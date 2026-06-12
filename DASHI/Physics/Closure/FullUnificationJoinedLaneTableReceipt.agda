@@ -19,14 +19,102 @@ import DASHI.Physics.Closure.UnifiedMarginInvariantReceipt
 -- Full unification joined-lane table receipt.
 --
 -- This receipt hardens the manager join surface into a concrete four-row
--- lane table.  Each lane has the same five columns:
+-- lane table while recording the current sharpened unification posture.
+-- The candidate UCT.1-UCT.8 package is explicit here:
+--
+--   * UCT.1-UCT.4 remain the live wall.
+--   * UCT.5-UCT.8 are already-structured downstream consumers.
+--
+-- Each joined lane has the same five columns:
 --
 --   residual / production / absorption / seam / open proof obligation.
 --
 -- The table is a publication/programme join surface only.  It consumes the
--- existing unified-margin, frontier, and roadmap receipts as open-boundary
--- context; it does not close NS, YM, Gate3, braid/carry, Clay, or terminal
--- obligations.
+-- existing unified-margin, frontier, and roadmap receipts as fail-closed
+-- context; it does not promote UCT, NS, YM, Gate3, braid/carry, Clay, or
+-- terminal closure.
+
+data UnificationCandidateStep : Set where
+  uct1ResidualPDE :
+    UnificationCandidateStep
+
+  uct2EllipticParabolicClass :
+    UnificationCandidateStep
+
+  uct3CarlemanIntake :
+    UnificationCandidateStep
+
+  uct4CrossTermNullity :
+    UnificationCandidateStep
+
+  uct5ModuloNullConsumer :
+    UnificationCandidateStep
+
+  uct6FourPointConsumer :
+    UnificationCandidateStep
+
+  uct7ParallelogramConsumer :
+    UnificationCandidateStep
+
+  uct8JordanVonNeumannConsumer :
+    UnificationCandidateStep
+
+canonicalUnificationCandidatePackage :
+  List UnificationCandidateStep
+canonicalUnificationCandidatePackage =
+  uct1ResidualPDE
+  ∷ uct2EllipticParabolicClass
+  ∷ uct3CarlemanIntake
+  ∷ uct4CrossTermNullity
+  ∷ uct5ModuloNullConsumer
+  ∷ uct6FourPointConsumer
+  ∷ uct7ParallelogramConsumer
+  ∷ uct8JordanVonNeumannConsumer
+  ∷ []
+
+data LiveWallStep : Set where
+  liveUCT1 :
+    LiveWallStep
+
+  liveUCT2 :
+    LiveWallStep
+
+  liveUCT3 :
+    LiveWallStep
+
+  liveUCT4 :
+    LiveWallStep
+
+canonicalLiveWall :
+  List LiveWallStep
+canonicalLiveWall =
+  liveUCT1
+  ∷ liveUCT2
+  ∷ liveUCT3
+  ∷ liveUCT4
+  ∷ []
+
+data DownstreamConsumerStep : Set where
+  downstreamUCT5 :
+    DownstreamConsumerStep
+
+  downstreamUCT6 :
+    DownstreamConsumerStep
+
+  downstreamUCT7 :
+    DownstreamConsumerStep
+
+  downstreamUCT8 :
+    DownstreamConsumerStep
+
+canonicalDownstreamConsumers :
+  List DownstreamConsumerStep
+canonicalDownstreamConsumers =
+  downstreamUCT5
+  ∷ downstreamUCT6
+  ∷ downstreamUCT7
+  ∷ downstreamUCT8
+  ∷ []
 
 data JoinedLaneTableStatus : Set where
   joinedLaneTableRecorded_failClosedNoPromotion :
@@ -247,7 +335,7 @@ canonicalJoinedLaneTable =
 joinedLaneTableStatement :
   String
 joinedLaneTableStatement =
-  "Joined lane table: NS theta, YM rho, Gate3 frame defect, and braid/carry tension each carry residual, production, absorption, seam, and open proof obligation fields; all obligations remain open."
+  "Joined lane table: the candidate UCT.1-UCT.8 package is explicit, UCT.1-UCT.4 remain the live wall, UCT.5-UCT.8 remain already-structured downstream consumers, and all four joined lanes keep their proof obligations open."
 
 data JoinedLaneTablePromotion : Set where
 
@@ -309,6 +397,24 @@ record FullUnificationJoinedLaneTableReceipt : Setω where
         publicationRoadmapReceipt
       ≡
       false
+
+    candidatePackage :
+      List UnificationCandidateStep
+
+    candidatePackageIsCanonical :
+      candidatePackage ≡ canonicalUnificationCandidatePackage
+
+    liveWall :
+      List LiveWallStep
+
+    liveWallIsCanonical :
+      liveWall ≡ canonicalLiveWall
+
+    downstreamConsumers :
+      List DownstreamConsumerStep
+
+    downstreamConsumersAreCanonical :
+      downstreamConsumers ≡ canonicalDownstreamConsumers
 
     joinedLanes :
       List JoinedLane
@@ -459,6 +565,18 @@ canonicalFullUnificationJoinedLaneTableReceipt =
         refl
     ; roadmapGate3False =
         refl
+    ; candidatePackage =
+        canonicalUnificationCandidatePackage
+    ; candidatePackageIsCanonical =
+        refl
+    ; liveWall =
+        canonicalLiveWall
+    ; liveWallIsCanonical =
+        refl
+    ; downstreamConsumers =
+        canonicalDownstreamConsumers
+    ; downstreamConsumersAreCanonical =
+        refl
     ; joinedLanes =
         canonicalJoinedLanes
     ; joinedLanesAreCanonical =
@@ -536,13 +654,15 @@ canonicalFullUnificationJoinedLaneTableReceipt =
     ; statementIsCanonical =
         refl
     ; receiptBoundary =
-        "NS theta row: residual tail flux, production tail flux, absorption by dissipation theta margin, theta<1 seam, actual-flow preservation and EV5 forward simulation open"
-        ∷ "YM rho row: residual same-prime polymer activity, production polymer activity, KP rho absorption, rho<1 seam, actual activity and Balaban RG transfer open"
-        ∷ "Gate3 row: residual cutoff frame defect, production finite cutoff frame evidence, absorption by frame bound, finite-to-continuum frame seam, density/Mosco/no-spectral-pollution/mass-shell bridge open"
-        ∷ "Braid/carry row: residual unresolved tension, production depth/history carry, absorption into depth, middle-tension seam, concrete tension functional and carry absorption theorem open"
+        "Candidate theorem grammar is explicit for UCT.1 residual PDE -> UCT.2 elliptic/parabolic class -> UCT.3 Carleman intake -> UCT.4 cross-term nullity -> UCT.5 modulo-null consumer -> UCT.6 four-point consumer -> UCT.7 parallelogram consumer -> UCT.8 Jordan-von Neumann consumer"
+        ∷ "The live unification wall remains exactly UCT.1-UCT.4"
+        ∷ "UCT.5-UCT.8 are already-structured fail-closed downstream consumers pending the live wall"
+        ∷ "NS lane row remains a joined programme row with residual, production, absorption, seam, and an open proof obligation"
+        ∷ "YM lane row remains a joined programme row with residual, production, absorption, seam, and an open proof obligation"
+        ∷ "Gate3 lane row remains a joined programme row with residual, production, absorption, seam, and an open proof obligation"
+        ∷ "Braid/carry lane row remains a joined programme row with residual, production, absorption, seam, and an open proof obligation"
         ∷ "The joined table consumes the existing unified-margin, frontier, and roadmap receipts only as fail-closed context"
-        ∷ "All four rows have residual, production, absorption, seam, and open proof obligation fields"
-        ∷ "No NS, YM, Gate3, Clay, or terminal promotion follows"
+        ∷ "No UCT, NS, YM, Gate3, Clay, or terminal promotion follows"
         ∷ []
     }
 

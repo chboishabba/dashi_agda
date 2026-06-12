@@ -12,7 +12,7 @@ import DASHI.Physics.Closure.NSRegularityRoadmapFilledReceipt as Roadmap
 import DASHI.Physics.Closure.NSWeakSolutionSummaryReceipt as WeakSummary
 
 data ClayNSCurrentStateStatus : Set where
-  weakSolutionBranchTrueRegularityAndClayOpen :
+  candidatePackageExplicitPromotionEvidenceOpen :
     ClayNSCurrentStateStatus
 
 data ClayNSCurrentStateEntry : Set where
@@ -39,7 +39,7 @@ canonicalClayNSCurrentStateEntries =
 
 clayNSCurrentStateStatement : String
 clayNSCurrentStateStatement =
-  "Current Clay NS state: Leray weak-solution branch is true; global smooth regularity, uniform BKM/vorticity control, and Clay closure remain false/open."
+  "Current Clay NS state: the Leray weak-solution branch and the candidate-complete self-contained A1-A9 package are explicit, the classical theorem intake is explicit, and the remaining issue is exact promotion evidence for the consumed norms/constants package into accepted continuum regularity and Clay closure; all promotion flags remain false."
 
 record ClayNSCurrentStateReceipt : Setω where
   field
@@ -143,7 +143,7 @@ canonicalClayNSCurrentStateReceipt :
 canonicalClayNSCurrentStateReceipt =
   record
     { status =
-        weakSolutionBranchTrueRegularityAndClayOpen
+        candidatePackageExplicitPromotionEvidenceOpen
     ; weakSummaryReceipt =
         WeakSummary.canonicalNSWeakSolutionSummaryReceipt
     ; weakSummaryLerayTrue =
@@ -199,10 +199,10 @@ canonicalClayNSCurrentStateReceipt =
     ; statementIsCanonical =
         refl
     ; receiptBoundary =
-        "The Leray weak-solution branch is the sole true Clay-NS-adjacent mathematical branch here"
-        ∷ "Critical Besov/vorticity control is recorded as the next target, not as a closed theorem"
-        ∷ "Finite-depth regularity rungs are recorded but do not imply a continuum regularity theorem"
-        ∷ "Uniform BKM/vorticity control, global smooth regularity, and Clay closure remain false"
+        "The Leray weak-solution branch is true and the candidate-complete self-contained A1-A9 package is explicit at receipt scope"
+        ∷ "The classical theorem intake is explicit here; the issue is not missing theorem-shape grammar"
+        ∷ "Finite-depth regularity rungs and consumed norms/constants are recorded, but exact promotion evidence into accepted continuum regularity is still missing"
+        ∷ "Critical Besov/vorticity control, uniform BKM/vorticity control, global smooth regularity, and Clay closure remain fail-closed"
         ∷ []
     }
 

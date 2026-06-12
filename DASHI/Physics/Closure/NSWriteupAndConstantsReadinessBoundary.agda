@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NSWriteupAndConstantsReadinessBoundary where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.String using (String)
 
 data List (A : Set) : Set where
   [] : List A
@@ -15,85 +16,123 @@ listLength [] = zero
 listLength (_ ∷ xs) = suc (listLength xs)
 
 data NSWriteupAndConstantsReadinessClause : Set where
-  a4ToA9LocalRouteStructureRecorded :
+  classicalPDEPacketDependsOnCandidateCompleteSuitableWeakSolutionPackage :
     NSWriteupAndConstantsReadinessClause
 
-  localReceiptLadderPresent :
+  classicalPDEPacketDependsOnCandidateCompletePressureAndLocalEnergyPackage :
     NSWriteupAndConstantsReadinessClause
 
-  localHarnessCoveragePresent :
+  candidateCompleteA1A3PackageRecordedForReviewerConsumption :
     NSWriteupAndConstantsReadinessClause
 
-  remainingGapIsWriteupAndAuthorityShaped :
+  candidateCompleteA4PackageRecordedForConstantsAndGeometry :
     NSWriteupAndConstantsReadinessClause
 
-  missingGapIsNotLocalRouteStructure :
+  candidateCompleteA5A9TheoremPackageLadderRecorded :
     NSWriteupAndConstantsReadinessClause
 
-  noClayPromotionWithoutExternalReview :
+  writeupSurfaceExplicitlyConsumesClassicalPDEAndCKNESSLRTAndA1A3A4A5A9Packages :
+    NSWriteupAndConstantsReadinessClause
+
+  constantsSurfaceExplicitlyDependsOnA1A3AndA4AndDownstreamA5A9Packages :
+    NSWriteupAndConstantsReadinessClause
+
+  remainingGapIsPromotionEvidenceAcceptanceAndExactConstantsNotMissingGrammar :
     NSWriteupAndConstantsReadinessClause
 
 canonicalNSWriteupAndConstantsReadinessClauses :
   List NSWriteupAndConstantsReadinessClause
 canonicalNSWriteupAndConstantsReadinessClauses =
-  a4ToA9LocalRouteStructureRecorded
-  ∷ localReceiptLadderPresent
-  ∷ localHarnessCoveragePresent
-  ∷ remainingGapIsWriteupAndAuthorityShaped
-  ∷ missingGapIsNotLocalRouteStructure
-  ∷ noClayPromotionWithoutExternalReview
+  classicalPDEPacketDependsOnCandidateCompleteSuitableWeakSolutionPackage
+  ∷ classicalPDEPacketDependsOnCandidateCompletePressureAndLocalEnergyPackage
+  ∷ candidateCompleteA1A3PackageRecordedForReviewerConsumption
+  ∷ candidateCompleteA4PackageRecordedForConstantsAndGeometry
+  ∷ candidateCompleteA5A9TheoremPackageLadderRecorded
+  ∷ writeupSurfaceExplicitlyConsumesClassicalPDEAndCKNESSLRTAndA1A3A4A5A9Packages
+  ∷ constantsSurfaceExplicitlyDependsOnA1A3AndA4AndDownstreamA5A9Packages
+  ∷ remainingGapIsPromotionEvidenceAcceptanceAndExactConstantsNotMissingGrammar
   ∷ []
 
 nsWriteupAndConstantsReadinessClauseCount : Nat
 nsWriteupAndConstantsReadinessClauseCount =
   listLength canonicalNSWriteupAndConstantsReadinessClauses
 
-nsWriteupAndConstantsReadinessClauseCountIs6 :
-  nsWriteupAndConstantsReadinessClauseCount ≡ 6
-nsWriteupAndConstantsReadinessClauseCountIs6 = refl
+nsWriteupAndConstantsReadinessClauseCountIs8 :
+  nsWriteupAndConstantsReadinessClauseCount ≡ 8
+nsWriteupAndConstantsReadinessClauseCountIs8 = refl
 
 data NSWriteupAndConstantsReadinessBlocker : Set where
-  writeupAssemblyStillOpen :
+  candidateA1TypeILorentzToAbelMassRouteNeedsPromotionEvidence :
     NSWriteupAndConstantsReadinessBlocker
 
-  constantsCompatibilityExtractionStillOpen :
+  candidateA3QuantitativeStationarityRateNeedsPromotionEvidence :
     NSWriteupAndConstantsReadinessBlocker
 
-  standardPDETranslationStillOpen :
+  candidateA4ResidualPositiveLadderNeedsPromotionEvidence :
     NSWriteupAndConstantsReadinessBlocker
 
-  externalReviewStillOpen :
+  candidateA5A6A7A8A9ConsumerLadderNeedsPromotionEvidence :
     NSWriteupAndConstantsReadinessBlocker
 
-  clayPromotionForbiddenUntilAuthorityCloses :
+  candidateSuitableWeakSolutionAndPressurePackageNeedsAcceptanceInConsumedNorms :
+    NSWriteupAndConstantsReadinessBlocker
+
+  exactConstantsCompatibilityAcceptanceStillOpen :
+    NSWriteupAndConstantsReadinessBlocker
+
+  candidateStandardPDEWriteupNeedsReviewerAcceptanceAsSelfContainedPacket :
+    NSWriteupAndConstantsReadinessBlocker
+
+  classicalCKNESSLRTIntakeNeedsAcceptanceInReviewerConsumedForm :
+    NSWriteupAndConstantsReadinessBlocker
+
+  externalAuthorityAcceptanceStillOpen :
+    NSWriteupAndConstantsReadinessBlocker
+
+  clayPromotionForbiddenUntilA1ThroughA9AndAuthorityClose :
     NSWriteupAndConstantsReadinessBlocker
 
 canonicalNSWriteupAndConstantsReadinessBlockers :
   List NSWriteupAndConstantsReadinessBlocker
 canonicalNSWriteupAndConstantsReadinessBlockers =
-  writeupAssemblyStillOpen
-  ∷ constantsCompatibilityExtractionStillOpen
-  ∷ standardPDETranslationStillOpen
-  ∷ externalReviewStillOpen
-  ∷ clayPromotionForbiddenUntilAuthorityCloses
+  candidateA1TypeILorentzToAbelMassRouteNeedsPromotionEvidence
+  ∷ candidateA3QuantitativeStationarityRateNeedsPromotionEvidence
+  ∷ candidateA4ResidualPositiveLadderNeedsPromotionEvidence
+  ∷ candidateA5A6A7A8A9ConsumerLadderNeedsPromotionEvidence
+  ∷ candidateSuitableWeakSolutionAndPressurePackageNeedsAcceptanceInConsumedNorms
+  ∷ exactConstantsCompatibilityAcceptanceStillOpen
+  ∷ candidateStandardPDEWriteupNeedsReviewerAcceptanceAsSelfContainedPacket
+  ∷ classicalCKNESSLRTIntakeNeedsAcceptanceInReviewerConsumedForm
+  ∷ externalAuthorityAcceptanceStillOpen
+  ∷ clayPromotionForbiddenUntilA1ThroughA9AndAuthorityClose
   ∷ []
 
 nsWriteupAndConstantsReadinessBlockerCount : Nat
 nsWriteupAndConstantsReadinessBlockerCount =
   listLength canonicalNSWriteupAndConstantsReadinessBlockers
 
-nsWriteupAndConstantsReadinessBlockerCountIs5 :
-  nsWriteupAndConstantsReadinessBlockerCount ≡ 5
-nsWriteupAndConstantsReadinessBlockerCountIs5 = refl
+nsWriteupAndConstantsReadinessBlockerCountIs10 :
+  nsWriteupAndConstantsReadinessBlockerCount ≡ 10
+nsWriteupAndConstantsReadinessBlockerCountIs10 = refl
+
+nsWriteupAndConstantsReadinessSummary : String
+nsWriteupAndConstantsReadinessSummary =
+  "Readiness grammar: the reviewer-facing NS packet is presented as a candidate-complete classical suitable-weak-solution plus pressure/local-energy package that explicitly consumes theorem-shape grammar for A1-A9 together with classical CKN/ESS/LRT intake; the remaining burden is promotion evidence, acceptance of the candidate self-contained packet, and sign-off on the exact consumed constants and norms, not missing theorem-shape placeholders."
 
 NSWriteupAndConstantsReadinessRecorded : Bool
 NSWriteupAndConstantsReadinessRecorded = true
 
 NSLocalRouteStructureReady : Bool
-NSLocalRouteStructureReady = true
+NSLocalRouteStructureReady = false
 
 NSWriteupAndConstantsCompleted : Bool
 NSWriteupAndConstantsCompleted = false
+
+NSAuthorityDependenciesAudited : Bool
+NSAuthorityDependenciesAudited = false
+
+NSSubmissionReady : Bool
+NSSubmissionReady = false
 
 NSClayPromotionFromWriteupAndConstantsReady : Bool
 NSClayPromotionFromWriteupAndConstantsReady = false
@@ -106,14 +145,18 @@ record NSWriteupAndConstantsReadinessBoundary : Set where
     blockers : List NSWriteupAndConstantsReadinessBlocker
     blockersCanonical :
       blockers ≡ canonicalNSWriteupAndConstantsReadinessBlockers
-    clauseCountIs6 :
-      nsWriteupAndConstantsReadinessClauseCount ≡ 6
-    blockerCountIs5 :
-      nsWriteupAndConstantsReadinessBlockerCount ≡ 5
+    clauseCountIs8 :
+      nsWriteupAndConstantsReadinessClauseCount ≡ 8
+    blockerCountIs10 :
+      nsWriteupAndConstantsReadinessBlockerCount ≡ 10
     readinessRecordedField :
       NSWriteupAndConstantsReadinessRecorded ≡ true
     localRouteStructureReadyField :
-      NSLocalRouteStructureReady ≡ true
+      NSLocalRouteStructureReady ≡ false
+    authorityAuditStillFalse :
+      NSAuthorityDependenciesAudited ≡ false
+    submissionReadyStillFalse :
+      NSSubmissionReady ≡ false
     completionStillFalse :
       NSWriteupAndConstantsCompleted ≡ false
     clayPromotionStillFalse :
@@ -127,10 +170,12 @@ canonicalNSWriteupAndConstantsReadinessBoundary =
     ; clausesCanonical = refl
     ; blockers = canonicalNSWriteupAndConstantsReadinessBlockers
     ; blockersCanonical = refl
-    ; clauseCountIs6 = refl
-    ; blockerCountIs5 = refl
+    ; clauseCountIs8 = refl
+    ; blockerCountIs10 = refl
     ; readinessRecordedField = refl
     ; localRouteStructureReadyField = refl
+    ; authorityAuditStillFalse = refl
+    ; submissionReadyStillFalse = refl
     ; completionStillFalse = refl
     ; clayPromotionStillFalse = refl
     }
@@ -139,6 +184,6 @@ NSWriteupAndConstantsReadinessRecordedIsTrue :
   NSWriteupAndConstantsReadinessRecorded ≡ true
 NSWriteupAndConstantsReadinessRecordedIsTrue = refl
 
-NSLocalRouteStructureReadyIsTrue :
-  NSLocalRouteStructureReady ≡ true
-NSLocalRouteStructureReadyIsTrue = refl
+NSLocalRouteStructureReadyIsFalse :
+  NSLocalRouteStructureReady ≡ false
+NSLocalRouteStructureReadyIsFalse = refl

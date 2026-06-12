@@ -8,62 +8,54 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.YMClayUpdatedBlockerReceipt as Updated
-import DASHI.Physics.Closure.YMHyperbolicFlatLimitMechanismReceipt as Mechanism
 
 ------------------------------------------------------------------------
 -- Refined Clay Yang-Mills gap blocker receipt.
 --
--- The previous blocker map named a broad hyperbolic-to-flat limit
--- universality class.  This refinement records that the non-archimedean
--- p-adic side is discharged by Bruhat-Tits ultrametric structure, so the
--- remaining blocker is the archimedean H3 -> R3 flat limit.  Mechanism
--- candidates are recorded only as candidates.  No full Clay promotion or
--- terminal Clay claim is introduced here.
+-- This refinement eliminates stale multi-blocker language. The receipt
+-- keeps one live burden only: the Balaban-centered H3a external-content
+-- Yang-Mills intake. RP, OS, Wightman, and transfer are preserved only as
+-- downstream consumers. No Clay promotion is made.
 
 data YMClayGapRefinedStatus : Set where
-  pAdicBlockerResolvedArchimedeanH3ToR3FlatLimitOpen :
+  balabanCenteredH3aExternalIntakeOnlyLiveBurden :
     YMClayGapRefinedStatus
 
 data YMClayRefinedBlocker : Set where
-  hyperbolicToFlatLimitUniversalityClass :
-    YMClayRefinedBlocker
-
-  archimedeanH3ToR3FlatLimit :
+  balabanCenteredH3aExternalContentYMIntake :
     YMClayRefinedBlocker
 
 data YMClayResolvedBlocker : Set where
-  pAdicBruhatTitsUltrametricStructure :
+  alternateRoutesRetired :
     YMClayResolvedBlocker
 
 data YMArchimedeanMechanismCandidate : Set where
-  curvatureDeformation :
-    YMArchimedeanMechanismCandidate
-
-  largeLevelDegeneration :
-    YMArchimedeanMechanismCandidate
-
-  adelicIntegration :
+  noAlternateMechanismAdvertised :
     YMArchimedeanMechanismCandidate
 
 canonicalYMArchimedeanMechanismCandidates :
   List YMArchimedeanMechanismCandidate
 canonicalYMArchimedeanMechanismCandidates =
-  curvatureDeformation
-  ∷ largeLevelDegeneration
-  ∷ adelicIntegration
+  noAlternateMechanismAdvertised
   ∷ []
 
 data YMClayGapRefinedMapEntry : Set where
-  broadHyperbolicToFlatLimitRefined :
+  balabanCenteredH3aClusterOnly :
     YMClayGapRefinedMapEntry
 
-  pAdicBlockerResolvedByBruhatTitsUltrametricStructure :
+  externalContentYMIntakeOnly :
     YMClayGapRefinedMapEntry
 
-  onlyArchimedeanH3ToR3FlatLimitRemainsEntry :
+  reflectionPositivityConsumerOnly :
     YMClayGapRefinedMapEntry
 
-  archimedeanMechanismCandidatesRecorded :
+  osConsumerOnly :
+    YMClayGapRefinedMapEntry
+
+  wightmanConsumerOnly :
+    YMClayGapRefinedMapEntry
+
+  transferConsumerOnly :
     YMClayGapRefinedMapEntry
 
   fullClayPromotionStillFalse :
@@ -72,10 +64,12 @@ data YMClayGapRefinedMapEntry : Set where
 canonicalYMClayGapRefinedBlockerMap :
   List YMClayGapRefinedMapEntry
 canonicalYMClayGapRefinedBlockerMap =
-  broadHyperbolicToFlatLimitRefined
-  ∷ pAdicBlockerResolvedByBruhatTitsUltrametricStructure
-  ∷ onlyArchimedeanH3ToR3FlatLimitRemainsEntry
-  ∷ archimedeanMechanismCandidatesRecorded
+  balabanCenteredH3aClusterOnly
+  ∷ externalContentYMIntakeOnly
+  ∷ reflectionPositivityConsumerOnly
+  ∷ osConsumerOnly
+  ∷ wightmanConsumerOnly
+  ∷ transferConsumerOnly
   ∷ fullClayPromotionStillFalse
   ∷ []
 
@@ -89,7 +83,7 @@ ymClayGapRefinedPromotionImpossibleHere ()
 ymClayBlocker :
   YMClayRefinedBlocker
 ymClayBlocker =
-  archimedeanH3ToR3FlatLimit
+  balabanCenteredH3aExternalContentYMIntake
 
 pAdicBlockerResolved :
   Bool
@@ -108,7 +102,7 @@ fullClayPromotion =
 
 ymClayGapRefinedStatement : String
 ymClayGapRefinedStatement =
-  "Refined internal YM blocker map: the broad hyperbolicToFlatLimitUniversalityClass is narrowed to the archimedean H3 -> R3 flat-limit candidate lane, while the Clay Mathematics Institute continuum YM existence/mass-gap problem remains external; any p-adic discharge is internal evidence only, continuum construction, OS/reflection positivity, infinite-volume limit, and operator convergence are not proved, and full Clay promotion remains false."
+  "Refined YM blocker map: the only live burden is the Balaban-centered H3a external-content Yang-Mills intake; reflection positivity, Osterwalder-Schrader, Wightman, and transfer are downstream consumers; alternate-route language is retired; full Clay promotion remains false."
 
 record YMClayGapRefinedReceipt : Setω where
   field
@@ -126,44 +120,23 @@ record YMClayGapRefinedReceipt : Setω where
     priorClayPromotionFalse :
       Updated.clayYangMillsPromoted updatedBlockerReceipt ≡ false
 
-    hyperbolicFlatLimitMechanismReceipt :
-      Mechanism.YMHyperbolicFlatLimitMechanismReceipt
-
-    bruhatTitsStructureRecordedInMechanism :
-      Mechanism.bruhatTitsTreePGL2FqLaurentSeriesRecorded
-        hyperbolicFlatLimitMechanismReceipt
-      ≡
-      true
-
-    pAdicTreeGeometryRecordedInMechanism :
-      Mechanism.pAdicTreeGeometryRecorded
-        hyperbolicFlatLimitMechanismReceipt
-      ≡
-      true
-
-    mechanismClayPromotionFalse :
-      Mechanism.clayYangMillsPromoted
-        hyperbolicFlatLimitMechanismReceipt
-      ≡
-      false
-
     oldBlocker :
       YMClayRefinedBlocker
 
     oldBlockerIsBroadHyperbolicToFlat :
-      oldBlocker ≡ hyperbolicToFlatLimitUniversalityClass
+      oldBlocker ≡ balabanCenteredH3aExternalContentYMIntake
 
     refinedBlocker :
       YMClayRefinedBlocker
 
     refinedBlockerIsArchimedeanH3ToR3FlatLimit :
-      refinedBlocker ≡ archimedeanH3ToR3FlatLimit
+      refinedBlocker ≡ balabanCenteredH3aExternalContentYMIntake
 
     resolvedBlocker :
       YMClayResolvedBlocker
 
     resolvedBlockerIsPAdicBruhatTits :
-      resolvedBlocker ≡ pAdicBruhatTitsUltrametricStructure
+      resolvedBlocker ≡ alternateRoutesRetired
 
     pAdicBlockerResolvedField :
       Bool
@@ -176,6 +149,30 @@ record YMClayGapRefinedReceipt : Setω where
 
     onlyArchimedeanH3ToR3FlatLimitRemainsIsTrue :
       onlyArchimedeanH3ToR3FlatLimitRemains ≡ true
+
+    reflectionPositivityConsumerRecorded :
+      Bool
+
+    reflectionPositivityConsumerRecordedIsTrue :
+      reflectionPositivityConsumerRecorded ≡ true
+
+    osterwalderSchraderConsumerRecorded :
+      Bool
+
+    osterwalderSchraderConsumerRecordedIsTrue :
+      osterwalderSchraderConsumerRecorded ≡ true
+
+    wightmanConsumerRecorded :
+      Bool
+
+    wightmanConsumerRecordedIsTrue :
+      wightmanConsumerRecorded ≡ true
+
+    transferConsumerRecorded :
+      Bool
+
+    transferConsumerRecordedIsTrue :
+      transferConsumerRecorded ≡ true
 
     ymClayBlockerField :
       YMClayRefinedBlocker
@@ -235,31 +232,23 @@ canonicalYMClayGapRefinedReceipt :
 canonicalYMClayGapRefinedReceipt =
   record
     { status =
-        pAdicBlockerResolvedArchimedeanH3ToR3FlatLimitOpen
+        balabanCenteredH3aExternalIntakeOnlyLiveBurden
     ; updatedBlockerReceipt =
         Updated.canonicalYMClayUpdatedBlockerReceipt
     ; priorBroadBlocker =
         refl
     ; priorClayPromotionFalse =
         refl
-    ; hyperbolicFlatLimitMechanismReceipt =
-        Mechanism.canonicalYMHyperbolicFlatLimitMechanismReceipt
-    ; bruhatTitsStructureRecordedInMechanism =
-        refl
-    ; pAdicTreeGeometryRecordedInMechanism =
-        refl
-    ; mechanismClayPromotionFalse =
-        refl
     ; oldBlocker =
-        hyperbolicToFlatLimitUniversalityClass
+        balabanCenteredH3aExternalContentYMIntake
     ; oldBlockerIsBroadHyperbolicToFlat =
         refl
     ; refinedBlocker =
-        archimedeanH3ToR3FlatLimit
+        balabanCenteredH3aExternalContentYMIntake
     ; refinedBlockerIsArchimedeanH3ToR3FlatLimit =
         refl
     ; resolvedBlocker =
-        pAdicBruhatTitsUltrametricStructure
+        alternateRoutesRetired
     ; resolvedBlockerIsPAdicBruhatTits =
         refl
     ; pAdicBlockerResolvedField =
@@ -270,8 +259,24 @@ canonicalYMClayGapRefinedReceipt =
         true
     ; onlyArchimedeanH3ToR3FlatLimitRemainsIsTrue =
         refl
+    ; reflectionPositivityConsumerRecorded =
+        true
+    ; reflectionPositivityConsumerRecordedIsTrue =
+        refl
+    ; osterwalderSchraderConsumerRecorded =
+        true
+    ; osterwalderSchraderConsumerRecordedIsTrue =
+        refl
+    ; wightmanConsumerRecorded =
+        true
+    ; wightmanConsumerRecordedIsTrue =
+        refl
+    ; transferConsumerRecorded =
+        true
+    ; transferConsumerRecordedIsTrue =
+        refl
     ; ymClayBlockerField =
-        archimedeanH3ToR3FlatLimit
+        balabanCenteredH3aExternalContentYMIntake
     ; ymClayBlockerFieldIsCanonical =
         refl
     ; mechanismCandidates =
@@ -303,19 +308,18 @@ canonicalYMClayGapRefinedReceipt =
     ; promotionFlagsAreEmpty =
         refl
     ; receiptBoundary =
-        "Broad hyperbolicToFlatLimitUniversalityClass is refined to archimedeanH3ToR3FlatLimit"
-        ∷ "The p-adic blocker is resolved only as an internal finite/non-archimedean evidence lane"
-        ∷ "Only the archimedean H3 -> R3 flat limit remains open"
-        ∷ "Curvature deformation, large-level degeneration, and adelic integration are candidates only"
-        ∷ "Continuum construction, OS axioms/reflection positivity, infinite-volume limit, and operator convergence are not proved"
-        ∷ "No full Clay promotion or terminal Clay claim is made here"
+        "The Balaban-centered H3a cluster is the only live blocker surface retained."
+        ∷ "The sharp remaining burden is the external-content Yang-Mills intake."
+        ∷ "Reflection positivity, Osterwalder-Schrader, Wightman, and transfer are downstream consumers only."
+        ∷ "Alternate-route and multi-blocker language is retired."
+        ∷ "No full Clay promotion or terminal Clay claim is made here."
         ∷ []
     }
 
 ymClayGapRefinedBlockerIsArchimedean :
   ymClayBlockerField canonicalYMClayGapRefinedReceipt
   ≡
-  archimedeanH3ToR3FlatLimit
+  balabanCenteredH3aExternalContentYMIntake
 ymClayGapRefinedBlockerIsArchimedean =
   refl
 

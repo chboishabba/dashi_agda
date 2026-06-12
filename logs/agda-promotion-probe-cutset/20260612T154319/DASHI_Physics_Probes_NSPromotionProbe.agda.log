@@ -1,0 +1,13 @@
+== DASHI/Physics/Probes/NSPromotionProbe.agda ==
+command: timeout 60s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Probes/NSPromotionProbe.agda
+started: 2026-06-12T15:44:18+10:00
+
+Checking DASHI.Physics.Probes.NSPromotionProbe (/home/c/Documents/code/dashi_agda/DASHI/Physics/Probes/NSPromotionProbe.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Probes/NSPromotionProbe.agda:31,32-36
+Agda.Builtin.Bool.false != true of type Agda.Builtin.Bool.Bool
+when checking that the expression refl has type
+Root.enstrophyPassageClosed Root.canonicalNSFinalStateReceipt ≡
+true
+
+exit_code: 42
+finished: 2026-06-12T15:44:36+10:00

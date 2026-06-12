@@ -5,13 +5,14 @@ module DASHI.Physics.Closure.NSA4UniformInNormalConstantsBoundary where
 --
 -- This module records the missing analytic obligation that the constants
 -- in the A4 eta-strip preimage/coarea estimate are uniform as the output
--- great-circle normal n ranges over S2.  The intended route is:
+-- great-circle normal n ranges over S2 and as the Type-I rescaling window
+-- moves along the blowup ladder.  The intended route is:
 --
---   compact S2 normal cover
---     -> stable chart/Whitney packet constants
---     -> bounded packet overlap independent of n
---     -> eta-window scale separation from packet and antipodal scales
---     -> positive lower-bound constant c_A4
+--   A4.5 normal-family compactness and chart selection
+--     -> A4.5 local Jacobian/coarea constants stable on each normal patch
+--     -> A4.5 bounded packet overlap independent of the normal
+--     -> A4.5 eta-window and Type-I-scale synchronization
+--     -> A4.5 candidate positive lower-bound constant c_A4
 --     -> fail-closed feed into the uniform A4 error-budget composite.
 --
 -- It consumes the existing coarea strip-preimage calculation boundary,
@@ -289,6 +290,24 @@ data UniformInNormalCoareaConstantObligationCarrier : Set where
     LowerBoundConstantCA4Carrier →
     UniformInNormalCoareaConstantObligationCarrier
 
+data FinitePatchMinimumCandidateCarrier : Set where
+  finitePatchMinimumProducesOnlyCandidateCA4UntilRescalingIsSynchronized :
+    S2CompactnessCoverCarrier →
+    LowerBoundConstantCA4Carrier →
+    FinitePatchMinimumCandidateCarrier
+
+data TypeIRescalingSynchronizationGapCarrier : Set where
+  uniformityA4-5AcrossTypeIRescalingFamilyStillNeedsPatchSynchronization :
+    FinitePatchMinimumCandidateCarrier →
+    UniformBudget.UniformA4PositiveMassScaleCarrier →
+    TypeIRescalingSynchronizationGapCarrier
+
+data UniformCA4GapCarrier : Set where
+  candidateCA4ForA4-5CannotBePromotedWithoutTypeIRescalingFamilySynchronization :
+    TypeIRescalingSynchronizationGapCarrier →
+    UniformInNormalCoareaConstantObligationCarrier →
+    UniformCA4GapCarrier
+
 data UniformNormalConstantRouteToErrorBudgetCarrier : Set where
   routeUniformNormalConstantFailureIntoUniformA4ErrorBudget :
     UniformInNormalCoareaConstantObligationCarrier →
@@ -366,6 +385,27 @@ canonicalUniformInNormalCoareaConstantObligationCarrier =
     Coarea.canonicalEtaStripCoareaSlabEstimateCarrier
     canonicalLowerBoundConstantCA4Carrier
 
+canonicalFinitePatchMinimumCandidateCarrier :
+  FinitePatchMinimumCandidateCarrier
+canonicalFinitePatchMinimumCandidateCarrier =
+  finitePatchMinimumProducesOnlyCandidateCA4UntilRescalingIsSynchronized
+    canonicalS2CompactnessCoverCarrier
+    canonicalLowerBoundConstantCA4Carrier
+
+canonicalTypeIRescalingSynchronizationGapCarrier :
+  TypeIRescalingSynchronizationGapCarrier
+canonicalTypeIRescalingSynchronizationGapCarrier =
+  uniformityA4-5AcrossTypeIRescalingFamilyStillNeedsPatchSynchronization
+    canonicalFinitePatchMinimumCandidateCarrier
+    UniformBudget.canonicalUniformA4PositiveMassScaleCarrier
+
+canonicalUniformCA4GapCarrier :
+  UniformCA4GapCarrier
+canonicalUniformCA4GapCarrier =
+  candidateCA4ForA4-5CannotBePromotedWithoutTypeIRescalingFamilySynchronization
+    canonicalTypeIRescalingSynchronizationGapCarrier
+    canonicalUniformInNormalCoareaConstantObligationCarrier
+
 canonicalUniformNormalConstantRouteToErrorBudgetCarrier :
   UniformNormalConstantRouteToErrorBudgetCarrier
 canonicalUniformNormalConstantRouteToErrorBudgetCarrier =
@@ -399,17 +439,25 @@ data UniformInNormalConstantsObligation : Set where
     UniformInNormalConstantsObligation
   consumeUniformErrorBudgetCompositeBoundary :
     UniformInNormalConstantsObligation
-  quantifyGreatCircleNormalsByCompactS2 :
+  recordA4-5NormalFamilyAsCompactS2ParameterSpace :
     UniformInNormalConstantsObligation
-  extractFiniteNormalCoverWithStableCharts :
+  extractA4-5FiniteNormalCoverWithStableCharts :
     UniformInNormalConstantsObligation
-  proveChartJacobianConstantsStableOnNormalPatches :
+  recordA4-5DirectionMapAndJacobianConstantsStableOnNormalPatches :
     UniformInNormalConstantsObligation
-  proveWhitneyPacketBoundedOverlapUniformInNormal :
+  recordA4-5WhitneyPacketBoundedOverlapUniformInNormal :
     UniformInNormalConstantsObligation
-  proveEtaWindowScaleSeparation :
+  propagateA4-3CoareaBudgetIntoA4-5UniformStripBudget :
     UniformInNormalConstantsObligation
-  choosePositiveLowerBoundConstantCA4 :
+  keepFinitePatchMinimumFailClosedAsCandidateOnly :
+    UniformInNormalConstantsObligation
+  requireUniformityAcrossTypeIRescalingFamily :
+    UniformInNormalConstantsObligation
+  isolatePatchSynchronizationGapAcrossTypeIRescalings :
+    UniformInNormalConstantsObligation
+  recordEtaWindowScaleSeparationAgainstPacketAndAntipodalScales :
+    UniformInNormalConstantsObligation
+  recordCandidatePositiveLowerBoundConstantCA4 :
     UniformInNormalConstantsObligation
   routeFailureClosedToUniformA4ErrorBudget :
     UniformInNormalConstantsObligation
@@ -422,12 +470,16 @@ canonicalUniformInNormalConstantsObligations =
   consumeCoareaStripPreimageCalculationBoundary
   ∷ consumeOutputStripPreimageMeasureEstimateBoundary
   ∷ consumeUniformErrorBudgetCompositeBoundary
-  ∷ quantifyGreatCircleNormalsByCompactS2
-  ∷ extractFiniteNormalCoverWithStableCharts
-  ∷ proveChartJacobianConstantsStableOnNormalPatches
-  ∷ proveWhitneyPacketBoundedOverlapUniformInNormal
-  ∷ proveEtaWindowScaleSeparation
-  ∷ choosePositiveLowerBoundConstantCA4
+  ∷ recordA4-5NormalFamilyAsCompactS2ParameterSpace
+  ∷ extractA4-5FiniteNormalCoverWithStableCharts
+  ∷ recordA4-5DirectionMapAndJacobianConstantsStableOnNormalPatches
+  ∷ recordA4-5WhitneyPacketBoundedOverlapUniformInNormal
+  ∷ propagateA4-3CoareaBudgetIntoA4-5UniformStripBudget
+  ∷ keepFinitePatchMinimumFailClosedAsCandidateOnly
+  ∷ requireUniformityAcrossTypeIRescalingFamily
+  ∷ isolatePatchSynchronizationGapAcrossTypeIRescalings
+  ∷ recordEtaWindowScaleSeparationAgainstPacketAndAntipodalScales
+  ∷ recordCandidatePositiveLowerBoundConstantCA4
   ∷ routeFailureClosedToUniformA4ErrorBudget
   ∷ keepA4A6NSClayAndTerminalPromotionsFalse
   ∷ []
@@ -436,23 +488,31 @@ uniformInNormalConstantsObligationCount : Nat
 uniformInNormalConstantsObligationCount =
   listLength canonicalUniformInNormalConstantsObligations
 
-uniformInNormalConstantsObligationCountIs11 :
-  uniformInNormalConstantsObligationCount ≡ 11
-uniformInNormalConstantsObligationCountIs11 =
+uniformInNormalConstantsObligationCountIs15 :
+  uniformInNormalConstantsObligationCount ≡ 15
+uniformInNormalConstantsObligationCountIs15 =
   refl
 
 data UniformInNormalConstantsBlocker : Set where
-  missingS2CompactnessCoverProof :
+  missingA4-5NormalFamilyCompactnessProof :
     UniformInNormalConstantsBlocker
-  missingNormalPatchChartStabilityProof :
+  missingA4-5DirectionMapAndNormalPatchChartStabilityProof :
     UniformInNormalConstantsBlocker
-  missingUniformWhitneyPacketBoundedOverlapProof :
+  missingA4-5UniformWhitneyPacketBoundedOverlapProof :
+    UniformInNormalConstantsBlocker
+  missingA4-3ToA4-5CoareaPropagationProof :
+    UniformInNormalConstantsBlocker
+  missingFinitePatchMinimumToGlobalConstantJustification :
+    UniformInNormalConstantsBlocker
+  missingA4-5UniformityAcrossTypeIRescalingFamilyProof :
+    UniformInNormalConstantsBlocker
+  missingPatchSynchronizationAcrossTypeIRescalings :
     UniformInNormalConstantsBlocker
   missingEtaWindowScaleSeparationProof :
     UniformInNormalConstantsBlocker
-  missingPositiveCA4LowerBoundProof :
+  missingCandidatePositiveCA4LowerBoundProof :
     UniformInNormalConstantsBlocker
-  missingUniformCoareaConstantTheorem :
+  missingA4-5UniformityAcrossTypeIRescalingFamilyConstantTheorem :
     UniformInNormalConstantsBlocker
   missingOutputPreimagePromotion :
     UniformInNormalConstantsBlocker
@@ -468,12 +528,16 @@ data UniformInNormalConstantsBlocker : Set where
 canonicalUniformInNormalConstantsBlockers :
   List UniformInNormalConstantsBlocker
 canonicalUniformInNormalConstantsBlockers =
-  missingS2CompactnessCoverProof
-  ∷ missingNormalPatchChartStabilityProof
-  ∷ missingUniformWhitneyPacketBoundedOverlapProof
+  missingA4-5NormalFamilyCompactnessProof
+  ∷ missingA4-5DirectionMapAndNormalPatchChartStabilityProof
+  ∷ missingA4-5UniformWhitneyPacketBoundedOverlapProof
+  ∷ missingA4-3ToA4-5CoareaPropagationProof
+  ∷ missingFinitePatchMinimumToGlobalConstantJustification
+  ∷ missingA4-5UniformityAcrossTypeIRescalingFamilyProof
+  ∷ missingPatchSynchronizationAcrossTypeIRescalings
   ∷ missingEtaWindowScaleSeparationProof
-  ∷ missingPositiveCA4LowerBoundProof
-  ∷ missingUniformCoareaConstantTheorem
+  ∷ missingCandidatePositiveCA4LowerBoundProof
+  ∷ missingA4-5UniformityAcrossTypeIRescalingFamilyConstantTheorem
   ∷ missingOutputPreimagePromotion
   ∷ missingUniformErrorBudgetPromotion
   ∷ missingA4Promotion
@@ -485,9 +549,9 @@ uniformInNormalConstantsBlockerCount : Nat
 uniformInNormalConstantsBlockerCount =
   listLength canonicalUniformInNormalConstantsBlockers
 
-uniformInNormalConstantsBlockerCountIs11 :
-  uniformInNormalConstantsBlockerCount ≡ 11
-uniformInNormalConstantsBlockerCountIs11 =
+uniformInNormalConstantsBlockerCountIs15 :
+  uniformInNormalConstantsBlockerCount ≡ 15
+uniformInNormalConstantsBlockerCountIs15 =
   refl
 
 data UniformInNormalConstantsStatusRow : Set where
@@ -495,15 +559,23 @@ data UniformInNormalConstantsStatusRow : Set where
     UniformInNormalConstantsStatusRow
   threeRequestedBoundaryInputsConsumedStatus :
     UniformInNormalConstantsStatusRow
-  compactnessOverS2NormalRecordedStatus :
+  A4-5CompactnessOverS2NormalFamilyRecordedStatus :
     UniformInNormalConstantsStatusRow
-  finiteNormalCoverRecordedStatus :
+  A4-5FiniteNormalCoverRecordedStatus :
     UniformInNormalConstantsStatusRow
-  whitneyPacketBoundedOverlapRecordedStatus :
+  A4-5DirectionMapJacobianAndCoareaChartStabilityRecordedStatus :
+    UniformInNormalConstantsStatusRow
+  A4-5WhitneyPacketBoundedOverlapRecordedStatus :
+    UniformInNormalConstantsStatusRow
+  finitePatchMinimumCandidateRecordedStatus :
+    UniformInNormalConstantsStatusRow
+  typeIRescalingUniformityTargetRecordedStatus :
+    UniformInNormalConstantsStatusRow
+  explicitTypeIRescalingSynchronizationGapRecordedStatus :
     UniformInNormalConstantsStatusRow
   etaWindowScaleSeparationRecordedStatus :
     UniformInNormalConstantsStatusRow
-  cA4LowerBoundConstantRecordedStatus :
+  candidateCA4LowerBoundConstantRecordedStatus :
     UniformInNormalConstantsStatusRow
   failClosedRouteToUniformErrorBudgetRecordedStatus :
     UniformInNormalConstantsStatusRow
@@ -515,11 +587,15 @@ canonicalUniformInNormalConstantsStatusRows :
 canonicalUniformInNormalConstantsStatusRows =
   boundaryRecordedStatus
   ∷ threeRequestedBoundaryInputsConsumedStatus
-  ∷ compactnessOverS2NormalRecordedStatus
-  ∷ finiteNormalCoverRecordedStatus
-  ∷ whitneyPacketBoundedOverlapRecordedStatus
+  ∷ A4-5CompactnessOverS2NormalFamilyRecordedStatus
+  ∷ A4-5FiniteNormalCoverRecordedStatus
+  ∷ A4-5DirectionMapJacobianAndCoareaChartStabilityRecordedStatus
+  ∷ A4-5WhitneyPacketBoundedOverlapRecordedStatus
+  ∷ finitePatchMinimumCandidateRecordedStatus
+  ∷ typeIRescalingUniformityTargetRecordedStatus
+  ∷ explicitTypeIRescalingSynchronizationGapRecordedStatus
   ∷ etaWindowScaleSeparationRecordedStatus
-  ∷ cA4LowerBoundConstantRecordedStatus
+  ∷ candidateCA4LowerBoundConstantRecordedStatus
   ∷ failClosedRouteToUniformErrorBudgetRecordedStatus
   ∷ A4AndNSClayRemainFalseStatus
   ∷ []
@@ -528,9 +604,9 @@ uniformInNormalConstantsStatusRowCount : Nat
 uniformInNormalConstantsStatusRowCount =
   listLength canonicalUniformInNormalConstantsStatusRows
 
-uniformInNormalConstantsStatusRowCountIs9 :
-  uniformInNormalConstantsStatusRowCount ≡ 9
-uniformInNormalConstantsStatusRowCountIs9 =
+uniformInNormalConstantsStatusRowCountIs13 :
+  uniformInNormalConstantsStatusRowCount ≡ 13
+uniformInNormalConstantsStatusRowCountIs13 =
   refl
 
 ------------------------------------------------------------------------
@@ -749,35 +825,35 @@ keepsTerminalPromotionFalse =
 
 organizationString : String
 organizationString =
-  "O: Worker-2 boundary isolates the uniform-in-great-circle-normal constant obligation for the NS A4 strip-preimage/coarea estimate."
+  "O: Worker-3 boundary isolates the blocked A4.5 theorem ladder for NS A4 strip-preimage/coarea constants, exposing the route to uniformity across the Type-I rescaling family."
 
 requirementString : String
 requirementString =
-  "R: Consume coarea strip-preimage, output preimage measure, and uniform error-budget boundaries; record compactness over n in S2, Whitney packet bounded overlap, eta-window scale separation, c_A4, and fail-closed error-budget routing."
+  "R: Consume coarea strip-preimage, output preimage measure, and uniform error-budget boundaries; record the exact A4.5 interface for uniformity across the Type-I rescaling family via compactness over n in S2, stable direction-map/Jacobian/coarea patch constants, Whitney overlap, A4.3-to-A4.5 coarea propagation, eta-window scale separation, candidate c_A4, and fail-closed routing."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: DASHI.Physics.Closure.NSA4UniformInNormalConstantsBoundary exports imported support, uniform-normal carriers, target, obligations, blockers, status rows, and false-promotion witnesses."
+  "C: DASHI.Physics.Closure.NSA4UniformInNormalConstantsBoundary exports the theorem-facing A4.5 ladder for uniform Jacobian/coarea constants in the great-circle-normal and Type-I-rescaling-family parameters, plus the fail-closed route into the uniform error-budget composite."
 
 stateString : String
 stateString =
-  "S: Boundary facts are recorded only; compactness extraction, uniform overlap, eta separation, c_A4 positivity, output-preimage promotion, A4, A6, NS Clay, and terminal promotion remain false."
+  "S: Boundary facts are recorded only; A4.5 normal-family compactness, normal-patch direction-map/Jacobian/coarea stability, A4.3-to-A4.5 propagation, A4.5 uniformity across the Type-I rescaling family, patch synchronization, eta separation, candidate c_A4 positivity, output-preimage promotion, A4, A6, NS Clay, and terminal promotion remain false."
 
 latticeString : String
 latticeString =
-  "L: S2 normal compactness -> finite normal patches -> stable chart constants -> uniform Whitney overlap -> eta scale separation -> c_A4 lower bound -> fail-closed uniform error budget."
+  "L: A4.5 S2 normal compactness -> finite normal patches -> stable direction-map/Jacobian/coarea constants -> uniform Whitney overlap -> A4.3 coarea propagation into the uniform strip budget -> A4.5 Type-I-rescaling-family synchronization -> eta scale separation -> candidate c_A4 lower bound -> fail-closed uniform error budget."
 
 proposalString : String
 proposalString =
-  "P: Promote only after proving the finite S2 cover, stable packet constants, normal-independent overlap summation, eta scale separation, and positive c_A4 lower bound quantitatively."
+  "P: Promote only after proving the A4.5 compactness cover, stable direction-map/Jacobian/coarea packet constants, normal-independent overlap summation, A4.3-to-A4.5 propagation, A4.5 uniformity across the Type-I rescaling family, eta scale separation, and candidate c_A4 positivity quantitatively."
 
 governanceString : String
 governanceString =
-  "G: The module is a boundary ledger; it routes missing uniformity to NSA4UniformErrorBudgetCompositeBoundary and keeps A4/NS Clay false."
+  "G: The module is a blocked A4.5 theorem ladder; it routes any failure of great-circle-normal-uniform or Type-I-rescaling-family-uniform Jacobian/coarea constants to NSA4UniformErrorBudgetCompositeBoundary and keeps A4/A6/NS Clay false."
 
 gapString : String
 gapString =
-  "F: Open gaps are S2 compactness cover proof, normal-patch chart stability, uniform Whitney bounded overlap, eta-window separation, positive c_A4 proof, and downstream A4/A6/Clay promotion."
+  "F: Open gaps are the A4.5 normal-family compactness cover proof, A4.5 direction-map/Jacobian/coarea patch stability, A4.3-to-A4.5 coarea propagation, uniform Whitney bounded overlap, A4.5 uniformity across the Type-I rescaling family, patch synchronization, eta-window separation, candidate positive c_A4 proof, and downstream A4/A6/Clay promotion."
 
 ------------------------------------------------------------------------
 -- Canonical receipt.
@@ -816,22 +892,28 @@ record NSA4UniformInNormalConstantsBoundary : Set where
       LowerBoundConstantCA4Carrier
     uniformCoareaObligation :
       UniformInNormalCoareaConstantObligationCarrier
+    finitePatchMinimumCandidate :
+      FinitePatchMinimumCandidateCarrier
+    typeIRescalingSynchronizationGap :
+      TypeIRescalingSynchronizationGapCarrier
+    uniformCA4Gap :
+      UniformCA4GapCarrier
     routeToUniformBudget :
       UniformNormalConstantRouteToErrorBudgetCarrier
     target :
       UniformInNormalConstantsTarget
     obligations :
       List UniformInNormalConstantsObligation
-    obligationCountIs11 :
-      uniformInNormalConstantsObligationCount ≡ 11
+    obligationCountIs15 :
+      uniformInNormalConstantsObligationCount ≡ 15
     blockers :
       List UniformInNormalConstantsBlocker
-    blockerCountIs11 :
-      uniformInNormalConstantsBlockerCount ≡ 11
+    blockerCountIs15 :
+      uniformInNormalConstantsBlockerCount ≡ 15
     statusRows :
       List UniformInNormalConstantsStatusRow
-    statusRowCountIs9 :
-      uniformInNormalConstantsStatusRowCount ≡ 9
+    statusRowCountIs13 :
+      uniformInNormalConstantsStatusRowCount ≡ 13
     boundaryRecordedTrue :
       NSA4UniformInNormalConstantsBoundaryRecorded ≡ true
     compactnessRecordedTrue :
@@ -913,21 +995,27 @@ canonicalNSA4UniformInNormalConstantsBoundary =
         canonicalLowerBoundConstantCA4Carrier
     ; uniformCoareaObligation =
         canonicalUniformInNormalCoareaConstantObligationCarrier
+    ; finitePatchMinimumCandidate =
+        canonicalFinitePatchMinimumCandidateCarrier
+    ; typeIRescalingSynchronizationGap =
+        canonicalTypeIRescalingSynchronizationGapCarrier
+    ; uniformCA4Gap =
+        canonicalUniformCA4GapCarrier
     ; routeToUniformBudget =
         canonicalUniformNormalConstantRouteToErrorBudgetCarrier
     ; target =
         canonicalUniformInNormalConstantsTarget
     ; obligations =
         canonicalUniformInNormalConstantsObligations
-    ; obligationCountIs11 =
+    ; obligationCountIs15 =
         refl
     ; blockers =
         canonicalUniformInNormalConstantsBlockers
-    ; blockerCountIs11 =
+    ; blockerCountIs15 =
         refl
     ; statusRows =
         canonicalUniformInNormalConstantsStatusRows
-    ; statusRowCountIs9 =
+    ; statusRowCountIs13 =
         refl
     ; boundaryRecordedTrue =
         refl

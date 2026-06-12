@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSA8A9MonotonicityClosureTheoremLadderBoundary where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
@@ -19,8 +19,8 @@ open import Agda.Builtin.String using (String)
 --
 -- into one standalone ledger surface.
 --
--- The intended upstream theorem names are recorded here only in comments
--- and strings to keep imports minimal:
+-- The intended upstream theorem names are recorded here explicitly as
+-- lightweight consumer strings to keep imports minimal:
 --
 --   * NSA8FullLocalDefectMonotonicityBoundary
 --   * NSA9CKNBKMClosureBoundary
@@ -44,6 +44,30 @@ listLength (_ ∷ xs) =
   suc (listLength xs)
 
 data ⊥ : Set where
+
+a8BoundaryReference : String
+a8BoundaryReference =
+  "DASHI.Physics.Closure.NSA8FullLocalDefectMonotonicityBoundary"
+
+a9BoundaryReference : String
+a9BoundaryReference =
+  "DASHI.Physics.Closure.NSA9CKNBKMClosureBoundary"
+
+a8BoundaryConsumedRecorded : Bool
+a8BoundaryConsumedRecorded =
+  true
+
+a9BoundaryConsumedRecorded : Bool
+a9BoundaryConsumedRecorded =
+  true
+
+a8RecursiveClosureTheoremText : String
+a8RecursiveClosureTheoremText =
+  "A8 candidate theorem grammar: after freezing the A7 smallness threshold, localization commutator control and the CKN annulus decomposition produce a scale-monotonicity recursion D_{theta r} <= q(theta,M) D_r + C(R,M) D_r^(1+alpha) with 0 < q(theta,M) < 1; choosing D_r below the recursive threshold makes the nonlinear remainder absorbable and theta-power iteration forces D_{theta^k r} -> 0."
+
+a9ClosureTheoremText : String
+a9ClosureTheoremText =
+  "A9 candidate theorem grammar: assume a putative Type-I singular scale, insert the A8 scale-monotonicity recursion along a shrinking sequence, deduce vanishing local defect and enstrophy at the critical point, upgrade that vanishing to local vorticity extinction via CKN/BKM-compatible control, then use Biot-Savart and elliptic regularity to contradict singularity formation."
 
 ------------------------------------------------------------------------
 -- Ladder clauses.
@@ -136,11 +160,11 @@ blockerTokenName :
   NSA8A9BlockerToken →
   String
 blockerTokenName blocker-a8-monotonicity-unproved =
-  "missingNSA8FullLocalDefectMonotonicityBoundary"
+  "missingA8RecursiveClosureTheorem"
 blockerTokenName blocker-a9-ckn-bkm-closure-unproved =
-  "missingNSA9CKNBKMClosureBoundary"
+  "missingA9CKNBKMClosureTheorem"
 blockerTokenName blocker-contradiction-not-promoted =
-  "missingContradictionPromotionFromA8A9"
+  "missingContradictionPromotionFromRecursiveClosure"
 blockerTokenName blocker-no-type-i-blowup-not-promoted =
   "missingNoTypeIBlowupPromotion"
 
@@ -172,11 +196,11 @@ a8MonotonicityRow =
     ; rungName =
         "A8 full local defect monotonicity"
     ; rungDescription =
-        "Record the scale-recursive contraction D_{theta r} <= q D_r + C D_r^(1+alpha) with q < 1 as the intended upstream theorem surface for NSA8FullLocalDefectMonotonicityBoundary."
+        "Candidate theorem package only: fix the A7 threshold regime, derive the strict-contraction scale recursion D_{theta r} <= q(theta,M) D_r + C(R,M) D_r^(1+alpha) with q(theta,M) < 1, absorb the nonlinear remainder below threshold, and iterate to obtain D_{theta^k r} -> 0."
     ; blocker =
         blocker-a8-monotonicity-unproved
     ; blockerName =
-        "missingNSA8FullLocalDefectMonotonicityBoundary"
+        "missingA8RecursiveClosureTheorem"
     ; blockerNameMatchesToken =
         refl
     ; promotedAtThisRung =
@@ -194,11 +218,11 @@ a9ClosureRow =
     ; rungName =
         "A9 CKN/BKM closure"
     ; rungDescription =
-        "Record the intended downstream closure from vanishing local enstrophy to local smoothness and singularity exclusion as the upstream theorem surface for NSA9CKNBKMClosureBoundary."
+        "Candidate theorem package only: run the A8 recursion at a putative Type-I singular scale, convert vanishing defect/enstrophy into local vorticity extinction, apply Biot-Savart plus elliptic regularity, and obtain the reviewer-facing CKN/BKM contradiction."
     ; blocker =
         blocker-a9-ckn-bkm-closure-unproved
     ; blockerName =
-        "missingNSA9CKNBKMClosureBoundary"
+        "missingA9CKNBKMClosureTheorem"
     ; blockerNameMatchesToken =
         refl
     ; promotedAtThisRung =
@@ -216,11 +240,11 @@ contradictionRow =
     ; rungName =
         "contradiction"
     ; rungDescription =
-        "Combine A8 recursion and A9 closure to contradict a putative Type-I singular profile, without claiming any theorem promotion inside this receipt."
+        "Receipt-level contradiction surface only: the sharpened A8 scale-monotonicity theorem package and sharpened A9 closure theorem package would jointly eliminate a putative Type-I singular profile, but this module records that dependency without promoting it."
     ; blocker =
         blocker-contradiction-not-promoted
     ; blockerName =
-        "missingContradictionPromotionFromA8A9"
+        "missingContradictionPromotionFromRecursiveClosure"
     ; blockerNameMatchesToken =
         refl
     ; promotedAtThisRung =
@@ -238,7 +262,7 @@ noTypeIBlowupRow =
     ; rungName =
         "no Type-I blowup"
     ; rungDescription =
-        "Terminal NS consequence surface only: if the A8 and A9 theorems were separately promoted, the contradiction rung would feed no Type-I blowup. This module does not promote that conclusion."
+        "Terminal NS consequence surface only: if the A8 scale-monotonicity package and A9 contradiction package were promoted, the contradiction rung would feed no Type-I blowup. This module keeps that downstream consequence fail-closed."
     ; blocker =
         blocker-no-type-i-blowup-not-promoted
     ; blockerName =
@@ -305,6 +329,20 @@ downstreamNSA8A9BlockerCountIs6 :
   downstreamNSA8A9BlockerCount ≡ 6
 downstreamNSA8A9BlockerCountIs6 =
   refl
+
+downstreamNSA8A9BlockerName : DownstreamNSA8A9Blocker → String
+downstreamNSA8A9BlockerName blocker-a8-proof-surface-not-imported-here =
+  "missingImportedA8RecursiveClosureSurface"
+downstreamNSA8A9BlockerName blocker-a9-proof-surface-not-imported-here =
+  "missingImportedA9CKNBKMClosureSurface"
+downstreamNSA8A9BlockerName blocker-contradiction-still-receipt-only =
+  "missingContradictionTheoremFromA8A9"
+downstreamNSA8A9BlockerName blocker-no-type-i-blowup-still-receipt-only =
+  "missingNoTypeIBlowupTheoremFromA8A9"
+downstreamNSA8A9BlockerName blocker-ns-clay-authority-unproved =
+  "missingNSClayAuthorityAfterA8A9"
+downstreamNSA8A9BlockerName blocker-terminal-promotion-forbidden =
+  "missingTerminalPromotionAuthorityAfterA8A9"
 
 A8MonotonicityTheoremProved : Bool
 A8MonotonicityTheoremProved =

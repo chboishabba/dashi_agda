@@ -43,6 +43,14 @@ normalizationLane : String
 normalizationLane =
   "YM-external-acceptance-packet-normalization"
 
+balabanBurdenSummary : String
+balabanBurdenSummary =
+  "Only live external mathematical burden: Balaban H3a.3/H3a.4/H3a.5"
+
+citedConsumerSummary : String
+citedConsumerSummary =
+  "Cited downstream consumers only: H3b, no-spectral-pollution, RP/OS, Wightman, continuum mass-gap transfer"
+
 packetRecorded : Bool
 packetRecorded = true
 
@@ -202,6 +210,58 @@ requiredExternalAuthorityTokenCountIsSix :
   requiredExternalAuthorityTokenCount ≡ 6
 requiredExternalAuthorityTokenCountIsSix = refl
 
+data BalabanMathematicalBurden : Set where
+  balaban-h3a3-finite-volume-mass-gap :
+    BalabanMathematicalBurden
+  balaban-h3a4-infinite-volume-control :
+    BalabanMathematicalBurden
+  balaban-h3a5-continuum-transfer-survival :
+    BalabanMathematicalBurden
+
+canonicalBalabanMathematicalBurdens :
+  List BalabanMathematicalBurden
+canonicalBalabanMathematicalBurdens =
+  balaban-h3a3-finite-volume-mass-gap
+  ∷ balaban-h3a4-infinite-volume-control
+  ∷ balaban-h3a5-continuum-transfer-survival
+  ∷ []
+
+balabanMathematicalBurdenCount : Nat
+balabanMathematicalBurdenCount = 3
+
+balabanMathematicalBurdenCountIsThree :
+  balabanMathematicalBurdenCount ≡ 3
+balabanMathematicalBurdenCountIsThree = refl
+
+data CitedConsumerDependency : Set where
+  cited-consumer-h3b :
+    CitedConsumerDependency
+  cited-consumer-no-spectral-pollution :
+    CitedConsumerDependency
+  cited-consumer-rp-os :
+    CitedConsumerDependency
+  cited-consumer-wightman :
+    CitedConsumerDependency
+  cited-consumer-continuum-mass-gap-transfer :
+    CitedConsumerDependency
+
+canonicalCitedConsumerDependencies :
+  List CitedConsumerDependency
+canonicalCitedConsumerDependencies =
+  cited-consumer-h3b
+  ∷ cited-consumer-no-spectral-pollution
+  ∷ cited-consumer-rp-os
+  ∷ cited-consumer-wightman
+  ∷ cited-consumer-continuum-mass-gap-transfer
+  ∷ []
+
+citedConsumerDependencyCount : Nat
+citedConsumerDependencyCount = 5
+
+citedConsumerDependencyCountIsFive :
+  citedConsumerDependencyCount ≡ 5
+citedConsumerDependencyCountIsFive = refl
+
 data ReproducibilityArtifact : Set where
   agda-sprint132-artifact :
     ReproducibilityArtifact
@@ -303,12 +363,30 @@ falsePromotionGuardCountIsSix = refl
 record NormalizedExternalAuthorityState : Set where
   constructor mkNormalizedExternalAuthorityState
   field
+    balabanMathematicalBurdens :
+      List BalabanMathematicalBurden
+    balabanMathematicalBurdenCountField :
+      Nat
+    balabanMathematicalBurdenCountIsExact :
+      balabanMathematicalBurdenCountField
+        ≡ balabanMathematicalBurdenCount
+    citedConsumerDependencies :
+      List CitedConsumerDependency
+    citedConsumerDependencyCountField :
+      Nat
+    citedConsumerDependencyCountIsExact :
+      citedConsumerDependencyCountField
+        ≡ citedConsumerDependencyCount
     requiredTokens :
       List ExternalAuthorityToken
     requiredTokenCount :
       Nat
     requiredTokenCountIsExact :
       requiredTokenCount ≡ requiredExternalAuthorityTokenCount
+    onlyBalabanClusterCarriesMathematicalBurden :
+      String
+    downstreamConsumerPosture :
+      String
     qualifyingPublicationAbsent :
       S133-DOCKET.qualifyingPublicationGatePresent ≡ false
     peerCommunityReviewAbsent :
@@ -328,9 +406,17 @@ canonicalExternalAuthorityState :
   NormalizedExternalAuthorityState
 canonicalExternalAuthorityState =
   mkNormalizedExternalAuthorityState
+    canonicalBalabanMathematicalBurdens
+    balabanMathematicalBurdenCount
+    refl
+    canonicalCitedConsumerDependencies
+    citedConsumerDependencyCount
+    refl
     requiredExternalAuthorityTokens
     requiredExternalAuthorityTokenCount
     refl
+    balabanBurdenSummary
+    citedConsumerSummary
     S133-DOCKET.qualifyingPublicationGatePresentIsFalse
     S133-DOCKET.peerCommunityReviewGatePresentIsFalse
     S133-DOCKET.twoYearWaitGatePresentIsFalse
@@ -585,6 +671,14 @@ record YMExternalAcceptancePacketNormalization : Setω where
       Nat
     falsePromotionGuardCountIsExact :
       falsePromotionGuardCountField ≡ falsePromotionGuardCount
+    balabanBurdenCountField :
+      Nat
+    balabanBurdenCountIsExact :
+      balabanBurdenCountField ≡ balabanMathematicalBurdenCount
+    citedConsumerCountField :
+      Nat
+    citedConsumerCountIsExact :
+      citedConsumerCountField ≡ citedConsumerDependencyCount
     terminalStatement :
       String
     internalReadinessTrue :
@@ -637,7 +731,11 @@ canonicalYMExternalAcceptancePacketNormalization =
     refl
     falsePromotionGuardCount
     refl
-    "Normalized external acceptance packet: internal readiness and reproducibility are true; all required external authority tokens remain absent; Clay statement boundary, external governance, external acceptance, and Clay Yang-Mills promotion remain false."
+    balabanMathematicalBurdenCount
+    refl
+    citedConsumerDependencyCount
+    refl
+    "Normalized external acceptance packet: internal readiness and reproducibility are true; the only live external mathematical burden is the Balaban H3a.3/H3a.4/H3a.5 cluster; H3b, no-spectral-pollution, RP/OS, Wightman, and continuum mass-gap transfer are explicit cited downstream consumers; all required external governance/acceptance tokens remain absent; Clay statement boundary, external governance, external acceptance, and Clay Yang-Mills promotion remain false."
     internalPacketReadyIsTrue
     internalReproducibilityVerifiedIsTrue
     externalGovernanceCompleteIsFalse

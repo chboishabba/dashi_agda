@@ -20,17 +20,25 @@ import DASHI.Physics.Closure.YMSprint88TransferSpectralGapHardInputsReceipt
 ------------------------------------------------------------------------
 -- Sprint 89 scoped-authority transfer spectral-gap receipt.
 --
--- This receipt consumes the Sprint 88 hard-input boundary.  The two remaining
--- analytic inputs are accepted as scoped authority imports:
+-- This is a historical scoped-authority routing packet surface inside the
+-- sharper Balaban-centred YM posture.  It consumes the Sprint 88 hard-input
+-- boundary and records how the two remaining analytic inputs were handed
+-- through the older lattice transfer chain; it does not compete with the
+-- current frontier, where the live external-content burden is the Balaban H3a
+-- cluster.
+--
+-- The two remaining analytic inputs are accepted here as scoped authority
+-- imports:
 --
 -- * BalabanCMP98LocalOscillationBoundForQhp for 2602.0041 Assumption 5.4;
 -- * EffectiveActionPolymersSpatialOnlyForA1 for 2602.0041 Assumption 6.3,
 --   using the packaging authority / strong Gate-B route without promoting the
 --   old weak PolymerIn theorem as an unconditional derivation.
 --
--- The result is a lattice transfer spectral-gap provider in the receipt sense.
--- Thermodynamic limit, continuum mass-gap transfer, OS/Wightman reconstruction,
--- and Clay/YM promotion remain false.
+-- The result is a lattice transfer spectral-gap provider in the historical
+-- receipt sense only.  Thermodynamic limit, continuum mass-gap transfer,
+-- OS/Wightman reconstruction, weak-surface promotion, and Clay/YM promotion
+-- remain false.
 
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
@@ -92,15 +100,15 @@ canonicalSprint89ScopedAuthorityInputs =
 
 qhpScopedAuthorityBoundary : String
 qhpScopedAuthorityBoundary =
-  "BalabanCMP98LocalOscillationBoundForQhp is accepted as a scoped CMP98/CMP116/2602.0041 Appendix A authority input for Assumption 5.4; it is not a native formal derivation of Q_hp or osc_e."
+  "Historical Sprint 89 routing: BalabanCMP98LocalOscillationBoundForQhp is accepted as a scoped CMP98/CMP116/2602.0041 Appendix A authority input for Assumption 5.4; this records an older handoff inside the Balaban-centred chain, not a native formal derivation of Q_hp or osc_e."
 
 gateBScopedAuthorityBoundary : String
 gateBScopedAuthorityBoundary =
-  "EffectiveActionPolymersSpatialOnlyForA1 is accepted through Gate-B packaging authority and the strong residual-membership KP route; the old weak PolymerIn surface remains unproved/unpromoted."
+  "Historical Sprint 89 routing: EffectiveActionPolymersSpatialOnlyForA1 is accepted through Gate-B packaging authority and the strong residual-membership KP route; the old weak PolymerIn surface remains unproved and unpromoted, so this stays fail-closed."
 
 transferSpectralGapScopedAuthorityBoundary : String
 transferSpectralGapScopedAuthorityBoundary =
-  "Assumption 5.4, Assumption 6.3, reflection positivity, TransferSpectralGap, and PositiveLatticeMassGapExtraction are closed by scoped authority receipts, yielding the lattice mass-gap provider in repo while leaving continuum/OS/Clay gates false."
+  "Historical Sprint 89 routing: Assumption 5.4, Assumption 6.3, reflection positivity, TransferSpectralGap, and PositiveLatticeMassGapExtraction are closed by scoped authority receipts, yielding the lattice mass-gap provider in the older receipt chain while the live external-content burden remains Balaban H3a and the continuum/OS/Clay gates stay false."
 
 record Sprint89ScopedAuthorityBoundary : Set₁ where
   field
@@ -132,18 +140,18 @@ record Sprint89ScopedAuthorityBoundary : Set₁ where
       StrongGateBKP.strongEta4EarnedUnconditionalFromSectorDisjointness
         ≡ true
 
-    latticeAssumption54Closed :
-      Lattice.eriksson26020041Assumption54DerivedInRepo ≡ true
-    latticeAssumption63Closed :
-      Lattice.eriksson26020041Assumption63DerivedInRepo ≡ true
-    latticeTransferReflectionPositivityClosed :
-      Lattice.transferReflectionPositivityDerivedInRepo ≡ true
-    latticeTransferSpectralGapClosed :
-      Lattice.transferSpectralGapDerivedInRepo ≡ true
-    latticePositiveMassGapExtractionClosed :
-      Lattice.positiveLatticeMassGapExtractionDerivedInRepo ≡ true
-    latticeProviderClosed :
-      Lattice.latticeMassGapProviderDerivedInRepo ≡ true
+    latticeAssumption54NotDerivedInRepo :
+      Lattice.eriksson26020041Assumption54DerivedInRepo ≡ false
+    latticeAssumption63NotDerivedInRepo :
+      Lattice.eriksson26020041Assumption63DerivedInRepo ≡ false
+    latticeTransferReflectionPositivityNotDerivedInRepo :
+      Lattice.transferReflectionPositivityDerivedInRepo ≡ false
+    latticeTransferSpectralGapNotDerivedInRepo :
+      Lattice.transferSpectralGapDerivedInRepo ≡ false
+    latticePositiveMassGapExtractionNotDerivedInRepo :
+      Lattice.positiveLatticeMassGapExtractionDerivedInRepo ≡ false
+    latticeProviderNotDerivedInRepo :
+      Lattice.latticeMassGapProviderDerivedInRepo ≡ false
     latticeMassGapUnconditionalStillFalse :
       Lattice.latticeMassGapFromAnisotropicKPUnconditional ≡ false
 
@@ -154,13 +162,13 @@ record Sprint89ScopedAuthorityBoundary : Set₁ where
 
     qhpBoundary :
       qhpScopedAuthorityBoundary ≡
-      "BalabanCMP98LocalOscillationBoundForQhp is accepted as a scoped CMP98/CMP116/2602.0041 Appendix A authority input for Assumption 5.4; it is not a native formal derivation of Q_hp or osc_e."
+      "Historical Sprint 89 routing: BalabanCMP98LocalOscillationBoundForQhp is accepted as a scoped CMP98/CMP116/2602.0041 Appendix A authority input for Assumption 5.4; this records an older handoff inside the Balaban-centred chain, not a native formal derivation of Q_hp or osc_e."
     gateBBoundary :
       gateBScopedAuthorityBoundary ≡
-      "EffectiveActionPolymersSpatialOnlyForA1 is accepted through Gate-B packaging authority and the strong residual-membership KP route; the old weak PolymerIn surface remains unproved/unpromoted."
+      "Historical Sprint 89 routing: EffectiveActionPolymersSpatialOnlyForA1 is accepted through Gate-B packaging authority and the strong residual-membership KP route; the old weak PolymerIn surface remains unproved and unpromoted, so this stays fail-closed."
     transferGapBoundary :
       transferSpectralGapScopedAuthorityBoundary ≡
-      "Assumption 5.4, Assumption 6.3, reflection positivity, TransferSpectralGap, and PositiveLatticeMassGapExtraction are closed by scoped authority receipts, yielding the lattice mass-gap provider in repo while leaving continuum/OS/Clay gates false."
+      "Historical Sprint 89 routing: Assumption 5.4, Assumption 6.3, reflection positivity, TransferSpectralGap, and PositiveLatticeMassGapExtraction are closed by scoped authority receipts, yielding the lattice mass-gap provider in the older receipt chain while the live external-content burden remains Balaban H3a and the continuum/OS/Clay gates stay false."
 
     qhpScopedAuthorityAccepted :
       balabanCMP98LocalOscillationBoundForQhpScopedAuthorityAccepted ≡ true
@@ -225,12 +233,12 @@ canonicalSprint89ScopedAuthorityBoundary =
     ; gateBPackagingA1AuthorityConditional = refl
     ; strongGateBToKPPresent = refl
     ; strongEta4FromSectorDisjointness = refl
-    ; latticeAssumption54Closed = refl
-    ; latticeAssumption63Closed = refl
-    ; latticeTransferReflectionPositivityClosed = refl
-    ; latticeTransferSpectralGapClosed = refl
-    ; latticePositiveMassGapExtractionClosed = refl
-    ; latticeProviderClosed = refl
+    ; latticeAssumption54NotDerivedInRepo = refl
+    ; latticeAssumption63NotDerivedInRepo = refl
+    ; latticeTransferReflectionPositivityNotDerivedInRepo = refl
+    ; latticeTransferSpectralGapNotDerivedInRepo = refl
+    ; latticePositiveMassGapExtractionNotDerivedInRepo = refl
+    ; latticeProviderNotDerivedInRepo = refl
     ; latticeMassGapUnconditionalStillFalse = refl
     ; scopedInputs = canonicalSprint89ScopedAuthorityInputs
     ; scopedInputsAreCanonical = refl

@@ -11,13 +11,51 @@ import DASHI.Physics.Closure.YMThermodynamicLimitAuthority as Thermo
 -- Authority-conditional Osterwalder-Schrader axioms gate.
 --
 -- This module advances the authority-conditional YM lane from the
--- thermodynamic/continuum-limit provider to the OS axiom surface.  The OS
--- provider is explicit and postulated: the repo does not internally derive
--- reflection positivity, Euclidean invariance, regularity, symmetry, or
--- clustering here.
+-- thermodynamic/continuum-limit provider to the OS axiom surface.  The
+-- external intake is now understood as:
+--
+--   Balaban-compatible transfer / RP.4 vacuum lane
+--     -> OS axiom authority intake
+--     -> OS/Wightman reconstruction authority
+--     -> continuum mass-gap transfer authority.
+--
+-- This file owns only the OS axiom intake.  The provider is explicit and
+-- postulated: the repo does not internally derive reflection positivity,
+-- Euclidean invariance, regularity, symmetry, or clustering here.  H3a trace
+-- / norm-resolvent control, H3b vacuum-projection continuity, and the
+-- downstream no-spectral-pollution step remain upstream requirements for the
+-- Balaban/RP.4 compatibility story rather than outputs of this file.
 --
 -- OS/Wightman reconstruction, continuum mass-gap transfer, mass-gap survival,
 -- and Clay/YM promotion remain false.
+
+data OSAuthorityStage : Set where
+  h3a-stage :
+    OSAuthorityStage
+  h3b-stage :
+    OSAuthorityStage
+  no-spectral-pollution-stage :
+    OSAuthorityStage
+  balaban-rp4-compatibility-stage :
+    OSAuthorityStage
+  os-axiom-intake-stage :
+    OSAuthorityStage
+  downstream-wightman-stage :
+    OSAuthorityStage
+  downstream-continuum-gap-stage :
+    OSAuthorityStage
+
+osAuthorityRouteSummary : String
+osAuthorityRouteSummary =
+  "YM OS authority route: Balaban H3a continuum intake -> H3b vacuum-projection continuity -> no-spectral-pollution from H3a/H3b -> RP/OS intake. Only after that cited RP/OS intake does the Wightman reconstruction lane become available, and continuum mass-gap transfer remains strictly downstream."
+
+exactContinuumAuthorityChainClause : String
+exactContinuumAuthorityChainClause =
+  "Balaban H3a continuum intake -> H3b vacuum-projection continuity -> no-spectral-pollution from H3a/H3b -> RP/OS intake -> Wightman reconstruction -> continuum mass-gap transfer"
+
+balabanRP4CompatibilityCitation : String
+balabanRP4CompatibilityCitation =
+  "Balaban/RP.4 transfer compatibility: the cited RP/OS intake that aligns the finite transfer construction with a continuum reflection-positive Schwinger-function package once Balaban H3a continuum intake, H3b vacuum-projection continuity, and no-spectral-pollution from H3a/H3b are supplied."
 
 record ReflectionPositivity : Set where
   constructor mkReflectionPositivity
@@ -158,6 +196,18 @@ osClusteringCitation : String
 osClusteringCitation =
   "OS clustering axiom for the continuum SU(3) Yang-Mills Schwinger functions."
 
+h3aTransferControlCitation : String
+h3aTransferControlCitation =
+  "Balaban H3a continuum intake is the load-bearing trace / norm-resolvent control on the vacuum-orthogonal transfer sector; it remains an upstream continuum-transfer obligation, not an OS axiom output."
+
+h3bVacuumContinuityCitation : String
+h3bVacuumContinuityCitation =
+  "H3b vacuum-projection continuity remains the downstream RP.4-compatible vacuum obligation after H3a; it is not an OS axiom output."
+
+noSpectralPollutionCitation : String
+noSpectralPollutionCitation =
+  "No-spectral-pollution from H3a/H3b closes the spectral-passage step and remains outside this OS authority file; RP/OS can only be cited after it."
+
 reflectionPositivityProvider :
   ReflectionPositivity
 reflectionPositivityProvider =
@@ -232,7 +282,7 @@ osAxiomsProviderAuthorityAvailable : Bool
 osAxiomsProviderAuthorityAvailable = true
 
 osAxiomsProviderDerivedInRepo : Bool
-osAxiomsProviderDerivedInRepo = true
+osAxiomsProviderDerivedInRepo = false
 
 osAxiomsProviderImportedByAuthority : Bool
 osAxiomsProviderImportedByAuthority = true
@@ -247,7 +297,7 @@ osterwalderSchraderAxiomsAuthorityConditionalBool : Bool
 osterwalderSchraderAxiomsAuthorityConditionalBool = true
 
 osterwalderSchraderAxiomsUnconditional : Bool
-osterwalderSchraderAxiomsUnconditional = true
+osterwalderSchraderAxiomsUnconditional = false
 
 osWightmanReconstructionAuthorityConditional : Bool
 osWightmanReconstructionAuthorityConditional = false
@@ -257,6 +307,15 @@ continuumMassGapTransferAuthorityConditional = false
 
 massGapSurvivalAuthorityConditional : Bool
 massGapSurvivalAuthorityConditional = false
+
+h3aAuthorityImportedHere : Bool
+h3aAuthorityImportedHere = false
+
+h3bAuthorityImportedHere : Bool
+h3bAuthorityImportedHere = false
+
+noSpectralPollutionAuthorityImportedHere : Bool
+noSpectralPollutionAuthorityImportedHere = false
 
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
@@ -270,10 +329,18 @@ osAxiomsPromotionImpossibleHere ()
 
 record OSAxiomsAuthorityBoundary : Set where
   field
+    authorityRouteStage :
+      OSAuthorityStage
+    authorityRouteSummary :
+      String
+    exactAuthorityChainClause :
+      String
+    balabanRP4CompatibilityBoundary :
+      String
     providerAuthorityAvailableIsTrue :
       osAxiomsProviderAuthorityAvailable ≡ true
-    providerDerivedInRepoIsTrue :
-      osAxiomsProviderDerivedInRepo ≡ true
+    providerNotDerivedInRepo :
+      osAxiomsProviderDerivedInRepo ≡ false
     providerAuthorityImported :
       osAxiomsProviderImportedByAuthority ≡ true
     providerSplitIntoFiveAnalyticLemmas :
@@ -282,8 +349,20 @@ record OSAxiomsAuthorityBoundary : Set where
       reflectionPositivityAuthorityConditional ≡ true
     osAxiomsAuthorityConditionalIsTrue :
       osterwalderSchraderAxiomsAuthorityConditionalBool ≡ true
-    osAxiomsUnconditionalIsTrue :
-      osterwalderSchraderAxiomsUnconditional ≡ true
+    osAxiomsUnconditionalStillFalse :
+      osterwalderSchraderAxiomsUnconditional ≡ false
+    h3aAuthorityNotImportedHere :
+      h3aAuthorityImportedHere ≡ false
+    h3bAuthorityNotImportedHere :
+      h3bAuthorityImportedHere ≡ false
+    noSpectralPollutionAuthorityNotImportedHere :
+      noSpectralPollutionAuthorityImportedHere ≡ false
+    h3aTransferControlStillExternal :
+      String
+    h3bVacuumContinuityStillExternal :
+      String
+    noSpectralPollutionStillExternal :
+      String
     osWightmanAuthorityConditionalStillFalse :
       osWightmanReconstructionAuthorityConditional ≡ false
     continuumMassGapTransferAuthorityConditionalStillFalse :
@@ -299,13 +378,23 @@ osAxiomsAuthorityBoundary :
   OSAxiomsAuthorityBoundary
 osAxiomsAuthorityBoundary =
   record
-    { providerAuthorityAvailableIsTrue = refl
-    ; providerDerivedInRepoIsTrue = refl
+    { authorityRouteStage = os-axiom-intake-stage
+    ; authorityRouteSummary = osAuthorityRouteSummary
+    ; exactAuthorityChainClause = exactContinuumAuthorityChainClause
+    ; balabanRP4CompatibilityBoundary = balabanRP4CompatibilityCitation
+    ; providerAuthorityAvailableIsTrue = refl
+    ; providerNotDerivedInRepo = refl
     ; providerAuthorityImported = refl
     ; providerSplitIntoFiveAnalyticLemmas = refl
     ; reflectionPositivityAuthorityConditionalIsTrue = refl
     ; osAxiomsAuthorityConditionalIsTrue = refl
-    ; osAxiomsUnconditionalIsTrue = refl
+    ; osAxiomsUnconditionalStillFalse = refl
+    ; h3aAuthorityNotImportedHere = refl
+    ; h3bAuthorityNotImportedHere = refl
+    ; noSpectralPollutionAuthorityNotImportedHere = refl
+    ; h3aTransferControlStillExternal = h3aTransferControlCitation
+    ; h3bVacuumContinuityStillExternal = h3bVacuumContinuityCitation
+    ; noSpectralPollutionStillExternal = noSpectralPollutionCitation
     ; osWightmanAuthorityConditionalStillFalse = refl
     ; continuumMassGapTransferAuthorityConditionalStillFalse = refl
     ; massGapSurvivalAuthorityConditionalStillFalse = refl

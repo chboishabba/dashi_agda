@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NSPaperSubmissionPacketBoundary where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.String using (String)
 
 data List (A : Set) : Set where
   [] : List A
@@ -15,88 +16,112 @@ listLength [] = zero
 listLength (_ ∷ xs) = suc (listLength xs)
 
 data NSPaperSubmissionPacketClause : Set where
-  pdeLanguageNarrativeAssembled :
+  reviewerPacketContainsCandidateCompleteSuitableWeakSolutionNarrative :
     NSPaperSubmissionPacketClause
 
-  constantsAppendixPacketAssembled :
+  reviewerPacketContainsCandidateCompletePressureLocalEnergyAndCKNESSLRTIntakeNarrative :
     NSPaperSubmissionPacketClause
 
-  solutionClassAndCriterionPacketAssembled :
+  reviewerNarrativeDependsOnCandidateCompleteA1A3Package :
     NSPaperSubmissionPacketClause
 
-  reviewerFacingAuthorityBlockersRecorded :
+  constantsAppendixDependsOnCandidateCompleteA4Package :
     NSPaperSubmissionPacketClause
 
-  submissionStillFalseUntilAuthorityCloses :
+  contradictionEndgameDependsOnCandidateCompleteA5A9Package :
     NSPaperSubmissionPacketClause
 
-  clayPromotionStillFalseUntilSubmissionCloses :
+  reviewerPacketDependsOnCandidateCompleteClassicalPDEAndA1A3A4A5A9Packages :
     NSPaperSubmissionPacketClause
 
-  terminalPromotionStillFalseUntilReviewCloses :
+  reviewerPacketMarksRemainingBurdenAsPromotionEvidenceAndAcceptance :
+    NSPaperSubmissionPacketClause
+
+  submissionStillFalseUntilCandidatePacketAcceptedInExactNormsAndConstants :
+    NSPaperSubmissionPacketClause
+
+  clayAndTerminalPromotionRemainFalseUntilReviewCloses :
     NSPaperSubmissionPacketClause
 
 canonicalNSPaperSubmissionPacketClauses :
   List NSPaperSubmissionPacketClause
 canonicalNSPaperSubmissionPacketClauses =
-  pdeLanguageNarrativeAssembled
-  ∷ constantsAppendixPacketAssembled
-  ∷ solutionClassAndCriterionPacketAssembled
-  ∷ reviewerFacingAuthorityBlockersRecorded
-  ∷ submissionStillFalseUntilAuthorityCloses
-  ∷ clayPromotionStillFalseUntilSubmissionCloses
-  ∷ terminalPromotionStillFalseUntilReviewCloses
+  reviewerPacketContainsCandidateCompleteSuitableWeakSolutionNarrative
+  ∷ reviewerPacketContainsCandidateCompletePressureLocalEnergyAndCKNESSLRTIntakeNarrative
+  ∷ reviewerNarrativeDependsOnCandidateCompleteA1A3Package
+  ∷ constantsAppendixDependsOnCandidateCompleteA4Package
+  ∷ contradictionEndgameDependsOnCandidateCompleteA5A9Package
+  ∷ reviewerPacketDependsOnCandidateCompleteClassicalPDEAndA1A3A4A5A9Packages
+  ∷ reviewerPacketMarksRemainingBurdenAsPromotionEvidenceAndAcceptance
+  ∷ submissionStillFalseUntilCandidatePacketAcceptedInExactNormsAndConstants
+  ∷ clayAndTerminalPromotionRemainFalseUntilReviewCloses
   ∷ []
 
 nsPaperSubmissionPacketClauseCount : Nat
 nsPaperSubmissionPacketClauseCount =
   listLength canonicalNSPaperSubmissionPacketClauses
 
-nsPaperSubmissionPacketClauseCountIs7 :
-  nsPaperSubmissionPacketClauseCount ≡ 7
-nsPaperSubmissionPacketClauseCountIs7 = refl
+nsPaperSubmissionPacketClauseCountIs9 :
+  nsPaperSubmissionPacketClauseCount ≡ 9
+nsPaperSubmissionPacketClauseCountIs9 = refl
 
 data NSPaperSubmissionPacketBlocker : Set where
-  pdeNarrativePolishStillOpen :
+  candidateSuitableWeakSolutionNarrativeNeedsPromotionEvidenceInConsumedNorms :
     NSPaperSubmissionPacketBlocker
 
-  constantsAppendixExtractionStillOpen :
+  candidatePressureLocalEnergyAndCKNESSLRTIntakeNeedAcceptanceInConsumedForm :
     NSPaperSubmissionPacketBlocker
 
-  solutionClassNarrativeAlignmentStillOpen :
+  candidateA1BoundedMassRouteNeedsPromotionEvidence :
     NSPaperSubmissionPacketBlocker
 
-  reviewerResponsePacketStillOpen :
+  candidateA3ThresholdAndApproximateStationarityNeedsPromotionEvidence :
     NSPaperSubmissionPacketBlocker
 
-  externalReviewAndAcceptanceStillOpen :
+  candidateA4OutputSupportCouplingNeedsAcceptedConstantsAndGeometry :
+    NSPaperSubmissionPacketBlocker
+
+  candidateA5A9ConsumerLadderNeedsPromotionEvidence :
+    NSPaperSubmissionPacketBlocker
+
+  exactConstantsAppendixAcceptanceStillOpen :
+    NSPaperSubmissionPacketBlocker
+
+  candidateStandardPDEPacketAcceptanceStillOpen :
+    NSPaperSubmissionPacketBlocker
+
+  externalReviewAcceptanceOfCandidateSelfContainedPacketStillOpen :
     NSPaperSubmissionPacketBlocker
 
   clayPromotionForbiddenUntilSubmissionAuthorityCloses :
     NSPaperSubmissionPacketBlocker
 
-  terminalPromotionForbiddenUntilReviewAuthorityCloses :
-    NSPaperSubmissionPacketBlocker
-
 canonicalNSPaperSubmissionPacketBlockers :
   List NSPaperSubmissionPacketBlocker
 canonicalNSPaperSubmissionPacketBlockers =
-  pdeNarrativePolishStillOpen
-  ∷ constantsAppendixExtractionStillOpen
-  ∷ solutionClassNarrativeAlignmentStillOpen
-  ∷ reviewerResponsePacketStillOpen
-  ∷ externalReviewAndAcceptanceStillOpen
+  candidateSuitableWeakSolutionNarrativeNeedsPromotionEvidenceInConsumedNorms
+  ∷ candidatePressureLocalEnergyAndCKNESSLRTIntakeNeedAcceptanceInConsumedForm
+  ∷ candidateA1BoundedMassRouteNeedsPromotionEvidence
+  ∷ candidateA3ThresholdAndApproximateStationarityNeedsPromotionEvidence
+  ∷ candidateA4OutputSupportCouplingNeedsAcceptedConstantsAndGeometry
+  ∷ candidateA5A9ConsumerLadderNeedsPromotionEvidence
+  ∷ exactConstantsAppendixAcceptanceStillOpen
+  ∷ candidateStandardPDEPacketAcceptanceStillOpen
+  ∷ externalReviewAcceptanceOfCandidateSelfContainedPacketStillOpen
   ∷ clayPromotionForbiddenUntilSubmissionAuthorityCloses
-  ∷ terminalPromotionForbiddenUntilReviewAuthorityCloses
   ∷ []
 
 nsPaperSubmissionPacketBlockerCount : Nat
 nsPaperSubmissionPacketBlockerCount =
   listLength canonicalNSPaperSubmissionPacketBlockers
 
-nsPaperSubmissionPacketBlockerCountIs7 :
-  nsPaperSubmissionPacketBlockerCount ≡ 7
-nsPaperSubmissionPacketBlockerCountIs7 = refl
+nsPaperSubmissionPacketBlockerCountIs10 :
+  nsPaperSubmissionPacketBlockerCount ≡ 10
+nsPaperSubmissionPacketBlockerCountIs10 = refl
+
+nsPaperSubmissionPacketSummary : String
+nsPaperSubmissionPacketSummary =
+  "Reviewer packet grammar: the NS submission packet is a fail-closed candidate-complete classical PDE package consisting of suitable-weak-solution, pressure-reconstruction, local-energy, and classical CKN/ESS/LRT intake grammar, explicitly consuming theorem-shape grammar for A1-A9; what remains is promotion evidence and acceptance of that candidate self-contained packet in the exact consumed norms and constants, so submission and all promotion bits remain false until review authority closes."
 
 NSPaperSubmissionPacketRecorded : Bool
 NSPaperSubmissionPacketRecorded = true
@@ -106,6 +131,12 @@ NSPaperSubmissionUsesExistingA1ToA9Math = true
 
 NSPaperSubmissionStillFalse : Bool
 NSPaperSubmissionStillFalse = false
+
+NSPaperSubmissionAuthorityAudited : Bool
+NSPaperSubmissionAuthorityAudited = false
+
+NSPaperSubmissionSubmissionReady : Bool
+NSPaperSubmissionSubmissionReady = false
 
 NSClayPromotionFromPaperSubmissionPacket : Bool
 NSClayPromotionFromPaperSubmissionPacket = false
@@ -121,14 +152,18 @@ record NSPaperSubmissionPacketBoundary : Set where
     blockers : List NSPaperSubmissionPacketBlocker
     blockersCanonical :
       blockers ≡ canonicalNSPaperSubmissionPacketBlockers
-    clauseCountIs7 :
-      nsPaperSubmissionPacketClauseCount ≡ 7
-    blockerCountIs7 :
-      nsPaperSubmissionPacketBlockerCount ≡ 7
+    clauseCountIs9 :
+      nsPaperSubmissionPacketClauseCount ≡ 9
+    blockerCountIs10 :
+      nsPaperSubmissionPacketBlockerCount ≡ 10
     packetRecordedField :
       NSPaperSubmissionPacketRecorded ≡ true
     existingMathReuseField :
       NSPaperSubmissionUsesExistingA1ToA9Math ≡ true
+    authorityAuditStillFalse :
+      NSPaperSubmissionAuthorityAudited ≡ false
+    submissionReadyStillFalse :
+      NSPaperSubmissionSubmissionReady ≡ false
     submissionStillFalseField :
       NSPaperSubmissionStillFalse ≡ false
     clayPromotionStillFalseField :
@@ -144,10 +179,12 @@ canonicalNSPaperSubmissionPacketBoundary =
     ; clausesCanonical = refl
     ; blockers = canonicalNSPaperSubmissionPacketBlockers
     ; blockersCanonical = refl
-    ; clauseCountIs7 = refl
-    ; blockerCountIs7 = refl
+    ; clauseCountIs9 = refl
+    ; blockerCountIs10 = refl
     ; packetRecordedField = refl
     ; existingMathReuseField = refl
+    ; authorityAuditStillFalse = refl
+    ; submissionReadyStillFalse = refl
     ; submissionStillFalseField = refl
     ; clayPromotionStillFalseField = refl
     ; terminalPromotionStillFalseField = refl

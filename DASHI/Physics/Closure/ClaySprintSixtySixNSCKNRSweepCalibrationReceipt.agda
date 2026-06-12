@@ -14,9 +14,13 @@ import DASHI.Physics.Closure.ClaySprintSixtyFiveNSPressureReconstructionCKNContr
 --
 -- dashiCFD samples pressure-inclusive CKN-style local critical concentration
 -- at candidate hot spots across several radii.  The available N32/N64, N128,
--- and dense N64 artifacts route as decaying under zoom.  This is favorable
--- diagnostic evidence only; no CKN epsilon theorem or Clay/NS promotion
--- follows.
+-- and dense N64 artifacts route as decaying under zoom.  This module is a
+-- downstream historical route-calibration surface inside the candidate NS
+-- self-contained packet, not the live primary frontier.  The sprint evidence
+-- remains diagnostic and pre-theorem only: candidate packet recorded,
+-- promotion evidence and referee-grade acceptance still outstanding, and no
+-- local energy theorem, suitable weak solution theorem, CKN epsilon theorem,
+-- ESS no-blowup theorem, or Clay/NS promotion follows.
 
 Scalar : Set
 Scalar = String
@@ -24,14 +28,49 @@ Scalar = String
 clayNavierStokesPromoted : Bool
 clayNavierStokesPromoted = false
 
+data Sprint66ClassicalPDEClause : Set where
+  packetHistoricalPressureInclusiveCKNQuantityInheritedClause :
+    Sprint66ClassicalPDEClause
+  downstreamMultiRadiusCylinderAuditComputedClause :
+    Sprint66ClassicalPDEClause
+  diagnosticOnlyPreTheoremStatusRecordedClause :
+    Sprint66ClassicalPDEClause
+  candidatePacketRecordedButNotPromotedClause :
+    Sprint66ClassicalPDEClause
+  localEnergySuitableWeakSolutionStillOpenClause :
+    Sprint66ClassicalPDEClause
+  cknEpsilonRegularityStillOpenClause :
+    Sprint66ClassicalPDEClause
+  essL3NoBlowupStillOpenClause :
+    Sprint66ClassicalPDEClause
+  a6ToA9ClosureStillOpenClause :
+    Sprint66ClassicalPDEClause
+
+canonicalSprint66ClassicalPDEClauses :
+  List Sprint66ClassicalPDEClause
+canonicalSprint66ClassicalPDEClauses =
+  packetHistoricalPressureInclusiveCKNQuantityInheritedClause
+  ∷ downstreamMultiRadiusCylinderAuditComputedClause
+  ∷ diagnosticOnlyPreTheoremStatusRecordedClause
+  ∷ candidatePacketRecordedButNotPromotedClause
+  ∷ localEnergySuitableWeakSolutionStillOpenClause
+  ∷ cknEpsilonRegularityStillOpenClause
+  ∷ essL3NoBlowupStillOpenClause
+  ∷ a6ToA9ClosureStillOpenClause
+  ∷ []
+
 data Sprint66RouteDecision : Set where
-  pressureInclusiveCKNQuantityInherited :
+  packetHistoricalPressureInclusiveCKNQuantityInherited :
     Sprint66RouteDecision
-  candidateCenteredRSweepComputed :
+  downstreamCandidateCenteredRSweepComputed :
     Sprint66RouteDecision
-  cknRSweepDecaysUnderZoomDiagnostic :
+  cknRSweepDecaysUnderZoomDiagnosticOnly :
     Sprint66RouteDecision
-  diagnosticEpsilonIsNotCKNTheorem :
+  sprintEvidenceIsPreTheoremOnly :
+    Sprint66RouteDecision
+  candidatePacketRecordedPromotionOutstanding :
+    Sprint66RouteDecision
+  refereeGradeAcceptanceOutstanding :
     Sprint66RouteDecision
   noClayPromotion :
     Sprint66RouteDecision
@@ -39,33 +78,38 @@ data Sprint66RouteDecision : Set where
 canonicalSprint66RouteDecisions :
   List Sprint66RouteDecision
 canonicalSprint66RouteDecisions =
-  pressureInclusiveCKNQuantityInherited
-  ∷ candidateCenteredRSweepComputed
-  ∷ cknRSweepDecaysUnderZoomDiagnostic
-  ∷ diagnosticEpsilonIsNotCKNTheorem
+  packetHistoricalPressureInclusiveCKNQuantityInherited
+  ∷ downstreamCandidateCenteredRSweepComputed
+  ∷ cknRSweepDecaysUnderZoomDiagnosticOnly
+  ∷ sprintEvidenceIsPreTheoremOnly
+  ∷ candidatePacketRecordedPromotionOutstanding
+  ∷ refereeGradeAcceptanceOutstanding
   ∷ noClayPromotion
   ∷ []
 
 data Sprint66OpenGate : Set where
-  gateCKNEpsilonAuthority :
+  gateLiveFrontierRemainsElsewhere :
     Sprint66OpenGate
-  gateScaleUniformPressureInclusiveBound :
+  gateLocalEnergyInequalityForSuitableWeakSolutions :
     Sprint66OpenGate
-  gateSuitableWeakSolutionBridge :
+  gateScaleUniformPressureInclusiveCKNBound :
     Sprint66OpenGate
-  gateContinuumUniformity :
+  gateCKNEpsilonRegularityTheorem :
     Sprint66OpenGate
-  gateNoFiniteTimeBlowup :
+  gateContinuumUniformityAcrossNAndDt :
+    Sprint66OpenGate
+  gateESSL3NoBlowupClosure :
     Sprint66OpenGate
 
 canonicalSprint66OpenGates :
   List Sprint66OpenGate
 canonicalSprint66OpenGates =
-  gateCKNEpsilonAuthority
-  ∷ gateScaleUniformPressureInclusiveBound
-  ∷ gateSuitableWeakSolutionBridge
-  ∷ gateContinuumUniformity
-  ∷ gateNoFiniteTimeBlowup
+  gateLiveFrontierRemainsElsewhere
+  ∷ gateLocalEnergyInequalityForSuitableWeakSolutions
+  ∷ gateScaleUniformPressureInclusiveCKNBound
+  ∷ gateCKNEpsilonRegularityTheorem
+  ∷ gateContinuumUniformityAcrossNAndDt
+  ∷ gateESSL3NoBlowupClosure
   ∷ []
 
 data Sprint66Promotion : Set where
@@ -81,16 +125,21 @@ scaleNormalizedCKNQuantity =
 
 sprint66CFDContract : String
 sprint66CFDContract =
-  "ns_sprint66_ckn_r_sweep_calibration_summary.json"
+  "ns_sprint66_ckn_r_sweep_calibration_summary.json records a downstream historical pressure-inclusive multi-radius CKN calibration intake inside the candidate self-contained NS packet; the evidence is diagnostic/pre-theorem only and theorem-grade local energy, suitable weak solution, epsilon-regularity, ESS/A9 closure, promotion evidence, and referee-grade acceptance remain outstanding"
 
 sprint66Boundary : String
 sprint66Boundary =
-  "Sprint 66 records that the sampled pressure-inclusive CKN hot spots decay under zoom on available DNS artifacts. This demotes the fixed-block ascended fractions as calibration artifacts, but it does not apply CKN epsilon regularity, prove suitable weak solution or continuum-uniform bridges, prove no finite-time blowup, or promote Clay/NS."
+  "Sprint 66 records that the sampled pressure-inclusive CKN hot spots decay under zoom on available DNS artifacts. This is downstream historical route-calibration evidence within the candidate self-contained NS packet rather than the live primary frontier. The sprint evidence is diagnostic and pre-theorem only, the packet is recorded but not promoted, promotion evidence and referee-grade acceptance are still outstanding, and local energy inequality, suitable weak solution structure, theorem-grade CKN epsilon regularity, continuum-uniform control, ESS no-blowup, and Clay/NS promotion all remain unproved."
 
 record ClaySprintSixtySixNSCKNRSweepCalibrationReceipt : Set₁ where
   field
     sprint65NoPromotion :
       Sprint65NS.clayNavierStokesPromoted ≡ false
+
+    classicalPDEClauses :
+      List Sprint66ClassicalPDEClause
+    classicalPDEClausesAreCanonical :
+      classicalPDEClauses ≡ canonicalSprint66ClassicalPDEClauses
 
     pressureReconstructionInherited :
       Bool
@@ -182,6 +231,8 @@ canonicalSprint66Receipt :
 canonicalSprint66Receipt =
   record
     { sprint65NoPromotion = refl
+    ; classicalPDEClauses = canonicalSprint66ClassicalPDEClauses
+    ; classicalPDEClausesAreCanonical = refl
     ; pressureReconstructionInherited = true
     ; pressureReconstructionInheritedIsTrue = refl
     ; fullCKNQuantityInherited = true

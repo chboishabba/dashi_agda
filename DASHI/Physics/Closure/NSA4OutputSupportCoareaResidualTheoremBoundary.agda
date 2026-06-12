@@ -5,21 +5,31 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Physics.Closure.NSLeiRenTianOutputSupportTransferBoundary
+  as OutputSupport
+import DASHI.Physics.Closure.NSPhiJacobianLowerBoundBoundary
+  as PhiJacobian
+import DASHI.Physics.Closure.NSOutputGreatCircleStripSlicingBoundary
+  as StripSlicing
+import DASHI.Physics.Closure.NSA4UniformInNormalConstantsBoundary
+  as UniformNormal
+
 ------------------------------------------------------------------------
 -- NS A4 output-support coarea/residual theorem boundary.
 --
 -- This is a lightweight, fail-closed receipt for the four-part A4 proof
 -- content:
 --
---   I.   local derivative formula,
---   II.  Sard/coarea density and uniform Jacobian control,
---   III. Lei-Ren-Tian transfer to every output great-circle strip,
---   IV. error subtraction and residual positivity.
+--   A4.1 direction-map regularity,
+--   A4.2 Jacobian lower-bound / nondegeneracy route,
+--   A4.3 coarea propagation,
+--   A4.4 strip-hitting / pushforward richness for every output normal,
+--   A4.5 uniformity across the Type-I rescaling family.
 --
 -- It is intentionally standalone so the direct validation target can run
--- under the 10s sprint cap.  It records A4 proof content as complete at the
--- receipt level only.  It does not promote A5, A6, A7, CKN/BKM, Navier-
--- Stokes Clay, or terminal authority.
+-- under the 10s sprint cap.  It now records only the candidate proof chain
+-- and the exact open lower-bound/uniformity gaps.  It does not promote A5,
+-- A6, A7, CKN/BKM, Navier-Stokes Clay, or terminal authority.
 
 data List (A : Set) : Set where
   [] :
@@ -40,95 +50,240 @@ listLength (_ ∷ xs) =
 data ⊥ : Set where
 
 ------------------------------------------------------------------------
+-- Imported fail-closed chain support.
+
+record ImportedA4CoareaCandidateChainSupport : Set where
+  field
+    outputSupportBoundary :
+      OutputSupport.NSLeiRenTianOutputSupportTransferBoundary
+    outputSupportBoundaryIsCanonical :
+      outputSupportBoundary
+        ≡ OutputSupport.canonicalNSLeiRenTianOutputSupportTransferBoundary
+    phiJacobianBoundary :
+      PhiJacobian.NSPhiJacobianLowerBoundBoundary
+    phiJacobianBoundaryIsCanonical :
+      phiJacobianBoundary
+        ≡ PhiJacobian.canonicalNSPhiJacobianLowerBoundBoundary
+    stripSlicingBoundary :
+      StripSlicing.NSOutputGreatCircleStripSlicingBoundary
+    stripSlicingBoundaryIsCanonical :
+      stripSlicingBoundary
+        ≡ StripSlicing.canonicalNSOutputGreatCircleStripSlicingBoundary
+    uniformNormalBoundary :
+      UniformNormal.NSA4UniformInNormalConstantsBoundary
+    uniformNormalBoundaryIsCanonical :
+      uniformNormalBoundary
+        ≡ UniformNormal.canonicalNSA4UniformInNormalConstantsBoundary
+    outputSupportStillFalse :
+      OutputSupport.leiRenTianOutputSupportTransferProved ≡ false
+    phiJacobianStillFalse :
+      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ false
+    stripSlicingStillFalse :
+      StripSlicing.OutputGreatCircleStripSlicingProved ≡ false
+    uniformNormalStillFalse :
+      UniformNormal.uniformInNormalConstantsTheoremProved ≡ false
+
+canonicalImportedA4CoareaCandidateChainSupport :
+  ImportedA4CoareaCandidateChainSupport
+canonicalImportedA4CoareaCandidateChainSupport =
+  record
+    { outputSupportBoundary =
+        OutputSupport.canonicalNSLeiRenTianOutputSupportTransferBoundary
+    ; outputSupportBoundaryIsCanonical =
+        refl
+    ; phiJacobianBoundary =
+        PhiJacobian.canonicalNSPhiJacobianLowerBoundBoundary
+    ; phiJacobianBoundaryIsCanonical =
+        refl
+    ; stripSlicingBoundary =
+        StripSlicing.canonicalNSOutputGreatCircleStripSlicingBoundary
+    ; stripSlicingBoundaryIsCanonical =
+        refl
+    ; uniformNormalBoundary =
+        UniformNormal.canonicalNSA4UniformInNormalConstantsBoundary
+    ; uniformNormalBoundaryIsCanonical =
+        refl
+    ; outputSupportStillFalse =
+        refl
+    ; phiJacobianStillFalse =
+        refl
+    ; stripSlicingStillFalse =
+        refl
+    ; uniformNormalStillFalse =
+        refl
+    }
+
+------------------------------------------------------------------------
 -- A4 proof content.
 
 data A4ProofPart : Set where
-  partI-localDerivativeFormula :
+  partA4-1-directionMapRegularity :
     A4ProofPart
-  partII-sardCoareaDensityUniformJacobian :
+  partA4-2-jacobianLowerBoundNondegeneracyRoute :
     A4ProofPart
-  partIII-leiRenTianTransfer :
+  partA4-3-coareaPropagation :
     A4ProofPart
-  partIV-errorSubtractionResidualPositivity :
+  partA4-4-stripHittingPushforwardRichness :
+    A4ProofPart
+  partA4-5-uniformityAcrossTypeIRescalingFamily :
     A4ProofPart
 
 canonicalA4ProofParts :
   List A4ProofPart
 canonicalA4ProofParts =
-  partI-localDerivativeFormula
-  ∷ partII-sardCoareaDensityUniformJacobian
-  ∷ partIII-leiRenTianTransfer
-  ∷ partIV-errorSubtractionResidualPositivity
+  partA4-1-directionMapRegularity
+  ∷ partA4-2-jacobianLowerBoundNondegeneracyRoute
+  ∷ partA4-3-coareaPropagation
+  ∷ partA4-4-stripHittingPushforwardRichness
+  ∷ partA4-5-uniformityAcrossTypeIRescalingFamily
   ∷ []
 
 A4ProofPartCount : Nat
 A4ProofPartCount =
   listLength canonicalA4ProofParts
 
-A4ProofPartCountIs4 :
-  A4ProofPartCount ≡ 4
-A4ProofPartCountIs4 =
+A4ProofPartCountIs5 :
+  A4ProofPartCount ≡ 5
+A4ProofPartCountIs5 =
+  refl
+
+data A4CandidateChainStage : Set where
+  stageA4-1-directionMapRegularity :
+    A4CandidateChainStage
+  stageA4-2-jacobianLowerBoundNondegeneracyRoute :
+    A4CandidateChainStage
+  stageA4-3-coareaPropagation :
+    A4CandidateChainStage
+  stageA4-4-stripHittingPushforwardRichness :
+    A4CandidateChainStage
+  stageA4-5-uniformityAcrossTypeIRescalingFamily :
+    A4CandidateChainStage
+
+canonicalA4CandidateChainStages :
+  List A4CandidateChainStage
+canonicalA4CandidateChainStages =
+  stageA4-1-directionMapRegularity
+  ∷ stageA4-2-jacobianLowerBoundNondegeneracyRoute
+  ∷ stageA4-3-coareaPropagation
+  ∷ stageA4-4-stripHittingPushforwardRichness
+  ∷ stageA4-5-uniformityAcrossTypeIRescalingFamily
+  ∷ []
+
+A4CandidateChainStageCount : Nat
+A4CandidateChainStageCount =
+  listLength canonicalA4CandidateChainStages
+
+A4CandidateChainStageCountIs5 :
+  A4CandidateChainStageCount ≡ 5
+A4CandidateChainStageCountIs5 =
+  refl
+
+data A4UnresolvedRouteStep : Set where
+  unresolvedA4-1DirectionMapRegularityUpgrade :
+    A4UnresolvedRouteStep
+  unresolvedA4-2JacobianLowerBoundNondegeneracyBridge :
+    A4UnresolvedRouteStep
+  unresolvedA4-3CoareaPropagationBridge :
+    A4UnresolvedRouteStep
+  unresolvedA4-4StripHittingPushforwardRichnessForEveryNormal :
+    A4UnresolvedRouteStep
+  unresolvedA4-5UniformityAcrossTypeIRescalingFamily :
+    A4UnresolvedRouteStep
+
+canonicalA4UnresolvedRouteSteps :
+  List A4UnresolvedRouteStep
+canonicalA4UnresolvedRouteSteps =
+  unresolvedA4-1DirectionMapRegularityUpgrade
+  ∷ unresolvedA4-2JacobianLowerBoundNondegeneracyBridge
+  ∷ unresolvedA4-3CoareaPropagationBridge
+  ∷ unresolvedA4-4StripHittingPushforwardRichnessForEveryNormal
+  ∷ unresolvedA4-5UniformityAcrossTypeIRescalingFamily
+  ∷ []
+
+A4UnresolvedRouteStepCount : Nat
+A4UnresolvedRouteStepCount =
+  listLength canonicalA4UnresolvedRouteSteps
+
+A4UnresolvedRouteStepCountIs5 :
+  A4UnresolvedRouteStepCount ≡ 5
+A4UnresolvedRouteStepCountIs5 =
   refl
 
 data A4LocalDerivativeClause : Set where
+  directionMapDifferentiableAwayFromAntipodalDegeneracy :
+    A4LocalDerivativeClause
   normalizeSumEquatorDerivativeFormula :
     A4LocalDerivativeClause
   equatorSecondFactorVanishes :
     A4LocalDerivativeClause
   derivativeScaleIsOneOverSqrtTwoCosHalfGamma :
     A4LocalDerivativeClause
+  tangentDirectionFieldVariesContinuouslyAlongRouteA4-1 :
+    A4LocalDerivativeClause
 
 canonicalA4LocalDerivativeClauses :
   List A4LocalDerivativeClause
 canonicalA4LocalDerivativeClauses =
-  normalizeSumEquatorDerivativeFormula
+  directionMapDifferentiableAwayFromAntipodalDegeneracy
+  ∷ normalizeSumEquatorDerivativeFormula
   ∷ equatorSecondFactorVanishes
   ∷ derivativeScaleIsOneOverSqrtTwoCosHalfGamma
+  ∷ tangentDirectionFieldVariesContinuouslyAlongRouteA4-1
   ∷ []
 
 A4LocalDerivativeClauseCount : Nat
 A4LocalDerivativeClauseCount =
   listLength canonicalA4LocalDerivativeClauses
 
-A4LocalDerivativeClauseCountIs3 :
-  A4LocalDerivativeClauseCount ≡ 3
-A4LocalDerivativeClauseCountIs3 =
+A4LocalDerivativeClauseCountIs5 :
+  A4LocalDerivativeClauseCount ≡ 5
+A4LocalDerivativeClauseCountIs5 =
   refl
 
 data A4CoareaDensityClause : Set where
   sardCriticalValuesNull :
     A4CoareaDensityClause
+  jacobianLowerBoundAttemptAwayFromRankDropSet :
+    A4CoareaDensityClause
   offAntipodalGradientInverseUniformlyBounded :
+    A4CoareaDensityClause
+  coareaPropagationFeedsRescaledStripBudget :
     A4CoareaDensityClause
   stripDensityPositiveForRegularValues :
     A4CoareaDensityClause
-  normalDirectionConstantsUniform :
+  jacobianAttemptStillNeedsQuantitativeClosure :
     A4CoareaDensityClause
 
 canonicalA4CoareaDensityClauses :
   List A4CoareaDensityClause
 canonicalA4CoareaDensityClauses =
   sardCriticalValuesNull
+  ∷ jacobianLowerBoundAttemptAwayFromRankDropSet
   ∷ offAntipodalGradientInverseUniformlyBounded
+  ∷ coareaPropagationFeedsRescaledStripBudget
   ∷ stripDensityPositiveForRegularValues
-  ∷ normalDirectionConstantsUniform
+  ∷ jacobianAttemptStillNeedsQuantitativeClosure
   ∷ []
 
 A4CoareaDensityClauseCount : Nat
 A4CoareaDensityClauseCount =
   listLength canonicalA4CoareaDensityClauses
 
-A4CoareaDensityClauseCountIs4 :
-  A4CoareaDensityClauseCount ≡ 4
-A4CoareaDensityClauseCountIs4 =
+A4CoareaDensityClauseCountIs6 :
+  A4CoareaDensityClauseCount ≡ 6
+A4CoareaDensityClauseCountIs6 =
   refl
 
 data A4LRTTransferClause : Set where
-  lrtGreatCircleConditionForEveryNormal :
+  outputGreatCircleStripPulledBackForEveryNormal :
+    A4LRTTransferClause
+  stripHittingAlternativeRecordedAsRichnessDemand :
     A4LRTTransferClause
   bothOpenHemispheresCarryPositiveMass :
     A4LRTTransferClause
   weightedCoareaDensityAtZeroIsPositive :
+    A4LRTTransferClause
+  pushforwardRichnessStillDependsOnUnprovedTransferWall :
     A4LRTTransferClause
   cA4DefinedAsPositiveLRTSquaredConstant :
     A4LRTTransferClause
@@ -136,9 +291,11 @@ data A4LRTTransferClause : Set where
 canonicalA4LRTTransferClauses :
   List A4LRTTransferClause
 canonicalA4LRTTransferClauses =
-  lrtGreatCircleConditionForEveryNormal
+  outputGreatCircleStripPulledBackForEveryNormal
+  ∷ stripHittingAlternativeRecordedAsRichnessDemand
   ∷ bothOpenHemispheresCarryPositiveMass
   ∷ weightedCoareaDensityAtZeroIsPositive
+  ∷ pushforwardRichnessStillDependsOnUnprovedTransferWall
   ∷ cA4DefinedAsPositiveLRTSquaredConstant
   ∷ []
 
@@ -146,9 +303,9 @@ A4LRTTransferClauseCount : Nat
 A4LRTTransferClauseCount =
   listLength canonicalA4LRTTransferClauses
 
-A4LRTTransferClauseCountIs4 :
-  A4LRTTransferClauseCount ≡ 4
-A4LRTTransferClauseCountIs4 =
+A4LRTTransferClauseCountIs6 :
+  A4LRTTransferClauseCount ≡ 6
+A4LRTTransferClauseCountIs6 =
   refl
 
 data A4ErrorSubtractionClause : Set where
@@ -235,7 +392,7 @@ NSA4OutputSupportCoareaResidualTheoremBoundaryRecorded =
 
 A4ProofContentCompleteReceipt : Bool
 A4ProofContentCompleteReceipt =
-  true
+  false
 
 A4PromotesA5KappaBiasVanishing : Bool
 A4PromotesA5KappaBiasVanishing =
@@ -266,9 +423,9 @@ recordsNSA4OutputSupportCoareaResidualTheoremBoundary :
 recordsNSA4OutputSupportCoareaResidualTheoremBoundary =
   refl
 
-recordsA4ProofContentComplete :
-  A4ProofContentCompleteReceipt ≡ true
-recordsA4ProofContentComplete =
+keepsA4ProofContentIncomplete :
+  A4ProofContentCompleteReceipt ≡ false
+keepsA4ProofContentIncomplete =
   refl
 
 keepsA5False :
@@ -306,35 +463,35 @@ keepsTerminalFalse =
 
 organizationString : String
 organizationString =
-  "O: Worker-D A4 output-support coarea/residual receipt owned by Closure; direct validation is standalone and 10s-safe."
+  "O: Worker-3 A4 theorem-ladder receipt owns the output-support coarea/Jacobian surfaces while keeping direct validation standalone and 10s-safe."
 
 requirementString : String
 requirementString =
-  "R: Record A4 four-part proof content: local derivative, Sard/coarea density, LRT transfer, and error subtraction/residual positivity."
+  "R: Record the exact theorem-facing ladder A4.1 direction-map regularity -> A4.2 Jacobian lower-bound / nondegeneracy -> A4.3 coarea propagation -> A4.4 strip-hitting/pushforward richness -> A4.5 uniformity across the Type-I rescaling family, while keeping every unresolved transfer wall explicit."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: NSA4OutputSupportCoareaResidualTheoremBoundary.agda records A4 proof parts, subclauses, downstream blockers, and fail-closed promotion flags."
+  "C: NSA4OutputSupportCoareaResidualTheoremBoundary.agda imports the child A4 surfaces, exports an explicit A4.1-A4.5 candidate ladder with sharper clause names, and keeps all theorem/promotion flags fail-closed."
 
 stateString : String
 stateString =
-  "S: A4_proof_content_complete is true as a receipt status; A5, A6, A7, CKN/BKM, NS Clay, and terminal promotion remain false."
+  "S: The receipt is recorded but not complete: the A4.2 Jacobian/nondegeneracy bridge, A4.3 coarea propagation wall, A4.4 strip-hitting/pushforward richness wall, and A4.5 Type-I-rescaling-family uniformity wall remain unresolved, so A4 proof completeness and every downstream promotion stay false."
 
 latticeString : String
 latticeString =
-  "L: derivative formula -> Sard/coarea density -> LRT transfer -> error subtraction/residual positivity -> A5/A6/A7 blockers."
+  "L: A4.1 direction-map regularity -> A4.2 Jacobian lower-bound / nondegeneracy -> A4.3 coarea propagation -> A4.4 strip-hitting/pushforward richness -> A4.5 uniformity across the Type-I rescaling family -> downstream A5/A6/A7 blockers."
 
 proposalString : String
 proposalString =
-  "P: Use this as the canonical lightweight A4 receipt; next proof rungs are A5 kappa-bias vanishing, A6 leakage, and A7 depletion."
+  "P: Use this as the honest lightweight A4 receipt until the A4.1-A4.5 ladder is discharged quantitatively, especially the A4.2 Jacobian/nondegeneracy route, A4.3 coarea propagation, A4.4 strip-hitting pushforward richness, and A4.5 Type-I-rescaling-family uniformity walls."
 
 governanceString : String
 governanceString =
-  "G: Fail closed: A4 receipt completeness is not a Clay promotion and does not discharge A5/A6/A7 or external authority."
+  "G: Fail closed: the receipt may expose the theorem checklist and candidate route, but it cannot hide the exact open A4.1-A4.5 gaps and it does not discharge A5/A6/A7 or external authority."
 
 gapString : String
 gapString =
-  "F: Remaining gaps are A5, A6, A7, A8 local monotonicity, A9 CKN/BKM closure, and Clay authority."
+  "F: Exact route gaps are the A4.1 regularity upgrade, the A4.2 Jacobian lower-bound / nondegeneracy route, A4.3 coarea propagation, A4.4 strip-hitting/pushforward richness for every normal, A4.5 uniformity across the Type-I rescaling family, and then the downstream A5/A6/A7/A8/A9/Clay blockers."
 
 record NSA4OutputSupportCoareaResidualTheoremBoundary : Set where
   field
@@ -370,30 +527,46 @@ record NSA4OutputSupportCoareaResidualTheoremBoundary : Set where
       String
     FIsCanonical :
       F ≡ gapString
+    importedSupport :
+      ImportedA4CoareaCandidateChainSupport
+    importedSupportIsCanonical :
+      importedSupport ≡ canonicalImportedA4CoareaCandidateChainSupport
     proofParts :
       List A4ProofPart
     proofPartsAreCanonical :
       proofParts ≡ canonicalA4ProofParts
-    proofPartCountIsFour :
-      A4ProofPartCount ≡ 4
+    proofPartCountIsFive :
+      A4ProofPartCount ≡ 5
+    candidateChainStages :
+      List A4CandidateChainStage
+    candidateChainStagesAreCanonical :
+      candidateChainStages ≡ canonicalA4CandidateChainStages
+    candidateChainStageCountIsFive :
+      A4CandidateChainStageCount ≡ 5
+    unresolvedRouteSteps :
+      List A4UnresolvedRouteStep
+    unresolvedRouteStepsAreCanonical :
+      unresolvedRouteSteps ≡ canonicalA4UnresolvedRouteSteps
+    unresolvedRouteStepCountIsFive :
+      A4UnresolvedRouteStepCount ≡ 5
     localDerivativeClauses :
       List A4LocalDerivativeClause
     localDerivativeClausesAreCanonical :
       localDerivativeClauses ≡ canonicalA4LocalDerivativeClauses
-    localDerivativeClauseCountIsThree :
-      A4LocalDerivativeClauseCount ≡ 3
+    localDerivativeClauseCountIsFive :
+      A4LocalDerivativeClauseCount ≡ 5
     coareaDensityClauses :
       List A4CoareaDensityClause
     coareaDensityClausesAreCanonical :
       coareaDensityClauses ≡ canonicalA4CoareaDensityClauses
-    coareaDensityClauseCountIsFour :
-      A4CoareaDensityClauseCount ≡ 4
+    coareaDensityClauseCountIsSix :
+      A4CoareaDensityClauseCount ≡ 6
     lrtTransferClauses :
       List A4LRTTransferClause
     lrtTransferClausesAreCanonical :
       lrtTransferClauses ≡ canonicalA4LRTTransferClauses
-    lrtTransferClauseCountIsFour :
-      A4LRTTransferClauseCount ≡ 4
+    lrtTransferClauseCountIsSix :
+      A4LRTTransferClauseCount ≡ 6
     errorSubtractionClauses :
       List A4ErrorSubtractionClause
     errorSubtractionClausesAreCanonical :
@@ -408,8 +581,8 @@ record NSA4OutputSupportCoareaResidualTheoremBoundary : Set where
       DownstreamA4BlockerCount ≡ 6
     boundaryRecordedTrue :
       NSA4OutputSupportCoareaResidualTheoremBoundaryRecorded ≡ true
-    A4ProofContentCompleteReceiptTrue :
-      A4ProofContentCompleteReceipt ≡ true
+    A4ProofContentCompleteReceiptFalse :
+      A4ProofContentCompleteReceipt ≡ false
     A5StillFalse :
       A4PromotesA5KappaBiasVanishing ≡ false
     A6StillFalse :
@@ -459,29 +632,45 @@ canonicalNSA4OutputSupportCoareaResidualTheoremBoundary =
         gapString
     ; FIsCanonical =
         refl
+    ; importedSupport =
+        canonicalImportedA4CoareaCandidateChainSupport
+    ; importedSupportIsCanonical =
+        refl
     ; proofParts =
         canonicalA4ProofParts
     ; proofPartsAreCanonical =
         refl
-    ; proofPartCountIsFour =
+    ; proofPartCountIsFive =
+        refl
+    ; candidateChainStages =
+        canonicalA4CandidateChainStages
+    ; candidateChainStagesAreCanonical =
+        refl
+    ; candidateChainStageCountIsFive =
+        refl
+    ; unresolvedRouteSteps =
+        canonicalA4UnresolvedRouteSteps
+    ; unresolvedRouteStepsAreCanonical =
+        refl
+    ; unresolvedRouteStepCountIsFive =
         refl
     ; localDerivativeClauses =
         canonicalA4LocalDerivativeClauses
     ; localDerivativeClausesAreCanonical =
         refl
-    ; localDerivativeClauseCountIsThree =
+    ; localDerivativeClauseCountIsFive =
         refl
     ; coareaDensityClauses =
         canonicalA4CoareaDensityClauses
     ; coareaDensityClausesAreCanonical =
         refl
-    ; coareaDensityClauseCountIsFour =
+    ; coareaDensityClauseCountIsSix =
         refl
     ; lrtTransferClauses =
         canonicalA4LRTTransferClauses
     ; lrtTransferClausesAreCanonical =
         refl
-    ; lrtTransferClauseCountIsFour =
+    ; lrtTransferClauseCountIsSix =
         refl
     ; errorSubtractionClauses =
         canonicalA4ErrorSubtractionClauses
@@ -497,7 +686,7 @@ canonicalNSA4OutputSupportCoareaResidualTheoremBoundary =
         refl
     ; boundaryRecordedTrue =
         refl
-    ; A4ProofContentCompleteReceiptTrue =
+    ; A4ProofContentCompleteReceiptFalse =
         refl
     ; A5StillFalse =
         refl

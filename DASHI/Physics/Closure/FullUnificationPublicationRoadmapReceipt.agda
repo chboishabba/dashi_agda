@@ -15,6 +15,10 @@ import DASHI.Physics.Closure.StrictMarginImpliesAbsorptionReceipt as L0
 -- Manager L owns the shared L0 grammar first.  NS, YM, and Gate 3 are
 -- downstream instantiations of that grammar and cannot consume it until they
 -- discharge their lane-specific dynamics and actual-margin obligations.
+-- Cross-lane governance is now sharper: NS and the unification route carry
+-- candidate-complete theorem packets pending promotion acceptance, while the
+-- YM lane keeps an explicit theorem chain but remains Balaban-burdened.
+-- Every promotion flag stays fail-closed.
 
 data RoadmapStatus : Set where
   fullUnificationRoadmapRecordedFailClosed :
@@ -187,11 +191,11 @@ roadmapPromotionImpossibleHere ()
 
 roadmapSummary : String
 roadmapSummary =
-  "Publication order: Paper 0 proves/records the shared fail-closed margin grammar; NS theta, Gate3 cutoff-frame/density, and YM rho/KP are downstream instantiations with their own missing analytic inhabitants."
+  "Publication order: Paper 0 records the shared fail-closed margin grammar; NS now carries candidate-complete A1/A3, A4, and A5-A9 packets pending promotion acceptance; YM carries explicit H3a/H3b/no-spectral-pollution grammar but remains Balaban-burdened; unification carries a candidate-complete UCT.1-UCT.8 packet with promotion still fail-closed."
 
 gate3CorrectionSummary : String
 gate3CorrectionSummary =
-  "Gate3 uses cutoff frame bounds A_N>0 on finite H_N plus density, Mosco recovery, no-spectral-pollution, and mass-shell bridge; it does not claim a finite dictionary has uniform A>0 on an infinite continuum Hilbert space."
+  "Gate3 uses cutoff frame bounds A_N>0 on finite H_N plus density, Mosco recovery, no-spectral-pollution, and mass-shell bridge; it does not claim a finite dictionary has uniform A>0 on an infinite continuum Hilbert space, and it does not alter the fail-closed NS/YM/unification promotion posture."
 
 record FullUnificationPublicationRoadmapReceipt : Setω where
   field
@@ -378,4 +382,3 @@ fullUnificationRoadmapNoYMClayPromotion :
   false
 fullUnificationRoadmapNoYMClayPromotion =
   refl
-

@@ -33,13 +33,40 @@ import DASHI.Physics.Closure.NSNonCircularKStarDriftBoundTargetReceipt
 --   4. Non-circular K*(t) drift bound.
 --
 -- This receipt deliberately does not discharge any of those walls.  It is a
--- fail-closed index: every proof flag remains false, and every promotion flag
--- remains blocked until the corresponding target receipt is inhabited by a
--- real proof.
+-- fail-closed index: YM remains the only live Thing 1 missing-content front
+-- via the external Balaban bridge, NS is retained only as a Thing 2 style
+-- self-contained candidate-theorem/promotion-evidence row, and every proof or
+-- promotion flag stays blocked until the corresponding target receipt is
+-- inhabited by a real proof.
 
 data FinalAnalyticWallStatus : Set where
   finalAnalyticWallsRecorded_failClosed_noPromotion :
     FinalAnalyticWallStatus
+
+data FinalAnalyticPosture : Set where
+  packageLevelCandidateComplete :
+    FinalAnalyticPosture
+
+  pendingPromotionEvidenceOnly :
+    FinalAnalyticPosture
+
+  genuineMissingContentFrontier :
+    FinalAnalyticPosture
+
+unificationPostureSummary :
+  String
+unificationPostureSummary =
+  "Repo-level package unification is candidate-complete in packaging only; live UCT.1-UCT.4 walls still prevent discharge"
+
+nsPostureSummary :
+  String
+nsPostureSummary =
+  "NS is retained as candidate-complete pending promotion evidence, not as a live missing-content front"
+
+ymPostureSummary :
+  String
+ymPostureSummary =
+  "YM remains the genuine missing-content frontier because the Balaban bridge and downstream internal closure content are still open"
 
 data FinalAnalyticWall : Set where
   monsterMultiplicityQuotientControl :
@@ -115,12 +142,12 @@ nonCircularKStarDriftSignature =
 finalAnalyticWallsSummary :
   String
 finalAnalyticWallsSummary =
-  "The final fail-closed analytic walls are MonsterMultiplicityQuotientControl, PAWOTGUniformSeparation, BalabanPhysicalBetaBridge, and NonCircularKStarDriftBound.  T_7 quotient evidence and Gate3 nesting/taper correction sharpen the targets, but do not discharge them."
+  "The final fail-closed analytic walls are MonsterMultiplicityQuotientControl, PAWOTGUniformSeparation, the Thing 1 style externally Balaban-centered YMBalabanPhysicalBetaBridge, and the Thing 2 style NSNegativeSobolev/NonCircularKStarDriftBound candidate package.  The receipt explicitly separates package-complete posture from genuine missing-content fronts: NS is candidate-complete pending promotion evidence, package unification stays candidate-complete with live UCT.1-UCT.4 walls, and YM remains the real missing-content frontier.  T_7 quotient evidence and Gate3 nesting/taper correction sharpen the targets, but do not discharge them or promote any theorem."
 
 finalAnalyticNonPromotionBoundary :
   String
 finalAnalyticNonPromotionBoundary =
-  "No final analytic wall is proved here.  Gate3, continuum Yang-Mills, physical mass gap, Navier-Stokes regularity, Clay promotion, and terminal promotion remain false."
+  "No final analytic wall is proved here.  YM remains the only live missing-content front through the Balaban bridge; the NS row is retained fail-closed as candidate-complete/promotion-evidence posture only; and package-level unification remains non-promoting with live UCT.1-UCT.4 walls.  Gate3, continuum Yang-Mills, Clay promotion, and terminal promotion remain false."
 
 record FinalAnalyticWallsReceipt : Setω where
   field
@@ -271,6 +298,42 @@ record FinalAnalyticWallsReceipt : Setω where
 
     nonPromotionBoundaryIsCanonical :
       nonPromotionBoundary ≡ finalAnalyticNonPromotionBoundary
+
+    unificationPosture :
+      FinalAnalyticPosture
+
+    unificationPostureIsPackageLevelCandidateComplete :
+      unificationPosture ≡ packageLevelCandidateComplete
+
+    unificationPostureSummaryText :
+      String
+
+    unificationPostureSummaryTextIsCanonical :
+      unificationPostureSummaryText ≡ unificationPostureSummary
+
+    nsPosture :
+      FinalAnalyticPosture
+
+    nsPostureIsPendingPromotionEvidenceOnly :
+      nsPosture ≡ pendingPromotionEvidenceOnly
+
+    nsPostureSummaryText :
+      String
+
+    nsPostureSummaryTextIsCanonical :
+      nsPostureSummaryText ≡ nsPostureSummary
+
+    ymPosture :
+      FinalAnalyticPosture
+
+    ymPostureIsMissingContentFrontier :
+      ymPosture ≡ genuineMissingContentFrontier
+
+    ymPostureSummaryText :
+      String
+
+    ymPostureSummaryTextIsCanonical :
+      ymPostureSummaryText ≡ ymPostureSummary
 
     monsterWallDischargedHere :
       Bool
@@ -431,6 +494,30 @@ canonicalFinalAnalyticWallsReceipt =
     ; nonPromotionBoundary =
         finalAnalyticNonPromotionBoundary
     ; nonPromotionBoundaryIsCanonical =
+        refl
+    ; unificationPosture =
+        packageLevelCandidateComplete
+    ; unificationPostureIsPackageLevelCandidateComplete =
+        refl
+    ; unificationPostureSummaryText =
+        unificationPostureSummary
+    ; unificationPostureSummaryTextIsCanonical =
+        refl
+    ; nsPosture =
+        pendingPromotionEvidenceOnly
+    ; nsPostureIsPendingPromotionEvidenceOnly =
+        refl
+    ; nsPostureSummaryText =
+        nsPostureSummary
+    ; nsPostureSummaryTextIsCanonical =
+        refl
+    ; ymPosture =
+        genuineMissingContentFrontier
+    ; ymPostureIsMissingContentFrontier =
+        refl
+    ; ymPostureSummaryText =
+        ymPostureSummary
+    ; ymPostureSummaryTextIsCanonical =
         refl
     ; monsterWallDischargedHere =
         false

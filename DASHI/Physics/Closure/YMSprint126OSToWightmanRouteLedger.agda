@@ -105,9 +105,9 @@ osAxiomsProviderDerivedInRepoInput : Bool
 osAxiomsProviderDerivedInRepoInput =
   OS.osAxiomsProviderDerivedInRepo
 
-osAxiomsProviderDerivedInRepoInputIsTrue :
-  osAxiomsProviderDerivedInRepoInput ≡ true
-osAxiomsProviderDerivedInRepoInputIsTrue = refl
+osAxiomsProviderDerivedInRepoInputIsFalse :
+  osAxiomsProviderDerivedInRepoInput ≡ false
+osAxiomsProviderDerivedInRepoInputIsFalse = refl
 
 osWightmanAuthorityConditionalInput : Bool
 osWightmanAuthorityConditionalInput =
@@ -307,8 +307,8 @@ record ScopedAuthorityRow : Set where
       importedAsScopedExternal ≡ true
     derivedDASHINatively :
       Bool
-    derivedDASHINativelyIsTrue :
-      derivedDASHINatively ≡ true
+    derivedDASHINativelyIsFalse :
+      derivedDASHINatively ≡ false
     closesMassGap :
       Bool
     closesMassGapIsFalse :
@@ -495,7 +495,7 @@ canonicalWightmanRouteRows =
       os1975AuthorityScopedExternalSourceRecorded
       refl
       osAxiomsProviderDerivedInRepoInput
-      refl
+      osAxiomsProviderDerivedInRepoInputIsFalse
       continuumMassGapProvedHere
       refl
       authority-scoped-external

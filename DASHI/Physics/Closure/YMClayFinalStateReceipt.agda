@@ -11,51 +11,66 @@ import DASHI.Physics.Closure.YMFinalStateReceipt as YMFinal
 
 ------------------------------------------------------------------------
 -- C5 Yang-Mills Clay final-state receipt.
+--
+-- This second-ring consumer inherits the sharpened posture from
+-- YMFinalStateReceipt: NS and unification are handled elsewhere as
+-- candidate-complete packages pending promotion evidence, while YM remains
+-- the live external-content frontier centered on the Balaban-side H3a intake
+-- cluster.  This consumer stays fail-closed and does not promote Clay YM.
 
 data YMClayFinalStateStatus : Set where
   l1L8ConditionalDefectBlockedNoClayPromotion :
     YMClayFinalStateStatus
 
 data YMClayConditionalLayer : Set where
-  l1FiniteCarrierMeasureScaffolded :
+  l1FiniteCarrierMeasureConditional :
     YMClayConditionalLayer
 
-  l2StrongCouplingScaffolded :
+  l2StrongCouplingConditional :
     YMClayConditionalLayer
 
-  l3TightnessScaffolded :
+  l3TightnessConditional :
     YMClayConditionalLayer
 
-  l4ContinuumLimitScaffolded :
+  l4ContinuumLimitConditional :
     YMClayConditionalLayer
 
-  l5OSAxiomsScaffolded :
+  l5OSAxiomsConditional :
     YMClayConditionalLayer
 
-  l6WightmanReconstructionScaffolded :
+  l6WightmanReconstructionConditional :
     YMClayConditionalLayer
 
-  l7UniformMassGapScaffolded :
+  l7UniformMassGapConditional :
     YMClayConditionalLayer
 
-  l8ClayIdentificationScaffolded :
+  l8ClayIdentificationConditional :
     YMClayConditionalLayer
 
 canonicalYMClayConditionalLayers :
   List YMClayConditionalLayer
 canonicalYMClayConditionalLayers =
-  l1FiniteCarrierMeasureScaffolded
-  ∷ l2StrongCouplingScaffolded
-  ∷ l3TightnessScaffolded
-  ∷ l4ContinuumLimitScaffolded
-  ∷ l5OSAxiomsScaffolded
-  ∷ l6WightmanReconstructionScaffolded
-  ∷ l7UniformMassGapScaffolded
-  ∷ l8ClayIdentificationScaffolded
+  l1FiniteCarrierMeasureConditional
+  ∷ l2StrongCouplingConditional
+  ∷ l3TightnessConditional
+  ∷ l4ContinuumLimitConditional
+  ∷ l5OSAxiomsConditional
+  ∷ l6WightmanReconstructionConditional
+  ∷ l7UniformMassGapConditional
+  ∷ l8ClayIdentificationConditional
   ∷ []
 
 data YMClayRemainingGap : Set where
-  continuumConstructionGap :
+  balabanH3aContinuumIntakeGap :
+    YMClayRemainingGap
+
+  balabanH3bVacuumProjectionContinuityGap :
+    YMClayRemainingGap
+
+  noSpectralPollutionFromH3aH3bGap :
+    YMClayRemainingGap
+
+  thermodynamicLimitFromBalabanClusterGap :
     YMClayRemainingGap
 
   osReflectionPositivityGap :
@@ -88,7 +103,10 @@ data YMClayRemainingGap : Set where
 canonicalYMClayRemainingGaps :
   List YMClayRemainingGap
 canonicalYMClayRemainingGaps =
-  continuumConstructionGap
+  balabanH3aContinuumIntakeGap
+  ∷ balabanH3bVacuumProjectionContinuityGap
+  ∷ noSpectralPollutionFromH3aH3bGap
+  ∷ thermodynamicLimitFromBalabanClusterGap
   ∷ osReflectionPositivityGap
   ∷ brstGaugeFixedOS3Gap
   ∷ ghostTimeReflectionSignGap
@@ -123,7 +141,7 @@ ymClayPromotionImpossibleHere ()
 
 ymClayFinalStateStatement : String
 ymClayFinalStateStatement =
-  "C5 final Clay YM state: finite carrier spectral gaps are evidence only. L1-L8 are scaffolded as a conditional chain; continuum construction, OS/reflection positivity, BRST gauge-fixed OS3, ghost time-reflection signs, continuum Gribov-copy resolution, infinite-volume limit, operator convergence, vacuum uniqueness/clustering, and the product-lattice Heegner defect issue remain open; full Clay promotion is blocked and ymClayPromotion=false."
+  "C5 final Clay YM state: this second-ring receipt consumes a conditional L1-L8 chain while NS and unification are tracked elsewhere as candidate-complete packages pending promotion evidence. YM remains the live external-content frontier centered on the Balaban-side H3a continuum intake, with downstream H3b/no-spectral-pollution, thermodynamic-limit, OS/reflection positivity, BRST gauge-fixed OS3, ghost time-reflection signs, continuum Gribov-copy resolution, operator convergence, vacuum uniqueness/clustering, and the recorded product-lattice defect issue still open; full Clay promotion stays blocked and ymClayPromotion=false."
 
 record YMClayFinalStateReceipt : Setω where
   field
@@ -362,14 +380,16 @@ canonicalYMClayFinalStateReceipt =
     ; statementIsCanonical =
         refl
     ; receiptBoundary =
-        "L1-L8 are recorded only as a scaffolded conditional chain consumed from YMFinalStateReceipt"
-        ∷ "Finite carrier spectral gaps are evidence only, not a Clay Yang-Mills proof"
-        ∷ "Continuum construction, OS axioms/reflection positivity, infinite-volume limit, and operator convergence remain unproved"
+        "L1-L8 are consumed only as a conditional chain imported from YMFinalStateReceipt"
+        ∷ "NS and unification are candidate-complete elsewhere pending promotion evidence; this receipt keeps YM as the live frontier"
+        ∷ "Finite carrier spectral gaps remain finite-lattice evidence only, not a Clay Yang-Mills proof"
+        ∷ "The live external intake is centered on the Balaban-side H3a continuum cluster with downstream H3b and no-spectral-pollution gates"
+        ∷ "Thermodynamic-limit, OS axioms/reflection positivity, infinite-volume limit, and operator convergence remain unproved"
         ∷ "Finite ungauge-fixed Wilson positivity is separated from BRST gauge-fixed obstruction, ghost time-reflection sign, and continuum Gribov-copy gaps"
         ∷ "Vacuum uniqueness and clustering remain open gaps"
         ∷ "Centre symmetry unbroken is recorded as a lattice-simulation-supported candidate, not as Clay proof"
-        ∷ "Heegner sites as defects and the product-lattice defect compatibility issue remain unresolved"
-        ∷ "The unresolved defect issue blocks full Clay promotion; ymClayPromotion and terminal Clay promotion are false"
+        ∷ "Heegner sites as defects and the product-lattice defect compatibility issue remain recorded unresolved, but they do not replace the H3a-centered frontier summary"
+        ∷ "ymClayPromotion and terminal Clay promotion remain false; every promotion flag stays fail-closed"
         ∷ []
     }
 

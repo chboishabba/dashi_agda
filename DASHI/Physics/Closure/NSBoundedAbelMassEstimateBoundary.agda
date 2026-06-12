@@ -12,18 +12,22 @@ import DASHI.Physics.Closure.NSAbelTriadicDefectMeasureConstructionBoundary
 ------------------------------------------------------------------------
 -- NS A1 bounded Abel mass estimate boundary.
 --
--- This fail-closed receipt records the first analytic mass-control rung
--- needed by the Abel triadic stationarity route:
+-- This fail-closed boundary records the theorem-facing A1 mass/compactness
+-- contract needed by the Abel triadic stationarity route:
 --
 --   Type-I / L^{3,infty} control
 --     -> Littlewood-Paley shell mass control
 --     -> Abel window averaging over reciprocal CKN scale shells
---     -> uniform finite-variation bound for the triadic measure.
+--     -> bounded total variation for the Abel-weighted triadic defect
+--        measures mu_r
+--     -> weak-* compactness of {mu_r}_r along r -> 0
+--     -> quantitative bounds strong enough to feed the A1/A3 bootstrap.
 --
 -- It is a boundary receipt only.  It does not prove the Lorentz-to-shell
--- estimate, does not prove Abel tightness, does not track the constants,
--- does not construct the PDE defect measure, and does not promote Clay
--- Navier-Stokes or terminal unification.
+-- estimate, does not prove bounded mass or weak-* compactness, does not
+-- establish the quantitative modulus needed by A3 stationarity, does not
+-- track the constants, does not construct the PDE defect measure, and does
+-- not promote Clay Navier-Stokes or terminal unification.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -212,10 +216,25 @@ data BoundedAbelMassEstimateTarget : Set where
     Abel.AbelTriadicDefectMeasureCarrier →
     TypeILorentzInput →
     BoundedAbelMassEstimateTarget
+  weakStarPrecompactnessOfAbelDefectMeasures :
+    Abel.AbelTriadicDefectMeasureCarrier →
+    BoundedAbelMassEstimateTarget
   abelMassControlledByTypeIConstant :
     String →
     BoundedAbelMassEstimateTarget
   constantsIndependentOfShrinkingScaleR :
+    String →
+    BoundedAbelMassEstimateTarget
+  quantitativeMassControlFeedsA3Bootstrap :
+    String →
+    BoundedAbelMassEstimateTarget
+  candidateChainRecordsSereginEpsilonRateIntake :
+    String →
+    BoundedAbelMassEstimateTarget
+  candidateChainRecordsStationarityRateMap :
+    String →
+    BoundedAbelMassEstimateTarget
+  candidateChainEndsAtMultiscaleAbelSummationIssue :
     String →
     BoundedAbelMassEstimateTarget
 
@@ -223,9 +242,29 @@ uniformAbelMassEstimateText : String
 uniformAbelMassEstimateText =
   "sup_r ||mu_r||_TV <= C_A1(R,M)"
 
+weakStarCompactnessText : String
+weakStarCompactnessText =
+  "{mu_r}_r is weak-* precompact in the finite Radon measure topology once the A1 mass bound is uniform"
+
 constantIndependenceText : String
 constantIndependenceText =
   "C_A1 may depend on local radius, cutoff, and Type-I bound M, but not on r"
+
+a1a3BootstrapText : String
+a1a3BootstrapText =
+  "A1 must supply explicit shell-tail and averaging control strong enough to pass to the A3 approximate T_NS stationarity bootstrap"
+
+sereginIntakeText : String
+sereginIntakeText =
+  "Weak-* compact Abel defect measures must be strong enough to receive a Seregin epsilon-rate intake on the same shrinking-scale branch"
+
+stationarityRateMapText : String
+stationarityRateMapText =
+  "That Seregin intake must convert into an Abel-window stationarity-rate map delta_r with constants uniform in r"
+
+multiscaleAbelIssueText : String
+multiscaleAbelIssueText =
+  "Open wall: the bootstrap still lacks the exact exponent/closure gain needed to sum the stationarity-rate output across multiscale Abel windows"
 
 canonicalBoundedAbelMassEstimateTargets :
   List BoundedAbelMassEstimateTarget
@@ -233,18 +272,213 @@ canonicalBoundedAbelMassEstimateTargets =
   uniformFiniteVariationBound
     Abel.canonicalAbelTriadicDefectMeasure
     uniformL3InfinityBound-M
+  ∷ weakStarPrecompactnessOfAbelDefectMeasures
+      Abel.canonicalAbelTriadicDefectMeasure
   ∷ abelMassControlledByTypeIConstant uniformAbelMassEstimateText
   ∷ constantsIndependentOfShrinkingScaleR constantIndependenceText
+  ∷ quantitativeMassControlFeedsA3Bootstrap a1a3BootstrapText
+  ∷ candidateChainRecordsSereginEpsilonRateIntake sereginIntakeText
+  ∷ candidateChainRecordsStationarityRateMap stationarityRateMapText
+  ∷ candidateChainEndsAtMultiscaleAbelSummationIssue multiscaleAbelIssueText
   ∷ []
 
 boundedAbelMassEstimateTargetCount : Nat
 boundedAbelMassEstimateTargetCount =
   listLength canonicalBoundedAbelMassEstimateTargets
 
-boundedAbelMassEstimateTargetCountIs3 :
-  boundedAbelMassEstimateTargetCount ≡ 3
-boundedAbelMassEstimateTargetCountIs3 =
+boundedAbelMassEstimateTargetCountIs8 :
+  boundedAbelMassEstimateTargetCount ≡ 8
+boundedAbelMassEstimateTargetCountIs8 =
   refl
+
+------------------------------------------------------------------------
+-- Explicit A1.1/A1.2/A1.3 theorem-facing clauses.
+
+data A11BoundedAbelWeightedDefectMassClause : Set where
+  typeIToLPShellMassInputClause :
+    A11BoundedAbelWeightedDefectMassClause
+  reciprocalScaleAbelWindowClause :
+    A11BoundedAbelWeightedDefectMassClause
+  abelWeightedTriadicDefectMassCarrierClause :
+    A11BoundedAbelWeightedDefectMassClause
+  boundedAbelMassFormulaClause :
+    String →
+    A11BoundedAbelWeightedDefectMassClause
+  boundedAbelMassConstantNameClause :
+    String →
+    A11BoundedAbelWeightedDefectMassClause
+  boundedMassConstantIndependenceClause :
+    String →
+    A11BoundedAbelWeightedDefectMassClause
+  boundedMassFeedsTightnessClause :
+    A11BoundedAbelWeightedDefectMassClause
+
+a11BoundedAbelMassFormulaText : String
+a11BoundedAbelMassFormulaText =
+  "A1.1: sup_r ||mu_r||_TV <= C_A1(R,M) after Abel averaging of reciprocal-scale Littlewood-Paley shell defect mass"
+
+a11BoundedAbelMassConstantNameText : String
+a11BoundedAbelMassConstantNameText =
+  "A1.1 recorded constant: C_A1(R,M)"
+
+a11ConstantIndependenceText : String
+a11ConstantIndependenceText =
+  "A1.1 constants may depend on the local radius/cutoff and Type-I bound M, but must be uniform in the shrinking scale r"
+
+canonicalA11BoundedAbelWeightedDefectMassClauses :
+  List A11BoundedAbelWeightedDefectMassClause
+canonicalA11BoundedAbelWeightedDefectMassClauses =
+  typeIToLPShellMassInputClause
+  ∷ reciprocalScaleAbelWindowClause
+  ∷ abelWeightedTriadicDefectMassCarrierClause
+  ∷ boundedAbelMassFormulaClause a11BoundedAbelMassFormulaText
+  ∷ boundedAbelMassConstantNameClause a11BoundedAbelMassConstantNameText
+  ∷ boundedMassConstantIndependenceClause a11ConstantIndependenceText
+  ∷ boundedMassFeedsTightnessClause
+  ∷ []
+
+a11BoundedAbelWeightedDefectMassClauseCount : Nat
+a11BoundedAbelWeightedDefectMassClauseCount =
+  listLength canonicalA11BoundedAbelWeightedDefectMassClauses
+
+a11BoundedAbelWeightedDefectMassClauseCountIs7 :
+  a11BoundedAbelWeightedDefectMassClauseCount ≡ 7
+a11BoundedAbelWeightedDefectMassClauseCountIs7 =
+  refl
+
+data A12WeakStarPrecompactnessTightnessClause : Set where
+  boundedMassImpliesUniformTightnessClause :
+    A12WeakStarPrecompactnessTightnessClause
+  tightnessModulusNameClause :
+    String →
+    A12WeakStarPrecompactnessTightnessClause
+  shellTailTightnessModulusClause :
+    String →
+    A12WeakStarPrecompactnessTightnessClause
+  finiteRadonMeasureAmbientSpaceClause :
+    A12WeakStarPrecompactnessTightnessClause
+  weakStarPrecompactnessConclusionClause :
+    String →
+    A12WeakStarPrecompactnessTightnessClause
+  extractionAlongShrinkingScalesClause :
+    A12WeakStarPrecompactnessTightnessClause
+  compactnessFeedsSereginIntakeClause :
+    A12WeakStarPrecompactnessTightnessClause
+
+a12TightnessModulusNameText : String
+a12TightnessModulusNameText =
+  "A1.2 recorded modulus: Tight_A1(epsilon;R,M)"
+
+a12TightnessModulusText : String
+a12TightnessModulusText =
+  "A1.2: for every epsilon > 0 choose a reciprocal shell cutoff so the Abel-weighted mass outside that shell window is <= epsilon uniformly in r"
+
+a12WeakStarCompactnessText : String
+a12WeakStarCompactnessText =
+  "A1.2: {mu_r}_r is weak-* precompact in finite Radon measures once the A1.1 mass bound and tightness modulus are recorded"
+
+canonicalA12WeakStarPrecompactnessTightnessClauses :
+  List A12WeakStarPrecompactnessTightnessClause
+canonicalA12WeakStarPrecompactnessTightnessClauses =
+  boundedMassImpliesUniformTightnessClause
+  ∷ tightnessModulusNameClause a12TightnessModulusNameText
+  ∷ shellTailTightnessModulusClause a12TightnessModulusText
+  ∷ finiteRadonMeasureAmbientSpaceClause
+  ∷ weakStarPrecompactnessConclusionClause a12WeakStarCompactnessText
+  ∷ extractionAlongShrinkingScalesClause
+  ∷ compactnessFeedsSereginIntakeClause
+  ∷ []
+
+a12WeakStarPrecompactnessTightnessClauseCount : Nat
+a12WeakStarPrecompactnessTightnessClauseCount =
+  listLength canonicalA12WeakStarPrecompactnessTightnessClauses
+
+a12WeakStarPrecompactnessTightnessClauseCountIs7 :
+  a12WeakStarPrecompactnessTightnessClauseCount ≡ 7
+a12WeakStarPrecompactnessTightnessClauseCountIs7 =
+  refl
+
+data A13QuantitativeShellTailControlClause : Set where
+  centralShellMassCapturedClause :
+    A13QuantitativeShellTailControlClause
+  neighborShellMassCapturedClause :
+    A13QuantitativeShellTailControlClause
+  offDiagonalTailSeparatedClause :
+    A13QuantitativeShellTailControlClause
+  shellTailRateNameClause :
+    String →
+    A13QuantitativeShellTailControlClause
+  quantitativeShellTailFormulaClause :
+    String →
+    A13QuantitativeShellTailControlClause
+  shellTailUniformInRClause :
+    String →
+    A13QuantitativeShellTailControlClause
+  shellTailFeedsA1A3BootstrapClause :
+    A13QuantitativeShellTailControlClause
+  shellTailFeedsTightnessClause :
+    A13QuantitativeShellTailControlClause
+
+a13ShellTailRateNameText : String
+a13ShellTailRateNameText =
+  "A1.3 recorded rate: Tail_A1(K;R,M)"
+
+a13QuantitativeShellTailFormulaText : String
+a13QuantitativeShellTailFormulaText =
+  "A1.3: shell-tail mass beyond the reciprocal Abel window is quantitatively <= Tail_A1(K;R,M) with Tail_A1(K;R,M) -> 0 as K -> infinity, uniformly in r"
+
+a13UniformInRText : String
+a13UniformInRText =
+  "A1.3 tail control must be uniform in the shrinking scale r so it can serve both tightness and the A1/A3 bootstrap"
+
+canonicalA13QuantitativeShellTailControlClauses :
+  List A13QuantitativeShellTailControlClause
+canonicalA13QuantitativeShellTailControlClauses =
+  centralShellMassCapturedClause
+  ∷ neighborShellMassCapturedClause
+  ∷ offDiagonalTailSeparatedClause
+  ∷ shellTailRateNameClause a13ShellTailRateNameText
+  ∷ quantitativeShellTailFormulaClause a13QuantitativeShellTailFormulaText
+  ∷ shellTailUniformInRClause a13UniformInRText
+  ∷ shellTailFeedsA1A3BootstrapClause
+  ∷ shellTailFeedsTightnessClause
+  ∷ []
+
+a13QuantitativeShellTailControlClauseCount : Nat
+a13QuantitativeShellTailControlClauseCount =
+  listLength canonicalA13QuantitativeShellTailControlClauses
+
+a13QuantitativeShellTailControlClauseCountIs8 :
+  a13QuantitativeShellTailControlClauseCount ≡ 8
+a13QuantitativeShellTailControlClauseCountIs8 =
+  refl
+
+data CandidateA1A3BootstrapStage : Set where
+  typeIOrCKNStage : CandidateA1A3BootstrapStage
+  boundedAbelMassStage : CandidateA1A3BootstrapStage
+  weakStarCompactnessStage : CandidateA1A3BootstrapStage
+  sereginEpsilonRateIntakeStage : CandidateA1A3BootstrapStage
+  stationarityRateMapStage : CandidateA1A3BootstrapStage
+  multiscaleAbelSummationIssueStage : CandidateA1A3BootstrapStage
+
+canonicalCandidateA1A3BootstrapStages :
+  List CandidateA1A3BootstrapStage
+canonicalCandidateA1A3BootstrapStages =
+  typeIOrCKNStage
+  ∷ boundedAbelMassStage
+  ∷ weakStarCompactnessStage
+  ∷ sereginEpsilonRateIntakeStage
+  ∷ stationarityRateMapStage
+  ∷ multiscaleAbelSummationIssueStage
+  ∷ []
+
+candidateA1A3BootstrapStageCount : Nat
+candidateA1A3BootstrapStageCount =
+  listLength canonicalCandidateA1A3BootstrapStages
+
+candidateA1A3BootstrapStageCountIs6 :
+  candidateA1A3BootstrapStageCount ≡ 6
+candidateA1A3BootstrapStageCountIs6 = refl
 
 ------------------------------------------------------------------------
 -- Constant-tracking obligations.
@@ -287,15 +521,29 @@ a1ConstantTrackingObligationCountIs7 =
   refl
 
 data BoundedAbelMassBlocker : Set where
-  missingLorentzToLocalShellMassProof :
+  missingA11LorentzToLocalShellMassProof :
     BoundedAbelMassBlocker
-  missingUniformLPPartitionConstant :
+  missingA11UniformLPPartitionConstant :
     BoundedAbelMassBlocker
-  missingAbelWindowFiniteVariationProof :
+  missingA11UniformBoundedMassForAbelWeightedDefectMeasures :
     BoundedAbelMassBlocker
-  missingTriadicMultiplicityAccounting :
+  missingA12WeakStarCompactnessExtractionForAbelMeasures :
     BoundedAbelMassBlocker
-  missingScaleIndependentConstantTracking :
+  missingA12UniformTightnessModulus :
+    BoundedAbelMassBlocker
+  missingA13TriadicMultiplicityAccounting :
+    BoundedAbelMassBlocker
+  missingA13QuantitativeShellTailControl :
+    BoundedAbelMassBlocker
+  missingA13ScaleIndependentShellTailTracking :
+    BoundedAbelMassBlocker
+  missingQuantitativeControlForA1A3Bootstrap :
+    BoundedAbelMassBlocker
+  missingSereginEpsilonRateIntakeCompatibility :
+    BoundedAbelMassBlocker
+  missingStationarityRateMapOnAbelWindows :
+    BoundedAbelMassBlocker
+  missingExactExponentForMultiscaleAbelSummation :
     BoundedAbelMassBlocker
   missingPDEDefectMeasureConstruction :
     BoundedAbelMassBlocker
@@ -305,11 +553,18 @@ data BoundedAbelMassBlocker : Set where
 canonicalBoundedAbelMassBlockers :
   List BoundedAbelMassBlocker
 canonicalBoundedAbelMassBlockers =
-  missingLorentzToLocalShellMassProof
-  ∷ missingUniformLPPartitionConstant
-  ∷ missingAbelWindowFiniteVariationProof
-  ∷ missingTriadicMultiplicityAccounting
-  ∷ missingScaleIndependentConstantTracking
+  missingA11LorentzToLocalShellMassProof
+  ∷ missingA11UniformLPPartitionConstant
+  ∷ missingA11UniformBoundedMassForAbelWeightedDefectMeasures
+  ∷ missingA12WeakStarCompactnessExtractionForAbelMeasures
+  ∷ missingA12UniformTightnessModulus
+  ∷ missingA13TriadicMultiplicityAccounting
+  ∷ missingA13QuantitativeShellTailControl
+  ∷ missingA13ScaleIndependentShellTailTracking
+  ∷ missingQuantitativeControlForA1A3Bootstrap
+  ∷ missingSereginEpsilonRateIntakeCompatibility
+  ∷ missingStationarityRateMapOnAbelWindows
+  ∷ missingExactExponentForMultiscaleAbelSummation
   ∷ missingPDEDefectMeasureConstruction
   ∷ clayNavierStokesPromotionClosed
   ∷ []
@@ -318,9 +573,9 @@ boundedAbelMassBlockerCount : Nat
 boundedAbelMassBlockerCount =
   listLength canonicalBoundedAbelMassBlockers
 
-boundedAbelMassBlockerCountIs7 :
-  boundedAbelMassBlockerCount ≡ 7
-boundedAbelMassBlockerCountIs7 =
+boundedAbelMassBlockerCountIs14 :
+  boundedAbelMassBlockerCount ≡ 14
+boundedAbelMassBlockerCountIs14 =
   refl
 
 ------------------------------------------------------------------------
@@ -451,7 +706,7 @@ organizationString =
 
 requirementString : String
 requirementString =
-  "R: Record Type-I L^{3,infty} input, LP shell mass, Abel averaging, constant obligations, and fail-closed promotion flags."
+  "R: Record the exact A1.1 bounded Abel-weighted defect mass, A1.2 weak-* precompactness/tightness, and A1.3 quantitative shell-tail control contracts, together with Type-I LP-shell input, constant obligations, and fail-closed promotion flags."
 
 codeArtifactString : String
 codeArtifactString =
@@ -459,15 +714,15 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "S: A1 is now typed as a boundary receipt; Lorentz-to-shell mass, Abel finite variation, scale-independent constants, and PDE measure construction remain unproved."
+  "S: A1 is typed as a boundary receipt only; A1.1 bounded Abel mass, A1.2 uniform tightness and weak-* precompactness, A1.3 shell-tail decay, scale-independent constants, quantitative A1/A3 bootstrap control, and PDE measure construction remain unproved."
 
 latticeString : String
 latticeString =
-  "L: Type-I Lorentz input -> LP shell mass -> Abel window averaging -> uniform finite variation target -> future stationarity and bias consumers."
+  "L: Type-I/L^{3,infty} -> LP shell mass -> Abel averaging -> A1.1 bounded Abel mass -> A1.2 tightness/weak-* compactness -> A1.3 shell-tail control -> Seregin epsilon-rate intake -> stationarity-rate map -> A1/A3 bootstrap -> multiscale Abel summation issue."
 
 proposalString : String
 proposalString =
-  "P: Treat this receipt as the narrow A1 gate and require the explicit analytic mass estimate before promoting Abel stationarity claims."
+  "P: Treat this receipt as the narrow A1 gate and require explicit A1.1/A1.2/A1.3 theorems, with quantitative shell control and tightness modulus, before promoting Abel stationarity claims."
 
 governanceString : String
 governanceString =
@@ -475,7 +730,7 @@ governanceString =
 
 gapString : String
 gapString =
-  "F: Missing evidence is the constant-tracked Lorentz/LP/Abel estimate with constants independent of r, plus the actual PDE Abel defect-measure construction."
+  "F: Missing evidence is the constant-tracked A1.1 Lorentz/LP/Abel estimate giving sup_r ||mu_r||_TV < infinity, the A1.2 uniform tightness modulus and weak-* compactness extraction for {mu_r}_r, the A1.3 quantitative shell-tail bound Tail_A1(K;R,M) -> 0 uniformly in r, a compatible Seregin epsilon-rate intake, an Abel-window stationarity-rate map, the exact exponent/closure gain needed for multiscale Abel summation, and the actual PDE Abel defect-measure construction."
 
 ------------------------------------------------------------------------
 -- Canonical receipt.
@@ -503,6 +758,18 @@ record NSBoundedAbelMassEstimateBoundary : Set where
       List BoundedAbelMassEstimateTarget
     boundedMassTargetsAreCanonical :
       boundedMassTargets ≡ canonicalBoundedAbelMassEstimateTargets
+    a11Clauses :
+      List A11BoundedAbelWeightedDefectMassClause
+    a11ClausesAreCanonical :
+      a11Clauses ≡ canonicalA11BoundedAbelWeightedDefectMassClauses
+    a12Clauses :
+      List A12WeakStarPrecompactnessTightnessClause
+    a12ClausesAreCanonical :
+      a12Clauses ≡ canonicalA12WeakStarPrecompactnessTightnessClauses
+    a13Clauses :
+      List A13QuantitativeShellTailControlClause
+    a13ClausesAreCanonical :
+      a13Clauses ≡ canonicalA13QuantitativeShellTailControlClauses
     constantObligations :
       List A1ConstantTrackingObligation
     constantObligationsAreCanonical :
@@ -536,6 +803,12 @@ canonicalNSBoundedAbelMassEstimateBoundary =
     refl
     canonicalBoundedAbelMassEstimateTargets
     refl
+    canonicalA11BoundedAbelWeightedDefectMassClauses
+    refl
+    canonicalA12WeakStarPrecompactnessTightnessClauses
+    refl
+    canonicalA13QuantitativeShellTailControlClauses
+    refl
     canonicalA1ConstantTrackingObligations
     refl
     canonicalBoundedAbelMassBlockers
@@ -545,4 +818,3 @@ canonicalNSBoundedAbelMassEstimateBoundary =
     refl
     refl
     refl
-

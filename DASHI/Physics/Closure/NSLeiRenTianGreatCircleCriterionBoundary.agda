@@ -303,6 +303,41 @@ greatCircleCriterionSupportRowCountIs10 :
 greatCircleCriterionSupportRowCountIs10 =
   refl
 
+data GreatCircleCriterionClause : Set where
+  clauseExternalGreatCircleHittingNecessaryCondition :
+    GreatCircleCriterionClause
+
+  clauseDoubleConeAvoidanceContrapositiveRegularity :
+    GreatCircleCriterionClause
+
+  clauseZeroModeTrapRouteMustExhibitGreatCircleAvoidance :
+    GreatCircleCriterionClause
+
+  clauseMicrolocalTransferRemainsExplicitlyOpen :
+    GreatCircleCriterionClause
+
+  clauseFailClosedPromotionPosture :
+    GreatCircleCriterionClause
+
+canonicalGreatCircleCriterionClauses :
+  List GreatCircleCriterionClause
+canonicalGreatCircleCriterionClauses =
+  clauseExternalGreatCircleHittingNecessaryCondition
+  ∷ clauseDoubleConeAvoidanceContrapositiveRegularity
+  ∷ clauseZeroModeTrapRouteMustExhibitGreatCircleAvoidance
+  ∷ clauseMicrolocalTransferRemainsExplicitlyOpen
+  ∷ clauseFailClosedPromotionPosture
+  ∷ []
+
+greatCircleCriterionClauseCount : Nat
+greatCircleCriterionClauseCount =
+  listLength canonicalGreatCircleCriterionClauses
+
+greatCircleCriterionClauseCountIs5 :
+  greatCircleCriterionClauseCount ≡ 5
+greatCircleCriterionClauseCountIs5 =
+  refl
+
 data GreatCircleCriterionBlocker : Set where
   leiRenTianTheoremNotInternallyFormalized :
     GreatCircleCriterionBlocker
@@ -909,33 +944,37 @@ canonicalNSLeiRenTianGreatCircleCriterionFailClosedReceipt =
 ------------------------------------------------------------------------
 -- ORCSLPGF.
 
+greatCircleCriterionTheoremLadderSummary : String
+greatCircleCriterionTheoremLadderSummary =
+  "The in-repo LRT ladder is: external singularity-implies-great-circle-hitting intake, contrapositive double-cone regularity reading, zero-mode trap interpretation target, still-open microlocal transfer, and fail-closed non-promotion."
+
 organizationString : String
 organizationString =
-  "O: Worker 1 owns NSLeiRenTianGreatCircleCriterionBoundary as a single Agda authority-boundary lane."
+  "O: Own the self-contained LRT great-circle intake lane only, packaging the classical great-circle theorem grammar as an in-repo boundary rather than a vague authority placeholder."
 
 requirementString : String
 requirementString =
-  "R: Encode the conservative Lei-Ren-Tian criterion: singular high-vorticity direction set I hits every great circle; double-cone avoidance is a regularity criterion."
+  "R: Encode the explicit LRT theorem ladder: singular high-vorticity direction set I must hit every great circle, double-cone avoidance gives the contrapositive regularity branch, and any zero-mode trap consumer must exhibit an actual great-circle-avoidance witness before exclusion can fire."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: The module exports source metadata, direction/great-circle/cone carriers, contrapositive boundary, zero-mode trap hooks, support/blocker/status rows, fail-closed gates, false promotion guards, ORCSLPGF, and canonical receipts."
+  "C: The module exports source metadata, direction/great-circle/cone carriers, an explicit five-clause LRT ladder, contrapositive boundary, zero-mode trap hooks, support/blocker/status rows, fail-closed gates, false promotion guards, ORCSLPGF, theorem-ladder summary, and canonical receipts."
 
 stateString : String
 stateString =
-  "S: Zero-mode classification, rank-one defect formula, and microlocal defect-mass boundary are imported; Lei-Ren-Tian is external and quantitative measure transfer remains missing."
+  "S: Great-circle hitting and double-cone regularity are typed as the external intake surface; zero-mode classification, rank-one defect formula, and microlocal defect-mass boundary are imported; the actual zero-mode avoidance witness and quantitative direction-set-to-measure transfer remain absent."
 
 latticeString : String
 latticeString =
-  "L: external great-circle criterion -> cone/double-cone regularity boundary -> zero-mode trap exclusion target -> quantitative microlocal transfer -> leakage/residual/Clay blockers."
+  "L: external great-circle hitting -> double-cone contrapositive regularity -> zero-mode trap must avoid some great circle -> quantitative direction-set/microlocal transfer -> leakage/residual/Clay blockers."
 
 proposalString : String
 proposalString =
-  "P: Promote only the checked criterion-boundary surface; leave internal theorem formalization, measure transfer, residual closure, Clay NS, and terminal promotion false."
+  "P: Keep the LRT package reviewer-readable and self-contained by promoting only the typed theorem ladder surface; leave internal theorem formalization, geometry witnesses, measure transfer, residual closure, Clay NS, and terminal promotion false."
 
 governanceString : String
 governanceString =
-  "G: External theorem metadata is recorded; no internal Lei-Ren-Tian proof, no authority-token acceptance, no quantitative measure transfer, no Clay promotion."
+  "G: This intake is fail-closed: theorem metadata and theorem grammar are recorded, but no internal Lei-Ren-Tian proof, no authority-token acceptance, no zero-mode avoidance witness, no quantitative measure transfer, and no Clay promotion are admitted."
 
 gapString : String
 gapString =
@@ -1123,6 +1162,21 @@ record NSLeiRenTianGreatCircleCriterionBoundaryReceipt : Setω where
     supportRowCountProof :
       supportRowCount ≡ 10
 
+    theoremClauses :
+      List GreatCircleCriterionClause
+    theoremClausesAreCanonical :
+      theoremClauses ≡ canonicalGreatCircleCriterionClauses
+    theoremClauseCount :
+      Nat
+    theoremClauseCountIsCanonical :
+      theoremClauseCount ≡ greatCircleCriterionClauseCount
+    theoremClauseCountProof :
+      theoremClauseCount ≡ 5
+    theoremLadderSummary :
+      String
+    theoremLadderSummaryIsCanonical :
+      theoremLadderSummary ≡ greatCircleCriterionTheoremLadderSummary
+
     blockerRows :
       List GreatCircleCriterionBlocker
     blockerRowsAreCanonical :
@@ -1271,6 +1325,13 @@ canonicalNSLeiRenTianGreatCircleCriterionBoundaryReceipt =
     greatCircleCriterionSupportRowCount
     refl
     greatCircleCriterionSupportRowCountIs10
+    canonicalGreatCircleCriterionClauses
+    refl
+    greatCircleCriterionClauseCount
+    refl
+    greatCircleCriterionClauseCountIs5
+    greatCircleCriterionTheoremLadderSummary
+    refl
     canonicalGreatCircleCriterionBlockers
     refl
     greatCircleCriterionBlockerCount

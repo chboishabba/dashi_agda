@@ -27,7 +27,11 @@ import DASHI.Physics.Closure.NSPressureVsDepthLPClarificationReceipt as Pressure
 ------------------------------------------------------------------------
 -- NS Paper 1 Clay target receipt.
 --
--- This is the Manager-B spine receipt.  It records the honest chain:
+-- This is the Manager-B spine receipt.  It records the candidate-complete
+-- self-contained A1-A9 package posture together with explicit classical
+-- theorem intake.  The remaining issue is not theorem-shape grammar but
+-- exact theorem acceptance/promotion for the consumed norms/constants.
+-- The honest chain is:
 --
 --   fixed-K LP identity
 --     -> theta defined as Flux/Diss
@@ -148,17 +152,17 @@ nsPaper1PromotionImpossibleHere ()
 publishableClaimText :
   String
 publishableClaimText =
-  "NS theta is a computable seam variable; diagnostics separate harmless LH from barrier-crossing HH; the sharpened Paper 1 obstruction is an H^{-1/2} nonlinear-defect bound for P_{>K*}(u.grad u), feeding dual-pairing tail absorption.  Theta preservation and the non-circular defect estimate remain open."
+  "NS theta is a computable seam variable inside an explicit candidate-complete self-contained A1-A9 package with explicit classical theorem intake; diagnostics separate harmless LH from barrier-crossing HH; the sharpened Paper 1 obstruction is exact promotion evidence for the consumed H^{-1/2} nonlinear-defect and tail-absorption constants, not missing theorem grammar."
 
 clayBoundaryText :
   String
 clayBoundaryText =
-  "Paper 1 does not prove the danger-shell maximum principle, the H^{-1/2} nonlinear-defect estimate, unconditional theta<1, BKM closure, or Clay Navier-Stokes."
+  "Paper 1 does not promote the danger-shell maximum principle, the H^{-1/2} nonlinear-defect estimate, unconditional theta<1, BKM closure, or Clay Navier-Stokes; the package is explicit, but acceptance/promotion of the consumed norms/constants remains open."
 
 comparisonTheoremTargetText :
   String
 comparisonTheoremTargetText =
-  "Conditional/open comparison target: assuming Theta<1 and the required interpolation hypotheses, control H^{11/8}; this is a Paper 1 theorem target, not a Clay proof."
+  "Conditional/open comparison target: assuming Theta<1 and the required interpolation hypotheses, control H^{11/8}; the theorem target and classical intake are explicit, but accepted promotion of the consumed interpolation norms/constants is still open, so this is not a Clay proof."
 
 record NSPaper1ClayTargetReceipt : Setω where
   field

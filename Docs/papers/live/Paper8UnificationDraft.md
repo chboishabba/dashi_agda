@@ -148,6 +148,45 @@ material lives in the compendium. Paper 8 needs only to show that the same
 closure grammar can host multiple bounded instantiations without confusing
 their theorem scope.
 
+For the live unification frontier, this means there is only one theorem-sized
+math wall being tracked here: the cross-term nullity or unique-continuation
+problem required to pass from gluing data to honest modulo-null linearity.
+Everything downstream in Paper 8 remains a controlled consumer once that wall
+is crossed.
+
+The repo now also carries a concrete candidate theorem package for that wall:
+an explicit residual PDE statement, an operator-class or ellipticity witness,
+a matched Carleman/unique-continuation intake, and a cross-term nullity target
+from which modulo-null, four-point, parallelogram, and Jordan-von Neumann
+consumers would follow. Paper 8 records that package because it clarifies the
+mathematical intake. It does not promote the wall itself.
+
+The point of this formulation is to prevent a familiar drift. Approximate
+compatibility, two-homogeneity, and scale-invariant heuristics can strongly
+motivate cross-term nullity, but Paper 8 does not treat them as a proof unless
+the residual PDE, its ellipticity or parabolicity class, and the relevant
+Carleman/unique-continuation intake are all fixed in a lane-appropriate way.
+The live theorem checklist is therefore explicit:
+`UCT.1` specify the overlap residual PDE,
+`UCT.2` verify its ellipticity or parabolicity class,
+`UCT.3` import the matching Carleman/unique-continuation theorem,
+and `UCT.4` derive cross-term nullity.
+Only after those four steps do the modulo-null, four-point, parallelogram, and
+Jordan-von Neumann consumers become mathematically unlocked.
+
+The downstream chain is now also recorded explicitly in the proof-facing
+surfaces: `UCT.5` modulo-null linearity, `UCT.6` four-point cancellation,
+`UCT.7` parallelogram, and `UCT.8` Jordan-von Neumann recovery. This is a
+governance sharpening, not a theorem promotion. Paper 8 still treats
+`UCT.1-UCT.4` as the live mathematical wall and the later clauses as
+consumers that become available only if that wall is crossed.
+
+The current remaining burden should therefore not be described as missing
+consumer grammar. The repo now carries an explicit candidate `UCT.1-UCT.8`
+package. What remains fail-closed is acceptance or promotion of the live
+`UCT.1-UCT.4` intake in a lane-appropriate PDE/Carleman form, after which the
+downstream consumer chain is already typed.
+
 ## 4. Jordan-von Neumann recovery
 
 The decisive mathematical step is the recovery of an inner product on `V/null`
@@ -246,6 +285,7 @@ reading as if algebraic closure alone produces observational confirmation.
 | `ClosurePipeline` | canonical quotient -> JvN -> completion -> consumer grammar | structural theorem only; no analytic Clay theorem follows from grammar alone |
 | `U-1a` | closure grammar theorem on `V/null` | each lane still needs its own hypothesis verification, including quotient-domain correctness where null directions are physical |
 | `U-1a-H` | per-lane justification surface | lane compatibility is bounded and does not substitute for Paper 1 or Paper 3 proofs; nonlinear YM requires gauge-quotient semantics before JvN |
+| cross-term nullity frontier | the one live theorem-sized unification obstruction | modulo-null gluing linearity still needs the cross-term-null / unique-continuation step; 2-homogeneity alone does not supply it |
 | JvN recovery | canonical inner-product recovery step | requires the actual parallelogram-law and null-space / quotient hypotheses |
 | DHR consumer route | legitimate post-completion illustration | controlled consumer only; not a proof of full DHR reconstruction, internal compact-group construction, or `G_DHR ~= G_SM` |
 | empirical consumers | controlled downstream interfaces | no authority, calibration, or acceptance theorem follows automatically |

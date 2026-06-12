@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.UnificationJordanVonNeumannAdapterBoundary where
 
--- Fail-closed boundary for the corrected Jordan-von Neumann adapter route:
+-- Fail-closed boundary for the corrected Jordan-von Neumann adapter route
+-- downstream of the live cross-term theorem wall:
 --
 --   Hypothesis U-1a-H
 --   -> four-point cancellation / parallelogram data
@@ -12,7 +13,11 @@ module DASHI.Physics.Closure.UnificationJordanVonNeumannAdapterBoundary where
 --
 -- This file records the route and sockets only.  It does not prove
 -- parallelogram, bilinearity, positivity, Clifford relations, spinor
--- realization, null-space linearity, quotient descent, or promotion.
+-- realization, null-space linearity, quotient descent, or promotion. The
+-- candidate theorem grammar for UCT.1-UCT.8 already exists, but the live
+-- mathematics wall remains UCT.1-UCT.4 and the downstream UCT.5-UCT.8
+-- route is structured consumer bookkeeping pending acceptance/promotion of
+-- the candidate package rather than missing theorem-shape grammar.
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -23,6 +28,8 @@ open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Physics.Closure.UnificationScaleInvariantCrossTermHypothesisBoundary
   as U1aH
+import DASHI.Physics.Closure.UnificationCrossTermNullityTheoremBoundary
+  as Theorem
 
 ------------------------------------------------------------------------
 -- Local utility.
@@ -180,8 +187,24 @@ record JordanVonNeumannImportedSupport : Setω where
     correctedHypothesisBoundary :
       U1aH.UnificationScaleInvariantCrossTermHypothesisBoundary
 
+    crossTermNullityBoundary :
+      Theorem.UnificationCrossTermNullityTheoremBoundary
+
+    exactUCTGrammarImported :
+      Theorem.theoremClauseCount
+        (Theorem.exactGrammarBoundary crossTermNullityBoundary)
+      ≡ 8
+
     correctedHypothesisRecorded :
       U1aH.scaleInvariantCrossTermHypothesisRecorded ≡ true
+
+    uct7ParallelogramConsumerRecorded :
+      Theorem.parallelogramConsumerRecorded crossTermNullityBoundary
+      ≡ true
+
+    uct8JordanVonNeumannAdapterConsumerRecorded :
+      Theorem.jordanVonNeumannAdapterConsumerRecorded crossTermNullityBoundary
+      ≡ true
 
     twoHomogeneityStillRejected :
       U1aH.twoHomogeneityAloneAccepted ≡ false
@@ -200,6 +223,14 @@ record JordanVonNeumannImportedSupport : Setω where
 
     upstreamJordanVonNeumannStillOpen :
       U1aH.jordanVonNeumannAdapterProved ≡ false
+
+    theoremParallelogramStillOpen :
+      Theorem.parallelogramProved crossTermNullityBoundary
+      ≡ false
+
+    theoremJordanVonNeumannStillOpen :
+      Theorem.jordanVonNeumannAdapterProved crossTermNullityBoundary
+      ≡ false
 
     upstreamQuadraticStillOpen :
       U1aH.quadraticConsumerProved ≡ false
@@ -221,8 +252,18 @@ canonicalJordanVonNeumannImportedSupport =
   record
     { correctedHypothesisBoundary =
         U1aH.canonicalUnificationScaleInvariantCrossTermHypothesisBoundary
+    ; crossTermNullityBoundary =
+        Theorem.canonicalUnificationCrossTermNullityTheoremBoundary
+    ; exactUCTGrammarImported =
+        Theorem.theoremClauseCountIs8
+          (Theorem.exactGrammarBoundary
+            Theorem.canonicalUnificationCrossTermNullityTheoremBoundary)
     ; correctedHypothesisRecorded =
         U1aH.canonicalScaleInvariantCrossTermHypothesisRecorded
+    ; uct7ParallelogramConsumerRecorded =
+        Theorem.canonicalCrossTermNullityParallelogramConsumerRecorded
+    ; uct8JordanVonNeumannAdapterConsumerRecorded =
+        Theorem.canonicalCrossTermNullityJordanVonNeumannAdapterConsumerRecorded
     ; twoHomogeneityStillRejected =
         U1aH.canonicalTwoHomogeneityRejected
     ; scaleInvariantDecompositionStillOpen =
@@ -235,6 +276,10 @@ canonicalJordanVonNeumannImportedSupport =
         U1aH.canonicalU1aHParallelogramStillOpen
     ; upstreamJordanVonNeumannStillOpen =
         U1aH.canonicalU1aHJordanVonNeumannStillOpen
+    ; theoremParallelogramStillOpen =
+        Theorem.canonicalCrossTermNullityParallelogramStillOpen
+    ; theoremJordanVonNeumannStillOpen =
+        Theorem.canonicalCrossTermNullityJordanVonNeumannStillOpen
     ; upstreamQuadraticStillOpen =
         U1aH.canonicalU1aHQuadraticStillOpen
     ; upstreamCliffordStillOpen =
@@ -342,11 +387,11 @@ jordanVonNeumannAdapterBlockerCountIs9 =
 
 jordanVonNeumannRouteText : String
 jordanVonNeumannRouteText =
-  "parallelogram -> polarization -> bilinear form -> null-space linearity/quotient-first discipline -> quadratic/Hilbert consumers on V/null -> Clifford/spinor consumers"
+  "Candidate theorem grammar exists for UCT.1-UCT.8: approximate compatibility -> UCT.1 exact residual PDE for c(s1,s2) -> UCT.2 elliptic/parabolic operator class -> UCT.3 Carleman/unique-continuation intake -> UCT.4 cross-term nullity theorem -> UCT.5 modulo-null consumer -> UCT.6 four-point consumer -> UCT.7 parallelogram consumer -> UCT.8 Jordan-von Neumann adapter consumer on V/null -> quadratic/Hilbert consumers on V/null -> Clifford/spinor consumers"
 
 jordanVonNeumannRouteTextIsCanonical :
   jordanVonNeumannRouteText
-  ≡ "parallelogram -> polarization -> bilinear form -> null-space linearity/quotient-first discipline -> quadratic/Hilbert consumers on V/null -> Clifford/spinor consumers"
+  ≡ "Candidate theorem grammar exists for UCT.1-UCT.8: approximate compatibility -> UCT.1 exact residual PDE for c(s1,s2) -> UCT.2 elliptic/parabolic operator class -> UCT.3 Carleman/unique-continuation intake -> UCT.4 cross-term nullity theorem -> UCT.5 modulo-null consumer -> UCT.6 four-point consumer -> UCT.7 parallelogram consumer -> UCT.8 Jordan-von Neumann adapter consumer on V/null -> quadratic/Hilbert consumers on V/null -> Clifford/spinor consumers"
 jordanVonNeumannRouteTextIsCanonical =
   refl
 
@@ -362,12 +407,22 @@ jordanVonNeumannPolarizationTextIsCanonical =
 
 jordanVonNeumannDischargeGateText : String
 jordanVonNeumannDischargeGateText =
-  "JvN recovery discharges only when both the parallelogram-law and null-space/quotient hypotheses are available"
+  "JvN recovery discharges only when the still-live UCT.1-UCT.4 wall has been accepted, UCT.5-UCT.7 have fed the already-structured fail-closed modulo-null/four-point/parallelogram chain, the null-space/quotient hypotheses needed by UCT.8 are available, and promotion has been authorized."
 
 jordanVonNeumannDischargeGateTextIsCanonical :
   jordanVonNeumannDischargeGateText
-  ≡ "JvN recovery discharges only when both the parallelogram-law and null-space/quotient hypotheses are available"
+  ≡ "JvN recovery discharges only when the still-live UCT.1-UCT.4 wall has been accepted, UCT.5-UCT.7 have fed the already-structured fail-closed modulo-null/four-point/parallelogram chain, the null-space/quotient hypotheses needed by UCT.8 are available, and promotion has been authorized."
 jordanVonNeumannDischargeGateTextIsCanonical =
+  refl
+
+jordanVonNeumannUCT8ConsumerText : String
+jordanVonNeumannUCT8ConsumerText =
+  "UCT.8 downstream consumer: consume UCT.7 only through already-structured fail-closed Jordan-von Neumann adapter surfaces on V/null while the live wall remains UCT.1-UCT.4."
+
+jordanVonNeumannUCT8ConsumerTextIsCanonical :
+  jordanVonNeumannUCT8ConsumerText
+  ≡ "UCT.8 downstream consumer: consume UCT.7 only through already-structured fail-closed Jordan-von Neumann adapter surfaces on V/null while the live wall remains UCT.1-UCT.4."
+jordanVonNeumannUCT8ConsumerTextIsCanonical =
   refl
 
 jordanVonNeumannQuotientConsumerText : String
@@ -388,6 +443,16 @@ jordanVonNeumannNonlinearYMQuotientTextIsCanonical :
   jordanVonNeumannNonlinearYMQuotientText
   ≡ "nonlinear YM consumers use the gauge-equivalence quotient domain"
 jordanVonNeumannNonlinearYMQuotientTextIsCanonical =
+  refl
+
+jordanVonNeumannTheoremWallEntryText : String
+jordanVonNeumannTheoremWallEntryText =
+  "Candidate theorem grammar for UCT.1-UCT.8 is already present, but UCT.8 reads the live wall only through the explicit chain UCT.4 cross-term nullity -> UCT.5 modulo-null -> UCT.6 four-point -> UCT.7 parallelogram."
+
+jordanVonNeumannTheoremWallEntryTextIsCanonical :
+  jordanVonNeumannTheoremWallEntryText
+  ≡ "Candidate theorem grammar for UCT.1-UCT.8 is already present, but UCT.8 reads the live wall only through the explicit chain UCT.4 cross-term nullity -> UCT.5 modulo-null -> UCT.6 four-point -> UCT.7 parallelogram."
+jordanVonNeumannTheoremWallEntryTextIsCanonical =
   refl
 
 ------------------------------------------------------------------------
@@ -546,10 +611,16 @@ record UnificationJordanVonNeumannAdapterBoundary : Set where
     blockerCount :
       Nat
 
+    crossTermExactGrammarImported :
+      Bool
+
     correctedHypothesisImported :
       Bool
 
     parallelogramConsumerImported :
+      Bool
+
+    jordanVonNeumannUCT8ConsumerRecorded :
       Bool
 
     polarizationImported :
@@ -598,10 +669,14 @@ canonicalUnificationJordanVonNeumannAdapterBoundary =
         jordanVonNeumannAdapterStageCount
     ; blockerCount =
         jordanVonNeumannAdapterBlockerCount
+    ; crossTermExactGrammarImported =
+        true
     ; correctedHypothesisImported =
         jordanVonNeumannAdapterRecorded
     ; parallelogramConsumerImported =
         parallelogramConsumerRecorded
+    ; jordanVonNeumannUCT8ConsumerRecorded =
+        true
     ; polarizationImported =
         polarizationRecorded
     ; nullSpaceLinearityImported =
@@ -645,11 +720,25 @@ canonicalJordanVonNeumannImported :
 canonicalJordanVonNeumannImported =
   refl
 
+canonicalJordanVonNeumannExactGrammarImported :
+  crossTermExactGrammarImported
+    canonicalUnificationJordanVonNeumannAdapterBoundary
+  ≡ true
+canonicalJordanVonNeumannExactGrammarImported =
+  refl
+
 canonicalJordanVonNeumannParallelogramImported :
   parallelogramConsumerImported
     canonicalUnificationJordanVonNeumannAdapterBoundary
   ≡ true
 canonicalJordanVonNeumannParallelogramImported =
+  refl
+
+canonicalJordanVonNeumannUCT8ConsumerRecorded :
+  jordanVonNeumannUCT8ConsumerRecorded
+    canonicalUnificationJordanVonNeumannAdapterBoundary
+  ≡ true
+canonicalJordanVonNeumannUCT8ConsumerRecorded =
   refl
 
 canonicalJordanVonNeumannPolarizationImported :

@@ -1,0 +1,7 @@
+== DASHI/Everything.agda ==
+command: timeout 60s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda
+started: 2026-06-12T15:43:19+10:00
+
+
+exit_code: 0
+finished: 2026-06-12T15:44:18+10:00

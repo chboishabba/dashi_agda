@@ -1,0 +1,13 @@
+== DASHI/Physics/Probes/YMPromotionProbe.agda ==
+command: timeout 60s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Probes/YMPromotionProbe.agda
+started: 2026-06-12T15:44:36+10:00
+
+Checking DASHI.Physics.Probes.YMPromotionProbe (/home/c/Documents/code/dashi_agda/DASHI/Physics/Probes/YMPromotionProbe.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Probes/YMPromotionProbe.agda:37,34-38
+Agda.Builtin.Bool.false != true of type Agda.Builtin.Bool.Bool
+when checking that the expression refl has type
+Root.ymL3TightnessConstructed Root.canonicalYMFinalStateReceipt ≡
+true
+
+exit_code: 42
+finished: 2026-06-12T15:44:55+10:00

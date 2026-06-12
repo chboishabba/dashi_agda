@@ -53,10 +53,21 @@ import DASHI.Physics.Closure.YMPhysicalBetaBridgeOpenReceipt as YMOpen
 --   ------------------------
 --   R' < 0
 --
--- This receipt records what is still needed for Clay-facing promotion after
--- that algebra is available.  It is an index and governance surface only: it
--- proves no PAWOTG theorem, no Balaban bridge, no OS/Wightman continuum
--- package, no NS danger-shell theorem, and no Clay result.
+-- This receipt records the current frontier ranking after that algebra is
+-- available. The intent is not to advertise many equally-live gaps across
+-- every lane. Instead:
+--
+-- 1. NS is treated here as a candidate-complete internal package pending
+--    promotion/acceptance review rather than as the active external-content
+--    frontier.
+-- 2. Unification/Gate3 is likewise treated as a candidate-complete package
+--    pending promotion/acceptance review.
+-- 3. YM remains the genuinely open external-content frontier if the program
+--    insists on internal closure.
+--
+-- The receipt is still governance-only and fail-closed: it proves no PAWOTG
+-- theorem, no Balaban bridge, no OS/Wightman continuum package, no NS danger
+-- shell theorem, and no Clay result.
 
 data ClayFinalAnalyticFrontierStatus : Set where
   clayFinalFrontierRecorded_failClosed :
@@ -102,6 +113,44 @@ data NSFinalLemma : Set where
 
   dangerShellMaximumPrinciple :
     NSFinalLemma
+
+data CandidateCompletePackage : Set where
+  navierStokesCandidateCompletePendingAcceptance :
+    CandidateCompletePackage
+
+  unificationCandidateCompletePendingAcceptance :
+    CandidateCompletePackage
+
+data GenuineExternalContentFrontier : Set where
+  yangMillsExternalContentFrontier :
+    GenuineExternalContentFrontier
+
+data FrontierRanking : Set where
+  candidateCompletePendingPromotionAcceptance :
+    FrontierRanking
+
+  genuineExternalContentFrontierIfInternalClosureDemanded :
+    FrontierRanking
+
+canonicalCandidateCompletePackages :
+  List CandidateCompletePackage
+canonicalCandidateCompletePackages =
+  navierStokesCandidateCompletePendingAcceptance
+  ∷ unificationCandidateCompletePendingAcceptance
+  ∷ []
+
+canonicalGenuineExternalContentFrontiers :
+  List GenuineExternalContentFrontier
+canonicalGenuineExternalContentFrontiers =
+  yangMillsExternalContentFrontier
+  ∷ []
+
+canonicalFrontierRanking :
+  List FrontierRanking
+canonicalFrontierRanking =
+  candidateCompletePendingPromotionAcceptance
+  ∷ genuineExternalContentFrontierIfInternalClosureDemanded
+  ∷ []
 
 canonicalSolvedSharedComponents :
   List SolvedSharedComponent
@@ -250,7 +299,7 @@ clayFinalAnalyticFrontierPromotionImpossibleHere ()
 frontierSummary :
   String
 frontierSummary =
-  "Clay after the scale-graph algebra reduces to Monster quotient control, Gate3 PAWOTG/Mosco/no-pollution, YM effective-C0 KP plus Balaban physical beta bridge plus OS/Wightman transfer, and NS tail-restricted theta plus non-circular high-high/K* danger-shell control."
+  "Frontier map after the scale-graph algebra: NS and unification are candidate-complete packages pending promotion/acceptance, while YM remains the genuine external-content frontier if internal closure is required. All Clay promotion flags stay false here."
 
 record ClayFinalAnalyticFrontierMapReceipt : Setω where
   field
@@ -431,6 +480,26 @@ record ClayFinalAnalyticFrontierMapReceipt : Setω where
     nsFinalLemmasAreCanonical :
       nsFinalLemmas ≡ canonicalNSFinalLemmas
 
+    candidateCompletePackages :
+      List CandidateCompletePackage
+
+    candidateCompletePackagesAreCanonical :
+      candidateCompletePackages ≡ canonicalCandidateCompletePackages
+
+    genuineExternalContentFrontiers :
+      List GenuineExternalContentFrontier
+
+    genuineExternalContentFrontiersAreCanonical :
+      genuineExternalContentFrontiers
+      ≡
+      canonicalGenuineExternalContentFrontiers
+
+    frontierRanking :
+      List FrontierRanking
+
+    frontierRankingIsCanonical :
+      frontierRanking ≡ canonicalFrontierRanking
+
     relatedExistingProofSurfaces :
       List RelatedExistingProofSurface
 
@@ -584,6 +653,18 @@ canonicalClayFinalAnalyticFrontierMapReceipt =
     ; nsFinalLemmas =
         canonicalNSFinalLemmas
     ; nsFinalLemmasAreCanonical =
+        refl
+    ; candidateCompletePackages =
+        canonicalCandidateCompletePackages
+    ; candidateCompletePackagesAreCanonical =
+        refl
+    ; genuineExternalContentFrontiers =
+        canonicalGenuineExternalContentFrontiers
+    ; genuineExternalContentFrontiersAreCanonical =
+        refl
+    ; frontierRanking =
+        canonicalFrontierRanking
+    ; frontierRankingIsCanonical =
         refl
     ; relatedExistingProofSurfaces =
         canonicalRelatedExistingProofSurfaces

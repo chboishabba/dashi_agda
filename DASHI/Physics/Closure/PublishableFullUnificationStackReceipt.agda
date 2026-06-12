@@ -26,12 +26,11 @@ import DASHI.Physics.Closure.YMPaper3RoadmapReceipt as YM
 -- programme state.  It consumes the existing lane receipts and records a
 -- precise claim:
 --
---   * Paper 0 is publishable as a fail-closed margin grammar.
---   * Papers 1-3 are publishable as conditional lane programmes once their
---     prose mirrors the already-recorded receipt boundaries.
---   * Paper 4 is publishable only as a unification programme, not as a final
---     theorem, because NS theta, YM actual rho/RG, and Gate 3 transfer remain
---     open analytic inhabitants.
+--   * the repo carries an explicit candidate UCT.1-UCT.8 package.
+--   * UCT.1-UCT.4 remain the live wall.
+--   * UCT.5-UCT.8 are already-structured downstream consumers.
+--   * Paper 4 is publishable as a fail-closed unification programme that
+--     records this package posture rather than a promoted closure theorem.
 --
 -- No Clay, continuum, or terminal promotion is made here.
 
@@ -57,6 +56,85 @@ data PublishableLayer : Set where
 
   layerPublicationClaims :
     PublishableLayer
+
+data UCTPackageStep : Set where
+  packageUCT1 :
+    UCTPackageStep
+
+  packageUCT2 :
+    UCTPackageStep
+
+  packageUCT3 :
+    UCTPackageStep
+
+  packageUCT4 :
+    UCTPackageStep
+
+  packageUCT5 :
+    UCTPackageStep
+
+  packageUCT6 :
+    UCTPackageStep
+
+  packageUCT7 :
+    UCTPackageStep
+
+  packageUCT8 :
+    UCTPackageStep
+
+canonicalUCTPackage : List UCTPackageStep
+canonicalUCTPackage =
+  packageUCT1
+  ∷ packageUCT2
+  ∷ packageUCT3
+  ∷ packageUCT4
+  ∷ packageUCT5
+  ∷ packageUCT6
+  ∷ packageUCT7
+  ∷ packageUCT8
+  ∷ []
+
+data UCTLiveWallStep : Set where
+  wallUCT1 :
+    UCTLiveWallStep
+
+  wallUCT2 :
+    UCTLiveWallStep
+
+  wallUCT3 :
+    UCTLiveWallStep
+
+  wallUCT4 :
+    UCTLiveWallStep
+
+canonicalUCTLiveWall : List UCTLiveWallStep
+canonicalUCTLiveWall =
+  wallUCT1
+  ∷ wallUCT2
+  ∷ wallUCT3
+  ∷ wallUCT4
+  ∷ []
+
+data UCTDownstreamConsumer : Set where
+  consumerUCT5 :
+    UCTDownstreamConsumer
+
+  consumerUCT6 :
+    UCTDownstreamConsumer
+
+  consumerUCT7 :
+    UCTDownstreamConsumer
+
+  consumerUCT8 :
+    UCTDownstreamConsumer
+
+canonicalUCTDownstreamConsumers : List UCTDownstreamConsumer
+canonicalUCTDownstreamConsumers =
+  consumerUCT5
+  ∷ consumerUCT6
+  ∷ consumerUCT7
+  ∷ consumerUCT8
+  ∷ []
 
 canonicalPublishableLayers : List PublishableLayer
 canonicalPublishableLayers =
@@ -157,7 +235,7 @@ publishableFullUnificationPromotionImpossibleHere ()
 
 publicationStackStatement : String
 publicationStackStatement =
-  "Finished publishable full unification means: Paper 0 states the shared strict-margin grammar; NS, YM, and Gate3 instantiate it as conditional programmes with typed seam variables; Paper 4 joins the lanes as a programme while keeping theta preservation, actual rho/RG, and Gate3 transfer open."
+  "Finished publishable full unification means: the candidate UCT.1-UCT.8 package is explicit, UCT.1-UCT.4 remain the live wall, UCT.5-UCT.8 remain already-structured downstream consumers, and Paper 4 is publishable only as a fail-closed programme with no closure or promotion claim."
 
 record PublishableFullUnificationStackReceipt : Setω where
   field
@@ -286,6 +364,24 @@ record PublishableFullUnificationStackReceipt : Setω where
 
     joinedTableNoClay :
       Joined.clayPromotionMade joinedLaneTableReceipt ≡ false
+
+    uctPackage :
+      List UCTPackageStep
+
+    uctPackageIsCanonical :
+      uctPackage ≡ canonicalUCTPackage
+
+    uctLiveWall :
+      List UCTLiveWallStep
+
+    uctLiveWallIsCanonical :
+      uctLiveWall ≡ canonicalUCTLiveWall
+
+    uctDownstreamConsumers :
+      List UCTDownstreamConsumer
+
+    uctDownstreamConsumersAreCanonical :
+      uctDownstreamConsumers ≡ canonicalUCTDownstreamConsumers
 
     layers :
       List PublishableLayer
@@ -426,6 +522,18 @@ canonicalPublishableFullUnificationStackReceipt =
     ; joinedTableObligationsOpen =
         refl
     ; joinedTableNoClay =
+        refl
+    ; uctPackage =
+        canonicalUCTPackage
+    ; uctPackageIsCanonical =
+        refl
+    ; uctLiveWall =
+        canonicalUCTLiveWall
+    ; uctLiveWallIsCanonical =
+        refl
+    ; uctDownstreamConsumers =
+        canonicalUCTDownstreamConsumers
+    ; uctDownstreamConsumersAreCanonical =
         refl
     ; layers =
         canonicalPublishableLayers

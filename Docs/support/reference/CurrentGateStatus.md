@@ -1,5 +1,93 @@
 # Current Gate Status
 
+## NS/YM/Unification Gate Correction 2026-06-12
+
+Owner: `Codex orchestrator`
+Status: `docs-only; fail-closed; non-promoting`
+
+The current cross-lane correction is:
+
+- Navier-Stokes no longer lacks theorem-shape grammar. The repo now carries an
+  explicit candidate self-contained packet
+  `CKN + ESS + LRT + A1/A3 + A4 + A5-A9`.
+  The remaining issue is exact theorem acceptance / promotion in the consumed
+  norms and constants, not vague missing structure.
+- Unification no longer lacks downstream theorem-shape grammar. The repo now
+  carries an explicit candidate package `UCT.1-UCT.8`, with the live wall at
+  `UCT.1-UCT.4` and the later clauses structured as downstream consumers.
+  The remaining issue is acceptance / promotion of that package, not missing
+  consumer shape.
+- Yang-Mills remains categorically different. The exact theorem chain is
+  explicit, but the load-bearing remaining missing-content burden is still the
+  Balaban-centered `H3a` cluster and its RG/continuum consequences.
+
+This correction changes no Agda theorem flag. It only aligns the repo's
+human-facing gate summary with the sharper packet surfaces already present.
+
+## Canonical Reading Rule 2026-06-12
+
+Owner: `Codex orchestrator`
+Status: `docs-only; fail-closed; non-promoting`
+
+This file now has a strict interpretation rule:
+
+- Treat the `2026-06-12` correction above as the canonical current-state
+  reading for the Clay-facing NS/YM/unification lanes.
+- Read older sections below as historical governance notes, route archives,
+  or legacy blocker maps unless they explicitly restate the same sharpened
+  posture.
+- In particular, older notes about broad NS missing-structure fronts,
+  broad unification consumer-shape gaps, or many equal-rank YM continuum
+  blockers are not the freshest statement of the repo.
+
+Current canonical split:
+
+- NS: explicit candidate self-contained packet exists; remaining burden is
+  promotion evidence / theorem acceptance.
+- Unification: explicit candidate `UCT.1-UCT.8` package exists; remaining
+  burden is promotion evidence focused on `UCT.1-UCT.4`.
+- YM: the live missing-content burden stays the Balaban-centered `H3a`
+  cluster if an internal proof is demanded.
+
+## Promotion Probe Layer 2026-06-12
+
+Owner: `Codex orchestrator`
+Status: `code + docs; fail-closed; non-promoting`
+
+The repo now carries a separate root-probe layer under
+`DASHI/Physics/Probes/`. The purpose is not to promote any theorem. The
+purpose is to ask a narrower question:
+
+- if the current canonical NS, YM, unification, or cross-lane root receipt had
+  to promote right now, what is the first strengthened assertion that fails?
+
+Operational rule:
+
+- `DASHI/Everything.agda` remains the aggregate green integration target.
+- The probe modules are intentionally outside `Everything`.
+- Directly compiling a probe is allowed to fail, and that failure is the
+  desired blocker signal.
+
+Canonical cutset surfaces:
+
+- Agda receipt: `DASHI/Physics/Closure/PromotionProbeCutsetReceipt.agda`
+- Runner: `scripts/run_promotion_probe_cutset.sh`
+- JSON harness: `scripts/promotion_probe_cutset_harness.py`
+
+Current recorded run shape:
+
+- `DASHI/Everything.agda`: `PASS`
+- `NSPromotionProbe`: `FAIL`
+- `YMPromotionProbe`: `FAIL`
+- `UnificationPromotionProbe`: `FAIL`
+- `CurrentProofProfilePromotionProbe`: `FAIL`
+
+The intended operational invariant is now explicit:
+
+- aggregate build green
+- root probes red
+- root blocker cutset extracted from those four red surfaces
+
 ## Worker 4 Termination/YM Lane Governance 2026-06-01
 
 Owner: `Worker 4`

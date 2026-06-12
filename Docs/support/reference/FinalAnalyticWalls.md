@@ -1,13 +1,44 @@
 # Final Analytic Walls
 
-This is the repository-level map of the four remaining fail-closed analytic
-walls.  The Agda source of record is:
+This page is now a legacy registry, not the canonical live statement of the
+Clay-facing NS/YM/unification frontier. The Agda source of record is:
 
 `DASHI/Physics/Closure/FinalAnalyticWallsReceipt.agda`
 
 The receipt imports the four target packages that already define the precise
-request surfaces.  It does not discharge any of them and it does not promote
+request surfaces. It does not discharge any of them and it does not promote
 Gate 3, Yang-Mills, Navier-Stokes, Clay, or terminal closure.
+
+Current correction: this four-row table is not the freshest statement of the
+NS/YM/unification frontier. The current sharper split is:
+
+- NS: exact candidate self-contained theorem packet recorded; remaining burden
+  is promotion evidence and exact theorem acceptance, not missing packet shape.
+- Unification: exact candidate `UCT.1-UCT.8` packet recorded; remaining burden
+  is promotion evidence focused on `UCT.1-UCT.4`, not missing consumer shape.
+- YM: the genuine missing-content burden remains Balaban-centered `H3a`.
+
+So this page should be read as a legacy analytic-wall register, not as the
+canonical current-state summary for the Clay-facing NS/YM/unification packets.
+
+## Canonical Cross-Lane Reading 2026-06-12
+
+For the current repo posture, read the NS/YM/unification frontier as:
+
+- NS: an explicit candidate self-contained packet is already recorded
+  (`CKN + ESS + LRT + A1/A3 + A4 + A5-A9`); the remaining burden is
+  promotion evidence / theorem acceptance.
+- Unification: an explicit candidate `UCT.1-UCT.8` package is already
+  recorded; the remaining burden is promotion evidence, concentrated at the
+  `UCT.1-UCT.4` wall.
+- YM: the real remaining missing-content burden is the Balaban-centered
+  `H3a` cluster if the repo insists on an internal proof, with `H3b`,
+  no-spectral-pollution, RP/OS, and Wightman/transfer as downstream
+  authority consumers.
+
+The four-row table below survives only as a historical blocker register for
+older programme framing. It should not override the sharper packet posture now
+used by the live papers, roadmap docs, and current proof-profile receipts.
 
 Gravity is not a fifth Clay wall in this table.  Its current source of record
 is `DASHI/Physics/Closure/GravityVladimirovFrameReceipt.agda`, which records

@@ -57,7 +57,7 @@ canonicalPhase2ProgrammeWorkItems =
 
 phase2ProgrammeStatement : String
 phase2ProgrammeStatement =
-  "Phase 2 targets YM k-to-infinity tightness, NS critical Besov/vorticity control, CKM Yukawa normalisation, and Paper 8 gauge-section completion without Clay, exact SM, or terminal promotion."
+  "Phase 2 is now a sharpened fail-closed programme receipt: YM k-to-infinity tightness and its dependent Clay-facing evidence remain the genuine internal-proof frontier, while NS and unification are treated as candidate-complete packages pending promotion evidence/acceptance; CKM Yukawa normalisation and Paper 8 gauge sections remain non-promoting support work."
 
 record Phase2ProgrammeReceipt : Setω where
   field
@@ -96,6 +96,30 @@ record Phase2ProgrammeReceipt : Setω where
 
     phase2ProgrammeRecordedIsTrue :
       phase2ProgrammeRecorded ≡ true
+
+    ymIsRemainingInternalProofFrontier :
+      Bool
+
+    ymIsRemainingInternalProofFrontierIsTrue :
+      ymIsRemainingInternalProofFrontier ≡ true
+
+    nsCandidateCompletePackageRecorded :
+      Bool
+
+    nsCandidateCompletePackageRecordedIsTrue :
+      nsCandidateCompletePackageRecorded ≡ true
+
+    unificationCandidateCompletePackageRecorded :
+      Bool
+
+    unificationCandidateCompletePackageRecordedIsTrue :
+      unificationCandidateCompletePackageRecorded ≡ true
+
+    broadSharedFrontierClaimRejected :
+      Bool
+
+    broadSharedFrontierClaimRejectedIsTrue :
+      broadSharedFrontierClaimRejected ≡ true
 
     lerayWeakSolutionBranchAvailable :
       Bool
@@ -204,6 +228,22 @@ canonicalPhase2ProgrammeReceipt =
         true
     ; phase2ProgrammeRecordedIsTrue =
         refl
+    ; ymIsRemainingInternalProofFrontier =
+        true
+    ; ymIsRemainingInternalProofFrontierIsTrue =
+        refl
+    ; nsCandidateCompletePackageRecorded =
+        true
+    ; nsCandidateCompletePackageRecordedIsTrue =
+        refl
+    ; unificationCandidateCompletePackageRecorded =
+        true
+    ; unificationCandidateCompletePackageRecordedIsTrue =
+        refl
+    ; broadSharedFrontierClaimRejected =
+        true
+    ; broadSharedFrontierClaimRejectedIsTrue =
+        refl
     ; lerayWeakSolutionBranchAvailable =
         true
     ; lerayWeakSolutionBranchAvailableIsTrue =
@@ -258,9 +298,11 @@ canonicalPhase2ProgrammeReceipt =
         refl
     ; receiptBoundary =
         "Phase 2 is a programme receipt, not a completed regularity theorem"
-        ∷ "YM k-to-infinity tightness, CKM Yukawa normalisation, and Paper 8 gauge sections are named targets"
-        ∷ "The Leray weak-solution branch remains true while critical Besov/vorticity control is open"
-        ∷ "Uniform enstrophy, continuum BKM, global smoothness, exact SM, Clay, and terminal promotion remain false"
+        ∷ "YM k-to-infinity tightness and its dependent Clay-facing packet remain the only genuine internal-proof frontier in this receipt"
+        ∷ "NS is treated as a candidate-complete package pending promotion evidence/acceptance rather than a fresh theorem-shape frontier here"
+        ∷ "Unification is treated as a candidate-complete package pending promotion evidence/acceptance rather than a fresh theorem-shape frontier here"
+        ∷ "The Leray weak-solution branch remains true; NS control items stay fail-closed as downstream promotion-evidence obligations"
+        ∷ "CKM Yukawa normalisation, Paper 8 gauge sections, exact SM, Clay, and terminal promotion remain false"
         ∷ []
     }
 
