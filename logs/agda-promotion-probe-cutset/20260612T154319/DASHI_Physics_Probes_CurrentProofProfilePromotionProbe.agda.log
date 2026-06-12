@@ -1,0 +1,14 @@
+== DASHI/Physics/Probes/CurrentProofProfilePromotionProbe.agda ==
+command: timeout 60s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Probes/CurrentProofProfilePromotionProbe.agda
+started: 2026-06-12T15:45:14+10:00
+
+Checking DASHI.Physics.Probes.CurrentProofProfilePromotionProbe (/home/c/Documents/code/dashi_agda/DASHI/Physics/Probes/CurrentProofProfilePromotionProbe.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Probes/CurrentProofProfilePromotionProbe.agda:16,32-36
+Agda.Builtin.Bool.false != true of type Agda.Builtin.Bool.Bool
+when checking that the expression refl has type
+Root.ymCandidateCompleteNow
+Root.canonicalCurrentProofProfileReceipt
+≡ true
+
+exit_code: 42
+finished: 2026-06-12T15:45:31+10:00

@@ -1,0 +1,15 @@
+== DASHI/Physics/Probes/UnificationPromotionProbe.agda ==
+command: timeout 60s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Physics/Probes/UnificationPromotionProbe.agda
+started: 2026-06-12T15:44:55+10:00
+
+Checking DASHI.Physics.Probes.UnificationPromotionProbe (/home/c/Documents/code/dashi_agda/DASHI/Physics/Probes/UnificationPromotionProbe.agda).
+/home/c/Documents/code/dashi_agda/DASHI/Physics/Probes/UnificationPromotionProbe.agda:48,45-49
+Agda.Builtin.Bool.false != true of type Agda.Builtin.Bool.Bool
+when checking that the expression refl has type
+Paper0.laneSpecificAnalyticsProvided
+(Root.paper0DependencyReceipt
+ Root.canonicalPublishableFullUnificationStackReceipt)
+≡ true
+
+exit_code: 42
+finished: 2026-06-12T15:45:14+10:00

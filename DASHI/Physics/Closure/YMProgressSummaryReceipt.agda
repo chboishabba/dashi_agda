@@ -11,69 +11,59 @@ open import Data.List.Base using (List; _∷_; [])
 ------------------------------------------------------------------------
 -- Yang-Mills progress summary receipt.
 --
--- This C2 receipt records programme progress only.  It discharges the
--- previously open spatial-refinement and p-adic flat-limit lanes as
--- inhabited programme surfaces, records the new p-adic Wilson-action and
--- 4D lattice-tree surfaces, and keeps the single remaining blocker as the
--- archimedean H^3 to R^3 flat limit.  It deliberately promotes no Clay
--- Yang-Mills theorem or terminal claim.
+-- This C2 receipt records genuine progress while keeping the theorem
+-- posture fail-closed. The single live burden is the Balaban-centered H3a
+-- external-content YM intake. Reflection-positivity, OS, Wightman, and
+-- transfer surfaces are cited only as downstream consumers of that intake.
 
 data YMProgressSummaryStatus : Set where
-  genuineProgressWithSingleArchimedeanFlatLimitGap :
+  genuineProgressWithSingleBalabanCenteredH3aIntakeBurden :
     YMProgressSummaryStatus
 
 data YMPreviouslyOpenItem : Set where
-  spatialRefinementOpen :
-    YMPreviouslyOpenItem
-
-  universalityClassOpen :
-    YMPreviouslyOpenItem
-
-  flatLimitOpen :
+  externalContentYMIntakeOpen :
     YMPreviouslyOpenItem
 
 canonicalYMPreviouslyOpenItems :
   List YMPreviouslyOpenItem
 canonicalYMPreviouslyOpenItems =
-  spatialRefinementOpen
-  ∷ universalityClassOpen
-  ∷ flatLimitOpen
+  externalContentYMIntakeOpen
   ∷ []
 
 data YMInhabitedProgressItem : Set where
-  spatialRefinementViaShimuraTower :
-    YMInhabitedProgressItem
-
-  pAdicFlatLimitViaBruhatTitsUltrametricBoundary :
-    YMInhabitedProgressItem
-
   pAdicWilsonActionWithSixtyEightPlaquetteTypes :
     YMInhabitedProgressItem
 
-  pAdicWilsonReflectionPositivity :
+  pAdicWilsonReflectionPositivitySurfaceRecorded :
     YMInhabitedProgressItem
 
   pAdicFourDimensionalLatticeTreesTimesDepth :
     YMInhabitedProgressItem
 
+  balabanCenteredH3aClusterNamedAsIntakeSite :
+    YMInhabitedProgressItem
+
+  downstreamConsumerSurfacesEnumerated :
+    YMInhabitedProgressItem
+
 canonicalYMInhabitedProgressItems :
   List YMInhabitedProgressItem
 canonicalYMInhabitedProgressItems =
-  spatialRefinementViaShimuraTower
-  ∷ pAdicFlatLimitViaBruhatTitsUltrametricBoundary
-  ∷ pAdicWilsonActionWithSixtyEightPlaquetteTypes
-  ∷ pAdicWilsonReflectionPositivity
+  pAdicWilsonActionWithSixtyEightPlaquetteTypes
+  ∷ pAdicWilsonReflectionPositivitySurfaceRecorded
   ∷ pAdicFourDimensionalLatticeTreesTimesDepth
+  ∷ balabanCenteredH3aClusterNamedAsIntakeSite
+  ∷ downstreamConsumerSurfacesEnumerated
   ∷ []
 
 data YMRemainingOpenGap : Set where
-  archimedeanH3ToR3FlatLimit :
+  balabanCenteredH3aExternalContentYMIntake :
     YMRemainingOpenGap
 
 canonicalYMRemainingOpenGaps :
   List YMRemainingOpenGap
 canonicalYMRemainingOpenGaps =
-  archimedeanH3ToR3FlatLimit
+  balabanCenteredH3aExternalContentYMIntake
   ∷ []
 
 data YMProgressClayPromotion : Set where
@@ -85,27 +75,27 @@ ymProgressClayPromotionImpossibleHere ()
 
 spatialRefinementProgressStatement : String
 spatialRefinementProgressStatement =
-  "Spatial refinement is now inhabited via the Shimura tower."
+  "Legacy spatial-refinement blocker language is retired; the receipt isolates the live burden to the Balaban-centered H3a intake surface."
 
 pAdicFlatLimitProgressStatement : String
 pAdicFlatLimitProgressStatement =
-  "The p-adic flat limit is now inhabited via the Bruhat-Tits ultrametric boundary."
+  "The non-archimedean intake-side preparation is recorded, but it does not close the external-content Yang-Mills intake."
 
 pAdicWilsonProgressStatement : String
 pAdicWilsonProgressStatement =
-  "The p-adic Wilson action is now inhabited with 68 plaquette types and reflection positivity."
+  "The p-adic Wilson action remains recorded with 68 plaquette types and a reflection-positivity surface."
 
 pAdicFourDimensionalLatticeTreeStatementLabel : String
 pAdicFourDimensionalLatticeTreeStatementLabel =
-  "The p-adic four-dimensional carrier is recorded as lattice trees times depth."
+  "The p-adic four-dimensional carrier remains recorded as lattice trees times depth."
 
 remainingArchimedeanGapStatement : String
 remainingArchimedeanGapStatement =
-  "The remaining single gap is the archimedean H^3 to R^3 flat limit."
+  "The single live burden is the Balaban-centered H3a external-content Yang-Mills intake."
 
 ymProgressSummaryStatement : String
 ymProgressSummaryStatement =
-  "Yang-Mills programme state: genuine progress has been made; spatial refinement, p-adic flat limit, p-adic Wilson action with 68 plaquette types and reflection positivity, and p-adic 4D lattice trees times depth are inhabited; the only remaining open gap is the archimedean H^3 to R^3 flat limit; no Clay Yang-Mills promotion is made."
+  "Yang-Mills programme state: genuine progress is recorded, but the sharp remaining live burden is the Balaban-centered H3a external-content Yang-Mills intake; reflection positivity, Osterwalder-Schrader, Wightman, and transfer are downstream consumers of that intake; no Clay Yang-Mills promotion or terminal claim is made."
 
 record YMProgressSummaryReceipt : Setω where
   field
@@ -175,14 +165,38 @@ record YMProgressSummaryReceipt : Setω where
     remainingOpenGap :
       YMRemainingOpenGap
 
-    remainingOpenGapIsArchimedeanH3ToR3FlatLimit :
-      remainingOpenGap ≡ archimedeanH3ToR3FlatLimit
+    remainingOpenGapIsBalabanCenteredH3aExternalContentYMIntake :
+      remainingOpenGap ≡ balabanCenteredH3aExternalContentYMIntake
 
     remainingOpenGapCount :
       Nat
 
     remainingOpenGapCountIsOne :
       remainingOpenGapCount ≡ 1
+
+    reflectionPositivityConsumesExternalIntake :
+      Bool
+
+    reflectionPositivityConsumesExternalIntakeIsTrue :
+      reflectionPositivityConsumesExternalIntake ≡ true
+
+    osterwalderSchraderConsumesExternalIntake :
+      Bool
+
+    osterwalderSchraderConsumesExternalIntakeIsTrue :
+      osterwalderSchraderConsumesExternalIntake ≡ true
+
+    wightmanConsumesExternalIntake :
+      Bool
+
+    wightmanConsumesExternalIntakeIsTrue :
+      wightmanConsumesExternalIntake ≡ true
+
+    transferConsumesExternalIntake :
+      Bool
+
+    transferConsumesExternalIntakeIsTrue :
+      transferConsumesExternalIntake ≡ true
 
     programmeMadeGenuineProgress :
       Bool
@@ -256,7 +270,7 @@ canonicalYMProgressSummaryReceipt :
 canonicalYMProgressSummaryReceipt =
   record
     { status =
-        genuineProgressWithSingleArchimedeanFlatLimitGap
+        genuineProgressWithSingleBalabanCenteredH3aIntakeBurden
     ; previouslyOpenItems =
         canonicalYMPreviouslyOpenItems
     ; previouslyOpenItemsAreCanonical =
@@ -298,12 +312,28 @@ canonicalYMProgressSummaryReceipt =
     ; remainingOpenGapsAreCanonical =
         refl
     ; remainingOpenGap =
-        archimedeanH3ToR3FlatLimit
-    ; remainingOpenGapIsArchimedeanH3ToR3FlatLimit =
+        balabanCenteredH3aExternalContentYMIntake
+    ; remainingOpenGapIsBalabanCenteredH3aExternalContentYMIntake =
         refl
     ; remainingOpenGapCount =
         1
     ; remainingOpenGapCountIsOne =
+        refl
+    ; reflectionPositivityConsumesExternalIntake =
+        true
+    ; reflectionPositivityConsumesExternalIntakeIsTrue =
+        refl
+    ; osterwalderSchraderConsumesExternalIntake =
+        true
+    ; osterwalderSchraderConsumesExternalIntakeIsTrue =
+        refl
+    ; wightmanConsumesExternalIntake =
+        true
+    ; wightmanConsumesExternalIntakeIsTrue =
+        refl
+    ; transferConsumesExternalIntake =
+        true
+    ; transferConsumesExternalIntakeIsTrue =
         refl
     ; programmeMadeGenuineProgress =
         true
@@ -351,6 +381,7 @@ canonicalYMProgressSummaryReceipt =
         ∷ pAdicWilsonProgressStatement
         ∷ pAdicFourDimensionalLatticeTreeStatementLabel
         ∷ remainingArchimedeanGapStatement
+        ∷ "Reflection positivity, Osterwalder-Schrader, Wightman, and transfer are downstream consumers of the open intake."
         ∷ ymProgressSummaryStatement
         ∷ []
     }
@@ -365,7 +396,7 @@ ymProgressSummaryRecordsGenuineProgress =
 ymProgressSummaryRecordsSingleRemainingGap :
   remainingOpenGap canonicalYMProgressSummaryReceipt
   ≡
-  archimedeanH3ToR3FlatLimit
+  balabanCenteredH3aExternalContentYMIntake
 ymProgressSummaryRecordsSingleRemainingGap =
   refl
 

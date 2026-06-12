@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.NSStandardPDEWriteupAssemblyBoundary where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.String using (String)
 
 data List (A : Set) : Set where
   [] : List A
@@ -15,57 +16,70 @@ listLength [] = zero
 listLength (_ ∷ xs) = suc (listLength xs)
 
 data NSStandardPDEWriteupAssemblyClause : Set where
-  suitableWeakSolutionLanguageAssemblyRecorded :
+  candidateCompleteSuitableWeakSolutionGrammarRecordedInReviewerFacingLanguage :
     NSStandardPDEWriteupAssemblyClause
 
-  pressureReconstructionAssemblyRecorded :
+  candidateCompleteLocalPressureGrammarRecordedForPacket :
     NSStandardPDEWriteupAssemblyClause
 
-  localEnstrophyCriterionAssemblyRecorded :
+  candidateCompleteLocalEnergyAndEnstrophyGrammarRecorded :
     NSStandardPDEWriteupAssemblyClause
 
-  constantCompatibilityWriteupAssemblyRecorded :
+  classicalPDEWriteupExplicitlyConsumesCandidateCompleteA1A3AndA4Grammar :
     NSStandardPDEWriteupAssemblyClause
 
-  externalReviewBlockersRecorded :
+  classicalPDEWriteupExplicitlyHandsOffToCandidateCompleteA5A9Grammar :
     NSStandardPDEWriteupAssemblyClause
 
-  promotionStaysFalseUntilAuthorityCloses :
+  classicalCKNESSLRTIntakeRecordedAsCandidateCompleteReviewerSocket :
+    NSStandardPDEWriteupAssemblyClause
+
+  remainingBurdenIsPromotionEvidenceAndAcceptanceNotMissingGrammar :
     NSStandardPDEWriteupAssemblyClause
 
 canonicalNSStandardPDEWriteupAssemblyClauses :
   List NSStandardPDEWriteupAssemblyClause
 canonicalNSStandardPDEWriteupAssemblyClauses =
-  suitableWeakSolutionLanguageAssemblyRecorded
-  ∷ pressureReconstructionAssemblyRecorded
-  ∷ localEnstrophyCriterionAssemblyRecorded
-  ∷ constantCompatibilityWriteupAssemblyRecorded
-  ∷ externalReviewBlockersRecorded
-  ∷ promotionStaysFalseUntilAuthorityCloses
+  candidateCompleteSuitableWeakSolutionGrammarRecordedInReviewerFacingLanguage
+  ∷ candidateCompleteLocalPressureGrammarRecordedForPacket
+  ∷ candidateCompleteLocalEnergyAndEnstrophyGrammarRecorded
+  ∷ classicalPDEWriteupExplicitlyConsumesCandidateCompleteA1A3AndA4Grammar
+  ∷ classicalPDEWriteupExplicitlyHandsOffToCandidateCompleteA5A9Grammar
+  ∷ classicalCKNESSLRTIntakeRecordedAsCandidateCompleteReviewerSocket
+  ∷ remainingBurdenIsPromotionEvidenceAndAcceptanceNotMissingGrammar
   ∷ []
 
 nsStandardPDEWriteupAssemblyClauseCount : Nat
 nsStandardPDEWriteupAssemblyClauseCount =
   listLength canonicalNSStandardPDEWriteupAssemblyClauses
 
-nsStandardPDEWriteupAssemblyClauseCountIs6 :
-  nsStandardPDEWriteupAssemblyClauseCount ≡ 6
-nsStandardPDEWriteupAssemblyClauseCountIs6 = refl
+nsStandardPDEWriteupAssemblyClauseCountIs7 :
+  nsStandardPDEWriteupAssemblyClauseCount ≡ 7
+nsStandardPDEWriteupAssemblyClauseCountIs7 = refl
 
 data NSStandardPDEWriteupAssemblyBlocker : Set where
-  suitableWeakSolutionPaperAssemblyStillOpen :
+  candidateSuitableWeakSolutionPackageNeedsPromotionEvidenceInConsumedNorms :
     NSStandardPDEWriteupAssemblyBlocker
 
-  pressureReconstructionWriteupStillOpen :
+  candidateLocalPressurePackageNeedsPromotionEvidenceInConsumedNormalization :
     NSStandardPDEWriteupAssemblyBlocker
 
-  localEnstrophyCriterionWriteupStillOpen :
+  candidateLocalEnergyAndEnstrophyPackageNeedsPromotionEvidenceForAcceptance :
     NSStandardPDEWriteupAssemblyBlocker
 
-  constantCompatibilityNarrativeStillOpen :
+  candidateA1A3PackageNeedsAcceptedRouteNormsAndConstants :
     NSStandardPDEWriteupAssemblyBlocker
 
-  externalReviewAndAcceptanceStillOpen :
+  candidateA4PackageNeedsAcceptedConstantsAndGeometryCompatibility :
+    NSStandardPDEWriteupAssemblyBlocker
+
+  candidateA5A9PackageNeedsAcceptedConsumerNormsAndConstants :
+    NSStandardPDEWriteupAssemblyBlocker
+
+  classicalCKNESSLRTIntakeNeedsReviewerAcceptanceAsConsumedAuthority :
+    NSStandardPDEWriteupAssemblyBlocker
+
+  candidateSelfContainedPacketAcceptanceStillOpen :
     NSStandardPDEWriteupAssemblyBlocker
 
   clayPromotionForbiddenUntilPaperAuthorityCloses :
@@ -74,11 +88,14 @@ data NSStandardPDEWriteupAssemblyBlocker : Set where
 canonicalNSStandardPDEWriteupAssemblyBlockers :
   List NSStandardPDEWriteupAssemblyBlocker
 canonicalNSStandardPDEWriteupAssemblyBlockers =
-  suitableWeakSolutionPaperAssemblyStillOpen
-  ∷ pressureReconstructionWriteupStillOpen
-  ∷ localEnstrophyCriterionWriteupStillOpen
-  ∷ constantCompatibilityNarrativeStillOpen
-  ∷ externalReviewAndAcceptanceStillOpen
+  candidateSuitableWeakSolutionPackageNeedsPromotionEvidenceInConsumedNorms
+  ∷ candidateLocalPressurePackageNeedsPromotionEvidenceInConsumedNormalization
+  ∷ candidateLocalEnergyAndEnstrophyPackageNeedsPromotionEvidenceForAcceptance
+  ∷ candidateA1A3PackageNeedsAcceptedRouteNormsAndConstants
+  ∷ candidateA4PackageNeedsAcceptedConstantsAndGeometryCompatibility
+  ∷ candidateA5A9PackageNeedsAcceptedConsumerNormsAndConstants
+  ∷ classicalCKNESSLRTIntakeNeedsReviewerAcceptanceAsConsumedAuthority
+  ∷ candidateSelfContainedPacketAcceptanceStillOpen
   ∷ clayPromotionForbiddenUntilPaperAuthorityCloses
   ∷ []
 
@@ -86,9 +103,13 @@ nsStandardPDEWriteupAssemblyBlockerCount : Nat
 nsStandardPDEWriteupAssemblyBlockerCount =
   listLength canonicalNSStandardPDEWriteupAssemblyBlockers
 
-nsStandardPDEWriteupAssemblyBlockerCountIs6 :
-  nsStandardPDEWriteupAssemblyBlockerCount ≡ 6
-nsStandardPDEWriteupAssemblyBlockerCountIs6 = refl
+nsStandardPDEWriteupAssemblyBlockerCountIs9 :
+  nsStandardPDEWriteupAssemblyBlockerCount ≡ 9
+nsStandardPDEWriteupAssemblyBlockerCountIs9 = refl
+
+nsStandardPDEWriteupAssemblySummary : String
+nsStandardPDEWriteupAssemblySummary =
+  "Classical NS packet grammar: the reviewer-facing PDE writeup now presents a candidate-complete self-contained package consisting of suitable-weak-solution, local-pressure, and local-energy/enstrophy grammar, explicitly consuming theorem-shape grammar for A1-A9 together with classical CKN/ESS/LRT intake; the remaining burden is promotion evidence and reviewer acceptance in the exact consumed norms and constants, so completion and Clay promotion stay fail-closed."
 
 NSStandardPDEWriteupAssemblyRecorded : Bool
 NSStandardPDEWriteupAssemblyRecorded = true
@@ -110,10 +131,10 @@ record NSStandardPDEWriteupAssemblyBoundary : Set where
     blockers : List NSStandardPDEWriteupAssemblyBlocker
     blockersCanonical :
       blockers ≡ canonicalNSStandardPDEWriteupAssemblyBlockers
-    clauseCountIs6 :
-      nsStandardPDEWriteupAssemblyClauseCount ≡ 6
-    blockerCountIs6 :
-      nsStandardPDEWriteupAssemblyBlockerCount ≡ 6
+    clauseCountIs7 :
+      nsStandardPDEWriteupAssemblyClauseCount ≡ 7
+    blockerCountIs9 :
+      nsStandardPDEWriteupAssemblyBlockerCount ≡ 9
     assemblyRecordedField :
       NSStandardPDEWriteupAssemblyRecorded ≡ true
     existingMathReuseField :
@@ -131,8 +152,8 @@ canonicalNSStandardPDEWriteupAssemblyBoundary =
     ; clausesCanonical = refl
     ; blockers = canonicalNSStandardPDEWriteupAssemblyBlockers
     ; blockersCanonical = refl
-    ; clauseCountIs6 = refl
-    ; blockerCountIs6 = refl
+    ; clauseCountIs7 = refl
+    ; blockerCountIs9 = refl
     ; assemblyRecordedField = refl
     ; existingMathReuseField = refl
     ; completionStillFalse = refl

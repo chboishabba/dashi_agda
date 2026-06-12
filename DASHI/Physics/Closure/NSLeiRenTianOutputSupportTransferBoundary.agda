@@ -18,14 +18,17 @@ import DASHI.Physics.Closure.NSTriadicAngularDefectSheafLeakageBoundary as Sheaf
 --
 --   physical-space vorticity direction great-circle richness
 --     -> Fourier triadic output direction great-circle richness
+--     -> uniform output-support transfer constant across Type-I rescalings
 --
 -- for Abel triadic measures.
 --
 -- Required assumptions are recorded explicitly: Whitney/frame/localization
--- compatibility and no angular collapse.  This module does not prove the
--- physical-to-Fourier angular coupling, does not lift output-direction
--- support, does not construct the PDE Abel measure support theorem, and does
--- not promote Clay Navier-Stokes.
+-- compatibility, quantitative Jacobian/coarea control on
+-- Phi(theta1,theta2), and no angular collapse.  This module is the A4 parent
+-- transfer socket.  It does not prove the physical-to-Fourier angular
+-- coupling, does not prove the uniform Type-I-rescaling transfer constant,
+-- does not lift output-direction support, does not construct the PDE Abel
+-- measure support theorem, and does not promote Clay Navier-Stokes.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -77,6 +80,30 @@ data PhysicalToFourierAngularCouplingTarget : Set where
     FourierTriadicOutputDirectionRichness →
     PhysicalToFourierAngularCouplingTarget
 
+data DirectionMapRegularitySocket : Set where
+  directionMapRegularityA4-1RequestedFromWhitneyLocalizedTriads :
+    WhitneyFrameLocalizationAssumption →
+    NoAngularCollapseAssumption →
+    DirectionMapRegularitySocket
+
+data CoareaJacobianLowerBoundAttemptSocket : Set where
+  jacobianNondegeneracyA4-2AndCoareaA4-3RequestedForOutputDirectionMap :
+    DirectionMapRegularitySocket →
+    FourierTriadicOutputDirectionRichness →
+    CoareaJacobianLowerBoundAttemptSocket
+
+data PushforwardStripHittingConsequenceSocket : Set where
+  stripHittingPushforwardRichnessA4-4ShouldHitEveryOutputGreatCircle :
+    CoareaJacobianLowerBoundAttemptSocket →
+    AbelTriadicOutputMeasureSupport →
+    PushforwardStripHittingConsequenceSocket
+
+data UniformInRescalingConstantObligationSocket : Set where
+  uniformityA4-5AcrossTypeIRescalingFamilyRemainsExplicitObligation :
+    PushforwardStripHittingConsequenceSocket →
+    PhysicalToFourierAngularCouplingTarget →
+    UniformInRescalingConstantObligationSocket
+
 canonicalPhysicalVorticityDirectionRichness :
   PhysicalVorticityDirectionRichness
 canonicalPhysicalVorticityDirectionRichness =
@@ -124,6 +151,34 @@ canonicalPhysicalToFourierAngularCouplingTarget =
     canonicalNoAngularCollapseAssumption
     canonicalFourierTriadicOutputDirectionRichness
 
+canonicalDirectionMapRegularitySocket :
+  DirectionMapRegularitySocket
+canonicalDirectionMapRegularitySocket =
+  directionMapRegularityA4-1RequestedFromWhitneyLocalizedTriads
+    canonicalWhitneyFrameLocalizationAssumption
+    canonicalNoAngularCollapseAssumption
+
+canonicalCoareaJacobianLowerBoundAttemptSocket :
+  CoareaJacobianLowerBoundAttemptSocket
+canonicalCoareaJacobianLowerBoundAttemptSocket =
+  jacobianNondegeneracyA4-2AndCoareaA4-3RequestedForOutputDirectionMap
+    canonicalDirectionMapRegularitySocket
+    canonicalFourierTriadicOutputDirectionRichness
+
+canonicalPushforwardStripHittingConsequenceSocket :
+  PushforwardStripHittingConsequenceSocket
+canonicalPushforwardStripHittingConsequenceSocket =
+  stripHittingPushforwardRichnessA4-4ShouldHitEveryOutputGreatCircle
+    canonicalCoareaJacobianLowerBoundAttemptSocket
+    canonicalAbelTriadicOutputMeasureSupport
+
+canonicalUniformInRescalingConstantObligationSocket :
+  UniformInRescalingConstantObligationSocket
+canonicalUniformInRescalingConstantObligationSocket =
+  uniformityA4-5AcrossTypeIRescalingFamilyRemainsExplicitObligation
+    canonicalPushforwardStripHittingConsequenceSocket
+    canonicalPhysicalToFourierAngularCouplingTarget
+
 ------------------------------------------------------------------------
 -- A4 dependency rows and blockers.
 
@@ -136,7 +191,15 @@ data OutputSupportTransferDependency : Set where
     OutputSupportTransferDependency
   whitneyFrameLocalizationDependency :
     OutputSupportTransferDependency
+  A4-1DirectionMapRegularityDependency :
+    OutputSupportTransferDependency
+  A4-2A4-3QuantitativePhiJacobianCoareaDependency :
+    OutputSupportTransferDependency
+  A4-4PushforwardStripHittingRichnessDependency :
+    OutputSupportTransferDependency
   noAngularCollapseDependency :
+    OutputSupportTransferDependency
+  A4-5UniformityAcrossTypeIRescalingFamilyDependency :
     OutputSupportTransferDependency
   stationarityA4BoundaryDependency :
     OutputSupportTransferDependency
@@ -148,7 +211,11 @@ canonicalOutputSupportTransferDependencies =
   ∷ abelTriadicMeasureDependency
   ∷ triadicOutputProjectionDependency
   ∷ whitneyFrameLocalizationDependency
+  ∷ A4-1DirectionMapRegularityDependency
+  ∷ A4-2A4-3QuantitativePhiJacobianCoareaDependency
+  ∷ A4-4PushforwardStripHittingRichnessDependency
   ∷ noAngularCollapseDependency
+  ∷ A4-5UniformityAcrossTypeIRescalingFamilyDependency
   ∷ stationarityA4BoundaryDependency
   ∷ []
 
@@ -156,13 +223,55 @@ outputSupportTransferDependencyCount : Nat
 outputSupportTransferDependencyCount =
   listLength canonicalOutputSupportTransferDependencies
 
-outputSupportTransferDependencyCountIs6 :
-  outputSupportTransferDependencyCount ≡ 6
-outputSupportTransferDependencyCountIs6 =
+outputSupportTransferDependencyCountIs10 :
+  outputSupportTransferDependencyCount ≡ 10
+outputSupportTransferDependencyCountIs10 =
+  refl
+
+data OutputSupportTransferClause : Set where
+  clausePhysicalGreatCircleHittingIsTheSeedInput :
+    OutputSupportTransferClause
+  clauseNoAngularCollapseMustSurviveThePhysicalToFourierMap :
+    OutputSupportTransferClause
+  clauseDirectionMapRegularityJacobianAndCoareaFormTheMiddleLadder :
+    OutputSupportTransferClause
+  clausePushforwardStripHittingCreatesFourierGreatCircleRichness :
+    OutputSupportTransferClause
+  clauseUniformOutputSupportConstantMustPersistAcrossTypeIRescaling :
+    OutputSupportTransferClause
+  clauseFailClosedPromotionPosture :
+    OutputSupportTransferClause
+
+canonicalOutputSupportTransferClauses :
+  List OutputSupportTransferClause
+canonicalOutputSupportTransferClauses =
+  clausePhysicalGreatCircleHittingIsTheSeedInput
+  ∷ clauseNoAngularCollapseMustSurviveThePhysicalToFourierMap
+  ∷ clauseDirectionMapRegularityJacobianAndCoareaFormTheMiddleLadder
+  ∷ clausePushforwardStripHittingCreatesFourierGreatCircleRichness
+  ∷ clauseUniformOutputSupportConstantMustPersistAcrossTypeIRescaling
+  ∷ clauseFailClosedPromotionPosture
+  ∷ []
+
+outputSupportTransferClauseCount : Nat
+outputSupportTransferClauseCount =
+  listLength canonicalOutputSupportTransferClauses
+
+outputSupportTransferClauseCountIs6 :
+  outputSupportTransferClauseCount ≡ 6
+outputSupportTransferClauseCountIs6 =
   refl
 
 data OutputSupportTransferBlocker : Set where
-  missingPhysicalToFourierAngularCoupling :
+  missingPhysicalToFourierGreatCircleTransferTheorem :
+    OutputSupportTransferBlocker
+  missingA4-1DirectionMapRegularityInput :
+    OutputSupportTransferBlocker
+  missingA4-2A4-3QuantitativePhiJacobianCoareaInput :
+    OutputSupportTransferBlocker
+  missingA4-4PushforwardDensityToStripHittingRichnessStep :
+    OutputSupportTransferBlocker
+  missingA4-5UniformityAcrossTypeIRescalingFamilyConstant :
     OutputSupportTransferBlocker
   missingOutputDirectionSupportLift :
     OutputSupportTransferBlocker
@@ -174,7 +283,11 @@ data OutputSupportTransferBlocker : Set where
 canonicalOutputSupportTransferBlockers :
   List OutputSupportTransferBlocker
 canonicalOutputSupportTransferBlockers =
-  missingPhysicalToFourierAngularCoupling
+  missingPhysicalToFourierGreatCircleTransferTheorem
+  ∷ missingA4-1DirectionMapRegularityInput
+  ∷ missingA4-2A4-3QuantitativePhiJacobianCoareaInput
+  ∷ missingA4-4PushforwardDensityToStripHittingRichnessStep
+  ∷ missingA4-5UniformityAcrossTypeIRescalingFamilyConstant
   ∷ missingOutputDirectionSupportLift
   ∷ missingPDEAbelMeasureSupportTheorem
   ∷ missingClayPromotion
@@ -184,9 +297,9 @@ outputSupportTransferBlockerCount : Nat
 outputSupportTransferBlockerCount =
   listLength canonicalOutputSupportTransferBlockers
 
-outputSupportTransferBlockerCountIs4 :
-  outputSupportTransferBlockerCount ≡ 4
-outputSupportTransferBlockerCountIs4 =
+outputSupportTransferBlockerCountIs8 :
+  outputSupportTransferBlockerCount ≡ 8
+outputSupportTransferBlockerCountIs8 =
   refl
 
 data OutputSupportTransferStatusRow : Set where
@@ -198,7 +311,15 @@ data OutputSupportTransferStatusRow : Set where
     OutputSupportTransferStatusRow
   whitneyFrameLocalizationAssumptionRecordedStatus :
     OutputSupportTransferStatusRow
+  A4-1DirectionMapRegularitySocketRecordedStatus :
+    OutputSupportTransferStatusRow
+  A4-2A4-3QuantitativeJacobianCoareaTransferSocketRecordedStatus :
+    OutputSupportTransferStatusRow
+  A4-4PushforwardStripHittingSocketRecordedStatus :
+    OutputSupportTransferStatusRow
   noAngularCollapseAssumptionRecordedStatus :
+    OutputSupportTransferStatusRow
+  A4-5UniformityAcrossTypeIRescalingFamilyStillFalseStatus :
     OutputSupportTransferStatusRow
   allProofAndPromotionFlagsFalseStatus :
     OutputSupportTransferStatusRow
@@ -210,7 +331,11 @@ canonicalOutputSupportTransferStatusRows =
   ∷ physicalGreatCircleRichnessTargetRecordedStatus
   ∷ fourierOutputGreatCircleRichnessTargetRecordedStatus
   ∷ whitneyFrameLocalizationAssumptionRecordedStatus
+  ∷ A4-1DirectionMapRegularitySocketRecordedStatus
+  ∷ A4-2A4-3QuantitativeJacobianCoareaTransferSocketRecordedStatus
+  ∷ A4-4PushforwardStripHittingSocketRecordedStatus
   ∷ noAngularCollapseAssumptionRecordedStatus
+  ∷ A4-5UniformityAcrossTypeIRescalingFamilyStillFalseStatus
   ∷ allProofAndPromotionFlagsFalseStatus
   ∷ []
 
@@ -218,9 +343,9 @@ outputSupportTransferStatusRowCount : Nat
 outputSupportTransferStatusRowCount =
   listLength canonicalOutputSupportTransferStatusRows
 
-outputSupportTransferStatusRowCountIs6 :
-  outputSupportTransferStatusRowCount ≡ 6
-outputSupportTransferStatusRowCountIs6 =
+outputSupportTransferStatusRowCountIs10 :
+  outputSupportTransferStatusRowCount ≡ 10
+outputSupportTransferStatusRowCountIs10 =
   refl
 
 ------------------------------------------------------------------------
@@ -379,37 +504,41 @@ keepsTerminalPromotionFalse =
 ------------------------------------------------------------------------
 -- O/R/C/S/L/P/G/F.
 
+outputSupportTransferTheoremLadderSummary : String
+outputSupportTransferTheoremLadderSummary =
+  "The output-support ladder is: physical great-circle hitting enters A4, no-angular-collapse preserves directional richness, A4.1-A4.3 supply regularity/Jacobian/coarea, A4.4 yields Fourier strip-hitting richness, A4.5 asks for a uniform Type-I output-support constant, and promotion remains fail-closed until the full chain is proved."
+
 organizationString : String
 organizationString =
-  "O: A4 records the boundary from physical vorticity-direction great-circle richness to Fourier triadic output-direction great-circle richness for Abel triadic measures."
+  "O: Own the self-contained A4 parent transfer lane only, packaging the LRT physical-to-Fourier route as an explicit in-repo theorem ladder with a named no-angular-collapse middle step."
 
 requirementString : String
 requirementString =
-  "R: Require Whitney/frame/localization compatibility and no angular collapse; keep every proof and Clay promotion flag false."
+  "R: Record the exact A4 theorem ladder: physical great-circle richness enters the route, no-angular-collapse preserves direction richness, A4.1 direction-map regularity plus A4.2 Jacobian nondegeneracy and A4.3 coarea provide the middle transfer, A4.4 yields Fourier strip-hitting richness, and A4.5 requests a uniform output-support constant across the Type-I rescaling family, while every proof and promotion flag stays false."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: NSLeiRenTianOutputSupportTransferBoundary anchors LRT, Abel triadic stationarity A4, and triadic sheaf output projection carriers."
+  "C: NSLeiRenTianOutputSupportTransferBoundary anchors LRT richness, Abel triadic stationarity A4, triadic output projection, an explicit six-clause transfer ladder, and the A4.1-A4.5 child sockets consumed by the fail-closed uniform-transfer lane."
 
 stateString : String
 stateString =
-  "S: Boundary is recorded only; no physical-to-Fourier angular theorem, output support lift, PDE Abel support theorem, or Clay promotion is present."
+  "S: Boundary is recorded only; the physical-to-Fourier great-circle transfer theorem, the no-angular-collapse proof, the A4.1 regularity input, the A4.2/A4.3 Jacobian-coarea input, the A4.4 strip-hitting richness step, the A4.5 uniform Type-I-rescaling-family constant, the output-support lift, the PDE Abel support theorem, and Clay promotion are all still absent."
 
 latticeString : String
 latticeString =
-  "L: LRT physical great-circle criterion -> Abel triadic measure support -> pi_out Fourier output richness -> future A4 stationarity consumer."
+  "L: LRT physical great-circle criterion -> no-angular-collapse physical/Fourier compatibility -> Abel triadic measure support -> A4.1 direction-map regularity -> A4.2 Jacobian lower-bound / nondegeneracy -> A4.3 coarea propagation -> A4.4 strip-hitting / pushforward richness -> A4.5 uniformity across the Type-I rescaling family -> future A4 stationarity consumer."
 
 proposalString : String
 proposalString =
-  "P: Promote A4 only after proving angular coupling, support lift, PDE Abel support, and the no-collapse hypothesis in the same analytic framework."
+  "P: Promote A4 only after proving the physical-to-Fourier great-circle transfer theorem together with no-angular-collapse and the A4.1-A4.5 child estimates that yield a uniform output-support constant across the Type-I rescaling family, then closing the support-lift and PDE Abel support consumers in the same analytic framework."
 
 governanceString : String
 governanceString =
-  "G: This is a fail-closed receipt: recorded bookkeeping is true, while theorem, support, Clay, and terminal promotions remain false."
+  "G: This is a fail-closed theorem socket: recorded bookkeeping is true, while the transfer theorem, no-angular-collapse proof, quantitative constant, support lift, A4, Clay, and terminal promotions remain false."
 
 gapString : String
 gapString =
-  "F: Blockers are missing physical-to-Fourier angular coupling, output-direction support lift, PDE Abel measure support theorem, and Clay promotion."
+  "F: Blockers are the missing physical-to-Fourier great-circle transfer theorem, missing no-angular-collapse proof, missing A4.1 direction-map regularity input, missing A4.2/A4.3 quantitative Phi-Jacobian/coarea input, missing A4.4 strip-hitting / pushforward richness step, missing A4.5 uniformity-across-the-Type-I-rescaling-family constant, missing output-direction support lift, missing PDE Abel measure support theorem, and missing Clay promotion."
 
 ------------------------------------------------------------------------
 -- Canonical receipt.
@@ -437,6 +566,25 @@ record NSLeiRenTianOutputSupportTransferBoundary : Set where
       NoAngularCollapseAssumption
     noAngularCollapseIsCanonical :
       noAngularCollapse ≡ canonicalNoAngularCollapseAssumption
+    directionMapRegularitySocket :
+      DirectionMapRegularitySocket
+    directionMapRegularitySocketIsCanonical :
+      directionMapRegularitySocket ≡ canonicalDirectionMapRegularitySocket
+    coareaJacobianLowerBoundAttemptSocket :
+      CoareaJacobianLowerBoundAttemptSocket
+    coareaJacobianLowerBoundAttemptSocketIsCanonical :
+      coareaJacobianLowerBoundAttemptSocket
+        ≡ canonicalCoareaJacobianLowerBoundAttemptSocket
+    pushforwardStripHittingConsequenceSocket :
+      PushforwardStripHittingConsequenceSocket
+    pushforwardStripHittingConsequenceSocketIsCanonical :
+      pushforwardStripHittingConsequenceSocket
+        ≡ canonicalPushforwardStripHittingConsequenceSocket
+    uniformInRescalingConstantObligationSocket :
+      UniformInRescalingConstantObligationSocket
+    uniformInRescalingConstantObligationSocketIsCanonical :
+      uniformInRescalingConstantObligationSocket
+        ≡ canonicalUniformInRescalingConstantObligationSocket
     transferTarget :
       PhysicalToFourierAngularCouplingTarget
     transferTargetIsCanonical :
@@ -445,6 +593,20 @@ record NSLeiRenTianOutputSupportTransferBoundary : Set where
       List OutputSupportTransferDependency
     dependenciesAreCanonical :
       dependencies ≡ canonicalOutputSupportTransferDependencies
+    theoremClauses :
+      List OutputSupportTransferClause
+    theoremClausesAreCanonical :
+      theoremClauses ≡ canonicalOutputSupportTransferClauses
+    theoremClauseCount :
+      Nat
+    theoremClauseCountIsCanonical :
+      theoremClauseCount ≡ outputSupportTransferClauseCount
+    theoremClauseCountProof :
+      theoremClauseCount ≡ 6
+    theoremLadderSummary :
+      String
+    theoremLadderSummaryIsCanonical :
+      theoremLadderSummary ≡ outputSupportTransferTheoremLadderSummary
     blockers :
       List OutputSupportTransferBlocker
     blockersAreCanonical :
@@ -512,9 +674,24 @@ canonicalNSLeiRenTianOutputSupportTransferBoundary =
     refl
     canonicalNoAngularCollapseAssumption
     refl
+    canonicalDirectionMapRegularitySocket
+    refl
+    canonicalCoareaJacobianLowerBoundAttemptSocket
+    refl
+    canonicalPushforwardStripHittingConsequenceSocket
+    refl
+    canonicalUniformInRescalingConstantObligationSocket
+    refl
     canonicalPhysicalToFourierAngularCouplingTarget
     refl
     canonicalOutputSupportTransferDependencies
+    refl
+    canonicalOutputSupportTransferClauses
+    refl
+    outputSupportTransferClauseCount
+    refl
+    outputSupportTransferClauseCountIs6
+    outputSupportTransferTheoremLadderSummary
     refl
     canonicalOutputSupportTransferBlockers
     refl

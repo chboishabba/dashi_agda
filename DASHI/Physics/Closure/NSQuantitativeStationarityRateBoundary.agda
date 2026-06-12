@@ -11,43 +11,38 @@ import DASHI.Physics.Closure.NSTransferOperatorBiasNeutralityBoundary
   as Transfer
 
 ------------------------------------------------------------------------
--- NS A3.3 quantitative stationarity-rate boundary.
+-- NS A3 quantitative stationarity-rate boundary.
 --
--- This surface records the intended quantitative route only:
+-- This surface records the explicit A3.1-A3.4 fail-closed route only:
 --
---   W_r = U_r - U_infty,
---   derive an energy ODE for W_r,
---   import Seregin/ESS compactness-rate authority,
---   use those inputs to target delta_r -> 0,
---   and only then feed the conditional transfer consequence
+--   A3.1: define W_r = U_r - U_infty and record the candidate energy ODE,
+--   A3.2: import Seregin/ESS quantitative intake with epsilon = 1/6
+--         recorded only as a candidate authority rate,
+--   A3.3: record delta_r = O(r^(1/12)) only as a downstream candidate
+--         consequence of the coupled ODE plus imported rate,
+--   A3.4: leave the multiscale Abel-summation closure / fixed-point step
+--         explicit and open before any A5/A6 consumption,
+--   and only then may the conditional transfer consequence be read:
 --
 --     |Bias(mu_r)| <= delta_r * sqrt(11/60).
 --
--- The rate theorem and delta_r convergence are not proved here.  The
--- sqrt(11/60) bias bound is recorded as a conditional downstream
--- consequence only, inherited from the transfer-operator bias-neutrality
--- receipt.  No Clay Navier-Stokes or terminal promotion is introduced.
+-- The A3 theorem clauses, imported rate labels, and conditional downstream
+-- consequences are recorded exactly, but the coupling theorem, the local
+-- derivation of epsilon = 1/6, the delta_r rate theorem, and the Abel
+-- closure/fixed-point argument are not proved here. No Clay Navier-Stokes
+-- or terminal promotion is introduced.
 
 data List (A : Set) : Set where
-  [] :
-    List A
-  _∷_ :
-    A →
-    List A →
-    List A
+  [] : List A
+  _∷_ : A → List A → List A
 
 infixr 5 _∷_
 
 listLength : {A : Set} → List A → Nat
-listLength [] =
-  zero
-listLength (_ ∷ xs) =
-  suc (listLength xs)
+listLength [] = zero
+listLength (_ ∷ xs) = suc (listLength xs)
 
 data ⊥ : Set where
-
-------------------------------------------------------------------------
--- Imported anchors.
 
 abelStationarityBoundaryReference : String
 abelStationarityBoundaryReference =
@@ -59,23 +54,43 @@ transferBiasNeutralityBoundaryReference =
 
 sereginESSCompactnessRateAuthorityReference : String
 sereginESSCompactnessRateAuthorityReference =
-  "Seregin/ESS compactness-rate input for quantitative stationarity"
+  "Seregin/ESS compactness-rate input for coupled A1/A3 stationarity with imported candidate epsilon = 1/6"
+
+sereginESSCompactnessRateAuthorityText : String
+sereginESSCompactnessRateAuthorityText =
+  "Imported authority only: use the Seregin/ESS compactness/epsilon-regularity intake as the candidate A3.2 source of epsilon = 1/6; this file does not derive that exponent locally."
+
+candidateEpsilonRateLabel : String
+candidateEpsilonRateLabel =
+  "epsilon_candidate = 1/6"
+
+candidateDeltaRRateLabel : String
+candidateDeltaRRateLabel =
+  "delta_r_candidate = O(r^(1/12))"
+
+candidateWrEnergyODELabel : String
+candidateWrEnergyODELabel =
+  "candidate_energy_ode_for_W_r: d/d(log r) Energy[W_r] + coercive_dissipation_r <= transport_r + pressure_r + commutator_r + A1_defect_input_r"
+
+multiscaleAbelClosureFixedPointLabel : String
+multiscaleAbelClosureFixedPointLabel =
+  "multiscale_abel_summation_closure_fixed_point_open"
+
+a5a6ConditionalBiasNeutralityContractText : String
+a5a6ConditionalBiasNeutralityContractText =
+  "A5/A6 may consume only the conditional contract: if the imported epsilon = 1/6 intake, the candidate delta_r = O(r^(1/12)) consequence, and the Abel fixed-point closure all discharge, then |Bias(mu_r)| <= delta_r * sqrt(11/60) remains bias-neutrality compatible."
 
 abelStationarityBoundaryImported : Bool
-abelStationarityBoundaryImported =
-  true
+abelStationarityBoundaryImported = true
 
 transferBiasNeutralityBoundaryImported : Bool
-transferBiasNeutralityBoundaryImported =
-  true
+transferBiasNeutralityBoundaryImported = true
 
 SereginRateImported : Bool
-SereginRateImported =
-  true
+SereginRateImported = true
 
 SereginRateAuthorityRecorded : Bool
-SereginRateAuthorityRecorded =
-  true
+SereginRateAuthorityRecorded = true
 
 record ImportedQuantitativeStationaritySupport : Set where
   field
@@ -120,27 +135,22 @@ canonicalImportedQuantitativeStationaritySupport =
         refl
     }
 
-------------------------------------------------------------------------
--- W_r = U_r - U_infty energy-ODE route.
-
 data QuantitativeStationarityObject : Set where
-  renormalizedProfileUr :
-    QuantitativeStationarityObject
-  limitingStationaryProfileUInfinity :
-    QuantitativeStationarityObject
-  profileDifferenceWrEqualsUrMinusUInfinity :
-    QuantitativeStationarityObject
-  stationarityDefectDeltaR :
-    QuantitativeStationarityObject
-  transferOutputMeasureMuR :
-    QuantitativeStationarityObject
-  biasFunctionalBiasMuR :
-    QuantitativeStationarityObject
+  a1AbelDefectMeasureMuR : QuantitativeStationarityObject
+  a1ShellWindowMassDr : QuantitativeStationarityObject
+  renormalizedProfileUr : QuantitativeStationarityObject
+  limitingStationaryProfileUInfinity : QuantitativeStationarityObject
+  profileDifferenceWrEqualsUrMinusUInfinity : QuantitativeStationarityObject
+  stationarityDefectDeltaR : QuantitativeStationarityObject
+  transferOutputMeasureMuR : QuantitativeStationarityObject
+  biasFunctionalBiasMuR : QuantitativeStationarityObject
 
 canonicalQuantitativeStationarityObjects :
   List QuantitativeStationarityObject
 canonicalQuantitativeStationarityObjects =
-  renormalizedProfileUr
+  a1AbelDefectMeasureMuR
+  ∷ a1ShellWindowMassDr
+  ∷ renormalizedProfileUr
   ∷ limitingStationaryProfileUInfinity
   ∷ profileDifferenceWrEqualsUrMinusUInfinity
   ∷ stationarityDefectDeltaR
@@ -152,62 +162,193 @@ quantitativeStationarityObjectCount : Nat
 quantitativeStationarityObjectCount =
   listLength canonicalQuantitativeStationarityObjects
 
-quantitativeStationarityObjectCountIs6 :
-  quantitativeStationarityObjectCount ≡ 6
-quantitativeStationarityObjectCountIs6 =
-  refl
+quantitativeStationarityObjectCountIs8 :
+  quantitativeStationarityObjectCount ≡ 8
+quantitativeStationarityObjectCountIs8 = refl
+
+data QuantitativeStationarityRateObject : Set where
+  wrEnergyODECandidate : QuantitativeStationarityRateObject
+  importedSereginEpsilonOneSixthCandidate :
+    QuantitativeStationarityRateObject
+  deltaROfRPowerOneTwelfthCandidate :
+    QuantitativeStationarityRateObject
+  pressureRateClosureInterface : QuantitativeStationarityRateObject
+  transportRateClosureInterface : QuantitativeStationarityRateObject
+  commutatorRateClosureInterface : QuantitativeStationarityRateObject
+  multiscaleAbelSummationFixedPointInterface :
+    QuantitativeStationarityRateObject
+  a5a6ConditionalBiasNeutralityContract :
+    QuantitativeStationarityRateObject
+
+canonicalQuantitativeStationarityRateObjects :
+  List QuantitativeStationarityRateObject
+canonicalQuantitativeStationarityRateObjects =
+  wrEnergyODECandidate
+  ∷ importedSereginEpsilonOneSixthCandidate
+  ∷ deltaROfRPowerOneTwelfthCandidate
+  ∷ pressureRateClosureInterface
+  ∷ transportRateClosureInterface
+  ∷ commutatorRateClosureInterface
+  ∷ multiscaleAbelSummationFixedPointInterface
+  ∷ a5a6ConditionalBiasNeutralityContract
+  ∷ []
+
+quantitativeStationarityRateObjectCount : Nat
+quantitativeStationarityRateObjectCount =
+  listLength canonicalQuantitativeStationarityRateObjects
+
+quantitativeStationarityRateObjectCountIs8 :
+  quantitativeStationarityRateObjectCount ≡ 8
+quantitativeStationarityRateObjectCountIs8 = refl
+
+data ExplicitA3RouteStage : Set where
+  a3p1EnergyODEForWrCandidateStage : ExplicitA3RouteStage
+  a3p2SereginESSImportedEpsilonOneSixthStage :
+    ExplicitA3RouteStage
+  a3p3DeltaROfRPowerOneTwelfthCandidateStage :
+    ExplicitA3RouteStage
+  a3p4MultiscaleAbelSummationClosureFixedPointStage :
+    ExplicitA3RouteStage
+
+canonicalExplicitA3RouteStages : List ExplicitA3RouteStage
+canonicalExplicitA3RouteStages =
+  a3p1EnergyODEForWrCandidateStage
+  ∷ a3p2SereginESSImportedEpsilonOneSixthStage
+  ∷ a3p3DeltaROfRPowerOneTwelfthCandidateStage
+  ∷ a3p4MultiscaleAbelSummationClosureFixedPointStage
+  ∷ []
+
+explicitA3RouteStageCount : Nat
+explicitA3RouteStageCount =
+  listLength canonicalExplicitA3RouteStages
+
+explicitA3RouteStageCountIs4 :
+  explicitA3RouteStageCount ≡ 4
+explicitA3RouteStageCountIs4 = refl
+
+data A3TheoremClause : Set where
+  a3p1WrDefinedAsUrMinusUInfinity :
+    A3TheoremClause
+  a3p1CandidateEnergyODERecorded :
+    A3TheoremClause
+  a3p1EnergyODECouplesA1DefectInput :
+    A3TheoremClause
+  a3p2SereginESSAuthorityImported :
+    A3TheoremClause
+  a3p2CandidateEpsilonEqualsOneSixthRecorded :
+    A3TheoremClause
+  a3p2UniformityInRRemainsRequired :
+    A3TheoremClause
+  a3p3CandidateDeltaROfRPowerOneTwelfthRecorded :
+    A3TheoremClause
+  a3p3CandidateDeltaRStillConditionalOnPressureTransportClosure :
+    A3TheoremClause
+  a3p4MultiscaleAbelSummationClosureFixedPointOpen :
+    A3TheoremClause
+  a3p4BiasNeutralityTransferToA5A6ConditionalOnly :
+    A3TheoremClause
+
+canonicalA3TheoremClauses : List A3TheoremClause
+canonicalA3TheoremClauses =
+  a3p1WrDefinedAsUrMinusUInfinity
+  ∷ a3p1CandidateEnergyODERecorded
+  ∷ a3p1EnergyODECouplesA1DefectInput
+  ∷ a3p2SereginESSAuthorityImported
+  ∷ a3p2CandidateEpsilonEqualsOneSixthRecorded
+  ∷ a3p2UniformityInRRemainsRequired
+  ∷ a3p3CandidateDeltaROfRPowerOneTwelfthRecorded
+  ∷ a3p3CandidateDeltaRStillConditionalOnPressureTransportClosure
+  ∷ a3p4MultiscaleAbelSummationClosureFixedPointOpen
+  ∷ a3p4BiasNeutralityTransferToA5A6ConditionalOnly
+  ∷ []
+
+a3TheoremClauseCount : Nat
+a3TheoremClauseCount = listLength canonicalA3TheoremClauses
+
+a3TheoremClauseCountIs10 :
+  a3TheoremClauseCount ≡ 10
+a3TheoremClauseCountIs10 = refl
 
 data EnergyODERouteClause : Set where
-  defineWrAsUrMinusUInfinity :
-    EnergyODERouteClause
-  subtractStationaryLimitEquation :
-    EnergyODERouteClause
-  testDifferenceEquationAgainstWr :
-    EnergyODERouteClause
-  isolateCoerciveDissipationTerm :
-    EnergyODERouteClause
-  boundTransportPressureAndCommutatorErrors :
-    EnergyODERouteClause
+  importA1DefectMeasureAndShellWindow : EnergyODERouteClause
+  receiveWeakStarCompactAbelBranch : EnergyODERouteClause
+  intakeSereginEpsilonRegularityRate : EnergyODERouteClause
+  defineWrAsUrMinusUInfinity : EnergyODERouteClause
+  subtractStationaryLimitEquation : EnergyODERouteClause
+  testDifferenceEquationAgainstWr : EnergyODERouteClause
+  isolateCoerciveDissipationTerm : EnergyODERouteClause
+  boundTransportPressureAndCommutatorErrors : EnergyODERouteClause
+  coupleDeltaRBackToA1DefectMass : EnergyODERouteClause
+  detectMultiscaleAbelSummationDeficit : EnergyODERouteClause
   convertDifferentialInequalityToQuantitativeDeltaRRate :
     EnergyODERouteClause
 
-canonicalEnergyODERouteClauses :
-  List EnergyODERouteClause
+canonicalEnergyODERouteClauses : List EnergyODERouteClause
 canonicalEnergyODERouteClauses =
-  defineWrAsUrMinusUInfinity
+  importA1DefectMeasureAndShellWindow
+  ∷ receiveWeakStarCompactAbelBranch
+  ∷ intakeSereginEpsilonRegularityRate
+  ∷ defineWrAsUrMinusUInfinity
   ∷ subtractStationaryLimitEquation
   ∷ testDifferenceEquationAgainstWr
   ∷ isolateCoerciveDissipationTerm
   ∷ boundTransportPressureAndCommutatorErrors
+  ∷ coupleDeltaRBackToA1DefectMass
+  ∷ detectMultiscaleAbelSummationDeficit
   ∷ convertDifferentialInequalityToQuantitativeDeltaRRate
   ∷ []
 
 energyODERouteClauseCount : Nat
-energyODERouteClauseCount =
-  listLength canonicalEnergyODERouteClauses
+energyODERouteClauseCount = listLength canonicalEnergyODERouteClauses
 
-energyODERouteClauseCountIs6 :
-  energyODERouteClauseCount ≡ 6
-energyODERouteClauseCountIs6 =
-  refl
+energyODERouteClauseCountIs11 :
+  energyODERouteClauseCount ≡ 11
+energyODERouteClauseCountIs11 = refl
+
+data CandidateA1A3StationarityChainStage : Set where
+  typeIOrCKNToBoundedAbelMassStage :
+    CandidateA1A3StationarityChainStage
+  boundedAbelMassToWeakStarCompactnessStage :
+    CandidateA1A3StationarityChainStage
+  weakStarCompactnessToExplicitA3p2RateIntakeStage :
+    CandidateA1A3StationarityChainStage
+  explicitA3p2RateIntakeToExplicitA3p3DeltaRMapStage :
+    CandidateA1A3StationarityChainStage
+  explicitA3p3DeltaRMapToExplicitA3p4AbelFixedPointStage :
+    CandidateA1A3StationarityChainStage
+
+canonicalCandidateA1A3StationarityChainStages :
+  List CandidateA1A3StationarityChainStage
+canonicalCandidateA1A3StationarityChainStages =
+  typeIOrCKNToBoundedAbelMassStage
+  ∷ boundedAbelMassToWeakStarCompactnessStage
+  ∷ weakStarCompactnessToExplicitA3p2RateIntakeStage
+  ∷ explicitA3p2RateIntakeToExplicitA3p3DeltaRMapStage
+  ∷ explicitA3p3DeltaRMapToExplicitA3p4AbelFixedPointStage
+  ∷ []
+
+candidateA1A3StationarityChainStageCount : Nat
+candidateA1A3StationarityChainStageCount =
+  listLength canonicalCandidateA1A3StationarityChainStages
+
+candidateA1A3StationarityChainStageCountIs5 :
+  candidateA1A3StationarityChainStageCount ≡ 5
+candidateA1A3StationarityChainStageCountIs5 = refl
 
 data SereginESSCompactnessRateInput : Set where
-  localEnergyCompactnessRate :
-    SereginESSCompactnessRateInput
-  epsilonRegularityScaleControl :
-    SereginESSCompactnessRateInput
-  ancientSolutionRigidityRate :
-    SereginESSCompactnessRateInput
-  pressureDecompositionCompactnessRate :
-    SereginESSCompactnessRateInput
-  rateConstantsMustBeUniformInR :
-    SereginESSCompactnessRateInput
+  localEnergyCompactnessRate : SereginESSCompactnessRateInput
+  epsilonRegularityScaleControl : SereginESSCompactnessRateInput
+  importedCandidateEpsilonOneSixth : SereginESSCompactnessRateInput
+  ancientSolutionRigidityRate : SereginESSCompactnessRateInput
+  pressureDecompositionCompactnessRate : SereginESSCompactnessRateInput
+  rateConstantsMustBeUniformInR : SereginESSCompactnessRateInput
 
 canonicalSereginESSCompactnessRateInputs :
   List SereginESSCompactnessRateInput
 canonicalSereginESSCompactnessRateInputs =
   localEnergyCompactnessRate
   ∷ epsilonRegularityScaleControl
+  ∷ importedCandidateEpsilonOneSixth
   ∷ ancientSolutionRigidityRate
   ∷ pressureDecompositionCompactnessRate
   ∷ rateConstantsMustBeUniformInR
@@ -217,19 +358,28 @@ sereginESSCompactnessRateInputCount : Nat
 sereginESSCompactnessRateInputCount =
   listLength canonicalSereginESSCompactnessRateInputs
 
-sereginESSCompactnessRateInputCountIs5 :
-  sereginESSCompactnessRateInputCount ≡ 5
-sereginESSCompactnessRateInputCountIs5 =
-  refl
+sereginESSCompactnessRateInputCountIs6 :
+  sereginESSCompactnessRateInputCount ≡ 6
+sereginESSCompactnessRateInputCountIs6 = refl
 
 data QuantitativeStationarityRateConsequence : Set where
+  coupledA1A3BootstrapWouldUpgradeDefectConstruction :
+    QuantitativeStationarityRateConsequence
   deltaRRateWouldUpgradeApproximateStationarity :
     QuantitativeStationarityRateConsequence
+  candidateImportedEpsilonOneSixthWouldConstrainRateLedger :
+    QuantitativeStationarityRateConsequence
   deltaRTendsToZeroWouldDischargeA3LimitBlocker :
+    QuantitativeStationarityRateConsequence
+  deltaRTendsToZeroWouldFeedBackIntoA1Closure :
     QuantitativeStationarityRateConsequence
   biasBoundWouldBeConditionalOnTransferNeutrality :
     QuantitativeStationarityRateConsequence
   displayedConditionalBiasBoundUsesSqrtElevenSixtieth :
+    QuantitativeStationarityRateConsequence
+  a5BiasNeutralityMayConsumeOnlyConditionalDeltaRRate :
+    QuantitativeStationarityRateConsequence
+  a6LargeDataRouteMayConsumeOnlyConditionalBiasNeutralityContract :
     QuantitativeStationarityRateConsequence
   noUnconditionalResidualOrClayConsequence :
     QuantitativeStationarityRateConsequence
@@ -237,10 +387,15 @@ data QuantitativeStationarityRateConsequence : Set where
 canonicalQuantitativeStationarityRateConsequences :
   List QuantitativeStationarityRateConsequence
 canonicalQuantitativeStationarityRateConsequences =
-  deltaRRateWouldUpgradeApproximateStationarity
+  coupledA1A3BootstrapWouldUpgradeDefectConstruction
+  ∷ deltaRRateWouldUpgradeApproximateStationarity
+  ∷ candidateImportedEpsilonOneSixthWouldConstrainRateLedger
   ∷ deltaRTendsToZeroWouldDischargeA3LimitBlocker
+  ∷ deltaRTendsToZeroWouldFeedBackIntoA1Closure
   ∷ biasBoundWouldBeConditionalOnTransferNeutrality
   ∷ displayedConditionalBiasBoundUsesSqrtElevenSixtieth
+  ∷ a5BiasNeutralityMayConsumeOnlyConditionalDeltaRRate
+  ∷ a6LargeDataRouteMayConsumeOnlyConditionalBiasNeutralityContract
   ∷ noUnconditionalResidualOrClayConsequence
   ∷ []
 
@@ -248,27 +403,44 @@ quantitativeStationarityRateConsequenceCount : Nat
 quantitativeStationarityRateConsequenceCount =
   listLength canonicalQuantitativeStationarityRateConsequences
 
-quantitativeStationarityRateConsequenceCountIs5 :
-  quantitativeStationarityRateConsequenceCount ≡ 5
-quantitativeStationarityRateConsequenceCountIs5 =
-  refl
+quantitativeStationarityRateConsequenceCountIs10 :
+  quantitativeStationarityRateConsequenceCount ≡ 10
+quantitativeStationarityRateConsequenceCountIs10 = refl
 
 conditionalBiasBoundText : String
 conditionalBiasBoundText =
-  "Conditional only: |Bias(mu_r)| <= delta_r * sqrt(11/60)"
+  "Conditional only after A3.1-A3.4 close and feed back into the coupled A1/A3 bootstrap: |Bias(mu_r)| <= delta_r * sqrt(11/60)"
 
 energyODERouteText : String
 energyODERouteText =
-  "W_r = U_r - U_infty; derive a closed energy ODE for W_r and turn it into a quantitative stationarity-defect rate."
+  "A3.1 records W_r = U_r - U_infty and the candidate coupled energy ODE, A3.2 imports the Seregin/ESS intake with candidate epsilon = 1/6, A3.3 records delta_r = O(r^(1/12)) only as a candidate consequence, and A3.4 leaves the multiscale Abel summation / fixed-point closure explicit before any feedback into A1."
 
 data QuantitativeStationarityRateBlocker : Set where
+  missingA1DefectMeasureToStationarityCoupling :
+    QuantitativeStationarityRateBlocker
   missingClosedEnergyODEForWr :
+    QuantitativeStationarityRateBlocker
+  missingLocalDerivationOfImportedEpsilonOneSixth :
     QuantitativeStationarityRateBlocker
   missingUniformSereginESSRateConstants :
     QuantitativeStationarityRateBlocker
+  missingPressureClosureAtImportedEpsilon :
+    QuantitativeStationarityRateBlocker
+  missingTransportClosureAtImportedEpsilon :
+    QuantitativeStationarityRateBlocker
   missingPressureAndCommutatorErrorRate :
     QuantitativeStationarityRateBlocker
+  missingCandidateDeltaROfRPowerOneTwelfthDerivation :
+    QuantitativeStationarityRateBlocker
   missingDeltaRToZeroProof :
+    QuantitativeStationarityRateBlocker
+  missingBootstrapClosureFromDeltaRToA1Mass :
+    QuantitativeStationarityRateBlocker
+  missingExactExponentGainForMultiscaleAbelSummation :
+    QuantitativeStationarityRateBlocker
+  missingAbelSummationFixedPointContraction :
+    QuantitativeStationarityRateBlocker
+  missingClosureOfAbelWindowSeries :
     QuantitativeStationarityRateBlocker
   missingUnconditionalTransferBiasNeutrality :
     QuantitativeStationarityRateBlocker
@@ -278,10 +450,19 @@ data QuantitativeStationarityRateBlocker : Set where
 canonicalQuantitativeStationarityRateBlockers :
   List QuantitativeStationarityRateBlocker
 canonicalQuantitativeStationarityRateBlockers =
-  missingClosedEnergyODEForWr
+  missingA1DefectMeasureToStationarityCoupling
+  ∷ missingClosedEnergyODEForWr
+  ∷ missingLocalDerivationOfImportedEpsilonOneSixth
   ∷ missingUniformSereginESSRateConstants
+  ∷ missingPressureClosureAtImportedEpsilon
+  ∷ missingTransportClosureAtImportedEpsilon
   ∷ missingPressureAndCommutatorErrorRate
+  ∷ missingCandidateDeltaROfRPowerOneTwelfthDerivation
   ∷ missingDeltaRToZeroProof
+  ∷ missingBootstrapClosureFromDeltaRToA1Mass
+  ∷ missingExactExponentGainForMultiscaleAbelSummation
+  ∷ missingAbelSummationFixedPointContraction
+  ∷ missingClosureOfAbelWindowSeries
   ∷ missingUnconditionalTransferBiasNeutrality
   ∷ missingCriticalRegularityAndResidualClosure
   ∷ []
@@ -290,139 +471,233 @@ quantitativeStationarityRateBlockerCount : Nat
 quantitativeStationarityRateBlockerCount =
   listLength canonicalQuantitativeStationarityRateBlockers
 
-quantitativeStationarityRateBlockerCountIs6 :
-  quantitativeStationarityRateBlockerCount ≡ 6
-quantitativeStationarityRateBlockerCountIs6 =
-  refl
+quantitativeStationarityRateBlockerCountIs15 :
+  quantitativeStationarityRateBlockerCount ≡ 15
+quantitativeStationarityRateBlockerCountIs15 = refl
 
-------------------------------------------------------------------------
--- Fail-closed public flags.
+a3p1EnergyODETargetLabel : String
+a3p1EnergyODETargetLabel =
+  "A3.1 energy ODE"
+
+a3p1EnergyODEContractText : String
+a3p1EnergyODEContractText =
+  "A3.1 energy-ODE clause: define W_r = U_r - U_infty and record the candidate coupled inequality d/d(log r) Energy[W_r] + coercive_dissipation_r <= transport_r + pressure_r + commutator_r + A1_defect_input_r, with closure still fail-closed."
+
+a3p1EnergyODEPrimaryBlockerName : String
+a3p1EnergyODEPrimaryBlockerName =
+  "missingClosedEnergyODEForWr"
+
+a3p2SereginESSIntakeTargetLabel : String
+a3p2SereginESSIntakeTargetLabel =
+  "A3.2 ESS/Seregin intake"
+
+a3p2SereginESSIntakeContractText : String
+a3p2SereginESSIntakeContractText =
+  "A3.2 ESS/Seregin intake clause: import the Seregin/ESS compactness/epsilon-regularity authority only as the candidate quantitative intake epsilon = 1/6, with local derivation and r-uniform constants still blocked."
+
+a3p2SereginESSIntakePrimaryBlockerName : String
+a3p2SereginESSIntakePrimaryBlockerName =
+  "missingLocalDerivationOfImportedEpsilonOneSixth"
+
+a3p3StationarityDefectRateTargetLabel : String
+a3p3StationarityDefectRateTargetLabel =
+  "A3.3 stationarity-defect rate"
+
+a3p3StationarityDefectRateContractText : String
+a3p3StationarityDefectRateContractText =
+  "A3.3 stationarity-defect rate clause: record delta_r = O(r^(1/12)) only as the candidate downstream consequence of the coupled energy ODE plus the imported epsilon = 1/6 intake, with the rate proof and delta_r -> 0 still blocked."
+
+a3p3StationarityDefectRatePrimaryBlockerName : String
+a3p3StationarityDefectRatePrimaryBlockerName =
+  "missingCandidateDeltaROfRPowerOneTwelfthDerivation"
+
+a3p4MultiscaleAbelSummationTargetLabel : String
+a3p4MultiscaleAbelSummationTargetLabel =
+  "A3.4 multiscale Abel-summation"
+
+a3p4MultiscaleAbelSummationContractText : String
+a3p4MultiscaleAbelSummationContractText =
+  "A3.4 multiscale Abel-summation clause: keep the multiscale Abel-summation / fixed-point closure explicit and open; no unconditional A1 feedback or A5/A6 transfer may occur before the exponent-gain and contraction blockers discharge."
+
+a3p4MultiscaleAbelSummationPrimaryBlockerName : String
+a3p4MultiscaleAbelSummationPrimaryBlockerName =
+  "missingAbelSummationFixedPointContraction"
+
+record A3TheoremTargetRow : Set where
+  field
+    stage :
+      ExplicitA3RouteStage
+    label :
+      String
+    contractText :
+      String
+    primaryBlocker :
+      QuantitativeStationarityRateBlocker
+    primaryBlockerName :
+      String
+    provedHere :
+      Bool
+    provedHereIsFalse :
+      provedHere ≡ false
+
+open A3TheoremTargetRow public
+
+mkA3TheoremTargetRow :
+  ExplicitA3RouteStage →
+  String →
+  String →
+  QuantitativeStationarityRateBlocker →
+  String →
+  A3TheoremTargetRow
+mkA3TheoremTargetRow stage label contractText primaryBlocker
+  primaryBlockerName =
+  record
+    { stage =
+        stage
+    ; label =
+        label
+    ; contractText =
+        contractText
+    ; primaryBlocker =
+        primaryBlocker
+    ; primaryBlockerName =
+        primaryBlockerName
+    ; provedHere =
+        false
+    ; provedHereIsFalse =
+        refl
+    }
+
+canonicalA3TheoremTargetRows :
+  List A3TheoremTargetRow
+canonicalA3TheoremTargetRows =
+  mkA3TheoremTargetRow
+    a3p1EnergyODEForWrCandidateStage
+    a3p1EnergyODETargetLabel
+    a3p1EnergyODEContractText
+    missingClosedEnergyODEForWr
+    a3p1EnergyODEPrimaryBlockerName
+  ∷ mkA3TheoremTargetRow
+    a3p2SereginESSImportedEpsilonOneSixthStage
+    a3p2SereginESSIntakeTargetLabel
+    a3p2SereginESSIntakeContractText
+    missingLocalDerivationOfImportedEpsilonOneSixth
+    a3p2SereginESSIntakePrimaryBlockerName
+  ∷ mkA3TheoremTargetRow
+    a3p3DeltaROfRPowerOneTwelfthCandidateStage
+    a3p3StationarityDefectRateTargetLabel
+    a3p3StationarityDefectRateContractText
+    missingCandidateDeltaROfRPowerOneTwelfthDerivation
+    a3p3StationarityDefectRatePrimaryBlockerName
+  ∷ mkA3TheoremTargetRow
+    a3p4MultiscaleAbelSummationClosureFixedPointStage
+    a3p4MultiscaleAbelSummationTargetLabel
+    a3p4MultiscaleAbelSummationContractText
+    missingAbelSummationFixedPointContraction
+    a3p4MultiscaleAbelSummationPrimaryBlockerName
+  ∷ []
+
+a3TheoremTargetRowCount : Nat
+a3TheoremTargetRowCount =
+  listLength canonicalA3TheoremTargetRows
+
+a3TheoremTargetRowCountIs4 :
+  a3TheoremTargetRowCount ≡ 4
+a3TheoremTargetRowCountIs4 = refl
 
 boundaryRecorded : Bool
-boundaryRecorded =
-  true
+boundaryRecorded = true
 
 NSQuantitativeStationarityRateBoundaryRecorded : Bool
-NSQuantitativeStationarityRateBoundaryRecorded =
-  true
+NSQuantitativeStationarityRateBoundaryRecorded = true
 
 energyODERecorded : Bool
-energyODERecorded =
-  true
+energyODERecorded = true
 
 sereginRateImported : Bool
-sereginRateImported =
-  SereginRateImported
+sereginRateImported = SereginRateImported
 
 sereginRateAuthorityRecorded : Bool
-sereginRateAuthorityRecorded =
-  SereginRateAuthorityRecorded
+sereginRateAuthorityRecorded = SereginRateAuthorityRecorded
 
 quantitativeStationarityRateProved : Bool
-quantitativeStationarityRateProved =
-  false
+quantitativeStationarityRateProved = false
 
 deltaRTendsToZeroProved : Bool
-deltaRTendsToZeroProved =
-  false
+deltaRTendsToZeroProved = false
 
 clayNavierStokesPromoted : Bool
-clayNavierStokesPromoted =
-  false
+clayNavierStokesPromoted = false
 
 terminalPromotion : Bool
-terminalPromotion =
-  false
+terminalPromotion = false
 
 data NSQuantitativeStationarityRatePromotion : Set where
 
 nsQuantitativeStationarityRatePromotionImpossibleHere :
-  NSQuantitativeStationarityRatePromotion →
-  ⊥
+  NSQuantitativeStationarityRatePromotion → ⊥
 nsQuantitativeStationarityRatePromotionImpossibleHere ()
 
-recordsBoundary :
-  boundaryRecorded ≡ true
-recordsBoundary =
-  refl
+recordsBoundary : boundaryRecorded ≡ true
+recordsBoundary = refl
 
 recordsNamedBoundary :
   NSQuantitativeStationarityRateBoundaryRecorded ≡ true
-recordsNamedBoundary =
-  refl
+recordsNamedBoundary = refl
 
-recordsEnergyODE :
-  energyODERecorded ≡ true
-recordsEnergyODE =
-  refl
+recordsEnergyODE : energyODERecorded ≡ true
+recordsEnergyODE = refl
 
-recordsSereginRateImported :
-  sereginRateImported ≡ true
-recordsSereginRateImported =
-  refl
+recordsSereginRateImported : sereginRateImported ≡ true
+recordsSereginRateImported = refl
 
-recordsSereginAuthority :
-  sereginRateAuthorityRecorded ≡ true
-recordsSereginAuthority =
-  refl
+recordsSereginAuthority : sereginRateAuthorityRecorded ≡ true
+recordsSereginAuthority = refl
 
 keepsQuantitativeRateUnproved :
   quantitativeStationarityRateProved ≡ false
-keepsQuantitativeRateUnproved =
-  refl
+keepsQuantitativeRateUnproved = refl
 
-keepsDeltaRTendsToZeroFalse :
-  deltaRTendsToZeroProved ≡ false
-keepsDeltaRTendsToZeroFalse =
-  refl
+keepsDeltaRTendsToZeroFalse : deltaRTendsToZeroProved ≡ false
+keepsDeltaRTendsToZeroFalse = refl
 
-keepsClayPromotionFalse :
-  clayNavierStokesPromoted ≡ false
-keepsClayPromotionFalse =
-  refl
+keepsClayPromotionFalse : clayNavierStokesPromoted ≡ false
+keepsClayPromotionFalse = refl
 
-keepsTerminalPromotionFalse :
-  terminalPromotion ≡ false
-keepsTerminalPromotionFalse =
-  refl
-
-------------------------------------------------------------------------
--- O/R/C/S/L/P/G/F.
+keepsTerminalPromotionFalse : terminalPromotion ≡ false
+keepsTerminalPromotionFalse = refl
 
 organizationString : String
 organizationString =
-  "O: NS A3.3 records the quantitative stationarity-rate target from W_r = U_r - U_infty through an energy-ODE route and Seregin/ESS compactness-rate input."
+  "O: NS A3 rate boundary records the exact A3.1-A3.4 theorem-facing contract from the A1 Abel defect-measure output through the W_r energy ODE, imported Seregin/ESS epsilon = 1/6 intake, candidate delta_r = O(r^(1/12)) consequence, and explicit Abel fixed-point closure wall."
 
 requirementString : String
 requirementString =
-  "R: Keep the boundary fail-closed: record the route and authority inputs while leaving the quantitative rate, delta_r -> 0, Clay, and terminal promotion false."
+  "R: Keep the boundary fail-closed: record exact A3 theorem clauses, rate objects, canonical rate labels, imported authority text, and A5/A6-facing conditional consequences while leaving the quantitative rate, delta_r -> 0, closure/fixed-point, Clay, and terminal promotion false."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: NSQuantitativeStationarityRateBoundary imports the Abel stationarity and transfer bias-neutrality boundaries, records W_r energy-ODE clauses, Seregin/ESS inputs, blockers, and the conditional sqrt(11/60) consequence."
+  "C: NSQuantitativeStationarityRateBoundary imports the Abel stationarity and transfer bias-neutrality boundaries, records explicit A3.1-A3.4 route stages, theorem clauses, rate objects, imported Seregin/ESS epsilon = 1/6 authority text, candidate delta_r = O(r^(1/12)) label, coupled blockers, and the conditional A5/A6 bias-neutrality contract."
 
 stateString : String
 stateString =
-  "S: Boundary, energy ODE, and Seregin/ESS authority are recorded; quantitative stationarity rate and delta_r convergence remain open."
+  "S: Boundary, exact A3 route stages, candidate W_r energy ODE, imported epsilon = 1/6 authority, and candidate delta_r = O(r^(1/12)) ledger are recorded; the local rate proof, pressure/transport closure, delta_r convergence, and multiscale Abel summation fixed-point closure remain open."
 
 latticeString : String
 latticeString =
-  "L: Abel A3 stationarity receipt -> W_r energy ODE plus Seregin/ESS rate authority -> delta_r -> 0 blocker -> conditional transfer bias bound."
+  "L: generic stationarity wall -> explicit A3.1 W_r energy ODE -> explicit A3.2 imported epsilon = 1/6 intake -> explicit A3.3 candidate delta_r = O(r^(1/12)) map -> explicit A3.4 Abel fixed-point wall -> feedback into A1 closure -> conditional A5/A6 bias-neutrality consumption."
 
 proposalString : String
 proposalString =
-  "P: Use this as the A3.3 receipt until a closed W_r energy inequality and uniform compactness-rate constants discharge delta_r -> 0."
+  "P: Use this as the theorem-facing A3 contract consumed by A5/A6 until a closed W_r energy inequality, a local derivation or justified import of epsilon = 1/6, the candidate delta_r = O(r^(1/12)) derivation, and the Abel-window fixed-point closure discharge delta_r -> 0."
 
 governanceString : String
 governanceString =
-  "G: The sqrt(11/60) bias statement is conditional only; no downstream PDE, Clay, or terminal theorem may read this module as an unconditional proof."
+  "G: The epsilon = 1/6 and delta_r = O(r^(1/12)) labels are imported/candidate only, the sqrt(11/60) bias statement is conditional only, and no downstream A5/A6, PDE, A1 closure, Clay, or terminal theorem may read this module as an unconditional proof."
 
 gapString : String
 gapString =
-  "F: Open blockers are the closed W_r energy ODE, Seregin/ESS uniform rate extraction, pressure/commutator rate control, delta_r -> 0, and unconditional transfer to critical regularity."
-
-------------------------------------------------------------------------
--- Canonical receipt.
+  "F: Open blockers are the A1-to-A3 coupling, the closed W_r energy ODE, the local or justified imported epsilon = 1/6 intake, Seregin/ESS uniform rate extraction, pressure/transport/commutator rate control, the candidate delta_r = O(r^(1/12)) derivation, delta_r -> 0, feedback into A1 closure, and the exact Abel fixed-point / summation gain needed before any unconditional transfer to A5/A6 or critical regularity."
 
 record NSQuantitativeStationarityRateBoundary : Set where
   constructor nsQuantitativeStationarityRateBoundary
@@ -435,32 +710,76 @@ record NSQuantitativeStationarityRateBoundary : Set where
       List QuantitativeStationarityObject
     objectsAreCanonical :
       objects ≡ canonicalQuantitativeStationarityObjects
-    objectCountIsSix :
-      quantitativeStationarityObjectCount ≡ 6
+    objectCountIsEight :
+      quantitativeStationarityObjectCount ≡ 8
+    rateObjects :
+      List QuantitativeStationarityRateObject
+    rateObjectsAreCanonical :
+      rateObjects ≡ canonicalQuantitativeStationarityRateObjects
+    rateObjectCountIsEight :
+      quantitativeStationarityRateObjectCount ≡ 8
+    explicitA3RouteStages :
+      List ExplicitA3RouteStage
+    explicitA3RouteStagesAreCanonical :
+      explicitA3RouteStages ≡ canonicalExplicitA3RouteStages
+    explicitA3RouteStageCountWitness :
+      explicitA3RouteStageCount ≡ 4
+    theoremClauses :
+      List A3TheoremClause
+    theoremClausesAreCanonical :
+      theoremClauses ≡ canonicalA3TheoremClauses
+    theoremClauseCountIs10 :
+      a3TheoremClauseCount ≡ 10
+    theoremTargetRows :
+      List A3TheoremTargetRow
+    theoremTargetRowsAreCanonical :
+      theoremTargetRows ≡ canonicalA3TheoremTargetRows
+    theoremTargetRowCountIsFour :
+      a3TheoremTargetRowCount ≡ 4
     energyODERoute :
       List EnergyODERouteClause
     energyODERouteIsCanonical :
       energyODERoute ≡ canonicalEnergyODERouteClauses
-    energyODERouteCountIsSix :
-      energyODERouteClauseCount ≡ 6
+    energyODERouteCountIsEleven :
+      energyODERouteClauseCount ≡ 11
     sereginESSInputs :
       List SereginESSCompactnessRateInput
     sereginESSInputsAreCanonical :
       sereginESSInputs ≡ canonicalSereginESSCompactnessRateInputs
-    sereginESSInputCountIsFive :
-      sereginESSCompactnessRateInputCount ≡ 5
+    sereginESSInputCountIsSix :
+      sereginESSCompactnessRateInputCount ≡ 6
     consequences :
       List QuantitativeStationarityRateConsequence
     consequencesAreCanonical :
       consequences ≡ canonicalQuantitativeStationarityRateConsequences
-    consequenceCountIsFive :
-      quantitativeStationarityRateConsequenceCount ≡ 5
+    consequenceCountIsTen :
+      quantitativeStationarityRateConsequenceCount ≡ 10
     blockers :
       List QuantitativeStationarityRateBlocker
     blockersAreCanonical :
       blockers ≡ canonicalQuantitativeStationarityRateBlockers
-    blockerCountIsSix :
-      quantitativeStationarityRateBlockerCount ≡ 6
+    blockerCountIsFifteen :
+      quantitativeStationarityRateBlockerCount ≡ 15
+    sereginESSAuthorityText :
+      String
+    sereginESSAuthorityTextIsCanonical :
+      sereginESSAuthorityText ≡ sereginESSCompactnessRateAuthorityText
+    candidateEpsilonRate :
+      String
+    candidateEpsilonRateIsCanonical :
+      candidateEpsilonRate ≡ candidateEpsilonRateLabel
+    candidateDeltaRRate :
+      String
+    candidateDeltaRRateIsCanonical :
+      candidateDeltaRRate ≡ candidateDeltaRRateLabel
+    candidateWrEnergyODE :
+      String
+    candidateWrEnergyODEIsCanonical :
+      candidateWrEnergyODE ≡ candidateWrEnergyODELabel
+    multiscaleAbelClosureFixedPoint :
+      String
+    multiscaleAbelClosureFixedPointIsCanonical :
+      multiscaleAbelClosureFixedPoint ≡ multiscaleAbelClosureFixedPointLabel
     energyODERouteSummary :
       String
     energyODERouteSummaryIsCanonical :
@@ -469,6 +788,11 @@ record NSQuantitativeStationarityRateBoundary : Set where
       String
     conditionalBiasBoundSummaryIsCanonical :
       conditionalBiasBoundSummary ≡ conditionalBiasBoundText
+    a5a6ConditionalBiasNeutralityContractTextField :
+      String
+    a5a6ConditionalBiasNeutralityContractTextFieldIsCanonical :
+      a5a6ConditionalBiasNeutralityContractTextField
+        ≡ a5a6ConditionalBiasNeutralityContractText
     O : String
     OIsCanonical : O ≡ organizationString
     R : String
@@ -509,50 +833,145 @@ open NSQuantitativeStationarityRateBoundary public
 canonicalNSQuantitativeStationarityRateBoundary :
   NSQuantitativeStationarityRateBoundary
 canonicalNSQuantitativeStationarityRateBoundary =
-  nsQuantitativeStationarityRateBoundary
-    canonicalImportedQuantitativeStationaritySupport
-    refl
-    canonicalQuantitativeStationarityObjects
-    refl
-    refl
-    canonicalEnergyODERouteClauses
-    refl
-    refl
-    canonicalSereginESSCompactnessRateInputs
-    refl
-    refl
-    canonicalQuantitativeStationarityRateConsequences
-    refl
-    refl
-    canonicalQuantitativeStationarityRateBlockers
-    refl
-    refl
-    energyODERouteText
-    refl
-    conditionalBiasBoundText
-    refl
-    organizationString
-    refl
-    requirementString
-    refl
-    codeArtifactString
-    refl
-    stateString
-    refl
-    latticeString
-    refl
-    proposalString
-    refl
-    governanceString
-    refl
-    gapString
-    refl
-    refl
-    refl
-    refl
-    refl
-    refl
-    refl
-    refl
-    refl
-    refl
+  record
+    { importedSupport =
+        canonicalImportedQuantitativeStationaritySupport
+    ; importedSupportIsCanonical =
+        refl
+    ; objects =
+        canonicalQuantitativeStationarityObjects
+    ; objectsAreCanonical =
+        refl
+    ; objectCountIsEight =
+        refl
+    ; rateObjects =
+        canonicalQuantitativeStationarityRateObjects
+    ; rateObjectsAreCanonical =
+        refl
+    ; rateObjectCountIsEight =
+        refl
+    ; explicitA3RouteStages =
+        canonicalExplicitA3RouteStages
+    ; explicitA3RouteStagesAreCanonical =
+        refl
+    ; explicitA3RouteStageCountWitness =
+        refl
+    ; theoremClauses =
+        canonicalA3TheoremClauses
+    ; theoremClausesAreCanonical =
+        refl
+    ; theoremClauseCountIs10 =
+        refl
+    ; theoremTargetRows =
+        canonicalA3TheoremTargetRows
+    ; theoremTargetRowsAreCanonical =
+        refl
+    ; theoremTargetRowCountIsFour =
+        refl
+    ; energyODERoute =
+        canonicalEnergyODERouteClauses
+    ; energyODERouteIsCanonical =
+        refl
+    ; energyODERouteCountIsEleven =
+        refl
+    ; sereginESSInputs =
+        canonicalSereginESSCompactnessRateInputs
+    ; sereginESSInputsAreCanonical =
+        refl
+    ; sereginESSInputCountIsSix =
+        refl
+    ; consequences =
+        canonicalQuantitativeStationarityRateConsequences
+    ; consequencesAreCanonical =
+        refl
+    ; consequenceCountIsTen =
+        refl
+    ; blockers =
+        canonicalQuantitativeStationarityRateBlockers
+    ; blockersAreCanonical =
+        refl
+    ; blockerCountIsFifteen =
+        refl
+    ; sereginESSAuthorityText =
+        sereginESSCompactnessRateAuthorityText
+    ; sereginESSAuthorityTextIsCanonical =
+        refl
+    ; candidateEpsilonRate =
+        candidateEpsilonRateLabel
+    ; candidateEpsilonRateIsCanonical =
+        refl
+    ; candidateDeltaRRate =
+        candidateDeltaRRateLabel
+    ; candidateDeltaRRateIsCanonical =
+        refl
+    ; candidateWrEnergyODE =
+        candidateWrEnergyODELabel
+    ; candidateWrEnergyODEIsCanonical =
+        refl
+    ; multiscaleAbelClosureFixedPoint =
+        multiscaleAbelClosureFixedPointLabel
+    ; multiscaleAbelClosureFixedPointIsCanonical =
+        refl
+    ; energyODERouteSummary =
+        energyODERouteText
+    ; energyODERouteSummaryIsCanonical =
+        refl
+    ; conditionalBiasBoundSummary =
+        conditionalBiasBoundText
+    ; conditionalBiasBoundSummaryIsCanonical =
+        refl
+    ; a5a6ConditionalBiasNeutralityContractTextField =
+        a5a6ConditionalBiasNeutralityContractText
+    ; a5a6ConditionalBiasNeutralityContractTextFieldIsCanonical =
+        refl
+    ; O =
+        organizationString
+    ; OIsCanonical =
+        refl
+    ; R =
+        requirementString
+    ; RIsCanonical =
+        refl
+    ; C =
+        codeArtifactString
+    ; CIsCanonical =
+        refl
+    ; S =
+        stateString
+    ; SIsCanonical =
+        refl
+    ; L =
+        latticeString
+    ; LIsCanonical =
+        refl
+    ; P =
+        proposalString
+    ; PIsCanonical =
+        refl
+    ; G =
+        governanceString
+    ; GIsCanonical =
+        refl
+    ; F =
+        gapString
+    ; FIsCanonical =
+        refl
+    ; boundaryRecordedIsTrue =
+        refl
+    ; namedBoundaryRecordedIsTrue =
+        refl
+    ; energyODERecordedIsTrue =
+        refl
+    ; sereginRateImportedIsTrue =
+        refl
+    ; sereginRateAuthorityRecordedIsTrue =
+        refl
+    ; quantitativeRateProvedIsFalse =
+        refl
+    ; deltaRTendsToZeroProvedIsFalse =
+        refl
+    ; clayNavierStokesPromotedIsFalse =
+        refl
+    ; terminalPromotionIsFalse =
+        refl
+    }

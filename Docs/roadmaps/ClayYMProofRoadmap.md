@@ -7,6 +7,35 @@ Jaffe-Witten Yang-Mills existence and mass-gap problem would have to prove.
 It is not a proof, and it does not promote any Clay, Wightman, Standard Model,
 or terminal claim.
 
+Current corpus correction: the live Clay-facing manuscript is now
+`Docs/papers/live/Paper3YangMillsClayDraft.md`, and it sharpens the real
+frontier. The finite self-adjointness and domination steps are internal to the
+current draft. The remaining continuum burden is not a vague "construction
+problem"; it is the cited `H3a` transfer theorem from Balaban-type multiscale
+inputs, with `H3b` and no-spectral-pollution downstream once RP.4 fixes the
+limiting vacuum. Read the roadmap below as a wider dependency ledger, not as a
+more current statement than the live paper.
+
+Current packaging correction: the repo now records the exact theorem-shape
+authority chain `H3a -> H3b -> no-spectral-pollution -> RP/OS -> Wightman ->
+continuum mass-gap transfer` in the proof-facing Agda boundaries. This is a
+governance improvement, not a theorem promotion: the Yang-Mills frontier
+remains authority-backed unless the full Balaban multiscale package is
+internalized.
+
+Current governance correction: YM is now the only major lane whose remaining
+burden is still naturally missing-content-shaped rather than merely
+promotion-evidence-shaped. The theorem chain is explicit, but the Balaban
+cluster remains the live load-bearing content frontier unless the repo stays
+authority-backed by design.
+
+Reviewer-packet correction: the repo now also carries an explicit final
+authority-packet layer for the same chain. The finite self-adjointness,
+domination, and finite spectral-margin story is internal; `H3a`, RP/OS,
+Wightman, and the final continuum transfer remain explicit external or
+authority-backed steps. This improves submission grammar only and does not
+change theorem ownership.
+
 ## Sprint 79 Current Fork
 
 The live in-repo YM fork now has two ordered lanes. The UV-continuum lane comes

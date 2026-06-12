@@ -10,13 +10,24 @@ import DASHI.Physics.Closure.YMLatticeMassGapAuthority as Lattice
 ------------------------------------------------------------------------
 -- Authority-conditional thermodynamic/continuum-limit gate.
 --
--- This module advances the authority-conditional YM lane from a positive
--- lattice mass gap to the infinite-volume/continuum-limit side of the endpoint
--- ladder.  The provider is explicit and postulated: the repo does not derive
--- the thermodynamic limit or tight nontrivial SU(3) continuum measure here.
+-- This module is a downstream authority-consumer surface.  It advances the
+-- authority-conditional YM lane from a positive lattice mass gap to the
+-- infinite-volume/continuum-limit side of the endpoint ladder, but it does so
+-- only by recording imported provider slots.  The repo does not derive the
+-- thermodynamic limit or tight nontrivial SU(3) continuum measure here.
 --
--- OS axioms, OS/Wightman reconstruction, continuum mass-gap transfer,
--- mass-gap survival, and Clay/YM promotion remain false.
+-- The honest downstream chain is:
+--
+--   * finite self-adjointness and the finite spectral margin are already
+--     internal upstream facts;
+--   * this file records only downstream thermodynamic-limit and
+--     continuum-carrier slots consuming upstream finite-lattice authority;
+--   * Balaban-centered H3a remains the live missing-content frontier if
+--     internal closure is demanded;
+--   * H3b vacuum-projection continuity and no-spectral-pollution remain
+--     downstream consumers after H3a;
+--   * OS axioms, OS/Wightman reconstruction, continuum mass-gap transfer,
+--     mass-gap survival, and Clay/YM promotion remain false.
 
 record UniformLatticeMassGap : Set where
   constructor mkUniformLatticeMassGap
@@ -155,7 +166,28 @@ continuumLimitExistsCitation =
 
 nontrivial4DSU3YangMillsMeasureCitation : String
 nontrivial4DSU3YangMillsMeasureCitation =
-  "Nontrivial four-dimensional SU(3) Yang-Mills continuum measure authority."
+  "Nontrivial four-dimensional SU(3) Yang-Mills continuum measure authority consumed here as a downstream slot."
+
+thermodynamicLimitSurfaceIsDownstreamConsumer : Bool
+thermodynamicLimitSurfaceIsDownstreamConsumer = true
+
+thermodynamicLimitSurfaceCarriesLiveClosureBurden : Bool
+thermodynamicLimitSurfaceCarriesLiveClosureBurden = false
+
+thermodynamicLimitConsumesFiniteLatticeAuthority : Bool
+thermodynamicLimitConsumesFiniteLatticeAuthority = true
+
+balabanH3aRemainsLiveMissingContentFrontier : Bool
+balabanH3aRemainsLiveMissingContentFrontier = true
+
+h3bSurfaceIsDownstreamConsumer : Bool
+h3bSurfaceIsDownstreamConsumer = true
+
+noSpectralPollutionSurfaceIsDownstreamConsumer : Bool
+noSpectralPollutionSurfaceIsDownstreamConsumer = true
+
+osWightmanSurfaceIsDownstreamSlot : Bool
+osWightmanSurfaceIsDownstreamSlot = true
 
 uniformLatticeMassGapProvider :
   UniformLatticeMassGap
@@ -181,6 +213,56 @@ nontrivial4DSU3YangMillsMeasureProvider :
   Nontrivial4DSU3YangMillsMeasure
 nontrivial4DSU3YangMillsMeasureProvider =
   mkNontrivial4DSU3YangMillsMeasure true refl
+
+record ThermodynamicLimitProviderSourceMap : Set where
+  field
+    thermodynamicSurfaceIsDownstreamConsumer :
+      thermodynamicLimitSurfaceIsDownstreamConsumer ≡ true
+    thermodynamicSurfaceNotLiveClosureBurden :
+      thermodynamicLimitSurfaceCarriesLiveClosureBurden ≡ false
+    thermodynamicSurfaceConsumesFiniteLatticeAuthority :
+      thermodynamicLimitConsumesFiniteLatticeAuthority ≡ true
+    liveMissingContentFrontierIsBalabanH3a :
+      balabanH3aRemainsLiveMissingContentFrontier ≡ true
+    h3bSurfaceRemainsDownstreamConsumer :
+      h3bSurfaceIsDownstreamConsumer ≡ true
+    noSpectralPollutionSurfaceRemainsDownstreamConsumer :
+      noSpectralPollutionSurfaceIsDownstreamConsumer ≡ true
+    osWightmanSurfaceRemainsDownstreamSlot :
+      osWightmanSurfaceIsDownstreamSlot ≡ true
+    uniformLatticeMassGapSourceCitation :
+      String
+    finiteVolumeTightnessSourceCitation :
+      String
+    thermodynamicLimitSourceCitation :
+      String
+    continuumLimitExistsSourceCitation :
+      String
+    nontrivialMeasureSourceCitation :
+      String
+
+thermodynamicLimitProviderSourceMap :
+  ThermodynamicLimitProviderSourceMap
+thermodynamicLimitProviderSourceMap =
+  record
+    { thermodynamicSurfaceIsDownstreamConsumer = refl
+    ; thermodynamicSurfaceNotLiveClosureBurden = refl
+    ; thermodynamicSurfaceConsumesFiniteLatticeAuthority = refl
+    ; liveMissingContentFrontierIsBalabanH3a = refl
+    ; h3bSurfaceRemainsDownstreamConsumer = refl
+    ; noSpectralPollutionSurfaceRemainsDownstreamConsumer = refl
+    ; osWightmanSurfaceRemainsDownstreamSlot = refl
+    ; uniformLatticeMassGapSourceCitation =
+        uniformLatticeMassGapCitation
+    ; finiteVolumeTightnessSourceCitation =
+        finiteVolumeTightnessCitation
+    ; thermodynamicLimitSourceCitation =
+        infiniteVolumeThermodynamicLimitCitation
+    ; continuumLimitExistsSourceCitation =
+        continuumLimitExistsCitation
+    ; nontrivialMeasureSourceCitation =
+        nontrivial4DSU3YangMillsMeasureCitation
+    }
 
 balabanThermodynamicLimitAnalyticPackage :
   ThermodynamicLimitAnalyticPackage
@@ -237,7 +319,7 @@ thermodynamicLimitProviderAuthorityAvailable : Bool
 thermodynamicLimitProviderAuthorityAvailable = true
 
 thermodynamicLimitProviderDerivedInRepo : Bool
-thermodynamicLimitProviderDerivedInRepo = true
+thermodynamicLimitProviderDerivedInRepo = false
 
 thermodynamicLimitProviderImportedByAuthority : Bool
 thermodynamicLimitProviderImportedByAuthority = true
@@ -257,8 +339,32 @@ continuumLimitExistsAuthorityConditional = true
 nontrivial4DSU3YangMillsMeasureAuthorityConditional : Bool
 nontrivial4DSU3YangMillsMeasureAuthorityConditional = true
 
+finiteSelfAdjointnessInternalized : Bool
+finiteSelfAdjointnessInternalized = true
+
+finiteSpectralMarginInternalized : Bool
+finiteSpectralMarginInternalized = true
+
 thermodynamicLimitUnconditional : Bool
-thermodynamicLimitUnconditional = true
+thermodynamicLimitUnconditional = false
+
+balabanH3aContinuumIntakeAuthorityConditional : Bool
+balabanH3aContinuumIntakeAuthorityConditional = false
+
+h3bVacuumProjectionContinuityAuthorityConditional : Bool
+h3bVacuumProjectionContinuityAuthorityConditional = false
+
+noSpectralPollutionFromH3aH3bAuthorityConditional : Bool
+noSpectralPollutionFromH3aH3bAuthorityConditional = false
+
+h3aAuthorityImportedHere : Bool
+h3aAuthorityImportedHere = false
+
+h3bAuthorityImportedHere : Bool
+h3bAuthorityImportedHere = false
+
+noSpectralPollutionAuthorityImportedHere : Bool
+noSpectralPollutionAuthorityImportedHere = false
 
 osterwalderSchraderAxiomsAuthorityConditional : Bool
 osterwalderSchraderAxiomsAuthorityConditional = false
@@ -275,6 +381,10 @@ massGapSurvivalAuthorityConditional = false
 clayYangMillsPromoted : Bool
 clayYangMillsPromoted = false
 
+remainingAuthorityChainSummary : String
+remainingAuthorityChainSummary =
+  "This file is a downstream thermodynamic-limit consumer slot only. It consumes the finite-lattice provider surface, does not carry the live closure burden, and leaves Balaban-centered H3a as the missing-content frontier. The downstream order remains H3a then H3b then no-spectral-pollution then thermodynamic-limit then OS/Wightman then continuum mass-gap transfer."
+
 data ThermodynamicLimitPromotion : Set where
 
 thermodynamicLimitPromotionImpossibleHere :
@@ -286,12 +396,32 @@ record ThermodynamicLimitAuthorityBoundary : Set where
   field
     providerAuthorityAvailableIsTrue :
       thermodynamicLimitProviderAuthorityAvailable ≡ true
-    providerDerivedInRepoIsTrue :
-      thermodynamicLimitProviderDerivedInRepo ≡ true
+    providerNotDerivedInRepo :
+      thermodynamicLimitProviderDerivedInRepo ≡ false
     providerAuthorityImported :
       thermodynamicLimitProviderImportedByAuthority ≡ true
     providerSplitIntoFiveAnalyticLemmas :
       thermodynamicLimitProviderSplitIntoFiveAnalyticLemmas ≡ true
+    providerSourceMap :
+      ThermodynamicLimitProviderSourceMap
+    thermodynamicSurfaceIsDownstreamConsumer :
+      thermodynamicLimitSurfaceIsDownstreamConsumer ≡ true
+    thermodynamicSurfaceNotLiveClosureBurden :
+      thermodynamicLimitSurfaceCarriesLiveClosureBurden ≡ false
+    thermodynamicSurfaceConsumesFiniteLatticeAuthority :
+      thermodynamicLimitConsumesFiniteLatticeAuthority ≡ true
+    liveMissingContentFrontierIsBalabanH3a :
+      balabanH3aRemainsLiveMissingContentFrontier ≡ true
+    h3bSurfaceRemainsDownstreamConsumer :
+      h3bSurfaceIsDownstreamConsumer ≡ true
+    noSpectralPollutionSurfaceRemainsDownstreamConsumer :
+      noSpectralPollutionSurfaceIsDownstreamConsumer ≡ true
+    osWightmanSurfaceRemainsDownstreamSlot :
+      osWightmanSurfaceIsDownstreamSlot ≡ true
+    finiteSelfAdjointnessClosedInternally :
+      finiteSelfAdjointnessInternalized ≡ true
+    finiteSpectralMarginClosedInternally :
+      finiteSpectralMarginInternalized ≡ true
     uniformLatticeMassGapAuthorityConditionalIsTrue :
       uniformLatticeMassGapAuthorityConditional ≡ true
     thermodynamicLimitAuthorityConditionalIsTrue :
@@ -300,8 +430,20 @@ record ThermodynamicLimitAuthorityBoundary : Set where
       continuumLimitExistsAuthorityConditional ≡ true
     nontrivialMeasureAuthorityConditionalIsTrue :
       nontrivial4DSU3YangMillsMeasureAuthorityConditional ≡ true
-    thermodynamicLimitUnconditionalIsTrue :
-      thermodynamicLimitUnconditional ≡ true
+    thermodynamicLimitUnconditionalStillFalse :
+      thermodynamicLimitUnconditional ≡ false
+    balabanH3aAuthorityConditionalStillFalse :
+      balabanH3aContinuumIntakeAuthorityConditional ≡ false
+    h3bAuthorityConditionalStillFalse :
+      h3bVacuumProjectionContinuityAuthorityConditional ≡ false
+    noSpectralPollutionFromH3aH3bStillFalse :
+      noSpectralPollutionFromH3aH3bAuthorityConditional ≡ false
+    h3aAuthorityNotImportedHere :
+      h3aAuthorityImportedHere ≡ false
+    h3bAuthorityNotImportedHere :
+      h3bAuthorityImportedHere ≡ false
+    noSpectralPollutionAuthorityNotImportedHere :
+      noSpectralPollutionAuthorityImportedHere ≡ false
     osAxiomsAuthorityConditionalStillFalse :
       osterwalderSchraderAxiomsAuthorityConditional ≡ false
     osWightmanAuthorityConditionalStillFalse :
@@ -310,6 +452,8 @@ record ThermodynamicLimitAuthorityBoundary : Set where
       continuumMassGapTransferAuthorityConditional ≡ false
     massGapSurvivalAuthorityConditionalStillFalse :
       massGapSurvivalAuthorityConditional ≡ false
+    remainingAuthorityChain :
+      String
     noClayPromotion :
       clayYangMillsPromoted ≡ false
     noPromotionPossibleHere :
@@ -320,18 +464,35 @@ thermodynamicLimitAuthorityBoundary :
 thermodynamicLimitAuthorityBoundary =
   record
     { providerAuthorityAvailableIsTrue = refl
-    ; providerDerivedInRepoIsTrue = refl
+    ; providerNotDerivedInRepo = refl
     ; providerAuthorityImported = refl
     ; providerSplitIntoFiveAnalyticLemmas = refl
+    ; providerSourceMap = thermodynamicLimitProviderSourceMap
+    ; thermodynamicSurfaceIsDownstreamConsumer = refl
+    ; thermodynamicSurfaceNotLiveClosureBurden = refl
+    ; thermodynamicSurfaceConsumesFiniteLatticeAuthority = refl
+    ; liveMissingContentFrontierIsBalabanH3a = refl
+    ; h3bSurfaceRemainsDownstreamConsumer = refl
+    ; noSpectralPollutionSurfaceRemainsDownstreamConsumer = refl
+    ; osWightmanSurfaceRemainsDownstreamSlot = refl
+    ; finiteSelfAdjointnessClosedInternally = refl
+    ; finiteSpectralMarginClosedInternally = refl
     ; uniformLatticeMassGapAuthorityConditionalIsTrue = refl
     ; thermodynamicLimitAuthorityConditionalIsTrue = refl
     ; continuumLimitExistsAuthorityConditionalIsTrue = refl
     ; nontrivialMeasureAuthorityConditionalIsTrue = refl
-    ; thermodynamicLimitUnconditionalIsTrue = refl
+    ; thermodynamicLimitUnconditionalStillFalse = refl
+    ; balabanH3aAuthorityConditionalStillFalse = refl
+    ; h3bAuthorityConditionalStillFalse = refl
+    ; noSpectralPollutionFromH3aH3bStillFalse = refl
+    ; h3aAuthorityNotImportedHere = refl
+    ; h3bAuthorityNotImportedHere = refl
+    ; noSpectralPollutionAuthorityNotImportedHere = refl
     ; osAxiomsAuthorityConditionalStillFalse = refl
     ; osWightmanAuthorityConditionalStillFalse = refl
     ; continuumMassGapTransferAuthorityConditionalStillFalse = refl
     ; massGapSurvivalAuthorityConditionalStillFalse = refl
+    ; remainingAuthorityChain = remainingAuthorityChainSummary
     ; noClayPromotion = refl
     ; noPromotionPossibleHere = thermodynamicLimitPromotionImpossibleHere
     }

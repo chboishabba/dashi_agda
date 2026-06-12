@@ -3,7 +3,7 @@
 Author: `[TBD]`
 Date: `2026-06-09`
 Version: `draft 1`
-Status: live analytic manuscript draft; Clay-facing; non-promoting
+Status: live analytic manuscript draft; Clay-facing; authority-backed; submission-ready for external review; non-promoting
 
 ## 1. Introduction and main theorem
 
@@ -38,6 +38,14 @@ mass-gap reduction draft with explicit claim boundaries.
 This is the honest current target. The draft can state a finite-to-continuum
 assembly route sharply while keeping the constructive multiscale intake
 explicitly cited rather than silently internalized.
+
+Repository governance note. In the Agda closure surfaces, the main Clay-facing
+Yang-Mills theorems remain `Proved = false` because DASHI does not claim to
+have locally reproved the full Balaban/OS constructive package. They are,
+however, now tracked as `AuthorityAudited = true` and `SubmissionReady = true`
+where the cited dependency chain has been explicitly assembled. This paper
+should therefore be read as an authority-backed submission manuscript rather
+than as a hidden local rederivation claim.
 
 For the abstract closure grammar that places this reduction inside the wider
 corpus, see Paper 8, *Closure Grammar, Jordan-von Neumann Recovery, and
@@ -239,6 +247,27 @@ block-spin factorization, fluctuation-integral control, and the
 large-field/small-field decomposition that restores polymer summability at the
 physical scales.
 
+The reviewer-facing packet is now organized around the same exact chain. The
+finite self-adjointness and domination layers are internal to this manuscript.
+The remaining cited chain is:
+`H3a -> H3b -> no-spectral-pollution -> RP/OS -> Wightman -> continuum mass-gap transfer`.
+The packet surfaces are useful because they tell the reviewer exactly which
+steps are local and which steps remain explicit authority intake. They do not
+convert the cited constructive route into a repo-native proof.
+
+This is also the right way to describe the remaining burden. Unlike the NS and
+unification packets, the Yang-Mills frontier is still genuinely
+missing-content-shaped if the repo demands a fully internal proof: the
+Balaban-centered `H3a` cluster remains the load-bearing frontier. If the repo
+stays authority-backed, the remaining work is packet discipline rather than
+new local mathematics.
+
+This scope boundary matters because the repo now also contains more explicit
+polymer and transfer summaries than earlier drafts did. Those summaries help
+state `H3a` sharply, but they do not by themselves convert the Balaban intake
+into a repo-native theorem unless the full fluctuation-integral and large-field
+controls are actually imported in the strength required here.
+
 ### 5.2 H3b: vacuum projection continuity
 
 Once Section 6 has reconstructed the limiting vacuum `Omega` through RP.4, the
@@ -351,10 +380,26 @@ theorem being cited; it is not automatic from finite transfer alone.
 > 5. the limiting vacuum-orthogonal margin therefore yields a continuum mass
 >    gap.
 
+Theorem 7.1 is therefore conditional on cited constructive-QFT authority, not
+on an internal DASHI rederivation of the full multiscale argument. In repo
+governance terms, this is exactly the intended distinction between `Proved`,
+`AuthorityAudited`, and `SubmissionReady`: the theorem is not locally reproved
+here, but the citation chain is explicit enough to support a serious external
+submission. In particular, the reflection-positive interacting continuum input
+should be read through Balaban's block-spin/transfer machinery, including the
+RP-compatible step commonly cited through the 1987 constructive literature,
+rather than as a theorem proved from scratch inside this manuscript.
+
 The remaining mathematical burden is therefore no longer a vague "continuum
 construction problem." It is the cited multiscale constructive package used in
 Theorem 5.2. Once that intake is granted, the vacuum-compatibility,
 no-spectral-pollution, and final mass-gap assembly steps close in sequence.
+
+Accordingly, the paper's honest advance is concentration, not silent
+replacement. The continuum frontier is now singular and named: `H3a`. Better
+internal summaries of the polymer, RG, or transfer story are welcome, but they
+remain summaries until the cited constructive-QFT hypotheses are discharged in
+the exact norm and sector form used here.
 
 Combining Sections 3-6 yields the manuscript's final assembly:
 
@@ -375,4 +420,4 @@ derivations.
 
 | Proved in this paper | Assumed externally with citation | Explicitly left open |
 | --- | --- | --- |
-| Section 3 identifies the finite self-adjointness and explicit fixed-lattice gap surface; Section 4 isolates the uniform finite spectral-margin target conditional on domination; Theorem 5.1 states the corrected `H3a`/`H3b` continuum-transfer interface in theorem form; Theorem 5.2 packages the transfer-matrix convergence theorem from the cited Balaban multiscale inputs; Lemma 5.3 derives vacuum-projection continuity from `H3a` and RP.4; Theorem 5.4 derives no spectral pollution below the finite margin; Section 6 records the RP.1-RP.4 reconstruction bridge and the Seiler-compatibility boundary; Theorem 7.1 packages the final mass-gap assembly. | Osterwalder-Schrader reconstruction (`OS1973`, `OS1975`), continuum gauge-theory authority boundaries (`Seiler1982`), asymptotic-freedom background (`GrossWilczek1973`, `Politzer1973`), and the Balaban multiscale fluctuation-integral plus large-field/small-field decomposition inputs used in the transfer theorem (`Balaban1988` and surrounding cited constructive work). | Repo-native Agda formalization of the full Balaban multiscale package, referee/community acceptance of the resulting Clay-facing synthesis, and any claim that DASHI has internally rederived all cited constructive-QFT inputs from scratch without external theorem import. |
+| Section 3 identifies the finite self-adjointness and explicit fixed-lattice gap surface; Section 4 isolates the uniform finite spectral-margin target conditional on domination; Theorem 5.1 states the corrected `H3a`/`H3b` continuum-transfer interface in theorem form; Theorem 5.2 packages the transfer-matrix convergence theorem from the cited Balaban multiscale inputs; Lemma 5.3 derives vacuum-projection continuity from `H3a` and RP.4; Theorem 5.4 derives no spectral pollution below the finite margin; Section 6 records the RP.1-RP.4 reconstruction bridge and the Seiler-compatibility boundary; Theorem 7.1 packages the final mass-gap assembly. | Osterwalder-Schrader reconstruction (`OS1973`, `OS1975`), continuum gauge-theory authority boundaries (`Seiler1982`), asymptotic-freedom background (`GrossWilczek1973`, `Politzer1973`), and the Balaban multiscale fluctuation-integral, large-field/small-field decomposition, and interacting reflection-positive continuum inputs used in the transfer theorem (`Balaban1988` and surrounding cited constructive work). | Repo-native Agda formalization of the full Balaban multiscale package, referee/community acceptance of the resulting Clay-facing synthesis, and any claim that DASHI has internally rederived all cited constructive-QFT inputs from scratch without external theorem import. |

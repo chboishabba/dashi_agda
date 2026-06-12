@@ -7,11 +7,13 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 ------------------------------------------------------------------------
--- Sprint 64 NS source-budget exhaustion and CKN route-pivot receipt.
+-- Sprint 64 NS source-budget exhaustion historical route receipt.
 --
--- This receipt records governance only.  It does not prove CKN
--- epsilon-regularity, pressure reconstruction, no finite-time blowup, or
--- Clay/Navier-Stokes promotion.
+-- This receipt now sits in packet history, not at the live theorem frontier.
+-- It records the older diagnostic pivot where the source-budget route failed
+-- and the repo first exposed the classical PDE intake later normalized into
+-- the explicit candidate packet around CKN + ESS + LRT + A1/A3 + A4 + A5-A9.
+-- It proves none of those packet components.
 
 Scalar : Set
 Scalar = String
@@ -41,12 +43,44 @@ canonicalExhaustedDiagnostics =
   ∷ crossShellParentBudgetNoncontractive
   ∷ []
 
+data Sprint64ClassicalPDEInput : Set where
+  candidatePacketHistoricalIntakeSurface :
+    Sprint64ClassicalPDEInput
+  localPressureReconstructionRequired :
+    Sprint64ClassicalPDEInput
+  localEnergyInequalityRequired :
+    Sprint64ClassicalPDEInput
+  suitableWeakSolutionHypothesisRequired :
+    Sprint64ClassicalPDEInput
+  cknEpsilonRegularityRequired :
+    Sprint64ClassicalPDEInput
+  essL3NoBlowupClosureRequired :
+    Sprint64ClassicalPDEInput
+  a1A6A9ClassicalPDEChainRequired :
+    Sprint64ClassicalPDEInput
+
+canonicalSprint64ClassicalPDEInputs :
+  List Sprint64ClassicalPDEInput
+canonicalSprint64ClassicalPDEInputs =
+  candidatePacketHistoricalIntakeSurface
+  ∷ localPressureReconstructionRequired
+  ∷ localEnergyInequalityRequired
+  ∷ suitableWeakSolutionHypothesisRequired
+  ∷ cknEpsilonRegularityRequired
+  ∷ essL3NoBlowupClosureRequired
+  ∷ a1A6A9ClassicalPDEChainRequired
+  ∷ []
+
 data Sprint64RouteDecision : Set where
+  historicalPreTheoremReceiptOnly :
+    Sprint64RouteDecision
   nsSourceBudgetRouteExhausted :
     Sprint64RouteDecision
-  localCriticalConcentrationPressureMissing :
+  explicitCandidatePacketNowLivesElsewhere :
     Sprint64RouteDecision
-  cknCriticalNormRouteOpenDecision :
+  pressureLocalEnergyPackageMissingAtSprint64 :
+    Sprint64RouteDecision
+  cknEssLrtA1A3A4A5A9PacketNotYetNormalizedAtSprint64 :
     Sprint64RouteDecision
   noClayPromotion :
     Sprint64RouteDecision
@@ -54,32 +88,37 @@ data Sprint64RouteDecision : Set where
 canonicalSprint64RouteDecisions :
   List Sprint64RouteDecision
 canonicalSprint64RouteDecisions =
-  nsSourceBudgetRouteExhausted
-  ∷ localCriticalConcentrationPressureMissing
-  ∷ cknCriticalNormRouteOpenDecision
+  historicalPreTheoremReceiptOnly
+  ∷ nsSourceBudgetRouteExhausted
+  ∷ explicitCandidatePacketNowLivesElsewhere
+  ∷ pressureLocalEnergyPackageMissingAtSprint64
+  ∷ cknEssLrtA1A3A4A5A9PacketNotYetNormalizedAtSprint64
   ∷ noClayPromotion
   ∷ []
 
 data Sprint64OpenGate : Set where
-  gatePressureReconstruction :
+  gateHistoricalCandidatePacketNormalizationReference :
     Sprint64OpenGate
-  gateCKNEpsilonThresholdCalibration :
+  gatePressurePoissonReconstruction :
     Sprint64OpenGate
-  gateLocalCriticalQuantityBridge :
+  gateLocalEnergyInequalityForSuitableWeakSolutions :
     Sprint64OpenGate
-  gateSuitableWeakSolutionBridge :
+  gatePressureInclusiveCKNQuantity :
     Sprint64OpenGate
-  gateNoFiniteTimeBlowup :
+  gateCKNEpsilonRegularityTheorem :
+    Sprint64OpenGate
+  gateESSL3NoBlowupClosure :
     Sprint64OpenGate
 
 canonicalSprint64OpenGates :
   List Sprint64OpenGate
 canonicalSprint64OpenGates =
-  gatePressureReconstruction
-  ∷ gateCKNEpsilonThresholdCalibration
-  ∷ gateLocalCriticalQuantityBridge
-  ∷ gateSuitableWeakSolutionBridge
-  ∷ gateNoFiniteTimeBlowup
+  gateHistoricalCandidatePacketNormalizationReference
+  ∷ gatePressurePoissonReconstruction
+  ∷ gateLocalEnergyInequalityForSuitableWeakSolutions
+  ∷ gatePressureInclusiveCKNQuantity
+  ∷ gateCKNEpsilonRegularityTheorem
+  ∷ gateESSL3NoBlowupClosure
   ∷ []
 
 data Sprint64Promotion : Set where
@@ -91,15 +130,15 @@ sprint64PromotionImpossibleHere ()
 
 sprint64SourceBudgetVerdict : String
 sprint64SourceBudgetVerdict =
-  "NS source-budget route diagnostically exhausted on current Sprint 55-63 artifacts"
+  "Sprint 64 is a historical diagnostic receipt: the NS source-budget route was exhausted on Sprint 55-63 artifacts before the repo later normalized the explicit candidate packet around CKN + ESS + LRT + A1/A3 + A4 + A5-A9"
 
 sprint64CKNPreflightContract : String
 sprint64CKNPreflightContract =
-  "ns_sprint64_local_critical_concentration_summary.json velocity-only local L3 concentration preflight, pressure missing, no CKN certificate"
+  "ns_sprint64_local_critical_concentration_summary.json records a velocity-only L3 preflight from packet history; before the later explicit candidate packet around CKN + ESS + LRT + A1/A3 + A4 + A5-A9, the missing intake here was pressure reconstruction + local energy + suitable weak solution + pressure-inclusive CKN quantity, so no theorem-shape A5-A9 certificate is available"
 
 sprint64Boundary : String
 sprint64Boundary =
-  "Sprint 64 records a norm switch from raw action/enstrophy budgets to CKN-style local critical concentration. Current dashiCFD truth artifacts lack pressure snapshots, so the audit is velocity-only and cannot certify CKN epsilon regularity."
+  "Sprint 64 should be read as a historical pre-theorem route receipt inside the sharper NS posture. It records the old norm switch from raw action/enstrophy budgets to the classical NS PDE intake later housed in the explicit candidate packet around CKN + ESS + LRT + A1/A3 + A4 + A5-A9: pressure reconstruction, local energy inequality, suitable weak solution structure, pressure-inclusive CKN epsilon-regularity, and ESS/BKM no-blowup. The Sprint 64 surface remains diagnostic, velocity-only, and fail-closed; no theorem step or Clay/NS promotion is discharged."
 
 record ClaySprintSixtyFourNSSourceBudgetExhaustionCKNRouteReceipt : Set₁ where
   field
@@ -112,6 +151,11 @@ record ClaySprintSixtyFourNSSourceBudgetExhaustionCKNRouteReceipt : Set₁ where
       List ExhaustedSourceBudgetDiagnostic
     exhaustedDiagnosticsAreCanonical :
       exhaustedDiagnostics ≡ canonicalExhaustedDiagnostics
+
+    classicalPDEInputs :
+      List Sprint64ClassicalPDEInput
+    classicalPDEInputsAreCanonical :
+      classicalPDEInputs ≡ canonicalSprint64ClassicalPDEInputs
 
     cknCriticalNormRouteOpen :
       Bool
@@ -186,6 +230,8 @@ canonicalSprint64Receipt =
     ; sourceBudgetRouteExhaustedIsTrue = refl
     ; exhaustedDiagnostics = canonicalExhaustedDiagnostics
     ; exhaustedDiagnosticsAreCanonical = refl
+    ; classicalPDEInputs = canonicalSprint64ClassicalPDEInputs
+    ; classicalPDEInputsAreCanonical = refl
     ; cknCriticalNormRouteOpen = true
     ; cknCriticalNormRouteOpenIsTrue = refl
     ; pressureReconstructionAvailable = false

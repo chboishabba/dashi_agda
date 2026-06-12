@@ -11,11 +11,12 @@ open import Data.List.Base using (List; _∷_; [])
 ------------------------------------------------------------------------
 -- Paper 3 Yang-Mills dependency graph receipt.
 --
--- This is a YM-lane receipt only.  It records the dependency graph from the
--- same-prime KP reduction through path counting, convergence, strict
--- absorption, polymer-activity supply, Balaban RG, and the rho < 1 Clay-level
--- gate.  It does not promote a continuum KP theorem, Balaban RG theorem,
--- Yang-Mills construction, mass gap, or Clay result.
+-- This is a YM-lane receipt only.  It records the explicit theorem grammar
+-- from same-prime KP reduction through path counting, convergence, strict
+-- absorption, polymer-activity supply, Balaban RG / `H3a`, and the rho < 1
+-- Clay-level gate.  Unlike the NS and unification candidate-complete packets,
+-- the YM lane remains Balaban-burdened: the chain is sharp, but the hard
+-- continuum intake is still open and no promotion occurs.
 
 data Paper3YMDependencyGraphStatus : Set where
   paper3YMDependencyGraphRecordedNoPromotion :
@@ -191,15 +192,15 @@ ym5Statement =
 
 ym6Statement : String
 ym6Statement =
-  "YM6: Balaban RG remains the hard open bridge from carrier/KP bookkeeping to continuum multiscale control."
+  "YM6: Balaban RG and the H3a transfer intake remain the hard open bridge from carrier/KP bookkeeping to continuum multiscale control."
 
 ym7Statement : String
 ym7Statement =
-  "YM7: rho < 1 is Clay-level only after YM5 and YM6; it is recorded here as nonpromotion."
+  "YM7: rho < 1 is only a downstream Clay-level consumer after YM5 and YM6; it is recorded here as explicit nonpromotion."
 
 paper3YMStatement : String
 paper3YMStatement =
-  "Paper 3 YM dependency graph: YM1 same-prime reduction; YM2/YM3 path counting plus convergence; YM4 strict absorption; YM5 actual polymer activity missing and immediate; YM6 Balaban RG hard open; YM7 rho<1 remains Clay-level/nonpromotion."
+  "Paper 3 YM dependency graph: explicit YM1-YM7 theorem grammar is recorded, but YM5 actual polymer activity and the Balaban-centered YM6/H3a burden remain open, so YM7 rho<1 stays downstream and every promotion flag stays false."
 
 record Paper3YMDependencyGraphReceipt : Setω where
   field
@@ -547,9 +548,9 @@ canonicalPaper3YMDependencyGraphReceipt =
         ∷ "YM2/YM3 record path counting plus the geometric convergence threshold"
         ∷ "YM4 records strict absorption as a stronger target than convergence"
         ∷ "YM5 is the immediate missing dependency: actual polymer activity is not supplied here"
-        ∷ "YM6 Balaban RG is the hard open continuum bridge"
-        ∷ "YM7 rho<1 is Clay-level and remains nonpromoted"
-        ∷ "No continuum KP, infinite-volume polymer, Balaban RG, mass-gap, Clay, or terminal promotion is made"
+        ∷ "YM6 Balaban RG and H3a remain the hard open Balaban-centered continuum burden"
+        ∷ "YM7 rho<1 is a downstream Clay-level consumer and remains nonpromoted"
+        ∷ "The theorem grammar is explicit, but no continuum KP, infinite-volume polymer, Balaban RG theorem, mass-gap, Clay, or terminal promotion is made"
         ∷ []
     }
 

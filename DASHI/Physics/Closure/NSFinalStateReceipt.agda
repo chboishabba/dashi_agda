@@ -19,7 +19,7 @@ import DASHI.Physics.Closure.Phase2ProgrammeReceipt as Phase2
 -- Navier-Stokes final-state receipt.
 
 data NSFinalStateStatus : Set where
-  lerayCompleteRoutesClosedRegularityOpen :
+  candidatePackageConsumedPromotionEvidenceOpen :
     NSFinalStateStatus
 
 data NSFinalStateClosedItem : Set where
@@ -91,7 +91,7 @@ nsFinalStatePromotionImpossibleHere ()
 
 nsFinalStateStatement : String
 nsFinalStateStatement =
-  "NS final state: Leray W1-W5 are complete at receipt scope; the 2/3/5 Haar-frame and critical-Besov-large-data proof routes are closed; enstrophy, L-infinity vorticity, smoothness, and Clay NS remain open."
+  "NS final state: Leray W1-W5 and the candidate-complete self-contained A1-A9 package are explicit at receipt scope, the classical theorem intake is explicit, and the remaining issue is exact acceptance/promotion of the consumed norms/constants package into continuum enstrophy, BKM regularity, global smoothness, and Clay closure; all promotion flags remain false."
 
 record NSFinalStateReceipt : Setω where
   field
@@ -261,7 +261,7 @@ canonicalNSFinalStateReceipt :
 canonicalNSFinalStateReceipt =
   record
     { status =
-        lerayCompleteRoutesClosedRegularityOpen
+        candidatePackageConsumedPromotionEvidenceOpen
     ; weakSummaryReceipt =
         Weak.canonicalNSWeakSolutionSummaryReceipt
     ; w1Complete =
@@ -365,10 +365,10 @@ canonicalNSFinalStateReceipt =
     ; statementIsCanonical =
         refl
     ; receiptBoundary =
-        "W1-W5 record the Leray weak-solution chain as complete at receipt scope"
-        ∷ "The 2/3/5 Haar-frame route is closed as a proof route and does not promote Clay NS"
-        ∷ "The critical Besov large-data route is closed here as a Clay proof route; critical Besov control itself is not constructed"
-        ∷ "Enstrophy passage, L-infinity vorticity control, continuum BKM, and global smooth regularity remain open"
+        "W1-W5 record the Leray weak-solution chain, and the self-contained candidate A1-A9 package is explicit at receipt scope"
+        ∷ "The classical theorem intake is explicit; these receipts are no longer blocked on theorem-shape grammar"
+        ∷ "The 2/3/5 Haar-frame route and the critical-Besov large-data route are consumed fail-closed as package evidence and do not by themselves promote Clay NS"
+        ∷ "The remaining issue is exact acceptance/promotion of the consumed norms/constants package into continuum enstrophy, L-infinity vorticity control, continuum BKM, and global smooth regularity"
         ∷ "Clay Navier-Stokes and terminal promotion remain false"
         ∷ []
     }

@@ -7,42 +7,47 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
-import DASHI.Physics.Closure.YMDepthContinuumLimitObstructionReceipt as Depth
+import DASHI.Physics.Closure.YMClayGapRefinedReceipt as Refined
 
 ------------------------------------------------------------------------
 -- Final corrected native Clay Yang-Mills blocker.
+--
+-- The live native blocker is no longer described as a menu of internal
+-- obstructions. It is the same single burden named by the refined receipt:
+-- the Balaban-centered H3a external-content Yang-Mills intake, with RP/OS/
+-- Wightman/transfer downstream of it and no theorem promotion.
 
 data YMClayTrueBlockerStatus : Set where
-  trueBlockerIdentifiedNoClayPromotion :
+  trueBlockerIsBalabanCenteredH3aExternalIntake :
     YMClayTrueBlockerStatus
 
 data YMClayTrueBlocker : Set where
-  threePlusOneFormalismAlreadyExists :
+  balabanCenteredH3aClusterCarriesBurden :
     YMClayTrueBlocker
 
-  wilsonActionAlreadyRecorded :
+  externalContentYMIntakeStillMissing :
     YMClayTrueBlocker
 
-  threeHeegnerSitesAreRigid :
+  reflectionPositivityDependsOnIntake :
     YMClayTrueBlocker
 
-  noSpatialRefinementMechanism :
+  osterwalderSchraderDependsOnIntake :
     YMClayTrueBlocker
 
-  depthRouteLeavesOnlyThreeSpatialModes :
+  wightmanDependsOnIntake :
     YMClayTrueBlocker
 
-  continuumQFTRequiresMoreSpatialStructure :
+  transferDependsOnIntake :
     YMClayTrueBlocker
 
 canonicalYMClayTrueBlockers : List YMClayTrueBlocker
 canonicalYMClayTrueBlockers =
-  threePlusOneFormalismAlreadyExists
-  ∷ wilsonActionAlreadyRecorded
-  ∷ threeHeegnerSitesAreRigid
-  ∷ noSpatialRefinementMechanism
-  ∷ depthRouteLeavesOnlyThreeSpatialModes
-  ∷ continuumQFTRequiresMoreSpatialStructure
+  balabanCenteredH3aClusterCarriesBurden
+  ∷ externalContentYMIntakeStillMissing
+  ∷ reflectionPositivityDependsOnIntake
+  ∷ osterwalderSchraderDependsOnIntake
+  ∷ wightmanDependsOnIntake
+  ∷ transferDependsOnIntake
   ∷ []
 
 data YMClayTrueBlockerPromotion : Set where
@@ -54,18 +59,20 @@ ymClayTrueBlockerPromotionImpossibleHere ()
 
 ymClayTrueBlockerStatement : String
 ymClayTrueBlockerStatement =
-  "The native DASHI Yang-Mills blocker is not absence of 3+1 formalism; it is that the three rigid Heegner spatial sites cannot support a continuum 3+1-dimensional QFT without a spatial refinement mechanism."
+  "The native DASHI Yang-Mills blocker is the Balaban-centered H3a external-content Yang-Mills intake; reflection positivity, Osterwalder-Schrader, Wightman, and transfer remain downstream consumers; no Clay Yang-Mills or terminal Clay claim is promoted."
 
 record YMClayTrueBlockerReceipt : Setω where
   field
     status :
       YMClayTrueBlockerStatus
 
-    depthObstructionReceipt :
-      Depth.YMDepthContinuumLimitObstructionReceipt
+    refinedReceipt :
+      Refined.YMClayGapRefinedReceipt
 
-    depthRouteBlocked :
-      Depth.ymDepthContinuumLimitObstructed depthObstructionReceipt ≡ true
+    refinedBlockerStillLive :
+      Refined.ymClayBlockerField refinedReceipt
+      ≡
+      Refined.balabanCenteredH3aExternalContentYMIntake
 
     threePlusOneFormalismExists :
       Bool
@@ -121,6 +128,30 @@ record YMClayTrueBlockerReceipt : Setω where
     continuumYangMillsConstructedIsFalse :
       continuumYangMillsConstructed ≡ false
 
+    reflectionPositivityConsumerRecorded :
+      Bool
+
+    reflectionPositivityConsumerRecordedIsTrue :
+      reflectionPositivityConsumerRecorded ≡ true
+
+    osterwalderSchraderConsumerRecorded :
+      Bool
+
+    osterwalderSchraderConsumerRecordedIsTrue :
+      osterwalderSchraderConsumerRecorded ≡ true
+
+    wightmanConsumerRecorded :
+      Bool
+
+    wightmanConsumerRecordedIsTrue :
+      wightmanConsumerRecorded ≡ true
+
+    transferConsumerRecorded :
+      Bool
+
+    transferConsumerRecordedIsTrue :
+      transferConsumerRecorded ≡ true
+
     ymClayPromotion :
       Bool
 
@@ -167,10 +198,10 @@ canonicalYMClayTrueBlockerReceipt :
 canonicalYMClayTrueBlockerReceipt =
   record
     { status =
-        trueBlockerIdentifiedNoClayPromotion
-    ; depthObstructionReceipt =
-        Depth.canonicalYMDepthContinuumLimitObstructionReceipt
-    ; depthRouteBlocked =
+        trueBlockerIsBalabanCenteredH3aExternalIntake
+    ; refinedReceipt =
+        Refined.canonicalYMClayGapRefinedReceipt
+    ; refinedBlockerStillLive =
         refl
     ; threePlusOneFormalismExists =
         true
@@ -208,6 +239,22 @@ canonicalYMClayTrueBlockerReceipt =
         false
     ; continuumYangMillsConstructedIsFalse =
         refl
+    ; reflectionPositivityConsumerRecorded =
+        true
+    ; reflectionPositivityConsumerRecordedIsTrue =
+        refl
+    ; osterwalderSchraderConsumerRecorded =
+        true
+    ; osterwalderSchraderConsumerRecordedIsTrue =
+        refl
+    ; wightmanConsumerRecorded =
+        true
+    ; wightmanConsumerRecordedIsTrue =
+        refl
+    ; transferConsumerRecorded =
+        true
+    ; transferConsumerRecordedIsTrue =
+        refl
     ; ymClayPromotion =
         false
     ; ymClayPromotionIsFalse =
@@ -233,10 +280,10 @@ canonicalYMClayTrueBlockerReceipt =
     ; promotionFlagsAreEmpty =
         refl
     ; receiptBoundary =
-        "The corrected blocker preserves the existing 3+1 Lorentz and Wilson-action receipts"
-        ∷ "The missing ingredient is a carrier-native spatial refinement mechanism"
-        ∷ "Depth refinement alone leaves a finite spatial-mode quantum-mechanical system"
-        ∷ "No Clay Yang-Mills or terminal Clay claim is promoted"
+        "The refined receipt's single live blocker is preserved."
+        ∷ "The Balaban-centered H3a cluster carries the remaining external-content Yang-Mills intake burden."
+        ∷ "Reflection positivity, Osterwalder-Schrader, Wightman, and transfer are downstream consumers only."
+        ∷ "No Clay Yang-Mills or terminal Clay claim is promoted."
         ∷ []
     }
 

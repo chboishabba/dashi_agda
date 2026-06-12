@@ -219,8 +219,8 @@ record YMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt : Set₁ wh
   field
     latticeAuthorityBoundary :
       Lattice.LatticeMassGapAuthorityBoundary
-    latticeProviderDerivedByScopedAuthority :
-      Lattice.latticeMassGapProviderDerivedInRepo ≡ true
+    latticeProviderNotDerivedInRepo :
+      Lattice.latticeMassGapProviderDerivedInRepo ≡ false
     latticeMassGapUnconditionalStillFalse :
       Lattice.latticeMassGapFromAnisotropicKPUnconditional ≡ false
 
@@ -300,7 +300,7 @@ canonicalYMSprint85TemporalTransferSpatialBlockingCompatibilityReceipt =
   record
     { latticeAuthorityBoundary =
         Lattice.latticeMassGapAuthorityBoundary
-    ; latticeProviderDerivedByScopedAuthority = refl
+    ; latticeProviderNotDerivedInRepo = refl
     ; latticeMassGapUnconditionalStillFalse = refl
     ; spatialOnlyBlockingReceipt =
         SpatialLinks.canonicalYMSpatialOnlyBlockingTemporalLinksReceipt

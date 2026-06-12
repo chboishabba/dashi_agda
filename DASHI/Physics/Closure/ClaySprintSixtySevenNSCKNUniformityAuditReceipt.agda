@@ -13,16 +13,66 @@ import DASHI.Physics.Closure.ClaySprintSixtySevenNSCKNLemmaTestLadderReceipt
 ------------------------------------------------------------------------
 -- Sprint 67B NS CKN uniformity audit receipt.
 --
--- Sprint 66 sampled hot spots and found decay under zoom.  Sprint 67B records
--- the next proof-facing diagnostic: audit every candidate ascended cylinder,
+-- Sprint 66 sampled hot spots and found decay under zoom. Sprint 67B archives
+-- the next bounded diagnostic pass: audit candidate ascended cylinders,
 -- cluster persistence, pressure fraction, epsilon sweep, and N/cadence
--- stability.  This receipt is a test contract only.
+-- stability. This receipt intentionally stays a historical diagnostic surface
+-- inside the broader candidate packet that feeds the classical PDE intake for
+-- A9 CKN/ESS closure. It is not the live theorem frontier, carries no theorem
+-- authority by itself, and cannot authorize Clay or NS promotion.
 
 Scalar : Set
 Scalar = String
 
 clayNavierStokesPromoted : Bool
 clayNavierStokesPromoted = false
+
+data Sprint67BClassicalPDEClause : Set where
+  allCandidateCylindersMustBeCovered :
+    Sprint67BClassicalPDEClause
+  pressureFractionMustStaySubcritical :
+    Sprint67BClassicalPDEClause
+  localEnergyResidualMustShrinkUniformly :
+    Sprint67BClassicalPDEClause
+  suitableWeakSolutionStructureMustHold :
+    Sprint67BClassicalPDEClause
+  uniformCKNEpsilonRegularityMustBeTheorem :
+    Sprint67BClassicalPDEClause
+  essL3NoBlowupMustCloseA9 :
+    Sprint67BClassicalPDEClause
+
+data Sprint67BSurfacePosture : Set where
+  historicalDiagnosticArchive :
+    Sprint67BSurfacePosture
+  boundedCandidatePacketSurface :
+    Sprint67BSurfacePosture
+  notLiveTheoremFrontier :
+    Sprint67BSurfacePosture
+  noClayPromotionAuthority :
+    Sprint67BSurfacePosture
+  noStandaloneNSClosureAuthority :
+    Sprint67BSurfacePosture
+
+canonicalSprint67BClassicalPDEClauses :
+  List Sprint67BClassicalPDEClause
+canonicalSprint67BClassicalPDEClauses =
+  allCandidateCylindersMustBeCovered
+  ∷ pressureFractionMustStaySubcritical
+  ∷ localEnergyResidualMustShrinkUniformly
+  ∷ suitableWeakSolutionStructureMustHold
+  ∷ uniformCKNEpsilonRegularityMustBeTheorem
+  ∷ essL3NoBlowupMustCloseA9
+  ∷ []
+
+canonicalSprint67BSurfacePosture :
+  List Sprint67BSurfacePosture
+canonicalSprint67BSurfacePosture =
+  historicalDiagnosticArchive
+  ∷ boundedCandidatePacketSurface
+  ∷ notLiveTheoremFrontier
+  ∷ noClayPromotionAuthority
+  ∷ noStandaloneNSClosureAuthority
+  ∷ []
 
 data Sprint67BRouteDecision : Set where
   hotspotEvidenceFavorable :
@@ -50,34 +100,34 @@ canonicalSprint67BRouteDecisions =
   ∷ []
 
 data Sprint67BOpenGate : Set where
-  gateAllCandidateAscendedCylinders :
+  gateAllCandidateSuitableWeakCylinders :
     Sprint67BOpenGate
-  gateScaleEpsilonPersistenceCalibration :
+  gateScaleEpsilonPersistenceTheorem :
     Sprint67BOpenGate
-  gatePressureFractionBound :
+  gatePressureFractionSubcriticalBound :
     Sprint67BOpenGate
-  gateClusterPersistenceBound :
+  gateClusterPersistenceExclusion :
     Sprint67BOpenGate
   gateMaxCKNStableUnderN :
     Sprint67BOpenGate
-  gateUniformCKNEpsilonTheorem :
+  gateUniformCKNEpsilonRegularityTheorem :
     Sprint67BOpenGate
-  gateSuitableWeakSolutionBridge :
+  gateSuitableWeakSolutionClosure :
     Sprint67BOpenGate
-  gateNoFiniteTimeBlowup :
+  gateESSL3NoBlowupClosure :
     Sprint67BOpenGate
 
 canonicalSprint67BOpenGates :
   List Sprint67BOpenGate
 canonicalSprint67BOpenGates =
-  gateAllCandidateAscendedCylinders
-  ∷ gateScaleEpsilonPersistenceCalibration
-  ∷ gatePressureFractionBound
-  ∷ gateClusterPersistenceBound
+  gateAllCandidateSuitableWeakCylinders
+  ∷ gateScaleEpsilonPersistenceTheorem
+  ∷ gatePressureFractionSubcriticalBound
+  ∷ gateClusterPersistenceExclusion
   ∷ gateMaxCKNStableUnderN
-  ∷ gateUniformCKNEpsilonTheorem
-  ∷ gateSuitableWeakSolutionBridge
-  ∷ gateNoFiniteTimeBlowup
+  ∷ gateUniformCKNEpsilonRegularityTheorem
+  ∷ gateSuitableWeakSolutionClosure
+  ∷ gateESSL3NoBlowupClosure
   ∷ []
 
 data Sprint67BOutputSurface : Set where
@@ -88,12 +138,34 @@ data Sprint67BOutputSurface : Set where
   summaryJSON :
     Sprint67BOutputSurface
 
+data Sprint67BGovernanceFlag : Set where
+  failClosedProofGovernance :
+    Sprint67BGovernanceFlag
+  candidatePacketOnlyRouting :
+    Sprint67BGovernanceFlag
+  historicalSnapshotOnly :
+    Sprint67BGovernanceFlag
+  theoremFrontierDelegatedAway :
+    Sprint67BGovernanceFlag
+  promotionAuthorityExplicitlyAbsent :
+    Sprint67BGovernanceFlag
+
 canonicalSprint67BOutputSurfaces :
   List Sprint67BOutputSurface
 canonicalSprint67BOutputSurfaces =
   byCylinderCSV
   ∷ byClusterCSV
   ∷ summaryJSON
+  ∷ []
+
+canonicalSprint67BGovernanceFlags :
+  List Sprint67BGovernanceFlag
+canonicalSprint67BGovernanceFlags =
+  failClosedProofGovernance
+  ∷ candidatePacketOnlyRouting
+  ∷ historicalSnapshotOnly
+  ∷ theoremFrontierDelegatedAway
+  ∷ promotionAuthorityExplicitlyAbsent
   ∷ []
 
 data Sprint67BPromotion : Set where
@@ -109,20 +181,46 @@ cknUniformityQuantity =
 
 sprint67BOutputContract : String
 sprint67BOutputContract =
-  "ns_sprint67_ckn_uniformity_by_cylinder.csv, ns_sprint67_ckn_uniformity_by_cluster.csv, ns_sprint67_ckn_uniformity_summary.json"
+  "ns_sprint67_ckn_uniformity_by_cylinder.csv, ns_sprint67_ckn_uniformity_by_cluster.csv, ns_sprint67_ckn_uniformity_summary.json; historical bounded evidence for candidate-cylinder, pressure-fraction, local-energy, suitable-weak-solution, CKN, and ESS intake surfaces inside the candidate packet, not a live theorem frontier artifact"
 
 sprint67BRouteLabels : String
 sprint67BRouteLabels =
-  "CKN_UNIFORM_DECAY_SUPPORTED, CKN_LOCALIZED_PERSISTENT_PLATEAU, CKN_CONCENTRATION_CANDIDATE_FOUND, CKN_PRESSURE_DOMINATED_ARTIFACT, CKN_INCONCLUSIVE_NEEDS_HIGHER_N"
+  "CKN_UNIFORM_DECAY_SUPPORTED, CKN_LOCALIZED_PERSISTENT_PLATEAU, CKN_CONCENTRATION_CANDIDATE_FOUND, CKN_PRESSURE_DOMINATED_ARTIFACT, CKN_INCONCLUSIVE_NEEDS_HIGHER_N, CKN_HISTORICAL_DIAGNOSTIC_ONLY"
+
+sprint67BHistoricalStatus : String
+sprint67BHistoricalStatus =
+  "Historical diagnostic archive only: this receipt records a bounded Sprint 67B audit snapshot and must be read as archived candidate-packet evidence rather than current theorem-frontier state."
+
+sprint67BCandidatePacketPlacement : String
+sprint67BCandidatePacketPlacement =
+  "Candidate-packet placement: this module sits downstream of the sprint-67 hotspot ladder and upstream of theorem-level CKN/ESS closure; it contributes intake evidence but does not discharge the PDE gates."
+
+sprint67BFrontierBoundary : String
+sprint67BFrontierBoundary =
+  "Frontier boundary: live theorem claims belong to separate proof owners for uniform CKN epsilon regularity, suitable weak solution closure, ESS no-blowup, and any Clay/NS promotion path."
+
+sprint67BGovernanceSummary : String
+sprint67BGovernanceSummary =
+  "Governance summary: proofs stay fail-closed, promotion authority is absent, and every favorable metric here remains bounded diagnostic evidence until imported theorem surfaces close the open gates."
 
 sprint67BBoundary : String
 sprint67BBoundary =
-  "Sprint 67B records favorable bounded CKN uniformity evidence: 1536/1536 selected ascended cylinders decay under zoom, with 120 clusters, no flat or concentrating cylinders, pressure_fraction_max~=0.1307, and max_C_total decreasing from N32 to N64. This is diagnostic only; unbounded candidate coverage, theorem-level pressure control, N-ladder stability beyond tested artifacts, uniform CKN epsilon, suitable weak solution bridge, no-blowup, and Clay/NS promotion remain unproved."
+  "Sprint 67B records favorable bounded CKN uniformity evidence: 1536/1536 selected ascended cylinders decay under zoom, with 120 clusters, no flat or concentrating cylinders, pressure_fraction_max~=0.1307, and max_C_total decreasing from N32 to N64. This is historical diagnostic evidence only inside the A1 -> A6 -> A9 classical PDE candidate packet; it is not the live theorem frontier, does not certify theorem-level pressure/local-energy control, and leaves unbounded candidate coverage, suitable weak solution closure, uniform CKN epsilon regularity, ESS no-blowup, and Clay/NS promotion unproved."
 
 record ClaySprintSixtySevenNSCKNUniformityAuditReceipt : Set₁ where
   field
     sprint67CKNNoPromotion :
       Sprint67CKN.clayNavierStokesPromoted ≡ false
+
+    classicalPDEClauses :
+      List Sprint67BClassicalPDEClause
+    classicalPDEClausesAreCanonical :
+      classicalPDEClauses ≡ canonicalSprint67BClassicalPDEClauses
+
+    surfacePosture :
+      List Sprint67BSurfacePosture
+    surfacePostureIsCanonical :
+      surfacePosture ≡ canonicalSprint67BSurfacePosture
 
     cknRouteInheritedOpen :
       Bool
@@ -264,6 +362,26 @@ record ClaySprintSixtySevenNSCKNUniformityAuditReceipt : Set₁ where
     routeLabelsAreCanonical :
       routeLabels ≡ sprint67BRouteLabels
 
+    historicalStatus :
+      String
+    historicalStatusIsCanonical :
+      historicalStatus ≡ sprint67BHistoricalStatus
+
+    candidatePacketPlacement :
+      String
+    candidatePacketPlacementIsCanonical :
+      candidatePacketPlacement ≡ sprint67BCandidatePacketPlacement
+
+    frontierBoundary :
+      String
+    frontierBoundaryIsCanonical :
+      frontierBoundary ≡ sprint67BFrontierBoundary
+
+    governanceSummary :
+      String
+    governanceSummaryIsCanonical :
+      governanceSummary ≡ sprint67BGovernanceSummary
+
     outputSurfaces :
       List Sprint67BOutputSurface
     outputSurfacesAreCanonical :
@@ -278,6 +396,36 @@ record ClaySprintSixtySevenNSCKNUniformityAuditReceipt : Set₁ where
       List Sprint67BOpenGate
     openGatesAreCanonical :
       openGates ≡ canonicalSprint67BOpenGates
+
+    governanceFlags :
+      List Sprint67BGovernanceFlag
+    governanceFlagsAreCanonical :
+      governanceFlags ≡ canonicalSprint67BGovernanceFlags
+
+    historicalDiagnosticOnly :
+      Bool
+    historicalDiagnosticOnlyIsTrue :
+      historicalDiagnosticOnly ≡ true
+
+    boundedCandidatePacketOnly :
+      Bool
+    boundedCandidatePacketOnlyIsTrue :
+      boundedCandidatePacketOnly ≡ true
+
+    liveTheoremFrontierClaimed :
+      Bool
+    liveTheoremFrontierClaimedIsFalse :
+      liveTheoremFrontierClaimed ≡ false
+
+    standaloneNSClosureClaimed :
+      Bool
+    standaloneNSClosureClaimedIsFalse :
+      standaloneNSClosureClaimed ≡ false
+
+    clayPromotionAuthorityPresent :
+      Bool
+    clayPromotionAuthorityPresentIsFalse :
+      clayPromotionAuthorityPresent ≡ false
 
     clayNavierStokesPromotedIsFalse :
       clayNavierStokesPromoted ≡ false
@@ -299,6 +447,10 @@ canonicalSprint67BReceipt :
 canonicalSprint67BReceipt =
   record
     { sprint67CKNNoPromotion = refl
+    ; classicalPDEClauses = canonicalSprint67BClassicalPDEClauses
+    ; classicalPDEClausesAreCanonical = refl
+    ; surfacePosture = canonicalSprint67BSurfacePosture
+    ; surfacePostureIsCanonical = refl
     ; cknRouteInheritedOpen = true
     ; cknRouteInheritedOpenIsTrue = refl
     ; pooledHotspotDecayCount = 80
@@ -355,12 +507,32 @@ canonicalSprint67BReceipt =
     ; outputContractIsCanonical = refl
     ; routeLabels = sprint67BRouteLabels
     ; routeLabelsAreCanonical = refl
+    ; historicalStatus = sprint67BHistoricalStatus
+    ; historicalStatusIsCanonical = refl
+    ; candidatePacketPlacement = sprint67BCandidatePacketPlacement
+    ; candidatePacketPlacementIsCanonical = refl
+    ; frontierBoundary = sprint67BFrontierBoundary
+    ; frontierBoundaryIsCanonical = refl
+    ; governanceSummary = sprint67BGovernanceSummary
+    ; governanceSummaryIsCanonical = refl
     ; outputSurfaces = canonicalSprint67BOutputSurfaces
     ; outputSurfacesAreCanonical = refl
     ; routeDecisions = canonicalSprint67BRouteDecisions
     ; routeDecisionsAreCanonical = refl
     ; openGates = canonicalSprint67BOpenGates
     ; openGatesAreCanonical = refl
+    ; governanceFlags = canonicalSprint67BGovernanceFlags
+    ; governanceFlagsAreCanonical = refl
+    ; historicalDiagnosticOnly = true
+    ; historicalDiagnosticOnlyIsTrue = refl
+    ; boundedCandidatePacketOnly = true
+    ; boundedCandidatePacketOnlyIsTrue = refl
+    ; liveTheoremFrontierClaimed = false
+    ; liveTheoremFrontierClaimedIsFalse = refl
+    ; standaloneNSClosureClaimed = false
+    ; standaloneNSClosureClaimedIsFalse = refl
+    ; clayPromotionAuthorityPresent = false
+    ; clayPromotionAuthorityPresentIsFalse = refl
     ; clayNavierStokesPromotedIsFalse = refl
     ; promotions = []
     ; promotionsAreEmpty = refl

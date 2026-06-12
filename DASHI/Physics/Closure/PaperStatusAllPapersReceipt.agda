@@ -262,7 +262,9 @@ canonicalPaperStatusAllPapersReceipt =
     ; receiptBoundary =
         "Records Papers 1-8 as a documentation/status snapshot."
         ∷ "Paper 6 diagnostic letter true; Paper 8 conjecture true; Paper 7 internal only."
-        ∷ "Clay YM and Clay NS papers are not submission-ready proof papers."
+        ∷ "Clay YM remains the only live Thing 1 missing-content front: the exact burden is still the externally Balaban-centered physical-beta to nonperturbative bridge, with continuum and authority promotion blockers downstream."
+        ∷ "Clay NS is tracked only as a Thing 2 style self-contained candidate-complete theorem grammar around the negative-Sobolev and non-circular K*(t) drift route; this top-level receipt does not upgrade that candidate content into Clay promotion."
+        ∷ "Unification is likewise tracked only as a Thing 2 style self-contained candidate-complete theorem grammar; the remaining burden is promotion evidence on the UCT.4 cross-term nullity -> four-point -> parallelogram route, not new theorem promotion here."
         ∷ "No exact physical CKM, exact Standard Model, Clay, or terminal promotion is asserted."
         ∷ []
     }

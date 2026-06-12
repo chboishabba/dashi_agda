@@ -544,6 +544,40 @@ fourierOutputCouplingErrorTermCountIs9 :
 fourierOutputCouplingErrorTermCountIs9 =
   refl
 
+data FourierOutputCouplingClause : Set where
+  clausePhysicalGreatCircleHittingSeedsTheRoute :
+    FourierOutputCouplingClause
+  clauseWhitneyPacketsLocalizeThePhysicalAngularMass :
+    FourierOutputCouplingClause
+  clauseDirectionMapMustStayNondegenerateAwayFromCollapsedTriads :
+    FourierOutputCouplingClause
+  clauseNoAngularCollapsePreservesOutputGreatCircleRichness :
+    FourierOutputCouplingClause
+  clauseFourierOutputSupportFeedsTheA4TransferConsumer :
+    FourierOutputCouplingClause
+  clauseFailClosedPromotionPosture :
+    FourierOutputCouplingClause
+
+canonicalFourierOutputCouplingClauses :
+  List FourierOutputCouplingClause
+canonicalFourierOutputCouplingClauses =
+  clausePhysicalGreatCircleHittingSeedsTheRoute
+  ∷ clauseWhitneyPacketsLocalizeThePhysicalAngularMass
+  ∷ clauseDirectionMapMustStayNondegenerateAwayFromCollapsedTriads
+  ∷ clauseNoAngularCollapsePreservesOutputGreatCircleRichness
+  ∷ clauseFourierOutputSupportFeedsTheA4TransferConsumer
+  ∷ clauseFailClosedPromotionPosture
+  ∷ []
+
+fourierOutputCouplingClauseCount : Nat
+fourierOutputCouplingClauseCount =
+  listLength canonicalFourierOutputCouplingClauses
+
+fourierOutputCouplingClauseCountIs6 :
+  fourierOutputCouplingClauseCount ≡ 6
+fourierOutputCouplingClauseCountIs6 =
+  refl
+
 data FourierOutputCouplingBlocker : Set where
   missingPhysicalAngularMeasureConstruction :
     FourierOutputCouplingBlocker
@@ -783,37 +817,41 @@ keepsTerminalPromotionFalse =
 ------------------------------------------------------------------------
 -- O/R/C/S/L/P/G/F.
 
+fourierOutputCouplingTheoremLadderSummary : String
+fourierOutputCouplingTheoremLadderSummary =
+  "The Fourier-output ladder is: physical LRT great-circle hitting seeds localized Whitney packets, the c-hat direction map must remain nondegenerate away from collapsed triads, no-angular-collapse preserves output richness, the resulting support feeds the A4 transfer socket, and all theorem or Clay promotions remain fail-closed."
+
 organizationString : String
 organizationString =
-  "O: NS A4 coupling boundary owned by Closure; it links LRT physical vorticity-direction richness to Fourier triadic output support for Abel measures."
+  "O: Own the self-contained LRT Fourier-output coupling lane only, presenting the physical-to-Fourier chain as a classical theorem ladder with an explicit nondegeneracy middle step."
 
 requirementString : String
 requirementString =
-  "R: Record the physical angular measure, localized Whitney frame packets, output-direction map, Whitney coupling, no-collapse transfer, and scale/window compatibility without proving promotion."
+  "R: Record the explicit coupling ladder: physical great-circle hitting, localized Whitney packets, nondegenerate output-direction map, no-angular-collapse transfer, and Fourier-output support compatibility with the A4 consumer, without proving promotion."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: NSLeiRenTianFourierOutputCouplingBoundary imports LRT, A4 output transfer, Abel defect construction, stationarity, and triadic sheaf output carriers."
+  "C: NSLeiRenTianFourierOutputCouplingBoundary imports LRT, A4 output transfer, Abel defect construction, stationarity, triadic sheaf output carriers, and an explicit six-clause Fourier-output theorem ladder."
 
 stateString : String
 stateString =
-  "S: Boundary is fail-closed: all target surfaces are recorded, while construction, coupling, support lift, A4 proof, and Clay promotion remain false."
+  "S: Boundary is fail-closed: all target surfaces are recorded, while physical angular mass construction, Whitney localization, direction-map nondegeneracy, no-angular-collapse transfer, support lift, A4 proof, and Clay promotion remain false."
 
 latticeString : String
 latticeString =
-  "L: physical LRT measure -> Whitney packet frame -> Fourier c-hat output map -> no angular collapse -> output great-circle support -> A4 consumer."
+  "L: physical LRT measure -> Whitney packet frame -> nondegenerate Fourier c-hat output map -> no angular collapse -> output great-circle support -> A4 consumer."
 
 proposalString : String
 proposalString =
-  "P: The next proof must establish the Whitney/frame coupling inequality and scale-window compatibility before A4 output support can be promoted."
+  "P: The next proof must establish the Whitney/frame coupling inequality, direction-map nondegeneracy away from collapsed triads, and scale-window compatibility before A4 output support can be promoted."
 
 governanceString : String
 governanceString =
-  "G: This module is a receipt and theorem boundary only; promotion remains blocked by explicit false booleans and an empty promotion type."
+  "G: This module is a receipt and theorem boundary only; explicit false booleans, open nondegeneracy steps, and an empty promotion type keep the route fail-closed."
 
 gapString : String
 gapString =
-  "F: Missing physical angular measure construction, localized packet estimate, Fourier pushforward, Whitney coupling, no-collapse transfer, scale compatibility, and output support lift."
+  "F: Missing physical angular measure construction, localized packet estimate, Fourier pushforward, direction-map nondegeneracy control, Whitney coupling, no-collapse transfer, scale compatibility, and output support lift."
 
 ------------------------------------------------------------------------
 -- Canonical compact summary record.
@@ -885,6 +923,20 @@ record NSLeiRenTianFourierOutputCouplingBoundary : Set where
       List FourierOutputCouplingErrorTerm
     errorTermsAreCanonical :
       errorTerms ≡ canonicalFourierOutputCouplingErrorTerms
+    theoremClauses :
+      List FourierOutputCouplingClause
+    theoremClausesAreCanonical :
+      theoremClauses ≡ canonicalFourierOutputCouplingClauses
+    theoremClauseCount :
+      Nat
+    theoremClauseCountIsCanonical :
+      theoremClauseCount ≡ fourierOutputCouplingClauseCount
+    theoremClauseCountProof :
+      theoremClauseCount ≡ 6
+    theoremLadderSummary :
+      String
+    theoremLadderSummaryIsCanonical :
+      theoremLadderSummary ≡ fourierOutputCouplingTheoremLadderSummary
     blockers :
       List FourierOutputCouplingBlocker
     blockersAreCanonical :
@@ -985,6 +1037,13 @@ canonicalNSLeiRenTianFourierOutputCouplingBoundary =
     canonicalScaleWindowCompatibilitySteps
     refl
     canonicalFourierOutputCouplingErrorTerms
+    refl
+    canonicalFourierOutputCouplingClauses
+    refl
+    fourierOutputCouplingClauseCount
+    refl
+    fourierOutputCouplingClauseCountIs6
+    fourierOutputCouplingTheoremLadderSummary
     refl
     canonicalFourierOutputCouplingBlockers
     refl
