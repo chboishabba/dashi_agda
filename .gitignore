@@ -25,6 +25,7 @@ scripts/data/hepdata/lhcb_prl125_011802_arxiv2003_04831/extracted/
 # Generated Clay NS replay row-level tables. Keep compact summaries/manifests
 # in git; regenerate large per-packet/per-time CSV dumps when needed.
 Docs/Images/clay-analytic-sprint/sprint*/*.csv
+Docs/diagrams/Images/clay-analytic-sprint/sprint*/*.csv
 
 
 # Chat history / local DBs
