@@ -3,6 +3,25 @@
 
 # P0 BLOCKERS
 
+• Candidate-receipt / probe-hygiene tranche is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.NSCandidateCompleteEnstrophyBKMPassageReceipt` and
+    `DASHI.Physics.Closure.YML3TightnessBoundedCandidateReceipt`;
+  - extends `DASHI.Physics.Closure.NSFinalStateReceipt`,
+    `DASHI.Physics.Closure.YMFinalStateReceipt`, and
+    `DASHI.Physics.Closure.Paper0SharedMarginDependencyReceipt` with bounded
+    candidate-only surfaces;
+  - rewrites `DASHI.Physics.Probes.AllProbes` plus the four probe lane modules
+    so the aggregate compiles against fail-closed cutset contracts instead of
+    impossible promotion witnesses;
+  - keeps Clay/YM/NS/full-unification/terminal promotion flags false;
+  - next cross-lane action: either complete a coherent `CurrentProofProfile`
+    candidate-alignment receipt and thread it through the closure chain, or
+    leave the profile lane purely cutset-based until that receipt is stable.
+
 • Sprint166 projection/nonlocality leakage frontier is implemented.
 
   Status:
