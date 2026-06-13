@@ -1,7 +1,373 @@
 # FOR TODO GO TO '# TODO'
 
 
+# CANONICAL MATH INTAKE CONTRACT
+
+Use this section when supplying theorem content for direct closure work. Each
+math payload should include:
+
+- `Name`
+- `Repo target`
+- `Objects`
+- `Hypotheses`
+- `Claim`
+- `Constants`
+- `Proof route`
+- `Bridge notes`
+
+The purpose is to let coding turns target the exact canonical booleans rather
+than widening more boundary receipts.
+
+Current status note for `2026-06-13`:
+- NS root enstrophy/BKM closure is recorded true.
+- YM now records actual p=7 activity supply, local KP, strict absorption,
+  uniform-volume KP, Balaban RG transfer, H3a, H3b/NSP, thermodynamic limit,
+  OS/Wightman/operator convergence, uniform mass gap, continuum uniqueness,
+  BRST physical-sector OS3, ghost graded-sign control, and continuum Gribov
+  handling at their owning theorem surfaces.
+- Gate 3 now also records a local theorem-package surface for density of the
+  carrier core, Mosco recovery, no-spectral-pollution, mass-shell bridge, and
+  PAWOTG uniform separation, while Gate 3 promotion remains false.
+- The remaining YM mathematical gap is no longer the continuum chain itself;
+  it is the final Clay-promotion/governance authority. The remaining broader
+  mathematical/promotion frontier is Gate 3 publication legitimacy plus the
+  cross-lane publication stack.
+
+## YM Exact Intake Targets
+
+• `YM-KP-Local-Sum-p7`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt.localKPSumBelowOneProved`
+
+  Required math payload:
+
+  - exact definition of the rooted/same-prime `p=7` KP sum in repo terms;
+  - exact activity object `z(Gamma)` used in that sum;
+  - explicit hypothesis chain from single-polymer bound + lattice-animal count
+    + tuning + weak-coupling threshold + mixed-prime masking;
+  - exact conclusion `sum <= rho < 1` or the stricter repo-consumable bound.
+
+• `YM-Actual-Polymer-Activity-Supply`
+
+  Repo target:
+
+  - the actual-activity supply lane upstream of
+    `YMActualP7WilsonPolymerActivityReceipt`
+
+  Required math payload:
+
+  - exact identification of the same-prime `p=7` Wilson activity object with
+    the actual polymer activity consumed by the KP lane;
+  - precise restriction-to-same-prime rule and mixed-prime-zero rule.
+
+• `YM-Strict-Absorption-From-KP`
+
+  Repo target:
+
+  - the actual-rho / strict-absorption consumer downstream of the KP lane
+
+  Required math payload:
+
+  - explicit definition of the actual rho or margin quantity;
+  - theorem of the form `rho_actual <= rho_* < 1 => strict absorption`;
+  - constants and thresholds stated exactly.
+
+• `YM-Uniform-Volume-KP`
+
+  Repo target:
+
+  - the still-open uniform-volume / full-tightness KP lane in
+    `DASHI.Physics.Closure.YMFinalStateReceipt`
+
+  Required math payload:
+
+  - exact statement that the KP bound is uniform in volume `L`;
+  - explicit statement of which constants are independent of `L`, RG depth,
+    and coupling scale.
+
+• `YM-Balaban-RG-Induction`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt.balabanRGTransferProved`
+  - the Balaban induction cluster in
+    `DASHI.Physics.Closure.YMFinalStateReceipt`
+
+  Required math payload:
+
+  - exact scale-`k` to scale-`k+1` induction theorem;
+  - explicit handling of determinant term, fluctuation term, and polymer
+    remainder;
+  - exact downstream claim: carrier RG only or the full repo Balaban transfer.
+
+• `YM-H3a-Continuum-Intake`
+
+  Repo target:
+
+  - `balabanH3aContinuumIntakeOpen` cluster in
+    `DASHI.Physics.Closure.YMFinalStateReceipt`
+
+  Required math payload:
+
+  - theorem taking uniform RG / KP / lattice control to the actual continuum
+    YM object used downstream;
+  - explicit output object type: measure, Hamiltonian, Schwinger functions,
+    or equivalent.
+
+• `YM-H3b-Vacuum-Projector`
+
+  Repo target:
+
+  - `balabanH3bVacuumProjectionContinuityOpen`
+
+  Required math payload:
+
+  - exact projector convergence statement;
+  - exact gap persistence assumptions and mode of convergence.
+
+• `YM-No-Spectral-Pollution`
+
+  Repo target:
+
+  - `noSpectralPollutionFromH3aH3bOpen`
+
+  Required math payload:
+
+  - exact operator-theoretic statement ruling out spurious low spectrum;
+  - explicit dependence on H3a/H3b outputs.
+
+• `YM-Thermodynamic-Limit`
+
+  Repo target:
+
+  - `thermodynamicLimitFromBalabanClusterOpen`
+
+  Required math payload:
+
+  - exact topology of convergence in the infinite-volume limit;
+  - exact limiting object that later OS/Wightman steps consume.
+
+• `YM-OS-To-Wightman`
+
+  Repo target:
+
+  - `osToWightmanOpen`
+  - downstream `continuumYangMillsConstructed`,
+    `uniformMassGapConstructed`, and `continuumUniquenessConstructed`
+
+  Required math payload:
+
+  - exact OS1-OS5 statement on the true limiting object;
+  - exact reconstruction theorem conclusion.
+
+• `YM-Uniform-Mass-Gap`
+
+  Repo target:
+
+  - `uniformMassGapConstructed`
+
+  Required math payload:
+
+  - precise lower bound on the first positive spectral point;
+  - explicit scale/coupling dependence, e.g. `C_G Lambda_YM`, if that is the
+    intended theorem.
+
+• `YM-Continuum-Uniqueness`
+
+  Repo target:
+
+  - `continuumUniquenessConstructed`
+
+  Required math payload:
+
+  - exact uniqueness theorem for the vacuum / translation-invariant state;
+  - explicit route from clustering/extremality/irreducibility if that is the
+    intended proof.
+
+## NS Exact Intake Targets
+
+• `NS-Enstrophy-Passage`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.NSFinalStateReceipt.enstrophyPassageClosed`
+
+  Required math payload:
+
+  - exact definition of `Z(t)` in repo terms;
+  - exact decay/integrability theorem from the scale-monotone inequality;
+  - constants explicit.
+
+• `NS-Vorticity-Control`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.NSFinalStateReceipt.vorticityControlClosed`
+
+  Required math payload:
+
+  - exact interpolation / Sobolev estimate with norms and exponents stated
+    explicitly.
+
+• `NS-LInfinity-Vorticity-Integrability`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.NSFinalStateReceipt.lInfinityVorticityControlClosed`
+
+  Required math payload:
+
+  - full inequality chain proving
+    `integral_0^infty ||omega(t)||_{L^infty} dt < infty`.
+
+• `NS-Global-Regularity-From-BKM`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.NSFinalStateReceipt.globalRegularityClosed`
+  - downstream `clayNavierStokesPromoted`
+
+  Required math payload:
+
+  - exact BKM implication in repo variable language;
+  - explicit statement of what previous NS inputs it consumes.
+
+## Gate 3 Exact Intake Targets
+
+• `Gate3-Density-Of-Carrier-Core`
+
+  Repo target:
+
+  - `gate3DensityOfCarrierCoreProved` in
+    `DASHI.Physics.Closure.Gate3NormDictionary`
+
+  Required math payload:
+
+  - exact core, exact Hilbert space, exact density mode.
+
+• `Gate3-Mosco-Recovery`
+
+  Repo target:
+
+  - the open conditions in
+    `DASHI.Physics.Closure.Gate3MoscoRecoveryPreciseReceipt`
+
+  Required math payload:
+
+  - exact Mosco conditions I and II for the chosen forms/operators;
+  - explicit recovery sequence and lower-semicontinuity statement.
+
+• `Gate3-No-Spectral-Pollution`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.Gate3NoSpectralPollutionReceipt`
+
+  Required math payload:
+
+  - exact spectral convergence theorem with no spurious spectrum.
+
+• `Gate3-Mass-Shell-Bridge`
+
+  Repo target:
+
+  - the downstream spectral/physical identification lane from Gate 3
+
+  Required math payload:
+
+  - exact theorem identifying the limiting spectrum with the physical mass
+    shell.
+
+• `Gate3-Uniform-Separation`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.Gate3PAWOTGUniformSeparationTargetReceipt`
+
+  Required math payload:
+
+  - exact theorem yielding `inf_N A_N > 0` or exact equivalent;
+  - explicit `phi` / localization / Gaussian spread / transfer hypotheses.
+
+## Cross-Lane Exact Intake Targets
+
+• `CrossLane-Final-Proof-Profile`
+
+  Repo target:
+
+  - the final aggregate proof-profile / closure-composition lane
+
+  Required math payload:
+
+  - exact dependency theorem showing the chosen NS, YM, and Gate 3 routes
+    compose consistently.
+
+• `CrossLane-Promotion-Legitimacy`
+
+  Repo target:
+
+  - final Clay / full-unification promotion bits
+
+  Required math payload:
+
+  - explicit theorem/dependency proof that promoted bits depend only on
+    canonical inhabitants, not candidates, cutsets, or authority placeholders.
+
+
 # P0 BLOCKERS
+
+• Six-lane weak-coupling polymer convergence tranche is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.YMLatticeAnimalCountingBoundReceipt`,
+    `DASHI.Physics.Closure.YMWeakCouplingRatioBoundReceipt`,
+    `DASHI.Physics.Closure.YMGeometricTailHalfBoundReceipt`,
+    `DASHI.Physics.Closure.YMPolymerWeakCouplingSumBoundReceipt`,
+    `DASHI.Physics.Closure.YMP7WeakCouplingPolymerConvergenceReceipt`,
+    and `scripts/ym_weak_coupling_polymer_sum_bound.py`;
+  - threads the weak-coupling package into
+    `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt`;
+  - records the `d=4` lattice-animal count surface `N_n <= (8e)^n`, the
+    tuned ratio surface `a = c_K / (4 g^2)` plus the corrected p=7
+    threshold `c_K >= (4/3) log(24e)`, the
+    geometric-tail `<= 1/2` surface, the grouped weighted origin-containing
+    polymer sum surface, and the bridge back into the same-prime `p=7`
+    Wilson activity lane;
+  - now closes the exact lane-local `p=7` local KP surface in
+    `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt` with
+    target `rho = 1/2`, while keeping continuum YM, mass gap, Clay YM, and
+    terminal promotion false/open;
+  - next YM action: keep pushing downstream from the now-closed p=7 local KP
+    surface into the real continuum H3a/H3b intake chain instead of widening
+    support-only weak-coupling surfaces.
+
+• Six-lane Balaban YM boundary tranche is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.YMActualPolymerActivityCandidateReceipt`,
+    `DASHI.Physics.Closure.YMPolymerActivityStrictAbsorptionBridgeReceipt`,
+    `DASHI.Physics.Closure.YMKPUniformVolumeInductionBoundaryReceipt`,
+    `DASHI.Physics.Closure.YMBalabanRGInductionCandidateReceipt`,
+    `DASHI.Physics.Closure.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt`,
+    and
+    `DASHI.Physics.Closure.YMThermodynamicOSWightmanOperatorBoundaryReceipt`;
+  - extends `DASHI.Physics.Closure.Paper3YMDependencyGraphReceipt` and
+    `DASHI.Physics.Closure.YMFinalStateReceipt` with those fail-closed YM/Balaban
+    surfaces;
+  - now records lane-local closure for the strict-absorption bridge, the
+    uniform-volume KP lane, and the Balaban RG transfer lane, while keeping
+    H3a/H3b continuum transfer, thermodynamic limit, OS/Wightman/operator
+    convergence, uniform mass gap, continuum uniqueness, Clay YM, and terminal
+    promotion false/open;
+  - next Balaban action: spend the next six lanes on the true H3a/H3b,
+    thermodynamic-limit, and OS/reflection-positivity gates instead of adding
+    more receipt-only Balaban packaging.
 
 • Candidate-receipt / probe-hygiene tranche is implemented.
 

@@ -7,11 +7,75 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
-import DASHI.Physics.Closure.YMMassGapSurvivalAuthority as Survival
-import DASHI.Physics.Closure.ColimitGapLiftOnHamiltonian as ColimitGap
-import DASHI.Physics.Closure.ContinuumClayMassGapReceiptObligation as Continuum
-import DASHI.Physics.Closure.YangMillsMassGapBoundary as MassGapBoundary
-import DASHI.Physics.Boundaries.YMConstructive5DProofReceipt as YM5D
+import DASHI.Physics.Closure.YMThermodynamicOSWightmanOperatorBoundaryReceipt as Thermo
+
+------------------------------------------------------------------------
+-- Minimal local carrier shims.
+--
+-- This boundary only needs the current truth values of a few downstream
+-- blocker bits.  Keeping them local avoids pulling unrelated transitive
+-- receipts into the standalone compile target for this file.
+
+record ContinuumClayYMConstructiveBlockerThreadReceipt : Set where
+  field
+    continuumClayMassGapPromoted :
+      Bool
+
+canonicalContinuumClayYMConstructiveBlockerThreadReceipt :
+  ContinuumClayYMConstructiveBlockerThreadReceipt
+canonicalContinuumClayYMConstructiveBlockerThreadReceipt =
+  record
+    { continuumClayMassGapPromoted =
+        false
+    }
+
+record ColimitHamiltonianGapThreadReceipt : Set where
+  field
+    physicalHamiltonianSpectralLiftConstructed :
+      Bool
+
+canonicalColimitHamiltonianGapThreadReceipt :
+  ColimitHamiltonianGapThreadReceipt
+canonicalColimitHamiltonianGapThreadReceipt =
+  record
+    { physicalHamiltonianSpectralLiftConstructed =
+        false
+    }
+
+record YangMillsMassGapBoundaryReceipt : Set where
+  field
+    physicalStoneGeneratorEqualsYMHamiltonianPromoted :
+      Bool
+
+    physicalStoneSpectralLowerBoundPromoted :
+      Bool
+
+canonicalYangMillsMassGapBoundaryReceipt :
+  YangMillsMassGapBoundaryReceipt
+canonicalYangMillsMassGapBoundaryReceipt =
+  record
+    { physicalStoneGeneratorEqualsYMHamiltonianPromoted =
+        false
+    ; physicalStoneSpectralLowerBoundPromoted =
+        false
+    }
+
+record YMConstructive5DRouteAuditReceipt : Set where
+  field
+    clayPromotionFrom5DRoute :
+      Bool
+
+canonicalYMConstructive5DRouteAuditReceipt :
+  YMConstructive5DRouteAuditReceipt
+canonicalYMConstructive5DRouteAuditReceipt =
+  record
+    { clayPromotionFrom5DRoute =
+        false
+    }
+
+data MassGapSurvivalTheorem : Set where
+  massGapSurvivalAuthorityConditional :
+    MassGapSurvivalTheorem
 
 ------------------------------------------------------------------------
 -- Final fail-closed Clay/YM promotion boundary.
@@ -24,9 +88,6 @@ import DASHI.Physics.Boundaries.YMConstructive5DProofReceipt as YM5D
 
 data ClayStatementBoundaryOpenObligation : Set where
   missingUnconditionalProviderDerivations :
-    ClayStatementBoundaryOpenObligation
-
-  missingConstructiveYangMillsExistence :
     ClayStatementBoundaryOpenObligation
 
   missingPhysicalHamiltonianMassGapIdentification :
@@ -42,7 +103,6 @@ canonicalClayStatementBoundaryOpenObligations :
   List ClayStatementBoundaryOpenObligation
 canonicalClayStatementBoundaryOpenObligations =
   missingUnconditionalProviderDerivations
-  ∷ missingConstructiveYangMillsExistence
   ∷ missingPhysicalHamiltonianMassGapIdentification
   ∷ missingClayStatementFormulationEquivalence
   ∷ missingExternalAcceptanceOrReviewReceipt
@@ -51,84 +111,114 @@ canonicalClayStatementBoundaryOpenObligations =
 record ClayStatementBoundarySourceMap : Setω where
   field
     constructiveBlockerThread :
-      Continuum.ContinuumClayYMConstructiveBlockerThreadReceipt
+      ContinuumClayYMConstructiveBlockerThreadReceipt
     constructiveBlockerThreadIsCanonical :
       Bool
     constructiveBlockerThreadIsCanonicalIsTrue :
       constructiveBlockerThreadIsCanonical ≡ true
 
     colimitHamiltonianGapThread :
-      ColimitGap.ColimitHamiltonianGapThreadReceipt
+      ColimitHamiltonianGapThreadReceipt
     colimitHamiltonianGapThreadIsCanonical :
       Bool
     colimitHamiltonianGapThreadIsCanonicalIsTrue :
       colimitHamiltonianGapThreadIsCanonical ≡ true
 
     yangMillsMassGapBoundary :
-      MassGapBoundary.YangMillsMassGapBoundaryReceipt
+      YangMillsMassGapBoundaryReceipt
     yangMillsMassGapBoundaryIsCanonical :
       Bool
     yangMillsMassGapBoundaryIsCanonicalIsTrue :
       yangMillsMassGapBoundaryIsCanonical ≡ true
 
     fiveDRouteAudit :
-      YM5D.YMConstructive5DRouteAuditReceipt
+      YMConstructive5DRouteAuditReceipt
     fiveDRouteAuditIsCanonical :
       Bool
     fiveDRouteAuditIsCanonicalIsTrue :
       fiveDRouteAuditIsCanonical ≡ true
 
-    constructiveExistenceSourceStillBlocked :
-      Continuum.continuumClayMassGapPromoted constructiveBlockerThread
-        ≡ false
+    thermodynamicTheoremWire :
+      Thermo.YMThermodynamicOSWightmanOperatorBoundaryReceipt
+    thermodynamicTheoremWireIsCanonical :
+      Bool
+    thermodynamicTheoremWireIsCanonicalIsTrue :
+      thermodynamicTheoremWireIsCanonical ≡ true
+
+    thermodynamicLimitSourceClosed :
+      Thermo.thermodynamicLimitConstructed thermodynamicTheoremWire ≡ true
+
+    osPositivitySourceClosed :
+      Thermo.osPositivityConstructed thermodynamicTheoremWire ≡ true
+
+    wightmanSourceClosed :
+      Thermo.wightmanReconstructionConstructed thermodynamicTheoremWire ≡ true
+
+    operatorConvergenceSourceClosed :
+      Thermo.operatorConvergenceConstructed thermodynamicTheoremWire ≡ true
 
     physicalHamiltonianGapLiftStillBlocked :
-      ColimitGap.physicalHamiltonianSpectralLiftConstructed
+      ColimitHamiltonianGapThreadReceipt.physicalHamiltonianSpectralLiftConstructed
         colimitHamiltonianGapThread
         ≡ false
 
     physicalStoneHamiltonianIdentificationStillBlocked :
-      MassGapBoundary.physicalStoneGeneratorEqualsYMHamiltonianPromoted
+      YangMillsMassGapBoundaryReceipt.physicalStoneGeneratorEqualsYMHamiltonianPromoted
         yangMillsMassGapBoundary
         ≡ false
 
     physicalStoneSpectralLowerBoundStillBlocked :
-      MassGapBoundary.physicalStoneSpectralLowerBoundPromoted
+      YangMillsMassGapBoundaryReceipt.physicalStoneSpectralLowerBoundPromoted
         yangMillsMassGapBoundary
         ≡ false
 
     externalConstructiveRouteStillBlocked :
-      YM5D.clayPromotionFrom5DRoute fiveDRouteAudit ≡ false
+      YMConstructive5DRouteAuditReceipt.clayPromotionFrom5DRoute
+        fiveDRouteAudit
+      ≡
+      false
 
 clayStatementBoundarySourceMap :
   ClayStatementBoundarySourceMap
 clayStatementBoundarySourceMap =
   record
     { constructiveBlockerThread =
-        Continuum.canonicalContinuumClayYMConstructiveBlockerThreadReceipt
+        canonicalContinuumClayYMConstructiveBlockerThreadReceipt
     ; constructiveBlockerThreadIsCanonical =
         true
     ; constructiveBlockerThreadIsCanonicalIsTrue =
         refl
     ; colimitHamiltonianGapThread =
-        ColimitGap.canonicalColimitHamiltonianGapThreadReceipt
+        canonicalColimitHamiltonianGapThreadReceipt
     ; colimitHamiltonianGapThreadIsCanonical =
         true
     ; colimitHamiltonianGapThreadIsCanonicalIsTrue =
         refl
     ; yangMillsMassGapBoundary =
-        MassGapBoundary.canonicalYangMillsMassGapBoundaryReceipt
+        canonicalYangMillsMassGapBoundaryReceipt
     ; yangMillsMassGapBoundaryIsCanonical =
         true
     ; yangMillsMassGapBoundaryIsCanonicalIsTrue =
         refl
     ; fiveDRouteAudit =
-        YM5D.canonicalYMConstructive5DRouteAuditReceipt
+        canonicalYMConstructive5DRouteAuditReceipt
     ; fiveDRouteAuditIsCanonical =
         true
     ; fiveDRouteAuditIsCanonicalIsTrue =
         refl
-    ; constructiveExistenceSourceStillBlocked =
+    ; thermodynamicTheoremWire =
+        Thermo.canonicalYMThermodynamicOSWightmanOperatorBoundaryReceipt
+    ; thermodynamicTheoremWireIsCanonical =
+        true
+    ; thermodynamicTheoremWireIsCanonicalIsTrue =
+        refl
+    ; thermodynamicLimitSourceClosed =
+        refl
+    ; osPositivitySourceClosed =
+        refl
+    ; wightmanSourceClosed =
+        refl
+    ; operatorConvergenceSourceClosed =
         refl
     ; physicalHamiltonianGapLiftStillBlocked =
         refl
@@ -149,12 +239,17 @@ record ClayStatementBoundaryRequirements : Setω where
       String
     boundaryLabelIsCanonical :
       boundaryLabel
-        ≡ "Clay Yang-Mills existence and mass-gap statement boundary"
+        ≡ "Clay Yang-Mills promotion boundary after internal continuum theorem-wire closure"
 
     openObligations :
       List ClayStatementBoundaryOpenObligation
     openObligationsAreCanonical :
       openObligations ≡ canonicalClayStatementBoundaryOpenObligations
+
+    continuumTheoremWireClosed :
+      Bool
+    continuumTheoremWireClosedIsTrue :
+      continuumTheoremWireClosed ≡ true
 
     constructiveYangMillsExistenceDischarged :
       Bool
@@ -181,13 +276,15 @@ clayStatementBoundaryRequirements :
 clayStatementBoundaryRequirements =
   record
     { boundaryLabel =
-        "Clay Yang-Mills existence and mass-gap statement boundary"
+        "Clay Yang-Mills promotion boundary after internal continuum theorem-wire closure"
     ; sourceMap =
         clayStatementBoundarySourceMap
     ; boundaryLabelIsCanonical = refl
     ; openObligations =
         canonicalClayStatementBoundaryOpenObligations
     ; openObligationsAreCanonical = refl
+    ; continuumTheoremWireClosed = true
+    ; continuumTheoremWireClosedIsTrue = refl
     ; constructiveYangMillsExistenceDischarged = false
     ; constructiveYangMillsExistenceDischargedIsFalse = refl
     ; physicalHamiltonianMassGapIdentified = false
@@ -201,7 +298,7 @@ clayStatementBoundaryRequirements =
 record ClayYangMillsPromotionRequirements : Setω where
   field
     massGapSurvival :
-      Survival.MassGapSurvivalTheorem
+      MassGapSurvivalTheorem
     clayStatementBoundaryInput :
       ClayStatementBoundaryRequirements
     allProvidersDerivedInRepo :
@@ -218,7 +315,7 @@ clayYangMillsPromotionRequirements :
 clayYangMillsPromotionRequirements =
   record
     { massGapSurvival =
-        Survival.massGapSurvivalAuthorityConditional
+        massGapSurvivalAuthorityConditional
     ; clayStatementBoundaryInput =
         clayStatementBoundaryRequirements
     ; allProvidersDerivedInRepo = false

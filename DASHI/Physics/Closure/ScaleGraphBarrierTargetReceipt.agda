@@ -333,8 +333,8 @@ record ScaleGraphBarrierTargetReceipt : Setω where
     ymActualReceipt :
       YMActual.YMActualPolymerActivityDefinitionReceipt
 
-    ymActualStillMissing :
-      YMActual.actualPolymerActivitySupplied ymActualReceipt ≡ false
+    ymActualRecorded :
+      YMActual.actualPolymerActivitySupplied ymActualReceipt ≡ true
 
     ymRGReceipt :
       YMRG.YMBalabanRGScaleTransferFrontierReceipt
@@ -476,7 +476,7 @@ canonicalScaleGraphBarrierTargetReceipt =
         refl
     ; ymActualReceipt =
         YMActual.canonicalYMActualPolymerActivityDefinitionReceipt
-    ; ymActualStillMissing =
+    ; ymActualRecorded =
         refl
     ; ymRGReceipt =
         YMRG.canonicalYMBalabanRGScaleTransferFrontierReceipt

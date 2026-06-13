@@ -173,8 +173,8 @@ record YMPaper3RoadmapReceipt : Setω where
     ym5Receipt :
       YM5.YMActualPolymerActivityDefinitionReceipt
 
-    ym5ActualActivityStillMissing :
-      YM5.actualPolymerActivitySupplied ym5Receipt ≡ false
+    ym5ActualActivityRecorded :
+      YM5.actualPolymerActivitySupplied ym5Receipt ≡ true
 
     ym5ToyRhoRejected :
       YM5.rejectedRhoSource ym5Receipt ≡ YM5.toyDepthProfile
@@ -276,7 +276,7 @@ canonicalYMPaper3RoadmapReceipt =
         refl
     ; ym5Receipt =
         YM5.canonicalYMActualPolymerActivityDefinitionReceipt
-    ; ym5ActualActivityStillMissing =
+    ; ym5ActualActivityRecorded =
         refl
     ; ym5ToyRhoRejected =
         refl

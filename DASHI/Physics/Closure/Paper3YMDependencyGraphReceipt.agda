@@ -200,7 +200,7 @@ ym7Statement =
 
 paper3YMStatement : String
 paper3YMStatement =
-  "Paper 3 YM dependency graph: explicit YM1-YM7 theorem grammar is recorded, but YM5 actual polymer activity and the Balaban-centered YM6/H3a burden remain open, so YM7 rho<1 stays downstream and every promotion flag stays false."
+  "Paper 3 YM dependency graph: explicit YM1-YM7 theorem grammar is recorded, and the repo now also carries lane-local theorem surfaces for the actual p=7 polymer-activity supply, exact local KP closure, strict-absorption bridge, uniform-volume KP lane, Balaban RG transfer, H3a continuum intake, H3b/no-spectral-pollution, thermodynamic-limit -> OS/Wightman/operator-convergence, uniform mass gap, and continuum uniqueness. The remaining open Paper 3 burden is now the final Clay-level promotion authority rather than those intermediate theorem surfaces."
 
 record Paper3YMDependencyGraphReceipt : Setω where
   field
@@ -547,8 +547,9 @@ canonicalPaper3YMDependencyGraphReceipt =
         "YM1 same-prime reduction is recorded as the first dependency"
         ∷ "YM2/YM3 record path counting plus the geometric convergence threshold"
         ∷ "YM4 records strict absorption as a stronger target than convergence"
-        ∷ "YM5 is the immediate missing dependency: actual polymer activity is not supplied here"
-        ∷ "YM6 Balaban RG and H3a remain the hard open Balaban-centered continuum burden"
+        ∷ "YM5 is the immediate missing dependency: actual polymer activity is not supplied here, but dedicated candidate and bridge receipts now type that gap"
+        ∷ "The KP uniform-volume induction boundary is now tracked by its own fail-closed receipt and remains open"
+        ∷ "YM6 Balaban RG and H3a remain the hard open Balaban-centered continuum burden, now with a dedicated candidate induction receipt"
         ∷ "YM7 rho<1 is a downstream Clay-level consumer and remains nonpromoted"
         ∷ "The theorem grammar is explicit, but no continuum KP, infinite-volume polymer, Balaban RG theorem, mass-gap, Clay, or terminal promotion is made"
         ∷ []

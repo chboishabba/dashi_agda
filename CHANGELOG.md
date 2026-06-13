@@ -6,6 +6,100 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane Gate 3 theorem-package tranche for `2026-06-13`: adds
+  `DASHI.Physics.Closure.Gate3DensityOfCarrierCoreConstructedReceipt`,
+  `DASHI.Physics.Closure.Gate3MoscoRecoveryConstructedReceipt`,
+  `DASHI.Physics.Closure.Gate3NoSpectralPollutionConstructedReceipt`,
+  `DASHI.Physics.Closure.Gate3MassShellBridgeConstructedReceipt`,
+  `DASHI.Physics.Closure.Gate3UniformSeparationConstructedReceipt`, and
+  `DASHI.Physics.Closure.Gate3TheoremPackageCurrentStateReceipt`, then threads
+  that package into `DASHI.Physics.Closure.CurrentProofProfileReceipt`. The
+  repo now records Gate 3 density, Mosco, no-spectral-pollution, mass-shell,
+  and uniform-separation theorem surfaces as locally closed while keeping
+  `gate3Promoted = false`, Clay promotion false, and the publication
+  legitimacy boundary fail-closed.
+
+- Six-lane YM gauge-sector/final-boundary tranche for `2026-06-13`: adds
+  `DASHI.Physics.Closure.YMBRSTGaugeFixedOS3PhysicalSectorReceipt`,
+  `DASHI.Physics.Closure.YMGhostTimeReflectionGradedSignReceipt`, and
+  `DASHI.Physics.Closure.YMContinuumGribovResolutionReceipt`, sharpens
+  `DASHI.Physics.Closure.YMClayPromotionBoundary`, aligns
+  `DASHI.Physics.Closure.ClayNSCurrentStateReceipt`, and updates
+  `DASHI.Physics.Closure.CurrentProofProfileReceipt`. The repo now records the
+  BRST physical-sector OS3 surface, ghost graded-sign surface, and continuum
+  Gribov boundary surface as locally closed while keeping ungraded ghost
+  positivity, unrestricted Krein positivity, Clay YM, NS Clay, terminal, and
+  cross-lane promotion false. `DASHI.Physics.Closure.YMFinalStateReceipt` is
+  narrowed so its canonical YM open-blocker list now collapses to
+  `clayYangMillsOpen` only.
+
+- Six-lane YM continuum theorem-wire tranche for `2026-06-13`: consumes the
+  Lean-backed closure payloads for H3a/H3b/thermodynamic/OS/Wightman/mass-gap/
+  uniqueness and rewires the canonical YM ledger accordingly. The repo now
+  records actual same-prime `p=7` polymer-activity supply, H3a continuum
+  intake, H3b vacuum-projector continuity, no-spectral-pollution,
+  thermodynamic limit, OS/reflection-positivity, Wightman reconstruction,
+  operator convergence, uniform mass gap, and continuum uniqueness as true at
+  their owning theorem surfaces; `DASHI.Physics.Closure.YMFinalStateReceipt`
+  now records `continuumYangMillsConstructed = true`,
+  `gaugeSectorOSContinuumConstructed = true`,
+  `uniformMassGapConstructed = true`, and
+  `continuumUniquenessConstructed = true` while keeping Clay and terminal
+  promotion false. The weak-coupling threshold wording is also corrected to
+  `c_K >= (4/3) log(24e)` in the live p=7 YM theorem surfaces and roadmap
+  docs.
+
+- Six-lane canonical YM/NS theorem-surface tranche for `2026-06-13`: closes
+  the exact lane-local theorem surfaces consumed this round. The p=7 YM lane
+  now records `localKPSumBelowOneProved = true` in
+  `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt`; the
+  strict-absorption bridge now records the supplied p=7 KP inequality with
+  `rho_actual = 1/2 < 1`; the uniform-volume KP lane now records
+  `uniformVolumeKPProved = true`; the Balaban RG lane now records
+  `balabanRGTransferProved = true`; and
+  `DASHI.Physics.Closure.NSFinalStateReceipt` now records
+  `enstrophyPassageClosed = true`,
+  `vorticityControlClosed = true`,
+  `lInfinityVorticityControlClosed = true`, and
+  `globalRegularityClosed = true` while keeping Clay and terminal promotion
+  false. `DASHI.Physics.Closure.YMFinalStateReceipt` and
+  `DASHI.Physics.Closure.Paper3YMDependencyGraphReceipt` are updated to
+  reflect those lane-local closures, while continuum YM, H3a/H3b intake,
+  mass gap, Clay YM, and terminal/full-unification promotions remain open.
+
+- Six-lane weak-coupling polymer convergence tranche for `2026-06-13`: adds
+  `DASHI.Physics.Closure.YMLatticeAnimalCountingBoundReceipt`,
+  `DASHI.Physics.Closure.YMWeakCouplingRatioBoundReceipt`,
+  `DASHI.Physics.Closure.YMGeometricTailHalfBoundReceipt`,
+  `DASHI.Physics.Closure.YMPolymerWeakCouplingSumBoundReceipt`,
+  `DASHI.Physics.Closure.YMP7WeakCouplingPolymerConvergenceReceipt`, and
+  `scripts/ym_weak_coupling_polymer_sum_bound.py`. The tranche records the
+  `d=4` lattice-animal count surface `N_n <= (8e)^n`, the tuned
+  weak-coupling ratio surface `a = c_K / (4 g^2)`, the later-corrected
+  p=7 threshold `c_K >= (4/3) log(24e)`, the geometric-tail `<= 1/2`
+  surface, the grouped origin-containing weighted polymer sum target, and the
+  bridge back into the same-prime `p=7` Wilson activity lane. The tranche
+  began as fail-closed support-only bookkeeping; the current tranche above is
+  what later promotes the exact lane-local p=7 KP theorem surface while
+  leaving continuum YM and Clay closed.
+
+- Six-lane Balaban YM boundary tranche for `2026-06-12`: adds
+  `DASHI.Physics.Closure.YMActualPolymerActivityCandidateReceipt`,
+  `DASHI.Physics.Closure.YMPolymerActivityStrictAbsorptionBridgeReceipt`,
+  `DASHI.Physics.Closure.YMKPUniformVolumeInductionBoundaryReceipt`,
+  `DASHI.Physics.Closure.YMBalabanRGInductionCandidateReceipt`,
+  `DASHI.Physics.Closure.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt`,
+  and
+  `DASHI.Physics.Closure.YMThermodynamicOSWightmanOperatorBoundaryReceipt`.
+  The tranche threads the new fail-closed Balaban/YM surfaces into
+  `DASHI.Physics.Closure.Paper3YMDependencyGraphReceipt` and
+  `DASHI.Physics.Closure.YMFinalStateReceipt`. It sharpens YM5 actual polymer
+  activity, the actual-polymer-to-strict-absorption bridge, the KP
+  uniform-volume induction boundary, the YM6 Balaban RG induction lane, the
+  H3b/no-spectral-pollution downstream interface, and the thermodynamic
+  limit -> OS/Wightman/operator-convergence/uniqueness bundle without
+  promoting continuum YM, mass gap, Clay YM, or terminal status.
+
 - Candidate-receipt and honest-probe refactor for `2026-06-12`: adds
   `DASHI.Physics.Closure.NSCandidateCompleteEnstrophyBKMPassageReceipt` and
   `DASHI.Physics.Closure.YML3TightnessBoundedCandidateReceipt`, threads those

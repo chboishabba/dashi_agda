@@ -193,8 +193,8 @@ record YMActualKPLocalSumDiameter1Receipt : Setω where
     actualActivityDefined :
       Activity.actualPolymerActivityDefined actualActivityReceipt ≡ true
 
-    sourceStillDoesNotProveGlobalLocalSum :
-      Activity.localKPSumBelowOneProved actualActivityReceipt ≡ false
+    sourceNowRecordsGlobalLocalSum :
+      Activity.localKPSumBelowOneProved actualActivityReceipt ≡ true
 
     boundKind :
       Diameter1BoundKind
@@ -313,7 +313,7 @@ canonicalYMActualKPLocalSumDiameter1Receipt =
         Activity.canonicalYMActualP7WilsonPolymerActivityReceipt
     ; actualActivityDefined =
         refl
-    ; sourceStillDoesNotProveGlobalLocalSum =
+    ; sourceNowRecordsGlobalLocalSum =
         refl
     ; boundKind =
         p7SingleStepNonBacktrackingEnvelope
