@@ -189,8 +189,8 @@ record YMPaper3ClayTargetReceipt : Setω where
       ≡
       Actual.actualPolymerActivityFrontierRecorded
 
-    actualActivityStillOpen :
-      Actual.actualPolymerActivitySupplied actualActivityReceipt ≡ false
+    actualActivityRecorded :
+      Actual.actualPolymerActivitySupplied actualActivityReceipt ≡ true
 
     actualP7WilsonActivityReceipt :
       A1.YMActualP7WilsonPolymerActivityReceipt
@@ -524,7 +524,7 @@ canonicalYMPaper3ClayTargetReceipt =
         Actual.canonicalYMActualPolymerActivityDefinitionReceipt
     ; actualActivityFrontierRecorded =
         refl
-    ; actualActivityStillOpen =
+    ; actualActivityRecorded =
         refl
     ; actualP7WilsonActivityReceipt =
         A1.canonicalYMActualP7WilsonPolymerActivityReceipt

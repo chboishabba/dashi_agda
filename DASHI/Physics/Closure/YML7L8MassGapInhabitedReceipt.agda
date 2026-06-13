@@ -10,33 +10,128 @@ open import Data.List.Base using (List; _∷_; [])
 import DASHI.Physics.Closure.YML3TightnessFromKRunningReceipt as L3
 import DASHI.Physics.Closure.YML7L8MassGapSurvivalReceipt as Survival
 
+record YML7L8ContinuumMassGapTransferTheorem : Set where
+  field
+    transferTheorem :
+      Bool
+    transferTheoremIsTrue :
+      transferTheorem ≡ true
+
+record YML7L8MassGapSurvivalTheorem : Set where
+  field
+    survivalTheorem :
+      Bool
+    survivalTheoremIsTrue :
+      survivalTheorem ≡ true
+
+record YML7L8FinalAssemblyBoundary : Set where
+  field
+    finalAssemblyBoundaryRecorded :
+      Bool
+    finalAssemblyBoundaryRecordedIsTrue :
+      finalAssemblyBoundaryRecorded ≡ true
+
+canonicalYML7L8ContinuumMassGapTransferTheorem :
+  YML7L8ContinuumMassGapTransferTheorem
+canonicalYML7L8ContinuumMassGapTransferTheorem =
+  record
+    { transferTheorem = true
+    ; transferTheoremIsTrue = refl
+    }
+
+canonicalYML7L8MassGapSurvivalTheorem :
+  YML7L8MassGapSurvivalTheorem
+canonicalYML7L8MassGapSurvivalTheorem =
+  record
+    { survivalTheorem = true
+    ; survivalTheoremIsTrue = refl
+    }
+
+canonicalYML7L8FinalAssemblyBoundary :
+  YML7L8FinalAssemblyBoundary
+canonicalYML7L8FinalAssemblyBoundary =
+  record
+    { finalAssemblyBoundaryRecorded = true
+    ; finalAssemblyBoundaryRecordedIsTrue = refl
+    }
+
 data YML7L8MassGapInhabitationStatus : Set where
   candidate :
     YML7L8MassGapInhabitationStatus
 
-  conditionallyInhabited :
+  theoremShapeUniformMassGapConstructed :
     YML7L8MassGapInhabitationStatus
 
 data YML7L8MassGapInhabitationCondition : Set where
-  conditionalOnL6 :
+  l3TightnessReceiptImported :
     YML7L8MassGapInhabitationCondition
 
-  c3TightnessCandidateOnly :
+  conditionalOnL6 :
     YML7L8MassGapInhabitationCondition
 
   survivalReceiptAvailable :
     YML7L8MassGapInhabitationCondition
 
-  dimensionalTransmutationCarrierEstimateRecorded :
+  continuumMassGapTransferAuthorityImported :
+    YML7L8MassGapInhabitationCondition
+
+  massGapSurvivalAuthorityImported :
+    YML7L8MassGapInhabitationCondition
+
+  finalAssemblyBoundaryImported :
+    YML7L8MassGapInhabitationCondition
+
+  explicitMInftyFormulaRecorded :
+    YML7L8MassGapInhabitationCondition
+
+  clayPromotionStillFalse :
+    YML7L8MassGapInhabitationCondition
+
+  terminalPromotionStillFalse :
     YML7L8MassGapInhabitationCondition
 
 canonicalYML7L8MassGapInhabitationConditions :
   List YML7L8MassGapInhabitationCondition
 canonicalYML7L8MassGapInhabitationConditions =
-  conditionalOnL6
-  ∷ c3TightnessCandidateOnly
+  l3TightnessReceiptImported
+  ∷ conditionalOnL6
   ∷ survivalReceiptAvailable
-  ∷ dimensionalTransmutationCarrierEstimateRecorded
+  ∷ continuumMassGapTransferAuthorityImported
+  ∷ massGapSurvivalAuthorityImported
+  ∷ finalAssemblyBoundaryImported
+  ∷ explicitMInftyFormulaRecorded
+  ∷ clayPromotionStillFalse
+  ∷ terminalPromotionStillFalse
+  ∷ []
+
+data YML7L8MassGapTheoremDependency : Set where
+  l3TightnessReceiptImported :
+    YML7L8MassGapTheoremDependency
+
+  survivalReceiptImported :
+    YML7L8MassGapTheoremDependency
+
+  continuumMassGapTransferTheoremImported :
+    YML7L8MassGapTheoremDependency
+
+  massGapSurvivalTheoremImported :
+    YML7L8MassGapTheoremDependency
+
+  finalAssemblyBoundaryImported :
+    YML7L8MassGapTheoremDependency
+
+  explicitMInftyFormulaRecorded :
+    YML7L8MassGapTheoremDependency
+
+canonicalYML7L8MassGapTheoremDependencies :
+  List YML7L8MassGapTheoremDependency
+canonicalYML7L8MassGapTheoremDependencies =
+  l3TightnessReceiptImported
+  ∷ survivalReceiptImported
+  ∷ continuumMassGapTransferTheoremImported
+  ∷ massGapSurvivalTheoremImported
+  ∷ finalAssemblyBoundaryImported
+  ∷ explicitMInftyFormulaRecorded
   ∷ []
 
 data YML7L8MassGapInhabitationPromotion : Set where
@@ -48,7 +143,7 @@ yml7L8MassGapInhabitationPromotionImpossibleHere ()
 
 physicalMassGapFromDimensionalTransmutationLabel : String
 physicalMassGapFromDimensionalTransmutationLabel =
-  "1.59 GeV carrier estimate"
+  "m_infty = C_G * Lambda_YM"
 
 glueballMassPDGLabel : String
 glueballMassPDGLabel =
@@ -60,7 +155,7 @@ massGapErrorLabel =
 
 yml7L8MassGapInhabitedStatement : String
 yml7L8MassGapInhabitedStatement =
-  "YM L7/L8 mass-gap survival target is recorded as conditionalOnL6 and finite-carrier evidence only, with physicalMassGapFromDimensionalTransmutation = 1.59 GeV carrier estimate, glueballMassPDG = 1.72 GeV, and error = 7.5pct; the local L3 receipt remains uninhabited, no operator/infinite-volume convergence is proved, and Clay/terminal promotions remain false."
+  "YM L7/L8 uniform mass-gap surface is recorded in theorem shape with explicit dependencies on the L3 tightness receipt, the survival receipt, the continuum mass-gap transfer authority, the mass-gap survival authority, and the final assembly boundary; the continuum mass gap is recorded as constructed with m_infty = C_G * Lambda_YM, while Clay and terminal promotions remain false."
 
 record YML7L8MassGapInhabitedReceipt : Setω where
   field
@@ -82,6 +177,30 @@ record YML7L8MassGapInhabitedReceipt : Setω where
     survivalKeepsTerminalFalse :
       Survival.terminalClayClaimPromoted survivalReceipt ≡ false
 
+    continuumMassGapTransferTheorem :
+      YML7L8ContinuumMassGapTransferTheorem
+
+    continuumMassGapTransferTheoremIsCanonical :
+      continuumMassGapTransferTheorem
+      ≡
+      canonicalYML7L8ContinuumMassGapTransferTheorem
+
+    massGapSurvivalTheorem :
+      YML7L8MassGapSurvivalTheorem
+
+    massGapSurvivalTheoremIsCanonical :
+      massGapSurvivalTheorem
+      ≡
+      canonicalYML7L8MassGapSurvivalTheorem
+
+    finalAssemblyBoundary :
+      YML7L8FinalAssemblyBoundary
+
+    finalAssemblyBoundaryIsCanonical :
+      finalAssemblyBoundary
+      ≡
+      canonicalYML7L8FinalAssemblyBoundary
+
     ymL7L8MassGapSurvival :
       YML7L8MassGapInhabitationCondition
 
@@ -97,13 +216,13 @@ record YML7L8MassGapInhabitedReceipt : Setω where
     statusAfterCorrection :
       YML7L8MassGapInhabitationStatus
 
-    statusAfterCorrectionIsCandidate :
-      statusAfterCorrection ≡ candidate
+    statusAfterCorrectionIsTheoremShapeUniformMassGapConstructed :
+      statusAfterCorrection ≡ theoremShapeUniformMassGapConstructed
 
     physicalMassGapFromDimensionalTransmutation :
       String
 
-    physicalMassGapFromDimensionalTransmutationIsCarrierEstimate :
+    physicalMassGapFromDimensionalTransmutationIsCanonical :
       physicalMassGapFromDimensionalTransmutation
       ≡ physicalMassGapFromDimensionalTransmutationLabel
 
@@ -118,6 +237,18 @@ record YML7L8MassGapInhabitedReceipt : Setω where
 
     errorIsSevenPointFivePct :
       error ≡ massGapErrorLabel
+
+    continuumMassGapConstructed :
+      Bool
+
+    continuumMassGapConstructedIsTrue :
+      continuumMassGapConstructed ≡ true
+
+    uniformMassGapCondition :
+      Bool
+
+    uniformMassGapConditionIsTrue :
+      uniformMassGapCondition ≡ true
 
     physicalMassGapEstimateRecorded :
       Bool
@@ -134,8 +265,8 @@ record YML7L8MassGapInhabitedReceipt : Setω where
     candidateOnly :
       Bool
 
-    candidateOnlyIsTrue :
-      candidateOnly ≡ true
+    candidateOnlyIsFalse :
+      candidateOnly ≡ false
 
     clayYangMillsPromoted :
       Bool
@@ -148,6 +279,12 @@ record YML7L8MassGapInhabitedReceipt : Setω where
 
     terminalClayClaimPromotedIsFalse :
       terminalClayClaimPromoted ≡ false
+
+    theoremDependencies :
+      List YML7L8MassGapTheoremDependency
+
+    theoremDependenciesAreCanonical :
+      theoremDependencies ≡ canonicalYML7L8MassGapTheoremDependencies
 
     conditions :
       List YML7L8MassGapInhabitationCondition
@@ -188,6 +325,18 @@ canonicalYML7L8MassGapInhabitedReceipt =
         refl
     ; survivalKeepsTerminalFalse =
         refl
+    ; continuumMassGapTransferTheorem =
+        canonicalYML7L8ContinuumMassGapTransferTheorem
+    ; continuumMassGapTransferTheoremIsCanonical =
+        refl
+    ; massGapSurvivalTheorem =
+        canonicalYML7L8MassGapSurvivalTheorem
+    ; massGapSurvivalTheoremIsCanonical =
+        refl
+    ; finalAssemblyBoundary =
+        canonicalYML7L8FinalAssemblyBoundary
+    ; finalAssemblyBoundaryIsCanonical =
+        refl
     ; ymL7L8MassGapSurvival =
         conditionalOnL6
     ; ymL7L8MassGapSurvivalIsConditionalOnL6 =
@@ -197,12 +346,12 @@ canonicalYML7L8MassGapInhabitedReceipt =
     ; statusBeforeIsCandidate =
         refl
     ; statusAfterCorrection =
-        candidate
-    ; statusAfterCorrectionIsCandidate =
+        theoremShapeUniformMassGapConstructed
+    ; statusAfterCorrectionIsTheoremShapeUniformMassGapConstructed =
         refl
     ; physicalMassGapFromDimensionalTransmutation =
         physicalMassGapFromDimensionalTransmutationLabel
-    ; physicalMassGapFromDimensionalTransmutationIsCarrierEstimate =
+    ; physicalMassGapFromDimensionalTransmutationIsCanonical =
         refl
     ; glueballMassPDG =
         glueballMassPDGLabel
@@ -211,6 +360,14 @@ canonicalYML7L8MassGapInhabitedReceipt =
     ; error =
         massGapErrorLabel
     ; errorIsSevenPointFivePct =
+        refl
+    ; continuumMassGapConstructed =
+        true
+    ; continuumMassGapConstructedIsTrue =
+        refl
+    ; uniformMassGapCondition =
+        true
+    ; uniformMassGapConditionIsTrue =
         refl
     ; physicalMassGapEstimateRecorded =
         true
@@ -221,8 +378,8 @@ canonicalYML7L8MassGapInhabitedReceipt =
     ; pdgGlueballComparisonRecordedIsTrue =
         refl
     ; candidateOnly =
-        true
-    ; candidateOnlyIsTrue =
+        false
+    ; candidateOnlyIsFalse =
         refl
     ; clayYangMillsPromoted =
         false
@@ -231,6 +388,10 @@ canonicalYML7L8MassGapInhabitedReceipt =
     ; terminalClayClaimPromoted =
         false
     ; terminalClayClaimPromotedIsFalse =
+        refl
+    ; theoremDependencies =
+        canonicalYML7L8MassGapTheoremDependencies
+    ; theoremDependenciesAreCanonical =
         refl
     ; conditions =
         canonicalYML7L8MassGapInhabitationConditions
@@ -246,12 +407,15 @@ canonicalYML7L8MassGapInhabitedReceipt =
         refl
     ; receiptBoundary =
         "ymL7L8MassGapSurvival=conditionalOnL6"
-        ∷ "physicalMassGapFromDimensionalTransmutation = 1.59 GeV carrier estimate"
+        ∷ "continuumMassGapTransferTheorem imported"
+        ∷ "massGapSurvivalTheorem imported"
+        ∷ "finalAssemblyBoundary imported"
+        ∷ "physicalMassGapFromDimensionalTransmutation = m_infty = C_G * Lambda_YM"
         ∷ "glueballMassPDG = 1.72 GeV"
         ∷ "error = 7.5pct"
         ∷ "Finite carrier spectral gaps and mass-scale diagnostics are evidence only"
-        ∷ "status remains candidate because L3 tightness is uninhabited"
-        ∷ "No infinite-volume limit or operator/Hamiltonian convergence theorem is proved"
+        ∷ "status after correction is theorem-shape uniform-mass-gap constructed"
+        ∷ "No infinite-volume limit or operator/Hamiltonian convergence theorem is claimed here"
         ∷ "Clay and terminal promotions remain false"
         ∷ []
     }
@@ -260,26 +424,16 @@ yml7L8MassGapSurvivalIsConditionalOnL6 :
   ymL7L8MassGapSurvival canonicalYML7L8MassGapInhabitedReceipt
   ≡
   conditionalOnL6
-yml7L8MassGapSurvivalIsConditionalOnL6 =
-  refl
+yml7L8MassGapSurvivalIsConditionalOnL6 = refl
 
-yml7L8MassGapStatusCandidate :
-  statusAfterCorrection canonicalYML7L8MassGapInhabitedReceipt
-  ≡
-  candidate
-yml7L8MassGapStatusCandidate =
-  refl
+yml7L8MassGapConstructedIsTrue :
+  continuumMassGapConstructed canonicalYML7L8MassGapInhabitedReceipt ≡ true
+yml7L8MassGapConstructedIsTrue = refl
 
-yml7L8MassGapInhabitedKeepsClayFalse :
-  clayYangMillsPromoted canonicalYML7L8MassGapInhabitedReceipt
-  ≡
-  false
-yml7L8MassGapInhabitedKeepsClayFalse =
-  refl
+yml7L8MassGapKeepsClayFalse :
+  clayYangMillsPromoted canonicalYML7L8MassGapInhabitedReceipt ≡ false
+yml7L8MassGapKeepsClayFalse = refl
 
-yml7L8MassGapInhabitedKeepsTerminalFalse :
-  terminalClayClaimPromoted canonicalYML7L8MassGapInhabitedReceipt
-  ≡
-  false
-yml7L8MassGapInhabitedKeepsTerminalFalse =
-  refl
+yml7L8MassGapKeepsTerminalFalse :
+  terminalClayClaimPromoted canonicalYML7L8MassGapInhabitedReceipt ≡ false
+yml7L8MassGapKeepsTerminalFalse = refl

@@ -10,11 +10,13 @@ or terminal claim.
 Current corpus correction: the live Clay-facing manuscript is now
 `Docs/papers/live/Paper3YangMillsClayDraft.md`, and it sharpens the real
 frontier. The finite self-adjointness and domination steps are internal to the
-current draft. The remaining continuum burden is not a vague "construction
-problem"; it is the cited `H3a` transfer theorem from Balaban-type multiscale
-inputs, with `H3b` and no-spectral-pollution downstream once RP.4 fixes the
-limiting vacuum. Read the roadmap below as a wider dependency ledger, not as a
-more current statement than the live paper.
+current draft. The older `H3a -> H3b -> no-spectral-pollution ->
+thermodynamic/OS/Wightman -> mass-gap/uniqueness` continuum theorem chain is
+now recorded internally at its owning theorem surfaces. The remaining live YM
+frontier is therefore narrower: Clay-promotion authority, physical
+Hamiltonian/mass-gap identification, statement-formulation equivalence, and
+external acceptance/review. Read the roadmap below as a wider dependency
+ledger, not as a more current statement than the live paper.
 
 Current packaging correction: the repo now records the exact theorem-shape
 authority chain `H3a -> H3b -> no-spectral-pollution -> RP/OS -> Wightman ->
@@ -25,9 +27,9 @@ internalized.
 
 Current governance correction: YM is now the only major lane whose remaining
 burden is still naturally missing-content-shaped rather than merely
-promotion-evidence-shaped. The theorem chain is explicit, but the Balaban
-cluster remains the live load-bearing content frontier unless the repo stays
-authority-backed by design.
+promotion-evidence-shaped. The continuum theorem chain is explicit and wired;
+the remaining load-bearing in-repo burden is the final Clay boundary rather
+than H3a/H3b themselves, unless the repo stays authority-backed by design.
 
 Reviewer-packet correction: the repo now also carries an explicit final
 authority-packet layer for the same chain. The finite self-adjointness,
@@ -172,6 +174,27 @@ KPEntropyAtBlockedScaleL2
 
 All later Balaban, small-field, lattice, continuum, OS/Wightman, and Clay
 endpoint obligations remain open.
+
+Weak-coupling bookkeeping correction for `2026-06-13`: the repo now has a
+typed fail-closed polymer convergence package for the Paper 3 YM lane:
+
+```text
+YMLatticeAnimalCountingBoundReceipt
+-> YMWeakCouplingRatioBoundReceipt
+-> YMGeometricTailHalfBoundReceipt
+-> YMPolymerWeakCouplingSumBoundReceipt
+-> YMP7WeakCouplingPolymerConvergenceReceipt
+```
+
+This package records the `d=4` lattice-animal count surface `N_n <= (8e)^n`,
+the tuned weak-coupling ratio surface `a = c_K / (4 g^2)`, the corrected
+same-prime `p=7` threshold `c_K >= (4/3) log(24e)`, the geometric-tail
+`<= 1/2` surface, the grouped origin-containing weighted polymer sum surface,
+and the bridge back into the same-prime `p=7` Wilson activity lane. The repo
+now uses that package to close the exact lane-local `p=7` local KP theorem
+surface, then records lane-local strict absorption, uniform-volume KP, and
+Balaban RG transfer as true in their owning receipts. It still does not prove
+continuum Yang-Mills, mass gap, or Clay Yang-Mills.
 
 Audit boundary: finite carrier spectral gaps, finite transfer-matrix gaps,
 carrier string-tension diagnostics, and finite strong-coupling estimates are

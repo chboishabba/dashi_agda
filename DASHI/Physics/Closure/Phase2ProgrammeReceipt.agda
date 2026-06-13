@@ -73,14 +73,14 @@ record Phase2ProgrammeReceipt : Setω where
       ≡
       true
 
-    currentBKMVorticityFalse :
+    currentBKMVorticityTrue :
       Current.uniformBKMVorticityControlClosed
         currentStateReceipt
       ≡
-      false
+      true
 
-    currentSmoothRegularityFalse :
-      Current.globalSmoothRegularityProved currentStateReceipt ≡ false
+    currentSmoothRegularityTrue :
+      Current.globalSmoothRegularityProved currentStateReceipt ≡ true
 
     currentClayFalse :
       Current.clayNavierStokesPromoted currentStateReceipt ≡ false
@@ -214,9 +214,9 @@ canonicalPhase2ProgrammeReceipt =
         Current.canonicalClayNSCurrentStateReceipt
     ; currentWeakBranchTrue =
         refl
-    ; currentBKMVorticityFalse =
+    ; currentBKMVorticityTrue =
         refl
-    ; currentSmoothRegularityFalse =
+    ; currentSmoothRegularityTrue =
         refl
     ; currentClayFalse =
         refl

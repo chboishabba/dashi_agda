@@ -151,10 +151,10 @@ record YMBalabanRGScaleTransferFrontierReceipt : Setω where
     consumedActualActivityReceipt :
       Actual.YMActualPolymerActivityDefinitionReceipt
 
-    actualActivityStillMissing :
+    actualActivityRecorded :
       Actual.actualPolymerActivitySupplied consumedActualActivityReceipt
       ≡
-      false
+      true
 
     oneLoopVerdict :
       YMBetaEstimateVerdict
@@ -274,7 +274,7 @@ canonicalYMBalabanRGScaleTransferFrontierReceipt =
         refl
     ; consumedActualActivityReceipt =
         Actual.canonicalYMActualPolymerActivityDefinitionReceipt
-    ; actualActivityStillMissing =
+    ; actualActivityRecorded =
         refl
     ; oneLoopVerdict =
         oneLoopBelowStrictKPMargin

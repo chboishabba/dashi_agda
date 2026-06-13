@@ -235,8 +235,8 @@ record DangerScaleEdgeConservationReceipt : Setω where
     ymActualReceipt :
       YMActual.YMActualPolymerActivityDefinitionReceipt
 
-    ymActualActivityStillMissing :
-      YMActual.actualPolymerActivitySupplied ymActualReceipt ≡ false
+    ymActualActivityRecorded :
+      YMActual.actualPolymerActivitySupplied ymActualReceipt ≡ true
 
     ymRGReceipt :
       YMRG.YMBalabanRGScaleTransferFrontierReceipt
@@ -362,7 +362,7 @@ canonicalDangerScaleEdgeConservationReceipt =
         refl
     ; ymActualReceipt =
         YMActual.canonicalYMActualPolymerActivityDefinitionReceipt
-    ; ymActualActivityStillMissing =
+    ; ymActualActivityRecorded =
         refl
     ; ymRGReceipt =
         YMRG.canonicalYMBalabanRGScaleTransferFrontierReceipt

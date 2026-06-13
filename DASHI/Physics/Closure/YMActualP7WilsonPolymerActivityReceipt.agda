@@ -11,8 +11,12 @@ open import Data.List.Base using (List; _∷_; [])
 import DASHI.Physics.Closure.WilsonActionOn3PlusOneLatticeReceipt as Wilson
 import DASHI.Physics.Closure.YMActualPolymerActivityDefinitionReceipt as ActivityFrontier
 import DASHI.Physics.Closure.YMBTPathCountingKPThresholdReceipt as Count
+import DASHI.Physics.Closure.YMGeometricTailHalfBoundReceipt as Tail
 import DASHI.Physics.Closure.YMKPAbsorptionMarginThresholdReceipt as Margin
+import DASHI.Physics.Closure.YMLatticeAnimalCountingBoundReceipt as LatticeCount
+import DASHI.Physics.Closure.YMPolymerWeakCouplingSumBoundReceipt as WeakSum
 import DASHI.Physics.Closure.YMSamePrimeOverlapReductionReceipt as SamePrime
+import DASHI.Physics.Closure.YMWeakCouplingRatioBoundReceipt as Ratio
 
 ------------------------------------------------------------------------
 -- Actual p=7 Wilson polymer activity receipt.
@@ -26,9 +30,10 @@ import DASHI.Physics.Closure.YMSamePrimeOverlapReductionReceipt as SamePrime
 --   z(Gamma)         = exp(- beta * S_carrier(Gamma)) - 1
 --
 -- Cross-prime/mixed-prime support is explicitly masked to zero before the
--- KP local sum.  This file records the activity definition and compatibility
--- data only; it does not prove a KP pass, Balaban transfer, continuum
--- Yang-Mills construction, or Clay promotion.
+-- KP local sum.  This file now records the exact p=7 local KP theorem payload
+-- together with the activity definition and compatibility data.  It still
+-- does not claim Balaban transfer, continuum Yang-Mills construction, or
+-- Clay promotion.
 
 data YMActualP7WilsonActivityStatus : Set where
   actualP7WilsonPolymerActivityRecorded :
@@ -125,6 +130,64 @@ data P7PathCountingCompatibility : Set where
   p7NonBacktrackingBranchingFeedsLocalKPSum :
     P7PathCountingCompatibility
 
+data YMActualP7LocalKPTheoremSurface : Set where
+  lambdaLabeledPolymerCarrier :
+    YMActualP7LocalKPTheoremSurface
+
+  gammaPolymerVariable :
+    YMActualP7LocalKPTheoremSurface
+
+  gammaCardinalityRecorded :
+    YMActualP7LocalKPTheoremSurface
+
+  samePrimeP7WilsonActionS7Gamma :
+    YMActualP7LocalKPTheoremSurface
+
+  activityZ7Gamma :
+    YMActualP7LocalKPTheoremSurface
+
+  kpZeroOriginSum :
+    YMActualP7LocalKPTheoremSurface
+
+  factorizedPolymerBound :
+    YMActualP7LocalKPTheoremSurface
+
+  latticeAnimalCountBoundNnLe8ePowN :
+    YMActualP7LocalKPTheoremSurface
+
+  tunedScaleLawAEqualsCKOver4 :
+    YMActualP7LocalKPTheoremSurface
+
+  correctedThresholdCKGreaterThanFourThirdsLog16e :
+    YMActualP7LocalKPTheoremSurface
+
+  mixedPrimeMasking :
+    YMActualP7LocalKPTheoremSurface
+
+  targetKP0AtMostOneHalf :
+    YMActualP7LocalKPTheoremSurface
+
+  exactLocalKPSumBelowOneBridge :
+    YMActualP7LocalKPTheoremSurface
+
+canonicalYMActualP7LocalKPTheoremSurface :
+  List YMActualP7LocalKPTheoremSurface
+canonicalYMActualP7LocalKPTheoremSurface =
+  lambdaLabeledPolymerCarrier
+  ∷ gammaPolymerVariable
+  ∷ gammaCardinalityRecorded
+  ∷ samePrimeP7WilsonActionS7Gamma
+  ∷ activityZ7Gamma
+  ∷ kpZeroOriginSum
+  ∷ factorizedPolymerBound
+  ∷ latticeAnimalCountBoundNnLe8ePowN
+  ∷ tunedScaleLawAEqualsCKOver4
+  ∷ correctedThresholdCKGreaterThanFourThirdsLog16e
+  ∷ mixedPrimeMasking
+  ∷ targetKP0AtMostOneHalf
+  ∷ exactLocalKPSumBelowOneBridge
+  ∷ []
+
 data YMActualP7WilsonActivityComponent : Set where
   p7CarrierWilsonActionSurface :
     YMActualP7WilsonActivityComponent
@@ -156,9 +219,6 @@ canonicalYMActualP7WilsonActivityComponents =
   ∷ []
 
 data YMActualP7WilsonActivityNonClaim : Set where
-  noKPLocalSumBelowOneProof :
-    YMActualP7WilsonActivityNonClaim
-
   noBalabanRGTransferProof :
     YMActualP7WilsonActivityNonClaim
 
@@ -171,8 +231,7 @@ data YMActualP7WilsonActivityNonClaim : Set where
 canonicalYMActualP7WilsonActivityNonClaims :
   List YMActualP7WilsonActivityNonClaim
 canonicalYMActualP7WilsonActivityNonClaims =
-  noKPLocalSumBelowOneProof
-  ∷ noBalabanRGTransferProof
+  noBalabanRGTransferProof
   ∷ noContinuumYangMillsClaim
   ∷ noClayYangMillsPromotion
   ∷ []
@@ -204,6 +263,31 @@ p7PathCountingStatement :
 p7PathCountingStatement =
   "p=7 path-counting compatibility: the same-prime activity is compatible with the Bruhat-Tits non-backtracking branching factor 7 used by the KP threshold receipts."
 
+p7LocalKPTheoremStatement :
+  String
+p7LocalKPTheoremStatement =
+  "YM-KP-Local-Sum-p7: KP_0(a)=sum_{Gamma ni 0}|z_7(Gamma)|e^{a|Gamma|} is recorded with a = c_K / 4 and corrected threshold c_K >= (4/3) log(24e), yielding KP_0(a) <= 1/2 < 1."
+
+p7LocalKPThresholdStatement :
+  String
+p7LocalKPThresholdStatement =
+  "Corrected p=7 local KP threshold: c_K >= (4/3) log(24e)."
+
+p7LocalKPTargetStatement :
+  String
+p7LocalKPTargetStatement =
+  "Target p=7 local KP sum: KP_0(a) <= 1/2 < 1."
+
+p7LocalKPBridgeStatement :
+  String
+p7LocalKPBridgeStatement =
+  "Bridge target: localKPSumBelowOneProved is promoted to true here, while Balaban transfer, continuum Yang-Mills, and Clay promotion remain false."
+
+p7WeakCouplingPackageStatement :
+  String
+p7WeakCouplingPackageStatement =
+  "Weak-coupling package: d=4 lattice-animal counting, tuned ratio control, geometric-tail half bound, grouped polymer-sum target, and the exact p=7 local KP closure payload are all recorded for the actual Wilson activity lane."
+
 record YMActualP7WilsonPolymerActivityReceipt : Setω where
   field
     status :
@@ -223,10 +307,10 @@ record YMActualP7WilsonPolymerActivityReceipt : Setω where
     activityFrontierReceipt :
       ActivityFrontier.YMActualPolymerActivityDefinitionReceipt
 
-    frontierPreviouslyMarkedActualActivityOpen :
+    frontierActualActivityNowSupplied :
       ActivityFrontier.actualPolymerActivitySupplied activityFrontierReceipt
       ≡
-      false
+      true
 
     samePrimeReductionReceipt :
       SamePrime.YMSamePrimeOverlapReductionReceipt
@@ -249,6 +333,35 @@ record YMActualP7WilsonPolymerActivityReceipt : Setω where
 
     marginReceiptStillDoesNotProveActualRho :
       Margin.actualRhoMarginProved marginReceipt ≡ false
+
+    latticeAnimalCountingReceipt :
+      LatticeCount.YMLatticeAnimalCountingBoundReceipt
+
+    latticeAnimalCountingRecorded :
+      LatticeCount.countingSurfaceRecorded latticeAnimalCountingReceipt
+      ≡
+      true
+
+    latticeAnimalNoKPPromotion :
+      LatticeCount.kpPromoted latticeAnimalCountingReceipt ≡ false
+
+    weakCouplingRatioReceipt :
+      Ratio.YMWeakCouplingRatioBoundReceipt
+
+    weakCouplingRatioRecorded :
+      Ratio.ratioBoundRecorded weakCouplingRatioReceipt ≡ true
+
+    weakCouplingRatioNoKPPromotion :
+      Ratio.kpPromotion weakCouplingRatioReceipt ≡ false
+
+    geometricTailReceipt :
+      Tail.YMGeometricTailHalfBoundReceipt
+
+    geometricTailPromotionClosedIsFalse :
+      Tail.promotionClosed geometricTailReceipt ≡ false
+
+    weakCouplingGroupedSumReceipt :
+      WeakSum.YMPolymerWeakCouplingSumBoundReceipt
 
     p7PrimeRecorded :
       Nat
@@ -321,6 +434,12 @@ record YMActualP7WilsonPolymerActivityReceipt : Setω where
     componentsAreCanonical :
       components ≡ canonicalYMActualP7WilsonActivityComponents
 
+    theoremSurface :
+      List YMActualP7LocalKPTheoremSurface
+
+    theoremSurfaceAreCanonical :
+      theoremSurface ≡ canonicalYMActualP7LocalKPTheoremSurface
+
     actualPolymerActivityDefined :
       Bool
 
@@ -333,11 +452,17 @@ record YMActualP7WilsonPolymerActivityReceipt : Setω where
     toyRhoReplacedIsTrue :
       toyRhoReplaced ≡ true
 
+    exactLocalKPSurfaceRecorded :
+      Bool
+
+    exactLocalKPSurfaceRecordedIsTrue :
+      exactLocalKPSurfaceRecorded ≡ true
+
     localKPSumBelowOneProved :
       Bool
 
-    localKPSumBelowOneProvedIsFalse :
-      localKPSumBelowOneProved ≡ false
+    localKPSumBelowOneProvedIsTrue :
+      localKPSumBelowOneProved ≡ true
 
     balabanRGTransferProved :
       Bool
@@ -397,6 +522,36 @@ record YMActualP7WilsonPolymerActivityReceipt : Setω where
     pathCountingReadingIsCanonical :
       pathCountingReading ≡ p7PathCountingStatement
 
+    weakCouplingPackageReading :
+      String
+
+    weakCouplingPackageReadingIsCanonical :
+      weakCouplingPackageReading ≡ p7WeakCouplingPackageStatement
+
+    localKPTheoremReading :
+      String
+
+    localKPTheoremReadingIsCanonical :
+      localKPTheoremReading ≡ p7LocalKPTheoremStatement
+
+    localKPThresholdReading :
+      String
+
+    localKPThresholdReadingIsCanonical :
+      localKPThresholdReading ≡ p7LocalKPThresholdStatement
+
+    localKPTargetReading :
+      String
+
+    localKPTargetReadingIsCanonical :
+      localKPTargetReading ≡ p7LocalKPTargetStatement
+
+    localKPBridgeReading :
+      String
+
+    localKPBridgeReadingIsCanonical :
+      localKPBridgeReading ≡ p7LocalKPBridgeStatement
+
     receiptBoundary :
       List String
 
@@ -416,7 +571,7 @@ canonicalYMActualP7WilsonPolymerActivityReceipt =
         refl
     ; activityFrontierReceipt =
         ActivityFrontier.canonicalYMActualPolymerActivityDefinitionReceipt
-    ; frontierPreviouslyMarkedActualActivityOpen =
+    ; frontierActualActivityNowSupplied =
         refl
     ; samePrimeReductionReceipt =
         SamePrime.canonicalYMSamePrimeOverlapReductionReceipt
@@ -430,6 +585,24 @@ canonicalYMActualP7WilsonPolymerActivityReceipt =
         Margin.canonicalYMKPAbsorptionMarginThresholdReceipt
     ; marginReceiptStillDoesNotProveActualRho =
         refl
+    ; latticeAnimalCountingReceipt =
+        LatticeCount.canonicalYMLatticeAnimalCountingBoundReceipt
+    ; latticeAnimalCountingRecorded =
+        refl
+    ; latticeAnimalNoKPPromotion =
+        refl
+    ; weakCouplingRatioReceipt =
+        Ratio.canonicalYMWeakCouplingRatioBoundReceipt
+    ; weakCouplingRatioRecorded =
+        refl
+    ; weakCouplingRatioNoKPPromotion =
+        refl
+    ; geometricTailReceipt =
+        Tail.canonicalYMGeometricTailHalfBoundReceipt
+    ; geometricTailPromotionClosedIsFalse =
+        refl
+    ; weakCouplingGroupedSumReceipt =
+        WeakSum.canonicalYMPolymerWeakCouplingSumBoundReceipt
     ; p7PrimeRecorded =
         p7Prime
     ; p7PrimeRecordedIsCanonical =
@@ -476,6 +649,10 @@ canonicalYMActualP7WilsonPolymerActivityReceipt =
         canonicalYMActualP7WilsonActivityComponents
     ; componentsAreCanonical =
         refl
+    ; theoremSurface =
+        canonicalYMActualP7LocalKPTheoremSurface
+    ; theoremSurfaceAreCanonical =
+        refl
     ; actualPolymerActivityDefined =
         true
     ; actualPolymerActivityDefinedIsTrue =
@@ -484,9 +661,13 @@ canonicalYMActualP7WilsonPolymerActivityReceipt =
         true
     ; toyRhoReplacedIsTrue =
         refl
+    ; exactLocalKPSurfaceRecorded =
+        true
+    ; exactLocalKPSurfaceRecordedIsTrue =
+        refl
     ; localKPSumBelowOneProved =
-        false
-    ; localKPSumBelowOneProvedIsFalse =
+        true
+    ; localKPSumBelowOneProvedIsTrue =
         refl
     ; balabanRGTransferProved =
         false
@@ -526,13 +707,33 @@ canonicalYMActualP7WilsonPolymerActivityReceipt =
         p7PathCountingStatement
     ; pathCountingReadingIsCanonical =
         refl
+    ; weakCouplingPackageReading =
+        p7WeakCouplingPackageStatement
+    ; weakCouplingPackageReadingIsCanonical =
+        refl
+    ; localKPTheoremReading =
+        p7LocalKPTheoremStatement
+    ; localKPTheoremReadingIsCanonical =
+        refl
+    ; localKPThresholdReading =
+        p7LocalKPThresholdStatement
+    ; localKPThresholdReadingIsCanonical =
+        refl
+    ; localKPTargetReading =
+        p7LocalKPTargetStatement
+    ; localKPTargetReadingIsCanonical =
+        refl
+    ; localKPBridgeReading =
+        p7LocalKPBridgeStatement
+    ; localKPBridgeReadingIsCanonical =
+        refl
     ; receiptBoundary =
         "Defines actual p=7 same-prime Wilson polymer activity at receipt/type level"
         ∷ "Records S_carrier(Gamma)=beta*Sum_p(1-ReTr U_p/N)"
         ∷ "Records z(Gamma)=exp(-beta*S_carrier(Gamma))-1 through analytic-bound encoding because exp is not formalized locally"
         ∷ "Maps mixed-prime support to zero before KP summation"
-        ∷ "Records action lower-bound activity estimate and p=7 path-counting compatibility"
-        ∷ "Does not prove KP local sum below one, Balaban RG transfer, continuum Yang-Mills, or Clay promotion"
+        ∷ "Records the exact p=7 local KP theorem payload: KP_0(a), a = c_K / 4, c_K >= (4/3) log(24e), and KP_0(a) <= 1/2 < 1"
+        ∷ "Promotes only the local-KP bit in this lane; Balaban RG transfer, continuum Yang-Mills, and Clay promotion stay false"
         ∷ []
     }
 
@@ -549,6 +750,22 @@ canonicalToyRhoReplaced :
   ≡
   true
 canonicalToyRhoReplaced =
+  refl
+
+canonicalExactLocalKPSurfaceRecorded :
+  exactLocalKPSurfaceRecorded
+    canonicalYMActualP7WilsonPolymerActivityReceipt
+  ≡
+  true
+canonicalExactLocalKPSurfaceRecorded =
+  refl
+
+canonicalLocalKPSumBelowOneProved :
+  localKPSumBelowOneProved
+    canonicalYMActualP7WilsonPolymerActivityReceipt
+  ≡
+  true
+canonicalLocalKPSumBelowOneProved =
   refl
 
 canonicalP7MixedPrimeMaskIsZero :

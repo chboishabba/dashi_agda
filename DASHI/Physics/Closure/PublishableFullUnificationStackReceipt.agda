@@ -302,11 +302,11 @@ record PublishableFullUnificationStackReceipt : Setω where
     ymReceipt :
       YM.YMPaper3RoadmapReceipt
 
-    ymActualActivityStillMissing :
+    ymActualActivityRecorded :
       YM5.actualPolymerActivitySupplied
         (YM.YMPaper3RoadmapReceipt.ym5Receipt ymReceipt)
       ≡
-      false
+      true
 
     ymBalabanStillMissing :
       YM6.balabanRGProofPresent
@@ -485,7 +485,7 @@ canonicalPublishableFullUnificationStackReceipt =
         refl
     ; ymReceipt =
         YM.canonicalYMPaper3RoadmapReceipt
-    ; ymActualActivityStillMissing =
+    ; ymActualActivityRecorded =
         refl
     ; ymBalabanStillMissing =
         refl

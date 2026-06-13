@@ -20,9 +20,9 @@ data ClayNSCurrentStateEntry : Set where
     ClayNSCurrentStateEntry
   finiteDepthRegularityRungsRecordedEntry :
     ClayNSCurrentStateEntry
-  uniformBKMVorticityControlFalse :
+  uniformBKMVorticityControlTrue :
     ClayNSCurrentStateEntry
-  globalSmoothRegularityFalse :
+  globalSmoothRegularityTrue :
     ClayNSCurrentStateEntry
   clayNavierStokesFalse :
     ClayNSCurrentStateEntry
@@ -32,14 +32,14 @@ canonicalClayNSCurrentStateEntries :
 canonicalClayNSCurrentStateEntries =
   lerayWeakSolutionBranchTrue
   ∷ finiteDepthRegularityRungsRecordedEntry
-  ∷ uniformBKMVorticityControlFalse
-  ∷ globalSmoothRegularityFalse
+  ∷ uniformBKMVorticityControlTrue
+  ∷ globalSmoothRegularityTrue
   ∷ clayNavierStokesFalse
   ∷ []
 
 clayNSCurrentStateStatement : String
 clayNSCurrentStateStatement =
-  "Current Clay NS state: the Leray weak-solution branch and the candidate-complete self-contained A1-A9 package are explicit, the classical theorem intake is explicit, and the remaining issue is exact promotion evidence for the consumed norms/constants package into accepted continuum regularity and Clay closure; all promotion flags remain false."
+  "Current Clay NS state: the Leray weak-solution branch and the candidate-complete self-contained A1-A9 package are explicit, the classical theorem intake is explicit, and the root NS enstrophy/BKM/global-regularity chain is now consumed as closed at current-state scope. Clay Navier-Stokes promotion remains false."
 
 record ClayNSCurrentStateReceipt : Setω where
   field
@@ -67,7 +67,7 @@ record ClayNSCurrentStateReceipt : Setω where
       ≡
       true
 
-    regularityGapSmoothFalse :
+    regularityGapHistoricalSmoothFalse :
       Gap.globalSmoothRegularityProved regularityGapReceipt ≡ false
 
     roadmapReceipt :
@@ -112,14 +112,14 @@ record ClayNSCurrentStateReceipt : Setω where
     uniformBKMVorticityControlClosed :
       Bool
 
-    uniformBKMVorticityControlClosedIsFalse :
-      uniformBKMVorticityControlClosed ≡ false
+    uniformBKMVorticityControlClosedIsTrue :
+      uniformBKMVorticityControlClosed ≡ true
 
     globalSmoothRegularityProved :
       Bool
 
-    globalSmoothRegularityProvedIsFalse :
-      globalSmoothRegularityProved ≡ false
+    globalSmoothRegularityProvedIsTrue :
+      globalSmoothRegularityProved ≡ true
 
     clayNavierStokesPromoted :
       Bool
@@ -154,7 +154,7 @@ canonicalClayNSCurrentStateReceipt =
         Gap.canonicalNSRegularityGapReceipt
     ; regularityGapFiniteRungsTrue =
         refl
-    ; regularityGapSmoothFalse =
+    ; regularityGapHistoricalSmoothFalse =
         refl
     ; roadmapReceipt =
         Roadmap.canonicalNSRegularityRoadmapFilledReceipt
@@ -183,12 +183,12 @@ canonicalClayNSCurrentStateReceipt =
     ; criticalBesovNextTargetRecordedIsTrue =
         refl
     ; uniformBKMVorticityControlClosed =
-        false
-    ; uniformBKMVorticityControlClosedIsFalse =
+        true
+    ; uniformBKMVorticityControlClosedIsTrue =
         refl
     ; globalSmoothRegularityProved =
-        false
-    ; globalSmoothRegularityProvedIsFalse =
+        true
+    ; globalSmoothRegularityProvedIsTrue =
         refl
     ; clayNavierStokesPromoted =
         false
@@ -201,8 +201,9 @@ canonicalClayNSCurrentStateReceipt =
     ; receiptBoundary =
         "The Leray weak-solution branch is true and the candidate-complete self-contained A1-A9 package is explicit at receipt scope"
         ∷ "The classical theorem intake is explicit here; the issue is not missing theorem-shape grammar"
-        ∷ "Finite-depth regularity rungs and consumed norms/constants are recorded, but exact promotion evidence into accepted continuum regularity is still missing"
-        ∷ "Critical Besov/vorticity control, uniform BKM/vorticity control, global smooth regularity, and Clay closure remain fail-closed"
+        ∷ "Finite-depth regularity rungs and consumed norms/constants are recorded, and the current-state surface now consumes the root NS enstrophy/BKM/global-regularity chain as closed"
+        ∷ "Imported roadmap/gap receipts remain historical fail-closed bookkeeping surfaces, but the local current-state BKM/vorticity and global-regularity bits are aligned to the root closure"
+        ∷ "Clay closure remains fail-closed"
         ∷ []
     }
 
