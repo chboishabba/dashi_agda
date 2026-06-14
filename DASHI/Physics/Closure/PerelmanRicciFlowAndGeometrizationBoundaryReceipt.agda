@@ -1,23 +1,28 @@
 module DASHI.Physics.Closure.PerelmanRicciFlowAndGeometrizationBoundaryReceipt where
 
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
-open import Agda.Builtin.String using (String)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Agda.Builtin.String using (String)
 
-import DASHI.Physics.Closure.BTBallVolumeEntropyBoundary as BTBall
-import DASHI.Physics.Closure.BTGaussianReducedVolumeBoundary as BTGaussian
-import DASHI.Physics.Closure.BTNeckJSJGeometryAnalogueBoundary as BTNeck
+import DASHI.Physics.Closure.BTBallVolumeArithmetic as Ball
+import DASHI.Physics.Closure.BTGaussianReducedVolumeSurface as Gaussian
+import DASHI.Physics.Closure.BTCanonicalNeckAnalogue as Neck
+import DASHI.Physics.Closure.GeometryAnalogueClassification as Geometry
+import DASHI.Physics.Closure.JSJAnaloguePieceClassification as JSJ
+import DASHI.Physics.Closure.SurgeryCanonicalNeighborhoodObstruction as Surgery
 
 ------------------------------------------------------------------------
 -- Perelman/Ricci-flow/geometrization boundary receipt.
 --
--- This module intentionally separates nameable and finite balanced-trit
--- artifacts from smooth Ricci-flow, surgery, 3-manifold, and Clay-style
--- authority.  The constructible lane records the user's requested formula
--- names and BT/hypervoxel analogues.  Every external theorem or smooth
--- identification socket remains false.
+-- This module is a receipt over concrete discrete modules only.  It records
+-- checked balanced-trit/Bruhat-Tits arithmetic, Gaussian shell rows, neck
+-- analogues, geometry/JSJ analogue classifications, and surgery obstruction
+-- taxonomy.  It deliberately does not assert smooth Ricci flow, Perelman
+-- monotonicity, surgery continuation, JSJ/geometrization theorems, or
+-- Navier-Stokes/Yang-Mills dependence.
 
 data FormulaName : Set where
   nameableRicciFlowInterface :
@@ -29,28 +34,22 @@ data FormulaName : Set where
   reducedDistanceQuadraticFormula :
     FormulaName
 
-  btBallGrowthFormula :
+  btBallVolumeArithmeticFormula :
     FormulaName
 
-  btVolumeEntropyFormula :
+  btGaussianReducedVolumeSurfaceFormula :
     FormulaName
 
-  btGaussianReducedVolumeConvergenceFormula :
+  btCanonicalNeckAnalogueFormula :
     FormulaName
 
-  btNeckAnalogue :
+  geometryAnalogueClassificationFormula :
     FormulaName
 
-  btPiecesAtoroidalFormula :
+  jsjAnaloguePieceClassificationFormula :
     FormulaName
 
-  hypervoxelSeifertAnalogue :
-    FormulaName
-
-  btGeometryNonArchHypTree :
-    FormulaName
-
-  hypervoxelFiniteFlatCell :
+  surgeryCanonicalNeighborhoodObstructionFormula :
     FormulaName
 
 data AuthoritySocketName : Set where
@@ -63,25 +62,19 @@ data AuthoritySocketName : Set where
   reducedVolumeMonotonicity :
     AuthoritySocketName
 
-  btReducedVolumeMonotonicity :
-    AuthoritySocketName
-
   smoothKappaNoncollapsing :
-    AuthoritySocketName
-
-  btSmoothKappaIdentification :
     AuthoritySocketName
 
   smoothEpsilonNeck :
     AuthoritySocketName
 
-  surgery :
+  surgeryContinuation :
     AuthoritySocketName
 
-  canonicalNeighborhood :
+  smoothCanonicalNeighborhood :
     AuthoritySocketName
 
-  smooth3Manifold :
+  smooth3ManifoldCarrier :
     AuthoritySocketName
 
   primeDecomposition :
@@ -148,126 +141,359 @@ mkClosedSocket socketName =
         refl
     }
 
-pow :
-  Nat →
-  Nat →
-  Nat
-pow base zero =
-  suc zero
-pow base (suc exponent) =
-  base * pow base exponent
-
-btSphereGrowth :
-  Nat →
-  Nat
-btSphereGrowth depth =
-  pow (suc (suc zero)) depth
-
-btBallGrowth :
-  Nat →
-  Nat
-btBallGrowth zero =
-  suc zero
-btBallGrowth (suc depth) =
-  btBallGrowth depth + btSphereGrowth (suc depth)
-
-btVolumeEntropyBase :
-  Nat
-btVolumeEntropyBase =
-  suc (suc zero)
-
-btVolumeEntropyBaseComputed :
-  btVolumeEntropyBase ≡ suc (suc zero)
-btVolumeEntropyBaseComputed =
-  refl
-
 reducedDistanceQuadratic :
   Nat →
   Nat
 reducedDistanceQuadratic radius =
   radius * radius
 
-btGaussianReducedVolume :
-  Nat →
-  Nat
-btGaussianReducedVolume depth =
-  suc zero
-
-btGaussianReducedVolumeLimit :
-  Nat
-btGaussianReducedVolumeLimit =
-  suc zero
-
-btGaussianReducedVolumeConvergesPointwise :
-  (depth : Nat) →
-  btGaussianReducedVolume depth ≡ btGaussianReducedVolumeLimit
-btGaussianReducedVolumeConvergesPointwise depth =
+reducedDistanceQuadraticAtTwo :
+  reducedDistanceQuadratic (suc (suc zero)) ≡
+  suc (suc (suc (suc zero)))
+reducedDistanceQuadraticAtTwo =
   refl
 
-data BTGeometry : Set where
-  nonArchHypTree :
-    BTGeometry
-
-data HypervoxelCell : Set where
-  finiteFlatCell :
-    HypervoxelCell
-
-data HypervoxelFibrationAnalogue : Set where
-  seifertAnalogue :
-    HypervoxelFibrationAnalogue
-
-record BTExplicitComputationReceipt : Set where
+record ORCSLPGF : Set where
   field
-    ballGrowthFormulaName :
-      ConstructibleFlag
+    O : String
+    R : String
+    C : String
+    S : String
+    L : String
+    P : String
+    G : String
+    F : String
 
-    ballGrowthAtZero :
-      btBallGrowth zero ≡ suc zero
+open ORCSLPGF public
 
-    ballGrowthAtOne :
-      btBallGrowth (suc zero) ≡ suc (suc (suc zero))
-
-    volumeEntropyFormulaName :
-      ConstructibleFlag
-
-    entropyBase :
-      Nat
-
-    entropyBaseIsTwo :
-      entropyBase ≡ suc (suc zero)
-
-    gaussianReducedVolumeConvergenceName :
-      ConstructibleFlag
-
-    gaussianReducedVolumeLimitIsOne :
-      btGaussianReducedVolumeLimit ≡ suc zero
-
-open BTExplicitComputationReceipt public
-
-canonicalBTExplicitComputationReceipt :
-  BTExplicitComputationReceipt
-canonicalBTExplicitComputationReceipt =
+boundaryORCSLPGF :
+  ORCSLPGF
+boundaryORCSLPGF =
   record
-    { ballGrowthFormulaName =
-        mkConstructible btBallGrowthFormula
-    ; ballGrowthAtZero =
-        refl
-    ; ballGrowthAtOne =
-        refl
-    ; volumeEntropyFormulaName =
-        mkConstructible btVolumeEntropyFormula
-    ; entropyBase =
-        btVolumeEntropyBase
-    ; entropyBaseIsTwo =
-        btVolumeEntropyBaseComputed
-    ; gaussianReducedVolumeConvergenceName =
-        mkConstructible btGaussianReducedVolumeConvergenceFormula
-    ; gaussianReducedVolumeLimitIsOne =
-        refl
+    { O =
+        "O: Closure receipt linking Perelman/Ricci-flow/geometrization names to concrete discrete BT modules."
+    ; R =
+        "R: Replace fake analytic convergence with refl-checked arithmetic, shell rows, neck, geometry, JSJ, and surgery obstruction facts."
+    ; C =
+        "C: This module imports BTBallVolumeArithmetic, BTGaussianReducedVolumeSurface, BTCanonicalNeckAnalogue, GeometryAnalogueClassification, JSJAnaloguePieceClassification, and SurgeryCanonicalNeighborhoodObstruction."
+    ; S =
+        "S: Concrete facts are available for finite Nat arithmetic and analogue classifications; smooth analytic and 3-manifold theorem sockets are false."
+    ; L =
+        "L: ball arithmetic -> Gaussian shell surface -> neck analogue -> geometry/JSJ analogue classifications -> surgery obstruction -> closed authority sockets."
+    ; P =
+        "P: Downstream code may consume these witnesses as discrete bookkeeping receipts only."
+    ; G =
+        "G: Fail-closed governance requires external authority before smooth Ricci flow, Perelman monotonicity, surgery, JSJ, geometrization, or NS/YM dependence can be promoted."
+    ; F =
+        "F: Missing evidence is smooth Ricci-flow existence/uniqueness, monotonicity, canonical neighborhoods, surgery continuation, smooth JSJ/geometrization, and NS/YM transfer."
     }
 
-record PerelmanRicciFlowAndGeometrizationBoundaryReceipt : Set where
+record ConcreteDiscreteWitnesses : Setω where
   field
+    ballVolumeFormulaName :
+      ConstructibleFlag
+
+    T2BallR2Is10 :
+      Ball.T2BallCount 2 ≡ 10
+
+    T3BallR2Is17 :
+      Ball.T3BallCount 2 ≡ 17
+
+    T7BallR2Is65 :
+      Ball.T7BallCount 2 ≡ 65
+
+    productSphere111Is96 :
+      Ball.T3xT2xT7SphereCount 1 1 1 ≡ 96
+
+    productLeadingFactorIs96 :
+      Ball.T3xT2xT7PositiveSphereLeadingFactor ≡ 96
+
+    productAsymptoticPrefactorCheck :
+      Ball.T3xT2xT7AsymptoticBallPrefactorDenominator
+      *
+      Ball.T3xT2xT7AsymptoticBallPrefactorQuotient
+      ≡
+      Ball.T3xT2xT7AsymptoticBallPrefactorNumerator
+
+    gaussianSurfaceFormulaName :
+      ConstructibleFlag
+
+    gaussianSurface :
+      Gaussian.BTGaussianReducedVolumeSurface
+
+    gaussianSurfaceIsCanonical :
+      gaussianSurface ≡ Gaussian.canonicalBTGaussianReducedVolumeSurface
+
+    gaussianRowsAreCanonical :
+      Gaussian.sampleShellRows gaussianSurface ≡ Gaussian.canonicalSampleShellRows
+
+    gaussianBaseIsFortyTwo :
+      Gaussian.productBase gaussianSurface ≡ Gaussian.productGrowthBase42
+
+    gaussianPrefactorIsEight :
+      Gaussian.productPrefactor gaussianSurface ≡ Gaussian.productGrowthPrefactor8
+
+    gaussianShellWeight2Is14112 :
+      Gaussian.shellWeightSurrogate 2 ≡ 14112
+
+    gaussianSquare3IsNine :
+      Gaussian.squareNat 3 ≡ 9
+
+    gaussianMonotonicityFailClosed :
+      Gaussian.monotonicityProofStatus gaussianSurface
+      ≡
+      Gaussian.monotonicityNotProvedForBTGaussianSurface
+
+    gaussianRicciFlowFailClosed :
+      Gaussian.smoothRicciFlowStatus gaussianSurface
+      ≡
+      Gaussian.smoothRicciFlowNotPostulated
+
+    gaussianPromotionTokensEmpty :
+      Gaussian.promotionTokens gaussianSurface ≡ []
+
+    neckFormulaName :
+      ConstructibleFlag
+
+    p2Neck :
+      Neck.BTCanonicalNeckAnalogue
+
+    p2NeckIsCanonical :
+      p2Neck ≡ Neck.canonicalP2BTNeckAnalogue
+
+    p2CrossSectionCardinalityIs3 :
+      Neck.crossSectionCardinality p2Neck ≡ 3
+
+    p2PathCylinderConstructed :
+      Neck.pathCylinderAnalogueConstructed p2Neck ≡ true
+
+    p2SmoothS2CrossSectionNotPromoted :
+      Neck.smoothS2CrossSectionPromoted p2Neck ≡ false
+
+    p2EpsilonNeckTheoremNotPromoted :
+      Neck.epsilonNeckTheoremPromoted p2Neck ≡ false
+
+open ConcreteDiscreteWitnesses public
+
+canonicalConcreteDiscreteWitnesses :
+  ConcreteDiscreteWitnesses
+canonicalConcreteDiscreteWitnesses =
+  record
+    { ballVolumeFormulaName =
+        mkConstructible btBallVolumeArithmeticFormula
+    ; T2BallR2Is10 =
+        Ball.T2BallR2Is10
+    ; T3BallR2Is17 =
+        Ball.T3BallR2Is17
+    ; T7BallR2Is65 =
+        Ball.T7BallR2Is65
+    ; productSphere111Is96 =
+        Ball.T3xT2xT7Sphere111Is96
+    ; productLeadingFactorIs96 =
+        Ball.T3xT2xT7PositiveSphereLeadingFactorIs96
+    ; productAsymptoticPrefactorCheck =
+        Ball.T3xT2xT7AsymptoticBallPrefactorCheck
+    ; gaussianSurfaceFormulaName =
+        mkConstructible btGaussianReducedVolumeSurfaceFormula
+    ; gaussianSurface =
+        Gaussian.canonicalBTGaussianReducedVolumeSurface
+    ; gaussianSurfaceIsCanonical =
+        refl
+    ; gaussianRowsAreCanonical =
+        Gaussian.canonicalSurfaceRowsRecorded
+    ; gaussianBaseIsFortyTwo =
+        refl
+    ; gaussianPrefactorIsEight =
+        refl
+    ; gaussianShellWeight2Is14112 =
+        Gaussian.shellWeight2IsFourteenThousandOneHundredTwelve
+    ; gaussianSquare3IsNine =
+        Gaussian.square3IsNine
+    ; gaussianMonotonicityFailClosed =
+        Gaussian.canonicalSurfaceMonotonicityFailClosed
+    ; gaussianRicciFlowFailClosed =
+        refl
+    ; gaussianPromotionTokensEmpty =
+        refl
+    ; neckFormulaName =
+        mkConstructible btCanonicalNeckAnalogueFormula
+    ; p2Neck =
+        Neck.canonicalP2BTNeckAnalogue
+    ; p2NeckIsCanonical =
+        refl
+    ; p2CrossSectionCardinalityIs3 =
+        Neck.p2CrossSectionCardinalityIs3
+    ; p2PathCylinderConstructed =
+        Neck.p2PathCylinderConstructed
+    ; p2SmoothS2CrossSectionNotPromoted =
+        Neck.p2SmoothS2CrossSectionNotPromoted
+    ; p2EpsilonNeckTheoremNotPromoted =
+        Neck.p2EpsilonNeckTheoremNotPromoted
+    }
+
+record AnalogueClassificationWitnesses : Setω where
+  field
+    geometryFormulaName :
+      ConstructibleFlag
+
+    btProductTreeIsNonArch :
+      Geometry.geometry
+        (Geometry.assignment
+          (Geometry.btProductTree
+            Geometry.canonicalGeometryAnalogueClassification))
+      ≡
+      Geometry.nonArchHypTree
+
+    hypervoxel369IsFiniteFlat :
+      Geometry.geometry
+        (Geometry.assignment
+          (Geometry.hypervoxel369
+            Geometry.canonicalGeometryAnalogueClassification))
+      ≡
+      Geometry.finiteFlatCell
+
+    smoothGeometryIdentificationNotPromoted :
+      Geometry.smoothGeometryIdentificationPromoted
+        Geometry.canonicalGeometryAnalogueClassification
+      ≡
+      false
+
+    geometrizationNotPromoted :
+      Geometry.geometrizationPromoted
+        Geometry.canonicalGeometryAnalogueClassification
+      ≡
+      false
+
+    jsjFormulaName :
+      ConstructibleFlag
+
+    jsjReceipt :
+      JSJ.JSJAnaloguePieceClassificationReceipt
+
+    jsjReceiptIsCanonical :
+      jsjReceipt ≡ JSJ.canonicalJSJAnaloguePieceClassificationReceipt
+
+    btPieceIsAtoroidalLike :
+      JSJ.kind (JSJ.btPiece jsjReceipt) ≡ JSJ.bruhatTitsAtoroidalLike
+
+    hyperfabric369PieceIsFiniteFlatTorusLike :
+      JSJ.kind (JSJ.hyperfabric369Piece jsjReceipt)
+      ≡
+      JSJ.finiteFlatTorusLike369
+
+    jsjPromotionFlagsEmpty :
+      JSJ.promotionFlags jsjReceipt ≡ []
+
+    jsjThurstonGeometrizationUnavailable :
+      JSJ.thurstonGeometrizationStatus ≡ JSJ.theoremUnavailableHere
+
+    surgeryFormulaName :
+      ConstructibleFlag
+
+    surgeryObstruction :
+      Surgery.SurgeryCanonicalNeighborhoodObstruction
+
+    surgeryObstructionIsOneMinusExample :
+      surgeryObstruction ≡ Surgery.oneMinusObstructionExample
+
+    surgeryCandidateIsDiscreteEpsilonNeck :
+      Surgery.discreteCandidate surgeryObstruction
+      ≡
+      Surgery.discreteEpsilonNeckCandidate
+
+    surgerySmoothTargetIsEpsilonNeck :
+      Surgery.smoothTarget surgeryObstruction ≡ Surgery.smoothEpsilonNeck
+
+    surgerySmoothCanonicalNeighborhoodUnavailable :
+      Surgery.smoothCanonicalNeighborhoodAvailable surgeryObstruction
+      ≡
+      false
+
+    surgeryContinuationUnavailable :
+      Surgery.surgeryContinuationAvailable surgeryObstruction ≡ false
+
+open AnalogueClassificationWitnesses public
+
+canonicalAnalogueClassificationWitnesses :
+  AnalogueClassificationWitnesses
+canonicalAnalogueClassificationWitnesses =
+  record
+    { geometryFormulaName =
+        mkConstructible geometryAnalogueClassificationFormula
+    ; btProductTreeIsNonArch =
+        Geometry.classificationBTProductTreeNonArch
+    ; hypervoxel369IsFiniteFlat =
+        Geometry.classificationHypervoxel369FiniteFlat
+    ; smoothGeometryIdentificationNotPromoted =
+        refl
+    ; geometrizationNotPromoted =
+        refl
+    ; jsjFormulaName =
+        mkConstructible jsjAnaloguePieceClassificationFormula
+    ; jsjReceipt =
+        JSJ.canonicalJSJAnaloguePieceClassificationReceipt
+    ; jsjReceiptIsCanonical =
+        refl
+    ; btPieceIsAtoroidalLike =
+        refl
+    ; hyperfabric369PieceIsFiniteFlatTorusLike =
+        refl
+    ; jsjPromotionFlagsEmpty =
+        JSJ.canonicalReceiptKeepsPromotionFlagsEmpty
+    ; jsjThurstonGeometrizationUnavailable =
+        JSJ.canonicalReceiptKeepsThurstonUnavailable
+    ; surgeryFormulaName =
+        mkConstructible surgeryCanonicalNeighborhoodObstructionFormula
+    ; surgeryObstruction =
+        Surgery.oneMinusObstructionExample
+    ; surgeryObstructionIsOneMinusExample =
+        refl
+    ; surgeryCandidateIsDiscreteEpsilonNeck =
+        Surgery.oneMinusObstructionCandidate
+    ; surgerySmoothTargetIsEpsilonNeck =
+        Surgery.oneMinusObstructionSmoothTarget
+    ; surgerySmoothCanonicalNeighborhoodUnavailable =
+        Surgery.oneMinusObstructionSmoothUnavailable
+    ; surgeryContinuationUnavailable =
+        Surgery.oneMinusObstructionSurgeryContinuationUnavailable
+    }
+
+canonicalConstructibleFlags :
+  List ConstructibleFlag
+canonicalConstructibleFlags =
+  mkConstructible nameableRicciFlowInterface
+  ∷ mkConstructible fEntropyFormula
+  ∷ mkConstructible reducedDistanceQuadraticFormula
+  ∷ mkConstructible btBallVolumeArithmeticFormula
+  ∷ mkConstructible btGaussianReducedVolumeSurfaceFormula
+  ∷ mkConstructible btCanonicalNeckAnalogueFormula
+  ∷ mkConstructible geometryAnalogueClassificationFormula
+  ∷ mkConstructible jsjAnaloguePieceClassificationFormula
+  ∷ mkConstructible surgeryCanonicalNeighborhoodObstructionFormula
+  ∷ []
+
+canonicalAuthoritySockets :
+  List AuthoritySocket
+canonicalAuthoritySockets =
+  mkClosedSocket smoothRicciFlowExistenceUniqueness
+  ∷ mkClosedSocket fEntropyMonotonicity
+  ∷ mkClosedSocket reducedVolumeMonotonicity
+  ∷ mkClosedSocket smoothKappaNoncollapsing
+  ∷ mkClosedSocket smoothEpsilonNeck
+  ∷ mkClosedSocket surgeryContinuation
+  ∷ mkClosedSocket smoothCanonicalNeighborhood
+  ∷ mkClosedSocket smooth3ManifoldCarrier
+  ∷ mkClosedSocket primeDecomposition
+  ∷ mkClosedSocket jsjDecomposition
+  ∷ mkClosedSocket thurstonGeometrization
+  ∷ mkClosedSocket nsYmDependenceOnPerelman
+  ∷ []
+
+record PerelmanRicciFlowAndGeometrizationBoundaryReceipt : Setω where
+  field
+    orcslpgf :
+      ORCSLPGF
+
     ricciFlowInterfaceNameable :
       ConstructibleFlag
 
@@ -277,85 +503,15 @@ record PerelmanRicciFlowAndGeometrizationBoundaryReceipt : Set where
     reducedDistanceQuadraticNameable :
       ConstructibleFlag
 
-    reducedDistanceQuadraticAtTwo :
+    reducedDistanceQuadraticAtTwoWitness :
       reducedDistanceQuadratic (suc (suc zero)) ≡
       suc (suc (suc (suc zero)))
 
-    btExplicitComputations :
-      BTExplicitComputationReceipt
+    concreteDiscreteWitnesses :
+      ConcreteDiscreteWitnesses
 
-    btBallVolumeEntropyBoundary :
-      BTBall.BTBallVolumeEntropyBoundary
-
-    btBallVolumeEntropyBoundaryIsCanonical :
-      btBallVolumeEntropyBoundary
-      ≡
-      BTBall.canonicalBTBallVolumeEntropyBoundary
-
-    btProductEntropyLabelIsLog42 :
-      BTBall.BTBallVolumeEntropyBoundary.entropyLabel
-        btBallVolumeEntropyBoundary
-      ≡
-      BTBall.entropyLabelText
-
-    btProductBaseIsFortyTwo :
-      BTBall.BTBallVolumeEntropyBoundary.productBase
-        btBallVolumeEntropyBoundary
-      ≡
-      42
-
-    btGaussianReducedVolumeBoundary :
-      BTGaussian.BTGaussianReducedVolumeBoundary
-
-    btGaussianReducedVolumeBoundaryIsCanonical :
-      btGaussianReducedVolumeBoundary
-      ≡
-      BTGaussian.canonicalBTGaussianReducedVolumeBoundary
-
-    btGaussianReducedVolumeConverges :
-      BTGaussian.BTGaussianReducedVolumeBoundary.convergenceFlag
-        btGaussianReducedVolumeBoundary
-      ≡
-      true
-
-    btNeckJSJGeometryAnalogueBoundary :
-      BTNeck.BTNeckJSJGeometryAnalogueBoundary
-
-    btNeckJSJGeometryAnalogueBoundaryIsCanonical :
-      btNeckJSJGeometryAnalogueBoundary
-      ≡
-      BTNeck.canonicalBTNeckJSJGeometryAnalogueBoundary
-
-    btNeckSmoothS2CrossSectionBlocked :
-      BTNeck.BTNeckAnalogue.smoothS2CrossSection
-        (BTNeck.BTNeckJSJGeometryAnalogueBoundary.btNeck
-          btNeckJSJGeometryAnalogueBoundary)
-      ≡
-      false
-
-    btNeckAnalogueNameable :
-      ConstructibleFlag
-
-    btPiecesAtoroidal :
-      ConstructibleFlag
-
-    hypervoxelSeifertAnalogueRecorded :
-      ConstructibleFlag
-
-    btGeometry :
-      BTGeometry
-
-    btGeometryNameable :
-      ConstructibleFlag
-
-    hypervoxelCell :
-      HypervoxelCell
-
-    hypervoxelFiniteFlatCellRecorded :
-      ConstructibleFlag
-
-    hypervoxelFibration :
-      HypervoxelFibrationAnalogue
+    analogueClassificationWitnesses :
+      AnalogueClassificationWitnesses
 
     constructibleFlags :
       List ConstructibleFlag
@@ -369,25 +525,19 @@ record PerelmanRicciFlowAndGeometrizationBoundaryReceipt : Set where
     reducedVolumeMonotonicitySocket :
       AuthoritySocket
 
-    btReducedVolumeMonotonicitySocket :
-      AuthoritySocket
-
     smoothKappaNoncollapsingSocket :
-      AuthoritySocket
-
-    btSmoothKappaIdentificationSocket :
       AuthoritySocket
 
     smoothEpsilonNeckSocket :
       AuthoritySocket
 
-    surgerySocket :
+    surgeryContinuationSocket :
       AuthoritySocket
 
-    canonicalNeighborhoodSocket :
+    smoothCanonicalNeighborhoodSocket :
       AuthoritySocket
 
-    smooth3ManifoldSocket :
+    smooth3ManifoldCarrierSocket :
       AuthoritySocket
 
     primeDecompositionSocket :
@@ -410,91 +560,24 @@ record PerelmanRicciFlowAndGeometrizationBoundaryReceipt : Set where
 
 open PerelmanRicciFlowAndGeometrizationBoundaryReceipt public
 
-canonicalConstructibleFlags :
-  List ConstructibleFlag
-canonicalConstructibleFlags =
-  mkConstructible nameableRicciFlowInterface
-  ∷ mkConstructible fEntropyFormula
-  ∷ mkConstructible reducedDistanceQuadraticFormula
-  ∷ mkConstructible btBallGrowthFormula
-  ∷ mkConstructible btVolumeEntropyFormula
-  ∷ mkConstructible btGaussianReducedVolumeConvergenceFormula
-  ∷ mkConstructible btNeckAnalogue
-  ∷ mkConstructible btPiecesAtoroidalFormula
-  ∷ mkConstructible hypervoxelSeifertAnalogue
-  ∷ mkConstructible btGeometryNonArchHypTree
-  ∷ mkConstructible hypervoxelFiniteFlatCell
-  ∷ []
-
-canonicalAuthoritySockets :
-  List AuthoritySocket
-canonicalAuthoritySockets =
-  mkClosedSocket smoothRicciFlowExistenceUniqueness
-  ∷ mkClosedSocket fEntropyMonotonicity
-  ∷ mkClosedSocket reducedVolumeMonotonicity
-  ∷ mkClosedSocket btReducedVolumeMonotonicity
-  ∷ mkClosedSocket smoothKappaNoncollapsing
-  ∷ mkClosedSocket btSmoothKappaIdentification
-  ∷ mkClosedSocket smoothEpsilonNeck
-  ∷ mkClosedSocket surgery
-  ∷ mkClosedSocket canonicalNeighborhood
-  ∷ mkClosedSocket smooth3Manifold
-  ∷ mkClosedSocket primeDecomposition
-  ∷ mkClosedSocket jsjDecomposition
-  ∷ mkClosedSocket thurstonGeometrization
-  ∷ mkClosedSocket nsYmDependenceOnPerelman
-  ∷ []
-
 canonicalPerelmanRicciFlowAndGeometrizationBoundaryReceipt :
   PerelmanRicciFlowAndGeometrizationBoundaryReceipt
 canonicalPerelmanRicciFlowAndGeometrizationBoundaryReceipt =
   record
-    { ricciFlowInterfaceNameable =
+    { orcslpgf =
+        boundaryORCSLPGF
+    ; ricciFlowInterfaceNameable =
         mkConstructible nameableRicciFlowInterface
     ; fEntropyFormulaNameable =
         mkConstructible fEntropyFormula
     ; reducedDistanceQuadraticNameable =
         mkConstructible reducedDistanceQuadraticFormula
-    ; reducedDistanceQuadraticAtTwo =
-        refl
-    ; btExplicitComputations =
-        canonicalBTExplicitComputationReceipt
-    ; btBallVolumeEntropyBoundary =
-        BTBall.canonicalBTBallVolumeEntropyBoundary
-    ; btBallVolumeEntropyBoundaryIsCanonical =
-        refl
-    ; btProductEntropyLabelIsLog42 =
-        BTBall.canonicalEntropyLog42Recorded
-    ; btProductBaseIsFortyTwo =
-        BTBall.canonicalProductBase42Recorded
-    ; btGaussianReducedVolumeBoundary =
-        BTGaussian.canonicalBTGaussianReducedVolumeBoundary
-    ; btGaussianReducedVolumeBoundaryIsCanonical =
-        refl
-    ; btGaussianReducedVolumeConverges =
-        BTGaussian.canonicalConvergenceFlagTrue
-    ; btNeckJSJGeometryAnalogueBoundary =
-        BTNeck.canonicalBTNeckJSJGeometryAnalogueBoundary
-    ; btNeckJSJGeometryAnalogueBoundaryIsCanonical =
-        refl
-    ; btNeckSmoothS2CrossSectionBlocked =
-        BTNeck.btNeckSmoothS2False
-    ; btNeckAnalogueNameable =
-        mkConstructible btNeckAnalogue
-    ; btPiecesAtoroidal =
-        mkConstructible btPiecesAtoroidalFormula
-    ; hypervoxelSeifertAnalogueRecorded =
-        mkConstructible hypervoxelSeifertAnalogue
-    ; btGeometry =
-        nonArchHypTree
-    ; btGeometryNameable =
-        mkConstructible btGeometryNonArchHypTree
-    ; hypervoxelCell =
-        finiteFlatCell
-    ; hypervoxelFiniteFlatCellRecorded =
-        mkConstructible hypervoxelFiniteFlatCell
-    ; hypervoxelFibration =
-        seifertAnalogue
+    ; reducedDistanceQuadraticAtTwoWitness =
+        reducedDistanceQuadraticAtTwo
+    ; concreteDiscreteWitnesses =
+        canonicalConcreteDiscreteWitnesses
+    ; analogueClassificationWitnesses =
+        canonicalAnalogueClassificationWitnesses
     ; constructibleFlags =
         canonicalConstructibleFlags
     ; smoothRicciFlowExistenceUniquenessSocket =
@@ -503,20 +586,16 @@ canonicalPerelmanRicciFlowAndGeometrizationBoundaryReceipt =
         mkClosedSocket fEntropyMonotonicity
     ; reducedVolumeMonotonicitySocket =
         mkClosedSocket reducedVolumeMonotonicity
-    ; btReducedVolumeMonotonicitySocket =
-        mkClosedSocket btReducedVolumeMonotonicity
     ; smoothKappaNoncollapsingSocket =
         mkClosedSocket smoothKappaNoncollapsing
-    ; btSmoothKappaIdentificationSocket =
-        mkClosedSocket btSmoothKappaIdentification
     ; smoothEpsilonNeckSocket =
         mkClosedSocket smoothEpsilonNeck
-    ; surgerySocket =
-        mkClosedSocket surgery
-    ; canonicalNeighborhoodSocket =
-        mkClosedSocket canonicalNeighborhood
-    ; smooth3ManifoldSocket =
-        mkClosedSocket smooth3Manifold
+    ; surgeryContinuationSocket =
+        mkClosedSocket surgeryContinuation
+    ; smoothCanonicalNeighborhoodSocket =
+        mkClosedSocket smoothCanonicalNeighborhood
+    ; smooth3ManifoldCarrierSocket =
+        mkClosedSocket smooth3ManifoldCarrier
     ; primeDecompositionSocket =
         mkClosedSocket primeDecomposition
     ; jsjDecompositionSocket =
@@ -528,34 +607,62 @@ canonicalPerelmanRicciFlowAndGeometrizationBoundaryReceipt =
     ; authoritySockets =
         canonicalAuthoritySockets
     ; boundaryNotes =
-        "Constructible lane records nameable Ricci-flow, f-entropy, reduced-distance, BT, and hypervoxel interfaces only."
-        ∷ "BT product-tree ball growth is explicit with entropy label log42 for T3 x T2 x T7."
-        ∷ "BT Gaussian reduced volume convergence consumes the product-tree 8 and 42 constants; it is not a monotonicity theorem."
-        ∷ "Smooth Ricci flow, Perelman monotonicities, kappa noncollapsing, necks, surgery, canonical neighborhoods, 3-manifold topology, geometrization, and NS/YM dependence remain external authority sockets fixed false."
+        "No local btGaussianReducedVolume constant or pointwise convergence witness is introduced."
+        ∷ "Gaussian evidence is imported from BTGaussianReducedVolumeSurface sample shell rows and fail-closed status fields."
+        ∷ "Smooth Ricci flow, Perelman monotonicity, surgery continuation, smooth canonical neighborhoods, JSJ, geometrization, and NS/YM dependence remain closed authority sockets."
         ∷ []
     }
 
-allPerelmanBoundaryAuthoritySocketsClosed :
-  ( AuthoritySocket.authorityAvailable
-      (smoothRicciFlowExistenceUniquenessSocket
-        canonicalPerelmanRicciFlowAndGeometrizationBoundaryReceipt)
-    ≡ false
-  )
-allPerelmanBoundaryAuthoritySocketsClosed =
-  refl
-
-btReducedVolumeMonotonicityNotPromoted :
-  AuthoritySocket.authorityAvailable
-    (btReducedVolumeMonotonicitySocket
+canonicalReceiptKeepsRicciFlowClosed :
+  authorityAvailable
+    (smoothRicciFlowExistenceUniquenessSocket
       canonicalPerelmanRicciFlowAndGeometrizationBoundaryReceipt)
-  ≡ false
-btReducedVolumeMonotonicityNotPromoted =
+  ≡
+  false
+canonicalReceiptKeepsRicciFlowClosed =
   refl
 
-thurstonGeometrizationAuthorityNotPromoted :
-  AuthoritySocket.authorityAvailable
+canonicalReceiptKeepsPerelmanMonotonicityClosed :
+  authorityAvailable
+    (reducedVolumeMonotonicitySocket
+      canonicalPerelmanRicciFlowAndGeometrizationBoundaryReceipt)
+  ≡
+  false
+canonicalReceiptKeepsPerelmanMonotonicityClosed =
+  refl
+
+canonicalReceiptKeepsSurgeryClosed :
+  authorityAvailable
+    (surgeryContinuationSocket
+      canonicalPerelmanRicciFlowAndGeometrizationBoundaryReceipt)
+  ≡
+  false
+canonicalReceiptKeepsSurgeryClosed =
+  refl
+
+canonicalReceiptKeepsJSJClosed :
+  authorityAvailable
+    (jsjDecompositionSocket
+      canonicalPerelmanRicciFlowAndGeometrizationBoundaryReceipt)
+  ≡
+  false
+canonicalReceiptKeepsJSJClosed =
+  refl
+
+canonicalReceiptKeepsGeometrizationClosed :
+  authorityAvailable
     (thurstonGeometrizationSocket
       canonicalPerelmanRicciFlowAndGeometrizationBoundaryReceipt)
-  ≡ false
-thurstonGeometrizationAuthorityNotPromoted =
+  ≡
+  false
+canonicalReceiptKeepsGeometrizationClosed =
+  refl
+
+canonicalReceiptKeepsNSYMDependenceClosed :
+  authorityAvailable
+    (nsYmDependenceOnPerelmanSocket
+      canonicalPerelmanRicciFlowAndGeometrizationBoundaryReceipt)
+  ≡
+  false
+canonicalReceiptKeepsNSYMDependenceClosed =
   refl

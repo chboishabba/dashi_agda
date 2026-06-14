@@ -1,9 +1,28 @@
 # Paper 1 Draft: Navier-Stokes Blowup Reduction Through Tail Flux Control
 
-Author: `[TBD]`
+Author: pending final public author list
 Date: `2026-06-09`
 Version: `draft 1`
 Status: live analytic manuscript draft; Clay-facing; non-promoting
+
+## Abstract
+
+This manuscript presents a conditional Navier-Stokes blowup-reduction route
+through high-frequency tail-flux control. The fixed-shell identity separates
+tail dissipation from nonlinear replenishment, and the proof package organizes
+the remaining work into ESS localization, Abel-defect bookkeeping,
+near-diagonal stationarity, support-richness transfer, defect-from-critical
+coercivity, depletion, scale monotonicity, and CKN/BKM closure. The theorem is
+a reduction theorem: if the named `A1-A9` package supplies a uniform
+high-tail domination estimate at the dynamically selected danger shell, then
+the continuation criteria preclude finite-time blowup.
+
+The paper should be read as a candidate proof package, internally
+DASHI/Agda-receipted where stated, pending independent peer review, external
+authority review, and the applicable Clay Mathematics Institute eligibility
+procedures. Its live frontiers are the quantitative `A1/A3` Abel-stationarity
+package and the uniform `A4` physical-to-Fourier support-richness transfer,
+not a claim that the Clay problem is already settled.
 
 ## 1. Introduction and main theorem
 
@@ -104,6 +123,14 @@ larger corpus, see Paper 8, *Closure Grammar, Jordan-von Neumann Recovery, and
 Controlled Consumers*. Paper 1 does not rely on Paper 8 for its analytic proof
 steps, but it does inherit the same claim-boundary discipline.
 
+**Formal status box.** This is a candidate analytic reduction manuscript. The
+accepted external inputs are Leray-Hopf existence theory, Coifman-Meyer
+paraproduct technology, CKN epsilon regularity, and the BKM continuation
+criterion. The internal DASHI receipts track theorem-interface anchors and
+terminal false guards. The diagnostic surfaces identify exactly where `A1/A3`
+and `A4` still need accepted quantitative constants. No global regularity
+theorem or Clay resolution is asserted.
+
 The historical theta or danger-shell diagnostics remain relevant as obstruction
 guidance, but they appear here only as appendix-level context for why the tail
 route is natural.
@@ -202,22 +229,28 @@ used by the Abel bootstrap. Until that intake is fixed in the required form,
 the manuscript treats even attractive candidate rates as diagnostic guidance
 rather than promoted theorem inputs.
 
-## 4. A4-A6: support geometry, richness, leakage reduction
+## 4. A4-A6: support geometry, richness, defect-from-critical coercivity
 
 The next stage replaces shell bookkeeping alone by physical-space support
 geometry. Assertion `A4` selects parabolic cylinders or annular supports on
 which the defect mass is nontrivial but quantitatively localized. Assertion
 `A5` is a richness statement: the support cannot degenerate to a set too thin
 to interact with the dissipation mechanism. Assertion `A6` then converts this
-richness into leakage reduction, meaning that energy escape across the support
-boundary can be made subordinate to the interior dissipation budget.
+richness into defect-from-critical coercivity: the near-diagonal nonlinear
+production may remain positive, but after Abel averaging, transport control,
+and commutator bookkeeping it must lose a fixed fraction of the critical
+tail-flux budget. This is weaker and safer than a pointwise negative stretching
+claim; it asks only that the localized defect cannot retain full critical
+strength once the `A4-A5` support geometry is imposed.
 
 The manuscript needs this section because shell domination alone cannot exclude
-edge inflow. The support geometry creates a second ledger, independent of the
-Littlewood-Paley identity, that tracks how much defect can leak into or out of
-the danger region. The intended conclusion is that after fixing radii
-`r_4 < r_6` and smallness thresholds `eps_4`, `eps_6`, one has enough slack to
-replace the raw flux term by an effective interior flux plus an error that is
+edge inflow or critical near-diagonal recirculation. The support geometry
+creates a second ledger, independent of the Littlewood-Paley identity, that
+tracks how much defect can leak into or out of the danger region and how much
+of the remaining near-diagonal defect must be spent against the coercive
+reserve. The intended conclusion is that after fixing radii `r_4 < r_6` and
+smallness thresholds `eps_4`, `eps_6`, one has enough slack to replace the raw
+flux term by an effective interior flux plus a leakage/coercivity error that is
 strictly smaller than the dissipation reserve carried forward to `A7-A8`.
 
 > **Proposition 4.1 (constants compatibility, first pass).**
@@ -236,9 +269,9 @@ the inequalities are jointly satisfiable because the support radii are ordered
 strictly and the smallness parameters are nested rather than competing at the
 same scale.
 
-In sum, `A4-A6` convert near-diagonal defect control into a leakage-aware
-support geometry with explicit room left for the later depletion and closure
-steps.
+In sum, `A4-A6` convert near-diagonal defect control into a leakage-aware,
+defect-from-critical coercivity statement with explicit room left for the later
+depletion and closure steps.
 
 The theorem-sized obstruction in this section is the quantitative `A4`
 transfer itself. The manuscript needs a uniform physical-to-Fourier output
@@ -259,8 +292,8 @@ exact theorem form required downstream.
 The downstream route is now equally explicit at theorem grammar level. The
 current repo records a candidate `A5-A9` package with the following shape:
 `A5` kappa-bias vanishing from asymptotic stationarity and A4 richness,
-`A6` pointwise-to-Abel / leakage transfer with explicit transport and
-commutator budgets,
+`A6` defect-from-critical coercivity through pointwise-to-Abel transfer,
+leakage accounting, transport control, and commutator budgets,
 `A7` a Gronwall depletion threshold,
 `A8` a scale-monotonicity recursion,
 and `A9` the CKN/BKM contradiction.
@@ -318,6 +351,17 @@ the later closure assumptions do not overconsume the gains created earlier.
 In sum, `A7-A8` preserve a positive quantitative reserve rather than a
 qualitative hope, so the continuation step can consume a real budget.
 
+The same information can be read as the constants table consumed by the final
+closure:
+
+| Stage | Input scale or parameter | Budget role |
+| --- | --- | --- |
+| `A4` support richness | `r_4`, `eps_4` | creates at least `8 eps_6` of normalized reserve |
+| `A6` defect-from-critical coercivity | `r_6`, `eps_6` | consumes at most `2 eps_6` through leakage, transport, and commutators |
+| `A7` depletion | `r_7`, `eps_7 <= eps_6` | consumes at most `eps_7` in the Gronwall step |
+| `A8` scale monotonicity | `r_8`, `eps_8 <= eps_7/2` | consumes at most `eps_8` while moving to the closure scale |
+| `A9` CKN/BKM closure | `r_9`, `eps_9 <= eps_8/2` | requires a final positive reserve |
+
 ## 6. A9: CKN/BKM closure and contradiction
 
 Assertion `A9` converts the retained reserve into a continuation theorem. Once
@@ -344,8 +388,22 @@ here as proof certificates. Their role is to justify why the present paper
 prioritizes ESS localization, Abel-defect bookkeeping, and leakage-aware
 closure rather than a tail-only numerical threshold.
 
-## Appendix B. Claim boundary table
+## Appendix B. Formal-support appendix
+
+The paper-facing theorem-variable manifest is generated by
+`scripts/generate_paper_proof_manifest.py` and recorded at
+`Docs/papers/generated/core_papers_theorem_var_manifest.md`. For Paper 1 it
+indexes the normalized theorem interface
+`DASHI/Papers/NavierStokes/TheoremInterface.agda`, including the `A6`, `A7`,
+`A8`, `A9`, final-status, and terminal false guard surfaces. The manifest is a
+formal-support index for the manuscript interfaces; it does not promote the
+analytic `A1/A3` and `A4` frontiers to accepted PDE theorems.
+
+## Appendix C. Claim boundary table
 
 | Proved in this paper | Assumed externally with citation | Explicitly left open |
 | --- | --- | --- |
-| The reduction theorem `A1-A9` is organized as a single analytic route; Proposition 3.1 reduces the obstruction to a near-diagonal Abel-defect shell window; Proposition 4.1 proves first-pass compatibility of the support radii and leakage thresholds; Proposition 5.1 proves the full constants ladder is jointly satisfiable with explicit slack; the support-geometry and richness stage is identified as the load-bearing bridge from shell data to continuation closure. | Leray-Hopf existence theory (`LerayHopf`), Coifman-Meyer paraproduct technology (`CoifmanMeyer`), Caffarelli-Kohn-Nirenberg epsilon regularity (`CKN`), and the Beale-Kato-Majda continuation criterion (`BKM`). | Quantitative Abel-defect-measure construction and the coupled `A1/A3` stationarity bootstrap; the uniform `A4` Lei-Ren-Tian output-support transfer constant across Type-I rescalings; any unconditional proof of the assertions `A1-A9`; any global smoothness theorem for 3D Navier-Stokes; any claim that the Clay problem is solved. |
+| The reduction theorem `A1-A9` is organized as a single analytic route from tail-flux domination to continuation closure. | Leray-Hopf existence theory (`LerayHopf`) supplies the solution framework. | Any unconditional proof that all `A1-A9` hypotheses hold for every 3D Navier-Stokes solution. |
+| Proposition 3.1 reduces the obstruction to a near-diagonal Abel-defect shell window. | Coifman-Meyer paraproduct technology (`CoifmanMeyer`) supplies the standard bilinear bookkeeping surface. | Quantitative Abel-defect-measure construction and the coupled `A1/A3` stationarity bootstrap in the exact norm consumed later. |
+| Proposition 4.1 proves compatibility of the support radii and leakage/coercivity thresholds once `A4-A6` are granted. | The candidate physical-to-Fourier richness route may use external geometric/PDE inputs only when stated in the exact consumed form. | The uniform `A4` Lei-Ren-Tian output-support transfer constant across Type-I rescalings. |
+| Proposition 5.1 proves the full constants ladder is jointly satisfiable with explicit slack. | CKN epsilon regularity (`CKN`) and the Beale-Kato-Majda continuation criterion (`BKM`) are used for the final continuation contradiction. | Any global smoothness theorem for 3D Navier-Stokes or any claim of Clay resolution. |

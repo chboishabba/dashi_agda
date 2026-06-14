@@ -10,6 +10,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 BIOLOGY = REPO_ROOT / "DASHI" / "Biology"
 INTEROP = REPO_ROOT / "DASHI" / "Interop"
+REASONING = REPO_ROOT / "DASHI" / "Reasoning"
 EVERYTHING = REPO_ROOT / "DASHI" / "Everything.agda"
 AUDIT_SCRIPT = REPO_ROOT / "scripts" / "avian_overlay_qualia_boundary_audit.py"
 
@@ -102,12 +103,16 @@ MODULES = {
             "transcriptReportQuotient",
             "transcriptPNF",
             "reportQuotientPromotedIsFalse",
+            "RuntimeQualiaTranscriptPNFPayload",
+            "RuntimeReceiptReportQuotient",
+            "auditScriptOnly",
         ),
         "boundary_terms": (
             "transcript",
             "pnf",
             "quotient",
             "qualia",
+            "runtime",
             "false",
         ),
     },
@@ -124,6 +129,11 @@ MODULES = {
             "BlockedPhenomenalClosure",
             "blockedPhenomenalClosure",
             "blockedPhenomenalClosureIsFalse",
+            "ObserverState",
+            "StateSpecificObserverQuotient",
+            "StateShiftProjectionDefect",
+            "stateModifiedFibresNonempty",
+            "stateShiftPhenomenalRecoveryIsFalse",
         ),
         "boundary_terms": (
             "observer",
@@ -131,10 +141,55 @@ MODULES = {
             "residual",
             "projection defect",
             "phenomenal",
+            "state",
+            "false",
+        ),
+    },
+    "DASHI.Reasoning.MultiObserverScienceQuotientQualiaBridge": {
+        "path": REASONING / "MultiObserverScienceQuotientQualiaBridge.agda",
+        "identifiers": (
+            "MultiObserverQuotientFusion",
+            "observerChannelsNonempty",
+            "partialReconstructionPromotedIsTrue",
+            "projectionDefectBoundedIsTrue",
+            "inhabitedExperienceRecoveredIsFalse",
+        ),
+        "boundary_terms": (
+            "multi",
+            "observer",
+            "quotient",
+            "fusion",
+            "false",
+        ),
+    },
+    "DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary": {
+        "path": BIOLOGY / "AvianMagnetoreceptionExtraFibreBoundary.agda",
+        "identifiers": (
+            "AvianMagnetoreceptionExtraFibreBoundary",
+            "perceptualQuotientGeometryExperimentallyConstrained",
+            "qualiaGeometryClaimIsFalse",
+        ),
+        "boundary_terms": (
+            "avian",
+            "magnetoreception",
+            "extra",
+            "fibre",
             "false",
         ),
     },
 }
+
+OBSERVER_QUOTIENT_COMPLETION_TOKENS = (
+    "StateSpecificObserverQuotient",
+    "StateShiftProjectionDefect",
+    "RuntimeQualiaTranscriptPNFPayload",
+    "RuntimeReceiptReportQuotient",
+    "auditScriptOnly",
+    "MultiObserverQuotientFusion",
+    "AvianMagnetoreceptionExtraFibreBoundary",
+    "perceptualQuotientGeometryExperimentallyConstrained",
+    "qualiaGeometryClaimIsFalse",
+)
 
 
 @pytest.fixture(scope="module")
@@ -162,6 +217,28 @@ def test_avian_overlay_modules_record_required_identifiers(
         text = module_texts[module_name]
         for identifier in spec["identifiers"]:
             assert identifier in text, f"{module_name} missing {identifier}"
+
+
+def test_observer_quotient_completion_surfaces_record_new_tokens(
+    module_texts: dict[str, str],
+) -> None:
+    combined = "\n".join(module_texts.values())
+    for token in OBSERVER_QUOTIENT_COMPLETION_TOKENS:
+        assert token in combined, f"observer quotient completion token missing: {token}"
+
+    transcript_text = module_texts["DASHI.Interop.QualiaTranscriptPNFSemanticBridge"]
+    assert "auditScriptOnly" in transcript_text
+    assert "RuntimeQualiaTranscriptPNFPayload" in transcript_text
+    assert "RuntimeReceiptReportQuotient" in transcript_text
+
+    fusion_text = module_texts["DASHI.Reasoning.MultiObserverScienceQuotientQualiaBridge"]
+    assert "MultiObserverQuotientFusion" in fusion_text
+    assert "partialReconstructionPromotedIsTrue" in fusion_text
+    assert "projectionDefectBoundedIsTrue" in fusion_text
+
+    avian_text = module_texts["DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary"]
+    assert "perceptualQuotientGeometryExperimentallyConstrained" in avian_text
+    assert "qualiaGeometryClaimIsFalse" in avian_text
 
 
 def test_avian_overlay_modules_record_false_boundary_language(
@@ -244,6 +321,8 @@ def test_optional_avian_overlay_audit_json_passes_non_aggregate_checks() -> None
         if spec.get("audit_json", True) is False:
             continue
         assert module_name.rsplit(".", maxsplit=1)[-1] in encoded
+    for token in OBSERVER_QUOTIENT_COMPLETION_TOKENS:
+        assert token in encoded
 
     rows = _audit_check_rows(payload)
     assert rows, "audit JSON did not expose check rows"

@@ -138,6 +138,14 @@ proof support: some are internally Agda-receipted/typechecked integration
 points, but they remain pending peer review, external authority review, and
 external acceptance. They do not claim Clay problem resolution.
 
+The live manuscripts use this route in a four-layer reading order: receipt
+layer, theorem-interface layer, Cubical/DCHoTT adapter layer, and controlled
+consumer layer. The adapter layer is especially important for Paper 8: DCHoTT
+rows record bounded interpretation coverage, while Cubical incompatibility rows
+record fail-closed boundaries rather than fabricated ports. Papers 1 and 3
+cite the same manifest as formal support for their paper-facing interfaces, not
+as a substitute for the analytic PDE or constructive-QFT arguments.
+
 The normalized paper-facing theorem interfaces and generated theorem-variable
 manifest are:
 

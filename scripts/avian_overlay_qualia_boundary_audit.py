@@ -25,6 +25,8 @@ REQUIRED_MODULES = (
     "DASHI.Interop.SensibLawResidualLattice",
     "DASHI.Interop.QualiaTranscriptPNFSemanticBridge",
     "DASHI.Biology.ObserverPerceptualManifoldResidual",
+    "DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary",
+    "DASHI.Reasoning.MultiObserverScienceQuotientQualiaBridge",
 )
 
 REQUIRED_CATEGORIES: dict[str, tuple[str, ...]] = {
@@ -91,6 +93,65 @@ REQUIRED_CATEGORIES: dict[str, tuple[str, ...]] = {
         "phenomenalClosureBlocked",
         "blockedPhenomenalClosureIsFalse",
     ),
+    "state_specific_observer_quotient_completion": (
+        "StateSpecificObserverQuotient",
+        "ObserverState",
+        "stateModifiedFibresNonempty",
+        "stateSpecificPhenomenalRecoveryIsFalse",
+    ),
+    "state_shift_projection_defect_completion": (
+        "StateShiftProjectionDefect",
+        "stateProjectionDefectPresentIsTrue",
+        "stateQuotientDifferentGeometryIsTrue",
+        "stateShiftPhenomenalRecoveryIsFalse",
+    ),
+    "runtime_qualia_transcript_pnf_payload_completion": (
+        "RuntimeQualiaTranscriptPNFPayload",
+        "NonEmptyRuntimeReceipts",
+        "auditScriptOnly",
+        "runtimePhenomenalRecoveryIsFalse",
+        "runtimeTypecheckedIsFalse",
+    ),
+    "runtime_receipt_report_quotient_completion": (
+        "RuntimeReceiptReportQuotient",
+        "auditScriptOnly",
+        "runtimeReceiptLowerBound",
+        "runtimeReceiptReportPromotedIsFalse",
+    ),
+    "multi_observer_quotient_fusion_completion": (
+        "MultiObserverQuotientFusion",
+        "observerChannelsNonempty",
+        "partialReconstructionPromotedIsTrue",
+        "projectionDefectBoundedIsTrue",
+        "inhabitedExperienceRecoveredIsFalse",
+    ),
+    "avian_magnetoreception_extra_fibre_boundary_completion": (
+        "AvianMagnetoreceptionExtraFibreBoundary",
+        "perceptualQuotientGeometryExperimentallyConstrained",
+        "qualiaGeometryClaimIsFalse",
+        "false",
+    ),
+}
+
+REQUIRED_CATEGORY_MODULES: dict[str, tuple[str, ...]] = {
+    "state_specific_observer_quotient_completion": (
+        "DASHI.Biology.ObserverPerceptualManifoldResidual",
+    ),
+    "state_shift_projection_defect_completion": (
+        "DASHI.Biology.ObserverPerceptualManifoldResidual",
+    ),
+    "runtime_qualia_transcript_pnf_payload_completion": (
+        "DASHI.Interop.QualiaTranscriptPNFSemanticBridge",
+    ),
+    "runtime_receipt_report_quotient_completion": (
+        "DASHI.Interop.QualiaTranscriptPNFSemanticBridge",
+    ),
+    "multi_observer_quotient_fusion_completion": (
+        "DASHI.Reasoning.MultiObserverScienceQuotientQualiaBridge",
+    ),
+    "avian_magnetoreception_extra_fibre_boundary_completion": (
+        "DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary",
+    ),
 }
 
 MODULE_CATEGORY_HINTS: dict[str, tuple[str, ...]] = {
@@ -134,6 +195,20 @@ MODULE_CATEGORY_HINTS: dict[str, tuple[str, ...]] = {
         "multi_speaker_residual_boundary",
         "observer_projection_defect_boundary",
         "blocked_phenomenal_closure_boundary",
+        "state_specific_observer_quotient_completion",
+        "state_shift_projection_defect_completion",
+    ),
+    "DASHI.Interop.QualiaTranscriptPNFSemanticBridge": (
+        "pnf_evidence_only_boundary",
+        "transcript_report_quotient_boundary",
+        "runtime_qualia_transcript_pnf_payload_completion",
+        "runtime_receipt_report_quotient_completion",
+    ),
+    "DASHI.Reasoning.MultiObserverScienceQuotientQualiaBridge": (
+        "multi_observer_quotient_fusion_completion",
+    ),
+    "DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary": (
+        "avian_magnetoreception_extra_fibre_boundary_completion",
     ),
 }
 
@@ -202,13 +277,21 @@ def marker_hits(surface: ModuleSurface) -> list[dict[str, Any]]:
 
 
 def category_status(surfaces: list[ModuleSurface]) -> dict[str, dict[str, Any]]:
-    combined = "\n".join(surface.text for surface in surfaces if surface.exists)
+    surface_by_module = {surface.module: surface for surface in surfaces}
     status: dict[str, dict[str, Any]] = {}
     for category, tokens in REQUIRED_CATEGORIES.items():
+        scoped_modules = REQUIRED_CATEGORY_MODULES.get(category)
+        scoped_surfaces = [
+            surface_by_module[module]
+            for module in scoped_modules or ()
+            if module in surface_by_module
+        ]
+        category_surfaces = scoped_surfaces or surfaces
+        combined = "\n".join(surface.text for surface in category_surfaces if surface.exists)
         missing = [token for token in tokens if token not in combined]
         present_modules = [
             surface.module
-            for surface in surfaces
+            for surface in category_surfaces
             if surface.exists and any(token in surface.text for token in tokens)
         ]
         status[category] = {
@@ -216,6 +299,7 @@ def category_status(surfaces: list[ModuleSurface]) -> dict[str, dict[str, Any]]:
             "missing_tokens": missing,
             "present_modules": present_modules,
             "required_tokens": list(tokens),
+            "required_modules": list(scoped_modules or ()),
         }
     return status
 
@@ -345,7 +429,7 @@ def build_summary(repo_root: Path, allow_missing_aggregate: bool) -> dict[str, A
         "passed": not failed_required,
         "control_card": {
             "O": "Audit owns only textual boundary checks over avian, transcript-PNF, observer-manifold, and SensibLaw surfaces.",
-            "R": "Textually audit avian overlay, RF perturbation, qualia boundary, hard-problem residual, and PNF evidence-only surfaces.",
+            "R": "Textually audit avian overlay, RF perturbation, qualia boundary, hard-problem residual, observer-quotient completion, and PNF evidence-only surfaces.",
             "C": "Stdlib Python argparse script emits JSON and optional Markdown.",
             "S": "New Agda surfaces can typecheck while accidentally becoming skeletons or promoted claims.",
             "L": "Required modules -> no incomplete markers -> category tokens -> aggregate import visibility.",

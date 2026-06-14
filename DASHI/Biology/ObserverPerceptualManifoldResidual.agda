@@ -424,6 +424,384 @@ canonicalPhenomenalInhabitationBlocked quotient =
     }
 
 ------------------------------------------------------------------------
+-- State-specific observer quotient and state-shift projection defect.
+------------------------------------------------------------------------
+
+data ObserverStateKind : Set where
+  baselineObserverStateKind : ObserverStateKind
+  psychedelicObserverStateKind : ObserverStateKind
+  genericObserverStateKind : ObserverStateKind
+
+record NonemptyPerceptualFibres
+    (fibres : List PerceptualFibre) : Set where
+  field
+    witnessFibre :
+      PerceptualFibre
+
+    remainingFibres :
+      List PerceptualFibre
+
+    fibresAreWitnessed :
+      fibres ≡ witnessFibre ∷ remainingFibres
+
+open NonemptyPerceptualFibres public
+
+singletonFibreNonempty :
+  (fibre : PerceptualFibre) →
+  NonemptyPerceptualFibres (fibre ∷ [])
+singletonFibreNonempty fibre =
+  record
+    { witnessFibre = fibre
+    ; remainingFibres = []
+    ; fibresAreWitnessed = refl
+    }
+
+observerPlusHumanFibreNonempty :
+  (observer : ObserverSpecies) →
+  NonemptyPerceptualFibres
+    (fibreFor observer ∷ humanVisionLanguageFibre ∷ [])
+observerPlusHumanFibreNonempty observer =
+  record
+    { witnessFibre = fibreFor observer
+    ; remainingFibres = humanVisionLanguageFibre ∷ []
+    ; fibresAreWitnessed = refl
+    }
+
+record ObserverState
+    (manifold : SharedLatentTransportManifold)
+    (observer : ObserverSpecies) : Set₁ where
+  field
+    stateKind :
+      ObserverStateKind
+
+    stateModifiedFibres :
+      List PerceptualFibre
+
+    stateModifiedFibresNonempty :
+      NonemptyPerceptualFibres stateModifiedFibres
+
+    StateQuotientGeometry :
+      Set
+
+    stateObserverQuotient :
+      ObserverPerceptualQuotient manifold observer
+
+    stateProjectionPromoted :
+      Bool
+
+    stateProjectionPromotedIsTrue :
+      stateProjectionPromoted ≡ true
+
+    statePhenomenalRecovery :
+      Bool
+
+    statePhenomenalRecoveryIsFalse :
+      statePhenomenalRecovery ≡ false
+
+    stateDirectPhenomenalRecoveryBlocked :
+      directPhenomenalInhabitant stateObserverQuotient ≡ false
+
+    stateQualiaRecoveryBlocked :
+      qualiaClosure stateObserverQuotient ≡ false
+
+    stateReading :
+      String
+
+open ObserverState public
+
+canonicalObserverState :
+  (manifold : SharedLatentTransportManifold) →
+  (observer : ObserverSpecies) →
+  (stateKind : ObserverStateKind) →
+  (stateModifiedFibres : List PerceptualFibre) →
+  NonemptyPerceptualFibres stateModifiedFibres →
+  (StateQuotientGeometry : Set) →
+  (projectBehavior : BehaviorClass manifold → StateQuotientGeometry) →
+  (identifyInQuotient :
+    StateQuotientGeometry →
+    StateQuotientGeometry →
+    Set) →
+  (quotientReceipt :
+    StateQuotientGeometry →
+    TransportReceipt manifold) →
+  ObserverState manifold observer
+canonicalObserverState
+  manifold
+  observer
+  stateKind
+  stateModifiedFibres
+  stateModifiedFibresNonempty
+  StateQuotientGeometry
+  projectBehavior
+  identifyInQuotient
+  quotientReceipt =
+  record
+    { stateKind = stateKind
+    ; stateModifiedFibres = stateModifiedFibres
+    ; stateModifiedFibresNonempty = stateModifiedFibresNonempty
+    ; StateQuotientGeometry = StateQuotientGeometry
+    ; stateObserverQuotient =
+        canonicalObserverPerceptualQuotient
+          manifold
+          observer
+          StateQuotientGeometry
+          projectBehavior
+          identifyInQuotient
+          quotientReceipt
+    ; stateProjectionPromoted = true
+    ; stateProjectionPromotedIsTrue = refl
+    ; statePhenomenalRecovery = false
+    ; statePhenomenalRecoveryIsFalse = refl
+    ; stateDirectPhenomenalRecoveryBlocked = refl
+    ; stateQualiaRecoveryBlocked = refl
+    ; stateReading =
+        "The observer state selects modified fibres and promotes a state-indexed projection quotient while phenomenal recovery remains blocked."
+    }
+
+canonicalBaselineObserverState :
+  (manifold : SharedLatentTransportManifold) →
+  (observer : ObserverSpecies) →
+  (BaselineGeometry : Set) →
+  (projectBehavior : BehaviorClass manifold → BaselineGeometry) →
+  (identifyInQuotient :
+    BaselineGeometry →
+    BaselineGeometry →
+    Set) →
+  (quotientReceipt :
+    BaselineGeometry →
+    TransportReceipt manifold) →
+  ObserverState manifold observer
+canonicalBaselineObserverState
+  manifold
+  observer
+  BaselineGeometry
+  projectBehavior
+  identifyInQuotient
+  quotientReceipt =
+  canonicalObserverState
+    manifold
+    observer
+    baselineObserverStateKind
+    (fibreFor observer ∷ [])
+    (singletonFibreNonempty (fibreFor observer))
+    BaselineGeometry
+    projectBehavior
+    identifyInQuotient
+    quotientReceipt
+
+canonicalPsychedelicObserverState :
+  (manifold : SharedLatentTransportManifold) →
+  (observer : ObserverSpecies) →
+  (PsychedelicGeometry : Set) →
+  (projectBehavior : BehaviorClass manifold → PsychedelicGeometry) →
+  (identifyInQuotient :
+    PsychedelicGeometry →
+    PsychedelicGeometry →
+    Set) →
+  (quotientReceipt :
+    PsychedelicGeometry →
+    TransportReceipt manifold) →
+  ObserverState manifold observer
+canonicalPsychedelicObserverState
+  manifold
+  observer
+  PsychedelicGeometry
+  projectBehavior
+  identifyInQuotient
+  quotientReceipt =
+  canonicalObserverState
+    manifold
+    observer
+    psychedelicObserverStateKind
+    (fibreFor observer ∷ humanVisionLanguageFibre ∷ [])
+    (observerPlusHumanFibreNonempty observer)
+    PsychedelicGeometry
+    projectBehavior
+    identifyInQuotient
+    quotientReceipt
+
+record StateSpecificObserverQuotient
+    {manifold : SharedLatentTransportManifold}
+    {observer : ObserverSpecies}
+    (state : ObserverState manifold observer) : Set₁ where
+  field
+    stateSpecificQuotient :
+      ObserverPerceptualQuotient manifold observer
+
+    stateSpecificQuotientMatches :
+      stateSpecificQuotient ≡ stateObserverQuotient state
+
+    stateSpecificModifiedFibres :
+      List PerceptualFibre
+
+    stateSpecificModifiedFibresMatch :
+      stateSpecificModifiedFibres ≡ stateModifiedFibres state
+
+    stateSpecificModifiedFibresNonempty :
+      NonemptyPerceptualFibres stateSpecificModifiedFibres
+
+    stateSpecificProjectionPromoted :
+      Bool
+
+    stateSpecificProjectionPromotedIsTrue :
+      stateSpecificProjectionPromoted ≡ true
+
+    stateSpecificPhenomenalRecovery :
+      Bool
+
+    stateSpecificPhenomenalRecoveryIsFalse :
+      stateSpecificPhenomenalRecovery ≡ false
+
+    stateSpecificReading :
+      String
+
+open StateSpecificObserverQuotient public
+
+canonicalStateSpecificObserverQuotient :
+  {manifold : SharedLatentTransportManifold} →
+  {observer : ObserverSpecies} →
+  (state : ObserverState manifold observer) →
+  StateSpecificObserverQuotient state
+canonicalStateSpecificObserverQuotient state =
+  record
+    { stateSpecificQuotient = stateObserverQuotient state
+    ; stateSpecificQuotientMatches = refl
+    ; stateSpecificModifiedFibres = stateModifiedFibres state
+    ; stateSpecificModifiedFibresMatch = refl
+    ; stateSpecificModifiedFibresNonempty =
+        stateModifiedFibresNonempty state
+    ; stateSpecificProjectionPromoted = true
+    ; stateSpecificProjectionPromotedIsTrue = refl
+    ; stateSpecificPhenomenalRecovery = false
+    ; stateSpecificPhenomenalRecoveryIsFalse = refl
+    ; stateSpecificReading =
+        "The state-specific quotient reuses the observer quotient surface with state-indexed modified fibres and no phenomenal recovery."
+    }
+
+record StateShiftProjectionDefect
+    {manifold : SharedLatentTransportManifold}
+    {observer : ObserverSpecies}
+    (sourceState targetState : ObserverState manifold observer) : Set₁ where
+  field
+    sourceStateQuotient :
+      ObserverPerceptualQuotient manifold observer
+
+    sourceStateQuotientMatches :
+      sourceStateQuotient ≡ stateObserverQuotient sourceState
+
+    targetStateQuotient :
+      ObserverPerceptualQuotient manifold observer
+
+    targetStateQuotientMatches :
+      targetStateQuotient ≡ stateObserverQuotient targetState
+
+    sourceModifiedFibres :
+      List PerceptualFibre
+
+    sourceModifiedFibresNonempty :
+      NonemptyPerceptualFibres sourceModifiedFibres
+
+    targetModifiedFibres :
+      List PerceptualFibre
+
+    targetModifiedFibresNonempty :
+      NonemptyPerceptualFibres targetModifiedFibres
+
+    stateShiftProjectionPromoted :
+      Bool
+
+    stateShiftProjectionPromotedIsTrue :
+      stateShiftProjectionPromoted ≡ true
+
+    stateProjectionDefectPresent :
+      Bool
+
+    stateProjectionDefectPresentIsTrue :
+      stateProjectionDefectPresent ≡ true
+
+    stateQuotientDifferentGeometry :
+      Bool
+
+    stateQuotientDifferentGeometryIsTrue :
+      stateQuotientDifferentGeometry ≡ true
+
+    stateQuotientIdentityClaim :
+      Bool
+
+    stateQuotientIdentityClaimIsFalse :
+      stateQuotientIdentityClaim ≡ false
+
+    sourceStatePhenomenalRecoveryBlocked :
+      statePhenomenalRecovery sourceState ≡ false
+
+    targetStatePhenomenalRecoveryBlocked :
+      statePhenomenalRecovery targetState ≡ false
+
+    stateShiftPhenomenalRecovery :
+      Bool
+
+    stateShiftPhenomenalRecoveryIsFalse :
+      stateShiftPhenomenalRecovery ≡ false
+
+    sourceDirectPhenomenalRecoveryBlocked :
+      directPhenomenalInhabitant sourceStateQuotient ≡ false
+
+    targetDirectPhenomenalRecoveryBlocked :
+      directPhenomenalInhabitant targetStateQuotient ≡ false
+
+    stateShiftQualiaRecoveryBlocked :
+      Bool
+
+    stateShiftQualiaRecoveryBlockedIsTrue :
+      stateShiftQualiaRecoveryBlocked ≡ true
+
+    stateShiftReading :
+      String
+
+open StateShiftProjectionDefect public
+
+canonicalStateShiftProjectionDefect :
+  {manifold : SharedLatentTransportManifold} →
+  {observer : ObserverSpecies} →
+  (sourceState targetState : ObserverState manifold observer) →
+  StateShiftProjectionDefect sourceState targetState
+canonicalStateShiftProjectionDefect sourceState targetState =
+  record
+    { sourceStateQuotient = stateObserverQuotient sourceState
+    ; sourceStateQuotientMatches = refl
+    ; targetStateQuotient = stateObserverQuotient targetState
+    ; targetStateQuotientMatches = refl
+    ; sourceModifiedFibres = stateModifiedFibres sourceState
+    ; sourceModifiedFibresNonempty =
+        stateModifiedFibresNonempty sourceState
+    ; targetModifiedFibres = stateModifiedFibres targetState
+    ; targetModifiedFibresNonempty =
+        stateModifiedFibresNonempty targetState
+    ; stateShiftProjectionPromoted = true
+    ; stateShiftProjectionPromotedIsTrue = refl
+    ; stateProjectionDefectPresent = true
+    ; stateProjectionDefectPresentIsTrue = refl
+    ; stateQuotientDifferentGeometry = true
+    ; stateQuotientDifferentGeometryIsTrue = refl
+    ; stateQuotientIdentityClaim = false
+    ; stateQuotientIdentityClaimIsFalse = refl
+    ; sourceStatePhenomenalRecoveryBlocked =
+        statePhenomenalRecoveryIsFalse sourceState
+    ; targetStatePhenomenalRecoveryBlocked =
+        statePhenomenalRecoveryIsFalse targetState
+    ; stateShiftPhenomenalRecovery = false
+    ; stateShiftPhenomenalRecoveryIsFalse = refl
+    ; sourceDirectPhenomenalRecoveryBlocked =
+        stateDirectPhenomenalRecoveryBlocked sourceState
+    ; targetDirectPhenomenalRecoveryBlocked =
+        stateDirectPhenomenalRecoveryBlocked targetState
+    ; stateShiftQualiaRecoveryBlocked = true
+    ; stateShiftQualiaRecoveryBlockedIsTrue = refl
+    ; stateShiftReading =
+        "A state shift can project one observer through different quotient geometry, but the projection defect records non-recovery of direct phenomenal inhabitation across the shift."
+    }
+
+------------------------------------------------------------------------
 -- Cross-species translation and projection defect.
 ------------------------------------------------------------------------
 
