@@ -6,6 +6,23 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane atomic-clock/SI-second adapter tranche for `2026-06-14`: adds
+  `DASHI.Physics.Closure.AtomicClockCandidate256DimensionAdapter`,
+  `DASHI.Promotion.SIDefiningConstantsAuthorityArtifactRequest`,
+  `DASHI.Promotion.PlanckHbarSIPayloadRequest`,
+  `DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge`,
+  `DASHI.Physics.Closure.AtomicClockW4ReceiptAdapterRequest`, and
+  `tests/test_atomic_clock_si_second_round2.py`, then wires the checked Agda
+  modules through `DASHI.Everything`. The tranche maps SI second/hertz/cycle
+  dimensions into the Candidate256 W4 exponent vector, names exact BIPM SI
+  artifact requests for `Delta nu Cs`, `c`, and `h`, records the derived
+  `hbar = h / (2 pi)` request for Stone/Schrodinger, captures the leading
+  atomic-clock redshift law `Delta f / f = Delta U / c^2`, and maps atomic
+  clock bridge fields onto the W4 external receipt field surface. It keeps
+  artifact loading, parsed carriers, Candidate256 authority tokens, external
+  receipt construction, empirical redshift claims, Stone/W4 promotion, and
+  terminal claims false.
+
 - Six-lane atomic-clock/SI-second metrology tranche for `2026-06-14`: adds
   `DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge`,
   `DASHI.Promotion.Cs133NumericAuthorityPayloadRequest`,
@@ -43,6 +60,12 @@ monitor surface.
   OS/Wightman data, GR/PDE Koszul/curvature/Einstein/weak-solution/energy
   estimate data, and the finite discrete-YM spectral theorem example receipt,
   while preserving every no-promotion boundary.
+  A proof-term-level occupant pass then pins the exact field names, formula
+  texts, indexed finite-basis combinators, SU(2)/SU(3) finite-Jacobi rows,
+  BRST nilpotence actions, OS/Wightman false-authority rows, MTW/contracted
+  Bianchi/SI-unit rows, and the finite discrete-YM boolean pattern as checked
+  receipts. Focused Agda checks pass for all six parity modules; no continuum
+  or Clay authority is fabricated.
 
 - Six-lane Gate 3 theorem-package tranche for `2026-06-13`: adds
   `DASHI.Physics.Closure.Gate3DensityOfCarrierCoreConstructedReceipt`,

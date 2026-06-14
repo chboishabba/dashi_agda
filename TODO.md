@@ -42,6 +42,26 @@ Current atomic-clock/SI intake note for `2026-06-14`:
   Delta tau` observable, Stone/Schrodinger SI time parameter with derived
   `hbar`, and the clock/light-speed route to metre before Rydberg wavenumber
   use. No authority or numeric promotion is currently accepted.
+- The second metrology adapter pass now records the Candidate256
+  dimension-vector adapter, exact SI defining constants artifact manifest for
+  `Delta nu Cs`, `c`, and `h`, the exact Planck/derived-`hbar` request, the
+  leading uniform-field redshift contact law `Delta f / f = Delta U / c^2`,
+  and the W4 receipt field-to-source adapter. Remaining closure work is still
+  external: provide accepted artifact identity, SHA256/access-date evidence,
+  parsed carriers, covariance/independence and consumer-ingestion receipts,
+  and then the constructorless Candidate256 calibration authority token.
+
+Current Agda/PhysLean parity intake note for `2026-06-14`:
+- The six parity surfaces now carry proof-term-level occupant rows for the
+  supplied math payload: exact scalar/vector/Hilbert/operator/spectral field
+  names, finite-basis `foldr2` and indexed lookup obligations,
+  Christoffel/Stokes/Poincare/Bianchi proof-content rows, SU(2)/SU(3)
+  finite-Jacobi authority rows, gauge-naturality/YM/BRST rows,
+  exact Hilbert/Operator/CCR/CAR/OS/Wightman QFT rows, Koszul/MTW/Einstein/SI
+  unit/weak PDE rows, and the finite discrete-YM spectral example boolean
+  pattern. Remaining work is to supply external authority tokens or genuine
+  proof terms for the rows still marked fail-closed; no promotion follows from
+  the intake rows alone.
 
 ## YM Exact Intake Targets
 
