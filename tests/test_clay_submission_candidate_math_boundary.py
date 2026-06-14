@@ -85,6 +85,11 @@ def test_boundary_records_latest_candidate_surfaces_and_anchors() -> None:
         "W_r energy ODE",
         "OU bias balance",
         "Bochner-Weitzenbock domination",
+        "YM-A local calculation",
+        "ymAConstantsLocallyComputable=true",
+        "ymAArithmeticObstructionAbsent=true",
+        "ymAOperatorTheoremStillMissing=true",
+        "ymAH3aStillMissing=true",
     ):
         assert normalize(term) in normalized, term
 
@@ -96,6 +101,10 @@ def test_boundary_keeps_candidates_recorded_but_not_promoted_or_eligible() -> No
         ("nsa", "candidate", "recorded"),
         ("nsc", "candidate", "recorded"),
         ("yma", "candidate", "recorded"),
+        ("ym", "a", "constants", "locally", "computable"),
+        ("ym", "a", "arithmetic", "obstruction", "absent"),
+        ("ym", "a", "operator", "theorem", "still", "missing"),
+        ("ym", "a", "h3a", "still", "missing"),
         ("boundary", "recorded"),
     ):
         assert has_bool_evidence(text, terms, True), terms
@@ -104,10 +113,12 @@ def test_boundary_keeps_candidates_recorded_but_not_promoted_or_eligible() -> No
         ("nsa", "proof", "promoted"),
         ("nsc", "proof", "promoted"),
         ("yma", "proof", "promoted"),
+        ("yma", "arithmetic", "proof", "promoted"),
         ("boundary", "proof", "promoted"),
         ("nsa", "clay", "eligible"),
         ("nsc", "clay", "eligible"),
         ("yma", "clay", "eligible"),
+        ("yma", "arithmetic", "clay", "eligible"),
         ("boundary", "clay", "eligible"),
     ):
         assert has_bool_evidence(text, terms, False), terms
@@ -130,6 +141,12 @@ def test_boundary_records_required_dependency_edges_and_control_card() -> None:
         "YM Clay dependsOn H3a",
         "nscDependsOnNSARecordedIsTrue",
         "ymClayDependsOnH3aRecordedIsTrue",
+        "ymAConstantsLocallyComputableRecordedIsTrue",
+        "ymAArithmeticObstructionAbsentRecordedIsTrue",
+        "ymAOperatorTheoremStillMissingRecordedIsTrue",
+        "ymAH3aStillMissingRecordedIsTrue",
+        "ymAArithmeticProofPromotedIsFalse",
+        "ymAArithmeticClayEligibleIsFalse",
         "O:",
         "R:",
         "C:",
