@@ -15,9 +15,6 @@ open import Base369 using
   ; nonaryXor ; nonary-index ; fromNonaryIndex
   )
 
-open import DASHI.Foundations.PhysicsLinearAnalysisParity using
-  ( ScalarAuthoritySocket ; canonicalRealScalarAuthoritySocket )
-
 ------------------------------------------------------------------------
 -- Shared witness shapes.
 
@@ -358,9 +355,21 @@ nonaryZeroDivisorWitness-6-6 =
     }
 
 ------------------------------------------------------------------------
--- Compatible scalar-field socket from the linear-analysis parity layer.
+-- Compatible scalar-law socket subset for the linear-analysis parity layer.
+-- `PhysicsLinearAnalysisParity.ScalarFieldLawShape` stores each law as a
+-- proposition family; this local record carries the concrete TriTruth proofs
+-- that inhabit those proposition rows without importing the broad parity
+-- surface into the finite Base369 module.
+
+record ScalarFieldSocketInhabitant : Set where
+  field
+    laws :
+      TriTruthRingLaws
 
 scalarFieldSocketInhabitant :
-  ScalarAuthoritySocket
+  ScalarFieldSocketInhabitant
 scalarFieldSocketInhabitant =
-  canonicalRealScalarAuthoritySocket
+  record
+    { laws =
+        triTruthRingLaws
+    }

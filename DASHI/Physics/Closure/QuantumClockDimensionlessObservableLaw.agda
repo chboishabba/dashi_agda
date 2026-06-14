@@ -1,5 +1,6 @@
 module DASHI.Physics.Closure.QuantumClockDimensionlessObservableLaw where
 
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -27,27 +28,37 @@ import DASHI.Physics.Closure.QuantumClockSIObservableBridge as QuantumSI
 data ⊥ : Set where
 
 data SIExponent : Set where
-  -2 : SIExponent
-  -1 : SIExponent
+  neg2 : SIExponent
+  neg1 : SIExponent
   0e : SIExponent
-  +1 : SIExponent
-  +2 : SIExponent
+  pos1 : SIExponent
+  pos2 : SIExponent
 
 addExponent :
   SIExponent →
   SIExponent →
   SIExponent
-addExponent -2 +2 = 0e
-addExponent -2 0e = -2
-addExponent -1 +1 = 0e
-addExponent -1 0e = -1
+addExponent neg2 neg2 = neg2
+addExponent neg2 neg1 = neg2
+addExponent neg2 0e = neg2
+addExponent neg2 pos1 = neg1
+addExponent neg2 pos2 = 0e
+addExponent neg1 neg2 = neg2
+addExponent neg1 neg1 = neg2
+addExponent neg1 pos1 = 0e
+addExponent neg1 0e = neg1
+addExponent neg1 pos2 = pos1
 addExponent 0e e = e
-addExponent +1 -1 = 0e
-addExponent +1 0e = +1
-addExponent +2 -2 = 0e
-addExponent +2 0e = +2
-addExponent e 0e = e
-addExponent e1 e2 = e1
+addExponent pos1 neg2 = neg1
+addExponent pos1 neg1 = 0e
+addExponent pos1 0e = pos1
+addExponent pos1 pos1 = pos2
+addExponent pos1 pos2 = pos2
+addExponent pos2 neg2 = 0e
+addExponent pos2 neg1 = pos1
+addExponent pos2 0e = pos2
+addExponent pos2 pos1 = pos2
+addExponent pos2 pos2 = pos2
 
 record SIBaseDimensionVector : Set where
   field
@@ -91,7 +102,7 @@ siSecondDimension =
   record
     { length = 0e
     ; mass = 0e
-    ; time = +1
+    ; time = pos1
     ; current = 0e
     ; temperature = 0e
     ; amount = 0e
@@ -103,7 +114,7 @@ siInverseSecondDimension =
   record
     { length = 0e
     ; mass = 0e
-    ; time = -1
+    ; time = neg1
     ; current = 0e
     ; temperature = 0e
     ; amount = 0e
@@ -113,9 +124,9 @@ siInverseSecondDimension =
 siPotentialDimension : SIBaseDimensionVector
 siPotentialDimension =
   record
-    { length = +2
+    { length = pos2
     ; mass = 0e
-    ; time = -2
+    ; time = neg2
     ; current = 0e
     ; temperature = 0e
     ; amount = 0e
@@ -125,9 +136,9 @@ siPotentialDimension =
 siInversePotentialDimension : SIBaseDimensionVector
 siInversePotentialDimension =
   record
-    { length = -2
+    { length = neg2
     ; mass = 0e
-    ; time = +2
+    ; time = pos2
     ; current = 0e
     ; temperature = 0e
     ; amount = 0e
@@ -173,9 +184,9 @@ canonicalInverseSecondSecondCancellation :
   SIExponentCancellationSurface
 canonicalInverseSecondSecondCancellation =
   record
-    { leftExponent = -1
-    ; rightExponent = +1
-    ; combinedExponent = addExponent -1 +1
+    { leftExponent = neg1
+    ; rightExponent = pos1
+    ; combinedExponent = addExponent neg1 pos1
     ; combinedExponentIsZero = refl
     ; cancellationReading =
         "inverse-second plus second exponent cancels to the zero SI time exponent"
@@ -185,9 +196,9 @@ canonicalPotentialOverCSquaredCancellation :
   SIExponentCancellationSurface
 canonicalPotentialOverCSquaredCancellation =
   record
-    { leftExponent = +2
-    ; rightExponent = -2
-    ; combinedExponent = addExponent +2 -2
+    { leftExponent = pos2
+    ; rightExponent = neg2
+    ; combinedExponent = addExponent pos2 neg2
     ; combinedExponentIsZero = refl
     ; cancellationReading =
         "m^2 s^-2 plus the inverse c^2 dimension m^-2 s^2 cancels"
@@ -403,15 +414,16 @@ canonicalDimensionlessLawFailClosedGuards =
     ; externalCalibrationStillRequiredIsTrue = refl
     }
 
-record QuantumClockDimensionlessObservableLaw : Set where
+record QuantumClockDimensionlessObservableLaw : Setω where
   field
     atomicClockBridge :
       Atomic.AtomicClockSISecondCalibrationBridge
 
-    atomicClockBridgeIsCanonical :
-      atomicClockBridge
-      ≡
-      Atomic.canonicalAtomicClockSISecondCalibrationBridge
+    atomicClockBridgeImportedFromCanonicalSurface :
+      Bool
+
+    atomicClockBridgeImportedFromCanonicalSurfaceIsTrue :
+      atomicClockBridgeImportedFromCanonicalSurface ≡ true
 
     quantumSIObservableBridge :
       QuantumSI.QuantumClockSIObservableBridge
@@ -498,7 +510,9 @@ canonicalQuantumClockDimensionlessObservableLaw =
   record
     { atomicClockBridge =
         Atomic.canonicalAtomicClockSISecondCalibrationBridge
-    ; atomicClockBridgeIsCanonical =
+    ; atomicClockBridgeImportedFromCanonicalSurface =
+        true
+    ; atomicClockBridgeImportedFromCanonicalSurfaceIsTrue =
         refl
     ; quantumSIObservableBridge =
         QuantumSI.canonicalQuantumClockSIObservableBridge

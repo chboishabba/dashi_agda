@@ -2,17 +2,18 @@ module DASHI.Foundations.Base369HexTruthRing where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Base369 public using
+  ( HexTruth
+  ; hex-0
+  ; hex-1
+  ; hex-2
+  ; hex-3
+  ; hex-4
+  ; hex-5
+  )
 
 ------------------------------------------------------------------------
--- HexTruth as the concrete residue ring Z/6Z.
-
-data HexTruth : Set where
-  hex-0 : HexTruth
-  hex-1 : HexTruth
-  hex-2 : HexTruth
-  hex-3 : HexTruth
-  hex-4 : HexTruth
-  hex-5 : HexTruth
+-- HexTruth as the concrete residue ring Z/6Z, reusing Base369's carrier.
 
 hexZero : HexTruth
 hexZero = hex-0

@@ -50,6 +50,14 @@ Current atomic-clock/SI intake note for `2026-06-14`:
   external: provide accepted artifact identity, SHA256/access-date evidence,
   parsed carriers, covariance/independence and consumer-ingestion receipts,
   and then the constructorless Candidate256 calibration authority token.
+- The third metrology pass now adds structural parsed carriers for `Delta nu
+  Cs`, `c`, and `h`; a Real-line topology request for SI-second Stone strong
+  continuity; dimensionless law surfaces for `omega0 * Delta tau` and `Delta U
+  / c^2`; the metre route from the SI second plus exact `c`; and a
+  W4/Candidate256 receipt checklist. Remaining closure work is unchanged:
+  actual BIPM/NIST/CODATA artifact evidence, parsed-carrier acceptance,
+  consumer-ingestion receipts, empirical redshift provenance, and the external
+  calibration authority token are still open.
 
 Current Agda/PhysLean parity intake note for `2026-06-14`:
 - The six parity surfaces now carry proof-term-level occupant rows for the
@@ -62,6 +70,32 @@ Current Agda/PhysLean parity intake note for `2026-06-14`:
   pattern. Remaining work is to supply external authority tokens or genuine
   proof terms for the rows still marked fail-closed; no promotion follows from
   the intake rows alone.
+- The Base369 finite algebra pass now records the local `TriTruth` GF(3)
+  field surface, `HexTruth` Z/6Z ring surface, and `NonaryTruth` Z/9Z ring
+  surface. The reusable ring shape avoids the large handwritten 700+ proof
+  expansions by concentrating finite law checks behind compact table
+  receipts. `Base369` now imports the tiny builtin-only `%`/`NonZero` support
+  from `DASHI.Foundations.Base369Nat`, not a repo-local `Data.Nat.Base`
+  shadow. `DASHI.Foundations.Base369NumeralOntologyBoundary` records the
+  separation between algebraic carriers, the 15-prime coordinate boundary, and
+  UFT traversal addresses, with narrative-only interpretations marked
+  non-promoting. Remaining external blockers are unchanged: real/complex
+  scalar completeness, Hilbert completion, spectral theorem authority,
+  OS/Wightman authority, physical calibration, and Clay promotion still
+  require external authority tokens or genuine proof terms.
+- The discrete-to-transcendental bridge pass now adds checked boundary
+  surfaces for finite trit approximants, prefix/suffix agreement gauges,
+  Nat-valued ultrametric completeness, the stage-quotient irreversibility
+  seam, and CRT/J fixed-point compactification receipts:
+  `DASHI.Foundations.SurrealCompactification`,
+  `DASHI.Metric.AgreementSurrealGaugeBridge`,
+  `DASHI.Geometry.NatUltrametricCompletenessBridge`,
+  `DASHI.Algebra.StageQuotientIrreversibilityBoundary`, and
+  `DASHI.Physics.Closure.CRTMonsterFixedPointCompactificationBoundary`.
+  Remaining work is deliberately external or non-promoting: a constructive
+  surreal/real arithmetic substrate, a proved `agreeDepth -> 3^-n` isometry,
+  compactification error theorem, Monster theorem authority, thermodynamic
+  promotion, and any terminal or Clay-facing claim.
 
 ## YM Exact Intake Targets
 

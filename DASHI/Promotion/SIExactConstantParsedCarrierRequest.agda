@@ -283,25 +283,28 @@ record SIExactParsedCarrierRowRequest : Set₁ where
       acceptedAuthorityTokenPresent
       ≡
       Payload.NumericAuthorityPayloadValidatorReceipt.acceptedAuthorityTokenPresent
-        SIArtifact.payloadValidator sourceManifest
+        (SIArtifact.payloadValidator sourceManifest)
     failClosedPromotionGuard :
       numericValuePromoted
       ≡
       Payload.NumericAuthorityPayloadValidatorReceipt.numericValuePromoted
-        SIArtifact.payloadValidator sourceManifest
+        (SIArtifact.payloadValidator sourceManifest)
 
 open SIExactParsedCarrierRowRequest public
 
 mkSIExactParsedCarrierRowRequest :
-  String →
-  SIExactParsedCarrierKind →
-  Registry.KnownConstantSlot →
-  SIArtifact.SIDefiningConstantAuthorityArtifactRowRequest →
-  String →
-  String →
-  String →
+  (label : String) →
+  (kind : SIExactParsedCarrierKind) →
+  (row : Registry.KnownConstantSlot) →
+  (artifactRow : SIArtifact.SIDefiningConstantAuthorityArtifactRowRequest) →
+  (rowRef : String) →
+  (rawText : String) →
+  (compactText : String) →
+  (rawText ≡ SIArtifact.rawValueText artifactRow) →
+  (compactText ≡ Registry.KnownConstantSlot.value row) →
   SIExactParsedCarrierRowRequest
-mkSIExactParsedCarrierRowRequest label kind row artifactRow rowRef rawText compactText =
+mkSIExactParsedCarrierRowRequest
+  label kind row artifactRow rowRef rawText compactText rawMatches compactMatches =
   record
     { rowLabel =
         label
@@ -328,9 +331,9 @@ mkSIExactParsedCarrierRowRequest label kind row artifactRow rowRef rawText compa
     ; uncertaintyTextIsZero =
         refl
     ; rawTextMatchesArtifactRequest =
-        refl
+        rawMatches
     ; registryTextMatchesSourceRow =
-        refl
+        compactMatches
     ; unitTextMatchesSourceRow =
         refl
     ; fieldKeys =
@@ -380,6 +383,8 @@ canonicalDeltaNuCsParsedCarrierRowRequest =
     SIArtifact.canonicalDeltaNuCsRegistrySourceRef
     (ExactIntegerTextCarrier.rawAuthorityText canonicalDeltaNuCsNaturalCarrier)
     (Registry.KnownConstantSlot.value SIArtifact.canonicalDeltaNuCsRegistryRow)
+    refl
+    refl
 
 canonicalCParsedCarrierRowRequest :
   SIExactParsedCarrierRowRequest
@@ -393,6 +398,8 @@ canonicalCParsedCarrierRowRequest =
     (ExactIntegerTextCarrier.rawAuthorityText
       canonicalCMetrePerSecondIntegerCarrier)
     (Registry.KnownConstantSlot.value SIArtifact.canonicalCRegistryRow)
+    refl
+    refl
 
 canonicalHParsedCarrierRowRequest :
   SIExactParsedCarrierRowRequest
@@ -407,6 +414,8 @@ canonicalHParsedCarrierRowRequest =
       canonicalHScientificDecimalCarrier)
     (ExactScientificDecimalCarrier.compactRegistryText
       canonicalHScientificDecimalCarrier)
+    refl
+    refl
 
 record SIExactConstantParsedCarrierRequestManifest : Set₁ where
   field

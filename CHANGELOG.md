@@ -6,6 +6,62 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane discrete-to-transcendental compactification tranche for
+  `2026-06-14`: adds
+  `DASHI.Foundations.SurrealCompactification`,
+  `DASHI.Metric.AgreementSurrealGaugeBridge`,
+  `DASHI.Geometry.NatUltrametricCompletenessBridge`,
+  `DASHI.Algebra.StageQuotientIrreversibilityBoundary`, and
+  `DASHI.Physics.Closure.CRTMonsterFixedPointCompactificationBoundary`, then
+  wires them through `DASHI.Everything`. The tranche records finite trit tower
+  approximants, prefix/suffix agreement metric receipts, the Nat-valued
+  ultrametric completeness bridge, stage-quotient irreversibility as geometric
+  compression rather than absence of GF(3) inverses, and CRT/J fixed-point
+  compactification receipts around `196884`. It keeps surreal arithmetic,
+  surreal isometry, compactification error, Monster theorem authority,
+  Carnot/thermodynamic promotion, physical terminal claims, and Clay promotion
+  false.
+
+- Six-lane atomic-clock/SI-second round-three metrology tranche for
+  `2026-06-14`: adds
+  `DASHI.Promotion.SIExactConstantParsedCarrierRequest`,
+  `DASHI.Physics.Closure.AtomicClockSecondRealTimeTopologyRequest`,
+  `DASHI.Physics.Closure.QuantumClockDimensionlessObservableLaw`,
+  `DASHI.Promotion.SIMetreFromSecondAndCAdapter`,
+  `DASHI.Physics.Closure.W4AtomicClockCandidateReceiptChecklist`, and
+  `tests/test_atomic_clock_si_second_round3.py`, then wires the checked Agda
+  modules through `DASHI.Everything`. The tranche records structural parsed
+  carriers for exact SI constants, the Real-time topology request for Stone
+  strong continuity, local dimensionless phase/redshift law checks, the
+  metre-from-second-and-`c` adapter for Rydberg use, and a W4/Candidate256
+  external receipt checklist. It keeps artifact evidence, authority-token
+  construction, consumer ingestion, numeric payload promotion, physical Stone
+  promotion, spectroscopy promotion, empirical redshift claims, W4 promotion,
+  and terminal claims false.
+
+- Six-lane Base369 finite algebra tranche for `2026-06-14`: adds
+  `DASHI.Foundations.Base369RingShape`,
+  `DASHI.Foundations.Base369Nat`,
+  `DASHI.Foundations.Base369TriTruthField`,
+  `DASHI.Foundations.Base369HexTruthRing`,
+  `DASHI.Foundations.Base369NonaryTruthRing`,
+  `DASHI.Foundations.Base369FiniteRingLaws`, and
+  `DASHI.Foundations.Base369FiniteRingRegression`, plus
+  `DASHI.Foundations.Base369NumeralOntologyBoundary`, then wires them through
+  `DASHI.Everything`. The tranche records `TriTruth` as the internal GF(3)
+  finite field surface, records `HexTruth` and `NonaryTruth` as finite rings
+  with typed zero-divisor witnesses, and adds regression sentinels for the key
+  constructor-normalizing equalities. `Base369Nat` replaces the previous
+  stdlib `Data.Nat.Base` dependency with a DASHI-namespaced builtin-only
+  compatibility layer, avoiding repo-wide stdlib namespace shadowing. The
+  numeral ontology boundary separates algebraic carriers, the 15-prime
+  coordinate boundary, and UFT traversal addresses, while keeping narrative
+  readings non-promoting. The reusable ring shape and table receipts avoid
+  expanding the 700+ and 2400+ case surfaces by hand. It does not promote
+  real/complex completeness, Hilbert completion, spectral theorem authority,
+  physical calibration, OS/Wightman authority, Clay claims, or terminal
+  unification.
+
 - Six-lane atomic-clock/SI-second adapter tranche for `2026-06-14`: adds
   `DASHI.Physics.Closure.AtomicClockCandidate256DimensionAdapter`,
   `DASHI.Promotion.SIDefiningConstantsAuthorityArtifactRequest`,

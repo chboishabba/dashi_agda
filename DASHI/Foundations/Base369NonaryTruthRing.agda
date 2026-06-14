@@ -2,10 +2,18 @@ module DASHI.Foundations.Base369NonaryTruthRing where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-
-data NonaryTruth : Set where
-  non-0 non-1 non-2 non-3 non-4 non-5 non-6 non-7 non-8 :
-    NonaryTruth
+open import Base369 public using
+  ( NonaryTruth
+  ; non-0
+  ; non-1
+  ; non-2
+  ; non-3
+  ; non-4
+  ; non-5
+  ; non-6
+  ; non-7
+  ; non-8
+  )
 
 ------------------------------------------------------------------------
 -- Boolean table helpers
@@ -50,7 +58,7 @@ allNonary3 :
 allNonary3 p = allNonary λ a → allNonary λ b → allNonary λ c → p a b c
 
 ------------------------------------------------------------------------
--- Self-contained Z/9Z ring operations on NonaryTruth.
+-- Z/9Z ring operations on Base369's NonaryTruth carrier.
 
 nonaryZero : NonaryTruth
 nonaryZero = non-0
