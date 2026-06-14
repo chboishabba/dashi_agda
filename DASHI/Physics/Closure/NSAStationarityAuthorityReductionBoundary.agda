@@ -182,6 +182,169 @@ abelTriadicReductionClauseCountIs6 =
   refl
 
 ------------------------------------------------------------------------
+-- Uniform pressure-rate theorem shape.
+--
+-- This is a builtin-style intake shape for the exact theorem requested by
+-- the NS-A stationarity route.  It is recorded as a boundary dependency only:
+-- the theorem is not proved in this module.
+
+uniformPressureRateForTypeICKNRescalingsTheoremName : String
+uniformPressureRateForTypeICKNRescalingsTheoremName =
+  "UniformPressureRateForTypeICKNRescalings"
+
+uniformPressureRateForTypeICKNRescalingsStatement : String
+uniformPressureRateForTypeICKNRescalingsStatement =
+  "UniformPressureRateForTypeICKNRescalings: for a suitable weak solution with M = L^{3,infty} bound, CKN rescalings u_r, p_r admit U_infty/P_infty on Q_R and ||p_r - P_infty||_{L^{3/2}(Q_R)} <= C(M,R) r^{1/6}."
+
+uniformPressureRateForTypeICKNRescalingsDownstreamText : String
+uniformPressureRateForTypeICKNRescalingsDownstreamText =
+  "Downstream unlock only: local/harmonic pressure decomposition + Calderon-Zygmund + Seregin-ESS rate would feed delta_r -> 0 / Abel fixed-point after the external theorem is supplied."
+
+data UniformPressureRateForTypeICKNRescalingsHypothesis : Set where
+  suitableWeakSolutionHypothesis :
+    UniformPressureRateForTypeICKNRescalingsHypothesis
+  typeICriticalLorentzBoundHypothesis :
+    UniformPressureRateForTypeICKNRescalingsHypothesis
+  cknRescaledVelocityPressureHypothesis :
+    UniformPressureRateForTypeICKNRescalingsHypothesis
+  limitProfileOnParabolicCylinderHypothesis :
+    UniformPressureRateForTypeICKNRescalingsHypothesis
+
+canonicalUniformPressureRateForTypeICKNRescalingsHypotheses :
+  List UniformPressureRateForTypeICKNRescalingsHypothesis
+canonicalUniformPressureRateForTypeICKNRescalingsHypotheses =
+  suitableWeakSolutionHypothesis
+  ∷ typeICriticalLorentzBoundHypothesis
+  ∷ cknRescaledVelocityPressureHypothesis
+  ∷ limitProfileOnParabolicCylinderHypothesis
+  ∷ []
+
+uniformPressureRateForTypeICKNRescalingsHypothesisCount : Nat
+uniformPressureRateForTypeICKNRescalingsHypothesisCount =
+  listLength canonicalUniformPressureRateForTypeICKNRescalingsHypotheses
+
+uniformPressureRateForTypeICKNRescalingsHypothesisCountIs4 :
+  uniformPressureRateForTypeICKNRescalingsHypothesisCount ≡ 4
+uniformPressureRateForTypeICKNRescalingsHypothesisCountIs4 =
+  refl
+
+data UniformPressureRateForTypeICKNRescalingsMechanism : Set where
+  localPressureDecompositionMechanism :
+    UniformPressureRateForTypeICKNRescalingsMechanism
+  harmonicPressureDecompositionMechanism :
+    UniformPressureRateForTypeICKNRescalingsMechanism
+  calderonZygmundEstimateMechanism :
+    UniformPressureRateForTypeICKNRescalingsMechanism
+  sereginESSRateMechanism :
+    UniformPressureRateForTypeICKNRescalingsMechanism
+
+canonicalUniformPressureRateForTypeICKNRescalingsMechanisms :
+  List UniformPressureRateForTypeICKNRescalingsMechanism
+canonicalUniformPressureRateForTypeICKNRescalingsMechanisms =
+  localPressureDecompositionMechanism
+  ∷ harmonicPressureDecompositionMechanism
+  ∷ calderonZygmundEstimateMechanism
+  ∷ sereginESSRateMechanism
+  ∷ []
+
+uniformPressureRateForTypeICKNRescalingsMechanismCount : Nat
+uniformPressureRateForTypeICKNRescalingsMechanismCount =
+  listLength canonicalUniformPressureRateForTypeICKNRescalingsMechanisms
+
+uniformPressureRateForTypeICKNRescalingsMechanismCountIs4 :
+  uniformPressureRateForTypeICKNRescalingsMechanismCount ≡ 4
+uniformPressureRateForTypeICKNRescalingsMechanismCountIs4 =
+  refl
+
+data UniformPressureRateForTypeICKNRescalingsConclusion : Set where
+  pressureLimitPinningConclusion :
+    UniformPressureRateForTypeICKNRescalingsConclusion
+  pressureRateEstimateConclusion :
+    UniformPressureRateForTypeICKNRescalingsConclusion
+  deltaRToZeroUnlockConclusion :
+    UniformPressureRateForTypeICKNRescalingsConclusion
+  abelFixedPointUnlockConclusion :
+    UniformPressureRateForTypeICKNRescalingsConclusion
+
+canonicalUniformPressureRateForTypeICKNRescalingsConclusions :
+  List UniformPressureRateForTypeICKNRescalingsConclusion
+canonicalUniformPressureRateForTypeICKNRescalingsConclusions =
+  pressureLimitPinningConclusion
+  ∷ pressureRateEstimateConclusion
+  ∷ deltaRToZeroUnlockConclusion
+  ∷ abelFixedPointUnlockConclusion
+  ∷ []
+
+uniformPressureRateForTypeICKNRescalingsConclusionCount : Nat
+uniformPressureRateForTypeICKNRescalingsConclusionCount =
+  listLength canonicalUniformPressureRateForTypeICKNRescalingsConclusions
+
+uniformPressureRateForTypeICKNRescalingsConclusionCountIs4 :
+  uniformPressureRateForTypeICKNRescalingsConclusionCount ≡ 4
+uniformPressureRateForTypeICKNRescalingsConclusionCountIs4 =
+  refl
+
+record UniformPressureRateForTypeICKNRescalingsBoundary : Set where
+  field
+    theoremName :
+      String
+    theoremStatement :
+      String
+    downstreamUnlock :
+      String
+    hypotheses :
+      List UniformPressureRateForTypeICKNRescalingsHypothesis
+    hypothesesAreCanonical :
+      hypotheses
+      ≡ canonicalUniformPressureRateForTypeICKNRescalingsHypotheses
+    mechanisms :
+      List UniformPressureRateForTypeICKNRescalingsMechanism
+    mechanismsAreCanonical :
+      mechanisms
+      ≡ canonicalUniformPressureRateForTypeICKNRescalingsMechanisms
+    conclusions :
+      List UniformPressureRateForTypeICKNRescalingsConclusion
+    conclusionsAreCanonical :
+      conclusions
+      ≡ canonicalUniformPressureRateForTypeICKNRescalingsConclusions
+    hypothesisCountIs4 :
+      uniformPressureRateForTypeICKNRescalingsHypothesisCount ≡ 4
+    mechanismCountIs4 :
+      uniformPressureRateForTypeICKNRescalingsMechanismCount ≡ 4
+    conclusionCountIs4 :
+      uniformPressureRateForTypeICKNRescalingsConclusionCount ≡ 4
+
+canonicalUniformPressureRateForTypeICKNRescalingsBoundary :
+  UniformPressureRateForTypeICKNRescalingsBoundary
+canonicalUniformPressureRateForTypeICKNRescalingsBoundary =
+  record
+    { theoremName =
+        uniformPressureRateForTypeICKNRescalingsTheoremName
+    ; theoremStatement =
+        uniformPressureRateForTypeICKNRescalingsStatement
+    ; downstreamUnlock =
+        uniformPressureRateForTypeICKNRescalingsDownstreamText
+    ; hypotheses =
+        canonicalUniformPressureRateForTypeICKNRescalingsHypotheses
+    ; hypothesesAreCanonical =
+        refl
+    ; mechanisms =
+        canonicalUniformPressureRateForTypeICKNRescalingsMechanisms
+    ; mechanismsAreCanonical =
+        refl
+    ; conclusions =
+        canonicalUniformPressureRateForTypeICKNRescalingsConclusions
+    ; conclusionsAreCanonical =
+        refl
+    ; hypothesisCountIs4 =
+        refl
+    ; mechanismCountIs4 =
+        refl
+    ; conclusionCountIs4 =
+        refl
+    }
+
+------------------------------------------------------------------------
 -- Concrete route flags.
 
 NSAStationarityAuthorityReductionBoundaryRecorded : Bool
@@ -216,6 +379,10 @@ A3AuthorityReductionRouteRecorded : Bool
 A3AuthorityReductionRouteRecorded =
   true
 
+UniformPressureRateForTypeICKNRescalingsBoundaryRecorded : Bool
+UniformPressureRateForTypeICKNRescalingsBoundaryRecorded =
+  true
+
 ------------------------------------------------------------------------
 -- Blockers and fail-closed status.
 
@@ -227,6 +394,8 @@ data NSAAuthorityBlocker : Set where
   missingDeltaRToZeroBridge :
     NSAAuthorityBlocker
   missingAbelSummationClosure :
+    NSAAuthorityBlocker
+  missingUniformPressureRateForTypeICKNRescalings :
     NSAAuthorityBlocker
   missingA3StationarityAuthorityTheorem :
     NSAAuthorityBlocker
@@ -242,6 +411,7 @@ canonicalNSAAuthorityBlockers =
   ∷ missingHarmonicPressureTailRate
   ∷ missingDeltaRToZeroBridge
   ∷ missingAbelSummationClosure
+  ∷ missingUniformPressureRateForTypeICKNRescalings
   ∷ missingA3StationarityAuthorityTheorem
   ∷ missingClayNavierStokesPromotionAuthority
   ∷ terminalPromotionForbidden
@@ -251,9 +421,9 @@ nsAAuthorityBlockerCount : Nat
 nsAAuthorityBlockerCount =
   listLength canonicalNSAAuthorityBlockers
 
-nsAAuthorityBlockerCountIs7 :
-  nsAAuthorityBlockerCount ≡ 7
-nsAAuthorityBlockerCountIs7 =
+nsAAuthorityBlockerCountIs8 :
+  nsAAuthorityBlockerCount ≡ 8
+nsAAuthorityBlockerCountIs8 =
   refl
 
 blockerName : NSAAuthorityBlocker → String
@@ -265,6 +435,8 @@ blockerName missingDeltaRToZeroBridge =
   "missingDeltaRToZeroBridge"
 blockerName missingAbelSummationClosure =
   "missingAbelSummationClosure"
+blockerName missingUniformPressureRateForTypeICKNRescalings =
+  "missingUniformPressureRateForTypeICKNRescalings"
 blockerName missingA3StationarityAuthorityTheorem =
   "missingA3StationarityAuthorityTheorem"
 blockerName missingClayNavierStokesPromotionAuthority =
@@ -286,6 +458,10 @@ deltaRToZeroBridgeProved =
 
 abelSummationClosureProved : Bool
 abelSummationClosureProved =
+  false
+
+UniformPressureRateForTypeICKNRescalingsProved : Bool
+UniformPressureRateForTypeICKNRescalingsProved =
   false
 
 a3StationarityAuthorityReductionProved : Bool
@@ -329,16 +505,20 @@ record NSAStationarityAuthorityReductionBoundary : Set where
       List NSAAuthorityBlocker
     blockersAreCanonical :
       blockers ≡ canonicalNSAAuthorityBlockers
+    uniformPressureRateBoundary :
+      UniformPressureRateForTypeICKNRescalingsBoundary
     routeStepCountIs8 :
       nsAAuthorityRouteStepCount ≡ 8
     dependencyCountIs4 :
       a3StationarityDependencyCount ≡ 4
     abelTriadicClauseCountIs6 :
       abelTriadicReductionClauseCount ≡ 6
-    blockerCountIs7 :
-      nsAAuthorityBlockerCount ≡ 7
+    blockerCountIs8 :
+      nsAAuthorityBlockerCount ≡ 8
     boundaryRecorded :
       NSAStationarityAuthorityReductionBoundaryRecorded ≡ true
+    uniformPressureRateBoundaryRecorded :
+      UniformPressureRateForTypeICKNRescalingsBoundaryRecorded ≡ true
     a1BoundedMassShaped :
       A1BoundedMassAlreadyShaped ≡ true
     uniformSereginESSDependencyRecorded :
@@ -349,6 +529,8 @@ record NSAStationarityAuthorityReductionBoundary : Set where
       A3StationarityDependsOnDeltaRToZero ≡ true
     abelSummationClosureDependencyRecorded :
       A3StationarityDependsOnAbelSummationClosure ≡ true
+    uniformPressureRateTheoremStillFalse :
+      UniformPressureRateForTypeICKNRescalingsProved ≡ false
     nsAStationarityStillFalse :
       nsAStationarityPromoted ≡ false
     nsClayStillFalse :
@@ -376,15 +558,19 @@ canonicalNSAStationarityAuthorityReductionBoundary =
         canonicalNSAAuthorityBlockers
     ; blockersAreCanonical =
         refl
+    ; uniformPressureRateBoundary =
+        canonicalUniformPressureRateForTypeICKNRescalingsBoundary
     ; routeStepCountIs8 =
         refl
     ; dependencyCountIs4 =
         refl
     ; abelTriadicClauseCountIs6 =
         refl
-    ; blockerCountIs7 =
+    ; blockerCountIs8 =
         refl
     ; boundaryRecorded =
+        refl
+    ; uniformPressureRateBoundaryRecorded =
         refl
     ; a1BoundedMassShaped =
         refl
@@ -395,6 +581,8 @@ canonicalNSAStationarityAuthorityReductionBoundary =
     ; deltaRToZeroDependencyRecorded =
         refl
     ; abelSummationClosureDependencyRecorded =
+        refl
+    ; uniformPressureRateTheoremStillFalse =
         refl
     ; nsAStationarityStillFalse =
         refl
@@ -432,6 +620,16 @@ A3StationarityDeltaRToZeroDependencyIsTrue =
 A3StationarityAbelSummationClosureDependencyIsTrue :
   A3StationarityDependsOnAbelSummationClosure ≡ true
 A3StationarityAbelSummationClosureDependencyIsTrue =
+  refl
+
+UniformPressureRateForTypeICKNRescalingsBoundaryRecordedIsTrue :
+  UniformPressureRateForTypeICKNRescalingsBoundaryRecorded ≡ true
+UniformPressureRateForTypeICKNRescalingsBoundaryRecordedIsTrue =
+  refl
+
+UniformPressureRateForTypeICKNRescalingsProvedIsFalse :
+  UniformPressureRateForTypeICKNRescalingsProved ≡ false
+UniformPressureRateForTypeICKNRescalingsProvedIsFalse =
   refl
 
 nsAStationarityPromotedIsFalse :

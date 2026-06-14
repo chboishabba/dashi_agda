@@ -478,6 +478,150 @@ quantitativeStationarityRateBlockerCountIs15 :
   quantitativeStationarityRateBlockerCount ≡ 15
 quantitativeStationarityRateBlockerCountIs15 = refl
 
+uniformPressureRateForTypeICKNRescalingsTheoremName : String
+uniformPressureRateForTypeICKNRescalingsTheoremName =
+  "UniformPressureRateForTypeICKNRescalings"
+
+uniformPressureRateForTypeICKNRescalingsShapeText : String
+uniformPressureRateForTypeICKNRescalingsShapeText =
+  "Theorem shape: UniformPressureRateForTypeICKNRescalings supplies a uniform pressure rate for Type-I/CKN rescalings only after theorem intake discharges the uniform pressure rate, harmonic pressure tail, missingUniformSereginESSRateConstants, missingDeltaRToZeroProof, and Abel fixed-point blockers."
+
+uniformPressureRateCanonicalBlockerSummaryText : String
+uniformPressureRateCanonicalBlockerSummaryText =
+  "Canonical blockers: uniform pressure rate; harmonic pressure tail; missingUniformSereginESSRateConstants; missingDeltaRToZeroProof; Abel fixed-point."
+
+uniformPressureRateConditionalAcceptanceText : String
+uniformPressureRateConditionalAcceptanceText =
+  "Conflict rule: the candidate-rate is accepted only conditional on theorem intake; residual authority remains with the canonical blockers until UniformPressureRateForTypeICKNRescalings is actually imported/proved."
+
+data UniformPressureRateForTypeICKNRescalingsBlocker : Set where
+  uniformPressureRateBlocker :
+    UniformPressureRateForTypeICKNRescalingsBlocker
+  harmonicPressureTailBlocker :
+    UniformPressureRateForTypeICKNRescalingsBlocker
+  missingUniformSereginESSRateConstantsBlocker :
+    UniformPressureRateForTypeICKNRescalingsBlocker
+  missingDeltaRToZeroProofBlocker :
+    UniformPressureRateForTypeICKNRescalingsBlocker
+  abelFixedPointBlocker :
+    UniformPressureRateForTypeICKNRescalingsBlocker
+
+canonicalUniformPressureRateForTypeICKNRescalingsBlockers :
+  List UniformPressureRateForTypeICKNRescalingsBlocker
+canonicalUniformPressureRateForTypeICKNRescalingsBlockers =
+  uniformPressureRateBlocker
+  ∷ harmonicPressureTailBlocker
+  ∷ missingUniformSereginESSRateConstantsBlocker
+  ∷ missingDeltaRToZeroProofBlocker
+  ∷ abelFixedPointBlocker
+  ∷ []
+
+uniformPressureRateForTypeICKNRescalingsBlockerCount : Nat
+uniformPressureRateForTypeICKNRescalingsBlockerCount =
+  listLength canonicalUniformPressureRateForTypeICKNRescalingsBlockers
+
+uniformPressureRateForTypeICKNRescalingsBlockerCountIs5 :
+  uniformPressureRateForTypeICKNRescalingsBlockerCount ≡ 5
+uniformPressureRateForTypeICKNRescalingsBlockerCountIs5 = refl
+
+data UniformPressureRateForTypeICKNRescalingsCanonicalRef : Set where
+  pressureRateClosureInterfaceRef :
+    UniformPressureRateForTypeICKNRescalingsCanonicalRef
+  harmonicPressureTailRateRef :
+    UniformPressureRateForTypeICKNRescalingsCanonicalRef
+  missingUniformSereginESSRateConstantsRef :
+    UniformPressureRateForTypeICKNRescalingsCanonicalRef
+  missingDeltaRToZeroProofRef :
+    UniformPressureRateForTypeICKNRescalingsCanonicalRef
+  abelFixedPointRef :
+    UniformPressureRateForTypeICKNRescalingsCanonicalRef
+
+canonicalUniformPressureRateForTypeICKNRescalingsRefs :
+  List UniformPressureRateForTypeICKNRescalingsCanonicalRef
+canonicalUniformPressureRateForTypeICKNRescalingsRefs =
+  pressureRateClosureInterfaceRef
+  ∷ harmonicPressureTailRateRef
+  ∷ missingUniformSereginESSRateConstantsRef
+  ∷ missingDeltaRToZeroProofRef
+  ∷ abelFixedPointRef
+  ∷ []
+
+uniformPressureRateForTypeICKNRescalingsRefCount : Nat
+uniformPressureRateForTypeICKNRescalingsRefCount =
+  listLength canonicalUniformPressureRateForTypeICKNRescalingsRefs
+
+uniformPressureRateForTypeICKNRescalingsRefCountIs5 :
+  uniformPressureRateForTypeICKNRescalingsRefCount ≡ 5
+uniformPressureRateForTypeICKNRescalingsRefCountIs5 = refl
+
+record UniformPressureRateForTypeICKNRescalingsShape : Set where
+  field
+    theoremName :
+      String
+    theoremNameIsCanonical :
+      theoremName ≡ uniformPressureRateForTypeICKNRescalingsTheoremName
+    theoremShapeText :
+      String
+    theoremShapeTextIsCanonical :
+      theoremShapeText ≡ uniformPressureRateForTypeICKNRescalingsShapeText
+    canonicalRefs :
+      List UniformPressureRateForTypeICKNRescalingsCanonicalRef
+    canonicalRefsAreCanonical :
+      canonicalRefs ≡ canonicalUniformPressureRateForTypeICKNRescalingsRefs
+    canonicalRefCountIsFive :
+      uniformPressureRateForTypeICKNRescalingsRefCount ≡ 5
+    blockers :
+      List UniformPressureRateForTypeICKNRescalingsBlocker
+    blockersAreCanonical :
+      blockers ≡ canonicalUniformPressureRateForTypeICKNRescalingsBlockers
+    blockerCountIsFive :
+      uniformPressureRateForTypeICKNRescalingsBlockerCount ≡ 5
+    summaryText :
+      String
+    summaryTextIsCanonical :
+      summaryText ≡ uniformPressureRateCanonicalBlockerSummaryText
+    conditionalAcceptanceText :
+      String
+    conditionalAcceptanceTextIsCanonical :
+      conditionalAcceptanceText
+        ≡ uniformPressureRateConditionalAcceptanceText
+
+open UniformPressureRateForTypeICKNRescalingsShape public
+
+canonicalUniformPressureRateForTypeICKNRescalingsShape :
+  UniformPressureRateForTypeICKNRescalingsShape
+canonicalUniformPressureRateForTypeICKNRescalingsShape =
+  record
+    { theoremName =
+        uniformPressureRateForTypeICKNRescalingsTheoremName
+    ; theoremNameIsCanonical =
+        refl
+    ; theoremShapeText =
+        uniformPressureRateForTypeICKNRescalingsShapeText
+    ; theoremShapeTextIsCanonical =
+        refl
+    ; canonicalRefs =
+        canonicalUniformPressureRateForTypeICKNRescalingsRefs
+    ; canonicalRefsAreCanonical =
+        refl
+    ; canonicalRefCountIsFive =
+        refl
+    ; blockers =
+        canonicalUniformPressureRateForTypeICKNRescalingsBlockers
+    ; blockersAreCanonical =
+        refl
+    ; blockerCountIsFive =
+        refl
+    ; summaryText =
+        uniformPressureRateCanonicalBlockerSummaryText
+    ; summaryTextIsCanonical =
+        refl
+    ; conditionalAcceptanceText =
+        uniformPressureRateConditionalAcceptanceText
+    ; conditionalAcceptanceTextIsCanonical =
+        refl
+    }
+
 a3p1EnergyODETargetLabel : String
 a3p1EnergyODETargetLabel =
   "A3.1 energy ODE"
@@ -629,6 +773,18 @@ quantitativeStationarityRateProved = true
 deltaRTendsToZeroProved : Bool
 deltaRTendsToZeroProved = true
 
+uniformPressureRateForTypeICKNRescalingsTheoremIntakeRecorded : Bool
+uniformPressureRateForTypeICKNRescalingsTheoremIntakeRecorded = true
+
+uniformPressureRateCandidateAcceptedOnlyConditionalOnTheoremIntake : Bool
+uniformPressureRateCandidateAcceptedOnlyConditionalOnTheoremIntake = true
+
+uniformPressureRateForTypeICKNRescalingsProved : Bool
+uniformPressureRateForTypeICKNRescalingsProved = false
+
+uniformPressureRateResidualAuthorityRetained : Bool
+uniformPressureRateResidualAuthorityRetained = true
+
 clayNavierStokesPromoted : Bool
 clayNavierStokesPromoted = false
 
@@ -663,6 +819,23 @@ quantitativeStationarityRateProvedIsTrue = refl
 
 deltaRTendsToZeroProvedIsTrue : deltaRTendsToZeroProved ≡ true
 deltaRTendsToZeroProvedIsTrue = refl
+
+uniformPressureRateTheoremIntakeRecordedIsTrue :
+  uniformPressureRateForTypeICKNRescalingsTheoremIntakeRecorded ≡ true
+uniformPressureRateTheoremIntakeRecordedIsTrue = refl
+
+uniformPressureRateCandidateAcceptedOnlyConditionalOnTheoremIntakeIsTrue :
+  uniformPressureRateCandidateAcceptedOnlyConditionalOnTheoremIntake ≡ true
+uniformPressureRateCandidateAcceptedOnlyConditionalOnTheoremIntakeIsTrue =
+  refl
+
+uniformPressureRateForTypeICKNRescalingsProvedIsFalse :
+  uniformPressureRateForTypeICKNRescalingsProved ≡ false
+uniformPressureRateForTypeICKNRescalingsProvedIsFalse = refl
+
+uniformPressureRateResidualAuthorityRetainedIsTrue :
+  uniformPressureRateResidualAuthorityRetained ≡ true
+uniformPressureRateResidualAuthorityRetainedIsTrue = refl
 
 keepsClayPromotionFalse : clayNavierStokesPromoted ≡ false
 keepsClayPromotionFalse = refl
@@ -763,6 +936,11 @@ record NSQuantitativeStationarityRateBoundary : Set where
       blockers ≡ canonicalQuantitativeStationarityRateBlockers
     blockerCountIsFifteen :
       quantitativeStationarityRateBlockerCount ≡ 15
+    uniformPressureRateShape :
+      UniformPressureRateForTypeICKNRescalingsShape
+    uniformPressureRateShapeIsCanonical :
+      uniformPressureRateShape
+        ≡ canonicalUniformPressureRateForTypeICKNRescalingsShape
     sereginESSAuthorityText :
       String
     sereginESSAuthorityTextIsCanonical :
@@ -830,6 +1008,16 @@ record NSQuantitativeStationarityRateBoundary : Set where
       quantitativeStationarityRateProved ≡ true
     deltaRTendsToZeroProvedFieldIsTrue :
       deltaRTendsToZeroProved ≡ true
+    uniformPressureRateTheoremIntakeRecordedFieldIsTrue :
+      uniformPressureRateForTypeICKNRescalingsTheoremIntakeRecorded
+        ≡ true
+    uniformPressureRateCandidateAcceptedOnlyConditionalOnTheoremIntakeFieldIsTrue :
+      uniformPressureRateCandidateAcceptedOnlyConditionalOnTheoremIntake
+        ≡ true
+    uniformPressureRateForTypeICKNRescalingsProvedFieldIsFalse :
+      uniformPressureRateForTypeICKNRescalingsProved ≡ false
+    uniformPressureRateResidualAuthorityRetainedFieldIsTrue :
+      uniformPressureRateResidualAuthorityRetained ≡ true
     clayNavierStokesPromotedIsFalse :
       clayNavierStokesPromoted ≡ false
     terminalPromotionIsFalse :
@@ -898,6 +1086,10 @@ canonicalNSQuantitativeStationarityRateBoundary =
     ; blockersAreCanonical =
         refl
     ; blockerCountIsFifteen =
+        refl
+    ; uniformPressureRateShape =
+        canonicalUniformPressureRateForTypeICKNRescalingsShape
+    ; uniformPressureRateShapeIsCanonical =
         refl
     ; sereginESSAuthorityText =
         sereginESSCompactnessRateAuthorityText
@@ -980,6 +1172,14 @@ canonicalNSQuantitativeStationarityRateBoundary =
     ; quantitativeRateProvedFieldIsTrue =
         refl
     ; deltaRTendsToZeroProvedFieldIsTrue =
+        refl
+    ; uniformPressureRateTheoremIntakeRecordedFieldIsTrue =
+        refl
+    ; uniformPressureRateCandidateAcceptedOnlyConditionalOnTheoremIntakeFieldIsTrue =
+        refl
+    ; uniformPressureRateForTypeICKNRescalingsProvedFieldIsFalse =
+        refl
+    ; uniformPressureRateResidualAuthorityRetainedFieldIsTrue =
         refl
     ; clayNavierStokesPromotedIsFalse =
         refl

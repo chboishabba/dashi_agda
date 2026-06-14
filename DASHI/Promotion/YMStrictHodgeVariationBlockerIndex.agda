@@ -12,6 +12,7 @@ import DASHI.Physics.Closure.YMStrictSelectedHodgeAlgebraLaws as HodgeAlgebra
 import DASHI.Physics.Closure.YMStrictSelectedHodgeVariationPairing as StrictPairing
 import DASHI.Physics.Closure.YMStrictSelectedNonzeroActionVariation as NonzeroVariation
 import DASHI.Physics.Closure.YMStrictSelectedSourceCurrentCoupling as SourceCoupling
+import DASHI.Physics.Closure.YMStrictSelectedStationarityToSourceEquation as StationarityToSource
 
 ------------------------------------------------------------------------
 -- Strict Hodge/variation blocker index.
@@ -53,6 +54,9 @@ data YMStrictHodgeVariationRow : Set where
   strictSelectedSourceCurrentCouplingCalculatedRow :
     YMStrictHodgeVariationRow
 
+  strictSelectedStationarityToSourceEquationReducedRow :
+    YMStrictHodgeVariationRow
+
   nonPromotingBoundaryRow :
     YMStrictHodgeVariationRow
 
@@ -67,6 +71,7 @@ canonicalYMStrictHodgeVariationRows =
   ∷ strictSelectedBoundaryCancellationCalculatedRow
   ∷ strictSelectedNonzeroActionVariationCalculatedRow
   ∷ strictSelectedSourceCurrentCouplingCalculatedRow
+  ∷ strictSelectedStationarityToSourceEquationReducedRow
   ∷ nonPromotingBoundaryRow
   ∷ []
 
@@ -148,6 +153,20 @@ record YMStrictHodgeVariationBlockerIndex : Set₁ where
       ≡
       SourceCoupling.canonicalStrictSelectedSourceCurrentCouplingReceipt
 
+    strictSelectedStationarityToSourceEquationReducer :
+      StationarityToSource.StrictSelectedStationarityToSourceEquationReducer
+
+    strictSelectedStationarityToSourceEquationReducerIsCanonical :
+      strictSelectedStationarityToSourceEquationReducer
+      ≡
+      StationarityToSource.canonicalStrictSelectedStationarityToSourceEquationReducer
+
+    strictSelectedStationarityToSourceEquationReduced :
+      Bool
+
+    strictSelectedStationarityToSourceEquationReducedIsTrue :
+      strictSelectedStationarityToSourceEquationReduced ≡ true
+
     strictSelectedFinitePairingCalculated :
       Bool
 
@@ -203,8 +222,8 @@ record YMStrictHodgeVariationBlockerIndex : Set₁ where
     rowCount :
       Nat
 
-    rowCountIs9 :
-      rowCount ≡ 9
+    rowCountIs10 :
+      rowCount ≡ 10
 
     receiptBoundary :
       List String
@@ -251,6 +270,16 @@ canonicalYMStrictHodgeVariationBlockerIndex =
         SourceCoupling.canonicalStrictSelectedSourceCurrentCouplingReceipt
     ; strictSelectedSourceCurrentCouplingIsCanonical =
         refl
+    ; strictSelectedStationarityToSourceEquationReducer =
+        StationarityToSource.canonicalStrictSelectedStationarityToSourceEquationReducer
+    ; strictSelectedStationarityToSourceEquationReducerIsCanonical =
+        refl
+    ; strictSelectedStationarityToSourceEquationReduced =
+        StationarityToSource.finiteStationarityToSourcedEquationReduced
+          StationarityToSource.canonicalStrictSelectedStationarityToSourceEquationReducer
+    ; strictSelectedStationarityToSourceEquationReducedIsTrue =
+        StationarityToSource.finiteStationarityToSourcedEquationReducedIsTrue
+          StationarityToSource.canonicalStrictSelectedStationarityToSourceEquationReducer
     ; strictSelectedFinitePairingCalculated =
         true
     ; strictSelectedFinitePairingCalculatedIsTrue =
@@ -284,23 +313,23 @@ canonicalYMStrictHodgeVariationBlockerIndex =
     ; rowIndexIsCanonical =
         refl
     ; rowCount =
-        9
-    ; rowCountIs9 =
+        10
+    ; rowCountIs10 =
         refl
     ; receiptBoundary =
         "Inhabited: Gate 3 pure-YM finite carrier-level D * F = J with J = 0, via the canonical zero-current supply"
         ∷ "Inhabited: finite discrete IBP lower law, where zero variation splits as zero Euler-Lagrange pairing plus zero boundary term"
         ∷ "Calculated: the strict selected finite Hodge variation pairing is inhabited over YMSFGCUserSuppliedVariationCarrier and YMSFGCUserSuppliedActionScalarCarrier"
-        ∷ "Calculated: selected finite Hodge algebra, zero-boundary cancellation, nonzero finite action split, and selected source-current carrier coupling are inhabited"
+        ∷ "Calculated: selected finite Hodge algebra, zero-boundary cancellation, nonzero finite action split, selected source-current carrier coupling, and selected stationarity-to-source-equation reduction are inhabited"
         ∷ "Boundary: the finite-to-real carrier boundary is intentionally consumed by the critical-path receipt, not imported back here"
         ∷ "Still blocked: physical matter/source authority, real sourced D * F = J, self-adjoint real-carrier YM Hamiltonian, and continuum mass-gap promotion are not supplied"
         ∷ "Non-promoting: this receipt does not assert strict D * F = J, physical Yang-Mills, continuum mass gap, Clay, or terminal unification"
         ∷ []
     }
 
-canonicalYMStrictHodgeVariationRowCountIs9 :
-  listCount canonicalYMStrictHodgeVariationRows ≡ 9
-canonicalYMStrictHodgeVariationRowCountIs9 =
+canonicalYMStrictHodgeVariationRowCountIs10 :
+  listCount canonicalYMStrictHodgeVariationRows ≡ 10
+canonicalYMStrictHodgeVariationRowCountIs10 =
   refl
 
 canonicalYMStrictHodgeVariationPureZeroCurrentIsInhabited :
@@ -325,6 +354,14 @@ canonicalYMStrictHodgeVariationSelectedFinitePairingCalculated :
   ≡
   true
 canonicalYMStrictHodgeVariationSelectedFinitePairingCalculated =
+  refl
+
+canonicalYMStrictHodgeVariationStationarityToSourceEquationReduced :
+  YMStrictHodgeVariationBlockerIndex.strictSelectedStationarityToSourceEquationReduced
+    canonicalYMStrictHodgeVariationBlockerIndex
+  ≡
+  true
+canonicalYMStrictHodgeVariationStationarityToSourceEquationReduced =
   refl
 
 canonicalYMStrictHodgeVariationBlockerIsExact :

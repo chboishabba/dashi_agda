@@ -8,6 +8,8 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.CKMCarrierDerived as CKMD
+import DASHI.Physics.Closure.BiunitaryDiagonalization3x3 as Biunitary3
+import DASHI.Physics.Closure.CKMEntryField as Field
 import DASHI.Physics.Closure.MatterRepresentationReceiptSurface as Matter
 import DASHI.Physics.Closure.YukawaDHRIntertwinerCompatibility as YDHR
 
@@ -366,6 +368,47 @@ record CKMVusCarrierPredictionTargetReceipt : Setω where
     alphaCouplingAcceptedForVusIsFalse :
       alphaCouplingAcceptedForVus ≡ false
 
+    cabibboLikeTransportSocket :
+      Biunitary3.CabibboLikeDownTransportSocket
+
+    cabibboLikeTransportSocketIsCanonical :
+      cabibboLikeTransportSocket
+      ≡
+      Biunitary3.canonicalCabibboLikeDownTransportSocket
+
+    identityCarrierVusFromSocketIsZero :
+      Biunitary3.identityVusEntry cabibboLikeTransportSocket
+      ≡
+      Matter.zeroMixingGaussianRationalDatum
+
+    cabibboLikeCarrierVusFromSocketIsOneFifth :
+      Biunitary3.cabibboLikeVusEntry cabibboLikeTransportSocket
+      ≡
+      Matter.mixingGaussianRationalDatum
+        Matter.oneFifthMixingSignedRationalDatum
+        Matter.zeroMixingSignedRationalDatum
+
+    cabibboLikeTransportDistinguishesIdentity :
+      Biunitary3.distinguishesIdentityCarrier cabibboLikeTransportSocket
+      ≡
+      true
+
+    cabibboLikeTransportExactUnitarityRejected :
+      Field.exactUnitarityForConcreteWolfenstein
+        (Biunitary3.exactVVdaggerResidualReceipt cabibboLikeTransportSocket)
+      ≡
+      false
+
+    cabibboLikeTransportExactPDGMatchClaimedIsFalse :
+      Biunitary3.exactPDGMatchClaimed cabibboLikeTransportSocket
+      ≡
+      false
+
+    cabibboLikeTransportPhysicalPromotionIsFalse :
+      Biunitary3.physicalCKMPromotionConstructed cabibboLikeTransportSocket
+      ≡
+      false
+
     pdgApproxVus :
       Matter.MixingGaussianRationalDatum
 
@@ -473,6 +516,22 @@ canonicalCKMVusCarrierPredictionTargetReceipt =
         false
     ; alphaCouplingAcceptedForVusIsFalse =
         refl
+    ; cabibboLikeTransportSocket =
+        Biunitary3.canonicalCabibboLikeDownTransportSocket
+    ; cabibboLikeTransportSocketIsCanonical =
+        refl
+    ; identityCarrierVusFromSocketIsZero =
+        refl
+    ; cabibboLikeCarrierVusFromSocketIsOneFifth =
+        refl
+    ; cabibboLikeTransportDistinguishesIdentity =
+        refl
+    ; cabibboLikeTransportExactUnitarityRejected =
+        refl
+    ; cabibboLikeTransportExactPDGMatchClaimedIsFalse =
+        refl
+    ; cabibboLikeTransportPhysicalPromotionIsFalse =
+        refl
     ; pdgApproxVus =
         pdgApproxVusGaussianDatum
     ; pdgApproxVusIsZeroPointTwoTwoFive =
@@ -508,6 +567,8 @@ canonicalCKMVusCarrierPredictionTargetReceipt =
         ∷ "The current carrier-derived CKM matrix is still the identity matrix, so its v12 entry is zero"
         ∷ "The receipt consumes first-second off-diagonal up/down Yukawa target data from the carrier DHR Yukawa formula surface"
         ∷ "The first symbolic non-identity target is |V_us|_target(alpha,g_12)=alpha*g_12"
+        ∷ "The concrete Cabibbo-like socket distinguishes identity V_us=0 from finite carrier V_us=1/5"
+        ∷ "The Cabibbo-like socket also carries the computed nonzero V V^dagger - I residual, so exact unitarity is rejected for that approximation"
         ∷ "The alpha/coupling target is symbolic only; no accepted alpha value or off-diagonal coupling evaluation is supplied"
         ∷ "The PDG-sized value 0.225 is recorded as an approximate comparison target only"
         ∷ "No exact physical CKM match, non-identity physical diagonalizer, approximation-error bound, or promotion is constructed here"
@@ -551,4 +612,33 @@ ckmVusAlphaCouplingAcceptedStillFalse :
   ≡
   false
 ckmVusAlphaCouplingAcceptedStillFalse =
+  refl
+
+ckmVusCabibboLikeTransportVusIsOneFifth :
+  Biunitary3.cabibboLikeVusEntry
+    (cabibboLikeTransportSocket
+      canonicalCKMVusCarrierPredictionTargetReceipt)
+  ≡
+  Matter.mixingGaussianRationalDatum
+    Matter.oneFifthMixingSignedRationalDatum
+    Matter.zeroMixingSignedRationalDatum
+ckmVusCabibboLikeTransportVusIsOneFifth =
+  refl
+
+ckmVusCabibboLikeTransportDistinguishesIdentity :
+  Biunitary3.distinguishesIdentityCarrier
+    (cabibboLikeTransportSocket
+      canonicalCKMVusCarrierPredictionTargetReceipt)
+  ≡
+  true
+ckmVusCabibboLikeTransportDistinguishesIdentity =
+  refl
+
+ckmVusCabibboLikeTransportKeepsPhysicalPromotionFalse :
+  Biunitary3.physicalCKMPromotionConstructed
+    (cabibboLikeTransportSocket
+      canonicalCKMVusCarrierPredictionTargetReceipt)
+  ≡
+  false
+ckmVusCabibboLikeTransportKeepsPhysicalPromotionFalse =
   refl

@@ -76,6 +76,13 @@ canonicalUpYukawaYukawaDaggerMatrix =
     (Exact.exactGaussian 4 1)
     (Exact.exactGaussian 9 1)
 
+canonicalDownYukawaYukawaDaggerMatrix : Matter.MixingMatrix
+canonicalDownYukawaYukawaDaggerMatrix =
+  Exact.diag3
+    (Exact.exactGaussian 25 6051600000000)
+    (Exact.exactGaussian 8649 60516000000)
+    (Exact.exactGaussian 17472400 60516000000)
+
 data UltrametricUpSectorSlot : Set where
   upFirstFirstSlot :
     UltrametricUpSectorSlot
@@ -633,6 +640,104 @@ canonicalUpWeakBasisEigenbasisTransport = record
       ∷ []
   }
 
+record DownWeakBasisEigenbasisTransport : Set where
+  field
+    carrierDownYukawa :
+      Exact.DiagonalYukawa3x3
+
+    carrierDownYukawaIsCanonical :
+      carrierDownYukawa ≡ canonicalDownYukawa3x3
+
+    carrierDownYukawaMatrix :
+      Matter.MixingMatrix
+
+    carrierDownYukawaMatrixIsCarrierMatrix :
+      carrierDownYukawaMatrix
+      ≡
+      Exact.DiagonalYukawa3x3.matrix carrierDownYukawa
+
+    carrierDownYukawaMatrixIsCanonical :
+      carrierDownYukawaMatrix ≡ canonicalDownYukawaMatrix
+
+    downHermitianProductMatrix :
+      Matter.MixingMatrix
+
+    downHermitianProductMatrixIsExplicitDiagonal :
+      downHermitianProductMatrix
+      ≡
+      canonicalDownYukawaYukawaDaggerMatrix
+
+    U_d :
+      Matter.MixingMatrix
+
+    U_dIsIdentity :
+      U_d ≡ Matter.identityMixingMatrix
+
+    U_dUnitaryClosure :
+      Matter.leftIdentityMixingProduct U_d ≡ U_d
+
+    transportedDownHermitianProduct :
+      Matter.MixingMatrix
+
+    transportedDownHermitianProductIsUdTransport :
+      transportedDownHermitianProduct
+      ≡
+      Matter.leftIdentityMixingProduct downHermitianProductMatrix
+
+    transportedDownHermitianProductIsExplicitDiagonal :
+      transportedDownHermitianProduct
+      ≡
+      canonicalDownYukawaYukawaDaggerMatrix
+
+    U_dDiagonalisesY_dY_dDagger :
+      transportedDownHermitianProduct ≡ downHermitianProductMatrix
+
+    downWeakBasisEigenbasisTransportConstructed :
+      Bool
+
+    downWeakBasisEigenbasisTransportConstructedIsTrue :
+      downWeakBasisEigenbasisTransportConstructed ≡ true
+
+    downWeakBasisEigenbasisTransportBoundary :
+      List String
+
+open DownWeakBasisEigenbasisTransport public
+
+canonicalDownWeakBasisEigenbasisTransport :
+  DownWeakBasisEigenbasisTransport
+canonicalDownWeakBasisEigenbasisTransport = record
+  { carrierDownYukawa = canonicalDownYukawa3x3
+  ; carrierDownYukawaIsCanonical = refl
+  ; carrierDownYukawaMatrix = canonicalDownYukawaMatrix
+  ; carrierDownYukawaMatrixIsCarrierMatrix = refl
+  ; carrierDownYukawaMatrixIsCanonical = refl
+  ; downHermitianProductMatrix =
+      canonicalDownYukawaYukawaDaggerMatrix
+  ; downHermitianProductMatrixIsExplicitDiagonal =
+      refl
+  ; U_d = Matter.identityMixingMatrix
+  ; U_dIsIdentity = refl
+  ; U_dUnitaryClosure = refl
+  ; transportedDownHermitianProduct =
+      Matter.leftIdentityMixingProduct canonicalDownYukawaYukawaDaggerMatrix
+  ; transportedDownHermitianProductIsUdTransport =
+      refl
+  ; transportedDownHermitianProductIsExplicitDiagonal =
+      refl
+  ; U_dDiagonalisesY_dY_dDagger =
+      refl
+  ; downWeakBasisEigenbasisTransportConstructed =
+      true
+  ; downWeakBasisEigenbasisTransportConstructedIsTrue =
+      refl
+  ; downWeakBasisEigenbasisTransportBoundary =
+      "The carrier down Yukawa is the existing canonical diagonal matrix diag(5/2460000,93/246000,4180/246000)"
+      ∷ "The carrier down Hermitian product surface Y_d Y_d^dagger is recorded as the explicit diagonal square matrix"
+      ∷ "The weak-basis down eigenbasis transport matrix U_d is the concrete identity MixingMatrix"
+      ∷ "Identity transport leaves the diagonal Hermitian product fixed, so U_d diagonalises the down-sector carrier surface by refl"
+      ∷ []
+  }
+
 data YukawaCarrierFailClosedBlocker : Set where
   missingAbsoluteHiggsVEVW4CalibrationForPhysicalYukawa :
     YukawaCarrierFailClosedBlocker
@@ -754,6 +859,20 @@ record YukawaFromCarrierReceipt : Setω where
       ≡
       canonicalUpWeakBasisEigenbasisTransport
 
+    downWeakBasisEigenbasisTransport :
+      DownWeakBasisEigenbasisTransport
+
+    downWeakBasisEigenbasisTransportIsCanonical :
+      downWeakBasisEigenbasisTransport
+      ≡
+      canonicalDownWeakBasisEigenbasisTransport
+
+    downWeakBasisEigenbasisTransportConstructed :
+      DownWeakBasisEigenbasisTransport.downWeakBasisEigenbasisTransportConstructed
+        downWeakBasisEigenbasisTransport
+      ≡
+      true
+
     firstGenerationUpUltrametricDepthCarrier :
       FirstGenerationUpUltrametricDepthCarrier
 
@@ -841,6 +960,28 @@ record YukawaFromCarrierReceipt : Setω where
       ≡
       UpWeakBasisEigenbasisTransport.upHermitianProductMatrix
         upWeakBasisEigenbasisTransport
+
+    U_d :
+      Matter.MixingMatrix
+
+    U_dMatchesDownWeakBasisTransport :
+      U_d
+      ≡
+      DownWeakBasisEigenbasisTransport.U_d
+        downWeakBasisEigenbasisTransport
+
+    U_dIsIdentity :
+      U_d ≡ Matter.identityMixingMatrix
+
+    U_dUnitaryClosure :
+      Matter.leftIdentityMixingProduct U_d ≡ U_d
+
+    U_dDiagonalisesCarrierDownYukawaYukawaDagger :
+      DownWeakBasisEigenbasisTransport.transportedDownHermitianProduct
+        downWeakBasisEigenbasisTransport
+      ≡
+      DownWeakBasisEigenbasisTransport.downHermitianProductMatrix
+        downWeakBasisEigenbasisTransport
 
     downYukawaMatrixAgreesWithCarrierDerivedCKM :
       downYukawaMatrix
@@ -1114,6 +1255,12 @@ canonicalYukawaFromCarrier = record
       canonicalUpWeakBasisEigenbasisTransport
   ; upWeakBasisEigenbasisTransportIsCanonical =
       refl
+  ; downWeakBasisEigenbasisTransport =
+      canonicalDownWeakBasisEigenbasisTransport
+  ; downWeakBasisEigenbasisTransportIsCanonical =
+      refl
+  ; downWeakBasisEigenbasisTransportConstructed =
+      refl
   ; firstGenerationUpUltrametricDepthCarrier =
       canonicalFirstGenerationUpUltrametricDepthCarrier
   ; firstGenerationUpUltrametricDepthCarrierIsCanonical =
@@ -1152,6 +1299,18 @@ canonicalYukawaFromCarrier = record
   ; U_uDiagonalisesCarrierUpYukawaYukawaDagger =
       UpWeakBasisEigenbasisTransport.U_uDiagonalisesY_uY_uDagger
         canonicalUpWeakBasisEigenbasisTransport
+  ; U_d =
+      DownWeakBasisEigenbasisTransport.U_d
+        canonicalDownWeakBasisEigenbasisTransport
+  ; U_dMatchesDownWeakBasisTransport =
+      refl
+  ; U_dIsIdentity =
+      refl
+  ; U_dUnitaryClosure =
+      refl
+  ; U_dDiagonalisesCarrierDownYukawaYukawaDagger =
+      DownWeakBasisEigenbasisTransport.U_dDiagonalisesY_dY_dDagger
+        canonicalDownWeakBasisEigenbasisTransport
   ; downYukawaMatrixAgreesWithCarrierDerivedCKM = refl
   ; upYukawaFormulaEntriesAgreeWithMatrix =
       λ _ _ → refl

@@ -26,6 +26,7 @@ import DASHI.Physics.Closure.GRDiscreteBianchiFiniteR as Gate4GR
 import DASHI.Physics.Closure.GRDiscreteRicciCandidateFromCurvature as Gate4Ricci
 import DASHI.Physics.Closure.GRNonFlatScalarAlgebraSurface as Gate4Scalar
 import DASHI.Quantum.Stone as Gate5
+import DASHI.Physics.Closure.SchrodingerSelfAdjointEvolutionReceipt as Gate5Schrodinger
 import DASHI.Physics.Closure.SelfAdjointYangMillsHamiltonianOnCarrierQuotient as Gate8Term4
 import DASHI.Physics.QFT.ModularTheoryReceiptSurface as Gate5Modular
 import DASHI.Physics.QFT.GNSFellRepresentationSurface as Gate5GNS
@@ -5431,6 +5432,9 @@ data PostTerminalIntegrationLayer : Set where
   postTerminalFiniteStoneYMSpectralBridgeLayer :
     PostTerminalIntegrationLayer
 
+  postTerminalGate5HilbertStonePhaseSpaceCarrierStepLayer :
+    PostTerminalIntegrationLayer
+
   postTerminalDoplicherRobertsScopingLayer :
     PostTerminalIntegrationLayer
 
@@ -5442,6 +5446,7 @@ canonicalPostTerminalIntegrationLayers =
   ∷ postTerminalStressEnergyW4ScopeLayer
   ∷ postTerminalSelectedMetricAPIRefactorLayer
   ∷ postTerminalFiniteStoneYMSpectralBridgeLayer
+  ∷ postTerminalGate5HilbertStonePhaseSpaceCarrierStepLayer
   ∷ postTerminalDoplicherRobertsScopingLayer
   ∷ []
 
@@ -5561,6 +5566,53 @@ record PostTerminalLayerIntegrationLedger : Setω₁ where
       ≡
       false
 
+    gate5HilbertStonePhaseSpaceCarrierStep :
+      Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep
+
+    gate5FinitePhaseSpaceCarrierStepTyped :
+      Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.finitePhaseSpaceCarrierStepTyped
+        gate5HilbertStonePhaseSpaceCarrierStep
+      ≡
+      true
+
+    gate5QuotientInnerProductStepTyped :
+      Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.quotientInnerProductStepTyped
+        gate5HilbertStonePhaseSpaceCarrierStep
+      ≡
+      true
+
+    gate5GeneratorDomainDataStepTyped :
+      Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.generatorDomainDataStepTyped
+        gate5HilbertStonePhaseSpaceCarrierStep
+      ≡
+      true
+
+    gate5PhysicalPhaseSpaceCarrierPromotedStillFalse :
+      Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.physicalPhaseSpaceCarrierPromoted
+        gate5HilbertStonePhaseSpaceCarrierStep
+      ≡
+      false
+
+    gate5PhysicalStoneBundlePromotedStillFalse :
+      Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.physicalStoneBundlePromoted
+        gate5HilbertStonePhaseSpaceCarrierStep
+      ≡
+      false
+
+    gate5SelfAdjointPhysicalGeneratorPromotedStillFalse :
+      Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.selfAdjointPhysicalGeneratorPromoted
+        gate5HilbertStonePhaseSpaceCarrierStep
+      ≡
+      false
+
+    gate5StoneFirstRemainingTarget :
+      Gate5.StoneGeneratorSpectralGapRemainingTarget
+
+    gate5StoneFirstRemainingTargetIsGlobalNoncollapsedPhysicalPhaseSpace :
+      gate5StoneFirstRemainingTarget
+      ≡
+      Gate5.targetGlobalNoncollapsedPhysicalPhaseSpace
+
     gate6DRScopingCorrection :
       Gate6DHR.DHRDoplicherRobertsScopingCorrectionReceipt
 
@@ -5649,6 +5701,30 @@ canonicalPostTerminalLayerIntegrationLedger =
         refl
     ; gate5TerminalStillFalse =
         refl
+    ; gate5HilbertStonePhaseSpaceCarrierStep =
+        Gate5Schrodinger.gate5HilbertStonePhaseSpaceCarrierStep
+    ; gate5FinitePhaseSpaceCarrierStepTyped =
+        Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.finitePhaseSpaceCarrierStepTyped-v
+          Gate5Schrodinger.gate5HilbertStonePhaseSpaceCarrierStep
+    ; gate5QuotientInnerProductStepTyped =
+        Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.quotientInnerProductStepTyped-v
+          Gate5Schrodinger.gate5HilbertStonePhaseSpaceCarrierStep
+    ; gate5GeneratorDomainDataStepTyped =
+        Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.generatorDomainDataStepTyped-v
+          Gate5Schrodinger.gate5HilbertStonePhaseSpaceCarrierStep
+    ; gate5PhysicalPhaseSpaceCarrierPromotedStillFalse =
+        Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.physicalPhaseSpaceCarrierPromoted-v
+          Gate5Schrodinger.gate5HilbertStonePhaseSpaceCarrierStep
+    ; gate5PhysicalStoneBundlePromotedStillFalse =
+        Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.physicalStoneBundlePromoted-v
+          Gate5Schrodinger.gate5HilbertStonePhaseSpaceCarrierStep
+    ; gate5SelfAdjointPhysicalGeneratorPromotedStillFalse =
+        Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.selfAdjointPhysicalGeneratorPromoted-v
+          Gate5Schrodinger.gate5HilbertStonePhaseSpaceCarrierStep
+    ; gate5StoneFirstRemainingTarget =
+        Gate5.targetGlobalNoncollapsedPhysicalPhaseSpace
+    ; gate5StoneFirstRemainingTargetIsGlobalNoncollapsedPhysicalPhaseSpace =
+        refl
     ; gate6DRScopingCorrection =
         Gate6DHR.canonicalDHRDoplicherRobertsScopingCorrectionReceipt
     ; gate6DRLiteratureRecorded =
@@ -5669,6 +5745,8 @@ canonicalPostTerminalLayerIntegrationLedger =
         ∷ "Gate 3 records the latest u2 instantiation decision and keeps strict real SU3, selected Hodge, and variation promotion false"
         ∷ "Gate 4 records local tensor/W4 scoping plus selected-metric API refactor targets without W4, Candidate256, Levi-Civita, or sourced-Einstein promotion"
         ∷ "Gate 5 records a finite Stone/YM spectral bridge while the numeric inequality, physical strong continuity, and terminal promotion remain false"
+        ∷ "Gate 5 consumes Gate5HilbertStonePhaseSpaceCarrierStep as the selected finite quotient carrier/domain step while physical phase-space carrier, physical Stone bundle, and self-adjoint physical generator promotion remain false"
+        ∷ "The physical Stone frontier remains targetGlobalNoncollapsedPhysicalPhaseSpace"
         ∷ "Gate 6 records Doplicher-Roberts literature authority as scoped, not consumed; local H1-H5 evidence, DR reconstruction, and Standard Model matching remain false"
         ∷ "terminalClaimPromoted remains false"
         ∷ []

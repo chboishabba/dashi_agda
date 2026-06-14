@@ -12,6 +12,7 @@ import DASHI.Physics.Closure.HiggsSymmetryBreakingReceipt as Higgs
 import DASHI.Physics.Closure.CKMEntryField as Field
 import DASHI.Physics.Closure.MatterRepresentationReceiptSurface as Matter
 import DASHI.Physics.Closure.CKMExactWitnesses as Exact
+import DASHI.Physics.Closure.YukawaFromCarrier as Yukawa
 import DASHI.Physics.YM.FroggattNielsenExpansion as FN
 import DASHI.Physics.YM.WolfensteinCKM as Wolf
 
@@ -11802,6 +11803,219 @@ canonicalCKMCarrierMixingGate7ExactBridgeReceipt = record
       ∷ "No promotion is claimed from the exact bridge"
       ∷ []
   }
+
+------------------------------------------------------------------------
+-- Gate 7 carrier identity unitarity through weak-basis transports.
+--
+-- Worker 5 supplied the down-sector weak-basis/eigenbasis transport in
+-- `YukawaFromCarrier`.  The surface below consumes it directly, together
+-- with the already existing up-sector transport, and exports the resulting
+-- carrier-identity CKM product and exact zero residual law.  This is scoped
+-- to the canonical identity carrier; it does not assert a non-identity
+-- physical CKM matrix.
+
+canonicalCarrierMixingUpWeakBasisEigenbasisTransport :
+  Yukawa.UpWeakBasisEigenbasisTransport
+canonicalCarrierMixingUpWeakBasisEigenbasisTransport =
+  Yukawa.upWeakBasisEigenbasisTransport Yukawa.canonicalYukawaFromCarrier
+
+canonicalCarrierMixingDownWeakBasisEigenbasisTransport :
+  Yukawa.DownWeakBasisEigenbasisTransport
+canonicalCarrierMixingDownWeakBasisEigenbasisTransport =
+  Yukawa.downWeakBasisEigenbasisTransport Yukawa.canonicalYukawaFromCarrier
+
+canonicalCarrierMixingDownTransportConstructed :
+  Yukawa.DownWeakBasisEigenbasisTransport.downWeakBasisEigenbasisTransportConstructed
+    canonicalCarrierMixingDownWeakBasisEigenbasisTransport
+  ≡
+  true
+canonicalCarrierMixingDownTransportConstructed =
+  Yukawa.downWeakBasisEigenbasisTransportConstructed
+    Yukawa.canonicalYukawaFromCarrier
+
+record CKMCarrierIdentityTransportResidualLaw : Setω where
+  field
+    upWeakBasisEigenbasisTransport :
+      Yukawa.UpWeakBasisEigenbasisTransport
+
+    upWeakBasisEigenbasisTransportIsCanonical :
+      upWeakBasisEigenbasisTransport
+      ≡
+      Yukawa.canonicalUpWeakBasisEigenbasisTransport
+
+    downWeakBasisEigenbasisTransport :
+      Yukawa.DownWeakBasisEigenbasisTransport
+
+    downWeakBasisEigenbasisTransportIsCanonical :
+      downWeakBasisEigenbasisTransport
+      ≡
+      Yukawa.canonicalDownWeakBasisEigenbasisTransport
+
+    downWeakBasisEigenbasisTransportConstructed :
+      Yukawa.DownWeakBasisEigenbasisTransport.downWeakBasisEigenbasisTransportConstructed
+        downWeakBasisEigenbasisTransport
+      ≡
+      true
+
+    U_u :
+      Matter.MixingMatrix
+
+    U_uMatchesTransport :
+      U_u
+      ≡
+      Yukawa.UpWeakBasisEigenbasisTransport.U_u
+        upWeakBasisEigenbasisTransport
+
+    U_uIsIdentity :
+      U_u ≡ Matter.identityMixingMatrix
+
+    U_uDiagonalisesCarrierHermitianProduct :
+      Yukawa.UpWeakBasisEigenbasisTransport.transportedUpHermitianProduct
+        upWeakBasisEigenbasisTransport
+      ≡
+      Yukawa.UpWeakBasisEigenbasisTransport.upHermitianProductMatrix
+        upWeakBasisEigenbasisTransport
+
+    U_d :
+      Matter.MixingMatrix
+
+    U_dMatchesTransport :
+      U_d
+      ≡
+      Yukawa.DownWeakBasisEigenbasisTransport.U_d
+        downWeakBasisEigenbasisTransport
+
+    U_dIsIdentity :
+      U_d ≡ Matter.identityMixingMatrix
+
+    U_dDiagonalisesCarrierHermitianProduct :
+      Yukawa.DownWeakBasisEigenbasisTransport.transportedDownHermitianProduct
+        downWeakBasisEigenbasisTransport
+      ≡
+      Yukawa.DownWeakBasisEigenbasisTransport.downHermitianProductMatrix
+        downWeakBasisEigenbasisTransport
+
+    carrierCKMProduct :
+      Matter.MixingMatrix
+
+    carrierCKMProductIsIdentity :
+      carrierCKMProduct ≡ Matter.identityMixingMatrix
+
+    carrierCKMProductIsExactProductWitness :
+      carrierCKMProduct
+      ≡
+      Exact.CKMProductClosureWitness.ckmMatrix
+        Exact.canonicalCKMProductClosureWitness
+
+    carrierUnitarityResidualWitness :
+      Exact.UnitarityResidualWitness
+
+    carrierUnitarityResidualWitnessIsExact :
+      carrierUnitarityResidualWitness
+      ≡
+      Exact.canonicalUnitarityResidualWitness
+
+    carrierUnitarityResidualMatrixIsZero :
+      Exact.UnitarityResidualWitness.residualMatrix
+        carrierUnitarityResidualWitness
+      ≡
+      Matter.mixingMatrix3x3
+        Exact.zeroGaussian Exact.zeroGaussian Exact.zeroGaussian
+        Exact.zeroGaussian Exact.zeroGaussian Exact.zeroGaussian
+        Exact.zeroGaussian Exact.zeroGaussian Exact.zeroGaussian
+
+    carrierUnitarityResidualAppliesToTransportProduct :
+      Exact.UnitarityResidualWitness.ckmMatrix
+        carrierUnitarityResidualWitness
+      ≡
+      carrierCKMProduct
+
+    lawBoundary :
+      List String
+
+open CKMCarrierIdentityTransportResidualLaw public
+
+canonicalCKMCarrierIdentityTransportResidualLaw :
+  CKMCarrierIdentityTransportResidualLaw
+canonicalCKMCarrierIdentityTransportResidualLaw = record
+  { upWeakBasisEigenbasisTransport =
+      canonicalCarrierMixingUpWeakBasisEigenbasisTransport
+  ; upWeakBasisEigenbasisTransportIsCanonical =
+      refl
+  ; downWeakBasisEigenbasisTransport =
+      canonicalCarrierMixingDownWeakBasisEigenbasisTransport
+  ; downWeakBasisEigenbasisTransportIsCanonical =
+      refl
+  ; downWeakBasisEigenbasisTransportConstructed =
+      canonicalCarrierMixingDownTransportConstructed
+  ; U_u =
+      Yukawa.UpWeakBasisEigenbasisTransport.U_u
+        canonicalCarrierMixingUpWeakBasisEigenbasisTransport
+  ; U_uMatchesTransport =
+      refl
+  ; U_uIsIdentity =
+      refl
+  ; U_uDiagonalisesCarrierHermitianProduct =
+      Yukawa.UpWeakBasisEigenbasisTransport.U_uDiagonalisesY_uY_uDagger
+        canonicalCarrierMixingUpWeakBasisEigenbasisTransport
+  ; U_d =
+      Yukawa.DownWeakBasisEigenbasisTransport.U_d
+        canonicalCarrierMixingDownWeakBasisEigenbasisTransport
+  ; U_dMatchesTransport =
+      refl
+  ; U_dIsIdentity =
+      refl
+  ; U_dDiagonalisesCarrierHermitianProduct =
+      Yukawa.DownWeakBasisEigenbasisTransport.U_dDiagonalisesY_dY_dDagger
+        canonicalCarrierMixingDownWeakBasisEigenbasisTransport
+  ; carrierCKMProduct =
+      Matter.identityMixingMatrix
+  ; carrierCKMProductIsIdentity =
+      refl
+  ; carrierCKMProductIsExactProductWitness =
+      refl
+  ; carrierUnitarityResidualWitness =
+      Exact.canonicalUnitarityResidualWitness
+  ; carrierUnitarityResidualWitnessIsExact =
+      refl
+  ; carrierUnitarityResidualMatrixIsZero =
+      refl
+  ; carrierUnitarityResidualAppliesToTransportProduct =
+      refl
+  ; lawBoundary =
+      "The canonical up weak-basis/eigenbasis transport is consumed from YukawaFromCarrier"
+      ∷ "The canonical down weak-basis/eigenbasis transport is consumed from YukawaFromCarrier"
+      ∷ "Both transport matrices are the identity MixingMatrix, so the carrier CKM product is the exact identity product"
+      ∷ "The unitarity residual witness is the exact zero residual for that carrier identity product"
+      ∷ "The law is scoped to the canonical carrier identity case and leaves non-identity CKM construction outside this receipt"
+      ∷ []
+  }
+
+ckmCarrierMixingExportsDownWeakBasisEigenbasisTransport :
+  downWeakBasisEigenbasisTransport
+    canonicalCKMCarrierIdentityTransportResidualLaw
+  ≡
+  Yukawa.canonicalDownWeakBasisEigenbasisTransport
+ckmCarrierMixingExportsDownWeakBasisEigenbasisTransport =
+  refl
+
+ckmCarrierIdentityTransportResidualIsZero :
+  carrierUnitarityResidualMatrixIsZero
+    canonicalCKMCarrierIdentityTransportResidualLaw
+  ≡
+  refl
+ckmCarrierIdentityTransportResidualIsZero =
+  refl
+
+ckmCarrierIdentityTransportResidualTargetsProduct :
+  Exact.UnitarityResidualWitness.ckmMatrix
+    (carrierUnitarityResidualWitness
+      canonicalCKMCarrierIdentityTransportResidualLaw)
+  ≡
+  carrierCKMProduct canonicalCKMCarrierIdentityTransportResidualLaw
+ckmCarrierIdentityTransportResidualTargetsProduct =
+  carrierUnitarityResidualAppliesToTransportProduct
+    canonicalCKMCarrierIdentityTransportResidualLaw
 
 record PhysicalCarrierMixingBridge : Setω where
   field

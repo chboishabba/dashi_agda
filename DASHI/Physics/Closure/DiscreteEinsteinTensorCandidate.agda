@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.DiscreteEinsteinTensorCandidate where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (zero)
+open import Agda.Builtin.Nat using (zero) renaming (_+_ to _+N_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ)
@@ -337,6 +337,30 @@ zeroFactorVec =
     zero zero zero zero zero
     zero zero zero zero zero
 
+factorVecAdd :
+  GL.FactorVec →
+  GL.FactorVec →
+  GL.FactorVec
+factorVecAdd
+  (GL.v15 x2 x3 x5 x7 x11 x13 x17 x19 x23 x29 x31 x41 x47 x59 x71)
+  (GL.v15 y2 y3 y5 y7 y11 y13 y17 y19 y23 y29 y31 y41 y47 y59 y71) =
+  GL.v15
+    (x2 +N y2)
+    (x3 +N y3)
+    (x5 +N y5)
+    (x7 +N y7)
+    (x11 +N y11)
+    (x13 +N y13)
+    (x17 +N y17)
+    (x19 +N y19)
+    (x23 +N y23)
+    (x29 +N y29)
+    (x31 +N y31)
+    (x41 +N y41)
+    (x47 +N y47)
+    (x59 +N y59)
+    (x71 +N y71)
+
 factorVecLeft :
   GL.FactorVec →
   GL.FactorVec →
@@ -382,7 +406,48 @@ factorVecSSPContraction :
   (SSP → GL.FactorVec) →
   GL.FactorVec
 factorVecSSPContraction component =
-  component MonsterOntos.p2
+  factorVecAdd (component MonsterOntos.p2)
+    (factorVecAdd (component MonsterOntos.p3)
+      (factorVecAdd (component MonsterOntos.p5)
+        (factorVecAdd (component MonsterOntos.p7)
+          (factorVecAdd (component MonsterOntos.p11)
+            (factorVecAdd (component MonsterOntos.p13)
+              (factorVecAdd (component MonsterOntos.p17)
+                (factorVecAdd (component MonsterOntos.p19)
+                  (factorVecAdd (component MonsterOntos.p23)
+                    (factorVecAdd (component MonsterOntos.p29)
+                      (factorVecAdd (component MonsterOntos.p31)
+                        (factorVecAdd (component MonsterOntos.p41)
+                          (factorVecAdd (component MonsterOntos.p47)
+                            (factorVecAdd (component MonsterOntos.p59)
+                              (component MonsterOntos.p71))))))))))))))
+
+factorVecSSPContractionAllLanesLaw :
+  (component : SSP → GL.FactorVec) →
+  factorVecSSPContraction component
+  ≡
+  factorVecAdd (component MonsterOntos.p2)
+    (factorVecAdd (component MonsterOntos.p3)
+      (factorVecAdd (component MonsterOntos.p5)
+        (factorVecAdd (component MonsterOntos.p7)
+          (factorVecAdd (component MonsterOntos.p11)
+            (factorVecAdd (component MonsterOntos.p13)
+              (factorVecAdd (component MonsterOntos.p17)
+                (factorVecAdd (component MonsterOntos.p19)
+                  (factorVecAdd (component MonsterOntos.p23)
+                    (factorVecAdd (component MonsterOntos.p29)
+                      (factorVecAdd (component MonsterOntos.p31)
+                        (factorVecAdd (component MonsterOntos.p41)
+                          (factorVecAdd (component MonsterOntos.p47)
+                            (factorVecAdd (component MonsterOntos.p59)
+                              (component MonsterOntos.p71))))))))))))))
+factorVecSSPContractionAllLanesLaw _ = refl
+
+factorVecSSPContractionZero :
+  factorVecSSPContraction (λ _ → zeroFactorVec)
+  ≡
+  zeroFactorVec
+factorVecSSPContractionZero = refl
 
 factorVecSSPRicci :
   GL.FactorVec →
@@ -417,6 +482,125 @@ factorVecSSPEinsteinTensor base mu nu =
     (factorVecLeft
       (factorVecLeft zeroFactorVec (factorVecSSPScalarCurvature base))
       (factorVecSSPZeroMetric base mu nu))
+
+factorVecSSPRicciZeroTableLaw :
+  (base : GL.FactorVec) →
+  (mu nu : SSP) →
+  factorVecSSPRicci base mu nu
+  ≡
+  zeroFactorVec
+factorVecSSPRicciZeroTableLaw _ _ _ = refl
+
+factorVecSSPScalarCurvatureZeroTableLaw :
+  (base : GL.FactorVec) →
+  factorVecSSPScalarCurvature base
+  ≡
+  zeroFactorVec
+factorVecSSPScalarCurvatureZeroTableLaw _ = refl
+
+factorVecSSPEinsteinTensorZeroTableLaw :
+  (base : GL.FactorVec) →
+  (mu nu : SSP) →
+  factorVecSSPEinsteinTensor base mu nu
+  ≡
+  zeroFactorVec
+factorVecSSPEinsteinTensorZeroTableLaw _ _ _ = refl
+
+record FactorVecSSPAllLaneContractionEinsteinTensorLaw : Set₁ where
+  field
+    finiteContraction :
+      (SSP → GL.FactorVec) →
+      GL.FactorVec
+
+    finiteContractionIsAllFifteenSSPLanes :
+      (component : SSP → GL.FactorVec) →
+      finiteContraction component
+      ≡
+      factorVecSSPContraction component
+
+    ricciFromRiemannZeroTable :
+      (base : GL.FactorVec) →
+      (mu nu : SSP) →
+      factorVecSSPRicci base mu nu
+      ≡
+      finiteContraction
+        (λ rho →
+          factorVecSSPZeroRiemann base rho mu rho nu)
+
+    scalarCurvatureFromRicciTraceZeroTable :
+      (base : GL.FactorVec) →
+      factorVecSSPScalarCurvature base
+      ≡
+      finiteContraction
+        (λ mu →
+          finiteContraction
+            (λ nu →
+              factorVecLeft
+                (factorVecSSPZeroMetric base mu nu)
+                (factorVecSSPRicci base mu nu)))
+
+    einsteinTensorFromRicciScalarMetricZeroTable :
+      (base : GL.FactorVec) →
+      (mu nu : SSP) →
+      factorVecSSPEinsteinTensor base mu nu
+      ≡
+      factorVecLeft
+        (factorVecSSPRicci base mu nu)
+        (factorVecLeft
+          (factorVecLeft zeroFactorVec (factorVecSSPScalarCurvature base))
+          (factorVecSSPZeroMetric base mu nu))
+
+    ricciZeroTableLaw :
+      (base : GL.FactorVec) →
+      (mu nu : SSP) →
+      factorVecSSPRicci base mu nu
+      ≡
+      zeroFactorVec
+
+    scalarCurvatureZeroTableLaw :
+      (base : GL.FactorVec) →
+      factorVecSSPScalarCurvature base
+      ≡
+      zeroFactorVec
+
+    einsteinTensorZeroTableLaw :
+      (base : GL.FactorVec) →
+      (mu nu : SSP) →
+      factorVecSSPEinsteinTensor base mu nu
+      ≡
+      zeroFactorVec
+
+    lawBoundary :
+      List String
+
+canonicalFactorVecSSPAllLaneContractionEinsteinTensorLaw :
+  FactorVecSSPAllLaneContractionEinsteinTensorLaw
+canonicalFactorVecSSPAllLaneContractionEinsteinTensorLaw =
+  record
+    { finiteContraction =
+        factorVecSSPContraction
+    ; finiteContractionIsAllFifteenSSPLanes =
+        λ _ → refl
+    ; ricciFromRiemannZeroTable =
+        λ _ _ _ → refl
+    ; scalarCurvatureFromRicciTraceZeroTable =
+        λ _ → refl
+    ; einsteinTensorFromRicciScalarMetricZeroTable =
+        λ _ _ _ → refl
+    ; ricciZeroTableLaw =
+        factorVecSSPRicciZeroTableLaw
+    ; scalarCurvatureZeroTableLaw =
+        factorVecSSPScalarCurvatureZeroTableLaw
+    ; einsteinTensorZeroTableLaw =
+        factorVecSSPEinsteinTensorZeroTableLaw
+    ; lawBoundary =
+        "finiteContraction enumerates all 15 SSP coordinate lanes p2 through p71"
+        ∷ "Ricci is the all-lane rho contraction R rho mu rho nu over the canonical zero Riemann table"
+        ∷ "Scalar curvature is the nested all-lane inverse-metric/Ricci trace over the canonical zero metric table"
+        ∷ "EinsteinTensor is the Ricci minus one-half scalar metric shape over the canonical zero table"
+        ∷ "This law is local finite tensor algebra for the existing zero-curvature construction request; it does not inhabit nonFlatWitness"
+        ∷ []
+    }
 
 factorVecSSPCommutatorShapedRiemannFromΔΓLaw :
   (base : GL.FactorVec) →

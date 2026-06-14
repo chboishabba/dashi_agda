@@ -19,9 +19,11 @@ AGDA = (
 
 TRUE_FLAGS = (
     "submissionPathRecorded",
+    "narrativeSubmissionPackagingSurfaceRecorded",
     "finiteBTCellSelfAdjointnessDominationInternalTarget",
     "kingGammaDAuthorityIntakeRecorded",
     "balabanH3aRGAuthorityIntakeRecorded",
+    "balabanH3aAuthorityBacked",
     "osWightmanAuthorityIntakeRecorded",
     "externalAcceptanceReviewRequired",
 )
@@ -55,6 +57,14 @@ BLOCKERS = (
     "External acceptance/review still required",
     "YM Clay promotion false",
     "Terminal promotion false",
+)
+
+NARRATIVE_PATH = "Docs/papers/live/YMAuthorityBackedSubmissionNarrative.md"
+
+NARRATIVE_PACKAGING_ROW = (
+    "Docs/papers/live/YMAuthorityBackedSubmissionNarrative.md is the "
+    "submission packaging surface; it packages the authority-backed narrative "
+    "only, while H3a remains Balaban-authority-backed and not internalized."
 )
 
 
@@ -100,6 +110,21 @@ def test_submission_path_flags_record_path_but_no_external_free_clay(
         assert f"{name}IsFalse" in source
 
 
+def test_narrative_document_contract_is_wired_as_packaging_surface(
+    source: str,
+) -> None:
+    assert re.search(
+        rf'(?m)^narrativeDocumentPath\s*=\s*\n\s*"{re.escape(NARRATIVE_PATH)}"$',
+        source,
+    )
+    assert NARRATIVE_PACKAGING_ROW in source
+    assert "narrativeSubmissionPackagingSurfaceRow" in source
+    assert "canonicalNarrativePackagingSurfaceRecorded" in source
+    assert "SubmissionPathFlags.narrativePackagingSurfaceRecorded" in source
+    assert "narrativeSubmissionPackagingSurfaceRecorded = true" in source
+    assert "narrativeSubmissionPackagingSurfaceRecorded = false" not in source
+
+
 def test_authority_chain_is_recorded_in_order_and_with_no_promotion(
     source: str,
 ) -> None:
@@ -135,6 +160,11 @@ def test_boundary_blockers_keep_h3a_clay_and_terminal_false(source: str) -> None
     for blocker in BLOCKERS:
         assert blocker in source
 
+    assert "Balaban-authority-backed" in source
+    assert "balabanH3aAuthorityBacked = true" in source
+    assert "balabanH3aAuthorityBacked = false" not in source
+    assert "balabanH3aAuthorityBackedIsTrue" in source
+    assert "canonicalBalabanH3aAuthorityBacked" in source
     assert re.search(r"\bsubmissionPathBlockerCountIs5\s*=\s*refl\b", source)
     assert "h3aInternalized = true" not in source
     assert "clayEligibleWithoutExternalAuthority = true" not in source
