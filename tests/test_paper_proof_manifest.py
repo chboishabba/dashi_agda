@@ -127,3 +127,128 @@ def test_expected_paper8_rows_exist(
         ),
     }
     assert expected_rows <= paper8_keys
+
+
+def test_new_intake_and_polymer_boundary_rows_remain_nonpromotional(
+    generated_payloads: dict[str, dict[str, object]],
+) -> None:
+    rows = generated_payloads[CANONICAL_BASENAME]["rows"]
+    assert isinstance(rows, list)
+    rows_by_lemma = {row["lemma"]: row for row in rows}
+
+    expected_rows = {
+        "Seregin/ESS A3 theorem-intake boundary": (
+            "Paper1 NS",
+            "DASHI/Physics/Closure/NSPaper1ClayTargetReceipt.agda",
+            "publishableClaimText",
+            "authority-intake-boundary",
+        ),
+        "Balaban Option A theorem-intake boundary": (
+            "Paper3 YM",
+            "DASHI/Physics/Closure/Paper3YMDependencyGraphReceipt.agda",
+            "ym6Statement",
+            "authority-intake-boundary",
+        ),
+        "Option B native polymer boundary": (
+            "Paper3 YM",
+            "DASHI/Physics/Closure/Paper3YMDependencyGraphReceipt.agda",
+            "infiniteVolumePolymerExpansionProved",
+            "false",
+        ),
+    }
+
+    for lemma, (paper, agda_file, exact_var, expected_status) in expected_rows.items():
+        if lemma == "Option B native polymer boundary" and lemma not in rows_by_lemma:
+            option_b_steps = {
+                row["lemma"]
+                for row in rows
+                if row["paper"] == "Paper3 YM" and str(row["lemma"]).startswith("Option B B")
+            }
+            assert len(option_b_steps) == 5
+            continue
+        row = rows_by_lemma[lemma]
+        assert row["paper"] == paper
+        assert row["agda_file"] == agda_file
+        assert row["exact_var"] == exact_var
+        assert row["expected_status"] == expected_status
+        assert row["expected_status"] != "true"
+        assert "promotion" in row["governance_note"].lower()
+
+
+def test_option_b_b1_b5_manifest_rows_are_complete_and_fail_closed(
+    generated_payloads: dict[str, dict[str, object]],
+) -> None:
+    rows = generated_payloads[CANONICAL_BASENAME]["rows"]
+    assert isinstance(rows, list)
+
+    b_rows = [
+        row
+        for row in rows
+        if row["paper"] == "Paper3 YM"
+        and "option" in row["lemma"].lower()
+        and "b" in row["lemma"].lower()
+        and any(f"b{index}" in " ".join(str(value).lower() for value in row.values()) for index in range(1, 6))
+    ]
+    if not b_rows:
+        pytest.skip("Option-B B1-B5 manifest rows are not integrated yet")
+
+    rows_by_step: dict[str, list[dict[str, object]]] = {f"B{index}": [] for index in range(1, 6)}
+    for row in b_rows:
+        haystack = " ".join(str(value).lower() for value in row.values())
+        for step in rows_by_step:
+            if step.lower() in haystack:
+                rows_by_step[step].append(row)
+
+    missing = [step for step, matches in rows_by_step.items() if not matches]
+    assert missing == []
+
+    for step, matches in rows_by_step.items():
+        for row in matches:
+            status = str(row["expected_status"]).lower()
+            note = str(row["governance_note"]).lower()
+            assert status not in {"true", "proved", "promoted"}, (step, row)
+            assert any(
+                word in status
+                for word in ("false", "open", "deferred", "boundary", "blocked", "target", "diagnostic")
+            )
+            assert any(word in note for word in ("fail", "promotion", "promote", "blocked", "deferred"))
+
+
+def test_ns_abel_manifest_rows_record_a1_a3_and_kappa_without_promotion(
+    generated_payloads: dict[str, dict[str, object]],
+) -> None:
+    rows = generated_payloads[CANONICAL_BASENAME]["rows"]
+    assert isinstance(rows, list)
+    rows_by_lemma = {row["lemma"]: row for row in rows}
+
+    expected_rows = {
+        "Missing-math master: NS A1/A3 Abel stationarity": (
+            "DASHI/Physics/Closure/NSSereginESSTheoremIntakeReceipt.agda",
+            "candidateAbelRateNotDerived",
+            "open",
+        ),
+        "Missing-math master: NS A5 kappa-bias": (
+            "DASHI/Physics/Closure/NSA6A4BiasToLeakageClosureCompositeBoundary.agda",
+            "a5BiasVanishingTheoremProved",
+            "false",
+        ),
+        "Seregin/ESS A3 theorem-intake boundary": (
+            "DASHI/Physics/Closure/NSPaper1ClayTargetReceipt.agda",
+            "publishableClaimText",
+            "authority-intake-boundary",
+        ),
+    }
+
+    for lemma, (agda_file, exact_var, expected_status) in expected_rows.items():
+        row = rows_by_lemma[lemma]
+        assert row["paper"] == "Paper1 NS"
+        assert row["lemma"] == lemma
+        assert row["agda_file"] == agda_file
+        assert row["exact_var"] == exact_var
+        assert row["expected_status"] == expected_status
+        assert str(row["expected_status"]).lower() not in {"true", "proved", "promoted"}
+        assert "promotion" in str(row["governance_note"]).lower()
+        assert any(
+            marker in str(row["governance_note"]).lower()
+            for marker in ("false", "non-promoting", "unpromoted", "blocked", "blocks", "guard", "boundary")
+        )

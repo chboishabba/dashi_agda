@@ -215,10 +215,9 @@ downstream consumer chain is already typed.
 
 The decisive mathematical step is the recovery of an inner product on `V/null`
 from a norm obeying the parallelogram law. This is the point at which the paper
-should cite `JordanVonNeumann1935` from the common citation ledger. Once the
-null space has been verified to be a linear subspace and quotiented out, the
-JvN polarization identity turns the quotient norm data into a genuine inner
-product.
+cites `JordanVonNeumann1935`. Once the null space has been verified to be a
+linear subspace and quotiented out, the JvN polarization identity turns the
+quotient norm data into a genuine inner product.
 
 The reason this matters for the corpus is that "completion" is otherwise too
 ambiguous. Completion of what? Completion with respect to which norm? Why is

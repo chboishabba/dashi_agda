@@ -284,8 +284,8 @@ large-field/small-field decomposition that restores polymer summability at the
 physical scales.
 
 The precise theorem-intake chain is the following. Balaban's block-spin
-renormalization group supplies the passage to a scale where the fluctuation
-integral is controlled and the effective action is localized. The
+renormalization group (`Balaban1987`) supplies the passage to a scale where
+the fluctuation integral is controlled and the effective action is localized. The
 large-field/small-field decomposition suppresses the complementary region.
 Most importantly for the `H3a` norm, the Balaban 1988 cluster expansion
 (`Balaban1988`, Lemma 3 and equations (2.11)-(2.13), with the activity bound
@@ -505,6 +505,6 @@ continuum argument or for external review of the cited constructive inputs.
 | --- | --- | --- |
 | Section 3 identifies the finite self-adjointness and explicit fixed-lattice gap surface. | Character-expansion and constructive lattice-gauge background are cited through `Balaban1988` where used as context. | Any inference that a fixed-lattice finite gap is already the continuum physical mass gap. |
 | Section 4 isolates the uniform finite spectral-margin target conditional on domination. | Balaban/KP-style domination and polymer estimates are cited as the external constructive stress-test surface. | A repo-native first-principles proof of the full domination package in the exact strength consumed here. |
-| Theorem 5.1 states the corrected `H3a`/`H3b` continuum-transfer interface; Theorem 5.2 packages `H3a` from cited multiscale inputs. | The Balaban fluctuation-integral, large-field/small-field decomposition, and interacting reflection-positive continuum inputs used in the transfer theorem (`Balaban1988` and surrounding cited constructive work). | Any claim that DASHI has internally rederived the full Balaban multiscale transfer theorem. |
+| Theorem 5.1 states the corrected `H3a`/`H3b` continuum-transfer interface; Theorem 5.2 packages `H3a` from cited multiscale inputs. | The Balaban block-spin/effective-action, fluctuation-integral, large-field/small-field decomposition, and interacting reflection-positive continuum inputs used in the transfer theorem (`Balaban1987`, `Balaban1988`, and surrounding cited constructive work). | Any claim that DASHI has internally rederived the full Balaban multiscale transfer theorem. |
 | Lemma 5.3 derives vacuum-projection continuity from `H3a` and RP.4; Theorem 5.4 derives no spectral pollution below the finite margin. | The existence and compatibility of the reconstructed limiting vacuum are consumed through the RP/OS route. | Spectral-pollution exclusion without the stated norm-resolvent or vacuum-compatibility hypotheses. |
 | Section 6 records the RP.1-RP.4 reconstruction bridge and the Seiler-compatibility boundary; Theorem 7.1 packages the final mass-gap assembly. | Osterwalder-Schrader reconstruction (`OS1973`, `OS1975`), continuum gauge-theory authority boundaries (`Seiler1982`), and asymptotic-freedom background (`GrossWilczek1973`, `Politzer1973`). | Referee/community acceptance, Clay eligibility review, or any terminal claim beyond the candidate proof package stated here. |

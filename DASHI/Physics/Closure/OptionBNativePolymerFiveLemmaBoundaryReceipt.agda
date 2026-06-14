@@ -84,6 +84,158 @@ canonicalOptionBLemmaCodes =
   ∷ B5IntermediateBetaRGInductionWarning
   ∷ []
 
+record OptionBGateMetadata : Set where
+  field
+    gateCode :
+      OptionBLemmaCode
+
+    status :
+      String
+
+    difficulty :
+      String
+
+    promotionAllowed :
+      Bool
+
+    promotionAllowedIsFalse :
+      promotionAllowed ≡ false
+
+    clayPromotion :
+      Bool
+
+    clayPromotionIsFalse :
+      clayPromotion ≡ false
+
+    nextArtifacts :
+      List String
+
+open OptionBGateMetadata public
+
+b1GateMetadata : OptionBGateMetadata
+b1GateMetadata =
+  record
+    { gateCode =
+        B1CasimirSuppressionSU2SU3Constants
+    ; status =
+        "recorded: SU2/SU3 finite Casimir constants only"
+    ; difficulty =
+        "low: arithmetic registry boundary"
+    ; promotionAllowed =
+        false
+    ; promotionAllowedIsFalse =
+        refl
+    ; clayPromotion =
+        false
+    ; clayPromotionIsFalse =
+        refl
+    ; nextArtifacts =
+        "finite Casimir authority table"
+        ∷ "normalization comparison receipt"
+        ∷ []
+    }
+
+b2GateMetadata : OptionBGateMetadata
+b2GateMetadata =
+  record
+    { gateCode =
+        B2PolymerLocalization
+    ; status =
+        "recorded: finite carrier localization, no continuum support claim"
+    ; difficulty =
+        "medium: finite support geometry boundary"
+    ; promotionAllowed =
+        false
+    ; promotionAllowedIsFalse =
+        refl
+    ; clayPromotion =
+        false
+    ; clayPromotionIsFalse =
+        refl
+    ; nextArtifacts =
+        "polymer carrier radius ledger"
+        ∷ "boundary-diameter witness receipt"
+        ∷ []
+    }
+
+b3GateMetadata : OptionBGateMetadata
+b3GateMetadata =
+  record
+    { gateCode =
+        B3DASHIBalabanActivityBoundAndKPCondition
+    ; status =
+        "blocked: weighted KP bound fails at recorded beta"
+    ; difficulty =
+        "high: activity/KP closure remains open"
+    ; promotionAllowed =
+        false
+    ; promotionAllowedIsFalse =
+        refl
+    ; clayPromotion =
+        false
+    ; clayPromotionIsFalse =
+        refl
+    ; nextArtifacts =
+        "activity ledger audit"
+        ∷ "weighted KP margin repair target"
+        ∷ []
+    }
+
+b4GateMetadata : OptionBGateMetadata
+b4GateMetadata =
+  record
+    { gateCode =
+        B4TraceNormConvergenceFromSummability
+    ; status =
+        "recorded: summability and Cauchy criterion only"
+    ; difficulty =
+        "medium-high: operator limit construction not promoted"
+    ; promotionAllowed =
+        false
+    ; promotionAllowedIsFalse =
+        refl
+    ; clayPromotion =
+        false
+    ; clayPromotionIsFalse =
+        refl
+    ; nextArtifacts =
+        "trace-norm tail certificate"
+        ∷ "operator-limit non-promotion boundary"
+        ∷ []
+    }
+
+b5GateMetadata : OptionBGateMetadata
+b5GateMetadata =
+  record
+    { gateCode =
+        B5IntermediateBetaRGInductionWarning
+    ; status =
+        "blocked: intermediate beta below recorded KP threshold"
+    ; difficulty =
+        "very high: RG induction cannot start from open KP"
+    ; promotionAllowed =
+        false
+    ; promotionAllowedIsFalse =
+        refl
+    ; clayPromotion =
+        false
+    ; clayPromotionIsFalse =
+        refl
+    ; nextArtifacts =
+        "beta threshold escalation receipt"
+        ∷ "Balaban induction blocker index"
+        ∷ []
+    }
+
+canonicalOptionBGateMetadata : List OptionBGateMetadata
+canonicalOptionBGateMetadata =
+  b1GateMetadata
+  ∷ b2GateMetadata
+  ∷ b3GateMetadata
+  ∷ b4GateMetadata
+  ∷ b5GateMetadata
+  ∷ []
+
 data OptionBGaugeGroup : Set where
   SU2 :
     OptionBGaugeGroup
@@ -560,6 +712,12 @@ record OptionBNativePolymerFiveLemmaBoundaryReceipt : Set₁ where
     lemmaCodesAreCanonical :
       lemmaCodes ≡ canonicalOptionBLemmaCodes
 
+    gateMetadata :
+      List OptionBGateMetadata
+
+    gateMetadataAreCanonical :
+      gateMetadata ≡ canonicalOptionBGateMetadata
+
     gaugeGroups :
       List OptionBGaugeGroup
 
@@ -667,6 +825,10 @@ canonicalOptionBNativePolymerFiveLemmaBoundaryReceipt =
     { lemmaCodes =
         canonicalOptionBLemmaCodes
     ; lemmaCodesAreCanonical =
+        refl
+    ; gateMetadata =
+        canonicalOptionBGateMetadata
+    ; gateMetadataAreCanonical =
         refl
     ; gaugeGroups =
         canonicalGaugeGroups

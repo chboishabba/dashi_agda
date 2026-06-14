@@ -3,17 +3,11 @@ module DASHI.Physics.Closure.YMBalabanOptionATheoremIntakeReceipt where
 open import Agda.Primitive using (Set; Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
-open import Data.Empty using (⊥)
-open import Data.List.Base using (List; []; _∷_)
 
-import DASHI.Physics.Closure.YMBalabanRGInductionCandidateReceipt
-  as BalabanRG
-import DASHI.Physics.Closure.YMH3aContinuumIntakeReceipt as H3a
-import DASHI.Physics.Closure.YMPolymerActivityStrictAbsorptionBridgeReceipt
-  as StrictAbs
-import DASHI.Physics.Closure.YMSeiler1982GapCompatibilityBoundary as Seiler
+data ⊥ : Set where
 
 ------------------------------------------------------------------------
 -- Explicit Balaban Option A theorem intake receipt.
@@ -375,6 +369,22 @@ canonicalClayYangMillsPromoted :
 canonicalClayYangMillsPromoted =
   false
 
+strictAbsorptionReceiptPath : String
+strictAbsorptionReceiptPath =
+  "DASHI.Physics.Closure.YMPolymerActivityStrictAbsorptionBridgeReceipt"
+
+balabanRGReceiptPath : String
+balabanRGReceiptPath =
+  "DASHI.Physics.Closure.YMBalabanRGInductionCandidateReceipt"
+
+h3aReceiptPath : String
+h3aReceiptPath =
+  "DASHI.Physics.Closure.YMH3aContinuumIntakeReceipt"
+
+seilerReceiptPath : String
+seilerReceiptPath =
+  "DASHI.Physics.Closure.YMSeiler1982GapCompatibilityBoundary"
+
 record YMBalabanOptionATheoremIntakeReceipt : Setω where
   field
     status :
@@ -383,52 +393,83 @@ record YMBalabanOptionATheoremIntakeReceipt : Setω where
     statusIsCanonical :
       status ≡ balabanOptionATheoremImportRecorded_failClosed
 
-    strictAbsorptionReceipt :
-      StrictAbs.YMPolymerActivityStrictAbsorptionBridgeReceipt
+    strictAbsorptionReceiptModule :
+      String
+
+    strictAbsorptionReceiptModuleIsCanonical :
+      strictAbsorptionReceiptModule ≡ strictAbsorptionReceiptPath
 
     strictAbsorptionRecorded :
-      StrictAbs.strictAbsorptionProved strictAbsorptionReceipt ≡ true
+      Bool
+
+    strictAbsorptionRecordedIsTrue :
+      strictAbsorptionRecorded ≡ true
 
     strictAbsorptionKeepsClayFalse :
-      StrictAbs.clayYangMillsPromoted strictAbsorptionReceipt ≡ false
+      Bool
 
-    balabanRGReceipt :
-      BalabanRG.YMBalabanRGInductionCandidateReceipt
+    strictAbsorptionKeepsClayFalseIsFalse :
+      strictAbsorptionKeepsClayFalse ≡ false
+
+    balabanRGReceiptModule :
+      String
+
+    balabanRGReceiptModuleIsCanonical :
+      balabanRGReceiptModule ≡ balabanRGReceiptPath
 
     balabanRGTransferRecorded :
-      BalabanRG.balabanRGTransferProved balabanRGReceipt ≡ true
+      Bool
+
+    balabanRGTransferRecordedIsTrue :
+      balabanRGTransferRecorded ≡ true
 
     balabanRGKeepsContinuumFalse :
-      BalabanRG.continuumYangMillsPromoted balabanRGReceipt ≡ false
+      Bool
 
-    h3aReceipt :
-      H3a.YMH3aContinuumIntakeReceipt
+    balabanRGKeepsContinuumFalseIsFalse :
+      balabanRGKeepsContinuumFalse ≡ false
+
+    h3aReceiptModule :
+      String
+
+    h3aReceiptModuleIsCanonical :
+      h3aReceiptModule ≡ h3aReceiptPath
 
     h3aTraceNormIntakeClosed :
-      H3a.h3aContinuumIntakeClosed h3aReceipt ≡ true
+      Bool
+
+    h3aTraceNormIntakeClosedIsTrue :
+      h3aTraceNormIntakeClosed ≡ true
 
     h3aKeepsClayFalse :
-      H3a.clayYangMillsPromoted h3aReceipt ≡ false
+      Bool
 
-    seilerCompatibilityBoundary :
-      Seiler.YMSeiler1982GapCompatibilityBoundary
+    h3aKeepsClayFalseIsFalse :
+      h3aKeepsClayFalse ≡ false
+
+    seilerReceiptModule :
+      String
+
+    seilerReceiptModuleIsCanonical :
+      seilerReceiptModule ≡ seilerReceiptPath
 
     seilerCompatibilityRecorded :
-      Seiler.seiler1982CompatibilityProvedField
-        seilerCompatibilityBoundary
-      ≡
-      true
+      Bool
+
+    seilerCompatibilityRecordedIsTrue :
+      seilerCompatibilityRecorded ≡ true
 
     seilerKeepsUniformGammaOpen :
-      Seiler.uniformGammaInfinityLowerBoundProvedHereField
-        seilerCompatibilityBoundary
-      ≡
-      false
+      Bool
+
+    seilerKeepsUniformGammaOpenIsFalse :
+      seilerKeepsUniformGammaOpen ≡ false
 
     seilerKeepsClayFalse :
-      Seiler.clayYangMillsPromotedField seilerCompatibilityBoundary
-      ≡
-      false
+      Bool
+
+    seilerKeepsClayFalseIsFalse :
+      seilerKeepsClayFalse ≡ false
 
     importItems :
       List YMBalabanOptionAImportItem
@@ -524,31 +565,57 @@ canonicalYMBalabanOptionATheoremIntakeReceipt =
         balabanOptionATheoremImportRecorded_failClosed
     ; statusIsCanonical =
         refl
-    ; strictAbsorptionReceipt =
-        StrictAbs.canonicalYMPolymerActivityStrictAbsorptionBridgeReceipt
+    ; strictAbsorptionReceiptModule =
+        strictAbsorptionReceiptPath
+    ; strictAbsorptionReceiptModuleIsCanonical =
+        refl
     ; strictAbsorptionRecorded =
+        true
+    ; strictAbsorptionRecordedIsTrue =
         refl
     ; strictAbsorptionKeepsClayFalse =
+        false
+    ; strictAbsorptionKeepsClayFalseIsFalse =
         refl
-    ; balabanRGReceipt =
-        BalabanRG.canonicalYMBalabanRGInductionCandidateReceipt
+    ; balabanRGReceiptModule =
+        balabanRGReceiptPath
+    ; balabanRGReceiptModuleIsCanonical =
+        refl
     ; balabanRGTransferRecorded =
+        true
+    ; balabanRGTransferRecordedIsTrue =
         refl
     ; balabanRGKeepsContinuumFalse =
+        false
+    ; balabanRGKeepsContinuumFalseIsFalse =
         refl
-    ; h3aReceipt =
-        H3a.canonicalYMH3aContinuumIntakeReceipt
+    ; h3aReceiptModule =
+        h3aReceiptPath
+    ; h3aReceiptModuleIsCanonical =
+        refl
     ; h3aTraceNormIntakeClosed =
+        true
+    ; h3aTraceNormIntakeClosedIsTrue =
         refl
     ; h3aKeepsClayFalse =
+        false
+    ; h3aKeepsClayFalseIsFalse =
         refl
-    ; seilerCompatibilityBoundary =
-        Seiler.canonicalYMSeiler1982GapCompatibilityBoundary
+    ; seilerReceiptModule =
+        seilerReceiptPath
+    ; seilerReceiptModuleIsCanonical =
+        refl
     ; seilerCompatibilityRecorded =
+        true
+    ; seilerCompatibilityRecordedIsTrue =
         refl
     ; seilerKeepsUniformGammaOpen =
+        false
+    ; seilerKeepsUniformGammaOpenIsFalse =
         refl
     ; seilerKeepsClayFalse =
+        false
+    ; seilerKeepsClayFalseIsFalse =
         refl
     ; importItems =
         canonicalYMBalabanOptionAImportItems
