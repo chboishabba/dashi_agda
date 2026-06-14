@@ -141,9 +141,43 @@ BIB_ENTRIES = {
   primaryClass = {math.AP}
 }
 """,
-    "Balaban1988": """@misc{Balaban1988,
+    "Seregin2012": """@article{Seregin2012,
+  author = {Seregin, Gregory},
+  title = {A Certain Necessary Condition of Potential Blow Up for Navier-Stokes Equations},
+  journal = {Communications in Mathematical Physics},
+  volume = {312},
+  number = {3},
+  pages = {833--845},
+  year = {2012},
+  doi = {10.1007/s00220-012-1440-0}
+}
+""",
+    "ESS2003": """@article{ESS2003,
+  author = {Escauriaza, Luis and Seregin, Gregory and Sverak, Vladimir},
+  title = {Backward Uniqueness for Parabolic Equations and Regularity of Navier-Stokes Equations},
+  journal = {Russian Mathematical Surveys},
+  volume = {58},
+  number = {2},
+  pages = {211--250},
+  year = {2003},
+  doi = {10.1070/RM2003v058n02ABEH000609}
+}
+""",
+    "Balaban1987": """@article{Balaban1987,
   author = {Balaban, Tadeusz},
-  title = {Constructive Gauge Theory and Renormalization Group Estimates for Lattice Gauge Fields},
+  title = {Renormalization Group Approach to Lattice Gauge Field Theories. I. Generation of Effective Actions in a Small Field Approximation and a Coupling Constant Renormalization in Four Dimensions},
+  journal = {Communications in Mathematical Physics},
+  volume = {109},
+  pages = {249--301},
+  year = {1987}
+}
+""",
+    "Balaban1988": """@article{Balaban1988,
+  author = {Balaban, Tadeusz},
+  title = {Renormalization Group Approach to Lattice Gauge Field Theories. II. Cluster Expansions},
+  journal = {Communications in Mathematical Physics},
+  volume = {116},
+  pages = {1--22},
   year = {1988},
   note = {Cited as the Balaban 1988 Lemma 3 activity bound / constructive lattice-gauge multiscale input surface; polymer summability, trace norm transfer, and Option B deferred status are stated in the manuscript packet.}
 }
@@ -447,6 +481,7 @@ def render_bib() -> str:
     entries: list[str] = []
     if not LEDGER.exists():
         return ""
+    missing: list[str] = []
     for line in LEDGER.read_text(encoding="utf-8").splitlines():
         if not line.startswith("| `"):
             continue
@@ -457,17 +492,11 @@ def render_bib() -> str:
         if key in BIB_ENTRIES:
             entries.append(BIB_ENTRIES[key])
             continue
-        reference = cells[1]
-        note = cells[2]
-        entries.append(
-            "@misc{"
-            + key
-            + ",\n"
-            + f"  title = {{{escape_bib(reference)}}},\n"
-            + "  author = {{DASHI project}},\n"
-            + "  year = {n.d.},\n"
-            + f"  note = {{{escape_bib(note)}}}\n"
-            + "}\n"
+        missing.append(key)
+    if missing:
+        raise ValueError(
+            "Missing concrete BibTeX entries for ledger keys: "
+            + ", ".join(sorted(missing))
         )
     return "\n".join(entries)
 

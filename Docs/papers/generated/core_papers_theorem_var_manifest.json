@@ -12,7 +12,7 @@
   ],
   "compatibility_alias": false,
   "generator": "scripts/generate_paper_proof_manifest.py",
-  "row_count": 53,
+  "row_count": 77,
   "rows": [
     {
       "agda_file": "DASHI/Physics/Closure/NSPaper1ClayTargetReceipt.agda",
@@ -123,6 +123,56 @@
       "lemma": "Paper-facing NS theorem interface",
       "paper": "Paper1 NS",
       "section": "Paper 1 formal-status appendix"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSSereginESSTheoremIntakeReceipt.agda",
+      "authority": "repo-native Seregin/ESS intake and Abel-rate boundary",
+      "exact_var": "candidateAbelRateNotDerived",
+      "expected_status": "open",
+      "governance_note": "Abel stationarity remains open; governance blocks Clay and terminal promotion.",
+      "lemma": "Missing-math master: NS A1/A3 Abel stationarity",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 A1/A3 missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSA4CoareaStripPreimageCalculationBoundary.agda",
+      "authority": "repo-native A4 coarea/output-support boundary",
+      "exact_var": "A4LeiRenTianFourierOutputCouplingProved",
+      "expected_status": "false",
+      "governance_note": "Support transfer remains false as a theorem consumer; governance blocks Clay and terminal promotion.",
+      "lemma": "Missing-math master: NS A4 support transfer",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 A4 missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSA6A4BiasToLeakageClosureCompositeBoundary.agda",
+      "authority": "repo-native A4/A5/A6 bias-to-leakage boundary",
+      "exact_var": "a5BiasVanishingTheoremProved",
+      "expected_status": "false",
+      "governance_note": "A5 kappa-bias vanishing stays false as a theorem burden; governance blocks Clay and terminal promotion.",
+      "lemma": "Missing-math master: NS A5 kappa-bias",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 A5 missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSPointwiseToAbelCompositeA6Boundary.agda",
+      "authority": "repo-native A6 pointwise-to-Abel composite boundary",
+      "exact_var": "compositeA6BoundaryDoesNotProveNSClay",
+      "expected_status": "downstream-locked",
+      "governance_note": "A6 is downstream-locked behind residual monotonicity/A7 and cannot promote Clay or terminal claims.",
+      "lemma": "Missing-math master: NS A6 pointwise-to-Abel",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 A6 missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSPaper1ClayTargetReceipt.agda",
+      "authority": "external Seregin/ESS compactness intake; candidate Abel rate remains a target",
+      "exact_var": "publishableClaimText",
+      "expected_status": "authority-intake-boundary",
+      "governance_note": "Records the Seregin/ESS ancient-solution intake as support only; A3 constants and Clay promotion remain unpromoted.",
+      "lemma": "Seregin/ESS A3 theorem-intake boundary",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 A1-A3 and Appendix B"
     },
     {
       "agda_file": "DASHI/Papers/NavierStokes/TheoremInterface.agda",
@@ -246,6 +296,66 @@
     },
     {
       "agda_file": "DASHI/Physics/Closure/Paper3YMDependencyGraphReceipt.agda",
+      "authority": "external Balaban RG/polymer theorem intake for H3a",
+      "exact_var": "ym6Statement",
+      "expected_status": "authority-intake-boundary",
+      "governance_note": "Records Option A as a cited-authority intake surface only; no local Balaban theorem, mass gap, Clay, or terminal promotion follows.",
+      "lemma": "Balaban Option A theorem-intake boundary",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 5.1"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/OptionBNativePolymerFiveLemmaBoundaryReceipt.agda",
+      "authority": "repo-native Option-B gate constructor",
+      "exact_var": "B1CasimirSuppressionSU2SU3Constants",
+      "expected_status": "diagnostic",
+      "governance_note": "B1 records finite SU2/SU3 Casimir constants only; it is not a Clay authority and cannot promote Clay YM.",
+      "lemma": "Option B B1 Casimir suppression boundary",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 5.1 companion-paper boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/OptionBNativePolymerFiveLemmaBoundaryReceipt.agda",
+      "authority": "repo-native Option-B gate constructor",
+      "exact_var": "B2PolymerLocalization",
+      "expected_status": "diagnostic",
+      "governance_note": "B2 records finite carrier localization only; it supplies no continuum support theorem and cannot promote Clay YM.",
+      "lemma": "Option B B2 polymer localization boundary",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 5.1 companion-paper boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/OptionBNativePolymerFiveLemmaBoundaryReceipt.agda",
+      "authority": "repo-native Option-B gate constructor",
+      "exact_var": "B3DASHIBalabanActivityBoundAndKPCondition",
+      "expected_status": "false",
+      "governance_note": "B3 keeps the KP activity condition false; the deferred activity bound cannot be consumed as Clay YM promotion.",
+      "lemma": "Option B B3 Kotecky-Preiss activity bound",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 5.1 companion-paper boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/OptionBNativePolymerFiveLemmaBoundaryReceipt.agda",
+      "authority": "repo-native Option-B gate constructor",
+      "exact_var": "B4TraceNormConvergenceFromSummability",
+      "expected_status": "diagnostic",
+      "governance_note": "B4 records summability/Cauchy diagnostics only; it does not construct the operator limit or promote Clay YM.",
+      "lemma": "Option B B4 trace-norm consequence boundary",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 5.1 companion-paper boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/OptionBNativePolymerFiveLemmaBoundaryReceipt.agda",
+      "authority": "repo-native Option-B gate constructor",
+      "exact_var": "B5IntermediateBetaRGInductionWarning",
+      "expected_status": "false",
+      "governance_note": "B5 keeps the intermediate-beta RG induction candidate unpromoted; continuum, mass-gap, and Clay YM promotion remain blocked.",
+      "lemma": "Option B B5 intermediate-beta RG induction boundary",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 5.1 companion-paper boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/Paper3YMDependencyGraphReceipt.agda",
       "authority": "repo-native Agda receipt",
       "exact_var": "balabanRGTheoremProved",
       "expected_status": "false",
@@ -313,6 +423,56 @@
       "lemma": "YM terminal Clay guard in interface",
       "paper": "Paper3 YM",
       "section": "Paper 3 governance boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMBochnerWeitzenbockHamiltonianDominationBoundary.agda",
+      "authority": "repo-native finite Bochner-Weitzenbock domination boundary",
+      "exact_var": "noClayPromotionFromYMBochnerWeitzenbockBoundary",
+      "expected_status": "downstream-locked",
+      "governance_note": "Finite domination is locked below OS/continuum transfer; governance blocks Clay and terminal promotion.",
+      "lemma": "Missing-math master: YM finite domination",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 finite-domination missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMH3aContinuumIntakeReceipt.agda",
+      "authority": "repo-native H3a continuum intake boundary",
+      "exact_var": "ymH3aContinuumIntakeKeepsClayFalse",
+      "expected_status": "authority-intake",
+      "governance_note": "H3a is authority intake only; governance blocks Clay and terminal promotion.",
+      "lemma": "Missing-math master: YM H3a",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 H3a missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt.agda",
+      "authority": "repo-native H3b vacuum-projector boundary",
+      "exact_var": "ymH3bBoundaryPromotionImpossibleHere",
+      "expected_status": "open",
+      "governance_note": "H3b remains an open boundary before no-spectral-pollution consumers; governance blocks Clay and terminal promotion.",
+      "lemma": "Missing-math master: YM H3b",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 H3b missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMNoSpectralPollutionToOSWightmanSocketCompositeLightweightBoundary.agda",
+      "authority": "repo-native no-spectral-pollution to OS/Wightman socket",
+      "exact_var": "YMNoSpectralPollutionToOSWightmanSocketCompositeProved",
+      "expected_status": "false",
+      "governance_note": "No spectral pollution remains false as a promoted theorem; governance blocks Clay and terminal promotion.",
+      "lemma": "Missing-math master: YM no spectral pollution",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 no-spectral-pollution missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMThermodynamicOSWightmanOperatorBoundaryReceipt.agda",
+      "authority": "repo-native thermodynamic OS/Wightman operator boundary",
+      "exact_var": "YMThermodynamicOSWightmanOperatorBoundaryClosesNothing",
+      "expected_status": "downstream-locked",
+      "governance_note": "RP/OS/Wightman consumers are downstream-locked and close no Clay theorem; governance blocks terminal promotion.",
+      "lemma": "Missing-math master: YM RP/OS/Wightman",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 RP/OS/Wightman missing-math master frontier"
     },
     {
       "agda_file": "DASHI/Physics/Closure/Paper8CoreThesisReceipt.agda",
@@ -433,6 +593,86 @@
       "lemma": "U-1a-H decomposition blocker",
       "paper": "Paper8 Unification",
       "section": "Paper 8 UCT.1/U-1a-H frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationCrossTermNullityTheoremBoundary.agda",
+      "authority": "repo-native UCT exact-intake theorem boundary",
+      "exact_var": "uct1ResidualPDESpecificationRecorded",
+      "expected_status": "open",
+      "governance_note": "UCT.1 residual PDE remains an open intake burden; governance blocks Clay and terminal promotion.",
+      "lemma": "Missing-math master: UCT.1 residual PDE",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.1 missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationCrossTermNullityTheoremBoundary.agda",
+      "authority": "repo-native UCT exact-intake theorem boundary",
+      "exact_var": "uct2EllipticityOrParabolicityClassRecorded",
+      "expected_status": "open",
+      "governance_note": "UCT.2 elliptic/parabolic class remains an open intake burden; governance blocks Clay and terminal promotion.",
+      "lemma": "Missing-math master: UCT.2 operator class",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.2 missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationCrossTermNullityTheoremBoundary.agda",
+      "authority": "repo-native UCT exact-intake theorem boundary",
+      "exact_var": "uct3CarlemanUniqueContinuationRecorded",
+      "expected_status": "authority-intake",
+      "governance_note": "UCT.3 is authority intake only and does not discharge UCT.4; governance blocks Clay and terminal promotion.",
+      "lemma": "Missing-math master: UCT.3 Carleman intake",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.3 missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationCrossTermNullityTheoremBoundary.agda",
+      "authority": "repo-native UCT exact theorem-target boundary",
+      "exact_var": "uct4ActualTheoremTargetRecorded",
+      "expected_status": "open",
+      "governance_note": "UCT.4 cross-term nullity remains open; governance blocks Clay and terminal promotion.",
+      "lemma": "Missing-math master: UCT.4 cross-term nullity",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.4 missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationCrossTermNullityTheoremBoundary.agda",
+      "authority": "repo-native UCT downstream consumer boundary",
+      "exact_var": "moduloNullLinearityConsumer",
+      "expected_status": "downstream-locked",
+      "governance_note": "UCT.5 is locked downstream of UCT.4 and cannot promote Clay or terminal claims.",
+      "lemma": "Missing-math master: UCT.5 modulo-null linearity",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.5 missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationCrossTermNullityTheoremBoundary.agda",
+      "authority": "repo-native UCT downstream consumer boundary",
+      "exact_var": "fourPointConsumer",
+      "expected_status": "downstream-locked",
+      "governance_note": "UCT.6 is locked downstream of UCT.5 and cannot promote Clay or terminal claims.",
+      "lemma": "Missing-math master: UCT.6 four-point cancellation",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.6 missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationCrossTermNullityTheoremBoundary.agda",
+      "authority": "repo-native UCT downstream consumer boundary",
+      "exact_var": "parallelogramConsumer",
+      "expected_status": "downstream-locked",
+      "governance_note": "UCT.7 is locked downstream of UCT.6 and cannot promote Clay or terminal claims.",
+      "lemma": "Missing-math master: UCT.7 parallelogram",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.7 missing-math master frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationCrossTermNullityTheoremBoundary.agda",
+      "authority": "repo-native UCT downstream consumer boundary",
+      "exact_var": "jordanVonNeumannAdapterConsumer",
+      "expected_status": "downstream-locked",
+      "governance_note": "UCT.8 is locked downstream of UCT.7 and cannot promote Clay or terminal claims.",
+      "lemma": "Missing-math master: UCT.8 Jordan-von Neumann",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.8 missing-math master frontier"
     },
     {
       "agda_file": "DASHI/Physics/Closure/UnificationCrossTermNullityDiscriminantBoundary.agda",
