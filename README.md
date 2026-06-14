@@ -28,6 +28,22 @@ The broader route/lane joining plan is `Docs/support/reference/UnifiedRoutesLane
 extends the same receipt-gated architecture across physics, empirical,
 biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
 
+Current Agda/PhysLean physics-library parity context:
+the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL
+`https://chatgpt.com/c/6a2e6b6c-f4b0-83ec-b233-126757c70248` into canonical
+archive thread `95d1157fa037ad3143960e629431b1d40439396c`. The implemented
+repo response is a six-layer, fail-closed parity surface: linear
+analysis/foundations, differential geometry, Lie/gauge theory, quantum/QFT,
+GR/PDE, and theorem-ergonomics roadmap receipts. The checked modules are
+`DASHI.Foundations.PhysicsLinearAnalysisParity`,
+`DASHI.Geometry.DifferentialGeometryParity`,
+`DASHI.Algebra.LieGaugeTheoryParity`,
+`DASHI.Algebra.Quantum.QFTParitySurface`,
+`DASHI.Physics.Closure.GRPDEParityBoundary`, and
+`DASHI.Physics.Closure.AgdaPhysicsParityRoadmapReceipt`. They name reusable
+interfaces and authority blockers; they do not claim PhysLean parity, imported
+continuum theorem authority, Clay promotion, or terminal unification.
+
 Current cross-lane scope-resolution boundary: `DASHI.Promotion.ObligationIndex`
 now includes a six-row `scopeResolutionSummaries` layer. The checked surfaces
 are `DASHI.Promotion.FiniteQuantumPhysicalScopeDecision`,

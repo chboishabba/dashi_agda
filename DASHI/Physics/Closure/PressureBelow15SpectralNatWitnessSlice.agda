@@ -99,6 +99,58 @@ s8NatP3BumpHamiltonianIs3 :
 s8NatP3BumpHamiltonianIs3 =
   refl
 
+s8NatP3BumpP3LaneOccupationIs1 :
+  s8NatLaneOccupationNumber S8.s8-p3-lane s8NatP3BumpFactorVec
+  ≡
+  1
+s8NatP3BumpP3LaneOccupationIs1 =
+  refl
+
+s8NatP3BumpP5LaneOccupationIs0 :
+  s8NatLaneOccupationNumber S8.s8-p5-lane s8NatP3BumpFactorVec
+  ≡
+  0
+s8NatP3BumpP5LaneOccupationIs0 =
+  refl
+
+s8NatP3BumpP7LaneOccupationIs0 :
+  s8NatLaneOccupationNumber S8.s8-p7-lane s8NatP3BumpFactorVec
+  ≡
+  0
+s8NatP3BumpP7LaneOccupationIs0 =
+  refl
+
+s8NatP3BumpP3LaneHamiltonianIs3 :
+  s8NatLaneHamiltonianEnergy S8.s8-p3-lane s8NatP3BumpFactorVec
+  ≡
+  3
+s8NatP3BumpP3LaneHamiltonianIs3 =
+  refl
+
+s8NatP3BumpP5LaneHamiltonianIs0 :
+  s8NatLaneHamiltonianEnergy S8.s8-p5-lane s8NatP3BumpFactorVec
+  ≡
+  0
+s8NatP3BumpP5LaneHamiltonianIs0 =
+  refl
+
+s8NatP3BumpP7LaneHamiltonianIs0 :
+  s8NatLaneHamiltonianEnergy S8.s8-p7-lane s8NatP3BumpFactorVec
+  ≡
+  0
+s8NatP3BumpP7LaneHamiltonianIs0 =
+  refl
+
+s8NatP3BumpActiveLaneHamiltonianSumIs3 :
+  s8NatActiveLaneHamiltonianSum
+    (s8NatLaneHamiltonianEnergy S8.s8-p3-lane s8NatP3BumpFactorVec)
+    (s8NatLaneHamiltonianEnergy S8.s8-p5-lane s8NatP3BumpFactorVec)
+    (s8NatLaneHamiltonianEnergy S8.s8-p7-lane s8NatP3BumpFactorVec)
+  ≡
+  3
+s8NatP3BumpActiveLaneHamiltonianSumIs3 =
+  refl
+
 s8NatOne≤One :
   1 ≤ 1
 s8NatOne≤One =
@@ -464,6 +516,188 @@ s8NatSubThresholdDependency =
     s8NatPressureToGapHypotheses
     s8NatPressureEnergyCoercivityCompilerInterface
     s8NatCarrierUnitNormalization
+
+record S8NatP3BumpFiniteSpectralLowerBoundSurface : Setω where
+  field
+    witnessState :
+      GL.FactorVec
+
+    witnessStateIsP3Bump :
+      witnessState
+      ≡
+      s8NatP3BumpFactorVec
+
+    witnessStateIsNonVacuum :
+      S8NatNonVacuumFactorVec witnessState
+
+    witnessStateOrthogonalToVacuum :
+      S8NatOrthogonalToVacuum witnessState
+
+    p3LaneOccupation :
+      s8NatLaneOccupationNumber S8.s8-p3-lane witnessState
+      ≡
+      1
+
+    p5LaneOccupation :
+      s8NatLaneOccupationNumber S8.s8-p5-lane witnessState
+      ≡
+      0
+
+    p7LaneOccupation :
+      s8NatLaneOccupationNumber S8.s8-p7-lane witnessState
+      ≡
+      0
+
+    p3LaneHamiltonian :
+      s8NatLaneHamiltonianEnergy S8.s8-p3-lane witnessState
+      ≡
+      3
+
+    p5LaneHamiltonian :
+      s8NatLaneHamiltonianEnergy S8.s8-p5-lane witnessState
+      ≡
+      0
+
+    p7LaneHamiltonian :
+      s8NatLaneHamiltonianEnergy S8.s8-p7-lane witnessState
+      ≡
+      0
+
+    activeLaneHamiltonianSum :
+      s8NatActiveLaneHamiltonianSum
+        (s8NatLaneHamiltonianEnergy S8.s8-p3-lane witnessState)
+        (s8NatLaneHamiltonianEnergy S8.s8-p5-lane witnessState)
+        (s8NatLaneHamiltonianEnergy S8.s8-p7-lane witnessState)
+      ≡
+      3
+
+    globalHamiltonian :
+      s8NatHamiltonianEnergy witnessState
+      ≡
+      3
+
+    pressureNorm² :
+      s8NatPressureNorm² witnessState
+      ≡
+      3
+
+    gapUnitIsCarrierOne :
+      S8.gapUnit s8NatPressureToGapHypotheses
+      ≡
+      1
+
+    selectedPositiveLowerBound :
+      S8._≤E_
+        s8NatPressureToGapHypotheses
+        (S8.gapUnit s8NatPressureToGapHypotheses)
+        (S8.hamiltonianEnergy s8NatPressureToGapHypotheses witnessState)
+
+    subThresholdLowerBoundAtWitness :
+      S8._≤E_
+        s8NatPressureToGapHypotheses
+        (S8.gapUnit s8NatPressureToGapHypotheses)
+        (S8.hamiltonianEnergy s8NatPressureToGapHypotheses witnessState)
+
+    pressureNormDominatedByHamiltonianAtWitness :
+      s8NatPressureNorm² witnessState
+      ≤
+      s8NatHamiltonianEnergy witnessState
+
+    pressureEnergyCoerciveAtNatPackage :
+      S8.pressureEnergyCoercive s8NatPressureToGapHypotheses
+
+    carrierUnitNormalizationAtDeficitOne :
+      S8.carrierUnitNormalization
+        s8NatPressureToGapHypotheses
+        14
+        15
+        Probe.canonicalPressureDeficitIs1
+
+    spectralGapPromoted :
+      Bool
+
+    spectralGapPromotedIsFalse :
+      spectralGapPromoted ≡ false
+
+    continuumClayMassGapPromoted :
+      Bool
+
+    continuumClayMassGapPromotedIsFalse :
+      continuumClayMassGapPromoted ≡ false
+
+    lowerBoundBoundary :
+      List String
+
+open S8NatP3BumpFiniteSpectralLowerBoundSurface public
+
+canonicalS8NatP3BumpFiniteSpectralLowerBoundSurface :
+  S8NatP3BumpFiniteSpectralLowerBoundSurface
+canonicalS8NatP3BumpFiniteSpectralLowerBoundSurface =
+  record
+    { witnessState =
+        s8NatP3BumpFactorVec
+    ; witnessStateIsP3Bump =
+        refl
+    ; witnessStateIsNonVacuum =
+        p3BumpNonVacuum
+    ; witnessStateOrthogonalToVacuum =
+        p3BumpOrthogonal
+    ; p3LaneOccupation =
+        s8NatP3BumpP3LaneOccupationIs1
+    ; p5LaneOccupation =
+        s8NatP3BumpP5LaneOccupationIs0
+    ; p7LaneOccupation =
+        s8NatP3BumpP7LaneOccupationIs0
+    ; p3LaneHamiltonian =
+        s8NatP3BumpP3LaneHamiltonianIs3
+    ; p5LaneHamiltonian =
+        s8NatP3BumpP5LaneHamiltonianIs0
+    ; p7LaneHamiltonian =
+        s8NatP3BumpP7LaneHamiltonianIs0
+    ; activeLaneHamiltonianSum =
+        s8NatP3BumpActiveLaneHamiltonianSumIs3
+    ; globalHamiltonian =
+        s8NatP3BumpHamiltonianIs3
+    ; pressureNorm² =
+        s8NatP3BumpHamiltonianIs3
+    ; gapUnitIsCarrierOne =
+        refl
+    ; selectedPositiveLowerBound =
+        s8NatOne≤Three
+    ; subThresholdLowerBoundAtWitness =
+        s8NatSubThresholdLowerBound
+          14
+          15
+          Probe.fourteenBelowFifteen
+          s8NatP3BumpFactorVec
+          p3BumpNonVacuum
+          p3BumpOrthogonal
+    ; pressureNormDominatedByHamiltonianAtWitness =
+        s8NatLaneHamiltonianDominatesPressureNorm
+          s8NatP3BumpFactorVec
+          p3BumpNonVacuum
+          p3BumpOrthogonal
+    ; pressureEnergyCoerciveAtNatPackage =
+        s8NatPressureEnergyCoerciveFromCompiler
+    ; carrierUnitNormalizationAtDeficitOne =
+        s8NatCarrierUnitNormalization
+    ; spectralGapPromoted =
+        false
+    ; spectralGapPromotedIsFalse =
+        refl
+    ; continuumClayMassGapPromoted =
+        false
+    ; continuumClayMassGapPromotedIsFalse =
+        refl
+    ; lowerBoundBoundary =
+        "The concrete selected witness is the p3 FactorVec bump over the Nat zero vacuum"
+        ∷ "Lane occupation is exactly p3=1, p5=0, p7=0"
+        ∷ "Lane Hamiltonian energy is exactly p3=3, p5=0, p7=0, so the active-lane sum is 3"
+        ∷ "The package gap unit is carrier Nat 1 and the selected finite lower bound is 1 <= H(p3-bump) = 3"
+        ∷ "The witness also routes through the package sub-threshold lower-bound and pressure-energy coercivity surfaces"
+        ∷ "This is a bounded Nat finite spectral lower-bound surface only; no continuum or Clay promotion is made"
+        ∷ []
+    }
 
 s8NatCarrierQuotientHilbertSpace :
   U.HilbertSpace

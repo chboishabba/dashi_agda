@@ -5435,6 +5435,9 @@ data PostTerminalIntegrationLayer : Set where
   postTerminalGate5HilbertStonePhaseSpaceCarrierStepLayer :
     PostTerminalIntegrationLayer
 
+  postTerminalGate5HilbertStoneTraversalDomainClosureWiringLayer :
+    PostTerminalIntegrationLayer
+
   postTerminalDoplicherRobertsScopingLayer :
     PostTerminalIntegrationLayer
 
@@ -5447,6 +5450,7 @@ canonicalPostTerminalIntegrationLayers =
   ∷ postTerminalSelectedMetricAPIRefactorLayer
   ∷ postTerminalFiniteStoneYMSpectralBridgeLayer
   ∷ postTerminalGate5HilbertStonePhaseSpaceCarrierStepLayer
+  ∷ postTerminalGate5HilbertStoneTraversalDomainClosureWiringLayer
   ∷ postTerminalDoplicherRobertsScopingLayer
   ∷ []
 
@@ -5605,6 +5609,34 @@ record PostTerminalLayerIntegrationLedger : Setω₁ where
       ≡
       false
 
+    gate5HilbertStoneTraversalDomainClosureWiring :
+      Gate5Schrodinger.Gate5HilbertStoneTraversalDomainClosureWiring
+
+    gate5TraversalDomainClosureWired :
+      Gate5Schrodinger.Gate5HilbertStoneTraversalDomainClosureWiring.closureWiredThroughGate5Step
+        gate5HilbertStoneTraversalDomainClosureWiring
+      ≡
+      true
+
+    gate5FiniteTraversalDomainClosureComposed :
+      Gate5Schrodinger.Gate5HilbertStoneTraversalDomainClosureWiring.finiteTraversalDomainClosureComposed
+        gate5HilbertStoneTraversalDomainClosureWiring
+      ≡
+      true
+
+    gate5TraversalDomainPhysicalStonePromotionStillFalse :
+      Gate5Schrodinger.Gate5HilbertStoneTraversalDomainClosureWiring.physicalStonePromotion
+        gate5HilbertStoneTraversalDomainClosureWiring
+      ≡
+      false
+
+    gate5TraversalDomainPhysicalGeneratorPromotionStillFalse :
+      Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.selfAdjointPhysicalGeneratorPromoted
+        (Gate5Schrodinger.Gate5HilbertStoneTraversalDomainClosureWiring.carrierStepReceipt
+          gate5HilbertStoneTraversalDomainClosureWiring)
+      ≡
+      false
+
     gate5StoneFirstRemainingTarget :
       Gate5.StoneGeneratorSpectralGapRemainingTarget
 
@@ -5721,6 +5753,20 @@ canonicalPostTerminalLayerIntegrationLedger =
     ; gate5SelfAdjointPhysicalGeneratorPromotedStillFalse =
         Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.selfAdjointPhysicalGeneratorPromoted-v
           Gate5Schrodinger.gate5HilbertStonePhaseSpaceCarrierStep
+    ; gate5HilbertStoneTraversalDomainClosureWiring =
+        Gate5Schrodinger.gate5HilbertStoneTraversalDomainClosureWiring
+    ; gate5TraversalDomainClosureWired =
+        Gate5Schrodinger.Gate5HilbertStoneTraversalDomainClosureWiring.closureWiredThroughGate5Step-v
+          Gate5Schrodinger.gate5HilbertStoneTraversalDomainClosureWiring
+    ; gate5FiniteTraversalDomainClosureComposed =
+        Gate5Schrodinger.Gate5HilbertStoneTraversalDomainClosureWiring.finiteTraversalDomainClosureComposed-v
+          Gate5Schrodinger.gate5HilbertStoneTraversalDomainClosureWiring
+    ; gate5TraversalDomainPhysicalStonePromotionStillFalse =
+        Gate5Schrodinger.Gate5HilbertStoneTraversalDomainClosureWiring.physicalStonePromotion-v
+          Gate5Schrodinger.gate5HilbertStoneTraversalDomainClosureWiring
+    ; gate5TraversalDomainPhysicalGeneratorPromotionStillFalse =
+        Gate5Schrodinger.Gate5HilbertStonePhaseSpaceCarrierStep.selfAdjointPhysicalGeneratorPromoted-v
+          Gate5Schrodinger.gate5HilbertStonePhaseSpaceCarrierStep
     ; gate5StoneFirstRemainingTarget =
         Gate5.targetGlobalNoncollapsedPhysicalPhaseSpace
     ; gate5StoneFirstRemainingTargetIsGlobalNoncollapsedPhysicalPhaseSpace =
@@ -5746,6 +5792,7 @@ canonicalPostTerminalLayerIntegrationLedger =
         ∷ "Gate 4 records local tensor/W4 scoping plus selected-metric API refactor targets without W4, Candidate256, Levi-Civita, or sourced-Einstein promotion"
         ∷ "Gate 5 records a finite Stone/YM spectral bridge while the numeric inequality, physical strong continuity, and terminal promotion remain false"
         ∷ "Gate 5 consumes Gate5HilbertStonePhaseSpaceCarrierStep as the selected finite quotient carrier/domain step while physical phase-space carrier, physical Stone bundle, and self-adjoint physical generator promotion remain false"
+        ∷ "Gate 5 consumes Gate5HilbertStoneTraversalDomainClosureWiring so the selected finite quotient reversible traversal/domain closure is wired through the carrier step while physical Stone and physical generator promotion remain false"
         ∷ "The physical Stone frontier remains targetGlobalNoncollapsedPhysicalPhaseSpace"
         ∷ "Gate 6 records Doplicher-Roberts literature authority as scoped, not consumed; local H1-H5 evidence, DR reconstruction, and Standard Model matching remain false"
         ∷ "terminalClaimPromoted remains false"

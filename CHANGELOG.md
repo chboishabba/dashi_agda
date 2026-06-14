@@ -6,6 +6,22 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane Agda/PhysLean physics-library parity tranche for `2026-06-14`: after
+  refreshing ChatGPT thread `Physics Library for Agda`
+  (`6a2e6b6c-f4b0-83ec-b233-126757c70248`,
+  canonical archive thread `95d1157fa037ad3143960e629431b1d40439396c`), adds
+  `DASHI.Foundations.PhysicsLinearAnalysisParity`,
+  `DASHI.Geometry.DifferentialGeometryParity`,
+  `DASHI.Algebra.LieGaugeTheoryParity`,
+  `DASHI.Algebra.Quantum.QFTParitySurface`,
+  `DASHI.Physics.Closure.GRPDEParityBoundary`, and
+  `DASHI.Physics.Closure.AgdaPhysicsParityRoadmapReceipt`, then wires them
+  through `DASHI.Everything`. The tranche records reusable fail-closed
+  interfaces for linear analysis, differential geometry, Lie/gauge theory,
+  QM/QFT, GR/PDE, and theorem ergonomics. It explicitly keeps PhysLean parity,
+  external continuum theorem imports, Clay promotions, and terminal
+  unification false or authority-blocked.
+
 - Six-lane Gate 3 theorem-package tranche for `2026-06-13`: adds
   `DASHI.Physics.Closure.Gate3DensityOfCarrierCoreConstructedReceipt`,
   `DASHI.Physics.Closure.Gate3MoscoRecoveryConstructedReceipt`,

@@ -18,6 +18,7 @@ import DASHI.Physics.Boundaries.ClayYMGap as ClayBoundary
 import DASHI.Physics.Boundaries.HiggsPDGBoundary as HiggsBoundary
 import DASHI.Physics.QFT.ExactSMMatchToken as ExactSM
 import DASHI.Physics.QFT.DHRThermodynamicLimit as DHRLimit
+import DASHI.Physics.QFT.Gate6FinitePrimeLaneLocalEndomorphismCategory as Gate6Finite
 import Ontology.GodelLattice as GL
 import Ontology.Hecke.FactorVecInstances as FVI
 
@@ -1081,6 +1082,120 @@ data DHRSectorBoundary : Set where
   dhrSectorBoundaryRecordedOnly :
     DHRSectorBoundary
 
+record FinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt : Setω where
+  field
+    gate6CompatibilityPayload :
+      Gate6Finite.Gate6FinitePrimeLaneCompatibilityPayload
+
+    narrowedPrimitive :
+      CarrierToPhysicsMissingPrimitiveWitness
+        missingDHRSectorCompatibility
+
+    narrowedPrimitiveIsCanonical :
+      narrowedPrimitive
+      ≡
+      missingDHRSectorCompatibilityPrimitiveWitness
+
+    gate1PrimitiveNameMatchesPayload :
+      Gate6Finite.gate1CompatibilityPrimitiveName gate6CompatibilityPayload
+      ≡
+      "missingDHRSectorCompatibilityPrimitiveWitness"
+
+    finiteRowsReadyForGate1Consumer :
+      Gate6Finite.finiteRowsReadyForGate1Consumer gate6CompatibilityPayload
+      ≡
+      true
+
+    p2QuantumNumbersAvailable :
+      Gate6Finite.finiteLaneQuantumNumbersAvailable
+        (Gate6Finite.p2QuantumNumbers gate6CompatibilityPayload)
+      ≡
+      true
+
+    p3QuantumNumbersAvailable :
+      Gate6Finite.finiteLaneQuantumNumbersAvailable
+        (Gate6Finite.p3QuantumNumbers gate6CompatibilityPayload)
+      ≡
+      true
+
+    p5QuantumNumbersAvailable :
+      Gate6Finite.finiteLaneQuantumNumbersAvailable
+        (Gate6Finite.p5QuantumNumbers gate6CompatibilityPayload)
+      ≡
+      true
+
+    finitePrimeLaneDHRCompatibilityNarrowed :
+      Bool
+
+    finitePrimeLaneDHRCompatibilityNarrowedIsTrue :
+      finitePrimeLaneDHRCompatibilityNarrowed ≡ true
+
+    arbitrarySectorCompatibilityPromoted :
+      Bool
+
+    arbitrarySectorCompatibilityPromotedIsFalse :
+      arbitrarySectorCompatibilityPromoted ≡ false
+
+    gDHRStandardModelMatchClaimed :
+      Bool
+
+    gDHRStandardModelMatchClaimedIsFalse :
+      gDHRStandardModelMatchClaimed ≡ false
+
+    exactStandardModelCarrierFunctorMatchPromoted :
+      Bool
+
+    exactStandardModelCarrierFunctorMatchPromotedIsFalse :
+      exactStandardModelCarrierFunctorMatchPromoted ≡ false
+
+    narrowingBoundary :
+      List String
+
+open FinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt public
+
+canonicalFinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt :
+  FinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt
+canonicalFinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt =
+  record
+    { gate6CompatibilityPayload =
+        Gate6Finite.canonicalGate6FinitePrimeLaneCompatibilityPayload
+    ; narrowedPrimitive =
+        missingDHRSectorCompatibilityPrimitiveWitness
+    ; narrowedPrimitiveIsCanonical =
+        refl
+    ; gate1PrimitiveNameMatchesPayload =
+        refl
+    ; finiteRowsReadyForGate1Consumer =
+        refl
+    ; p2QuantumNumbersAvailable =
+        refl
+    ; p3QuantumNumbersAvailable =
+        refl
+    ; p5QuantumNumbersAvailable =
+        refl
+    ; finitePrimeLaneDHRCompatibilityNarrowed =
+        true
+    ; finitePrimeLaneDHRCompatibilityNarrowedIsTrue =
+        refl
+    ; arbitrarySectorCompatibilityPromoted =
+        false
+    ; arbitrarySectorCompatibilityPromotedIsFalse =
+        refl
+    ; gDHRStandardModelMatchClaimed =
+        false
+    ; gDHRStandardModelMatchClaimedIsFalse =
+        refl
+    ; exactStandardModelCarrierFunctorMatchPromoted =
+        false
+    ; exactStandardModelCarrierFunctorMatchPromotedIsFalse =
+        refl
+    ; narrowingBoundary =
+        "Gate 6 finite p2/p3/p5 compatibility payload is consumed by the Gate 1 DHR compatibility surface"
+        ∷ "The missingDHRSectorCompatibilityPrimitiveWitness is narrowed only for finite prime-lane rows with available quantum numbers and local identity category laws"
+        ∷ "Arbitrary DHR sectors, G_DHR ~= G_SM, and exact Standard Model carrier-functor promotion remain false"
+        ∷ []
+    }
+
 record PrimeLaneRepresentationSemanticsReceipt : Setω where
   field
     chosenPrimeBumpSemantics :
@@ -1487,6 +1602,21 @@ record DHRSectorCompatibilityLawReceipt : Setω where
       CarrierToPhysicsMissingPrimitiveWitness
         missingDHRSectorCompatibility
 
+    finitePrimeLaneCompatibilityNarrowing :
+      FinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt
+
+    finitePrimeLaneDHRCompatibilityNarrowed :
+      Bool
+
+    finitePrimeLaneDHRCompatibilityNarrowedIsTrue :
+      finitePrimeLaneDHRCompatibilityNarrowed ≡ true
+
+    arbitrarySectorCompatibilityPromoted :
+      Bool
+
+    arbitrarySectorCompatibilityPromotedIsFalse :
+      arbitrarySectorCompatibilityPromoted ≡ false
+
 open DHRSectorCompatibilityLawReceipt public
 
 canonicalDHRSectorCompatibilityLawReceipt :
@@ -1503,6 +1633,16 @@ canonicalDHRSectorCompatibilityLawReceipt =
         refl
     ; dhrCompatibilityProof =
         missingDHRSectorCompatibilityPrimitiveWitness
+    ; finitePrimeLaneCompatibilityNarrowing =
+        canonicalFinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt
+    ; finitePrimeLaneDHRCompatibilityNarrowed =
+        true
+    ; finitePrimeLaneDHRCompatibilityNarrowedIsTrue =
+        refl
+    ; arbitrarySectorCompatibilityPromoted =
+        false
+    ; arbitrarySectorCompatibilityPromotedIsFalse =
+        refl
     }
 
 record CarrierToPhysicsFunctorLawReceiptSurface : Setω where
@@ -2573,6 +2713,15 @@ record Gate1FilteredColimitDHRCompatibilityTrancheReceipt : Setω where
       DHRSectorCompatibilityLawReceipt.dhrCompatibilityProof
         dhrSectorCompatibilitySurface
 
+    finitePrimeLaneCompatibilityNarrowing :
+      FinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt
+
+    finitePrimeLaneCompatibilityNarrowingReady :
+      FinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt.finitePrimeLaneDHRCompatibilityNarrowed
+        finitePrimeLaneCompatibilityNarrowing
+      ≡
+      true
+
     exactStandardModelCarrierFunctorMatchBlocker :
       ExactStandardModelCarrierFunctorMatchBlocker
 
@@ -2595,6 +2744,12 @@ record Gate1FilteredColimitDHRCompatibilityTrancheReceipt : Setω where
 
     dhrSectorCompatibilityPromotedIsFalse :
       dhrSectorCompatibilityPromoted ≡ false
+
+    finitePrimeLaneDHRCompatibilityNarrowed :
+      Bool
+
+    finitePrimeLaneDHRCompatibilityNarrowedIsTrue :
+      finitePrimeLaneDHRCompatibilityNarrowed ≡ true
 
     exactStandardModelCarrierFunctorMatchPromoted :
       Bool
@@ -2627,6 +2782,10 @@ canonicalGate1FilteredColimitDHRCompatibilityTrancheReceipt =
         missingDHRSectorCompatibilityPrimitiveWitness
     ; dhrSectorCompatibilityPrimitiveMatchesSurface =
         refl
+    ; finitePrimeLaneCompatibilityNarrowing =
+        canonicalFinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt
+    ; finitePrimeLaneCompatibilityNarrowingReady =
+        refl
     ; exactStandardModelCarrierFunctorMatchBlocker =
         missingExactStandardModelCarrierFunctorMatch
     ; exactStandardModelCarrierFunctorMatchBlockerIsCanonical =
@@ -2641,6 +2800,10 @@ canonicalGate1FilteredColimitDHRCompatibilityTrancheReceipt =
         false
     ; dhrSectorCompatibilityPromotedIsFalse =
         refl
+    ; finitePrimeLaneDHRCompatibilityNarrowed =
+        true
+    ; finitePrimeLaneDHRCompatibilityNarrowedIsTrue =
+        refl
     ; exactStandardModelCarrierFunctorMatchPromoted =
         false
     ; exactStandardModelCarrierFunctorMatchPromotedIsFalse =
@@ -2648,7 +2811,7 @@ canonicalGate1FilteredColimitDHRCompatibilityTrancheReceipt =
     ; gate1TrancheBoundary =
         "Gate1 graph functor, prime-lane representation semantics, prime-bump covariance, and depth naturality remain inhabited"
         ∷ "Filtered-colimit preservation is attacked through the located AQFT l3/l5 receipt surfaces, then kept fail-closed because missingFiniteSupportFilteredColimitPrimitiveWitness remains open and a local left-adjoint preservation theorem is absent"
-        ∷ "DHR-sector compatibility is attacked through the located DHR local-algebra precondition audit, then kept fail-closed because DASHILocalAlgebra and arbitrary-sector semantics are absent"
+        ∷ "DHR-sector compatibility is narrowed for finite p2/p3/p5 rows by consuming the Gate 6 compatibility payload, then kept fail-closed for arbitrary sectors because DASHILocalAlgebra and arbitrary-sector semantics are absent"
         ∷ "Exact Standard Model carrier-functor matching remains the Gate1/Gate6/Gate8 blocker named missingExactStandardModelCarrierFunctorMatch"
         ∷ []
     }
@@ -2786,6 +2949,21 @@ record Gate1Gate6FinalLocalExactMatchReceipt : Setω where
       ≡
       missingDHRSectorCompatibilityPrimitiveWitness
 
+    finitePrimeLaneCompatibilityNarrowing :
+      FinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt
+
+    finitePrimeLaneCompatibilityNarrowingReady :
+      FinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt.finitePrimeLaneDHRCompatibilityNarrowed
+        finitePrimeLaneCompatibilityNarrowing
+      ≡
+      true
+
+    finitePrimeLaneDHRCompatibilityNarrowed :
+      Bool
+
+    finitePrimeLaneDHRCompatibilityNarrowedIsTrue :
+      finitePrimeLaneDHRCompatibilityNarrowed ≡ true
+
     exactStandardModelCarrierFunctorMatchBlocker :
       ExactStandardModelCarrierFunctorMatchBlocker
 
@@ -2823,6 +3001,14 @@ canonicalGate1Gate6FinalLocalExactMatchReceipt =
         missingDHRSectorCompatibilityPrimitiveWitness
     ; dhrSectorCompatibilityPrimitiveStillOpenMatchesCanonical =
         refl
+    ; finitePrimeLaneCompatibilityNarrowing =
+        canonicalFinitePrimeLaneDHRSectorCompatibilityNarrowingReceipt
+    ; finitePrimeLaneCompatibilityNarrowingReady =
+        refl
+    ; finitePrimeLaneDHRCompatibilityNarrowed =
+        true
+    ; finitePrimeLaneDHRCompatibilityNarrowedIsTrue =
+        refl
     ; exactStandardModelCarrierFunctorMatchBlocker =
         missingExactStandardModelCarrierFunctorMatch
     ; exactStandardModelCarrierFunctorMatchBlockerIsCanonical =
@@ -2833,7 +3019,7 @@ canonicalGate1Gate6FinalLocalExactMatchReceipt =
         refl
     ; finalLocalBoundary =
         "Gate1 wave-3 final-local receipt records that Gate6 supplied-witness foreign-lane identity consumption does not close Gate1 semantics"
-        ∷ "Filtered-colimit preservation and DHR-sector compatibility remain explicit missing semantic primitives, and missingExactStandardModelCarrierFunctorMatch remains canonical"
+        ∷ "Finite p2/p3/p5 DHR compatibility is narrowed by the Gate6 payload, while filtered-colimit preservation and arbitrary-sector DHR compatibility remain explicit missing semantic primitives"
         ∷ "The exact Standard Model carrier-functor match remains the canonical Gate1/Gate6/Gate8 blocker"
         ∷ "No G_DHR ~= G_SM or terminal promotion follows from this receipt"
         ∷ []
@@ -2957,8 +3143,9 @@ canonicalGate1FilteredColimitDHRSMMatchResidualFrontierReceipt =
         refl
     ; frontierBoundary =
         "Gate1 frontier keeps missingFiniteSupportFilteredColimitPrimitiveWitness and missingDHRSectorCompatibilityPrimitiveWitness as explicit missing primitives"
+        ∷ "Gate6 finite p2/p3/p5 compatibility payload narrows DHR compatibility for finite prime lanes only"
         ∷ "The exact Standard Model carrier-functor match depends on filtered-colimit preservation, left-adjoint colimit semantics, DASHI local algebra, arbitrary DHR sectors, and G_DHR/SM identification, while missingExactStandardModelCarrierFunctorMatch remains open"
-        ∷ "Gate6 supplied identity-witness consumption does not discharge Gate1 filtered-colimit or DHR-sector compatibility"
+        ∷ "Gate6 finite-lane payload consumption does not discharge Gate1 filtered-colimit preservation or arbitrary-sector DHR compatibility"
         ∷ "No G_DHR ~= G_SM claim is recorded at the Gate1 frontier; the exact-match obstruction remains named directly"
         ∷ []
     }

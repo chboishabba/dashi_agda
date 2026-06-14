@@ -15,6 +15,7 @@ import DASHI.Algebra.Clifford.UniversalProperty
 import DASHI.Algebra.ConstraintAlgebraClosure
 import DASHI.Algebra.ConstraintAlgebraClosureTests
 import DASHI.Algebra.GaugeGroupContract
+import DASHI.Algebra.LieGaugeTheoryParity
 import DASHI.Algebra.MonsterMask15
 import DASHI.Algebra.MonsterProjection15
 import DASHI.Algebra.MonsterUltrametric15
@@ -40,6 +41,7 @@ import DASHI.Algebra.Quantum.SpinEmergenceInstance
 import DASHI.Algebra.Quantum.SpinFromEvenClifford
 import DASHI.Algebra.Quantum.TreeCCR
 import DASHI.Algebra.Quantum.Unitary
+import DASHI.Algebra.Quantum.QFTParitySurface
 import DASHI.Algebra.Quantum.UVFiniteness
 import DASHI.Algebra.Quantum.UVFinitenessHolographyInstance
 import DASHI.Algebra.Quantum.UVFinitenessHolographyTests
@@ -165,6 +167,8 @@ import DASHI.Energy.TranslationInvariantMetric
 import DASHI.Execution.Contract
 import DASHI.Execution.ShiftGeometryBridge
 import DASHI.Examples.ConcreteInstances
+import DASHI.Foundations.PhysicsLinearAnalysisParity
+import DASHI.Geometry.DifferentialGeometryParity
 import DASHI.Interop.ITIRJoinBridge
 import DASHI.Interop.AggregateBidirectionalTranslationDischarge
 import DASHI.Interop.AvianCompassPNFSemanticBridge
@@ -214,6 +218,8 @@ import DASHI.Physics.Closure.NSSprint162CriticalResidualBoundaryReceipt
 import DASHI.Physics.Closure.NSSprint163TopologicalAlignmentObstructionBoundaryReceipt
 import DASHI.Physics.Closure.NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt
 import DASHI.Physics.Closure.NSSereginESSTheoremIntakeReceipt
+import DASHI.Physics.Closure.AgdaPhysicsParityRoadmapReceipt
+import DASHI.Physics.Closure.GRPDEParityBoundary
 import DASHI.Physics.Closure.ScaleLocalObservableCriterion
 import DASHI.Physics.Closure.BTBallVolumeEntropyBoundary
 import DASHI.Physics.Closure.BTBoundaryCrossSectionRows

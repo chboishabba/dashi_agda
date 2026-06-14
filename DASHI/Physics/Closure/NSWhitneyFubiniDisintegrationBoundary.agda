@@ -293,6 +293,92 @@ canonicalWhitneyFubiniDisintegrationTarget =
     Coupling.canonicalWhitneyCouplingInequalityTarget
 
 ------------------------------------------------------------------------
+-- Obligations and explicit blockers.
+
+data WhitneyFubiniDisintegrationObligation : Set where
+  constructProductAngularMeasureOnInputPairs :
+    WhitneyFubiniDisintegrationObligation
+  buildMeasurableWhitneyPacketPartitionOfUnity :
+    WhitneyFubiniDisintegrationObligation
+  proveBoundedOverlapSummabilityForPacketPartition :
+    WhitneyFubiniDisintegrationObligation
+  disintegratePhysicalProductMeasureAcrossPackets :
+    WhitneyFubiniDisintegrationObligation
+  pushPacketDisintegrationThroughPhiOutputMap :
+    WhitneyFubiniDisintegrationObligation
+  disintegrateOverFrequencyOutputPackets :
+    WhitneyFubiniDisintegrationObligation
+  discardAntipodalLowVorticityAndBoundaryExceptionalSets :
+    WhitneyFubiniDisintegrationObligation
+  proveAbelAveragingCommutesWithPacketDisintegration :
+    WhitneyFubiniDisintegrationObligation
+  consumeDisintegratedLowerBoundInWhitneyCoupling :
+    WhitneyFubiniDisintegrationObligation
+  exposeOutputSupportLowerBoundForA4 :
+    WhitneyFubiniDisintegrationObligation
+
+canonicalWhitneyFubiniDisintegrationObligations :
+  List WhitneyFubiniDisintegrationObligation
+canonicalWhitneyFubiniDisintegrationObligations =
+  constructProductAngularMeasureOnInputPairs
+  ∷ buildMeasurableWhitneyPacketPartitionOfUnity
+  ∷ proveBoundedOverlapSummabilityForPacketPartition
+  ∷ disintegratePhysicalProductMeasureAcrossPackets
+  ∷ pushPacketDisintegrationThroughPhiOutputMap
+  ∷ disintegrateOverFrequencyOutputPackets
+  ∷ discardAntipodalLowVorticityAndBoundaryExceptionalSets
+  ∷ proveAbelAveragingCommutesWithPacketDisintegration
+  ∷ consumeDisintegratedLowerBoundInWhitneyCoupling
+  ∷ exposeOutputSupportLowerBoundForA4
+  ∷ []
+
+whitneyFubiniDisintegrationObligationCount : Nat
+whitneyFubiniDisintegrationObligationCount =
+  listLength canonicalWhitneyFubiniDisintegrationObligations
+
+whitneyFubiniDisintegrationObligationCountIs10 :
+  whitneyFubiniDisintegrationObligationCount ≡ 10
+whitneyFubiniDisintegrationObligationCountIs10 =
+  refl
+
+data WhitneyFubiniDisintegrationBlocker : Set where
+  missingMeasurablePacketAtlas :
+    WhitneyFubiniDisintegrationBlocker
+  missingBoundedOverlapSummability :
+    WhitneyFubiniDisintegrationBlocker
+  missingExceptionalSetDiscard :
+    WhitneyFubiniDisintegrationBlocker
+  missingDisintegrationCompatibilityWithAbelAveraging :
+    WhitneyFubiniDisintegrationBlocker
+  missingFrequencyOutputPacketMeasurability :
+    WhitneyFubiniDisintegrationBlocker
+  missingOutputSupportLowerBoundConsumption :
+    WhitneyFubiniDisintegrationBlocker
+  missingA4WhitneyCouplingPromotion :
+    WhitneyFubiniDisintegrationBlocker
+
+canonicalWhitneyFubiniDisintegrationBlockers :
+  List WhitneyFubiniDisintegrationBlocker
+canonicalWhitneyFubiniDisintegrationBlockers =
+  missingMeasurablePacketAtlas
+  ∷ missingBoundedOverlapSummability
+  ∷ missingExceptionalSetDiscard
+  ∷ missingDisintegrationCompatibilityWithAbelAveraging
+  ∷ missingFrequencyOutputPacketMeasurability
+  ∷ missingOutputSupportLowerBoundConsumption
+  ∷ missingA4WhitneyCouplingPromotion
+  ∷ []
+
+whitneyFubiniDisintegrationBlockerCount : Nat
+whitneyFubiniDisintegrationBlockerCount =
+  listLength canonicalWhitneyFubiniDisintegrationBlockers
+
+whitneyFubiniDisintegrationBlockerCountIs7 :
+  whitneyFubiniDisintegrationBlockerCount ≡ 7
+whitneyFubiniDisintegrationBlockerCountIs7 =
+  refl
+
+------------------------------------------------------------------------
 -- Finite consumer trace narrowing missingOutputSupportLowerBoundConsumption.
 
 data WhitneyFubiniFiniteConsumerStep : Set where
@@ -384,10 +470,6 @@ record FiniteWhitneyFubiniConsumerLaw : Set where
       WhitneyFubiniDisintegrationBlocker
     narrowedBlockerIsOutputSupportConsumer :
       narrowedBlocker ≡ missingOutputSupportLowerBoundConsumption
-    keepsTheoremClosed :
-      WhitneyFubiniDisintegrationProved ≡ false
-    keepsA4Closed :
-      A4WhitneyCouplingInequalityProved ≡ false
 
 canonicalFiniteWhitneyFubiniConsumerLaw :
   FiniteWhitneyFubiniConsumerLaw
@@ -441,97 +523,7 @@ canonicalFiniteWhitneyFubiniConsumerLaw =
         missingOutputSupportLowerBoundConsumption
     ; narrowedBlockerIsOutputSupportConsumer =
         refl
-    ; keepsTheoremClosed =
-        refl
-    ; keepsA4Closed =
-        refl
     }
-
-------------------------------------------------------------------------
--- Obligations and explicit blockers.
-
-data WhitneyFubiniDisintegrationObligation : Set where
-  constructProductAngularMeasureOnInputPairs :
-    WhitneyFubiniDisintegrationObligation
-  buildMeasurableWhitneyPacketPartitionOfUnity :
-    WhitneyFubiniDisintegrationObligation
-  proveBoundedOverlapSummabilityForPacketPartition :
-    WhitneyFubiniDisintegrationObligation
-  disintegratePhysicalProductMeasureAcrossPackets :
-    WhitneyFubiniDisintegrationObligation
-  pushPacketDisintegrationThroughPhiOutputMap :
-    WhitneyFubiniDisintegrationObligation
-  disintegrateOverFrequencyOutputPackets :
-    WhitneyFubiniDisintegrationObligation
-  discardAntipodalLowVorticityAndBoundaryExceptionalSets :
-    WhitneyFubiniDisintegrationObligation
-  proveAbelAveragingCommutesWithPacketDisintegration :
-    WhitneyFubiniDisintegrationObligation
-  consumeDisintegratedLowerBoundInWhitneyCoupling :
-    WhitneyFubiniDisintegrationObligation
-  exposeOutputSupportLowerBoundForA4 :
-    WhitneyFubiniDisintegrationObligation
-
-canonicalWhitneyFubiniDisintegrationObligations :
-  List WhitneyFubiniDisintegrationObligation
-canonicalWhitneyFubiniDisintegrationObligations =
-  constructProductAngularMeasureOnInputPairs
-  ∷ buildMeasurableWhitneyPacketPartitionOfUnity
-  ∷ proveBoundedOverlapSummabilityForPacketPartition
-  ∷ disintegratePhysicalProductMeasureAcrossPackets
-  ∷ pushPacketDisintegrationThroughPhiOutputMap
-  ∷ disintegrateOverFrequencyOutputPackets
-  ∷ discardAntipodalLowVorticityAndBoundaryExceptionalSets
-  ∷ proveAbelAveragingCommutesWithPacketDisintegration
-  ∷ consumeDisintegratedLowerBoundInWhitneyCoupling
-  ∷ exposeOutputSupportLowerBoundForA4
-  ∷ []
-
-whitneyFubiniDisintegrationObligationCount : Nat
-whitneyFubiniDisintegrationObligationCount =
-  listLength canonicalWhitneyFubiniDisintegrationObligations
-
-whitneyFubiniDisintegrationObligationCountIs10 :
-  whitneyFubiniDisintegrationObligationCount ≡ 10
-whitneyFubiniDisintegrationObligationCountIs10 =
-  refl
-
-data WhitneyFubiniDisintegrationBlocker : Set where
-  missingMeasurablePacketAtlas :
-    WhitneyFubiniDisintegrationBlocker
-  missingBoundedOverlapSummability :
-    WhitneyFubiniDisintegrationBlocker
-  missingExceptionalSetDiscard :
-    WhitneyFubiniDisintegrationBlocker
-  missingDisintegrationCompatibilityWithAbelAveraging :
-    WhitneyFubiniDisintegrationBlocker
-  missingFrequencyOutputPacketMeasurability :
-    WhitneyFubiniDisintegrationBlocker
-  missingOutputSupportLowerBoundConsumption :
-    WhitneyFubiniDisintegrationBlocker
-  missingA4WhitneyCouplingPromotion :
-    WhitneyFubiniDisintegrationBlocker
-
-canonicalWhitneyFubiniDisintegrationBlockers :
-  List WhitneyFubiniDisintegrationBlocker
-canonicalWhitneyFubiniDisintegrationBlockers =
-  missingMeasurablePacketAtlas
-  ∷ missingBoundedOverlapSummability
-  ∷ missingExceptionalSetDiscard
-  ∷ missingDisintegrationCompatibilityWithAbelAveraging
-  ∷ missingFrequencyOutputPacketMeasurability
-  ∷ missingOutputSupportLowerBoundConsumption
-  ∷ missingA4WhitneyCouplingPromotion
-  ∷ []
-
-whitneyFubiniDisintegrationBlockerCount : Nat
-whitneyFubiniDisintegrationBlockerCount =
-  listLength canonicalWhitneyFubiniDisintegrationBlockers
-
-whitneyFubiniDisintegrationBlockerCountIs7 :
-  whitneyFubiniDisintegrationBlockerCount ≡ 7
-whitneyFubiniDisintegrationBlockerCountIs7 =
-  refl
 
 data WhitneyFubiniDisintegrationStatusRow : Set where
   childBoundaryRecordedStatus :
@@ -552,6 +544,8 @@ data WhitneyFubiniDisintegrationStatusRow : Set where
     WhitneyFubiniDisintegrationStatusRow
   outputSupportLowerBoundConsumerRecordedStatus :
     WhitneyFubiniDisintegrationStatusRow
+  finiteConsumerLawRecordedStatus :
+    WhitneyFubiniDisintegrationStatusRow
   allProofAndPromotionFlagsRemainFalseStatus :
     WhitneyFubiniDisintegrationStatusRow
 
@@ -567,6 +561,7 @@ canonicalWhitneyFubiniDisintegrationStatusRows =
   ∷ exceptionalNullSetRoutingRecordedStatus
   ∷ AbelCompatibilityRecordedStatus
   ∷ outputSupportLowerBoundConsumerRecordedStatus
+  ∷ finiteConsumerLawRecordedStatus
   ∷ allProofAndPromotionFlagsRemainFalseStatus
   ∷ []
 
@@ -574,9 +569,9 @@ whitneyFubiniDisintegrationStatusRowCount : Nat
 whitneyFubiniDisintegrationStatusRowCount =
   listLength canonicalWhitneyFubiniDisintegrationStatusRows
 
-whitneyFubiniDisintegrationStatusRowCountIs10 :
-  whitneyFubiniDisintegrationStatusRowCount ≡ 10
-whitneyFubiniDisintegrationStatusRowCountIs10 =
+whitneyFubiniDisintegrationStatusRowCountIs11 :
+  whitneyFubiniDisintegrationStatusRowCount ≡ 11
+whitneyFubiniDisintegrationStatusRowCountIs11 =
   refl
 
 ------------------------------------------------------------------------
@@ -626,6 +621,10 @@ AbelAveragingCompatibilityRecorded =
 
 outputSupportLowerBoundConsumerRecorded : Bool
 outputSupportLowerBoundConsumerRecorded =
+  true
+
+finiteWhitneyFubiniConsumerLawRecorded : Bool
+finiteWhitneyFubiniConsumerLawRecorded =
   true
 
 measurablePacketAtlasProved : Bool
@@ -719,6 +718,11 @@ recordsAbelAveragingCompatibility =
 recordsOutputSupportLowerBoundConsumer :
   outputSupportLowerBoundConsumerRecorded ≡ true
 recordsOutputSupportLowerBoundConsumer =
+  refl
+
+recordsFiniteWhitneyFubiniConsumerLaw :
+  finiteWhitneyFubiniConsumerLawRecorded ≡ true
+recordsFiniteWhitneyFubiniConsumerLaw =
   refl
 
 keepsMeasurablePacketAtlasFalse :
@@ -817,7 +821,11 @@ record NSWhitneyFubiniDisintegrationBoundary : Set where
     statusRows :
       List WhitneyFubiniDisintegrationStatusRow
     statusRowCount :
-      whitneyFubiniDisintegrationStatusRowCount ≡ 10
+      whitneyFubiniDisintegrationStatusRowCount ≡ 11
+    finiteConsumerLaw :
+      FiniteWhitneyFubiniConsumerLaw
+    finiteConsumerLawIsCanonical :
+      finiteConsumerLaw ≡ canonicalFiniteWhitneyFubiniConsumerLaw
     recordsBoundaryFlag :
       NSWhitneyFubiniDisintegrationBoundaryRecorded ≡ true
     productAngularMeasureFlag :
@@ -836,6 +844,8 @@ record NSWhitneyFubiniDisintegrationBoundary : Set where
       AbelAveragingCompatibilityRecorded ≡ true
     outputSupportConsumerFlag :
       outputSupportLowerBoundConsumerRecorded ≡ true
+    finiteConsumerLawFlag :
+      finiteWhitneyFubiniConsumerLawRecorded ≡ true
     measurablePacketAtlasStillFalse :
       measurablePacketAtlasProved ≡ false
     boundedOverlapSummabilityStillFalse :
@@ -897,6 +907,10 @@ canonicalNSWhitneyFubiniDisintegrationBoundary =
         canonicalWhitneyFubiniDisintegrationStatusRows
     ; statusRowCount =
         refl
+    ; finiteConsumerLaw =
+        canonicalFiniteWhitneyFubiniConsumerLaw
+    ; finiteConsumerLawIsCanonical =
+        refl
     ; recordsBoundaryFlag =
         refl
     ; productAngularMeasureFlag =
@@ -914,6 +928,8 @@ canonicalNSWhitneyFubiniDisintegrationBoundary =
     ; AbelCompatibilityFlag =
         refl
     ; outputSupportConsumerFlag =
+        refl
+    ; finiteConsumerLawFlag =
         refl
     ; measurablePacketAtlasStillFalse =
         refl

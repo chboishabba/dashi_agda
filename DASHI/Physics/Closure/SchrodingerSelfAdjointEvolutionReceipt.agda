@@ -2804,6 +2804,271 @@ gate5HilbertStonePhaseSpaceCarrierStep =
         ∷ []
     }
 
+record Gate5HilbertStoneTraversalDomainClosureWiring : Setω where
+  field
+    carrierStepReceipt :
+      Gate5HilbertStonePhaseSpaceCarrierStep
+
+    closureReceipt :
+      SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+
+    closureDepthSystemIsCarrierStepDepthSystem :
+      SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.depthSystem
+        closureReceipt
+      ≡
+      Gate5HilbertStonePhaseSpaceCarrierStep.finiteDepthSystem
+        carrierStepReceipt
+
+    closureGeneratorDomainTargetIsCarrierStepTarget :
+      SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+        closureReceipt
+      ≡
+      Gate5HilbertStonePhaseSpaceCarrierStep.generatorDomainTarget
+        carrierStepReceipt
+
+    closureSymmetricTargetIsCarrierStepTarget :
+      SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.symmetricGeneratorDomainTarget
+        closureReceipt
+      ≡
+      Gate5HilbertStonePhaseSpaceCarrierStep.symmetricGeneratorDomainTarget
+        carrierStepReceipt
+
+    carrierStepForwardReverseInverse :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.reverseStep
+        closureReceipt
+        d
+        n
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.forwardStep
+          closureReceipt
+          d
+          n
+          q)
+      ≡
+      q
+
+    carrierStepReverseForwardInverse :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.forwardStep
+        closureReceipt
+        d
+        n
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.reverseStep
+          closureReceipt
+          d
+          n
+          q)
+      ≡
+      q
+
+    carrierStepDepthGeneratorSelfAdjoint :
+      (d : Nat) →
+      Stone.StoneSelfAdjoint
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d)
+        (Stone.DiscreteGeneratorDomainTarget.generator_d
+          (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+            closureReceipt)
+          d)
+
+    carrierStepDomainClosedUnderForward :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+          closureReceipt)
+        d
+        q →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+          closureReceipt)
+        d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.forwardStep
+          closureReceipt
+          d
+          n
+          q)
+
+    carrierStepDomainClosedUnderReverse :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+          closureReceipt)
+        d
+        q →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+          closureReceipt)
+        d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.reverseStep
+          closureReceipt
+          d
+          n
+          q)
+
+    carrierStepGeneratorCommutesWithForward :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+          closureReceipt)
+        d
+        q →
+      Stone.DiscreteGeneratorDomainTarget.generator_d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+          closureReceipt)
+        d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.forwardStep
+          closureReceipt
+          d
+          n
+          q)
+      ≡
+      SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.forwardStep
+        closureReceipt
+        d
+        n
+        (Stone.DiscreteGeneratorDomainTarget.generator_d
+          (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+            closureReceipt)
+          d
+          q)
+
+    carrierStepGeneratorCommutesWithReverse :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+          closureReceipt)
+        d
+        q →
+      Stone.DiscreteGeneratorDomainTarget.generator_d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+          closureReceipt)
+        d
+        (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.reverseStep
+          closureReceipt
+          d
+          n
+          q)
+      ≡
+      SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.reverseStep
+        closureReceipt
+        d
+        n
+        (Stone.DiscreteGeneratorDomainTarget.generator_d
+          (SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainTarget
+            closureReceipt)
+          d
+          q)
+
+    closureWiredThroughGate5Step :
+      Bool
+
+    closureWiredThroughGate5Step-v :
+      closureWiredThroughGate5Step ≡ true
+
+    finiteTraversalDomainClosureComposed :
+      Bool
+
+    finiteTraversalDomainClosureComposed-v :
+      finiteTraversalDomainClosureComposed ≡ true
+
+    physicalStonePromotion :
+      Bool
+
+    physicalStonePromotion-v :
+      physicalStonePromotion ≡ false
+
+    wiringBoundary :
+      List String
+
+open Gate5HilbertStoneTraversalDomainClosureWiring public
+
+gate5HilbertStoneTraversalDomainClosureWiring :
+  Gate5HilbertStoneTraversalDomainClosureWiring
+gate5HilbertStoneTraversalDomainClosureWiring =
+  record
+    { carrierStepReceipt =
+        gate5HilbertStonePhaseSpaceCarrierStep
+    ; closureReceipt =
+        selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+    ; closureDepthSystemIsCarrierStepDepthSystem =
+        refl
+    ; closureGeneratorDomainTargetIsCarrierStepTarget =
+        refl
+    ; closureSymmetricTargetIsCarrierStepTarget =
+        refl
+    ; carrierStepForwardReverseInverse =
+        SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.forwardReverseInverse
+          selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+    ; carrierStepReverseForwardInverse =
+        SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.reverseForwardInverse
+          selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+    ; carrierStepDepthGeneratorSelfAdjoint =
+        SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.depthGeneratorSelfAdjoint
+          selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+    ; carrierStepDomainClosedUnderForward =
+        SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainClosedUnderForward
+          selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+    ; carrierStepDomainClosedUnderReverse =
+        SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorDomainClosedUnderReverse
+          selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+    ; carrierStepGeneratorCommutesWithForward =
+        SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorCommutesWithForwardOnDomain
+          selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+    ; carrierStepGeneratorCommutesWithReverse =
+        SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure.generatorCommutesWithReverseOnDomain
+          selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+    ; closureWiredThroughGate5Step =
+        true
+    ; closureWiredThroughGate5Step-v =
+        refl
+    ; finiteTraversalDomainClosureComposed =
+        true
+    ; finiteTraversalDomainClosureComposed-v =
+        refl
+    ; physicalStonePromotion =
+        false
+    ; physicalStonePromotion-v =
+        refl
+    ; wiringBoundary =
+        "Gate5HilbertStoneTraversalDomainClosureWiring composes the canonical Gate5 phase-space carrier step with its selected finite quotient reversible traversal/domain closure"
+        ∷ "The wiring exposes forward/reverse inverse laws through the Gate5 carrier-step receipt rather than as an unconnected local witness"
+        ∷ "It re-exports finite-depth StoneSelfAdjoint identity-generator evidence and forward/reverse generator-domain closure for downstream composition consumers"
+        ∷ "The selected irreversible finite advance remains outside this reversible identity closure and is not promoted to an invertible traversal"
+        ∷ "physicalStonePromotion remains false"
+        ∷ []
+    }
+
 record PhysicalTraversalStoneUpgradeData : Setω where
   field
     ProjectionAlgebra :
@@ -5366,6 +5631,9 @@ record SchrodingerSelfAdjointEvolutionReceipt
     gate5HilbertStonePhaseSpaceCarrierStepReceipt :
       Gate5HilbertStonePhaseSpaceCarrierStep
 
+    gate5HilbertStoneTraversalDomainClosureWiringReceipt :
+      Gate5HilbertStoneTraversalDomainClosureWiring
+
     selectedQuotientStrongContinuitySocketReceipt :
       SelectedQuotientStrongContinuitySocket
 
@@ -5500,6 +5768,8 @@ schrodingerSelfAdjointEvolutionReceipt quotientReceipt =
         selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
     ; gate5HilbertStonePhaseSpaceCarrierStepReceipt =
         gate5HilbertStonePhaseSpaceCarrierStep
+    ; gate5HilbertStoneTraversalDomainClosureWiringReceipt =
+        gate5HilbertStoneTraversalDomainClosureWiring
     ; selectedQuotientStrongContinuitySocketReceipt =
         selectedQuotientStrongContinuitySocket
     ; formalPhysicalReversibleShadowReceipt =
@@ -5553,6 +5823,7 @@ schrodingerSelfAdjointEvolutionReceipt quotientReceipt =
         ∷ "SelectedQuotientPostAcceptedHilbertCompletionSocket marks selected finite fourth-field progress while keeping acceptedHilbertCompletionPromoted fixed false"
         ∷ "Gate5HilbertStonePhaseSpaceCarrierStep packages the selected finite quotient carrier, projection inner product, finite depth embedding/traversal compatibility, finite-support domain, and symmetric generator-domain target as one non-promoting typed phase-space step"
         ∷ "SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure adds finite-depth reversible identity traversal laws and StoneSelfAdjoint generator-domain closure over the selected quotient projection system, without promoting the selected irreversible finite advance"
+        ∷ "Gate5HilbertStoneTraversalDomainClosureWiring composes that closure through the Gate5 carrier step and re-exports inverse, domain-closure, generator-commutation, and finite-depth StoneSelfAdjoint laws"
         ∷ "SelectedQuotientStrongContinuitySocket now pins the exact missing strong-continuity primitive against the semigroup-only selected finite advance"
         ∷ "DASHI.Quantum.Stone also supplies a one-point finite self-adjoint Hamiltonian/Stone witness with nonzero unique-point inner product"
         ∷ "That one-point witness now lifts to a reusable constant-depth identity tower: H_d is constant, iota_d is identity, U_d is identity, and depth compatibility is reflexive"

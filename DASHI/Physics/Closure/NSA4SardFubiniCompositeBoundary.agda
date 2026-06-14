@@ -63,6 +63,11 @@ record ImportedA4SardFubiniCompositeSupport : Set where
       Fubini.NSWhitneyFubiniDisintegrationBoundary
     fubiniBoundaryIsCanonical :
       fubiniBoundary ≡ Fubini.canonicalNSWhitneyFubiniDisintegrationBoundary
+    fubiniFiniteConsumerLaw :
+      Fubini.FiniteWhitneyFubiniConsumerLaw
+    fubiniFiniteConsumerLawIsCanonical :
+      fubiniFiniteConsumerLaw
+        ≡ Fubini.canonicalFiniteWhitneyFubiniConsumerLaw
     jacobianBoundary :
       Jacobian.NSPhiJacobianLowerBoundBoundary
     jacobianBoundaryIsCanonical :
@@ -83,6 +88,10 @@ record ImportedA4SardFubiniCompositeSupport : Set where
       Sard.SardRegularValueSlicingProved ≡ false
     fubiniDisintegrationStillFalse :
       Fubini.WhitneyFubiniDisintegrationProved ≡ false
+    fubiniFiniteConsumerLawRecorded :
+      Fubini.finiteWhitneyFubiniConsumerLawRecorded ≡ true
+    fubiniOutputSupportConsumerStillFalse :
+      Fubini.outputSupportLowerBoundConsumed ≡ false
     jacobianLowerBoundNowTrue :
       Jacobian.PhiJacobianLowerBoundTheoremProved ≡ true
     whitneySardFubiniStillFalse :
@@ -110,6 +119,10 @@ canonicalImportedA4SardFubiniCompositeSupport =
         Fubini.canonicalNSWhitneyFubiniDisintegrationBoundary
     ; fubiniBoundaryIsCanonical =
         refl
+    ; fubiniFiniteConsumerLaw =
+        Fubini.canonicalFiniteWhitneyFubiniConsumerLaw
+    ; fubiniFiniteConsumerLawIsCanonical =
+        refl
     ; jacobianBoundary =
         Jacobian.canonicalNSPhiJacobianLowerBoundBoundary
     ; jacobianBoundaryIsCanonical =
@@ -127,6 +140,10 @@ canonicalImportedA4SardFubiniCompositeSupport =
     ; sardRegularValueStillFalse =
         refl
     ; fubiniDisintegrationStillFalse =
+        refl
+    ; fubiniFiniteConsumerLawRecorded =
+        refl
+    ; fubiniOutputSupportConsumerStillFalse =
         refl
     ; jacobianLowerBoundNowTrue =
         refl
@@ -201,9 +218,25 @@ canonicalA4SardFubiniCompositeRoute =
     Whitney.canonicalWhitneyCouplingInequalityTarget
     A4.canonicalNSLeiRenTianFourierOutputCouplingBoundary
 
+data A4SardFubiniFiniteConsumerLawExport : Set where
+  finiteWhitneyFubiniConsumerLawFeedsA4Composite :
+    Fubini.FiniteWhitneyFubiniConsumerLaw →
+    Fubini.WhitneyFubiniDisintegrationTarget →
+    A4SardFubiniCompositeRoute →
+    A4SardFubiniFiniteConsumerLawExport
+
+canonicalA4SardFubiniFiniteConsumerLawExport :
+  A4SardFubiniFiniteConsumerLawExport
+canonicalA4SardFubiniFiniteConsumerLawExport =
+  finiteWhitneyFubiniConsumerLawFeedsA4Composite
+    Fubini.canonicalFiniteWhitneyFubiniConsumerLaw
+    Fubini.canonicalWhitneyFubiniDisintegrationTarget
+    canonicalA4SardFubiniCompositeRoute
+
 data A4SardFubiniCompositeTarget : Set where
   childSardFubiniBoundariesComposeToA4OutputSupportTransfer :
     ImportedA4SardFubiniCompositeSupport →
+    A4SardFubiniFiniteConsumerLawExport →
     A4SardFubiniCompositeRoute →
     A4SardFubiniCompositeTarget
 
@@ -212,6 +245,7 @@ canonicalA4SardFubiniCompositeTarget :
 canonicalA4SardFubiniCompositeTarget =
   childSardFubiniBoundariesComposeToA4OutputSupportTransfer
     canonicalImportedA4SardFubiniCompositeSupport
+    canonicalA4SardFubiniFiniteConsumerLawExport
     canonicalA4SardFubiniCompositeRoute
 
 ------------------------------------------------------------------------
@@ -306,6 +340,8 @@ A4SardFubiniCompositeBlockerCountIs9 =
 data A4SardFubiniCompositeStatusRow : Set where
   childBoundariesRecordedStatus :
     A4SardFubiniCompositeStatusRow
+  finiteWhitneyFubiniConsumerLawExportedStatus :
+    A4SardFubiniCompositeStatusRow
   dependencyChainRecordedStatus :
     A4SardFubiniCompositeStatusRow
   SardFubiniTheoremStillOpenStatus :
@@ -323,6 +359,7 @@ canonicalA4SardFubiniCompositeStatusRows :
   List A4SardFubiniCompositeStatusRow
 canonicalA4SardFubiniCompositeStatusRows =
   childBoundariesRecordedStatus
+  ∷ finiteWhitneyFubiniConsumerLawExportedStatus
   ∷ dependencyChainRecordedStatus
   ∷ SardFubiniTheoremStillOpenStatus
   ∷ WhitneyCouplingStillOpenStatus
@@ -335,9 +372,9 @@ A4SardFubiniCompositeStatusRowCount : Nat
 A4SardFubiniCompositeStatusRowCount =
   listLength canonicalA4SardFubiniCompositeStatusRows
 
-A4SardFubiniCompositeStatusRowCountIs7 :
-  A4SardFubiniCompositeStatusRowCount ≡ 7
-A4SardFubiniCompositeStatusRowCountIs7 =
+A4SardFubiniCompositeStatusRowCountIs8 :
+  A4SardFubiniCompositeStatusRowCount ≡ 8
+A4SardFubiniCompositeStatusRowCountIs8 =
   refl
 
 ------------------------------------------------------------------------
@@ -349,6 +386,10 @@ NSA4SardFubiniCompositeBoundaryRecorded =
 
 A4SardFubiniCompositeRouteRecorded : Bool
 A4SardFubiniCompositeRouteRecorded =
+  true
+
+finiteWhitneyFubiniConsumerLawConsumedByA4Composite : Bool
+finiteWhitneyFubiniConsumerLawConsumedByA4Composite =
   true
 
 SardFubiniCompositeTheoremProved : Bool
@@ -392,6 +433,11 @@ A4SardFubiniCompositePromotionImpossibleHere ()
 keepsSardFubiniCompositeFalse :
   SardFubiniCompositeTheoremProved ≡ false
 keepsSardFubiniCompositeFalse =
+  refl
+
+recordsFiniteWhitneyFubiniConsumerLawConsumption :
+  finiteWhitneyFubiniConsumerLawConsumedByA4Composite ≡ true
+recordsFiniteWhitneyFubiniConsumerLawConsumption =
   refl
 
 keepsA4WhitneyCouplingFalse :
@@ -450,6 +496,11 @@ record NSA4SardFubiniCompositeBoundary : Set where
       A4SardFubiniDependencyStageCount ≡ 7
     compositeRoute :
       A4SardFubiniCompositeRoute
+    finiteConsumerLawExport :
+      A4SardFubiniFiniteConsumerLawExport
+    finiteConsumerLawExportIsCanonical :
+      finiteConsumerLawExport
+        ≡ canonicalA4SardFubiniFiniteConsumerLawExport
     compositeTarget :
       A4SardFubiniCompositeTarget
     obligations :
@@ -463,17 +514,23 @@ record NSA4SardFubiniCompositeBoundary : Set where
     statusRows :
       List A4SardFubiniCompositeStatusRow
     statusRowCount :
-      A4SardFubiniCompositeStatusRowCount ≡ 7
+      A4SardFubiniCompositeStatusRowCount ≡ 8
     boundaryRecorded :
       NSA4SardFubiniCompositeBoundaryRecorded ≡ true
     compositeRouteRecorded :
       A4SardFubiniCompositeRouteRecorded ≡ true
+    finiteConsumerLawConsumed :
+      finiteWhitneyFubiniConsumerLawConsumedByA4Composite ≡ true
     importedAntipodalStillFalse :
       Antipodal.antipodalTubeNullMassProved ≡ false
     importedSardStillFalse :
       Sard.SardRegularValueSlicingProved ≡ false
     importedFubiniStillFalse :
       Fubini.WhitneyFubiniDisintegrationProved ≡ false
+    importedFubiniFiniteConsumerLawRecorded :
+      Fubini.finiteWhitneyFubiniConsumerLawRecorded ≡ true
+    importedFubiniOutputSupportConsumerStillFalse :
+      Fubini.outputSupportLowerBoundConsumed ≡ false
     importedJacobianNowTrue :
       Jacobian.PhiJacobianLowerBoundTheoremProved ≡ true
     importedWhitneySardFubiniStillFalse :
@@ -506,17 +563,17 @@ canonicalNSA4SardFubiniCompositeBoundary =
     { O-organization =
         "NS A4 Sard/Fubini composite owned by Closure."
     ; R-requirement =
-        "Tie antipodal discard, Sard slicing, Whitney/Fubini disintegration, and Phi-Jacobian lower bound into Whitney coupling and A4 output-support transfer."
+        "Tie antipodal discard, Sard slicing, finite Whitney/Fubini consumer law, and Phi-Jacobian lower bound into Whitney coupling and A4 output-support transfer."
     ; C-artifact =
         "DASHI.Physics.Closure.NSA4SardFubiniCompositeBoundary"
     ; S-state =
-        "Composite route recorded; all child theorems, A4, A6, NS Clay, and terminal promotion remain false."
+        "Composite route and finite Whitney/Fubini consumer-law export recorded; all child theorem, A4, A6, NS Clay, and terminal promotion flags remain false."
     ; L-lattice =
-        "antipodal discard -> regular-value slicing -> Fubini packet disintegration -> Jacobian lower bound -> Whitney coupling consumer -> A4 output support."
+        "antipodal discard -> regular-value slicing -> finite Whitney/Fubini consumer law -> Jacobian lower bound -> Whitney coupling consumer -> no-angular-collapse/A4 output support."
     ; P-proposal =
-        "Use this composite as the single normalized A4 Sard/Fubini routing surface."
+        "Use this composite as the normalized A4 Sard/Fubini routing surface that exports the finite Whitney/Fubini consumer law to the no-angular-collapse route."
     ; G-governance =
-        "Fail closed: receipts are checked, but no analytic theorem or promotion is inferred."
+        "Fail closed: the finite consumer law is consumed as a typed law only, and no analytic theorem or promotion is inferred."
     ; F-gap =
         "Missing actual Sard/Fubini theorem, Whitney overlap lower bound, A4 output-support transfer, A6 leakage identity, and Clay proof."
     ; importedSupport =
@@ -527,6 +584,10 @@ canonicalNSA4SardFubiniCompositeBoundary =
         refl
     ; compositeRoute =
         canonicalA4SardFubiniCompositeRoute
+    ; finiteConsumerLawExport =
+        canonicalA4SardFubiniFiniteConsumerLawExport
+    ; finiteConsumerLawExportIsCanonical =
+        refl
     ; compositeTarget =
         canonicalA4SardFubiniCompositeTarget
     ; obligations =
@@ -545,11 +606,17 @@ canonicalNSA4SardFubiniCompositeBoundary =
         refl
     ; compositeRouteRecorded =
         refl
+    ; finiteConsumerLawConsumed =
+        refl
     ; importedAntipodalStillFalse =
         refl
     ; importedSardStillFalse =
         refl
     ; importedFubiniStillFalse =
+        refl
+    ; importedFubiniFiniteConsumerLawRecorded =
+        refl
+    ; importedFubiniOutputSupportConsumerStillFalse =
         refl
     ; importedJacobianNowTrue =
         refl

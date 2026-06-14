@@ -85,6 +85,9 @@ record Candidate256PhysicalCalibrationExternalReceipt : Setω where
     candidate256CalibrationConstant :
       unitCarrier
 
+    physicalDimensionVector :
+      W4External.Candidate256PhysicalCalibrationDimensionVector
+
     scaleMapFactorsThroughCandidate256Surrogate :
       (q : Surrogate.Candidate256QuotientClass) →
       quotientScaleMap q
@@ -111,6 +114,9 @@ record Candidate256PhysicalCalibrationExternalReceipt : Setω where
     sourceW4AdequacyReceiptName :
       String
 
+    physicalDimensionVectorLabel :
+      String
+
     externalAuthorityBoundary :
       List String
 
@@ -132,6 +138,9 @@ candidate256ReceiptToW4ExternalReceipt receipt =
           receipt
     ; physicalUnitCarrier =
         Candidate256PhysicalCalibrationExternalReceipt.unitCarrier receipt
+    ; physicalDimensionVector =
+        Candidate256PhysicalCalibrationExternalReceipt.physicalDimensionVector
+          receipt
     ; natToUnitCalibrationMap =
         Candidate256PhysicalCalibrationExternalReceipt.scaleMap receipt
     ; calibratedQuotientScaleMap =
@@ -147,6 +156,9 @@ candidate256ReceiptToW4ExternalReceipt receipt =
           receipt
     ; physicalUnitCarrierLabel =
         "Candidate256 externally accepted physical unit carrier"
+    ; physicalDimensionVectorLabel =
+        Candidate256PhysicalCalibrationExternalReceipt.physicalDimensionVectorLabel
+          receipt
     ; natToUnitCalibrationMapLabel =
         "Candidate256 Nat-surrogate to physical-unit scale map"
     ; calibratedQuotientScaleMapLabel =
@@ -168,6 +180,8 @@ data Candidate256PhysicalCalibrationPreflightMissing : Set where
     Candidate256PhysicalCalibrationPreflightMissing
   missingScaleMap :
     Candidate256PhysicalCalibrationPreflightMissing
+  missingPhysicalDimensionVector :
+    Candidate256PhysicalCalibrationPreflightMissing
   missingCandidate256CalibrationConstant :
     Candidate256PhysicalCalibrationPreflightMissing
   missingDimensionalPreservationLaw :
@@ -185,6 +199,7 @@ canonicalCandidate256PhysicalCalibrationPreflightMissing =
   ∷ missingCandidate256PhysicalCalibrationAuthority
   ∷ missingUnitCarrier
   ∷ missingScaleMap
+  ∷ missingPhysicalDimensionVector
   ∷ missingCandidate256CalibrationConstant
   ∷ missingDimensionalPreservationLaw
   ∷ missingExternalAuthorityCitation
@@ -255,6 +270,7 @@ canonicalCandidate256PhysicalCalibrationReceiptPreflight =
         ∷ "scaleMap : Nat -> unitCarrier"
         ∷ "quotientScaleMap : Candidate256QuotientClass -> unitCarrier"
         ∷ "candidate256CalibrationConstant : unitCarrier"
+        ∷ "physicalDimensionVector : Candidate256PhysicalCalibrationDimensionVector"
         ∷ "scaleMapFactorsThroughCandidate256Surrogate : quotientScaleMap q == scaleMap (candidate256SurrogateScale q)"
         ∷ "dimensionalPreservationLaw : QuotientLawAtWitness canonicalCandidate256QuotientLaw -> Set"
         ∷ "externalAuthorityCitation : String"
