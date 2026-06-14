@@ -1,8 +1,11 @@
 module DASHI.Physics.Closure.SchwarzschildLimitCandidate where
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
+open import Data.Unit using (⊤; tt)
 
 import DASHI.Physics.Closure.DiscreteConnectionCandidateFromCRT as DCRT
 import DASHI.Physics.Closure.DiscreteEinsteinTensorCandidate as DET
@@ -195,3 +198,293 @@ schwarzschildLimitStatusIsRequestOnly :
   ≡
   requestSurfaceOnlyNoPromotion
 schwarzschildLimitStatusIsRequestOnly = refl
+
+------------------------------------------------------------------------
+-- Concrete bounded radial valuation / weak-field adapter.
+--
+-- This is intentionally weaker than SchwarzschildLimitCarrierRequest.  It
+-- supplies a checked finite radial shell carrier, a positive rational radius
+-- tag for each shell, a finite-residue radial valuation, and the first-order
+-- weak-field lapse table g_tt = 1 - 2 phi.  The "Schwarzschild" side below is
+-- only the same linear weak-field lapse shape over the same table, so the
+-- match is definitional.  It does not construct a vacuum exterior metric,
+-- Birkhoff theorem, W4 source, Ricci-zero theorem, or full metric match.
+
+data RationalRadialShell : Set where
+  shell-r2 :
+    RationalRadialShell
+  shell-r4 :
+    RationalRadialShell
+  shell-r8 :
+    RationalRadialShell
+
+record PositiveRationalRadiusTag : Set where
+  constructor positiveRationalRadius
+  field
+    numerator :
+      Nat
+
+    denominatorMinusOne :
+      Nat
+
+positiveRationalRadiusDenominator :
+  PositiveRationalRadiusTag →
+  Nat
+positiveRationalRadiusDenominator tag =
+  suc (PositiveRationalRadiusTag.denominatorMinusOne tag)
+
+oneN twoN fourN eightN : Nat
+oneN = suc zero
+twoN = suc oneN
+fourN = suc (suc twoN)
+eightN = suc (suc (suc (suc fourN)))
+
+rationalShellRadius :
+  RationalRadialShell →
+  PositiveRationalRadiusTag
+rationalShellRadius shell-r2 =
+  positiveRationalRadius twoN zero
+rationalShellRadius shell-r4 =
+  positiveRationalRadius fourN zero
+rationalShellRadius shell-r8 =
+  positiveRationalRadius eightN zero
+
+rationalShellRadiusDenominatorIsOne :
+  (shell : RationalRadialShell) →
+  positiveRationalRadiusDenominator (rationalShellRadius shell)
+  ≡
+  oneN
+rationalShellRadiusDenominatorIsOne shell-r2 = refl
+rationalShellRadiusDenominatorIsOne shell-r4 = refl
+rationalShellRadiusDenominatorIsOne shell-r8 = refl
+
+rationalShellRadialValuation :
+  RationalRadialShell →
+  NF.GRFiniteRScalar
+rationalShellRadialValuation shell-r2 =
+  NF.r2
+rationalShellRadialValuation shell-r4 =
+  NF.r0
+rationalShellRadialValuation shell-r8 =
+  NF.r0
+
+rationalShellSphericalSymmetry :
+  RationalRadialShell →
+  Set
+rationalShellSphericalSymmetry _ =
+  ⊤
+
+rationalShellSymmetryWitness :
+  (shell : RationalRadialShell) →
+  rationalShellSphericalSymmetry shell
+rationalShellSymmetryWitness _ =
+  tt
+
+rationalShellMassResidue :
+  RationalRadialShell →
+  NF.GRFiniteRScalar
+rationalShellMassResidue _ =
+  NF.r1
+
+rationalShellWeakFieldPotentialResidue :
+  RationalRadialShell →
+  NF.GRFiniteRScalar
+rationalShellWeakFieldPotentialResidue shell-r2 =
+  NF.r2
+rationalShellWeakFieldPotentialResidue shell-r4 =
+  NF.r1
+rationalShellWeakFieldPotentialResidue shell-r8 =
+  NF.r3
+
+weakFieldLinearLapseResidue :
+  RationalRadialShell →
+  NF.GRFiniteRScalar
+weakFieldLinearLapseResidue shell =
+  NF.grFiniteRScalarSub
+    NF.r1
+    (NF.grFiniteRScalarMul
+      NF.r2
+      (rationalShellWeakFieldPotentialResidue shell))
+
+schwarzschildLinearLapseResidue :
+  RationalRadialShell →
+  NF.GRFiniteRScalar
+schwarzschildLinearLapseResidue shell =
+  NF.grFiniteRScalarSub
+    NF.r1
+    (NF.grFiniteRScalarMul
+      NF.r2
+      (rationalShellWeakFieldPotentialResidue shell))
+
+rationalShellWeakFieldLapseMatchesSchwarzschildLinearLapse :
+  (shell : RationalRadialShell) →
+  weakFieldLinearLapseResidue shell
+  ≡
+  schwarzschildLinearLapseResidue shell
+rationalShellWeakFieldLapseMatchesSchwarzschildLinearLapse _ =
+  refl
+
+weakFieldLinearLapseAtR2IsR1 :
+  weakFieldLinearLapseResidue shell-r2
+  ≡
+  NF.r1
+weakFieldLinearLapseAtR2IsR1 =
+  refl
+
+weakFieldLinearLapseAtR4IsR3 :
+  weakFieldLinearLapseResidue shell-r4
+  ≡
+  NF.r3
+weakFieldLinearLapseAtR4IsR3 =
+  refl
+
+weakFieldLinearLapseAtR8IsR3 :
+  weakFieldLinearLapseResidue shell-r8
+  ≡
+  NF.r3
+weakFieldLinearLapseAtR8IsR3 =
+  refl
+
+record RationalShellWeakFieldMatchAdapter : Set₁ where
+  field
+    scalarSurface :
+      NF.GRCarrierScalarOperations
+
+    scalarSurfaceIsCanonicalFiniteR :
+      scalarSurface
+      ≡
+      NF.canonicalGRFiniteRCarrierScalarOperations
+
+    Carrier :
+      Set
+
+    radiusTag :
+      Carrier →
+      PositiveRationalRadiusTag
+
+    radiusDenominatorNonZeroByConstruction :
+      (x : Carrier) →
+      positiveRationalRadiusDenominator (radiusTag x)
+      ≡
+      oneN
+
+    radialValuation :
+      Carrier →
+      NF.GRFiniteRScalar
+
+    sphericalSymmetryPredicate :
+      Carrier →
+      Set
+
+    sphericalSymmetryWitness :
+      (x : Carrier) →
+      sphericalSymmetryPredicate x
+
+    finiteMassParameter :
+      Carrier →
+      NF.GRFiniteRScalar
+
+    weakFieldNewtonianPotential :
+      Carrier →
+      NF.GRFiniteRScalar
+
+    weakFieldLapse :
+      Carrier →
+      NF.GRFiniteRScalar
+
+    schwarzschildLinearLapse :
+      Carrier →
+      NF.GRFiniteRScalar
+
+    weakFieldMetricMatch :
+      (x : Carrier) →
+      weakFieldLapse x
+      ≡
+      schwarzschildLinearLapse x
+
+    allLaneEinsteinZeroTableLaw :
+      DET.FactorVecSSPAllLaneContractionEinsteinTensorLaw
+
+    landedSurface :
+      List String
+
+    missingForVacuumPromotion :
+      List SchwarzschildLimitFirstMissingPrimitive
+
+    firstMissingAfterAdapter :
+      SchwarzschildLimitFirstMissingPrimitive
+
+    vacuumPromotion :
+      Bool
+
+    vacuumPromotionIsFalse :
+      vacuumPromotion ≡ false
+
+canonicalRationalShellWeakFieldMatchAdapter :
+  RationalShellWeakFieldMatchAdapter
+canonicalRationalShellWeakFieldMatchAdapter =
+  record
+    { scalarSurface =
+        NF.canonicalGRFiniteRCarrierScalarOperations
+    ; scalarSurfaceIsCanonicalFiniteR =
+        refl
+    ; Carrier =
+        RationalRadialShell
+    ; radiusTag =
+        rationalShellRadius
+    ; radiusDenominatorNonZeroByConstruction =
+        rationalShellRadiusDenominatorIsOne
+    ; radialValuation =
+        rationalShellRadialValuation
+    ; sphericalSymmetryPredicate =
+        rationalShellSphericalSymmetry
+    ; sphericalSymmetryWitness =
+        rationalShellSymmetryWitness
+    ; finiteMassParameter =
+        rationalShellMassResidue
+    ; weakFieldNewtonianPotential =
+        rationalShellWeakFieldPotentialResidue
+    ; weakFieldLapse =
+        weakFieldLinearLapseResidue
+    ; schwarzschildLinearLapse =
+        schwarzschildLinearLapseResidue
+    ; weakFieldMetricMatch =
+        rationalShellWeakFieldLapseMatchesSchwarzschildLinearLapse
+    ; allLaneEinsteinZeroTableLaw =
+        DET.canonicalFactorVecSSPAllLaneContractionEinsteinTensorLaw
+    ; landedSurface =
+        "RationalRadialShell has concrete positive rational radius tags 2/1, 4/1, and 8/1"
+        ∷ "radialValuation is a total finite-residue table into GRFiniteRScalar"
+        ∷ "sphericalSymmetryPredicate is inhabited on every bounded shell"
+        ∷ "weakFieldNewtonianPotential and g_tt = 1 - 2 phi are concrete finite-residue tables"
+        ∷ "weakFieldMetricMatch proves equality with the same Schwarzschild-linear lapse adapter by refl"
+        ∷ "The existing all-lane Einstein zero-table law is consumed only as a flat local finite algebra receipt"
+        ∷ []
+    ; missingForVacuumPromotion =
+        missingSchwarzschildMetricMatch
+        ∷ missingBirkhoffCarrierProof
+        ∷ missingW4MassSource
+        ∷ []
+    ; firstMissingAfterAdapter =
+        missingSchwarzschildMetricMatch
+    ; vacuumPromotion =
+        false
+    ; vacuumPromotionIsFalse =
+        refl
+    }
+
+rationalShellWeakFieldAdapterFirstMissingMetricMatch :
+  RationalShellWeakFieldMatchAdapter.firstMissingAfterAdapter
+    canonicalRationalShellWeakFieldMatchAdapter
+  ≡
+  missingSchwarzschildMetricMatch
+rationalShellWeakFieldAdapterFirstMissingMetricMatch =
+  refl
+
+rationalShellWeakFieldAdapterNoVacuumPromotion :
+  RationalShellWeakFieldMatchAdapter.vacuumPromotion
+    canonicalRationalShellWeakFieldMatchAdapter
+  ≡
+  false
+rationalShellWeakFieldAdapterNoVacuumPromotion =
+  refl

@@ -51,6 +51,39 @@ data ContinuumLimitMissingPrimitive : Set where
   missingW2BridgeOrObstructionResolution :
     ContinuumLimitMissingPrimitive
 
+data ConnectionConvergenceDerivativeLawStatus : Set where
+  derivativeLawSuppliedConnectionConvergenceInput :
+    ConnectionConvergenceDerivativeLawStatus
+
+  derivativeLawMissingFailClosedNoConnectionPromotion :
+    ConnectionConvergenceDerivativeLawStatus
+
+data ConnectionConvergenceMissingDerivativeLaw : Set where
+  missingFiniteCarrierMetricDerivativeConsistency :
+    ConnectionConvergenceMissingDerivativeLaw
+
+  missingInverseMetricC0Control :
+    ConnectionConvergenceMissingDerivativeLaw
+
+  missingChristoffelFormulaC0Stability :
+    ConnectionConvergenceMissingDerivativeLaw
+
+  missingFiniteDerivativeToContinuumPartialLaw :
+    ConnectionConvergenceMissingDerivativeLaw
+
+  missingConnectionErrorBoundExtraction :
+    ConnectionConvergenceMissingDerivativeLaw
+
+canonicalConnectionConvergenceMissingDerivativeLaws :
+  List ConnectionConvergenceMissingDerivativeLaw
+canonicalConnectionConvergenceMissingDerivativeLaws =
+  missingFiniteCarrierMetricDerivativeConsistency
+  ∷ missingInverseMetricC0Control
+  ∷ missingChristoffelFormulaC0Stability
+  ∷ missingFiniteDerivativeToContinuumPartialLaw
+  ∷ missingConnectionErrorBoundExtraction
+  ∷ []
+
 record ContinuumLimitEpsilonRateSurface : Setω where
   field
     DiscreteScale :
@@ -147,6 +180,198 @@ record ContinuumLimitAnalyticPrimitives
       Epsilon →
       DiscreteScale →
       Set
+
+record FiniteCarrierMetricDerivativeScheme
+  (rate : ContinuumLimitEpsilonRateSurface)
+  (primitives : ContinuumLimitAnalyticPrimitives rate)
+  : Setω where
+  open ContinuumLimitEpsilonRateSurface rate
+  open ContinuumLimitAnalyticPrimitives primitives
+
+  field
+    FiniteCarrier :
+      Set
+
+    CarrierIndex :
+      Set
+
+    carrierPoint :
+      FiniteCarrier →
+      LatticePoint
+
+    carrierEmbeddingAgrees :
+      (carrier : FiniteCarrier) →
+      ContinuumPoint
+
+    carrierEmbeddingAgreesWithLatticeEmbedding :
+      (carrier : FiniteCarrier) →
+      carrierEmbeddingAgrees carrier ≡ latticeEmbedding (carrierPoint carrier)
+
+    finiteMetricSample :
+      DiscreteScale →
+      FiniteCarrier →
+      DiscreteMetric
+
+    continuumMetricSample :
+      FiniteCarrier →
+      ContinuumMetric
+
+    finiteDerivative :
+      CarrierIndex →
+      DiscreteScale →
+      FiniteCarrier →
+      DiscreteMetric
+
+    continuumPartial :
+      CarrierIndex →
+      FiniteCarrier →
+      ContinuumMetric
+
+    derivativeErrorBound :
+      Epsilon →
+      CarrierIndex →
+      DiscreteScale →
+      FiniteCarrier →
+      Set
+
+    inverseMetricC0Control :
+      Epsilon →
+      DiscreteScale →
+      FiniteCarrier →
+      Set
+
+    metricSampleC0Bound :
+      (ε : Epsilon) →
+      (scale : DiscreteScale) →
+      (carrier : FiniteCarrier) →
+      metricErrorBound
+        ε
+        scale
+        (finiteMetricSample scale carrier)
+        (continuumMetricSample carrier)
+
+    derivativeSchemeBoundary :
+      List String
+
+record FiniteCarrierConnectionConvergenceInput
+  (rate : ContinuumLimitEpsilonRateSurface)
+  (primitives : ContinuumLimitAnalyticPrimitives rate)
+  : Setω where
+  open ContinuumLimitEpsilonRateSurface rate
+  open ContinuumLimitAnalyticPrimitives primitives
+
+  field
+    derivativeScheme :
+      FiniteCarrierMetricDerivativeScheme rate primitives
+
+    christoffelC0FromFiniteDerivativeLaw :
+      (ε : Epsilon) →
+      (scale : DiscreteScale) →
+      (discreteConnection : DiscreteConnection) →
+      (continuumConnection : ContinuumConnection) →
+      connectionErrorBound
+        ε
+        scale
+        discreteConnection
+        continuumConnection
+
+    lawStatus :
+      ConnectionConvergenceDerivativeLawStatus
+
+    lawStatusIsSupplied :
+      lawStatus ≡ derivativeLawSuppliedConnectionConvergenceInput
+
+    adapterBoundary :
+      List String
+
+finiteCarrierDerivativeSchemeConnectionErrorBound :
+  {rate : ContinuumLimitEpsilonRateSurface} →
+  {primitives : ContinuumLimitAnalyticPrimitives rate} →
+  (input : FiniteCarrierConnectionConvergenceInput rate primitives) →
+  (ε : ContinuumLimitEpsilonRateSurface.Epsilon rate) →
+  (scale : ContinuumLimitEpsilonRateSurface.DiscreteScale rate) →
+  (discreteConnection :
+    ContinuumLimitAnalyticPrimitives.DiscreteConnection primitives) →
+  (continuumConnection :
+    ContinuumLimitAnalyticPrimitives.ContinuumConnection primitives) →
+  ContinuumLimitAnalyticPrimitives.connectionErrorBound
+    primitives
+    ε
+    scale
+    discreteConnection
+    continuumConnection
+finiteCarrierDerivativeSchemeConnectionErrorBound
+  input
+  ε
+  scale
+  discreteConnection
+  continuumConnection =
+  FiniteCarrierConnectionConvergenceInput.christoffelC0FromFiniteDerivativeLaw
+    input
+    ε
+    scale
+    discreteConnection
+    continuumConnection
+
+record FiniteCarrierConnectionConvergenceFailClosedAdapter : Set where
+  field
+    adapterName :
+      String
+
+    lawStatus :
+      ConnectionConvergenceDerivativeLawStatus
+
+    lawStatusIsMissing :
+      lawStatus ≡ derivativeLawMissingFailClosedNoConnectionPromotion
+
+    exactMissingDerivativeLaws :
+      List ConnectionConvergenceMissingDerivativeLaw
+
+    exactMissingDerivativeLawsAreCanonical :
+      exactMissingDerivativeLaws
+      ≡
+      canonicalConnectionConvergenceMissingDerivativeLaws
+
+    firstMissingDerivativeLaw :
+      ConnectionConvergenceMissingDerivativeLaw
+
+    firstMissingDerivativeLawIsFiniteCarrierMetricDerivativeConsistency :
+      firstMissingDerivativeLaw
+      ≡
+      missingFiniteCarrierMetricDerivativeConsistency
+
+    requestedInput :
+      String
+
+    failClosedBoundary :
+      List String
+
+canonicalFiniteCarrierConnectionConvergenceFailClosedAdapter :
+  FiniteCarrierConnectionConvergenceFailClosedAdapter
+canonicalFiniteCarrierConnectionConvergenceFailClosedAdapter =
+  record
+    { adapterName =
+        "FiniteCarrierMetricDerivativeScheme-to-connectionErrorBound adapter"
+    ; lawStatus =
+        derivativeLawMissingFailClosedNoConnectionPromotion
+    ; lawStatusIsMissing =
+        refl
+    ; exactMissingDerivativeLaws =
+        canonicalConnectionConvergenceMissingDerivativeLaws
+    ; exactMissingDerivativeLawsAreCanonical =
+        refl
+    ; firstMissingDerivativeLaw =
+        missingFiniteCarrierMetricDerivativeConsistency
+    ; firstMissingDerivativeLawIsFiniteCarrierMetricDerivativeConsistency =
+        refl
+    ; requestedInput =
+        "A finite-carrier metric derivative consistency law proving that the sampled finite derivative scheme, inverse-metric C0 control, and Christoffel formula stability extract ContinuumLimitAnalyticPrimitives.connectionErrorBound"
+    ; failClosedBoundary =
+        "The finite carrier, sampled metric, finite derivative, continuum partial, metric C0, derivative C0, and inverse-metric C0 sockets are typed by FiniteCarrierMetricDerivativeScheme"
+        ∷ "The connection convergence adapter is inhabited only by christoffelC0FromFiniteDerivativeLaw"
+        ∷ "No Christoffel C0 convergence, connectionErrorBound, Ricci convergence, C2 GR convergence, or continuum GR theorem is constructed by the fail-closed adapter"
+        ∷ []
+    }
 
 record ContinuumLimitTheoremCandidate : Setω where
   field

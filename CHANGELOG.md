@@ -6,6 +6,47 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane surreal compactification proof-term tranche for `2026-06-15`: adds
+  `DASHI.Foundations.SurrealCompactificationQQCarrier`,
+  `DASHI.Foundations.SurrealCompactificationBalancedTernaryEmbedding`, and
+  `DASHI.Foundations.SurrealCompactificationProofTermIndex`, strengthens
+  `DASHI.Metric.AgreementSurrealGaugeBridge` with symbolic `3^-n` antitone,
+  gauge-monotone, and gauge-ultrametric proof-term receipts, and strengthens
+  `DASHI.Foundations.SurrealCompactificationTailBoundBridge` with structural
+  `kappa`, `kappa9`, truncation, and tail-shape receipts. The tranche records
+  bounded internal QQ-like arithmetic and finite tower recursion only; external
+  QQ/No/order authority, analytic interval/tail inequalities,
+  compactification error, Monster/Carnot authority, and terminal/Clay
+  promotions remain false.
+
+- Six-lane GR proof-architecture tranche for `2026-06-15`: narrows the
+  selected Christoffel/Levi-Civita, Ricci/Bianchi, convergence, and
+  Schwarzschild surfaces without promoting non-flat GR.  The tranche adds the
+  checked `GRSelectedUndoubledChristoffelLift` adapter and proves the canonical
+  selected finite-r table cannot inhabit it at the odd `2Γ = r1` slot; adds
+  reusable finite-r zero/product and contraction-zero helpers; ties the local
+  Ricci/scalar/Einstein zero table to the finite `4R`/Ricci/scalar/`2G`
+  arithmetic receipt; adds a finite-carrier derivative-scheme-to-connection
+  convergence adapter with the exact missing derivative laws; adds a bounded
+  rational-shell weak-field Schwarzschild linear-lapse adapter; and wires the
+  checked surface through `DASHI.Physics.Closure.GRProofArchitectureAggregationTest`.
+  Non-flat Levi-Civita, full contracted Bianchi promotion, continuum Ricci
+  convergence, Schwarzschild vacuum/Birkhoff, W4/Candidate256, Clay, and
+  terminal promotions remain false.
+
+- Public authority-source artifact fetch for `2026-06-15`: downloads local
+  source artifacts under `data/authority/si_metrology_20260615/` and
+  `data/authority/theorem_locators_20260615/`, adds
+  `DASHI.Promotion.DownloadedAuthorityArtifactReceipt`, and wires it through
+  `DASHI.Everything`. The receipt binds SHA-256, byte count, access date, and
+  wget provenance for the BIPM SI Brochure page/DOI/PDF artifacts, NIST
+  constants page/search/all-ASCII table, NIST ASD lines form, Moonshine source
+  notes, and Carnot source locators. It records downloaded ingestion rows for
+  the exact raw `Delta nu Cs`, `c`, and `h` text from the NIST all-ASCII table.
+  It keeps accepted SI authority tokens, NIST ASD spectral-token acceptance,
+  Monster/Moonshine proof authority, Carnot/thermodynamic theorem authority,
+  and all promotions false.
+
 - Six-lane source-locator and ordered-bridge tranche for `2026-06-14`: adds
   `DASHI.Foundations.SurrealCompactificationOrderedQQBridge`,
   `DASHI.Foundations.SurrealCompactificationTailBoundBridge`,

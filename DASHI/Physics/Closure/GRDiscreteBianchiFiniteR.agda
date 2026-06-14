@@ -7519,6 +7519,54 @@ selectedInspectedPlaceholderChristoffelDoesNotMatchDoubledIntegral :
 selectedInspectedPlaceholderChristoffelDoesNotMatchDoubledIntegral =
   λ ()
 
+record GRSelectedUndoubledChristoffelLift
+  (input : GRU4SelectedDoubledChristoffelMetricCompatibilityInput) : Set where
+  field
+    undoubledChristoffel :
+      SelectedMetric.GRSelectedFiniteRBase →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      NFScalar.GRFiniteRScalar
+
+    doublesToDoubledChristoffel :
+      (base : SelectedMetric.GRSelectedFiniteRBase) →
+      (lambda' mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+      NFScalar.grFiniteRScalarMul
+        NFScalar.r2
+        (undoubledChristoffel base lambda' mu nu)
+      ≡
+      GRU4SelectedDoubledChristoffelMetricCompatibilityInput.twoTimesChristoffel
+        input
+        base
+        lambda'
+        mu
+        nu
+
+    undoubledLowerIndexSymmetry :
+      (base : SelectedMetric.GRSelectedFiniteRBase) →
+      (lambda' mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+      undoubledChristoffel base lambda' mu nu
+      ≡
+      undoubledChristoffel base lambda' nu mu
+
+canonicalSelectedUndoubledChristoffelLiftImpossible :
+  GRSelectedUndoubledChristoffelLift
+    canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput →
+  ⊥
+canonicalSelectedUndoubledChristoffelLiftImpossible lift =
+  selectedInspectedDoubledChristoffelNoScalarHalf
+    (GRSelectedUndoubledChristoffelLift.undoubledChristoffel lift
+      SelectedMetric.selectedBase0
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial)
+    (GRSelectedUndoubledChristoffelLift.doublesToDoubledChristoffel lift
+      SelectedMetric.selectedBase0
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial)
+
 data GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessStatus : Set where
   grUpper6U3DoubledTorsionFreeClosedUniquenessBlockedNoPromotion :
     GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessStatus
@@ -7626,6 +7674,18 @@ record GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt : Setω where
         SelectedMetric.selectedRadial →
       ⊥
 
+    requiredUndoubledChristoffelLiftType :
+      Set
+
+    requiredUndoubledChristoffelLiftTypeIsCanonical :
+      requiredUndoubledChristoffelLiftType
+      ≡
+      GRSelectedUndoubledChristoffelLift doubledInput
+
+    requiredUndoubledChristoffelLiftImpossible :
+      requiredUndoubledChristoffelLiftType →
+      ⊥
+
     selectedFirstMissingLaw :
       SelectedMetric.GRSelectedNonFlatMetricFirstMissingLaw
 
@@ -7694,6 +7754,13 @@ canonicalGRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt =
         selectedInspectedPlaceholderChristoffelDoubleIsZero
     ; placeholderChristoffelDoesNotMatchDoubledIntegral =
         selectedInspectedPlaceholderChristoffelDoesNotMatchDoubledIntegral
+    ; requiredUndoubledChristoffelLiftType =
+        GRSelectedUndoubledChristoffelLift
+          canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput
+    ; requiredUndoubledChristoffelLiftTypeIsCanonical =
+        refl
+    ; requiredUndoubledChristoffelLiftImpossible =
+        canonicalSelectedUndoubledChristoffelLiftImpossible
     ; selectedFirstMissingLaw =
         SelectedMetric.GRSelectedNonFlatMetricInstanceSurface.firstMissingNonFlatLaw
           SelectedMetric.canonicalGRSelectedNonFlatMetricInstanceSurface
@@ -7718,6 +7785,7 @@ canonicalGRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt =
     ; blockerReceipt =
         "upper6 u3 reuses the selected doubled-Christoffel input and closes torsion-free lower-index symmetry for the 2*Gamma table"
         ∷ "At selectedBase0/radial/radial/radial, the doubled integral 2*Gamma value is r1"
+        ∷ "The required undoubled Christoffel lift is now typed as a carrier-level adapter, and the canonical selected instance proves that adapter is uninhabited"
         ∷ "No selected GRFiniteRScalar coefficient has double r1, so uniqueness of an actual Christoffel coefficient has no existence witness and is only vacuous at this slot"
         ∷ "The selected placeholder Christoffel table still gives 2*Gamma = r0 at the same slot, yielding the exact placeholder/integral mismatch counterexample"
         ∷ "SelectedMetric now records missingSelectedCarrierConnectionIsLeviCivita first; the selected carrierConnectionIsLeviCivita, Bianchi, Ricci, Einstein, or terminal promotion is still not produced"

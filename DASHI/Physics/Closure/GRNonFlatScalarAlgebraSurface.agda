@@ -168,6 +168,30 @@ grFiniteRScalarMultiplicativeIdentity :
   grFiniteRScalarMul r1 x ≡ x
 grFiniteRScalarMultiplicativeIdentity _ = refl
 
+grFiniteRScalarMulZeroˡ :
+  (x : GRFiniteRScalar) →
+  grFiniteRScalarMul r0 x ≡ r0
+grFiniteRScalarMulZeroˡ _ =
+  refl
+
+grFiniteRScalarMulZeroʳ :
+  (x : GRFiniteRScalar) →
+  grFiniteRScalarMul x r0 ≡ r0
+grFiniteRScalarMulZeroʳ r0 = refl
+grFiniteRScalarMulZeroʳ r1 = refl
+grFiniteRScalarMulZeroʳ r2 = refl
+grFiniteRScalarMulZeroʳ r3 = refl
+
+grFiniteRScalarSubZeroZero :
+  grFiniteRScalarSub r0 r0 ≡ r0
+grFiniteRScalarSubZeroZero =
+  refl
+
+grFiniteRScalarSumFin4Zeros :
+  grFiniteRScalarSumFin4 r0 r0 r0 r0 ≡ r0
+grFiniteRScalarSumFin4Zeros =
+  refl
+
 canonicalGRFiniteRCarrierScalarOperations :
   GRCarrierScalarOperations
 canonicalGRFiniteRCarrierScalarOperations =
@@ -1596,6 +1620,46 @@ grSelectedFiniteRContract f =
     (f coord2)
     (f coord3)
 
+grSelectedFiniteRContractZeros :
+  grSelectedFiniteRContract (λ _ → r0)
+  ≡
+  r0
+grSelectedFiniteRContractZeros =
+  grFiniteRScalarSumFin4Zeros
+
+grSelectedFiniteRZeroContract :
+  r0
+  ≡
+  grSelectedFiniteRContract (λ _ → r0)
+grSelectedFiniteRZeroContract =
+  refl
+
+grSelectedFiniteRContractPointwiseZero :
+  (f : GRFiniteRCoordinateIndex → GRFiniteRScalar) →
+  f coord0 ≡ r0 →
+  f coord1 ≡ r0 →
+  f coord2 ≡ r0 →
+  f coord3 ≡ r0 →
+  grSelectedFiniteRContract f
+  ≡
+  r0
+grSelectedFiniteRContractPointwiseZero f f0 f1 f2 f3
+  rewrite f0 | f1 | f2 | f3 =
+  grFiniteRScalarSumFin4Zeros
+
+grSelectedFiniteRZeroFromPointwiseContract :
+  (f : GRFiniteRCoordinateIndex → GRFiniteRScalar) →
+  f coord0 ≡ r0 →
+  f coord1 ≡ r0 →
+  f coord2 ≡ r0 →
+  f coord3 ≡ r0 →
+  r0
+  ≡
+  grSelectedFiniteRContract f
+grSelectedFiniteRZeroFromPointwiseContract f f0 f1 f2 f3
+  rewrite f0 | f1 | f2 | f3 =
+  refl
+
 grSelectedFiniteRChristoffelSymbol :
   GRFiniteRConnectionCarrier →
   GRFiniteRCoordinateIndex →
@@ -2151,7 +2215,47 @@ grSelectedFiniteRRicciFromCurvatureContraction :
     (λ rho →
       grSelectedFiniteRCurvatureAction rho mu rho nu)
 grSelectedFiniteRRicciFromCurvatureContraction _ _ =
-  refl
+  grSelectedFiniteRZeroContract
+
+grSelectedFiniteRScalarTraceIntegrandZero :
+  (rho : GRFiniteRCoordinateIndex) →
+  grFiniteRScalarMul
+    (grSelectedFiniteRInverseMetricComponent
+      selectedFourChartIdentityMetric
+      rho
+      rho)
+    (grSelectedFiniteRRicciComponent rho rho)
+  ≡
+  r0
+grSelectedFiniteRScalarTraceIntegrandZero coord0 = refl
+grSelectedFiniteRScalarTraceIntegrandZero coord1 = refl
+grSelectedFiniteRScalarTraceIntegrandZero coord2 = refl
+grSelectedFiniteRScalarTraceIntegrandZero coord3 = refl
+
+grSelectedFiniteRScalarTraceZeroContract :
+  grSelectedFiniteRContract
+    (λ rho →
+      grFiniteRScalarMul
+        (grSelectedFiniteRInverseMetricComponent
+          selectedFourChartIdentityMetric
+          rho
+          rho)
+        (grSelectedFiniteRRicciComponent rho rho))
+  ≡
+  r0
+grSelectedFiniteRScalarTraceZeroContract =
+  grSelectedFiniteRContractPointwiseZero
+    (λ rho →
+      grFiniteRScalarMul
+        (grSelectedFiniteRInverseMetricComponent
+          selectedFourChartIdentityMetric
+          rho
+          rho)
+        (grSelectedFiniteRRicciComponent rho rho))
+    (grSelectedFiniteRScalarTraceIntegrandZero coord0)
+    (grSelectedFiniteRScalarTraceIntegrandZero coord1)
+    (grSelectedFiniteRScalarTraceIntegrandZero coord2)
+    (grSelectedFiniteRScalarTraceIntegrandZero coord3)
 
 grSelectedFiniteRScalarCurvatureFromRicciTrace :
   grSelectedFiniteRScalarCurvatureComponent
@@ -2165,7 +2269,18 @@ grSelectedFiniteRScalarCurvatureFromRicciTrace :
           rho)
         (grSelectedFiniteRRicciComponent rho rho))
 grSelectedFiniteRScalarCurvatureFromRicciTrace =
-  refl
+  grSelectedFiniteRZeroFromPointwiseContract
+    (λ rho →
+      grFiniteRScalarMul
+        (grSelectedFiniteRInverseMetricComponent
+          selectedFourChartIdentityMetric
+          rho
+          rho)
+        (grSelectedFiniteRRicciComponent rho rho))
+    (grSelectedFiniteRScalarTraceIntegrandZero coord0)
+    (grSelectedFiniteRScalarTraceIntegrandZero coord1)
+    (grSelectedFiniteRScalarTraceIntegrandZero coord2)
+    (grSelectedFiniteRScalarTraceIntegrandZero coord3)
 
 grSelectedFiniteREinsteinTensorZeroTableLaw :
   (mu nu : GRFiniteRCoordinateIndex) →
@@ -2181,8 +2296,13 @@ grSelectedFiniteRContractedBianchiDivergenceZero :
     (λ mu → grSelectedFiniteREinsteinTensorComponent mu nu)
   ≡
   r0
-grSelectedFiniteRContractedBianchiDivergenceZero _ =
-  refl
+grSelectedFiniteRContractedBianchiDivergenceZero nu =
+  grSelectedFiniteRContractPointwiseZero
+    (λ mu → grSelectedFiniteREinsteinTensorComponent mu nu)
+    refl
+    refl
+    refl
+    refl
 
 data GRSelectedFourChartLeviCivitaBianchiEinsteinStatus : Set where
   selectedFourChartLeviCivitaBianchiEinsteinStagedNoSourcedPromotion :
