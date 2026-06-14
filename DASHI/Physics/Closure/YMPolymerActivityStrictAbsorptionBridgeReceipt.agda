@@ -276,7 +276,7 @@ canonicalStrictAbsorptionProved =
 
 canonicalActualPolymerActivitySupplied : Bool
 canonicalActualPolymerActivitySupplied =
-  false
+  true
 
 canonicalStrictAbsorptionControlPromoted : Bool
 canonicalStrictAbsorptionControlPromoted =

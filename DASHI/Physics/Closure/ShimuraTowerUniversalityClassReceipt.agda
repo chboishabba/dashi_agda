@@ -204,7 +204,7 @@ record ShimuraTowerUniversalityClassReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -304,7 +304,7 @@ canonicalShimuraTowerUniversalityClassReceipt =
     ; euclideanYMEquivalencePromotedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

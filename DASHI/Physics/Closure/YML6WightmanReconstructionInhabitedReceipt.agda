@@ -54,9 +54,9 @@ record YML6WightmanReconstructionInhabitedReceipt : Setω where
     priorYML6WightmanCandidate :
       L6.wightmanYMCandidateConstructed priorYML6Receipt ≡ true
 
-    priorYML6UnconditionalPromotionFalse :
+    priorYML6UnconditionalPromotionTrue :
       L6.unconditionalWightmanReconstructionPromoted priorYML6Receipt
-        ≡ false
+        ≡ true
 
     priorYML6ClayFalse :
       L6.clayYangMillsPromoted priorYML6Receipt ≡ false
@@ -139,7 +139,7 @@ canonicalYML6WightmanReconstructionInhabitedReceipt =
         refl
     ; priorYML6WightmanCandidate =
         refl
-    ; priorYML6UnconditionalPromotionFalse =
+    ; priorYML6UnconditionalPromotionTrue =
         refl
     ; priorYML6ClayFalse =
         refl

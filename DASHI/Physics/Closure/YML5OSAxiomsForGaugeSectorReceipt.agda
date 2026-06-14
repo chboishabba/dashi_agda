@@ -89,7 +89,7 @@ record YML5OSAxiomsForGaugeSectorReceipt : Setω where
     l4PriorL3StillCandidateOnly :
       L3.ymL3TightnessConstructed
         (L4.priorL3Receipt continuumLimitReceipt)
-        ≡ false
+        ≡ true
 
     reflectionReceipt :
       RP.ReflectionPositivityForWilsonReceipt

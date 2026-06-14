@@ -83,8 +83,8 @@ record ImportedA4SardFubiniCompositeSupport : Set where
       Sard.SardRegularValueSlicingProved ≡ false
     fubiniDisintegrationStillFalse :
       Fubini.WhitneyFubiniDisintegrationProved ≡ false
-    jacobianLowerBoundStillFalse :
-      Jacobian.PhiJacobianLowerBoundTheoremProved ≡ false
+    jacobianLowerBoundNowTrue :
+      Jacobian.PhiJacobianLowerBoundTheoremProved ≡ true
     whitneySardFubiniStillFalse :
       Whitney.SardFubiniStepProved ≡ false
     whitneyCouplingStillFalse :
@@ -128,7 +128,7 @@ canonicalImportedA4SardFubiniCompositeSupport =
         refl
     ; fubiniDisintegrationStillFalse =
         refl
-    ; jacobianLowerBoundStillFalse =
+    ; jacobianLowerBoundNowTrue =
         refl
     ; whitneySardFubiniStillFalse =
         refl
@@ -474,8 +474,8 @@ record NSA4SardFubiniCompositeBoundary : Set where
       Sard.SardRegularValueSlicingProved ≡ false
     importedFubiniStillFalse :
       Fubini.WhitneyFubiniDisintegrationProved ≡ false
-    importedJacobianStillFalse :
-      Jacobian.PhiJacobianLowerBoundTheoremProved ≡ false
+    importedJacobianNowTrue :
+      Jacobian.PhiJacobianLowerBoundTheoremProved ≡ true
     importedWhitneySardFubiniStillFalse :
       Whitney.SardFubiniStepProved ≡ false
     importedWhitneyCouplingStillFalse :
@@ -551,7 +551,7 @@ canonicalNSA4SardFubiniCompositeBoundary =
         refl
     ; importedFubiniStillFalse =
         refl
-    ; importedJacobianStillFalse =
+    ; importedJacobianNowTrue =
         refl
     ; importedWhitneySardFubiniStillFalse =
         refl

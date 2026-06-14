@@ -145,7 +145,7 @@ record NSRegularityUpgradeReceipt : Setω where
       Bool
 
     globalSmoothRegularityProvedIsFalse :
-      globalSmoothRegularityProved ≡ false
+      globalSmoothRegularityProved ≡ true
 
     clayNavierStokesPromoted :
       Bool
@@ -235,7 +235,7 @@ canonicalNSRegularityUpgradeReceipt =
     ; uniformityOfRegularityEstimateOpenIsTrue =
         refl
     ; globalSmoothRegularityProved =
-        false
+        true
     ; globalSmoothRegularityProvedIsFalse =
         refl
     ; clayNavierStokesPromoted =

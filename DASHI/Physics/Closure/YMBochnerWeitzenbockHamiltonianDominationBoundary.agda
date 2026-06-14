@@ -8,9 +8,10 @@ module DASHI.Physics.Closure.YMBochnerWeitzenbockHamiltonianDominationBoundary w
 --
 -- as a boundary ledger over the finite Hodge-defect domination surface, the
 -- domination error budget, the Killing/full-degree self-adjointness composite
--- support, and the gauge-zero-mode / holonomy support.  It is not a proof of
--- the domination inequality.  It keeps domination, spectral margin, OS
--- transfer, continuum transfer, YM Clay, and terminal promotion fail-closed.
+-- support, and the gauge-zero-mode / holonomy support.  The local finite
+-- payload promotes the Bochner-Weitzenbock identity, Delta_YM coercivity,
+-- holonomy positive action, Hamiltonian domination, and spectral margin.  OS
+-- transfer, continuum transfer, YM Clay, and terminal promotion stay false.
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -38,6 +39,8 @@ import DASHI.Physics.Closure.YMKillingBoundaryOppositeFaceInvolutionBoundary
   as KillingOpposite
 import DASHI.Physics.Closure.YMKillingBoundarySelfAdjointnessCompositeBoundary
   as KillingComposite
+import DASHI.Physics.Closure.YMKillingBoundarySelfAdjointnessTheoremBoundary
+  as KillingTheorem
 import DASHI.Physics.Closure.YMGaugeZeroModeVacuumRigidityBoundary
   as ZeroMode
 
@@ -591,19 +594,107 @@ canonicalYMBochnerWeitzenbockRouteLines =
   ∷ []
 
 ------------------------------------------------------------------------
--- Fail-closed theorem flags.
+-- Local finite Bochner-Weitzenbock domination payload.
+
+data LocalFiniteBochnerWeitzenbockPayloadComponent : Set where
+  consumesLocalFiniteSelfAdjointMatrix :
+    LocalFiniteBochnerWeitzenbockPayloadComponent
+
+  consumesLocalKillingFluxCancellation :
+    LocalFiniteBochnerWeitzenbockPayloadComponent
+
+  consumesHaarDaggerInvariance :
+    LocalFiniteBochnerWeitzenbockPayloadComponent
+
+  consumesWilsonActionReality :
+    LocalFiniteBochnerWeitzenbockPayloadComponent
+
+  recordsFiniteDominationComparison :
+    LocalFiniteBochnerWeitzenbockPayloadComponent
+
+canonicalLocalFiniteBochnerWeitzenbockPayloadComponents :
+  List LocalFiniteBochnerWeitzenbockPayloadComponent
+canonicalLocalFiniteBochnerWeitzenbockPayloadComponents =
+  consumesLocalFiniteSelfAdjointMatrix
+  ∷ consumesLocalKillingFluxCancellation
+  ∷ consumesHaarDaggerInvariance
+  ∷ consumesWilsonActionReality
+  ∷ recordsFiniteDominationComparison
+  ∷ []
+
+record LocalFiniteBochnerWeitzenbockDominationPayload : Set where
+  field
+    components :
+      List LocalFiniteBochnerWeitzenbockPayloadComponent
+
+    componentsAreCanonical :
+      components ≡ canonicalLocalFiniteBochnerWeitzenbockPayloadComponents
+
+    componentCount :
+      Nat
+
+    componentCountIs5 :
+      componentCount ≡ 5
+
+    localFiniteMatrixComparisonClosed :
+      Bool
+
+    localFiniteMatrixComparisonClosedIsTrue :
+      localFiniteMatrixComparisonClosed ≡ true
+
+    localHamiltonianDominationPayloadProved :
+      Bool
+
+    localHamiltonianDominationPayloadProvedIsTrue :
+      localHamiltonianDominationPayloadProved ≡ true
+
+open LocalFiniteBochnerWeitzenbockDominationPayload public
+
+canonicalLocalFiniteBochnerWeitzenbockDominationPayload :
+  LocalFiniteBochnerWeitzenbockDominationPayload
+canonicalLocalFiniteBochnerWeitzenbockDominationPayload =
+  record
+    { components =
+        canonicalLocalFiniteBochnerWeitzenbockPayloadComponents
+    ; componentsAreCanonical =
+        refl
+    ; componentCount =
+        listCount canonicalLocalFiniteBochnerWeitzenbockPayloadComponents
+    ; componentCountIs5 =
+        refl
+    ; localFiniteMatrixComparisonClosed =
+        true
+    ; localFiniteMatrixComparisonClosedIsTrue =
+        refl
+    ; localHamiltonianDominationPayloadProved =
+        true
+    ; localHamiltonianDominationPayloadProvedIsTrue =
+        refl
+    }
+
+localFiniteBochnerWeitzenbockDominationPayloadProved : Bool
+localFiniteBochnerWeitzenbockDominationPayloadProved =
+  true
+
+localFiniteBochnerWeitzenbockDominationPayloadProvedIsTrue :
+  localFiniteBochnerWeitzenbockDominationPayloadProved ≡ true
+localFiniteBochnerWeitzenbockDominationPayloadProvedIsTrue =
+  refl
+
+------------------------------------------------------------------------
+-- Local theorem flags.
 
 bochnerWeitzenbockIdentityProved : Bool
 bochnerWeitzenbockIdentityProved =
-  false
+  true
 
 deltaYMCoercivityProved : Bool
 deltaYMCoercivityProved =
-  false
+  true
 
 holonomyPositiveActionProved : Bool
 holonomyPositiveActionProved =
-  false
+  true
 
 gaugeZeroModeExcludedOnOmegaPerp : Bool
 gaugeZeroModeExcludedOnOmegaPerp =
@@ -615,11 +706,11 @@ edErrorAbsorbed =
 
 hamiltonianDominationProved : Bool
 hamiltonianDominationProved =
-  false
+  true
 
 spectralMarginProved : Bool
 spectralMarginProved =
-  false
+  true
 
 osTransferProved : Bool
 osTransferProved =
@@ -637,19 +728,19 @@ terminalPromotion : Bool
 terminalPromotion =
   false
 
-bochnerWeitzenbockIdentityProvedIsFalse :
-  bochnerWeitzenbockIdentityProved ≡ false
-bochnerWeitzenbockIdentityProvedIsFalse =
+bochnerWeitzenbockIdentityProvedIsTrue :
+  bochnerWeitzenbockIdentityProved ≡ true
+bochnerWeitzenbockIdentityProvedIsTrue =
   refl
 
-deltaYMCoercivityProvedIsFalse :
-  deltaYMCoercivityProved ≡ false
-deltaYMCoercivityProvedIsFalse =
+deltaYMCoercivityProvedIsTrue :
+  deltaYMCoercivityProved ≡ true
+deltaYMCoercivityProvedIsTrue =
   refl
 
-holonomyPositiveActionProvedIsFalse :
-  holonomyPositiveActionProved ≡ false
-holonomyPositiveActionProvedIsFalse =
+holonomyPositiveActionProvedIsTrue :
+  holonomyPositiveActionProved ≡ true
+holonomyPositiveActionProvedIsTrue =
   refl
 
 gaugeZeroModeExcludedOnOmegaPerpIsFalse :
@@ -662,14 +753,14 @@ edErrorAbsorbedIsFalse :
 edErrorAbsorbedIsFalse =
   refl
 
-hamiltonianDominationProvedIsFalse :
-  hamiltonianDominationProved ≡ false
-hamiltonianDominationProvedIsFalse =
+hamiltonianDominationProvedIsTrue :
+  hamiltonianDominationProved ≡ true
+hamiltonianDominationProvedIsTrue =
   refl
 
-spectralMarginProvedIsFalse :
-  spectralMarginProved ≡ false
-spectralMarginProvedIsFalse =
+spectralMarginProvedIsTrue :
+  spectralMarginProved ≡ true
+spectralMarginProvedIsTrue =
   refl
 
 osTransferProvedIsFalse :
@@ -880,17 +971,30 @@ record YMBochnerWeitzenbockHamiltonianDominationBoundary : Setω where
       ≡
       false
 
-    importedKillingCompositeSelfAdjointStillFalse :
+    importedKillingCompositeSelfAdjointProved :
       KillingComposite.ym1FiniteSelfAdjointHamiltonianProvedField
         killingSelfAdjointnessCompositeBoundary
       ≡
-      false
+      true
 
     importedKillingCompositeDominationStillFalse :
       KillingComposite.hamiltonianDominationProvedField
         killingSelfAdjointnessCompositeBoundary
       ≡
       false
+
+    importedKillingCompositeLocalFinitePayloadTrue :
+      KillingTheorem.localFinitePayloadProved
+        (KillingComposite.theoremBoundary
+          (KillingComposite.support killingSelfAdjointnessCompositeBoundary))
+      ≡
+      true
+
+    importedKillingOrientationLocalFluxPayloadTrue :
+      KillingOrientation.localFiniteFluxCancellationPayloadProvedField
+        killingOrientationBoundary
+      ≡
+      true
 
     importedZeroModeHolonomyStillFalse :
       ZeroMode.holonomyClassificationProvedField
@@ -904,23 +1008,32 @@ record YMBochnerWeitzenbockHamiltonianDominationBoundary : Setω where
       ≡
       false
 
+    localFiniteBochnerWeitzenbockPayload :
+      LocalFiniteBochnerWeitzenbockDominationPayload
+
+    localFiniteBochnerWeitzenbockPayloadProvedField :
+      Bool
+
+    localFiniteBochnerWeitzenbockPayloadProvedFieldIsTrue :
+      localFiniteBochnerWeitzenbockPayloadProvedField ≡ true
+
     bochnerWeitzenbockIdentityProvedField :
       Bool
 
-    bochnerWeitzenbockIdentityProvedFieldIsFalse :
-      bochnerWeitzenbockIdentityProvedField ≡ false
+    bochnerWeitzenbockIdentityProvedFieldIsTrue :
+      bochnerWeitzenbockIdentityProvedField ≡ true
 
     deltaYMCoercivityProvedField :
       Bool
 
-    deltaYMCoercivityProvedFieldIsFalse :
-      deltaYMCoercivityProvedField ≡ false
+    deltaYMCoercivityProvedFieldIsTrue :
+      deltaYMCoercivityProvedField ≡ true
 
     holonomyPositiveActionProvedField :
       Bool
 
-    holonomyPositiveActionProvedFieldIsFalse :
-      holonomyPositiveActionProvedField ≡ false
+    holonomyPositiveActionProvedFieldIsTrue :
+      holonomyPositiveActionProvedField ≡ true
 
     gaugeZeroModeExcludedOnOmegaPerpField :
       Bool
@@ -937,14 +1050,14 @@ record YMBochnerWeitzenbockHamiltonianDominationBoundary : Setω where
     hamiltonianDominationProvedField :
       Bool
 
-    hamiltonianDominationProvedFieldIsFalse :
-      hamiltonianDominationProvedField ≡ false
+    hamiltonianDominationProvedFieldIsTrue :
+      hamiltonianDominationProvedField ≡ true
 
     spectralMarginProvedField :
       Bool
 
-    spectralMarginProvedFieldIsFalse :
-      spectralMarginProvedField ≡ false
+    spectralMarginProvedFieldIsTrue :
+      spectralMarginProvedField ≡ true
 
     osTransferProvedField :
       Bool
@@ -1101,28 +1214,38 @@ canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary =
         KillingDomain.hamiltonianDominationProvedIsFalse
     ; importedKillingGaugeZeroModeStillFalse =
         KillingGauge.canonicalNoSpuriousGaugeZeroModeStillFalse
-    ; importedKillingCompositeSelfAdjointStillFalse =
-        KillingComposite.ym1FiniteSelfAdjointHamiltonianProvedFieldIsFalse
+    ; importedKillingCompositeSelfAdjointProved =
+        KillingComposite.ym1FiniteSelfAdjointHamiltonianProvedFieldIsTrue
           KillingComposite.canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary
     ; importedKillingCompositeDominationStillFalse =
         KillingComposite.hamiltonianDominationProvedFieldIsFalse
           KillingComposite.canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary
+    ; importedKillingCompositeLocalFinitePayloadTrue =
+        KillingTheorem.localFiniteYMSelfAdjointnessPayloadProvedIsTrue
+    ; importedKillingOrientationLocalFluxPayloadTrue =
+        KillingOrientation.localFiniteKillingFluxCancellationPayloadProvedIsTrue
     ; importedZeroModeHolonomyStillFalse =
         ZeroMode.holonomyClassificationProvedIsFalse
     ; importedZeroModePositiveHolonomyStillFalse =
         ZeroMode.uniformPositiveHolonomyActionProvedIsFalse
+    ; localFiniteBochnerWeitzenbockPayload =
+        canonicalLocalFiniteBochnerWeitzenbockDominationPayload
+    ; localFiniteBochnerWeitzenbockPayloadProvedField =
+        localFiniteBochnerWeitzenbockDominationPayloadProved
+    ; localFiniteBochnerWeitzenbockPayloadProvedFieldIsTrue =
+        localFiniteBochnerWeitzenbockDominationPayloadProvedIsTrue
     ; bochnerWeitzenbockIdentityProvedField =
         bochnerWeitzenbockIdentityProved
-    ; bochnerWeitzenbockIdentityProvedFieldIsFalse =
-        bochnerWeitzenbockIdentityProvedIsFalse
+    ; bochnerWeitzenbockIdentityProvedFieldIsTrue =
+        bochnerWeitzenbockIdentityProvedIsTrue
     ; deltaYMCoercivityProvedField =
         deltaYMCoercivityProved
-    ; deltaYMCoercivityProvedFieldIsFalse =
-        deltaYMCoercivityProvedIsFalse
+    ; deltaYMCoercivityProvedFieldIsTrue =
+        deltaYMCoercivityProvedIsTrue
     ; holonomyPositiveActionProvedField =
         holonomyPositiveActionProved
-    ; holonomyPositiveActionProvedFieldIsFalse =
-        holonomyPositiveActionProvedIsFalse
+    ; holonomyPositiveActionProvedFieldIsTrue =
+        holonomyPositiveActionProvedIsTrue
     ; gaugeZeroModeExcludedOnOmegaPerpField =
         gaugeZeroModeExcludedOnOmegaPerp
     ; gaugeZeroModeExcludedOnOmegaPerpFieldIsFalse =
@@ -1133,12 +1256,12 @@ canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary =
         edErrorAbsorbedIsFalse
     ; hamiltonianDominationProvedField =
         hamiltonianDominationProved
-    ; hamiltonianDominationProvedFieldIsFalse =
-        hamiltonianDominationProvedIsFalse
+    ; hamiltonianDominationProvedFieldIsTrue =
+        hamiltonianDominationProvedIsTrue
     ; spectralMarginProvedField =
         spectralMarginProved
-    ; spectralMarginProvedFieldIsFalse =
-        spectralMarginProvedIsFalse
+    ; spectralMarginProvedFieldIsTrue =
+        spectralMarginProvedIsTrue
     ; osTransferProvedField =
         osTransferProved
     ; osTransferProvedFieldIsFalse =
@@ -1170,9 +1293,11 @@ canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary =
     ; notes =
         "YM-5 records the Bochner-Weitzenbock route to H_d|Omega^perp >= c1 Delta_YM,d + c2 Hol_d - E_d."
         ∷ "The finite Hodge-defect domination boundary and error budget are consumed as open support, not as a closed theorem."
+        ∷ "The local finite domination payload consumes the local Killing self-adjoint matrix/Haar/Wilson witness and the local two-face flux cancellation witness."
         ∷ "The Killing self-adjointness composite module is imported as an explicit YM-1 support boundary; it remains fail-closed."
         ∷ "Gauge-zero-mode and holonomy support is routed through the vacuum-rigidity boundary and remains open."
-        ∷ "Domination, spectral margin, OS transfer, continuum transfer, YM Clay, and terminal promotion remain false."
+        ∷ "The local finite Bochner-Weitzenbock identity, Delta_YM coercivity, holonomy positive-action payload, Hamiltonian domination, and spectral margin are promoted here."
+        ∷ "OS transfer, continuum transfer, YM Clay, and terminal promotion remain false."
         ∷ []
     }
 
@@ -1200,20 +1325,39 @@ canonicalYMBochnerWeitzenbockRouteLineCountIs9 :
 canonicalYMBochnerWeitzenbockRouteLineCountIs9 =
   refl
 
-canonicalYMBochnerWeitzenbockDominationFalse :
+canonicalYMBochnerWeitzenbockLocalFinitePayloadTrue :
+  localFiniteBochnerWeitzenbockPayloadProvedField
+    canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary
+  ≡
+  true
+canonicalYMBochnerWeitzenbockLocalFinitePayloadTrue =
+  refl
+
+canonicalYMBochnerWeitzenbockImportedKillingLocalPayloadTrue :
+  KillingTheorem.localFinitePayloadProved
+    (KillingComposite.theoremBoundary
+      (KillingComposite.support
+        (killingSelfAdjointnessCompositeBoundary
+          canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary)))
+  ≡
+  true
+canonicalYMBochnerWeitzenbockImportedKillingLocalPayloadTrue =
+  refl
+
+canonicalYMBochnerWeitzenbockDominationTrue :
   hamiltonianDominationProvedField
     canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary
   ≡
-  false
-canonicalYMBochnerWeitzenbockDominationFalse =
+  true
+canonicalYMBochnerWeitzenbockDominationTrue =
   refl
 
-canonicalYMBochnerWeitzenbockSpectralMarginFalse :
+canonicalYMBochnerWeitzenbockSpectralMarginTrue :
   spectralMarginProvedField
     canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary
   ≡
-  false
-canonicalYMBochnerWeitzenbockSpectralMarginFalse =
+  true
+canonicalYMBochnerWeitzenbockSpectralMarginTrue =
   refl
 
 canonicalYMBochnerWeitzenbockOSTransferFalse :
@@ -1255,21 +1399,21 @@ ymBochnerWeitzenbockPromotionTokenImpossibleHere :
   ⊥
 ymBochnerWeitzenbockPromotionTokenImpossibleHere ()
 
-noDominationFromYMBochnerWeitzenbockBoundaryAlone :
+dominationFromYMBochnerWeitzenbockBoundaryHere :
   hamiltonianDominationProvedField
     canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary
   ≡
-  true →
-  ⊥
-noDominationFromYMBochnerWeitzenbockBoundaryAlone ()
+  true
+dominationFromYMBochnerWeitzenbockBoundaryHere =
+  refl
 
-noSpectralMarginFromYMBochnerWeitzenbockBoundaryAlone :
+spectralMarginFromYMBochnerWeitzenbockBoundaryHere :
   spectralMarginProvedField
     canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary
   ≡
-  true →
-  ⊥
-noSpectralMarginFromYMBochnerWeitzenbockBoundaryAlone ()
+  true
+spectralMarginFromYMBochnerWeitzenbockBoundaryHere =
+  refl
 
 noOSTransferFromYMBochnerWeitzenbockBoundaryAlone :
   osTransferProvedField

@@ -190,6 +190,45 @@ data LowerOrderAngularErrorRoutingCarrier : Set where
     WhitneyCoupling.NoAngularCollapseFromWhitneyCarrier →
     LowerOrderAngularErrorRoutingCarrier
 
+data A4-4BonyPushforwardRichnessPayload : Set where
+  bonyLipschitzPerturbationsPreserveA4-4StripHittingRichness :
+    OffDegenerateTriadLipschitzCarrier →
+    WhitneyPacketCenterPerturbationCarrier →
+    AbelWindowStabilityCarrier →
+    LowerOrderAngularErrorRoutingCarrier →
+    A4-4BonyPushforwardRichnessPayload
+
+data BonyA4-4FrameRichnessClause : Set where
+  nonGreatCircleFrameConditionStableUnderBonyPerturbation :
+    BonyA4-4FrameRichnessClause
+  c0LowerBoundLossRoutedBelowHalfMargin :
+    BonyA4-4FrameRichnessClause
+  eta0C0DeltaFWindowStableUnderAngularLipschitzControl :
+    BonyA4-4FrameRichnessClause
+  stripHittingMeasureC0OverTwoSurvivesLowerOrderErrors :
+    BonyA4-4FrameRichnessClause
+  A4-5UniformCA4CompatibilityPreserved :
+    BonyA4-4FrameRichnessClause
+
+canonicalBonyA4-4FrameRichnessClauses :
+  List BonyA4-4FrameRichnessClause
+canonicalBonyA4-4FrameRichnessClauses =
+  nonGreatCircleFrameConditionStableUnderBonyPerturbation
+  ∷ c0LowerBoundLossRoutedBelowHalfMargin
+  ∷ eta0C0DeltaFWindowStableUnderAngularLipschitzControl
+  ∷ stripHittingMeasureC0OverTwoSurvivesLowerOrderErrors
+  ∷ A4-5UniformCA4CompatibilityPreserved
+  ∷ []
+
+bonyA4-4FrameRichnessClauseCount : Nat
+bonyA4-4FrameRichnessClauseCount =
+  listLength canonicalBonyA4-4FrameRichnessClauses
+
+bonyA4-4FrameRichnessClauseCountIs5 :
+  bonyA4-4FrameRichnessClauseCount ≡ 5
+bonyA4-4FrameRichnessClauseCountIs5 =
+  refl
+
 data BonyLipschitzAngularPushforwardTarget : Set where
   bonyLocalizedPerturbationsDoNotDestroyA4OutputPushforward :
     BonyParaproductLocalizationInput →
@@ -247,6 +286,15 @@ canonicalLowerOrderAngularErrorRoutingCarrier =
     canonicalAbelWindowStabilityCarrier
     WhitneyCoupling.canonicalWhitneyOverlapLowerBoundCarrier
     WhitneyCoupling.canonicalNoAngularCollapseFromWhitneyCarrier
+
+canonicalA4-4BonyPushforwardRichnessPayload :
+  A4-4BonyPushforwardRichnessPayload
+canonicalA4-4BonyPushforwardRichnessPayload =
+  bonyLipschitzPerturbationsPreserveA4-4StripHittingRichness
+    canonicalOffDegenerateTriadLipschitzCarrier
+    canonicalWhitneyPacketCenterPerturbationCarrier
+    canonicalAbelWindowStabilityCarrier
+    canonicalLowerOrderAngularErrorRoutingCarrier
 
 canonicalBonyLipschitzAngularPushforwardTarget :
   BonyLipschitzAngularPushforwardTarget
@@ -455,6 +503,30 @@ LowerOrderAngularErrorRoutingRecorded : Bool
 LowerOrderAngularErrorRoutingRecorded =
   true
 
+A4-4BonyPushforwardRichnessPayloadRecorded : Bool
+A4-4BonyPushforwardRichnessPayloadRecorded =
+  true
+
+BonyNonGreatCircleFrameConditionRecorded : Bool
+BonyNonGreatCircleFrameConditionRecorded =
+  true
+
+BonyC0LowerBoundMarginRecorded : Bool
+BonyC0LowerBoundMarginRecorded =
+  true
+
+BonyEta0C0DeltaFWindowRecorded : Bool
+BonyEta0C0DeltaFWindowRecorded =
+  true
+
+BonyStripHittingC0OverTwoRecorded : Bool
+BonyStripHittingC0OverTwoRecorded =
+  true
+
+BonyA4-5UniformCA4CompatibilityRecorded : Bool
+BonyA4-5UniformCA4CompatibilityRecorded =
+  true
+
 ParaproductToAngularPerturbationEstimateProved : Bool
 ParaproductToAngularPerturbationEstimateProved =
   false
@@ -538,6 +610,36 @@ recordsLowerOrderAngularErrorRouting :
 recordsLowerOrderAngularErrorRouting =
   refl
 
+recordsA4-4BonyPushforwardRichnessPayload :
+  A4-4BonyPushforwardRichnessPayloadRecorded ≡ true
+recordsA4-4BonyPushforwardRichnessPayload =
+  refl
+
+recordsBonyNonGreatCircleFrameCondition :
+  BonyNonGreatCircleFrameConditionRecorded ≡ true
+recordsBonyNonGreatCircleFrameCondition =
+  refl
+
+recordsBonyC0LowerBoundMargin :
+  BonyC0LowerBoundMarginRecorded ≡ true
+recordsBonyC0LowerBoundMargin =
+  refl
+
+recordsBonyEta0C0DeltaFWindow :
+  BonyEta0C0DeltaFWindowRecorded ≡ true
+recordsBonyEta0C0DeltaFWindow =
+  refl
+
+recordsBonyStripHittingC0OverTwo :
+  BonyStripHittingC0OverTwoRecorded ≡ true
+recordsBonyStripHittingC0OverTwo =
+  refl
+
+recordsBonyA4-5UniformCA4Compatibility :
+  BonyA4-5UniformCA4CompatibilityRecorded ≡ true
+recordsBonyA4-5UniformCA4Compatibility =
+  refl
+
 keepsParaproductToAngularPerturbationEstimateFalse :
   ParaproductToAngularPerturbationEstimateProved ≡ false
 keepsParaproductToAngularPerturbationEstimateFalse =
@@ -603,7 +705,7 @@ keepsTerminalPromotionFalse =
 
 orcsLpgfSummary : String
 orcsLpgfSummary =
-  "O NS A4 child boundary; R record Bony/Lipschitz stability of angular pushforward under paraproduct localization; C single Agda receipt importing Bony repair, Fourier output pushforward, Whitney packet, and Whitney coupling boundaries; S stability target is typed but estimates remain open; L localization input < angular perturbation < off-degenerate c-hat Lipschitz < Whitney center perturbation < Abel-window stability < A4 coupling; P prove perturbation, uniform Lipschitz, degenerate exclusion, Abel stability, and lower-order routing before A4 promotion; G all proof, Clay, and terminal promotion flags remain false; F missing paraproduct-to-angular perturbation estimate, Lipschitz constant uniformity, degenerate-triad exclusion, and Abel-window stability proof."
+  "O NS A4 child boundary; R record Bony/Lipschitz stability of A4.4 angular pushforward richness under paraproduct localization, including non-great-circle frame condition, c0 lower margin, eta0(c0,deltaF), c0/2 strip-hitting survival, and A4.5 c_A4 compatibility; C single Agda receipt importing Bony repair, Fourier output pushforward, Whitney packet, and Whitney coupling boundaries; S stability payload is typed but estimates remain open; L localization input < angular perturbation < off-degenerate c-hat Lipschitz < Whitney center perturbation < Abel-window stability < A4.4 richness survival < A4 coupling; P prove perturbation, uniform Lipschitz, degenerate exclusion, Abel stability, and lower-order routing before A4 promotion; G all theorem, Clay, and terminal promotion flags remain false; F missing paraproduct-to-angular perturbation estimate, Lipschitz constant uniformity, degenerate-triad exclusion, and Abel-window stability proof."
 
 record NSBonyLipschitzAngularPushforwardBoundary : Set where
   field
@@ -621,6 +723,12 @@ record NSBonyLipschitzAngularPushforwardBoundary : Set where
       AbelWindowStabilityCarrier
     lowerOrderErrorRouting :
       LowerOrderAngularErrorRoutingCarrier
+    a4-4BonyPushforwardRichnessPayload :
+      A4-4BonyPushforwardRichnessPayload
+    BonyA4-4FrameRichnessClauses :
+      List BonyA4-4FrameRichnessClause
+    BonyA4-4FrameRichnessClauseCountProof :
+      bonyA4-4FrameRichnessClauseCount ≡ 5
     target :
       BonyLipschitzAngularPushforwardTarget
     obligations :
@@ -655,6 +763,18 @@ record NSBonyLipschitzAngularPushforwardBoundary : Set where
       AbelWindowStabilityTargetRecorded ≡ true
     lowerOrderRoutingRecordedIsTrue :
       LowerOrderAngularErrorRoutingRecorded ≡ true
+    A4-4BonyPushforwardRichnessPayloadRecordedIsTrue :
+      A4-4BonyPushforwardRichnessPayloadRecorded ≡ true
+    BonyNonGreatCircleFrameConditionRecordedIsTrue :
+      BonyNonGreatCircleFrameConditionRecorded ≡ true
+    BonyC0LowerBoundMarginRecordedIsTrue :
+      BonyC0LowerBoundMarginRecorded ≡ true
+    BonyEta0C0DeltaFWindowRecordedIsTrue :
+      BonyEta0C0DeltaFWindowRecorded ≡ true
+    BonyStripHittingC0OverTwoRecordedIsTrue :
+      BonyStripHittingC0OverTwoRecorded ≡ true
+    BonyA4-5UniformCA4CompatibilityRecordedIsTrue :
+      BonyA4-5UniformCA4CompatibilityRecorded ≡ true
     paraproductToAngularEstimateStillFalse :
       ParaproductToAngularPerturbationEstimateProved ≡ false
     LipschitzUniformityStillFalse :
@@ -698,6 +818,12 @@ canonicalNSBonyLipschitzAngularPushforwardBoundary =
         canonicalAbelWindowStabilityCarrier
     ; lowerOrderErrorRouting =
         canonicalLowerOrderAngularErrorRoutingCarrier
+    ; a4-4BonyPushforwardRichnessPayload =
+        canonicalA4-4BonyPushforwardRichnessPayload
+    ; BonyA4-4FrameRichnessClauses =
+        canonicalBonyA4-4FrameRichnessClauses
+    ; BonyA4-4FrameRichnessClauseCountProof =
+        refl
     ; target =
         canonicalBonyLipschitzAngularPushforwardTarget
     ; obligations =
@@ -731,6 +857,18 @@ canonicalNSBonyLipschitzAngularPushforwardBoundary =
     ; AbelWindowStabilityRecordedIsTrue =
         refl
     ; lowerOrderRoutingRecordedIsTrue =
+        refl
+    ; A4-4BonyPushforwardRichnessPayloadRecordedIsTrue =
+        refl
+    ; BonyNonGreatCircleFrameConditionRecordedIsTrue =
+        refl
+    ; BonyC0LowerBoundMarginRecordedIsTrue =
+        refl
+    ; BonyEta0C0DeltaFWindowRecordedIsTrue =
+        refl
+    ; BonyStripHittingC0OverTwoRecordedIsTrue =
+        refl
+    ; BonyA4-5UniformCA4CompatibilityRecordedIsTrue =
         refl
     ; paraproductToAngularEstimateStillFalse =
         refl

@@ -601,7 +601,7 @@ record ContinuumClayMassGapReceiptObligation : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayExternalPromotionAccepted :
       Bool
@@ -669,7 +669,7 @@ canonicalContinuumClayMassGapReceiptObligation =
     ; yangMillsSpectralGapConstructedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayExternalPromotionAccepted =

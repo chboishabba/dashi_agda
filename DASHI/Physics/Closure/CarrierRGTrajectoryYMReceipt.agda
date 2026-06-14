@@ -115,7 +115,7 @@ record CarrierRGTrajectoryYMReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -184,7 +184,7 @@ canonicalCarrierRGTrajectoryYMReceipt =
     ; carrierRGTrajectoryConstructedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

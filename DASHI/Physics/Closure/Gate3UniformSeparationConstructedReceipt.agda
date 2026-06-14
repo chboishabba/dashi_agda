@@ -58,8 +58,8 @@ record Gate3UniformSeparationConstructedReceipt : Setω where
     targetReceipt :
       Target.Gate3PAWOTGUniformSeparationTargetReceipt
 
-    legacyInfAStillOpen :
-      Target.infANPositiveProvedHere targetReceipt ≡ false
+    targetInfAPromoted :
+      Target.infANPositiveProvedHere targetReceipt ≡ true
 
     massShellReceipt :
       MassShell.Gate3MassShellBridgeConstructedReceipt
@@ -133,7 +133,7 @@ canonicalGate3UniformSeparationConstructedReceipt =
         refl
     ; targetReceipt =
         Target.canonicalGate3PAWOTGUniformSeparationTargetReceipt
-    ; legacyInfAStillOpen =
+    ; targetInfAPromoted =
         refl
     ; massShellReceipt =
         MassShell.canonicalGate3MassShellBridgeConstructedReceipt

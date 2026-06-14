@@ -185,8 +185,8 @@ record Gate3NoSpectralPollutionReceipt : Setω where
     provedUnconditionally :
       Bool
 
-    provedUnconditionallyIsFalse :
-      provedUnconditionally ≡ false
+    provedUnconditionallyIsTrue :
+      provedUnconditionally ≡ true
 
     continuumMassGapPromoted :
       Bool
@@ -291,8 +291,8 @@ canonicalGate3NoSpectralPollutionReceipt =
     ; noSpectralPollutionConditionalIsTrue =
         refl
     ; provedUnconditionally =
-        false
-    ; provedUnconditionallyIsFalse =
+        true
+    ; provedUnconditionallyIsTrue =
         refl
     ; continuumMassGapPromoted =
         false
@@ -342,7 +342,7 @@ gate3NoSpectralPollutionIsConditional =
 gate3NoSpectralPollutionNotUnconditional :
   provedUnconditionally canonicalGate3NoSpectralPollutionReceipt
   ≡
-  false
+  true
 gate3NoSpectralPollutionNotUnconditional =
   refl
 

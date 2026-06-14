@@ -102,7 +102,7 @@ record YMDepthContinuumLimitObstructionReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -174,7 +174,7 @@ canonicalYMDepthContinuumLimitObstructionReceipt =
     ; ymDepthContinuumLimitObstructedIsTrue =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

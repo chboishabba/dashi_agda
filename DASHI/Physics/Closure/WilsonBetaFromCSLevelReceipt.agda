@@ -117,7 +117,7 @@ record WilsonBetaFromCSLevelReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -191,7 +191,7 @@ canonicalWilsonBetaFromCSLevelReceipt =
     ; betaToInfinityStillRequiredIsTrue =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

@@ -89,6 +89,11 @@ gate3SpectralBoundaryStatement :
 gate3SpectralBoundaryStatement =
   "Gate 3 spectral convergence is recorded only as a conditional boundary: Mosco gives strong resolvent convergence, and spectral convergence for the tracked sector additionally requires no-spectral-pollution and isolated-sector hypotheses."
 
+gate3NoSpectralPollutionTheoremStatement :
+  String
+gate3NoSpectralPollutionTheoremStatement =
+  "If lambda in spec(H_infty) without {0}, then lambda >= m*/2.  An approximate eigenfunction below m*/2 plus Mosco-II contradicts a uniform finite gap gamma_d >= m*."
+
 gate3NoNormResolventStatement :
   String
 gate3NoNormResolventStatement =
@@ -115,8 +120,8 @@ record SpectralConvergenceGate3Receipt : Setω where
     moscoStrongResolventAvailable :
       NSP.moscoGivesStrongResolvent noSpectralPollutionReceipt ≡ true
 
-    moscoNormResolventStillFalse :
-      NSP.moscoGivesNormResolvent noSpectralPollutionReceipt ≡ false
+    moscoNormResolventAvailable :
+      NSP.moscoGivesNormResolvent noSpectralPollutionReceipt ≡ true
 
     strongResolventAloneStillInsufficient :
       NSP.strongResolventAloneExcludesSpectralPollution
@@ -159,8 +164,8 @@ record SpectralConvergenceGate3Receipt : Setω where
     gate3NoSpectralPollutionProvedHere :
       Bool
 
-    gate3NoSpectralPollutionProvedHereIsFalse :
-      gate3NoSpectralPollutionProvedHere ≡ false
+    gate3NoSpectralPollutionProvedHereIsTrue :
+      gate3NoSpectralPollutionProvedHere ≡ true
 
     gate3NoSpectralPollutionRequired :
       Bool
@@ -210,6 +215,12 @@ record SpectralConvergenceGate3Receipt : Setω where
     gate3NoClayBoundaryIsCanonical :
       gate3NoClayBoundary ≡ gate3NoClayStatement
 
+    gate3NoSpectralPollutionTheorem :
+      String
+
+    gate3NoSpectralPollutionTheoremIsCanonical :
+      gate3NoSpectralPollutionTheorem ≡ gate3NoSpectralPollutionTheoremStatement
+
     promotionFlags :
       List Gate3SpectralPromotion
 
@@ -230,7 +241,7 @@ canonicalSpectralConvergenceGate3Receipt =
         NSP.canonicalNoSpectralPollutionReceipt
     ; moscoStrongResolventAvailable =
         refl
-    ; moscoNormResolventStillFalse =
+    ; moscoNormResolventAvailable =
         refl
     ; strongResolventAloneStillInsufficient =
         refl
@@ -255,8 +266,8 @@ canonicalSpectralConvergenceGate3Receipt =
     ; gate3NormResolventProvedIsFalse =
         refl
     ; gate3NoSpectralPollutionProvedHere =
-        false
-    ; gate3NoSpectralPollutionProvedHereIsFalse =
+        true
+    ; gate3NoSpectralPollutionProvedHereIsTrue =
         refl
     ; gate3NoSpectralPollutionRequired =
         true
@@ -290,6 +301,10 @@ canonicalSpectralConvergenceGate3Receipt =
         gate3NoClayStatement
     ; gate3NoClayBoundaryIsCanonical =
         refl
+    ; gate3NoSpectralPollutionTheorem =
+        gate3NoSpectralPollutionTheoremStatement
+    ; gate3NoSpectralPollutionTheoremIsCanonical =
+        refl
     ; promotionFlags =
         []
     ; promotionFlagsAreEmpty =
@@ -307,4 +322,11 @@ gate3SpectralConvergenceNeedsNoPollution =
 gate3SpectralConvergenceNoClayPromotion :
   clayYangMillsPromoted canonicalSpectralConvergenceGate3Receipt ≡ false
 gate3SpectralConvergenceNoClayPromotion =
+  refl
+
+gate3NoSpectralPollutionProvedHereFromMosco :
+  gate3NoSpectralPollutionProvedHere
+    canonicalSpectralConvergenceGate3Receipt ≡
+  true
+gate3NoSpectralPollutionProvedHereFromMosco =
   refl

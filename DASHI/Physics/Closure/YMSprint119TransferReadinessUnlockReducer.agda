@@ -49,6 +49,11 @@ unlockRowsRecordedHere = true
 transferLowerBoundReadyHere : Bool
 transferLowerBoundReadyHere = false
 
+transferLowerBoundReadyHereIsFalse :
+  transferLowerBoundReadyHere ≡ false
+transferLowerBoundReadyHereIsFalse =
+  refl
+
 transferLowerBoundTheoremProvedHere : Bool
 transferLowerBoundTheoremProvedHere = false
 
@@ -552,8 +557,8 @@ canonicalUpstreamUnlockFlags =
     refl
     Calculus118.allTransferCalculusObligationsClosedHere
     refl
-    Matrix118.transferLowerBoundReadyHere
-    Matrix118.canonicalReceiptTransferLowerBoundReadyHereIsFalse
+    transferLowerBoundReadyHere
+    transferLowerBoundReadyHereIsFalse
 
 commonCarrierFeedThroughRow : UnlockRow
 commonCarrierFeedThroughRow =
@@ -692,8 +697,8 @@ governanceBoundaryRow =
     final-governance-boundary
     sprint118MatrixSourcePath
     "DASHI/Physics/Closure/YMSprint119ClayGovernancePromotionBoundary.agda"
-    Matrix118.transferLowerBoundReadyHere
-    Matrix118.canonicalReceiptTransferLowerBoundReadyHereIsFalse
+    transferLowerBoundReadyHere
+    transferLowerBoundReadyHereIsFalse
     true
     refl
     true

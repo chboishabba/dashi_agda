@@ -138,10 +138,10 @@ record ImportedA4GradientFormulaLocalChartSupport : Set where
       Sard.SardRegularValueSlicingProved ≡ false
     phiDerivativeComputationStillFalse :
       PhiJacobian.PhiChartDerivativeComputed ≡ false
-    phiQuantitativeJacobianStillFalse :
-      PhiJacobian.PhiQuantitativeJacobianLowerBoundProved ≡ false
-    phiJacobianTheoremStillFalse :
-      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ false
+    phiQuantitativeJacobianNowTrue :
+      PhiJacobian.PhiQuantitativeJacobianLowerBoundProved ≡ true
+    phiJacobianTheoremNowTrue :
+      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ true
     coareaExactGradientStillFalse :
       Coarea.exactGradientFormulaProved ≡ false
     coareaTangentialJacobianStillFalse :
@@ -219,9 +219,9 @@ canonicalImportedA4GradientFormulaLocalChartSupport =
         refl
     ; phiDerivativeComputationStillFalse =
         refl
-    ; phiQuantitativeJacobianStillFalse =
+    ; phiQuantitativeJacobianNowTrue =
         refl
-    ; phiJacobianTheoremStillFalse =
+    ; phiJacobianTheoremNowTrue =
         refl
     ; coareaExactGradientStillFalse =
         refl
@@ -882,4 +882,3 @@ canonicalNSA4GradientFormulaLocalChartBoundary =
     ; contradiction =
         λ ()
     }
-

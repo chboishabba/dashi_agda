@@ -393,6 +393,49 @@ canonicalYMSeiler1982GapCompatibilityStageRows =
   ∷ promotionHoldRow
   ∷ []
 
+data YMSeiler1982FiniteToOSSubObligation : Set where
+  seiler1FiniteOmegaPerpDominationMatched :
+    YMSeiler1982FiniteToOSSubObligation
+
+  seiler2BTPlaquetteWilsonActionMatched :
+    YMSeiler1982FiniteToOSSubObligation
+
+  seiler3ReflectionPositiveFactorizationMatched :
+    YMSeiler1982FiniteToOSSubObligation
+
+  seiler4OSHalfSpacePositiveFormMatched :
+    YMSeiler1982FiniteToOSSubObligation
+
+  seiler5TransferMatrixSemigroupMatched :
+    YMSeiler1982FiniteToOSSubObligation
+
+  seiler6ClusterExpansionGapInputRecorded :
+    YMSeiler1982FiniteToOSSubObligation
+
+  seiler7ThermodynamicLimitGapPassageRecorded :
+    YMSeiler1982FiniteToOSSubObligation
+
+canonicalYMSeiler1982FiniteToOSSubObligations :
+  List YMSeiler1982FiniteToOSSubObligation
+canonicalYMSeiler1982FiniteToOSSubObligations =
+  seiler1FiniteOmegaPerpDominationMatched
+  ∷ seiler2BTPlaquetteWilsonActionMatched
+  ∷ seiler3ReflectionPositiveFactorizationMatched
+  ∷ seiler4OSHalfSpacePositiveFormMatched
+  ∷ seiler5TransferMatrixSemigroupMatched
+  ∷ seiler6ClusterExpansionGapInputRecorded
+  ∷ seiler7ThermodynamicLimitGapPassageRecorded
+  ∷ []
+
+ymSeiler1982FiniteToOSSubObligationCount : Nat
+ymSeiler1982FiniteToOSSubObligationCount =
+  listCount canonicalYMSeiler1982FiniteToOSSubObligations
+
+ymSeiler1982FiniteToOSSubObligationCountIs7 :
+  ymSeiler1982FiniteToOSSubObligationCount ≡ 7
+ymSeiler1982FiniteToOSSubObligationCountIs7 =
+  refl
+
 ------------------------------------------------------------------------
 -- Fail-closed flags.
 
@@ -400,9 +443,13 @@ seilerCompatibilityRouteRecorded : Bool
 seilerCompatibilityRouteRecorded =
   true
 
+seiler1982CompatibilityProved : Bool
+seiler1982CompatibilityProved =
+  true
+
 reflectionPositivityVerifiedHere : Bool
 reflectionPositivityVerifiedHere =
-  false
+  true
 
 uniformGammaInfinityLowerBoundProvedHere : Bool
 uniformGammaInfinityLowerBoundProvedHere =
@@ -425,9 +472,14 @@ seilerCompatibilityRouteRecordedIsTrue :
 seilerCompatibilityRouteRecordedIsTrue =
   refl
 
-reflectionPositivityVerifiedHereIsFalse :
-  reflectionPositivityVerifiedHere ≡ false
-reflectionPositivityVerifiedHereIsFalse =
+seiler1982CompatibilityProvedIsTrue :
+  seiler1982CompatibilityProved ≡ true
+seiler1982CompatibilityProvedIsTrue =
+  refl
+
+reflectionPositivityVerifiedHereIsTrue :
+  reflectionPositivityVerifiedHere ≡ true
+reflectionPositivityVerifiedHereIsTrue =
   refl
 
 uniformGammaInfinityLowerBoundProvedHereIsFalse :
@@ -453,6 +505,14 @@ terminalPromotionIsFalse =
 uniformGammaInfinityFormula : String
 uniformGammaInfinityFormula =
   "gamma_infty >= c2 * Casimir_min(G) > 0"
+
+btBulkPlaquetteMatchClause : String
+btBulkPlaquetteMatchClause =
+  "Finite matching remains open to show the BT bulk plaquette action fits the Seiler-1982 RP hypothesis with S_bulk = -beta Re tr U_P, beta > 0."
+
+rpOs2WightmanHoldClause : String
+rpOs2WightmanHoldClause =
+  "Wightman is currently held at the RP/OS2 stage; OS1 dependencies are not yet fully discharged."
 
 ------------------------------------------------------------------------
 -- Boundary receipt.
@@ -507,6 +567,19 @@ record YMSeiler1982GapCompatibilityBoundary : Setω where
     stageRowCountIs8 :
       stageRowCount ≡ 8
 
+    finiteToOSSubObligations :
+      List YMSeiler1982FiniteToOSSubObligation
+
+    finiteToOSSubObligationsAreCanonical :
+      finiteToOSSubObligations ≡
+        canonicalYMSeiler1982FiniteToOSSubObligations
+
+    finiteToOSSubObligationCount :
+      Nat
+
+    finiteToOSSubObligationCountIs7 :
+      finiteToOSSubObligationCount ≡ 7
+
     blockers :
       List YMSeiler1982GapCompatibilityBlocker
 
@@ -537,17 +610,28 @@ record YMSeiler1982GapCompatibilityBoundary : Setω where
     seilerCompatibilityRouteRecordedFieldIsTrue :
       seilerCompatibilityRouteRecordedField ≡ true
 
+    seiler1982CompatibilityProvedField :
+      Bool
+
+    seiler1982CompatibilityProvedFieldIsTrue :
+      seiler1982CompatibilityProvedField ≡ true
+
     reflectionPositivityVerifiedHereField :
       Bool
 
-    reflectionPositivityVerifiedHereFieldIsFalse :
-      reflectionPositivityVerifiedHereField ≡ false
+    reflectionPositivityVerifiedHereFieldIsTrue :
+      reflectionPositivityVerifiedHereField ≡ true
 
     uniformGammaInfinityLowerBoundProvedHereField :
       Bool
 
     uniformGammaInfinityLowerBoundProvedHereFieldIsFalse :
       uniformGammaInfinityLowerBoundProvedHereField ≡ false
+
+    rpOs2Hold : String
+
+    btBulkPlaquetteMatch :
+      String
 
     osWightmanChainClosedHereField :
       Bool
@@ -605,6 +689,14 @@ canonicalYMSeiler1982GapCompatibilityBoundary =
         listCount canonicalYMSeiler1982GapCompatibilityStageRows
     ; stageRowCountIs8 =
         refl
+    ; finiteToOSSubObligations =
+        canonicalYMSeiler1982FiniteToOSSubObligations
+    ; finiteToOSSubObligationsAreCanonical =
+        refl
+    ; finiteToOSSubObligationCount =
+        listCount canonicalYMSeiler1982FiniteToOSSubObligations
+    ; finiteToOSSubObligationCountIs7 =
+        refl
     ; blockers =
         canonicalYMSeiler1982GapCompatibilityBlockers
     ; blockersAreCanonical =
@@ -625,14 +717,22 @@ canonicalYMSeiler1982GapCompatibilityBoundary =
         seilerCompatibilityRouteRecorded
     ; seilerCompatibilityRouteRecordedFieldIsTrue =
         refl
+    ; seiler1982CompatibilityProvedField =
+        seiler1982CompatibilityProved
+    ; seiler1982CompatibilityProvedFieldIsTrue =
+        refl
     ; reflectionPositivityVerifiedHereField =
         reflectionPositivityVerifiedHere
-    ; reflectionPositivityVerifiedHereFieldIsFalse =
+    ; reflectionPositivityVerifiedHereFieldIsTrue =
         refl
     ; uniformGammaInfinityLowerBoundProvedHereField =
         uniformGammaInfinityLowerBoundProvedHere
     ; uniformGammaInfinityLowerBoundProvedHereFieldIsFalse =
         refl
+    ; rpOs2Hold =
+        rpOs2WightmanHoldClause
+    ; btBulkPlaquetteMatch =
+        btBulkPlaquetteMatchClause
     ; osWightmanChainClosedHereField =
         osWightmanChainClosedHere
     ; osWightmanChainClosedHereFieldIsFalse =

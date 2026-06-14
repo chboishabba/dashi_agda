@@ -163,8 +163,8 @@ record Gate3AtomSamplerPAWOTGQualityReceipt : Setω where
     uniformSeparationTarget :
       Target.Gate3PAWOTGUniformSeparationTargetReceipt
 
-    infANStillOpen :
-      Target.infANPositiveProvedHere uniformSeparationTarget ≡ false
+    targetInfANPromoted :
+      Target.infANPositiveProvedHere uniformSeparationTarget ≡ true
 
     targetNoGate3Promotion :
       Target.gate3Promoted uniformSeparationTarget ≡ false
@@ -324,7 +324,7 @@ canonicalGate3AtomSamplerPAWOTGQualityReceipt =
         refl
     ; uniformSeparationTarget =
         Target.canonicalGate3PAWOTGUniformSeparationTargetReceipt
-    ; infANStillOpen =
+    ; targetInfANPromoted =
         refl
     ; targetNoGate3Promotion =
         refl

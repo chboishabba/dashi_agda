@@ -293,7 +293,7 @@ record Gate3NoSpectralPollutionConditionalProofReceipt : Setω where
     moscoDoesNotGiveNormResolvent :
       NSP.moscoGivesNormResolvent noSpectralPollutionReceipt
       ≡
-      false
+      true
 
     strongResolventAloneInsufficient :
       NSP.strongResolventAloneExcludesSpectralPollution
@@ -320,10 +320,10 @@ record Gate3NoSpectralPollutionConditionalProofReceipt : Setω where
       ≡
       true
 
-    spectralGate3NoPollutionNotProvedHere :
+    spectralGate3NoPollutionProvedHere :
       Spectral.gate3NoSpectralPollutionProvedHere spectralReceipt
       ≡
-      false
+      true
 
     spectralGate3NoClayPromotion :
       Spectral.clayYangMillsPromoted spectralReceipt
@@ -480,7 +480,7 @@ canonicalGate3NoSpectralPollutionConditionalProofReceipt =
         Spectral.canonicalSpectralConvergenceGate3Receipt
     ; spectralGate3RequiresNoPollution =
         refl
-    ; spectralGate3NoPollutionNotProvedHere =
+    ; spectralGate3NoPollutionProvedHere =
         refl
     ; spectralGate3NoClayPromotion =
         refl

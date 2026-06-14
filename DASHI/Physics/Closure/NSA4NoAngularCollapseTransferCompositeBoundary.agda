@@ -179,20 +179,20 @@ record ImportedNoAngularCollapseTransferCompositeSupport : Set where
       LRTFourier.A4LeiRenTianFourierOutputCouplingProved ≡ false
     lrtOutputSupportStillFalse :
       LRTFourier.A4LeiRenTianOutputSupportTransferProved ≡ false
-    stripPreimageEstimateStillFalse :
-      StripSlicing.preimageMeasureEstimateProved ≡ false
-    exactStripPreimageBoundaryStillFalse :
-      StripPreimage.OutputStripPreimageMeasureEstimateProved ≡ false
-    exactStripPreimageA4StillFalse :
-      StripPreimage.A4LeiRenTianFourierOutputCouplingProved ≡ false
+    stripPreimageEstimateNowTrue :
+      StripSlicing.preimageMeasureEstimateProved ≡ true
+    exactStripPreimageBoundaryNowTrue :
+      StripPreimage.OutputStripPreimageMeasureEstimateProved ≡ true
+    exactStripPreimageA4NowTrue :
+      StripPreimage.A4LeiRenTianFourierOutputCouplingProved ≡ true
     exceptionalMassRoutingStillFalse :
       ExceptionalMass.exceptionalMassRoutingCompositeProved ≡ false
     exceptionalMassA4StillFalse :
       ExceptionalMass.A4LeiRenTianFourierOutputCouplingProved ≡ false
     stripNoCollapseConsumerStillFalse :
       StripSlicing.noCollapseConsumerProofCompleted ≡ false
-    stripSlicingTheoremStillFalse :
-      StripSlicing.OutputGreatCircleStripSlicingProved ≡ false
+    stripSlicingTheoremNowTrue :
+      StripSlicing.OutputGreatCircleStripSlicingProved ≡ true
 
 canonicalImportedNoAngularCollapseTransferCompositeSupport :
   ImportedNoAngularCollapseTransferCompositeSupport
@@ -238,11 +238,11 @@ canonicalImportedNoAngularCollapseTransferCompositeSupport =
         refl
     ; lrtOutputSupportStillFalse =
         refl
-    ; stripPreimageEstimateStillFalse =
+    ; stripPreimageEstimateNowTrue =
         refl
-    ; exactStripPreimageBoundaryStillFalse =
+    ; exactStripPreimageBoundaryNowTrue =
         refl
-    ; exactStripPreimageA4StillFalse =
+    ; exactStripPreimageA4NowTrue =
         refl
     ; exceptionalMassRoutingStillFalse =
         refl
@@ -250,7 +250,7 @@ canonicalImportedNoAngularCollapseTransferCompositeSupport =
         refl
     ; stripNoCollapseConsumerStillFalse =
         refl
-    ; stripSlicingTheoremStillFalse =
+    ; stripSlicingTheoremNowTrue =
         refl
     }
 
@@ -754,8 +754,8 @@ record NSA4NoAngularCollapseTransferCompositeBoundary : Set where
       LRTFourier.A4LeiRenTianFourierOutputCouplingProved ≡ false
     importedLRTOutputSupportStillFalse :
       LRTFourier.A4LeiRenTianOutputSupportTransferProved ≡ false
-    importedStripPreimageStillFalse :
-      StripSlicing.preimageMeasureEstimateProved ≡ false
+    importedStripPreimageNowTrue :
+      StripSlicing.preimageMeasureEstimateProved ≡ true
     importedStripNoCollapseStillFalse :
       StripSlicing.noCollapseConsumerProofCompleted ≡ false
     physicalConstructionHereFalse :

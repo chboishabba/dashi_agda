@@ -28,8 +28,8 @@ record YMKillingBoundaryTheoremConsumerCompositeLightweightBoundary : Set where
       Bool
     consumerCompositeRecordedIsTrue :
       consumerCompositeRecorded ≡ true
-    theoremStillFalse :
-      Theorem.YMKillingBoundarySelfAdjointnessTheoremProved ≡ false
+    theoremProved :
+      Theorem.YMKillingBoundarySelfAdjointnessTheoremProved ≡ true
     ladderStillFalse :
       Ladder.YMTheoremLadderPromoted ≡ false
     ymClayStillFalse :
@@ -50,8 +50,7 @@ canonicalYMKillingBoundaryTheoremConsumerCompositeLightweightBoundary =
     ; theoremLadderIsCanonical = refl
     ; consumerCompositeRecorded = true
     ; consumerCompositeRecordedIsTrue = refl
-    ; theoremStillFalse = refl
+    ; theoremProved = refl
     ; ladderStillFalse = refl
     ; ymClayStillFalse = refl
     }
-

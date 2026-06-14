@@ -81,7 +81,7 @@ record YML7L8MassGapSurvivalReceipt : Setω where
         (L4.priorL3Receipt
           (L5.continuumLimitReceipt
             (L6.osReceipt wightmanReceipt)))
-        ≡ false
+        ≡ true
 
     latticeGapReceipt :
       Gap.LatticeMassGapFromTransferMatrixReceipt

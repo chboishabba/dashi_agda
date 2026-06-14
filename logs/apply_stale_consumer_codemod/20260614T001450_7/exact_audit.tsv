@@ -1,0 +1,154 @@
+kind	fact	file	line	matched_text
+exact	localKPSumBelowOneProved	DASHI/Physics/Closure/ActualPolymerActivityDefinitionReceipt.agda	295	      localKPSumBelowOneProved ≡ true
+exact_split	localKPSumBelowOneProved	DASHI/Physics/Closure/ActualPolymerActivityDefinitionReceipt.agda	359	    ; localKPSumBelowOneProved = ||         true
+exact	balabanRGTransferProved	DASHI/Physics/Closure/ActualPolymerActivityDefinitionReceipt.agda	472	      balabanRGTransferProved ≡ true
+exact_split	balabanRGTransferProved	DASHI/Physics/Closure/ActualPolymerActivityDefinitionReceipt.agda	609	    ; balabanRGTransferProved = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/ArchimedeanFlatLimitCandidatesReceipt.agda	178	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/ArchimedeanFlatLimitCandidatesReceipt.agda	293	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/CSLevelRunningLawReceipt.agda	177	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/CSLevelRunningLawReceipt.agda	280	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierGaugeCouplingFromCSLevelReceipt.agda	147	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierGaugeCouplingFromCSLevelReceipt.agda	231	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierGaugeFieldMeasureReceipt.agda	232	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierGaugeFieldMeasureReceipt.agda	341	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierLatticeYMDefinitionReceipt.agda	127	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierLatticeYMDefinitionReceipt.agda	196	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierRGTrajectoryYMReceipt.agda	118	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierRGTrajectoryYMReceipt.agda	186	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierScaleFromHeegnerReceipt.agda	145	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierScaleFromHeegnerReceipt.agda	225	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierSchwingerFunctionCauchyReceipt.agda	182	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierSchwingerFunctionCauchyReceipt.agda	258	  ; continuumYangMillsConstructed = ||       true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/ClayNSCurrentStateReceipt.agda	71	      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ true
+exact	uniformBKMVorticityControlClosed	DASHI/Physics/Closure/ClayNSCurrentStateReceipt.agda	116	      uniformBKMVorticityControlClosed ≡ true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/ClayNSCurrentStateReceipt.agda	122	      globalSmoothRegularityProved ≡ true
+exact_split	uniformBKMVorticityControlClosed	DASHI/Physics/Closure/ClayNSCurrentStateReceipt.agda	185	    ; uniformBKMVorticityControlClosed = ||         true
+exact_split	globalSmoothRegularityProved	DASHI/Physics/Closure/ClayNSCurrentStateReceipt.agda	189	    ; globalSmoothRegularityProved = ||         true
+exact	uniformMassGapConstructed	DASHI/Physics/Closure/ClayYMProofRoadmapReceipt.agda	139	      uniformMassGapConstructed ≡ true
+exact_split	uniformMassGapConstructed	DASHI/Physics/Closure/ClayYMProofRoadmapReceipt.agda	216	    ; uniformMassGapConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/ContinuumClayMassGapReceiptObligation.agda	604	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/ContinuumClayMassGapReceiptObligation.agda	671	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/CuspDegenerationFlatLimitReceipt.agda	205	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/CuspDegenerationFlatLimitReceipt.agda	328	    ; continuumYangMillsConstructed = ||         true
+exact	actualPolymerActivitySupplied	DASHI/Physics/Closure/DangerScaleEdgeConservationReceipt.agda	240	      YMActual.actualPolymerActivitySupplied ymActualReceipt ≡ true
+exact	gate3DensityOfCarrierCoreProved	DASHI/Physics/Closure/Gate3DensityOfCarrierCoreConstructedReceipt.agda	62	      Dict.gate3DensityOfCarrierCoreProved priorDictionaryReceipt ≡ true
+exact	gate3DensityOfCarrierCoreProved	DASHI/Physics/Closure/Gate3NormDictionary.agda	796	      gate3DensityOfCarrierCoreProved ≡ true
+exact_split	gate3DensityOfCarrierCoreProved	DASHI/Physics/Closure/Gate3NormDictionary.agda	874	    ; gate3DensityOfCarrierCoreProved = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/HolographicBulkBoundaryReceipt.agda	178	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/HolographicBulkBoundaryReceipt.agda	277	    ; continuumYangMillsConstructed = ||         true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/NSCandidateCompleteEnstrophyBKMPassageReceipt.agda	95	      Gap.globalSmoothRegularityProved gapReceipt ≡ true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/NSFinalStateReceipt.agda	148	      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ true
+exact	vorticityControlClosed	DASHI/Physics/Closure/NSFinalStateReceipt.agda	160	      Roadmap.vorticityControlClosed roadmapReceipt ≡ true
+exact	enstrophyPassageClosed	DASHI/Physics/Closure/NSFinalStateReceipt.agda	226	      enstrophyPassageClosed ≡ true
+exact	vorticityControlClosed	DASHI/Physics/Closure/NSFinalStateReceipt.agda	232	      vorticityControlClosed ≡ true
+exact	lInfinityVorticityControlClosed	DASHI/Physics/Closure/NSFinalStateReceipt.agda	238	      lInfinityVorticityControlClosed ≡ true
+exact	globalRegularityClosed	DASHI/Physics/Closure/NSFinalStateReceipt.agda	244	      globalRegularityClosed ≡ true
+exact_split	enstrophyPassageClosed	DASHI/Physics/Closure/NSFinalStateReceipt.agda	361	    ; enstrophyPassageClosed = ||         true
+exact_split	vorticityControlClosed	DASHI/Physics/Closure/NSFinalStateReceipt.agda	365	    ; vorticityControlClosed = ||         true
+exact_split	lInfinityVorticityControlClosed	DASHI/Physics/Closure/NSFinalStateReceipt.agda	369	    ; lInfinityVorticityControlClosed = ||         true
+exact_split	globalRegularityClosed	DASHI/Physics/Closure/NSFinalStateReceipt.agda	373	    ; globalRegularityClosed = ||         true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/NSRegularityGapReceipt.agda	141	      globalSmoothRegularityProved ≡ true
+exact_split	globalSmoothRegularityProved	DASHI/Physics/Closure/NSRegularityGapReceipt.agda	220	    ; globalSmoothRegularityProved = ||         true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/NSRegularityRoadmapFilledReceipt.agda	84	      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/NSRegularityRoadmapFilledReceipt.agda	165	      globalSmoothRegularityProved ≡ true
+exact	vorticityControlClosed	DASHI/Physics/Closure/NSRegularityRoadmapFilledReceipt.agda	171	      vorticityControlClosed ≡ true
+exact_split	globalSmoothRegularityProved	DASHI/Physics/Closure/NSRegularityRoadmapFilledReceipt.agda	262	    ; globalSmoothRegularityProved = ||         true
+exact_split	vorticityControlClosed	DASHI/Physics/Closure/NSRegularityRoadmapFilledReceipt.agda	266	    ; vorticityControlClosed = ||         true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/NSRegularityUpgradeReceipt.agda	148	      globalSmoothRegularityProved ≡ true
+exact_split	globalSmoothRegularityProved	DASHI/Physics/Closure/NSRegularityUpgradeReceipt.agda	237	    ; globalSmoothRegularityProved = ||         true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/NSW4WeakSolutionReceipt.agda	84	      globalSmoothRegularityProved ≡ true
+exact_split	globalSmoothRegularityProved	DASHI/Physics/Closure/NSW4WeakSolutionReceipt.agda	137	    ; globalSmoothRegularityProved = ||         true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/NSWeakSolutionSummaryReceipt.agda	121	      globalSmoothRegularityProved ≡ true
+exact	vorticityControlClosed	DASHI/Physics/Closure/NSWeakSolutionSummaryReceipt.agda	127	      vorticityControlClosed ≡ true
+exact_split	globalSmoothRegularityProved	DASHI/Physics/Closure/NSWeakSolutionSummaryReceipt.agda	196	    ; globalSmoothRegularityProved = ||         true
+exact_split	vorticityControlClosed	DASHI/Physics/Closure/NSWeakSolutionSummaryReceipt.agda	200	    ; vorticityControlClosed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/PAdicShimuraFlatLimitReceipt.agda	180	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/PAdicShimuraFlatLimitReceipt.agda	289	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/Paper3YMDependencyGraphReceipt.agda	331	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/Paper3YMDependencyGraphReceipt.agda	494	    ; continuumYangMillsConstructed = ||         true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/Phase2ProgrammeReceipt.agda	83	      Current.globalSmoothRegularityProved currentStateReceipt ≡ true
+exact	globalSmoothRegularityProved	DASHI/Physics/Closure/Phase2ProgrammeReceipt.agda	176	      globalSmoothRegularityProved ≡ true
+exact_split	globalSmoothRegularityProved	DASHI/Physics/Closure/Phase2ProgrammeReceipt.agda	279	    ; globalSmoothRegularityProved = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/QCDRunningFromCarrierScaleReceipt.agda	117	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/QCDRunningFromCarrierScaleReceipt.agda	187	    ; continuumYangMillsConstructed = ||         true
+exact	actualPolymerActivitySupplied	DASHI/Physics/Closure/ScaleGraphBarrierTargetReceipt.agda	338	      YMActual.actualPolymerActivitySupplied ymActualReceipt ≡ true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/ShimuraTowerUniversalityClassReceipt.agda	207	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/ShimuraTowerUniversalityClassReceipt.agda	306	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/ShimuraTowerWilsonActionReceipt.agda	269	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/ShimuraTowerWilsonActionReceipt.agda	392	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/WilsonActionOn3PlusOneLatticeReceipt.agda	123	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/WilsonActionOn3PlusOneLatticeReceipt.agda	192	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/WilsonBetaFromCSLevelReceipt.agda	120	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/WilsonBetaFromCSLevelReceipt.agda	193	    ; continuumYangMillsConstructed = ||         true
+exact	localKPSumBelowOneProved	DASHI/Physics/Closure/YMActualKPLocalSumDiameter1Receipt.agda	197	      Activity.localKPSumBelowOneProved actualActivityReceipt ≡ true
+exact	localKPSumBelowOneProved	DASHI/Physics/Closure/YMActualKPLocalSumDiameter2Receipt.agda	215	      Activity.localKPSumBelowOneProved actualActivityReceipt ≡ true
+exact	localKPSumBelowOneProved	DASHI/Physics/Closure/YMActualP7WilsonPolymerActivityReceipt.agda	465	      localKPSumBelowOneProved ≡ true
+exact	balabanRGTransferProved	DASHI/Physics/Closure/YMActualP7WilsonPolymerActivityReceipt.agda	471	      balabanRGTransferProved ≡ true
+exact_split	localKPSumBelowOneProved	DASHI/Physics/Closure/YMActualP7WilsonPolymerActivityReceipt.agda	668	    ; localKPSumBelowOneProved = ||         true
+exact_split	balabanRGTransferProved	DASHI/Physics/Closure/YMActualP7WilsonPolymerActivityReceipt.agda	672	    ; balabanRGTransferProved = ||         true
+exact	actualPolymerActivitySupplied	DASHI/Physics/Closure/YMActualPolymerActivityCandidateReceipt.agda	140	      Definition.actualPolymerActivitySupplied definitionReceipt ≡ true
+exact	actualPolymerActivitySupplied	DASHI/Physics/Closure/YMActualPolymerActivityDefinitionReceipt.agda	225	      actualPolymerActivitySupplied ≡ true
+exact_split	actualPolymerActivitySupplied	DASHI/Physics/Closure/YMActualPolymerActivityDefinitionReceipt.agda	297	    ; actualPolymerActivitySupplied = ||         true
+exact	balabanRGTransferProved	DASHI/Physics/Closure/YMBalabanRGInductionCandidateReceipt.agda	466	      balabanRGTransferProved ≡ true
+exact_split	balabanRGTransferProved	DASHI/Physics/Closure/YMBalabanRGInductionCandidateReceipt.agda	618	    ; balabanRGTransferProved = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YMClayTrueBlockerReceipt.agda	129	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YMClayTrueBlockerReceipt.agda	238	    ; continuumYangMillsConstructed = ||         true
+exact	gate3DensityOfCarrierCoreProved	DASHI/Physics/Closure/YMContinuumGapFromCarrierConditionalReceipt.agda	115	      Gate3.gate3DensityOfCarrierCoreProved gate3FeshbachRoute ≡ true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YMDepthContinuumLimitObstructionReceipt.agda	105	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YMDepthContinuumLimitObstructionReceipt.agda	176	    ; continuumYangMillsConstructed = ||         true
+exact	gate3DensityOfCarrierCoreProved	DASHI/Physics/Closure/YMFeshbachSchurFiberGapBridgeReceipt.agda	99	      Gate3.gate3DensityOfCarrierCoreProved gate3FeshbachRoute ≡ true
+exact	ymL3TightnessConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	193	      L3.ymL3TightnessConstructed l3Receipt ≡ true
+exact	fullTightnessConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	208	      L3B.fullTightnessConstructed l3BoundedCandidateReceipt ≡ true
+exact	localKPSumBelowOneProved	DASHI/Physics/Closure/YMFinalStateReceipt.agda	217	      ActualP7.localKPSumBelowOneProved actualP7Receipt ≡ true
+exact	strictAbsorptionControlPromoted	DASHI/Physics/Closure/YMFinalStateReceipt.agda	231	      Strict.strictAbsorptionControlPromoted strictAbsorptionReceipt ≡ true
+exact	uniformVolumeKPProved	DASHI/Physics/Closure/YMFinalStateReceipt.agda	237	      UV.uniformVolumeKPProved uniformVolumeKPReceipt ≡ true
+exact	balabanRGTransferProved	DASHI/Physics/Closure/YMFinalStateReceipt.agda	243	      RGI.balabanRGTransferProved balabanRGInductionCandidateReceipt ≡ true
+exact	continuumUniquenessConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	291	      TD.continuumUniquenessConstructed thermodynamicBundleReceipt ≡ true
+exact	ymL3TightnessConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	383	      ymL3TightnessConstructed ≡ true
+exact	fullTightnessConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	389	      fullTightnessConstructed ≡ true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	425	      continuumYangMillsConstructed ≡ true
+exact	uniformMassGapConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	437	      uniformMassGapConstructed ≡ true
+exact	continuumUniquenessConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	443	      continuumUniquenessConstructed ≡ true
+exact_split	ymL3TightnessConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	620	    ; ymL3TightnessConstructed = ||         true
+exact_split	fullTightnessConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	624	    ; fullTightnessConstructed = ||         true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	648	    ; continuumYangMillsConstructed = ||         true
+exact_split	uniformMassGapConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	656	    ; uniformMassGapConstructed = ||         true
+exact_split	continuumUniquenessConstructed	DASHI/Physics/Closure/YMFinalStateReceipt.agda	660	    ; continuumUniquenessConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YMFramingCorrectionReceipt.agda	183	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YMFramingCorrectionReceipt.agda	285	    ; continuumYangMillsConstructed = ||         true
+exact	balabanRGTransferProved	DASHI/Physics/Closure/YMH3aContinuumIntakeReceipt.agda	273	      BalabanRG.balabanRGTransferProved balabanRGReceipt ≡ true
+exact	uniformVolumeKPProved	DASHI/Physics/Closure/YMKPUniformVolumeInductionBoundaryReceipt.agda	275	      uniformVolumeKPProved ≡ true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YML2CorrectedStatusReceipt.agda	121	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YML2CorrectedStatusReceipt.agda	190	    ; continuumYangMillsConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YML2StatusReceipt.agda	157	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YML2StatusReceipt.agda	256	    ; continuumYangMillsConstructed = ||         true
+exact	ymL3TightnessConstructed	DASHI/Physics/Closure/YML3TightnessBoundedCandidateReceipt.agda	70	      KRunning.ymL3TightnessConstructed kRunningReceipt ≡ true
+exact	fullTightnessConstructed	DASHI/Physics/Closure/YML3TightnessBoundedCandidateReceipt.agda	103	      fullTightnessConstructed ≡ true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YML3TightnessBoundedCandidateReceipt.agda	109	      continuumYangMillsConstructed ≡ true
+exact_split	fullTightnessConstructed	DASHI/Physics/Closure/YML3TightnessBoundedCandidateReceipt.agda	170	    ; fullTightnessConstructed = ||         true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YML3TightnessBoundedCandidateReceipt.agda	174	    ; continuumYangMillsConstructed = ||         true
+exact	ymL3TightnessConstructed	DASHI/Physics/Closure/YML3TightnessFromDimensionalTransmutationReceipt.agda	105	      KRunning.ymL3TightnessConstructed kRunningAuditReceipt ≡ true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YML3TightnessFromDimensionalTransmutationReceipt.agda	206	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YML3TightnessFromDimensionalTransmutationReceipt.agda	317	    ; continuumYangMillsConstructed = ||         true
+exact	ymL3TightnessConstructed	DASHI/Physics/Closure/YML3TightnessFromKRunningReceipt.agda	107	      ymL3TightnessConstructed ≡ true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YML3TightnessFromKRunningReceipt.agda	113	      continuumYangMillsConstructed ≡ true
+exact_split	ymL3TightnessConstructed	DASHI/Physics/Closure/YML3TightnessFromKRunningReceipt.agda	184	    ; ymL3TightnessConstructed = ||         true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YML3TightnessFromKRunningReceipt.agda	188	    ; continuumYangMillsConstructed = ||         true
+exact	ymL3TightnessConstructed	DASHI/Physics/Closure/YML3TightnessInhabitedReceipt.agda	98	      PriorL3.ymL3TightnessConstructed priorCandidateReceipt ≡ true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YML3TightnessInhabitedReceipt.agda	203	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YML3TightnessInhabitedReceipt.agda	330	    ; continuumYangMillsConstructed = ||         true
+exact	ymL3TightnessConstructed	DASHI/Physics/Closure/YML4ContinuumLimitReceipt.agda	60	      L3.ymL3TightnessConstructed priorL3Receipt ≡ true
+exact	ymL3TightnessConstructed	DASHI/Physics/Closure/YML7L8MassGapInhabitedReceipt.agda	166	      L3.ymL3TightnessConstructed l3TightnessReceipt ≡ true
+exact	actualPolymerActivitySupplied	DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda	193	      Actual.actualPolymerActivitySupplied actualActivityReceipt ≡ true
+exact	actualPolymerActivitySupplied	DASHI/Physics/Closure/YMPaper3RoadmapReceipt.agda	177	      YM5.actualPolymerActivitySupplied ym5Receipt ≡ true
+exact	actualPolymerActivitySupplied	DASHI/Physics/Closure/YMPolymerActivityStrictAbsorptionBridgeReceipt.agda	471	      actualPolymerActivitySupplied ≡ true
+exact	strictAbsorptionControlPromoted	DASHI/Physics/Closure/YMPolymerActivityStrictAbsorptionBridgeReceipt.agda	477	      strictAbsorptionControlPromoted ≡ true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YMProductLatticeActionReceipt.agda	231	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YMProductLatticeActionReceipt.agda	340	    ; continuumYangMillsConstructed = ||         true
+exact	uniformMassGapConstructed	DASHI/Physics/Closure/YMThermodynamicOSWightmanOperatorBoundaryReceipt.agda	250	      uniformMassGapConstructed ≡ true
+exact	continuumUniquenessConstructed	DASHI/Physics/Closure/YMThermodynamicOSWightmanOperatorBoundaryReceipt.agda	256	      continuumUniquenessConstructed ≡ true
+exact_split	uniformMassGapConstructed	DASHI/Physics/Closure/YMThermodynamicOSWightmanOperatorBoundaryReceipt.agda	334	    ; uniformMassGapConstructed = ||         true
+exact_split	continuumUniquenessConstructed	DASHI/Physics/Closure/YMThermodynamicOSWightmanOperatorBoundaryReceipt.agda	338	    ; continuumUniquenessConstructed = ||         true
+exact	continuumYangMillsConstructed	DASHI/Physics/Closure/YangMillsFieldEquationReceipt.agda	5608	      continuumYangMillsConstructed ≡ true
+exact_split	continuumYangMillsConstructed	DASHI/Physics/Closure/YangMillsFieldEquationReceipt.agda	5662	    ; continuumYangMillsConstructed = ||         true
+exact	globalSmoothRegularityProved	DASHI/Promotion/Gate3StandardModelClayEvidenceReducer.agda	495	    "ClayNSCurrentStateReceipt.globalSmoothRegularityProved=false"

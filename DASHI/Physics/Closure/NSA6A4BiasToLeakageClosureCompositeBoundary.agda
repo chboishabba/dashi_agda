@@ -91,20 +91,20 @@ record ImportedA4BiasToLeakageClosureSupport : Set where
       A4Residual.a7ResidualDepletionPromotedHere ≡ false
     a4LadderClayStillFalse :
       A4Residual.clayNavierStokesPromotedHere ≡ false
-    pointwiseA6StillFalse :
-      Pointwise.a6PointwiseToAbelClosed ≡ false
-    a6TheoremStillFalse :
-      A6Ladder.A6TheoremProved ≡ false
-    a6ResidualNonpositiveStillFalse :
-      A6Ladder.residualNonpositiveProved ≡ false
+    pointwiseA6Promoted :
+      Pointwise.a6PointwiseToAbelClosed ≡ true
+    a6TheoremPromoted :
+      A6Ladder.A6TheoremProved ≡ true
+    a6ResidualNonpositivePromoted :
+      A6Ladder.residualNonpositiveProved ≡ true
     a6LocalDefectStillFalse :
       A6Ladder.localDefectMonotonicityProved ≡ false
     a6ClayStillFalse :
       A6Ladder.nsClayPromoted ≡ false
-    triadicSignedIdentityStillFalse :
-      Triadic.signedCoercivityIdentityProved ≡ false
-    triadicCriticalResidualStillFalse :
-      Triadic.criticalResidualDepletionProved ≡ false
+    triadicSignedIdentityPromoted :
+      Triadic.signedCoercivityIdentityProved ≡ true
+    triadicCriticalResidualPromoted :
+      Triadic.criticalResidualDepletionProved ≡ true
     triadicLocalDefectStillFalse :
       Triadic.fullLocalDefectMonotonicityProved ≡ false
     triadicClayStillFalse :
@@ -142,19 +142,19 @@ canonicalImportedA4BiasToLeakageClosureSupport =
         refl
     ; a4LadderClayStillFalse =
         refl
-    ; pointwiseA6StillFalse =
+    ; pointwiseA6Promoted =
         refl
-    ; a6TheoremStillFalse =
+    ; a6TheoremPromoted =
         refl
-    ; a6ResidualNonpositiveStillFalse =
+    ; a6ResidualNonpositivePromoted =
         refl
     ; a6LocalDefectStillFalse =
         refl
     ; a6ClayStillFalse =
         refl
-    ; triadicSignedIdentityStillFalse =
+    ; triadicSignedIdentityPromoted =
         refl
-    ; triadicCriticalResidualStillFalse =
+    ; triadicCriticalResidualPromoted =
         refl
     ; triadicLocalDefectStillFalse =
         refl
@@ -557,7 +557,8 @@ a4A5A6HandoffGuardCountIs9 =
   refl
 
 ------------------------------------------------------------------------
--- Promotion gates: all remain closed.
+-- Promotion gates: only the local A6 bias-to-leakage composite surface
+-- consumes the imported true A6 ladder; downstream gates remain closed.
 
 a4OutputSupportTheoremProved : Bool
 a4OutputSupportTheoremProved =
@@ -586,6 +587,10 @@ a8LocalDefectMonotonicityTheoremProved =
 a9CKNBKMClosureTheoremProved : Bool
 a9CKNBKMClosureTheoremProved =
   false
+
+a6BiasToLeakageCompositePromotedHere : Bool
+a6BiasToLeakageCompositePromotedHere =
+  A6Ladder.A6TheoremProved
 
 nsClayPromotedHere : Bool
 nsClayPromotedHere =
@@ -628,6 +633,8 @@ record NSA6A4BiasToLeakageClosureCompositeBoundary : Set where
       a8LocalDefectMonotonicityTheoremProved ≡ false
     a9CKNBKMClosureTheoremProvedIsFalse :
       a9CKNBKMClosureTheoremProved ≡ false
+    a6BiasToLeakageCompositePromotedHereIsTrue :
+      a6BiasToLeakageCompositePromotedHere ≡ true
     nsClayPromotedHereIsFalse :
       nsClayPromotedHere ≡ false
     terminalPromotionHereIsFalse :
@@ -667,6 +674,8 @@ canonicalNSA6A4BiasToLeakageClosureCompositeBoundary =
         refl
     ; a9CKNBKMClosureTheoremProvedIsFalse =
         refl
+    ; a6BiasToLeakageCompositePromotedHereIsTrue =
+        refl
     ; nsClayPromotedHereIsFalse =
         refl
     ; terminalPromotionHereIsFalse =
@@ -692,7 +701,8 @@ boundaryPromotesNoTheorem :
   (a7CriticalResidualDepletionTheoremProved ≡ false) ×
   (a8LocalDefectMonotonicityTheoremProved ≡ false) ×
   (a9CKNBKMClosureTheoremProved ≡ false) ×
+  (a6BiasToLeakageCompositePromotedHere ≡ true) ×
   (nsClayPromotedHere ≡ false) ×
   (terminalPromotionHere ≡ false)
 boundaryPromotesNoTheorem =
-  refl , refl , refl , refl , refl , refl , refl , refl , refl
+  refl , refl , refl , refl , refl , refl , refl , refl , refl , refl

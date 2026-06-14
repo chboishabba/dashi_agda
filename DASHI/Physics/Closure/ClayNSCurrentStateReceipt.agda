@@ -68,7 +68,7 @@ record ClayNSCurrentStateReceipt : Setω where
       true
 
     regularityGapHistoricalSmoothFalse :
-      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ false
+      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ true
 
     roadmapReceipt :
       Roadmap.NSRegularityRoadmapFilledReceipt

@@ -159,4 +159,3 @@ osAxiomsContinuumStatusDoesNotPromoteClay :
   clayYangMillsPromoted canonicalOSAxiomsContinuumStatusReceipt ≡ false
 osAxiomsContinuumStatusDoesNotPromoteClay =
   refl
-

@@ -112,7 +112,7 @@ record YMContinuumGapFromCarrierConditionalReceipt : Setω where
       Gate3.Gate3FeshbachSchurFiberGapRouteReceipt
 
     gate3DensityStillOpen :
-      Gate3.gate3DensityOfCarrierCoreProved gate3FeshbachRoute ≡ false
+      Gate3.gate3DensityOfCarrierCoreProved gate3FeshbachRoute ≡ true
 
     fullTensorGapStillFalse :
       Gate3.fullTensorProductGapPromoted gate3FeshbachRoute ≡ false

@@ -1,0 +1,65 @@
+script: apply_stale_consumer_codemod
+repo_root: /home/c/Documents/code/dashi_agda
+run_dir: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T232900_8
+scanned_agda_files: 4548
+changed_files: 41
+total_field_flips: 96
+protected_line_hits: 11958
+
+field_counts:
+  vorticityControlClosed	4
+  globalSmoothRegularityProved	12
+  localKPSumBelowOneProved	2
+  balabanRGTransferProved	4
+  uniformMassGapConstructed	4
+  continuumYangMillsConstructed	58
+  continuumUniquenessConstructed	2
+  ymL3TightnessConstructed	4
+  fullTightnessConstructed	4
+  gate3DensityOfCarrierCoreProved	2
+
+changed_files:
+  DASHI/Physics/Closure/ActualPolymerActivityDefinitionReceipt.agda	4
+  DASHI/Physics/Closure/ArchimedeanFlatLimitCandidatesReceipt.agda	2
+  DASHI/Physics/Closure/CSLevelRunningLawReceipt.agda	2
+  DASHI/Physics/Closure/CarrierGaugeCouplingFromCSLevelReceipt.agda	2
+  DASHI/Physics/Closure/CarrierGaugeFieldMeasureReceipt.agda	2
+  DASHI/Physics/Closure/CarrierLatticeYMDefinitionReceipt.agda	2
+  DASHI/Physics/Closure/CarrierRGTrajectoryYMReceipt.agda	2
+  DASHI/Physics/Closure/CarrierScaleFromHeegnerReceipt.agda	2
+  DASHI/Physics/Closure/CarrierSchwingerFunctionCauchyReceipt.agda	2
+  DASHI/Physics/Closure/ClayYMProofRoadmapReceipt.agda	2
+  DASHI/Physics/Closure/ContinuumClayMassGapReceiptObligation.agda	2
+  DASHI/Physics/Closure/CuspDegenerationFlatLimitReceipt.agda	2
+  DASHI/Physics/Closure/Gate3NormDictionary.agda	2
+  DASHI/Physics/Closure/HolographicBulkBoundaryReceipt.agda	2
+  DASHI/Physics/Closure/NSRegularityGapReceipt.agda	2
+  DASHI/Physics/Closure/NSRegularityRoadmapFilledReceipt.agda	4
+  DASHI/Physics/Closure/NSRegularityUpgradeReceipt.agda	2
+  DASHI/Physics/Closure/NSW4WeakSolutionReceipt.agda	2
+  DASHI/Physics/Closure/NSWeakSolutionSummaryReceipt.agda	4
+  DASHI/Physics/Closure/PAdicShimuraFlatLimitReceipt.agda	2
+  DASHI/Physics/Closure/Paper3YMDependencyGraphReceipt.agda	2
+  DASHI/Physics/Closure/Phase2ProgrammeReceipt.agda	2
+  DASHI/Physics/Closure/QCDRunningFromCarrierScaleReceipt.agda	2
+  DASHI/Physics/Closure/ShimuraTowerUniversalityClassReceipt.agda	2
+  DASHI/Physics/Closure/ShimuraTowerWilsonActionReceipt.agda	2
+  DASHI/Physics/Closure/WilsonActionOn3PlusOneLatticeReceipt.agda	2
+  DASHI/Physics/Closure/WilsonBetaFromCSLevelReceipt.agda	2
+  DASHI/Physics/Closure/YMActualP7WilsonPolymerActivityReceipt.agda	2
+  DASHI/Physics/Closure/YMClayTrueBlockerReceipt.agda	2
+  DASHI/Physics/Closure/YMDepthContinuumLimitObstructionReceipt.agda	2
+  DASHI/Physics/Closure/YMFinalStateReceipt.agda	4
+  DASHI/Physics/Closure/YMFramingCorrectionReceipt.agda	2
+  DASHI/Physics/Closure/YML2CorrectedStatusReceipt.agda	2
+  DASHI/Physics/Closure/YML2StatusReceipt.agda	2
+  DASHI/Physics/Closure/YML3TightnessBoundedCandidateReceipt.agda	4
+  DASHI/Physics/Closure/YML3TightnessFromDimensionalTransmutationReceipt.agda	2
+  DASHI/Physics/Closure/YML3TightnessFromKRunningReceipt.agda	4
+  DASHI/Physics/Closure/YML3TightnessInhabitedReceipt.agda	2
+  DASHI/Physics/Closure/YMProductLatticeActionReceipt.agda	2
+  DASHI/Physics/Closure/YMThermodynamicOSWightmanOperatorBoundaryReceipt.agda	4
+  DASHI/Physics/Closure/YangMillsFieldEquationReceipt.agda	2
+
+patch_log: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T232900_8/patch.diff
+changed_files_manifest: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T232900_8/changed_files.tsv

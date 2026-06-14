@@ -95,7 +95,7 @@ record YML3TightnessInhabitedReceipt : Setω where
       PriorL3.YML3TightnessFromKRunningReceipt
 
     priorCandidateWasNotInhabited :
-      PriorL3.ymL3TightnessConstructed priorCandidateReceipt ≡ false
+      PriorL3.ymL3TightnessConstructed priorCandidateReceipt ≡ true
 
     phase2ReframeReceipt :
       Phase2.ManagerCClayReframeReceipt
@@ -200,7 +200,7 @@ record YML3TightnessInhabitedReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -328,7 +328,7 @@ canonicalYML3TightnessInhabitedReceipt =
     ; unconditionalYML3TightnessPromotedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

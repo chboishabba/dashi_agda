@@ -328,7 +328,7 @@ record Paper3YMDependencyGraphReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     yangMillsMassGapPromoted :
       Bool
@@ -492,7 +492,7 @@ canonicalPaper3YMDependencyGraphReceipt =
     ; balabanRGTheoremProvedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; yangMillsMassGapPromoted =

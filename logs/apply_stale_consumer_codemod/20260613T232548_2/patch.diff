@@ -1,0 +1,9 @@
+--- /home/c/Documents/code/dashi_agda/DASHI/Combinatorics/String/Compatibility.agda (before)
++++ /home/c/Documents/code/dashi_agda/DASHI/Combinatorics/String/Compatibility.agda (after)
+@@ -8,4 +8,4 @@
+ -- The compatibility predicate you want to enforce for operations, e.g. "same length"
+ record StringCompatibility (A : Set) : Set₁ where
+   field
+-    compatible : String → String → Set
+\ No newline at end of file
++    compatible : String → String → Set

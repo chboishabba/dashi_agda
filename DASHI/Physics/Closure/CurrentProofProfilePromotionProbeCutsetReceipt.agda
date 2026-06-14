@@ -14,9 +14,9 @@ import DASHI.Physics.Closure.CurrentProofProfileReceipt as Root
 --
 -- This receipt records the stable cross-lane root-probe blocker without
 -- importing the probe itself.  The root receipt is canonical, the probe path
--- is fixed, the first blocker remains ymCandidateCompleteNow, and the
--- interpretation is fail-closed: the current proof profile is not yet
--- promotable from this probe.
+-- is fixed, ymCandidateCompleteNow is now recorded true at the root profile,
+-- and the interpretation remains fail-closed because no promotion token is
+-- introduced by this probe.
 
 data CurrentProofProfilePromotionProbeCutsetStatus : Set where
   rootProbeBlockerCaptured :
@@ -39,7 +39,7 @@ currentProofProfilePromotionProbeFirstBlockerName =
 
 currentProofProfilePromotionProbeInterpretation : String
 currentProofProfilePromotionProbeInterpretation =
-  "Fail-closed root probe: the canonical current proof profile still records ymCandidateCompleteNow as false, so the probe remains blocked and no promotion is introduced."
+  "Fail-closed root probe: the canonical current proof profile records ymCandidateCompleteNow as true, but the probe introduces no promotion token."
 
 record CurrentProofProfilePromotionProbeCutsetReceipt : Setω where
   field
@@ -52,8 +52,8 @@ record CurrentProofProfilePromotionProbeCutsetReceipt : Setω where
     rootReceipt :
       Root.CurrentProofProfileReceipt
 
-    rootProbeBlockerFalse :
-      Root.ymCandidateCompleteNow rootReceipt ≡ false
+    rootCandidateCompleteTrue :
+      Root.ymCandidateCompleteNow rootReceipt ≡ true
 
     probePath :
       String
@@ -67,11 +67,11 @@ record CurrentProofProfilePromotionProbeCutsetReceipt : Setω where
     firstBlockerNameIsCanonical :
       firstBlockerName ≡ currentProofProfilePromotionProbeFirstBlockerName
 
-    firstBlockerRecordedAsFalse :
+    firstBlockerRecordedAsTrue :
       Bool
 
-    firstBlockerRecordedAsFalseIsFalse :
-      firstBlockerRecordedAsFalse ≡ false
+    firstBlockerRecordedAsTrueIsTrue :
+      firstBlockerRecordedAsTrue ≡ true
 
     interpretation :
       String
@@ -92,7 +92,7 @@ record CurrentProofProfilePromotionProbeCutsetReceipt : Setω where
       receiptBoundary ≡
       "Probe path: DASHI/Physics/Probes/CurrentProofProfilePromotionProbe.agda"
       ∷ "First blocker: ymCandidateCompleteNow"
-      ∷ "Interpretation: fail-closed because the canonical root receipt keeps ymCandidateCompleteNow false"
+      ∷ "Interpretation: fail-closed because no promotion token is introduced even though ymCandidateCompleteNow is true"
       ∷ "No promotion token is introduced"
       ∷ []
 
@@ -108,7 +108,7 @@ canonicalCurrentProofProfilePromotionProbeCutsetReceipt =
         refl
     ; rootReceipt =
         Root.canonicalCurrentProofProfileReceipt
-    ; rootProbeBlockerFalse =
+    ; rootCandidateCompleteTrue =
         refl
     ; probePath =
         currentProofProfilePromotionProbePath
@@ -118,9 +118,9 @@ canonicalCurrentProofProfilePromotionProbeCutsetReceipt =
         currentProofProfilePromotionProbeFirstBlockerName
     ; firstBlockerNameIsCanonical =
         refl
-    ; firstBlockerRecordedAsFalse =
-        false
-    ; firstBlockerRecordedAsFalseIsFalse =
+    ; firstBlockerRecordedAsTrue =
+        true
+    ; firstBlockerRecordedAsTrueIsTrue =
         refl
     ; interpretation =
         currentProofProfilePromotionProbeInterpretation
@@ -133,19 +133,19 @@ canonicalCurrentProofProfilePromotionProbeCutsetReceipt =
     ; receiptBoundary =
         "Probe path: DASHI/Physics/Probes/CurrentProofProfilePromotionProbe.agda"
         ∷ "First blocker: ymCandidateCompleteNow"
-        ∷ "Interpretation: fail-closed because the canonical root receipt keeps ymCandidateCompleteNow false"
+        ∷ "Interpretation: fail-closed because no promotion token is introduced even though ymCandidateCompleteNow is true"
         ∷ "No promotion token is introduced"
         ∷ []
     ; receiptBoundaryIsCanonical =
         refl
     }
 
-currentProofProfilePromotionProbeCutsetKeepsRootFalse :
+currentProofProfilePromotionProbeCutsetRecordsRootTrue :
   Root.ymCandidateCompleteNow
     (rootReceipt canonicalCurrentProofProfilePromotionProbeCutsetReceipt)
   ≡
-  false
-currentProofProfilePromotionProbeCutsetKeepsRootFalse =
+  true
+currentProofProfilePromotionProbeCutsetRecordsRootTrue =
   refl
 
 currentProofProfilePromotionProbeCutsetNoPromotion :

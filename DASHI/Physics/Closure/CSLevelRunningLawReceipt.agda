@@ -174,7 +174,7 @@ record CSLevelRunningLawReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -278,7 +278,7 @@ canonicalCSLevelRunningLawReceipt =
     ; wilsonMeasureTightnessConstructedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

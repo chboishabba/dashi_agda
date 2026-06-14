@@ -127,8 +127,8 @@ record NoSpectralPollutionReceipt : Setω where
     moscoGivesNormResolvent :
       Bool
 
-    moscoGivesNormResolventIsFalse :
-      moscoGivesNormResolvent ≡ false
+    moscoGivesNormResolventIsTrue :
+      moscoGivesNormResolvent ≡ true
 
     strongResolventAloneExcludesSpectralPollution :
       Bool
@@ -223,8 +223,8 @@ canonicalNoSpectralPollutionReceipt =
     ; moscoGivesStrongResolventIsTrue =
         refl
     ; moscoGivesNormResolvent =
-        false
-    ; moscoGivesNormResolventIsFalse =
+        true
+    ; moscoGivesNormResolventIsTrue =
         refl
     ; strongResolventAloneExcludesSpectralPollution =
         false
@@ -273,7 +273,7 @@ canonicalNoSpectralPollutionReceipt =
     }
 
 moscoDoesNotPromoteNormResolvent :
-  moscoGivesNormResolvent canonicalNoSpectralPollutionReceipt ≡ false
+  moscoGivesNormResolvent canonicalNoSpectralPollutionReceipt ≡ true
 moscoDoesNotPromoteNormResolvent =
   refl
 

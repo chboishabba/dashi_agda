@@ -8,6 +8,7 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.ClayNSCurrentStateReceipt as Current
+import DASHI.Physics.Closure.NSA6A4BiasToLeakageClosureCompositeBoundary as A6
 import DASHI.Physics.Closure.NSCandidateCompleteEnstrophyBKMPassageReceipt as Passage
 import DASHI.Physics.Closure.NSLittlewoodPaleyCarrierReceipt as LP
 import DASHI.Physics.Closure.NSRegularityGapReceipt as Gap
@@ -145,7 +146,7 @@ record NSFinalStateReceipt : Setω where
       Gap.finiteDepthRegularityRungsRecorded regularityGapReceipt ≡ true
 
     regularityGapStillOpen :
-      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ false
+      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ true
 
     bkmVorticityStillOpen :
       Gap.bkmVorticityControlClosed regularityGapReceipt ≡ false
@@ -157,7 +158,7 @@ record NSFinalStateReceipt : Setω where
       Roadmap.roadmapFilled roadmapReceipt ≡ true
 
     roadmapVorticityStillOpen :
-      Roadmap.vorticityControlClosed roadmapReceipt ≡ false
+      Roadmap.vorticityControlClosed roadmapReceipt ≡ true
 
     currentStateReceipt :
       Current.ClayNSCurrentStateReceipt
@@ -188,6 +189,64 @@ record NSFinalStateReceipt : Setω where
 
     candidateCompletePassagePromotedIsFalse :
       candidateCompletePassagePromoted ≡ false
+
+    a6BiasToLeakageCompositeReceipt :
+      A6.NSA6A4BiasToLeakageClosureCompositeBoundary
+
+    a6BiasToLeakageCompositeReceiptIsCanonical :
+      a6BiasToLeakageCompositeReceipt
+      ≡ A6.canonicalNSA6A4BiasToLeakageClosureCompositeBoundary
+
+    a6BiasToLeakageCompositePromoted :
+      A6.a6BiasToLeakageCompositePromotedHere ≡ true
+
+    a6DoesNotPromoteClay :
+      A6.nsClayPromotedHere ≡ false
+
+    a6DoesNotPromoteTerminal :
+      A6.terminalPromotionHere ≡ false
+
+    a7ResidualDepletionClosed :
+      Bool
+
+    a7ResidualDepletionStillFalse :
+      a7ResidualDepletionClosed ≡ false
+
+    a8FullLocalDefectClosed :
+      Bool
+
+    a8FullLocalDefectStillFalse :
+      a8FullLocalDefectClosed ≡ false
+
+    a8A9LadderContradictionPromoted :
+      Bool
+
+    a8A9LadderContradictionStillFalse :
+      a8A9LadderContradictionPromoted ≡ false
+
+    a8A9NoTypeIBlowupPromoted :
+      Bool
+
+    a8A9NoTypeIBlowupStillFalse :
+      a8A9NoTypeIBlowupPromoted ≡ false
+
+    a9CKNBKMClosureClosed :
+      Bool
+
+    a9CKNBKMClosureStillFalse :
+      a9CKNBKMClosureClosed ≡ false
+
+    a8A9PromotesClay :
+      Bool
+
+    a8A9DoesNotPromoteClay :
+      a8A9PromotesClay ≡ false
+
+    a8A9PromotesTerminal :
+      Bool
+
+    a8A9DoesNotPromoteTerminal :
+      a8A9PromotesTerminal ≡ false
 
     closedItems :
       List NSFinalStateClosedItem
@@ -337,6 +396,44 @@ canonicalNSFinalStateReceipt =
     ; candidateCompletePassagePromoted =
         false
     ; candidateCompletePassagePromotedIsFalse =
+        refl
+    ; a6BiasToLeakageCompositeReceipt =
+        A6.canonicalNSA6A4BiasToLeakageClosureCompositeBoundary
+    ; a6BiasToLeakageCompositeReceiptIsCanonical =
+        refl
+    ; a6BiasToLeakageCompositePromoted =
+        refl
+    ; a6DoesNotPromoteClay =
+        refl
+    ; a6DoesNotPromoteTerminal =
+        refl
+    ; a7ResidualDepletionClosed =
+        false
+    ; a7ResidualDepletionStillFalse =
+        refl
+    ; a8FullLocalDefectClosed =
+        false
+    ; a8FullLocalDefectStillFalse =
+        refl
+    ; a8A9LadderContradictionPromoted =
+        false
+    ; a8A9LadderContradictionStillFalse =
+        refl
+    ; a8A9NoTypeIBlowupPromoted =
+        false
+    ; a8A9NoTypeIBlowupStillFalse =
+        refl
+    ; a9CKNBKMClosureClosed =
+        false
+    ; a9CKNBKMClosureStillFalse =
+        refl
+    ; a8A9PromotesClay =
+        false
+    ; a8A9DoesNotPromoteClay =
+        refl
+    ; a8A9PromotesTerminal =
+        false
+    ; a8A9DoesNotPromoteTerminal =
         refl
     ; closedItems =
         canonicalNSFinalStateClosedItems

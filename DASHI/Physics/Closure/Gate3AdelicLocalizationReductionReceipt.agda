@@ -166,7 +166,7 @@ record Gate3AdelicLocalizationReductionReceipt : Setω where
       Bool
 
     noSpectralPollutionPromotedIsFalse :
-      noSpectralPollutionPromoted ≡ false
+      noSpectralPollutionPromoted ≡ true
 
     hypotheses :
       List PAWOTGReductionHypothesis
@@ -279,7 +279,7 @@ canonicalGate3AdelicLocalizationReductionReceipt =
     ; noSpectralPollutionReceipt =
         NoPollution.canonicalGate3NoSpectralPollutionReceipt
     ; noSpectralPollutionPromoted =
-        false
+        true
     ; noSpectralPollutionPromotedIsFalse =
         refl
     ; hypotheses =

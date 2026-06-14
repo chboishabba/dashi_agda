@@ -104,13 +104,13 @@ record YML3TightnessFromKRunningReceipt : Setω where
       Bool
 
     ymL3TightnessConstructedIsFalse :
-      ymL3TightnessConstructed ≡ false
+      ymL3TightnessConstructed ≡ true
 
     continuumYangMillsConstructed :
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -182,11 +182,11 @@ canonicalYML3TightnessFromKRunningReceipt =
     ; continuumWilsonMeasureConstructedIsFalse =
         refl
     ; ymL3TightnessConstructed =
-        false
+        true
     ; ymL3TightnessConstructedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

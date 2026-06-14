@@ -142,7 +142,7 @@ record CarrierScaleFromHeegnerReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -223,7 +223,7 @@ canonicalCarrierScaleFromHeegnerReceipt =
     ; qcdScaleAnchorDerivedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

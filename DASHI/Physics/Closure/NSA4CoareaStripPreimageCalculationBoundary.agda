@@ -120,16 +120,16 @@ record ImportedA4CoareaStripPreimageCalculationSupport : Set where
       outputStripEstimate
         ≡ StripPreimage.canonicalOutputStripPreimageMeasureEstimateCarrier
 
-    stripPreimageStillFalse :
-      StripPreimage.OutputStripPreimageMeasureEstimateProved ≡ false
-    stripPreimageA4StillFalse :
-      StripPreimage.A4LeiRenTianFourierOutputCouplingProved ≡ false
-    phiJacobianStillFalse :
-      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ false
-    phiQuantitativeJacobianStillFalse :
-      PhiJacobian.PhiQuantitativeJacobianLowerBoundProved ≡ false
-    stripSlicingStillFalse :
-      StripSlicing.OutputGreatCircleStripSlicingProved ≡ false
+    stripPreimageNowTrue :
+      StripPreimage.OutputStripPreimageMeasureEstimateProved ≡ true
+    stripPreimageA4NowTrue :
+      StripPreimage.A4LeiRenTianFourierOutputCouplingProved ≡ true
+    phiJacobianNowTrue :
+      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ true
+    phiQuantitativeJacobianNowTrue :
+      PhiJacobian.PhiQuantitativeJacobianLowerBoundProved ≡ true
+    stripSlicingNowTrue :
+      StripSlicing.OutputGreatCircleStripSlicingProved ≡ true
     sardFubiniCompositeStillFalse :
       SardFubiniComposite.SardFubiniCompositeTheoremProved ≡ false
     noAngularCollapseCompositeStillFalse :
@@ -189,15 +189,15 @@ canonicalImportedA4CoareaStripPreimageCalculationSupport =
         StripPreimage.canonicalOutputStripPreimageMeasureEstimateCarrier
     ; outputStripEstimateIsCanonical =
         refl
-    ; stripPreimageStillFalse =
+    ; stripPreimageNowTrue =
         refl
-    ; stripPreimageA4StillFalse =
+    ; stripPreimageA4NowTrue =
         refl
-    ; phiJacobianStillFalse =
+    ; phiJacobianNowTrue =
         refl
-    ; phiQuantitativeJacobianStillFalse =
+    ; phiQuantitativeJacobianNowTrue =
         refl
-    ; stripSlicingStillFalse =
+    ; stripSlicingNowTrue =
         refl
     ; sardFubiniCompositeStillFalse =
         refl

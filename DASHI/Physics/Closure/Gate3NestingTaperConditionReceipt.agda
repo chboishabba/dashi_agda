@@ -188,8 +188,8 @@ record Gate3NestingTaperConditionReceipt : Setω where
     uniformSeparationTarget :
       Target.Gate3PAWOTGUniformSeparationTargetReceipt
 
-    infANStillOpen :
-      Target.infANPositiveProvedHere uniformSeparationTarget ≡ false
+    targetInfANPromoted :
+      Target.infANPositiveProvedHere uniformSeparationTarget ≡ true
 
     facts :
       List NestingTaperFact
@@ -353,7 +353,7 @@ canonicalGate3NestingTaperConditionReceipt =
         refl
     ; uniformSeparationTarget =
         Target.canonicalGate3PAWOTGUniformSeparationTargetReceipt
-    ; infANStillOpen =
+    ; targetInfANPromoted =
         refl
     ; facts =
         canonicalNestingTaperFacts

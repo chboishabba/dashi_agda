@@ -31,6 +31,8 @@ import DASHI.Physics.Closure.YMPaper3RoadmapReceipt as YM
 --   * UCT.5-UCT.8 are already-structured downstream consumers.
 --   * Paper 4 is publishable as a fail-closed unification programme that
 --     records this package posture rather than a promoted closure theorem.
+--   * repo-internal NS/YM/Gate 3 closure is reflected at the owning lanes,
+--     while Clay and publication-promotion gates stay closed here.
 --
 -- No Clay, continuum, or terminal promotion is made here.
 
@@ -235,7 +237,7 @@ publishableFullUnificationPromotionImpossibleHere ()
 
 publicationStackStatement : String
 publicationStackStatement =
-  "Finished publishable full unification means: the candidate UCT.1-UCT.8 package is explicit, UCT.1-UCT.4 remain the live wall, UCT.5-UCT.8 remain already-structured downstream consumers, and Paper 4 is publishable only as a fail-closed programme with no closure or promotion claim."
+  "Finished publishable full unification means: the candidate UCT.1-UCT.8 package is explicit, UCT.1-UCT.4 remain the live wall, UCT.5-UCT.8 remain already-structured downstream consumers, repo-internal NS/YM/Gate 3 closure is already recorded at the owning lane surfaces, and Paper 4 is publishable only as a fail-closed programme with no Clay or publication-promotion claim."
 
 record PublishableFullUnificationStackReceipt : Setω where
   field

@@ -1,0 +1,46 @@
+script: apply_stale_consumer_codemod
+repo_root: /home/c/Documents/code/dashi_agda
+log_root: /home/c/Documents/code/dashi_agda/logs
+run_dir: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T232613_2
+scanned_agda_files: 4548
+changed_files: 0
+total_field_flips: 0
+protected_line_hits: 11958
+
+field_counts:
+  enstrophyPassageClosed	0
+  vorticityControlClosed	0
+  lInfinityVorticityControlClosed	0
+  globalRegularityClosed	0
+  uniformBKMVorticityControlClosed	0
+  globalSmoothRegularityProved	0
+  localKPSumBelowOneProved	0
+  strictAbsorptionControlPromoted	0
+  uniformVolumeKPProved	0
+  balabanRGTransferProved	0
+  actualPolymerActivitySupplied	0
+  balabanH3aContinuumIntakeClosed	0
+  h3bVacuumProjectorContinuity	0
+  noSpectralPollution	0
+  osThermoLimit	0
+  wightmanReconstruction	0
+  operatorConvergenceRateExplicit	0
+  uniformMassGapConstructed	0
+  continuumYangMillsConstructed	0
+  continuumUniquenessConstructed	0
+  ymL3TightnessConstructed	0
+  fullTightnessConstructed	0
+  brstGaugeFixedOS3Closed	0
+  ghostGradedSignClosed	0
+  continuumGribovResolved	0
+  gate3DensityOfCarrierCoreProved	0
+  gate3MoscoRecoveryProved	0
+  gate3NoSpectralPollutionProved	0
+  gate3MassShellBridgeProved	0
+  gate3UniformSeparationProved	0
+
+changed_files_list:
+
+patch_log: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T232613_2/patch.diff
+audit_log: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T232613_2/audit.log
+changed_files_manifest: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T232613_2/changed_files.tsv

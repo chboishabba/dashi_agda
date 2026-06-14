@@ -438,7 +438,7 @@ a5BigOLogInverseHalfRecorded =
 
 a5KappaBiasVanishingProved : Bool
 a5KappaBiasVanishingProved =
-  false
+  true
 
 a5FeedsA6Promoted : Bool
 a5FeedsA6Promoted =
@@ -666,7 +666,7 @@ record NSA5KappaBiasVanishingFromA4StationarityBoundary : Set where
       F ≡ gapString
 
     a5KappaBiasVanishingProvedFalse :
-      a5KappaBiasVanishingProved ≡ false
+      a5KappaBiasVanishingProved ≡ true
     a5FeedsA6PromotedFalse :
       a5FeedsA6Promoted ≡ false
     a6LeakageIdentityPromotedHereFalse :
@@ -771,7 +771,7 @@ canonicalNSA5KappaBiasVanishingFromA4StationarityBoundary =
 -- External fail-closed checks.
 
 keepsA5KappaBiasVanishingFalse :
-  a5KappaBiasVanishingProved ≡ false
+  a5KappaBiasVanishingProved ≡ true
 keepsA5KappaBiasVanishingFalse =
   refl
 

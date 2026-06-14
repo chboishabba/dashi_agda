@@ -126,7 +126,7 @@ record YMClayTrueBlockerReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     reflectionPositivityConsumerRecorded :
       Bool
@@ -236,7 +236,7 @@ canonicalYMClayTrueBlockerReceipt =
     ; ymClayNativeRouteBlockedIsTrue =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; reflectionPositivityConsumerRecorded =

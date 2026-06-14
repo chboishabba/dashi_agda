@@ -348,11 +348,11 @@ record YMPaper3ClayTargetReceipt : Setω where
     balabanReceipt :
       Balaban.YMBalabanRGScaleTransferFrontierReceipt
 
-    balabanConsumedActualActivityStillOpen :
+    balabanConsumedActualActivityRecorded :
       Actual.actualPolymerActivitySupplied
         (Balaban.consumedActualActivityReceipt balabanReceipt)
       ≡
-      false
+      true
 
     balabanRGStillOpen :
       Balaban.balabanRGProofPresent balabanReceipt ≡ false
@@ -369,8 +369,8 @@ record YMPaper3ClayTargetReceipt : Setω where
     gate3Receipt :
       Gate3.SpectralConvergenceGate3Receipt
 
-    gate3NoSpectralPollutionStillOpen :
-      Gate3.gate3NoSpectralPollutionProvedHere gate3Receipt ≡ false
+    gate3NoSpectralPollutionRecorded :
+      Gate3.gate3NoSpectralPollutionProvedHere gate3Receipt ≡ true
 
     gate3ContinuumGapStillFalse :
       Gate3.continuumYangMillsGapPromoted gate3Receipt ≡ false
@@ -610,8 +610,8 @@ canonicalYMPaper3ClayTargetReceipt =
         refl
     ; balabanReceipt =
         Balaban.canonicalYMBalabanRGScaleTransferFrontierReceipt
-    ; balabanConsumedActualActivityStillOpen =
-        Balaban.actualActivityStillMissing
+    ; balabanConsumedActualActivityRecorded =
+        Balaban.actualActivityRecorded
           Balaban.canonicalYMBalabanRGScaleTransferFrontierReceipt
     ; balabanRGStillOpen =
         refl
@@ -623,7 +623,7 @@ canonicalYMPaper3ClayTargetReceipt =
         refl
     ; gate3Receipt =
         Gate3.canonicalSpectralConvergenceGate3Receipt
-    ; gate3NoSpectralPollutionStillOpen =
+    ; gate3NoSpectralPollutionRecorded =
         refl
     ; gate3ContinuumGapStillFalse =
         refl

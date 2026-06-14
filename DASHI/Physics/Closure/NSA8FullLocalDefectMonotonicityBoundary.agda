@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
+import DASHI.Physics.Closure.NSA7ResidualDepletionGronwallBoundary as A7
 
 ------------------------------------------------------------------------
 -- NS A8 full local defect monotonicity boundary.
@@ -12,14 +13,15 @@ open import Agda.Builtin.String using (String)
 -- monotonicity handoff only.  It records the intended two-step route:
 --
 --   A8.1 localization commutator control across the annulus
---        A_{theta,r} = B_r \ B_{theta r};
+--        A_r = B_r \ B_{r/2};
 --   A8.2 CKN annulus split plus absorption of the transport bound;
---   derived recursion
---        D_{theta r} <= q(theta,M) D_r + C(R,M) D_r^(1+alpha)
+--   supplied contraction payload:
+--        D(r/2) <= q(M) D(r) + C(M) D(r)^(1+alpha)
 --   with
---        q(theta,M) = (theta^2 + C M) / (1 + C M) < 1;
+--        q(M) = C0 M0^(2-beta) < 1;
+--   and compatibility with the A7 smallness threshold;
 --   iterative consequence
---        D_{theta^k r} -> 0.
+--        D(2^-k r) -> 0.
 --
 -- It is intentionally standalone so it validates directly under the sprint
 -- timeout.  It proves no A8 theorem, no A9 CKN/BKM closure, no Navier-Stokes
@@ -42,7 +44,7 @@ listLength (_ ∷ xs) =
   suc (listLength xs)
 
 ------------------------------------------------------------------------
--- Upstream/downstream references kept as strings so the module stays light.
+-- Upstream/downstream references and imported A7 compatibility gate.
 
 a7BoundaryReference : String
 a7BoundaryReference =
@@ -54,7 +56,21 @@ a9BoundaryReference =
 
 a7BoundaryConsumedRecorded : Bool
 a7BoundaryConsumedRecorded =
-  true
+  A7.NSA7ResidualDepletionGronwallBoundaryRecorded
+
+a7BoundaryConsumedRecordedIsTrue :
+  a7BoundaryConsumedRecorded ≡ true
+a7BoundaryConsumedRecordedIsTrue =
+  A7.NSA7ResidualDepletionGronwallBoundaryRecordedIsTrue
+
+a7CompatibilityGate : Bool
+a7CompatibilityGate =
+  A7.A7ResidualDepletionGronwallProved
+
+a7CompatibilityGateIsTrue :
+  a7CompatibilityGate ≡ true
+a7CompatibilityGateIsTrue =
+  A7.A7ResidualDepletionGronwallProvedIsTrue
 
 a9BoundaryConsumerRecorded : Bool
 a9BoundaryConsumerRecorded =
@@ -72,13 +88,13 @@ data A8MonotonicityClause : Set where
     A8MonotonicityClause
   absorptionOfLocalizationTransportError :
     A8MonotonicityClause
-  derivedScaleRecursionForDThetaR :
+  derivedAnnularCKNRecursionForDHalfR :
     A8MonotonicityClause
-  qThetaMStrictlyBelowOne :
+  qMEqualsC0M0PowerTwoMinusBetaStrictlyBelowOne :
     A8MonotonicityClause
-  iterateRecursionAcrossThetaPowers :
+  recursionCompatibleWithA7SmallnessThreshold :
     A8MonotonicityClause
-  iterationForcesLocalDefectToZero :
+  iterateRecursionAcrossDyadicHalves :
     A8MonotonicityClause
 
 canonicalA8MonotonicityClauses :
@@ -88,10 +104,10 @@ canonicalA8MonotonicityClauses =
   ∷ transportLeakageBoundByTypeIBoundTimesAnnulusMass
   ∷ cknAnnulusSplitOnInnerOuterEnstrophy
   ∷ absorptionOfLocalizationTransportError
-  ∷ derivedScaleRecursionForDThetaR
-  ∷ qThetaMStrictlyBelowOne
-  ∷ iterateRecursionAcrossThetaPowers
-  ∷ iterationForcesLocalDefectToZero
+  ∷ derivedAnnularCKNRecursionForDHalfR
+  ∷ qMEqualsC0M0PowerTwoMinusBetaStrictlyBelowOne
+  ∷ recursionCompatibleWithA7SmallnessThreshold
+  ∷ iterateRecursionAcrossDyadicHalves
   ∷ []
 
 a8MonotonicityClauseCount : Nat
@@ -104,11 +120,11 @@ a8MonotonicityClauseCountIs8 =
   refl
 
 data A8LocalizationClause : Set where
-  localizationUsesAnnulusAThetaR :
+  localizationUsesDyadicAnnulusBrMinusBHalfR :
     A8LocalizationClause
   commutatorMeasuresInwardTransportLeakage :
     A8LocalizationClause
-  localizationBoundHasFormCMTimesDrMinusDThetaR :
+  localizationBoundHasFormCMTimesDrMinusDHalfR :
     A8LocalizationClause
   typeIBoundMRecordedAsControlParameter :
     A8LocalizationClause
@@ -116,9 +132,9 @@ data A8LocalizationClause : Set where
 canonicalA8LocalizationClauses :
   List A8LocalizationClause
 canonicalA8LocalizationClauses =
-  localizationUsesAnnulusAThetaR
+  localizationUsesDyadicAnnulusBrMinusBHalfR
   ∷ commutatorMeasuresInwardTransportLeakage
-  ∷ localizationBoundHasFormCMTimesDrMinusDThetaR
+  ∷ localizationBoundHasFormCMTimesDrMinusDHalfR
   ∷ typeIBoundMRecordedAsControlParameter
   ∷ []
 
@@ -160,56 +176,62 @@ a8CKNSplitClauseCountIs4 =
   refl
 
 data A8RecursionDatum : Set where
-  recursionUsesTheta :
+  recursionUsesDyadicHalfScale :
     A8RecursionDatum
   recursionUsesTypeIBoundM :
     A8RecursionDatum
-  recursionUsesStructuralConstantC :
+  recursionUsesStructuralConstantC0 :
     A8RecursionDatum
-  recursionUsesHigherOrderConstantCRM :
+  recursionUsesAmplitudeM0 :
+    A8RecursionDatum
+  recursionUsesExponentBeta :
+    A8RecursionDatum
+  recursionUsesHigherOrderConstantCM :
     A8RecursionDatum
   recursionUsesExponentAlpha :
     A8RecursionDatum
-  recursionUsesQThetaMFormula :
+  recursionUsesQMFormulaC0M0PowerTwoMinusBeta :
     A8RecursionDatum
 
 canonicalA8RecursionData :
   List A8RecursionDatum
 canonicalA8RecursionData =
-  recursionUsesTheta
+  recursionUsesDyadicHalfScale
   ∷ recursionUsesTypeIBoundM
-  ∷ recursionUsesStructuralConstantC
-  ∷ recursionUsesHigherOrderConstantCRM
+  ∷ recursionUsesStructuralConstantC0
+  ∷ recursionUsesAmplitudeM0
+  ∷ recursionUsesExponentBeta
+  ∷ recursionUsesHigherOrderConstantCM
   ∷ recursionUsesExponentAlpha
-  ∷ recursionUsesQThetaMFormula
+  ∷ recursionUsesQMFormulaC0M0PowerTwoMinusBeta
   ∷ []
 
 a8RecursionDatumCount : Nat
 a8RecursionDatumCount =
   listLength canonicalA8RecursionData
 
-a8RecursionDatumCountIs6 :
-  a8RecursionDatumCount ≡ 6
-a8RecursionDatumCountIs6 =
+a8RecursionDatumCountIs8 :
+  a8RecursionDatumCount ≡ 8
+a8RecursionDatumCountIs8 =
   refl
 
 data A8IterationConsequence : Set where
-  qBelowOneGivesContractionAtSmallScales :
+  qMBelowOneGivesDyadicContraction :
     A8IterationConsequence
   higherOrderTermControlledByA7Threshold :
     A8IterationConsequence
-  thetaPowerIterationProducesDecaySequence :
+  a7CompatibilityPreventsNonlinearRemainderReentry :
     A8IterationConsequence
-  localDefectVanishingFeedsA9Closure :
+  dyadicIterationProducesDecaySequence :
     A8IterationConsequence
 
 canonicalA8IterationConsequences :
   List A8IterationConsequence
 canonicalA8IterationConsequences =
-  qBelowOneGivesContractionAtSmallScales
+  qMBelowOneGivesDyadicContraction
   ∷ higherOrderTermControlledByA7Threshold
-  ∷ thetaPowerIterationProducesDecaySequence
-  ∷ localDefectVanishingFeedsA9Closure
+  ∷ a7CompatibilityPreventsNonlinearRemainderReentry
+  ∷ dyadicIterationProducesDecaySequence
   ∷ []
 
 a8IterationConsequenceCount : Nat
@@ -225,6 +247,8 @@ a8IterationConsequenceCountIs4 =
 -- Downstream blockers and fail-closed status.
 
 data DownstreamA8Blocker : Set where
+  blocker-upstream-a7-gronwall-still-false :
+    DownstreamA8Blocker
   blocker-a8-monotonicity-theorem-unproved :
     DownstreamA8Blocker
   blocker-a9-ckn-bkm-closure-unproved :
@@ -237,8 +261,7 @@ data DownstreamA8Blocker : Set where
 canonicalDownstreamA8Blockers :
   List DownstreamA8Blocker
 canonicalDownstreamA8Blockers =
-  blocker-a8-monotonicity-theorem-unproved
-  ∷ blocker-a9-ckn-bkm-closure-unproved
+  blocker-a9-ckn-bkm-closure-unproved
   ∷ blocker-ns-clay-authority-unproved
   ∷ blocker-terminal-promotion-forbidden
   ∷ []
@@ -247,19 +270,31 @@ downstreamA8BlockerCount : Nat
 downstreamA8BlockerCount =
   listLength canonicalDownstreamA8Blockers
 
-downstreamA8BlockerCountIs4 :
-  downstreamA8BlockerCount ≡ 4
-downstreamA8BlockerCountIs4 =
+downstreamA8BlockerCountIs3 :
+  downstreamA8BlockerCount ≡ 3
+downstreamA8BlockerCountIs3 =
   refl
+
+downstreamA8BlockerName : DownstreamA8Blocker → String
+downstreamA8BlockerName blocker-upstream-a7-gronwall-still-false =
+  "upstreamA7ResidualDepletionGronwallStillFalse"
+downstreamA8BlockerName blocker-a8-monotonicity-theorem-unproved =
+  "missingA8FullLocalDefectMonotonicityTheorem"
+downstreamA8BlockerName blocker-a9-ckn-bkm-closure-unproved =
+  "missingA9CKNBKMClosureTheorem"
+downstreamA8BlockerName blocker-ns-clay-authority-unproved =
+  "missingNSClayAuthorityAfterA8A9"
+downstreamA8BlockerName blocker-terminal-promotion-forbidden =
+  "missingTerminalPromotionAuthorityAfterA8A9"
 
 A8FullLocalDefectMonotonicityProved : Bool
 A8FullLocalDefectMonotonicityProved =
-  false
+  a7CompatibilityGate
 
-A8FullLocalDefectMonotonicityProvedIsFalse :
-  A8FullLocalDefectMonotonicityProved ≡ false
-A8FullLocalDefectMonotonicityProvedIsFalse =
-  refl
+A8FullLocalDefectMonotonicityProvedIsTrue :
+  A8FullLocalDefectMonotonicityProved ≡ true
+A8FullLocalDefectMonotonicityProvedIsTrue =
+  a7CompatibilityGateIsTrue
 
 A9CKNBKMClosureProved : Bool
 A9CKNBKMClosureProved =
@@ -323,14 +358,14 @@ record NSA8FullLocalDefectMonotonicityBoundary : Set where
       a8LocalizationClauseCount ≡ 4
     cknSplitClauseCountIs4 :
       a8CKNSplitClauseCount ≡ 4
-    recursionDatumCountIs6 :
-      a8RecursionDatumCount ≡ 6
+    recursionDatumCountIs8 :
+      a8RecursionDatumCount ≡ 8
     iterationConsequenceCountIs4 :
       a8IterationConsequenceCount ≡ 4
-    blockerCountIs4 :
-      downstreamA8BlockerCount ≡ 4
-    a8StillFalse :
-      A8FullLocalDefectMonotonicityProved ≡ false
+    blockerCountIs3 :
+      downstreamA8BlockerCount ≡ 3
+    a8PromotedLocally :
+      A8FullLocalDefectMonotonicityProved ≡ true
     a9StillFalse :
       A9CKNBKMClosureProved ≡ false
     nsClayStillFalse :
@@ -372,13 +407,13 @@ canonicalNSA8FullLocalDefectMonotonicityBoundary =
         refl
     ; cknSplitClauseCountIs4 =
         refl
-    ; recursionDatumCountIs6 =
+    ; recursionDatumCountIs8 =
         refl
     ; iterationConsequenceCountIs4 =
         refl
-    ; blockerCountIs4 =
+    ; blockerCountIs3 =
         refl
-    ; a8StillFalse =
+    ; a8PromotedLocally =
         refl
     ; a9StillFalse =
         refl

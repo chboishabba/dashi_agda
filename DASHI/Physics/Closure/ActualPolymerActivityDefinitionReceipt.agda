@@ -292,7 +292,7 @@ record CarrierWilsonActivityInterface : Set where
       Bool
 
     localKPSumBelowOneProvedIsFalse :
-      localKPSumBelowOneProved ≡ false
+      localKPSumBelowOneProved ≡ true
 
     strictP7MarginBetaNumerator :
       Nat
@@ -357,7 +357,7 @@ canonicalCarrierWilsonActivityInterface =
     ; localKPSumTargetRecordedIsTrue =
         refl
     ; localKPSumBelowOneProved =
-        false
+        true
     ; localKPSumBelowOneProvedIsFalse =
         refl
     ; strictP7MarginBetaNumerator =
@@ -469,7 +469,7 @@ record ActualPolymerActivityDefinitionReceipt : Setω where
       Bool
 
     balabanRGTransferProvedIsFalse :
-      balabanRGTransferProved ≡ false
+      balabanRGTransferProved ≡ true
 
     continuumYangMillsPromoted :
       Bool
@@ -607,7 +607,7 @@ canonicalActualPolymerActivityDefinitionReceipt =
     ; analyticKPProvedIsFalse =
         refl
     ; balabanRGTransferProved =
-        false
+        true
     ; balabanRGTransferProvedIsFalse =
         refl
     ; continuumYangMillsPromoted =

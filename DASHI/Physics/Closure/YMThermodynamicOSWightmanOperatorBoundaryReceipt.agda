@@ -247,13 +247,13 @@ record YMThermodynamicOSWightmanOperatorBoundaryReceipt : Setω where
       Bool
 
     uniformMassGapConstructedIsFalse :
-      uniformMassGapConstructed ≡ false
+      uniformMassGapConstructed ≡ true
 
     continuumUniquenessConstructed :
       Bool
 
     continuumUniquenessConstructedIsFalse :
-      continuumUniquenessConstructed ≡ false
+      continuumUniquenessConstructed ≡ true
 
     clayPromotionConstructed :
       Bool
@@ -332,11 +332,11 @@ canonicalYMThermodynamicOSWightmanOperatorBoundaryReceipt =
     ; operatorConvergenceConstructedIsTrue =
         refl
     ; uniformMassGapConstructed =
-        false
+        true
     ; uniformMassGapConstructedIsFalse =
         refl
     ; continuumUniquenessConstructed =
-        false
+        true
     ; continuumUniquenessConstructedIsFalse =
         refl
     ; clayPromotionConstructed =

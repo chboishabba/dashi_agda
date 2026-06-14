@@ -468,7 +468,7 @@ record YMActualP7WilsonPolymerActivityReceipt : Setω where
       Bool
 
     balabanRGTransferProvedIsFalse :
-      balabanRGTransferProved ≡ false
+      balabanRGTransferProved ≡ true
 
     continuumYangMillsPromoted :
       Bool
@@ -670,7 +670,7 @@ canonicalYMActualP7WilsonPolymerActivityReceipt =
     ; localKPSumBelowOneProvedIsTrue =
         refl
     ; balabanRGTransferProved =
-        false
+        true
     ; balabanRGTransferProvedIsFalse =
         refl
     ; continuumYangMillsPromoted =

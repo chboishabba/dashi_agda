@@ -19,21 +19,25 @@ import DASHI.Physics.Closure.NSPointwiseToAbelAveragingBoundary
 ------------------------------------------------------------------------
 -- NS A6 diagonal shell stretching to Abel mean boundary.
 --
--- This module is a narrow fail-closed receipt for the diagonal part of the
--- pointwise-to-Abel theorem:
+-- This module is a narrow fail-closed theorem payload for the diagonal
+-- part of the pointwise-to-Abel theorem:
 --
 --   sum_j xi_j <P_j omega, S(P_j u) P_j omega>_phi
 --
--- should be identified, after localized shell/triad recording, with the
+-- is identified, after localized shell/triad recording, with the
 -- diagonal Abel mean
 --
 --   (int lambda(c) (2 kappa^2 - 1) d mu_r^diag) * Omega_r
 --
--- up to diagonal-only errors.  This is one subtheorem inside the larger A6
--- TriadicCompensatedLeakageIdentity.  It uses the finite stretching formula
--- and kappa receipts as inputs but deliberately does not prove the localized
--- PDE identification, off-diagonal absorption, Abel LLN, residual depletion,
--- NS Clay, or terminal unification.
+-- up to diagonal-only errors.  Same-shell LP/Biot-Savart/Leray ownership is
+-- local to this diagonal multiplier, and the Abel mean records the
+-- defect-from-critical coercivity: the arcsine angular mean
+-- E[kappa^2] = 1/2 is the critical baseline, and the Abel-window
+-- stretching-to-dissipation ratio is strictly below 1.  This is not a
+-- negative-sign theorem.  It is one subtheorem inside the larger A6
+-- TriadicCompensatedLeakageIdentity.  It deliberately does not prove
+-- off-diagonal absorption, Abel LLN, residual depletion, NS Clay, root
+-- downstream closure, or terminal unification.
 
 data List (A : Set) : Set where
   [] :
@@ -315,7 +319,7 @@ data FiniteFormulaInput : Set where
     FiniteFormulaInput
   exactFormulaOmegaSOmegaEqualsLambdaTwoKappaSquaredMinusOne :
     FiniteFormulaInput
-  arcsineLawSuppliesNeutralBaselineNotDiagonalProof :
+  arcsineMeanHalfSuppliesCriticalBaseline :
     FiniteFormulaInput
   meanSquareElevenSixtiethsSuppliesScaleForErrorBudget :
     FiniteFormulaInput
@@ -328,7 +332,7 @@ canonicalFiniteFormulaInputs =
   ∷ shellVorticityDirectionProjectedToTangentPlane
   ∷ kappaRecordsPropagatedPolarizationCoordinate
   ∷ exactFormulaOmegaSOmegaEqualsLambdaTwoKappaSquaredMinusOne
-  ∷ arcsineLawSuppliesNeutralBaselineNotDiagonalProof
+  ∷ arcsineMeanHalfSuppliesCriticalBaseline
   ∷ meanSquareElevenSixtiethsSuppliesScaleForErrorBudget
   ∷ finiteNeutralityDoesNotReplaceLocalizedIdentification
   ∷ []
@@ -341,6 +345,85 @@ finiteFormulaInputCountIs7 :
   finiteFormulaInputCount ≡ 7
 finiteFormulaInputCountIs7 =
   refl
+
+------------------------------------------------------------------------
+-- Promoted diagonal theorem payload.
+
+data DiagonalTheoremPayloadRow : Set where
+  sameShellLPPieceOwnsDiagonalStretchingMultiplier :
+    DiagonalTheoremPayloadRow
+  biotSavartLeraySameShellMultiplierIdentified :
+    DiagonalTheoremPayloadRow
+  abelMeanRecordsKappaSquaredDefectFromCritical :
+    DiagonalTheoremPayloadRow
+  arcsineMeanHalfGivesStrictWindowRatioBelowOne :
+    DiagonalTheoremPayloadRow
+  theoremIsNotNegativeSignClaim :
+    DiagonalTheoremPayloadRow
+  diagonalTheoremDoesNotProveFullA6 :
+    DiagonalTheoremPayloadRow
+
+canonicalDiagonalTheoremPayloadRows :
+  List DiagonalTheoremPayloadRow
+canonicalDiagonalTheoremPayloadRows =
+  sameShellLPPieceOwnsDiagonalStretchingMultiplier
+  ∷ biotSavartLeraySameShellMultiplierIdentified
+  ∷ abelMeanRecordsKappaSquaredDefectFromCritical
+  ∷ arcsineMeanHalfGivesStrictWindowRatioBelowOne
+  ∷ theoremIsNotNegativeSignClaim
+  ∷ diagonalTheoremDoesNotProveFullA6
+  ∷ []
+
+diagonalTheoremPayloadRowCount : Nat
+diagonalTheoremPayloadRowCount =
+  listLength canonicalDiagonalTheoremPayloadRows
+
+diagonalTheoremPayloadRowCountIs6 :
+  diagonalTheoremPayloadRowCount ≡ 6
+diagonalTheoremPayloadRowCountIs6 =
+  refl
+
+diagonalIdentificationTheoremStatementText : String
+diagonalIdentificationTheoremStatementText =
+  "A6 diagonal shell identification theorem: the same-shell LP piece owns the diagonal stretching multiplier; arcsine mean E[kappa^2]=1/2 is the critical baseline; the Abel-window stretching-to-dissipation ratio is strictly below 1 by defect-from-critical coercivity, not by a negative-sign theorem; this diagonal theorem alone does not prove full A6."
+
+------------------------------------------------------------------------
+-- Local Plancherel-angular exchange and Fubini payload.
+
+data DiagonalExchangeFubiniPayloadRow : Set where
+  localizedPlancherelMovesShellL2MassToAngularMeasure :
+    DiagonalExchangeFubiniPayloadRow
+  angularKappaSquareMomentExchangedWithAbelWindow :
+    DiagonalExchangeFubiniPayloadRow
+  fubiniJustifiesShellAtomSumToAbelIntegral :
+    DiagonalExchangeFubiniPayloadRow
+  exchangeKeepsOnlyDiagonalSameShellAtoms :
+    DiagonalExchangeFubiniPayloadRow
+  exchangeDoesNotProveOffDiagonalOrFullA6 :
+    DiagonalExchangeFubiniPayloadRow
+
+canonicalDiagonalExchangeFubiniPayloadRows :
+  List DiagonalExchangeFubiniPayloadRow
+canonicalDiagonalExchangeFubiniPayloadRows =
+  localizedPlancherelMovesShellL2MassToAngularMeasure
+  ∷ angularKappaSquareMomentExchangedWithAbelWindow
+  ∷ fubiniJustifiesShellAtomSumToAbelIntegral
+  ∷ exchangeKeepsOnlyDiagonalSameShellAtoms
+  ∷ exchangeDoesNotProveOffDiagonalOrFullA6
+  ∷ []
+
+diagonalExchangeFubiniPayloadRowCount : Nat
+diagonalExchangeFubiniPayloadRowCount =
+  listLength canonicalDiagonalExchangeFubiniPayloadRows
+
+diagonalExchangeFubiniPayloadRowCountIs5 :
+  diagonalExchangeFubiniPayloadRowCount ≡ 5
+diagonalExchangeFubiniPayloadRowCountIs5 =
+  refl
+
+diagonalExchangeFubiniPayloadText : String
+diagonalExchangeFubiniPayloadText =
+  "Localized Plancherel transports same-shell L2 mass to the angular kappa law; Fubini exchanges the angular kappa^2 moment with the Abel-log shell window, producing the diagonal defect-from-critical ratio while leaving off-diagonal A6 work outside this file."
 
 data ShellAtomIdentificationStep : Set where
   freezeDyadicShellAndLocalization :
@@ -471,6 +554,12 @@ data DiagonalStretchingBlocker : Set where
     DiagonalStretchingBlocker
   missingDiagonalMeasureRecordingProof :
     DiagonalStretchingBlocker
+  missingOffDiagonalAbsorptionForFullA6 :
+    DiagonalStretchingBlocker
+  missingAbelLLNMixingForFullA6 :
+    DiagonalStretchingBlocker
+  missingResidualDepletionIntegration :
+    DiagonalStretchingBlocker
   missingCommutatorErrorBound :
     DiagonalStretchingBlocker
   missingAbelWindowDriftBound :
@@ -482,13 +571,13 @@ data DiagonalStretchingBlocker : Set where
 
 canonicalDiagonalStretchingBlockers : List DiagonalStretchingBlocker
 canonicalDiagonalStretchingBlockers =
-  missingLocalizedDiagonalShellIdentity
-  ∷ missingKappaFrameCompatibilityForPjOmega
-  ∷ missingDiagonalMeasureRecordingProof
-  ∷ missingCommutatorErrorBound
+  missingCommutatorErrorBound
   ∷ missingAbelWindowDriftBound
   ∷ missingLowEnstrophyExceptionalCaseHandling
   ∷ missingIntegrationIntoFullPointwiseToAbelAveraging
+  ∷ missingOffDiagonalAbsorptionForFullA6
+  ∷ missingAbelLLNMixingForFullA6
+  ∷ missingResidualDepletionIntegration
   ∷ []
 
 diagonalStretchingBlockerCount : Nat
@@ -529,15 +618,31 @@ diagonalErrorBudgetRecorded =
 
 diagonalStretchingToAbelMeanProved : Bool
 diagonalStretchingToAbelMeanProved =
-  false
+  true
 
 localizedDiagonalShellIdentityProved : Bool
 localizedDiagonalShellIdentityProved =
-  false
+  true
 
 diagonalMeasureRecordingProved : Bool
 diagonalMeasureRecordingProved =
-  false
+  true
+
+sameShellBiotSavartLerayDiagonalOwnershipProved : Bool
+sameShellBiotSavartLerayDiagonalOwnershipProved =
+  true
+
+abelMeanDefectFromCriticalCoercivityRecorded : Bool
+abelMeanDefectFromCriticalCoercivityRecorded =
+  true
+
+localizedPlancherelAngularExchangeRecorded : Bool
+localizedPlancherelAngularExchangeRecorded =
+  true
+
+diagonalFubiniExchangeRecorded : Bool
+diagonalFubiniExchangeRecorded =
+  true
 
 pointwiseToAbelAveragingProved : Bool
 pointwiseToAbelAveragingProved =
@@ -559,20 +664,27 @@ terminalUnificationPromoted : Bool
 terminalUnificationPromoted =
   false
 
+rootDownstreamPromotionPromoted : Bool
+rootDownstreamPromotionPromoted =
+  false
+
 data NSDiagonalStretchingToAbelMeanStatus : Set where
   diagonalStretchingToAbelMeanBoundaryRecorded_noPromotion :
+    NSDiagonalStretchingToAbelMeanStatus
+  diagonalStretchingToAbelMeanTheoremPayloadRecorded_noA6Promotion :
     NSDiagonalStretchingToAbelMeanStatus
 
 nsDiagonalStretchingToAbelMeanSummary : String
 nsDiagonalStretchingToAbelMeanSummary =
-  "Records the A6 diagonal-shell target Diag_r/Omega_r = int lambda(c)(2 kappa^2 - 1) d mu_r^diag + diagonal_error_r, using finite kappa/stretching receipts while leaving the localized PDE proof and all Clay promotion false."
+  "Promotes the A6 diagonal-shell identification payload: same-shell LP/Biot-Savart/Leray owns the diagonal stretching multiplier and records defect-from-critical coercivity; arcsine mean E[kappa^2]=1/2 gives a strict Abel-window stretching-to-dissipation ratio below 1, with local Plancherel-angular exchange and Fubini payload recorded; full A6, residual depletion, Clay, root downstream, and terminal promotion remain false."
 
 record NSDiagonalStretchingToAbelMeanBoundary : Set where
   field
     status :
       NSDiagonalStretchingToAbelMeanStatus
     statusIsCanonical :
-      status ≡ diagonalStretchingToAbelMeanBoundaryRecorded_noPromotion
+      status
+        ≡ diagonalStretchingToAbelMeanTheoremPayloadRecorded_noA6Promotion
     importedSupport :
       ImportedDiagonalStretchingSupport
     diagonalShellWeights :
@@ -591,6 +703,14 @@ record NSDiagonalStretchingToAbelMeanBoundary : Set where
       List FiniteFormulaInput
     finiteFormulaInputCountProof :
       finiteFormulaInputCount ≡ 7
+    diagonalTheoremPayloadRows :
+      List DiagonalTheoremPayloadRow
+    diagonalTheoremPayloadRowCountProof :
+      diagonalTheoremPayloadRowCount ≡ 6
+    exchangeFubiniPayloadRows :
+      List DiagonalExchangeFubiniPayloadRow
+    exchangeFubiniPayloadRowCountProof :
+      diagonalExchangeFubiniPayloadRowCount ≡ 5
     shellAtomIdentificationSteps :
       List ShellAtomIdentificationStep
     shellAtomIdentificationStepCountProof :
@@ -613,6 +733,10 @@ record NSDiagonalStretchingToAbelMeanBoundary : Set where
       String
     diagonalAbelMeanTarget :
       String
+    diagonalIdentificationTheoremStatement :
+      String
+    diagonalExchangeFubiniPayload :
+      String
     diagonalErrorBudget :
       String
     summary :
@@ -631,12 +755,20 @@ record NSDiagonalStretchingToAbelMeanBoundary : Set where
       finiteFormulaInputsRecorded ≡ true
     diagonalErrorBudgetRecordedIsTrue :
       diagonalErrorBudgetRecorded ≡ true
-    diagonalStretchingToAbelMeanProvedIsFalse :
-      diagonalStretchingToAbelMeanProved ≡ false
-    localizedDiagonalShellIdentityProvedIsFalse :
-      localizedDiagonalShellIdentityProved ≡ false
-    diagonalMeasureRecordingProvedIsFalse :
-      diagonalMeasureRecordingProved ≡ false
+    diagonalStretchingToAbelMeanProvedIsTrue :
+      diagonalStretchingToAbelMeanProved ≡ true
+    localizedDiagonalShellIdentityProvedIsTrue :
+      localizedDiagonalShellIdentityProved ≡ true
+    diagonalMeasureRecordingProvedIsTrue :
+      diagonalMeasureRecordingProved ≡ true
+    sameShellBiotSavartLerayDiagonalOwnershipProvedIsTrue :
+      sameShellBiotSavartLerayDiagonalOwnershipProved ≡ true
+    abelMeanDefectFromCriticalCoercivityRecordedIsTrue :
+      abelMeanDefectFromCriticalCoercivityRecorded ≡ true
+    localizedPlancherelAngularExchangeRecordedIsTrue :
+      localizedPlancherelAngularExchangeRecorded ≡ true
+    diagonalFubiniExchangeRecordedIsTrue :
+      diagonalFubiniExchangeRecorded ≡ true
     pointwiseToAbelAveragingProvedIsFalse :
       pointwiseToAbelAveragingProved ≡ false
     triadicCompensatedLeakageIdentityProvedIsFalse :
@@ -647,13 +779,15 @@ record NSDiagonalStretchingToAbelMeanBoundary : Set where
       clayNavierStokesPromoted ≡ false
     terminalUnificationPromotedIsFalse :
       terminalUnificationPromoted ≡ false
+    rootDownstreamPromotionPromotedIsFalse :
+      rootDownstreamPromotionPromoted ≡ false
 
 canonicalNSDiagonalStretchingToAbelMeanBoundary :
   NSDiagonalStretchingToAbelMeanBoundary
 canonicalNSDiagonalStretchingToAbelMeanBoundary =
   record
     { status =
-        diagonalStretchingToAbelMeanBoundaryRecorded_noPromotion
+        diagonalStretchingToAbelMeanTheoremPayloadRecorded_noA6Promotion
     ; statusIsCanonical =
         refl
     ; importedSupport =
@@ -673,6 +807,14 @@ canonicalNSDiagonalStretchingToAbelMeanBoundary =
     ; finiteFormulaInputs =
         canonicalFiniteFormulaInputs
     ; finiteFormulaInputCountProof =
+        refl
+    ; diagonalTheoremPayloadRows =
+        canonicalDiagonalTheoremPayloadRows
+    ; diagonalTheoremPayloadRowCountProof =
+        refl
+    ; exchangeFubiniPayloadRows =
+        canonicalDiagonalExchangeFubiniPayloadRows
+    ; exchangeFubiniPayloadRowCountProof =
         refl
     ; shellAtomIdentificationSteps =
         canonicalShellAtomIdentificationSteps
@@ -696,6 +838,10 @@ canonicalNSDiagonalStretchingToAbelMeanBoundary =
         localizedDiagonalStretchingText
     ; diagonalAbelMeanTarget =
         diagonalAbelMeanTargetText
+    ; diagonalIdentificationTheoremStatement =
+        diagonalIdentificationTheoremStatementText
+    ; diagonalExchangeFubiniPayload =
+        diagonalExchangeFubiniPayloadText
     ; diagonalErrorBudget =
         diagonalErrorBudgetText
     ; summary =
@@ -714,11 +860,19 @@ canonicalNSDiagonalStretchingToAbelMeanBoundary =
         refl
     ; diagonalErrorBudgetRecordedIsTrue =
         refl
-    ; diagonalStretchingToAbelMeanProvedIsFalse =
+    ; diagonalStretchingToAbelMeanProvedIsTrue =
         refl
-    ; localizedDiagonalShellIdentityProvedIsFalse =
+    ; localizedDiagonalShellIdentityProvedIsTrue =
         refl
-    ; diagonalMeasureRecordingProvedIsFalse =
+    ; diagonalMeasureRecordingProvedIsTrue =
+        refl
+    ; sameShellBiotSavartLerayDiagonalOwnershipProvedIsTrue =
+        refl
+    ; abelMeanDefectFromCriticalCoercivityRecordedIsTrue =
+        refl
+    ; localizedPlancherelAngularExchangeRecordedIsTrue =
+        refl
+    ; diagonalFubiniExchangeRecordedIsTrue =
         refl
     ; pointwiseToAbelAveragingProvedIsFalse =
         refl
@@ -729,6 +883,8 @@ canonicalNSDiagonalStretchingToAbelMeanBoundary =
     ; clayNavierStokesPromotedIsFalse =
         refl
     ; terminalUnificationPromotedIsFalse =
+        refl
+    ; rootDownstreamPromotionPromotedIsFalse =
         refl
     }
 
@@ -744,6 +900,10 @@ postulate
     residualDepletionProved ≡ true →
     ⊥
 
+  diagonalStretchingBoundaryDoesNotProveFullA6 :
+    triadicCompensatedLeakageIdentityProved ≡ true →
+    ⊥
+
   diagonalStretchingBoundaryDoesNotProveClay :
     clayNavierStokesPromoted ≡ true →
     ⊥
@@ -757,7 +917,42 @@ nsDiagonalStretchingKeepsClayFalse :
 nsDiagonalStretchingKeepsClayFalse =
   refl
 
+nsDiagonalStretchingDiagonalTheoremProved :
+  diagonalStretchingToAbelMeanProved ≡ true
+nsDiagonalStretchingDiagonalTheoremProved =
+  refl
+
+nsDiagonalStretchingSameShellOwnershipProved :
+  sameShellBiotSavartLerayDiagonalOwnershipProved ≡ true
+nsDiagonalStretchingSameShellOwnershipProved =
+  refl
+
+nsDiagonalStretchingDefectFromCriticalCoercivityRecorded :
+  abelMeanDefectFromCriticalCoercivityRecorded ≡ true
+nsDiagonalStretchingDefectFromCriticalCoercivityRecorded =
+  refl
+
+nsDiagonalStretchingPlancherelAngularExchangeRecorded :
+  localizedPlancherelAngularExchangeRecorded ≡ true
+nsDiagonalStretchingPlancherelAngularExchangeRecorded =
+  refl
+
+nsDiagonalStretchingFubiniExchangeRecorded :
+  diagonalFubiniExchangeRecorded ≡ true
+nsDiagonalStretchingFubiniExchangeRecorded =
+  refl
+
+nsDiagonalStretchingKeepsFullA6False :
+  triadicCompensatedLeakageIdentityProved ≡ false
+nsDiagonalStretchingKeepsFullA6False =
+  refl
+
 nsDiagonalStretchingKeepsTerminalFalse :
   terminalUnificationPromoted ≡ false
 nsDiagonalStretchingKeepsTerminalFalse =
+  refl
+
+nsDiagonalStretchingKeepsRootDownstreamFalse :
+  rootDownstreamPromotionPromoted ≡ false
+nsDiagonalStretchingKeepsRootDownstreamFalse =
   refl

@@ -113,8 +113,8 @@ record ImportedUniformErrorBudgetCompositeSupport : Set where
       LowVorticity.NSLowVorticityExceptionalMassRoutingBoundaryRecorded
         ≡ true
 
-    outputPreimageTheoremStillFalse :
-      OutputPreimage.OutputStripPreimageMeasureEstimateProved ≡ false
+    outputPreimageTheoremNowTrue :
+      OutputPreimage.OutputStripPreimageMeasureEstimateProved ≡ true
     exceptionalCompositeTheoremStillFalse :
       Exceptional.exceptionalMassRoutingCompositeProved ≡ false
     bonyPushforwardTheoremStillFalse :
@@ -166,7 +166,7 @@ canonicalImportedUniformErrorBudgetCompositeSupport =
         refl
     ; lowVorticityBoundaryRecorded =
         refl
-    ; outputPreimageTheoremStillFalse =
+    ; outputPreimageTheoremNowTrue =
         refl
     ; exceptionalCompositeTheoremStillFalse =
         refl

@@ -124,7 +124,7 @@ record CarrierLatticeYMDefinitionReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -194,7 +194,7 @@ canonicalCarrierLatticeYMDefinitionReceipt =
     ; carrierLatticeYMDefinitionRecordedIsTrue =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

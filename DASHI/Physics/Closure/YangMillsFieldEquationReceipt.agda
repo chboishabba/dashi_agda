@@ -5605,7 +5605,7 @@ record YMSFGCL4WilsonContinuumCheckpointReceipt : Set₁ where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayOrTerminalPromoted :
       Bool
@@ -5660,7 +5660,7 @@ canonicalYMSFGCL4WilsonContinuumCheckpointReceipt =
     ; firstStrictBlockerIsNonFlatCurvature =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayOrTerminalPromoted =

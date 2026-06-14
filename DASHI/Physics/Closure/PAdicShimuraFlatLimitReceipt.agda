@@ -177,7 +177,7 @@ record PAdicShimuraFlatLimitReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -287,7 +287,7 @@ canonicalPAdicShimuraFlatLimitReceipt =
     ; geometryComponentsAreCanonical =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

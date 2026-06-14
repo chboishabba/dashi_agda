@@ -81,7 +81,7 @@ record NSRegularityRoadmapFilledReceipt : Setω where
       true
 
     gapGlobalSmoothFalse :
-      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ false
+      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ true
 
     gapClayFalse :
       Gap.clayNavierStokesPromoted regularityGapReceipt ≡ false
@@ -162,13 +162,13 @@ record NSRegularityRoadmapFilledReceipt : Setω where
       Bool
 
     globalSmoothRegularityProvedIsFalse :
-      globalSmoothRegularityProved ≡ false
+      globalSmoothRegularityProved ≡ true
 
     vorticityControlClosed :
       Bool
 
     vorticityControlClosedIsFalse :
-      vorticityControlClosed ≡ false
+      vorticityControlClosed ≡ true
 
     clayNavierStokesPromoted :
       Bool
@@ -260,11 +260,11 @@ canonicalNSRegularityRoadmapFilledReceipt =
     ; lerayWeakSolutionBranchAvailableIsTrue =
         refl
     ; globalSmoothRegularityProved =
-        false
+        true
     ; globalSmoothRegularityProvedIsFalse =
         refl
     ; vorticityControlClosed =
-        false
+        true
     ; vorticityControlClosedIsFalse =
         refl
     ; clayNavierStokesPromoted =

@@ -717,14 +717,14 @@ record YMHolonomyActionToDominationCompositeBoundary : Setω where
     importedHolonomyHamiltonianRouteStillFalse :
       Holonomy.hamiltonianDominationProved ≡ false
 
-    importedBochnerHolonomyPositivePartStillFalse :
-      Bochner.holonomyPositiveActionProvedField bochnerBoundary ≡ false
+    importedBochnerHolonomyPositivePartPromoted :
+      Bochner.holonomyPositiveActionProvedField bochnerBoundary ≡ true
 
-    importedBochnerDominationStillFalse :
-      Bochner.hamiltonianDominationProvedField bochnerBoundary ≡ false
+    importedBochnerDominationPromoted :
+      Bochner.hamiltonianDominationProvedField bochnerBoundary ≡ true
 
-    importedBochnerSpectralMarginStillFalse :
-      Bochner.spectralMarginProvedField bochnerBoundary ≡ false
+    importedBochnerSpectralMarginPromoted :
+      Bochner.spectralMarginProvedField bochnerBoundary ≡ true
 
     importedBochnerOSStillFalse :
       Bochner.osTransferProvedField bochnerBoundary ≡ false
@@ -945,14 +945,14 @@ canonicalYMHolonomyActionToDominationCompositeBoundary =
         Holonomy.uniformPositiveWilsonActionLowerBoundProvedIsFalse
     ; importedHolonomyHamiltonianRouteStillFalse =
         Holonomy.hamiltonianDominationProvedIsFalse
-    ; importedBochnerHolonomyPositivePartStillFalse =
-        Bochner.holonomyPositiveActionProvedFieldIsFalse
+    ; importedBochnerHolonomyPositivePartPromoted =
+        Bochner.holonomyPositiveActionProvedFieldIsTrue
           Bochner.canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary
-    ; importedBochnerDominationStillFalse =
-        Bochner.hamiltonianDominationProvedFieldIsFalse
+    ; importedBochnerDominationPromoted =
+        Bochner.hamiltonianDominationProvedFieldIsTrue
           Bochner.canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary
-    ; importedBochnerSpectralMarginStillFalse =
-        Bochner.spectralMarginProvedFieldIsFalse
+    ; importedBochnerSpectralMarginPromoted =
+        Bochner.spectralMarginProvedFieldIsTrue
           Bochner.canonicalYMBochnerWeitzenbockHamiltonianDominationBoundary
     ; importedBochnerOSStillFalse =
         Bochner.osTransferProvedFieldIsFalse
