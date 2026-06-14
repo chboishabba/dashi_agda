@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.QFT.FinitePrimeLaneDHRSMCompatibilityLedger as Ledger
+import DASHI.Physics.QFT.DHRSectorDecomposition as DHR
 
 ------------------------------------------------------------------------
 -- Gate 6 finite prime-lane localised endomorphism category.
@@ -306,7 +307,7 @@ gate6FinitePrimeLaneGaugeFactor lane =
 
 gate6FinitePrimeLaneSectorAtom :
   Gate6FinitePrimeLane →
-  Ledger.DHR.DHRGaugeSectorAtom
+  DHR.DHRGaugeSectorAtom
 gate6FinitePrimeLaneSectorAtom lane =
   Ledger.FinitePrimeLaneSMRow.sectorAtom
     (gate6FinitePrimeLaneRow lane)
@@ -372,7 +373,7 @@ record Gate6FinitePrimeLaneQuantumNumbers
       quantumDimension ≡ gate6FinitePrimeLaneQuantumDimension lane
 
     sectorAtom :
-      Ledger.DHR.DHRGaugeSectorAtom
+      DHR.DHRGaugeSectorAtom
 
     sectorAtomIsLedgerAtom :
       sectorAtom ≡ gate6FinitePrimeLaneSectorAtom lane

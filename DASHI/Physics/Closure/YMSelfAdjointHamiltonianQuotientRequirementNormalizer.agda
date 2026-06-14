@@ -68,6 +68,9 @@ data YMSelfAdjointHamiltonianRequirementRow : Set where
   selectedCarrierLowerBoundReceiptConsumedRow :
     YMSelfAdjointHamiltonianRequirementRow
 
+  p3BumpFiniteSpectralLowerBoundSurfaceConsumedRow :
+    YMSelfAdjointHamiltonianRequirementRow
+
   gate2ColimitGapLiftReceiptConsumedRow :
     YMSelfAdjointHamiltonianRequirementRow
 
@@ -98,6 +101,7 @@ canonicalYMSelfAdjointHamiltonianRequirementRows =
   ∷ l6RealCarrierQuotientFailClosedConsumedRow
   ∷ stoneHamiltonianGapBridgeConsumedRow
   ∷ selectedCarrierLowerBoundReceiptConsumedRow
+  ∷ p3BumpFiniteSpectralLowerBoundSurfaceConsumedRow
   ∷ gate2ColimitGapLiftReceiptConsumedRow
   ∷ firstLocalQuotientBlockerNarrowedRow
   ∷ exactSelfAdjointHamiltonianBlockerNormalizedRow
@@ -193,9 +197,6 @@ record YMSelfAdjointHamiltonianQuotientRequirementNormalizer : Setω where
 
     sourcedEquationBoundaryCanonicalIsTrue :
       sourcedEquationBoundaryCanonical ≡ true
-
-    sourcedHamiltonianPrerequisites :
-      Sourced.YMHamiltonianQuotientPrerequisiteBundle
 
     sourcedHamiltonianPrerequisitesCanonical :
       Bool
@@ -336,6 +337,27 @@ record YMSelfAdjointHamiltonianQuotientRequirementNormalizer : Setω where
     selectedCarrierLowerBoundCanonicalIsTrue :
       selectedCarrierLowerBoundCanonical ≡ true
 
+    p3BumpFiniteSpectralLowerBoundSurface :
+      NatSlice.S8NatP3BumpFiniteSpectralLowerBoundSurface
+
+    p3BumpFiniteSpectralLowerBoundSurfaceCanonical :
+      Bool
+
+    p3BumpFiniteSpectralLowerBoundSurfaceCanonicalIsTrue :
+      p3BumpFiniteSpectralLowerBoundSurfaceCanonical ≡ true
+
+    p3BumpFiniteSpectralLowerBoundSurfaceSpectralGapPromoted :
+      Bool
+
+    p3BumpFiniteSpectralLowerBoundSurfaceSpectralGapPromotedIsFalse :
+      p3BumpFiniteSpectralLowerBoundSurfaceSpectralGapPromoted ≡ false
+
+    p3BumpFiniteSpectralLowerBoundSurfaceClayPromoted :
+      Bool
+
+    p3BumpFiniteSpectralLowerBoundSurfaceClayPromotedIsFalse :
+      p3BumpFiniteSpectralLowerBoundSurfaceClayPromoted ≡ false
+
     gate2ColimitGapLift :
       Hamiltonian.Gate2ColimitGapLiftReceipt
 
@@ -442,8 +464,8 @@ record YMSelfAdjointHamiltonianQuotientRequirementNormalizer : Setω where
     rowCount :
       Nat
 
-    rowCountIs17 :
-      rowCount ≡ 17
+    rowCountIs18 :
+      rowCount ≡ 18
 
     hamiltonianTheoremPromoted :
       Bool
@@ -486,8 +508,6 @@ canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer =
         true
     ; sourcedEquationBoundaryCanonicalIsTrue =
         refl
-    ; sourcedHamiltonianPrerequisites =
-        Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
     ; sourcedHamiltonianPrerequisitesCanonical =
         true
     ; sourcedHamiltonianPrerequisitesCanonicalIsTrue =
@@ -594,6 +614,24 @@ canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer =
         true
     ; selectedCarrierLowerBoundCanonicalIsTrue =
         refl
+    ; p3BumpFiniteSpectralLowerBoundSurface =
+        NatSlice.canonicalS8NatP3BumpFiniteSpectralLowerBoundSurface
+    ; p3BumpFiniteSpectralLowerBoundSurfaceCanonical =
+        true
+    ; p3BumpFiniteSpectralLowerBoundSurfaceCanonicalIsTrue =
+        refl
+    ; p3BumpFiniteSpectralLowerBoundSurfaceSpectralGapPromoted =
+        NatSlice.S8NatP3BumpFiniteSpectralLowerBoundSurface.spectralGapPromoted
+          NatSlice.canonicalS8NatP3BumpFiniteSpectralLowerBoundSurface
+    ; p3BumpFiniteSpectralLowerBoundSurfaceSpectralGapPromotedIsFalse =
+        NatSlice.S8NatP3BumpFiniteSpectralLowerBoundSurface.spectralGapPromotedIsFalse
+          NatSlice.canonicalS8NatP3BumpFiniteSpectralLowerBoundSurface
+    ; p3BumpFiniteSpectralLowerBoundSurfaceClayPromoted =
+        NatSlice.S8NatP3BumpFiniteSpectralLowerBoundSurface.continuumClayMassGapPromoted
+          NatSlice.canonicalS8NatP3BumpFiniteSpectralLowerBoundSurface
+    ; p3BumpFiniteSpectralLowerBoundSurfaceClayPromotedIsFalse =
+        NatSlice.S8NatP3BumpFiniteSpectralLowerBoundSurface.continuumClayMassGapPromotedIsFalse
+          NatSlice.canonicalS8NatP3BumpFiniteSpectralLowerBoundSurface
     ; gate2ColimitGapLift =
         Hamiltonian.canonicalGate2ColimitGapLiftReceipt
     ; gate2ColimitGapLiftCanonical =
@@ -667,8 +705,8 @@ canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer =
     ; rowsAreCanonical =
         refl
     ; rowCount =
-        17
-    ; rowCountIs17 =
+        18
+    ; rowCountIs18 =
         refl
     ; hamiltonianTheoremPromoted =
         false
@@ -692,6 +730,7 @@ canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer =
         ∷ "The prerequisite bundle narrows the first local blocker to sourced D * F still being a boundary package before quotient/domain/self-adjointness transport"
         ∷ "Gauge-orbit equivalence, dense domain, symmetric dense Hamiltonian, and self-adjoint extension are exposed as concrete false prerequisite fields"
         ∷ "The bounded Nat carrier theorem is available only as bounded Nat evidence"
+        ∷ "The p3-bump finite spectral lower-bound surface is consumed as Nat finite evidence with spectral and Clay promotion flags false"
         ∷ "The Nat-to-real transition and lower6 blocker keep the real carrier theorem false"
         ∷ "The Stone bridge records finite/local generator and selected lower-bound surfaces without identifying them with H_YM"
         ∷ "The real quotient implementation audit still lacks YMConnectionCarrier modulo gauge, operator, dense domain, symmetry, and self-adjointness data"
@@ -701,9 +740,9 @@ canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer =
         ∷ []
     }
 
-canonicalYMSelfAdjointHamiltonianRequirementRowCountIs17 :
-  listCount canonicalYMSelfAdjointHamiltonianRequirementRows ≡ 17
-canonicalYMSelfAdjointHamiltonianRequirementRowCountIs17 =
+canonicalYMSelfAdjointHamiltonianRequirementRowCountIs18 :
+  listCount canonicalYMSelfAdjointHamiltonianRequirementRows ≡ 18
+canonicalYMSelfAdjointHamiltonianRequirementRowCountIs18 =
   refl
 
 canonicalYMSelfAdjointHamiltonianRequirementClassCountIs5 :
@@ -818,6 +857,30 @@ canonicalYMSelfAdjointHamiltonianNormalizerFiniteBoundNotTransported :
   ≡
   false
 canonicalYMSelfAdjointHamiltonianNormalizerFiniteBoundNotTransported =
+  refl
+
+canonicalYMSelfAdjointHamiltonianNormalizerP3BumpSurfaceCanonical :
+  p3BumpFiniteSpectralLowerBoundSurfaceCanonical
+    canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
+  ≡
+  true
+canonicalYMSelfAdjointHamiltonianNormalizerP3BumpSurfaceCanonical =
+  refl
+
+canonicalYMSelfAdjointHamiltonianNormalizerP3BumpSpectralGapFalse :
+  p3BumpFiniteSpectralLowerBoundSurfaceSpectralGapPromoted
+    canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
+  ≡
+  false
+canonicalYMSelfAdjointHamiltonianNormalizerP3BumpSpectralGapFalse =
+  refl
+
+canonicalYMSelfAdjointHamiltonianNormalizerP3BumpClayFalse :
+  p3BumpFiniteSpectralLowerBoundSurfaceClayPromoted
+    canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
+  ≡
+  false
+canonicalYMSelfAdjointHamiltonianNormalizerP3BumpClayFalse =
   refl
 
 canonicalYMSelfAdjointHamiltonianNormalizerHamiltonianTheoremFalse :

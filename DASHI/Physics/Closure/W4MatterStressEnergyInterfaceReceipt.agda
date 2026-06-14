@@ -10,7 +10,9 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation as W4External
+import DASHI.Physics.Closure.DiscreteEinsteinTensorCandidate as DET
 import DASHI.Physics.Closure.EinsteinEquationCandidate as EEC
+open import MonsterOntos using (SSP)
 import Ontology.GodelLattice as GL
 
 ------------------------------------------------------------------------
@@ -3408,4 +3410,184 @@ w4YMGRStressEnergyUniquenessNotPromoted :
   ≡
   false
 w4YMGRStressEnergyUniquenessNotPromoted =
+  refl
+
+------------------------------------------------------------------------
+-- Gate4 all-lane zero-source compatibility case.
+--
+-- This consumes the finite all-15-lane Ricci/scalar/Einstein zero-table law
+-- from the acyclic discrete Einstein-tensor candidate surface and exposes
+-- the only source-compatible case currently justified here: zero Einstein
+-- tensor with zero local source expectation.  It is not a W4 stress-energy
+-- tensor and it does not promote the sourced non-flat Einstein equation.
+
+data W4Gate4ZeroSourceCompatibilityStatus : Set where
+  w4Gate4ZeroSourceCompatibilityRecordedFailClosed :
+    W4Gate4ZeroSourceCompatibilityStatus
+
+record W4Gate4ZeroSourceCompatibilityReceipt : Setω where
+  field
+    status :
+      W4Gate4ZeroSourceCompatibilityStatus
+
+    uniquenessProgress :
+      W4YMGRStressEnergyUniquenessProgressReceipt
+
+    localZeroTableAgreementMayBeConsumed :
+      W4YMGRStressEnergyUniquenessProgressReceipt.localZeroTableAgreementMayBeConsumed
+        uniquenessProgress
+      ≡
+      true
+
+    upstreamGate4SourcedEquationSurfaceName :
+      String
+
+    allLaneEinsteinTensorLaw :
+      DET.FactorVecSSPAllLaneContractionEinsteinTensorLaw
+
+    allLaneEinsteinTensorLawIsDETCanonical :
+      allLaneEinsteinTensorLaw
+      ≡
+      DET.canonicalFactorVecSSPAllLaneContractionEinsteinTensorLaw
+
+    zeroSourceExpected :
+      Bool
+
+    zeroSourceExpectedIsTrue :
+      zeroSourceExpected
+      ≡
+      true
+
+    einsteinTensorZeroSourceCompatibility :
+      (base : GL.FactorVec) →
+      (mu nu : SSP) →
+      DET.factorVecSSPEinsteinTensor base mu nu
+      ≡
+      DET.zeroFactorVec
+
+    w4MatterStressEnergyReceiptConstructed :
+      Bool
+
+    w4MatterStressEnergyReceiptConstructedIsFalse :
+      w4MatterStressEnergyReceiptConstructed
+      ≡
+      false
+
+    authorityBackedStressEnergyConstructed :
+      Bool
+
+    authorityBackedStressEnergyConstructedIsFalse :
+      authorityBackedStressEnergyConstructed
+      ≡
+      false
+
+    selectedNonFlatEquationPromoted :
+      Bool
+
+    selectedNonFlatEquationPromotedIsFalse :
+      selectedNonFlatEquationPromoted
+      ≡
+      false
+
+    candidate256Promoted :
+      Bool
+
+    candidate256PromotedIsFalse :
+      candidate256Promoted
+      ≡
+      false
+
+    firstAuthorityInterfaceBlocker :
+      W4MatterStressEnergyAuthorityInterfaceBlocker
+
+    firstAuthorityInterfaceBlockerIsCandidate256 :
+      firstAuthorityInterfaceBlocker
+      ≡
+      missingCandidate256CalibrationReceiptForMatterInterface
+
+    noEinsteinInterfaceReceiptHere :
+      EEC.W4MatterStressEnergyInterfaceReceipt →
+      ⊥
+
+    zeroSourceBoundary :
+      List String
+
+canonicalW4Gate4ZeroSourceCompatibilityReceipt :
+  W4Gate4ZeroSourceCompatibilityReceipt
+canonicalW4Gate4ZeroSourceCompatibilityReceipt =
+  record
+    { status =
+        w4Gate4ZeroSourceCompatibilityRecordedFailClosed
+    ; uniquenessProgress =
+        canonicalW4YMGRStressEnergyUniquenessProgressReceipt
+    ; localZeroTableAgreementMayBeConsumed =
+        W4YMGRStressEnergyUniquenessProgressReceipt.localZeroTableAgreementMayBeConsumedIsTrue
+          canonicalW4YMGRStressEnergyUniquenessProgressReceipt
+    ; upstreamGate4SourcedEquationSurfaceName =
+        "DASHI.Physics.Closure.GRDiscreteRicciCandidateFromCurvature.canonicalGRGate4SourcedEinsteinEquationSurface"
+    ; allLaneEinsteinTensorLaw =
+        DET.canonicalFactorVecSSPAllLaneContractionEinsteinTensorLaw
+    ; allLaneEinsteinTensorLawIsDETCanonical =
+        refl
+    ; zeroSourceExpected =
+        true
+    ; zeroSourceExpectedIsTrue =
+        refl
+    ; einsteinTensorZeroSourceCompatibility =
+        DET.FactorVecSSPAllLaneContractionEinsteinTensorLaw.einsteinTensorZeroTableLaw
+          DET.canonicalFactorVecSSPAllLaneContractionEinsteinTensorLaw
+    ; w4MatterStressEnergyReceiptConstructed =
+        false
+    ; w4MatterStressEnergyReceiptConstructedIsFalse =
+        refl
+    ; authorityBackedStressEnergyConstructed =
+        false
+    ; authorityBackedStressEnergyConstructedIsFalse =
+        refl
+    ; selectedNonFlatEquationPromoted =
+        false
+    ; selectedNonFlatEquationPromotedIsFalse =
+        refl
+    ; candidate256Promoted =
+        false
+    ; candidate256PromotedIsFalse =
+        refl
+    ; firstAuthorityInterfaceBlocker =
+        W4YMGRStressEnergyUniquenessProgressReceipt.firstAuthorityInterfaceBlocker
+          canonicalW4YMGRStressEnergyUniquenessProgressReceipt
+    ; firstAuthorityInterfaceBlockerIsCandidate256 =
+        W4YMGRStressEnergyUniquenessProgressReceipt.firstAuthorityInterfaceBlockerIsCandidate256
+          canonicalW4YMGRStressEnergyUniquenessProgressReceipt
+    ; noEinsteinInterfaceReceiptHere =
+        EEC.w4MatterStressEnergyInterfaceReceiptImpossibleHere
+    ; zeroSourceBoundary =
+        "The acyclic all-15-lane Ricci/scalar/Einstein zero-table law is consumed as the finite compatibility witness"
+        ∷ "The compatibility case is zero-source only: factorVecSSPEinsteinTensor base mu nu is zero for every FactorVec base and SSP lane pair"
+        ∷ "The Gate4 sourced-equation surface remains an upstream fail-closed context; this W4 receipt avoids importing it directly to preserve the existing module dependency order"
+        ∷ "The W4 matter/stress-energy interface, authority-backed stress-energy tensor, Candidate256 authority, and sourced non-flat Einstein equation remain unconstructed"
+        ∷ []
+    }
+
+w4Gate4ZeroSourceCompatibilityAllLaneLawCanonical :
+  W4Gate4ZeroSourceCompatibilityReceipt.allLaneEinsteinTensorLaw
+    canonicalW4Gate4ZeroSourceCompatibilityReceipt
+  ≡
+  DET.canonicalFactorVecSSPAllLaneContractionEinsteinTensorLaw
+w4Gate4ZeroSourceCompatibilityAllLaneLawCanonical =
+  refl
+
+w4Gate4ZeroSourceCompatibilityNoSourcedPromotion :
+  W4Gate4ZeroSourceCompatibilityReceipt.selectedNonFlatEquationPromoted
+    canonicalW4Gate4ZeroSourceCompatibilityReceipt
+  ≡
+  false
+w4Gate4ZeroSourceCompatibilityNoSourcedPromotion =
+  refl
+
+w4Gate4ZeroSourceCompatibilityNoCandidate256Promotion :
+  W4Gate4ZeroSourceCompatibilityReceipt.candidate256Promoted
+    canonicalW4Gate4ZeroSourceCompatibilityReceipt
+  ≡
+  false
+w4Gate4ZeroSourceCompatibilityNoCandidate256Promotion =
   refl

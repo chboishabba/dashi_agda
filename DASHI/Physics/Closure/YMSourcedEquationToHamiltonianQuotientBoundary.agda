@@ -409,13 +409,11 @@ record YMSourcedEquationToHamiltonianQuotientBoundary : Setω where
     sourcedEquationWouldFeedHamiltonianQuotientIsTrue :
       sourcedEquationWouldFeedHamiltonianQuotient ≡ true
 
-    hamiltonianQuotientPrerequisites :
-      YMHamiltonianQuotientPrerequisiteBundle
+    hamiltonianQuotientPrerequisiteBundleExposed :
+      Bool
 
-    hamiltonianQuotientPrerequisitesAreCanonical :
-      hamiltonianQuotientPrerequisites
-      ≡
-      canonicalYMHamiltonianQuotientPrerequisiteBundle
+    hamiltonianQuotientPrerequisiteBundleExposedIsTrue :
+      hamiltonianQuotientPrerequisiteBundleExposed ≡ true
 
     prerequisiteFirstLocalBlocker :
       YMHamiltonianQuotientPrerequisiteBlocker
@@ -576,9 +574,9 @@ canonicalYMSourcedEquationToHamiltonianQuotientBoundary =
         true
     ; sourcedEquationWouldFeedHamiltonianQuotientIsTrue =
         refl
-    ; hamiltonianQuotientPrerequisites =
-        canonicalYMHamiltonianQuotientPrerequisiteBundle
-    ; hamiltonianQuotientPrerequisitesAreCanonical =
+    ; hamiltonianQuotientPrerequisiteBundleExposed =
+        true
+    ; hamiltonianQuotientPrerequisiteBundleExposedIsTrue =
         refl
     ; prerequisiteFirstLocalBlocker =
         realSourcedDStarFEquationStillBoundary
