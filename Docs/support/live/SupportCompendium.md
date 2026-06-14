@@ -1,6 +1,6 @@
 # Support Compendium for Papers 1, 3, and 8
 
-Date: `2026-06-09`
+Date: `2026-06-14`
 Status: shared support sourcebook; not a flagship manuscript
 
 This compendium is the cleaned support layer for the live corpus:
@@ -127,7 +127,95 @@ remains is a reusable governance rule: every live manuscript should distinguish
 what it proves, what it imports under citation, and what it deliberately leaves
 open.
 
-## 6. Source provenance index
+## 6. Theorem interfaces, adapters, and manifests
+
+Source file: `Docs/support/reference/AgdaValidationTargets.md`  
+Extraction date: `2026-06-14`
+
+The paper-facing route to formal support is the validation target manifest, not
+an unfiltered scan of historical receipts. Read these surfaces as candidate
+proof support: some are internally Agda-receipted/typechecked integration
+points, but they remain pending peer review, external authority review, and
+external acceptance. They do not claim Clay problem resolution.
+
+The normalized paper-facing theorem interfaces and generated theorem-variable
+manifest are:
+
+- `DASHI/Papers/NavierStokes/TheoremInterface.agda`
+- `DASHI/Papers/YangMills/TheoremInterface.agda`
+- `DASHI/Papers/Unification/TheoremInterface.agda`
+- `scripts/generate_paper_proof_manifest.py`
+- `Docs/papers/generated/core_papers_theorem_var_manifest.md`
+- `Docs/papers/generated/core_papers_theorem_var_manifest.json`
+- `Docs/papers/generated/core_papers_theorem_var_manifest.tsv`
+
+For Paper 1, the current theorem-interface surface is the NS wall listed in
+`Docs/support/reference/AgdaValidationTargets.md`, ending at:
+
+- `DASHI/Physics/Closure/NSWriteupAndConstantsReadinessBoundary.agda`
+- `DASHI/Physics/Closure/NSStandardPDEWriteupAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/NSPaperSubmissionPacketBoundary.agda`
+
+The matching manifest route is:
+
+- `scripts/local_clay_harness_manifest.py`
+- `outputs/local_clay_harness_manifest.json`
+- `outputs/local_clay_harness_manifest_children/ns_paper_submission_packet_smoke.json`
+- `outputs/local_clay_harness_manifest_children/ns_standard_pde_writeup_assembly_smoke.json`
+
+For Paper 3, the current theorem-interface surface is the YM wall listed in
+`Docs/support/reference/AgdaValidationTargets.md`, especially:
+
+- `DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda`
+- `DASHI/Physics/Closure/YMSpectralMarginToContinuumTransferCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMContinuumTransferToNoSpectralPollutionSocketCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/YMReflectionPositivityFullTheoremAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/YMPaperSubmissionPacketBoundary.agda`
+- `DASHI/Physics/Closure/YMExternalAcceptanceBoundary.agda`
+
+The matching manifest route is:
+
+- `scripts/local_clay_harness_manifest.py`
+- `outputs/local_clay_harness_manifest.json`
+- `outputs/local_clay_harness_manifest_children/ym_paper_submission_packet_smoke.json`
+- `outputs/local_clay_harness_manifest_children/ym_final_authority_packaging_smoke.json`
+
+For Paper 8, the current theorem-interface surface is the unification wall
+listed in `Docs/support/reference/AgdaValidationTargets.md`, especially:
+
+- `DASHI/Physics/Closure/UnificationU1aHPerLaneCompositeBoundary.agda`
+- `DASHI/Physics/Closure/UnificationCrossTermNullityDiscriminantBoundary.agda`
+- `DASHI/Physics/Closure/UnificationParallelogramToJordanVonNeumannSocketCompositeLightweightBoundary.agda`
+- `DASHI/Physics/Closure/UnificationConsumerAuthorityAssemblyBoundary.agda`
+- `DASHI/Physics/Closure/UnificationAuthorityReviewPacketBoundary.agda`
+
+The matching manifest route is:
+
+- `scripts/local_clay_harness_manifest.py`
+- `outputs/local_clay_harness_manifest.json`
+- `outputs/local_clay_harness_manifest_children/unification_authority_review_packet_smoke.json`
+- `outputs/local_clay_harness_manifest_children/unification_consumer_authority_assembly_smoke.json`
+
+Adapter surfaces should be cited only for their bounded role. Current
+paper-support adapters include:
+
+- `DASHI/DCHoTT/InterpretationAdapter.agda`
+- `DASHI/DCHoTT/All.agda`
+- `DASHI/Cubical/NavierStokesCandidate.agda`
+- `DASHI/Cubical/YangMillsCandidate.agda`
+- `DASHI/Physics/Closure/BoundaryParameterAdapterAlgebra.agda`
+- `DASHI/Physics/Closure/UnificationJordanVonNeumannAdapterBoundary.agda`
+- `DASHI/Physics/Closure/AtomicChemistryRightLimitsAdapter.agda`
+- `scripts/sm_higgs_hepdata_receipt_adapter.py`
+- `outputs/sm_higgs_hepdata_receipts/sm_higgs_hepdata_receipt_adapter.md`
+
+These adapters connect paper claims to typed boundaries or diagnostic receipts;
+they do not promote downstream physics claims or external acceptance.
+The Cubical files are currently fail-closed compatibility records because the
+receipt modules they would need to import are not yet checked with
+`--without-K` / `--cubical-compatible`.
+
+## 7. Source provenance index
 
 | Compendium section | Source file | Extraction date | Role in live corpus |
 | --- | --- | --- | --- |
@@ -136,3 +224,4 @@ open.
 | DHR reconstruction support | `Docs/papers/legacy/Paper5DHRSkeleton.md` | `2026-06-09` | Paper 8 JvN/completion consumer example |
 | Yukawa/CKM diagnostics | `Docs/papers/legacy/Paper6MatterYukawaCKMSkeleton.md` | `2026-06-09` | downstream diagnostic support only |
 | Scope and terminal non-claims | `Docs/papers/legacy/Paper7TerminalCompositionDraft.md` | `2026-06-09` | shared claim-boundary discipline |
+| Theorem interfaces, adapters, and manifests | `Docs/support/reference/AgdaValidationTargets.md`; `Docs/papers/generated/core_papers_theorem_var_manifest.md` | `2026-06-14` | shared paper-facing theorem-support router |

@@ -13,3 +13,8 @@ Rendered Agda dependency graphs currently checked in here:
 - `UnifiedPhysicsTheorem.svg`
 
 They can be regenerated with `./scripts/render_agda_dependency_graph.sh <module>`.
+
+Publication-routing smoke checks:
+
+- `python scripts/check_diagram_reproducibility.py`
+- `python scripts/check_publication_readiness.py`

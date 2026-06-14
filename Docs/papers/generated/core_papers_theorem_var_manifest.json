@@ -1,0 +1,548 @@
+{
+  "basename": "core_papers_theorem_var_manifest",
+  "columns": [
+    "paper",
+    "lemma",
+    "agda_file",
+    "exact_var",
+    "expected_status",
+    "authority",
+    "section",
+    "governance_note"
+  ],
+  "compatibility_alias": false,
+  "generator": "scripts/generate_paper_proof_manifest.py",
+  "row_count": 53,
+  "rows": [
+    {
+      "agda_file": "DASHI/Physics/Closure/NSPaper1ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "lpIdentityFixedKSignsLocked",
+      "expected_status": "recorded",
+      "governance_note": "Fixed cutoff bookkeeping only; no moving-cutoff theorem or Clay promotion.",
+      "lemma": "Fixed-K LP identity/sign spine",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 Section 2"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSPaper1ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "thetaFluxOverDissDefinedAfterFixedKProfile",
+      "expected_status": "recorded",
+      "governance_note": "Theta is a seam/profile variable, not a theorem-level monotonicity claim.",
+      "lemma": "Theta seam definition after fixed-K profile",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 Sections 1-2"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSPaper1ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "thetaImpliesTailDecayConditionally",
+      "expected_status": "conditional",
+      "governance_note": "Conditional reduction only; real NS data must still supply the estimate.",
+      "lemma": "Theta less than one implies tail decay",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 Section 2"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSPaper1ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "dangerShellMaximumPrincipleOpen",
+      "expected_status": "open",
+      "governance_note": "Hard open point; cannot be consumed as smoothness or Clay NS.",
+      "lemma": "Danger-shell maximum principle",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 Sections 3-6"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSPaper1ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "hMinusHalfNonlinearDefectBoundWithoutCircularity",
+      "expected_status": "open",
+      "governance_note": "Promotion requires accepted constants and non-circular norm control.",
+      "lemma": "H-minus-half nonlinear defect bound",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 Sections 3-6"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSPaper1ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "comparisonTheoremThetaControlsH118ByInterpolation",
+      "expected_status": "target-only",
+      "governance_note": "Explicit target, not accepted theorem input and not Clay closure.",
+      "lemma": "Comparison theorem target",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 theorem-resolution checklist"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSTailFluxAbsorptionMarginReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "thetaProfileComputableAfterFixedKFluxDissProfile",
+      "expected_status": "recorded",
+      "governance_note": "Profile is computed after fixed-K data; danger-shell argmax is separate.",
+      "lemma": "Tail-flux theta profile computability",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 Sections 1-2"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/NSTailFluxAbsorptionMarginReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "thetaLessThanOneAnalyticEstimateProvedHere",
+      "expected_status": "false",
+      "governance_note": "Clay promotion row false; analytic theta<1 estimate is not proved here.",
+      "lemma": "Theta analytic estimate",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 Section 2"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/EV5ThetaMarginUpgradeReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "thetaPromotedToTheorem",
+      "expected_status": "false",
+      "governance_note": "Clay promotion row false; theta evidence remains diagnostic.",
+      "lemma": "Theta-to-theorem promotion",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 theta/EV5 note"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/ClayNSCurrentStateReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "clayNSCurrentStateKeepsClayFalse",
+      "expected_status": "false",
+      "governance_note": "Clay promotion row false by current-state guard.",
+      "lemma": "Clay Navier-Stokes promotion guard",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 governance boundary"
+    },
+    {
+      "agda_file": "DASHI/Papers/NavierStokes/TheoremInterface.agda",
+      "authority": "repo-native Agda wrapper over exact A6/A7/A8/A9/final receipts",
+      "exact_var": "canonicalNSPaperTheoremStatus",
+      "expected_status": "interface",
+      "governance_note": "Normalized paper interface; does not promote Clay or terminal claims.",
+      "lemma": "Paper-facing NS theorem interface",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 formal-status appendix"
+    },
+    {
+      "agda_file": "DASHI/Papers/NavierStokes/TheoremInterface.agda",
+      "authority": "NSA9CKNBKMClosureBoundary imported equality",
+      "exact_var": "a9CKNBKMClosureProved",
+      "expected_status": "true",
+      "governance_note": "Receipt-level A9 anchor only; final Clay promotion remains false.",
+      "lemma": "A9 CKN/BKM closure interface anchor",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 formal-status appendix"
+    },
+    {
+      "agda_file": "DASHI/Papers/NavierStokes/TheoremInterface.agda",
+      "authority": "NSFinalStateReceipt imported equality",
+      "exact_var": "nsPaperInterfaceTerminalFalse",
+      "expected_status": "false",
+      "governance_note": "Explicitly prevents paper-facing interface from reading as Clay promotion.",
+      "lemma": "NS terminal Clay guard in interface",
+      "paper": "Paper1 NS",
+      "section": "Paper 1 governance boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "canonicalYMPaper3ClaimChain",
+      "expected_status": "recorded",
+      "governance_note": "Records actualActivity -> KP -> Balaban -> area law -> open continuum gaps.",
+      "lemma": "Paper 3 carrier-to-continuum claim chain",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Sections 1-5"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "actualActivityStep",
+      "expected_status": "recorded",
+      "governance_note": "Carrier-scale activity step only; not continuum Yang-Mills.",
+      "lemma": "Actual polymer activity",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 KP/Balaban setup"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "gate3BridgeStepOpen",
+      "expected_status": "open",
+      "governance_note": "Open bridge; cannot be promoted to Clay authority.",
+      "lemma": "Gate 3 bridge",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 5"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "continuumMassGapStepOpen",
+      "expected_status": "open",
+      "governance_note": "Open continuum step; finite carrier margins are not the Clay mass gap.",
+      "lemma": "Continuum mass-gap step",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Sections 5-7"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "moscoBridgeOpen",
+      "expected_status": "open",
+      "governance_note": "Mosco structure alone does not prove no spectral pollution.",
+      "lemma": "Mosco bridge gap",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 5"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "noSpectralPollutionOpen",
+      "expected_status": "open",
+      "governance_note": "Requires H3a/H3b-strength transfer before promotion.",
+      "lemma": "No-spectral-pollution gap",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 5.3"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "massShellBridgeOpen",
+      "expected_status": "open",
+      "governance_note": "Physical mass-shell identification remains a boundary obligation.",
+      "lemma": "Mass-shell bridge gap",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 7"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "continuumMassGapProved",
+      "expected_status": "false",
+      "governance_note": "Clay promotion row false; continuum mass gap is not proved here.",
+      "lemma": "Continuum mass gap proved field",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 governance boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "clayYMMassGapPromoted",
+      "expected_status": "false",
+      "governance_note": "Clay promotion row false by target receipt.",
+      "lemma": "Clay YM mass-gap promotion field",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 governance boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/Paper3YMDependencyGraphReceipt.agda",
+      "authority": "repo-native Agda receipt plus cited-authority intake",
+      "exact_var": "ym6Statement",
+      "expected_status": "open-frontier",
+      "governance_note": "H3a remains the Balaban-centered hard bridge unless accepted as authority intake.",
+      "lemma": "Balaban RG / H3a frontier",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 5.1"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/Paper3YMDependencyGraphReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "balabanRGTheoremProved",
+      "expected_status": "false",
+      "governance_note": "Clay promotion row false; no local full Balaban theorem is claimed.",
+      "lemma": "Balaban RG theorem proved field",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 Section 5.1"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/Paper3YMDependencyGraphReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "yangMillsMassGapPromoted",
+      "expected_status": "false",
+      "governance_note": "Clay promotion row false; mass-gap promotion is blocked.",
+      "lemma": "Yang-Mills mass-gap promotion field",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 governance boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/YMClayPromotionBoundary.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "clayYangMillsPromoted",
+      "expected_status": "false",
+      "governance_note": "Clay promotion row false by explicit boundary.",
+      "lemma": "Clay Yang-Mills promotion boundary",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 governance boundary"
+    },
+    {
+      "agda_file": "DASHI/Papers/YangMills/TheoremInterface.agda",
+      "authority": "repo-native Agda wrapper over self-adjointness, Bochner, Gate3, and final receipts",
+      "exact_var": "canonicalYangMillsPaperTheoremInterface",
+      "expected_status": "interface",
+      "governance_note": "Normalized paper interface; separates local finite anchors from OS/continuum/Clay guards.",
+      "lemma": "Paper-facing YM theorem interface",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 formal-status appendix"
+    },
+    {
+      "agda_file": "DASHI/Papers/YangMills/TheoremInterface.agda",
+      "authority": "YMBochnerWeitzenbockHamiltonianDominationBoundary imported equality",
+      "exact_var": "paperInterfaceLocalDominationTrue",
+      "expected_status": "true",
+      "governance_note": "Local finite domination is recorded true; OS/continuum/Clay consumers remain separately guarded.",
+      "lemma": "Local Bochner-Weitzenbock domination interface anchor",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 formal-status appendix"
+    },
+    {
+      "agda_file": "DASHI/Papers/YangMills/TheoremInterface.agda",
+      "authority": "Gate3PAWOTGUniformSeparationTargetReceipt imported equality",
+      "exact_var": "paperInterfacePAWOTGTransferTrue",
+      "expected_status": "true",
+      "governance_note": "Transfer anchor true while Gate3 and Clay promotion remain false.",
+      "lemma": "Gate3 no-spectral-pollution transfer interface anchor",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 formal-status appendix"
+    },
+    {
+      "agda_file": "DASHI/Papers/YangMills/TheoremInterface.agda",
+      "authority": "YMFinalStateReceipt/interface guard",
+      "exact_var": "paperInterfaceClayTerminalFalse",
+      "expected_status": "false",
+      "governance_note": "Explicitly prevents paper-facing interface from reading as Clay promotion.",
+      "lemma": "YM terminal Clay guard in interface",
+      "paper": "Paper3 YM",
+      "section": "Paper 3 governance boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/Paper8CoreThesisReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "canonicalPaper8CoreThesisReceipt",
+      "expected_status": "recorded",
+      "governance_note": "Records fail-closed receipt architecture and diagnostics without terminal physics unification.",
+      "lemma": "Paper 8 core thesis receipt",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 core thesis"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/Paper8CoreThesisReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "paper8CoreThesisKeepsTerminalFalse",
+      "expected_status": "false",
+      "governance_note": "Full unification, Clay YM, and Clay NS promotion remain false.",
+      "lemma": "Paper 8 terminal promotion guard",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 governance boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/MillenniumTowerSchemaReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "canonicalMillenniumTowerSchemaReceipt",
+      "expected_status": "recorded",
+      "governance_note": "Shared T0-T4 schema records YM/NS instances; T3/T4 obligations remain fail-closed.",
+      "lemma": "Millennium tower schema",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 Section 7"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/MillenniumTowerSchemaReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "millenniumTowerSchemaKeepsClayFalse",
+      "expected_status": "false",
+      "governance_note": "Schema typechecking does not promote Clay, full unification, or terminal claims.",
+      "lemma": "Millennium tower Clay promotion guard",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 Section 7 governance boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/MillenniumTowerYangMillsInstanceReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "canonicalMillenniumTowerYangMillsInstanceReceipt",
+      "expected_status": "recorded",
+      "governance_note": "Finite carrier gap and field-equation surfaces are recorded; continuum/Clay YM remains blocked.",
+      "lemma": "Millennium tower YM instance",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 YM Millennium lane"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/MillenniumTowerYangMillsInstanceReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "millenniumTowerYangMillsNoClayPromotion",
+      "expected_status": "false",
+      "governance_note": "Keeps the YM instance from changing Paper 3 or Clay YM semantics.",
+      "lemma": "Millennium tower YM no-promotion guard",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 YM Millennium lane boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/MillenniumTowerNavierStokesInstanceReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "canonicalMillenniumTowerNavierStokesInstanceReceipt",
+      "expected_status": "recorded",
+      "governance_note": "Finite NS regularity tower data are recorded; continuum BKM/Clay NS remains blocked.",
+      "lemma": "Millennium tower NS instance",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 NS Millennium lane"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/MillenniumTowerNavierStokesInstanceReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "millenniumTowerNavierStokesNoClayPromotion",
+      "expected_status": "false",
+      "governance_note": "Keeps the NS instance from changing Paper 1 or Clay NS semantics.",
+      "lemma": "Millennium tower NS no-promotion guard",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 NS Millennium lane boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/MillenniumSchemaBlockerMapReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "canonicalMillenniumSchemaBlockerMapReceipt",
+      "expected_status": "recorded",
+      "governance_note": "Records YM active blocker plus NS/unification candidate-package posture without promotion.",
+      "lemma": "Millennium schema blocker map",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 blocker map"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/MillenniumSchemaBlockerMapReceipt.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "millenniumSchemaBlockerMapKeepsTerminalFalse",
+      "expected_status": "false",
+      "governance_note": "Blocker map is structural only and makes no Yang-Mills, Navier-Stokes, unification, or terminal promotion.",
+      "lemma": "Millennium schema terminal guard",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 blocker map boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationScaleInvariantCrossTermHypothesisBoundary.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "scaleInvariantCrossTermHypothesisRecorded",
+      "expected_status": "recorded",
+      "governance_note": "Records the cross-term hypothesis boundary; decomposition and downstream consumers remain open.",
+      "lemma": "U-1a-H scale-invariant cross-term hypothesis",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.1/U-1a-H frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationScaleInvariantCrossTermHypothesisBoundary.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "scaleInvariantCrossTermDecompositionProved",
+      "expected_status": "false",
+      "governance_note": "First live theorem burden stays false; two-homogeneity alone is not accepted.",
+      "lemma": "U-1a-H decomposition blocker",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.1/U-1a-H frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationCrossTermNullityDiscriminantBoundary.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "UnificationCrossTermNullityDiscriminantRecorded",
+      "expected_status": "recorded",
+      "governance_note": "Records the discriminant boundary feeding UCT.4-UCT.8 consumers without discharging it.",
+      "lemma": "Cross-term nullity discriminant",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.4 frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationCrossTermNullityDiscriminantBoundary.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "UnificationCrossTermNullityDiscriminantProved",
+      "expected_status": "false",
+      "governance_note": "Residual nullity remains a fail-closed blocker before downstream promotion.",
+      "lemma": "Cross-term nullity discriminant proof guard",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.4 frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationNullClassSubspaceCompleteBoundary.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "UnificationNullClassSubspaceCompleteRecorded",
+      "expected_status": "recorded",
+      "governance_note": "Records null-class subspace completeness as a consumer boundary, not a terminal theorem.",
+      "lemma": "Null-class subspace completeness",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 modulo-null consumer chain"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationParallelogramFromBilinearBoundary.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "UnificationParallelogramFromBilinearRecorded",
+      "expected_status": "recorded",
+      "governance_note": "Records the bilinear-to-parallelogram route while keeping the theorem burden explicit.",
+      "lemma": "Parallelogram law from bilinear boundary",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.6 frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationParallelogramToJordanVonNeumannSocketCompositeLightweightBoundary.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "UnificationParallelogramToJordanVonNeumannSocketCompositeRecorded",
+      "expected_status": "recorded",
+      "governance_note": "Downstream socket is recorded; it does not replace the missing parallelogram/Jordan-von Neumann proof.",
+      "lemma": "Jordan-von Neumann socket",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 UCT.7 frontier"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationAuthorityReviewPacketBoundary.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "UnificationAuthorityReviewPacketRecorded",
+      "expected_status": "recorded",
+      "governance_note": "Authority packet is recorded but not ready and does not enable terminal promotion.",
+      "lemma": "Unification authority review packet",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 authority boundary"
+    },
+    {
+      "agda_file": "DASHI/Physics/Closure/UnificationAuthorityReviewPacketBoundary.agda",
+      "authority": "repo-native Agda receipt",
+      "exact_var": "TerminalPromotionFromUnificationAuthorityReviewPacket",
+      "expected_status": "false",
+      "governance_note": "Explicit terminal promotion guard for the review packet.",
+      "lemma": "Unification authority review no-promotion guard",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 authority boundary"
+    },
+    {
+      "agda_file": "DASHI/Papers/Unification/TheoremInterface.agda",
+      "authority": "repo-native Agda wrapper over UCT receipts and consumer authority boundaries",
+      "exact_var": "canonicalUnificationPaperTheoremInterface",
+      "expected_status": "interface",
+      "governance_note": "Normalized paper interface; terminal unification promotion remains false.",
+      "lemma": "Paper-facing Unification theorem interface",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 formal-status appendix"
+    },
+    {
+      "agda_file": "DASHI/DCHoTT/UnificationCandidate.agda",
+      "authority": "repo-native DCHoTT interpretation adapter",
+      "exact_var": "canonicalDCHoTTUnificationCandidateAdapter",
+      "expected_status": "adapter",
+      "governance_note": "DCHoTT adapter records interpretation coverage without full repo port or terminal promotion.",
+      "lemma": "DCHoTT adapter index",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 adapter appendix"
+    },
+    {
+      "agda_file": "DASHI/DCHoTT/UnificationCandidate.agda",
+      "authority": "repo-native DCHoTT interpretation adapter",
+      "exact_var": "dchottUnificationCandidateTerminalFalse",
+      "expected_status": "false",
+      "governance_note": "Terminal unification remains false through the DCHoTT-facing adapter.",
+      "lemma": "DCHoTT adapter terminal guard",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 adapter appendix"
+    },
+    {
+      "agda_file": "DASHI/Cubical/UnificationCandidate.agda",
+      "authority": "repo-native Cubical compatibility boundary",
+      "exact_var": "unificationCubicalAdapterIncompatibility",
+      "expected_status": "adapter-boundary",
+      "governance_note": "Records why a Cubical wrapper is not constructed; no Cubical path or terminal promotion is fabricated.",
+      "lemma": "Cubical adapter incompatibility surface",
+      "paper": "Paper8 Unification",
+      "section": "Paper 8 adapter appendix"
+    }
+  ]
+}
