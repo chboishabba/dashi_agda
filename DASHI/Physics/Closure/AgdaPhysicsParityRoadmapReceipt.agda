@@ -75,8 +75,15 @@ data EvidenceMode : Set where
 data PromotionVerdict : Set where
   notPromoted :
     PromotionVerdict
-  authorityRequired :
+  authorityRequiredVerdict :
     PromotionVerdict
+
+data ParityPromotionAuthorityToken : Set where
+
+parityPromotionImpossibleHere :
+  ParityPromotionAuthorityToken →
+  ⊥
+parityPromotionImpossibleHere ()
 
 data ErgonomicFacet : Set where
   coherentNames :
@@ -100,6 +107,61 @@ canonicalErgonomicFacets =
   ∷ tacticOrAutomationAnalogue
   ∷ searchAndNavigationIndex
   ∷ packageLevelRoadmap
+  ∷ []
+
+finiteYMSpectralTheoremStableInterfaceName : String
+finiteYMSpectralTheoremStableInterfaceName =
+  "finiteYMSpectralTheorem"
+
+finiteYMSpectralTheoremInputs : List String
+finiteYMSpectralTheoremInputs =
+  "finite-dimensional Hilbert space"
+  ∷ "ordered basis"
+  ∷ "discrete YM Hamiltonian matrix"
+  ∷ "finite gauge action"
+  ∷ []
+
+finiteYMSpectralTheoremOutputs : List String
+finiteYMSpectralTheoremOutputs =
+  "orthonormal eigenbasis"
+  ∷ "real eigenvalue spectrum"
+  ∷ "finite spectral decomposition"
+  ∷ "gauge-compatible Hamiltonian receipt"
+  ∷ []
+
+finiteYMSpectralDefinitionalReflObligations : List String
+finiteYMSpectralDefinitionalReflObligations =
+  "dimension=length basis"
+  ∷ "finite Jacobi check"
+  ∷ "finite CCR matrix law"
+  ∷ []
+
+finiteYMSpectralExplicitProofObligations : List String
+finiteYMSpectralExplicitProofObligations =
+  "spanning"
+  ∷ "linear independence"
+  ∷ "Cauchy completeness"
+  ∷ "spectral theorem"
+  ∷ "gauge invariance"
+  ∷ []
+
+finiteYMSpectralTheoremProofObligationNames : List String
+finiteYMSpectralTheoremProofObligationNames =
+  "dimension=length basis"
+  ∷ "finite Jacobi check"
+  ∷ "finite CCR matrix law"
+  ∷ "spanning"
+  ∷ "linear independence"
+  ∷ "Cauchy completeness"
+  ∷ "spectral theorem"
+  ∷ "gauge invariance"
+  ∷ []
+
+finiteYMSpectralNavigationKeys : List String
+finiteYMSpectralNavigationKeys =
+  "finite-YM"
+  ∷ "spectral-theorem"
+  ∷ "discrete-Hamiltonian"
   ∷ []
 
 record LayerReceipt : Set where
@@ -263,7 +325,7 @@ packageRoadmapGovernanceReceipt =
     refl
     false
     refl
-    authorityRequired
+    authorityRequiredVerdict
     "Require explicit authority before any parity-complete or physics promotion claim."
 
 canonicalLayerReceipts : List LayerReceipt
@@ -283,6 +345,18 @@ record TheoremAPIShape : Set where
       ErgonomicFacet
     apiName :
       String
+    stableInterfaceName :
+      String
+    inputs :
+      List String
+    outputs :
+      List String
+    proofObligationNames :
+      List String
+    authorityRequired :
+      Bool
+    authorityRequiredIsTrue :
+      authorityRequired ≡ true
     requiredShape :
       String
     reusable :
@@ -305,6 +379,18 @@ namePolicyAPI =
   mkTheoremAPIShape
     coherentNames
     "AgdaPhysicsNamePolicy"
+    "AgdaPhysicsNamePolicy"
+    ("module path"
+    ∷ "theorem noun"
+    ∷ "boundary status"
+    ∷ [])
+    ("stable receipt name"
+    ∷ "searchable interface name"
+    ∷ [])
+    ("coherent names"
+    ∷ [])
+    true
+    refl
     "module path, theorem noun, boundary status, and receipt suffix are explicit"
     true
     refl
@@ -319,6 +405,16 @@ reusableTheoremSurfaceAPI =
   mkTheoremAPIShape
     reusableTheoremAPI
     "AgdaPhysicsReusableTheoremSurface"
+    "AgdaPhysicsReusableTheoremSurface"
+    ("record fields"
+    ∷ "projection names"
+    ∷ [])
+    ("downstream reusable theorem API"
+    ∷ [])
+    ("field projection equality"
+    ∷ [])
+    true
+    refl
     "records expose fields that downstream receipts can project and prove equal"
     true
     refl
@@ -333,6 +429,16 @@ exampleRegressionAPI =
   mkTheoremAPIShape
     examplesAndRegressionRows
     "AgdaPhysicsExampleRegressionRows"
+    "AgdaPhysicsExampleRegressionRows"
+    ("example name"
+    ∷ "regression import"
+    ∷ [])
+    ("canonical example receipt"
+    ∷ [])
+    ("example remains non-promoted"
+    ∷ [])
+    true
+    refl
     "examples are named as obligations until concrete checked providers exist"
     true
     refl
@@ -347,6 +453,17 @@ automationAnalogueAPI =
   mkTheoremAPIShape
     tacticOrAutomationAnalogue
     "AgdaPhysicsAutomationAnalogue"
+    "AgdaPhysicsAutomationAnalogue"
+    ("obligation name"
+    ∷ "automation class"
+    ∷ [])
+    ("definitional refl obligations"
+    ∷ "explicit proof obligations"
+    ∷ [])
+    ("automation classification recorded"
+    ∷ [])
+    true
+    refl
     "rewrite/search/tactic candidates are listed, not asserted as available"
     true
     refl
@@ -361,6 +478,16 @@ searchNavigationAPI =
   mkTheoremAPIShape
     searchAndNavigationIndex
     "AgdaPhysicsSearchNavigationIndex"
+    "AgdaPhysicsSearchNavigationIndex"
+    ("search key"
+    ∷ "target interface"
+    ∷ [])
+    ("navigation index row"
+    ∷ [])
+    ("search key recorded"
+    ∷ [])
+    true
+    refl
     "stable strings connect concepts to modules without importing race targets"
     true
     refl
@@ -375,6 +502,16 @@ packageRoadmapAPI =
   mkTheoremAPIShape
     packageLevelRoadmap
     "AgdaPhysicsPackageRoadmap"
+    "AgdaPhysicsPackageRoadmap"
+    ("layer receipts"
+    ∷ "authority boundary"
+    ∷ [])
+    ("non-promoting roadmap receipt"
+    ∷ [])
+    ("authority token required"
+    ∷ [])
+    true
+    refl
     "layer receipts compose into one canonical non-promoting roadmap receipt"
     true
     refl
@@ -384,10 +521,61 @@ packageRoadmapAPI =
     false
     refl
 
+finiteYMSpectralTheoremAPI : TheoremAPIShape
+finiteYMSpectralTheoremAPI =
+  mkTheoremAPIShape
+    reusableTheoremAPI
+    "FiniteYMSpectralTheoremAPI"
+    finiteYMSpectralTheoremStableInterfaceName
+    finiteYMSpectralTheoremInputs
+    finiteYMSpectralTheoremOutputs
+    finiteYMSpectralTheoremProofObligationNames
+    true
+    refl
+    "finite-dimensional discrete Yang-Mills Hamiltonian spectral theorem API"
+    true
+    refl
+    true
+    false
+    refl
+    false
+    refl
+
+finiteYMSpectralTheoremAPIStableInterfaceNameIsExact :
+  TheoremAPIShape.stableInterfaceName finiteYMSpectralTheoremAPI
+  ≡
+  finiteYMSpectralTheoremStableInterfaceName
+finiteYMSpectralTheoremAPIStableInterfaceNameIsExact = refl
+
+finiteYMSpectralTheoremAPIInputsAreExact :
+  TheoremAPIShape.inputs finiteYMSpectralTheoremAPI
+  ≡
+  finiteYMSpectralTheoremInputs
+finiteYMSpectralTheoremAPIInputsAreExact = refl
+
+finiteYMSpectralTheoremAPIOutputsAreExact :
+  TheoremAPIShape.outputs finiteYMSpectralTheoremAPI
+  ≡
+  finiteYMSpectralTheoremOutputs
+finiteYMSpectralTheoremAPIOutputsAreExact = refl
+
+finiteYMSpectralTheoremAPIProofObligationsAreExact :
+  TheoremAPIShape.proofObligationNames finiteYMSpectralTheoremAPI
+  ≡
+  finiteYMSpectralTheoremProofObligationNames
+finiteYMSpectralTheoremAPIProofObligationsAreExact = refl
+
+finiteYMSpectralTheoremAPIAuthorityRequired :
+  TheoremAPIShape.authorityRequired finiteYMSpectralTheoremAPI
+  ≡
+  true
+finiteYMSpectralTheoremAPIAuthorityRequired = refl
+
 canonicalTheoremAPIShapes : List TheoremAPIShape
 canonicalTheoremAPIShapes =
   namePolicyAPI
   ∷ reusableTheoremSurfaceAPI
+  ∷ finiteYMSpectralTheoremAPI
   ∷ exampleRegressionAPI
   ∷ automationAnalogueAPI
   ∷ searchNavigationAPI
@@ -399,6 +587,8 @@ record SearchNavigationKey : Set where
   field
     key :
       String
+    keys :
+      List String
     layer :
       ParityLayer
     facet :
@@ -414,10 +604,33 @@ record SearchNavigationKey : Set where
     searchRecordedIsTrue :
       searchRecorded ≡ true
 
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey :
+  SearchNavigationKey
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey =
+  mkSearchNavigationKey
+    "parity:example:finite-dimensional-spectral-theorem:discrete-ym-hamiltonian"
+    finiteYMSpectralNavigationKeys
+    examplesRegressionLayer
+    examplesAndRegressionRows
+    "CanonicalParityExampleReceipt"
+    false
+    refl
+    true
+    refl
+
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKeysAreExact :
+  SearchNavigationKey.keys
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
+  ≡
+  finiteYMSpectralNavigationKeys
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKeysAreExact =
+  refl
+
 canonicalSearchKeys : List SearchNavigationKey
 canonicalSearchKeys =
   mkSearchNavigationKey
     "parity:infrastructure:receipt-vocabulary"
+    ("receipt-vocabulary" ∷ [])
     infrastructureLayer
     coherentNames
     "AgdaPhysicsInfrastructureSurface"
@@ -427,6 +640,7 @@ canonicalSearchKeys =
     refl
   ∷ mkSearchNavigationKey
     "parity:domain:physics-closure"
+    ("physics-closure" ∷ [])
     domainLibraryLayer
     reusableTheoremAPI
     "AgdaPhysicsDomainLibrarySurface"
@@ -436,6 +650,7 @@ canonicalSearchKeys =
     refl
   ∷ mkSearchNavigationKey
     "parity:ergonomics:theorem-api"
+    ("theorem-api" ∷ [])
     theoremErgonomicsLayer
     reusableTheoremAPI
     "AgdaPhysicsTheoremErgonomicsAPI"
@@ -445,6 +660,7 @@ canonicalSearchKeys =
     refl
   ∷ mkSearchNavigationKey
     "parity:examples:regression"
+    ("examples-regression" ∷ [])
     examplesRegressionLayer
     examplesAndRegressionRows
     "AgdaPhysicsExamplesRegressionSurface"
@@ -454,6 +670,7 @@ canonicalSearchKeys =
     refl
   ∷ mkSearchNavigationKey
     "parity:automation:search-navigation"
+    ("automation-search-navigation" ∷ [])
     automationSearchLayer
     searchAndNavigationIndex
     "AgdaPhysicsAutomationSearchNavigationSurface"
@@ -463,6 +680,7 @@ canonicalSearchKeys =
     refl
   ∷ mkSearchNavigationKey
     "parity:governance:no-promotion"
+    ("no-promotion" ∷ [])
     packageRoadmapGovernanceLayer
     packageLevelRoadmap
     "AgdaPhysicsPackageRoadmapGovernanceSurface"
@@ -470,14 +688,341 @@ canonicalSearchKeys =
     refl
     true
     refl
+  ∷ finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
   ∷ []
 
-data ParityPromotionAuthorityToken : Set where
+record CanonicalParityExampleReceipt : Set where
+  constructor mkCanonicalParityExampleReceipt
+  field
+    interfaceName :
+      String
+    theoremAPIShape :
+      TheoremAPIShape
+    searchNavigationKey :
+      SearchNavigationKey
+    linearAnalysisConsumed :
+      Bool
+    linearAnalysisConsumedIsTrue :
+      linearAnalysisConsumed ≡ true
+    lieGaugeConsumed :
+      Bool
+    lieGaugeConsumedIsTrue :
+      lieGaugeConsumed ≡ true
+    qftConsumed :
+      Bool
+    qftConsumedIsTrue :
+      qftConsumed ≡ true
+    grPDEConsumed :
+      Bool
+    grPDEConsumedIsFalse :
+      grPDEConsumed ≡ false
+    examplePromoted :
+      Bool
+    examplePromotedIsFalse :
+      examplePromoted ≡ false
+    regressionImport :
+      String
+    dischargeByRefl :
+      List String
+    dischargeByReflIsCanonical :
+      dischargeByRefl ≡ finiteYMSpectralDefinitionalReflObligations
+    requiresExplicitProof :
+      List String
+    requiresExplicitProofIsCanonical :
+      requiresExplicitProof ≡ finiteYMSpectralExplicitProofObligations
+    noPromotionWithoutAuthority :
+      ParityPromotionAuthorityToken →
+      ⊥
 
-parityPromotionImpossibleHere :
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianReceipt :
+  CanonicalParityExampleReceipt
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianReceipt =
+  mkCanonicalParityExampleReceipt
+    "finite-discrete-YM-Hamiltonian-spectral-example"
+    finiteYMSpectralTheoremAPI
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    "DASHI.Physics.Examples.DiscreteYMHamiltonianSpectralTheoremRegression"
+    finiteYMSpectralDefinitionalReflObligations
+    refl
+    finiteYMSpectralExplicitProofObligations
+    refl
+    parityPromotionImpossibleHere
+
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianInterfaceNameIsExact :
+  CanonicalParityExampleReceipt.interfaceName
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianReceipt
+  ≡
+  "finite-discrete-YM-Hamiltonian-spectral-example"
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianInterfaceNameIsExact =
+  refl
+
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianTheoremAPIIsExact :
+  CanonicalParityExampleReceipt.theoremAPIShape
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianReceipt
+  ≡
+  finiteYMSpectralTheoremAPI
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianTheoremAPIIsExact =
+  refl
+
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKeyIsExact :
+  CanonicalParityExampleReceipt.searchNavigationKey
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianReceipt
+  ≡
+  finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKeyIsExact =
+  refl
+
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianDischargeByReflIsExact :
+  CanonicalParityExampleReceipt.dischargeByRefl
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianReceipt
+  ≡
+  finiteYMSpectralDefinitionalReflObligations
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianDischargeByReflIsExact =
+  refl
+
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianRequiresExplicitProofIsExact :
+  CanonicalParityExampleReceipt.requiresExplicitProof
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianReceipt
+  ≡
+  finiteYMSpectralExplicitProofObligations
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianRequiresExplicitProofIsExact =
+  refl
+
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianNotPromoted :
+  CanonicalParityExampleReceipt.examplePromoted
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianReceipt
+  ≡
+  false
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianNotPromoted =
+  refl
+
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianNoPromotionWithoutAuthority :
   ParityPromotionAuthorityToken →
   ⊥
-parityPromotionImpossibleHere ()
+finiteDimensionalSpectralTheoremDiscreteYMHamiltonianNoPromotionWithoutAuthority =
+  CanonicalParityExampleReceipt.noPromotionWithoutAuthority
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianReceipt
+
+canonicalParityExampleReceipts : List CanonicalParityExampleReceipt
+canonicalParityExampleReceipts =
+  finiteDimensionalSpectralTheoremDiscreteYMHamiltonianReceipt
+  ∷ []
+
+data AutomationDischargeClass : Set where
+  definitionalReflDischarge :
+    AutomationDischargeClass
+  explicitProofObligation :
+    AutomationDischargeClass
+
+record AutomationSearchDischargeClassification : Set where
+  constructor mkAutomationSearchDischargeClassification
+  field
+    classificationName :
+      String
+    searchNavigationKey :
+      SearchNavigationKey
+    dischargeClass :
+      AutomationDischargeClass
+    dischargeByRefl :
+      Bool
+    requiresExplicitProof :
+      Bool
+    classificationRecorded :
+      Bool
+    classificationRecordedIsTrue :
+      classificationRecorded ≡ true
+    promotionClaimed :
+      Bool
+    promotionClaimedIsFalse :
+      promotionClaimed ≡ false
+
+dimensionLengthBasisDischargeClassification :
+  AutomationSearchDischargeClassification
+dimensionLengthBasisDischargeClassification =
+  mkAutomationSearchDischargeClassification
+    "dimension=length basis"
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
+    definitionalReflDischarge
+    true
+    false
+    true
+    refl
+    false
+    refl
+
+finiteJacobiCheckDischargeClassification :
+  AutomationSearchDischargeClassification
+finiteJacobiCheckDischargeClassification =
+  mkAutomationSearchDischargeClassification
+    "finite Jacobi check"
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
+    definitionalReflDischarge
+    true
+    false
+    true
+    refl
+    false
+    refl
+
+finiteCCRMatrixLawDischargeClassification :
+  AutomationSearchDischargeClassification
+finiteCCRMatrixLawDischargeClassification =
+  mkAutomationSearchDischargeClassification
+    "finite CCR matrix law"
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
+    definitionalReflDischarge
+    true
+    false
+    true
+    refl
+    false
+    refl
+
+spanningExplicitProofClassification :
+  AutomationSearchDischargeClassification
+spanningExplicitProofClassification =
+  mkAutomationSearchDischargeClassification
+    "spanning"
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
+    explicitProofObligation
+    false
+    true
+    true
+    refl
+    false
+    refl
+
+linearIndependenceExplicitProofClassification :
+  AutomationSearchDischargeClassification
+linearIndependenceExplicitProofClassification =
+  mkAutomationSearchDischargeClassification
+    "linear independence"
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
+    explicitProofObligation
+    false
+    true
+    true
+    refl
+    false
+    refl
+
+cauchyCompletenessExplicitProofClassification :
+  AutomationSearchDischargeClassification
+cauchyCompletenessExplicitProofClassification =
+  mkAutomationSearchDischargeClassification
+    "Cauchy completeness"
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
+    explicitProofObligation
+    false
+    true
+    true
+    refl
+    false
+    refl
+
+spectralTheoremExplicitProofClassification :
+  AutomationSearchDischargeClassification
+spectralTheoremExplicitProofClassification =
+  mkAutomationSearchDischargeClassification
+    "spectral theorem"
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
+    explicitProofObligation
+    false
+    true
+    true
+    refl
+    false
+    refl
+
+gaugeInvarianceExplicitProofClassification :
+  AutomationSearchDischargeClassification
+gaugeInvarianceExplicitProofClassification =
+  mkAutomationSearchDischargeClassification
+    "gauge invariance"
+    finiteDimensionalSpectralTheoremDiscreteYMHamiltonianSearchKey
+    explicitProofObligation
+    false
+    true
+    true
+    refl
+    false
+    refl
+
+canonicalAutomationSearchDischargeClassifications :
+  List AutomationSearchDischargeClassification
+canonicalAutomationSearchDischargeClassifications =
+  dimensionLengthBasisDischargeClassification
+  ∷ finiteJacobiCheckDischargeClassification
+  ∷ finiteCCRMatrixLawDischargeClassification
+  ∷ spanningExplicitProofClassification
+  ∷ linearIndependenceExplicitProofClassification
+  ∷ cauchyCompletenessExplicitProofClassification
+  ∷ spectralTheoremExplicitProofClassification
+  ∷ gaugeInvarianceExplicitProofClassification
+  ∷ []
+
+data PackageGovernancePromotionAuthorityToken : Set where
+
+packageGovernancePromotionImpossibleHere :
+  PackageGovernancePromotionAuthorityToken →
+  ⊥
+packageGovernancePromotionImpossibleHere ()
+
+record PackageGovernanceNoPromotionBoundary : Set where
+  constructor mkPackageGovernanceNoPromotionBoundary
+  field
+    boundaryName :
+      String
+    packageGovernanceRecorded :
+      Bool
+    packageGovernanceRecordedIsTrue :
+      packageGovernanceRecorded ≡ true
+    authorityTokenPresent :
+      Bool
+    authorityTokenPresentIsFalse :
+      authorityTokenPresent ≡ false
+    noPromotionAuthorityBoundary :
+      Bool
+    noPromotionAuthorityBoundaryIsTrue :
+      noPromotionAuthorityBoundary ≡ true
+    examplePromotionAllowed :
+      Bool
+    examplePromotionAllowedIsFalse :
+      examplePromotionAllowed ≡ false
+    packagePromotionAllowed :
+      Bool
+    packagePromotionAllowedIsFalse :
+      packagePromotionAllowed ≡ false
+    noPackagePromotionWithoutAuthority :
+      PackageGovernancePromotionAuthorityToken →
+      ⊥
+
+canonicalPackageGovernanceNoPromotionBoundary :
+  PackageGovernanceNoPromotionBoundary
+canonicalPackageGovernanceNoPromotionBoundary =
+  mkPackageGovernanceNoPromotionBoundary
+    "package-governance/no-promotion authority token boundary"
+    true
+    refl
+    false
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    packageGovernancePromotionImpossibleHere
 
 record AgdaPhysicsParityRoadmapReceipt : Set where
   constructor mkAgdaPhysicsParityRoadmapReceipt
@@ -508,6 +1053,22 @@ record AgdaPhysicsParityRoadmapReceipt : Set where
       List SearchNavigationKey
     searchKeysAreCanonical :
       searchKeys ≡ canonicalSearchKeys
+    parityExampleReceipts :
+      List CanonicalParityExampleReceipt
+    parityExampleReceiptsAreCanonical :
+      parityExampleReceipts ≡ canonicalParityExampleReceipts
+    automationSearchDischargeClassifications :
+      List AutomationSearchDischargeClassification
+    automationSearchDischargeClassificationsAreCanonical :
+      automationSearchDischargeClassifications
+        ≡
+        canonicalAutomationSearchDischargeClassifications
+    packageGovernanceNoPromotionBoundary :
+      PackageGovernanceNoPromotionBoundary
+    packageGovernanceNoPromotionBoundaryIsCanonical :
+      packageGovernanceNoPromotionBoundary
+        ≡
+        canonicalPackageGovernanceNoPromotionBoundary
     sixLayerCompositionRecorded :
       Bool
     sixLayerCompositionRecordedIsTrue :
@@ -562,13 +1123,11 @@ canonicalAgdaPhysicsParityRoadmapReceipt =
     refl
     canonicalSearchKeys
     refl
-    true
+    canonicalParityExampleReceipts
     refl
-    false
+    canonicalAutomationSearchDischargeClassifications
     refl
-    false
-    refl
-    false
+    canonicalPackageGovernanceNoPromotionBoundary
     refl
     true
     refl
@@ -578,7 +1137,15 @@ canonicalAgdaPhysicsParityRoadmapReceipt =
     refl
     false
     refl
-    authorityRequired
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    authorityRequiredVerdict
     "Six Agda physics parity layers are recorded as checked, import-safe roadmap interfaces; theorem ergonomics are reusable receipt rows; no PhysLean parity-complete or physics promotion claim is made without authority."
 
 canonicalReceiptNoConcurrentDependencies :

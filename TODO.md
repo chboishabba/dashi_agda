@@ -33,6 +33,16 @@ Current status note for `2026-06-13`:
   mathematical/promotion frontier is Gate 3 publication legitimacy plus the
   cross-lane publication stack.
 
+Current atomic-clock/SI intake note for `2026-06-14`:
+- The first metrology contact lane is now typed but fail-closed. Intake targets
+  are the BIPM/NIST Cs-133 SI defining-constant artifact, SHA256/access-date
+  evidence, exact raw text `9 192 631 770`, zero-uncertainty convention,
+  parsed exact integer payload, and consumer ingestion into the SI-second
+  carrier. Downstream requests are the quantum-clock `Delta phi = omega0 *
+  Delta tau` observable, Stone/Schrodinger SI time parameter with derived
+  `hbar`, and the clock/light-speed route to metre before Rydberg wavenumber
+  use. No authority or numeric promotion is currently accepted.
+
 ## YM Exact Intake Targets
 
 • `YM-KP-Local-Sum-p7`
