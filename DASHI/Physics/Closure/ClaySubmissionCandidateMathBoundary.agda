@@ -66,6 +66,10 @@ bochnerWeitzenbockDominationAnchor : String
 bochnerWeitzenbockDominationAnchor =
   "Bochner-Weitzenbock domination: finite Yang-Mills domination candidate for H_d on Omega_perp, not Clay eligibility."
 
+ymALocalCalculationAnchor : String
+ymALocalCalculationAnchor =
+  "YM-A local calculation: constants are locally computable and no arithmetic obstruction is recorded, but the operator theorem and H3a intake are still missing."
+
 nsaStationarityReceipt : CandidateReceipt
 nsaStationarityReceipt =
   mkCandidateReceipt
@@ -106,7 +110,77 @@ ymaFiniteDominationReceipt =
     false
     refl
     bochnerWeitzenbockDominationAnchor
-    "YM-A finite domination candidate records Bochner-Weitzenbock domination and depends on H3a for Clay use; proofPromoted=false and clayEligible=false."
+    "YM-A finite domination candidate records Bochner-Weitzenbock domination plus local candidate arithmetic and depends on H3a for Clay use; proofPromoted=false and clayEligible=false."
+
+record YMAArithmeticReceipt : Set where
+  constructor mkYMAArithmeticReceipt
+  field
+    arithmeticAnchor :
+      String
+    ymAConstantsLocallyComputable :
+      Bool
+    ymAConstantsLocallyComputableIsTrue :
+      ymAConstantsLocallyComputable ≡ true
+    ymAArithmeticObstructionAbsent :
+      Bool
+    ymAArithmeticObstructionAbsentIsTrue :
+      ymAArithmeticObstructionAbsent ≡ true
+    ymAOperatorTheoremStillMissing :
+      Bool
+    ymAOperatorTheoremStillMissingIsTrue :
+      ymAOperatorTheoremStillMissing ≡ true
+    ymAH3aStillMissing :
+      Bool
+    ymAH3aStillMissingIsTrue :
+      ymAH3aStillMissing ≡ true
+    arithmeticText :
+      String
+
+open YMAArithmeticReceipt public
+
+ymALocalCalculationCandidateArithmetic : YMAArithmeticReceipt
+ymALocalCalculationCandidateArithmetic =
+  mkYMAArithmeticReceipt
+    ymALocalCalculationAnchor
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    "YM-A local calculation is recorded only as candidate arithmetic: ymAConstantsLocallyComputable=true, ymAArithmeticObstructionAbsent=true, ymAOperatorTheoremStillMissing=true, and ymAH3aStillMissing=true."
+
+ymAConstantsLocallyComputableRecordedIsTrue :
+  ymAConstantsLocallyComputable ymALocalCalculationCandidateArithmetic ≡ true
+ymAConstantsLocallyComputableRecordedIsTrue = refl
+
+ymAArithmeticObstructionAbsentRecordedIsTrue :
+  ymAArithmeticObstructionAbsent ymALocalCalculationCandidateArithmetic ≡ true
+ymAArithmeticObstructionAbsentRecordedIsTrue = refl
+
+ymAOperatorTheoremStillMissingRecordedIsTrue :
+  ymAOperatorTheoremStillMissing ymALocalCalculationCandidateArithmetic ≡ true
+ymAOperatorTheoremStillMissingRecordedIsTrue = refl
+
+ymAH3aStillMissingRecordedIsTrue :
+  ymAH3aStillMissing ymALocalCalculationCandidateArithmetic ≡ true
+ymAH3aStillMissingRecordedIsTrue = refl
+
+ymAArithmeticProofPromoted : Bool
+ymAArithmeticProofPromoted = false
+
+ymAArithmeticProofPromotedIsFalse :
+  ymAArithmeticProofPromoted ≡ false
+ymAArithmeticProofPromotedIsFalse = refl
+
+ymAArithmeticClayEligible : Bool
+ymAArithmeticClayEligible = false
+
+ymAArithmeticClayEligibleIsFalse :
+  ymAArithmeticClayEligible ≡ false
+ymAArithmeticClayEligibleIsFalse = refl
 
 candidateReceipts : List CandidateReceipt
 candidateReceipts =
@@ -240,15 +314,15 @@ rCard =
 
 cCard : String
 cCard =
-  "C: Candidate surfaces are NSAStationarityCandidate, NSCKappaBiasCandidate, and YMAFiniteDominationCandidate."
+  "C: Candidate surfaces are NSAStationarityCandidate, NSCKappaBiasCandidate, and YMAFiniteDominationCandidate; YM-A candidate arithmetic records local constants and arithmetic obstruction absence only."
 
 sCard : String
 sCard =
-  "S: Boundary state is receipt-only; W_r energy ODE, OU bias balance, and Bochner-Weitzenbock domination are string anchors."
+  "S: Boundary state is receipt-only; W_r energy ODE, OU bias balance, Bochner-Weitzenbock domination, and YM-A local calculation are string anchors."
 
 lCard : String
 lCard =
-  "L: NS-A stationarity -> NS-C kappa bias; H3a continuum intake -> YM Clay eligibility; no promotion is inferred here."
+  "L: NS-A stationarity -> NS-C kappa bias; YM-A constants/arithmetic -> candidate arithmetic only; H3a continuum intake and the operator theorem -> YM Clay eligibility; no promotion is inferred here."
 
 pCard : String
 pCard =
@@ -256,7 +330,7 @@ pCard =
 
 gCard : String
 gCard =
-  "G: Governance gate remains fail-closed: proofPromoted=false and clayEligible=false for every candidate."
+  "G: Governance gate remains fail-closed: proofPromoted=false and clayEligible=false for every candidate, including YM-A candidate arithmetic."
 
 fCard : String
 fCard =
