@@ -58,6 +58,15 @@ Current atomic-clock/SI intake note for `2026-06-14`:
   actual BIPM/NIST/CODATA artifact evidence, parsed-carrier acceptance,
   consumer-ingestion receipts, empirical redshift provenance, and the external
   calibration authority token are still open.
+- The fourth metrology evidence pass now adds explicit typed surfaces for the
+  BIPM/NIST exact-constant evidence checklist, parsed-carrier consumer
+  ingestion, the dimensionless Stone exponent `H * t / hbar`, empirical
+  redshift receipt requests, CODATA/NIST Rydberg spectroscopy authority, and
+  the strict SI metrology dependency DAG. Remaining closure work is still
+  external: artifact identity, SHA256/access date, raw source text acceptance,
+  parsed-carrier acceptance, covariance/independence receipts, consumer
+  ingestion receipts, empirical redshift provenance, NIST ASD line evidence,
+  and the Candidate256 physical calibration authority token.
 
 Current Agda/PhysLean parity intake note for `2026-06-14`:
 - The six parity surfaces now carry proof-term-level occupant rows for the
@@ -88,14 +97,37 @@ Current Agda/PhysLean parity intake note for `2026-06-14`:
   Nat-valued ultrametric completeness, the stage-quotient irreversibility
   seam, and CRT/J fixed-point compactification receipts:
   `DASHI.Foundations.SurrealCompactification`,
+  `DASHI.Foundations.SurrealCompactificationIntake`,
+  `DASHI.Foundations.SurrealCompactificationOrderedQQBridge`,
+  `DASHI.Foundations.SurrealCompactificationRationalBridge`,
+  `DASHI.Foundations.SurrealCompactificationTailBoundBridge`,
   `DASHI.Metric.AgreementSurrealGaugeBridge`,
   `DASHI.Geometry.NatUltrametricCompletenessBridge`,
   `DASHI.Algebra.StageQuotientIrreversibilityBoundary`, and
   `DASHI.Physics.Closure.CRTMonsterFixedPointCompactificationBoundary`.
-  Remaining work is deliberately external or non-promoting: a constructive
-  surreal/real arithmetic substrate, a proved `agreeDepth -> 3^-n` isometry,
-  compactification error theorem, Monster theorem authority, thermodynamic
-  promotion, and any terminal or Clay-facing claim.
+  The current strengthening adds internal tower/Vec conversion and truncation
+  receipts, an exact non-promoting `3^-agreeDepth` gauge-shape row, explicit
+  Nat-to-non-Nat completeness dependency ordering, no-section/reversal-gap
+  seam lemmas, an exact CRT/Monster closure-chain split, and the intake
+  contract for rational/surreal carrier work. The follow-up strengthening adds
+  a checked symbolic rational approximant bridge, ordered-QQ carrier and
+  antitone law-shape receipts, kappa-to-depth-9 and tail-bound receipts,
+  checked Nat Cauchy-stabilisation variables, and a rational compactification
+  row in the 196884/Monster closure chain. Remaining work is deliberately
+  external or non-promoting: a concrete ordered QQ/No arithmetic substrate, a
+  proved `agreeDepth -> 3^-n` isometry, analytic compactification error
+  theorem, Monster theorem authority, thermodynamic promotion, and any
+  terminal or Clay-facing claim.
+
+Current external authority locator note for `2026-06-14`:
+- `DASHI.Promotion.SIMetrologyExternalSourceLocator` records fail-closed
+  source-locator rows for the BIPM SI Brochure, NIST fundamental constants
+  page, and NIST ASD lines form, plus raw text rows for `Delta nu Cs`, `c`,
+  and `h`. `DASHI.Promotion.ExternalTheoremAuthoritySourceLocator` records
+  fail-closed locator rows for Monster/Moonshine and Carnot/thermodynamic
+  authority gates. Remaining closure work is unchanged: compute and commit
+  SHA256/access-date evidence, ingestion receipts, accepted authority tokens,
+  proof authority, and promotion tokens.
 
 ## YM Exact Intake Targets
 

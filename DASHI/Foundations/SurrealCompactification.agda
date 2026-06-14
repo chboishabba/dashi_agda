@@ -19,6 +19,26 @@ cong :
   f x ≡ f y
 cong f refl = refl
 
+one two three four five six seven eight nine : Nat
+one =
+  suc zero
+two =
+  suc one
+three =
+  suc two
+four =
+  suc three
+five =
+  suc four
+six =
+  suc five
+seven =
+  suc six
+eight =
+  suc seven
+nine =
+  suc eight
+
 data FiniteTritTower : Nat → Set where
   emptyTower :
     FiniteTritTower zero
@@ -178,6 +198,21 @@ data _≤_ : Nat → Nat → Set where
 ≤-trans (s≤s a≤b) (s≤s b≤c) =
   s≤s (≤-trans a≤b b≤c)
 
+≤-step :
+  {m n : Nat} →
+  m ≤ n →
+  m ≤ suc n
+≤-step z≤n =
+  z≤n
+≤-step (s≤s m≤n) =
+  s≤s (≤-step m≤n)
+
+≤-suc :
+  (n : Nat) →
+  n ≤ suc n
+≤-suc n =
+  ≤-step (≤-refl n)
+
 truncateTower :
   {target source : Nat} →
   target ≤ source →
@@ -228,6 +263,58 @@ truncateTower-vec-compatible (s≤s target≤source) (extendTower tower trit) =
     (λ lowerTrits → trit ∷ lowerTrits)
     (truncateTower-vec-compatible target≤source tower)
 
+truncateTower-id :
+  {depth : Nat} →
+  (tower : FiniteTritTower depth) →
+  truncateTower (≤-refl depth) tower ≡ tower
+truncateTower-id emptyTower =
+  refl
+truncateTower-id (extendTower tower trit) =
+  cong
+    (λ lowerTower → extendTower lowerTower trit)
+    (truncateTower-id tower)
+
+truncateVec-id :
+  {depth : Nat} →
+  (trits : Vec Trit depth) →
+  truncateVec (≤-refl depth) trits ≡ trits
+truncateVec-id [] =
+  refl
+truncateVec-id (trit ∷ trits) =
+  cong
+    (λ lowerTrits → trit ∷ lowerTrits)
+    (truncateVec-id trits)
+
+truncateTower-compose :
+  {lower middle upper : Nat} →
+  (lower≤middle : lower ≤ middle) →
+  (middle≤upper : middle ≤ upper) →
+  (tower : FiniteTritTower upper) →
+  truncateTower lower≤middle (truncateTower middle≤upper tower)
+  ≡
+  truncateTower (≤-trans lower≤middle middle≤upper) tower
+truncateTower-compose z≤n _ _ =
+  refl
+truncateTower-compose (s≤s lower≤middle) (s≤s middle≤upper) (extendTower tower trit) =
+  cong
+    (λ lowerTower → extendTower lowerTower trit)
+    (truncateTower-compose lower≤middle middle≤upper tower)
+
+truncateVec-compose :
+  {lower middle upper : Nat} →
+  (lower≤middle : lower ≤ middle) →
+  (middle≤upper : middle ≤ upper) →
+  (trits : Vec Trit upper) →
+  truncateVec lower≤middle (truncateVec middle≤upper trits)
+  ≡
+  truncateVec (≤-trans lower≤middle middle≤upper) trits
+truncateVec-compose z≤n _ _ =
+  refl
+truncateVec-compose (s≤s lower≤middle) (s≤s middle≤upper) (trit ∷ trits) =
+  cong
+    (λ lowerTrits → trit ∷ lowerTrits)
+    (truncateVec-compose lower≤middle middle≤upper trits)
+
 record BoundedFiniteTritTower (bound : Nat) : Set where
   constructor boundedFiniteTritTower
   field
@@ -249,6 +336,176 @@ truncateBoundedTower :
   FiniteTritTower target
 truncateBoundedTower bounded target≤actual =
   truncateTower target≤actual (boundedTower bounded)
+
+truncateBoundedTower-within-bound :
+  {target bound : Nat} →
+  (bounded : BoundedFiniteTritTower bound) →
+  (target≤actual : target ≤ actualDepth bounded) →
+  target ≤ bound
+truncateBoundedTower-within-bound bounded target≤actual =
+  ≤-trans target≤actual (actualWithinBound bounded)
+
+truncateBoundedTower-as-bounded :
+  {target bound : Nat} →
+  (bounded : BoundedFiniteTritTower bound) →
+  (target≤actual : target ≤ actualDepth bounded) →
+  BoundedFiniteTritTower bound
+truncateBoundedTower-as-bounded {target} bounded target≤actual =
+  boundedFiniteTritTower
+    target
+    (truncateBoundedTower-within-bound bounded target≤actual)
+    (truncateBoundedTower bounded target≤actual)
+
+truncateBoundedTower-depth :
+  {target bound : Nat} →
+  (bounded : BoundedFiniteTritTower bound) →
+  (target≤actual : target ≤ actualDepth bounded) →
+  towerDepthValue (truncateBoundedTower bounded target≤actual) ≡ target
+truncateBoundedTower-depth bounded target≤actual =
+  truncateTower-depth target≤actual (boundedTower bounded)
+
+Depth9FiniteTritTower : Set
+Depth9FiniteTritTower =
+  FiniteTritTower nine
+
+depth9≤depth9 :
+  nine ≤ nine
+depth9≤depth9 =
+  ≤-refl nine
+
+kappaToDepth9Tower :
+  {kappaDepth : Nat} →
+  nine ≤ kappaDepth →
+  FiniteTritTower kappaDepth →
+  Depth9FiniteTritTower
+kappaToDepth9Tower nine≤kappa tower =
+  truncateTower nine≤kappa tower
+
+kappaToDepth9Vec :
+  {kappaDepth : Nat} →
+  nine ≤ kappaDepth →
+  Vec Trit kappaDepth →
+  Vec Trit nine
+kappaToDepth9Vec nine≤kappa trits =
+  truncateVec nine≤kappa trits
+
+kappaToDepth9-depth :
+  {kappaDepth : Nat} →
+  (nine≤kappa : nine ≤ kappaDepth) →
+  (tower : FiniteTritTower kappaDepth) →
+  towerDepthValue (kappaToDepth9Tower nine≤kappa tower) ≡ nine
+kappaToDepth9-depth nine≤kappa tower =
+  truncateTower-depth nine≤kappa tower
+
+kappaToDepth9-vec-compatible :
+  {kappaDepth : Nat} →
+  (nine≤kappa : nine ≤ kappaDepth) →
+  (tower : FiniteTritTower kappaDepth) →
+  towerToVec (kappaToDepth9Tower nine≤kappa tower)
+  ≡
+  kappaToDepth9Vec nine≤kappa (towerToVec tower)
+kappaToDepth9-vec-compatible nine≤kappa tower =
+  truncateTower-vec-compatible nine≤kappa tower
+
+kappaToDepth9-id :
+  (tower : Depth9FiniteTritTower) →
+  kappaToDepth9Tower depth9≤depth9 tower ≡ tower
+kappaToDepth9-id tower =
+  truncateTower-id tower
+
+record KappaToDepth9Receipt : Set₁ where
+  constructor kappaToDepth9Receipt
+  field
+    kappaDepth :
+      Nat
+
+    depth9WithinKappa :
+      nine ≤ kappaDepth
+
+    kappaTower :
+      FiniteTritTower kappaDepth
+
+    depth9Tower :
+      Depth9FiniteTritTower
+
+    depth9Tower-is-truncation :
+      depth9Tower ≡ kappaToDepth9Tower depth9WithinKappa kappaTower
+
+    depth9Tower-depth :
+      towerDepthValue depth9Tower ≡ nine
+
+    depth9Tower-vec-compatible :
+      towerToVec depth9Tower
+      ≡
+      kappaToDepth9Vec depth9WithinKappa (towerToVec kappaTower)
+
+    boundedAtKappa :
+      BoundedFiniteTritTower kappaDepth
+
+    boundedAtKappa-is-source :
+      actualDepth boundedAtKappa ≡ kappaDepth
+
+    boundedAtNine :
+      BoundedFiniteTritTower kappaDepth
+
+    boundedAtNine-depth :
+      towerDepthValue (boundedTower boundedAtNine) ≡ nine
+
+    requiresExternalSurrealAuthority :
+      Bool
+
+    requiresExternalSurrealAuthority-is-false :
+      requiresExternalSurrealAuthority ≡ false
+
+    promotesTransfiniteBoundary :
+      Bool
+
+    promotesTransfiniteBoundary-is-false :
+      promotesTransfiniteBoundary ≡ false
+
+open KappaToDepth9Receipt public
+
+canonicalKappaToDepth9Receipt :
+  {kappaDepth : Nat} →
+  (nine≤kappa : nine ≤ kappaDepth) →
+  (tower : FiniteTritTower kappaDepth) →
+  KappaToDepth9Receipt
+canonicalKappaToDepth9Receipt nine≤kappa tower =
+  record
+    { kappaDepth =
+        _
+    ; depth9WithinKappa =
+        nine≤kappa
+    ; kappaTower =
+        tower
+    ; depth9Tower =
+        kappaToDepth9Tower nine≤kappa tower
+    ; depth9Tower-is-truncation =
+        refl
+    ; depth9Tower-depth =
+        kappaToDepth9-depth nine≤kappa tower
+    ; depth9Tower-vec-compatible =
+        kappaToDepth9-vec-compatible nine≤kappa tower
+    ; boundedAtKappa =
+        boundedFiniteTritTower _ (≤-refl _) tower
+    ; boundedAtKappa-is-source =
+        refl
+    ; boundedAtNine =
+        boundedFiniteTritTower
+          nine
+          nine≤kappa
+          (kappaToDepth9Tower nine≤kappa tower)
+    ; boundedAtNine-depth =
+        kappaToDepth9-depth nine≤kappa tower
+    ; requiresExternalSurrealAuthority =
+        false
+    ; requiresExternalSurrealAuthority-is-false =
+        refl
+    ; promotesTransfiniteBoundary =
+        false
+    ; promotesTransfiniteBoundary-is-false =
+        refl
+    }
 
 record InternalBoundedTruncationSurface : Set₁ where
   field

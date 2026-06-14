@@ -11,6 +11,7 @@ open import Data.List.Base using (List; _∷_; [])
 import CRTJFixedPointBridge as RootCRTJ
 import CRTPeriod as CRT
 import DASHI.Algebra.MoonshineBridge as MoonshineBridge
+import DASHI.Foundations.SurrealCompactificationIntake as SurrealIntake
 import DASHI.Physics.CRTPeriodJFixedBridge as CRTJ
 import DASHI.Physics.Closure.ExtremalFrobeniusMonsterAuthorityBoundary as MonsterBoundary
 import DASHI.Physics.Closure.MonsterMoonshineSSPQuotientControlReceipt as MonsterQuotient
@@ -42,6 +43,12 @@ data CRTMonsterFixedPointCompactificationBoundary : Set where
   boundaryMonsterReceiptsConsumedOnly :
     CRTMonsterFixedPointCompactificationBoundary
 
+  boundaryRationalCompactificationStatusConsumedOnly :
+    CRTMonsterFixedPointCompactificationBoundary
+
+  boundaryRationalCompactificationConnects196884MonsterChain :
+    CRTMonsterFixedPointCompactificationBoundary
+
   boundarySurrealIsomorphismNotConstructed :
     CRTMonsterFixedPointCompactificationBoundary
 
@@ -58,6 +65,8 @@ canonicalCRTMonsterFixedPointCompactificationBoundaries =
   ∷ boundaryJContractIsPeriodPlusOne
   ∷ boundaryPeriodPlusOneIs196884
   ∷ boundaryMonsterReceiptsConsumedOnly
+  ∷ boundaryRationalCompactificationStatusConsumedOnly
+  ∷ boundaryRationalCompactificationConnects196884MonsterChain
   ∷ boundarySurrealIsomorphismNotConstructed
   ∷ boundaryNoMonsterTheoremPromotion
   ∷ boundaryNoTerminalPromotion
@@ -440,6 +449,160 @@ canonicalCRTMonsterExactClosureChain =
         refl
     }
 
+record RationalCompactification196884MonsterReceiptRow : Setω where
+  field
+    rationalCompactificationIntake :
+      SurrealIntake.SurrealCompactificationIntakeContract
+
+    rationalCompactificationIntakeIsCanonical :
+      rationalCompactificationIntake
+      ≡
+      SurrealIntake.canonicalSurrealCompactificationIntakeContract
+
+    rationalNoQQCarrierIntake :
+      SurrealIntake.NoQQCarrierBridgeIntake
+
+    rationalNoQQCarrierIntakeIsImported :
+      rationalNoQQCarrierIntake
+      ≡
+      SurrealIntake.carrierIntake rationalCompactificationIntake
+
+    rationalQQCarrierGate :
+      SurrealIntake.CarrierAuthorityGate
+
+    rationalQQCarrierGateIsImported :
+      rationalQQCarrierGate
+      ≡
+      SurrealIntake.qqGate rationalNoQQCarrierIntake
+
+    rationalQQCarrierExternalAuthorityRequired :
+      SurrealIntake.externalAuthorityRequired rationalQQCarrierGate ≡ true
+
+    rationalQQCarrierConstructedHereIsFalse :
+      SurrealIntake.constructedHere rationalQQCarrierGate ≡ false
+
+    rationalQQCarrierPromotedHereIsFalse :
+      SurrealIntake.promotedHere rationalQQCarrierGate ≡ false
+
+    rationalGaugeIntakeAtPeriod :
+      SurrealIntake.SymbolicThreeMinusNGaugeIntake CRT.period
+
+    rationalGaugeIntakeAtPeriodIsImported :
+      rationalGaugeIntakeAtPeriod
+      ≡
+      SurrealIntake.gaugeIntake rationalCompactificationIntake CRT.period
+
+    rationalGaugeRequiresQQValue :
+      SurrealIntake.rationalValueRequired rationalGaugeIntakeAtPeriod ≡ true
+
+    rationalGaugeQQValueConstructedHereIsFalse :
+      SurrealIntake.rationalValueConstructedHere rationalGaugeIntakeAtPeriod
+      ≡
+      false
+
+    rationalPromotionFlags :
+      SurrealIntake.NoPromotionFlags
+
+    rationalPromotionFlagsAreImported :
+      rationalPromotionFlags
+      ≡
+      SurrealIntake.promotionFlags rationalCompactificationIntake
+
+    rationalCompactificationPromotedIsFalse :
+      SurrealIntake.compactificationPromoted rationalPromotionFlags ≡ false
+
+    exactClosureChainForRationalStatus :
+      CRTMonsterExactClosureChain
+
+    rationalStatusScalar :
+      Nat
+
+    rationalStatusScalarIsArithmetic196884 :
+      rationalStatusScalar
+      ≡
+      arithmeticScalar
+        (arithmeticEqualityLink exactClosureChainForRationalStatus)
+
+    rationalStatusScalarIsMonsterCoefficient :
+      rationalStatusScalar
+      ≡
+      monsterCoefficientScalar
+        (monsterCoefficientLink exactClosureChainForRationalStatus)
+
+    rationalStatusScalarIs196884 :
+      rationalStatusScalar ≡ 196884
+
+    rationalStatusMonsterTheoremPromoted :
+      exactChainMonsterTheoremPromoted exactClosureChainForRationalStatus
+      ≡
+      false
+
+    rationalStatusSurrealIsomorphismConstructed :
+      exactChainSurrealIsomorphismConstructed exactClosureChainForRationalStatus
+      ≡
+      false
+
+open RationalCompactification196884MonsterReceiptRow public
+
+canonicalRationalCompactification196884MonsterReceiptRow :
+  RationalCompactification196884MonsterReceiptRow
+canonicalRationalCompactification196884MonsterReceiptRow =
+  record
+    { rationalCompactificationIntake =
+        SurrealIntake.canonicalSurrealCompactificationIntakeContract
+    ; rationalCompactificationIntakeIsCanonical =
+        refl
+    ; rationalNoQQCarrierIntake =
+        SurrealIntake.carrierIntake
+          SurrealIntake.canonicalSurrealCompactificationIntakeContract
+    ; rationalNoQQCarrierIntakeIsImported =
+        refl
+    ; rationalQQCarrierGate =
+        SurrealIntake.qqGate
+          (SurrealIntake.carrierIntake
+            SurrealIntake.canonicalSurrealCompactificationIntakeContract)
+    ; rationalQQCarrierGateIsImported =
+        refl
+    ; rationalQQCarrierExternalAuthorityRequired =
+        refl
+    ; rationalQQCarrierConstructedHereIsFalse =
+        refl
+    ; rationalQQCarrierPromotedHereIsFalse =
+        refl
+    ; rationalGaugeIntakeAtPeriod =
+        SurrealIntake.gaugeIntake
+          SurrealIntake.canonicalSurrealCompactificationIntakeContract
+          CRT.period
+    ; rationalGaugeIntakeAtPeriodIsImported =
+        refl
+    ; rationalGaugeRequiresQQValue =
+        refl
+    ; rationalGaugeQQValueConstructedHereIsFalse =
+        refl
+    ; rationalPromotionFlags =
+        SurrealIntake.promotionFlags
+          SurrealIntake.canonicalSurrealCompactificationIntakeContract
+    ; rationalPromotionFlagsAreImported =
+        refl
+    ; rationalCompactificationPromotedIsFalse =
+        refl
+    ; exactClosureChainForRationalStatus =
+        canonicalCRTMonsterExactClosureChain
+    ; rationalStatusScalar =
+        arithmeticScalar
+          (arithmeticEqualityLink canonicalCRTMonsterExactClosureChain)
+    ; rationalStatusScalarIsArithmetic196884 =
+        refl
+    ; rationalStatusScalarIsMonsterCoefficient =
+        refl
+    ; rationalStatusScalarIs196884 =
+        refl
+    ; rationalStatusMonsterTheoremPromoted =
+        refl
+    ; rationalStatusSurrealIsomorphismConstructed =
+        refl
+    }
+
 record CRTMonsterFixedPointCompactificationBoundaryReceipt : Setω where
   field
     status :
@@ -466,9 +629,6 @@ record CRTMonsterFixedPointCompactificationBoundaryReceipt : Setω where
     exactClosureChain :
       CRTMonsterExactClosureChain
 
-    exactClosureChainIsCanonical :
-      exactClosureChain ≡ canonicalCRTMonsterExactClosureChain
-
     arithmetic196884Link :
       Arithmetic196884EqualityLink
 
@@ -488,18 +648,58 @@ record CRTMonsterFixedPointCompactificationBoundaryReceipt : Setω where
     monsterCoefficientReceiptLink :
       MonsterCoefficientReceiptLink
 
-    monsterCoefficientReceiptLinkIsExactChainLink :
-      monsterCoefficientReceiptLink
+    monsterCoefficientReceiptScalarMatchesExactChain :
+      monsterCoefficientScalar monsterCoefficientReceiptLink
       ≡
-      monsterCoefficientLink exactClosureChain
+      monsterCoefficientScalar (monsterCoefficientLink exactClosureChain)
 
     missingMoonshineIsomorphismAuthorityLink :
       MissingMoonshineIsomorphismAuthorityLink
 
-    missingMoonshineIsomorphismAuthorityLinkIsExactChainLink :
-      missingMoonshineIsomorphismAuthorityLink
+    missingMoonshineIsomorphismAuthorityStateMatchesExactChain :
+      missingAuthorityState missingMoonshineIsomorphismAuthorityLink
       ≡
-      missingAuthorityLink exactClosureChain
+      missingAuthorityState (missingAuthorityLink exactClosureChain)
+
+    missingMoonshineQuotientTheoremFlagMatchesExactChain :
+      moonshineQuotientTheoremProvedHere
+        missingMoonshineIsomorphismAuthorityLink
+      ≡
+      moonshineQuotientTheoremProvedHere
+        (missingAuthorityLink exactClosureChain)
+
+    rationalCompactification196884MonsterRow :
+      RationalCompactification196884MonsterReceiptRow
+
+    rationalCompactificationScalarMatchesExactChain :
+      rationalStatusScalar rationalCompactification196884MonsterRow
+      ≡
+      arithmeticScalar (arithmeticEqualityLink exactClosureChain)
+
+    rationalCompactificationScalarMatchesMonsterCoefficient :
+      rationalStatusScalar rationalCompactification196884MonsterRow
+      ≡
+      monsterCoefficientScalar (monsterCoefficientLink exactClosureChain)
+
+    rationalCompactificationPromotedIsFalse :
+      SurrealIntake.compactificationPromoted
+        (rationalPromotionFlags rationalCompactification196884MonsterRow)
+      ≡
+      false
+
+    rationalCompactificationPreservesMonsterTheoremFalse :
+      exactChainMonsterTheoremPromoted
+        (exactClosureChainForRationalStatus
+          rationalCompactification196884MonsterRow)
+      ≡
+      false
+
+    rationalCompactificationPreservesSurrealIsomorphismFalse :
+      exactChainSurrealIsomorphismConstructed
+        (exactClosureChainForRationalStatus
+          rationalCompactification196884MonsterRow)
+      ≡
+      false
 
     period :
       Nat
@@ -621,8 +821,6 @@ canonicalCRTMonsterFixedPointCompactificationBoundaryReceipt =
         MonsterBoundary.canonicalExternalGradedModuleIsomorphismAuthorityBoundary
     ; exactClosureChain =
         canonicalCRTMonsterExactClosureChain
-    ; exactClosureChainIsCanonical =
-        refl
     ; arithmetic196884Link =
         canonicalArithmetic196884EqualityLink
     ; arithmetic196884LinkIsExactChainLink =
@@ -633,11 +831,25 @@ canonicalCRTMonsterFixedPointCompactificationBoundaryReceipt =
         refl
     ; monsterCoefficientReceiptLink =
         canonicalMonsterCoefficientReceiptLink
-    ; monsterCoefficientReceiptLinkIsExactChainLink =
+    ; monsterCoefficientReceiptScalarMatchesExactChain =
         refl
     ; missingMoonshineIsomorphismAuthorityLink =
         canonicalMissingMoonshineIsomorphismAuthorityLink
-    ; missingMoonshineIsomorphismAuthorityLinkIsExactChainLink =
+    ; missingMoonshineIsomorphismAuthorityStateMatchesExactChain =
+        refl
+    ; missingMoonshineQuotientTheoremFlagMatchesExactChain =
+        refl
+    ; rationalCompactification196884MonsterRow =
+        canonicalRationalCompactification196884MonsterReceiptRow
+    ; rationalCompactificationScalarMatchesExactChain =
+        refl
+    ; rationalCompactificationScalarMatchesMonsterCoefficient =
+        refl
+    ; rationalCompactificationPromotedIsFalse =
+        refl
+    ; rationalCompactificationPreservesMonsterTheoremFalse =
+        refl
+    ; rationalCompactificationPreservesSurrealIsomorphismFalse =
         refl
     ; period =
         CRT.period
@@ -705,6 +917,7 @@ canonicalCRTMonsterFixedPointCompactificationBoundaryReceipt =
         "CRT.period is imported and checked as 47*59*71." ∷
         "CRT.period+1, J.contract unit-obs, and Monster c1 are checked at 196884." ∷
         "Monster fixed-point, quotient, uniqueness, and graded-isomorphism boundary receipts are consumed only as receipts." ∷
+        "Rational compactification intake is connected to the 196884/Monster exact closure chain without accepting QQ/No authority." ∷
         "Monster theorem promotion, surreal-isomorphism construction, and terminal promotion are false." ∷
         []
     }

@@ -6,6 +6,58 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane source-locator and ordered-bridge tranche for `2026-06-14`: adds
+  `DASHI.Foundations.SurrealCompactificationOrderedQQBridge`,
+  `DASHI.Foundations.SurrealCompactificationTailBoundBridge`,
+  `DASHI.Promotion.SIMetrologyExternalSourceLocator`, and
+  `DASHI.Promotion.ExternalTheoremAuthoritySourceLocator`, extends
+  `DASHI.Foundations.SurrealCompactificationIntake` and
+  `DASHI.Metric.AgreementSurrealGaugeBridge`, and wires the new modules through
+  `DASHI.Everything`. The tranche records the exact symbolic ordered-QQ carrier
+  surface, antitone dependency row, non-promoting gauge monotone and
+  gauge-ultrametric-inheritance receipts, geometric-series-tail and
+  kappa-tail-bound law shapes, BIPM/NIST/CODATA locator rows with raw SI
+  constant text, and fail-closed Monster/Moonshine plus Carnot authority
+  locator rows. It keeps concrete QQ/No/order promotion, analytic tail/error
+  proofs, SHA256/access-date evidence, ingestion receipts, accepted authority
+  tokens, external proof authority, and all terminal/Clay promotions false.
+
+- Six-lane discrete-to-transcendental exact-intake strengthening for
+  `2026-06-14`: extends
+  `DASHI.Foundations.SurrealCompactification`,
+  `DASHI.Foundations.SurrealCompactificationRationalBridge`,
+  `DASHI.Metric.AgreementSurrealGaugeBridge`,
+  `DASHI.Geometry.NatUltrametricCompletenessBridge`,
+  `DASHI.Algebra.StageQuotientIrreversibilityBoundary`, and
+  `DASHI.Physics.Closure.CRTMonsterFixedPointCompactificationBoundary`, and
+  adds `DASHI.Foundations.SurrealCompactificationIntake`. The tranche records
+  internal tower/Vec conversion and truncation receipts, exact non-promoting
+  `3^-agreeDepth` gauge-shape rows, Nat-to-non-Nat completeness dependency
+  ordering, no-section/reversal-gap seam lemmas, a checked symbolic rational
+  approximant bridge, kappa-to-depth-9 receipts, checked Nat Cauchy
+  stabilisation variables, a rational gauge row explaining why the naive
+  `d_QQ = 3^-agreeDepth` equality fails at full agreement, and a typed split
+  between arithmetic `196884`, J contraction, Monster coefficient receipt, and
+  missing Moonshine/isomorphism authority. It keeps ordered QQ/No arithmetic,
+  surreal isometry, compactification error, Monster theorem authority,
+  Carnot/thermodynamic promotion, terminal claims, and Clay promotion false.
+
+- Six-lane SI/metrology evidence-normalization tranche for `2026-06-14`: adds
+  `DASHI.Promotion.SIDefiningConstantAuthorityEvidenceChecklist`,
+  `DASHI.Promotion.SIExactConstantConsumerIngestionBridge`,
+  `DASHI.Physics.Closure.StoneHbarDimensionlessActionBridge`,
+  `DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftReceiptRequest`,
+  `DASHI.Promotion.RydbergSpectroscopyAuthorityPayloadRequest`,
+  `DASHI.Promotion.SIMetrologyPayloadDependencyDAG`, and extends
+  `tests/test_atomic_clock_si_second_round3.py`, then wires the checked Agda
+  modules through `DASHI.Everything`. The tranche records exact authority
+  evidence sockets for `Delta nu Cs`, `c`, and `h`; consumer-ingestion routing;
+  the local dimensionless `H * t / hbar` action law; empirical redshift
+  receipt requests; CODATA/NIST Rydberg spectroscopy authority requests; and
+  the strict dependency DAG. It keeps BIPM/NIST/CODATA artifact evidence,
+  SHA256/access dates, consumer ingestion, empirical redshift acceptance,
+  spectroscopy authority, W4/Candidate256 tokens, and terminal promotion false.
+
 - Six-lane discrete-to-transcendental compactification tranche for
   `2026-06-14`: adds
   `DASHI.Foundations.SurrealCompactification`,

@@ -27,6 +27,40 @@ EXPECTED_MODULES = {
             "externalArtifactAccepted",
         ),
     },
+    "DASHI.Promotion.SIDefiningConstantAuthorityEvidenceChecklist": {
+        "path": "DASHI/Promotion/SIDefiningConstantAuthorityEvidenceChecklist.agda",
+        "required": (
+            "SIConstantAuthorityEvidenceChecklistManifest",
+            "canonicalDeltaNuCsAuthorityEvidenceRow",
+            "canonicalCAuthorityEvidenceRow",
+            "canonicalHAuthorityEvidenceRow",
+            "canonicalSIConstantAuthorityEvidenceChecklistManifest",
+        ),
+        "false_guards": (
+            "anyArtifactEvidenceAccepted",
+            "candidate256AuthorityTokenConstructed",
+            "anyConsumerIngestionReceiptAccepted",
+            "allParsedCarrierPayloadsAccepted",
+            "anySIConstantPromoted",
+        ),
+    },
+    "DASHI.Promotion.SIExactConstantConsumerIngestionBridge": {
+        "path": "DASHI/Promotion/SIExactConstantConsumerIngestionBridge.agda",
+        "required": (
+            "SIExactConstantConsumerIngestionBridge",
+            "canonicalDeltaNuCsConsumerIngestionBridgeRow",
+            "canonicalCConsumerIngestionBridgeRow",
+            "canonicalHConsumerIngestionBridgeRow",
+            "canonicalSIExactConstantConsumerIngestionBridge",
+        ),
+        "false_guards": (
+            "consumerIngestionReceiptPresent",
+            "downstreamPromotionEnabled",
+            "anyConsumerIngestionReceiptPresent",
+            "anyNumericValuePromoted",
+            "anyDownstreamPromotionEnabled",
+        ),
+    },
     "DASHI.Physics.Closure.AtomicClockSecondRealTimeTopologyRequest": {
         "path": "DASHI/Physics/Closure/AtomicClockSecondRealTimeTopologyRequest.agda",
         "required": (
@@ -44,6 +78,23 @@ EXPECTED_MODULES = {
             "promotionAllowed",
         ),
     },
+    "DASHI.Physics.Closure.StoneHbarDimensionlessActionBridge": {
+        "path": "DASHI/Physics/Closure/StoneHbarDimensionlessActionBridge.agda",
+        "required": (
+            "stoneExponentDimensionless",
+            "canonicalStoneHbarActionDimensionCancellationReceipt",
+            "canonicalOneParameterUnitaryGroupObligationReceipt",
+            "canonicalStoneHbarDimensionlessActionBridge",
+            "canonicalBridgeKeepsPhysicalSchrodingerPromotionFalse",
+        ),
+        "false_guards": (
+            "physicalRealGroupLawSupplied",
+            "physicalUnitaryGroupConstructed",
+            "realCarrierSupplied",
+            "hbarAuthorityPayloadSupplied",
+            "physicalPromotionAllowed",
+        ),
+    },
     "DASHI.Physics.Closure.QuantumClockDimensionlessObservableLaw": {
         "path": "DASHI/Physics/Closure/QuantumClockDimensionlessObservableLaw.agda",
         "required": (
@@ -57,6 +108,23 @@ EXPECTED_MODULES = {
             "numericPayloadClaimed",
             "empiricalReceiptClaimed",
             "numericPredictionClaimed",
+            "empiricalPromotionClaimed",
+        ),
+    },
+    "DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftReceiptRequest": {
+        "path": "DASHI/Physics/Closure/QuantumClockEmpiricalRedshiftReceiptRequest.agda",
+        "required": (
+            "QuantumClockEmpiricalRedshiftReceiptRequest",
+            "canonicalRequiredEvidenceRows",
+            "poundRebkaRequested",
+            "gpsClockComparisonRequested",
+            "canonicalQuantumClockEmpiricalRedshiftReceiptRequest",
+        ),
+        "false_guards": (
+            "empiricalReceiptAccepted",
+            "evidenceAccepted",
+            "ingestionReceiptPresent",
+            "empiricalPromotionAllowed",
             "empiricalPromotionClaimed",
         ),
     },
@@ -77,6 +145,23 @@ EXPECTED_MODULES = {
             "spectroscopyPromoted",
         ),
     },
+    "DASHI.Promotion.RydbergSpectroscopyAuthorityPayloadRequest": {
+        "path": "DASHI/Promotion/RydbergSpectroscopyAuthorityPayloadRequest.agda",
+        "required": (
+            "RydbergSpectroscopyAuthorityPayloadRequest",
+            "canonicalRInfinityCODATAPayloadRequest",
+            "electronMassReducedMassDependency",
+            "protonMassReducedMassDependency",
+            "canonicalRydbergSpectroscopyAuthorityPayloadRequestManifest",
+        ),
+        "false_guards": (
+            "authorityPayloadAccepted",
+            "parsedNumericCarrierAccepted",
+            "nistASDTokenAccepted",
+            "spectroscopyPromotionAllowed",
+            "spectroscopyPromoted",
+        ),
+    },
     "DASHI.Physics.Closure.W4AtomicClockCandidateReceiptChecklist": {
         "path": "DASHI/Physics/Closure/W4AtomicClockCandidateReceiptChecklist.agda",
         "required": (
@@ -92,6 +177,23 @@ EXPECTED_MODULES = {
             "externalReceiptConstructed",
             "w4PhysicalCalibrationPromoted",
             "siAuthorityRowsPromoted",
+        ),
+    },
+    "DASHI.Promotion.SIMetrologyPayloadDependencyDAG": {
+        "path": "DASHI/Promotion/SIMetrologyPayloadDependencyDAG.agda",
+        "required": (
+            "SIMetrologyPayloadDependencyDAG",
+            "canonicalSIMetrologyDAGNodes",
+            "canonicalSIMetrologyDAGEdges",
+            "canonicalSIMetrologyClosureOrder",
+            "canonicalSIMetrologyPayloadDependencyDAG",
+        ),
+        "false_guards": (
+            "promoted",
+            "edgeCurrentlyClosed",
+            "rowClosed",
+            "guardValue",
+            "terminalPromotionAllowed",
         ),
     },
 }
@@ -166,11 +268,17 @@ def test_round_three_si_metrology_contact_strings_and_structural_values() -> Non
         "Delta nu Cs",
         "BIPM",
         "NIST",
+        "CODATA",
+        "Pound-Rebka",
+        "Gravity Probe A",
         "Candidate256",
         "Real carrier",
+        "H * t / hbar",
         "dim(omega0 * Delta tau) = dimensionless",
         "dim(Delta U / c^2) = dimensionless",
         "metre = c * second / 299792458",
+        "R_infinity",
+        "NIST ASD",
     ):
         assert exact in combined, f"missing round-3 SI/metrology contact string: {exact}"
 

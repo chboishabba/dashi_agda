@@ -81,6 +81,10 @@ local finite algebra inhabitant without promoting real/complex completeness,
 spectral theorem authority, physical calibration, or Clay claims.
 The discrete-to-transcendental bridge is now recorded as a bounded formal
 stack: `DASHI.Foundations.SurrealCompactification`,
+`DASHI.Foundations.SurrealCompactificationIntake`,
+`DASHI.Foundations.SurrealCompactificationRationalBridge`,
+`DASHI.Foundations.SurrealCompactificationOrderedQQBridge`,
+`DASHI.Foundations.SurrealCompactificationTailBoundBridge`,
 `DASHI.Metric.AgreementSurrealGaugeBridge`,
 `DASHI.Geometry.NatUltrametricCompletenessBridge`,
 `DASHI.Algebra.StageQuotientIrreversibilityBoundary`, and
@@ -88,8 +92,16 @@ stack: `DASHI.Foundations.SurrealCompactification`,
 through `DASHI.Everything`. These surfaces separate the checked finite content
 from the extension story: finite trit towers, prefix/suffix agreement metrics,
 Nat-valued ultrametric completeness, the stage-quotient irreversibility seam,
-and the CRT/J fixed-point receipts are recorded locally. Surreal arithmetic,
-the `agreeDepth -> 3^-n` gauge as an isometry, compactification error theorems,
+and the CRT/J fixed-point receipts are recorded locally. The intake layer now
+names the exact remaining math sockets: rational/surreal carrier, balanced
+ternary embedding, symbolic `3^-n` gauge, antitone proof, truncation/kappa,
+tail-bound, and external authority gates. The rational bridge adds a checked
+symbolic finite balanced-ternary approximant surface without constructing or
+promoting a QQ/No ordered carrier. The ordered-QQ and tail-bound bridges now
+name the exact ordered carrier, antitone, geometric-series-tail, and
+kappa-tail-bound law shapes while keeping rational order authority and
+analytic error proofs fail-closed. Surreal arithmetic, the
+`agreeDepth -> 3^-n` gauge as an isometry, compactification error theorems,
 Monster moonshine theorem authority, Carnot/thermodynamic promotion, and any
 terminal Clay or physics claim remain fail-closed.
 
@@ -172,6 +184,27 @@ clock phase and redshift observables, the metre-from-second-and-`c` route for
 Rydberg use, and a W4/Candidate256 external receipt checklist. They still do
 not load artifacts, accept SHA256/access-date evidence, construct authority
 tokens, promote numeric payloads, or claim empirical clock/redshift adequacy.
+The fourth SI/metrology evidence tranche adds
+`DASHI.Promotion.SIDefiningConstantAuthorityEvidenceChecklist`,
+`DASHI.Promotion.SIExactConstantConsumerIngestionBridge`,
+`DASHI.Physics.Closure.StoneHbarDimensionlessActionBridge`,
+`DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftReceiptRequest`,
+`DASHI.Promotion.RydbergSpectroscopyAuthorityPayloadRequest`, and
+`DASHI.Promotion.SIMetrologyPayloadDependencyDAG`. These normalize the exact
+artifact-evidence sockets, consumer-ingestion routing, `H * t / hbar`
+dimensionless action bridge, empirical redshift receipt request, Rydberg /
+NIST ASD spectroscopy authority request, and the strict dependency DAG. They
+remain fail-closed: no BIPM/NIST/CODATA artifact, checksum, access date,
+empirical receipt, consumer ingestion, spectroscopy token, W4 token, or
+terminal promotion is locally constructed.
+The source-locator pass adds
+`DASHI.Promotion.SIMetrologyExternalSourceLocator` and
+`DASHI.Promotion.ExternalTheoremAuthoritySourceLocator`. These rows record
+BIPM SI Brochure, NIST constants, NIST ASD, Monster/Moonshine, and
+Carnot/thermodynamic source-locator targets plus raw SI constant text where
+available. They are locator/intake rows only: SHA256, access-date evidence,
+ingestion receipts, accepted authority tokens, proof authority, and promotion
+remain false.
 
 Current Standard Model first-principles boundary:
 `DASHI.Promotion.ObligationIndex` now includes a nine-row
