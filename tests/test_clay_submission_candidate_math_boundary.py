@@ -132,6 +132,45 @@ def test_boundary_keeps_candidates_recorded_but_not_promoted_or_eligible() -> No
     assert forbidden_true_flags == []
 
 
+def test_boundary_records_ym_authority_backed_submission_posture() -> None:
+    text = read_boundary()
+    normalized = normalize(text)
+
+    for term in (
+        "YMAuthorityBackedSubmissionPosture",
+        "ymAuthorityBackedSubmissionPosture",
+        "YM authority-backed submission posture narrative recorded",
+        "King gamma authority slot recorded",
+        "Balaban H3a authority slot recorded",
+        "OS/Wightman authority slot recorded",
+        "externalAcceptancePending=true",
+        "h3aInternalized",
+        "clayEligibleWithoutExternalAuthority",
+        "ymClayPromoted",
+        "terminalPromotion",
+    ):
+        assert normalize(term) in normalized, term
+
+    true_gates = (
+        ("narrative", "recorded"),
+        ("king", "gamma", "authority", "slot", "recorded"),
+        ("balaban", "h3a", "authority", "slot", "recorded"),
+        ("os", "wightman", "authority", "slot", "recorded"),
+        ("external", "acceptance", "pending"),
+    )
+    false_gates = (
+        ("h3a", "internalized"),
+        ("clay", "eligible", "without", "external", "authority"),
+        ("ym", "clay", "promoted"),
+        ("terminal", "promotion"),
+    )
+
+    for terms in true_gates:
+        assert has_bool_evidence(text, terms, True), terms
+    for terms in false_gates:
+        assert has_bool_evidence(text, terms, False), terms
+
+
 def test_boundary_records_required_dependency_edges_and_control_card() -> None:
     text = read_boundary()
     normalized = normalize(text)

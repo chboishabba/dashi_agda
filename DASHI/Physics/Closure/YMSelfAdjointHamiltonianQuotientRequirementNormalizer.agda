@@ -35,6 +35,12 @@ data YMSelfAdjointHamiltonianRequirementRow : Set where
   sourcedEquationBoundaryConsumedRow :
     YMSelfAdjointHamiltonianRequirementRow
 
+  sourcedDStarFBoundaryPackageConsumedRow :
+    YMSelfAdjointHamiltonianRequirementRow
+
+  hamiltonianQuotientPrerequisitesConsumedRow :
+    YMSelfAdjointHamiltonianRequirementRow
+
   natToRealTransitionConsumedRow :
     YMSelfAdjointHamiltonianRequirementRow
 
@@ -65,6 +71,9 @@ data YMSelfAdjointHamiltonianRequirementRow : Set where
   gate2ColimitGapLiftReceiptConsumedRow :
     YMSelfAdjointHamiltonianRequirementRow
 
+  firstLocalQuotientBlockerNarrowedRow :
+    YMSelfAdjointHamiltonianRequirementRow
+
   exactSelfAdjointHamiltonianBlockerNormalizedRow :
     YMSelfAdjointHamiltonianRequirementRow
 
@@ -78,6 +87,8 @@ canonicalYMSelfAdjointHamiltonianRequirementRows :
   List YMSelfAdjointHamiltonianRequirementRow
 canonicalYMSelfAdjointHamiltonianRequirementRows =
   sourcedEquationBoundaryConsumedRow
+  ∷ sourcedDStarFBoundaryPackageConsumedRow
+  ∷ hamiltonianQuotientPrerequisitesConsumedRow
   ∷ natToRealTransitionConsumedRow
   ∷ lower6RealCarrierBlockerConsumedRow
   ∷ conditionalFiniteSpectralWiringConsumedRow
@@ -88,10 +99,60 @@ canonicalYMSelfAdjointHamiltonianRequirementRows =
   ∷ stoneHamiltonianGapBridgeConsumedRow
   ∷ selectedCarrierLowerBoundReceiptConsumedRow
   ∷ gate2ColimitGapLiftReceiptConsumedRow
+  ∷ firstLocalQuotientBlockerNarrowedRow
   ∷ exactSelfAdjointHamiltonianBlockerNormalizedRow
   ∷ exactSelfAdjointHamiltonianTheoremFieldNormalizedRow
   ∷ promotionGuardsHeldFalseRow
   ∷ []
+
+data YMSelfAdjointHamiltonianNormalizedBlocker : Set where
+  sourcedDStarFPackageStillBoundaryBlocker :
+    YMSelfAdjointHamiltonianNormalizedBlocker
+
+  realGaugeOrbitEquivalenceStillMissingBlocker :
+    YMSelfAdjointHamiltonianNormalizedBlocker
+
+  denseHamiltonianDomainStillMissingBlocker :
+    YMSelfAdjointHamiltonianNormalizedBlocker
+
+  symmetricSelfAdjointExtensionStillMissingBlocker :
+    YMSelfAdjointHamiltonianNormalizedBlocker
+
+  finiteLowerBoundTransportStillMissingBlocker :
+    YMSelfAdjointHamiltonianNormalizedBlocker
+
+  globalSelfAdjointHamiltonianQuotientStillMissingBlocker :
+    YMSelfAdjointHamiltonianNormalizedBlocker
+
+canonicalYMSelfAdjointHamiltonianNormalizedBlockers :
+  List YMSelfAdjointHamiltonianNormalizedBlocker
+canonicalYMSelfAdjointHamiltonianNormalizedBlockers =
+  sourcedDStarFPackageStillBoundaryBlocker
+  ∷ realGaugeOrbitEquivalenceStillMissingBlocker
+  ∷ denseHamiltonianDomainStillMissingBlocker
+  ∷ symmetricSelfAdjointExtensionStillMissingBlocker
+  ∷ finiteLowerBoundTransportStillMissingBlocker
+  ∷ globalSelfAdjointHamiltonianQuotientStillMissingBlocker
+  ∷ []
+
+normalizePrerequisiteBlocker :
+  Sourced.YMHamiltonianQuotientPrerequisiteBlocker →
+  YMSelfAdjointHamiltonianNormalizedBlocker
+normalizePrerequisiteBlocker
+  Sourced.realSourcedDStarFEquationStillBoundary =
+  sourcedDStarFPackageStillBoundaryBlocker
+normalizePrerequisiteBlocker
+  Sourced.missingRealGaugeOrbitEquivalenceForCarrierQuotient =
+  realGaugeOrbitEquivalenceStillMissingBlocker
+normalizePrerequisiteBlocker
+  Sourced.missingRealHamiltonianOperatorAndDenseDomain =
+  denseHamiltonianDomainStillMissingBlocker
+normalizePrerequisiteBlocker
+  Sourced.missingSymmetricDenseHamiltonianAndSelfAdjointExtension =
+  symmetricSelfAdjointExtensionStillMissingBlocker
+normalizePrerequisiteBlocker
+  Sourced.missingFiniteCarrierBoundTransportToRealYM =
+  finiteLowerBoundTransportStillMissingBlocker
 
 data YMSelfAdjointHamiltonianRequirementClass : Set where
   carrierQuotientAndGaugeEquivalenceRequired :
@@ -132,6 +193,67 @@ record YMSelfAdjointHamiltonianQuotientRequirementNormalizer : Setω where
 
     sourcedEquationBoundaryCanonicalIsTrue :
       sourcedEquationBoundaryCanonical ≡ true
+
+    sourcedHamiltonianPrerequisites :
+      Sourced.YMHamiltonianQuotientPrerequisiteBundle
+
+    sourcedHamiltonianPrerequisitesCanonical :
+      Bool
+
+    sourcedHamiltonianPrerequisitesCanonicalIsTrue :
+      sourcedHamiltonianPrerequisitesCanonical ≡ true
+
+    sourcedDStarFBoundaryTyped :
+      Bool
+
+    sourcedDStarFBoundaryTypedIsTrue :
+      sourcedDStarFBoundaryTyped ≡ true
+
+    physicalRealDStarFEqualsJPromoted :
+      Bool
+
+    physicalRealDStarFEqualsJPromotedIsFalse :
+      physicalRealDStarFEqualsJPromoted ≡ false
+
+    firstLocalPrerequisiteBlocker :
+      Sourced.YMHamiltonianQuotientPrerequisiteBlocker
+
+    firstLocalPrerequisiteBlockerIsSourcedBoundary :
+      firstLocalPrerequisiteBlocker
+      ≡
+      Sourced.realSourcedDStarFEquationStillBoundary
+
+    normalizedFirstLocalPrerequisiteBlocker :
+      YMSelfAdjointHamiltonianNormalizedBlocker
+
+    normalizedFirstLocalPrerequisiteBlockerIsSourcedDStarFBoundary :
+      normalizedFirstLocalPrerequisiteBlocker
+      ≡
+      sourcedDStarFPackageStillBoundaryBlocker
+
+    quotientGaugeOrbitEquivalenceConstructed :
+      Bool
+
+    quotientGaugeOrbitEquivalenceConstructedIsFalse :
+      quotientGaugeOrbitEquivalenceConstructed ≡ false
+
+    quotientDenseDomainConstructed :
+      Bool
+
+    quotientDenseDomainConstructedIsFalse :
+      quotientDenseDomainConstructed ≡ false
+
+    quotientSymmetricOnDenseDomainConstructed :
+      Bool
+
+    quotientSymmetricOnDenseDomainConstructedIsFalse :
+      quotientSymmetricOnDenseDomainConstructed ≡ false
+
+    quotientSelfAdjointExtensionConstructed :
+      Bool
+
+    quotientSelfAdjointExtensionConstructedIsFalse :
+      quotientSelfAdjointExtensionConstructed ≡ false
 
     natToRealTransition :
       NatSlice.S8NatToRealPhysicalCarrierTransitionReceipt
@@ -297,6 +419,20 @@ record YMSelfAdjointHamiltonianQuotientRequirementNormalizer : Setω where
     normalizedRequirementClassCountIs5 :
       normalizedRequirementClassCount ≡ 5
 
+    normalizedBlockers :
+      List YMSelfAdjointHamiltonianNormalizedBlocker
+
+    normalizedBlockersAreCanonical :
+      normalizedBlockers
+      ≡
+      canonicalYMSelfAdjointHamiltonianNormalizedBlockers
+
+    normalizedBlockerCount :
+      Nat
+
+    normalizedBlockerCountIs6 :
+      normalizedBlockerCount ≡ 6
+
     rows :
       List YMSelfAdjointHamiltonianRequirementRow
 
@@ -306,8 +442,8 @@ record YMSelfAdjointHamiltonianQuotientRequirementNormalizer : Setω where
     rowCount :
       Nat
 
-    rowCountIs14 :
-      rowCount ≡ 14
+    rowCountIs17 :
+      rowCount ≡ 17
 
     hamiltonianTheoremPromoted :
       Bool
@@ -350,6 +486,60 @@ canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer =
         true
     ; sourcedEquationBoundaryCanonicalIsTrue =
         refl
+    ; sourcedHamiltonianPrerequisites =
+        Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; sourcedHamiltonianPrerequisitesCanonical =
+        true
+    ; sourcedHamiltonianPrerequisitesCanonicalIsTrue =
+        refl
+    ; sourcedDStarFBoundaryTyped =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.realBoundaryEquationTargetTyped
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; sourcedDStarFBoundaryTypedIsTrue =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.realBoundaryEquationTargetTypedIsTrue
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; physicalRealDStarFEqualsJPromoted =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.physicalRealDStarFEqualsJPromoted
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; physicalRealDStarFEqualsJPromotedIsFalse =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.physicalRealDStarFEqualsJPromotedIsFalse
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; firstLocalPrerequisiteBlocker =
+        Sourced.prerequisiteFirstLocalBlocker
+          Sourced.canonicalYMSourcedEquationToHamiltonianQuotientBoundary
+    ; firstLocalPrerequisiteBlockerIsSourcedBoundary =
+        Sourced.prerequisiteFirstLocalBlockerIsRealSourcedBoundary
+          Sourced.canonicalYMSourcedEquationToHamiltonianQuotientBoundary
+    ; normalizedFirstLocalPrerequisiteBlocker =
+        normalizePrerequisiteBlocker
+          (Sourced.prerequisiteFirstLocalBlocker
+            Sourced.canonicalYMSourcedEquationToHamiltonianQuotientBoundary)
+    ; normalizedFirstLocalPrerequisiteBlockerIsSourcedDStarFBoundary =
+        refl
+    ; quotientGaugeOrbitEquivalenceConstructed =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.realGaugeOrbitEquivalenceConstructed
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; quotientGaugeOrbitEquivalenceConstructedIsFalse =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.realGaugeOrbitEquivalenceConstructedIsFalse
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; quotientDenseDomainConstructed =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.denseDomainConstructed
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; quotientDenseDomainConstructedIsFalse =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.denseDomainConstructedIsFalse
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; quotientSymmetricOnDenseDomainConstructed =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.symmetricOnDenseDomainConstructed
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; quotientSymmetricOnDenseDomainConstructedIsFalse =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.symmetricOnDenseDomainConstructedIsFalse
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; quotientSelfAdjointExtensionConstructed =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.selfAdjointExtensionConstructed
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
+    ; quotientSelfAdjointExtensionConstructedIsFalse =
+        Sourced.YMHamiltonianQuotientPrerequisiteBundle.selfAdjointExtensionConstructedIsFalse
+          Sourced.canonicalYMHamiltonianQuotientPrerequisiteBundle
     ; natToRealTransition =
         NatSlice.canonicalS8NatToRealPhysicalCarrierTransitionReceipt
     ; natToRealTransitionCanonical =
@@ -464,13 +654,21 @@ canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer =
         5
     ; normalizedRequirementClassCountIs5 =
         refl
+    ; normalizedBlockers =
+        canonicalYMSelfAdjointHamiltonianNormalizedBlockers
+    ; normalizedBlockersAreCanonical =
+        refl
+    ; normalizedBlockerCount =
+        6
+    ; normalizedBlockerCountIs6 =
+        refl
     ; rows =
         canonicalYMSelfAdjointHamiltonianRequirementRows
     ; rowsAreCanonical =
         refl
     ; rowCount =
-        14
-    ; rowCountIs14 =
+        17
+    ; rowCountIs17 =
         refl
     ; hamiltonianTheoremPromoted =
         false
@@ -490,6 +688,9 @@ canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer =
         refl
     ; normalizedBoundary =
         "The sourced-equation boundary feeds the Hamiltonian quotient interface but does not construct it"
+        ∷ "The consumed real sourced D * F boundary package has a typed boundary target, while physical real D * F = J remains false"
+        ∷ "The prerequisite bundle narrows the first local blocker to sourced D * F still being a boundary package before quotient/domain/self-adjointness transport"
+        ∷ "Gauge-orbit equivalence, dense domain, symmetric dense Hamiltonian, and self-adjoint extension are exposed as concrete false prerequisite fields"
         ∷ "The bounded Nat carrier theorem is available only as bounded Nat evidence"
         ∷ "The Nat-to-real transition and lower6 blocker keep the real carrier theorem false"
         ∷ "The Stone bridge records finite/local generator and selected lower-bound surfaces without identifying them with H_YM"
@@ -500,14 +701,67 @@ canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer =
         ∷ []
     }
 
-canonicalYMSelfAdjointHamiltonianRequirementRowCountIs14 :
-  listCount canonicalYMSelfAdjointHamiltonianRequirementRows ≡ 14
-canonicalYMSelfAdjointHamiltonianRequirementRowCountIs14 =
+canonicalYMSelfAdjointHamiltonianRequirementRowCountIs17 :
+  listCount canonicalYMSelfAdjointHamiltonianRequirementRows ≡ 17
+canonicalYMSelfAdjointHamiltonianRequirementRowCountIs17 =
   refl
 
 canonicalYMSelfAdjointHamiltonianRequirementClassCountIs5 :
   listCount canonicalYMSelfAdjointHamiltonianRequirementClasses ≡ 5
 canonicalYMSelfAdjointHamiltonianRequirementClassCountIs5 =
+  refl
+
+canonicalYMSelfAdjointHamiltonianNormalizedBlockerCountIs6 :
+  listCount canonicalYMSelfAdjointHamiltonianNormalizedBlockers ≡ 6
+canonicalYMSelfAdjointHamiltonianNormalizedBlockerCountIs6 =
+  refl
+
+canonicalYMSelfAdjointHamiltonianNormalizerSourcedDStarFTyped :
+  sourcedDStarFBoundaryTyped
+    canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
+  ≡
+  true
+canonicalYMSelfAdjointHamiltonianNormalizerSourcedDStarFTyped =
+  refl
+
+canonicalYMSelfAdjointHamiltonianNormalizerPhysicalRealDStarFFalse :
+  physicalRealDStarFEqualsJPromoted
+    canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
+  ≡
+  false
+canonicalYMSelfAdjointHamiltonianNormalizerPhysicalRealDStarFFalse =
+  refl
+
+canonicalYMSelfAdjointHamiltonianNormalizerFirstLocalBlocker :
+  normalizedFirstLocalPrerequisiteBlocker
+    canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
+  ≡
+  sourcedDStarFPackageStillBoundaryBlocker
+canonicalYMSelfAdjointHamiltonianNormalizerFirstLocalBlocker =
+  refl
+
+canonicalYMSelfAdjointHamiltonianNormalizerGaugeOrbitFalse :
+  quotientGaugeOrbitEquivalenceConstructed
+    canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
+  ≡
+  false
+canonicalYMSelfAdjointHamiltonianNormalizerGaugeOrbitFalse =
+  refl
+
+canonicalYMSelfAdjointHamiltonianNormalizerDenseDomainFalse :
+  quotientDenseDomainConstructed
+    canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
+  ≡
+  false
+canonicalYMSelfAdjointHamiltonianNormalizerDenseDomainFalse =
+  refl
+
+canonicalYMSelfAdjointHamiltonianNormalizerSelfAdjointExtensionFalse :
+  quotientSelfAdjointExtensionConstructed
+    canonicalYMSelfAdjointHamiltonianQuotientRequirementNormalizer
+  ≡
+  false
+canonicalYMSelfAdjointHamiltonianNormalizerSelfAdjointExtensionFalse =
   refl
 
 canonicalYMSelfAdjointHamiltonianNormalizerFirstBlocker :

@@ -168,6 +168,135 @@ ymAH3aStillMissingRecordedIsTrue :
   ymAH3aStillMissing ymALocalCalculationCandidateArithmetic ≡ true
 ymAH3aStillMissingRecordedIsTrue = refl
 
+kingGammaAuthoritySlot : String
+kingGammaAuthoritySlot =
+  "King gamma authority slot recorded"
+
+balabanH3aAuthoritySlot : String
+balabanH3aAuthoritySlot =
+  "Balaban H3a authority slot recorded"
+
+osWightmanAuthoritySlot : String
+osWightmanAuthoritySlot =
+  "OS/Wightman authority slot recorded"
+
+ymAuthorityBackedSubmissionNarrative : String
+ymAuthorityBackedSubmissionNarrative =
+  "YM authority-backed submission posture narrative recorded: external authority slots are recorded, externalAcceptancePending=true, and terminal promotion remains closed."
+
+record YMAuthorityBackedSubmissionPosture : Set where
+  constructor mkYMAuthorityBackedSubmissionPosture
+  field
+    narrativeRecorded :
+      Bool
+    narrativeRecordedIsTrue :
+      narrativeRecorded ≡ true
+    kingGammaAuthoritySlotRecorded :
+      Bool
+    kingGammaAuthoritySlotRecordedIsTrue :
+      kingGammaAuthoritySlotRecorded ≡ true
+    balabanH3aAuthoritySlotRecorded :
+      Bool
+    balabanH3aAuthoritySlotRecordedIsTrue :
+      balabanH3aAuthoritySlotRecorded ≡ true
+    osWightmanAuthoritySlotRecorded :
+      Bool
+    osWightmanAuthoritySlotRecordedIsTrue :
+      osWightmanAuthoritySlotRecorded ≡ true
+    externalAcceptancePending :
+      Bool
+    externalAcceptancePendingIsTrue :
+      externalAcceptancePending ≡ true
+    h3aInternalized :
+      Bool
+    h3aInternalizedIsFalse :
+      h3aInternalized ≡ false
+    clayEligibleWithoutExternalAuthority :
+      Bool
+    clayEligibleWithoutExternalAuthorityIsFalse :
+      clayEligibleWithoutExternalAuthority ≡ false
+    ymClayPromoted :
+      Bool
+    ymClayPromotedIsFalse :
+      ymClayPromoted ≡ false
+    terminalPromotion :
+      Bool
+    terminalPromotionIsFalse :
+      terminalPromotion ≡ false
+    narrativeText :
+      String
+    kingGammaAuthorityText :
+      String
+    balabanH3aAuthorityText :
+      String
+    osWightmanAuthorityText :
+      String
+
+open YMAuthorityBackedSubmissionPosture public
+
+ymAuthorityBackedSubmissionPosture :
+  YMAuthorityBackedSubmissionPosture
+ymAuthorityBackedSubmissionPosture =
+  mkYMAuthorityBackedSubmissionPosture
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    ymAuthorityBackedSubmissionNarrative
+    kingGammaAuthoritySlot
+    balabanH3aAuthoritySlot
+    osWightmanAuthoritySlot
+
+narrativeRecordedForYMAuthorityPostureIsTrue :
+  narrativeRecorded ymAuthorityBackedSubmissionPosture ≡ true
+narrativeRecordedForYMAuthorityPostureIsTrue = refl
+
+kingGammaAuthoritySlotRecordedForYMAuthorityPostureIsTrue :
+  kingGammaAuthoritySlotRecorded ymAuthorityBackedSubmissionPosture ≡ true
+kingGammaAuthoritySlotRecordedForYMAuthorityPostureIsTrue = refl
+
+balabanH3aAuthoritySlotRecordedForYMAuthorityPostureIsTrue :
+  balabanH3aAuthoritySlotRecorded ymAuthorityBackedSubmissionPosture ≡ true
+balabanH3aAuthoritySlotRecordedForYMAuthorityPostureIsTrue = refl
+
+osWightmanAuthoritySlotRecordedForYMAuthorityPostureIsTrue :
+  osWightmanAuthoritySlotRecorded ymAuthorityBackedSubmissionPosture ≡ true
+osWightmanAuthoritySlotRecordedForYMAuthorityPostureIsTrue = refl
+
+externalAcceptancePendingForYMAuthorityPostureIsTrue :
+  externalAcceptancePending ymAuthorityBackedSubmissionPosture ≡ true
+externalAcceptancePendingForYMAuthorityPostureIsTrue = refl
+
+h3aInternalizedForYMAuthorityPostureIsFalse :
+  h3aInternalized ymAuthorityBackedSubmissionPosture ≡ false
+h3aInternalizedForYMAuthorityPostureIsFalse = refl
+
+clayEligibleWithoutExternalAuthorityForYMAuthorityPostureIsFalse :
+  clayEligibleWithoutExternalAuthority ymAuthorityBackedSubmissionPosture ≡ false
+clayEligibleWithoutExternalAuthorityForYMAuthorityPostureIsFalse = refl
+
+ymClayPromotedForYMAuthorityPostureIsFalse :
+  ymClayPromoted ymAuthorityBackedSubmissionPosture ≡ false
+ymClayPromotedForYMAuthorityPostureIsFalse = refl
+
+terminalPromotionForYMAuthorityPostureIsFalse :
+  terminalPromotion ymAuthorityBackedSubmissionPosture ≡ false
+terminalPromotionForYMAuthorityPostureIsFalse = refl
+
 ymAArithmeticProofPromoted : Bool
 ymAArithmeticProofPromoted = false
 

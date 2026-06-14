@@ -1,10 +1,12 @@
 module DASHI.Physics.Closure.BiunitaryDiagonalization3x3 where
 
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.MatterRepresentationReceiptSurface as Matter
+import DASHI.Physics.Closure.CKMEntryField as Field
 import DASHI.Physics.Closure.CKMExactWitnesses as Exact
 open import DASHI.Physics.YM.BiunitaryDiagonalization
   using (DiagonalBiunitaryWitness; canonicalDiagonalBiunitaryWitness)
@@ -191,3 +193,170 @@ canonicalBiunitaryDiagonalization3x3Receipt = record
       ∷ "The diagonalization carrier is the existing exact diagonal witness"
       ∷ []
   }
+
+------------------------------------------------------------------------
+-- First non-identity transport socket.
+--
+-- The exact carrier diagonalization above remains the identity case.  The
+-- socket below is deliberately separate: it records a finite Cabibbo-like
+-- down-sector transport already present in the concrete `Matter.MixingMatrix`
+-- carrier, while keeping the exact physical CKM promotion closed.
+
+record CabibboLikeDownTransportSocket : Set where
+  field
+    upTransport :
+      Matter.MixingMatrix
+
+    upTransportIsIdentity :
+      upTransport ≡ Matter.identityMixingMatrix
+
+    downTransport :
+      Matter.MixingMatrix
+
+    downTransportIsCanonicalWolfenstein :
+      downTransport ≡ Matter.canonicalWolfensteinMixingMatrix
+
+    carrierProduct :
+      Matter.MixingMatrix
+
+    carrierProductIsLeftIdentityTransport :
+      carrierProduct ≡ Matter.leftIdentityMixingProduct downTransport
+
+    carrierProductIsDownTransport :
+      carrierProduct ≡ downTransport
+
+    identityVusEntry :
+      Matter.MixingGaussianRationalDatum
+
+    identityVusEntryIsZero :
+      identityVusEntry ≡ Matter.zeroMixingGaussianRationalDatum
+
+    cabibboLikeVusEntry :
+      Matter.MixingGaussianRationalDatum
+
+    cabibboLikeVusEntryIsOneFifth :
+      cabibboLikeVusEntry
+      ≡
+      Matter.mixingGaussianRationalDatum
+        Matter.oneFifthMixingSignedRationalDatum
+        Matter.zeroMixingSignedRationalDatum
+
+    distinguishesIdentityCarrier :
+      Bool
+
+    distinguishesIdentityCarrierIsTrue :
+      distinguishesIdentityCarrier ≡ true
+
+    exactVVdaggerResidualReceipt :
+      Field.CKMMatterMixingMatrixExactVVdaggerResidualReceipt
+
+    residualSourceIsCarrierProduct :
+      Field.sourceMatrix exactVVdaggerResidualReceipt ≡ carrierProduct
+
+    residual11IsNonzeroTarget :
+      Matter.v11
+        (Field.vvDaggerMinusIdentityResidual exactVVdaggerResidualReceipt)
+      ≡
+      Matter.mixingGaussianRationalDatum
+        Matter.thirtySevenNinetyThousandMixingSignedRationalDatum
+        Matter.zeroMixingSignedRationalDatum
+
+    exactUnitarityRejected :
+      Field.exactUnitarityForConcreteWolfenstein exactVVdaggerResidualReceipt
+      ≡
+      false
+
+    exactPDGMatchClaimed :
+      Bool
+
+    exactPDGMatchClaimedIsFalse :
+      exactPDGMatchClaimed ≡ false
+
+    physicalCKMPromotionConstructed :
+      Bool
+
+    physicalCKMPromotionConstructedIsFalse :
+      physicalCKMPromotionConstructed ≡ false
+
+    socketBoundary :
+      List String
+
+open CabibboLikeDownTransportSocket public
+
+canonicalCabibboLikeDownTransportSocket :
+  CabibboLikeDownTransportSocket
+canonicalCabibboLikeDownTransportSocket = record
+  { upTransport =
+      Matter.identityMixingMatrix
+  ; upTransportIsIdentity =
+      refl
+  ; downTransport =
+      Matter.canonicalWolfensteinMixingMatrix
+  ; downTransportIsCanonicalWolfenstein =
+      refl
+  ; carrierProduct =
+      Matter.canonicalWolfensteinMixingMatrix
+  ; carrierProductIsLeftIdentityTransport =
+      refl
+  ; carrierProductIsDownTransport =
+      refl
+  ; identityVusEntry =
+      Matter.v12 Matter.identityMixingMatrix
+  ; identityVusEntryIsZero =
+      refl
+  ; cabibboLikeVusEntry =
+      Matter.v12 Matter.canonicalWolfensteinMixingMatrix
+  ; cabibboLikeVusEntryIsOneFifth =
+      refl
+  ; distinguishesIdentityCarrier =
+      true
+  ; distinguishesIdentityCarrierIsTrue =
+      refl
+  ; exactVVdaggerResidualReceipt =
+      Field.canonicalCKMMatterMixingMatrixExactVVdaggerResidualReceipt
+  ; residualSourceIsCarrierProduct =
+      refl
+  ; residual11IsNonzeroTarget =
+      refl
+  ; exactUnitarityRejected =
+      refl
+  ; exactPDGMatchClaimed =
+      false
+  ; exactPDGMatchClaimedIsFalse =
+      refl
+  ; physicalCKMPromotionConstructed =
+      false
+  ; physicalCKMPromotionConstructedIsFalse =
+      refl
+  ; socketBoundary =
+      "The exact biunitary carrier remains the identity diagonalization"
+      ∷ "The non-identity frontier socket uses identity up transport and canonical Wolfenstein down transport"
+      ∷ "The resulting finite carrier product has V_us = 1/5, while the identity carrier has V_us = 0"
+      ∷ "The socket consumes the exact finite V V^dagger - I residual receipt, including nonzero residual11 = 37/90000"
+      ∷ "This distinguishes identity from a Cabibbo-like transport without claiming an exact PDG match or physical CKM promotion"
+      ∷ []
+  }
+
+cabibboLikeSocketVusIsOneFifth :
+  cabibboLikeVusEntry canonicalCabibboLikeDownTransportSocket
+  ≡
+  Matter.mixingGaussianRationalDatum
+    Matter.oneFifthMixingSignedRationalDatum
+    Matter.zeroMixingSignedRationalDatum
+cabibboLikeSocketVusIsOneFifth =
+  refl
+
+cabibboLikeSocketRejectsExactUnitarity :
+  Field.exactUnitarityForConcreteWolfenstein
+    (exactVVdaggerResidualReceipt canonicalCabibboLikeDownTransportSocket)
+  ≡
+  false
+cabibboLikeSocketRejectsExactUnitarity =
+  refl
+
+cabibboLikeSocketDoesNotPromotePhysicalCKM :
+  physicalCKMPromotionConstructed canonicalCabibboLikeDownTransportSocket
+  ≡
+  false
+cabibboLikeSocketDoesNotPromotePhysicalCKM =
+  refl

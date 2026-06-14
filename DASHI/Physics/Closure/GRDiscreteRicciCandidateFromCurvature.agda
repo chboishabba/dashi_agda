@@ -578,6 +578,14 @@ record GRDiscreteRicciGate4LocalFibreContractionReceipt : Setω where
       ≡
       NFScalar.r0
 
+    factorVecSSPAllLaneZeroTableLaw :
+      DET.FactorVecSSPAllLaneContractionEinsteinTensorLaw
+
+    factorVecSSPAllLaneZeroTableLawIsCanonical :
+      factorVecSSPAllLaneZeroTableLaw
+      ≡
+      DET.canonicalFactorVecSSPAllLaneContractionEinsteinTensorLaw
+
     doubledChristoffelInputStaged :
       Bool
 
@@ -753,6 +761,10 @@ canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt =
     ; selectedContractedBianchiDivergenceZero =
         NFScalar.GRSelectedFourChartLeviCivitaBianchiEinsteinStagingReceipt.contractedBianchiDivergenceZero
           NFScalar.canonicalGRSelectedFourChartLeviCivitaBianchiEinsteinStagingReceipt
+    ; factorVecSSPAllLaneZeroTableLaw =
+        DET.canonicalFactorVecSSPAllLaneContractionEinsteinTensorLaw
+    ; factorVecSSPAllLaneZeroTableLawIsCanonical =
+        refl
     ; doubledChristoffelInputStaged =
         true
     ; doubledChristoffelInputStagedIsTrue =
@@ -827,12 +839,27 @@ canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt =
         "The local fibre functions close over the canonical u4 doubled-Christoffel input and take SelectedMetric base/index arguments explicitly"
         ∷ "The selected finite non-flat local compatibility receipt supplies metric compatibility and torsion-free witnesses over the selected two-base table"
         ∷ "The 4R, Ricci, scalar, and 2G zero-table shape is staged, but pointwise zero proof construction is deferred"
+        ∷ "The FactorVec/SSP all-15-lane Ricci/scalar/Einstein zero-table law is consumed as a canonical finite-contraction witness"
         ∷ "The r1 concrete site split audit is carried beside the fibre as the legacy compatibility-era blocker"
         ∷ "The newer doubled-input adapter promotes selected metric compatibility locally; the exact post-compatibility blocker is missingCarrierConnectionIsLeviCivita"
         ∷ "The fibre receipt keeps contraction site/base-local to avoid global eager normalization across the selected finite table"
         ∷ "No selected metric-compatibility proof, selected Levi-Civita proof, Ricci/Einstein tower promotion, sourced equation, or non-flat GR promotion is constructed"
         ∷ []
     }
+
+grDiscreteRicciGate4AllLaneZeroTableLaw :
+  DET.FactorVecSSPAllLaneContractionEinsteinTensorLaw
+grDiscreteRicciGate4AllLaneZeroTableLaw =
+  GRDiscreteRicciGate4LocalFibreContractionReceipt.factorVecSSPAllLaneZeroTableLaw
+    canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt
+
+grDiscreteRicciGate4AllLaneZeroTableLawIsCanonical :
+  grDiscreteRicciGate4AllLaneZeroTableLaw
+  ≡
+  DET.canonicalFactorVecSSPAllLaneContractionEinsteinTensorLaw
+grDiscreteRicciGate4AllLaneZeroTableLawIsCanonical =
+  GRDiscreteRicciGate4LocalFibreContractionReceipt.factorVecSSPAllLaneZeroTableLawIsCanonical
+    canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt
 
 record GRDiscreteRicciGate4SelectedChainFailClosedReceipt : Setω where
   field

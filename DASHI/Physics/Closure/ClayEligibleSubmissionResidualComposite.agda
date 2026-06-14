@@ -27,9 +27,9 @@ data FirstResidual : Set where
     FirstResidual
   NSA6TheoremAcceptanceResidual :
     FirstResidual
-  YMSelfAdjointQuotientResidual :
+  NSPressureTheoremResidual :
     FirstResidual
-  YMH3aAuthorityResidual :
+  YMSelfAdjointQuotientResidual :
     FirstResidual
   YMExternalAcceptanceResidual :
     FirstResidual
@@ -59,20 +59,20 @@ firstResidualLabel NSATheoremAcceptanceResidual =
   "NS-A theorem acceptance"
 firstResidualLabel NSA6TheoremAcceptanceResidual =
   "NS-A6 theorem acceptance"
+firstResidualLabel NSPressureTheoremResidual =
+  "NS pressure theorem still residual"
 firstResidualLabel YMSelfAdjointQuotientResidual =
   "YM self-adjoint quotient"
-firstResidualLabel YMH3aAuthorityResidual =
-  "YM H3a authority"
 firstResidualLabel YMExternalAcceptanceResidual =
-  "YM external acceptance"
+  "YM external acceptance pending"
 firstResidualLabel UCT1PromotionEvidenceResidual =
-  "UCT.1 promotion evidence"
+  "UCT.1 residual still deferred"
 firstResidualLabel UCT2PromotionEvidenceResidual =
-  "UCT.2 promotion evidence"
+  "UCT.2 residual still deferred"
 firstResidualLabel UCT3PromotionEvidenceResidual =
-  "UCT.3 promotion evidence"
+  "UCT.3 residual still deferred"
 firstResidualLabel UCT4PromotionEvidenceResidual =
-  "UCT.4 promotion evidence"
+  "UCT.4 residual still deferred"
 
 submissionDomains : List SubmissionDomain
 submissionDomains =
@@ -90,8 +90,8 @@ firstResiduals : List FirstResidual
 firstResiduals =
   NSATheoremAcceptanceResidual
   ∷ NSA6TheoremAcceptanceResidual
+  ∷ NSPressureTheoremResidual
   ∷ YMSelfAdjointQuotientResidual
-  ∷ YMH3aAuthorityResidual
   ∷ YMExternalAcceptanceResidual
   ∷ UCT1PromotionEvidenceResidual
   ∷ UCT2PromotionEvidenceResidual
@@ -117,6 +117,45 @@ localArithmeticDoneIsTrue = refl
 localArithmeticSource : String
 localArithmeticSource =
   "YM-A arithmetic recorded done as input flag: existing sibling modules may supply it, but this composite does not import them."
+
+nextSubmissionPackagingState : String
+nextSubmissionPackagingState =
+  "YM authority-backed narrative/posture is the next submission packaging state: local arithmetic done, authority packaging ready, external acceptance pending."
+
+ymAuthorityBackedNarrativeReady : Bool
+ymAuthorityBackedNarrativeReady = true
+
+ymAuthorityPackagingReady : Bool
+ymAuthorityPackagingReady = true
+
+ymExternalAcceptancePending : Bool
+ymExternalAcceptancePending = true
+
+nsPressureTheoremStillResidual : Bool
+nsPressureTheoremStillResidual = true
+
+uctResidualStillDeferred : Bool
+uctResidualStillDeferred = true
+
+ymAuthorityBackedNarrativeReadyIsTrue :
+  ymAuthorityBackedNarrativeReady ≡ true
+ymAuthorityBackedNarrativeReadyIsTrue = refl
+
+ymAuthorityPackagingReadyIsTrue :
+  ymAuthorityPackagingReady ≡ true
+ymAuthorityPackagingReadyIsTrue = refl
+
+ymExternalAcceptancePendingIsTrue :
+  ymExternalAcceptancePending ≡ true
+ymExternalAcceptancePendingIsTrue = refl
+
+nsPressureTheoremStillResidualIsTrue :
+  nsPressureTheoremStillResidual ≡ true
+nsPressureTheoremStillResidualIsTrue = refl
+
+uctResidualStillDeferredIsTrue :
+  uctResidualStillDeferred ≡ true
+uctResidualStillDeferredIsTrue = refl
 
 clayEligibleDomains : Nat
 clayEligibleDomains = zero
@@ -166,6 +205,26 @@ record ClayEligibleSubmissionResidualComposite : Set where
       Bool
     localArithmeticDoneFieldIsTrue :
       localArithmeticDoneField ≡ true
+    ymAuthorityBackedNarrativeReadyField :
+      Bool
+    ymAuthorityBackedNarrativeReadyFieldIsTrue :
+      ymAuthorityBackedNarrativeReadyField ≡ true
+    ymAuthorityPackagingReadyField :
+      Bool
+    ymAuthorityPackagingReadyFieldIsTrue :
+      ymAuthorityPackagingReadyField ≡ true
+    ymExternalAcceptancePendingField :
+      Bool
+    ymExternalAcceptancePendingFieldIsTrue :
+      ymExternalAcceptancePendingField ≡ true
+    nsPressureTheoremStillResidualField :
+      Bool
+    nsPressureTheoremStillResidualFieldIsTrue :
+      nsPressureTheoremStillResidualField ≡ true
+    uctResidualStillDeferredField :
+      Bool
+    uctResidualStillDeferredFieldIsTrue :
+      uctResidualStillDeferredField ≡ true
     clayEligibleDomainCount :
       Nat
     clayEligibleDomainCountIsZero :
@@ -198,6 +257,16 @@ canonicalClayEligibleSubmissionResidualComposite =
     refl
     localArithmeticDone
     refl
+    ymAuthorityBackedNarrativeReady
+    refl
+    ymAuthorityPackagingReady
+    refl
+    ymExternalAcceptancePending
+    refl
+    nsPressureTheoremStillResidual
+    refl
+    uctResidualStillDeferred
+    refl
     clayEligibleDomains
     refl
     firstResiduals
@@ -207,4 +276,4 @@ canonicalClayEligibleSubmissionResidualComposite =
     refl
     refl
     refl
-    "O: Clay-eligible submission residual composite. R: domains are NS, YM, and Paper8/UCT. C: YM-A localArithmeticDone=true is a recorded input flag. S: clayEligibleDomains=zero. L: first residuals are NS-A/A6 theorem acceptance, YM self-adjoint quotient/H3a authority/external acceptance, and UCT.1-UCT.4 promotion evidence. P: all Clay and terminal promotion flags remain false. G: no sibling imports are required while concurrent lanes are unstable. F: residual ledger only; no Clay-eligible domain is promoted."
+    "O: Clay-eligible submission residual composite. R: domains are NS, YM, and Paper8/UCT. C: YM-A localArithmeticDone=true is a recorded input flag and YM authority-backed narrative/posture is the next submission packaging state. S: clayEligibleDomains=zero; YM authority packaging ready; YM external acceptance pending. L: first residuals are NS-A/A6 theorem acceptance, NS pressure theorem still residual, YM self-adjoint quotient/external acceptance pending, and UCT residual still deferred. P: all Clay and terminal promotion flags remain false. G: no sibling imports are required while concurrent lanes are unstable. F: residual ledger only; no Clay-eligible domain is promoted."

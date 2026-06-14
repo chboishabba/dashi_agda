@@ -99,6 +99,25 @@ def test_composite_records_local_arithmetic_done_as_input_flag() -> None:
     assert normalize("recorded input flag") in normalized
 
 
+def test_composite_records_ym_authority_packaging_as_next_state() -> None:
+    text = read_boundary()
+    normalized = normalize(text)
+
+    for terms in (
+        ("ym", "authority", "backed", "narrative", "ready"),
+        ("ym", "authority", "packaging", "ready"),
+        ("ym", "external", "acceptance", "pending"),
+    ):
+        assert has_bool_evidence(text, terms, True), terms
+
+    for term in (
+        "YM authority-backed narrative/posture is the next submission packaging state",
+        "authority packaging ready",
+        "external acceptance pending",
+    ):
+        assert normalize(term) in normalized, term
+
+
 def test_composite_records_first_residual_labels() -> None:
     text = read_boundary()
     normalized = normalize(text)
@@ -106,16 +125,23 @@ def test_composite_records_first_residual_labels() -> None:
     for term in (
         "NS-A theorem acceptance",
         "NS-A6 theorem acceptance",
+        "NS pressure theorem still residual",
         "YM self-adjoint quotient",
-        "YM H3a authority",
-        "YM external acceptance",
-        "UCT.1 promotion evidence",
-        "UCT.2 promotion evidence",
-        "UCT.3 promotion evidence",
-        "UCT.4 promotion evidence",
+        "YM external acceptance pending",
+        "UCT.1 residual still deferred",
+        "UCT.2 residual still deferred",
+        "UCT.3 residual still deferred",
+        "UCT.4 residual still deferred",
         "firstResidualCountIs9",
     ):
         assert normalize(term) in normalized, term
+
+
+def test_composite_records_ns_pressure_and_uct_as_unpromoted_residuals() -> None:
+    text = read_boundary()
+
+    assert has_bool_evidence(text, ("ns", "pressure", "theorem", "still", "residual"), True)
+    assert has_bool_evidence(text, ("uct", "residual", "still", "deferred"), True)
 
 
 def test_composite_keeps_all_clay_and_terminal_promotion_false() -> None:

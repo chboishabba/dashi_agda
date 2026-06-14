@@ -35,8 +35,15 @@ receiptName : String
 receiptName =
   "YM-A authority-backed submission path boundary"
 
+narrativeDocumentPath : String
+narrativeDocumentPath =
+  "Docs/papers/live/YMAuthorityBackedSubmissionNarrative.md"
+
 submissionPathRecorded : Bool
 submissionPathRecorded = true
+
+narrativeSubmissionPackagingSurfaceRecorded : Bool
+narrativeSubmissionPackagingSurfaceRecorded = true
 
 finiteBTCellSelfAdjointnessDominationInternalTarget : Bool
 finiteBTCellSelfAdjointnessDominationInternalTarget = true
@@ -46,6 +53,9 @@ kingGammaDAuthorityIntakeRecorded = true
 
 balabanH3aRGAuthorityIntakeRecorded : Bool
 balabanH3aRGAuthorityIntakeRecorded = true
+
+balabanH3aAuthorityBacked : Bool
+balabanH3aAuthorityBacked = true
 
 osWightmanAuthorityIntakeRecorded : Bool
 osWightmanAuthorityIntakeRecorded = true
@@ -69,6 +79,10 @@ submissionPathRecordedIsTrue :
   submissionPathRecorded ≡ true
 submissionPathRecordedIsTrue = refl
 
+narrativeSubmissionPackagingSurfaceRecordedIsTrue :
+  narrativeSubmissionPackagingSurfaceRecorded ≡ true
+narrativeSubmissionPackagingSurfaceRecordedIsTrue = refl
+
 finiteBTCellSelfAdjointnessDominationInternalTargetIsTrue :
   finiteBTCellSelfAdjointnessDominationInternalTarget ≡ true
 finiteBTCellSelfAdjointnessDominationInternalTargetIsTrue = refl
@@ -80,6 +94,10 @@ kingGammaDAuthorityIntakeRecordedIsTrue = refl
 balabanH3aRGAuthorityIntakeRecordedIsTrue :
   balabanH3aRGAuthorityIntakeRecorded ≡ true
 balabanH3aRGAuthorityIntakeRecordedIsTrue = refl
+
+balabanH3aAuthorityBackedIsTrue :
+  balabanH3aAuthorityBacked ≡ true
+balabanH3aAuthorityBackedIsTrue = refl
 
 osWightmanAuthorityIntakeRecordedIsTrue :
   osWightmanAuthorityIntakeRecorded ≡ true
@@ -171,11 +189,15 @@ stageBoundary internalFiniteBTTarget =
 stageBoundary kingGammaD =
   "King is recorded as gamma_d authority intake; the authority text does not by itself internalize H3a or promote YM Clay."
 stageBoundary balabanH3aRG =
-  "Balaban H3a/RG is recorded as external authority intake; h3aInternalized remains false in this boundary."
+  "Balaban H3a/RG is recorded as Balaban-authority-backed external authority intake; h3aInternalized remains false in this boundary."
 stageBoundary osWightman =
   "OS/Wightman authority is recorded as a required continuum-axiom authority layer, not as completed external acceptance."
 stageBoundary externalAcceptanceReview =
   "Final external acceptance/review is required before Clay eligibility or terminal promotion can be asserted."
+
+narrativeSubmissionPackagingSurfaceRow : String
+narrativeSubmissionPackagingSurfaceRow =
+  "Docs/papers/live/YMAuthorityBackedSubmissionNarrative.md is the submission packaging surface; it packages the authority-backed narrative only, while H3a remains Balaban-authority-backed and not internalized."
 
 record AuthorityPathRow : Set where
   constructor mkAuthorityPathRow
@@ -331,6 +353,10 @@ record SubmissionPathFlags : Set where
       Bool
     pathRecordedIsTrue :
       pathRecorded ≡ true
+    narrativePackagingSurfaceRecorded :
+      Bool
+    narrativePackagingSurfaceRecordedIsTrue :
+      narrativePackagingSurfaceRecorded ≡ true
     finiteBTInternalTargetRecorded :
       Bool
     finiteBTInternalTargetRecordedIsTrue :
@@ -343,6 +369,10 @@ record SubmissionPathFlags : Set where
       Bool
     balabanH3aRGRecordedIsTrue :
       balabanH3aRGRecorded ≡ true
+    balabanH3aAuthorityBackedFlag :
+      Bool
+    balabanH3aAuthorityBackedFlagIsTrue :
+      balabanH3aAuthorityBackedFlag ≡ true
     osWightmanRecorded :
       Bool
     osWightmanRecordedIsTrue :
@@ -373,12 +403,16 @@ canonicalSubmissionPathFlags =
   mkSubmissionPathFlags
     submissionPathRecorded
     submissionPathRecordedIsTrue
+    narrativeSubmissionPackagingSurfaceRecorded
+    narrativeSubmissionPackagingSurfaceRecordedIsTrue
     finiteBTCellSelfAdjointnessDominationInternalTarget
     finiteBTCellSelfAdjointnessDominationInternalTargetIsTrue
     kingGammaDAuthorityIntakeRecorded
     kingGammaDAuthorityIntakeRecordedIsTrue
     balabanH3aRGAuthorityIntakeRecorded
     balabanH3aRGAuthorityIntakeRecordedIsTrue
+    balabanH3aAuthorityBacked
+    balabanH3aAuthorityBackedIsTrue
     osWightmanAuthorityIntakeRecorded
     osWightmanAuthorityIntakeRecordedIsTrue
     externalAcceptanceReviewRequired
@@ -394,14 +428,18 @@ canonicalSubmissionPathFlags =
 
 receiptBoundaryStatement : String
 receiptBoundaryStatement =
-  "YM-A submission path is recorded as an authority-backed ledger: finite BT self-adjointness/domination is the internal target; King supplies gamma_d authority intake; Balaban H3a/RG and OS/Wightman remain authority layers; final external acceptance/review is required; H3a internalization, Clay eligibility without external authority, YM Clay promotion, and terminal promotion are all false."
+  "YM-A submission path is recorded as an authority-backed ledger: Docs/papers/live/YMAuthorityBackedSubmissionNarrative.md is the submission packaging surface; finite BT self-adjointness/domination is the internal target; King supplies gamma_d authority intake; H3a remains Balaban-authority-backed and not internalized; OS/Wightman remains an authority layer; final external acceptance/review is required; H3a internalization, Clay eligibility without external authority, YM Clay promotion, and terminal promotion are all false."
 
 record YMAAuthorityBackedSubmissionPathBoundary : Set where
   constructor mkYMAAuthorityBackedSubmissionPathBoundary
   field
     receiptPath :
       String
+    narrativePath :
+      String
     name :
+      String
+    narrativePackagingSurface :
       String
     authorityRows :
       List AuthorityPathRow
@@ -419,6 +457,10 @@ record YMAAuthorityBackedSubmissionPathBoundary : Set where
       SubmissionPathFlags
     recorded :
       submissionPathRecorded ≡ true
+    narrativePackagingSurfaceRecorded :
+      narrativeSubmissionPackagingSurfaceRecorded ≡ true
+    h3aBalabanAuthorityBacked :
+      balabanH3aAuthorityBacked ≡ true
     h3aStillExternal :
       h3aInternalized ≡ false
     noClayEligibilityWithoutExternalAuthority :
@@ -437,7 +479,9 @@ canonicalYMAAuthorityBackedSubmissionPathBoundary :
 canonicalYMAAuthorityBackedSubmissionPathBoundary =
   mkYMAAuthorityBackedSubmissionPathBoundary
     modulePath
+    narrativeDocumentPath
     receiptName
+    narrativeSubmissionPackagingSurfaceRow
     canonicalAuthorityPathRows
     refl
     authorityPathRowCountIs5
@@ -446,6 +490,8 @@ canonicalYMAAuthorityBackedSubmissionPathBoundary =
     submissionPathBlockerCountIs5
     canonicalSubmissionPathFlags
     submissionPathRecordedIsTrue
+    narrativeSubmissionPackagingSurfaceRecordedIsTrue
+    balabanH3aAuthorityBackedIsTrue
     h3aInternalizedIsFalse
     clayEligibleWithoutExternalAuthorityIsFalse
     ymClayPromotedIsFalse
@@ -456,6 +502,18 @@ canonicalYMAAuthorityBackedSubmissionPathBoundary =
 canonicalSubmissionPathRecorded :
   SubmissionPathFlags.pathRecorded canonicalSubmissionPathFlags ≡ true
 canonicalSubmissionPathRecorded = refl
+
+canonicalNarrativePackagingSurfaceRecorded :
+  SubmissionPathFlags.narrativePackagingSurfaceRecorded
+    canonicalSubmissionPathFlags
+  ≡ true
+canonicalNarrativePackagingSurfaceRecorded = refl
+
+canonicalBalabanH3aAuthorityBacked :
+  SubmissionPathFlags.balabanH3aAuthorityBackedFlag
+    canonicalSubmissionPathFlags
+  ≡ true
+canonicalBalabanH3aAuthorityBacked = refl
 
 canonicalH3aInternalizedFalse :
   SubmissionPathFlags.h3aInternalizedFlag canonicalSubmissionPathFlags

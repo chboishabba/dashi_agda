@@ -60,6 +60,7 @@ def test_ns_a_stationarity_authority_records_positive_route_flags(
         "A3StationarityDependsOnAbelSummationClosure",
         "AbelTriadicStationarityRouteRecorded",
         "A3AuthorityReductionRouteRecorded",
+        "UniformPressureRateForTypeICKNRescalingsBoundaryRecorded",
     ):
         assert agda_bool_assignment(receipt_text, name, True), name
 
@@ -72,6 +73,28 @@ def test_ns_a_stationarity_authority_records_positive_route_flags(
         "canonicalNSAAuthorityRouteSteps",
         "canonicalA3StationarityDependencies",
         "canonicalAbelTriadicReductionClauses",
+        "canonicalUniformPressureRateForTypeICKNRescalingsBoundary",
+    ):
+        assert term in receipt_text, term
+
+
+def test_ns_a_stationarity_authority_records_uniform_pressure_rate_shape(
+    receipt_text: str,
+) -> None:
+    for term in (
+        "UniformPressureRateForTypeICKNRescalings",
+        "suitable weak solution",
+        "M = L^{3,infty} bound",
+        "u_r",
+        "p_r",
+        "U_infty/P_infty",
+        "Q_R",
+        "||p_r - P_infty||_{L^{3/2}(Q_R)} <= C(M,R) r^{1/6}",
+        "local/harmonic pressure decomposition",
+        "Calderon-Zygmund",
+        "Seregin-ESS rate",
+        "delta_r -> 0 / Abel fixed-point",
+        "missingUniformPressureRateForTypeICKNRescalings",
     ):
         assert term in receipt_text, term
 
@@ -84,6 +107,7 @@ def test_ns_a_stationarity_authority_keeps_promotion_flags_false(
         "harmonicPressureTailRateProved",
         "deltaRToZeroBridgeProved",
         "abelSummationClosureProved",
+        "UniformPressureRateForTypeICKNRescalingsProved",
         "a3StationarityAuthorityReductionProved",
         "nsAStationarityPromoted",
         "nsClayPromoted",

@@ -2174,6 +2174,636 @@ gate5SelectedFiniteProjectionScalarAuditReceipt =
         ∷ []
     }
 
+record SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure : Setω where
+  field
+    depthSystem :
+      Stone.DiscreteTimeHilbertDepthEmbeddingSystem
+
+    depthSystemIsSelectedProjection :
+      depthSystem
+      ≡
+      selectedFiniteQuotientProjectionDiscreteDepthSystem
+
+    forwardStep :
+      (d n : Nat) →
+      U.HilbertSpace.H
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d) →
+      U.HilbertSpace.H
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d)
+
+    forwardStepIsSelectedUstep :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      forwardStep d n q
+      ≡
+      Stone.DiscreteTimeHilbertDepthEmbeddingSystem.Ustep_d
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+        d
+        n
+        q
+
+    reverseStep :
+      (d n : Nat) →
+      U.HilbertSpace.H
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d) →
+      U.HilbertSpace.H
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d)
+
+    reverseStepIsIdentity :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      reverseStep d n q
+      ≡
+      q
+
+    forwardReverseInverse :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      reverseStep d n (forwardStep d n q)
+      ≡
+      q
+
+    reverseForwardInverse :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      forwardStep d n (reverseStep d n q)
+      ≡
+      q
+
+    reverseStepIotaCompatible :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      Stone.DiscreteTimeHilbertDepthEmbeddingSystem.iota_d
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+        d
+        (reverseStep d n q)
+      ≡
+      reverseStep
+        (suc d)
+        n
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.iota_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d
+          q)
+
+    finiteSupportDomain :
+      Stone.FinitelySupportedDepthColimitDomain
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+
+    generatorDomainTarget :
+      Stone.DiscreteGeneratorDomainTarget
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+
+    generatorDomainTargetIsSelectedIdentity :
+      generatorDomainTarget
+      ≡
+      selectedFiniteQuotientProjectionDiscreteGeneratorDomainTarget
+
+    symmetricGeneratorDomainTarget :
+      Stone.DiscreteSymmetricGeneratorDomainTarget
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+
+    symmetricGeneratorDomainTargetIsSelectedIdentity :
+      symmetricGeneratorDomainTarget
+      ≡
+      selectedFiniteQuotientProjectionDiscreteSymmetricGeneratorDomainTarget
+
+    generatorDomainClosedUnderForward :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        generatorDomainTarget
+        d
+        q →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        generatorDomainTarget
+        d
+        (forwardStep d n q)
+
+    generatorDomainClosedUnderReverse :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        generatorDomainTarget
+        d
+        q →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        generatorDomainTarget
+        d
+        (reverseStep d n q)
+
+    generatorCommutesWithForwardOnDomain :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        generatorDomainTarget
+        d
+        q →
+      Stone.DiscreteGeneratorDomainTarget.generator_d
+        generatorDomainTarget
+        d
+        (forwardStep d n q)
+      ≡
+      forwardStep
+        d
+        n
+        (Stone.DiscreteGeneratorDomainTarget.generator_d
+          generatorDomainTarget
+          d
+          q)
+
+    generatorCommutesWithReverseOnDomain :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      Stone.DiscreteGeneratorDomainTarget.generatorDomain_d
+        generatorDomainTarget
+        d
+        q →
+      Stone.DiscreteGeneratorDomainTarget.generator_d
+        generatorDomainTarget
+        d
+        (reverseStep d n q)
+      ≡
+      reverseStep
+        d
+        n
+        (Stone.DiscreteGeneratorDomainTarget.generator_d
+          generatorDomainTarget
+          d
+          q)
+
+    depthGeneratorSelfAdjoint :
+      (d : Nat) →
+      Stone.StoneSelfAdjoint
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d)
+        (Stone.DiscreteGeneratorDomainTarget.generator_d
+          generatorDomainTarget
+          d)
+
+    finiteReversibleTraversalClosureTyped :
+      Bool
+
+    finiteReversibleTraversalClosureTyped-v :
+      finiteReversibleTraversalClosureTyped ≡ true
+
+    finiteSelfAdjointGeneratorDomainClosureTyped :
+      Bool
+
+    finiteSelfAdjointGeneratorDomainClosureTyped-v :
+      finiteSelfAdjointGeneratorDomainClosureTyped ≡ true
+
+    selectedIrreversibleAdvancePromotedToReversible :
+      Bool
+
+    selectedIrreversibleAdvancePromotedToReversible-v :
+      selectedIrreversibleAdvancePromotedToReversible ≡ false
+
+    physicalStonePromotion :
+      Bool
+
+    physicalStonePromotion-v :
+      physicalStonePromotion ≡ false
+
+    closureBoundary :
+      List String
+
+open SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure public
+
+selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure :
+  SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure =
+  record
+    { depthSystem =
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+    ; depthSystemIsSelectedProjection =
+        refl
+    ; forwardStep =
+        λ _ _ q → q
+    ; forwardStepIsSelectedUstep =
+        λ _ _ _ → refl
+    ; reverseStep =
+        λ _ _ q → q
+    ; reverseStepIsIdentity =
+        λ _ _ _ → refl
+    ; forwardReverseInverse =
+        λ _ _ _ → refl
+    ; reverseForwardInverse =
+        λ _ _ _ → refl
+    ; reverseStepIotaCompatible =
+        λ _ _ _ → refl
+    ; finiteSupportDomain =
+        selectedFiniteQuotientProjectionFiniteSupportColimitDomain 0
+    ; generatorDomainTarget =
+        selectedFiniteQuotientProjectionDiscreteGeneratorDomainTarget
+    ; generatorDomainTargetIsSelectedIdentity =
+        refl
+    ; symmetricGeneratorDomainTarget =
+        selectedFiniteQuotientProjectionDiscreteSymmetricGeneratorDomainTarget
+    ; symmetricGeneratorDomainTargetIsSelectedIdentity =
+        refl
+    ; generatorDomainClosedUnderForward =
+        λ _ _ _ _ → tt
+    ; generatorDomainClosedUnderReverse =
+        λ _ _ _ _ → tt
+    ; generatorCommutesWithForwardOnDomain =
+        λ _ _ _ _ → refl
+    ; generatorCommutesWithReverseOnDomain =
+        λ _ _ _ _ → refl
+    ; depthGeneratorSelfAdjoint =
+        λ _ →
+          record
+            { symmetric =
+                λ _ _ → refl
+            }
+    ; finiteReversibleTraversalClosureTyped =
+        true
+    ; finiteReversibleTraversalClosureTyped-v =
+        refl
+    ; finiteSelfAdjointGeneratorDomainClosureTyped =
+        true
+    ; finiteSelfAdjointGeneratorDomainClosureTyped-v =
+        refl
+    ; selectedIrreversibleAdvancePromotedToReversible =
+        false
+    ; selectedIrreversibleAdvancePromotedToReversible-v =
+        refl
+    ; physicalStonePromotion =
+        false
+    ; physicalStonePromotion-v =
+        refl
+    ; closureBoundary =
+        "Selected finite quotient reversible traversal closure is inhabited for the identity depth traversal, with explicit forward/reverse inverse laws at every finite depth"
+        ∷ "The reverse identity step is compatible with the selected quotient identity depth embedding"
+        ∷ "The selected identity generator domain is closed under both forward and reverse finite steps, and the generator commutes with both steps on that domain"
+        ∷ "Each finite-depth selected quotient projection Hilbert space carries a StoneSelfAdjoint witness for the identity generator"
+        ∷ "This is not a promotion of selectedFiniteQuotientAdvanceTraversal: that current advance remains the irreversible start -> next -> held table"
+        ∷ "No physical Stone bundle, physical one-parameter traversal group, or Schrodinger evolution is promoted"
+        ∷ []
+    }
+
+record Gate5HilbertStonePhaseSpaceCarrierStep : Setω where
+  field
+    projectionScalarAuditReceipt :
+      Gate5SelectedFiniteProjectionScalarAuditReceipt
+
+    noncollapsedPrecursor :
+      Stone.NoncollapsedProjectionAlgebraPrecursor
+
+    noncollapsedPrecursorIsTwoPoint :
+      noncollapsedPrecursor
+      ≡
+      Stone.twoPointNoncollapsedProjectionAlgebraPrecursor
+
+    quotientProjectionInnerProductSurfaceReceipt :
+      SelectedQuotientProjectionInnerProductSurface
+
+    phaseSpaceCarrier :
+      Set
+
+    phaseSpaceCarrierIsSelectedQuotient :
+      phaseSpaceCarrier ≡ selectedFiniteQuotientCarrier
+
+    quotientHilbertSpace :
+      U.HilbertSpace
+
+    quotientHilbertSpaceUsesProjectionInnerProduct :
+      quotientHilbertSpace
+      ≡
+      selectedFiniteQuotientProjectionHilbertSpace
+
+    quotientInnerProduct :
+      selectedFiniteQuotientCarrier →
+      selectedFiniteQuotientCarrier →
+      U.ℂ
+
+    quotientInnerProductIsSelectedProjectionInner :
+      (q r : selectedFiniteQuotientCarrier) →
+      quotientInnerProduct q r
+      ≡
+      selectedFiniteQuotientProjectionInner q r
+
+    quotientInnerProductRepresentativeIndependent :
+      {ψ ψ′ χ χ′ :
+        QS.Carrier
+          (SQD.advanceWavePhaseObservationKernelSetoid
+            SQD.shiftWavePhaseSelectedObservationKernelPrimitive)} →
+      QS._≈_
+        (SQD.advanceWavePhaseObservationKernelSetoid
+          SQD.shiftWavePhaseSelectedObservationKernelPrimitive)
+        ψ
+        ψ′ →
+      QS._≈_
+        (SQD.advanceWavePhaseObservationKernelSetoid
+          SQD.shiftWavePhaseSelectedObservationKernelPrimitive)
+        χ
+        χ′ →
+      quotientInnerProduct
+        (QS.quotientClass
+          SQD.shiftWavePhaseSelectedObservationQuotientSurface
+          ψ)
+        (QS.quotientClass
+          SQD.shiftWavePhaseSelectedObservationQuotientSurface
+          χ)
+      ≡
+      quotientInnerProduct
+        (QS.quotientClass
+          SQD.shiftWavePhaseSelectedObservationQuotientSurface
+          ψ′)
+        (QS.quotientClass
+          SQD.shiftWavePhaseSelectedObservationQuotientSurface
+          χ′)
+
+    keptPhaseSpaceState :
+      selectedFiniteQuotientCarrier
+
+    orthogonalPhaseSpaceState :
+      selectedFiniteQuotientCarrier
+
+    keptPhaseSpaceNorm :
+      quotientInnerProduct keptPhaseSpaceState keptPhaseSpaceState
+      ≡
+      U.toℝ 1
+
+    keptOrthogonalSeparation :
+      quotientInnerProduct keptPhaseSpaceState orthogonalPhaseSpaceState
+      ≡
+      U.toℝ 0
+
+    finiteDepthSystem :
+      Stone.DiscreteTimeHilbertDepthEmbeddingSystem
+
+    finiteDepthSystemIsSelectedProjection :
+      finiteDepthSystem
+      ≡
+      selectedFiniteQuotientProjectionDiscreteDepthSystem
+
+    finiteDepthEmbeddingIsometry :
+      (d : Nat) →
+      (q r :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      U.HilbertSpace.⟨_,_⟩
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          (suc d))
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.iota_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d
+          q)
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.iota_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d
+          r)
+      ≡
+      U.HilbertSpace.⟨_,_⟩
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d)
+        q
+        r
+
+    finiteTraversalCompatibility :
+      (d n : Nat) →
+      (q :
+        U.HilbertSpace.H
+          (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.H_d
+            selectedFiniteQuotientProjectionDiscreteDepthSystem
+            d)) →
+      Stone.DiscreteTimeHilbertDepthEmbeddingSystem.iota_d
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+        d
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.Ustep_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d
+          n
+          q)
+      ≡
+      Stone.DiscreteTimeHilbertDepthEmbeddingSystem.Ustep_d
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+        (suc d)
+        n
+        (Stone.DiscreteTimeHilbertDepthEmbeddingSystem.iota_d
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+          d
+          q)
+
+    finiteSupportDomain :
+      Stone.FinitelySupportedDepthColimitDomain
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+
+    finiteSupportDomainIsSelectedDepth0 :
+      finiteSupportDomain
+      ≡
+      selectedFiniteQuotientProjectionFiniteSupportColimitDomain 0
+
+    generatorDomainTarget :
+      Stone.DiscreteGeneratorDomainTarget
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+
+    generatorDomainTargetIsSelectedIdentity :
+      generatorDomainTarget
+      ≡
+      selectedFiniteQuotientProjectionDiscreteGeneratorDomainTarget
+
+    symmetricGeneratorDomainTarget :
+      Stone.DiscreteSymmetricGeneratorDomainTarget
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+
+    symmetricGeneratorDomainTargetIsSelectedIdentity :
+      symmetricGeneratorDomainTarget
+      ≡
+      selectedFiniteQuotientProjectionDiscreteSymmetricGeneratorDomainTarget
+
+    reversibleTraversalSelfAdjointDomainClosureReceipt :
+      SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+
+    finitePhaseSpaceCarrierStepTyped :
+      Bool
+
+    finitePhaseSpaceCarrierStepTyped-v :
+      finitePhaseSpaceCarrierStepTyped ≡ true
+
+    quotientInnerProductStepTyped :
+      Bool
+
+    quotientInnerProductStepTyped-v :
+      quotientInnerProductStepTyped ≡ true
+
+    generatorDomainDataStepTyped :
+      Bool
+
+    generatorDomainDataStepTyped-v :
+      generatorDomainDataStepTyped ≡ true
+
+    physicalPhaseSpaceCarrierPromoted :
+      Bool
+
+    physicalPhaseSpaceCarrierPromoted-v :
+      physicalPhaseSpaceCarrierPromoted ≡ false
+
+    physicalStoneBundlePromoted :
+      Bool
+
+    physicalStoneBundlePromoted-v :
+      physicalStoneBundlePromoted ≡ false
+
+    selfAdjointPhysicalGeneratorPromoted :
+      Bool
+
+    selfAdjointPhysicalGeneratorPromoted-v :
+      selfAdjointPhysicalGeneratorPromoted ≡ false
+
+    nextMissingPrimitiveName :
+      String
+
+    stepBoundary :
+      List String
+
+open Gate5HilbertStonePhaseSpaceCarrierStep public
+
+gate5HilbertStonePhaseSpaceCarrierStep :
+  Gate5HilbertStonePhaseSpaceCarrierStep
+gate5HilbertStonePhaseSpaceCarrierStep =
+  record
+    { projectionScalarAuditReceipt =
+        gate5SelectedFiniteProjectionScalarAuditReceipt
+    ; noncollapsedPrecursor =
+        Stone.twoPointNoncollapsedProjectionAlgebraPrecursor
+    ; noncollapsedPrecursorIsTwoPoint =
+        refl
+    ; quotientProjectionInnerProductSurfaceReceipt =
+        selectedQuotientProjectionInnerProductSurface
+    ; phaseSpaceCarrier =
+        selectedFiniteQuotientCarrier
+    ; phaseSpaceCarrierIsSelectedQuotient =
+        refl
+    ; quotientHilbertSpace =
+        selectedFiniteQuotientProjectionHilbertSpace
+    ; quotientHilbertSpaceUsesProjectionInnerProduct =
+        refl
+    ; quotientInnerProduct =
+        selectedFiniteQuotientProjectionInner
+    ; quotientInnerProductIsSelectedProjectionInner =
+        λ _ _ → refl
+    ; quotientInnerProductRepresentativeIndependent =
+        selectedFiniteQuotientProjectionInnerWellDefined
+    ; keptPhaseSpaceState =
+        SPTI.shiftStartPoint
+    ; orthogonalPhaseSpaceState =
+        SPTI.shiftHeldExitPoint
+    ; keptPhaseSpaceNorm =
+        refl
+    ; keptOrthogonalSeparation =
+        refl
+    ; finiteDepthSystem =
+        selectedFiniteQuotientProjectionDiscreteDepthSystem
+    ; finiteDepthSystemIsSelectedProjection =
+        refl
+    ; finiteDepthEmbeddingIsometry =
+        Stone.DiscreteTimeHilbertDepthEmbeddingSystem.iota_d-isometry
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+    ; finiteTraversalCompatibility =
+        Stone.DiscreteTimeHilbertDepthEmbeddingSystem.iota_d-Ustep-compatible
+          selectedFiniteQuotientProjectionDiscreteDepthSystem
+    ; finiteSupportDomain =
+        selectedFiniteQuotientProjectionFiniteSupportColimitDomain 0
+    ; finiteSupportDomainIsSelectedDepth0 =
+        refl
+    ; generatorDomainTarget =
+        selectedFiniteQuotientProjectionDiscreteGeneratorDomainTarget
+    ; generatorDomainTargetIsSelectedIdentity =
+        refl
+    ; symmetricGeneratorDomainTarget =
+        selectedFiniteQuotientProjectionDiscreteSymmetricGeneratorDomainTarget
+    ; symmetricGeneratorDomainTargetIsSelectedIdentity =
+        refl
+    ; reversibleTraversalSelfAdjointDomainClosureReceipt =
+        selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+    ; finitePhaseSpaceCarrierStepTyped =
+        true
+    ; finitePhaseSpaceCarrierStepTyped-v =
+        refl
+    ; quotientInnerProductStepTyped =
+        true
+    ; quotientInnerProductStepTyped-v =
+        refl
+    ; generatorDomainDataStepTyped =
+        true
+    ; generatorDomainDataStepTyped-v =
+        refl
+    ; physicalPhaseSpaceCarrierPromoted =
+        false
+    ; physicalPhaseSpaceCarrierPromoted-v =
+        refl
+    ; physicalStoneBundlePromoted =
+        false
+    ; physicalStoneBundlePromoted-v =
+        refl
+    ; selfAdjointPhysicalGeneratorPromoted =
+        false
+    ; selfAdjointPhysicalGeneratorPromoted-v =
+        refl
+    ; nextMissingPrimitiveName =
+        "Accepted noncollapsed physical phase-space carrier with reversible traversal and self-adjoint generator-domain closure"
+    ; stepBoundary =
+        "Gate5HilbertStonePhaseSpaceCarrierStep packages the selected finite quotient carrier as the current phase-space carrier step"
+        ∷ "The carrier is tied to the two-point noncollapsed precursor through SelectedQuotientProjectionInnerProductSurface and keeps kept/orthogonal states separated by the selected projection inner product"
+        ∷ "Representative independence is the existing quotientSound-based selectedFiniteQuotientProjectionInnerWellDefined proof"
+        ∷ "The finite-depth system reuses selectedFiniteQuotientProjectionDiscreteDepthSystem: identity iota is isometric and compatible with every identity traversal step"
+        ∷ "The finite-support colimit-domain, generator-domain, and symmetric generator-domain targets are the existing selected finite quotient Stone targets"
+        ∷ "SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure adds explicit inverse laws for the identity finite traversal and a finite-depth StoneSelfAdjoint witness for the selected identity generator"
+        ∷ "This is a typed finite phase-space carrier/domain step only; physicalPhaseSpaceCarrierPromoted, physicalStoneBundlePromoted, and selfAdjointPhysicalGeneratorPromoted are fixed false"
+        ∷ []
+    }
+
 record PhysicalTraversalStoneUpgradeData : Setω where
   field
     ProjectionAlgebra :
@@ -4730,6 +5360,12 @@ record SchrodingerSelfAdjointEvolutionReceipt
     selectedQuotientPostAcceptedHilbertCompletionSocketReceipt :
       SelectedQuotientPostAcceptedHilbertCompletionSocket
 
+    selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosureReceipt :
+      SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+
+    gate5HilbertStonePhaseSpaceCarrierStepReceipt :
+      Gate5HilbertStonePhaseSpaceCarrierStep
+
     selectedQuotientStrongContinuitySocketReceipt :
       SelectedQuotientStrongContinuitySocket
 
@@ -4860,6 +5496,10 @@ schrodingerSelfAdjointEvolutionReceipt quotientReceipt =
         selectedQuotientPostGlobalInnerProductWellDefinednessSocket
     ; selectedQuotientPostAcceptedHilbertCompletionSocketReceipt =
         selectedQuotientPostAcceptedHilbertCompletionSocket
+    ; selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosureReceipt =
+        selectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure
+    ; gate5HilbertStonePhaseSpaceCarrierStepReceipt =
+        gate5HilbertStonePhaseSpaceCarrierStep
     ; selectedQuotientStrongContinuitySocketReceipt =
         selectedQuotientStrongContinuitySocket
     ; formalPhysicalReversibleShadowReceipt =
@@ -4911,6 +5551,8 @@ schrodingerSelfAdjointEvolutionReceipt quotientReceipt =
         ∷ "SelectedQuotientPostInnerProductWellDefinednessSocket marks selected finite second-field progress and makes globalPhysicalQuotientInnerProductWellDefinednessField the next exact theorem blocker on that lane"
         ∷ "SelectedQuotientPostGlobalInnerProductWellDefinednessSocket marks selected finite third-field progress and makes acceptedHilbertCompletionField the next exact theorem blocker on that lane"
         ∷ "SelectedQuotientPostAcceptedHilbertCompletionSocket marks selected finite fourth-field progress while keeping acceptedHilbertCompletionPromoted fixed false"
+        ∷ "Gate5HilbertStonePhaseSpaceCarrierStep packages the selected finite quotient carrier, projection inner product, finite depth embedding/traversal compatibility, finite-support domain, and symmetric generator-domain target as one non-promoting typed phase-space step"
+        ∷ "SelectedFiniteQuotientReversibleTraversalSelfAdjointDomainClosure adds finite-depth reversible identity traversal laws and StoneSelfAdjoint generator-domain closure over the selected quotient projection system, without promoting the selected irreversible finite advance"
         ∷ "SelectedQuotientStrongContinuitySocket now pins the exact missing strong-continuity primitive against the semigroup-only selected finite advance"
         ∷ "DASHI.Quantum.Stone also supplies a one-point finite self-adjoint Hamiltonian/Stone witness with nonzero unique-point inner product"
         ∷ "That one-point witness now lifts to a reusable constant-depth identity tower: H_d is constant, iota_d is identity, U_d is identity, and depth compatibility is reflexive"

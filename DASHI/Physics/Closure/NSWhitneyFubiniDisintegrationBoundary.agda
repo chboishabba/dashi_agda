@@ -293,6 +293,161 @@ canonicalWhitneyFubiniDisintegrationTarget =
     Coupling.canonicalWhitneyCouplingInequalityTarget
 
 ------------------------------------------------------------------------
+-- Finite consumer trace narrowing missingOutputSupportLowerBoundConsumption.
+
+data WhitneyFubiniFiniteConsumerStep : Set where
+  usePhysicalProductMeasureStep :
+    WhitneyFubiniFiniteConsumerStep
+  useWhitneyPacketPartitionStep :
+    WhitneyFubiniFiniteConsumerStep
+  useBoundedOverlapStep :
+    WhitneyFubiniFiniteConsumerStep
+  usePhysicalPacketDisintegrationStep :
+    WhitneyFubiniFiniteConsumerStep
+  useFourierOutputPacketDisintegrationStep :
+    WhitneyFubiniFiniteConsumerStep
+  useExceptionalRoutingAndAbelCompatibilityStep :
+    WhitneyFubiniFiniteConsumerStep
+  consumeOutputSupportLowerBoundStep :
+    WhitneyFubiniFiniteConsumerStep
+
+canonicalWhitneyFubiniFiniteConsumerSteps :
+  List WhitneyFubiniFiniteConsumerStep
+canonicalWhitneyFubiniFiniteConsumerSteps =
+  usePhysicalProductMeasureStep
+  ∷ useWhitneyPacketPartitionStep
+  ∷ useBoundedOverlapStep
+  ∷ usePhysicalPacketDisintegrationStep
+  ∷ useFourierOutputPacketDisintegrationStep
+  ∷ useExceptionalRoutingAndAbelCompatibilityStep
+  ∷ consumeOutputSupportLowerBoundStep
+  ∷ []
+
+whitneyFubiniFiniteConsumerStepCount : Nat
+whitneyFubiniFiniteConsumerStepCount =
+  listLength canonicalWhitneyFubiniFiniteConsumerSteps
+
+whitneyFubiniFiniteConsumerStepCountIs7 :
+  whitneyFubiniFiniteConsumerStepCount ≡ 7
+whitneyFubiniFiniteConsumerStepCountIs7 =
+  refl
+
+record FiniteWhitneyFubiniConsumerLaw : Set where
+  field
+    steps :
+      List WhitneyFubiniFiniteConsumerStep
+    stepCount :
+      whitneyFubiniFiniteConsumerStepCount ≡ 7
+    productMeasure :
+      ProductAngularMeasureCarrier
+    productMeasureIsCanonical :
+      productMeasure ≡ canonicalProductAngularMeasureCarrier
+    packetPartition :
+      WhitneyPacketPartitionOfUnityCarrier
+    packetPartitionIsCanonical :
+      packetPartition ≡ canonicalWhitneyPacketPartitionOfUnityCarrier
+    boundedOverlap :
+      BoundedOverlapSummabilityCarrier
+    boundedOverlapIsCanonical :
+      boundedOverlap ≡ canonicalBoundedOverlapSummabilityCarrier
+    physicalDisintegration :
+      PhysicalPacketDisintegrationCarrier
+    physicalDisintegrationIsCanonical :
+      physicalDisintegration ≡ canonicalPhysicalPacketDisintegrationCarrier
+    frequencyOutputPacket :
+      FrequencyOutputPacketCarrier
+    frequencyOutputPacketIsCanonical :
+      frequencyOutputPacket ≡ canonicalFrequencyOutputPacketCarrier
+    FourierOutputDisintegration :
+      FourierOutputPacketDisintegrationCarrier
+    FourierOutputDisintegrationIsCanonical :
+      FourierOutputDisintegration
+        ≡ canonicalFourierOutputPacketDisintegrationCarrier
+    exceptionalRouting :
+      ExceptionalNullSetRoutingCarrier
+    exceptionalRoutingIsCanonical :
+      exceptionalRouting ≡ canonicalExceptionalNullSetRoutingCarrier
+    AbelCompatibility :
+      AbelAveragingDisintegrationCompatibilityCarrier
+    AbelCompatibilityIsCanonical :
+      AbelCompatibility
+        ≡ canonicalAbelAveragingDisintegrationCompatibilityCarrier
+    lowerBoundConsumer :
+      OutputSupportLowerBoundConsumer
+    lowerBoundConsumerIsCanonical :
+      lowerBoundConsumer ≡ canonicalOutputSupportLowerBoundConsumer
+    consumedTarget :
+      WhitneyFubiniDisintegrationTarget
+    consumedTargetIsCanonical :
+      consumedTarget ≡ canonicalWhitneyFubiniDisintegrationTarget
+    narrowedBlocker :
+      WhitneyFubiniDisintegrationBlocker
+    narrowedBlockerIsOutputSupportConsumer :
+      narrowedBlocker ≡ missingOutputSupportLowerBoundConsumption
+    keepsTheoremClosed :
+      WhitneyFubiniDisintegrationProved ≡ false
+    keepsA4Closed :
+      A4WhitneyCouplingInequalityProved ≡ false
+
+canonicalFiniteWhitneyFubiniConsumerLaw :
+  FiniteWhitneyFubiniConsumerLaw
+canonicalFiniteWhitneyFubiniConsumerLaw =
+  record
+    { steps =
+        canonicalWhitneyFubiniFiniteConsumerSteps
+    ; stepCount =
+        refl
+    ; productMeasure =
+        canonicalProductAngularMeasureCarrier
+    ; productMeasureIsCanonical =
+        refl
+    ; packetPartition =
+        canonicalWhitneyPacketPartitionOfUnityCarrier
+    ; packetPartitionIsCanonical =
+        refl
+    ; boundedOverlap =
+        canonicalBoundedOverlapSummabilityCarrier
+    ; boundedOverlapIsCanonical =
+        refl
+    ; physicalDisintegration =
+        canonicalPhysicalPacketDisintegrationCarrier
+    ; physicalDisintegrationIsCanonical =
+        refl
+    ; frequencyOutputPacket =
+        canonicalFrequencyOutputPacketCarrier
+    ; frequencyOutputPacketIsCanonical =
+        refl
+    ; FourierOutputDisintegration =
+        canonicalFourierOutputPacketDisintegrationCarrier
+    ; FourierOutputDisintegrationIsCanonical =
+        refl
+    ; exceptionalRouting =
+        canonicalExceptionalNullSetRoutingCarrier
+    ; exceptionalRoutingIsCanonical =
+        refl
+    ; AbelCompatibility =
+        canonicalAbelAveragingDisintegrationCompatibilityCarrier
+    ; AbelCompatibilityIsCanonical =
+        refl
+    ; lowerBoundConsumer =
+        canonicalOutputSupportLowerBoundConsumer
+    ; lowerBoundConsumerIsCanonical =
+        refl
+    ; consumedTarget =
+        canonicalWhitneyFubiniDisintegrationTarget
+    ; consumedTargetIsCanonical =
+        refl
+    ; narrowedBlocker =
+        missingOutputSupportLowerBoundConsumption
+    ; narrowedBlockerIsOutputSupportConsumer =
+        refl
+    ; keepsTheoremClosed =
+        refl
+    ; keepsA4Closed =
+        refl
+    }
+
+------------------------------------------------------------------------
 -- Obligations and explicit blockers.
 
 data WhitneyFubiniDisintegrationObligation : Set where
