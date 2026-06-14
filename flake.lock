@@ -1,5 +1,39 @@
 {
   "nodes": {
+    "cubicalSrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778646200,
+        "narHash": "sha256-KoR3cTT06L4a3E4A5QImsCPsHf8COrHxOtH++k2QG90=",
+        "owner": "agda",
+        "repo": "cubical",
+        "rev": "d0b9c7b0e9e4f816422c3447d7983b03274dd829",
+        "type": "github"
+      },
+      "original": {
+        "owner": "agda",
+        "repo": "cubical",
+        "rev": "d0b9c7b0e9e4f816422c3447d7983b03274dd829",
+        "type": "github"
+      }
+    },
+    "dchottSrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1655454889,
+        "narHash": "sha256-TM8F3jaF0wrZP9zeYT4+HQdAW8ftZIZbtcNy7F2WFiA=",
+        "owner": "felixwellen",
+        "repo": "DCHoTT-Agda",
+        "rev": "ca8c755af0b26f8f50c5a60d3b7f9384a26f5d0e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "felixwellen",
+        "repo": "DCHoTT-Agda",
+        "rev": "ca8c755af0b26f8f50c5a60d3b7f9384a26f5d0e",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -54,6 +88,8 @@
     },
     "root": {
       "inputs": {
+        "cubicalSrc": "cubicalSrc",
+        "dchottSrc": "dchottSrc",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
         "zkperf": "zkperf"

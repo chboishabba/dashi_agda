@@ -16,6 +16,10 @@ composition vector -> bounded matter/force proxy carrier -> stability observable
 receipt -> fail-closed Agda guard. This is a simulator scaffold and roadmap,
 not a claim that the repo already derives arbitrary physics, chemistry,
 biology, stellar, or clinical predictions.
+For paper publication sequencing, start with
+`Docs/papers/PublicationRoadmap.md`. It records the current three-paper core
+and satellite order while preserving the non-promotion boundary for Clay,
+unification, and externally reviewed claims.
 The first executable slice is now present as
 `scripts/run_stellar_composition_proxy_diagnostic.py` with the Agda guard
 `DASHI.Unified.StellarCompositionProxyReceipt`; it remains proxy-only and
@@ -5484,6 +5488,10 @@ Current refactor status:
 The repo now carries a local merge-prep Nix surface intended to harden an
 upstream `nix`/`zkperf` merge without overstating what it validates.
 
+- Consumer install/import instructions live in `INSTALL.md`. The intended
+  downstream route is `agda -l dashi-agda ...` after registering
+  `standard-library`, `dchott-agda`, `cubical-0.9`, and `dashi-agda` with
+  Agda.
 - `nix build .#check` is the authoritative Nix check and mirrors the current
   GitHub workflow by typechecking `DASHI/Everything.agda`.
 - `nix build .#merge-smoke` is the recursive merge-prep smoke check and walks
@@ -5495,7 +5503,13 @@ upstream `nix`/`zkperf` merge without overstating what it validates.
 - `agda-record-all` is expected to recurse over that same merge-prep target
   surface rather than only top-level files.
 - `dashi-agda.agda-lib` is now present as the local library surface used by
-  this tooling layer.
+  this tooling layer. It depends on the named local dependency libraries
+  `dchott-agda` and `cubical-0.9` instead of treating those trees only as raw
+  include paths.
+- `dchott-agda.agda-lib` is the repo-local wrapper for the flat
+  `DCHoTT-Agda/` submodule. The Nix flake pins matching `dchottSrc` and
+  `cubicalSrc` source inputs and exposes `.#dchott-agda`, `.#cubical`,
+  `.#dashi-agda`, and `.#agda-with-dashi-deps`.
 - Any tracked DA51 / zkperf JSONL examples should be read as sample witness
   outputs, not as canonical reproducibility fixtures.
 
