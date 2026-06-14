@@ -65,6 +65,12 @@ Required update before submission:
   explicit in the introduction and in the transfer section;
 - move the Mosco / norm-resolvent / no-spectral-pollution interface into a
   theorem-level statement with exact hypotheses;
+- convert the `H3a` Balaban authority socket into an explicit intake chain:
+  block-spin RG, Balaban 1988 Lemma 3 / cluster-expansion activity bound,
+  polymer summability, Casimir suppression on the vacuum-orthogonal sector,
+  trace-norm transfer, and Seiler compatibility;
+- keep Option B, the DASHI-native polymer-bound rederivation, separated as a
+  companion-paper target rather than as a hidden premise of the current draft;
 - cite the generated theorem-variable manifest as a formal supplement, not as a
   substitute for the prose proof;
 - keep the abstract, status box, formal-support appendix, and claim-boundary
@@ -102,6 +108,11 @@ Required update before submission:
 
 - rewrite the A6 section around defect-from-critical coercivity rather than
   negative stretching sign;
+- state the Seregin/ESS intake as an `A3.2` compactness theorem only, with
+  `delta_r = O(r^(1/12))` recorded as the `A3.3` Abel-weighted target rather
+  than a derived theorem;
+- add the route-compatibility boundary separating this paper's tail-flux /
+  Abel-defect route from the independent Sprint164 microlocal `Sigma` route;
 - provide a constant table for the depletion and Gronwall thresholds;
 - separate accepted external PDE inputs from internal DASHI receipts and
   diagnostic harnesses;
@@ -203,19 +214,23 @@ Trigger:
   diluted by publishing consciousness-adjacent or biology-adjacent claims in
   the same first wave.
 
-### Satellite B2: Qualitative Transcript PNF / Observer Residuals
+### Satellite B2: Observer Quotients / Transcript PNF / Phenomenal Non-Recovery
 
 Topic:
 
 - ITIR/SensibLaw-style PNF over qualitative-experience transcripts,
   observer-specific perceptual quotient surfaces, cross-observer projection
   defects, audit-bounded runtime PNF seams, multi-observer quotient fusion,
-  and explicit non-recovery of phenomenal content.
+  avian magnetoreception as the best constrained extra-fibre example, and
+  explicit non-recovery of phenomenal content.
 
 Formal support:
 
 - `DASHI/Interop/QualiaTranscriptPNFSemanticBridge.agda`
 - `DASHI/Biology/ObserverPerceptualManifoldResidual.agda`
+- `DASHI/Biology/AvianMagnetoreceptionExtraFibreBoundary.agda`
+- `DASHI/Reasoning/MultiObserverScienceQuotientQualiaBridge.agda`
+- `DASHI/Reasoning/ObserverQuotientCompleteStatement.agda`
 - `Docs/papers/drafts/Paper8QualiaTranscriptPNFSectionDraft.md`
 
 Trigger:
@@ -224,6 +239,12 @@ Trigger:
   preprints are already public. This lane may be cited as an example of
   fail-closed report-structure handling, but it should not be mixed into the
   first-wave NS/YM submissions.
+
+Publication posture:
+
+- this is the merged home for the former `Qualia / Observation Quotient`
+  satellite. It should be framed as observer quotient reconstruction and
+  phenomenal non-recovery, not as a consciousness solution.
 
 ### Satellite C: GR / Finite Geometry / DCHoTT
 
@@ -259,16 +280,18 @@ Trigger:
 
 - after the Yang-Mills paper's formal status stabilizes.
 
-### Satellite E: Qualia / Observation Quotient
+### Satellite E: Reserved / Merged
 
 Topic:
 
-- observation quotient and overlay-class formalism.
+- reserved. The former `Qualia / Observation Quotient` topic is merged into
+  Satellite B2 so that transcript PNF, observer residuals, avian extra-fibre
+  geometry, and phenomenal non-recovery are governed by one fail-closed paper.
 
 Trigger:
 
-- last. This material may be interesting, but it is high reputational risk if
-  published before the core mathematical papers establish credibility.
+- no independent trigger until a future router splits the merged observer
+  quotient paper for a concrete venue reason.
 
 ## Integration Rule
 
@@ -290,7 +313,7 @@ ask reviewers to first accept Paper 8.
 3. Generate and cite theorem-variable manifests for all core papers.
 4. Update Paper 8 after Papers 1 and 3 stabilize.
 5. Only then select one satellite, with `Quantum / Operator` preferred over
-   `Qualia`.
+   `Observer Quotients / Transcript PNF / Phenomenal Non-Recovery`.
 
 ## Promotion Gates
 

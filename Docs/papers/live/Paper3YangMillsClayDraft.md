@@ -1,6 +1,6 @@
 # Paper 3 Draft: Yang-Mills Mass-Gap Reduction from Finite Carrier to Continuum Transfer
 
-Author: pending final public author list
+Author: Johl Brown
 Date: `2026-06-09`
 Version: `draft 1`
 Status: live analytic manuscript draft; Clay-facing candidate preprint; non-promoting
@@ -67,6 +67,16 @@ operator, transfer-interface, and terminal-guard surfaces. The external
 constructive-QFT intake remains explicit and reviewable; no Clay approval,
 external acceptance, or terminal promotion is asserted.
 
+**Proof scope summary.**
+
+| Manuscript surface | Role | Boundary |
+| --- | --- | --- |
+| finite carrier gap | proves the fixed-lattice operator/gap surface | not a continuum physical mass gap |
+| uniform finite margin | carries domination input into the transfer problem | conditional on the stated domination package |
+| `H3a` transfer | load-bearing continuum intake | cited Balaban/RG authority, not repo-native rederivation |
+| `H3b` and no spectral pollution | vacuum compatibility and gap preservation | depends on RP.4 and the stated norm-resolvent strength |
+| RP/OS reconstruction | Hilbert-space and Wightman bridge | subject to OS/Seiler compatibility and external review |
+
 For the abstract closure grammar that places this reduction inside the wider
 corpus, see Paper 8, *Closure Grammar, Jordan-von Neumann Recovery, and
 Controlled Consumers*. The present paper remains the analytic home of the
@@ -122,6 +132,12 @@ sector carries weight `I_0(beta)`, the first nontrivial sector carries weight
 bound. In this manuscript it is used as an explicit finite-carrier estimate,
 not as a continuum theorem. See `Balaban1988` for the background constructive
 stress-test context.
+
+**Section 3 status.** The displayed `SU(2)` bound is finite-volume and
+fixed-`beta`. It is not asserted to be uniform as `a(beta) -> 0` and
+`beta -> infinity`. The continuum physical mass-gap burden begins only when
+Sections 4-5 supply a uniform finite margin and the `H3a` transfer theorem
+preserves that margin through the scaling limit.
 
 ## 4. Hamiltonian domination and uniform finite spectral margin
 
@@ -267,6 +283,40 @@ block-spin factorization, fluctuation-integral control, and the
 large-field/small-field decomposition that restores polymer summability at the
 physical scales.
 
+The precise theorem-intake chain is the following. Balaban's block-spin
+renormalization group supplies the passage to a scale where the fluctuation
+integral is controlled and the effective action is localized. The
+large-field/small-field decomposition suppresses the complementary region.
+Most importantly for the `H3a` norm, the Balaban 1988 cluster expansion
+(`Balaban1988`, Lemma 3 and equations (2.11)-(2.13), with the activity bound
+recorded there as (2.38)) gives exponentially decaying polymer activities:
+
+```text
+|H(Z)| <= C exp(-c d(Z)).
+```
+
+Consequently the polymer sums for boundary-touching and large-diameter
+polymers are absolutely summable. On the vacuum-orthogonal sector the
+nontrivial representation blocks also carry the heat-kernel Casimir
+suppression
+
+```text
+sum_{lambda != 0} d_lambda^2 exp(-a C_lambda) < infinity,
+```
+
+for the compact groups under consideration. The combination of polymer
+summability and Casimir suppression is the cited input that upgrades strong or
+Mosco-style convergence to the trace-norm transfer conclusion of Theorem 5.2.
+This is an authority-backed theorem import, not a repo-native proof of
+Balaban's multiscale estimates.
+
+The repo-native alternative is explicitly deferred. A companion Option-B
+paper would have to reprove, for the specific DASHI lattice families, the
+Casimir suppression, polymer localization, Kotecky-Preiss activity bound,
+trace-norm consequence, and intermediate-`beta` RG induction. Until that
+separate proof exists, Theorem 5.2 remains authority-backed by the Balaban
+intake above.
+
 The reviewer-facing packet is now organized around the same exact chain. The
 finite self-adjointness and domination layers are internal to this manuscript.
 The remaining cited chain is:
@@ -288,11 +338,23 @@ state `H3a` sharply, but they do not by themselves convert the Balaban intake
 into a repo-native theorem unless the full fluctuation-integral and large-field
 controls are actually imported in the strength required here.
 
+**Seiler compatibility note.** The transfer theorem of this section is used to
+place the limiting theory on the path toward the standard
+Osterwalder-Schrader/Wightman framework built in Section 6. Any comparison to
+Seiler's continuum mass-gap conclusions requires an additional compatibility
+check between the constructed limiting objects and the hypotheses of the
+continuum gauge-theory theorem being cited; it is not automatic from finite
+transfer alone.
+
 ### 5.2 H3b: vacuum projection continuity
 
 Once Section 6 has reconstructed the limiting vacuum `Omega` through RP.4, the
 remaining vacuum-compatibility statement is a standard spectral perturbation
 lemma.
+
+Logical-order note. RP.4 is established in Section 6. Lemma 5.3 is stated here
+to keep the continuum-transfer interface in one place; its proof is downstream
+of the reflection-positive vacuum construction.
 
 > **Lemma 5.3 (`H3b` from `H3a` and RP.4).** Assume Theorem 5.2 and suppose the
 > limiting Euclidean theory reconstructed in Section 6 yields a unique vacuum
@@ -362,17 +424,6 @@ makes the limiting vacuum concrete. Without that reconstructed vacuum vector,
 the continuum-transfer problem lacks a canonical target for the vacuum
 projection, so the no-spectral-pollution statement of Section 5 has no honest
 vacuum-orthogonal sector on which to close.
-
-This section must not pretend that BT-to-Euclidean transfer automatically gives
-Seiler's continuum conclusion for free. The current manuscript therefore keeps
-the following scope note explicit.
-
-**Seiler compatibility note.** The transfer and reflection-positivity steps are
-used here only to place the limiting theory inside the standard
-Osterwalder-Schrader/Wightman framework. Any comparison to Seiler's continuum
-mass-gap conclusions requires an additional compatibility check between the
-constructed limiting objects and the hypotheses of the continuum gauge-theory
-theorem being cited; it is not automatic from finite transfer alone.
 
 ## 7. Final mass-gap assembly and claim boundary
 

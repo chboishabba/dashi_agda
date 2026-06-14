@@ -17,7 +17,11 @@ Status: first-round shared citation surface
 | `LerayHopf` | Leray-Hopf weak-solution and existence theory | Use for the foundational existence and energy-inequality surface assumed in Paper 1. | Paper 1 |
 | `BKM` | Beale-Kato-Majda continuation criterion | Use for the continuation/contradiction step at `A9` in Paper 1. | Paper 1 |
 | `CKN` | Caffarelli-Kohn-Nirenberg epsilon-regularity theory | Use for the local regularity closure invoked at `A9` in Paper 1. | Paper 1 |
-| `Balaban1988` | T. Balaban, 1988 constructive lattice gauge theory context | Use for Balaban-style domination, polymer, and continuum-stress background in Paper 3; do not treat it as a proof that the present transfer theorem is discharged. | Paper 3 |
+| `LeiRenTian2025` | Z. Lei, X. Ren, and G. Tian, 2025 | Use only as the candidate geometric obstruction route behind `A4`; the manuscript consumes a stronger Type-I-uniform physical-to-Fourier richness transfer than this citation alone supplies. | Paper 1 |
+| `Seregin2012` | G. Seregin, 2012 Type-I / critical-space Navier-Stokes compactness context | Use for the `A3.2` subsequential ancient-solution compactness intake only; the Abel-weighted `delta_r = O(r^(1/12))` rate remains a target unless separately proved. | Paper 1 |
+| `ESS2003` | L. Escauriaza, G. Seregin, and V. Sverak, 2003 endpoint regularity context | Use as background for the Seregin/ESS compactness and endpoint-regularity intake; do not cite it as deriving the Abel-stationarity rate. | Paper 1 |
+| `Balaban1987` | T. Balaban, 1987 block-spin constructive lattice gauge theory context | Use for the block-spin RG/effective-action generation part of the `H3a` authority intake. | Paper 3 |
+| `Balaban1988` | T. Balaban, 1988 constructive lattice gauge theory context | Use specifically for the Lemma 3 / cluster-expansion activity-bound intake that supplies polymer summability for `H3a`; do not treat DASHI as having reproved the full multiscale package repo-natively. | Paper 3 |
 
 ## Usage rules
 

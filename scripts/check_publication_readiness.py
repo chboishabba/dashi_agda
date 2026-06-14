@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from dataclasses import dataclass
@@ -64,6 +65,101 @@ FORBIDDEN_CLAIM_PHRASES = (
     "clay approved",
     "clay-accepted",
     "clay accepted",
+)
+
+PAPER_UPGRADE_OBLIGATION_SOURCES = {
+    "paper1-ns-upgrade-obligations": (
+        Path("Docs/papers/live/Paper1NavierStokesClayDraft.md"),
+    ),
+    "paper3-ym-upgrade-obligations": (
+        Path("Docs/papers/live/Paper3YangMillsClayDraft.md"),
+        Path("Docs/support/live/PaperCommonCitationLedger.md"),
+        Path("scripts/render_core_paper_pdfs.py"),
+    ),
+}
+
+PAPER_UPGRADE_OBLIGATION_GROUPS = {
+    "paper1-ns-upgrade-obligations": (
+        ("seregin/ess-intake", ("seregin/ess", "ess/seregin", "seregin-rate")),
+        (
+            "ess-intake",
+            ("seregin/ess intake", "ess/seregin intake", "quantitative seregin/ess rate intake"),
+        ),
+        ("target-not-derived-r-1-12", ("r^(1/12)", "target", "not promoted")),
+        ("route-compatibility", ("route", "compatible")),
+    ),
+    "paper3-ym-upgrade-obligations": (
+        ("balaban-1988-lemma-3", ("balaban 1988 lemma 3",)),
+        ("activity-bound", ("activity bound",)),
+        ("polymer-summability", ("polymer summability",)),
+        ("trace-norm", ("trace norm", "trace-norm")),
+        ("option-b-deferred", ("option b deferred",)),
+        ("seiler-compatibility", ("seiler compatibility", "seiler-compatibility")),
+    ),
+}
+
+CLAY_PUBLICATION_GOVERNANCE_ROWS = (
+    {
+        "gate_id": "ARXIV_JOURNAL_READINESS_NOT_CLAY_PRIZE_SUBMISSION",
+        "boundary": "arXiv/journal submission readiness is not Clay prize submission",
+        "governance_owner": "external",
+        "internal_readiness_promotes_clay": False,
+        "clay_prize_submission_claim": False,
+        "fail_closed": True,
+    },
+    {
+        "gate_id": "TWO_YEAR_COMMUNITY_ACCEPTANCE_EXTERNAL",
+        "boundary": "two-year post-publication/community acceptance remains external governance",
+        "governance_owner": "external",
+        "internal_readiness_promotes_clay": False,
+        "clay_prize_submission_claim": False,
+        "fail_closed": True,
+    },
+    {
+        "gate_id": "NO_DIRECT_CMI_MANUSCRIPT_SUBMISSION_CLAIM",
+        "boundary": "no direct CMI manuscript submission claim is promoted",
+        "governance_owner": "external",
+        "internal_readiness_promotes_clay": False,
+        "clay_prize_submission_claim": False,
+        "fail_closed": True,
+    },
+)
+
+FORBIDDEN_CLAY_PUBLICATION_PATTERNS = (
+    (
+        "arxiv-or-journal-as-clay-prize-submission",
+        re.compile(
+            r"\b(?:arxiv|journal|referee|publication)[^\n.]{0,100}"
+            r"\b(?:is|as|equals|constitutes|counts\s+as)[^\n.]{0,40}"
+            r"\b(?:clay|cmi)[^\n.]{0,80}\b(?:prize\s+)?submission\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "direct-cmi-manuscript-submission",
+        re.compile(
+            r"\bsubmit(?:ted|s|ting)?[^\n.]{0,80}\b(?:manuscript|paper|draft)[^\n.]{0,80}"
+            r"\b(?:directly\s+)?(?:to|with)\s+(?:cmi|clay\s+mathematics\s+institute)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "cmi-acceptance-or-approval-claim",
+        re.compile(
+            r"\b(?:cmi|clay\s+mathematics\s+institute)[^\n.]{0,100}"
+            r"\b(?:accepted|approved|validated|certified|received)[^\n.]{0,80}"
+            r"\b(?:manuscript|paper|draft|submission|claim)\b",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "internal-community-acceptance-claim",
+        re.compile(
+            r"\b(?:two[- ]year|2[- ]year|community\s+acceptance)[^\n.]{0,100}"
+            r"\b(?:satisfied|discharged|completed|proved|internal|repository-local)\b",
+            re.IGNORECASE,
+        ),
+    ),
 )
 
 
@@ -203,6 +299,84 @@ def check_claim_boundaries(repo_root: Path) -> list[CheckResult]:
     return [CheckResult("claim-boundary-forbidden-phrases", not hits, "; ".join(hits))]
 
 
+def forbidden_clay_publication_hits(repo_root: Path, paths: list[Path]) -> list[str]:
+    hits: list[str] = []
+    for path in paths:
+        full = repo_root / path
+        if not full.exists():
+            continue
+        text = full.read_text(encoding="utf-8", errors="replace")
+        for name, pattern in FORBIDDEN_CLAY_PUBLICATION_PATTERNS:
+            for match in pattern.finditer(text):
+                line = text.count("\n", 0, match.start()) + 1
+                hits.append(f"{path.as_posix()}:{line}:{name}")
+    return hits
+
+
+def check_clay_publication_governance(repo_root: Path) -> list[CheckResult]:
+    rows = list(CLAY_PUBLICATION_GOVERNANCE_ROWS)
+    gate_ids = {str(row.get("gate_id", "")) for row in rows}
+    required_gate_ids = {
+        "ARXIV_JOURNAL_READINESS_NOT_CLAY_PRIZE_SUBMISSION",
+        "TWO_YEAR_COMMUNITY_ACCEPTANCE_EXTERNAL",
+        "NO_DIRECT_CMI_MANUSCRIPT_SUBMISSION_CLAIM",
+    }
+    bad_rows = [
+        str(row.get("gate_id", "<unknown>"))
+        for row in rows
+        if (
+            row.get("governance_owner") != "external"
+            or row.get("internal_readiness_promotes_clay") is not False
+            or row.get("clay_prize_submission_claim") is not False
+            or row.get("fail_closed") is not True
+        )
+    ]
+    scan_paths = [
+        *LIVE_PAPER_FILES,
+        Path("Docs/papers/PublicationRoadmap.md"),
+        Path("Docs/support/live/SupportCompendium.md"),
+    ]
+    forbidden_hits = forbidden_clay_publication_hits(repo_root, scan_paths)
+    return [
+        CheckResult(
+            "clay-publication-governance-rows-present",
+            required_gate_ids <= gate_ids,
+            ", ".join(sorted(gate_ids)),
+        ),
+        CheckResult("clay-publication-governance-fail-closed", not bad_rows, "; ".join(bad_rows)),
+        CheckResult(
+            "clay-publication-forbidden-promotion-claims",
+            not forbidden_hits,
+            "; ".join(forbidden_hits),
+        ),
+    ]
+
+
+def normalize_obligation_text(text: str) -> str:
+    return " ".join(text.lower().replace("`", "").replace("_", " ").split())
+
+
+def check_paper_upgrade_obligations(repo_root: Path) -> list[CheckResult]:
+    results: list[CheckResult] = []
+    for name, sources in PAPER_UPGRADE_OBLIGATION_SOURCES.items():
+        texts = []
+        missing_sources = []
+        for source in sources:
+            full = repo_root / source
+            if not full.exists():
+                missing_sources.append(source.as_posix())
+                continue
+            texts.append(full.read_text(encoding="utf-8"))
+        corpus = normalize_obligation_text("\n".join(texts))
+        missing_groups = []
+        for group_name, phrases in PAPER_UPGRADE_OBLIGATION_GROUPS[name]:
+            if not any(phrase in corpus for phrase in phrases):
+                missing_groups.append(group_name)
+        detail_parts = [*missing_sources, *missing_groups]
+        results.append(CheckResult(name, not detail_parts, "; ".join(detail_parts)))
+    return results
+
+
 def agda_command(target: Path) -> list[str]:
     stdlib_path = Path("/tmp/dashi-agda-stdlib")
     if not stdlib_path.exists():
@@ -262,6 +436,8 @@ def main(argv: list[str] | None = None) -> int:
         *check_manifest_payload(payload, repo_root),
         *check_theorem_interfaces(repo_root),
         *check_claim_boundaries(repo_root),
+        *check_clay_publication_governance(repo_root),
+        *check_paper_upgrade_obligations(repo_root),
     ]
     if args.run_agda:
         results.extend(run_agda_targets(repo_root, THEOREM_INTERFACE_TARGETS))

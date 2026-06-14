@@ -14,6 +14,7 @@ TARGET_FILES = (
     "DASHI/Physics/Closure/PerelmanRicciFlowAndGeometrizationBoundaryReceipt.agda",
     "DASHI/Physics/Closure/BTBallVolumeArithmetic.agda",
     "DASHI/Physics/Closure/BTBallVolumeEntropyBoundary.agda",
+    "DASHI/Physics/Closure/BTBoundaryCrossSectionRows.agda",
     "DASHI/Physics/Closure/BTCanonicalNeckAnalogue.agda",
     "DASHI/Physics/Closure/BTGaussianDiagonalInputRows.agda",
     "DASHI/Physics/Closure/BTGaussianReducedVolumeBoundary.agda",
@@ -28,9 +29,13 @@ TARGET_FILES = (
     "DASHI/Physics/Closure/JSJBlockerNormalization.agda",
     "DASHI/Physics/Closure/SurgeryCanonicalNeighborhoodObligationLadder.agda",
     "DASHI/Physics/Closure/SurgeryCanonicalNeighborhoodObstruction.agda",
+    "DASHI/Physics/Closure/SurgeryObligationBlockerNormalization.agda",
+    "DASHI/Physics/Closure/PerelmanBTAnalogueDashboard.agda",
     "DASHI/Physics/Closure/PerelmanBTGeometrizationAnalogueSummary.agda",
+    "DASHI/Physics/Closure/PerelmanBTLedgerExactCounts.agda",
     "DASHI/Physics/Closure/PerelmanBTNoPromotionAuditSurface.agda",
     "DASHI/Physics/Closure/PerelmanBTNoPromotionLaw.agda",
+    "DASHI/Physics/Closure/PerelmanBTRoundFullImportSmoke.agda",
     "DASHI/Physics/Probes/PerelmanBTAnalogueImportProbe.agda",
     "DASHI/Physics/Probes/PerelmanBTAnaloguePromotionProbe.agda",
 )
@@ -56,6 +61,11 @@ REQUIRED_TOKENS = (
     "JSJBlockerNormalizationLedger",
     "PerelmanBTNoPromotionAuditSurface",
     "PerelmanBTAnalogueImportProbe",
+    "BTBoundaryCrossSectionRow",
+    "SurgeryObligationBlockerRow",
+    "PerelmanBTLedgerExactCounts",
+    "PerelmanBTAnalogueDashboard",
+    "PerelmanBTRoundFullImportSmoke",
 )
 
 

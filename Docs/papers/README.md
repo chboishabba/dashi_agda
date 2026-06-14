@@ -78,5 +78,28 @@ candidate proof packages that may be internally Agda-receipted/typechecked, but
 remain pending peer review, external authority checks, and external acceptance.
 They do not assert that any Clay problem has been solved.
 
+## TeX/PDF Rendering
+
+The current live core drafts render through:
+
+```text
+python scripts/render_core_paper_pdfs.py
+```
+
+The command reads `live/Paper1NavierStokesClayDraft.md`,
+`live/Paper3YangMillsClayDraft.md`, and `live/Paper8UnificationDraft.md`, then
+emits `.tex`, `.bib`, and `.pdf` artifacts under `build/papers/`. It uses
+`latexmk -xelatex` and the shared citation ledger as the bibliography source.
+
+## Submission Metadata Draft
+
+Suggested arXiv primary classifications:
+
+| Paper | Primary class | Secondary classes |
+| --- | --- | --- |
+| Paper 1, Navier-Stokes | `math.AP` | `35Q30`, `math-ph` |
+| Paper 3, Yang-Mills | `math-ph` | `81T13`, `81T08`, `math.SP` |
+| Paper 8, closure architecture | `math.LO` or `cs.LO` | `math.CT`, `math-ph` |
+
 Everything else under `papers/` is support, draft, or legacy material unless a
 later router explicitly promotes it.
