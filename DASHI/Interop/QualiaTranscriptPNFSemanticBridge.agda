@@ -294,6 +294,330 @@ noPhenomenalContentRecoveryPNFReceipt =
     noPhenomenalContentRecoveryPNFAtom
 
 ------------------------------------------------------------------------
+-- Lemmas 3+4: runtime parser/reducer profile and receipt quotient.
+--
+-- This layer records what the runtime script may hand to Agda.  The script is
+-- an audit artifact only: it is not typechecked here, cannot recover
+-- phenomenal content, and cannot promote an empty runtime parse because the
+-- payload carries an explicit nonempty receipt lower-bound.
+
+record ParserProfile : Set where
+  constructor parserProfile
+  field
+    parserProfileId :
+      String
+
+    parserProfileScope :
+      String
+
+    evidenceOnly :
+      Bool
+
+    evidenceOnlyIsTrue :
+      evidenceOnly ≡ true
+
+    runtimePhenomenalRecovery :
+      Bool
+
+    runtimePhenomenalRecoveryIsFalse :
+      runtimePhenomenalRecovery ≡ false
+
+record ReducerProfile : Set where
+  constructor reducerProfile
+  field
+    reducerProfileId :
+      String
+
+    reducerProfileScope :
+      String
+
+    evidenceOnly :
+      Bool
+
+    evidenceOnlyIsTrue :
+      evidenceOnly ≡ true
+
+    runtimePhenomenalRecovery :
+      Bool
+
+    runtimePhenomenalRecoveryIsFalse :
+      runtimePhenomenalRecovery ≡ false
+
+canonicalParserProfile : ParserProfile
+canonicalParserProfile =
+  parserProfile
+    "qualia-transcript-runtime-parser"
+    "audit-script transcript span extraction only"
+    true
+    refl
+    false
+    refl
+
+canonicalReducerProfile : ReducerProfile
+canonicalReducerProfile =
+  reducerProfile
+    "qualia-transcript-runtime-reducer"
+    "audit-script evidence-to-PNF reduction only"
+    true
+    refl
+    false
+    refl
+
+data RuntimeVerificationMethod : Set where
+  auditScriptOnly : RuntimeVerificationMethod
+
+record NonEmptyRuntimeReceipts : Set where
+  constructor nonEmptyRuntimeReceipts
+  field
+    headReceipt :
+      Residual.PNFEmissionReceipt
+
+    tailReceipts :
+      List Residual.PNFEmissionReceipt
+
+canonicalRuntimeReceiptLowerBound : NonEmptyRuntimeReceipts
+canonicalRuntimeReceiptLowerBound =
+  nonEmptyRuntimeReceipts
+    transcriptDiscussionPNFReceipt
+    ( colorBreathingPNFReceipt
+    ∷ timeNonlinearityPNFReceipt
+    ∷ egoDissolutionPNFReceipt
+    ∷ ineffabilityPNFReceipt
+    ∷ noSemanticTruthAuthorityPNFReceipt
+    ∷ noSpeakerExperienceVerificationPNFReceipt
+    ∷ noPhenomenalContentRecoveryPNFReceipt
+    ∷ [])
+
+canonicalRuntimeReceiptList : List Residual.PNFEmissionReceipt
+canonicalRuntimeReceiptList =
+  transcriptDiscussionPNFReceipt
+  ∷ colorBreathingPNFReceipt
+  ∷ timeNonlinearityPNFReceipt
+  ∷ egoDissolutionPNFReceipt
+  ∷ ineffabilityPNFReceipt
+  ∷ noSemanticTruthAuthorityPNFReceipt
+  ∷ noSpeakerExperienceVerificationPNFReceipt
+  ∷ noPhenomenalContentRecoveryPNFReceipt
+  ∷ []
+
+record RuntimeQualiaTranscriptPNFPayload
+    (surface : QualiaTranscriptSurface) : Set where
+  field
+    runtimeSurface :
+      QualiaTranscriptSurface
+
+    runtimeSurfaceIsInput :
+      runtimeSurface ≡ surface
+
+    runtimeParserProfile :
+      ParserProfile
+
+    runtimeParserProfileIsCanonical :
+      runtimeParserProfile ≡ canonicalParserProfile
+
+    runtimeReducerProfile :
+      ReducerProfile
+
+    runtimeReducerProfileIsCanonical :
+      runtimeReducerProfile ≡ canonicalReducerProfile
+
+    runtimeVerification :
+      RuntimeVerificationMethod
+
+    runtimeVerificationIsAuditScriptOnly :
+      runtimeVerification ≡ auditScriptOnly
+
+    runtimeReceiptLowerBound :
+      NonEmptyRuntimeReceipts
+
+    runtimeReceiptLowerBoundIsCanonical :
+      runtimeReceiptLowerBound ≡ canonicalRuntimeReceiptLowerBound
+
+    runtimeReceipts :
+      List Residual.PNFEmissionReceipt
+
+    runtimeReceiptsAreCanonical :
+      runtimeReceipts ≡ canonicalRuntimeReceiptList
+
+    runtimeAtoms :
+      List Residual.PredicatePNF
+
+    runtimeAtomsAreCanonical :
+      runtimeAtoms ≡ canonicalQualiaTranscriptPNFAtoms
+
+    evidenceOnly :
+      Bool
+
+    evidenceOnlyIsTrue :
+      evidenceOnly ≡ true
+
+    runtimePhenomenalRecovery :
+      Bool
+
+    runtimePhenomenalRecoveryIsFalse :
+      runtimePhenomenalRecovery ≡ false
+
+    emptyRuntimeParsePromoted :
+      Bool
+
+    emptyRuntimeParsePromotedIsFalse :
+      emptyRuntimeParsePromoted ≡ false
+
+    runtimeTypechecked :
+      Bool
+
+    runtimeTypecheckedIsFalse :
+      runtimeTypechecked ≡ false
+
+runtimeQualiaTranscriptPNFPayload :
+  (surface : QualiaTranscriptSurface) →
+  RuntimeQualiaTranscriptPNFPayload surface
+runtimeQualiaTranscriptPNFPayload surface =
+  record
+    { runtimeSurface =
+        surface
+    ; runtimeSurfaceIsInput =
+        refl
+    ; runtimeParserProfile =
+        canonicalParserProfile
+    ; runtimeParserProfileIsCanonical =
+        refl
+    ; runtimeReducerProfile =
+        canonicalReducerProfile
+    ; runtimeReducerProfileIsCanonical =
+        refl
+    ; runtimeVerification =
+        auditScriptOnly
+    ; runtimeVerificationIsAuditScriptOnly =
+        refl
+    ; runtimeReceiptLowerBound =
+        canonicalRuntimeReceiptLowerBound
+    ; runtimeReceiptLowerBoundIsCanonical =
+        refl
+    ; runtimeReceipts =
+        canonicalRuntimeReceiptList
+    ; runtimeReceiptsAreCanonical =
+        refl
+    ; runtimeAtoms =
+        canonicalQualiaTranscriptPNFAtoms
+    ; runtimeAtomsAreCanonical =
+        refl
+    ; evidenceOnly =
+        true
+    ; evidenceOnlyIsTrue =
+        refl
+    ; runtimePhenomenalRecovery =
+        false
+    ; runtimePhenomenalRecoveryIsFalse =
+        refl
+    ; emptyRuntimeParsePromoted =
+        false
+    ; emptyRuntimeParsePromotedIsFalse =
+        refl
+    ; runtimeTypechecked =
+        false
+    ; runtimeTypecheckedIsFalse =
+        refl
+    }
+
+record RuntimeReceiptReportQuotient
+    (surface : QualiaTranscriptSurface) : Set where
+  field
+    runtimePayload :
+      RuntimeQualiaTranscriptPNFPayload surface
+
+    runtimePayloadIsCanonical :
+      runtimePayload ≡ runtimeQualiaTranscriptPNFPayload surface
+
+    reportQuotient :
+      TranscriptReportQuotient surface
+
+    reportQuotientIsCanonical :
+      reportQuotient ≡ transcriptReportQuotient surface
+
+    runtimeReceiptLowerBound :
+      NonEmptyRuntimeReceipts
+
+    runtimeReceiptLowerBoundIsCanonical :
+      runtimeReceiptLowerBound ≡ canonicalRuntimeReceiptLowerBound
+
+    runtimeVerification :
+      RuntimeVerificationMethod
+
+    runtimeVerificationIsAuditScriptOnly :
+      runtimeVerification ≡ auditScriptOnly
+
+    evidenceOnly :
+      Bool
+
+    evidenceOnlyIsTrue :
+      evidenceOnly ≡ true
+
+    runtimePhenomenalRecovery :
+      Bool
+
+    runtimePhenomenalRecoveryIsFalse :
+      runtimePhenomenalRecovery ≡ false
+
+    runtimeReceiptReportPromoted :
+      Bool
+
+    runtimeReceiptReportPromotedIsFalse :
+      runtimeReceiptReportPromoted ≡ false
+
+    quotientReading :
+      String
+
+runtimeReceiptReportQuotient :
+  (surface : QualiaTranscriptSurface) →
+  RuntimeReceiptReportQuotient surface
+runtimeReceiptReportQuotient surface =
+  record
+    { runtimePayload =
+        runtimeQualiaTranscriptPNFPayload surface
+    ; runtimePayloadIsCanonical =
+        refl
+    ; reportQuotient =
+        transcriptReportQuotient surface
+    ; reportQuotientIsCanonical =
+        refl
+    ; runtimeReceiptLowerBound =
+        canonicalRuntimeReceiptLowerBound
+    ; runtimeReceiptLowerBoundIsCanonical =
+        refl
+    ; runtimeVerification =
+        auditScriptOnly
+    ; runtimeVerificationIsAuditScriptOnly =
+        refl
+    ; evidenceOnly =
+        true
+    ; evidenceOnlyIsTrue =
+        refl
+    ; runtimePhenomenalRecovery =
+        false
+    ; runtimePhenomenalRecoveryIsFalse =
+        refl
+    ; runtimeReceiptReportPromoted =
+        false
+    ; runtimeReceiptReportPromotedIsFalse =
+        refl
+    ; quotientReading =
+        "Runtime receipts quotient public transcript-report evidence only; audit script output is not typechecked, empty parses cannot promote, and phenomenal recovery remains false."
+    }
+
+lemma3TypedRuntimeQualiaTranscriptPNFPayload :
+  (surface : QualiaTranscriptSurface) →
+  RuntimeQualiaTranscriptPNFPayload surface
+lemma3TypedRuntimeQualiaTranscriptPNFPayload =
+  runtimeQualiaTranscriptPNFPayload
+
+lemma4RuntimeReceiptReportQuotient :
+  (surface : QualiaTranscriptSurface) →
+  RuntimeReceiptReportQuotient surface
+lemma4RuntimeReceiptReportQuotient =
+  runtimeReceiptReportQuotient
+
+------------------------------------------------------------------------
 -- Evidence wrapper/provenance preservation.
 
 record EvidenceWrappedTranscriptPNFAtom : Set where

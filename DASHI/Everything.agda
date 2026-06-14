@@ -85,6 +85,7 @@ import DASHI.Biology.AnimalexicAnimalUtteranceSurface
 import DASHI.Biology.AvianCompassSurface
 import DASHI.Biology.AvianCompassExamples
 import DASHI.Biology.AvianHardProblemResidual
+import DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary
 import DASHI.Biology.AvianRFOverlayManipulationReceipt
 import DASHI.Biology.AvianVisualOverlayQuotient
 import DASHI.Biology.BioAnimalexicStackDischarge
@@ -148,6 +149,7 @@ import DASHI.Reasoning.FallacyCatalogue
 import DASHI.Reasoning.FallacyExamples
 import DASHI.Reasoning.MetaphorAlignmentMisunderstanding
 import DASHI.Reasoning.MultiObserverScienceQuotient
+import DASHI.Reasoning.MultiObserverScienceQuotientQualiaBridge
 import DASHI.Reasoning.OperatorInvariantEquivalence
 import DASHI.Process.DASHIMarkovCompatibility
 import DASHI.Energy.ClosestPoint

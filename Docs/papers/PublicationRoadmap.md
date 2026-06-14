@@ -67,6 +67,8 @@ Required update before submission:
   theorem-level statement with exact hypotheses;
 - cite the generated theorem-variable manifest as a formal supplement, not as a
   substitute for the prose proof;
+- keep the abstract, status box, formal-support appendix, and claim-boundary
+  table aligned on candidate preprint language;
 - keep terminal Clay promotion false until external governance changes.
 
 Submission target state:
@@ -103,6 +105,8 @@ Required update before submission:
 - provide a constant table for the depletion and Gronwall thresholds;
 - separate accepted external PDE inputs from internal DASHI receipts and
   diagnostic harnesses;
+- keep the formal-support appendix explicit that theorem-interface receipts do
+  not promote `A1/A3` or `A4`;
 - keep the formal status box conservative: candidate proof package, not Clay
   resolution.
 
@@ -140,8 +144,8 @@ Reason for third priority:
 
 Required update before submission:
 
-- add the three-layer formal support story: receipt layer, theorem interface
-  layer, Cubical/DCHoTT adapter layer;
+- add the four-layer formal support story: receipt layer, theorem-interface
+  layer, Cubical/DCHoTT adapter layer, controlled consumer layer;
 - add a generated Paper 8 theorem-variable manifest once its interface is
   stable;
 - describe wider lanes only as scoped consumers, examples, or satellites;
@@ -189,7 +193,9 @@ Trigger:
 Topic:
 
 - finite quantum and operator surfaces, radical-pair or avian compass
-  observation-quotient material, and bounded physical interpretation.
+  observation-quotient material, species+state quotient completion, bounded
+  physical interpretation, and avian magnetoreception treated as perceptual
+  quotient geometry rather than qualia geometry.
 
 Trigger:
 
@@ -203,7 +209,8 @@ Topic:
 
 - ITIR/SensibLaw-style PNF over qualitative-experience transcripts,
   observer-specific perceptual quotient surfaces, cross-observer projection
-  defects, and explicit non-recovery of phenomenal content.
+  defects, audit-bounded runtime PNF seams, multi-observer quotient fusion,
+  and explicit non-recovery of phenomenal content.
 
 Formal support:
 
