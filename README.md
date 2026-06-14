@@ -60,6 +60,38 @@ exact Hilbert/Operator/CCR/CAR/OS/Wightman field surfaces, GR/PDE records the
 Koszul/MTW/contracted-Bianchi/Einstein/SI-unit/weak-form payloads, and the
 finite discrete-YM spectral example records its exact boolean pattern. The
 continuum authority slots remain false or external.
+The finite Base369 algebra pass adds an internal scalar/ring layer:
+`DASHI.Foundations.Base369RingShape`,
+`DASHI.Foundations.Base369Nat`,
+`DASHI.Foundations.Base369TriTruthField`,
+`DASHI.Foundations.Base369HexTruthRing`,
+`DASHI.Foundations.Base369NonaryTruthRing`,
+`DASHI.Foundations.Base369FiniteRingLaws`, and
+`DASHI.Foundations.Base369FiniteRingRegression`, with
+`DASHI.Foundations.Base369NumeralOntologyBoundary` as the role-separation
+receipt. `Base369Nat` is a DASHI-namespaced builtin-only compatibility surface
+for the tiny `%`/`NonZero` support that `Base369` needs; the repo does not
+vendor or shadow `Data.Nat.Base`. `TriTruth` is recorded as the GF(3) field
+carrier with additive and multiplicative inverse receipts; `HexTruth` and
+`NonaryTruth` are recorded as rings with typed zero-divisor witnesses, not
+fields. The ontology boundary separates algebraic carriers, 15-prime
+coordinate boundaries, and UFT traversal addresses, and marks narrative
+readings as non-promoting. This gives the linear-analysis scalar-law socket a
+local finite algebra inhabitant without promoting real/complex completeness,
+spectral theorem authority, physical calibration, or Clay claims.
+The discrete-to-transcendental bridge is now recorded as a bounded formal
+stack: `DASHI.Foundations.SurrealCompactification`,
+`DASHI.Metric.AgreementSurrealGaugeBridge`,
+`DASHI.Geometry.NatUltrametricCompletenessBridge`,
+`DASHI.Algebra.StageQuotientIrreversibilityBoundary`, and
+`DASHI.Physics.Closure.CRTMonsterFixedPointCompactificationBoundary`, all wired
+through `DASHI.Everything`. These surfaces separate the checked finite content
+from the extension story: finite trit towers, prefix/suffix agreement metrics,
+Nat-valued ultrametric completeness, the stage-quotient irreversibility seam,
+and the CRT/J fixed-point receipts are recorded locally. Surreal arithmetic,
+the `agreeDepth -> 3^-n` gauge as an isometry, compactification error theorems,
+Monster moonshine theorem authority, Carnot/thermodynamic promotion, and any
+terminal Clay or physics claim remain fail-closed.
 
 Current cross-lane scope-resolution boundary: `DASHI.Promotion.ObligationIndex`
 now includes a six-row `scopeResolutionSummaries` layer. The checked surfaces
@@ -128,6 +160,18 @@ derived `hbar` request, leading uniform-field atomic-clock redshift law, and
 the W4 receipt field mapping. They remain request/adaptor surfaces only: the
 constructorless Candidate256 authority token and external calibration receipt
 are still not inhabited.
+The third SI-second/metrology tranche adds
+`DASHI.Promotion.SIExactConstantParsedCarrierRequest`,
+`DASHI.Physics.Closure.AtomicClockSecondRealTimeTopologyRequest`,
+`DASHI.Physics.Closure.QuantumClockDimensionlessObservableLaw`,
+`DASHI.Promotion.SIMetreFromSecondAndCAdapter`, and
+`DASHI.Physics.Closure.W4AtomicClockCandidateReceiptChecklist`. These record
+structural parsed carriers for exact SI constants, the Real-time topology
+request needed for Stone strong continuity, local dimensionless checks for
+clock phase and redshift observables, the metre-from-second-and-`c` route for
+Rydberg use, and a W4/Candidate256 external receipt checklist. They still do
+not load artifacts, accept SHA256/access-date evidence, construct authority
+tokens, promote numeric payloads, or claim empirical clock/redshift adequacy.
 
 Current Standard Model first-principles boundary:
 `DASHI.Promotion.ObligationIndex` now includes a nine-row

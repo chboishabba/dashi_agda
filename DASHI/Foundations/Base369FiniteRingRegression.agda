@@ -29,9 +29,8 @@ open import Base369 using
 ------------------------------------------------------------------------
 -- Local concrete modular operations used as regression sentinels.
 --
--- The abstract finite-ring shape module currently does not typecheck as a
--- dependency when checked standalone, so this regression anchors directly on
--- the stable Base369 carriers and constructors.
+-- This regression anchors directly on the stable Base369 carriers and
+-- constructors, so it catches accidental drift in the canonical definitions.
 
 triAdd : TriTruth → TriTruth → TriTruth
 triAdd = triXor
