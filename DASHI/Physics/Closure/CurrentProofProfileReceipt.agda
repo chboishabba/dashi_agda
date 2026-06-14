@@ -16,10 +16,10 @@ import DASHI.Physics.Closure.FullUnificationPublicationRoadmapReceipt as Uni
 -- Current cross-lane proof profile receipt.
 --
 -- This receipt aligns the shared governance summary across the active NS, YM,
--- and unification lanes.  NS root closure is recorded done, the YM continuum
--- theorem chain is recorded done, Gate 3 remains open, and every promotion
--- flag remains false.  This module records the sharper fail-closed profile
--- only.
+-- and unification lanes.  The repo-internal NS root closure, YM continuum
+-- chain, and Gate 3 theorem package are recorded at their owning surfaces;
+-- Clay/publication promotion remains fail-closed, and every promotion flag in
+-- this profile remains false.
 
 data CurrentProofProfileStatus : Set where
   currentProofProfileAlignedFailClosed :
@@ -34,7 +34,7 @@ currentProofProfilePromotionImpossibleHere ()
 
 currentProofProfileSummary : String
 currentProofProfileSummary =
-  "Current proof profile: NS root closure is done, the YM continuum theorem chain is done, the Gate 3 theorem package is recorded done at its owning theorem surfaces while Gate 3 promotion remains open, unification remains candidate-complete pending promotion acceptance, and every promotion flag remains false."
+  "Current proof profile: the repo-internal NS root closure, YM continuum theorem chain, and Gate 3 theorem package are recorded done at their owning surfaces; Clay/publication promotion remains fail-closed, unification remains candidate-complete pending promotion acceptance, and every promotion flag remains false."
 
 record CurrentProofProfileReceipt : Setω where
   field
@@ -95,11 +95,11 @@ record CurrentProofProfileReceipt : Setω where
     gate3PromotionStillBlockedReceipt :
       Gate3.gate3PromotionStillBlockedFlag gate3Receipt ≡ true
 
-    gate3StillOpen :
+    gate3PromotionStillBlocked :
       Bool
 
-    gate3StillOpenIsTrue :
-      gate3StillOpen ≡ true
+    gate3PromotionStillBlockedIsTrue :
+      gate3PromotionStillBlocked ≡ true
 
     unificationReceipt :
       Uni.FullUnificationPublicationRoadmapReceipt
@@ -184,9 +184,9 @@ canonicalCurrentProofProfileReceipt =
         refl
     ; gate3PromotionStillBlockedReceipt =
         refl
-    ; gate3StillOpen =
+    ; gate3PromotionStillBlocked =
         true
-    ; gate3StillOpenIsTrue =
+    ; gate3PromotionStillBlockedIsTrue =
         refl
     ; unificationReceipt =
         Uni.canonicalFullUnificationPublicationRoadmapReceipt
@@ -209,9 +209,9 @@ canonicalCurrentProofProfileReceipt =
     ; promotionFlagsAreEmpty =
         refl
     ; receiptBoundary =
-        "NS root closure is recorded done while NS promotion remains false"
-        ∷ "YM continuum theorem chain is recorded done while YM promotion remains false"
-        ∷ "Gate 3 theorem surfaces are recorded done here, but Gate 3 promotion remains open and is not promoted from this profile"
+        "NS root closure is recorded done while NS Clay promotion remains false"
+        ∷ "YM continuum theorem chain is recorded done while YM Clay promotion remains false"
+        ∷ "Gate 3 theorem surfaces are recorded done here, but Gate 3 promotion remains fail-closed from this profile"
         ∷ "Unification is recorded as candidate-complete pending promotion acceptance"
         ∷ "Every NS, YM, and cross-lane promotion flag remains false"
         ∷ "This receipt records fail-closed packet alignment only"

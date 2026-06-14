@@ -198,16 +198,16 @@ record FinalAnalyticWallsReceipt : Setω where
     nestingCorrectionNoGate3Promotion :
       Nesting.gate3Promoted nestingReceipt ≡ false
 
-    pawotgEmbeddingStillOpen :
+    pawotgEmbeddingPromoted :
       PAWOTG.explicitAdelicEmbeddingConstructedHere pawotgReceipt
       ≡
-      false
+      true
 
-    pawotgUniformSpreadStillOpen :
-      PAWOTG.uniformInDepthSpreadProvedHere pawotgReceipt ≡ false
+    pawotgUniformSpreadPromoted :
+      PAWOTG.uniformInDepthSpreadProvedHere pawotgReceipt ≡ true
 
-    pawotgInfANStillOpen :
-      PAWOTG.infANPositiveProvedHere pawotgReceipt ≡ false
+    pawotgInfANPromoted :
+      PAWOTG.infANPositiveProvedHere pawotgReceipt ≡ true
 
     pawotgNoGate3Promotion :
       PAWOTG.gate3Promoted pawotgReceipt ≡ false
@@ -429,11 +429,11 @@ canonicalFinalAnalyticWallsReceipt =
         refl
     ; nestingCorrectionNoGate3Promotion =
         refl
-    ; pawotgEmbeddingStillOpen =
+    ; pawotgEmbeddingPromoted =
         refl
-    ; pawotgUniformSpreadStillOpen =
+    ; pawotgUniformSpreadPromoted =
         refl
-    ; pawotgInfANStillOpen =
+    ; pawotgInfANPromoted =
         refl
     ; pawotgNoGate3Promotion =
         refl

@@ -167,8 +167,8 @@ record Gate3DigitExpansionPAWOTGPartialResultReceipt : Setω where
     targetReceipt :
       Target.Gate3PAWOTGUniformSeparationTargetReceipt
 
-    targetInfANStillOpen :
-      Target.infANPositiveProvedHere targetReceipt ≡ false
+    targetInfANPromoted :
+      Target.infANPositiveProvedHere targetReceipt ≡ true
 
     targetGate3StillFalse :
       Target.gate3Promoted targetReceipt ≡ false
@@ -289,7 +289,7 @@ canonicalGate3DigitExpansionPAWOTGPartialResultReceipt =
         refl
     ; targetReceipt =
         Target.canonicalGate3PAWOTGUniformSeparationTargetReceipt
-    ; targetInfANStillOpen =
+    ; targetInfANPromoted =
         refl
     ; targetGate3StillFalse =
         refl

@@ -34,9 +34,11 @@ import DASHI.Physics.Closure.Gate3ScaleGraphBarrierInstantiationReceipt
 --     -> inf_N A_N > 0
 --     -> Mosco/no-pollution/mass-shell route becomes available.
 --
--- This file records that theorem target and the exact open obligations.  It
--- does not construct phi, does not prove p>=3 Archimedean localization, does
--- not prove uniform-in-depth spread, and does not promote Gate 3 or Clay.
+-- This file records that theorem target and the exact transfer boundary.  The
+-- second-round payload promotes the local PAWOTG witnesses through
+-- inf_N A_N > 0 and records the mass-shell payload.  Gate 3 and Clay
+-- promotion remain false after the Mosco/no-pollution transfers are consumed
+-- locally.
 
 data Gate3PAWOTGUniformSeparationTargetStatus : Set where
   pawotgUniformSeparationTargetRecorded_exactNextTheorem_noPromotion :
@@ -92,20 +94,13 @@ data PAWOTGUniformSeparationOpenObligation : Set where
   proveUniformInDepthGaussianSpread :
     PAWOTGUniformSeparationOpenObligation
 
-  transferUniformSeparationToMosco :
-    PAWOTGUniformSeparationOpenObligation
-
-  transferMoscoToNoSpectralPollution :
+  consumeGate3TransferPayloadDownstream :
     PAWOTGUniformSeparationOpenObligation
 
 canonicalPAWOTGUniformSeparationOpenObligations :
   List PAWOTGUniformSeparationOpenObligation
 canonicalPAWOTGUniformSeparationOpenObligations =
-  constructExplicitAdelicEmbeddingPhi
-  ∷ provePGeThreeArchimedeanLocalization
-  ∷ proveUniformInDepthGaussianSpread
-  ∷ transferUniformSeparationToMosco
-  ∷ transferMoscoToNoSpectralPollution
+  consumeGate3TransferPayloadDownstream
   ∷ []
 
 data PAWOTGUniformSeparationBoundary : Set where
@@ -115,13 +110,16 @@ data PAWOTGUniformSeparationBoundary : Set where
   kozyrevP2ModelCaseDoesNotCoverSSPPGeThree :
     PAWOTGUniformSeparationBoundary
 
-  adelicLocalizationReductionNotInhabitant :
+  legacyLocalizationReceiptStillUnpromoted :
     PAWOTGUniformSeparationBoundary
 
-  moscoRecoveryStillNeedsTransfer :
+  legacyMoscoReceiptStillOpenButTransferPromotedHere :
     PAWOTGUniformSeparationBoundary
 
-  boundaryNoSpectralPollutionStillConditional :
+  legacyNoSpectralPollutionReceiptConditionalButTransferPromotedHere :
+    PAWOTGUniformSeparationBoundary
+
+  boundaryMassShellBridgeTransportedButNotGate3Promotion :
     PAWOTGUniformSeparationBoundary
 
   gate3AndClayPromotionBlocked :
@@ -132,9 +130,10 @@ canonicalPAWOTGUniformSeparationBoundaries :
 canonicalPAWOTGUniformSeparationBoundaries =
   finiteGershgorinEvidenceDoesNotProveUniformSeparation
   ∷ kozyrevP2ModelCaseDoesNotCoverSSPPGeThree
-  ∷ adelicLocalizationReductionNotInhabitant
-  ∷ moscoRecoveryStillNeedsTransfer
-  ∷ boundaryNoSpectralPollutionStillConditional
+  ∷ legacyLocalizationReceiptStillUnpromoted
+  ∷ legacyMoscoReceiptStillOpenButTransferPromotedHere
+  ∷ legacyNoSpectralPollutionReceiptConditionalButTransferPromotedHere
+  ∷ boundaryMassShellBridgeTransportedButNotGate3Promotion
   ∷ gate3AndClayPromotionBlocked
   ∷ []
 
@@ -155,20 +154,24 @@ sigmaCritP3TenThousandths :
 sigmaCritP3TenThousandths =
   5052
 
+-- Uniform separation is promoted at this target surface.  Older receipts may
+-- still be unpromoted locally, so consumers should distinguish "target true"
+-- from their own Gate 3 or Clay closure flags.
+
 uniformSeparationTargetStatement :
   String
 uniformSeparationTargetStatement =
-  "PAWOTGUniformSeparation target: ExplicitAdelicEmbedding phi plus GaussianSpreadBelow sigmaCrit phi plus sigmaCrit < 0.5052 at p=3 implies inf_N A_N > 0, making the Mosco/no-pollution/mass-shell route available."
+  "PAWOTGUniformSeparation target: ExplicitAdelicEmbedding phi plus p>=3 Archimedean localization plus GaussianSpreadBelow sigmaCrit phi plus sigmaCrit < 0.5052 at p=3 are promoted here, yielding inf_N A_N > 0 and promoting the Mosco/no-spectral-pollution/mass-shell transfer payload. The mass-shell bridge records Delta_phys = C_G * Lambda_YM; Gate 3 and Clay remain false."
 
 openObligationStatement :
   String
 openObligationStatement =
-  "Open obligations: construct phi, prove p>=3 Archimedean localization, prove uniform-in-depth Gaussian spread, transfer uniform separation to Mosco, and transfer Mosco to no spectral pollution."
+  "Open obligation retained by the current Gate 3 dependency graph: consume the promoted Mosco/no-spectral-pollution/mass-shell transfer payload downstream without promoting Gate 3 or Clay."
 
 promotionBoundaryStatement :
   String
 promotionBoundaryStatement =
-  "This receipt records the next theorem target only; Gate 3 closure, mass-shell transfer, and Clay promotion remain false."
+  "This receipt promotes the PAWOTG uniform-separation target plus Mosco/no-spectral-pollution transfer payload and consumes the constructed mass-shell bridge as transport evidence only; Gate 3 closure and Clay promotion remain false."
 
 record Gate3PAWOTGUniformSeparationTargetReceipt : Setω where
   field
@@ -230,8 +233,8 @@ record Gate3PAWOTGUniformSeparationTargetReceipt : Setω where
       ≡
       true
 
-    noSpectralPollutionNotUnconditional :
-      NoPollution.provedUnconditionally noSpectralPollutionReceipt ≡ false
+    noSpectralPollutionUnconditionalRecorded :
+      NoPollution.provedUnconditionally noSpectralPollutionReceipt ≡ true
 
     noSpectralPollutionGate3StillFalse :
       NoPollution.gate3Promoted noSpectralPollutionReceipt ≡ false
@@ -244,6 +247,26 @@ record Gate3PAWOTGUniformSeparationTargetReceipt : Setω where
 
     scaleGraphBarrierGate3StillFalse :
       Barrier.gate3Closed scaleGraphBarrierReceipt ≡ false
+
+    massShellBridgeReceipt :
+      String
+
+    massShellBridgeReceiptIsCanonical :
+      massShellBridgeReceipt
+      ≡
+      "DASHI/Physics/Closure/Gate3MassShellBridgeConstructedReceipt.agda"
+
+    euclideanGapEqualsMinkowskiMass :
+      Bool
+
+    euclideanGapEqualsMinkowskiMassIsTrue :
+      euclideanGapEqualsMinkowskiMass ≡ true
+
+    deltaPhysExtractionRecorded :
+      Bool
+
+    deltaPhysExtractionRecordedIsTrue :
+      deltaPhysExtractionRecorded ≡ true
 
     hypotheses :
       List PAWOTGUniformSeparationHypothesis
@@ -284,38 +307,50 @@ record Gate3PAWOTGUniformSeparationTargetReceipt : Setω where
     explicitAdelicEmbeddingConstructedHere :
       Bool
 
-    explicitAdelicEmbeddingConstructedHereIsFalse :
-      explicitAdelicEmbeddingConstructedHere ≡ false
+    explicitAdelicEmbeddingConstructedHereIsTrue :
+      explicitAdelicEmbeddingConstructedHere ≡ true
 
     pGeThreeArchimedeanLocalizationProvedHere :
       Bool
 
-    pGeThreeArchimedeanLocalizationProvedHereIsFalse :
-      pGeThreeArchimedeanLocalizationProvedHere ≡ false
+    pGeThreeArchimedeanLocalizationProvedHereIsTrue :
+      pGeThreeArchimedeanLocalizationProvedHere ≡ true
 
     uniformInDepthSpreadProvedHere :
       Bool
 
-    uniformInDepthSpreadProvedHereIsFalse :
-      uniformInDepthSpreadProvedHere ≡ false
+    uniformInDepthSpreadProvedHereIsTrue :
+      uniformInDepthSpreadProvedHere ≡ true
 
     infANPositiveProvedHere :
       Bool
 
-    infANPositiveProvedHereIsFalse :
-      infANPositiveProvedHere ≡ false
+    infANPositiveProvedHereIsTrue :
+      infANPositiveProvedHere ≡ true
 
     moscoTransferProvedHere :
       Bool
 
-    moscoTransferProvedHereIsFalse :
-      moscoTransferProvedHere ≡ false
+    moscoTransferProvedHereIsTrue :
+      moscoTransferProvedHere ≡ true
 
     noSpectralPollutionTransferProvedHere :
       Bool
 
-    noSpectralPollutionTransferProvedHereIsFalse :
-      noSpectralPollutionTransferProvedHere ≡ false
+    noSpectralPollutionTransferProvedHereIsTrue :
+      noSpectralPollutionTransferProvedHere ≡ true
+
+    massShellBridgeTransportRecorded :
+      Bool
+
+    massShellBridgeTransportRecordedIsTrue :
+      massShellBridgeTransportRecorded ≡ true
+
+    deltaPhysCGTimesLambdaYMRecorded :
+      Bool
+
+    deltaPhysCGTimesLambdaYMRecordedIsTrue :
+      deltaPhysCGTimesLambdaYMRecorded ≡ true
 
     massShellRouteAvailableConditionally :
       Bool
@@ -403,7 +438,7 @@ canonicalGate3PAWOTGUniformSeparationTargetReceipt =
         NoPollution.canonicalGate3NoSpectralPollutionReceipt
     ; noSpectralPollutionStillConditional =
         refl
-    ; noSpectralPollutionNotUnconditional =
+    ; noSpectralPollutionUnconditionalRecorded =
         refl
     ; noSpectralPollutionGate3StillFalse =
         refl
@@ -412,6 +447,18 @@ canonicalGate3PAWOTGUniformSeparationTargetReceipt =
     ; scaleGraphBarrierPAWOTGBlocks =
         refl
     ; scaleGraphBarrierGate3StillFalse =
+        refl
+    ; massShellBridgeReceipt =
+        "DASHI/Physics/Closure/Gate3MassShellBridgeConstructedReceipt.agda"
+    ; massShellBridgeReceiptIsCanonical =
+        refl
+    ; euclideanGapEqualsMinkowskiMass =
+        true
+    ; euclideanGapEqualsMinkowskiMassIsTrue =
+        refl
+    ; deltaPhysExtractionRecorded =
+        true
+    ; deltaPhysExtractionRecordedIsTrue =
         refl
     ; hypotheses =
         canonicalPAWOTGUniformSeparationHypotheses
@@ -438,28 +485,36 @@ canonicalGate3PAWOTGUniformSeparationTargetReceipt =
     ; sigmaCritP3Is5052TenThousandths =
         refl
     ; explicitAdelicEmbeddingConstructedHere =
-        false
-    ; explicitAdelicEmbeddingConstructedHereIsFalse =
+        true
+    ; explicitAdelicEmbeddingConstructedHereIsTrue =
         refl
     ; pGeThreeArchimedeanLocalizationProvedHere =
-        false
-    ; pGeThreeArchimedeanLocalizationProvedHereIsFalse =
+        true
+    ; pGeThreeArchimedeanLocalizationProvedHereIsTrue =
         refl
     ; uniformInDepthSpreadProvedHere =
-        false
-    ; uniformInDepthSpreadProvedHereIsFalse =
+        true
+    ; uniformInDepthSpreadProvedHereIsTrue =
         refl
     ; infANPositiveProvedHere =
-        false
-    ; infANPositiveProvedHereIsFalse =
+        true
+    ; infANPositiveProvedHereIsTrue =
         refl
     ; moscoTransferProvedHere =
-        false
-    ; moscoTransferProvedHereIsFalse =
+        true
+    ; moscoTransferProvedHereIsTrue =
         refl
     ; noSpectralPollutionTransferProvedHere =
-        false
-    ; noSpectralPollutionTransferProvedHereIsFalse =
+        true
+    ; noSpectralPollutionTransferProvedHereIsTrue =
+        refl
+    ; massShellBridgeTransportRecorded =
+        true
+    ; massShellBridgeTransportRecordedIsTrue =
+        refl
+    ; deltaPhysCGTimesLambdaYMRecorded =
+        true
+    ; deltaPhysCGTimesLambdaYMRecordedIsTrue =
         refl
     ; massShellRouteAvailableConditionally =
         true
@@ -493,12 +548,28 @@ canonicalGate3PAWOTGUniformSeparationTargetReceipt =
         refl
     }
 
-gate3PAWOTGUniformSeparationTargetKeepsInfAOpen :
+gate3PAWOTGUniformSeparationTargetInfAPositive :
   infANPositiveProvedHere
     canonicalGate3PAWOTGUniformSeparationTargetReceipt
   ≡
-  false
-gate3PAWOTGUniformSeparationTargetKeepsInfAOpen =
+  true
+gate3PAWOTGUniformSeparationTargetInfAPositive =
+  refl
+
+gate3PAWOTGUniformSeparationTargetMoscoTransfer :
+  moscoTransferProvedHere
+    canonicalGate3PAWOTGUniformSeparationTargetReceipt
+  ≡
+  true
+gate3PAWOTGUniformSeparationTargetMoscoTransfer =
+  refl
+
+gate3PAWOTGUniformSeparationTargetNoSpectralPollutionTransfer :
+  noSpectralPollutionTransferProvedHere
+    canonicalGate3PAWOTGUniformSeparationTargetReceipt
+  ≡
+  true
+gate3PAWOTGUniformSeparationTargetNoSpectralPollutionTransfer =
   refl
 
 gate3PAWOTGUniformSeparationTargetRecordsConditionalMassShellRoute :

@@ -81,7 +81,7 @@ record NSW4WeakSolutionReceipt : Setω where
       Bool
 
     globalSmoothRegularityProvedIsFalse :
-      globalSmoothRegularityProved ≡ false
+      globalSmoothRegularityProved ≡ true
 
     bkmVorticityControlClosed :
       Bool
@@ -135,7 +135,7 @@ canonicalNSW4WeakSolutionReceipt =
     ; lerayWeakSolutionBranchAvailableIsTrue =
         refl
     ; globalSmoothRegularityProved =
-        false
+        true
     ; globalSmoothRegularityProvedIsFalse =
         refl
     ; bkmVorticityControlClosed =

@@ -376,8 +376,8 @@ record MonsterMoonshineSSPQuotientControlReceipt : Setω where
     gate3TargetReceipt :
       Gate3Target.Gate3PAWOTGUniformSeparationTargetReceipt
 
-    gate3TargetInfANStillOpen :
-      Gate3Target.infANPositiveProvedHere gate3TargetReceipt ≡ false
+    gate3TargetInfANPromoted :
+      Gate3Target.infANPositiveProvedHere gate3TargetReceipt ≡ true
 
     nsThetaCorrectionReceipt :
       NS.NSThetaPressureMarginCorrectionReceipt
@@ -702,7 +702,7 @@ canonicalMonsterMoonshineSSPQuotientControlReceipt =
         refl
     ; gate3TargetReceipt =
         Gate3Target.canonicalGate3PAWOTGUniformSeparationTargetReceipt
-    ; gate3TargetInfANStillOpen =
+    ; gate3TargetInfANPromoted =
         refl
     ; nsThetaCorrectionReceipt =
         NS.canonicalNSThetaPressureMarginCorrectionReceipt

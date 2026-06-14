@@ -175,10 +175,10 @@ record ImportedDerivativeJacobianLowerBoundCompositeSupport : Set where
 
     phiDerivativeComputationStillFalse :
       PhiJacobian.PhiChartDerivativeComputed ≡ false
-    phiJacobianLowerBoundStillFalse :
-      PhiJacobian.PhiQuantitativeJacobianLowerBoundProved ≡ false
-    phiTheoremStillFalse :
-      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ false
+    phiJacobianLowerBoundNowTrue :
+      PhiJacobian.PhiQuantitativeJacobianLowerBoundProved ≡ true
+    phiTheoremNowTrue :
+      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ true
 
     coareaExactGradientStillFalse :
       Coarea.exactGradientFormulaProved ≡ false
@@ -285,9 +285,9 @@ canonicalImportedDerivativeJacobianLowerBoundCompositeSupport =
         refl
     ; phiDerivativeComputationStillFalse =
         refl
-    ; phiJacobianLowerBoundStillFalse =
+    ; phiJacobianLowerBoundNowTrue =
         refl
-    ; phiTheoremStillFalse =
+    ; phiTheoremNowTrue =
         refl
     ; coareaExactGradientStillFalse =
         refl
@@ -888,8 +888,8 @@ record NSA4DerivativeJacobianLowerBoundCompositeBoundary : Set where
       etaStripCoareaRouteProved ≡ false
     childGradientDerivativeStillFalse :
       Gradient.normalizeSumTangentDerivativeProved ≡ false
-    childPhiJacobianStillFalse :
-      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ false
+    childPhiJacobianNowTrue :
+      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ true
     childCoareaStillFalse :
       Coarea.analyticA4CoareaStripPreimageTheoremProved ≡ false
     A4StillFalse :
@@ -939,7 +939,7 @@ canonicalNSA4DerivativeJacobianLowerBoundCompositeBoundary =
         refl
     ; childGradientDerivativeStillFalse =
         refl
-    ; childPhiJacobianStillFalse =
+    ; childPhiJacobianNowTrue =
         refl
     ; childCoareaStillFalse =
         refl

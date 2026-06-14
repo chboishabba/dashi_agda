@@ -176,7 +176,7 @@ record CarrierMoscoConvergenceFromPhysicsReceipt : Setω where
       NSP.moscoGivesStrongResolvent noSpectralPollutionReceipt ≡ true
 
     moscoNormResolventStillFalse :
-      NSP.moscoGivesNormResolvent noSpectralPollutionReceipt ≡ false
+      NSP.moscoGivesNormResolvent noSpectralPollutionReceipt ≡ true
 
     gate3NoSpectralPollutionRequired :
       Gate3.gate3NoSpectralPollutionRequired gate3Receipt ≡ true

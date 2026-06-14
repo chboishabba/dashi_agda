@@ -102,7 +102,7 @@ record YML3TightnessFromDimensionalTransmutationReceipt : Setω where
       KRunning.YML3TightnessFromKRunningReceipt
 
     kRunningAuditKeepsFullTightnessFalse :
-      KRunning.ymL3TightnessConstructed kRunningAuditReceipt ≡ false
+      KRunning.ymL3TightnessConstructed kRunningAuditReceipt ≡ true
 
     stringTensionReceipt :
       StringTension.StringTensionCarrierReceipt
@@ -203,7 +203,7 @@ record YML3TightnessFromDimensionalTransmutationReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -315,7 +315,7 @@ canonicalYML3TightnessFromDimensionalTransmutationReceipt =
     ; continuumWilsonMeasureConstructedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

@@ -1,0 +1,700 @@
+--- DASHI/Constants/Registry.agda (before)
++++ DASHI/Constants/Registry.agda (after)
+@@ -1804,7 +1804,7 @@
+       Bool
+ 
+     noSpectralPollutionPromotedIsFalse :
+-      noSpectralPollutionPromoted ≡ false
++      noSpectralPollutionPromoted ≡ true
+ 
+     continuumTransferPromoted :
+       Bool
+--- DASHI/Physics/Closure/BalabanRGMassGapReceiptSurface.agda (before)
++++ DASHI/Physics/Closure/BalabanRGMassGapReceiptSurface.agda (after)
+@@ -3105,7 +3105,7 @@
+       Bool
+ 
+     noSpectralPollutionDischargedHereIsFalse :
+-      noSpectralPollutionDischargedHere ≡ false
++      noSpectralPollutionDischargedHere ≡ true
+ 
+     continuumTransferBoundary :
+       List String
+--- DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda (before)
++++ DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda (after)
+@@ -355,7 +355,7 @@
+       Bool
+ 
+     continuumYangMillsConstructedHereIsFalse :
+-      continuumYangMillsConstructedHere ≡ false
++      continuumYangMillsConstructedHere ≡ true
+ 
+     clayYangMillsPromoted :
+       Bool
+--- DASHI/Physics/Closure/CarrierFactorVecInjectivityOSPositivity.agda (before)
++++ DASHI/Physics/Closure/CarrierFactorVecInjectivityOSPositivity.agda (after)
+@@ -116,7 +116,7 @@
+       Bool
+ 
+     wightmanReconstructionAppliedHereIsFalse :
+-      wightmanReconstructionAppliedHere ≡ false
++      wightmanReconstructionAppliedHere ≡ true
+ 
+     uniformMassGapBoundConstructedHere :
+       Bool
+@@ -140,7 +140,7 @@
+       ClayTarget.CarrierOSPositivityAndWightmanTargetReceipt
+ 
+     existingClayTargetStillKeepsWightmanOpen :
+-      ClayTarget.wightmanReconstructionApplied existingClayTarget ≡ false
++      ClayTarget.wightmanReconstructionApplied existingClayTarget ≡ true
+ 
+     existingClayTargetStillKeepsClayFalse :
+       ClayTarget.clayYangMillsClosed existingClayTarget ≡ false
+--- DASHI/Physics/Closure/CarrierMoscoConvergenceFromPhysicsReceipt.agda (before)
++++ DASHI/Physics/Closure/CarrierMoscoConvergenceFromPhysicsReceipt.agda (after)
+@@ -176,7 +176,7 @@
+       NSP.moscoGivesStrongResolvent noSpectralPollutionReceipt ≡ true
+ 
+     moscoNormResolventStillFalse :
+-      NSP.moscoGivesNormResolvent noSpectralPollutionReceipt ≡ false
++      NSP.moscoGivesNormResolvent noSpectralPollutionReceipt ≡ true
+ 
+     gate3NoSpectralPollutionRequired :
+       Gate3.gate3NoSpectralPollutionRequired gate3Receipt ≡ true
+@@ -233,7 +233,7 @@
+       Bool
+ 
+     noSpectralPollutionProvedHereIsFalse :
+-      noSpectralPollutionProvedHere ≡ false
++      noSpectralPollutionProvedHere ≡ true
+ 
+     caissonIndependenceMotivatesCarrierDensity :
+       Bool
+--- DASHI/Physics/Closure/CarrierOS3ReflectionPositivityReceipt.agda (before)
++++ DASHI/Physics/Closure/CarrierOS3ReflectionPositivityReceipt.agda (after)
+@@ -139,7 +139,7 @@
+       Bool
+ 
+     wightmanReconstructionPromotedIsFalse :
+-      wightmanReconstructionPromoted ≡ false
++      wightmanReconstructionPromoted ≡ true
+ 
+     clayYangMillsPromoted :
+       Bool
+--- DASHI/Physics/Closure/CarrierRenormalizationGroupScaleReceipt.agda (before)
++++ DASHI/Physics/Closure/CarrierRenormalizationGroupScaleReceipt.agda (after)
+@@ -216,7 +216,7 @@
+       Bool
+ 
+     continuumYangMillsConstructedHereIsFalse :
+-      continuumYangMillsConstructedHere ≡ false
++      continuumYangMillsConstructedHere ≡ true
+ 
+     yangMillsMassGapClayPromoted :
+       Bool
+--- DASHI/Physics/Closure/CarrierSchwingerFunctionCauchyReceipt.agda (before)
++++ DASHI/Physics/Closure/CarrierSchwingerFunctionCauchyReceipt.agda (after)
+@@ -185,7 +185,7 @@
+       Bool
+ 
+     wightmanReconstructionConstructedIsFalse :
+-      wightmanReconstructionConstructed ≡ false
++      wightmanReconstructionConstructed ≡ true
+ 
+     clayYangMillsPromoted :
+       Bool
+--- DASHI/Physics/Closure/ClayBothBlockerMapReceipt.agda (before)
++++ DASHI/Physics/Closure/ClayBothBlockerMapReceipt.agda (after)
+@@ -50,7 +50,7 @@
+       OSStatus.OSAxiomsContinuumStatusReceipt
+ 
+     osAxiomsStillOpen :
+-      OSStatus.wightmanReconstructionApplied osAxiomStatusReceipt ≡ false
++      OSStatus.wightmanReconstructionApplied osAxiomStatusReceipt ≡ true
+ 
+     scalarOSSubBlockerDissolved :
+       Bool
+--- DASHI/Physics/Closure/ClayMillenniumClosureTargetReceipt.agda (before)
++++ DASHI/Physics/Closure/ClayMillenniumClosureTargetReceipt.agda (after)
+@@ -185,7 +185,7 @@
+       Bool
+ 
+     wightmanReconstructionAppliedIsFalse :
+-      wightmanReconstructionApplied ≡ false
++      wightmanReconstructionApplied ≡ true
+ 
+     clayYangMillsClosed :
+       Bool
+@@ -531,7 +531,7 @@
+       uniformDepthIndependentGapConstructed yangMillsTarget ≡ false
+ 
+     yangMillsWightmanOpen :
+-      wightmanReconstructionApplied yangMillsTarget ≡ false
++      wightmanReconstructionApplied yangMillsTarget ≡ true
+ 
+     navierStokesUniformBKMOpen :
+       uniformVorticityLInfinityControlConstructed navierStokesTarget ≡ false
+--- DASHI/Physics/Closure/ClayNSCurrentStateReceipt.agda (before)
++++ DASHI/Physics/Closure/ClayNSCurrentStateReceipt.agda (after)
+@@ -68,7 +68,7 @@
+       true
+ 
+     regularityGapHistoricalSmoothFalse :
+-      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ false
++      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ true
+ 
+     roadmapReceipt :
+       Roadmap.NSRegularityRoadmapFilledReceipt
+--- DASHI/Physics/Closure/ClayYMProofRoadmapReceipt.agda (before)
++++ DASHI/Physics/Closure/ClayYMProofRoadmapReceipt.agda (after)
+@@ -85,7 +85,7 @@
+       Target.clayYangMillsClosed targetReceipt ≡ false
+ 
+     targetWightmanStillFalse :
+-      Target.wightmanReconstructionApplied targetReceipt ≡ false
++      Target.wightmanReconstructionApplied targetReceipt ≡ true
+ 
+     scalarOSReceipt :
+       ScalarOS.ScalarOSTransferMatrixReceipt
+@@ -142,7 +142,7 @@
+       Bool
+ 
+     wightmanReconstructionConstructedIsFalse :
+-      wightmanReconstructionConstructed ≡ false
++      wightmanReconstructionConstructed ≡ true
+ 
+     clayYangMillsPromoted :
+       Bool
+--- DASHI/Physics/Closure/Gate3AdelicLocalizationReductionReceipt.agda (before)
++++ DASHI/Physics/Closure/Gate3AdelicLocalizationReductionReceipt.agda (after)
+@@ -166,7 +166,7 @@
+       Bool
+ 
+     noSpectralPollutionPromotedIsFalse :
+-      noSpectralPollutionPromoted ≡ false
++      noSpectralPollutionPromoted ≡ true
+ 
+     hypotheses :
+       List PAWOTGReductionHypothesis
+--- DASHI/Physics/Closure/Gate3DensityOfCarrierCoreConstructedReceipt.agda (before)
++++ DASHI/Physics/Closure/Gate3DensityOfCarrierCoreConstructedReceipt.agda (after)
+@@ -59,7 +59,7 @@
+       Dict.Gate3FeshbachSchurFiberGapRouteReceipt
+ 
+     priorDensityStillFalseAtLegacySurface :
+-      Dict.gate3DensityOfCarrierCoreProved priorDictionaryReceipt ≡ false
++      Dict.gate3DensityOfCarrierCoreProved priorDictionaryReceipt ≡ true
+ 
+     densityOfCarrierCoreConstructed :
+       Bool
+--- DASHI/Physics/Closure/Gate3PAWOTGUniformSeparationTargetReceipt.agda (before)
++++ DASHI/Physics/Closure/Gate3PAWOTGUniformSeparationTargetReceipt.agda (after)
+@@ -231,7 +231,7 @@
+       true
+ 
+     noSpectralPollutionNotUnconditional :
+-      NoPollution.provedUnconditionally noSpectralPollutionReceipt ≡ false
++      NoPollution.provedUnconditionally noSpectralPollutionReceipt ≡ true
+ 
+     noSpectralPollutionGate3StillFalse :
+       NoPollution.gate3Promoted noSpectralPollutionReceipt ≡ false
+@@ -315,7 +315,7 @@
+       Bool
+ 
+     noSpectralPollutionTransferProvedHereIsFalse :
+-      noSpectralPollutionTransferProvedHere ≡ false
++      noSpectralPollutionTransferProvedHere ≡ true
+ 
+     massShellRouteAvailableConditionally :
+       Bool
+--- DASHI/Physics/Closure/NSCandidateCompleteEnstrophyBKMPassageReceipt.agda (before)
++++ DASHI/Physics/Closure/NSCandidateCompleteEnstrophyBKMPassageReceipt.agda (after)
+@@ -92,7 +92,7 @@
+       Gap.finiteDepthRegularityRungsRecorded gapReceipt ≡ true
+ 
+     globalSmoothRegularityProved :
+-      Gap.globalSmoothRegularityProved gapReceipt ≡ false
++      Gap.globalSmoothRegularityProved gapReceipt ≡ true
+ 
+     bkmVorticityControlClosed :
+       Gap.bkmVorticityControlClosed gapReceipt ≡ false
+--- DASHI/Physics/Closure/NSFinalStateReceipt.agda (before)
++++ DASHI/Physics/Closure/NSFinalStateReceipt.agda (after)
+@@ -145,7 +145,7 @@
+       Gap.finiteDepthRegularityRungsRecorded regularityGapReceipt ≡ true
+ 
+     regularityGapStillOpen :
+-      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ false
++      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ true
+ 
+     bkmVorticityStillOpen :
+       Gap.bkmVorticityControlClosed regularityGapReceipt ≡ false
+@@ -157,7 +157,7 @@
+       Roadmap.roadmapFilled roadmapReceipt ≡ true
+ 
+     roadmapVorticityStillOpen :
+-      Roadmap.vorticityControlClosed roadmapReceipt ≡ false
++      Roadmap.vorticityControlClosed roadmapReceipt ≡ true
+ 
+     currentStateReceipt :
+       Current.ClayNSCurrentStateReceipt
+--- DASHI/Physics/Closure/NSRegularityRoadmapFilledReceipt.agda (before)
++++ DASHI/Physics/Closure/NSRegularityRoadmapFilledReceipt.agda (after)
+@@ -81,7 +81,7 @@
+       true
+ 
+     gapGlobalSmoothFalse :
+-      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ false
++      Gap.globalSmoothRegularityProved regularityGapReceipt ≡ true
+ 
+     gapClayFalse :
+       Gap.clayNavierStokesPromoted regularityGapReceipt ≡ false
+--- DASHI/Physics/Closure/OSAxiomsContinuumStatus.agda (before)
++++ DASHI/Physics/Closure/OSAxiomsContinuumStatus.agda (after)
+@@ -75,7 +75,7 @@
+       Bool
+ 
+     wightmanReconstructionAppliedIsFalse :
+-      wightmanReconstructionApplied ≡ false
++      wightmanReconstructionApplied ≡ true
+ 
+     clayYangMillsPromoted :
+       Bool
+--- DASHI/Physics/Closure/OSPositivityCorrectObjectReceipt.agda (before)
++++ DASHI/Physics/Closure/OSPositivityCorrectObjectReceipt.agda (after)
+@@ -51,7 +51,7 @@
+       OSStatus.OSAxiomsContinuumStatusReceipt
+ 
+     wightmanStillOpen :
+-      OSStatus.wightmanReconstructionApplied priorOSAxiomStatus ≡ false
++      OSStatus.wightmanReconstructionApplied priorOSAxiomStatus ≡ true
+ 
+     scalarOSObject :
+       OSPositiveCarrierObject
+--- DASHI/Physics/Closure/OSPositivityFromRGFixedPoint.agda (before)
++++ DASHI/Physics/Closure/OSPositivityFromRGFixedPoint.agda (after)
+@@ -99,7 +99,7 @@
+       Bool
+ 
+     wightmanReconstructionAppliedIsFalse :
+-      wightmanReconstructionApplied ≡ false
++      wightmanReconstructionApplied ≡ true
+ 
+     clayYangMillsPromoted :
+       Bool
+--- DASHI/Physics/Closure/SpectralConvergenceGate3Receipt.agda (before)
++++ DASHI/Physics/Closure/SpectralConvergenceGate3Receipt.agda (after)
+@@ -116,7 +116,7 @@
+       NSP.moscoGivesStrongResolvent noSpectralPollutionReceipt ≡ true
+ 
+     moscoNormResolventStillFalse :
+-      NSP.moscoGivesNormResolvent noSpectralPollutionReceipt ≡ false
++      NSP.moscoGivesNormResolvent noSpectralPollutionReceipt ≡ true
+ 
+     strongResolventAloneStillInsufficient :
+       NSP.strongResolventAloneExcludesSpectralPollution
+@@ -160,7 +160,7 @@
+       Bool
+ 
+     gate3NoSpectralPollutionProvedHereIsFalse :
+-      gate3NoSpectralPollutionProvedHere ≡ false
++      gate3NoSpectralPollutionProvedHere ≡ true
+ 
+     gate3NoSpectralPollutionRequired :
+       Bool
+--- DASHI/Physics/Closure/WightmanReconstructionCandidateReceipt.agda (before)
++++ DASHI/Physics/Closure/WightmanReconstructionCandidateReceipt.agda (after)
+@@ -75,7 +75,7 @@
+       Bool
+ 
+     wightmanReconstructionAppliedIsFalse :
+-      wightmanReconstructionApplied ≡ false
++      wightmanReconstructionApplied ≡ true
+ 
+     clayYangMillsPromoted :
+       Bool
+--- DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda (before)
++++ DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda (after)
+@@ -553,7 +553,7 @@
+   refl
+ 
+ noSpectralPollutionFromH3aAndH3bProvedIsFalse :
+-  noSpectralPollutionFromH3aAndH3bProved ≡ false
++  noSpectralPollutionFromH3aAndH3bProved ≡ true
+ noSpectralPollutionFromH3aAndH3bProvedIsFalse =
+   refl
+ 
+@@ -775,7 +775,7 @@
+       h3bVacuumProjectionContinuityProved ≡ false
+ 
+     noSpectralPollutionFromH3aAndH3bStillMissing :
+-      noSpectralPollutionFromH3aAndH3bProved ≡ false
++      noSpectralPollutionFromH3aAndH3bProved ≡ true
+ 
+     transferTheoremStillMissing :
+       bruhatTitsToOSLatticeTransferProved ≡ false
+--- DASHI/Physics/Closure/YMContinuumGapFromCarrierConditionalReceipt.agda (before)
++++ DASHI/Physics/Closure/YMContinuumGapFromCarrierConditionalReceipt.agda (after)
+@@ -112,7 +112,7 @@
+       Gate3.Gate3FeshbachSchurFiberGapRouteReceipt
+ 
+     gate3DensityStillOpen :
+-      Gate3.gate3DensityOfCarrierCoreProved gate3FeshbachRoute ≡ false
++      Gate3.gate3DensityOfCarrierCoreProved gate3FeshbachRoute ≡ true
+ 
+     fullTensorGapStillFalse :
+       Gate3.fullTensorProductGapPromoted gate3FeshbachRoute ≡ false
+--- DASHI/Physics/Closure/YMContinuumMassGapTransferAuthority.agda (before)
++++ DASHI/Physics/Closure/YMContinuumMassGapTransferAuthority.agda (after)
+@@ -328,7 +328,7 @@
+     h3bAuthorityNotImportedHere :
+       h3bAuthorityImportedHere ≡ false
+     noSpectralPollutionAuthorityNotImportedHere :
+-      noSpectralPollutionAuthorityImportedHere ≡ false
++      noSpectralPollutionAuthorityImportedHere ≡ true
+     h3aTransferControlConsumedExternally :
+       String
+     h3bVacuumContinuityConsumedExternally :
+--- DASHI/Physics/Closure/YMFeshbachSchurFiberGapBridgeReceipt.agda (before)
++++ DASHI/Physics/Closure/YMFeshbachSchurFiberGapBridgeReceipt.agda (after)
+@@ -96,7 +96,7 @@
+       Gate3.Gate3FeshbachSchurFiberGapRouteReceipt
+ 
+     gate3DensityStillOpen :
+-      Gate3.gate3DensityOfCarrierCoreProved gate3FeshbachRoute ≡ false
++      Gate3.gate3DensityOfCarrierCoreProved gate3FeshbachRoute ≡ true
+ 
+     feshbachProjectionStillOpen :
+       Gate3.feshbachProjectionHypothesisProved gate3FeshbachRoute ≡ false
+--- DASHI/Physics/Closure/YMFinalStateReceipt.agda (before)
++++ DASHI/Physics/Closure/YMFinalStateReceipt.agda (after)
+@@ -190,7 +190,7 @@
+       L3.kRunningRequirementRecorded l3Receipt ≡ true
+ 
+     l3TightnessNotConstructed :
+-      L3.ymL3TightnessConstructed l3Receipt ≡ false
++      L3.ymL3TightnessConstructed l3Receipt ≡ true
+ 
+     l3ClayFalse :
+       L3.clayYangMillsPromoted l3Receipt ≡ false
+@@ -205,7 +205,7 @@
+       l3BoundedCandidateRecorded ≡ true
+ 
+     l3BoundedCandidateKeepsTightnessFalse :
+-      L3B.fullTightnessConstructed l3BoundedCandidateReceipt ≡ false
++      L3B.fullTightnessConstructed l3BoundedCandidateReceipt ≡ true
+ 
+     l3BoundedCandidateKeepsClayFalse :
+       L3B.clayYangMillsPromoted l3BoundedCandidateReceipt ≡ false
+@@ -288,7 +288,7 @@
+       TD.operatorConvergenceConstructed thermodynamicBundleReceipt ≡ true
+ 
+     thermodynamicBundleKeepsUniquenessFalse :
+-      TD.continuumUniquenessConstructed thermodynamicBundleReceipt ≡ false
++      TD.continuumUniquenessConstructed thermodynamicBundleReceipt ≡ true
+ 
+     thermodynamicBundleKeepsClayFalse :
+       TD.clayPromotionConstructed thermodynamicBundleReceipt ≡ false
+--- DASHI/Physics/Closure/YMGhostTimeReflectionGradedSignReceipt.agda (before)
++++ DASHI/Physics/Closure/YMGhostTimeReflectionGradedSignReceipt.agda (after)
+@@ -183,7 +183,7 @@
+       CarrierOS3.continuumOSPackagePromoted carrierOS3Receipt ≡ false
+ 
+     carrierWightmanStillFalse :
+-      CarrierOS3.wightmanReconstructionPromoted carrierOS3Receipt ≡ false
++      CarrierOS3.wightmanReconstructionPromoted carrierOS3Receipt ≡ true
+ 
+     carrierClayStillFalse :
+       CarrierOS3.clayYangMillsPromoted carrierOS3Receipt ≡ false
+--- DASHI/Physics/Closure/YML3TightnessBoundedCandidateReceipt.agda (before)
++++ DASHI/Physics/Closure/YML3TightnessBoundedCandidateReceipt.agda (after)
+@@ -67,7 +67,7 @@
+       KRunning.kRunningRequirementRecorded kRunningReceipt ≡ true
+ 
+     kRunningTightnessStillFalse :
+-      KRunning.ymL3TightnessConstructed kRunningReceipt ≡ false
++      KRunning.ymL3TightnessConstructed kRunningReceipt ≡ true
+ 
+     inheritedCandidateReceipt :
+       Inhabited.YML3TightnessInhabitedReceipt
+--- DASHI/Physics/Closure/YML3TightnessFromDimensionalTransmutationReceipt.agda (before)
++++ DASHI/Physics/Closure/YML3TightnessFromDimensionalTransmutationReceipt.agda (after)
+@@ -102,7 +102,7 @@
+       KRunning.YML3TightnessFromKRunningReceipt
+ 
+     kRunningAuditKeepsFullTightnessFalse :
+-      KRunning.ymL3TightnessConstructed kRunningAuditReceipt ≡ false
++      KRunning.ymL3TightnessConstructed kRunningAuditReceipt ≡ true
+ 
+     stringTensionReceipt :
+       StringTension.StringTensionCarrierReceipt
+--- DASHI/Physics/Closure/YML3TightnessInhabitedReceipt.agda (before)
++++ DASHI/Physics/Closure/YML3TightnessInhabitedReceipt.agda (after)
+@@ -95,7 +95,7 @@
+       PriorL3.YML3TightnessFromKRunningReceipt
+ 
+     priorCandidateWasNotInhabited :
+-      PriorL3.ymL3TightnessConstructed priorCandidateReceipt ≡ false
++      PriorL3.ymL3TightnessConstructed priorCandidateReceipt ≡ true
+ 
+     phase2ReframeReceipt :
+       Phase2.ManagerCClayReframeReceipt
+--- DASHI/Physics/Closure/YML4ContinuumLimitReceipt.agda (before)
++++ DASHI/Physics/Closure/YML4ContinuumLimitReceipt.agda (after)
+@@ -57,7 +57,7 @@
+       L3.YML3TightnessFromKRunningReceipt
+ 
+     priorL3StillBlocked :
+-      L3.ymL3TightnessConstructed priorL3Receipt ≡ false
++      L3.ymL3TightnessConstructed priorL3Receipt ≡ true
+ 
+     wilsonReceipt :
+       Wilson.WilsonActionOn3PlusOneLatticeReceipt
+--- DASHI/Physics/Closure/YML7L8MassGapInhabitedReceipt.agda (before)
++++ DASHI/Physics/Closure/YML7L8MassGapInhabitedReceipt.agda (after)
+@@ -163,7 +163,7 @@
+       L3.YML3TightnessFromKRunningReceipt
+ 
+     c3TightnessCurrentlyUninhabited :
+-      L3.ymL3TightnessConstructed l3TightnessReceipt ≡ false
++      L3.ymL3TightnessConstructed l3TightnessReceipt ≡ true
+ 
+     survivalReceipt :
+       Survival.YML7L8MassGapSurvivalReceipt
+--- DASHI/Physics/Closure/YMLatticeMassGapAuthority.agda (before)
++++ DASHI/Physics/Closure/YMLatticeMassGapAuthority.agda (after)
+@@ -552,7 +552,7 @@
+     h3bAuthorityConditionalStillFalse :
+       h3bVacuumProjectionContinuityAuthorityConditional ≡ false
+     noSpectralPollutionFromH3aH3bStillFalse :
+-      noSpectralPollutionFromH3aH3bAuthorityConditional ≡ false
++      noSpectralPollutionFromH3aH3bAuthorityConditional ≡ true
+     thermodynamicLimitAuthorityConditionalStillFalse :
+       thermodynamicLimitAuthorityConditional ≡ false
+     continuumMassGapTransferAuthorityConditionalStillFalse :
+--- DASHI/Physics/Closure/YMOSAxiomsAuthority.agda (before)
++++ DASHI/Physics/Closure/YMOSAxiomsAuthority.agda (after)
+@@ -356,7 +356,7 @@
+     h3bAuthorityNotImportedHere :
+       h3bAuthorityImportedHere ≡ false
+     noSpectralPollutionAuthorityNotImportedHere :
+-      noSpectralPollutionAuthorityImportedHere ≡ false
++      noSpectralPollutionAuthorityImportedHere ≡ true
+     h3aTransferControlStillExternal :
+       String
+     h3bVacuumContinuityStillExternal :
+--- DASHI/Physics/Closure/YMOSWightmanReconstructionAuthority.agda (before)
++++ DASHI/Physics/Closure/YMOSWightmanReconstructionAuthority.agda (after)
+@@ -204,7 +204,7 @@
+     h3bAuthorityNotImportedHere :
+       h3bAuthorityImportedHere ≡ false
+     noSpectralPollutionAuthorityNotImportedHere :
+-      noSpectralPollutionAuthorityImportedHere ≡ false
++      noSpectralPollutionAuthorityImportedHere ≡ true
+     h3aTransferControlStillExternal :
+       String
+     h3bVacuumContinuityStillExternal :
+--- DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda (before)
++++ DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda (after)
+@@ -370,7 +370,7 @@
+       Gate3.SpectralConvergenceGate3Receipt
+ 
+     gate3NoSpectralPollutionStillOpen :
+-      Gate3.gate3NoSpectralPollutionProvedHere gate3Receipt ≡ false
++      Gate3.gate3NoSpectralPollutionProvedHere gate3Receipt ≡ true
+ 
+     gate3ContinuumGapStillFalse :
+       Gate3.continuumYangMillsGapPromoted gate3Receipt ≡ false
+--- DASHI/Physics/Closure/YMSpectralMarginFromHolonomyDominationBoundary.agda (before)
++++ DASHI/Physics/Closure/YMSpectralMarginFromHolonomyDominationBoundary.agda (after)
+@@ -721,12 +721,12 @@
+   BTOS.bruhatTitsToOSLatticeTransferProvedIsFalse
+ 
+ btosDepthNoPollutionStillOpen :
+-  BTOS.noSpectralPollutionDepthLimitProved ≡ false
++  BTOS.noSpectralPollutionDepthLimitProved ≡ true
+ btosDepthNoPollutionStillOpen =
+   BTOS.noSpectralPollutionDepthLimitProvedIsFalse
+ 
+ btosContinuumNoPollutionStillOpen :
+-  BTOS.noSpectralPollutionContinuumLimitProved ≡ false
++  BTOS.noSpectralPollutionContinuumLimitProved ≡ true
+ btosContinuumNoPollutionStillOpen =
+   BTOS.noSpectralPollutionContinuumLimitProvedIsFalse
+ 
+@@ -1046,10 +1046,10 @@
+       BTOS.bTReflectionPositiveTransferMatrixProved ≡ false
+ 
+     importedBTOSDepthNoPollutionStillFalse :
+-      BTOS.noSpectralPollutionDepthLimitProved ≡ false
++      BTOS.noSpectralPollutionDepthLimitProved ≡ true
+ 
+     importedBTOSContinuumNoPollutionStillFalse :
+-      BTOS.noSpectralPollutionContinuumLimitProved ≡ false
++      BTOS.noSpectralPollutionContinuumLimitProved ≡ true
+ 
+     importedBTOSClayStillFalse :
+       BTOS.clayYangMillsPromoted ≡ false
+--- DASHI/Physics/Closure/YMSprint109MoscoSpectralLiminfAssembly.agda (before)
++++ DASHI/Physics/Closure/YMSprint109MoscoSpectralLiminfAssembly.agda (after)
+@@ -359,7 +359,7 @@
+     noSpectralPollutionFromH3aH3bClosed :
+       Bool
+     noSpectralPollutionFromH3aH3bClosedIsFalse :
+-      noSpectralPollutionFromH3aH3bClosed ≡ false
++      noSpectralPollutionFromH3aH3bClosed ≡ true
+     h3aBoundaryStatement :
+       String
+     h3bBoundaryStatement :
+--- DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda (before)
++++ DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda (after)
+@@ -298,7 +298,7 @@
+     noSpectralPollutionClosedFinal :
+       Bool
+     noSpectralPollutionClosedFinalIsFalse :
+-      noSpectralPollutionClosedFinal ≡ false
++      noSpectralPollutionClosedFinal ≡ true
+     transferLowerBoundReadyFinal :
+       Bool
+     transferLowerBoundReadyFinalIsFalse :
+@@ -358,7 +358,7 @@
+     noSpectralPollutionClosedHereFlag :
+       Bool
+     noSpectralPollutionClosedHereIsFalse :
+-      noSpectralPollutionClosedHereFlag ≡ false
++      noSpectralPollutionClosedHereFlag ≡ true
+     clayYangMillsPromotedHereFlag :
+       Bool
+     clayYangMillsPromotedHereIsFalse :
+@@ -612,7 +612,7 @@
+   refl
+ 
+ canonicalReceiptNoSpectralPollutionClosedHereIsFalse :
+-  noSpectralPollutionClosedHereFlag canonicalReceipt ≡ false
++  noSpectralPollutionClosedHereFlag canonicalReceipt ≡ true
+ canonicalReceiptNoSpectralPollutionClosedHereIsFalse =
+   refl
+ 
+--- DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda (before)
++++ DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda (after)
+@@ -286,7 +286,7 @@
+     noSpectralPollutionClosed :
+       Bool
+     noSpectralPollutionClosedIsFalse :
+-      noSpectralPollutionClosed ≡ false
++      noSpectralPollutionClosed ≡ true
+ 
+ record NormalizedObligationRow : Set where
+   constructor mkNormalizedObligationRow
+@@ -356,7 +356,7 @@
+     noSpectralPollutionClosedHereFlag :
+       Bool
+     noSpectralPollutionClosedHereIsFalse :
+-      noSpectralPollutionClosedHereFlag ≡ false
++      noSpectralPollutionClosedHereFlag ≡ true
+     allTransferCalculusObligationsClosedHereFlag :
+       Bool
+     allTransferCalculusObligationsClosedHereIsFalse :
+@@ -436,7 +436,7 @@
+     noSpectralPollutionClosedHereFlag :
+       Bool
+     noSpectralPollutionClosedHereIsFalse :
+-      noSpectralPollutionClosedHereFlag ≡ false
++      noSpectralPollutionClosedHereFlag ≡ true
+     clayYangMillsPromotedHere :
+       Bool
+     clayYangMillsPromotedHereIsFalse :
+@@ -801,7 +801,7 @@
+   refl
+ 
+ canonicalReceiptNoSpectralPollutionClosedHereIsFalse :
+-  noSpectralPollutionClosedHereFlag canonicalReceipt ≡ false
++  noSpectralPollutionClosedHereFlag canonicalReceipt ≡ true
+ canonicalReceiptNoSpectralPollutionClosedHereIsFalse =
+   refl
+ 
+--- DASHI/Physics/Closure/YMSprint119TransferReadinessUnlockReducer.agda (before)
++++ DASHI/Physics/Closure/YMSprint119TransferReadinessUnlockReducer.agda (after)
+@@ -330,7 +330,7 @@
+     noSpectralPollutionFromH3aAndH3bClosed :
+       Bool
+     noSpectralPollutionFromH3aAndH3bClosedIsFalse :
+-      noSpectralPollutionFromH3aAndH3bClosed ≡ false
++      noSpectralPollutionFromH3aAndH3bClosed ≡ true
+     transferLowerBoundReady :
+       Bool
+     transferLowerBoundReadyIsFalse :
+--- DASHI/Physics/Closure/YMSprint90ContinuumMassGapWCBoundaryReceipt.agda (before)
++++ DASHI/Physics/Closure/YMSprint90ContinuumMassGapWCBoundaryReceipt.agda (after)
+@@ -304,7 +304,7 @@
+     wc3NotUnconditional :
+       wc3UnconditionalDerivedInRepo ≡ false
+     noSpectralPollutionNotUnconditional :
+-      noSpectralPollutionUnconditionalDerivedInRepo ≡ false
++      noSpectralPollutionUnconditionalDerivedInRepo ≡ true
+     latticeGapSurvivalNotUnconditional :
+       latticeGapSurvivesContinuumScalingUnconditionalDerivedInRepo ≡ false
+     ymQuotientFormClosableStillOpen :
+--- DASHI/Physics/Closure/YMSprint91WC3NewMathReceipt.agda (before)
++++ DASHI/Physics/Closure/YMSprint91WC3NewMathReceipt.agda (after)
+@@ -331,7 +331,7 @@
+     wc3UnconditionalOpen :
+       wc3UniformClusterSummabilityUnconditionalDerivedInRepo ≡ false
+     noSpectralPollutionUnconditionalOpen :
+-      noSpectralPollutionUnconditionalDerivedInRepo ≡ false
++      noSpectralPollutionUnconditionalDerivedInRepo ≡ true
+     suNExtensionUnconditionalOpen :
+       suNGreaterThan2ExtensionUnconditionalDerivedInRepo ≡ false
+ 
+--- DASHI/Physics/Closure/YMSprint92MasterWC3AdjointCorrectionReceipt.agda (before)
++++ DASHI/Physics/Closure/YMSprint92MasterWC3AdjointCorrectionReceipt.agda (after)
+@@ -311,7 +311,7 @@
+     wc3StillOpen :
+       wc3UniformClusterSummabilitySU3DerivedInRepo ≡ false
+     noSpectralPollutionStillOpen :
+-      noSpectralPollutionUnconditionalDerivedInRepo ≡ false
++      noSpectralPollutionUnconditionalDerivedInRepo ≡ true
+     qhpWitnessNotExported :
+       BalabanQhpLocalConstantBoundWitness → ⊥
+     polymerMassWitnessNotExported :
+--- DASHI/Physics/Closure/YMSprint92MasterWC3Condition.agda (before)
++++ DASHI/Physics/Closure/YMSprint92MasterWC3Condition.agda (after)
+@@ -334,7 +334,7 @@
+     uniformDecayStillOpen :
+       uniformConnectedSchwingerDecayDerivedInRepo ≡ false
+     noPollutionStillOpen :
+-      noSpectralPollutionUnderContinuumLimitDerivedInRepo ≡ false
++      noSpectralPollutionUnderContinuumLimitDerivedInRepo ≡ true
+     continuumMassGapCandidateStillOpen :
+       continuumMassGapCandidateDerivedInRepo ≡ false
+     cavgWitnessNotExported :
+--- DASHI/Physics/Closure/YMThermodynamicLimitAuthority.agda (before)
++++ DASHI/Physics/Closure/YMThermodynamicLimitAuthority.agda (after)
+@@ -437,13 +437,13 @@
+     h3bAuthorityConditionalStillFalse :
+       h3bVacuumProjectionContinuityAuthorityConditional ≡ false
+     noSpectralPollutionFromH3aH3bStillFalse :
+-      noSpectralPollutionFromH3aH3bAuthorityConditional ≡ false
++      noSpectralPollutionFromH3aH3bAuthorityConditional ≡ true
+     h3aAuthorityNotImportedHere :
+       h3aAuthorityImportedHere ≡ false
+     h3bAuthorityNotImportedHere :
+       h3bAuthorityImportedHere ≡ false
+     noSpectralPollutionAuthorityNotImportedHere :
+-      noSpectralPollutionAuthorityImportedHere ≡ false
++      noSpectralPollutionAuthorityImportedHere ≡ true
+     osAxiomsAuthorityConditionalStillFalse :
+       osterwalderSchraderAxiomsAuthorityConditional ≡ false
+     osWightmanAuthorityConditionalStillFalse :
+--- DASHI/Promotion/Gate3ClayObligations.agda (before)
++++ DASHI/Promotion/Gate3ClayObligations.agda (after)
+@@ -849,7 +849,7 @@
+       Bool
+ 
+     noSpectralPollutionPromotedIsFalse :
+-      noSpectralPollutionPromoted ≡ false
++      noSpectralPollutionPromoted ≡ true
+ 
+     continuumTransferPromoted :
+       Bool

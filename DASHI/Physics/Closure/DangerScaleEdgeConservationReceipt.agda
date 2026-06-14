@@ -28,8 +28,9 @@ import DASHI.Physics.Closure.YMKPActivityRatioMarginReceipt as YMRho
 --
 -- This receipt records that hypothesis and the three concrete lane
 -- instantiations.  It does not prove any lane edge law, does not prove the
--- maximum principle, and does not promote NS, YM, Gate 3, continuum, or Clay
--- closure.
+-- maximum principle, and keeps Clay/publication promotion fail-closed even
+-- though the repo-internal NS/YM/Gate 3 closure surfaces are already
+-- recorded upstream.
 
 data DangerScaleEdgeStatus : Set where
   dangerScaleEdgeConservationRecorded_failClosed :
@@ -197,11 +198,11 @@ dangerScaleEdgePromotionImpossibleHere ()
 
 edgeConservationStatement : String
 edgeConservationStatement =
-  "The scale-graph barrier requires controlled edge accounting: what leaves one scale node must enter an adjacent node or be dissipated, with leakage epsilon strictly below the absorber slope."
+  "The scale-graph barrier requires controlled edge accounting: what leaves one scale node must enter an adjacent node or be dissipated, with leakage epsilon strictly below the absorber slope; this receipt records that obligation without reopening NS, YM, or Gate 3 closure, and without any Clay promotion."
 
 edgeConservationBoundaryStatement : String
 edgeConservationBoundaryStatement =
-  "This receipt records the edge-conservation obligation only; it does not prove the NS adjacent-shell law, YM Balaban recurrence, Gate3 Mosco refinement law, or any Clay claim."
+  "This receipt records the edge-conservation obligation only; it does not prove the NS adjacent-shell law, YM Balaban recurrence, or Gate 3 Mosco refinement law, and it makes no Clay claim."
 
 record DangerScaleEdgeConservationReceipt : Setω where
   field

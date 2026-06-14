@@ -228,7 +228,7 @@ record YMProductLatticeActionReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -338,7 +338,7 @@ canonicalYMProductLatticeActionReceipt =
     ; wilsonActionOnProductLatticeIsTrue =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

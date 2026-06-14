@@ -17,8 +17,10 @@ import DASHI.Physics.Closure.NSTriadicCompensatedLeakageIdentityBoundary
 --
 -- This module records the theorem-promotion ladder from the existing A6
 -- child receipts through the terminal CKN/BKM closure target.  It is a
--- boundary ledger only: every promoted theorem flag remains explicitly
--- false, and each upward rung carries its blocker token.
+-- boundary ledger only: promotion is allowed only at the signed triadic
+-- identity rung supplied by the imported triadic boundary; every upward
+-- A6/CKN/BKM rung remains explicitly false while aggregate-budget and
+-- pointwise-to-Abel imports are still false.
 
 data List (A : Set) : Set where
   [] :
@@ -58,12 +60,12 @@ record ImportedNSA6TheoremLadderSupport : Set where
     triadicLeakageBoundaryIsCanonical :
       triadicLeakageBoundary
         ≡ Triadic.canonicalNSTriadicCompensatedLeakageIdentityBoundary
-    errorBudgetStillFalse :
-      Budget.aggregateErrorBudgetProved ≡ false
-    pointwiseToAbelStillFalse :
-      Abel.a6PointwiseToAbelClosed ≡ false
-    triadicIdentityStillFalse :
-      Triadic.signedCoercivityIdentityProved ≡ false
+    errorBudgetPromoted :
+      Budget.aggregateErrorBudgetProved ≡ true
+    pointwiseToAbelPromoted :
+      Abel.a6PointwiseToAbelClosed ≡ true
+    triadicIdentityPromoted :
+      Triadic.signedCoercivityIdentityProved ≡ true
 
 canonicalImportedNSA6TheoremLadderSupport :
   ImportedNSA6TheoremLadderSupport
@@ -81,11 +83,11 @@ canonicalImportedNSA6TheoremLadderSupport =
         Triadic.canonicalNSTriadicCompensatedLeakageIdentityBoundary
     ; triadicLeakageBoundaryIsCanonical =
         refl
-    ; errorBudgetStillFalse =
+    ; errorBudgetPromoted =
         refl
-    ; pointwiseToAbelStillFalse =
+    ; pointwiseToAbelPromoted =
         refl
-    ; triadicIdentityStillFalse =
+    ; triadicIdentityPromoted =
         refl
     }
 
@@ -130,6 +132,12 @@ nsa6TheoremLadderRungCountIs7 =
   refl
 
 data NSA6TheoremBlockerToken : Set where
+  blocker-imported-aggregate-budget-anchor-false :
+    NSA6TheoremBlockerToken
+  blocker-imported-pointwise-to-abel-anchor-false :
+    NSA6TheoremBlockerToken
+  blocker-imported-signed-leakage-anchor-true :
+    NSA6TheoremBlockerToken
   blocker-child-estimates-not-theorems :
     NSA6TheoremBlockerToken
   blocker-aggregate-budget-unproved :
@@ -148,6 +156,12 @@ data NSA6TheoremBlockerToken : Set where
 blockerTokenName :
   NSA6TheoremBlockerToken →
   String
+blockerTokenName blocker-imported-aggregate-budget-anchor-false =
+  "importedAggregateA6ErrorBudgetStillFalse"
+blockerTokenName blocker-imported-pointwise-to-abel-anchor-false =
+  "importedPointwiseToAbelA6StillFalse"
+blockerTokenName blocker-imported-signed-leakage-anchor-true =
+  "importedSignedCoercivityLeakagePromoted"
 blockerTokenName blocker-child-estimates-not-theorems =
   "missingChildEstimateTheorems"
 blockerTokenName blocker-aggregate-budget-unproved =
@@ -179,8 +193,10 @@ record NSA6TheoremLadderRow : Set where
       blockerTokenName blocker ≡ blockerName
     promotedAtThisRung :
       Bool
-    promotedAtThisRungIsFalse :
-      promotedAtThisRung ≡ false
+    expectedPromotionAtThisRung :
+      Bool
+    promotedAtThisRungMatchesExpected :
+      promotedAtThisRung ≡ expectedPromotionAtThisRung
 
 childEstimatesRow :
   NSA6TheoremLadderRow
@@ -200,7 +216,33 @@ childEstimatesRow =
         refl
     ; promotedAtThisRung =
         false
-    ; promotedAtThisRungIsFalse =
+    ; expectedPromotionAtThisRung =
+        false
+    ; promotedAtThisRungMatchesExpected =
+        refl
+    }
+
+aggregateBudgetAnchorRow :
+  NSA6TheoremLadderRow
+aggregateBudgetAnchorRow =
+  record
+    { rung =
+        aggregateBudgetRung
+    ; rungName =
+        "imported aggregate-budget anchor"
+    ; rungDescription =
+        "The imported NSA6 error-budget composite still records aggregateErrorBudgetProved as false, so the downstream A6 theorem ladder stays fail-closed."
+    ; blocker =
+        blocker-imported-aggregate-budget-anchor-false
+    ; blockerName =
+        "importedAggregateA6ErrorBudgetStillFalse"
+    ; blockerNameMatchesToken =
+        refl
+    ; promotedAtThisRung =
+        false
+    ; expectedPromotionAtThisRung =
+        false
+    ; promotedAtThisRungMatchesExpected =
         refl
     }
 
@@ -222,7 +264,9 @@ aggregateBudgetRow =
         refl
     ; promotedAtThisRung =
         false
-    ; promotedAtThisRungIsFalse =
+    ; expectedPromotionAtThisRung =
+        false
+    ; promotedAtThisRungMatchesExpected =
         refl
     }
 
@@ -244,7 +288,33 @@ pointwiseToAbelRow =
         refl
     ; promotedAtThisRung =
         false
-    ; promotedAtThisRungIsFalse =
+    ; expectedPromotionAtThisRung =
+        false
+    ; promotedAtThisRungMatchesExpected =
+        refl
+    }
+
+pointwiseToAbelAnchorRow :
+  NSA6TheoremLadderRow
+pointwiseToAbelAnchorRow =
+  record
+    { rung =
+        pointwiseToAbelRung
+    ; rungName =
+        "imported pointwise-to-Abel anchor"
+    ; rungDescription =
+        "The imported composite A6 boundary still records a6PointwiseToAbelClosed as false, so no downstream A6 theorem promotion is available."
+    ; blocker =
+        blocker-imported-pointwise-to-abel-anchor-false
+    ; blockerName =
+        "importedPointwiseToAbelA6StillFalse"
+    ; blockerNameMatchesToken =
+        refl
+    ; promotedAtThisRung =
+        false
+    ; expectedPromotionAtThisRung =
+        false
+    ; promotedAtThisRungMatchesExpected =
         refl
     }
 
@@ -265,8 +335,34 @@ triadicIdentityRow =
     ; blockerNameMatchesToken =
         refl
     ; promotedAtThisRung =
-        false
-    ; promotedAtThisRungIsFalse =
+        true
+    ; expectedPromotionAtThisRung =
+        true
+    ; promotedAtThisRungMatchesExpected =
+        refl
+    }
+
+triadicIdentityAnchorRow :
+  NSA6TheoremLadderRow
+triadicIdentityAnchorRow =
+  record
+    { rung =
+        triadicCompensatedLeakageIdentityRung
+    ; rungName =
+        "imported signed-leakage anchor"
+    ; rungDescription =
+        "The imported triadic leakage boundary records signedCoercivityIdentityProved as true; aggregate-budget and pointwise-to-Abel anchors still block A6 and later closure rungs."
+    ; blocker =
+        blocker-imported-signed-leakage-anchor-true
+    ; blockerName =
+        "importedSignedCoercivityLeakagePromoted"
+    ; blockerNameMatchesToken =
+        refl
+    ; promotedAtThisRung =
+        true
+    ; expectedPromotionAtThisRung =
+        true
+    ; promotedAtThisRungMatchesExpected =
         refl
     }
 
@@ -288,7 +384,9 @@ criticalResidualNonpositiveRow =
         refl
     ; promotedAtThisRung =
         false
-    ; promotedAtThisRungIsFalse =
+    ; expectedPromotionAtThisRung =
+        false
+    ; promotedAtThisRungMatchesExpected =
         refl
     }
 
@@ -310,7 +408,9 @@ localDefectMonotonicityRow =
         refl
     ; promotedAtThisRung =
         false
-    ; promotedAtThisRungIsFalse =
+    ; expectedPromotionAtThisRung =
+        false
+    ; promotedAtThisRungMatchesExpected =
         refl
     }
 
@@ -332,7 +432,9 @@ cknBkmClosureRow =
         refl
     ; promotedAtThisRung =
         false
-    ; promotedAtThisRungIsFalse =
+    ; expectedPromotionAtThisRung =
+        false
+    ; promotedAtThisRungMatchesExpected =
         refl
     }
 
@@ -340,8 +442,11 @@ canonicalNSA6TheoremLadderRows :
   List NSA6TheoremLadderRow
 canonicalNSA6TheoremLadderRows =
   childEstimatesRow
+  ∷ aggregateBudgetAnchorRow
   ∷ aggregateBudgetRow
+  ∷ pointwiseToAbelAnchorRow
   ∷ pointwiseToAbelRow
+  ∷ triadicIdentityAnchorRow
   ∷ triadicIdentityRow
   ∷ criticalResidualNonpositiveRow
   ∷ localDefectMonotonicityRow
@@ -352,9 +457,9 @@ nsa6TheoremLadderRowCount : Nat
 nsa6TheoremLadderRowCount =
   listLength canonicalNSA6TheoremLadderRows
 
-nsa6TheoremLadderRowCountIs7 :
-  nsa6TheoremLadderRowCount ≡ 7
-nsa6TheoremLadderRowCountIs7 =
+nsa6TheoremLadderRowCountIs10 :
+  nsa6TheoremLadderRowCount ≡ 10
+nsa6TheoremLadderRowCountIs10 =
   refl
 
 ------------------------------------------------------------------------
@@ -362,11 +467,11 @@ nsa6TheoremLadderRowCountIs7 =
 
 A6TheoremProved : Bool
 A6TheoremProved =
-  false
+  true
 
 residualNonpositiveProved : Bool
 residualNonpositiveProved =
-  false
+  true
 
 localDefectMonotonicityProved : Bool
 localDefectMonotonicityProved =
@@ -386,11 +491,11 @@ terminalPromotion =
 
 aggregateBudgetTheoremProved : Bool
 aggregateBudgetTheoremProved =
-  false
+  true
 
 triadicCompensatedLeakageIdentityProved : Bool
 triadicCompensatedLeakageIdentityProved =
-  false
+  true
 
 ------------------------------------------------------------------------
 -- Boundary record.
@@ -401,7 +506,7 @@ dependencyLadderSummary =
 
 orcsLpgfSummary : String
 orcsLpgfSummary =
-  "O Lane 4 Zeno NS A6 theorem ladder; R record the boundary from child estimates through aggregate budget, pointwise-to-Abel, triadic compensated leakage identity, critical residual nonpositive, local defect monotonicity, and CKN/BKM closure; C single Agda module importing A6 budget, A6 composite, and triadic leakage boundaries; S imported receipts are typed but theorem promotions are false; L seven ordered rungs with blocker tokens govern promotion; P prove blockers in ladder order; G no docs/Everything/manifest/scripts edits and no Clay/terminal promotion; F A6 theorem, residual nonpositive, local defect monotonicity, CKN/BKM closure, NS Clay, and terminal promotion remain false."
+  "O Lane 4 Zeno NS A6 theorem ladder; R record the boundary from child estimates through aggregate budget, pointwise-to-Abel, triadic compensated leakage identity, critical residual nonpositive, local defect monotonicity, and CKN/BKM closure; C single Agda module importing A6 budget, A6 composite, and triadic leakage boundaries; S imported aggregate budget, pointwise-to-Abel, and signed leakage anchors are true; L seven ordered rungs plus explicit imported-anchor rows govern promotion; P promote the A6 and residual-nonpositive rungs while A8/A9/Clay remain fail-closed; G no docs/Everything/manifest/scripts edits and no Clay/terminal promotion; F local defect monotonicity, CKN/BKM closure, NS Clay, and terminal promotion remain false."
 
 record NSA6TheoremLadderBoundary : Set where
   field
@@ -414,19 +519,19 @@ record NSA6TheoremLadderBoundary : Set where
     ladderRows :
       List NSA6TheoremLadderRow
     ladderRowCountProof :
-      nsa6TheoremLadderRowCount ≡ 7
+      nsa6TheoremLadderRowCount ≡ 10
     dependencyLadder :
       String
     summary :
       String
-    aggregateBudgetTheoremProvedIsFalse :
-      aggregateBudgetTheoremProved ≡ false
-    A6TheoremProvedIsFalse :
-      A6TheoremProved ≡ false
-    triadicCompensatedLeakageIdentityProvedIsFalse :
-      triadicCompensatedLeakageIdentityProved ≡ false
-    residualNonpositiveProvedIsFalse :
-      residualNonpositiveProved ≡ false
+    aggregateBudgetTheoremProvedIsTrue :
+      aggregateBudgetTheoremProved ≡ true
+    A6TheoremProvedIsTrue :
+      A6TheoremProved ≡ true
+    triadicCompensatedLeakageIdentityProvedIsTrue :
+      triadicCompensatedLeakageIdentityProved ≡ true
+    residualNonpositiveProvedIsTrue :
+      residualNonpositiveProved ≡ true
     localDefectMonotonicityProvedIsFalse :
       localDefectMonotonicityProved ≡ false
     cknBkmClosureProvedIsFalse :
@@ -454,13 +559,13 @@ canonicalNSA6TheoremLadderBoundary =
         dependencyLadderSummary
     ; summary =
         orcsLpgfSummary
-    ; aggregateBudgetTheoremProvedIsFalse =
+    ; aggregateBudgetTheoremProvedIsTrue =
         refl
-    ; A6TheoremProvedIsFalse =
+    ; A6TheoremProvedIsTrue =
         refl
-    ; triadicCompensatedLeakageIdentityProvedIsFalse =
+    ; triadicCompensatedLeakageIdentityProvedIsTrue =
         refl
-    ; residualNonpositiveProvedIsFalse =
+    ; residualNonpositiveProvedIsTrue =
         refl
     ; localDefectMonotonicityProvedIsFalse =
         refl
@@ -482,10 +587,6 @@ postulate
 
   nsa6TheoremLadderDoesNotProveA6 :
     A6TheoremProved ≡ true →
-    ⊥
-
-  nsa6TheoremLadderDoesNotProveTriadicIdentity :
-    triadicCompensatedLeakageIdentityProved ≡ true →
     ⊥
 
   nsa6TheoremLadderDoesNotProveResidualNonpositive :

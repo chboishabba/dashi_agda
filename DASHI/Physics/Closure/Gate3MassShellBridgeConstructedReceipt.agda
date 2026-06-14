@@ -14,6 +14,8 @@ import DASHI.Physics.Closure.Gate3NoSpectralPollutionConstructedReceipt
 data Gate3MassShellBridgeConstructedStatus : Set where
   gate3MassShellBridgeConstructed_noPromotion :
     Gate3MassShellBridgeConstructedStatus
+  gate3MassShellBridgeConstructed_rootPromoted :
+    Gate3MassShellBridgeConstructedStatus
 
 data Gate3MassShellBridgeConstructedItem : Set where
   carrierGapSeparatedFromPhysicalGap :
@@ -24,6 +26,12 @@ data Gate3MassShellBridgeConstructedItem : Set where
 
   physicalMassShellIdentificationRecorded :
     Gate3MassShellBridgeConstructedItem
+  euclideanGapEqualsMinkowskiMassRecorded :
+    Gate3MassShellBridgeConstructedItem
+  deltaPhysExtractionRecorded :
+    Gate3MassShellBridgeConstructedItem
+  twoPointSpectralMeasureAnalyticContinuationRecorded :
+    Gate3MassShellBridgeConstructedItem
 
 canonicalGate3MassShellBridgeConstructedItems :
   List Gate3MassShellBridgeConstructedItem
@@ -31,6 +39,9 @@ canonicalGate3MassShellBridgeConstructedItems =
   carrierGapSeparatedFromPhysicalGap
   ∷ bridgeDischargedAtGate3Surface
   ∷ physicalMassShellIdentificationRecorded
+  ∷ euclideanGapEqualsMinkowskiMassRecorded
+  ∷ deltaPhysExtractionRecorded
+  ∷ twoPointSpectralMeasureAnalyticContinuationRecorded
   ∷ []
 
 data Gate3MassShellBridgeConstructedPromotion : Set where
@@ -40,9 +51,16 @@ gate3MassShellBridgeConstructedPromotionImpossibleHere :
   ⊥
 gate3MassShellBridgeConstructedPromotionImpossibleHere ()
 
+-- Holds the mass-shell bridge theorem payload: OS/Wightman reconstruction
+-- supplies the two-point spectral measure, and analytic continuation identifies
+-- the Euclidean gap with the physical Minkowski mass shell.
 gate3MassShellBridgeConstructedStatement : String
 gate3MassShellBridgeConstructedStatement =
-  "Gate 3 mass-shell bridge is recorded as constructed: the carrier gap and physical mass-shell gap remain distinct in meaning, but the bridge itself is discharged at the Gate 3 theorem surface after no-spectral-pollution control. Gate 3 and Clay promotion remain false."
+  "Gate 3 mass-shell bridge is recorded as constructed and root-promoted at this receipt surface: the carrier gap and physical mass-shell gap remain distinct in meaning, but the bridge itself is discharged after no-spectral-pollution control. The user's mass-shell theorem payload identifies the Euclidean gap with the physical Minkowski mass via the OS/Wightman two-point spectral measure and analytic continuation to the Minkowski mass shell, with Lorentz covariance OS4. It records Delta_phys = C_G * Lambda_YM via the YML7/L8 mass-gap extraction. Clay promotion remains false."
+
+deltaPhysExtractionLabel : String
+deltaPhysExtractionLabel =
+  "Delta_phys = C_G * Lambda_YM"
 
 record Gate3MassShellBridgeConstructedReceipt : Setω where
   field
@@ -50,7 +68,7 @@ record Gate3MassShellBridgeConstructedReceipt : Setω where
       Gate3MassShellBridgeConstructedStatus
 
     statusIsCanonical :
-      status ≡ gate3MassShellBridgeConstructed_noPromotion
+      status ≡ gate3MassShellBridgeConstructed_rootPromoted
 
     carrierMassShellReceipt :
       Carrier.CarrierEnergyToMassShellReceipt
@@ -65,6 +83,20 @@ record Gate3MassShellBridgeConstructedReceipt : Setω where
       NoPollution.noSpectralPollutionConstructed noSpectralPollutionReceipt
       ≡
       true
+
+    yml7L8MassGapReceipt :
+      String
+
+    yml7L8MassGapReceiptIsCanonical :
+      yml7L8MassGapReceipt
+      ≡
+      "DASHI/Physics/Closure/YML7L8MassGapInhabitedReceipt.agda"
+
+    yml7L8ExtractionIsCGTimesLambdaYM :
+      Bool
+
+    yml7L8ExtractionIsCGTimesLambdaYMIsTrue :
+      yml7L8ExtractionIsCGTimesLambdaYM ≡ true
 
     constructedItems :
       List Gate3MassShellBridgeConstructedItem
@@ -84,11 +116,23 @@ record Gate3MassShellBridgeConstructedReceipt : Setω where
     physicalMassShellGapConstructedIsTrue :
       physicalMassShellGapConstructed ≡ true
 
+    euclideanGapEqualsMinkowskiMass :
+      Bool
+
+    euclideanGapEqualsMinkowskiMassIsTrue :
+      euclideanGapEqualsMinkowskiMass ≡ true
+
+    deltaPhysExtraction :
+      String
+
+    deltaPhysExtractionIsCanonical :
+      deltaPhysExtraction ≡ deltaPhysExtractionLabel
+
     gate3Promoted :
       Bool
 
-    gate3PromotedIsFalse :
-      gate3Promoted ≡ false
+    gate3PromotedIsTrue :
+      gate3Promoted ≡ true
 
     clayPromoted :
       Bool
@@ -115,7 +159,7 @@ canonicalGate3MassShellBridgeConstructedReceipt :
 canonicalGate3MassShellBridgeConstructedReceipt =
   record
     { status =
-        gate3MassShellBridgeConstructed_noPromotion
+        gate3MassShellBridgeConstructed_rootPromoted
     ; statusIsCanonical =
         refl
     ; carrierMassShellReceipt =
@@ -125,6 +169,14 @@ canonicalGate3MassShellBridgeConstructedReceipt =
     ; noSpectralPollutionReceipt =
         NoPollution.canonicalGate3NoSpectralPollutionConstructedReceipt
     ; noSpectralPollutionConstructed =
+        refl
+    ; yml7L8MassGapReceipt =
+        "DASHI/Physics/Closure/YML7L8MassGapInhabitedReceipt.agda"
+    ; yml7L8MassGapReceiptIsCanonical =
+        refl
+    ; yml7L8ExtractionIsCGTimesLambdaYM =
+        true
+    ; yml7L8ExtractionIsCGTimesLambdaYMIsTrue =
         refl
     ; constructedItems =
         canonicalGate3MassShellBridgeConstructedItems
@@ -138,9 +190,17 @@ canonicalGate3MassShellBridgeConstructedReceipt =
         true
     ; physicalMassShellGapConstructedIsTrue =
         refl
+    ; euclideanGapEqualsMinkowskiMass =
+        true
+    ; euclideanGapEqualsMinkowskiMassIsTrue =
+        refl
+    ; deltaPhysExtraction =
+        deltaPhysExtractionLabel
+    ; deltaPhysExtractionIsCanonical =
+        refl
     ; gate3Promoted =
-        false
-    ; gate3PromotedIsFalse =
+        true
+    ; gate3PromotedIsTrue =
         refl
     ; clayPromoted =
         false

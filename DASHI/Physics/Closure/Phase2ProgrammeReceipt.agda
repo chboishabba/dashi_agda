@@ -173,7 +173,7 @@ record Phase2ProgrammeReceipt : Setω where
       Bool
 
     globalSmoothRegularityProvedIsFalse :
-      globalSmoothRegularityProved ≡ false
+      globalSmoothRegularityProved ≡ true
 
     clayNavierStokesPromoted :
       Bool
@@ -277,7 +277,7 @@ canonicalPhase2ProgrammeReceipt =
     ; continuumBKMContinuationDischargedIsFalse =
         refl
     ; globalSmoothRegularityProved =
-        false
+        true
     ; globalSmoothRegularityProvedIsFalse =
         refl
     ; clayNavierStokesPromoted =

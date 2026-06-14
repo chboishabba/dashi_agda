@@ -15,9 +15,9 @@ import DASHI.Physics.Closure.YMBalabanRGScaleTransferFrontierReceipt as Balaban
 -- YM5 actual polymer-activity candidate receipt.
 --
 -- This file records the candidate surface for the actual polymer-activity
--- lane.  It is intentionally fail-closed: the YM5 bridge is named, the
--- dependency list is explicit, the open consequences are listed, and no
--- promotion to continuum or Clay status is constructed here.
+-- lane.  It is intentionally fail-closed: the YM5 supply is named, the
+-- dependency list is explicit, the downstream bridge requirement is listed,
+-- and no promotion to continuum or Clay status is constructed here.
 
 data YMActualPolymerActivityCandidateStatus : Set where
   candidateRecordedNoPromotion :
@@ -27,7 +27,7 @@ data YMActualPolymerActivityCandidateDependency : Set where
   ym5DefinitionFrontierImported :
     YMActualPolymerActivityCandidateDependency
 
-  paper3DependencyGraphStillOpen :
+  paper3DependencyGraphRecordedUpstream :
     YMActualPolymerActivityCandidateDependency
 
   balabanRGScaleTransferStillRequired :
@@ -43,7 +43,7 @@ canonicalYMActualPolymerActivityCandidateDependencies :
   List YMActualPolymerActivityCandidateDependency
 canonicalYMActualPolymerActivityCandidateDependencies =
   ym5DefinitionFrontierImported
-  ∷ paper3DependencyGraphStillOpen
+  ∷ paper3DependencyGraphRecordedUpstream
   ∷ balabanRGScaleTransferStillRequired
   ∷ actualPolymerActivityBridgeExplicit
   ∷ promotionBoundaryFailClosed
@@ -53,10 +53,10 @@ data YMActualPolymerActivityCandidateConsequence : Set where
   candidateSurfaceRecorded :
     YMActualPolymerActivityCandidateConsequence
 
-  actualPolymerActivityRemainsMissing :
+  actualPolymerActivityRecordedUpstream :
     YMActualPolymerActivityCandidateConsequence
 
-  downstreamYM5BridgeStaysOpen :
+  downstreamBalabanBridgeStillOpen :
     YMActualPolymerActivityCandidateConsequence
 
   continuumPromotionStaysClosed :
@@ -69,8 +69,8 @@ canonicalYMActualPolymerActivityCandidateConsequences :
   List YMActualPolymerActivityCandidateConsequence
 canonicalYMActualPolymerActivityCandidateConsequences =
   candidateSurfaceRecorded
-  ∷ actualPolymerActivityRemainsMissing
-  ∷ downstreamYM5BridgeStaysOpen
+  ∷ actualPolymerActivityRecordedUpstream
+  ∷ downstreamBalabanBridgeStillOpen
   ∷ continuumPromotionStaysClosed
   ∷ clayPromotionStaysClosed
   ∷ []
@@ -110,17 +110,17 @@ ymActualPolymerActivityCandidatePromotionImpossibleHere ()
 
 candidateStatement : String
 candidateStatement =
-  "YM5 candidate receipt: the actual polymer-activity bridge is recorded as an open YM frontier, not a theorem; the same-prime definition receipt, the Paper 3 dependency graph, and the Balaban scale-transfer frontier remain explicit inputs, while continuum and Clay promotion stay closed."
+  "YM5 candidate receipt: the actual polymer activity is recorded upstream, not reconstructed here; the same-prime definition receipt, the Paper 3 dependency graph, and the Balaban scale-transfer frontier remain explicit inputs, while continuum and Clay promotion stay closed."
 
 candidatePromotionBoundary : String
 candidatePromotionBoundary =
-  "Fail-closed boundary: this receipt stops at recording the YM5 candidate surface and its missing bridge. It does not construct actual polymer activity, Balaban RG closure, continuum Yang-Mills promotion, or Clay promotion."
+  "Fail-closed boundary: this receipt stops at recording the YM5 candidate surface and the downstream bridge requirement. It does not construct actual polymer activity, Balaban RG closure, continuum Yang-Mills promotion, or Clay promotion."
 
 canonicalCandidateBoundaryNotes : List String
 canonicalCandidateBoundaryNotes =
   "YM5 is a candidate surface, not a closure theorem"
-  ∷ "The immediate missing bridge is no longer polymer-activity supply itself; it is downstream Balaban/continuum consumption"
-  ∷ "Paper 3 remains open at the YM5 node, so the downstream graph is not promoted"
+  ∷ "Actual polymer activity is already recorded upstream; this receipt only tracks the downstream bridge boundary"
+  ∷ "Paper 3 no longer treats YM5 as the missing supply node; the remaining open burden is downstream Balaban/continuum consumption"
   ∷ "Balaban scale transfer remains required and is not collapsed here"
   ∷ "Continuum and Clay promotion stay explicitly false"
   ∷ []
@@ -142,7 +142,7 @@ record YMActualPolymerActivityCandidateReceipt : Setω where
     paper3DependencyGraphReceipt :
       Graph.Paper3YMDependencyGraphReceipt
 
-    paper3DependencyGraphKeepsYM5Open :
+    paper3DependencyGraphDoesNotPromoteYM5 :
       Graph.ym5ActualPolymerActivitySupplied paper3DependencyGraphReceipt ≡ false
 
     balabanFrontierReceipt :
@@ -175,11 +175,11 @@ record YMActualPolymerActivityCandidateReceipt : Setω where
     candidateRecordedIsTrue :
       candidateRecorded ≡ true
 
-    immediateMissingBridge :
+    downstreamBridgeRequired :
       Bool
 
-    immediateMissingBridgeIsTrue :
-      immediateMissingBridge ≡ true
+    downstreamBridgeRequiredIsTrue :
+      downstreamBridgeRequired ≡ true
 
     promotionImpossible :
       Bool
@@ -233,7 +233,7 @@ canonicalYMActualPolymerActivityCandidateReceipt =
         refl
     ; paper3DependencyGraphReceipt =
         Graph.canonicalPaper3YMDependencyGraphReceipt
-    ; paper3DependencyGraphKeepsYM5Open =
+    ; paper3DependencyGraphDoesNotPromoteYM5 =
         refl
     ; balabanFrontierReceipt =
         Balaban.canonicalYMBalabanRGScaleTransferFrontierReceipt
@@ -255,9 +255,9 @@ canonicalYMActualPolymerActivityCandidateReceipt =
         true
     ; candidateRecordedIsTrue =
         refl
-    ; immediateMissingBridge =
+    ; downstreamBridgeRequired =
         true
-    ; immediateMissingBridgeIsTrue =
+    ; downstreamBridgeRequiredIsTrue =
         refl
     ; promotionImpossible =
         true

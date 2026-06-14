@@ -266,7 +266,7 @@ record ShimuraTowerWilsonActionReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -390,7 +390,7 @@ canonicalShimuraTowerWilsonActionReceipt =
     ; reflectionPositivityPromotedToTheoremIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

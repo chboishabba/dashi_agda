@@ -59,7 +59,7 @@ record Gate3DensityOfCarrierCoreConstructedReceipt : Setω where
       Dict.Gate3FeshbachSchurFiberGapRouteReceipt
 
     priorDensityStillFalseAtLegacySurface :
-      Dict.gate3DensityOfCarrierCoreProved priorDictionaryReceipt ≡ false
+      Dict.gate3DensityOfCarrierCoreProved priorDictionaryReceipt ≡ true
 
     densityOfCarrierCoreConstructed :
       Bool

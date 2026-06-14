@@ -1,0 +1,16 @@
+script: apply_stale_consumer_codemod
+repo_root: /home/c/Documents/code/dashi_agda
+run_dir: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T232755_7
+scanned_agda_files: 4548
+changed_files: 0
+total_field_flips: 0
+protected_line_hits: 11958
+
+field_counts:
+  (none)
+
+changed_files:
+  (none)
+
+patch_log: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T232755_7/patch.diff
+changed_files_manifest: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T232755_7/changed_files.tsv

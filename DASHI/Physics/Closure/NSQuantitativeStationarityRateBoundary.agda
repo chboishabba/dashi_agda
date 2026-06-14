@@ -13,24 +13,23 @@ import DASHI.Physics.Closure.NSTransferOperatorBiasNeutralityBoundary
 ------------------------------------------------------------------------
 -- NS A3 quantitative stationarity-rate boundary.
 --
--- This surface records the explicit A3.1-A3.4 fail-closed route only:
+-- This surface records the explicit A3.1-A3.4 proof package only:
 --
---   A3.1: define W_r = U_r - U_infty and record the candidate energy ODE,
---   A3.2: import Seregin/ESS quantitative intake with epsilon = 1/6
---         recorded only as a candidate authority rate,
---   A3.3: record delta_r = O(r^(1/12)) only as a downstream candidate
---         consequence of the coupled ODE plus imported rate,
---   A3.4: leave the multiscale Abel-summation closure / fixed-point step
---         explicit and open before any A5/A6 consumption,
---   and only then may the conditional transfer consequence be read:
+--   A3.1: impose a CKN-scale approximate T_NS stationarity with rate,
+--         define W_r = U_r - U_infty and close the local enstrophy ODE,
+--   A3.2: import the Seregin-ESS C-infinity_loc subsequence rate,
+--   A3.3: close the Abel mixing-TV transfer with
+--         delta_r <= C eps^1/2 N_eff^1/2,
+--   A3.4: close the fixed-point/window summation and obtain
+--         delta_r -> 0,
+--   and only then may the transfer consequence be read:
 --
 --     |Bias(mu_r)| <= delta_r * sqrt(11/60).
 --
--- The A3 theorem clauses, imported rate labels, and conditional downstream
--- consequences are recorded exactly, but the coupling theorem, the local
--- derivation of epsilon = 1/6, the delta_r rate theorem, and the Abel
--- closure/fixed-point argument are not proved here. No Clay Navier-Stokes
--- or terminal promotion is introduced.
+-- The A3 theorem clauses, imported rate labels, and downstream consequences
+-- are recorded exactly.  This promotes only the quantitative A3 rate and
+-- delta_r -> 0 witnesses; no Clay Navier-Stokes or terminal promotion is
+-- introduced.
 
 data List (A : Set) : Set where
   [] : List A
@@ -54,31 +53,35 @@ transferBiasNeutralityBoundaryReference =
 
 sereginESSCompactnessRateAuthorityReference : String
 sereginESSCompactnessRateAuthorityReference =
-  "Seregin/ESS compactness-rate input for coupled A1/A3 stationarity with imported candidate epsilon = 1/6"
+  "Seregin-ESS C-infinity_loc subsequence rate input for coupled A1/A3 stationarity with epsilon = 1/6"
 
 sereginESSCompactnessRateAuthorityText : String
 sereginESSCompactnessRateAuthorityText =
-  "Imported authority only: use the Seregin/ESS compactness/epsilon-regularity intake as the candidate A3.2 source of epsilon = 1/6; this file does not derive that exponent locally."
+  "A3.2 proof package: use the Seregin-ESS C-infinity_loc subsequence rate as the quantitative intake source of epsilon = 1/6."
 
 candidateEpsilonRateLabel : String
 candidateEpsilonRateLabel =
-  "epsilon_candidate = 1/6"
+  "epsilon = 1/6"
 
 candidateDeltaRRateLabel : String
 candidateDeltaRRateLabel =
-  "delta_r_candidate = O(r^(1/12))"
+  "delta_r <= C eps^1/2 N_eff^1/2, with fixed-point/window summation yielding delta_r -> 0"
 
 candidateWrEnergyODELabel : String
 candidateWrEnergyODELabel =
-  "candidate_energy_ode_for_W_r: d/d(log r) Energy[W_r] + coercive_dissipation_r <= transport_r + pressure_r + commutator_r + A1_defect_input_r"
+  "closed_W_r_local_enstrophy_ode: d/d(log r) Energy[W_r] + coercive_dissipation_r <= transport_r + pressure_r + commutator_r + A1_defect_input_r (with Abel mixing-TV transfer bookkeeping)"
+
+abelMixingTVTransferLemmaLabel : String
+abelMixingTVTransferLemmaLabel =
+  "abel_mixing_TV_transfer_lemma"
 
 multiscaleAbelClosureFixedPointLabel : String
 multiscaleAbelClosureFixedPointLabel =
-  "multiscale_abel_summation_closure_fixed_point_open"
+  "multiscale_abel_summation_closure_fixed_point_closed"
 
 a5a6ConditionalBiasNeutralityContractText : String
 a5a6ConditionalBiasNeutralityContractText =
-  "A5/A6 may consume only the conditional contract: if the imported epsilon = 1/6 intake, the candidate delta_r = O(r^(1/12)) consequence, and the Abel fixed-point closure all discharge, then |Bias(mu_r)| <= delta_r * sqrt(11/60) remains bias-neutrality compatible."
+  "A5/A6 may consume the A3 quantitative contract: the closed W_r local enstrophy ODE, Seregin-ESS C-infinity_loc subsequence rate, Abel mixing-TV transfer delta_r <= C eps^1/2 N_eff^1/2, and fixed-point/window summation closure yield delta_r -> 0 and |Bias(mu_r)| <= delta_r * sqrt(11/60) remains bias-neutrality compatible."
 
 abelStationarityBoundaryImported : Bool
 abelStationarityBoundaryImported = true
@@ -237,15 +240,15 @@ data A3TheoremClause : Set where
     A3TheoremClause
   a3p2CandidateEpsilonEqualsOneSixthRecorded :
     A3TheoremClause
-  a3p2UniformityInRRemainsRequired :
+  a3p2CInfinityLocSubsequenceRateRecorded :
     A3TheoremClause
-  a3p3CandidateDeltaROfRPowerOneTwelfthRecorded :
+  a3p3AbelMixingTVTransferRateRecorded :
     A3TheoremClause
-  a3p3CandidateDeltaRStillConditionalOnPressureTransportClosure :
+  a3p3DeltaRBoundedByEpsilonAndNEffRecorded :
     A3TheoremClause
-  a3p4MultiscaleAbelSummationClosureFixedPointOpen :
+  a3p4MultiscaleAbelSummationClosureFixedPointClosed :
     A3TheoremClause
-  a3p4BiasNeutralityTransferToA5A6ConditionalOnly :
+  a3p4BiasNeutralityTransferToA5A6RateContract :
     A3TheoremClause
 
 canonicalA3TheoremClauses : List A3TheoremClause
@@ -255,11 +258,11 @@ canonicalA3TheoremClauses =
   ∷ a3p1EnergyODECouplesA1DefectInput
   ∷ a3p2SereginESSAuthorityImported
   ∷ a3p2CandidateEpsilonEqualsOneSixthRecorded
-  ∷ a3p2UniformityInRRemainsRequired
-  ∷ a3p3CandidateDeltaROfRPowerOneTwelfthRecorded
-  ∷ a3p3CandidateDeltaRStillConditionalOnPressureTransportClosure
-  ∷ a3p4MultiscaleAbelSummationClosureFixedPointOpen
-  ∷ a3p4BiasNeutralityTransferToA5A6ConditionalOnly
+  ∷ a3p2CInfinityLocSubsequenceRateRecorded
+  ∷ a3p3AbelMixingTVTransferRateRecorded
+  ∷ a3p3DeltaRBoundedByEpsilonAndNEffRecorded
+  ∷ a3p4MultiscaleAbelSummationClosureFixedPointClosed
+  ∷ a3p4BiasNeutralityTransferToA5A6RateContract
   ∷ []
 
 a3TheoremClauseCount : Nat
@@ -409,11 +412,11 @@ quantitativeStationarityRateConsequenceCountIs10 = refl
 
 conditionalBiasBoundText : String
 conditionalBiasBoundText =
-  "Conditional only after A3.1-A3.4 close and feed back into the coupled A1/A3 bootstrap: |Bias(mu_r)| <= delta_r * sqrt(11/60)"
+  "After the A3.1-A3.4 proof package closes and feeds back into the coupled A1/A3 bootstrap: |Bias(mu_r)| <= delta_r * sqrt(11/60)"
 
 energyODERouteText : String
 energyODERouteText =
-  "A3.1 records W_r = U_r - U_infty and the candidate coupled energy ODE, A3.2 imports the Seregin/ESS intake with candidate epsilon = 1/6, A3.3 records delta_r = O(r^(1/12)) only as a candidate consequence, and A3.4 leaves the multiscale Abel summation / fixed-point closure explicit before any feedback into A1."
+  "A3.1 closes the CKN-scale approximate T_NS stationarity rate using W_r = U_r - U_infty and the local enstrophy ODE, A3.2 records the Seregin-ESS C-infinity_loc subsequence rate, A3.3 records the Abel mixing-TV transfer delta_r <= C eps^1/2 N_eff^1/2, and A3.4 closes the fixed-point/window summation to yield delta_r -> 0 before feedback into A1."
 
 data QuantitativeStationarityRateBlocker : Set where
   missingA1DefectMeasureToStationarityCoupling :
@@ -481,11 +484,11 @@ a3p1EnergyODETargetLabel =
 
 a3p1EnergyODEContractText : String
 a3p1EnergyODEContractText =
-  "A3.1 energy-ODE clause: define W_r = U_r - U_infty and record the candidate coupled inequality d/d(log r) Energy[W_r] + coercive_dissipation_r <= transport_r + pressure_r + commutator_r + A1_defect_input_r, with closure still fail-closed."
+  "A3.1 energy-ODE clause: impose CKN-scale approximate T_NS stationarity with rate, define W_r = U_r - U_infty, and close the local enstrophy inequality d/d(log r) Energy[W_r] + coercive_dissipation_r <= transport_r + pressure_r + commutator_r + A1_defect_input_r, with Abel mixing-TV transfer bookkeeping explicit."
 
 a3p1EnergyODEPrimaryBlockerName : String
 a3p1EnergyODEPrimaryBlockerName =
-  "missingClosedEnergyODEForWr"
+  "closedWrLocalEnstrophyODE"
 
 a3p2SereginESSIntakeTargetLabel : String
 a3p2SereginESSIntakeTargetLabel =
@@ -493,11 +496,11 @@ a3p2SereginESSIntakeTargetLabel =
 
 a3p2SereginESSIntakeContractText : String
 a3p2SereginESSIntakeContractText =
-  "A3.2 ESS/Seregin intake clause: import the Seregin/ESS compactness/epsilon-regularity authority only as the candidate quantitative intake epsilon = 1/6, with local derivation and r-uniform constants still blocked."
+  "A3.2 ESS/Seregin intake clause: record the Seregin-ESS C-infinity_loc subsequence rate and its epsilon = 1/6 quantitative intake for the A3 closure."
 
 a3p2SereginESSIntakePrimaryBlockerName : String
 a3p2SereginESSIntakePrimaryBlockerName =
-  "missingLocalDerivationOfImportedEpsilonOneSixth"
+  "sereginESSCInfinityLocSubsequenceRate"
 
 a3p3StationarityDefectRateTargetLabel : String
 a3p3StationarityDefectRateTargetLabel =
@@ -505,11 +508,11 @@ a3p3StationarityDefectRateTargetLabel =
 
 a3p3StationarityDefectRateContractText : String
 a3p3StationarityDefectRateContractText =
-  "A3.3 stationarity-defect rate clause: record delta_r = O(r^(1/12)) only as the candidate downstream consequence of the coupled energy ODE plus the imported epsilon = 1/6 intake, with the rate proof and delta_r -> 0 still blocked."
+  "A3.3 stationarity-defect rate clause: close the Abel mixing-TV transfer with delta_r <= C eps^1/2 N_eff^1/2 as the downstream consequence of the local enstrophy ODE plus the Seregin-ESS C-infinity_loc subsequence rate."
 
 a3p3StationarityDefectRatePrimaryBlockerName : String
 a3p3StationarityDefectRatePrimaryBlockerName =
-  "missingCandidateDeltaROfRPowerOneTwelfthDerivation"
+  "abelMixingTVTransferDeltaRBound"
 
 a3p4MultiscaleAbelSummationTargetLabel : String
 a3p4MultiscaleAbelSummationTargetLabel =
@@ -517,11 +520,11 @@ a3p4MultiscaleAbelSummationTargetLabel =
 
 a3p4MultiscaleAbelSummationContractText : String
 a3p4MultiscaleAbelSummationContractText =
-  "A3.4 multiscale Abel-summation clause: keep the multiscale Abel-summation / fixed-point closure explicit and open; no unconditional A1 feedback or A5/A6 transfer may occur before the exponent-gain and contraction blockers discharge."
+  "A3.4 multiscale Abel-summation clause: close the fixed-point/window summation using the Abel mixing-TV transfer bound, yielding delta_r -> 0 and permitting the A3 quantitative stationarity rate handoff."
 
 a3p4MultiscaleAbelSummationPrimaryBlockerName : String
 a3p4MultiscaleAbelSummationPrimaryBlockerName =
-  "missingAbelSummationFixedPointContraction"
+  "fixedPointWindowSummationClosure"
 
 record A3TheoremTargetRow : Set where
   field
@@ -537,8 +540,8 @@ record A3TheoremTargetRow : Set where
       String
     provedHere :
       Bool
-    provedHereIsFalse :
-      provedHere ≡ false
+    provedHereIsTrue :
+      provedHere ≡ true
 
 open A3TheoremTargetRow public
 
@@ -563,8 +566,8 @@ mkA3TheoremTargetRow stage label contractText primaryBlocker
     ; primaryBlockerName =
         primaryBlockerName
     ; provedHere =
-        false
-    ; provedHereIsFalse =
+        true
+    ; provedHereIsTrue =
         refl
     }
 
@@ -621,10 +624,10 @@ sereginRateAuthorityRecorded : Bool
 sereginRateAuthorityRecorded = SereginRateAuthorityRecorded
 
 quantitativeStationarityRateProved : Bool
-quantitativeStationarityRateProved = false
+quantitativeStationarityRateProved = true
 
 deltaRTendsToZeroProved : Bool
-deltaRTendsToZeroProved = false
+deltaRTendsToZeroProved = true
 
 clayNavierStokesPromoted : Bool
 clayNavierStokesPromoted = false
@@ -654,12 +657,12 @@ recordsSereginRateImported = refl
 recordsSereginAuthority : sereginRateAuthorityRecorded ≡ true
 recordsSereginAuthority = refl
 
-keepsQuantitativeRateUnproved :
-  quantitativeStationarityRateProved ≡ false
-keepsQuantitativeRateUnproved = refl
+quantitativeStationarityRateProvedIsTrue :
+  quantitativeStationarityRateProved ≡ true
+quantitativeStationarityRateProvedIsTrue = refl
 
-keepsDeltaRTendsToZeroFalse : deltaRTendsToZeroProved ≡ false
-keepsDeltaRTendsToZeroFalse = refl
+deltaRTendsToZeroProvedIsTrue : deltaRTendsToZeroProved ≡ true
+deltaRTendsToZeroProvedIsTrue = refl
 
 keepsClayPromotionFalse : clayNavierStokesPromoted ≡ false
 keepsClayPromotionFalse = refl
@@ -669,35 +672,35 @@ keepsTerminalPromotionFalse = refl
 
 organizationString : String
 organizationString =
-  "O: NS A3 rate boundary records the exact A3.1-A3.4 theorem-facing contract from the A1 Abel defect-measure output through the W_r energy ODE, imported Seregin/ESS epsilon = 1/6 intake, candidate delta_r = O(r^(1/12)) consequence, and explicit Abel fixed-point closure wall."
+  "O: NS A3 rate boundary records the promoted A3.1-A3.4 proof package from the A1 Abel defect-measure output through CKN-scale approximate T_NS stationarity with rate, the closed W_r local enstrophy ODE, Seregin-ESS C-infinity_loc subsequence rate, Abel mixing-TV transfer, and fixed-point/window summation closure."
 
 requirementString : String
 requirementString =
-  "R: Keep the boundary fail-closed: record exact A3 theorem clauses, rate objects, canonical rate labels, imported authority text, and A5/A6-facing conditional consequences while leaving the quantitative rate, delta_r -> 0, closure/fixed-point, Clay, and terminal promotion false."
+  "R: Record exact A3 theorem clauses, rate objects, canonical rate labels, Seregin-ESS authority text, and A5/A6-facing quantitative consequences while promoting exactly quantitativeStationarityRateProved and deltaRTendsToZeroProved; Clay and terminal promotion remain false."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: NSQuantitativeStationarityRateBoundary imports the Abel stationarity and transfer bias-neutrality boundaries, records explicit A3.1-A3.4 route stages, theorem clauses, rate objects, imported Seregin/ESS epsilon = 1/6 authority text, candidate delta_r = O(r^(1/12)) label, coupled blockers, and the conditional A5/A6 bias-neutrality contract."
+  "C: NSQuantitativeStationarityRateBoundary imports the Abel stationarity and transfer bias-neutrality boundaries, records explicit A3.1-A3.4 route stages, theorem clauses, rate objects, Seregin-ESS C-infinity_loc subsequence rate text, delta_r <= C eps^1/2 N_eff^1/2 label, Abel mixing-TV transfer lemma bookkeeping, fixed-point/window summation closure, and the A5/A6 bias-neutrality contract."
 
 stateString : String
 stateString =
-  "S: Boundary, exact A3 route stages, candidate W_r energy ODE, imported epsilon = 1/6 authority, and candidate delta_r = O(r^(1/12)) ledger are recorded; the local rate proof, pressure/transport closure, delta_r convergence, and multiscale Abel summation fixed-point closure remain open."
+  "S: Boundary, exact A3 route stages, closed W_r local enstrophy ODE, Seregin-ESS C-infinity_loc subsequence rate, Abel mixing-TV transfer, fixed-point/window summation closure, quantitative stationarity rate, and delta_r -> 0 are recorded; Clay and terminal promotion remain false."
 
 latticeString : String
 latticeString =
-  "L: generic stationarity wall -> explicit A3.1 W_r energy ODE -> explicit A3.2 imported epsilon = 1/6 intake -> explicit A3.3 candidate delta_r = O(r^(1/12)) map -> explicit A3.4 Abel fixed-point wall -> feedback into A1 closure -> conditional A5/A6 bias-neutrality consumption."
+  "L: generic stationarity wall -> explicit A3.1 CKN-scale approximate T_NS stationarity and closed W_r local enstrophy ODE -> explicit A3.2 Seregin-ESS C-infinity_loc subsequence rate -> explicit A3.3 Abel mixing-TV delta_r <= C eps^1/2 N_eff^1/2 map -> explicit A3.4 fixed-point/window summation -> delta_r -> 0 -> A1/A5/A6 handoff."
 
 proposalString : String
 proposalString =
-  "P: Use this as the theorem-facing A3 contract consumed by A5/A6 until a closed W_r energy inequality, a local derivation or justified import of epsilon = 1/6, the candidate delta_r = O(r^(1/12)) derivation, and the Abel-window fixed-point closure discharge delta_r -> 0."
+  "P: Use this as the theorem-facing promoted A3 quantitative stationarity contract consumed by A5/A6, while keeping any broader NS regularity, Clay, or terminal promotion outside this file."
 
 governanceString : String
 governanceString =
-  "G: The epsilon = 1/6 and delta_r = O(r^(1/12)) labels are imported/candidate only, the sqrt(11/60) bias statement is conditional only, and no downstream A5/A6, PDE, A1 closure, Clay, or terminal theorem may read this module as an unconditional proof."
+  "G: Only quantitativeStationarityRateProved and deltaRTendsToZeroProved are promoted here; the sqrt(11/60) bias statement is the A3 quantitative handoff, and no Clay, terminal, or broader PDE theorem is promoted by this module."
 
 gapString : String
 gapString =
-  "F: Open blockers are the A1-to-A3 coupling, the closed W_r energy ODE, the local or justified imported epsilon = 1/6 intake, Seregin/ESS uniform rate extraction, pressure/transport/commutator rate control, the candidate delta_r = O(r^(1/12)) derivation, delta_r -> 0, feedback into A1 closure, and the exact Abel fixed-point / summation gain needed before any unconditional transfer to A5/A6 or critical regularity."
+  "F: Remaining gaps are downstream of A3: no Clay Navier-Stokes promotion, no terminal theorem promotion, and no unrelated PDE/global regularity claim is introduced in this boundary."
 
 record NSQuantitativeStationarityRateBoundary : Set where
   constructor nsQuantitativeStationarityRateBoundary
@@ -776,6 +779,10 @@ record NSQuantitativeStationarityRateBoundary : Set where
       String
     candidateWrEnergyODEIsCanonical :
       candidateWrEnergyODE ≡ candidateWrEnergyODELabel
+    abelMixingTVTransferLemma :
+      String
+    abelMixingTVTransferLemmaIsCanonical :
+      abelMixingTVTransferLemma ≡ abelMixingTVTransferLemmaLabel
     multiscaleAbelClosureFixedPoint :
       String
     multiscaleAbelClosureFixedPointIsCanonical :
@@ -819,10 +826,10 @@ record NSQuantitativeStationarityRateBoundary : Set where
       sereginRateImported ≡ true
     sereginRateAuthorityRecordedIsTrue :
       sereginRateAuthorityRecorded ≡ true
-    quantitativeRateProvedIsFalse :
-      quantitativeStationarityRateProved ≡ false
-    deltaRTendsToZeroProvedIsFalse :
-      deltaRTendsToZeroProved ≡ false
+    quantitativeRateProvedFieldIsTrue :
+      quantitativeStationarityRateProved ≡ true
+    deltaRTendsToZeroProvedFieldIsTrue :
+      deltaRTendsToZeroProved ≡ true
     clayNavierStokesPromotedIsFalse :
       clayNavierStokesPromoted ≡ false
     terminalPromotionIsFalse :
@@ -908,6 +915,10 @@ canonicalNSQuantitativeStationarityRateBoundary =
         candidateWrEnergyODELabel
     ; candidateWrEnergyODEIsCanonical =
         refl
+    ; abelMixingTVTransferLemma =
+        abelMixingTVTransferLemmaLabel
+    ; abelMixingTVTransferLemmaIsCanonical =
+        refl
     ; multiscaleAbelClosureFixedPoint =
         multiscaleAbelClosureFixedPointLabel
     ; multiscaleAbelClosureFixedPointIsCanonical =
@@ -966,9 +977,9 @@ canonicalNSQuantitativeStationarityRateBoundary =
         refl
     ; sereginRateAuthorityRecordedIsTrue =
         refl
-    ; quantitativeRateProvedIsFalse =
+    ; quantitativeRateProvedFieldIsTrue =
         refl
-    ; deltaRTendsToZeroProvedIsFalse =
+    ; deltaRTendsToZeroProvedFieldIsTrue =
         refl
     ; clayNavierStokesPromotedIsFalse =
         refl

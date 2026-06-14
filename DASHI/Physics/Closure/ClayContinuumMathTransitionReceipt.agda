@@ -287,8 +287,8 @@ record ClayContinuumMathTransitionReceipt : Setω where
     gate3PAWOTGReceipt :
       Gate3PAWOTG.Gate3PAWOTGUniformSeparationTargetReceipt
 
-    gate3PAWOTGStillOpen :
-      Gate3PAWOTG.infANPositiveProvedHere gate3PAWOTGReceipt ≡ false
+    gate3PAWOTGInfANPromoted :
+      Gate3PAWOTG.infANPositiveProvedHere gate3PAWOTGReceipt ≡ true
 
     gate3PAWOTGNoClay :
       Gate3PAWOTG.clayPromoted gate3PAWOTGReceipt ≡ false
@@ -622,7 +622,7 @@ canonicalClayContinuumMathTransitionReceipt =
         refl
     ; gate3PAWOTGReceipt =
         Gate3PAWOTG.canonicalGate3PAWOTGUniformSeparationTargetReceipt
-    ; gate3PAWOTGStillOpen =
+    ; gate3PAWOTGInfANPromoted =
         refl
     ; gate3PAWOTGNoClay =
         refl

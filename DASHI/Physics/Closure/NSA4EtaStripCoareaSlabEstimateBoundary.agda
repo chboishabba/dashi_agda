@@ -159,16 +159,16 @@ record ImportedEtaStripCoareaSlabSupport : Set where
       uniformCoareaObligation
         ≡ UniformNormal.canonicalUniformInNormalCoareaConstantObligationCarrier
 
-    outputPreimageStillFalse :
-      OutputPreimage.OutputStripPreimageMeasureEstimateProved ≡ false
+    outputPreimageNowTrue :
+      OutputPreimage.OutputStripPreimageMeasureEstimateProved ≡ true
     sardStillFalse :
       Sard.SardRegularValueSlicingProved ≡ false
     antipodalStillFalse :
       Antipodal.antipodalTubeNullMassProved ≡ false
-    uniformNormalStillFalse :
-      UniformNormal.uniformInNormalConstantsTheoremProved ≡ false
-    cA4StillFalse :
-      UniformNormal.positiveLowerBoundConstantCA4Proved ≡ false
+    uniformNormalNowTrue :
+      UniformNormal.uniformInNormalConstantsTheoremProved ≡ true
+    cA4NowTrue :
+      UniformNormal.positiveLowerBoundConstantCA4Proved ≡ true
 
 canonicalImportedEtaStripCoareaSlabSupport :
   ImportedEtaStripCoareaSlabSupport
@@ -258,15 +258,15 @@ canonicalImportedEtaStripCoareaSlabSupport =
         UniformNormal.canonicalUniformInNormalCoareaConstantObligationCarrier
     ; uniformCoareaObligationIsCanonical =
         refl
-    ; outputPreimageStillFalse =
+    ; outputPreimageNowTrue =
         refl
     ; sardStillFalse =
         refl
     ; antipodalStillFalse =
         refl
-    ; uniformNormalStillFalse =
+    ; uniformNormalNowTrue =
         refl
-    ; cA4StillFalse =
+    ; cA4NowTrue =
         refl
     }
 

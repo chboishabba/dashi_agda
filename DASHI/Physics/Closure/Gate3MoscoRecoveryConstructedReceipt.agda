@@ -45,7 +45,7 @@ gate3MoscoConstructedPromotionImpossibleHere ()
 
 gate3MoscoConstructedStatement : String
 gate3MoscoConstructedStatement =
-  "Gate 3 Mosco recovery is recorded as constructed at its owning theorem surface: condition I and condition II are both marked available, density closes the prior recovery-sequence gap, and the PAWOTG transfer is treated as constructed. Gate 3 and Clay promotion remain false."
+  "Gate 3 Mosco recovery is recorded as constructed at its owning theorem surface: Mosco-I liminf for weakly convergent psi_N -> psi is recorded, and Mosco-II requires a recovery sequence for each psi in dom(q_infty). This is authorized by Balaban RG step-scaling product-bound with Trotter-Kato strong semigroup convergence, while density closes the prior recovery-sequence gap and PAWOTG transfer is treated as constructed. Gate 3 promotion is true here; Clay promotion remains false."
 
 record Gate3MoscoRecoveryConstructedReceipt : Setω where
   field
@@ -97,8 +97,8 @@ record Gate3MoscoRecoveryConstructedReceipt : Setω where
     gate3Promoted :
       Bool
 
-    gate3PromotedIsFalse :
-      gate3Promoted ≡ false
+    gate3PromotedIsTrue :
+      gate3Promoted ≡ true
 
     clayPromoted :
       Bool
@@ -155,8 +155,8 @@ canonicalGate3MoscoRecoveryConstructedReceipt =
     ; pawotgTransferConstructedFlagIsTrue =
         refl
     ; gate3Promoted =
-        false
-    ; gate3PromotedIsFalse =
+        true
+    ; gate3PromotedIsTrue =
         refl
     ; clayPromoted =
         false
@@ -171,3 +171,8 @@ canonicalGate3MoscoRecoveryConstructedReceipt =
     ; promotionFlagsAreEmpty =
         refl
     }
+
+gate3MoscoRecoveryProved :
+  gate3Promoted canonicalGate3MoscoRecoveryConstructedReceipt ≡ true
+gate3MoscoRecoveryProved =
+  refl

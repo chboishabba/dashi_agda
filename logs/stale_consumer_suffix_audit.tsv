@@ -1,0 +1,118 @@
+kind	fact	file	line	matched_text
+suspicious_suffix	continuumYangMillsConstructed	DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda	358	      continuumYangMillsConstructedHere ≡ false
+suspicious_suffix_split	continuumYangMillsConstructed	DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda	472	    ; continuumYangMillsConstructedHere = ||         false
+suspicious_suffix	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierRenormalizationGroupScaleReceipt.agda	219	      continuumYangMillsConstructedHere ≡ false
+suspicious_suffix_split	continuumYangMillsConstructed	DASHI/Physics/Closure/CarrierRenormalizationGroupScaleReceipt.agda	311	    ; continuumYangMillsConstructedHere = ||         false
+suspicious_suffix	gate3NoSpectralPollutionProved	DASHI/Physics/Closure/SpectralConvergenceGate3Receipt.agda	163	      gate3NoSpectralPollutionProvedHere ≡ false
+suspicious_suffix_split	gate3NoSpectralPollutionProved	DASHI/Physics/Closure/SpectralConvergenceGate3Receipt.agda	257	    ; gate3NoSpectralPollutionProvedHere = ||         false
+suspicious_suffix	gate3NoSpectralPollutionProved	DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda	373	      Gate3.gate3NoSpectralPollutionProvedHere gate3Receipt ≡ false
+suspicious_suffix	noSpectralPollution	DASHI/Constants/Registry.agda	1807	      noSpectralPollutionPromoted ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Constants/Registry.agda	2349	  ; noSpectralPollutionPromoted = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/BalabanRGMassGapReceiptSurface.agda	171	      noSpectralPollutionNeedsBothH3aAndH3b ≡ true
+suspicious_suffix_split	noSpectralPollution	DASHI/Physics/Closure/BalabanRGMassGapReceiptSurface.agda	194	    ; noSpectralPollutionNeedsBothH3aAndH3b = ||         true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/BalabanRGMassGapReceiptSurface.agda	3108	      noSpectralPollutionDischargedHere ≡ false
+suspicious_suffix_split	noSpectralPollution	DASHI/Physics/Closure/BalabanRGMassGapReceiptSurface.agda	3151	    ; noSpectralPollutionDischargedHere = ||         false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/CarrierMoscoConvergenceFromPhysicsReceipt.agda	176	      NSP.moscoGivesStrongResolvent noSpectralPollutionReceipt ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/CarrierMoscoConvergenceFromPhysicsReceipt.agda	179	      NSP.moscoGivesNormResolvent noSpectralPollutionReceipt ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/CarrierMoscoConvergenceFromPhysicsReceipt.agda	236	      noSpectralPollutionProvedHere ≡ false
+suspicious_suffix_split	noSpectralPollution	DASHI/Physics/Closure/CarrierMoscoConvergenceFromPhysicsReceipt.agda	374	    ; noSpectralPollutionProvedHere = ||         false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/Gate3AdelicLocalizationReductionReceipt.agda	169	      noSpectralPollutionPromoted ≡ true
+suspicious_suffix_split	noSpectralPollution	DASHI/Physics/Closure/Gate3AdelicLocalizationReductionReceipt.agda	281	    ; noSpectralPollutionPromoted = ||         true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/Gate3NoSpectralPollutionConstructedReceipt.agda	58	      Conditional.noSpectralPollutionConditional priorConditionalReceipt ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/Gate3NoSpectralPollutionConstructedReceipt.agda	76	      noSpectralPollutionConstructed ≡ true
+suspicious_suffix_split	noSpectralPollution	DASHI/Physics/Closure/Gate3NoSpectralPollutionConstructedReceipt.agda	130	    ; noSpectralPollutionConstructed = ||         true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/Gate3NoSpectralPollutionReceipt.agda	183	      noSpectralPollutionConditional ≡ true
+suspicious_suffix_split	noSpectralPollution	DASHI/Physics/Closure/Gate3NoSpectralPollutionReceipt.agda	289	    ; noSpectralPollutionConditional = ||         true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/Gate3PAWOTGUniformSeparationTargetReceipt.agda	234	      NoPollution.provedUnconditionally noSpectralPollutionReceipt ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/Gate3PAWOTGUniformSeparationTargetReceipt.agda	237	      NoPollution.gate3Promoted noSpectralPollutionReceipt ≡ false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/Gate3PAWOTGUniformSeparationTargetReceipt.agda	318	      noSpectralPollutionTransferProvedHere ≡ false
+suspicious_suffix_split	noSpectralPollution	DASHI/Physics/Closure/Gate3PAWOTGUniformSeparationTargetReceipt.agda	460	    ; noSpectralPollutionTransferProvedHere = ||         false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/NoSpectralPollutionReceipt.agda	143	      noSpectralPollutionRecordedAsHypothesis ≡ true
+suspicious_suffix_split	noSpectralPollution	DASHI/Physics/Closure/NoSpectralPollutionReceipt.agda	233	    ; noSpectralPollutionRecordedAsHypothesis = ||         true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/SpectralConvergenceGate3Receipt.agda	116	      NSP.moscoGivesStrongResolvent noSpectralPollutionReceipt ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/SpectralConvergenceGate3Receipt.agda	119	      NSP.moscoGivesNormResolvent noSpectralPollutionReceipt ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/SpectralConvergenceGate3Receipt.agda	133	      NSP.isolatedSectorHypothesesRequired noSpectralPollutionReceipt ≡ true
+suspicious_suffix_split	noSpectralPollution	DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda	467	noSpectralPollutionFromH3aAndH3bProved = ||   false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda	556	  noSpectralPollutionFromH3aAndH3bProved ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda	778	      noSpectralPollutionFromH3aAndH3bProved ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMContinuumMassGapTransferAuthority.agda	290	noSpectralPollutionAuthorityImportedHere = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMContinuumMassGapTransferAuthority.agda	331	      noSpectralPollutionAuthorityImportedHere ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt.agda	312	      noSpectralPollutionDependsOnH3aAndH3bFlag ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt.agda	348	      noSpectralPollutionProved ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt.agda	445	    ; noSpectralPollutionDependsOnH3aAndH3bFlag = true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt.agda	457	    ; noSpectralPollutionProved = true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMLatticeMassGapAuthority.agda	153	noSpectralPollutionIsDownstreamConsumer = true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMLatticeMassGapAuthority.agda	250	      noSpectralPollutionIsDownstreamConsumer ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMLatticeMassGapAuthority.agda	470	noSpectralPollutionFromH3aH3bAuthorityConditional = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMLatticeMassGapAuthority.agda	516	      noSpectralPollutionIsDownstreamConsumer ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMLatticeMassGapAuthority.agda	555	      noSpectralPollutionFromH3aH3bAuthorityConditional ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMOSAxiomsAuthority.agda	318	noSpectralPollutionAuthorityImportedHere = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMOSAxiomsAuthority.agda	359	      noSpectralPollutionAuthorityImportedHere ≡ false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMOSWightmanReconstructionAuthority.agda	170	noSpectralPollutionAuthorityImportedHere = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMOSWightmanReconstructionAuthority.agda	207	      noSpectralPollutionAuthorityImportedHere ≡ false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMOnlyRemainingAuthorityBlockersBoundary.agda	96	noSpectralPollutionIsDownstreamOfH3aH3b = true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMOnlyRemainingAuthorityBlockersBoundary.agda	164	      noSpectralPollutionIsDownstreamOfH3aH3b ≡ true
+suspicious_suffix_split	noSpectralPollution	DASHI/Physics/Closure/YMSpectralMarginErrorBudgetCompositeBoundary.agda	433	    ; noSpectralPollutionProved = ||         false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSpectralMarginFromHolonomyDominationBoundary.agda	724	  BTOS.noSpectralPollutionDepthLimitProved ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSpectralMarginFromHolonomyDominationBoundary.agda	729	  BTOS.noSpectralPollutionContinuumLimitProved ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSpectralMarginFromHolonomyDominationBoundary.agda	1049	      BTOS.noSpectralPollutionDepthLimitProved ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSpectralMarginFromHolonomyDominationBoundary.agda	1052	      BTOS.noSpectralPollutionContinuumLimitProved ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSpectralMarginToContinuumTransferCompositeLightweightBoundary.agda	80	      noSpectralPollutionWaitsForH3aH3b ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSpectralMarginToContinuumTransferCompositeLightweightBoundary.agda	98	    ; noSpectralPollutionWaitsForH3aH3b = true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint107FiniteContinuumUniformityBoundary.agda	53	noSpectralPollutionBoundaryRecorded = true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint109MoscoSpectralLiminfAssembly.agda	71	noSpectralPollutionFromH3aH3bClosedHere = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint109MoscoSpectralLiminfAssembly.agda	362	      noSpectralPollutionFromH3aH3bClosed ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda	107	noSpectralPollutionClosedHere = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda	301	      noSpectralPollutionClosedFinal ≡ false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda	361	      noSpectralPollutionClosedHereFlag ≡ false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda	615	  noSpectralPollutionClosedHereFlag canonicalReceipt ≡ false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda	107	noSpectralPollutionClosedHere = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda	289	      noSpectralPollutionClosed ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda	359	      noSpectralPollutionClosedHereFlag ≡ false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda	439	      noSpectralPollutionClosedHereFlag ≡ false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda	804	  noSpectralPollutionClosedHereFlag canonicalReceipt ≡ false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint119TransferReadinessUnlockReducer.agda	333	      noSpectralPollutionFromH3aAndH3bClosed ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint90ContinuumMassGapWCBoundaryReceipt.agda	49	noSpectralPollutionUnconditionalDerivedInRepo = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint90ContinuumMassGapWCBoundaryReceipt.agda	203	      noSpectralPollutionUnderContinuumLimit ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint90ContinuumMassGapWCBoundaryReceipt.agda	307	      noSpectralPollutionUnconditionalDerivedInRepo ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint91WC3NewMathReceipt.agda	59	noSpectralPollutionUnconditionalDerivedInRepo = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint91WC3NewMathReceipt.agda	334	      noSpectralPollutionUnconditionalDerivedInRepo ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint92MasterWC3AdjointCorrectionReceipt.agda	70	noSpectralPollutionUnconditionalDerivedInRepo = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint92MasterWC3AdjointCorrectionReceipt.agda	314	      noSpectralPollutionUnconditionalDerivedInRepo ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint92MasterWC3Condition.agda	56	noSpectralPollutionUnderContinuumLimitDerivedInRepo = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMSprint92MasterWC3Condition.agda	337	      noSpectralPollutionUnderContinuumLimitDerivedInRepo ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMThermodynamicLimitAuthority.agda	187	noSpectralPollutionSurfaceIsDownstreamConsumer = true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMThermodynamicLimitAuthority.agda	230	      noSpectralPollutionSurfaceIsDownstreamConsumer ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMThermodynamicLimitAuthority.agda	358	noSpectralPollutionFromH3aH3bAuthorityConditional = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMThermodynamicLimitAuthority.agda	367	noSpectralPollutionAuthorityImportedHere = false
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMThermodynamicLimitAuthority.agda	418	      noSpectralPollutionSurfaceIsDownstreamConsumer ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMThermodynamicLimitAuthority.agda	440	      noSpectralPollutionFromH3aH3bAuthorityConditional ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Physics/Closure/YMThermodynamicLimitAuthority.agda	446	      noSpectralPollutionAuthorityImportedHere ≡ true
+suspicious_suffix	noSpectralPollution	DASHI/Promotion/Gate3ClayObligations.agda	852	      noSpectralPollutionPromoted ≡ true
+suspicious_suffix_split	noSpectralPollution	DASHI/Promotion/Gate3ClayObligations.agda	925	  ; noSpectralPollutionPromoted = ||       false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/CarrierFactorVecInjectivityOSPositivity.agda	119	      wightmanReconstructionAppliedHere ≡ false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/CarrierFactorVecInjectivityOSPositivity.agda	143	      ClayTarget.wightmanReconstructionApplied existingClayTarget ≡ false
+suspicious_suffix_split	wightmanReconstruction	DASHI/Physics/Closure/CarrierFactorVecInjectivityOSPositivity.agda	180	    ; wightmanReconstructionAppliedHere = ||         false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/CarrierOS3ReflectionPositivityReceipt.agda	142	      wightmanReconstructionPromoted ≡ false
+suspicious_suffix_split	wightmanReconstruction	DASHI/Physics/Closure/CarrierOS3ReflectionPositivityReceipt.agda	225	    ; wightmanReconstructionPromoted = ||         false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/CarrierSchwingerFunctionCauchyReceipt.agda	188	      wightmanReconstructionConstructed ≡ true
+suspicious_suffix_split	wightmanReconstruction	DASHI/Physics/Closure/CarrierSchwingerFunctionCauchyReceipt.agda	262	  ; wightmanReconstructionConstructed = ||       false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/ClayBothBlockerMapReceipt.agda	53	      OSStatus.wightmanReconstructionApplied osAxiomStatusReceipt ≡ false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/ClayMillenniumClosureTargetReceipt.agda	188	      wightmanReconstructionApplied ≡ false
+suspicious_suffix_split	wightmanReconstruction	DASHI/Physics/Closure/ClayMillenniumClosureTargetReceipt.agda	263	    ; wightmanReconstructionApplied = ||         false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/ClayMillenniumClosureTargetReceipt.agda	534	      wightmanReconstructionApplied yangMillsTarget ≡ false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/ClayYMProofRoadmapReceipt.agda	88	      Target.wightmanReconstructionApplied targetReceipt ≡ false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/ClayYMProofRoadmapReceipt.agda	145	      wightmanReconstructionConstructed ≡ false
+suspicious_suffix_split	wightmanReconstruction	DASHI/Physics/Closure/ClayYMProofRoadmapReceipt.agda	220	    ; wightmanReconstructionConstructed = ||         false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/OSAxiomsContinuumStatus.agda	78	      wightmanReconstructionApplied ≡ false
+suspicious_suffix_split	wightmanReconstruction	DASHI/Physics/Closure/OSAxiomsContinuumStatus.agda	135	    ; wightmanReconstructionApplied = ||         false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/OSPositivityCorrectObjectReceipt.agda	54	      OSStatus.wightmanReconstructionApplied priorOSAxiomStatus ≡ false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/OSPositivityFromRGFixedPoint.agda	102	      wightmanReconstructionApplied ≡ false
+suspicious_suffix_split	wightmanReconstruction	DASHI/Physics/Closure/OSPositivityFromRGFixedPoint.agda	149	    ; wightmanReconstructionApplied = ||         false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/WightmanReconstructionCandidateReceipt.agda	78	      wightmanReconstructionApplied ≡ false
+suspicious_suffix_split	wightmanReconstruction	DASHI/Physics/Closure/WightmanReconstructionCandidateReceipt.agda	129	    ; wightmanReconstructionApplied = ||         false
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/YMClayPromotionBoundary.agda	155	      Thermo.wightmanReconstructionConstructed thermodynamicTheoremWire ≡ true
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/YMFinalStateReceipt.agda	285	      TD.wightmanReconstructionConstructed thermodynamicBundleReceipt ≡ true
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/YMGhostTimeReflectionGradedSignReceipt.agda	186	      CarrierOS3.wightmanReconstructionPromoted carrierOS3Receipt ≡ true
+suspicious_suffix	wightmanReconstruction	DASHI/Physics/Closure/YMThermodynamicOSWightmanOperatorBoundaryReceipt.agda	238	      wightmanReconstructionConstructed ≡ true
+suspicious_suffix_split	wightmanReconstruction	DASHI/Physics/Closure/YMThermodynamicOSWightmanOperatorBoundaryReceipt.agda	326	    ; wightmanReconstructionConstructed = ||         true

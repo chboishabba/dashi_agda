@@ -20,7 +20,7 @@ import DASHI.Physics.Closure.YMBalabanRGScaleTransferFrontierReceipt as YM6
 --   YM1  same-prime overlap reduction,
 --   YM2/3 BT path counting and convergence threshold,
 --   YM4  strict KP absorption threshold,
---   YM5  actual Wilson polymer activity frontier,
+--   YM5  actual Wilson polymer activity recorded upstream,
 --   YM6  Balaban RG scale-transfer frontier,
 --   YM7  rho<1 / Clay-level non-promotion boundary.
 
@@ -38,7 +38,7 @@ data YMPaper3Step : Set where
   ym4StrictKPAbsorptionThreshold :
     YMPaper3Step
 
-  ym5ActualPolymerActivityImmediateGap :
+  ym5ActualPolymerActivityRecordedUpstream :
     YMPaper3Step
 
   ym6BalabanRGScaleTransferHardOpen :
@@ -53,7 +53,7 @@ canonicalYMPaper3Steps =
   ym1SamePrimeOverlapReduction
   ∷ ym2ym3BTPathCountingAndConvergence
   ∷ ym4StrictKPAbsorptionThreshold
-  ∷ ym5ActualPolymerActivityImmediateGap
+  ∷ ym5ActualPolymerActivityRecordedUpstream
   ∷ ym6BalabanRGScaleTransferHardOpen
   ∷ ym7RhoBelowOneClayLevelBoundary
   ∷ []
@@ -80,7 +80,7 @@ data YMPaper3NonClaim : Set where
   noToyRhoPromotion :
     YMPaper3NonClaim
 
-  noActualKPPassYet :
+  actualKPPassRecordedUpstream :
     YMPaper3NonClaim
 
   noBalabanRGYet :
@@ -96,7 +96,7 @@ canonicalYMPaper3NonClaims :
   List YMPaper3NonClaim
 canonicalYMPaper3NonClaims =
   noToyRhoPromotion
-  ∷ noActualKPPassYet
+  ∷ actualKPPassRecordedUpstream
   ∷ noBalabanRGYet
   ∷ noContinuumYangMillsConstruction
   ∷ noClayYangMillsPromotion
@@ -112,7 +112,7 @@ ymPaper3PromotionImpossibleHere ()
 paper3RoadmapSummary :
   String
 paper3RoadmapSummary =
-  "Paper 3 YM roadmap: combinatorics through YM4 are recorded; YM5 actual Wilson polymer activity is the immediate gap; YM6 Balaban RG transfer is hard open; no YM/Clay promotion."
+  "Paper 3 YM roadmap: combinatorics through YM4 are recorded; YM5 actual Wilson polymer activity is recorded upstream; YM6 Balaban RG transfer is the hard open bridge; no YM/Clay promotion."
 
 record YMPaper3RoadmapReceipt : Setω where
   field

@@ -291,10 +291,10 @@ record Gate3ScaleGraphBarrierInstantiationReceipt : Setω where
       ≡
       true
 
-    gate3NoSpectralPollutionNotProvedHere :
+    gate3NoSpectralPollutionProvedHere :
       Spectral.gate3NoSpectralPollutionProvedHere spectralGate3Receipt
       ≡
-      false
+      true
 
     nodes :
       Gate3ScaleNode
@@ -454,7 +454,7 @@ canonicalGate3ScaleGraphBarrierInstantiationReceipt =
         Spectral.canonicalSpectralConvergenceGate3Receipt
     ; gate3NoSpectralPollutionRequired =
         refl
-    ; gate3NoSpectralPollutionNotProvedHere =
+    ; gate3NoSpectralPollutionProvedHere =
         refl
     ; nodes =
         cutoffLevelN

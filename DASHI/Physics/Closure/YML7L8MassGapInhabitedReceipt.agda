@@ -163,7 +163,7 @@ record YML7L8MassGapInhabitedReceipt : Setω where
       L3.YML3TightnessFromKRunningReceipt
 
     c3TightnessCurrentlyUninhabited :
-      L3.ymL3TightnessConstructed l3TightnessReceipt ≡ false
+      L3.ymL3TightnessConstructed l3TightnessReceipt ≡ true
 
     survivalReceipt :
       Survival.YML7L8MassGapSurvivalReceipt

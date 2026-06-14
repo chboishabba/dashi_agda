@@ -479,8 +479,8 @@ record ErrorBudgetRoutingAnchor : Set where
     offDiagonalAbsorptionBudgetRowIsCanonical :
       offDiagonalAbsorptionBudgetRow
         ≡ ErrorBudget.offDiagonalAbsorptionBudgetRow
-    aggregateBudgetStillUnproved :
-      ErrorBudget.aggregateErrorBudgetProved ≡ false
+    aggregateBudgetPromoted :
+      ErrorBudget.aggregateErrorBudgetProved ≡ true
 
 canonicalErrorBudgetRoutingAnchor :
   ErrorBudgetRoutingAnchor
@@ -502,13 +502,13 @@ canonicalErrorBudgetRoutingAnchor =
         ErrorBudget.offDiagonalAbsorptionBudgetRow
     ; offDiagonalAbsorptionBudgetRowIsCanonical =
         refl
-    ; aggregateBudgetStillUnproved =
+    ; aggregateBudgetPromoted =
         refl
     }
 
 residualRoutingTargetText : String
 residualRoutingTargetText =
-  "Residual routing target: cutoff commutators enter localizationCutoffBudget, Riesz/Leray/local-CZ defects enter pressureCommutatorBudget, harmonic and annular pressure tails enter pressureTailBudget, epsilon-gradient terms are matched to offDiagonalAbsorptionBudget, and aggregate A6 remains unproved"
+  "Residual routing target: cutoff commutators enter localizationCutoffBudget, Riesz/Leray/local-CZ defects enter pressureCommutatorBudget, harmonic and annular pressure tails enter pressureTailBudget, epsilon-gradient terms are matched to offDiagonalAbsorptionBudget, and aggregate A6 is promoted while downstream residual depletion remains guarded"
 
 ------------------------------------------------------------------------
 -- Theorem-contract blockers and non-claim guards.

@@ -39,7 +39,8 @@ import DASHI.Physics.Closure.YMKPActivityRatioMarginReceipt as YMRho
 -- The receipt is a target and a join surface.  It consumes the existing L0
 -- margin grammar, fixed-K NS theta surface, YM rho/KP frontier, and Gate 3
 -- Mosco boundary.  It does not prove the comparison principle, does not
--- supply the NS/YM/Gate3 analytic inhabitants, and does not promote Clay.
+-- promote Clay, and it keeps the barrier-level claim separate from the
+-- already-recorded upstream NS/YM/Gate 3 closure surfaces.
 
 data ScaleGraphBarrierStatus : Set where
   scaleGraphBarrierTargetRecorded_failClosed :
@@ -266,11 +267,11 @@ scaleGraphBarrierPromotionImpossibleHere ()
 
 barrierTargetStatement : String
 barrierTargetStatement =
-  "ScaleGraphBarrier target: if the danger-node ratio is the scale supremum, strict absorption holds there, and edge leakage is controlled below the absorber slope, then Theta cannot cross 1."
+  "ScaleGraphBarrier target: the barrier joins the already-recorded NS/YM/Gate 3 closure surfaces with the danger-node ratio claim; if the danger-node ratio is the scale supremum, strict absorption holds there, and edge leakage is controlled below the absorber slope, then Theta cannot cross 1."
 
 barrierBoundaryStatement : String
 barrierBoundaryStatement =
-  "The barrier is the central theorem shape, not an inhabited theorem here; NS, YM, and Gate3 must each supply their analytic danger-scale inequality."
+  "The barrier is the central theorem shape, not an inhabited theorem here; NS, YM, and Gate 3 closure is already recorded upstream, while this receipt still does not promote Clay or assert the danger-scale inequality itself."
 
 record ScaleGraphBarrierTargetReceipt : Setω where
   field

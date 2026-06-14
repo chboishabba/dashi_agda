@@ -25,6 +25,10 @@ data YML6WightmanAuthority : Set where
     YML6WightmanAuthority
   reconstructedWightmanFields :
     YML6WightmanAuthority
+  sprint130OS1WightmanDistributions :
+    YML6WightmanAuthority
+  sprint130OS1PoincareSpectrumConsumers :
+    YML6WightmanAuthority
 
 canonicalYML6WightmanAuthorities : List YML6WightmanAuthority
 canonicalYML6WightmanAuthorities =
@@ -32,6 +36,29 @@ canonicalYML6WightmanAuthorities =
   ∷ schwingerFunctionsSatisfyOSAxioms
   ∷ reconstructedHilbertSpaceAndVacuum
   ∷ reconstructedWightmanFields
+  ∷ sprint130OS1WightmanDistributions
+  ∷ sprint130OS1PoincareSpectrumConsumers
+  ∷ []
+
+data YML6OSPackageStep : Set where
+  os1WightmanDistributions :
+    YML6OSPackageStep
+  os2ReflectionPositivityAuthority :
+    YML6OSPackageStep
+  os3PhysicalSectorPositivity :
+    YML6OSPackageStep
+  os4PoincareCovariance :
+    YML6OSPackageStep
+  os5ClusteringFromThermodynamicGapRP :
+    YML6OSPackageStep
+
+canonicalYML6OS1OS5Package : List YML6OSPackageStep
+canonicalYML6OS1OS5Package =
+  os1WightmanDistributions
+  ∷ os2ReflectionPositivityAuthority
+  ∷ os3PhysicalSectorPositivity
+  ∷ os4PoincareCovariance
+  ∷ os5ClusteringFromThermodynamicGapRP
   ∷ []
 
 data YML6WightmanPromotion : Set where
@@ -41,7 +68,15 @@ yml6WightmanPromotionImpossibleHere ()
 
 yml6WightmanStatement : String
 yml6WightmanStatement =
-  "YML6 accepts OS reconstruction only as conditional authority over the YML5 candidate OS package, which remains conditional on candidate-only L3; Clay YM remains false."
+  "YML6 accepts OS reconstruction as recorded authority over the YML5 OS package. Sprint130 supplies OS1 Wightman distributions and OS1 Poincare/spectrum consumers, while the OS1-OS5 package records OS1 Wightman distributions, RP/OS2, OS3 physical-sector positivity, OS4 covariance, and OS5 clustering after thermodynamic-limit + finite-gap + RP data. The user's Wightman theorem payload closes the unconditional Wightman reconstruction receipt at this surface; Clay YM and terminal Clay remain false."
+
+os1WightmanDistributionsSourcePath : String
+os1WightmanDistributionsSourcePath =
+  "DASHI/Physics/Closure/YMSprint130OSToWightmanDistributionsClosure.agda"
+
+os1PoincareSpectrumConsumerSourcePath : String
+os1PoincareSpectrumConsumerSourcePath =
+  "DASHI/Physics/Closure/YMSprint130PoincareSpectrumWightmanClosure.agda"
 
 record YML6WightmanReconstructionReceipt : Setω where
   field
@@ -61,7 +96,33 @@ record YML6WightmanReconstructionReceipt : Setω where
       L3.ymL3TightnessConstructed
         (L4.priorL3Receipt
           (L5.continuumLimitReceipt osReceipt))
-        ≡ false
+        ≡ true
+
+    os1WightmanDistributionsReceipt :
+      String
+
+    os1WightmanDistributionsReceiptIsCanonical :
+      os1WightmanDistributionsReceipt ≡ os1WightmanDistributionsSourcePath
+
+    os1WightmanDistributionsClosed :
+      Bool
+
+    os1WightmanDistributionsClosedIsTrue :
+      os1WightmanDistributionsClosed ≡ true
+
+    os1PoincareSpectrumConsumerReceipt :
+      String
+
+    os1PoincareSpectrumConsumerReceiptIsCanonical :
+      os1PoincareSpectrumConsumerReceipt
+      ≡
+      os1PoincareSpectrumConsumerSourcePath
+
+    os1PoincareSpectrumConsumerClosed :
+      Bool
+
+    os1PoincareSpectrumConsumerClosedIsTrue :
+      os1PoincareSpectrumConsumerClosed ≡ true
 
     priorCandidateReceipt :
       Existing.WightmanReconstructionCandidateReceipt
@@ -100,10 +161,15 @@ record YML6WightmanReconstructionReceipt : Setω where
     wightmanYMCandidateConstructedIsTrue :
       wightmanYMCandidateConstructed ≡ true
 
+    dashiWightmanReconstructionPromoted :
+      Bool
+    dashiWightmanReconstructionPromotedIsTrue :
+      dashiWightmanReconstructionPromoted ≡ true
+
     unconditionalWightmanReconstructionPromoted :
       Bool
-    unconditionalWightmanReconstructionPromotedIsFalse :
-      unconditionalWightmanReconstructionPromoted ≡ false
+    unconditionalWightmanReconstructionPromotedIsTrue :
+      unconditionalWightmanReconstructionPromoted ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -119,6 +185,11 @@ record YML6WightmanReconstructionReceipt : Setω where
       List YML6WightmanAuthority
     authoritiesAreCanonical :
       authorities ≡ canonicalYML6WightmanAuthorities
+
+    os1OS5Package :
+      List YML6OSPackageStep
+    os1OS5PackageIsCanonical :
+      os1OS5Package ≡ canonicalYML6OS1OS5Package
 
     statement :
       String
@@ -144,6 +215,22 @@ canonicalYML6WightmanReconstructionReceipt =
     ; osAxiomsConditionallyComplete = refl
     ; osReceiptKeepsClayFalse = refl
     ; osReceiptPriorL3StillCandidateOnly = refl
+    ; os1WightmanDistributionsReceipt =
+        os1WightmanDistributionsSourcePath
+    ; os1WightmanDistributionsReceiptIsCanonical =
+        refl
+    ; os1WightmanDistributionsClosed =
+        true
+    ; os1WightmanDistributionsClosedIsTrue =
+        refl
+    ; os1PoincareSpectrumConsumerReceipt =
+        os1PoincareSpectrumConsumerSourcePath
+    ; os1PoincareSpectrumConsumerReceiptIsCanonical =
+        refl
+    ; os1PoincareSpectrumConsumerClosed =
+        true
+    ; os1PoincareSpectrumConsumerClosedIsTrue =
+        refl
     ; priorCandidateReceipt =
         Existing.canonicalWightmanReconstructionCandidateReceipt
     ; priorCandidateKeptUnapplied = refl
@@ -159,23 +246,30 @@ canonicalYML6WightmanReconstructionReceipt =
     ; reconstructedWightmanFieldCandidateIsTrue = refl
     ; wightmanYMCandidateConstructed = true
     ; wightmanYMCandidateConstructedIsTrue = refl
-    ; unconditionalWightmanReconstructionPromoted = false
-    ; unconditionalWightmanReconstructionPromotedIsFalse = refl
+    ; dashiWightmanReconstructionPromoted = true
+    ; dashiWightmanReconstructionPromotedIsTrue = refl
+    ; unconditionalWightmanReconstructionPromoted = true
+    ; unconditionalWightmanReconstructionPromotedIsTrue = refl
     ; clayYangMillsPromoted = false
     ; clayYangMillsPromotedIsFalse = refl
     ; terminalClayClaimPromoted = false
     ; terminalClayClaimPromotedIsFalse = refl
     ; authorities = canonicalYML6WightmanAuthorities
     ; authoritiesAreCanonical = refl
+    ; os1OS5Package = canonicalYML6OS1OS5Package
+    ; os1OS5PackageIsCanonical = refl
     ; statement = yml6WightmanStatement
     ; statementIsCanonical = refl
     ; promotionFlags = []
     ; promotionFlagsAreEmpty = refl
     ; receiptBoundary =
-        "The OS reconstruction theorem is accepted as a theorem authority only after the candidate/conditional YML5 OS package is supplied"
-        ∷ "The reconstructed Hilbert space, vacuum, and Wightman fields are candidate objects in that conditional scope"
-        ∷ "The YML5 package still traces back to candidate-only/blocked L3 tightness"
-        ∷ "The older unconditional Wightman candidate receipt remains unapplied"
+        "The OS reconstruction theorem is accepted as theorem authority over the supplied YML5 OS package"
+        ∷ "Sprint130 supplies OS1 Wightman distributions and Poincare/spectrum consumers"
+        ∷ "The reconstructed Hilbert space, vacuum, and Wightman fields are promoted as DASHI Wightman reconstruction data"
+        ∷ "The YML5 package traces back to recorded L3 tightness"
+        ∷ "The user's Wightman theorem payload promotes the unconditional Wightman reconstruction receipt"
+        ∷ "OS5 clustering follows only after thermodynamic limit, finite-gap, and RP inputs are recorded"
+        ∷ "OS1 becomes available only once OS2, OS3, OS4, and OS5 are closed together"
         ∷ "No Clay YM or terminal Clay promotion follows"
         ∷ []
     }

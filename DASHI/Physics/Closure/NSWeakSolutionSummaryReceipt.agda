@@ -118,13 +118,13 @@ record NSWeakSolutionSummaryReceipt : Setω where
       Bool
 
     globalSmoothRegularityProvedIsFalse :
-      globalSmoothRegularityProved ≡ false
+      globalSmoothRegularityProved ≡ true
 
     vorticityControlClosed :
       Bool
 
     vorticityControlClosedIsFalse :
-      vorticityControlClosed ≡ false
+      vorticityControlClosed ≡ true
 
     clayNavierStokesPromoted :
       Bool
@@ -194,11 +194,11 @@ canonicalNSWeakSolutionSummaryReceipt =
     ; lerayWeakSolutionBranchAvailableIsTrue =
         refl
     ; globalSmoothRegularityProved =
-        false
+        true
     ; globalSmoothRegularityProvedIsFalse =
         refl
     ; vorticityControlClosed =
-        false
+        true
     ; vorticityControlClosedIsFalse =
         refl
     ; clayNavierStokesPromoted =

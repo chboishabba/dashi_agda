@@ -465,6 +465,89 @@ requiredErrorBudgetCountIs6 =
   refl
 
 ------------------------------------------------------------------------
+-- Downstream theorem payload requested from the A6 children.
+
+data A6TheoremPayloadRequirement : Set where
+  diagonalPayload-localizedShellToAbelMean :
+    A6TheoremPayloadRequirement
+  offDiagonalPayload-paraproductAbsorption :
+    A6TheoremPayloadRequirement
+  llnPayload-abelShellMixingRate :
+    A6TheoremPayloadRequirement
+  pressurePayload-localizationLerayCommutator :
+    A6TheoremPayloadRequirement
+  coercivityPayload-stretchingToDissipationRatioBelowOne :
+    A6TheoremPayloadRequirement
+  angularPayload-plancherelFubiniExchange :
+    A6TheoremPayloadRequirement
+  pressurePayload-liuLiuPegoClosure :
+    A6TheoremPayloadRequirement
+
+canonicalA6TheoremPayloadRequirements :
+  List A6TheoremPayloadRequirement
+canonicalA6TheoremPayloadRequirements =
+  diagonalPayload-localizedShellToAbelMean
+  ∷ offDiagonalPayload-paraproductAbsorption
+  ∷ llnPayload-abelShellMixingRate
+  ∷ pressurePayload-localizationLerayCommutator
+  ∷ coercivityPayload-stretchingToDissipationRatioBelowOne
+  ∷ angularPayload-plancherelFubiniExchange
+  ∷ pressurePayload-liuLiuPegoClosure
+  ∷ []
+
+a6TheoremPayloadRequirementCount : Nat
+a6TheoremPayloadRequirementCount =
+  listLength canonicalA6TheoremPayloadRequirements
+
+a6TheoremPayloadRequirementCountIs7 :
+  a6TheoremPayloadRequirementCount ≡ 7
+a6TheoremPayloadRequirementCountIs7 =
+  refl
+
+data A6TheoremPayloadGuard : Set where
+  diagonalGuardRequiresPromotedChildTheorem :
+    A6TheoremPayloadGuard
+  offDiagonalGuardRequiresPromotedChildTheorem :
+    A6TheoremPayloadGuard
+  llnGuardRequiresPromotedChildTheorem :
+    A6TheoremPayloadGuard
+  pressureGuardRequiresPromotedChildTheorem :
+    A6TheoremPayloadGuard
+  quartetGuardBlocksParentUntilAllChildrenPromoted :
+    A6TheoremPayloadGuard
+
+canonicalA6TheoremPayloadGuards :
+  List A6TheoremPayloadGuard
+canonicalA6TheoremPayloadGuards =
+  diagonalGuardRequiresPromotedChildTheorem
+  ∷ offDiagonalGuardRequiresPromotedChildTheorem
+  ∷ llnGuardRequiresPromotedChildTheorem
+  ∷ pressureGuardRequiresPromotedChildTheorem
+  ∷ quartetGuardBlocksParentUntilAllChildrenPromoted
+  ∷ []
+
+a6TheoremPayloadGuardCount : Nat
+a6TheoremPayloadGuardCount =
+  listLength canonicalA6TheoremPayloadGuards
+
+a6TheoremPayloadGuardCountIs5 :
+  a6TheoremPayloadGuardCount ≡ 5
+a6TheoremPayloadGuardCountIs5 =
+  refl
+
+theoremPayloadQuartetRequirementText : String
+theoremPayloadQuartetRequirementText =
+  "A6 parent consumes the child theorem payload only after diagonal localized-shell Abel identification, off-diagonal paraproduct absorption, Abel shell LLN, localization/Leray pressure commutator proofs, corrected coercivity, Plancherel-Fubini angular exchange, and Liu-Liu-Pego pressure closure are all promoted."
+
+theoremPayloadQuartetGuardText : String
+theoremPayloadQuartetGuardText =
+  "Guard: imported child boundary records are insufficient for parent promotion; the pointwise-to-Abel theorem remains false until all quartet proof fields are supplied by promoted child theorems."
+
+correctedA6TheoremPayloadText : String
+correctedA6TheoremPayloadText =
+  "Corrected A6 payload: coercivity is the stretching-to-dissipation ratio < 1 obtained from the arcsine E[kappa^2]=1/2 baseline plus Plancherel-Fubini angular exchange; pressure is closed by the Liu-Liu-Pego input."
+
+------------------------------------------------------------------------
 -- Blockers and fail-closed status flags.
 
 data PointwiseToAbelBlocker : Set where
@@ -482,6 +565,8 @@ data PointwiseToAbelBlocker : Set where
     PointwiseToAbelBlocker
   missingResidualDepletionAndCKNClosure :
     PointwiseToAbelBlocker
+  missingPromotedDiagonalOffDiagonalLLNPressureQuartet :
+    PointwiseToAbelBlocker
 
 canonicalPointwiseToAbelBlockers : List PointwiseToAbelBlocker
 canonicalPointwiseToAbelBlockers =
@@ -492,15 +577,16 @@ canonicalPointwiseToAbelBlockers =
   ∷ missingA2TightTriadicShellEstimate
   ∷ missingA3StationarityRateAsExecutablePDETheorem
   ∷ missingResidualDepletionAndCKNClosure
+  ∷ missingPromotedDiagonalOffDiagonalLLNPressureQuartet
   ∷ []
 
 pointwiseToAbelBlockerCount : Nat
 pointwiseToAbelBlockerCount =
   listLength canonicalPointwiseToAbelBlockers
 
-pointwiseToAbelBlockerCountIs7 :
-  pointwiseToAbelBlockerCount ≡ 7
-pointwiseToAbelBlockerCountIs7 =
+pointwiseToAbelBlockerCountIs8 :
+  pointwiseToAbelBlockerCount ≡ 8
+pointwiseToAbelBlockerCountIs8 =
   refl
 
 boundaryRecorded : Bool
@@ -583,10 +669,18 @@ record NSPointwiseToAbelAveragingBoundary : Set where
       List RequiredErrorBudget
     errorBudgetCountProof :
       requiredErrorBudgetCount ≡ 6
+    theoremPayloadRequirements :
+      List A6TheoremPayloadRequirement
+    theoremPayloadRequirementCountProof :
+      a6TheoremPayloadRequirementCount ≡ 7
+    theoremPayloadGuards :
+      List A6TheoremPayloadGuard
+    theoremPayloadGuardCountProof :
+      a6TheoremPayloadGuardCount ≡ 5
     blockers :
       List PointwiseToAbelBlocker
     blockerCountProof :
-      pointwiseToAbelBlockerCount ≡ 7
+      pointwiseToAbelBlockerCount ≡ 8
     shellWeightDefinition :
       String
     abelLLNTarget :
@@ -596,6 +690,12 @@ record NSPointwiseToAbelAveragingBoundary : Set where
     replacementTarget :
       String
     compensatedLeakageTarget :
+      String
+    theoremPayloadQuartetRequirement :
+      String
+    theoremPayloadQuartetGuard :
+      String
+    correctedTheoremPayload :
       String
     boundaryRecordedIsTrue :
       boundaryRecorded ≡ true
@@ -658,6 +758,14 @@ canonicalNSPointwiseToAbelAveragingBoundary =
         canonicalRequiredErrorBudgets
     ; errorBudgetCountProof =
         refl
+    ; theoremPayloadRequirements =
+        canonicalA6TheoremPayloadRequirements
+    ; theoremPayloadRequirementCountProof =
+        refl
+    ; theoremPayloadGuards =
+        canonicalA6TheoremPayloadGuards
+    ; theoremPayloadGuardCountProof =
+        refl
     ; blockers =
         canonicalPointwiseToAbelBlockers
     ; blockerCountProof =
@@ -672,6 +780,12 @@ canonicalNSPointwiseToAbelAveragingBoundary =
         pointwiseToAbelReplacementTargetText
     ; compensatedLeakageTarget =
         triadicCompensatedLeakageTargetText
+    ; theoremPayloadQuartetRequirement =
+        theoremPayloadQuartetRequirementText
+    ; theoremPayloadQuartetGuard =
+        theoremPayloadQuartetGuardText
+    ; correctedTheoremPayload =
+        correctedA6TheoremPayloadText
     ; boundaryRecordedIsTrue =
         refl
     ; shellWeightsRecordedIsTrue =

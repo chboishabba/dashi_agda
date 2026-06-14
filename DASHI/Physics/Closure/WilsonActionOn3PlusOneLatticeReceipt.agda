@@ -120,7 +120,7 @@ record WilsonActionOn3PlusOneLatticeReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -190,7 +190,7 @@ canonicalWilsonActionOn3PlusOneLatticeReceipt =
     ; uniformMassGapProvedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

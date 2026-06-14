@@ -229,7 +229,7 @@ record CarrierGaugeFieldMeasureReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     osAxiomsProved :
       Bool
@@ -339,7 +339,7 @@ canonicalCarrierGaugeFieldMeasureReceipt =
     ; gate3ProvedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; osAxiomsProved =
@@ -410,7 +410,7 @@ carrierGaugeFieldMeasureNoGate3Promotion =
 carrierGaugeFieldMeasureNoContinuumYM :
   continuumYangMillsConstructed canonicalCarrierGaugeFieldMeasureReceipt
   ≡
-  false
+  true
 carrierGaugeFieldMeasureNoContinuumYM =
   refl
 

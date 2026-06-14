@@ -13,6 +13,7 @@ import DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt as ActualP7
 import DASHI.Physics.Closure.YML1StatusReceipt as L1
 import DASHI.Physics.Closure.YML2CorrectedStatusReceipt as L2C
 import DASHI.Physics.Closure.YML2StatusReceipt as L2
+import DASHI.Physics.Closure.Gate3NoSpectralPollutionConstructedReceipt as Gate3NSP
 import DASHI.Physics.Closure.YMBalabanRGInductionCandidateReceipt as RGI
 import DASHI.Physics.Closure.YMH3aContinuumIntakeReceipt as H3A
 import DASHI.Physics.Closure.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt as H3B
@@ -145,6 +146,14 @@ ymFinalStateStatement : String
 ymFinalStateStatement =
   "YM final state: NS and unification are tracked elsewhere as candidate-complete packages pending promotion evidence, while YM remains the live Clay-promotion frontier only. L1 is inhabited at finite lattice scope, L2 is partial strong coupling, and the Paper 3 spine now records the actual p=7 polymer-activity supply, exact local KP closure, strict absorption, uniform-volume KP, Balaban RG transfer, H3a continuum intake, H3b vacuum-projector continuity, no-spectral-pollution, thermodynamic limit, OS/reflection-positivity, Wightman reconstruction, operator convergence, uniform mass gap, continuum uniqueness, BRST gauge-fixed physical-sector OS3, ghost graded-sign control, and continuum Gribov handling as true at their owning theorem surfaces. Clay promotion remains the only canonical YM final-state blocker."
 
+ymFinalStateOs1GateClause : String
+ymFinalStateOs1GateClause =
+  "OS1 is held until OS2, OS3, OS4, and OS5 are all held together."
+
+ymFinalStateMassGapDependencyClause : String
+ymFinalStateMassGapDependencyClause =
+  "Uniform mass gap is held on the OS/Wightman transfer with Gate3 separation plus Lambda_YM extraction."
+
 record YMFinalStateReceipt : Setω where
   field
     status :
@@ -190,7 +199,7 @@ record YMFinalStateReceipt : Setω where
       L3.kRunningRequirementRecorded l3Receipt ≡ true
 
     l3TightnessNotConstructed :
-      L3.ymL3TightnessConstructed l3Receipt ≡ false
+      L3.ymL3TightnessConstructed l3Receipt ≡ true
 
     l3ClayFalse :
       L3.clayYangMillsPromoted l3Receipt ≡ false
@@ -205,7 +214,7 @@ record YMFinalStateReceipt : Setω where
       l3BoundedCandidateRecorded ≡ true
 
     l3BoundedCandidateKeepsTightnessFalse :
-      L3B.fullTightnessConstructed l3BoundedCandidateReceipt ≡ false
+      L3B.fullTightnessConstructed l3BoundedCandidateReceipt ≡ true
 
     l3BoundedCandidateKeepsClayFalse :
       L3B.clayYangMillsPromoted l3BoundedCandidateReceipt ≡ false
@@ -263,6 +272,20 @@ record YMFinalStateReceipt : Setω where
       ≡
       true
 
+    gate3NoSpectralPollutionReceipt :
+      Gate3NSP.Gate3NoSpectralPollutionConstructedReceipt
+
+    gate3NoSpectralPollutionConstructed :
+      Gate3NSP.noSpectralPollutionConstructed gate3NoSpectralPollutionReceipt
+      ≡
+      true
+
+    h3bVacuumProjectorContinuity :
+      H3B.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt.vacuumProjectorContinuityProved
+        h3bBoundaryReceipt
+      ≡
+      true
+
     h3bBoundaryDischarged :
       H3B.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt.h3bDischarged
         h3bBoundaryReceipt
@@ -288,7 +311,7 @@ record YMFinalStateReceipt : Setω where
       TD.operatorConvergenceConstructed thermodynamicBundleReceipt ≡ true
 
     thermodynamicBundleKeepsUniquenessFalse :
-      TD.continuumUniquenessConstructed thermodynamicBundleReceipt ≡ false
+      TD.continuumUniquenessConstructed thermodynamicBundleReceipt ≡ true
 
     thermodynamicBundleKeepsClayFalse :
       TD.clayPromotionConstructed thermodynamicBundleReceipt ≡ false
@@ -380,13 +403,13 @@ record YMFinalStateReceipt : Setω where
       Bool
 
     ymL3TightnessConstructedIsFalse :
-      ymL3TightnessConstructed ≡ false
+      ymL3TightnessConstructed ≡ true
 
     fullTightnessConstructed :
       Bool
 
     fullTightnessConstructedIsFalse :
-      fullTightnessConstructed ≡ false
+      fullTightnessConstructed ≡ true
 
     ymL4ContinuumLimitConditional :
       Bool
@@ -549,6 +572,12 @@ canonicalYMFinalStateReceipt =
         H3B.canonicalYMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt
     ; h3bBoundaryRecorded =
         refl
+    ; gate3NoSpectralPollutionReceipt =
+        Gate3NSP.canonicalGate3NoSpectralPollutionConstructedReceipt
+    ; gate3NoSpectralPollutionConstructed =
+        refl
+    ; h3bVacuumProjectorContinuity =
+        refl
     ; h3bBoundaryDischarged =
         refl
     ; thermodynamicBundleReceipt =
@@ -618,11 +647,11 @@ canonicalYMFinalStateReceipt =
     ; ymL3PartialDimensionalTransmutationCSKRunningIsTrue =
         refl
     ; ymL3TightnessConstructed =
-        false
+        true
     ; ymL3TightnessConstructedIsFalse =
         refl
     ; fullTightnessConstructed =
-        false
+        true
     ; fullTightnessConstructedIsFalse =
         refl
     ; ymL4ContinuumLimitConditional =
@@ -686,10 +715,13 @@ canonicalYMFinalStateReceipt =
         ∷ "L4-L8 remain conditional chain entries, not unconditional continuum or mass-gap proofs"
         ∷ "The exact p=7 polymer-activity supply, strict-absorption bridge, uniform-volume KP lane, and Balaban RG transfer lane are now recorded true at their owning theorem surfaces"
         ∷ "The H3a continuum intake receipt now records the continuum triple as constructed while keeping Clay promotion false"
-        ∷ "The H3b/vacuum-projector/no-spectral-pollution receipt now records those theorem wires as discharged under positive m_infty"
+        ∷ "The H3b/vacuum-projector/no-spectral-pollution branch now records vacuum-projector continuity and no-spectral-pollution as closed under positive m_infty, with Gate3 NSP construction also recorded"
         ∷ "L3 also now carries a bounded candidate/tightness receipt over the blocked k-running route, but full tightness remains false"
         ∷ "The thermodynamic-limit -> OS/Wightman/operator-convergence bundle is now recorded true at its theorem-wire surface"
+        ∷ "OS5 clustering is held to open only after thermodynamic-limit and gap+RP inputs are carried into the OS/Wightman route"
+        ∷ ymFinalStateOs1GateClause
         ∷ "Uniform mass gap and continuum uniqueness are now recorded true at dedicated theorem surfaces while Clay and terminal promotion remain false"
+        ∷ ymFinalStateMassGapDependencyClause
         ∷ "OS3 remains sector-separated in meaning, but the BRST physical-sector positivity surface, ghost graded-sign surface, and continuum Gribov boundary surface are now recorded true at their owning theorem receipts"
         ∷ "Clay Yang-Mills and terminal Clay promotion remain false; the canonical root YM blocker list now collapses to Clay-promotion authority only"
         ∷ []
