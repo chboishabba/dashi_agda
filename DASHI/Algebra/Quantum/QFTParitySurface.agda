@@ -9,6 +9,12 @@ open import Agda.Builtin.String using (String)
 
 data ⊥ : Set where
 
+record Sigma {ℓ : Level} (A : Set ℓ) : Set ℓ where
+  constructor sigma
+  field
+    witness :
+      A
+
 -- This module is a fail-closed parity surface: it records the shape of the
 -- quantum-mechanics/QFT interface needed for PhysLean parity without claiming
 -- the analytic theorems that are still external or unproved in this repository.
@@ -96,7 +102,7 @@ record HilbertSurface (ℓ : Level) : Set (lsuc ℓ) where
     _+_ :
       Carrier → Carrier → Carrier
 
-    _∙_ :
+    _·_ :
       Scalar → Carrier → Carrier
 
     inner :
@@ -105,11 +111,47 @@ record HilbertSurface (ℓ : Level) : Set (lsuc ℓ) where
     norm :
       Carrier → Scalar
 
+    CauchySeq :
+      Set ℓ
+
+    LimSeq :
+      Set ℓ
+
+    completeness :
+      CauchySeq → Sigma LimSeq
+
+    CauchySequence :
+      Set ℓ
+
+    isCauchy :
+      CauchySequence → EvidenceState
+
+    Lim :
+      CauchySequence → Carrier
+
+    cauchyAuthority :
+      ParityAuthority
+
+    cauchyAuthorityIsHilbertCompletion :
+      cauchyAuthority ≡ constructiveHilbertCompletionAuthority
+
+    limAuthority :
+      ParityAuthority
+
+    limAuthorityIsHilbertCompletion :
+      limAuthority ≡ constructiveHilbertCompletionAuthority
+
     complete :
       EvidenceState
 
     completeClosed :
       evidenceClosed complete ≡ false
+
+    cauchyComplete :
+      EvidenceState
+
+    cauchyCompleteClosed :
+      evidenceClosed cauchyComplete ≡ false
 
 record BoundedOperatorSurface {ℓ : Level} (H : HilbertSurface ℓ) :
   Set (lsuc ℓ) where
@@ -130,17 +172,141 @@ record BoundedOperatorSurface {ℓ : Level} (H : HilbertSurface ℓ) :
     adjoint :
       Op → Op
 
+    idLaw :
+      EvidenceState
+
+    idLawClosed :
+      evidenceClosed idLaw ≡ false
+
+    composeLaw :
+      EvidenceState
+
+    composeLawClosed :
+      evidenceClosed composeLaw ≡ false
+
+    adjointLaw :
+      EvidenceState
+
+    adjointLawClosed :
+      evidenceClosed adjointLaw ≡ false
+
+    operatorLawAuthority :
+      ParityAuthority
+
+    operatorLawAuthorityIsBoundedCalculus :
+      operatorLawAuthority ≡ boundedOperatorCalculusAuthority
+
     bounded :
       Op → EvidenceState
 
     boundedClosed :
       ∀ A → evidenceClosed (bounded A) ≡ false
 
+    boundedAuthority :
+      ParityAuthority
+
+    boundedAuthorityIsBoundedCalculus :
+      boundedAuthority ≡ boundedOperatorCalculusAuthority
+
     selfAdjoint :
       Op → EvidenceState
 
+    selfAdjointAuthority :
+      ParityAuthority
+
+    selfAdjointAuthorityIsSpectralTheorem :
+      selfAdjointAuthority ≡ selfAdjointSpectralTheoremAuthority
+
     unitary :
       Op → EvidenceState
+
+    unitaryAuthority :
+      ParityAuthority
+
+    unitaryAuthorityIsStoneTheorem :
+      unitaryAuthority ≡ unitaryStoneTheoremAuthority
+
+record OperatorSurface {ℓ : Level} (H : HilbertSurface ℓ) :
+  Set (lsuc ℓ) where
+  open HilbertSurface H
+  field
+    Op :
+      Set ℓ
+
+    apply :
+      Op → Carrier → Carrier
+
+    idOp :
+      Op
+
+    compose :
+      Op → Op → Op
+
+    adjoint :
+      Op → Op
+
+    isBounded :
+      Op → EvidenceState
+
+    isSelfAdj :
+      Op → EvidenceState
+
+    isUnitary :
+      Op → EvidenceState
+
+    adjointId :
+      EvidenceState
+
+    selfAdjEq :
+      Op → EvidenceState
+
+    unitPres :
+      Op → EvidenceState
+
+    isBoundedClosed :
+      ∀ A → evidenceClosed (isBounded A) ≡ false
+
+    isSelfAdjClosed :
+      ∀ A → evidenceClosed (isSelfAdj A) ≡ false
+
+    isUnitaryClosed :
+      ∀ U → evidenceClosed (isUnitary U) ≡ false
+
+    adjointIdClosed :
+      evidenceClosed adjointId ≡ false
+
+    selfAdjEqClosed :
+      ∀ A → evidenceClosed (selfAdjEq A) ≡ false
+
+    unitPresClosed :
+      ∀ U → evidenceClosed (unitPres U) ≡ false
+
+canonicalHilbertSurfaceFields : List String
+canonicalHilbertSurfaceFields =
+  "Carrier"
+  ∷ "Scalar"
+  ∷ "zero"
+  ∷ "_+_"
+  ∷ "_·_"
+  ∷ "inner"
+  ∷ "norm"
+  ∷ "completeness : CauchySeq -> Sigma LimSeq"
+  ∷ []
+
+canonicalOperatorSurfaceFields : List String
+canonicalOperatorSurfaceFields =
+  "Op"
+  ∷ "apply"
+  ∷ "idOp"
+  ∷ "compose"
+  ∷ "adjoint"
+  ∷ "isBounded"
+  ∷ "isSelfAdj"
+  ∷ "isUnitary"
+  ∷ "adjointId"
+  ∷ "selfAdjEq"
+  ∷ "unitPres"
+  ∷ []
 
 record SpectrumSurface {ℓ : Level}
   (H : HilbertSurface ℓ)
@@ -157,6 +323,42 @@ record SpectrumSurface {ℓ : Level}
 
     spectralMeasure :
       Op → Set ℓ
+
+    spectrumTheoremAuthority :
+      ParityAuthority
+
+    spectrumTheoremAuthorityIsSpectralTheorem :
+      spectrumTheoremAuthority ≡ selfAdjointSpectralTheoremAuthority
+
+    resolventTheoremAuthority :
+      ParityAuthority
+
+    resolventTheoremAuthorityIsSpectralTheorem :
+      resolventTheoremAuthority ≡ selfAdjointSpectralTheoremAuthority
+
+    spectralMeasureTheoremAuthority :
+      ParityAuthority
+
+    spectralMeasureTheoremAuthorityIsSpectralTheorem :
+      spectralMeasureTheoremAuthority ≡ selfAdjointSpectralTheoremAuthority
+
+    spectrumTheorem :
+      EvidenceState
+
+    spectrumTheoremClosed :
+      evidenceClosed spectrumTheorem ≡ false
+
+    resolventTheorem :
+      EvidenceState
+
+    resolventTheoremClosed :
+      evidenceClosed resolventTheorem ≡ false
+
+    spectralMeasureTheorem :
+      EvidenceState
+
+    spectralMeasureTheoremClosed :
+      evidenceClosed spectralMeasureTheorem ≡ false
 
     spectralTheorem :
       EvidenceState
@@ -196,6 +398,82 @@ data CommutationFamily : Set where
   cliffordCAR :
     CommutationFamily
 
+record CCRLawRow : Set where
+  field
+    lawName :
+      String
+
+    bracket :
+      String
+
+    scalarOpWitnessText :
+      String
+
+    stoneVonNeumannAuthoritySlot :
+      String
+
+    authoritySlotFilled :
+      Bool
+
+    authoritySlotFilledIsFalse :
+      authoritySlotFilled ≡ false
+
+record CARLawRow : Set where
+  field
+    lawName :
+      String
+
+    antibracket :
+      String
+
+    scalarOpWitnessText :
+      String
+
+    finiteCARCStarAlgebraAuthoritySlot :
+      String
+
+    authoritySlotFilled :
+      Bool
+
+    authoritySlotFilledIsFalse :
+      authoritySlotFilled ≡ false
+
+canonicalCCRLawRows : List CCRLawRow
+canonicalCCRLawRows =
+  record
+    { lawName =
+        "CCR canonical bracket law"
+    ; bracket =
+        "[q(f), p(g)] = i * omega(f,g) * 1"
+    ; scalarOpWitnessText =
+        "scalarOp witnesses scalar multiples of idOp; this is a surface row, not a promoted representation theorem"
+    ; stoneVonNeumannAuthoritySlot =
+        "Stone-von Neumann uniqueness theorem authority required"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
+  ∷ []
+
+canonicalCARLawRows : List CARLawRow
+canonicalCARLawRows =
+  record
+    { lawName =
+        "CAR canonical antibracket law"
+    ; antibracket =
+        "{a(f), a*(g)} = inner(f,g) * 1"
+    ; scalarOpWitnessText =
+        "scalarOp witnesses scalar multiples of idOp; this is a surface row, not a promoted finite CAR theorem"
+    ; finiteCARCStarAlgebraAuthoritySlot =
+        "finite CAR C*-algebra authority required"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
+  ∷ []
+
 record CCRCARSurface {ℓ : Level}
   (H : HilbertSurface ℓ)
   (B : BoundedOperatorSurface H) :
@@ -227,6 +505,83 @@ record CCRCARSurface {ℓ : Level}
     carLawClosed :
       evidenceClosed carLaw ≡ false
 
+record CCRSurface {ℓ : Level}
+  (H : HilbertSurface ℓ)
+  (B : BoundedOperatorSurface H) :
+  Set (lsuc ℓ) where
+  open HilbertSurface H
+  open BoundedOperatorSurface B
+  field
+    one :
+      Op
+
+    bracket :
+      Op → Op → Op
+
+    scalarOp :
+      Scalar → Op
+
+    scalarOpWitnessText :
+      String
+
+    symplecticForm :
+      Carrier → Carrier → Set ℓ
+
+    ccrLawRows :
+      List CCRLawRow
+
+    ccrLawRowsCanonical :
+      ccrLawRows ≡ canonicalCCRLawRows
+
+    ccrRepresentationAuthority :
+      ParityAuthority
+
+    ccrRepresentationAuthorityIsCCR :
+      ccrRepresentationAuthority ≡ ccrRepresentationTheoremAuthority
+
+    ccrLaw :
+      EvidenceState
+
+    ccrLawClosed :
+      evidenceClosed ccrLaw ≡ false
+
+record CARSurface {ℓ : Level}
+  (H : HilbertSurface ℓ)
+  (B : BoundedOperatorSurface H) :
+  Set (lsuc ℓ) where
+  open HilbertSurface H
+  open BoundedOperatorSurface B
+  field
+    one :
+      Op
+
+    antibracket :
+      Op → Op → Op
+
+    scalarOp :
+      Scalar → Op
+
+    scalarOpWitnessText :
+      String
+
+    carLawRows :
+      List CARLawRow
+
+    carLawRowsCanonical :
+      carLawRows ≡ canonicalCARLawRows
+
+    carRepresentationAuthority :
+      ParityAuthority
+
+    carRepresentationAuthorityIsCAR :
+      carRepresentationAuthority ≡ carRepresentationTheoremAuthority
+
+    carLaw :
+      EvidenceState
+
+    carLawClosed :
+      evidenceClosed carLaw ≡ false
+
 record FockSurface {ℓ : Level}
   (H : HilbertSurface ℓ)
   (B : BoundedOperatorSurface H) :
@@ -240,6 +595,12 @@ record FockSurface {ℓ : Level}
     vacuum :
       FockCarrier
 
+    finiteParticleSector :
+      Nat → Set ℓ
+
+    finiteFockCarrier :
+      Set ℓ
+
     creation :
       Carrier → FockCarrier → FockCarrier
 
@@ -248,6 +609,18 @@ record FockSurface {ℓ : Level}
 
     numberOperator :
       Op
+
+    finiteFockConstructed :
+      EvidenceState
+
+    finiteFockConstructedClosed :
+      evidenceClosed finiteFockConstructed ≡ false
+
+    fockConstructionAuthority :
+      ParityAuthority
+
+    fockConstructionAuthorityIsFock :
+      fockConstructionAuthority ≡ fockSpaceConstructionAuthority
 
     fockConstructed :
       EvidenceState
@@ -264,6 +637,12 @@ record FieldOperatorSurface {ℓ : Level}
     TestFunction :
       Set ℓ
 
+    Domain :
+      Set ℓ
+
+    domainMembership :
+      Domain → Op → EvidenceState
+
     Field :
       TestFunction → Op
 
@@ -273,53 +652,174 @@ record FieldOperatorSurface {ℓ : Level}
     commonInvariantDomain :
       EvidenceState
 
+    commonInvariantDomainClosed :
+      evidenceClosed commonInvariantDomain ≡ false
+
+    domainAuthority :
+      ParityAuthority
+
+    domainAuthorityIsOperatorValuedDistribution :
+      domainAuthority ≡ operatorValuedDistributionDomainAuthority
+
     operatorValuedDistribution :
       EvidenceState
 
     operatorValuedDistributionClosed :
       evidenceClosed operatorValuedDistribution ≡ false
 
-data WightmanAxiom : Set where
-  temperedDistributions :
-    WightmanAxiom
-  poincareCovariance :
-    WightmanAxiom
-  spectrumCondition :
-    WightmanAxiom
-  vacuumCyclicity :
-    WightmanAxiom
-  localCommutativity :
-    WightmanAxiom
+record WightmanAxiom : Set where
+  field
+    axiomName :
+      String
+
+    axiomText :
+      String
+
+    authoritySlotFilled :
+      Bool
+
+    authoritySlotFilledIsFalse :
+      authoritySlotFilled ≡ false
 
 canonicalWightmanAxioms : List WightmanAxiom
 canonicalWightmanAxioms =
-  temperedDistributions
-  ∷ poincareCovariance
-  ∷ spectrumCondition
-  ∷ vacuumCyclicity
-  ∷ localCommutativity
+  record
+    { axiomName =
+        "W1"
+    ; axiomText =
+        "W1 tempered distributions"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
+  ∷ record
+    { axiomName =
+        "W2"
+    ; axiomText =
+        "W2 Poincare covariance"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
+  ∷ record
+    { axiomName =
+        "W3"
+    ; axiomText =
+        "W3 spectrum condition"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
+  ∷ record
+    { axiomName =
+        "W4"
+    ; axiomText =
+        "W4 vacuum cyclicity"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
+  ∷ record
+    { axiomName =
+        "W5"
+    ; axiomText =
+        "W5 local commutativity"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
+  ∷ record
+    { axiomName =
+        "W6"
+    ; axiomText =
+        "W6 operator-valued distributions"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
   ∷ []
 
-data OSAxiom : Set where
-  osRegularity :
-    OSAxiom
-  osEuclideanCovariance :
-    OSAxiom
-  osReflectionPositivity :
-    OSAxiom
-  osSymmetry :
-    OSAxiom
-  osClusterProperty :
-    OSAxiom
+wightmanAxiomName : WightmanAxiom → String
+wightmanAxiomName row =
+  WightmanAxiom.axiomText row
+
+record OSAxiom : Set where
+  field
+    axiomName :
+      String
+
+    axiomText :
+      String
+
+    authoritySlotFilled :
+      Bool
+
+    authoritySlotFilledIsFalse :
+      authoritySlotFilled ≡ false
 
 canonicalOSAxioms : List OSAxiom
 canonicalOSAxioms =
-  osRegularity
-  ∷ osEuclideanCovariance
-  ∷ osReflectionPositivity
-  ∷ osSymmetry
-  ∷ osClusterProperty
+  record
+    { axiomName =
+        "OS1"
+    ; axiomText =
+        "OS1 regularity"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
+  ∷ record
+    { axiomName =
+        "OS2"
+    ; axiomText =
+        "OS2 Euclidean covariance"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
+  ∷ record
+    { axiomName =
+        "OS3"
+    ; axiomText =
+        "OS3 reflection positivity"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
+  ∷ record
+    { axiomName =
+        "OS4"
+    ; axiomText =
+        "OS4 symmetry"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
+  ∷ record
+    { axiomName =
+        "OS5"
+    ; axiomText =
+        "OS5 cluster property"
+    ; authoritySlotFilled =
+        false
+    ; authoritySlotFilledIsFalse =
+        refl
+    }
   ∷ []
+
+osAxiomName : OSAxiom → String
+osAxiomName row =
+  OSAxiom.axiomText row
 
 record OSWightmanSurface : Set₁ where
   field
@@ -421,9 +921,13 @@ data QFTParityItem : Set where
     QFTParityItem
   tensorProducts :
     QFTParityItem
-  ccrCarAlgebras :
+  ccrAlgebras :
+    QFTParityItem
+  carAlgebras :
     QFTParityItem
   fockSpace :
+    QFTParityItem
+  operatorValuedDistributionDomains :
     QFTParityItem
   fieldOperators :
     QFTParityItem
@@ -444,8 +948,10 @@ canonicalParityItems =
   ∷ unitaryOperators
   ∷ spectra
   ∷ tensorProducts
-  ∷ ccrCarAlgebras
+  ∷ ccrAlgebras
+  ∷ carAlgebras
   ∷ fockSpace
+  ∷ operatorValuedDistributionDomains
   ∷ fieldOperators
   ∷ wightmanAxioms
   ∷ osAxioms
@@ -477,6 +983,22 @@ record QFTParityReceipt : Set₁ where
     requiredAuthoritiesCanonical :
       requiredAuthorities ≡ canonicalAuthorityCutset
 
+    authorityCutsetReferences :
+      List ParityAuthority
+
+    authorityCutsetReferencesCanonical :
+      authorityCutsetReferences ≡ canonicalAuthorityCutset
+
+    hilbertSurfaceFieldRows :
+      List String
+    hilbertSurfaceFieldRowsCanonical :
+      hilbertSurfaceFieldRows ≡ canonicalHilbertSurfaceFields
+
+    operatorSurfaceFieldRows :
+      List String
+    operatorSurfaceFieldRowsCanonical :
+      operatorSurfaceFieldRows ≡ canonicalOperatorSurfaceFields
+
     hilbertSurfaceDeclared :
       Bool
     hilbertSurfaceDeclaredIsTrue :
@@ -486,6 +1008,11 @@ record QFTParityReceipt : Set₁ where
       Bool
     boundedOperatorSurfaceDeclaredIsTrue :
       boundedOperatorSurfaceDeclared ≡ true
+
+    operatorSurfaceDeclared :
+      Bool
+    operatorSurfaceDeclaredIsTrue :
+      operatorSurfaceDeclared ≡ true
 
     selfAdjointSurfaceDeclared :
       Bool
@@ -512,10 +1039,40 @@ record QFTParityReceipt : Set₁ where
     ccrCarSurfaceDeclaredIsTrue :
       ccrCarSurfaceDeclared ≡ true
 
+    ccrSurfaceDeclared :
+      Bool
+    ccrSurfaceDeclaredIsTrue :
+      ccrSurfaceDeclared ≡ true
+
+    canonicalCCRRows :
+      List CCRLawRow
+    canonicalCCRRowsAreCanonical :
+      canonicalCCRRows ≡ canonicalCCRLawRows
+
+    carSurfaceDeclared :
+      Bool
+    carSurfaceDeclaredIsTrue :
+      carSurfaceDeclared ≡ true
+
+    canonicalCARRows :
+      List CARLawRow
+    canonicalCARRowsAreCanonical :
+      canonicalCARRows ≡ canonicalCARLawRows
+
     fockSurfaceDeclared :
       Bool
     fockSurfaceDeclaredIsTrue :
       fockSurfaceDeclared ≡ true
+
+    fockFiniteConstructionSurfaceDeclared :
+      Bool
+    fockFiniteConstructionSurfaceDeclaredIsTrue :
+      fockFiniteConstructionSurfaceDeclared ≡ true
+
+    operatorValuedDistributionDomainSurfaceDeclared :
+      Bool
+    operatorValuedDistributionDomainSurfaceDeclaredIsTrue :
+      operatorValuedDistributionDomainSurfaceDeclared ≡ true
 
     fieldOperatorSurfaceDeclared :
       Bool
@@ -526,6 +1083,16 @@ record QFTParityReceipt : Set₁ where
       Bool
     osWightmanSurfaceDeclaredIsTrue :
       osWightmanSurfaceDeclared ≡ true
+
+    canonicalOSRows :
+      List OSAxiom
+    canonicalOSRowsAreOS1ToOS5 :
+      canonicalOSRows ≡ canonicalOSAxioms
+
+    canonicalWightmanRows :
+      List WightmanAxiom
+    canonicalWightmanRowsAreW1ToW6 :
+      canonicalWightmanRows ≡ canonicalWightmanAxioms
 
     scatteringSurfaceDeclared :
       Bool
@@ -627,6 +1194,18 @@ canonicalQFTParityReceipt =
         canonicalAuthorityCutset
     ; requiredAuthoritiesCanonical =
         refl
+    ; authorityCutsetReferences =
+        canonicalAuthorityCutset
+    ; authorityCutsetReferencesCanonical =
+        refl
+    ; hilbertSurfaceFieldRows =
+        canonicalHilbertSurfaceFields
+    ; hilbertSurfaceFieldRowsCanonical =
+        refl
+    ; operatorSurfaceFieldRows =
+        canonicalOperatorSurfaceFields
+    ; operatorSurfaceFieldRowsCanonical =
+        refl
     ; hilbertSurfaceDeclared =
         true
     ; hilbertSurfaceDeclaredIsTrue =
@@ -634,6 +1213,10 @@ canonicalQFTParityReceipt =
     ; boundedOperatorSurfaceDeclared =
         true
     ; boundedOperatorSurfaceDeclaredIsTrue =
+        refl
+    ; operatorSurfaceDeclared =
+        true
+    ; operatorSurfaceDeclaredIsTrue =
         refl
     ; selfAdjointSurfaceDeclared =
         true
@@ -655,9 +1238,33 @@ canonicalQFTParityReceipt =
         true
     ; ccrCarSurfaceDeclaredIsTrue =
         refl
+    ; ccrSurfaceDeclared =
+        true
+    ; ccrSurfaceDeclaredIsTrue =
+        refl
+    ; canonicalCCRRows =
+        canonicalCCRLawRows
+    ; canonicalCCRRowsAreCanonical =
+        refl
+    ; carSurfaceDeclared =
+        true
+    ; carSurfaceDeclaredIsTrue =
+        refl
+    ; canonicalCARRows =
+        canonicalCARLawRows
+    ; canonicalCARRowsAreCanonical =
+        refl
     ; fockSurfaceDeclared =
         true
     ; fockSurfaceDeclaredIsTrue =
+        refl
+    ; fockFiniteConstructionSurfaceDeclared =
+        true
+    ; fockFiniteConstructionSurfaceDeclaredIsTrue =
+        refl
+    ; operatorValuedDistributionDomainSurfaceDeclared =
+        true
+    ; operatorValuedDistributionDomainSurfaceDeclaredIsTrue =
         refl
     ; fieldOperatorSurfaceDeclared =
         true
@@ -666,6 +1273,14 @@ canonicalQFTParityReceipt =
     ; osWightmanSurfaceDeclared =
         true
     ; osWightmanSurfaceDeclaredIsTrue =
+        refl
+    ; canonicalOSRows =
+        canonicalOSAxioms
+    ; canonicalOSRowsAreOS1ToOS5 =
+        refl
+    ; canonicalWightmanRows =
+        canonicalWightmanAxioms
+    ; canonicalWightmanRowsAreW1ToW6 =
         refl
     ; scatteringSurfaceDeclared =
         true

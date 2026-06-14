@@ -43,6 +43,14 @@ GR/PDE, and theorem-ergonomics roadmap receipts. The checked modules are
 `DASHI.Physics.Closure.AgdaPhysicsParityRoadmapReceipt`. They name reusable
 interfaces and authority blockers; they do not claim PhysLean parity, imported
 continuum theorem authority, Clay promotion, or terminal unification.
+The current intake-strengthened versions also record the exact law-shape
+payloads required by those sockets: scalar/vector/Hilbert/operator/spectral
+and ODE shapes; manifold/chart/exterior-calculus theorem targets; Lie/gauge
+Jacobi, curvature, YM, Wilson, BRST, and gauge-fixing shapes; QFT Hilbert,
+CCR/CAR, Fock, OS, and Wightman rows; GR/PDE Koszul, curvature, Einstein,
+weak-solution, and energy-estimate rows; and the canonical finite discrete-YM
+spectral example receipt. These remain checked intake contracts, not imported
+continuum proofs.
 
 Current cross-lane scope-resolution boundary: `DASHI.Promotion.ObligationIndex`
 now includes a six-row `scopeResolutionSummaries` layer. The checked surfaces
@@ -86,6 +94,20 @@ exterior chain, a 20-field numeric authority payload validator, and finite-mode
 Schrodinger/Born closure. They still do not promote NS Clay, physical chemistry
 or wet-lab chemistry, broad Standard Model, Maxwell field equations, measured
 numeric values, infinite-dimensional quantum/QFT, or terminal unification.
+
+Current atomic-clock / SI-second empirical boundary:
+`DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge`,
+`DASHI.Promotion.Cs133NumericAuthorityPayloadRequest`,
+`DASHI.Physics.Closure.QuantumClockSIObservableBridge`,
+`DASHI.Physics.Closure.StoneSISecondTimeParameterBridge`, and
+`DASHI.Promotion.RydbergClockMetreBridge` record the first narrow metrology
+contact lane. They expose the SI time/frequency carrier shape, the exact
+Cs-133 integer/text request, quantum-clock phase/visibility/squeezing
+observable requirements, Gate 5 time-parameter requirements, and the
+clock-to-metre route needed before Rydberg wavenumber use. The lane remains
+fail-closed: no BIPM/NIST artifact is loaded, no authority token is locally
+constructed, no numeric payload is promoted, and W4/Candidate256, Stone,
+chemistry, spectroscopy, and terminal promotion remain false.
 
 Current Standard Model first-principles boundary:
 `DASHI.Promotion.ObligationIndex` now includes a nine-row

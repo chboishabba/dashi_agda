@@ -6,6 +6,21 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane atomic-clock/SI-second metrology tranche for `2026-06-14`: adds
+  `DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge`,
+  `DASHI.Promotion.Cs133NumericAuthorityPayloadRequest`,
+  `DASHI.Physics.Closure.QuantumClockSIObservableBridge`,
+  `DASHI.Physics.Closure.StoneSISecondTimeParameterBridge`,
+  `DASHI.Promotion.RydbergClockMetreBridge`, and
+  `tests/test_atomic_clock_si_bridge.py`, then wires the checked Agda modules
+  through `DASHI.Everything`. The tranche records SI time/frequency unit
+  shape, Cs-133 exact-value payload requirements, quantum-clock observable
+  dependencies, Gate 5 time-parameter requirements, and the clock-to-metre
+  route for Rydberg spectroscopy. It deliberately keeps BIPM/NIST artifact
+  ingestion, local external authority construction, numeric promotion,
+  Candidate256/W4 physical calibration, physical Stone promotion, chemistry
+  promotion, spectroscopy promotion, and terminal claims false.
+
 - Six-lane Agda/PhysLean physics-library parity tranche for `2026-06-14`: after
   refreshing ChatGPT thread `Physics Library for Agda`
   (`6a2e6b6c-f4b0-83ec-b233-126757c70248`,
@@ -21,6 +36,13 @@ monitor surface.
   QM/QFT, GR/PDE, and theorem ergonomics. It explicitly keeps PhysLean parity,
   external continuum theorem imports, Clay promotions, and terminal
   unification false or authority-blocked.
+  A follow-up exact-intake pass in the same tranche strengthens those six
+  modules with checked law-shape rows for scalar/vector/Hilbert/operator/
+  spectral/ODE data, manifold/chart/exterior-calculus identities, Lie/gauge
+  Jacobi/curvature/YM/Wilson/BRST/gauge-fixing data, QFT Hilbert/CCR/CAR/Fock/
+  OS/Wightman data, GR/PDE Koszul/curvature/Einstein/weak-solution/energy
+  estimate data, and the finite discrete-YM spectral theorem example receipt,
+  while preserving every no-promotion boundary.
 
 - Six-lane Gate 3 theorem-package tranche for `2026-06-13`: adds
   `DASHI.Physics.Closure.Gate3DensityOfCarrierCoreConstructedReceipt`,
