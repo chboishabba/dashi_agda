@@ -150,6 +150,7 @@ import DASHI.Reasoning.FallacyExamples
 import DASHI.Reasoning.MetaphorAlignmentMisunderstanding
 import DASHI.Reasoning.MultiObserverScienceQuotient
 import DASHI.Reasoning.MultiObserverScienceQuotientQualiaBridge
+import DASHI.Reasoning.ObserverQuotientCompleteStatement
 import DASHI.Reasoning.OperatorInvariantEquivalence
 import DASHI.Process.DASHIMarkovCompatibility
 import DASHI.Energy.ClosestPoint

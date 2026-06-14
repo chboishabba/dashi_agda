@@ -27,6 +27,7 @@ REQUIRED_MODULES = (
     "DASHI.Biology.ObserverPerceptualManifoldResidual",
     "DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary",
     "DASHI.Reasoning.MultiObserverScienceQuotientQualiaBridge",
+    "DASHI.Reasoning.ObserverQuotientCompleteStatement",
 )
 
 REQUIRED_CATEGORIES: dict[str, tuple[str, ...]] = {
@@ -131,6 +132,17 @@ REQUIRED_CATEGORIES: dict[str, tuple[str, ...]] = {
         "qualiaGeometryClaimIsFalse",
         "false",
     ),
+    "observer_quotient_complete_statement_boundary": (
+        "ObserverQuotientCompleteStatement",
+        "observerQuotientEquation",
+        "M_{O,s,c}=L/~_{O,s,c}",
+        "formalObservationQuotientPromotedIsTrue",
+        "hardProblemResidualPromotedIsFalse",
+        "projectionDefectTypedIsTrue",
+        "projectionDefectClosedIsFalse",
+        "runtimeAgdaCertificationClaimIsFalse",
+        "avianQualiaGeometryClaimBlocked",
+    ),
 }
 
 REQUIRED_CATEGORY_MODULES: dict[str, tuple[str, ...]] = {
@@ -151,6 +163,9 @@ REQUIRED_CATEGORY_MODULES: dict[str, tuple[str, ...]] = {
     ),
     "avian_magnetoreception_extra_fibre_boundary_completion": (
         "DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary",
+    ),
+    "observer_quotient_complete_statement_boundary": (
+        "DASHI.Reasoning.ObserverQuotientCompleteStatement",
     ),
 }
 
@@ -209,6 +224,9 @@ MODULE_CATEGORY_HINTS: dict[str, tuple[str, ...]] = {
     ),
     "DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary": (
         "avian_magnetoreception_extra_fibre_boundary_completion",
+    ),
+    "DASHI.Reasoning.ObserverQuotientCompleteStatement": (
+        "observer_quotient_complete_statement_boundary",
     ),
 }
 
@@ -428,8 +446,8 @@ def build_summary(repo_root: Path, allow_missing_aggregate: bool) -> dict[str, A
         "failed_required_checks": failed_required,
         "passed": not failed_required,
         "control_card": {
-            "O": "Audit owns only textual boundary checks over avian, transcript-PNF, observer-manifold, and SensibLaw surfaces.",
-            "R": "Textually audit avian overlay, RF perturbation, qualia boundary, hard-problem residual, observer-quotient completion, and PNF evidence-only surfaces.",
+            "O": "Audit owns only textual boundary checks over avian, transcript-PNF, observer-manifold, observer-quotient complete-statement, and SensibLaw surfaces.",
+            "R": "Textually audit avian overlay, RF perturbation, qualia boundary, hard-problem residual, observer-quotient completion, complete-statement, and PNF evidence-only surfaces.",
             "C": "Stdlib Python argparse script emits JSON and optional Markdown.",
             "S": "New Agda surfaces can typecheck while accidentally becoming skeletons or promoted claims.",
             "L": "Required modules -> no incomplete markers -> category tokens -> aggregate import visibility.",

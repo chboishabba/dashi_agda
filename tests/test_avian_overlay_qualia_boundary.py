@@ -177,6 +177,26 @@ MODULES = {
             "false",
         ),
     },
+    "DASHI.Reasoning.ObserverQuotientCompleteStatement": {
+        "path": REASONING / "ObserverQuotientCompleteStatement.agda",
+        "identifiers": (
+            "ObserverQuotientCompleteStatement",
+            "observerQuotientEquation",
+            "formalObservationQuotientPromotedIsTrue",
+            "hardProblemResidualPromotedIsFalse",
+            "projectionDefectTypedIsTrue",
+            "projectionDefectClosedIsFalse",
+            "runtimeAgdaCertificationClaimIsFalse",
+            "avianQualiaGeometryClaimBlocked",
+        ),
+        "boundary_terms": (
+            "observer quotient",
+            "audit-bounded",
+            "phenomenal",
+            "qualia",
+            "false",
+        ),
+    },
 }
 
 OBSERVER_QUOTIENT_COMPLETION_TOKENS = (
@@ -187,6 +207,10 @@ OBSERVER_QUOTIENT_COMPLETION_TOKENS = (
     "auditScriptOnly",
     "MultiObserverQuotientFusion",
     "AvianMagnetoreceptionExtraFibreBoundary",
+    "ObserverQuotientCompleteStatement",
+    "M_{O,s,c}=L/~_{O,s,c}",
+    "hardProblemResidualPromotedIsFalse",
+    "runtimeAgdaCertificationClaimIsFalse",
     "perceptualQuotientGeometryExperimentallyConstrained",
     "qualiaGeometryClaimIsFalse",
 )
@@ -239,6 +263,12 @@ def test_observer_quotient_completion_surfaces_record_new_tokens(
     avian_text = module_texts["DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary"]
     assert "perceptualQuotientGeometryExperimentallyConstrained" in avian_text
     assert "qualiaGeometryClaimIsFalse" in avian_text
+
+    complete_text = module_texts["DASHI.Reasoning.ObserverQuotientCompleteStatement"]
+    assert "ObserverQuotientCompleteStatement" in complete_text
+    assert "M_{O,s,c}=L/~_{O,s,c}" in complete_text
+    assert "hardProblemResidualPromotedIsFalse" in complete_text
+    assert "runtimeAgdaCertificationClaimIsFalse" in complete_text
 
 
 def test_avian_overlay_modules_record_false_boundary_language(
