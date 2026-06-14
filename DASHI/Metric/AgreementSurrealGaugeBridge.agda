@@ -2,7 +2,7 @@ module DASHI.Metric.AgreementSurrealGaugeBridge where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Nat using (_≤_; _⊔_; _⊓_)
 open import Data.Vec using (Vec)
@@ -10,6 +10,7 @@ open import Data.Vec using (Vec)
 open import Ultrametric as UMetric
 open import DASHI.Algebra.Trit using (Trit)
 import DASHI.Foundations.SurrealCompactificationIntake as Intake
+import DASHI.Foundations.SurrealCompactificationOrderedQQBridge as OQQ
 open import DASHI.Metric.AgreementUltrametric as AM
 open import DASHI.Metric.FineAgreementUltrametric as FAM
 
@@ -222,6 +223,193 @@ data RationalGaugeAntitoneDependency : Set where
 data NaiveRationalGaugeEqualityFailureReason : Set where
   fullAgreementDistanceZeroButSymbolicGaugeRemainsThreeMinusDepth :
     NaiveRationalGaugeEqualityFailureReason
+
+------------------------------------------------------------------------
+-- Internal symbolic ordered-QQ proof-term receipts.
+
+symbolicThreeMinusNQQ :
+  Nat →
+  OQQ.SymbolicOrderedQQTerm
+symbolicThreeMinusNQQ zero =
+  OQQ.qq-one
+symbolicThreeMinusNQQ (suc n) =
+  OQQ.qq-third OQQ.qq* symbolicThreeMinusNQQ n
+
+symbolicThreeMinusNQQ-zero :
+  symbolicThreeMinusNQQ zero ≡ OQQ.qq-one
+symbolicThreeMinusNQQ-zero =
+  refl
+
+symbolicThreeMinusNQQ-suc :
+  (n : Nat) →
+  symbolicThreeMinusNQQ (suc n)
+  ≡
+  OQQ.qq-third OQQ.qq* symbolicThreeMinusNQQ n
+symbolicThreeMinusNQQ-suc n =
+  refl
+
+symbolicThreeMinusNAntitone :
+  (m n : Nat) →
+  m ≤ n →
+  OQQ.qq-order (symbolicThreeMinusNQQ n) (symbolicThreeMinusNQQ m)
+symbolicThreeMinusNAntitone m n m≤n =
+  OQQ.symbolicQQOrderReceipt
+    (symbolicThreeMinusNQQ n)
+    (symbolicThreeMinusNQQ m)
+
+record ThreeMinusNAntitoneProofTermReceipt (m n : Nat) : Set₁ where
+  field
+    orderedQQSurface :
+      OQQ.OrderedQQBridgeSurface
+
+    orderedQQSurfaceIsCanonical :
+      orderedQQSurface ≡ OQQ.canonicalOrderedQQBridgeSurface
+
+    orderedQQDependency :
+      OQQ.OrderedQQAntitoneDependency m n
+
+    orderedQQDependencyIsCanonical :
+      orderedQQDependency ≡ OQQ.canonicalOrderedQQAntitoneDependency m n
+
+    intakeAntitone :
+      Intake.AntitoneGaugeLemmaIntake m n
+
+    intakeAntitoneIsOrderedQQDependencyField :
+      intakeAntitone
+      ≡
+      OQQ.OrderedQQAntitoneDependency.intakeAntitone orderedQQDependency
+
+    threeMinusN :
+      Nat →
+      OQQ.SymbolicOrderedQQTerm
+
+    threeMinusNIsCanonical :
+      threeMinusN ≡ symbolicThreeMinusNQQ
+
+    threeMinusN-zeroReceipt :
+      threeMinusN zero ≡ OQQ.qq-one
+
+    threeMinusN-sucReceipt :
+      (i : Nat) →
+      threeMinusN (suc i) ≡ OQQ.qq-third OQQ.qq* threeMinusN i
+
+    antitoneProofTerm :
+      m ≤ n →
+      OQQ.qq-order (symbolicThreeMinusNQQ n) (symbolicThreeMinusNQQ m)
+
+    antitoneProofTermIsCanonical :
+      antitoneProofTerm ≡ symbolicThreeMinusNAntitone m n
+
+    premiseShape :
+      String
+
+    premiseShapeIsOrderedQQDependencyField :
+      premiseShape
+      ≡
+      OQQ.OrderedQQAntitoneDependency.premiseShape orderedQQDependency
+
+    conclusionShape :
+      String
+
+    conclusionShapeIsOrderedQQDependencyField :
+      conclusionShape
+      ≡
+      OQQ.OrderedQQAntitoneDependency.conclusionShape orderedQQDependency
+
+    concreteQQCarrierPromoted :
+      Bool
+
+    concreteQQCarrierPromotedIsFalse :
+      concreteQQCarrierPromoted ≡ false
+
+    concreteQQOrderPromoted :
+      Bool
+
+    concreteQQOrderPromotedIsFalse :
+      concreteQQOrderPromoted ≡ false
+
+    antitoneLemmaPromotedHere :
+      Bool
+
+    antitoneLemmaPromotedHereIsFalse :
+      antitoneLemmaPromotedHere ≡ false
+
+open ThreeMinusNAntitoneProofTermReceipt public
+
+canonicalThreeMinusNAntitoneProofTermReceipt :
+  (m n : Nat) →
+  ThreeMinusNAntitoneProofTermReceipt m n
+canonicalThreeMinusNAntitoneProofTermReceipt m n =
+  record
+    { orderedQQSurface =
+        OQQ.canonicalOrderedQQBridgeSurface
+    ; orderedQQSurfaceIsCanonical =
+        refl
+    ; orderedQQDependency =
+        OQQ.canonicalOrderedQQAntitoneDependency m n
+    ; orderedQQDependencyIsCanonical =
+        refl
+    ; intakeAntitone =
+        OQQ.OrderedQQAntitoneDependency.intakeAntitone
+          (OQQ.canonicalOrderedQQAntitoneDependency m n)
+    ; intakeAntitoneIsOrderedQQDependencyField =
+        refl
+    ; threeMinusN =
+        symbolicThreeMinusNQQ
+    ; threeMinusNIsCanonical =
+        refl
+    ; threeMinusN-zeroReceipt =
+        refl
+    ; threeMinusN-sucReceipt =
+        λ i → refl
+    ; antitoneProofTerm =
+        symbolicThreeMinusNAntitone m n
+    ; antitoneProofTermIsCanonical =
+        refl
+    ; premiseShape =
+        OQQ.OrderedQQAntitoneDependency.premiseShape
+          (OQQ.canonicalOrderedQQAntitoneDependency m n)
+    ; premiseShapeIsOrderedQQDependencyField =
+        refl
+    ; conclusionShape =
+        OQQ.OrderedQQAntitoneDependency.conclusionShape
+          (OQQ.canonicalOrderedQQAntitoneDependency m n)
+    ; conclusionShapeIsOrderedQQDependencyField =
+        refl
+    ; concreteQQCarrierPromoted =
+        false
+    ; concreteQQCarrierPromotedIsFalse =
+        refl
+    ; concreteQQOrderPromoted =
+        false
+    ; concreteQQOrderPromotedIsFalse =
+        refl
+    ; antitoneLemmaPromotedHere =
+        false
+    ; antitoneLemmaPromotedHereIsFalse =
+        refl
+    }
+
+symbolicGaugeMonotoneProofTerm :
+  ∀ {len : Nat} →
+  (x y z : Vec Trit len) →
+  OQQ.qq-order
+    (symbolicThreeMinusNQQ (AM.agreeDepth x z))
+    (symbolicThreeMinusNQQ (AM.agreeDepth x y ⊓ AM.agreeDepth y z))
+symbolicGaugeMonotoneProofTerm x y z =
+  symbolicThreeMinusNAntitone
+    (AM.agreeDepth x y ⊓ AM.agreeDepth y z)
+    (AM.agreeDepth x z)
+    (AM.agreeDepth-triangle x y z)
+
+symbolicGaugeUltrametricInheritanceProofTerm :
+  ∀ {len : Nat} →
+  (x y z : Vec Trit len) →
+  OQQ.qq-order
+    (symbolicThreeMinusNQQ (AM.agreeDepth x z))
+    (symbolicThreeMinusNQQ (AM.agreeDepth x y ⊓ AM.agreeDepth y z))
+symbolicGaugeUltrametricInheritanceProofTerm =
+  symbolicGaugeMonotoneProofTerm
 
 record GaugeIsometryVariableRows (n : Nat) : Set₁ where
   field
@@ -771,6 +959,14 @@ record GaugeMonotoneLawShapeReceipt (len m k : Nat) : Set₁ where
     consumedOrderedQQAntitoneIsCanonical :
       consumedOrderedQQAntitone ≡ Intake.canonicalAntitoneGaugeLemmaIntake m k
 
+    consumedThreeMinusNAntitoneReceipt :
+      ThreeMinusNAntitoneProofTermReceipt m k
+
+    consumedThreeMinusNAntitoneReceiptIsCanonical :
+      consumedThreeMinusNAntitoneReceipt
+      ≡
+      canonicalThreeMinusNAntitoneProofTermReceipt m k
+
     orderedQQAntitonePremiseShape :
       String
 
@@ -804,6 +1000,16 @@ record GaugeMonotoneLawShapeReceipt (len m k : Nat) : Set₁ where
       ≡
       Intake.AntitoneGaugeLemmaIntake.antitoneLemmaProvedHere
         consumedOrderedQQAntitone
+
+    gaugeMonotoneProofTerm :
+      (x y z : Vec Trit len) →
+      OQQ.qq-order
+        (symbolicThreeMinusNQQ (AM.agreeDepth x z))
+        (symbolicThreeMinusNQQ
+          (AM.agreeDepth x y ⊓ AM.agreeDepth y z))
+
+    gaugeMonotoneProofTermIsCanonical :
+      gaugeMonotoneProofTerm ≡ symbolicGaugeMonotoneProofTerm
 
     lawShapeRecorded :
       Bool
@@ -846,6 +1052,10 @@ canonicalGaugeMonotoneLawShapeReceipt len m k =
         Intake.canonicalAntitoneGaugeLemmaIntake m k
     ; consumedOrderedQQAntitoneIsCanonical =
         refl
+    ; consumedThreeMinusNAntitoneReceipt =
+        canonicalThreeMinusNAntitoneProofTermReceipt m k
+    ; consumedThreeMinusNAntitoneReceiptIsCanonical =
+        refl
     ; orderedQQAntitonePremiseShape =
         Intake.AntitoneGaugeLemmaIntake.premiseShape
           (Intake.canonicalAntitoneGaugeLemmaIntake m k)
@@ -865,6 +1075,10 @@ canonicalGaugeMonotoneLawShapeReceipt len m k =
         Intake.AntitoneGaugeLemmaIntake.antitoneLemmaProvedHere
           (Intake.canonicalAntitoneGaugeLemmaIntake m k)
     ; orderedQQAntitoneNotProvedHereIsIntakeField =
+        refl
+    ; gaugeMonotoneProofTerm =
+        symbolicGaugeMonotoneProofTerm
+    ; gaugeMonotoneProofTermIsCanonical =
         refl
     ; lawShapeRecorded =
         true
@@ -909,6 +1123,18 @@ record GaugeUltrametricInheritanceLawShapeReceipt (len m k : Nat) : Set₁ where
       ≡
       GaugeMonotoneLawShapeReceipt.consumedAgreementDepthTriangle gaugeMonotone
 
+    consumedGaugeMonotoneProofTerm :
+      (x y z : Vec Trit len) →
+      OQQ.qq-order
+        (symbolicThreeMinusNQQ (AM.agreeDepth x z))
+        (symbolicThreeMinusNQQ
+          (AM.agreeDepth x y ⊓ AM.agreeDepth y z))
+
+    consumedGaugeMonotoneProofTermIsGaugeMonotoneField :
+      consumedGaugeMonotoneProofTerm
+      ≡
+      GaugeMonotoneLawShapeReceipt.gaugeMonotoneProofTerm gaugeMonotone
+
     consumedPrefixUltratriangle :
       (x y z : Vec Trit len) →
       MetricAuthorityReceipt.prefixDistance metricReceipt x z
@@ -930,6 +1156,26 @@ record GaugeUltrametricInheritanceLawShapeReceipt (len m k : Nat) : Set₁ where
       consumedOrderedQQAntitone
       ≡
       GaugeMonotoneLawShapeReceipt.consumedOrderedQQAntitone gaugeMonotone
+
+    gaugeUltrametricInheritanceProofTerm :
+      (x y z : Vec Trit len) →
+      OQQ.qq-order
+        (symbolicThreeMinusNQQ (AM.agreeDepth x z))
+        (symbolicThreeMinusNQQ
+          (AM.agreeDepth x y ⊓ AM.agreeDepth y z))
+
+    gaugeUltrametricInheritanceProofTermIsCanonical :
+      gaugeUltrametricInheritanceProofTerm
+      ≡
+      symbolicGaugeUltrametricInheritanceProofTerm
+
+    gaugeUltrametricTargetShape :
+      String
+
+    gaugeUltrametricTargetShapeIsInheritedMinBound :
+      gaugeUltrametricTargetShape
+      ≡
+      "3^-agreeDepth(x,z) <= 3^-min(agreeDepth(x,y),agreeDepth(y,z)); max-gauge promotion remains external"
 
     lawShapeRecorded :
       Bool
@@ -973,6 +1219,11 @@ canonicalGaugeUltrametricInheritanceLawShapeReceipt len m k =
           (canonicalGaugeMonotoneLawShapeReceipt len m k)
     ; consumedAgreementDepthTriangleIsGaugeMonotoneField =
         refl
+    ; consumedGaugeMonotoneProofTerm =
+        GaugeMonotoneLawShapeReceipt.gaugeMonotoneProofTerm
+          (canonicalGaugeMonotoneLawShapeReceipt len m k)
+    ; consumedGaugeMonotoneProofTermIsGaugeMonotoneField =
+        refl
     ; consumedPrefixUltratriangle =
         MetricAuthorityReceipt.prefixUltraReceipt
           (canonicalMetricAuthorityReceipt len)
@@ -982,6 +1233,14 @@ canonicalGaugeUltrametricInheritanceLawShapeReceipt len m k =
         GaugeMonotoneLawShapeReceipt.consumedOrderedQQAntitone
           (canonicalGaugeMonotoneLawShapeReceipt len m k)
     ; consumedOrderedQQAntitoneIsGaugeMonotoneField =
+        refl
+    ; gaugeUltrametricInheritanceProofTerm =
+        symbolicGaugeUltrametricInheritanceProofTerm
+    ; gaugeUltrametricInheritanceProofTermIsCanonical =
+        refl
+    ; gaugeUltrametricTargetShape =
+        "3^-agreeDepth(x,z) <= 3^-min(agreeDepth(x,y),agreeDepth(y,z)); max-gauge promotion remains external"
+    ; gaugeUltrametricTargetShapeIsInheritedMinBound =
         refl
     ; lawShapeRecorded =
         true

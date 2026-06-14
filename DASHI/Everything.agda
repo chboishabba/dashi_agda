@@ -178,8 +178,11 @@ import DASHI.Foundations.Base369RingShape
 import DASHI.Foundations.Base369TriTruthField
 import DASHI.Foundations.PhysicsLinearAnalysisParity
 import DASHI.Foundations.SurrealCompactification
+import DASHI.Foundations.SurrealCompactificationBalancedTernaryEmbedding
 import DASHI.Foundations.SurrealCompactificationIntake
 import DASHI.Foundations.SurrealCompactificationOrderedQQBridge
+import DASHI.Foundations.SurrealCompactificationProofTermIndex
+import DASHI.Foundations.SurrealCompactificationQQCarrier
 import DASHI.Foundations.SurrealCompactificationRationalBridge
 import DASHI.Foundations.SurrealCompactificationTailBoundBridge
 import DASHI.Geometry.DifferentialGeometryParity
@@ -205,6 +208,7 @@ import DASHI.Promotion.ChemistryFiniteRuleTargets
 import DASHI.Promotion.Cs133NumericAuthorityPayloadRequest
 import DASHI.Promotion.DefectQuadraticClosureDependencyIndex
 import DASHI.Promotion.DownloadedNewAdditionsReferenceIndex
+import DASHI.Promotion.DownloadedAuthorityArtifactReceipt
 import DASHI.Promotion.ExternalTheoremAuthoritySourceLocator
 import DASHI.Promotion.FiniteQuantumPhysicalScopeDecision
 import DASHI.Promotion.FiniteQuantumQFTScopedClosure
@@ -925,6 +929,7 @@ import DASHI.Physics.Closure.GRSelectedNonFlatMetricInstance
 import DASHI.Physics.Closure.SchwarzschildLimitCandidate
 import DASHI.Physics.Closure.GRWeakFieldPredictionReceipt
 import DASHI.Physics.Closure.GRPrecisionGravityPredictionTargetReceipt
+import DASHI.Physics.Closure.GRProofArchitectureAggregationTest
 import DASHI.Physics.Closure.GRVladimirovFrameDiagnosticReceipt
 import DASHI.Physics.Closure.GravityVladimirovFrameReceipt
 import DASHI.Physics.GR

@@ -118,6 +118,12 @@ Current Agda/PhysLean parity intake note for `2026-06-14`:
   proved `agreeDepth -> 3^-n` isometry, analytic compactification error
   theorem, Monster theorem authority, thermodynamic promotion, and any
   terminal or Clay-facing claim.
+- The proof-term strengthening pass now adds the bounded internal
+  `SurrealCompactificationQQCarrier`, checked balanced ternary embedding
+  recursion, proof-term index, symbolic antitone/gauge receipts, and structural
+  kappa/truncation receipts. Remaining work is still the real analytic layer:
+  external QQ/No/order authority, interval inequalities, geometric tail
+  inequalities, compactification error theorem, and promoted gauge isometry.
 
 Current external authority locator note for `2026-06-14`:
 - `DASHI.Promotion.SIMetrologyExternalSourceLocator` records fail-closed
@@ -125,9 +131,33 @@ Current external authority locator note for `2026-06-14`:
   page, and NIST ASD lines form, plus raw text rows for `Delta nu Cs`, `c`,
   and `h`. `DASHI.Promotion.ExternalTheoremAuthoritySourceLocator` records
   fail-closed locator rows for Monster/Moonshine and Carnot/thermodynamic
-  authority gates. Remaining closure work is unchanged: compute and commit
-  SHA256/access-date evidence, ingestion receipts, accepted authority tokens,
-  proof authority, and promotion tokens.
+  authority gates. The `2026-06-15` follow-up adds
+  `DASHI.Promotion.DownloadedAuthorityArtifactReceipt` with wget-downloaded
+  BIPM/NIST/NIST-ASD source artifacts, SHA-256 digests, byte counts, access
+  date, and raw-text ingestion receipts for `Delta nu Cs`, `c`, and `h`.
+  Remaining closure work is now narrower: construct or import accepted
+  authority tokens, NIST ASD spectral-token acceptance, Monster/Moonshine proof
+  authority, Carnot/thermodynamic theorem authority, and promotion tokens.
+
+Current GR proof-architecture intake note for `2026-06-15`:
+- The selected Christoffel lane now has a typed
+  `GRSelectedUndoubledChristoffelLift` adapter, and the canonical selected
+  finite-r table proves that adapter uninhabited at
+  `selectedBase0/radial/radial/radial` because the required doubled value is
+  `r1`. The next honest blocker remains `missingCarrierConnectionIsLeviCivita`.
+- Ricci/Bianchi staging now has named finite-r zero-product, zero-contraction,
+  Ricci/scalar/Einstein, and contracted-Bianchi zero helpers plus
+  `GRDiscreteRicciFiniteZeroTableArithmeticReceipt`. This advances local
+  finite arithmetic only; non-flat Ricci, sourced Einstein, and full
+  contracted-Bianchi promotion remain blocked.
+- Continuum convergence now has a finite-carrier derivative scheme adapter;
+  the exact next input is the Christoffel C0 law extracting
+  `connectionErrorBound` from finite metric derivative consistency,
+  inverse-metric C0 control, formula stability, and finite-to-continuum partial
+  control.
+- Schwarzschild now has a bounded rational-shell weak-field linear-lapse
+  adapter. Full Schwarzschild metric match, Birkhoff/vacuum proof, W4 mass
+  source, precision-gravity promotion, and Clay/terminal claims remain open.
 
 ## YM Exact Intake Targets
 

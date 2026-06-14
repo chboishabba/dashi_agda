@@ -60,6 +60,19 @@ exact Hilbert/Operator/CCR/CAR/OS/Wightman field surfaces, GR/PDE records the
 Koszul/MTW/contracted-Bianchi/Einstein/SI-unit/weak-form payloads, and the
 finite discrete-YM spectral example records its exact boolean pattern. The
 continuum authority slots remain false or external.
+Current GR proof-architecture status: the checked finite-r surfaces now expose
+a more precise Christoffel/Ricci/convergence/Schwarzschild boundary. The
+selected doubled-Christoffel lane has a typed undoubled lift adapter, and the
+canonical selected finite-r table proves that lift impossible at the odd
+`2Γ = r1` slot. Ricci/scalar/Einstein zero-table arithmetic is factored through
+named finite-r zero/contraction helpers and a `GRDiscreteRicciFiniteZeroTableArithmeticReceipt`.
+`ContinuumLimitTheorem` now has a finite-carrier derivative scheme adapter that
+extracts `connectionErrorBound` only from an explicit Christoffel C0 law.
+`SchwarzschildLimitCandidate` has a bounded rational-shell weak-field linear
+lapse adapter, and `GRProofArchitectureAggregationTest` checks the current
+Levi-Civita/Ricci/Bianchi/Schwarzschild imports. Non-flat Levi-Civita, full
+contracted Bianchi promotion, Ricci convergence, Schwarzschild vacuum/Birkhoff,
+W4/Candidate256, Clay, and terminal promotion remain false.
 The finite Base369 algebra pass adds an internal scalar/ring layer:
 `DASHI.Foundations.Base369RingShape`,
 `DASHI.Foundations.Base369Nat`,
@@ -104,6 +117,25 @@ analytic error proofs fail-closed. Surreal arithmetic, the
 `agreeDepth -> 3^-n` gauge as an isometry, compactification error theorems,
 Monster moonshine theorem authority, Carnot/thermodynamic promotion, and any
 terminal Clay or physics claim remain fail-closed.
+The proof-term strengthening layer adds
+`DASHI.Foundations.SurrealCompactificationQQCarrier`,
+`DASHI.Foundations.SurrealCompactificationBalancedTernaryEmbedding`, and
+`DASHI.Foundations.SurrealCompactificationProofTermIndex`, and strengthens
+`DASHI.Metric.AgreementSurrealGaugeBridge` plus
+`DASHI.Foundations.SurrealCompactificationTailBoundBridge`. It records an
+internal bounded QQ-like carrier, checked balanced-trit embedding recursion,
+symbolic `3^-n` antitone/gauge receipts, and structural kappa/truncation
+receipts while leaving external QQ/No authority, analytic interval/tail
+inequalities, and compactification promotion false.
+The first downloaded external-source custody layer is also present:
+`DASHI.Promotion.DownloadedAuthorityArtifactReceipt` binds local
+`data/authority/si_metrology_20260615/` BIPM/NIST artifacts and
+`data/authority/theorem_locators_20260615/` Moonshine/Carnot locator artifacts
+to SHA-256 digests, byte counts, and access date `2026-06-15`. It records
+raw-text ingestion rows for the exact `Delta nu Cs`, `c`, and `h` strings from
+the NIST all-constants ASCII table. This is source custody only: accepted SI
+authority tokens, NIST ASD spectral-token acceptance, Monster/Moonshine proof
+authority, Carnot theorem authority, and all promotions remain false.
 
 Current cross-lane scope-resolution boundary: `DASHI.Promotion.ObligationIndex`
 now includes a six-row `scopeResolutionSummaries` layer. The checked surfaces

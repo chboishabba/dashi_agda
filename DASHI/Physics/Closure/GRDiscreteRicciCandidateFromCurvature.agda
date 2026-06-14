@@ -861,6 +861,282 @@ grDiscreteRicciGate4AllLaneZeroTableLawIsCanonical =
   GRDiscreteRicciGate4LocalFibreContractionReceipt.factorVecSSPAllLaneZeroTableLawIsCanonical
     canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt
 
+------------------------------------------------------------------------
+-- Finite zero-table Ricci/Einstein arithmetic carrier.
+--
+-- The local fibre receipt above records the Ricci/scalar/Einstein maps over
+-- NFScalar's selected four-chart table.  GRDiscreteBianchiFiniteR also carries
+-- the finite 4R/Ricci/scalar/2G case-split arithmetic over the selected
+-- two-coordinate table.  This receipt ties those two checked carriers
+-- together and records the exact first missing precision for the non-flat and
+-- contracted-Bianchi routes.
+
+data GRDiscreteRicciFiniteZeroTableArithmeticStatus : Set where
+  grDiscreteRicciFiniteZeroTableArithmeticStagedNoPromotion :
+    GRDiscreteRicciFiniteZeroTableArithmeticStatus
+
+record GRDiscreteRicciFiniteZeroTableArithmeticReceipt : Setω where
+  field
+    status :
+      GRDiscreteRicciFiniteZeroTableArithmeticStatus
+
+    localFibreContractionReceipt :
+      GRDiscreteRicciGate4LocalFibreContractionReceipt
+
+    finiteArithmeticReceipt :
+      GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt
+
+    localRiemannIsCanonicalZeroTable :
+      GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedRiemannComponent
+        localFibreContractionReceipt
+      ≡
+      NFScalar.grSelectedFiniteRCurvatureAction
+
+    localRicciIsCanonicalZeroTable :
+      GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedRicciComponent
+        localFibreContractionReceipt
+      ≡
+      NFScalar.grSelectedFiniteRRicciComponent
+
+    localRicciFromCurvatureContraction :
+      (mu nu : NFScalar.GRFiniteRCoordinateIndex) →
+      GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedRicciComponent
+        localFibreContractionReceipt mu nu
+      ≡
+      NFScalar.grSelectedFiniteRContract
+        (λ rho →
+          GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedRiemannComponent
+            localFibreContractionReceipt rho mu rho nu)
+
+    localScalarFromRicciTrace :
+      GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedScalarCurvatureComponent
+        localFibreContractionReceipt
+      ≡
+      NFScalar.grSelectedFiniteRContract
+        (λ rho →
+          NFScalar.grFiniteRScalarMul
+            (NFScalar.grSelectedFiniteRInverseMetricComponent
+              NFScalar.selectedFourChartIdentityMetric
+              rho
+              rho)
+            (GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedRicciComponent
+              localFibreContractionReceipt rho rho))
+
+    localEinsteinFromRicciScalar :
+      (mu nu : NFScalar.GRFiniteRCoordinateIndex) →
+      GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedEinsteinTensorComponent
+        localFibreContractionReceipt mu nu
+      ≡
+      NFScalar.grFiniteRScalarSub
+        (GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedRicciComponent
+          localFibreContractionReceipt mu nu)
+        (NFScalar.grFiniteRScalarMul
+          NFScalar.r2
+          (NFScalar.grFiniteRScalarMul
+            (NFScalar.grSelectedFiniteRMetricComponent
+              NFScalar.selectedFourChartIdentityMetric
+              mu
+              nu)
+            (GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedScalarCurvatureComponent
+              localFibreContractionReceipt)))
+
+    localContractedBianchiDivergenceZero :
+      (nu : NFScalar.GRFiniteRCoordinateIndex) →
+      NFScalar.grSelectedFiniteRContract
+        (λ mu →
+          GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedEinsteinTensorComponent
+            localFibreContractionReceipt mu nu)
+      ≡
+      NFScalar.r0
+
+    finiteFourTimesRiemannZero :
+      (base : SelectedMetric.GRSelectedFiniteRBase) →
+      (rho sigma mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+      GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.fourTimesRiemann
+        finiteArithmeticReceipt base rho sigma mu nu
+      ≡
+      NFScalar.r0
+
+    finiteRicciFromFourRZero :
+      (base : SelectedMetric.GRSelectedFiniteRBase) →
+      (sigma nu : SelectedMetric.GRSelectedCoordinateIndex) →
+      GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.ricciFromFourR
+        finiteArithmeticReceipt base sigma nu
+      ≡
+      NFScalar.r0
+
+    finiteScalarFromRicciTraceZero :
+      (base : SelectedMetric.GRSelectedFiniteRBase) →
+      GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.scalarFromRicciTrace
+        finiteArithmeticReceipt base
+      ≡
+      NFScalar.r0
+
+    finiteTwoTimesEinsteinZero :
+      (base : SelectedMetric.GRSelectedFiniteRBase) →
+      (mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+      GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.twoTimesEinstein
+        finiteArithmeticReceipt base mu nu
+      ≡
+      NFScalar.r0
+
+    finiteArithmeticFirstBlocker :
+      GRBianchi.GRDiscreteBianchiFiniteRMissingIngredient
+
+    finiteArithmeticFirstBlockerIsMetricCompatibility :
+      finiteArithmeticFirstBlocker
+      ≡
+      GRBianchi.missingMetricCompatibility
+
+    contractedBianchiDependencyBlocker :
+      GRBianchi.GRDiscreteBianchiFiniteRMissingIngredient
+
+    contractedBianchiDependencyBlockerIsCarrierConnection :
+      contractedBianchiDependencyBlocker
+      ≡
+      GRBianchi.missingCarrierConnectionIsLeviCivita
+
+    ricciEinsteinTowerPromoted :
+      Bool
+
+    ricciEinsteinTowerPromotedIsFalse :
+      ricciEinsteinTowerPromoted
+      ≡
+      false
+
+    contractedBianchiPromoted :
+      Bool
+
+    contractedBianchiPromotedIsFalse :
+      contractedBianchiPromoted
+      ≡
+      false
+
+    arithmeticBoundary :
+      List String
+
+canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt :
+  GRDiscreteRicciFiniteZeroTableArithmeticReceipt
+canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt =
+  record
+    { status =
+        grDiscreteRicciFiniteZeroTableArithmeticStagedNoPromotion
+    ; localFibreContractionReceipt =
+        canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt
+    ; finiteArithmeticReceipt =
+        GRBianchi.canonicalGRM3FourRTwoGEinsteinFiniteArithmeticReceipt
+    ; localRiemannIsCanonicalZeroTable =
+        GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedRiemannComponentIsCanonicalZeroTable
+          canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt
+    ; localRicciIsCanonicalZeroTable =
+        GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedRicciComponentIsCanonicalZeroTable
+          canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt
+    ; localRicciFromCurvatureContraction =
+        GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedRicciFromCurvatureContraction
+          canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt
+    ; localScalarFromRicciTrace =
+        GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedScalarCurvatureFromRicciTrace
+          canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt
+    ; localEinsteinFromRicciScalar =
+        GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedEinsteinTensorFromRicciScalar
+          canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt
+    ; localContractedBianchiDivergenceZero =
+        GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedContractedBianchiDivergenceZero
+          canonicalGRDiscreteRicciGate4LocalFibreContractionReceipt
+    ; finiteFourTimesRiemannZero =
+        GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.fourTimesRiemannZero
+          GRBianchi.canonicalGRM3FourRTwoGEinsteinFiniteArithmeticReceipt
+    ; finiteRicciFromFourRZero =
+        GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.ricciFromFourRZero
+          GRBianchi.canonicalGRM3FourRTwoGEinsteinFiniteArithmeticReceipt
+    ; finiteScalarFromRicciTraceZero =
+        GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.scalarFromRicciTraceZero
+          GRBianchi.canonicalGRM3FourRTwoGEinsteinFiniteArithmeticReceipt
+    ; finiteTwoTimesEinsteinZero =
+        GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.twoTimesEinsteinZero
+          GRBianchi.canonicalGRM3FourRTwoGEinsteinFiniteArithmeticReceipt
+    ; finiteArithmeticFirstBlocker =
+        GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.exactFirstSelectedNonFlatBlocker
+          GRBianchi.canonicalGRM3FourRTwoGEinsteinFiniteArithmeticReceipt
+    ; finiteArithmeticFirstBlockerIsMetricCompatibility =
+        GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.exactFirstSelectedNonFlatBlockerIsMetricCompatibility
+          GRBianchi.canonicalGRM3FourRTwoGEinsteinFiniteArithmeticReceipt
+    ; contractedBianchiDependencyBlocker =
+        GRBianchi.GRGate4ContractedBianchiAfterSelectedLeviCivitaDependencyReceipt.exactSelectedConnectionDependencyBlocker
+          GRBianchi.canonicalGRGate4ContractedBianchiAfterSelectedLeviCivitaDependencyReceipt
+    ; contractedBianchiDependencyBlockerIsCarrierConnection =
+        GRBianchi.GRGate4ContractedBianchiAfterSelectedLeviCivitaDependencyReceipt.exactSelectedConnectionDependencyBlockerIsCarrierConnectionLeviCivita
+          GRBianchi.canonicalGRGate4ContractedBianchiAfterSelectedLeviCivitaDependencyReceipt
+    ; ricciEinsteinTowerPromoted =
+        GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.ricciEinsteinTowerPromoted
+          GRBianchi.canonicalGRM3FourRTwoGEinsteinFiniteArithmeticReceipt
+    ; ricciEinsteinTowerPromotedIsFalse =
+        GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.ricciEinsteinTowerPromotedIsFalse
+          GRBianchi.canonicalGRM3FourRTwoGEinsteinFiniteArithmeticReceipt
+    ; contractedBianchiPromoted =
+        GRBianchi.GRGate4ContractedBianchiAfterSelectedLeviCivitaDependencyReceipt.contractedBianchiPromoted
+          GRBianchi.canonicalGRGate4ContractedBianchiAfterSelectedLeviCivitaDependencyReceipt
+    ; contractedBianchiPromotedIsFalse =
+        GRBianchi.GRGate4ContractedBianchiAfterSelectedLeviCivitaDependencyReceipt.contractedBianchiPromotedIsFalse
+          GRBianchi.canonicalGRGate4ContractedBianchiAfterSelectedLeviCivitaDependencyReceipt
+    ; arithmeticBoundary =
+        "The Ricci-side carrier ties the selected four-chart local fibre zero table to the m3 finite 4R/Ricci/scalar/2G arithmetic receipt"
+        ∷ "Riemann-to-Ricci, Ricci-to-scalar, scalar-to-Einstein, and contracted-Bianchi zero are consumed as definitional local zero-table equations"
+        ∷ "The finite two-coordinate table also exports 4R, Ricci, scalar, and two-times-Einstein zero equations"
+        ∷ "The exact first finite-arithmetic blocker remains missingMetricCompatibility"
+        ∷ "The contracted-Bianchi route remains blocked at missingCarrierConnectionIsLeviCivita"
+        ∷ "No non-flat Ricci theorem, sourced Einstein equation, or GR promotion is constructed"
+        ∷ []
+    }
+
+grDiscreteRicciFiniteZeroTableTwoTimesEinsteinZero :
+  (base : SelectedMetric.GRSelectedFiniteRBase) →
+  (mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+  GRBianchi.GRM3FourRTwoGEinsteinFiniteArithmeticReceipt.twoTimesEinstein
+    (GRDiscreteRicciFiniteZeroTableArithmeticReceipt.finiteArithmeticReceipt
+      canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt)
+    base
+    mu
+    nu
+  ≡
+  NFScalar.r0
+grDiscreteRicciFiniteZeroTableTwoTimesEinsteinZero =
+  GRDiscreteRicciFiniteZeroTableArithmeticReceipt.finiteTwoTimesEinsteinZero
+    canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt
+
+grDiscreteRicciFiniteZeroTableContractedBianchiZero :
+  (nu : NFScalar.GRFiniteRCoordinateIndex) →
+  NFScalar.grSelectedFiniteRContract
+    (λ mu →
+      GRDiscreteRicciGate4LocalFibreContractionReceipt.selectedEinsteinTensorComponent
+        (GRDiscreteRicciFiniteZeroTableArithmeticReceipt.localFibreContractionReceipt
+          canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt)
+        mu
+        nu)
+  ≡
+  NFScalar.r0
+grDiscreteRicciFiniteZeroTableContractedBianchiZero =
+  GRDiscreteRicciFiniteZeroTableArithmeticReceipt.localContractedBianchiDivergenceZero
+    canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt
+
+grDiscreteRicciFiniteZeroTableFirstBlocker :
+  GRDiscreteRicciFiniteZeroTableArithmeticReceipt.finiteArithmeticFirstBlocker
+    canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt
+  ≡
+  GRBianchi.missingMetricCompatibility
+grDiscreteRicciFiniteZeroTableFirstBlocker =
+  GRDiscreteRicciFiniteZeroTableArithmeticReceipt.finiteArithmeticFirstBlockerIsMetricCompatibility
+    canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt
+
+grDiscreteRicciFiniteZeroTableContractedBianchiBlocker :
+  GRDiscreteRicciFiniteZeroTableArithmeticReceipt.contractedBianchiDependencyBlocker
+    canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt
+  ≡
+  GRBianchi.missingCarrierConnectionIsLeviCivita
+grDiscreteRicciFiniteZeroTableContractedBianchiBlocker =
+  GRDiscreteRicciFiniteZeroTableArithmeticReceipt.contractedBianchiDependencyBlockerIsCarrierConnection
+    canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt
+
 record GRDiscreteRicciGate4SelectedChainFailClosedReceipt : Setω where
   field
     status :
