@@ -51,6 +51,15 @@ CCR/CAR, Fock, OS, and Wightman rows; GR/PDE Koszul, curvature, Einstein,
 weak-solution, and energy-estimate rows; and the canonical finite discrete-YM
 spectral example receipt. These remain checked intake contracts, not imported
 continuum proofs.
+The proof-term-level pass now makes those rows more auditably exact: scalar
+and vector law fields use the requested names, finite bases use `foldr2` plus
+indexed lookup, DG records include the Christoffel transform and named Stokes
+orientation slot, Lie/gauge records include SU(2)/SU(3) finite-Jacobi
+authority rows plus gauge-naturality/BRST nilpotence payloads, QFT records the
+exact Hilbert/Operator/CCR/CAR/OS/Wightman field surfaces, GR/PDE records the
+Koszul/MTW/contracted-Bianchi/Einstein/SI-unit/weak-form payloads, and the
+finite discrete-YM spectral example records its exact boolean pattern. The
+continuum authority slots remain false or external.
 
 Current cross-lane scope-resolution boundary: `DASHI.Promotion.ObligationIndex`
 now includes a six-row `scopeResolutionSummaries` layer. The checked surfaces
@@ -108,6 +117,17 @@ clock-to-metre route needed before Rydberg wavenumber use. The lane remains
 fail-closed: no BIPM/NIST artifact is loaded, no authority token is locally
 constructed, no numeric payload is promoted, and W4/Candidate256, Stone,
 chemistry, spectroscopy, and terminal promotion remain false.
+The follow-up SI-second adapter tranche adds
+`DASHI.Physics.Closure.AtomicClockCandidate256DimensionAdapter`,
+`DASHI.Promotion.SIDefiningConstantsAuthorityArtifactRequest`,
+`DASHI.Promotion.PlanckHbarSIPayloadRequest`,
+`DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge`, and
+`DASHI.Physics.Closure.AtomicClockW4ReceiptAdapterRequest`. These sharpen the
+Candidate256 dimension-vector adapter, exact Cs/c/h artifact request rows,
+derived `hbar` request, leading uniform-field atomic-clock redshift law, and
+the W4 receipt field mapping. They remain request/adaptor surfaces only: the
+constructorless Candidate256 authority token and external calibration receipt
+are still not inhabited.
 
 Current Standard Model first-principles boundary:
 `DASHI.Promotion.ObligationIndex` now includes a nine-row
