@@ -178,6 +178,10 @@ import DASHI.Foundations.Base369RingShape
 import DASHI.Foundations.Base369TriTruthField
 import DASHI.Foundations.PhysicsLinearAnalysisParity
 import DASHI.Foundations.SurrealCompactification
+import DASHI.Foundations.SurrealCompactificationIntake
+import DASHI.Foundations.SurrealCompactificationOrderedQQBridge
+import DASHI.Foundations.SurrealCompactificationRationalBridge
+import DASHI.Foundations.SurrealCompactificationTailBoundBridge
 import DASHI.Geometry.DifferentialGeometryParity
 import DASHI.Interop.ITIRJoinBridge
 import DASHI.Interop.AggregateBidirectionalTranslationDischarge
@@ -201,6 +205,7 @@ import DASHI.Promotion.ChemistryFiniteRuleTargets
 import DASHI.Promotion.Cs133NumericAuthorityPayloadRequest
 import DASHI.Promotion.DefectQuadraticClosureDependencyIndex
 import DASHI.Promotion.DownloadedNewAdditionsReferenceIndex
+import DASHI.Promotion.ExternalTheoremAuthoritySourceLocator
 import DASHI.Promotion.FiniteQuantumPhysicalScopeDecision
 import DASHI.Promotion.FiniteQuantumQFTScopedClosure
 import DASHI.Promotion.GRBoundaryClarification
@@ -211,9 +216,14 @@ import DASHI.Promotion.NumericMeasuredAuthorityTokenNormalization
 import DASHI.Promotion.ObligationIndex
 import DASHI.Promotion.PlanckHbarSIPayloadRequest
 import DASHI.Promotion.RydbergClockMetreBridge
+import DASHI.Promotion.RydbergSpectroscopyAuthorityPayloadRequest
 import DASHI.Promotion.SIDefiningConstantsAuthorityArtifactRequest
+import DASHI.Promotion.SIDefiningConstantAuthorityEvidenceChecklist
+import DASHI.Promotion.SIExactConstantConsumerIngestionBridge
 import DASHI.Promotion.SIExactConstantParsedCarrierRequest
 import DASHI.Promotion.SIMetreFromSecondAndCAdapter
+import DASHI.Promotion.SIMetrologyExternalSourceLocator
+import DASHI.Promotion.SIMetrologyPayloadDependencyDAG
 import DASHI.Promotion.StandardModelArchiveContextBinding
 import DASHI.Promotion.StandardModelFiniteAnomalyHyperchargeCheck
 import DASHI.Promotion.StandardModelFiniteRepresentationNarrowing
@@ -857,9 +867,11 @@ import DASHI.Physics.Closure.QuantumPathFibreObservationQuotient
 import DASHI.Physics.Closure.QuantumClockSuperpositionReceipt
 import DASHI.Physics.Closure.QuantumClockAuthorityReceipt
 import DASHI.Physics.Closure.QuantumClockDimensionlessObservableLaw
+import DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftReceiptRequest
 import DASHI.Physics.Closure.QuantumClockObservableContract
 import DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge
 import DASHI.Physics.Closure.QuantumClockSIObservableBridge
+import DASHI.Physics.Closure.StoneHbarDimensionlessActionBridge
 import DASHI.Physics.Closure.W4AtomicClockCandidateReceiptChecklist
 import DASHI.Physics.Closure.DiscreteEinsteinTensorNextThreadIndex
 import DASHI.Physics.Closure.DiscreteEinsteinVacuumLimitSurface

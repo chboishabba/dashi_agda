@@ -4,11 +4,12 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
-open import Data.Nat using (_≤_; _⊔_)
+open import Data.Nat using (_≤_; _⊔_; _⊓_)
 open import Data.Vec using (Vec)
 
 open import Ultrametric as UMetric
 open import DASHI.Algebra.Trit using (Trit)
+import DASHI.Foundations.SurrealCompactificationIntake as Intake
 open import DASHI.Metric.AgreementUltrametric as AM
 open import DASHI.Metric.FineAgreementUltrametric as FAM
 
@@ -209,6 +210,18 @@ data GaugeLawShapeKind : Set where
 
   ultrametricInheritancePrerequisiteLawShape :
     GaugeLawShapeKind
+
+data MonotoneEquivalentGaugeLaw : Set where
+  prefixDistanceMonotoneEquivalentToDepthAntitoneGauge :
+    MonotoneEquivalentGaugeLaw
+
+data RationalGaugeAntitoneDependency : Set where
+  symbolicThreeMinusDepthDependsOnNatDepthOrderAndQQOrder :
+    RationalGaugeAntitoneDependency
+
+data NaiveRationalGaugeEqualityFailureReason : Set where
+  fullAgreementDistanceZeroButSymbolicGaugeRemainsThreeMinusDepth :
+    NaiveRationalGaugeEqualityFailureReason
 
 record GaugeIsometryVariableRows (n : Nat) : Set₁ where
   field
@@ -565,6 +578,423 @@ canonicalAgreementSurrealGaugeSlot n =
         refl
     ; bridgeReading =
         "Prefix agreeDepth and suffix fine agreement are checked locally; 3^-agreeDepth is only a symbolic external change-of-gauge slot, with No/surreal claims fail-closed."
+    }
+
+record CheckedRationalGaugeBridgeRow (len m k : Nat) : Set₁ where
+  field
+    gaugeSlot :
+      AgreementSurrealGaugeSlot len
+
+    gaugeSlotIsCanonical :
+      gaugeSlot ≡ canonicalAgreementSurrealGaugeSlot len
+
+    rationalBridgeIntakeVocabularyConsumed :
+      Bool
+
+    rationalBridgeIntakeVocabularyConsumedIsTrue :
+      rationalBridgeIntakeVocabularyConsumed ≡ true
+
+    symbolicGaugeIntakeShape :
+      String
+
+    symbolicGaugeIntakeShapeIsThreeMinusDepth :
+      symbolicGaugeIntakeShape ≡ "3^-n"
+
+    antitoneGaugePremiseShape :
+      String
+
+    antitoneGaugePremiseShapeIsNatOrder :
+      antitoneGaugePremiseShape ≡ "m <= n"
+
+    antitoneGaugeConclusionShape :
+      String
+
+    antitoneGaugeConclusionShapeIsQQOrder :
+      antitoneGaugeConclusionShape ≡ "3^-n <= 3^-m in QQ"
+
+    monotoneEquivalentGaugeLaw :
+      MonotoneEquivalentGaugeLaw
+
+    monotoneEquivalentGaugeLawIsPrefixDistanceDepthAntitone :
+      monotoneEquivalentGaugeLaw
+      ≡
+      prefixDistanceMonotoneEquivalentToDepthAntitoneGauge
+
+    antitoneDependency :
+      RationalGaugeAntitoneDependency
+
+    antitoneDependencyIsIntakeOrderDependency :
+      antitoneDependency
+      ≡
+      symbolicThreeMinusDepthDependsOnNatDepthOrderAndQQOrder
+
+    symbolicGaugeRequiresRationalValue :
+      Bool
+
+    symbolicGaugeRequiresRationalValueIsTrue :
+      symbolicGaugeRequiresRationalValue ≡ true
+
+    symbolicGaugeRationalValueNotConstructedHere :
+      Bool
+
+    symbolicGaugeRationalValueNotConstructedHereIsFalse :
+      symbolicGaugeRationalValueNotConstructedHere ≡ false
+
+    antitoneRequiresRationalOrderAuthority :
+      Bool
+
+    antitoneRequiresRationalOrderAuthorityIsTrue :
+      antitoneRequiresRationalOrderAuthority ≡ true
+
+    antitoneLemmaNotProvedHere :
+      Bool
+
+    antitoneLemmaNotProvedHereIsFalse :
+      antitoneLemmaNotProvedHere ≡ false
+
+    fullAgreementDistanceReceipt :
+      (x : Vec Trit len) →
+      AM.dNat x x ≡ 0
+
+    fullAgreementDepthReceipt :
+      (x : Vec Trit len) →
+      AM.agreeDepth x x ≡ len
+
+    naiveEqualityFailureReason :
+      NaiveRationalGaugeEqualityFailureReason
+
+    naiveEqualityFailureReasonIsFullAgreementZeroVsGauge :
+      naiveEqualityFailureReason
+      ≡
+      fullAgreementDistanceZeroButSymbolicGaugeRemainsThreeMinusDepth
+
+    naiveEqualityFailureReading :
+      String
+
+    surrealGaugeAuthorityAccepted :
+      Bool
+
+    surrealGaugeAuthorityAcceptedIsFalse :
+      surrealGaugeAuthorityAccepted ≡ false
+
+open CheckedRationalGaugeBridgeRow public
+
+canonicalCheckedRationalGaugeBridgeRow :
+  ∀ len m k →
+  CheckedRationalGaugeBridgeRow len m k
+canonicalCheckedRationalGaugeBridgeRow len m k =
+  record
+    { gaugeSlot =
+        canonicalAgreementSurrealGaugeSlot len
+    ; gaugeSlotIsCanonical =
+        refl
+    ; rationalBridgeIntakeVocabularyConsumed =
+        true
+    ; rationalBridgeIntakeVocabularyConsumedIsTrue =
+        refl
+    ; symbolicGaugeIntakeShape =
+        "3^-n"
+    ; symbolicGaugeIntakeShapeIsThreeMinusDepth =
+        refl
+    ; antitoneGaugePremiseShape =
+        "m <= n"
+    ; antitoneGaugePremiseShapeIsNatOrder =
+        refl
+    ; antitoneGaugeConclusionShape =
+        "3^-n <= 3^-m in QQ"
+    ; antitoneGaugeConclusionShapeIsQQOrder =
+        refl
+    ; monotoneEquivalentGaugeLaw =
+        prefixDistanceMonotoneEquivalentToDepthAntitoneGauge
+    ; monotoneEquivalentGaugeLawIsPrefixDistanceDepthAntitone =
+        refl
+    ; antitoneDependency =
+        symbolicThreeMinusDepthDependsOnNatDepthOrderAndQQOrder
+    ; antitoneDependencyIsIntakeOrderDependency =
+        refl
+    ; symbolicGaugeRequiresRationalValue =
+        true
+    ; symbolicGaugeRequiresRationalValueIsTrue =
+        refl
+    ; symbolicGaugeRationalValueNotConstructedHere =
+        false
+    ; symbolicGaugeRationalValueNotConstructedHereIsFalse =
+        refl
+    ; antitoneRequiresRationalOrderAuthority =
+        true
+    ; antitoneRequiresRationalOrderAuthorityIsTrue =
+        refl
+    ; antitoneLemmaNotProvedHere =
+        false
+    ; antitoneLemmaNotProvedHereIsFalse =
+        refl
+    ; fullAgreementDistanceReceipt =
+        λ x → prefixIdentityReceipt (canonicalMetricAuthorityReceipt len) x
+    ; fullAgreementDepthReceipt =
+        AM.agreeDepth-self
+    ; naiveEqualityFailureReason =
+        fullAgreementDistanceZeroButSymbolicGaugeRemainsThreeMinusDepth
+    ; naiveEqualityFailureReasonIsFullAgreementZeroVsGauge =
+        refl
+    ; naiveEqualityFailureReading =
+        "Naive d_QQ = 3^-agreeDepth is false at full agreement: dNat x x is 0, while the intake only records the symbolic rational gauge 3^-len and explicitly does not construct or prove that QQ value equal to zero."
+    ; surrealGaugeAuthorityAccepted =
+        false
+    ; surrealGaugeAuthorityAcceptedIsFalse =
+        refl
+    }
+
+record GaugeMonotoneLawShapeReceipt (len m k : Nat) : Set₁ where
+  field
+    rationalBridgeRow :
+      CheckedRationalGaugeBridgeRow len m k
+
+    rationalBridgeRowIsCanonical :
+      rationalBridgeRow ≡ canonicalCheckedRationalGaugeBridgeRow len m k
+
+    lawShapeName :
+      String
+
+    lawShapeNameIsGaugeMonotone :
+      lawShapeName ≡ "gaugeMonotone"
+
+    consumedAgreementDepthTriangle :
+      (x y z : Vec Trit len) →
+      (AM.agreeDepth x y ⊓ AM.agreeDepth y z) ≤ AM.agreeDepth x z
+
+    consumedAgreementDepthTriangleIsCanonical :
+      consumedAgreementDepthTriangle ≡ AM.agreeDepth-triangle
+
+    consumedOrderedQQAntitone :
+      Intake.AntitoneGaugeLemmaIntake m k
+
+    consumedOrderedQQAntitoneIsCanonical :
+      consumedOrderedQQAntitone ≡ Intake.canonicalAntitoneGaugeLemmaIntake m k
+
+    orderedQQAntitonePremiseShape :
+      String
+
+    orderedQQAntitonePremiseShapeIsIntakeField :
+      orderedQQAntitonePremiseShape
+      ≡
+      Intake.AntitoneGaugeLemmaIntake.premiseShape consumedOrderedQQAntitone
+
+    orderedQQAntitoneConclusionShape :
+      String
+
+    orderedQQAntitoneConclusionShapeIsIntakeField :
+      orderedQQAntitoneConclusionShape
+      ≡
+      Intake.AntitoneGaugeLemmaIntake.conclusionShape consumedOrderedQQAntitone
+
+    orderedQQAntitoneAuthorityRequired :
+      Bool
+
+    orderedQQAntitoneAuthorityRequiredIsIntakeField :
+      orderedQQAntitoneAuthorityRequired
+      ≡
+      Intake.AntitoneGaugeLemmaIntake.rationalOrderAuthorityRequired
+        consumedOrderedQQAntitone
+
+    orderedQQAntitoneNotProvedHere :
+      Bool
+
+    orderedQQAntitoneNotProvedHereIsIntakeField :
+      orderedQQAntitoneNotProvedHere
+      ≡
+      Intake.AntitoneGaugeLemmaIntake.antitoneLemmaProvedHere
+        consumedOrderedQQAntitone
+
+    lawShapeRecorded :
+      Bool
+
+    lawShapeRecordedIsTrue :
+      lawShapeRecorded ≡ true
+
+    lawShapePromoted :
+      Bool
+
+    lawShapePromotedIsFalse :
+      lawShapePromoted ≡ false
+
+    surrealGaugeAuthorityAccepted :
+      Bool
+
+    surrealGaugeAuthorityAcceptedIsFalse :
+      surrealGaugeAuthorityAccepted ≡ false
+
+open GaugeMonotoneLawShapeReceipt public
+
+canonicalGaugeMonotoneLawShapeReceipt :
+  ∀ len m k →
+  GaugeMonotoneLawShapeReceipt len m k
+canonicalGaugeMonotoneLawShapeReceipt len m k =
+  record
+    { rationalBridgeRow =
+        canonicalCheckedRationalGaugeBridgeRow len m k
+    ; rationalBridgeRowIsCanonical =
+        refl
+    ; lawShapeName =
+        "gaugeMonotone"
+    ; lawShapeNameIsGaugeMonotone =
+        refl
+    ; consumedAgreementDepthTriangle =
+        AM.agreeDepth-triangle
+    ; consumedAgreementDepthTriangleIsCanonical =
+        refl
+    ; consumedOrderedQQAntitone =
+        Intake.canonicalAntitoneGaugeLemmaIntake m k
+    ; consumedOrderedQQAntitoneIsCanonical =
+        refl
+    ; orderedQQAntitonePremiseShape =
+        Intake.AntitoneGaugeLemmaIntake.premiseShape
+          (Intake.canonicalAntitoneGaugeLemmaIntake m k)
+    ; orderedQQAntitonePremiseShapeIsIntakeField =
+        refl
+    ; orderedQQAntitoneConclusionShape =
+        Intake.AntitoneGaugeLemmaIntake.conclusionShape
+          (Intake.canonicalAntitoneGaugeLemmaIntake m k)
+    ; orderedQQAntitoneConclusionShapeIsIntakeField =
+        refl
+    ; orderedQQAntitoneAuthorityRequired =
+        Intake.AntitoneGaugeLemmaIntake.rationalOrderAuthorityRequired
+          (Intake.canonicalAntitoneGaugeLemmaIntake m k)
+    ; orderedQQAntitoneAuthorityRequiredIsIntakeField =
+        refl
+    ; orderedQQAntitoneNotProvedHere =
+        Intake.AntitoneGaugeLemmaIntake.antitoneLemmaProvedHere
+          (Intake.canonicalAntitoneGaugeLemmaIntake m k)
+    ; orderedQQAntitoneNotProvedHereIsIntakeField =
+        refl
+    ; lawShapeRecorded =
+        true
+    ; lawShapeRecordedIsTrue =
+        refl
+    ; lawShapePromoted =
+        false
+    ; lawShapePromotedIsFalse =
+        refl
+    ; surrealGaugeAuthorityAccepted =
+        false
+    ; surrealGaugeAuthorityAcceptedIsFalse =
+        refl
+    }
+
+record GaugeUltrametricInheritanceLawShapeReceipt (len m k : Nat) : Set₁ where
+  field
+    gaugeMonotone :
+      GaugeMonotoneLawShapeReceipt len m k
+
+    gaugeMonotoneIsCanonical :
+      gaugeMonotone ≡ canonicalGaugeMonotoneLawShapeReceipt len m k
+
+    lawShapeName :
+      String
+
+    lawShapeNameIsGaugeUltrametricInheritance :
+      lawShapeName ≡ "gaugeUltrametricInheritance"
+
+    metricReceipt :
+      MetricAuthorityReceipt len
+
+    metricReceiptIsCanonical :
+      metricReceipt ≡ canonicalMetricAuthorityReceipt len
+
+    consumedAgreementDepthTriangle :
+      (x y z : Vec Trit len) →
+      (AM.agreeDepth x y ⊓ AM.agreeDepth y z) ≤ AM.agreeDepth x z
+
+    consumedAgreementDepthTriangleIsGaugeMonotoneField :
+      consumedAgreementDepthTriangle
+      ≡
+      GaugeMonotoneLawShapeReceipt.consumedAgreementDepthTriangle gaugeMonotone
+
+    consumedPrefixUltratriangle :
+      (x y z : Vec Trit len) →
+      MetricAuthorityReceipt.prefixDistance metricReceipt x z
+      ≤
+      ( MetricAuthorityReceipt.prefixDistance metricReceipt x y
+        ⊔
+        MetricAuthorityReceipt.prefixDistance metricReceipt y z
+      )
+
+    consumedPrefixUltratriangleIsMetricField :
+      consumedPrefixUltratriangle
+      ≡
+      MetricAuthorityReceipt.prefixUltraReceipt metricReceipt
+
+    consumedOrderedQQAntitone :
+      Intake.AntitoneGaugeLemmaIntake m k
+
+    consumedOrderedQQAntitoneIsGaugeMonotoneField :
+      consumedOrderedQQAntitone
+      ≡
+      GaugeMonotoneLawShapeReceipt.consumedOrderedQQAntitone gaugeMonotone
+
+    lawShapeRecorded :
+      Bool
+
+    lawShapeRecordedIsTrue :
+      lawShapeRecorded ≡ true
+
+    lawShapePromoted :
+      Bool
+
+    lawShapePromotedIsFalse :
+      lawShapePromoted ≡ false
+
+    surrealGaugeAuthorityAccepted :
+      Bool
+
+    surrealGaugeAuthorityAcceptedIsFalse :
+      surrealGaugeAuthorityAccepted ≡ false
+
+open GaugeUltrametricInheritanceLawShapeReceipt public
+
+canonicalGaugeUltrametricInheritanceLawShapeReceipt :
+  ∀ len m k →
+  GaugeUltrametricInheritanceLawShapeReceipt len m k
+canonicalGaugeUltrametricInheritanceLawShapeReceipt len m k =
+  record
+    { gaugeMonotone =
+        canonicalGaugeMonotoneLawShapeReceipt len m k
+    ; gaugeMonotoneIsCanonical =
+        refl
+    ; lawShapeName =
+        "gaugeUltrametricInheritance"
+    ; lawShapeNameIsGaugeUltrametricInheritance =
+        refl
+    ; metricReceipt =
+        canonicalMetricAuthorityReceipt len
+    ; metricReceiptIsCanonical =
+        refl
+    ; consumedAgreementDepthTriangle =
+        GaugeMonotoneLawShapeReceipt.consumedAgreementDepthTriangle
+          (canonicalGaugeMonotoneLawShapeReceipt len m k)
+    ; consumedAgreementDepthTriangleIsGaugeMonotoneField =
+        refl
+    ; consumedPrefixUltratriangle =
+        MetricAuthorityReceipt.prefixUltraReceipt
+          (canonicalMetricAuthorityReceipt len)
+    ; consumedPrefixUltratriangleIsMetricField =
+        refl
+    ; consumedOrderedQQAntitone =
+        GaugeMonotoneLawShapeReceipt.consumedOrderedQQAntitone
+          (canonicalGaugeMonotoneLawShapeReceipt len m k)
+    ; consumedOrderedQQAntitoneIsGaugeMonotoneField =
+        refl
+    ; lawShapeRecorded =
+        true
+    ; lawShapeRecordedIsTrue =
+        refl
+    ; lawShapePromoted =
+        false
+    ; lawShapePromotedIsFalse =
+        refl
+    ; surrealGaugeAuthorityAccepted =
+        false
+    ; surrealGaugeAuthorityAcceptedIsFalse =
+        refl
     }
 
 canonicalSurrealGaugeAuthorityStillFalse :
