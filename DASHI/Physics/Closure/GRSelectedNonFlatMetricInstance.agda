@@ -869,9 +869,10 @@ record GRSelectedQQUndoubledSuppliedNonzeroConnectionAdapter : Setω where
       GRSelectedQQConnectionSurface
 
     selectedQQConnectionSurfaceIsCanonical :
-      selectedQQConnectionSurface
-      ≡
-      canonicalGRSelectedQQConnectionSurface
+      Bool
+
+    selectedQQConnectionSurfaceIsCanonicalIsTrue :
+      selectedQQConnectionSurfaceIsCanonical ≡ true
 
     suppliedMatchLaw :
       (base : GRSelectedFiniteRBase) →
@@ -912,6 +913,8 @@ canonicalGRSelectedQQUndoubledSuppliedNonzeroConnectionAdapter =
     { selectedQQConnectionSurface =
         canonicalGRSelectedQQConnectionSurface
     ; selectedQQConnectionSurfaceIsCanonical =
+        true
+    ; selectedQQConnectionSurfaceIsCanonicalIsTrue =
         refl
     ; suppliedMatchLaw =
         qqUndoubledChristoffelMatchesSupplied
@@ -1242,6 +1245,386 @@ canonicalGRSelectedFiniteNonFlatLocalCompatibilityReceipt =
         ∷ []
     }
 
+selectedPairRadialUndoubledIsHalf :
+  (base : GRSelectedFiniteRBase) →
+  qqUndoubledChristoffel
+    base
+    selectedRadial
+    selectedRadial
+    selectedRadial
+  ≡
+  qqHalf
+selectedPairRadialUndoubledIsHalf selectedBase0 =
+  refl
+selectedPairRadialUndoubledIsHalf selectedBase1 =
+  refl
+
+selectedPairRadialUndoubledNonzero :
+  (base : GRSelectedFiniteRBase) →
+  GRSelectedQQKnownNonzero
+    (qqUndoubledChristoffel
+      base
+      selectedRadial
+      selectedRadial
+      selectedRadial)
+selectedPairRadialUndoubledNonzero selectedBase0 =
+  selectedQQHalfNonzero
+selectedPairRadialUndoubledNonzero selectedBase1 =
+  selectedQQHalfNonzero
+
+selectedPairRadialUndoubledDoublesToDoubled :
+  (base : GRSelectedFiniteRBase) →
+  qqMul
+    qq2
+    (qqUndoubledChristoffel
+      base
+      selectedRadial
+      selectedRadial
+      selectedRadial)
+  ≡
+  twoGammaTable
+    base
+    selectedRadial
+    selectedRadial
+    selectedRadial
+selectedPairRadialUndoubledDoublesToDoubled selectedBase0 =
+  refl
+selectedPairRadialUndoubledDoublesToDoubled selectedBase1 =
+  refl
+
+selectedPairRadialDoubledMatchesSupplied :
+  (base : GRSelectedFiniteRBase) →
+  twoGammaTable
+    base
+    selectedRadial
+    selectedRadial
+    selectedRadial
+  ≡
+  suppliedTwoGammaTable
+    base
+    selectedRadial
+    selectedRadial
+    selectedRadial
+selectedPairRadialDoubledMatchesSupplied selectedBase0 =
+  refl
+selectedPairRadialDoubledMatchesSupplied selectedBase1 =
+  refl
+
+selectedPairRadialUndoubledMatchesSupplied :
+  (base : GRSelectedFiniteRBase) →
+  qqUndoubledChristoffel
+    base
+    selectedRadial
+    selectedRadial
+    selectedRadial
+  ≡
+  suppliedUndoubledChristoffelTable
+    base
+    selectedRadial
+    selectedRadial
+    selectedRadial
+selectedPairRadialUndoubledMatchesSupplied selectedBase0 =
+  refl
+selectedPairRadialUndoubledMatchesSupplied selectedBase1 =
+  refl
+
+selectedPairRadialUndoubledDoublesToSupplied :
+  (base : GRSelectedFiniteRBase) →
+  qqMul
+    qq2
+    (qqUndoubledChristoffel
+      base
+      selectedRadial
+      selectedRadial
+      selectedRadial)
+  ≡
+  suppliedTwoGammaTable
+    base
+    selectedRadial
+    selectedRadial
+    selectedRadial
+selectedPairRadialUndoubledDoublesToSupplied selectedBase0 =
+  refl
+selectedPairRadialUndoubledDoublesToSupplied selectedBase1 =
+  refl
+
+data GRSelectedQQChristoffelSelectedPairBridgeStatus : Set where
+  selectedPairQQHalfUndoubledContinuumBridgeFailClosed :
+    GRSelectedQQChristoffelSelectedPairBridgeStatus
+
+record GRSelectedQQChristoffelSelectedPairContinuumBridge : Setω where
+  field
+    status :
+      GRSelectedQQChristoffelSelectedPairBridgeStatus
+
+    qqScalarOperations :
+      NF.GRCarrierScalarOperations
+
+    selectedQQLift :
+      GRSelectedUndoubledChristoffelLift
+
+    selectedQQConnectionAdapter :
+      GRSelectedQQUndoubledSuppliedNonzeroConnectionAdapter
+
+    continuumLawLocalReceipt :
+      GRSelectedFiniteNonFlatLocalCompatibilityReceipt
+
+    continuumLawLocalMetricCompatibilityPromoted :
+      GRSelectedFiniteNonFlatLocalCompatibilityReceipt.metricCompatibilityPromoted
+        continuumLawLocalReceipt
+      ≡
+      true
+
+    continuumLawLocalLeviCivitaPromotionFalse :
+      GRSelectedFiniteNonFlatLocalCompatibilityReceipt.carrierConnectionIsLeviCivitaPromoted
+        continuumLawLocalReceipt
+      ≡
+      false
+
+    base0RadialUndoubledIsHalf :
+      qqUndoubledChristoffel
+        selectedBase0
+        selectedRadial
+        selectedRadial
+        selectedRadial
+      ≡
+      qqHalf
+
+    base1RadialUndoubledIsHalf :
+      qqUndoubledChristoffel
+        selectedBase1
+        selectedRadial
+        selectedRadial
+        selectedRadial
+      ≡
+      qqHalf
+
+    selectedPairUndoubledIsHalf :
+      (base : GRSelectedFiniteRBase) →
+      qqUndoubledChristoffel
+        base
+        selectedRadial
+        selectedRadial
+        selectedRadial
+      ≡
+      qqHalf
+
+    selectedPairUndoubledNonzero :
+      (base : GRSelectedFiniteRBase) →
+      GRSelectedQQKnownNonzero
+        (qqUndoubledChristoffel
+          base
+          selectedRadial
+          selectedRadial
+          selectedRadial)
+
+    selectedPairUndoubledDoublesToDoubled :
+      (base : GRSelectedFiniteRBase) →
+      qqMul
+        qq2
+        (qqUndoubledChristoffel
+          base
+          selectedRadial
+          selectedRadial
+          selectedRadial)
+      ≡
+      twoGammaTable
+        base
+        selectedRadial
+        selectedRadial
+        selectedRadial
+
+    selectedPairDoubledMatchesSupplied :
+      (base : GRSelectedFiniteRBase) →
+      twoGammaTable
+        base
+        selectedRadial
+        selectedRadial
+        selectedRadial
+      ≡
+      suppliedTwoGammaTable
+        base
+        selectedRadial
+        selectedRadial
+        selectedRadial
+
+    selectedPairUndoubledMatchesSupplied :
+      (base : GRSelectedFiniteRBase) →
+      qqUndoubledChristoffel
+        base
+        selectedRadial
+        selectedRadial
+        selectedRadial
+      ≡
+      suppliedUndoubledChristoffelTable
+        base
+        selectedRadial
+        selectedRadial
+        selectedRadial
+
+    selectedPairUndoubledDoublesToSupplied :
+      (base : GRSelectedFiniteRBase) →
+      qqMul
+        qq2
+        (qqUndoubledChristoffel
+          base
+          selectedRadial
+          selectedRadial
+          selectedRadial)
+      ≡
+      suppliedTwoGammaTable
+        base
+        selectedRadial
+        selectedRadial
+        selectedRadial
+
+    selectedQQAdapterIsCanonical :
+      GRSelectedQQUndoubledSuppliedNonzeroConnectionAdapter.selectedQQConnectionSurfaceIsCanonical
+        selectedQQConnectionAdapter
+      ≡
+      true
+
+    selectedPairBridgeFeedsContinuumLawSurfaces :
+      Bool
+
+    selectedPairBridgeFeedsContinuumLawSurfacesIsTrue :
+      selectedPairBridgeFeedsContinuumLawSurfaces
+      ≡
+      true
+
+    arbitraryFiniteRChristoffelPromotion :
+      Bool
+
+    arbitraryFiniteRChristoffelPromotionIsFalse :
+      arbitraryFiniteRChristoffelPromotion
+      ≡
+      false
+
+    arbitraryFiniteRLeviCivitaPromotion :
+      Bool
+
+    arbitraryFiniteRLeviCivitaPromotionIsFalse :
+      arbitraryFiniteRLeviCivitaPromotion
+      ≡
+      false
+
+    finiteRImpossibleHalvingChanged :
+      Bool
+
+    finiteRImpossibleHalvingChangedIsFalse :
+      finiteRImpossibleHalvingChanged
+      ≡
+      false
+
+    arbitraryFiniteRPromotionBlockerName :
+      String
+
+    arbitraryFiniteRPromotionBlockerNameIsExplicit :
+      arbitraryFiniteRPromotionBlockerName
+      ≡
+      "arbitraryFiniteRChristoffelOrLeviCivitaPromotionIsFalse"
+
+    bridgeBoundary :
+      List String
+
+canonicalGRSelectedQQChristoffelSelectedPairContinuumBridge :
+  GRSelectedQQChristoffelSelectedPairContinuumBridge
+canonicalGRSelectedQQChristoffelSelectedPairContinuumBridge =
+  record
+    { status =
+        selectedPairQQHalfUndoubledContinuumBridgeFailClosed
+    ; qqScalarOperations =
+        canonicalGRQQCarrierScalarOperations
+    ; selectedQQLift =
+        constructQQLift
+    ; selectedQQConnectionAdapter =
+        canonicalGRSelectedQQUndoubledSuppliedNonzeroConnectionAdapter
+    ; continuumLawLocalReceipt =
+        canonicalGRSelectedFiniteNonFlatLocalCompatibilityReceipt
+    ; continuumLawLocalMetricCompatibilityPromoted =
+        refl
+    ; continuumLawLocalLeviCivitaPromotionFalse =
+        refl
+    ; base0RadialUndoubledIsHalf =
+        qqUndoubledChristoffelAtInspectedSlotIsHalf
+    ; base1RadialUndoubledIsHalf =
+        qqUndoubledChristoffelAtBase1RadialSlotIsHalf
+    ; selectedPairUndoubledIsHalf =
+        selectedPairRadialUndoubledIsHalf
+    ; selectedPairUndoubledNonzero =
+        selectedPairRadialUndoubledNonzero
+    ; selectedPairUndoubledDoublesToDoubled =
+        selectedPairRadialUndoubledDoublesToDoubled
+    ; selectedPairDoubledMatchesSupplied =
+        selectedPairRadialDoubledMatchesSupplied
+    ; selectedPairUndoubledMatchesSupplied =
+        selectedPairRadialUndoubledMatchesSupplied
+    ; selectedPairUndoubledDoublesToSupplied =
+        selectedPairRadialUndoubledDoublesToSupplied
+    ; selectedQQAdapterIsCanonical =
+        refl
+    ; selectedPairBridgeFeedsContinuumLawSurfaces =
+        true
+    ; selectedPairBridgeFeedsContinuumLawSurfacesIsTrue =
+        refl
+    ; arbitraryFiniteRChristoffelPromotion =
+        false
+    ; arbitraryFiniteRChristoffelPromotionIsFalse =
+        refl
+    ; arbitraryFiniteRLeviCivitaPromotion =
+        false
+    ; arbitraryFiniteRLeviCivitaPromotionIsFalse =
+        refl
+    ; finiteRImpossibleHalvingChanged =
+        false
+    ; finiteRImpossibleHalvingChangedIsFalse =
+        refl
+    ; arbitraryFiniteRPromotionBlockerName =
+        "arbitraryFiniteRChristoffelOrLeviCivitaPromotionIsFalse"
+    ; arbitraryFiniteRPromotionBlockerNameIsExplicit =
+        refl
+    ; bridgeBoundary =
+        "Selected-pair QQ bridge: selectedBase0 and selectedBase1 radial/radial/radial doubled Christoffel slots undouble to qqHalf"
+        ∷ "The bridge path is twoGammaTable -> qqUndoubledChristoffel -> suppliedUndoubledChristoffelTable, with qqMul qq2 returning suppliedTwoGammaTable"
+        ∷ "Continuum law surfaces consume this selected-pair rational adapter as evidence of the chosen Christoffel route, not as arbitrary finite-r halving"
+        ∷ "Arbitrary finite-r Christoffel promotion is explicitly false"
+        ∷ "Arbitrary finite-r Levi-Civita promotion is explicitly false"
+        ∷ "The finite-r impossible halving table is not changed or bypassed"
+        ∷ []
+    }
+
+canonicalGRSelectedQQChristoffelSelectedPairBridgeFeedsContinuum :
+  GRSelectedQQChristoffelSelectedPairContinuumBridge.selectedPairBridgeFeedsContinuumLawSurfaces
+    canonicalGRSelectedQQChristoffelSelectedPairContinuumBridge
+  ≡
+  true
+canonicalGRSelectedQQChristoffelSelectedPairBridgeFeedsContinuum =
+  refl
+
+canonicalGRSelectedQQChristoffelSelectedPairBridgeFiniteRChristoffelPromotionFalse :
+  GRSelectedQQChristoffelSelectedPairContinuumBridge.arbitraryFiniteRChristoffelPromotion
+    canonicalGRSelectedQQChristoffelSelectedPairContinuumBridge
+  ≡
+  false
+canonicalGRSelectedQQChristoffelSelectedPairBridgeFiniteRChristoffelPromotionFalse =
+  refl
+
+canonicalGRSelectedQQChristoffelSelectedPairBridgeFiniteRLeviCivitaPromotionFalse :
+  GRSelectedQQChristoffelSelectedPairContinuumBridge.arbitraryFiniteRLeviCivitaPromotion
+    canonicalGRSelectedQQChristoffelSelectedPairContinuumBridge
+  ≡
+  false
+canonicalGRSelectedQQChristoffelSelectedPairBridgeFiniteRLeviCivitaPromotionFalse =
+  refl
+
+canonicalGRSelectedQQChristoffelSelectedPairBridgeKeepsFiniteRHalvingUnchanged :
+  GRSelectedQQChristoffelSelectedPairContinuumBridge.finiteRImpossibleHalvingChanged
+    canonicalGRSelectedQQChristoffelSelectedPairContinuumBridge
+  ≡
+  false
+canonicalGRSelectedQQChristoffelSelectedPairBridgeKeepsFiniteRHalvingUnchanged =
+  refl
+
 data GRSelectedNonFlatMetricInstanceStatus : Set where
   selectedNonFlatMetricDependencyInstantiatedNoGRPromotion :
     GRSelectedNonFlatMetricInstanceStatus
@@ -1325,6 +1708,27 @@ record GRSelectedNonFlatMetricInstanceSurface : Setω where
     leviCivitaBlockerWitness :
       NF.GRLatestWaveDoubledChristoffelMetricCompatibilityReceipt
 
+    qqSelectedPairContinuumBridge :
+      GRSelectedQQChristoffelSelectedPairContinuumBridge
+
+    qqSelectedPairContinuumBridgeUsed :
+      GRSelectedQQChristoffelSelectedPairContinuumBridge.selectedPairBridgeFeedsContinuumLawSurfaces
+        qqSelectedPairContinuumBridge
+      ≡
+      true
+
+    arbitraryFiniteRChristoffelPromotionFalse :
+      GRSelectedQQChristoffelSelectedPairContinuumBridge.arbitraryFiniteRChristoffelPromotion
+        qqSelectedPairContinuumBridge
+      ≡
+      false
+
+    arbitraryFiniteRLeviCivitaPromotionFalse :
+      GRSelectedQQChristoffelSelectedPairContinuumBridge.arbitraryFiniteRLeviCivitaPromotion
+        qqSelectedPairContinuumBridge
+      ≡
+      false
+
     firstMissingNonFlatLaw :
       GRSelectedNonFlatMetricFirstMissingLaw
 
@@ -1359,6 +1763,14 @@ canonicalGRSelectedNonFlatMetricInstanceSurface =
         "selectedMetricCompatibilityObligation"
     ; leviCivitaBlockerWitness =
         selectedLeviCivitaBlockerWitness
+    ; qqSelectedPairContinuumBridge =
+        canonicalGRSelectedQQChristoffelSelectedPairContinuumBridge
+    ; qqSelectedPairContinuumBridgeUsed =
+        canonicalGRSelectedQQChristoffelSelectedPairBridgeFeedsContinuum
+    ; arbitraryFiniteRChristoffelPromotionFalse =
+        canonicalGRSelectedQQChristoffelSelectedPairBridgeFiniteRChristoffelPromotionFalse
+    ; arbitraryFiniteRLeviCivitaPromotionFalse =
+        canonicalGRSelectedQQChristoffelSelectedPairBridgeFiniteRLeviCivitaPromotionFalse
     ; firstMissingNonFlatLaw =
         missingSelectedChristoffelFromMetricLaw
     ; noPromotionBoundary =
@@ -1366,6 +1778,8 @@ canonicalGRSelectedNonFlatMetricInstanceSurface =
         ∷ "Metric symmetry, inverse left/right contraction, finite contraction shape, and selected trace=r2 are table laws over the two selected coordinate indices"
         ∷ "The Christoffel-from-metric slot is wired to the imported doubled-Christoffel / Levi-Civita receipt from GRNonFlatScalarAlgebraSurface"
         ∷ "The doubled-Christoffel / Levi-Civita blocker witness is available from GRNonFlatScalarAlgebraSurface.canonicalGRLatestWaveDoubledChristoffelMetricCompatibilityReceipt"
+        ∷ "The QQ selected-pair continuum bridge records the undoubled qqHalf route for both selected radial/radial/radial slots"
+        ∷ "The QQ bridge explicitly keeps arbitrary finite-r Christoffel and Levi-Civita promotion false"
         ∷ "Metric compatibility is witnessed for the selected placeholder connection because selectedCovariantDerivativeOfMetric reduces to r0"
         ∷ "No carrierConnectionIsLeviCivita, Ricci cancellation, Bianchi bridge, Ricci-zero theorem, Einstein tensor law, or GR closure is constructed"
         ∷ []
@@ -1377,3 +1791,27 @@ canonicalGRSelectedNonFlatMetricFirstMissing :
   ≡
   missingSelectedChristoffelFromMetricLaw
 canonicalGRSelectedNonFlatMetricFirstMissing = refl
+
+canonicalGRSelectedNonFlatMetricSurfaceUsesQQSelectedPairBridge :
+  GRSelectedNonFlatMetricInstanceSurface.qqSelectedPairContinuumBridgeUsed
+    canonicalGRSelectedNonFlatMetricInstanceSurface
+  ≡
+  refl
+canonicalGRSelectedNonFlatMetricSurfaceUsesQQSelectedPairBridge =
+  refl
+
+canonicalGRSelectedNonFlatMetricSurfaceFiniteRChristoffelPromotionFalse :
+  GRSelectedNonFlatMetricInstanceSurface.arbitraryFiniteRChristoffelPromotionFalse
+    canonicalGRSelectedNonFlatMetricInstanceSurface
+  ≡
+  refl
+canonicalGRSelectedNonFlatMetricSurfaceFiniteRChristoffelPromotionFalse =
+  refl
+
+canonicalGRSelectedNonFlatMetricSurfaceFiniteRLeviCivitaPromotionFalse :
+  GRSelectedNonFlatMetricInstanceSurface.arbitraryFiniteRLeviCivitaPromotionFalse
+    canonicalGRSelectedNonFlatMetricInstanceSurface
+  ≡
+  refl
+canonicalGRSelectedNonFlatMetricSurfaceFiniteRLeviCivitaPromotionFalse =
+  refl

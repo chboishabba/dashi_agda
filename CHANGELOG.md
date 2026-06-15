@@ -6,6 +6,32 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane GR interval-kernel/zero-epsilon tranche for `2026-06-15`: adds the
+  selected zero-epsilon connection/Ricci error-bound receipt in
+  `ContinuumLimitTheorem`, records non-degenerate Schwarzschild Shell A `[3,4]`
+  constants `C_Gamma = 1`, `C'_Gamma = 26/27`, `L_Gamma = 72`, `C_R = 80`, and
+  Shell B `[5/2,7/2]` constants `C_Gamma = 48/25`, `C'_Gamma = 992/125`,
+  `L_Gamma = 112`, `C_R = 220`, upgrades Ricci routing so `48` is point-shell
+  only while interval shells use `80`/`220`, adds the selected-pair
+  zero-epsilon equality bridge with arbitrary equality blocked, and aggregates
+  the new interval and quantitative handoff surfaces. The actual ordered
+  rational Christoffel C0 stability theorem, continuum Ricci convergence,
+  Schwarzschild vacuum/Birkhoff, W4/Candidate256, Clay, and terminal
+  promotions remain false.
+
+- Six-lane GR selected-kernel/shell-bound tranche for `2026-06-15`: records the
+  selected symbolic-rational Christoffel pair as the only local `refl`
+  connection-error extraction, threads selected constants through
+  `ContinuumLimitTheorem`, adds Schwarzschild shell-supremum receipts for
+  `r_s = 2`, `r_min = r_max = 3`, `delta = 1`, tight `C_Gamma = 1`,
+  conservative shell `C_Gamma <= 2`, requested formula-stability `11/9`, and
+  conservative repo constant `48`, records Ricci contraction continuity
+  `1280/27` rounded to `48` while preserving conservative `640`, and aggregates
+  the selected-pair, Levi-Civita/Koszul, Ricci-readiness, and shell-bound
+  surfaces. Arbitrary connection equality, continuum Ricci convergence,
+  Schwarzschild vacuum/Birkhoff, W4/Candidate256, Clay, and terminal promotions
+  remain false.
+
 - Six-lane GR analytic-handoff tranche for `2026-06-15`: adds direct selected
   finite-r Levi-Civita handoff projections, finite inverse-metric C0 and
   derivative-sign handoff projections, exact Ricci-readiness target-name and

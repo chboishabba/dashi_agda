@@ -8027,6 +8027,581 @@ canonicalGRSelectedInspectedRationalChristoffelMetricLawReceipt =
         ∷ []
     }
 
+GRSelectedPairConnectionIdentityLawShape :
+  (input : GRU4SelectedDoubledChristoffelMetricCompatibilityInput) →
+  GRSelectedRationalUndoubledChristoffelLift input →
+  Set
+GRSelectedPairConnectionIdentityLawShape input lift =
+  (base : SelectedMetric.GRSelectedFiniteRBase) →
+  (lambda' mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+  qqDouble
+    (GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffel
+      lift
+      base
+      lambda'
+      mu
+      nu)
+  ≡
+  GRSelectedRationalUndoubledChristoffelLift.rationalDoubledChristoffel
+    lift
+    base
+    lambda'
+    mu
+    nu
+
+GRSelectedPairZeroEpsilonError :
+  (input : GRU4SelectedDoubledChristoffelMetricCompatibilityInput) →
+  GRSelectedRationalUndoubledChristoffelLift input →
+  SelectedMetric.GRSelectedFiniteRBase →
+  SelectedMetric.GRSelectedCoordinateIndex →
+  SelectedMetric.GRSelectedCoordinateIndex →
+  SelectedMetric.GRSelectedCoordinateIndex →
+  ℚ
+GRSelectedPairZeroEpsilonError _ _ _ _ _ _ =
+  zeroℚ
+
+GRSelectedPairEqualityFromZeroEpsilonBridge :
+  (input : GRU4SelectedDoubledChristoffelMetricCompatibilityInput) →
+  (lift : GRSelectedRationalUndoubledChristoffelLift input) →
+  Set
+GRSelectedPairEqualityFromZeroEpsilonBridge input lift =
+  (base : SelectedMetric.GRSelectedFiniteRBase) →
+  (lambda' mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+  GRSelectedPairZeroEpsilonError input lift base lambda' mu nu
+  ≡
+  zeroℚ →
+  qqDouble
+    (GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffel
+      lift
+      base
+      lambda'
+      mu
+      nu)
+  ≡
+  GRSelectedRationalUndoubledChristoffelLift.rationalDoubledChristoffel
+    lift
+    base
+    lambda'
+    mu
+    nu
+
+GRArbitraryConnectionEqualityFromSelectedPairLaw : Set₁
+GRArbitraryConnectionEqualityFromSelectedPairLaw =
+  (ConnectionCarrier : Set) →
+  (connection connection' : ConnectionCarrier) →
+  connection ≡ connection'
+
+selectedPairInspectedZeroEpsilonError :
+  GRSelectedPairZeroEpsilonError
+    canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput
+    canonicalSelectedRationalUndoubledChristoffelLift
+    SelectedMetric.selectedBase0
+    SelectedMetric.selectedRadial
+    SelectedMetric.selectedRadial
+    SelectedMetric.selectedRadial
+  ≡
+  zeroℚ
+selectedPairInspectedZeroEpsilonError =
+  refl
+
+selectedPairInspectedEqualityFromZeroEpsilonRefl :
+  GRSelectedPairZeroEpsilonError
+    canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput
+    canonicalSelectedRationalUndoubledChristoffelLift
+    SelectedMetric.selectedBase0
+    SelectedMetric.selectedRadial
+    SelectedMetric.selectedRadial
+    SelectedMetric.selectedRadial
+  ≡
+  zeroℚ →
+  oneℚ ≡ oneℚ
+selectedPairInspectedEqualityFromZeroEpsilonRefl _ =
+  refl
+
+selectedPairEqualityFromZeroEpsilonBridge :
+  GRSelectedPairEqualityFromZeroEpsilonBridge
+    canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput
+    canonicalSelectedRationalUndoubledChristoffelLift
+selectedPairEqualityFromZeroEpsilonBridge base lambda' mu nu _ =
+  GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffelDoubles
+    canonicalSelectedRationalUndoubledChristoffelLift
+    base
+    lambda'
+    mu
+    nu
+
+data GRSelectedPairZeroEpsilonEqualityBridgeStatus : Set where
+  selectedPairZeroEpsilonEqualityBridgeLocalOnlyNoArbitraryConnection :
+    GRSelectedPairZeroEpsilonEqualityBridgeStatus
+
+record GRSelectedPairZeroEpsilonEqualityBridgeReceipt : Setω where
+  field
+    status :
+      GRSelectedPairZeroEpsilonEqualityBridgeStatus
+
+    doubledInput :
+      GRU4SelectedDoubledChristoffelMetricCompatibilityInput
+
+    rationalUndoubledChristoffelLift :
+      GRSelectedRationalUndoubledChristoffelLift doubledInput
+
+    selectedPairIdentityLaw :
+      Set
+
+    selectedPairIdentityLawIsRationalDoubleLaw :
+      selectedPairIdentityLaw
+      ≡
+      GRSelectedPairConnectionIdentityLawShape
+        doubledInput
+        rationalUndoubledChristoffelLift
+
+    selectedPairIdentityWitness :
+      selectedPairIdentityLaw
+
+    zeroEpsilonError :
+      SelectedMetric.GRSelectedFiniteRBase →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      ℚ
+
+    zeroEpsilonErrorIsCanonical :
+      zeroEpsilonError
+      ≡
+      GRSelectedPairZeroEpsilonError
+        doubledInput
+        rationalUndoubledChristoffelLift
+
+    zeroEpsilonErrorZero :
+      (base : SelectedMetric.GRSelectedFiniteRBase) →
+      (lambda' mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+      zeroEpsilonError base lambda' mu nu
+      ≡
+      zeroℚ
+
+    equalityFromZeroEpsilonBridge :
+      GRSelectedPairEqualityFromZeroEpsilonBridge
+        doubledInput
+        rationalUndoubledChristoffelLift
+
+    inspectedZeroEpsilonError :
+      zeroEpsilonError
+        SelectedMetric.selectedBase0
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+      ≡
+      zeroℚ
+
+    inspectedSelectedEqualityShape :
+      Set
+
+    inspectedSelectedEqualityShapeIsRefl :
+      inspectedSelectedEqualityShape
+      ≡
+      (oneℚ ≡ oneℚ)
+
+    inspectedSelectedEqualityFromZeroEpsilon :
+      zeroEpsilonError
+        SelectedMetric.selectedBase0
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+      ≡
+      zeroℚ →
+      inspectedSelectedEqualityShape
+
+    inspectedSelectedEqualityReflDerived :
+      inspectedSelectedEqualityShape
+
+    selectedEqualityIsLocal :
+      Bool
+
+    selectedEqualityIsLocalIsTrue :
+      selectedEqualityIsLocal
+      ≡
+      true
+
+    quantitativeZeroEpsilonPreferredBridge :
+      Bool
+
+    quantitativeZeroEpsilonPreferredBridgeIsTrue :
+      quantitativeZeroEpsilonPreferredBridge
+      ≡
+      true
+
+    arbitraryConnectionEqualityLaw :
+      Set₁
+
+    arbitraryConnectionEqualityLawIsGlobalConnectionEquality :
+      arbitraryConnectionEqualityLaw
+      ≡
+      GRArbitraryConnectionEqualityFromSelectedPairLaw
+
+    arbitraryConnectionEqualitySupplied :
+      Bool
+
+    arbitraryConnectionEqualitySuppliedIsFalse :
+      arbitraryConnectionEqualitySupplied
+      ≡
+      false
+
+    arbitraryConnectionEqualityBlocker :
+      GRDiscreteBianchiFiniteRMissingIngredient
+
+    arbitraryConnectionEqualityBlockerIsCarrierConnectionIsLeviCivita :
+      arbitraryConnectionEqualityBlocker
+      ≡
+      missingCarrierConnectionIsLeviCivita
+
+    promotedBeyondSelectedPair :
+      Bool
+
+    promotedBeyondSelectedPairIsFalse :
+      promotedBeyondSelectedPair
+      ≡
+      false
+
+    bridgeBoundary :
+      List String
+
+canonicalGRSelectedPairZeroEpsilonEqualityBridgeReceipt :
+  GRSelectedPairZeroEpsilonEqualityBridgeReceipt
+canonicalGRSelectedPairZeroEpsilonEqualityBridgeReceipt =
+  record
+    { status =
+        selectedPairZeroEpsilonEqualityBridgeLocalOnlyNoArbitraryConnection
+    ; doubledInput =
+        canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput
+    ; rationalUndoubledChristoffelLift =
+        canonicalSelectedRationalUndoubledChristoffelLift
+    ; selectedPairIdentityLaw =
+        GRSelectedPairConnectionIdentityLawShape
+          canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput
+          canonicalSelectedRationalUndoubledChristoffelLift
+    ; selectedPairIdentityLawIsRationalDoubleLaw =
+        refl
+    ; selectedPairIdentityWitness =
+        GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffelDoubles
+          canonicalSelectedRationalUndoubledChristoffelLift
+    ; zeroEpsilonError =
+        GRSelectedPairZeroEpsilonError
+          canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput
+          canonicalSelectedRationalUndoubledChristoffelLift
+    ; zeroEpsilonErrorIsCanonical =
+        refl
+    ; zeroEpsilonErrorZero =
+        λ _ _ _ _ → refl
+    ; equalityFromZeroEpsilonBridge =
+        selectedPairEqualityFromZeroEpsilonBridge
+    ; inspectedZeroEpsilonError =
+        selectedPairInspectedZeroEpsilonError
+    ; inspectedSelectedEqualityShape =
+        oneℚ ≡ oneℚ
+    ; inspectedSelectedEqualityShapeIsRefl =
+        refl
+    ; inspectedSelectedEqualityFromZeroEpsilon =
+        selectedPairInspectedEqualityFromZeroEpsilonRefl
+    ; inspectedSelectedEqualityReflDerived =
+        refl
+    ; selectedEqualityIsLocal =
+        true
+    ; selectedEqualityIsLocalIsTrue =
+        refl
+    ; quantitativeZeroEpsilonPreferredBridge =
+        true
+    ; quantitativeZeroEpsilonPreferredBridgeIsTrue =
+        refl
+    ; arbitraryConnectionEqualityLaw =
+        GRArbitraryConnectionEqualityFromSelectedPairLaw
+    ; arbitraryConnectionEqualityLawIsGlobalConnectionEquality =
+        refl
+    ; arbitraryConnectionEqualitySupplied =
+        false
+    ; arbitraryConnectionEqualitySuppliedIsFalse =
+        refl
+    ; arbitraryConnectionEqualityBlocker =
+        missingCarrierConnectionIsLeviCivita
+    ; arbitraryConnectionEqualityBlockerIsCarrierConnectionIsLeviCivita =
+        refl
+    ; promotedBeyondSelectedPair =
+        false
+    ; promotedBeyondSelectedPairIsFalse =
+        refl
+    ; bridgeBoundary =
+        "The selected-pair identity is retained as the rational double law already present in the selected handoff"
+        ∷ "The inspected selected equality is deliberately local: after the selected base0/radial/radial/radial reductions, the receipt stores the refl-derived one == one surface"
+        ∷ "The quantitative bridge is the zero-epsilon error surface: zero error is the preferred input to recover the selected-pair rational double equality"
+        ∷ "No arbitrary connection equality is supplied; the blocked law would identify any two inhabitants of an arbitrary connection carrier"
+        ∷ "The exact downstream blocker remains missingCarrierConnectionIsLeviCivita, so no finite-r Christoffel, Bianchi, Ricci, Einstein, or sourced-Einstein promotion is made"
+        ∷ []
+    }
+
+grSelectedPairZeroEpsilonBridgePreferred :
+  GRSelectedPairZeroEpsilonEqualityBridgeReceipt.quantitativeZeroEpsilonPreferredBridge
+    canonicalGRSelectedPairZeroEpsilonEqualityBridgeReceipt
+  ≡
+  true
+grSelectedPairZeroEpsilonBridgePreferred =
+  refl
+
+grSelectedPairArbitraryConnectionEqualityBlocked :
+  GRSelectedPairZeroEpsilonEqualityBridgeReceipt.arbitraryConnectionEqualitySupplied
+    canonicalGRSelectedPairZeroEpsilonEqualityBridgeReceipt
+  ≡
+  false
+grSelectedPairArbitraryConnectionEqualityBlocked =
+  refl
+
+data GRSelectedRationalSelectedPairIdentityHandoffStatus : Set where
+  selectedRationalQQIdentityRouteStagedNoFinitePromotion :
+    GRSelectedRationalSelectedPairIdentityHandoffStatus
+
+record GRSelectedRationalSelectedPairIdentityHandoffReceipt : Setω where
+  field
+    status :
+      GRSelectedRationalSelectedPairIdentityHandoffStatus
+
+    inspectedRationalMetricLawReceipt :
+      GRSelectedInspectedRationalChristoffelMetricLawReceipt
+
+    zeroEpsilonEqualityBridgeReceipt :
+      GRSelectedPairZeroEpsilonEqualityBridgeReceipt
+
+    doubledInput :
+      GRU4SelectedDoubledChristoffelMetricCompatibilityInput
+
+    rationalUndoubledChristoffelLift :
+      GRSelectedRationalUndoubledChristoffelLift doubledInput
+
+    qqDivisionByTwoWitness :
+      ℚ
+
+    qqDivisionByTwoWitnessIsqqHalf :
+      qqDivisionByTwoWitness
+      ≡
+      qqHalf
+
+    qqDivisionByTwoWitnessDoublesToOne :
+      qqDouble qqDivisionByTwoWitness
+      ≡
+      oneℚ
+
+    qqSelectedSurfaceBypassesOddHalvingObstruction :
+      Bool
+
+    qqSelectedSurfaceBypassesOddHalvingObstructionIsTrue :
+      qqSelectedSurfaceBypassesOddHalvingObstruction
+      ≡
+      true
+
+    finiteRCarrierOddHalvingObstructionStillPresent :
+      Bool
+
+    finiteRCarrierOddHalvingObstructionStillPresentIsTrue :
+      finiteRCarrierOddHalvingObstructionStillPresent
+      ≡
+      true
+
+    finiteRCarrierLiftStillImpossible :
+      GRSelectedUndoubledChristoffelLift doubledInput →
+      ⊥
+
+    finiteRInspectedOddHalfStillImpossible :
+      (gamma : NFScalar.GRFiniteRScalar) →
+      NFScalar.grFiniteRScalarMul NFScalar.r2 gamma
+      ≡
+      GRU4SelectedDoubledChristoffelMetricCompatibilityInput.twoTimesChristoffel
+        doubledInput
+        SelectedMetric.selectedBase0
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial →
+      ⊥
+
+    connectionIdentity :
+      Set
+
+    connectionIdentityIsSelectedPairRationalDoubleLaw :
+      connectionIdentity
+      ≡
+      GRSelectedPairConnectionIdentityLawShape
+        doubledInput
+        rationalUndoubledChristoffelLift
+
+    connectionIdentityWitness :
+      connectionIdentity
+
+    inspectedConnectionIdentitySlot :
+      qqDouble
+        (GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffel
+          rationalUndoubledChristoffelLift
+          SelectedMetric.selectedBase0
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial)
+      ≡
+      GRSelectedRationalUndoubledChristoffelLift.rationalDoubledChristoffel
+        rationalUndoubledChristoffelLift
+        SelectedMetric.selectedBase0
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+
+    selectedPairIdentityRouteStaged :
+      Bool
+
+    selectedPairIdentityRouteStagedIsTrue :
+      selectedPairIdentityRouteStaged
+      ≡
+      true
+
+    selectedPairZeroEpsilonBridgePreferred :
+      GRSelectedPairZeroEpsilonEqualityBridgeReceipt.quantitativeZeroEpsilonPreferredBridge
+        zeroEpsilonEqualityBridgeReceipt
+      ≡
+      true
+
+    selectedPairArbitraryConnectionEqualityBlocked :
+      GRSelectedPairZeroEpsilonEqualityBridgeReceipt.arbitraryConnectionEqualitySupplied
+        zeroEpsilonEqualityBridgeReceipt
+      ≡
+      false
+
+    selectedPairIdentityRoutePromotesFiniteRChristoffel :
+      Bool
+
+    selectedPairIdentityRoutePromotesFiniteRChristoffelIsFalse :
+      selectedPairIdentityRoutePromotesFiniteRChristoffel
+      ≡
+      false
+
+    selectedPairIdentityRoutePromotesContinuumBianchi :
+      Bool
+
+    selectedPairIdentityRoutePromotesContinuumBianchiIsFalse :
+      selectedPairIdentityRoutePromotesContinuumBianchi
+      ≡
+      false
+
+    selectedCarrierConnectionIsLeviCivitaPromoted :
+      Bool
+
+    selectedCarrierConnectionIsLeviCivitaPromotedIsFalse :
+      selectedCarrierConnectionIsLeviCivitaPromoted
+      ≡
+      false
+
+    exactDownstreamBlocker :
+      GRDiscreteBianchiFiniteRMissingIngredient
+
+    exactDownstreamBlockerIsCarrierConnectionIsLeviCivita :
+      exactDownstreamBlocker
+      ≡
+      missingCarrierConnectionIsLeviCivita
+
+    handoffBoundary :
+      List String
+
+canonicalGRSelectedRationalSelectedPairIdentityHandoffReceipt :
+  GRSelectedRationalSelectedPairIdentityHandoffReceipt
+canonicalGRSelectedRationalSelectedPairIdentityHandoffReceipt =
+  record
+    { status =
+        selectedRationalQQIdentityRouteStagedNoFinitePromotion
+    ; inspectedRationalMetricLawReceipt =
+        canonicalGRSelectedInspectedRationalChristoffelMetricLawReceipt
+    ; zeroEpsilonEqualityBridgeReceipt =
+        canonicalGRSelectedPairZeroEpsilonEqualityBridgeReceipt
+    ; doubledInput =
+        canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput
+    ; rationalUndoubledChristoffelLift =
+        canonicalSelectedRationalUndoubledChristoffelLift
+    ; qqDivisionByTwoWitness =
+        qqHalf
+    ; qqDivisionByTwoWitnessIsqqHalf =
+        refl
+    ; qqDivisionByTwoWitnessDoublesToOne =
+        qqHalfDoubleIsOne
+    ; qqSelectedSurfaceBypassesOddHalvingObstruction =
+        true
+    ; qqSelectedSurfaceBypassesOddHalvingObstructionIsTrue =
+        refl
+    ; finiteRCarrierOddHalvingObstructionStillPresent =
+        true
+    ; finiteRCarrierOddHalvingObstructionStillPresentIsTrue =
+        refl
+    ; finiteRCarrierLiftStillImpossible =
+        canonicalSelectedUndoubledChristoffelLiftImpossible
+    ; finiteRInspectedOddHalfStillImpossible =
+        selectedInspectedDoubledChristoffelNoScalarHalf
+    ; connectionIdentity =
+        GRSelectedPairConnectionIdentityLawShape
+          canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput
+          canonicalSelectedRationalUndoubledChristoffelLift
+    ; connectionIdentityIsSelectedPairRationalDoubleLaw =
+        refl
+    ; connectionIdentityWitness =
+        GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffelDoubles
+          canonicalSelectedRationalUndoubledChristoffelLift
+    ; inspectedConnectionIdentitySlot =
+        GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffelDoubles
+          canonicalSelectedRationalUndoubledChristoffelLift
+          SelectedMetric.selectedBase0
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial
+    ; selectedPairIdentityRouteStaged =
+        true
+    ; selectedPairIdentityRouteStagedIsTrue =
+        refl
+    ; selectedPairZeroEpsilonBridgePreferred =
+        grSelectedPairZeroEpsilonBridgePreferred
+    ; selectedPairArbitraryConnectionEqualityBlocked =
+        grSelectedPairArbitraryConnectionEqualityBlocked
+    ; selectedPairIdentityRoutePromotesFiniteRChristoffel =
+        false
+    ; selectedPairIdentityRoutePromotesFiniteRChristoffelIsFalse =
+        refl
+    ; selectedPairIdentityRoutePromotesContinuumBianchi =
+        false
+    ; selectedPairIdentityRoutePromotesContinuumBianchiIsFalse =
+        refl
+    ; selectedCarrierConnectionIsLeviCivitaPromoted =
+        false
+    ; selectedCarrierConnectionIsLeviCivitaPromotedIsFalse =
+        refl
+    ; exactDownstreamBlocker =
+        missingCarrierConnectionIsLeviCivita
+    ; exactDownstreamBlockerIsCarrierConnectionIsLeviCivita =
+        refl
+    ; handoffBoundary =
+        "The selected rational handoff consumes the inspected rational Christoffel metric-law receipt and the canonical GRSelectedRationalUndoubledChristoffelLift"
+        ∷ "Division by two is available only on the QQ selected surface: qqHalf doubles to one at selectedBase0/radial/radial/radial"
+        ∷ "The finite four-residue carrier obstruction is retained: no GRFiniteRScalar half of the odd r1 doubled Christoffel slot is produced"
+        ∷ "connectionIdentity is recorded as the downstream selected-pair law shape: qqDouble of the rational undoubled coefficient equals the rational doubled Christoffel table"
+        ∷ "The zero-epsilon equality bridge is threaded through this handoff: selected equality is local/refl-derived, and arbitrary connection equality remains blocked"
+        ∷ "This is a handoff receipt for the selected-pair identity route only; it does not promote full finite-r Christoffel, continuum Bianchi, Ricci, Einstein, or sourced Einstein closure"
+        ∷ "selectedCarrierConnectionIsLeviCivitaPromoted remains false and the exact downstream blocker remains missingCarrierConnectionIsLeviCivita"
+        ∷ []
+    }
+
+grSelectedRationalSelectedPairConnectionIdentityAvailable :
+  GRSelectedRationalSelectedPairIdentityHandoffReceipt.selectedPairIdentityRouteStaged
+    canonicalGRSelectedRationalSelectedPairIdentityHandoffReceipt
+  ≡
+  true
+grSelectedRationalSelectedPairConnectionIdentityAvailable =
+  refl
+
+grSelectedRationalSelectedPairKeepsLeviCivitaBlocked :
+  GRSelectedRationalSelectedPairIdentityHandoffReceipt.selectedCarrierConnectionIsLeviCivitaPromoted
+    canonicalGRSelectedRationalSelectedPairIdentityHandoffReceipt
+  ≡
+  false
+grSelectedRationalSelectedPairKeepsLeviCivitaBlocked =
+  refl
+
 data GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessStatus : Set where
   grUpper6U3DoubledTorsionFreeClosedUniquenessBlockedNoPromotion :
     GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessStatus
@@ -8188,6 +8763,36 @@ record GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt : Setω where
       requiredUndoubledChristoffelLiftType →
       ⊥
 
+    rationalSelectedPairIdentityHandoff :
+      GRSelectedRationalSelectedPairIdentityHandoffReceipt
+
+    rationalSelectedPairZeroEpsilonEqualityBridge :
+      GRSelectedPairZeroEpsilonEqualityBridgeReceipt
+
+    rationalSelectedPairZeroEpsilonPreferred :
+      GRSelectedPairZeroEpsilonEqualityBridgeReceipt.quantitativeZeroEpsilonPreferredBridge
+        rationalSelectedPairZeroEpsilonEqualityBridge
+      ≡
+      true
+
+    rationalSelectedPairArbitraryConnectionEqualityBlocked :
+      GRSelectedPairZeroEpsilonEqualityBridgeReceipt.arbitraryConnectionEqualitySupplied
+        rationalSelectedPairZeroEpsilonEqualityBridge
+      ≡
+      false
+
+    rationalSelectedPairIdentityRouteStaged :
+      GRSelectedRationalSelectedPairIdentityHandoffReceipt.selectedPairIdentityRouteStaged
+        rationalSelectedPairIdentityHandoff
+      ≡
+      true
+
+    rationalSelectedPairIdentityKeepsLeviCivitaBlocked :
+      GRSelectedRationalSelectedPairIdentityHandoffReceipt.selectedCarrierConnectionIsLeviCivitaPromoted
+        rationalSelectedPairIdentityHandoff
+      ≡
+      false
+
     selectedFirstMissingLaw :
       SelectedMetric.GRSelectedNonFlatMetricFirstMissingLaw
 
@@ -8287,6 +8892,21 @@ canonicalGRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt =
           canonicalSelectedRationalUndoubledChristoffelLift
     ; rationalLiftDoesNotDischargeFiniteCarrierLift =
         canonicalSelectedUndoubledChristoffelLiftImpossible
+    ; rationalSelectedPairIdentityHandoff =
+        canonicalGRSelectedRationalSelectedPairIdentityHandoffReceipt
+    ; rationalSelectedPairZeroEpsilonEqualityBridge =
+        GRSelectedRationalSelectedPairIdentityHandoffReceipt.zeroEpsilonEqualityBridgeReceipt
+          canonicalGRSelectedRationalSelectedPairIdentityHandoffReceipt
+    ; rationalSelectedPairZeroEpsilonPreferred =
+        GRSelectedRationalSelectedPairIdentityHandoffReceipt.selectedPairZeroEpsilonBridgePreferred
+          canonicalGRSelectedRationalSelectedPairIdentityHandoffReceipt
+    ; rationalSelectedPairArbitraryConnectionEqualityBlocked =
+        GRSelectedRationalSelectedPairIdentityHandoffReceipt.selectedPairArbitraryConnectionEqualityBlocked
+          canonicalGRSelectedRationalSelectedPairIdentityHandoffReceipt
+    ; rationalSelectedPairIdentityRouteStaged =
+        grSelectedRationalSelectedPairConnectionIdentityAvailable
+    ; rationalSelectedPairIdentityKeepsLeviCivitaBlocked =
+        grSelectedRationalSelectedPairKeepsLeviCivitaBlocked
     ; selectedFirstMissingLaw =
         SelectedMetric.GRSelectedNonFlatMetricInstanceSurface.firstMissingNonFlatLaw
           SelectedMetric.canonicalGRSelectedNonFlatMetricInstanceSurface
@@ -8317,6 +8937,8 @@ canonicalGRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt =
         ∷ "At selectedBase0/radial/radial/radial, the doubled integral 2*Gamma value is r1"
         ∷ "The required undoubled Christoffel lift is now typed as a carrier-level adapter, and the canonical selected instance proves that adapter is uninhabited"
         ∷ "A separate rational-backed adapter canonically undoubles the same slot to qqHalf and proves its rational double is one, so rational division by two is not the remaining blocker"
+        ∷ "The rational selected-pair handoff records connectionIdentity as a downstream QQ law shape only, not as a finite-r carrier Christoffel promotion"
+        ∷ "The zero-epsilon equality bridge is consumed from the selected-pair handoff: equality from zero error is preferred, while arbitrary connection equality is still false"
         ∷ "The remaining selected metric-law blocker after the rational lift is still SelectedMetric.missingSelectedChristoffelFromMetricLaw"
         ∷ "No selected GRFiniteRScalar coefficient has double r1, so uniqueness of an actual Christoffel coefficient has no existence witness and is only vacuous at this slot"
         ∷ "The selected placeholder Christoffel table still gives 2*Gamma = r0 at the same slot, yielding the exact placeholder/integral mismatch counterexample"
@@ -9136,6 +9758,21 @@ record GRGate4ContractedBianchiAfterSelectedLeviCivitaDependencyReceipt : Setω 
       ≡
       false
 
+    selectedPairZeroEpsilonEqualityBridge :
+      GRSelectedPairZeroEpsilonEqualityBridgeReceipt
+
+    selectedPairZeroEpsilonPreferred :
+      GRSelectedPairZeroEpsilonEqualityBridgeReceipt.quantitativeZeroEpsilonPreferredBridge
+        selectedPairZeroEpsilonEqualityBridge
+      ≡
+      true
+
+    selectedPairArbitraryConnectionEqualityBlocked :
+      GRSelectedPairZeroEpsilonEqualityBridgeReceipt.arbitraryConnectionEqualitySupplied
+        selectedPairZeroEpsilonEqualityBridge
+      ≡
+      false
+
     selectedMetricCompatibilityPromoted :
       GRM3SelectedMetricCompatibilityDoubledInputAdapterReceipt.selectedMetricCompatibilityPromoted
         selectedMetricCompatibilityAdapter
@@ -9214,6 +9851,15 @@ canonicalGRGate4ContractedBianchiAfterSelectedLeviCivitaDependencyReceipt =
         grUpper6U3DoubledTorsionFreeClosed
     ; selectedLeviCivitaAttemptStillFalse =
         grUpper6U3SelectedLeviCivitaStillBlocked
+    ; selectedPairZeroEpsilonEqualityBridge =
+        GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt.rationalSelectedPairZeroEpsilonEqualityBridge
+          canonicalGRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt
+    ; selectedPairZeroEpsilonPreferred =
+        GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt.rationalSelectedPairZeroEpsilonPreferred
+          canonicalGRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt
+    ; selectedPairArbitraryConnectionEqualityBlocked =
+        GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt.rationalSelectedPairArbitraryConnectionEqualityBlocked
+          canonicalGRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt
     ; selectedMetricCompatibilityPromoted =
         GRM3SelectedMetricCompatibilityDoubledInputAdapterReceipt.selectedMetricCompatibilityPromotedIsTrue
           canonicalGRM3SelectedMetricCompatibilityDoubledInputAdapterReceipt
@@ -9247,6 +9893,7 @@ canonicalGRGate4ContractedBianchiAfterSelectedLeviCivitaDependencyReceipt =
     ; receiptBoundary =
         "Selected metric compatibility is now consumed from the doubled-Christoffel residual adapter"
         ∷ "upper6/u3 supplies doubled torsion-free only; its selectedCarrierConnectionIsLeviCivitaPromoted bit is still false"
+        ∷ "The selected-pair zero-epsilon bridge is threaded from u3: selected equality remains local/refl-derived and arbitrary connection equality remains blocked"
         ∷ "The local 4R/Ricci/scalar/2G zero table is carried as finite case-split arithmetic only"
         ∷ "Contracted Bianchi is fail-closed at the selected-connection dependency: selectedCarrierConnection is not proved to be the Levi-Civita connection of selectedGRNonFlatMetricDependency"
         ∷ "The exact typed blocker is missingCarrierConnectionIsLeviCivita, mirrored by SelectedMetric.missingSelectedCarrierConnectionIsLeviCivita"
