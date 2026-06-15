@@ -63,7 +63,7 @@ package "Canonical code surfaces" {
   rectangle "PhysicsUnificationToCanonicalClosureAdapter\nabstract/canonical seam owner" as AdapterOwner #fef3c7
   rectangle "Bridge / packaging consumers" as Consumers #fef3c7
   rectangle "Empirical lane\nphotonuclear + HEPData" as Empirical #fee2e2
-  rectangle "Interop sidecars\nNGram: ternary windows, not text semantics\nITIRJoinBridge: UFTC join -> pressure adapter\nSensibLawResidualLattice: fibred PNF residual chain,\nPNFEmissionReceipt required before labels,\nreceipted performative -> scopeExceeded6,\nindex fallback, six-level refinement\nTetralemma/Sixfold: LogicTlurey/Base369 carrier bridges\nHecke.PNFResidualBridge: quotient fibre -> residual pressure\naggregate-imported; consumer receipts remain" as InteropSidecars #fef3c7
+  rectangle "Interop sidecars\nNGram: ternary windows, not text semantics\nITIRJoinBridge: UFTC join -> pressure adapter\nSensibLawResidualLattice: fibred PNF residual chain,\nPNFEmissionReceipt required before labels,\nreceipted performative -> scopeExceeded6,\nindex fallback, six-level refinement\nPNF spectral field: registry anchoring,\nresidual invariants, coordinate rebuildability,\nresolver/selector commitment, Hodge boundary,\nempirical basin gates; vector proposes only\nTetralemma/Sixfold: LogicTlurey/Base369 carrier bridges\nHecke.PNFResidualBridge: quotient fibre -> residual pressure\naggregate-imported; consumer receipts remain" as InteropSidecars #fef3c7
 }
 
 package "Diagram surfaces" {

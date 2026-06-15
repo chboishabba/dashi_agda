@@ -6,6 +6,36 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane PNF spectral-field invariant tranche for `2026-06-15`: adds
+  `PNFSpectralRegistryAnchoring`, `PNFResidualFieldInvariants`,
+  `PNFSpectralCoordinateRebuildability`, `PNFResolverSelectorCommitment`,
+  `PNFHodgeResidualTopology`, and `PNFSpectralEmpiricalBasinValidation`.
+  These surfaces type the formal PNF field invariants behind the architecture
+  stack: span/version/registry anchoring, fibre comparability, residual
+  severity-max joins and contradiction monotonicity, coordinate rebuildability,
+  textual fallback non-authority, resolver/selector/admitted-package
+  commitment, signed-Laplacian-first Hodge topology, and empirical basin/MDL
+  validation gates. They are wired through `DASHI.Everything` and
+  `Promotion.ObligationIndex`, whose PNF application boundary now has eight
+  rows. Runtime parser authority, ANN authority, semantic truth,
+  support/admissibility promotion, Hodge authority, empirical adequacy,
+  financial advice, market prediction, production trading authority, manual
+  semantic labels, threshold fishing, trading truth, Clay, and terminal
+  promotion remain false.
+
+- Six-lane PNF spectral-field architecture tranche for `2026-06-15`: adds
+  `PNFSpectralFieldCore`, `PNFSpectralFieldGraph`, `PNFBraidTransportField`,
+  `PNFSpectralVectorIndex`, and `PNFSpectralFieldArchitectureReceipt` as the
+  checked object/fibre, residual graph/Laplacian, braid transport, and
+  vector-index/resolver/selector stack. Adds
+  `PNFSpectralTradingSignalBoundary` for Nashi/Mirror-style news/trading
+  consumer vocabulary, and threads the architecture/trading boundary through
+  `DASHI.Everything` plus `Promotion.ObligationIndex`. The vector layer remains
+  proposal-only: no runtime parser, ANN backend, spectral utility proof,
+  semantic truth, support/admissibility promotion, financial advice, market
+  prediction guarantee, production trading authority, empirical adequacy,
+  trading truth, Clay, or terminal promotion is claimed.
+
 - Six-lane GR interval-kernel/zero-epsilon tranche for `2026-06-15`: adds the
   selected zero-epsilon connection/Ricci error-bound receipt in
   `ContinuumLimitTheorem`, records non-degenerate Schwarzschild Shell A `[3,4]`
