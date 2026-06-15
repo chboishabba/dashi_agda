@@ -140,24 +140,34 @@ Current external authority locator note for `2026-06-14`:
   authority, Carnot/thermodynamic theorem authority, and promotion tokens.
 
 Current GR proof-architecture intake note for `2026-06-15`:
-- The selected Christoffel lane now has a typed
-  `GRSelectedUndoubledChristoffelLift` adapter, and the canonical selected
-  finite-r table proves that adapter uninhabited at
-  `selectedBase0/radial/radial/radial` because the required doubled value is
-  `r1`. The next honest blocker remains `missingCarrierConnectionIsLeviCivita`.
+- The selected Christoffel lane now separates the finite-r obstruction from the
+  half-capable path: the canonical finite-r table still records the odd
+  `2Γ = r1` blocker, while the symbolic QQ lane inhabits
+  `GRSelectedUndoubledChristoffelLift` with a total half/undoubling adapter.
 - Ricci/Bianchi staging now has named finite-r zero-product, zero-contraction,
-  Ricci/scalar/Einstein, and contracted-Bianchi zero helpers plus
-  `GRDiscreteRicciFiniteZeroTableArithmeticReceipt`. This advances local
-  finite arithmetic only; non-flat Ricci, sourced Einstein, and full
-  contracted-Bianchi promotion remain blocked.
-- Continuum convergence now has a finite-carrier derivative scheme adapter;
-  the exact next input is the Christoffel C0 law extracting
-  `connectionErrorBound` from finite metric derivative consistency,
-  inverse-metric C0 control, formula stability, and finite-to-continuum partial
-  control.
-- Schwarzschild now has a bounded rational-shell weak-field linear-lapse
-  adapter. Full Schwarzschild metric match, Birkhoff/vacuum proof, W4 mass
-  source, precision-gravity promotion, and Clay/terminal claims remain open.
+  Ricci/scalar/Einstein, contracted-Bianchi zero helpers, and downstream
+  readiness receipts. This advances local finite arithmetic only; sourced
+  Einstein, full contracted-Bianchi promotion, and continuum Ricci convergence
+  remain blocked.
+- `GRConcreteLeviCivita` now has a selected finite-r Levi-Civita adapter that
+  locally discharges `missingCarrierConnectionIsLeviCivita` for the checked
+  zero-table carrier, plus direct handoff projections for torsion-free,
+  metric-compatibility, and Christoffel-form consumption. The next honest
+  blockers are curvature-to-Ricci/Einstein promotion and external continuum
+  authority, not terminal GR promotion.
+- Continuum convergence now has symbolic finite metric derivative,
+  inverse-metric C0, finite-to-continuum partial-control, and Christoffel-C0
+  extraction surfaces. The symbolic rational finite-carrier derivative-law
+  constructor now closes all finite plumbing from a supplied
+  `SymbolicRationalChristoffelC0StabilityKernel`. A genuine ordered rational
+  Lipschitz/analytic Christoffel C0 estimate remains the exact input before
+  continuum Ricci convergence can promote.
+- Schwarzschild now has the exact `r_s = 2, r = 3` doubled-Christoffel point
+  table, undoubled Christoffel table, radial `∂_r Γ` table, inverse-metric
+  radial derivative table, and the bounded rational-shell weak-field
+  linear-lapse adapter. Full Schwarzschild metric match, Birkhoff/vacuum proof,
+  W4 mass source, precision-gravity promotion, and Clay/terminal claims remain
+  open.
 
 ## YM Exact Intake Targets
 

@@ -5,10 +5,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Empty using (⊥)
-open import Data.Integer using (ℤ)
+open import Data.Integer using (ℤ; +_)
 open import Data.List.Base using (List; _∷_; [])
+open import Data.Rational as R using (_/_)
 open import Data.Unit using (⊤; tt)
-open import DASHI.Core.Q using (ℚ)
+open import DASHI.Core.Q using (ℚ; _+ℚ_; _*ℚ_; zeroℚ; oneℚ; twoℚ)
 
 import DASHI.Combinatorics.String.LieAlgebra as StringLie
 import DASHI.Physics.Constraints.Bracket as Bracket
@@ -7567,6 +7568,465 @@ canonicalSelectedUndoubledChristoffelLiftImpossible lift =
       SelectedMetric.selectedRadial
       SelectedMetric.selectedRadial)
 
+qqHalf : ℚ
+qqHalf = (+ 1) R./ 2
+
+qqDouble : ℚ → ℚ
+qqDouble q = twoℚ *ℚ q
+
+qqHalfDoubleIsOne :
+  qqDouble qqHalf
+  ≡
+  oneℚ
+qqHalfDoubleIsOne =
+  refl
+
+selectedFiniteRScalarAsℚ : NFScalar.GRFiniteRScalar → ℚ
+selectedFiniteRScalarAsℚ NFScalar.r0 = zeroℚ
+selectedFiniteRScalarAsℚ NFScalar.r1 = oneℚ
+selectedFiniteRScalarAsℚ NFScalar.r2 = twoℚ
+selectedFiniteRScalarAsℚ NFScalar.r3 = twoℚ +ℚ oneℚ
+
+selectedFiniteRScalarHalfAsℚ : NFScalar.GRFiniteRScalar → ℚ
+selectedFiniteRScalarHalfAsℚ NFScalar.r0 = zeroℚ
+selectedFiniteRScalarHalfAsℚ NFScalar.r1 = qqHalf
+selectedFiniteRScalarHalfAsℚ NFScalar.r2 = oneℚ
+selectedFiniteRScalarHalfAsℚ NFScalar.r3 = oneℚ +ℚ qqHalf
+
+selectedFiniteRScalarHalfDoubleAsℚ :
+  (scalar : NFScalar.GRFiniteRScalar) →
+  qqDouble (selectedFiniteRScalarHalfAsℚ scalar)
+  ≡
+  selectedFiniteRScalarAsℚ scalar
+selectedFiniteRScalarHalfDoubleAsℚ NFScalar.r0 = refl
+selectedFiniteRScalarHalfDoubleAsℚ NFScalar.r1 = refl
+selectedFiniteRScalarHalfDoubleAsℚ NFScalar.r2 = refl
+selectedFiniteRScalarHalfDoubleAsℚ NFScalar.r3 = refl
+
+selectedTwoTimesChristoffelIntegralAsℚ :
+  SelectedMetric.GRSelectedFiniteRBase →
+  SelectedMetric.GRSelectedCoordinateIndex →
+  SelectedMetric.GRSelectedCoordinateIndex →
+  SelectedMetric.GRSelectedCoordinateIndex →
+  ℚ
+selectedTwoTimesChristoffelIntegralAsℚ base lambda' mu nu =
+  selectedFiniteRScalarAsℚ
+    (selectedTwoTimesChristoffelIntegral base lambda' mu nu)
+
+selectedRationalUndoubledChristoffel :
+  SelectedMetric.GRSelectedFiniteRBase →
+  SelectedMetric.GRSelectedCoordinateIndex →
+  SelectedMetric.GRSelectedCoordinateIndex →
+  SelectedMetric.GRSelectedCoordinateIndex →
+  ℚ
+selectedRationalUndoubledChristoffel base lambda' mu nu =
+  selectedFiniteRScalarHalfAsℚ
+    (selectedTwoTimesChristoffelIntegral base lambda' mu nu)
+
+selectedRationalUndoubledChristoffelDoubles :
+  (base : SelectedMetric.GRSelectedFiniteRBase) →
+  (lambda' mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+  qqDouble (selectedRationalUndoubledChristoffel base lambda' mu nu)
+  ≡
+  selectedTwoTimesChristoffelIntegralAsℚ base lambda' mu nu
+selectedRationalUndoubledChristoffelDoubles base lambda' mu nu =
+  selectedFiniteRScalarHalfDoubleAsℚ
+    (selectedTwoTimesChristoffelIntegral base lambda' mu nu)
+
+selectedRationalUndoubledChristoffelLowerSymmetry :
+  (base : SelectedMetric.GRSelectedFiniteRBase) →
+  (lambda' mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+  selectedRationalUndoubledChristoffel base lambda' mu nu
+  ≡
+  selectedRationalUndoubledChristoffel base lambda' nu mu
+selectedRationalUndoubledChristoffelLowerSymmetry base lambda' mu nu
+  rewrite selectedTwoTimesChristoffelIntegralLowerSymmetry base lambda' mu nu =
+  refl
+
+selectedRationalUndoubledChristoffelAtInspectedSlotIsHalf :
+  selectedRationalUndoubledChristoffel
+    SelectedMetric.selectedBase0
+    SelectedMetric.selectedRadial
+    SelectedMetric.selectedRadial
+    SelectedMetric.selectedRadial
+  ≡
+  qqHalf
+selectedRationalUndoubledChristoffelAtInspectedSlotIsHalf =
+  refl
+
+selectedRationalUndoubledChristoffelDoubleAtInspectedSlotIsOne :
+  qqDouble
+    (selectedRationalUndoubledChristoffel
+      SelectedMetric.selectedBase0
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial)
+  ≡
+  oneℚ
+selectedRationalUndoubledChristoffelDoubleAtInspectedSlotIsOne =
+  qqHalfDoubleIsOne
+
+record GRSelectedRationalUndoubledChristoffelLift
+  (input : GRU4SelectedDoubledChristoffelMetricCompatibilityInput) : Set where
+  field
+    rationalDoubledChristoffel :
+      SelectedMetric.GRSelectedFiniteRBase →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      ℚ
+
+    rationalDoubledChristoffelReflectsFinite :
+      (base : SelectedMetric.GRSelectedFiniteRBase) →
+      (lambda' mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+      rationalDoubledChristoffel base lambda' mu nu
+      ≡
+      selectedFiniteRScalarAsℚ
+        (GRU4SelectedDoubledChristoffelMetricCompatibilityInput.twoTimesChristoffel
+          input
+          base
+          lambda'
+          mu
+          nu)
+
+    rationalUndoubledChristoffel :
+      SelectedMetric.GRSelectedFiniteRBase →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      SelectedMetric.GRSelectedCoordinateIndex →
+      ℚ
+
+    rationalUndoubledChristoffelDoubles :
+      (base : SelectedMetric.GRSelectedFiniteRBase) →
+      (lambda' mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+      qqDouble (rationalUndoubledChristoffel base lambda' mu nu)
+      ≡
+      rationalDoubledChristoffel base lambda' mu nu
+
+    rationalUndoubledLowerIndexSymmetry :
+      (base : SelectedMetric.GRSelectedFiniteRBase) →
+      (lambda' mu nu : SelectedMetric.GRSelectedCoordinateIndex) →
+      rationalUndoubledChristoffel base lambda' mu nu
+      ≡
+      rationalUndoubledChristoffel base lambda' nu mu
+
+    inspectedOddSlotIsqqHalf :
+      rationalUndoubledChristoffel
+        SelectedMetric.selectedBase0
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+      ≡
+      qqHalf
+
+    qqHalfWitness :
+      ℚ
+
+    qqHalfWitnessIsCanonical :
+      qqHalfWitness
+      ≡
+      qqHalf
+
+    qqHalfWitnessDoublesToOne :
+      qqDouble qqHalfWitness
+      ≡
+      oneℚ
+
+    inspectedRationalDoubledSlotIsOne :
+      rationalDoubledChristoffel
+        SelectedMetric.selectedBase0
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+      ≡
+      oneℚ
+
+    finiteScalarLiftStillImpossible :
+      GRSelectedUndoubledChristoffelLift input →
+      ⊥
+
+    finiteScalarObstructionStillRemains :
+      (gamma : NFScalar.GRFiniteRScalar) →
+      NFScalar.grFiniteRScalarMul NFScalar.r2 gamma
+      ≡
+      GRU4SelectedDoubledChristoffelMetricCompatibilityInput.twoTimesChristoffel
+        input
+        SelectedMetric.selectedBase0
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial →
+      ⊥
+
+open GRSelectedRationalUndoubledChristoffelLift public
+
+canonicalSelectedRationalUndoubledChristoffelLift :
+  GRSelectedRationalUndoubledChristoffelLift
+    canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput
+canonicalSelectedRationalUndoubledChristoffelLift =
+  record
+    { rationalDoubledChristoffel =
+        selectedTwoTimesChristoffelIntegralAsℚ
+    ; rationalDoubledChristoffelReflectsFinite =
+        λ _ _ _ _ → refl
+    ; rationalUndoubledChristoffel =
+        selectedRationalUndoubledChristoffel
+    ; rationalUndoubledChristoffelDoubles =
+        selectedRationalUndoubledChristoffelDoubles
+    ; rationalUndoubledLowerIndexSymmetry =
+        selectedRationalUndoubledChristoffelLowerSymmetry
+    ; inspectedOddSlotIsqqHalf =
+        selectedRationalUndoubledChristoffelAtInspectedSlotIsHalf
+    ; qqHalfWitness =
+        qqHalf
+    ; qqHalfWitnessIsCanonical =
+        refl
+    ; qqHalfWitnessDoublesToOne =
+        qqHalfDoubleIsOne
+    ; inspectedRationalDoubledSlotIsOne =
+        refl
+    ; finiteScalarLiftStillImpossible =
+        canonicalSelectedUndoubledChristoffelLiftImpossible
+    ; finiteScalarObstructionStillRemains =
+        selectedInspectedDoubledChristoffelNoScalarHalf
+    }
+
+selectedInspectedRationalChristoffelFromMetricObligation :
+  Set
+selectedInspectedRationalChristoffelFromMetricObligation =
+  qqDouble
+    (GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffel
+      canonicalSelectedRationalUndoubledChristoffelLift
+      SelectedMetric.selectedBase0
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial)
+  ≡
+  selectedFiniteRScalarAsℚ
+    (selectedLeviCivitaChristoffelNumerator
+      SelectedMetric.selectedBase0
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial)
+
+selectedInspectedRationalChristoffelFromMetricShape :
+  selectedInspectedRationalChristoffelFromMetricObligation
+  ≡
+  (oneℚ ≡ oneℚ)
+selectedInspectedRationalChristoffelFromMetricShape =
+  refl
+
+selectedInspectedRationalChristoffelFromMetricWitness :
+  selectedInspectedRationalChristoffelFromMetricObligation
+selectedInspectedRationalChristoffelFromMetricWitness =
+  selectedRationalUndoubledChristoffelDoubleAtInspectedSlotIsOne
+
+selectedInspectedRationalFiniteNumeratorIsOne :
+  selectedFiniteRScalarAsℚ
+    (selectedLeviCivitaChristoffelNumerator
+      SelectedMetric.selectedBase0
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial
+      SelectedMetric.selectedRadial)
+  ≡
+  oneℚ
+selectedInspectedRationalFiniteNumeratorIsOne =
+  refl
+
+data GRSelectedInspectedRationalChristoffelMetricLawStatus : Set where
+  selectedInspectedFiniteHeldRationalMetricLawSupplied :
+    GRSelectedInspectedRationalChristoffelMetricLawStatus
+
+record GRSelectedInspectedRationalChristoffelMetricLawReceipt : Setω where
+  field
+    status :
+      GRSelectedInspectedRationalChristoffelMetricLawStatus
+
+    finiteInspectedChristoffelFromMetricObligation :
+      Set
+
+    finiteInspectedChristoffelFromMetricObligationIsSelected :
+      finiteInspectedChristoffelFromMetricObligation
+      ≡
+      selectedInspectedChristoffelFromMetricObligation
+
+    finiteInspectedChristoffelFromMetricShape :
+      finiteInspectedChristoffelFromMetricObligation
+      ≡
+      (NFScalar.r0 ≡ NFScalar.r1)
+
+    finiteInspectedChristoffelFromMetricCounterexample :
+      finiteInspectedChristoffelFromMetricObligation →
+      ⊥
+
+    finiteNFScalarR0≡R1ObligationHeldImpossible :
+      selectedInspectedChristoffelFromMetricObligation →
+      ⊥
+
+    finiteInspectedChristoffelFromMetricDischarged :
+      Bool
+
+    finiteInspectedChristoffelFromMetricDischargedIsFalse :
+      finiteInspectedChristoffelFromMetricDischarged
+      ≡
+      false
+
+    rationalUndoubledChristoffelLift :
+      GRSelectedRationalUndoubledChristoffelLift
+        canonicalGRU4SelectedDoubledChristoffelMetricCompatibilityInput
+
+    rationalInspectedChristoffelFromMetricObligation :
+      Set
+
+    rationalInspectedChristoffelFromMetricObligationIsSelected :
+      rationalInspectedChristoffelFromMetricObligation
+      ≡
+      selectedInspectedRationalChristoffelFromMetricObligation
+
+    rationalInspectedChristoffelFromMetricShape :
+      rationalInspectedChristoffelFromMetricObligation
+      ≡
+      (oneℚ ≡ oneℚ)
+
+    rationalInspectedChristoffelFromMetricWitness :
+      rationalInspectedChristoffelFromMetricObligation
+
+    inspectedRationalUndoubledSlotIsqqHalf :
+      GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffel
+        rationalUndoubledChristoffelLift
+        SelectedMetric.selectedBase0
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+      ≡
+      qqHalf
+
+    inspectedRationalLiftDoubleLaw :
+      qqDouble
+        (GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffel
+          rationalUndoubledChristoffelLift
+          SelectedMetric.selectedBase0
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial)
+      ≡
+      GRSelectedRationalUndoubledChristoffelLift.rationalDoubledChristoffel
+        rationalUndoubledChristoffelLift
+        SelectedMetric.selectedBase0
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+
+    inspectedRationalDoubleSlotIsOne :
+      qqDouble
+        (GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffel
+          rationalUndoubledChristoffelLift
+          SelectedMetric.selectedBase0
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial)
+      ≡
+      oneℚ
+
+    inspectedRationalDoubledSlotReflectsFiniteOddNumerator :
+      selectedFiniteRScalarAsℚ
+        (selectedLeviCivitaChristoffelNumerator
+          SelectedMetric.selectedBase0
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial)
+      ≡
+      oneℚ
+
+    rationalMetricLawShapeSupplied :
+      Bool
+
+    rationalMetricLawShapeSuppliedIsTrue :
+      rationalMetricLawShapeSupplied
+      ≡
+      true
+
+    rationalLiftClosesFiniteNFScalarObligation :
+      Bool
+
+    rationalLiftClosesFiniteNFScalarObligationIsFalse :
+      rationalLiftClosesFiniteNFScalarObligation
+      ≡
+      false
+
+    exactRemainingFiniteBlocker :
+      GRDiscreteBianchiFiniteRMissingIngredient
+
+    exactRemainingFiniteBlockerIsCarrierConnectionIsLeviCivita :
+      exactRemainingFiniteBlocker
+      ≡
+      missingCarrierConnectionIsLeviCivita
+
+    receiptBoundary :
+      List String
+
+canonicalGRSelectedInspectedRationalChristoffelMetricLawReceipt :
+  GRSelectedInspectedRationalChristoffelMetricLawReceipt
+canonicalGRSelectedInspectedRationalChristoffelMetricLawReceipt =
+  record
+    { status =
+        selectedInspectedFiniteHeldRationalMetricLawSupplied
+    ; finiteInspectedChristoffelFromMetricObligation =
+        selectedInspectedChristoffelFromMetricObligation
+    ; finiteInspectedChristoffelFromMetricObligationIsSelected =
+        refl
+    ; finiteInspectedChristoffelFromMetricShape =
+        selectedInspectedChristoffelFromMetricShape
+    ; finiteInspectedChristoffelFromMetricCounterexample =
+        selectedInspectedChristoffelFromMetricCounterexample
+    ; finiteNFScalarR0≡R1ObligationHeldImpossible =
+        selectedInspectedChristoffelFromMetricCounterexample
+    ; finiteInspectedChristoffelFromMetricDischarged =
+        false
+    ; finiteInspectedChristoffelFromMetricDischargedIsFalse =
+        refl
+    ; rationalUndoubledChristoffelLift =
+        canonicalSelectedRationalUndoubledChristoffelLift
+    ; rationalInspectedChristoffelFromMetricObligation =
+        selectedInspectedRationalChristoffelFromMetricObligation
+    ; rationalInspectedChristoffelFromMetricObligationIsSelected =
+        refl
+    ; rationalInspectedChristoffelFromMetricShape =
+        selectedInspectedRationalChristoffelFromMetricShape
+    ; rationalInspectedChristoffelFromMetricWitness =
+        selectedInspectedRationalChristoffelFromMetricWitness
+    ; inspectedRationalUndoubledSlotIsqqHalf =
+        selectedRationalUndoubledChristoffelAtInspectedSlotIsHalf
+    ; inspectedRationalLiftDoubleLaw =
+        GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffelDoubles
+          canonicalSelectedRationalUndoubledChristoffelLift
+          SelectedMetric.selectedBase0
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial
+          SelectedMetric.selectedRadial
+    ; inspectedRationalDoubleSlotIsOne =
+        selectedRationalUndoubledChristoffelDoubleAtInspectedSlotIsOne
+    ; inspectedRationalDoubledSlotReflectsFiniteOddNumerator =
+        selectedInspectedRationalFiniteNumeratorIsOne
+    ; rationalMetricLawShapeSupplied =
+        true
+    ; rationalMetricLawShapeSuppliedIsTrue =
+        refl
+    ; rationalLiftClosesFiniteNFScalarObligation =
+        false
+    ; rationalLiftClosesFiniteNFScalarObligationIsFalse =
+        refl
+    ; exactRemainingFiniteBlocker =
+        missingCarrierConnectionIsLeviCivita
+    ; exactRemainingFiniteBlockerIsCarrierConnectionIsLeviCivita =
+        refl
+    ; receiptBoundary =
+        "The selected finite inspected Christoffel-from-metric obligation remains the impossible NFScalar.r0 == NFScalar.r1 shape"
+        ∷ "The rational inspected adapter uses GRSelectedRationalUndoubledChristoffelLift at the same base0/radial/radial/radial slot"
+        ∷ "The inspected rational undoubled coefficient is qqHalf and its rational double is one"
+        ∷ "This supplies only the rational metric-law shape; it does not discharge the finite four-residue carrier obligation"
+        ∷ []
+    }
+
 data GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessStatus : Set where
   grUpper6U3DoubledTorsionFreeClosedUniquenessBlockedNoPromotion :
     GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessStatus
@@ -7686,6 +8146,48 @@ record GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt : Setω where
       requiredUndoubledChristoffelLiftType →
       ⊥
 
+    rationalUndoubledChristoffelLift :
+      GRSelectedRationalUndoubledChristoffelLift doubledInput
+
+    rationalDivisionByTwoAdapterAvailable :
+      Bool
+
+    rationalDivisionByTwoAdapterAvailableIsTrue :
+      rationalDivisionByTwoAdapterAvailable
+      ≡
+      true
+
+    rationalUndoubledInspectedSlotIsqqHalf :
+      GRSelectedRationalUndoubledChristoffelLift.rationalUndoubledChristoffel
+        rationalUndoubledChristoffelLift
+        SelectedMetric.selectedBase0
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+      ≡
+      qqHalf
+
+    rationalHalfWitnessDoublesToOne :
+      qqDouble
+        (GRSelectedRationalUndoubledChristoffelLift.qqHalfWitness
+          rationalUndoubledChristoffelLift)
+      ≡
+      oneℚ
+
+    rationalDoubledInspectedSlotIsOne :
+      GRSelectedRationalUndoubledChristoffelLift.rationalDoubledChristoffel
+        rationalUndoubledChristoffelLift
+        SelectedMetric.selectedBase0
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+        SelectedMetric.selectedRadial
+      ≡
+      oneℚ
+
+    rationalLiftDoesNotDischargeFiniteCarrierLift :
+      requiredUndoubledChristoffelLiftType →
+      ⊥
+
     selectedFirstMissingLaw :
       SelectedMetric.GRSelectedNonFlatMetricFirstMissingLaw
 
@@ -7694,13 +8196,21 @@ record GRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt : Setω where
       ≡
       SelectedMetric.missingSelectedChristoffelFromMetricLaw
 
-    missingDivisionByTwoAPI :
+    rationalDivisionByTwoIsNotRemainingBlocker :
       Bool
 
-    missingDivisionByTwoAPIIsTrue :
-      missingDivisionByTwoAPI
+    rationalDivisionByTwoIsNotRemainingBlockerIsTrue :
+      rationalDivisionByTwoIsNotRemainingBlocker
       ≡
       true
+
+    remainingMetricLawBlockerAfterRationalLift :
+      SelectedMetric.GRSelectedNonFlatMetricFirstMissingLaw
+
+    remainingMetricLawBlockerAfterRationalLiftIsChristoffelFromMetric :
+      remainingMetricLawBlockerAfterRationalLift
+      ≡
+      SelectedMetric.missingSelectedChristoffelFromMetricLaw
 
     selectedChristoffelFromMetricLawSupplied :
       Bool
@@ -7761,14 +8271,34 @@ canonicalGRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt =
         refl
     ; requiredUndoubledChristoffelLiftImpossible =
         canonicalSelectedUndoubledChristoffelLiftImpossible
+    ; rationalUndoubledChristoffelLift =
+        canonicalSelectedRationalUndoubledChristoffelLift
+    ; rationalDivisionByTwoAdapterAvailable =
+        true
+    ; rationalDivisionByTwoAdapterAvailableIsTrue =
+        refl
+    ; rationalUndoubledInspectedSlotIsqqHalf =
+        selectedRationalUndoubledChristoffelAtInspectedSlotIsHalf
+    ; rationalHalfWitnessDoublesToOne =
+        GRSelectedRationalUndoubledChristoffelLift.qqHalfWitnessDoublesToOne
+          canonicalSelectedRationalUndoubledChristoffelLift
+    ; rationalDoubledInspectedSlotIsOne =
+        GRSelectedRationalUndoubledChristoffelLift.inspectedRationalDoubledSlotIsOne
+          canonicalSelectedRationalUndoubledChristoffelLift
+    ; rationalLiftDoesNotDischargeFiniteCarrierLift =
+        canonicalSelectedUndoubledChristoffelLiftImpossible
     ; selectedFirstMissingLaw =
         SelectedMetric.GRSelectedNonFlatMetricInstanceSurface.firstMissingNonFlatLaw
           SelectedMetric.canonicalGRSelectedNonFlatMetricInstanceSurface
     ; selectedFirstMissingLawIsCarrierConnectionIsLeviCivita =
         SelectedMetric.canonicalGRSelectedNonFlatMetricFirstMissing
-    ; missingDivisionByTwoAPI =
+    ; rationalDivisionByTwoIsNotRemainingBlocker =
         true
-    ; missingDivisionByTwoAPIIsTrue =
+    ; rationalDivisionByTwoIsNotRemainingBlockerIsTrue =
+        refl
+    ; remainingMetricLawBlockerAfterRationalLift =
+        SelectedMetric.missingSelectedChristoffelFromMetricLaw
+    ; remainingMetricLawBlockerAfterRationalLiftIsChristoffelFromMetric =
         refl
     ; selectedChristoffelFromMetricLawSupplied =
         false
@@ -7786,6 +8316,8 @@ canonicalGRUpper6U3SelectedLeviCivitaTorsionFreeUniquenessReceipt =
         "upper6 u3 reuses the selected doubled-Christoffel input and closes torsion-free lower-index symmetry for the 2*Gamma table"
         ∷ "At selectedBase0/radial/radial/radial, the doubled integral 2*Gamma value is r1"
         ∷ "The required undoubled Christoffel lift is now typed as a carrier-level adapter, and the canonical selected instance proves that adapter is uninhabited"
+        ∷ "A separate rational-backed adapter canonically undoubles the same slot to qqHalf and proves its rational double is one, so rational division by two is not the remaining blocker"
+        ∷ "The remaining selected metric-law blocker after the rational lift is still SelectedMetric.missingSelectedChristoffelFromMetricLaw"
         ∷ "No selected GRFiniteRScalar coefficient has double r1, so uniqueness of an actual Christoffel coefficient has no existence witness and is only vacuous at this slot"
         ∷ "The selected placeholder Christoffel table still gives 2*Gamma = r0 at the same slot, yielding the exact placeholder/integral mismatch counterexample"
         ∷ "SelectedMetric now records missingSelectedCarrierConnectionIsLeviCivita first; the selected carrierConnectionIsLeviCivita, Bianchi, Ricci, Einstein, or terminal promotion is still not produced"

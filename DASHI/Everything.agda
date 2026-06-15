@@ -919,6 +919,7 @@ import DASHI.Physics.Closure.KostantMultiplicityFreeAuthorityReceipt
 import DASHI.Physics.Closure.G6CrossLaneCommutingTheoremFromKostant
 import DASHI.Physics.Closure.G6PrerequisiteIndex
 import DASHI.Physics.Closure.GRConcreteLeviCivita
+import DASHI.Physics.Closure.GRFirstOrderGravityScope
 import DASHI.Physics.Closure.GRDiscreteBianchiFiniteR
 import DASHI.Physics.Closure.ContractedBianchiMatterClosure
 import DASHI.Physics.Closure.WaldGRAuthorityReceipt
@@ -2200,6 +2201,10 @@ import DASHI.Physics.QFT.ConformalSpinFromCMReceipt
 import DASHI.Physics.QFT.DiracSpinSectorReceipt
 import DASHI.Physics.QFT.SpinStatisticsConnectionReceipt
 import DASHI.Physics.Closure.AdapterIrreducibilityNoGoIndex
+import DASHI.Physics.Closure.GRQFTConsumerNextObligation
+import DASHI.Physics.Closure.GRQFTConsumerNextObligationV2
+import DASHI.Physics.Closure.GRQFTConsumerSourceDiagnostic
+import DASHI.Physics.Closure.GRQFTClosurePromotionReceiptRequestPack
 import DASHI.Physics.Closure.GRQFTTerminalCompositionBoundary
 import DASHI.Physics.Closure.ExtremalFrobeniusFixedPointUniqueness
 import DASHI.Physics.Closure.ExtremalFrobeniusMonsterAuthorityBoundary

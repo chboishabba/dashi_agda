@@ -60,19 +60,28 @@ exact Hilbert/Operator/CCR/CAR/OS/Wightman field surfaces, GR/PDE records the
 Koszul/MTW/contracted-Bianchi/Einstein/SI-unit/weak-form payloads, and the
 finite discrete-YM spectral example records its exact boolean pattern. The
 continuum authority slots remain false or external.
-Current GR proof-architecture status: the checked finite-r surfaces now expose
-a more precise Christoffel/Ricci/convergence/Schwarzschild boundary. The
-selected doubled-Christoffel lane has a typed undoubled lift adapter, and the
-canonical selected finite-r table proves that lift impossible at the odd
-`2Γ = r1` slot. Ricci/scalar/Einstein zero-table arithmetic is factored through
-named finite-r zero/contraction helpers and a `GRDiscreteRicciFiniteZeroTableArithmeticReceipt`.
-`ContinuumLimitTheorem` now has a finite-carrier derivative scheme adapter that
-extracts `connectionErrorBound` only from an explicit Christoffel C0 law.
-`SchwarzschildLimitCandidate` has a bounded rational-shell weak-field linear
-lapse adapter, and `GRProofArchitectureAggregationTest` checks the current
-Levi-Civita/Ricci/Bianchi/Schwarzschild imports. Non-flat Levi-Civita, full
-contracted Bianchi promotion, Ricci convergence, Schwarzschild vacuum/Birkhoff,
-W4/Candidate256, Clay, and terminal promotion remain false.
+Current GR proof-architecture status: the checked finite-r and symbolic QQ
+surfaces now expose a sharper Christoffel/Ricci/convergence/Schwarzschild
+boundary. The selected finite-r table still records the historical odd
+`2Γ = r1` halving obstruction, while `GRSelectedNonFlatMetricInstance` now also
+has a symbolic QQ undoubled-Christoffel lift with a checked total half adapter.
+Ricci/scalar/Einstein zero-table arithmetic is factored through named finite-r
+zero/contraction helpers and downstream readiness receipts.
+`GRConcreteLeviCivita` now carries direct selected finite-r Levi-Civita handoff
+projections that locally discharge the carrier-connection blocker without
+promoting continuum Schwarzschild GR. `ContinuumLimitTheorem` has symbolic
+finite derivative, inverse-metric C0, Christoffel-C0 extraction surfaces, and a
+kernel-parametric constructor for the symbolic rational
+`FiniteCarrierChristoffelC0FromDerivativeLaw`; the remaining analytic kernel is
+the real Christoffel C0 stability/extraction law, not the finite derivative
+plumbing. `SchwarzschildLimitCandidate` records the exact `r_s = 2, r = 3`
+doubled and undoubled Christoffel point tables, radial `∂_r Γ` table including
+the zero `Γ^r_tt` derivative, inverse-metric radial derivative signs, and the
+bounded weak-field shell adapter. `GRProofArchitectureAggregationTest` checks
+the current imports and aggregates the selected Levi-Civita, inverse-metric
+C0/derivative, Ricci-readiness, and machine-checked constant surfaces. Full
+contracted Bianchi promotion, continuum Ricci convergence, Schwarzschild
+vacuum/Birkhoff, W4/Candidate256, Clay, and terminal promotion remain false.
 The finite Base369 algebra pass adds an internal scalar/ring layer:
 `DASHI.Foundations.Base369RingShape`,
 `DASHI.Foundations.Base369Nat`,

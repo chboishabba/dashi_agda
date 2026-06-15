@@ -6,6 +6,31 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane GR analytic-handoff tranche for `2026-06-15`: adds direct selected
+  finite-r Levi-Civita handoff projections, finite inverse-metric C0 and
+  derivative-sign handoff projections, exact Ricci-readiness target-name and
+  zero-table projections, a kernel-parametric symbolic rational
+  `FiniteCarrierChristoffelC0FromDerivativeLaw` constructor, and exact
+  Schwarzschild `r_s = 2, r = 3` undoubled-Christoffel, radial `∂_r Γ`, and
+  inverse-metric radial derivative tables. `GRProofArchitectureAggregationTest`
+  now aggregates these selected Levi-Civita, inverse-metric, Ricci-readiness,
+  and machine-checked constant surfaces. The remaining continuum blocker is
+  the actual Christoffel C0 stability/extraction kernel; continuum Ricci
+  convergence, Schwarzschild vacuum/Birkhoff, W4/Candidate256, Clay, and
+  terminal promotions remain false.
+
+- Six-lane GR QQ/Schwarzschild proof-term tranche for `2026-06-15`: upgrades
+  the selected Christoffel lane from a finite-r-only odd-half obstruction to a
+  checked symbolic QQ lift with total half/undoubling, adds inverse-metric C0
+  and finite derivative consistency receipts, adds a selected finite-r
+  Levi-Civita adapter that locally discharges the carrier-connection blocker,
+  strengthens Ricci/Bianchi downstream readiness, records the exact
+  `r_s = 2, r = 3` doubled-Christoffel point table, and extends the continuum
+  derivative-to-Christoffel-C0 extraction surface. The finite-r obstruction is
+  preserved as a boundary receipt. Full contracted Bianchi promotion,
+  continuum Ricci convergence, Schwarzschild vacuum/Birkhoff, W4/Candidate256,
+  Clay, and terminal promotions remain false.
+
 - Six-lane surreal compactification proof-term tranche for `2026-06-15`: adds
   `DASHI.Foundations.SurrealCompactificationQQCarrier`,
   `DASHI.Foundations.SurrealCompactificationBalancedTernaryEmbedding`, and
