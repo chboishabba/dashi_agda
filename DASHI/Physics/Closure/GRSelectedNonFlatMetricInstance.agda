@@ -283,6 +283,651 @@ selectedFiniteContractShape :
   NF.grFiniteRScalarAdd (f selectedTime) (f selectedRadial)
 selectedFiniteContractShape f = refl
 
+------------------------------------------------------------------------
+-- QQ/symbolic-half selected doubled-Christoffel lift.
+--
+-- The finite-r scalar lane above intentionally keeps odd halves unavailable.
+-- This local carrier records the selected Christoffel numerator over a
+-- symbolic rational surface where multiplication by 1/2 is total and
+-- definitional enough for 2 * (q * 1/2) = q.
+
+data GRSelectedQQScalar : Set where
+  qq0 qqHalf qqThird qq1 qq2 qq3 qq6 :
+    GRSelectedQQScalar
+
+  qqHalfProduct :
+    GRSelectedQQScalar →
+    GRSelectedQQScalar
+
+  qqAddNode qqSubNode qqMulNode :
+    GRSelectedQQScalar →
+    GRSelectedQQScalar →
+    GRSelectedQQScalar
+
+qqAdd :
+  GRSelectedQQScalar →
+  GRSelectedQQScalar →
+  GRSelectedQQScalar
+qqAdd qq0 y = y
+qqAdd x qq0 = x
+qqAdd qq1 qq1 = qq2
+qqAdd qq3 qq3 = qq6
+qqAdd x y = qqAddNode x y
+
+qqSub :
+  GRSelectedQQScalar →
+  GRSelectedQQScalar →
+  GRSelectedQQScalar
+qqSub x qq0 = x
+qqSub qq1 qq1 = qq0
+qqSub qq2 qq1 = qq1
+qqSub qq6 qq3 = qq3
+qqSub x y = qqSubNode x y
+
+qqMul :
+  GRSelectedQQScalar →
+  GRSelectedQQScalar →
+  GRSelectedQQScalar
+qqMul qq0 _ = qq0
+qqMul qq1 y = y
+qqMul x qq0 = qq0
+qqMul qqThird qq3 = qq1
+qqMul qq2 qqHalf = qq1
+qqMul qq2 qq1 = qq2
+qqMul qq2 (qqHalfProduct q) = q
+qqMul qq3 qqThird = qq1
+qqMul x qqHalf = qqHalfProduct x
+qqMul x y = qqMulNode x y
+
+qqSumFin4 :
+  GRSelectedQQScalar →
+  GRSelectedQQScalar →
+  GRSelectedQQScalar →
+  GRSelectedQQScalar →
+  GRSelectedQQScalar
+qqSumFin4 a b c d =
+  qqAdd (qqAdd (qqAdd a b) c) d
+
+qqHalfTotal :
+  GRSelectedQQScalar →
+  NF.GRDiscretePartial GRSelectedQQScalar
+qqHalfTotal q =
+  NF.available (qqMul q qqHalf)
+
+qqAdditiveIdentity :
+  (q : GRSelectedQQScalar) →
+  qqAdd qq0 q ≡ q
+qqAdditiveIdentity _ = refl
+
+qqMultiplicativeIdentity :
+  (q : GRSelectedQQScalar) →
+  qqMul qq1 q ≡ q
+qqMultiplicativeIdentity _ = refl
+
+undoublingLemma :
+  (q : GRSelectedQQScalar) →
+  qqMul qq2 (qqMul q qqHalf) ≡ q
+undoublingLemma qq0 = refl
+undoublingLemma qqHalf = refl
+undoublingLemma qqThird = refl
+undoublingLemma qq1 = refl
+undoublingLemma qq2 = refl
+undoublingLemma qq3 = refl
+undoublingLemma qq6 = refl
+undoublingLemma (qqHalfProduct q) = refl
+undoublingLemma (qqAddNode q q') = refl
+undoublingLemma (qqSubNode q q') = refl
+undoublingLemma (qqMulNode q q') = refl
+
+canonicalGRQQCarrierScalarOperations :
+  NF.GRCarrierScalarOperations
+canonicalGRQQCarrierScalarOperations =
+  record
+    { CarrierScalar =
+        GRSelectedQQScalar
+    ; zeroScalar =
+        qq0
+    ; oneScalar =
+        qq1
+    ; twoScalar =
+        qq2
+    ; _+_ =
+        qqAdd
+    ; _-_ =
+        qqSub
+    ; _*_ =
+        qqMul
+    ; sumFin4 =
+        qqSumFin4
+    ; discretePartial =
+        NF.GRDiscretePartial
+    ; half =
+        qqHalfTotal
+    ; additiveIdentityLaw =
+        qqAdditiveIdentity
+    ; multiplicativeIdentityLaw =
+        qqMultiplicativeIdentity
+    ; scalarBoundary =
+        "Symbolic QQ scalar carrier for selected Christoffel undoubling"
+        ∷ "qqHalf is total and returns q * 1/2 as a symbolic product"
+        ∷ "undoublingLemma proves 2 * (q * 1/2) = q by table reduction for every symbolic QQ scalar"
+        ∷ []
+    }
+
+finiteRScalarToQQ :
+  NF.GRFiniteRScalar →
+  GRSelectedQQScalar
+finiteRScalarToQQ NF.r0 = qq0
+finiteRScalarToQQ NF.r1 = qq1
+finiteRScalarToQQ NF.r2 = qq2
+finiteRScalarToQQ NF.r3 = qq3
+
+qqSelectedMetricComponent :
+  GRSelectedMetricCarrier →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedQQScalar
+qqSelectedMetricComponent metric mu nu =
+  finiteRScalarToQQ (selectedMetricComponent metric mu nu)
+
+qqSelectedInverseMetricComponent :
+  GRSelectedMetricCarrier →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedQQScalar
+qqSelectedInverseMetricComponent selectedBase1 selectedRadial selectedRadial =
+  qqThird
+qqSelectedInverseMetricComponent metric mu nu =
+  finiteRScalarToQQ (selectedInverseMetricComponent metric mu nu)
+
+qqSelectedInverseMetricComponentBase1RadialRadialIsThird :
+  qqSelectedInverseMetricComponent selectedBase1 selectedRadial selectedRadial
+  ≡
+  qqThird
+qqSelectedInverseMetricComponentBase1RadialRadialIsThird =
+  refl
+
+qqSelectedCoordinateDerivativeOfMetric :
+  GRSelectedMetricCarrier →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedQQScalar
+qqSelectedCoordinateDerivativeOfMetric metric lambda mu nu =
+  finiteRScalarToQQ
+    (selectedCoordinateDerivativeOfMetric metric lambda mu nu)
+
+qqSelectedFiniteContract :
+  (GRSelectedCoordinateIndex → GRSelectedQQScalar) →
+  GRSelectedQQScalar
+qqSelectedFiniteContract f =
+  qqAdd (f selectedTime) (f selectedRadial)
+
+twoGammaTable :
+  GRSelectedFiniteRBase →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedQQScalar
+twoGammaTable base lambda mu nu =
+  qqSelectedFiniteContract
+    (λ sigma →
+      qqMul
+        (qqSelectedInverseMetricComponent
+          (selectedMetricAt base)
+          lambda
+          sigma)
+        (qqSub
+          (qqAdd
+            (qqSelectedCoordinateDerivativeOfMetric
+              (selectedMetricAt base)
+              mu
+              nu
+              sigma)
+            (qqSelectedCoordinateDerivativeOfMetric
+              (selectedMetricAt base)
+              nu
+              mu
+              sigma))
+          (qqSelectedCoordinateDerivativeOfMetric
+            (selectedMetricAt base)
+            sigma
+            mu
+            nu)))
+
+qqUndoubledChristoffel :
+  GRSelectedFiniteRBase →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedQQScalar
+qqUndoubledChristoffel base lambda mu nu =
+  qqMul (twoGammaTable base lambda mu nu) qqHalf
+
+twoGammaTableAtInspectedSlotIsQQ1 :
+  twoGammaTable
+    selectedBase0
+    selectedRadial
+    selectedRadial
+    selectedRadial
+  ≡
+  qq1
+twoGammaTableAtInspectedSlotIsQQ1 =
+  refl
+
+twoGammaTableAtBase1RadialSlotIsQQ1 :
+  twoGammaTable
+    selectedBase1
+    selectedRadial
+    selectedRadial
+    selectedRadial
+  ≡
+  qq1
+twoGammaTableAtBase1RadialSlotIsQQ1 =
+  refl
+
+suppliedTwoGammaTable :
+  GRSelectedFiniteRBase →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedQQScalar
+suppliedTwoGammaTable selectedBase0 selectedRadial selectedRadial selectedRadial =
+  qq1
+suppliedTwoGammaTable selectedBase1 selectedRadial selectedRadial selectedRadial =
+  qq1
+suppliedTwoGammaTable _ _ _ _ =
+  qq0
+
+twoGammaTableMatchesSupplied :
+  (base : GRSelectedFiniteRBase) →
+  (lambda mu nu : GRSelectedCoordinateIndex) →
+  twoGammaTable base lambda mu nu
+  ≡
+  suppliedTwoGammaTable base lambda mu nu
+twoGammaTableMatchesSupplied selectedBase0 selectedTime selectedTime selectedTime = refl
+twoGammaTableMatchesSupplied selectedBase0 selectedTime selectedTime selectedRadial = refl
+twoGammaTableMatchesSupplied selectedBase0 selectedTime selectedRadial selectedTime = refl
+twoGammaTableMatchesSupplied selectedBase0 selectedTime selectedRadial selectedRadial = refl
+twoGammaTableMatchesSupplied selectedBase0 selectedRadial selectedTime selectedTime = refl
+twoGammaTableMatchesSupplied selectedBase0 selectedRadial selectedTime selectedRadial = refl
+twoGammaTableMatchesSupplied selectedBase0 selectedRadial selectedRadial selectedTime = refl
+twoGammaTableMatchesSupplied selectedBase0 selectedRadial selectedRadial selectedRadial = refl
+twoGammaTableMatchesSupplied selectedBase1 selectedTime selectedTime selectedTime = refl
+twoGammaTableMatchesSupplied selectedBase1 selectedTime selectedTime selectedRadial = refl
+twoGammaTableMatchesSupplied selectedBase1 selectedTime selectedRadial selectedTime = refl
+twoGammaTableMatchesSupplied selectedBase1 selectedTime selectedRadial selectedRadial = refl
+twoGammaTableMatchesSupplied selectedBase1 selectedRadial selectedTime selectedTime = refl
+twoGammaTableMatchesSupplied selectedBase1 selectedRadial selectedTime selectedRadial = refl
+twoGammaTableMatchesSupplied selectedBase1 selectedRadial selectedRadial selectedTime = refl
+twoGammaTableMatchesSupplied selectedBase1 selectedRadial selectedRadial selectedRadial = refl
+
+suppliedUndoubledChristoffelTable :
+  GRSelectedFiniteRBase →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedCoordinateIndex →
+  GRSelectedQQScalar
+suppliedUndoubledChristoffelTable base lambda mu nu =
+  qqMul (suppliedTwoGammaTable base lambda mu nu) qqHalf
+
+qqUndoubledChristoffelMatchesSupplied :
+  (base : GRSelectedFiniteRBase) →
+  (lambda mu nu : GRSelectedCoordinateIndex) →
+  qqUndoubledChristoffel base lambda mu nu
+  ≡
+  suppliedUndoubledChristoffelTable base lambda mu nu
+qqUndoubledChristoffelMatchesSupplied selectedBase0 selectedTime selectedTime selectedTime = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase0 selectedTime selectedTime selectedRadial = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase0 selectedTime selectedRadial selectedTime = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase0 selectedTime selectedRadial selectedRadial = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase0 selectedRadial selectedTime selectedTime = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase0 selectedRadial selectedTime selectedRadial = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase0 selectedRadial selectedRadial selectedTime = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase0 selectedRadial selectedRadial selectedRadial = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase1 selectedTime selectedTime selectedTime = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase1 selectedTime selectedTime selectedRadial = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase1 selectedTime selectedRadial selectedTime = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase1 selectedTime selectedRadial selectedRadial = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase1 selectedRadial selectedTime selectedTime = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase1 selectedRadial selectedTime selectedRadial = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase1 selectedRadial selectedRadial selectedTime = refl
+qqUndoubledChristoffelMatchesSupplied selectedBase1 selectedRadial selectedRadial selectedRadial = refl
+
+qqUndoubledChristoffelAtInspectedSlotIsHalf :
+  qqUndoubledChristoffel
+    selectedBase0
+    selectedRadial
+    selectedRadial
+    selectedRadial
+  ≡
+  qqHalf
+qqUndoubledChristoffelAtInspectedSlotIsHalf =
+  refl
+
+qqUndoubledChristoffelAtBase1RadialSlotIsHalf :
+  qqUndoubledChristoffel
+    selectedBase1
+    selectedRadial
+    selectedRadial
+    selectedRadial
+  ≡
+  qqHalf
+qqUndoubledChristoffelAtBase1RadialSlotIsHalf =
+  refl
+
+record GRSelectedUndoubledChristoffelLift : Setω where
+  field
+    scalarOperations :
+      NF.GRCarrierScalarOperations
+
+    doubledChristoffel :
+      GRSelectedFiniteRBase →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedQQScalar
+
+    undoubledChristoffel :
+      GRSelectedFiniteRBase →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedQQScalar
+
+    doublesToDoubledChristoffel :
+      (base : GRSelectedFiniteRBase) →
+      (lambda mu nu : GRSelectedCoordinateIndex) →
+      qqMul qq2 (undoubledChristoffel base lambda mu nu)
+      ≡
+      doubledChristoffel base lambda mu nu
+
+    suppliedDoubledChristoffel :
+      GRSelectedFiniteRBase →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedQQScalar
+
+    doubledChristoffelMatchesSupplied :
+      (base : GRSelectedFiniteRBase) →
+      (lambda mu nu : GRSelectedCoordinateIndex) →
+      doubledChristoffel base lambda mu nu
+      ≡
+      suppliedDoubledChristoffel base lambda mu nu
+
+    suppliedUndoubledChristoffel :
+      GRSelectedFiniteRBase →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedQQScalar
+
+    undoubledChristoffelMatchesSupplied :
+      (base : GRSelectedFiniteRBase) →
+      (lambda mu nu : GRSelectedCoordinateIndex) →
+      undoubledChristoffel base lambda mu nu
+      ≡
+      suppliedUndoubledChristoffel base lambda mu nu
+
+    inspectedOddSlotDoublesFromQQHalf :
+      qqMul
+        qq2
+        (undoubledChristoffel
+          selectedBase0
+          selectedRadial
+          selectedRadial
+          selectedRadial)
+      ≡
+      qq1
+
+    liftBoundary :
+      List String
+
+constructQQLift :
+  GRSelectedUndoubledChristoffelLift
+constructQQLift =
+  record
+    { scalarOperations =
+        canonicalGRQQCarrierScalarOperations
+    ; doubledChristoffel =
+        twoGammaTable
+    ; undoubledChristoffel =
+        qqUndoubledChristoffel
+    ; doublesToDoubledChristoffel =
+        λ base lambda mu nu → undoublingLemma (twoGammaTable base lambda mu nu)
+    ; suppliedDoubledChristoffel =
+        suppliedTwoGammaTable
+    ; doubledChristoffelMatchesSupplied =
+        twoGammaTableMatchesSupplied
+    ; suppliedUndoubledChristoffel =
+        suppliedUndoubledChristoffelTable
+    ; undoubledChristoffelMatchesSupplied =
+        qqUndoubledChristoffelMatchesSupplied
+    ; inspectedOddSlotDoublesFromQQHalf =
+        refl
+    ; liftBoundary =
+        "The selected doubled-Christoffel table is evaluated over symbolic QQ scalars"
+        ∷ "The old finite-r odd slot is no longer impossible: undoubled Gamma at selectedBase0/radial/radial/radial is qqHalf"
+        ∷ "The base1 radial/radial/radial slot also undoubles to qqHalf by adapting the supplied inverse-metric r3 slot to qqThird"
+        ∷ "suppliedTwoGammaTable records exactly the two nonzero doubled radial slots, and twoGammaTableMatchesSupplied checks all selected slots"
+        ∷ "doublesToDoubledChristoffel is exactly undoublingLemma applied pointwise to twoGammaTable"
+        ∷ []
+    }
+
+constructQQLiftInspectedSlot :
+  GRSelectedUndoubledChristoffelLift.inspectedOddSlotDoublesFromQQHalf
+    constructQQLift
+  ≡
+  refl
+constructQQLiftInspectedSlot =
+  refl
+
+data GRSelectedQQKnownNonzero :
+  GRSelectedQQScalar →
+  Set where
+  selectedQQHalfNonzero :
+    GRSelectedQQKnownNonzero qqHalf
+
+  selectedQQThirdNonzero :
+    GRSelectedQQKnownNonzero qqThird
+
+  selectedQQOneNonzero :
+    GRSelectedQQKnownNonzero qq1
+
+record GRSelectedQQConnectionSurface : Setω where
+  field
+    scalarOperations :
+      NF.GRCarrierScalarOperations
+
+    selectedConnectionChristoffel :
+      GRSelectedFiniteRBase →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedQQScalar
+
+    suppliedSelectedConnectionChristoffel :
+      GRSelectedFiniteRBase →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedCoordinateIndex →
+      GRSelectedQQScalar
+
+    selectedConnectionMatchesSupplied :
+      (base : GRSelectedFiniteRBase) →
+      (lambda mu nu : GRSelectedCoordinateIndex) →
+      selectedConnectionChristoffel base lambda mu nu
+      ≡
+      suppliedSelectedConnectionChristoffel base lambda mu nu
+
+    inspectedHalfAdapterSlotLaw :
+      selectedConnectionChristoffel
+        selectedBase1
+        selectedRadial
+        selectedRadial
+        selectedRadial
+      ≡
+      qqHalf
+
+    inspectedHalfAdapterNonzero :
+      GRSelectedQQKnownNonzero
+        (selectedConnectionChristoffel
+          selectedBase1
+          selectedRadial
+          selectedRadial
+          selectedRadial)
+
+    inspectedHalfAdapterDoublesToSupplied :
+      qqMul
+        qq2
+        (selectedConnectionChristoffel
+          selectedBase1
+          selectedRadial
+          selectedRadial
+          selectedRadial)
+      ≡
+      suppliedTwoGammaTable
+        selectedBase1
+        selectedRadial
+        selectedRadial
+        selectedRadial
+
+    connectionBoundary :
+      List String
+
+canonicalGRSelectedQQConnectionSurface :
+  GRSelectedQQConnectionSurface
+canonicalGRSelectedQQConnectionSurface =
+  record
+    { scalarOperations =
+        canonicalGRQQCarrierScalarOperations
+    ; selectedConnectionChristoffel =
+        qqUndoubledChristoffel
+    ; suppliedSelectedConnectionChristoffel =
+        suppliedUndoubledChristoffelTable
+    ; selectedConnectionMatchesSupplied =
+        qqUndoubledChristoffelMatchesSupplied
+    ; inspectedHalfAdapterSlotLaw =
+        qqUndoubledChristoffelAtBase1RadialSlotIsHalf
+    ; inspectedHalfAdapterNonzero =
+        selectedQQHalfNonzero
+    ; inspectedHalfAdapterDoublesToSupplied =
+        refl
+    ; connectionBoundary =
+        "Selected rational connection surface: Christoffel symbols are the QQ-undoubled metric-derived table"
+        ∷ "The supplied selected connection is suppliedUndoubledChristoffelTable, and the exact match law is qqUndoubledChristoffelMatchesSupplied"
+        ∷ "For the current selected metric tables, the inspected nonzero law is the half-adapter slot Gamma(radial,radial,radial)=qqHalf at selectedBase1"
+        ∷ "This deliberately stays separate from selectedChristoffelSymbol, whose finite-r placeholder remains unchanged"
+        ∷ []
+    }
+
+selectedQQConnectionInspectedHalfAdapterSlotLaw :
+  GRSelectedQQConnectionSurface.selectedConnectionChristoffel
+    canonicalGRSelectedQQConnectionSurface
+    selectedBase1
+    selectedRadial
+    selectedRadial
+    selectedRadial
+  ≡
+  qqHalf
+selectedQQConnectionInspectedHalfAdapterSlotLaw =
+  refl
+
+selectedQQConnectionInspectedHalfAdapterNonzero :
+  GRSelectedQQKnownNonzero
+    (GRSelectedQQConnectionSurface.selectedConnectionChristoffel
+      canonicalGRSelectedQQConnectionSurface
+      selectedBase1
+      selectedRadial
+      selectedRadial
+      selectedRadial)
+selectedQQConnectionInspectedHalfAdapterNonzero =
+  selectedQQHalfNonzero
+
+selectedQQConnectionInspectedHalfAdapterDoublesToSupplied :
+  qqMul
+    qq2
+    (GRSelectedQQConnectionSurface.selectedConnectionChristoffel
+      canonicalGRSelectedQQConnectionSurface
+      selectedBase1
+      selectedRadial
+      selectedRadial
+      selectedRadial)
+  ≡
+  suppliedTwoGammaTable
+    selectedBase1
+    selectedRadial
+    selectedRadial
+    selectedRadial
+selectedQQConnectionInspectedHalfAdapterDoublesToSupplied =
+  refl
+
+record GRSelectedQQUndoubledSuppliedNonzeroConnectionAdapter : Setω where
+  field
+    selectedQQConnectionSurface :
+      GRSelectedQQConnectionSurface
+
+    selectedQQConnectionSurfaceIsCanonical :
+      selectedQQConnectionSurface
+      ≡
+      canonicalGRSelectedQQConnectionSurface
+
+    suppliedMatchLaw :
+      (base : GRSelectedFiniteRBase) →
+      (lambda mu nu : GRSelectedCoordinateIndex) →
+      qqUndoubledChristoffel base lambda mu nu
+      ≡
+      suppliedUndoubledChristoffelTable base lambda mu nu
+
+    suppliedMatchLawIsQQRoute :
+      suppliedMatchLaw
+      ≡
+      qqUndoubledChristoffelMatchesSupplied
+
+    nonzeroConnectionSlotLaw :
+      qqUndoubledChristoffel
+        selectedBase1
+        selectedRadial
+        selectedRadial
+        selectedRadial
+      ≡
+      qqHalf
+
+    nonzeroConnectionSlotWitness :
+      GRSelectedQQKnownNonzero
+        (qqUndoubledChristoffel
+          selectedBase1
+          selectedRadial
+          selectedRadial
+          selectedRadial)
+
+    adapterBoundary :
+      List String
+
+canonicalGRSelectedQQUndoubledSuppliedNonzeroConnectionAdapter :
+  GRSelectedQQUndoubledSuppliedNonzeroConnectionAdapter
+canonicalGRSelectedQQUndoubledSuppliedNonzeroConnectionAdapter =
+  record
+    { selectedQQConnectionSurface =
+        canonicalGRSelectedQQConnectionSurface
+    ; selectedQQConnectionSurfaceIsCanonical =
+        refl
+    ; suppliedMatchLaw =
+        qqUndoubledChristoffelMatchesSupplied
+    ; suppliedMatchLawIsQQRoute =
+        refl
+    ; nonzeroConnectionSlotLaw =
+        selectedQQConnectionInspectedHalfAdapterSlotLaw
+    ; nonzeroConnectionSlotWitness =
+        selectedQQHalfNonzero
+    ; adapterBoundary =
+        "Adapter tying the supplied QQ selected connection match directly to qqUndoubledChristoffelMatchesSupplied"
+        ∷ "The selected connection is nonzero at selectedBase1/radial/radial/radial by the exact qqHalf slot law"
+        ∷ "This is the rational half-adapter path for the current metric tables; no finite-r half or r0==r1 collapse is introduced"
+        ∷ []
+    }
+
 selectedMetricCompatibilityObligation :
   GRSelectedFiniteRBase →
   GRSelectedCoordinateIndex →
