@@ -149,25 +149,32 @@ Current GR proof-architecture intake note for `2026-06-15`:
   readiness receipts. This advances local finite arithmetic only; sourced
   Einstein, full contracted-Bianchi promotion, and continuum Ricci convergence
   remain blocked.
-- `GRConcreteLeviCivita` now has a selected finite-r Levi-Civita adapter that
-  locally discharges `missingCarrierConnectionIsLeviCivita` for the checked
-  zero-table carrier, plus direct handoff projections for torsion-free,
-  metric-compatibility, and Christoffel-form consumption. The next honest
-  blockers are curvature-to-Ricci/Einstein promotion and external continuum
-  authority, not terminal GR promotion.
+- `GRConcreteLeviCivita` now has a selected finite-r Levi-Civita adapter and a
+  selected Schwarzschild Levi-Civita/Koszul handoff. Together they locally
+  expose torsion-free, metric-compatibility, and Christoffel-form law shapes
+  while keeping the remaining analytic blocker at the Christoffel C0 stability
+  kernel rather than claiming continuum Schwarzschild promotion.
 - Continuum convergence now has symbolic finite metric derivative,
-  inverse-metric C0, finite-to-continuum partial-control, and Christoffel-C0
-  extraction surfaces. The symbolic rational finite-carrier derivative-law
-  constructor now closes all finite plumbing from a supplied
-  `SymbolicRationalChristoffelC0StabilityKernel`. A genuine ordered rational
-  Lipschitz/analytic Christoffel C0 estimate remains the exact input before
-  continuum Ricci convergence can promote.
+  inverse-metric C0, finite-to-continuum partial-control, Christoffel-C0
+  extraction surfaces, and a selected-pair symbolic rational handoff. The
+  finite-carrier derivative-law constructor closes all finite plumbing from a
+  supplied `SymbolicRationalChristoffelC0StabilityKernel`; the checked selected
+  primitive only gives diagonal selected-pair equality, now recast through a
+  selected zero-epsilon quantitative connection/Ricci error-bound receipt. A
+  genuine ordered rational Lipschitz/analytic Christoffel C0 estimate remains
+  the exact input before continuum Ricci convergence can promote.
 - Schwarzschild now has the exact `r_s = 2, r = 3` doubled-Christoffel point
-  table, undoubled Christoffel table, radial `∂_r Γ` table, inverse-metric
-  radial derivative table, and the bounded rational-shell weak-field
-  linear-lapse adapter. Full Schwarzschild metric match, Birkhoff/vacuum proof,
-  W4 mass source, precision-gravity promotion, and Clay/terminal claims remain
-  open.
+  table, undoubled Christoffel table, radial `∂_r Γ` table, shell supremum
+  receipts recording tight `C_Gamma = 1`, shell `5/3` text, conservative
+  `C_Gamma <= 2`, formula-stability `11/9` versus repo `48`, and Ricci
+  contraction `1280/27` rounded to point-shell `48` while preserving
+  conservative `640`; it also records non-degenerate Shell A `[3,4]` constants
+  `C_Gamma = 1`, `C'_Gamma = 26/27`, `L_Gamma = 72`, `C_R = 80`, and Shell B
+  `[5/2,7/2]` constants `C_Gamma = 48/25`, `C'_Gamma = 992/125`,
+  `L_Gamma = 112`, `C_R = 220`. The Ricci route now explicitly marks `48` as
+  point-shell-only and routes interval shells through `80`/`220`. Full
+  Schwarzschild metric match, Birkhoff/vacuum proof, W4 mass source,
+  precision-gravity promotion, and Clay/terminal claims remain open.
 
 ## YM Exact Intake Targets
 

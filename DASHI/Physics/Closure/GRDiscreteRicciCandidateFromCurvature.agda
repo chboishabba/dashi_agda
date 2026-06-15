@@ -2365,6 +2365,586 @@ grSchwarzschildFiniteCarrierRicciBianchiConsumersType =
 -- exports the checked zero-table arithmetic as named inputs while keeping
 -- convergence, contracted Bianchi, sourced Einstein, and GR promotion closed.
 
+grDiscreteRicciSharpCRNumerator1280 : Nat
+grDiscreteRicciSharpCRNumerator1280 =
+  1280
+
+grDiscreteRicciSharpCRDenominator27 : Nat
+grDiscreteRicciSharpCRDenominator27 =
+  27
+
+grDiscreteRicciContinuityRoundedConstant48 : Nat
+grDiscreteRicciContinuityRoundedConstant48 =
+  48
+
+grDiscreteRicciShellASafeIntervalConstant80 : Nat
+grDiscreteRicciShellASafeIntervalConstant80 =
+  80
+
+grDiscreteRicciShellBSafeIntervalConstant220 : Nat
+grDiscreteRicciShellBSafeIntervalConstant220 =
+  220
+
+grDiscreteRicciExistingConservativeConstant640 : Nat
+grDiscreteRicciExistingConservativeConstant640 =
+  640
+
+grDiscreteRicciOptionalTightRicciNumerator112 : Nat
+grDiscreteRicciOptionalTightRicciNumerator112 =
+  112
+
+data GRDiscreteRicciInequalityPrimitiveRouteShape : Set where
+  grDiscreteRicciInequalityPrimitiveRouteNatCeilingSafeInterval :
+    GRDiscreteRicciInequalityPrimitiveRouteShape
+
+record GRDiscreteRicciContractionContinuityConstantReceipt : Set where
+  field
+    sharpCRCalculationText :
+      String
+
+    sharpCRCalculationTextIs1280Over27 :
+      sharpCRCalculationText
+      ≡
+      "C_R = 1280/27"
+
+    sharpCRNumerator :
+      Nat
+
+    sharpCRNumeratorIs1280 :
+      sharpCRNumerator
+      ≡
+      1280
+
+    sharpCRDenominator :
+      Nat
+
+    sharpCRDenominatorIs27 :
+      sharpCRDenominator
+      ≡
+      27
+
+    ricciContractionContinuityConstant :
+      Nat
+
+    ricciContractionContinuityConstantIs48 :
+      ricciContractionContinuityConstant
+      ≡
+      48
+
+    pointShellRicciContinuityConstant :
+      Nat
+
+    pointShellRicciContinuityConstantIs48 :
+      pointShellRicciContinuityConstant
+      ≡
+      48
+
+    pointShell48Only :
+      Bool
+
+    pointShell48OnlyIsTrue :
+      pointShell48Only
+      ≡
+      true
+
+    roundedConstantText :
+      String
+
+    roundedConstantTextIs48 :
+      roundedConstantText
+      ≡
+      "point shell only: ceil(1280/27) = 48"
+
+    shellASafeIntervalRicciContinuityConstant :
+      Nat
+
+    shellASafeIntervalRicciContinuityConstantIs80 :
+      shellASafeIntervalRicciContinuityConstant
+      ≡
+      80
+
+    shellBSafeIntervalRicciContinuityConstant :
+      Nat
+
+    shellBSafeIntervalRicciContinuityConstantIs220 :
+      shellBSafeIntervalRicciContinuityConstant
+      ≡
+      220
+
+    intervalShellsUseSafeConstants :
+      Bool
+
+    intervalShellsUseSafeConstantsIsTrue :
+      intervalShellsUseSafeConstants
+      ≡
+      true
+
+    intervalShellsDoNotUsePoint48 :
+      Bool
+
+    intervalShellsDoNotUsePoint48IsTrue :
+      intervalShellsDoNotUsePoint48
+      ≡
+      true
+
+    intervalShellRoutingText :
+      String
+
+    intervalShellRoutingTextIsCanonical :
+      intervalShellRoutingText
+      ≡
+      "interval shells route through Shell A safe 80 and Shell B safe 220, not point shell 48"
+
+    existingConservativeRicciConstant :
+      Nat
+
+    existingConservativeRicciConstantIs640 :
+      existingConservativeRicciConstant
+      ≡
+      640
+
+    existingConservative640RemainsValid :
+      Bool
+
+    existingConservative640RemainsValidIsTrue :
+      existingConservative640RemainsValid
+      ≡
+      true
+
+    pointCRConstant :
+      Nat
+
+    pointCRConstantIs48 :
+      pointCRConstant
+      ≡
+      48
+
+    shellACRConstant :
+      Nat
+
+    shellACRConstantIs80 :
+      shellACRConstant
+      ≡
+      80
+
+    conservativeCRExtractionConstant :
+      Nat
+
+    conservativeCRExtractionConstantIs640 :
+      conservativeCRExtractionConstant
+      ≡
+      640
+
+    optionalTightRicciNumerator :
+      Nat
+
+    optionalTightRicciNumeratorIs112 :
+      optionalTightRicciNumerator
+      ≡
+      112
+
+    optionalTightRicciNumeratorUsedAsPromotion :
+      Bool
+
+    optionalTightRicciNumeratorUsedAsPromotionIsFalse :
+      optionalTightRicciNumeratorUsedAsPromotion
+      ≡
+      false
+
+    inequalityPrimitiveRouteShape :
+      GRDiscreteRicciInequalityPrimitiveRouteShape
+
+    inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval :
+      inequalityPrimitiveRouteShape
+      ≡
+      grDiscreteRicciInequalityPrimitiveRouteNatCeilingSafeInterval
+
+    inequalityPrimitiveRouteText :
+      String
+
+    inequalityPrimitiveRouteTextIsCanonical :
+      inequalityPrimitiveRouteText
+      ≡
+      "primitive route: C_R=1280/27 via Nat ceiling to point C_R=48; interval extraction uses Shell A C_R=80; conservative downstream uses 640; optional tight Schwarzschild numerator 112 stays local"
+
+    constantPromotedAsRicciConvergence :
+      Bool
+
+    constantPromotedAsRicciConvergenceIsFalse :
+      constantPromotedAsRicciConvergence
+      ≡
+      false
+
+    constantBoundary :
+      List String
+
+canonicalGRDiscreteRicciContractionContinuityConstantReceipt :
+  GRDiscreteRicciContractionContinuityConstantReceipt
+canonicalGRDiscreteRicciContractionContinuityConstantReceipt =
+  record
+    { sharpCRCalculationText =
+        "C_R = 1280/27"
+    ; sharpCRCalculationTextIs1280Over27 =
+        refl
+    ; sharpCRNumerator =
+        grDiscreteRicciSharpCRNumerator1280
+    ; sharpCRNumeratorIs1280 =
+        refl
+    ; sharpCRDenominator =
+        grDiscreteRicciSharpCRDenominator27
+    ; sharpCRDenominatorIs27 =
+        refl
+    ; ricciContractionContinuityConstant =
+        grDiscreteRicciContinuityRoundedConstant48
+    ; ricciContractionContinuityConstantIs48 =
+        refl
+    ; pointShellRicciContinuityConstant =
+        grDiscreteRicciContinuityRoundedConstant48
+    ; pointShellRicciContinuityConstantIs48 =
+        refl
+    ; pointShell48Only =
+        true
+    ; pointShell48OnlyIsTrue =
+        refl
+    ; roundedConstantText =
+        "point shell only: ceil(1280/27) = 48"
+    ; roundedConstantTextIs48 =
+        refl
+    ; shellASafeIntervalRicciContinuityConstant =
+        grDiscreteRicciShellASafeIntervalConstant80
+    ; shellASafeIntervalRicciContinuityConstantIs80 =
+        refl
+    ; shellBSafeIntervalRicciContinuityConstant =
+        grDiscreteRicciShellBSafeIntervalConstant220
+    ; shellBSafeIntervalRicciContinuityConstantIs220 =
+        refl
+    ; intervalShellsUseSafeConstants =
+        true
+    ; intervalShellsUseSafeConstantsIsTrue =
+        refl
+    ; intervalShellsDoNotUsePoint48 =
+        true
+    ; intervalShellsDoNotUsePoint48IsTrue =
+        refl
+    ; intervalShellRoutingText =
+        "interval shells route through Shell A safe 80 and Shell B safe 220, not point shell 48"
+    ; intervalShellRoutingTextIsCanonical =
+        refl
+    ; existingConservativeRicciConstant =
+        grDiscreteRicciExistingConservativeConstant640
+    ; existingConservativeRicciConstantIs640 =
+        refl
+    ; existingConservative640RemainsValid =
+        true
+    ; existingConservative640RemainsValidIsTrue =
+        refl
+    ; pointCRConstant =
+        grDiscreteRicciContinuityRoundedConstant48
+    ; pointCRConstantIs48 =
+        refl
+    ; shellACRConstant =
+        grDiscreteRicciShellASafeIntervalConstant80
+    ; shellACRConstantIs80 =
+        refl
+    ; conservativeCRExtractionConstant =
+        grDiscreteRicciExistingConservativeConstant640
+    ; conservativeCRExtractionConstantIs640 =
+        refl
+    ; optionalTightRicciNumerator =
+        grDiscreteRicciOptionalTightRicciNumerator112
+    ; optionalTightRicciNumeratorIs112 =
+        refl
+    ; optionalTightRicciNumeratorUsedAsPromotion =
+        false
+    ; optionalTightRicciNumeratorUsedAsPromotionIsFalse =
+        refl
+    ; inequalityPrimitiveRouteShape =
+        grDiscreteRicciInequalityPrimitiveRouteNatCeilingSafeInterval
+    ; inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval =
+        refl
+    ; inequalityPrimitiveRouteText =
+        "primitive route: C_R=1280/27 via Nat ceiling to point C_R=48; interval extraction uses Shell A C_R=80; conservative downstream uses 640; optional tight Schwarzschild numerator 112 stays local"
+    ; inequalityPrimitiveRouteTextIsCanonical =
+        refl
+    ; constantPromotedAsRicciConvergence =
+        false
+    ; constantPromotedAsRicciConvergenceIsFalse =
+        refl
+    ; constantBoundary =
+        "Sharp supplied Ricci contraction continuity calculation is recorded symbolically as C_R = 1280/27"
+        ∷ "The Nat-compatible rounded Ricci contraction continuity constant 48 is point-shell-only"
+        ∷ "Interval Shell A routes through the safe Ricci continuity constant 80"
+        ∷ "Interval Shell B routes through the safe Ricci continuity constant 220"
+        ∷ "The existing repository conservative Ricci extraction constant 640 remains valid and available to downstream adapters"
+        ∷ "The primitive inequality route is a Nat-ceiling and safe-interval route, not a continuum convergence proof"
+        ∷ "The optional tight Schwarzschild numerator 112 is mirrored as local arithmetic only"
+        ∷ "These constants are readiness inputs only and do not promote ricciConvergesC0"
+        ∷ []
+    }
+
+record GRDiscreteRicciExtractionReadinessDependencyReceipt : Setω where
+  field
+    finiteZeroTableArithmeticReceipt :
+      GRDiscreteRicciFiniteZeroTableArithmeticReceipt
+
+    selectedCompatibilityHandoff :
+      GRDiscreteRicciSelectedCompatibilityHandoffReceipt
+
+    continuityConstantReceipt :
+      GRDiscreteRicciContractionContinuityConstantReceipt
+
+    christoffelC0StabilityKernelDependencyName :
+      String
+
+    christoffelC0StabilityKernelDependencyNameIsCanonical :
+      christoffelC0StabilityKernelDependencyName
+      ≡
+      "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel"
+
+    selectedPairIdentityDependencyName :
+      String
+
+    selectedPairIdentityDependencyNameIsCanonical :
+      selectedPairIdentityDependencyName
+      ≡
+      "selected-pair identity for finite Ricci contraction extraction"
+
+    ricciContractionContinuityConstant :
+      Nat
+
+    ricciContractionContinuityConstantIs48 :
+      ricciContractionContinuityConstant
+      ≡
+      48
+
+    pointShellRicciContinuityConstant :
+      Nat
+
+    pointShellRicciContinuityConstantIs48 :
+      pointShellRicciContinuityConstant
+      ≡
+      48
+
+    shellASafeIntervalRicciContinuityConstant :
+      Nat
+
+    shellASafeIntervalRicciContinuityConstantIs80 :
+      shellASafeIntervalRicciContinuityConstant
+      ≡
+      80
+
+    shellBSafeIntervalRicciContinuityConstant :
+      Nat
+
+    shellBSafeIntervalRicciContinuityConstantIs220 :
+      shellBSafeIntervalRicciContinuityConstant
+      ≡
+      220
+
+    intervalShellRoutingText :
+      String
+
+    intervalShellRoutingTextIsCanonical :
+      intervalShellRoutingText
+      ≡
+      "interval shells route through Shell A safe 80 and Shell B safe 220, not point shell 48"
+
+    conservativeRicciExtractionConstant :
+      Nat
+
+    conservativeRicciExtractionConstantIs640 :
+      conservativeRicciExtractionConstant
+      ≡
+      640
+
+    pointCRConstant :
+      Nat
+
+    pointCRConstantIs48 :
+      pointCRConstant
+      ≡
+      48
+
+    shellACRConstant :
+      Nat
+
+    shellACRConstantIs80 :
+      shellACRConstant
+      ≡
+      80
+
+    conservativeCRExtractionConstant :
+      Nat
+
+    conservativeCRExtractionConstantIs640 :
+      conservativeCRExtractionConstant
+      ≡
+      640
+
+    optionalTightRicciNumerator :
+      Nat
+
+    optionalTightRicciNumeratorIs112 :
+      optionalTightRicciNumerator
+      ≡
+      112
+
+    inequalityPrimitiveRouteShape :
+      GRDiscreteRicciInequalityPrimitiveRouteShape
+
+    inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval :
+      inequalityPrimitiveRouteShape
+      ≡
+      grDiscreteRicciInequalityPrimitiveRouteNatCeilingSafeInterval
+
+    inequalityPrimitiveRouteText :
+      String
+
+    inequalityPrimitiveRouteTextIsCanonical :
+      inequalityPrimitiveRouteText
+      ≡
+      "primitive route: C_R=1280/27 via Nat ceiling to point C_R=48; interval extraction uses Shell A C_R=80; conservative downstream uses 640; optional tight Schwarzschild numerator 112 stays local"
+
+    finiteRicciZeroReady :
+      Bool
+
+    finiteRicciZeroReadyIsTrue :
+      finiteRicciZeroReady
+      ≡
+      true
+
+    christoffelC0StabilityKernelPromotedHere :
+      Bool
+
+    christoffelC0StabilityKernelPromotedHereIsFalse :
+      christoffelC0StabilityKernelPromotedHere
+      ≡
+      false
+
+    selectedPairIdentityPromotedHere :
+      Bool
+
+    selectedPairIdentityPromotedHereIsFalse :
+      selectedPairIdentityPromotedHere
+      ≡
+      false
+
+    extractionReadinessBoundary :
+      List String
+
+canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt
+canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt =
+  record
+    { finiteZeroTableArithmeticReceipt =
+        canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt
+    ; selectedCompatibilityHandoff =
+        canonicalGRDiscreteRicciSelectedCompatibilityHandoffReceipt
+    ; continuityConstantReceipt =
+        canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; christoffelC0StabilityKernelDependencyName =
+        "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel"
+    ; christoffelC0StabilityKernelDependencyNameIsCanonical =
+        refl
+    ; selectedPairIdentityDependencyName =
+        "selected-pair identity for finite Ricci contraction extraction"
+    ; selectedPairIdentityDependencyNameIsCanonical =
+        refl
+    ; ricciContractionContinuityConstant =
+        GRDiscreteRicciContractionContinuityConstantReceipt.ricciContractionContinuityConstant
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; ricciContractionContinuityConstantIs48 =
+        GRDiscreteRicciContractionContinuityConstantReceipt.ricciContractionContinuityConstantIs48
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; pointShellRicciContinuityConstant =
+        GRDiscreteRicciContractionContinuityConstantReceipt.pointShellRicciContinuityConstant
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; pointShellRicciContinuityConstantIs48 =
+        GRDiscreteRicciContractionContinuityConstantReceipt.pointShellRicciContinuityConstantIs48
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; shellASafeIntervalRicciContinuityConstant =
+        GRDiscreteRicciContractionContinuityConstantReceipt.shellASafeIntervalRicciContinuityConstant
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; shellASafeIntervalRicciContinuityConstantIs80 =
+        GRDiscreteRicciContractionContinuityConstantReceipt.shellASafeIntervalRicciContinuityConstantIs80
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; shellBSafeIntervalRicciContinuityConstant =
+        GRDiscreteRicciContractionContinuityConstantReceipt.shellBSafeIntervalRicciContinuityConstant
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; shellBSafeIntervalRicciContinuityConstantIs220 =
+        GRDiscreteRicciContractionContinuityConstantReceipt.shellBSafeIntervalRicciContinuityConstantIs220
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; intervalShellRoutingText =
+        GRDiscreteRicciContractionContinuityConstantReceipt.intervalShellRoutingText
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; intervalShellRoutingTextIsCanonical =
+        GRDiscreteRicciContractionContinuityConstantReceipt.intervalShellRoutingTextIsCanonical
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; conservativeRicciExtractionConstant =
+        GRDiscreteRicciContractionContinuityConstantReceipt.existingConservativeRicciConstant
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; conservativeRicciExtractionConstantIs640 =
+        GRDiscreteRicciContractionContinuityConstantReceipt.existingConservativeRicciConstantIs640
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; pointCRConstant =
+        GRDiscreteRicciContractionContinuityConstantReceipt.pointCRConstant
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; pointCRConstantIs48 =
+        GRDiscreteRicciContractionContinuityConstantReceipt.pointCRConstantIs48
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; shellACRConstant =
+        GRDiscreteRicciContractionContinuityConstantReceipt.shellACRConstant
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; shellACRConstantIs80 =
+        GRDiscreteRicciContractionContinuityConstantReceipt.shellACRConstantIs80
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; conservativeCRExtractionConstant =
+        GRDiscreteRicciContractionContinuityConstantReceipt.conservativeCRExtractionConstant
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; conservativeCRExtractionConstantIs640 =
+        GRDiscreteRicciContractionContinuityConstantReceipt.conservativeCRExtractionConstantIs640
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; optionalTightRicciNumerator =
+        GRDiscreteRicciContractionContinuityConstantReceipt.optionalTightRicciNumerator
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; optionalTightRicciNumeratorIs112 =
+        GRDiscreteRicciContractionContinuityConstantReceipt.optionalTightRicciNumeratorIs112
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; inequalityPrimitiveRouteShape =
+        GRDiscreteRicciContractionContinuityConstantReceipt.inequalityPrimitiveRouteShape
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval =
+        GRDiscreteRicciContractionContinuityConstantReceipt.inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; inequalityPrimitiveRouteText =
+        GRDiscreteRicciContractionContinuityConstantReceipt.inequalityPrimitiveRouteText
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; inequalityPrimitiveRouteTextIsCanonical =
+        GRDiscreteRicciContractionContinuityConstantReceipt.inequalityPrimitiveRouteTextIsCanonical
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; finiteRicciZeroReady =
+        true
+    ; finiteRicciZeroReadyIsTrue =
+        refl
+    ; christoffelC0StabilityKernelPromotedHere =
+        false
+    ; christoffelC0StabilityKernelPromotedHereIsFalse =
+        refl
+    ; selectedPairIdentityPromotedHere =
+        false
+    ; selectedPairIdentityPromotedHereIsFalse =
+        refl
+    ; extractionReadinessBoundary =
+        "Finite Ricci zero-table extraction reuses canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt"
+        ∷ "Ricci continuity still depends on the Christoffel C0 stability kernel named here"
+        ∷ "Selected-pair identity is named as an extraction dependency and is not promoted by this receipt"
+        ∷ "The sharp supplied C_R = 1280/27 gives the rounded Nat-compatible constant 48 for point-shell use only"
+        ∷ "Interval extraction routes must use Shell A safe 80 or Shell B safe 220; the conservative 640 constant remains valid"
+        ∷ "The inequality primitive route is explicit: Nat ceiling gives point C_R=48, interval extraction uses Shell A C_R=80, and the conservative adapter keeps 640"
+        ∷ "The optional tight Schwarzschild numerator 112 is mirrored only as local arithmetic readiness"
+        ∷ []
+    }
+
 data GRDiscreteRicciDownstreamConvergenceReadinessStatus : Set where
   grDiscreteRicciDownstreamConvergenceInputsStagedNoPromotion :
     GRDiscreteRicciDownstreamConvergenceReadinessStatus
@@ -2379,6 +2959,9 @@ record GRDiscreteRicciDownstreamConvergenceReadinessReceipt : Setω where
 
     selectedCompatibilityHandoff :
       GRDiscreteRicciSelectedCompatibilityHandoffReceipt
+
+    extractionReadinessDependencyReceipt :
+      GRDiscreteRicciExtractionReadinessDependencyReceipt
 
     downstreamModuleName :
       String
@@ -2457,6 +3040,118 @@ record GRDiscreteRicciDownstreamConvergenceReadinessReceipt : Setω where
       ≡
       true
 
+    christoffelC0StabilityKernelDependencyName :
+      String
+
+    christoffelC0StabilityKernelDependencyNameIsCanonical :
+      christoffelC0StabilityKernelDependencyName
+      ≡
+      "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel"
+
+    selectedPairIdentityDependencyName :
+      String
+
+    selectedPairIdentityDependencyNameIsCanonical :
+      selectedPairIdentityDependencyName
+      ≡
+      "selected-pair identity for finite Ricci contraction extraction"
+
+    ricciContractionContinuityConstant :
+      Nat
+
+    ricciContractionContinuityConstantIs48 :
+      ricciContractionContinuityConstant
+      ≡
+      48
+
+    pointShellRicciContinuityConstant :
+      Nat
+
+    pointShellRicciContinuityConstantIs48 :
+      pointShellRicciContinuityConstant
+      ≡
+      48
+
+    shellASafeIntervalRicciContinuityConstant :
+      Nat
+
+    shellASafeIntervalRicciContinuityConstantIs80 :
+      shellASafeIntervalRicciContinuityConstant
+      ≡
+      80
+
+    shellBSafeIntervalRicciContinuityConstant :
+      Nat
+
+    shellBSafeIntervalRicciContinuityConstantIs220 :
+      shellBSafeIntervalRicciContinuityConstant
+      ≡
+      220
+
+    intervalShellRoutingText :
+      String
+
+    intervalShellRoutingTextIsCanonical :
+      intervalShellRoutingText
+      ≡
+      "interval shells route through Shell A safe 80 and Shell B safe 220, not point shell 48"
+
+    conservativeRicciExtractionConstant :
+      Nat
+
+    conservativeRicciExtractionConstantIs640 :
+      conservativeRicciExtractionConstant
+      ≡
+      640
+
+    pointCRConstant :
+      Nat
+
+    pointCRConstantIs48 :
+      pointCRConstant
+      ≡
+      48
+
+    shellACRConstant :
+      Nat
+
+    shellACRConstantIs80 :
+      shellACRConstant
+      ≡
+      80
+
+    conservativeCRExtractionConstant :
+      Nat
+
+    conservativeCRExtractionConstantIs640 :
+      conservativeCRExtractionConstant
+      ≡
+      640
+
+    optionalTightRicciNumerator :
+      Nat
+
+    optionalTightRicciNumeratorIs112 :
+      optionalTightRicciNumerator
+      ≡
+      112
+
+    inequalityPrimitiveRouteShape :
+      GRDiscreteRicciInequalityPrimitiveRouteShape
+
+    inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval :
+      inequalityPrimitiveRouteShape
+      ≡
+      grDiscreteRicciInequalityPrimitiveRouteNatCeilingSafeInterval
+
+    inequalityPrimitiveRouteText :
+      String
+
+    inequalityPrimitiveRouteTextIsCanonical :
+      inequalityPrimitiveRouteText
+      ≡
+      "primitive route: C_R=1280/27 via Nat ceiling to point C_R=48; interval extraction uses Shell A C_R=80; conservative downstream uses 640; optional tight Schwarzschild numerator 112 stays local"
+
     ricciConvergesC0Promoted :
       Bool
 
@@ -2510,6 +3205,8 @@ canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt =
         canonicalGRDiscreteRicciFiniteZeroTableArithmeticReceipt
     ; selectedCompatibilityHandoff =
         canonicalGRDiscreteRicciSelectedCompatibilityHandoffReceipt
+    ; extractionReadinessDependencyReceipt =
+        canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
     ; downstreamModuleName =
         "DiscreteToSmoothRicciConvergence"
     ; downstreamRicciConvergenceTargetName =
@@ -2534,6 +3231,90 @@ canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt =
         true
     ; zeroTableArithmeticReadyForTier3IsTrue =
         refl
+    ; christoffelC0StabilityKernelDependencyName =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.christoffelC0StabilityKernelDependencyName
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; christoffelC0StabilityKernelDependencyNameIsCanonical =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.christoffelC0StabilityKernelDependencyNameIsCanonical
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; selectedPairIdentityDependencyName =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.selectedPairIdentityDependencyName
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; selectedPairIdentityDependencyNameIsCanonical =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.selectedPairIdentityDependencyNameIsCanonical
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; ricciContractionContinuityConstant =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.ricciContractionContinuityConstant
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; ricciContractionContinuityConstantIs48 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.ricciContractionContinuityConstantIs48
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; pointShellRicciContinuityConstant =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.pointShellRicciContinuityConstant
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; pointShellRicciContinuityConstantIs48 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.pointShellRicciContinuityConstantIs48
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellASafeIntervalRicciContinuityConstant =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellASafeIntervalRicciContinuityConstant
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellASafeIntervalRicciContinuityConstantIs80 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellASafeIntervalRicciContinuityConstantIs80
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellBSafeIntervalRicciContinuityConstant =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellBSafeIntervalRicciContinuityConstant
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellBSafeIntervalRicciContinuityConstantIs220 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellBSafeIntervalRicciContinuityConstantIs220
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; intervalShellRoutingText =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.intervalShellRoutingText
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; intervalShellRoutingTextIsCanonical =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.intervalShellRoutingTextIsCanonical
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; conservativeRicciExtractionConstant =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.conservativeRicciExtractionConstant
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; conservativeRicciExtractionConstantIs640 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.conservativeRicciExtractionConstantIs640
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; pointCRConstant =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.pointCRConstant
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; pointCRConstantIs48 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.pointCRConstantIs48
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellACRConstant =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellACRConstant
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellACRConstantIs80 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellACRConstantIs80
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; conservativeCRExtractionConstant =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.conservativeCRExtractionConstant
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; conservativeCRExtractionConstantIs640 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.conservativeCRExtractionConstantIs640
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; optionalTightRicciNumerator =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.optionalTightRicciNumerator
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; optionalTightRicciNumeratorIs112 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.optionalTightRicciNumeratorIs112
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; inequalityPrimitiveRouteShape =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteShape
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; inequalityPrimitiveRouteText =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteText
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; inequalityPrimitiveRouteTextIsCanonical =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteTextIsCanonical
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
     ; ricciConvergesC0Promoted =
         false
     ; ricciConvergesC0PromotedIsFalse =
@@ -2559,6 +3340,11 @@ canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt =
     ; readinessBoundary =
         "Finite Ricci, scalar, and two-times-Einstein zero-table arithmetic is exposed as named downstream input"
         ∷ "The local contracted-Bianchi zero table is available only as selected finite zero-table arithmetic"
+        ∷ "Ricci extraction readiness records the Christoffel C0 stability kernel dependency and selected-pair identity dependency by name"
+        ∷ "The supplied sharp C_R = 1280/27 is rounded to the Nat-compatible Ricci contraction continuity constant 48 for point-shell use only"
+        ∷ "Interval Shell A uses safe constant 80 and interval Shell B uses safe constant 220"
+        ∷ "The existing conservative Ricci extraction constant 640 remains valid for downstream adapters"
+        ∷ "The downstream inequality primitive route is still a readiness route: point C_R=48, Shell A C_R=80, conservative 640, and optional 112 are not smooth convergence tokens"
         ∷ "The intended Tier 3 consumer is named as DiscreteToSmoothRicciConvergence.ricciConvergesC0"
         ∷ "ricciConvergesC0 is not promoted here because the selected carrier connection is not proved to be Levi-Civita"
         ∷ "No full Bianchi theorem, sourced Einstein equation, smooth convergence theorem, or GR promotion is claimed"
@@ -2660,6 +3446,420 @@ grDiscreteRicciDownstreamZeroTableReady :
   true
 grDiscreteRicciDownstreamZeroTableReady =
   refl
+
+grDiscreteRicciSharpCRCalculationTextExact :
+  GRDiscreteRicciContractionContinuityConstantReceipt.sharpCRCalculationText
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  "C_R = 1280/27"
+grDiscreteRicciSharpCRCalculationTextExact =
+  GRDiscreteRicciContractionContinuityConstantReceipt.sharpCRCalculationTextIs1280Over27
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciSharpCRNumeratorIs1280 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.sharpCRNumerator
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  1280
+grDiscreteRicciSharpCRNumeratorIs1280 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.sharpCRNumeratorIs1280
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciSharpCRDenominatorIs27 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.sharpCRDenominator
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  27
+grDiscreteRicciSharpCRDenominatorIs27 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.sharpCRDenominatorIs27
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciContinuityRoundedConstantIs48 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.ricciContractionContinuityConstant
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  48
+grDiscreteRicciContinuityRoundedConstantIs48 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.ricciContractionContinuityConstantIs48
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciPointShellContinuityConstantIs48 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.pointShellRicciContinuityConstant
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  48
+grDiscreteRicciPointShellContinuityConstantIs48 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.pointShellRicciContinuityConstantIs48
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciPointShell48Only :
+  GRDiscreteRicciContractionContinuityConstantReceipt.pointShell48Only
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  true
+grDiscreteRicciPointShell48Only =
+  GRDiscreteRicciContractionContinuityConstantReceipt.pointShell48OnlyIsTrue
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciShellASafeIntervalContinuityConstantIs80 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.shellASafeIntervalRicciContinuityConstant
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  80
+grDiscreteRicciShellASafeIntervalContinuityConstantIs80 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.shellASafeIntervalRicciContinuityConstantIs80
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciShellBSafeIntervalContinuityConstantIs220 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.shellBSafeIntervalRicciContinuityConstant
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  220
+grDiscreteRicciShellBSafeIntervalContinuityConstantIs220 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.shellBSafeIntervalRicciContinuityConstantIs220
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciIntervalShellsUseSafeConstants :
+  GRDiscreteRicciContractionContinuityConstantReceipt.intervalShellsUseSafeConstants
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  true
+grDiscreteRicciIntervalShellsUseSafeConstants =
+  GRDiscreteRicciContractionContinuityConstantReceipt.intervalShellsUseSafeConstantsIsTrue
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciIntervalShellsDoNotUsePoint48 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.intervalShellsDoNotUsePoint48
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  true
+grDiscreteRicciIntervalShellsDoNotUsePoint48 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.intervalShellsDoNotUsePoint48IsTrue
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciIntervalShellRoutingTextExact :
+  GRDiscreteRicciContractionContinuityConstantReceipt.intervalShellRoutingText
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  "interval shells route through Shell A safe 80 and Shell B safe 220, not point shell 48"
+grDiscreteRicciIntervalShellRoutingTextExact =
+  GRDiscreteRicciContractionContinuityConstantReceipt.intervalShellRoutingTextIsCanonical
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciExistingConservativeConstantIs640 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.existingConservativeRicciConstant
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  640
+grDiscreteRicciExistingConservativeConstantIs640 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.existingConservativeRicciConstantIs640
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciExistingConservative640StillValid :
+  GRDiscreteRicciContractionContinuityConstantReceipt.existingConservative640RemainsValid
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  true
+grDiscreteRicciExistingConservative640StillValid =
+  GRDiscreteRicciContractionContinuityConstantReceipt.existingConservative640RemainsValidIsTrue
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciPointCRConstantIs48 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.pointCRConstant
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  48
+grDiscreteRicciPointCRConstantIs48 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.pointCRConstantIs48
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciShellACRConstantIs80 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.shellACRConstant
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  80
+grDiscreteRicciShellACRConstantIs80 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.shellACRConstantIs80
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciConservativeCRExtractionConstantIs640 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.conservativeCRExtractionConstant
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  640
+grDiscreteRicciConservativeCRExtractionConstantIs640 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.conservativeCRExtractionConstantIs640
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciOptionalTightRicciNumeratorIs112 :
+  GRDiscreteRicciContractionContinuityConstantReceipt.optionalTightRicciNumerator
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  112
+grDiscreteRicciOptionalTightRicciNumeratorIs112 =
+  GRDiscreteRicciContractionContinuityConstantReceipt.optionalTightRicciNumeratorIs112
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciOptionalTightRicciNumeratorNotPromotion :
+  GRDiscreteRicciContractionContinuityConstantReceipt.optionalTightRicciNumeratorUsedAsPromotion
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  false
+grDiscreteRicciOptionalTightRicciNumeratorNotPromotion =
+  GRDiscreteRicciContractionContinuityConstantReceipt.optionalTightRicciNumeratorUsedAsPromotionIsFalse
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciInequalityPrimitiveRouteShapeExact :
+  GRDiscreteRicciContractionContinuityConstantReceipt.inequalityPrimitiveRouteShape
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  grDiscreteRicciInequalityPrimitiveRouteNatCeilingSafeInterval
+grDiscreteRicciInequalityPrimitiveRouteShapeExact =
+  GRDiscreteRicciContractionContinuityConstantReceipt.inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciInequalityPrimitiveRouteTextExact :
+  GRDiscreteRicciContractionContinuityConstantReceipt.inequalityPrimitiveRouteText
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+  ≡
+  "primitive route: C_R=1280/27 via Nat ceiling to point C_R=48; interval extraction uses Shell A C_R=80; conservative downstream uses 640; optional tight Schwarzschild numerator 112 stays local"
+grDiscreteRicciInequalityPrimitiveRouteTextExact =
+  GRDiscreteRicciContractionContinuityConstantReceipt.inequalityPrimitiveRouteTextIsCanonical
+    canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+
+grDiscreteRicciExtractionChristoffelC0StabilityKernelDependencyNameExact :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.christoffelC0StabilityKernelDependencyName
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel"
+grDiscreteRicciExtractionChristoffelC0StabilityKernelDependencyNameExact =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.christoffelC0StabilityKernelDependencyNameIsCanonical
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionSelectedPairIdentityDependencyNameExact :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.selectedPairIdentityDependencyName
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  "selected-pair identity for finite Ricci contraction extraction"
+grDiscreteRicciExtractionSelectedPairIdentityDependencyNameExact =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.selectedPairIdentityDependencyNameIsCanonical
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciDownstreamChristoffelC0StabilityKernelDependencyNameExact :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.christoffelC0StabilityKernelDependencyName
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel"
+grDiscreteRicciDownstreamChristoffelC0StabilityKernelDependencyNameExact =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.christoffelC0StabilityKernelDependencyNameIsCanonical
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamSelectedPairIdentityDependencyNameExact :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.selectedPairIdentityDependencyName
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  "selected-pair identity for finite Ricci contraction extraction"
+grDiscreteRicciDownstreamSelectedPairIdentityDependencyNameExact =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.selectedPairIdentityDependencyNameIsCanonical
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamContinuityConstantIs48 :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.ricciContractionContinuityConstant
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  48
+grDiscreteRicciDownstreamContinuityConstantIs48 =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.ricciContractionContinuityConstantIs48
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciExtractionPointShellContinuityConstantIs48 :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.pointShellRicciContinuityConstant
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  48
+grDiscreteRicciExtractionPointShellContinuityConstantIs48 =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.pointShellRicciContinuityConstantIs48
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionShellAIntervalConstantIs80 :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.shellASafeIntervalRicciContinuityConstant
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  80
+grDiscreteRicciExtractionShellAIntervalConstantIs80 =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.shellASafeIntervalRicciContinuityConstantIs80
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionShellBIntervalConstantIs220 :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.shellBSafeIntervalRicciContinuityConstant
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  220
+grDiscreteRicciExtractionShellBIntervalConstantIs220 =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.shellBSafeIntervalRicciContinuityConstantIs220
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionIntervalShellRoutingTextExact :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.intervalShellRoutingText
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  "interval shells route through Shell A safe 80 and Shell B safe 220, not point shell 48"
+grDiscreteRicciExtractionIntervalShellRoutingTextExact =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.intervalShellRoutingTextIsCanonical
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionPointCRConstantIs48 :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.pointCRConstant
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  48
+grDiscreteRicciExtractionPointCRConstantIs48 =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.pointCRConstantIs48
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionShellACRConstantIs80 :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.shellACRConstant
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  80
+grDiscreteRicciExtractionShellACRConstantIs80 =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.shellACRConstantIs80
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionConservativeCRExtractionConstantIs640 :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.conservativeCRExtractionConstant
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  640
+grDiscreteRicciExtractionConservativeCRExtractionConstantIs640 =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.conservativeCRExtractionConstantIs640
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionOptionalTightRicciNumeratorIs112 :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.optionalTightRicciNumerator
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  112
+grDiscreteRicciExtractionOptionalTightRicciNumeratorIs112 =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.optionalTightRicciNumeratorIs112
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionInequalityPrimitiveRouteShapeExact :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteShape
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  grDiscreteRicciInequalityPrimitiveRouteNatCeilingSafeInterval
+grDiscreteRicciExtractionInequalityPrimitiveRouteShapeExact =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionInequalityPrimitiveRouteTextExact :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteText
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  "primitive route: C_R=1280/27 via Nat ceiling to point C_R=48; interval extraction uses Shell A C_R=80; conservative downstream uses 640; optional tight Schwarzschild numerator 112 stays local"
+grDiscreteRicciExtractionInequalityPrimitiveRouteTextExact =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteTextIsCanonical
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciDownstreamPointShellContinuityConstantIs48 :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.pointShellRicciContinuityConstant
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  48
+grDiscreteRicciDownstreamPointShellContinuityConstantIs48 =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.pointShellRicciContinuityConstantIs48
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamShellAIntervalConstantIs80 :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.shellASafeIntervalRicciContinuityConstant
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  80
+grDiscreteRicciDownstreamShellAIntervalConstantIs80 =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.shellASafeIntervalRicciContinuityConstantIs80
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamShellBIntervalConstantIs220 :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.shellBSafeIntervalRicciContinuityConstant
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  220
+grDiscreteRicciDownstreamShellBIntervalConstantIs220 =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.shellBSafeIntervalRicciContinuityConstantIs220
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamIntervalShellRoutingTextExact :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.intervalShellRoutingText
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  "interval shells route through Shell A safe 80 and Shell B safe 220, not point shell 48"
+grDiscreteRicciDownstreamIntervalShellRoutingTextExact =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.intervalShellRoutingTextIsCanonical
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamConservativeExtractionConstantIs640 :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.conservativeRicciExtractionConstant
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  640
+grDiscreteRicciDownstreamConservativeExtractionConstantIs640 =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.conservativeRicciExtractionConstantIs640
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamPointCRConstantIs48 :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.pointCRConstant
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  48
+grDiscreteRicciDownstreamPointCRConstantIs48 =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.pointCRConstantIs48
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamShellACRConstantIs80 :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.shellACRConstant
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  80
+grDiscreteRicciDownstreamShellACRConstantIs80 =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.shellACRConstantIs80
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamConservativeCRExtractionConstantIs640 :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.conservativeCRExtractionConstant
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  640
+grDiscreteRicciDownstreamConservativeCRExtractionConstantIs640 =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.conservativeCRExtractionConstantIs640
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamOptionalTightRicciNumeratorIs112 :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.optionalTightRicciNumerator
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  112
+grDiscreteRicciDownstreamOptionalTightRicciNumeratorIs112 =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.optionalTightRicciNumeratorIs112
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamInequalityPrimitiveRouteShapeExact :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.inequalityPrimitiveRouteShape
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  grDiscreteRicciInequalityPrimitiveRouteNatCeilingSafeInterval
+grDiscreteRicciDownstreamInequalityPrimitiveRouteShapeExact =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+
+grDiscreteRicciDownstreamInequalityPrimitiveRouteTextExact :
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.inequalityPrimitiveRouteText
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
+  ≡
+  "primitive route: C_R=1280/27 via Nat ceiling to point C_R=48; interval extraction uses Shell A C_R=80; conservative downstream uses 640; optional tight Schwarzschild numerator 112 stays local"
+grDiscreteRicciDownstreamInequalityPrimitiveRouteTextExact =
+  GRDiscreteRicciDownstreamConvergenceReadinessReceipt.inequalityPrimitiveRouteTextIsCanonical
+    canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt
 
 grDiscreteRicciDownstreamRicciConvergesC0NotPromoted :
   GRDiscreteRicciDownstreamConvergenceReadinessReceipt.ricciConvergesC0Promoted
@@ -2966,6 +4166,57 @@ record GRSchwarzschildFiniteRicciBianchiPerturbationReceipt : Setω where
       ≡
       27
 
+    extractionReadinessDependencyReceipt :
+      GRDiscreteRicciExtractionReadinessDependencyReceipt
+
+    pointCRConstant :
+      Nat
+
+    pointCRConstantIs48 :
+      pointCRConstant
+      ≡
+      48
+
+    shellACRConstant :
+      Nat
+
+    shellACRConstantIs80 :
+      shellACRConstant
+      ≡
+      80
+
+    conservativeCRExtractionConstant :
+      Nat
+
+    conservativeCRExtractionConstantIs640 :
+      conservativeCRExtractionConstant
+      ≡
+      640
+
+    optionalTightRicciNumerator :
+      Nat
+
+    optionalTightRicciNumeratorIs112 :
+      optionalTightRicciNumerator
+      ≡
+      112
+
+    inequalityPrimitiveRouteShape :
+      GRDiscreteRicciInequalityPrimitiveRouteShape
+
+    inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval :
+      inequalityPrimitiveRouteShape
+      ≡
+      grDiscreteRicciInequalityPrimitiveRouteNatCeilingSafeInterval
+
+    inequalityPrimitiveRouteText :
+      String
+
+    inequalityPrimitiveRouteTextIsCanonical :
+      inequalityPrimitiveRouteText
+      ≡
+      "primitive route: C_R=1280/27 via Nat ceiling to point C_R=48; interval extraction uses Shell A C_R=80; conservative downstream uses 640; optional tight Schwarzschild numerator 112 stays local"
+
     ricciPerturbationBoundPromotedAsConvergence :
       Bool
 
@@ -3057,6 +4308,44 @@ canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt =
     ; tightRicciRadialPowerIs27 =
         GRSchwarzschildFiniteRicciPerturbationTightArithmeticReceipt.tightRadialPowerIs27
           canonicalGRSchwarzschildFiniteRicciPerturbationTightArithmeticReceipt
+    ; extractionReadinessDependencyReceipt =
+        canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; pointCRConstant =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.pointCRConstant
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; pointCRConstantIs48 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.pointCRConstantIs48
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellACRConstant =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellACRConstant
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellACRConstantIs80 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellACRConstantIs80
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; conservativeCRExtractionConstant =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.conservativeCRExtractionConstant
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; conservativeCRExtractionConstantIs640 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.conservativeCRExtractionConstantIs640
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; optionalTightRicciNumerator =
+        GRSchwarzschildFiniteRicciPerturbationTightArithmeticReceipt.tightNumerator
+          canonicalGRSchwarzschildFiniteRicciPerturbationTightArithmeticReceipt
+    ; optionalTightRicciNumeratorIs112 =
+        GRSchwarzschildFiniteRicciPerturbationTightArithmeticReceipt.tightNumeratorIs112
+          canonicalGRSchwarzschildFiniteRicciPerturbationTightArithmeticReceipt
+    ; inequalityPrimitiveRouteShape =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteShape
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; inequalityPrimitiveRouteText =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteText
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; inequalityPrimitiveRouteTextIsCanonical =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.inequalityPrimitiveRouteTextIsCanonical
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
     ; ricciPerturbationBoundPromotedAsConvergence =
         false
     ; ricciPerturbationBoundPromotedAsConvergenceIsFalse =
@@ -3071,6 +4360,7 @@ canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt =
         ∷ "The contracted-Bianchi route is the canonical Gate4 fail-closed dependency receipt and remains blocked at missingCarrierConnectionIsLeviCivita"
         ∷ "L_Ricci is recorded as the exact local perturbation bound 640, not as a smooth Ricci convergence theorem"
         ∷ "A tighter arithmetic receipt records 112/3008 at radial-power denominator 27 without promoting convergence"
+        ∷ "The perturbation receipt mirrors point C_R=48, Shell A C_R=80, conservative 640, and the primitive inequality route from the extraction readiness receipt"
         ∷ "The Schwarzschild candidate remains the bounded rational-shell request/adapter surface; full external continuum Schwarzschild authority is false"
         ∷ []
     }
@@ -3138,4 +4428,58 @@ grSchwarzschildFiniteRicciTightRadialPowerIs27 :
   27
 grSchwarzschildFiniteRicciTightRadialPowerIs27 =
   GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.tightRicciRadialPowerIs27
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+
+grSchwarzschildFiniteRicciPerturbationPointCRConstantIs48 :
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.pointCRConstant
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+  ≡
+  48
+grSchwarzschildFiniteRicciPerturbationPointCRConstantIs48 =
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.pointCRConstantIs48
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+
+grSchwarzschildFiniteRicciPerturbationShellACRConstantIs80 :
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.shellACRConstant
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+  ≡
+  80
+grSchwarzschildFiniteRicciPerturbationShellACRConstantIs80 =
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.shellACRConstantIs80
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+
+grSchwarzschildFiniteRicciPerturbationConservativeCRConstantIs640 :
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.conservativeCRExtractionConstant
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+  ≡
+  640
+grSchwarzschildFiniteRicciPerturbationConservativeCRConstantIs640 =
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.conservativeCRExtractionConstantIs640
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+
+grSchwarzschildFiniteRicciPerturbationOptionalNumeratorIs112 :
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.optionalTightRicciNumerator
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+  ≡
+  112
+grSchwarzschildFiniteRicciPerturbationOptionalNumeratorIs112 =
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.optionalTightRicciNumeratorIs112
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+
+grSchwarzschildFiniteRicciPerturbationInequalityRouteShapeExact :
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.inequalityPrimitiveRouteShape
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+  ≡
+  grDiscreteRicciInequalityPrimitiveRouteNatCeilingSafeInterval
+grSchwarzschildFiniteRicciPerturbationInequalityRouteShapeExact =
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.inequalityPrimitiveRouteShapeIsNatCeilingSafeInterval
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+
+grSchwarzschildFiniteRicciPerturbationInequalityRouteTextExact :
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.inequalityPrimitiveRouteText
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+  ≡
+  "primitive route: C_R=1280/27 via Nat ceiling to point C_R=48; interval extraction uses Shell A C_R=80; conservative downstream uses 640; optional tight Schwarzschild numerator 112 stays local"
+grSchwarzschildFiniteRicciPerturbationInequalityRouteTextExact =
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.inequalityPrimitiveRouteTextIsCanonical
     canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt

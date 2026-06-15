@@ -866,6 +866,223 @@ canonicalChristoffelRicciExtractionDependencies =
   ∷ dependsOnConstantsLGamma48CGamma2LRicci640
   ∷ []
 
+data OrderedRationalAnalyticKernelLawShape : Set where
+  orderedRationalShellAChristoffelC0Shape :
+    OrderedRationalAnalyticKernelLawShape
+
+data OrderedRationalAnalyticInequalityPrimitive : Set where
+  shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive :
+    OrderedRationalAnalyticInequalityPrimitive
+
+record OrderedRationalShellAChristoffelC0ConstantReceipt : Set where
+  field
+    lawShape :
+      OrderedRationalAnalyticKernelLawShape
+
+    lawShapeIsShellAChristoffelC0 :
+      lawShape ≡ orderedRationalShellAChristoffelC0Shape
+
+    shellALabel :
+      String
+
+    shellALowerEndpoint :
+      Nat
+
+    shellALowerEndpointIs3 :
+      shellALowerEndpoint ≡ 3
+
+    shellAUpperEndpoint :
+      Nat
+
+    shellAUpperEndpointIs4 :
+      shellAUpperEndpoint ≡ 4
+
+    shellAEndpointLower≤Upper :
+      shellALowerEndpoint ≤ shellAUpperEndpoint
+
+    shellA_L_Gamma :
+      Nat
+
+    shellA_L_GammaIs72 :
+      shellA_L_Gamma ≡ 72
+
+    shellA_C_R :
+      Nat
+
+    shellA_C_RIs80 :
+      shellA_C_R ≡ 80
+
+    shellA_C_Gamma :
+      Nat
+
+    shellA_C_GammaIs1 :
+      shellA_C_Gamma ≡ 1
+
+    shellA_CPrime_GammaNumerator :
+      Nat
+
+    shellA_CPrime_GammaNumeratorIs26 :
+      shellA_CPrime_GammaNumerator ≡ 26
+
+    shellA_CPrime_GammaDenominator :
+      Nat
+
+    shellA_CPrime_GammaDenominatorIs27 :
+      shellA_CPrime_GammaDenominator ≡ 27
+
+    shellA_CPrime_GammaText :
+      String
+
+    requestedInequalityPrimitive :
+      OrderedRationalAnalyticInequalityPrimitive
+
+    requestedInequalityPrimitiveIsCPrime_Gamma≤C_Gamma :
+      requestedInequalityPrimitive
+      ≡
+      shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
+
+    inequalityPrimitiveOnly :
+      Bool
+
+    inequalityPrimitiveOnlyIsTrue :
+      inequalityPrimitiveOnly ≡ Bool.true
+
+    orderedQQTheoremPromoted :
+      Bool
+
+    orderedQQTheoremPromotedIsFalse :
+      orderedQQTheoremPromoted ≡ Bool.false
+
+    analyticEstimatePromoted :
+      Bool
+
+    analyticEstimatePromotedIsFalse :
+      analyticEstimatePromoted ≡ Bool.false
+
+    orderedShellABoundary :
+      List String
+
+canonicalOrderedRationalShellAChristoffelC0ConstantReceipt :
+  OrderedRationalShellAChristoffelC0ConstantReceipt
+canonicalOrderedRationalShellAChristoffelC0ConstantReceipt =
+  record
+    { lawShape =
+        orderedRationalShellAChristoffelC0Shape
+    ; lawShapeIsShellAChristoffelC0 =
+        refl
+    ; shellALabel =
+        "Shell A [3,4]"
+    ; shellALowerEndpoint =
+        3
+    ; shellALowerEndpointIs3 =
+        refl
+    ; shellAUpperEndpoint =
+        4
+    ; shellAUpperEndpointIs4 =
+        refl
+    ; shellAEndpointLower≤Upper =
+        s≤s (s≤s (s≤s z≤n))
+    ; shellA_L_Gamma =
+        72
+    ; shellA_L_GammaIs72 =
+        refl
+    ; shellA_C_R =
+        80
+    ; shellA_C_RIs80 =
+        refl
+    ; shellA_C_Gamma =
+        1
+    ; shellA_C_GammaIs1 =
+        refl
+    ; shellA_CPrime_GammaNumerator =
+        26
+    ; shellA_CPrime_GammaNumeratorIs26 =
+        refl
+    ; shellA_CPrime_GammaDenominator =
+        27
+    ; shellA_CPrime_GammaDenominatorIs27 =
+        refl
+    ; shellA_CPrime_GammaText =
+        "C'_Gamma = 26/27 is recorded as Nat numerator 26 and denominator 27"
+    ; requestedInequalityPrimitive =
+        shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
+    ; requestedInequalityPrimitiveIsCPrime_Gamma≤C_Gamma =
+        refl
+    ; inequalityPrimitiveOnly =
+        Bool.true
+    ; inequalityPrimitiveOnlyIsTrue =
+        refl
+    ; orderedQQTheoremPromoted =
+        Bool.false
+    ; orderedQQTheoremPromotedIsFalse =
+        refl
+    ; analyticEstimatePromoted =
+        Bool.false
+    ; analyticEstimatePromotedIsFalse =
+        refl
+    ; orderedShellABoundary =
+        "Ordered rational analytic kernel receipt for Shell A [3,4]"
+        ∷ "Checked Nat constants: L_Gamma = 72, C_R = 80, C_Gamma = 1"
+        ∷ "C'_Gamma is represented by numerator 26 and denominator 27"
+        ∷ "The requested inequality C'_Gamma <= C_Gamma is recorded only as a named primitive shape"
+        ∷ "No ordered QQ theorem, rational-order proof, or analytic Christoffel estimate is promoted by this receipt"
+        ∷ []
+    }
+
+orderedRationalShellA_L_GammaIs72 :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+  ≡
+  72
+orderedRationalShellA_L_GammaIs72 =
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_GammaIs72
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+orderedRationalShellA_C_RIs80 :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_R
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+  ≡
+  80
+orderedRationalShellA_C_RIs80 =
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_RIs80
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+orderedRationalShellA_C_GammaIs1 :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_Gamma
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+  ≡
+  1
+orderedRationalShellA_C_GammaIs1 =
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_GammaIs1
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+orderedRationalShellA_CPrime_GammaNumeratorIs26 :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaNumerator
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+  ≡
+  26
+orderedRationalShellA_CPrime_GammaNumeratorIs26 =
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaNumeratorIs26
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+orderedRationalShellA_CPrime_GammaDenominatorIs27 :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaDenominator
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+  ≡
+  27
+orderedRationalShellA_CPrime_GammaDenominatorIs27 =
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaDenominatorIs27
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+orderedRationalShellARequestedInequalityPrimitive :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.requestedInequalityPrimitive
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+  ≡
+  shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
+orderedRationalShellARequestedInequalityPrimitive =
+  OrderedRationalShellAChristoffelC0ConstantReceipt.requestedInequalityPrimitiveIsCPrime_Gamma≤C_Gamma
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
 record FiniteCarrierChristoffelC0FromDerivativeLaw
   (rate : ContinuumLimitEpsilonRateSurface)
   (primitives : ContinuumLimitAnalyticPrimitives rate)
@@ -951,6 +1168,50 @@ record FiniteCarrierChristoffelC0FromDerivativeLaw
         machineCheckedConstants
       ≡
       inverseMetricC0PointwiseFiniteCarrierShape
+
+    orderedShellAConstants :
+      OrderedRationalShellAChristoffelC0ConstantReceipt
+
+    orderedShellAConstantsAreCanonical :
+      orderedShellAConstants
+      ≡
+      canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+    orderedShellA_L_GammaIs72 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+        orderedShellAConstants
+      ≡
+      72
+
+    orderedShellA_C_RIs80 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_R
+        orderedShellAConstants
+      ≡
+      80
+
+    orderedShellA_C_GammaIs1 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_Gamma
+        orderedShellAConstants
+      ≡
+      1
+
+    orderedShellA_CPrime_GammaNumeratorIs26 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaNumerator
+        orderedShellAConstants
+      ≡
+      26
+
+    orderedShellA_CPrime_GammaDenominatorIs27 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaDenominator
+        orderedShellAConstants
+      ≡
+      27
+
+    orderedShellARequestedInequalityPrimitive :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.requestedInequalityPrimitive
+        orderedShellAConstants
+      ≡
+      shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
 
     finitePartialControl :
       (ε : Epsilon) →
@@ -1083,6 +1344,127 @@ christoffelC0ConnectionErrorBoundFromDerivativeLaw
             index
             scale
             carrier)))
+
+record OrderedShellAFiniteCarrierChristoffelC0LawReceipt
+  {rate : ContinuumLimitEpsilonRateSurface}
+  {primitives : ContinuumLimitAnalyticPrimitives rate}
+  (law : FiniteCarrierChristoffelC0FromDerivativeLaw rate primitives)
+  : Setω where
+  field
+    orderedShellAConstants :
+      OrderedRationalShellAChristoffelC0ConstantReceipt
+
+    orderedShellAConstantsMatchLaw :
+      orderedShellAConstants
+      ≡
+      FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellAConstants law
+
+    orderedShellAConstantsAreCanonical :
+      orderedShellAConstants
+      ≡
+      canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+    shellA_L_GammaThreadedAs72 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+        orderedShellAConstants
+      ≡
+      72
+
+    shellA_C_RThreadedAs80 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_R
+        orderedShellAConstants
+      ≡
+      80
+
+    shellA_C_GammaThreadedAs1 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_Gamma
+        orderedShellAConstants
+      ≡
+      1
+
+    shellA_CPrime_GammaNumeratorThreadedAs26 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaNumerator
+        orderedShellAConstants
+      ≡
+      26
+
+    shellA_CPrime_GammaDenominatorThreadedAs27 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaDenominator
+        orderedShellAConstants
+      ≡
+      27
+
+    shellARequestedInequalityPrimitiveThreaded :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.requestedInequalityPrimitive
+        orderedShellAConstants
+      ≡
+      shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
+
+    shellAOrderedQQTheoremPromotedFalse :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.orderedQQTheoremPromoted
+        orderedShellAConstants
+      ≡
+      Bool.false
+
+    shellAAnalyticEstimatePromotedFalse :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.analyticEstimatePromoted
+        orderedShellAConstants
+      ≡
+      Bool.false
+
+    orderedShellALawBoundary :
+      List String
+
+orderedShellAFiniteCarrierChristoffelC0LawReceiptFromDerivativeLaw :
+  {rate : ContinuumLimitEpsilonRateSurface} →
+  {primitives : ContinuumLimitAnalyticPrimitives rate} →
+  (law : FiniteCarrierChristoffelC0FromDerivativeLaw rate primitives) →
+  OrderedShellAFiniteCarrierChristoffelC0LawReceipt law
+orderedShellAFiniteCarrierChristoffelC0LawReceiptFromDerivativeLaw law =
+  record
+    { orderedShellAConstants =
+        FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellAConstants law
+    ; orderedShellAConstantsMatchLaw =
+        refl
+    ; orderedShellAConstantsAreCanonical =
+        FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellAConstantsAreCanonical
+          law
+    ; shellA_L_GammaThreadedAs72 =
+        FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellA_L_GammaIs72
+          law
+    ; shellA_C_RThreadedAs80 =
+        FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellA_C_RIs80
+          law
+    ; shellA_C_GammaThreadedAs1 =
+        FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellA_C_GammaIs1
+          law
+    ; shellA_CPrime_GammaNumeratorThreadedAs26 =
+        FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellA_CPrime_GammaNumeratorIs26
+          law
+    ; shellA_CPrime_GammaDenominatorThreadedAs27 =
+        FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellA_CPrime_GammaDenominatorIs27
+          law
+    ; shellARequestedInequalityPrimitiveThreaded =
+        FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellARequestedInequalityPrimitive
+          law
+    ; shellAOrderedQQTheoremPromotedFalse =
+        OrderedRationalShellAChristoffelC0ConstantReceipt.orderedQQTheoremPromotedIsFalse
+          (FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellAConstants
+            law)
+    ; shellAAnalyticEstimatePromotedFalse =
+        OrderedRationalShellAChristoffelC0ConstantReceipt.analyticEstimatePromotedIsFalse
+          (FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellAConstants
+            law)
+    ; orderedShellALawBoundary =
+        "Finite-carrier law threads the ordered rational Shell A analytic-kernel receipt supplied by the law"
+        ∷ "Recovered constants: Shell A [3,4], L_Gamma = 72, C_R = 80, C_Gamma = 1, C'_Gamma = 26/27"
+        ∷ "Recovered inequality primitive: C'_Gamma <= C_Gamma, recorded as a primitive shape only"
+        ∷ "No ordered QQ theorem or analytic Christoffel estimate is promoted by this finite-carrier receipt"
+        ∷
+        OrderedRationalShellAChristoffelC0ConstantReceipt.orderedShellABoundary
+          (FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellAConstants
+            law)
+    }
 
 record ChristoffelRicciExtractionSurfaceReceipt
   {rate : ContinuumLimitEpsilonRateSurface}
@@ -1286,12 +1668,17 @@ finiteCarrierConnectionConvergenceInputFromChristoffelC0DerivativeLaw law =
         refl
     ; adapterBoundary =
         ("Christoffel C0 connection convergence is extracted from the supplied finite-carrier derivative law"
-        ∷ "The law must provide d_QQ <= threeMinusN control, checked conservative C_Gamma = 2, checked L_Gamma = 48, checked L_Ricci = 640, optional sharp L_Ricci = 112, checked Ricci/contraction extraction constant 640, inverse metric C0 control, finite-to-continuum partial control, Christoffel formula C0 stability, and connectionErrorBound extraction"
-        ∷ "No ordered QQ carrier, rational order theorem, or analytic Christoffel estimate is promoted by this adapter"
+        ∷ "The law must provide d_QQ <= threeMinusN control, checked conservative C_Gamma = 2, checked L_Gamma = 48, checked L_Ricci = 640, optional sharp L_Ricci = 112, checked Ricci/contraction extraction constant 640, inverse metric C0 control, finite-to-continuum partial control, Christoffel formula C0 stability, connectionErrorBound extraction, and the ordered rational Shell A primitive receipt"
+        ∷ "Shell A ordered rational constants are threaded as [3,4], L_Gamma = 72, C_R = 80, C_Gamma = 1, and C'_Gamma = 26/27"
+        ∷ "No ordered QQ carrier, rational order theorem, ordered inequality theorem, or analytic Christoffel estimate is promoted by this adapter"
         ∷ [])
         ++
         MachineCheckedChristoffelC0ConstantReceipt.constantBoundary
           (FiniteCarrierChristoffelC0FromDerivativeLaw.machineCheckedConstants
+            law)
+        ++
+        OrderedRationalShellAChristoffelC0ConstantReceipt.orderedShellABoundary
+          (FiniteCarrierChristoffelC0FromDerivativeLaw.orderedShellAConstants
             law)
         ++
         FiniteCarrierChristoffelC0FromDerivativeLaw.derivativeLawBoundary law
@@ -1310,8 +1697,442 @@ symbolicRationalConnectionErrorBoundDiagonal :
 symbolicRationalConnectionErrorBoundDiagonal ε scale connection =
   refl
 
+record SelectedSymbolicRationalChristoffelC0Primitive : Set where
+  field
+    selectedConnection :
+      RB.SymbolicRationalApproximation
+
+    selectedDiscreteConnection :
+      RB.SymbolicRationalApproximation
+
+    selectedContinuumConnection :
+      RB.SymbolicRationalApproximation
+
+    selectedDiscreteConnectionIsSelected :
+      selectedDiscreteConnection ≡ selectedConnection
+
+    selectedContinuumConnectionIsSelected :
+      selectedContinuumConnection ≡ selectedConnection
+
+    selectedPairIdentity :
+      selectedDiscreteConnection ≡ selectedContinuumConnection
+
+    selectedPairConnectionErrorBound :
+      (ε : Nat) →
+      (scale : Nat) →
+      ContinuumLimitAnalyticPrimitives.connectionErrorBound
+        symbolicRationalContinuumAnalyticPrimitives
+        ε
+        scale
+        selectedDiscreteConnection
+        selectedContinuumConnection
+
+    onlySelectedPairReflExtraction :
+      Bool
+
+    onlySelectedPairReflExtractionIsTrue :
+      onlySelectedPairReflExtraction ≡ Bool.true
+
+    arbitraryConnectionEqualityPromoted :
+      Bool
+
+    arbitraryConnectionEqualityPromotedIsFalse :
+      arbitraryConnectionEqualityPromoted ≡ Bool.false
+
+    primitiveBoundary :
+      List String
+
+canonicalSelectedSymbolicRationalChristoffelC0Primitive :
+  SelectedSymbolicRationalChristoffelC0Primitive
+canonicalSelectedSymbolicRationalChristoffelC0Primitive =
+  record
+    { selectedConnection =
+        symbolicRationalOneStepZeroMetric
+    ; selectedDiscreteConnection =
+        symbolicRationalOneStepZeroMetric
+    ; selectedContinuumConnection =
+        symbolicRationalOneStepZeroMetric
+    ; selectedDiscreteConnectionIsSelected =
+        refl
+    ; selectedContinuumConnectionIsSelected =
+        refl
+    ; selectedPairIdentity =
+        refl
+    ; selectedPairConnectionErrorBound =
+        λ ε scale →
+          refl
+    ; onlySelectedPairReflExtraction =
+        Bool.true
+    ; onlySelectedPairReflExtractionIsTrue =
+        refl
+    ; arbitraryConnectionEqualityPromoted =
+        Bool.false
+    ; arbitraryConnectionEqualityPromotedIsFalse =
+        refl
+    ; primitiveBoundary =
+        "The selected symbolic-rational Christoffel primitive is the diagonal pair at symbolicRationalOneStepZeroMetric"
+        ∷ "The only refl-producing connectionErrorBound extraction recorded here is the selected-pair identity extraction"
+        ∷ "No arbitrary discreteConnection = continuumConnection equality is promoted from this selected primitive"
+        ∷ []
+    }
+
+selectedSymbolicRationalChristoffelC0PrimitivePairIdentity :
+  SelectedSymbolicRationalChristoffelC0Primitive.selectedDiscreteConnection
+    canonicalSelectedSymbolicRationalChristoffelC0Primitive
+  ≡
+  SelectedSymbolicRationalChristoffelC0Primitive.selectedContinuumConnection
+    canonicalSelectedSymbolicRationalChristoffelC0Primitive
+selectedSymbolicRationalChristoffelC0PrimitivePairIdentity =
+  SelectedSymbolicRationalChristoffelC0Primitive.selectedPairIdentity
+    canonicalSelectedSymbolicRationalChristoffelC0Primitive
+
+selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound :
+  (ε : Nat) →
+  (scale : Nat) →
+  ContinuumLimitAnalyticPrimitives.connectionErrorBound
+    symbolicRationalContinuumAnalyticPrimitives
+    ε
+    scale
+    (SelectedSymbolicRationalChristoffelC0Primitive.selectedDiscreteConnection
+      canonicalSelectedSymbolicRationalChristoffelC0Primitive)
+    (SelectedSymbolicRationalChristoffelC0Primitive.selectedContinuumConnection
+      canonicalSelectedSymbolicRationalChristoffelC0Primitive)
+selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound =
+  SelectedSymbolicRationalChristoffelC0Primitive.selectedPairConnectionErrorBound
+    canonicalSelectedSymbolicRationalChristoffelC0Primitive
+
+record SymbolicRationalChristoffelC0SelectedConstantReceipt : Set where
+  field
+    constantsReceipt :
+      MachineCheckedChristoffelC0ConstantReceipt
+
+    constantsReceiptIsCanonical :
+      constantsReceipt ≡ canonicalMachineCheckedChristoffelC0ConstantReceipt
+
+    orderedShellAConstants :
+      OrderedRationalShellAChristoffelC0ConstantReceipt
+
+    orderedShellAConstantsAreCanonical :
+      orderedShellAConstants
+      ≡
+      canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+    orderedShellA_L_GammaSelectedAs72 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+        orderedShellAConstants
+      ≡
+      72
+
+    orderedShellA_C_RSelectedAs80 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_R
+        orderedShellAConstants
+      ≡
+      80
+
+    orderedShellA_C_GammaSelectedAs1 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_Gamma
+        orderedShellAConstants
+      ≡
+      1
+
+    orderedShellA_CPrime_GammaNumeratorSelectedAs26 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaNumerator
+        orderedShellAConstants
+      ≡
+      26
+
+    orderedShellA_CPrime_GammaDenominatorSelectedAs27 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaDenominator
+        orderedShellAConstants
+      ≡
+      27
+
+    orderedShellARequestedInequalityPrimitiveSelected :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.requestedInequalityPrimitive
+        orderedShellAConstants
+      ≡
+      shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
+
+    selectedTight_C_GammaNat :
+      Nat
+
+    selectedTight_C_GammaNatIs1 :
+      selectedTight_C_GammaNat ≡ 1
+
+    selectedTight_C_GammaText :
+      String
+
+    conservativeShell_C_GammaNat :
+      Nat
+
+    conservativeShell_C_GammaNatIs2 :
+      conservativeShell_C_GammaNat ≡ 2
+
+    conservativeShell_C_GammaText :
+      String
+
+    formulaStabilityConstantNat :
+      Nat
+
+    formulaStabilityConstantNatIs48 :
+      formulaStabilityConstantNat ≡ 48
+
+    formulaStabilityConstantText :
+      String
+
+    optionalFormulaStabilityRatioText :
+      String
+
+    ricciBoundNumeratorNat :
+      Nat
+
+    ricciBoundNumeratorNatIs48 :
+      ricciBoundNumeratorNat ≡ 48
+
+    ricciBoundDenominatorNat :
+      Nat
+
+    ricciBoundDenominatorNatIs640 :
+      ricciBoundDenominatorNat ≡ 640
+
+    ricciBoundText :
+      String
+
+    noArbitraryConnectionEqualityClaimed :
+      Bool
+
+    noArbitraryConnectionEqualityClaimedIsTrue :
+      noArbitraryConnectionEqualityClaimed ≡ Bool.true
+
+    selectedConstantBoundary :
+      List String
+
+canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt :
+  SymbolicRationalChristoffelC0SelectedConstantReceipt
+canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt =
+  record
+    { constantsReceipt =
+        canonicalMachineCheckedChristoffelC0ConstantReceipt
+    ; constantsReceiptIsCanonical =
+        refl
+    ; orderedShellAConstants =
+        canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+    ; orderedShellAConstantsAreCanonical =
+        refl
+    ; orderedShellA_L_GammaSelectedAs72 =
+        orderedRationalShellA_L_GammaIs72
+    ; orderedShellA_C_RSelectedAs80 =
+        orderedRationalShellA_C_RIs80
+    ; orderedShellA_C_GammaSelectedAs1 =
+        orderedRationalShellA_C_GammaIs1
+    ; orderedShellA_CPrime_GammaNumeratorSelectedAs26 =
+        orderedRationalShellA_CPrime_GammaNumeratorIs26
+    ; orderedShellA_CPrime_GammaDenominatorSelectedAs27 =
+        orderedRationalShellA_CPrime_GammaDenominatorIs27
+    ; orderedShellARequestedInequalityPrimitiveSelected =
+        orderedRationalShellARequestedInequalityPrimitive
+    ; selectedTight_C_GammaNat =
+        1
+    ; selectedTight_C_GammaNatIs1 =
+        refl
+    ; selectedTight_C_GammaText =
+        "selected/tight C_Gamma receipt: 1 on the selected symbolic-rational kernel surface"
+    ; conservativeShell_C_GammaNat =
+        MachineCheckedChristoffelC0ConstantReceipt.shell_C_Gamma
+          canonicalMachineCheckedChristoffelC0ConstantReceipt
+    ; conservativeShell_C_GammaNatIs2 =
+        MachineCheckedChristoffelC0ConstantReceipt.shell_C_GammaIs2
+          canonicalMachineCheckedChristoffelC0ConstantReceipt
+    ; conservativeShell_C_GammaText =
+        "conservative shell C_Gamma receipt: analytic 5/3 is recorded textually; checked Nat-compatible shell is 2"
+    ; formulaStabilityConstantNat =
+        MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
+          canonicalMachineCheckedChristoffelC0ConstantReceipt
+    ; formulaStabilityConstantNatIs48 =
+        MachineCheckedChristoffelC0ConstantReceipt.L_GammaIs48
+          canonicalMachineCheckedChristoffelC0ConstantReceipt
+    ; formulaStabilityConstantText =
+        "formula stability receipt: checked Nat constant 48"
+    ; optionalFormulaStabilityRatioText =
+        "optional tight formula stability receipt: 11/9 is recorded as text only and is not promoted into the Nat constant surface"
+    ; ricciBoundNumeratorNat =
+        48
+    ; ricciBoundNumeratorNatIs48 =
+        refl
+    ; ricciBoundDenominatorNat =
+        MachineCheckedChristoffelC0ConstantReceipt.ricciContractionExtractionConstant
+          canonicalMachineCheckedChristoffelC0ConstantReceipt
+    ; ricciBoundDenominatorNatIs640 =
+        MachineCheckedChristoffelC0ConstantReceipt.ricciContractionExtractionConstantIs640
+          canonicalMachineCheckedChristoffelC0ConstantReceipt
+    ; ricciBoundText =
+        "selected Ricci/contraction bound receipt: 48/640, recorded as numerator/denominator Nat fields without asserting a Ricci convergence theorem"
+    ; noArbitraryConnectionEqualityClaimed =
+        Bool.true
+    ; noArbitraryConnectionEqualityClaimedIsTrue =
+        refl
+    ; selectedConstantBoundary =
+        "Selected/tight C_Gamma is recorded as Nat 1 for this selected symbolic-rational kernel surface"
+        ∷ "Ordered rational Shell A constants are recorded canonically: [3,4], L_Gamma = 72, C_R = 80, C_Gamma = 1, C'_Gamma = 26/27"
+        ∷ "The ordered rational inequality C'_Gamma <= C_Gamma is selected only as the named primitive shape"
+        ∷ "The conservative shell records analytic 5/3 textually and threads the existing Nat-compatible shell C_Gamma = 2"
+        ∷ "Formula stability records checked Nat 48 and optional tight 11/9 textually"
+        ∷ "Ricci/contraction receipt records 48/640 as Nat numerator 48 and Nat denominator 640"
+        ∷ "These are receipts for selected-kernel aggregation; they do not claim arbitrary connection equality"
+        ∷ []
+    }
+
+selectedSymbolicRationalChristoffelC0Tight_C_GammaIs1 :
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.selectedTight_C_GammaNat
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  ≡
+  1
+selectedSymbolicRationalChristoffelC0Tight_C_GammaIs1 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.selectedTight_C_GammaNatIs1
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalChristoffelC0Conservative_C_GammaIs2 :
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.conservativeShell_C_GammaNat
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  ≡
+  2
+selectedSymbolicRationalChristoffelC0Conservative_C_GammaIs2 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.conservativeShell_C_GammaNatIs2
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedShellA_L_GammaIs72 :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellAConstants
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  72
+selectedSymbolicRationalOrderedShellA_L_GammaIs72 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellA_L_GammaSelectedAs72
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedShellA_C_RIs80 :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_R
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellAConstants
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  80
+selectedSymbolicRationalOrderedShellA_C_RIs80 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellA_C_RSelectedAs80
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedShellA_C_GammaIs1 :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_Gamma
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellAConstants
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  1
+selectedSymbolicRationalOrderedShellA_C_GammaIs1 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellA_C_GammaSelectedAs1
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedShellA_CPrime_GammaNumeratorIs26 :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaNumerator
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellAConstants
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  26
+selectedSymbolicRationalOrderedShellA_CPrime_GammaNumeratorIs26 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellA_CPrime_GammaNumeratorSelectedAs26
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedShellA_CPrime_GammaDenominatorIs27 :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaDenominator
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellAConstants
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  27
+selectedSymbolicRationalOrderedShellA_CPrime_GammaDenominatorIs27 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellA_CPrime_GammaDenominatorSelectedAs27
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedShellARequestedInequalityPrimitive :
+  OrderedRationalShellAChristoffelC0ConstantReceipt.requestedInequalityPrimitive
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellAConstants
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
+selectedSymbolicRationalOrderedShellARequestedInequalityPrimitive =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellARequestedInequalityPrimitiveSelected
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalChristoffelC0FormulaStabilityIs48 :
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.formulaStabilityConstantNat
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  ≡
+  48
+selectedSymbolicRationalChristoffelC0FormulaStabilityIs48 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.formulaStabilityConstantNatIs48
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalChristoffelC0RicciBoundNumeratorIs48 :
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.ricciBoundNumeratorNat
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  ≡
+  48
+selectedSymbolicRationalChristoffelC0RicciBoundNumeratorIs48 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.ricciBoundNumeratorNatIs48
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalChristoffelC0RicciBoundDenominatorIs640 :
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.ricciBoundDenominatorNat
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  ≡
+  640
+selectedSymbolicRationalChristoffelC0RicciBoundDenominatorIs640 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.ricciBoundDenominatorNatIs640
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
 record SymbolicRationalChristoffelC0StabilityKernel : Setω where
   field
+    orderedShellAConstants :
+      OrderedRationalShellAChristoffelC0ConstantReceipt
+
+    orderedShellAConstantsAreCanonical :
+      orderedShellAConstants
+      ≡
+      canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+    orderedShellA_L_GammaIs72 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+        orderedShellAConstants
+      ≡
+      72
+
+    orderedShellA_C_RIs80 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_R
+        orderedShellAConstants
+      ≡
+      80
+
+    orderedShellA_C_GammaIs1 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_Gamma
+        orderedShellAConstants
+      ≡
+      1
+
+    orderedShellA_CPrime_GammaNumeratorIs26 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaNumerator
+        orderedShellAConstants
+      ≡
+      26
+
+    orderedShellA_CPrime_GammaDenominatorIs27 :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaDenominator
+        orderedShellAConstants
+      ≡
+      27
+
+    orderedShellARequestedInequalityPrimitive :
+      OrderedRationalShellAChristoffelC0ConstantReceipt.requestedInequalityPrimitive
+        orderedShellAConstants
+      ≡
+      shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
+
     ChristoffelFormulaC0Stable :
       Nat →
       Nat →
@@ -1404,6 +2225,30 @@ symbolicRationalFiniteCarrierChristoffelC0FromDerivativeLawFromKernel kernel =
     ; inverseMetricC0LawShape =
         MachineCheckedChristoffelC0ConstantReceipt.inverseMetricC0ShapeIsPointwiseFiniteCarrier
           canonicalMachineCheckedChristoffelC0ConstantReceipt
+    ; orderedShellAConstants =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellAConstants
+          kernel
+    ; orderedShellAConstantsAreCanonical =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellAConstantsAreCanonical
+          kernel
+    ; orderedShellA_L_GammaIs72 =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellA_L_GammaIs72
+          kernel
+    ; orderedShellA_C_RIs80 =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellA_C_RIs80
+          kernel
+    ; orderedShellA_C_GammaIs1 =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellA_C_GammaIs1
+          kernel
+    ; orderedShellA_CPrime_GammaNumeratorIs26 =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellA_CPrime_GammaNumeratorIs26
+          kernel
+    ; orderedShellA_CPrime_GammaDenominatorIs27 =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellA_CPrime_GammaDenominatorIs27
+          kernel
+    ; orderedShellARequestedInequalityPrimitive =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellARequestedInequalityPrimitive
+          kernel
     ; finitePartialControl =
         λ ε index scale carrier →
           ⊤
@@ -1428,9 +2273,507 @@ symbolicRationalFiniteCarrierChristoffelC0FromDerivativeLawFromKernel kernel =
     ; derivativeLawBoundary =
         "Symbolic-rational finite/gauge/constant obligations are closed by this constructor from the canonical identity derivative scheme"
         ∷ "The constructor consumes checked constants L_Gamma = 48, Ricci/contraction extraction constant = 640, and shell C_Gamma <= 2"
+        ∷ "The ordered rational Shell A analytic constants are supplied by the kernel: [3,4], L_Gamma = 72, C_R = 80, C_Gamma = 1, and C'_Gamma = 26/27"
+        ∷ "The ordered rational inequality is threaded only as the named primitive C'_Gamma <= C_Gamma, not as a promoted QQ theorem"
         ∷ "Only the Christoffel formula C0 stability kernel and equality-valued connectionErrorBound extraction remain external"
-        ∷ SymbolicRationalChristoffelC0StabilityKernel.kernelBoundary kernel
+        ∷
+        OrderedRationalShellAChristoffelC0ConstantReceipt.orderedShellABoundary
+          (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAConstants
+            kernel)
+        ++
+        SymbolicRationalChristoffelC0StabilityKernel.kernelBoundary kernel
     }
+
+record SymbolicRationalChristoffelC0SelectedKernelHandoff
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel)
+  : Setω where
+  field
+    selectedPrimitive :
+      SelectedSymbolicRationalChristoffelC0Primitive
+
+    selectedPrimitiveIsCanonical :
+      selectedPrimitive
+      ≡
+      canonicalSelectedSymbolicRationalChristoffelC0Primitive
+
+    selectedConstants :
+      SymbolicRationalChristoffelC0SelectedConstantReceipt
+
+    selectedConstantsAreCanonical :
+      selectedConstants
+      ≡
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+    finiteCarrierLaw :
+      FiniteCarrierChristoffelC0FromDerivativeLaw
+        symbolicRationalContinuumEpsilonRateSurface
+        symbolicRationalContinuumAnalyticPrimitives
+
+    finiteCarrierLawIsKernelAdapterTag :
+      Bool
+
+    finiteCarrierLawIsKernelAdapterTagIsTrue :
+      finiteCarrierLawIsKernelAdapterTag ≡ Bool.true
+
+    selectedPairIdentityReceipt :
+      SelectedSymbolicRationalChristoffelC0Primitive.selectedDiscreteConnection
+        selectedPrimitive
+      ≡
+      SelectedSymbolicRationalChristoffelC0Primitive.selectedContinuumConnection
+        selectedPrimitive
+
+    selectedPairPrimitiveConnectionErrorBound :
+      (ε : Nat) →
+      (scale : Nat) →
+      ContinuumLimitAnalyticPrimitives.connectionErrorBound
+        symbolicRationalContinuumAnalyticPrimitives
+        ε
+        scale
+        (SelectedSymbolicRationalChristoffelC0Primitive.selectedDiscreteConnection
+          selectedPrimitive)
+        (SelectedSymbolicRationalChristoffelC0Primitive.selectedContinuumConnection
+          selectedPrimitive)
+
+    selectedKernelFormulaStable :
+      (ε : Nat) →
+      (scale : Nat) →
+      SymbolicRationalChristoffelC0StabilityKernel.ChristoffelFormulaC0Stable
+        kernel
+        ε
+        scale
+        (SelectedSymbolicRationalChristoffelC0Primitive.selectedDiscreteConnection
+          selectedPrimitive)
+        (SelectedSymbolicRationalChristoffelC0Primitive.selectedContinuumConnection
+          selectedPrimitive)
+
+    selectedKernelConnectionErrorBound :
+      (ε : Nat) →
+      (scale : Nat) →
+      ContinuumLimitAnalyticPrimitives.connectionErrorBound
+        symbolicRationalContinuumAnalyticPrimitives
+        ε
+        scale
+        (SelectedSymbolicRationalChristoffelC0Primitive.selectedDiscreteConnection
+          selectedPrimitive)
+        (SelectedSymbolicRationalChristoffelC0Primitive.selectedContinuumConnection
+          selectedPrimitive)
+
+    selectedKernelExtractionIsNotArbitraryEquality :
+      Bool
+
+    selectedKernelExtractionIsNotArbitraryEqualityIsTrue :
+      selectedKernelExtractionIsNotArbitraryEquality ≡ Bool.true
+
+    aggregationBoundary :
+      List String
+
+symbolicRationalChristoffelC0SelectedKernelHandoff :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  SymbolicRationalChristoffelC0SelectedKernelHandoff kernel
+symbolicRationalChristoffelC0SelectedKernelHandoff kernel =
+  record
+    { selectedPrimitive =
+        canonicalSelectedSymbolicRationalChristoffelC0Primitive
+    ; selectedPrimitiveIsCanonical =
+        refl
+    ; selectedConstants =
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+    ; selectedConstantsAreCanonical =
+        refl
+    ; finiteCarrierLaw =
+        symbolicRationalFiniteCarrierChristoffelC0FromDerivativeLawFromKernel
+          kernel
+    ; finiteCarrierLawIsKernelAdapterTag =
+        Bool.true
+    ; finiteCarrierLawIsKernelAdapterTagIsTrue =
+        refl
+    ; selectedPairIdentityReceipt =
+        selectedSymbolicRationalChristoffelC0PrimitivePairIdentity
+    ; selectedPairPrimitiveConnectionErrorBound =
+        selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound
+    ; selectedKernelFormulaStable =
+        λ ε scale →
+          SymbolicRationalChristoffelC0StabilityKernel.christoffelFormulaC0Stability
+            kernel
+            ε
+            scale
+            (SelectedSymbolicRationalChristoffelC0Primitive.selectedDiscreteConnection
+              canonicalSelectedSymbolicRationalChristoffelC0Primitive)
+            (SelectedSymbolicRationalChristoffelC0Primitive.selectedContinuumConnection
+              canonicalSelectedSymbolicRationalChristoffelC0Primitive)
+            tt
+            (MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
+              canonicalMachineCheckedChristoffelC0ConstantReceipt)
+            (λ carrier →
+              tt)
+            (λ index carrier →
+              refl)
+    ; selectedKernelConnectionErrorBound =
+        λ ε scale →
+          SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction
+            kernel
+            ε
+            scale
+            (SelectedSymbolicRationalChristoffelC0Primitive.selectedDiscreteConnection
+              canonicalSelectedSymbolicRationalChristoffelC0Primitive)
+            (SelectedSymbolicRationalChristoffelC0Primitive.selectedContinuumConnection
+              canonicalSelectedSymbolicRationalChristoffelC0Primitive)
+            (SymbolicRationalChristoffelC0StabilityKernel.christoffelFormulaC0Stability
+              kernel
+              ε
+              scale
+              (SelectedSymbolicRationalChristoffelC0Primitive.selectedDiscreteConnection
+                canonicalSelectedSymbolicRationalChristoffelC0Primitive)
+              (SelectedSymbolicRationalChristoffelC0Primitive.selectedContinuumConnection
+                canonicalSelectedSymbolicRationalChristoffelC0Primitive)
+              tt
+              (MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
+                canonicalMachineCheckedChristoffelC0ConstantReceipt)
+              (λ carrier →
+                tt)
+              (λ index carrier →
+                refl))
+    ; selectedKernelExtractionIsNotArbitraryEquality =
+        Bool.true
+    ; selectedKernelExtractionIsNotArbitraryEqualityIsTrue =
+        refl
+    ; aggregationBoundary =
+        ("Canonical selected-kernel handoff for aggregation: selected primitive, selected constants, finite-carrier derivative law, selected formula stability, and selected connectionErrorBound receipt"
+        ∷ "The selected primitive's refl-producing extraction is only the diagonal selected-pair identity at symbolicRationalOneStepZeroMetric"
+        ∷ "The supplied kernel may provide selected-pair stability/extraction for the handoff, but this receipt does not promote arbitrary connection equality"
+        ∷ [])
+        ++
+        SymbolicRationalChristoffelC0SelectedConstantReceipt.selectedConstantBoundary
+          canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+        ++
+        SymbolicRationalChristoffelC0StabilityKernel.kernelBoundary kernel
+    }
+
+canonicalSymbolicRationalChristoffelC0SelectedKernelHandoff :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  SymbolicRationalChristoffelC0SelectedKernelHandoff kernel
+canonicalSymbolicRationalChristoffelC0SelectedKernelHandoff =
+  symbolicRationalChristoffelC0SelectedKernelHandoff
+
+record SelectedZeroEpsilonConnectionErrorBoundReceipt
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel)
+  : Setω where
+  field
+    selectedKernelHandoff :
+      SymbolicRationalChristoffelC0SelectedKernelHandoff kernel
+
+    selectedKernelHandoffCanonicalTag :
+      Bool
+
+    selectedKernelHandoffCanonicalTagIsTrue :
+      selectedKernelHandoffCanonicalTag ≡ Bool.true
+
+    selectedPrimitive :
+      SelectedSymbolicRationalChristoffelC0Primitive
+
+    selectedPrimitiveMatchesHandoff :
+      selectedPrimitive
+      ≡
+      SymbolicRationalChristoffelC0SelectedKernelHandoff.selectedPrimitive
+        selectedKernelHandoff
+
+    selectedConstants :
+      SymbolicRationalChristoffelC0SelectedConstantReceipt
+
+    selectedConstantsMatchHandoff :
+      selectedConstants
+      ≡
+      SymbolicRationalChristoffelC0SelectedKernelHandoff.selectedConstants
+        selectedKernelHandoff
+
+    selectedEpsilon :
+      Nat
+
+    selectedEpsilonIsZero :
+      selectedEpsilon ≡ 0
+
+    selectedScale :
+      Nat
+
+    selectedScaleIsZero :
+      selectedScale ≡ 0
+
+    selectedDiscreteConnection :
+      RB.SymbolicRationalApproximation
+
+    selectedDiscreteConnectionIsPrimitive :
+      selectedDiscreteConnection
+      ≡
+      SelectedSymbolicRationalChristoffelC0Primitive.selectedDiscreteConnection
+        selectedPrimitive
+
+    selectedContinuumConnection :
+      RB.SymbolicRationalApproximation
+
+    selectedContinuumConnectionIsPrimitive :
+      selectedContinuumConnection
+      ≡
+      SelectedSymbolicRationalChristoffelC0Primitive.selectedContinuumConnection
+        selectedPrimitive
+
+    selectedLocalEqualityHandoff :
+      selectedDiscreteConnection ≡ selectedContinuumConnection
+
+    selectedLocalPrimitiveConnectionErrorBound :
+      ContinuumLimitAnalyticPrimitives.connectionErrorBound
+        symbolicRationalContinuumAnalyticPrimitives
+        selectedEpsilon
+        selectedScale
+        selectedDiscreteConnection
+        selectedContinuumConnection
+
+    selectedLocalKernelConnectionErrorBound :
+      ContinuumLimitAnalyticPrimitives.connectionErrorBound
+        symbolicRationalContinuumAnalyticPrimitives
+        selectedEpsilon
+        selectedScale
+        selectedDiscreteConnection
+        selectedContinuumConnection
+
+    connectionBound :
+      Nat →
+      Nat →
+      RB.SymbolicRationalApproximation →
+      RB.SymbolicRationalApproximation →
+      Nat
+
+    selectedConnectionBound :
+      Nat
+
+    selectedConnectionBoundIsConnectionBound :
+      selectedConnectionBound
+      ≡
+      connectionBound
+        selectedEpsilon
+        selectedScale
+        selectedDiscreteConnection
+        selectedContinuumConnection
+
+    selectedConnectionBoundIsZero :
+      selectedConnectionBound ≡ 0
+
+    selectedConnectionBound≤FormulaStability :
+      selectedConnectionBound
+      ≤
+      SymbolicRationalChristoffelC0SelectedConstantReceipt.formulaStabilityConstantNat
+        selectedConstants
+
+    selectedConnectionBound≤ConservativeShell :
+      selectedConnectionBound
+      ≤
+      SymbolicRationalChristoffelC0SelectedConstantReceipt.conservativeShell_C_GammaNat
+        selectedConstants
+
+    ricciErrorBound :
+      Nat →
+      Nat →
+      RB.SymbolicRationalApproximation →
+      RB.SymbolicRationalApproximation →
+      Nat
+
+    selectedRicciErrorBound :
+      Nat
+
+    selectedRicciErrorBoundIsRicciErrorBound :
+      selectedRicciErrorBound
+      ≡
+      ricciErrorBound
+        selectedEpsilon
+        selectedScale
+        selectedDiscreteConnection
+        selectedContinuumConnection
+
+    selectedRicciErrorBoundIsZero :
+      selectedRicciErrorBound ≡ 0
+
+    selectedRicciErrorBound≤L_Ricci :
+      selectedRicciErrorBound
+      ≤
+      MachineCheckedChristoffelC0ConstantReceipt.L_Ricci
+        (SymbolicRationalChristoffelC0SelectedConstantReceipt.constantsReceipt
+          selectedConstants)
+
+    selectedRicciErrorBound≤RicciDenominator :
+      selectedRicciErrorBound
+      ≤
+      SymbolicRationalChristoffelC0SelectedConstantReceipt.ricciBoundDenominatorNat
+        selectedConstants
+
+    selectedZeroEpsilonDerivationClosed :
+      Bool
+
+    selectedZeroEpsilonDerivationClosedIsTrue :
+      selectedZeroEpsilonDerivationClosed ≡ Bool.true
+
+    equalityHandoffIsSelectedLocalOnly :
+      Bool
+
+    equalityHandoffIsSelectedLocalOnlyIsTrue :
+      equalityHandoffIsSelectedLocalOnly ≡ Bool.true
+
+    arbitraryConnectionEqualityPromoted :
+      Bool
+
+    arbitraryConnectionEqualityPromotedIsFalse :
+      arbitraryConnectionEqualityPromoted ≡ Bool.false
+
+    inequalityBoundary :
+      List String
+
+canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  SelectedZeroEpsilonConnectionErrorBoundReceipt kernel
+canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel =
+  record
+    { selectedKernelHandoff =
+        symbolicRationalChristoffelC0SelectedKernelHandoff kernel
+    ; selectedKernelHandoffCanonicalTag =
+        Bool.true
+    ; selectedKernelHandoffCanonicalTagIsTrue =
+        refl
+    ; selectedPrimitive =
+        canonicalSelectedSymbolicRationalChristoffelC0Primitive
+    ; selectedPrimitiveMatchesHandoff =
+        refl
+    ; selectedConstants =
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+    ; selectedConstantsMatchHandoff =
+        refl
+    ; selectedEpsilon =
+        0
+    ; selectedEpsilonIsZero =
+        refl
+    ; selectedScale =
+        0
+    ; selectedScaleIsZero =
+        refl
+    ; selectedDiscreteConnection =
+        SelectedSymbolicRationalChristoffelC0Primitive.selectedDiscreteConnection
+          canonicalSelectedSymbolicRationalChristoffelC0Primitive
+    ; selectedDiscreteConnectionIsPrimitive =
+        refl
+    ; selectedContinuumConnection =
+        SelectedSymbolicRationalChristoffelC0Primitive.selectedContinuumConnection
+          canonicalSelectedSymbolicRationalChristoffelC0Primitive
+    ; selectedContinuumConnectionIsPrimitive =
+        refl
+    ; selectedLocalEqualityHandoff =
+        selectedSymbolicRationalChristoffelC0PrimitivePairIdentity
+    ; selectedLocalPrimitiveConnectionErrorBound =
+        selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound
+          0
+          0
+    ; selectedLocalKernelConnectionErrorBound =
+        SymbolicRationalChristoffelC0SelectedKernelHandoff.selectedKernelConnectionErrorBound
+          (symbolicRationalChristoffelC0SelectedKernelHandoff kernel)
+          0
+          0
+    ; connectionBound =
+        λ ε scale discreteConnection continuumConnection →
+          0
+    ; selectedConnectionBound =
+        0
+    ; selectedConnectionBoundIsConnectionBound =
+        refl
+    ; selectedConnectionBoundIsZero =
+        refl
+    ; selectedConnectionBound≤FormulaStability =
+        z≤n
+    ; selectedConnectionBound≤ConservativeShell =
+        z≤n
+    ; ricciErrorBound =
+        λ ε scale discreteConnection continuumConnection →
+          0
+    ; selectedRicciErrorBound =
+        0
+    ; selectedRicciErrorBoundIsRicciErrorBound =
+        refl
+    ; selectedRicciErrorBoundIsZero =
+        refl
+    ; selectedRicciErrorBound≤L_Ricci =
+        z≤n
+    ; selectedRicciErrorBound≤RicciDenominator =
+        z≤n
+    ; selectedZeroEpsilonDerivationClosed =
+        Bool.true
+    ; selectedZeroEpsilonDerivationClosedIsTrue =
+        refl
+    ; equalityHandoffIsSelectedLocalOnly =
+        Bool.true
+    ; equalityHandoffIsSelectedLocalOnlyIsTrue =
+        refl
+    ; arbitraryConnectionEqualityPromoted =
+        Bool.false
+    ; arbitraryConnectionEqualityPromotedIsFalse =
+        refl
+    ; inequalityBoundary =
+        ("Selected zero-epsilon receipt: epsilon = 0, scale = 0, and both symbolic-rational connections are the selected primitive pair"
+        ∷ "The equality handoff is selectedLocalEqualityHandoff only; it is the primitive diagonal pair and is not exported as arbitrary connection equality"
+        ∷ "connectionBound is the local Nat-valued selected bound function and evaluates to 0 on the selected zero-epsilon pair"
+        ∷ "ricciErrorBound is the local Nat-valued selected bound function and evaluates to 0 on the selected zero-epsilon pair"
+        ∷ "The zero selected bounds are checked against the existing formula stability, conservative shell, L_Ricci, and Ricci denominator constants by z≤n"
+        ∷ [])
+        ++
+        SelectedSymbolicRationalChristoffelC0Primitive.primitiveBoundary
+          canonicalSelectedSymbolicRationalChristoffelC0Primitive
+        ++
+        SymbolicRationalChristoffelC0SelectedConstantReceipt.selectedConstantBoundary
+          canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+        ++
+        SymbolicRationalChristoffelC0StabilityKernel.kernelBoundary kernel
+    }
+
+selectedZeroEpsilonConnectionBoundIsZero :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedConnectionBound
+    (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel)
+  ≡
+  0
+selectedZeroEpsilonConnectionBoundIsZero kernel =
+  SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedConnectionBoundIsZero
+    (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel)
+
+selectedZeroEpsilonRicciErrorBoundIsZero :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedRicciErrorBound
+    (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel)
+  ≡
+  0
+selectedZeroEpsilonRicciErrorBoundIsZero kernel =
+  SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedRicciErrorBoundIsZero
+    (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel)
+
+selectedZeroEpsilonLocalEqualityHandoff :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedDiscreteConnection
+    (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel)
+  ≡
+  SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedContinuumConnection
+    (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel)
+selectedZeroEpsilonLocalEqualityHandoff kernel =
+  SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedLocalEqualityHandoff
+    (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel)
+
+selectedZeroEpsilonLocalConnectionErrorBound :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  ContinuumLimitAnalyticPrimitives.connectionErrorBound
+    symbolicRationalContinuumAnalyticPrimitives
+    (SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedEpsilon
+      (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel))
+    (SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedScale
+      (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel))
+    (SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedDiscreteConnection
+      (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel))
+    (SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedContinuumConnection
+      (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel))
+selectedZeroEpsilonLocalConnectionErrorBound kernel =
+  SelectedZeroEpsilonConnectionErrorBoundReceipt.selectedLocalPrimitiveConnectionErrorBound
+    (canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel)
 
 finiteCarrierDerivativeSchemeConnectionErrorBound :
   {rate : ContinuumLimitEpsilonRateSurface} →

@@ -67,21 +67,31 @@ boundary. The selected finite-r table still records the historical odd
 has a symbolic QQ undoubled-Christoffel lift with a checked total half adapter.
 Ricci/scalar/Einstein zero-table arithmetic is factored through named finite-r
 zero/contraction helpers and downstream readiness receipts.
-`GRConcreteLeviCivita` now carries direct selected finite-r Levi-Civita handoff
-projections that locally discharge the carrier-connection blocker without
-promoting continuum Schwarzschild GR. `ContinuumLimitTheorem` has symbolic
-finite derivative, inverse-metric C0, Christoffel-C0 extraction surfaces, and a
-kernel-parametric constructor for the symbolic rational
-`FiniteCarrierChristoffelC0FromDerivativeLaw`; the remaining analytic kernel is
-the real Christoffel C0 stability/extraction law, not the finite derivative
-plumbing. `SchwarzschildLimitCandidate` records the exact `r_s = 2, r = 3`
+`GRConcreteLeviCivita` now carries direct selected finite-r and selected
+Schwarzschild Levi-Civita/Koszul handoff projections that locally discharge the
+carrier-connection blocker without promoting continuum Schwarzschild GR.
+`ContinuumLimitTheorem` has symbolic finite derivative, inverse-metric C0,
+Christoffel-C0 extraction surfaces, a kernel-parametric constructor for the
+symbolic rational `FiniteCarrierChristoffelC0FromDerivativeLaw`, and a checked
+selected-pair identity/constant handoff that makes the only local `refl`
+connection extraction explicit. It now also records the selected zero-epsilon
+connection/Ricci error-bound bridge as a quantitative local receipt while
+leaving arbitrary connection equality false. The remaining analytic kernel is
+still the real ordered Christoffel C0 stability/extraction law, not the finite
+derivative plumbing. `SchwarzschildLimitCandidate` records the exact `r_s = 2, r = 3`
 doubled and undoubled Christoffel point tables, radial `∂_r Γ` table including
-the zero `Γ^r_tt` derivative, inverse-metric radial derivative signs, and the
-bounded weak-field shell adapter. `GRProofArchitectureAggregationTest` checks
-the current imports and aggregates the selected Levi-Civita, inverse-metric
-C0/derivative, Ricci-readiness, and machine-checked constant surfaces. Full
-contracted Bianchi promotion, continuum Ricci convergence, Schwarzschild
-vacuum/Birkhoff, W4/Candidate256, Clay, and terminal promotion remain false.
+the zero `Γ^r_tt` derivative, shell supremum receipts with tight `C_Gamma = 1`
+and conservative shell `C_Gamma <= 2`, non-degenerate Shell A `[3,4]` constants
+`C_Gamma = 1`, `C'_Gamma = 26/27`, `L_Gamma = 72`, `C_R = 80`, non-degenerate
+Shell B `[5/2,7/2]` constants `C_Gamma = 48/25`, `C'_Gamma = 992/125`,
+`L_Gamma = 112`, `C_R = 220`, inverse-metric radial derivative signs, and the
+bounded weak-field shell adapter. `GRProofArchitectureAggregationTest`
+checks the current imports and aggregates the selected Levi-Civita,
+inverse-metric C0/derivative, shell-bound, Ricci-readiness, selected-pair
+identity, zero-epsilon quantitative bridge, interval Ricci constant-routing,
+and machine-checked constant surfaces. Full contracted Bianchi promotion,
+continuum Ricci convergence, Schwarzschild vacuum/Birkhoff, W4/Candidate256,
+Clay, and terminal promotion remain false.
 The finite Base369 algebra pass adds an internal scalar/ring layer:
 `DASHI.Foundations.Base369RingShape`,
 `DASHI.Foundations.Base369Nat`,
