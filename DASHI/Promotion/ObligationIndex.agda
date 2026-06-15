@@ -66,6 +66,14 @@ import DASHI.Physics.Closure.BTFiniteBuildingYMGapTransferBoundary as BTYMGap
 import DASHI.Physics.Closure.BTNSBoundaryDefectLeakageTarget as BTNSDefect
 import DASHI.Physics.Closure.FiniteDepthBoundaryObservablePromotionPipeline as BoundaryObservablePipeline
 import DASHI.Physics.Closure.P0ClayFiniteHodgeNSTopologicalStackReceipt as P0Stack
+import DASHI.Interop.PNFSpectralFieldArchitectureReceipt as PNFArchitecture
+import DASHI.Interop.PNFSpectralRegistryAnchoring as PNFRegistry
+import DASHI.Interop.PNFResidualFieldInvariants as PNFResidualInvariants
+import DASHI.Interop.PNFSpectralCoordinateRebuildability as PNFCoordinate
+import DASHI.Interop.PNFResolverSelectorCommitment as PNFResolverSelector
+import DASHI.Interop.PNFHodgeResidualTopology as PNFHodge
+import DASHI.Promotion.PNFSpectralTradingSignalBoundary as PNFTrading
+import DASHI.Promotion.PNFSpectralEmpiricalBasinValidation as PNFEmpirical
 
 -- Sprint165 support vocabulary for the P0 stack:
 -- finite depth boundary observable, Maxwell, Yang Mills, Navier Stokes.
@@ -152,6 +160,24 @@ data FullClayExternalAuthorityBoundaryLane : Set where
     FullClayExternalAuthorityBoundaryLane
   nsProjectionNonlocalityLeakagePrincipleBoundaryLane :
     FullClayExternalAuthorityBoundaryLane
+
+data PNFSpectralApplicationBoundaryLane : Set where
+  pnfSpectralFieldArchitectureLane :
+    PNFSpectralApplicationBoundaryLane
+  pnfSpectralRegistryAnchoringLane :
+    PNFSpectralApplicationBoundaryLane
+  pnfResidualFieldInvariantLane :
+    PNFSpectralApplicationBoundaryLane
+  pnfSpectralCoordinateRebuildabilityLane :
+    PNFSpectralApplicationBoundaryLane
+  pnfResolverSelectorCommitmentLane :
+    PNFSpectralApplicationBoundaryLane
+  pnfHodgeResidualTopologyLane :
+    PNFSpectralApplicationBoundaryLane
+  pnfSpectralTradingSignalBoundaryLane :
+    PNFSpectralApplicationBoundaryLane
+  pnfSpectralEmpiricalBasinValidationLane :
+    PNFSpectralApplicationBoundaryLane
 
 record PromotionLaneSummary : Set where
   field
@@ -383,6 +409,34 @@ record FullClayExternalAuthorityBoundarySummary : Set where
 
 open FullClayExternalAuthorityBoundarySummary public
 
+record PNFSpectralApplicationBoundarySummary : Set where
+  field
+    pnfSpectralBoundaryLane :
+      PNFSpectralApplicationBoundaryLane
+
+    pnfSpectralBoundaryModule :
+      String
+
+    canonicalPNFSpectralBoundarySurface :
+      String
+
+    recordedArchitectureAdvance :
+      String
+
+    remainingValidationBoundary :
+      String
+
+    validationCommand :
+      String
+
+    promotesRuntimeOrTradingAuthority :
+      Bool
+
+    promotesRuntimeOrTradingAuthorityIsFalse :
+      promotesRuntimeOrTradingAuthority ≡ false
+
+open PNFSpectralApplicationBoundarySummary public
+
 mkLaneSummary :
   PromotionImplementationLane →
   String →
@@ -545,6 +599,26 @@ mkFullClayExternalAuthorityBoundarySummary lane owner surface support boundary c
     ; validationCommand = command
     ; promotesClay = false
     ; promotesClayIsFalse = refl
+    }
+
+mkPNFSpectralApplicationBoundarySummary :
+  PNFSpectralApplicationBoundaryLane →
+  String →
+  String →
+  String →
+  String →
+  String →
+  PNFSpectralApplicationBoundarySummary
+mkPNFSpectralApplicationBoundarySummary lane owner surface advance boundary command =
+  record
+    { pnfSpectralBoundaryLane = lane
+    ; pnfSpectralBoundaryModule = owner
+    ; canonicalPNFSpectralBoundarySurface = surface
+    ; recordedArchitectureAdvance = advance
+    ; remainingValidationBoundary = boundary
+    ; validationCommand = command
+    ; promotesRuntimeOrTradingAuthority = false
+    ; promotesRuntimeOrTradingAuthorityIsFalse = refl
     }
 
 canonicalPromotionLaneSummaries : List PromotionLaneSummary
@@ -959,6 +1033,67 @@ canonicalFullClayExternalAuthorityBoundarySummaries =
     "python scripts/projection_nonlocality_leakage_principle.py && python scripts/ns_projection_pressure_commutator_chain.py && python scripts/ym_bt_hodge_gauge_commutator_chain.py && agda -i . DASHI/Physics/Closure/Sprint166ProjectionNonlocalityLeakagePrincipleReceipt.agda && pytest -q tests/test_sprint166_projection_nonlocality_emitters.py tests/test_sprint166_projection_nonlocality_agda.py"
   ∷ []
 
+canonicalPNFSpectralApplicationBoundarySummaries :
+  List PNFSpectralApplicationBoundarySummary
+canonicalPNFSpectralApplicationBoundarySummaries =
+  mkPNFSpectralApplicationBoundarySummary
+    pnfSpectralFieldArchitectureLane
+    "DASHI.Interop.PNFSpectralFieldArchitectureReceipt"
+    "canonicalPNFSpectralFieldArchitectureReceipt"
+    "core/fibre, residual graph/Laplacian, braid transport, and vector index/resolver/selector are aggregated as an intake-only architecture surface"
+    "runtime parser, ANN backend, spectral utility proof, semantic truth, and trading truth remain false"
+    "agda -i . DASHI/Interop/PNFSpectralFieldArchitectureReceipt.agda"
+  ∷ mkPNFSpectralApplicationBoundarySummary
+    pnfSpectralRegistryAnchoringLane
+    "DASHI.Interop.PNFSpectralRegistryAnchoring"
+    "canonicalPNFSpectralRegistryAnchoringReceipt"
+    "canonical documents, evidence spans, version hashes, parser/reducer profiles, structural payloads, registry rows, and resolver preconditions are typed"
+    "unanchored object admission, stale-version admission, vector-row authority, missing-receipt admission, and runtime-parser authority remain false"
+    "agda -i . DASHI/Interop/PNFSpectralRegistryAnchoring.agda"
+  ∷ mkPNFSpectralApplicationBoundarySummary
+    pnfResidualFieldInvariantLane
+    "DASHI.Interop.PNFResidualFieldInvariants"
+    "canonicalPNFResidualFieldInvariantReceipt"
+    "structural projection, same-fibre comparability, bridge-transport exception, severity-max join, and contradiction monotonicity are recorded"
+    "vector/spectral proximity still cannot promote truth, support, admissibility, or authority"
+    "agda -i . DASHI/Interop/PNFResidualFieldInvariants.agda"
+  ∷ mkPNFSpectralApplicationBoundarySummary
+    pnfSpectralCoordinateRebuildabilityLane
+    "DASHI.Interop.PNFSpectralCoordinateRebuildability"
+    "canonicalPNFSpectralCoordinateRebuildabilityReceipt"
+    "signed adjacency, absolute-degree, signed-Laplacian tags, spectral coordinate rows, text fallback rows, and coordinate rebuildability are typed"
+    "text fallback authority, non-rebuildable coordinate admission, and vector authority remain false"
+    "agda -i . DASHI/Interop/PNFSpectralCoordinateRebuildability.agda"
+  ∷ mkPNFSpectralApplicationBoundarySummary
+    pnfResolverSelectorCommitmentLane
+    "DASHI.Interop.PNFResolverSelectorCommitment"
+    "canonicalPNFResolverSelectorCommitmentReceipt"
+    "resolver preconditions, selector packages, query modes, hybrid ranking, and ITIR commitment over admitted packages are typed"
+    "unresolved candidate support, raw vector-hit evidence, score authority, contradiction erasure, and direct ANN-to-ITIR commitment remain false"
+    "agda -i . DASHI/Interop/PNFResolverSelectorCommitment.agda"
+  ∷ mkPNFSpectralApplicationBoundarySummary
+    pnfHodgeResidualTopologyLane
+    "DASHI.Interop.PNFHodgeResidualTopology"
+    "canonicalPNFHodgeResidualTopologyReceipt"
+    "0/1/2-cell residual topology, boundary-map tags, Hodge-Laplacian tags, and closed contradiction feature rows are typed"
+    "Hodge authority, runtime evidence resolution, and topological promotion remain false"
+    "agda -i . DASHI/Interop/PNFHodgeResidualTopology.agda"
+  ∷ mkPNFSpectralApplicationBoundarySummary
+    pnfSpectralTradingSignalBoundaryLane
+    "DASHI.Promotion.PNFSpectralTradingSignalBoundary"
+    "canonicalPNFSpectralTradingSignalBoundaryReceipt"
+    "Nashi/Mirror-style news/trading consumer vocabulary is typed as candidate/proposal-only"
+    "financial advice, market prediction guarantee, production trading authority, and empirical adequacy remain false without replay/receipts"
+    "agda -i . DASHI/Promotion/PNFSpectralTradingSignalBoundary.agda"
+  ∷ mkPNFSpectralApplicationBoundarySummary
+    pnfSpectralEmpiricalBasinValidationLane
+    "DASHI.Promotion.PNFSpectralEmpiricalBasinValidation"
+    "canonicalPNFSpectralEmpiricalBasinValidationReceipt"
+    "field-window features, outcome carriers, basin proximity rows, separator lifecycle, MDL/cost discipline, and holdout/cost-stress/search gates are typed"
+    "empirical adequacy, financial advice, production trading, market prediction, manual semantic labels, and threshold fishing remain false"
+    "agda -i . DASHI/Promotion/PNFSpectralEmpiricalBasinValidation.agda"
+  ∷ []
+
 record UnifiedPromotionObligationIndex : Setω where
   field
     sourceKnownInputsPopulation :
@@ -1129,6 +1264,30 @@ record UnifiedPromotionObligationIndex : Setω where
     p0ClayFiniteHodgeNSTopologicalStack :
       P0Stack.P0ClayFiniteHodgeNSTopologicalStackReceipt
 
+    pnfSpectralFieldArchitectureReceipt :
+      PNFArchitecture.PNFSpectralFieldArchitectureReceipt
+
+    pnfSpectralRegistryAnchoringReceipt :
+      PNFRegistry.PNFSpectralRegistryAnchoringReceipt
+
+    pnfResidualFieldInvariantReceipt :
+      PNFResidualInvariants.PNFResidualFieldInvariantReceipt
+
+    pnfSpectralCoordinateRebuildabilityReceipt :
+      PNFCoordinate.PNFSpectralCoordinateRebuildabilityReceipt
+
+    pnfResolverSelectorCommitmentReceipt :
+      PNFResolverSelector.PNFResolverSelectorCommitmentReceipt
+
+    pnfHodgeResidualTopologyReceipt :
+      PNFHodge.PNFHodgeResidualTopologyReceipt
+
+    pnfSpectralTradingSignalBoundary :
+      PNFTrading.PNFSpectralTradingSignalBoundaryReceipt
+
+    pnfSpectralEmpiricalBasinValidationReceipt :
+      PNFEmpirical.PNFSpectralEmpiricalBasinValidationReceipt
+
     laneSummaries :
       List PromotionLaneSummary
 
@@ -1152,6 +1311,9 @@ record UnifiedPromotionObligationIndex : Setω where
 
     fullClayExternalAuthorityBoundarySummaries :
       List FullClayExternalAuthorityBoundarySummary
+
+    pnfSpectralApplicationBoundarySummaries :
+      List PNFSpectralApplicationBoundarySummary
 
     laneSummaryCount :
       Nat
@@ -1201,11 +1363,17 @@ record UnifiedPromotionObligationIndex : Setω where
     fullClayExternalAuthorityBoundaryCountIs7 :
       fullClayExternalAuthorityBoundaryCount ≡ 7
 
+    pnfSpectralApplicationBoundaryCount :
+      Nat
+
+    pnfSpectralApplicationBoundaryCountIs8 :
+      pnfSpectralApplicationBoundaryCount ≡ 8
+
     aggregateOpenObligationCount :
       Nat
 
-    aggregateOpenObligationCountIs85 :
-      aggregateOpenObligationCount ≡ 85
+    aggregateOpenObligationCountIs91 :
+      aggregateOpenObligationCount ≡ 91
 
     validationTarget :
       String
@@ -1343,6 +1511,22 @@ canonicalUnifiedPromotionObligationIndex =
         BoundaryObservablePipeline.canonicalFiniteDepthBoundaryObservablePromotionPipeline
     ; p0ClayFiniteHodgeNSTopologicalStack =
         P0Stack.canonicalP0ClayFiniteHodgeNSTopologicalStackReceipt
+    ; pnfSpectralFieldArchitectureReceipt =
+        PNFArchitecture.canonicalPNFSpectralFieldArchitectureReceipt
+    ; pnfSpectralRegistryAnchoringReceipt =
+        PNFRegistry.canonicalPNFSpectralRegistryAnchoringReceipt
+    ; pnfResidualFieldInvariantReceipt =
+        PNFResidualInvariants.canonicalPNFResidualFieldInvariantReceipt
+    ; pnfSpectralCoordinateRebuildabilityReceipt =
+        PNFCoordinate.canonicalPNFSpectralCoordinateRebuildabilityReceipt
+    ; pnfResolverSelectorCommitmentReceipt =
+        PNFResolverSelector.canonicalPNFResolverSelectorCommitmentReceipt
+    ; pnfHodgeResidualTopologyReceipt =
+        PNFHodge.canonicalPNFHodgeResidualTopologyReceipt
+    ; pnfSpectralTradingSignalBoundary =
+        PNFTrading.canonicalPNFSpectralTradingSignalBoundaryReceipt
+    ; pnfSpectralEmpiricalBasinValidationReceipt =
+        PNFEmpirical.canonicalPNFSpectralEmpiricalBasinValidationReceipt
     ; laneSummaries =
         canonicalPromotionLaneSummaries
     ; adapterAdvancementSummaries =
@@ -1359,6 +1543,8 @@ canonicalUnifiedPromotionObligationIndex =
         canonicalSMFirstPrinciplesBoundarySummaries
     ; fullClayExternalAuthorityBoundarySummaries =
         canonicalFullClayExternalAuthorityBoundarySummaries
+    ; pnfSpectralApplicationBoundarySummaries =
+        canonicalPNFSpectralApplicationBoundarySummaries
     ; laneSummaryCount =
         6
     ; laneSummaryCountIs6 =
@@ -1391,9 +1577,13 @@ canonicalUnifiedPromotionObligationIndex =
         7
     ; fullClayExternalAuthorityBoundaryCountIs7 =
         refl
+    ; pnfSpectralApplicationBoundaryCount =
+        8
+    ; pnfSpectralApplicationBoundaryCountIs8 =
+        refl
     ; aggregateOpenObligationCount =
-        85
-    ; aggregateOpenObligationCountIs85 =
+        91
+    ; aggregateOpenObligationCountIs91 =
         refl
     ; validationTarget =
         "DASHI/Promotion/ObligationIndex.agda"
@@ -1415,11 +1605,11 @@ canonicalUnifiedPromotionLaneCountIs6 :
   ≡ 6
 canonicalUnifiedPromotionLaneCountIs6 = refl
 
-canonicalUnifiedPromotionOpenObligationCountIs85 :
+canonicalUnifiedPromotionOpenObligationCountIs91 :
   UnifiedPromotionObligationIndex.aggregateOpenObligationCount
     canonicalUnifiedPromotionObligationIndex
-  ≡ 85
-canonicalUnifiedPromotionOpenObligationCountIs85 = refl
+  ≡ 91
+canonicalUnifiedPromotionOpenObligationCountIs91 = refl
 
 canonicalUnifiedPromotionAdapterAdvancementCountIs6 :
   UnifiedPromotionObligationIndex.adapterAdvancementCount
@@ -1462,6 +1652,12 @@ canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs7 :
     canonicalUnifiedPromotionObligationIndex
   ≡ 7
 canonicalUnifiedPromotionFullClayExternalAuthorityBoundaryCountIs7 = refl
+
+canonicalUnifiedPromotionPNFSpectralApplicationBoundaryCountIs8 :
+  UnifiedPromotionObligationIndex.pnfSpectralApplicationBoundaryCount
+    canonicalUnifiedPromotionObligationIndex
+  ≡ 8
+canonicalUnifiedPromotionPNFSpectralApplicationBoundaryCountIs8 = refl
 
 canonicalUnifiedPromotionTerminalPromotionIsFalse :
   UnifiedPromotionObligationIndex.terminalPromotion

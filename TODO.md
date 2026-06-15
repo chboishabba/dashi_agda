@@ -7388,6 +7388,49 @@ Worker 4 spectral tower tranche governance `2026-06-01`:
   ground-state, and infinite-volume gap-survival steps kept conditional.
 - [ ] Prove any claimed runtime/semantic PNF correspondence before consuming
   the finite diagonal spectral proof outside spectral severity.
+- [x] Add a checked PNF spectral-field architecture surface over the residual
+  carrier.
+  Required:
+  model PNF atoms as refs/sections over structural fibres, add residual graph
+  and signed Laplacian vocabulary, add temporal/source braid transport, and keep
+  vector search as proposal-only addressing over object refs.
+  Result:
+  `DASHI/Interop/PNFSpectralFieldCore.agda`,
+  `DASHI/Interop/PNFSpectralFieldGraph.agda`,
+  `DASHI/Interop/PNFBraidTransportField.agda`,
+  `DASHI/Interop/PNFSpectralVectorIndex.agda`, and
+  `DASHI/Interop/PNFSpectralFieldArchitectureReceipt.agda` now check as the
+  normalized architecture stack. `DASHI/Promotion/PNFSpectralTradingSignalBoundary.agda`
+  records Nashi/Mirror-style news/trading use as candidate/proposal-only, with
+  no financial advice, market prediction guarantee, production trading
+  authority, empirical adequacy, runtime parser, ANN backend, semantic truth, or
+  trading truth promoted.
+- [x] Strengthen the PNF spectral-field formalism into checked invariant
+  surfaces.
+  Result:
+  `DASHI/Interop/PNFSpectralRegistryAnchoring.agda` records canonical document,
+  evidence-span, version-hash, parser/reducer-profile, structural-payload,
+  registry-row, identity-authority, and resolver-precondition gates;
+  `DASHI/Interop/PNFResidualFieldInvariants.agda` records structural projection,
+  same-fibre comparability, bridge exceptions, severity-max join, visible
+  residual severity, and contradiction monotonicity;
+  `DASHI/Interop/PNFSpectralCoordinateRebuildability.agda` records signed
+  adjacency, absolute degree, signed-Laplacian tags, spectral coordinate rows,
+  text fallback, and rebuildability from registry payloads;
+  `DASHI/Interop/PNFResolverSelectorCommitment.agda` records resolve,
+  selector-package, query-mode, hybrid-ranking, and ITIR-commitment invariants;
+  `DASHI/Interop/PNFHodgeResidualTopology.agda` records 0/1/2-cell,
+  boundary-map, Hodge-Laplacian, and detected-feature tags with signed
+  Laplacian as the first implementable layer; and
+  `DASHI/Promotion/PNFSpectralEmpiricalBasinValidation.agda` records
+  field-window, outcome-carrier, basin, separator, MDL/cost, holdout,
+  cost-stress, search-cost, and threshold-fishing gates. These surfaces are
+  wired through `DASHI/Everything.agda` and
+  `DASHI/Promotion/ObligationIndex.agda`, whose PNF application boundary now
+  has eight rows. Runtime parsing, ANN, semantic truth, support/admissibility
+  promotion, Hodge authority, empirical adequacy, financial advice, production
+  trading, market prediction, manual semantic labels, threshold fishing, Clay,
+  and terminal promotion remain false.
 - [ ] Prove continuum/Clay promotion separately before using the spectral
   tower target as theorem closure.
 - [ ] Extend NS FRACTRAN admissibility beyond the Kolmogorov-calibrated

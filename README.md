@@ -3885,12 +3885,43 @@ depends on that surface.
   output as semantic authority. The tetralemma bridge also records the
   `TriTruth -> ResidualLevel` embedding and proves that `contradiction` is not
   in the tone image.
-  `Ontology/Hecke/PNFResidualBridge.agda` adds the Hecke-side PNF fibre
-  adapter: quotient projection equality is a candidate-pool fibre, stable /
-  illegal / other defects map to `partial` / `contradiction` / `noTypedMeet`,
-  and illegal defects preserve critical pressure under residual joins.
-  `WrapperState` now includes `performativeEvidence`, which maps to
-  `scopeExceeded6` when emitted by the pipeline; `PNFEmissionReceipt` records
+	  `Ontology/Hecke/PNFResidualBridge.agda` adds the Hecke-side PNF fibre
+	  adapter: quotient projection equality is a candidate-pool fibre, stable /
+	  illegal / other defects map to `partial` / `contradiction` / `noTypedMeet`,
+	  and illegal defects preserve critical pressure under residual joins.
+	  The PNF-as-field architecture is now also checked:
+	  `DASHI/Interop/PNFSpectralFieldCore.agda` records refs, fibres, chamber
+	  projections, residual edges, braid paths, support packets, and candidate
+	  refs over the existing `PredicatePNF` carrier;
+	  `DASHI/Interop/PNFSpectralFieldGraph.agda` records typed residual graph
+	  edges, structural weight classes, signed contradiction handling, and
+	  Laplacian/spectral-coordinate surfaces;
+	  `DASHI/Interop/PNFBraidTransportField.agda` records source/time braid
+	  transport as proposed-only candidate navigation;
+	  `DASHI/Interop/PNFSpectralVectorIndex.agda` records the
+	  vector-proposes/resolver-anchors/selector-admits/ITIR-commits authority
+	  chain; and `DASHI/Interop/PNFSpectralFieldArchitectureReceipt.agda`
+	  aggregates the whole field stack. The follow-up invariant tranche records
+	  the exact registry/span/version anchoring surface
+	  (`DASHI/Interop/PNFSpectralRegistryAnchoring.agda`), residual/fibre
+	  comparability and contradiction monotonicity
+	  (`DASHI/Interop/PNFResidualFieldInvariants.agda`), coordinate
+	  rebuildability and text-fallback non-authority
+	  (`DASHI/Interop/PNFSpectralCoordinateRebuildability.agda`),
+	  resolver/selector/ITIR package commitment
+	  (`DASHI/Interop/PNFResolverSelectorCommitment.agda`), and the
+	  signed-Laplacian-first Hodge/topology boundary
+	  (`DASHI/Interop/PNFHodgeResidualTopology.agda`).
+	  `DASHI/Promotion/PNFSpectralTradingSignalBoundary.agda` adds the
+	  Nashi/Mirror-style news/trading consumer boundary, and
+	  `DASHI/Promotion/PNFSpectralEmpiricalBasinValidation.agda` records
+	  field-window, basin, separator, MDL/cost, holdout, and cost-stress gates.
+	  Financial advice, market prediction, production trading authority,
+	  empirical adequacy, runtime parser, ANN backend, semantic truth,
+	  support/admissibility promotion, Hodge authority, manual semantic labels,
+	  threshold fishing, and trading truth all remain explicitly fail-closed.
+	  `WrapperState` now includes `performativeEvidence`, which maps to
+	  `scopeExceeded6` when emitted by the pipeline; `PNFEmissionReceipt` records
   parser profile, reducer profile, source span, and emitted atom so residual
   comparison is receipt-driven rather than hand-labelled.
   `Docs/PNFCaseStudiesWatergateIran.md` records Watergate/Iran as conditional
