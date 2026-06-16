@@ -9,6 +9,7 @@ open import DASHI.Algebra.Trit using (Trit)
 import DASHI.Foundations.SurrealCompactification as SC
 import DASHI.Foundations.SurrealCompactificationIntake as Intake
 import DASHI.Foundations.SurrealCompactificationRationalBridge as RationalBridge
+import DASHI.Foundations.CarrierPromotionBoundaryCore as CarrierCore
 
 ------------------------------------------------------------------------
 -- Exact fail-closed analytic law shapes.
@@ -215,6 +216,20 @@ kappaTailBound-law n k =
 
 record CompactificationTailBoundBridgeSurface (n k : Nat) : Set₁ where
   field
+    tailBoundPromotionCore :
+      CarrierCore.CarrierPromotionReceipt
+
+    tailBoundPromotionCoreIsCanonical :
+      tailBoundPromotionCore
+      ≡
+      CarrierCore.canonicalTailBoundPromotionReceipt
+
+    tailBoundPromotionCoreProvedFalse :
+      CarrierCore.analyticTailBoundProvedHere
+        (CarrierCore.boundary tailBoundPromotionCore)
+      ≡
+      false
+
     geometricSeriesTail :
       GeometricSeriesTailLawShape n
 
@@ -270,7 +285,13 @@ canonicalCompactificationTailBoundBridgeSurface :
   CompactificationTailBoundBridgeSurface n k
 canonicalCompactificationTailBoundBridgeSurface n k =
   record
-    { geometricSeriesTail =
+    { tailBoundPromotionCore =
+        CarrierCore.canonicalTailBoundPromotionReceipt
+    ; tailBoundPromotionCoreIsCanonical =
+        refl
+    ; tailBoundPromotionCoreProvedFalse =
+        refl
+    ; geometricSeriesTail =
         geometric-series-tail-law n
     ; geometricSeriesTailIsCanonical =
         refl

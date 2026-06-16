@@ -9,6 +9,7 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Interop.PNFSpectralFieldCore as Core
 import DASHI.Interop.PNFResidualSpectralSeverityReceipt as SpectralSeverity
+import DASHI.Interop.SpectralOperatorShapeCore as ShapeCore
 import DASHI.Interop.SensibLawResidualLattice as Residual
 import UFTC_Lattice as UFTC
 
@@ -35,6 +36,7 @@ data PNFGraphEdgeKind : Set where
   sameFibreEdge : PNFGraphEdgeKind
   exactResidualEdge : PNFGraphEdgeKind
   partialResidualEdge : PNFGraphEdgeKind
+  noTypedMeetEdge : PNFGraphEdgeKind
   compatibleJoinEdge : PNFGraphEdgeKind
   compatibleMeetEdge : PNFGraphEdgeKind
   sharedProvenanceEdge : PNFGraphEdgeKind
@@ -47,6 +49,7 @@ data PNFGraphWeightClass : Set where
   fibreWeight : PNFGraphWeightClass
   exactResidualWeight : PNFGraphWeightClass
   partialResidualWeight : PNFGraphWeightClass
+  noTypedMeetWeight : PNFGraphWeightClass
   compatibleJoinWeight : PNFGraphWeightClass
   compatibleMeetWeight : PNFGraphWeightClass
   sharedProvenanceWeight : PNFGraphWeightClass
@@ -55,10 +58,23 @@ data PNFGraphWeightClass : Set where
   temporalContinuationWeight : PNFGraphWeightClass
   contradictionSignedWeight : PNFGraphWeightClass
 
+data PNFGraphEdgeOriginClass : Set where
+  structuralFibreOrigin : PNFGraphEdgeOriginClass
+  evidenceProvenanceTimeOrigin : PNFGraphEdgeOriginClass
+  temporalTransportOrigin : PNFGraphEdgeOriginClass
+  contradictionOrigin : PNFGraphEdgeOriginClass
+
+data PNFGraphEdgeSourceClass : Set where
+  structuralFibreSource : PNFGraphEdgeSourceClass
+  evidenceProvenanceTimeSource : PNFGraphEdgeSourceClass
+  temporalTransportSource : PNFGraphEdgeSourceClass
+  contradictionSource : PNFGraphEdgeSourceClass
+
 edgeKindWeightClass : PNFGraphEdgeKind → PNFGraphWeightClass
 edgeKindWeightClass sameFibreEdge = fibreWeight
 edgeKindWeightClass exactResidualEdge = exactResidualWeight
 edgeKindWeightClass partialResidualEdge = partialResidualWeight
+edgeKindWeightClass noTypedMeetEdge = noTypedMeetWeight
 edgeKindWeightClass compatibleJoinEdge = compatibleJoinWeight
 edgeKindWeightClass compatibleMeetEdge = compatibleMeetWeight
 edgeKindWeightClass sharedProvenanceEdge = sharedProvenanceWeight
@@ -66,6 +82,32 @@ edgeKindWeightClass sharedSourceEdge = sharedSourceWeight
 edgeKindWeightClass sharedTimeEdge = sharedTimeWeight
 edgeKindWeightClass temporalContinuationEdge = temporalContinuationWeight
 edgeKindWeightClass contradictionEdge = contradictionSignedWeight
+
+edgeKindOriginClass : PNFGraphEdgeKind → PNFGraphEdgeOriginClass
+edgeKindOriginClass sameFibreEdge = structuralFibreOrigin
+edgeKindOriginClass exactResidualEdge = structuralFibreOrigin
+edgeKindOriginClass partialResidualEdge = structuralFibreOrigin
+edgeKindOriginClass noTypedMeetEdge = structuralFibreOrigin
+edgeKindOriginClass compatibleJoinEdge = structuralFibreOrigin
+edgeKindOriginClass compatibleMeetEdge = structuralFibreOrigin
+edgeKindOriginClass sharedProvenanceEdge = evidenceProvenanceTimeOrigin
+edgeKindOriginClass sharedSourceEdge = evidenceProvenanceTimeOrigin
+edgeKindOriginClass sharedTimeEdge = evidenceProvenanceTimeOrigin
+edgeKindOriginClass temporalContinuationEdge = temporalTransportOrigin
+edgeKindOriginClass contradictionEdge = contradictionOrigin
+
+edgeKindSourceClass : PNFGraphEdgeKind → PNFGraphEdgeSourceClass
+edgeKindSourceClass sameFibreEdge = structuralFibreSource
+edgeKindSourceClass exactResidualEdge = structuralFibreSource
+edgeKindSourceClass partialResidualEdge = structuralFibreSource
+edgeKindSourceClass noTypedMeetEdge = structuralFibreSource
+edgeKindSourceClass compatibleJoinEdge = structuralFibreSource
+edgeKindSourceClass compatibleMeetEdge = structuralFibreSource
+edgeKindSourceClass sharedProvenanceEdge = evidenceProvenanceTimeSource
+edgeKindSourceClass sharedSourceEdge = evidenceProvenanceTimeSource
+edgeKindSourceClass sharedTimeEdge = evidenceProvenanceTimeSource
+edgeKindSourceClass temporalContinuationEdge = temporalTransportSource
+edgeKindSourceClass contradictionEdge = contradictionSource
 
 data ResidualWeightTag : Set where
   exactResidualSeverityWeight : ResidualWeightTag
@@ -179,6 +221,9 @@ data PNFGraphEdgeEvidence : PNFGraphEdgeKind → Set where
   partialResidualEvidence :
     PNFGraphEdgeEvidence partialResidualEdge
 
+  noTypedMeetEvidence :
+    PNFGraphEdgeEvidence noTypedMeetEdge
+
   compatibleJoinEvidence :
     Residual.ResidualLevel →
     Residual.ResidualLevel →
@@ -218,6 +263,10 @@ record PNFGraphEdge : Set where
     evidence : PNFGraphEdgeEvidence kind
     weightClass : PNFGraphWeightClass
     weightClassIsStructural : weightClass ≡ edgeKindWeightClass kind
+    originClass : PNFGraphEdgeOriginClass
+    originClassIsTyped : originClass ≡ edgeKindOriginClass kind
+    sourceClass : PNFGraphEdgeSourceClass
+    sourceClassIsTyped : sourceClass ≡ edgeKindSourceClass kind
 
 open PNFGraphEdge public
 
@@ -235,6 +284,10 @@ mkPNFGraphEdge {kind} left right evidence =
     evidence
     (edgeKindWeightClass kind)
     refl
+    (edgeKindOriginClass kind)
+    refl
+    (edgeKindSourceClass kind)
+    refl
 
 record WeightedPNFGraph : Set where
   constructor weightedPNFGraph
@@ -245,6 +298,12 @@ record WeightedPNFGraph : Set where
     edgeWeightClass : PNFGraphEdge → PNFGraphWeightClass
     edgeWeightClassIsStructural :
       ∀ e → edgeWeightClass e ≡ edgeKindWeightClass (kind e)
+    edgeOriginClass : PNFGraphEdge → PNFGraphEdgeOriginClass
+    edgeOriginClassIsTyped :
+      ∀ e → edgeOriginClass e ≡ edgeKindOriginClass (kind e)
+    edgeSourceClass : PNFGraphEdge → PNFGraphEdgeSourceClass
+    edgeSourceClassIsTyped :
+      ∀ e → edgeSourceClass e ≡ edgeKindSourceClass (kind e)
 
 open WeightedPNFGraph public
 
@@ -293,9 +352,29 @@ record SignedResidualLaplacianOperator : Set where
       ∀ v w →
       sign (signedLaplacianEntry v w) ≡ negativeResidualWeight →
       Bool
+    signedLaplacianIsOperatorRelative :
+      Bool
+    signedLaplacianIsOperatorRelativeIsTrue :
+      signedLaplacianIsOperatorRelative ≡ true
+    signedLaplacianIsProposalOnly :
+      Bool
+    signedLaplacianIsProposalOnlyIsTrue :
+      signedLaplacianIsProposalOnly ≡ true
+    signedLaplacianSemanticTruth :
+      Bool
+    signedLaplacianSemanticTruthIsFalse :
+      signedLaplacianSemanticTruth ≡ false
     signedLaplacianStatement : String
 
 open SignedResidualLaplacianOperator public
+
+data SpectralCoordinateOperatorScope : Set where
+  operatorRelativeProposalCoordinates :
+    SpectralCoordinateOperatorScope
+
+data ContradictionFrustrationSemantics : Set where
+  signedFrustrationNotSemanticTruth :
+    ContradictionFrustrationSemantics
 
 record SpectralCoordinateRow : Set where
   constructor spectralCoordinateRow
@@ -308,6 +387,30 @@ record SpectralCoordinateRow : Set where
     rowStatement : String
 
 open SpectralCoordinateRow public
+
+record CheckedSpectralCoordinateRow : Set where
+  constructor checkedSpectralCoordinateRow
+  field
+    checkedRow : SpectralCoordinateRow
+    coordinateScope : SpectralCoordinateOperatorScope
+    coordinateScopeIsOperatorRelativeProposal :
+      coordinateScope ≡ operatorRelativeProposalCoordinates
+    contradictionFrustrationSemantics :
+      ContradictionFrustrationSemantics
+    contradictionFrustrationIsSignedNotSemanticTruth :
+      contradictionFrustrationSemantics
+      ≡
+      signedFrustrationNotSemanticTruth
+    contradictionCoordinateRemainsSigned :
+      sign (contradictionCoordinate checkedRow)
+      ≡
+      negativeResidualWeight
+    semanticTruthCoordinate :
+      Bool
+    semanticTruthCoordinateIsFalse :
+      semanticTruthCoordinate ≡ false
+
+open CheckedSpectralCoordinateRow public
 
 canonicalSpectralCoordinateRow :
   PNFGraphVertex →
@@ -334,6 +437,20 @@ canonicalSpectralCoordinateRowContradictionIsSigned :
 canonicalSpectralCoordinateRowContradictionIsSigned v =
   refl
 
+canonicalCheckedSpectralCoordinateRow :
+  PNFGraphVertex →
+  CheckedSpectralCoordinateRow
+canonicalCheckedSpectralCoordinateRow v =
+  checkedSpectralCoordinateRow
+    (canonicalSpectralCoordinateRow v)
+    operatorRelativeProposalCoordinates
+    refl
+    signedFrustrationNotSemanticTruth
+    refl
+    refl
+    false
+    refl
+
 ------------------------------------------------------------------------
 -- Canonical finite receipt and promotion boundary.
 
@@ -343,24 +460,33 @@ data PNFSpectralFieldGraphStatus : Set where
 
 data PNFSpectralFieldGraphComponent : Set where
   typedResidualEdgeKindsComponent : PNFSpectralFieldGraphComponent
+  typedEdgeOriginSourceClassesComponent :
+    PNFSpectralFieldGraphComponent
   structuralWeightClassesComponent : PNFSpectralFieldGraphComponent
   signedContradictionComponent : PNFSpectralFieldGraphComponent
   diagonalDegreeComponent : PNFSpectralFieldGraphComponent
   graphLaplacianComponent : PNFSpectralFieldGraphComponent
   signedResidualLaplacianComponent : PNFSpectralFieldGraphComponent
   finiteSpectralCoordinateRowComponent : PNFSpectralFieldGraphComponent
+  checkedOperatorRelativeCoordinateComponent :
+    PNFSpectralFieldGraphComponent
+  signedFrustrationBoundaryComponent :
+    PNFSpectralFieldGraphComponent
   finiteReceiptBoundaryComponent : PNFSpectralFieldGraphComponent
 
 canonicalPNFSpectralFieldGraphComponents :
   List PNFSpectralFieldGraphComponent
 canonicalPNFSpectralFieldGraphComponents =
   typedResidualEdgeKindsComponent
+  ∷ typedEdgeOriginSourceClassesComponent
   ∷ structuralWeightClassesComponent
   ∷ signedContradictionComponent
   ∷ diagonalDegreeComponent
   ∷ graphLaplacianComponent
   ∷ signedResidualLaplacianComponent
   ∷ finiteSpectralCoordinateRowComponent
+  ∷ checkedOperatorRelativeCoordinateComponent
+  ∷ signedFrustrationBoundaryComponent
   ∷ finiteReceiptBoundaryComponent
   ∷ []
 
@@ -373,11 +499,59 @@ pnfSpectralFieldGraphPromotionImpossible ()
 
 pnfSpectralFieldGraphStatement : String
 pnfSpectralFieldGraphStatement =
-  "The weighted residual graph is a finite symbolic addressing surface over PNF receipts. Edge kinds are typed structural constructors; residual weights reuse the finite residual severity lattice; contradiction is kept as a signed residual component."
+  "The weighted residual graph is a finite symbolic addressing surface over PNF receipts. Edge kinds carry typed origin/source classes for structural-fibre, no-typed-meet, evidence/provenance/time, temporal transport, and contradiction edges; residual weights reuse the finite residual severity lattice; contradiction/frustration is kept as a signed residual component."
 
 pnfSpectralFieldGraphBoundaryStatement : String
 pnfSpectralFieldGraphBoundaryStatement =
-  "This receipt is only an addressing/proposal operator for finite PNF spectral field rows. It does not assert semantic truth, admissibility, runtime evidence, legal/policy authority, or any continuum spectral theorem."
+  "This receipt is only an operator-relative addressing/proposal surface for finite PNF spectral field rows. Signed spectral coordinates do not assert semantic truth, admissibility, runtime evidence, legal/policy authority, or any continuum spectral theorem; contradiction/frustration remains signed residual structure."
+
+canonicalStructuralFibreOrigin :
+  edgeKindOriginClass sameFibreEdge ≡ structuralFibreOrigin
+canonicalStructuralFibreOrigin =
+  refl
+
+canonicalEvidenceProvenanceTimeOrigin :
+  edgeKindOriginClass sharedProvenanceEdge
+  ≡
+  evidenceProvenanceTimeOrigin
+canonicalEvidenceProvenanceTimeOrigin =
+  refl
+
+canonicalTemporalTransportOrigin :
+  edgeKindOriginClass temporalContinuationEdge
+  ≡
+  temporalTransportOrigin
+canonicalTemporalTransportOrigin =
+  refl
+
+canonicalContradictionOrigin :
+  edgeKindOriginClass contradictionEdge ≡ contradictionOrigin
+canonicalContradictionOrigin =
+  refl
+
+canonicalStructuralFibreSource :
+  edgeKindSourceClass sameFibreEdge ≡ structuralFibreSource
+canonicalStructuralFibreSource =
+  refl
+
+canonicalEvidenceProvenanceTimeSource :
+  edgeKindSourceClass sharedSourceEdge
+  ≡
+  evidenceProvenanceTimeSource
+canonicalEvidenceProvenanceTimeSource =
+  refl
+
+canonicalTemporalTransportSource :
+  edgeKindSourceClass temporalContinuationEdge
+  ≡
+  temporalTransportSource
+canonicalTemporalTransportSource =
+  refl
+
+canonicalContradictionSource :
+  edgeKindSourceClass contradictionEdge ≡ contradictionSource
+canonicalContradictionSource =
+  refl
 
 record PNFSpectralFieldGraphReceipt : Set where
   field
@@ -396,6 +570,17 @@ record PNFSpectralFieldGraphReceipt : Set where
       severityReceipt
       ≡
       SpectralSeverity.canonicalPNFResidualSpectralSeverityReceipt
+
+    spectralOperatorShapeCore :
+      ShapeCore.SpectralOperatorShapeReceipt
+
+    spectralOperatorShapeCoreIsCanonical :
+      spectralOperatorShapeCore
+      ≡
+      ShapeCore.canonicalSignedResidualLaplacianReceipt
+
+    spectralOperatorShapeCorePromotionFalse :
+      ShapeCore.semanticTruthPromotion spectralOperatorShapeCore ≡ false
 
     components :
       List PNFSpectralFieldGraphComponent
@@ -440,6 +625,46 @@ record PNFSpectralFieldGraphReceipt : Set where
       ≡
       negativeResidualWeight
 
+    structuralFibreOriginIsCanonical :
+      edgeKindOriginClass sameFibreEdge
+      ≡
+      structuralFibreOrigin
+
+    evidenceProvenanceTimeOriginIsCanonical :
+      edgeKindOriginClass sharedProvenanceEdge
+      ≡
+      evidenceProvenanceTimeOrigin
+
+    temporalTransportOriginIsCanonical :
+      edgeKindOriginClass temporalContinuationEdge
+      ≡
+      temporalTransportOrigin
+
+    contradictionOriginIsCanonical :
+      edgeKindOriginClass contradictionEdge
+      ≡
+      contradictionOrigin
+
+    structuralFibreSourceIsCanonical :
+      edgeKindSourceClass sameFibreEdge
+      ≡
+      structuralFibreSource
+
+    evidenceProvenanceTimeSourceIsCanonical :
+      edgeKindSourceClass sharedSourceEdge
+      ≡
+      evidenceProvenanceTimeSource
+
+    temporalTransportSourceIsCanonical :
+      edgeKindSourceClass temporalContinuationEdge
+      ≡
+      temporalTransportSource
+
+    contradictionSourceIsCanonical :
+      edgeKindSourceClass contradictionEdge
+      ≡
+      contradictionSource
+
     statement :
       String
 
@@ -457,6 +682,24 @@ record PNFSpectralFieldGraphReceipt : Set where
 
     semanticTruthPromotionIsFalse :
       semanticTruthPromotion ≡ false
+
+    signedSpectralCoordinatesOperatorRelative :
+      Bool
+
+    signedSpectralCoordinatesOperatorRelativeIsTrue :
+      signedSpectralCoordinatesOperatorRelative ≡ true
+
+    signedSpectralCoordinatesProposalOnly :
+      Bool
+
+    signedSpectralCoordinatesProposalOnlyIsTrue :
+      signedSpectralCoordinatesProposalOnly ≡ true
+
+    contradictionFrustrationSemanticTruth :
+      Bool
+
+    contradictionFrustrationSemanticTruthIsFalse :
+      contradictionFrustrationSemanticTruth ≡ false
 
     admissibilityPromotion :
       Bool
@@ -502,6 +745,12 @@ canonicalPNFSpectralFieldGraphReceipt =
         SpectralSeverity.canonicalPNFResidualSpectralSeverityReceipt
     ; severityReceiptIsCanonical =
         refl
+    ; spectralOperatorShapeCore =
+        ShapeCore.canonicalSignedResidualLaplacianReceipt
+    ; spectralOperatorShapeCoreIsCanonical =
+        refl
+    ; spectralOperatorShapeCorePromotionFalse =
+        refl
     ; components =
         canonicalPNFSpectralFieldGraphComponents
     ; componentsAreCanonical =
@@ -524,6 +773,22 @@ canonicalPNFSpectralFieldGraphReceipt =
         contradictionResidualWeightSeverityIsNine
     ; contradictionWeightSign =
         refl
+    ; structuralFibreOriginIsCanonical =
+        refl
+    ; evidenceProvenanceTimeOriginIsCanonical =
+        refl
+    ; temporalTransportOriginIsCanonical =
+        refl
+    ; contradictionOriginIsCanonical =
+        refl
+    ; structuralFibreSourceIsCanonical =
+        refl
+    ; evidenceProvenanceTimeSourceIsCanonical =
+        refl
+    ; temporalTransportSourceIsCanonical =
+        refl
+    ; contradictionSourceIsCanonical =
+        refl
     ; statement =
         pnfSpectralFieldGraphStatement
     ; statementIsCanonical =
@@ -535,6 +800,18 @@ canonicalPNFSpectralFieldGraphReceipt =
     ; semanticTruthPromotion =
         false
     ; semanticTruthPromotionIsFalse =
+        refl
+    ; signedSpectralCoordinatesOperatorRelative =
+        true
+    ; signedSpectralCoordinatesOperatorRelativeIsTrue =
+        refl
+    ; signedSpectralCoordinatesProposalOnly =
+        true
+    ; signedSpectralCoordinatesProposalOnlyIsTrue =
+        refl
+    ; contradictionFrustrationSemanticTruth =
+        false
+    ; contradictionFrustrationSemanticTruthIsFalse =
         refl
     ; admissibilityPromotion =
         false

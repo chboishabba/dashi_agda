@@ -3,7 +3,7 @@ module DASHI.Physics.Closure.SchwarzschildLimitCandidate where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.Unit using (⊤; tt)
@@ -591,8 +591,11 @@ twentySevenN :
 twentySevenN =
   27
 
-seventyTwoN eightyN oneHundredTwelveN oneHundredTwentyFourN twoHundredTwentyN nineHundredNinetyTwoN :
+fortyFourN seventyTwoN eightyN oneHundredTwelveN oneHundredTwentyFourN twoHundredTwentyN nineHundredNinetyTwoN :
   Nat
+fortyFourN =
+  44
+
 seventyTwoN =
   72
 
@@ -624,7 +627,7 @@ twentySixN :
 twentySixN =
   suc9 (suc9 eightN)
 
-zeroQ posOne posOneThird posOneNinth posOneTwentySeventh posTwo posTwoThirds posTwoNinths posTwoTwentySevenths posFour posFourNinths posFourTwentySevenths posFiveThirds posElevenNinths posTwentySixTwentySevenths posFortyEightTwentyFifths posNineHundredNinetyTwoOneHundredTwentyFifths posThree posSix posNine posSeventyTwo posEighty posOneHundredTwelve posTwoHundredTwenty negOne negOneThird negOneNinth negTwoThirds negTwo negTwoNinths negTwoTwentySevenths negThree negFour negFourNinths negFourTwentySevenths negSix : SignedPositiveRationalTag
+zeroQ posOne posOneThird posOneNinth posOneTwentySeventh posTwo posTwoThirds posTwoNinths posTwoTwentySevenths posTwoEightyFirsts posFour posFourNinths posFourTwentySevenths posFiveThirds posElevenNinths posTwentySixTwentySevenths posFortyEightTwentyFifths posNineHundredNinetyTwoOneHundredTwentyFifths posThree posSix posNine posFortyFour posFortyEight posSeventyTwo posEighty posOneHundredTwelve posTwoHundredTwenty negOne negOneThird negOneNinth negTwoThirds negTwo negTwoNinths negTwoTwentySevenths negTwoEightyFirsts negThree negFour negFourNinths negFourTwentySevenths negTwentySixTwentySevenths negSix : SignedPositiveRationalTag
 zeroQ =
   signedPositiveRational sign+ zero zero
 
@@ -651,6 +654,9 @@ posTwoNinths =
 
 posTwoTwentySevenths =
   signedPositiveRational sign+ twoN twentySixN
+
+posTwoEightyFirsts =
+  signedPositiveRational sign+ twoN eightyN
 
 posFour =
   signedPositiveRational sign+ fourN zero
@@ -685,6 +691,12 @@ posSix =
 posNine =
   signedPositiveRational sign+ nineN zero
 
+posFortyFour =
+  signedPositiveRational sign+ fortyFourN zero
+
+posFortyEight =
+  signedPositiveRational sign+ fortyEightN zero
+
 posSeventyTwo =
   signedPositiveRational sign+ seventyTwoN zero
 
@@ -718,6 +730,9 @@ negTwoNinths =
 negTwoTwentySevenths =
   signedPositiveRational sign- twoN twentySixN
 
+negTwoEightyFirsts =
+  signedPositiveRational sign- twoN eightyN
+
 negThree =
   signedPositiveRational sign- threeN zero
 
@@ -729,6 +744,9 @@ negFourNinths =
 
 negFourTwentySevenths =
   signedPositiveRational sign- fourN twentySixN
+
+negTwentySixTwentySevenths =
+  signedPositiveRational sign- twentySixN twentySixN
 
 negSix =
   signedPositiveRational sign- sixN zero
@@ -997,6 +1015,62 @@ schwarzschildGammaRadialDerivativeAbsAtRs2R3 coord-phi coord-phi coord-r =
 schwarzschildGammaRadialDerivativeAbsAtRs2R3 _ _ _ =
   zeroQ
 
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 :
+  SchwarzschildCoordinateIndex →
+  SchwarzschildCoordinateIndex →
+  SchwarzschildCoordinateIndex →
+  SignedPositiveRationalTag
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-t coord-t coord-r =
+  posTwentySixTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-t coord-r coord-t =
+  posTwentySixTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-r coord-t coord-t =
+  negTwoEightyFirsts
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-r coord-r coord-r =
+  negTwentySixTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-r coord-theta coord-theta =
+  zeroQ
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-r coord-phi coord-phi =
+  zeroQ
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-theta coord-r coord-theta =
+  posTwoTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-theta coord-theta coord-r =
+  posTwoTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-phi coord-r coord-phi =
+  posTwoTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-phi coord-phi coord-r =
+  posTwoTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAtRs2R3 _ _ _ =
+  zeroQ
+
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 :
+  SchwarzschildCoordinateIndex →
+  SchwarzschildCoordinateIndex →
+  SchwarzschildCoordinateIndex →
+  SignedPositiveRationalTag
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 coord-t coord-t coord-r =
+  posTwentySixTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 coord-t coord-r coord-t =
+  posTwentySixTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 coord-r coord-t coord-t =
+  posTwoEightyFirsts
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 coord-r coord-r coord-r =
+  posTwentySixTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 coord-r coord-theta coord-theta =
+  zeroQ
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 coord-r coord-phi coord-phi =
+  zeroQ
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 coord-theta coord-r coord-theta =
+  posTwoTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 coord-theta coord-theta coord-r =
+  posTwoTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 coord-phi coord-r coord-phi =
+  posTwoTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 coord-phi coord-phi coord-r =
+  posTwoTwentySevenths
+schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 _ _ _ =
+  zeroQ
+
 record SchwarzschildShellSupremumParameterReceipt : Set where
   field
     shellRs :
@@ -1100,6 +1174,11 @@ record SchwarzschildGammaRadialDerivativeSlotFormulaReceipt : Set where
     shellBound :
       SignedPositiveRationalTag
 
+    shellBoundIsOne :
+      shellBound
+      ≡
+      posOne
+
     shellBoundText :
       String
 
@@ -1118,6 +1197,7 @@ schwarzschildGammaRadialDerivativeSlotFormulaReceipts =
     posFourNinths
     refl
     posOne
+    refl
     "absolute value 4/9 is bounded by the tight shell max 1"
   ∷ gammaRadialDerivativeSlotFormulaReceipt
     "dr-gamma-trt"
@@ -1131,6 +1211,7 @@ schwarzschildGammaRadialDerivativeSlotFormulaReceipts =
     posFourNinths
     refl
     posOne
+    refl
     "absolute value 4/9 is bounded by the tight shell max 1"
   ∷ gammaRadialDerivativeSlotFormulaReceipt
     "dr-gamma-rtt"
@@ -1144,6 +1225,7 @@ schwarzschildGammaRadialDerivativeSlotFormulaReceipts =
     zeroQ
     refl
     posOne
+    refl
     "explicit zero slot is bounded by the tight shell max 1"
   ∷ gammaRadialDerivativeSlotFormulaReceipt
     "dr-gamma-rrr"
@@ -1157,6 +1239,7 @@ schwarzschildGammaRadialDerivativeSlotFormulaReceipts =
     posFourNinths
     refl
     posOne
+    refl
     "absolute value 4/9 is bounded by the tight shell max 1"
   ∷ gammaRadialDerivativeSlotFormulaReceipt
     "dr-gamma-rthetatheta"
@@ -1170,6 +1253,7 @@ schwarzschildGammaRadialDerivativeSlotFormulaReceipts =
     posOne
     refl
     posOne
+    refl
     "absolute value 1 attains the tight shell max"
   ∷ gammaRadialDerivativeSlotFormulaReceipt
     "dr-gamma-rphiphi"
@@ -1183,6 +1267,7 @@ schwarzschildGammaRadialDerivativeSlotFormulaReceipts =
     posOne
     refl
     posOne
+    refl
     "absolute value 1 attains the tight shell max"
   ∷ gammaRadialDerivativeSlotFormulaReceipt
     "dr-gamma-thetartheta"
@@ -1196,6 +1281,7 @@ schwarzschildGammaRadialDerivativeSlotFormulaReceipts =
     posOneNinth
     refl
     posOne
+    refl
     "absolute value 1/9 is bounded by the tight shell max 1"
   ∷ gammaRadialDerivativeSlotFormulaReceipt
     "dr-gamma-thetathetar"
@@ -1209,6 +1295,7 @@ schwarzschildGammaRadialDerivativeSlotFormulaReceipts =
     posOneNinth
     refl
     posOne
+    refl
     "absolute value 1/9 is bounded by the tight shell max 1"
   ∷ gammaRadialDerivativeSlotFormulaReceipt
     "dr-gamma-phirphi"
@@ -1222,6 +1309,7 @@ schwarzschildGammaRadialDerivativeSlotFormulaReceipts =
     posOneNinth
     refl
     posOne
+    refl
     "absolute value 1/9 is bounded by the tight shell max 1"
   ∷ gammaRadialDerivativeSlotFormulaReceipt
     "dr-gamma-phiphir"
@@ -1235,7 +1323,383 @@ schwarzschildGammaRadialDerivativeSlotFormulaReceipts =
     posOneNinth
     refl
     posOne
+    refl
     "absolute value 1/9 is bounded by the tight shell max 1"
+  ∷ []
+
+schwarzschildGammaRadialDerivativeTTRSlotFormulaReceipt :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+schwarzschildGammaRadialDerivativeTTRSlotFormulaReceipt =
+  gammaRadialDerivativeSlotFormulaReceipt
+    "dr-gamma-ttr"
+    coord-t
+    coord-t
+    coord-r
+    "drGammaTTR"
+    "d_r Gamma^t_tr = d_r (r_s / (2 r (r - r_s))) at r_s=2,r=3 = -4/9"
+    negFourNinths
+    refl
+    posFourNinths
+    refl
+    posOne
+    refl
+    "absolute value 4/9 is bounded by the tight shell max 1"
+
+schwarzschildGammaRadialDerivativeTRTSlotFormulaReceipt :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+schwarzschildGammaRadialDerivativeTRTSlotFormulaReceipt =
+  gammaRadialDerivativeSlotFormulaReceipt
+    "dr-gamma-trt"
+    coord-t
+    coord-r
+    coord-t
+    "drGammaTRT"
+    "d_r Gamma^t_rt follows lower-index symmetry from d_r Gamma^t_tr and equals -4/9"
+    negFourNinths
+    refl
+    posFourNinths
+    refl
+    posOne
+    refl
+    "absolute value 4/9 is bounded by the tight shell max 1"
+
+schwarzschildGammaRadialDerivativeRTTSlotFormulaReceipt :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+schwarzschildGammaRadialDerivativeRTTSlotFormulaReceipt =
+  gammaRadialDerivativeSlotFormulaReceipt
+    "dr-gamma-rtt"
+    coord-r
+    coord-t
+    coord-t
+    "drGammaRTT"
+    "d_r Gamma^r_tt = d_r (r_s (r - r_s) / (2 r^3)) and is zero at r=3,r_s=2"
+    zeroQ
+    refl
+    zeroQ
+    refl
+    posOne
+    refl
+    "explicit zero slot is bounded by the tight shell max 1"
+
+schwarzschildGammaRadialDerivativeRRRSlotFormulaReceipt :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+schwarzschildGammaRadialDerivativeRRRSlotFormulaReceipt =
+  gammaRadialDerivativeSlotFormulaReceipt
+    "dr-gamma-rrr"
+    coord-r
+    coord-r
+    coord-r
+    "drGammaRRR"
+    "d_r Gamma^r_rr = d_r (-r_s / (2 r (r - r_s))) at r_s=2,r=3 = 4/9"
+    posFourNinths
+    refl
+    posFourNinths
+    refl
+    posOne
+    refl
+    "absolute value 4/9 is bounded by the tight shell max 1"
+
+schwarzschildGammaRadialDerivativeRThetaThetaSlotFormulaReceipt :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+schwarzschildGammaRadialDerivativeRThetaThetaSlotFormulaReceipt =
+  gammaRadialDerivativeSlotFormulaReceipt
+    "dr-gamma-rthetatheta"
+    coord-r
+    coord-theta
+    coord-theta
+    "drGammaRThetaTheta"
+    "d_r Gamma^r_thetatheta = d_r (-(r - r_s)) at r_s=2,r=3 = -1"
+    negOne
+    refl
+    posOne
+    refl
+    posOne
+    refl
+    "absolute value 1 attains the tight shell max"
+
+schwarzschildGammaRadialDerivativeRPhiPhiSlotFormulaReceipt :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+schwarzschildGammaRadialDerivativeRPhiPhiSlotFormulaReceipt =
+  gammaRadialDerivativeSlotFormulaReceipt
+    "dr-gamma-rphiphi"
+    coord-r
+    coord-phi
+    coord-phi
+    "drGammaRPhiPhi"
+    "d_r Gamma^r_phiphi uses sin(theta)^2=1, so d_r (-(r - r_s)) = -1"
+    negOne
+    refl
+    posOne
+    refl
+    posOne
+    refl
+    "absolute value 1 attains the tight shell max"
+
+schwarzschildGammaRadialDerivativeThetaRThetaSlotFormulaReceipt :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+schwarzschildGammaRadialDerivativeThetaRThetaSlotFormulaReceipt =
+  gammaRadialDerivativeSlotFormulaReceipt
+    "dr-gamma-thetartheta"
+    coord-theta
+    coord-r
+    coord-theta
+    "drGammaThetaRTheta"
+    "d_r Gamma^theta_rtheta = d_r (1 / r) at r=3 = -1/9"
+    negOneNinth
+    refl
+    posOneNinth
+    refl
+    posOne
+    refl
+    "absolute value 1/9 is bounded by the tight shell max 1"
+
+schwarzschildGammaRadialDerivativeTTRSlotBoundIsOne :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt.shellBound
+    schwarzschildGammaRadialDerivativeTTRSlotFormulaReceipt
+  ≡
+  posOne
+schwarzschildGammaRadialDerivativeTTRSlotBoundIsOne =
+  refl
+
+schwarzschildGammaRadialDerivativeTRTSlotBoundIsOne :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt.shellBound
+    schwarzschildGammaRadialDerivativeTRTSlotFormulaReceipt
+  ≡
+  posOne
+schwarzschildGammaRadialDerivativeTRTSlotBoundIsOne =
+  refl
+
+schwarzschildGammaRadialDerivativeRTTSlotBoundIsOne :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt.shellBound
+    schwarzschildGammaRadialDerivativeRTTSlotFormulaReceipt
+  ≡
+  posOne
+schwarzschildGammaRadialDerivativeRTTSlotBoundIsOne =
+  refl
+
+schwarzschildGammaRadialDerivativeRRRSlotBoundIsOne :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt.shellBound
+    schwarzschildGammaRadialDerivativeRRRSlotFormulaReceipt
+  ≡
+  posOne
+schwarzschildGammaRadialDerivativeRRRSlotBoundIsOne =
+  refl
+
+schwarzschildGammaRadialDerivativeRThetaThetaSlotBoundIsOne :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt.shellBound
+    schwarzschildGammaRadialDerivativeRThetaThetaSlotFormulaReceipt
+  ≡
+  posOne
+schwarzschildGammaRadialDerivativeRThetaThetaSlotBoundIsOne =
+  refl
+
+schwarzschildGammaRadialDerivativeRPhiPhiSlotBoundIsOne :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt.shellBound
+    schwarzschildGammaRadialDerivativeRPhiPhiSlotFormulaReceipt
+  ≡
+  posOne
+schwarzschildGammaRadialDerivativeRPhiPhiSlotBoundIsOne =
+  refl
+
+schwarzschildGammaRadialDerivativeThetaRThetaSlotBoundIsOne :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt.shellBound
+    schwarzschildGammaRadialDerivativeThetaRThetaSlotFormulaReceipt
+  ≡
+  posOne
+schwarzschildGammaRadialDerivativeThetaRThetaSlotBoundIsOne =
+  refl
+
+record SchwarzschildGammaRadialSecondDerivativeSlotFormulaReceipt : Set where
+  constructor gammaRadialSecondDerivativeSlotFormulaReceipt
+  field
+    slotName :
+      String
+
+    upper :
+      SchwarzschildCoordinateIndex
+
+    lower₁ :
+      SchwarzschildCoordinateIndex
+
+    lower₂ :
+      SchwarzschildCoordinateIndex
+
+    formulaName :
+      String
+
+    formulaText :
+      String
+
+    exactValue :
+      SignedPositiveRationalTag
+
+    exactValueMatchesTable :
+      schwarzschildGammaRadialSecondDerivativeAtRs2R3 upper lower₁ lower₂
+      ≡
+      exactValue
+
+    absoluteValue :
+      SignedPositiveRationalTag
+
+    absoluteValueMatchesTable :
+      schwarzschildGammaRadialSecondDerivativeAbsAtRs2R3 upper lower₁ lower₂
+      ≡
+      absoluteValue
+
+    shellBound :
+      SignedPositiveRationalTag
+
+    shellBoundIsTwentySixTwentySevenths :
+      shellBound
+      ≡
+      posTwentySixTwentySevenths
+
+    shellBoundText :
+      String
+
+schwarzschildGammaRadialSecondDerivativeSlotFormulaReceipts :
+  List SchwarzschildGammaRadialSecondDerivativeSlotFormulaReceipt
+schwarzschildGammaRadialSecondDerivativeSlotFormulaReceipts =
+  gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-ttr"
+    coord-t
+    coord-t
+    coord-r
+    "drrGammaTTR"
+    "d_rr Gamma^t_tr = 26/27 at r_s=2,r=3 and attains the Shell A second-derivative envelope"
+    posTwentySixTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 26/27 is the recorded C'_Gamma bound"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-trt"
+    coord-t
+    coord-r
+    coord-t
+    "drrGammaTRT"
+    "d_rr Gamma^t_rt follows lower-index symmetry and equals 26/27"
+    posTwentySixTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 26/27 is the recorded C'_Gamma bound"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-rtt"
+    coord-r
+    coord-t
+    coord-t
+    "drrGammaRTT"
+    "d_rr Gamma^r_tt = -2/81 at r_s=2,r=3"
+    negTwoEightyFirsts
+    refl
+    posTwoEightyFirsts
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 2/81 is recorded under the 26/27 envelope"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-rrr"
+    coord-r
+    coord-r
+    coord-r
+    "drrGammaRRR"
+    "d_rr Gamma^r_rr = -26/27 at r_s=2,r=3 and attains the Shell A second-derivative envelope"
+    negTwentySixTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 26/27 is the recorded C'_Gamma bound"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-rthetatheta"
+    coord-r
+    coord-theta
+    coord-theta
+    "drrGammaRThetaTheta"
+    "d_rr Gamma^r_thetatheta = 0 because d_r Gamma^r_thetatheta is constant -1"
+    zeroQ
+    refl
+    zeroQ
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "zero second derivative is recorded under the 26/27 envelope"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-rphiphi"
+    coord-r
+    coord-phi
+    coord-phi
+    "drrGammaRPhiPhi"
+    "d_rr Gamma^r_phiphi = 0 at the equatorial slice because d_r Gamma^r_phiphi is constant -1"
+    zeroQ
+    refl
+    zeroQ
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "zero second derivative is recorded under the 26/27 envelope"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-thetartheta"
+    coord-theta
+    coord-r
+    coord-theta
+    "drrGammaThetaRTheta"
+    "d_rr Gamma^theta_rtheta = 2/r^3 = 2/27 at r=3"
+    posTwoTwentySevenths
+    refl
+    posTwoTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 2/27 is recorded under the 26/27 envelope"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-thetathetar"
+    coord-theta
+    coord-theta
+    coord-r
+    "drrGammaThetaThetaR"
+    "d_rr Gamma^theta_thetar follows lower-index symmetry and equals 2/27"
+    posTwoTwentySevenths
+    refl
+    posTwoTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 2/27 is recorded under the 26/27 envelope"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-phirphi"
+    coord-phi
+    coord-r
+    coord-phi
+    "drrGammaPhiRPhi"
+    "d_rr Gamma^phi_rphi = 2/r^3 = 2/27 at r=3"
+    posTwoTwentySevenths
+    refl
+    posTwoTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 2/27 is recorded under the 26/27 envelope"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-phiphir"
+    coord-phi
+    coord-phi
+    coord-r
+    "drrGammaPhiPhiR"
+    "d_rr Gamma^phi_phir follows lower-index symmetry and equals 2/27"
+    posTwoTwentySevenths
+    refl
+    posTwoTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 2/27 is recorded under the 26/27 envelope"
   ∷ []
 
 record SchwarzschildShellSupremumConstantReceipt : Set where
@@ -1349,6 +1813,9 @@ record SchwarzschildShellSupremumBoundsReceipt : Set where
     radialDerivativeSlots :
       List SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
 
+    radialSecondDerivativeSlots :
+      List SchwarzschildGammaRadialSecondDerivativeSlotFormulaReceipt
+
     selectedConstants :
       SchwarzschildShellSupremumConstantReceipt
 
@@ -1363,6 +1830,8 @@ canonicalSchwarzschildShellSupremumBoundsReceipt =
         canonicalSchwarzschildShellSupremumParameterReceipt
     ; radialDerivativeSlots =
         schwarzschildGammaRadialDerivativeSlotFormulaReceipts
+    ; radialSecondDerivativeSlots =
+        schwarzschildGammaRadialSecondDerivativeSlotFormulaReceipts
     ; selectedConstants =
         canonicalSchwarzschildShellSupremumConstantReceipt
     ; receiptBoundary =
@@ -1414,7 +1883,7 @@ nonDegenerateShellLGamma :
   SchwarzschildNonDegenerateShellName →
   SignedPositiveRationalTag
 nonDegenerateShellLGamma shellA3To4 =
-  posSeventyTwo
+  posFortyEight
 nonDegenerateShellLGamma shellB5Over2To7Over2 =
   posOneHundredTwelve
 
@@ -1550,7 +2019,7 @@ canonicalSchwarzschildNonDegenerateShellAReceipt =
     ; cGammaPrimeMatchesAudit =
         refl
     ; lGamma =
-        posSeventyTwo
+        posFortyEight
     ; lGammaMatchesAudit =
         refl
     ; cR =
@@ -1579,7 +2048,8 @@ canonicalSchwarzschildNonDegenerateShellAReceipt =
         refl
     ; receiptText =
         "Shell A is the non-degenerate interval [3,4]"
-        ∷ "Audit constants are C_Gamma=1, C'_Gamma=26/27, L_Gamma=72, and C_R=80"
+        ∷ "Audit constants are C_Gamma=1, C'_Gamma=26/27, final L_Gamma=48, and C_R=80"
+        ∷ "The earlier L_Gamma=72 value is reserved for legacy conservative comparison receipts"
         ∷ "The existing point-shell r_s=2,r=3 constants remain canonical and unchanged"
         ∷ "This receipt records finite rational tags only; it does not promote an ordered supremum theorem"
         ∷ []
@@ -1692,7 +2162,7 @@ canonicalSchwarzschildNonDegenerateShellSupremumAuditReceipts =
         refl
     ; auditBoundary =
         "Non-degenerate shell receipts are attached beside the point-shell receipt"
-        ∷ "Shell A [3,4] records C_Gamma=1, C'_Gamma=26/27, L_Gamma=72, C_R=80"
+        ∷ "Shell A [3,4] records C_Gamma=1, C'_Gamma=26/27, final L_Gamma=48, C_R=80"
         ∷ "Shell B [5/2,7/2] records C_Gamma=48/25, C'_Gamma=992/125, L_Gamma=112, C_R=220"
         ∷ "All Birkhoff, W4 mass, continuum Ricci, and Candidate256 promotion gates remain false"
         ∷ []
@@ -2957,7 +3427,7 @@ schwarzschildShellASupremumQuantityValue shellA-C-Gamma =
 schwarzschildShellASupremumQuantityValue shellA-C-Gamma-Prime =
   posTwentySixTwentySevenths
 schwarzschildShellASupremumQuantityValue shellA-L-Gamma =
-  posSeventyTwo
+  posFortyEight
 schwarzschildShellASupremumQuantityValue shellA-C-R =
   posEighty
 
@@ -2999,9 +3469,9 @@ schwarzschildShellASupremumTableRows =
   ∷ shellASupremumTableRowReceipt
     "L_Gamma"
     shellA-L-Gamma
-    posSeventyTwo
+    posFortyEight
     refl
-    "Shell A [3,4] perturbation ledger uses L_Gamma = 72"
+    "Shell A [3,4] perturbation ledger uses final L_Gamma = 48"
   ∷ shellASupremumTableRowReceipt
     "C_R"
     shellA-C-R
@@ -3058,10 +3528,34 @@ record SchwarzschildShellASupremumTableReceipt : Set where
     lGamma :
       SignedPositiveRationalTag
 
-    lGammaIsSeventyTwo :
+    lGammaIsFortyEight :
       lGamma
       ≡
+      posFortyEight
+
+    tightLGamma :
+      SignedPositiveRationalTag
+
+    tightLGammaIsFortyFour :
+      tightLGamma
+      ≡
+      posFortyFour
+
+    legacyConservativeLGamma :
+      SignedPositiveRationalTag
+
+    legacyConservativeLGammaIsSeventyTwo :
+      legacyConservativeLGamma
+      ≡
       posSeventyTwo
+
+    supAbsInverseMetric :
+      SignedPositiveRationalTag
+
+    supAbsInverseMetricIsThree :
+      supAbsInverseMetric
+      ≡
+      posThree
 
     cR :
       SignedPositiveRationalTag
@@ -3073,6 +3567,12 @@ record SchwarzschildShellASupremumTableReceipt : Set where
 
     tableRows :
       List SchwarzschildShellASupremumTableRowReceipt
+
+    derivativeSlotLedger :
+      List SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+
+    secondDerivativeSlotLedger :
+      List SchwarzschildGammaRadialSecondDerivativeSlotFormulaReceipt
 
     birkhoffPromoted :
       Bool
@@ -3136,8 +3636,20 @@ canonicalSchwarzschildShellASupremumTableReceipt =
     ; cGammaPrimeIsTwentySixTwentySevenths =
         refl
     ; lGamma =
+        posFortyEight
+    ; lGammaIsFortyEight =
+        refl
+    ; tightLGamma =
+        posFortyFour
+    ; tightLGammaIsFortyFour =
+        refl
+    ; legacyConservativeLGamma =
         posSeventyTwo
-    ; lGammaIsSeventyTwo =
+    ; legacyConservativeLGammaIsSeventyTwo =
+        refl
+    ; supAbsInverseMetric =
+        posThree
+    ; supAbsInverseMetricIsThree =
         refl
     ; cR =
         posEighty
@@ -3145,6 +3657,10 @@ canonicalSchwarzschildShellASupremumTableReceipt =
         refl
     ; tableRows =
         schwarzschildShellASupremumTableRows
+    ; derivativeSlotLedger =
+        schwarzschildGammaRadialDerivativeSlotFormulaReceipts
+    ; secondDerivativeSlotLedger =
+        schwarzschildGammaRadialSecondDerivativeSlotFormulaReceipts
     ; birkhoffPromoted =
         false
     ; birkhoffPromotedIsFalse =
@@ -3163,7 +3679,10 @@ canonicalSchwarzschildShellASupremumTableReceipt =
         refl
     ; receiptText =
         "Exact Shell A [3,4] supremum table is recorded as finite signed-rational tags"
-        ∷ "The table fixes C_Gamma=1, C'_Gamma=26/27, L_Gamma=72, and C_R=80 by refl"
+        ∷ "The table fixes C_Gamma=1, C'_Gamma=26/27, tight L_Gamma=44, final L_Gamma=48, and C_R=80 by refl"
+        ∷ "The corrected inverse-metric supremum field records sup|g^-1|=3"
+        ∷ "The earlier L_Gamma=72 surface is retained only as a legacy conservative overbound comparison"
+        ∷ "The table now carries per-slot d_r Gamma and d_rr Gamma ledgers for downstream Continuum/Ricci references"
         ∷ "This table is a user-supplied calculation receipt, not an ordered supremum theorem"
         ∷ "Birkhoff, W4, continuum Ricci, and Candidate256 gates remain false"
         ∷ []
@@ -3203,10 +3722,10 @@ record SchwarzschildShellAPerturbationSlotLedgerReceipt : Set where
     lGamma :
       SignedPositiveRationalTag
 
-    lGammaIsSeventyTwo :
+    lGammaIsFortyEight :
       lGamma
       ≡
-      posSeventyTwo
+      posFortyEight
 
     routeText :
       String
@@ -3223,9 +3742,9 @@ schwarzschildShellAPerturbationSlotLedgerRows =
     refl
     posFourNinths
     refl
-    posSeventyTwo
+    posFortyEight
     refl
-    "Slot ledger checks Gamma^t_tr=1/3 and |d_r Gamma^t_tr|=4/9 under Shell A L_Gamma=72"
+    "Slot ledger checks Gamma^t_tr=1/3 and |d_r Gamma^t_tr|=4/9 under Shell A final L_Gamma=48"
   ∷ shellAPerturbationSlotLedgerReceipt
     "Gamma^t_rt"
     coord-t
@@ -3235,9 +3754,9 @@ schwarzschildShellAPerturbationSlotLedgerRows =
     refl
     posFourNinths
     refl
-    posSeventyTwo
+    posFortyEight
     refl
-    "Lower-index symmetry copy checks Gamma^t_rt=1/3 and |d_r Gamma^t_rt|=4/9 under L_Gamma=72"
+    "Lower-index symmetry copy checks Gamma^t_rt=1/3 and |d_r Gamma^t_rt|=4/9 under final L_Gamma=48"
   ∷ shellAPerturbationSlotLedgerReceipt
     "Gamma^r_tt"
     coord-r
@@ -3247,9 +3766,9 @@ schwarzschildShellAPerturbationSlotLedgerRows =
     refl
     zeroQ
     refl
-    posSeventyTwo
+    posFortyEight
     refl
-    "Slot ledger records Gamma^r_tt=1/27 and the zero radial perturbation slot under L_Gamma=72"
+    "Slot ledger records Gamma^r_tt=1/27 and the zero radial perturbation slot under final L_Gamma=48"
   ∷ shellAPerturbationSlotLedgerReceipt
     "Gamma^r_rr"
     coord-r
@@ -3259,9 +3778,9 @@ schwarzschildShellAPerturbationSlotLedgerRows =
     refl
     posFourNinths
     refl
-    posSeventyTwo
+    posFortyEight
     refl
-    "Slot ledger checks Gamma^r_rr=-1/3 and |d_r Gamma^r_rr|=4/9 under L_Gamma=72"
+    "Slot ledger checks Gamma^r_rr=-1/3 and |d_r Gamma^r_rr|=4/9 under final L_Gamma=48"
   ∷ shellAPerturbationSlotLedgerReceipt
     "Gamma^r_thetatheta"
     coord-r
@@ -3271,9 +3790,9 @@ schwarzschildShellAPerturbationSlotLedgerRows =
     refl
     posOne
     refl
-    posSeventyTwo
+    posFortyEight
     refl
-    "Angular radial slot attains the point-table derivative envelope 1 while Shell A keeps L_Gamma=72"
+    "Angular radial slot attains the point-table derivative envelope 1 while Shell A records final L_Gamma=48"
   ∷ shellAPerturbationSlotLedgerReceipt
     "Gamma^r_phiphi"
     coord-r
@@ -3283,9 +3802,9 @@ schwarzschildShellAPerturbationSlotLedgerRows =
     refl
     posOne
     refl
-    posSeventyTwo
+    posFortyEight
     refl
-    "Phi angular radial slot attains the point-table derivative envelope 1 while Shell A keeps L_Gamma=72"
+    "Phi angular radial slot attains the point-table derivative envelope 1 while Shell A records final L_Gamma=48"
   ∷ shellAPerturbationSlotLedgerReceipt
     "Gamma^theta_rtheta"
     coord-theta
@@ -3295,9 +3814,9 @@ schwarzschildShellAPerturbationSlotLedgerRows =
     refl
     posOneNinth
     refl
-    posSeventyTwo
+    posFortyEight
     refl
-    "Angular perturbation slot checks Gamma^theta_rtheta=1/3 and |d_r|=1/9 under L_Gamma=72"
+    "Angular perturbation slot checks Gamma^theta_rtheta=1/3 and |d_r|=1/9 under final L_Gamma=48"
   ∷ shellAPerturbationSlotLedgerReceipt
     "Gamma^theta_thetar"
     coord-theta
@@ -3307,9 +3826,9 @@ schwarzschildShellAPerturbationSlotLedgerRows =
     refl
     posOneNinth
     refl
-    posSeventyTwo
+    posFortyEight
     refl
-    "Lower-index symmetry copy checks Gamma^theta_thetar=1/3 and |d_r|=1/9 under L_Gamma=72"
+    "Lower-index symmetry copy checks Gamma^theta_thetar=1/3 and |d_r|=1/9 under final L_Gamma=48"
   ∷ shellAPerturbationSlotLedgerReceipt
     "Gamma^phi_rphi"
     coord-phi
@@ -3319,9 +3838,9 @@ schwarzschildShellAPerturbationSlotLedgerRows =
     refl
     posOneNinth
     refl
-    posSeventyTwo
+    posFortyEight
     refl
-    "Phi perturbation slot checks Gamma^phi_rphi=1/3 and |d_r|=1/9 under L_Gamma=72"
+    "Phi perturbation slot checks Gamma^phi_rphi=1/3 and |d_r|=1/9 under final L_Gamma=48"
   ∷ shellAPerturbationSlotLedgerReceipt
     "Gamma^phi_phir"
     coord-phi
@@ -3331,9 +3850,9 @@ schwarzschildShellAPerturbationSlotLedgerRows =
     refl
     posOneNinth
     refl
-    posSeventyTwo
+    posFortyEight
     refl
-    "Lower-index symmetry copy checks Gamma^phi_phir=1/3 and |d_r|=1/9 under L_Gamma=72"
+    "Lower-index symmetry copy checks Gamma^phi_phir=1/3 and |d_r|=1/9 under final L_Gamma=48"
   ∷ []
 
 record SchwarzschildShellAPerturbationLedgerReceipt : Set where
@@ -3349,8 +3868,16 @@ record SchwarzschildShellAPerturbationLedgerReceipt : Set where
     lGamma :
       SignedPositiveRationalTag
 
-    lGammaIsSeventyTwo :
+    lGammaIsFortyEight :
       lGamma
+      ≡
+      posFortyEight
+
+    legacyConservativeLGamma :
+      SignedPositiveRationalTag
+
+    legacyConservativeLGammaIsSeventyTwo :
+      legacyConservativeLGamma
       ≡
       posSeventyTwo
 
@@ -3369,14 +3896,19 @@ canonicalSchwarzschildShellAPerturbationLedgerReceipt =
     ; shellASupremumTableIsCanonical =
         refl
     ; lGamma =
+        posFortyEight
+    ; lGammaIsFortyEight =
+        refl
+    ; legacyConservativeLGamma =
         posSeventyTwo
-    ; lGammaIsSeventyTwo =
+    ; legacyConservativeLGammaIsSeventyTwo =
         refl
     ; slotLedger =
         schwarzschildShellAPerturbationSlotLedgerRows
     ; perturbationRouteText =
         "Perturbation ledger is slotwise over the ten nonzero Christoffel entries in the point table"
-        ∷ "Every row carries the same Shell A L_Gamma=72 constant with a definitional equality"
+        ∷ "Every row carries the same Shell A final L_Gamma=48 constant with a definitional equality"
+        ∷ "The legacy L_Gamma=72 constant remains named only as a conservative comparison"
         ∷ "The zero d_r Gamma^r_tt slot is retained explicitly instead of being dropped"
         ∷ "No perturbative convergence theorem or analytic promotion is claimed"
         ∷ []
@@ -3523,6 +4055,89 @@ canonicalSchwarzschildShellARicciTermCountLedgerReceipt =
         ∷ []
     }
 
+record SchwarzschildShellAExactLGammaCalculationRowReceipt : Set where
+  constructor shellAExactLGammaCalculationRowReceipt
+  field
+    rowName :
+      String
+
+    formulaText :
+      String
+
+    calculationValue :
+      Nat
+
+    calculationTag :
+      SignedPositiveRationalTag
+
+    finalLGamma :
+      SignedPositiveRationalTag
+
+    finalLGammaIsFortyEight :
+      finalLGamma
+      ≡
+      posFortyEight
+
+    conservativeLGamma :
+      SignedPositiveRationalTag
+
+    conservativeLGammaIsFortyEight :
+      conservativeLGamma
+      ≡
+      posFortyEight
+
+    legacyConservativeLGamma :
+      SignedPositiveRationalTag
+
+    legacyConservativeLGammaIsSeventyTwo :
+      legacyConservativeLGamma
+      ≡
+      posSeventyTwo
+
+    supAbsInverseMetric :
+      SignedPositiveRationalTag
+
+    supAbsInverseMetricIsThree :
+      supAbsInverseMetric
+      ≡
+      posThree
+
+    routeText :
+      String
+
+schwarzschildShellAExactLGammaCalculationRows :
+  List SchwarzschildShellAExactLGammaCalculationRowReceipt
+schwarzschildShellAExactLGammaCalculationRows =
+  shellAExactLGammaCalculationRowReceipt
+    "Shell A tight corrected L_Gamma"
+    "4 * (8 + 3) = 44 using corrected sup|g^-1| = 3"
+    (fourN * (eightN + threeN))
+    posFortyFour
+    posFortyEight
+    refl
+    posFortyEight
+    refl
+    posSeventyTwo
+    refl
+    posThree
+    refl
+    "Tight calculation receipt records corrected L_Gamma=44, while the repository final/conservative field remains L_Gamma=48"
+  ∷ shellAExactLGammaCalculationRowReceipt
+    "Shell A final conservative L_Gamma"
+    "4 * (8 + 4) = 48"
+    (fourN * (eightN + fourN))
+    posFortyEight
+    posFortyEight
+    refl
+    posFortyEight
+    refl
+    posSeventyTwo
+    refl
+    posThree
+    refl
+    "Final calculation receipt records the retained conservative L_Gamma=48, with legacy L_Gamma=72 preserved only as an overbound comparison"
+  ∷ []
+
 record SchwarzschildShellAExactCalculationReceipt : Set₁ where
   field
     supremumTable :
@@ -3534,6 +4149,62 @@ record SchwarzschildShellAExactCalculationReceipt : Set₁ where
     ricciTermCountLedger :
       SchwarzschildShellARicciTermCountLedgerReceipt
 
+    cGamma :
+      SignedPositiveRationalTag
+
+    cGammaIsOne :
+      cGamma
+      ≡
+      posOne
+
+    cGammaPrime :
+      SignedPositiveRationalTag
+
+    cGammaPrimeIsTwentySixTwentySevenths :
+      cGammaPrime
+      ≡
+      posTwentySixTwentySevenths
+
+    lGamma :
+      SignedPositiveRationalTag
+
+    lGammaIsFortyEight :
+      lGamma
+      ≡
+      posFortyEight
+
+    tightLGamma :
+      SignedPositiveRationalTag
+
+    tightLGammaIsFortyFour :
+      tightLGamma
+      ≡
+      posFortyFour
+
+    legacyConservativeLGamma :
+      SignedPositiveRationalTag
+
+    legacyConservativeLGammaIsSeventyTwo :
+      legacyConservativeLGamma
+      ≡
+      posSeventyTwo
+
+    supAbsInverseMetric :
+      SignedPositiveRationalTag
+
+    supAbsInverseMetricIsThree :
+      supAbsInverseMetric
+      ≡
+      posThree
+
+    cR :
+      SignedPositiveRationalTag
+
+    cRIsEighty :
+      cR
+      ≡
+      posEighty
+
     conservativeEnvelope :
       Nat
 
@@ -3541,6 +4212,9 @@ record SchwarzschildShellAExactCalculationReceipt : Set₁ where
       conservativeEnvelope
       ≡
       sixHundredFortyN
+
+    lGammaExactCalculationRows :
+      List SchwarzschildShellAExactLGammaCalculationRowReceipt
 
     birkhoffPromoted :
       Bool
@@ -3587,10 +4261,40 @@ canonicalSchwarzschildShellAExactCalculationReceipt =
         canonicalSchwarzschildShellAPerturbationLedgerReceipt
     ; ricciTermCountLedger =
         canonicalSchwarzschildShellARicciTermCountLedgerReceipt
+    ; cGamma =
+        posOne
+    ; cGammaIsOne =
+        refl
+    ; cGammaPrime =
+        posTwentySixTwentySevenths
+    ; cGammaPrimeIsTwentySixTwentySevenths =
+        refl
+    ; lGamma =
+        posFortyEight
+    ; lGammaIsFortyEight =
+        refl
+    ; tightLGamma =
+        posFortyFour
+    ; tightLGammaIsFortyFour =
+        refl
+    ; legacyConservativeLGamma =
+        posSeventyTwo
+    ; legacyConservativeLGammaIsSeventyTwo =
+        refl
+    ; supAbsInverseMetric =
+        posThree
+    ; supAbsInverseMetricIsThree =
+        refl
+    ; cR =
+        posEighty
+    ; cRIsEighty =
+        refl
     ; conservativeEnvelope =
         sixHundredFortyN
     ; conservativeEnvelopeIsSixHundredForty =
         refl
+    ; lGammaExactCalculationRows =
+        schwarzschildShellAExactLGammaCalculationRows
     ; birkhoffPromoted =
         false
     ; birkhoffPromotedIsFalse =
@@ -3609,17 +4313,149 @@ canonicalSchwarzschildShellAExactCalculationReceipt =
         refl
     ; receiptRouteText =
         "Shell A [3,4] exact calculation receipt combines supremum, perturbation, and Ricci term-count ledgers"
-        ∷ "L_Gamma=72, C_R=80, and conservative envelope 640 are named fields with definitional equalities"
+        ∷ "C_Gamma=1, C'_Gamma=26/27, tight L_Gamma=44, final L_Gamma=48, C_R=80, and conservative envelope 640 are named fields with definitional equalities"
+        ∷ "The exact L_Gamma rows record corrected 4 * (8 + 3) = 44 from sup|g^-1|=3 alongside retained conservative 4 * (8 + 4) = 48"
+        ∷ "The earlier L_Gamma=72 value is retained only as a legacy conservative overbound comparison"
         ∷ "The receipt strengthens finite calculation traceability without promoting Schwarzschild vacuum results"
         ∷ []
     }
 
-schwarzschildShellAExactLGammaIsSeventyTwo :
+schwarzschildShellAExactCGammaIsOne :
+  SchwarzschildShellAExactCalculationReceipt.cGamma
+    canonicalSchwarzschildShellAExactCalculationReceipt
+  ≡
+  posOne
+schwarzschildShellAExactCGammaIsOne =
+  refl
+
+schwarzschildShellAExactCGammaPrimeIsTwentySixTwentySevenths :
+  SchwarzschildShellAExactCalculationReceipt.cGammaPrime
+    canonicalSchwarzschildShellAExactCalculationReceipt
+  ≡
+  posTwentySixTwentySevenths
+schwarzschildShellAExactCGammaPrimeIsTwentySixTwentySevenths =
+  refl
+
+schwarzschildShellAExactCalculationLGammaIsFortyEight :
+  SchwarzschildShellAExactCalculationReceipt.lGamma
+    canonicalSchwarzschildShellAExactCalculationReceipt
+  ≡
+  posFortyEight
+schwarzschildShellAExactCalculationLGammaIsFortyEight =
+  refl
+
+schwarzschildShellAExactLGammaIsFortyEight :
   SchwarzschildShellAPerturbationLedgerReceipt.lGamma
     canonicalSchwarzschildShellAPerturbationLedgerReceipt
   ≡
-  posSeventyTwo
-schwarzschildShellAExactLGammaIsSeventyTwo =
+  posFortyEight
+schwarzschildShellAExactLGammaIsFortyEight =
+  refl
+
+schwarzschildShellASupremumTableLGammaIsFortyEight :
+  SchwarzschildShellASupremumTableReceipt.lGamma
+    canonicalSchwarzschildShellASupremumTableReceipt
+  ≡
+  posFortyEight
+schwarzschildShellASupremumTableLGammaIsFortyEight =
+  refl
+
+schwarzschildShellAExactLGammaCalculationIsFortyEight :
+  SchwarzschildShellAExactLGammaCalculationRowReceipt.calculationValue
+    (shellAExactLGammaCalculationRowReceipt
+      "Shell A final conservative L_Gamma"
+      "4 * (8 + 4) = 48"
+      (fourN * (eightN + fourN))
+      posFortyEight
+      posFortyEight
+      refl
+      posFortyEight
+      refl
+      posSeventyTwo
+      refl
+      posThree
+      refl
+      "Final calculation receipt records the retained conservative L_Gamma=48, with legacy L_Gamma=72 preserved only as an overbound comparison")
+  ≡
+  fortyEightN
+schwarzschildShellAExactLGammaCalculationIsFortyEight =
+  refl
+
+schwarzschildShellAExactTightLGammaCalculationIsFortyFour :
+  SchwarzschildShellAExactLGammaCalculationRowReceipt.calculationValue
+    (shellAExactLGammaCalculationRowReceipt
+      "Shell A tight corrected L_Gamma"
+      "4 * (8 + 3) = 44 using corrected sup|g^-1| = 3"
+      (fourN * (eightN + threeN))
+      posFortyFour
+      posFortyEight
+      refl
+      posFortyEight
+      refl
+      posSeventyTwo
+      refl
+      posThree
+      refl
+      "Tight calculation receipt records corrected L_Gamma=44, while the repository final/conservative field remains L_Gamma=48")
+  ≡
+  fortyFourN
+schwarzschildShellAExactTightLGammaCalculationIsFortyFour =
+  refl
+
+schwarzschildShellAExactCalculationRowsAreCanonical :
+  SchwarzschildShellAExactCalculationReceipt.lGammaExactCalculationRows
+    canonicalSchwarzschildShellAExactCalculationReceipt
+  ≡
+  schwarzschildShellAExactLGammaCalculationRows
+schwarzschildShellAExactCalculationRowsAreCanonical =
+  refl
+
+schwarzschildShellAExactCalculationSupremumTableIsCanonical :
+  SchwarzschildShellAExactCalculationReceipt.supremumTable
+    canonicalSchwarzschildShellAExactCalculationReceipt
+  ≡
+  canonicalSchwarzschildShellASupremumTableReceipt
+schwarzschildShellAExactCalculationSupremumTableIsCanonical =
+  refl
+
+schwarzschildShellAExactCalculationPerturbationLedgerIsCanonical :
+  SchwarzschildShellAExactCalculationReceipt.perturbationLedger
+    canonicalSchwarzschildShellAExactCalculationReceipt
+  ≡
+  canonicalSchwarzschildShellAPerturbationLedgerReceipt
+schwarzschildShellAExactCalculationPerturbationLedgerIsCanonical =
+  refl
+
+schwarzschildShellAExactCalculationRicciTermCountLedgerIsCanonical :
+  SchwarzschildShellAExactCalculationReceipt.ricciTermCountLedger
+    canonicalSchwarzschildShellAExactCalculationReceipt
+  ≡
+  canonicalSchwarzschildShellARicciTermCountLedgerReceipt
+schwarzschildShellAExactCalculationRicciTermCountLedgerIsCanonical =
+  refl
+
+schwarzschildShellASupremumTableCGammaIsOne :
+  SchwarzschildShellASupremumTableReceipt.cGamma
+    canonicalSchwarzschildShellASupremumTableReceipt
+  ≡
+  posOne
+schwarzschildShellASupremumTableCGammaIsOne =
+  refl
+
+schwarzschildShellASupremumTableCGammaPrimeIsTwentySixTwentySevenths :
+  SchwarzschildShellASupremumTableReceipt.cGammaPrime
+    canonicalSchwarzschildShellASupremumTableReceipt
+  ≡
+  posTwentySixTwentySevenths
+schwarzschildShellASupremumTableCGammaPrimeIsTwentySixTwentySevenths =
+  refl
+
+schwarzschildShellASupremumTableCRIsEighty :
+  SchwarzschildShellASupremumTableReceipt.cR
+    canonicalSchwarzschildShellASupremumTableReceipt
+  ≡
+  posEighty
+schwarzschildShellASupremumTableCRIsEighty =
   refl
 
 schwarzschildShellAExactCRIsEighty :
@@ -3630,12 +4466,79 @@ schwarzschildShellAExactCRIsEighty :
 schwarzschildShellAExactCRIsEighty =
   refl
 
+schwarzschildShellAExactCalculationCRIsEighty :
+  SchwarzschildShellAExactCalculationReceipt.cR
+    canonicalSchwarzschildShellAExactCalculationReceipt
+  ≡
+  posEighty
+schwarzschildShellAExactCalculationCRIsEighty =
+  refl
+
 schwarzschildShellAExactEnvelopeIsSixHundredForty :
   SchwarzschildShellAExactCalculationReceipt.conservativeEnvelope
     canonicalSchwarzschildShellAExactCalculationReceipt
   ≡
   sixHundredFortyN
 schwarzschildShellAExactEnvelopeIsSixHundredForty =
+  refl
+
+schwarzschildShellARicciTermCountEnvelopeIsSixHundredForty :
+  SchwarzschildShellARicciTermCountLedgerReceipt.conservativeEnvelope
+    canonicalSchwarzschildShellARicciTermCountLedgerReceipt
+  ≡
+  sixHundredFortyN
+schwarzschildShellARicciTermCountEnvelopeIsSixHundredForty =
+  refl
+
+schwarzschildShellASupremumDerivativeSlotLedgerIsCanonical :
+  SchwarzschildShellASupremumTableReceipt.derivativeSlotLedger
+    canonicalSchwarzschildShellASupremumTableReceipt
+  ≡
+  schwarzschildGammaRadialDerivativeSlotFormulaReceipts
+schwarzschildShellASupremumDerivativeSlotLedgerIsCanonical =
+  refl
+
+schwarzschildShellASupremumSecondDerivativeSlotLedgerIsCanonical :
+  SchwarzschildShellASupremumTableReceipt.secondDerivativeSlotLedger
+    canonicalSchwarzschildShellASupremumTableReceipt
+  ≡
+  schwarzschildGammaRadialSecondDerivativeSlotFormulaReceipts
+schwarzschildShellASupremumSecondDerivativeSlotLedgerIsCanonical =
+  refl
+
+schwarzschildShellASecondDerivativeTTRIsTwentySixTwentySevenths :
+  schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-t coord-t coord-r
+  ≡
+  posTwentySixTwentySevenths
+schwarzschildShellASecondDerivativeTTRIsTwentySixTwentySevenths =
+  refl
+
+schwarzschildShellASecondDerivativeRTTIsNegativeTwoEightyFirsts :
+  schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-r coord-t coord-t
+  ≡
+  negTwoEightyFirsts
+schwarzschildShellASecondDerivativeRTTIsNegativeTwoEightyFirsts =
+  refl
+
+schwarzschildShellASecondDerivativeRRRIsNegativeTwentySixTwentySevenths :
+  schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-r coord-r coord-r
+  ≡
+  negTwentySixTwentySevenths
+schwarzschildShellASecondDerivativeRRRIsNegativeTwentySixTwentySevenths =
+  refl
+
+schwarzschildShellASecondDerivativeThetaRThetaIsTwoTwentySevenths :
+  schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-theta coord-r coord-theta
+  ≡
+  posTwoTwentySevenths
+schwarzschildShellASecondDerivativeThetaRThetaIsTwoTwentySevenths =
+  refl
+
+schwarzschildShellASecondDerivativePhiRPhiIsTwoTwentySevenths :
+  schwarzschildGammaRadialSecondDerivativeAtRs2R3 coord-phi coord-r coord-phi
+  ≡
+  posTwoTwentySevenths
+schwarzschildShellASecondDerivativePhiRPhiIsTwoTwentySevenths =
   refl
 
 schwarzschildShellAExactBirkhoffFalse :
@@ -4067,7 +4970,7 @@ canonicalSchwarzschildRs2R3AnalyticTableReceipt =
         ∷ "Conservative shell C_Gamma <= 2 is retained, with exact shell numerator text recorded as 5/3"
         ∷ "Formula stability comparison records requested 11/9 versus repository conservative 48"
         ∷ "Ricci contraction comparison records requested 48 versus repository conservative 640"
-        ∷ "Shell A [3,4] exact calculation receipt records C_Gamma=1, C'_Gamma=26/27, L_Gamma=72, C_R=80"
+        ∷ "Shell A [3,4] exact calculation receipt records C_Gamma=1, C'_Gamma=26/27, final L_Gamma=48, C_R=80"
         ∷ "Shell A perturbation and Ricci term-count ledgers retain 640 as a conservative envelope"
         ∷ "Gamma^r_tt radial derivative is explicitly zero at r=3,r_s=2"
         ∷ "Metric rows use signature (-,+,+,+): g_tt=-1/3, g_rr=3, and angular diagonal entries 9"

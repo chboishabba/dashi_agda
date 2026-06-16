@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.NSSprint158SymmetricHouLuoRegularityClassClosureReceipt as S158
+import DASHI.Physics.Closure.ExternalAuthorityImportCore as AuthorityCore
 
 ------------------------------------------------------------------------
 -- Sprint 159 full-Clay external-authority boundary receipt.
@@ -345,6 +346,14 @@ record NSSprint159FullClayExternalAuthorityBoundaryReceipt : Set where
       List Sprint159BoundaryRow
     boundaryRowsAreCanonical :
       boundaryRows ≡ canonicalSprint159BoundaryRows
+    externalAuthorityImportCore :
+      AuthorityCore.ExternalAuthorityImportReceipt
+    externalAuthorityImportCoreIsCanonical :
+      externalAuthorityImportCore
+      ≡
+      AuthorityCore.clayExternalAuthorityImportReceipt
+    externalAuthorityImportCorePromotedFalse :
+      AuthorityCore.promoted externalAuthorityImportCore ≡ false
     sprint158AnchorField :
       sprint158SymmetricClosureAnchor ≡ true
     symmetricSupportField :
@@ -394,7 +403,192 @@ canonicalNSSprint159FullClayExternalAuthorityBoundaryReceipt =
     refl
     canonicalSprint159BoundaryRows
     refl
+    AuthorityCore.clayExternalAuthorityImportReceipt
     refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+------------------------------------------------------------------------
+-- Chain C: general-data reduction boundary.
+--
+-- This is a fail-closed receipt for the user-math comparison between the
+-- GKP/L3/Besov candidate lanes and the H1 Clay target.  It records the
+-- exact missing gateways and prevents any downstream import from treating
+-- critical profiles, compactness, continuation, or Clay promotion as closed.
+
+data ChainCAnalyticGapRow : Set where
+  gkpL3BesovVersusH1ClayGap :
+    ChainCAnalyticGapRow
+  minimalBlowupProfileExistenceOpen :
+    ChainCAnalyticGapRow
+  essL3InfinityBackwardsUniquenessAvailableOnly :
+    ChainCAnalyticGapRow
+  hHalfBackwardsUniquenessOpenRow :
+    ChainCAnalyticGapRow
+  selfSimilarBlowupExclusionOpenRow :
+    ChainCAnalyticGapRow
+  profileToDepletionCircularityPresent :
+    ChainCAnalyticGapRow
+  generalDataReductionFalse :
+    ChainCAnalyticGapRow
+  criticalProfileCompactnessFalse :
+    ChainCAnalyticGapRow
+  fullContinuationBridgeFalse :
+    ChainCAnalyticGapRow
+  clayPromotionFalse :
+    ChainCAnalyticGapRow
+
+canonicalChainCAnalyticGapRows : List ChainCAnalyticGapRow
+canonicalChainCAnalyticGapRows =
+  gkpL3BesovVersusH1ClayGap
+  ∷ minimalBlowupProfileExistenceOpen
+  ∷ essL3InfinityBackwardsUniquenessAvailableOnly
+  ∷ hHalfBackwardsUniquenessOpenRow
+  ∷ selfSimilarBlowupExclusionOpenRow
+  ∷ profileToDepletionCircularityPresent
+  ∷ generalDataReductionFalse
+  ∷ criticalProfileCompactnessFalse
+  ∷ fullContinuationBridgeFalse
+  ∷ clayPromotionFalse
+  ∷ []
+
+chainCAnalyticGapRowCount : Nat
+chainCAnalyticGapRowCount = 10
+
+chainCAnalyticGapRowCountIsTen :
+  chainCAnalyticGapRowCount ≡ 10
+chainCAnalyticGapRowCountIsTen = refl
+
+chainCMinimumGatewayText : String
+chainCMinimumGatewayText =
+  "Minimum gateways: nonlinear Riesz sign condition or H^{1/2} backwards uniqueness."
+
+chainCGapText : String
+chainCGapText =
+  "Chain C fail-closed: GKP/L3/Besov evidence does not bridge the H1 Clay target without the minimum gateways; ESS L^{3,∞} backwards uniqueness is not H^{1/2} backwards uniqueness."
+
+minimalBlowupProfileExistenceConstructed : Bool
+minimalBlowupProfileExistenceConstructed = false
+
+minimalBlowupProfileExistenceOpenFlag : Bool
+minimalBlowupProfileExistenceOpenFlag = true
+
+essL3InfinityBackwardsUniquenessRecorded : Bool
+essL3InfinityBackwardsUniquenessRecorded = true
+
+hHalfBackwardsUniquenessConstructed : Bool
+hHalfBackwardsUniquenessConstructed = false
+
+hHalfBackwardsUniquenessOpen : Bool
+hHalfBackwardsUniquenessOpen = true
+
+selfSimilarBlowupExclusionConstructed : Bool
+selfSimilarBlowupExclusionConstructed = false
+
+selfSimilarBlowupExclusionOpen : Bool
+selfSimilarBlowupExclusionOpen = true
+
+profileToDepletionCircularityDetected : Bool
+profileToDepletionCircularityDetected = true
+
+profileToDepletionNonCircularBridgeConstructed : Bool
+profileToDepletionNonCircularBridgeConstructed = false
+
+nonlinearRieszSignConditionConstructed : Bool
+nonlinearRieszSignConditionConstructed = false
+
+chainCGatewayClosed : Bool
+chainCGatewayClosed = false
+
+chainCGeneralDataReductionToCriticalProfilesFalse :
+  GeneralDataReductionToCriticalProfiles ≡ false
+chainCGeneralDataReductionToCriticalProfilesFalse = refl
+
+chainCCriticalProfileCompactnessForNSFalse :
+  CriticalProfileCompactnessForNS ≡ false
+chainCCriticalProfileCompactnessForNSFalse = refl
+
+chainCFullNavierStokesContinuationBridgeFalse :
+  FullNavierStokesContinuationBridge ≡ false
+chainCFullNavierStokesContinuationBridgeFalse = refl
+
+chainCClayPromotionFalse :
+  clayNavierStokesPromoted ≡ false
+chainCClayPromotionFalse = refl
+
+record ChainCGeneralDataReductionBoundaryReceipt : Set where
+  constructor chainCGeneralDataReductionBoundaryReceipt
+  field
+    gapRows :
+      List ChainCAnalyticGapRow
+    gapRowsAreCanonical :
+      gapRows ≡ canonicalChainCAnalyticGapRows
+    gatewayText :
+      String
+    gatewayTextIsCanonical :
+      gatewayText ≡ chainCMinimumGatewayText
+    gapText :
+      String
+    gapTextIsCanonical :
+      gapText ≡ chainCGapText
+    minimalBlowupProfileExistenceStatus :
+      minimalBlowupProfileExistenceConstructed ≡ false
+    minimalBlowupProfileExistenceIsOpen :
+      minimalBlowupProfileExistenceOpenFlag ≡ true
+    essL3InfinityBackwardsUniquenessStatus :
+      essL3InfinityBackwardsUniquenessRecorded ≡ true
+    hHalfBackwardsUniquenessStatus :
+      hHalfBackwardsUniquenessConstructed ≡ false
+    hHalfBackwardsUniquenessIsOpen :
+      hHalfBackwardsUniquenessOpen ≡ true
+    selfSimilarBlowupExclusionStatus :
+      selfSimilarBlowupExclusionConstructed ≡ false
+    selfSimilarBlowupExclusionIsOpen :
+      selfSimilarBlowupExclusionOpen ≡ true
+    profileToDepletionCircularityStatus :
+      profileToDepletionCircularityDetected ≡ true
+    profileToDepletionNonCircularBridgeStatus :
+      profileToDepletionNonCircularBridgeConstructed ≡ false
+    nonlinearRieszSignConditionStatus :
+      nonlinearRieszSignConditionConstructed ≡ false
+    chainCGatewayClosedStatus :
+      chainCGatewayClosed ≡ false
+    generalDataReductionStatus :
+      GeneralDataReductionToCriticalProfiles ≡ false
+    criticalProfileCompactnessStatus :
+      CriticalProfileCompactnessForNS ≡ false
+    fullNavierStokesContinuationBridgeStatus :
+      FullNavierStokesContinuationBridge ≡ false
+    clayPromotionStatus :
+      clayNavierStokesPromoted ≡ false
+
+open ChainCGeneralDataReductionBoundaryReceipt public
+
+canonicalChainCGeneralDataReductionBoundaryReceipt :
+  ChainCGeneralDataReductionBoundaryReceipt
+canonicalChainCGeneralDataReductionBoundaryReceipt =
+  chainCGeneralDataReductionBoundaryReceipt
+    canonicalChainCAnalyticGapRows
+    refl
+    chainCMinimumGatewayText
+    refl
+    chainCGapText
     refl
     refl
     refl

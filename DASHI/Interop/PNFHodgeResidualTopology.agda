@@ -10,6 +10,7 @@ open import Data.List.Base using (List; _∷_; [])
 import DASHI.Interop.PNFBraidTransportField as Braid
 import DASHI.Interop.PNFSpectralFieldCore as Core
 import DASHI.Interop.PNFSpectralFieldGraph as Graph
+import DASHI.Interop.SpectralOperatorShapeCore as ShapeCore
 import DASHI.Interop.SensibLawResidualLattice as Residual
 import UFTC_Lattice as UFTC
 
@@ -211,6 +212,46 @@ data HodgeLaplacianTag : Set where
   Δ1 : HodgeLaplacianTag
   Δ2 : HodgeLaplacianTag
 
+data HodgeLaplacianBoundaryLayer : Set where
+  signedGraphLaplacian0Implementable :
+    HodgeLaplacianBoundaryLayer
+
+  hodgeLaplacian1DiagnosticOnly :
+    HodgeLaplacianBoundaryLayer
+
+  hodgeLaplacian2DiagnosticOnly :
+    HodgeLaplacianBoundaryLayer
+
+laplacianBoundaryLayer :
+  HodgeLaplacianTag →
+  HodgeLaplacianBoundaryLayer
+laplacianBoundaryLayer Δ0 =
+  signedGraphLaplacian0Implementable
+laplacianBoundaryLayer Δ1 =
+  hodgeLaplacian1DiagnosticOnly
+laplacianBoundaryLayer Δ2 =
+  hodgeLaplacian2DiagnosticOnly
+
+laplacianIsSignedGraphLaplacian0 :
+  HodgeLaplacianTag →
+  Bool
+laplacianIsSignedGraphLaplacian0 Δ0 =
+  true
+laplacianIsSignedGraphLaplacian0 Δ1 =
+  false
+laplacianIsSignedGraphLaplacian0 Δ2 =
+  false
+
+laplacianIsRicherHodgeDiagnosticOnly :
+  HodgeLaplacianTag →
+  Bool
+laplacianIsRicherHodgeDiagnosticOnly Δ0 =
+  false
+laplacianIsRicherHodgeDiagnosticOnly Δ1 =
+  true
+laplacianIsRicherHodgeDiagnosticOnly Δ2 =
+  true
+
 laplacianCellDimension :
   HodgeLaplacianTag →
   PNFCellDimension
@@ -253,6 +294,12 @@ record PNFHodgeLaplacianShape : Set where
     laplacianActsOnIsCanonical :
       laplacianActsOn ≡ laplacianCellDimension laplacianTag
 
+    laplacianLayer :
+      HodgeLaplacianBoundaryLayer
+
+    laplacianLayerIsCanonical :
+      laplacianLayer ≡ laplacianBoundaryLayer laplacianTag
+
     lowerBoundaryShape :
       BoundaryMapShape
 
@@ -264,6 +311,28 @@ record PNFHodgeLaplacianShape : Set where
 
     signedResidualImplementableFirstIsTrue :
       signedResidualImplementableFirst ≡ true
+
+    signedGraphLaplacian0ImplementableLayer :
+      Bool
+
+    signedGraphLaplacian0ImplementableLayerIsCanonical :
+      signedGraphLaplacian0ImplementableLayer
+      ≡
+      laplacianIsSignedGraphLaplacian0 laplacianTag
+
+    richerHodgeDiagnosticOnlyLayer :
+      Bool
+
+    richerHodgeDiagnosticOnlyLayerIsCanonical :
+      richerHodgeDiagnosticOnlyLayer
+      ≡
+      laplacianIsRicherHodgeDiagnosticOnly laplacianTag
+
+    richerHodgeDiagnosticOnlyNoAuthority :
+      Bool
+
+    richerHodgeDiagnosticOnlyNoAuthorityIsFalse :
+      richerHodgeDiagnosticOnlyNoAuthority ≡ false
 
     hodgeAuthorityGranted :
       Bool
@@ -279,9 +348,17 @@ canonicalΔ0Shape =
     Δ0
     zeroCellDimension
     refl
+    signedGraphLaplacian0Implementable
+    refl
     d0BoundaryShape
     d0BoundaryShape
     true
+    refl
+    true
+    refl
+    false
+    refl
+    false
     refl
     false
     refl
@@ -292,9 +369,17 @@ canonicalΔ1Shape =
     Δ1
     oneCellDimension
     refl
+    hodgeLaplacian1DiagnosticOnly
+    refl
     d0BoundaryShape
     d1BoundaryShape
     true
+    refl
+    false
+    refl
+    true
+    refl
+    false
     refl
     false
     refl
@@ -305,9 +390,17 @@ canonicalΔ2Shape =
     Δ2
     twoCellDimension
     refl
+    hodgeLaplacian2DiagnosticOnly
+    refl
     d1BoundaryShape
     d1BoundaryShape
     true
+    refl
+    false
+    refl
+    true
+    refl
+    false
     refl
     false
     refl
@@ -331,6 +424,18 @@ data DetectedResidualFeatureTag : Set where
   closedContradictionStructureFeature :
     DetectedResidualFeatureTag
 
+  frustratedSignedCycleFeature :
+    DetectedResidualFeatureTag
+
+  rotationalFrustrationFeature :
+    DetectedResidualFeatureTag
+
+  harmonicCycleDiagnosticFeature :
+    DetectedResidualFeatureTag
+
+  harmonicCavityDiagnosticFeature :
+    DetectedResidualFeatureTag
+
 canonicalDetectedResidualFeatures :
   List DetectedResidualFeatureTag
 canonicalDetectedResidualFeatures =
@@ -339,6 +444,10 @@ canonicalDetectedResidualFeatures =
   ∷ inconsistentLoopFeature
   ∷ unresolvedEvidenceCavityFeature
   ∷ closedContradictionStructureFeature
+  ∷ frustratedSignedCycleFeature
+  ∷ rotationalFrustrationFeature
+  ∷ harmonicCycleDiagnosticFeature
+  ∷ harmonicCavityDiagnosticFeature
   ∷ []
 
 record DetectedResidualFeature : Set where
@@ -361,6 +470,12 @@ record DetectedResidualFeature : Set where
 
     featureIsDiagnosticOnlyIsTrue :
       featureIsDiagnosticOnly ≡ true
+
+    featureGrantsHodgeAuthority :
+      Bool
+
+    featureGrantsHodgeAuthorityIsFalse :
+      featureGrantsHodgeAuthority ≡ false
 
 open DetectedResidualFeature public
 
@@ -463,6 +578,61 @@ canonicalCycleFeature =
     (twoCellRef canonicalContradictionTwoCell ∷ [])
     true
     refl
+    false
+    refl
+
+canonicalFrustratedSignedCycleFeature : DetectedResidualFeature
+canonicalFrustratedSignedCycleFeature =
+  detectedResidualFeature
+    frustratedSignedCycleFeature
+    (zeroCellRef canonicalZeroCell0
+      ∷ zeroCellRef canonicalZeroCell1
+      ∷ zeroCellRef canonicalZeroCell2
+      ∷ [])
+    (oneCellRef canonicalResidualOneCell
+      ∷ oneCellRef canonicalContradictionOneCell
+      ∷ [])
+    (twoCellRef canonicalContradictionTwoCell ∷ [])
+    true
+    refl
+    false
+    refl
+
+canonicalRotationalFrustrationFeature : DetectedResidualFeature
+canonicalRotationalFrustrationFeature =
+  detectedResidualFeature
+    rotationalFrustrationFeature
+    (zeroCellRef canonicalZeroCell0
+      ∷ zeroCellRef canonicalZeroCell1
+      ∷ zeroCellRef canonicalZeroCell2
+      ∷ [])
+    (oneCellRef canonicalResidualOneCell
+      ∷ oneCellRef canonicalTransportOneCell
+      ∷ oneCellRef canonicalContradictionOneCell
+      ∷ [])
+    (twoCellRef canonicalContradictionTwoCell ∷ [])
+    true
+    refl
+    false
+    refl
+
+canonicalHarmonicCycleDiagnosticFeature : DetectedResidualFeature
+canonicalHarmonicCycleDiagnosticFeature =
+  detectedResidualFeature
+    harmonicCycleDiagnosticFeature
+    (zeroCellRef canonicalZeroCell0
+      ∷ zeroCellRef canonicalZeroCell1
+      ∷ zeroCellRef canonicalZeroCell2
+      ∷ [])
+    (oneCellRef canonicalResidualOneCell
+      ∷ oneCellRef canonicalTransportOneCell
+      ∷ oneCellRef canonicalContradictionOneCell
+      ∷ [])
+    (twoCellRef canonicalContradictionTwoCell ∷ [])
+    true
+    refl
+    false
+    refl
 
 ------------------------------------------------------------------------
 -- Authority boundary and canonical receipt.
@@ -496,6 +666,15 @@ data PNFHodgeResidualTopologyComponent : Set where
   signedLaplacianFirstComponent :
     PNFHodgeResidualTopologyComponent
 
+  hodgeDiagnosticOnlyComponent :
+    PNFHodgeResidualTopologyComponent
+
+  frustrationFeatureComponent :
+    PNFHodgeResidualTopologyComponent
+
+  harmonicCycleDiagnosticComponent :
+    PNFHodgeResidualTopologyComponent
+
   failClosedHodgeAuthorityComponent :
     PNFHodgeResidualTopologyComponent
 
@@ -509,6 +688,9 @@ canonicalPNFHodgeResidualTopologyComponents =
   ∷ hodgeLaplacianTagComponent
   ∷ detectedFeatureTagComponent
   ∷ signedLaplacianFirstComponent
+  ∷ hodgeDiagnosticOnlyComponent
+  ∷ frustrationFeatureComponent
+  ∷ harmonicCycleDiagnosticComponent
   ∷ failClosedHodgeAuthorityComponent
   ∷ []
 
@@ -518,7 +700,7 @@ pnfHodgeResidualTopologyStatement =
 
 pnfHodgeResidualTopologyBoundaryStatement : String
 pnfHodgeResidualTopologyBoundaryStatement =
-  "The signed residual graph Laplacian is the implementable first layer. Hodge Laplacian tags Δ0/Δ1/Δ2 and feature detections are diagnostic receipt shapes only; they grant no semantic truth, runtime evidence, legal/policy authority, continuum Hodge theorem, or closed-loop resolution authority."
+  "The signed residual graph Laplacian Δ0 is the implementable first layer. Richer Hodge Δ1/Δ2 tags, frustrated signed cycles, rotational frustration, and harmonic-cycle/cavity tags are diagnostic receipt shapes only; they grant no semantic truth, runtime evidence, legal/policy authority, continuum Hodge theorem, harmonic authority, or closed-loop resolution authority."
 
 record PNFHodgeResidualTopologyReceipt : Set where
   field
@@ -586,6 +768,28 @@ record PNFHodgeResidualTopologyReceipt : Set where
     Δ2ShapeIsCanonical :
       Δ2Shape ≡ canonicalΔ2Shape
 
+    hodge1OperatorShapeCore :
+      ShapeCore.SpectralOperatorShapeReceipt
+
+    hodge1OperatorShapeCoreIsCanonical :
+      hodge1OperatorShapeCore
+      ≡
+      ShapeCore.canonicalHodge1DiagnosticReceipt
+
+    hodge2OperatorShapeCore :
+      ShapeCore.SpectralOperatorShapeReceipt
+
+    hodge2OperatorShapeCoreIsCanonical :
+      hodge2OperatorShapeCore
+      ≡
+      ShapeCore.canonicalHodge2DiagnosticReceipt
+
+    hodgeOperatorShapeCoreAuthorityFalse :
+      ShapeCore.higherHodgeDiagnosticGrantsAuthority
+        hodge1OperatorShapeCore
+      ≡
+      false
+
     detectedFeatureTags :
       List DetectedResidualFeatureTag
 
@@ -628,11 +832,71 @@ record PNFHodgeResidualTopologyReceipt : Set where
     signedResidualLaplacianImplementableFirstIsTrue :
       signedResidualLaplacianImplementableFirst ≡ true
 
+    Δ0SignedGraphLaplacianImplementable :
+      Bool
+
+    Δ0SignedGraphLaplacianImplementableIsTrue :
+      Δ0SignedGraphLaplacianImplementable ≡ true
+
+    Δ1HodgeLaplacianDiagnosticOnly :
+      Bool
+
+    Δ1HodgeLaplacianDiagnosticOnlyIsTrue :
+      Δ1HodgeLaplacianDiagnosticOnly ≡ true
+
+    Δ2HodgeLaplacianDiagnosticOnly :
+      Bool
+
+    Δ2HodgeLaplacianDiagnosticOnlyIsTrue :
+      Δ2HodgeLaplacianDiagnosticOnly ≡ true
+
+    exampleFrustratedSignedCycleFeature :
+      DetectedResidualFeature
+
+    exampleFrustratedSignedCycleFeatureIsCanonical :
+      exampleFrustratedSignedCycleFeature
+      ≡
+      canonicalFrustratedSignedCycleFeature
+
+    exampleRotationalFrustrationFeature :
+      DetectedResidualFeature
+
+    exampleRotationalFrustrationFeatureIsCanonical :
+      exampleRotationalFrustrationFeature
+      ≡
+      canonicalRotationalFrustrationFeature
+
+    exampleHarmonicCycleDiagnosticFeature :
+      DetectedResidualFeature
+
+    exampleHarmonicCycleDiagnosticFeatureIsCanonical :
+      exampleHarmonicCycleDiagnosticFeature
+      ≡
+      canonicalHarmonicCycleDiagnosticFeature
+
     hodgeAuthorityPromotion :
       Bool
 
     hodgeAuthorityPromotionIsFalse :
       hodgeAuthorityPromotion ≡ false
+
+    hodgeDecompositionAuthorityPromotion :
+      Bool
+
+    hodgeDecompositionAuthorityPromotionIsFalse :
+      hodgeDecompositionAuthorityPromotion ≡ false
+
+    harmonicCycleAuthorityPromotion :
+      Bool
+
+    harmonicCycleAuthorityPromotionIsFalse :
+      harmonicCycleAuthorityPromotion ≡ false
+
+    topologyDecisionAuthorityPromotion :
+      Bool
+
+    topologyDecisionAuthorityPromotionIsFalse :
+      topologyDecisionAuthorityPromotion ≡ false
 
     runtimeEvidencePromotion :
       Bool
@@ -710,6 +974,16 @@ canonicalPNFHodgeResidualTopologyReceipt =
         canonicalΔ2Shape
     ; Δ2ShapeIsCanonical =
         refl
+    ; hodge1OperatorShapeCore =
+        ShapeCore.canonicalHodge1DiagnosticReceipt
+    ; hodge1OperatorShapeCoreIsCanonical =
+        refl
+    ; hodge2OperatorShapeCore =
+        ShapeCore.canonicalHodge2DiagnosticReceipt
+    ; hodge2OperatorShapeCoreIsCanonical =
+        refl
+    ; hodgeOperatorShapeCoreAuthorityFalse =
+        refl
     ; detectedFeatureTags =
         canonicalDetectedResidualFeatures
     ; detectedFeatureTagsAreCanonical =
@@ -738,9 +1012,45 @@ canonicalPNFHodgeResidualTopologyReceipt =
         true
     ; signedResidualLaplacianImplementableFirstIsTrue =
         refl
+    ; Δ0SignedGraphLaplacianImplementable =
+        true
+    ; Δ0SignedGraphLaplacianImplementableIsTrue =
+        refl
+    ; Δ1HodgeLaplacianDiagnosticOnly =
+        true
+    ; Δ1HodgeLaplacianDiagnosticOnlyIsTrue =
+        refl
+    ; Δ2HodgeLaplacianDiagnosticOnly =
+        true
+    ; Δ2HodgeLaplacianDiagnosticOnlyIsTrue =
+        refl
+    ; exampleFrustratedSignedCycleFeature =
+        canonicalFrustratedSignedCycleFeature
+    ; exampleFrustratedSignedCycleFeatureIsCanonical =
+        refl
+    ; exampleRotationalFrustrationFeature =
+        canonicalRotationalFrustrationFeature
+    ; exampleRotationalFrustrationFeatureIsCanonical =
+        refl
+    ; exampleHarmonicCycleDiagnosticFeature =
+        canonicalHarmonicCycleDiagnosticFeature
+    ; exampleHarmonicCycleDiagnosticFeatureIsCanonical =
+        refl
     ; hodgeAuthorityPromotion =
         false
     ; hodgeAuthorityPromotionIsFalse =
+        refl
+    ; hodgeDecompositionAuthorityPromotion =
+        false
+    ; hodgeDecompositionAuthorityPromotionIsFalse =
+        refl
+    ; harmonicCycleAuthorityPromotion =
+        false
+    ; harmonicCycleAuthorityPromotionIsFalse =
+        refl
+    ; topologyDecisionAuthorityPromotion =
+        false
+    ; topologyDecisionAuthorityPromotionIsFalse =
         refl
     ; runtimeEvidencePromotion =
         false
@@ -812,12 +1122,60 @@ canonicalReceiptSignedLaplacianFirst :
 canonicalReceiptSignedLaplacianFirst =
   refl
 
+canonicalReceiptΔ0IsSignedGraphImplementable :
+  laplacianLayer
+    (Δ0Shape canonicalPNFHodgeResidualTopologyReceipt)
+  ≡
+  signedGraphLaplacian0Implementable
+canonicalReceiptΔ0IsSignedGraphImplementable =
+  refl
+
+canonicalReceiptΔ1IsDiagnosticOnly :
+  laplacianLayer
+    (Δ1Shape canonicalPNFHodgeResidualTopologyReceipt)
+  ≡
+  hodgeLaplacian1DiagnosticOnly
+canonicalReceiptΔ1IsDiagnosticOnly =
+  refl
+
+canonicalReceiptΔ2IsDiagnosticOnly :
+  laplacianLayer
+    (Δ2Shape canonicalPNFHodgeResidualTopologyReceipt)
+  ≡
+  hodgeLaplacian2DiagnosticOnly
+canonicalReceiptΔ2IsDiagnosticOnly =
+  refl
+
 canonicalReceiptHodgeAuthorityFailClosed :
   hodgeAuthorityPromotion
     canonicalPNFHodgeResidualTopologyReceipt
   ≡
   false
 canonicalReceiptHodgeAuthorityFailClosed =
+  refl
+
+canonicalReceiptHodgeDecompositionAuthorityFailClosed :
+  hodgeDecompositionAuthorityPromotion
+    canonicalPNFHodgeResidualTopologyReceipt
+  ≡
+  false
+canonicalReceiptHodgeDecompositionAuthorityFailClosed =
+  refl
+
+canonicalReceiptHarmonicCycleAuthorityFailClosed :
+  harmonicCycleAuthorityPromotion
+    canonicalPNFHodgeResidualTopologyReceipt
+  ≡
+  false
+canonicalReceiptHarmonicCycleAuthorityFailClosed =
+  refl
+
+canonicalReceiptTopologyDecisionAuthorityFailClosed :
+  topologyDecisionAuthorityPromotion
+    canonicalPNFHodgeResidualTopologyReceipt
+  ≡
+  false
+canonicalReceiptTopologyDecisionAuthorityFailClosed =
   refl
 
 canonicalContradictionOneCellIsNegative :
@@ -832,4 +1190,32 @@ canonicalFeatureIsClosedContradictionStructure :
   ≡
   closedContradictionStructureFeature
 canonicalFeatureIsClosedContradictionStructure =
+  refl
+
+canonicalFeatureIsFrustratedSignedCycle :
+  featureTag canonicalFrustratedSignedCycleFeature
+  ≡
+  frustratedSignedCycleFeature
+canonicalFeatureIsFrustratedSignedCycle =
+  refl
+
+canonicalFeatureIsRotationalFrustration :
+  featureTag canonicalRotationalFrustrationFeature
+  ≡
+  rotationalFrustrationFeature
+canonicalFeatureIsRotationalFrustration =
+  refl
+
+canonicalFeatureIsHarmonicCycleDiagnostic :
+  featureTag canonicalHarmonicCycleDiagnosticFeature
+  ≡
+  harmonicCycleDiagnosticFeature
+canonicalFeatureIsHarmonicCycleDiagnostic =
+  refl
+
+canonicalHarmonicCycleGrantsNoHodgeAuthority :
+  featureGrantsHodgeAuthority canonicalHarmonicCycleDiagnosticFeature
+  ≡
+  false
+canonicalHarmonicCycleGrantsNoHodgeAuthority =
   refl

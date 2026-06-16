@@ -9,6 +9,7 @@ open import Data.Rational using (ℚ)
 
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 import DASHI.Foundations.SurrealCompactification as SC
+import DASHI.Foundations.CarrierPromotionBoundaryCore as CarrierCore
 
 ------------------------------------------------------------------------
 -- Boundary-only intake contract.
@@ -125,6 +126,22 @@ qqCarrierAuthorityGate =
 
 record NoQQCarrierBridgeIntake : Set where
   field
+    surrealCarrierPromotionCore :
+      CarrierCore.CarrierPromotionReceipt
+
+    surrealCarrierPromotionCoreIsCanonical :
+      surrealCarrierPromotionCore
+      ≡
+      CarrierCore.canonicalSurrealCarrierPromotionReceipt
+
+    qqCarrierPromotionCore :
+      CarrierCore.CarrierPromotionReceipt
+
+    qqCarrierPromotionCoreIsCanonical :
+      qqCarrierPromotionCore
+      ≡
+      CarrierCore.canonicalQQCarrierPromotionReceipt
+
     noGate :
       CarrierAuthorityGate
 
@@ -154,7 +171,15 @@ open NoQQCarrierBridgeIntake public
 canonicalNoQQCarrierBridgeIntake : NoQQCarrierBridgeIntake
 canonicalNoQQCarrierBridgeIntake =
   record
-    { noGate =
+    { surrealCarrierPromotionCore =
+        CarrierCore.canonicalSurrealCarrierPromotionReceipt
+    ; surrealCarrierPromotionCoreIsCanonical =
+        refl
+    ; qqCarrierPromotionCore =
+        CarrierCore.canonicalQQCarrierPromotionReceipt
+    ; qqCarrierPromotionCoreIsCanonical =
+        refl
+    ; noGate =
         noCarrierAuthorityGate
     ; noGateIsCanonical =
         refl

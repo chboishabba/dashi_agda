@@ -1,5 +1,70 @@
 # FOR TODO GO TO '# TODO'
 
+Current GR analytic-kernel aggregation note for `2026-06-15`:
+- Worker 6 added
+  `GRProofArchitectureNextAnalyticKernelTrancheReceipt` in
+  `GRProofArchitectureAggregationTest`.
+- Reconciled Shell A constants are `C_Gamma = 1`, `C'_Gamma = 26/27`,
+  `GammaMax = 2`, tight `L_Gamma = 44`, accepted conservative
+  `L_Gamma = 48`, and tight Ricci constant `C_R = 2144/27 <= 80`;
+  downstream extraction remains the conservative `640`. Older `L_Gamma = 72`
+  wording is historical and must not be treated as an accepted Shell A
+  constant.
+- Next proof work remains exactly the ordered-QQ toolkit, Shell A denominator
+  monotonicity, Christoffel first/second derivative bounds, Christoffel C0
+  perturbation estimate, and Ricci perturbation extraction. The aggregation
+  receipt only records the dependency surface; it does not promote continuum
+  Ricci convergence or external Schwarzschild authority.
+- Five proof tiers for this tranche: checked finite tables/receipts;
+  machine-checked Shell A constant ledger; ordered-QQ analytic kernel targets;
+  continuum PDE/GR theorem gateways; external authority/governance promotion.
+  Exact GR calculation result surfaces are
+  `DASHI.Physics.Closure.GRProofArchitectureAggregationTest.GRProofArchitectureNextAnalyticKernelTrancheReceipt`,
+  `DASHI.Physics.Closure.ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel`,
+  `DASHI.Physics.Closure.ContinuumLimitTheorem.MachineCheckedChristoffelC0ConstantReceipt`,
+  `DASHI.Physics.Closure.SchwarzschildLimitCandidate.SchwarzschildShellAExactCalculationReceipt`,
+  and
+  `DASHI.Physics.Closure.GRDiscreteRicciCandidateFromCurvature.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt`.
+
+Current NS-GW-1 diagnostic note for `2026-06-16`:
+- The first numerical probe for the nonlinear Riesz sign route is implemented
+  as `scripts/ns_gateway1_strain_cross_derivative_diagnostic.py`, with
+  deterministic NPZ fixture generation in `scripts/ns_gateway1_fixture_npz.py`.
+  It computes the strain eigenframe at the enstrophy maximum and records
+  `d_e1 d_e2 lambda2` for synthetic Taylor-Green or user-supplied periodic
+  NPZ velocity fields.
+- The diagnostic is now hardened for DNS intake: NPZ metadata validation covers
+  declared `N`, `domain_length`, `grid_spacing`, finite `amplitude`, `time`,
+  `snapshot_index`, and source text. JSON output includes
+  `sign_classification`, `sign_tolerance`, `grid_spacing`, `domain_length`, and
+  validated `field_metadata`; tolerance-zero evidence is classified as
+  nonpositive evidence but remains non-promoting.
+- The checked fail-closed receipt is
+  `DASHI.Physics.Closure.NSGateway1StrainCrossDerivativeDiagnosticReceipt`,
+  imported by the full-Clay gateway and blocker-chain aggregation receipts and
+  wired through `DASHI.Everything`.
+- The receipt aggregation now explicitly records that DNS sign classification
+  is still open and that DNS evidence is required before any sign-promotion
+  route can be used.
+- Next actual math/evidence work is external to Agda: run the diagnostic on
+  credible Taylor-Green DNS data and only then decide whether the signed
+  T(b)/nonlinear Riesz route is viable. DNS sign confirmation, nonlinear
+  Riesz sign, residual depletion, full Clay NS, and Clay promotion remain
+  false/open.
+
+Current GR analytic-kernel implementation note for `2026-06-16`:
+- The ordered-gauge, Shell A denominator, symbolic-kernel, and Schwarzschild
+  Shell A receipt layers now have additional derived projection helpers for the
+  already-recorded constants and primitive laws: threeMinusN nonnegative/
+  positive primitive laws, nonnegative scaling by 48/72/80/640, inverse-metric
+  max `4`, derivative max `8`, tight envelope `44`, accepted conservative
+  envelope `48`, legacy comparison `72`, and kernel-level Christoffel
+  stability / connection-error extraction fields.
+- This tranche strengthens auditability and downstream reuse only. It does not
+  supply the missing ordered-rational analytic proof of
+  `ChristoffelFormulaC0Stable`, does not close arbitrary continuum Ricci
+  convergence, and does not promote Schwarzschild/Birkhoff/W4/Candidate256.
+
 
 # CANONICAL MATH INTAKE CONTRACT
 
@@ -166,10 +231,12 @@ Current GR proof-architecture intake note for `2026-06-15`:
 - Schwarzschild now has the exact `r_s = 2, r = 3` doubled-Christoffel point
   table, undoubled Christoffel table, radial `∂_r Γ` table, shell supremum
   receipts recording tight `C_Gamma = 1`, shell `5/3` text, conservative
-  `C_Gamma <= 2`, formula-stability `11/9` versus repo `48`, and Ricci
-  contraction `1280/27` rounded to point-shell `48` while preserving
+  `C_Gamma <= 2`, `GammaMax = 2`, formula-stability `11/9` versus repo `48`,
+  and Ricci contraction `1280/27` rounded to point-shell `48` while preserving
   conservative `640`; it also records non-degenerate Shell A `[3,4]` constants
-  `C_Gamma = 1`, `C'_Gamma = 26/27`, `L_Gamma = 72`, `C_R = 80`, and Shell B
+  `C_Gamma = 1`, `C'_Gamma = 26/27`, tight `L_Gamma = 44`,
+  accepted conservative `L_Gamma = 48`,
+  tight `C_R = 2144/27 <= 80`, and Shell B
   `[5/2,7/2]` constants `C_Gamma = 48/25`, `C'_Gamma = 992/125`,
   `L_Gamma = 112`, `C_R = 220`. The Ricci route now explicitly marks `48` as
   point-shell-only and routes interval shells through `80`/`220`. Full
@@ -177,6 +244,17 @@ Current GR proof-architecture intake note for `2026-06-15`:
   precision-gravity promotion, and Clay/terminal claims remain open.
 
 ## YM Exact Intake Targets
+
+Current reconciled YM status for `2026-06-15`:
+- Internal YM math targets are not the remaining blocker for this coding
+  tranche. The live gate is external governance/Clay acceptance, with
+  `clayYangMillsPromoted` still false.
+- Exact governance refs: `DASHI.Physics.Closure.YMFinalStateReceipt`,
+  `DASHI.Physics.Closure.YMExternalAcceptancePacketNormalization`,
+  `DASHI.Physics.Closure.YMCompletionBoundaryTightening`, and
+  `DASHI.Promotion.Gate3ClayObligations` target
+  `yangMillsExternalAcceptance`. The historical intake targets below remain
+  useful as audit labels, not as current internal-math blockers.
 
 • `YM-KP-Local-Sum-p7`
 
@@ -330,6 +408,29 @@ Current GR proof-architecture intake note for `2026-06-15`:
     intended proof.
 
 ## NS Exact Intake Targets
+
+Current reconciled NS status for `2026-06-15`:
+- NS is scoped-paper ready only. Full Clay remains gated by real PDE theorem
+  gateways; do not promote from receipts, diagnostics, or paper readiness.
+- Current NS blocker-chain intake is exact-shape only:
+  Chain A is residual depletion, requiring a nonlinear Riesz sign condition or
+  an equivalent pressure/stretching depletion theorem; Chain B is the
+  microlocal/topological route, requiring the exact defect-mass/topological
+  leakage/pressure-commutator shapes; Chain C is general-data reduction,
+  requiring a real reduction from arbitrary smooth finite-energy data to the
+  scoped mechanism class. These are theorem inputs, not constructed proofs.
+- Intended aggregation/gateway receipt names, if implemented by Agda workers:
+  `NSFullClayBlockerChainAggregationReceipt.agda` and
+  `NSFullClayGatewayTheoremBoundaryReceipt.agda`. The single gateway theorem
+  must consume Chains A/B/C and only then target full Clay NS; until a
+  nonlinear Riesz sign condition or `H^{1/2}` backwards uniqueness theorem is
+  supplied, the full Clay gateway remains false/open.
+- Exact NS refs: `DASHI.Physics.Closure.NSFinalStateReceipt`,
+  `DASHI.Physics.Closure.NSFastestClayPathReceipt`,
+  `DASHI.Physics.Closure.NSPaper1ClayTargetReceipt`,
+  `DASHI.Physics.Closure.NSClayDistanceRevisionReceipt`, and
+  `DASHI.Promotion.Gate3ClayObligations` target
+  `navierStokesGlobalSmoothness`. `clayNavierStokesPromoted` remains false.
 
 • `NS-Enstrophy-Passage`
 

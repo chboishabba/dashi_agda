@@ -33,8 +33,61 @@ canonicalEmbeddingMethods =
   ∷ braidTransportSpectrumV1
   ∷ []
 
+data ⊤-local : Set where
+  tt-local : ⊤-local
+
 data VectorCoordinate : Set where
   vectorCoordinate : Nat → String → VectorCoordinate
+
+data MetricGuaranteeKind : Set where
+  exactMetricGuarantee : MetricGuaranteeKind
+  annMetricGuarantee : MetricGuaranteeKind
+
+canonicalMetricGuaranteeKinds : List MetricGuaranteeKind
+canonicalMetricGuaranteeKinds =
+  exactMetricGuarantee
+  ∷ annMetricGuarantee
+  ∷ []
+
+record VectorMetricGuarantee : Set where
+  constructor vectorMetricGuarantee
+  field
+    metricGuaranteeKind : MetricGuaranteeKind
+    metricGuaranteeMethod : EmbeddingMethodTag
+    metricGuaranteeProfile : String
+    metricIsOperatorRelative : Bool
+    exactMetricBoundAvailable : Bool
+    annMetricBoundAvailable : Bool
+    metricGuaranteeProximityOnly : Bool
+    metricGuaranteeCarriesCommittedSupport : Bool
+    metricGuaranteeCarriesTruth : Bool
+    metricGuaranteeCarriesAdmissibility : Bool
+    metricGuaranteeFailClosed : Bool
+
+open VectorMetricGuarantee public
+
+canonicalMetricGuaranteeBoundary :
+  ∀ guarantee →
+  metricGuaranteeProximityOnly guarantee ≡ true →
+  metricGuaranteeCarriesCommittedSupport guarantee ≡ false →
+  metricGuaranteeCarriesTruth guarantee ≡ false →
+  metricGuaranteeCarriesAdmissibility guarantee ≡ false →
+  metricGuaranteeFailClosed guarantee ≡ true →
+  Set
+canonicalMetricGuaranteeBoundary _ _ _ _ _ _ =
+  ⊤-local
+
+data PNFGraphOperatorTag : Set where
+  pnfAdjacencyOperatorV1 : PNFGraphOperatorTag
+  pnfResidualLaplacianOperatorV1 : PNFGraphOperatorTag
+  pnfSignedBraidTransportOperatorV1 : PNFGraphOperatorTag
+
+canonicalPNFGraphOperators : List PNFGraphOperatorTag
+canonicalPNFGraphOperators =
+  pnfAdjacencyOperatorV1
+  ∷ pnfResidualLaplacianOperatorV1
+  ∷ pnfSignedBraidTransportOperatorV1
+  ∷ []
 
 record ObjectRef : Set where
   constructor objectRef
@@ -57,8 +110,33 @@ record VectorIndexRow : Set where
 
 open VectorIndexRow public
 
-data ⊤-local : Set where
-  tt-local : ⊤-local
+record PNFGraphOperatorProximity : Set where
+  constructor pnfGraphOperatorProximity
+  field
+    graphOperator : PNFGraphOperatorTag
+    graphSourceRow : VectorIndexRow
+    graphTargetRow : VectorIndexRow
+    graphOperatorProfile : String
+    graphOperatorRelative : Bool
+    graphProximityOnly : Bool
+    graphCarriesCommittedSupport : Bool
+    graphCarriesTruth : Bool
+    graphCarriesAdmissibility : Bool
+    graphProximityFailClosed : Bool
+
+open PNFGraphOperatorProximity public
+
+canonicalGraphOperatorProximityBoundary :
+  ∀ proximity →
+  graphOperatorRelative proximity ≡ true →
+  graphProximityOnly proximity ≡ true →
+  graphCarriesCommittedSupport proximity ≡ false →
+  graphCarriesTruth proximity ≡ false →
+  graphCarriesAdmissibility proximity ≡ false →
+  graphProximityFailClosed proximity ≡ true →
+  Set
+canonicalGraphOperatorProximityBoundary _ _ _ _ _ _ _ =
+  ⊤-local
 
 canonicalIndexRowBoundary :
   ∀ row →
@@ -89,6 +167,46 @@ record CandidateRef : Set where
     candidateCommittedSupport : Bool
 
 open CandidateRef public
+
+data VectorArithmeticProposalKind : Set where
+  vectorAdditionProposal : VectorArithmeticProposalKind
+  vectorDifferenceProposal : VectorArithmeticProposalKind
+  scalarStepProposal : VectorArithmeticProposalKind
+
+canonicalVectorArithmeticProposalKinds : List VectorArithmeticProposalKind
+canonicalVectorArithmeticProposalKinds =
+  vectorAdditionProposal
+  ∷ vectorDifferenceProposal
+  ∷ scalarStepProposal
+  ∷ []
+
+record VectorArithmeticProposalRow : Set where
+  constructor vectorArithmeticProposalRow
+  field
+    arithmeticProposalKind : VectorArithmeticProposalKind
+    arithmeticSourceCandidate : CandidateRef
+    arithmeticSourceCoordinate : VectorCoordinate
+    arithmeticTransportCoordinate : VectorCoordinate
+    arithmeticProposedObject : ObjectRef
+    arithmeticProposalProfile : String
+    arithmeticIsCandidateTransportProposal : Bool
+    arithmeticCarriesCommittedSupport : Bool
+    arithmeticCarriesTruth : Bool
+    arithmeticCarriesAdmissibility : Bool
+    arithmeticProposalFailClosed : Bool
+
+open VectorArithmeticProposalRow public
+
+canonicalArithmeticProposalBoundary :
+  ∀ proposal →
+  arithmeticIsCandidateTransportProposal proposal ≡ true →
+  arithmeticCarriesCommittedSupport proposal ≡ false →
+  arithmeticCarriesTruth proposal ≡ false →
+  arithmeticCarriesAdmissibility proposal ≡ false →
+  arithmeticProposalFailClosed proposal ≡ true →
+  Set
+canonicalArithmeticProposalBoundary _ _ _ _ _ _ =
+  ⊤-local
 
 rowToCandidateRef : Nat → VectorIndexRow → CandidateRef
 rowToCandidateRef rank row =
@@ -400,6 +518,84 @@ record PNFSpectralVectorIndexReceipt : Set where
     providerBoundaryStatementIsCanonical :
       providerBoundaryStatement ≡ canonicalProviderBoundaryStatement
 
+    metricGuaranteeKinds : List MetricGuaranteeKind
+    metricGuaranteeKindsAreCanonical :
+      metricGuaranteeKinds ≡ canonicalMetricGuaranteeKinds
+
+    graphOperators : List PNFGraphOperatorTag
+    graphOperatorsAreCanonical :
+      graphOperators ≡ canonicalPNFGraphOperators
+
+    arithmeticProposalKinds : List VectorArithmeticProposalKind
+    arithmeticProposalKindsAreCanonical :
+      arithmeticProposalKinds ≡ canonicalVectorArithmeticProposalKinds
+
+    exactMetricGuaranteeReceipt : VectorMetricGuarantee
+    exactMetricGuaranteeKindIsExact :
+      metricGuaranteeKind exactMetricGuaranteeReceipt ≡ exactMetricGuarantee
+    exactMetricGuaranteeOperatorRelative :
+      metricIsOperatorRelative exactMetricGuaranteeReceipt ≡ true
+    exactMetricBoundAvailableHere :
+      exactMetricBoundAvailable exactMetricGuaranteeReceipt ≡ true
+    exactMetricANNBoundUnavailable :
+      annMetricBoundAvailable exactMetricGuaranteeReceipt ≡ false
+    exactMetricGuaranteeProximityOnly :
+      metricGuaranteeProximityOnly exactMetricGuaranteeReceipt ≡ true
+    exactMetricGuaranteeSupportIsFalse :
+      metricGuaranteeCarriesCommittedSupport exactMetricGuaranteeReceipt ≡ false
+    exactMetricGuaranteeTruthIsFalse :
+      metricGuaranteeCarriesTruth exactMetricGuaranteeReceipt ≡ false
+    exactMetricGuaranteeAdmissibilityIsFalse :
+      metricGuaranteeCarriesAdmissibility exactMetricGuaranteeReceipt ≡ false
+    exactMetricGuaranteeFailClosedHere :
+      metricGuaranteeFailClosed exactMetricGuaranteeReceipt ≡ true
+
+    annMetricGuaranteeReceipt : VectorMetricGuarantee
+    annMetricGuaranteeKindIsANN :
+      metricGuaranteeKind annMetricGuaranteeReceipt ≡ annMetricGuarantee
+    annMetricGuaranteeOperatorRelative :
+      metricIsOperatorRelative annMetricGuaranteeReceipt ≡ true
+    annMetricExactBoundUnavailable :
+      exactMetricBoundAvailable annMetricGuaranteeReceipt ≡ false
+    annMetricBoundUnavailableFailClosed :
+      annMetricBoundAvailable annMetricGuaranteeReceipt ≡ false
+    annMetricGuaranteeProximityOnly :
+      metricGuaranteeProximityOnly annMetricGuaranteeReceipt ≡ true
+    annMetricGuaranteeSupportIsFalse :
+      metricGuaranteeCarriesCommittedSupport annMetricGuaranteeReceipt ≡ false
+    annMetricGuaranteeTruthIsFalse :
+      metricGuaranteeCarriesTruth annMetricGuaranteeReceipt ≡ false
+    annMetricGuaranteeAdmissibilityIsFalse :
+      metricGuaranteeCarriesAdmissibility annMetricGuaranteeReceipt ≡ false
+    annMetricGuaranteeFailClosedHere :
+      metricGuaranteeFailClosed annMetricGuaranteeReceipt ≡ true
+
+    graphOperatorProximityReceipt : PNFGraphOperatorProximity
+    graphOperatorProximityIsOperatorRelative :
+      graphOperatorRelative graphOperatorProximityReceipt ≡ true
+    graphOperatorProximityOnlyHere :
+      graphProximityOnly graphOperatorProximityReceipt ≡ true
+    graphOperatorSupportIsFalse :
+      graphCarriesCommittedSupport graphOperatorProximityReceipt ≡ false
+    graphOperatorTruthIsFalse :
+      graphCarriesTruth graphOperatorProximityReceipt ≡ false
+    graphOperatorAdmissibilityIsFalse :
+      graphCarriesAdmissibility graphOperatorProximityReceipt ≡ false
+    graphOperatorFailClosedHere :
+      graphProximityFailClosed graphOperatorProximityReceipt ≡ true
+
+    arithmeticProposalReceipt : VectorArithmeticProposalRow
+    arithmeticProposalCandidateTransportOnly :
+      arithmeticIsCandidateTransportProposal arithmeticProposalReceipt ≡ true
+    arithmeticProposalSupportIsFalse :
+      arithmeticCarriesCommittedSupport arithmeticProposalReceipt ≡ false
+    arithmeticProposalTruthIsFalse :
+      arithmeticCarriesTruth arithmeticProposalReceipt ≡ false
+    arithmeticProposalAdmissibilityIsFalse :
+      arithmeticCarriesAdmissibility arithmeticProposalReceipt ≡ false
+    arithmeticProposalFailClosedHere :
+      arithmeticProposalFailClosed arithmeticProposalReceipt ≡ true
+
 open PNFSpectralVectorIndexReceipt public
 
 canonicalSampleCoordinate : VectorCoordinate
@@ -426,6 +622,65 @@ canonicalSampleRow =
 canonicalSampleCandidate : CandidateRef
 canonicalSampleCandidate =
   rowToCandidateRef zero canonicalSampleRow
+
+canonicalExactMetricGuarantee : VectorMetricGuarantee
+canonicalExactMetricGuarantee =
+  vectorMetricGuarantee
+    exactMetricGuarantee
+    pnfSpectralLaplacianV1
+    "canonical-exact-operator-relative-metric-v1"
+    true
+    true
+    false
+    true
+    false
+    false
+    false
+    true
+
+canonicalANNMetricGuarantee : VectorMetricGuarantee
+canonicalANNMetricGuarantee =
+  vectorMetricGuarantee
+    annMetricGuarantee
+    pnfSpectralLaplacianV1
+    "canonical-ann-operator-relative-metric-v1"
+    true
+    false
+    false
+    true
+    false
+    false
+    false
+    true
+
+canonicalGraphOperatorProximity : PNFGraphOperatorProximity
+canonicalGraphOperatorProximity =
+  pnfGraphOperatorProximity
+    pnfResidualLaplacianOperatorV1
+    canonicalSampleRow
+    canonicalSampleRow
+    "canonical-pnf-graph-operator-proximity-v1"
+    true
+    true
+    false
+    false
+    false
+    true
+
+canonicalArithmeticProposalRow : VectorArithmeticProposalRow
+canonicalArithmeticProposalRow =
+  vectorArithmeticProposalRow
+    vectorAdditionProposal
+    canonicalSampleCandidate
+    canonicalSampleCoordinate
+    canonicalSampleCoordinate
+    canonicalSampleObject
+    "canonical-vector-arithmetic-candidate-transport-v1"
+    true
+    false
+    false
+    false
+    true
 
 canonicalSampleSearchReceipt : VectorSearchReceipt
 canonicalSampleSearchReceipt =
@@ -508,6 +763,45 @@ canonicalPNFSpectralVectorIndexReceipt =
     refl
     canonicalProviderBoundaryStatement
     refl
+    canonicalMetricGuaranteeKinds
+    refl
+    canonicalPNFGraphOperators
+    refl
+    canonicalVectorArithmeticProposalKinds
+    refl
+    canonicalExactMetricGuarantee
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    canonicalANNMetricGuarantee
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    canonicalGraphOperatorProximity
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    canonicalArithmeticProposalRow
+    refl
+    refl
+    refl
+    refl
+    refl
 
 canonicalReceipt :
   PNFSpectralVectorIndexReceipt
@@ -542,4 +836,60 @@ canonicalReceiptVectorAdmissibilityFalse =
 canonicalReceiptITIRVectorSupportFalse :
   commitConsumesVectorAsSupport (itirReceipt canonicalReceipt) ≡ false
 canonicalReceiptITIRVectorSupportFalse =
+  refl
+
+canonicalReceiptExactMetricTruthFalse :
+  metricGuaranteeCarriesTruth
+    (exactMetricGuaranteeReceipt canonicalReceipt)
+  ≡
+  false
+canonicalReceiptExactMetricTruthFalse =
+  refl
+
+canonicalReceiptANNMetricBoundUnavailable :
+  annMetricBoundAvailable
+    (annMetricGuaranteeReceipt canonicalReceipt)
+  ≡
+  false
+canonicalReceiptANNMetricBoundUnavailable =
+  refl
+
+canonicalReceiptANNMetricTruthFalse :
+  metricGuaranteeCarriesTruth
+    (annMetricGuaranteeReceipt canonicalReceipt)
+  ≡
+  false
+canonicalReceiptANNMetricTruthFalse =
+  refl
+
+canonicalReceiptGraphOperatorTruthFalse :
+  graphCarriesTruth
+    (graphOperatorProximityReceipt canonicalReceipt)
+  ≡
+  false
+canonicalReceiptGraphOperatorTruthFalse =
+  refl
+
+canonicalReceiptArithmeticProposalTruthFalse :
+  arithmeticCarriesTruth
+    (arithmeticProposalReceipt canonicalReceipt)
+  ≡
+  false
+canonicalReceiptArithmeticProposalTruthFalse =
+  refl
+
+canonicalReceiptArithmeticProposalSupportFalse :
+  arithmeticCarriesCommittedSupport
+    (arithmeticProposalReceipt canonicalReceipt)
+  ≡
+  false
+canonicalReceiptArithmeticProposalSupportFalse =
+  refl
+
+canonicalReceiptArithmeticProposalAdmissibilityFalse :
+  arithmeticCarriesAdmissibility
+    (arithmeticProposalReceipt canonicalReceipt)
+  ≡
+  false
+canonicalReceiptArithmeticProposalAdmissibilityFalse =
   refl

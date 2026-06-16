@@ -6,6 +6,75 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane continuation tranche for `2026-06-16`: strengthens the GR analytic
+  kernel receipt surfaces with derived ordered-gauge primitive bundles, Shell A
+  denominator/reciprocal projections, symbolic-kernel stability/extraction
+  projections, and Schwarzschild radial-derivative/Shell A constant projections.
+  It also hardens the NS-GW-1 diagnostic with NPZ metadata validation
+  (`N`, `domain_length`, `grid_spacing`, finite `amplitude`, `time`,
+  `snapshot_index`, source), explicit sign classification/tolerance output, and
+  fail-closed Agda receipt projections for DNS sign classification still open.
+  These are auditability and evidence-routing improvements only: DNS sign
+  confirmation, the nonlinear Riesz sign condition, residual depletion,
+  ordered-rational Christoffel C0 stability, continuum Ricci convergence, full
+  Clay NS, and Clay/terminal promotions remain false/open.
+
+- Six-lane NS-GW-1 diagnostic tranche for `2026-06-16`: adds the executable
+  `scripts/ns_gateway1_strain_cross_derivative_diagnostic.py` and deterministic
+  `scripts/ns_gateway1_fixture_npz.py` to measure
+  `d_e1 d_e2 lambda2` at the enstrophy maximum for periodic Taylor-Green or
+  NPZ velocity fields. Adds
+  `DASHI.Physics.Closure.NSGateway1StrainCrossDerivativeDiagnosticReceipt`,
+  threads it through the full-Clay gateway and blocker-chain aggregation
+  receipts, and wires it into `DASHI.Everything`. This is numerical evidence
+  routing only: DNS confirmation, the nonlinear Riesz sign condition,
+  residual depletion, full Clay NS, and Clay promotion remain false/open.
+
+- Worker 6 NS blocker-chain docs intake for `2026-06-15`: canonical docs now
+  record Chain A residual depletion exact shapes, Chain B
+  microlocal/topological exact shapes, Chain C general-data reduction exact
+  shapes, and the single full-Clay gateway theorem as theorem inputs only.
+  Intended receipt names are
+  `NSFullClayBlockerChainAggregationReceipt.agda` and
+  `NSFullClayGatewayTheoremBoundaryReceipt.agda`. Scoped Hou-Luo/Sprint 158
+  remains publishable/ready where already recorded, but full Clay NS remains
+  false/open until a nonlinear Riesz sign condition or `H^{1/2}` backwards
+  uniqueness theorem is supplied; `clayNavierStokesPromoted` remains false.
+  This is documentation alignment only; no Agda files or promotions were
+  changed.
+
+- Reconciled Worker 6 docs snapshot for `2026-06-15`: canonical docs now
+  record GR final Shell A as `C_Gamma = 1`, `C'_Gamma = 26/27`,
+  `GammaMax = 2`, `L_Gamma = 48`, and tight `C_R = 2144/27 <= 80`, with
+  conservative extraction still `640`. The five proof tiers are checked
+  finite tables/receipts, machine-checked Shell A constant ledger, ordered-QQ
+  analytic kernel targets, continuum PDE/GR theorem gateways, and external
+  authority/governance promotion. Exact GR refs are
+  `GRProofArchitectureNextAnalyticKernelTrancheReceipt`,
+  `SymbolicRationalChristoffelC0StabilityKernel`,
+  `MachineCheckedChristoffelC0ConstantReceipt`,
+  `SchwarzschildShellAExactCalculationReceipt`, and
+  `GRSchwarzschildFiniteRicciBianchiPerturbationReceipt`. YM is recorded as
+  having no internal math remaining for this tranche, with live blockers at
+  `YMExternalAcceptancePacketNormalization`,
+  `YMCompletionBoundaryTightening`, and `Gate3ClayObligations.yangMillsExternalAcceptance`;
+  `clayYangMillsPromoted` remains false. NS is recorded as scoped-paper ready
+  only; full Clay still requires real PDE theorem gateways through
+  `NSFinalStateReceipt`, `NSFastestClayPathReceipt`,
+  `NSPaper1ClayTargetReceipt`, `NSClayDistanceRevisionReceipt`, and
+  `Gate3ClayObligations.navierStokesGlobalSmoothness`;
+  `clayNavierStokesPromoted` remains false. This is documentation alignment
+  only; no Agda files or promotions were changed.
+
+- Worker 6 aggregation tranche for `2026-06-15`: adds
+  `GRProofArchitectureNextAnalyticKernelTrancheReceipt` and threads it through
+  `GRProofArchitectureAggregationTest`. The receipt cites the existing
+  Continuum ordered Shell A constants, Schwarzschild Shell A exact-calculation
+  ledger, and Ricci perturbation receipt, while listing the six analytic proof
+  classes still required for the real Christoffel C0 stability kernel. Ordered
+  QQ theorem promotion, analytic-estimate promotion, continuum Ricci
+  convergence, and external Schwarzschild authority remain false.
+
 - Six-lane PNF spectral-field invariant tranche for `2026-06-15`: adds
   `PNFSpectralRegistryAnchoring`, `PNFResidualFieldInvariants`,
   `PNFSpectralCoordinateRebuildability`, `PNFResolverSelectorCommitment`,
@@ -39,7 +108,7 @@ monitor surface.
 - Six-lane GR interval-kernel/zero-epsilon tranche for `2026-06-15`: adds the
   selected zero-epsilon connection/Ricci error-bound receipt in
   `ContinuumLimitTheorem`, records non-degenerate Schwarzschild Shell A `[3,4]`
-  constants `C_Gamma = 1`, `C'_Gamma = 26/27`, `L_Gamma = 72`, `C_R = 80`, and
+  constants `C_Gamma = 1`, `C'_Gamma = 26/27`, `L_Gamma = 48`, `C_R = 80`, and
   Shell B `[5/2,7/2]` constants `C_Gamma = 48/25`, `C'_Gamma = 992/125`,
   `L_Gamma = 112`, `C_R = 220`, upgrades Ricci routing so `48` is point-shell
   only while interval shells use `80`/`220`, adds the selected-pair

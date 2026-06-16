@@ -9,6 +9,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Foundations.SurrealCompactification as SC
 import DASHI.Foundations.SurrealCompactificationIntake as Intake
 import DASHI.Foundations.SurrealCompactificationRationalBridge as RB
+import DASHI.Foundations.CarrierPromotionBoundaryCore as CarrierCore
 
 ------------------------------------------------------------------------
 -- Symbolic ordered-QQ carrier.
@@ -216,6 +217,20 @@ canonicalOrderedQQAntitoneDependency m n =
 
 record OrderedQQNonPromotionReceipts : Set where
   field
+    orderedQQCarrierPromotionCore :
+      CarrierCore.CarrierPromotionReceipt
+
+    orderedQQCarrierPromotionCoreIsCanonical :
+      orderedQQCarrierPromotionCore
+      ≡
+      CarrierCore.canonicalOrderedQQCarrierPromotionReceipt
+
+    orderedQQCarrierPromotionCoreFalse :
+      CarrierCore.orderedQQCarrierPromoted
+        (CarrierCore.boundary orderedQQCarrierPromotionCore)
+      ≡
+      false
+
     noQQCarrierBridgeIntake :
       Intake.NoQQCarrierBridgeIntake
 
@@ -266,7 +281,13 @@ canonicalOrderedQQNonPromotionReceipts :
   OrderedQQNonPromotionReceipts
 canonicalOrderedQQNonPromotionReceipts =
   record
-    { noQQCarrierBridgeIntake =
+    { orderedQQCarrierPromotionCore =
+        CarrierCore.canonicalOrderedQQCarrierPromotionReceipt
+    ; orderedQQCarrierPromotionCoreIsCanonical =
+        refl
+    ; orderedQQCarrierPromotionCoreFalse =
+        refl
+    ; noQQCarrierBridgeIntake =
         Intake.canonicalNoQQCarrierBridgeIntake
     ; noQQCarrierBridgeIntakeIsCanonical =
         refl

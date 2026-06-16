@@ -10,7 +10,9 @@ open import Data.List.Base using (List; []; _∷_)
 import DASHI.Interop.PNFSpectralFieldCore as Core
 import DASHI.Interop.PNFSpectralFieldGraph as Graph
 import DASHI.Interop.PNFSpectralVectorIndex as Vector
+import DASHI.Interop.SpectralOperatorShapeCore as ShapeCore
 import DASHI.Interop.SensibLawResidualLattice as Residual
+import DASHI.Interop.VectorNonAuthorityCore as VectorNA
 import UFTC_Lattice as UFTC
 
 ------------------------------------------------------------------------
@@ -54,6 +56,12 @@ data CoordinateReceiptComponent : Set where
   vectorNonAuthorityGatesComponent :
     CoordinateReceiptComponent
 
+  vectorNonAuthorityAdapterRowsComponent :
+    CoordinateReceiptComponent
+
+  residualCheckProductRowsComponent :
+    CoordinateReceiptComponent
+
 canonicalCoordinateReceiptComponents :
   List CoordinateReceiptComponent
 canonicalCoordinateReceiptComponents =
@@ -66,6 +74,8 @@ canonicalCoordinateReceiptComponents =
   ∷ rebuildabilityWitnessComponent
   ∷ inadmissibleNonRebuildableRowsComponent
   ∷ vectorNonAuthorityGatesComponent
+  ∷ vectorNonAuthorityAdapterRowsComponent
+  ∷ residualCheckProductRowsComponent
   ∷ []
 
 ------------------------------------------------------------------------
@@ -652,6 +662,489 @@ canonicalVectorRowNoAdmissibility :
 canonicalVectorRowNoAdmissibility =
   refl
 
+canonicalOperatorRelativeProximityForCoordinate :
+  Vector.PNFGraphOperatorProximity
+canonicalOperatorRelativeProximityForCoordinate =
+  Vector.pnfGraphOperatorProximity
+    Vector.pnfResidualLaplacianOperatorV1
+    canonicalVectorRowForCoordinate
+    canonicalVectorRowForCoordinate
+    "coordinate-rebuildability-operator-relative-proximity"
+    true
+    true
+    false
+    false
+    false
+    true
+
+canonicalOperatorRelativeProximityIsOperatorRelative :
+  Vector.graphOperatorRelative
+    canonicalOperatorRelativeProximityForCoordinate
+  ≡
+  true
+canonicalOperatorRelativeProximityIsOperatorRelative =
+  refl
+
+canonicalOperatorRelativeProximityNoSupport :
+  Vector.graphCarriesCommittedSupport
+    canonicalOperatorRelativeProximityForCoordinate
+  ≡
+  false
+canonicalOperatorRelativeProximityNoSupport =
+  refl
+
+canonicalOperatorRelativeProximityNoTruth :
+  Vector.graphCarriesTruth canonicalOperatorRelativeProximityForCoordinate
+  ≡
+  false
+canonicalOperatorRelativeProximityNoTruth =
+  refl
+
+canonicalOperatorRelativeProximityNoAdmissibility :
+  Vector.graphCarriesAdmissibility
+    canonicalOperatorRelativeProximityForCoordinate
+  ≡
+  false
+canonicalOperatorRelativeProximityNoAdmissibility =
+  refl
+
+canonicalArithmeticProposalForCoordinate :
+  Vector.VectorArithmeticProposalRow
+canonicalArithmeticProposalForCoordinate =
+  Vector.vectorArithmeticProposalRow
+    Vector.vectorAdditionProposal
+    (Vector.rowToCandidateRef zero canonicalVectorRowForCoordinate)
+    (coordinate canonicalRebuildabilityWitness)
+    (coordinate canonicalRebuildabilityWitness)
+    (Vector.referencedObject canonicalVectorRowForCoordinate)
+    "coordinate-rebuildability-vector-arithmetic-candidate-transport"
+    true
+    false
+    false
+    false
+    true
+
+canonicalArithmeticProposalCandidateTransportOnly :
+  Vector.arithmeticIsCandidateTransportProposal
+    canonicalArithmeticProposalForCoordinate
+  ≡
+  true
+canonicalArithmeticProposalCandidateTransportOnly =
+  refl
+
+canonicalArithmeticProposalNoSupport :
+  Vector.arithmeticCarriesCommittedSupport
+    canonicalArithmeticProposalForCoordinate
+  ≡
+  false
+canonicalArithmeticProposalNoSupport =
+  refl
+
+canonicalArithmeticProposalNoTruth :
+  Vector.arithmeticCarriesTruth canonicalArithmeticProposalForCoordinate
+  ≡
+  false
+canonicalArithmeticProposalNoTruth =
+  refl
+
+canonicalArithmeticProposalNoAdmissibility :
+  Vector.arithmeticCarriesAdmissibility
+    canonicalArithmeticProposalForCoordinate
+  ≡
+  false
+canonicalArithmeticProposalNoAdmissibility =
+  refl
+
+coreAdapterProposal :
+  VectorNA.VectorProposalMode →
+  String →
+  VectorNA.VectorProposalRow
+coreAdapterProposal mode profile =
+  VectorNA.vectorProposalRow
+    mode
+    VectorNA.canonicalCandidateOnlyHit
+    VectorNA.canonicalVectorEvidenceClaim
+    VectorNA.fallbackVectorCoordinate
+    VectorNA.fallbackVectorCoordinate
+    VectorNA.fallbackObjectRef
+    profile
+    true
+    false
+    false
+    false
+    false
+
+canonicalSpectralCoreAdapterProposal :
+  VectorNA.VectorProposalRow
+canonicalSpectralCoreAdapterProposal =
+  coreAdapterProposal
+    VectorNA.spectralProposalMode
+    "coordinate-rebuildability-spectral-core-adapter"
+
+canonicalTextFallbackCoreAdapterProposal :
+  VectorNA.VectorProposalRow
+canonicalTextFallbackCoreAdapterProposal =
+  coreAdapterProposal
+    (VectorNA.blendedProposalMode "text-fallback-rendering")
+    "coordinate-rebuildability-text-fallback-core-adapter"
+
+canonicalArithmeticCoreAdapterProposal :
+  VectorNA.VectorProposalRow
+canonicalArithmeticCoreAdapterProposal =
+  coreAdapterProposal
+    VectorNA.arithmeticProposalMode
+    "coordinate-rebuildability-vector-arithmetic-core-adapter"
+
+canonicalSpectralCoreAdapterReceipt :
+  VectorNA.VectorProposalRowReceipt canonicalSpectralCoreAdapterProposal
+canonicalSpectralCoreAdapterReceipt =
+  VectorNA.vectorProposalRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalTextFallbackCoreAdapterReceipt :
+  VectorNA.VectorProposalRowReceipt canonicalTextFallbackCoreAdapterProposal
+canonicalTextFallbackCoreAdapterReceipt =
+  VectorNA.vectorProposalRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalArithmeticCoreAdapterReceipt :
+  VectorNA.VectorProposalRowReceipt canonicalArithmeticCoreAdapterProposal
+canonicalArithmeticCoreAdapterReceipt =
+  VectorNA.vectorProposalRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+
+record VectorNonAuthorityAdapterReceiptRows : Set where
+  constructor vectorNonAuthorityAdapterReceiptRows
+  field
+    adapterCoreReceipt :
+      VectorNA.VectorNonAuthorityReceipt
+
+    adapterCoreReceiptIsCanonical :
+      adapterCoreReceipt ≡ VectorNA.canonicalVectorNonAuthorityReceipt
+
+    adapterSpectralCoreProposal :
+      VectorNA.VectorProposalRow
+
+    adapterSpectralCoreProposalIsCanonical :
+      adapterSpectralCoreProposal ≡ canonicalSpectralCoreAdapterProposal
+
+    adapterSpectralCoreProposalReceipt :
+      VectorNA.VectorProposalRowReceipt adapterSpectralCoreProposal
+
+    adapterTextFallbackCoreProposal :
+      VectorNA.VectorProposalRow
+
+    adapterTextFallbackCoreProposalIsCanonical :
+      adapterTextFallbackCoreProposal
+      ≡
+      canonicalTextFallbackCoreAdapterProposal
+
+    adapterTextFallbackCoreProposalReceipt :
+      VectorNA.VectorProposalRowReceipt adapterTextFallbackCoreProposal
+
+    adapterArithmeticCoreProposal :
+      VectorNA.VectorProposalRow
+
+    adapterArithmeticCoreProposalIsCanonical :
+      adapterArithmeticCoreProposal
+      ≡
+      canonicalArithmeticCoreAdapterProposal
+
+    adapterArithmeticCoreProposalReceipt :
+      VectorNA.VectorProposalRowReceipt adapterArithmeticCoreProposal
+
+    adapterSpectralCoordinateRow :
+      SpectralCoordinateMapRow
+
+    adapterSpectralCoordinateRowIsCanonical :
+      adapterSpectralCoordinateRow ≡ canonicalSpectralCoordinateMapRow
+
+    adapterSpectralCoordinateIsRebuildableProposal :
+      mapRowAdmissible adapterSpectralCoordinateRow ≡ true
+
+    adapterSpectralCoordinateCarriesVectorAuthority :
+      mapRowCarriesVectorAuthority adapterSpectralCoordinateRow ≡ false
+
+    adapterSpectralCoordinateCarriesTextFallback :
+      mapRowCarriesTextFallback adapterSpectralCoordinateRow ≡ false
+
+    adapterTextFallbackRow :
+      TextualFallbackRenderingRow
+
+    adapterTextFallbackRowIsCanonical :
+      adapterTextFallbackRow ≡ canonicalTextFallbackRenderingRow
+
+    adapterTextFallbackRenderable :
+      fallbackIsRenderable adapterTextFallbackRow ≡ true
+
+    adapterTextFallbackNotSpectralAuthority :
+      fallbackAdmissibleAsSpectralRow adapterTextFallbackRow ≡ false
+
+    adapterTextFallbackCarriesNoAuthority :
+      fallbackCarriesAuthority adapterTextFallbackRow ≡ false
+
+    adapterVectorArithmeticProposal :
+      Vector.VectorArithmeticProposalRow
+
+    adapterVectorArithmeticProposalIsCanonical :
+      adapterVectorArithmeticProposal
+      ≡
+      canonicalArithmeticProposalForCoordinate
+
+    adapterVectorArithmeticCandidateOnly :
+      Vector.arithmeticIsCandidateTransportProposal
+        adapterVectorArithmeticProposal
+      ≡
+      true
+
+    adapterVectorArithmeticCarriesNoSupport :
+      Vector.arithmeticCarriesCommittedSupport
+        adapterVectorArithmeticProposal
+      ≡
+      false
+
+    adapterVectorArithmeticCarriesNoTruth :
+      Vector.arithmeticCarriesTruth adapterVectorArithmeticProposal
+      ≡
+      false
+
+    adapterVectorArithmeticCarriesNoAdmissibility :
+      Vector.arithmeticCarriesAdmissibility adapterVectorArithmeticProposal
+      ≡
+      false
+
+    adapterRowsPreserveCanonicalNames :
+      Bool
+
+    adapterRowsUseNonAuthorityCoreBoundary :
+      Bool
+
+open VectorNonAuthorityAdapterReceiptRows public
+
+canonicalVectorNonAuthorityAdapterReceiptRows :
+  VectorNonAuthorityAdapterReceiptRows
+canonicalVectorNonAuthorityAdapterReceiptRows =
+  vectorNonAuthorityAdapterReceiptRows
+    VectorNA.canonicalVectorNonAuthorityReceipt
+    refl
+    canonicalSpectralCoreAdapterProposal
+    refl
+    canonicalSpectralCoreAdapterReceipt
+    canonicalTextFallbackCoreAdapterProposal
+    refl
+    canonicalTextFallbackCoreAdapterReceipt
+    canonicalArithmeticCoreAdapterProposal
+    refl
+    canonicalArithmeticCoreAdapterReceipt
+    canonicalSpectralCoordinateMapRow
+    refl
+    refl
+    refl
+    refl
+    canonicalTextFallbackRenderingRow
+    refl
+    refl
+    refl
+    refl
+    canonicalArithmeticProposalForCoordinate
+    refl
+    refl
+    refl
+    refl
+    refl
+    true
+    true
+
+canonicalAdapterSpectralCoordinateRebuildableProposal :
+  mapRowAdmissible
+    (adapterSpectralCoordinateRow
+      canonicalVectorNonAuthorityAdapterReceiptRows)
+  ≡
+  true
+canonicalAdapterSpectralCoordinateRebuildableProposal =
+  refl
+
+canonicalAdapterSpectralCoreProposalNoTruth :
+  VectorNA.proposalRowCarriesTruthAuthority
+    (adapterSpectralCoreProposal
+      canonicalVectorNonAuthorityAdapterReceiptRows)
+  ≡
+  false
+canonicalAdapterSpectralCoreProposalNoTruth =
+  refl
+
+canonicalAdapterTextFallbackNoAuthority :
+  fallbackCarriesAuthority
+    (adapterTextFallbackRow
+      canonicalVectorNonAuthorityAdapterReceiptRows)
+  ≡
+  false
+canonicalAdapterTextFallbackNoAuthority =
+  refl
+
+canonicalAdapterTextFallbackCoreProposalNoTruth :
+  VectorNA.proposalRowCarriesTruthAuthority
+    (adapterTextFallbackCoreProposal
+      canonicalVectorNonAuthorityAdapterReceiptRows)
+  ≡
+  false
+canonicalAdapterTextFallbackCoreProposalNoTruth =
+  refl
+
+canonicalAdapterVectorArithmeticNoTruth :
+  Vector.arithmeticCarriesTruth
+    (adapterVectorArithmeticProposal
+      canonicalVectorNonAuthorityAdapterReceiptRows)
+  ≡
+  false
+canonicalAdapterVectorArithmeticNoTruth =
+  refl
+
+canonicalAdapterArithmeticCoreProposalNoTruth :
+  VectorNA.proposalRowCarriesTruthAuthority
+    (adapterArithmeticCoreProposal
+      canonicalVectorNonAuthorityAdapterReceiptRows)
+  ≡
+  false
+canonicalAdapterArithmeticCoreProposalNoTruth =
+  refl
+
+canonicalAdapterRowsPreserveNames :
+  adapterRowsPreserveCanonicalNames
+    canonicalVectorNonAuthorityAdapterReceiptRows
+  ≡
+  true
+canonicalAdapterRowsPreserveNames =
+  refl
+
+canonicalAdapterRowsUseNonAuthorityCoreBoundary :
+  adapterRowsUseNonAuthorityCoreBoundary
+    canonicalVectorNonAuthorityAdapterReceiptRows
+  ≡
+  true
+canonicalAdapterRowsUseNonAuthorityCoreBoundary =
+  refl
+
+record RebuildableSpectralResidualCheckProductRow : Set where
+  constructor rebuildableSpectralResidualCheckProductRow
+  field
+    productSpectralRow :
+      SpectralCoordinateMapRow
+
+    productOperatorRelativeProximity :
+      Vector.PNFGraphOperatorProximity
+
+    productArithmeticProposal :
+      Vector.VectorArithmeticProposalRow
+
+    productResidualLevel :
+      Residual.ResidualLevel
+
+    finiteSpectralCoordinatesAreRebuildableProposalCoordinates :
+      Bool
+
+    textFallbackIsRebuildableAuthority :
+      Bool
+
+    resolverLayerRequired :
+      Bool
+
+    residualCheckRequired :
+      Bool
+
+    proximityCorroboratedCandidateAfterResolverResidual :
+      Bool
+
+    vectorArithmeticCorroboratedCandidateAfterResolverResidual :
+      Bool
+
+    proximityPromotesSupport :
+      Bool
+
+    proximityPromotesTruth :
+      Bool
+
+    vectorArithmeticPromotesSupport :
+      Bool
+
+    vectorArithmeticPromotesTruth :
+      Bool
+
+open RebuildableSpectralResidualCheckProductRow public
+
+canonicalResidualCheckProductRow :
+  RebuildableSpectralResidualCheckProductRow
+canonicalResidualCheckProductRow =
+  rebuildableSpectralResidualCheckProductRow
+    canonicalSpectralCoordinateMapRow
+    canonicalOperatorRelativeProximityForCoordinate
+    canonicalArithmeticProposalForCoordinate
+    Residual.partial
+    true
+    false
+    true
+    true
+    true
+    true
+    false
+    false
+    false
+    false
+
+canonicalResidualCheckRequired :
+  residualCheckRequired canonicalResidualCheckProductRow ≡ true
+canonicalResidualCheckRequired =
+  refl
+
+canonicalFiniteSpectralCoordinatesAreRebuildableProposalCoordinates :
+  finiteSpectralCoordinatesAreRebuildableProposalCoordinates
+    canonicalResidualCheckProductRow
+  ≡
+  true
+canonicalFiniteSpectralCoordinatesAreRebuildableProposalCoordinates =
+  refl
+
+canonicalTextFallbackNotRebuildableAuthority :
+  textFallbackIsRebuildableAuthority canonicalResidualCheckProductRow
+  ≡
+  false
+canonicalTextFallbackNotRebuildableAuthority =
+  refl
+
+canonicalProductProximityNoSupport :
+  proximityPromotesSupport canonicalResidualCheckProductRow ≡ false
+canonicalProductProximityNoSupport =
+  refl
+
+canonicalProductProximityNoTruth :
+  proximityPromotesTruth canonicalResidualCheckProductRow ≡ false
+canonicalProductProximityNoTruth =
+  refl
+
+canonicalProductArithmeticNoSupport :
+  vectorArithmeticPromotesSupport canonicalResidualCheckProductRow
+  ≡
+  false
+canonicalProductArithmeticNoSupport =
+  refl
+
+canonicalProductArithmeticNoTruth :
+  vectorArithmeticPromotesTruth canonicalResidualCheckProductRow ≡ false
+canonicalProductArithmeticNoTruth =
+  refl
+
 ------------------------------------------------------------------------
 -- End-to-end coordinate rebuildability receipt.
 
@@ -666,6 +1159,10 @@ textFallbackBoundaryStatement =
 vectorNonAuthorityBoundaryStatement : String
 vectorNonAuthorityBoundaryStatement =
   "Vector rows over rebuilt coordinates remain proximity-only rows: they carry no truth, no committed support, no admissibility, and no registry authority."
+
+residualCheckProductBoundaryStatement : String
+residualCheckProductBoundaryStatement =
+  "Finite spectral coordinates are rebuildable proposal coordinates. Text fallback is not rebuildable authority. Operator-relative proximity and vector arithmetic become corroborated candidates only after resolver and residual-check layers; they never promote support or truth."
 
 record PNFSpectralCoordinateRebuildabilityReceipt : Set where
   constructor pnfSpectralCoordinateRebuildabilityReceipt
@@ -709,6 +1206,20 @@ record PNFSpectralCoordinateRebuildabilityReceipt : Set where
 
     laplacianMethodsAreCanonical :
       laplacianMethods ≡ canonicalSignedLaplacianMethods
+
+    spectralOperatorShapeCore :
+      ShapeCore.SpectralOperatorShapeReceipt
+
+    spectralOperatorShapeCoreIsCanonical :
+      spectralOperatorShapeCore
+      ≡
+      ShapeCore.canonicalSignedResidualLaplacianReceipt
+
+    spectralOperatorShapeCoreFirst :
+      ShapeCore.signedResidualLaplacianFirst
+        spectralOperatorShapeCore
+      ≡
+      true
 
     spectralMethod :
       EmbeddingMethodDistinction
@@ -784,6 +1295,112 @@ record PNFSpectralCoordinateRebuildabilityReceipt : Set where
     vectorRowAdmissibilityFalse :
       Vector.rowCarriesAdmissibility vectorRow ≡ false
 
+    operatorRelativeProximityRow :
+      Vector.PNFGraphOperatorProximity
+
+    operatorRelativeProximityRowIsCanonical :
+      operatorRelativeProximityRow
+      ≡
+      canonicalOperatorRelativeProximityForCoordinate
+
+    operatorRelativeProximityHere :
+      Vector.graphOperatorRelative operatorRelativeProximityRow ≡ true
+
+    operatorRelativeProximitySupportFalse :
+      Vector.graphCarriesCommittedSupport operatorRelativeProximityRow ≡ false
+
+    operatorRelativeProximityTruthFalse :
+      Vector.graphCarriesTruth operatorRelativeProximityRow ≡ false
+
+    operatorRelativeProximityAdmissibilityFalse :
+      Vector.graphCarriesAdmissibility operatorRelativeProximityRow ≡ false
+
+    vectorArithmeticProposalRow :
+      Vector.VectorArithmeticProposalRow
+
+    vectorArithmeticProposalRowIsCanonical :
+      vectorArithmeticProposalRow
+      ≡
+      canonicalArithmeticProposalForCoordinate
+
+    vectorArithmeticProposalCandidateOnly :
+      Vector.arithmeticIsCandidateTransportProposal
+        vectorArithmeticProposalRow
+      ≡
+      true
+
+    vectorArithmeticProposalSupportFalse :
+      Vector.arithmeticCarriesCommittedSupport
+        vectorArithmeticProposalRow
+      ≡
+      false
+
+    vectorArithmeticProposalTruthFalse :
+      Vector.arithmeticCarriesTruth vectorArithmeticProposalRow ≡ false
+
+    vectorArithmeticProposalAdmissibilityFalse :
+      Vector.arithmeticCarriesAdmissibility vectorArithmeticProposalRow
+      ≡
+      false
+
+    vectorNonAuthorityAdapterRows :
+      VectorNonAuthorityAdapterReceiptRows
+
+    vectorNonAuthorityAdapterRowsAreCanonical :
+      vectorNonAuthorityAdapterRows
+      ≡
+      canonicalVectorNonAuthorityAdapterReceiptRows
+
+    adapterSpectralCoordinateProposalHere :
+      mapRowAdmissible
+        (adapterSpectralCoordinateRow vectorNonAuthorityAdapterRows)
+      ≡
+      true
+
+    adapterTextFallbackNoAuthorityHere :
+      fallbackCarriesAuthority
+        (adapterTextFallbackRow vectorNonAuthorityAdapterRows)
+      ≡
+      false
+
+    adapterVectorArithmeticNoTruthHere :
+      Vector.arithmeticCarriesTruth
+        (adapterVectorArithmeticProposal vectorNonAuthorityAdapterRows)
+      ≡
+      false
+
+    residualCheckProductRow :
+      RebuildableSpectralResidualCheckProductRow
+
+    residualCheckProductRowIsCanonical :
+      residualCheckProductRow ≡ canonicalResidualCheckProductRow
+
+    residualCheckRequiredHere :
+      residualCheckRequired residualCheckProductRow ≡ true
+
+    finiteSpectralCoordinatesRebuildableProposalHere :
+      finiteSpectralCoordinatesAreRebuildableProposalCoordinates
+        residualCheckProductRow
+      ≡
+      true
+
+    textFallbackRebuildableAuthorityFalse :
+      textFallbackIsRebuildableAuthority residualCheckProductRow
+      ≡
+      false
+
+    productProximitySupportFalse :
+      proximityPromotesSupport residualCheckProductRow ≡ false
+
+    productProximityTruthFalse :
+      proximityPromotesTruth residualCheckProductRow ≡ false
+
+    productArithmeticSupportFalse :
+      vectorArithmeticPromotesSupport residualCheckProductRow ≡ false
+
+    productArithmeticTruthFalse :
+      vectorArithmeticPromotesTruth residualCheckProductRow ≡ false
+
     statement :
       String
 
@@ -801,6 +1418,12 @@ record PNFSpectralCoordinateRebuildabilityReceipt : Set where
 
     vectorBoundaryIsCanonical :
       vectorBoundary ≡ vectorNonAuthorityBoundaryStatement
+
+    residualCheckProductBoundary :
+      String
+
+    residualCheckProductBoundaryIsCanonical :
+      residualCheckProductBoundary ≡ residualCheckProductBoundaryStatement
 
     vectorTruthGate :
       Bool
@@ -856,6 +1479,9 @@ canonicalPNFSpectralCoordinateRebuildabilityReceipt =
     refl
     canonicalSignedLaplacianMethods
     refl
+    ShapeCore.canonicalSignedResidualLaplacianReceipt
+    refl
+    refl
     canonicalSpectralMethodDistinction
     refl
     canonicalTextFallbackMethodDistinction
@@ -880,11 +1506,39 @@ canonicalPNFSpectralCoordinateRebuildabilityReceipt =
     refl
     refl
     refl
+    canonicalOperatorRelativeProximityForCoordinate
+    refl
+    refl
+    refl
+    refl
+    refl
+    canonicalArithmeticProposalForCoordinate
+    refl
+    refl
+    refl
+    refl
+    refl
+    canonicalVectorNonAuthorityAdapterReceiptRows
+    refl
+    refl
+    refl
+    refl
+    canonicalResidualCheckProductRow
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
     coordinateRebuildabilityStatement
     refl
     textFallbackBoundaryStatement
     refl
     vectorNonAuthorityBoundaryStatement
+    refl
+    residualCheckProductBoundaryStatement
     refl
     false
     refl
@@ -921,6 +1575,69 @@ canonicalReceiptVectorNonAuthority :
   ≡
   false
 canonicalReceiptVectorNonAuthority =
+  refl
+
+canonicalReceiptOperatorRelativeProximityNoSupport :
+  Vector.graphCarriesCommittedSupport
+    (operatorRelativeProximityRow
+      canonicalPNFSpectralCoordinateRebuildabilityReceipt)
+  ≡
+  false
+canonicalReceiptOperatorRelativeProximityNoSupport =
+  refl
+
+canonicalReceiptOperatorRelativeProximityNoTruth :
+  Vector.graphCarriesTruth
+    (operatorRelativeProximityRow
+      canonicalPNFSpectralCoordinateRebuildabilityReceipt)
+  ≡
+  false
+canonicalReceiptOperatorRelativeProximityNoTruth =
+  refl
+
+canonicalReceiptVectorArithmeticNoSupport :
+  Vector.arithmeticCarriesCommittedSupport
+    (vectorArithmeticProposalRow
+      canonicalPNFSpectralCoordinateRebuildabilityReceipt)
+  ≡
+  false
+canonicalReceiptVectorArithmeticNoSupport =
+  refl
+
+canonicalReceiptVectorArithmeticNoTruth :
+  Vector.arithmeticCarriesTruth
+    (vectorArithmeticProposalRow
+      canonicalPNFSpectralCoordinateRebuildabilityReceipt)
+  ≡
+  false
+canonicalReceiptVectorArithmeticNoTruth =
+  refl
+
+canonicalReceiptAdapterRowsCanonical :
+  vectorNonAuthorityAdapterRows
+    canonicalPNFSpectralCoordinateRebuildabilityReceipt
+  ≡
+  canonicalVectorNonAuthorityAdapterReceiptRows
+canonicalReceiptAdapterRowsCanonical =
+  refl
+
+canonicalReceiptAdapterTextFallbackNoAuthority :
+  fallbackCarriesAuthority
+    (adapterTextFallbackRow
+      (vectorNonAuthorityAdapterRows
+        canonicalPNFSpectralCoordinateRebuildabilityReceipt))
+  ≡
+  false
+canonicalReceiptAdapterTextFallbackNoAuthority =
+  refl
+
+canonicalReceiptResidualCheckRequired :
+  residualCheckRequired
+    (residualCheckProductRow
+      canonicalPNFSpectralCoordinateRebuildabilityReceipt)
+  ≡
+  true
+canonicalReceiptResidualCheckRequired =
   refl
 
 canonicalReceiptNonRebuildableInadmissible :

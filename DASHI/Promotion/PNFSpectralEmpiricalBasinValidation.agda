@@ -10,6 +10,7 @@ open import Data.List.Base using (List; []; _∷_)
 import DASHI.Interop.PNFBraidTransportField as Braid
 import DASHI.Interop.PNFSpectralFieldArchitectureReceipt as Arch
 import DASHI.Promotion.PNFSpectralTradingSignalBoundary as Trading
+open import DASHI.Core.FiniteReceiptList using (listCount)
 
 ------------------------------------------------------------------------
 -- PNF spectral empirical basin validation.
@@ -22,10 +23,6 @@ import DASHI.Promotion.PNFSpectralTradingSignalBoundary as Trading
 -- market prediction, financial advice, production trading authority,
 -- manual semantic labelling authority, or threshold-fishing authority is
 -- promoted here.
-
-listCount : ∀ {A : Set} → List A → Nat
-listCount [] = zero
-listCount (_ ∷ xs) = suc (listCount xs)
 
 ------------------------------------------------------------------------
 -- Field-window features and outcome carriers.
@@ -389,6 +386,132 @@ canonicalBasinRows =
   ∷ canonicalBadBasinProximityRow
   ∷ canonicalTailBasinProximityRow
   ∷ []
+
+------------------------------------------------------------------------
+-- Stronger trading-side product: three-layer corroboration, still
+-- candidate-only pending holdout/replay.
+
+record TradingSideProductCandidateRow : Set where
+  field
+    tradingSideProductRowId :
+      String
+    basinSpectralProximityLayer :
+      BasinProximityRow
+    basinSpectralProximityLayerIsCanonical :
+      basinSpectralProximityLayer ≡ canonicalGoodBasinProximityRow
+    braidSignatureReferenceNeighborhoodLayer :
+      Braid.BraidSignature
+    braidSignatureReferenceNeighborhoodLayerIsCanonical :
+      braidSignatureReferenceNeighborhoodLayer
+      ≡
+      Braid.canonicalNewsBraidSignature
+    referenceNeighborhoodLayer :
+      Trading.HistoricalBraidNeighborhood
+    referenceNeighborhoodLayerIsCanonical :
+      referenceNeighborhoodLayer ≡ Trading.canonicalFavorableBraidNeighborhood
+    residualReceiptCorroborationLayer :
+      Arch.PNFSpectralFieldArchitectureReceipt
+    residualReceiptCorroborationLayerIsCanonical :
+      residualReceiptCorroborationLayer
+      ≡
+      Arch.canonicalPNFSpectralFieldArchitectureReceipt
+    tradingBoundaryCorroborationLayer :
+      Trading.TradingSignalProposal
+    tradingBoundaryCorroborationLayerIsCanonical :
+      tradingBoundaryCorroborationLayer
+      ≡
+      Trading.canonicalTradingSignalProposal
+    threeCorroborationLayersNamed :
+      Bool
+    threeCorroborationLayersNamedIsTrue :
+      threeCorroborationLayersNamed ≡ true
+    pendingHoldoutReplay :
+      Bool
+    pendingHoldoutReplayIsTrue :
+      pendingHoldoutReplay ≡ true
+    candidateOnlyPendingHoldoutReplay :
+      Bool
+    candidateOnlyPendingHoldoutReplayIsTrue :
+      candidateOnlyPendingHoldoutReplay ≡ true
+    empiricalAdequacyGranted :
+      Bool
+    empiricalAdequacyGrantedIsFalse :
+      empiricalAdequacyGranted ≡ false
+    marketPredictionAuthorityGranted :
+      Bool
+    marketPredictionAuthorityGrantedIsFalse :
+      marketPredictionAuthorityGranted ≡ false
+    financialAdviceAuthorityGranted :
+      Bool
+    financialAdviceAuthorityGrantedIsFalse :
+      financialAdviceAuthorityGranted ≡ false
+    productionTradingAuthorityGranted :
+      Bool
+    productionTradingAuthorityGrantedIsFalse :
+      productionTradingAuthorityGranted ≡ false
+
+open TradingSideProductCandidateRow public
+
+canonicalTradingSideProductCandidateRow :
+  TradingSideProductCandidateRow
+canonicalTradingSideProductCandidateRow =
+  record
+    { tradingSideProductRowId =
+        "canonical trading-side product candidate: basin plus braid neighborhood plus residual receipt corroboration"
+    ; basinSpectralProximityLayer =
+        canonicalGoodBasinProximityRow
+    ; basinSpectralProximityLayerIsCanonical =
+        refl
+    ; braidSignatureReferenceNeighborhoodLayer =
+        Braid.canonicalNewsBraidSignature
+    ; braidSignatureReferenceNeighborhoodLayerIsCanonical =
+        refl
+    ; referenceNeighborhoodLayer =
+        Trading.canonicalFavorableBraidNeighborhood
+    ; referenceNeighborhoodLayerIsCanonical =
+        refl
+    ; residualReceiptCorroborationLayer =
+        Arch.canonicalPNFSpectralFieldArchitectureReceipt
+    ; residualReceiptCorroborationLayerIsCanonical =
+        refl
+    ; tradingBoundaryCorroborationLayer =
+        Trading.canonicalTradingSignalProposal
+    ; tradingBoundaryCorroborationLayerIsCanonical =
+        refl
+    ; threeCorroborationLayersNamed =
+        true
+    ; threeCorroborationLayersNamedIsTrue =
+        refl
+    ; pendingHoldoutReplay =
+        true
+    ; pendingHoldoutReplayIsTrue =
+        refl
+    ; candidateOnlyPendingHoldoutReplay =
+        true
+    ; candidateOnlyPendingHoldoutReplayIsTrue =
+        refl
+    ; empiricalAdequacyGranted =
+        false
+    ; empiricalAdequacyGrantedIsFalse =
+        refl
+    ; marketPredictionAuthorityGranted =
+        false
+    ; marketPredictionAuthorityGrantedIsFalse =
+        refl
+    ; financialAdviceAuthorityGranted =
+        false
+    ; financialAdviceAuthorityGrantedIsFalse =
+        refl
+    ; productionTradingAuthorityGranted =
+        false
+    ; productionTradingAuthorityGrantedIsFalse =
+        refl
+    }
+
+canonicalTradingSideProductCandidateRows :
+  List TradingSideProductCandidateRow
+canonicalTradingSideProductCandidateRows =
+  canonicalTradingSideProductCandidateRow ∷ []
 
 ------------------------------------------------------------------------
 -- Separator candidate lifecycle and collapse/exhaustion flags.
@@ -940,6 +1063,18 @@ record PNFSpectralEmpiricalBasinValidationReceipt : Set where
       BasinProximityRow
     tailBasinRowIsCanonical :
       tailBasinRow ≡ canonicalTailBasinProximityRow
+    tradingSideProductCandidateRows :
+      List TradingSideProductCandidateRow
+    tradingSideProductCandidateRowsAreCanonical :
+      tradingSideProductCandidateRows
+      ≡
+      canonicalTradingSideProductCandidateRows
+    tradingSideProductCandidateRow :
+      TradingSideProductCandidateRow
+    tradingSideProductCandidateRowIsCanonical :
+      tradingSideProductCandidateRow
+      ≡
+      canonicalTradingSideProductCandidateRow
     separatorLifecycle :
       SeparatorCandidateLifecycle
     separatorLifecycleIsCanonical :
@@ -1055,6 +1190,14 @@ canonicalPNFSpectralEmpiricalBasinValidationReceipt =
         canonicalTailBasinProximityRow
     ; tailBasinRowIsCanonical =
         refl
+    ; tradingSideProductCandidateRows =
+        canonicalTradingSideProductCandidateRows
+    ; tradingSideProductCandidateRowsAreCanonical =
+        refl
+    ; tradingSideProductCandidateRow =
+        canonicalTradingSideProductCandidateRow
+    ; tradingSideProductCandidateRowIsCanonical =
+        refl
     ; separatorLifecycle =
         canonicalSeparatorCandidateLifecycle
     ; separatorLifecycleIsCanonical =
@@ -1080,9 +1223,9 @@ canonicalPNFSpectralEmpiricalBasinValidationReceipt =
     ; exhaustionFlagIsCanonical =
         refl
     ; validationSummary =
-        "Records field-window features, outcome carriers, good/bad/tail basin proximity, separator lifecycle, collapse/exhaustion flags, MDL/cost discipline, and holdout/cost/search gates."
+        "Records field-window features, outcome carriers, good/bad/tail basin proximity, the trading-side product candidate with basin spectral proximity plus braid signature/reference neighborhood plus residual/receipt corroboration, separator lifecycle, collapse/exhaustion flags, MDL/cost discipline, and holdout/cost/search gates."
     ; failClosedBoundary =
-        "Empirical adequacy remains false until external resolver, selector, ITIR replay, outcome, holdout, cost-stress, search-cost, MDL, tail-risk, and anti-fishing receipts are supplied."
+        "Trading-side product remains candidate-only pending holdout/replay; empirical adequacy, market prediction authority, financial advice authority, and production trading authority remain false until external resolver, selector, ITIR replay, outcome, holdout, cost-stress, search-cost, MDL, tail-risk, and anti-fishing receipts are supplied."
     ; empiricalAdequacyAllowed =
         false
     ; empiricalAdequacyAllowedIsFalse =
@@ -1147,6 +1290,12 @@ projectTailBasinRow :
   BasinProximityRow
 projectTailBasinRow receipt =
   tailBasinRow receipt
+
+projectTradingSideProductCandidateRow :
+  PNFSpectralEmpiricalBasinValidationReceipt →
+  TradingSideProductCandidateRow
+projectTradingSideProductCandidateRow receipt =
+  tradingSideProductCandidateRow receipt
 
 projectSeparatorLifecycle :
   PNFSpectralEmpiricalBasinValidationReceipt →
@@ -1220,6 +1369,14 @@ canonicalTailBasinProjection :
 canonicalTailBasinProjection =
   refl
 
+canonicalTradingSideProductCandidateProjection :
+  projectTradingSideProductCandidateRow
+    canonicalPNFSpectralEmpiricalBasinValidationReceipt
+  ≡
+  canonicalTradingSideProductCandidateRow
+canonicalTradingSideProductCandidateProjection =
+  refl
+
 canonicalSeparatorLifecycleProjection :
   projectSeparatorLifecycle
     canonicalPNFSpectralEmpiricalBasinValidationReceipt
@@ -1284,6 +1441,14 @@ canonicalBasinRowCountIs3 :
 canonicalBasinRowCountIs3 =
   refl
 
+canonicalTradingSideProductCandidateRowCountIs1 :
+  listCount
+    (tradingSideProductCandidateRows
+      canonicalPNFSpectralEmpiricalBasinValidationReceipt)
+  ≡ 1
+canonicalTradingSideProductCandidateRowCountIs1 =
+  refl
+
 canonicalEmpiricalValidationGateCountIs10 :
   listCount
     (validationGates canonicalHoldoutCostStressSearchGateReceipt)
@@ -1324,6 +1489,48 @@ canonicalNoMarketPredictionAllowed :
     canonicalPNFSpectralEmpiricalBasinValidationReceipt
   ≡ false
 canonicalNoMarketPredictionAllowed =
+  refl
+
+canonicalTradingSideProductNamesThreeLayers :
+  threeCorroborationLayersNamed
+    canonicalTradingSideProductCandidateRow
+  ≡ true
+canonicalTradingSideProductNamesThreeLayers =
+  refl
+
+canonicalTradingSideProductPendingHoldoutReplay :
+  pendingHoldoutReplay
+    canonicalTradingSideProductCandidateRow
+  ≡ true
+canonicalTradingSideProductPendingHoldoutReplay =
+  refl
+
+canonicalTradingSideProductNoEmpiricalAdequacy :
+  empiricalAdequacyGranted
+    canonicalTradingSideProductCandidateRow
+  ≡ false
+canonicalTradingSideProductNoEmpiricalAdequacy =
+  refl
+
+canonicalTradingSideProductNoMarketPrediction :
+  marketPredictionAuthorityGranted
+    canonicalTradingSideProductCandidateRow
+  ≡ false
+canonicalTradingSideProductNoMarketPrediction =
+  refl
+
+canonicalTradingSideProductNoFinancialAdvice :
+  financialAdviceAuthorityGranted
+    canonicalTradingSideProductCandidateRow
+  ≡ false
+canonicalTradingSideProductNoFinancialAdvice =
+  refl
+
+canonicalTradingSideProductNoProductionTrading :
+  productionTradingAuthorityGranted
+    canonicalTradingSideProductCandidateRow
+  ≡ false
+canonicalTradingSideProductNoProductionTrading =
   refl
 
 canonicalNoManualSemanticLabelsAllowed :

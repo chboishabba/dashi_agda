@@ -74,6 +74,29 @@ import DASHI.Interop.PNFResolverSelectorCommitment as PNFResolverSelector
 import DASHI.Interop.PNFHodgeResidualTopology as PNFHodge
 import DASHI.Promotion.PNFSpectralTradingSignalBoundary as PNFTrading
 import DASHI.Promotion.PNFSpectralEmpiricalBasinValidation as PNFEmpirical
+import DASHI.Promotion.CrossDomainClaimPromotionBoundary as CrossDomainBoundary
+import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Core.FiniteReceiptList as FiniteReceiptList
+import DASHI.Interop.RoleGrammarCore as RoleGrammarCore
+import DASHI.Interop.ResidualBoundaryCore as ResidualBoundaryCore
+import DASHI.Interop.VectorNonAuthorityCore as VectorNonAuthorityCore
+import DASHI.Interop.PNFPackageCore as PNFPackageCore
+import DASHI.Interop.SpectralOperatorShapeCore as SpectralOperatorShapeCore
+import DASHI.Promotion.AuthorityGateCore as AuthorityGateCore
+import DASHI.Promotion.ReceiptSummaryCore as ReceiptSummaryCore
+import DASHI.Foundations.CarrierPromotionBoundaryCore as CarrierPromotionBoundaryCore
+import DASHI.Physics.Closure.ExternalAuthorityImportCore as ExternalAuthorityImportCore
+import DASHI.Interop.TypedTermRoleFunctor as TypedTermRole
+import DASHI.Interop.StratifiedTypedComparisonLaw as StratifiedComparison
+import DASHI.Interop.InspectionRelativeNoTypedMeet as InspectionNoMeet
+import DASHI.Interop.BackgroundDistributionBridge as BackgroundBridge
+import DASHI.Interop.WikidataCandidateRoleBridge as WikidataBridge
+import DASHI.Interop.PNFVoidScopeBoundary as PNFVoidScope
+import DASHI.Algebra.StageToneInterpretationBoundary as StageToneBoundary
+import DASHI.Foundations.PAdicSocioeconomicBoundary as PAdicBoundary
+import DASHI.Physics.Closure.MonsterAnalogyPromotionBoundary as MonsterAnalogyBoundary
+import DASHI.Promotion.PoliticalRoleAssignmentBoundary as PoliticalRoleBoundary
+import DASHI.Culture.QiOperatorTheoryBoundary as QiOperatorTheory
 
 -- Sprint165 support vocabulary for the P0 stack:
 -- finite depth boundary observable, Maxwell, Yang Mills, Navier Stokes.
@@ -178,6 +201,54 @@ data PNFSpectralApplicationBoundaryLane : Set where
     PNFSpectralApplicationBoundaryLane
   pnfSpectralEmpiricalBasinValidationLane :
     PNFSpectralApplicationBoundaryLane
+
+data CrossDomainInterpretationBoundaryLane : Set where
+  crossDomainClaimPromotionBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  pnfVoidScopeBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  stageToneInterpretationBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  pAdicSocioeconomicBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  monsterAnalogyPromotionBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  politicalRoleAssignmentBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  roleGrammarCoreBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  genericReceiptCoreLane :
+    CrossDomainInterpretationBoundaryLane
+  finiteReceiptListCoreLane :
+    CrossDomainInterpretationBoundaryLane
+  residualBoundaryCoreLane :
+    CrossDomainInterpretationBoundaryLane
+  vectorNonAuthorityCoreLane :
+    CrossDomainInterpretationBoundaryLane
+  pnfPackageCoreLane :
+    CrossDomainInterpretationBoundaryLane
+  spectralOperatorShapeCoreLane :
+    CrossDomainInterpretationBoundaryLane
+  authorityGateCoreLane :
+    CrossDomainInterpretationBoundaryLane
+  carrierPromotionBoundaryCoreLane :
+    CrossDomainInterpretationBoundaryLane
+  externalAuthorityImportCoreLane :
+    CrossDomainInterpretationBoundaryLane
+  receiptSummaryCoreLane :
+    CrossDomainInterpretationBoundaryLane
+  typedTermRoleFunctorBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  stratifiedTypedComparisonLawBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  inspectionRelativeNoTypedMeetBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  backgroundDistributionBridgeBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  wikidataCandidateRoleBridgeBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  qiOperatorTheoryBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
 
 record PromotionLaneSummary : Set where
   field
@@ -437,6 +508,34 @@ record PNFSpectralApplicationBoundarySummary : Set where
 
 open PNFSpectralApplicationBoundarySummary public
 
+record CrossDomainInterpretationBoundarySummary : Set where
+  field
+    crossDomainBoundaryLane :
+      CrossDomainInterpretationBoundaryLane
+
+    crossDomainBoundaryModule :
+      String
+
+    canonicalCrossDomainBoundarySurface :
+      String
+
+    recordedBoundaryAdvance :
+      String
+
+    remainingPromotionBoundary :
+      String
+
+    validationCommand :
+      String
+
+    promotesAuthorityClaim :
+      Bool
+
+    promotesAuthorityClaimIsFalse :
+      promotesAuthorityClaim ≡ false
+
+open CrossDomainInterpretationBoundarySummary public
+
 mkLaneSummary :
   PromotionImplementationLane →
   String →
@@ -619,6 +718,26 @@ mkPNFSpectralApplicationBoundarySummary lane owner surface advance boundary comm
     ; validationCommand = command
     ; promotesRuntimeOrTradingAuthority = false
     ; promotesRuntimeOrTradingAuthorityIsFalse = refl
+    }
+
+mkCrossDomainInterpretationBoundarySummary :
+  CrossDomainInterpretationBoundaryLane →
+  String →
+  String →
+  String →
+  String →
+  String →
+  CrossDomainInterpretationBoundarySummary
+mkCrossDomainInterpretationBoundarySummary lane owner surface advance boundary command =
+  record
+    { crossDomainBoundaryLane = lane
+    ; crossDomainBoundaryModule = owner
+    ; canonicalCrossDomainBoundarySurface = surface
+    ; recordedBoundaryAdvance = advance
+    ; remainingPromotionBoundary = boundary
+    ; validationCommand = command
+    ; promotesAuthorityClaim = false
+    ; promotesAuthorityClaimIsFalse = refl
     }
 
 canonicalPromotionLaneSummaries : List PromotionLaneSummary
@@ -1047,29 +1166,29 @@ canonicalPNFSpectralApplicationBoundarySummaries =
     pnfSpectralRegistryAnchoringLane
     "DASHI.Interop.PNFSpectralRegistryAnchoring"
     "canonicalPNFSpectralRegistryAnchoringReceipt"
-    "canonical documents, evidence spans, version hashes, parser/reducer profiles, structural payloads, registry rows, and resolver preconditions are typed"
+    "canonical documents, evidence spans, version hashes, parser/reducer profiles, structural payloads, registry rows, resolver preconditions, and product identity corroboration are typed"
     "unanchored object admission, stale-version admission, vector-row authority, missing-receipt admission, and runtime-parser authority remain false"
     "agda -i . DASHI/Interop/PNFSpectralRegistryAnchoring.agda"
   ∷ mkPNFSpectralApplicationBoundarySummary
     pnfResidualFieldInvariantLane
     "DASHI.Interop.PNFResidualFieldInvariants"
     "canonicalPNFResidualFieldInvariantReceipt"
-    "structural projection, same-fibre comparability, bridge-transport exception, severity-max join, and contradiction monotonicity are recorded"
-    "vector/spectral proximity still cannot promote truth, support, admissibility, or authority"
+    "structural projection, same-fibre comparability, bridge-transport exception, severity-max join, contradiction monotonicity, and residual-corroborated proximity are recorded"
+    "vector/spectral proximity alone still cannot promote truth, support, admissibility, or authority; contradiction and noTypedMeet fail closed"
     "agda -i . DASHI/Interop/PNFResidualFieldInvariants.agda"
   ∷ mkPNFSpectralApplicationBoundarySummary
     pnfSpectralCoordinateRebuildabilityLane
     "DASHI.Interop.PNFSpectralCoordinateRebuildability"
     "canonicalPNFSpectralCoordinateRebuildabilityReceipt"
-    "signed adjacency, absolute-degree, signed-Laplacian tags, spectral coordinate rows, text fallback rows, and coordinate rebuildability are typed"
-    "text fallback authority, non-rebuildable coordinate admission, and vector authority remain false"
+    "signed adjacency, absolute-degree, signed-Laplacian tags, spectral coordinate rows, text fallback rows, coordinate rebuildability, and residual-check product rows are typed"
+    "text fallback authority, non-rebuildable coordinate admission, vector authority, and vector-arithmetic authority remain false"
     "agda -i . DASHI/Interop/PNFSpectralCoordinateRebuildability.agda"
   ∷ mkPNFSpectralApplicationBoundarySummary
     pnfResolverSelectorCommitmentLane
     "DASHI.Interop.PNFResolverSelectorCommitment"
     "canonicalPNFResolverSelectorCommitmentReceipt"
-    "resolver preconditions, selector packages, query modes, hybrid ranking, and ITIR commitment over admitted packages are typed"
-    "unresolved candidate support, raw vector-hit evidence, score authority, contradiction erasure, and direct ANN-to-ITIR commitment remain false"
+    "resolver preconditions, selector packages, query modes, hybrid ranking, product commitment certificate, and ITIR commitment over admitted packages are typed"
+    "unresolved candidate support, support/truth/admissibility from vector rows, raw vector-hit evidence, score authority, contradiction erasure, and direct ANN-to-ITIR commitment remain false"
     "agda -i . DASHI/Interop/PNFResolverSelectorCommitment.agda"
   ∷ mkPNFSpectralApplicationBoundarySummary
     pnfHodgeResidualTopologyLane
@@ -1089,10 +1208,184 @@ canonicalPNFSpectralApplicationBoundarySummaries =
     pnfSpectralEmpiricalBasinValidationLane
     "DASHI.Promotion.PNFSpectralEmpiricalBasinValidation"
     "canonicalPNFSpectralEmpiricalBasinValidationReceipt"
-    "field-window features, outcome carriers, basin proximity rows, separator lifecycle, MDL/cost discipline, and holdout/cost-stress/search gates are typed"
-    "empirical adequacy, financial advice, production trading, market prediction, manual semantic labels, and threshold fishing remain false"
+    "field-window features, outcome carriers, basin proximity rows, trading-side product candidate rows, separator lifecycle, MDL/cost discipline, and holdout/cost-stress/search gates are typed"
+    "trading-side product candidates remain holdout-gated; empirical adequacy, financial advice, production trading, market prediction, manual semantic labels, and threshold fishing remain false"
     "agda -i . DASHI/Promotion/PNFSpectralEmpiricalBasinValidation.agda"
   ∷ []
+
+canonicalCrossDomainInterpretationBoundarySummaries :
+  List CrossDomainInterpretationBoundarySummary
+canonicalCrossDomainInterpretationBoundarySummaries =
+  mkCrossDomainInterpretationBoundarySummary
+    crossDomainClaimPromotionBoundaryLane
+    "DASHI.Promotion.CrossDomainClaimPromotionBoundary"
+    "canonicalCrossDomainClaimPromotionBoundary"
+    "mathematical, structural, evidence-graph, vector, product, and spatial-practice readings are recorded as interpretation/proposal-only unless explicit bridge receipts are supplied"
+    "empirical, political, economic, clinical, environmental, spiritual, legal, trading, support, and admissibility authority remain false"
+    "agda -i . DASHI/Promotion/CrossDomainClaimPromotionBoundary.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    pnfVoidScopeBoundaryLane
+    "DASHI.Interop.PNFVoidScopeBoundary"
+    "canonicalPNFVoidScopeBoundaryRows"
+    "same-fibre NO_TYPED_MEET is separated from cross-domain SCOPE_EXCEEDED and fibre-collapse boundaries"
+    "truth, support, admissibility, and live actor classification promotion remain false"
+    "agda -i . DASHI/Interop/PNFVoidScopeBoundary.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    stageToneInterpretationBoundaryLane
+    "DASHI.Algebra.StageToneInterpretationBoundary"
+    "canonicalStageToneInterpretationBoundary"
+    "stageTone/tetralemma rows, overflow-to-tri-low, and TriTruth residual contradiction exclusion are recorded as checked carrier facts"
+    "social-development, theological, Lacanian, Hegelian, political, and economic readings remain non-promoting interpretations"
+    "agda -i . DASHI/Algebra/StageToneInterpretationBoundary.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    pAdicSocioeconomicBoundaryLane
+    "DASHI.Foundations.PAdicSocioeconomicBoundary"
+    "canonicalPAdicSocioeconomicBoundaryReceipt"
+    "the 3-adic identity is recorded as a mathematics-only arithmetic identity"
+    "labor-market prediction, population percentage, AI-capitalism fact, and policy authority remain false without empirical bridges"
+    "agda -i . DASHI/Foundations/PAdicSocioeconomicBoundary.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    monsterAnalogyPromotionBoundaryLane
+    "DASHI.Physics.Closure.MonsterAnalogyPromotionBoundary"
+    "canonicalMonsterAnalogyPromotionBoundaryReceipt"
+    "the checked CRT/J/196884 arithmetic chain is consumed while 196884 and 11-language remain analogy-only"
+    "Monster theorem facts, social/topological analogy promotion, first-genuinely-new claims, and terminal promotion remain false"
+    "agda -i . DASHI/Physics/Closure/MonsterAnalogyPromotionBoundary.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    politicalRoleAssignmentBoundaryLane
+    "DASHI.Promotion.PoliticalRoleAssignmentBoundary"
+    "canonicalPoliticalRoleAssignmentBoundaryReceipt"
+    "evidence-graph structure can be characterized with opaque actor labels and unresolved role-binding gaps"
+    "live actor/conflict/protected-identity adjudication, dehumanizing classifier authority, violence/erasure authority, and legal/policy authority remain false"
+    "agda -i . DASHI/Promotion/PoliticalRoleAssignmentBoundary.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    roleGrammarCoreBoundaryLane
+    "DASHI.Interop.RoleGrammarCore"
+    "canonicalRoleGrammarCoreReceipt"
+    "reusable DomainLabel x FormalRole grammar, role families, role functors, typed terms, bridge strength, admission, and authority classes are recorded"
+    "candidate, bridge, admission, and committed local typing surfaces do not create external legal, clinical, cultural, empirical, or scientific authority"
+    "agda -i . DASHI/Interop/RoleGrammarCore.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    genericReceiptCoreLane
+    "DASHI.Core.GenericReceipt"
+    "canonicalGenericReceiptCoreReceipt"
+    "repo-wide generic receipt metadata, fail-closed promotion bit, count helper, and non-promotion list proof are centralized"
+    "domain-specific receipt payloads still require explicit adapters into the generic surface"
+    "agda -i . DASHI/Core/GenericReceipt.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    finiteReceiptListCoreLane
+    "DASHI.Core.FiniteReceiptList"
+    "canonical finite receipt/list examples"
+    "reusable finite list count, canonical finite-list, singleton/pair/triple, and all-false helper shapes are recorded"
+    "consumer modules must still opt in to replacing their local count/list helpers"
+    "agda -i . DASHI/Core/FiniteReceiptList.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    residualBoundaryCoreLane
+    "DASHI.Interop.ResidualBoundaryCore"
+    "canonicalBoundaryReceipts"
+    "reusable exact/partial/noTypedMeet/scopeExceeded/contradiction boundary vocabulary, inspection levels, bridge requirements, and fail-closed admissibility gates are recorded"
+    "residual boundaries do not promote truth, support, or external authority"
+    "agda -i . DASHI/Interop/ResidualBoundaryCore.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    vectorNonAuthorityCoreLane
+    "DASHI.Interop.VectorNonAuthorityCore"
+    "canonicalVectorNonAuthorityReceipt"
+    "reusable vector, spectral, proximity, ranking, and arithmetic proposal rows are recorded as candidate-only surfaces"
+    "vector proposal rows do not promote truth, support, admissibility, or trading authority"
+    "agda -i . DASHI/Interop/VectorNonAuthorityCore.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    pnfPackageCoreLane
+    "DASHI.Interop.PNFPackageCore"
+    "canonicalSelectorReceiptExamples"
+    "PNF query, resolver, selector, package, span, receipt, residual, contradiction, rejection, and admission-status rows are factored"
+    "candidate-only and rejected packages stay fail-closed, and local admitted package-shape examples do not create ITIR runtime authority"
+    "agda -i . DASHI/Interop/PNFPackageCore.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    spectralOperatorShapeCoreLane
+    "DASHI.Interop.SpectralOperatorShapeCore"
+    "canonicalSignedResidualLaplacianReceipt"
+    "zero/one/two-cell refs, operator tags, signed weights, spectral coordinate kinds, and diagnostic Hodge gates are centralized"
+    "higher Hodge rows remain diagnostic-only and spectral operator shapes do not grant semantic, runtime, continuum, or policy authority"
+    "agda -i . DASHI/Interop/SpectralOperatorShapeCore.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    authorityGateCoreLane
+    "DASHI.Promotion.AuthorityGateCore"
+    "canonicalAuthorityGateReceipts"
+    "reusable empirical/legal/clinical/scientific/spiritual/cultural/trading/support/admissibility/theorem/Clay/runtime authority gates are recorded closed"
+    "all canonical local gates, external-authority-supplied bits, and promoted bits remain false"
+    "agda -i . DASHI/Promotion/AuthorityGateCore.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    carrierPromotionBoundaryCoreLane
+    "DASHI.Foundations.CarrierPromotionBoundaryCore"
+    "canonicalCarrierPromotionGenericReceipts"
+    "Surreal/QQ/ordered-QQ carrier and analytic-tail-bound non-promotion booleans are factored into reusable fail-closed receipts"
+    "carrier construction, carrier promotion, and analytic tail-bound authority remain absent here"
+    "agda -i . DASHI/Foundations/CarrierPromotionBoundaryCore.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    externalAuthorityImportCoreLane
+    "DASHI.Physics.Closure.ExternalAuthorityImportCore"
+    "canonicalExternalAuthorityImportReceipts"
+    "external theorem, Clay, W4 token, import, artifact, local-overlap-audited, and promotion-absent shapes are centralized"
+    "accepted external artifact bytes, tokens, theorem imports, and authority promotion remain missing"
+    "agda -i . DASHI/Physics/Closure/ExternalAuthorityImportCore.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    receiptSummaryCoreLane
+    "DASHI.Promotion.ReceiptSummaryCore"
+    "canonicalExampleReceipts"
+    "generic non-promoting receipt-summary rows factor owner/surface/advance/gap/validation-command boilerplate"
+    "summary rows remain index metadata and do not promote authority claims"
+    "agda -i . DASHI/Promotion/ReceiptSummaryCore.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    typedTermRoleFunctorBoundaryLane
+    "DASHI.Interop.TypedTermRoleFunctor"
+    "canonicalTypedTermRoleFunctorReceipt"
+    "Domain x FormalRole typed terms, RoleFunctor families, and multi-role water/donkey examples are recorded"
+    "surface/entity identity, candidate-only role assignment, and committed local terms do not create external authority"
+    "agda -i . DASHI/Interop/TypedTermRoleFunctor.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    stratifiedTypedComparisonLawBoundaryLane
+    "DASHI.Interop.StratifiedTypedComparisonLaw"
+    "canonicalStratifiedTypedComparisonLawV2Receipt"
+    "comparison law v2 is stratified by domain, role, bridge evidence, and implicit background chains"
+    "cross-domain same-role structure may be compared, but content identity, truth, support, and admissibility promotion remain blocked"
+    "agda -i . DASHI/Interop/StratifiedTypedComparisonLaw.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    inspectionRelativeNoTypedMeetBoundaryLane
+    "DASHI.Interop.InspectionRelativeNoTypedMeet"
+    "canonicalNoTypedMeetAtCurrentInspection"
+    "NO_TYPED_MEET is recorded as current-inspection-relative and revisable under deeper parse, bridge admission, or new role assignment"
+    "global impossibility, permanent incommensurability, truth, support, and admissibility promotion remain false"
+    "agda -i . DASHI/Interop/InspectionRelativeNoTypedMeet.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    backgroundDistributionBridgeBoundaryLane
+    "DASHI.Interop.BackgroundDistributionBridge"
+    "canonicalBackgroundDistributionalBridges"
+    "explicit transport, causal-chain, background-distribution, and proof-by-omission bridge strengths are named with residual/outlier conditions"
+    "economy-to-person-behaviour examples remain partial/example-only with no empirical, causal, policy, or person-behaviour truth authority"
+    "agda -i . DASHI/Interop/BackgroundDistributionBridge.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    wikidataCandidateRoleBridgeBoundaryLane
+    "DASHI.Interop.WikidataCandidateRoleBridge"
+    "canonicalBoundaryNotes"
+    "Wikidata QIDs, superclass/relation/domain hints, PNF role assignment, and ITIR receipt commitment are separated"
+    "QID/entity identity does not entail FormalRole, same entity may yield multiple typed terms, and uncommitted candidates have no authority"
+    "agda -i . DASHI/Interop/WikidataCandidateRoleBridge.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    qiOperatorTheoryBoundaryLane
+    "DASHI.Culture.QiOperatorTheoryBoundary"
+    "canonicalQiOperatorTheoryBoundaryReceipt"
+    "operator theory is mapped as Qi-field role grammar with operator-family rows, Sheng/Sha/Si spectral rows, and Sweetgrass reciprocity gate"
+    "empirical, spiritual, mystical, clinical, environmental, legal, and scientific authority remain false without validation"
+    "agda -i . DASHI/Culture/QiOperatorTheoryBoundary.agda"
+  ∷ []
+
+crossDomainInterpretationBoundaryCount :
+  Nat
+crossDomainInterpretationBoundaryCount = 23
+
+crossDomainInterpretationBoundaryCountIs23 :
+  crossDomainInterpretationBoundaryCount ≡ 23
+crossDomainInterpretationBoundaryCountIs23 = refl
 
 record UnifiedPromotionObligationIndex : Setω where
   field

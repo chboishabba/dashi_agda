@@ -6,6 +6,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
+open import DASHI.Core.FiniteReceiptList using (listCount)
 
 ------------------------------------------------------------------------
 -- PNF spectral trading/news application boundary.
@@ -15,10 +16,6 @@ open import Data.List.Base using (List; []; _∷_)
 -- the records below may describe candidate packets and proposal-only signal
 -- envelopes, but they do not assert financial validity, market prediction,
 -- production trading authority, or empirical adequacy.
-
-listCount : ∀ {A : Set} → List A → Nat
-listCount [] = zero
-listCount (_ ∷ xs) = suc (listCount xs)
 
 ------------------------------------------------------------------------
 -- Consumer concepts.

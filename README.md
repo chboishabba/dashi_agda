@@ -81,11 +81,23 @@ still the real ordered Christoffel C0 stability/extraction law, not the finite
 derivative plumbing. `SchwarzschildLimitCandidate` records the exact `r_s = 2, r = 3`
 doubled and undoubled Christoffel point tables, radial `∂_r Γ` table including
 the zero `Γ^r_tt` derivative, shell supremum receipts with tight `C_Gamma = 1`
-and conservative shell `C_Gamma <= 2`, non-degenerate Shell A `[3,4]` constants
-`C_Gamma = 1`, `C'_Gamma = 26/27`, `L_Gamma = 72`, `C_R = 80`, non-degenerate
-Shell B `[5/2,7/2]` constants `C_Gamma = 48/25`, `C'_Gamma = 992/125`,
-`L_Gamma = 112`, `C_R = 220`, inverse-metric radial derivative signs, and the
-bounded weak-field shell adapter. `GRProofArchitectureAggregationTest`
+and conservative shell `C_Gamma <= 2`, `GammaMax = 2`, non-degenerate Shell A
+`[3,4]` constants `C_Gamma = 1`, `C'_Gamma = 26/27`, tight
+`L_Gamma = 44`, accepted conservative `L_Gamma = 48`, and tight
+`C_R = 2144/27 <= 80` with conservative extraction `640`; Shell B
+`[5/2,7/2]` remains `C_Gamma = 48/25`,
+`C'_Gamma = 992/125`, `L_Gamma = 112`, `C_R = 220`. Older Shell A
+`L_Gamma = 72` wording is historical and is not an accepted Shell A
+constant. The same tranche is tracked in five proof tiers: checked finite
+tables/receipts, machine-checked Shell A constant ledger, ordered-QQ analytic
+kernel targets, continuum PDE/GR theorem gateways, and external
+authority/governance promotion. Exact GR calculation result surfaces are
+`GRProofArchitectureNextAnalyticKernelTrancheReceipt`,
+`SymbolicRationalChristoffelC0StabilityKernel`,
+`MachineCheckedChristoffelC0ConstantReceipt`,
+`SchwarzschildShellAExactCalculationReceipt`, and
+`GRSchwarzschildFiniteRicciBianchiPerturbationReceipt`.
+`GRProofArchitectureAggregationTest`
 checks the current imports and aggregates the selected Levi-Civita,
 inverse-metric C0/derivative, shell-bound, Ricci-readiness, selected-pair
 identity, zero-epsilon quantitative bridge, interval Ricci constant-routing,
@@ -256,6 +268,18 @@ Carnot/thermodynamic source-locator targets plus raw SI constant text where
 available. They are locator/intake rows only: SHA256, access-date evidence,
 ingestion receipts, accepted authority tokens, proof authority, and promotion
 remain false.
+
+Current NS-GW-1 nonlinear-Riesz diagnostic boundary:
+`scripts/ns_gateway1_strain_cross_derivative_diagnostic.py` implements the
+first executable probe for the proposed signed T(b) route. It computes the
+strain eigenframe at the enstrophy maximum and reports `d_e1 d_e2 lambda2` for
+periodic Taylor-Green or NPZ velocity fields; `scripts/ns_gateway1_fixture_npz.py`
+generates deterministic fixtures for that input contract. The checked Agda
+surface is `DASHI.Physics.Closure.NSGateway1StrainCrossDerivativeDiagnosticReceipt`,
+which is imported by the full-Clay gateway and blocker-chain aggregation
+receipts. This lane is numerical evidence routing only: DNS confirmation, the
+nonlinear Riesz sign condition, residual depletion, full Clay NS, and Clay
+promotion remain false/open.
 
 Current Standard Model first-principles boundary:
 `DASHI.Promotion.ObligationIndex` now includes a nine-row
@@ -836,6 +860,16 @@ symmetric result. `MechanismExhaustionForFullClayNS`,
 `GeneralSmoothFiniteEnergyNSRegularity`, `full_clay_ns_solved`,
 `fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
 `clayNavierStokesPromoted` remain false.
+
+Current full-Clay NS blocker-chain intake is fail-closed: Chain A is residual
+depletion exact shapes, Chain B is microlocal/topological exact shapes, Chain C
+is general-data reduction exact shapes, and the single gateway theorem must
+consume all three before any full Clay target can move. Intended receipt names,
+if implemented, are `NSFullClayBlockerChainAggregationReceipt.agda` and
+`NSFullClayGatewayTheoremBoundaryReceipt.agda`. Scoped Hou-Luo/Sprint 158
+readiness is not a full-Clay proof; full Clay remains false/open until a
+nonlinear Riesz sign condition or `H^{1/2}` backwards uniqueness theorem is
+supplied.
 
 Current NS Sprint 159 boundary: the repo records the full-Clay jump from the
 scoped symmetric Hou-Luo theorem as an external-authority boundary, not as an
@@ -3891,17 +3925,22 @@ depends on that surface.
 	  and illegal defects preserve critical pressure under residual joins.
 	  The PNF-as-field architecture is now also checked:
 	  `DASHI/Interop/PNFSpectralFieldCore.agda` records refs, fibres, chamber
-	  projections, residual edges, braid paths, support packets, and candidate
-	  refs over the existing `PredicatePNF` carrier;
+	  projections, an explicit structural/evidence-time product base, residual
+	  edges, braid paths, support packets, and candidate refs over the existing
+	  `PredicatePNF` carrier;
 	  `DASHI/Interop/PNFSpectralFieldGraph.agda` records typed residual graph
-	  edges, structural weight classes, signed contradiction handling, and
-	  Laplacian/spectral-coordinate surfaces;
+	  edges, structural/evidence/time/transport/contradiction edge-origin
+	  classes, signed contradiction/frustration handling, and
+	  operator-relative Laplacian/spectral-coordinate surfaces;
 	  `DASHI/Interop/PNFBraidTransportField.agda` records source/time braid
-	  transport as proposed-only candidate navigation;
+	  transport as proposed-only candidate navigation with explicit partial
+	  transport and `noTypedMeet` strand termination;
 	  `DASHI/Interop/PNFSpectralVectorIndex.agda` records the
 	  vector-proposes/resolver-anchors/selector-admits/ITIR-commits authority
-	  chain; and `DASHI/Interop/PNFSpectralFieldArchitectureReceipt.agda`
-	  aggregates the whole field stack. The follow-up invariant tranche records
+	  chain plus operator-relative metric and vector-arithmetic-as-proposal
+	  receipts; and `DASHI/Interop/PNFSpectralFieldArchitectureReceipt.agda`
+	  aggregates the whole field stack, including the PNF-only summary pipeline
+	  and graph/DAG/tree projection split. The follow-up invariant tranche records
 	  the exact registry/span/version anchoring surface
 	  (`DASHI/Interop/PNFSpectralRegistryAnchoring.agda`), residual/fibre
 	  comparability and contradiction monotonicity
@@ -3910,16 +3949,95 @@ depends on that surface.
 	  (`DASHI/Interop/PNFSpectralCoordinateRebuildability.agda`),
 	  resolver/selector/ITIR package commitment
 	  (`DASHI/Interop/PNFResolverSelectorCommitment.agda`), and the
-	  signed-Laplacian-first Hodge/topology boundary
+	  signed-Laplacian-`Δ0`-first Hodge/topology boundary
 	  (`DASHI/Interop/PNFHodgeResidualTopology.agda`).
+	  The product guarantee is coexistence, not promotion: spectral proximity
+	  and receipt-anchored identity may both hold, but only spectral proximity
+	  plus exact/partial residual corroboration plus receipt/span anchoring marks
+	  a corroborated candidate. That candidate still does not collapse into
+	  truth, support, or admissibility.
 	  `DASHI/Promotion/PNFSpectralTradingSignalBoundary.agda` adds the
 	  Nashi/Mirror-style news/trading consumer boundary, and
 	  `DASHI/Promotion/PNFSpectralEmpiricalBasinValidation.agda` records
 	  field-window, basin, separator, MDL/cost, holdout, and cost-stress gates.
+	  On the trading side, a braid signature with residual corroboration is only
+	  the strongest candidate form, still gated by holdout validation.
 	  Financial advice, market prediction, production trading authority,
 	  empirical adequacy, runtime parser, ANN backend, semantic truth,
 	  support/admissibility promotion, Hodge authority, manual semantic labels,
 	  threshold fishing, and trading truth all remain explicitly fail-closed.
+	  The cross-domain interpretation boundary tranche now records the same
+	  discipline for broader analogy surfaces:
+	  `DASHI/Promotion/CrossDomainClaimPromotionBoundary.agda` blocks promotion
+	  from mathematical, structural, evidence-graph, vector, product, and
+	  spatial-practice readings into empirical, political, economic, clinical,
+	  environmental, spiritual, legal, trading, support, or admissibility
+	  authority without explicit bridge receipts;
+	  `DASHI/Interop/PNFVoidScopeBoundary.agda` separates same-fibre
+	  `NO_TYPED_MEET` from cross-domain `SCOPE_EXCEEDED`/fibre collapse;
+	  `DASHI/Algebra/StageToneInterpretationBoundary.agda` keeps
+	  `stageTone`/tetralemma rows as checked carrier facts while leaving
+	  social-development, theological, Lacanian, Hegelian, political, and
+	  economic readings non-promoting; `DASHI/Foundations/PAdicSocioeconomicBoundary.agda`
+	  records the 3-adic identity as mathematics-only; `DASHI/Physics/Closure/MonsterAnalogyPromotionBoundary.agda`
+	  consumes the checked CRT/J/196884 arithmetic chain without promoting
+	  Monster or "first genuinely new" analogy claims; and
+	  `DASHI/Promotion/PoliticalRoleAssignmentBoundary.agda` permits only
+	  opaque evidence-graph structural characterization, not live actor/conflict
+	  adjudication, dehumanizing classifier authority, violence/erasure
+	  authority, or legal/policy authority.
+	  The operator-theory role grammar is now factored through
+	  `DASHI/Interop/RoleGrammarCore.agda`: reusable `DomainLabel x
+	  FormalRole` families, role functors, generic typed terms, bridge
+	  strength, admission status, and authority classes are checked once and
+	  consumed by the downstream boundary modules.  This is a proof-surface
+	  compression/maintenance optimization only; it does not promote any
+	  domain-specific empirical, legal, clinical, cultural, spiritual,
+	  scientific, support, trading, or admissibility authority.
+	  The same reusable-core optimization now covers adjacent boundaries:
+	  `DASHI/Core/GenericReceipt.agda` centralizes repo-wide receipt metadata,
+	  fail-closed promotion bits, non-promotion list proofs, and generic
+	  adapters; `DASHI/Core/FiniteReceiptList.agda` centralizes finite
+	  list-count/canonical-list/all-false boilerplate;
+	  `DASHI/Promotion/AuthorityGateCore.agda` centralizes closed authority
+	  gates; `DASHI/Interop/VectorNonAuthorityCore.agda` centralizes
+	  vector/spectral/proximity/ranking/arithmetic proposal-only rows;
+	  `DASHI/Interop/ResidualBoundaryCore.agda` centralizes
+	  exact/partial/no-typed-meet/scope-exceeded/contradiction boundary
+	  vocabulary; `DASHI/Interop/PNFPackageCore.agda` centralizes PNF
+	  query/resolver/selector package rows; `DASHI/Interop/SpectralOperatorShapeCore.agda`
+	  centralizes signed-Laplacian/Hodge diagnostic operator shapes;
+	  `DASHI/Foundations/CarrierPromotionBoundaryCore.agda` centralizes
+	  Surreal/QQ carrier non-promotion receipts;
+	  `DASHI/Physics/Closure/ExternalAuthorityImportCore.agda` centralizes
+	  absent external theorem/token/artifact import receipts; and
+	  `DASHI/Promotion/ReceiptSummaryCore.agda` factors non-promoting
+	  receipt-summary boilerplate.  These are repo-maintenance and
+	  proof-surface compression layers, not new promotion authority.  Current
+	  consumer migrations are compatibility adapters over existing receipts:
+	  they preserve public receipt names while routing repeated list-count,
+	  external-authority, carrier non-promotion, PNF package, and
+	  spectral/Hodge diagnostic shapes through the reusable cores.
+	  The fetched `Domain x FormalRole` correction is now also checked:
+	  `DASHI/Interop/TypedTermRoleFunctor.agda` records typed terms as
+	  surface/entity plus domain plus formal role, with a domain-indexed
+	  role-family generator and multi-role water/donkey examples;
+	  `DASHI/Interop/StratifiedTypedComparisonLaw.agda` records comparison law
+	  v2: same-domain/same-role content comparison is native,
+	  different-domain/same-role comparison is role-structural, divergent
+	  predicate/argument structure is `NO_TYPED_MEET` at the current inspection
+	  level, cross-domain content identity requires bridge evidence, and
+	  implicit background chains remain partial with named residuals;
+	  `DASHI/Interop/InspectionRelativeNoTypedMeet.agda` blocks the global
+	  reading of `NO_TYPED_MEET` as eternal incommensurability;
+	  `DASHI/Interop/BackgroundDistributionBridge.agda` names explicit,
+	  causal-chain, distributional, and proof-by-omission bridge strengths
+	  without promoting empirical or policy claims;
+	  `DASHI/Interop/WikidataCandidateRoleBridge.agda` places Wikidata as a
+	  candidate entity/domain-hint layer while DASHI/PNF assigns role/fibre and
+	  ITIR commits receipts; and `DASHI/Culture/QiOperatorTheoryBoundary.agda`
+	  records the Feng-Shui/Qi operator-theory mapping as non-promoting role
+	  grammar with Sheng/Sha/Si spectral rows and a Sweetgrass reciprocity gate.
 	  `WrapperState` now includes `performativeEvidence`, which maps to
 	  `scopeExceeded6` when emitted by the pipeline; `PNFEmissionReceipt` records
   parser profile, reducer profile, source span, and emitted atom so residual

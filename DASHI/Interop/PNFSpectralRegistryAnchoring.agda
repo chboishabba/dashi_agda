@@ -8,6 +8,7 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.PNFSpectralFieldCore as Core
+import DASHI.Interop.PNFPackageCore as PackageCore
 import DASHI.Interop.PNFSpectralVectorIndex as Vector
 
 ------------------------------------------------------------------------
@@ -445,6 +446,17 @@ record PNFSpectralRegistryAnchoringReceipt : Set where
     receiptRuntimeParserAuthorityAdmissionFailsClosed :
       runtimeParserAuthorityAdmission receiptFailClosedGates ≡ false
 
+    pnfPackageCoreAdapter :
+      PackageCore.SelectorPackage
+
+    pnfPackageCoreAdapterIsCanonical :
+      pnfPackageCoreAdapter
+      ≡
+      PackageCore.canonicalCandidateOnlySelectorPackage
+
+    pnfPackageCoreAdmittedFalse :
+      PackageCore.selectorAdmitted pnfPackageCoreAdapter ≡ false
+
 open PNFSpectralRegistryAnchoringReceipt public
 
 canonicalPNFSpectralRegistryAnchoringReceipt :
@@ -497,6 +509,9 @@ canonicalPNFSpectralRegistryAnchoringReceipt =
     refl
     refl
     refl
+    PackageCore.canonicalCandidateOnlySelectorPackage
+    refl
+    refl
 
 canonicalReceipt : PNFSpectralRegistryAnchoringReceipt
 canonicalReceipt =
@@ -543,4 +558,208 @@ canonicalReceiptMissingReceiptFailsClosed =
 canonicalReceiptStaleVersionFailsClosed :
   staleVersionAdmission (receiptFailClosedGates canonicalReceipt) ≡ false
 canonicalReceiptStaleVersionFailsClosed =
+  refl
+
+------------------------------------------------------------------------
+-- Product identity corroboration across spectral and receipt surfaces.
+
+record PNFProductIdentityCorroboration : Set where
+  constructor pnfProductIdentityCorroboration
+  field
+    corroboratedObject :
+      Core.PredicateObjectRef
+
+    corroboratedVectorObject :
+      Vector.ObjectRef
+
+    corroboratedVectorRow :
+      Vector.VectorIndexRow
+
+    corroboratedProductBase :
+      Core.PNFProductBase
+
+    corroboratedProductSection :
+      Core.ProductFieldSection
+
+    corroboratedRegistryRow :
+      ObjectRegistryRow
+
+    corroboratedStructuralPayload :
+      StructuralPayloadAnchor
+
+    corroboratedEvidenceSpan :
+      EvidenceSpanRef
+
+    corroboratedProductBaseIsCanonical :
+      corroboratedProductBase ≡ Core.canonicalProductBase
+
+    corroboratedProductSectionIsCanonical :
+      corroboratedProductSection ≡ Core.canonicalProductFieldSection
+
+    corroboratedProductSectionBaseIsProductBase :
+      Core.productBase corroboratedProductSection
+      ≡
+      corroboratedProductBase
+
+    corroboratedVectorObjectCoreIsObject :
+      Vector.coreObjectRef corroboratedVectorObject
+      ≡
+      corroboratedObject
+
+    corroboratedVectorRowObjectIsVectorObject :
+      Vector.referencedObject corroboratedVectorRow
+      ≡
+      corroboratedVectorObject
+
+    corroboratedRegistryRowObjectIsVectorObject :
+      rowObject corroboratedRegistryRow
+      ≡
+      corroboratedVectorObject
+
+    corroboratedRegistryRowPayloadIsStructuralPayload :
+      rowStructuralPayload corroboratedRegistryRow
+      ≡
+      corroboratedStructuralPayload
+
+    corroboratedRegistryRowSpanIsEvidenceSpan :
+      rowSpan corroboratedRegistryRow
+      ≡
+      corroboratedEvidenceSpan
+
+    corroboratedStructuralPayloadObjectIsObject :
+      payloadObject corroboratedStructuralPayload
+      ≡
+      corroboratedObject
+
+    corroboratedPayloadBindsObject :
+      payloadBindsObject corroboratedStructuralPayload ≡ true
+
+    corroboratedPayloadBindsSpan :
+      payloadBindsSpan corroboratedStructuralPayload ≡ true
+
+    corroboratedRowHasReceipt :
+      rowHasReceipt corroboratedRegistryRow ≡ true
+
+    corroboratedRowAnchoredObject :
+      rowAnchoredObject corroboratedRegistryRow ≡ true
+
+    corroboratedRowCurrentVersion :
+      rowCurrentVersion corroboratedRegistryRow ≡ true
+
+    corroboratedVectorRowProximityOnly :
+      Vector.rowProximityOnly corroboratedVectorRow ≡ true
+
+    corroboratedVectorRowSupportAuthorityFalse :
+      Vector.rowCarriesCommittedSupport corroboratedVectorRow ≡ false
+
+    corroboratedVectorRowTruthAuthorityFalse :
+      Vector.rowCarriesTruth corroboratedVectorRow ≡ false
+
+    corroboratedVectorRowAdmissibilityAuthorityFalse :
+      Vector.rowCarriesAdmissibility corroboratedVectorRow ≡ false
+
+    corroboratedRegistryVectorAuthorityFalse :
+      rowAdmitsVectorRowAuthority corroboratedRegistryRow ≡ false
+
+    corroboratedRuntimeParserAuthorityFalse :
+      rowAdmitsRuntimeParserAuthority corroboratedRegistryRow ≡ false
+
+open PNFProductIdentityCorroboration public
+
+canonicalPNFProductIdentityCorroboration :
+  PNFProductIdentityCorroboration
+canonicalPNFProductIdentityCorroboration =
+  pnfProductIdentityCorroboration
+    Core.canonicalPredicateObjectRef
+    canonicalRegistryObject
+    canonicalVectorRow
+    Core.canonicalProductBase
+    Core.canonicalProductFieldSection
+    canonicalRegistryRow
+    canonicalStructuralPayloadAnchor
+    canonicalEvidenceSpan
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalCorroboratedProductSectionBase :
+  Core.productBase
+    (corroboratedProductSection canonicalPNFProductIdentityCorroboration)
+  ≡
+  corroboratedProductBase canonicalPNFProductIdentityCorroboration
+canonicalCorroboratedProductSectionBase =
+  refl
+
+canonicalCorroboratedProductIdentityObject :
+  Vector.coreObjectRef
+    (corroboratedVectorObject canonicalPNFProductIdentityCorroboration)
+  ≡
+  payloadObject
+    (corroboratedStructuralPayload canonicalPNFProductIdentityCorroboration)
+canonicalCorroboratedProductIdentityObject =
+  refl
+
+canonicalCorroboratedProductIdentityPayload :
+  rowStructuralPayload
+    (corroboratedRegistryRow canonicalPNFProductIdentityCorroboration)
+  ≡
+  corroboratedStructuralPayload canonicalPNFProductIdentityCorroboration
+canonicalCorroboratedProductIdentityPayload =
+  refl
+
+canonicalCorroboratedProductIdentitySpan :
+  rowSpan
+    (corroboratedRegistryRow canonicalPNFProductIdentityCorroboration)
+  ≡
+  corroboratedEvidenceSpan canonicalPNFProductIdentityCorroboration
+canonicalCorroboratedProductIdentitySpan =
+  refl
+
+canonicalCorroboratedProductIdentityHasReceipt :
+  rowHasReceipt
+    (corroboratedRegistryRow canonicalPNFProductIdentityCorroboration)
+  ≡
+  true
+canonicalCorroboratedProductIdentityHasReceipt =
+  refl
+
+canonicalCorroboratedProductIdentityVectorAuthorityFalse :
+  rowAdmitsVectorRowAuthority
+    (corroboratedRegistryRow canonicalPNFProductIdentityCorroboration)
+  ≡
+  false
+canonicalCorroboratedProductIdentityVectorAuthorityFalse =
+  refl
+
+canonicalCorroboratedProductIdentityRuntimeAuthorityFalse :
+  rowAdmitsRuntimeParserAuthority
+    (corroboratedRegistryRow canonicalPNFProductIdentityCorroboration)
+  ≡
+  false
+canonicalCorroboratedProductIdentityRuntimeAuthorityFalse =
+  refl
+
+canonicalProductIdentityVectorRowCarriesNoSupportAuthority :
+  Vector.rowCarriesCommittedSupport
+    (corroboratedVectorRow canonicalPNFProductIdentityCorroboration)
+  ≡
+  false
+canonicalProductIdentityVectorRowCarriesNoSupportAuthority =
   refl

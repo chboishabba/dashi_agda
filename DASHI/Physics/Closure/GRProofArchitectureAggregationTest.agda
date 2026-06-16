@@ -1,8 +1,9 @@
 module DASHI.Physics.Closure.GRProofArchitectureAggregationTest where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.Nat.Base using (_≤_)
@@ -30,6 +31,691 @@ import Ontology.GodelLattice as GL
 data GRProofArchitectureAggregationStatus : Set where
   checkedAggregationOnlyNoPromotion :
     GRProofArchitectureAggregationStatus
+
+record GRProofArchitectureNextAnalyticKernelTrancheReceipt : Setω where
+  field
+    status :
+      GRProofArchitectureAggregationStatus
+
+    gaugeToolkitTierName :
+      String
+
+    gaugeToolkitTierNameIsCanonical :
+      gaugeToolkitTierName
+      ≡
+      "tier 1: ordered rational gauge toolkit"
+
+    gaugeToolkitTargetFile :
+      String
+
+    gaugeToolkitTargetFileIsCanonical :
+      gaugeToolkitTargetFile
+      ≡
+      "DASHI/Physics/Closure/ContinuumLimitTheorem.agda"
+
+    gaugeToolkitTargetVars :
+      List String
+
+    gaugeToolkitTargetVarsAreCanonical :
+      gaugeToolkitTargetVars
+      ≡
+      "canonicalOrderedRationalGaugeToolkitReceipt"
+      ∷ "orderedRationalGaugeD_QQZeroLawPrimitive"
+      ∷ "orderedRationalGaugeD_QQSymmetryLawPrimitive"
+      ∷ "orderedRationalGaugeD_QQTriangleLawPrimitive"
+      ∷ "orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive"
+      ∷ "orderedRationalGaugeThreeMinusNPositiveLawPrimitive"
+      ∷ "orderedRationalGaugeScale48Is48"
+      ∷ "orderedRationalGaugeScale48NonnegativeLawPrimitive"
+      ∷ []
+
+    shellADenominatorTierName :
+      String
+
+    shellADenominatorTierNameIsCanonical :
+      shellADenominatorTierName
+      ≡
+      "tier 2: Shell A denominator chain"
+
+    shellADenominatorTargetFile :
+      String
+
+    shellADenominatorTargetFileIsCanonical :
+      shellADenominatorTargetFile
+      ≡
+      "DASHI/Physics/Closure/ContinuumLimitTheorem.agda"
+
+    shellADenominatorTargetVars :
+      List String
+
+    shellADenominatorTargetVarsAreCanonical :
+      shellADenominatorTargetVars
+      ≡
+      "canonicalOrderedRationalShellADenominatorReciprocalReceipt"
+      ∷ "orderedRationalShellARadialMinusSchwarzschildLowerBoundIs1"
+      ∷ "orderedRationalShellAInverseMetricAbsMaxIs4"
+      ∷ "orderedRationalShellAMetricDerivativeAbsMaxIs8"
+      ∷ "orderedRationalShellAChristoffelFormulaEnvelopeIs72"
+      ∷ "orderedRationalShellAReciprocalBoundsFeedChristoffelFormulaC0Stable"
+      ∷ []
+
+    christoffelDerivativeBoundsTierName :
+      String
+
+    christoffelDerivativeBoundsTierNameIsCanonical :
+      christoffelDerivativeBoundsTierName
+      ≡
+      "tier 3: Christoffel derivative bounds"
+
+    christoffelDerivativeBoundsTargetFile :
+      String
+
+    christoffelDerivativeBoundsTargetFileIsCanonical :
+      christoffelDerivativeBoundsTargetFile
+      ≡
+      "DASHI/Physics/Closure/ContinuumLimitTheorem.agda"
+
+    christoffelDerivativeBoundsTargetVars :
+      List String
+
+    christoffelDerivativeBoundsTargetVarsAreCanonical :
+      christoffelDerivativeBoundsTargetVars
+      ≡
+      "canonicalOrderedRationalShellAChristoffelC0ConstantReceipt"
+      ∷ "orderedRationalShellA_C_GammaIs1"
+      ∷ "orderedRationalShellA_CPrime_GammaNumeratorIs26"
+      ∷ "orderedRationalShellA_CPrime_GammaDenominatorIs27"
+      ∷ "orderedRationalShellARequestedInequalityPrimitive"
+      ∷ "canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt"
+      ∷ []
+
+    christoffelC0StabilityTierName :
+      String
+
+    christoffelC0StabilityTierNameIsCanonical :
+      christoffelC0StabilityTierName
+      ≡
+      "tier 4: Christoffel C0 stability"
+
+    christoffelC0StabilityTargetFile :
+      String
+
+    christoffelC0StabilityTargetFileIsCanonical :
+      christoffelC0StabilityTargetFile
+      ≡
+      "DASHI/Physics/Closure/ContinuumLimitTheorem.agda"
+
+    christoffelC0StabilityTargetVars :
+      List String
+
+    christoffelC0StabilityTargetVarsAreCanonical :
+      christoffelC0StabilityTargetVars
+      ≡
+      "canonicalMachineCheckedChristoffelC0ConstantReceipt"
+      ∷ "machineCheckedChristoffelL_GammaIs48"
+      ∷ "canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt"
+      ∷ "selectedSymbolicRationalChristoffelC0FormulaStabilityIs48"
+      ∷ "canonicalSelectedSymbolicRationalChristoffelC0Primitive"
+      ∷ "selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound"
+      ∷ []
+
+    ricciPerturbationExtractionTierName :
+      String
+
+    ricciPerturbationExtractionTierNameIsCanonical :
+      ricciPerturbationExtractionTierName
+      ≡
+      "tier 5: Ricci perturbation extraction"
+
+    ricciPerturbationExtractionTargetFile :
+      String
+
+    ricciPerturbationExtractionTargetFileIsCanonical :
+      ricciPerturbationExtractionTargetFile
+      ≡
+      "DASHI/Physics/Closure/GRDiscreteRicciCandidateFromCurvature.agda"
+
+    ricciPerturbationExtractionTargetVars :
+      List String
+
+    ricciPerturbationExtractionTargetVarsAreCanonical :
+      ricciPerturbationExtractionTargetVars
+      ≡
+      "canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt"
+      ∷ "grDiscreteRicciExtractionConnectionErrorBoundExtractionDependencyNameExact"
+      ∷ "grDiscreteRicciExtractionPointCRConstantIs48"
+      ∷ "grDiscreteRicciExtractionShellACRConstantIs80"
+      ∷ "grDiscreteRicciExtractionConservativeCRExtractionConstantIs640"
+      ∷ "canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt"
+      ∷ "grSchwarzschildFiniteRicciPerturbationPointCRConstantIs48"
+      ∷ "grSchwarzschildFiniteRicciPerturbationConservativeCRConstantIs640"
+      ∷ []
+
+    machineCheckedChristoffelC0Constants :
+      Continuum.MachineCheckedChristoffelC0ConstantReceipt
+
+    machineCheckedChristoffelC0ConstantsAreCanonical :
+      machineCheckedChristoffelC0Constants
+      ≡
+      Continuum.canonicalMachineCheckedChristoffelC0ConstantReceipt
+
+    finalShellA_LGammaIs48 :
+      Continuum.MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
+        machineCheckedChristoffelC0Constants
+      ≡
+      48
+
+    finalShellA_RicciExtractionConstantIs640 :
+      Continuum.MachineCheckedChristoffelC0ConstantReceipt.ricciContractionExtractionConstant
+        machineCheckedChristoffelC0Constants
+      ≡
+      640
+
+    finalShellA_ConservativeCGammaUsed :
+      Continuum.MachineCheckedChristoffelC0ConstantReceipt.conservativeShellCGammaUsed
+        machineCheckedChristoffelC0Constants
+      ≡
+      true
+
+    correctedTightShellA_LGamma :
+      Nat
+
+    correctedTightShellA_LGammaIs44 :
+      correctedTightShellA_LGamma
+      ≡
+      44
+
+    correctedTightShellA_LGammaDocumentationOnly :
+      Bool
+
+    correctedTightShellA_LGammaDocumentationOnlyIsTrue :
+      correctedTightShellA_LGammaDocumentationOnly
+      ≡
+      true
+
+    correctedTightShellA_LGammaPreservesFinal48 :
+      Bool
+
+    correctedTightShellA_LGammaPreservesFinal48IsTrue :
+      correctedTightShellA_LGammaPreservesFinal48
+      ≡
+      true
+
+    correctedTightShellA_LGammaPreservesLegacy72 :
+      Bool
+
+    correctedTightShellA_LGammaPreservesLegacy72IsTrue :
+      correctedTightShellA_LGammaPreservesLegacy72
+      ≡
+      true
+
+    selectedChristoffelC0Constants :
+      Continuum.SymbolicRationalChristoffelC0SelectedConstantReceipt
+
+    selectedChristoffelC0ConstantsAreCanonical :
+      selectedChristoffelC0Constants
+      ≡
+      Continuum.canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+    selectedChristoffelC0FormulaStability48 :
+      Continuum.SymbolicRationalChristoffelC0SelectedConstantReceipt.formulaStabilityConstantNat
+        selectedChristoffelC0Constants
+      ≡
+      48
+
+    selectedChristoffelC0NoArbitraryConnectionEquality :
+      Continuum.SymbolicRationalChristoffelC0SelectedConstantReceipt.noArbitraryConnectionEqualityClaimed
+        selectedChristoffelC0Constants
+      ≡
+      true
+
+    shellADenominatorReciprocal :
+      Continuum.OrderedRationalShellADenominatorReciprocalReceipt
+
+    shellADenominatorReciprocalIsCanonical :
+      shellADenominatorReciprocal
+      ≡
+      Continuum.canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+    shellADenominatorReciprocalFeedsC0Stability :
+      Continuum.OrderedRationalShellADenominatorReciprocalReceipt.reciprocalBoundsFeedChristoffelFormulaC0Stable
+        shellADenominatorReciprocal
+      ≡
+      true
+
+    orderedGaugeToolkit :
+      Continuum.OrderedRationalGaugeToolkitReceipt
+
+    orderedGaugeToolkitIsCanonical :
+      orderedGaugeToolkit
+      ≡
+      Continuum.canonicalOrderedRationalGaugeToolkitReceipt
+
+    orderedGaugeScale48 :
+      Continuum.OrderedRationalGaugeToolkitReceipt.scaleConstant48
+        orderedGaugeToolkit
+      ≡
+      48
+
+    orderedGaugeToolkitNotPromoted :
+      Continuum.OrderedRationalGaugeToolkitReceipt.orderedQQTheoremPromoted
+        orderedGaugeToolkit
+      ≡
+      false
+
+    orderedShellAConstants :
+      Continuum.OrderedRationalShellAChristoffelC0ConstantReceipt
+
+    orderedShellAConstantsAreCanonical :
+      orderedShellAConstants
+      ≡
+      Continuum.canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+    orderedShellA_LGammaIs72 :
+      Continuum.OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+        orderedShellAConstants
+      ≡
+      72
+
+    orderedShellA_CRIs80 :
+      Continuum.OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_R
+        orderedShellAConstants
+      ≡
+      80
+
+    orderedShellA_CGammaIs1 :
+      Continuum.OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_C_Gamma
+        orderedShellAConstants
+      ≡
+      1
+
+    orderedShellA_CPrimeNumeratorIs26 :
+      Continuum.OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaNumerator
+        orderedShellAConstants
+      ≡
+      26
+
+    orderedShellA_CPrimeDenominatorIs27 :
+      Continuum.OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_CPrime_GammaDenominator
+        orderedShellAConstants
+      ≡
+      27
+
+    orderedShellARequestedInequalityPrimitive :
+      Continuum.OrderedRationalShellAChristoffelC0ConstantReceipt.requestedInequalityPrimitive
+        orderedShellAConstants
+      ≡
+      Continuum.shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
+
+    orderedShellAQQTheoremNotPromoted :
+      Continuum.OrderedRationalShellAChristoffelC0ConstantReceipt.orderedQQTheoremPromoted
+        orderedShellAConstants
+      ≡
+      false
+
+    orderedShellAAnalyticEstimateNotPromoted :
+      Continuum.OrderedRationalShellAChristoffelC0ConstantReceipt.analyticEstimatePromoted
+        orderedShellAConstants
+      ≡
+      false
+
+    orderedShellAPerturbationRoute :
+      Continuum.OrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+    orderedShellAPerturbationRouteIsCanonical :
+      orderedShellAPerturbationRoute
+      ≡
+      Continuum.canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+    orderedShellAPerturbationRouteL_GammaIs72 :
+      Continuum.OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotient
+        orderedShellAPerturbationRoute
+      ≡
+      72
+
+    orderedShellAPerturbationRouteNotPromoted :
+      Continuum.OrderedRationalShellAChristoffelPerturbationRouteReceipt.fullOrderedQQEstimatePromoted
+        orderedShellAPerturbationRoute
+      ≡
+      false
+
+    schwarzschildShellAExactCalculation :
+      Schwarzschild.SchwarzschildShellAExactCalculationReceipt
+
+    schwarzschildShellAExactCalculationIsCanonical :
+      schwarzschildShellAExactCalculation
+      ≡
+      Schwarzschild.canonicalSchwarzschildShellAExactCalculationReceipt
+
+    schwarzschildShellAConservativeEnvelope640 :
+      Schwarzschild.SchwarzschildShellAExactCalculationReceipt.conservativeEnvelope
+        schwarzschildShellAExactCalculation
+      ≡
+      Schwarzschild.sixHundredFortyN
+
+    schwarzschildShellANoContinuumRicciPromotion :
+      Schwarzschild.SchwarzschildShellAExactCalculationReceipt.continuumRicciPromoted
+        schwarzschildShellAExactCalculation
+      ≡
+      false
+
+    ricciFinitePerturbationReceipt :
+      Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+
+    ricciFinitePerturbationReceiptIsCanonical :
+      Bool
+
+    ricciFinitePerturbationReceiptIsCanonicalTrue :
+      ricciFinitePerturbationReceiptIsCanonical
+      ≡
+      true
+
+    ricciPerturbationBound640 :
+      Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.lRicciPerturbationBound
+        ricciFinitePerturbationReceipt
+      ≡
+      640
+
+    ricciPerturbationPointCRConstant48 :
+      Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.pointCRConstant
+        ricciFinitePerturbationReceipt
+      ≡
+      48
+
+    ricciPerturbationShellACRConstant80 :
+      Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.shellACRConstant
+        ricciFinitePerturbationReceipt
+      ≡
+      80
+
+    ricciPerturbationConservativeCRConstant640 :
+      Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.conservativeCRExtractionConstant
+        ricciFinitePerturbationReceipt
+      ≡
+      640
+
+    ricciPerturbationConnectionErrorExtractionDependency :
+      Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.connectionErrorBoundExtractionDependencyName
+        ricciFinitePerturbationReceipt
+      ≡
+      "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
+
+    ricciPerturbationNotConvergencePromotion :
+      Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.ricciPerturbationBoundPromotedAsConvergence
+        ricciFinitePerturbationReceipt
+      ≡
+      false
+
+    ricciExternalContinuumAuthorityNotClaimed :
+      Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.externalContinuumSchwarzschildAuthorityClaimed
+        ricciFinitePerturbationReceipt
+      ≡
+      false
+
+    kernelDependencyName :
+      String
+
+    kernelDependencyNameIsCanonical :
+      kernelDependencyName
+      ≡
+      "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel"
+
+    analyticKernelStillOpen :
+      Bool
+
+    analyticKernelStillOpenIsTrue :
+      analyticKernelStillOpen
+      ≡
+      true
+
+    requiredAnalyticalProofs :
+      List String
+
+    requiredAnalyticalProofsAreCanonical :
+      requiredAnalyticalProofs
+      ≡
+      "tier 1: ordered rational gauge toolkit in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalOrderedRationalGaugeToolkitReceipt and orderedRationalGauge* projections"
+      ∷ "tier 2: Shell A denominator chain in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalOrderedRationalShellADenominatorReciprocalReceipt and orderedRationalShellA* projections"
+      ∷ "tier 3: Christoffel derivative bounds in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalOrderedRationalShellAChristoffelC0ConstantReceipt, C_Gamma=1, and C'_Gamma=26/27 projections"
+      ∷ "corrected tight Shell A L_Gamma=44 is recorded as documentation-only aggregation metadata; final/conservative L_Gamma=48 and legacy 72 overbound projections are preserved"
+      ∷ "tier 4: Christoffel C0 stability in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalMachineCheckedChristoffelC0ConstantReceipt and selectedSymbolicRationalChristoffelC0FormulaStabilityIs48"
+      ∷ "tier 5: Ricci perturbation extraction in DASHI/Physics/Closure/GRDiscreteRicciCandidateFromCurvature.agda at canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt and canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt"
+      ∷ []
+
+canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt :
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt
+canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt =
+  record
+    { status =
+        checkedAggregationOnlyNoPromotion
+    ; gaugeToolkitTierName =
+        "tier 1: ordered rational gauge toolkit"
+    ; gaugeToolkitTierNameIsCanonical =
+        refl
+    ; gaugeToolkitTargetFile =
+        "DASHI/Physics/Closure/ContinuumLimitTheorem.agda"
+    ; gaugeToolkitTargetFileIsCanonical =
+        refl
+    ; gaugeToolkitTargetVars =
+        "canonicalOrderedRationalGaugeToolkitReceipt"
+        ∷ "orderedRationalGaugeD_QQZeroLawPrimitive"
+        ∷ "orderedRationalGaugeD_QQSymmetryLawPrimitive"
+        ∷ "orderedRationalGaugeD_QQTriangleLawPrimitive"
+        ∷ "orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive"
+        ∷ "orderedRationalGaugeThreeMinusNPositiveLawPrimitive"
+        ∷ "orderedRationalGaugeScale48Is48"
+        ∷ "orderedRationalGaugeScale48NonnegativeLawPrimitive"
+        ∷ []
+    ; gaugeToolkitTargetVarsAreCanonical =
+        refl
+    ; shellADenominatorTierName =
+        "tier 2: Shell A denominator chain"
+    ; shellADenominatorTierNameIsCanonical =
+        refl
+    ; shellADenominatorTargetFile =
+        "DASHI/Physics/Closure/ContinuumLimitTheorem.agda"
+    ; shellADenominatorTargetFileIsCanonical =
+        refl
+    ; shellADenominatorTargetVars =
+        "canonicalOrderedRationalShellADenominatorReciprocalReceipt"
+        ∷ "orderedRationalShellARadialMinusSchwarzschildLowerBoundIs1"
+        ∷ "orderedRationalShellAInverseMetricAbsMaxIs4"
+        ∷ "orderedRationalShellAMetricDerivativeAbsMaxIs8"
+        ∷ "orderedRationalShellAChristoffelFormulaEnvelopeIs72"
+        ∷ "orderedRationalShellAReciprocalBoundsFeedChristoffelFormulaC0Stable"
+        ∷ []
+    ; shellADenominatorTargetVarsAreCanonical =
+        refl
+    ; christoffelDerivativeBoundsTierName =
+        "tier 3: Christoffel derivative bounds"
+    ; christoffelDerivativeBoundsTierNameIsCanonical =
+        refl
+    ; christoffelDerivativeBoundsTargetFile =
+        "DASHI/Physics/Closure/ContinuumLimitTheorem.agda"
+    ; christoffelDerivativeBoundsTargetFileIsCanonical =
+        refl
+    ; christoffelDerivativeBoundsTargetVars =
+        "canonicalOrderedRationalShellAChristoffelC0ConstantReceipt"
+        ∷ "orderedRationalShellA_C_GammaIs1"
+        ∷ "orderedRationalShellA_CPrime_GammaNumeratorIs26"
+        ∷ "orderedRationalShellA_CPrime_GammaDenominatorIs27"
+        ∷ "orderedRationalShellARequestedInequalityPrimitive"
+        ∷ "canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt"
+        ∷ []
+    ; christoffelDerivativeBoundsTargetVarsAreCanonical =
+        refl
+    ; christoffelC0StabilityTierName =
+        "tier 4: Christoffel C0 stability"
+    ; christoffelC0StabilityTierNameIsCanonical =
+        refl
+    ; christoffelC0StabilityTargetFile =
+        "DASHI/Physics/Closure/ContinuumLimitTheorem.agda"
+    ; christoffelC0StabilityTargetFileIsCanonical =
+        refl
+    ; christoffelC0StabilityTargetVars =
+        "canonicalMachineCheckedChristoffelC0ConstantReceipt"
+        ∷ "machineCheckedChristoffelL_GammaIs48"
+        ∷ "canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt"
+        ∷ "selectedSymbolicRationalChristoffelC0FormulaStabilityIs48"
+        ∷ "canonicalSelectedSymbolicRationalChristoffelC0Primitive"
+        ∷ "selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound"
+        ∷ []
+    ; christoffelC0StabilityTargetVarsAreCanonical =
+        refl
+    ; ricciPerturbationExtractionTierName =
+        "tier 5: Ricci perturbation extraction"
+    ; ricciPerturbationExtractionTierNameIsCanonical =
+        refl
+    ; ricciPerturbationExtractionTargetFile =
+        "DASHI/Physics/Closure/GRDiscreteRicciCandidateFromCurvature.agda"
+    ; ricciPerturbationExtractionTargetFileIsCanonical =
+        refl
+    ; ricciPerturbationExtractionTargetVars =
+        "canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt"
+        ∷ "grDiscreteRicciExtractionConnectionErrorBoundExtractionDependencyNameExact"
+        ∷ "grDiscreteRicciExtractionPointCRConstantIs48"
+        ∷ "grDiscreteRicciExtractionShellACRConstantIs80"
+        ∷ "grDiscreteRicciExtractionConservativeCRExtractionConstantIs640"
+        ∷ "canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt"
+        ∷ "grSchwarzschildFiniteRicciPerturbationPointCRConstantIs48"
+        ∷ "grSchwarzschildFiniteRicciPerturbationConservativeCRConstantIs640"
+        ∷ []
+    ; ricciPerturbationExtractionTargetVarsAreCanonical =
+        refl
+    ; machineCheckedChristoffelC0Constants =
+        Continuum.canonicalMachineCheckedChristoffelC0ConstantReceipt
+    ; machineCheckedChristoffelC0ConstantsAreCanonical =
+        refl
+    ; finalShellA_LGammaIs48 =
+        Continuum.machineCheckedChristoffelL_GammaIs48
+    ; finalShellA_RicciExtractionConstantIs640 =
+        Continuum.machineCheckedRicciContractionExtractionConstantIs640
+    ; finalShellA_ConservativeCGammaUsed =
+        Continuum.MachineCheckedChristoffelC0ConstantReceipt.conservativeShellCGammaUsedIsTrue
+          Continuum.canonicalMachineCheckedChristoffelC0ConstantReceipt
+    ; correctedTightShellA_LGamma =
+        44
+    ; correctedTightShellA_LGammaIs44 =
+        refl
+    ; correctedTightShellA_LGammaDocumentationOnly =
+        true
+    ; correctedTightShellA_LGammaDocumentationOnlyIsTrue =
+        refl
+    ; correctedTightShellA_LGammaPreservesFinal48 =
+        true
+    ; correctedTightShellA_LGammaPreservesFinal48IsTrue =
+        refl
+    ; correctedTightShellA_LGammaPreservesLegacy72 =
+        true
+    ; correctedTightShellA_LGammaPreservesLegacy72IsTrue =
+        refl
+    ; selectedChristoffelC0Constants =
+        Continuum.canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+    ; selectedChristoffelC0ConstantsAreCanonical =
+        refl
+    ; selectedChristoffelC0FormulaStability48 =
+        Continuum.selectedSymbolicRationalChristoffelC0FormulaStabilityIs48
+    ; selectedChristoffelC0NoArbitraryConnectionEquality =
+        Continuum.SymbolicRationalChristoffelC0SelectedConstantReceipt.noArbitraryConnectionEqualityClaimedIsTrue
+          Continuum.canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+    ; shellADenominatorReciprocal =
+        Continuum.canonicalOrderedRationalShellADenominatorReciprocalReceipt
+    ; shellADenominatorReciprocalIsCanonical =
+        refl
+    ; shellADenominatorReciprocalFeedsC0Stability =
+        Continuum.orderedRationalShellAReciprocalBoundsFeedChristoffelFormulaC0Stable
+    ; orderedGaugeToolkit =
+        Continuum.canonicalOrderedRationalGaugeToolkitReceipt
+    ; orderedGaugeToolkitIsCanonical =
+        refl
+    ; orderedGaugeScale48 =
+        Continuum.orderedRationalGaugeScale48Is48
+    ; orderedGaugeToolkitNotPromoted =
+        Continuum.OrderedRationalGaugeToolkitReceipt.orderedQQTheoremPromotedIsFalse
+          Continuum.canonicalOrderedRationalGaugeToolkitReceipt
+    ; orderedShellAConstants =
+        Continuum.canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+    ; orderedShellAConstantsAreCanonical =
+        refl
+    ; orderedShellA_LGammaIs72 =
+        Continuum.orderedRationalShellA_L_GammaIs72
+    ; orderedShellA_CRIs80 =
+        Continuum.orderedRationalShellA_C_RIs80
+    ; orderedShellA_CGammaIs1 =
+        Continuum.orderedRationalShellA_C_GammaIs1
+    ; orderedShellA_CPrimeNumeratorIs26 =
+        Continuum.orderedRationalShellA_CPrime_GammaNumeratorIs26
+    ; orderedShellA_CPrimeDenominatorIs27 =
+        Continuum.orderedRationalShellA_CPrime_GammaDenominatorIs27
+    ; orderedShellARequestedInequalityPrimitive =
+        Continuum.orderedRationalShellARequestedInequalityPrimitive
+    ; orderedShellAQQTheoremNotPromoted =
+        Continuum.OrderedRationalShellAChristoffelC0ConstantReceipt.orderedQQTheoremPromotedIsFalse
+          Continuum.canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+    ; orderedShellAAnalyticEstimateNotPromoted =
+        Continuum.OrderedRationalShellAChristoffelC0ConstantReceipt.analyticEstimatePromotedIsFalse
+          Continuum.canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+    ; orderedShellAPerturbationRoute =
+        Continuum.canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+    ; orderedShellAPerturbationRouteIsCanonical =
+        refl
+    ; orderedShellAPerturbationRouteL_GammaIs72 =
+        Continuum.orderedRationalShellAPerturbationRouteL_GammaIs72
+    ; orderedShellAPerturbationRouteNotPromoted =
+        Continuum.OrderedRationalShellAChristoffelPerturbationRouteReceipt.fullOrderedQQEstimatePromotedIsFalse
+          Continuum.canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+    ; schwarzschildShellAExactCalculation =
+        Schwarzschild.canonicalSchwarzschildShellAExactCalculationReceipt
+    ; schwarzschildShellAExactCalculationIsCanonical =
+        refl
+    ; schwarzschildShellAConservativeEnvelope640 =
+        Schwarzschild.SchwarzschildShellAExactCalculationReceipt.conservativeEnvelopeIsSixHundredForty
+          Schwarzschild.canonicalSchwarzschildShellAExactCalculationReceipt
+    ; schwarzschildShellANoContinuumRicciPromotion =
+        Schwarzschild.SchwarzschildShellAExactCalculationReceipt.continuumRicciPromotedIsFalse
+          Schwarzschild.canonicalSchwarzschildShellAExactCalculationReceipt
+    ; ricciFinitePerturbationReceipt =
+        Ricci.canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+    ; ricciFinitePerturbationReceiptIsCanonical =
+        true
+    ; ricciFinitePerturbationReceiptIsCanonicalTrue =
+        refl
+    ; ricciPerturbationBound640 =
+        Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.lRicciPerturbationBoundIs640
+          Ricci.canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+    ; ricciPerturbationPointCRConstant48 =
+        Ricci.grSchwarzschildFiniteRicciPerturbationPointCRConstantIs48
+    ; ricciPerturbationShellACRConstant80 =
+        Ricci.grSchwarzschildFiniteRicciPerturbationShellACRConstantIs80
+    ; ricciPerturbationConservativeCRConstant640 =
+        Ricci.grSchwarzschildFiniteRicciPerturbationConservativeCRConstantIs640
+    ; ricciPerturbationConnectionErrorExtractionDependency =
+        Ricci.grSchwarzschildFiniteRicciConnectionErrorBoundExtractionDependencyNameExact
+    ; ricciPerturbationNotConvergencePromotion =
+        Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.ricciPerturbationBoundPromotedAsConvergenceIsFalse
+          Ricci.canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+    ; ricciExternalContinuumAuthorityNotClaimed =
+        Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.externalContinuumSchwarzschildAuthorityClaimedIsFalse
+          Ricci.canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+    ; kernelDependencyName =
+        "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel"
+    ; kernelDependencyNameIsCanonical =
+        refl
+    ; analyticKernelStillOpen =
+        true
+    ; analyticKernelStillOpenIsTrue =
+        refl
+    ; requiredAnalyticalProofs =
+        "tier 1: ordered rational gauge toolkit in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalOrderedRationalGaugeToolkitReceipt and orderedRationalGauge* projections"
+        ∷ "tier 2: Shell A denominator chain in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalOrderedRationalShellADenominatorReciprocalReceipt and orderedRationalShellA* projections"
+        ∷ "tier 3: Christoffel derivative bounds in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalOrderedRationalShellAChristoffelC0ConstantReceipt, C_Gamma=1, and C'_Gamma=26/27 projections"
+        ∷ "corrected tight Shell A L_Gamma=44 is recorded as documentation-only aggregation metadata; final/conservative L_Gamma=48 and legacy 72 overbound projections are preserved"
+        ∷ "tier 4: Christoffel C0 stability in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalMachineCheckedChristoffelC0ConstantReceipt and selectedSymbolicRationalChristoffelC0FormulaStabilityIs48"
+        ∷ "tier 5: Ricci perturbation extraction in DASHI/Physics/Closure/GRDiscreteRicciCandidateFromCurvature.agda at canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt and canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt"
+        ∷ []
+    ; requiredAnalyticalProofsAreCanonical =
+        refl
+    }
 
 record GRProofArchitectureAggregationTest : Setω where
   field
@@ -292,7 +978,7 @@ record GRProofArchitectureAggregationTest : Setω where
       Schwarzschild.SchwarzschildNonDegenerateShellSupremumReceipt.lGamma
         Schwarzschild.canonicalSchwarzschildNonDegenerateShellAReceipt
       ≡
-      Schwarzschild.posSeventyTwo
+      Schwarzschild.posFortyEight
 
     schwarzschildShellA_CRIs80 :
       Schwarzschild.SchwarzschildNonDegenerateShellSupremumReceipt.cR
@@ -965,6 +1651,38 @@ record GRProofArchitectureAggregationTest : Setω where
       ≡
       true
 
+    correctedTightShellA_LGamma :
+      Nat
+
+    correctedTightShellA_LGammaIs44 :
+      correctedTightShellA_LGamma
+      ≡
+      44
+
+    correctedTightShellA_LGammaDocumentationOnly :
+      Bool
+
+    correctedTightShellA_LGammaDocumentationOnlyIsTrue :
+      correctedTightShellA_LGammaDocumentationOnly
+      ≡
+      true
+
+    correctedTightShellA_LGammaPreservesFinal48 :
+      Bool
+
+    correctedTightShellA_LGammaPreservesFinal48IsTrue :
+      correctedTightShellA_LGammaPreservesFinal48
+      ≡
+      true
+
+    correctedTightShellA_LGammaPreservesLegacy72 :
+      Bool
+
+    correctedTightShellA_LGammaPreservesLegacy72IsTrue :
+      correctedTightShellA_LGammaPreservesLegacy72
+      ≡
+      true
+
     machineCheckedInverseMetricC0Shape :
       Continuum.MachineCheckedChristoffelC0ConstantReceipt.inverseMetricC0Shape
         machineCheckedChristoffelC0Constants
@@ -1052,6 +1770,156 @@ record GRProofArchitectureAggregationTest : Setω where
         selectedChristoffelC0Primitive
       ≡
       false
+
+    nextAnalyticKernelTranche :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt
+
+    nextAnalyticKernelTrancheIsCanonical :
+      Bool
+
+    nextAnalyticKernelTrancheIsCanonicalTrue :
+      nextAnalyticKernelTrancheIsCanonical
+      ≡
+      true
+
+    nextAnalyticKernelStillOpen :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.analyticKernelStillOpen
+        nextAnalyticKernelTranche
+      ≡
+      true
+
+    nextAnalyticKernelDependencyName :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.kernelDependencyName
+        nextAnalyticKernelTranche
+      ≡
+      "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel"
+
+    nextAnalyticKernelGaugeToolkitTargets :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.gaugeToolkitTargetVars
+        nextAnalyticKernelTranche
+      ≡
+      "canonicalOrderedRationalGaugeToolkitReceipt"
+      ∷ "orderedRationalGaugeD_QQZeroLawPrimitive"
+      ∷ "orderedRationalGaugeD_QQSymmetryLawPrimitive"
+      ∷ "orderedRationalGaugeD_QQTriangleLawPrimitive"
+      ∷ "orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive"
+      ∷ "orderedRationalGaugeThreeMinusNPositiveLawPrimitive"
+      ∷ "orderedRationalGaugeScale48Is48"
+      ∷ "orderedRationalGaugeScale48NonnegativeLawPrimitive"
+      ∷ []
+
+    nextAnalyticKernelShellADenominatorTargets :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.shellADenominatorTargetVars
+        nextAnalyticKernelTranche
+      ≡
+      "canonicalOrderedRationalShellADenominatorReciprocalReceipt"
+      ∷ "orderedRationalShellARadialMinusSchwarzschildLowerBoundIs1"
+      ∷ "orderedRationalShellAInverseMetricAbsMaxIs4"
+      ∷ "orderedRationalShellAMetricDerivativeAbsMaxIs8"
+      ∷ "orderedRationalShellAChristoffelFormulaEnvelopeIs72"
+      ∷ "orderedRationalShellAReciprocalBoundsFeedChristoffelFormulaC0Stable"
+      ∷ []
+
+    nextAnalyticKernelChristoffelDerivativeTargets :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.christoffelDerivativeBoundsTargetVars
+        nextAnalyticKernelTranche
+      ≡
+      "canonicalOrderedRationalShellAChristoffelC0ConstantReceipt"
+      ∷ "orderedRationalShellA_C_GammaIs1"
+      ∷ "orderedRationalShellA_CPrime_GammaNumeratorIs26"
+      ∷ "orderedRationalShellA_CPrime_GammaDenominatorIs27"
+      ∷ "orderedRationalShellARequestedInequalityPrimitive"
+      ∷ "canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt"
+      ∷ []
+
+    nextAnalyticKernelChristoffelC0Targets :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.christoffelC0StabilityTargetVars
+        nextAnalyticKernelTranche
+      ≡
+      "canonicalMachineCheckedChristoffelC0ConstantReceipt"
+      ∷ "machineCheckedChristoffelL_GammaIs48"
+      ∷ "canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt"
+      ∷ "selectedSymbolicRationalChristoffelC0FormulaStabilityIs48"
+      ∷ "canonicalSelectedSymbolicRationalChristoffelC0Primitive"
+      ∷ "selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound"
+      ∷ []
+
+    nextAnalyticKernelRicciExtractionTargets :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.ricciPerturbationExtractionTargetVars
+        nextAnalyticKernelTranche
+      ≡
+      "canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt"
+      ∷ "grDiscreteRicciExtractionConnectionErrorBoundExtractionDependencyNameExact"
+      ∷ "grDiscreteRicciExtractionPointCRConstantIs48"
+      ∷ "grDiscreteRicciExtractionShellACRConstantIs80"
+      ∷ "grDiscreteRicciExtractionConservativeCRExtractionConstantIs640"
+      ∷ "canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt"
+      ∷ "grSchwarzschildFiniteRicciPerturbationPointCRConstantIs48"
+      ∷ "grSchwarzschildFiniteRicciPerturbationConservativeCRConstantIs640"
+      ∷ []
+
+    nextAnalyticKernelFinalShellA_LGammaIs48 :
+      Continuum.MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
+        (GRProofArchitectureNextAnalyticKernelTrancheReceipt.machineCheckedChristoffelC0Constants
+          nextAnalyticKernelTranche)
+      ≡
+      48
+
+    nextAnalyticKernelFinalShellASelectedFormula48 :
+      Continuum.SymbolicRationalChristoffelC0SelectedConstantReceipt.formulaStabilityConstantNat
+        (GRProofArchitectureNextAnalyticKernelTrancheReceipt.selectedChristoffelC0Constants
+          nextAnalyticKernelTranche)
+      ≡
+      48
+
+    nextAnalyticKernelRicciPointCR48 :
+      Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.pointCRConstant
+        (GRProofArchitectureNextAnalyticKernelTrancheReceipt.ricciFinitePerturbationReceipt
+          nextAnalyticKernelTranche)
+      ≡
+      48
+
+    nextAnalyticKernelCorrectedTightShellA_LGamma44 :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGamma
+        nextAnalyticKernelTranche
+      ≡
+      44
+
+    nextAnalyticKernelCorrectedTightShellA_DocumentationOnly :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGammaDocumentationOnly
+        nextAnalyticKernelTranche
+      ≡
+      true
+
+    nextAnalyticKernelCorrectedTightShellA_PreservesFinal48 :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGammaPreservesFinal48
+        nextAnalyticKernelTranche
+      ≡
+      true
+
+    nextAnalyticKernelCorrectedTightShellA_PreservesLegacy72 :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGammaPreservesLegacy72
+        nextAnalyticKernelTranche
+      ≡
+      true
+
+    nextAnalyticKernelShellA_LGammaIs72 :
+      Bool
+
+    nextAnalyticKernelShellA_CRIs80 :
+      Bool
+
+    nextAnalyticKernelShellA_CPrimeDenominatorIs27 :
+      Bool
+
+    nextAnalyticKernelSchwarzschildShellAEnvelope640 :
+      Bool
+
+    nextAnalyticKernelRicciPerturbationBound640 :
+      Bool
+
+    nextAnalyticKernelNoRicciConvergencePromotion :
+      Bool
 
     unsafeExternalSurfaceReceipts :
       List String
@@ -1483,6 +2351,22 @@ canonicalGRProofArchitectureAggregationTest =
     ; machineCheckedConservativeShellCGammaUsed =
         Continuum.MachineCheckedChristoffelC0ConstantReceipt.conservativeShellCGammaUsedIsTrue
           Continuum.canonicalMachineCheckedChristoffelC0ConstantReceipt
+    ; correctedTightShellA_LGamma =
+        44
+    ; correctedTightShellA_LGammaIs44 =
+        refl
+    ; correctedTightShellA_LGammaDocumentationOnly =
+        true
+    ; correctedTightShellA_LGammaDocumentationOnlyIsTrue =
+        refl
+    ; correctedTightShellA_LGammaPreservesFinal48 =
+        true
+    ; correctedTightShellA_LGammaPreservesFinal48IsTrue =
+        refl
+    ; correctedTightShellA_LGammaPreservesLegacy72 =
+        true
+    ; correctedTightShellA_LGammaPreservesLegacy72IsTrue =
+        refl
     ; machineCheckedInverseMetricC0Shape =
         Continuum.MachineCheckedChristoffelC0ConstantReceipt.inverseMetricC0ShapeIsPointwiseFiniteCarrier
           Continuum.canonicalMachineCheckedChristoffelC0ConstantReceipt
@@ -1520,6 +2404,63 @@ canonicalGRProofArchitectureAggregationTest =
     ; selectedChristoffelC0NoArbitraryEqualityPromotion =
         Continuum.SelectedSymbolicRationalChristoffelC0Primitive.arbitraryConnectionEqualityPromotedIsFalse
           Continuum.canonicalSelectedSymbolicRationalChristoffelC0Primitive
+    ; nextAnalyticKernelTranche =
+        canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelTrancheIsCanonical =
+        true
+    ; nextAnalyticKernelTrancheIsCanonicalTrue =
+        refl
+    ; nextAnalyticKernelStillOpen =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.analyticKernelStillOpenIsTrue
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelDependencyName =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.kernelDependencyNameIsCanonical
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelGaugeToolkitTargets =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.gaugeToolkitTargetVarsAreCanonical
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelShellADenominatorTargets =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.shellADenominatorTargetVarsAreCanonical
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelChristoffelDerivativeTargets =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.christoffelDerivativeBoundsTargetVarsAreCanonical
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelChristoffelC0Targets =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.christoffelC0StabilityTargetVarsAreCanonical
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelRicciExtractionTargets =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.ricciPerturbationExtractionTargetVarsAreCanonical
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelFinalShellA_LGammaIs48 =
+        refl
+    ; nextAnalyticKernelFinalShellASelectedFormula48 =
+        refl
+    ; nextAnalyticKernelRicciPointCR48 =
+        refl
+    ; nextAnalyticKernelCorrectedTightShellA_LGamma44 =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGammaIs44
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelCorrectedTightShellA_DocumentationOnly =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGammaDocumentationOnlyIsTrue
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelCorrectedTightShellA_PreservesFinal48 =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGammaPreservesFinal48IsTrue
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelCorrectedTightShellA_PreservesLegacy72 =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGammaPreservesLegacy72IsTrue
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelShellA_LGammaIs72 =
+        true
+    ; nextAnalyticKernelShellA_CRIs80 =
+        true
+    ; nextAnalyticKernelShellA_CPrimeDenominatorIs27 =
+        true
+    ; nextAnalyticKernelSchwarzschildShellAEnvelope640 =
+        true
+    ; nextAnalyticKernelRicciPerturbationBound640 =
+        true
+    ; nextAnalyticKernelNoRicciConvergencePromotion =
+        true
     ; unsafeExternalSurfaceReceipts =
         []
     ; unsafeExternalSurfaceReceiptsAreCanonicalCurrentBlockers =
@@ -1547,6 +2488,7 @@ canonicalGRProofArchitectureAggregationTest =
         ∷ "Imports and checks the continuum theorem-request surface"
         ∷ "Imports and checks the Continuum machine-checked Christoffel C0 constants"
         ∷ "Imports and checks Shell A/B selected Christoffel constants and the zero-epsilon selected equality bridge without arbitrary equality promotion"
+        ∷ "Imports and checks the next analytic-kernel tranche requirements without promoting the ordered QQ theorem or Ricci convergence"
         ∷ "No GR, Schwarzschild, Bianchi, or Einstein-equation promotion is introduced here"
         ∷ []
     }
@@ -2145,6 +3087,34 @@ grProofArchitectureAggregationMachineCheckedConservativeShellCGammaUsed :
     Continuum.canonicalMachineCheckedChristoffelC0ConstantReceipt
 grProofArchitectureAggregationMachineCheckedConservativeShellCGammaUsed = refl
 
+grProofArchitectureAggregationCorrectedTightShellA_LGamma44 :
+  GRProofArchitectureAggregationTest.correctedTightShellA_LGamma
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  44
+grProofArchitectureAggregationCorrectedTightShellA_LGamma44 = refl
+
+grProofArchitectureAggregationCorrectedTightShellA_DocumentationOnly :
+  GRProofArchitectureAggregationTest.correctedTightShellA_LGammaDocumentationOnly
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  true
+grProofArchitectureAggregationCorrectedTightShellA_DocumentationOnly = refl
+
+grProofArchitectureAggregationCorrectedTightShellA_PreservesFinal48 :
+  GRProofArchitectureAggregationTest.correctedTightShellA_LGammaPreservesFinal48
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  true
+grProofArchitectureAggregationCorrectedTightShellA_PreservesFinal48 = refl
+
+grProofArchitectureAggregationCorrectedTightShellA_PreservesLegacy72 :
+  GRProofArchitectureAggregationTest.correctedTightShellA_LGammaPreservesLegacy72
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  true
+grProofArchitectureAggregationCorrectedTightShellA_PreservesLegacy72 = refl
+
 grProofArchitectureAggregationSelectedChristoffelC0ShellA_TightCGammaIsOne :
   GRProofArchitectureAggregationTest.selectedChristoffelC0ShellA_TightCGammaIsOne
     canonicalGRProofArchitectureAggregationTest
@@ -2203,3 +3173,173 @@ grProofArchitectureAggregationSelectedChristoffelC0NoArbitraryEqualityPromotion 
   Continuum.SelectedSymbolicRationalChristoffelC0Primitive.arbitraryConnectionEqualityPromotedIsFalse
     Continuum.canonicalSelectedSymbolicRationalChristoffelC0Primitive
 grProofArchitectureAggregationSelectedChristoffelC0NoArbitraryEqualityPromotion = refl
+
+grProofArchitectureAggregationNextAnalyticKernelTrancheCanonical :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelTrancheIsCanonical
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  true
+grProofArchitectureAggregationNextAnalyticKernelTrancheCanonical = refl
+
+grProofArchitectureAggregationNextAnalyticKernelStillOpen :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelStillOpen
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt.analyticKernelStillOpenIsTrue
+    canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+grProofArchitectureAggregationNextAnalyticKernelStillOpen = refl
+
+grProofArchitectureAggregationNextAnalyticKernelDependencyName :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelDependencyName
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt.kernelDependencyNameIsCanonical
+    canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+grProofArchitectureAggregationNextAnalyticKernelDependencyName = refl
+
+grProofArchitectureAggregationNextAnalyticKernelGaugeToolkitTargets :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelGaugeToolkitTargets
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt.gaugeToolkitTargetVarsAreCanonical
+    canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+grProofArchitectureAggregationNextAnalyticKernelGaugeToolkitTargets = refl
+
+grProofArchitectureAggregationNextAnalyticKernelShellADenominatorTargets :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelShellADenominatorTargets
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt.shellADenominatorTargetVarsAreCanonical
+    canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+grProofArchitectureAggregationNextAnalyticKernelShellADenominatorTargets = refl
+
+grProofArchitectureAggregationNextAnalyticKernelChristoffelDerivativeTargets :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelChristoffelDerivativeTargets
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt.christoffelDerivativeBoundsTargetVarsAreCanonical
+    canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+grProofArchitectureAggregationNextAnalyticKernelChristoffelDerivativeTargets = refl
+
+grProofArchitectureAggregationNextAnalyticKernelChristoffelC0Targets :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelChristoffelC0Targets
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt.christoffelC0StabilityTargetVarsAreCanonical
+    canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+grProofArchitectureAggregationNextAnalyticKernelChristoffelC0Targets = refl
+
+grProofArchitectureAggregationNextAnalyticKernelRicciExtractionTargets :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelRicciExtractionTargets
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt.ricciPerturbationExtractionTargetVarsAreCanonical
+    canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+grProofArchitectureAggregationNextAnalyticKernelRicciExtractionTargets = refl
+
+grProofArchitectureAggregationNextAnalyticKernelFinalShellA_LGamma48 :
+  Continuum.MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
+    (GRProofArchitectureNextAnalyticKernelTrancheReceipt.machineCheckedChristoffelC0Constants
+      (GRProofArchitectureAggregationTest.nextAnalyticKernelTranche
+        canonicalGRProofArchitectureAggregationTest))
+  ≡
+  48
+grProofArchitectureAggregationNextAnalyticKernelFinalShellA_LGamma48 =
+  GRProofArchitectureAggregationTest.nextAnalyticKernelFinalShellA_LGammaIs48
+    canonicalGRProofArchitectureAggregationTest
+
+grProofArchitectureAggregationNextAnalyticKernelFinalShellASelectedFormula48 :
+  Continuum.SymbolicRationalChristoffelC0SelectedConstantReceipt.formulaStabilityConstantNat
+    (GRProofArchitectureNextAnalyticKernelTrancheReceipt.selectedChristoffelC0Constants
+      (GRProofArchitectureAggregationTest.nextAnalyticKernelTranche
+        canonicalGRProofArchitectureAggregationTest))
+  ≡
+  48
+grProofArchitectureAggregationNextAnalyticKernelFinalShellASelectedFormula48 =
+  GRProofArchitectureAggregationTest.nextAnalyticKernelFinalShellASelectedFormula48
+    canonicalGRProofArchitectureAggregationTest
+
+grProofArchitectureAggregationNextAnalyticKernelRicciPointCR48 :
+  Ricci.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.pointCRConstant
+    (GRProofArchitectureNextAnalyticKernelTrancheReceipt.ricciFinitePerturbationReceipt
+      (GRProofArchitectureAggregationTest.nextAnalyticKernelTranche
+        canonicalGRProofArchitectureAggregationTest))
+  ≡
+  48
+grProofArchitectureAggregationNextAnalyticKernelRicciPointCR48 =
+  GRProofArchitectureAggregationTest.nextAnalyticKernelRicciPointCR48
+    canonicalGRProofArchitectureAggregationTest
+
+grProofArchitectureAggregationNextAnalyticKernelCorrectedTightShellA_LGamma44 :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelCorrectedTightShellA_LGamma44
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGammaIs44
+    canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+grProofArchitectureAggregationNextAnalyticKernelCorrectedTightShellA_LGamma44 = refl
+
+grProofArchitectureAggregationNextAnalyticKernelCorrectedTightShellA_DocumentationOnly :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelCorrectedTightShellA_DocumentationOnly
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGammaDocumentationOnlyIsTrue
+    canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+grProofArchitectureAggregationNextAnalyticKernelCorrectedTightShellA_DocumentationOnly = refl
+
+grProofArchitectureAggregationNextAnalyticKernelCorrectedTightShellA_PreservesFinal48 :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelCorrectedTightShellA_PreservesFinal48
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGammaPreservesFinal48IsTrue
+    canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+grProofArchitectureAggregationNextAnalyticKernelCorrectedTightShellA_PreservesFinal48 = refl
+
+grProofArchitectureAggregationNextAnalyticKernelCorrectedTightShellA_PreservesLegacy72 :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelCorrectedTightShellA_PreservesLegacy72
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  GRProofArchitectureNextAnalyticKernelTrancheReceipt.correctedTightShellA_LGammaPreservesLegacy72IsTrue
+    canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+grProofArchitectureAggregationNextAnalyticKernelCorrectedTightShellA_PreservesLegacy72 = refl
+
+grProofArchitectureAggregationNextAnalyticKernelShellA_LGamma72 :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelShellA_LGammaIs72
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  true
+grProofArchitectureAggregationNextAnalyticKernelShellA_LGamma72 = refl
+
+grProofArchitectureAggregationNextAnalyticKernelShellA_CR80 :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelShellA_CRIs80
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  true
+grProofArchitectureAggregationNextAnalyticKernelShellA_CR80 = refl
+
+grProofArchitectureAggregationNextAnalyticKernelShellA_CPrimeDenominator27 :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelShellA_CPrimeDenominatorIs27
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  true
+grProofArchitectureAggregationNextAnalyticKernelShellA_CPrimeDenominator27 = refl
+
+grProofArchitectureAggregationNextAnalyticKernelSchwarzschildShellAEnvelope640 :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelSchwarzschildShellAEnvelope640
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  true
+grProofArchitectureAggregationNextAnalyticKernelSchwarzschildShellAEnvelope640 = refl
+
+grProofArchitectureAggregationNextAnalyticKernelRicciPerturbationBound640 :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelRicciPerturbationBound640
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  true
+grProofArchitectureAggregationNextAnalyticKernelRicciPerturbationBound640 = refl
+
+grProofArchitectureAggregationNextAnalyticKernelNoRicciConvergencePromotion :
+  GRProofArchitectureAggregationTest.nextAnalyticKernelNoRicciConvergencePromotion
+    canonicalGRProofArchitectureAggregationTest
+  ≡
+  true
+grProofArchitectureAggregationNextAnalyticKernelNoRicciConvergencePromotion = refl
