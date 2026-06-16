@@ -114,6 +114,7 @@ data PromotionImplementationLane : Set where
   classicalFieldLane : PromotionImplementationLane
   quantumQFTLane : PromotionImplementationLane
   chemistryBiologyLane : PromotionImplementationLane
+  neurochemicalLane : PromotionImplementationLane
   gate3ClayLane : PromotionImplementationLane
   standardModelTerminalLane : PromotionImplementationLane
 
@@ -778,6 +779,15 @@ canonicalPromotionLaneSummaries =
     "chemistry and biology promotion obligations are indexed beyond local population receipts"
     "physical chemistry, spectroscopy, bonding, wet-lab, causation, intervention, clinical validity, and brain-state recovery remain false"
     "agda -i . DASHI/Promotion/ChemistryBiologyObligations.agda"
+  ∷ mkLaneSummary
+    neurochemicalLane
+    "DASHI.Promotion.NeurochemicalAuthorityBoundary"
+    "canonicalNeurochemicalAuthorityBoundary"
+    "neurochemical transmission bridge; neurochemical vocabulary; synaptic transfer recovery"
+    3
+    "neurochemical TransmissionBridge, NeurochemicalVocabularyReceipt, and NeurochemicalAuthorityBoundary are staged as missing-obligation bridge/authority surfaces"
+    "all neurochemical bridge and authority claims remain false pending missing file/authority landings"
+    "echo Neurochemical bridge/authority surfaces pending: DASHI.Biology.NeurochemicalTransmissionBridge, DASHI.Biology.NeurochemicalVocabularyReceipt, DASHI.Promotion.NeurochemicalAuthorityBoundary"
   ∷ mkLaneSummary
     gate3ClayLane
     "DASHI.Promotion.Gate3ClayObligations"
@@ -1612,7 +1622,7 @@ record UnifiedPromotionObligationIndex : Setω where
       Nat
 
     laneSummaryCountIs6 :
-      laneSummaryCount ≡ 6
+      laneSummaryCount ≡ 7
 
     adapterAdvancementCount :
       Nat
@@ -1666,7 +1676,7 @@ record UnifiedPromotionObligationIndex : Setω where
       Nat
 
     aggregateOpenObligationCountIs91 :
-      aggregateOpenObligationCount ≡ 91
+      aggregateOpenObligationCount ≡ 94
 
     validationTarget :
       String
@@ -1839,7 +1849,7 @@ canonicalUnifiedPromotionObligationIndex =
     ; pnfSpectralApplicationBoundarySummaries =
         canonicalPNFSpectralApplicationBoundarySummaries
     ; laneSummaryCount =
-        6
+        7
     ; laneSummaryCountIs6 =
         refl
     ; adapterAdvancementCount =
@@ -1875,7 +1885,7 @@ canonicalUnifiedPromotionObligationIndex =
     ; pnfSpectralApplicationBoundaryCountIs8 =
         refl
     ; aggregateOpenObligationCount =
-        91
+        94
     ; aggregateOpenObligationCountIs91 =
         refl
     ; validationTarget =
@@ -1895,13 +1905,13 @@ canonicalUnifiedPromotionObligationIndex =
 canonicalUnifiedPromotionLaneCountIs6 :
   UnifiedPromotionObligationIndex.laneSummaryCount
     canonicalUnifiedPromotionObligationIndex
-  ≡ 6
+  ≡ 7
 canonicalUnifiedPromotionLaneCountIs6 = refl
 
 canonicalUnifiedPromotionOpenObligationCountIs91 :
   UnifiedPromotionObligationIndex.aggregateOpenObligationCount
     canonicalUnifiedPromotionObligationIndex
-  ≡ 91
+  ≡ 94
 canonicalUnifiedPromotionOpenObligationCountIs91 = refl
 
 canonicalUnifiedPromotionAdapterAdvancementCountIs6 :

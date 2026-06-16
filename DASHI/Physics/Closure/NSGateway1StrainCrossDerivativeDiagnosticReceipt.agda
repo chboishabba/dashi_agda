@@ -14,7 +14,8 @@ open import Agda.Builtin.String using (String)
 -- Current nine-result conclusion: the t=0 synthetic/fixture row is
 -- eigenframe-degenerate, so zero/noise cross-derivative values are not sign
 -- evidence.  Real DNS snapshots near t≈7-9 are required before any sign
--- promotion can even be considered.
+-- promotion can even be considered.  Pressure-Hessian promotion is also
+-- held behind an explicit axis-order/incompressibility audit receipt.
 --
 -- Follow-up FluidSim Re=1600 Taylor-Green runs at t≈9 resolved the first
 -- non-degenerate sign ambiguity: N=64 gave a positive under-resolved row,
@@ -317,11 +318,58 @@ canonicalResolutionSeriesClayStillUnpromoted :
 canonicalResolutionSeriesClayStillUnpromoted =
   refl
 
+record NSGateway1AxisOrderIncompressibilityAuditReceipt : Set where
+  constructor mkNSGateway1AxisOrderIncompressibilityAuditReceipt
+  field
+    auditName :
+      String
+    axisOrderAuditRecorded :
+      Bool
+    axisOrderAuditRecordedIsTrue :
+      axisOrderAuditRecorded ≡ true
+    incompressibilityAuditRecorded :
+      Bool
+    incompressibilityAuditRecordedIsTrue :
+      incompressibilityAuditRecorded ≡ true
+    requiredBeforePressureHessianPromotion :
+      Bool
+    requiredBeforePressureHessianPromotionIsTrue :
+      requiredBeforePressureHessianPromotion ≡ true
+    pressureHessianTheoremPromotedHere :
+      Bool
+    pressureHessianTheoremPromotedHereIsFalse :
+      pressureHessianTheoremPromotedHere ≡ false
+    clayClaimPromotedHere :
+      Bool
+    clayClaimPromotedHereIsFalse :
+      clayClaimPromotedHere ≡ false
+    auditConclusion :
+      String
+
+canonicalAxisOrderIncompressibilityAuditReceipt :
+  NSGateway1AxisOrderIncompressibilityAuditReceipt
+canonicalAxisOrderIncompressibilityAuditReceipt =
+  mkNSGateway1AxisOrderIncompressibilityAuditReceipt
+    "NS-GW-1 axis-order/incompressibility audit"
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    "Axis-order and incompressibility are recorded as prerequisites before pressure-Hessian promotion; the theorem and Clay claims stay false."
+
 record NSGateway1PressureHessianDiagnosticResult : Set where
   constructor mkNSGateway1PressureHessianDiagnosticResult
   field
     diagnosticName :
       String
+    axisOrderIncompressibilityAudit :
+      NSGateway1AxisOrderIncompressibilityAuditReceipt
     qcritSign :
       String
     pressureHessianCrossDerivative :
@@ -338,8 +386,8 @@ record NSGateway1PressureHessianDiagnosticResult : Set where
       String
     vorticityDominance :
       Bool
-    vorticityDominanceIsFalse :
-      vorticityDominance ≡ false
+    vorticityDominanceIsTrue :
+      vorticityDominance ≡ true
     pressurePoissonConvention :
       String
     divergenceResidual :
@@ -364,18 +412,18 @@ canonicalPressureHessianDiagnosticResult :
 canonicalPressureHessianDiagnosticResult =
   mkNSGateway1PressureHessianDiagnosticResult
     "NS-GW-1 pressure-Hessian diagnostic result"
-    "pressure_hessian_e1_e2_at_max negative on local FluidSim N=128 row; unpromoted"
-    "-20.59520372949974"
-    (NSGateway1ResolutionSeriesReceipt.n128CrossDerivative
-      canonicalResolutionSeriesReceipt)
-    "-87779.53406197317"
-    "-82468.7576414551"
-    "38558.395406739015"
-    "-77137.38601720752"
-    false
+    canonicalAxisOrderIncompressibilityAuditReceipt
+    "axis-corrected pressure_hessian_e1_e2_at_max positive on local FluidSim N=128 row; pressure-Hessian sign route adverse and unpromoted"
+    "15.909006049568312"
+    "-690.5589798533151"
+    "-132442.67124306824"
+    "-53862.34109935466"
+    "-12343.085516129893"
+    "15.909006049565505"
+    true
     refl
-    "-Delta p = |S|^2 - 0.5*|omega|^2, zero-mean periodic pressure solve"
-    "divergence_max_abs=25.896617641470357; pressure_poisson_rhs_mean=5.854499264747854"
+    "-Delta p = |S|^2 - 0.5*|omega|^2, zero-mean periodic pressure solve, numpy array axis order z,y,x"
+    "divergence_max_abs=2.7533531010703882e-14; divergence_l2_mean=4.363464778751043e-15; xyz_storage_divergence_max_abs=25.896617641470364; pressure_poisson_rhs_mean=-8.673617379884035e-18"
     false
     refl
     true
@@ -405,11 +453,53 @@ canonicalPressureHessianResultPromotedHereFalse :
 canonicalPressureHessianResultPromotedHereFalse =
   refl
 
-canonicalPressureHessianVorticityDominanceRecordedFalse :
+canonicalPressureHessianVorticityDominanceRecordedTrue :
   NSGateway1PressureHessianDiagnosticResult.vorticityDominance
     canonicalPressureHessianDiagnosticResult
+  ≡ true
+canonicalPressureHessianVorticityDominanceRecordedTrue =
+  refl
+
+canonicalPressureHessianAxisOrderAuditRecordedTrue :
+  NSGateway1PressureHessianDiagnosticResult.axisOrderIncompressibilityAudit
+    canonicalPressureHessianDiagnosticResult
+  ≡ canonicalAxisOrderIncompressibilityAuditReceipt
+canonicalPressureHessianAxisOrderAuditRecordedTrue =
+  refl
+
+canonicalAxisOrderIncompressibilityAuditRequiredBeforePressureHessianPromotion :
+  NSGateway1AxisOrderIncompressibilityAuditReceipt.requiredBeforePressureHessianPromotion
+    canonicalAxisOrderIncompressibilityAuditReceipt
+  ≡ true
+canonicalAxisOrderIncompressibilityAuditRequiredBeforePressureHessianPromotion =
+  refl
+
+canonicalAxisOrderIncompressibilityAuditAxisOrderRecordedTrue :
+  NSGateway1AxisOrderIncompressibilityAuditReceipt.axisOrderAuditRecorded
+    canonicalAxisOrderIncompressibilityAuditReceipt
+  ≡ true
+canonicalAxisOrderIncompressibilityAuditAxisOrderRecordedTrue =
+  refl
+
+canonicalAxisOrderIncompressibilityAuditIncompressibilityRecordedTrue :
+  NSGateway1AxisOrderIncompressibilityAuditReceipt.incompressibilityAuditRecorded
+    canonicalAxisOrderIncompressibilityAuditReceipt
+  ≡ true
+canonicalAxisOrderIncompressibilityAuditIncompressibilityRecordedTrue =
+  refl
+
+canonicalAxisOrderIncompressibilityAuditPressureHessianTheoremFalse :
+  NSGateway1AxisOrderIncompressibilityAuditReceipt.pressureHessianTheoremPromotedHere
+    canonicalAxisOrderIncompressibilityAuditReceipt
   ≡ false
-canonicalPressureHessianVorticityDominanceRecordedFalse =
+canonicalAxisOrderIncompressibilityAuditPressureHessianTheoremFalse =
+  refl
+
+canonicalAxisOrderIncompressibilityAuditClayClaimFalse :
+  NSGateway1AxisOrderIncompressibilityAuditReceipt.clayClaimPromotedHere
+    canonicalAxisOrderIncompressibilityAuditReceipt
+  ≡ false
+canonicalAxisOrderIncompressibilityAuditClayClaimFalse =
   refl
 
 canonicalGateway1DiagnosticRouteRecorded :
@@ -549,7 +639,7 @@ organizationString =
 
 requirementString : String
 requirementString =
-  "Record the nine-result degeneracy conclusion while keeping DNS sign, nonlinear Riesz sign, and Clay promotion fail-closed."
+  "Record the nine-result degeneracy conclusion while keeping DNS sign, nonlinear Riesz sign, axis-order/incompressibility audit, pressure-Hessian promotion, and Clay promotion fail-closed."
 
 codeArtifactString : String
 codeArtifactString =
@@ -557,7 +647,7 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "t=0 synthetic/fixture eigenframe_degenerate=true; FluidSim TG Re=1600 t≈9 N=64 positive row is superseded by non-degenerate N=128 negative row; local sign route is live but unpromoted."
+  "t=0 synthetic/fixture eigenframe_degenerate=true; FluidSim TG Re=1600 t≈9 N=64 positive row is superseded by non-degenerate N=128 negative row; axis-order/incompressibility audit is required before any pressure-Hessian promotion; local sign route is live but unpromoted."
 
 latticeString : String
 latticeString =
@@ -565,15 +655,15 @@ latticeString =
 
 proposalString : String
 proposalString =
-  "Use diagnostic output only as evidence routing; proceed to NS-GW-2a while requiring independent external DNS t≈7-9 before nonlinear Riesz sign promotion."
+  "Use diagnostic output only as evidence routing; proceed to NS-GW-2a while requiring independent external DNS t≈7-9 before nonlinear Riesz sign promotion and requiring the axis-order/incompressibility audit before any pressure-Hessian promotion."
 
 governanceString : String
 governanceString =
-  "promotionAllowed=false, dnsSignConfirmed=false, nonlinearRieszSignConditionConfirmed=false, clayNavierStokesPromoted=false, zeroOrNoiseCrossDerivativeIsSignEvidence=false"
+  "promotionAllowed=false, dnsSignConfirmed=false, nonlinearRieszSignConditionConfirmed=false, clayNavierStokesPromoted=false, pressureHessianTheoremPromotedHere=false, zeroOrNoiseCrossDerivativeIsSignEvidence=false"
 
 gapString : String
 gapString =
-  "Independent external DNS t≈7-9, global Riesz-vs-local-cross-derivative extraction, and nonlinear Riesz sign theorem remain open; Clay Navier-Stokes promotion is blocked."
+  "Independent external DNS t≈7-9, axis-order/incompressibility audit closure, global Riesz-vs-local-cross-derivative extraction, and nonlinear Riesz sign theorem remain open; Clay Navier-Stokes promotion is blocked."
 
 record NSGateway1DiagnosticReceipt : Set where
   constructor mkNSGateway1DiagnosticReceipt

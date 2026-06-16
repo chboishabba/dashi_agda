@@ -92,6 +92,9 @@ import DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary
 import DASHI.Biology.AvianRFOverlayManipulationReceipt
 import DASHI.Biology.AvianVisualOverlayQuotient
 import DASHI.Biology.BioAnimalexicStackDischarge
+import DASHI.Biology.BioactiveMolecularRecognitionBridge
+import DASHI.Biology.NeurochemicalTransmissionBridge
+import DASHI.Biology.NeurochemicalVocabularyReceipt
 import DASHI.Biology.CellDifferentiationCommunicationBridge
 import DASHI.Biology.CrossSpeciesOntologyTranslationBridge
 import DASHI.Biology.EmbodiedMotorMultisensoryBridge
@@ -233,6 +236,7 @@ import DASHI.Promotion.MaxwellFiniteExteriorChainStrengthening
 import DASHI.Promotion.MaxwellHodgeSourceConservationObligations
 import DASHI.Promotion.NumericAuthorityPayloadValidator
 import DASHI.Promotion.NumericMeasuredAuthorityTokenNormalization
+import DASHI.Promotion.NeurochemicalAuthorityBoundary
 import DASHI.Promotion.ObligationIndex
 import DASHI.Promotion.PlanckHbarSIPayloadRequest
 import DASHI.Promotion.RydbergClockMetreBridge
@@ -261,6 +265,8 @@ import DASHI.Physics.Closure.NSSprint159FullClayExternalAuthorityBoundaryReceipt
 import DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt
 import DASHI.Physics.Closure.NSFullClayBlockerChainAggregationReceipt
 import DASHI.Physics.Closure.NSGateway1StrainCrossDerivativeDiagnosticReceipt
+import DASHI.Physics.Closure.NSPressureHessianGateShapeCore
+import DASHI.Physics.Closure.NSStrainBMOBoundReceipt
 import DASHI.Physics.Closure.NSSprint160NoLocalClayMechanismSprintRuleReceipt
 import DASHI.Physics.Closure.NSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt
 import DASHI.Physics.Closure.NSSprint162CriticalResidualBoundaryReceipt

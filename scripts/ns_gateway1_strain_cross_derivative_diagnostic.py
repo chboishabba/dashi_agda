@@ -29,6 +29,12 @@ CAVEAT = (
 DNS_TIME_WINDOW_REQUIRED = "real_dns_t_approximately_7_to_9"
 SIGN_TOLERANCE = 1.0e-12
 JSON_FORMAT = "ns-gateway1-strain-cross-derivative-json-v1"
+XYZ_STORAGE_AXIS_CONVENTION = "numpy_array_axis_order:x,y,z"
+ZYX_STORAGE_AXIS_CONVENTION = "numpy_array_axis_order:z,y,x"
+AXIS_CONVENTION_TO_COORD_AXIS = {
+    XYZ_STORAGE_AXIS_CONVENTION: (0, 1, 2),
+    ZYX_STORAGE_AXIS_CONVENTION: (2, 1, 0),
+}
 
 
 def _as_real_array(name: str, value: Any) -> np.ndarray:
@@ -133,7 +139,43 @@ def _validate_npz_metadata(
     if source is not None:
         metadata["npz_source"] = str(source)
 
+    axis_order = _optional_scalar(data, "axis_order")
+    if axis_order is not None:
+        axis_order_text = str(axis_order).replace(" ", "")
+        if axis_order_text not in {"x,y,z", "z,y,x"}:
+            raise ValueError(
+                "axis_order metadata must be one of 'x,y,z' or 'z,y,x', "
+                f"got {axis_order!r}"
+            )
+        metadata["axis_order"] = axis_order_text
+
     return metadata
+
+
+def infer_axis_convention(
+    source: str,
+    field_metadata: dict[str, Any],
+) -> str:
+    """Return the physical-coordinate-to-array-axis convention for derivatives."""
+
+    axis_order = field_metadata.get("axis_order")
+    if axis_order == "x,y,z":
+        return XYZ_STORAGE_AXIS_CONVENTION
+    if axis_order == "z,y,x":
+        return ZYX_STORAGE_AXIS_CONVENTION
+
+    npz_source = str(field_metadata.get("npz_source", "")).lower()
+    if "fluidsim" in npz_source:
+        return ZYX_STORAGE_AXIS_CONVENTION
+    if source.startswith("synthetic_"):
+        return XYZ_STORAGE_AXIS_CONVENTION
+    return XYZ_STORAGE_AXIS_CONVENTION
+
+
+def coord_axis(axis_convention: str, coord: int) -> int:
+    if axis_convention not in AXIS_CONVENTION_TO_COORD_AXIS:
+        raise ValueError(f"unsupported axis convention: {axis_convention!r}")
+    return AXIS_CONVENTION_TO_COORD_AXIS[axis_convention][coord]
 
 
 def wavenumbers(n: int, length: float = DOMAIN_LENGTH) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -145,25 +187,38 @@ def wavenumbers(n: int, length: float = DOMAIN_LENGTH) -> tuple[np.ndarray, np.n
     return np.meshgrid(k, k, k, indexing="ij")
 
 
-def spectral_derivative(field: np.ndarray, axis: int, length: float = DOMAIN_LENGTH) -> np.ndarray:
+def spectral_derivative(
+    field: np.ndarray,
+    axis: int,
+    length: float = DOMAIN_LENGTH,
+    axis_convention: str = XYZ_STORAGE_AXIS_CONVENTION,
+) -> np.ndarray:
     """Periodic spectral derivative of a scalar field along one axis."""
 
     scalar = _as_real_array("field", field)
     n = scalar.shape[0]
     k = 2.0 * np.pi * np.fft.fftfreq(n, d=length / n)
     shape = [1, 1, 1]
-    shape[axis] = n
+    shape[coord_axis(axis_convention, axis)] = n
     multiplier = 1j * k.reshape(shape)
     return np.fft.ifftn(multiplier * np.fft.fftn(scalar)).real
 
 
-def spectral_hessian(field: np.ndarray, length: float = DOMAIN_LENGTH) -> np.ndarray:
+def spectral_hessian(
+    field: np.ndarray,
+    length: float = DOMAIN_LENGTH,
+    axis_convention: str = XYZ_STORAGE_AXIS_CONVENTION,
+) -> np.ndarray:
     """Return Hessian H[i,j] = partial_i partial_j field via FFT."""
 
     scalar = _as_real_array("field", field)
     n = scalar.shape[0]
-    kx, ky, kz = wavenumbers(n, length)
-    ks = (kx, ky, kz)
+    k = 2.0 * np.pi * np.fft.fftfreq(n, d=length / n)
+    ks = []
+    for coord in range(3):
+        shape = [1, 1, 1]
+        shape[coord_axis(axis_convention, coord)] = n
+        ks.append(k.reshape(shape))
     field_hat = np.fft.fftn(scalar)
     hessian = np.empty((3, 3) + scalar.shape, dtype=float)
     for i in range(3):
@@ -194,6 +249,7 @@ def velocity_gradient(
     v: np.ndarray,
     w: np.ndarray,
     length: float = DOMAIN_LENGTH,
+    axis_convention: str = XYZ_STORAGE_AXIS_CONVENTION,
 ) -> np.ndarray:
     """Return grad[a,b] = partial_b velocity_a for a 3D periodic velocity."""
 
@@ -202,7 +258,12 @@ def velocity_gradient(
     grad = np.empty((3, 3) + ux.shape, dtype=float)
     for component_idx, component in enumerate(components):
         for axis in range(3):
-            grad[component_idx, axis] = spectral_derivative(component, axis, length)
+            grad[component_idx, axis] = spectral_derivative(
+                component,
+                axis,
+                length,
+                axis_convention,
+            )
     return grad
 
 
@@ -251,6 +312,19 @@ def divergence_from_gradient(grad: np.ndarray) -> np.ndarray:
     if gradient.ndim != 5 or gradient.shape[:2] != (3, 3):
         raise ValueError(f"grad must have shape (3,3,N,N,N), got {gradient.shape!r}")
     return gradient[0, 0] + gradient[1, 1] + gradient[2, 2]
+
+
+def divergence_for_axis_convention(
+    u: np.ndarray,
+    v: np.ndarray,
+    w: np.ndarray,
+    axis_convention: str,
+) -> np.ndarray:
+    """Return divergence after recomputing derivatives under an axis convention."""
+
+    return divergence_from_gradient(
+        velocity_gradient(u, v, w, axis_convention=axis_convention)
+    )
 
 
 def taylor_green_velocity(
@@ -426,8 +500,15 @@ def run_diagnostic(
 
     n = int(u.shape[0])
     grid_spacing = float(DOMAIN_LENGTH / n)
-    grad = velocity_gradient(u, v, w)
+    derivative_axis_convention = infer_axis_convention(source, field_metadata)
+    grad = velocity_gradient(u, v, w, axis_convention=derivative_axis_convention)
     divergence = divergence_from_gradient(grad)
+    divergence_xyz_storage = divergence_for_axis_convention(
+        u, v, w, XYZ_STORAGE_AXIS_CONVENTION
+    )
+    divergence_zyx_storage = divergence_for_axis_convention(
+        u, v, w, ZYX_STORAGE_AXIS_CONVENTION
+    )
     strain = strain_tensor(grad)
     omega = vorticity_from_gradient(grad)
     strain_norm_squared = tensor_frobenius_squared(strain)
@@ -451,26 +532,36 @@ def run_diagnostic(
     eigenvalues_field = _strain_eigenvalues_field(strain)
     lambda2_field = eigenvalues_field[..., 1]
     lambda2_gradient = np.stack(
-        [spectral_derivative(lambda2_field, axis) for axis in range(3)],
+        [
+            spectral_derivative(
+                lambda2_field,
+                axis,
+                axis_convention=derivative_axis_convention,
+            )
+            for axis in range(3)
+        ],
         axis=0,
     )
-    hessian = spectral_hessian(lambda2_field)
+    hessian = spectral_hessian(
+        lambda2_field,
+        axis_convention=derivative_axis_convention,
+    )
     local_hessian = _tensor_at(hessian, max_index)
     cross_derivative = _directional_hessian_cross(hessian, max_index, e1, e2)
     pressure_hessian_e1_e2 = _directional_hessian_cross(
-        spectral_hessian(pressure),
+        spectral_hessian(pressure, axis_convention=derivative_axis_convention),
         max_index,
         e1,
         e2,
     )
     hess_omega2_e1_e2 = _directional_hessian_cross(
-        spectral_hessian(enstrophy),
+        spectral_hessian(enstrophy, axis_convention=derivative_axis_convention),
         max_index,
         e1,
         e2,
     )
     hess_S2_e1_e2 = _directional_hessian_cross(
-        spectral_hessian(strain_norm_squared),
+        spectral_hessian(strain_norm_squared, axis_convention=derivative_axis_convention),
         max_index,
         e1,
         e2,
@@ -547,8 +638,17 @@ def run_diagnostic(
         "pressure_poisson_rhs_mean": float(np.mean(pressure_poisson_rhs)),
         "strain_norm_squared_at_max": float(strain_norm_squared[max_index]),
         "half_vorticity_norm_squared_at_max": 0.5 * float(enstrophy[max_index]),
+        "derivative_operator_axis_convention": derivative_axis_convention,
         "divergence_max_abs": float(np.max(np.abs(divergence))),
         "divergence_l2_mean": float(np.sqrt(np.mean(divergence * divergence))),
+        "divergence_max_abs_xyz_storage": float(np.max(np.abs(divergence_xyz_storage))),
+        "divergence_l2_mean_xyz_storage": float(
+            np.sqrt(np.mean(divergence_xyz_storage * divergence_xyz_storage))
+        ),
+        "divergence_max_abs_zyx_storage": float(np.max(np.abs(divergence_zyx_storage))),
+        "divergence_l2_mean_zyx_storage": float(
+            np.sqrt(np.mean(divergence_zyx_storage * divergence_zyx_storage))
+        ),
         "sign_nonpositive_at_max": bool(
             sign_classification != "positive_adverse_to_nonpositive_rule"
         ),
