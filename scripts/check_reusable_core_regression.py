@@ -45,7 +45,13 @@ AGDA_TARGETS = [
 ]
 
 OPTIONAL_AGDA_TARGETS = [
+    "DASHI/Promotion/AuthorityBoundaryCore.agda",
+    "DASHI/Biology/BioactiveAuthorityBoundaryCore.agda",
     "DASHI/Biology/BioactiveMolecularRecognitionBridge.agda",
+    "DASHI/Biology/NeurochemicalAtomicChemistryBridge.agda",
+    "DASHI/Biology/NeurochemicalBrainCarrierBridge.agda",
+    "DASHI/Biology/NeurochemicalGenomicExpressionBridge.agda",
+    "DASHI/Biology/NeurochemicalProteinTargetBridge.agda",
     "DASHI/Biology/NeurochemicalTransmissionBridge.agda",
     "DASHI/Biology/NeurochemicalVocabularyReceipt.agda",
     "DASHI/Promotion/NeurochemicalAuthorityBoundary.agda",

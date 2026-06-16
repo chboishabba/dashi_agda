@@ -92,7 +92,12 @@ import DASHI.Biology.AvianMagnetoreceptionExtraFibreBoundary
 import DASHI.Biology.AvianRFOverlayManipulationReceipt
 import DASHI.Biology.AvianVisualOverlayQuotient
 import DASHI.Biology.BioAnimalexicStackDischarge
+import DASHI.Biology.BioactiveAuthorityBoundaryCore
 import DASHI.Biology.BioactiveMolecularRecognitionBridge
+import DASHI.Biology.NeurochemicalAtomicChemistryBridge
+import DASHI.Biology.NeurochemicalBrainCarrierBridge
+import DASHI.Biology.NeurochemicalGenomicExpressionBridge
+import DASHI.Biology.NeurochemicalProteinTargetBridge
 import DASHI.Biology.NeurochemicalTransmissionBridge
 import DASHI.Biology.NeurochemicalVocabularyReceipt
 import DASHI.Biology.CellDifferentiationCommunicationBridge
@@ -237,6 +242,7 @@ import DASHI.Promotion.MaxwellHodgeSourceConservationObligations
 import DASHI.Promotion.NumericAuthorityPayloadValidator
 import DASHI.Promotion.NumericMeasuredAuthorityTokenNormalization
 import DASHI.Promotion.NeurochemicalAuthorityBoundary
+import DASHI.Promotion.AuthorityBoundaryCore
 import DASHI.Promotion.ObligationIndex
 import DASHI.Promotion.PlanckHbarSIPayloadRequest
 import DASHI.Promotion.RydbergClockMetreBridge
@@ -267,6 +273,7 @@ import DASHI.Physics.Closure.NSFullClayBlockerChainAggregationReceipt
 import DASHI.Physics.Closure.NSGateway1StrainCrossDerivativeDiagnosticReceipt
 import DASHI.Physics.Closure.NSPressureHessianGateShapeCore
 import DASHI.Physics.Closure.NSStrainBMOBoundReceipt
+import DASHI.Physics.Closure.NSIntegralConditionDiagnosticReceipt
 import DASHI.Physics.Closure.NSSprint160NoLocalClayMechanismSprintRuleReceipt
 import DASHI.Physics.Closure.NSSprint161MechanismExhaustionAnalyticAttemptBoundaryReceipt
 import DASHI.Physics.Closure.NSSprint162CriticalResidualBoundaryReceipt
@@ -967,6 +974,7 @@ import DASHI.Physics.Closure.GRWeakFieldPredictionReceipt
 import DASHI.Physics.Closure.GRPrecisionGravityPredictionTargetReceipt
 import DASHI.Physics.Closure.GRProofArchitectureAggregationTest
 import DASHI.Physics.Closure.GRCoord4TensorCore
+import DASHI.Physics.Closure.GRPerturbationBoundShapeCore
 import DASHI.Physics.Closure.GRVladimirovFrameDiagnosticReceipt
 import DASHI.Physics.Closure.GravityVladimirovFrameReceipt
 import DASHI.Physics.GR

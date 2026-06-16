@@ -8,6 +8,7 @@ open import Agda.Builtin.Unit using (⊤; tt)
 
 import DASHI.Core.CandidateOnlyCore as CandidateOnly
 import DASHI.Interop.ObservationTransportSpine as Spine
+import DASHI.Biology.BioactiveAuthorityBoundaryCore as BoundaryCore
 
 ------------------------------------------------------------------------
 -- Bioactive molecular recognition bridge.
@@ -671,6 +672,20 @@ record BioactiveMolecularRecognitionBridge : Set₁ where
     authorityClaimsAreCanonical :
       authorityClaims ≡ canonicalBioactiveRecognitionAuthorityClaims
 
+    bioactiveAuthorityBoundaryCore :
+      BoundaryCore.BioactiveAuthorityBoundaryCore
+
+    bioactiveAuthorityBoundaryCoreIsCanonical :
+      bioactiveAuthorityBoundaryCore
+      ≡
+      BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+
+    blockedClaims :
+      List BoundaryCore.BioactiveBlockedClaim
+
+    blockedClaimsAreCanonical :
+      blockedClaims ≡ BoundaryCore.canonicalBioactiveBlockedClaims
+
     clinicalAuthorityClaimFlag :
       Bool
 
@@ -981,22 +996,59 @@ canonicalBioactiveMolecularRecognitionBridge =
     ; guardsAreCanonical = refl
     ; authorityClaims = canonicalBioactiveRecognitionAuthorityClaims
     ; authorityClaimsAreCanonical = refl
-    ; clinicalAuthorityClaimFlag = false
-    ; clinicalAuthorityClaimFlagIsFalse = refl
-    ; doseResponseAuthorityClaimFlag = false
-    ; doseResponseAuthorityClaimFlagIsFalse = refl
-    ; prescribingAuthorityClaimFlag = false
-    ; prescribingAuthorityClaimFlagIsFalse = refl
-    ; diseaseAuthorityClaimFlag = false
-    ; diseaseAuthorityClaimFlagIsFalse = refl
-    ; behaviorAuthorityClaimFlag = false
-    ; behaviorAuthorityClaimFlagIsFalse = refl
-    ; biomarkerAuthorityClaimFlag = false
-    ; biomarkerAuthorityClaimFlagIsFalse = refl
-    ; receptorActionIdentityAuthorityClaimFlag = false
-    ; receptorActionIdentityAuthorityClaimFlagIsFalse = refl
-    ; shapeEffectIdentityAuthorityClaimFlag = false
-    ; shapeEffectIdentityAuthorityClaimFlagIsFalse = refl
+    ; bioactiveAuthorityBoundaryCore =
+        BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; bioactiveAuthorityBoundaryCoreIsCanonical = refl
+    ; blockedClaims = BoundaryCore.canonicalBioactiveBlockedClaims
+    ; blockedClaimsAreCanonical = refl
+    ; clinicalAuthorityClaimFlag =
+        BoundaryCore.clinicalAuthorityClaimFlag
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; clinicalAuthorityClaimFlagIsFalse =
+        BoundaryCore.clinicalAuthorityClaimFlagIsFalse
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; doseResponseAuthorityClaimFlag =
+        BoundaryCore.doseResponseAuthorityClaimFlag
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; doseResponseAuthorityClaimFlagIsFalse =
+        BoundaryCore.doseResponseAuthorityClaimFlagIsFalse
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; prescribingAuthorityClaimFlag =
+        BoundaryCore.prescribingAuthorityClaimFlag
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; prescribingAuthorityClaimFlagIsFalse =
+        BoundaryCore.prescribingAuthorityClaimFlagIsFalse
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; diseaseAuthorityClaimFlag =
+        BoundaryCore.diseaseAuthorityClaimFlag
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; diseaseAuthorityClaimFlagIsFalse =
+        BoundaryCore.diseaseAuthorityClaimFlagIsFalse
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; behaviorAuthorityClaimFlag =
+        BoundaryCore.behaviorAuthorityClaimFlag
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; behaviorAuthorityClaimFlagIsFalse =
+        BoundaryCore.behaviorAuthorityClaimFlagIsFalse
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; biomarkerAuthorityClaimFlag =
+        BoundaryCore.biomarkerAuthorityClaimFlag
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; biomarkerAuthorityClaimFlagIsFalse =
+        BoundaryCore.biomarkerAuthorityClaimFlagIsFalse
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; receptorActionIdentityAuthorityClaimFlag =
+        BoundaryCore.receptorActionIdentityAuthorityClaimFlag
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; receptorActionIdentityAuthorityClaimFlagIsFalse =
+        BoundaryCore.receptorActionIdentityAuthorityClaimFlagIsFalse
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; shapeEffectIdentityAuthorityClaimFlag =
+        BoundaryCore.shapeEffectIdentityAuthorityClaimFlag
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
+    ; shapeEffectIdentityAuthorityClaimFlagIsFalse =
+        BoundaryCore.shapeEffectIdentityAuthorityClaimFlagIsFalse
+          BoundaryCore.canonicalBioactiveAuthorityBoundaryCore
     ; bridgeReading =
         "Candidate-only bioactive recognition bridge: ligand, receptor, enzyme, transporter, channel, and allosteric-site naming is tracked as a receipt-bound observation surface, while clinical, dose-response, prescribing, disease, behavior, biomarker, receptor-action identity, and shape-effect identity authority remain blocked."
     }
