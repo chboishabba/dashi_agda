@@ -8,9 +8,12 @@ open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.RoleGrammarCore as Core
+import DASHI.Core.AdapterCanonicalityCore as AdapterCanonicality
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
 import DASHI.Core.BridgeRequirementCore as BridgeReq
 import DASHI.Core.CandidateOnlyCore as CandidateOnly
 import DASHI.Core.EmptyPromotionCore as EmptyPromotion
+import DASHI.Core.FormalLensQualificationCore as FormalLensCore
 
 ------------------------------------------------------------------------
 -- Stratified typed comparison law v2.
@@ -756,6 +759,407 @@ canonicalSameSurfaceArgumentNoTypedMeetStatus :
   noTypedMeetAtInspectionStatus
 canonicalSameSurfaceArgumentNoTypedMeetStatus =
   refl
+
+------------------------------------------------------------------------
+canonicalStratifiedComparisonFormalLens :
+  FormalLensCore.FormalLens
+canonicalStratifiedComparisonFormalLens =
+  FormalLensCore.NamedFormalLens "stratified typed comparison law"
+
+stratifiedComparisonFormalLensVocabulary :
+  List FormalLensCore.FormalLens
+stratifiedComparisonFormalLensVocabulary =
+  FormalLensCore.SymbolicRational
+  ∷ FormalLensCore.Category
+  ∷ FormalLensCore.Lattice
+  ∷ FormalLensCore.Functional
+  ∷ []
+
+stratifiedComparisonFormalLensUsesSymbolicRational :
+  stratifiedComparisonFormalLensVocabulary
+  ≡
+  FormalLensCore.SymbolicRational
+  ∷ FormalLensCore.Category
+  ∷ FormalLensCore.Lattice
+  ∷ FormalLensCore.Functional
+  ∷ []
+stratifiedComparisonFormalLensUsesSymbolicRational =
+  refl
+
+stratifiedComparisonFormalLensCategoryPresent :
+  FormalLensCore.Category
+  ≡
+  FormalLensCore.Category
+stratifiedComparisonFormalLensCategoryPresent =
+  refl
+
+stratifiedComparisonFormalLensLatticePresent :
+  FormalLensCore.Lattice
+  ≡
+  FormalLensCore.Lattice
+stratifiedComparisonFormalLensLatticePresent =
+  refl
+
+stratifiedComparisonFormalLensOrderFallback :
+  FormalLensCore.Lattice
+  ≡
+  FormalLensCore.Lattice
+stratifiedComparisonFormalLensOrderFallback =
+  refl
+
+stratifiedComparisonFormalLensFunctionalPresent :
+  FormalLensCore.Functional
+  ≡
+  FormalLensCore.Functional
+stratifiedComparisonFormalLensFunctionalPresent =
+  refl
+
+formalLensCandidateOnlyCoreAdapter :
+  CandidateOnly.CandidateOnlyRow
+formalLensCandidateOnlyCoreAdapter =
+  CandidateOnly.candidateOnlyRow
+    "stratified typed comparison formal lens"
+    "DASHI.Interop.StratifiedTypedComparisonLaw"
+    "FormalLens"
+    CandidateOnly.functionalCandidateKind
+    CandidateOnly.functionalCandidateOnlyStatus
+    "stratified comparison is a formal-lens-qualified receipt surface"
+    "comparison truth, admissibility, theorem, and external authority require separate accepted gates"
+    true
+    false
+    false
+    false
+    false
+    false
+    false
+    false
+
+formalLensCandidateOnlyCoreAdapterReceipt :
+  CandidateOnly.CandidateOnlyReceipt formalLensCandidateOnlyCoreAdapter
+formalLensCandidateOnlyCoreAdapterReceipt =
+  CandidateOnly.canonicalCandidateOnlyReceipt
+    formalLensCandidateOnlyCoreAdapter
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+formalLensCandidateOnlyCoreAdapterCandidateTrue :
+  CandidateOnly.candidateOnly formalLensCandidateOnlyCoreAdapter
+  ≡
+  true
+formalLensCandidateOnlyCoreAdapterCandidateTrue =
+  CandidateOnly.candidateOnlyIsTrue
+    formalLensCandidateOnlyCoreAdapterReceipt
+
+formalLensCandidateOnlyCoreAdapterPromotedFalse :
+  CandidateOnly.promoted formalLensCandidateOnlyCoreAdapter
+  ≡
+  false
+formalLensCandidateOnlyCoreAdapterPromotedFalse =
+  CandidateOnly.candidatePromotedIsFalse
+    formalLensCandidateOnlyCoreAdapterReceipt
+
+formalLensCandidateOnlyCoreAdapterTruthAuthorityFalse :
+  CandidateOnly.carriesTruthAuthority formalLensCandidateOnlyCoreAdapter
+  ≡
+  false
+formalLensCandidateOnlyCoreAdapterTruthAuthorityFalse =
+  CandidateOnly.candidateNoTruthAuthority
+    formalLensCandidateOnlyCoreAdapterReceipt
+
+formalLensCandidateOnlyCoreAdapterSupportAuthorityFalse :
+  CandidateOnly.carriesSupportAuthority formalLensCandidateOnlyCoreAdapter
+  ≡
+  false
+formalLensCandidateOnlyCoreAdapterSupportAuthorityFalse =
+  CandidateOnly.candidateNoSupportAuthority
+    formalLensCandidateOnlyCoreAdapterReceipt
+
+formalLensCandidateOnlyCoreAdapterAdmissibilityAuthorityFalse :
+  CandidateOnly.carriesAdmissibilityAuthority
+    formalLensCandidateOnlyCoreAdapter
+  ≡
+  false
+formalLensCandidateOnlyCoreAdapterAdmissibilityAuthorityFalse =
+  CandidateOnly.candidateNoAdmissibilityAuthority
+    formalLensCandidateOnlyCoreAdapterReceipt
+
+formalLensCandidateOnlyCoreAdapterTheoremAuthorityFalse :
+  CandidateOnly.carriesTheoremAuthority formalLensCandidateOnlyCoreAdapter
+  ≡
+  false
+formalLensCandidateOnlyCoreAdapterTheoremAuthorityFalse =
+  CandidateOnly.candidateNoTheoremAuthority
+    formalLensCandidateOnlyCoreAdapterReceipt
+
+formalLensAuthorityNonPromotionCoreAdapter :
+  AuthorityNA.AuthorityNonPromotionBundle
+formalLensAuthorityNonPromotionCoreAdapter =
+  AuthorityNA.mkClosedAuthorityNonPromotionBundle
+    "stratified typed comparison formal lens"
+
+formalLensAuthorityCoreTruthFalse :
+  AuthorityNA.truthAuthorityFlag formalLensAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+formalLensAuthorityCoreTruthFalse =
+  AuthorityNA.bundleTruthAuthorityIsFalse
+    formalLensAuthorityNonPromotionCoreAdapter
+
+formalLensAuthorityCoreSupportFalse :
+  AuthorityNA.supportAuthorityFlag formalLensAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+formalLensAuthorityCoreSupportFalse =
+  AuthorityNA.bundleSupportAuthorityIsFalse
+    formalLensAuthorityNonPromotionCoreAdapter
+
+formalLensAuthorityCoreAdmissibilityFalse :
+  AuthorityNA.admissibilityAuthorityFlag
+    formalLensAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+formalLensAuthorityCoreAdmissibilityFalse =
+  AuthorityNA.bundleAdmissibilityAuthorityIsFalse
+    formalLensAuthorityNonPromotionCoreAdapter
+
+formalLensAuthorityCoreTheoremFalse :
+  AuthorityNA.theoremAuthorityFlag formalLensAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+formalLensAuthorityCoreTheoremFalse =
+  AuthorityNA.bundleTheoremAuthorityIsFalse
+    formalLensAuthorityNonPromotionCoreAdapter
+
+formalLensAuthorityCoreExternalFalse :
+  AuthorityNA.externalAuthorityFlag formalLensAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+formalLensAuthorityCoreExternalFalse =
+  AuthorityNA.bundleExternalAuthorityIsFalse
+    formalLensAuthorityNonPromotionCoreAdapter
+
+formalLensAuthorityCorePromotesAnyAuthorityFalse :
+  AuthorityNA.promotesAnyAuthority formalLensAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+formalLensAuthorityCorePromotesAnyAuthorityFalse =
+  AuthorityNA.bundlePromotesAnyAuthorityIsFalse
+    formalLensAuthorityNonPromotionCoreAdapter
+
+formalLensBridgeRequirementCoreAdapter :
+  BridgeReq.BridgeRequirementRow
+formalLensBridgeRequirementCoreAdapter =
+  BridgeReq.canonicalBridgeRequirementRow
+    "stratified typed comparison law"
+    "formal lens qualification"
+    BridgeReq.bridgeSuppliedCandidateOnly
+    true
+    true
+    true
+
+formalLensBridgeRequirementCoreAdapterReceipt :
+  BridgeReq.BridgeRequirementRowReceipt
+    formalLensBridgeRequirementCoreAdapter
+formalLensBridgeRequirementCoreAdapterReceipt =
+  BridgeReq.bridgeRequirementRowReceipt refl refl refl
+
+formalLensQualificationThresholdRow :
+  FormalLensCore.ThresholdRow
+formalLensQualificationThresholdRow =
+  FormalLensCore.mkThresholdRow
+    "stratified comparison formal lens threshold"
+    FormalLensCore.adapterConsumerRole
+    FormalLensCore.thresholdMet
+    FormalLensCore.explicitAdapterResidualBoundary
+
+formalLensQualificationThresholdReceipt :
+  FormalLensCore.ThresholdRowReceipt
+    formalLensQualificationThresholdRow
+formalLensQualificationThresholdReceipt =
+  FormalLensCore.thresholdRowReceipt refl refl refl
+
+stratifiedComparisonFormalLensQualificationSurface :
+  FormalLensCore.FormalLensQualificationSurface
+stratifiedComparisonFormalLensQualificationSurface =
+  FormalLensCore.mkFormalLensQualificationSurface
+    "stratified typed comparison formal lens qualification"
+    "DASHI.Interop.StratifiedTypedComparisonLaw"
+    "stratifiedComparisonFormalLensQualificationSurface"
+    FormalLensCore.SymbolicRational
+    FormalLensCore.Lattice
+    (FormalLensCore.namedQualificationRole
+      "stratified-comparison-symbolic-rational-category-lattice-functional")
+    formalLensQualificationThresholdRow
+    formalLensQualificationThresholdReceipt
+    FormalLensCore.explicitAdapterResidualBoundary
+    formalLensCandidateOnlyCoreAdapter
+    formalLensCandidateOnlyCoreAdapterReceipt
+    formalLensBridgeRequirementCoreAdapter
+    formalLensBridgeRequirementCoreAdapterReceipt
+    "stratified typed comparison is qualified as a formal-lens inspection surface over symbolic rational, category, lattice/order-fallback, and functional vocabulary"
+    "truth, support, admissibility, category/lattice theorem authority, external authority, and promotion remain absent"
+
+canonicalStratifiedComparisonLensQualificationReceipt :
+  FormalLensCore.FormalLensQualificationReceipt
+    stratifiedComparisonFormalLensQualificationSurface
+canonicalStratifiedComparisonLensQualificationReceipt =
+  FormalLensCore.mkFormalLensQualificationReceipt
+    stratifiedComparisonFormalLensQualificationSurface
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+stratifiedComparisonFormalLensSourceSymbolicRational :
+  FormalLensCore.sourceLens stratifiedComparisonFormalLensQualificationSurface
+  ≡
+  FormalLensCore.SymbolicRational
+stratifiedComparisonFormalLensSourceSymbolicRational =
+  refl
+
+stratifiedComparisonFormalLensTargetLatticeFallback :
+  FormalLensCore.targetLens stratifiedComparisonFormalLensQualificationSurface
+  ≡
+  FormalLensCore.Lattice
+stratifiedComparisonFormalLensTargetLatticeFallback =
+  refl
+
+formalLensQualificationCandidateOnlyTrue :
+  FormalLensCore.qualificationCandidateOnly
+    stratifiedComparisonFormalLensQualificationSurface
+  ≡
+  true
+formalLensQualificationCandidateOnlyTrue =
+  FormalLensCore.qualificationIsCandidateOnly
+    canonicalStratifiedComparisonLensQualificationReceipt
+
+formalLensQualificationPromotedFalse :
+  FormalLensCore.qualificationPromoted
+    stratifiedComparisonFormalLensQualificationSurface
+  ≡
+  false
+formalLensQualificationPromotedFalse =
+  FormalLensCore.qualificationPromotedFalse
+    canonicalStratifiedComparisonLensQualificationReceipt
+
+formalLensQualificationTheoremAuthorityFalse :
+  FormalLensCore.theoremAuthority
+    stratifiedComparisonFormalLensQualificationSurface
+  ≡
+  false
+formalLensQualificationTheoremAuthorityFalse =
+  FormalLensCore.qualificationTheoremAuthorityFalse
+    canonicalStratifiedComparisonLensQualificationReceipt
+
+formalLensQualificationExternalAuthorityFalse :
+  FormalLensCore.externalAuthority
+    stratifiedComparisonFormalLensQualificationSurface
+  ≡
+  false
+formalLensQualificationExternalAuthorityFalse =
+  FormalLensCore.qualificationExternalAuthorityFalse
+    canonicalStratifiedComparisonLensQualificationReceipt
+
+formalLensQualificationPromotionAuthorityFalse :
+  FormalLensCore.promotionAuthority
+    stratifiedComparisonFormalLensQualificationSurface
+  ≡
+  false
+formalLensQualificationPromotionAuthorityFalse =
+  FormalLensCore.qualificationPromotionAuthorityFalse
+    canonicalStratifiedComparisonLensQualificationReceipt
+
+formalLensQualificationAdapterCanonicality :
+  AdapterCanonicality.AdapterCanonicalityReceipt
+    FormalLensCore.FormalLensQualificationSurface
+    stratifiedComparisonFormalLensQualificationSurface
+formalLensQualificationAdapterCanonicality =
+  AdapterCanonicality.mkCanonicalAdapterReceipt
+    "stratified typed comparison formal lens"
+    "DASHI.Interop.StratifiedTypedComparisonLaw"
+    "stratifiedComparisonFormalLensQualificationSurface"
+    (AdapterCanonicality.namedAdapterKind "formal-lens-qualification")
+    stratifiedComparisonFormalLensQualificationSurface
+
+formalLensQualificationAdapterIsCanonical :
+  AdapterCanonicality.adapter formalLensQualificationAdapterCanonicality
+  ≡
+  stratifiedComparisonFormalLensQualificationSurface
+formalLensQualificationAdapterIsCanonical =
+  AdapterCanonicality.adapterCanonical
+    formalLensQualificationAdapterCanonicality
+
+formalLensQualificationAdapterPromotesAuthorityFalse :
+  AdapterCanonicality.adapterPromotesAuthority
+    formalLensQualificationAdapterCanonicality
+  ≡
+  false
+formalLensQualificationAdapterPromotesAuthorityFalse =
+  AdapterCanonicality.adapterAuthorityPromotionFalse
+    formalLensQualificationAdapterCanonicality
+
+formalLensCandidateOnlyAdapterCanonicality :
+  AdapterCanonicality.AdapterCanonicalityReceipt
+    CandidateOnly.CandidateOnlyRow
+    formalLensCandidateOnlyCoreAdapter
+formalLensCandidateOnlyAdapterCanonicality =
+  AdapterCanonicality.mkCanonicalAdapterReceipt
+    "stratified typed comparison formal lens candidate-only adapter"
+    "DASHI.Interop.StratifiedTypedComparisonLaw"
+    "formalLensCandidateOnlyCoreAdapter"
+    AdapterCanonicality.bridgeAdapterKind
+    formalLensCandidateOnlyCoreAdapter
+
+formalLensCandidateOnlyAdapterPromotesAuthorityFalse :
+  AdapterCanonicality.adapterPromotesAuthority
+    formalLensCandidateOnlyAdapterCanonicality
+  ≡
+  false
+formalLensCandidateOnlyAdapterPromotesAuthorityFalse =
+  AdapterCanonicality.adapterAuthorityPromotionFalse
+    formalLensCandidateOnlyAdapterCanonicality
+
+formalLensAuthorityFailClosedAdapterCanonicality :
+  AdapterCanonicality.AdapterCanonicalityReceipt
+    AuthorityNA.AuthorityNonPromotionBundle
+    formalLensAuthorityNonPromotionCoreAdapter
+formalLensAuthorityFailClosedAdapterCanonicality =
+  AdapterCanonicality.mkCanonicalAdapterReceipt
+    "stratified typed comparison formal lens authority adapter"
+    "DASHI.Interop.StratifiedTypedComparisonLaw"
+    "formalLensAuthorityNonPromotionCoreAdapter"
+    AdapterCanonicality.authorityAdapterKind
+    formalLensAuthorityNonPromotionCoreAdapter
+
+formalLensAuthorityFailClosedAdapterPromotesAuthorityFalse :
+  AdapterCanonicality.adapterPromotesAuthority
+    formalLensAuthorityFailClosedAdapterCanonicality
+  ≡
+  false
+formalLensAuthorityFailClosedAdapterPromotesAuthorityFalse =
+  AdapterCanonicality.adapterAuthorityPromotionFalse
+    formalLensAuthorityFailClosedAdapterCanonicality
 
 comparisonLawV2BoundaryStatement :
   String

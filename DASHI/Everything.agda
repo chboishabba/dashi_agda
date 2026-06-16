@@ -138,6 +138,7 @@ import DASHI.Core.CandidateOnlyCore
 import DASHI.Core.FiniteReceiptList
 import DASHI.Core.GenericReceipt
 import DASHI.Core.EmptyPromotionCore
+import DASHI.Core.FormalLensQualificationCore
 import DASHI.Core.KernelMonoid
 import DASHI.Core.LensKernel
 import DASHI.Core.OperatorTypes
@@ -271,6 +272,7 @@ import DASHI.Physics.Closure.AtomicClockCandidate256DimensionAdapter
 import DASHI.Physics.Closure.AtomicClockSecondRealTimeTopologyRequest
 import DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge
 import DASHI.Physics.Closure.AtomicClockW4ReceiptAdapterRequest
+import DASHI.Physics.Closure.GRCoord4TensorCore
 import DASHI.Physics.Closure.GRPDEParityBoundary
 import DASHI.Physics.Closure.ScaleLocalObservableCriterion
 import DASHI.Physics.Closure.BTBallVolumeEntropyBoundary

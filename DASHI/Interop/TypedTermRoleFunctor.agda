@@ -6,8 +6,10 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
+import DASHI.Core.AdapterCanonicalityCore as AdapterCanonicality
 import DASHI.Core.CandidateOnlyCore as CandidateOnly
 import DASHI.Core.EmptyPromotionCore as EmptyPromotion
+import DASHI.Core.FormalLensQualificationCore as FormalLensCore
 import DASHI.Interop.RoleGrammarCore as Core
 
 ------------------------------------------------------------------------
@@ -959,6 +961,290 @@ emptyPromotionCoreAdapterIsCanonical :
 emptyPromotionCoreAdapterIsCanonical =
   refl
 
+------------------------------------------------------------------------
+-- Formal-lens qualification adapter surface.
+--
+-- FormalLensQualificationCore is the shared home for SymbolicRational /
+-- Category qualification receipts.  This module keeps a local compatibility
+-- surface while tying it to the reusable fail-closed core.
+
+record TypedTermFormalLensQualificationSurface : Set where
+  constructor typedTermFormalLensQualificationSurface
+  field
+    formalLensSurfaceLabel :
+      String
+
+    formalLensReceiptSurface :
+      String
+
+    symbolicRationalLensQualified :
+      Bool
+
+    symbolicRationalLensQualifiedIsTrue :
+      symbolicRationalLensQualified ≡ true
+
+    categoryLensQualified :
+      Bool
+
+    categoryLensQualifiedIsTrue :
+      categoryLensQualified ≡ true
+
+    functionalLensVocabularyQualified :
+      Bool
+
+    functionalLensVocabularyQualifiedIsTrue :
+      functionalLensVocabularyQualified ≡ true
+
+    operatorLensVocabularyQualified :
+      Bool
+
+    operatorLensVocabularyQualifiedIsTrue :
+      operatorLensVocabularyQualified ≡ true
+
+    formalLensCandidateOnly :
+      Bool
+
+    formalLensCandidateOnlyIsTrue :
+      formalLensCandidateOnly ≡ true
+
+    formalLensAuthorityFailClosed :
+      Bool
+
+    formalLensAuthorityFailClosedIsTrue :
+      formalLensAuthorityFailClosed ≡ true
+
+    formalLensRoleTruthAuthority :
+      Bool
+
+    formalLensRoleTruthAuthorityIsFalse :
+      formalLensRoleTruthAuthority ≡ false
+
+    formalLensExternalOntologyAuthority :
+      Bool
+
+    formalLensExternalOntologyAuthorityIsFalse :
+      formalLensExternalOntologyAuthority ≡ false
+
+    formalLensTheoremAuthority :
+      Bool
+
+    formalLensTheoremAuthorityIsFalse :
+      formalLensTheoremAuthority ≡ false
+
+    formalLensCategoryTheoryAuthority :
+      Bool
+
+    formalLensCategoryTheoryAuthorityIsFalse :
+      formalLensCategoryTheoryAuthority ≡ false
+
+    formalLensPromotion :
+      Bool
+
+    formalLensPromotionIsFalse :
+      formalLensPromotion ≡ false
+
+    formalLensRemainingGap :
+      String
+
+open TypedTermFormalLensQualificationSurface public
+
+canonicalTypedTermFormalLensQualificationSurface :
+  TypedTermFormalLensQualificationSurface
+canonicalTypedTermFormalLensQualificationSurface =
+  typedTermFormalLensQualificationSurface
+    "typed-term role/functor formal-lens qualification"
+    "FormalLens(SymbolicRational, Category, Functional, Operator) candidate surface"
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    "qualification is vocabulary-only; no role truth, ontology authority, theorem authority, category-theory authority, or promotion is supplied"
+
+typedTermFormalLensCoreSurface :
+  FormalLensCore.FormalLensQualificationSurface
+typedTermFormalLensCoreSurface =
+  FormalLensCore.mkFormalLensQualificationSurface
+    "typed-term role/functor formal-lens qualification"
+    "DASHI.Interop.TypedTermRoleFunctor"
+    "typedTermFormalLensCoreSurface"
+    FormalLensCore.SymbolicRational
+    FormalLensCore.Category
+    (FormalLensCore.namedQualificationRole
+      "typed-term-role-functor")
+    FormalLensCore.canonicalMetThresholdRow
+    FormalLensCore.canonicalMetThresholdRowReceipt
+    FormalLensCore.explicitAdapterResidualBoundary
+    CandidateOnly.canonicalRoleCandidateOnlyRow
+    CandidateOnly.canonicalRoleCandidateOnlyReceipt
+    FormalLensCore.genericFormalLensBridgeRow
+    FormalLensCore.genericFormalLensBridgeReceipt
+    "typed-term role/functor vocabulary is qualified as symbolic-rational/category inspection grammar"
+    "role truth, ontology authority, category-theory authority, theorem authority, and promotion remain absent"
+
+typedTermFormalLensCoreReceipt :
+  FormalLensCore.FormalLensQualificationReceipt
+    typedTermFormalLensCoreSurface
+typedTermFormalLensCoreReceipt =
+  FormalLensCore.mkFormalLensQualificationReceipt
+    typedTermFormalLensCoreSurface
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+typedTermFormalLensAdapterCanonicalityReceipt :
+  AdapterCanonicality.AdapterCanonicalityReceipt
+    TypedTermFormalLensQualificationSurface
+    canonicalTypedTermFormalLensQualificationSurface
+typedTermFormalLensAdapterCanonicalityReceipt =
+  AdapterCanonicality.mkCanonicalAdapterReceipt
+    "typed-term formal-lens adapter"
+    "DASHI.Interop.TypedTermRoleFunctor"
+    "canonicalTypedTermFormalLensQualificationSurface"
+    (AdapterCanonicality.namedAdapterKind
+      "typed-term-role-functor-formal-lens")
+    canonicalTypedTermFormalLensQualificationSurface
+
+record TypedTermFormalLensQualificationReceipt : Set where
+  constructor typedTermFormalLensQualificationReceipt
+  field
+    formalLensQualificationSurface :
+      TypedTermFormalLensQualificationSurface
+
+    formalLensQualificationSurfaceIsCanonical :
+      formalLensQualificationSurface
+      ≡
+      canonicalTypedTermFormalLensQualificationSurface
+
+    formalLensRoleCandidateOnlyAdapter :
+      CandidateOnly.CandidateOnlyReceipt
+        CandidateOnly.canonicalRoleCandidateOnlyRow
+
+    formalLensRoleCandidateOnlyAdapterIsCanonical :
+      formalLensRoleCandidateOnlyAdapter
+      ≡
+      CandidateOnly.canonicalRoleCandidateOnlyReceipt
+
+    formalLensFunctionalCandidateOnlyAdapter :
+      CandidateOnly.CandidateOnlyReceipt
+        CandidateOnly.canonicalFunctionalCandidateOnlyRow
+
+    formalLensFunctionalCandidateOnlyAdapterIsCanonical :
+      formalLensFunctionalCandidateOnlyAdapter
+      ≡
+      CandidateOnly.canonicalFunctionalCandidateOnlyReceipt
+
+    formalLensOperatorCandidateOnlyAdapter :
+      CandidateOnly.CandidateOnlyReceipt
+        CandidateOnly.canonicalOperatorCandidateOnlyRow
+
+    formalLensOperatorCandidateOnlyAdapterIsCanonical :
+      formalLensOperatorCandidateOnlyAdapter
+      ≡
+      CandidateOnly.canonicalOperatorCandidateOnlyReceipt
+
+    formalLensAuthorityFailClosedAdapter :
+      AuthorityNA.AuthorityNonPromotionBundle
+
+    formalLensAuthorityFailClosedAdapterIsCanonical :
+      formalLensAuthorityFailClosedAdapter
+      ≡
+      AuthorityNA.canonicalAuthorityNonPromotionBundle
+
+    formalLensEmptyPromotionAdapter :
+      EmptyPromotion.EmptyPromotionReceipt
+
+    formalLensEmptyPromotionAdapterIsCanonical :
+      formalLensEmptyPromotionAdapter
+      ≡
+      EmptyPromotion.canonicalEmptyPromotionReceipt
+
+    formalLensAdapterCanonicality :
+      AdapterCanonicality.AdapterCanonicalityReceipt
+        TypedTermFormalLensQualificationSurface
+        canonicalTypedTermFormalLensQualificationSurface
+
+    formalLensAdapterCanonicalityIsCanonical :
+      AdapterCanonicality.adapter formalLensAdapterCanonicality
+      ≡
+      canonicalTypedTermFormalLensQualificationSurface
+
+    formalLensAdapterCanonicalityPromotesAuthorityFalse :
+      AdapterCanonicality.adapterPromotesAuthority
+        formalLensAdapterCanonicality
+      ≡
+      false
+
+    formalLensCoreAdapter :
+      FormalLensCore.FormalLensQualificationSurface
+
+    formalLensCoreAdapterIsCanonical :
+      formalLensCoreAdapter
+      ≡
+      typedTermFormalLensCoreSurface
+
+    formalLensCoreReceipt :
+      FormalLensCore.FormalLensQualificationReceipt
+        formalLensCoreAdapter
+
+open TypedTermFormalLensQualificationReceipt public
+
+canonicalTypedTermFormalLensQualificationReceipt :
+  TypedTermFormalLensQualificationReceipt
+canonicalTypedTermFormalLensQualificationReceipt =
+  typedTermFormalLensQualificationReceipt
+    canonicalTypedTermFormalLensQualificationSurface
+    refl
+    CandidateOnly.canonicalRoleCandidateOnlyReceipt
+    refl
+    CandidateOnly.canonicalFunctionalCandidateOnlyReceipt
+    refl
+    CandidateOnly.canonicalOperatorCandidateOnlyReceipt
+    refl
+    AuthorityNA.canonicalAuthorityNonPromotionBundle
+    refl
+    EmptyPromotion.canonicalEmptyPromotionReceipt
+    refl
+    typedTermFormalLensAdapterCanonicalityReceipt
+    refl
+    refl
+    typedTermFormalLensCoreSurface
+    refl
+    typedTermFormalLensCoreReceipt
+
 canonicalTypedTermRoleFunctorReceipt :
   TypedTermRoleFunctorReceipt
 canonicalTypedTermRoleFunctorReceipt =
@@ -1074,4 +1360,139 @@ receiptCandidateOnlyAuthorityMatchesCandidateCore :
   ≡
   CandidateOnly.promoted CandidateOnly.canonicalRoleCandidateOnlyRow
 receiptCandidateOnlyAuthorityMatchesCandidateCore =
+  refl
+
+canonicalFormalLensSymbolicRationalQualified :
+  symbolicRationalLensQualified
+    (formalLensQualificationSurface
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  true
+canonicalFormalLensSymbolicRationalQualified =
+  refl
+
+canonicalFormalLensCategoryQualified :
+  categoryLensQualified
+    (formalLensQualificationSurface
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  true
+canonicalFormalLensCategoryQualified =
+  refl
+
+canonicalFormalLensCandidateOnly :
+  formalLensCandidateOnly
+    (formalLensQualificationSurface
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  true
+canonicalFormalLensCandidateOnly =
+  refl
+
+canonicalFormalLensRoleCandidateOnlyAdapterPromotedFalse :
+  CandidateOnly.promoted CandidateOnly.canonicalRoleCandidateOnlyRow
+  ≡
+  false
+canonicalFormalLensRoleCandidateOnlyAdapterPromotedFalse =
+  CandidateOnly.candidatePromotedIsFalse
+    (formalLensRoleCandidateOnlyAdapter
+      canonicalTypedTermFormalLensQualificationReceipt)
+
+canonicalFormalLensFunctionalCandidateOnlyAdapterPromotedFalse :
+  CandidateOnly.promoted CandidateOnly.canonicalFunctionalCandidateOnlyRow
+  ≡
+  false
+canonicalFormalLensFunctionalCandidateOnlyAdapterPromotedFalse =
+  CandidateOnly.candidatePromotedIsFalse
+    (formalLensFunctionalCandidateOnlyAdapter
+      canonicalTypedTermFormalLensQualificationReceipt)
+
+canonicalFormalLensOperatorCandidateOnlyAdapterPromotedFalse :
+  CandidateOnly.promoted CandidateOnly.canonicalOperatorCandidateOnlyRow
+  ≡
+  false
+canonicalFormalLensOperatorCandidateOnlyAdapterPromotedFalse =
+  CandidateOnly.candidatePromotedIsFalse
+    (formalLensOperatorCandidateOnlyAdapter
+      canonicalTypedTermFormalLensQualificationReceipt)
+
+canonicalFormalLensRoleTruthAuthorityFalse :
+  formalLensRoleTruthAuthority
+    (formalLensQualificationSurface
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  false
+canonicalFormalLensRoleTruthAuthorityFalse =
+  refl
+
+canonicalFormalLensExternalOntologyAuthorityFalse :
+  formalLensExternalOntologyAuthority
+    (formalLensQualificationSurface
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  false
+canonicalFormalLensExternalOntologyAuthorityFalse =
+  refl
+
+canonicalFormalLensTheoremAuthorityFalse :
+  formalLensTheoremAuthority
+    (formalLensQualificationSurface
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  false
+canonicalFormalLensTheoremAuthorityFalse =
+  refl
+
+canonicalFormalLensCategoryTheoryAuthorityFalse :
+  formalLensCategoryTheoryAuthority
+    (formalLensQualificationSurface
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  false
+canonicalFormalLensCategoryTheoryAuthorityFalse =
+  refl
+
+canonicalFormalLensPromotionFalse :
+  formalLensPromotion
+    (formalLensQualificationSurface
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  false
+canonicalFormalLensPromotionFalse =
+  refl
+
+canonicalFormalLensAuthorityFailClosedExternalFalse :
+  AuthorityNA.externalAuthorityFlag
+    (formalLensAuthorityFailClosedAdapter
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  false
+canonicalFormalLensAuthorityFailClosedExternalFalse =
+  refl
+
+canonicalFormalLensAuthorityFailClosedTheoremFalse :
+  AuthorityNA.theoremAuthorityFlag
+    (formalLensAuthorityFailClosedAdapter
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  false
+canonicalFormalLensAuthorityFailClosedTheoremFalse =
+  refl
+
+canonicalFormalLensAdapterCanonical :
+  AdapterCanonicality.adapter
+    (formalLensAdapterCanonicality
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  canonicalTypedTermFormalLensQualificationSurface
+canonicalFormalLensAdapterCanonical =
+  refl
+
+canonicalFormalLensAdapterPromotesAuthorityFalse :
+  AdapterCanonicality.adapterPromotesAuthority
+    (formalLensAdapterCanonicality
+      canonicalTypedTermFormalLensQualificationReceipt)
+  ≡
+  false
+canonicalFormalLensAdapterPromotesAuthorityFalse =
   refl

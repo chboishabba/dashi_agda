@@ -16,6 +16,7 @@ AGDA_TARGETS = [
     "DASHI/Core/AuthorityNonPromotionCore.agda",
     "DASHI/Core/EmptyPromotionCore.agda",
     "DASHI/Core/CandidateOnlyCore.agda",
+    "DASHI/Core/FormalLensQualificationCore.agda",
     "DASHI/Core/CandidateFunctionalCore.agda",
     "DASHI/Core/OperatorShapeNonAuthorityCore.agda",
     "DASHI/Core/BridgeRequirementCore.agda",

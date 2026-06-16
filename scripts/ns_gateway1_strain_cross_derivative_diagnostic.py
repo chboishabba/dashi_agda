@@ -172,6 +172,23 @@ def spectral_hessian(field: np.ndarray, length: float = DOMAIN_LENGTH) -> np.nda
     return hessian
 
 
+def solve_periodic_poisson_negative_laplacian(
+    rhs: np.ndarray,
+    length: float = DOMAIN_LENGTH,
+) -> np.ndarray:
+    """Solve ``-Delta p = rhs`` on a periodic cube with zero-mean pressure."""
+
+    source = _as_real_array("rhs", rhs)
+    n = source.shape[0]
+    kx, ky, kz = wavenumbers(n, length)
+    k_squared = kx * kx + ky * ky + kz * kz
+    rhs_hat = np.fft.fftn(source)
+    pressure_hat = np.zeros_like(rhs_hat, dtype=complex)
+    nonzero = k_squared > 0.0
+    pressure_hat[nonzero] = rhs_hat[nonzero] / k_squared[nonzero]
+    return np.fft.ifftn(pressure_hat).real
+
+
 def velocity_gradient(
     u: np.ndarray,
     v: np.ndarray,
@@ -198,6 +215,15 @@ def strain_tensor(grad: np.ndarray) -> np.ndarray:
     return 0.5 * (gradient + np.swapaxes(gradient, 0, 1))
 
 
+def tensor_frobenius_squared(tensor: np.ndarray) -> np.ndarray:
+    """Return pointwise Frobenius norm squared for a 3x3 tensor field."""
+
+    tensor_field = np.asarray(tensor, dtype=float)
+    if tensor_field.ndim != 5 or tensor_field.shape[:2] != (3, 3):
+        raise ValueError(f"tensor must have shape (3,3,N,N,N), got {tensor_field.shape!r}")
+    return np.sum(tensor_field * tensor_field, axis=(0, 1))
+
+
 def vorticity_from_gradient(grad: np.ndarray) -> np.ndarray:
     """Return curl velocity as omega[component,x,y,z] from grad velocity."""
 
@@ -216,6 +242,15 @@ def enstrophy_density(omega: np.ndarray) -> np.ndarray:
     if vort.ndim != 4 or vort.shape[0] != 3:
         raise ValueError(f"omega must have shape (3,N,N,N), got {vort.shape!r}")
     return np.sum(vort * vort, axis=0)
+
+
+def divergence_from_gradient(grad: np.ndarray) -> np.ndarray:
+    """Return pointwise divergence from grad[a,b] = partial_b velocity_a."""
+
+    gradient = np.asarray(grad, dtype=float)
+    if gradient.ndim != 5 or gradient.shape[:2] != (3, 3):
+        raise ValueError(f"grad must have shape (3,3,N,N,N), got {gradient.shape!r}")
+    return gradient[0, 0] + gradient[1, 1] + gradient[2, 2]
 
 
 def taylor_green_velocity(
@@ -257,6 +292,16 @@ def load_velocity_npz(path: str | Path) -> tuple[np.ndarray, np.ndarray, np.ndar
 
 def _tensor_at(tensor_field: np.ndarray, index: tuple[int, int, int]) -> np.ndarray:
     return np.asarray(tensor_field[(slice(None), slice(None)) + index], dtype=float)
+
+
+def _directional_hessian_cross(
+    hessian: np.ndarray,
+    index: tuple[int, int, int],
+    e1: np.ndarray,
+    e2: np.ndarray,
+) -> float:
+    local_hessian = _tensor_at(hessian, index)
+    return float(e1 @ local_hessian @ e2)
 
 
 def _canonicalize_eigenvectors(eigenvectors: np.ndarray) -> np.ndarray:
@@ -382,9 +427,13 @@ def run_diagnostic(
     n = int(u.shape[0])
     grid_spacing = float(DOMAIN_LENGTH / n)
     grad = velocity_gradient(u, v, w)
+    divergence = divergence_from_gradient(grad)
     strain = strain_tensor(grad)
     omega = vorticity_from_gradient(grad)
+    strain_norm_squared = tensor_frobenius_squared(strain)
     enstrophy = enstrophy_density(omega)
+    pressure_poisson_rhs = strain_norm_squared - 0.5 * enstrophy
+    pressure = solve_periodic_poisson_negative_laplacian(pressure_poisson_rhs)
 
     max_flat = int(np.argmax(enstrophy))
     max_index = tuple(int(i) for i in np.unravel_index(max_flat, enstrophy.shape))
@@ -407,7 +456,34 @@ def run_diagnostic(
     )
     hessian = spectral_hessian(lambda2_field)
     local_hessian = _tensor_at(hessian, max_index)
-    cross_derivative = float(e1 @ local_hessian @ e2)
+    cross_derivative = _directional_hessian_cross(hessian, max_index, e1, e2)
+    pressure_hessian_e1_e2 = _directional_hessian_cross(
+        spectral_hessian(pressure),
+        max_index,
+        e1,
+        e2,
+    )
+    hess_omega2_e1_e2 = _directional_hessian_cross(
+        spectral_hessian(enstrophy),
+        max_index,
+        e1,
+        e2,
+    )
+    hess_S2_e1_e2 = _directional_hessian_cross(
+        spectral_hessian(strain_norm_squared),
+        max_index,
+        e1,
+        e2,
+    )
+    pressure_hessian_local_decomposition_tail = (
+        pressure_hessian_e1_e2
+        - (-0.5 * hess_omega2_e1_e2 + hess_S2_e1_e2)
+    )
+    vorticity_dominance_margin = (
+        0.5 * abs(hess_omega2_e1_e2)
+        - (abs(hess_S2_e1_e2) + abs(pressure_hessian_local_decomposition_tail))
+    )
+    vorticity_dominance_condition_holds = bool(vorticity_dominance_margin > 0.0)
     sign_classification = classify_sign(cross_derivative)
     diagnostic_status, sign_evidence_for_promotion, sign_evidence_blocker = _diagnostic_status(
         source=source,
@@ -449,6 +525,30 @@ def run_diagnostic(
         "lambda2_gradient_at_max": _jsonify_vector(lambda2_gradient[(slice(None),) + max_index]),
         "lambda2_hessian_at_max": _jsonify_matrix(local_hessian),
         "cross_derivative_e1_e2_lambda2_at_max": cross_derivative,
+        "pressure_hessian_e1_e2_at_max": pressure_hessian_e1_e2,
+        "hess_omega2_e1_e2_at_max": hess_omega2_e1_e2,
+        "hess_S2_e1_e2_at_max": hess_S2_e1_e2,
+        "cross_derivative_e1_e2_pressure_at_max": pressure_hessian_e1_e2,
+        "cross_derivative_e1_e2_vorticity_norm_squared_at_max": hess_omega2_e1_e2,
+        "cross_derivative_e1_e2_strain_norm_squared_at_max": hess_S2_e1_e2,
+        "pressure_hessian_local_decomposition_tail_e1_e2_at_max": (
+            pressure_hessian_local_decomposition_tail
+        ),
+        "vorticity_dominance_margin": vorticity_dominance_margin,
+        "vorticity_dominance_rule": (
+            "abs(hess_S2_e1_e2 + tail bound split as abs(hess_S2_e1_e2) "
+            "+ abs(pressure_hessian_local_decomposition_tail_e1_e2)) "
+            "< 0.5 * abs(hess_omega2_e1_e2)"
+        ),
+        "vorticity_dominance_condition_holds": vorticity_dominance_condition_holds,
+        "pressure_poisson_equation": "-Delta p = |S|^2 - 0.5*|omega|^2",
+        "pressure_poisson_identity_assumption": "incompressible_periodic_velocity",
+        "pressure_poisson_rhs_at_max": float(pressure_poisson_rhs[max_index]),
+        "pressure_poisson_rhs_mean": float(np.mean(pressure_poisson_rhs)),
+        "strain_norm_squared_at_max": float(strain_norm_squared[max_index]),
+        "half_vorticity_norm_squared_at_max": 0.5 * float(enstrophy[max_index]),
+        "divergence_max_abs": float(np.max(np.abs(divergence))),
+        "divergence_l2_mean": float(np.sqrt(np.mean(divergence * divergence))),
         "sign_nonpositive_at_max": bool(
             sign_classification != "positive_adverse_to_nonpositive_rule"
         ),

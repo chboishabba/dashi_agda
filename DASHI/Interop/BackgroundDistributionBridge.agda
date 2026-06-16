@@ -7,9 +7,11 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Interop.RoleGrammarCore as RoleCore
+import DASHI.Core.AdapterCanonicalityCore as AdapterCanonicalityCore
 import DASHI.Core.AuthorityNonPromotionCore as AuthorityNonPromotionCore
 import DASHI.Core.BridgeRequirementCore as BridgeRequirementCore
 import DASHI.Core.CandidateOnlyCore as CandidateOnlyCore
+import DASHI.Core.FormalLensQualificationCore as FormalLensCore
 
 ------------------------------------------------------------------------
 -- Background distributional bridge receipt.
@@ -454,6 +456,334 @@ authorityNonPromotionCoreAdapterPromotesAnyAuthorityFalse candidate =
   AuthorityNonPromotionCore.bundlePromotesAnyAuthorityIsFalse
     (authorityNonPromotionCoreAdapter candidate)
 
+------------------------------------------------------------------------
+-- Formal-lens qualification compatibility surface.
+--
+-- This local surface consumes FormalLensQualificationCore and routes every
+-- authority bit through existing reusable fail-closed cores.  It is
+-- candidate-only evidence: no probability theorem authority, empirical
+-- adequacy, background distribution authority, transport authority, external
+-- authority, or promotion is introduced here.
+
+FormalLens : Set
+FormalLens =
+  FormalLensCore.FormalLens
+
+backgroundFormalLensQualificationCanonicalLenses :
+  List FormalLens
+backgroundFormalLensQualificationCanonicalLenses =
+  FormalLensCore.Probabilistic
+  ∷ FormalLensCore.Information
+  ∷ FormalLensCore.Category
+  ∷ FormalLensCore.Functional
+  ∷ []
+
+record BackgroundFormalLensQualificationSurface
+    (candidate : BackgroundBridgeCandidateProfile) : Set where
+  constructor backgroundFormalLensQualificationSurface
+  field
+    formalLensQualifiedLenses :
+      List FormalLens
+
+    formalLensQualifiedLensesAreCanonical :
+      formalLensQualifiedLenses
+      ≡
+      backgroundFormalLensQualificationCanonicalLenses
+
+    formalLensProbabilisticReading :
+      Bool
+
+    formalLensProbabilisticReadingIsTrue :
+      formalLensProbabilisticReading ≡ true
+
+    formalLensInformationReading :
+      Bool
+
+    formalLensInformationReadingIsTrue :
+      formalLensInformationReading ≡ true
+
+    formalLensCategoryReading :
+      Bool
+
+    formalLensCategoryReadingIsTrue :
+      formalLensCategoryReading ≡ true
+
+    formalLensFunctionalReading :
+      Bool
+
+    formalLensFunctionalReadingIsTrue :
+      formalLensFunctionalReading ≡ true
+
+    formalLensGradientFlowReading :
+      Bool
+
+    formalLensGradientFlowReadingIsFalse :
+      formalLensGradientFlowReading ≡ false
+
+    formalLensSymbolicRationalReading :
+      Bool
+
+    formalLensSymbolicRationalReadingIsFalse :
+      formalLensSymbolicRationalReading ≡ false
+
+    formalLensCandidateOnlyAdapter :
+      CandidateOnlyCore.CandidateOnlyRow
+
+    formalLensCandidateOnlyAdapterReceipt :
+      CandidateOnlyCore.CandidateOnlyReceipt
+        formalLensCandidateOnlyAdapter
+
+    formalLensCandidateOnlyIsTrue :
+      CandidateOnlyCore.candidateOnly
+        formalLensCandidateOnlyAdapter
+      ≡
+      true
+
+    formalLensCandidateOnlyPromotedFalse :
+      CandidateOnlyCore.promoted
+        formalLensCandidateOnlyAdapter
+      ≡
+      false
+
+    formalLensCandidateOnlyTruthAuthorityFalse :
+      CandidateOnlyCore.carriesTruthAuthority
+        formalLensCandidateOnlyAdapter
+      ≡
+      false
+
+    formalLensCandidateOnlySupportAuthorityFalse :
+      CandidateOnlyCore.carriesSupportAuthority
+        formalLensCandidateOnlyAdapter
+      ≡
+      false
+
+    formalLensCandidateOnlyAdmissibilityAuthorityFalse :
+      CandidateOnlyCore.carriesAdmissibilityAuthority
+        formalLensCandidateOnlyAdapter
+      ≡
+      false
+
+    formalLensCandidateOnlyTheoremAuthorityFalse :
+      CandidateOnlyCore.carriesTheoremAuthority
+        formalLensCandidateOnlyAdapter
+      ≡
+      false
+
+    formalLensAuthorityFailClosedAdapter :
+      AuthorityNonPromotionCore.AuthorityNonPromotionBundle
+
+    formalLensTruthAuthorityFalse :
+      AuthorityNonPromotionCore.truthAuthorityFlag
+        formalLensAuthorityFailClosedAdapter
+      ≡
+      false
+
+    formalLensSupportAuthorityFalse :
+      AuthorityNonPromotionCore.supportAuthorityFlag
+        formalLensAuthorityFailClosedAdapter
+      ≡
+      false
+
+    formalLensAdmissibilityAuthorityFalse :
+      AuthorityNonPromotionCore.admissibilityAuthorityFlag
+        formalLensAuthorityFailClosedAdapter
+      ≡
+      false
+
+    formalLensTheoremAuthorityFalse :
+      AuthorityNonPromotionCore.theoremAuthorityFlag
+        formalLensAuthorityFailClosedAdapter
+      ≡
+      false
+
+    formalLensEmpiricalAuthorityFalse :
+      AuthorityNonPromotionCore.empiricalAuthorityFlag
+        formalLensAuthorityFailClosedAdapter
+      ≡
+      false
+
+    formalLensExternalAuthorityFalse :
+      AuthorityNonPromotionCore.externalAuthorityFlag
+        formalLensAuthorityFailClosedAdapter
+      ≡
+      false
+
+    formalLensPromotesAnyAuthorityFalse :
+      AuthorityNonPromotionCore.promotesAnyAuthority
+        formalLensAuthorityFailClosedAdapter
+      ≡
+      false
+
+    formalLensBridgeRequirementAdapter :
+      BridgeRequirementCore.BridgeRequirementRow
+
+    formalLensBridgeRequirementAdapterReceipt :
+      BridgeRequirementCore.BridgeRequirementRowReceipt
+        formalLensBridgeRequirementAdapter
+
+    formalLensBackgroundDistributionAuthorityFalse :
+      BridgeRequirementCore.rowBackgroundBridgeAuthority
+        formalLensBridgeRequirementAdapter
+      ≡
+      false
+
+    formalLensTransportAuthorityFalse :
+      BridgeRequirementCore.rowTransportMapAuthority
+        formalLensBridgeRequirementAdapter
+      ≡
+      false
+
+    formalLensBridgeAuthorityPromotionFalse :
+      BridgeRequirementCore.rowAuthorityPromotion
+        formalLensBridgeRequirementAdapter
+      ≡
+      false
+
+    formalLensAdapterCanonicality :
+      AdapterCanonicalityCore.AdapterCanonicalityReceipt
+        (List FormalLens)
+        backgroundFormalLensQualificationCanonicalLenses
+
+    formalLensAdapterIsCanonical :
+      AdapterCanonicalityCore.adapter
+        formalLensAdapterCanonicality
+      ≡
+      backgroundFormalLensQualificationCanonicalLenses
+
+    formalLensAdapterCanonicalityAuthorityFalse :
+      AdapterCanonicalityCore.adapterPromotesAuthority
+        formalLensAdapterCanonicality
+      ≡
+      false
+
+    formalLensProbabilityTheoremAuthority :
+      Bool
+
+    formalLensProbabilityTheoremAuthorityIsFalse :
+      formalLensProbabilityTheoremAuthority ≡ false
+
+    formalLensEmpiricalAdequacyAuthority :
+      Bool
+
+    formalLensEmpiricalAdequacyAuthorityIsFalse :
+      formalLensEmpiricalAdequacyAuthority ≡ false
+
+    formalLensBackgroundDistributionAuthority :
+      Bool
+
+    formalLensBackgroundDistributionAuthorityIsFalse :
+      formalLensBackgroundDistributionAuthority ≡ false
+
+    formalLensTransportAuthority :
+      Bool
+
+    formalLensTransportAuthorityIsFalse :
+      formalLensTransportAuthority ≡ false
+
+    formalLensExternalAuthority :
+      Bool
+
+    formalLensExternalAuthorityIsFalse :
+      formalLensExternalAuthority ≡ false
+
+    formalLensPromoted :
+      Bool
+
+    formalLensPromotedIsFalse :
+      formalLensPromoted ≡ false
+
+    formalLensQualificationReading :
+      String
+
+open BackgroundFormalLensQualificationSurface public
+
+backgroundFormalLensQualificationAdapterCanonicality :
+  AdapterCanonicalityCore.AdapterCanonicalityReceipt
+    (List FormalLens)
+    backgroundFormalLensQualificationCanonicalLenses
+backgroundFormalLensQualificationAdapterCanonicality =
+  AdapterCanonicalityCore.mkCanonicalAdapterReceipt
+    "background distribution formal-lens qualification canonicality"
+    "DASHI.Interop.BackgroundDistributionBridge"
+    "backgroundFormalLensQualificationCanonicalLenses"
+    AdapterCanonicalityCore.receiptAdapterKind
+    backgroundFormalLensQualificationCanonicalLenses
+
+backgroundFormalLensQualification :
+  (candidate : BackgroundBridgeCandidateProfile) →
+  BackgroundFormalLensQualificationSurface candidate
+backgroundFormalLensQualification candidate =
+  backgroundFormalLensQualificationSurface
+    backgroundFormalLensQualificationCanonicalLenses
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    (candidateOnlyCoreAdapter candidate)
+    (candidateOnlyCoreAdapterReceipt candidate)
+    (CandidateOnlyCore.candidateOnlyIsTrue
+      (candidateOnlyCoreAdapterReceipt candidate))
+    (CandidateOnlyCore.candidatePromotedIsFalse
+      (candidateOnlyCoreAdapterReceipt candidate))
+    (CandidateOnlyCore.candidateNoTruthAuthority
+      (candidateOnlyCoreAdapterReceipt candidate))
+    (CandidateOnlyCore.candidateNoSupportAuthority
+      (candidateOnlyCoreAdapterReceipt candidate))
+    (CandidateOnlyCore.candidateNoAdmissibilityAuthority
+      (candidateOnlyCoreAdapterReceipt candidate))
+    (CandidateOnlyCore.candidateNoTheoremAuthority
+      (candidateOnlyCoreAdapterReceipt candidate))
+    (authorityNonPromotionCoreAdapter candidate)
+    (AuthorityNonPromotionCore.bundleTruthAuthorityIsFalse
+      (authorityNonPromotionCoreAdapter candidate))
+    (AuthorityNonPromotionCore.bundleSupportAuthorityIsFalse
+      (authorityNonPromotionCoreAdapter candidate))
+    (AuthorityNonPromotionCore.bundleAdmissibilityAuthorityIsFalse
+      (authorityNonPromotionCoreAdapter candidate))
+    (AuthorityNonPromotionCore.bundleTheoremAuthorityIsFalse
+      (authorityNonPromotionCoreAdapter candidate))
+    (AuthorityNonPromotionCore.bundleEmpiricalAuthorityIsFalse
+      (authorityNonPromotionCoreAdapter candidate))
+    (AuthorityNonPromotionCore.bundleExternalAuthorityIsFalse
+      (authorityNonPromotionCoreAdapter candidate))
+    (AuthorityNonPromotionCore.bundlePromotesAnyAuthorityIsFalse
+      (authorityNonPromotionCoreAdapter candidate))
+    (bridgeRequirementCoreAdapter candidate)
+    (bridgeRequirementCoreAdapterReceipt candidate)
+    (BridgeRequirementCore.rowBackgroundBridgeAuthorityFalse
+      (bridgeRequirementCoreAdapterReceipt candidate))
+    (BridgeRequirementCore.rowTransportMapAuthorityFalse
+      (bridgeRequirementCoreAdapterReceipt candidate))
+    (BridgeRequirementCore.rowAuthorityPromotionFalse
+      (bridgeRequirementCoreAdapterReceipt candidate))
+    backgroundFormalLensQualificationAdapterCanonicality
+    (AdapterCanonicalityCore.adapterCanonical
+      backgroundFormalLensQualificationAdapterCanonicality)
+    (AdapterCanonicalityCore.adapterAuthorityPromotionFalse
+      backgroundFormalLensQualificationAdapterCanonicality)
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    "BackgroundDistributionBridge is formal-lens-qualified only as probabilistic, information, category, and functional reading; the adapter is candidate-only and authority fail-closed."
+
 backgroundCandidateSourceCoreTypedTerm :
   BackgroundBridgeCandidateProfile →
   RoleCore.GenericTypedTerm String
@@ -788,6 +1118,96 @@ canonicalBackgroundBridgePromotionGates =
   ∷ godOfGapsNoPromotionGate
   ∷ policyAuthorityNoPromotionGate
   ∷ []
+
+------------------------------------------------------------------------
+-- Formal-lens example witnesses.
+
+economyExampleFormalLensQualification :
+  BackgroundFormalLensQualificationSurface
+    economyToPersonBehaviourDistributionalCandidateProfile
+economyExampleFormalLensQualification =
+  backgroundFormalLensQualification
+    economyToPersonBehaviourDistributionalCandidateProfile
+
+economyExampleFormalLensProbabilisticReadingIsTrue :
+  formalLensProbabilisticReading
+    economyExampleFormalLensQualification
+  ≡
+  true
+economyExampleFormalLensProbabilisticReadingIsTrue =
+  refl
+
+economyExampleFormalLensInformationReadingIsTrue :
+  formalLensInformationReading
+    economyExampleFormalLensQualification
+  ≡
+  true
+economyExampleFormalLensInformationReadingIsTrue =
+  refl
+
+economyExampleFormalLensCategoryReadingIsTrue :
+  formalLensCategoryReading
+    economyExampleFormalLensQualification
+  ≡
+  true
+economyExampleFormalLensCategoryReadingIsTrue =
+  refl
+
+economyExampleFormalLensFunctionalReadingIsTrue :
+  formalLensFunctionalReading
+    economyExampleFormalLensQualification
+  ≡
+  true
+economyExampleFormalLensFunctionalReadingIsTrue =
+  refl
+
+economyExampleFormalLensPromotedIsFalse :
+  formalLensPromoted
+    economyExampleFormalLensQualification
+  ≡
+  false
+economyExampleFormalLensPromotedIsFalse =
+  refl
+
+economyExampleFormalLensProbabilityTheoremAuthorityIsFalse :
+  formalLensProbabilityTheoremAuthority
+    economyExampleFormalLensQualification
+  ≡
+  false
+economyExampleFormalLensProbabilityTheoremAuthorityIsFalse =
+  refl
+
+economyExampleFormalLensEmpiricalAdequacyAuthorityIsFalse :
+  formalLensEmpiricalAdequacyAuthority
+    economyExampleFormalLensQualification
+  ≡
+  false
+economyExampleFormalLensEmpiricalAdequacyAuthorityIsFalse =
+  refl
+
+economyExampleFormalLensBackgroundDistributionAuthorityIsFalse :
+  formalLensBackgroundDistributionAuthority
+    economyExampleFormalLensQualification
+  ≡
+  false
+economyExampleFormalLensBackgroundDistributionAuthorityIsFalse =
+  refl
+
+economyExampleFormalLensTransportAuthorityIsFalse :
+  formalLensTransportAuthority
+    economyExampleFormalLensQualification
+  ≡
+  false
+economyExampleFormalLensTransportAuthorityIsFalse =
+  refl
+
+economyExampleFormalLensExternalAuthorityIsFalse :
+  formalLensExternalAuthority
+    economyExampleFormalLensQualification
+  ≡
+  false
+economyExampleFormalLensExternalAuthorityIsFalse =
+  refl
 
 ------------------------------------------------------------------------
 -- Receipt equalities.

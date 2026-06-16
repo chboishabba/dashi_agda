@@ -6,6 +6,18 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane formal-lens qualification tranche for `2026-06-16`: adds
+  `DASHI.Core.FormalLensQualificationCore` as the reusable symbolic-rational
+  lens qualification surface for Operator, Functional, Hamiltonian,
+  GradientFlow, ResistiveTransport, Spectral, Group, Category, Number,
+  Lattice, Topological, Probabilistic, Graph, Information, and
+  SymbolicRational readings. Migrates Qi operator theory, Meditation Qi,
+  typed-term role/functor, stratified comparison, background distribution,
+  and cross-domain claim promotion-boundary consumers additively onto the
+  lens/core adapter pattern. Formal lens qualification remains candidate-only:
+  analytic, empirical, clinical, physical, theorem, metaphysical, external,
+  governance, Clay, and promotion authority remain false/open.
+
 - Six-lane reusable-core migration tranche for `2026-06-16`: adds
   `DASHI.Core.AdapterCanonicalityCore` and migrates the next biology,
   Wikidata-role, and ontology bridge consumers onto the reusable
