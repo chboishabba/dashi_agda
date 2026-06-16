@@ -96,15 +96,99 @@ obligationMathTokenRows =
   ∷ "Shell A accepted L=48"
   ∷ []
 
+canonicalChristoffelFormulaLawDependencyRows : List String
+canonicalChristoffelFormulaLawDependencyRows =
+  "dependency: Coord4.Coord4 carrier"
+  ∷ "dependency: canonicalSchwarzschildDiagonalFormulaCarrier"
+  ∷ "dependency: canonicalSchwarzschildFormulaLaw"
+  ∷ "dependency: christoffelFormulaLaw is a recorded surface, not a theorem promotion"
+  ∷ []
+
+canonicalChristoffelFormulaLawProjectionRows : List String
+canonicalChristoffelFormulaLawProjectionRows =
+  "projection: Coord4.SchwarzschildFormulaLawSurface.christoffelFormulaLaw"
+  ∷ "projection: canonicalSchwarzschildFormulaLaw projects the Christoffel law surface"
+  ∷ []
+
+canonicalInverseMetricLawDependencyRows : List String
+canonicalInverseMetricLawDependencyRows =
+  "dependency: Coord4.Coord4 carrier"
+  ∷ "dependency: canonicalSchwarzschildDiagonalFormulaCarrier"
+  ∷ "dependency: canonicalSchwarzschildFormulaLaw"
+  ∷ "dependency: inverseMetricLaw is recorded without metric inversion promotion"
+  ∷ []
+
+canonicalInverseMetricLawProjectionRows : List String
+canonicalInverseMetricLawProjectionRows =
+  "projection: Coord4.SchwarzschildFormulaLawSurface.inverseMetricLaw"
+  ∷ "projection: canonicalSchwarzschildFormulaLaw projects the inverse metric law surface"
+  ∷ []
+
+canonicalMetricCompatibilityLawDependencyRows : List String
+canonicalMetricCompatibilityLawDependencyRows =
+  "dependency: Coord4.Coord4 carrier"
+  ∷ "dependency: canonicalSchwarzschildDiagonalFormulaCarrier"
+  ∷ "dependency: canonicalSchwarzschildFormulaLaw"
+  ∷ "dependency: metricCompatibilityLaw is recorded without Levi-Civita promotion"
+  ∷ []
+
+canonicalMetricCompatibilityLawProjectionRows : List String
+canonicalMetricCompatibilityLawProjectionRows =
+  "projection: Coord4.SchwarzschildFormulaLawSurface.metricCompatibilityLaw"
+  ∷ "projection: canonicalSchwarzschildFormulaLaw projects the metric compatibility law surface"
+  ∷ []
+
+canonicalChristoffelPerturbBoundDependencyRows : List String
+canonicalChristoffelPerturbBoundDependencyRows =
+  "dependency: canonicalPerturbationShape"
+  ∷ "dependency: christoffelPerturbationRoute"
+  ∷ "dependency: christoffelPerturbationTermCount = 2"
+  ∷ "dependency: christoffelFiniteSlotFactor = 4"
+  ∷ []
+
+canonicalChristoffelPerturbBoundProjectionRows : List String
+canonicalChristoffelPerturbBoundProjectionRows =
+  "projection: christoffelPerturbBoundName"
+  ∷ "projection: christoffelPerturbationRoute remains a receipt, not a theorem"
+  ∷ []
+
+canonicalRicciBoundDependencyRows : List String
+canonicalRicciBoundDependencyRows =
+  "dependency: canonicalPerturbationShape"
+  ∷ "dependency: ricciPerturbationBound"
+  ∷ "dependency: canonicalRicciShellALaw"
+  ∷ "dependency: 2144/27<=80<=640 is recorded as a blocker row, not a convergence theorem"
+  ∷ []
+
+canonicalRicciBoundProjectionRows : List String
+canonicalRicciBoundProjectionRows =
+  "projection: ricciPerturbationBound = 640"
+  ∷ "projection: canonicalRicciShellALaw projects the shell-A Ricci receipt"
+  ∷ []
+
+canonicalSymbolicKernelConstructorHandoffDependencyRows : List String
+canonicalSymbolicKernelConstructorHandoffDependencyRows =
+  "dependency: canonicalSchwarzschildFormulaLaw"
+  ∷ "dependency: canonicalPerturbationShape"
+  ∷ "dependency: obligationMathTokenRows"
+  ∷ "dependency: symbolic kernel constructor handoff remains receipt-only and fail-closed"
+  ∷ []
+
+canonicalSymbolicKernelConstructorHandoffProjectionRows : List String
+canonicalSymbolicKernelConstructorHandoffProjectionRows =
+  "projection: ContinuumLimitTheorem.symbolicRationalFiniteCarrierChristoffelC0FromDerivativeLawFromKernel"
+  ∷ "projection: constructor handoff records the named symbolic kernel without promotion"
+  ∷ []
+
 record GRChristoffelRicciKernelObligationCoreORCSLPGF : Set where
   constructor grChristoffelRicciKernelObligationCoreORCSLPGF
   field
     O : String
     OIsCanonical : O ≡ "GR-Christoffel-Ricci-kernel obligations"
     R : String
-    RIsCanonical : R ≡ "record the concrete proof-grammar dependency chain"
+    RIsCanonical : R ≡ "record the concrete proof-grammar dependency/projection chain"
     C : String
-    CIsCanonical : C ≡ "diagonal Coord4/Schwarzschild law → ordered rational → perturbation → Ricci"
+    CIsCanonical : C ≡ "diagonal Coord4/Schwarzschild law → explicit row ledger → ordered rational → perturbation → Ricci"
     S : String
     SIsCanonical : S ≡ "fail-closed"
     L : String
@@ -115,19 +199,19 @@ record GRChristoffelRicciKernelObligationCoreORCSLPGF : Set where
     GIsCanonical : G ≡ "geometric surface+symbolic-kernel constructor shape"
     F : String
     FIsCanonical : F ≡
-      "keeps concrete 22<=48 / 2144/27<=80<=640 rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
+      "keeps concrete 22<=48 / 2144/27<=80<=640 rows and explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
 
 open GRChristoffelRicciKernelObligationCoreORCSLPGF public
 
 canonicalGRChristoffelRicciKernelObligationCoreORCSLPGF :
   GRChristoffelRicciKernelObligationCoreORCSLPGF
 canonicalGRChristoffelRicciKernelObligationCoreORCSLPGF =
-  grChristoffelRicciKernelObligationCoreORCSLPGF
+    grChristoffelRicciKernelObligationCoreORCSLPGF
     "GR-Christoffel-Ricci-kernel obligations"
     refl
-    "record the concrete proof-grammar dependency chain"
+    "record the concrete proof-grammar dependency/projection chain"
     refl
-    "diagonal Coord4/Schwarzschild law → ordered rational → perturbation → Ricci"
+    "diagonal Coord4/Schwarzschild law → explicit row ledger → ordered rational → perturbation → Ricci"
     refl
     "fail-closed"
     refl
@@ -137,7 +221,7 @@ canonicalGRChristoffelRicciKernelObligationCoreORCSLPGF =
     refl
     "geometric surface+symbolic-kernel constructor shape"
     refl
-    "keeps concrete 22<=48 / 2144/27<=80<=640 rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
+    "keeps concrete 22<=48 / 2144/27<=80<=640 rows and explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
     refl
 
 record GRChristoffelRicciKernelObligationCore : Setω where
@@ -184,6 +268,42 @@ record GRChristoffelRicciKernelObligationCore : Setω where
     diagonalSchwarzschildFormulaLawIsCanonical :
       diagonalSchwarzschildFormulaLaw ≡ canonicalSchwarzschildFormulaLaw
 
+    christoffelFormulaLawDependencyRows :
+      List String
+
+    christoffelFormulaLawDependencyRowsAreCanonical :
+      christoffelFormulaLawDependencyRows ≡ canonicalChristoffelFormulaLawDependencyRows
+
+    christoffelFormulaLawProjectionRows :
+      List String
+
+    christoffelFormulaLawProjectionRowsAreCanonical :
+      christoffelFormulaLawProjectionRows ≡ canonicalChristoffelFormulaLawProjectionRows
+
+    inverseMetricLawDependencyRows :
+      List String
+
+    inverseMetricLawDependencyRowsAreCanonical :
+      inverseMetricLawDependencyRows ≡ canonicalInverseMetricLawDependencyRows
+
+    inverseMetricLawProjectionRows :
+      List String
+
+    inverseMetricLawProjectionRowsAreCanonical :
+      inverseMetricLawProjectionRows ≡ canonicalInverseMetricLawProjectionRows
+
+    metricCompatibilityLawDependencyRows :
+      List String
+
+    metricCompatibilityLawDependencyRowsAreCanonical :
+      metricCompatibilityLawDependencyRows ≡ canonicalMetricCompatibilityLawDependencyRows
+
+    metricCompatibilityLawProjectionRows :
+      List String
+
+    metricCompatibilityLawProjectionRowsAreCanonical :
+      metricCompatibilityLawProjectionRows ≡ canonicalMetricCompatibilityLawProjectionRows
+
     orderedRationalFormulaLemmas :
       List String
 
@@ -226,11 +346,35 @@ record GRChristoffelRicciKernelObligationCore : Setω where
       Perturbation.GRPerturbationBoundShapeCore.christoffelPerturbBoundName
         canonicalPerturbationShape
 
+    christoffelPerturbBoundDependencyRows :
+      List String
+
+    christoffelPerturbBoundDependencyRowsAreCanonical :
+      christoffelPerturbBoundDependencyRows ≡ canonicalChristoffelPerturbBoundDependencyRows
+
+    christoffelPerturbBoundProjectionRows :
+      List String
+
+    christoffelPerturbBoundProjectionRowsAreCanonical :
+      christoffelPerturbBoundProjectionRows ≡ canonicalChristoffelPerturbBoundProjectionRows
+
     ricciBound :
       Nat
 
     ricciBoundIs640 :
       ricciBound ≡ 640
+
+    ricciBoundDependencyRows :
+      List String
+
+    ricciBoundDependencyRowsAreCanonical :
+      ricciBoundDependencyRows ≡ canonicalRicciBoundDependencyRows
+
+    ricciBoundProjectionRows :
+      List String
+
+    ricciBoundProjectionRowsAreCanonical :
+      ricciBoundProjectionRows ≡ canonicalRicciBoundProjectionRows
 
     ricciShellA2144Over27Le80Le640Law :
       Ricci.GRDiscreteRicciShellAConstantLawShape
@@ -269,6 +413,22 @@ record GRChristoffelRicciKernelObligationCore : Setω where
       symbolicRationalChristoffelC0StabilityKernelConstructorName
       ≡
       "ContinuumLimitTheorem.symbolicRationalFiniteCarrierChristoffelC0FromDerivativeLawFromKernel"
+
+    symbolicKernelConstructorHandoffDependencyRows :
+      List String
+
+    symbolicKernelConstructorHandoffDependencyRowsAreCanonical :
+      symbolicKernelConstructorHandoffDependencyRows
+      ≡
+      canonicalSymbolicKernelConstructorHandoffDependencyRows
+
+    symbolicKernelConstructorHandoffProjectionRows :
+      List String
+
+    symbolicKernelConstructorHandoffProjectionRowsAreCanonical :
+      symbolicKernelConstructorHandoffProjectionRows
+      ≡
+      canonicalSymbolicKernelConstructorHandoffProjectionRows
 
     orcslpgf :
       GRChristoffelRicciKernelObligationCoreORCSLPGF
@@ -309,6 +469,30 @@ canonicalGRChristoffelRicciKernelObligationCore =
         canonicalSchwarzschildFormulaLaw
     ; diagonalSchwarzschildFormulaLawIsCanonical =
         refl
+    ; christoffelFormulaLawDependencyRows =
+        canonicalChristoffelFormulaLawDependencyRows
+    ; christoffelFormulaLawDependencyRowsAreCanonical =
+        refl
+    ; christoffelFormulaLawProjectionRows =
+        canonicalChristoffelFormulaLawProjectionRows
+    ; christoffelFormulaLawProjectionRowsAreCanonical =
+        refl
+    ; inverseMetricLawDependencyRows =
+        canonicalInverseMetricLawDependencyRows
+    ; inverseMetricLawDependencyRowsAreCanonical =
+        refl
+    ; inverseMetricLawProjectionRows =
+        canonicalInverseMetricLawProjectionRows
+    ; inverseMetricLawProjectionRowsAreCanonical =
+        refl
+    ; metricCompatibilityLawDependencyRows =
+        canonicalMetricCompatibilityLawDependencyRows
+    ; metricCompatibilityLawDependencyRowsAreCanonical =
+        refl
+    ; metricCompatibilityLawProjectionRows =
+        canonicalMetricCompatibilityLawProjectionRows
+    ; metricCompatibilityLawProjectionRowsAreCanonical =
+        refl
     ; orderedRationalFormulaLemmas =
         OrderedRational.canonicalOrderedRationalScalarLemmaNames
           ++ "22<=48" ∷ "2144/27<=80<=640" ∷ []
@@ -341,12 +525,28 @@ canonicalGRChristoffelRicciKernelObligationCore =
           canonicalPerturbationShape
     ; christoffelPerturbBoundNameIsCanonical =
         refl
+    ; christoffelPerturbBoundDependencyRows =
+        canonicalChristoffelPerturbBoundDependencyRows
+    ; christoffelPerturbBoundDependencyRowsAreCanonical =
+        refl
+    ; christoffelPerturbBoundProjectionRows =
+        canonicalChristoffelPerturbBoundProjectionRows
+    ; christoffelPerturbBoundProjectionRowsAreCanonical =
+        refl
     ; ricciBound =
         Perturbation.GRPerturbationBoundShapeCore.ricciPerturbationBound
           canonicalPerturbationShape
     ; ricciBoundIs640 =
         Perturbation.GRPerturbationBoundShapeCore.ricciPerturbationBoundIs640
           canonicalPerturbationShape
+    ; ricciBoundDependencyRows =
+        canonicalRicciBoundDependencyRows
+    ; ricciBoundDependencyRowsAreCanonical =
+        refl
+    ; ricciBoundProjectionRows =
+        canonicalRicciBoundProjectionRows
+    ; ricciBoundProjectionRowsAreCanonical =
+        refl
     ; ricciShellA2144Over27Le80Le640Law =
         canonicalRicciShellALaw
     ; ricciShellA2144Over27Le80Le640LawIsCanonical =
@@ -374,6 +574,14 @@ canonicalGRChristoffelRicciKernelObligationCore =
     ; symbolicRationalChristoffelC0StabilityKernelConstructorName =
         "ContinuumLimitTheorem.symbolicRationalFiniteCarrierChristoffelC0FromDerivativeLawFromKernel"
     ; symbolicRationalChristoffelC0StabilityKernelConstructorNameIsCanonical =
+        refl
+    ; symbolicKernelConstructorHandoffDependencyRows =
+        canonicalSymbolicKernelConstructorHandoffDependencyRows
+    ; symbolicKernelConstructorHandoffDependencyRowsAreCanonical =
+        refl
+    ; symbolicKernelConstructorHandoffProjectionRows =
+        canonicalSymbolicKernelConstructorHandoffProjectionRows
+    ; symbolicKernelConstructorHandoffProjectionRowsAreCanonical =
         refl
     ; orcslpgf =
         canonicalGRChristoffelRicciKernelObligationCoreORCSLPGF
