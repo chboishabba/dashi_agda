@@ -9,6 +9,9 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Constants.Registry as Registry
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
+import DASHI.Core.CandidateOnlyCore as CandidateOnly
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
 import DASHI.Promotion.NumericAndAuthorityObligations as Authority
 import DASHI.Interop.PNFResidualConsumerReceiptRequestPack as PNFRequest
 import DASHI.Interop.PNFResidualConsumerRuntimeProviderAttempt as PNFAttempt
@@ -1446,3 +1449,204 @@ acceptedProviderAuthorityStillBlocked :
   ⊥
 acceptedProviderAuthorityStillBlocked =
   HEPProjection.acceptedProjectionRunnerReceiptImpossibleHere
+
+------------------------------------------------------------------------
+-- Authority-boundary compatibility layer.
+--
+-- This adapter now carries a concrete runtime authority-boundary receipt
+-- from DASHI.Promotion.AuthorityBoundaryCore while preserving the existing
+-- runtime-replay false projections as compatibility surfaces.
+
+canonicalRuntimeReplayAuthorityBoundaryReceipt :
+  AuthorityBoundary.AuthorityBoundaryReceipt
+canonicalRuntimeReplayAuthorityBoundaryReceipt =
+  AuthorityBoundary.mkFailClosedAuthorityBoundaryReceipt
+    "runtime replay authority boundary receipt"
+    AuthorityBoundary.runtimeBoundaryDomain
+    AuthorityBoundary.runtimeAuthorityClaim
+    CandidateOnly.rowCandidateKind
+    CandidateOnly.rowCandidateOnlyStatus
+    "runtime replay remains candidate-only and fail-closed"
+    "runtime replay authority and blocked authority kinds remain false"
+    "DASHI.Promotion.EmpiricalRuntimeReplayAdapter"
+
+record EmpiricalRuntimeReplayAuthorityBoundaryCore : Setω where
+  constructor mkEmpiricalRuntimeReplayAuthorityBoundaryCore
+  field
+    runtimeReplayValidationReport :
+      EmpiricalRuntimeValidationReport
+
+    runtimeReplayAuthorityBoundaryReceipt :
+      AuthorityBoundary.AuthorityBoundaryReceipt
+
+    runtimeReplayAuthorityBoundaryReceiptIsCanonical :
+      runtimeReplayAuthorityBoundaryReceipt ≡
+      canonicalRuntimeReplayAuthorityBoundaryReceipt
+
+    runtimeReplayAuthorityBoundaryReceiptDomainMatches :
+      AuthorityBoundary.receiptDomain runtimeReplayAuthorityBoundaryReceipt
+      ≡
+      AuthorityBoundary.runtimeBoundaryDomain
+
+    runtimeReplayAuthorityBoundaryReceiptClaimKindMatches :
+      AuthorityBoundary.receiptClaimKind
+        runtimeReplayAuthorityBoundaryReceipt
+      ≡
+      AuthorityBoundary.runtimeAuthorityClaim
+
+    runtimeReplayAuthorityBoundaryReceiptClaimAuthorityKindMatches :
+      AuthorityBoundary.receiptClaimAuthorityKind
+        runtimeReplayAuthorityBoundaryReceipt
+      ≡
+      AuthorityNA.runtimeAuthority
+
+    runtimeReplayAuthorityBoundaryCandidateOnlyIsTrue :
+      CandidateOnly.candidateOnly
+        (AuthorityBoundary.receiptCandidateRow
+          runtimeReplayAuthorityBoundaryReceipt)
+      ≡
+      true
+
+    runtimeReplayAuthorityBoundaryCandidatePromotedIsFalse :
+      CandidateOnly.promoted
+        (AuthorityBoundary.receiptCandidateRow
+          runtimeReplayAuthorityBoundaryReceipt)
+      ≡
+      false
+
+    runtimeReplayAuthorityBoundaryCandidateNoTruthAuthority :
+      CandidateOnly.carriesTruthAuthority
+        (AuthorityBoundary.receiptCandidateRow
+          runtimeReplayAuthorityBoundaryReceipt)
+      ≡
+      false
+
+    runtimeReplayAuthorityBoundaryCandidateNoSupportAuthority :
+      CandidateOnly.carriesSupportAuthority
+        (AuthorityBoundary.receiptCandidateRow
+          runtimeReplayAuthorityBoundaryReceipt)
+      ≡
+      false
+
+    runtimeReplayAuthorityBoundaryCandidateNoAdmissibilityAuthority :
+      CandidateOnly.carriesAdmissibilityAuthority
+        (AuthorityBoundary.receiptCandidateRow
+          runtimeReplayAuthorityBoundaryReceipt)
+      ≡
+      false
+
+    runtimeReplayAuthorityBoundaryCandidateNoTradingAuthority :
+      CandidateOnly.carriesTradingAuthority
+        (AuthorityBoundary.receiptCandidateRow
+          runtimeReplayAuthorityBoundaryReceipt)
+      ≡
+      false
+
+    runtimeReplayAuthorityBoundaryCandidateNoRuntimeAuthority :
+      CandidateOnly.carriesRuntimeAuthority
+        (AuthorityBoundary.receiptCandidateRow
+          runtimeReplayAuthorityBoundaryReceipt)
+      ≡
+      false
+
+    runtimeReplayAuthorityBoundaryCandidateNoTheoremAuthority :
+      CandidateOnly.carriesTheoremAuthority
+        (AuthorityBoundary.receiptCandidateRow
+          runtimeReplayAuthorityBoundaryReceipt)
+      ≡
+      false
+
+    runtimeReplayAuthorityBoundaryBlockedAuthorityKinds :
+      List AuthorityNA.AuthorityKind
+
+    runtimeReplayAuthorityBoundaryBlockedAuthorityKindsIsCanonical :
+      runtimeReplayAuthorityBoundaryBlockedAuthorityKinds ≡
+      AuthorityBoundary.canonicalBlockedAuthorityKinds
+
+    runtimeReplayAuthorityBoundaryBlockedAuthorityKindsCount :
+      Nat
+
+    runtimeReplayAuthorityBoundaryBlockedAuthorityKindsCountIsCanonical :
+      runtimeReplayAuthorityBoundaryBlockedAuthorityKindsCount ≡
+      AuthorityBoundary.canonicalBlockedAuthorityKindCount
+
+    runtimeReplayAuthorityBoundaryBundlePromotesAnyAuthorityIsFalse :
+      AuthorityNA.promotesAnyAuthority
+        (AuthorityBoundary.receiptAuthorityBundle
+          runtimeReplayAuthorityBoundaryReceipt)
+      ≡
+      false
+
+    runtimeReplayAuthorityBoundaryBlockedAuthorityKindsFalse :
+      AuthorityNA.AllAuthorityKindsFalse
+        (AuthorityBoundary.receiptAuthorityBundle
+          runtimeReplayAuthorityBoundaryReceipt)
+        runtimeReplayAuthorityBoundaryBlockedAuthorityKinds
+
+    runtimeReplayAuthorityBoundaryPromotedIsFalse :
+      AuthorityBoundary.receiptBoundaryPromoted
+        runtimeReplayAuthorityBoundaryReceipt
+      ≡
+      false
+
+open EmpiricalRuntimeReplayAuthorityBoundaryCore public
+
+canonicalEmpiricalRuntimeReplayAuthorityBoundaryCore :
+  EmpiricalRuntimeReplayAuthorityBoundaryCore
+canonicalEmpiricalRuntimeReplayAuthorityBoundaryCore = record
+  { runtimeReplayValidationReport =
+      canonicalEmpiricalRuntimeValidationReport
+  ; runtimeReplayAuthorityBoundaryReceipt =
+      canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryReceiptIsCanonical =
+      refl
+  ; runtimeReplayAuthorityBoundaryReceiptDomainMatches =
+      refl
+  ; runtimeReplayAuthorityBoundaryReceiptClaimKindMatches =
+      refl
+  ; runtimeReplayAuthorityBoundaryReceiptClaimAuthorityKindMatches =
+      refl
+  ; runtimeReplayAuthorityBoundaryCandidateOnlyIsTrue =
+      AuthorityBoundary.authorityBoundaryCandidateOnlyIsTrue
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryCandidatePromotedIsFalse =
+      AuthorityBoundary.authorityBoundaryCandidatePromotedIsFalse
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryCandidateNoTruthAuthority =
+      AuthorityBoundary.authorityBoundaryCandidateNoTruthAuthority
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryCandidateNoSupportAuthority =
+      AuthorityBoundary.authorityBoundaryCandidateNoSupportAuthority
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryCandidateNoAdmissibilityAuthority =
+      AuthorityBoundary.authorityBoundaryCandidateNoAdmissibilityAuthority
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryCandidateNoTradingAuthority =
+      AuthorityBoundary.authorityBoundaryCandidateNoTradingAuthority
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryCandidateNoRuntimeAuthority =
+      AuthorityBoundary.authorityBoundaryCandidateNoRuntimeAuthority
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryCandidateNoTheoremAuthority =
+      AuthorityBoundary.authorityBoundaryCandidateNoTheoremAuthority
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryBlockedAuthorityKinds =
+      AuthorityBoundary.receiptBlockedAuthorityKinds
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryBlockedAuthorityKindsIsCanonical =
+      refl
+  ; runtimeReplayAuthorityBoundaryBlockedAuthorityKindsCount =
+      AuthorityBoundary.receiptBlockedAuthorityKindsCount
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryBlockedAuthorityKindsCountIsCanonical =
+      refl
+  ; runtimeReplayAuthorityBoundaryBundlePromotesAnyAuthorityIsFalse =
+      AuthorityBoundary.authorityBoundaryBundlePromotesAnyAuthorityIsFalse
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryBlockedAuthorityKindsFalse =
+      AuthorityBoundary.authorityBoundaryBlockedAuthorityKindsFalse
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  ; runtimeReplayAuthorityBoundaryPromotedIsFalse =
+      AuthorityBoundary.receiptBoundaryPromotedIsFalse
+        canonicalRuntimeReplayAuthorityBoundaryReceipt
+  }

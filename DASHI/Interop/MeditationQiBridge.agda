@@ -15,6 +15,7 @@ import DASHI.Core.FormalLensQualificationCore as FormalLensCore
 import DASHI.Core.OperatorShapeNonAuthorityCore as OperatorShapeNA
 import DASHI.Interop.InterMediaCarrierBridge as IM
 import DASHI.Interop.QiCarrierFieldBridge as Qi
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundaryCore
 
 open FormalLensCore
   using
@@ -744,6 +745,98 @@ canonicalSweetgrassMeditationGate : SweetgrassMeditationGate
 canonicalSweetgrassMeditationGate =
   sweetgrassMeditationGate true false false refl refl refl
 
+record MeditationAuthorityBoundarySurface : Set where
+  constructor meditationAuthorityBoundarySurface
+  field
+    authorityBoundarySurfaceReceipt :
+      AuthorityBoundaryCore.AuthorityBoundaryReceipt
+
+    authorityBoundarySurfaceReceiptIsCanonical :
+      authorityBoundarySurfaceReceipt ≡
+      AuthorityBoundaryCore.canonicalRuntimeAuthorityBoundaryReceipt
+
+    authorityBoundarySurfaceCandidateOnlyTrue :
+      CandidateOnly.candidateOnly
+        (AuthorityBoundaryCore.receiptCandidateRow
+          authorityBoundarySurfaceReceipt)
+      ≡ true
+
+    authorityBoundarySurfaceBundlePromotesAnyAuthorityFalse :
+      AuthorityNA.promotesAnyAuthority
+        (AuthorityBoundaryCore.receiptAuthorityBundle
+          authorityBoundarySurfaceReceipt)
+      ≡ false
+
+    authorityBoundarySurfacePromoted :
+      Bool
+
+    authorityBoundarySurfacePromotedIsFalse :
+      authorityBoundarySurfacePromoted ≡ false
+
+    authorityBoundarySurfaceBlockedAuthorityKinds :
+      List AuthorityNA.AuthorityKind
+
+    authorityBoundarySurfaceBlockedAuthorityKindsAreCanonical :
+      authorityBoundarySurfaceBlockedAuthorityKinds ≡
+      AuthorityNA.canonicalAuthorityKinds
+
+    authorityBoundarySurfaceBlockedAuthorityKindsFalse :
+      AuthorityNA.AllAuthorityKindsFalse
+        (AuthorityBoundaryCore.receiptAuthorityBundle
+          authorityBoundarySurfaceReceipt)
+        authorityBoundarySurfaceBlockedAuthorityKinds
+
+    authorityBoundarySurfaceTruthAuthorityPromoted :
+      Bool
+
+    authorityBoundarySurfaceTruthAuthorityPromotedIsFalse :
+      authorityBoundarySurfaceTruthAuthorityPromoted ≡ false
+
+    authorityBoundarySurfaceClinicalAuthorityPromoted :
+      Bool
+
+    authorityBoundarySurfaceClinicalAuthorityPromotedIsFalse :
+      authorityBoundarySurfaceClinicalAuthorityPromoted ≡ false
+
+    authorityBoundarySurfaceMetaphysicalAuthorityPromoted :
+      Bool
+
+    authorityBoundarySurfaceMetaphysicalAuthorityPromotedIsFalse :
+      authorityBoundarySurfaceMetaphysicalAuthorityPromoted ≡ false
+
+    authorityBoundarySurfaceReciprocalPracticeAuthorityPromoted :
+      Bool
+
+    authorityBoundarySurfaceReciprocalPracticeAuthorityPromotedIsFalse :
+      authorityBoundarySurfaceReciprocalPracticeAuthorityPromoted ≡ false
+
+open MeditationAuthorityBoundarySurface public
+
+canonicalMeditationAuthorityBoundarySurface :
+  MeditationAuthorityBoundarySurface
+canonicalMeditationAuthorityBoundarySurface =
+  meditationAuthorityBoundarySurface
+    AuthorityBoundaryCore.canonicalRuntimeAuthorityBoundaryReceipt
+    refl
+    (AuthorityBoundaryCore.authorityBoundaryCandidateOnlyIsTrue
+      AuthorityBoundaryCore.canonicalRuntimeAuthorityBoundaryReceipt)
+    (AuthorityBoundaryCore.authorityBoundaryBundlePromotesAnyAuthorityIsFalse
+      AuthorityBoundaryCore.canonicalRuntimeAuthorityBoundaryReceipt)
+    false
+    refl
+    AuthorityNA.canonicalAuthorityKinds
+    refl
+    (AuthorityBoundaryCore.authorityBoundaryBlockedAuthorityKindsFalse
+      AuthorityBoundaryCore.canonicalRuntimeAuthorityBoundaryReceipt)
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+
 record MeditationQiBridgeReceipt : Set where
   constructor meditationQiBridgeReceipt
   field
@@ -1325,3 +1418,131 @@ canonicalMeditationQiTruthAuthorityFalse :
   truthAuthorityPromoted canonicalMeditationQiBridgeReceipt ≡ false
 canonicalMeditationQiTruthAuthorityFalse =
   refl
+
+canonicalMeditationAuthorityBoundaryReceipt :
+  AuthorityBoundaryCore.AuthorityBoundaryReceipt
+canonicalMeditationAuthorityBoundaryReceipt =
+  authorityBoundarySurfaceReceipt canonicalMeditationAuthorityBoundarySurface
+
+canonicalMeditationAuthorityBoundaryReceiptIsCanonical :
+  canonicalMeditationAuthorityBoundaryReceipt ≡
+  AuthorityBoundaryCore.canonicalRuntimeAuthorityBoundaryReceipt
+canonicalMeditationAuthorityBoundaryReceiptIsCanonical =
+  authorityBoundarySurfaceReceiptIsCanonical
+    canonicalMeditationAuthorityBoundarySurface
+
+canonicalMeditationAuthorityBoundaryReceiptCandidateOnlyTrue :
+  CandidateOnly.candidateOnly
+    (AuthorityBoundaryCore.receiptCandidateRow
+      canonicalMeditationAuthorityBoundaryReceipt)
+  ≡
+  true
+canonicalMeditationAuthorityBoundaryReceiptCandidateOnlyTrue =
+  AuthorityBoundaryCore.authorityBoundaryCandidateOnlyIsTrue
+    canonicalMeditationAuthorityBoundaryReceipt
+
+canonicalMeditationAuthorityBoundaryReceiptBundlePromotesAnyAuthorityFalse :
+  AuthorityNA.promotesAnyAuthority
+    (AuthorityBoundaryCore.receiptAuthorityBundle
+      canonicalMeditationAuthorityBoundaryReceipt)
+  ≡
+  false
+canonicalMeditationAuthorityBoundaryReceiptBundlePromotesAnyAuthorityFalse =
+  AuthorityBoundaryCore.authorityBoundaryBundlePromotesAnyAuthorityIsFalse
+    canonicalMeditationAuthorityBoundaryReceipt
+
+canonicalMeditationAuthorityBoundaryReceiptPromotedFalse :
+  AuthorityBoundaryCore.receiptBoundaryPromoted
+    canonicalMeditationAuthorityBoundaryReceipt
+  ≡
+  false
+canonicalMeditationAuthorityBoundaryReceiptPromotedFalse =
+  AuthorityBoundaryCore.receiptBoundaryPromotedIsFalse
+    canonicalMeditationAuthorityBoundaryReceipt
+
+canonicalMeditationAuthorityBoundaryReceiptBlockedKindsFalse :
+  AuthorityNA.AllAuthorityKindsFalse
+    (AuthorityBoundaryCore.receiptAuthorityBundle
+      canonicalMeditationAuthorityBoundaryReceipt)
+    (AuthorityBoundaryCore.receiptBlockedAuthorityKinds
+      canonicalMeditationAuthorityBoundaryReceipt)
+canonicalMeditationAuthorityBoundaryReceiptBlockedKindsFalse =
+  AuthorityBoundaryCore.receiptBlockedAuthorityKindsFalse
+    canonicalMeditationAuthorityBoundaryReceipt
+
+canonicalMeditationAuthorityBoundaryCandidateOnlyTrue :
+  CandidateOnly.candidateOnly
+    (AuthorityBoundaryCore.receiptCandidateRow
+      canonicalMeditationAuthorityBoundaryReceipt)
+  ≡
+  true
+canonicalMeditationAuthorityBoundaryCandidateOnlyTrue =
+  authorityBoundarySurfaceCandidateOnlyTrue
+    canonicalMeditationAuthorityBoundarySurface
+
+canonicalMeditationAuthorityBoundaryBundlePromotesAnyAuthorityFalse :
+  AuthorityNA.promotesAnyAuthority
+    (AuthorityBoundaryCore.receiptAuthorityBundle
+      canonicalMeditationAuthorityBoundaryReceipt)
+  ≡
+  false
+canonicalMeditationAuthorityBoundaryBundlePromotesAnyAuthorityFalse =
+  authorityBoundarySurfaceBundlePromotesAnyAuthorityFalse
+    canonicalMeditationAuthorityBoundarySurface
+
+canonicalMeditationAuthorityBoundaryPromotedFalse :
+  authorityBoundarySurfacePromoted canonicalMeditationAuthorityBoundarySurface ≡ false
+canonicalMeditationAuthorityBoundaryPromotedFalse =
+  authorityBoundarySurfacePromotedIsFalse
+    canonicalMeditationAuthorityBoundarySurface
+
+canonicalMeditationAuthorityBoundaryBlockedKindsFalse :
+  AuthorityNA.AllAuthorityKindsFalse
+    (AuthorityBoundaryCore.receiptAuthorityBundle
+      canonicalMeditationAuthorityBoundaryReceipt)
+    (authorityBoundarySurfaceBlockedAuthorityKinds
+      canonicalMeditationAuthorityBoundarySurface)
+canonicalMeditationAuthorityBoundaryBlockedKindsFalse =
+  authorityBoundarySurfaceBlockedAuthorityKindsFalse
+    canonicalMeditationAuthorityBoundarySurface
+
+canonicalMeditationAuthorityBoundaryBlockedKindsAreCanonical :
+  authorityBoundarySurfaceBlockedAuthorityKinds
+    canonicalMeditationAuthorityBoundarySurface
+  ≡
+  AuthorityNA.canonicalAuthorityKinds
+canonicalMeditationAuthorityBoundaryBlockedKindsAreCanonical =
+  authorityBoundarySurfaceBlockedAuthorityKindsAreCanonical
+    canonicalMeditationAuthorityBoundarySurface
+
+canonicalMeditationAuthorityBoundaryTruthFalse :
+  authorityBoundarySurfaceTruthAuthorityPromoted
+    canonicalMeditationAuthorityBoundarySurface ≡ false
+canonicalMeditationAuthorityBoundaryTruthFalse =
+  authorityBoundarySurfaceTruthAuthorityPromotedIsFalse
+    canonicalMeditationAuthorityBoundarySurface
+
+canonicalMeditationAuthorityBoundaryClinicalFalse :
+  authorityBoundarySurfaceClinicalAuthorityPromoted
+    canonicalMeditationAuthorityBoundarySurface ≡ false
+canonicalMeditationAuthorityBoundaryClinicalFalse =
+  authorityBoundarySurfaceClinicalAuthorityPromotedIsFalse
+    canonicalMeditationAuthorityBoundarySurface
+
+canonicalMeditationAuthorityBoundaryMetaphysicalFalse :
+  authorityBoundarySurfaceMetaphysicalAuthorityPromoted
+    canonicalMeditationAuthorityBoundarySurface
+  ≡
+  false
+canonicalMeditationAuthorityBoundaryMetaphysicalFalse =
+  authorityBoundarySurfaceMetaphysicalAuthorityPromotedIsFalse
+    canonicalMeditationAuthorityBoundarySurface
+
+canonicalMeditationAuthorityBoundaryReciprocalPracticeFalse :
+  authorityBoundarySurfaceReciprocalPracticeAuthorityPromoted
+    canonicalMeditationAuthorityBoundarySurface
+  ≡
+  false
+canonicalMeditationAuthorityBoundaryReciprocalPracticeFalse =
+  authorityBoundarySurfaceReciprocalPracticeAuthorityPromotedIsFalse
+    canonicalMeditationAuthorityBoundarySurface

@@ -387,8 +387,13 @@ def candidate_for(path: Path) -> Candidate | None:
 
 
 def candidate_sort_key(candidate: Candidate) -> tuple[int, int, str]:
+    already_adapted_rank = (
+        1
+        if any(note.startswith("already consumes AuthorityBoundaryCore") for note in candidate.notes)
+        else 0
+    )
     risk_rank = {"low": 0, "medium": 1, "avoid": 2}[candidate.risk]
-    return (risk_rank, -candidate.score, candidate.file)
+    return (already_adapted_rank, risk_rank, -candidate.score, candidate.file)
 
 
 def as_jsonable(candidate: Candidate) -> dict[str, object]:

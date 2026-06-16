@@ -11,6 +11,8 @@ import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
 import DASHI.Core.BridgeRequirementCore as BridgeReq
 import DASHI.Core.CandidateOnlyCore as CandidateOnly
 import DASHI.Core.EmptyPromotionCore as EmptyPromotion
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
+import DASHI.Core.GenericReceipt as GenericReceipt
 
 ------------------------------------------------------------------------
 -- Generic inter-media bridge.
@@ -325,6 +327,61 @@ record InterMediaCarrierBridgeReceipt : Set where
       ≡
       EmptyPromotion.canonicalEmptyPromotionReceipt
 
+    authorityBoundaryCoreAdapter :
+      AuthorityBoundary.AuthorityBoundaryReceipt
+
+    authorityBoundaryCoreAdapterIsCanonical :
+      authorityBoundaryCoreAdapter
+      ≡
+      AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt
+
+    authorityBoundaryCoreAdapterCandidateReceipt :
+      CandidateOnly.CandidateOnlyReceipt
+        (AuthorityBoundary.receiptCandidateRow
+          authorityBoundaryCoreAdapter)
+
+    authorityBoundaryCoreAdapterCandidateReceiptIsCanonical :
+      authorityBoundaryCoreAdapterCandidateReceipt
+      ≡
+      AuthorityBoundary.receiptCandidateReceipt
+        authorityBoundaryCoreAdapter
+
+    authorityBoundaryCoreAdapterGenericReceipt :
+      GenericReceipt.GenericReceipt
+
+    authorityBoundaryCoreAdapterGenericReceiptIsCanonical :
+      authorityBoundaryCoreAdapterGenericReceipt
+      ≡
+      AuthorityBoundary.authorityBoundaryGenericReceipt
+        authorityBoundaryCoreAdapter
+
+    authorityBoundaryCoreAdapterBlockedAuthorityKinds :
+      List AuthorityNA.AuthorityKind
+
+    authorityBoundaryCoreAdapterBlockedAuthorityKindsAreCanonical :
+      authorityBoundaryCoreAdapterBlockedAuthorityKinds
+      ≡
+      AuthorityBoundary.canonicalBlockedAuthorityKinds
+
+    authorityBoundaryCoreAdapterBlockedAuthorityKindsCount :
+      Nat
+
+    authorityBoundaryCoreAdapterBlockedAuthorityKindsCountIsCanonical :
+      authorityBoundaryCoreAdapterBlockedAuthorityKindsCount
+      ≡
+      AuthorityBoundary.canonicalBlockedAuthorityKindCount
+
+    authorityBoundaryCoreAdapterBlockedAuthorityKindsFalse :
+      AuthorityNA.AllAuthorityKindsFalse
+        (AuthorityBoundary.receiptAuthorityBundle authorityBoundaryCoreAdapter)
+        authorityBoundaryCoreAdapterBlockedAuthorityKinds
+
+    authorityBoundaryCoreAdapterBoundaryPromoted :
+      Bool
+
+    authorityBoundaryCoreAdapterBoundaryPromotedIsFalse :
+      authorityBoundaryCoreAdapterBoundaryPromoted ≡ false
+
     bridgeStatus :
       InterMediaBridgeStatus
 
@@ -403,6 +460,24 @@ canonicalInterMediaCarrierBridgeReceipt =
     refl
     EmptyPromotion.canonicalEmptyPromotionReceipt
     refl
+    AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt
+    refl
+    (AuthorityBoundary.receiptCandidateReceipt
+      AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt)
+    refl
+    (AuthorityBoundary.authorityBoundaryGenericReceipt
+      AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt)
+    refl
+    AuthorityBoundary.canonicalBlockedAuthorityKinds
+    refl
+    AuthorityBoundary.canonicalBlockedAuthorityKindCount
+    refl
+    (AuthorityNA.proveAllAuthorityKindsFalse
+      (AuthorityBoundary.receiptAuthorityBundle
+        AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt)
+      AuthorityBoundary.canonicalBlockedAuthorityKinds)
+    false
+    refl
     interMediaBridge_candidateOnly
     canonicalInterMediaBridgeRows
     refl
@@ -466,6 +541,90 @@ canonicalInterMediaEmptyPromotionCoreEmpty :
   []
 canonicalInterMediaEmptyPromotionCoreEmpty =
   refl
+
+canonicalInterMediaAuthorityBoundaryCandidateOnlyTrue :
+  CandidateOnly.candidateOnly
+    (AuthorityBoundary.receiptCandidateRow
+      (authorityBoundaryCoreAdapter canonicalInterMediaCarrierBridgeReceipt))
+  ≡
+  true
+canonicalInterMediaAuthorityBoundaryCandidateOnlyTrue =
+  refl
+
+canonicalInterMediaAuthorityBoundaryCandidateReceiptIsCanonical :
+  authorityBoundaryCoreAdapterCandidateReceipt
+    canonicalInterMediaCarrierBridgeReceipt
+  ≡
+  AuthorityBoundary.receiptCandidateReceipt
+    (authorityBoundaryCoreAdapter canonicalInterMediaCarrierBridgeReceipt)
+canonicalInterMediaAuthorityBoundaryCandidateReceiptIsCanonical =
+  refl
+
+canonicalInterMediaAuthorityBoundaryGenericReceiptIsCanonical :
+  authorityBoundaryCoreAdapterGenericReceipt
+    canonicalInterMediaCarrierBridgeReceipt
+  ≡
+  AuthorityBoundary.authorityBoundaryGenericReceipt
+    (authorityBoundaryCoreAdapter canonicalInterMediaCarrierBridgeReceipt)
+canonicalInterMediaAuthorityBoundaryGenericReceiptIsCanonical =
+  refl
+
+canonicalInterMediaAuthorityBoundaryBlockedKindsAreCanonical :
+  authorityBoundaryCoreAdapterBlockedAuthorityKinds
+    canonicalInterMediaCarrierBridgeReceipt
+  ≡
+  AuthorityBoundary.canonicalBlockedAuthorityKinds
+canonicalInterMediaAuthorityBoundaryBlockedKindsAreCanonical =
+  authorityBoundaryCoreAdapterBlockedAuthorityKindsAreCanonical
+    canonicalInterMediaCarrierBridgeReceipt
+
+canonicalInterMediaAuthorityBoundaryBlockedKindsFalse :
+  AuthorityNA.AllAuthorityKindsFalse
+    (AuthorityBoundary.receiptAuthorityBundle
+      (authorityBoundaryCoreAdapter canonicalInterMediaCarrierBridgeReceipt))
+    (authorityBoundaryCoreAdapterBlockedAuthorityKinds
+      canonicalInterMediaCarrierBridgeReceipt)
+canonicalInterMediaAuthorityBoundaryBlockedKindsFalse =
+  authorityBoundaryCoreAdapterBlockedAuthorityKindsFalse
+    canonicalInterMediaCarrierBridgeReceipt
+
+canonicalInterMediaAuthorityBoundaryBlockedKindsCountIsCanonical :
+  authorityBoundaryCoreAdapterBlockedAuthorityKindsCount
+    canonicalInterMediaCarrierBridgeReceipt
+  ≡
+  AuthorityBoundary.canonicalBlockedAuthorityKindCount
+canonicalInterMediaAuthorityBoundaryBlockedKindsCountIsCanonical =
+  refl
+
+canonicalInterMediaAuthorityBoundaryPromotedFalse :
+  AuthorityBoundary.receiptBoundaryPromoted
+    (authorityBoundaryCoreAdapter canonicalInterMediaCarrierBridgeReceipt)
+  ≡
+  false
+canonicalInterMediaAuthorityBoundaryPromotedFalse =
+  refl
+
+canonicalInterMediaAuthorityBoundaryClaimKindMatchesDomain :
+  AuthorityBoundary.receiptDomain
+    (authorityBoundaryCoreAdapter canonicalInterMediaCarrierBridgeReceipt)
+  ≡
+  AuthorityBoundary.authorityBoundaryClaimDomain
+    (AuthorityBoundary.receiptClaimKind
+      (authorityBoundaryCoreAdapter canonicalInterMediaCarrierBridgeReceipt))
+canonicalInterMediaAuthorityBoundaryClaimKindMatchesDomain =
+  AuthorityBoundary.receiptClaimDomainMatches
+    (authorityBoundaryCoreAdapter canonicalInterMediaCarrierBridgeReceipt)
+
+canonicalInterMediaAuthorityBoundaryClaimKindMatchesAuthorityKind :
+  AuthorityBoundary.receiptClaimAuthorityKind
+    (authorityBoundaryCoreAdapter canonicalInterMediaCarrierBridgeReceipt)
+  ≡
+  AuthorityBoundary.authorityBoundaryClaimAuthorityKind
+    (AuthorityBoundary.receiptClaimKind
+      (authorityBoundaryCoreAdapter canonicalInterMediaCarrierBridgeReceipt))
+canonicalInterMediaAuthorityBoundaryClaimKindMatchesAuthorityKind =
+  AuthorityBoundary.receiptClaimAuthorityKindMatches
+    (authorityBoundaryCoreAdapter canonicalInterMediaCarrierBridgeReceipt)
 
 canonicalSpatialToAttentionCandidateOnly :
   candidateOnly spatialToAttentionBridgeRow ≡ true

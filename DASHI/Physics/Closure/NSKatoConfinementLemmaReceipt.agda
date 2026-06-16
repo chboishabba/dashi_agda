@@ -15,6 +15,8 @@ open import Data.Empty using (⊥)
 -- analytic vocabulary for the Kato identity route and confinement radius
 -- shape: Kato identity, distinct eigenvalue gaps, λ2 < 0, negative cross
 -- derivative K, and the formal Taylor/minimax radius r* = δ0 / K.
+-- It also records the corrected distinction between an enstrophy maximum
+-- and a true vortex-core target, plus the gap-preservation candidate shape.
 --
 -- No theorem promotion is performed here.  In particular, Miller-criterion
 -- promotion is explicitly blocked via named blockers and false promotion
@@ -29,6 +31,11 @@ data NSKatoConfinementShape : Set where
   lambda2NegativeAtCore : NSKatoConfinementShape
   negativeCrossDerivativeK : NSKatoConfinementShape
   confinementRadiusTaylorMinimaxFormula : NSKatoConfinementShape
+  enstrophyMaximumNotNecessarilyVortexCore : NSKatoConfinementShape
+  vortexCoreTargetSelectionRequired : NSKatoConfinementShape
+  katoAlignmentBCondition : NSKatoConfinementShape
+  thirdOrderRemainderMCondition : NSKatoConfinementShape
+  gap12LowerBoundShape : NSKatoConfinementShape
 
 canonicalNSKatoConfinementShape : List NSKatoConfinementShape
 canonicalNSKatoConfinementShape =
@@ -37,18 +44,27 @@ canonicalNSKatoConfinementShape =
   ∷ lambda2NegativeAtCore
   ∷ negativeCrossDerivativeK
   ∷ confinementRadiusTaylorMinimaxFormula
+  ∷ enstrophyMaximumNotNecessarilyVortexCore
+  ∷ vortexCoreTargetSelectionRequired
+  ∷ katoAlignmentBCondition
+  ∷ thirdOrderRemainderMCondition
+  ∷ gap12LowerBoundShape
   ∷ []
 
 data NSKatoConfinementMillerBlocker : Set where
-  millerCriterionGapCertificateMissing : NSKatoConfinementMillerBlocker
-  millerCriterionTaylorMinimaxControlMissing : NSKatoConfinementMillerBlocker
-  millerCriterionNoIndependentMillerTheorem : NSKatoConfinementMillerBlocker
+  targetSelectorMeasurementMissing : NSKatoConfinementMillerBlocker
+  targetSelectorMeasurementRequired : NSKatoConfinementMillerBlocker
+  conditionCAtTrueVortexCoreNotYetMeasured : NSKatoConfinementMillerBlocker
+  conditionDH3RemainderControlMissing : NSKatoConfinementMillerBlocker
+  noMillerBridge : NSKatoConfinementMillerBlocker
 
 canonicalNSKatoConfinementMillerBlockers : List NSKatoConfinementMillerBlocker
 canonicalNSKatoConfinementMillerBlockers =
-  millerCriterionGapCertificateMissing
-  ∷ millerCriterionTaylorMinimaxControlMissing
-  ∷ millerCriterionNoIndependentMillerTheorem
+  targetSelectorMeasurementMissing
+  ∷ targetSelectorMeasurementRequired
+  ∷ conditionCAtTrueVortexCoreNotYetMeasured
+  ∷ conditionDH3RemainderControlMissing
+  ∷ noMillerBridge
   ∷ []
 
 data NSKatoConfinementPromotion : Set where
@@ -68,19 +84,43 @@ eigenvalueGapShapeText =
 
 lambda2NegativeText : String
 lambda2NegativeText =
-  "Core sign gate is recorded as λ2 < 0 for the confined vortex-core region."
+  "Core sign gate is recorded as lambda2<=-delta0 at the true vortex-core target; this receipt does not claim the current enstrophy maximum already satisfies it."
 
 crossDerivativeNegativeText : String
 crossDerivativeNegativeText =
-  "Cross-derivative curvature is recorded as K = T e1 (T e2 λ2) with the shape requirement K < 0."
+  "Cross-derivative curvature is recorded as cross derivative<=-delta, with the K = T e1 (T e2 λ2) notation kept as a shape tag only."
 
 confinementRadiusText : String
 confinementRadiusText =
   "Confinement radius is recorded as a shape formula only: r* = delta0 / K."
 
+enstrophyMaximumText : String
+enstrophyMaximumText =
+  "Enstrophy maximum is recorded as not necessarily identical to the true vortex-core target."
+
+vortexCoreTargetSelectionText : String
+vortexCoreTargetSelectionText =
+  "A true vortex-core target selector is required and is not yet supplied by this receipt."
+
+katoAlignmentBConditionText : String
+katoAlignmentBConditionText =
+  "Kato alignment condition B is recorded as a required gate at the true vortex-core target."
+
+thirdOrderRemainderMConditionText : String
+thirdOrderRemainderMConditionText =
+  "Third-order remainder condition M is recorded as a required gate; H3 remainder control is not yet measured."
+
+gap12LowerBoundShapeText : String
+gap12LowerBoundShapeText =
+  "Gap-preservation candidate shape: if lambda2<=-delta0, cross derivative<=-delta, B>=b0>0, and M<delta at a true vortex-core target, then gap12 >= b0/(delta+M), by the Kato identity contradiction on gap collapse."
+
+theoremCandidateText : String
+theoremCandidateText =
+  gap12LowerBoundShapeText
+
 millerBlockerText : String
 millerBlockerText =
-  "Miller-criterion promotion is blocked until an independent Miller-style theorem, gap certificate, and Taylor/minimax control are provided."
+  "Promotion is blocked until target-selector measurement, condition C at the true vortex core, condition D/H3 remainder control, and a Miller bridge are provided."
 
 record NSKatoConfinementLemmaORCSLPGF : Set where
   constructor mkNSKatoConfinementLemmaORCSLPGF
@@ -91,19 +131,19 @@ record NSKatoConfinementLemmaORCSLPGF : Set where
 
     R : String
     RIsCanonical : R ≡
-      "R: Record shape-only Kato identity, distinct eigenvalue gaps, λ2 < 0, K = T e1 (T e2 λ2) < 0, and r* = delta0 / K while keeping Miller-criterion promotion explicit blockers."
+      "R: Record shape-only Kato identity, distinct eigenvalue gaps, enstrophy maximum not necessarily true vortex core, true vortex-core target selection required, λ2 gate, B gate, M gate, gap12 lower-bound candidate, and explicit blockers."
 
     C : String
     CIsCanonical : C ≡
-      "C: This module exports route/shape tokens, blocker ledger, and explicit fail-closed promotion guards."
+      "C: This module exports route/shape tokens, blocker ledger, and explicit fail-closed promotion guards; it does not claim the enstrophy maximum already satisfies the true vortex-core target gate."
 
     S : String
     SIsCanonical : S ≡
-      "S: Kato identity=true; distinct-gap assumption=true; lambda2<0=true; K<0=true; r*=delta0/K recorded; Miller blockers recorded."
+      "S: Kato identity recorded; distinct-gap gate recorded; lambda2<=-delta0 gate recorded; cross-derivative gate recorded; B>=b0 gate recorded; M<delta gate recorded; gap12 lower-bound candidate recorded; blockers recorded."
 
     L : String
     LIsCanonical : L ≡
-      "L: Kato route -> gap separation -> λ2<0 -> K<0 -> formal confinement-radius output."
+      "L: Kato route -> true vortex-core target selection -> lambda2 gate -> B gate -> M gate -> gap12 lower-bound candidate."
 
     P : String
     PIsCanonical : P ≡
@@ -115,7 +155,7 @@ record NSKatoConfinementLemmaORCSLPGF : Set where
 
     F : String
     FIsCanonical : F ≡
-      "F: Promotion remains blocked by the explicit Miller blockers: gap certificate missing, minimax control missing, no independent Miller theorem."
+      "F: Promotion remains blocked by the explicit blockers: target selector measurement missing or required, condition C at true vortex core not yet measured, condition D/H3 remainder control missing, and no Miller bridge."
 
 record NSKatoConfinementLemmaReceipt : Setω where
   field
@@ -191,6 +231,66 @@ record NSKatoConfinementLemmaReceipt : Setω where
     confinementRadiusFormulaIsCanonical :
       confinementRadiusFormula ≡ confinementRadiusText
 
+    enstrophyMaximumShapeRecorded :
+      Bool
+
+    enstrophyMaximumShapeRecordedIsTrue :
+      enstrophyMaximumShapeRecorded ≡ true
+
+    enstrophyMaximumTextRecorded :
+      String
+
+    enstrophyMaximumTextRecordedIsCanonical :
+      enstrophyMaximumTextRecorded ≡ enstrophyMaximumText
+
+    vortexCoreTargetSelectionRecorded :
+      Bool
+
+    vortexCoreTargetSelectionRecordedIsTrue :
+      vortexCoreTargetSelectionRecorded ≡ true
+
+    vortexCoreTargetSelectionTextRecorded :
+      String
+
+    vortexCoreTargetSelectionTextRecordedIsCanonical :
+      vortexCoreTargetSelectionTextRecorded ≡ vortexCoreTargetSelectionText
+
+    katoAlignmentBConditionRecorded :
+      Bool
+
+    katoAlignmentBConditionRecordedIsTrue :
+      katoAlignmentBConditionRecorded ≡ true
+
+    katoAlignmentBConditionTextRecorded :
+      String
+
+    katoAlignmentBConditionTextRecordedIsCanonical :
+      katoAlignmentBConditionTextRecorded ≡ katoAlignmentBConditionText
+
+    thirdOrderRemainderMConditionRecorded :
+      Bool
+
+    thirdOrderRemainderMConditionRecordedIsTrue :
+      thirdOrderRemainderMConditionRecorded ≡ true
+
+    thirdOrderRemainderMConditionTextRecorded :
+      String
+
+    thirdOrderRemainderMConditionTextRecordedIsCanonical :
+      thirdOrderRemainderMConditionTextRecorded ≡ thirdOrderRemainderMConditionText
+
+    gap12LowerBoundShapeRecorded :
+      Bool
+
+    gap12LowerBoundShapeRecordedIsTrue :
+      gap12LowerBoundShapeRecorded ≡ true
+
+    gap12LowerBoundShapeTextRecorded :
+      String
+
+    gap12LowerBoundShapeTextRecordedIsCanonical :
+      gap12LowerBoundShapeTextRecorded ≡ gap12LowerBoundShapeText
+
     millerBlockers :
       List NSKatoConfinementMillerBlocker
 
@@ -202,6 +302,12 @@ record NSKatoConfinementLemmaReceipt : Setω where
 
     millerBlockerExplanationIsCanonical :
       millerBlockerExplanation ≡ millerBlockerText
+
+    theoremCandidate :
+      String
+
+    theoremCandidateIsCanonical :
+      theoremCandidate ≡ theoremCandidateText
 
     millerCriterionPromotion :
       Bool
@@ -244,19 +350,19 @@ canonicalNSKatoConfinementLemmaORCSLPGF =
   mkNSKatoConfinementLemmaORCSLPGF
     "O: Record a fail-closed Kato strain-eigenvalue Hessian identity and vortex-core confinement shape receipt."
     refl
-    "R: Record shape-only Kato identity, distinct eigenvalue gaps, λ2 < 0, K = T e1 (T e2 λ2) < 0, and r* = delta0 / K while keeping Miller-criterion promotion explicit blockers."
+    "R: Record shape-only Kato identity, distinct eigenvalue gaps, enstrophy maximum not necessarily true vortex core, true vortex-core target selection required, λ2 gate, B gate, M gate, gap12 lower-bound candidate, and explicit blockers."
     refl
-    "C: This module exports route/shape tokens, blocker ledger, and explicit fail-closed promotion guards."
+    "C: This module exports route/shape tokens, blocker ledger, and explicit fail-closed promotion guards; it does not claim the enstrophy maximum already satisfies the true vortex-core target gate."
     refl
-    "S: Kato identity=true; distinct-gap assumption=true; lambda2<0=true; K<0=true; r*=delta0/K recorded; Miller blockers recorded."
+    "S: Kato identity recorded; distinct-gap gate recorded; lambda2<=-delta0 gate recorded; cross-derivative gate recorded; B>=b0 gate recorded; M<delta gate recorded; gap12 lower-bound candidate recorded; blockers recorded."
     refl
-    "L: Kato route -> gap separation -> λ2<0 -> K<0 -> formal confinement-radius output."
+    "L: Kato route -> true vortex-core target selection -> lambda2 gate -> B gate -> M gate -> gap12 lower-bound candidate."
     refl
     "P: Keep this as a shape/receipt layer only. No Miller criterion theorem is promoted."
     refl
     "G: No Clay or terminal promotion and no fake local theorem promotion are introduced."
     refl
-    "F: Promotion remains blocked by the explicit Miller blockers: gap certificate missing, minimax control missing, no independent Miller theorem."
+    "F: Promotion remains blocked by the explicit blockers: target selector measurement missing or required, condition C at true vortex core not yet measured, condition D/H3 remainder control missing, and no Miller bridge."
     refl
 
 canonicalNSKatoConfinementLemmaReceipt :
@@ -311,6 +417,46 @@ canonicalNSKatoConfinementLemmaReceipt =
         confinementRadiusText
     ; confinementRadiusFormulaIsCanonical =
         refl
+    ; enstrophyMaximumShapeRecorded =
+        true
+    ; enstrophyMaximumShapeRecordedIsTrue =
+        refl
+    ; enstrophyMaximumTextRecorded =
+        enstrophyMaximumText
+    ; enstrophyMaximumTextRecordedIsCanonical =
+        refl
+    ; vortexCoreTargetSelectionRecorded =
+        true
+    ; vortexCoreTargetSelectionRecordedIsTrue =
+        refl
+    ; vortexCoreTargetSelectionTextRecorded =
+        vortexCoreTargetSelectionText
+    ; vortexCoreTargetSelectionTextRecordedIsCanonical =
+        refl
+    ; katoAlignmentBConditionRecorded =
+        true
+    ; katoAlignmentBConditionRecordedIsTrue =
+        refl
+    ; katoAlignmentBConditionTextRecorded =
+        katoAlignmentBConditionText
+    ; katoAlignmentBConditionTextRecordedIsCanonical =
+        refl
+    ; thirdOrderRemainderMConditionRecorded =
+        true
+    ; thirdOrderRemainderMConditionRecordedIsTrue =
+        refl
+    ; thirdOrderRemainderMConditionTextRecorded =
+        thirdOrderRemainderMConditionText
+    ; thirdOrderRemainderMConditionTextRecordedIsCanonical =
+        refl
+    ; gap12LowerBoundShapeRecorded =
+        true
+    ; gap12LowerBoundShapeRecordedIsTrue =
+        refl
+    ; gap12LowerBoundShapeTextRecorded =
+        gap12LowerBoundShapeText
+    ; gap12LowerBoundShapeTextRecordedIsCanonical =
+        refl
     ; millerBlockers =
         canonicalNSKatoConfinementMillerBlockers
     ; millerBlockersAreCanonical =
@@ -318,6 +464,10 @@ canonicalNSKatoConfinementLemmaReceipt =
     ; millerBlockerExplanation =
         millerBlockerText
     ; millerBlockerExplanationIsCanonical =
+        refl
+    ; theoremCandidate =
+        theoremCandidateText
+    ; theoremCandidateIsCanonical =
         refl
     ; millerCriterionPromotion =
         false
