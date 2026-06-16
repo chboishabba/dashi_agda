@@ -121,6 +121,14 @@ def main() -> int:
             "reusable core candidate audit",
             [sys.executable, "scripts/audit_reusable_core_candidates.py"],
         ),
+        (
+            "authority-boundary candidate audit",
+            [
+                sys.executable,
+                "scripts/audit_authority_boundary_candidates.py",
+                "--no-write",
+            ],
+        ),
     ]
 
     for target in AGDA_TARGETS:

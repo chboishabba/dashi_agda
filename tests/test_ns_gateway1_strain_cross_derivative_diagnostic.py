@@ -86,6 +86,18 @@ def script_supports_integral_conditions_flag() -> bool:
     return "--integral-conditions" in completed.stdout
 
 
+@lru_cache(maxsize=1)
+def script_supports_kato_alignment_flag() -> bool:
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPT), "--help"],
+        check=True,
+        capture_output=True,
+        cwd=REPO_ROOT,
+        text=True,
+    )
+    return "--kato-alignment" in completed.stdout
+
+
 def deterministic_velocity(n: int, amplitude: float = 0.75) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     x = np.linspace(0.0, 2.0 * np.pi, n, endpoint=False)
     X, Y, Z = np.meshgrid(x, x, x, indexing="ij")
@@ -184,6 +196,27 @@ def count_and_validate_finite_numeric_leaves(value: Any) -> int:
         assert np.isfinite(float(value)), f"non-finite numeric value: {value!r}"
         return 1
     return 0
+
+
+def assert_finite_numeric_vector(value: Any, *, expected_len: int) -> None:
+    assert isinstance(value, (list, tuple))
+    assert len(value) == expected_len, f"unexpected vector length for value: {value!r}"
+    assert count_and_validate_finite_numeric_leaves(value) == expected_len
+
+
+def assert_kato_alignment_payload(result: dict[str, Any]) -> None:
+    assert result["kato_alignment_enabled"] is True
+    assert_finite_numeric_vector(result["kato_alignment_directional_grad_e1_vector"], expected_len=3)
+    assert_finite_numeric_vector(result["kato_alignment_directional_grad_e2_vector"], expected_len=3)
+    for key in (
+        "kato_alignment_e2_dot_d_e1S_e1",
+        "kato_alignment_e2_dot_d_e2S_e1",
+        "kato_alignment_B",
+    ):
+        assert isinstance(result[key], (int, float, np.integer, np.floating))
+        assert np.isfinite(float(result[key])), f"non-finite numeric value for {key}: {result[key]!r}"
+    assert isinstance(result["kato_alignment_B_sign"], str)
+    assert result["kato_alignment_B_sign"], "expected non-empty kato alignment sign string"
 
 
 def parse_json_stdout(stdout: str) -> dict[str, Any]:
@@ -383,6 +416,8 @@ def test_cli_help_documents_fixture_npz_contract() -> None:
     assert "--field" in completed.stdout
     if script_supports_integral_conditions_flag():
         assert "--integral-conditions" in completed.stdout
+    if script_supports_kato_alignment_flag():
+        assert "--kato-alignment" in completed.stdout
 
 
 def test_cli_integral_conditions_on_synthetic_fixture_have_finite_numeric_outputs(
@@ -437,3 +472,45 @@ def test_cli_integral_conditions_on_synthetic_fixture_have_finite_numeric_output
         for value in integral_condition_items.values()
     )
     assert numeric_leaf_count > 0, "expected at least one finite numeric integral-condition output"
+
+
+def test_cli_kato_alignment_on_synthetic_fixture_has_finite_numeric_outputs(
+    tmp_path: Path,
+) -> None:
+    if not script_supports_kato_alignment_flag():
+        pytest.skip("script does not expose --kato-alignment yet")
+
+    n = 8
+    u, v, w = deterministic_velocity(n)
+    field_path = tmp_path / "fixture_style_velocity_for_kato_alignment.npz"
+    np.savez(
+        field_path,
+        u=u,
+        v=v,
+        w=w,
+        N=np.array(n, dtype=np.int64),
+        domain_length=np.array(2.0 * np.pi, dtype=np.float64),
+        grid_spacing=np.array((2.0 * np.pi) / n, dtype=np.float64),
+        amplitude=np.array(0.75, dtype=np.float64),
+        source=np.array("fixture-style-kato-alignment-cli-test"),
+    )
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--field",
+            str(field_path),
+            "--kato-alignment",
+        ],
+        check=True,
+        capture_output=True,
+        cwd=REPO_ROOT,
+        text=True,
+    )
+
+    result = parse_json_stdout(completed.stdout)
+    require_contract(result, expected_n=n)
+    assert result["source"] == f"npz:{field_path}"
+    assert result["field_metadata"]["npz_source"] == "fixture-style-kato-alignment-cli-test"
+    assert_kato_alignment_payload(result)

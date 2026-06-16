@@ -6,6 +6,15 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Authority-boundary audit workflow for `2026-06-17`: adds
+  `scripts/audit_authority_boundary_candidates.py` as a discovery-only
+  migration queue for authority-boundary, candidate-only, empty-promotion,
+  blocked-claim, bridge-required, and adapter-canonicality duplication. The
+  script emits ignored JSON/Markdown reports under
+  `artifacts/authority_boundary_audit/` and is wired into
+  `scripts/check_reusable_core_regression.py` with `--no-write`; it ranks
+  candidates but performs no Agda rewrites or promotions.
+
 - Six-lane formal-lens qualification tranche for `2026-06-16`: adds
   `DASHI.Core.FormalLensQualificationCore` as the reusable symbolic-rational
   lens qualification surface for Operator, Functional, Hamiltonian,
