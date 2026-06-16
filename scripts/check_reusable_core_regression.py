@@ -58,6 +58,10 @@ OPTIONAL_AGDA_TARGETS = [
     "DASHI/Biology/NeurochemicalTransmissionBridge.agda",
     "DASHI/Biology/NeurochemicalVocabularyReceipt.agda",
     "DASHI/Promotion/NeurochemicalAuthorityBoundary.agda",
+    "DASHI/Crypto/RSABatchSharedPrimeBoundary.agda",
+    "DASHI/Crypto/RSAEntropySourceStatisticalBoundary.agda",
+    "DASHI/Crypto/RSAIterationLeakBoundary.agda",
+    "DASHI/Crypto/RSAKeygenSourceBoundary.agda",
     "DASHI/Crypto/RSAVulnerabilityBoundary.agda",
     "DASHI/Crypto/RSABTResidueBraidHypervoxelBoundary.agda",
 ]
