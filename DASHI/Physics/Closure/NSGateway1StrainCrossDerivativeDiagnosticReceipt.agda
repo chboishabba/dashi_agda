@@ -324,10 +324,26 @@ record NSGateway1PressureHessianDiagnosticResult : Set where
       String
     qcritSign :
       String
+    pressureHessianCrossDerivative :
+      String
     lambda2CrossDerivative :
+      String
+    omegaNormSquaredCrossDerivative :
+      String
+    strainNormSquaredCrossDerivative :
+      String
+    localDecompositionTail :
+      String
+    vorticityDominanceMargin :
       String
     vorticityDominance :
       Bool
+    vorticityDominanceIsFalse :
+      vorticityDominance ≡ false
+    pressurePoissonConvention :
+      String
+    divergenceResidual :
+      String
     localToGlobalTheoremPromoted :
       Bool
     localToGlobalTheoremPromotedIsFalse :
@@ -348,17 +364,25 @@ canonicalPressureHessianDiagnosticResult :
 canonicalPressureHessianDiagnosticResult =
   mkNSGateway1PressureHessianDiagnosticResult
     "NS-GW-1 pressure-Hessian diagnostic result"
-    "Qcrit sign unpromoted; no local-to-global pressure-Hessian theorem"
+    "pressure_hessian_e1_e2_at_max negative on local FluidSim N=128 row; unpromoted"
+    "-20.59520372949974"
     (NSGateway1ResolutionSeriesReceipt.n128CrossDerivative
       canonicalResolutionSeriesReceipt)
-    true
+    "-87779.53406197317"
+    "-82468.7576414551"
+    "38558.395406739015"
+    "-77137.38601720752"
+    false
+    refl
+    "-Delta p = |S|^2 - 0.5*|omega|^2, zero-mean periodic pressure solve"
+    "divergence_max_abs=25.896617641470357; pressure_poisson_rhs_mean=5.854499264747854"
     false
     refl
     true
     refl
     false
     refl
-    "Pressure-Hessian Qcrit/lambda2 cross-derivative evidence is typed as local diagnostic evidence only; vorticity dominance is recorded as a boolean diagnostic flag, local-to-global theorem promotion is false, and external DNS remains required."
+    "Pressure-Hessian Qcrit is negative on the local N=128 FluidSim row, but the proposed vorticity-dominance sufficient condition fails, the divergence/RHS residuals are recorded, local-to-global theorem promotion is false, and external DNS remains required."
 
 canonicalPressureHessianLocalToGlobalTheoremPromotedFalse :
   NSGateway1PressureHessianDiagnosticResult.localToGlobalTheoremPromoted
@@ -381,11 +405,11 @@ canonicalPressureHessianResultPromotedHereFalse :
 canonicalPressureHessianResultPromotedHereFalse =
   refl
 
-canonicalPressureHessianVorticityDominanceRecorded :
+canonicalPressureHessianVorticityDominanceRecordedFalse :
   NSGateway1PressureHessianDiagnosticResult.vorticityDominance
     canonicalPressureHessianDiagnosticResult
-  ≡ true
-canonicalPressureHessianVorticityDominanceRecorded =
+  ≡ false
+canonicalPressureHessianVorticityDominanceRecordedFalse =
   refl
 
 canonicalGateway1DiagnosticRouteRecorded :

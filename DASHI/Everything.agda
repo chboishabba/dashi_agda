@@ -272,7 +272,6 @@ import DASHI.Physics.Closure.AtomicClockCandidate256DimensionAdapter
 import DASHI.Physics.Closure.AtomicClockSecondRealTimeTopologyRequest
 import DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge
 import DASHI.Physics.Closure.AtomicClockW4ReceiptAdapterRequest
-import DASHI.Physics.Closure.GRCoord4TensorCore
 import DASHI.Physics.Closure.GRPDEParityBoundary
 import DASHI.Physics.Closure.ScaleLocalObservableCriterion
 import DASHI.Physics.Closure.BTBallVolumeEntropyBoundary
@@ -961,6 +960,7 @@ import DASHI.Physics.Closure.SchwarzschildLimitCandidate
 import DASHI.Physics.Closure.GRWeakFieldPredictionReceipt
 import DASHI.Physics.Closure.GRPrecisionGravityPredictionTargetReceipt
 import DASHI.Physics.Closure.GRProofArchitectureAggregationTest
+import DASHI.Physics.Closure.GRCoord4TensorCore
 import DASHI.Physics.Closure.GRVladimirovFrameDiagnosticReceipt
 import DASHI.Physics.Closure.GravityVladimirovFrameReceipt
 import DASHI.Physics.GR
