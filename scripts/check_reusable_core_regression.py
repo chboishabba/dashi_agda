@@ -44,6 +44,17 @@ AGDA_TARGETS = [
     "DASHI/Promotion/ObligationIndex.agda",
 ]
 
+OPTIONAL_AGDA_TARGETS = [
+    "DASHI/Biology/BioactiveMolecularRecognitionBridge.agda",
+    "DASHI/Biology/NeurochemicalTransmissionBridge.agda",
+    "DASHI/Biology/NeurochemicalVocabularyReceipt.agda",
+    "DASHI/Promotion/NeurochemicalAuthorityBoundary.agda",
+]
+
+AGDA_TARGETS.extend(
+    target for target in OPTIONAL_AGDA_TARGETS if (ROOT / target).is_file()
+)
+
 
 def run(label: str, cmd: list[str]) -> int:
     print(f"\n== {label} ==")

@@ -44,8 +44,13 @@ REQUIRED_KEYS = {
     "pressure_poisson_rhs_mean",
     "strain_norm_squared_at_max",
     "half_vorticity_norm_squared_at_max",
+    "derivative_operator_axis_convention",
     "divergence_max_abs",
     "divergence_l2_mean",
+    "divergence_max_abs_xyz_storage",
+    "divergence_l2_mean_xyz_storage",
+    "divergence_max_abs_zyx_storage",
+    "divergence_l2_mean_zyx_storage",
     "sign_nonpositive_at_max",
     "sign_classification",
     "sign_tolerance",
@@ -125,8 +130,14 @@ def require_contract(result: dict[str, Any], expected_n: int) -> None:
     assert isinstance(result["pressure_poisson_rhs_mean"], float)
     assert isinstance(result["strain_norm_squared_at_max"], float)
     assert isinstance(result["half_vorticity_norm_squared_at_max"], float)
+    assert isinstance(result["derivative_operator_axis_convention"], str)
+    assert result["derivative_operator_axis_convention"]
     assert isinstance(result["divergence_max_abs"], float)
     assert isinstance(result["divergence_l2_mean"], float)
+    assert np.isfinite(result["divergence_max_abs_xyz_storage"])
+    assert np.isfinite(result["divergence_l2_mean_xyz_storage"])
+    assert np.isfinite(result["divergence_max_abs_zyx_storage"])
+    assert np.isfinite(result["divergence_l2_mean_zyx_storage"])
     assert isinstance(result["sign_nonpositive_at_max"], bool)
     assert result["sign_classification"] in {
         "positive_adverse_to_nonpositive_rule",
