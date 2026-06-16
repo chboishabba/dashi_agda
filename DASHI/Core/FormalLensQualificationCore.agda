@@ -11,6 +11,7 @@ import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Core.BridgeRequirementCore as Bridge
 import DASHI.Core.CandidateOnlyCore as Candidate
 import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Core.FormalLensVocabularyCore as Vocabulary
 
 ------------------------------------------------------------------------
 -- Reusable formal-lens qualification core.
@@ -101,6 +102,145 @@ canonicalFormalLenses =
 canonicalFormalLensCount : Nat
 canonicalFormalLensCount =
   listCount canonicalFormalLenses
+
+------------------------------------------------------------------------
+-- Vocabulary compatibility.
+--
+-- The legacy `FormalLens` vocabulary remains public for existing consumers.
+-- These helpers provide a stable bridge to the forthcoming vocabulary core
+-- without renaming any constructor in this module.
+
+formalLensKindOf :
+  FormalLens →
+  Vocabulary.FormalLensKind
+formalLensKindOf SymbolicRational =
+  Vocabulary.SymbolicRational
+formalLensKindOf Operator =
+  Vocabulary.Operator
+formalLensKindOf Functional =
+  Vocabulary.Functional
+formalLensKindOf Hamiltonian =
+  Vocabulary.Hamiltonian
+formalLensKindOf GradientFlow =
+  Vocabulary.GradientFlow
+formalLensKindOf ResistiveTransport =
+  Vocabulary.QuotientResidue
+formalLensKindOf Spectral =
+  Vocabulary.SpectralSequence
+formalLensKindOf Group =
+  Vocabulary.Group
+formalLensKindOf Category =
+  Vocabulary.Category
+formalLensKindOf Number =
+  Vocabulary.Number
+formalLensKindOf Lattice =
+  Vocabulary.Lattice
+formalLensKindOf Topological =
+  Vocabulary.Topology
+formalLensKindOf Probabilistic =
+  Vocabulary.Probability
+formalLensKindOf Graph =
+  Vocabulary.Graph
+formalLensKindOf Information =
+  Vocabulary.Information
+formalLensKindOf (NamedFormalLens s) =
+  Vocabulary.NamedFormalLensKind s
+
+formalLensFamilyOf :
+  FormalLens →
+  Vocabulary.FormalLensFamily
+formalLensFamilyOf lens =
+  Vocabulary.familyOf (formalLensKindOf lens)
+
+formalLensVocabularyKindsOf :
+  List FormalLens →
+  List Vocabulary.FormalLensKind
+formalLensVocabularyKindsOf [] = []
+formalLensVocabularyKindsOf (lens ∷ lenses) =
+  formalLensKindOf lens ∷ formalLensVocabularyKindsOf lenses
+
+formalLensVocabularyFamiliesOf :
+  List FormalLens →
+  List Vocabulary.FormalLensFamily
+formalLensVocabularyFamiliesOf [] = []
+formalLensVocabularyFamiliesOf (lens ∷ lenses) =
+  formalLensFamilyOf lens ∷ formalLensVocabularyFamiliesOf lenses
+
+canonicalFormalLensVocabularyKinds :
+  List Vocabulary.FormalLensKind
+canonicalFormalLensVocabularyKinds =
+  formalLensVocabularyKindsOf canonicalFormalLenses
+
+canonicalFormalLensVocabularyKindsAreCanonical :
+  canonicalFormalLensVocabularyKinds
+  ≡
+  formalLensVocabularyKindsOf canonicalFormalLenses
+canonicalFormalLensVocabularyKindsAreCanonical =
+  refl
+
+canonicalFormalLensVocabularyKindCount :
+  Nat
+canonicalFormalLensVocabularyKindCount =
+  listCount canonicalFormalLensVocabularyKinds
+
+canonicalFormalLensVocabularyFamilies :
+  List Vocabulary.FormalLensFamily
+canonicalFormalLensVocabularyFamilies =
+  formalLensVocabularyFamiliesOf canonicalFormalLenses
+
+canonicalFormalLensVocabularyFamiliesAreCanonical :
+  canonicalFormalLensVocabularyFamilies
+  ≡
+  formalLensVocabularyFamiliesOf canonicalFormalLenses
+canonicalFormalLensVocabularyFamiliesAreCanonical =
+  refl
+
+canonicalFormalLensVocabularyFamilyCount :
+  Nat
+canonicalFormalLensVocabularyFamilyCount =
+  listCount canonicalFormalLensVocabularyFamilies
+
+record FormalLensVocabularyCompatibilityReceipt : Set₁ where
+  constructor formalLensVocabularyCompatibilityReceipt
+  field
+    vocabularyKinds :
+      List Vocabulary.FormalLensKind
+
+    vocabularyKindsAreCanonical :
+      vocabularyKinds ≡ canonicalFormalLensVocabularyKinds
+
+    vocabularyKindCount :
+      Nat
+
+    vocabularyKindCountIsCanonical :
+      vocabularyKindCount ≡ canonicalFormalLensVocabularyKindCount
+
+    vocabularyFamilies :
+      List Vocabulary.FormalLensFamily
+
+    vocabularyFamiliesAreCanonical :
+      vocabularyFamilies ≡ canonicalFormalLensVocabularyFamilies
+
+    vocabularyFamilyCount :
+      Nat
+
+    vocabularyFamilyCountIsCanonical :
+      vocabularyFamilyCount ≡ canonicalFormalLensVocabularyFamilyCount
+
+open FormalLensVocabularyCompatibilityReceipt public
+
+canonicalFormalLensVocabularyCompatibilityReceipt :
+  FormalLensVocabularyCompatibilityReceipt
+canonicalFormalLensVocabularyCompatibilityReceipt =
+  formalLensVocabularyCompatibilityReceipt
+    canonicalFormalLensVocabularyKinds
+    refl
+    canonicalFormalLensVocabularyKindCount
+    refl
+    canonicalFormalLensVocabularyFamilies
+    refl
+    canonicalFormalLensVocabularyFamilyCount
+    refl
 
 ------------------------------------------------------------------------
 -- Threshold, role, and residual boundary vocabulary.

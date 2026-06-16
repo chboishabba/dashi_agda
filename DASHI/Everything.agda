@@ -147,6 +147,7 @@ import DASHI.Core.ControlCardCore
 import DASHI.Core.FiniteReceiptList
 import DASHI.Core.GenericReceipt
 import DASHI.Core.EmptyPromotionCore
+import DASHI.Core.FormalLensVocabularyCore
 import DASHI.Core.FormalLensQualificationCore
 import DASHI.Core.HiddenLiftProjectionCore
 import DASHI.Core.KernelMonoid
@@ -156,13 +157,19 @@ import DASHI.Core.OperatorShapeNonAuthorityCore
 import DASHI.Core.Prelude
 import DASHI.Core.Q
 import DASHI.Core.StatisticalEvidenceCore
+import DASHI.Core.FingerprintProjectionCore
 import DASHI.Core.AuthorityBoundary
 import DASHI.Core.UniversalOperatorBasis
+import DASHI.Crypto.HashCandidateBoundary
+import DASHI.Crypto.RSAArithmeticCore
 import DASHI.Crypto.RSABatchSharedPrimeBoundary
 import DASHI.Crypto.RSABTResidueBraidHypervoxelBoundary
+import DASHI.Crypto.RSACRTChamberCore
 import DASHI.Crypto.RSAEntropySourceStatisticalBoundary
 import DASHI.Crypto.RSAIterationLeakBoundary
+import DASHI.Crypto.RSAKeygenTraceCore
 import DASHI.Crypto.RSAKeygenSourceBoundary
+import DASHI.Crypto.RSASharedPrimeCollapse
 import DASHI.Crypto.RSAVulnerabilityBoundary
 import DASHI.DCHoTT.All
 import DASHI.Papers.CoreTheoremInterfaces
