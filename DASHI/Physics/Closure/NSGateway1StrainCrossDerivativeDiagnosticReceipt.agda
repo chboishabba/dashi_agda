@@ -317,6 +317,77 @@ canonicalResolutionSeriesClayStillUnpromoted :
 canonicalResolutionSeriesClayStillUnpromoted =
   refl
 
+record NSGateway1PressureHessianDiagnosticResult : Set where
+  constructor mkNSGateway1PressureHessianDiagnosticResult
+  field
+    diagnosticName :
+      String
+    qcritSign :
+      String
+    lambda2CrossDerivative :
+      String
+    vorticityDominance :
+      Bool
+    localToGlobalTheoremPromoted :
+      Bool
+    localToGlobalTheoremPromotedIsFalse :
+      localToGlobalTheoremPromoted ≡ false
+    externalDNSRequired :
+      Bool
+    externalDNSRequiredIsTrue :
+      externalDNSRequired ≡ true
+    resultPromotedHere :
+      Bool
+    resultPromotedHereIsFalse :
+      resultPromotedHere ≡ false
+    diagnosticConclusion :
+      String
+
+canonicalPressureHessianDiagnosticResult :
+  NSGateway1PressureHessianDiagnosticResult
+canonicalPressureHessianDiagnosticResult =
+  mkNSGateway1PressureHessianDiagnosticResult
+    "NS-GW-1 pressure-Hessian diagnostic result"
+    "Qcrit sign unpromoted; no local-to-global pressure-Hessian theorem"
+    (NSGateway1ResolutionSeriesReceipt.n128CrossDerivative
+      canonicalResolutionSeriesReceipt)
+    true
+    false
+    refl
+    true
+    refl
+    false
+    refl
+    "Pressure-Hessian Qcrit/lambda2 cross-derivative evidence is typed as local diagnostic evidence only; vorticity dominance is recorded as a boolean diagnostic flag, local-to-global theorem promotion is false, and external DNS remains required."
+
+canonicalPressureHessianLocalToGlobalTheoremPromotedFalse :
+  NSGateway1PressureHessianDiagnosticResult.localToGlobalTheoremPromoted
+    canonicalPressureHessianDiagnosticResult
+  ≡ false
+canonicalPressureHessianLocalToGlobalTheoremPromotedFalse =
+  refl
+
+canonicalPressureHessianExternalDNSRequiredTrue :
+  NSGateway1PressureHessianDiagnosticResult.externalDNSRequired
+    canonicalPressureHessianDiagnosticResult
+  ≡ true
+canonicalPressureHessianExternalDNSRequiredTrue =
+  refl
+
+canonicalPressureHessianResultPromotedHereFalse :
+  NSGateway1PressureHessianDiagnosticResult.resultPromotedHere
+    canonicalPressureHessianDiagnosticResult
+  ≡ false
+canonicalPressureHessianResultPromotedHereFalse =
+  refl
+
+canonicalPressureHessianVorticityDominanceRecorded :
+  NSGateway1PressureHessianDiagnosticResult.vorticityDominance
+    canonicalPressureHessianDiagnosticResult
+  ≡ true
+canonicalPressureHessianVorticityDominanceRecorded =
+  refl
+
 canonicalGateway1DiagnosticRouteRecorded :
   NSGateway1DiagnosticAggregation.gateway1DiagnosticRouteRecorded
     canonicalAggregation

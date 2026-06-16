@@ -28,6 +28,24 @@ REQUIRED_KEYS = {
     "eigenvalues_at_max",
     "lambda2_at_max",
     "cross_derivative_e1_e2_lambda2_at_max",
+    "pressure_hessian_e1_e2_at_max",
+    "hess_omega2_e1_e2_at_max",
+    "hess_S2_e1_e2_at_max",
+    "cross_derivative_e1_e2_pressure_at_max",
+    "cross_derivative_e1_e2_vorticity_norm_squared_at_max",
+    "cross_derivative_e1_e2_strain_norm_squared_at_max",
+    "pressure_hessian_local_decomposition_tail_e1_e2_at_max",
+    "vorticity_dominance_margin",
+    "vorticity_dominance_rule",
+    "vorticity_dominance_condition_holds",
+    "pressure_poisson_equation",
+    "pressure_poisson_identity_assumption",
+    "pressure_poisson_rhs_at_max",
+    "pressure_poisson_rhs_mean",
+    "strain_norm_squared_at_max",
+    "half_vorticity_norm_squared_at_max",
+    "divergence_max_abs",
+    "divergence_l2_mean",
     "sign_nonpositive_at_max",
     "sign_classification",
     "sign_tolerance",
@@ -85,6 +103,30 @@ def require_contract(result: dict[str, Any], expected_n: int) -> None:
     assert all(isinstance(value, float) for value in result["eigenvalues_at_max"])
     assert isinstance(result["lambda2_at_max"], float)
     assert isinstance(result["cross_derivative_e1_e2_lambda2_at_max"], float)
+    assert isinstance(result["pressure_hessian_e1_e2_at_max"], float)
+    assert isinstance(result["hess_omega2_e1_e2_at_max"], float)
+    assert isinstance(result["hess_S2_e1_e2_at_max"], float)
+    assert result["cross_derivative_e1_e2_pressure_at_max"] == result["pressure_hessian_e1_e2_at_max"]
+    assert (
+        result["cross_derivative_e1_e2_vorticity_norm_squared_at_max"]
+        == result["hess_omega2_e1_e2_at_max"]
+    )
+    assert (
+        result["cross_derivative_e1_e2_strain_norm_squared_at_max"]
+        == result["hess_S2_e1_e2_at_max"]
+    )
+    assert isinstance(result["pressure_hessian_local_decomposition_tail_e1_e2_at_max"], float)
+    assert isinstance(result["vorticity_dominance_margin"], float)
+    assert isinstance(result["vorticity_dominance_rule"], str)
+    assert isinstance(result["vorticity_dominance_condition_holds"], bool)
+    assert result["pressure_poisson_equation"] == "-Delta p = |S|^2 - 0.5*|omega|^2"
+    assert result["pressure_poisson_identity_assumption"] == "incompressible_periodic_velocity"
+    assert isinstance(result["pressure_poisson_rhs_at_max"], float)
+    assert isinstance(result["pressure_poisson_rhs_mean"], float)
+    assert isinstance(result["strain_norm_squared_at_max"], float)
+    assert isinstance(result["half_vorticity_norm_squared_at_max"], float)
+    assert isinstance(result["divergence_max_abs"], float)
+    assert isinstance(result["divergence_l2_mean"], float)
     assert isinstance(result["sign_nonpositive_at_max"], bool)
     assert result["sign_classification"] in {
         "positive_adverse_to_nonpositive_rule",

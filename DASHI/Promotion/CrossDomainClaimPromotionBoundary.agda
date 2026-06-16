@@ -6,9 +6,11 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 import DASHI.Promotion.AuthorityGateCore as AuthorityGateCore
+import DASHI.Core.AdapterCanonicalityCore as AdapterCanon
 import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
 import DASHI.Core.BridgeRequirementCore as BridgeReq
 import DASHI.Core.CandidateOnlyCore as CandidateOnly
+import DASHI.Core.FormalLensQualificationCore as FormalLens
 open import DASHI.Core.FiniteReceiptList using (listCount)
 
 ------------------------------------------------------------------------
@@ -618,6 +620,434 @@ candidateOnlyCoreAdapterTradingAuthorityFalse :
 candidateOnlyCoreAdapterTradingAuthorityFalse =
   CandidateOnly.candidateNoTradingAuthority
     candidateOnlyCoreAdapterReceipt
+
+------------------------------------------------------------------------
+-- Formal-lens qualification adapter.
+--
+-- Cross-domain vocabulary may be read through formal lenses, but the
+-- reading is candidate-only and does not supply claim truth, support,
+-- admissibility, bridge authority, external authority, theorem authority,
+-- Clay authority, or promotion.
+
+data CrossDomainFormalLensReading : Set where
+  crossDomainSymbolicRationalReading :
+    CrossDomainFormalLensReading
+  crossDomainCategoryReading :
+    CrossDomainFormalLensReading
+  crossDomainBridgeReading :
+    CrossDomainFormalLensReading
+  crossDomainFunctionalReading :
+    CrossDomainFormalLensReading
+
+crossDomainFormalLens :
+  CrossDomainFormalLensReading →
+  FormalLens.FormalLens
+crossDomainFormalLens crossDomainSymbolicRationalReading =
+  FormalLens.SymbolicRational
+crossDomainFormalLens crossDomainCategoryReading =
+  FormalLens.Category
+crossDomainFormalLens crossDomainBridgeReading =
+  FormalLens.NamedFormalLens "Bridge"
+crossDomainFormalLens crossDomainFunctionalReading =
+  FormalLens.Functional
+
+record CrossDomainFormalLensQualificationAdapterRow : Set where
+  constructor crossDomainFormalLensQualificationAdapterRow
+  field
+    formalLensReading :
+      CrossDomainFormalLensReading
+    formalLensConstructor :
+      FormalLens.FormalLens
+    formalLensConstructorComputes :
+      crossDomainFormalLens formalLensReading
+      ≡
+      formalLensConstructor
+    formalLensQualificationSurface :
+      FormalLens.FormalLensQualificationSurface
+    formalLensQualificationReceipt :
+      FormalLens.FormalLensQualificationReceipt
+        formalLensQualificationSurface
+    formalLensCandidateOnly :
+      Bool
+    formalLensCandidateOnlyIsTrue :
+      formalLensCandidateOnly ≡ true
+    formalLensPromoted :
+      Bool
+    formalLensPromotedIsFalse :
+      formalLensPromoted ≡ false
+    formalLensTruthAuthority :
+      Bool
+    formalLensTruthAuthorityIsFalse :
+      formalLensTruthAuthority ≡ false
+    formalLensSupportAuthority :
+      Bool
+    formalLensSupportAuthorityIsFalse :
+      formalLensSupportAuthority ≡ false
+    formalLensAdmissibilityAuthority :
+      Bool
+    formalLensAdmissibilityAuthorityIsFalse :
+      formalLensAdmissibilityAuthority ≡ false
+    formalLensAnalyticAuthority :
+      Bool
+    formalLensAnalyticAuthorityIsFalse :
+      formalLensAnalyticAuthority ≡ false
+    formalLensEmpiricalAuthority :
+      Bool
+    formalLensEmpiricalAuthorityIsFalse :
+      formalLensEmpiricalAuthority ≡ false
+    formalLensClinicalAuthority :
+      Bool
+    formalLensClinicalAuthorityIsFalse :
+      formalLensClinicalAuthority ≡ false
+    formalLensTheoremAuthority :
+      Bool
+    formalLensTheoremAuthorityIsFalse :
+      formalLensTheoremAuthority ≡ false
+    formalLensClayAuthority :
+      Bool
+    formalLensClayAuthorityIsFalse :
+      formalLensClayAuthority ≡ false
+    formalLensExternalAuthority :
+      Bool
+    formalLensExternalAuthorityIsFalse :
+      formalLensExternalAuthority ≡ false
+    formalLensGovernanceAuthority :
+      Bool
+    formalLensGovernanceAuthorityIsFalse :
+      formalLensGovernanceAuthority ≡ false
+    formalLensPromotionAuthority :
+      Bool
+    formalLensPromotionAuthorityIsFalse :
+      formalLensPromotionAuthority ≡ false
+    formalLensBridgeAuthority :
+      Bool
+    formalLensBridgeAuthorityIsFalse :
+      formalLensBridgeAuthority ≡ false
+    formalLensTransportMapAuthority :
+      Bool
+    formalLensTransportMapAuthorityIsFalse :
+      formalLensTransportMapAuthority ≡ false
+    formalLensBackgroundBridgeAuthority :
+      Bool
+    formalLensBackgroundBridgeAuthorityIsFalse :
+      formalLensBackgroundBridgeAuthority ≡ false
+    formalLensAuthorityBundlePromotion :
+      Bool
+    formalLensAuthorityBundlePromotionIsFalse :
+      formalLensAuthorityBundlePromotion ≡ false
+    formalLensReadingNote :
+      String
+
+open CrossDomainFormalLensQualificationAdapterRow public
+
+mkCrossDomainFormalLensQualificationSurface :
+  CrossDomainFormalLensReading →
+  String →
+  FormalLens.FormalLensQualificationSurface
+mkCrossDomainFormalLensQualificationSurface reading note =
+  FormalLens.mkFormalLensQualificationSurface
+    "cross-domain claim formal-lens qualification"
+    "DASHI.Promotion.CrossDomainClaimPromotionBoundary"
+    "CrossDomainFormalLensQualificationAdapterRow"
+    (crossDomainFormalLens reading)
+    FormalLens.Information
+    FormalLens.adapterConsumerRole
+    FormalLens.canonicalRequiredThresholdRow
+    FormalLens.canonicalRequiredThresholdRowReceipt
+    FormalLens.explicitBridgeResidualBoundary
+    FormalLens.genericFormalLensCandidateRow
+    FormalLens.genericFormalLensCandidateReceipt
+    FormalLens.genericFormalLensBridgeRow
+    FormalLens.genericFormalLensBridgeReceipt
+    note
+    "formal-lens qualification is candidate-only; domain authority, bridge authority, theorem authority, external acceptance, Clay authority, and promotion remain absent"
+
+mkCrossDomainFormalLensQualificationReceipt :
+  (reading : CrossDomainFormalLensReading) →
+  (note : String) →
+  FormalLens.FormalLensQualificationReceipt
+    (mkCrossDomainFormalLensQualificationSurface reading note)
+mkCrossDomainFormalLensQualificationReceipt reading note =
+  FormalLens.mkFormalLensQualificationReceipt
+    (mkCrossDomainFormalLensQualificationSurface reading note)
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+mkCrossDomainFormalLensQualificationAdapterRow :
+  CrossDomainFormalLensReading →
+  String →
+  CrossDomainFormalLensQualificationAdapterRow
+mkCrossDomainFormalLensQualificationAdapterRow reading note =
+  record
+    { formalLensReading =
+        reading
+    ; formalLensConstructor =
+        crossDomainFormalLens reading
+    ; formalLensConstructorComputes =
+        refl
+    ; formalLensQualificationSurface =
+        mkCrossDomainFormalLensQualificationSurface reading note
+    ; formalLensQualificationReceipt =
+        mkCrossDomainFormalLensQualificationReceipt
+          reading
+          note
+    ; formalLensCandidateOnly =
+        FormalLens.qualificationCandidateOnly
+          (mkCrossDomainFormalLensQualificationSurface reading note)
+    ; formalLensCandidateOnlyIsTrue =
+        FormalLens.qualificationIsCandidateOnly
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensPromoted =
+        FormalLens.qualificationPromoted
+          (mkCrossDomainFormalLensQualificationSurface reading note)
+    ; formalLensPromotedIsFalse =
+        FormalLens.qualificationPromotedFalse
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensTruthAuthority =
+        AuthorityNA.truthAuthorityFlag
+          (FormalLens.authorityBundle
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensTruthAuthorityIsFalse =
+        AuthorityNA.bundleTruthAuthorityIsFalse
+          (FormalLens.authorityBundle
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensSupportAuthority =
+        AuthorityNA.supportAuthorityFlag
+          (FormalLens.authorityBundle
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensSupportAuthorityIsFalse =
+        AuthorityNA.bundleSupportAuthorityIsFalse
+          (FormalLens.authorityBundle
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensAdmissibilityAuthority =
+        AuthorityNA.admissibilityAuthorityFlag
+          (FormalLens.authorityBundle
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensAdmissibilityAuthorityIsFalse =
+        AuthorityNA.bundleAdmissibilityAuthorityIsFalse
+          (FormalLens.authorityBundle
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensAnalyticAuthority =
+        FormalLens.analyticAuthority
+          (mkCrossDomainFormalLensQualificationSurface reading note)
+    ; formalLensAnalyticAuthorityIsFalse =
+        FormalLens.qualificationAnalyticAuthorityFalse
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensEmpiricalAuthority =
+        FormalLens.empiricalAuthority
+          (mkCrossDomainFormalLensQualificationSurface reading note)
+    ; formalLensEmpiricalAuthorityIsFalse =
+        FormalLens.qualificationEmpiricalAuthorityFalse
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensClinicalAuthority =
+        FormalLens.clinicalAuthority
+          (mkCrossDomainFormalLensQualificationSurface reading note)
+    ; formalLensClinicalAuthorityIsFalse =
+        FormalLens.qualificationClinicalAuthorityFalse
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensTheoremAuthority =
+        FormalLens.theoremAuthority
+          (mkCrossDomainFormalLensQualificationSurface reading note)
+    ; formalLensTheoremAuthorityIsFalse =
+        FormalLens.qualificationTheoremAuthorityFalse
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensClayAuthority =
+        AuthorityNA.clayAuthorityFlag
+          (FormalLens.authorityBundle
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensClayAuthorityIsFalse =
+        AuthorityNA.bundleClayAuthorityIsFalse
+          (FormalLens.authorityBundle
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensExternalAuthority =
+        FormalLens.externalAuthority
+          (mkCrossDomainFormalLensQualificationSurface reading note)
+    ; formalLensExternalAuthorityIsFalse =
+        FormalLens.qualificationExternalAuthorityFalse
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensGovernanceAuthority =
+        FormalLens.governanceAuthority
+          (mkCrossDomainFormalLensQualificationSurface reading note)
+    ; formalLensGovernanceAuthorityIsFalse =
+        FormalLens.qualificationGovernanceAuthorityFalse
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensPromotionAuthority =
+        FormalLens.promotionAuthority
+          (mkCrossDomainFormalLensQualificationSurface reading note)
+    ; formalLensPromotionAuthorityIsFalse =
+        FormalLens.qualificationPromotionAuthorityFalse
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensBridgeAuthority =
+        BridgeReq.rowAuthorityPromotion
+          (FormalLens.bridgeRow
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensBridgeAuthorityIsFalse =
+        FormalLens.receiptBridgeAuthorityPromotionFalse
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensTransportMapAuthority =
+        BridgeReq.rowTransportMapAuthority
+          (FormalLens.bridgeRow
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensTransportMapAuthorityIsFalse =
+        FormalLens.receiptBridgeTransportMapAuthorityFalse
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensBackgroundBridgeAuthority =
+        BridgeReq.rowBackgroundBridgeAuthority
+          (FormalLens.bridgeRow
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensBackgroundBridgeAuthorityIsFalse =
+        FormalLens.receiptBridgeBackgroundAuthorityFalse
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensAuthorityBundlePromotion =
+        AuthorityNA.promotesAnyAuthority
+          (FormalLens.authorityBundle
+            (mkCrossDomainFormalLensQualificationSurface reading note))
+    ; formalLensAuthorityBundlePromotionIsFalse =
+        FormalLens.receiptAuthorityBundleNonPromoting
+          (mkCrossDomainFormalLensQualificationReceipt
+            reading
+            note)
+    ; formalLensReadingNote =
+        note
+    }
+
+crossDomainSymbolicRationalFormalLensQualificationRow :
+  CrossDomainFormalLensQualificationAdapterRow
+crossDomainSymbolicRationalFormalLensQualificationRow =
+  mkCrossDomainFormalLensQualificationAdapterRow
+    crossDomainSymbolicRationalReading
+    "scores, proximity, ratios, and symbolic thresholds are read only as SymbolicRational formal-lens candidates."
+
+crossDomainCategoryFormalLensQualificationRow :
+  CrossDomainFormalLensQualificationAdapterRow
+crossDomainCategoryFormalLensQualificationRow =
+  mkCrossDomainFormalLensQualificationAdapterRow
+    crossDomainCategoryReading
+    "claim kinds, bridge receipt kinds, examples, and blocked-target lists are read only as Category formal-lens candidates."
+
+crossDomainBridgeFormalLensQualificationRow :
+  CrossDomainFormalLensQualificationAdapterRow
+crossDomainBridgeFormalLensQualificationRow =
+  mkCrossDomainFormalLensQualificationAdapterRow
+    crossDomainBridgeReading
+    "required bridge vocabulary is read only as a named Bridge formal-lens candidate, not bridge authority."
+
+crossDomainFunctionalFormalLensQualificationRow :
+  CrossDomainFormalLensQualificationAdapterRow
+crossDomainFunctionalFormalLensQualificationRow =
+  mkCrossDomainFormalLensQualificationAdapterRow
+    crossDomainFunctionalReading
+    "promotion gates and boolean projections are read only as Functional formal-lens candidates."
+
+canonicalCrossDomainFormalLensQualificationRows :
+  List CrossDomainFormalLensQualificationAdapterRow
+canonicalCrossDomainFormalLensQualificationRows =
+  crossDomainSymbolicRationalFormalLensQualificationRow
+  ∷ crossDomainCategoryFormalLensQualificationRow
+  ∷ crossDomainBridgeFormalLensQualificationRow
+  ∷ crossDomainFunctionalFormalLensQualificationRow
+  ∷ []
+
+crossDomainFormalLensAdapterCanonicality :
+  AdapterCanon.AdapterCanonicalityReceipt
+    (List CrossDomainFormalLensQualificationAdapterRow)
+    canonicalCrossDomainFormalLensQualificationRows
+crossDomainFormalLensAdapterCanonicality =
+  AdapterCanon.mkCanonicalAdapterReceipt
+    "cross-domain formal-lens qualification adapter"
+    "DASHI.Promotion.CrossDomainClaimPromotionBoundary"
+    "canonicalCrossDomainFormalLensQualificationRows"
+    (AdapterCanon.namedAdapterKind "formal-lens-qualification")
+    canonicalCrossDomainFormalLensQualificationRows
+
+crossDomainFormalLensAdapterIsCanonical :
+  AdapterCanon.adapter crossDomainFormalLensAdapterCanonicality
+  ≡
+  canonicalCrossDomainFormalLensQualificationRows
+crossDomainFormalLensAdapterIsCanonical =
+  AdapterCanon.adapterCanonical
+    crossDomainFormalLensAdapterCanonicality
+
+crossDomainFormalLensAdapterPromotesAuthorityFalse :
+  AdapterCanon.adapterPromotesAuthority
+    crossDomainFormalLensAdapterCanonicality
+  ≡ false
+crossDomainFormalLensAdapterPromotesAuthorityFalse =
+  AdapterCanon.adapterAuthorityPromotionFalse
+    crossDomainFormalLensAdapterCanonicality
+
+crossDomainSymbolicRationalFormalLensCandidateOnly :
+  formalLensCandidateOnly
+    crossDomainSymbolicRationalFormalLensQualificationRow
+  ≡ true
+crossDomainSymbolicRationalFormalLensCandidateOnly =
+  formalLensCandidateOnlyIsTrue
+    crossDomainSymbolicRationalFormalLensQualificationRow
+
+crossDomainCategoryFormalLensCandidateOnly :
+  formalLensCandidateOnly
+    crossDomainCategoryFormalLensQualificationRow
+  ≡ true
+crossDomainCategoryFormalLensCandidateOnly =
+  formalLensCandidateOnlyIsTrue
+    crossDomainCategoryFormalLensQualificationRow
+
+crossDomainBridgeFormalLensBridgeAuthorityFalse :
+  formalLensBridgeAuthority
+    crossDomainBridgeFormalLensQualificationRow
+  ≡ false
+crossDomainBridgeFormalLensBridgeAuthorityFalse =
+  formalLensBridgeAuthorityIsFalse
+    crossDomainBridgeFormalLensQualificationRow
+
+crossDomainFunctionalFormalLensPromotionAuthorityFalse :
+  formalLensPromotionAuthority
+    crossDomainFunctionalFormalLensQualificationRow
+  ≡ false
+crossDomainFunctionalFormalLensPromotionAuthorityFalse =
+  formalLensPromotionAuthorityIsFalse
+    crossDomainFunctionalFormalLensQualificationRow
 
 ------------------------------------------------------------------------
 -- Canonical fail-closed receipt.

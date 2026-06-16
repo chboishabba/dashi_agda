@@ -8,9 +8,26 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Core.CandidateFunctionalCore as FunctionalCore
+import DASHI.Core.AdapterCanonicalityCore as AdapterCanon
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
+import DASHI.Core.CandidateOnlyCore as CandidateOnly
+import DASHI.Core.FormalLensQualificationCore as FormalLensCore
 import DASHI.Core.OperatorShapeNonAuthorityCore as OperatorShapeNA
 import DASHI.Interop.InterMediaCarrierBridge as IM
 import DASHI.Interop.QiCarrierFieldBridge as Qi
+
+open FormalLensCore
+  using
+    ( FormalLens
+    ; SymbolicRational
+    ; Operator
+    ; Functional
+    ; Hamiltonian
+    ; GradientFlow
+    ; ResistiveTransport
+    ; Spectral
+    ; Category
+    )
 
 ------------------------------------------------------------------------
 -- Meditation as inner carrier-field governance.
@@ -338,6 +355,361 @@ canonicalMeditationSafetyRoutes =
   ∷ refuseDeepeningReturnExternalCarrierRoute
   ∷ []
 
+------------------------------------------------------------------------
+-- Formal-lens qualification adapter surface.
+
+MeditationFormalLens : Set
+MeditationFormalLens =
+  FormalLens
+
+canonicalMeditationFormalLenses : List MeditationFormalLens
+canonicalMeditationFormalLenses =
+  SymbolicRational
+  ∷ Operator
+  ∷ Functional
+  ∷ Hamiltonian
+  ∷ GradientFlow
+  ∷ ResistiveTransport
+  ∷ Spectral
+  ∷ Category
+  ∷ []
+
+meditationFormalLensCandidateOnlyRow :
+  CandidateOnly.CandidateOnlyRow
+meditationFormalLensCandidateOnlyRow =
+  CandidateOnly.mkCandidateOnlyRow
+    "meditation formal-lens qualification candidate"
+    "DASHI.Interop.MeditationQiBridge"
+    "MeditationFormalLensQualificationSurface"
+    (CandidateOnly.namedCandidateKind "formal-lens qualification")
+    (CandidateOnly.namedCandidateOnlyStatus "formal-lens qualification")
+    "Meditation attention, operator, Hamiltonian, functional, spectral, and gradient-flow readings are symbolic-rational candidate lenses only."
+    "Clinical, spiritual, metaphysical, analytic Hamiltonian, spectral theorem, empirical, theorem, Clay, and promotion authority remain outside this adapter."
+
+meditationFormalLensCandidateOnlyReceipt :
+  CandidateOnly.CandidateOnlyReceipt
+    meditationFormalLensCandidateOnlyRow
+meditationFormalLensCandidateOnlyReceipt =
+  CandidateOnly.canonicalCandidateOnlyReceipt
+    meditationFormalLensCandidateOnlyRow
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+meditationFormalLensAuthorityNonPromotionBundle :
+  AuthorityNA.AuthorityNonPromotionBundle
+meditationFormalLensAuthorityNonPromotionBundle =
+  AuthorityNA.mkClosedAuthorityNonPromotionBundle
+    "meditation formal-lens qualification authority non-promotion adapter"
+
+meditationFormalLensAuthorityNonPromotionAllFalse :
+  AuthorityNA.AllAuthorityKindsFalse
+    meditationFormalLensAuthorityNonPromotionBundle
+    AuthorityNA.canonicalAuthorityKinds
+meditationFormalLensAuthorityNonPromotionAllFalse =
+  AuthorityNA.proveAllAuthorityKindsFalse
+    meditationFormalLensAuthorityNonPromotionBundle
+    AuthorityNA.canonicalAuthorityKinds
+
+meditationFormalLensListCanonicalityReceipt :
+  AdapterCanon.AdapterCanonicalityReceipt
+    (List MeditationFormalLens)
+    canonicalMeditationFormalLenses
+meditationFormalLensListCanonicalityReceipt =
+  AdapterCanon.mkCanonicalAdapterReceipt
+    "meditation formal-lens list canonicality"
+    "DASHI.Interop.MeditationQiBridge"
+    "canonicalMeditationFormalLenses"
+    (AdapterCanon.namedAdapterKind "formal-lens list")
+    canonicalMeditationFormalLenses
+
+meditationAttentionOperatorFormalLensCoreSurface :
+  FormalLensCore.FormalLensQualificationSurface
+meditationAttentionOperatorFormalLensCoreSurface =
+  FormalLensCore.mkFormalLensQualificationSurface
+    "meditation attention operator formal-lens qualification"
+    "DASHI.Interop.MeditationQiBridge"
+    "meditationAttentionOperatorFormalLensCoreSurface"
+    SymbolicRational
+    Operator
+    FormalLensCore.adapterConsumerRole
+    FormalLensCore.canonicalRequiredThresholdRow
+    FormalLensCore.canonicalRequiredThresholdRowReceipt
+    FormalLensCore.explicitAdapterResidualBoundary
+    meditationFormalLensCandidateOnlyRow
+    meditationFormalLensCandidateOnlyReceipt
+    FormalLensCore.genericFormalLensBridgeRow
+    FormalLensCore.genericFormalLensBridgeReceipt
+    "Meditation attention/operator readings are symbolic-rational formal-lens qualifications only."
+    "No analytic Hamiltonian, spectral theorem, empirical, clinical, spiritual, metaphysical, theorem, Clay, governance, or promotion authority is supplied."
+
+meditationAttentionOperatorFormalLensCoreReceipt :
+  FormalLensCore.FormalLensQualificationReceipt
+    meditationAttentionOperatorFormalLensCoreSurface
+meditationAttentionOperatorFormalLensCoreReceipt =
+  FormalLensCore.mkFormalLensQualificationReceipt
+    meditationAttentionOperatorFormalLensCoreSurface
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+record MeditationFormalLensQualificationSurface : Set where
+  constructor meditationFormalLensQualificationSurface
+  field
+    candidateOnlyCoreAdapter :
+      CandidateOnly.CandidateOnlyReceipt
+        meditationFormalLensCandidateOnlyRow
+
+    candidateOnlyCoreAdapterIsCanonical :
+      candidateOnlyCoreAdapter
+      ≡
+      meditationFormalLensCandidateOnlyReceipt
+
+    authorityNonPromotionCoreAdapter :
+      AuthorityNA.AuthorityNonPromotionBundle
+
+    authorityNonPromotionCoreAdapterIsCanonical :
+      authorityNonPromotionCoreAdapter
+      ≡
+      meditationFormalLensAuthorityNonPromotionBundle
+
+    authorityNonPromotionCoreAdapterAllFalse :
+      AuthorityNA.AllAuthorityKindsFalse
+        authorityNonPromotionCoreAdapter
+        AuthorityNA.canonicalAuthorityKinds
+
+    formalLensCanonicalityAdapter :
+      AdapterCanon.AdapterCanonicalityReceipt
+        (List MeditationFormalLens)
+        canonicalMeditationFormalLenses
+
+    formalLensCanonicalityAdapterIsCanonical :
+      formalLensCanonicalityAdapter
+      ≡
+      meditationFormalLensListCanonicalityReceipt
+
+    formalLensQualificationCoreAdapter :
+      FormalLensCore.FormalLensQualificationSurface
+
+    formalLensQualificationCoreAdapterIsCanonical :
+      formalLensQualificationCoreAdapter
+      ≡
+      meditationAttentionOperatorFormalLensCoreSurface
+
+    formalLensQualificationCoreReceipt :
+      FormalLensCore.FormalLensQualificationReceipt
+        formalLensQualificationCoreAdapter
+
+    formalLensReadings :
+      List MeditationFormalLens
+
+    formalLensReadingsAreCanonical :
+      formalLensReadings ≡ canonicalMeditationFormalLenses
+
+    symbolicRationalReading :
+      MeditationFormalLens
+
+    symbolicRationalReadingIsCanonical :
+      symbolicRationalReading ≡ SymbolicRational
+
+    attentionOperatorReading :
+      MeditationFormalLens
+
+    attentionOperatorReadingIsCanonical :
+      attentionOperatorReading ≡ Operator
+
+    meditationFunctionalReading :
+      MeditationFormalLens
+
+    meditationFunctionalReadingIsCanonical :
+      meditationFunctionalReading ≡ Functional
+
+    meditationHamiltonianReading :
+      MeditationFormalLens
+
+    meditationHamiltonianReadingIsCanonical :
+      meditationHamiltonianReading ≡ Hamiltonian
+
+    meditationGradientFlowReading :
+      MeditationFormalLens
+
+    meditationGradientFlowReadingIsCanonical :
+      meditationGradientFlowReading ≡ GradientFlow
+
+    meditationResistiveTransportReading :
+      MeditationFormalLens
+
+    meditationResistiveTransportReadingIsCanonical :
+      meditationResistiveTransportReading ≡ ResistiveTransport
+
+    meditationSpectralReading :
+      MeditationFormalLens
+
+    meditationSpectralReadingIsCanonical :
+      meditationSpectralReading ≡ Spectral
+
+    meditationCategoryReading :
+      MeditationFormalLens
+
+    meditationCategoryReadingIsCanonical :
+      meditationCategoryReading ≡ Category
+
+    formalLensCandidateOnly :
+      Bool
+
+    formalLensCandidateOnlyIsTrue :
+      formalLensCandidateOnly ≡ true
+
+    formalLensSymbolicRationalOnly :
+      Bool
+
+    formalLensSymbolicRationalOnlyIsTrue :
+      formalLensSymbolicRationalOnly ≡ true
+
+    formalLensClinicalAuthorityPromoted :
+      Bool
+
+    formalLensClinicalAuthorityPromotedIsFalse :
+      formalLensClinicalAuthorityPromoted ≡ false
+
+    formalLensSpiritualAuthorityPromoted :
+      Bool
+
+    formalLensSpiritualAuthorityPromotedIsFalse :
+      formalLensSpiritualAuthorityPromoted ≡ false
+
+    formalLensMetaphysicalAuthorityPromoted :
+      Bool
+
+    formalLensMetaphysicalAuthorityPromotedIsFalse :
+      formalLensMetaphysicalAuthorityPromoted ≡ false
+
+    formalLensAnalyticHamiltonianAuthorityPromoted :
+      Bool
+
+    formalLensAnalyticHamiltonianAuthorityPromotedIsFalse :
+      formalLensAnalyticHamiltonianAuthorityPromoted ≡ false
+
+    formalLensSpectralTheoremAuthorityPromoted :
+      Bool
+
+    formalLensSpectralTheoremAuthorityPromotedIsFalse :
+      formalLensSpectralTheoremAuthorityPromoted ≡ false
+
+    formalLensEmpiricalAuthorityPromoted :
+      Bool
+
+    formalLensEmpiricalAuthorityPromotedIsFalse :
+      formalLensEmpiricalAuthorityPromoted ≡ false
+
+    formalLensTheoremAuthorityPromoted :
+      Bool
+
+    formalLensTheoremAuthorityPromotedIsFalse :
+      formalLensTheoremAuthorityPromoted ≡ false
+
+    formalLensClayAuthorityPromoted :
+      Bool
+
+    formalLensClayAuthorityPromotedIsFalse :
+      formalLensClayAuthorityPromoted ≡ false
+
+    formalLensPromotionAuthorityPromoted :
+      Bool
+
+    formalLensPromotionAuthorityPromotedIsFalse :
+      formalLensPromotionAuthorityPromoted ≡ false
+
+open MeditationFormalLensQualificationSurface public
+
+canonicalMeditationFormalLensQualificationSurface :
+  MeditationFormalLensQualificationSurface
+canonicalMeditationFormalLensQualificationSurface =
+  meditationFormalLensQualificationSurface
+    meditationFormalLensCandidateOnlyReceipt
+    refl
+    meditationFormalLensAuthorityNonPromotionBundle
+    refl
+    meditationFormalLensAuthorityNonPromotionAllFalse
+    meditationFormalLensListCanonicalityReceipt
+    refl
+    meditationAttentionOperatorFormalLensCoreSurface
+    refl
+    meditationAttentionOperatorFormalLensCoreReceipt
+    canonicalMeditationFormalLenses
+    refl
+    SymbolicRational
+    refl
+    Operator
+    refl
+    Functional
+    refl
+    Hamiltonian
+    refl
+    GradientFlow
+    refl
+    ResistiveTransport
+    refl
+    Spectral
+    refl
+    Category
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+
+canonicalMeditationFormalLensQualificationAdapterCanonicality :
+  AdapterCanon.AdapterCanonicalityReceipt
+    MeditationFormalLensQualificationSurface
+    canonicalMeditationFormalLensQualificationSurface
+canonicalMeditationFormalLensQualificationAdapterCanonicality =
+  AdapterCanon.mkCanonicalAdapterReceipt
+    "meditation formal-lens qualification surface canonicality"
+    "DASHI.Interop.MeditationQiBridge"
+    "canonicalMeditationFormalLensQualificationSurface"
+    (AdapterCanon.namedAdapterKind "formal-lens qualification surface")
+    canonicalMeditationFormalLensQualificationSurface
+
 data MeditationPromotion : Set where
 
 meditationPromotionImpossible :
@@ -402,6 +774,24 @@ record MeditationQiBridgeReceipt : Set where
       operatorShapeNonAuthorityCoreAdapter
       ≡
       OperatorShapeNA.canonicalOperatorShapeCandidateReceipt
+
+    formalLensQualificationAdapter :
+      MeditationFormalLensQualificationSurface
+
+    formalLensQualificationAdapterIsCanonical :
+      formalLensQualificationAdapter
+      ≡
+      canonicalMeditationFormalLensQualificationSurface
+
+    formalLensQualificationAdapterCanonicalityCore :
+      AdapterCanon.AdapterCanonicalityReceipt
+        MeditationFormalLensQualificationSurface
+        canonicalMeditationFormalLensQualificationSurface
+
+    formalLensQualificationAdapterCanonicalityCoreIsCanonical :
+      formalLensQualificationAdapterCanonicalityCore
+      ≡
+      canonicalMeditationFormalLensQualificationAdapterCanonicality
 
     meditationStateSnapshot :
       MeditationState
@@ -504,6 +894,10 @@ canonicalMeditationQiBridgeReceipt =
     refl
     OperatorShapeNA.canonicalOperatorShapeCandidateReceipt
     refl
+    canonicalMeditationFormalLensQualificationSurface
+    refl
+    canonicalMeditationFormalLensQualificationAdapterCanonicality
+    refl
     canonicalMeditationState
     refl
     canonicalFlowStateDimensions
@@ -576,6 +970,345 @@ canonicalMeditationQiOperatorShapeTheoremAuthorityFalse :
   ≡
   false
 canonicalMeditationQiOperatorShapeTheoremAuthorityFalse =
+  refl
+
+canonicalMeditationQiFormalLensAdapterCanonical :
+  formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt
+  ≡
+  canonicalMeditationFormalLensQualificationSurface
+canonicalMeditationQiFormalLensAdapterCanonical =
+  refl
+
+canonicalMeditationQiFormalLensCandidateOnly :
+  formalLensCandidateOnly
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  true
+canonicalMeditationQiFormalLensCandidateOnly =
+  refl
+
+canonicalMeditationQiFormalLensSymbolicRationalOnly :
+  formalLensSymbolicRationalOnly
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  true
+canonicalMeditationQiFormalLensSymbolicRationalOnly =
+  refl
+
+canonicalMeditationQiFormalLensCandidateCoreCandidateOnly :
+  CandidateOnly.candidateOnly meditationFormalLensCandidateOnlyRow
+  ≡
+  true
+canonicalMeditationQiFormalLensCandidateCoreCandidateOnly =
+  CandidateOnly.candidateOnlyIsTrue
+    (candidateOnlyCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+
+canonicalMeditationQiFormalLensCandidateCorePromotedFalse :
+  CandidateOnly.promoted meditationFormalLensCandidateOnlyRow
+  ≡
+  false
+canonicalMeditationQiFormalLensCandidateCorePromotedFalse =
+  CandidateOnly.candidatePromotedIsFalse
+    (candidateOnlyCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+
+canonicalMeditationQiFormalLensAdapterCanonicalityPromotionFalse :
+  AdapterCanon.adapterPromotesAuthority
+    (formalLensQualificationAdapterCanonicalityCore
+      canonicalMeditationQiBridgeReceipt)
+  ≡
+  false
+canonicalMeditationQiFormalLensAdapterCanonicalityPromotionFalse =
+  refl
+
+canonicalMeditationQiFormalLensCoreAdapterCanonical :
+  formalLensQualificationCoreAdapter
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  meditationAttentionOperatorFormalLensCoreSurface
+canonicalMeditationQiFormalLensCoreAdapterCanonical =
+  refl
+
+canonicalMeditationQiFormalLensCoreSourceSymbolicRational :
+  FormalLensCore.sourceLens
+    (formalLensQualificationCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  SymbolicRational
+canonicalMeditationQiFormalLensCoreSourceSymbolicRational =
+  refl
+
+canonicalMeditationQiFormalLensCoreTargetOperator :
+  FormalLensCore.targetLens
+    (formalLensQualificationCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  Operator
+canonicalMeditationQiFormalLensCoreTargetOperator =
+  refl
+
+canonicalMeditationQiFormalLensCoreCandidateOnly :
+  FormalLensCore.qualificationCandidateOnly
+    (formalLensQualificationCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  true
+canonicalMeditationQiFormalLensCoreCandidateOnly =
+  FormalLensCore.qualificationIsCandidateOnly
+    (formalLensQualificationCoreReceipt
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+
+canonicalMeditationQiFormalLensCorePromotedFalse :
+  FormalLensCore.qualificationPromoted
+    (formalLensQualificationCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensCorePromotedFalse =
+  FormalLensCore.qualificationPromotedFalse
+    (formalLensQualificationCoreReceipt
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+
+canonicalMeditationQiFormalLensCoreAnalyticAuthorityFalse :
+  FormalLensCore.analyticAuthority
+    (formalLensQualificationCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensCoreAnalyticAuthorityFalse =
+  FormalLensCore.qualificationAnalyticAuthorityFalse
+    (formalLensQualificationCoreReceipt
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+
+canonicalMeditationQiFormalLensCoreEmpiricalAuthorityFalse :
+  FormalLensCore.empiricalAuthority
+    (formalLensQualificationCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensCoreEmpiricalAuthorityFalse =
+  FormalLensCore.qualificationEmpiricalAuthorityFalse
+    (formalLensQualificationCoreReceipt
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+
+canonicalMeditationQiFormalLensCoreClinicalAuthorityFalse :
+  FormalLensCore.clinicalAuthority
+    (formalLensQualificationCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensCoreClinicalAuthorityFalse =
+  FormalLensCore.qualificationClinicalAuthorityFalse
+    (formalLensQualificationCoreReceipt
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+
+canonicalMeditationQiFormalLensCoreTheoremAuthorityFalse :
+  FormalLensCore.theoremAuthority
+    (formalLensQualificationCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensCoreTheoremAuthorityFalse =
+  FormalLensCore.qualificationTheoremAuthorityFalse
+    (formalLensQualificationCoreReceipt
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+
+canonicalMeditationQiFormalLensCoreMetaphysicalAuthorityFalse :
+  FormalLensCore.metaphysicalAuthority
+    (formalLensQualificationCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensCoreMetaphysicalAuthorityFalse =
+  FormalLensCore.qualificationMetaphysicalAuthorityFalse
+    (formalLensQualificationCoreReceipt
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+
+canonicalMeditationQiFormalLensCorePromotionAuthorityFalse :
+  FormalLensCore.promotionAuthority
+    (formalLensQualificationCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensCorePromotionAuthorityFalse =
+  FormalLensCore.qualificationPromotionAuthorityFalse
+    (formalLensQualificationCoreReceipt
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+
+canonicalMeditationQiFormalLensAttentionOperator :
+  attentionOperatorReading
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  Operator
+canonicalMeditationQiFormalLensAttentionOperator =
+  refl
+
+canonicalMeditationQiFormalLensHamiltonian :
+  meditationHamiltonianReading
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  Hamiltonian
+canonicalMeditationQiFormalLensHamiltonian =
+  refl
+
+canonicalMeditationQiFormalLensFunctional :
+  meditationFunctionalReading
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  Functional
+canonicalMeditationQiFormalLensFunctional =
+  refl
+
+canonicalMeditationQiFormalLensSpectral :
+  meditationSpectralReading
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  Spectral
+canonicalMeditationQiFormalLensSpectral =
+  refl
+
+canonicalMeditationQiFormalLensGradientFlow :
+  meditationGradientFlowReading
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  GradientFlow
+canonicalMeditationQiFormalLensGradientFlow =
+  refl
+
+canonicalMeditationQiFormalLensClinicalAuthorityFalse :
+  formalLensClinicalAuthorityPromoted
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  false
+canonicalMeditationQiFormalLensClinicalAuthorityFalse =
+  refl
+
+canonicalMeditationQiFormalLensSpiritualAuthorityFalse :
+  formalLensSpiritualAuthorityPromoted
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  false
+canonicalMeditationQiFormalLensSpiritualAuthorityFalse =
+  refl
+
+canonicalMeditationQiFormalLensMetaphysicalAuthorityFalse :
+  formalLensMetaphysicalAuthorityPromoted
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  false
+canonicalMeditationQiFormalLensMetaphysicalAuthorityFalse =
+  refl
+
+canonicalMeditationQiFormalLensAnalyticHamiltonianAuthorityFalse :
+  formalLensAnalyticHamiltonianAuthorityPromoted
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  false
+canonicalMeditationQiFormalLensAnalyticHamiltonianAuthorityFalse =
+  refl
+
+canonicalMeditationQiFormalLensSpectralTheoremAuthorityFalse :
+  formalLensSpectralTheoremAuthorityPromoted
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  false
+canonicalMeditationQiFormalLensSpectralTheoremAuthorityFalse =
+  refl
+
+canonicalMeditationQiFormalLensEmpiricalAuthorityFalse :
+  formalLensEmpiricalAuthorityPromoted
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  false
+canonicalMeditationQiFormalLensEmpiricalAuthorityFalse =
+  refl
+
+canonicalMeditationQiFormalLensTheoremAuthorityFalse :
+  formalLensTheoremAuthorityPromoted
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  false
+canonicalMeditationQiFormalLensTheoremAuthorityFalse =
+  refl
+
+canonicalMeditationQiFormalLensClayAuthorityFalse :
+  formalLensClayAuthorityPromoted
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  false
+canonicalMeditationQiFormalLensClayAuthorityFalse =
+  refl
+
+canonicalMeditationQiFormalLensPromotionAuthorityFalse :
+  formalLensPromotionAuthorityPromoted
+    (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt)
+  ≡
+  false
+canonicalMeditationQiFormalLensPromotionAuthorityFalse =
+  refl
+
+canonicalMeditationQiFormalLensAuthorityCoreClinicalFalse :
+  AuthorityNA.clinicalAuthorityFlag
+    (authorityNonPromotionCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensAuthorityCoreClinicalFalse =
+  refl
+
+canonicalMeditationQiFormalLensAuthorityCoreSpiritualFalse :
+  AuthorityNA.spiritualAuthorityFlag
+    (authorityNonPromotionCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensAuthorityCoreSpiritualFalse =
+  refl
+
+canonicalMeditationQiFormalLensAuthorityCoreMetaphysicalFalse :
+  AuthorityNA.metaphysicalAuthorityFlag
+    (authorityNonPromotionCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensAuthorityCoreMetaphysicalFalse =
+  refl
+
+canonicalMeditationQiFormalLensAuthorityCoreTheoremFalse :
+  AuthorityNA.theoremAuthorityFlag
+    (authorityNonPromotionCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensAuthorityCoreTheoremFalse =
+  refl
+
+canonicalMeditationQiFormalLensAuthorityCoreClayFalse :
+  AuthorityNA.clayAuthorityFlag
+    (authorityNonPromotionCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensAuthorityCoreClayFalse =
+  refl
+
+canonicalMeditationQiFormalLensAuthorityCoreEmpiricalFalse :
+  AuthorityNA.empiricalAuthorityFlag
+    (authorityNonPromotionCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensAuthorityCoreEmpiricalFalse =
+  refl
+
+canonicalMeditationQiFormalLensAuthorityCorePromotesAnyFalse :
+  AuthorityNA.promotesAnyAuthority
+    (authorityNonPromotionCoreAdapter
+      (formalLensQualificationAdapter canonicalMeditationQiBridgeReceipt))
+  ≡
+  false
+canonicalMeditationQiFormalLensAuthorityCorePromotesAnyFalse =
   refl
 
 canonicalMeditationQiClinicalAuthorityFalse :

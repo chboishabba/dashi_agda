@@ -5,11 +5,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 import DASHI.Core.AuthorityNonPromotionCore as AuthorityCore
+import DASHI.Core.AdapterCanonicalityCore as AdapterCanon
 import DASHI.Core.CandidateFunctionalCore as FunctionalCore
 import DASHI.Core.CandidateOnlyCore as CandidateCore
+import DASHI.Core.FormalLensQualificationCore as FormalLensCore
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Core.OperatorShapeNonAuthorityCore as OperatorShapeCore
 open import DASHI.Interop.RoleGrammarCore as RoleCore
+import DASHI.Interop.SpectralOperatorShapeCore as SpectralShapeCore
 
 ------------------------------------------------------------------------
 -- Feng Shui / Qi operator-theory boundary.
@@ -801,6 +804,404 @@ canonicalQiReceiptBoundaryRows =
   ∷ rowAuthorityBlockedWithoutValidation
   ∷ []
 
+------------------------------------------------------------------------
+-- Formal-lens qualification adapter.
+--
+-- FormalLensQualificationCore owns the reusable lens surface.  This local
+-- adapter keeps the Qi/operator readings readable while staying candidate-only
+-- and non-authoritative.
+
+data QiFormalLensReading : Set where
+  qiSymbolicRationalReading :
+    QiFormalLensReading
+  qiOperatorReading :
+    QiFormalLensReading
+  qiFunctionalReading :
+    QiFormalLensReading
+  qiHamiltonianReading :
+    QiFormalLensReading
+  qiGradientFlowReading :
+    QiFormalLensReading
+  qiResistiveTransportReading :
+    QiFormalLensReading
+  qiSpectralReading :
+    QiFormalLensReading
+  qiCategoryReading :
+    QiFormalLensReading
+
+QiFormalLensConstructor : Set
+QiFormalLensConstructor =
+  FormalLensCore.FormalLens
+
+qiFormalLensConstructor :
+  QiFormalLensReading → QiFormalLensConstructor
+qiFormalLensConstructor qiSymbolicRationalReading =
+  FormalLensCore.SymbolicRational
+qiFormalLensConstructor qiOperatorReading =
+  FormalLensCore.Operator
+qiFormalLensConstructor qiFunctionalReading =
+  FormalLensCore.Functional
+qiFormalLensConstructor qiHamiltonianReading =
+  FormalLensCore.Hamiltonian
+qiFormalLensConstructor qiGradientFlowReading =
+  FormalLensCore.GradientFlow
+qiFormalLensConstructor qiResistiveTransportReading =
+  FormalLensCore.ResistiveTransport
+qiFormalLensConstructor qiSpectralReading =
+  FormalLensCore.Spectral
+qiFormalLensConstructor qiCategoryReading =
+  FormalLensCore.Category
+
+qiFormalLensIsQualified :
+  QiFormalLensReading → Bool
+qiFormalLensIsQualified _ =
+  true
+
+qiFormalLensIsCandidateOnly :
+  QiFormalLensReading → Bool
+qiFormalLensIsCandidateOnly _ =
+  true
+
+qiFormalLensPromotesAuthority :
+  QiFormalLensReading → Bool
+qiFormalLensPromotesAuthority _ =
+  false
+
+record QiFormalLensQualificationAdapterRow : Set where
+  constructor qiFormalLensQualificationAdapterRow
+  field
+    formalLensReading :
+      QiFormalLensReading
+    formalLensConstructor :
+      QiFormalLensConstructor
+    formalLensConstructorComputes :
+      qiFormalLensConstructor formalLensReading
+        ≡ formalLensConstructor
+    formalLensQualified :
+      Bool
+    formalLensQualifiedIsTrue :
+      formalLensQualified ≡ true
+    formalLensCandidateOnly :
+      Bool
+    formalLensCandidateOnlyIsTrue :
+      formalLensCandidateOnly ≡ true
+    formalLensPromotesAuthority :
+      Bool
+    formalLensPromotesAuthorityIsFalse :
+      formalLensPromotesAuthority ≡ false
+    promotesQiAuthority :
+      Bool
+    promotesQiAuthorityIsFalse :
+      promotesQiAuthority ≡ false
+    promotesAnalyticOperatorAuthority :
+      Bool
+    promotesAnalyticOperatorAuthorityIsFalse :
+      promotesAnalyticOperatorAuthority ≡ false
+    promotesSpectralAuthority :
+      Bool
+    promotesSpectralAuthorityIsFalse :
+      promotesSpectralAuthority ≡ false
+    promotesGradientFlowAuthority :
+      Bool
+    promotesGradientFlowAuthorityIsFalse :
+      promotesGradientFlowAuthority ≡ false
+    promotesClinicalAuthority :
+      Bool
+    promotesClinicalAuthorityIsFalse :
+      promotesClinicalAuthority ≡ false
+    promotesMetaphysicalAuthority :
+      Bool
+    promotesMetaphysicalAuthorityIsFalse :
+      promotesMetaphysicalAuthority ≡ false
+    promotesTheoremAuthority :
+      Bool
+    promotesTheoremAuthorityIsFalse :
+      promotesTheoremAuthority ≡ false
+    promotesClayAuthority :
+      Bool
+    promotesClayAuthorityIsFalse :
+      promotesClayAuthority ≡ false
+    reading :
+      String
+
+open QiFormalLensQualificationAdapterRow public
+
+qiFormalLensQualificationAdapterRowFor :
+  (lensReading : QiFormalLensReading) →
+  String →
+  QiFormalLensQualificationAdapterRow
+qiFormalLensQualificationAdapterRowFor lensReading reading =
+  qiFormalLensQualificationAdapterRow
+    lensReading
+    (qiFormalLensConstructor lensReading)
+    refl
+    (qiFormalLensIsQualified lensReading)
+    refl
+    (qiFormalLensIsCandidateOnly lensReading)
+    refl
+    (qiFormalLensPromotesAuthority lensReading)
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    reading
+
+qiSymbolicRationalFormalLensQualificationRow :
+  QiFormalLensQualificationAdapterRow
+qiSymbolicRationalFormalLensQualificationRow =
+  qiFormalLensQualificationAdapterRowFor
+    qiSymbolicRationalReading
+    "Qi ratios and symbolic balances are formal-lens-qualified as SymbolicRational candidate readings only."
+
+qiOperatorFormalLensQualificationRow :
+  QiFormalLensQualificationAdapterRow
+qiOperatorFormalLensQualificationRow =
+  qiFormalLensQualificationAdapterRowFor
+    qiOperatorReading
+    "Qi operator roles are formal-lens-qualified as Operator candidate readings only."
+
+qiFunctionalFormalLensQualificationRow :
+  QiFormalLensQualificationAdapterRow
+qiFunctionalFormalLensQualificationRow =
+  qiFormalLensQualificationAdapterRowFor
+    qiFunctionalReading
+    "Qi functional roles are formal-lens-qualified as Functional candidate readings only."
+
+qiHamiltonianFormalLensQualificationRow :
+  QiFormalLensQualificationAdapterRow
+qiHamiltonianFormalLensQualificationRow =
+  qiFormalLensQualificationAdapterRowFor
+    qiHamiltonianReading
+    "Qi energy-like bookkeeping is formal-lens-qualified as Hamiltonian candidate grammar only."
+
+qiGradientFlowFormalLensQualificationRow :
+  QiFormalLensQualificationAdapterRow
+qiGradientFlowFormalLensQualificationRow =
+  qiFormalLensQualificationAdapterRowFor
+    qiGradientFlowReading
+    "Qi flow wording is formal-lens-qualified as GradientFlow candidate grammar only."
+
+qiResistiveTransportFormalLensQualificationRow :
+  QiFormalLensQualificationAdapterRow
+qiResistiveTransportFormalLensQualificationRow =
+  qiFormalLensQualificationAdapterRowFor
+    qiResistiveTransportReading
+    "Qi obstruction and attenuation wording is formal-lens-qualified as ResistiveTransport candidate grammar only."
+
+qiSpectralFormalLensQualificationRow :
+  QiFormalLensQualificationAdapterRow
+qiSpectralFormalLensQualificationRow =
+  qiFormalLensQualificationAdapterRowFor
+    qiSpectralReading
+    "Sheng/Sha/Si spectrum wording is formal-lens-qualified as Spectral candidate grammar only."
+
+qiCategoryFormalLensQualificationRow :
+  QiFormalLensQualificationAdapterRow
+qiCategoryFormalLensQualificationRow =
+  qiFormalLensQualificationAdapterRowFor
+    qiCategoryReading
+    "Qi role-grammar organization is formal-lens-qualified as Category candidate grammar only."
+
+canonicalQiFormalLensQualificationAdapterRows :
+  List QiFormalLensQualificationAdapterRow
+canonicalQiFormalLensQualificationAdapterRows =
+  qiSymbolicRationalFormalLensQualificationRow
+  ∷ qiOperatorFormalLensQualificationRow
+  ∷ qiFunctionalFormalLensQualificationRow
+  ∷ qiHamiltonianFormalLensQualificationRow
+  ∷ qiGradientFlowFormalLensQualificationRow
+  ∷ qiResistiveTransportFormalLensQualificationRow
+  ∷ qiSpectralFormalLensQualificationRow
+  ∷ qiCategoryFormalLensQualificationRow
+  ∷ []
+
+qiFormalLensQualifiedCandidateOnly :
+  formalLensQualified qiCategoryFormalLensQualificationRow
+    ≡ true
+qiFormalLensQualifiedCandidateOnly =
+  refl
+
+qiFormalLensPromotesQiAuthorityFalse :
+  promotesQiAuthority qiCategoryFormalLensQualificationRow
+    ≡ false
+qiFormalLensPromotesQiAuthorityFalse =
+  promotesQiAuthorityIsFalse qiCategoryFormalLensQualificationRow
+
+qiOperatorFormalLensQualified :
+  formalLensQualified qiOperatorFormalLensQualificationRow
+    ≡ true
+qiOperatorFormalLensQualified =
+  refl
+
+qiOperatorFormalLensCandidateOnly :
+  formalLensCandidateOnly qiOperatorFormalLensQualificationRow
+    ≡ true
+qiOperatorFormalLensCandidateOnly =
+  refl
+
+qiOperatorFormalLensAnalyticOperatorAuthorityFalse :
+  promotesAnalyticOperatorAuthority qiOperatorFormalLensQualificationRow
+    ≡ false
+qiOperatorFormalLensAnalyticOperatorAuthorityFalse =
+  promotesAnalyticOperatorAuthorityIsFalse
+    qiOperatorFormalLensQualificationRow
+
+qiSpectralFormalLensQualified :
+  formalLensQualified qiSpectralFormalLensQualificationRow
+    ≡ true
+qiSpectralFormalLensQualified =
+  refl
+
+qiSpectralFormalLensCandidateOnly :
+  formalLensCandidateOnly qiSpectralFormalLensQualificationRow
+    ≡ true
+qiSpectralFormalLensCandidateOnly =
+  refl
+
+qiSpectralFormalLensAuthorityFalse :
+  promotesSpectralAuthority qiSpectralFormalLensQualificationRow
+    ≡ false
+qiSpectralFormalLensAuthorityFalse =
+  promotesSpectralAuthorityIsFalse
+    qiSpectralFormalLensQualificationRow
+
+qiGradientFlowFormalLensQualified :
+  formalLensQualified qiGradientFlowFormalLensQualificationRow
+    ≡ true
+qiGradientFlowFormalLensQualified =
+  refl
+
+qiGradientFlowFormalLensCandidateOnly :
+  formalLensCandidateOnly qiGradientFlowFormalLensQualificationRow
+    ≡ true
+qiGradientFlowFormalLensCandidateOnly =
+  refl
+
+qiGradientFlowFormalLensAuthorityFalse :
+  promotesGradientFlowAuthority qiGradientFlowFormalLensQualificationRow
+    ≡ false
+qiGradientFlowFormalLensAuthorityFalse =
+  promotesGradientFlowAuthorityIsFalse
+    qiGradientFlowFormalLensQualificationRow
+
+formalLensQualificationCandidateOnlyCoreAdapter :
+  CandidateCore.CandidateOnlyRow
+formalLensQualificationCandidateOnlyCoreAdapter =
+  CandidateCore.mkCandidateOnlyRow
+    "Qi formal-lens qualification candidate adapter"
+    "DASHI.Culture.QiOperatorTheoryBoundary"
+    "canonicalQiFormalLensQualificationAdapterRows"
+    CandidateCore.operatorCandidateKind
+    CandidateCore.operatorCandidateOnlyStatus
+    "Qi/operator/spectral/gradient-flow readings are formal-lens-qualified candidate surfaces."
+    "Worker A's FormalLensQualificationCore remains the owning core for any authoritative surface."
+
+formalLensQualificationCandidateOnlyCoreAdapterReceipt :
+  CandidateCore.CandidateOnlyReceipt
+    formalLensQualificationCandidateOnlyCoreAdapter
+formalLensQualificationCandidateOnlyCoreAdapterReceipt =
+  CandidateCore.canonicalCandidateOnlyReceipt
+    formalLensQualificationCandidateOnlyCoreAdapter
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+formalLensQualificationCandidateOnlyCoreAdapterPromotedFalse :
+  CandidateCore.promoted formalLensQualificationCandidateOnlyCoreAdapter
+    ≡ false
+formalLensQualificationCandidateOnlyCoreAdapterPromotedFalse =
+  CandidateCore.candidatePromotedIsFalse
+    formalLensQualificationCandidateOnlyCoreAdapterReceipt
+
+formalLensQualificationAdapterCanonicality :
+  AdapterCanon.AdapterCanonicalityReceipt
+    (List QiFormalLensQualificationAdapterRow)
+    canonicalQiFormalLensQualificationAdapterRows
+formalLensQualificationAdapterCanonicality =
+  AdapterCanon.mkCanonicalAdapterReceipt
+    "Qi formal-lens qualification adapter canonicality"
+    "DASHI.Culture.QiOperatorTheoryBoundary"
+    "canonicalQiFormalLensQualificationAdapterRows"
+    AdapterCanon.receiptAdapterKind
+    canonicalQiFormalLensQualificationAdapterRows
+
+formalLensQualificationAdapterIsCanonical :
+  AdapterCanon.adapter formalLensQualificationAdapterCanonicality
+    ≡ canonicalQiFormalLensQualificationAdapterRows
+formalLensQualificationAdapterIsCanonical =
+  AdapterCanon.adapterCanonical
+    formalLensQualificationAdapterCanonicality
+
+formalLensQualificationAdapterPromotesAuthorityFalse :
+  AdapterCanon.adapterPromotesAuthority
+    formalLensQualificationAdapterCanonicality
+    ≡ false
+formalLensQualificationAdapterPromotesAuthorityFalse =
+  AdapterCanon.adapterAuthorityPromotionFalse
+    formalLensQualificationAdapterCanonicality
+
+formalLensQualificationAdapterGenericReceipt :
+  GenericReceipt.GenericReceipt
+formalLensQualificationAdapterGenericReceipt =
+  GenericReceipt.mkNonPromotingReceipt
+    "Qi formal-lens qualification adapter"
+    "DASHI.Culture.QiOperatorTheoryBoundary"
+    "canonicalQiFormalLensQualificationAdapterRows"
+    "Qi/operator/spectral/gradient-flow readings are mapped to the expected formal-lens constructors as candidate-only rows."
+    "No analytic operator, spectral, clinical, metaphysical, Qi, theorem, Clay, or promotion authority is supplied."
+    "agda -i . DASHI/Culture/QiOperatorTheoryBoundary.agda"
+
+formalLensQualificationAdapterGenericReceiptNonPromoting :
+  GenericReceipt.promotesClaim
+    formalLensQualificationAdapterGenericReceipt
+    ≡ false
+formalLensQualificationAdapterGenericReceiptNonPromoting =
+  refl
+
+qiSpectralOperatorShapeCoreAdapter :
+  SpectralShapeCore.SpectralOperatorShapeReceipt
+qiSpectralOperatorShapeCoreAdapter =
+  SpectralShapeCore.mkSpectralOperatorShapeReceipt
+    SpectralShapeCore.hodgeLaplacian1Diagnostic
+
+qiSpectralOperatorShapeCoreAdapterFailClosed :
+  SpectralShapeCore.higherHodgeDiagnosticFailClosed
+    qiSpectralOperatorShapeCoreAdapter
+    ≡ true
+qiSpectralOperatorShapeCoreAdapterFailClosed =
+  refl
+
+qiSpectralOperatorShapeCoreAdapterGrantsAuthorityFalse :
+  SpectralShapeCore.higherHodgeDiagnosticGrantsAuthority
+    qiSpectralOperatorShapeCoreAdapter
+    ≡ false
+qiSpectralOperatorShapeCoreAdapterGrantsAuthorityFalse =
+  refl
+
+qiSpectralOperatorShapeCoreAdapterGenericReceipt :
+  GenericReceipt.GenericReceipt
+qiSpectralOperatorShapeCoreAdapterGenericReceipt =
+  SpectralShapeCore.spectralOperatorShapeGenericReceipt
+    qiSpectralOperatorShapeCoreAdapter
+
 record QiOperatorTheoryBoundaryReceipt : Set where
   field
     status :
@@ -879,6 +1280,43 @@ record QiOperatorTheoryBoundaryReceipt : Set where
       Bool
     promotesScientificAuthorityIsFalse :
       promotesScientificAuthority ≡ false
+    formalLensRows :
+      List QiFormalLensQualificationAdapterRow
+    formalLensRowsAreCanonical :
+      formalLensRows ≡ canonicalQiFormalLensQualificationAdapterRows
+    formalLensCandidateOnlyCoreAdapter :
+      CandidateCore.CandidateOnlyRow
+    formalLensCandidateOnlyCoreAdapterIsCanonical :
+      formalLensCandidateOnlyCoreAdapter
+        ≡ formalLensQualificationCandidateOnlyCoreAdapter
+    formalLensCandidateOnlyCoreAdapterPromotedFalse :
+      CandidateCore.promoted formalLensCandidateOnlyCoreAdapter
+        ≡ false
+    formalLensAdapterCanonicality :
+      AdapterCanon.AdapterCanonicalityReceipt
+        (List QiFormalLensQualificationAdapterRow)
+        canonicalQiFormalLensQualificationAdapterRows
+    formalLensAdapterIsCanonical :
+      AdapterCanon.adapter formalLensAdapterCanonicality
+        ≡ canonicalQiFormalLensQualificationAdapterRows
+    formalLensAdapterPromotesAuthorityFalse :
+      AdapterCanon.adapterPromotesAuthority formalLensAdapterCanonicality
+        ≡ false
+    formalLensGenericReceipt :
+      GenericReceipt.GenericReceipt
+    formalLensGenericReceiptNonPromoting :
+      GenericReceipt.promotesClaim formalLensGenericReceipt
+        ≡ false
+    spectralOperatorShapeCoreAdapter :
+      SpectralShapeCore.SpectralOperatorShapeReceipt
+    spectralOperatorShapeCoreAdapterFailClosed :
+      SpectralShapeCore.higherHodgeDiagnosticFailClosed
+        spectralOperatorShapeCoreAdapter
+        ≡ true
+    spectralOperatorShapeCoreAdapterGrantsAuthorityFalse :
+      SpectralShapeCore.higherHodgeDiagnosticGrantsAuthority
+        spectralOperatorShapeCoreAdapter
+        ≡ false
     receiptReading :
       String
 
@@ -964,6 +1402,32 @@ canonicalQiOperatorTheoryBoundaryReceipt =
         false
     ; promotesScientificAuthorityIsFalse =
         refl
+    ; formalLensRows =
+        canonicalQiFormalLensQualificationAdapterRows
+    ; formalLensRowsAreCanonical =
+        refl
+    ; formalLensCandidateOnlyCoreAdapter =
+        formalLensQualificationCandidateOnlyCoreAdapter
+    ; formalLensCandidateOnlyCoreAdapterIsCanonical =
+        refl
+    ; formalLensCandidateOnlyCoreAdapterPromotedFalse =
+        formalLensQualificationCandidateOnlyCoreAdapterPromotedFalse
+    ; formalLensAdapterCanonicality =
+        formalLensQualificationAdapterCanonicality
+    ; formalLensAdapterIsCanonical =
+        formalLensQualificationAdapterIsCanonical
+    ; formalLensAdapterPromotesAuthorityFalse =
+        formalLensQualificationAdapterPromotesAuthorityFalse
+    ; formalLensGenericReceipt =
+        formalLensQualificationAdapterGenericReceipt
+    ; formalLensGenericReceiptNonPromoting =
+        formalLensQualificationAdapterGenericReceiptNonPromoting
+    ; spectralOperatorShapeCoreAdapter =
+        qiSpectralOperatorShapeCoreAdapter
+    ; spectralOperatorShapeCoreAdapterFailClosed =
+        qiSpectralOperatorShapeCoreAdapterFailClosed
+    ; spectralOperatorShapeCoreAdapterGrantsAuthorityFalse =
+        qiSpectralOperatorShapeCoreAdapterGrantsAuthorityFalse
     ; receiptReading =
         "Feng Shui/Qi operator theory is recorded as non-promoting role grammar for Qi-field formalism only."
     }
