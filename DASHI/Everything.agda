@@ -130,6 +130,7 @@ import DASHI.Combinatorics.String.LieAlgebra
 import DASHI.Combinatorics.String.StringCompatibility
 import DASHI.Combinatorics.String.Unitary
 import DASHI.Core.DashiMarkov
+import DASHI.Core.AdapterCanonicalityCore
 import DASHI.Core.AuthorityNonPromotionCore
 import DASHI.Core.BridgeRequirementCore
 import DASHI.Core.CandidateFunctionalCore

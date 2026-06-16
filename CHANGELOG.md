@@ -6,6 +6,16 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane reusable-core migration tranche for `2026-06-16`: adds
+  `DASHI.Core.AdapterCanonicalityCore` and migrates the next biology,
+  Wikidata-role, and ontology bridge consumers onto the reusable
+  candidate-only, authority non-promotion, bridge requirement, empty-promotion,
+  and adapter-canonicality cores. Public receipt names, constructors, booleans,
+  and local false proof surfaces remain additive/stable. This is proof-plumbing
+  compression only: biological truth, clinical/scientific authority, Wikidata
+  edit/truth authority, ontology promotion, theorem authority, Clay, and
+  terminal promotion remain false/open.
+
 - Worker 6 docs-only canonical update for `2026-06-16`: records the exact
   remaining GR variable names for the ordered rational gauge, Shell A
   denominator, Christoffel derivative-bound, C0-stability, and Ricci

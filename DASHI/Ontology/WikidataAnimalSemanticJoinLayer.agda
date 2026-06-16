@@ -8,6 +8,11 @@ open import Agda.Builtin.Unit using (⊤; tt)
 
 open import DASHI.Biology.AnimalexicAnimalUtteranceSurface
 open import DASHI.Biology.CrossSpeciesOntologyTranslationBridge as CrossSpecies
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityCore
+import DASHI.Core.BridgeRequirementCore as BridgeCore
+import DASHI.Core.CandidateOnlyCore as CandidateCore
+import DASHI.Core.EmptyPromotionCore as EmptyPromotion
+import DASHI.Core.GenericReceipt as GenericReceipt
 
 ------------------------------------------------------------------------
 -- Public ontology vocabulary for Animalexic-style review joins.
@@ -243,6 +248,27 @@ record WikidataAnimalSemanticJoinLayer : Set₁ where
     anthropomorphicPromotionAllowedIsFalse :
       anthropomorphicPromotionAllowed ≡ false
 
+    candidateOnlyCoreAdapter :
+      CandidateCore.CandidateOnlyRow
+
+    candidateOnlyCoreAdapterReceipt :
+      CandidateCore.CandidateOnlyReceipt candidateOnlyCoreAdapter
+
+    bridgeRequirementCoreAdapter :
+      BridgeCore.BridgeRequirementCoreReceipt
+
+    emptyPromotionCoreAdapter :
+      EmptyPromotion.EmptyPromotionReceipt
+
+    authorityNonPromotionCoreAdapter :
+      AuthorityCore.AuthorityNonPromotionBundle
+
+    genericNonPromotingReceipts :
+      List GenericReceipt.GenericReceipt
+
+    genericNonPromotingReceiptsAreNonPromoting :
+      GenericReceipt.AllReceiptsNonPromoting genericNonPromotingReceipts
+
     layerReading :
       String
 
@@ -272,10 +298,205 @@ record WikidataSemanticJoinNonAuthorityCertificate
     anthropomorphicPromotionBlocked :
       anthropomorphicPromotionAllowed layer ≡ false
 
+    candidateOnlyCoreCandidateOnly :
+      CandidateCore.candidateOnly (candidateOnlyCoreAdapter layer) ≡ true
+
+    candidateOnlyCorePromotedFalse :
+      CandidateCore.promoted (candidateOnlyCoreAdapter layer) ≡ false
+
+    candidateOnlyCoreTruthAuthorityFalse :
+      CandidateCore.carriesTruthAuthority (candidateOnlyCoreAdapter layer)
+      ≡ false
+
+    bridgeCoreAuthorityPromotionFalse :
+      BridgeCore.receiptAuthorityPromotion (bridgeRequirementCoreAdapter layer)
+      ≡ false
+
+    bridgeCoreTransportMapAuthorityFalse :
+      BridgeCore.receiptTransportMapAuthority
+        (bridgeRequirementCoreAdapter layer)
+      ≡ false
+
+    bridgeCoreBackgroundBridgeAuthorityFalse :
+      BridgeCore.receiptBackgroundBridgeAuthority
+        (bridgeRequirementCoreAdapter layer)
+      ≡ false
+
+    emptyPromotionCorePromotionsEmpty :
+      EmptyPromotion.promotions (emptyPromotionCoreAdapter layer) ≡ []
+
+    authorityCoreTruthAuthorityFalse :
+      AuthorityCore.truthAuthorityFlag (authorityNonPromotionCoreAdapter layer)
+      ≡ false
+
+    authorityCoreRuntimeAuthorityFalse :
+      AuthorityCore.runtimeAuthorityFlag (authorityNonPromotionCoreAdapter layer)
+      ≡ false
+
+    authorityCorePromotesAnyAuthorityFalse :
+      AuthorityCore.promotesAnyAuthority
+        (authorityNonPromotionCoreAdapter layer)
+      ≡ false
+
     certificateReading :
       String
 
 open WikidataSemanticJoinNonAuthorityCertificate public
+
+------------------------------------------------------------------------
+-- Reusable core adapters.
+--
+-- These adapters are additive only: they route the local candidate-only,
+-- bridge-false, authority-false, and empty-promotion readings through the
+-- reusable fail-closed cores without changing the public ontology records.
+------------------------------------------------------------------------
+
+wikidataSemanticJoinCandidateOnlyCoreAdapter :
+  CandidateCore.CandidateOnlyRow
+wikidataSemanticJoinCandidateOnlyCoreAdapter =
+  CandidateCore.mkCandidateOnlyRow
+    "wikidata animal semantic join candidate-only adapter"
+    "DASHI.Ontology.WikidataAnimalSemanticJoinLayer"
+    "WikidataAnimalSemanticJoinLayer"
+    CandidateCore.bridgeCandidateKind
+    CandidateCore.bridgeCandidateOnlyStatus
+    "Wikidata/Wikipedia animal semantics join Animalexic observations as review candidates only."
+    "Edit authority, truth authority, context-free translation, and anthropomorphic promotion remain outside this join layer."
+
+wikidataSemanticJoinCandidateOnlyCoreAdapterReceipt :
+  CandidateCore.CandidateOnlyReceipt
+    wikidataSemanticJoinCandidateOnlyCoreAdapter
+wikidataSemanticJoinCandidateOnlyCoreAdapterReceipt =
+  CandidateCore.canonicalCandidateOnlyReceipt
+    wikidataSemanticJoinCandidateOnlyCoreAdapter
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+wikidataSemanticJoinBridgeRequirementCoreAdapter :
+  BridgeCore.BridgeRequirementCoreReceipt
+wikidataSemanticJoinBridgeRequirementCoreAdapter =
+  BridgeCore.canonicalBridgeRequirementCoreReceipt
+
+wikidataSemanticJoinEmptyPromotionCoreAdapter :
+  EmptyPromotion.EmptyPromotionReceipt
+wikidataSemanticJoinEmptyPromotionCoreAdapter =
+  EmptyPromotion.canonicalEmptyPromotionReceipt
+
+wikidataSemanticJoinAuthorityNonPromotionCoreAdapter :
+  AuthorityCore.AuthorityNonPromotionBundle
+wikidataSemanticJoinAuthorityNonPromotionCoreAdapter =
+  AuthorityCore.mkClosedAuthorityNonPromotionBundle
+    "wikidata animal semantic join authority non-promotion adapter"
+
+wikidataSemanticJoinGenericNonPromotingReceipts :
+  List GenericReceipt.GenericReceipt
+wikidataSemanticJoinGenericNonPromotingReceipts =
+  BridgeCore.bridgeRequirementRowGenericReceipt
+    BridgeCore.suppliedCandidateOnlyBridgeRow
+  ∷ BridgeCore.bridgeRequirementRowGenericReceipt
+      BridgeCore.absentRequiredBridgeRow
+  ∷ EmptyPromotion.canonicalEmptyPromotionGenericReceipt
+  ∷ AuthorityCore.authorityNonPromotionGenericReceipt
+      wikidataSemanticJoinAuthorityNonPromotionCoreAdapter
+  ∷ []
+
+wikidataSemanticJoinGenericNonPromotingReceiptsAreNonPromoting :
+  GenericReceipt.AllReceiptsNonPromoting
+    wikidataSemanticJoinGenericNonPromotingReceipts
+wikidataSemanticJoinGenericNonPromotingReceiptsAreNonPromoting =
+  GenericReceipt.proveAllReceiptsNonPromoting
+    wikidataSemanticJoinGenericNonPromotingReceipts
+
+wikidataSemanticJoinLayerCandidateOnlyCoreCandidateOnly :
+  (layer : WikidataAnimalSemanticJoinLayer) →
+  CandidateCore.candidateOnly (candidateOnlyCoreAdapter layer) ≡ true
+wikidataSemanticJoinLayerCandidateOnlyCoreCandidateOnly layer =
+  CandidateCore.candidateOnlyIsTrue
+    (candidateOnlyCoreAdapterReceipt layer)
+
+wikidataSemanticJoinLayerCandidateOnlyCorePromotedFalse :
+  (layer : WikidataAnimalSemanticJoinLayer) →
+  CandidateCore.promoted (candidateOnlyCoreAdapter layer) ≡ false
+wikidataSemanticJoinLayerCandidateOnlyCorePromotedFalse layer =
+  CandidateCore.candidatePromotedIsFalse
+    (candidateOnlyCoreAdapterReceipt layer)
+
+wikidataSemanticJoinLayerCandidateOnlyCoreTruthAuthorityFalse :
+  (layer : WikidataAnimalSemanticJoinLayer) →
+  CandidateCore.carriesTruthAuthority (candidateOnlyCoreAdapter layer)
+  ≡ false
+wikidataSemanticJoinLayerCandidateOnlyCoreTruthAuthorityFalse layer =
+  CandidateCore.candidateNoTruthAuthority
+    (candidateOnlyCoreAdapterReceipt layer)
+
+wikidataSemanticJoinLayerBridgeCoreAuthorityPromotionFalse :
+  (layer : WikidataAnimalSemanticJoinLayer) →
+  BridgeCore.receiptAuthorityPromotion (bridgeRequirementCoreAdapter layer)
+  ≡ false
+wikidataSemanticJoinLayerBridgeCoreAuthorityPromotionFalse layer =
+  BridgeCore.receiptAuthorityPromotionFalse
+    (bridgeRequirementCoreAdapter layer)
+
+wikidataSemanticJoinLayerBridgeCoreTransportMapAuthorityFalse :
+  (layer : WikidataAnimalSemanticJoinLayer) →
+  BridgeCore.receiptTransportMapAuthority (bridgeRequirementCoreAdapter layer)
+  ≡ false
+wikidataSemanticJoinLayerBridgeCoreTransportMapAuthorityFalse layer =
+  BridgeCore.receiptTransportMapAuthorityFalse
+    (bridgeRequirementCoreAdapter layer)
+
+wikidataSemanticJoinLayerBridgeCoreBackgroundBridgeAuthorityFalse :
+  (layer : WikidataAnimalSemanticJoinLayer) →
+  BridgeCore.receiptBackgroundBridgeAuthority
+    (bridgeRequirementCoreAdapter layer)
+  ≡ false
+wikidataSemanticJoinLayerBridgeCoreBackgroundBridgeAuthorityFalse layer =
+  BridgeCore.receiptBackgroundBridgeAuthorityFalse
+    (bridgeRequirementCoreAdapter layer)
+
+wikidataSemanticJoinLayerEmptyPromotionCorePromotionsEmpty :
+  (layer : WikidataAnimalSemanticJoinLayer) →
+  EmptyPromotion.promotions (emptyPromotionCoreAdapter layer) ≡ []
+wikidataSemanticJoinLayerEmptyPromotionCorePromotionsEmpty layer =
+  EmptyPromotion.emptyPromotionReceiptPromotionsAreEmpty
+    (emptyPromotionCoreAdapter layer)
+
+wikidataSemanticJoinLayerAuthorityCoreTruthAuthorityFalse :
+  (layer : WikidataAnimalSemanticJoinLayer) →
+  AuthorityCore.truthAuthorityFlag (authorityNonPromotionCoreAdapter layer)
+  ≡ false
+wikidataSemanticJoinLayerAuthorityCoreTruthAuthorityFalse layer =
+  AuthorityCore.bundleTruthAuthorityIsFalse
+    (authorityNonPromotionCoreAdapter layer)
+
+wikidataSemanticJoinLayerAuthorityCoreRuntimeAuthorityFalse :
+  (layer : WikidataAnimalSemanticJoinLayer) →
+  AuthorityCore.runtimeAuthorityFlag (authorityNonPromotionCoreAdapter layer)
+  ≡ false
+wikidataSemanticJoinLayerAuthorityCoreRuntimeAuthorityFalse layer =
+  AuthorityCore.bundleRuntimeAuthorityIsFalse
+    (authorityNonPromotionCoreAdapter layer)
+
+wikidataSemanticJoinLayerAuthorityCorePromotesAnyAuthorityFalse :
+  (layer : WikidataAnimalSemanticJoinLayer) →
+  AuthorityCore.promotesAnyAuthority (authorityNonPromotionCoreAdapter layer)
+  ≡ false
+wikidataSemanticJoinLayerAuthorityCorePromotesAnyAuthorityFalse layer =
+  AuthorityCore.bundlePromotesAnyAuthorityIsFalse
+    (authorityNonPromotionCoreAdapter layer)
+
+wikidataSemanticJoinLayerGenericReceiptsNonPromoting :
+  (layer : WikidataAnimalSemanticJoinLayer) →
+  GenericReceipt.AllReceiptsNonPromoting
+    (genericNonPromotingReceipts layer)
+wikidataSemanticJoinLayerGenericReceiptsNonPromoting layer =
+  genericNonPromotingReceiptsAreNonPromoting layer
 
 ------------------------------------------------------------------------
 -- Canonical toy inhabitants.
@@ -432,6 +653,20 @@ canonicalWikidataAnimalSemanticJoinLayer =
         false
     ; anthropomorphicPromotionAllowedIsFalse =
         refl
+    ; candidateOnlyCoreAdapter =
+        wikidataSemanticJoinCandidateOnlyCoreAdapter
+    ; candidateOnlyCoreAdapterReceipt =
+        wikidataSemanticJoinCandidateOnlyCoreAdapterReceipt
+    ; bridgeRequirementCoreAdapter =
+        wikidataSemanticJoinBridgeRequirementCoreAdapter
+    ; emptyPromotionCoreAdapter =
+        wikidataSemanticJoinEmptyPromotionCoreAdapter
+    ; authorityNonPromotionCoreAdapter =
+        wikidataSemanticJoinAuthorityNonPromotionCoreAdapter
+    ; genericNonPromotingReceipts =
+        wikidataSemanticJoinGenericNonPromotingReceipts
+    ; genericNonPromotingReceiptsAreNonPromoting =
+        wikidataSemanticJoinGenericNonPromotingReceiptsAreNonPromoting
     ; layerReading =
         "Wikidata/Wikipedia species knowledge joins Animalexic candidates as a bounded review layer; it can hold, promote-with-receipts, contradict, or mark unsupported, but it is not edit authority, truth authority, qualia identity, or context-free translation."
     }
@@ -455,6 +690,36 @@ canonicalWikidataSemanticJoinNonAuthorityCertificate =
         refl
     ; anthropomorphicPromotionBlocked =
         refl
+    ; candidateOnlyCoreCandidateOnly =
+        CandidateCore.candidateOnlyIsTrue
+          wikidataSemanticJoinCandidateOnlyCoreAdapterReceipt
+    ; candidateOnlyCorePromotedFalse =
+        CandidateCore.candidatePromotedIsFalse
+          wikidataSemanticJoinCandidateOnlyCoreAdapterReceipt
+    ; candidateOnlyCoreTruthAuthorityFalse =
+        CandidateCore.candidateNoTruthAuthority
+          wikidataSemanticJoinCandidateOnlyCoreAdapterReceipt
+    ; bridgeCoreAuthorityPromotionFalse =
+        BridgeCore.receiptAuthorityPromotionFalse
+          wikidataSemanticJoinBridgeRequirementCoreAdapter
+    ; bridgeCoreTransportMapAuthorityFalse =
+        BridgeCore.receiptTransportMapAuthorityFalse
+          wikidataSemanticJoinBridgeRequirementCoreAdapter
+    ; bridgeCoreBackgroundBridgeAuthorityFalse =
+        BridgeCore.receiptBackgroundBridgeAuthorityFalse
+          wikidataSemanticJoinBridgeRequirementCoreAdapter
+    ; emptyPromotionCorePromotionsEmpty =
+        EmptyPromotion.emptyPromotionReceiptPromotionsAreEmpty
+          wikidataSemanticJoinEmptyPromotionCoreAdapter
+    ; authorityCoreTruthAuthorityFalse =
+        AuthorityCore.bundleTruthAuthorityIsFalse
+          wikidataSemanticJoinAuthorityNonPromotionCoreAdapter
+    ; authorityCoreRuntimeAuthorityFalse =
+        AuthorityCore.bundleRuntimeAuthorityIsFalse
+          wikidataSemanticJoinAuthorityNonPromotionCoreAdapter
+    ; authorityCorePromotesAnyAuthorityFalse =
+        AuthorityCore.bundlePromotesAnyAuthorityIsFalse
+          wikidataSemanticJoinAuthorityNonPromotionCoreAdapter
     ; certificateReading =
         "The canonical toy layer is review-only and blocks blind edit, truth authority, edit authority, qualia identity, context-free translation, and anthropomorphic promotion."
     }

@@ -11,6 +11,9 @@ open import DASHI.Biology.AvianCompassExamples
 open import DASHI.Biology.EvolvedSensoryTransport
 open import DASHI.Biology.GenomeSensorimotorConnectomeBridge
 open import DASHI.Biology.RetinalPerturbationObservationBridge
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityCore
+import DASHI.Core.BridgeRequirementCore as BridgeCore
+import DASHI.Core.CandidateOnlyCore as CandidateCore
 open import DASHI.Interop.ObservationTransportSpine
 open import DASHI.Interop.SeaMeInItROMKernelFormalism
 open import DASHI.Physics.Closure.BidirectionalBrainObservationQuotient
@@ -507,6 +510,144 @@ canonicalSeaMeInItNonPromotionCertificateForDischarge =
     }
 
 ------------------------------------------------------------------------
+-- Reusable non-authority core adapters.
+
+canonicalAnimalSenseCandidateOnlyCoreAdapter :
+  CandidateCore.CandidateOnlyRow
+canonicalAnimalSenseCandidateOnlyCoreAdapter =
+  CandidateCore.mkCandidateOnlyRow
+    "animal sense observation thread candidate-only adapter"
+    "DASHI.Biology.AnimalSenseObservationThreadDischarge"
+    "canonicalAnimalSenseCandidateOnlyCoreAdapter"
+    CandidateCore.bridgeCandidateKind
+    CandidateCore.bridgeCandidateOnlyStatus
+    "Thread surfaces are inhabited as observation-transport candidates and receipt-bound bridges."
+    "Qualia recovery, DNA-meaning semantics, cross-sense identity, and theorem-level biology authority remain outside this discharge."
+
+canonicalAnimalSenseCandidateOnlyCoreAdapterReceipt :
+  CandidateCore.CandidateOnlyReceipt
+    canonicalAnimalSenseCandidateOnlyCoreAdapter
+canonicalAnimalSenseCandidateOnlyCoreAdapterReceipt =
+  CandidateCore.canonicalCandidateOnlyReceipt
+    canonicalAnimalSenseCandidateOnlyCoreAdapter
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalAnimalSenseCandidateOnlyAdapterCandidateOnly :
+  CandidateCore.candidateOnly
+    canonicalAnimalSenseCandidateOnlyCoreAdapter
+  ≡
+  true
+canonicalAnimalSenseCandidateOnlyAdapterCandidateOnly =
+  CandidateCore.candidateOnlyIsTrue
+    canonicalAnimalSenseCandidateOnlyCoreAdapterReceipt
+
+canonicalAnimalSenseCandidateOnlyAdapterPromotedFalse :
+  CandidateCore.promoted
+    canonicalAnimalSenseCandidateOnlyCoreAdapter
+  ≡
+  false
+canonicalAnimalSenseCandidateOnlyAdapterPromotedFalse =
+  CandidateCore.candidatePromotedIsFalse
+    canonicalAnimalSenseCandidateOnlyCoreAdapterReceipt
+
+canonicalAnimalSenseCandidateOnlyAdapterTheoremAuthorityFalse :
+  CandidateCore.carriesTheoremAuthority
+    canonicalAnimalSenseCandidateOnlyCoreAdapter
+  ≡
+  false
+canonicalAnimalSenseCandidateOnlyAdapterTheoremAuthorityFalse =
+  CandidateCore.candidateNoTheoremAuthority
+    canonicalAnimalSenseCandidateOnlyCoreAdapterReceipt
+
+canonicalAnimalSenseAuthorityNonPromotionCoreAdapter :
+  AuthorityCore.AuthorityNonPromotionBundle
+canonicalAnimalSenseAuthorityNonPromotionCoreAdapter =
+  AuthorityCore.mkClosedAuthorityNonPromotionBundle
+    "animal sense observation thread authority non-promotion adapter"
+
+canonicalAnimalSenseAuthorityNonPromotionCoreAdapterKindsFalse :
+  AuthorityCore.AllAuthorityKindsFalse
+    canonicalAnimalSenseAuthorityNonPromotionCoreAdapter
+    AuthorityCore.canonicalAuthorityKinds
+canonicalAnimalSenseAuthorityNonPromotionCoreAdapterKindsFalse =
+  AuthorityCore.proveAllAuthorityKindsFalse
+    canonicalAnimalSenseAuthorityNonPromotionCoreAdapter
+    AuthorityCore.canonicalAuthorityKinds
+
+canonicalAnimalSenseAuthorityAdapterScientificAuthorityFalse :
+  AuthorityCore.scientificAuthorityFlag
+    canonicalAnimalSenseAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+canonicalAnimalSenseAuthorityAdapterScientificAuthorityFalse =
+  AuthorityCore.bundleScientificAuthorityIsFalse
+    canonicalAnimalSenseAuthorityNonPromotionCoreAdapter
+
+canonicalAnimalSenseAuthorityAdapterEmpiricalAuthorityFalse :
+  AuthorityCore.empiricalAuthorityFlag
+    canonicalAnimalSenseAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+canonicalAnimalSenseAuthorityAdapterEmpiricalAuthorityFalse =
+  AuthorityCore.bundleEmpiricalAuthorityIsFalse
+    canonicalAnimalSenseAuthorityNonPromotionCoreAdapter
+
+canonicalAnimalSenseAuthorityAdapterPromotesAnyAuthorityFalse :
+  AuthorityCore.promotesAnyAuthority
+    canonicalAnimalSenseAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+canonicalAnimalSenseAuthorityAdapterPromotesAnyAuthorityFalse =
+  AuthorityCore.bundlePromotesAnyAuthorityIsFalse
+    canonicalAnimalSenseAuthorityNonPromotionCoreAdapter
+
+canonicalAnimalSenseBridgeRequirementCoreAdapter :
+  BridgeCore.BridgeRequirementCoreReceipt
+canonicalAnimalSenseBridgeRequirementCoreAdapter =
+  BridgeCore.canonicalBridgeRequirementCoreReceipt
+
+canonicalAnimalSenseBridgeRequirementCoreAdapterIsCanonical :
+  canonicalAnimalSenseBridgeRequirementCoreAdapter
+  ≡
+  BridgeCore.canonicalBridgeRequirementCoreReceipt
+canonicalAnimalSenseBridgeRequirementCoreAdapterIsCanonical =
+  refl
+
+canonicalAnimalSenseBridgeAdapterAuthorityPromotionFalse :
+  BridgeCore.receiptAuthorityPromotion
+    canonicalAnimalSenseBridgeRequirementCoreAdapter
+  ≡
+  false
+canonicalAnimalSenseBridgeAdapterAuthorityPromotionFalse =
+  BridgeCore.receiptAuthorityPromotionFalse
+    canonicalAnimalSenseBridgeRequirementCoreAdapter
+
+canonicalAnimalSenseBridgeAdapterTransportMapAuthorityFalse :
+  BridgeCore.receiptTransportMapAuthority
+    canonicalAnimalSenseBridgeRequirementCoreAdapter
+  ≡
+  false
+canonicalAnimalSenseBridgeAdapterTransportMapAuthorityFalse =
+  BridgeCore.receiptTransportMapAuthorityFalse
+    canonicalAnimalSenseBridgeRequirementCoreAdapter
+
+canonicalAnimalSenseBridgeAdapterBackgroundBridgeAuthorityFalse :
+  BridgeCore.receiptBackgroundBridgeAuthority
+    canonicalAnimalSenseBridgeRequirementCoreAdapter
+  ≡
+  false
+canonicalAnimalSenseBridgeAdapterBackgroundBridgeAuthorityFalse =
+  BridgeCore.receiptBackgroundBridgeAuthorityFalse
+    canonicalAnimalSenseBridgeRequirementCoreAdapter
+
+------------------------------------------------------------------------
 -- Whole thread discharge.
 
 record AnimalSenseObservationThreadDischarge : Set₁ where
@@ -555,6 +696,83 @@ record AnimalSenseObservationThreadDischarge : Set₁ where
     observationSpineNoRecovery :
       canonicalNoRecoveryFlag ≡ true
 
+    threadCandidateOnlyCoreAdapter :
+      CandidateCore.CandidateOnlyRow
+
+    threadCandidateOnlyCoreAdapterReceipt :
+      CandidateCore.CandidateOnlyReceipt
+        threadCandidateOnlyCoreAdapter
+
+    threadCandidateOnlyCoreAdapterCandidateOnly :
+      CandidateCore.candidateOnly
+        threadCandidateOnlyCoreAdapter
+      ≡
+      true
+
+    threadCandidateOnlyCoreAdapterPromotedFalse :
+      CandidateCore.promoted
+        threadCandidateOnlyCoreAdapter
+      ≡
+      false
+
+    threadCandidateOnlyCoreAdapterTheoremAuthorityFalse :
+      CandidateCore.carriesTheoremAuthority
+        threadCandidateOnlyCoreAdapter
+      ≡
+      false
+
+    threadAuthorityNonPromotionCoreAdapter :
+      AuthorityCore.AuthorityNonPromotionBundle
+
+    threadAuthorityNonPromotionCoreAdapterKindsFalse :
+      AuthorityCore.AllAuthorityKindsFalse
+        threadAuthorityNonPromotionCoreAdapter
+        AuthorityCore.canonicalAuthorityKinds
+
+    threadAuthorityAdapterScientificAuthorityFalse :
+      AuthorityCore.scientificAuthorityFlag
+        threadAuthorityNonPromotionCoreAdapter
+      ≡
+      false
+
+    threadAuthorityAdapterEmpiricalAuthorityFalse :
+      AuthorityCore.empiricalAuthorityFlag
+        threadAuthorityNonPromotionCoreAdapter
+      ≡
+      false
+
+    threadAuthorityAdapterPromotesAnyAuthorityFalse :
+      AuthorityCore.promotesAnyAuthority
+        threadAuthorityNonPromotionCoreAdapter
+      ≡
+      false
+
+    threadBridgeRequirementCoreAdapter :
+      BridgeCore.BridgeRequirementCoreReceipt
+
+    threadBridgeRequirementCoreAdapterIsCanonical :
+      threadBridgeRequirementCoreAdapter
+      ≡
+      BridgeCore.canonicalBridgeRequirementCoreReceipt
+
+    threadBridgeAdapterAuthorityPromotionFalse :
+      BridgeCore.receiptAuthorityPromotion
+        threadBridgeRequirementCoreAdapter
+      ≡
+      false
+
+    threadBridgeAdapterTransportMapAuthorityFalse :
+      BridgeCore.receiptTransportMapAuthority
+        threadBridgeRequirementCoreAdapter
+      ≡
+      false
+
+    threadBridgeAdapterBackgroundBridgeAuthorityFalse :
+      BridgeCore.receiptBackgroundBridgeAuthority
+        threadBridgeRequirementCoreAdapter
+      ≡
+      false
+
     allRequestedSurfacesInhabited : Bool
     allRequestedSurfacesInhabitedIsTrue :
       allRequestedSurfacesInhabited ≡ true
@@ -597,6 +815,36 @@ canonicalAnimalSenseObservationThreadDischarge =
         canonicalSeaMeInItNonPromotionCertificateForDischarge
     ; observationSpineNoRecovery =
         canonicalNoRecoveryFlagIsTrue
+    ; threadCandidateOnlyCoreAdapter =
+        canonicalAnimalSenseCandidateOnlyCoreAdapter
+    ; threadCandidateOnlyCoreAdapterReceipt =
+        canonicalAnimalSenseCandidateOnlyCoreAdapterReceipt
+    ; threadCandidateOnlyCoreAdapterCandidateOnly =
+        canonicalAnimalSenseCandidateOnlyAdapterCandidateOnly
+    ; threadCandidateOnlyCoreAdapterPromotedFalse =
+        canonicalAnimalSenseCandidateOnlyAdapterPromotedFalse
+    ; threadCandidateOnlyCoreAdapterTheoremAuthorityFalse =
+        canonicalAnimalSenseCandidateOnlyAdapterTheoremAuthorityFalse
+    ; threadAuthorityNonPromotionCoreAdapter =
+        canonicalAnimalSenseAuthorityNonPromotionCoreAdapter
+    ; threadAuthorityNonPromotionCoreAdapterKindsFalse =
+        canonicalAnimalSenseAuthorityNonPromotionCoreAdapterKindsFalse
+    ; threadAuthorityAdapterScientificAuthorityFalse =
+        canonicalAnimalSenseAuthorityAdapterScientificAuthorityFalse
+    ; threadAuthorityAdapterEmpiricalAuthorityFalse =
+        canonicalAnimalSenseAuthorityAdapterEmpiricalAuthorityFalse
+    ; threadAuthorityAdapterPromotesAnyAuthorityFalse =
+        canonicalAnimalSenseAuthorityAdapterPromotesAnyAuthorityFalse
+    ; threadBridgeRequirementCoreAdapter =
+        canonicalAnimalSenseBridgeRequirementCoreAdapter
+    ; threadBridgeRequirementCoreAdapterIsCanonical =
+        canonicalAnimalSenseBridgeRequirementCoreAdapterIsCanonical
+    ; threadBridgeAdapterAuthorityPromotionFalse =
+        canonicalAnimalSenseBridgeAdapterAuthorityPromotionFalse
+    ; threadBridgeAdapterTransportMapAuthorityFalse =
+        canonicalAnimalSenseBridgeAdapterTransportMapAuthorityFalse
+    ; threadBridgeAdapterBackgroundBridgeAuthorityFalse =
+        canonicalAnimalSenseBridgeAdapterBackgroundBridgeAuthorityFalse
     ; allRequestedSurfacesInhabited = true
     ; allRequestedSurfacesInhabitedIsTrue = refl
     ; allUnsafeRoutesDischarged = true
