@@ -6,6 +6,12 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane RSA source-conditioned statistical/keygen tranche for `2026-06-17`:
+  adds the keygen source boundary, batch shared-prime boundary, iteration leak
+  boundary, and entropy-source statistical boundary as candidate-only
+  bookkeeping surfaces. No RSA break, factoring claim, security theorem,
+  advisory authority, or promotion authority is asserted.
+
 - Six-lane control-card/statistics/crypto generic tranche for `2026-06-17`:
   adds `DASHI.Core.ControlCardCore` as the reusable O/R/C/S/L/P/G/F
   control-card spine, `scripts/audit_control_card_candidates.py` as the
