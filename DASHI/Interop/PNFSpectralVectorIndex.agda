@@ -9,6 +9,7 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.PNFSpectralFieldCore as Core
+import DASHI.Interop.VectorNonAuthorityCore as VectorNA
 
 ------------------------------------------------------------------------
 -- Vector-index boundary for PNF spectral navigation.
@@ -596,6 +597,32 @@ record PNFSpectralVectorIndexReceipt : Set where
     arithmeticProposalFailClosedHere :
       arithmeticProposalFailClosed arithmeticProposalReceipt ≡ true
 
+    vectorNonAuthorityCoreAdapter :
+      VectorNA.VectorNonAuthorityReceipt
+
+    vectorNonAuthorityCoreAdapterIsCanonical :
+      vectorNonAuthorityCoreAdapter
+      ≡
+      VectorNA.canonicalVectorNonAuthorityReceipt
+
+    vectorNonAuthorityCoreTruthFalse :
+      VectorNA.proposalRowCarriesTruthAuthority
+        (VectorNA.receiptProposalRow vectorNonAuthorityCoreAdapter)
+      ≡
+      false
+
+    vectorNonAuthorityCoreSupportFalse :
+      VectorNA.proposalRowCarriesSupportAuthority
+        (VectorNA.receiptProposalRow vectorNonAuthorityCoreAdapter)
+      ≡
+      false
+
+    vectorNonAuthorityCoreAdmissibilityFalse :
+      VectorNA.proposalRowCarriesAdmissibilityAuthority
+        (VectorNA.receiptProposalRow vectorNonAuthorityCoreAdapter)
+      ≡
+      false
+
 open PNFSpectralVectorIndexReceipt public
 
 canonicalSampleCoordinate : VectorCoordinate
@@ -802,6 +829,11 @@ canonicalPNFSpectralVectorIndexReceipt =
     refl
     refl
     refl
+    VectorNA.canonicalVectorNonAuthorityReceipt
+    refl
+    refl
+    refl
+    refl
 
 canonicalReceipt :
   PNFSpectralVectorIndexReceipt
@@ -892,4 +924,20 @@ canonicalReceiptArithmeticProposalAdmissibilityFalse :
   ≡
   false
 canonicalReceiptArithmeticProposalAdmissibilityFalse =
+  refl
+
+canonicalReceiptVectorNonAuthorityCoreCanonical :
+  vectorNonAuthorityCoreAdapter canonicalReceipt
+  ≡
+  VectorNA.canonicalVectorNonAuthorityReceipt
+canonicalReceiptVectorNonAuthorityCoreCanonical =
+  refl
+
+canonicalReceiptVectorNonAuthorityCoreTruthFalse :
+  VectorNA.proposalRowCarriesTruthAuthority
+    (VectorNA.receiptProposalRow
+      (vectorNonAuthorityCoreAdapter canonicalReceipt))
+  ≡
+  false
+canonicalReceiptVectorNonAuthorityCoreTruthFalse =
   refl

@@ -10,6 +10,7 @@ import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.PNFSpectralFieldCore as Core
 import DASHI.Interop.PNFPackageCore as PackageCore
 import DASHI.Interop.PNFSpectralVectorIndex as Vector
+import DASHI.Interop.VectorNonAuthorityCore as VectorNA
 
 ------------------------------------------------------------------------
 -- PNF evidence anchoring and object-registry invariants.
@@ -335,6 +336,32 @@ canonicalVectorRow =
     false
     false
 
+registryVectorCoreAdapterProposal : VectorNA.VectorProposalRow
+registryVectorCoreAdapterProposal =
+  VectorNA.vectorProposalRow
+    VectorNA.proximityProposalMode
+    VectorNA.canonicalCandidateOnlyHit
+    VectorNA.canonicalVectorEvidenceClaim
+    VectorNA.fallbackVectorCoordinate
+    VectorNA.fallbackVectorCoordinate
+    VectorNA.fallbackObjectRef
+    "registry-anchoring-corroborated-vector-row-core-adapter"
+    true
+    false
+    false
+    false
+    false
+
+registryVectorCoreAdapterProposalReceipt :
+  VectorNA.VectorProposalRowReceipt registryVectorCoreAdapterProposal
+registryVectorCoreAdapterProposalReceipt =
+  VectorNA.vectorProposalRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+
 canonicalCandidate : Vector.CandidateRef
 canonicalCandidate =
   Vector.rowToCandidateRef zero canonicalVectorRow
@@ -457,6 +484,40 @@ record PNFSpectralRegistryAnchoringReceipt : Set where
     pnfPackageCoreAdmittedFalse :
       PackageCore.selectorAdmitted pnfPackageCoreAdapter ≡ false
 
+    vectorNonAuthorityCoreAdapter :
+      VectorNA.VectorNonAuthorityReceipt
+
+    vectorNonAuthorityCoreAdapterIsCanonical :
+      vectorNonAuthorityCoreAdapter
+      ≡
+      VectorNA.canonicalVectorNonAuthorityReceipt
+
+    vectorNonAuthorityRegistryAdapter :
+      VectorNA.VectorProposalRow
+
+    vectorNonAuthorityRegistryAdapterIsCanonical :
+      vectorNonAuthorityRegistryAdapter
+      ≡
+      registryVectorCoreAdapterProposal
+
+    vectorNonAuthorityCoreTruthFalse :
+      VectorNA.proposalRowCarriesTruthAuthority
+        vectorNonAuthorityRegistryAdapter
+      ≡
+      false
+
+    vectorNonAuthorityCoreSupportFalse :
+      VectorNA.proposalRowCarriesSupportAuthority
+        vectorNonAuthorityRegistryAdapter
+      ≡
+      false
+
+    vectorNonAuthorityCoreAdmissibilityFalse :
+      VectorNA.proposalRowCarriesAdmissibilityAuthority
+        vectorNonAuthorityRegistryAdapter
+      ≡
+      false
+
 open PNFSpectralRegistryAnchoringReceipt public
 
 canonicalPNFSpectralRegistryAnchoringReceipt :
@@ -512,6 +573,13 @@ canonicalPNFSpectralRegistryAnchoringReceipt =
     PackageCore.canonicalCandidateOnlySelectorPackage
     refl
     refl
+    VectorNA.canonicalVectorNonAuthorityReceipt
+    refl
+    registryVectorCoreAdapterProposal
+    refl
+    refl
+    refl
+    refl
 
 canonicalReceipt : PNFSpectralRegistryAnchoringReceipt
 canonicalReceipt =
@@ -558,6 +626,21 @@ canonicalReceiptMissingReceiptFailsClosed =
 canonicalReceiptStaleVersionFailsClosed :
   staleVersionAdmission (receiptFailClosedGates canonicalReceipt) ≡ false
 canonicalReceiptStaleVersionFailsClosed =
+  refl
+
+canonicalReceiptVectorNonAuthorityCoreCanonical :
+  vectorNonAuthorityCoreAdapter canonicalReceipt
+  ≡
+  VectorNA.canonicalVectorNonAuthorityReceipt
+canonicalReceiptVectorNonAuthorityCoreCanonical =
+  refl
+
+canonicalReceiptVectorNonAuthorityRegistryTruthFalse :
+  VectorNA.proposalRowCarriesTruthAuthority
+    (vectorNonAuthorityRegistryAdapter canonicalReceipt)
+  ≡
+  false
+canonicalReceiptVectorNonAuthorityRegistryTruthFalse =
   refl
 
 ------------------------------------------------------------------------
