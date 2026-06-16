@@ -97,6 +97,36 @@ authority/governance promotion. Exact GR calculation result surfaces are
 `MachineCheckedChristoffelC0ConstantReceipt`,
 `SchwarzschildShellAExactCalculationReceipt`, and
 `GRSchwarzschildFiniteRicciBianchiPerturbationReceipt`.
+The exact remaining GR variables for the next real proof tranche are the
+canonical aggregation targets, not new receipt surfaces: ordered rational
+gauge toolkit variables
+`orderedRationalGaugeD_QQZeroLawPrimitive`,
+`orderedRationalGaugeD_QQSymmetryLawPrimitive`,
+`orderedRationalGaugeD_QQTriangleLawPrimitive`,
+`orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive`,
+`orderedRationalGaugeThreeMinusNPositiveLawPrimitive`,
+`orderedRationalGaugeScale48Is48`, and
+`orderedRationalGaugeScale48NonnegativeLawPrimitive`; Shell A denominator
+variables
+`orderedRationalShellARadialMinusSchwarzschildLowerBoundIs1`,
+`orderedRationalShellAInverseMetricAbsMaxIs4`,
+`orderedRationalShellAMetricDerivativeAbsMaxIs8`,
+`orderedRationalShellAChristoffelFormulaEnvelopeIs72`, and
+`orderedRationalShellAReciprocalBoundsFeedChristoffelFormulaC0Stable`;
+Christoffel derivative-bound variables
+`orderedRationalShellA_C_GammaIs1`,
+`orderedRationalShellA_CPrime_GammaNumeratorIs26`,
+`orderedRationalShellA_CPrime_GammaDenominatorIs27`, and
+`orderedRationalShellARequestedInequalityPrimitive`; C0-stability variables
+`machineCheckedChristoffelL_GammaIs48`,
+`selectedSymbolicRationalChristoffelC0FormulaStabilityIs48`, and
+`selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound`; and
+Ricci extraction variables
+`grDiscreteRicciExtractionConnectionErrorBoundExtractionDependencyNameExact`,
+`grDiscreteRicciExtractionPointCRConstantIs48`,
+`grDiscreteRicciExtractionShellACRConstantIs80`,
+`grDiscreteRicciExtractionConservativeCRExtractionConstantIs640`, and
+`grSchwarzschildFiniteRicciPerturbationPointCRConstantIs48`.
 `GRProofArchitectureAggregationTest`
 checks the current imports and aggregates the selected Levi-Civita,
 inverse-metric C0/derivative, shell-bound, Ricci-readiness, selected-pair
@@ -277,9 +307,19 @@ periodic Taylor-Green or NPZ velocity fields; `scripts/ns_gateway1_fixture_npz.p
 generates deterministic fixtures for that input contract. The checked Agda
 surface is `DASHI.Physics.Closure.NSGateway1StrainCrossDerivativeDiagnosticReceipt`,
 which is imported by the full-Clay gateway and blocker-chain aggregation
-receipts. This lane is numerical evidence routing only: DNS confirmation, the
-nonlinear Riesz sign condition, residual depletion, full Clay NS, and Clay
-promotion remain false/open.
+receipts. The current synthetic/Taylor-Green degeneracy interpretation is
+only a diagnostic sanity check: `zero_within_tolerance`,
+`negative_supports_nonpositive_rule`, or `eigenframe_degenerate = true` does
+not count as DNS sign confirmation and cannot promote the signed T(b) /
+nonlinear Riesz route. The next required real calculation is to run the same
+JSON diagnostic on a credible periodic Taylor-Green DNS snapshot supplied as
+NPZ with validated `N`, `domain_length`, `grid_spacing`, `amplitude`, `time`,
+`snapshot_index`, and `source`, then report
+`cross_derivative_e1_e2_lambda2_at_max`, `sign_classification`,
+`sign_tolerance`, `min_local_eigenvalue_gap`, and `eigenframe_degenerate`.
+This lane is numerical evidence routing only: DNS confirmation, the nonlinear
+Riesz sign condition, residual depletion, full Clay NS, and Clay promotion
+remain false/open.
 
 Current Standard Model first-principles boundary:
 `DASHI.Promotion.ObligationIndex` now includes a nine-row

@@ -26,6 +26,7 @@ CAVEAT = (
     "numerical evidence only; this is not DNS proof and not a Navier-Stokes "
     "regularity proof."
 )
+DNS_TIME_WINDOW_REQUIRED = "real_dns_t_approximately_7_to_9"
 SIGN_TOLERANCE = 1.0e-12
 JSON_FORMAT = "ns-gateway1-strain-cross-derivative-json-v1"
 
@@ -302,6 +303,7 @@ def format_summary(result: dict[str, Any]) -> str:
     index = tuple(result["enstrophy_max_index"])
     cross = float(result["cross_derivative_e1_e2_lambda2_at_max"])
     classification = str(result["sign_classification"])
+    status = str(result["diagnostic_status"])
     artifact = result.get("result_artifact_path")
     artifact_text = f", artifact={artifact}" if artifact else ""
     return (
@@ -309,8 +311,44 @@ def format_summary(result: dict[str, Any]) -> str:
         f"source={source}, N={int(result['grid_N'])}, "
         f"enstrophy_max_index={index}, "
         f"d_e1_d_e2_lambda2={cross:.17g}, "
-        f"classification={classification}{artifact_text}"
+        f"classification={classification}, "
+        f"status={status}{artifact_text}"
     )
+
+
+def _diagnostic_status(
+    *,
+    source: str,
+    field_metadata: dict[str, Any],
+    eigenframe_degenerate: bool,
+    sign_classification: str,
+) -> tuple[str, bool, str]:
+    source_is_synthetic = source == "synthetic_taylor_green"
+    time_value = field_metadata.get("time")
+    source_is_t0_fixture = time_value is not None and np.isclose(float(time_value), 0.0)
+    zero_or_noise = sign_classification == "zero_within_tolerance"
+
+    if eigenframe_degenerate and (source_is_synthetic or source_is_t0_fixture):
+        blocker = (
+            "t=0 synthetic/fixture eigenframe_degenerate=true; zero/noise cross "
+            "derivative is not evidence for sign"
+        )
+        return "fail_closed_degenerate_t0_not_sign_evidence", False, blocker
+
+    if eigenframe_degenerate:
+        blocker = "eigenframe_degenerate=true; eigenframe-local sign evidence is blocked"
+        return "fail_closed_degenerate_eigenframe", False, blocker
+
+    if source_is_synthetic:
+        blocker = "synthetic Taylor-Green diagnostic is not DNS sign evidence"
+        return "fail_closed_synthetic_not_dns_evidence", False, blocker
+
+    if zero_or_noise:
+        blocker = "zero/noise cross derivative is not sign evidence"
+        return "fail_closed_zero_or_noise_not_sign_evidence", False, blocker
+
+    blocker = f"{DNS_TIME_WINDOW_REQUIRED} still required before sign promotion"
+    return "fail_closed_real_dns_window_required", False, blocker
 
 
 def run_diagnostic(
@@ -357,6 +395,7 @@ def run_diagnostic(
     lambda2 = float(local_eigenvalues[1])
     eigenvalue_gaps = np.diff(local_eigenvalues)
     min_eigenvalue_gap = float(np.min(np.abs(eigenvalue_gaps)))
+    eigenframe_degenerate = bool(min_eigenvalue_gap <= 1.0e-10)
     e1 = local_eigenvectors[:, 0]
     e2 = local_eigenvectors[:, 1]
 
@@ -370,6 +409,12 @@ def run_diagnostic(
     local_hessian = _tensor_at(hessian, max_index)
     cross_derivative = float(e1 @ local_hessian @ e2)
     sign_classification = classify_sign(cross_derivative)
+    diagnostic_status, sign_evidence_for_promotion, sign_evidence_blocker = _diagnostic_status(
+        source=source,
+        field_metadata=field_metadata,
+        eigenframe_degenerate=eigenframe_degenerate,
+        sign_classification=sign_classification,
+    )
 
     max_vorticity = omega[(slice(None),) + max_index]
     output_path = Path(output) if output is not None else None
@@ -399,7 +444,7 @@ def run_diagnostic(
             "strain eigenvalue; e1 is most compressive and e2 is intermediate"
         ),
         "min_local_eigenvalue_gap": min_eigenvalue_gap,
-        "eigenframe_degenerate": bool(min_eigenvalue_gap <= 1.0e-10),
+        "eigenframe_degenerate": eigenframe_degenerate,
         "lambda2_at_max": lambda2,
         "lambda2_gradient_at_max": _jsonify_vector(lambda2_gradient[(slice(None),) + max_index]),
         "lambda2_hessian_at_max": _jsonify_matrix(local_hessian),
@@ -410,6 +455,14 @@ def run_diagnostic(
         "sign_classification": sign_classification,
         "sign_tolerance": float(SIGN_TOLERANCE),
         "sign_rule": "cross_derivative_d_e1_d_e2_lambda2 <= 0",
+        "diagnostic_status": diagnostic_status,
+        "sign_evidence_for_promotion": sign_evidence_for_promotion,
+        "sign_evidence_blocker": sign_evidence_blocker,
+        "dns_time_window_required": DNS_TIME_WINDOW_REQUIRED,
+        "degeneracy_conclusion": (
+            "nine-result conclusion: t=0 synthetic/fixture eigenframe_degenerate=true; "
+            "zero/noise cross derivative is not evidence for sign; real DNS t≈7-9 required"
+        ),
         "promotion_allowed": False,
         "nonlinear_riesz_sign_condition_confirmed": False,
         "caveat": CAVEAT,

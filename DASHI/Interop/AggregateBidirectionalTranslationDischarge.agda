@@ -8,6 +8,11 @@ open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 
 import DASHI.Computation.PersistentTransportMotifs as Motifs
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityCore
+import DASHI.Core.BridgeRequirementCore as BridgeCore
+import DASHI.Core.CandidateOnlyCore as CandidateCore
+import DASHI.Core.EmptyPromotionCore as EmptyCore
+import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Ontology.WikidataAnimalSemanticJoinLayer as WikiJoin
 
 ------------------------------------------------------------------------
@@ -499,6 +504,186 @@ canonicalAggregateTranslationNonPromotionCertificate =
     ; certificateReading =
         "The aggregate bridge is transport-permissive but non-promoting: residuals are explicit and zero-defect is not asserted."
     }
+
+------------------------------------------------------------------------
+-- Reusable core adapters.
+--
+-- These adapters consume the shared non-promotion cores without replacing
+-- the aggregate transport records, toy inhabitants, or bridge semantics.
+
+bridgeRequirementCoreAdapter :
+  BridgeCore.BridgeRequirementCoreReceipt
+bridgeRequirementCoreAdapter =
+  BridgeCore.canonicalBridgeRequirementCoreReceipt
+
+bridgeRequirementCoreAdapterIsCanonical :
+  bridgeRequirementCoreAdapter
+  ≡
+  BridgeCore.canonicalBridgeRequirementCoreReceipt
+bridgeRequirementCoreAdapterIsCanonical =
+  refl
+
+bridgeRequirementCoreAdapterAuthorityPromotionFalse :
+  BridgeCore.receiptAuthorityPromotion bridgeRequirementCoreAdapter
+  ≡
+  false
+bridgeRequirementCoreAdapterAuthorityPromotionFalse =
+  BridgeCore.receiptAuthorityPromotionFalse bridgeRequirementCoreAdapter
+
+bridgeRequirementCoreAdapterTransportMapAuthorityFalse :
+  BridgeCore.receiptTransportMapAuthority bridgeRequirementCoreAdapter
+  ≡
+  false
+bridgeRequirementCoreAdapterTransportMapAuthorityFalse =
+  BridgeCore.receiptTransportMapAuthorityFalse bridgeRequirementCoreAdapter
+
+bridgeRequirementCoreAdapterBackgroundBridgeAuthorityFalse :
+  BridgeCore.receiptBackgroundBridgeAuthority bridgeRequirementCoreAdapter
+  ≡
+  false
+bridgeRequirementCoreAdapterBackgroundBridgeAuthorityFalse =
+  BridgeCore.receiptBackgroundBridgeAuthorityFalse bridgeRequirementCoreAdapter
+
+candidateOnlyCoreAdapter :
+  CandidateCore.CandidateOnlyRow
+candidateOnlyCoreAdapter =
+  CandidateCore.mkCandidateOnlyRow
+    "aggregate translation candidate-only adapter"
+    "DASHI.Interop.AggregateBidirectionalTranslationDischarge"
+    "candidateOnlyCoreAdapter"
+    CandidateCore.bridgeCandidateKind
+    CandidateCore.bridgeCandidateOnlyStatus
+    "Aggregate translation bridges are candidate-only evidence unless a separate zero-defect witness is supplied."
+    "Universal translation, runtime optimization, and authority promotion remain outside this aggregate adapter."
+
+candidateOnlyCoreAdapterReceipt :
+  CandidateCore.CandidateOnlyReceipt candidateOnlyCoreAdapter
+candidateOnlyCoreAdapterReceipt =
+  CandidateCore.canonicalCandidateOnlyReceipt
+    candidateOnlyCoreAdapter
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+candidateOnlyCoreAdapterCandidateOnly :
+  CandidateCore.candidateOnly candidateOnlyCoreAdapter
+  ≡
+  true
+candidateOnlyCoreAdapterCandidateOnly =
+  CandidateCore.candidateOnlyIsTrue candidateOnlyCoreAdapterReceipt
+
+candidateOnlyCoreAdapterPromotedFalse :
+  CandidateCore.promoted candidateOnlyCoreAdapter
+  ≡
+  false
+candidateOnlyCoreAdapterPromotedFalse =
+  CandidateCore.candidatePromotedIsFalse candidateOnlyCoreAdapterReceipt
+
+candidateOnlyCoreAdapterRuntimeAuthorityFalse :
+  CandidateCore.carriesRuntimeAuthority candidateOnlyCoreAdapter
+  ≡
+  false
+candidateOnlyCoreAdapterRuntimeAuthorityFalse =
+  CandidateCore.candidateNoRuntimeAuthority candidateOnlyCoreAdapterReceipt
+
+authorityNonPromotionCoreAdapter :
+  AuthorityCore.AuthorityNonPromotionBundle
+authorityNonPromotionCoreAdapter =
+  AuthorityCore.mkClosedAuthorityNonPromotionBundle
+    "aggregate translation authority non-promotion adapter"
+
+authorityNonPromotionCoreAdapterCanonicalKindsFalse :
+  AuthorityCore.AllAuthorityKindsFalse
+    authorityNonPromotionCoreAdapter
+    AuthorityCore.canonicalAuthorityKinds
+authorityNonPromotionCoreAdapterCanonicalKindsFalse =
+  AuthorityCore.proveAllAuthorityKindsFalse
+    authorityNonPromotionCoreAdapter
+    AuthorityCore.canonicalAuthorityKinds
+
+authorityNonPromotionCoreAdapterGenericReceipt :
+  GenericReceipt.GenericReceipt
+authorityNonPromotionCoreAdapterGenericReceipt =
+  AuthorityCore.authorityNonPromotionGenericReceipt
+    authorityNonPromotionCoreAdapter
+
+authorityNonPromotionCoreAdapterRuntimeAuthorityFalse :
+  AuthorityCore.runtimeAuthorityFlag authorityNonPromotionCoreAdapter
+  ≡
+  false
+authorityNonPromotionCoreAdapterRuntimeAuthorityFalse =
+  AuthorityCore.bundleRuntimeAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+authorityNonPromotionCoreAdapterExternalAuthorityFalse :
+  AuthorityCore.externalAuthorityFlag authorityNonPromotionCoreAdapter
+  ≡
+  false
+authorityNonPromotionCoreAdapterExternalAuthorityFalse =
+  AuthorityCore.bundleExternalAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+authorityNonPromotionCoreAdapterPromotesAnyAuthorityFalse :
+  AuthorityCore.promotesAnyAuthority authorityNonPromotionCoreAdapter
+  ≡
+  false
+authorityNonPromotionCoreAdapterPromotesAnyAuthorityFalse =
+  AuthorityCore.bundlePromotesAnyAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+emptyPromotionCoreAdapter :
+  EmptyCore.EmptyPromotionBundle
+emptyPromotionCoreAdapter =
+  EmptyCore.canonicalEmptyPromotionBundle
+
+emptyPromotionCoreAdapterIsCanonical :
+  emptyPromotionCoreAdapter
+  ≡
+  EmptyCore.canonicalEmptyPromotionBundle
+emptyPromotionCoreAdapterIsCanonical =
+  refl
+
+emptyPromotionCoreAdapterReceiptIsCanonical :
+  EmptyCore.emptyPromotionReceipt emptyPromotionCoreAdapter
+  ≡
+  EmptyCore.canonicalEmptyPromotionReceipt
+emptyPromotionCoreAdapterReceiptIsCanonical =
+  EmptyCore.canonicalEmptyPromotionBundleReceiptIsCanonical
+
+emptyPromotionCoreAdapterPromotionsAreEmpty :
+  EmptyCore.promotions
+    (EmptyCore.emptyPromotionReceipt emptyPromotionCoreAdapter)
+  ≡
+  []
+emptyPromotionCoreAdapterPromotionsAreEmpty =
+  EmptyCore.canonicalEmptyPromotionBundlePromotionsAreEmpty
+
+emptyPromotionCoreAdapterPromotionImpossible :
+  EmptyCore.EmptyPromotionToken →
+  ⊥
+emptyPromotionCoreAdapterPromotionImpossible =
+  EmptyCore.canonicalEmptyPromotionBundlePromotionImpossible
+
+aggregateAdapterUniversalTranslatorBlocked :
+  universalTranslatorClaim canonicalAggregateBidirectionalTranslationDischarge
+  ≡
+  false
+aggregateAdapterUniversalTranslatorBlocked =
+  universalTranslatorClaimIsFalse
+    canonicalAggregateBidirectionalTranslationDischarge
+
+aggregateAdapterRuntimeOptimizerBlocked :
+  runtimeOptimizerClaim canonicalAggregateBidirectionalTranslationDischarge
+  ≡
+  false
+aggregateAdapterRuntimeOptimizerBlocked =
+  runtimeOptimizerClaimIsFalse
+    canonicalAggregateBidirectionalTranslationDischarge
 
 canonicalHumanDogPartialTranslationWitness :
   PartialTranslationWitness canonicalHumanDogBridge

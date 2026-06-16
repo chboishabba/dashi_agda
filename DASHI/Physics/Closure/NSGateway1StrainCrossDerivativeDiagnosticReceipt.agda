@@ -10,6 +10,18 @@ open import Agda.Builtin.String using (String)
 -- This receipt records one diagnostic target and its fail-closed boundary.
 -- It does not promote a DNS sign result, a nonlinear Riesz sign condition,
 -- Navier-Stokes regularity, or Clay status.
+--
+-- Current nine-result conclusion: the t=0 synthetic/fixture row is
+-- eigenframe-degenerate, so zero/noise cross-derivative values are not sign
+-- evidence.  Real DNS snapshots near t≈7-9 are required before any sign
+-- promotion can even be considered.
+--
+-- Follow-up FluidSim Re=1600 Taylor-Green runs at t≈9 resolved the first
+-- non-degenerate sign ambiguity: N=64 gave a positive under-resolved row,
+-- while N=128 gave a negative, non-degenerate row.  This keeps the signed
+-- T(b) route empirically live, but it still does not promote the nonlinear
+-- Riesz sign condition; an independent external DNS time-window receipt is
+-- still required.
 
 scriptPath : String
 scriptPath =
@@ -42,6 +54,14 @@ record NSGateway1DiagnosticTarget : Set where
       Bool
     clayNavierStokesPromoted :
       Bool
+    t0SyntheticFixture :
+      Bool
+    eigenframeDegenerate :
+      Bool
+    zeroOrNoiseCrossDerivativeIsSignEvidence :
+      Bool
+    realDNSTimeSevenToNineRequired :
+      Bool
 
 canonicalTaylorGreenDiagnostic :
   NSGateway1DiagnosticTarget
@@ -57,6 +77,10 @@ canonicalTaylorGreenDiagnostic =
     false
     false
     false
+    true
+    true
+    false
+    true
 
 canonicalPromotionAllowed :
   NSGateway1DiagnosticTarget.promotionAllowed
@@ -86,6 +110,34 @@ canonicalClayNavierStokesPromoted :
 canonicalClayNavierStokesPromoted =
   refl
 
+canonicalT0SyntheticFixture :
+  NSGateway1DiagnosticTarget.t0SyntheticFixture
+    canonicalTaylorGreenDiagnostic
+    ≡ true
+canonicalT0SyntheticFixture =
+  refl
+
+canonicalEigenframeDegenerate :
+  NSGateway1DiagnosticTarget.eigenframeDegenerate
+    canonicalTaylorGreenDiagnostic
+    ≡ true
+canonicalEigenframeDegenerate =
+  refl
+
+canonicalZeroOrNoiseCrossDerivativeIsNotSignEvidence :
+  NSGateway1DiagnosticTarget.zeroOrNoiseCrossDerivativeIsSignEvidence
+    canonicalTaylorGreenDiagnostic
+    ≡ false
+canonicalZeroOrNoiseCrossDerivativeIsNotSignEvidence =
+  refl
+
+canonicalRealDNSTimeSevenToNineRequired :
+  NSGateway1DiagnosticTarget.realDNSTimeSevenToNineRequired
+    canonicalTaylorGreenDiagnostic
+    ≡ true
+canonicalRealDNSTimeSevenToNineRequired =
+  refl
+
 record NSGateway1DiagnosticAggregation : Set where
   constructor mkNSGateway1DiagnosticAggregation
   field
@@ -96,6 +148,12 @@ record NSGateway1DiagnosticAggregation : Set where
     nonlinearRieszSignStillOpen :
       Bool
     clayPromotionStillBlocked :
+      Bool
+    degeneracyConclusionRecorded :
+      Bool
+    zeroNoiseCrossDerivativeSignEvidenceBlocked :
+      Bool
+    realDNSWindowStillRequired :
       Bool
     diagnosticScriptReference :
       String
@@ -110,8 +168,154 @@ canonicalAggregation =
     true
     true
     true
+    true
+    true
+    true
     scriptPath
     mathematicalGateway
+
+record NSGateway1ResolutionSeriesReceipt : Set where
+  constructor mkNSGateway1ResolutionSeriesReceipt
+  field
+    seriesName :
+      String
+    n64FieldPath :
+      String
+    n64Source :
+      String
+    n64Grid :
+      String
+    n64Time :
+      String
+    n64CrossDerivative :
+      String
+    n64EigenframeDegenerate :
+      Bool
+    n64EigenframeDegenerateIsFalse :
+      n64EigenframeDegenerate ≡ false
+    n64Classification :
+      String
+    n64UnderResolvedAliasingSuspected :
+      Bool
+    n64UnderResolvedAliasingSuspectedIsTrue :
+      n64UnderResolvedAliasingSuspected ≡ true
+    n128FieldPath :
+      String
+    n128Source :
+      String
+    n128Grid :
+      String
+    n128Time :
+      String
+    n128CrossDerivative :
+      String
+    n128EigenframeDegenerate :
+      Bool
+    n128EigenframeDegenerateIsFalse :
+      n128EigenframeDegenerate ≡ false
+    n128MinEigenvalueGap :
+      String
+    n128Classification :
+      String
+    n128SignSupportsNonpositiveRule :
+      Bool
+    n128SignSupportsNonpositiveRuleIsTrue :
+      n128SignSupportsNonpositiveRule ≡ true
+    n128ResolvesN64SignInversion :
+      Bool
+    n128ResolvesN64SignInversionIsTrue :
+      n128ResolvesN64SignInversion ≡ true
+    routeEmpiricallyLive :
+      Bool
+    routeEmpiricallyLiveIsTrue :
+      routeEmpiricallyLive ≡ true
+    externalDNSWindowStillRequired :
+      Bool
+    externalDNSWindowStillRequiredIsTrue :
+      externalDNSWindowStillRequired ≡ true
+    nonlinearRieszSignPromotedHere :
+      Bool
+    nonlinearRieszSignPromotedHereIsFalse :
+      nonlinearRieszSignPromotedHere ≡ false
+    clayPromotionHere :
+      Bool
+    clayPromotionHereIsFalse :
+      clayPromotionHere ≡ false
+    analysisConclusion :
+      String
+
+canonicalResolutionSeriesReceipt :
+  NSGateway1ResolutionSeriesReceipt
+canonicalResolutionSeriesReceipt =
+  mkNSGateway1ResolutionSeriesReceipt
+    "NS-GW-1 FluidSim Taylor-Green Re=1600 t≈9 resolution series"
+    "/tmp/tg_re1600_t9_N64_fluidsim.npz"
+    "FluidSim ns3d pseudo-spectral Taylor-Green"
+    "N=64"
+    "t=9.009999999999852"
+    "+346.53387265024656"
+    false
+    refl
+    "positive_adverse_to_nonpositive_rule"
+    true
+    refl
+    "/tmp/tg_re1600_t9_N128_fluidsim.npz"
+    "FluidSim ns3d pseudo-spectral Taylor-Green"
+    "N=128"
+    "t=9.009999999999852"
+    "-1116.3493344286098"
+    false
+    refl
+    "1.938833755893448"
+    "negative_supports_nonpositive_rule"
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    "N=128 is non-degenerate and supports the nonpositive local eigenframe cross-derivative route; this is empirical route evidence only, with external DNS and nonlinear Riesz promotion still fail-closed."
+
+canonicalResolutionSeriesN128SignSupportsRoute :
+  NSGateway1ResolutionSeriesReceipt.n128SignSupportsNonpositiveRule
+    canonicalResolutionSeriesReceipt
+  ≡ true
+canonicalResolutionSeriesN128SignSupportsRoute =
+  refl
+
+canonicalResolutionSeriesRouteEmpiricallyLive :
+  NSGateway1ResolutionSeriesReceipt.routeEmpiricallyLive
+    canonicalResolutionSeriesReceipt
+  ≡ true
+canonicalResolutionSeriesRouteEmpiricallyLive =
+  refl
+
+canonicalResolutionSeriesExternalDNSStillRequired :
+  NSGateway1ResolutionSeriesReceipt.externalDNSWindowStillRequired
+    canonicalResolutionSeriesReceipt
+  ≡ true
+canonicalResolutionSeriesExternalDNSStillRequired =
+  refl
+
+canonicalResolutionSeriesNonlinearRieszStillUnpromoted :
+  NSGateway1ResolutionSeriesReceipt.nonlinearRieszSignPromotedHere
+    canonicalResolutionSeriesReceipt
+  ≡ false
+canonicalResolutionSeriesNonlinearRieszStillUnpromoted =
+  refl
+
+canonicalResolutionSeriesClayStillUnpromoted :
+  NSGateway1ResolutionSeriesReceipt.clayPromotionHere
+    canonicalResolutionSeriesReceipt
+  ≡ false
+canonicalResolutionSeriesClayStillUnpromoted =
+  refl
 
 canonicalGateway1DiagnosticRouteRecorded :
   NSGateway1DiagnosticAggregation.gateway1DiagnosticRouteRecorded
@@ -139,6 +343,27 @@ canonicalClayPromotionStillBlocked :
     canonicalAggregation
     ≡ true
 canonicalClayPromotionStillBlocked =
+  refl
+
+canonicalDegeneracyConclusionRecorded :
+  NSGateway1DiagnosticAggregation.degeneracyConclusionRecorded
+    canonicalAggregation
+    ≡ true
+canonicalDegeneracyConclusionRecorded =
+  refl
+
+canonicalZeroNoiseCrossDerivativeSignEvidenceBlocked :
+  NSGateway1DiagnosticAggregation.zeroNoiseCrossDerivativeSignEvidenceBlocked
+    canonicalAggregation
+    ≡ true
+canonicalZeroNoiseCrossDerivativeSignEvidenceBlocked =
+  refl
+
+canonicalRealDNSWindowStillRequired :
+  NSGateway1DiagnosticAggregation.realDNSWindowStillRequired
+    canonicalAggregation
+    ≡ true
+canonicalRealDNSWindowStillRequired =
   refl
 
 routeRecordedNotPromoted : Bool
@@ -186,6 +411,18 @@ numericalDNSRequiredBeforeAnySignPromotion =
   NSGateway1DiagnosticAggregation.numericalDNSStillRequired
     canonicalAggregation
 
+t0SyntheticFixtureEigenframeDegenerateHere : Bool
+t0SyntheticFixtureEigenframeDegenerateHere =
+  true
+
+zeroOrNoiseCrossDerivativeNotSignEvidenceHere : Bool
+zeroOrNoiseCrossDerivativeNotSignEvidenceHere =
+  true
+
+realDNSTimeSevenToNineRequiredHere : Bool
+realDNSTimeSevenToNineRequiredHere =
+  true
+
 dnsSignClassificationStillOpenIsTrue :
   dnsSignClassificationStillOpen ≡ true
 dnsSignClassificationStillOpenIsTrue =
@@ -196,13 +433,28 @@ numericalDNSRequiredBeforeAnySignPromotionIsTrue :
 numericalDNSRequiredBeforeAnySignPromotionIsTrue =
   refl
 
+t0SyntheticFixtureEigenframeDegenerateHereIsTrue :
+  t0SyntheticFixtureEigenframeDegenerateHere ≡ true
+t0SyntheticFixtureEigenframeDegenerateHereIsTrue =
+  refl
+
+zeroOrNoiseCrossDerivativeNotSignEvidenceHereIsTrue :
+  zeroOrNoiseCrossDerivativeNotSignEvidenceHere ≡ true
+zeroOrNoiseCrossDerivativeNotSignEvidenceHereIsTrue =
+  refl
+
+realDNSTimeSevenToNineRequiredHereIsTrue :
+  realDNSTimeSevenToNineRequiredHere ≡ true
+realDNSTimeSevenToNineRequiredHereIsTrue =
+  refl
+
 organizationString : String
 organizationString =
   "NS-GW-1 diagnostic route boundary receipt"
 
 requirementString : String
 requirementString =
-  "Record the strain cross-derivative diagnostic target while keeping DNS sign, nonlinear Riesz sign, and Clay promotion fail-closed."
+  "Record the nine-result degeneracy conclusion while keeping DNS sign, nonlinear Riesz sign, and Clay promotion fail-closed."
 
 codeArtifactString : String
 codeArtifactString =
@@ -210,7 +462,7 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "Synthetic Taylor-Green row recorded; numerical DNS evidence remains required."
+  "t=0 synthetic/fixture eigenframe_degenerate=true; FluidSim TG Re=1600 t≈9 N=64 positive row is superseded by non-degenerate N=128 negative row; local sign route is live but unpromoted."
 
 latticeString : String
 latticeString =
@@ -218,15 +470,15 @@ latticeString =
 
 proposalString : String
 proposalString =
-  "Use the diagnostic script output only as evidence routing until real DNS data and the nonlinear sign condition are checked."
+  "Use diagnostic output only as evidence routing; proceed to NS-GW-2a while requiring independent external DNS t≈7-9 before nonlinear Riesz sign promotion."
 
 governanceString : String
 governanceString =
-  "promotionAllowed=false, dnsSignConfirmed=false, nonlinearRieszSignConditionConfirmed=false, clayNavierStokesPromoted=false"
+  "promotionAllowed=false, dnsSignConfirmed=false, nonlinearRieszSignConditionConfirmed=false, clayNavierStokesPromoted=false, zeroOrNoiseCrossDerivativeIsSignEvidence=false"
 
 gapString : String
 gapString =
-  "DNS sign and nonlinear Riesz sign condition remain open; Clay Navier-Stokes promotion is blocked."
+  "Independent external DNS t≈7-9, global Riesz-vs-local-cross-derivative extraction, and nonlinear Riesz sign theorem remain open; Clay Navier-Stokes promotion is blocked."
 
 record NSGateway1DiagnosticReceipt : Set where
   constructor mkNSGateway1DiagnosticReceipt
@@ -235,6 +487,8 @@ record NSGateway1DiagnosticReceipt : Set where
       NSGateway1DiagnosticTarget
     aggregation :
       NSGateway1DiagnosticAggregation
+    resolutionSeries :
+      NSGateway1ResolutionSeriesReceipt
     routeRecorded :
       Bool
     routeRecordedIsTrue :
@@ -251,6 +505,18 @@ record NSGateway1DiagnosticReceipt : Set where
       Bool
     clayNavierStokesPromotedIsFalse :
       clayNavierStokesPromoted ≡ false
+    t0SyntheticFixtureEigenframeDegenerate :
+      Bool
+    t0SyntheticFixtureEigenframeDegenerateIsTrue :
+      t0SyntheticFixtureEigenframeDegenerate ≡ true
+    zeroOrNoiseCrossDerivativeNotSignEvidence :
+      Bool
+    zeroOrNoiseCrossDerivativeNotSignEvidenceIsTrue :
+      zeroOrNoiseCrossDerivativeNotSignEvidence ≡ true
+    realDNSTimeSevenToNineRequired :
+      Bool
+    realDNSTimeSevenToNineRequiredIsTrue :
+      realDNSTimeSevenToNineRequired ≡ true
     O :
       String
     R :
@@ -274,6 +540,7 @@ canonicalReceipt =
   mkNSGateway1DiagnosticReceipt
     canonicalTaylorGreenDiagnostic
     canonicalAggregation
+    canonicalResolutionSeriesReceipt
     routeRecordedNotPromoted
     routeRecordedNotPromotedIsTrue
     dnsSignConfirmedHere
@@ -282,6 +549,12 @@ canonicalReceipt =
     nonlinearRieszSignConditionProvedHereIsFalse
     clayNavierStokesPromotedHere
     clayNavierStokesPromotedHereIsFalse
+    t0SyntheticFixtureEigenframeDegenerateHere
+    t0SyntheticFixtureEigenframeDegenerateHereIsTrue
+    zeroOrNoiseCrossDerivativeNotSignEvidenceHere
+    zeroOrNoiseCrossDerivativeNotSignEvidenceHereIsTrue
+    realDNSTimeSevenToNineRequiredHere
+    realDNSTimeSevenToNineRequiredHereIsTrue
     organizationString
     requirementString
     codeArtifactString
@@ -314,4 +587,25 @@ canonicalReceiptDNSSignConfirmedFalseProjection =
 canonicalReceiptNumericalDNSBeforePromotionProjection :
   numericalDNSRequiredBeforeAnySignPromotion ≡ true
 canonicalReceiptNumericalDNSBeforePromotionProjection =
+  refl
+
+canonicalReceiptT0SyntheticFixtureEigenframeDegenerateProjection :
+  NSGateway1DiagnosticReceipt.t0SyntheticFixtureEigenframeDegenerate
+    canonicalReceipt
+  ≡ true
+canonicalReceiptT0SyntheticFixtureEigenframeDegenerateProjection =
+  refl
+
+canonicalReceiptZeroOrNoiseCrossDerivativeNotSignEvidenceProjection :
+  NSGateway1DiagnosticReceipt.zeroOrNoiseCrossDerivativeNotSignEvidence
+    canonicalReceipt
+  ≡ true
+canonicalReceiptZeroOrNoiseCrossDerivativeNotSignEvidenceProjection =
+  refl
+
+canonicalReceiptRealDNSTimeSevenToNineRequiredProjection :
+  NSGateway1DiagnosticReceipt.realDNSTimeSevenToNineRequired
+    canonicalReceipt
+  ≡ true
+canonicalReceiptRealDNSTimeSevenToNineRequiredProjection =
   refl

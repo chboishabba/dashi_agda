@@ -28,6 +28,12 @@ AGDA_TARGETS = [
     "DASHI/Interop/QiCarrierFieldBridge.agda",
     "DASHI/Interop/MeditationQiBridge.agda",
     "DASHI/Interop/InterMediaBridgeRegression.agda",
+    "DASHI/Culture/QiOperatorTheoryBoundary.agda",
+    "DASHI/Interop/TypedTermRoleFunctor.agda",
+    "DASHI/Interop/StratifiedTypedComparisonLaw.agda",
+    "DASHI/Interop/BackgroundDistributionBridge.agda",
+    "DASHI/Promotion/CrossDomainClaimPromotionBoundary.agda",
+    "DASHI/Interop/AggregateBidirectionalTranslationDischarge.agda",
     "DASHI/Promotion/ObligationIndex.agda",
 ]
 

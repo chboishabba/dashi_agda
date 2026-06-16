@@ -15,6 +15,31 @@ Current GR analytic-kernel aggregation note for `2026-06-15`:
   perturbation estimate, and Ricci perturbation extraction. The aggregation
   receipt only records the dependency surface; it does not promote continuum
   Ricci convergence or external Schwarzschild authority.
+- Exact remaining GR variables for this tranche are:
+  `orderedRationalGaugeD_QQZeroLawPrimitive`,
+  `orderedRationalGaugeD_QQSymmetryLawPrimitive`,
+  `orderedRationalGaugeD_QQTriangleLawPrimitive`,
+  `orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive`,
+  `orderedRationalGaugeThreeMinusNPositiveLawPrimitive`,
+  `orderedRationalGaugeScale48Is48`,
+  `orderedRationalGaugeScale48NonnegativeLawPrimitive`,
+  `orderedRationalShellARadialMinusSchwarzschildLowerBoundIs1`,
+  `orderedRationalShellAInverseMetricAbsMaxIs4`,
+  `orderedRationalShellAMetricDerivativeAbsMaxIs8`,
+  `orderedRationalShellAChristoffelFormulaEnvelopeIs72`,
+  `orderedRationalShellAReciprocalBoundsFeedChristoffelFormulaC0Stable`,
+  `orderedRationalShellA_C_GammaIs1`,
+  `orderedRationalShellA_CPrime_GammaNumeratorIs26`,
+  `orderedRationalShellA_CPrime_GammaDenominatorIs27`,
+  `orderedRationalShellARequestedInequalityPrimitive`,
+  `machineCheckedChristoffelL_GammaIs48`,
+  `selectedSymbolicRationalChristoffelC0FormulaStabilityIs48`,
+  `selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound`,
+  `grDiscreteRicciExtractionConnectionErrorBoundExtractionDependencyNameExact`,
+  `grDiscreteRicciExtractionPointCRConstantIs48`,
+  `grDiscreteRicciExtractionShellACRConstantIs80`,
+  `grDiscreteRicciExtractionConservativeCRExtractionConstantIs640`, and
+  `grSchwarzschildFiniteRicciPerturbationPointCRConstantIs48`.
 - Five proof tiers for this tranche: checked finite tables/receipts;
   machine-checked Shell A constant ledger; ordered-QQ analytic kernel targets;
   continuum PDE/GR theorem gateways; external authority/governance promotion.
@@ -46,11 +71,19 @@ Current NS-GW-1 diagnostic note for `2026-06-16`:
 - The receipt aggregation now explicitly records that DNS sign classification
   is still open and that DNS evidence is required before any sign-promotion
   route can be used.
+- Interpret the first synthetic/Taylor-Green degeneracy result narrowly:
+  tolerance-zero or nonpositive output, and especially
+  `eigenframe_degenerate = true`, is a diagnostic sanity check only. It is not
+  DNS sign confirmation and cannot inhabit the nonlinear Riesz sign condition.
 - Next actual math/evidence work is external to Agda: run the diagnostic on
   credible Taylor-Green DNS data and only then decide whether the signed
-  T(b)/nonlinear Riesz route is viable. DNS sign confirmation, nonlinear
-  Riesz sign, residual depletion, full Clay NS, and Clay promotion remain
-  false/open.
+  T(b)/nonlinear Riesz route is viable. The required real DNS calculation is
+  a periodic NPZ snapshot with validated `N`, `domain_length`, `grid_spacing`,
+  finite `amplitude`, `time`, `snapshot_index`, and `source`, reporting
+  `cross_derivative_e1_e2_lambda2_at_max`, `sign_classification`,
+  `sign_tolerance`, `min_local_eigenvalue_gap`, and
+  `eigenframe_degenerate`. DNS sign confirmation, nonlinear Riesz sign,
+  residual depletion, full Clay NS, and Clay promotion remain false/open.
 
 Current GR analytic-kernel implementation note for `2026-06-16`:
 - The ordered-gauge, Shell A denominator, symbolic-kernel, and Schwarzschild

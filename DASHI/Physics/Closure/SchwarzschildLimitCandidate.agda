@@ -591,7 +591,7 @@ twentySevenN :
 twentySevenN =
   27
 
-fortyFourN seventyTwoN eightyN oneHundredTwelveN oneHundredTwentyFourN twoHundredTwentyN nineHundredNinetyTwoN :
+fortyFourN seventyTwoN eightyN oneHundredTwelveN oneHundredTwentyFourN oneHundredTwentySevenN twoHundredTwentyN nineHundredNinetyTwoN twoThousandOneHundredFortyFourN :
   Nat
 fortyFourN =
   44
@@ -608,11 +608,17 @@ oneHundredTwelveN =
 oneHundredTwentyFourN =
   124
 
+oneHundredTwentySevenN =
+  127
+
 twoHundredTwentyN =
   220
 
 nineHundredNinetyTwoN =
   992
+
+twoThousandOneHundredFortyFourN =
+  2144
 
 fortyEightN sixHundredFortyN :
   Nat
@@ -627,7 +633,7 @@ twentySixN :
 twentySixN =
   suc9 (suc9 eightN)
 
-zeroQ posOne posOneThird posOneNinth posOneTwentySeventh posTwo posTwoThirds posTwoNinths posTwoTwentySevenths posTwoEightyFirsts posFour posFourNinths posFourTwentySevenths posFiveThirds posElevenNinths posTwentySixTwentySevenths posFortyEightTwentyFifths posNineHundredNinetyTwoOneHundredTwentyFifths posThree posSix posNine posFortyFour posFortyEight posSeventyTwo posEighty posOneHundredTwelve posTwoHundredTwenty negOne negOneThird negOneNinth negTwoThirds negTwo negTwoNinths negTwoTwentySevenths negTwoEightyFirsts negThree negFour negFourNinths negFourTwentySevenths negTwentySixTwentySevenths negSix : SignedPositiveRationalTag
+zeroQ posOne posOneThird posOneNinth posOneTwentySeventh posOneOneHundredTwentyEighth posTwo posTwoThirds posTwoNinths posTwoTwentySevenths posTwoEightyFirsts posFour posFourNinths posFourTwentySevenths posFiveThirds posElevenNinths posTwentySixTwentySevenths posFortyEightTwentyFifths posNineHundredNinetyTwoOneHundredTwentyFifths posTwoThousandOneHundredFortyFourTwentySevenths posThree posSix posNine posFortyFour posFortyEight posSeventyTwo posEighty posOneHundredTwelve posTwoHundredTwenty negOne negOneThird negOneNinth negTwoThirds negTwo negTwoNinths negTwoTwentySevenths negTwoEightyFirsts negThree negFour negFourNinths negFourTwentySevenths negTwentySixTwentySevenths negSix : SignedPositiveRationalTag
 zeroQ =
   signedPositiveRational sign+ zero zero
 
@@ -642,6 +648,9 @@ posOneNinth =
 
 posOneTwentySeventh =
   signedPositiveRational sign+ oneN twentySixN
+
+posOneOneHundredTwentyEighth =
+  signedPositiveRational sign+ oneN oneHundredTwentySevenN
 
 posTwo =
   signedPositiveRational sign+ twoN zero
@@ -681,6 +690,9 @@ posFortyEightTwentyFifths =
 
 posNineHundredNinetyTwoOneHundredTwentyFifths =
   signedPositiveRational sign+ nineHundredNinetyTwoN oneHundredTwentyFourN
+
+posTwoThousandOneHundredFortyFourTwentySevenths =
+  signedPositiveRational sign+ twoThousandOneHundredFortyFourN twentySixN
 
 posThree =
   signedPositiveRational sign+ threeN zero
@@ -1453,6 +1465,103 @@ schwarzschildGammaRadialDerivativeThetaRThetaSlotFormulaReceipt =
     refl
     "absolute value 1/9 is bounded by the tight shell max 1"
 
+schwarzschildGammaRadialDerivativePhiRPhiSlotFormulaReceipt :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+schwarzschildGammaRadialDerivativePhiRPhiSlotFormulaReceipt =
+  gammaRadialDerivativeSlotFormulaReceipt
+    "dr-gamma-phirphi"
+    coord-phi
+    coord-r
+    coord-phi
+    "drGammaPhiRPhi"
+    "d_r Gamma^phi_rphi = d_r (1 / r) at r=3 = -1/9"
+    negOneNinth
+    refl
+    posOneNinth
+    refl
+    posOne
+    refl
+    "absolute value 1/9 is bounded by the tight shell max 1"
+
+schwarzschildGammaRadialDerivativeSevenSlotFormulaReceipts :
+  List SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+schwarzschildGammaRadialDerivativeSevenSlotFormulaReceipts =
+  schwarzschildGammaRadialDerivativeTTRSlotFormulaReceipt
+  ∷ schwarzschildGammaRadialDerivativeRTTSlotFormulaReceipt
+  ∷ schwarzschildGammaRadialDerivativeRRRSlotFormulaReceipt
+  ∷ schwarzschildGammaRadialDerivativeRThetaThetaSlotFormulaReceipt
+  ∷ schwarzschildGammaRadialDerivativeRPhiPhiSlotFormulaReceipt
+  ∷ schwarzschildGammaRadialDerivativeThetaRThetaSlotFormulaReceipt
+  ∷ schwarzschildGammaRadialDerivativePhiRPhiSlotFormulaReceipt
+  ∷ []
+
+record SchwarzschildShellADerivativeSlotBoundReceipt : Set where
+  constructor shellADerivativeSlotBoundReceipt
+  field
+    slotReceipt :
+      SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+
+    shellABound :
+      SignedPositiveRationalTag
+
+    cGamma :
+      SignedPositiveRationalTag
+
+    cGammaIsOne :
+      cGamma
+      ≡
+      posOne
+
+    routeText :
+      String
+
+schwarzschildShellASevenSlotDerivativeBoundReceipts :
+  List SchwarzschildShellADerivativeSlotBoundReceipt
+schwarzschildShellASevenSlotDerivativeBoundReceipts =
+  shellADerivativeSlotBoundReceipt
+    schwarzschildGammaRadialDerivativeTTRSlotFormulaReceipt
+    posFourNinths
+    posOne
+    refl
+    "Shell A derivative slot bound records |d_r Gamma^t_tr| <= 4/9 under C_Gamma=1"
+  ∷ shellADerivativeSlotBoundReceipt
+    schwarzschildGammaRadialDerivativeRTTSlotFormulaReceipt
+    posOneOneHundredTwentyEighth
+    posOne
+    refl
+    "Shell A derivative slot bound records |d_r Gamma^r_tt| <= 1/128 under C_Gamma=1"
+  ∷ shellADerivativeSlotBoundReceipt
+    schwarzschildGammaRadialDerivativeRRRSlotFormulaReceipt
+    posFourNinths
+    posOne
+    refl
+    "Shell A derivative slot bound records |d_r Gamma^r_rr| <= 4/9 under C_Gamma=1"
+  ∷ shellADerivativeSlotBoundReceipt
+    schwarzschildGammaRadialDerivativeRThetaThetaSlotFormulaReceipt
+    posOne
+    posOne
+    refl
+    "Shell A derivative slot bound records |d_r Gamma^r_thetatheta| <= 1 under C_Gamma=1"
+  ∷ shellADerivativeSlotBoundReceipt
+    schwarzschildGammaRadialDerivativeRPhiPhiSlotFormulaReceipt
+    posOne
+    posOne
+    refl
+    "Shell A derivative slot bound records |d_r Gamma^r_phiphi| <= 1 under C_Gamma=1"
+  ∷ shellADerivativeSlotBoundReceipt
+    schwarzschildGammaRadialDerivativeThetaRThetaSlotFormulaReceipt
+    posOneNinth
+    posOne
+    refl
+    "Shell A derivative slot bound records |d_r Gamma^theta_rtheta| <= 1/9 under C_Gamma=1"
+  ∷ shellADerivativeSlotBoundReceipt
+    schwarzschildGammaRadialDerivativePhiRPhiSlotFormulaReceipt
+    posOneNinth
+    posOne
+    refl
+    "Shell A derivative slot bound records |d_r Gamma^phi_rphi| <= 1/9 under C_Gamma=1"
+  ∷ []
+
 schwarzschildGammaRadialDerivativeTTRSlotBoundIsOne :
   SchwarzschildGammaRadialDerivativeSlotFormulaReceipt.shellBound
     schwarzschildGammaRadialDerivativeTTRSlotFormulaReceipt
@@ -1507,6 +1616,14 @@ schwarzschildGammaRadialDerivativeThetaRThetaSlotBoundIsOne :
   ≡
   posOne
 schwarzschildGammaRadialDerivativeThetaRThetaSlotBoundIsOne =
+  refl
+
+schwarzschildGammaRadialDerivativePhiRPhiSlotBoundIsOne :
+  SchwarzschildGammaRadialDerivativeSlotFormulaReceipt.shellBound
+    schwarzschildGammaRadialDerivativePhiRPhiSlotFormulaReceipt
+  ≡
+  posOne
+schwarzschildGammaRadialDerivativePhiRPhiSlotBoundIsOne =
   refl
 
 record SchwarzschildGammaRadialSecondDerivativeSlotFormulaReceipt : Set where
@@ -1693,6 +1810,109 @@ schwarzschildGammaRadialSecondDerivativeSlotFormulaReceipts =
     coord-r
     "drrGammaPhiPhiR"
     "d_rr Gamma^phi_phir follows lower-index symmetry and equals 2/27"
+    posTwoTwentySevenths
+    refl
+    posTwoTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 2/27 is recorded under the 26/27 envelope"
+  ∷ []
+
+schwarzschildGammaRadialSecondDerivativeSevenSlotFormulaReceipts :
+  List SchwarzschildGammaRadialSecondDerivativeSlotFormulaReceipt
+schwarzschildGammaRadialSecondDerivativeSevenSlotFormulaReceipts =
+  gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-ttr"
+    coord-t
+    coord-t
+    coord-r
+    "drrGammaTTR"
+    "d_rr Gamma^t_tr = 26/27 at r_s=2,r=3 and attains the Shell A second-derivative envelope"
+    posTwentySixTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 26/27 is the recorded C'_Gamma bound"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-rtt"
+    coord-r
+    coord-t
+    coord-t
+    "drrGammaRTT"
+    "d_rr Gamma^r_tt = -2/81 at r_s=2,r=3"
+    negTwoEightyFirsts
+    refl
+    posTwoEightyFirsts
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 2/81 is recorded under the 26/27 envelope"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-rrr"
+    coord-r
+    coord-r
+    coord-r
+    "drrGammaRRR"
+    "d_rr Gamma^r_rr = -26/27 at r_s=2,r=3 and attains the Shell A second-derivative envelope"
+    negTwentySixTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 26/27 is the recorded C'_Gamma bound"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-rthetatheta"
+    coord-r
+    coord-theta
+    coord-theta
+    "drrGammaRThetaTheta"
+    "d_rr Gamma^r_thetatheta = 0 because d_r Gamma^r_thetatheta is constant -1"
+    zeroQ
+    refl
+    zeroQ
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "zero second derivative is recorded under the 26/27 envelope"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-rphiphi"
+    coord-r
+    coord-phi
+    coord-phi
+    "drrGammaRPhiPhi"
+    "d_rr Gamma^r_phiphi = 0 at the equatorial slice because d_r Gamma^r_phiphi is constant -1"
+    zeroQ
+    refl
+    zeroQ
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "zero second derivative is recorded under the 26/27 envelope"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-thetartheta"
+    coord-theta
+    coord-r
+    coord-theta
+    "drrGammaThetaRTheta"
+    "d_rr Gamma^theta_rtheta = 2/r^3 = 2/27 at r=3"
+    posTwoTwentySevenths
+    refl
+    posTwoTwentySevenths
+    refl
+    posTwentySixTwentySevenths
+    refl
+    "absolute value 2/27 is recorded under the 26/27 envelope"
+  ∷ gammaRadialSecondDerivativeSlotFormulaReceipt
+    "drr-gamma-phirphi"
+    coord-phi
+    coord-r
+    coord-phi
+    "drrGammaPhiRPhi"
+    "d_rr Gamma^phi_rphi = 2/r^3 = 2/27 at r=3"
     posTwoTwentySevenths
     refl
     posTwoTwentySevenths
@@ -4320,6 +4540,177 @@ canonicalSchwarzschildShellAExactCalculationReceipt =
         ∷ []
     }
 
+record SchwarzschildShellASevenSlotDerivativeConstantReceipt : Set₁ where
+  field
+    exactCalculation :
+      SchwarzschildShellAExactCalculationReceipt
+
+    exactCalculationIsCanonical :
+      exactCalculation
+      ≡
+      canonicalSchwarzschildShellAExactCalculationReceipt
+
+    sevenSlotRadialDerivativeRows :
+      List SchwarzschildGammaRadialDerivativeSlotFormulaReceipt
+
+    sevenSlotRadialDerivativeRowsAreCanonical :
+      sevenSlotRadialDerivativeRows
+      ≡
+      schwarzschildGammaRadialDerivativeSevenSlotFormulaReceipts
+
+    sevenSlotRadialDerivativeBoundRows :
+      List SchwarzschildShellADerivativeSlotBoundReceipt
+
+    sevenSlotRadialDerivativeBoundRowsAreCanonical :
+      sevenSlotRadialDerivativeBoundRows
+      ≡
+      schwarzschildShellASevenSlotDerivativeBoundReceipts
+
+    sevenSlotRadialSecondDerivativeRows :
+      List SchwarzschildGammaRadialSecondDerivativeSlotFormulaReceipt
+
+    sevenSlotRadialSecondDerivativeRowsAreCanonical :
+      sevenSlotRadialSecondDerivativeRows
+      ≡
+      schwarzschildGammaRadialSecondDerivativeSevenSlotFormulaReceipts
+
+    cGamma :
+      SignedPositiveRationalTag
+
+    cGammaIsOne :
+      cGamma
+      ≡
+      posOne
+
+    cGammaPrime :
+      SignedPositiveRationalTag
+
+    cGammaPrimeIsTwentySixTwentySevenths :
+      cGammaPrime
+      ≡
+      posTwentySixTwentySevenths
+
+    gammaMax :
+      SignedPositiveRationalTag
+
+    gammaMaxIsTwo :
+      gammaMax
+      ≡
+      posTwo
+
+    tightLGamma :
+      SignedPositiveRationalTag
+
+    tightLGammaIsFortyFour :
+      tightLGamma
+      ≡
+      posFortyFour
+
+    conservativeLGamma :
+      SignedPositiveRationalTag
+
+    conservativeLGammaIsFortyEight :
+      conservativeLGamma
+      ≡
+      posFortyEight
+
+    exactCR :
+      SignedPositiveRationalTag
+
+    exactCRIsTwoThousandOneHundredFortyFourTwentySevenths :
+      exactCR
+      ≡
+      posTwoThousandOneHundredFortyFourTwentySevenths
+
+    conservativeCR :
+      SignedPositiveRationalTag
+
+    conservativeCRIsEighty :
+      conservativeCR
+      ≡
+      posEighty
+
+    sevenSlotPromoted :
+      Bool
+
+    sevenSlotPromotedIsFalse :
+      sevenSlotPromoted
+      ≡
+      false
+
+    eigenframeIndependentNotes :
+      List String
+
+    boundaryText :
+      List String
+
+canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt
+canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt =
+  record
+    { exactCalculation =
+        canonicalSchwarzschildShellAExactCalculationReceipt
+    ; exactCalculationIsCanonical =
+        refl
+    ; sevenSlotRadialDerivativeRows =
+        schwarzschildGammaRadialDerivativeSevenSlotFormulaReceipts
+    ; sevenSlotRadialDerivativeRowsAreCanonical =
+        refl
+    ; sevenSlotRadialDerivativeBoundRows =
+        schwarzschildShellASevenSlotDerivativeBoundReceipts
+    ; sevenSlotRadialDerivativeBoundRowsAreCanonical =
+        refl
+    ; sevenSlotRadialSecondDerivativeRows =
+        schwarzschildGammaRadialSecondDerivativeSevenSlotFormulaReceipts
+    ; sevenSlotRadialSecondDerivativeRowsAreCanonical =
+        refl
+    ; cGamma =
+        posOne
+    ; cGammaIsOne =
+        refl
+    ; cGammaPrime =
+        posTwentySixTwentySevenths
+    ; cGammaPrimeIsTwentySixTwentySevenths =
+        refl
+    ; gammaMax =
+        posTwo
+    ; gammaMaxIsTwo =
+        refl
+    ; tightLGamma =
+        posFortyFour
+    ; tightLGammaIsFortyFour =
+        refl
+    ; conservativeLGamma =
+        posFortyEight
+    ; conservativeLGammaIsFortyEight =
+        refl
+    ; exactCR =
+        posTwoThousandOneHundredFortyFourTwentySevenths
+    ; exactCRIsTwoThousandOneHundredFortyFourTwentySevenths =
+        refl
+    ; conservativeCR =
+        posEighty
+    ; conservativeCRIsEighty =
+        refl
+    ; sevenSlotPromoted =
+        false
+    ; sevenSlotPromotedIsFalse =
+        refl
+    ; eigenframeIndependentNotes =
+        "Eigenframe-independent Shell A constant receipt records C_Gamma=1 from the seven-slot radial derivative rows"
+        ∷ "Eigenframe-independent Shell A constant receipt records C'_Gamma=26/27 from the seven-slot second-radial derivative rows"
+        ∷ "Seven Shell A derivative slot bound records carry 4/9, 1/128, 4/9, 1, 1, 1/9, and 1/9 under C_Gamma=1"
+        ∷ "Eigenframe-independent Shell A constant receipt records GammaMax=2 as the conservative Christoffel-value envelope"
+        ∷ "Tight L_Gamma=44 is recorded beside the retained conservative L_Gamma=48"
+        ∷ "Exact Ricci contraction constant is recorded as C_R=2144/27, with conservative receipt C_R<=80 retained as a rational overbound note"
+        ∷ []
+    ; boundaryText =
+        "The seven-slot table keeps one representative per lower-index symmetry class"
+        ∷ "The receipt is finite signed-rational traceability, not an ordered-field proof of 2144/27 <= 80"
+        ∷ "No Birkhoff, W4 mass, continuum Ricci, or Candidate256 promotion is introduced"
+        ∷ []
+    }
+
 schwarzschildShellAExactCGammaIsOne :
   SchwarzschildShellAExactCalculationReceipt.cGamma
     canonicalSchwarzschildShellAExactCalculationReceipt
@@ -4504,6 +4895,94 @@ schwarzschildShellASupremumSecondDerivativeSlotLedgerIsCanonical :
   ≡
   schwarzschildGammaRadialSecondDerivativeSlotFormulaReceipts
 schwarzschildShellASupremumSecondDerivativeSlotLedgerIsCanonical =
+  refl
+
+schwarzschildShellASevenSlotDerivativeRowsAreCanonical :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt.sevenSlotRadialDerivativeRows
+    canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+  ≡
+  schwarzschildGammaRadialDerivativeSevenSlotFormulaReceipts
+schwarzschildShellASevenSlotDerivativeRowsAreCanonical =
+  refl
+
+schwarzschildShellASevenSlotDerivativeBoundRowsAreCanonical :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt.sevenSlotRadialDerivativeBoundRows
+    canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+  ≡
+  schwarzschildShellASevenSlotDerivativeBoundReceipts
+schwarzschildShellASevenSlotDerivativeBoundRowsAreCanonical =
+  refl
+
+schwarzschildShellASevenSlotSecondDerivativeRowsAreCanonical :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt.sevenSlotRadialSecondDerivativeRows
+    canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+  ≡
+  schwarzschildGammaRadialSecondDerivativeSevenSlotFormulaReceipts
+schwarzschildShellASevenSlotSecondDerivativeRowsAreCanonical =
+  refl
+
+schwarzschildShellASevenSlotCGammaIsOne :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt.cGamma
+    canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+  ≡
+  posOne
+schwarzschildShellASevenSlotCGammaIsOne =
+  refl
+
+schwarzschildShellASevenSlotCGammaPrimeIsTwentySixTwentySevenths :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt.cGammaPrime
+    canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+  ≡
+  posTwentySixTwentySevenths
+schwarzschildShellASevenSlotCGammaPrimeIsTwentySixTwentySevenths =
+  refl
+
+schwarzschildShellASevenSlotGammaMaxIsTwo :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt.gammaMax
+    canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+  ≡
+  posTwo
+schwarzschildShellASevenSlotGammaMaxIsTwo =
+  refl
+
+schwarzschildShellASevenSlotTightLGammaIsFortyFour :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt.tightLGamma
+    canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+  ≡
+  posFortyFour
+schwarzschildShellASevenSlotTightLGammaIsFortyFour =
+  refl
+
+schwarzschildShellASevenSlotConservativeLGammaIsFortyEight :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt.conservativeLGamma
+    canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+  ≡
+  posFortyEight
+schwarzschildShellASevenSlotConservativeLGammaIsFortyEight =
+  refl
+
+schwarzschildShellASevenSlotExactCRIsTwoThousandOneHundredFortyFourTwentySevenths :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt.exactCR
+    canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+  ≡
+  posTwoThousandOneHundredFortyFourTwentySevenths
+schwarzschildShellASevenSlotExactCRIsTwoThousandOneHundredFortyFourTwentySevenths =
+  refl
+
+schwarzschildShellASevenSlotConservativeCRIsEighty :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt.conservativeCR
+    canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+  ≡
+  posEighty
+schwarzschildShellASevenSlotConservativeCRIsEighty =
+  refl
+
+schwarzschildShellASevenSlotPromotedFalse :
+  SchwarzschildShellASevenSlotDerivativeConstantReceipt.sevenSlotPromoted
+    canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+  ≡
+  false
+schwarzschildShellASevenSlotPromotedFalse =
   refl
 
 schwarzschildShellASecondDerivativeTTRIsTwentySixTwentySevenths :
