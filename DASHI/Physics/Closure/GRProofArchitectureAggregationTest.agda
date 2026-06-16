@@ -505,6 +505,44 @@ record GRProofArchitectureNextAnalyticKernelTrancheReceipt : Setω where
       ≡
       true
 
+    kernelObstructionReceipt :
+      Continuum.SymbolicRationalChristoffelC0KernelObstructionReceipt
+
+    kernelObstructionReceiptIsCanonical :
+      kernelObstructionReceipt
+      ≡
+      Continuum.canonicalSymbolicRationalChristoffelC0KernelObstructionReceipt
+
+    kernelObstructionGlobalKernelNotConstructed :
+      Continuum.SymbolicRationalChristoffelC0KernelObstructionReceipt.globalKernelLocallyConstructed
+        kernelObstructionReceipt
+      ≡
+      false
+
+    kernelObstructionNoFinFourTensorLayer :
+      Continuum.SymbolicRationalChristoffelC0KernelObstructionReceipt.concreteFinFourTensorLayerPresent
+        kernelObstructionReceipt
+      ≡
+      false
+
+    kernelObstructionNoComponentChristoffelFormula :
+      Continuum.SymbolicRationalChristoffelC0KernelObstructionReceipt.componentChristoffelFormulaPresent
+        kernelObstructionReceipt
+      ≡
+      false
+
+    kernelObstructionNoRicciContractionLayer :
+      Continuum.SymbolicRationalChristoffelC0KernelObstructionReceipt.ricciComponentContractionLayerPresent
+        kernelObstructionReceipt
+      ≡
+      false
+
+    kernelObstructionSchwarzschildRowsCanonical :
+      Continuum.SymbolicRationalChristoffelC0KernelObstructionReceipt.schwarzschildSevenSlotDerivativeBoundRows
+        kernelObstructionReceipt
+      ≡
+      Schwarzschild.schwarzschildShellASevenSlotDerivativeBoundReceipts
+
     requiredAnalyticalProofs :
       List String
 
@@ -764,6 +802,25 @@ canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt =
         true
     ; analyticKernelStillOpenIsTrue =
         refl
+    ; kernelObstructionReceipt =
+        Continuum.canonicalSymbolicRationalChristoffelC0KernelObstructionReceipt
+    ; kernelObstructionReceiptIsCanonical =
+        refl
+    ; kernelObstructionGlobalKernelNotConstructed =
+        Continuum.SymbolicRationalChristoffelC0KernelObstructionReceipt.globalKernelLocallyConstructedIsFalse
+          Continuum.canonicalSymbolicRationalChristoffelC0KernelObstructionReceipt
+    ; kernelObstructionNoFinFourTensorLayer =
+        Continuum.SymbolicRationalChristoffelC0KernelObstructionReceipt.concreteFinFourTensorLayerPresentIsFalse
+          Continuum.canonicalSymbolicRationalChristoffelC0KernelObstructionReceipt
+    ; kernelObstructionNoComponentChristoffelFormula =
+        Continuum.SymbolicRationalChristoffelC0KernelObstructionReceipt.componentChristoffelFormulaPresentIsFalse
+          Continuum.canonicalSymbolicRationalChristoffelC0KernelObstructionReceipt
+    ; kernelObstructionNoRicciContractionLayer =
+        Continuum.SymbolicRationalChristoffelC0KernelObstructionReceipt.ricciComponentContractionLayerPresentIsFalse
+          Continuum.canonicalSymbolicRationalChristoffelC0KernelObstructionReceipt
+    ; kernelObstructionSchwarzschildRowsCanonical =
+        Continuum.SymbolicRationalChristoffelC0KernelObstructionReceipt.schwarzschildSevenSlotDerivativeBoundRowsAreCanonical
+          Continuum.canonicalSymbolicRationalChristoffelC0KernelObstructionReceipt
     ; requiredAnalyticalProofs =
         "tier 1: ordered rational gauge toolkit in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalOrderedRationalGaugeToolkitReceipt and orderedRationalGauge* projections"
         ∷ "tier 2: Shell A denominator chain in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalOrderedRationalShellADenominatorReciprocalReceipt and orderedRationalShellA* projections"

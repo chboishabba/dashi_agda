@@ -7,6 +7,8 @@ open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
 
 open import DASHI.Biology.AnimalexicAnimalUtteranceSurface
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
+import DASHI.Core.CandidateOnlyCore as CandidateOnly
 
 ------------------------------------------------------------------------
 -- Embodied motor / nociception / proprioception / vestibular vocabulary.
@@ -257,6 +259,55 @@ record EmbodiedMotorMultisensoryBridge
     bridgeReading :
       String
 
+    candidateOnlyCoreAdapter :
+      CandidateOnly.CandidateOnlyRow
+
+    candidateOnlyCoreAdapterReceipt :
+      CandidateOnly.CandidateOnlyReceipt candidateOnlyCoreAdapter
+
+    candidateOnlyCoreAdapterCandidateOnly :
+      CandidateOnly.candidateOnly candidateOnlyCoreAdapter ≡ true
+
+    candidateOnlyCoreAdapterPromotedFalse :
+      CandidateOnly.promoted candidateOnlyCoreAdapter ≡ false
+
+    candidateOnlyCoreAdapterTruthAuthorityFalse :
+      CandidateOnly.carriesTruthAuthority candidateOnlyCoreAdapter ≡ false
+
+    candidateOnlyCoreAdapterRuntimeAuthorityFalse :
+      CandidateOnly.carriesRuntimeAuthority candidateOnlyCoreAdapter ≡ false
+
+    candidateOnlyCoreAdapterTheoremAuthorityFalse :
+      CandidateOnly.carriesTheoremAuthority candidateOnlyCoreAdapter ≡ false
+
+    authorityNonPromotionCoreAdapter :
+      AuthorityNA.AuthorityNonPromotionBundle
+
+    authorityNonPromotionCoreAdapterCanonicalKindsFalse :
+      AuthorityNA.AllAuthorityKindsFalse
+        authorityNonPromotionCoreAdapter
+        AuthorityNA.canonicalAuthorityKinds
+
+    authorityNonPromotionCoreAdapterClinicalAuthorityFalse :
+      AuthorityNA.clinicalAuthorityFlag authorityNonPromotionCoreAdapter
+      ≡ false
+
+    authorityNonPromotionCoreAdapterScientificAuthorityFalse :
+      AuthorityNA.scientificAuthorityFlag authorityNonPromotionCoreAdapter
+      ≡ false
+
+    authorityNonPromotionCoreAdapterEmpiricalAuthorityFalse :
+      AuthorityNA.empiricalAuthorityFlag authorityNonPromotionCoreAdapter
+      ≡ false
+
+    authorityNonPromotionCoreAdapterExternalAuthorityFalse :
+      AuthorityNA.externalAuthorityFlag authorityNonPromotionCoreAdapter
+      ≡ false
+
+    authorityNonPromotionCoreAdapterPromotesAnyAuthorityFalse :
+      AuthorityNA.promotesAnyAuthority authorityNonPromotionCoreAdapter
+      ≡ false
+
     intentRecoveryClaim :
       Bool
 
@@ -447,6 +498,133 @@ canonicalEmbodiedMotorMultisensorySurface =
         "Toy embodied surface constrains behaviour envelopes from motor, pain-behaviour, proprioceptive, vestibular, and contextual traces."
     }
 
+canonicalEmbodiedCandidateOnlyCoreAdapter :
+  CandidateOnly.CandidateOnlyRow
+canonicalEmbodiedCandidateOnlyCoreAdapter =
+  CandidateOnly.mkCandidateOnlyRow
+    "embodied motor multisensory candidate-only adapter"
+    "DASHI.Biology.EmbodiedMotorMultisensoryBridge"
+    "canonicalEmbodiedMotorMultisensoryBridge"
+    CandidateOnly.bridgeCandidateKind
+    CandidateOnly.bridgeCandidateOnlyStatus
+    "Embodied motor and multisensory bridge receipts constrain candidate behavioural interpretation only."
+    "Intent recovery, pain-qualia identity, full motor-policy closure, and sensor-fusion closure remain blocked."
+
+canonicalEmbodiedCandidateOnlyCoreAdapterReceipt :
+  CandidateOnly.CandidateOnlyReceipt
+    canonicalEmbodiedCandidateOnlyCoreAdapter
+canonicalEmbodiedCandidateOnlyCoreAdapterReceipt =
+  CandidateOnly.canonicalCandidateOnlyReceipt
+    canonicalEmbodiedCandidateOnlyCoreAdapter
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalEmbodiedCandidateOnlyCoreAdapterCandidateOnly :
+  CandidateOnly.candidateOnly canonicalEmbodiedCandidateOnlyCoreAdapter
+  ≡
+  true
+canonicalEmbodiedCandidateOnlyCoreAdapterCandidateOnly =
+  CandidateOnly.candidateOnlyIsTrue
+    canonicalEmbodiedCandidateOnlyCoreAdapterReceipt
+
+canonicalEmbodiedCandidateOnlyCoreAdapterPromotedFalse :
+  CandidateOnly.promoted canonicalEmbodiedCandidateOnlyCoreAdapter
+  ≡
+  false
+canonicalEmbodiedCandidateOnlyCoreAdapterPromotedFalse =
+  CandidateOnly.candidatePromotedIsFalse
+    canonicalEmbodiedCandidateOnlyCoreAdapterReceipt
+
+canonicalEmbodiedCandidateOnlyCoreAdapterTruthAuthorityFalse :
+  CandidateOnly.carriesTruthAuthority canonicalEmbodiedCandidateOnlyCoreAdapter
+  ≡
+  false
+canonicalEmbodiedCandidateOnlyCoreAdapterTruthAuthorityFalse =
+  CandidateOnly.candidateNoTruthAuthority
+    canonicalEmbodiedCandidateOnlyCoreAdapterReceipt
+
+canonicalEmbodiedCandidateOnlyCoreAdapterRuntimeAuthorityFalse :
+  CandidateOnly.carriesRuntimeAuthority canonicalEmbodiedCandidateOnlyCoreAdapter
+  ≡
+  false
+canonicalEmbodiedCandidateOnlyCoreAdapterRuntimeAuthorityFalse =
+  CandidateOnly.candidateNoRuntimeAuthority
+    canonicalEmbodiedCandidateOnlyCoreAdapterReceipt
+
+canonicalEmbodiedCandidateOnlyCoreAdapterTheoremAuthorityFalse :
+  CandidateOnly.carriesTheoremAuthority canonicalEmbodiedCandidateOnlyCoreAdapter
+  ≡
+  false
+canonicalEmbodiedCandidateOnlyCoreAdapterTheoremAuthorityFalse =
+  CandidateOnly.candidateNoTheoremAuthority
+    canonicalEmbodiedCandidateOnlyCoreAdapterReceipt
+
+canonicalEmbodiedAuthorityNonPromotionCoreAdapter :
+  AuthorityNA.AuthorityNonPromotionBundle
+canonicalEmbodiedAuthorityNonPromotionCoreAdapter =
+  AuthorityNA.mkClosedAuthorityNonPromotionBundle
+    "embodied motor multisensory authority non-promotion adapter"
+
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterCanonicalKindsFalse :
+  AuthorityNA.AllAuthorityKindsFalse
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+    AuthorityNA.canonicalAuthorityKinds
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterCanonicalKindsFalse =
+  AuthorityNA.proveAllAuthorityKindsFalse
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+    AuthorityNA.canonicalAuthorityKinds
+
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterClinicalAuthorityFalse :
+  AuthorityNA.clinicalAuthorityFlag
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterClinicalAuthorityFalse =
+  AuthorityNA.bundleClinicalAuthorityIsFalse
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterScientificAuthorityFalse :
+  AuthorityNA.scientificAuthorityFlag
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterScientificAuthorityFalse =
+  AuthorityNA.bundleScientificAuthorityIsFalse
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterEmpiricalAuthorityFalse :
+  AuthorityNA.empiricalAuthorityFlag
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterEmpiricalAuthorityFalse =
+  AuthorityNA.bundleEmpiricalAuthorityIsFalse
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterExternalAuthorityFalse :
+  AuthorityNA.externalAuthorityFlag
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterExternalAuthorityFalse =
+  AuthorityNA.bundleExternalAuthorityIsFalse
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterPromotesAnyAuthorityFalse :
+  AuthorityNA.promotesAnyAuthority
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+  ≡
+  false
+canonicalEmbodiedAuthorityNonPromotionCoreAdapterPromotesAnyAuthorityFalse =
+  AuthorityNA.bundlePromotesAnyAuthorityIsFalse
+    canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+
 canonicalEmbodiedMotorMultisensoryBridge :
   EmbodiedMotorMultisensoryBridge
     canonicalEmbodiedAnimalexicSurface
@@ -458,6 +636,34 @@ canonicalEmbodiedMotorMultisensoryBridge =
     ; guards = defaultEmbodiedNonPromotionGuards
     ; bridgeReading =
         "Embodied motor and multisensory channels are receipt-gated constraints on Animalexic behavioural interpretation."
+    ; candidateOnlyCoreAdapter =
+        canonicalEmbodiedCandidateOnlyCoreAdapter
+    ; candidateOnlyCoreAdapterReceipt =
+        canonicalEmbodiedCandidateOnlyCoreAdapterReceipt
+    ; candidateOnlyCoreAdapterCandidateOnly =
+        canonicalEmbodiedCandidateOnlyCoreAdapterCandidateOnly
+    ; candidateOnlyCoreAdapterPromotedFalse =
+        canonicalEmbodiedCandidateOnlyCoreAdapterPromotedFalse
+    ; candidateOnlyCoreAdapterTruthAuthorityFalse =
+        canonicalEmbodiedCandidateOnlyCoreAdapterTruthAuthorityFalse
+    ; candidateOnlyCoreAdapterRuntimeAuthorityFalse =
+        canonicalEmbodiedCandidateOnlyCoreAdapterRuntimeAuthorityFalse
+    ; candidateOnlyCoreAdapterTheoremAuthorityFalse =
+        canonicalEmbodiedCandidateOnlyCoreAdapterTheoremAuthorityFalse
+    ; authorityNonPromotionCoreAdapter =
+        canonicalEmbodiedAuthorityNonPromotionCoreAdapter
+    ; authorityNonPromotionCoreAdapterCanonicalKindsFalse =
+        canonicalEmbodiedAuthorityNonPromotionCoreAdapterCanonicalKindsFalse
+    ; authorityNonPromotionCoreAdapterClinicalAuthorityFalse =
+        canonicalEmbodiedAuthorityNonPromotionCoreAdapterClinicalAuthorityFalse
+    ; authorityNonPromotionCoreAdapterScientificAuthorityFalse =
+        canonicalEmbodiedAuthorityNonPromotionCoreAdapterScientificAuthorityFalse
+    ; authorityNonPromotionCoreAdapterEmpiricalAuthorityFalse =
+        canonicalEmbodiedAuthorityNonPromotionCoreAdapterEmpiricalAuthorityFalse
+    ; authorityNonPromotionCoreAdapterExternalAuthorityFalse =
+        canonicalEmbodiedAuthorityNonPromotionCoreAdapterExternalAuthorityFalse
+    ; authorityNonPromotionCoreAdapterPromotesAnyAuthorityFalse =
+        canonicalEmbodiedAuthorityNonPromotionCoreAdapterPromotesAnyAuthorityFalse
     ; intentRecoveryClaim = false
     ; intentRecoveryClaimIsFalse = refl
     ; painQualiaIdentityClaim = false

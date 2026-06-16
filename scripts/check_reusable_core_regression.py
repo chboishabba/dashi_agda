@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 AGDA_TARGETS = [
+    "DASHI/Core/AdapterCanonicalityCore.agda",
     "DASHI/Core/AuthorityNonPromotionCore.agda",
     "DASHI/Core/EmptyPromotionCore.agda",
     "DASHI/Core/CandidateOnlyCore.agda",
@@ -34,6 +35,11 @@ AGDA_TARGETS = [
     "DASHI/Interop/BackgroundDistributionBridge.agda",
     "DASHI/Promotion/CrossDomainClaimPromotionBoundary.agda",
     "DASHI/Interop/AggregateBidirectionalTranslationDischarge.agda",
+    "DASHI/Biology/CrossSpeciesOntologyTranslationBridge.agda",
+    "DASHI/Biology/EmbodiedMotorMultisensoryBridge.agda",
+    "DASHI/Biology/AnimalSenseObservationThreadDischarge.agda",
+    "DASHI/Interop/WikidataCandidateRoleBridge.agda",
+    "DASHI/Ontology/WikidataAnimalSemanticJoinLayer.agda",
     "DASHI/Promotion/ObligationIndex.agda",
 ]
 

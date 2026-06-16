@@ -5,6 +5,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
+import DASHI.Core.AdapterCanonicalityCore as AdapterCanonicalityCore
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNonPromotionCore
+import DASHI.Core.CandidateOnlyCore as CandidateOnlyCore
 import DASHI.Interop.RoleGrammarCore as RoleCore
 
 ------------------------------------------------------------------------
@@ -564,6 +567,168 @@ candidateIdentityFormalRoleEntailment :
   CandidateFormalRoleEntailment
 candidateIdentityFormalRoleEntailment entity =
   noFormalRoleEntailed
+
+------------------------------------------------------------------------
+-- Reusable non-authority core adapters.
+--
+-- These rows are additive adapter evidence only.  They keep the public
+-- candidate, authority, status, and receipt names above unchanged while
+-- projecting the same candidate-only and authority-false semantics through
+-- reusable fail-closed cores.
+
+wikidataCandidateOnlyCoreAdapter :
+  WikidataCandidateSurface →
+  CandidateOnlyCore.CandidateOnlyRow
+wikidataCandidateOnlyCoreAdapter candidate =
+  CandidateOnlyCore.candidateOnlyRow
+    (candidateSurface (wikidataEntity candidate))
+    "DASHI.Interop.WikidataCandidateRoleBridge"
+    "WikidataCandidateSurface"
+    CandidateOnlyCore.roleCandidateKind
+    CandidateOnlyCore.roleCandidateOnlyStatus
+    "Wikidata entity and hint bundles are candidate-only role surfaces"
+    "PNF role-in-context assignment and ITIR typed-term authority require separate receipts"
+    (candidateOnly candidate)
+    false
+    false
+    false
+    false
+    false
+    false
+    false
+
+wikidataCandidateOnlyCoreAdapterReceipt :
+  (candidate : WikidataCandidateSurface) →
+  CandidateOnlyCore.CandidateOnlyReceipt
+    (wikidataCandidateOnlyCoreAdapter candidate)
+wikidataCandidateOnlyCoreAdapterReceipt candidate =
+  CandidateOnlyCore.canonicalCandidateOnlyReceipt
+    (wikidataCandidateOnlyCoreAdapter candidate)
+    (candidateOnlyIsTrue candidate)
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+wikidataCandidateOnlyCoreCandidateTrue :
+  (candidate : WikidataCandidateSurface) →
+  CandidateOnlyCore.candidateOnly
+    (wikidataCandidateOnlyCoreAdapter candidate)
+  ≡
+  true
+wikidataCandidateOnlyCoreCandidateTrue candidate =
+  CandidateOnlyCore.candidateOnlyIsTrue
+    (wikidataCandidateOnlyCoreAdapterReceipt candidate)
+
+wikidataCandidateOnlyCorePromotedFalse :
+  (candidate : WikidataCandidateSurface) →
+  CandidateOnlyCore.promoted
+    (wikidataCandidateOnlyCoreAdapter candidate)
+  ≡
+  false
+wikidataCandidateOnlyCorePromotedFalse candidate =
+  CandidateOnlyCore.candidatePromotedIsFalse
+    (wikidataCandidateOnlyCoreAdapterReceipt candidate)
+
+wikidataCandidateOnlyCoreTruthAuthorityFalse :
+  (candidate : WikidataCandidateSurface) →
+  CandidateOnlyCore.carriesTruthAuthority
+    (wikidataCandidateOnlyCoreAdapter candidate)
+  ≡
+  false
+wikidataCandidateOnlyCoreTruthAuthorityFalse candidate =
+  CandidateOnlyCore.candidateNoTruthAuthority
+    (wikidataCandidateOnlyCoreAdapterReceipt candidate)
+
+wikidataCandidateOnlyCoreTheoremAuthorityFalse :
+  (candidate : WikidataCandidateSurface) →
+  CandidateOnlyCore.carriesTheoremAuthority
+    (wikidataCandidateOnlyCoreAdapter candidate)
+  ≡
+  false
+wikidataCandidateOnlyCoreTheoremAuthorityFalse candidate =
+  CandidateOnlyCore.candidateNoTheoremAuthority
+    (wikidataCandidateOnlyCoreAdapterReceipt candidate)
+
+wikidataAuthorityNonPromotionCoreAdapter :
+  WikidataCandidateSurface →
+  AuthorityNonPromotionCore.AuthorityNonPromotionBundle
+wikidataAuthorityNonPromotionCoreAdapter candidate =
+  AuthorityNonPromotionCore.mkClosedAuthorityNonPromotionBundle
+    (candidateSurface (wikidataEntity candidate))
+
+wikidataAuthorityCoreExternalAuthorityFalse :
+  (candidate : WikidataCandidateSurface) →
+  AuthorityNonPromotionCore.externalAuthorityFlag
+    (wikidataAuthorityNonPromotionCoreAdapter candidate)
+  ≡
+  false
+wikidataAuthorityCoreExternalAuthorityFalse candidate =
+  AuthorityNonPromotionCore.bundleExternalAuthorityIsFalse
+    (wikidataAuthorityNonPromotionCoreAdapter candidate)
+
+wikidataAuthorityCorePromotesAnyAuthorityFalse :
+  (candidate : WikidataCandidateSurface) →
+  AuthorityNonPromotionCore.promotesAnyAuthority
+    (wikidataAuthorityNonPromotionCoreAdapter candidate)
+  ≡
+  false
+wikidataAuthorityCorePromotesAnyAuthorityFalse candidate =
+  AuthorityNonPromotionCore.bundlePromotesAnyAuthorityIsFalse
+    (wikidataAuthorityNonPromotionCoreAdapter candidate)
+
+typedTermCoreExternalAuthorityMatchesAuthorityCore :
+  (term : TypedTerm) →
+  RoleCore.typedTermExternalAuthority (typedTermCoreReceipt term)
+  ≡
+  AuthorityNonPromotionCore.externalAuthorityFlag
+    (AuthorityNonPromotionCore.mkClosedAuthorityNonPromotionBundle
+      (typedSurface term))
+typedTermCoreExternalAuthorityMatchesAuthorityCore term with typedStatus term
+... | wikidataCandidateOnly =
+  refl
+... | pnfRoleAssigned =
+  refl
+... | itirCommittedWithReceipt =
+  refl
+... | rejectedCandidate =
+  refl
+
+wikidataCandidateOnlyCoreAdapterCanonicality :
+  (candidate : WikidataCandidateSurface) →
+  AdapterCanonicalityCore.AdapterCanonicalityReceipt
+    CandidateOnlyCore.CandidateOnlyRow
+    (wikidataCandidateOnlyCoreAdapter candidate)
+wikidataCandidateOnlyCoreAdapterCanonicality candidate =
+  AdapterCanonicalityCore.mkCanonicalAdapterReceipt
+    (candidateSurface (wikidataEntity candidate))
+    "DASHI.Interop.WikidataCandidateRoleBridge"
+    "wikidataCandidateOnlyCoreAdapter"
+    AdapterCanonicalityCore.bridgeAdapterKind
+    (wikidataCandidateOnlyCoreAdapter candidate)
+
+wikidataCandidateOnlyCoreAdapterIsCanonical :
+  (candidate : WikidataCandidateSurface) →
+  AdapterCanonicalityCore.adapter
+    (wikidataCandidateOnlyCoreAdapterCanonicality candidate)
+  ≡
+  wikidataCandidateOnlyCoreAdapter candidate
+wikidataCandidateOnlyCoreAdapterIsCanonical candidate =
+  AdapterCanonicalityCore.adapterCanonical
+    (wikidataCandidateOnlyCoreAdapterCanonicality candidate)
+
+wikidataCandidateOnlyCoreAdapterCanonicalityPromotesAuthorityFalse :
+  (candidate : WikidataCandidateSurface) →
+  AdapterCanonicalityCore.adapterPromotesAuthority
+    (wikidataCandidateOnlyCoreAdapterCanonicality candidate)
+  ≡
+  false
+wikidataCandidateOnlyCoreAdapterCanonicalityPromotesAuthorityFalse candidate =
+  AdapterCanonicalityCore.adapterAuthorityPromotionFalse
+    (wikidataCandidateOnlyCoreAdapterCanonicality candidate)
 
 ------------------------------------------------------------------------
 -- Donkey Q7368 examples with multiple roles.

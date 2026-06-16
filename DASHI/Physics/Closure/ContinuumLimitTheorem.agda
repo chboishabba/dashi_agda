@@ -42,6 +42,7 @@ import DASHI.Physics.Closure.DiscreteEinsteinTensorCandidate as DET
 import DASHI.Physics.Closure.EinsteinEquationCandidate as EEC
 import DASHI.Physics.Closure.G3P2LimitConvergenceSurface as G3P2
 import DASHI.Physics.Closure.NaturalP2ConvergencePromotionObligation as W2
+import DASHI.Physics.Closure.SchwarzschildLimitCandidate as Schwarz
 import DASHI.Physics.Closure.W2CanonicalPressureMetricP2BridgeOrObstruction as W2PM
 
 ------------------------------------------------------------------------
@@ -3500,6 +3501,21 @@ selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound =
   SelectedSymbolicRationalChristoffelC0Primitive.selectedPairConnectionErrorBound
     canonicalSelectedSymbolicRationalChristoffelC0Primitive
 
+symbolicRationalConnectionErrorBoundFromEquality :
+  (ε : Nat) →
+  (scale : Nat) →
+  (discreteConnection : RB.SymbolicRationalApproximation) →
+  (continuumConnection : RB.SymbolicRationalApproximation) →
+  discreteConnection ≡ continuumConnection →
+  ContinuumLimitAnalyticPrimitives.connectionErrorBound
+    symbolicRationalContinuumAnalyticPrimitives
+    ε
+    scale
+    discreteConnection
+    continuumConnection
+symbolicRationalConnectionErrorBoundFromEquality ε scale discreteConnection continuumConnection equality =
+  equality
+
 record SymbolicRationalChristoffelC0SelectedConstantReceipt : Set where
   field
     constantsReceipt :
@@ -4299,6 +4315,243 @@ record SymbolicRationalChristoffelC0StabilityKernel : Setω where
 
     kernelBoundary :
       List String
+
+data SymbolicRationalKernelGlobalObstruction : Set where
+  equalityValuedConnectionErrorBoundRequiresConnectionEquality :
+    SymbolicRationalKernelGlobalObstruction
+
+  finFourTensorLayerNotPresent :
+    SymbolicRationalKernelGlobalObstruction
+
+  componentChristoffelFormulaNotPresent :
+    SymbolicRationalKernelGlobalObstruction
+
+  ricciComponentContractionLayerNotPresent :
+    SymbolicRationalKernelGlobalObstruction
+
+canonicalSymbolicRationalKernelGlobalObstructions :
+  List SymbolicRationalKernelGlobalObstruction
+canonicalSymbolicRationalKernelGlobalObstructions =
+  equalityValuedConnectionErrorBoundRequiresConnectionEquality
+  ∷ finFourTensorLayerNotPresent
+  ∷ componentChristoffelFormulaNotPresent
+  ∷ ricciComponentContractionLayerNotPresent
+  ∷ []
+
+record SymbolicRationalChristoffelC0KernelObstructionReceipt : Set₁ where
+  field
+    kernelTargetName :
+      String
+
+    kernelTargetNameIsCanonical :
+      kernelTargetName
+      ≡
+      "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel"
+
+    symbolicConnectionErrorBoundIsEqualityValued :
+      Bool
+
+    symbolicConnectionErrorBoundIsEqualityValuedIsTrue :
+      symbolicConnectionErrorBoundIsEqualityValued ≡ Bool.true
+
+    equalityExtractionAdapterName :
+      String
+
+    equalityExtractionAdapterNameIsCanonical :
+      equalityExtractionAdapterName
+      ≡
+      "symbolicRationalConnectionErrorBoundFromEquality"
+
+    arbitraryConnectionEqualityPromoted :
+      Bool
+
+    arbitraryConnectionEqualityPromotedIsFalse :
+      arbitraryConnectionEqualityPromoted ≡ Bool.false
+
+    concreteFinFourTensorLayerPresent :
+      Bool
+
+    concreteFinFourTensorLayerPresentIsFalse :
+      concreteFinFourTensorLayerPresent ≡ Bool.false
+
+    componentChristoffelFormulaPresent :
+      Bool
+
+    componentChristoffelFormulaPresentIsFalse :
+      componentChristoffelFormulaPresent ≡ Bool.false
+
+    ricciComponentContractionLayerPresent :
+      Bool
+
+    ricciComponentContractionLayerPresentIsFalse :
+      ricciComponentContractionLayerPresent ≡ Bool.false
+
+    schwarzschildSevenSlotDerivativeReceipt :
+      Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt
+
+    schwarzschildSevenSlotDerivativeReceiptIsCanonical :
+      schwarzschildSevenSlotDerivativeReceipt
+      ≡
+      Schwarz.canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+
+    schwarzschildSevenSlotDerivativeBoundRows :
+      List Schwarz.SchwarzschildShellADerivativeSlotBoundReceipt
+
+    schwarzschildSevenSlotDerivativeBoundRowsAreCanonical :
+      schwarzschildSevenSlotDerivativeBoundRows
+      ≡
+      Schwarz.schwarzschildShellASevenSlotDerivativeBoundReceipts
+
+    schwarzschild_C_GammaIs1 :
+      Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.cGamma
+        schwarzschildSevenSlotDerivativeReceipt
+      ≡
+      Schwarz.posOne
+
+    schwarzschild_CPrime_GammaIs26Over27 :
+      Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.cGammaPrime
+        schwarzschildSevenSlotDerivativeReceipt
+      ≡
+      Schwarz.posTwentySixTwentySevenths
+
+    schwarzschildGammaMaxIs2 :
+      Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.gammaMax
+        schwarzschildSevenSlotDerivativeReceipt
+      ≡
+      Schwarz.posTwo
+
+    schwarzschildTightLGammaIs44 :
+      Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.tightLGamma
+        schwarzschildSevenSlotDerivativeReceipt
+      ≡
+      Schwarz.posFortyFour
+
+    schwarzschildConservativeLGammaIs48 :
+      Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.conservativeLGamma
+        schwarzschildSevenSlotDerivativeReceipt
+      ≡
+      Schwarz.posFortyEight
+
+    schwarzschildExactCRIs2144Over27 :
+      Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.exactCR
+        schwarzschildSevenSlotDerivativeReceipt
+      ≡
+      Schwarz.posTwoThousandOneHundredFortyFourTwentySevenths
+
+    schwarzschildConservativeCRIs80 :
+      Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.conservativeCR
+        schwarzschildSevenSlotDerivativeReceipt
+      ≡
+      Schwarz.posEighty
+
+    formulaTightBound22Le48 :
+      22 ≤ 48
+
+    ricci2144Over27Le80CrossMultiplied :
+      2144 ≤ 2160
+
+    ricci80Le640 :
+      80 ≤ 640
+
+    globalKernelLocallyConstructed :
+      Bool
+
+    globalKernelLocallyConstructedIsFalse :
+      globalKernelLocallyConstructed ≡ Bool.false
+
+    obstructions :
+      List SymbolicRationalKernelGlobalObstruction
+
+    obstructionsAreCanonical :
+      obstructions ≡ canonicalSymbolicRationalKernelGlobalObstructions
+
+    boundary :
+      List String
+
+canonicalSymbolicRationalChristoffelC0KernelObstructionReceipt :
+  SymbolicRationalChristoffelC0KernelObstructionReceipt
+canonicalSymbolicRationalChristoffelC0KernelObstructionReceipt =
+  record
+    { kernelTargetName =
+        "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel"
+    ; kernelTargetNameIsCanonical =
+        refl
+    ; symbolicConnectionErrorBoundIsEqualityValued =
+        Bool.true
+    ; symbolicConnectionErrorBoundIsEqualityValuedIsTrue =
+        refl
+    ; equalityExtractionAdapterName =
+        "symbolicRationalConnectionErrorBoundFromEquality"
+    ; equalityExtractionAdapterNameIsCanonical =
+        refl
+    ; arbitraryConnectionEqualityPromoted =
+        Bool.false
+    ; arbitraryConnectionEqualityPromotedIsFalse =
+        refl
+    ; concreteFinFourTensorLayerPresent =
+        Bool.false
+    ; concreteFinFourTensorLayerPresentIsFalse =
+        refl
+    ; componentChristoffelFormulaPresent =
+        Bool.false
+    ; componentChristoffelFormulaPresentIsFalse =
+        refl
+    ; ricciComponentContractionLayerPresent =
+        Bool.false
+    ; ricciComponentContractionLayerPresentIsFalse =
+        refl
+    ; schwarzschildSevenSlotDerivativeReceipt =
+        Schwarz.canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+    ; schwarzschildSevenSlotDerivativeReceiptIsCanonical =
+        refl
+    ; schwarzschildSevenSlotDerivativeBoundRows =
+        Schwarz.schwarzschildShellASevenSlotDerivativeBoundReceipts
+    ; schwarzschildSevenSlotDerivativeBoundRowsAreCanonical =
+        Schwarz.schwarzschildShellASevenSlotDerivativeBoundRowsAreCanonical
+    ; schwarzschild_C_GammaIs1 =
+        Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.cGammaIsOne
+          Schwarz.canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+    ; schwarzschild_CPrime_GammaIs26Over27 =
+        Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.cGammaPrimeIsTwentySixTwentySevenths
+          Schwarz.canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+    ; schwarzschildGammaMaxIs2 =
+        Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.gammaMaxIsTwo
+          Schwarz.canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+    ; schwarzschildTightLGammaIs44 =
+        Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.tightLGammaIsFortyFour
+          Schwarz.canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+    ; schwarzschildConservativeLGammaIs48 =
+        Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.conservativeLGammaIsFortyEight
+          Schwarz.canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+    ; schwarzschildExactCRIs2144Over27 =
+        Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.exactCRIsTwoThousandOneHundredFortyFourTwentySevenths
+          Schwarz.canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+    ; schwarzschildConservativeCRIs80 =
+        Schwarz.SchwarzschildShellASevenSlotDerivativeConstantReceipt.conservativeCRIsEighty
+          Schwarz.canonicalSchwarzschildShellASevenSlotDerivativeConstantReceipt
+    ; formulaTightBound22Le48 =
+        nat≤rightSlack 26 22
+    ; ricci2144Over27Le80CrossMultiplied =
+        nat≤rightSlack 16 2144
+    ; ricci80Le640 =
+        nat≤rightSlack 560 80
+    ; globalKernelLocallyConstructed =
+        Bool.false
+    ; globalKernelLocallyConstructedIsFalse =
+        refl
+    ; obstructions =
+        canonicalSymbolicRationalKernelGlobalObstructions
+    ; obstructionsAreCanonical =
+        refl
+    ; boundary =
+        "The symbolic-rational primitive's connectionErrorBound is equality-valued, so extraction for arbitrary connection pairs requires an explicit connection equality premise"
+        ∷ "symbolicRationalConnectionErrorBoundFromEquality is the reusable local adapter from equality to the symbolic connectionErrorBound predicate"
+        ∷ "The current continuum module has no concrete Fin 4 tensor layer, component Christoffel formula, finite Christoffel sum API, or Ricci component contraction API"
+        ∷ "SchwarzschildLimitCandidate supplies the checked seven-slot Shell A derivative receipt: C_Gamma=1, C'_Gamma=26/27, GammaMax=2, tight L_Gamma=44, conservative L_Gamma=48, and C_R=2144/27<=80"
+        ∷ "The arithmetic checks 22<=48, 2144<=2160, and 80<=640 are local Nat witnesses; they do not construct the missing ordered-rational analytic theorem"
+        ∷ "Therefore the global SymbolicRationalChristoffelC0StabilityKernel remains external/fail-closed until a concrete tensor theorem layer or external analytic authority is supplied"
+        ∷ []
+    }
 
 symbolicRationalKernelOrderedGaugeToolkitIsCanonical :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
