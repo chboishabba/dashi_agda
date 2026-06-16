@@ -16,7 +16,10 @@ AGDA_TARGETS = [
     "DASHI/Core/AuthorityNonPromotionCore.agda",
     "DASHI/Core/EmptyPromotionCore.agda",
     "DASHI/Core/CandidateOnlyCore.agda",
+    "DASHI/Core/ControlCardCore.agda",
     "DASHI/Core/FormalLensQualificationCore.agda",
+    "DASHI/Core/HiddenLiftProjectionCore.agda",
+    "DASHI/Core/StatisticalEvidenceCore.agda",
     "DASHI/Core/CandidateFunctionalCore.agda",
     "DASHI/Core/OperatorShapeNonAuthorityCore.agda",
     "DASHI/Core/BridgeRequirementCore.agda",
@@ -55,6 +58,8 @@ OPTIONAL_AGDA_TARGETS = [
     "DASHI/Biology/NeurochemicalTransmissionBridge.agda",
     "DASHI/Biology/NeurochemicalVocabularyReceipt.agda",
     "DASHI/Promotion/NeurochemicalAuthorityBoundary.agda",
+    "DASHI/Crypto/RSAVulnerabilityBoundary.agda",
+    "DASHI/Crypto/RSABTResidueBraidHypervoxelBoundary.agda",
 ]
 
 AGDA_TARGETS.extend(
@@ -126,6 +131,14 @@ def main() -> int:
             [
                 sys.executable,
                 "scripts/audit_authority_boundary_candidates.py",
+                "--no-write",
+            ],
+        ),
+        (
+            "control-card candidate audit",
+            [
+                sys.executable,
+                "scripts/audit_control_card_candidates.py",
                 "--no-write",
             ],
         ),

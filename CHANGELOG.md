@@ -6,6 +6,23 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Six-lane control-card/statistics/crypto generic tranche for `2026-06-17`:
+  adds `DASHI.Core.ControlCardCore` as the reusable O/R/C/S/L/P/G/F
+  control-card spine, `scripts/audit_control_card_candidates.py` as the
+  discovery-only ORCSLPGF/control-card migration queue, and
+  `DASHI.Core.StatisticalEvidenceCore` as the candidate-only inference,
+  robust-evidence, interval/test/decision, uncertainty, and residual surface.
+  Adds `DASHI.Core.HiddenLiftProjectionCore` as the generic private-state to
+  public-quotient/projection plus hidden-lift witness boundary, with RSA as a
+  downstream instance rather than the abstraction ceiling. Adds
+  `DASHI.Crypto.RSAVulnerabilityBoundary` and
+  `DASHI.Crypto.RSABTResidueBraidHypervoxelBoundary` for candidate-only RSA
+  vulnerability, BT residue chamber, CRT braid/fingerprint, visible-axis
+  FactorVec, and hypervoxel padding/ciphertext boundary bookkeeping. These
+  surfaces promote no RSA break, factoring-hardness theorem, semantic-security
+  proof, padding-security proof, side-channel/implementation authority,
+  theorem authority, statistical truth/certainty, or governance promotion.
+
 - Authority-boundary audit workflow for `2026-06-17`: adds
   `scripts/audit_authority_boundary_candidates.py` as a discovery-only
   migration queue for authority-boundary, candidate-only, empty-promotion,
