@@ -975,6 +975,7 @@ import DASHI.Physics.Closure.GRPrecisionGravityPredictionTargetReceipt
 import DASHI.Physics.Closure.GRProofArchitectureAggregationTest
 import DASHI.Physics.Closure.GRCoord4TensorCore
 import DASHI.Physics.Closure.GRPerturbationBoundShapeCore
+import DASHI.Physics.Closure.NSKatoConfinementLemmaReceipt
 import DASHI.Physics.Closure.GRVladimirovFrameDiagnosticReceipt
 import DASHI.Physics.Closure.GravityVladimirovFrameReceipt
 import DASHI.Physics.GR

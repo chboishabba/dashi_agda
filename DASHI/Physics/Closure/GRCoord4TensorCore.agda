@@ -567,3 +567,294 @@ record SchwarzschildCoord4TensorSurface : Set where
 
     surfaceBoundary :
       List String
+
+------------------------------------------------------------------------
+-- Concrete diagonal tensor accessors for the four-coordinate core.
+
+diagonalMetricComponent :
+  {Scalar : Set} →
+  Coord4 →
+  DiagonalMetric Scalar →
+  Scalar
+diagonalMetricComponent coord (diagTensor2 tt rr th ph) with coord
+... | coord0 = tt
+... | coord1 = rr
+... | coord2 = th
+... | coord3 = ph
+
+diagonalMetricTT :
+  {Scalar : Set} →
+  DiagonalMetric Scalar →
+  Scalar
+diagonalMetricTT = diagonalMetricComponent coord0
+
+diagonalMetricRR :
+  {Scalar : Set} →
+  DiagonalMetric Scalar →
+  Scalar
+diagonalMetricRR = diagonalMetricComponent coord1
+
+diagonalMetricThetaTheta :
+  {Scalar : Set} →
+  DiagonalMetric Scalar →
+  Scalar
+diagonalMetricThetaTheta = diagonalMetricComponent coord2
+
+diagonalMetricPhiPhi :
+  {Scalar : Set} →
+  DiagonalMetric Scalar →
+  Scalar
+diagonalMetricPhiPhi = diagonalMetricComponent coord3
+
+diagonalInverseMetricComponent :
+  {Scalar : Set} →
+  Coord4 →
+  DiagonalInvMetric Scalar →
+  Scalar
+diagonalInverseMetricComponent coord (diagTensor2 tt rr th ph) with coord
+... | coord0 = tt
+... | coord1 = rr
+... | coord2 = th
+... | coord3 = ph
+
+diagonalInverseMetricTT :
+  {Scalar : Set} →
+  DiagonalInvMetric Scalar →
+  Scalar
+diagonalInverseMetricTT = diagonalInverseMetricComponent coord0
+
+diagonalInverseMetricRR :
+  {Scalar : Set} →
+  DiagonalInvMetric Scalar →
+  Scalar
+diagonalInverseMetricRR = diagonalInverseMetricComponent coord1
+
+diagonalInverseMetricThetaTheta :
+  {Scalar : Set} →
+  DiagonalInvMetric Scalar →
+  Scalar
+diagonalInverseMetricThetaTheta = diagonalInverseMetricComponent coord2
+
+diagonalInverseMetricPhiPhi :
+  {Scalar : Set} →
+  DiagonalInvMetric Scalar →
+  Scalar
+diagonalInverseMetricPhiPhi = diagonalInverseMetricComponent coord3
+
+schwarzschildMetricDiagonalTable :
+  SchwarzschildDiagonalMetricSurface →
+  DiagonalMetric ℚ
+schwarzschildMetricDiagonalTable surface =
+  diagTensor2
+    (DiagonalCoord4Component.value (SchwarzschildDiagonalMetricSurface.ttComponent surface))
+    (DiagonalCoord4Component.value (SchwarzschildDiagonalMetricSurface.rrComponent surface))
+    (DiagonalCoord4Component.value (SchwarzschildDiagonalMetricSurface.thetaThetaComponent surface))
+    (DiagonalCoord4Component.value (SchwarzschildDiagonalMetricSurface.phiPhiComponent surface))
+
+schwarzschildInverseMetricDiagonalTable :
+  SchwarzschildInverseDiagonalMetricSurface →
+  DiagonalInvMetric ℚ
+schwarzschildInverseMetricDiagonalTable surface =
+  diagTensor2
+    (DiagonalCoord4Component.value (SchwarzschildInverseDiagonalMetricSurface.ttComponent surface))
+    (DiagonalCoord4Component.value (SchwarzschildInverseDiagonalMetricSurface.rrComponent surface))
+    (DiagonalCoord4Component.value (SchwarzschildInverseDiagonalMetricSurface.thetaThetaComponent surface))
+    (DiagonalCoord4Component.value (SchwarzschildInverseDiagonalMetricSurface.phiPhiComponent surface))
+
+schwarzschildMetricAt :
+  SchwarzschildDiagonalMetricSurface →
+  Coord4 →
+  ℚ
+schwarzschildMetricAt surface coord =
+  diagonalMetricComponent coord
+    (schwarzschildMetricDiagonalTable surface)
+
+schwarzschildInverseMetricAt :
+  SchwarzschildInverseDiagonalMetricSurface →
+  Coord4 →
+  ℚ
+schwarzschildInverseMetricAt surface coord =
+  diagonalInverseMetricComponent coord
+    (schwarzschildInverseMetricDiagonalTable surface)
+
+record SchwarzschildPartialGFormulaSurface : Set where
+  constructor schwarzschildPartialGFormulaSurface
+  field
+    ttAtTime :
+      ℚ
+
+    ttAtRadial :
+      ℚ
+
+    ttAtTheta :
+      ℚ
+
+    ttAtPhi :
+      ℚ
+
+    rrAtTime :
+      ℚ
+
+    rrAtRadial :
+      ℚ
+
+    rrAtTheta :
+      ℚ
+
+    rrAtPhi :
+      ℚ
+
+    thetaThetaAtTime :
+      ℚ
+
+    thetaThetaAtRadial :
+      ℚ
+
+    thetaThetaAtTheta :
+      ℚ
+
+    thetaThetaAtPhi :
+      ℚ
+
+    phiPhiAtTime :
+      ℚ
+
+    phiPhiAtRadial :
+      ℚ
+
+    phiPhiAtTheta :
+      ℚ
+
+    phiPhiAtPhi :
+      ℚ
+
+    partialGBoundary :
+      List String
+
+schwarzschildPartialGFormula :
+  SchwarzschildPartialGFormulaSurface →
+  Coord4 →
+  Coord4 →
+  ℚ
+schwarzschildPartialGFormula formulas derivative component with derivative | component
+... | coord0 | coord0 = SchwarzschildPartialGFormulaSurface.ttAtTime formulas
+... | coord1 | coord0 = SchwarzschildPartialGFormulaSurface.ttAtRadial formulas
+... | coord2 | coord0 = SchwarzschildPartialGFormulaSurface.ttAtTheta formulas
+... | coord3 | coord0 = SchwarzschildPartialGFormulaSurface.ttAtPhi formulas
+... | coord0 | coord1 = SchwarzschildPartialGFormulaSurface.rrAtTime formulas
+... | coord1 | coord1 = SchwarzschildPartialGFormulaSurface.rrAtRadial formulas
+... | coord2 | coord1 = SchwarzschildPartialGFormulaSurface.rrAtTheta formulas
+... | coord3 | coord1 = SchwarzschildPartialGFormulaSurface.rrAtPhi formulas
+... | coord0 | coord2 = SchwarzschildPartialGFormulaSurface.thetaThetaAtTime formulas
+... | coord1 | coord2 = SchwarzschildPartialGFormulaSurface.thetaThetaAtRadial formulas
+... | coord2 | coord2 = SchwarzschildPartialGFormulaSurface.thetaThetaAtTheta formulas
+... | coord3 | coord2 = SchwarzschildPartialGFormulaSurface.thetaThetaAtPhi formulas
+... | coord0 | coord3 = SchwarzschildPartialGFormulaSurface.phiPhiAtTime formulas
+... | coord1 | coord3 = SchwarzschildPartialGFormulaSurface.phiPhiAtRadial formulas
+... | coord2 | coord3 = SchwarzschildPartialGFormulaSurface.phiPhiAtTheta formulas
+... | coord3 | coord3 = SchwarzschildPartialGFormulaSurface.phiPhiAtPhi formulas
+
+schwarzschildPartialGTT :
+  SchwarzschildPartialGFormulaSurface →
+  Coord4 →
+  ℚ
+schwarzschildPartialGTT formulas derivative =
+  schwarzschildPartialGFormula formulas derivative coord0
+
+schwarzschildPartialGRR :
+  SchwarzschildPartialGFormulaSurface →
+  Coord4 →
+  ℚ
+schwarzschildPartialGRR formulas derivative =
+  schwarzschildPartialGFormula formulas derivative coord1
+
+schwarzschildPartialGThetaTheta :
+  SchwarzschildPartialGFormulaSurface →
+  Coord4 →
+  ℚ
+schwarzschildPartialGThetaTheta formulas derivative =
+  schwarzschildPartialGFormula formulas derivative coord2
+
+schwarzschildPartialGPhiPhi :
+  SchwarzschildPartialGFormulaSurface →
+  Coord4 →
+  ℚ
+schwarzschildPartialGPhiPhi formulas derivative =
+  schwarzschildPartialGFormula formulas derivative coord3
+
+record SchwarzschildChristoffelFormulaSurface : Set where
+  constructor schwarzschildChristoffelFormulaSurface
+  field
+    ttrFormula :
+      SchwarzschildChristoffelSlotFormula
+
+    rttFormula :
+      SchwarzschildChristoffelSlotFormula
+
+    rrrFormula :
+      SchwarzschildChristoffelSlotFormula
+
+    rThetaThetaFormula :
+      SchwarzschildChristoffelSlotFormula
+
+    rPhiPhiFormula :
+      SchwarzschildChristoffelSlotFormula
+
+    thetaRThetaFormula :
+      SchwarzschildChristoffelSlotFormula
+
+    phiRPhiFormula :
+      SchwarzschildChristoffelSlotFormula
+
+    formulaBoundary :
+      List String
+
+schwarzschildChristoffelFormulaSurfaceFromPackage :
+  SchwarzschildChristoffelSevenSlotPackage →
+  SchwarzschildChristoffelFormulaSurface
+schwarzschildChristoffelFormulaSurfaceFromPackage package =
+  schwarzschildChristoffelFormulaSurface
+    (SchwarzschildChristoffelSevenSlotPackage.slotTtr package)
+    (SchwarzschildChristoffelSevenSlotPackage.slotRtt package)
+    (SchwarzschildChristoffelSevenSlotPackage.slotRrr package)
+    (SchwarzschildChristoffelSevenSlotPackage.slotRThetaTheta package)
+    (SchwarzschildChristoffelSevenSlotPackage.slotRPhiPhi package)
+    (SchwarzschildChristoffelSevenSlotPackage.slotThetaRTheta package)
+    (SchwarzschildChristoffelSevenSlotPackage.slotPhiRPhi package)
+    ( "slotTtr" ∷ "slotRtt" ∷ "slotRrr" ∷
+      "slotRThetaTheta" ∷ "slotRPhiPhi" ∷
+      "slotThetaRTheta" ∷ "slotPhiRPhi" ∷ [])
+
+schwarzschildChristoffelFormulaPackageFromSurface :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelSevenSlotPackage
+schwarzschildChristoffelFormulaPackageFromSurface surface =
+  schwarzschildChristoffelSevenSlotPackage
+    (SchwarzschildChristoffelFormulaSurface.ttrFormula surface)
+    (SchwarzschildChristoffelFormulaSurface.rttFormula surface)
+    (SchwarzschildChristoffelFormulaSurface.rrrFormula surface)
+    (SchwarzschildChristoffelFormulaSurface.rThetaThetaFormula surface)
+    (SchwarzschildChristoffelFormulaSurface.rPhiPhiFormula surface)
+    (SchwarzschildChristoffelFormulaSurface.thetaRThetaFormula surface)
+    (SchwarzschildChristoffelFormulaSurface.phiRPhiFormula surface)
+    ( "slotTtr" ∷ "slotRtt" ∷ "slotRrr" ∷
+      "slotRThetaTheta" ∷ "slotRPhiPhi" ∷
+      "slotThetaRTheta" ∷ "slotPhiRPhi" ∷ [])
+
+record SchwarzschildDiagonalFormulaCarrierSurface : Set where
+  constructor schwarzschildDiagonalFormulaCarrierSurface
+  field
+    metric :
+      SchwarzschildDiagonalMetricSurface
+
+    inverseMetric :
+      SchwarzschildInverseDiagonalMetricSurface
+
+    partialG :
+      SchwarzschildPartialGFormulaSurface
+
+    christoffelFormula :
+      SchwarzschildChristoffelFormulaSurface
+
+    formulaBoundary :
+      List String

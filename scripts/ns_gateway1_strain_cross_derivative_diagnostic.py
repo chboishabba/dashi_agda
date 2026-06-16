@@ -5,6 +5,9 @@ This script is an evidence-only numerical diagnostic for periodic 3D velocity
 fields on ``[0, 2*pi)^3``.  It computes the strain eigenframe at the maximum
 vorticity point and measures the local directional cross derivative
 ``d_{e1} d_{e2} lambda2`` of the intermediate strain eigenvalue field.
+With ``--kato-alignment`` it additionally reports Kato alignment quantities
+including the condition
+``B = 2 * <e2, (d_{e1} S) e1> * <e2, (d_{e2} S) e1>``.
 With ``--integral-conditions`` it also reports weighted integral/average
 diagnostics over vortex-support weights.
 
@@ -229,6 +232,31 @@ def spectral_hessian(
     return hessian
 
 
+def strain_gradient_tensor(
+    strain: np.ndarray,
+    length: float = DOMAIN_LENGTH,
+    axis_convention: str = XYZ_STORAGE_AXIS_CONVENTION,
+) -> np.ndarray:
+    """Return strain gradient tensor G[i,j,k] = ∂_k S_ij by FFT."""
+
+    strain_tensor = np.asarray(strain, dtype=float)
+    if strain_tensor.ndim != 5 or strain_tensor.shape[:2] != (3, 3):
+        raise ValueError(
+            f"strain must have shape (3,3,N,N,N), got {strain_tensor.shape!r}"
+        )
+    gradient = np.empty((3, 3, 3) + strain_tensor.shape[2:], dtype=float)
+    for row in range(3):
+        for col in range(3):
+            for axis in range(3):
+                gradient[row, col, axis] = spectral_derivative(
+                    strain_tensor[row, col],
+                    axis,
+                    length,
+                    axis_convention,
+                )
+    return gradient
+
+
 def solve_periodic_poisson_negative_laplacian(
     rhs: np.ndarray,
     length: float = DOMAIN_LENGTH,
@@ -380,6 +408,35 @@ def _directional_hessian_cross(
     return float(e1 @ local_hessian @ e2)
 
 
+def _directional_strain_gradient_projection(
+    strain_gradient: np.ndarray,
+    index: tuple[int, int, int],
+    left_vector: np.ndarray,
+    right_vector: np.ndarray,
+    derivative_direction: np.ndarray,
+) -> float:
+    local_gradient = np.asarray(
+        strain_gradient[(slice(None), slice(None), slice(None)) + index],
+        dtype=float,
+    )
+    directional_matrix = np.tensordot(derivative_direction, local_gradient, axes=(0, 2))
+    return float(left_vector @ (directional_matrix @ right_vector))
+
+
+def _directional_strain_gradient_vector(
+    strain_gradient: np.ndarray,
+    index: tuple[int, int, int],
+    derivative_direction: np.ndarray,
+    right_vector: np.ndarray,
+) -> np.ndarray:
+    local_gradient = np.asarray(
+        strain_gradient[(slice(None), slice(None), slice(None)) + index],
+        dtype=float,
+    )
+    directional_matrix = np.tensordot(derivative_direction, local_gradient, axes=(0, 2))
+    return np.asarray(directional_matrix @ right_vector, dtype=float)
+
+
 def _weighted_field_statistics(
     field: np.ndarray,
     weights: np.ndarray,
@@ -456,13 +513,19 @@ def format_summary(result: dict[str, Any]) -> str:
             integral_conditions = ", integral_conditions=on"
         else:
             integral_conditions = f", integral_conditions=on(top_enstrophy_percentile={percentile})"
+    kato_alignment = ""
+    if result.get("kato_alignment_enabled"):
+        kato_alignment = (
+            f", kato_B={float(result['kato_alignment_B']):.17g}, "
+            f"kato_B_sign={str(result['kato_alignment_B_sign'])}"
+        )
     return (
         "NS-GW-1 diagnostic: "
         f"source={source}, N={int(result['grid_N'])}, "
         f"enstrophy_max_index={index}, "
         f"d_e1_d_e2_lambda2={cross:.17g}, "
         f"classification={classification}, "
-        f"status={status}{artifact_text}{integral_conditions}"
+        f"status={status}{artifact_text}{integral_conditions}{kato_alignment}"
     )
 
 
@@ -508,6 +571,7 @@ def run_diagnostic(
     output: str | Path | None = None,
     integral_conditions: bool = False,
     top_enstrophy_percentile: float | None = None,
+    kato_alignment: bool = False,
 ) -> dict[str, Any]:
     """Run the NS-GW-1 diagnostic and return a JSON-serializable dict.
 
@@ -515,7 +579,9 @@ def run_diagnostic(
     ``u``, ``v``, and ``w`` sampled on ``[0, 2*pi)^3``.  ``N`` and
     ``amplitude`` control only the deterministic built-in Taylor-Green field.
     When ``integral_conditions`` is true, additional weighted integral and
-    average diagnostics are reported over natural vortex support weights.
+    average diagnostics are reported over natural vortex support weights.  When
+    ``kato_alignment`` is true, scalar projections defining Kato condition
+    B are added at the selected enstrophy-max index.
     """
 
     if int(N) != N:
@@ -608,6 +674,55 @@ def run_diagnostic(
         e1,
         e2,
     )
+    kato_alignment_result: dict[str, Any] = {}
+    if kato_alignment:
+        strain_grad = strain_gradient_tensor(strain, axis_convention=derivative_axis_convention)
+        d_e1S_e1 = _directional_strain_gradient_vector(
+            strain_grad,
+            max_index,
+            e1,
+            e1,
+        )
+        d_e2S_e1 = _directional_strain_gradient_vector(
+            strain_grad,
+            max_index,
+            e2,
+            e1,
+        )
+        if not np.all(np.isfinite(d_e1S_e1)) or not np.all(np.isfinite(d_e2S_e1)):
+            raise ValueError("Kato alignment directional projected vectors contain non-finite values")
+        e2_d_e1S_e1 = _directional_strain_gradient_projection(
+            strain_grad,
+            max_index,
+            e2,
+            e1,
+            e1,
+        )
+        e2_d_e2S_e1 = _directional_strain_gradient_projection(
+            strain_grad,
+            max_index,
+            e2,
+            e1,
+            e2,
+        )
+        if not np.isfinite(e2_d_e1S_e1) or not np.isfinite(e2_d_e2S_e1):
+            raise ValueError("Kato alignment directional projections are non-finite")
+        kato_alignment_B = 2.0 * e2_d_e1S_e1 * e2_d_e2S_e1
+        if not np.isfinite(kato_alignment_B):
+            raise ValueError("Kato alignment condition B is non-finite")
+        kato_alignment_result = {
+            "kato_alignment_enabled": True,
+            "kato_alignment_directional_grad_e1_vector": _jsonify_vector(d_e1S_e1),
+            "kato_alignment_directional_grad_e2_vector": _jsonify_vector(d_e2S_e1),
+            "kato_alignment_e2_dot_d_e1S_e1": e2_d_e1S_e1,
+            "kato_alignment_e2_dot_d_e2S_e1": e2_d_e2S_e1,
+            "kato_alignment_B": float(kato_alignment_B),
+        }
+        kato_alignment_result["kato_alignment_B_sign"] = classify_sign(
+            kato_alignment_result["kato_alignment_B"]
+        )
+        if not np.isfinite(kato_alignment_result["kato_alignment_B"]):
+            raise ValueError("Kato alignment condition B is non-finite")
     pressure_hessian_local_decomposition_tail = (
         pressure_hessian_e1_e2
         - (-0.5 * hess_omega2_e1_e2 + hess_S2_e1_e2)
@@ -709,6 +824,7 @@ def run_diagnostic(
         "nonlinear_riesz_sign_condition_confirmed": False,
         "caveat": CAVEAT,
     }
+    result.update(kato_alignment_result)
     if integral_conditions:
         cell_volume = float(grid_spacing ** 3)
         pressure_hessian_e1_e2_field = np.einsum(
@@ -788,7 +904,9 @@ def parse_args() -> argparse.Namespace:
             "  scripts/ns_gateway1_strain_cross_derivative_diagnostic.py "
             "--field /tmp/ns_gw1_fixture.npz --output /tmp/ns_gw1_result.json\n"
             "  scripts/ns_gateway1_strain_cross_derivative_diagnostic.py "
-            "--integral-conditions --top-enstrophy-percentile 95 --output /tmp/ns_gw1_result.json\n\n"
+            "--integral-conditions --top-enstrophy-percentile 95 --output /tmp/ns_gw1_result.json\n"
+            "  scripts/ns_gateway1_strain_cross_derivative_diagnostic.py "
+            "--kato-alignment --output /tmp/ns_gw1_result.json\n\n"
             "Input NPZ contract: cubic real arrays named u, v, w on [0, 2*pi)^3; "
             "optional scalar metadata N, domain_length, grid_spacing, amplitude, "
             "time, snapshot_index, and source are validated/reported."
@@ -822,6 +940,11 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="optional top-enstrophy percentile threshold for the integral-condition mode",
     )
+    parser.add_argument(
+        "--kato-alignment",
+        action="store_true",
+        help="compute and report Kato strain-gradient alignment condition B at the target point",
+    )
     parser.add_argument("--json-indent", type=int, default=2, help="JSON indentation level for stdout JSON")
     return parser.parse_args()
 
@@ -835,6 +958,7 @@ def main() -> None:
         output=args.output,
         integral_conditions=args.integral_conditions,
         top_enstrophy_percentile=args.top_enstrophy_percentile,
+        kato_alignment=args.kato_alignment,
     )
     if args.output is None:
         print(json.dumps(result, indent=args.json_indent, sort_keys=True))
