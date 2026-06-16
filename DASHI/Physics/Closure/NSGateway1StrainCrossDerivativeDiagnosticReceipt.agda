@@ -430,7 +430,7 @@ canonicalPressureHessianDiagnosticResult =
     refl
     false
     refl
-    "Pressure-Hessian Qcrit is negative on the local N=128 FluidSim row, but the proposed vorticity-dominance sufficient condition fails, the divergence/RHS residuals are recorded, local-to-global theorem promotion is false, and external DNS remains required."
+    "Axis-corrected pressure-Hessian Qcrit is positive/adverse on the local N=128 FluidSim row; the local lambda2 cross-derivative is negative but does not promote the pressure-Hessian sign route. Divergence/RHS residuals are recorded, local-to-global theorem promotion is false, and external DNS remains required."
 
 canonicalPressureHessianLocalToGlobalTheoremPromotedFalse :
   NSGateway1PressureHessianDiagnosticResult.localToGlobalTheoremPromoted

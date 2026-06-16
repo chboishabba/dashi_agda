@@ -5,6 +5,8 @@ This script is an evidence-only numerical diagnostic for periodic 3D velocity
 fields on ``[0, 2*pi)^3``.  It computes the strain eigenframe at the maximum
 vorticity point and measures the local directional cross derivative
 ``d_{e1} d_{e2} lambda2`` of the intermediate strain eigenvalue field.
+With ``--integral-conditions`` it also reports weighted integral/average
+diagnostics over vortex-support weights.
 
 The built-in Taylor-Green field is synthetic.  A sign pass here is not DNS
 evidence and is not a Navier-Stokes regularity proof.
@@ -378,6 +380,28 @@ def _directional_hessian_cross(
     return float(e1 @ local_hessian @ e2)
 
 
+def _weighted_field_statistics(
+    field: np.ndarray,
+    weights: np.ndarray,
+    cell_volume: float,
+) -> dict[str, float | None]:
+    values = np.asarray(field, dtype=float)
+    weight_array = np.asarray(weights, dtype=float)
+    if values.shape != weight_array.shape:
+        raise ValueError(
+            f"weighted statistics field and weights must match, got {values.shape!r} and {weight_array.shape!r}"
+        )
+    weight_sum = float(np.sum(weight_array))
+    weighted_sum = float(np.sum(values * weight_array))
+    return {
+        "weight_sum": weight_sum,
+        "weight_integral": weight_sum * cell_volume,
+        "weighted_sum": weighted_sum,
+        "weighted_integral": weighted_sum * cell_volume,
+        "weighted_average": weighted_sum / weight_sum if weight_sum > 0.0 else None,
+    }
+
+
 def _canonicalize_eigenvectors(eigenvectors: np.ndarray) -> np.ndarray:
     """Make eigenvector signs deterministic for stable JSON output."""
 
@@ -425,13 +449,20 @@ def format_summary(result: dict[str, Any]) -> str:
     status = str(result["diagnostic_status"])
     artifact = result.get("result_artifact_path")
     artifact_text = f", artifact={artifact}" if artifact else ""
+    integral_conditions = ""
+    if result.get("integral_conditions_enabled"):
+        percentile = result.get("integral_conditions_top_enstrophy_percentile")
+        if percentile is None:
+            integral_conditions = ", integral_conditions=on"
+        else:
+            integral_conditions = f", integral_conditions=on(top_enstrophy_percentile={percentile})"
     return (
         "NS-GW-1 diagnostic: "
         f"source={source}, N={int(result['grid_N'])}, "
         f"enstrophy_max_index={index}, "
         f"d_e1_d_e2_lambda2={cross:.17g}, "
         f"classification={classification}, "
-        f"status={status}{artifact_text}"
+        f"status={status}{artifact_text}{integral_conditions}"
     )
 
 
@@ -475,12 +506,16 @@ def run_diagnostic(
     amplitude: float = 1.0,
     field: str | Path | None = None,
     output: str | Path | None = None,
+    integral_conditions: bool = False,
+    top_enstrophy_percentile: float | None = None,
 ) -> dict[str, Any]:
     """Run the NS-GW-1 diagnostic and return a JSON-serializable dict.
 
     ``field`` is an optional ``.npz`` path containing cubic 3D arrays named
     ``u``, ``v``, and ``w`` sampled on ``[0, 2*pi)^3``.  ``N`` and
     ``amplitude`` control only the deterministic built-in Taylor-Green field.
+    When ``integral_conditions`` is true, additional weighted integral and
+    average diagnostics are reported over natural vortex support weights.
     """
 
     if int(N) != N:
@@ -489,6 +524,12 @@ def run_diagnostic(
     amplitude = float(amplitude)
     if not np.isfinite(amplitude):
         raise ValueError("amplitude must be finite")
+    if top_enstrophy_percentile is not None:
+        top_enstrophy_percentile = float(top_enstrophy_percentile)
+        if not np.isfinite(top_enstrophy_percentile):
+            raise ValueError("top_enstrophy_percentile must be finite")
+        if not (0.0 < top_enstrophy_percentile <= 100.0):
+            raise ValueError("top_enstrophy_percentile must be in the interval (0, 100]")
 
     field_metadata: dict[str, Any] = {}
     if field is not None:
@@ -548,8 +589,9 @@ def run_diagnostic(
     )
     local_hessian = _tensor_at(hessian, max_index)
     cross_derivative = _directional_hessian_cross(hessian, max_index, e1, e2)
+    pressure_hessian = spectral_hessian(pressure, axis_convention=derivative_axis_convention)
     pressure_hessian_e1_e2 = _directional_hessian_cross(
-        spectral_hessian(pressure, axis_convention=derivative_axis_convention),
+        pressure_hessian,
         max_index,
         e1,
         e2,
@@ -667,6 +709,66 @@ def run_diagnostic(
         "nonlinear_riesz_sign_condition_confirmed": False,
         "caveat": CAVEAT,
     }
+    if integral_conditions:
+        cell_volume = float(grid_spacing ** 3)
+        pressure_hessian_e1_e2_field = np.einsum(
+            "i,ijxyz,j->xyz",
+            e1,
+            pressure_hessian,
+            e2,
+        )
+        condition_weights: list[tuple[str, np.ndarray, dict[str, Any]]] = [
+            (
+                "lambda2_negative_mask",
+                (lambda2_field < 0.0).astype(float),
+                {"support_type": "lambda2<0"},
+            ),
+            (
+                "omega2_weight",
+                enstrophy,
+                {"support_type": "omega2"},
+            ),
+            (
+                "S2_weight",
+                strain_norm_squared,
+                {"support_type": "S2"},
+            ),
+        ]
+        if top_enstrophy_percentile is not None:
+            enstrophy_threshold = float(np.percentile(enstrophy, top_enstrophy_percentile))
+            condition_weights.append(
+                (
+                    "top_enstrophy_percentile",
+                    (enstrophy >= enstrophy_threshold).astype(float),
+                    {
+                        "support_type": "top_enstrophy_mask",
+                        "percentile": float(top_enstrophy_percentile),
+                        "threshold": enstrophy_threshold,
+                    },
+                )
+            )
+        integral_condition_fields: dict[str, dict[str, Any]] = {}
+        for field_name, field_values in (
+            ("Qcrit_pressure_hessian_e1_e2", pressure_hessian_e1_e2_field),
+            ("pressure_poisson_rhs", pressure_poisson_rhs),
+        ):
+            field_summary: dict[str, Any] = {}
+            for weight_name, weight_values, weight_metadata in condition_weights:
+                stats = _weighted_field_statistics(field_values, weight_values, cell_volume)
+                field_summary[weight_name] = {
+                    **weight_metadata,
+                    **stats,
+                }
+            integral_condition_fields[field_name] = field_summary
+        result["integral_conditions_enabled"] = True
+        if top_enstrophy_percentile is not None:
+            result["integral_conditions_top_enstrophy_percentile"] = float(top_enstrophy_percentile)
+            result["integral_conditions_top_enstrophy_threshold"] = float(enstrophy_threshold)
+        result["integral_conditions"] = {
+            "cell_volume": cell_volume,
+            "weight_fields": [name for name, _, _ in condition_weights],
+            "fields": integral_condition_fields,
+        }
     result["summary"] = format_summary(result)
     if output_path is not None:
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -684,7 +786,9 @@ def parse_args() -> argparse.Namespace:
             "  scripts/ns_gateway1_fixture_npz.py --N 16 --amplitude 0.75 "
             "--output /tmp/ns_gw1_fixture.npz\n"
             "  scripts/ns_gateway1_strain_cross_derivative_diagnostic.py "
-            "--field /tmp/ns_gw1_fixture.npz --output /tmp/ns_gw1_result.json\n\n"
+            "--field /tmp/ns_gw1_fixture.npz --output /tmp/ns_gw1_result.json\n"
+            "  scripts/ns_gateway1_strain_cross_derivative_diagnostic.py "
+            "--integral-conditions --top-enstrophy-percentile 95 --output /tmp/ns_gw1_result.json\n\n"
             "Input NPZ contract: cubic real arrays named u, v, w on [0, 2*pi)^3; "
             "optional scalar metadata N, domain_length, grid_spacing, amplitude, "
             "time, snapshot_index, and source are validated/reported."
@@ -704,13 +808,34 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--field", type=Path, default=None, help="optional NPZ containing 3D arrays u, v, w")
     parser.add_argument("--output", type=Path, default=None, help="optional JSON artifact output path")
+    parser.add_argument(
+        "--integral-conditions",
+        action="store_true",
+        help=(
+            "report weighted integral/average diagnostics over lambda2<0, omega2, S2, "
+            "and optional top-enstrophy support"
+        ),
+    )
+    parser.add_argument(
+        "--top-enstrophy-percentile",
+        type=float,
+        default=None,
+        help="optional top-enstrophy percentile threshold for the integral-condition mode",
+    )
     parser.add_argument("--json-indent", type=int, default=2, help="JSON indentation level for stdout JSON")
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    result = run_diagnostic(N=args.N, amplitude=args.amplitude, field=args.field, output=args.output)
+    result = run_diagnostic(
+        N=args.N,
+        amplitude=args.amplitude,
+        field=args.field,
+        output=args.output,
+        integral_conditions=args.integral_conditions,
+        top_enstrophy_percentile=args.top_enstrophy_percentile,
+    )
     if args.output is None:
         print(json.dumps(result, indent=args.json_indent, sort_keys=True))
     else:

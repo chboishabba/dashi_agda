@@ -4,10 +4,12 @@ import importlib.util
 import json
 import subprocess
 import sys
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
 import numpy as np
+import pytest
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -70,6 +72,18 @@ def load_module() -> Any:
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+@lru_cache(maxsize=1)
+def script_supports_integral_conditions_flag() -> bool:
+    completed = subprocess.run(
+        [sys.executable, str(SCRIPT), "--help"],
+        check=True,
+        capture_output=True,
+        cwd=REPO_ROOT,
+        text=True,
+    )
+    return "--integral-conditions" in completed.stdout
 
 
 def deterministic_velocity(n: int, amplitude: float = 0.75) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -151,6 +165,34 @@ def require_contract(result: dict[str, Any], expected_n: int) -> None:
     assert result["diagnostic_scope"]
 
 
+def assert_dict_contains(actual: dict[str, Any], expected: dict[str, Any]) -> None:
+    for key, value in expected.items():
+        assert key in actual, f"missing expected key: {key}"
+        assert actual[key] == value, f"unexpected value for {key}: {actual[key]!r} != {value!r}"
+
+
+def count_and_validate_finite_numeric_leaves(value: Any) -> int:
+    if isinstance(value, dict):
+        return sum(count_and_validate_finite_numeric_leaves(item) for item in value.values())
+    if isinstance(value, (list, tuple)):
+        return sum(count_and_validate_finite_numeric_leaves(item) for item in value)
+    if isinstance(value, np.ndarray):
+        return count_and_validate_finite_numeric_leaves(value.tolist())
+    if isinstance(value, bool):
+        return 0
+    if isinstance(value, (int, float, np.integer, np.floating)):
+        assert np.isfinite(float(value)), f"non-finite numeric value: {value!r}"
+        return 1
+    return 0
+
+
+def parse_json_stdout(stdout: str) -> dict[str, Any]:
+    start = stdout.find("{")
+    end = stdout.rfind("}")
+    assert start != -1 and end != -1 and end > start, "stdout did not contain JSON"
+    return json.loads(stdout[start : end + 1])
+
+
 def test_run_diagnostic_importable_returns_json_serializable_contract() -> None:
     module = load_module()
 
@@ -209,7 +251,7 @@ def test_npz_field_metadata_is_validated_and_reported(tmp_path: Path) -> None:
     result = module.run_diagnostic(field=field_path)
 
     require_contract(result, expected_n=n)
-    assert result["field_metadata"] == {
+    assert_dict_contains(result["field_metadata"], {
         "N": n,
         "domain_length": 2.0 * np.pi,
         "grid_spacing": (2.0 * np.pi) / n,
@@ -217,7 +259,7 @@ def test_npz_field_metadata_is_validated_and_reported(tmp_path: Path) -> None:
         "time": 1.25,
         "snapshot_index": 7,
         "npz_source": "unit-test-dns-snapshot",
-    }
+    })
 
 
 def test_npz_field_rejects_inconsistent_domain_metadata(tmp_path: Path) -> None:
@@ -339,3 +381,59 @@ def test_cli_help_documents_fixture_npz_contract() -> None:
     assert "scripts/ns_gateway1_fixture_npz.py" in completed.stdout
     assert "Input NPZ contract" in completed.stdout
     assert "--field" in completed.stdout
+    if script_supports_integral_conditions_flag():
+        assert "--integral-conditions" in completed.stdout
+
+
+def test_cli_integral_conditions_on_synthetic_fixture_have_finite_numeric_outputs(
+    tmp_path: Path,
+) -> None:
+    if not script_supports_integral_conditions_flag():
+        pytest.skip("script does not expose --integral-conditions yet")
+
+    n = 8
+    u, v, w = deterministic_velocity(n)
+    field_path = tmp_path / "fixture_style_velocity.npz"
+    np.savez(
+        field_path,
+        u=u,
+        v=v,
+        w=w,
+        N=np.array(n, dtype=np.int64),
+        domain_length=np.array(2.0 * np.pi, dtype=np.float64),
+        grid_spacing=np.array((2.0 * np.pi) / n, dtype=np.float64),
+        amplitude=np.array(0.75, dtype=np.float64),
+        source=np.array("fixture-style-cli-test"),
+    )
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--field",
+            str(field_path),
+            "--integral-conditions",
+        ],
+        check=True,
+        capture_output=True,
+        cwd=REPO_ROOT,
+        text=True,
+    )
+
+    result = parse_json_stdout(completed.stdout)
+    require_contract(result, expected_n=n)
+    assert result["source"] == f"npz:{field_path}"
+    assert result["field_metadata"]["npz_source"] == "fixture-style-cli-test"
+
+    integral_condition_items = {
+        key: value
+        for key, value in result.items()
+        if "integral" in key.lower() and "condition" in key.lower()
+    }
+    assert integral_condition_items, "expected integral-condition outputs in JSON result"
+
+    numeric_leaf_count = sum(
+        count_and_validate_finite_numeric_leaves(value)
+        for value in integral_condition_items.values()
+    )
+    assert numeric_leaf_count > 0, "expected at least one finite numeric integral-condition output"

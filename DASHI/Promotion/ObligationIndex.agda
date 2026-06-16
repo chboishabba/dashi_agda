@@ -783,11 +783,11 @@ canonicalPromotionLaneSummaries =
     neurochemicalLane
     "DASHI.Promotion.NeurochemicalAuthorityBoundary"
     "canonicalNeurochemicalAuthorityBoundary"
-    "neurochemical transmission bridge; neurochemical vocabulary; synaptic transfer recovery"
-    3
-    "neurochemical TransmissionBridge, NeurochemicalVocabularyReceipt, and NeurochemicalAuthorityBoundary are staged as missing-obligation bridge/authority surfaces"
-    "all neurochemical bridge and authority claims remain false pending missing file/authority landings"
-    "echo Neurochemical bridge/authority surfaces pending: DASHI.Biology.NeurochemicalTransmissionBridge, DASHI.Biology.NeurochemicalVocabularyReceipt, DASHI.Promotion.NeurochemicalAuthorityBoundary"
+    "bioactive authority boundary; molecular recognition; atomic chemistry; protein target; genomic expression; brain carrier; neurochemical transmission; neurochemical vocabulary; authority boundary"
+    9
+    "neurochemical and bioactive cross-scale bridge surfaces are implemented as candidate-only receipt infrastructure"
+    "molecular identity, binding, receptor-action, genome, circuit, behavior, clinical, prescribing, and brain-state authority remain false"
+    "python scripts/check_reusable_core_regression.py"
   ∷ mkLaneSummary
     gate3ClayLane
     "DASHI.Promotion.Gate3ClayObligations"
@@ -1675,8 +1675,8 @@ record UnifiedPromotionObligationIndex : Setω where
     aggregateOpenObligationCount :
       Nat
 
-    aggregateOpenObligationCountIs91 :
-      aggregateOpenObligationCount ≡ 94
+    aggregateOpenObligationCountIs100 :
+      aggregateOpenObligationCount ≡ 100
 
     validationTarget :
       String
@@ -1885,8 +1885,8 @@ canonicalUnifiedPromotionObligationIndex =
     ; pnfSpectralApplicationBoundaryCountIs8 =
         refl
     ; aggregateOpenObligationCount =
-        94
-    ; aggregateOpenObligationCountIs91 =
+        100
+    ; aggregateOpenObligationCountIs100 =
         refl
     ; validationTarget =
         "DASHI/Promotion/ObligationIndex.agda"
@@ -1902,17 +1902,17 @@ canonicalUnifiedPromotionObligationIndex =
         refl
     }
 
-canonicalUnifiedPromotionLaneCountIs6 :
+canonicalUnifiedPromotionLaneCountIs7 :
   UnifiedPromotionObligationIndex.laneSummaryCount
     canonicalUnifiedPromotionObligationIndex
   ≡ 7
-canonicalUnifiedPromotionLaneCountIs6 = refl
+canonicalUnifiedPromotionLaneCountIs7 = refl
 
-canonicalUnifiedPromotionOpenObligationCountIs91 :
+canonicalUnifiedPromotionOpenObligationCountIs100 :
   UnifiedPromotionObligationIndex.aggregateOpenObligationCount
     canonicalUnifiedPromotionObligationIndex
-  ≡ 94
-canonicalUnifiedPromotionOpenObligationCountIs91 = refl
+  ≡ 100
+canonicalUnifiedPromotionOpenObligationCountIs100 = refl
 
 canonicalUnifiedPromotionAdapterAdvancementCountIs6 :
   UnifiedPromotionObligationIndex.adapterAdvancementCount
