@@ -50,6 +50,14 @@ data CandidateRef : Set where
   candidateRef : Nat → CandidateRef
   candidateFallback : CandidateRef
 
+data EvidenceBaseRef : Set where
+  evidenceBaseRef : Nat → EvidenceBaseRef
+  evidenceBaseFallback : EvidenceBaseRef
+
+data TimeBaseRef : Set where
+  timeBaseRef : Nat → TimeBaseRef
+  timeBaseFallback : TimeBaseRef
+
 record PredicateObjectRef : Set where
   constructor predicateObjectRef
   field
@@ -82,6 +90,43 @@ record PNFStructuralBase : Set where
       Residual.WrapperState
 
 open PNFStructuralBase public
+
+record PNFEvidenceTimeBase : Set where
+  constructor pnfEvidenceTimeBase
+  field
+    evidenceBase :
+      EvidenceBaseRef
+
+    evidenceParserProfile :
+      String
+
+    evidenceReducerProfile :
+      String
+
+    evidenceSourceSpan :
+      String
+
+    evidenceProvenance :
+      String
+
+    timeBase :
+      TimeBaseRef
+
+    timeBaseStatement :
+      String
+
+open PNFEvidenceTimeBase public
+
+record PNFProductBase : Set where
+  constructor pnfProductBase
+  field
+    structuralComponent :
+      PNFStructuralBase
+
+    evidenceComponent :
+      PNFEvidenceTimeBase
+
+open PNFProductBase public
 
 record PNFCoordinateShape : Set where
   constructor pnfCoordinateShape
@@ -156,6 +201,53 @@ pnfCoordinateOfReceipt r =
     (Residual.PNFEmissionReceipt.sourceSpan r)
     (Residual.PredicatePNF.provenance
       (Residual.PNFEmissionReceipt.emittedAtom r))
+
+pnfReceiptOnlyTimeBaseStatement :
+  String
+pnfReceiptOnlyTimeBaseStatement =
+  "PNF spectral field time base is an explicit receipt coordinate, not a runtime clock, ordering claim, or freshness proof."
+
+pnfEvidenceTimeBaseOfReceipt :
+  Residual.PNFEmissionReceipt →
+  PNFEvidenceTimeBase
+pnfEvidenceTimeBaseOfReceipt r =
+  pnfEvidenceTimeBase
+    evidenceBaseFallback
+    (Residual.PNFEmissionReceipt.parserProfile r)
+    (Residual.PNFEmissionReceipt.reducerProfile r)
+    (Residual.PNFEmissionReceipt.sourceSpan r)
+    (Residual.PredicatePNF.provenance
+      (Residual.PNFEmissionReceipt.emittedAtom r))
+    timeBaseFallback
+    pnfReceiptOnlyTimeBaseStatement
+
+pnfProductBaseOfReceipt :
+  Residual.PNFEmissionReceipt →
+  PNFProductBase
+pnfProductBaseOfReceipt r =
+  pnfProductBase
+    (pnfStructuralBaseOf
+      (Residual.PNFEmissionReceipt.emittedAtom r))
+    (pnfEvidenceTimeBaseOfReceipt r)
+
+pnfProductBaseStructuralProjectionIsCanonical :
+  ∀ r →
+  PNFProductBase.structuralComponent
+    (pnfProductBaseOfReceipt r)
+  ≡
+  pnfStructuralBaseOf
+    (Residual.PNFEmissionReceipt.emittedAtom r)
+pnfProductBaseStructuralProjectionIsCanonical r =
+  refl
+
+pnfProductBaseEvidenceProjectionIsCanonical :
+  ∀ r →
+  PNFProductBase.evidenceComponent
+    (pnfProductBaseOfReceipt r)
+  ≡
+  pnfEvidenceTimeBaseOfReceipt r
+pnfProductBaseEvidenceProjectionIsCanonical r =
+  refl
 
 pnfChamberProjectionOfReceipt :
   PredicateObjectRef →
@@ -349,6 +441,29 @@ record FieldSection : Set where
 
 open FieldSection public
 
+record ProductFieldSection : Set where
+  constructor productFieldSection
+  field
+    productSectionRef :
+      SupportPacketRef
+
+    productBase :
+      PNFProductBase
+
+    structuralSection :
+      FieldSection
+
+    structuralSectionBase :
+      FibreRef
+
+    evidenceSectionBase :
+      EvidenceBaseRef
+
+    timeSectionBase :
+      TimeBaseRef
+
+open ProductFieldSection public
+
 canonicalFibreNeighborhood :
   FibreNeighborhood
 canonicalFibreNeighborhood =
@@ -378,6 +493,39 @@ canonicalFieldSection =
     []
     canonicalSupportPacketMembers
 
+canonicalEvidenceTimeBase :
+  PNFEvidenceTimeBase
+canonicalEvidenceTimeBase =
+  pnfEvidenceTimeBase
+    evidenceBaseFallback
+    ""
+    ""
+    ""
+    ""
+    timeBaseFallback
+    pnfReceiptOnlyTimeBaseStatement
+
+canonicalProductBase :
+  PNFProductBase
+canonicalProductBase =
+  pnfProductBase
+    (pnfStructuralBase
+      Residual.sig-unclassified
+      Residual.qualifierUnknown
+      Residual.wrapperUnknown)
+    canonicalEvidenceTimeBase
+
+canonicalProductFieldSection :
+  ProductFieldSection
+canonicalProductFieldSection =
+  productFieldSection
+    supportPacketFallback
+    canonicalProductBase
+    canonicalFieldSection
+    fibreFallback
+    evidenceBaseFallback
+    timeBaseFallback
+
 ------------------------------------------------------------------------
 -- Authority boundary.
 
@@ -404,6 +552,15 @@ data PNFSpectralFieldComponent : Set where
   chamberProjectionOverResidualPNF :
     PNFSpectralFieldComponent
 
+  evidenceProvenanceTimeBase :
+    PNFSpectralFieldComponent
+
+  productBaseOverStructuralEvidence :
+    PNFSpectralFieldComponent
+
+  canonicalProductProjectionReceipt :
+    PNFSpectralFieldComponent
+
   explicitEmbeddingBoundary :
     PNFSpectralFieldComponent
 
@@ -418,6 +575,9 @@ canonicalPNFSpectralFieldComponents =
   ∷ typedFibreAndResidualEdgeVocabulary
   ∷ braidPathAndSupportPacketVocabulary
   ∷ chamberProjectionOverResidualPNF
+  ∷ evidenceProvenanceTimeBase
+  ∷ productBaseOverStructuralEvidence
+  ∷ canonicalProductProjectionReceipt
   ∷ explicitEmbeddingBoundary
   ∷ receiptOnlyNoRuntimePromotion
   ∷ []
@@ -485,6 +645,20 @@ record PNFSpectralFieldReceipt : Set where
     coordinateProjectionIsCanonical :
       coordinateProjection ≡ pnfCoordinateOfReceipt
 
+    evidenceTimeBaseProjection :
+      Residual.PNFEmissionReceipt →
+      PNFEvidenceTimeBase
+
+    evidenceTimeBaseProjectionIsCanonical :
+      evidenceTimeBaseProjection ≡ pnfEvidenceTimeBaseOfReceipt
+
+    productBaseProjection :
+      Residual.PNFEmissionReceipt →
+      PNFProductBase
+
+    productBaseProjectionIsCanonical :
+      productBaseProjection ≡ pnfProductBaseOfReceipt
+
     chamberProjection :
       PredicateObjectRef →
       Residual.PNFEmissionReceipt →
@@ -510,6 +684,12 @@ record PNFSpectralFieldReceipt : Set where
 
     sectionIsCanonical :
       section ≡ canonicalFieldSection
+
+    productSection :
+      ProductFieldSection
+
+    productSectionIsCanonical :
+      productSection ≡ canonicalProductFieldSection
 
     components :
       List PNFSpectralFieldComponent
@@ -599,6 +779,14 @@ canonicalPNFSpectralFieldReceipt =
         pnfCoordinateOfReceipt
     ; coordinateProjectionIsCanonical =
         refl
+    ; evidenceTimeBaseProjection =
+        pnfEvidenceTimeBaseOfReceipt
+    ; evidenceTimeBaseProjectionIsCanonical =
+        refl
+    ; productBaseProjection =
+        pnfProductBaseOfReceipt
+    ; productBaseProjectionIsCanonical =
+        refl
     ; chamberProjection =
         pnfChamberProjectionOfReceipt
     ; chamberProjectionIsCanonical =
@@ -614,6 +802,10 @@ canonicalPNFSpectralFieldReceipt =
     ; section =
         canonicalFieldSection
     ; sectionIsCanonical =
+        refl
+    ; productSection =
+        canonicalProductFieldSection
+    ; productSectionIsCanonical =
         refl
     ; components =
         canonicalPNFSpectralFieldComponents

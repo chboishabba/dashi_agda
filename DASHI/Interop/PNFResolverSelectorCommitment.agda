@@ -9,6 +9,7 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Interop.PNFSpectralFieldArchitectureReceipt as Architecture
 import DASHI.Interop.PNFSpectralFieldCore as Core
+import DASHI.Interop.PNFPackageCore as PackageCore
 import DASHI.Interop.PNFSpectralVectorIndex as Vector
 import DASHI.Interop.SensibLawResidualLattice as Residual
 
@@ -572,6 +573,200 @@ canonicalHybridRankingReceipt =
     refl
 
 ------------------------------------------------------------------------
+-- Product commitment certificate: resolved and corroborated candidates.
+
+data ResidualCheckShape : Set where
+  residualExactCheck :
+    ResidualCheckShape
+
+  residualPartialCheck :
+    ResidualCheckShape
+
+canonicalResidualCheckShapes : List ResidualCheckShape
+canonicalResidualCheckShapes =
+  residualExactCheck
+  ∷ residualPartialCheck
+  ∷ []
+
+record CandidateResidualCheckReceipt : Set where
+  constructor candidateResidualCheckReceipt
+  field
+    checkedAnchor :
+      Vector.ResolverAnchor
+
+    checkedResidualLevel :
+      Residual.ResidualLevel
+
+    residualCheckShape :
+      ResidualCheckShape
+
+    residualChecked :
+      Bool
+
+    residualExactOrPartial :
+      Bool
+
+    exactResidualAccepted :
+      Bool
+
+    partialResidualAccepted :
+      Bool
+
+    noTypedMeetAccepted :
+      Bool
+
+    contradictionAcceptedAsCorroboration :
+      Bool
+
+    residualCheckedIsTrue :
+      residualChecked ≡ true
+
+    residualExactOrPartialIsTrue :
+      residualExactOrPartial ≡ true
+
+    exactResidualAcceptedIsFalse :
+      exactResidualAccepted ≡ false
+
+    partialResidualAcceptedIsTrue :
+      partialResidualAccepted ≡ true
+
+    noTypedMeetAcceptedIsFalse :
+      noTypedMeetAccepted ≡ false
+
+    contradictionAcceptedAsCorroborationIsFalse :
+      contradictionAcceptedAsCorroboration ≡ false
+
+open CandidateResidualCheckReceipt public
+
+record ResolverSelectorProductCommitmentCertificate : Set where
+  constructor resolverSelectorProductCommitmentCertificate
+  field
+    productCandidate :
+      Vector.CandidateRef
+
+    productSearch :
+      Vector.VectorSearchReceipt
+
+    productResolverAnchor :
+      Vector.ResolverAnchor
+
+    productResidualCheck :
+      CandidateResidualCheckReceipt
+
+    productSpanReceipt :
+      SpanReceipt
+
+    productProvenanceReceipt :
+      ProvenanceReceipt
+
+    productSelectorPackage :
+      SelectorPackage
+
+    candidateFromVectorSearch :
+      Bool
+
+    spectralProximityRecorded :
+      Bool
+
+    resolverAnchorRecorded :
+      Bool
+
+    residualExactOrPartialRecorded :
+      Bool
+
+    spanReceiptAnchored :
+      Bool
+
+    receiptAnchoringRecorded :
+      Bool
+
+    admittedPackageRecorded :
+      Bool
+
+    corroboratedCandidate :
+      Bool
+
+    supportFromVector :
+      Bool
+
+    truthFromVector :
+      Bool
+
+    admissibilityFromVector :
+      Bool
+
+    unresolvedCandidateCanCommitSupport :
+      Bool
+
+    vectorScoreCanCommitSupport :
+      Bool
+
+    rawHitCanCommitSupport :
+      Bool
+
+    productCandidateMatchesAnchor :
+      Vector.anchoredCandidate productResolverAnchor ≡ productCandidate
+
+    productAnchorMatchesResidualCheck :
+      checkedAnchor productResidualCheck ≡ productResolverAnchor
+
+    productAnchorMatchesSelector :
+      Vector.selectedAnchor
+        (selectorAdmission productSelectorPackage)
+      ≡
+      productResolverAnchor
+
+    productResidualMatchesSelector :
+      Vector.residualLevel
+        (selectorAdmission productSelectorPackage)
+      ≡
+      checkedResidualLevel productResidualCheck
+
+    candidateFromVectorSearchIsTrue :
+      candidateFromVectorSearch ≡ true
+
+    spectralProximityRecordedIsTrue :
+      spectralProximityRecorded ≡ true
+
+    resolverAnchorRecordedIsTrue :
+      resolverAnchorRecorded ≡ true
+
+    residualExactOrPartialRecordedIsTrue :
+      residualExactOrPartialRecorded ≡ true
+
+    spanReceiptAnchoredIsTrue :
+      spanReceiptAnchored ≡ true
+
+    receiptAnchoringRecordedIsTrue :
+      receiptAnchoringRecorded ≡ true
+
+    admittedPackageRecordedIsTrue :
+      admittedPackageRecorded ≡ true
+
+    corroboratedCandidateIsTrue :
+      corroboratedCandidate ≡ true
+
+    supportFromVectorIsFalse :
+      supportFromVector ≡ false
+
+    truthFromVectorIsFalse :
+      truthFromVector ≡ false
+
+    admissibilityFromVectorIsFalse :
+      admissibilityFromVector ≡ false
+
+    unresolvedCandidateCanCommitSupportIsFalse :
+      unresolvedCandidateCanCommitSupport ≡ false
+
+    vectorScoreCanCommitSupportIsFalse :
+      vectorScoreCanCommitSupport ≡ false
+
+    rawHitCanCommitSupportIsFalse :
+      rawHitCanCommitSupport ≡ false
+
+open ResolverSelectorProductCommitmentCertificate public
+
+------------------------------------------------------------------------
 -- Section 29: ITIR commitment may consume only admitted packages.
 
 record ITIRPackageCommitmentReceipt : Set where
@@ -765,6 +960,69 @@ canonicalSelectorPackage =
     refl
     refl
 
+canonicalCandidateResidualCheckReceipt : CandidateResidualCheckReceipt
+canonicalCandidateResidualCheckReceipt =
+  candidateResidualCheckReceipt
+    canonicalResolvedAnchor
+    Residual.partial
+    residualPartialCheck
+    true
+    true
+    false
+    true
+    false
+    false
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalProductCommitmentCertificate :
+  ResolverSelectorProductCommitmentCertificate
+canonicalProductCommitmentCertificate =
+  resolverSelectorProductCommitmentCertificate
+    Vector.canonicalSampleCandidate
+    Vector.canonicalSampleSearchReceipt
+    canonicalResolvedAnchor
+    canonicalCandidateResidualCheckReceipt
+    canonicalSpanReceipt
+    canonicalProvenanceReceipt
+    canonicalSelectorPackage
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    true
+    false
+    false
+    false
+    false
+    false
+    false
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
 canonicalITIRCommitReceipt : Vector.ITIRCommitReceipt
 canonicalITIRCommitReceipt =
   Vector.commitAdmittedSelection
@@ -829,8 +1087,37 @@ record PNFResolverSelectorCommitmentReceipt : Set where
     hybridRanking :
       HybridRankingReceipt
 
+    productCommitmentCertificate :
+      ResolverSelectorProductCommitmentCertificate
+
     itirCommitment :
       ITIRPackageCommitmentReceipt
+
+    pnfPackageCoreAdapter :
+      PackageCore.SelectorPackage
+
+    pnfPackageCoreAdapterIsCanonical :
+      pnfPackageCoreAdapter
+      ≡
+      PackageCore.canonicalAdmittedSelectorPackage
+
+    pnfPackageCoreDirectCommitFalse :
+      PackageCore.selectorCommitsDirectlyToITIR
+        pnfPackageCoreAdapter
+      ≡
+      false
+
+    receiptCorroboratedCandidate :
+      Bool
+
+    receiptSupportFromVector :
+      Bool
+
+    receiptTruthFromVector :
+      Bool
+
+    receiptAdmissibilityFromVector :
+      Bool
 
     statement :
       String
@@ -864,8 +1151,25 @@ record PNFResolverSelectorCommitmentReceipt : Set where
     hybridRankingIsCanonical :
       hybridRanking ≡ canonicalHybridRankingReceipt
 
+    productCommitmentCertificateIsCanonical :
+      productCommitmentCertificate
+      ≡
+      canonicalProductCommitmentCertificate
+
     itirCommitmentIsCanonical :
       itirCommitment ≡ canonicalITIRPackageCommitmentReceipt
+
+    receiptCorroboratedCandidateIsTrue :
+      receiptCorroboratedCandidate ≡ true
+
+    receiptSupportFromVectorIsFalse :
+      receiptSupportFromVector ≡ false
+
+    receiptTruthFromVectorIsFalse :
+      receiptTruthFromVector ≡ false
+
+    receiptAdmissibilityFromVectorIsFalse :
+      receiptAdmissibilityFromVector ≡ false
 
     statementIsCanonical :
       statement ≡ resolverSelectorCommitmentStatement
@@ -900,8 +1204,21 @@ canonicalPNFResolverSelectorCommitmentReceipt =
     canonicalQueryModes
     canonicalQueryModeReceipts
     canonicalHybridRankingReceipt
+    canonicalProductCommitmentCertificate
     canonicalITIRPackageCommitmentReceipt
+    PackageCore.canonicalAdmittedSelectorPackage
+    refl
+    refl
+    true
+    false
+    false
+    false
     resolverSelectorCommitmentStatement
+    refl
+    refl
+    refl
+    refl
+    refl
     refl
     refl
     refl
@@ -948,6 +1265,13 @@ canonicalHybridRankingProjection :
 canonicalHybridRankingProjection =
   refl
 
+canonicalProductCommitmentCertificateProjection :
+  productCommitmentCertificate canonicalReceipt
+  ≡
+  canonicalProductCommitmentCertificate
+canonicalProductCommitmentCertificateProjection =
+  refl
+
 canonicalITIRCommitmentProjection :
   itirCommitment canonicalReceipt
   ≡
@@ -977,6 +1301,26 @@ canonicalPackageRejectsDirectANNToITIR :
   ≡
   false
 canonicalPackageRejectsDirectANNToITIR =
+  refl
+
+canonicalReceiptCorroboratedCandidateTrue :
+  receiptCorroboratedCandidate canonicalReceipt ≡ true
+canonicalReceiptCorroboratedCandidateTrue =
+  refl
+
+canonicalReceiptSupportFromVectorFalse :
+  receiptSupportFromVector canonicalReceipt ≡ false
+canonicalReceiptSupportFromVectorFalse =
+  refl
+
+canonicalReceiptTruthFromVectorFalse :
+  receiptTruthFromVector canonicalReceipt ≡ false
+canonicalReceiptTruthFromVectorFalse =
+  refl
+
+canonicalReceiptAdmissibilityFromVectorFalse :
+  receiptAdmissibilityFromVector canonicalReceipt ≡ false
+canonicalReceiptAdmissibilityFromVectorFalse =
   refl
 
 canonicalRankingIsOrderingOnly :

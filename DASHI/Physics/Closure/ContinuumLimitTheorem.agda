@@ -683,6 +683,18 @@ record MachineCheckedChristoffelC0ConstantReceipt : Set where
     L_GammaIs48 :
       L_Gamma ≡ 48
 
+    tightAuditedL_Gamma :
+      Nat
+
+    tightAuditedL_GammaIs44 :
+      tightAuditedL_Gamma ≡ 44
+
+    conservativeL_Gamma :
+      Nat
+
+    conservativeL_GammaIs48 :
+      conservativeL_Gamma ≡ 48
+
     ricciContractionExtractionConstant :
       Nat
 
@@ -745,6 +757,14 @@ canonicalMachineCheckedChristoffelC0ConstantReceipt =
         48
     ; L_GammaIs48 =
         refl
+    ; tightAuditedL_Gamma =
+        44
+    ; tightAuditedL_GammaIs44 =
+        refl
+    ; conservativeL_Gamma =
+        48
+    ; conservativeL_GammaIs48 =
+        refl
     ; ricciContractionExtractionConstant =
         640
     ; ricciContractionExtractionConstantIs640 =
@@ -780,7 +800,7 @@ canonicalMachineCheckedChristoffelC0ConstantReceipt =
     ; noExternalAnalyticAuthorityFabricatedIsFalse =
         refl
     ; constantBoundary =
-        "Machine-checked constants consumed by the finite-carrier Christoffel C0 law surface: L_Gamma = 48, L_Ricci = 640, optional sharp L_Ricci = 112, and conservative shell C_Gamma <= 2"
+        "Machine-checked constants consumed by the finite-carrier Christoffel C0 law surface: conservative L_Gamma = 48, tight audited L_Gamma = 44, L_Ricci = 640, optional sharp L_Ricci = 112, and conservative shell C_Gamma <= 2"
         ∷ "The analytic C_Gamma = 1/2 normalization is not proved here; the local checked adapter threads only the conservative Nat shell C_Gamma = 2"
         ∷ "The inverse metric C0 surface is only the typed pointwise socket inverseMetricC0Control epsilon scale carrier"
         ∷ "These constants are local receipts for adapter wiring and do not fabricate an external analytic Christoffel, Ricci, contraction, or continuum GR proof"
@@ -794,6 +814,24 @@ machineCheckedChristoffelL_GammaIs48 :
   48
 machineCheckedChristoffelL_GammaIs48 =
   MachineCheckedChristoffelC0ConstantReceipt.L_GammaIs48
+    canonicalMachineCheckedChristoffelC0ConstantReceipt
+
+machineCheckedChristoffelTightAuditedL_GammaIs44 :
+  MachineCheckedChristoffelC0ConstantReceipt.tightAuditedL_Gamma
+    canonicalMachineCheckedChristoffelC0ConstantReceipt
+  ≡
+  44
+machineCheckedChristoffelTightAuditedL_GammaIs44 =
+  MachineCheckedChristoffelC0ConstantReceipt.tightAuditedL_GammaIs44
+    canonicalMachineCheckedChristoffelC0ConstantReceipt
+
+machineCheckedChristoffelConservativeL_GammaIs48 :
+  MachineCheckedChristoffelC0ConstantReceipt.conservativeL_Gamma
+    canonicalMachineCheckedChristoffelC0ConstantReceipt
+  ≡
+  48
+machineCheckedChristoffelConservativeL_GammaIs48 =
+  MachineCheckedChristoffelC0ConstantReceipt.conservativeL_GammaIs48
     canonicalMachineCheckedChristoffelC0ConstantReceipt
 
 machineCheckedRicciContractionExtractionConstantIs640 :
@@ -874,6 +912,369 @@ data OrderedRationalAnalyticInequalityPrimitive : Set where
   shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive :
     OrderedRationalAnalyticInequalityPrimitive
 
+data OrderedRationalGaugePrimitiveShape : Set where
+  d_QQZeroPrimitive :
+    OrderedRationalGaugePrimitiveShape
+
+  d_QQSymmetryPrimitive :
+    OrderedRationalGaugePrimitiveShape
+
+  d_QQTrianglePrimitive :
+    OrderedRationalGaugePrimitiveShape
+
+  threeMinusNNonnegativePrimitive :
+    OrderedRationalGaugePrimitiveShape
+
+  threeMinusNPositivePrimitive :
+    OrderedRationalGaugePrimitiveShape
+
+  nonnegativeScaleBy48Primitive :
+    OrderedRationalGaugePrimitiveShape
+
+  nonnegativeScaleBy72Primitive :
+    OrderedRationalGaugePrimitiveShape
+
+  nonnegativeScaleBy80Primitive :
+    OrderedRationalGaugePrimitiveShape
+
+  nonnegativeScaleBy640Primitive :
+    OrderedRationalGaugePrimitiveShape
+
+record OrderedRationalGaugeToolkitReceipt : Set where
+  field
+    d_QQZeroLaw :
+      OrderedRationalGaugePrimitiveShape
+
+    d_QQZeroLawIsPrimitive :
+      d_QQZeroLaw ≡ d_QQZeroPrimitive
+
+    d_QQSymmetryLaw :
+      OrderedRationalGaugePrimitiveShape
+
+    d_QQSymmetryLawIsPrimitive :
+      d_QQSymmetryLaw ≡ d_QQSymmetryPrimitive
+
+    d_QQTriangleLaw :
+      OrderedRationalGaugePrimitiveShape
+
+    d_QQTriangleLawIsPrimitive :
+      d_QQTriangleLaw ≡ d_QQTrianglePrimitive
+
+    threeMinusNNonnegativeLaw :
+      OrderedRationalGaugePrimitiveShape
+
+    threeMinusNNonnegativeLawIsPrimitive :
+      threeMinusNNonnegativeLaw ≡ threeMinusNNonnegativePrimitive
+
+    threeMinusNPositiveLaw :
+      OrderedRationalGaugePrimitiveShape
+
+    threeMinusNPositiveLawIsPrimitive :
+      threeMinusNPositiveLaw ≡ threeMinusNPositivePrimitive
+
+    scaleConstant48 :
+      Nat
+
+    scaleConstant48Is48 :
+      scaleConstant48 ≡ 48
+
+    scaleConstant48NonnegativeLaw :
+      OrderedRationalGaugePrimitiveShape
+
+    scaleConstant48NonnegativeLawIsPrimitive :
+      scaleConstant48NonnegativeLaw ≡ nonnegativeScaleBy48Primitive
+
+    scaleConstant72 :
+      Nat
+
+    scaleConstant72Is72 :
+      scaleConstant72 ≡ 72
+
+    scaleConstant72NonnegativeLaw :
+      OrderedRationalGaugePrimitiveShape
+
+    scaleConstant72NonnegativeLawIsPrimitive :
+      scaleConstant72NonnegativeLaw ≡ nonnegativeScaleBy72Primitive
+
+    scaleConstant80 :
+      Nat
+
+    scaleConstant80Is80 :
+      scaleConstant80 ≡ 80
+
+    scaleConstant80NonnegativeLaw :
+      OrderedRationalGaugePrimitiveShape
+
+    scaleConstant80NonnegativeLawIsPrimitive :
+      scaleConstant80NonnegativeLaw ≡ nonnegativeScaleBy80Primitive
+
+    scaleConstant640 :
+      Nat
+
+    scaleConstant640Is640 :
+      scaleConstant640 ≡ 640
+
+    scaleConstant640NonnegativeLaw :
+      OrderedRationalGaugePrimitiveShape
+
+    scaleConstant640NonnegativeLawIsPrimitive :
+      scaleConstant640NonnegativeLaw ≡ nonnegativeScaleBy640Primitive
+
+    orderedQQTheoremPromoted :
+      Bool
+
+    orderedQQTheoremPromotedIsFalse :
+      orderedQQTheoremPromoted ≡ Bool.false
+
+    gaugeToolkitBoundary :
+      List String
+
+canonicalOrderedRationalGaugeToolkitReceipt :
+  OrderedRationalGaugeToolkitReceipt
+canonicalOrderedRationalGaugeToolkitReceipt =
+  record
+    { d_QQZeroLaw =
+        d_QQZeroPrimitive
+    ; d_QQZeroLawIsPrimitive =
+        refl
+    ; d_QQSymmetryLaw =
+        d_QQSymmetryPrimitive
+    ; d_QQSymmetryLawIsPrimitive =
+        refl
+    ; d_QQTriangleLaw =
+        d_QQTrianglePrimitive
+    ; d_QQTriangleLawIsPrimitive =
+        refl
+    ; threeMinusNNonnegativeLaw =
+        threeMinusNNonnegativePrimitive
+    ; threeMinusNNonnegativeLawIsPrimitive =
+        refl
+    ; threeMinusNPositiveLaw =
+        threeMinusNPositivePrimitive
+    ; threeMinusNPositiveLawIsPrimitive =
+        refl
+    ; scaleConstant48 =
+        48
+    ; scaleConstant48Is48 =
+        refl
+    ; scaleConstant48NonnegativeLaw =
+        nonnegativeScaleBy48Primitive
+    ; scaleConstant48NonnegativeLawIsPrimitive =
+        refl
+    ; scaleConstant72 =
+        72
+    ; scaleConstant72Is72 =
+        refl
+    ; scaleConstant72NonnegativeLaw =
+        nonnegativeScaleBy72Primitive
+    ; scaleConstant72NonnegativeLawIsPrimitive =
+        refl
+    ; scaleConstant80 =
+        80
+    ; scaleConstant80Is80 =
+        refl
+    ; scaleConstant80NonnegativeLaw =
+        nonnegativeScaleBy80Primitive
+    ; scaleConstant80NonnegativeLawIsPrimitive =
+        refl
+    ; scaleConstant640 =
+        640
+    ; scaleConstant640Is640 =
+        refl
+    ; scaleConstant640NonnegativeLaw =
+        nonnegativeScaleBy640Primitive
+    ; scaleConstant640NonnegativeLawIsPrimitive =
+        refl
+    ; orderedQQTheoremPromoted =
+        Bool.false
+    ; orderedQQTheoremPromotedIsFalse =
+        refl
+    ; gaugeToolkitBoundary =
+        "Ordered rational gauge toolkit receipt: d_QQ zero, symmetry, and triangle are recorded as primitive proof targets"
+        ∷ "threeMinusN nonnegative and positive gauge laws are recorded as primitive proof targets"
+        ∷ "Nonnegative scaling targets are recorded for constants 48, 72, 80, and 640"
+        ∷ "This receipt does not promote an ordered QQ theorem; it names the exact remaining algebraic laws needed by the analytic kernel"
+        ∷ []
+    }
+
+orderedRationalGaugeToolkitD_QQZeroPrimitive :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.d_QQZeroLaw toolkit
+  ≡
+  d_QQZeroPrimitive
+orderedRationalGaugeToolkitD_QQZeroPrimitive toolkit =
+  OrderedRationalGaugeToolkitReceipt.d_QQZeroLawIsPrimitive toolkit
+
+orderedRationalGaugeToolkitD_QQSymmetryPrimitive :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.d_QQSymmetryLaw toolkit
+  ≡
+  d_QQSymmetryPrimitive
+orderedRationalGaugeToolkitD_QQSymmetryPrimitive toolkit =
+  OrderedRationalGaugeToolkitReceipt.d_QQSymmetryLawIsPrimitive toolkit
+
+orderedRationalGaugeToolkitD_QQTrianglePrimitive :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.d_QQTriangleLaw toolkit
+  ≡
+  d_QQTrianglePrimitive
+orderedRationalGaugeToolkitD_QQTrianglePrimitive toolkit =
+  OrderedRationalGaugeToolkitReceipt.d_QQTriangleLawIsPrimitive toolkit
+
+orderedRationalGaugeToolkitThreeMinusNNonnegativePrimitive :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.threeMinusNNonnegativeLaw toolkit
+  ≡
+  threeMinusNNonnegativePrimitive
+orderedRationalGaugeToolkitThreeMinusNNonnegativePrimitive toolkit =
+  OrderedRationalGaugeToolkitReceipt.threeMinusNNonnegativeLawIsPrimitive toolkit
+
+orderedRationalGaugeToolkitThreeMinusNPositivePrimitive :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.threeMinusNPositiveLaw toolkit
+  ≡
+  threeMinusNPositivePrimitive
+orderedRationalGaugeToolkitThreeMinusNPositivePrimitive toolkit =
+  OrderedRationalGaugeToolkitReceipt.threeMinusNPositiveLawIsPrimitive toolkit
+
+orderedRationalGaugeToolkitScale48Is48 :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant48 toolkit
+  ≡
+  48
+orderedRationalGaugeToolkitScale48Is48 toolkit =
+  OrderedRationalGaugeToolkitReceipt.scaleConstant48Is48 toolkit
+
+orderedRationalGaugeToolkitScale48NonnegativePrimitive :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLaw toolkit
+  ≡
+  nonnegativeScaleBy48Primitive
+orderedRationalGaugeToolkitScale48NonnegativePrimitive toolkit =
+  OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLawIsPrimitive
+    toolkit
+
+orderedRationalGaugeToolkitScale72Is72 :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant72 toolkit
+  ≡
+  72
+orderedRationalGaugeToolkitScale72Is72 toolkit =
+  OrderedRationalGaugeToolkitReceipt.scaleConstant72Is72 toolkit
+
+orderedRationalGaugeToolkitScale72NonnegativePrimitive :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLaw toolkit
+  ≡
+  nonnegativeScaleBy72Primitive
+orderedRationalGaugeToolkitScale72NonnegativePrimitive toolkit =
+  OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLawIsPrimitive
+    toolkit
+
+orderedRationalGaugeToolkitScale80Is80 :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant80 toolkit
+  ≡
+  80
+orderedRationalGaugeToolkitScale80Is80 toolkit =
+  OrderedRationalGaugeToolkitReceipt.scaleConstant80Is80 toolkit
+
+orderedRationalGaugeToolkitScale80NonnegativePrimitive :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLaw toolkit
+  ≡
+  nonnegativeScaleBy80Primitive
+orderedRationalGaugeToolkitScale80NonnegativePrimitive toolkit =
+  OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLawIsPrimitive
+    toolkit
+
+orderedRationalGaugeToolkitScale640Is640 :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant640 toolkit
+  ≡
+  640
+orderedRationalGaugeToolkitScale640Is640 toolkit =
+  OrderedRationalGaugeToolkitReceipt.scaleConstant640Is640 toolkit
+
+orderedRationalGaugeToolkitScale640NonnegativePrimitive :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLaw toolkit
+  ≡
+  nonnegativeScaleBy640Primitive
+orderedRationalGaugeToolkitScale640NonnegativePrimitive toolkit =
+  OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLawIsPrimitive
+    toolkit
+
+record OrderedRationalGaugeThreeMinusNPrimitiveLawPair
+  (toolkit : OrderedRationalGaugeToolkitReceipt) : Set where
+  field
+    threeMinusNNonnegativePrimitiveLaw :
+      OrderedRationalGaugeToolkitReceipt.threeMinusNNonnegativeLaw toolkit
+      ≡
+      threeMinusNNonnegativePrimitive
+
+    threeMinusNPositivePrimitiveLaw :
+      OrderedRationalGaugeToolkitReceipt.threeMinusNPositiveLaw toolkit
+      ≡
+      threeMinusNPositivePrimitive
+
+orderedRationalGaugeToolkitThreeMinusNPrimitiveLawPair :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeThreeMinusNPrimitiveLawPair toolkit
+orderedRationalGaugeToolkitThreeMinusNPrimitiveLawPair toolkit =
+  record
+    { threeMinusNNonnegativePrimitiveLaw =
+        orderedRationalGaugeToolkitThreeMinusNNonnegativePrimitive toolkit
+    ; threeMinusNPositivePrimitiveLaw =
+        orderedRationalGaugeToolkitThreeMinusNPositivePrimitive toolkit
+    }
+
+record OrderedRationalGaugeScaleNonnegativePrimitiveLaws
+  (toolkit : OrderedRationalGaugeToolkitReceipt) : Set where
+  field
+    scale48NonnegativePrimitiveLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLaw toolkit
+      ≡
+      nonnegativeScaleBy48Primitive
+
+    scale72NonnegativePrimitiveLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLaw toolkit
+      ≡
+      nonnegativeScaleBy72Primitive
+
+    scale80NonnegativePrimitiveLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLaw toolkit
+      ≡
+      nonnegativeScaleBy80Primitive
+
+    scale640NonnegativePrimitiveLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLaw toolkit
+      ≡
+      nonnegativeScaleBy640Primitive
+
+orderedRationalGaugeToolkitScaleNonnegativePrimitiveLaws :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeScaleNonnegativePrimitiveLaws toolkit
+orderedRationalGaugeToolkitScaleNonnegativePrimitiveLaws toolkit =
+  record
+    { scale48NonnegativePrimitiveLaw =
+        orderedRationalGaugeToolkitScale48NonnegativePrimitive toolkit
+    ; scale72NonnegativePrimitiveLaw =
+        orderedRationalGaugeToolkitScale72NonnegativePrimitive toolkit
+    ; scale80NonnegativePrimitiveLaw =
+        orderedRationalGaugeToolkitScale80NonnegativePrimitive toolkit
+    ; scale640NonnegativePrimitiveLaw =
+        orderedRationalGaugeToolkitScale640NonnegativePrimitive toolkit
+    }
+
+orderedRationalGaugeToolkitOrderedQQTheoremNotPromoted :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeToolkitReceipt.orderedQQTheoremPromoted toolkit
+  ≡
+  Bool.false
+orderedRationalGaugeToolkitOrderedQQTheoremNotPromoted toolkit =
+  OrderedRationalGaugeToolkitReceipt.orderedQQTheoremPromotedIsFalse toolkit
+
 record OrderedRationalShellAChristoffelC0ConstantReceipt : Set where
   field
     lawShape :
@@ -940,6 +1341,12 @@ record OrderedRationalShellAChristoffelC0ConstantReceipt : Set where
       requestedInequalityPrimitive
       ≡
       shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
+
+    orderedGaugeToolkit :
+      OrderedRationalGaugeToolkitReceipt
+
+    orderedGaugeToolkitIsCanonical :
+      orderedGaugeToolkit ≡ canonicalOrderedRationalGaugeToolkitReceipt
 
     inequalityPrimitiveOnly :
       Bool
@@ -1008,6 +1415,10 @@ canonicalOrderedRationalShellAChristoffelC0ConstantReceipt =
         shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
     ; requestedInequalityPrimitiveIsCPrime_Gamma≤C_Gamma =
         refl
+    ; orderedGaugeToolkit =
+        canonicalOrderedRationalGaugeToolkitReceipt
+    ; orderedGaugeToolkitIsCanonical =
+        refl
     ; inequalityPrimitiveOnly =
         Bool.true
     ; inequalityPrimitiveOnlyIsTrue =
@@ -1025,8 +1436,11 @@ canonicalOrderedRationalShellAChristoffelC0ConstantReceipt =
         ∷ "Checked Nat constants: L_Gamma = 72, C_R = 80, C_Gamma = 1"
         ∷ "C'_Gamma is represented by numerator 26 and denominator 27"
         ∷ "The requested inequality C'_Gamma <= C_Gamma is recorded only as a named primitive shape"
+        ∷ "The ordered rational gauge toolkit records d_QQ zero/symmetry/triangle, threeMinusN positivity, and nonnegative scaling proof targets"
         ∷ "No ordered QQ theorem, rational-order proof, or analytic Christoffel estimate is promoted by this receipt"
-        ∷ []
+        ∷
+        OrderedRationalGaugeToolkitReceipt.gaugeToolkitBoundary
+          canonicalOrderedRationalGaugeToolkitReceipt
     }
 
 orderedRationalShellA_L_GammaIs72 :
@@ -1082,6 +1496,1006 @@ orderedRationalShellARequestedInequalityPrimitive :
 orderedRationalShellARequestedInequalityPrimitive =
   OrderedRationalShellAChristoffelC0ConstantReceipt.requestedInequalityPrimitiveIsCPrime_Gamma≤C_Gamma
     canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+data OrderedRationalShellAChristoffelPerturbationTerm : Set where
+  inverseMetricPerturbationTimesMetricDerivative :
+    OrderedRationalShellAChristoffelPerturbationTerm
+
+  inverseMetricTimesDerivativePerturbation :
+    OrderedRationalShellAChristoffelPerturbationTerm
+
+record OrderedRationalShellAChristoffelPerturbationRouteReceipt : Set where
+  field
+    orderedShellAConstants :
+      OrderedRationalShellAChristoffelC0ConstantReceipt
+
+    orderedShellAConstantsAreCanonical :
+      orderedShellAConstants
+      ≡
+      canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+    firstPerturbationTerm :
+      OrderedRationalShellAChristoffelPerturbationTerm
+
+    firstPerturbationTermIsInverseMetricPerturbation :
+      firstPerturbationTerm
+      ≡
+      inverseMetricPerturbationTimesMetricDerivative
+
+    secondPerturbationTerm :
+      OrderedRationalShellAChristoffelPerturbationTerm
+
+    secondPerturbationTermIsDerivativePerturbation :
+      secondPerturbationTerm
+      ≡
+      inverseMetricTimesDerivativePerturbation
+
+    perturbationTermCount :
+      Nat
+
+    perturbationTermCountIs2 :
+      perturbationTermCount ≡ 2
+
+    finiteSumSlotFactor :
+      Nat
+
+    finiteSumSlotFactorIs4 :
+      finiteSumSlotFactor ≡ 4
+
+    halfFactorNumerator :
+      Nat
+
+    halfFactorNumeratorIs1 :
+      halfFactorNumerator ≡ 1
+
+    halfFactorDenominator :
+      Nat
+
+    halfFactorDenominatorIs2 :
+      halfFactorDenominator ≡ 2
+
+    shellAInverseMetricMax :
+      Nat
+
+    shellAInverseMetricMaxIs4 :
+      shellAInverseMetricMax ≡ 4
+
+    auditedShellAInverseMetricMax :
+      Nat
+
+    auditedShellAInverseMetricMaxIs3 :
+      auditedShellAInverseMetricMax ≡ 3
+
+    shellAMetricDerivativeMax :
+      Nat
+
+    shellAMetricDerivativeMaxIs8 :
+      shellAMetricDerivativeMax ≡ 8
+
+    auditedShellAMetricDerivativeMax :
+      Nat
+
+    auditedShellAMetricDerivativeMaxIs8 :
+      auditedShellAMetricDerivativeMax ≡ 8
+
+    derivativePlusPerturbationUnit :
+      Nat
+
+    derivativePlusPerturbationUnitIs9 :
+      derivativePlusPerturbationUnit ≡ 9
+
+    lGammaRouteNumerator :
+      Nat
+
+    lGammaRouteNumeratorIs144 :
+      lGammaRouteNumerator ≡ 144
+
+    lGammaRouteDenominator :
+      Nat
+
+    lGammaRouteDenominatorIs2 :
+      lGammaRouteDenominator ≡ 2
+
+    lGammaRouteQuotient :
+      Nat
+
+    lGammaRouteQuotientIs72 :
+      lGammaRouteQuotient ≡ 72
+
+    finalL_GammaRouteQuotient :
+      Nat
+
+    finalL_GammaRouteQuotientIs48 :
+      finalL_GammaRouteQuotient ≡ 48
+
+    finalL_GammaRouteMatchesMachineCheckedConstant :
+      finalL_GammaRouteQuotient
+      ≡
+      MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
+        canonicalMachineCheckedChristoffelC0ConstantReceipt
+
+    tightAuditedL_GammaRouteQuotient :
+      Nat
+
+    tightAuditedL_GammaRouteQuotientIs44 :
+      tightAuditedL_GammaRouteQuotient ≡ 44
+
+    tightAuditedL_GammaRouteMatchesMachineCheckedTightConstant :
+      tightAuditedL_GammaRouteQuotient
+      ≡
+      MachineCheckedChristoffelC0ConstantReceipt.tightAuditedL_Gamma
+        canonicalMachineCheckedChristoffelC0ConstantReceipt
+
+    legacyConservativeL_GammaBoundary :
+      String
+
+    routeL_GammaMatchesShellAConstants :
+      lGammaRouteQuotient
+      ≡
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+        orderedShellAConstants
+
+    perturbationSplitExposed :
+      Bool
+
+    perturbationSplitExposedIsTrue :
+      perturbationSplitExposed ≡ Bool.true
+
+    fullOrderedQQEstimatePromoted :
+      Bool
+
+    fullOrderedQQEstimatePromotedIsFalse :
+      fullOrderedQQEstimatePromoted ≡ Bool.false
+
+    perturbationRouteText :
+      String
+
+    perturbationRouteBoundary :
+      List String
+
+canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt :
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt
+canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt =
+  record
+    { orderedShellAConstants =
+        canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+    ; orderedShellAConstantsAreCanonical =
+        refl
+    ; firstPerturbationTerm =
+        inverseMetricPerturbationTimesMetricDerivative
+    ; firstPerturbationTermIsInverseMetricPerturbation =
+        refl
+    ; secondPerturbationTerm =
+        inverseMetricTimesDerivativePerturbation
+    ; secondPerturbationTermIsDerivativePerturbation =
+        refl
+    ; perturbationTermCount =
+        2
+    ; perturbationTermCountIs2 =
+        refl
+    ; finiteSumSlotFactor =
+        4
+    ; finiteSumSlotFactorIs4 =
+        refl
+    ; halfFactorNumerator =
+        1
+    ; halfFactorNumeratorIs1 =
+        refl
+    ; halfFactorDenominator =
+        2
+    ; halfFactorDenominatorIs2 =
+        refl
+    ; shellAInverseMetricMax =
+        4
+    ; shellAInverseMetricMaxIs4 =
+        refl
+    ; auditedShellAInverseMetricMax =
+        3
+    ; auditedShellAInverseMetricMaxIs3 =
+        refl
+    ; shellAMetricDerivativeMax =
+        8
+    ; shellAMetricDerivativeMaxIs8 =
+        refl
+    ; auditedShellAMetricDerivativeMax =
+        8
+    ; auditedShellAMetricDerivativeMaxIs8 =
+        refl
+    ; derivativePlusPerturbationUnit =
+        9
+    ; derivativePlusPerturbationUnitIs9 =
+        refl
+    ; lGammaRouteNumerator =
+        144
+    ; lGammaRouteNumeratorIs144 =
+        refl
+    ; lGammaRouteDenominator =
+        2
+    ; lGammaRouteDenominatorIs2 =
+        refl
+    ; lGammaRouteQuotient =
+        72
+    ; lGammaRouteQuotientIs72 =
+        refl
+    ; finalL_GammaRouteQuotient =
+        48
+    ; finalL_GammaRouteQuotientIs48 =
+        refl
+    ; finalL_GammaRouteMatchesMachineCheckedConstant =
+        refl
+    ; tightAuditedL_GammaRouteQuotient =
+        44
+    ; tightAuditedL_GammaRouteQuotientIs44 =
+        refl
+    ; tightAuditedL_GammaRouteMatchesMachineCheckedTightConstant =
+        refl
+    ; legacyConservativeL_GammaBoundary =
+        "Legacy/conservative Shell A perturbation envelope remains 72; the canonical conservative Nat perturbation route remains 48; the tight audited route is 44."
+    ; routeL_GammaMatchesShellAConstants =
+        refl
+    ; perturbationSplitExposed =
+        Bool.true
+    ; perturbationSplitExposedIsTrue =
+        refl
+    ; fullOrderedQQEstimatePromoted =
+        Bool.false
+    ; fullOrderedQQEstimatePromotedIsFalse =
+        refl
+    ; perturbationRouteText =
+        "Shell A Christoffel perturbation route: conservative checked Nat constant is 48; tight audited Nat constant is 44 from inverseMetricMax 3 and metricDerivativeMax 8; legacy/conservative envelope 1/2 * 4 slots * inverseMetricMax 4 * (metricDerivativeMax 8 + perturbation unit 1) = 72 remains non-promoting."
+    ; perturbationRouteBoundary =
+        "Two-term Christoffel perturbation split is exposed as (delta g^-1) * partial g plus g^-1 * delta(partial g)"
+        ∷ "The finite Christoffel sum contributes the four-slot factor from Fin 4"
+        ∷ "Shell A conservative inverse metric max is recorded as 4; audited inverse metric max is recorded as 3; metric derivative max is recorded as 8"
+        ∷ "The route numerator is 144, denominator is 2, and quotient is the legacy/conservative envelope 72"
+        ∷ "The conservative Shell A perturbation route quotient remains the machine-checked L_Gamma = 48"
+        ∷ "The tight audited Shell A perturbation route quotient is recorded as L_Gamma = 44"
+        ∷ "This receipt does not promote the full ordered QQ estimate; it only names the analytic decomposition required by ChristoffelFormulaC0Stable"
+        ∷ []
+    }
+
+orderedRationalShellAPerturbationRouteL_GammaIs48 :
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.finalL_GammaRouteQuotient
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+  ≡
+  48
+orderedRationalShellAPerturbationRouteL_GammaIs48 =
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.finalL_GammaRouteQuotientIs48
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+orderedRationalShellAPerturbationRouteTightAuditedL_GammaIs44 :
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.tightAuditedL_GammaRouteQuotient
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+  ≡
+  44
+orderedRationalShellAPerturbationRouteTightAuditedL_GammaIs44 =
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.tightAuditedL_GammaRouteQuotientIs44
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+orderedRationalShellAPerturbationRouteTightAuditedMatchesMachineCheckedTightConstant :
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.tightAuditedL_GammaRouteQuotient
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+  ≡
+  MachineCheckedChristoffelC0ConstantReceipt.tightAuditedL_Gamma
+    canonicalMachineCheckedChristoffelC0ConstantReceipt
+orderedRationalShellAPerturbationRouteTightAuditedMatchesMachineCheckedTightConstant =
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.tightAuditedL_GammaRouteMatchesMachineCheckedTightConstant
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+orderedRationalShellAPerturbationRouteAuditedInverseMetricMaxIs3 :
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.auditedShellAInverseMetricMax
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+  ≡
+  3
+orderedRationalShellAPerturbationRouteAuditedInverseMetricMaxIs3 =
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.auditedShellAInverseMetricMaxIs3
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+orderedRationalShellAPerturbationRouteAuditedMetricDerivativeMaxIs8 :
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.auditedShellAMetricDerivativeMax
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+  ≡
+  8
+orderedRationalShellAPerturbationRouteAuditedMetricDerivativeMaxIs8 =
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.auditedShellAMetricDerivativeMaxIs8
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+orderedRationalShellAPerturbationRouteL_GammaIs72 :
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotient
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+  ≡
+  72
+orderedRationalShellAPerturbationRouteL_GammaIs72 =
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotientIs72
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+orderedRationalShellAPerturbationRouteLegacyConservativeL_GammaIs72 :
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotient
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+  ≡
+  72
+orderedRationalShellAPerturbationRouteLegacyConservativeL_GammaIs72 =
+  orderedRationalShellAPerturbationRouteL_GammaIs72
+
+orderedRationalShellAPerturbationRouteMatchesConstants :
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotient
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+  ≡
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+orderedRationalShellAPerturbationRouteMatchesConstants =
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.routeL_GammaMatchesShellAConstants
+    canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+orderedRationalShellAOrderedGaugeToolkit :
+  OrderedRationalGaugeToolkitReceipt
+orderedRationalShellAOrderedGaugeToolkit =
+  OrderedRationalShellAChristoffelC0ConstantReceipt.orderedGaugeToolkit
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+orderedRationalShellAOrderedGaugeToolkitIsCanonical :
+  orderedRationalShellAOrderedGaugeToolkit
+  ≡
+  canonicalOrderedRationalGaugeToolkitReceipt
+orderedRationalShellAOrderedGaugeToolkitIsCanonical =
+  OrderedRationalShellAChristoffelC0ConstantReceipt.orderedGaugeToolkitIsCanonical
+    canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+orderedRationalGaugeD_QQZeroLawPrimitive :
+  OrderedRationalGaugeToolkitReceipt.d_QQZeroLaw
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  d_QQZeroPrimitive
+orderedRationalGaugeD_QQZeroLawPrimitive =
+  orderedRationalGaugeToolkitD_QQZeroPrimitive
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeD_QQSymmetryLawPrimitive :
+  OrderedRationalGaugeToolkitReceipt.d_QQSymmetryLaw
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  d_QQSymmetryPrimitive
+orderedRationalGaugeD_QQSymmetryLawPrimitive =
+  orderedRationalGaugeToolkitD_QQSymmetryPrimitive
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeD_QQTriangleLawPrimitive :
+  OrderedRationalGaugeToolkitReceipt.d_QQTriangleLaw
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  d_QQTrianglePrimitive
+orderedRationalGaugeD_QQTriangleLawPrimitive =
+  orderedRationalGaugeToolkitD_QQTrianglePrimitive
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive :
+  OrderedRationalGaugeToolkitReceipt.threeMinusNNonnegativeLaw
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  threeMinusNNonnegativePrimitive
+orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive =
+  orderedRationalGaugeToolkitThreeMinusNNonnegativePrimitive
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeThreeMinusNPositiveLawPrimitive :
+  OrderedRationalGaugeToolkitReceipt.threeMinusNPositiveLaw
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  threeMinusNPositivePrimitive
+orderedRationalGaugeThreeMinusNPositiveLawPrimitive =
+  orderedRationalGaugeToolkitThreeMinusNPositivePrimitive
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeScale48Is48 :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant48
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  48
+orderedRationalGaugeScale48Is48 =
+  orderedRationalGaugeToolkitScale48Is48
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeScale48NonnegativeLawPrimitive :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLaw
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  nonnegativeScaleBy48Primitive
+orderedRationalGaugeScale48NonnegativeLawPrimitive =
+  orderedRationalGaugeToolkitScale48NonnegativePrimitive
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeScale72Is72 :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant72
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  72
+orderedRationalGaugeScale72Is72 =
+  orderedRationalGaugeToolkitScale72Is72
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeScale72NonnegativeLawPrimitive :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLaw
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  nonnegativeScaleBy72Primitive
+orderedRationalGaugeScale72NonnegativeLawPrimitive =
+  orderedRationalGaugeToolkitScale72NonnegativePrimitive
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeScale80Is80 :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant80
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  80
+orderedRationalGaugeScale80Is80 =
+  orderedRationalGaugeToolkitScale80Is80
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeScale80NonnegativeLawPrimitive :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLaw
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  nonnegativeScaleBy80Primitive
+orderedRationalGaugeScale80NonnegativeLawPrimitive =
+  orderedRationalGaugeToolkitScale80NonnegativePrimitive
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeScale640Is640 :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant640
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  640
+orderedRationalGaugeScale640Is640 =
+  orderedRationalGaugeToolkitScale640Is640
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeScale640NonnegativeLawPrimitive :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLaw
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  nonnegativeScaleBy640Primitive
+orderedRationalGaugeScale640NonnegativeLawPrimitive =
+  orderedRationalGaugeToolkitScale640NonnegativePrimitive
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeOrderedQQTheoremNotPromoted :
+  OrderedRationalGaugeToolkitReceipt.orderedQQTheoremPromoted
+    canonicalOrderedRationalGaugeToolkitReceipt
+  ≡
+  Bool.false
+orderedRationalGaugeOrderedQQTheoremNotPromoted =
+  orderedRationalGaugeToolkitOrderedQQTheoremNotPromoted
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+record OrderedRationalShellADenominatorReciprocalReceipt : Set where
+  field
+    constantsReceipt :
+      OrderedRationalShellAChristoffelC0ConstantReceipt
+
+    constantsReceiptIsCanonical :
+      constantsReceipt
+      ≡
+      canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+
+    radialCoordinateName :
+      String
+
+    schwarzschildRadius :
+      Nat
+
+    schwarzschildRadiusIs2 :
+      schwarzschildRadius ≡ 2
+
+    shellALowerEndpoint :
+      Nat
+
+    shellALowerEndpointIs3 :
+      shellALowerEndpoint ≡ 3
+
+    shellAUpperEndpoint :
+      Nat
+
+    shellAUpperEndpointIs4 :
+      shellAUpperEndpoint ≡ 4
+
+    shellAEndpointLower≤Upper :
+      shellALowerEndpoint ≤ shellAUpperEndpoint
+
+    shellALowerEndpointPositive :
+      1 ≤ shellALowerEndpoint
+
+    schwarzschildRadiusBelowShell :
+      schwarzschildRadius ≤ shellALowerEndpoint
+
+    horizonClearance :
+      Nat
+
+    horizonClearanceIs1 :
+      horizonClearance ≡ 1
+
+    radialMinusSchwarzschildLowerBound :
+      Nat
+
+    radialMinusSchwarzschildLowerBoundIs1 :
+      radialMinusSchwarzschildLowerBound ≡ 1
+
+    radialDenominatorPositiveText :
+      String
+
+    reciprocalRUpperBoundNumerator :
+      Nat
+
+    reciprocalRUpperBoundNumeratorIs1 :
+      reciprocalRUpperBoundNumerator ≡ 1
+
+    reciprocalRUpperBoundDenominator :
+      Nat
+
+    reciprocalRUpperBoundDenominatorIs3 :
+      reciprocalRUpperBoundDenominator ≡ 3
+
+    reciprocalRSquaredUpperBoundNumerator :
+      Nat
+
+    reciprocalRSquaredUpperBoundNumeratorIs1 :
+      reciprocalRSquaredUpperBoundNumerator ≡ 1
+
+    reciprocalRSquaredUpperBoundDenominator :
+      Nat
+
+    reciprocalRSquaredUpperBoundDenominatorIs9 :
+      reciprocalRSquaredUpperBoundDenominator ≡ 9
+
+    reciprocalGapUpperBoundNumerator :
+      Nat
+
+    reciprocalGapUpperBoundNumeratorIs1 :
+      reciprocalGapUpperBoundNumerator ≡ 1
+
+    reciprocalGapUpperBoundDenominator :
+      Nat
+
+    reciprocalGapUpperBoundDenominatorIs1 :
+      reciprocalGapUpperBoundDenominator ≡ 1
+
+    reciprocalGapSquaredUpperBoundNumerator :
+      Nat
+
+    reciprocalGapSquaredUpperBoundNumeratorIs1 :
+      reciprocalGapSquaredUpperBoundNumerator ≡ 1
+
+    reciprocalGapSquaredUpperBoundDenominator :
+      Nat
+
+    reciprocalGapSquaredUpperBoundDenominatorIs1 :
+      reciprocalGapSquaredUpperBoundDenominator ≡ 1
+
+    inverseMetricAbsMax :
+      Nat
+
+    inverseMetricAbsMaxIs4 :
+      inverseMetricAbsMax ≡ 4
+
+    auditedInverseMetricAbsMax :
+      Nat
+
+    auditedInverseMetricAbsMaxIs3 :
+      auditedInverseMetricAbsMax ≡ 3
+
+    metricDerivativeAbsMax :
+      Nat
+
+    metricDerivativeAbsMaxIs8 :
+      metricDerivativeAbsMax ≡ 8
+
+    auditedMetricDerivativeAbsMax :
+      Nat
+
+    auditedMetricDerivativeAbsMaxIs8 :
+      auditedMetricDerivativeAbsMax ≡ 8
+
+    perturbationHalfFactorDenominator :
+      Nat
+
+    perturbationHalfFactorDenominatorIs2 :
+      perturbationHalfFactorDenominator ≡ 2
+
+    finFourSummandCount :
+      Nat
+
+    finFourSummandCountIs4 :
+      finFourSummandCount ≡ 4
+
+    christoffelFormulaEnvelope :
+      Nat
+
+    christoffelFormulaEnvelopeIs72 :
+      christoffelFormulaEnvelope ≡ 72
+
+    finalChristoffelFormulaEnvelope :
+      Nat
+
+    finalChristoffelFormulaEnvelopeIs48 :
+      finalChristoffelFormulaEnvelope ≡ 48
+
+    finalChristoffelFormulaEnvelopeMatchesMachineCheckedConstant :
+      finalChristoffelFormulaEnvelope
+      ≡
+      MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
+        canonicalMachineCheckedChristoffelC0ConstantReceipt
+
+    tightAuditedChristoffelFormulaEnvelope :
+      Nat
+
+    tightAuditedChristoffelFormulaEnvelopeIs44 :
+      tightAuditedChristoffelFormulaEnvelope ≡ 44
+
+    tightAuditedChristoffelFormulaEnvelopeMatchesMachineCheckedTightConstant :
+      tightAuditedChristoffelFormulaEnvelope
+      ≡
+      MachineCheckedChristoffelC0ConstantReceipt.tightAuditedL_Gamma
+        canonicalMachineCheckedChristoffelC0ConstantReceipt
+
+    legacyConservativeChristoffelFormulaEnvelopeBoundary :
+      String
+
+    reciprocalBoundsFeedChristoffelFormulaC0Stable :
+      Bool
+
+    reciprocalBoundsFeedChristoffelFormulaC0StableIsTrue :
+      reciprocalBoundsFeedChristoffelFormulaC0Stable ≡ Bool.true
+
+    orderedQQTheoremPromoted :
+      Bool
+
+    orderedQQTheoremPromotedIsFalse :
+      orderedQQTheoremPromoted ≡ Bool.false
+
+    reciprocalBoundary :
+      List String
+
+canonicalOrderedRationalShellADenominatorReciprocalReceipt :
+  OrderedRationalShellADenominatorReciprocalReceipt
+canonicalOrderedRationalShellADenominatorReciprocalReceipt =
+  record
+    { constantsReceipt =
+        canonicalOrderedRationalShellAChristoffelC0ConstantReceipt
+    ; constantsReceiptIsCanonical =
+        refl
+    ; radialCoordinateName =
+        "r"
+    ; schwarzschildRadius =
+        2
+    ; schwarzschildRadiusIs2 =
+        refl
+    ; shellALowerEndpoint =
+        3
+    ; shellALowerEndpointIs3 =
+        refl
+    ; shellAUpperEndpoint =
+        4
+    ; shellAUpperEndpointIs4 =
+        refl
+    ; shellAEndpointLower≤Upper =
+        s≤s (s≤s (s≤s z≤n))
+    ; shellALowerEndpointPositive =
+        s≤s z≤n
+    ; schwarzschildRadiusBelowShell =
+        s≤s (s≤s z≤n)
+    ; horizonClearance =
+        1
+    ; horizonClearanceIs1 =
+        refl
+    ; radialMinusSchwarzschildLowerBound =
+        1
+    ; radialMinusSchwarzschildLowerBoundIs1 =
+        refl
+    ; radialDenominatorPositiveText =
+        "On Shell A, r in [3,4] and r_s = 2, so r > 0 and r - r_s >= 1."
+    ; reciprocalRUpperBoundNumerator =
+        1
+    ; reciprocalRUpperBoundNumeratorIs1 =
+        refl
+    ; reciprocalRUpperBoundDenominator =
+        3
+    ; reciprocalRUpperBoundDenominatorIs3 =
+        refl
+    ; reciprocalRSquaredUpperBoundNumerator =
+        1
+    ; reciprocalRSquaredUpperBoundNumeratorIs1 =
+        refl
+    ; reciprocalRSquaredUpperBoundDenominator =
+        9
+    ; reciprocalRSquaredUpperBoundDenominatorIs9 =
+        refl
+    ; reciprocalGapUpperBoundNumerator =
+        1
+    ; reciprocalGapUpperBoundNumeratorIs1 =
+        refl
+    ; reciprocalGapUpperBoundDenominator =
+        1
+    ; reciprocalGapUpperBoundDenominatorIs1 =
+        refl
+    ; reciprocalGapSquaredUpperBoundNumerator =
+        1
+    ; reciprocalGapSquaredUpperBoundNumeratorIs1 =
+        refl
+    ; reciprocalGapSquaredUpperBoundDenominator =
+        1
+    ; reciprocalGapSquaredUpperBoundDenominatorIs1 =
+        refl
+    ; inverseMetricAbsMax =
+        4
+    ; inverseMetricAbsMaxIs4 =
+        refl
+    ; auditedInverseMetricAbsMax =
+        3
+    ; auditedInverseMetricAbsMaxIs3 =
+        refl
+    ; metricDerivativeAbsMax =
+        8
+    ; metricDerivativeAbsMaxIs8 =
+        refl
+    ; auditedMetricDerivativeAbsMax =
+        8
+    ; auditedMetricDerivativeAbsMaxIs8 =
+        refl
+    ; perturbationHalfFactorDenominator =
+        2
+    ; perturbationHalfFactorDenominatorIs2 =
+        refl
+    ; finFourSummandCount =
+        4
+    ; finFourSummandCountIs4 =
+        refl
+    ; christoffelFormulaEnvelope =
+        72
+    ; christoffelFormulaEnvelopeIs72 =
+        refl
+    ; finalChristoffelFormulaEnvelope =
+        48
+    ; finalChristoffelFormulaEnvelopeIs48 =
+        refl
+    ; finalChristoffelFormulaEnvelopeMatchesMachineCheckedConstant =
+        refl
+    ; tightAuditedChristoffelFormulaEnvelope =
+        44
+    ; tightAuditedChristoffelFormulaEnvelopeIs44 =
+        refl
+    ; tightAuditedChristoffelFormulaEnvelopeMatchesMachineCheckedTightConstant =
+        refl
+    ; legacyConservativeChristoffelFormulaEnvelopeBoundary =
+        "Legacy/conservative Shell A denominator envelope remains 72; the final canonical conservative Christoffel formula envelope remains 48; the tight audited envelope is 44."
+    ; reciprocalBoundsFeedChristoffelFormulaC0Stable =
+        Bool.true
+    ; reciprocalBoundsFeedChristoffelFormulaC0StableIsTrue =
+        refl
+    ; orderedQQTheoremPromoted =
+        Bool.false
+    ; orderedQQTheoremPromotedIsFalse =
+        refl
+    ; reciprocalBoundary =
+        "Shell A denominator surface: r in [3,4], r_s = 2, horizon clearance delta = 1"
+        ∷ "The denominators used by Schwarzschild Christoffel formulae are positive: r > 0 and r - r_s >= 1"
+        ∷ "Reciprocal bounds recorded for the analytic kernel: 1/r <= 1/3, 1/r^2 <= 1/9, 1/(r-r_s) <= 1, and 1/(r-r_s)^2 <= 1"
+        ∷ "Conservative inverse metric sup bound is recorded as 4; audited inverse metric sup bound is recorded as 3; metric-derivative sup bound is recorded as 8 on Shell A"
+        ∷ "These bounds feed the legacy/conservative Christoffel perturbation envelope 1/2 * 4 * 4 * (8 + 1) = 72"
+        ∷ "The conservative Shell A Christoffel formula envelope remains the machine-checked L_Gamma = 48"
+        ∷ "The tight audited Shell A Christoffel formula envelope is recorded as L_Gamma = 44"
+        ∷ "This is a denominator and reciprocal receipt only; it does not promote an ordered QQ theorem"
+        ∷ []
+    }
+
+orderedRationalShellADenominatorInverseMetricAbsMaxIs4 :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.inverseMetricAbsMax
+    receipt
+  ≡
+  4
+orderedRationalShellADenominatorInverseMetricAbsMaxIs4 receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.inverseMetricAbsMaxIs4
+    receipt
+
+orderedRationalShellADenominatorAuditedInverseMetricAbsMaxIs3 :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.auditedInverseMetricAbsMax
+    receipt
+  ≡
+  3
+orderedRationalShellADenominatorAuditedInverseMetricAbsMaxIs3 receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.auditedInverseMetricAbsMaxIs3
+    receipt
+
+orderedRationalShellADenominatorMetricDerivativeAbsMaxIs8 :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.metricDerivativeAbsMax
+    receipt
+  ≡
+  8
+orderedRationalShellADenominatorMetricDerivativeAbsMaxIs8 receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.metricDerivativeAbsMaxIs8
+    receipt
+
+orderedRationalShellADenominatorAuditedMetricDerivativeAbsMaxIs8 :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.auditedMetricDerivativeAbsMax
+    receipt
+  ≡
+  8
+orderedRationalShellADenominatorAuditedMetricDerivativeAbsMaxIs8 receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.auditedMetricDerivativeAbsMaxIs8
+    receipt
+
+orderedRationalShellADenominatorFinalEnvelopeIs48 :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.finalChristoffelFormulaEnvelope
+    receipt
+  ≡
+  48
+orderedRationalShellADenominatorFinalEnvelopeIs48 receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.finalChristoffelFormulaEnvelopeIs48
+    receipt
+
+orderedRationalShellADenominatorFinalEnvelopeMatchesMachineCheckedConstant :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.finalChristoffelFormulaEnvelope
+    receipt
+  ≡
+  MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
+    canonicalMachineCheckedChristoffelC0ConstantReceipt
+orderedRationalShellADenominatorFinalEnvelopeMatchesMachineCheckedConstant receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.finalChristoffelFormulaEnvelopeMatchesMachineCheckedConstant
+    receipt
+
+orderedRationalShellADenominatorTightAuditedEnvelopeIs44 :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.tightAuditedChristoffelFormulaEnvelope
+    receipt
+  ≡
+  44
+orderedRationalShellADenominatorTightAuditedEnvelopeIs44 receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.tightAuditedChristoffelFormulaEnvelopeIs44
+    receipt
+
+orderedRationalShellADenominatorTightAuditedEnvelopeMatchesMachineCheckedTightConstant :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.tightAuditedChristoffelFormulaEnvelope
+    receipt
+  ≡
+  MachineCheckedChristoffelC0ConstantReceipt.tightAuditedL_Gamma
+    canonicalMachineCheckedChristoffelC0ConstantReceipt
+orderedRationalShellADenominatorTightAuditedEnvelopeMatchesMachineCheckedTightConstant receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.tightAuditedChristoffelFormulaEnvelopeMatchesMachineCheckedTightConstant
+    receipt
+
+orderedRationalShellADenominatorLegacyEnvelopeIs72 :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.christoffelFormulaEnvelope
+    receipt
+  ≡
+  72
+orderedRationalShellADenominatorLegacyEnvelopeIs72 receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.christoffelFormulaEnvelopeIs72
+    receipt
+
+orderedRationalShellADenominatorReciprocalFeedsChristoffelFormulaC0Stable :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.reciprocalBoundsFeedChristoffelFormulaC0Stable
+    receipt
+  ≡
+  Bool.true
+orderedRationalShellADenominatorReciprocalFeedsChristoffelFormulaC0Stable receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.reciprocalBoundsFeedChristoffelFormulaC0StableIsTrue
+    receipt
+
+orderedRationalShellAInverseMetricAbsMaxIs4 :
+  OrderedRationalShellADenominatorReciprocalReceipt.inverseMetricAbsMax
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  4
+orderedRationalShellAInverseMetricAbsMaxIs4 =
+  orderedRationalShellADenominatorInverseMetricAbsMaxIs4
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAAuditedInverseMetricAbsMaxIs3 :
+  OrderedRationalShellADenominatorReciprocalReceipt.auditedInverseMetricAbsMax
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  3
+orderedRationalShellAAuditedInverseMetricAbsMaxIs3 =
+  orderedRationalShellADenominatorAuditedInverseMetricAbsMaxIs3
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAMetricDerivativeAbsMaxIs8 :
+  OrderedRationalShellADenominatorReciprocalReceipt.metricDerivativeAbsMax
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  8
+orderedRationalShellAMetricDerivativeAbsMaxIs8 =
+  orderedRationalShellADenominatorMetricDerivativeAbsMaxIs8
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAAuditedMetricDerivativeAbsMaxIs8 :
+  OrderedRationalShellADenominatorReciprocalReceipt.auditedMetricDerivativeAbsMax
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  8
+orderedRationalShellAAuditedMetricDerivativeAbsMaxIs8 =
+  orderedRationalShellADenominatorAuditedMetricDerivativeAbsMaxIs8
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAChristoffelFormulaEnvelopeIs48 :
+  OrderedRationalShellADenominatorReciprocalReceipt.finalChristoffelFormulaEnvelope
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  48
+orderedRationalShellAChristoffelFormulaEnvelopeIs48 =
+  orderedRationalShellADenominatorFinalEnvelopeIs48
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAChristoffelFormulaEnvelopeMatchesMachineCheckedConstant :
+  OrderedRationalShellADenominatorReciprocalReceipt.finalChristoffelFormulaEnvelope
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
+    canonicalMachineCheckedChristoffelC0ConstantReceipt
+orderedRationalShellAChristoffelFormulaEnvelopeMatchesMachineCheckedConstant =
+  orderedRationalShellADenominatorFinalEnvelopeMatchesMachineCheckedConstant
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAChristoffelFormulaTightAuditedEnvelopeIs44 :
+  OrderedRationalShellADenominatorReciprocalReceipt.tightAuditedChristoffelFormulaEnvelope
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  44
+orderedRationalShellAChristoffelFormulaTightAuditedEnvelopeIs44 =
+  orderedRationalShellADenominatorTightAuditedEnvelopeIs44
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAChristoffelFormulaTightAuditedEnvelopeMatchesMachineCheckedTightConstant :
+  OrderedRationalShellADenominatorReciprocalReceipt.tightAuditedChristoffelFormulaEnvelope
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  MachineCheckedChristoffelC0ConstantReceipt.tightAuditedL_Gamma
+    canonicalMachineCheckedChristoffelC0ConstantReceipt
+orderedRationalShellAChristoffelFormulaTightAuditedEnvelopeMatchesMachineCheckedTightConstant =
+  orderedRationalShellADenominatorTightAuditedEnvelopeMatchesMachineCheckedTightConstant
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAChristoffelFormulaEnvelopeIs72 :
+  OrderedRationalShellADenominatorReciprocalReceipt.christoffelFormulaEnvelope
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  72
+orderedRationalShellAChristoffelFormulaEnvelopeIs72 =
+  orderedRationalShellADenominatorLegacyEnvelopeIs72
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAChristoffelFormulaLegacyConservativeEnvelopeIs72 :
+  OrderedRationalShellADenominatorReciprocalReceipt.christoffelFormulaEnvelope
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  72
+orderedRationalShellAChristoffelFormulaLegacyConservativeEnvelopeIs72 =
+  orderedRationalShellAChristoffelFormulaEnvelopeIs72
+
+orderedRationalShellARadialMinusSchwarzschildLowerBoundIs1 :
+  OrderedRationalShellADenominatorReciprocalReceipt.radialMinusSchwarzschildLowerBound
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  1
+orderedRationalShellARadialMinusSchwarzschildLowerBoundIs1 =
+  OrderedRationalShellADenominatorReciprocalReceipt.radialMinusSchwarzschildLowerBoundIs1
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAReciprocalBoundsFeedChristoffelFormulaC0Stable :
+  OrderedRationalShellADenominatorReciprocalReceipt.reciprocalBoundsFeedChristoffelFormulaC0Stable
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  Bool.true
+orderedRationalShellAReciprocalBoundsFeedChristoffelFormulaC0Stable =
+  orderedRationalShellADenominatorReciprocalFeedsChristoffelFormulaC0Stable
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
 
 record FiniteCarrierChristoffelC0FromDerivativeLaw
   (rate : ContinuumLimitEpsilonRateSurface)
@@ -1212,6 +2626,110 @@ record FiniteCarrierChristoffelC0FromDerivativeLaw
         orderedShellAConstants
       ≡
       shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
+
+    orderedShellAPerturbationRoute :
+      OrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+    orderedShellAPerturbationRouteAreCanonical :
+      orderedShellAPerturbationRoute
+      ≡
+      canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+    orderedShellAPerturbationRouteL_GammaIs48 :
+      OrderedRationalShellAChristoffelPerturbationRouteReceipt.finalL_GammaRouteQuotient
+        orderedShellAPerturbationRoute
+      ≡
+      48
+
+    orderedShellAPerturbationRouteL_GammaIs72 :
+      OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotient
+        orderedShellAPerturbationRoute
+      ≡
+      72
+
+    orderedShellAPerturbationRouteMatchesConstants :
+      OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotient
+        orderedShellAPerturbationRoute
+      ≡
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+        orderedShellAConstants
+
+    orderedGaugeToolkit :
+      OrderedRationalGaugeToolkitReceipt
+
+    orderedGaugeToolkitIsCanonical :
+      orderedGaugeToolkit ≡ canonicalOrderedRationalGaugeToolkitReceipt
+
+    orderedGaugeD_QQZeroLaw :
+      OrderedRationalGaugeToolkitReceipt.d_QQZeroLaw orderedGaugeToolkit
+      ≡
+      d_QQZeroPrimitive
+
+    orderedGaugeD_QQSymmetryLaw :
+      OrderedRationalGaugeToolkitReceipt.d_QQSymmetryLaw orderedGaugeToolkit
+      ≡
+      d_QQSymmetryPrimitive
+
+    orderedGaugeD_QQTriangleLaw :
+      OrderedRationalGaugeToolkitReceipt.d_QQTriangleLaw orderedGaugeToolkit
+      ≡
+      d_QQTrianglePrimitive
+
+    orderedGaugeThreeMinusNNonnegativeLaw :
+      OrderedRationalGaugeToolkitReceipt.threeMinusNNonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      threeMinusNNonnegativePrimitive
+
+    orderedGaugeThreeMinusNPositiveLaw :
+      OrderedRationalGaugeToolkitReceipt.threeMinusNPositiveLaw
+        orderedGaugeToolkit
+      ≡
+      threeMinusNPositivePrimitive
+
+    orderedGaugeScale48Is48 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant48 orderedGaugeToolkit
+      ≡
+      48
+
+    orderedGaugeScale48NonnegativeLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy48Primitive
+
+    orderedGaugeScale72Is72 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant72 orderedGaugeToolkit
+      ≡
+      72
+
+    orderedGaugeScale72NonnegativeLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy72Primitive
+
+    orderedGaugeScale80Is80 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant80 orderedGaugeToolkit
+      ≡
+      80
+
+    orderedGaugeScale80NonnegativeLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy80Primitive
+
+    orderedGaugeScale640Is640 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant640 orderedGaugeToolkit
+      ≡
+      640
+
+    orderedGaugeScale640NonnegativeLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy640Primitive
 
     finitePartialControl :
       (ε : Epsilon) →
@@ -1853,6 +3371,83 @@ record SymbolicRationalChristoffelC0SelectedConstantReceipt : Set where
       ≡
       shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
 
+    orderedGaugeToolkit :
+      OrderedRationalGaugeToolkitReceipt
+
+    orderedGaugeToolkitIsCanonical :
+      orderedGaugeToolkit ≡ canonicalOrderedRationalGaugeToolkitReceipt
+
+    orderedGaugeD_QQZeroLawSelected :
+      OrderedRationalGaugeToolkitReceipt.d_QQZeroLaw orderedGaugeToolkit
+      ≡
+      d_QQZeroPrimitive
+
+    orderedGaugeD_QQSymmetryLawSelected :
+      OrderedRationalGaugeToolkitReceipt.d_QQSymmetryLaw orderedGaugeToolkit
+      ≡
+      d_QQSymmetryPrimitive
+
+    orderedGaugeD_QQTriangleLawSelected :
+      OrderedRationalGaugeToolkitReceipt.d_QQTriangleLaw orderedGaugeToolkit
+      ≡
+      d_QQTrianglePrimitive
+
+    orderedGaugeThreeMinusNNonnegativeLawSelected :
+      OrderedRationalGaugeToolkitReceipt.threeMinusNNonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      threeMinusNNonnegativePrimitive
+
+    orderedGaugeThreeMinusNPositiveLawSelected :
+      OrderedRationalGaugeToolkitReceipt.threeMinusNPositiveLaw
+        orderedGaugeToolkit
+      ≡
+      threeMinusNPositivePrimitive
+
+    orderedGaugeScale48SelectedAs48 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant48 orderedGaugeToolkit
+      ≡
+      48
+
+    orderedGaugeScale48NonnegativeLawSelected :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy48Primitive
+
+    orderedGaugeScale72SelectedAs72 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant72 orderedGaugeToolkit
+      ≡
+      72
+
+    orderedGaugeScale72NonnegativeLawSelected :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy72Primitive
+
+    orderedGaugeScale80SelectedAs80 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant80 orderedGaugeToolkit
+      ≡
+      80
+
+    orderedGaugeScale80NonnegativeLawSelected :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy80Primitive
+
+    orderedGaugeScale640SelectedAs640 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant640 orderedGaugeToolkit
+      ≡
+      640
+
+    orderedGaugeScale640NonnegativeLawSelected :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy640Primitive
+
     selectedTight_C_GammaNat :
       Nat
 
@@ -1931,6 +3526,36 @@ canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt =
         orderedRationalShellA_CPrime_GammaDenominatorIs27
     ; orderedShellARequestedInequalityPrimitiveSelected =
         orderedRationalShellARequestedInequalityPrimitive
+    ; orderedGaugeToolkit =
+        canonicalOrderedRationalGaugeToolkitReceipt
+    ; orderedGaugeToolkitIsCanonical =
+        refl
+    ; orderedGaugeD_QQZeroLawSelected =
+        orderedRationalGaugeD_QQZeroLawPrimitive
+    ; orderedGaugeD_QQSymmetryLawSelected =
+        orderedRationalGaugeD_QQSymmetryLawPrimitive
+    ; orderedGaugeD_QQTriangleLawSelected =
+        orderedRationalGaugeD_QQTriangleLawPrimitive
+    ; orderedGaugeThreeMinusNNonnegativeLawSelected =
+        orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive
+    ; orderedGaugeThreeMinusNPositiveLawSelected =
+        orderedRationalGaugeThreeMinusNPositiveLawPrimitive
+    ; orderedGaugeScale48SelectedAs48 =
+        orderedRationalGaugeScale48Is48
+    ; orderedGaugeScale48NonnegativeLawSelected =
+        orderedRationalGaugeScale48NonnegativeLawPrimitive
+    ; orderedGaugeScale72SelectedAs72 =
+        orderedRationalGaugeScale72Is72
+    ; orderedGaugeScale72NonnegativeLawSelected =
+        orderedRationalGaugeScale72NonnegativeLawPrimitive
+    ; orderedGaugeScale80SelectedAs80 =
+        orderedRationalGaugeScale80Is80
+    ; orderedGaugeScale80NonnegativeLawSelected =
+        orderedRationalGaugeScale80NonnegativeLawPrimitive
+    ; orderedGaugeScale640SelectedAs640 =
+        orderedRationalGaugeScale640Is640
+    ; orderedGaugeScale640NonnegativeLawSelected =
+        orderedRationalGaugeScale640NonnegativeLawPrimitive
     ; selectedTight_C_GammaNat =
         1
     ; selectedTight_C_GammaNatIs1 =
@@ -1975,6 +3600,7 @@ canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt =
         "Selected/tight C_Gamma is recorded as Nat 1 for this selected symbolic-rational kernel surface"
         ∷ "Ordered rational Shell A constants are recorded canonically: [3,4], L_Gamma = 72, C_R = 80, C_Gamma = 1, C'_Gamma = 26/27"
         ∷ "The ordered rational inequality C'_Gamma <= C_Gamma is selected only as the named primitive shape"
+        ∷ "The ordered rational gauge toolkit is selected canonically for d_QQ laws, threeMinusN gauge positivity, and nonnegative scaling constants"
         ∷ "The conservative shell records analytic 5/3 textually and threads the existing Nat-compatible shell C_Gamma = 2"
         ∷ "Formula stability records checked Nat 48 and optional tight 11/9 textually"
         ∷ "Ricci/contraction receipt records 48/640 as Nat numerator 48 and Nat denominator 640"
@@ -2060,6 +3686,145 @@ selectedSymbolicRationalOrderedShellARequestedInequalityPrimitive =
   SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedShellARequestedInequalityPrimitiveSelected
     canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
 
+selectedSymbolicRationalOrderedGaugeToolkitIsCanonical :
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  ≡
+  canonicalOrderedRationalGaugeToolkitReceipt
+selectedSymbolicRationalOrderedGaugeToolkitIsCanonical =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkitIsCanonical
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeD_QQZeroLaw :
+  OrderedRationalGaugeToolkitReceipt.d_QQZeroLaw
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  d_QQZeroPrimitive
+selectedSymbolicRationalOrderedGaugeD_QQZeroLaw =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeD_QQZeroLawSelected
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeD_QQSymmetryLaw :
+  OrderedRationalGaugeToolkitReceipt.d_QQSymmetryLaw
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  d_QQSymmetryPrimitive
+selectedSymbolicRationalOrderedGaugeD_QQSymmetryLaw =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeD_QQSymmetryLawSelected
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeD_QQTriangleLaw :
+  OrderedRationalGaugeToolkitReceipt.d_QQTriangleLaw
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  d_QQTrianglePrimitive
+selectedSymbolicRationalOrderedGaugeD_QQTriangleLaw =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeD_QQTriangleLawSelected
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeThreeMinusNNonnegativeLaw :
+  OrderedRationalGaugeToolkitReceipt.threeMinusNNonnegativeLaw
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  threeMinusNNonnegativePrimitive
+selectedSymbolicRationalOrderedGaugeThreeMinusNNonnegativeLaw =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeThreeMinusNNonnegativeLawSelected
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeThreeMinusNPositiveLaw :
+  OrderedRationalGaugeToolkitReceipt.threeMinusNPositiveLaw
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  threeMinusNPositivePrimitive
+selectedSymbolicRationalOrderedGaugeThreeMinusNPositiveLaw =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeThreeMinusNPositiveLawSelected
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeScale48Is48 :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant48
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  48
+selectedSymbolicRationalOrderedGaugeScale48Is48 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale48SelectedAs48
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeScale48NonnegativeLaw :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLaw
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  nonnegativeScaleBy48Primitive
+selectedSymbolicRationalOrderedGaugeScale48NonnegativeLaw =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale48NonnegativeLawSelected
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeScale72Is72 :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant72
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  72
+selectedSymbolicRationalOrderedGaugeScale72Is72 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale72SelectedAs72
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeScale72NonnegativeLaw :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLaw
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  nonnegativeScaleBy72Primitive
+selectedSymbolicRationalOrderedGaugeScale72NonnegativeLaw =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale72NonnegativeLawSelected
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeScale80Is80 :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant80
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  80
+selectedSymbolicRationalOrderedGaugeScale80Is80 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale80SelectedAs80
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeScale80NonnegativeLaw :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLaw
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  nonnegativeScaleBy80Primitive
+selectedSymbolicRationalOrderedGaugeScale80NonnegativeLaw =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale80NonnegativeLawSelected
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeScale640Is640 :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant640
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  640
+selectedSymbolicRationalOrderedGaugeScale640Is640 =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale640SelectedAs640
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
+selectedSymbolicRationalOrderedGaugeScale640NonnegativeLaw :
+  OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLaw
+    (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+      canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt)
+  ≡
+  nonnegativeScaleBy640Primitive
+selectedSymbolicRationalOrderedGaugeScale640NonnegativeLaw =
+  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale640NonnegativeLawSelected
+    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+
 selectedSymbolicRationalChristoffelC0FormulaStabilityIs48 :
   SymbolicRationalChristoffelC0SelectedConstantReceipt.formulaStabilityConstantNat
     canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
@@ -2133,6 +3898,162 @@ record SymbolicRationalChristoffelC0StabilityKernel : Setω where
       ≡
       shellA_CPrime_Gamma26Over27≤C_Gamma1Primitive
 
+    orderedGaugeToolkit :
+      OrderedRationalGaugeToolkitReceipt
+
+    orderedGaugeToolkitIsCanonical :
+      orderedGaugeToolkit ≡ canonicalOrderedRationalGaugeToolkitReceipt
+
+    orderedGaugeD_QQZeroLaw :
+      OrderedRationalGaugeToolkitReceipt.d_QQZeroLaw orderedGaugeToolkit
+      ≡
+      d_QQZeroPrimitive
+
+    orderedGaugeD_QQSymmetryLaw :
+      OrderedRationalGaugeToolkitReceipt.d_QQSymmetryLaw orderedGaugeToolkit
+      ≡
+      d_QQSymmetryPrimitive
+
+    orderedGaugeD_QQTriangleLaw :
+      OrderedRationalGaugeToolkitReceipt.d_QQTriangleLaw orderedGaugeToolkit
+      ≡
+      d_QQTrianglePrimitive
+
+    orderedGaugeThreeMinusNNonnegativeLaw :
+      OrderedRationalGaugeToolkitReceipt.threeMinusNNonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      threeMinusNNonnegativePrimitive
+
+    orderedGaugeThreeMinusNPositiveLaw :
+      OrderedRationalGaugeToolkitReceipt.threeMinusNPositiveLaw
+        orderedGaugeToolkit
+      ≡
+      threeMinusNPositivePrimitive
+
+    orderedGaugeScale48Is48 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant48 orderedGaugeToolkit
+      ≡
+      48
+
+    orderedGaugeScale48NonnegativeLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy48Primitive
+
+    orderedGaugeScale72Is72 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant72 orderedGaugeToolkit
+      ≡
+      72
+
+    orderedGaugeScale72NonnegativeLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy72Primitive
+
+    orderedGaugeScale80Is80 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant80 orderedGaugeToolkit
+      ≡
+      80
+
+    orderedGaugeScale80NonnegativeLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy80Primitive
+
+    orderedGaugeScale640Is640 :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant640 orderedGaugeToolkit
+      ≡
+      640
+
+    orderedGaugeScale640NonnegativeLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLaw
+        orderedGaugeToolkit
+      ≡
+      nonnegativeScaleBy640Primitive
+
+    shellADenominatorReciprocal :
+      OrderedRationalShellADenominatorReciprocalReceipt
+
+    shellADenominatorReciprocalIsCanonical :
+      shellADenominatorReciprocal
+      ≡
+      canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+    shellAInverseMetricAbsMaxIs4 :
+      OrderedRationalShellADenominatorReciprocalReceipt.inverseMetricAbsMax
+        shellADenominatorReciprocal
+      ≡
+      4
+
+    shellAMetricDerivativeAbsMaxIs8 :
+      OrderedRationalShellADenominatorReciprocalReceipt.metricDerivativeAbsMax
+        shellADenominatorReciprocal
+      ≡
+      8
+
+    shellAChristoffelFormulaEnvelopeIs48 :
+      OrderedRationalShellADenominatorReciprocalReceipt.finalChristoffelFormulaEnvelope
+        shellADenominatorReciprocal
+      ≡
+      48
+
+    shellAChristoffelFormulaEnvelopeIs72 :
+      OrderedRationalShellADenominatorReciprocalReceipt.christoffelFormulaEnvelope
+        shellADenominatorReciprocal
+      ≡
+      72
+
+    shellAReciprocalBoundsFeedChristoffelFormulaC0Stable :
+      OrderedRationalShellADenominatorReciprocalReceipt.reciprocalBoundsFeedChristoffelFormulaC0Stable
+        shellADenominatorReciprocal
+      ≡
+      Bool.true
+
+    orderedShellAPerturbationRoute :
+      OrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+    orderedShellAPerturbationRouteAreCanonical :
+      orderedShellAPerturbationRoute
+      ≡
+      canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
+
+    orderedShellAPerturbationRouteL_GammaIs48 :
+      OrderedRationalShellAChristoffelPerturbationRouteReceipt.finalL_GammaRouteQuotient
+        orderedShellAPerturbationRoute
+      ≡
+      48
+
+    orderedShellAPerturbationRouteL_GammaIs72 :
+      OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotient
+        orderedShellAPerturbationRoute
+      ≡
+      72
+
+    orderedShellAPerturbationRouteMatchesConstants :
+      OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotient
+        orderedShellAPerturbationRoute
+      ≡
+      OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+        orderedShellAConstants
+
+    perturbationRouteInverseMetricMaxMatchesDenominatorReceipt :
+      OrderedRationalShellAChristoffelPerturbationRouteReceipt.shellAInverseMetricMax
+        orderedShellAPerturbationRoute
+      ≡
+      OrderedRationalShellADenominatorReciprocalReceipt.inverseMetricAbsMax
+        shellADenominatorReciprocal
+
+    perturbationRouteDerivativeMaxMatchesDenominatorReceipt :
+      OrderedRationalShellAChristoffelPerturbationRouteReceipt.shellAMetricDerivativeMax
+        orderedShellAPerturbationRoute
+      ≡
+      OrderedRationalShellADenominatorReciprocalReceipt.metricDerivativeAbsMax
+        shellADenominatorReciprocal
+
     ChristoffelFormulaC0Stable :
       Nat →
       Nat →
@@ -2177,6 +4098,476 @@ record SymbolicRationalChristoffelC0StabilityKernel : Setω where
 
     kernelBoundary :
       List String
+
+symbolicRationalKernelOrderedGaugeToolkitIsCanonical :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+    kernel
+  ≡
+  canonicalOrderedRationalGaugeToolkitReceipt
+symbolicRationalKernelOrderedGaugeToolkitIsCanonical kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkitIsCanonical
+    kernel
+
+symbolicRationalKernelOrderedGaugeOrderedQQTheoremNotPromoted :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.orderedQQTheoremPromoted
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  Bool.false
+symbolicRationalKernelOrderedGaugeOrderedQQTheoremNotPromoted kernel =
+  orderedRationalGaugeToolkitOrderedQQTheoremNotPromoted
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+
+symbolicRationalKernelOrderedGaugeD_QQZeroLaw :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.d_QQZeroLaw
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  d_QQZeroPrimitive
+symbolicRationalKernelOrderedGaugeD_QQZeroLaw kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeD_QQZeroLaw
+    kernel
+
+symbolicRationalKernelOrderedGaugeD_QQSymmetryLaw :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.d_QQSymmetryLaw
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  d_QQSymmetryPrimitive
+symbolicRationalKernelOrderedGaugeD_QQSymmetryLaw kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeD_QQSymmetryLaw
+    kernel
+
+symbolicRationalKernelOrderedGaugeD_QQTriangleLaw :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.d_QQTriangleLaw
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  d_QQTrianglePrimitive
+symbolicRationalKernelOrderedGaugeD_QQTriangleLaw kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeD_QQTriangleLaw
+    kernel
+
+symbolicRationalKernelOrderedGaugeThreeMinusNNonnegativeLaw :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.threeMinusNNonnegativeLaw
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  threeMinusNNonnegativePrimitive
+symbolicRationalKernelOrderedGaugeThreeMinusNNonnegativeLaw kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeThreeMinusNNonnegativeLaw
+    kernel
+
+symbolicRationalKernelOrderedGaugeThreeMinusNPositiveLaw :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.threeMinusNPositiveLaw
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  threeMinusNPositivePrimitive
+symbolicRationalKernelOrderedGaugeThreeMinusNPositiveLaw kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeThreeMinusNPositiveLaw
+    kernel
+
+symbolicRationalKernelOrderedGaugeScale48Is48 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant48
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  48
+symbolicRationalKernelOrderedGaugeScale48Is48 kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale48Is48
+    kernel
+
+symbolicRationalKernelOrderedGaugeScale48NonnegativeLaw :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLaw
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  nonnegativeScaleBy48Primitive
+symbolicRationalKernelOrderedGaugeScale48NonnegativeLaw kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale48NonnegativeLaw
+    kernel
+
+symbolicRationalKernelOrderedGaugeScale72Is72 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant72
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  72
+symbolicRationalKernelOrderedGaugeScale72Is72 kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale72Is72
+    kernel
+
+symbolicRationalKernelOrderedGaugeScale72NonnegativeLaw :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLaw
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  nonnegativeScaleBy72Primitive
+symbolicRationalKernelOrderedGaugeScale72NonnegativeLaw kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale72NonnegativeLaw
+    kernel
+
+symbolicRationalKernelOrderedGaugeScale80Is80 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant80
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  80
+symbolicRationalKernelOrderedGaugeScale80Is80 kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale80Is80
+    kernel
+
+symbolicRationalKernelOrderedGaugeScale80NonnegativeLaw :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLaw
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  nonnegativeScaleBy80Primitive
+symbolicRationalKernelOrderedGaugeScale80NonnegativeLaw kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale80NonnegativeLaw
+    kernel
+
+symbolicRationalKernelOrderedGaugeScale640Is640 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant640
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  640
+symbolicRationalKernelOrderedGaugeScale640Is640 kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale640Is640
+    kernel
+
+symbolicRationalKernelOrderedGaugeScale640NonnegativeLaw :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLaw
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+      kernel)
+  ≡
+  nonnegativeScaleBy640Primitive
+symbolicRationalKernelOrderedGaugeScale640NonnegativeLaw kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale640NonnegativeLaw
+    kernel
+
+symbolicRationalKernelShellADenominatorReciprocalIsCanonical :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+    kernel
+  ≡
+  canonicalOrderedRationalShellADenominatorReciprocalReceipt
+symbolicRationalKernelShellADenominatorReciprocalIsCanonical kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocalIsCanonical
+    kernel
+
+symbolicRationalKernelShellAInverseMetricAbsMaxIs4 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellADenominatorReciprocalReceipt.inverseMetricAbsMax
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+  ≡
+  4
+symbolicRationalKernelShellAInverseMetricAbsMaxIs4 kernel =
+  orderedRationalShellADenominatorInverseMetricAbsMaxIs4
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+
+symbolicRationalKernelShellAAuditedInverseMetricAbsMaxIs3 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellADenominatorReciprocalReceipt.auditedInverseMetricAbsMax
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+  ≡
+  3
+symbolicRationalKernelShellAAuditedInverseMetricAbsMaxIs3 kernel =
+  orderedRationalShellADenominatorAuditedInverseMetricAbsMaxIs3
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+
+symbolicRationalKernelShellAMetricDerivativeAbsMaxIs8 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellADenominatorReciprocalReceipt.metricDerivativeAbsMax
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+  ≡
+  8
+symbolicRationalKernelShellAMetricDerivativeAbsMaxIs8 kernel =
+  orderedRationalShellADenominatorMetricDerivativeAbsMaxIs8
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+
+symbolicRationalKernelShellAAuditedMetricDerivativeAbsMaxIs8 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellADenominatorReciprocalReceipt.auditedMetricDerivativeAbsMax
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+  ≡
+  8
+symbolicRationalKernelShellAAuditedMetricDerivativeAbsMaxIs8 kernel =
+  orderedRationalShellADenominatorAuditedMetricDerivativeAbsMaxIs8
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+
+symbolicRationalKernelShellAChristoffelFormulaEnvelopeIs48 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellADenominatorReciprocalReceipt.finalChristoffelFormulaEnvelope
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+  ≡
+  48
+symbolicRationalKernelShellAChristoffelFormulaEnvelopeIs48 kernel =
+  orderedRationalShellADenominatorFinalEnvelopeIs48
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+
+symbolicRationalKernelShellAChristoffelFormulaEnvelopeMatchesMachineCheckedConstant :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellADenominatorReciprocalReceipt.finalChristoffelFormulaEnvelope
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+  ≡
+  MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
+    canonicalMachineCheckedChristoffelC0ConstantReceipt
+symbolicRationalKernelShellAChristoffelFormulaEnvelopeMatchesMachineCheckedConstant kernel =
+  orderedRationalShellADenominatorFinalEnvelopeMatchesMachineCheckedConstant
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+
+symbolicRationalKernelShellAChristoffelFormulaTightAuditedEnvelopeIs44 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellADenominatorReciprocalReceipt.tightAuditedChristoffelFormulaEnvelope
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+  ≡
+  44
+symbolicRationalKernelShellAChristoffelFormulaTightAuditedEnvelopeIs44 kernel =
+  orderedRationalShellADenominatorTightAuditedEnvelopeIs44
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+
+symbolicRationalKernelShellAChristoffelFormulaTightAuditedEnvelopeMatchesMachineCheckedTightConstant :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellADenominatorReciprocalReceipt.tightAuditedChristoffelFormulaEnvelope
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+  ≡
+  MachineCheckedChristoffelC0ConstantReceipt.tightAuditedL_Gamma
+    canonicalMachineCheckedChristoffelC0ConstantReceipt
+symbolicRationalKernelShellAChristoffelFormulaTightAuditedEnvelopeMatchesMachineCheckedTightConstant kernel =
+  orderedRationalShellADenominatorTightAuditedEnvelopeMatchesMachineCheckedTightConstant
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+
+symbolicRationalKernelShellAChristoffelFormulaEnvelopeIs72 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellADenominatorReciprocalReceipt.christoffelFormulaEnvelope
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+  ≡
+  72
+symbolicRationalKernelShellAChristoffelFormulaEnvelopeIs72 kernel =
+  orderedRationalShellADenominatorLegacyEnvelopeIs72
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+
+symbolicRationalKernelShellAChristoffelFormulaLegacyConservativeEnvelopeIs72 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellADenominatorReciprocalReceipt.christoffelFormulaEnvelope
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+  ≡
+  72
+symbolicRationalKernelShellAChristoffelFormulaLegacyConservativeEnvelopeIs72 kernel =
+  symbolicRationalKernelShellAChristoffelFormulaEnvelopeIs72 kernel
+
+symbolicRationalKernelShellAReciprocalBoundsFeedChristoffelFormulaC0Stable :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellADenominatorReciprocalReceipt.reciprocalBoundsFeedChristoffelFormulaC0Stable
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+  ≡
+  Bool.true
+symbolicRationalKernelShellAReciprocalBoundsFeedChristoffelFormulaC0Stable kernel =
+  orderedRationalShellADenominatorReciprocalFeedsChristoffelFormulaC0Stable
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+
+symbolicRationalKernelPerturbationRouteL_GammaIs48 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.finalL_GammaRouteQuotient
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+  ≡
+  48
+symbolicRationalKernelPerturbationRouteL_GammaIs48 kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRouteL_GammaIs48
+    kernel
+
+symbolicRationalKernelPerturbationRouteTightAuditedL_GammaIs44 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.tightAuditedL_GammaRouteQuotient
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+  ≡
+  44
+symbolicRationalKernelPerturbationRouteTightAuditedL_GammaIs44 kernel =
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.tightAuditedL_GammaRouteQuotientIs44
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+
+symbolicRationalKernelPerturbationRouteAuditedInverseMetricMaxIs3 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.auditedShellAInverseMetricMax
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+  ≡
+  3
+symbolicRationalKernelPerturbationRouteAuditedInverseMetricMaxIs3 kernel =
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.auditedShellAInverseMetricMaxIs3
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+
+symbolicRationalKernelPerturbationRouteAuditedMetricDerivativeMaxIs8 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.auditedShellAMetricDerivativeMax
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+  ≡
+  8
+symbolicRationalKernelPerturbationRouteAuditedMetricDerivativeMaxIs8 kernel =
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.auditedShellAMetricDerivativeMaxIs8
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+
+symbolicRationalKernelPerturbationRouteL_GammaIs72 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotient
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+  ≡
+  72
+symbolicRationalKernelPerturbationRouteL_GammaIs72 kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRouteL_GammaIs72
+    kernel
+
+symbolicRationalKernelPerturbationRouteLegacyConservativeL_GammaIs72 :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotient
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+  ≡
+  72
+symbolicRationalKernelPerturbationRouteLegacyConservativeL_GammaIs72 kernel =
+  symbolicRationalKernelPerturbationRouteL_GammaIs72 kernel
+
+symbolicRationalKernelPerturbationRouteMatchesConstants :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.lGammaRouteQuotient
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+  ≡
+  OrderedRationalShellAChristoffelC0ConstantReceipt.shellA_L_Gamma
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAConstants
+      kernel)
+symbolicRationalKernelPerturbationRouteMatchesConstants kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRouteMatchesConstants
+    kernel
+
+symbolicRationalKernelPerturbationRouteInverseMetricMaxMatchesDenominatorReceipt :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.shellAInverseMetricMax
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+  ≡
+  OrderedRationalShellADenominatorReciprocalReceipt.inverseMetricAbsMax
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+symbolicRationalKernelPerturbationRouteInverseMetricMaxMatchesDenominatorReceipt kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.perturbationRouteInverseMetricMaxMatchesDenominatorReceipt
+    kernel
+
+symbolicRationalKernelPerturbationRouteDerivativeMaxMatchesDenominatorReceipt :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  OrderedRationalShellAChristoffelPerturbationRouteReceipt.shellAMetricDerivativeMax
+    (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+      kernel)
+  ≡
+  OrderedRationalShellADenominatorReciprocalReceipt.metricDerivativeAbsMax
+    (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+      kernel)
+symbolicRationalKernelPerturbationRouteDerivativeMaxMatchesDenominatorReceipt kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.perturbationRouteDerivativeMaxMatchesDenominatorReceipt
+    kernel
+
+symbolicRationalKernelChristoffelFormulaC0Stable :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  Nat →
+  Nat →
+  RB.SymbolicRationalApproximation →
+  RB.SymbolicRationalApproximation →
+  Set
+symbolicRationalKernelChristoffelFormulaC0Stable kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.ChristoffelFormulaC0Stable
+    kernel
+
+symbolicRationalKernelChristoffelFormulaC0Stability :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  (ε : Nat) →
+  (scale : Nat) →
+  (discreteConnection : RB.SymbolicRationalApproximation) →
+  (continuumConnection : RB.SymbolicRationalApproximation) →
+  ⊤ →
+  Nat →
+  ((carrier : RB.SymbolicRationalApproximation) →
+    ⊤) →
+  ((index : Nat) →
+    (carrier : RB.SymbolicRationalApproximation) →
+    carrier ≡ carrier) →
+  symbolicRationalKernelChristoffelFormulaC0Stable
+    kernel
+    ε
+    scale
+    discreteConnection
+    continuumConnection
+symbolicRationalKernelChristoffelFormulaC0Stability kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.christoffelFormulaC0Stability
+    kernel
+
+symbolicRationalKernelConnectionErrorBoundExtraction :
+  (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
+  (ε : Nat) →
+  (scale : Nat) →
+  (discreteConnection : RB.SymbolicRationalApproximation) →
+  (continuumConnection : RB.SymbolicRationalApproximation) →
+  symbolicRationalKernelChristoffelFormulaC0Stable
+    kernel
+    ε
+    scale
+    discreteConnection
+    continuumConnection →
+  ContinuumLimitAnalyticPrimitives.connectionErrorBound
+    symbolicRationalContinuumAnalyticPrimitives
+    ε
+    scale
+    discreteConnection
+    continuumConnection
+symbolicRationalKernelConnectionErrorBoundExtraction kernel =
+  SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction
+    kernel
 
 symbolicRationalFiniteCarrierChristoffelC0FromDerivativeLawFromKernel :
   SymbolicRationalChristoffelC0StabilityKernel →
@@ -2249,6 +4640,66 @@ symbolicRationalFiniteCarrierChristoffelC0FromDerivativeLawFromKernel kernel =
     ; orderedShellARequestedInequalityPrimitive =
         SymbolicRationalChristoffelC0StabilityKernel.orderedShellARequestedInequalityPrimitive
           kernel
+    ; orderedShellAPerturbationRoute =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+          kernel
+    ; orderedShellAPerturbationRouteAreCanonical =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRouteAreCanonical
+          kernel
+    ; orderedShellAPerturbationRouteL_GammaIs48 =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRouteL_GammaIs48
+          kernel
+    ; orderedShellAPerturbationRouteL_GammaIs72 =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRouteL_GammaIs72
+          kernel
+    ; orderedShellAPerturbationRouteMatchesConstants =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRouteMatchesConstants
+          kernel
+    ; orderedGaugeToolkit =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+          kernel
+    ; orderedGaugeToolkitIsCanonical =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkitIsCanonical
+          kernel
+    ; orderedGaugeD_QQZeroLaw =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeD_QQZeroLaw
+          kernel
+    ; orderedGaugeD_QQSymmetryLaw =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeD_QQSymmetryLaw
+          kernel
+    ; orderedGaugeD_QQTriangleLaw =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeD_QQTriangleLaw
+          kernel
+    ; orderedGaugeThreeMinusNNonnegativeLaw =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeThreeMinusNNonnegativeLaw
+          kernel
+    ; orderedGaugeThreeMinusNPositiveLaw =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeThreeMinusNPositiveLaw
+          kernel
+    ; orderedGaugeScale48Is48 =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale48Is48
+          kernel
+    ; orderedGaugeScale48NonnegativeLaw =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale48NonnegativeLaw
+          kernel
+    ; orderedGaugeScale72Is72 =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale72Is72
+          kernel
+    ; orderedGaugeScale72NonnegativeLaw =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale72NonnegativeLaw
+          kernel
+    ; orderedGaugeScale80Is80 =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale80Is80
+          kernel
+    ; orderedGaugeScale80NonnegativeLaw =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale80NonnegativeLaw
+          kernel
+    ; orderedGaugeScale640Is640 =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale640Is640
+          kernel
+    ; orderedGaugeScale640NonnegativeLaw =
+        SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale640NonnegativeLaw
+          kernel
     ; finitePartialControl =
         λ ε index scale carrier →
           ⊤
@@ -2274,11 +4725,26 @@ symbolicRationalFiniteCarrierChristoffelC0FromDerivativeLawFromKernel kernel =
         "Symbolic-rational finite/gauge/constant obligations are closed by this constructor from the canonical identity derivative scheme"
         ∷ "The constructor consumes checked constants L_Gamma = 48, Ricci/contraction extraction constant = 640, and shell C_Gamma <= 2"
         ∷ "The ordered rational Shell A analytic constants are supplied by the kernel: [3,4], L_Gamma = 72, C_R = 80, C_Gamma = 1, and C'_Gamma = 26/27"
+        ∷ "The kernel also supplies the Shell A denominator/reciprocal receipt: r > 0, r - r_s >= 1, conservative inverse-metric bound 4, audited inverse-metric bound 3, derivative bound 8, conservative Christoffel formula envelope 48, tight audited envelope 44, and legacy/conservative envelope 72"
+        ∷ "The kernel supplies the Shell A perturbation route: two perturbation terms, four finite-sum slots, conservative inverse metric max 4, audited inverse metric max 3, metric derivative max 8, conservative L_Gamma = 48, tight audited L_Gamma = 44, and legacy/conservative L_Gamma = 72"
+        ∷ "The kernel supplies ordered rational gauge primitives for d_QQ zero/symmetry/triangle, threeMinusN positivity, and nonnegative scaling by 48, 72, 80, and 640"
         ∷ "The ordered rational inequality is threaded only as the named primitive C'_Gamma <= C_Gamma, not as a promoted QQ theorem"
         ∷ "Only the Christoffel formula C0 stability kernel and equality-valued connectionErrorBound extraction remain external"
         ∷
         OrderedRationalShellAChristoffelC0ConstantReceipt.orderedShellABoundary
           (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAConstants
+            kernel)
+        ++
+        OrderedRationalShellADenominatorReciprocalReceipt.reciprocalBoundary
+          (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+            kernel)
+        ++
+        OrderedRationalShellAChristoffelPerturbationRouteReceipt.perturbationRouteBoundary
+          (SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+            kernel)
+        ++
+        OrderedRationalGaugeToolkitReceipt.gaugeToolkitBoundary
+          (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
             kernel)
         ++
         SymbolicRationalChristoffelC0StabilityKernel.kernelBoundary kernel

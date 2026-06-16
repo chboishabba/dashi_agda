@@ -179,6 +179,15 @@ data PNFCrossingKind : Set where
   sourceContinuation :
     PNFCrossingKind
 
+  mergeCrossing :
+    PNFCrossingKind
+
+  swapCrossing :
+    PNFCrossingKind
+
+  strandTerminationCrossing :
+    PNFCrossingKind
+
 canonicalCrossingKinds :
   List PNFCrossingKind
 canonicalCrossingKinds =
@@ -188,6 +197,9 @@ canonicalCrossingKinds =
   ∷ supportStrengthening
   ∷ supportWeakening
   ∷ sourceContinuation
+  ∷ mergeCrossing
+  ∷ swapCrossing
+  ∷ strandTerminationCrossing
   ∷ []
 
 record PNFCrossing : Set where
@@ -302,6 +314,88 @@ data TransportCommitGate : Set where
 
   commitBlockedUntilReceipts :
     TransportCommitGate
+
+data ResidualTransportGate : Set where
+  residualMayContinue :
+    ResidualTransportGate
+
+  residualNoTypedMeetTerminates :
+    ResidualTransportGate
+
+  residualContradictionTerminates :
+    ResidualTransportGate
+
+residualTerminationThreshold :
+  Residual.ResidualLevel
+residualTerminationThreshold =
+  Residual.noTypedMeet
+
+residualTransportGate :
+  Residual.ResidualLevel →
+  ResidualTransportGate
+residualTransportGate Residual.exact =
+  residualMayContinue
+residualTransportGate Residual.partial =
+  residualMayContinue
+residualTransportGate Residual.noTypedMeet =
+  residualNoTypedMeetTerminates
+residualTransportGate Residual.contradiction =
+  residualContradictionTerminates
+
+noTypedMeetResidualGateTerminates :
+  residualTransportGate Residual.noTypedMeet
+  ≡
+  residualNoTypedMeetTerminates
+noTypedMeetResidualGateTerminates =
+  refl
+
+data PNFTransportResult : Set where
+  successfulTarget :
+    PNFRef →
+    PNFTransportResult
+
+  strandTerminated :
+    PNFStrand →
+    Residual.ResidualLevel →
+    PNFTransportResult
+
+record PNFPartialTransportReceipt : Set where
+  constructor pnfPartialTransportReceipt
+  field
+    partialTransportSource :
+      PNFRef
+
+    partialTransportResult :
+      PNFTransportResult
+
+    partialTransportPath :
+      BraidPath
+
+    residualGate :
+      ResidualTransportGate
+
+    residualObserved :
+      Residual.ResidualLevel
+
+    partialResidualThreshold :
+      Residual.ResidualLevel
+
+    partialResidualThresholdIsNoTypedMeet :
+      partialResidualThreshold ≡ Residual.noTypedMeet
+
+    partialTransportIsReceipt :
+      Bool
+
+    partialTransportIsReceiptIsTrue :
+      partialTransportIsReceipt ≡ true
+
+    partialTransportAssertsTruth :
+      Bool
+
+    partialTransportAssertsTruthIsFalse :
+      partialTransportAssertsTruth ≡ false
+
+open PNFPartialTransportReceipt public
 
 canonicalNewsEventCommitGates :
   List TransportCommitGate
@@ -578,6 +672,18 @@ canonicalPartialResidualCrossing =
     true
     refl
 
+canonicalStrandTerminationCrossing :
+  PNFCrossing
+canonicalStrandTerminationCrossing =
+  pnfCrossing
+    strandTerminationCrossing
+    canonicalCandidateStrand
+    canonicalResidualStrand
+    Residual.noTypedMeet
+    "crossing:no-typed-meet:strand-termination:receipt"
+    true
+    refl
+
 canonicalNewsBraidPath :
   BraidPath
 canonicalNewsBraidPath =
@@ -593,6 +699,24 @@ canonicalNewsBraidPath =
       ∷ canonicalPartialResidualCrossing
       ∷ [])
     "path:news-event-braid:candidate-navigation"
+    true
+    refl
+
+canonicalTerminationBraidPath :
+  BraidPath
+canonicalTerminationBraidPath =
+  braidPath
+    canonicalNewsSourceEvent
+    canonicalInitialSlice
+    canonicalRevisionSlice
+    (canonicalSourceStrand
+      ∷ canonicalCandidateStrand
+      ∷ canonicalResidualStrand
+      ∷ [])
+    (canonicalSameFibreCrossing
+      ∷ canonicalStrandTerminationCrossing
+      ∷ [])
+    "path:news-event-braid:no-typed-meet-termination"
     true
     refl
 
@@ -639,6 +763,62 @@ canonicalNewsEventTransportRelation =
     refl
     false
     refl
+
+canonicalContinuationTransportResult :
+  PNFTransportResult
+canonicalContinuationTransportResult =
+  successfulTarget canonicalTargetRef
+
+canonicalTerminationTransportResult :
+  PNFTransportResult
+canonicalTerminationTransportResult =
+  strandTerminated canonicalResidualStrand Residual.noTypedMeet
+
+canonicalContinuationPartialTransportReceipt :
+  PNFPartialTransportReceipt
+canonicalContinuationPartialTransportReceipt =
+  pnfPartialTransportReceipt
+    canonicalSourceRef
+    canonicalContinuationTransportResult
+    canonicalNewsBraidPath
+    residualMayContinue
+    Residual.partial
+    residualTerminationThreshold
+    refl
+    true
+    refl
+    false
+    refl
+
+canonicalTerminationPartialTransportReceipt :
+  PNFPartialTransportReceipt
+canonicalTerminationPartialTransportReceipt =
+  pnfPartialTransportReceipt
+    canonicalSourceRef
+    canonicalTerminationTransportResult
+    canonicalTerminationBraidPath
+    residualNoTypedMeetTerminates
+    Residual.noTypedMeet
+    residualTerminationThreshold
+    refl
+    true
+    refl
+    false
+    refl
+
+canonicalContinuationResultIsSuccessfulTarget :
+  canonicalContinuationTransportResult
+  ≡
+  successfulTarget canonicalTargetRef
+canonicalContinuationResultIsSuccessfulTarget =
+  refl
+
+canonicalTerminationResultIsStrandTerminated :
+  canonicalTerminationTransportResult
+  ≡
+  strandTerminated canonicalResidualStrand Residual.noTypedMeet
+canonicalTerminationResultIsStrandTerminated =
+  refl
 
 record PNFBraidTransportFieldReceipt : Set where
   field
@@ -717,6 +897,61 @@ record PNFBraidTransportFieldReceipt : Set where
 
     transportRelationIsCanonical :
       transportRelation ≡ canonicalNewsEventTransportRelation
+
+    terminationBraidPath :
+      BraidPath
+
+    terminationBraidPathIsCanonical :
+      terminationBraidPath ≡ canonicalTerminationBraidPath
+
+    continuationResult :
+      PNFTransportResult
+
+    continuationResultIsCanonical :
+      continuationResult ≡ canonicalContinuationTransportResult
+
+    receiptContinuationResultIsSuccessfulTarget :
+      canonicalContinuationTransportResult
+      ≡
+      successfulTarget canonicalTargetRef
+
+    terminationResult :
+      PNFTransportResult
+
+    terminationResultIsCanonical :
+      terminationResult ≡ canonicalTerminationTransportResult
+
+    receiptTerminationResultIsStrandTerminated :
+      canonicalTerminationTransportResult
+      ≡
+      strandTerminated canonicalResidualStrand Residual.noTypedMeet
+
+    continuationPartialReceipt :
+      PNFPartialTransportReceipt
+
+    continuationPartialReceiptIsCanonical :
+      continuationPartialReceipt ≡ canonicalContinuationPartialTransportReceipt
+
+    terminationPartialReceipt :
+      PNFPartialTransportReceipt
+
+    terminationPartialReceiptIsCanonical :
+      terminationPartialReceipt ≡ canonicalTerminationPartialTransportReceipt
+
+    residualTerminationGate :
+      ResidualTransportGate
+
+    residualTerminationGateIsNoTypedMeetTermination :
+      residualTerminationGate ≡ residualNoTypedMeetTerminates
+
+    residualGateComputationTerminatesAtNoTypedMeet :
+      residualTransportGate Residual.noTypedMeet ≡ residualNoTypedMeetTerminates
+
+    receiptResidualThreshold :
+      Residual.ResidualLevel
+
+    receiptResidualThresholdIsNoTypedMeet :
+      receiptResidualThreshold ≡ Residual.noTypedMeet
 
     transportRelationIsReceiptBearing :
       Bool
@@ -887,6 +1122,40 @@ canonicalPNFBraidTransportFieldReceipt =
         canonicalNewsEventTransportRelation
     ; transportRelationIsCanonical =
         refl
+    ; terminationBraidPath =
+        canonicalTerminationBraidPath
+    ; terminationBraidPathIsCanonical =
+        refl
+    ; continuationResult =
+        canonicalContinuationTransportResult
+    ; continuationResultIsCanonical =
+        refl
+    ; receiptContinuationResultIsSuccessfulTarget =
+        canonicalContinuationResultIsSuccessfulTarget
+    ; terminationResult =
+        canonicalTerminationTransportResult
+    ; terminationResultIsCanonical =
+        refl
+    ; receiptTerminationResultIsStrandTerminated =
+        canonicalTerminationResultIsStrandTerminated
+    ; continuationPartialReceipt =
+        canonicalContinuationPartialTransportReceipt
+    ; continuationPartialReceiptIsCanonical =
+        refl
+    ; terminationPartialReceipt =
+        canonicalTerminationPartialTransportReceipt
+    ; terminationPartialReceiptIsCanonical =
+        refl
+    ; residualTerminationGate =
+        residualNoTypedMeetTerminates
+    ; residualTerminationGateIsNoTypedMeetTermination =
+        refl
+    ; residualGateComputationTerminatesAtNoTypedMeet =
+        noTypedMeetResidualGateTerminates
+    ; receiptResidualThreshold =
+        residualTerminationThreshold
+    ; receiptResidualThresholdIsNoTypedMeet =
+        refl
     ; transportRelationIsReceiptBearing =
         true
     ; transportRelationIsReceiptBearingIsTrue =
@@ -963,8 +1232,10 @@ canonicalPNFBraidTransportFieldReceipt =
         pnfBraidTransportPromotionImpossible
     ; receiptBoundary =
         "Source event, time slice/revision, strand, crossing kind, braid path, and braid signature are named surfaces"
-        ∷ "Crossing kinds include same-fibre, partial residual, contradiction, support strengthening, support weakening, and source continuation"
+        ∷ "Crossing kinds include same-fibre, partial residual, contradiction, support strengthening, support weakening, source continuation, merge, swap, and strand termination"
         ∷ "Transport is a receipt-bearing relation over PNF refs/fibres, not truth"
+        ∷ "Partial transport results either continue to a successful target or terminate at a strand"
+        ∷ "The residual threshold for strand termination is noTypedMeet"
         ∷ "A news event braid may propose candidate refs only"
         ∷ "Commit is blocked until resolved, selected, and ITIR-validated receipts exist"
         ∷ "Authority and promotion flags remain false"

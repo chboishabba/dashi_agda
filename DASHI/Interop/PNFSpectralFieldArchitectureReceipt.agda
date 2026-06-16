@@ -6,22 +6,27 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 
+import DASHI.Interop.PNFPackageCore as PackageCore
+
 ------------------------------------------------------------------------
 -- PNF spectral field architecture receipt.
 --
 -- This module is an aggregate checked intake receipt for the PNF spectral
--- field stack.  It joins the four local architecture layers into one
+-- field stack.  It joins the local architecture layers into one
 -- normalized surface:
 --
 --   1. core object / fibre field;
---   2. residual weighted graph / Laplacian;
---   3. braid transport;
---   4. vector index / resolver / selector.
+--   2. two-base product-base corrected PNF summary;
+--   3. residual weighted graph / Laplacian;
+--   4. graph / DAG / tree projection split;
+--   5. braid transport;
+--   6. vector index / resolver / selector.
 --
 -- The receipt is intentionally architectural.  It records the intended
 -- pipeline and governance boundaries, but it does not implement a runtime
--- parser, ANN backend, semantic truth engine, trading truth engine, or proof
--- that spectral coordinates improve retrieval quality.
+-- parser, external runtime adapter, ANN backend, semantic truth engine,
+-- trading truth engine, or proof that spectral coordinates improve retrieval
+-- quality.
 
 data ArchitectureReceiptStatus : Set where
   pnfSpectralFieldArchitectureRecorded_intakeOnly :
@@ -31,7 +36,13 @@ data ArchitectureLayer : Set where
   coreObjectFibreFieldLayer :
     ArchitectureLayer
 
+  twoBaseProductBasePNFSummaryLayer :
+    ArchitectureLayer
+
   residualWeightedGraphLaplacianLayer :
+    ArchitectureLayer
+
+  graphDAGTreeProjectionLayer :
     ArchitectureLayer
 
   braidTransportLayer :
@@ -43,7 +54,9 @@ data ArchitectureLayer : Set where
 canonicalArchitectureLayers : List ArchitectureLayer
 canonicalArchitectureLayers =
   coreObjectFibreFieldLayer
+  ∷ twoBaseProductBasePNFSummaryLayer
   ∷ residualWeightedGraphLaplacianLayer
+  ∷ graphDAGTreeProjectionLayer
   ∷ braidTransportLayer
   ∷ spectralVectorIndexResolverSelectorLayer
   ∷ []
@@ -55,7 +68,22 @@ data PipelineStage : Set where
   evidenceSpanPNFStage :
     PipelineStage
 
+  twoBaseProductBaseCorrectionStage :
+    PipelineStage
+
+  pnfOnlySummaryStage :
+    PipelineStage
+
   residualMeetJoinGraphStage :
+    PipelineStage
+
+  graphProjectionStage :
+    PipelineStage
+
+  dagProjectionStage :
+    PipelineStage
+
+  treeProjectionStage :
     PipelineStage
 
   fibreFieldStage :
@@ -83,7 +111,12 @@ canonicalPipeline : List PipelineStage
 canonicalPipeline =
   rawEvidenceStage
   ∷ evidenceSpanPNFStage
+  ∷ twoBaseProductBaseCorrectionStage
+  ∷ pnfOnlySummaryStage
   ∷ residualMeetJoinGraphStage
+  ∷ graphProjectionStage
+  ∷ dagProjectionStage
+  ∷ treeProjectionStage
   ∷ fibreFieldStage
   ∷ braidTransportStage
   ∷ spectralCoordinatesStage
@@ -100,7 +133,16 @@ data GovernanceBoundary : Set where
   noRuntimeParserBoundary :
     GovernanceBoundary
 
+  noExternalRuntimeImplementationBoundary :
+    GovernanceBoundary
+
   noANNBackendBoundary :
+    GovernanceBoundary
+
+  pnfOnlySummaryBoundary :
+    GovernanceBoundary
+
+  vectorNonAuthorityBoundary :
     GovernanceBoundary
 
   noSpectralUtilityProofBoundary :
@@ -116,7 +158,10 @@ canonicalGovernanceBoundaries : List GovernanceBoundary
 canonicalGovernanceBoundaries =
   architectureIntakeOnlyBoundary
   ∷ noRuntimeParserBoundary
+  ∷ noExternalRuntimeImplementationBoundary
   ∷ noANNBackendBoundary
+  ∷ pnfOnlySummaryBoundary
+  ∷ vectorNonAuthorityBoundary
   ∷ noSpectralUtilityProofBoundary
   ∷ noSemanticTruthBoundary
   ∷ noTradingTruthBoundary
@@ -126,7 +171,19 @@ data ReceiptProjectionKind : Set where
   projectCoreObjectFibreField :
     ReceiptProjectionKind
 
+  projectTwoBaseProductBasePNFSummary :
+    ReceiptProjectionKind
+
   projectResidualWeightedGraphLaplacian :
+    ReceiptProjectionKind
+
+  projectGraphProjection :
+    ReceiptProjectionKind
+
+  projectDAGProjection :
+    ReceiptProjectionKind
+
+  projectTreeProjection :
     ReceiptProjectionKind
 
   projectBraidTransport :
@@ -179,6 +236,25 @@ canonicalCoreObjectFibreReceiptRef =
         "Does not parse runtime evidence or certify semantic truth."
     }
 
+canonicalTwoBaseProductBasePNFSummaryReceiptRef : ComponentReceiptRef
+canonicalTwoBaseProductBasePNFSummaryReceiptRef =
+  record
+    { projectionKind =
+        projectTwoBaseProductBasePNFSummary
+    ; layer =
+        twoBaseProductBasePNFSummaryLayer
+    ; moduleName =
+        "DASHI.Interop.PNFSpectralFieldArchitectureReceipt"
+    ; canonicalReceiptName =
+        "canonicalPNFSpectralFieldArchitectureReceipt"
+    ; responsibility =
+        "Aggregate two-base product-base correction and PNF-only summary pipeline."
+    ; componentPositiveBoundary =
+        "Records that summary inputs remain PNF-only after the corrected product-base step."
+    ; forbiddenPromotion =
+        "Does not introduce non-PNF summary authority or external runtime conversion."
+    }
+
 canonicalResidualWeightedGraphReceiptRef : ComponentReceiptRef
 canonicalResidualWeightedGraphReceiptRef =
   record
@@ -193,9 +269,66 @@ canonicalResidualWeightedGraphReceiptRef =
     ; responsibility =
         "Residual graph, meet/join edge, weighting, and Laplacian intake surface."
     ; componentPositiveBoundary =
-        "Records residual adjacency and Laplacian-ready architecture over PNF spans."
+        "Records residual adjacency and Laplacian-ready architecture over PNF-only summaries."
     ; forbiddenPromotion =
         "Does not prove spectral gap, retrieval quality, or physical utility."
+    }
+
+canonicalGraphProjectionReceiptRef : ComponentReceiptRef
+canonicalGraphProjectionReceiptRef =
+  record
+    { projectionKind =
+        projectGraphProjection
+    ; layer =
+        graphDAGTreeProjectionLayer
+    ; moduleName =
+        "DASHI.Interop.PNFSpectralFieldArchitectureReceipt"
+    ; canonicalReceiptName =
+        "canonicalPNFSpectralFieldArchitectureReceipt"
+    ; responsibility =
+        "Graph projection of the corrected PNF residual architecture."
+    ; componentPositiveBoundary =
+        "Records graph projection separately from DAG and tree projections."
+    ; forbiddenPromotion =
+        "Does not collapse graph, DAG, and tree projections into one authority surface."
+    }
+
+canonicalDAGProjectionReceiptRef : ComponentReceiptRef
+canonicalDAGProjectionReceiptRef =
+  record
+    { projectionKind =
+        projectDAGProjection
+    ; layer =
+        graphDAGTreeProjectionLayer
+    ; moduleName =
+        "DASHI.Interop.PNFSpectralFieldArchitectureReceipt"
+    ; canonicalReceiptName =
+        "canonicalPNFSpectralFieldArchitectureReceipt"
+    ; responsibility =
+        "DAG projection of the corrected PNF residual architecture."
+    ; componentPositiveBoundary =
+        "Records acyclic dependency projection separately from graph and tree projections."
+    ; forbiddenPromotion =
+        "Does not claim runtime DAG materialization or global canonicalization."
+    }
+
+canonicalTreeProjectionReceiptRef : ComponentReceiptRef
+canonicalTreeProjectionReceiptRef =
+  record
+    { projectionKind =
+        projectTreeProjection
+    ; layer =
+        graphDAGTreeProjectionLayer
+    ; moduleName =
+        "DASHI.Interop.PNFSpectralFieldArchitectureReceipt"
+    ; canonicalReceiptName =
+        "canonicalPNFSpectralFieldArchitectureReceipt"
+    ; responsibility =
+        "Tree projection of the corrected PNF residual architecture."
+    ; componentPositiveBoundary =
+        "Records rooted/tree view projection separately from graph and DAG projections."
+    ; forbiddenPromotion =
+        "Does not claim the tree view is the sole authoritative residual structure."
     }
 
 canonicalBraidTransportReceiptRef : ComponentReceiptRef
@@ -231,7 +364,7 @@ canonicalSpectralVectorIndexReceiptRef =
     ; responsibility =
         "Spectral coordinates, vector index over references, resolver, and selector."
     ; componentPositiveBoundary =
-        "Records typed reference-index architecture for selection after validation."
+        "Records typed reference-index architecture as non-authoritative proposal support after validation."
     ; forbiddenPromotion =
         "Does not implement ANN search, truth ranking, trading advice, or answer authority."
     }
@@ -239,7 +372,11 @@ canonicalSpectralVectorIndexReceiptRef =
 canonicalComponentReceipts : List ComponentReceiptRef
 canonicalComponentReceipts =
   canonicalCoreObjectFibreReceiptRef
+  ∷ canonicalTwoBaseProductBasePNFSummaryReceiptRef
   ∷ canonicalResidualWeightedGraphReceiptRef
+  ∷ canonicalGraphProjectionReceiptRef
+  ∷ canonicalDAGProjectionReceiptRef
+  ∷ canonicalTreeProjectionReceiptRef
   ∷ canonicalBraidTransportReceiptRef
   ∷ canonicalSpectralVectorIndexReceiptRef
   ∷ []
@@ -274,7 +411,7 @@ canonicalPipelineReceipt =
     ; stages =
         canonicalPipeline
     ; cleanPipelineStatement =
-        "raw evidence -> EvidenceSpan/PNF -> residual/meet/join graph -> fibres -> braids -> spectral coordinates -> vector index over refs -> resolver/selector -> ITIR validation -> support packet/answer/signal"
+        "raw evidence -> EvidenceSpan/PNF -> two-base product-base correction -> PNF-only summary -> residual/meet/join graph -> graph projection -> DAG projection -> tree projection -> fibres -> braids -> spectral coordinates -> vector index over refs as non-authority -> resolver/selector -> ITIR validation -> support packet/answer/signal"
     ; firstStage =
         rawEvidenceStage
     ; finalStage =
@@ -297,7 +434,16 @@ record GovernanceReceipt : Set where
     noRuntimeParser :
       Bool
 
+    noExternalRuntimeImplementation :
+      Bool
+
     noANNBackend :
+      Bool
+
+    pnfOnlySummary :
+      Bool
+
+    vectorNonAuthority :
       Bool
 
     noProofOfSpectralUtility :
@@ -315,8 +461,17 @@ record GovernanceReceipt : Set where
     noRuntimeParserIsTrue :
       noRuntimeParser ≡ true
 
+    noExternalRuntimeImplementationIsTrue :
+      noExternalRuntimeImplementation ≡ true
+
     noANNBackendIsTrue :
       noANNBackend ≡ true
+
+    pnfOnlySummaryIsTrue :
+      pnfOnlySummary ≡ true
+
+    vectorNonAuthorityIsTrue :
+      vectorNonAuthority ≡ true
 
     noProofOfSpectralUtilityIsTrue :
       noProofOfSpectralUtility ≡ true
@@ -340,7 +495,13 @@ canonicalGovernanceReceipt =
         true
     ; noRuntimeParser =
         true
+    ; noExternalRuntimeImplementation =
+        true
     ; noANNBackend =
+        true
+    ; pnfOnlySummary =
+        true
+    ; vectorNonAuthority =
         true
     ; noProofOfSpectralUtility =
         true
@@ -352,7 +513,13 @@ canonicalGovernanceReceipt =
         refl
     ; noRuntimeParserIsTrue =
         refl
+    ; noExternalRuntimeImplementationIsTrue =
+        refl
     ; noANNBackendIsTrue =
+        refl
+    ; pnfOnlySummaryIsTrue =
+        refl
+    ; vectorNonAuthorityIsTrue =
         refl
     ; noProofOfSpectralUtilityIsTrue =
         refl
@@ -382,7 +549,19 @@ record PNFSpectralFieldArchitectureReceipt : Set where
     coreObjectFibreComponent :
       ComponentReceiptRef
 
+    twoBaseProductBasePNFSummaryComponent :
+      ComponentReceiptRef
+
     residualWeightedGraphComponent :
+      ComponentReceiptRef
+
+    graphProjectionComponent :
+      ComponentReceiptRef
+
+    dagProjectionComponent :
+      ComponentReceiptRef
+
+    treeProjectionComponent :
       ComponentReceiptRef
 
     braidTransportComponent :
@@ -397,10 +576,33 @@ record PNFSpectralFieldArchitectureReceipt : Set where
     governanceReceipt :
       GovernanceReceipt
 
+    pnfPackageCoreAdapter :
+      PackageCore.SelectorPackage
+
+    pnfPackageCoreAdapterIsCanonical :
+      pnfPackageCoreAdapter
+      ≡
+      PackageCore.canonicalAdmittedSelectorPackage
+
     intakeSummary :
       String
 
     architecturePositiveBoundary :
+      String
+
+    twoBaseProductBaseCorrection :
+      String
+
+    pnfOnlySummaryPipeline :
+      String
+
+    graphDAGTreeProjectionSplit :
+      String
+
+    vectorNonAuthorityStatement :
+      String
+
+    externalRuntimeBoundary :
       String
 
     falsePromotionGuards :
@@ -412,7 +614,13 @@ record PNFSpectralFieldArchitectureReceipt : Set where
     promotesRuntimeParser :
       Bool
 
+    promotesExternalRuntime :
+      Bool
+
     promotesANNBackend :
+      Bool
+
+    promotesVectorAuthority :
       Bool
 
     provesSpectralUtility :
@@ -427,8 +635,14 @@ record PNFSpectralFieldArchitectureReceipt : Set where
     promotesRuntimeParserIsFalse :
       promotesRuntimeParser ≡ false
 
+    promotesExternalRuntimeIsFalse :
+      promotesExternalRuntime ≡ false
+
     promotesANNBackendIsFalse :
       promotesANNBackend ≡ false
+
+    promotesVectorAuthorityIsFalse :
+      promotesVectorAuthority ≡ false
 
     provesSpectralUtilityIsFalse :
       provesSpectralUtility ≡ false
@@ -450,15 +664,23 @@ canonicalPNFSpectralFieldArchitectureReceipt =
     ; receiptName =
         "canonicalPNFSpectralFieldArchitectureReceipt"
     ; layerCount =
-        4
+        6
     ; layers =
         canonicalArchitectureLayers
     ; componentReceipts =
         canonicalComponentReceipts
     ; coreObjectFibreComponent =
         canonicalCoreObjectFibreReceiptRef
+    ; twoBaseProductBasePNFSummaryComponent =
+        canonicalTwoBaseProductBasePNFSummaryReceiptRef
     ; residualWeightedGraphComponent =
         canonicalResidualWeightedGraphReceiptRef
+    ; graphProjectionComponent =
+        canonicalGraphProjectionReceiptRef
+    ; dagProjectionComponent =
+        canonicalDAGProjectionReceiptRef
+    ; treeProjectionComponent =
+        canonicalTreeProjectionReceiptRef
     ; braidTransportComponent =
         canonicalBraidTransportReceiptRef
     ; spectralVectorIndexComponent =
@@ -467,17 +689,35 @@ canonicalPNFSpectralFieldArchitectureReceipt =
         canonicalPipelineReceipt
     ; governanceReceipt =
         canonicalGovernanceReceipt
+    ; pnfPackageCoreAdapter =
+        PackageCore.canonicalAdmittedSelectorPackage
+    ; pnfPackageCoreAdapterIsCanonical =
+        refl
     ; intakeSummary =
-        "Aggregates PNF core/fibre field, residual graph/Laplacian, braid transport, and spectral vector index/resolver/selector into one architecture receipt."
+        "Aggregates PNF core/fibre field, two-base product-base correction, PNF-only summary, residual graph/Laplacian, graph/DAG/tree projection split, braid transport, and spectral vector index/resolver/selector into one architecture receipt."
     ; architecturePositiveBoundary =
         "Architecture and intake receipt only; downstream validation must occur before support packet, answer, or signal use."
+    ; twoBaseProductBaseCorrection =
+        "Two bases are treated as a corrected product-base intake before residual projection; the aggregate receipt records the boundary and does not change runtime repositories."
+    ; pnfOnlySummaryPipeline =
+        "The summary pipeline is PNF-only: raw evidence must be carried through EvidenceSpan/PNF and the corrected product-base step before summary, graph, or selector consumption."
+    ; graphDAGTreeProjectionSplit =
+        "Graph, DAG, and tree are separate projections of the corrected PNF residual architecture; none is collapsed into the others."
+    ; vectorNonAuthorityStatement =
+        "Vector rows, spectral coordinates, and index hits are proposal carriers only, never truth, support, admissibility, answer, policy, legal, Wikidata, or trading authority."
+    ; externalRuntimeBoundary =
+        "External runtimes may supply separately governed evidence or receipts, but this architecture receipt does not implement adapters, parsers, repository changes, or runtime authority."
     ; falsePromotionGuards =
-        "No runtime parser, no ANN backend, no proof of spectral utility, no semantic truth, and no trading truth are promoted here."
+        "No runtime parser, no external runtime implementation, no ANN backend, no vector authority, no proof of spectral utility, no semantic truth, and no trading truth are promoted here."
     ; validationOwner =
         "Main validation lane / ITIR gate"
     ; promotesRuntimeParser =
         false
+    ; promotesExternalRuntime =
+        false
     ; promotesANNBackend =
+        false
+    ; promotesVectorAuthority =
         false
     ; provesSpectralUtility =
         false
@@ -487,7 +727,11 @@ canonicalPNFSpectralFieldArchitectureReceipt =
         false
     ; promotesRuntimeParserIsFalse =
         refl
+    ; promotesExternalRuntimeIsFalse =
+        refl
     ; promotesANNBackendIsFalse =
+        refl
+    ; promotesVectorAuthorityIsFalse =
         refl
     ; provesSpectralUtilityIsFalse =
         refl
@@ -505,10 +749,30 @@ projectCoreObjectFibreComponentReceipt :
 projectCoreObjectFibreComponentReceipt receipt =
   coreObjectFibreComponent receipt
 
+projectTwoBaseProductBasePNFSummaryComponentReceipt :
+  PNFSpectralFieldArchitectureReceipt → ComponentReceiptRef
+projectTwoBaseProductBasePNFSummaryComponentReceipt receipt =
+  twoBaseProductBasePNFSummaryComponent receipt
+
 projectResidualWeightedGraphComponentReceipt :
   PNFSpectralFieldArchitectureReceipt → ComponentReceiptRef
 projectResidualWeightedGraphComponentReceipt receipt =
   residualWeightedGraphComponent receipt
+
+projectGraphProjectionComponentReceipt :
+  PNFSpectralFieldArchitectureReceipt → ComponentReceiptRef
+projectGraphProjectionComponentReceipt receipt =
+  graphProjectionComponent receipt
+
+projectDAGProjectionComponentReceipt :
+  PNFSpectralFieldArchitectureReceipt → ComponentReceiptRef
+projectDAGProjectionComponentReceipt receipt =
+  dagProjectionComponent receipt
+
+projectTreeProjectionComponentReceipt :
+  PNFSpectralFieldArchitectureReceipt → ComponentReceiptRef
+projectTreeProjectionComponentReceipt receipt =
+  treeProjectionComponent receipt
 
 projectBraidTransportComponentReceipt :
   PNFSpectralFieldArchitectureReceipt → ComponentReceiptRef
@@ -525,9 +789,29 @@ canonicalCoreObjectFibreComponentReceipt =
   projectCoreObjectFibreComponentReceipt
     canonicalPNFSpectralFieldArchitectureReceipt
 
+canonicalTwoBaseProductBasePNFSummaryComponentReceipt : ComponentReceiptRef
+canonicalTwoBaseProductBasePNFSummaryComponentReceipt =
+  projectTwoBaseProductBasePNFSummaryComponentReceipt
+    canonicalPNFSpectralFieldArchitectureReceipt
+
 canonicalResidualWeightedGraphComponentReceipt : ComponentReceiptRef
 canonicalResidualWeightedGraphComponentReceipt =
   projectResidualWeightedGraphComponentReceipt
+    canonicalPNFSpectralFieldArchitectureReceipt
+
+canonicalGraphProjectionComponentReceipt : ComponentReceiptRef
+canonicalGraphProjectionComponentReceipt =
+  projectGraphProjectionComponentReceipt
+    canonicalPNFSpectralFieldArchitectureReceipt
+
+canonicalDAGProjectionComponentReceipt : ComponentReceiptRef
+canonicalDAGProjectionComponentReceipt =
+  projectDAGProjectionComponentReceipt
+    canonicalPNFSpectralFieldArchitectureReceipt
+
+canonicalTreeProjectionComponentReceipt : ComponentReceiptRef
+canonicalTreeProjectionComponentReceipt =
+  projectTreeProjectionComponentReceipt
     canonicalPNFSpectralFieldArchitectureReceipt
 
 canonicalBraidTransportComponentReceipt : ComponentReceiptRef

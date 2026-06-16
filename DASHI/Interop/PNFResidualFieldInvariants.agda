@@ -48,6 +48,9 @@ data PNFResidualFieldInvariantComponent : Set where
   visibleResidualSeverityComponent :
     PNFResidualFieldInvariantComponent
 
+  residualCorroboratedProximityComponent :
+    PNFResidualFieldInvariantComponent
+
   vectorSpectralNonAuthorityComponent :
     PNFResidualFieldInvariantComponent
 
@@ -61,6 +64,7 @@ canonicalPNFResidualFieldInvariantComponents =
   ∷ severityMaxJoinComponent
   ∷ contradictionMonotonicityComponent
   ∷ visibleResidualSeverityComponent
+  ∷ residualCorroboratedProximityComponent
   ∷ vectorSpectralNonAuthorityComponent
   ∷ []
 
@@ -433,6 +437,264 @@ vectorSpectralAuthorityGateIsFalse carrier =
   refl
 
 ------------------------------------------------------------------------
+-- Residual-corroborated proximity product invariant.
+
+residualCanCorroborateCompatibility :
+  Residual.ResidualLevel →
+  Bool
+residualCanCorroborateCompatibility Residual.exact =
+  true
+residualCanCorroborateCompatibility Residual.partial =
+  true
+residualCanCorroborateCompatibility Residual.noTypedMeet =
+  false
+residualCanCorroborateCompatibility Residual.contradiction =
+  false
+
+proximityCanRecordCorroboratedCandidate :
+  Bool →
+  Residual.ResidualLevel →
+  Bool
+proximityCanRecordCorroboratedCandidate false _ =
+  false
+proximityCanRecordCorroboratedCandidate true residual =
+  residualCanCorroborateCompatibility residual
+
+residualGraphEdgeKind :
+  Residual.ResidualLevel →
+  Graph.PNFGraphEdgeKind
+residualGraphEdgeKind Residual.exact =
+  Graph.exactResidualEdge
+residualGraphEdgeKind Residual.partial =
+  Graph.partialResidualEdge
+residualGraphEdgeKind Residual.noTypedMeet =
+  Graph.noTypedMeetEdge
+residualGraphEdgeKind Residual.contradiction =
+  Graph.contradictionEdge
+
+residualGraphEdgeEvidence :
+  (r : Residual.ResidualLevel) →
+  Graph.PNFGraphEdgeEvidence (residualGraphEdgeKind r)
+residualGraphEdgeEvidence Residual.exact =
+  Graph.exactResidualEvidence
+residualGraphEdgeEvidence Residual.partial =
+  Graph.partialResidualEvidence
+residualGraphEdgeEvidence Residual.noTypedMeet =
+  Graph.noTypedMeetEvidence
+residualGraphEdgeEvidence Residual.contradiction =
+  Graph.contradictionEvidence
+
+record ResidualCorroboratedProximity : Set where
+  constructor residualCorroboratedProximity
+  field
+    proximityCandidate :
+      Core.CandidateRef
+
+    proximityFibre :
+      Core.FibreRef
+
+    proximityInsideFibre :
+      Bool
+
+    spectralRow :
+      Graph.CheckedSpectralCoordinateRow
+
+    proximityCarrier :
+      NonAuthorityCarrier
+
+    proximityResidualLevel :
+      Residual.ResidualLevel
+
+    residualCompatibility :
+      Bool
+
+    residualCompatibilityIsCanonical :
+      residualCompatibility
+      ≡
+      residualCanCorroborateCompatibility proximityResidualLevel
+
+    residualVisibleSeverity :
+      VisibleResidualSeverity
+
+    residualVisibleSeverityIsCanonical :
+      residualVisibleSeverity ≡ visibleResidualSeverityOf proximityResidualLevel
+
+    edgeKind :
+      Graph.PNFGraphEdgeKind
+
+    edgeKindIsResidual :
+      edgeKind ≡ residualGraphEdgeKind proximityResidualLevel
+
+    edgeEvidence :
+      Graph.PNFGraphEdgeEvidence edgeKind
+
+    candidateRecorded :
+      Bool
+
+    candidateRecordedIsCompatibilityConjunction :
+      candidateRecorded
+      ≡
+      proximityCanRecordCorroboratedCandidate
+        proximityInsideFibre
+        proximityResidualLevel
+
+    proximityPromotesTruth :
+      Bool
+
+    proximityPromotesTruthIsFalse :
+      proximityPromotesTruth ≡ false
+
+    proximityPromotesSupport :
+      Bool
+
+    proximityPromotesSupportIsFalse :
+      proximityPromotesSupport ≡ false
+
+    proximityPromotesAdmissibility :
+      Bool
+
+    proximityPromotesAdmissibilityIsFalse :
+      proximityPromotesAdmissibility ≡ false
+
+    proximityPromotesAuthority :
+      Bool
+
+    proximityPromotesAuthorityIsFalse :
+      proximityPromotesAuthority ≡ false
+
+open ResidualCorroboratedProximity public
+
+residualCorroboratedProximityOf :
+  Core.CandidateRef →
+  Graph.PNFGraphVertex →
+  Bool →
+  Residual.ResidualLevel →
+  ResidualCorroboratedProximity
+residualCorroboratedProximityOf candidate vertex insideFibre residual =
+  residualCorroboratedProximity
+    candidate
+    Core.fibreFallback
+    insideFibre
+    (Graph.canonicalCheckedSpectralCoordinateRow vertex)
+    spectralCoordinateCarrier
+    residual
+    (residualCanCorroborateCompatibility residual)
+    refl
+    (visibleResidualSeverityOf residual)
+    refl
+    (residualGraphEdgeKind residual)
+    refl
+    (residualGraphEdgeEvidence residual)
+    (proximityCanRecordCorroboratedCandidate insideFibre residual)
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+
+canonicalExactCorroboratedProximity :
+  ResidualCorroboratedProximity
+canonicalExactCorroboratedProximity =
+  residualCorroboratedProximityOf
+    Core.candidateFallback
+    (Graph.pnfGraphVertex 0)
+    true
+    EXACT
+
+canonicalPartialCorroboratedProximity :
+  ResidualCorroboratedProximity
+canonicalPartialCorroboratedProximity =
+  residualCorroboratedProximityOf
+    Core.candidateFallback
+    (Graph.pnfGraphVertex 1)
+    true
+    PARTIAL
+
+canonicalContradictionProximity :
+  ResidualCorroboratedProximity
+canonicalContradictionProximity =
+  residualCorroboratedProximityOf
+    Core.candidateFallback
+    (Graph.pnfGraphVertex 2)
+    true
+    CONTRADICTION
+
+canonicalNoTypedMeetProximity :
+  ResidualCorroboratedProximity
+canonicalNoTypedMeetProximity =
+  residualCorroboratedProximityOf
+    Core.candidateFallback
+    (Graph.pnfGraphVertex 3)
+    false
+    NO_TYPED_MEET
+
+canonicalExactProximityIsCorroboratedCompatibility :
+  candidateRecorded canonicalExactCorroboratedProximity ≡ true
+canonicalExactProximityIsCorroboratedCompatibility =
+  refl
+
+canonicalPartialProximityIsCorroboratedCompatibility :
+  candidateRecorded canonicalPartialCorroboratedProximity ≡ true
+canonicalPartialProximityIsCorroboratedCompatibility =
+  refl
+
+canonicalExactProximityIsInsideFibre :
+  proximityInsideFibre canonicalExactCorroboratedProximity ≡ true
+canonicalExactProximityIsInsideFibre =
+  refl
+
+canonicalPartialProximityIsInsideFibre :
+  proximityInsideFibre canonicalPartialCorroboratedProximity ≡ true
+canonicalPartialProximityIsInsideFibre =
+  refl
+
+canonicalContradictionDoesNotBecomeCorroboratedCompatibility :
+  candidateRecorded canonicalContradictionProximity ≡ false
+canonicalContradictionDoesNotBecomeCorroboratedCompatibility =
+  refl
+
+canonicalNoTypedMeetDoesNotBecomeCorroboratedCompatibility :
+  candidateRecorded canonicalNoTypedMeetProximity ≡ false
+canonicalNoTypedMeetDoesNotBecomeCorroboratedCompatibility =
+  refl
+
+canonicalNoTypedMeetProximityIsNotInsideFibre :
+  proximityInsideFibre canonicalNoTypedMeetProximity ≡ false
+canonicalNoTypedMeetProximityIsNotInsideFibre =
+  refl
+
+canonicalExactProximityTruthGateFalse :
+  proximityPromotesTruth canonicalExactCorroboratedProximity ≡ false
+canonicalExactProximityTruthGateFalse =
+  refl
+
+canonicalPartialProximitySupportGateFalse :
+  proximityPromotesSupport canonicalPartialCorroboratedProximity ≡ false
+canonicalPartialProximitySupportGateFalse =
+  refl
+
+canonicalPartialProximityAdmissibilityGateFalse :
+  proximityPromotesAdmissibility canonicalPartialCorroboratedProximity
+  ≡
+  false
+canonicalPartialProximityAdmissibilityGateFalse =
+  refl
+
+canonicalPartialProximityAuthorityGateFalse :
+  proximityPromotesAuthority canonicalPartialCorroboratedProximity ≡ false
+canonicalPartialProximityAuthorityGateFalse =
+  refl
+
+canonicalVectorProximityAloneAuthorityGateFalse :
+  vectorOrSpectralPromotesAuthority vectorProximityCarrier ≡ false
+canonicalVectorProximityAloneAuthorityGateFalse =
+  refl
+
+------------------------------------------------------------------------
 -- Canonical example rows.
 
 canonicalPredicate :
@@ -478,6 +740,28 @@ canonicalNegatedReceipt =
     "canonical-reducer"
     "canonical negated source span"
     canonicalNegatedPredicate
+
+canonicalHedgedPredicate :
+  Residual.PredicatePNF
+canonicalHedgedPredicate =
+  Residual.predicatePNF
+    "canonical predicate"
+    Residual.sig-agent-theme
+    (Residual.opaqueArg "agent")
+    (Residual.opaqueArg "theme")
+    Residual.absent
+    Residual.positive
+    Residual.hedgedEvidence
+    "canonical-example"
+
+canonicalHedgedReceipt :
+  Residual.PNFEmissionReceipt
+canonicalHedgedReceipt =
+  Residual.pnfEmissionReceipt
+    "canonical-parser"
+    "canonical-reducer"
+    "canonical hedged source span"
+    canonicalHedgedPredicate
 
 canonicalCrossSignaturePredicate :
   Residual.PredicatePNF
@@ -557,6 +841,22 @@ canonicalExactRow =
     false
     false
 
+canonicalPartialRow :
+  CanonicalResidualExampleRow
+canonicalPartialRow =
+  canonicalResidualExampleRow
+    "same fibre partial"
+    canonicalPositiveReceipt
+    canonicalHedgedReceipt
+    PARTIAL
+    refl
+    (visibleResidualSeverityOf PARTIAL)
+    refl
+    true
+    false
+    false
+    false
+
 canonicalContradictionRow :
   CanonicalResidualExampleRow
 canonicalContradictionRow =
@@ -593,6 +893,7 @@ canonicalRows :
   List CanonicalResidualExampleRow
 canonicalRows =
   canonicalExactRow
+  ∷ canonicalPartialRow
   ∷ canonicalContradictionRow
   ∷ canonicalNoTypedMeetBridgeExceptionRow
   ∷ []
@@ -605,6 +906,11 @@ canonicalExactRowSeverityIsZero =
 canonicalContradictionRowSeverityIsNine :
   severityScore (exampleVisibleSeverity canonicalContradictionRow) ≡ 9
 canonicalContradictionRowSeverityIsNine =
+  refl
+
+canonicalPartialRowSeverityIsOne :
+  severityScore (exampleVisibleSeverity canonicalPartialRow) ≡ 1
+canonicalPartialRowSeverityIsOne =
   refl
 
 canonicalBridgeExceptionRowResidualIsNoTypedMeet :
@@ -642,12 +948,12 @@ canonicalRowsSpectralAuthorityGateFalse =
 pnfResidualFieldInvariantStatement :
   String
 pnfResidualFieldInvariantStatement =
-  "PNF residual field invariants expose structural projection, same-fibre comparability, explicit bridge transport exception, finite residual severity, severity-max join, visible residual severity, and false vector/spectral authority gates."
+  "PNF residual field invariants expose structural projection, same-fibre comparability, explicit bridge transport exception, finite residual severity, severity-max join, visible residual severity, residual-corroborated proximity candidates, and false vector/spectral authority gates."
 
 pnfResidualFieldInvariantBoundary :
   String
 pnfResidualFieldInvariantBoundary =
-  "Residual severity is visible bookkeeping over typed PNF receipts only. Vector proximity, spectral rows, signed Laplacians, and bridge transport exceptions do not promote truth, support, admissibility, legal/policy/Wikidata authority, or cross-fibre comparability."
+  "Residual severity is visible bookkeeping over typed PNF receipts only. Vector proximity, spectral rows, signed Laplacians, and candidate status alone do not promote truth, support, admissibility, legal/policy/Wikidata authority, or cross-fibre comparability. Only EXACT/PARTIAL residuals inside a fibre can be recorded as corroborated compatibility; CONTRADICTION and NO_TYPED_MEET fail closed."
 
 record PNFResidualFieldInvariantReceipt : Set where
   field
@@ -759,6 +1065,56 @@ record PNFResidualFieldInvariantReceipt : Set where
 
     exampleRowsAreCanonical :
       exampleRows ≡ canonicalRows
+
+    exactCorroboratedProximity :
+      ResidualCorroboratedProximity
+
+    exactCorroboratedProximityIsCanonical :
+      exactCorroboratedProximity
+      ≡
+      canonicalExactCorroboratedProximity
+
+    partialCorroboratedProximity :
+      ResidualCorroboratedProximity
+
+    partialCorroboratedProximityIsCanonical :
+      partialCorroboratedProximity
+      ≡
+      canonicalPartialCorroboratedProximity
+
+    exactCorroboratedProximityInsideFibre :
+      proximityInsideFibre canonicalExactCorroboratedProximity ≡ true
+
+    partialCorroboratedProximityInsideFibre :
+      proximityInsideFibre canonicalPartialCorroboratedProximity ≡ true
+
+    contradictionDoesNotCorroborateCompatibility :
+      candidateRecorded canonicalContradictionProximity ≡ false
+
+    noTypedMeetDoesNotCorroborateCompatibility :
+      candidateRecorded canonicalNoTypedMeetProximity ≡ false
+
+    noTypedMeetCorroboratedProximityOutsideFibre :
+      proximityInsideFibre canonicalNoTypedMeetProximity ≡ false
+
+    corroboratedCandidateTruthGate :
+      proximityPromotesTruth canonicalExactCorroboratedProximity ≡ false
+
+    corroboratedCandidateSupportGate :
+      proximityPromotesSupport canonicalPartialCorroboratedProximity ≡ false
+
+    corroboratedCandidateAdmissibilityGate :
+      proximityPromotesAdmissibility canonicalPartialCorroboratedProximity
+      ≡
+      false
+
+    corroboratedCandidateAuthorityGate :
+      proximityPromotesAuthority canonicalPartialCorroboratedProximity
+      ≡
+      false
+
+    vectorProximityAloneAuthorityGate :
+      vectorOrSpectralPromotesAuthority vectorProximityCarrier ≡ false
 
     vectorTruthGate :
       vectorOrSpectralPromotesTruth vectorProximityCarrier ≡ false
@@ -880,6 +1236,34 @@ canonicalPNFResidualFieldInvariantReceipt =
     ; exampleRows =
         canonicalRows
     ; exampleRowsAreCanonical =
+        refl
+    ; exactCorroboratedProximity =
+        canonicalExactCorroboratedProximity
+    ; exactCorroboratedProximityIsCanonical =
+        refl
+    ; partialCorroboratedProximity =
+        canonicalPartialCorroboratedProximity
+    ; partialCorroboratedProximityIsCanonical =
+        refl
+    ; exactCorroboratedProximityInsideFibre =
+        refl
+    ; partialCorroboratedProximityInsideFibre =
+        refl
+    ; contradictionDoesNotCorroborateCompatibility =
+        refl
+    ; noTypedMeetDoesNotCorroborateCompatibility =
+        refl
+    ; noTypedMeetCorroboratedProximityOutsideFibre =
+        refl
+    ; corroboratedCandidateTruthGate =
+        refl
+    ; corroboratedCandidateSupportGate =
+        refl
+    ; corroboratedCandidateAdmissibilityGate =
+        refl
+    ; corroboratedCandidateAuthorityGate =
+        refl
+    ; vectorProximityAloneAuthorityGate =
         refl
     ; vectorTruthGate =
         refl

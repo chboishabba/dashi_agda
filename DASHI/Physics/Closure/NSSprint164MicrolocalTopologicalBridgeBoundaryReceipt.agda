@@ -340,6 +340,280 @@ sprint164MicrolocalBoundaryRowCountIsSix :
   sprint164MicrolocalBoundaryRowCount ≡ 6
 sprint164MicrolocalBoundaryRowCountIsSix = refl
 
+data Sprint164ChainBExactShapeRow : Set where
+  phaseSpaceConcentrationAtX0Xi0 :
+    Sprint164ChainBExactShapeRow
+  strainEigenvectorAlignmentTarget :
+    Sprint164ChainBExactShapeRow
+  bmoCommutatorBlocker :
+    Sprint164ChainBExactShapeRow
+  helicityPointBlowupExclusion :
+    Sprint164ChainBExactShapeRow
+  filamentaryLeakageFailureLMuchGreaterThanRStar :
+    Sprint164ChainBExactShapeRow
+  vortexLineRegularityBlocker :
+    Sprint164ChainBExactShapeRow
+  angularMomentumPressureCommutatorTarget :
+    Sprint164ChainBExactShapeRow
+  axisymmetricExactVanishing :
+    Sprint164ChainBExactShapeRow
+  criticalHOneHalfFourierMultiplierGap :
+    Sprint164ChainBExactShapeRow
+
+canonicalSprint164ChainBExactShapeRows :
+  List Sprint164ChainBExactShapeRow
+canonicalSprint164ChainBExactShapeRows =
+  phaseSpaceConcentrationAtX0Xi0
+  ∷ strainEigenvectorAlignmentTarget
+  ∷ bmoCommutatorBlocker
+  ∷ helicityPointBlowupExclusion
+  ∷ filamentaryLeakageFailureLMuchGreaterThanRStar
+  ∷ vortexLineRegularityBlocker
+  ∷ angularMomentumPressureCommutatorTarget
+  ∷ axisymmetricExactVanishing
+  ∷ criticalHOneHalfFourierMultiplierGap
+  ∷ []
+
+sprint164ChainBExactShapeRowCount : Nat
+sprint164ChainBExactShapeRowCount = 9
+
+sprint164ChainBExactShapeRowCountIsNine :
+  sprint164ChainBExactShapeRowCount ≡ 9
+sprint164ChainBExactShapeRowCountIsNine = refl
+
+phaseSpaceConcentrationShapeString : String
+phaseSpaceConcentrationShapeString =
+  "Chain B MicrolocalAlignmentConcentrationLemma target row: a defect packet may concentrate at one phase-space point (x0,xi0), so the receipt records the exact missing wave-packet-to-eigenbundle localization step."
+
+strainEigenvectorAlignmentShapeString : String
+strainEigenvectorAlignmentShapeString =
+  "Chain B MicrolocalAlignmentConcentrationLemma target row: concentration must align vorticity direction with the maximal strain eigenvector field, not merely with a scalar strain size."
+
+bmoCommutatorBlockerShapeString : String
+bmoCommutatorBlockerShapeString =
+  "Chain B MicrolocalAlignmentConcentrationLemma blocker row: the pressure/Riesz BMO commutator is not controlled at the critical endpoint, so no concentration lemma is promoted."
+
+helicityPointBlowupExclusionShapeString : String
+helicityPointBlowupExclusionShapeString =
+  "Chain B TopologicalStretchingLeakageLemma target row: helicity conservation should exclude a pure point-blowup scenario only after a rigorous topology-to-vorticity bridge, which remains open."
+
+filamentaryLeakageFailureShapeString : String
+filamentaryLeakageFailureShapeString =
+  "Chain B TopologicalStretchingLeakageLemma failure row: a filament with length L >> r* can leak stretching across topology without giving the recorded depletion estimate."
+
+vortexLineRegularityBlockerShapeString : String
+vortexLineRegularityBlockerShapeString =
+  "Chain B TopologicalStretchingLeakageLemma blocker row: vortex-line regularity and reconnection control are missing at the singular scale, so filamentary leakage is not ruled out."
+
+angularCommutatorTargetShapeString : String
+angularCommutatorTargetShapeString =
+  "Chain B AngularDegeneracyPressureCommutatorGain target row: prove a quantitative gain for the angular pressure commutator [L_z,P] near the angular-degeneracy set."
+
+axisymmetricExactVanishingShapeString : String
+axisymmetricExactVanishingShapeString =
+  "Chain B AngularDegeneracyPressureCommutatorGain calibration row: in the exactly axisymmetric case the [L_z,P] commutator should vanish exactly."
+
+criticalHOneHalfFourierMultiplierGapShapeString : String
+criticalHOneHalfFourierMultiplierGapShapeString =
+  "Chain B AngularDegeneracyPressureCommutatorGain gap row: the critical H^{1/2} Fourier multiplier estimate needed to upgrade symbolic angular cancellation is not proved."
+
+record Sprint164MicrolocalAlignmentConcentrationExactShape : Set where
+  constructor sprint164MicrolocalAlignmentConcentrationExactShape
+  field
+    microlocalAlignmentConcentrationLemmaName :
+      String
+    microlocalAlignmentConcentrationLemmaNameIsCanonical :
+      microlocalAlignmentConcentrationLemmaName ≡
+      "MicrolocalAlignmentConcentrationLemma"
+    microlocalAlignmentPhaseSpaceRow :
+      Sprint164ChainBExactShapeRow
+    microlocalAlignmentPhaseSpaceRowIsCanonical :
+      microlocalAlignmentPhaseSpaceRow ≡ phaseSpaceConcentrationAtX0Xi0
+    microlocalAlignmentPhaseSpaceShape :
+      String
+    microlocalAlignmentPhaseSpaceShapeIsCanonical :
+      microlocalAlignmentPhaseSpaceShape ≡
+      phaseSpaceConcentrationShapeString
+    microlocalAlignmentStrainAlignmentRow :
+      Sprint164ChainBExactShapeRow
+    microlocalAlignmentStrainAlignmentRowIsCanonical :
+      microlocalAlignmentStrainAlignmentRow ≡
+      strainEigenvectorAlignmentTarget
+    microlocalAlignmentStrainAlignmentShape :
+      String
+    microlocalAlignmentStrainAlignmentShapeIsCanonical :
+      microlocalAlignmentStrainAlignmentShape ≡
+      strainEigenvectorAlignmentShapeString
+    microlocalAlignmentEndpointBlockerRow :
+      Sprint164ChainBExactShapeRow
+    microlocalAlignmentEndpointBlockerRowIsCanonical :
+      microlocalAlignmentEndpointBlockerRow ≡ bmoCommutatorBlocker
+    microlocalAlignmentEndpointBlockerShape :
+      String
+    microlocalAlignmentEndpointBlockerShapeIsCanonical :
+      microlocalAlignmentEndpointBlockerShape ≡
+      bmoCommutatorBlockerShapeString
+    microlocalAlignmentTargetRecorded :
+      MicrolocalAlignmentConcentrationTargetRecorded ≡ true
+    microlocalAlignmentTheoremGateStaysFalse :
+      MicrolocalAlignmentConcentrationLemma ≡ false
+
+open Sprint164MicrolocalAlignmentConcentrationExactShape public
+
+canonicalSprint164MicrolocalAlignmentConcentrationExactShape :
+  Sprint164MicrolocalAlignmentConcentrationExactShape
+canonicalSprint164MicrolocalAlignmentConcentrationExactShape =
+  sprint164MicrolocalAlignmentConcentrationExactShape
+    "MicrolocalAlignmentConcentrationLemma"
+    refl
+    phaseSpaceConcentrationAtX0Xi0
+    refl
+    phaseSpaceConcentrationShapeString
+    refl
+    strainEigenvectorAlignmentTarget
+    refl
+    strainEigenvectorAlignmentShapeString
+    refl
+    bmoCommutatorBlocker
+    refl
+    bmoCommutatorBlockerShapeString
+    refl
+    refl
+    refl
+
+record Sprint164TopologicalStretchingLeakageExactShape : Set where
+  constructor sprint164TopologicalStretchingLeakageExactShape
+  field
+    topologicalStretchingLeakageLemmaName :
+      String
+    topologicalStretchingLeakageLemmaNameIsCanonical :
+      topologicalStretchingLeakageLemmaName ≡
+      "TopologicalStretchingLeakageLemma"
+    topologicalStretchingHelicityExclusionRow :
+      Sprint164ChainBExactShapeRow
+    topologicalStretchingHelicityExclusionRowIsCanonical :
+      topologicalStretchingHelicityExclusionRow ≡
+      helicityPointBlowupExclusion
+    topologicalStretchingHelicityExclusionShape :
+      String
+    topologicalStretchingHelicityExclusionShapeIsCanonical :
+      topologicalStretchingHelicityExclusionShape ≡
+      helicityPointBlowupExclusionShapeString
+    topologicalStretchingFilamentaryLeakageFailureRow :
+      Sprint164ChainBExactShapeRow
+    topologicalStretchingFilamentaryLeakageFailureRowIsCanonical :
+      topologicalStretchingFilamentaryLeakageFailureRow ≡
+      filamentaryLeakageFailureLMuchGreaterThanRStar
+    topologicalStretchingFilamentaryLeakageFailureShape :
+      String
+    topologicalStretchingFilamentaryLeakageFailureShapeIsCanonical :
+      topologicalStretchingFilamentaryLeakageFailureShape ≡
+      filamentaryLeakageFailureShapeString
+    topologicalStretchingVortexLineRegularityBlockerRow :
+      Sprint164ChainBExactShapeRow
+    topologicalStretchingVortexLineRegularityBlockerRowIsCanonical :
+      topologicalStretchingVortexLineRegularityBlockerRow ≡
+      vortexLineRegularityBlocker
+    topologicalStretchingVortexLineRegularityBlockerShape :
+      String
+    topologicalStretchingVortexLineRegularityBlockerShapeIsCanonical :
+      topologicalStretchingVortexLineRegularityBlockerShape ≡
+      vortexLineRegularityBlockerShapeString
+    topologicalStretchingTargetRecorded :
+      TopologicalStretchingLeakageTargetRecorded ≡ true
+    topologicalStretchingTheoremGateStaysFalse :
+      TopologicalStretchingLeakageLemma ≡ false
+
+open Sprint164TopologicalStretchingLeakageExactShape public
+
+canonicalSprint164TopologicalStretchingLeakageExactShape :
+  Sprint164TopologicalStretchingLeakageExactShape
+canonicalSprint164TopologicalStretchingLeakageExactShape =
+  sprint164TopologicalStretchingLeakageExactShape
+    "TopologicalStretchingLeakageLemma"
+    refl
+    helicityPointBlowupExclusion
+    refl
+    helicityPointBlowupExclusionShapeString
+    refl
+    filamentaryLeakageFailureLMuchGreaterThanRStar
+    refl
+    filamentaryLeakageFailureShapeString
+    refl
+    vortexLineRegularityBlocker
+    refl
+    vortexLineRegularityBlockerShapeString
+    refl
+    refl
+    refl
+
+record Sprint164AngularDegeneracyPressureCommutatorGainExactShape :
+  Set where
+  constructor sprint164AngularDegeneracyPressureCommutatorGainExactShape
+  field
+    angularDegeneracyPressureCommutatorGainName :
+      String
+    angularDegeneracyPressureCommutatorGainNameIsCanonical :
+      angularDegeneracyPressureCommutatorGainName ≡
+      "AngularDegeneracyPressureCommutatorGain"
+    angularDegeneracyCommutatorTargetRow :
+      Sprint164ChainBExactShapeRow
+    angularDegeneracyCommutatorTargetRowIsCanonical :
+      angularDegeneracyCommutatorTargetRow ≡
+      angularMomentumPressureCommutatorTarget
+    angularDegeneracyCommutatorTargetShape :
+      String
+    angularDegeneracyCommutatorTargetShapeIsCanonical :
+      angularDegeneracyCommutatorTargetShape ≡
+      angularCommutatorTargetShapeString
+    angularDegeneracyAxisymmetricVanishingRow :
+      Sprint164ChainBExactShapeRow
+    angularDegeneracyAxisymmetricVanishingRowIsCanonical :
+      angularDegeneracyAxisymmetricVanishingRow ≡
+      axisymmetricExactVanishing
+    angularDegeneracyAxisymmetricVanishingShape :
+      String
+    angularDegeneracyAxisymmetricVanishingShapeIsCanonical :
+      angularDegeneracyAxisymmetricVanishingShape ≡
+      axisymmetricExactVanishingShapeString
+    angularDegeneracyCriticalMultiplierGapRow :
+      Sprint164ChainBExactShapeRow
+    angularDegeneracyCriticalMultiplierGapRowIsCanonical :
+      angularDegeneracyCriticalMultiplierGapRow ≡
+      criticalHOneHalfFourierMultiplierGap
+    angularDegeneracyCriticalMultiplierGapShape :
+      String
+    angularDegeneracyCriticalMultiplierGapShapeIsCanonical :
+      angularDegeneracyCriticalMultiplierGapShape ≡
+      criticalHOneHalfFourierMultiplierGapShapeString
+    angularDegeneracyTargetRecorded :
+      AngularDegeneracyPressureCommutatorGainTargetRecorded ≡ true
+    angularDegeneracyTheoremGateStaysFalse :
+      AngularDegeneracyPressureCommutatorGain ≡ false
+
+open Sprint164AngularDegeneracyPressureCommutatorGainExactShape public
+
+canonicalSprint164AngularDegeneracyPressureCommutatorGainExactShape :
+  Sprint164AngularDegeneracyPressureCommutatorGainExactShape
+canonicalSprint164AngularDegeneracyPressureCommutatorGainExactShape =
+  sprint164AngularDegeneracyPressureCommutatorGainExactShape
+    "AngularDegeneracyPressureCommutatorGain"
+    refl
+    angularMomentumPressureCommutatorTarget
+    refl
+    angularCommutatorTargetShapeString
+    refl
+    axisymmetricExactVanishing
+    refl
+    axisymmetricExactVanishingShapeString
+    refl
+    criticalHOneHalfFourierMultiplierGap
+    refl
+    criticalHOneHalfFourierMultiplierGapShapeString
+    refl
+    refl
+    refl
+
 organizationString : String
 organizationString =
   "O: Sprint164 is a microlocal/topological bridge boundary receipt anchored to Sprint163 topological-alignment obstruction."
@@ -350,7 +624,7 @@ requirementString =
 
 codeArtifactString : String
 codeArtifactString =
-  "C: The Agda artifact exports source-anchor rows, theorem-target rows, gap rows, status rows, exact counts, refl proofs, ORCSLPGF strings, and a canonical receipt record."
+  "C: The Agda artifact exports source-anchor rows, theorem-target rows, Chain B exact-shape rows, gap rows, status rows, exact counts, refl proofs, ORCSLPGF strings, and a canonical receipt record."
 
 stateString : String
 stateString =
@@ -449,6 +723,25 @@ record NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt : Set where
       List Sprint164MicrolocalBoundaryRow
     microlocalBoundaryRowsAreCanonical :
       microlocalBoundaryRows ≡ canonicalSprint164MicrolocalBoundaryRows
+    chainBExactShapeRows :
+      List Sprint164ChainBExactShapeRow
+    chainBExactShapeRowsAreCanonical :
+      chainBExactShapeRows ≡ canonicalSprint164ChainBExactShapeRows
+    microlocalAlignmentConcentrationExactShape :
+      Sprint164MicrolocalAlignmentConcentrationExactShape
+    microlocalAlignmentConcentrationExactShapeIsCanonical :
+      microlocalAlignmentConcentrationExactShape ≡
+      canonicalSprint164MicrolocalAlignmentConcentrationExactShape
+    topologicalStretchingLeakageExactShape :
+      Sprint164TopologicalStretchingLeakageExactShape
+    topologicalStretchingLeakageExactShapeIsCanonical :
+      topologicalStretchingLeakageExactShape ≡
+      canonicalSprint164TopologicalStretchingLeakageExactShape
+    angularDegeneracyPressureCommutatorGainExactShape :
+      Sprint164AngularDegeneracyPressureCommutatorGainExactShape
+    angularDegeneracyPressureCommutatorGainExactShapeIsCanonical :
+      angularDegeneracyPressureCommutatorGainExactShape ≡
+      canonicalSprint164AngularDegeneracyPressureCommutatorGainExactShape
     microlocalAlignmentConcentrationTargetRecordedField :
       MicrolocalAlignmentConcentrationTargetRecorded ≡ true
     topologicalStretchingLeakageTargetRecordedField :
@@ -485,6 +778,8 @@ record NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt : Set where
       sprint164StatusRowCount ≡ 11
     microlocalBoundaryRowCountField :
       sprint164MicrolocalBoundaryRowCount ≡ 6
+    chainBExactShapeRowCountField :
+      sprint164ChainBExactShapeRowCount ≡ 9
 
 canonicalNSSprint164MicrolocalTopologicalBridgeBoundaryReceipt :
   NSSprint164MicrolocalTopologicalBridgeBoundaryReceipt
@@ -505,6 +800,15 @@ canonicalNSSprint164MicrolocalTopologicalBridgeBoundaryReceipt =
     canonicalSprint164StatusRows
     refl
     canonicalSprint164MicrolocalBoundaryRows
+    refl
+    canonicalSprint164ChainBExactShapeRows
+    refl
+    canonicalSprint164MicrolocalAlignmentConcentrationExactShape
+    refl
+    canonicalSprint164TopologicalStretchingLeakageExactShape
+    refl
+    canonicalSprint164AngularDegeneracyPressureCommutatorGainExactShape
+    refl
     refl
     refl
     refl
