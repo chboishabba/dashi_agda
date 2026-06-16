@@ -7,20 +7,27 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.Empty using (⊥)
 
+open import DASHI.Physics.Closure.NSKatoHessianConfinementReceipt
+  using
+    ( NSKatoHessianConfinementReceipt
+    ; canonicalNSKatoHessianConfinementReceipt
+    )
+
 ------------------------------------------------------------------------
--- Kato strain-eigenvalue Hessian identity + vortex-core confinement
--- shape receipt.
+-- Deprecated Kato confinement lemma receipt.
 --
--- This is a strictly fail-closed shape layer.  It records only the
--- analytic vocabulary for the Kato identity route and confinement radius
--- shape: Kato identity, distinct eigenvalue gaps, λ2 < 0, negative cross
--- derivative K, and the formal Taylor/minimax radius r* = δ0 / K.
--- It also records the corrected distinction between an enstrophy maximum
--- and a true vortex-core target, plus the gap-preservation candidate shape.
+-- This module is retained as a fail-closed compatibility shell only.
+-- The obsolete negative-cross-derivative vortex-core story is no longer
+-- asserted here.  The corrected distinction is recorded explicitly:
 --
--- No theorem promotion is performed here.  In particular, Miller-criterion
--- promotion is explicitly blocked via named blockers and false promotion
--- flags.
+--   xE / enstrophy maximum: lambda2>0 and negative cross derivative
+--   xV / true vortex core:  lambda2<0 and positive Hessian/confinement
+--
+-- The canonical live confinement receipt is
+-- DASHI.Physics.Closure.NSKatoHessianConfinementReceipt.
+--
+-- No theorem promotion is performed here.  Miller-criterion promotion is
+-- explicitly blocked via named blockers and false promotion flags.
 
 data NSKatoConfinementLemmaStatus : Set where
   failClosedShapeOnly : NSKatoConfinementLemmaStatus
@@ -28,11 +35,11 @@ data NSKatoConfinementLemmaStatus : Set where
 data NSKatoConfinementShape : Set where
   katoStrainEigenvalueHessianIdentity : NSKatoConfinementShape
   distinctEigenvalueGapRequirement : NSKatoConfinementShape
-  lambda2NegativeAtCore : NSKatoConfinementShape
-  negativeCrossDerivativeK : NSKatoConfinementShape
-  confinementRadiusTaylorMinimaxFormula : NSKatoConfinementShape
-  enstrophyMaximumNotNecessarilyVortexCore : NSKatoConfinementShape
-  vortexCoreTargetSelectionRequired : NSKatoConfinementShape
+  enstrophyMaximumXERouteRecorded : NSKatoConfinementShape
+  xELambda2PositiveAndNegativeCrossDerivative : NSKatoConfinementShape
+  vortexCoreXVRouteRecorded : NSKatoConfinementShape
+  xVLambda2NegativeAndPositiveHessianConfinementSignal : NSKatoConfinementShape
+  legacyRouteRedirectedToNSKatoHessianConfinementReceipt : NSKatoConfinementShape
   katoAlignmentBCondition : NSKatoConfinementShape
   thirdOrderRemainderMCondition : NSKatoConfinementShape
   gap12LowerBoundShape : NSKatoConfinementShape
@@ -41,11 +48,11 @@ canonicalNSKatoConfinementShape : List NSKatoConfinementShape
 canonicalNSKatoConfinementShape =
   katoStrainEigenvalueHessianIdentity
   ∷ distinctEigenvalueGapRequirement
-  ∷ lambda2NegativeAtCore
-  ∷ negativeCrossDerivativeK
-  ∷ confinementRadiusTaylorMinimaxFormula
-  ∷ enstrophyMaximumNotNecessarilyVortexCore
-  ∷ vortexCoreTargetSelectionRequired
+  ∷ enstrophyMaximumXERouteRecorded
+  ∷ xELambda2PositiveAndNegativeCrossDerivative
+  ∷ vortexCoreXVRouteRecorded
+  ∷ xVLambda2NegativeAndPositiveHessianConfinementSignal
+  ∷ legacyRouteRedirectedToNSKatoHessianConfinementReceipt
   ∷ katoAlignmentBCondition
   ∷ thirdOrderRemainderMCondition
   ∷ gap12LowerBoundShape
@@ -76,43 +83,35 @@ katoConfinementPromotionImpossibleHere ()
 
 katoShapeText : String
 katoShapeText =
-  "Kato strain-eigenvalue Hessian shape: mixed-direction Hessian for λ2 in the strain eigenframe is the core analytic route, recorded as a local identity shape only."
+  "Deprecated compatibility shell: the old Kato receipt now redirects to NSKatoHessianConfinementReceipt."
 
 eigenvalueGapShapeText : String
 eigenvalueGapShapeText =
-  "Distinct eigenvalue gap requirement: local gaps (λ1-λ2) and (λ2-λ3) are explicit denominators / separation inputs and are not proved here."
+  "Distinct eigenvalue gap requirement: local gaps (lambda1-lambda2) and (lambda2-lambda3) remain explicit separation inputs and are not proved here."
 
-lambda2NegativeText : String
-lambda2NegativeText =
-  "Core sign gate is recorded as lambda2<=-delta0 at the true vortex-core target; this receipt does not claim the current enstrophy maximum already satisfies it."
+enstrophyMaximumXERouteText : String
+enstrophyMaximumXERouteText =
+  "At the enstrophy maximum xE, lambda2>0 and the cross derivative is negative; this is the xE diagnostic lane, not the vortex-core lane."
 
-crossDerivativeNegativeText : String
-crossDerivativeNegativeText =
-  "Cross-derivative curvature is recorded as cross derivative<=-delta, with the K = T e1 (T e2 λ2) notation kept as a shape tag only."
+vortexCoreXVRouteText : String
+vortexCoreXVRouteText =
+  "At the true vortex core xV, lambda2<0 and the Hessian/confinement signal is positive; the live confinement lane is recorded in NSKatoHessianConfinementReceipt."
 
-confinementRadiusText : String
-confinementRadiusText =
-  "Confinement radius is recorded as a shape formula only: r* = delta0 / K."
-
-enstrophyMaximumText : String
-enstrophyMaximumText =
-  "Enstrophy maximum is recorded as not necessarily identical to the true vortex-core target."
-
-vortexCoreTargetSelectionText : String
-vortexCoreTargetSelectionText =
-  "A true vortex-core target selector is required and is not yet supplied by this receipt."
+legacyRouteRedirectText : String
+legacyRouteRedirectText =
+  "This legacy receipt is retained only for compatibility and redirects readers to the canonical Hessian confinement receipt."
 
 katoAlignmentBConditionText : String
 katoAlignmentBConditionText =
-  "Kato alignment condition B is recorded as a required gate at the true vortex-core target."
+  "Kato alignment condition B is retained as a legacy gate at the true vortex-core target."
 
 thirdOrderRemainderMConditionText : String
 thirdOrderRemainderMConditionText =
-  "Third-order remainder condition M is recorded as a required gate; H3 remainder control is not yet measured."
+  "Third-order remainder condition M is retained as a legacy gate; H3 remainder control is not yet measured here."
 
 gap12LowerBoundShapeText : String
 gap12LowerBoundShapeText =
-  "Gap-preservation candidate shape: if lambda2<=-delta0, cross derivative<=-delta, B>=b0>0, and M<delta at a true vortex-core target, then gap12 >= b0/(delta+M), by the Kato identity contradiction on gap collapse."
+  "Legacy gap-preservation candidate shape is retained only as a non-promoting marker; the canonical confinement signal is in NSKatoHessianConfinementReceipt."
 
 theoremCandidateText : String
 theoremCandidateText =
@@ -127,35 +126,35 @@ record NSKatoConfinementLemmaORCSLPGF : Set where
   field
     O : String
     OIsCanonical : O ≡
-      "O: Record a fail-closed Kato strain-eigenvalue Hessian identity and vortex-core confinement shape receipt."
+      "O: Retain a deprecated Kato receipt as a compatibility shell and redirect to the canonical Hessian confinement receipt."
 
     R : String
     RIsCanonical : R ≡
-      "R: Record shape-only Kato identity, distinct eigenvalue gaps, enstrophy maximum not necessarily true vortex core, true vortex-core target selection required, λ2 gate, B gate, M gate, gap12 lower-bound candidate, and explicit blockers."
+      "R: Record the corrected xE/xV distinction, keep the legacy gap-preservation shape non-promoting, and point readers to NSKatoHessianConfinementReceipt."
 
     C : String
     CIsCanonical : C ≡
-      "C: This module exports route/shape tokens, blocker ledger, and explicit fail-closed promotion guards; it does not claim the enstrophy maximum already satisfies the true vortex-core target gate."
+      "C: This module is a fail-closed compatibility wrapper; the canonical sign story is exported by NSKatoHessianConfinementReceipt."
 
     S : String
     SIsCanonical : S ≡
-      "S: Kato identity recorded; distinct-gap gate recorded; lambda2<=-delta0 gate recorded; cross-derivative gate recorded; B>=b0 gate recorded; M<delta gate recorded; gap12 lower-bound candidate recorded; blockers recorded."
+      "S: xE lane records lambda2>0 with negative cross derivative; xV lane records lambda2<0 with positive Hessian/confinement signal; promotion remains blocked."
 
     L : String
     LIsCanonical : L ≡
-      "L: Kato route -> true vortex-core target selection -> lambda2 gate -> B gate -> M gate -> gap12 lower-bound candidate."
+      "L: Legacy Kato receipt -> corrected xE/xV distinction -> canonical Hessian receipt for the live confinement signal."
 
     P : String
     PIsCanonical : P ≡
-      "P: Keep this as a shape/receipt layer only. No Miller criterion theorem is promoted."
+      "P: Keep this module as deprecated compatibility only; do not promote any theorem from it."
 
     G : String
     GIsCanonical : G ≡
-      "G: No Clay or terminal promotion and no fake local theorem promotion are introduced."
+      "G: No Clay, Miller, or external promotion is introduced here; the canonical module carries the corrected confinement statement."
 
     F : String
     FIsCanonical : F ≡
-      "F: Promotion remains blocked by the explicit blockers: target selector measurement missing or required, condition C at true vortex core not yet measured, condition D/H3 remainder control missing, and no Miller bridge."
+      "F: Promotion remains blocked and this file exists only to redirect to NSKatoHessianConfinementReceipt."
 
 record NSKatoConfinementLemmaReceipt : Setω where
   field
@@ -195,65 +194,41 @@ record NSKatoConfinementLemmaReceipt : Setω where
     eigenvalueGapTextIsCanonical :
       eigenvalueGapText ≡ eigenvalueGapShapeText
 
-    lambda2NegativeRecorded :
+    enstrophyMaximumXERouteRecordedFlag :
       Bool
 
-    lambda2NegativeRecordedIsTrue :
-      lambda2NegativeRecorded ≡ true
+    enstrophyMaximumXERouteRecordedFlagIsTrue :
+      enstrophyMaximumXERouteRecordedFlag ≡ true
 
-    lambda2NegativeTextRecorded :
+    enstrophyMaximumXERouteTextRecorded :
       String
 
-    lambda2NegativeTextRecordedIsCanonical :
-      lambda2NegativeTextRecorded ≡ lambda2NegativeText
+    enstrophyMaximumXERouteTextRecordedIsCanonical :
+      enstrophyMaximumXERouteTextRecorded ≡ enstrophyMaximumXERouteText
 
-    crossDerivativeNegativeRecorded :
+    vortexCoreXVRouteRecordedFlag :
       Bool
 
-    crossDerivativeNegativeRecordedIsTrue :
-      crossDerivativeNegativeRecorded ≡ true
+    vortexCoreXVRouteRecordedFlagIsTrue :
+      vortexCoreXVRouteRecordedFlag ≡ true
 
-    crossDerivativeNegativeTextRecorded :
+    vortexCoreXVRouteTextRecorded :
       String
 
-    crossDerivativeNegativeTextRecordedIsCanonical :
-      crossDerivativeNegativeTextRecorded ≡ crossDerivativeNegativeText
+    vortexCoreXVRouteTextRecordedIsCanonical :
+      vortexCoreXVRouteTextRecorded ≡ vortexCoreXVRouteText
 
-    confinementRadiusShapeRecorded :
+    legacyRouteRedirectRecordedFlag :
       Bool
 
-    confinementRadiusShapeRecordedIsTrue :
-      confinementRadiusShapeRecorded ≡ true
+    legacyRouteRedirectRecordedFlagIsTrue :
+      legacyRouteRedirectRecordedFlag ≡ true
 
-    confinementRadiusFormula :
+    legacyRouteRedirectTextRecorded :
       String
 
-    confinementRadiusFormulaIsCanonical :
-      confinementRadiusFormula ≡ confinementRadiusText
-
-    enstrophyMaximumShapeRecorded :
-      Bool
-
-    enstrophyMaximumShapeRecordedIsTrue :
-      enstrophyMaximumShapeRecorded ≡ true
-
-    enstrophyMaximumTextRecorded :
-      String
-
-    enstrophyMaximumTextRecordedIsCanonical :
-      enstrophyMaximumTextRecorded ≡ enstrophyMaximumText
-
-    vortexCoreTargetSelectionRecorded :
-      Bool
-
-    vortexCoreTargetSelectionRecordedIsTrue :
-      vortexCoreTargetSelectionRecorded ≡ true
-
-    vortexCoreTargetSelectionTextRecorded :
-      String
-
-    vortexCoreTargetSelectionTextRecordedIsCanonical :
-      vortexCoreTargetSelectionTextRecorded ≡ vortexCoreTargetSelectionText
+    legacyRouteRedirectTextRecordedIsCanonical :
+      legacyRouteRedirectTextRecorded ≡ legacyRouteRedirectText
 
     katoAlignmentBConditionRecorded :
       Bool
@@ -309,6 +284,12 @@ record NSKatoConfinementLemmaReceipt : Setω where
     theoremCandidateIsCanonical :
       theoremCandidate ≡ theoremCandidateText
 
+    canonicalHessianReceipt :
+      NSKatoHessianConfinementReceipt
+
+    canonicalHessianReceiptIsCanonical :
+      canonicalHessianReceipt ≡ canonicalNSKatoHessianConfinementReceipt
+
     millerCriterionPromotion :
       Bool
 
@@ -348,21 +329,21 @@ canonicalNSKatoConfinementLemmaORCSLPGF :
   NSKatoConfinementLemmaORCSLPGF
 canonicalNSKatoConfinementLemmaORCSLPGF =
   mkNSKatoConfinementLemmaORCSLPGF
-    "O: Record a fail-closed Kato strain-eigenvalue Hessian identity and vortex-core confinement shape receipt."
+    "O: Retain a deprecated Kato receipt as a compatibility shell and redirect to the canonical Hessian confinement receipt."
     refl
-    "R: Record shape-only Kato identity, distinct eigenvalue gaps, enstrophy maximum not necessarily true vortex core, true vortex-core target selection required, λ2 gate, B gate, M gate, gap12 lower-bound candidate, and explicit blockers."
+    "R: Record the corrected xE/xV distinction, keep the legacy gap-preservation shape non-promoting, and point readers to NSKatoHessianConfinementReceipt."
     refl
-    "C: This module exports route/shape tokens, blocker ledger, and explicit fail-closed promotion guards; it does not claim the enstrophy maximum already satisfies the true vortex-core target gate."
+    "C: This module is a fail-closed compatibility wrapper; the canonical sign story is exported by NSKatoHessianConfinementReceipt."
     refl
-    "S: Kato identity recorded; distinct-gap gate recorded; lambda2<=-delta0 gate recorded; cross-derivative gate recorded; B>=b0 gate recorded; M<delta gate recorded; gap12 lower-bound candidate recorded; blockers recorded."
+    "S: xE lane records lambda2>0 with negative cross derivative; xV lane records lambda2<0 with positive Hessian/confinement signal; promotion remains blocked."
     refl
-    "L: Kato route -> true vortex-core target selection -> lambda2 gate -> B gate -> M gate -> gap12 lower-bound candidate."
+    "L: Legacy Kato receipt -> corrected xE/xV distinction -> canonical Hessian receipt for the live confinement signal."
     refl
-    "P: Keep this as a shape/receipt layer only. No Miller criterion theorem is promoted."
+    "P: Keep this module as deprecated compatibility only; do not promote any theorem from it."
     refl
-    "G: No Clay or terminal promotion and no fake local theorem promotion are introduced."
+    "G: No Clay, Miller, or external promotion is introduced here; the canonical module carries the corrected confinement statement."
     refl
-    "F: Promotion remains blocked by the explicit blockers: target selector measurement missing or required, condition C at true vortex core not yet measured, condition D/H3 remainder control missing, and no Miller bridge."
+    "F: Promotion remains blocked and this file exists only to redirect to NSKatoHessianConfinementReceipt."
     refl
 
 canonicalNSKatoConfinementLemmaReceipt :
@@ -393,45 +374,29 @@ canonicalNSKatoConfinementLemmaReceipt =
         eigenvalueGapShapeText
     ; eigenvalueGapTextIsCanonical =
         refl
-    ; lambda2NegativeRecorded =
+    ; enstrophyMaximumXERouteRecordedFlag =
         true
-    ; lambda2NegativeRecordedIsTrue =
+    ; enstrophyMaximumXERouteRecordedFlagIsTrue =
         refl
-    ; lambda2NegativeTextRecorded =
-        lambda2NegativeText
-    ; lambda2NegativeTextRecordedIsCanonical =
+    ; enstrophyMaximumXERouteTextRecorded =
+        enstrophyMaximumXERouteText
+    ; enstrophyMaximumXERouteTextRecordedIsCanonical =
         refl
-    ; crossDerivativeNegativeRecorded =
+    ; vortexCoreXVRouteRecordedFlag =
         true
-    ; crossDerivativeNegativeRecordedIsTrue =
+    ; vortexCoreXVRouteRecordedFlagIsTrue =
         refl
-    ; crossDerivativeNegativeTextRecorded =
-        crossDerivativeNegativeText
-    ; crossDerivativeNegativeTextRecordedIsCanonical =
+    ; vortexCoreXVRouteTextRecorded =
+        vortexCoreXVRouteText
+    ; vortexCoreXVRouteTextRecordedIsCanonical =
         refl
-    ; confinementRadiusShapeRecorded =
+    ; legacyRouteRedirectRecordedFlag =
         true
-    ; confinementRadiusShapeRecordedIsTrue =
+    ; legacyRouteRedirectRecordedFlagIsTrue =
         refl
-    ; confinementRadiusFormula =
-        confinementRadiusText
-    ; confinementRadiusFormulaIsCanonical =
-        refl
-    ; enstrophyMaximumShapeRecorded =
-        true
-    ; enstrophyMaximumShapeRecordedIsTrue =
-        refl
-    ; enstrophyMaximumTextRecorded =
-        enstrophyMaximumText
-    ; enstrophyMaximumTextRecordedIsCanonical =
-        refl
-    ; vortexCoreTargetSelectionRecorded =
-        true
-    ; vortexCoreTargetSelectionRecordedIsTrue =
-        refl
-    ; vortexCoreTargetSelectionTextRecorded =
-        vortexCoreTargetSelectionText
-    ; vortexCoreTargetSelectionTextRecordedIsCanonical =
+    ; legacyRouteRedirectTextRecorded =
+        legacyRouteRedirectText
+    ; legacyRouteRedirectTextRecordedIsCanonical =
         refl
     ; katoAlignmentBConditionRecorded =
         true
@@ -468,6 +433,10 @@ canonicalNSKatoConfinementLemmaReceipt =
     ; theoremCandidate =
         theoremCandidateText
     ; theoremCandidateIsCanonical =
+        refl
+    ; canonicalHessianReceipt =
+        canonicalNSKatoHessianConfinementReceipt
+    ; canonicalHessianReceiptIsCanonical =
         refl
     ; millerCriterionPromotion =
         false

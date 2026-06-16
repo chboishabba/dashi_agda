@@ -35,6 +35,12 @@ CAVEAT = (
 DNS_TIME_WINDOW_REQUIRED = "real_dns_t_approximately_7_to_9"
 SIGN_TOLERANCE = 1.0e-12
 JSON_FORMAT = "ns-gateway1-strain-cross-derivative-json-v1"
+TARGET_MODES = (
+    "enstrophy_max",
+    "lambda2_min",
+    "lambda2_negative_top_enstrophy",
+    "strain_max",
+)
 XYZ_STORAGE_AXIS_CONVENTION = "numpy_array_axis_order:x,y,z"
 ZYX_STORAGE_AXIS_CONVENTION = "numpy_array_axis_order:z,y,x"
 AXIS_CONVENTION_TO_COORD_AXIS = {
@@ -485,6 +491,38 @@ def _jsonify_matrix(matrix: np.ndarray) -> list[list[float]]:
     return [[float(x) for x in row] for row in array]
 
 
+def _target_snapshot_payload(
+    *,
+    target_index: tuple[int, int, int],
+    target_enstrophy: float,
+    target_strain_norm_squared: float,
+    target_eigenvalues: np.ndarray,
+    target_eigenvectors: np.ndarray,
+    target_min_local_eigenvalue_gap: float,
+    target_eigenframe_degenerate: bool,
+    target_lambda2: float,
+    target_cross_derivative: float,
+    target_pressure_hessian_e1_e2: float,
+) -> dict[str, Any]:
+    """Return the selected target-point JSON payload with stable aliases."""
+
+    return {
+        "target_index": list(target_index),
+        "target_enstrophy": float(target_enstrophy),
+        "target_strain_norm_squared": float(target_strain_norm_squared),
+        "target_eigenvalues": _jsonify_vector(target_eigenvalues),
+        "target_eigenvectors": _jsonify_matrix(target_eigenvectors),
+        "target_min_local_eigenvalue_gap": float(target_min_local_eigenvalue_gap),
+        "target_eigenframe_degenerate": bool(target_eigenframe_degenerate),
+        "target_lambda2": float(target_lambda2),
+        "lambda2_at_target": float(target_lambda2),
+        "target_cross_derivative_e1_e2_lambda2": float(target_cross_derivative),
+        "cross_derivative_e1_e2_lambda2_at_target": float(target_cross_derivative),
+        "target_pressure_hessian_e1_e2": float(target_pressure_hessian_e1_e2),
+        "pressure_hessian_e1_e2_at_target": float(target_pressure_hessian_e1_e2),
+    }
+
+
 def classify_sign(value: float, *, tolerance: float = SIGN_TOLERANCE) -> str:
     """Classify the local cross-derivative sign for JSON decision output."""
 
@@ -673,12 +711,7 @@ def run_diagnostic(
     amplitude = float(amplitude)
     if not np.isfinite(amplitude):
         raise ValueError("amplitude must be finite")
-    if target not in {
-        "enstrophy_max",
-        "lambda2_min",
-        "lambda2_negative_top_enstrophy",
-        "strain_max",
-    }:
+    if target not in TARGET_MODES:
         raise ValueError(
             "target must be one of 'enstrophy_max', 'lambda2_min', "
             "'lambda2_negative_top_enstrophy', or 'strain_max'"
@@ -841,6 +874,8 @@ def run_diagnostic(
             raise ValueError("Kato alignment condition B is non-finite")
         kato_alignment_result = {
             "kato_alignment_enabled": True,
+            "kato_alignment_computed": True,
+            "kato_alignment_target_snapshot_available": True,
             "kato_alignment_directional_grad_e1_vector": _jsonify_vector(d_e1S_e1),
             "kato_alignment_directional_grad_e2_vector": _jsonify_vector(d_e2S_e1),
             "kato_alignment_e2_dot_d_e1S_e1": e2_d_e1S_e1,
@@ -848,6 +883,12 @@ def run_diagnostic(
             "kato_alignment_B": float(kato_alignment_B),
             "kato_alignment_target_index": list(target_index),
             "kato_alignment_target_mode": target,
+            "kato_alignment_lambda2_at_target": float(target_lambda2),
+            "kato_alignment_target_lambda2": float(target_lambda2),
+            "kato_alignment_target_pressure_hessian_e1_e2": float(target_pressure_hessian_e1_e2),
+            "kato_alignment_target_cross_derivative_e1_e2_lambda2": float(target_cross_derivative),
+            "kato_alignment_cross_derivative_e1_e2_lambda2_at_target": float(target_cross_derivative),
+            "kato_alignment_pressure_hessian_e1_e2_at_target": float(target_pressure_hessian_e1_e2),
         }
         kato_alignment_result["kato_alignment_B_sign"] = classify_sign(
             kato_alignment_result["kato_alignment_B"]
@@ -897,16 +938,18 @@ def run_diagnostic(
         "target_top_enstrophy_threshold": target_selection.get("target_top_enstrophy_threshold"),
         "target_top_enstrophy_mask_count": target_selection.get("target_top_enstrophy_mask_count"),
         "target_negative_lambda2_top_mask_count": target_selection.get("target_negative_lambda2_top_mask_count"),
-        "target_index": list(target_index),
-        "target_enstrophy": float(enstrophy[target_index]),
-        "target_strain_norm_squared": float(strain_norm_squared[target_index]),
-        "target_eigenvalues": _jsonify_vector(target_eigenvalues),
-        "target_eigenvectors": _jsonify_matrix(target_eigenvectors),
-        "target_min_local_eigenvalue_gap": target_min_eigenvalue_gap,
-        "target_eigenframe_degenerate": target_eigenframe_degenerate,
-        "target_lambda2": target_lambda2,
-        "target_cross_derivative_e1_e2_lambda2": target_cross_derivative,
-        "target_pressure_hessian_e1_e2": target_pressure_hessian_e1_e2,
+        **_target_snapshot_payload(
+            target_index=target_index,
+            target_enstrophy=float(enstrophy[target_index]),
+            target_strain_norm_squared=float(strain_norm_squared[target_index]),
+            target_eigenvalues=target_eigenvalues,
+            target_eigenvectors=target_eigenvectors,
+            target_min_local_eigenvalue_gap=target_min_eigenvalue_gap,
+            target_eigenframe_degenerate=target_eigenframe_degenerate,
+            target_lambda2=target_lambda2,
+            target_cross_derivative=target_cross_derivative,
+            target_pressure_hessian_e1_e2=target_pressure_hessian_e1_e2,
+        ),
         "target_sign_classification": target_sign_classification,
         "target_sign_nonpositive": bool(
             target_sign_classification != "positive_adverse_to_nonpositive_rule"
@@ -1092,12 +1135,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, default=None, help="optional JSON artifact output path")
     parser.add_argument(
         "--target",
-        choices=(
-            "enstrophy_max",
-            "lambda2_min",
-            "lambda2_negative_top_enstrophy",
-            "strain_max",
-        ),
+        choices=TARGET_MODES,
         default="enstrophy_max",
         help="select the target point used for target-dependent diagnostics",
     )

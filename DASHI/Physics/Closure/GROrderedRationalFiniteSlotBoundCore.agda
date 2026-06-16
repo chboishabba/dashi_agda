@@ -53,8 +53,51 @@ sevenNonzeroSlotReductionLemmaName = "seven nonzero slot reduction"
 orderedRationalChristoffel22Le48LawName : String
 orderedRationalChristoffel22Le48LawName = "22<=48"
 
-orderedRationalRicci2144Over27Le80Le640LawName : String
-orderedRationalRicci2144Over27Le80Le640LawName = "2144/27<=80<=640"
+orderedRationalRicci2144Over27Le80LawName : String
+orderedRationalRicci2144Over27Le80LawName = "2144/27<=80"
+
+orderedRationalRicci80Le640LawName : String
+orderedRationalRicci80Le640LawName = "80<=640"
+
+orderedRationalShellA44Le48LawName : String
+orderedRationalShellA44Le48LawName = "44<=48"
+
+coord4SevenNonzeroSlotsLawName : String
+coord4SevenNonzeroSlotsLawName = "7 nonzero slots"
+
+coord4FiftySevenZeroSlotsLawName : String
+coord4FiftySevenZeroSlotsLawName = "57 zero slots"
+
+coord4SixtyFourTriplesLawName : String
+coord4SixtyFourTriplesLawName = "64 total Coord4 triples"
+
+data GROrderedRationalFiniteSlotBoundCoreAdapterRow : Set where
+  christoffel22Le48AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  ricci2144Over27Le80AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  ricci80Le640AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  shellA44Le48AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  coord4SevenNonzeroSlotsAdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  coord4FiftySevenZeroSlotsAdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  coord4SixtyFourTriplesAdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+
+canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRows :
+  List GROrderedRationalFiniteSlotBoundCoreAdapterRow
+canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRows =
+  christoffel22Le48AdapterRow
+  ∷ ricci2144Over27Le80AdapterRow
+  ∷ ricci80Le640AdapterRow
+  ∷ shellA44Le48AdapterRow
+  ∷ coord4SevenNonzeroSlotsAdapterRow
+  ∷ coord4FiftySevenZeroSlotsAdapterRow
+  ∷ coord4SixtyFourTriplesAdapterRow
+  ∷ []
 
 data GROrderedRationalFiniteSlotBoundCoreDataRow : Set where
   christoffelPerturbBound22 :
@@ -161,6 +204,17 @@ canonicalOrderedRationalScalarLemmaNames =
   ∷ sevenNonzeroSlotReductionLemmaName
   ∷ []
 
+canonicalGROrderedRationalFiniteSlotBoundCoreAdapterTokens : List String
+canonicalGROrderedRationalFiniteSlotBoundCoreAdapterTokens =
+  orderedRationalChristoffel22Le48LawName
+  ∷ orderedRationalRicci2144Over27Le80LawName
+  ∷ orderedRationalRicci80Le640LawName
+  ∷ orderedRationalShellA44Le48LawName
+  ∷ coord4SevenNonzeroSlotsLawName
+  ∷ coord4FiftySevenZeroSlotsLawName
+  ∷ coord4SixtyFourTriplesLawName
+  ∷ []
+
 data GROrderedRationalFiniteSlotBoundCoreBlockedRow : Set where
   fullOrderedRationalProofStackStillOpen :
     GROrderedRationalFiniteSlotBoundCoreBlockedRow
@@ -183,7 +237,11 @@ canonicalGROrderedRationalFiniteSlotBoundCoreBlockedRows =
 data GROrderedRationalFiniteSlotBoundCoreLawRow : Set where
   christoffel22Le48LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
-  ricci2144Over27Le80Le640LawShape :
+  ricci2144Over27Le80LawShape :
+    GROrderedRationalFiniteSlotBoundCoreLawRow
+  ricci80Le640LawShape :
+    GROrderedRationalFiniteSlotBoundCoreLawRow
+  shellA44Le48LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
   absSub :
     GROrderedRationalFiniteSlotBoundCoreLawRow
@@ -200,7 +258,9 @@ canonicalGROrderedRationalFiniteSlotBoundCoreLawRows :
   List GROrderedRationalFiniteSlotBoundCoreLawRow
 canonicalGROrderedRationalFiniteSlotBoundCoreLawRows =
   christoffel22Le48LawShape
-  ∷ ricci2144Over27Le80Le640LawShape
+  ∷ ricci2144Over27Le80LawShape
+  ∷ ricci80Le640LawShape
+  ∷ shellA44Le48LawShape
   ∷ absSub
   ∷ scaleMonotoneNonnegative
   ∷ finiteSevenSlotReduction
@@ -214,19 +274,19 @@ record GROrderedRationalFiniteSlotBoundCoreORCSLPGF : Set where
     O : String
     OIsCanonical : O ≡ "ordered-rational"
     R : String
-    RIsCanonical : R ≡ "future Christoffel/Ricci proof-shape reuse"
+    RIsCanonical : R ≡ "future Christoffel/Ricci proof-shape reuse with adapter rows"
     C : String
-    CIsCanonical : C ≡ "canonical scalar lemma names plus finite slot counts"
+    CIsCanonical : C ≡ "canonical scalar lemma names plus exact arithmetic adapter rows"
     S : String
     SIsCanonical : S ≡ "fail-closed"
     L : String
-    LIsCanonical : L ≡ "list-backed lemma ledger"
+    LIsCanonical : L ≡ "list-backed lemma and adapter ledger"
     P : String
     PIsCanonical : P ≡ "promotions remain blocked"
     G : String
-    GIsCanonical : G ≡ "record the reusable bound shapes only"
+    GIsCanonical : G ≡ "record the reusable bound shapes and exact arithmetic adapters only"
     F : String
-    FIsCanonical : F ≡ "full ordered-rational proofs, Christoffel bound, and Ricci bound remain unpromoted"
+    FIsCanonical : F ≡ "full ordered-rational proofs remain unpromoted; 22<=48, 2144/27<=80, 80<=640, 44<=48, and 7/57/64 Coord4 triple rows are recorded"
 
 open GROrderedRationalFiniteSlotBoundCoreORCSLPGF public
 
@@ -236,19 +296,19 @@ canonicalGROrderedRationalFiniteSlotBoundCoreORCSLPGF =
   groOrderedRationalFiniteSlotBoundCoreORCSLPGF
     "ordered-rational"
     refl
-    "future Christoffel/Ricci proof-shape reuse"
+    "future Christoffel/Ricci proof-shape reuse with adapter rows"
     refl
-    "canonical scalar lemma names plus finite slot counts"
+    "canonical scalar lemma names plus exact arithmetic adapter rows"
     refl
     "fail-closed"
     refl
-    "list-backed lemma ledger"
+    "list-backed lemma and adapter ledger"
     refl
     "promotions remain blocked"
     refl
-    "record the reusable bound shapes only"
+    "record the reusable bound shapes and exact arithmetic adapters only"
     refl
-    "full ordered-rational proofs, Christoffel bound, and Ricci bound remain unpromoted"
+    "full ordered-rational proofs remain unpromoted; 22<=48, 2144/27<=80, 80<=640, 44<=48, and 7/57/64 Coord4 triple rows are recorded"
     refl
 
 record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
@@ -272,6 +332,12 @@ record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
     blockedRowsAreCanonical :
       blockedRows ≡ canonicalGROrderedRationalFiniteSlotBoundCoreBlockedRows
 
+    adapterRows :
+      List GROrderedRationalFiniteSlotBoundCoreAdapterRow
+
+    adapterRowsAreCanonical :
+      adapterRows ≡ canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRows
+
     lawRows :
       List GROrderedRationalFiniteSlotBoundCoreLawRow
 
@@ -283,6 +349,12 @@ record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
 
     dataRowsAreCanonical :
       dataRows ≡ canonicalGROrderedRationalFiniteSlotBoundCoreDataRows
+
+    adapterTokenRows :
+      List String
+
+    adapterTokenRowsAreCanonical :
+      adapterTokenRows ≡ canonicalGROrderedRationalFiniteSlotBoundCoreAdapterTokens
 
     shellAConstantRows :
       List String
@@ -362,6 +434,30 @@ record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
     shellAC_RChainRecordedIs2144Over27Le80Le640 :
       shellAC_RChainRecorded ≡ "2144/27<=80<=640"
 
+    shellA44Le48Recorded :
+      String
+
+    shellA44Le48RecordedIsCanonical :
+      shellA44Le48Recorded ≡ "44<=48"
+
+    coord4SevenNonzeroSlotsRecorded :
+      Nat
+
+    coord4SevenNonzeroSlotsRecordedIs7 :
+      coord4SevenNonzeroSlotsRecorded ≡ 7
+
+    coord4FiftySevenZeroSlotsRecorded :
+      Nat
+
+    coord4FiftySevenZeroSlotsRecordedIs57 :
+      coord4FiftySevenZeroSlotsRecorded ≡ 57
+
+    coord4SixtyFourTriplesRecorded :
+      Nat
+
+    coord4SixtyFourTriplesRecordedIs64 :
+      coord4SixtyFourTriplesRecorded ≡ 64
+
     fullOrderedRationalProofsPromotedRecorded :
       Bool
 
@@ -395,7 +491,22 @@ record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
     orderedRationalChristoffel22Le48LawRecorded :
       String
 
-    orderedRationalRicci2144Over27Le80Le640LawRecorded :
+    orderedRationalRicci2144Over27Le80LawRecorded :
+      String
+
+    orderedRationalRicci80Le640LawRecorded :
+      String
+
+    orderedRational44Le48LawRecorded :
+      String
+
+    coord4SevenNonzeroSlotsLawRecorded :
+      String
+
+    coord4FiftySevenZeroSlotsLawRecorded :
+      String
+
+    coord4SixtyFourTriplesLawRecorded :
       String
 
     blockedReason :
@@ -419,9 +530,13 @@ canonicalGROrderedRationalFiniteSlotBoundCoreReceipt =
     refl
     canonicalGROrderedRationalFiniteSlotBoundCoreBlockedRows
     refl
+    canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRows
+    refl
     canonicalGROrderedRationalFiniteSlotBoundCoreLawRows
     refl
     canonicalGROrderedRationalFiniteSlotBoundCoreDataRows
+    refl
+    canonicalGROrderedRationalFiniteSlotBoundCoreAdapterTokens
     refl
     canonicalShellAConstantRows
     refl
@@ -449,6 +564,14 @@ canonicalGROrderedRationalFiniteSlotBoundCoreReceipt =
     refl
     shellAC_RChain
     refl
+    "44<=48"
+    refl
+    7
+    refl
+    57
+    refl
+    64
+    refl
     fullOrderedRationalProofsPromoted
     refl
     christoffelBoundPromoted
@@ -460,7 +583,12 @@ canonicalGROrderedRationalFiniteSlotBoundCoreReceipt =
     sevenNonzeroSlotCount
     refl
     orderedRationalChristoffel22Le48LawName
-    orderedRationalRicci2144Over27Le80Le640LawName
+    orderedRationalRicci2144Over27Le80LawName
+    orderedRationalRicci80Le640LawName
+    orderedRationalShellA44Le48LawName
+    coord4SevenNonzeroSlotsLawName
+    coord4FiftySevenZeroSlotsLawName
+    coord4SixtyFourTriplesLawName
     ("full ordered-rational proofs are intentionally absent until the surrounding Christoffel and Ricci inhabitants are stable"
       ∷ "the file only records reusable scalar lemma names and finite slot shapes"
       ∷ "no fragile proof terms are duplicated here"

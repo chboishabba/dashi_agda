@@ -196,8 +196,7 @@ def require_contract(result: dict[str, Any], expected_n: int) -> None:
     assert isinstance(result["summary"], str)
     assert "NS-GW-1 diagnostic:" in result["summary"]
     assert result["sign_classification"] in result["summary"]
-    assert len(result["enstrophy_max_index"]) == 3
-    assert all(isinstance(index, int) for index in result["enstrophy_max_index"])
+    assert_index_triplet(result["enstrophy_max_index"])
     assert isinstance(result["enstrophy_max_value"], float)
     assert len(result["eigenvalues_at_max"]) == 3
     assert all(isinstance(value, float) for value in result["eigenvalues_at_max"])
@@ -268,8 +267,7 @@ def require_contract(result: dict[str, Any], expected_n: int) -> None:
     if result["target_negative_lambda2_top_mask_count"] is not None:
         assert isinstance(result["target_negative_lambda2_top_mask_count"], int)
         assert result["target_negative_lambda2_top_mask_count"] >= 0
-    assert len(result["target_index"]) == 3
-    assert all(isinstance(index, int) for index in result["target_index"])
+    assert_index_triplet(result["target_index"])
     assert isinstance(result["target_enstrophy"], float)
     assert isinstance(result["target_strain_norm_squared"], float)
     assert len(result["target_eigenvalues"]) == 3
@@ -350,6 +348,7 @@ def assert_kato_alignment_payload(result: dict[str, Any], *, expected_target_mod
     }
     if expected_target_mode is not None:
         assert result["kato_alignment_target_mode"] == expected_target_mode
+    assert_index_triplet(result["kato_alignment_target_index"])
     assert result["kato_alignment_target_index"] == result["target_index"]
     assert_finite_numeric_vector(result["kato_alignment_directional_grad_e1_vector"], expected_len=3)
     assert_finite_numeric_vector(result["kato_alignment_directional_grad_e2_vector"], expected_len=3)
@@ -426,6 +425,21 @@ def assert_target_payload(result: dict[str, Any], *, expected_mode: str) -> None
     assert np.isfinite(result["target_top_enstrophy_percentile"])
 
 
+def assert_enstrophy_max_target_payload(result: dict[str, Any]) -> None:
+    assert result["target_mode"] == "enstrophy_max"
+    assert result["target_index"] == result["enstrophy_max_index"]
+    assert result["target_selection_status"] == "selected_enstrophy_max"
+    assert result["target_top_enstrophy_threshold"] is None
+    assert result["target_top_enstrophy_mask_count"] is None
+    assert result["target_negative_lambda2_top_mask_count"] is None
+    assert result["target_enstrophy"] == result["enstrophy_max_value"]
+    assert result["target_lambda2"] == result["lambda2_at_max"]
+    assert result["target_cross_derivative_e1_e2_lambda2"] == result[
+        "cross_derivative_e1_e2_lambda2_at_max"
+    ]
+    assert result["target_pressure_hessian_e1_e2"] == result["pressure_hessian_e1_e2_at_max"]
+
+
 def assert_target_payload_is_target_mode(result: dict[str, Any]) -> None:
     assert result["target_mode"] != "enstrophy_max"
     assert result["target_index"] != result["enstrophy_max_index"] or (
@@ -446,6 +460,7 @@ def test_run_diagnostic_importable_returns_json_serializable_contract() -> None:
     result = module.run_diagnostic(N=8, amplitude=0.5)
 
     require_contract(result, expected_n=8)
+    assert_enstrophy_max_target_payload(result)
 
 
 def test_run_diagnostic_importable_supports_target_selection_when_available(
@@ -513,7 +528,7 @@ def test_run_diagnostic_target_modes_use_distinct_target_payloads_on_small_fixtu
         source=np.array("target-mode-compare-fixture"),
     )
 
-    result_enstrophy = module.run_diagnostic(field=field_path)
+    result_enstrophy = module.run_diagnostic(field=field_path, kato_alignment=True)
     result_lambda2 = module.run_diagnostic(
         field=field_path,
         target="lambda2_min",
@@ -531,6 +546,7 @@ def test_run_diagnostic_target_modes_use_distinct_target_payloads_on_small_fixtu
     require_contract(result_top, expected_n=n)
 
     assert result_enstrophy["target_mode"] == "enstrophy_max"
+    assert_enstrophy_max_target_payload(result_enstrophy)
     assert result_lambda2["target_mode"] == "lambda2_min"
     assert result_top["target_mode"] == "lambda2_negative_top_enstrophy"
     assert result_top["target_top_enstrophy_percentile"] == 85.0
@@ -539,6 +555,10 @@ def test_run_diagnostic_target_modes_use_distinct_target_payloads_on_small_fixtu
 
     assert_target_payload(result_lambda2, expected_mode="lambda2_min")
     assert_target_payload(result_top, expected_mode="lambda2_negative_top_enstrophy")
+    assert_kato_alignment_payload(
+        result_enstrophy,
+        expected_target_mode="enstrophy_max",
+    )
     assert_kato_alignment_payload(
         result_lambda2,
         expected_target_mode="lambda2_min",

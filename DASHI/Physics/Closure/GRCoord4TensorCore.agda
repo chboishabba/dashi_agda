@@ -1053,3 +1053,232 @@ schwarzschildFormulaLawSurfaceFromCarrier carrier =
     (schwarzschildInverseMetricLawSurfaceFromCarrier carrier)
     (schwarzschildMetricCompatibilityLawSurfaceFromCarrier carrier)
     false
+
+------------------------------------------------------------------------
+-- Named Christoffel law rows and the 57-slot zero closure.
+--
+-- These definitions stay at the surface level.  They record the seven
+-- canonical nonzero Schwarzschild Christoffel slots individually, and they
+-- give the complementary 57-slot closure a concrete named list so downstream
+-- perturbation work can project the row family without promoting any theorem.
+
+record SchwarzschildChristoffelNamedLawRow : Set where
+  constructor schwarzschildChristoffelNamedLawRow
+  field
+    rowName :
+      String
+
+    rowSlot :
+      SchwarzschildChristoffelSlot
+
+    rowFormula :
+      SchwarzschildChristoffelSlotFormula
+
+    rowBoundary :
+      List String
+
+    rowNotPromoted :
+      Bool
+
+schwarzschildChristoffelTtrNamedLawRow :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelNamedLawRow
+schwarzschildChristoffelTtrNamedLawRow surface =
+  schwarzschildChristoffelNamedLawRow
+    "ttrLawRow"
+    gammaTtr
+    (SchwarzschildChristoffelFormulaSurface.ttrFormula surface)
+    ("rowTtr" ∷ [])
+    false
+
+schwarzschildChristoffelRttNamedLawRow :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelNamedLawRow
+schwarzschildChristoffelRttNamedLawRow surface =
+  schwarzschildChristoffelNamedLawRow
+    "rttLawRow"
+    gammaRtt
+    (SchwarzschildChristoffelFormulaSurface.rttFormula surface)
+    ("rowRtt" ∷ [])
+    false
+
+schwarzschildChristoffelRrrNamedLawRow :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelNamedLawRow
+schwarzschildChristoffelRrrNamedLawRow surface =
+  schwarzschildChristoffelNamedLawRow
+    "rrrLawRow"
+    gammaRrr
+    (SchwarzschildChristoffelFormulaSurface.rrrFormula surface)
+    ("rowRrr" ∷ [])
+    false
+
+schwarzschildChristoffelRThetaThetaNamedLawRow :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelNamedLawRow
+schwarzschildChristoffelRThetaThetaNamedLawRow surface =
+  schwarzschildChristoffelNamedLawRow
+    "rThetaThetaLawRow"
+    gammaRThetaTheta
+    (SchwarzschildChristoffelFormulaSurface.rThetaThetaFormula surface)
+    ("rowRThetaTheta" ∷ [])
+    false
+
+schwarzschildChristoffelRPhiPhiNamedLawRow :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelNamedLawRow
+schwarzschildChristoffelRPhiPhiNamedLawRow surface =
+  schwarzschildChristoffelNamedLawRow
+    "rPhiPhiLawRow"
+    gammaRPhiPhi
+    (SchwarzschildChristoffelFormulaSurface.rPhiPhiFormula surface)
+    ("rowRPhiPhi" ∷ [])
+    false
+
+schwarzschildChristoffelThetaRThetaNamedLawRow :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelNamedLawRow
+schwarzschildChristoffelThetaRThetaNamedLawRow surface =
+  schwarzschildChristoffelNamedLawRow
+    "thetaRThetaLawRow"
+    gammaThetaRTheta
+    (SchwarzschildChristoffelFormulaSurface.thetaRThetaFormula surface)
+    ("rowThetaRTheta" ∷ [])
+    false
+
+schwarzschildChristoffelPhiRPhiNamedLawRow :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelNamedLawRow
+schwarzschildChristoffelPhiRPhiNamedLawRow surface =
+  schwarzschildChristoffelNamedLawRow
+    "phiRPhiLawRow"
+    gammaPhiRPhi
+    (SchwarzschildChristoffelFormulaSurface.phiRPhiFormula surface)
+    ("rowPhiRPhi" ∷ [])
+    false
+
+record SchwarzschildChristoffelSevenNamedLawSurface : Set where
+  constructor schwarzschildChristoffelSevenNamedLawSurfaceRecord
+  field
+    ttrRow :
+      SchwarzschildChristoffelNamedLawRow
+
+    rttRow :
+      SchwarzschildChristoffelNamedLawRow
+
+    rrrRow :
+      SchwarzschildChristoffelNamedLawRow
+
+    rThetaThetaRow :
+      SchwarzschildChristoffelNamedLawRow
+
+    rPhiPhiRow :
+      SchwarzschildChristoffelNamedLawRow
+
+    thetaRThetaRow :
+      SchwarzschildChristoffelNamedLawRow
+
+    phiRPhiRow :
+      SchwarzschildChristoffelNamedLawRow
+
+    surfaceBoundary :
+      List String
+
+    surfaceNotPromoted :
+      Bool
+
+schwarzschildChristoffelSevenNamedLawSurfaceFromFormulaSurface :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelSevenNamedLawSurface
+schwarzschildChristoffelSevenNamedLawSurfaceFromFormulaSurface surface =
+  schwarzschildChristoffelSevenNamedLawSurfaceRecord
+    (schwarzschildChristoffelTtrNamedLawRow surface)
+    (schwarzschildChristoffelRttNamedLawRow surface)
+    (schwarzschildChristoffelRrrNamedLawRow surface)
+    (schwarzschildChristoffelRThetaThetaNamedLawRow surface)
+    (schwarzschildChristoffelRPhiPhiNamedLawRow surface)
+    (schwarzschildChristoffelThetaRThetaNamedLawRow surface)
+    (schwarzschildChristoffelPhiRPhiNamedLawRow surface)
+    ( "sevenNonzeroChristoffelRows" ∷
+      "schwarzschildDiagonalLawCore" ∷
+      [] )
+    false
+
+record SchwarzschildChristoffelZeroSlotClosureSurface : Set where
+  constructor schwarzschildChristoffelZeroSlotClosureSurfaceRecord
+  field
+    zeroSlotNames :
+      List String
+
+    closureBoundary :
+      List String
+
+    closureNotPromoted :
+      Bool
+
+schwarzschildChristoffelZeroSlotClosureNames :
+  List String
+schwarzschildChristoffelZeroSlotClosureNames =
+  "zeroGamma000" ∷ "zeroGamma002" ∷ "zeroGamma003" ∷
+  "zeroGamma010" ∷ "zeroGamma011" ∷ "zeroGamma012" ∷
+  "zeroGamma013" ∷ "zeroGamma020" ∷ "zeroGamma021" ∷
+  "zeroGamma022" ∷ "zeroGamma023" ∷ "zeroGamma030" ∷
+  "zeroGamma031" ∷ "zeroGamma032" ∷ "zeroGamma033" ∷
+  "zeroGamma101" ∷ "zeroGamma102" ∷ "zeroGamma103" ∷
+  "zeroGamma110" ∷ "zeroGamma112" ∷ "zeroGamma113" ∷
+  "zeroGamma120" ∷ "zeroGamma121" ∷ "zeroGamma123" ∷
+  "zeroGamma130" ∷ "zeroGamma131" ∷ "zeroGamma132" ∷
+  "zeroGamma200" ∷ "zeroGamma201" ∷ "zeroGamma202" ∷
+  "zeroGamma203" ∷ "zeroGamma210" ∷ "zeroGamma211" ∷
+  "zeroGamma213" ∷ "zeroGamma220" ∷ "zeroGamma221" ∷
+  "zeroGamma222" ∷ "zeroGamma223" ∷ "zeroGamma230" ∷
+  "zeroGamma231" ∷ "zeroGamma232" ∷ "zeroGamma233" ∷
+  "zeroGamma300" ∷ "zeroGamma301" ∷ "zeroGamma302" ∷
+  "zeroGamma303" ∷ "zeroGamma310" ∷ "zeroGamma311" ∷
+  "zeroGamma312" ∷ "zeroGamma320" ∷ "zeroGamma321" ∷
+  "zeroGamma322" ∷ "zeroGamma323" ∷ "zeroGamma330" ∷
+  "zeroGamma331" ∷ "zeroGamma332" ∷ "zeroGamma333" ∷ []
+
+schwarzschildChristoffelZeroSlotClosureSurface :
+  SchwarzschildChristoffelZeroSlotClosureSurface
+schwarzschildChristoffelZeroSlotClosureSurface =
+  schwarzschildChristoffelZeroSlotClosureSurfaceRecord
+    schwarzschildChristoffelZeroSlotClosureNames
+    ( "zeroSlot57Closure" ∷
+      "complementOfSevenNamedNonzeroRows" ∷
+      [] )
+    false
+
+record SchwarzschildChristoffelDiagonalLawCoreSurface : Set where
+  constructor schwarzschildChristoffelDiagonalLawCoreSurfaceRecord
+  field
+    sevenNamedLawSurface :
+      SchwarzschildChristoffelSevenNamedLawSurface
+
+    zeroSlotClosureSurface :
+      SchwarzschildChristoffelZeroSlotClosureSurface
+
+    lawCoreBoundary :
+      List String
+
+    lawCoreNotPromoted :
+      Bool
+
+schwarzschildChristoffelDiagonalLawCoreSurfaceFromFormulaSurface :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelDiagonalLawCoreSurface
+schwarzschildChristoffelDiagonalLawCoreSurfaceFromFormulaSurface surface =
+  schwarzschildChristoffelDiagonalLawCoreSurfaceRecord
+    (schwarzschildChristoffelSevenNamedLawSurfaceFromFormulaSurface surface)
+    schwarzschildChristoffelZeroSlotClosureSurface
+    ( "diagonalChristoffelLawCore" ∷
+      "sevenRowsAndZeroClosure" ∷
+      [] )
+    false
+
+schwarzschildChristoffelDiagonalLawCoreSurfaceFromCarrier :
+  SchwarzschildDiagonalFormulaCarrierSurface →
+  SchwarzschildChristoffelDiagonalLawCoreSurface
+schwarzschildChristoffelDiagonalLawCoreSurfaceFromCarrier carrier =
+  schwarzschildChristoffelDiagonalLawCoreSurfaceFromFormulaSurface
+    (SchwarzschildDiagonalFormulaCarrierSurface.christoffelFormula carrier)
