@@ -12,6 +12,7 @@ import DASHI.Interop.PNFSpectralFieldCore as Core
 import DASHI.Interop.PNFSpectralFieldGraph as Graph
 import DASHI.Interop.PNFResidualSpectralSeverityReceipt as SeverityReceipt
 import DASHI.Interop.SensibLawResidualLattice as Residual
+import DASHI.Interop.VectorNonAuthorityCore as VectorNA
 import UFTC_Lattice as UFTC
 
 ------------------------------------------------------------------------
@@ -435,6 +436,48 @@ vectorSpectralAuthorityGateIsFalse :
   vectorOrSpectralPromotesAuthority carrier ≡ false
 vectorSpectralAuthorityGateIsFalse carrier =
   refl
+
+nonAuthorityCarrierProposalMode :
+  NonAuthorityCarrier →
+  VectorNA.VectorProposalMode
+nonAuthorityCarrierProposalMode textEmbeddingCarrier =
+  VectorNA.embeddingProposalMode
+nonAuthorityCarrierProposalMode vectorProximityCarrier =
+  VectorNA.proximityProposalMode
+nonAuthorityCarrierProposalMode spectralCoordinateCarrier =
+  VectorNA.spectralProposalMode
+nonAuthorityCarrierProposalMode signedLaplacianCarrier =
+  VectorNA.spectralProposalMode
+
+nonAuthorityCarrierCoreAdapter :
+  NonAuthorityCarrier →
+  VectorNA.VectorProposalRow
+nonAuthorityCarrierCoreAdapter carrier =
+  VectorNA.vectorProposalRow
+    (nonAuthorityCarrierProposalMode carrier)
+    VectorNA.canonicalCandidateOnlyHit
+    VectorNA.canonicalVectorEvidenceClaim
+    VectorNA.fallbackVectorCoordinate
+    VectorNA.fallbackVectorCoordinate
+    VectorNA.fallbackObjectRef
+    "residual-field-non-authority-carrier-core-adapter"
+    true
+    false
+    false
+    false
+    false
+
+nonAuthorityCarrierCoreAdapterReceipt :
+  ∀ carrier →
+  VectorNA.VectorProposalRowReceipt
+    (nonAuthorityCarrierCoreAdapter carrier)
+nonAuthorityCarrierCoreAdapterReceipt _ =
+  VectorNA.vectorProposalRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
 
 ------------------------------------------------------------------------
 -- Residual-corroborated proximity product invariant.
@@ -1128,6 +1171,40 @@ record PNFResidualFieldInvariantReceipt : Set where
     spectralAuthorityGate :
       vectorOrSpectralPromotesAuthority spectralCoordinateCarrier ≡ false
 
+    vectorNonAuthorityCoreAdapter :
+      VectorNA.VectorNonAuthorityReceipt
+
+    vectorNonAuthorityCoreAdapterIsCanonical :
+      vectorNonAuthorityCoreAdapter
+      ≡
+      VectorNA.canonicalVectorNonAuthorityReceipt
+
+    vectorNonAuthorityCarrierAdapter :
+      VectorNA.VectorProposalRow
+
+    vectorNonAuthorityCarrierAdapterIsCanonical :
+      vectorNonAuthorityCarrierAdapter
+      ≡
+      nonAuthorityCarrierCoreAdapter vectorProximityCarrier
+
+    vectorNonAuthorityCoreTruthFalse :
+      VectorNA.proposalRowCarriesTruthAuthority
+        vectorNonAuthorityCarrierAdapter
+      ≡
+      false
+
+    vectorNonAuthorityCoreSupportFalse :
+      VectorNA.proposalRowCarriesSupportAuthority
+        vectorNonAuthorityCarrierAdapter
+      ≡
+      false
+
+    vectorNonAuthorityCoreAdmissibilityFalse :
+      VectorNA.proposalRowCarriesAdmissibilityAuthority
+        vectorNonAuthorityCarrierAdapter
+      ≡
+      false
+
     statement :
       String
 
@@ -1273,6 +1350,20 @@ canonicalPNFResidualFieldInvariantReceipt =
         refl
     ; spectralAuthorityGate =
         refl
+    ; vectorNonAuthorityCoreAdapter =
+        VectorNA.canonicalVectorNonAuthorityReceipt
+    ; vectorNonAuthorityCoreAdapterIsCanonical =
+        refl
+    ; vectorNonAuthorityCarrierAdapter =
+        nonAuthorityCarrierCoreAdapter vectorProximityCarrier
+    ; vectorNonAuthorityCarrierAdapterIsCanonical =
+        refl
+    ; vectorNonAuthorityCoreTruthFalse =
+        refl
+    ; vectorNonAuthorityCoreSupportFalse =
+        refl
+    ; vectorNonAuthorityCoreAdmissibilityFalse =
+        refl
     ; statement =
         pnfResidualFieldInvariantStatement
     ; statementIsCanonical =
@@ -1322,4 +1413,20 @@ canonicalReceiptNoAuthorityProjection :
   ≡
   false
 canonicalReceiptNoAuthorityProjection =
+  refl
+
+canonicalReceiptVectorNonAuthorityCoreCanonical :
+  vectorNonAuthorityCoreAdapter canonicalPNFResidualFieldInvariantReceipt
+  ≡
+  VectorNA.canonicalVectorNonAuthorityReceipt
+canonicalReceiptVectorNonAuthorityCoreCanonical =
+  refl
+
+canonicalReceiptVectorNonAuthorityCoreTruthFalse :
+  VectorNA.proposalRowCarriesTruthAuthority
+    (vectorNonAuthorityCarrierAdapter
+      canonicalPNFResidualFieldInvariantReceipt)
+  ≡
+  false
+canonicalReceiptVectorNonAuthorityCoreTruthFalse =
   refl

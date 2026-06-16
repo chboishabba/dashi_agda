@@ -12,6 +12,7 @@ import DASHI.Interop.PNFSpectralFieldCore as Core
 import DASHI.Interop.PNFPackageCore as PackageCore
 import DASHI.Interop.PNFSpectralVectorIndex as Vector
 import DASHI.Interop.SensibLawResidualLattice as Residual
+import DASHI.Interop.VectorNonAuthorityCore as VectorNA
 
 ------------------------------------------------------------------------
 -- Resolver / selector / ITIR commitment package receipt.
@@ -572,6 +573,32 @@ canonicalHybridRankingReceipt =
     refl
     refl
 
+rankingCoreAdapterProposal : VectorNA.VectorProposalRow
+rankingCoreAdapterProposal =
+  VectorNA.vectorProposalRow
+    VectorNA.rankingProposalMode
+    VectorNA.canonicalCandidateOnlyHit
+    VectorNA.canonicalVectorEvidenceClaim
+    VectorNA.fallbackVectorCoordinate
+    VectorNA.fallbackVectorCoordinate
+    VectorNA.fallbackObjectRef
+    "resolver-selector-ranking-ordering-only-core-adapter"
+    true
+    false
+    false
+    false
+    false
+
+rankingCoreAdapterProposalReceipt :
+  VectorNA.VectorProposalRowReceipt rankingCoreAdapterProposal
+rankingCoreAdapterProposalReceipt =
+  VectorNA.vectorProposalRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+
 ------------------------------------------------------------------------
 -- Product commitment certificate: resolved and corroborated candidates.
 
@@ -1107,6 +1134,38 @@ record PNFResolverSelectorCommitmentReceipt : Set where
       ≡
       false
 
+    vectorNonAuthorityCoreAdapter :
+      VectorNA.VectorNonAuthorityReceipt
+
+    vectorNonAuthorityCoreAdapterIsCanonical :
+      vectorNonAuthorityCoreAdapter
+      ≡
+      VectorNA.canonicalVectorNonAuthorityReceipt
+
+    vectorNonAuthorityRankingAdapter :
+      VectorNA.VectorProposalRow
+
+    vectorNonAuthorityRankingAdapterIsCanonical :
+      vectorNonAuthorityRankingAdapter ≡ rankingCoreAdapterProposal
+
+    vectorNonAuthorityCoreTruthFalse :
+      VectorNA.proposalRowCarriesTruthAuthority
+        vectorNonAuthorityRankingAdapter
+      ≡
+      false
+
+    vectorNonAuthorityCoreSupportFalse :
+      VectorNA.proposalRowCarriesSupportAuthority
+        vectorNonAuthorityRankingAdapter
+      ≡
+      false
+
+    vectorNonAuthorityCoreAdmissibilityFalse :
+      VectorNA.proposalRowCarriesAdmissibilityAuthority
+        vectorNonAuthorityRankingAdapter
+      ≡
+      false
+
     receiptCorroboratedCandidate :
       Bool
 
@@ -1207,6 +1266,13 @@ canonicalPNFResolverSelectorCommitmentReceipt =
     canonicalProductCommitmentCertificate
     canonicalITIRPackageCommitmentReceipt
     PackageCore.canonicalAdmittedSelectorPackage
+    refl
+    refl
+    VectorNA.canonicalVectorNonAuthorityReceipt
+    refl
+    rankingCoreAdapterProposal
+    refl
+    refl
     refl
     refl
     true
@@ -1335,6 +1401,19 @@ canonicalRankingScoreIsNotAuthority :
   ≡
   false
 canonicalRankingScoreIsNotAuthority =
+  refl
+
+canonicalRankingCoreAdapterScoreAuthorityFalse :
+  scoreAsAuthority (hybridRanking canonicalReceipt) ≡ false
+canonicalRankingCoreAdapterScoreAuthorityFalse =
+  refl
+
+canonicalReceiptVectorNonAuthorityRankingTruthFalse :
+  VectorNA.proposalRowCarriesTruthAuthority
+    (vectorNonAuthorityRankingAdapter canonicalReceipt)
+  ≡
+  false
+canonicalReceiptVectorNonAuthorityRankingTruthFalse =
   refl
 
 canonicalContradictionIsPreserved :
