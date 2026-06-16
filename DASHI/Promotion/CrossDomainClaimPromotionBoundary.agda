@@ -11,6 +11,7 @@ import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
 import DASHI.Core.BridgeRequirementCore as BridgeReq
 import DASHI.Core.CandidateOnlyCore as CandidateOnly
 import DASHI.Core.FormalLensQualificationCore as FormalLens
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
 open import DASHI.Core.FiniteReceiptList using (listCount)
 
 ------------------------------------------------------------------------
@@ -279,6 +280,120 @@ canonicalCrossDomainAuthorityGateAdapterRows =
     canonicalBlockedTargetClaims
     canonicalRequiredBridgeReceiptKinds
   ∷ []
+
+------------------------------------------------------------------------
+-- Authority-boundary adapter.
+--
+-- The cross-domain boundary keeps its local claim vocabulary, but the
+-- blocked-authority and boundary-promoted plumbing now projects through the
+-- reusable authority-boundary core so the closed false surface is shared.
+
+record CrossDomainAuthorityBoundaryAdapterRow : Set where
+  constructor crossDomainAuthorityBoundaryAdapterRow
+  field
+    authorityBoundaryLabel :
+      String
+    authorityBoundaryReceipt :
+      AuthorityBoundary.AuthorityBoundaryReceipt
+    authorityBoundaryReceiptIsCanonical :
+      authorityBoundaryReceipt ≡
+      AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt
+    authorityBoundaryBlockedClaimKinds :
+      List AuthorityBoundary.AuthorityBoundaryClaimKind
+    authorityBoundaryBlockedClaimKindsAreCanonical :
+      authorityBoundaryBlockedClaimKinds ≡
+      AuthorityBoundary.canonicalBlockedAuthorityClaims
+    authorityBoundaryBlockedKinds :
+      List AuthorityNA.AuthorityKind
+    authorityBoundaryBlockedKindsAreCanonical :
+      authorityBoundaryBlockedKinds ≡
+      AuthorityBoundary.canonicalBlockedAuthorityKinds
+    authorityBoundaryCandidateOnly :
+      Bool
+    authorityBoundaryCandidateOnlyIsTrue :
+      authorityBoundaryCandidateOnly ≡ true
+    authorityBoundaryCandidatePromoted :
+      Bool
+    authorityBoundaryCandidatePromotedIsFalse :
+      authorityBoundaryCandidatePromoted ≡ false
+    authorityBoundaryBundlePromotesAnyAuthority :
+      Bool
+    authorityBoundaryBundlePromotesAnyAuthorityIsFalse :
+      authorityBoundaryBundlePromotesAnyAuthority ≡ false
+    authorityBoundaryPromoted :
+      Bool
+    authorityBoundaryPromotedIsFalse :
+      authorityBoundaryPromoted ≡ false
+    authorityBoundaryBlockedKindsFalse :
+      AuthorityNA.AllAuthorityKindsFalse
+        (AuthorityBoundary.receiptAuthorityBundle
+          authorityBoundaryReceipt)
+        authorityBoundaryBlockedKinds
+    authorityBoundaryBlockedKindsCount :
+      Nat
+    authorityBoundaryBlockedKindsCountIsCanonical :
+      authorityBoundaryBlockedKindsCount ≡
+      AuthorityBoundary.canonicalBlockedAuthorityKindCount
+    authorityBoundaryAdapterNote :
+      String
+
+open CrossDomainAuthorityBoundaryAdapterRow public
+
+canonicalCrossDomainAuthorityBoundaryAdapterRow :
+  CrossDomainAuthorityBoundaryAdapterRow
+canonicalCrossDomainAuthorityBoundaryAdapterRow =
+  record
+    { authorityBoundaryLabel =
+        "cross-domain authority boundary adapter"
+    ; authorityBoundaryReceipt =
+        AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt
+    ; authorityBoundaryReceiptIsCanonical =
+        refl
+    ; authorityBoundaryBlockedClaimKinds =
+        AuthorityBoundary.canonicalBlockedAuthorityClaims
+    ; authorityBoundaryBlockedClaimKindsAreCanonical =
+        refl
+    ; authorityBoundaryBlockedKinds =
+        AuthorityBoundary.canonicalBlockedAuthorityKinds
+    ; authorityBoundaryBlockedKindsAreCanonical =
+        refl
+    ; authorityBoundaryCandidateOnly =
+        CandidateOnly.candidateOnly
+          (AuthorityBoundary.receiptCandidateRow
+            AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt)
+    ; authorityBoundaryCandidateOnlyIsTrue =
+        AuthorityBoundary.authorityBoundaryCandidateOnlyIsTrue
+          AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt
+    ; authorityBoundaryCandidatePromoted =
+        CandidateOnly.promoted
+          (AuthorityBoundary.receiptCandidateRow
+            AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt)
+    ; authorityBoundaryCandidatePromotedIsFalse =
+        AuthorityBoundary.authorityBoundaryCandidatePromotedIsFalse
+          AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt
+    ; authorityBoundaryBundlePromotesAnyAuthority =
+        AuthorityNA.promotesAnyAuthority
+          (AuthorityBoundary.receiptAuthorityBundle
+            AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt)
+    ; authorityBoundaryBundlePromotesAnyAuthorityIsFalse =
+        AuthorityBoundary.authorityBoundaryBundlePromotesAnyAuthorityIsFalse
+          AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt
+    ; authorityBoundaryPromoted =
+        AuthorityBoundary.receiptBoundaryPromoted
+          AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt
+    ; authorityBoundaryPromotedIsFalse =
+        AuthorityBoundary.receiptBoundaryPromotedIsFalse
+          AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt
+    ; authorityBoundaryBlockedKindsFalse =
+        AuthorityBoundary.authorityBoundaryBlockedAuthorityKindsFalse
+          AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt
+    ; authorityBoundaryBlockedKindsCount =
+        AuthorityBoundary.canonicalBlockedAuthorityKindCount
+    ; authorityBoundaryBlockedKindsCountIsCanonical =
+        refl
+    ; authorityBoundaryAdapterNote =
+        "cross-domain claim promotion keeps the generic authority-boundary core blocked and candidate-only"
+    }
 
 ------------------------------------------------------------------------
 -- Canonical examples.
@@ -1055,6 +1170,11 @@ crossDomainFunctionalFormalLensPromotionAuthorityFalse =
 record CrossDomainClaimPromotionBoundary : Set where
   field
     receiptLabel : String
+    authorityBoundaryAdapterRow :
+      CrossDomainAuthorityBoundaryAdapterRow
+    authorityBoundaryAdapterRowIsCanonical :
+      authorityBoundaryAdapterRow ≡
+      canonicalCrossDomainAuthorityBoundaryAdapterRow
     blockedTargetClaims : List ClaimKind
     requiredBridgeReceiptKinds : List BridgeReceiptKind
     examples : List CrossDomainPromotionExample
@@ -1141,6 +1261,10 @@ canonicalCrossDomainClaimPromotionBoundary =
   record
     { receiptLabel =
         "cross-domain claim promotion boundary"
+    ; authorityBoundaryAdapterRow =
+        canonicalCrossDomainAuthorityBoundaryAdapterRow
+    ; authorityBoundaryAdapterRowIsCanonical =
+        refl
     ; blockedTargetClaims =
         canonicalBlockedTargetClaims
     ; requiredBridgeReceiptKinds =
@@ -1255,6 +1379,83 @@ canonicalAuthorityGateAdapterRowsAreCanonical :
   authorityGateAdapterRows canonicalCrossDomainClaimPromotionBoundary
   ≡ canonicalCrossDomainAuthorityGateAdapterRows
 canonicalAuthorityGateAdapterRowsAreCanonical = refl
+
+canonicalAuthorityBoundaryAdapterRowIsCanonical :
+  authorityBoundaryAdapterRow
+    canonicalCrossDomainClaimPromotionBoundary
+  ≡ canonicalCrossDomainAuthorityBoundaryAdapterRow
+canonicalAuthorityBoundaryAdapterRowIsCanonical = refl
+
+canonicalAuthorityBoundaryReceiptIsCanonical :
+  authorityBoundaryReceipt
+    (authorityBoundaryAdapterRow
+      canonicalCrossDomainClaimPromotionBoundary)
+  ≡
+  AuthorityBoundary.canonicalRuntimeAuthorityBoundaryReceipt
+canonicalAuthorityBoundaryReceiptIsCanonical = refl
+
+canonicalAuthorityBoundaryBlockedClaimKindsAreCanonical :
+  authorityBoundaryBlockedClaimKinds
+    (authorityBoundaryAdapterRow
+      canonicalCrossDomainClaimPromotionBoundary)
+  ≡ AuthorityBoundary.canonicalBlockedAuthorityClaims
+canonicalAuthorityBoundaryBlockedClaimKindsAreCanonical = refl
+
+canonicalAuthorityBoundaryBlockedKindsAreCanonical :
+  authorityBoundaryBlockedKinds
+    (authorityBoundaryAdapterRow
+      canonicalCrossDomainClaimPromotionBoundary)
+  ≡ AuthorityBoundary.canonicalBlockedAuthorityKinds
+canonicalAuthorityBoundaryBlockedKindsAreCanonical = refl
+
+canonicalAuthorityBoundaryBlockedKindsFalse :
+  AuthorityNA.AllAuthorityKindsFalse
+    (AuthorityBoundary.receiptAuthorityBundle
+      (authorityBoundaryReceipt
+        (authorityBoundaryAdapterRow
+          canonicalCrossDomainClaimPromotionBoundary)))
+    (authorityBoundaryBlockedKinds
+      (authorityBoundaryAdapterRow
+        canonicalCrossDomainClaimPromotionBoundary))
+canonicalAuthorityBoundaryBlockedKindsFalse =
+  authorityBoundaryBlockedKindsFalse
+    (authorityBoundaryAdapterRow
+      canonicalCrossDomainClaimPromotionBoundary)
+
+canonicalAuthorityBoundaryPromotedIsFalse :
+  authorityBoundaryPromoted
+    (authorityBoundaryAdapterRow
+      canonicalCrossDomainClaimPromotionBoundary)
+  ≡ false
+canonicalAuthorityBoundaryPromotedIsFalse = refl
+
+canonicalAuthorityBoundaryCandidateOnlyIsTrue :
+  authorityBoundaryCandidateOnly
+    (authorityBoundaryAdapterRow
+      canonicalCrossDomainClaimPromotionBoundary)
+  ≡ true
+canonicalAuthorityBoundaryCandidateOnlyIsTrue = refl
+
+canonicalAuthorityBoundaryCandidatePromotedIsFalse :
+  authorityBoundaryCandidatePromoted
+    (authorityBoundaryAdapterRow
+      canonicalCrossDomainClaimPromotionBoundary)
+  ≡ false
+canonicalAuthorityBoundaryCandidatePromotedIsFalse = refl
+
+canonicalAuthorityBoundaryBundlePromotesAnyAuthorityIsFalse :
+  authorityBoundaryBundlePromotesAnyAuthority
+    (authorityBoundaryAdapterRow
+      canonicalCrossDomainClaimPromotionBoundary)
+  ≡ false
+canonicalAuthorityBoundaryBundlePromotesAnyAuthorityIsFalse = refl
+
+canonicalAuthorityBoundaryBlockedKindsCountIsCanonical :
+  authorityBoundaryBlockedKindsCount
+    (authorityBoundaryAdapterRow
+      canonicalCrossDomainClaimPromotionBoundary)
+  ≡ AuthorityBoundary.canonicalBlockedAuthorityKindCount
+canonicalAuthorityBoundaryBlockedKindsCountIsCanonical = refl
 
 canonicalMathematicalAnalogyDoesNotImplyEmpiricalFact :
   mathematicalAnalogyImpliesEmpiricalFact

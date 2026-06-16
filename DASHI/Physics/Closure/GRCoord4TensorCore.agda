@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.GRCoord4TensorCore where
 
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Bool using (Bool; false)
 open import Data.List.Base using (List; _∷_; [])
 open import DASHI.Core.Q using (ℚ)
 
@@ -22,6 +23,20 @@ data Coord4 : Set where
   coord1 : Coord4
   coord2 : Coord4
   coord3 : Coord4
+
+coord4Case :
+  {A : Set} →
+  A →
+  A →
+  A →
+  A →
+  Coord4 →
+  A
+coord4Case zero one two three coord with coord
+... | coord0 = zero
+... | coord1 = one
+... | coord2 = two
+... | coord3 = three
 
 timeCoord radialCoord thetaCoord phiCoord : Coord4
 timeCoord = coord0
@@ -669,6 +684,12 @@ schwarzschildMetricAt surface coord =
   diagonalMetricComponent coord
     (schwarzschildMetricDiagonalTable surface)
 
+diagonalMetricAt :
+  SchwarzschildDiagonalMetricSurface →
+  Coord4 →
+  ℚ
+diagonalMetricAt = schwarzschildMetricAt
+
 schwarzschildInverseMetricAt :
   SchwarzschildInverseDiagonalMetricSurface →
   Coord4 →
@@ -676,6 +697,12 @@ schwarzschildInverseMetricAt :
 schwarzschildInverseMetricAt surface coord =
   diagonalInverseMetricComponent coord
     (schwarzschildInverseMetricDiagonalTable surface)
+
+diagonalInvMetricAt :
+  SchwarzschildInverseDiagonalMetricSurface →
+  Coord4 →
+  ℚ
+diagonalInvMetricAt = schwarzschildInverseMetricAt
 
 record SchwarzschildPartialGFormulaSurface : Set where
   constructor schwarzschildPartialGFormulaSurface
@@ -782,6 +809,13 @@ schwarzschildPartialGPhiPhi :
 schwarzschildPartialGPhiPhi formulas derivative =
   schwarzschildPartialGFormula formulas derivative coord3
 
+partialGAt :
+  SchwarzschildPartialGFormulaSurface →
+  Coord4 →
+  Coord4 →
+  ℚ
+partialGAt = schwarzschildPartialGFormula
+
 record SchwarzschildChristoffelFormulaSurface : Set where
   constructor schwarzschildChristoffelFormulaSurface
   field
@@ -808,6 +842,46 @@ record SchwarzschildChristoffelFormulaSurface : Set where
 
     formulaBoundary :
       List String
+
+SchwarzschildMetric : Set
+SchwarzschildMetric = SchwarzschildDiagonalMetricSurface
+
+SchwarzschildInvMetric : Set
+SchwarzschildInvMetric = SchwarzschildInverseDiagonalMetricSurface
+
+SchwarzschildPartialG : Set
+SchwarzschildPartialG = SchwarzschildPartialGFormulaSurface
+
+SchwarzschildChristoffelFormulaLawShape : Set
+SchwarzschildChristoffelFormulaLawShape = SchwarzschildChristoffelFormulaSurface
+
+schwarzschildChristoffelTtrToken :
+  SchwarzschildChristoffelSlot
+schwarzschildChristoffelTtrToken = gammaTtr
+
+schwarzschildChristoffelRttToken :
+  SchwarzschildChristoffelSlot
+schwarzschildChristoffelRttToken = gammaRtt
+
+schwarzschildChristoffelRrrToken :
+  SchwarzschildChristoffelSlot
+schwarzschildChristoffelRrrToken = gammaRrr
+
+schwarzschildChristoffelRThetaThetaToken :
+  SchwarzschildChristoffelSlot
+schwarzschildChristoffelRThetaThetaToken = gammaRThetaTheta
+
+schwarzschildChristoffelRPhiPhiToken :
+  SchwarzschildChristoffelSlot
+schwarzschildChristoffelRPhiPhiToken = gammaRPhiPhi
+
+schwarzschildChristoffelThetaRThetaToken :
+  SchwarzschildChristoffelSlot
+schwarzschildChristoffelThetaRThetaToken = gammaThetaRTheta
+
+schwarzschildChristoffelPhiRPhiToken :
+  SchwarzschildChristoffelSlot
+schwarzschildChristoffelPhiRPhiToken = gammaPhiRPhi
 
 schwarzschildChristoffelFormulaSurfaceFromPackage :
   SchwarzschildChristoffelSevenSlotPackage →
@@ -841,6 +915,11 @@ schwarzschildChristoffelFormulaPackageFromSurface surface =
       "slotRThetaTheta" ∷ "slotRPhiPhi" ∷
       "slotThetaRTheta" ∷ "slotPhiRPhi" ∷ [])
 
+christoffelFormulaDiagonalShape :
+  SchwarzschildChristoffelFormulaLawShape →
+  SchwarzschildChristoffelSevenSlotPackage
+christoffelFormulaDiagonalShape = schwarzschildChristoffelFormulaPackageFromSurface
+
 record SchwarzschildDiagonalFormulaCarrierSurface : Set where
   constructor schwarzschildDiagonalFormulaCarrierSurface
   field
@@ -858,3 +937,119 @@ record SchwarzschildDiagonalFormulaCarrierSurface : Set where
 
     formulaBoundary :
       List String
+
+-- Concrete fail-closed law-shape rows for the diagonal Schwarzschild tensor formulas.
+-- These rows intentionally record reusable shape intent only; they are not promoted
+-- into continuum-level theorems.
+data ChristoffelFormulaLaw : Set where
+  diagonalOneTermReduction :
+    ChristoffelFormulaLaw
+
+  sevenSlotNonzeroReduction :
+    ChristoffelFormulaLaw
+
+  zeroSlot57Closure :
+    ChristoffelFormulaLaw
+
+data InverseMetricLaw : Set where
+  diagonalOneTermInverseReduction :
+    InverseMetricLaw
+
+data MetricCompatibilityLaw : Set where
+  diagonalMetricCompatibilityReduction :
+    MetricCompatibilityLaw
+
+record SchwarzschildChristoffelFormulaLawSurface : Set where
+  constructor schwarzschildChristoffelFormulaLawSurface
+  field
+    metricCarrier :
+      SchwarzschildDiagonalFormulaCarrierSurface
+
+    christoffelFormulaRows :
+      List ChristoffelFormulaLaw
+
+    lawNotPromoted :
+      Bool
+
+record SchwarzschildInverseMetricLawSurface : Set where
+  constructor schwarzschildInverseMetricLawSurface
+  field
+    metricCarrier :
+      SchwarzschildDiagonalFormulaCarrierSurface
+
+    inverseMetricLawRows :
+      List InverseMetricLaw
+
+    lawNotPromoted :
+      Bool
+
+record SchwarzschildMetricCompatibilityLawSurface : Set where
+  constructor schwarzschildMetricCompatibilityLawSurface
+  field
+    metricCarrier :
+      SchwarzschildDiagonalFormulaCarrierSurface
+
+    metricCompatibilityRows :
+      List MetricCompatibilityLaw
+
+    lawNotPromoted :
+      Bool
+
+record SchwarzschildFormulaLawSurface : Set where
+  constructor schwarzschildFormulaLawSurface
+  field
+    metricCarrier :
+      SchwarzschildDiagonalFormulaCarrierSurface
+
+    christoffelFormulaLaw :
+      SchwarzschildChristoffelFormulaLawSurface
+
+    inverseMetricLaw :
+      SchwarzschildInverseMetricLawSurface
+
+    metricCompatibilityLaw :
+      SchwarzschildMetricCompatibilityLawSurface
+
+    lawNotPromoted :
+      Bool
+
+schwarzschildChristoffelFormulaLawSurfaceFromCarrier :
+  SchwarzschildDiagonalFormulaCarrierSurface →
+  SchwarzschildChristoffelFormulaLawSurface
+schwarzschildChristoffelFormulaLawSurfaceFromCarrier carrier =
+  schwarzschildChristoffelFormulaLawSurface
+    carrier
+    ( diagonalOneTermReduction
+    ∷ sevenSlotNonzeroReduction
+    ∷ zeroSlot57Closure
+    ∷ [] )
+    false
+
+schwarzschildInverseMetricLawSurfaceFromCarrier :
+  SchwarzschildDiagonalFormulaCarrierSurface →
+  SchwarzschildInverseMetricLawSurface
+schwarzschildInverseMetricLawSurfaceFromCarrier carrier =
+  schwarzschildInverseMetricLawSurface
+    carrier
+    ( diagonalOneTermInverseReduction ∷ [] )
+    false
+
+schwarzschildMetricCompatibilityLawSurfaceFromCarrier :
+  SchwarzschildDiagonalFormulaCarrierSurface →
+  SchwarzschildMetricCompatibilityLawSurface
+schwarzschildMetricCompatibilityLawSurfaceFromCarrier carrier =
+  schwarzschildMetricCompatibilityLawSurface
+    carrier
+    ( diagonalMetricCompatibilityReduction ∷ [] )
+    false
+
+schwarzschildFormulaLawSurfaceFromCarrier :
+  SchwarzschildDiagonalFormulaCarrierSurface →
+  SchwarzschildFormulaLawSurface
+schwarzschildFormulaLawSurfaceFromCarrier carrier =
+  schwarzschildFormulaLawSurface
+    carrier
+    (schwarzschildChristoffelFormulaLawSurfaceFromCarrier carrier)
+    (schwarzschildInverseMetricLawSurfaceFromCarrier carrier)
+    (schwarzschildMetricCompatibilityLawSurfaceFromCarrier carrier)
+    false

@@ -8,6 +8,9 @@ open import Agda.Primitive using (Level)
 open import Data.List.Base using (List; []; _∷_)
 
 open import DASHI.Constants.Registry as Registry
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
+import DASHI.Core.CandidateOnlyCore as CandidateOnly
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
 
 ------------------------------------------------------------------------
 -- Numeric, authority, provider, comparison, covariance, holdout, and
@@ -91,6 +94,87 @@ record AuthorityObligationRow : Set₁ where
 
 open AuthorityObligationRow public
 
+canonicalNumericAndAuthorityBoundaryReceipt :
+  AuthorityBoundary.AuthorityBoundaryReceipt
+canonicalNumericAndAuthorityBoundaryReceipt =
+  AuthorityBoundary.mkFailClosedAuthorityBoundaryReceipt
+    "numeric and authority obligations boundary receipt"
+    AuthorityBoundary.physicsBoundaryDomain
+    AuthorityBoundary.physicsAuthorityClaim
+    (CandidateOnly.namedCandidateKind
+      "numeric and authority obligations boundary candidate")
+    (CandidateOnly.namedCandidateOnlyStatus
+      "numeric and authority obligations boundary status")
+    "numeric and authority obligations remain candidate-only"
+    "numeric and authority promotion requires a separate bridge receipt"
+    "DASHI.Promotion.NumericAndAuthorityObligations"
+
+canonicalNumericAndAuthorityBoundaryReceiptClaimDomainMatches :
+  AuthorityBoundary.receiptDomain
+    canonicalNumericAndAuthorityBoundaryReceipt
+  ≡
+  AuthorityBoundary.authorityBoundaryClaimDomain
+    (AuthorityBoundary.receiptClaimKind
+      canonicalNumericAndAuthorityBoundaryReceipt)
+canonicalNumericAndAuthorityBoundaryReceiptClaimDomainMatches =
+  AuthorityBoundary.authorityBoundaryClaimKindMatchesDomain
+    canonicalNumericAndAuthorityBoundaryReceipt
+
+canonicalNumericAndAuthorityBoundaryReceiptClaimAuthorityKindMatches :
+  AuthorityBoundary.receiptClaimAuthorityKind
+    canonicalNumericAndAuthorityBoundaryReceipt
+  ≡
+  AuthorityBoundary.authorityBoundaryClaimAuthorityKind
+    (AuthorityBoundary.receiptClaimKind
+      canonicalNumericAndAuthorityBoundaryReceipt)
+canonicalNumericAndAuthorityBoundaryReceiptClaimAuthorityKindMatches =
+  AuthorityBoundary.authorityBoundaryClaimKindMatchesAuthorityKind
+    canonicalNumericAndAuthorityBoundaryReceipt
+
+canonicalNumericAndAuthorityBoundaryReceiptCandidateOnlyIsTrue :
+  CandidateOnly.candidateOnly
+    (AuthorityBoundary.receiptCandidateRow
+      canonicalNumericAndAuthorityBoundaryReceipt)
+  ≡ true
+canonicalNumericAndAuthorityBoundaryReceiptCandidateOnlyIsTrue =
+  AuthorityBoundary.authorityBoundaryCandidateOnlyIsTrue
+    canonicalNumericAndAuthorityBoundaryReceipt
+
+canonicalNumericAndAuthorityBoundaryReceiptCandidatePromotedIsFalse :
+  CandidateOnly.promoted
+    (AuthorityBoundary.receiptCandidateRow
+      canonicalNumericAndAuthorityBoundaryReceipt)
+  ≡ false
+canonicalNumericAndAuthorityBoundaryReceiptCandidatePromotedIsFalse =
+  AuthorityBoundary.authorityBoundaryCandidatePromotedIsFalse
+    canonicalNumericAndAuthorityBoundaryReceipt
+
+canonicalNumericAndAuthorityBoundaryReceiptBlockedAuthorityKindsFalse :
+  AuthorityNA.AllAuthorityKindsFalse
+    (AuthorityBoundary.receiptAuthorityBundle
+      canonicalNumericAndAuthorityBoundaryReceipt)
+    (AuthorityBoundary.receiptBlockedAuthorityKinds
+      canonicalNumericAndAuthorityBoundaryReceipt)
+canonicalNumericAndAuthorityBoundaryReceiptBlockedAuthorityKindsFalse =
+  AuthorityBoundary.authorityBoundaryBlockedAuthorityKindsFalse
+    canonicalNumericAndAuthorityBoundaryReceipt
+
+canonicalNumericAndAuthorityBoundaryReceiptBlockedAuthorityKindsCountIsCanonical :
+  AuthorityBoundary.receiptBlockedAuthorityKindsCount
+    canonicalNumericAndAuthorityBoundaryReceipt
+  ≡ AuthorityBoundary.canonicalBlockedAuthorityKindCount
+canonicalNumericAndAuthorityBoundaryReceiptBlockedAuthorityKindsCountIsCanonical =
+  AuthorityBoundary.receiptBlockedAuthorityKindsCountIsCanonical
+    canonicalNumericAndAuthorityBoundaryReceipt
+
+canonicalNumericAndAuthorityBoundaryReceiptPromotedIsFalse :
+  AuthorityBoundary.receiptBoundaryPromoted
+    canonicalNumericAndAuthorityBoundaryReceipt
+  ≡ false
+canonicalNumericAndAuthorityBoundaryReceiptPromotedIsFalse =
+  AuthorityBoundary.receiptBoundaryPromotedIsFalse
+    canonicalNumericAndAuthorityBoundaryReceipt
+
 record NumericAndAuthorityObligationIndex : Set₁ where
   field
     indexLabel : String
@@ -138,6 +222,40 @@ record NumericAndAuthorityObligationIndex : Set₁ where
     empiricalAdequacyAccepted : Bool
     empiricalAdequacyAcceptedIsFalse :
       empiricalAdequacyAccepted ≡ false
+    authorityBoundaryReceipt :
+      AuthorityBoundary.AuthorityBoundaryReceipt
+    authorityBoundaryReceiptIsCanonical :
+      authorityBoundaryReceipt ≡
+      canonicalNumericAndAuthorityBoundaryReceipt
+    authorityBoundaryClaimDomainMatches :
+      AuthorityBoundary.receiptDomain authorityBoundaryReceipt
+      ≡
+      AuthorityBoundary.authorityBoundaryClaimDomain
+        (AuthorityBoundary.receiptClaimKind authorityBoundaryReceipt)
+    authorityBoundaryClaimAuthorityKindMatches :
+      AuthorityBoundary.receiptClaimAuthorityKind
+        authorityBoundaryReceipt
+      ≡
+      AuthorityBoundary.authorityBoundaryClaimAuthorityKind
+        (AuthorityBoundary.receiptClaimKind authorityBoundaryReceipt)
+    authorityBoundaryCandidateOnlyIsTrue :
+      CandidateOnly.candidateOnly
+        (AuthorityBoundary.receiptCandidateRow authorityBoundaryReceipt) ≡ true
+    authorityBoundaryCandidatePromotedIsFalse :
+      CandidateOnly.promoted
+        (AuthorityBoundary.receiptCandidateRow authorityBoundaryReceipt) ≡ false
+    authorityBoundaryBlockedAuthorityKindsFalse :
+      AuthorityNA.AllAuthorityKindsFalse
+        (AuthorityBoundary.receiptAuthorityBundle authorityBoundaryReceipt)
+        (AuthorityBoundary.receiptBlockedAuthorityKinds
+          authorityBoundaryReceipt)
+    authorityBoundaryBlockedAuthorityKindsCountIsCanonical :
+      AuthorityBoundary.receiptBlockedAuthorityKindsCount
+        authorityBoundaryReceipt ≡
+        AuthorityBoundary.canonicalBlockedAuthorityKindCount
+    authorityBoundaryPromoted : Bool
+    authorityBoundaryPromotedIsFalse :
+      authorityBoundaryPromoted ≡ false
 
 open NumericAndAuthorityObligationIndex public
 
@@ -556,6 +674,26 @@ canonicalNumericAndAuthorityObligationIndex = record
   ; empiricalAdequacyAcceptedIsFalse =
       Registry.EmpiricalRuntimeKnownInputsReferenceReceipt.empiricalAdequacyAcceptedIsFalse
         Registry.canonicalEmpiricalRuntimeKnownInputsReferenceReceipt
+  ; authorityBoundaryReceipt =
+      canonicalNumericAndAuthorityBoundaryReceipt
+  ; authorityBoundaryReceiptIsCanonical = refl
+  ; authorityBoundaryClaimDomainMatches =
+      canonicalNumericAndAuthorityBoundaryReceiptClaimDomainMatches
+  ; authorityBoundaryClaimAuthorityKindMatches =
+      canonicalNumericAndAuthorityBoundaryReceiptClaimAuthorityKindMatches
+  ; authorityBoundaryCandidateOnlyIsTrue =
+      canonicalNumericAndAuthorityBoundaryReceiptCandidateOnlyIsTrue
+  ; authorityBoundaryCandidatePromotedIsFalse =
+      canonicalNumericAndAuthorityBoundaryReceiptCandidatePromotedIsFalse
+  ; authorityBoundaryBlockedAuthorityKindsFalse =
+      canonicalNumericAndAuthorityBoundaryReceiptBlockedAuthorityKindsFalse
+  ; authorityBoundaryBlockedAuthorityKindsCountIsCanonical =
+      canonicalNumericAndAuthorityBoundaryReceiptBlockedAuthorityKindsCountIsCanonical
+  ; authorityBoundaryPromoted =
+      AuthorityBoundary.receiptBoundaryPromoted
+        canonicalNumericAndAuthorityBoundaryReceipt
+  ; authorityBoundaryPromotedIsFalse =
+      canonicalNumericAndAuthorityBoundaryReceiptPromotedIsFalse
   }
 
 canonicalAuthorityRowCountIs9 :
@@ -583,3 +721,47 @@ canonicalMetadataObligationCountIs9 :
   ≡ 9
 canonicalMetadataObligationCountIs9 = refl
 
+canonicalAuthorityBoundaryReceiptIsCanonical :
+  NumericAndAuthorityObligationIndex.authorityBoundaryReceipt
+    canonicalNumericAndAuthorityObligationIndex
+  ≡ canonicalNumericAndAuthorityBoundaryReceipt
+canonicalAuthorityBoundaryReceiptIsCanonical = refl
+
+canonicalAuthorityBoundaryReceiptCandidateOnlyIsTrue :
+  CandidateOnly.candidateOnly
+    (AuthorityBoundary.receiptCandidateRow
+      (NumericAndAuthorityObligationIndex.authorityBoundaryReceipt
+        canonicalNumericAndAuthorityObligationIndex))
+  ≡ true
+canonicalAuthorityBoundaryReceiptCandidateOnlyIsTrue =
+  NumericAndAuthorityObligationIndex.authorityBoundaryCandidateOnlyIsTrue
+    canonicalNumericAndAuthorityObligationIndex
+
+canonicalAuthorityBoundaryReceiptBlockedAuthorityKindsFalse :
+  AuthorityNA.AllAuthorityKindsFalse
+    (AuthorityBoundary.receiptAuthorityBundle
+      (NumericAndAuthorityObligationIndex.authorityBoundaryReceipt
+        canonicalNumericAndAuthorityObligationIndex))
+    (AuthorityBoundary.receiptBlockedAuthorityKinds
+      (NumericAndAuthorityObligationIndex.authorityBoundaryReceipt
+        canonicalNumericAndAuthorityObligationIndex))
+canonicalAuthorityBoundaryReceiptBlockedAuthorityKindsFalse =
+  NumericAndAuthorityObligationIndex.authorityBoundaryBlockedAuthorityKindsFalse
+    canonicalNumericAndAuthorityObligationIndex
+
+canonicalAuthorityBoundaryReceiptBlockedAuthorityKindsCountIsCanonical :
+  AuthorityBoundary.receiptBlockedAuthorityKindsCount
+    (NumericAndAuthorityObligationIndex.authorityBoundaryReceipt
+      canonicalNumericAndAuthorityObligationIndex)
+  ≡ AuthorityBoundary.canonicalBlockedAuthorityKindCount
+canonicalAuthorityBoundaryReceiptBlockedAuthorityKindsCountIsCanonical =
+  NumericAndAuthorityObligationIndex.authorityBoundaryBlockedAuthorityKindsCountIsCanonical
+    canonicalNumericAndAuthorityObligationIndex
+
+canonicalAuthorityBoundaryReceiptPromotedIsFalse :
+  NumericAndAuthorityObligationIndex.authorityBoundaryPromoted
+    canonicalNumericAndAuthorityObligationIndex
+  ≡ false
+canonicalAuthorityBoundaryReceiptPromotedIsFalse =
+  NumericAndAuthorityObligationIndex.authorityBoundaryPromotedIsFalse
+    canonicalNumericAndAuthorityObligationIndex

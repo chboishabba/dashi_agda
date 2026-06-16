@@ -12,6 +12,7 @@ import DASHI.Core.FormalLensQualificationCore as FormalLensCore
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Core.OperatorShapeNonAuthorityCore as OperatorShapeCore
 open import DASHI.Interop.RoleGrammarCore as RoleCore
+import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundaryCore
 import DASHI.Interop.SpectralOperatorShapeCore as SpectralShapeCore
 
 ------------------------------------------------------------------------
@@ -776,6 +777,147 @@ environmentalAuthorityFalseWithoutValidation :
 environmentalAuthorityFalseWithoutValidation =
   refl
 
+qiBlockedAuthorityKindToAuthorityBoundaryClaimKind :
+  QiBlockedAuthorityKind →
+  AuthorityBoundaryCore.AuthorityBoundaryClaimKind
+qiBlockedAuthorityKindToAuthorityBoundaryClaimKind empiricalAuthorityKind =
+  AuthorityBoundaryCore.bioactiveAuthorityClaim
+qiBlockedAuthorityKindToAuthorityBoundaryClaimKind spiritualAuthorityKind =
+  AuthorityBoundaryCore.culturalAuthorityClaim
+qiBlockedAuthorityKindToAuthorityBoundaryClaimKind clinicalAuthorityKind =
+  AuthorityBoundaryCore.clinicalAuthorityClaim
+qiBlockedAuthorityKindToAuthorityBoundaryClaimKind environmentalAuthorityKind =
+  AuthorityBoundaryCore.runtimeAuthorityClaim
+qiBlockedAuthorityKindToAuthorityBoundaryClaimKind mysticalAuthorityKind =
+  AuthorityBoundaryCore.tradingAuthorityClaim
+qiBlockedAuthorityKindToAuthorityBoundaryClaimKind legalAuthorityKind =
+  AuthorityBoundaryCore.legalAuthorityClaim
+qiBlockedAuthorityKindToAuthorityBoundaryClaimKind scientificAuthorityKind =
+  AuthorityBoundaryCore.physicsAuthorityClaim
+
+qiBlockedAuthorityKindCoreReceipt :
+  QiBlockedAuthorityKind →
+  AuthorityBoundaryCore.AuthorityBoundaryReceipt
+qiBlockedAuthorityKindCoreReceipt empiricalAuthorityKind =
+  AuthorityBoundaryCore.canonicalBioactiveAuthorityBoundaryReceipt
+qiBlockedAuthorityKindCoreReceipt spiritualAuthorityKind =
+  AuthorityBoundaryCore.canonicalCulturalAuthorityBoundaryReceipt
+qiBlockedAuthorityKindCoreReceipt clinicalAuthorityKind =
+  AuthorityBoundaryCore.canonicalClinicalAuthorityBoundaryReceipt
+qiBlockedAuthorityKindCoreReceipt environmentalAuthorityKind =
+  AuthorityBoundaryCore.canonicalRuntimeAuthorityBoundaryReceipt
+qiBlockedAuthorityKindCoreReceipt mysticalAuthorityKind =
+  AuthorityBoundaryCore.canonicalTradingAuthorityBoundaryReceipt
+qiBlockedAuthorityKindCoreReceipt legalAuthorityKind =
+  AuthorityBoundaryCore.canonicalLegalAuthorityBoundaryReceipt
+qiBlockedAuthorityKindCoreReceipt scientificAuthorityKind =
+  AuthorityBoundaryCore.canonicalPhysicsAuthorityBoundaryReceipt
+
+record QiAuthorityBoundaryCoreAdapterRow : Set where
+  constructor qiAuthorityBoundaryCoreAdapterRow
+  field
+    qiBlockedAuthorityKind :
+      QiBlockedAuthorityKind
+    authorityBoundaryCoreClaimKind :
+      AuthorityBoundaryCore.AuthorityBoundaryClaimKind
+    authorityBoundaryCoreClaimKindMatches :
+      authorityBoundaryCoreClaimKind ≡
+      qiBlockedAuthorityKindToAuthorityBoundaryClaimKind
+        qiBlockedAuthorityKind
+    authorityBoundaryCoreReceipt :
+      AuthorityBoundaryCore.AuthorityBoundaryReceipt
+    authorityBoundaryCoreReceiptIsCanonical :
+      authorityBoundaryCoreReceipt ≡
+      qiBlockedAuthorityKindCoreReceipt qiBlockedAuthorityKind
+    authorityBoundaryCoreReceiptCandidateOnlyIsTrue :
+      CandidateCore.candidateOnly
+        (AuthorityBoundaryCore.receiptCandidateRow
+          authorityBoundaryCoreReceipt) ≡ true
+    authorityBoundaryCoreReceiptPromotedIsFalse :
+      CandidateCore.promoted
+        (AuthorityBoundaryCore.receiptCandidateRow
+          authorityBoundaryCoreReceipt) ≡ false
+    authorityBoundaryCoreReceiptPromotesAnyAuthorityIsFalse :
+      AuthorityCore.promotesAnyAuthority
+        (AuthorityBoundaryCore.receiptAuthorityBundle
+          authorityBoundaryCoreReceipt) ≡ false
+    authorityBoundaryCoreReceiptBlockedAuthorityKindsFalse :
+      AuthorityCore.AllAuthorityKindsFalse
+        (AuthorityBoundaryCore.receiptAuthorityBundle
+          authorityBoundaryCoreReceipt)
+        (AuthorityBoundaryCore.receiptBlockedAuthorityKinds
+          authorityBoundaryCoreReceipt)
+    reading :
+      String
+
+open QiAuthorityBoundaryCoreAdapterRow public
+
+qiAuthorityBoundaryCoreAdapterRowFor :
+  (blockedAuthorityKind : QiBlockedAuthorityKind) →
+  String →
+  QiAuthorityBoundaryCoreAdapterRow
+qiAuthorityBoundaryCoreAdapterRowFor blockedAuthorityKind reading =
+  qiAuthorityBoundaryCoreAdapterRow
+    blockedAuthorityKind
+    (qiBlockedAuthorityKindToAuthorityBoundaryClaimKind blockedAuthorityKind)
+    refl
+    (qiBlockedAuthorityKindCoreReceipt blockedAuthorityKind)
+    refl
+    (AuthorityBoundaryCore.authorityBoundaryCandidateOnlyIsTrue
+      (qiBlockedAuthorityKindCoreReceipt blockedAuthorityKind))
+    (AuthorityBoundaryCore.authorityBoundaryCandidatePromotedIsFalse
+      (qiBlockedAuthorityKindCoreReceipt blockedAuthorityKind))
+    (AuthorityBoundaryCore.authorityBoundaryBundlePromotesAnyAuthorityIsFalse
+      (qiBlockedAuthorityKindCoreReceipt blockedAuthorityKind))
+    (AuthorityBoundaryCore.authorityBoundaryBlockedAuthorityKindsFalse
+      (qiBlockedAuthorityKindCoreReceipt blockedAuthorityKind))
+    reading
+
+canonicalQiAuthorityBoundaryCoreAdapterRows :
+  List QiAuthorityBoundaryCoreAdapterRow
+canonicalQiAuthorityBoundaryCoreAdapterRows =
+  qiAuthorityBoundaryCoreAdapterRowFor
+    empiricalAuthorityKind
+    "Empirical authority is bridged to the shared bioactive authority boundary receipt."
+  ∷ qiAuthorityBoundaryCoreAdapterRowFor
+    spiritualAuthorityKind
+    "Spiritual authority is bridged to the shared cultural authority boundary receipt."
+  ∷ qiAuthorityBoundaryCoreAdapterRowFor
+    clinicalAuthorityKind
+    "Clinical authority is bridged to the shared clinical authority boundary receipt."
+  ∷ qiAuthorityBoundaryCoreAdapterRowFor
+    environmentalAuthorityKind
+    "Environmental authority is bridged to the shared runtime authority boundary receipt."
+  ∷ qiAuthorityBoundaryCoreAdapterRowFor
+    mysticalAuthorityKind
+    "Mystical authority is bridged to the shared trading authority boundary receipt."
+  ∷ qiAuthorityBoundaryCoreAdapterRowFor
+    legalAuthorityKind
+    "Legal authority is bridged to the shared legal authority boundary receipt."
+  ∷ qiAuthorityBoundaryCoreAdapterRowFor
+    scientificAuthorityKind
+    "Scientific authority is bridged to the shared physics authority boundary receipt."
+  ∷ []
+
+canonicalQiAuthorityBoundaryCoreReceipts :
+  List AuthorityBoundaryCore.AuthorityBoundaryReceipt
+canonicalQiAuthorityBoundaryCoreReceipts =
+  qiBlockedAuthorityKindCoreReceipt empiricalAuthorityKind
+  ∷ qiBlockedAuthorityKindCoreReceipt spiritualAuthorityKind
+  ∷ qiBlockedAuthorityKindCoreReceipt clinicalAuthorityKind
+  ∷ qiBlockedAuthorityKindCoreReceipt environmentalAuthorityKind
+  ∷ qiBlockedAuthorityKindCoreReceipt mysticalAuthorityKind
+  ∷ qiBlockedAuthorityKindCoreReceipt legalAuthorityKind
+  ∷ qiBlockedAuthorityKindCoreReceipt scientificAuthorityKind
+  ∷ []
+
+canonicalQiAuthorityBoundaryCoreReceiptsFailClosed :
+  AuthorityBoundaryCore.AllAuthorityBoundaryReceiptsFailClosed
+    canonicalQiAuthorityBoundaryCoreReceipts
+canonicalQiAuthorityBoundaryCoreReceiptsFailClosed =
+  AuthorityBoundaryCore.proveAllAuthorityBoundaryReceiptsFailClosed
+    canonicalQiAuthorityBoundaryCoreReceipts
+
 data QiReceiptBoundaryRow : Set where
   rowOperatorTheoryRoleGrammarOnly :
     QiReceiptBoundaryRow
@@ -1244,6 +1386,19 @@ record QiOperatorTheoryBoundaryReceipt : Set where
       List QiBlockedAuthorityKindRow
     blockedAuthorityKindRowsAreCanonical :
       blockedAuthorityKindRows ≡ canonicalQiBlockedAuthorityKindRows
+    authorityBoundaryCoreAdapterRows :
+      List QiAuthorityBoundaryCoreAdapterRow
+    authorityBoundaryCoreAdapterRowsAreCanonical :
+      authorityBoundaryCoreAdapterRows
+        ≡ canonicalQiAuthorityBoundaryCoreAdapterRows
+    authorityBoundaryCoreReceipts :
+      List AuthorityBoundaryCore.AuthorityBoundaryReceipt
+    authorityBoundaryCoreReceiptsAreCanonical :
+      authorityBoundaryCoreReceipts
+        ≡ canonicalQiAuthorityBoundaryCoreReceipts
+    authorityBoundaryCoreReceiptsFailClosed :
+      AuthorityBoundaryCore.AllAuthorityBoundaryReceiptsFailClosed
+        authorityBoundaryCoreReceipts
     receiptRows :
       List QiReceiptBoundaryRow
     receiptRowsAreCanonical :
@@ -1366,6 +1521,16 @@ canonicalQiOperatorTheoryBoundaryReceipt =
         canonicalQiBlockedAuthorityKindRows
     ; blockedAuthorityKindRowsAreCanonical =
         refl
+    ; authorityBoundaryCoreAdapterRows =
+        canonicalQiAuthorityBoundaryCoreAdapterRows
+    ; authorityBoundaryCoreAdapterRowsAreCanonical =
+        refl
+    ; authorityBoundaryCoreReceipts =
+        canonicalQiAuthorityBoundaryCoreReceipts
+    ; authorityBoundaryCoreReceiptsAreCanonical =
+        refl
+    ; authorityBoundaryCoreReceiptsFailClosed =
+        canonicalQiAuthorityBoundaryCoreReceiptsFailClosed
     ; receiptRows =
         canonicalQiReceiptBoundaryRows
     ; receiptRowsAreCanonical =

@@ -2,10 +2,11 @@
 """NS-GW-1 strain cross-derivative numerical diagnostic.
 
 This script is an evidence-only numerical diagnostic for periodic 3D velocity
-fields on ``[0, 2*pi)^3``.  It computes the strain eigenframe at the maximum
-vorticity point and measures the local directional cross derivative
-``d_{e1} d_{e2} lambda2`` of the intermediate strain eigenvalue field.
-With ``--kato-alignment`` it additionally reports Kato alignment quantities
+fields on ``[0, 2*pi)^3``.  It computes a selectable target strain eigenframe
+and measures the local directional cross derivative ``d_{e1} d_{e2} lambda2``
+of the intermediate strain eigenvalue field.  The legacy enstrophy-maximum
+snapshot is still reported for backward compatibility.  With
+``--kato-alignment`` it additionally reports Kato alignment quantities
 including the condition
 ``B = 2 * <e2, (d_{e1} S) e1> * <e2, (d_{e2} S) e1>``.
 With ``--integral-conditions`` it also reports weighted integral/average
@@ -500,12 +501,16 @@ def format_summary(result: dict[str, Any]) -> str:
     """Return a compact human-readable summary for CLI logs."""
 
     source = str(result["source"])
-    index = tuple(result["enstrophy_max_index"])
-    cross = float(result["cross_derivative_e1_e2_lambda2_at_max"])
+    target_mode = str(result["target_mode"])
+    target_index = tuple(result["target_index"])
+    target_cross = float(result["target_cross_derivative_e1_e2_lambda2"])
     classification = str(result["sign_classification"])
+    target_classification = str(result.get("target_sign_classification", result["sign_classification"]))
     status = str(result["diagnostic_status"])
     artifact = result.get("result_artifact_path")
     artifact_text = f", artifact={artifact}" if artifact else ""
+    target_status = result.get("target_diagnostic_status")
+    target_status_text = f", target_status={target_status}" if target_status else ""
     integral_conditions = ""
     if result.get("integral_conditions_enabled"):
         percentile = result.get("integral_conditions_top_enstrophy_percentile")
@@ -522,10 +527,85 @@ def format_summary(result: dict[str, Any]) -> str:
     return (
         "NS-GW-1 diagnostic: "
         f"source={source}, N={int(result['grid_N'])}, "
-        f"enstrophy_max_index={index}, "
-        f"d_e1_d_e2_lambda2={cross:.17g}, "
+        f"target_mode={target_mode}, target_index={target_index}, "
+        f"target_d_e1_d_e2_lambda2={target_cross:.17g}, "
         f"classification={classification}, "
-        f"status={status}{artifact_text}{integral_conditions}{kato_alignment}"
+        f"target_classification={target_classification}, "
+        f"enstrophy_max_index={tuple(result['enstrophy_max_index'])}, "
+        f"status={status}{target_status_text}{artifact_text}{integral_conditions}{kato_alignment}"
+    )
+
+
+def _select_target_index(
+    *,
+    target_mode: str,
+    enstrophy: np.ndarray,
+    lambda2_field: np.ndarray,
+    strain_norm_squared: np.ndarray,
+    target_top_enstrophy_percentile: float,
+) -> dict[str, Any]:
+    """Select the diagnostic target point and record how it was chosen."""
+
+    if target_mode == "enstrophy_max":
+        flat_index = int(np.argmax(enstrophy))
+        return {
+            "target_index": tuple(int(i) for i in np.unravel_index(flat_index, enstrophy.shape)),
+            "target_selection_status": "selected_enstrophy_max",
+            "target_selection_blocker": None,
+            "target_top_enstrophy_percentile": float(target_top_enstrophy_percentile),
+            "target_top_enstrophy_threshold": None,
+        }
+
+    if target_mode == "lambda2_min":
+        flat_index = int(np.argmin(lambda2_field))
+        return {
+            "target_index": tuple(int(i) for i in np.unravel_index(flat_index, lambda2_field.shape)),
+            "target_selection_status": "selected_lambda2_min",
+            "target_selection_blocker": None,
+            "target_top_enstrophy_percentile": float(target_top_enstrophy_percentile),
+            "target_top_enstrophy_threshold": None,
+        }
+
+    if target_mode == "strain_max":
+        flat_index = int(np.argmax(strain_norm_squared))
+        return {
+            "target_index": tuple(int(i) for i in np.unravel_index(flat_index, strain_norm_squared.shape)),
+            "target_selection_status": "selected_strain_max",
+            "target_selection_blocker": None,
+            "target_top_enstrophy_percentile": float(target_top_enstrophy_percentile),
+            "target_top_enstrophy_threshold": None,
+        }
+
+    if target_mode == "lambda2_negative_top_enstrophy":
+        enstrophy_threshold = float(np.percentile(enstrophy, target_top_enstrophy_percentile))
+        top_enstrophy_mask = enstrophy >= enstrophy_threshold
+        negative_mask = top_enstrophy_mask & (lambda2_field < 0.0)
+        if np.any(negative_mask):
+            masked_lambda2 = np.where(negative_mask, lambda2_field, np.inf)
+            flat_index = int(np.argmin(masked_lambda2))
+            status = "selected_negative_lambda2_within_top_enstrophy_mask"
+            blocker = None
+        else:
+            masked_lambda2 = np.where(top_enstrophy_mask, lambda2_field, np.inf)
+            flat_index = int(np.argmin(masked_lambda2))
+            status = "fallback_most_negative_lambda2_in_top_enstrophy_mask"
+            blocker = (
+                "no lambda2<0 point in the top-enstrophy mask; fell back to the "
+                "most negative lambda2 in the top-enstrophy mask"
+            )
+        return {
+            "target_index": tuple(int(i) for i in np.unravel_index(flat_index, lambda2_field.shape)),
+            "target_selection_status": status,
+            "target_selection_blocker": blocker,
+            "target_top_enstrophy_percentile": float(target_top_enstrophy_percentile),
+            "target_top_enstrophy_threshold": enstrophy_threshold,
+            "target_top_enstrophy_mask_count": int(np.count_nonzero(top_enstrophy_mask)),
+            "target_negative_lambda2_top_mask_count": int(np.count_nonzero(negative_mask)),
+        }
+
+    raise ValueError(
+        "target must be one of 'enstrophy_max', 'lambda2_min', "
+        "'lambda2_negative_top_enstrophy', or 'strain_max'"
     )
 
 
@@ -569,6 +649,8 @@ def run_diagnostic(
     amplitude: float = 1.0,
     field: str | Path | None = None,
     output: str | Path | None = None,
+    target: str = "enstrophy_max",
+    target_top_enstrophy_percentile: float = 90.0,
     integral_conditions: bool = False,
     top_enstrophy_percentile: float | None = None,
     kato_alignment: bool = False,
@@ -578,10 +660,11 @@ def run_diagnostic(
     ``field`` is an optional ``.npz`` path containing cubic 3D arrays named
     ``u``, ``v``, and ``w`` sampled on ``[0, 2*pi)^3``.  ``N`` and
     ``amplitude`` control only the deterministic built-in Taylor-Green field.
-    When ``integral_conditions`` is true, additional weighted integral and
-    average diagnostics are reported over natural vortex support weights.  When
-    ``kato_alignment`` is true, scalar projections defining Kato condition
-    B are added at the selected enstrophy-max index.
+    ``target`` selects the local point used for the target-dependent
+    diagnostics.  When ``integral_conditions`` is true, additional weighted
+    integral and average diagnostics are reported over natural vortex support
+    weights.  When ``kato_alignment`` is true, scalar projections defining
+    Kato condition B are added at the selected target point.
     """
 
     if int(N) != N:
@@ -590,6 +673,21 @@ def run_diagnostic(
     amplitude = float(amplitude)
     if not np.isfinite(amplitude):
         raise ValueError("amplitude must be finite")
+    if target not in {
+        "enstrophy_max",
+        "lambda2_min",
+        "lambda2_negative_top_enstrophy",
+        "strain_max",
+    }:
+        raise ValueError(
+            "target must be one of 'enstrophy_max', 'lambda2_min', "
+            "'lambda2_negative_top_enstrophy', or 'strain_max'"
+        )
+    target_top_enstrophy_percentile = float(target_top_enstrophy_percentile)
+    if not np.isfinite(target_top_enstrophy_percentile):
+        raise ValueError("target_top_enstrophy_percentile must be finite")
+    if not (0.0 < target_top_enstrophy_percentile <= 100.0):
+        raise ValueError("target_top_enstrophy_percentile must be in the interval (0, 100]")
     if top_enstrophy_percentile is not None:
         top_enstrophy_percentile = float(top_enstrophy_percentile)
         if not np.isfinite(top_enstrophy_percentile):
@@ -653,9 +751,40 @@ def run_diagnostic(
         lambda2_field,
         axis_convention=derivative_axis_convention,
     )
+    pressure_hessian = spectral_hessian(pressure, axis_convention=derivative_axis_convention)
+    target_selection = _select_target_index(
+        target_mode=target,
+        enstrophy=enstrophy,
+        lambda2_field=lambda2_field,
+        strain_norm_squared=strain_norm_squared,
+        target_top_enstrophy_percentile=target_top_enstrophy_percentile,
+    )
+    target_index = tuple(int(i) for i in target_selection["target_index"])
+    target_local_strain = _tensor_at(strain, target_index)
+    target_eigenvalues, target_eigenvectors = np.linalg.eigh(target_local_strain)
+    target_eigenvectors = _canonicalize_eigenvectors(target_eigenvectors)
+    target_lambda2 = float(target_eigenvalues[1])
+    target_eigenvalue_gaps = np.diff(target_eigenvalues)
+    target_min_eigenvalue_gap = float(np.min(np.abs(target_eigenvalue_gaps)))
+    target_eigenframe_degenerate = bool(target_min_eigenvalue_gap <= 1.0e-10)
+    target_e1 = target_eigenvectors[:, 0]
+    target_e2 = target_eigenvectors[:, 1]
+    target_cross_derivative = _directional_hessian_cross(hessian, target_index, target_e1, target_e2)
+    target_pressure_hessian_e1_e2 = _directional_hessian_cross(
+        pressure_hessian,
+        target_index,
+        target_e1,
+        target_e2,
+    )
+    target_sign_classification = classify_sign(target_cross_derivative)
+    target_diagnostic_status, target_sign_evidence_for_promotion, target_sign_evidence_blocker = _diagnostic_status(
+        source=source,
+        field_metadata=field_metadata,
+        eigenframe_degenerate=target_eigenframe_degenerate,
+        sign_classification=target_sign_classification,
+    )
     local_hessian = _tensor_at(hessian, max_index)
     cross_derivative = _directional_hessian_cross(hessian, max_index, e1, e2)
-    pressure_hessian = spectral_hessian(pressure, axis_convention=derivative_axis_convention)
     pressure_hessian_e1_e2 = _directional_hessian_cross(
         pressure_hessian,
         max_index,
@@ -679,31 +808,31 @@ def run_diagnostic(
         strain_grad = strain_gradient_tensor(strain, axis_convention=derivative_axis_convention)
         d_e1S_e1 = _directional_strain_gradient_vector(
             strain_grad,
-            max_index,
-            e1,
-            e1,
+            target_index,
+            target_e1,
+            target_e1,
         )
         d_e2S_e1 = _directional_strain_gradient_vector(
             strain_grad,
-            max_index,
-            e2,
-            e1,
+            target_index,
+            target_e2,
+            target_e1,
         )
         if not np.all(np.isfinite(d_e1S_e1)) or not np.all(np.isfinite(d_e2S_e1)):
             raise ValueError("Kato alignment directional projected vectors contain non-finite values")
         e2_d_e1S_e1 = _directional_strain_gradient_projection(
             strain_grad,
-            max_index,
-            e2,
-            e1,
-            e1,
+            target_index,
+            target_e2,
+            target_e1,
+            target_e1,
         )
         e2_d_e2S_e1 = _directional_strain_gradient_projection(
             strain_grad,
-            max_index,
-            e2,
-            e1,
-            e2,
+            target_index,
+            target_e2,
+            target_e1,
+            target_e2,
         )
         if not np.isfinite(e2_d_e1S_e1) or not np.isfinite(e2_d_e2S_e1):
             raise ValueError("Kato alignment directional projections are non-finite")
@@ -717,6 +846,8 @@ def run_diagnostic(
             "kato_alignment_e2_dot_d_e1S_e1": e2_d_e1S_e1,
             "kato_alignment_e2_dot_d_e2S_e1": e2_d_e2S_e1,
             "kato_alignment_B": float(kato_alignment_B),
+            "kato_alignment_target_index": list(target_index),
+            "kato_alignment_target_mode": target,
         }
         kato_alignment_result["kato_alignment_B_sign"] = classify_sign(
             kato_alignment_result["kato_alignment_B"]
@@ -749,7 +880,8 @@ def run_diagnostic(
         "result_artifact_format": "json" if output_path is not None else "stdout_json",
         "diagnostic_scope": (
             "single periodic-grid numerical probe for the nonlinear Riesz sign "
-            "route; reports only the enstrophy-maximum local value"
+            "route; reports the legacy enstrophy-maximum snapshot and the selected "
+            "target-point snapshot"
         ),
         "grid_N": n,
         "grid_spacing": grid_spacing,
@@ -758,6 +890,30 @@ def run_diagnostic(
         "source": source,
         "field_metadata": field_metadata,
         "amplitude": float(amplitude),
+        "target_mode": target,
+        "target_selection_status": target_selection["target_selection_status"],
+        "target_selection_blocker": target_selection["target_selection_blocker"],
+        "target_top_enstrophy_percentile": float(target_selection["target_top_enstrophy_percentile"]),
+        "target_top_enstrophy_threshold": target_selection.get("target_top_enstrophy_threshold"),
+        "target_top_enstrophy_mask_count": target_selection.get("target_top_enstrophy_mask_count"),
+        "target_negative_lambda2_top_mask_count": target_selection.get("target_negative_lambda2_top_mask_count"),
+        "target_index": list(target_index),
+        "target_enstrophy": float(enstrophy[target_index]),
+        "target_strain_norm_squared": float(strain_norm_squared[target_index]),
+        "target_eigenvalues": _jsonify_vector(target_eigenvalues),
+        "target_eigenvectors": _jsonify_matrix(target_eigenvectors),
+        "target_min_local_eigenvalue_gap": target_min_eigenvalue_gap,
+        "target_eigenframe_degenerate": target_eigenframe_degenerate,
+        "target_lambda2": target_lambda2,
+        "target_cross_derivative_e1_e2_lambda2": target_cross_derivative,
+        "target_pressure_hessian_e1_e2": target_pressure_hessian_e1_e2,
+        "target_sign_classification": target_sign_classification,
+        "target_sign_nonpositive": bool(
+            target_sign_classification != "positive_adverse_to_nonpositive_rule"
+        ),
+        "target_diagnostic_status": target_diagnostic_status,
+        "target_sign_evidence_for_promotion": target_sign_evidence_for_promotion,
+        "target_sign_evidence_blocker": target_sign_evidence_blocker,
         "enstrophy_max_index": list(max_index),
         "enstrophy_max_value": float(enstrophy[max_index]),
         "vorticity_at_max": _jsonify_vector(max_vorticity),
@@ -796,6 +952,7 @@ def run_diagnostic(
         "strain_norm_squared_at_max": float(strain_norm_squared[max_index]),
         "half_vorticity_norm_squared_at_max": 0.5 * float(enstrophy[max_index]),
         "derivative_operator_axis_convention": derivative_axis_convention,
+        "target_derivative_operator_axis_convention": derivative_axis_convention,
         "divergence_max_abs": float(np.max(np.abs(divergence))),
         "divergence_l2_mean": float(np.sqrt(np.mean(divergence * divergence))),
         "divergence_max_abs_xyz_storage": float(np.max(np.abs(divergence_xyz_storage))),
@@ -829,9 +986,9 @@ def run_diagnostic(
         cell_volume = float(grid_spacing ** 3)
         pressure_hessian_e1_e2_field = np.einsum(
             "i,ijxyz,j->xyz",
-            e1,
+            target_e1,
             pressure_hessian,
-            e2,
+            target_e2,
         )
         condition_weights: list[tuple[str, np.ndarray, dict[str, Any]]] = [
             (
@@ -877,11 +1034,15 @@ def run_diagnostic(
                 }
             integral_condition_fields[field_name] = field_summary
         result["integral_conditions_enabled"] = True
+        result["integral_conditions_target_mode"] = target
+        result["integral_conditions_target_index"] = list(target_index)
         if top_enstrophy_percentile is not None:
             result["integral_conditions_top_enstrophy_percentile"] = float(top_enstrophy_percentile)
             result["integral_conditions_top_enstrophy_threshold"] = float(enstrophy_threshold)
         result["integral_conditions"] = {
             "cell_volume": cell_volume,
+            "reference_target_mode": target,
+            "reference_target_index": list(target_index),
             "weight_fields": [name for name, _, _ in condition_weights],
             "fields": integral_condition_fields,
         }
@@ -907,6 +1068,9 @@ def parse_args() -> argparse.Namespace:
             "--integral-conditions --top-enstrophy-percentile 95 --output /tmp/ns_gw1_result.json\n"
             "  scripts/ns_gateway1_strain_cross_derivative_diagnostic.py "
             "--kato-alignment --output /tmp/ns_gw1_result.json\n\n"
+            "  scripts/ns_gateway1_strain_cross_derivative_diagnostic.py "
+            "--target lambda2_negative_top_enstrophy --target-top-enstrophy-percentile 90 "
+            "--output /tmp/ns_gw1_result.json\n\n"
             "Input NPZ contract: cubic real arrays named u, v, w on [0, 2*pi)^3; "
             "optional scalar metadata N, domain_length, grid_spacing, amplitude, "
             "time, snapshot_index, and source are validated/reported."
@@ -926,6 +1090,23 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--field", type=Path, default=None, help="optional NPZ containing 3D arrays u, v, w")
     parser.add_argument("--output", type=Path, default=None, help="optional JSON artifact output path")
+    parser.add_argument(
+        "--target",
+        choices=(
+            "enstrophy_max",
+            "lambda2_min",
+            "lambda2_negative_top_enstrophy",
+            "strain_max",
+        ),
+        default="enstrophy_max",
+        help="select the target point used for target-dependent diagnostics",
+    )
+    parser.add_argument(
+        "--target-top-enstrophy-percentile",
+        type=float,
+        default=90.0,
+        help="top-enstrophy percentile used by --target lambda2_negative_top_enstrophy",
+    )
     parser.add_argument(
         "--integral-conditions",
         action="store_true",
@@ -956,6 +1137,8 @@ def main() -> None:
         amplitude=args.amplitude,
         field=args.field,
         output=args.output,
+        target=args.target,
+        target_top_enstrophy_percentile=args.target_top_enstrophy_percentile,
         integral_conditions=args.integral_conditions,
         top_enstrophy_percentile=args.top_enstrophy_percentile,
         kato_alignment=args.kato_alignment,

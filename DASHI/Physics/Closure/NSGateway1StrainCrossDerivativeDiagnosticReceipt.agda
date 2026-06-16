@@ -32,6 +32,102 @@ mathematicalGateway : String
 mathematicalGateway =
   "T_e1 T_e2 lambda2 sign condition"
 
+record NSGateway1TargetModeSelectionReceipt : Set where
+  constructor mkNSGateway1TargetModeSelectionReceipt
+  field
+    supportedTargetModes :
+      String
+    supportedTargetModesIsCanonical :
+      supportedTargetModes ≡
+        "enstrophy_max; lambda2_min; lambda2_negative_top_enstrophy; strain_max"
+    correctedTargetSelectionEnstrophyMax :
+      String
+    correctedTargetSelectionEnstrophyMaxIsCanonical :
+      correctedTargetSelectionEnstrophyMax ≡ "xE"
+    correctedTargetSelectionTrueVortexCore :
+      String
+    correctedTargetSelectionTrueVortexCoreIsCanonical :
+      correctedTargetSelectionTrueVortexCore ≡ "xV"
+    enstrophyMaxSignConjunction :
+      String
+    enstrophyMaxSignConjunctionIsCanonical :
+      enstrophyMaxSignConjunction ≡ "xE: lambda2>0, (T e1)(T e2)lambda2<0"
+    vortexCoreSignConjunction :
+      String
+    vortexCoreSignConjunctionIsCanonical :
+      vortexCoreSignConjunction ≡ "xV: lambda2<0, (T e1)(T e2)lambda2>0"
+    pressureHessianRouteAdverse :
+      Bool
+    pressureHessianRouteAdverseIsTrue :
+      pressureHessianRouteAdverse ≡ true
+    pressureHessianSignNotPromoted :
+      Bool
+    pressureHessianSignNotPromotedIsFalse :
+      pressureHessianSignNotPromoted ≡ false
+    lambda2HessianConfinementIsEmpiricalGeometrySignal :
+      Bool
+    lambda2HessianConfinementIsEmpiricalGeometrySignalIsTrue :
+      lambda2HessianConfinementIsEmpiricalGeometrySignal ≡ true
+    lambda2ConfinementSeparateFromPressureLane :
+      Bool
+    lambda2ConfinementSeparateFromPressureLaneIsTrue :
+      lambda2ConfinementSeparateFromPressureLane ≡ true
+    externalDNSSignPromotion :
+      Bool
+    externalDNSSignPromotionIsFalse :
+      externalDNSSignPromotion ≡ false
+    clayPromotion :
+      Bool
+    clayPromotionIsFalse :
+      clayPromotion ≡ false
+    pressureHessianConcludingText :
+      String
+    pressureHessianConcludingTextIsCanonical :
+      pressureHessianConcludingText ≡
+        "Pressure-Hessian lane stays adverse on local N128 FluidSim data and remains fail-closed without external DNS promotion."
+    correctedSignConventionConclusion :
+      String
+    correctedSignConventionConclusionIsCanonical :
+      correctedSignConventionConclusion ≡
+        "corrected axis-order gives mixed lambda2 / T(e1)T(e2)lambda2 pairing across xE/xV; lane-level pressure sign remains adverse and non-promotable."
+    divergenceResidualAtDiagnosticRowMachinePrecision :
+      Bool
+    divergenceResidualAtDiagnosticRowMachinePrecisionIsTrue :
+      divergenceResidualAtDiagnosticRowMachinePrecision ≡ true
+
+canonicalTargetModeSelectionReceipt :
+  NSGateway1TargetModeSelectionReceipt
+canonicalTargetModeSelectionReceipt =
+  mkNSGateway1TargetModeSelectionReceipt
+    "enstrophy_max; lambda2_min; lambda2_negative_top_enstrophy; strain_max"
+    refl
+    "xE"
+    refl
+    "xV"
+    refl
+    "xE: lambda2>0, (T e1)(T e2)lambda2<0"
+    refl
+    "xV: lambda2<0, (T e1)(T e2)lambda2>0"
+    refl
+    true
+    refl
+    false
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    "Pressure-Hessian lane stays adverse on local N128 FluidSim data and remains fail-closed without external DNS promotion."
+    refl
+    "corrected axis-order gives mixed lambda2 / T(e1)T(e2)lambda2 pairing across xE/xV; lane-level pressure sign remains adverse and non-promotable."
+    refl
+    true
+    refl
+
 record NSGateway1DiagnosticTarget : Set where
   constructor mkNSGateway1DiagnosticTarget
   field
@@ -702,6 +798,10 @@ record NSGateway1DiagnosticReceipt : Set where
       Bool
     realDNSTimeSevenToNineRequiredIsTrue :
       realDNSTimeSevenToNineRequired ≡ true
+    targetModeSelection :
+      NSGateway1TargetModeSelectionReceipt
+    targetModeSelectionIsCanonical :
+      targetModeSelection ≡ canonicalTargetModeSelectionReceipt
     O :
       String
     R :
@@ -740,6 +840,8 @@ canonicalReceipt =
     zeroOrNoiseCrossDerivativeNotSignEvidenceHereIsTrue
     realDNSTimeSevenToNineRequiredHere
     realDNSTimeSevenToNineRequiredHereIsTrue
+    canonicalTargetModeSelectionReceipt
+    refl
     organizationString
     requirementString
     codeArtifactString
@@ -793,4 +895,88 @@ canonicalReceiptRealDNSTimeSevenToNineRequiredProjection :
     canonicalReceipt
   ≡ true
 canonicalReceiptRealDNSTimeSevenToNineRequiredProjection =
+  refl
+
+canonicalReceiptTargetModeSelectionProjection :
+  NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt
+    ≡ canonicalTargetModeSelectionReceipt
+canonicalReceiptTargetModeSelectionProjection =
+  refl
+
+canonicalReceiptSupportedTargetModesProjection :
+  NSGateway1TargetModeSelectionReceipt.supportedTargetModes
+    (NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt)
+  ≡ "enstrophy_max; lambda2_min; lambda2_negative_top_enstrophy; strain_max"
+canonicalReceiptSupportedTargetModesProjection =
+  refl
+
+canonicalReceiptCorrectedTargetRowsProjection :
+  NSGateway1TargetModeSelectionReceipt.correctedTargetSelectionEnstrophyMax
+    (NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt)
+  ≡ "xE"
+canonicalReceiptCorrectedTargetRowsProjection =
+  refl
+
+canonicalReceiptCorrectedVortexCoreRowProjection :
+  NSGateway1TargetModeSelectionReceipt.correctedTargetSelectionTrueVortexCore
+    (NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt)
+  ≡ "xV"
+canonicalReceiptCorrectedVortexCoreRowProjection =
+  refl
+
+canonicalReceiptPressureHessianRouteAdverseProjection :
+  NSGateway1TargetModeSelectionReceipt.pressureHessianRouteAdverse
+    (NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt)
+  ≡ true
+canonicalReceiptPressureHessianRouteAdverseProjection =
+  refl
+
+canonicalReceiptPressureHessianNotPromotedProjection :
+  NSGateway1TargetModeSelectionReceipt.pressureHessianSignNotPromoted
+    (NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt)
+  ≡ false
+canonicalReceiptPressureHessianNotPromotedProjection =
+  refl
+
+canonicalReceiptLambda2ConfinementSignalProjection :
+  NSGateway1TargetModeSelectionReceipt.lambda2HessianConfinementIsEmpiricalGeometrySignal
+    (NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt)
+  ≡ true
+canonicalReceiptLambda2ConfinementSignalProjection =
+  refl
+
+canonicalReceiptLambda2ConfinementSeparatesPressureLaneProjection :
+  NSGateway1TargetModeSelectionReceipt.lambda2ConfinementSeparateFromPressureLane
+    (NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt)
+  ≡ true
+canonicalReceiptLambda2ConfinementSeparatesPressureLaneProjection =
+  refl
+
+canonicalReceiptExternalDNSPromotionProjection :
+  NSGateway1TargetModeSelectionReceipt.externalDNSSignPromotion
+    (NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt)
+  ≡ false
+canonicalReceiptExternalDNSPromotionProjection =
+  refl
+
+canonicalReceiptClayPromotionProjection :
+  NSGateway1TargetModeSelectionReceipt.clayPromotion
+    (NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt)
+  ≡ false
+canonicalReceiptClayPromotionProjection =
+  refl
+
+canonicalReceiptDivergenceMachinePrecisionProjection :
+  NSGateway1TargetModeSelectionReceipt.divergenceResidualAtDiagnosticRowMachinePrecision
+    (NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt)
+  ≡ true
+canonicalReceiptDivergenceMachinePrecisionProjection =
+  refl
+
+canonicalReceiptCorrectedSignConclusionProjection :
+  NSGateway1TargetModeSelectionReceipt.correctedSignConventionConclusion
+    (NSGateway1DiagnosticReceipt.targetModeSelection canonicalReceipt)
+  ≡
+    "corrected axis-order gives mixed lambda2 / T(e1)T(e2)lambda2 pairing across xE/xV; lane-level pressure sign remains adverse and non-promotable."
+canonicalReceiptCorrectedSignConclusionProjection =
   refl
