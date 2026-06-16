@@ -9,6 +9,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
 import DASHI.Core.CandidateOnlyCore as CandidateOnly
 import DASHI.Core.FormalLensQualificationCore as FormalLensCore
+import DASHI.Core.FormalLensVocabularyCore as Vocabulary
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
 
@@ -129,6 +130,24 @@ canonicalStatisticalEvidenceFormalLensCount : Nat
 canonicalStatisticalEvidenceFormalLensCount =
   listCount canonicalStatisticalEvidenceFormalLenses
 
+canonicalStatisticalEvidenceFormalLensKinds : List Vocabulary.FormalLensKind
+canonicalStatisticalEvidenceFormalLensKinds =
+  Vocabulary.Statistical
+  ∷ Vocabulary.Inference
+  ∷ Vocabulary.RobustStatistic
+  ∷ Vocabulary.Estimator
+  ∷ Vocabulary.ConfidenceInterval
+  ∷ Vocabulary.HypothesisTest
+  ∷ Vocabulary.OutlierDetection
+  ∷ Vocabulary.UncertaintyQuantification
+  ∷ Vocabulary.Probability
+  ∷ Vocabulary.InformationCriterion
+  ∷ []
+
+canonicalStatisticalEvidenceFormalLensKindsCount : Nat
+canonicalStatisticalEvidenceFormalLensKindsCount =
+  listCount canonicalStatisticalEvidenceFormalLensKinds
+
 ------------------------------------------------------------------------
 -- Boundary claims.
 
@@ -191,6 +210,12 @@ record StatisticalEvidenceSurface : Set where
 
     evidenceFormalLenses :
       List FormalLensCore.FormalLens
+
+    evidenceFormalLensKinds :
+      List Vocabulary.FormalLensKind
+
+    evidenceFormalLensKindsCount :
+      Nat
 
     evidenceCandidateRow :
       CandidateOnly.CandidateOnlyRow
@@ -290,6 +315,16 @@ record StatisticalEvidenceReceipt
       ≡
       canonicalStatisticalEvidenceFormalLenses
 
+    receiptFormalLensKindsCanonical :
+      evidenceFormalLensKinds surface
+      ≡
+      canonicalStatisticalEvidenceFormalLensKinds
+
+    receiptFormalLensKindsCountCanonical :
+      evidenceFormalLensKindsCount surface
+      ≡
+      canonicalStatisticalEvidenceFormalLensKindsCount
+
     receiptVocabularyCanonical :
       evidenceVocabulary surface
       ≡
@@ -303,6 +338,8 @@ mkStatisticalEvidenceSurface :
   String →
   List StatisticalEvidenceKind →
   List FormalLensCore.FormalLens →
+  List Vocabulary.FormalLensKind →
+  Nat →
   (candidateRow : CandidateOnly.CandidateOnlyRow) →
   CandidateOnly.CandidateOnlyReceipt candidateRow →
   AuthorityNA.AuthorityNonPromotionBundle →
@@ -324,6 +361,8 @@ mkStatisticalEvidenceSurface
   surface
   vocabulary
   formalLenses
+  formalLensKinds
+  formalLensKindsCount
   candidateRow
   candidateReceipt
   authorityBundle
@@ -344,6 +383,8 @@ mkStatisticalEvidenceSurface
     surface
     vocabulary
     formalLenses
+    formalLensKinds
+    formalLensKindsCount
     candidateRow
     candidateReceipt
     authorityBundle
@@ -386,6 +427,12 @@ mkStatisticalEvidenceReceipt :
   evidenceFormalLenses surface
   ≡
   canonicalStatisticalEvidenceFormalLenses →
+  evidenceFormalLensKinds surface
+  ≡
+  canonicalStatisticalEvidenceFormalLensKinds →
+  evidenceFormalLensKindsCount surface
+  ≡
+  canonicalStatisticalEvidenceFormalLensKindsCount →
   evidenceVocabulary surface
   ≡
   canonicalStatisticalEvidenceVocabulary →
@@ -404,6 +451,8 @@ mkStatisticalEvidenceReceipt
   predictionProof
   boundaryProof
   formalLensesProof
+  formalLensKindsProof
+  formalLensKindsCountProof
   vocabularyProof =
   statisticalEvidenceReceipt
     candidateReceiptProof
@@ -418,6 +467,8 @@ mkStatisticalEvidenceReceipt
     predictionProof
     boundaryProof
     formalLensesProof
+    formalLensKindsProof
+    formalLensKindsCountProof
     vocabularyProof
 
 canonicalStatisticalEvidenceSurface :
@@ -429,6 +480,8 @@ canonicalStatisticalEvidenceSurface =
     "canonicalStatisticalEvidenceSurface"
     canonicalStatisticalEvidenceVocabulary
     canonicalStatisticalEvidenceFormalLenses
+    canonicalStatisticalEvidenceFormalLensKinds
+    canonicalStatisticalEvidenceFormalLensKindsCount
     canonicalStatisticalEvidenceCandidateRow
     canonicalStatisticalEvidenceCandidateReceipt
     AuthorityNA.canonicalAuthorityNonPromotionBundle
@@ -450,6 +503,8 @@ canonicalStatisticalEvidenceReceipt =
   mkStatisticalEvidenceReceipt
     canonicalStatisticalEvidenceSurface
     canonicalStatisticalEvidenceCandidateReceipt
+    refl
+    refl
     refl
     refl
     refl
@@ -550,6 +605,21 @@ statisticalEvidenceFormalLensesCanonical :
   canonicalStatisticalEvidenceFormalLenses
 statisticalEvidenceFormalLensesCanonical =
   receiptFormalLensesCanonical canonicalStatisticalEvidenceReceipt
+
+statisticalEvidenceFormalLensKindsCanonical :
+  evidenceFormalLensKinds canonicalStatisticalEvidenceSurface
+  ≡
+  canonicalStatisticalEvidenceFormalLensKinds
+statisticalEvidenceFormalLensKindsCanonical =
+  receiptFormalLensKindsCanonical canonicalStatisticalEvidenceReceipt
+
+statisticalEvidenceFormalLensKindsCountCanonical :
+  evidenceFormalLensKindsCount canonicalStatisticalEvidenceSurface
+  ≡
+  canonicalStatisticalEvidenceFormalLensKindsCount
+statisticalEvidenceFormalLensKindsCountCanonical =
+  receiptFormalLensKindsCountCanonical
+    canonicalStatisticalEvidenceReceipt
 
 statisticalEvidenceVocabularyCanonical :
   evidenceVocabulary canonicalStatisticalEvidenceSurface

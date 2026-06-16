@@ -2,6 +2,8 @@ module DASHI.Core.HiddenLiftProjectionCore where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.AdapterCanonicalityCore as Adapter
@@ -9,6 +11,7 @@ import DASHI.Core.AuthorityNonPromotionCore as Authority
 import DASHI.Core.BridgeRequirementCore as Bridge
 import DASHI.Core.CandidateOnlyCore as Candidate
 import DASHI.Core.FormalLensQualificationCore as Lens
+import DASHI.Core.FormalLensVocabularyCore as Vocabulary
 import DASHI.Core.GenericReceipt as GenericReceipt
 
 ------------------------------------------------------------------------
@@ -77,6 +80,72 @@ data HiddenLiftWitness : Set where
     String →
     HiddenLiftWitness
 
+------------------------------------------------------------------------
+-- Vocabulary layer.
+
+listCount : ∀ {A : Set} → List A → Nat
+listCount [] =
+  zero
+listCount (_ ∷ xs) =
+  suc (listCount xs)
+
+canonicalHiddenLiftProjectionVocabularyKinds :
+  List Vocabulary.FormalLensKind
+canonicalHiddenLiftProjectionVocabularyKinds =
+  Vocabulary.Cryptographic
+  ∷ Vocabulary.TrapdoorProjection
+  ∷ Vocabulary.SecretWitness
+  ∷ Vocabulary.QuotientResidue
+  ∷ Vocabulary.HiddenLift
+  ∷ Vocabulary.Commitment
+  ∷ []
+
+canonicalHiddenLiftProjectionVocabularyKindCount : Nat
+canonicalHiddenLiftProjectionVocabularyKindCount =
+  listCount canonicalHiddenLiftProjectionVocabularyKinds
+
+record HiddenLiftProjectionVocabularyReceipt : Set where
+  constructor mkHiddenLiftProjectionVocabularyReceipt
+  field
+    vocabularyKinds :
+      List Vocabulary.FormalLensKind
+
+    vocabularyKindsAreCanonical :
+      vocabularyKinds ≡ canonicalHiddenLiftProjectionVocabularyKinds
+
+    vocabularyKindCount :
+      Nat
+
+    vocabularyKindCountIsCanonical :
+      vocabularyKindCount ≡ canonicalHiddenLiftProjectionVocabularyKindCount
+
+    vocabularyCandidateOnly :
+      Bool
+
+    vocabularyCandidateOnlyIsTrue :
+      vocabularyCandidateOnly ≡ true
+
+    vocabularyPromoted :
+      Bool
+
+    vocabularyPromotedIsFalse :
+      vocabularyPromoted ≡ false
+
+open HiddenLiftProjectionVocabularyReceipt public
+
+canonicalHiddenLiftProjectionVocabularyReceipt :
+  HiddenLiftProjectionVocabularyReceipt
+canonicalHiddenLiftProjectionVocabularyReceipt =
+  mkHiddenLiftProjectionVocabularyReceipt
+    canonicalHiddenLiftProjectionVocabularyKinds
+    refl
+    canonicalHiddenLiftProjectionVocabularyKindCount
+    refl
+    true
+    refl
+    false
+    refl
+
 record HiddenLiftProjectionSurface : Set where
   constructor mkHiddenLiftProjectionSurface
   field
@@ -129,6 +198,18 @@ record HiddenLiftProjectionSurface : Set where
       Bool
 
 open HiddenLiftProjectionSurface public
+
+hiddenLiftProjectionVocabularyKinds :
+  HiddenLiftProjectionSurface →
+  List Vocabulary.FormalLensKind
+hiddenLiftProjectionVocabularyKinds _ =
+  canonicalHiddenLiftProjectionVocabularyKinds
+
+hiddenLiftProjectionVocabularyKindCount :
+  HiddenLiftProjectionSurface →
+  Nat
+hiddenLiftProjectionVocabularyKindCount _ =
+  canonicalHiddenLiftProjectionVocabularyKindCount
 
 record CorrectnessReceipt : Set where
   constructor mkCorrectnessReceipt
@@ -371,6 +452,16 @@ canonicalHiddenLiftProjectionSurface =
     false
     false
 
+canonicalHiddenLiftProjectionVocabularyKindsForSurface :
+  List Vocabulary.FormalLensKind
+canonicalHiddenLiftProjectionVocabularyKindsForSurface =
+  hiddenLiftProjectionVocabularyKinds canonicalHiddenLiftProjectionSurface
+
+canonicalHiddenLiftProjectionVocabularyKindCountForSurface :
+  Nat
+canonicalHiddenLiftProjectionVocabularyKindCountForSurface =
+  hiddenLiftProjectionVocabularyKindCount canonicalHiddenLiftProjectionSurface
+
 canonicalHiddenLiftProjectionCorrectnessReceipt :
   CorrectnessReceipt
 canonicalHiddenLiftProjectionCorrectnessReceipt =
@@ -432,4 +523,3 @@ canonicalHiddenLiftProjectionReceipt =
     canonicalHiddenLiftProjectionSecurityGap
     canonicalHiddenLiftProjectionFiberCollapseBoundary
     canonicalHiddenLiftProjectionEvidence
-

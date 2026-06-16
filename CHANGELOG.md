@@ -6,6 +6,23 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Formal-lens vocabulary tranche for `2026-06-17`: adds
+  `DASHI.Core.FormalLensVocabularyCore` as the broad JMD formal-lens taxonomy
+  and wires the projection/hash/RSA tranche regression surfaces.
+
+- Six-lane RSA/hash projection tranche for `2026-06-17`: adds
+  `DASHI.Crypto.RSAArithmeticCore`,
+  `DASHI.Crypto.RSASharedPrimeCollapse`,
+  `DASHI.Crypto.RSACRTChamberCore`,
+  `DASHI.Crypto.RSAKeygenTraceCore`,
+  `DASHI.Core.FingerprintProjectionCore`, and
+  `DASHI.Crypto.HashCandidateBoundary`. The tranche moves RSA from pure
+  receipt scaffolding toward proof-shaped arithmetic, shared-factor witness,
+  CRT-chamber, and keygen-trace carriers, while adding the sibling
+  fingerprint/hash projection core. Full RSA correctness, gcd equality, CRT
+  recombination, MD5/hash security, content-address authority, and general
+  cryptographic break claims remain explicitly unpromoted.
+
 - Six-lane RSA source-conditioned statistical/keygen tranche for `2026-06-17`:
   adds the keygen source boundary, batch shared-prime boundary, iteration leak
   boundary, and entropy-source statistical boundary as candidate-only
