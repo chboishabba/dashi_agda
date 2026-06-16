@@ -4,12 +4,37 @@ open import Agda.Primitive using (Set; Setω)
 import Agda.Builtin.Bool as Bool
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; []; _++_)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+
+nat≤refl :
+  (n : Nat) →
+  n ≤ n
+nat≤refl zero =
+  z≤n
+nat≤refl (suc n) =
+  s≤s (nat≤refl n)
+
+nat≤sucRight :
+  {m n : Nat} →
+  m ≤ n →
+  m ≤ suc n
+nat≤sucRight z≤n =
+  z≤n
+nat≤sucRight (s≤s proof) =
+  s≤s (nat≤sucRight proof)
+
+nat≤rightSlack :
+  (slack n : Nat) →
+  n ≤ slack + n
+nat≤rightSlack zero n =
+  nat≤refl n
+nat≤rightSlack (suc slack) n =
+  nat≤sucRight (nat≤rightSlack slack n)
 
 import DASHI.Foundations.SurrealCompactification as SC
 import DASHI.Foundations.SurrealCompactificationRationalBridge as RB
@@ -1267,6 +1292,86 @@ orderedRationalGaugeToolkitScaleNonnegativePrimitiveLaws toolkit =
         orderedRationalGaugeToolkitScale640NonnegativePrimitive toolkit
     }
 
+record OrderedRationalGaugeScaleNonnegativePrimitiveBundle
+  (toolkit : OrderedRationalGaugeToolkitReceipt) : Set where
+  field
+    scale48ConstantLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant48 toolkit
+      ≡
+      48
+
+    scale48NonnegativePrimitiveLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLaw toolkit
+      ≡
+      nonnegativeScaleBy48Primitive
+
+    scale72ConstantLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant72 toolkit
+      ≡
+      72
+
+    scale72NonnegativePrimitiveLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLaw toolkit
+      ≡
+      nonnegativeScaleBy72Primitive
+
+    scale80ConstantLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant80 toolkit
+      ≡
+      80
+
+    scale80NonnegativePrimitiveLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLaw toolkit
+      ≡
+      nonnegativeScaleBy80Primitive
+
+    scale640ConstantLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant640 toolkit
+      ≡
+      640
+
+    scale640NonnegativePrimitiveLaw :
+      OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLaw toolkit
+      ≡
+      nonnegativeScaleBy640Primitive
+
+orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle :
+  (toolkit : OrderedRationalGaugeToolkitReceipt) →
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle toolkit
+orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle toolkit =
+  record
+    { scale48ConstantLaw =
+        orderedRationalGaugeToolkitScale48Is48 toolkit
+    ; scale48NonnegativePrimitiveLaw =
+        orderedRationalGaugeToolkitScale48NonnegativePrimitive toolkit
+    ; scale72ConstantLaw =
+        orderedRationalGaugeToolkitScale72Is72 toolkit
+    ; scale72NonnegativePrimitiveLaw =
+        orderedRationalGaugeToolkitScale72NonnegativePrimitive toolkit
+    ; scale80ConstantLaw =
+        orderedRationalGaugeToolkitScale80Is80 toolkit
+    ; scale80NonnegativePrimitiveLaw =
+        orderedRationalGaugeToolkitScale80NonnegativePrimitive toolkit
+    ; scale640ConstantLaw =
+        orderedRationalGaugeToolkitScale640Is640 toolkit
+    ; scale640NonnegativePrimitiveLaw =
+        orderedRationalGaugeToolkitScale640NonnegativePrimitive toolkit
+    }
+
+orderedRationalGaugeCanonicalThreeMinusNPrimitiveLawPair :
+  OrderedRationalGaugeThreeMinusNPrimitiveLawPair
+    canonicalOrderedRationalGaugeToolkitReceipt
+orderedRationalGaugeCanonicalThreeMinusNPrimitiveLawPair =
+  orderedRationalGaugeToolkitThreeMinusNPrimitiveLawPair
+    canonicalOrderedRationalGaugeToolkitReceipt
+
+orderedRationalGaugeCanonicalScaleNonnegativePrimitiveBundle :
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle
+    canonicalOrderedRationalGaugeToolkitReceipt
+orderedRationalGaugeCanonicalScaleNonnegativePrimitiveBundle =
+  orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+    canonicalOrderedRationalGaugeToolkitReceipt
+
 orderedRationalGaugeToolkitOrderedQQTheoremNotPromoted :
   (toolkit : OrderedRationalGaugeToolkitReceipt) →
   OrderedRationalGaugeToolkitReceipt.orderedQQTheoremPromoted toolkit
@@ -1874,8 +1979,8 @@ orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive :
   ≡
   threeMinusNNonnegativePrimitive
 orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive =
-  orderedRationalGaugeToolkitThreeMinusNNonnegativePrimitive
-    canonicalOrderedRationalGaugeToolkitReceipt
+  OrderedRationalGaugeThreeMinusNPrimitiveLawPair.threeMinusNNonnegativePrimitiveLaw
+    orderedRationalGaugeCanonicalThreeMinusNPrimitiveLawPair
 
 orderedRationalGaugeThreeMinusNPositiveLawPrimitive :
   OrderedRationalGaugeToolkitReceipt.threeMinusNPositiveLaw
@@ -1883,8 +1988,8 @@ orderedRationalGaugeThreeMinusNPositiveLawPrimitive :
   ≡
   threeMinusNPositivePrimitive
 orderedRationalGaugeThreeMinusNPositiveLawPrimitive =
-  orderedRationalGaugeToolkitThreeMinusNPositivePrimitive
-    canonicalOrderedRationalGaugeToolkitReceipt
+  OrderedRationalGaugeThreeMinusNPrimitiveLawPair.threeMinusNPositivePrimitiveLaw
+    orderedRationalGaugeCanonicalThreeMinusNPrimitiveLawPair
 
 orderedRationalGaugeScale48Is48 :
   OrderedRationalGaugeToolkitReceipt.scaleConstant48
@@ -1892,8 +1997,8 @@ orderedRationalGaugeScale48Is48 :
   ≡
   48
 orderedRationalGaugeScale48Is48 =
-  orderedRationalGaugeToolkitScale48Is48
-    canonicalOrderedRationalGaugeToolkitReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale48ConstantLaw
+    orderedRationalGaugeCanonicalScaleNonnegativePrimitiveBundle
 
 orderedRationalGaugeScale48NonnegativeLawPrimitive :
   OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLaw
@@ -1901,8 +2006,8 @@ orderedRationalGaugeScale48NonnegativeLawPrimitive :
   ≡
   nonnegativeScaleBy48Primitive
 orderedRationalGaugeScale48NonnegativeLawPrimitive =
-  orderedRationalGaugeToolkitScale48NonnegativePrimitive
-    canonicalOrderedRationalGaugeToolkitReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale48NonnegativePrimitiveLaw
+    orderedRationalGaugeCanonicalScaleNonnegativePrimitiveBundle
 
 orderedRationalGaugeScale72Is72 :
   OrderedRationalGaugeToolkitReceipt.scaleConstant72
@@ -1910,8 +2015,8 @@ orderedRationalGaugeScale72Is72 :
   ≡
   72
 orderedRationalGaugeScale72Is72 =
-  orderedRationalGaugeToolkitScale72Is72
-    canonicalOrderedRationalGaugeToolkitReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale72ConstantLaw
+    orderedRationalGaugeCanonicalScaleNonnegativePrimitiveBundle
 
 orderedRationalGaugeScale72NonnegativeLawPrimitive :
   OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLaw
@@ -1919,8 +2024,8 @@ orderedRationalGaugeScale72NonnegativeLawPrimitive :
   ≡
   nonnegativeScaleBy72Primitive
 orderedRationalGaugeScale72NonnegativeLawPrimitive =
-  orderedRationalGaugeToolkitScale72NonnegativePrimitive
-    canonicalOrderedRationalGaugeToolkitReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale72NonnegativePrimitiveLaw
+    orderedRationalGaugeCanonicalScaleNonnegativePrimitiveBundle
 
 orderedRationalGaugeScale80Is80 :
   OrderedRationalGaugeToolkitReceipt.scaleConstant80
@@ -1928,8 +2033,8 @@ orderedRationalGaugeScale80Is80 :
   ≡
   80
 orderedRationalGaugeScale80Is80 =
-  orderedRationalGaugeToolkitScale80Is80
-    canonicalOrderedRationalGaugeToolkitReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale80ConstantLaw
+    orderedRationalGaugeCanonicalScaleNonnegativePrimitiveBundle
 
 orderedRationalGaugeScale80NonnegativeLawPrimitive :
   OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLaw
@@ -1937,8 +2042,8 @@ orderedRationalGaugeScale80NonnegativeLawPrimitive :
   ≡
   nonnegativeScaleBy80Primitive
 orderedRationalGaugeScale80NonnegativeLawPrimitive =
-  orderedRationalGaugeToolkitScale80NonnegativePrimitive
-    canonicalOrderedRationalGaugeToolkitReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale80NonnegativePrimitiveLaw
+    orderedRationalGaugeCanonicalScaleNonnegativePrimitiveBundle
 
 orderedRationalGaugeScale640Is640 :
   OrderedRationalGaugeToolkitReceipt.scaleConstant640
@@ -1946,8 +2051,8 @@ orderedRationalGaugeScale640Is640 :
   ≡
   640
 orderedRationalGaugeScale640Is640 =
-  orderedRationalGaugeToolkitScale640Is640
-    canonicalOrderedRationalGaugeToolkitReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale640ConstantLaw
+    orderedRationalGaugeCanonicalScaleNonnegativePrimitiveBundle
 
 orderedRationalGaugeScale640NonnegativeLawPrimitive :
   OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLaw
@@ -1955,8 +2060,8 @@ orderedRationalGaugeScale640NonnegativeLawPrimitive :
   ≡
   nonnegativeScaleBy640Primitive
 orderedRationalGaugeScale640NonnegativeLawPrimitive =
-  orderedRationalGaugeToolkitScale640NonnegativePrimitive
-    canonicalOrderedRationalGaugeToolkitReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale640NonnegativePrimitiveLaw
+    orderedRationalGaugeCanonicalScaleNonnegativePrimitiveBundle
 
 orderedRationalGaugeOrderedQQTheoremNotPromoted :
   OrderedRationalGaugeToolkitReceipt.orderedQQTheoremPromoted
@@ -2387,6 +2492,82 @@ orderedRationalShellADenominatorReciprocalFeedsChristoffelFormulaC0Stable :
 orderedRationalShellADenominatorReciprocalFeedsChristoffelFormulaC0Stable receipt =
   OrderedRationalShellADenominatorReciprocalReceipt.reciprocalBoundsFeedChristoffelFormulaC0StableIsTrue
     receipt
+
+orderedRationalShellADenominatorSchwarzschildRadiusIs2 :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.schwarzschildRadius
+    receipt
+  ≡
+  2
+orderedRationalShellADenominatorSchwarzschildRadiusIs2 receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.schwarzschildRadiusIs2
+    receipt
+
+orderedRationalShellADenominatorLowerEndpointIs3 :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.shellALowerEndpoint
+    receipt
+  ≡
+  3
+orderedRationalShellADenominatorLowerEndpointIs3 receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.shellALowerEndpointIs3
+    receipt
+
+orderedRationalShellADenominatorUpperEndpointIs4 :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.shellAUpperEndpoint
+    receipt
+  ≡
+  4
+orderedRationalShellADenominatorUpperEndpointIs4 receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.shellAUpperEndpointIs4
+    receipt
+
+orderedRationalShellADenominatorHorizonClearanceIs1 :
+  (receipt : OrderedRationalShellADenominatorReciprocalReceipt) →
+  OrderedRationalShellADenominatorReciprocalReceipt.horizonClearance
+    receipt
+  ≡
+  1
+orderedRationalShellADenominatorHorizonClearanceIs1 receipt =
+  OrderedRationalShellADenominatorReciprocalReceipt.horizonClearanceIs1
+    receipt
+
+orderedRationalShellASchwarzschildRadiusIs2 :
+  OrderedRationalShellADenominatorReciprocalReceipt.schwarzschildRadius
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  2
+orderedRationalShellASchwarzschildRadiusIs2 =
+  orderedRationalShellADenominatorSchwarzschildRadiusIs2
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellALowerEndpointIs3 :
+  OrderedRationalShellADenominatorReciprocalReceipt.shellALowerEndpoint
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  3
+orderedRationalShellALowerEndpointIs3 =
+  orderedRationalShellADenominatorLowerEndpointIs3
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAUpperEndpointIs4 :
+  OrderedRationalShellADenominatorReciprocalReceipt.shellAUpperEndpoint
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  4
+orderedRationalShellAUpperEndpointIs4 =
+  orderedRationalShellADenominatorUpperEndpointIs4
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+
+orderedRationalShellAHorizonClearanceIs1 :
+  OrderedRationalShellADenominatorReciprocalReceipt.horizonClearance
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
+  ≡
+  1
+orderedRationalShellAHorizonClearanceIs1 =
+  orderedRationalShellADenominatorHorizonClearanceIs1
+    canonicalOrderedRationalShellADenominatorReciprocalReceipt
 
 orderedRationalShellAInverseMetricAbsMaxIs4 :
   OrderedRationalShellADenominatorReciprocalReceipt.inverseMetricAbsMax
@@ -3732,8 +3913,10 @@ selectedSymbolicRationalOrderedGaugeThreeMinusNNonnegativeLaw :
   ≡
   threeMinusNNonnegativePrimitive
 selectedSymbolicRationalOrderedGaugeThreeMinusNNonnegativeLaw =
-  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeThreeMinusNNonnegativeLawSelected
-    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  OrderedRationalGaugeThreeMinusNPrimitiveLawPair.threeMinusNNonnegativePrimitiveLaw
+    (orderedRationalGaugeToolkitThreeMinusNPrimitiveLawPair
+      (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt))
 
 selectedSymbolicRationalOrderedGaugeThreeMinusNPositiveLaw :
   OrderedRationalGaugeToolkitReceipt.threeMinusNPositiveLaw
@@ -3742,8 +3925,10 @@ selectedSymbolicRationalOrderedGaugeThreeMinusNPositiveLaw :
   ≡
   threeMinusNPositivePrimitive
 selectedSymbolicRationalOrderedGaugeThreeMinusNPositiveLaw =
-  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeThreeMinusNPositiveLawSelected
-    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  OrderedRationalGaugeThreeMinusNPrimitiveLawPair.threeMinusNPositivePrimitiveLaw
+    (orderedRationalGaugeToolkitThreeMinusNPrimitiveLawPair
+      (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt))
 
 selectedSymbolicRationalOrderedGaugeScale48Is48 :
   OrderedRationalGaugeToolkitReceipt.scaleConstant48
@@ -3752,8 +3937,10 @@ selectedSymbolicRationalOrderedGaugeScale48Is48 :
   ≡
   48
 selectedSymbolicRationalOrderedGaugeScale48Is48 =
-  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale48SelectedAs48
-    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale48ConstantLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt))
 
 selectedSymbolicRationalOrderedGaugeScale48NonnegativeLaw :
   OrderedRationalGaugeToolkitReceipt.scaleConstant48NonnegativeLaw
@@ -3762,8 +3949,10 @@ selectedSymbolicRationalOrderedGaugeScale48NonnegativeLaw :
   ≡
   nonnegativeScaleBy48Primitive
 selectedSymbolicRationalOrderedGaugeScale48NonnegativeLaw =
-  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale48NonnegativeLawSelected
-    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale48NonnegativePrimitiveLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt))
 
 selectedSymbolicRationalOrderedGaugeScale72Is72 :
   OrderedRationalGaugeToolkitReceipt.scaleConstant72
@@ -3772,8 +3961,10 @@ selectedSymbolicRationalOrderedGaugeScale72Is72 :
   ≡
   72
 selectedSymbolicRationalOrderedGaugeScale72Is72 =
-  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale72SelectedAs72
-    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale72ConstantLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt))
 
 selectedSymbolicRationalOrderedGaugeScale72NonnegativeLaw :
   OrderedRationalGaugeToolkitReceipt.scaleConstant72NonnegativeLaw
@@ -3782,8 +3973,10 @@ selectedSymbolicRationalOrderedGaugeScale72NonnegativeLaw :
   ≡
   nonnegativeScaleBy72Primitive
 selectedSymbolicRationalOrderedGaugeScale72NonnegativeLaw =
-  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale72NonnegativeLawSelected
-    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale72NonnegativePrimitiveLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt))
 
 selectedSymbolicRationalOrderedGaugeScale80Is80 :
   OrderedRationalGaugeToolkitReceipt.scaleConstant80
@@ -3792,8 +3985,10 @@ selectedSymbolicRationalOrderedGaugeScale80Is80 :
   ≡
   80
 selectedSymbolicRationalOrderedGaugeScale80Is80 =
-  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale80SelectedAs80
-    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale80ConstantLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt))
 
 selectedSymbolicRationalOrderedGaugeScale80NonnegativeLaw :
   OrderedRationalGaugeToolkitReceipt.scaleConstant80NonnegativeLaw
@@ -3802,8 +3997,10 @@ selectedSymbolicRationalOrderedGaugeScale80NonnegativeLaw :
   ≡
   nonnegativeScaleBy80Primitive
 selectedSymbolicRationalOrderedGaugeScale80NonnegativeLaw =
-  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale80NonnegativeLawSelected
-    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale80NonnegativePrimitiveLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt))
 
 selectedSymbolicRationalOrderedGaugeScale640Is640 :
   OrderedRationalGaugeToolkitReceipt.scaleConstant640
@@ -3812,8 +4009,10 @@ selectedSymbolicRationalOrderedGaugeScale640Is640 :
   ≡
   640
 selectedSymbolicRationalOrderedGaugeScale640Is640 =
-  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale640SelectedAs640
-    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale640ConstantLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt))
 
 selectedSymbolicRationalOrderedGaugeScale640NonnegativeLaw :
   OrderedRationalGaugeToolkitReceipt.scaleConstant640NonnegativeLaw
@@ -3822,8 +4021,10 @@ selectedSymbolicRationalOrderedGaugeScale640NonnegativeLaw :
   ≡
   nonnegativeScaleBy640Primitive
 selectedSymbolicRationalOrderedGaugeScale640NonnegativeLaw =
-  SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeScale640NonnegativeLawSelected
-    canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale640NonnegativePrimitiveLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0SelectedConstantReceipt.orderedGaugeToolkit
+        canonicalSymbolicRationalChristoffelC0SelectedConstantReceipt))
 
 selectedSymbolicRationalChristoffelC0FormulaStabilityIs48 :
   SymbolicRationalChristoffelC0SelectedConstantReceipt.formulaStabilityConstantNat
@@ -4162,8 +4363,10 @@ symbolicRationalKernelOrderedGaugeThreeMinusNNonnegativeLaw :
   ≡
   threeMinusNNonnegativePrimitive
 symbolicRationalKernelOrderedGaugeThreeMinusNNonnegativeLaw kernel =
-  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeThreeMinusNNonnegativeLaw
-    kernel
+  OrderedRationalGaugeThreeMinusNPrimitiveLawPair.threeMinusNNonnegativePrimitiveLaw
+    (orderedRationalGaugeToolkitThreeMinusNPrimitiveLawPair
+      (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+        kernel))
 
 symbolicRationalKernelOrderedGaugeThreeMinusNPositiveLaw :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
@@ -4173,8 +4376,10 @@ symbolicRationalKernelOrderedGaugeThreeMinusNPositiveLaw :
   ≡
   threeMinusNPositivePrimitive
 symbolicRationalKernelOrderedGaugeThreeMinusNPositiveLaw kernel =
-  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeThreeMinusNPositiveLaw
-    kernel
+  OrderedRationalGaugeThreeMinusNPrimitiveLawPair.threeMinusNPositivePrimitiveLaw
+    (orderedRationalGaugeToolkitThreeMinusNPrimitiveLawPair
+      (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+        kernel))
 
 symbolicRationalKernelOrderedGaugeScale48Is48 :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
@@ -4184,8 +4389,10 @@ symbolicRationalKernelOrderedGaugeScale48Is48 :
   ≡
   48
 symbolicRationalKernelOrderedGaugeScale48Is48 kernel =
-  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale48Is48
-    kernel
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale48ConstantLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+        kernel))
 
 symbolicRationalKernelOrderedGaugeScale48NonnegativeLaw :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
@@ -4195,8 +4402,10 @@ symbolicRationalKernelOrderedGaugeScale48NonnegativeLaw :
   ≡
   nonnegativeScaleBy48Primitive
 symbolicRationalKernelOrderedGaugeScale48NonnegativeLaw kernel =
-  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale48NonnegativeLaw
-    kernel
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale48NonnegativePrimitiveLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+        kernel))
 
 symbolicRationalKernelOrderedGaugeScale72Is72 :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
@@ -4206,8 +4415,10 @@ symbolicRationalKernelOrderedGaugeScale72Is72 :
   ≡
   72
 symbolicRationalKernelOrderedGaugeScale72Is72 kernel =
-  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale72Is72
-    kernel
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale72ConstantLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+        kernel))
 
 symbolicRationalKernelOrderedGaugeScale72NonnegativeLaw :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
@@ -4217,8 +4428,10 @@ symbolicRationalKernelOrderedGaugeScale72NonnegativeLaw :
   ≡
   nonnegativeScaleBy72Primitive
 symbolicRationalKernelOrderedGaugeScale72NonnegativeLaw kernel =
-  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale72NonnegativeLaw
-    kernel
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale72NonnegativePrimitiveLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+        kernel))
 
 symbolicRationalKernelOrderedGaugeScale80Is80 :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
@@ -4228,8 +4441,10 @@ symbolicRationalKernelOrderedGaugeScale80Is80 :
   ≡
   80
 symbolicRationalKernelOrderedGaugeScale80Is80 kernel =
-  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale80Is80
-    kernel
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale80ConstantLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+        kernel))
 
 symbolicRationalKernelOrderedGaugeScale80NonnegativeLaw :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
@@ -4239,8 +4454,10 @@ symbolicRationalKernelOrderedGaugeScale80NonnegativeLaw :
   ≡
   nonnegativeScaleBy80Primitive
 symbolicRationalKernelOrderedGaugeScale80NonnegativeLaw kernel =
-  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale80NonnegativeLaw
-    kernel
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale80NonnegativePrimitiveLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+        kernel))
 
 symbolicRationalKernelOrderedGaugeScale640Is640 :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
@@ -4250,8 +4467,10 @@ symbolicRationalKernelOrderedGaugeScale640Is640 :
   ≡
   640
 symbolicRationalKernelOrderedGaugeScale640Is640 kernel =
-  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale640Is640
-    kernel
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale640ConstantLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+        kernel))
 
 symbolicRationalKernelOrderedGaugeScale640NonnegativeLaw :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
@@ -4261,8 +4480,10 @@ symbolicRationalKernelOrderedGaugeScale640NonnegativeLaw :
   ≡
   nonnegativeScaleBy640Primitive
 symbolicRationalKernelOrderedGaugeScale640NonnegativeLaw kernel =
-  SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeScale640NonnegativeLaw
-    kernel
+  OrderedRationalGaugeScaleNonnegativePrimitiveBundle.scale640NonnegativePrimitiveLaw
+    (orderedRationalGaugeToolkitScaleNonnegativePrimitiveBundle
+      (SymbolicRationalChristoffelC0StabilityKernel.orderedGaugeToolkit
+        kernel))
 
 symbolicRationalKernelShellADenominatorReciprocalIsCanonical :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
@@ -4346,6 +4567,11 @@ symbolicRationalKernelShellAChristoffelFormulaEnvelopeMatchesMachineCheckedConst
   orderedRationalShellADenominatorFinalEnvelopeMatchesMachineCheckedConstant
     (SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
       kernel)
+
+symbolicRationalKernelShellAChristoffelFormula22Le48 :
+  22 ≤ 48
+symbolicRationalKernelShellAChristoffelFormula22Le48 =
+  nat≤rightSlack 26 22
 
 symbolicRationalKernelShellAChristoffelFormulaTightAuditedEnvelopeIs44 :
   (kernel : SymbolicRationalChristoffelC0StabilityKernel) →
@@ -5070,6 +5296,12 @@ record SelectedZeroEpsilonConnectionErrorBoundReceipt
       SymbolicRationalChristoffelC0SelectedConstantReceipt.ricciBoundDenominatorNat
         selectedConstants
 
+    selectedRicciPerturbation2144Over27LeShell80 :
+      2144 ≤ 2160
+
+    selectedRicciShell80LeRicciDenominator640 :
+      80 ≤ 640
+
     selectedZeroEpsilonDerivationClosed :
       Bool
 
@@ -5165,6 +5397,10 @@ canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel =
         z≤n
     ; selectedRicciErrorBound≤RicciDenominator =
         z≤n
+    ; selectedRicciPerturbation2144Over27LeShell80 =
+        nat≤rightSlack 16 2144
+    ; selectedRicciShell80LeRicciDenominator640 =
+        nat≤rightSlack 560 80
     ; selectedZeroEpsilonDerivationClosed =
         Bool.true
     ; selectedZeroEpsilonDerivationClosedIsTrue =
@@ -5182,6 +5418,8 @@ canonicalSelectedZeroEpsilonConnectionErrorBoundReceipt kernel =
         ∷ "The equality handoff is selectedLocalEqualityHandoff only; it is the primitive diagonal pair and is not exported as arbitrary connection equality"
         ∷ "connectionBound is the local Nat-valued selected bound function and evaluates to 0 on the selected zero-epsilon pair"
         ∷ "ricciErrorBound is the local Nat-valued selected bound function and evaluates to 0 on the selected zero-epsilon pair"
+        ∷ "Ricci perturbation arithmetic records 2144/27 <= 80 by the Nat cross-multiplication inhabitant 2144 <= 2160"
+        ∷ "The Ricci shell ceiling records 80 <= 640, matching the selected Ricci denominator receipt"
         ∷ "The zero selected bounds are checked against the existing formula stability, conservative shell, L_Ricci, and Ricci denominator constants by z≤n"
         ∷ [])
         ++

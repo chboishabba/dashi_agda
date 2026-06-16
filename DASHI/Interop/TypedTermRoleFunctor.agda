@@ -5,6 +5,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
+import DASHI.Core.CandidateOnlyCore as CandidateOnly
+import DASHI.Core.EmptyPromotionCore as EmptyPromotion
 import DASHI.Interop.RoleGrammarCore as Core
 
 ------------------------------------------------------------------------
@@ -919,6 +922,43 @@ record TypedTermRoleFunctorReceipt : Set where
 
 open TypedTermRoleFunctorReceipt public
 
+authorityNonPromotionCoreAdapter :
+  AuthorityNA.AuthorityNonPromotionBundle
+authorityNonPromotionCoreAdapter =
+  AuthorityNA.canonicalAuthorityNonPromotionBundle
+
+authorityNonPromotionCoreAdapterIsCanonical :
+  authorityNonPromotionCoreAdapter
+  ≡
+  AuthorityNA.canonicalAuthorityNonPromotionBundle
+authorityNonPromotionCoreAdapterIsCanonical =
+  refl
+
+candidateOnlyCoreAdapter :
+  CandidateOnly.CandidateOnlyReceipt
+    CandidateOnly.canonicalRoleCandidateOnlyRow
+candidateOnlyCoreAdapter =
+  CandidateOnly.canonicalRoleCandidateOnlyReceipt
+
+candidateOnlyCoreAdapterIsCanonical :
+  candidateOnlyCoreAdapter
+  ≡
+  CandidateOnly.canonicalRoleCandidateOnlyReceipt
+candidateOnlyCoreAdapterIsCanonical =
+  refl
+
+emptyPromotionCoreAdapter :
+  EmptyPromotion.EmptyPromotionReceipt
+emptyPromotionCoreAdapter =
+  EmptyPromotion.canonicalEmptyPromotionReceipt
+
+emptyPromotionCoreAdapterIsCanonical :
+  emptyPromotionCoreAdapter
+  ≡
+  EmptyPromotion.canonicalEmptyPromotionReceipt
+emptyPromotionCoreAdapterIsCanonical =
+  refl
+
 canonicalTypedTermRoleFunctorReceipt :
   TypedTermRoleFunctorReceipt
 canonicalTypedTermRoleFunctorReceipt =
@@ -956,4 +996,82 @@ receiptSurfaceEntityIdentityDoesNotEntailRole =
 canonicalReceiptExternalAuthorityIsFalse :
   receiptExternalAuthority canonicalTypedTermRoleFunctorReceipt ≡ false
 canonicalReceiptExternalAuthorityIsFalse =
+  refl
+
+canonicalTypedTermAuthorityCoreExternalFalse :
+  AuthorityNA.externalAuthorityFlag authorityNonPromotionCoreAdapter
+  ≡
+  false
+canonicalTypedTermAuthorityCoreExternalFalse =
+  refl
+
+canonicalTypedTermAuthorityCorePromotesNothing :
+  AuthorityNA.promotesAnyAuthority authorityNonPromotionCoreAdapter
+  ≡
+  false
+canonicalTypedTermAuthorityCorePromotesNothing =
+  refl
+
+canonicalTypedTermCandidateOnlyCoreCandidateTrue :
+  CandidateOnly.candidateOnly
+    CandidateOnly.canonicalRoleCandidateOnlyRow
+  ≡
+  true
+canonicalTypedTermCandidateOnlyCoreCandidateTrue =
+  CandidateOnly.candidateOnlyIsTrue
+    candidateOnlyCoreAdapter
+
+canonicalTypedTermCandidateOnlyCorePromotedFalse :
+  CandidateOnly.promoted
+    CandidateOnly.canonicalRoleCandidateOnlyRow
+  ≡
+  false
+canonicalTypedTermCandidateOnlyCorePromotedFalse =
+  CandidateOnly.candidatePromotedIsFalse
+    candidateOnlyCoreAdapter
+
+canonicalTypedTermCandidateOnlyCoreTruthAuthorityFalse :
+  CandidateOnly.carriesTruthAuthority
+    CandidateOnly.canonicalRoleCandidateOnlyRow
+  ≡
+  false
+canonicalTypedTermCandidateOnlyCoreTruthAuthorityFalse =
+  CandidateOnly.candidateNoTruthAuthority
+    candidateOnlyCoreAdapter
+
+canonicalTypedTermEmptyPromotionCoreEmpty :
+  EmptyPromotion.promotions emptyPromotionCoreAdapter
+  ≡
+  []
+canonicalTypedTermEmptyPromotionCoreEmpty =
+  refl
+
+surfaceEntityAuthorityMatchesAuthorityCore :
+  ∀ domain →
+  surfaceEntityRoleAuthority canonicalRoleFunctor domain
+  ≡
+  AuthorityNA.externalAuthorityFlag authorityNonPromotionCoreAdapter
+surfaceEntityAuthorityMatchesAuthorityCore domain =
+  refl
+
+candidateRoleAuthorityMatchesCandidateOnlyCore :
+  ∀ domain →
+  candidateRoleAuthority canonicalRoleFunctor domain
+  ≡
+  CandidateOnly.promoted CandidateOnly.canonicalRoleCandidateOnlyRow
+candidateRoleAuthorityMatchesCandidateOnlyCore domain =
+  refl
+
+receiptExternalAuthorityMatchesAuthorityCore :
+  receiptExternalAuthority canonicalTypedTermRoleFunctorReceipt
+  ≡
+  AuthorityNA.externalAuthorityFlag authorityNonPromotionCoreAdapter
+receiptExternalAuthorityMatchesAuthorityCore =
+  refl
+
+receiptCandidateOnlyAuthorityMatchesCandidateCore :
+  receiptCandidateOnlyAuthority canonicalTypedTermRoleFunctorReceipt
+  ≡
+  CandidateOnly.promoted CandidateOnly.canonicalRoleCandidateOnlyRow
+receiptCandidateOnlyAuthorityMatchesCandidateCore =
   refl

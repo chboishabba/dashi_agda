@@ -7,6 +7,9 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Interop.RoleGrammarCore as RoleCore
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNonPromotionCore
+import DASHI.Core.BridgeRequirementCore as BridgeRequirementCore
+import DASHI.Core.CandidateOnlyCore as CandidateOnlyCore
 
 ------------------------------------------------------------------------
 -- Background distributional bridge receipt.
@@ -305,6 +308,151 @@ record BackgroundBridgeCandidateProfile : Set where
       String
 
 open BackgroundBridgeCandidateProfile public
+
+------------------------------------------------------------------------
+-- Reusable core adapters.
+--
+-- These adapters consume the shared candidate-only/non-promotion cores while
+-- preserving the local BackgroundDistributionalBridge/Profile surface.
+
+bridgeRequirementCoreAdapter :
+  BackgroundBridgeCandidateProfile →
+  BridgeRequirementCore.BridgeRequirementRow
+bridgeRequirementCoreAdapter candidate =
+  BridgeRequirementCore.canonicalBridgeRequirementRow
+    (candidateName candidate)
+    (candidateReceiptNote candidate)
+    BridgeRequirementCore.bridgeSuppliedCandidateOnly
+    true
+    true
+    true
+
+bridgeRequirementCoreAdapterReceipt :
+  (candidate : BackgroundBridgeCandidateProfile) →
+  BridgeRequirementCore.BridgeRequirementRowReceipt
+    (bridgeRequirementCoreAdapter candidate)
+bridgeRequirementCoreAdapterReceipt candidate =
+  BridgeRequirementCore.canonicalBridgeRequirementRowReceipt
+    (bridgeRequirementCoreAdapter candidate)
+    refl
+    refl
+    refl
+
+bridgeRequirementCoreAdapterBridgeAuthorityFalse :
+  (candidate : BackgroundBridgeCandidateProfile) →
+  BridgeRequirementCore.rowBackgroundBridgeAuthority
+    (bridgeRequirementCoreAdapter candidate)
+  ≡
+  false
+bridgeRequirementCoreAdapterBridgeAuthorityFalse candidate =
+  BridgeRequirementCore.rowBackgroundBridgeAuthorityFalse
+    (bridgeRequirementCoreAdapterReceipt candidate)
+
+bridgeRequirementCoreAdapterAuthorityPromotionFalse :
+  (candidate : BackgroundBridgeCandidateProfile) →
+  BridgeRequirementCore.rowAuthorityPromotion
+    (bridgeRequirementCoreAdapter candidate)
+  ≡
+  false
+bridgeRequirementCoreAdapterAuthorityPromotionFalse candidate =
+  BridgeRequirementCore.rowAuthorityPromotionFalse
+    (bridgeRequirementCoreAdapterReceipt candidate)
+
+bridgeRequirementCoreAdapterTransportMapAuthorityFalse :
+  (candidate : BackgroundBridgeCandidateProfile) →
+  BridgeRequirementCore.rowTransportMapAuthority
+    (bridgeRequirementCoreAdapter candidate)
+  ≡
+  false
+bridgeRequirementCoreAdapterTransportMapAuthorityFalse candidate =
+  BridgeRequirementCore.rowTransportMapAuthorityFalse
+    (bridgeRequirementCoreAdapterReceipt candidate)
+
+candidateOnlyCoreAdapter :
+  BackgroundBridgeCandidateProfile →
+  CandidateOnlyCore.CandidateOnlyRow
+candidateOnlyCoreAdapter candidate =
+  CandidateOnlyCore.mkCandidateOnlyRow
+    (candidateName candidate)
+    "DASHI.Interop.BackgroundDistributionBridge"
+    "BackgroundBridgeCandidateProfile"
+    CandidateOnlyCore.bridgeCandidateKind
+    CandidateOnlyCore.bridgeCandidateOnlyStatus
+    "background distributional bridge profiles are candidate-only receipt surfaces"
+    "empirical truth, bridge authority, and promotion require separate accepted authority artifacts"
+
+candidateOnlyCoreAdapterReceipt :
+  (candidate : BackgroundBridgeCandidateProfile) →
+  CandidateOnlyCore.CandidateOnlyReceipt
+    (candidateOnlyCoreAdapter candidate)
+candidateOnlyCoreAdapterReceipt candidate =
+  CandidateOnlyCore.canonicalCandidateOnlyReceipt
+    (candidateOnlyCoreAdapter candidate)
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+candidateOnlyCoreAdapterPromotedFalse :
+  (candidate : BackgroundBridgeCandidateProfile) →
+  CandidateOnlyCore.promoted
+    (candidateOnlyCoreAdapter candidate)
+  ≡
+  false
+candidateOnlyCoreAdapterPromotedFalse candidate =
+  CandidateOnlyCore.candidatePromotedIsFalse
+    (candidateOnlyCoreAdapterReceipt candidate)
+
+candidateOnlyCoreAdapterTruthAuthorityFalse :
+  (candidate : BackgroundBridgeCandidateProfile) →
+  CandidateOnlyCore.carriesTruthAuthority
+    (candidateOnlyCoreAdapter candidate)
+  ≡
+  false
+candidateOnlyCoreAdapterTruthAuthorityFalse candidate =
+  CandidateOnlyCore.candidateNoTruthAuthority
+    (candidateOnlyCoreAdapterReceipt candidate)
+
+authorityNonPromotionCoreAdapter :
+  BackgroundBridgeCandidateProfile →
+  AuthorityNonPromotionCore.AuthorityNonPromotionBundle
+authorityNonPromotionCoreAdapter candidate =
+  AuthorityNonPromotionCore.mkClosedAuthorityNonPromotionBundle
+    (candidateName candidate)
+
+authorityNonPromotionCoreAdapterEmpiricalAuthorityFalse :
+  (candidate : BackgroundBridgeCandidateProfile) →
+  AuthorityNonPromotionCore.empiricalAuthorityFlag
+    (authorityNonPromotionCoreAdapter candidate)
+  ≡
+  false
+authorityNonPromotionCoreAdapterEmpiricalAuthorityFalse candidate =
+  AuthorityNonPromotionCore.bundleEmpiricalAuthorityIsFalse
+    (authorityNonPromotionCoreAdapter candidate)
+
+authorityNonPromotionCoreAdapterExternalAuthorityFalse :
+  (candidate : BackgroundBridgeCandidateProfile) →
+  AuthorityNonPromotionCore.externalAuthorityFlag
+    (authorityNonPromotionCoreAdapter candidate)
+  ≡
+  false
+authorityNonPromotionCoreAdapterExternalAuthorityFalse candidate =
+  AuthorityNonPromotionCore.bundleExternalAuthorityIsFalse
+    (authorityNonPromotionCoreAdapter candidate)
+
+authorityNonPromotionCoreAdapterPromotesAnyAuthorityFalse :
+  (candidate : BackgroundBridgeCandidateProfile) →
+  AuthorityNonPromotionCore.promotesAnyAuthority
+    (authorityNonPromotionCoreAdapter candidate)
+  ≡
+  false
+authorityNonPromotionCoreAdapterPromotesAnyAuthorityFalse candidate =
+  AuthorityNonPromotionCore.bundlePromotesAnyAuthorityIsFalse
+    (authorityNonPromotionCoreAdapter candidate)
 
 backgroundCandidateSourceCoreTypedTerm :
   BackgroundBridgeCandidateProfile →

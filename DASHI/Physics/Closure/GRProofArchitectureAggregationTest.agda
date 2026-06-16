@@ -191,6 +191,43 @@ record GRProofArchitectureNextAnalyticKernelTrancheReceipt : Setω where
       ∷ "grSchwarzschildFiniteRicciPerturbationConservativeCRConstantIs640"
       ∷ []
 
+    currentGRAnalyticKernelRemainingVars :
+      List String
+
+    currentGRAnalyticKernelRemainingVarsAreCanonical :
+      currentGRAnalyticKernelRemainingVars
+      ≡
+      "nextAnalyticKernelShellA_LGammaIs72"
+      ∷ "nextAnalyticKernelShellA_CRIs80"
+      ∷ "nextAnalyticKernelShellA_CPrimeDenominatorIs27"
+      ∷ "nextAnalyticKernelSchwarzschildShellAEnvelope640"
+      ∷ "nextAnalyticKernelRicciPerturbationBound640"
+      ∷ []
+
+    nsGW1DegeneracyStatusContext :
+      String
+
+    nsGW1DegeneracyStatusContextIsCanonical :
+      nsGW1DegeneracyStatusContext
+      ≡
+      "NS-GW-1 degeneracy status is settled here only as non-promoting context: numeric evidence lane only; DNS confirmation and DNS sign classification remain outside this GR analytic-kernel tranche."
+
+    nsGW1DegeneracyStatusNonPromoting :
+      Bool
+
+    nsGW1DegeneracyStatusNonPromotingIsTrue :
+      nsGW1DegeneracyStatusNonPromoting
+      ≡
+      true
+
+    nsGW1DegeneracyDoesNotPromoteGRKernel :
+      Bool
+
+    nsGW1DegeneracyDoesNotPromoteGRKernelIsTrue :
+      nsGW1DegeneracyDoesNotPromoteGRKernel
+      ≡
+      true
+
     machineCheckedChristoffelC0Constants :
       Continuum.MachineCheckedChristoffelC0ConstantReceipt
 
@@ -480,6 +517,7 @@ record GRProofArchitectureNextAnalyticKernelTrancheReceipt : Setω where
       ∷ "corrected tight Shell A L_Gamma=44 is recorded as documentation-only aggregation metadata; final/conservative L_Gamma=48 and legacy 72 overbound projections are preserved"
       ∷ "tier 4: Christoffel C0 stability in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalMachineCheckedChristoffelC0ConstantReceipt and selectedSymbolicRationalChristoffelC0FormulaStabilityIs48"
       ∷ "tier 5: Ricci perturbation extraction in DASHI/Physics/Closure/GRDiscreteRicciCandidateFromCurvature.agda at canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt and canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt"
+      ∷ "current GR analytic-kernel remaining variables are recorded explicitly as five non-promoting aggregation booleans; NS-GW-1 degeneracy context remains numeric-evidence-only and outside promotion"
       ∷ []
 
 canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt :
@@ -581,6 +619,27 @@ canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt =
         ∷ "grSchwarzschildFiniteRicciPerturbationConservativeCRConstantIs640"
         ∷ []
     ; ricciPerturbationExtractionTargetVarsAreCanonical =
+        refl
+    ; currentGRAnalyticKernelRemainingVars =
+        "nextAnalyticKernelShellA_LGammaIs72"
+        ∷ "nextAnalyticKernelShellA_CRIs80"
+        ∷ "nextAnalyticKernelShellA_CPrimeDenominatorIs27"
+        ∷ "nextAnalyticKernelSchwarzschildShellAEnvelope640"
+        ∷ "nextAnalyticKernelRicciPerturbationBound640"
+        ∷ []
+    ; currentGRAnalyticKernelRemainingVarsAreCanonical =
+        refl
+    ; nsGW1DegeneracyStatusContext =
+        "NS-GW-1 degeneracy status is settled here only as non-promoting context: numeric evidence lane only; DNS confirmation and DNS sign classification remain outside this GR analytic-kernel tranche."
+    ; nsGW1DegeneracyStatusContextIsCanonical =
+        refl
+    ; nsGW1DegeneracyStatusNonPromoting =
+        true
+    ; nsGW1DegeneracyStatusNonPromotingIsTrue =
+        refl
+    ; nsGW1DegeneracyDoesNotPromoteGRKernel =
+        true
+    ; nsGW1DegeneracyDoesNotPromoteGRKernelIsTrue =
         refl
     ; machineCheckedChristoffelC0Constants =
         Continuum.canonicalMachineCheckedChristoffelC0ConstantReceipt
@@ -712,6 +771,7 @@ canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt =
         ∷ "corrected tight Shell A L_Gamma=44 is recorded as documentation-only aggregation metadata; final/conservative L_Gamma=48 and legacy 72 overbound projections are preserved"
         ∷ "tier 4: Christoffel C0 stability in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalMachineCheckedChristoffelC0ConstantReceipt and selectedSymbolicRationalChristoffelC0FormulaStabilityIs48"
         ∷ "tier 5: Ricci perturbation extraction in DASHI/Physics/Closure/GRDiscreteRicciCandidateFromCurvature.agda at canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt and canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt"
+        ∷ "current GR analytic-kernel remaining variables are recorded explicitly as five non-promoting aggregation booleans; NS-GW-1 degeneracy context remains numeric-evidence-only and outside promotion"
         ∷ []
     ; requiredAnalyticalProofsAreCanonical =
         refl
@@ -1858,6 +1918,35 @@ record GRProofArchitectureAggregationTest : Setω where
       ∷ "grSchwarzschildFiniteRicciPerturbationConservativeCRConstantIs640"
       ∷ []
 
+    nextAnalyticKernelRemainingVars :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.currentGRAnalyticKernelRemainingVars
+        nextAnalyticKernelTranche
+      ≡
+      "nextAnalyticKernelShellA_LGammaIs72"
+      ∷ "nextAnalyticKernelShellA_CRIs80"
+      ∷ "nextAnalyticKernelShellA_CPrimeDenominatorIs27"
+      ∷ "nextAnalyticKernelSchwarzschildShellAEnvelope640"
+      ∷ "nextAnalyticKernelRicciPerturbationBound640"
+      ∷ []
+
+    nextAnalyticKernelNSGW1DegeneracyContext :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.nsGW1DegeneracyStatusContext
+        nextAnalyticKernelTranche
+      ≡
+      "NS-GW-1 degeneracy status is settled here only as non-promoting context: numeric evidence lane only; DNS confirmation and DNS sign classification remain outside this GR analytic-kernel tranche."
+
+    nextAnalyticKernelNSGW1DegeneracyNonPromoting :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.nsGW1DegeneracyStatusNonPromoting
+        nextAnalyticKernelTranche
+      ≡
+      true
+
+    nextAnalyticKernelNSGW1DegeneracyDoesNotPromoteGR :
+      GRProofArchitectureNextAnalyticKernelTrancheReceipt.nsGW1DegeneracyDoesNotPromoteGRKernel
+        nextAnalyticKernelTranche
+      ≡
+      true
+
     nextAnalyticKernelFinalShellA_LGammaIs48 :
       Continuum.MachineCheckedChristoffelC0ConstantReceipt.L_Gamma
         (GRProofArchitectureNextAnalyticKernelTrancheReceipt.machineCheckedChristoffelC0Constants
@@ -2431,6 +2520,18 @@ canonicalGRProofArchitectureAggregationTest =
     ; nextAnalyticKernelRicciExtractionTargets =
         GRProofArchitectureNextAnalyticKernelTrancheReceipt.ricciPerturbationExtractionTargetVarsAreCanonical
           canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelRemainingVars =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.currentGRAnalyticKernelRemainingVarsAreCanonical
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelNSGW1DegeneracyContext =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.nsGW1DegeneracyStatusContextIsCanonical
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelNSGW1DegeneracyNonPromoting =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.nsGW1DegeneracyStatusNonPromotingIsTrue
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
+    ; nextAnalyticKernelNSGW1DegeneracyDoesNotPromoteGR =
+        GRProofArchitectureNextAnalyticKernelTrancheReceipt.nsGW1DegeneracyDoesNotPromoteGRKernelIsTrue
+          canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt
     ; nextAnalyticKernelFinalShellA_LGammaIs48 =
         refl
     ; nextAnalyticKernelFinalShellASelectedFormula48 =
@@ -2489,6 +2590,7 @@ canonicalGRProofArchitectureAggregationTest =
         ∷ "Imports and checks the Continuum machine-checked Christoffel C0 constants"
         ∷ "Imports and checks Shell A/B selected Christoffel constants and the zero-epsilon selected equality bridge without arbitrary equality promotion"
         ∷ "Imports and checks the next analytic-kernel tranche requirements without promoting the ordered QQ theorem or Ricci convergence"
+        ∷ "Records the five current GR analytic-kernel remaining variables and the settled NS-GW-1 degeneracy status as non-promoting context"
         ∷ "No GR, Schwarzschild, Bianchi, or Einstein-equation promotion is introduced here"
         ∷ []
     }

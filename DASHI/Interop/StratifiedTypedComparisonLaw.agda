@@ -8,6 +8,9 @@ open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Interop.SensibLawResidualLattice as Residual
 import DASHI.Interop.RoleGrammarCore as Core
+import DASHI.Core.BridgeRequirementCore as BridgeReq
+import DASHI.Core.CandidateOnlyCore as CandidateOnly
+import DASHI.Core.EmptyPromotionCore as EmptyPromotion
 
 ------------------------------------------------------------------------
 -- Stratified typed comparison law v2.
@@ -621,6 +624,124 @@ canonicalComparisonLawV2NoExternalAuthority :
   false
 canonicalComparisonLawV2NoExternalAuthority =
   refl
+
+------------------------------------------------------------------------
+-- Reusable core adapters.
+--
+-- These adapters are additive evidence only: they consume the reusable
+-- fail-closed cores without changing the comparison law verdicts, row
+-- constructors, bridge strengths, or content-identity booleans above.
+
+bridgeRequirementCoreAdapter :
+  BridgeReq.BridgeRequirementCoreReceipt
+bridgeRequirementCoreAdapter =
+  BridgeReq.canonicalBridgeRequirementCoreReceipt
+
+bridgeRequirementCoreAdapterIsCanonical :
+  bridgeRequirementCoreAdapter
+  ≡
+  BridgeReq.canonicalBridgeRequirementCoreReceipt
+bridgeRequirementCoreAdapterIsCanonical =
+  refl
+
+candidateOnlyCoreAdapter :
+  CandidateOnly.CandidateOnlyReceipt
+    CandidateOnly.canonicalBridgeCandidateOnlyRow
+candidateOnlyCoreAdapter =
+  CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+
+candidateOnlyCoreAdapterIsCanonical :
+  candidateOnlyCoreAdapter
+  ≡
+  CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+candidateOnlyCoreAdapterIsCanonical =
+  refl
+
+emptyPromotionCoreAdapter :
+  EmptyPromotion.EmptyPromotionReceipt
+emptyPromotionCoreAdapter =
+  EmptyPromotion.canonicalEmptyPromotionReceipt
+
+emptyPromotionCoreAdapterIsCanonical :
+  emptyPromotionCoreAdapter
+  ≡
+  EmptyPromotion.canonicalEmptyPromotionReceipt
+emptyPromotionCoreAdapterIsCanonical =
+  refl
+
+comparisonBridgeAuthorityPromoted :
+  StratifiedComparisonCase →
+  Bool
+comparisonBridgeAuthorityPromoted _ =
+  BridgeReq.receiptAuthorityPromotion bridgeRequirementCoreAdapter
+
+comparisonBridgeAuthorityPromotedFalse :
+  (comparisonCase : StratifiedComparisonCase) →
+  comparisonBridgeAuthorityPromoted comparisonCase ≡ false
+comparisonBridgeAuthorityPromotedFalse _ =
+  BridgeReq.receiptAuthorityPromotionFalse bridgeRequirementCoreAdapter
+
+comparisonBridgeTransportMapAuthorityFalse :
+  (comparisonCase : StratifiedComparisonCase) →
+  BridgeReq.receiptTransportMapAuthority bridgeRequirementCoreAdapter
+  ≡
+  false
+comparisonBridgeTransportMapAuthorityFalse _ =
+  BridgeReq.receiptTransportMapAuthorityFalse bridgeRequirementCoreAdapter
+
+comparisonBridgeBackgroundAuthorityFalse :
+  (comparisonCase : StratifiedComparisonCase) →
+  BridgeReq.receiptBackgroundBridgeAuthority bridgeRequirementCoreAdapter
+  ≡
+  false
+comparisonBridgeBackgroundAuthorityFalse _ =
+  BridgeReq.receiptBackgroundBridgeAuthorityFalse bridgeRequirementCoreAdapter
+
+candidateOnlyCoreAdapterCandidateTrue :
+  CandidateOnly.candidateOnly CandidateOnly.canonicalBridgeCandidateOnlyRow
+  ≡
+  true
+candidateOnlyCoreAdapterCandidateTrue =
+  CandidateOnly.candidateOnlyIsTrue candidateOnlyCoreAdapter
+
+candidateOnlyCoreAdapterPromotedFalse :
+  CandidateOnly.promoted CandidateOnly.canonicalBridgeCandidateOnlyRow
+  ≡
+  false
+candidateOnlyCoreAdapterPromotedFalse =
+  CandidateOnly.candidatePromotedIsFalse candidateOnlyCoreAdapter
+
+emptyPromotionCoreAdapterPromotionsEmpty :
+  EmptyPromotion.promotions emptyPromotionCoreAdapter
+  ≡
+  []
+emptyPromotionCoreAdapterPromotionsEmpty =
+  EmptyPromotion.emptyPromotionReceiptPromotionsAreEmpty
+    emptyPromotionCoreAdapter
+
+comparisonContentIdentityPromotedFalse :
+  (comparisonCase : StratifiedComparisonCase) →
+  contentIdentityPromoted comparisonCase ≡ false
+comparisonContentIdentityPromotedFalse _ =
+  refl
+
+canonicalDifferentDomainContentIdentityCoreBridgeAuthorityFalse :
+  comparisonBridgeAuthorityPromoted
+    (DifferentDomainContentIdentification bridgeAbsent)
+  ≡
+  false
+canonicalDifferentDomainContentIdentityCoreBridgeAuthorityFalse =
+  comparisonBridgeAuthorityPromotedFalse
+    (DifferentDomainContentIdentification bridgeAbsent)
+
+canonicalDifferentDomainContentIdentityCoreNotPromoted :
+  contentIdentityPromoted
+    (DifferentDomainContentIdentification bridgeAbsent)
+  ≡
+  false
+canonicalDifferentDomainContentIdentityCoreNotPromoted =
+  comparisonContentIdentityPromotedFalse
+    (DifferentDomainContentIdentification bridgeAbsent)
 
 canonicalSameSurfacePredicateNoTypedMeetStatus :
   comparisonStatus (SameSurfaceDivergent predicateDiverges)

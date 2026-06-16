@@ -4,6 +4,11 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityCore
+import DASHI.Core.CandidateFunctionalCore as FunctionalCore
+import DASHI.Core.CandidateOnlyCore as CandidateCore
+import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Core.OperatorShapeNonAuthorityCore as OperatorShapeCore
 open import DASHI.Interop.RoleGrammarCore as RoleCore
 
 ------------------------------------------------------------------------
@@ -1004,3 +1009,170 @@ qiOperatorTheoryReceiptNonPromotingScientific :
     ≡ false
 qiOperatorTheoryReceiptNonPromotingScientific =
   refl
+
+------------------------------------------------------------------------
+-- Reusable core adapters.
+--
+-- These adapter receipts consume the shared cores without replacing the
+-- local Qi/operator-theory rows above.
+
+authorityNonPromotionCoreAdapter :
+  AuthorityCore.AuthorityNonPromotionBundle
+authorityNonPromotionCoreAdapter =
+  AuthorityCore.mkClosedAuthorityNonPromotionBundle
+    "Qi/operator-theory boundary authority non-promotion adapter"
+
+authorityNonPromotionCoreAdapterCanonicalKindsFalse :
+  AuthorityCore.AllAuthorityKindsFalse
+    authorityNonPromotionCoreAdapter
+    AuthorityCore.canonicalAuthorityKinds
+authorityNonPromotionCoreAdapterCanonicalKindsFalse =
+  AuthorityCore.proveAllAuthorityKindsFalse
+    authorityNonPromotionCoreAdapter
+    AuthorityCore.canonicalAuthorityKinds
+
+authorityNonPromotionCoreAdapterGenericReceipt :
+  GenericReceipt.GenericReceipt
+authorityNonPromotionCoreAdapterGenericReceipt =
+  AuthorityCore.authorityNonPromotionGenericReceipt
+    authorityNonPromotionCoreAdapter
+
+qiOperatorTheoryAdapterTheoremAuthorityFalse :
+  AuthorityCore.theoremAuthorityFlag authorityNonPromotionCoreAdapter
+    ≡ false
+qiOperatorTheoryAdapterTheoremAuthorityFalse =
+  AuthorityCore.bundleTheoremAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+qiOperatorTheoryAdapterScientificAuthorityFalse :
+  AuthorityCore.scientificAuthorityFlag authorityNonPromotionCoreAdapter
+    ≡ false
+qiOperatorTheoryAdapterScientificAuthorityFalse =
+  AuthorityCore.bundleScientificAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+qiOperatorTheoryAdapterMetaphysicalAuthorityFalse :
+  AuthorityCore.metaphysicalAuthorityFlag authorityNonPromotionCoreAdapter
+    ≡ false
+qiOperatorTheoryAdapterMetaphysicalAuthorityFalse =
+  AuthorityCore.bundleMetaphysicalAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+qiOperatorTheoryAdapterSpiritualAuthorityFalse :
+  AuthorityCore.spiritualAuthorityFlag authorityNonPromotionCoreAdapter
+    ≡ false
+qiOperatorTheoryAdapterSpiritualAuthorityFalse =
+  AuthorityCore.bundleSpiritualAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+candidateOnlyCoreAdapter :
+  CandidateCore.CandidateOnlyRow
+candidateOnlyCoreAdapter =
+  CandidateCore.mkCandidateOnlyRow
+    "Qi/operator-theory candidate-only adapter"
+    "DASHI.Culture.QiOperatorTheoryBoundary"
+    "candidateOnlyCoreAdapter"
+    CandidateCore.operatorCandidateKind
+    CandidateCore.operatorCandidateOnlyStatus
+    "Qi operator-theory rows are candidate-only role-grammar surfaces."
+    "Validation remains outside this Qi/operator-theory boundary."
+
+candidateOnlyCoreAdapterReceipt :
+  CandidateCore.CandidateOnlyReceipt candidateOnlyCoreAdapter
+candidateOnlyCoreAdapterReceipt =
+  CandidateCore.canonicalCandidateOnlyReceipt
+    candidateOnlyCoreAdapter
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+candidateOnlyCoreAdapterPromotedFalse :
+  CandidateCore.promoted candidateOnlyCoreAdapter ≡ false
+candidateOnlyCoreAdapterPromotedFalse =
+  CandidateCore.candidatePromotedIsFalse
+    candidateOnlyCoreAdapterReceipt
+
+candidateFunctionalCoreAdapter :
+  FunctionalCore.CandidateFunctionalSurface
+candidateFunctionalCoreAdapter =
+  FunctionalCore.candidateFunctionalSurface
+    "Qi symbolic carrier"
+    "Qi operator-theory formal state"
+    (FunctionalCore.NamedFunctionalKind "Qi role-grammar functional")
+    (FunctionalCore.neutralFunctionalTerm
+      "Qi role-grammar neutral term"
+      FunctionalCore.neutralSymbolicWeight
+      ∷ [])
+    FunctionalCore.candidateTermCatalogue
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+
+candidateFunctionalCoreAdapterCandidateOnly :
+  FunctionalCore.candidateOnly candidateFunctionalCoreAdapter
+    ≡ true
+candidateFunctionalCoreAdapterCandidateOnly =
+  refl
+
+candidateFunctionalCoreAdapterMetaphysicalAuthorityFalse :
+  FunctionalCore.metaphysicalAuthority candidateFunctionalCoreAdapter
+    ≡ false
+candidateFunctionalCoreAdapterMetaphysicalAuthorityFalse =
+  refl
+
+candidateFunctionalCoreAdapterGenericReceipt :
+  GenericReceipt.GenericReceipt
+candidateFunctionalCoreAdapterGenericReceipt =
+  FunctionalCore.candidateFunctionalSurfaceGenericReceipt
+    candidateFunctionalCoreAdapter
+
+operatorShapeNonAuthorityCoreAdapter :
+  OperatorShapeCore.OperatorShapeCandidateReceipt
+operatorShapeNonAuthorityCoreAdapter =
+  OperatorShapeCore.mkOperatorShapeCandidateReceipt
+    OperatorShapeCore.receiptDomainCarrier
+    OperatorShapeCore.receiptCodomainCarrier
+    OperatorShapeCore.symbolicOperatorTag
+    OperatorShapeCore.diagnosticCompositionHint
+    OperatorShapeCore.boundednessCandidateRequiresProof
+    OperatorShapeCore.contractionCandidateUnwitnessed
+    OperatorShapeCore.dissipativeCandidateUnwitnessed
+    OperatorShapeCore.spectralShapeCandidate
+    "Qi/operator theory consumes operator-shaped vocabulary as candidate grammar only; no operator theorem authority is supplied."
+
+operatorShapeNonAuthorityCoreAdapterComponentsCanonical :
+  OperatorShapeCore.components operatorShapeNonAuthorityCoreAdapter
+    ≡ OperatorShapeCore.canonicalOperatorShapeReceiptComponents
+operatorShapeNonAuthorityCoreAdapterComponentsCanonical =
+  refl
+
+operatorShapeNonAuthorityCoreAdapterTheoremAuthorityFalse :
+  OperatorShapeCore.actualTheoremAuthority operatorShapeNonAuthorityCoreAdapter
+    ≡ false
+operatorShapeNonAuthorityCoreAdapterTheoremAuthorityFalse =
+  OperatorShapeCore.operatorShapeBlocksTheoremAuthority
+    operatorShapeNonAuthorityCoreAdapter
+
+operatorShapeNonAuthorityCoreAdapterGenericReceipt :
+  GenericReceipt.GenericReceipt
+operatorShapeNonAuthorityCoreAdapterGenericReceipt =
+  OperatorShapeCore.operatorShapeCandidateGenericReceipt
+    operatorShapeNonAuthorityCoreAdapter

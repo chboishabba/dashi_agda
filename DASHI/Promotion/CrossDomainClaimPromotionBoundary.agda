@@ -6,6 +6,9 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 import DASHI.Promotion.AuthorityGateCore as AuthorityGateCore
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
+import DASHI.Core.BridgeRequirementCore as BridgeReq
+import DASHI.Core.CandidateOnlyCore as CandidateOnly
 open import DASHI.Core.FiniteReceiptList using (listCount)
 
 ------------------------------------------------------------------------
@@ -462,6 +465,159 @@ canonicalCrossDomainPromotionExamples =
   ∷ structuralAnalogyTradingExample
   ∷ spatialPracticeInterpretationExample
   ∷ []
+
+------------------------------------------------------------------------
+-- Reusable core adapters.
+--
+-- These adapter receipts consume the shared cores without replacing the
+-- local claim, bridge, example, or AuthorityGateCore adapter rows above.
+
+authorityNonPromotionCoreAdapter :
+  AuthorityNA.AuthorityNonPromotionBundle
+authorityNonPromotionCoreAdapter =
+  AuthorityNA.canonicalAuthorityNonPromotionBundle
+
+authorityNonPromotionCoreAdapterIsCanonical :
+  authorityNonPromotionCoreAdapter
+  ≡
+  AuthorityNA.canonicalAuthorityNonPromotionBundle
+authorityNonPromotionCoreAdapterIsCanonical =
+  refl
+
+authorityNonPromotionCoreAdapterCanonicalKindsFalse :
+  AuthorityNA.AllAuthorityKindsFalse
+    authorityNonPromotionCoreAdapter
+    AuthorityNA.canonicalAuthorityKinds
+authorityNonPromotionCoreAdapterCanonicalKindsFalse =
+  AuthorityNA.proveAllAuthorityKindsFalse
+    authorityNonPromotionCoreAdapter
+    AuthorityNA.canonicalAuthorityKinds
+
+crossDomainAdapterEmpiricalAuthorityFalse :
+  AuthorityNA.empiricalAuthorityFlag authorityNonPromotionCoreAdapter
+  ≡ false
+crossDomainAdapterEmpiricalAuthorityFalse =
+  AuthorityNA.bundleEmpiricalAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+crossDomainAdapterTradingAuthorityFalse :
+  AuthorityNA.tradingAuthorityFlag authorityNonPromotionCoreAdapter
+  ≡ false
+crossDomainAdapterTradingAuthorityFalse =
+  AuthorityNA.bundleTradingAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+crossDomainAdapterSupportAuthorityFalse :
+  AuthorityNA.supportAuthorityFlag authorityNonPromotionCoreAdapter
+  ≡ false
+crossDomainAdapterSupportAuthorityFalse =
+  AuthorityNA.bundleSupportAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+crossDomainAdapterAdmissibilityAuthorityFalse :
+  AuthorityNA.admissibilityAuthorityFlag authorityNonPromotionCoreAdapter
+  ≡ false
+crossDomainAdapterAdmissibilityAuthorityFalse =
+  AuthorityNA.bundleAdmissibilityAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+crossDomainAdapterAnyAuthorityPromotionFalse :
+  AuthorityNA.promotesAnyAuthority authorityNonPromotionCoreAdapter
+  ≡ false
+crossDomainAdapterAnyAuthorityPromotionFalse =
+  AuthorityNA.bundlePromotesAnyAuthorityIsFalse
+    authorityNonPromotionCoreAdapter
+
+bridgeRequirementCoreAdapter :
+  BridgeReq.BridgeRequirementCoreReceipt
+bridgeRequirementCoreAdapter =
+  BridgeReq.canonicalBridgeRequirementCoreReceipt
+
+bridgeRequirementCoreAdapterIsCanonical :
+  bridgeRequirementCoreAdapter
+  ≡
+  BridgeReq.canonicalBridgeRequirementCoreReceipt
+bridgeRequirementCoreAdapterIsCanonical =
+  refl
+
+bridgeRequirementCoreAdapterAuthorityPromotionFalse :
+  BridgeReq.receiptAuthorityPromotion bridgeRequirementCoreAdapter
+  ≡ false
+bridgeRequirementCoreAdapterAuthorityPromotionFalse =
+  BridgeReq.receiptAuthorityPromotionFalse
+    bridgeRequirementCoreAdapter
+
+bridgeRequirementCoreAdapterTransportMapAuthorityFalse :
+  BridgeReq.receiptTransportMapAuthority bridgeRequirementCoreAdapter
+  ≡ false
+bridgeRequirementCoreAdapterTransportMapAuthorityFalse =
+  BridgeReq.receiptTransportMapAuthorityFalse
+    bridgeRequirementCoreAdapter
+
+bridgeRequirementCoreAdapterBackgroundBridgeAuthorityFalse :
+  BridgeReq.receiptBackgroundBridgeAuthority bridgeRequirementCoreAdapter
+  ≡ false
+bridgeRequirementCoreAdapterBackgroundBridgeAuthorityFalse =
+  BridgeReq.receiptBackgroundBridgeAuthorityFalse
+    bridgeRequirementCoreAdapter
+
+bridgeRequirementCoreAdapterBridgeRequired :
+  BridgeReq.statusRequiresBridge BridgeReq.bridgeRequired
+  ≡ true
+bridgeRequirementCoreAdapterBridgeRequired =
+  refl
+
+candidateOnlyCoreAdapter :
+  CandidateOnly.CandidateOnlyRow
+candidateOnlyCoreAdapter =
+  CandidateOnly.canonicalBridgeCandidateOnlyRow
+
+candidateOnlyCoreAdapterIsCanonical :
+  candidateOnlyCoreAdapter
+  ≡
+  CandidateOnly.canonicalBridgeCandidateOnlyRow
+candidateOnlyCoreAdapterIsCanonical =
+  refl
+
+candidateOnlyCoreAdapterReceipt :
+  CandidateOnly.CandidateOnlyReceipt candidateOnlyCoreAdapter
+candidateOnlyCoreAdapterReceipt =
+  CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+
+candidateOnlyCoreAdapterCandidateOnlyTrue :
+  CandidateOnly.candidateOnly candidateOnlyCoreAdapter
+  ≡ true
+candidateOnlyCoreAdapterCandidateOnlyTrue =
+  CandidateOnly.candidateOnlyIsTrue
+    candidateOnlyCoreAdapterReceipt
+
+candidateOnlyCoreAdapterPromotedFalse :
+  CandidateOnly.promoted candidateOnlyCoreAdapter
+  ≡ false
+candidateOnlyCoreAdapterPromotedFalse =
+  CandidateOnly.candidatePromotedIsFalse
+    candidateOnlyCoreAdapterReceipt
+
+candidateOnlyCoreAdapterSupportAuthorityFalse :
+  CandidateOnly.carriesSupportAuthority candidateOnlyCoreAdapter
+  ≡ false
+candidateOnlyCoreAdapterSupportAuthorityFalse =
+  CandidateOnly.candidateNoSupportAuthority
+    candidateOnlyCoreAdapterReceipt
+
+candidateOnlyCoreAdapterAdmissibilityAuthorityFalse :
+  CandidateOnly.carriesAdmissibilityAuthority candidateOnlyCoreAdapter
+  ≡ false
+candidateOnlyCoreAdapterAdmissibilityAuthorityFalse =
+  CandidateOnly.candidateNoAdmissibilityAuthority
+    candidateOnlyCoreAdapterReceipt
+
+candidateOnlyCoreAdapterTradingAuthorityFalse :
+  CandidateOnly.carriesTradingAuthority candidateOnlyCoreAdapter
+  ≡ false
+candidateOnlyCoreAdapterTradingAuthorityFalse =
+  CandidateOnly.candidateNoTradingAuthority
+    candidateOnlyCoreAdapterReceipt
 
 ------------------------------------------------------------------------
 -- Canonical fail-closed receipt.

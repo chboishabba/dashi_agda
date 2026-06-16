@@ -2397,6 +2397,14 @@ grDiscreteRicciGammaMaxShellAConstant2 : Nat
 grDiscreteRicciGammaMaxShellAConstant2 =
   2
 
+grDiscreteRicciFiniteCoordinateDimension4 : Nat
+grDiscreteRicciFiniteCoordinateDimension4 =
+  4
+
+grDiscreteRicciFiniteNSquaredExtractionFactor16 : Nat
+grDiscreteRicciFiniteNSquaredExtractionFactor16 =
+  16
+
 grDiscreteRicciTightLGammaConstant44 : Nat
 grDiscreteRicciTightLGammaConstant44 =
   44
@@ -2627,6 +2635,22 @@ record GRDiscreteRicciContractionContinuityConstantReceipt : Set where
       ≡
       2
 
+    finiteCoordinateDimension :
+      Nat
+
+    finiteCoordinateDimensionIs4 :
+      finiteCoordinateDimension
+      ≡
+      4
+
+    finiteNSquaredExtractionFactor :
+      Nat
+
+    finiteNSquaredExtractionFactorIs16 :
+      finiteNSquaredExtractionFactor
+      ≡
+      16
+
     tightLGammaConstant :
       Nat
 
@@ -2682,6 +2706,14 @@ record GRDiscreteRicciContractionContinuityConstantReceipt : Set where
       shellASharpCRCalculationText
       ≡
       "Shell A: C_R = 16 * (26/27 + 2 * 2 * 1) = 2144/27 <= 80 <= 640"
+
+    shellA2144Over27≤80≤640Law :
+      GRDiscreteRicciShellAConstantLawShape
+
+    shellA2144Over27≤80≤640LawIsCanonical :
+      shellA2144Over27≤80≤640Law
+      ≡
+      grDiscreteRicciShellA2144Over27≤80Law
 
     shellASharpCRBoundedBy80 :
       Bool
@@ -2874,6 +2906,14 @@ canonicalGRDiscreteRicciContractionContinuityConstantReceipt =
         grDiscreteRicciGammaMaxShellAConstant2
     ; gammaMaxShellAConstantIs2 =
         refl
+    ; finiteCoordinateDimension =
+        grDiscreteRicciFiniteCoordinateDimension4
+    ; finiteCoordinateDimensionIs4 =
+        refl
+    ; finiteNSquaredExtractionFactor =
+        grDiscreteRicciFiniteNSquaredExtractionFactor16
+    ; finiteNSquaredExtractionFactorIs16 =
+        refl
     ; tightLGammaConstant =
         grDiscreteRicciTightLGammaConstant44
     ; tightLGammaConstantIs44 =
@@ -2901,6 +2941,10 @@ canonicalGRDiscreteRicciContractionContinuityConstantReceipt =
     ; shellASharpCRCalculationText =
         "Shell A: C_R = 16 * (26/27 + 2 * 2 * 1) = 2144/27 <= 80 <= 640"
     ; shellASharpCRCalculationTextIs2144Over27 =
+        refl
+    ; shellA2144Over27≤80≤640Law =
+        grDiscreteRicciShellA2144Over27≤80Law
+    ; shellA2144Over27≤80≤640LawIsCanonical =
         refl
     ; shellASharpCRBoundedBy80 =
         true
@@ -2973,7 +3017,7 @@ canonicalGRDiscreteRicciContractionContinuityConstantReceipt =
     ; constantBoundary =
         "Sharp supplied Ricci contraction continuity calculation is recorded symbolically as C_R = 1280/27"
         ∷ "The Nat-compatible rounded Ricci contraction continuity constant 48 is point-shell-only"
-        ∷ "Shell A records C'_Gamma=26/27, C_Gamma=1, GammaMax=2, hence C_R=2144/27 <= 80 <= 640"
+        ∷ "Shell A records finite n^2=16, C'_Gamma=26/27, C_Gamma=1, GammaMax=2, hence C_R=2144/27 <= 80 <= 640"
         ∷ "The audited connection bound records L_Gamma tight 44 with conservative 48"
         ∷ "Interval Shell A routes through the safe Ricci continuity constant 80"
         ∷ "Interval Shell B routes through the safe Ricci continuity constant 220"
@@ -3075,6 +3119,22 @@ record GRDiscreteRicciExtractionReadinessDependencyReceipt : Setω where
       ≡
       2
 
+    finiteCoordinateDimension :
+      Nat
+
+    finiteCoordinateDimensionIs4 :
+      finiteCoordinateDimension
+      ≡
+      4
+
+    finiteNSquaredExtractionFactor :
+      Nat
+
+    finiteNSquaredExtractionFactorIs16 :
+      finiteNSquaredExtractionFactor
+      ≡
+      16
+
     tightLGammaConstant :
       Nat
 
@@ -3130,6 +3190,14 @@ record GRDiscreteRicciExtractionReadinessDependencyReceipt : Setω where
       shellASharpCRCalculationText
       ≡
       "Shell A: C_R = 16 * (26/27 + 2 * 2 * 1) = 2144/27 <= 80 <= 640"
+
+    shellA2144Over27≤80≤640Law :
+      GRDiscreteRicciShellAConstantLawShape
+
+    shellA2144Over27≤80≤640LawIsCanonical :
+      shellA2144Over27≤80≤640Law
+      ≡
+      grDiscreteRicciShellA2144Over27≤80Law
 
     shellASharpCRBoundedBy80 :
       Bool
@@ -3318,6 +3386,18 @@ canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt =
     ; gammaMaxShellAConstantIs2 =
         GRDiscreteRicciContractionContinuityConstantReceipt.gammaMaxShellAConstantIs2
           canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; finiteCoordinateDimension =
+        GRDiscreteRicciContractionContinuityConstantReceipt.finiteCoordinateDimension
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; finiteCoordinateDimensionIs4 =
+        GRDiscreteRicciContractionContinuityConstantReceipt.finiteCoordinateDimensionIs4
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; finiteNSquaredExtractionFactor =
+        GRDiscreteRicciContractionContinuityConstantReceipt.finiteNSquaredExtractionFactor
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; finiteNSquaredExtractionFactorIs16 =
+        GRDiscreteRicciContractionContinuityConstantReceipt.finiteNSquaredExtractionFactorIs16
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
     ; tightLGammaConstant =
         GRDiscreteRicciContractionContinuityConstantReceipt.tightLGammaConstant
           canonicalGRDiscreteRicciContractionContinuityConstantReceipt
@@ -3359,6 +3439,12 @@ canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt =
           canonicalGRDiscreteRicciContractionContinuityConstantReceipt
     ; shellASharpCRCalculationTextIs2144Over27 =
         GRDiscreteRicciContractionContinuityConstantReceipt.shellASharpCRCalculationTextIs2144Over27
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; shellA2144Over27≤80≤640Law =
+        GRDiscreteRicciContractionContinuityConstantReceipt.shellA2144Over27≤80≤640Law
+          canonicalGRDiscreteRicciContractionContinuityConstantReceipt
+    ; shellA2144Over27≤80≤640LawIsCanonical =
+        GRDiscreteRicciContractionContinuityConstantReceipt.shellA2144Over27≤80≤640LawIsCanonical
           canonicalGRDiscreteRicciContractionContinuityConstantReceipt
     ; shellASharpCRBoundedBy80 =
         GRDiscreteRicciContractionContinuityConstantReceipt.shellASharpCRBoundedBy80
@@ -3451,7 +3537,7 @@ canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt =
         ∷ "Selected-pair identity is named as an extraction dependency and is not promoted by this receipt"
         ∷ "The sharp supplied C_R = 1280/27 gives the rounded Nat-compatible constant 48 for point-shell use only"
         ∷ "Interval extraction routes must use Shell A safe 80 or Shell B safe 220; the conservative 640 constant remains valid"
-        ∷ "Shell A exposes C'_Gamma=26/27, C_Gamma=1, GammaMax=2, and C_R=2144/27 <= 80 <= 640"
+        ∷ "Shell A exposes finite n^2=16, C'_Gamma=26/27, C_Gamma=1, GammaMax=2, and C_R=2144/27 <= 80 <= 640"
         ∷ "L_Gamma tight 44 is mirrored with conservative 48 for extraction readiness"
         ∷ "The inequality primitive route is explicit: Nat ceiling gives point C_R=48, interval extraction uses Shell A C_R=80, and the conservative adapter keeps 640"
         ∷ "The optional tight Schwarzschild numerator 112 is mirrored only as local arithmetic readiness"
@@ -3633,6 +3719,22 @@ record GRDiscreteRicciDownstreamConvergenceReadinessReceipt : Setω where
       ≡
       2
 
+    finiteCoordinateDimension :
+      Nat
+
+    finiteCoordinateDimensionIs4 :
+      finiteCoordinateDimension
+      ≡
+      4
+
+    finiteNSquaredExtractionFactor :
+      Nat
+
+    finiteNSquaredExtractionFactorIs16 :
+      finiteNSquaredExtractionFactor
+      ≡
+      16
+
     tightLGammaConstant :
       Nat
 
@@ -3688,6 +3790,14 @@ record GRDiscreteRicciDownstreamConvergenceReadinessReceipt : Setω where
       shellASharpCRCalculationText
       ≡
       "Shell A: C_R = 16 * (26/27 + 2 * 2 * 1) = 2144/27 <= 80 <= 640"
+
+    shellA2144Over27≤80≤640Law :
+      GRDiscreteRicciShellAConstantLawShape
+
+    shellA2144Over27≤80≤640LawIsCanonical :
+      shellA2144Over27≤80≤640Law
+      ≡
+      grDiscreteRicciShellA2144Over27≤80Law
 
     shellASharpCRBoundedBy80 :
       Bool
@@ -3924,6 +4034,18 @@ canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt =
     ; gammaMaxShellAConstantIs2 =
         GRDiscreteRicciExtractionReadinessDependencyReceipt.gammaMaxShellAConstantIs2
           canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; finiteCoordinateDimension =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteCoordinateDimension
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; finiteCoordinateDimensionIs4 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteCoordinateDimensionIs4
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; finiteNSquaredExtractionFactor =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteNSquaredExtractionFactor
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; finiteNSquaredExtractionFactorIs16 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteNSquaredExtractionFactorIs16
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
     ; tightLGammaConstant =
         GRDiscreteRicciExtractionReadinessDependencyReceipt.tightLGammaConstant
           canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
@@ -3965,6 +4087,12 @@ canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt =
           canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
     ; shellASharpCRCalculationTextIs2144Over27 =
         GRDiscreteRicciExtractionReadinessDependencyReceipt.shellASharpCRCalculationTextIs2144Over27
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellA2144Over27≤80≤640Law =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellA2144Over27≤80≤640Law
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellA2144Over27≤80≤640LawIsCanonical =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellA2144Over27≤80≤640LawIsCanonical
           canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
     ; shellASharpCRBoundedBy80 =
         GRDiscreteRicciExtractionReadinessDependencyReceipt.shellASharpCRBoundedBy80
@@ -4067,7 +4195,7 @@ canonicalGRDiscreteRicciDownstreamConvergenceReadinessReceipt =
         ∷ "connectionErrorBoundExtraction is the named kernel field required to convert connection C0 error into Ricci C0 error"
         ∷ "The supplied sharp C_R = 1280/27 is rounded to the Nat-compatible Ricci contraction continuity constant 48 for point-shell use only"
         ∷ "Interval Shell A uses safe constant 80 and interval Shell B uses safe constant 220"
-        ∷ "Shell A exposes C'_Gamma=26/27, C_Gamma=1, GammaMax=2, and C_R=2144/27 <= 80 <= 640"
+        ∷ "Shell A exposes finite n^2=16, C'_Gamma=26/27, C_Gamma=1, GammaMax=2, and C_R=2144/27 <= 80 <= 640"
         ∷ "Downstream readiness carries L_Gamma tight 44 with conservative 48 without promoting ricciConvergesC0"
         ∷ "The existing conservative Ricci extraction constant 640 remains valid for downstream adapters"
         ∷ "The downstream inequality primitive route is still a readiness route: point C_R=48, Shell A C_R=80, conservative 640, and optional 112 are not smooth convergence tokens"
@@ -4615,6 +4743,14 @@ grDiscreteRicciExtractionCPrimeGammaDenominatorIs27 =
   GRDiscreteRicciExtractionReadinessDependencyReceipt.cPrimeGammaDenominatorIs27
     canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
 
+grDiscreteRicciExtractionCPrimeGammaIs26Over27 :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.cPrimeGammaNumerator
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  26
+grDiscreteRicciExtractionCPrimeGammaIs26Over27 =
+  grDiscreteRicciExtractionCPrimeGammaNumeratorIs26
+
 grDiscreteRicciExtractionCGammaShellAConstantIs1 :
   GRDiscreteRicciExtractionReadinessDependencyReceipt.cGammaShellAConstant
     canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
@@ -4631,6 +4767,24 @@ grDiscreteRicciExtractionGammaMaxShellAConstantIs2 :
   2
 grDiscreteRicciExtractionGammaMaxShellAConstantIs2 =
   GRDiscreteRicciExtractionReadinessDependencyReceipt.gammaMaxShellAConstantIs2
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionFiniteCoordinateDimensionIs4 :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteCoordinateDimension
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  4
+grDiscreteRicciExtractionFiniteCoordinateDimensionIs4 =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteCoordinateDimensionIs4
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionFiniteNSquaredIs16 :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteNSquaredExtractionFactor
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  16
+grDiscreteRicciExtractionFiniteNSquaredIs16 =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteNSquaredExtractionFactorIs16
     canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
 
 grDiscreteRicciExtractionTightLGammaConstantIs44 :
@@ -4667,6 +4821,15 @@ grDiscreteRicciExtractionShellASharpCRDenominatorIs27 :
   27
 grDiscreteRicciExtractionShellASharpCRDenominatorIs27 =
   GRDiscreteRicciExtractionReadinessDependencyReceipt.shellASharpCRDenominatorIs27
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+
+grDiscreteRicciExtractionShellA2144Over27≤80≤640Law :
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.shellA2144Over27≤80≤640Law
+    canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+  ≡
+  grDiscreteRicciShellA2144Over27≤80Law
+grDiscreteRicciExtractionShellA2144Over27≤80≤640Law =
+  GRDiscreteRicciExtractionReadinessDependencyReceipt.shellA2144Over27≤80≤640LawIsCanonical
     canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
 
 grDiscreteRicciExtractionShellBIntervalConstantIs220 :
@@ -5326,6 +5489,22 @@ record GRSchwarzschildFiniteRicciBianchiPerturbationReceipt : Setω where
       ≡
       2
 
+    finiteCoordinateDimension :
+      Nat
+
+    finiteCoordinateDimensionIs4 :
+      finiteCoordinateDimension
+      ≡
+      4
+
+    finiteNSquaredExtractionFactor :
+      Nat
+
+    finiteNSquaredExtractionFactorIs16 :
+      finiteNSquaredExtractionFactor
+      ≡
+      16
+
     tightLGammaConstant :
       Nat
 
@@ -5381,6 +5560,14 @@ record GRSchwarzschildFiniteRicciBianchiPerturbationReceipt : Setω where
       shellASharpCRCalculationText
       ≡
       "Shell A: C_R = 16 * (26/27 + 2 * 2 * 1) = 2144/27 <= 80 <= 640"
+
+    shellA2144Over27≤80≤640Law :
+      GRDiscreteRicciShellAConstantLawShape
+
+    shellA2144Over27≤80≤640LawIsCanonical :
+      shellA2144Over27≤80≤640Law
+      ≡
+      grDiscreteRicciShellA2144Over27≤80Law
 
     shellASharpCRBoundedBy80 :
       Bool
@@ -5577,6 +5764,18 @@ canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt =
     ; gammaMaxShellAConstantIs2 =
         GRDiscreteRicciExtractionReadinessDependencyReceipt.gammaMaxShellAConstantIs2
           canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; finiteCoordinateDimension =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteCoordinateDimension
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; finiteCoordinateDimensionIs4 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteCoordinateDimensionIs4
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; finiteNSquaredExtractionFactor =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteNSquaredExtractionFactor
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; finiteNSquaredExtractionFactorIs16 =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.finiteNSquaredExtractionFactorIs16
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
     ; tightLGammaConstant =
         GRDiscreteRicciExtractionReadinessDependencyReceipt.tightLGammaConstant
           canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
@@ -5618,6 +5817,12 @@ canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt =
           canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
     ; shellASharpCRCalculationTextIs2144Over27 =
         GRDiscreteRicciExtractionReadinessDependencyReceipt.shellASharpCRCalculationTextIs2144Over27
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellA2144Over27≤80≤640Law =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellA2144Over27≤80≤640Law
+          canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
+    ; shellA2144Over27≤80≤640LawIsCanonical =
+        GRDiscreteRicciExtractionReadinessDependencyReceipt.shellA2144Over27≤80≤640LawIsCanonical
           canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt
     ; shellASharpCRBoundedBy80 =
         GRDiscreteRicciExtractionReadinessDependencyReceipt.shellASharpCRBoundedBy80
@@ -5687,7 +5892,7 @@ canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt =
         ∷ "The contracted-Bianchi route is the canonical Gate4 fail-closed dependency receipt and remains blocked at missingCarrierConnectionIsLeviCivita"
         ∷ "L_Ricci is recorded as the exact local perturbation bound 640, not as a smooth Ricci convergence theorem"
         ∷ "The receipt names connectionErrorBoundExtraction as the missing continuum kernel field for this extraction"
-        ∷ "Shell A exposes C'_Gamma=26/27, C_Gamma=1, GammaMax=2, and C_R=2144/27 <= 80 <= 640"
+        ∷ "Shell A exposes finite n^2=16, C'_Gamma=26/27, C_Gamma=1, GammaMax=2, and C_R=2144/27 <= 80 <= 640"
         ∷ "The perturbation receipt mirrors L_Gamma tight 44 with conservative 48"
         ∷ "A tighter arithmetic receipt records 112/3008 at radial-power denominator 27 without promoting convergence"
         ∷ "The perturbation receipt mirrors point C_R=48, Shell A C_R=80, conservative 640, and the primitive inequality route from the extraction readiness receipt"
@@ -5775,6 +5980,24 @@ grSchwarzschildFiniteRicciGammaMaxShellAConstantIs2 =
   GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.gammaMaxShellAConstantIs2
     canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
 
+grSchwarzschildFiniteRicciFiniteCoordinateDimensionIs4 :
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.finiteCoordinateDimension
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+  ≡
+  4
+grSchwarzschildFiniteRicciFiniteCoordinateDimensionIs4 =
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.finiteCoordinateDimensionIs4
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+
+grSchwarzschildFiniteRicciFiniteNSquaredIs16 :
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.finiteNSquaredExtractionFactor
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+  ≡
+  16
+grSchwarzschildFiniteRicciFiniteNSquaredIs16 =
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.finiteNSquaredExtractionFactorIs16
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+
 grSchwarzschildFiniteRicciTightLGammaConstantIs44 :
   GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.tightLGammaConstant
     canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
@@ -5809,6 +6032,15 @@ grSchwarzschildFiniteRicciShellASharpCRDenominatorIs27 :
   27
 grSchwarzschildFiniteRicciShellASharpCRDenominatorIs27 =
   GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.shellASharpCRDenominatorIs27
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+
+grSchwarzschildFiniteRicciShellA2144Over27≤80≤640Law :
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.shellA2144Over27≤80≤640Law
+    canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
+  ≡
+  grDiscreteRicciShellA2144Over27≤80Law
+grSchwarzschildFiniteRicciShellA2144Over27≤80≤640Law =
+  GRSchwarzschildFiniteRicciBianchiPerturbationReceipt.shellA2144Over27≤80≤640LawIsCanonical
     canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt
 
 grSchwarzschildFiniteRicciTightNumeratorIs112 :

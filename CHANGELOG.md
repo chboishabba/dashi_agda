@@ -6,6 +6,18 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Worker 6 docs-only canonical update for `2026-06-16`: records the exact
+  remaining GR variable names for the ordered rational gauge, Shell A
+  denominator, Christoffel derivative-bound, C0-stability, and Ricci
+  extraction tiers; clarifies that the first NS-GW-1 synthetic/Taylor-Green
+  degeneracy or tolerance-zero result is only a diagnostic sanity check and is
+  not DNS sign confirmation; and names the next required real DNS calculation
+  as a metadata-validated periodic Taylor-Green NPZ run reporting the
+  cross-derivative, sign classification/tolerance, local eigenvalue gap, and
+  eigenframe degeneracy fields. Documentation only; no Agda files were
+  touched, no typechecker was run, and GR/NS/Clay promotions remain
+  false/open.
+
 - Six-lane continuation tranche for `2026-06-16`: strengthens the GR analytic
   kernel receipt surfaces with derived ordered-gauge primitive bundles, Shell A
   denominator/reciprocal projections, symbolic-kernel stability/extraction
