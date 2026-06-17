@@ -219,6 +219,59 @@ canonicalPerturbationDiagHypothesis = "h_diag"
 canonicalPerturbationPGIHypothesis : String
 canonicalPerturbationPGIHypothesis = "h_pgi"
 
+canonicalConnectionErrorBoundExtractionDependencyName : String
+canonicalConnectionErrorBoundExtractionDependencyName =
+  "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
+
+canonicalConnectionErrorBoundExtractionHypotheses : List String
+canonicalConnectionErrorBoundExtractionHypotheses =
+  "h_dΓ"
+  ∷ "h_Γ"
+  ∷ canonicalPerturbationPGIHypothesis
+  ∷ "h_p2g"
+  ∷ "h_pg"
+  ∷ []
+
+canonicalConnectionErrorBoundExtractionBounds : List String
+canonicalConnectionErrorBoundExtractionBounds =
+  "ricciPalatiniExpansion"
+  ∷ "allTermsLE44"
+  ∷ "derivative terms"
+  ∷ "product terms"
+  ∷ "Schwarzschild nonzero-slot pruning"
+  ∷ "|∂δΓ| <= 19/2 ε"
+  ∷ "|δ(ΓΓ)| <= 44 ε"
+  ∷ "352 ε <= 640 ε"
+  ∷ []
+
+canonicalConnectionErrorBoundExtractionDependencyRows : List String
+canonicalConnectionErrorBoundExtractionDependencyRows =
+  "dependency: connectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
+  ∷ "dependency: ricciPalatiniExpansion"
+  ∷ "dependency: allTermsLE44"
+  ∷ "dependency: derivative terms"
+  ∷ "dependency: product terms"
+  ∷ "dependency: Schwarzschild nonzero-slot pruning"
+  ∷ "dependency: h_dΓ"
+  ∷ "dependency: h_Γ"
+  ∷ "dependency: h_pgi"
+  ∷ "dependency: h_p2g"
+  ∷ "dependency: h_pg"
+  ∷ "dependency: |∂δΓ| <= 19/2 ε"
+  ∷ "dependency: |δ(ΓΓ)| <= 44 ε"
+  ∷ "dependency: 352 ε <= 640 ε"
+  ∷ "dependency: connectionErrorBoundExtractionPromoted = false"
+  ∷ []
+
+canonicalConnectionErrorBoundExtractionProjectionRows : List String
+canonicalConnectionErrorBoundExtractionProjectionRows =
+  "projection: connectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
+  ∷ "projection: connectionErrorBoundExtractionHypotheses = h_dΓ, h_Γ, h_pgi, h_p2g, h_pg"
+  ∷ "projection: connectionErrorBoundExtractionBounds = derivative terms; product terms; Schwarzschild nonzero-slot pruning; |∂δΓ| <= 19/2 ε; |δ(ΓΓ)| <= 44 ε; 352 ε <= 640 ε"
+  ∷ "projection route text: 352 ε <= 640 ε"
+  ∷ "projection: connectionErrorBoundExtractionPromoted = false"
+  ∷ []
+
 canonicalChristoffelPerSlot11Over2Route : String
 canonicalChristoffelPerSlot11Over2Route =
   OrderedRational.orderedRationalChristoffel16p5Le22Le48LawName
@@ -343,6 +396,21 @@ canonicalSymbolicKernelConstructorHandoffDependencyRows =
   ∷ "dependency: canonicalPerturbationPGIHypothesis"
   ∷ "dependency: canonicalChristoffelPerSlot11Over2Route"
   ∷ "dependency: canonicalRicci252Le640LooseRoute"
+  ∷ "dependency: connectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
+  ∷ "dependency: ricciPalatiniExpansion"
+  ∷ "dependency: allTermsLE44"
+  ∷ "dependency: derivative terms"
+  ∷ "dependency: product terms"
+  ∷ "dependency: Schwarzschild nonzero-slot pruning"
+  ∷ "dependency: h_dΓ"
+  ∷ "dependency: h_Γ"
+  ∷ "dependency: h_pgi"
+  ∷ "dependency: h_p2g"
+  ∷ "dependency: h_pg"
+  ∷ "dependency: |∂δΓ| <= 19/2 ε"
+  ∷ "dependency: |δ(ΓΓ)| <= 44 ε"
+  ∷ "dependency: 352 ε <= 640 ε"
+  ∷ "dependency: connectionErrorBoundExtractionPromoted = false"
   ∷ "dependency: canonicalPerturbationAdapterRouteProjectionRows"
   ∷ "dependency: canonicalPerturbationAdapterBlockedRows"
   ∷ "dependency: obligationMathTokenRows"
@@ -361,6 +429,11 @@ canonicalSymbolicKernelConstructorHandoffProjectionRows =
   ∷ "projection: canonicalPerturbationStaticHypothesis = h_static"
   ∷ "projection: canonicalPerturbationDiagHypothesis = h_diag"
   ∷ "projection: canonicalPerturbationPGIHypothesis = h_pgi"
+  ∷ "projection: canonicalConnectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
+  ∷ "projection: canonicalConnectionErrorBoundExtractionHypotheses = h_dΓ, h_Γ, h_pgi, h_p2g, h_pg"
+  ∷ "projection: canonicalConnectionErrorBoundExtractionBounds = derivative terms; product terms; Schwarzschild nonzero-slot pruning; |∂δΓ| <= 19/2 ε; |δ(ΓΓ)| <= 44 ε; 352 ε <= 640 ε"
+  ∷ "projection route text: 352 ε <= 640 ε"
+  ∷ "projection: canonicalConnectionErrorBoundExtractionPromoted = false"
   ∷ "projection: canonicalOrderedRationalProofsPromotedIsFalse = false"
   ∷ []
 
@@ -376,14 +449,14 @@ record GRChristoffelRicciKernelObligationCoreORCSLPGF : Set where
     S : String
     SIsCanonical : S ≡ "fail-closed"
     L : String
-    LIsCanonical : L ≡ "obligation token rows and blockers"
+    LIsCanonical : L ≡ "obligation token rows, connection-error extraction rows, and blockers"
     P : String
     PIsCanonical : P ≡ "all promotions are blocked"
     G : String
-    GIsCanonical : G ≡ "geometric surface+symbolic-kernel constructor shape"
+    GIsCanonical : G ≡ "geometric surface+symbolic-kernel constructor+connection-error extraction shape"
     F : String
     FIsCanonical : F ≡
-      "keeps concrete 22<=48 / 2144/27<=80<=640 rows and explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
+      "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction ricciPalatiniExpansion/allTermsLE44 with derivative terms, product terms, Schwarzschild nonzero-slot pruning, |∂δΓ| <= 19/2 ε, |δ(ΓΓ)| <= 44 ε, and 352 ε <= 640 ε rows, and explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
 
 open GRChristoffelRicciKernelObligationCoreORCSLPGF public
 
@@ -399,13 +472,13 @@ canonicalGRChristoffelRicciKernelObligationCoreORCSLPGF =
     refl
     "fail-closed"
     refl
-    "obligation token rows and blockers"
+    "obligation token rows, connection-error extraction rows, and blockers"
     refl
     "all promotions are blocked"
     refl
-    "geometric surface+symbolic-kernel constructor shape"
+    "geometric surface+symbolic-kernel constructor+connection-error extraction shape"
     refl
-    "keeps concrete 22<=48 / 2144/27<=80<=640 rows and explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
+    "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction ricciPalatiniExpansion/allTermsLE44 with derivative terms, product terms, Schwarzschild nonzero-slot pruning, |∂δΓ| <= 19/2 ε, |δ(ΓΓ)| <= 44 ε, and 352 ε <= 640 ε rows, and explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
     refl
 
 record GRChristoffelRicciKernelObligationCore : Setω where
@@ -828,6 +901,54 @@ record GRChristoffelRicciKernelObligationCore : Setω where
       ≡
       canonicalSymbolicKernelConstructorHandoffProjectionRows
 
+    connectionErrorBoundExtractionDependencyName :
+      String
+
+    connectionErrorBoundExtractionDependencyNameIsCanonical :
+      connectionErrorBoundExtractionDependencyName
+      ≡
+      canonicalConnectionErrorBoundExtractionDependencyName
+
+    connectionErrorBoundExtractionHypotheses :
+      List String
+
+    connectionErrorBoundExtractionHypothesesAreCanonical :
+      connectionErrorBoundExtractionHypotheses
+      ≡
+      canonicalConnectionErrorBoundExtractionHypotheses
+
+    connectionErrorBoundExtractionBounds :
+      List String
+
+    connectionErrorBoundExtractionBoundsAreCanonical :
+      connectionErrorBoundExtractionBounds
+      ≡
+      canonicalConnectionErrorBoundExtractionBounds
+
+    connectionErrorBoundExtractionDependencyRows :
+      List String
+
+    connectionErrorBoundExtractionDependencyRowsAreCanonical :
+      connectionErrorBoundExtractionDependencyRows
+      ≡
+      canonicalConnectionErrorBoundExtractionDependencyRows
+
+    connectionErrorBoundExtractionProjectionRows :
+      List String
+
+    connectionErrorBoundExtractionProjectionRowsAreCanonical :
+      connectionErrorBoundExtractionProjectionRows
+      ≡
+      canonicalConnectionErrorBoundExtractionProjectionRows
+
+    connectionErrorBoundExtractionPromoted :
+      Bool
+
+    connectionErrorBoundExtractionPromotedIsFalse :
+      connectionErrorBoundExtractionPromoted
+      ≡
+      false
+
     orcslpgf :
       GRChristoffelRicciKernelObligationCoreORCSLPGF
 
@@ -1098,6 +1219,30 @@ canonicalGRChristoffelRicciKernelObligationCore =
     ; symbolicKernelConstructorHandoffProjectionRows =
         canonicalSymbolicKernelConstructorHandoffProjectionRows
     ; symbolicKernelConstructorHandoffProjectionRowsAreCanonical =
+        refl
+    ; connectionErrorBoundExtractionDependencyName =
+        canonicalConnectionErrorBoundExtractionDependencyName
+    ; connectionErrorBoundExtractionDependencyNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionHypotheses =
+        canonicalConnectionErrorBoundExtractionHypotheses
+    ; connectionErrorBoundExtractionHypothesesAreCanonical =
+        refl
+    ; connectionErrorBoundExtractionBounds =
+        canonicalConnectionErrorBoundExtractionBounds
+    ; connectionErrorBoundExtractionBoundsAreCanonical =
+        refl
+    ; connectionErrorBoundExtractionDependencyRows =
+        canonicalConnectionErrorBoundExtractionDependencyRows
+    ; connectionErrorBoundExtractionDependencyRowsAreCanonical =
+        refl
+    ; connectionErrorBoundExtractionProjectionRows =
+        canonicalConnectionErrorBoundExtractionProjectionRows
+    ; connectionErrorBoundExtractionProjectionRowsAreCanonical =
+        refl
+    ; connectionErrorBoundExtractionPromoted =
+        false
+    ; connectionErrorBoundExtractionPromotedIsFalse =
         refl
     ; orcslpgf =
         canonicalGRChristoffelRicciKernelObligationCoreORCSLPGF

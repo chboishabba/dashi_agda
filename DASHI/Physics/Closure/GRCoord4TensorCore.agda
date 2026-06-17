@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.GRCoord4TensorCore where
 
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; _∷_; []; map; _++_)
 open import DASHI.Core.Q using (ℚ)
@@ -632,6 +632,234 @@ canonicalSchwarzschildChristoffelSlotClassificationSurface =
       [] )
     false
 
+data SchwarzschildChristoffelSlotDecision : Set where
+  slotDecisionTrue :
+    SchwarzschildChristoffelSlotDecision
+
+  slotDecisionFalse :
+    SchwarzschildChristoffelSlotDecision
+
+schwarzschildChristoffelSlotDecisionToBool :
+  SchwarzschildChristoffelSlotDecision →
+  Bool
+schwarzschildChristoffelSlotDecisionToBool slotDecisionTrue = true
+schwarzschildChristoffelSlotDecisionToBool slotDecisionFalse = false
+
+schwarzschildChristoffelSlotDecisionFromOccupancy :
+  SchwarzschildSlotOccupancy →
+  SchwarzschildChristoffelSlotDecision
+schwarzschildChristoffelSlotDecisionFromOccupancy (diagonalSlot _) =
+  slotDecisionTrue
+schwarzschildChristoffelSlotDecisionFromOccupancy zeroSlot =
+  slotDecisionFalse
+
+record SchwarzschildChristoffelSlotDecisionRow : Set where
+  constructor schwarzschildChristoffelSlotDecisionRow
+  field
+    row :
+      SchwarzschildChristoffelSlotClassificationRow
+
+    rowDecision :
+      SchwarzschildChristoffelSlotDecision
+
+    rowDecisionBool :
+      Bool
+
+    rowBoundary :
+      List String
+
+    rowNotPromoted :
+      Bool
+
+schwarzschildChristoffelSlotDecisionRowFromRow :
+  SchwarzschildChristoffelSlotClassificationRow →
+  SchwarzschildChristoffelSlotDecisionRow
+schwarzschildChristoffelSlotDecisionRowFromRow row =
+  schwarzschildChristoffelSlotDecisionRow
+    row
+    (schwarzschildChristoffelSlotDecisionFromOccupancy
+      (SchwarzschildChristoffelSlotClassificationRow.occupancy row))
+    (schwarzschildChristoffelSlotDecisionToBool
+      (schwarzschildChristoffelSlotDecisionFromOccupancy
+        (SchwarzschildChristoffelSlotClassificationRow.occupancy row)))
+    ( "sevenSlotBooleanClassifier"
+      ∷ "checkedSlotDecisionRow"
+      ∷ [] )
+    false
+
+schwarzschildChristoffelSlotDecisionRows :
+  List SchwarzschildChristoffelSlotDecisionRow
+schwarzschildChristoffelSlotDecisionRows =
+  map schwarzschildChristoffelSlotDecisionRowFromRow
+    schwarzschildChristoffelSlotClassificationRows
+
+record SchwarzschildChristoffelCheckedSlotClassifierSurface : Set where
+  constructor schwarzschildChristoffelCheckedSlotClassifierSurface
+  field
+    classifierRows :
+      List SchwarzschildChristoffelSlotDecisionRow
+
+    classifierRowCount :
+      Nat
+
+    classifierTrueCount :
+      Nat
+
+    classifierFalseCount :
+      Nat
+
+    classifierBoundary :
+      List String
+
+    classifierNotPromoted :
+      Bool
+
+canonicalSchwarzschildChristoffelCheckedSlotClassifierSurface :
+  SchwarzschildChristoffelCheckedSlotClassifierSurface
+canonicalSchwarzschildChristoffelCheckedSlotClassifierSurface =
+  schwarzschildChristoffelCheckedSlotClassifierSurface
+    schwarzschildChristoffelSlotDecisionRows
+    coord4SlotCount64
+    coord4NonzeroSlotCount7
+    coord4ZeroSlotCount57
+    ( "sevenSlotBooleanClassifier"
+      ∷ "checkedSevenSlotBooleanClassifier"
+      ∷ "7true57falseClassifierReceipt"
+      ∷ [] )
+    false
+
+record SchwarzschildChristoffelCheckedSlotClassifierReceiptSurface : Set where
+  constructor schwarzschildChristoffelCheckedSlotClassifierReceiptSurface
+  field
+    receiptRows :
+      List SchwarzschildChristoffelSlotDecisionRow
+
+    receiptRowCount :
+      Nat
+
+    receiptTrueCount :
+      Nat
+
+    receiptFalseCount :
+      Nat
+
+    receiptBoundary :
+      List String
+
+    receiptNotPromoted :
+      Bool
+
+canonicalSchwarzschildChristoffelCheckedSlotClassifierReceiptSurface :
+  SchwarzschildChristoffelCheckedSlotClassifierReceiptSurface
+canonicalSchwarzschildChristoffelCheckedSlotClassifierReceiptSurface =
+  schwarzschildChristoffelCheckedSlotClassifierReceiptSurface
+    schwarzschildChristoffelSlotDecisionRows
+    coord4SlotCount64
+    coord4NonzeroSlotCount7
+    coord4ZeroSlotCount57
+    ( "checkedSevenSlotBooleanClassifierReceipt"
+      ∷ "7true57falseReceipt"
+      ∷ [] )
+    false
+
+schwarzschildSevenNonzeroSlotNames :
+  List String
+schwarzschildSevenNonzeroSlotNames =
+  "gammaTtr" ∷
+  "gammaRtt" ∷
+  "gammaRrr" ∷
+  "gammaRThetaTheta" ∷
+  "gammaRPhiPhi" ∷
+  "gammaThetaRTheta" ∷
+  "gammaPhiRPhi" ∷
+  []
+
+schwarzschildNonzeroSlotDecisionRows :
+  List SchwarzschildChristoffelSlotDecisionRow
+schwarzschildNonzeroSlotDecisionRows =
+  map schwarzschildChristoffelSlotDecisionRowFromRow
+    schwarzschildNonzeroSlotClassificationRows
+
+schwarzschildDiagonalNonzeroSlotQuestionName :
+  String
+schwarzschildDiagonalNonzeroSlotQuestionName = "DiagonalNonzeroSlot?"
+
+schwarzschildDiagonalNonzeroSlotBoundary :
+  List String
+schwarzschildDiagonalNonzeroSlotBoundary =
+  schwarzschildDiagonalNonzeroSlotQuestionName ∷
+  "7 symmetry classes and the 64-slot diagonal Christoffel ledger remain receipt-only"
+  ∷ []
+
+record SchwarzschildDiagonalNonzeroSlotSurface : Set where
+  constructor schwarzschildDiagonalNonzeroSlotSurface
+  field
+    predicateSurface :
+      SchwarzschildChristoffelSlotClassificationSurface
+
+    decisionSurface :
+      SchwarzschildChristoffelCheckedSlotClassifierSurface
+
+    receiptSurface :
+      SchwarzschildChristoffelCheckedSlotClassifierReceiptSurface
+
+    allSlotCount :
+      Nat
+
+    nonzeroSlotCount :
+      Nat
+
+    zeroSlotCount :
+      Nat
+
+    nonzeroSlotCoordinates :
+      List Coord4Slot
+
+    nonzeroSymmetryClassNames :
+      List String
+
+    nonzeroClassificationRows :
+      List SchwarzschildChristoffelSlotClassificationRow
+
+    nonzeroDecisionRows :
+      List SchwarzschildChristoffelSlotDecisionRow
+
+canonicalSchwarzschildDiagonalNonzeroSlotSurface :
+  SchwarzschildDiagonalNonzeroSlotSurface
+canonicalSchwarzschildDiagonalNonzeroSlotSurface =
+  schwarzschildDiagonalNonzeroSlotSurface
+    canonicalSchwarzschildChristoffelSlotClassificationSurface
+    canonicalSchwarzschildChristoffelCheckedSlotClassifierSurface
+    canonicalSchwarzschildChristoffelCheckedSlotClassifierReceiptSurface
+    coord4SlotCount64
+    coord4NonzeroSlotCount7
+    coord4ZeroSlotCount57
+    schwarzschildNonzeroSlotCoordinates
+    schwarzschildSevenNonzeroSlotNames
+    schwarzschildNonzeroSlotClassificationRows
+    schwarzschildNonzeroSlotDecisionRows
+
+DiagonalNonzeroSlotPredicateSurface : Set
+DiagonalNonzeroSlotPredicateSurface =
+  SchwarzschildChristoffelSlotClassificationSurface
+
+DiagonalNonzeroSlotDecisionSurface : Set
+DiagonalNonzeroSlotDecisionSurface =
+  SchwarzschildChristoffelCheckedSlotClassifierSurface
+
+DiagonalNonzeroSlotReceiptSurface : Set
+DiagonalNonzeroSlotReceiptSurface =
+  SchwarzschildChristoffelCheckedSlotClassifierReceiptSurface
+
+DiagonalNonzeroSlotQuestionName : String
+DiagonalNonzeroSlotQuestionName = schwarzschildDiagonalNonzeroSlotQuestionName
+
+DiagonalNonzeroSlotBoundary : List String
+DiagonalNonzeroSlotBoundary = schwarzschildDiagonalNonzeroSlotBoundary
+
+DiagonalNonzeroSlotSurface : Set
+DiagonalNonzeroSlotSurface = SchwarzschildDiagonalNonzeroSlotSurface
+
 schwarzschildChristoffelSlotFormulaAt :
   SchwarzschildChristoffelSlot →
   Coord4 →
@@ -1116,6 +1344,148 @@ schwarzschildChristoffelFormulaPackageFromSurface surface =
     ( "slotTtr" ∷ "slotRtt" ∷ "slotRrr" ∷
       "slotRThetaTheta" ∷ "slotRPhiPhi" ∷
       "slotThetaRTheta" ∷ "slotPhiRPhi" ∷ [])
+
+------------------------------------------------------------------------
+-- Boolean ledger and receipt surfaces for the seven canonical nonzero slots.
+
+record SchwarzschildChristoffelSevenSlotLedgerRow : Set where
+  constructor schwarzschildChristoffelSevenSlotLedgerRow
+  field
+    rowName :
+      String
+
+    rowSlot :
+      SchwarzschildChristoffelSlot
+
+    rowCoordinates :
+      Coord4Slot
+
+    rowIsNonzero :
+      Bool
+
+    rowBoundary :
+      List String
+
+    rowNotPromoted :
+      Bool
+
+schwarzschildChristoffelSevenSlotLedgerRowFromSlot :
+  SchwarzschildChristoffelSlot →
+  SchwarzschildChristoffelSevenSlotLedgerRow
+schwarzschildChristoffelSevenSlotLedgerRowFromSlot gammaTtr =
+  schwarzschildChristoffelSevenSlotLedgerRow
+    "gammaTtrLedgerRow"
+    gammaTtr
+    schwarzschildGammaTtrCoordinates
+    true
+    ( "sevenSlotBooleanLedgerRow" ∷ "gammaTtr" ∷ [] )
+    false
+schwarzschildChristoffelSevenSlotLedgerRowFromSlot gammaRtt =
+  schwarzschildChristoffelSevenSlotLedgerRow
+    "gammaRttLedgerRow"
+    gammaRtt
+    schwarzschildGammaRttCoordinates
+    true
+    ( "sevenSlotBooleanLedgerRow" ∷ "gammaRtt" ∷ [] )
+    false
+schwarzschildChristoffelSevenSlotLedgerRowFromSlot gammaRrr =
+  schwarzschildChristoffelSevenSlotLedgerRow
+    "gammaRrrLedgerRow"
+    gammaRrr
+    schwarzschildGammaRrrCoordinates
+    true
+    ( "sevenSlotBooleanLedgerRow" ∷ "gammaRrr" ∷ [] )
+    false
+schwarzschildChristoffelSevenSlotLedgerRowFromSlot gammaRThetaTheta =
+  schwarzschildChristoffelSevenSlotLedgerRow
+    "gammaRThetaThetaLedgerRow"
+    gammaRThetaTheta
+    schwarzschildGammaRThetaThetaCoordinates
+    true
+    ( "sevenSlotBooleanLedgerRow" ∷ "gammaRThetaTheta" ∷ [] )
+    false
+schwarzschildChristoffelSevenSlotLedgerRowFromSlot gammaRPhiPhi =
+  schwarzschildChristoffelSevenSlotLedgerRow
+    "gammaRPhiPhiLedgerRow"
+    gammaRPhiPhi
+    schwarzschildGammaRPhiPhiCoordinates
+    true
+    ( "sevenSlotBooleanLedgerRow" ∷ "gammaRPhiPhi" ∷ [] )
+    false
+schwarzschildChristoffelSevenSlotLedgerRowFromSlot gammaThetaRTheta =
+  schwarzschildChristoffelSevenSlotLedgerRow
+    "gammaThetaRThetaLedgerRow"
+    gammaThetaRTheta
+    schwarzschildGammaThetaRThetaCoordinates
+    true
+    ( "sevenSlotBooleanLedgerRow" ∷ "gammaThetaRTheta" ∷ [] )
+    false
+schwarzschildChristoffelSevenSlotLedgerRowFromSlot gammaPhiRPhi =
+  schwarzschildChristoffelSevenSlotLedgerRow
+    "gammaPhiRPhiLedgerRow"
+    gammaPhiRPhi
+    schwarzschildGammaPhiRPhiCoordinates
+    true
+    ( "sevenSlotBooleanLedgerRow" ∷ "gammaPhiRPhi" ∷ [] )
+    false
+
+schwarzschildChristoffelSevenSlotLedgerRows :
+  List SchwarzschildChristoffelSevenSlotLedgerRow
+schwarzschildChristoffelSevenSlotLedgerRows =
+  map schwarzschildChristoffelSevenSlotLedgerRowFromSlot
+    schwarzschildSevenNonzeroSlots
+
+record SchwarzschildChristoffelSevenSlotClassifierSurface : Set where
+  constructor schwarzschildChristoffelSevenSlotClassifierSurface
+  field
+    classifierRows :
+      List SchwarzschildChristoffelSevenSlotLedgerRow
+
+    classifierRowCount :
+      Nat
+
+    classifierBoundary :
+      List String
+
+    classifierNotPromoted :
+      Bool
+
+canonicalSchwarzschildChristoffelSevenSlotClassifierSurface :
+  SchwarzschildChristoffelSevenSlotClassifierSurface
+canonicalSchwarzschildChristoffelSevenSlotClassifierSurface =
+  schwarzschildChristoffelSevenSlotClassifierSurface
+    schwarzschildChristoffelSevenSlotLedgerRows
+    coord4NonzeroSlotCount7
+    ( "sevenSlotBooleanClassifier" ∷
+      "canonicalSchwarzschildChristoffelSevenSlotClassifierSurface" ∷
+      [] )
+    false
+
+record SchwarzschildChristoffelSevenSlotReceiptSurface : Set where
+  constructor schwarzschildChristoffelSevenSlotReceiptSurface
+  field
+    receiptRows :
+      List SchwarzschildChristoffelSevenSlotLedgerRow
+
+    receiptRowCount :
+      Nat
+
+    receiptBoundary :
+      List String
+
+    receiptNotPromoted :
+      Bool
+
+canonicalSchwarzschildChristoffelSevenSlotReceiptSurface :
+  SchwarzschildChristoffelSevenSlotReceiptSurface
+canonicalSchwarzschildChristoffelSevenSlotReceiptSurface =
+  schwarzschildChristoffelSevenSlotReceiptSurface
+    schwarzschildChristoffelSevenSlotLedgerRows
+    coord4NonzeroSlotCount7
+    ( "sevenSlotCanonicalReceipt" ∷
+      "sevenSlotBooleanClassifierReceipt" ∷
+      [] )
+    false
 
 christoffelFormulaDiagonalShape :
   SchwarzschildChristoffelFormulaLawShape →

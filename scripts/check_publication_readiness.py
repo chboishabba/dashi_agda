@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import os
 import json
 import re
 import subprocess
@@ -35,6 +36,29 @@ CORE_MANUSCRIPT_FILES = (
 
 CITATION_LEDGER = Path("Docs/support/live/PaperCommonCitationLedger.md")
 RENDERER_SCRIPT = Path("scripts/render_core_paper_pdfs.py")
+AGDA_BIN = os.environ.get("AGDA_BIN")
+
+
+def _resolve_agda_bin() -> str:
+    if AGDA_BIN:
+        return AGDA_BIN
+    try:
+        completed = subprocess.run(
+            ["nix", "build", "--no-link", "--print-out-paths", "/home/c/Documents/code/agda#debug.bin"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if completed.returncode == 0:
+            candidate = Path((completed.stdout or "").strip()) / "bin" / "agda"
+            if candidate.is_file():
+                return str(candidate)
+    except FileNotFoundError:
+        pass
+    return "agda"
+
+
+AGDA_BIN = _resolve_agda_bin()
 
 THEOREM_INTERFACE_TARGETS = (
     Path("DASHI/Papers/NavierStokes/TheoremInterface.agda"),
@@ -1438,7 +1462,7 @@ def agda_command(target: Path) -> list[str]:
     if not stdlib_path.exists():
         stdlib_path = Path("/usr/share/agda/lib/stdlib")
     return [
-        "agda",
+        AGDA_BIN,
         "--no-libraries",
         "-i",
         ".",
@@ -1476,6 +1500,11 @@ def run_agda_targets(repo_root: Path, targets: tuple[Path, ...]) -> list[CheckRe
 def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo-root", type=Path, default=REPO_ROOT)
+    parser.add_argument(
+        "--agda-bin",
+        default=AGDA_BIN,
+        help="Agda binary to use (defaults to $AGDA_BIN or local agda build)",
+    )
     parser.add_argument("--run-agda", action="store_true", help="typecheck the declared Agda support targets")
     return parser.parse_args(argv)
 
@@ -1483,6 +1512,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(sys.argv[1:] if argv is None else argv)
     repo_root = args.repo_root.resolve()
+    global AGDA_BIN
+    AGDA_BIN = args.agda_bin
 
     payload, manifest_load_results = load_manifest(repo_root)
     results = [
