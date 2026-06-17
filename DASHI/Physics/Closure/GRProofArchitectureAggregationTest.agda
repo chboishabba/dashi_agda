@@ -2073,12 +2073,14 @@ record GRProofArchitectureAggregationTest : Setω where
     conservativeGRRouteRowsAreCanonical :
       conservativeGRRouteRows
       ≡
-      "bracket_le=8 Shell A direct bound"
+      "angular ledger=13 nonzero / 51 zero"
+      ∷ "bracket_le=8 via r_max=4M and bracket_le=2*r_max"
+      ∷ "theta-shell/cot-bound required for angular cot slots"
       ∷ "C_shell=8 Γ background shell bound"
       ∷ "h_dΓ_tight=11/2"
       ∷ "derivTermBound_44"
       ∷ "productTermBound via 176<=640"
-      ∷ "no promotion"
+      ∷ "fail-closed/no promotion"
       ∷ []
 
     unsafeExternalSurfaceReceipts :
@@ -2634,12 +2636,14 @@ canonicalGRProofArchitectureAggregationTest =
     ; nextAnalyticKernelNoRicciConvergencePromotion =
         true
     ; conservativeGRRouteRows =
-        "bracket_le=8 Shell A direct bound"
+        "angular ledger=13 nonzero / 51 zero"
+        ∷ "bracket_le=8 via r_max=4M and bracket_le=2*r_max"
+        ∷ "theta-shell/cot-bound required for angular cot slots"
         ∷ "C_shell=8 Γ background shell bound"
         ∷ "h_dΓ_tight=11/2"
         ∷ "derivTermBound_44"
         ∷ "productTermBound via 176<=640"
-        ∷ "no promotion"
+        ∷ "fail-closed/no promotion"
         ∷ []
     ; conservativeGRRouteRowsAreCanonical =
         refl
@@ -2671,7 +2675,7 @@ canonicalGRProofArchitectureAggregationTest =
         ∷ "Imports and checks the Continuum machine-checked Christoffel C0 constants"
         ∷ "Imports and checks Shell A/B selected Christoffel constants and the zero-epsilon selected equality bridge without arbitrary equality promotion"
         ∷ "Imports and checks the next analytic-kernel tranche requirements without promoting the ordered QQ theorem or Ricci convergence"
-        ∷ "Records the conservative GR route rows: bracket_le=8 Shell A direct bound, C_shell=8 Γ background shell bound, h_dΓ_tight=11/2, derivTermBound_44, productTermBound via 176<=640, and no promotion"
+        ∷ "Records the conservative GR route rows: angular ledger=13 nonzero / 51 zero, bracket_le=8 via r_max=4M and bracket_le=2*r_max, theta-shell/cot-bound required for angular cot slots, C_shell=8 Γ background shell bound, h_dΓ_tight=11/2, derivTermBound_44, productTermBound via 176<=640, and fail-closed/no promotion"
         ∷ "Records the five current GR analytic-kernel remaining variables and the settled NS-GW-1 degeneracy status as non-promoting context"
         ∷ "No GR, Schwarzschild, Bianchi, or Einstein-equation promotion is introduced here"
         ∷ []
@@ -3532,11 +3536,13 @@ grProofArchitectureAggregationConservativeGRRouteRows :
   GRProofArchitectureAggregationTest.conservativeGRRouteRows
     canonicalGRProofArchitectureAggregationTest
   ≡
-  "bracket_le=8 Shell A direct bound"
+  "angular ledger=13 nonzero / 51 zero"
+  ∷ "bracket_le=8 via r_max=4M and bracket_le=2*r_max"
+  ∷ "theta-shell/cot-bound required for angular cot slots"
   ∷ "C_shell=8 Γ background shell bound"
   ∷ "h_dΓ_tight=11/2"
   ∷ "derivTermBound_44"
   ∷ "productTermBound via 176<=640"
-  ∷ "no promotion"
+  ∷ "fail-closed/no promotion"
   ∷ []
 grProofArchitectureAggregationConservativeGRRouteRows = refl

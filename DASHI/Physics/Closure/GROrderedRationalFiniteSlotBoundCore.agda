@@ -87,7 +87,8 @@ orderedRationalShellA_C_GammaVerifiedLawName : String
 orderedRationalShellA_C_GammaVerifiedLawName = "Shell A C_Gamma=1 (verified)"
 
 orderedRationalShellA_RLooseExtractionLawName : String
-orderedRationalShellA_RLooseExtractionLawName = "Shell A loose Ricci extraction: 252<=640"
+orderedRationalShellA_RLooseExtractionLawName =
+  "Shell A loose Ricci extraction: bracket_le=2*r_max, selected r_max=4M -> bracket_le=8, θ-shell/cot-bound, 13 nonzero / 51 zero symmetric slots, conservative product budget remains below 640"
 
 orderedRationalRicci2144Over27Le80LawName : String
 orderedRationalRicci2144Over27Le80LawName = "2144/27<=80"
@@ -120,10 +121,10 @@ orderedRationalShellA44Le48LawName : String
 orderedRationalShellA44Le48LawName = "44<=48"
 
 coord4SevenNonzeroSlotsLawName : String
-coord4SevenNonzeroSlotsLawName = "7 nonzero slots"
+coord4SevenNonzeroSlotsLawName = "13 nonzero slots"
 
 coord4FiftySevenZeroSlotsLawName : String
-coord4FiftySevenZeroSlotsLawName = "57 zero slots"
+coord4FiftySevenZeroSlotsLawName = "51 zero symmetric slots"
 
 coord4SixtyFourTriplesLawName : String
 coord4SixtyFourTriplesLawName = "64 total Coord4 triples"
@@ -774,7 +775,7 @@ shellAConstantRowLabel shellAC_GammaVerifiedConstant =
 shellAConstantRowLabel shellACRLooseExtractionConstant =
   orderedRationalShellA_RLooseExtractionLawName
 shellAConstantRowLabel shellACRChainConstant =
-  "Shell A CR=2144/27<=80<=640"
+  "Shell A CR=2144/27<=80<=640; conservative product budget remains below 640"
 
 record GROrderedRationalFiniteSlotBoundCoreShellAProjectionRows : Set where
   constructor grOrderedRationalFiniteSlotBoundCoreShellAProjectionRows
@@ -902,9 +903,9 @@ finiteSlotCountRowName :
   String
 finiteSlotCountRowName coord4SlotCountRow = "coord4 slot count = 4"
 finiteSlotCountRowName coord4AllSlotCountRow = "coord4 all slot count = 64"
-finiteSlotCountRowName sevenNonzeroSlotCountRow = "coord4 seven nonzero slots = 7"
+finiteSlotCountRowName sevenNonzeroSlotCountRow = "coord4 thirteen nonzero slots = 13"
 finiteSlotCountRowName coord4FiftySevenZeroSlotsCountRow =
-  "coord4 nonzero/zero split: 57 zero slots"
+  "coord4 nonzero/zero split: 51 zero symmetric slots"
 finiteSlotCountRowName coord4SixtyFourTriplesCountRow =
   "coord4 total triples = 64"
 
@@ -935,8 +936,8 @@ canonicalGROrderedRationalFiniteSlotBoundCoreFiniteSlotCountProjectionRows =
   grOrderedRationalFiniteSlotBoundCoreFiniteSlotCountProjectionRows
     "coord4 slot count = 4"
     "coord4 all slot count = 64"
-    "coord4 seven nonzero slots = 7"
-    "coord4 nonzero/zero split: 57 zero slots"
+    "coord4 thirteen nonzero slots = 13"
+    "coord4 nonzero/zero split: 51 zero symmetric slots"
     "coord4 total triples = 64"
 
 data GROrderedRationalFiniteSlotBoundCoreBlockedRow : Set where
@@ -1046,11 +1047,13 @@ record GROrderedRationalFiniteSlotBoundCoreORCSLPGF : Set where
     O : String
     OIsCanonical : O ≡ "ordered-rational"
     R : String
-    RIsCanonical : R ≡ "future Christoffel/Ricci proof-shape reuse with adapter rows"
+    RIsCanonical :
+      R ≡
+      "future Christoffel/Ricci proof-shape reuse with adapter rows and corrected shell route receipts"
     C : String
     CIsCanonical :
       C ≡
-      "canonical scalar lemma names plus reusable dependency rows, corrected arithmetic chains, and exact arithmetic adapters"
+      "canonical scalar lemma names plus reusable dependency rows, corrected shell route receipts, corrected arithmetic chains, and exact arithmetic adapters"
     S : String
     SIsCanonical : S ≡ "fail-closed"
     L : String
@@ -1060,11 +1063,11 @@ record GROrderedRationalFiniteSlotBoundCoreORCSLPGF : Set where
     G : String
     GIsCanonical :
       G ≡
-      "record the reusable bound shapes, scale/slack constants, h_Γ_bg_bound helper routing, dependency names, and exact arithmetic adapters only"
+      "record the reusable bound shapes, scale/slack constants, corrected shell route receipts, h_Γ_bg_bound helper routing, dependency names, and exact arithmetic adapters only"
     F : String
     FIsCanonical :
       F ≡
-      "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 27/2<=22, 252<=640, 22<=44, 44<=48, h_Γ_bg_bound helper routing, and 7/57/64 Coord4 triple rows are recorded"
+      "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 27/2<=22, 252<=640, 22<=44, 44<=48, bracket_le=2*r_max, selected r_max=4M -> bracket_le=8, θ-shell/cot-bound, 13 nonzero / 51 zero symmetric slots, conservative product budget remains below 640, h_Γ_bg_bound helper routing, and 64 Coord4 triple rows are recorded"
 
 open GROrderedRationalFiniteSlotBoundCoreORCSLPGF public
 
@@ -1074,9 +1077,9 @@ canonicalGROrderedRationalFiniteSlotBoundCoreORCSLPGF =
   groOrderedRationalFiniteSlotBoundCoreORCSLPGF
   "ordered-rational"
   refl
-  "future Christoffel/Ricci proof-shape reuse with adapter rows"
+  "future Christoffel/Ricci proof-shape reuse with adapter rows and corrected shell route receipts"
   refl
-  "canonical scalar lemma names plus reusable dependency rows, corrected arithmetic chains, and exact arithmetic adapters"
+  "canonical scalar lemma names plus reusable dependency rows, corrected shell route receipts, corrected arithmetic chains, and exact arithmetic adapters"
   refl
   "fail-closed"
   refl
@@ -1084,9 +1087,9 @@ canonicalGROrderedRationalFiniteSlotBoundCoreORCSLPGF =
   refl
   "promotions remain blocked"
   refl
-  "record the reusable bound shapes, scale/slack constants, h_Γ_bg_bound helper routing, dependency names, and exact arithmetic adapters only"
+  "record the reusable bound shapes, scale/slack constants, corrected shell route receipts, h_Γ_bg_bound helper routing, dependency names, and exact arithmetic adapters only"
   refl
-  "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 27/2<=22, 252<=640, 22<=44, 44<=48, h_Γ_bg_bound helper routing, and 7/57/64 Coord4 triple rows are recorded"
+  "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 27/2<=22, 252<=640, 22<=44, 44<=48, bracket_le=2*r_max, selected r_max=4M -> bracket_le=8, θ-shell/cot-bound, 13 nonzero / 51 zero symmetric slots, conservative product budget remains below 640, h_Γ_bg_bound helper routing, and 64 Coord4 triple rows are recorded"
   refl
 
 record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
@@ -1423,7 +1426,7 @@ record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
       ≡
       ("full ordered-rational proofs are intentionally absent until the surrounding Christoffel and Ricci inhabitants are stable"
         ∷ "the file only records reusable scalar lemma names, dependency names, and finite slot shapes"
-        ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 27/2<=22, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 352<=640, and h_Γ_bg_bound routing"
+        ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 27/2<=22, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 352<=640, bracket_le=2*r_max, selected r_max=4M -> bracket_le=8, θ-shell/cot-bound, 13 nonzero / 51 zero symmetric slots, conservative product budget remains below 640, and h_Γ_bg_bound routing"
         ∷ "no fragile proof terms are duplicated here"
         ∷ [])
 
@@ -1537,7 +1540,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreReceipt =
     coord4SixtyFourTriplesLawName
     ("full ordered-rational proofs are intentionally absent until the surrounding Christoffel and Ricci inhabitants are stable"
       ∷ "the file only records reusable scalar lemma names, dependency names, and finite slot shapes"
-      ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 27/2<=22, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 352<=640, and h_Γ_bg_bound routing"
+      ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 27/2<=22, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 352<=640, bracket_le=2*r_max, selected r_max=4M -> bracket_le=8, θ-shell/cot-bound, 13 nonzero / 51 zero symmetric slots, conservative product budget remains below 640, and h_Γ_bg_bound routing"
       ∷ "no fragile proof terms are duplicated here"
       ∷ [])
     refl
