@@ -441,6 +441,15 @@ data SchwarzschildChristoffelSlot : Set where
   gammaPhiRPhi :
     SchwarzschildChristoffelSlot
 
+  gammaThetaPhiPhi :
+    SchwarzschildChristoffelSlot
+
+  gammaPhiThetaPhi :
+    SchwarzschildChristoffelSlot
+
+  gammaPhiPhiTheta :
+    SchwarzschildChristoffelSlot
+
 record SchwarzschildChristoffelSlotFormula : Set where
   constructor schwarzschildChristoffelSlotFormula
   field
@@ -510,13 +519,13 @@ coord4ZeroSlotCount57 :
   Nat
 coord4ZeroSlotCount57 = 57
 
-coord4SymmetricNonzeroSlotCount10 :
+coord4SymmetricNonzeroSlotCount13 :
   Nat
-coord4SymmetricNonzeroSlotCount10 = 10
+coord4SymmetricNonzeroSlotCount13 = 13
 
-coord4SymmetricZeroSlotCount54 :
+coord4SymmetricZeroSlotCount51 :
   Nat
-coord4SymmetricZeroSlotCount54 = 54
+coord4SymmetricZeroSlotCount51 = 51
 
 data SchwarzschildSlotOccupancy : Set where
   diagonalSlot :
@@ -566,8 +575,11 @@ schwarzschildSlotOccupancyWithLowerSymmetry (coord4Slot upper lower1 lower2) wit
 ... | coord1 | coord3 | coord3 = diagonalSlot gammaRPhiPhi
 ... | coord2 | coord1 | coord2 = diagonalSlot gammaThetaRTheta
 ... | coord2 | coord2 | coord1 = diagonalSlot gammaThetaRTheta
+... | coord2 | coord3 | coord3 = diagonalSlot gammaThetaPhiPhi
 ... | coord3 | coord1 | coord3 = diagonalSlot gammaPhiRPhi
 ... | coord3 | coord3 | coord1 = diagonalSlot gammaPhiRPhi
+... | coord3 | coord2 | coord3 = diagonalSlot gammaPhiThetaPhi
+... | coord3 | coord3 | coord2 = diagonalSlot gammaPhiPhiTheta
 ... | _ | _ | _ = zeroSlot
 
 schwarzschildChristoffelSlotClassificationRowFromSlot :
@@ -587,8 +599,8 @@ schwarzschildChristoffelSlotClassificationRows =
     schwarzschildAllSlots
 
 -- Symmetric-lower projection classifies both lower-index permutations for
--- diagonal Christoffel symmetry.  This yields the 10 symmetric nonzero triples
--- and the corresponding 54 zero triples.
+-- diagonal Christoffel symmetry.  This yields the 13 corrected symmetric
+-- nonzero triples and the corresponding 51 zero triples.
 schwarzschildSymmetricSlotClassificationRowFromSlot :
   Coord4Slot →
   SchwarzschildChristoffelSlotClassificationRow
@@ -718,8 +730,8 @@ canonicalSchwarzschildChristoffelSlotClassificationSurface =
     coord4SlotCount64
     coord4NonzeroSlotCount7
     coord4ZeroSlotCount57
-    ( "64-slot classification ledger" ∷
-      "7 nonzero + 57 zero diagonal Schwarzschild Christoffel slots" ∷
+    ( "64-slot legacy radial classification ledger" ∷
+      "7 radial canonical classes; authoritative symmetric ledger is 13 nonzero + 51 zero" ∷
       [] )
     false
 
@@ -731,10 +743,10 @@ schwarzschildSymmetricSlotClassificationSurface =
     schwarzschildSymmetricNonzeroSlotClassificationRows
     schwarzschildSymmetricZeroSlotClassificationRows
     coord4SlotCount64
-    coord4SymmetricNonzeroSlotCount10
-    coord4SymmetricZeroSlotCount54
+    coord4SymmetricNonzeroSlotCount13
+    coord4SymmetricZeroSlotCount51
     ( "64-slot symmetric classification ledger" ∷
-      "10 nonzero + 54 zero symmetric diagonal Schwarzschild Christoffel slots" ∷
+      "13 nonzero + 51 zero symmetric diagonal Schwarzschild Christoffel slots" ∷
       [] )
     false
 
@@ -862,7 +874,7 @@ schwarzschildChristoffelSlotDecisionRowFromRow row =
     (schwarzschildChristoffelSlotDecisionToBool
       (schwarzschildChristoffelSlotDecisionFromOccupancy
         (SchwarzschildChristoffelSlotClassificationRow.occupancy row)))
-    ( "sevenSlotBooleanClassifier"
+    ( "slotBooleanClassifier"
       ∷ "checkedSlotDecisionRow"
       ∷ [] )
     false
@@ -960,11 +972,11 @@ schwarzschildSymmetricSlotCheckedSlotClassifierSurface =
   schwarzschildChristoffelCheckedSlotClassifierSurface
     schwarzschildSymmetricSlotDecisionRows
     coord4SlotCount64
-    coord4SymmetricNonzeroSlotCount10
-    coord4SymmetricZeroSlotCount54
+    coord4SymmetricNonzeroSlotCount13
+    coord4SymmetricZeroSlotCount51
     ( "symmetricSlotBooleanClassifier"
       ∷ "checkedSymmetricSlotBooleanClassifier"
-      ∷ "10true54falseClassifierReceipt"
+      ∷ "13true51falseClassifierReceipt"
       ∷ [] )
     false
 
@@ -974,10 +986,10 @@ schwarzschildSymmetricSlotCheckedSlotClassifierReceiptSurface =
   schwarzschildChristoffelCheckedSlotClassifierReceiptSurface
     schwarzschildSymmetricSlotDecisionRows
     coord4SlotCount64
-    coord4SymmetricNonzeroSlotCount10
-    coord4SymmetricZeroSlotCount54
+    coord4SymmetricNonzeroSlotCount13
+    coord4SymmetricZeroSlotCount51
     ( "checkedSymmetricSlotBooleanClassifierReceipt"
-      ∷ "10true54falseReceipt"
+      ∷ "13true51falseReceipt"
       ∷ [] )
     false
 
@@ -1012,7 +1024,7 @@ schwarzschildSymmetricDiagonalNonzeroSlotBoundary :
   List String
 schwarzschildSymmetricDiagonalNonzeroSlotBoundary =
   schwarzschildSymmetricDiagonalNonzeroSlotQuestionName ∷
-  "10 symmetric diagonal Christoffel slots and 54 zero slots across 64 triples"
+  "13 symmetric diagonal Christoffel slots and 51 zero slots across 64 triples"
   ∷ []
 
 schwarzschildDiagonalNonzeroSlotBoundary :
@@ -1073,16 +1085,16 @@ canonicalSchwarzschildDiagonalNonzeroSlotSurface =
 schwarzschildSymmetricNonzeroSlotNames :
   List String
 schwarzschildSymmetricNonzeroSlotNames =
-  "gamma001" ∷
-  "gamma010" ∷
-  "gamma100" ∷
-  "gamma111" ∷
-  "gamma122" ∷
-  "gamma133" ∷
-  "gamma212" ∷
-  "gamma221" ∷
-  "gamma313" ∷
-  "gamma331" ∷ []
+  "gammaTtr" ∷
+  "gammaRtt" ∷
+  "gammaRrr" ∷
+  "gammaRThetaTheta" ∷
+  "gammaRPhiPhi" ∷
+  "gammaThetaRTheta" ∷
+  "gammaThetaPhiPhi" ∷
+  "gammaPhiRPhi" ∷
+  "gammaPhiThetaPhi" ∷
+  "gammaPhiPhiTheta" ∷ []
 
 schwarzschildSymmetricDiagonalNonzeroSlotSurface :
   SchwarzschildDiagonalNonzeroSlotSurface
@@ -1092,8 +1104,8 @@ schwarzschildSymmetricDiagonalNonzeroSlotSurface =
     schwarzschildSymmetricSlotCheckedSlotClassifierSurface
     schwarzschildSymmetricSlotCheckedSlotClassifierReceiptSurface
     coord4SlotCount64
-    coord4SymmetricNonzeroSlotCount10
-    coord4SymmetricZeroSlotCount54
+    coord4SymmetricNonzeroSlotCount13
+    coord4SymmetricZeroSlotCount51
     schwarzschildSymmetricNonzeroSlotCoordinates
     schwarzschildSymmetricNonzeroSlotNames
     schwarzschildSymmetricNonzeroSlotClassificationRows
@@ -1160,10 +1172,10 @@ schwarzschildSymmetricDiagonalNonzeroSlotProjectionSurfaceFromSurface surface =
   schwarzschildDiagonalNonzeroSlotProjectionSurface
     surface
     (schwarzschildSymmetricDiagonalNonzeroSlotProjectionRowsFromSurface surface)
-    coord4SymmetricNonzeroSlotCount10
+    coord4SymmetricNonzeroSlotCount13
     ( "SymmetricDiagonalNonzeroSlotProjectionSurface" ∷
       "canonicalSchwarzschildSymmetricDiagonalNonzeroSlotSurface" ∷
-      "10 symmetric Schwarzschild nonzero slots" ∷ [] )
+      "13 symmetric Schwarzschild nonzero slots" ∷ [] )
     false
 
 canonicalSchwarzschildSymmetricDiagonalNonzeroSlotProjectionSurface :
@@ -1228,10 +1240,10 @@ schwarzschildSymmetricDiagonalNonzeroSlotCoverageSurfaceFromSurface surface =
   schwarzschildDiagonalNonzeroSlotCoverageSurface
     (schwarzschildSymmetricDiagonalNonzeroSlotProjectionSurfaceFromSurface surface)
     (schwarzschildSymmetricDiagonalNonzeroSlotCoverageRowsFromSurface surface)
-    coord4SymmetricNonzeroSlotCount10
+    coord4SymmetricNonzeroSlotCount13
     ( "SymmetricDiagonalNonzeroSlotCoverageSurface" ∷
       "checkedSymmetricDiagonalNonzeroSlotClassifier" ∷
-      "10-true checked Schwarzschild nonzero slots" ∷ [] )
+      "13-true checked Schwarzschild nonzero slots" ∷ [] )
     false
 
 canonicalSchwarzschildSymmetricDiagonalNonzeroSlotCoverageSurface :
@@ -1296,10 +1308,10 @@ schwarzschildSymmetricDiagonalNonzeroSlotReceiptSurfaceFromSurface surface =
   schwarzschildDiagonalNonzeroSlotReceiptSurface
     (schwarzschildSymmetricDiagonalNonzeroSlotCoverageSurfaceFromSurface surface)
     (schwarzschildSymmetricDiagonalNonzeroSlotReceiptRowsFromSurface surface)
-    coord4SymmetricNonzeroSlotCount10
+    coord4SymmetricNonzeroSlotCount13
     ( "SymmetricDiagonalNonzeroSlotReceiptSurface" ∷
       "receiptSymmetricDiagonalNonzeroSlotClassifier" ∷
-      "checkedSurfaceReceiptForTenSymmetricSchwarzschildSlots" ∷ [] )
+      "checkedSurfaceReceiptForThirteenSymmetricSchwarzschildSlots" ∷ [] )
     false
 
 canonicalSchwarzschildSymmetricDiagonalNonzeroSlotReceiptSurface :
@@ -1484,6 +1496,48 @@ schwarzschildGammaPhiRPhiFormula value =
     schwarzschildGammaPhiRPhiCoordinates
     value
 
+schwarzschildGammaThetaPhiPhiCoordinates :
+  Coord4Slot
+schwarzschildGammaThetaPhiPhiCoordinates =
+  schwarzschildSlot thetaCoord phiCoord phiCoord
+
+schwarzschildGammaPhiThetaPhiCoordinates :
+  Coord4Slot
+schwarzschildGammaPhiThetaPhiCoordinates =
+  schwarzschildSlot phiCoord thetaCoord phiCoord
+
+schwarzschildGammaPhiPhiThetaCoordinates :
+  Coord4Slot
+schwarzschildGammaPhiPhiThetaCoordinates =
+  schwarzschildSlot phiCoord phiCoord thetaCoord
+
+schwarzschildGammaThetaPhiPhiFormula :
+  ℚ →
+  SchwarzschildChristoffelSlotFormula
+schwarzschildGammaThetaPhiPhiFormula value =
+  schwarzschildChristoffelSlotFormula
+    gammaThetaPhiPhi
+    schwarzschildGammaThetaPhiPhiCoordinates
+    value
+
+schwarzschildGammaPhiThetaPhiFormula :
+  ℚ →
+  SchwarzschildChristoffelSlotFormula
+schwarzschildGammaPhiThetaPhiFormula value =
+  schwarzschildChristoffelSlotFormula
+    gammaPhiThetaPhi
+    schwarzschildGammaPhiThetaPhiCoordinates
+    value
+
+schwarzschildGammaPhiPhiThetaFormula :
+  ℚ →
+  SchwarzschildChristoffelSlotFormula
+schwarzschildGammaPhiPhiThetaFormula value =
+  schwarzschildChristoffelSlotFormula
+    gammaPhiPhiTheta
+    schwarzschildGammaPhiPhiThetaCoordinates
+    value
+
 record SchwarzschildChristoffelSevenSlotPackage : Set where
   constructor schwarzschildChristoffelSevenSlotPackage
   field
@@ -1506,6 +1560,15 @@ record SchwarzschildChristoffelSevenSlotPackage : Set where
       SchwarzschildChristoffelSlotFormula
 
     slotPhiRPhi :
+      SchwarzschildChristoffelSlotFormula
+
+    slotThetaPhiPhi :
+      SchwarzschildChristoffelSlotFormula
+
+    slotPhiThetaPhi :
+      SchwarzschildChristoffelSlotFormula
+
+    slotPhiPhiTheta :
       SchwarzschildChristoffelSlotFormula
 
     packageBoundary :
@@ -1783,6 +1846,15 @@ record SchwarzschildChristoffelFormulaSurface : Set where
     phiRPhiFormula :
       SchwarzschildChristoffelSlotFormula
 
+    thetaPhiPhiFormula :
+      SchwarzschildChristoffelSlotFormula
+
+    phiThetaPhiFormula :
+      SchwarzschildChristoffelSlotFormula
+
+    phiPhiThetaFormula :
+      SchwarzschildChristoffelSlotFormula
+
     formulaBoundary :
       List String
 
@@ -1826,6 +1898,18 @@ schwarzschildChristoffelPhiRPhiToken :
   SchwarzschildChristoffelSlot
 schwarzschildChristoffelPhiRPhiToken = gammaPhiRPhi
 
+schwarzschildChristoffelThetaPhiPhiToken :
+  SchwarzschildChristoffelSlot
+schwarzschildChristoffelThetaPhiPhiToken = gammaThetaPhiPhi
+
+schwarzschildChristoffelPhiThetaPhiToken :
+  SchwarzschildChristoffelSlot
+schwarzschildChristoffelPhiThetaPhiToken = gammaPhiThetaPhi
+
+schwarzschildChristoffelPhiPhiThetaToken :
+  SchwarzschildChristoffelSlot
+schwarzschildChristoffelPhiPhiThetaToken = gammaPhiPhiTheta
+
 schwarzschildChristoffelFormulaSurfaceFromPackage :
   SchwarzschildChristoffelSevenSlotPackage →
   SchwarzschildChristoffelFormulaSurface
@@ -1838,9 +1922,14 @@ schwarzschildChristoffelFormulaSurfaceFromPackage package =
     (SchwarzschildChristoffelSevenSlotPackage.slotRPhiPhi package)
     (SchwarzschildChristoffelSevenSlotPackage.slotThetaRTheta package)
     (SchwarzschildChristoffelSevenSlotPackage.slotPhiRPhi package)
+    (SchwarzschildChristoffelSevenSlotPackage.slotThetaPhiPhi package)
+    (SchwarzschildChristoffelSevenSlotPackage.slotPhiThetaPhi package)
+    (SchwarzschildChristoffelSevenSlotPackage.slotPhiPhiTheta package)
     ( "slotTtr" ∷ "slotRtt" ∷ "slotRrr" ∷
       "slotRThetaTheta" ∷ "slotRPhiPhi" ∷
-      "slotThetaRTheta" ∷ "slotPhiRPhi" ∷ [])
+      "slotThetaRTheta" ∷ "slotPhiRPhi" ∷
+      "slotThetaPhiPhi" ∷ "slotPhiThetaPhi" ∷
+      "slotPhiPhiTheta" ∷ [])
 
 schwarzschildChristoffelFormulaPackageFromSurface :
   SchwarzschildChristoffelFormulaSurface →
@@ -1854,9 +1943,14 @@ schwarzschildChristoffelFormulaPackageFromSurface surface =
     (SchwarzschildChristoffelFormulaSurface.rPhiPhiFormula surface)
     (SchwarzschildChristoffelFormulaSurface.thetaRThetaFormula surface)
     (SchwarzschildChristoffelFormulaSurface.phiRPhiFormula surface)
+    (SchwarzschildChristoffelFormulaSurface.thetaPhiPhiFormula surface)
+    (SchwarzschildChristoffelFormulaSurface.phiThetaPhiFormula surface)
+    (SchwarzschildChristoffelFormulaSurface.phiPhiThetaFormula surface)
     ( "slotTtr" ∷ "slotRtt" ∷ "slotRrr" ∷
       "slotRThetaTheta" ∷ "slotRPhiPhi" ∷
-      "slotThetaRTheta" ∷ "slotPhiRPhi" ∷ [])
+      "slotThetaRTheta" ∷ "slotPhiRPhi" ∷
+      "slotThetaPhiPhi" ∷ "slotPhiThetaPhi" ∷
+      "slotPhiPhiTheta" ∷ [])
 
 ------------------------------------------------------------------------
 -- Boolean ledger and receipt surfaces for the seven canonical nonzero slots.
@@ -1940,6 +2034,30 @@ schwarzschildChristoffelSevenSlotLedgerRowFromSlot gammaPhiRPhi =
     schwarzschildGammaPhiRPhiCoordinates
     true
     ( "sevenSlotBooleanLedgerRow" ∷ "gammaPhiRPhi" ∷ [] )
+    false
+schwarzschildChristoffelSevenSlotLedgerRowFromSlot gammaThetaPhiPhi =
+  schwarzschildChristoffelSevenSlotLedgerRow
+    "gammaThetaPhiPhiLedgerRow"
+    gammaThetaPhiPhi
+    schwarzschildGammaThetaPhiPhiCoordinates
+    true
+    ( "sevenSlotBooleanLedgerRow" ∷ "gammaThetaPhiPhi" ∷ [] )
+    false
+schwarzschildChristoffelSevenSlotLedgerRowFromSlot gammaPhiThetaPhi =
+  schwarzschildChristoffelSevenSlotLedgerRow
+    "gammaPhiThetaPhiLedgerRow"
+    gammaPhiThetaPhi
+    schwarzschildGammaPhiThetaPhiCoordinates
+    true
+    ( "sevenSlotBooleanLedgerRow" ∷ "gammaPhiThetaPhi" ∷ [] )
+    false
+schwarzschildChristoffelSevenSlotLedgerRowFromSlot gammaPhiPhiTheta =
+  schwarzschildChristoffelSevenSlotLedgerRow
+    "gammaPhiPhiThetaLedgerRow"
+    gammaPhiPhiTheta
+    schwarzschildGammaPhiPhiThetaCoordinates
+    true
+    ( "sevenSlotBooleanLedgerRow" ∷ "gammaPhiPhiTheta" ∷ [] )
     false
 
 schwarzschildChristoffelSevenSlotLedgerRows :
@@ -2272,6 +2390,9 @@ schwarzschildChristoffelSlotRowName gammaRThetaTheta = "gammaRThetaTheta"
 schwarzschildChristoffelSlotRowName gammaRPhiPhi = "gammaRPhiPhi"
 schwarzschildChristoffelSlotRowName gammaThetaRTheta = "gammaThetaRTheta"
 schwarzschildChristoffelSlotRowName gammaPhiRPhi = "gammaPhiRPhi"
+schwarzschildChristoffelSlotRowName gammaThetaPhiPhi = "gammaThetaPhiPhi"
+schwarzschildChristoffelSlotRowName gammaPhiThetaPhi = "gammaPhiThetaPhi"
+schwarzschildChristoffelSlotRowName gammaPhiPhiTheta = "gammaPhiPhiTheta"
 
 schwarzschildFormulaLawFromChristoffelSlot :
   SchwarzschildChristoffelSlot →
@@ -2283,6 +2404,9 @@ schwarzschildFormulaLawFromChristoffelSlot gammaRThetaTheta = sevenSlotNonzeroRe
 schwarzschildFormulaLawFromChristoffelSlot gammaRPhiPhi = sevenSlotNonzeroReduction
 schwarzschildFormulaLawFromChristoffelSlot gammaThetaRTheta = sevenSlotNonzeroReduction
 schwarzschildFormulaLawFromChristoffelSlot gammaPhiRPhi = sevenSlotNonzeroReduction
+schwarzschildFormulaLawFromChristoffelSlot gammaThetaPhiPhi = sevenSlotNonzeroReduction
+schwarzschildFormulaLawFromChristoffelSlot gammaPhiThetaPhi = sevenSlotNonzeroReduction
+schwarzschildFormulaLawFromChristoffelSlot gammaPhiPhiTheta = sevenSlotNonzeroReduction
 
 schwarzschildFormulaSlotValueFromSurface :
   SchwarzschildChristoffelFormulaSurface →
@@ -2302,6 +2426,12 @@ schwarzschildFormulaSlotValueFromSurface surface gammaThetaRTheta =
   SchwarzschildChristoffelFormulaSurface.thetaRThetaFormula surface
 schwarzschildFormulaSlotValueFromSurface surface gammaPhiRPhi =
   SchwarzschildChristoffelFormulaSurface.phiRPhiFormula surface
+schwarzschildFormulaSlotValueFromSurface surface gammaThetaPhiPhi =
+  SchwarzschildChristoffelFormulaSurface.thetaPhiPhiFormula surface
+schwarzschildFormulaSlotValueFromSurface surface gammaPhiThetaPhi =
+  SchwarzschildChristoffelFormulaSurface.phiThetaPhiFormula surface
+schwarzschildFormulaSlotValueFromSurface surface gammaPhiPhiTheta =
+  SchwarzschildChristoffelFormulaSurface.phiPhiThetaFormula surface
 
 record SchwarzschildChristoffelFormulaLawProjectionRow : Set where
   constructor schwarzschildChristoffelFormulaLawProjectionRow
@@ -2841,12 +2971,12 @@ schwarzschildChristoffelZeroSlotClosureNames =
   "zeroGamma203" ∷ "zeroGamma210" ∷ "zeroGamma211" ∷
   "zeroGamma213" ∷ "zeroGamma220" ∷ "zeroGamma221" ∷
   "zeroGamma222" ∷ "zeroGamma223" ∷ "zeroGamma230" ∷
-  "zeroGamma231" ∷ "zeroGamma232" ∷ "zeroGamma233" ∷
+  "zeroGamma231" ∷ "zeroGamma232" ∷
   "zeroGamma300" ∷ "zeroGamma301" ∷ "zeroGamma302" ∷
   "zeroGamma303" ∷ "zeroGamma310" ∷ "zeroGamma311" ∷
   "zeroGamma312" ∷ "zeroGamma320" ∷ "zeroGamma321" ∷
-  "zeroGamma322" ∷ "zeroGamma323" ∷ "zeroGamma330" ∷
-  "zeroGamma331" ∷ "zeroGamma332" ∷ "zeroGamma333" ∷ []
+  "zeroGamma322" ∷ "zeroGamma330" ∷
+  "zeroGamma331" ∷ "zeroGamma333" ∷ []
 
 schwarzschildChristoffelZeroSlotClosureSurface :
   SchwarzschildChristoffelZeroSlotClosureSurface
@@ -2874,20 +3004,20 @@ schwarzschildChristoffelSymmetricZeroSlotClosureNames =
   "zeroGamma203" ∷ "zeroGamma210" ∷ "zeroGamma211" ∷
   "zeroGamma213" ∷ "zeroGamma220" ∷ "zeroGamma222" ∷
   "zeroGamma223" ∷ "zeroGamma230" ∷ "zeroGamma231" ∷
-  "zeroGamma232" ∷ "zeroGamma233" ∷
+  "zeroGamma232" ∷
   "zeroGamma300" ∷ "zeroGamma301" ∷ "zeroGamma302" ∷
   "zeroGamma303" ∷ "zeroGamma310" ∷ "zeroGamma311" ∷
   "zeroGamma312" ∷ "zeroGamma320" ∷ "zeroGamma321" ∷
-  "zeroGamma322" ∷ "zeroGamma323" ∷ "zeroGamma330" ∷
-  "zeroGamma332" ∷ "zeroGamma333" ∷ []
+  "zeroGamma322" ∷ "zeroGamma330" ∷
+  "zeroGamma333" ∷ []
 
 schwarzschildChristoffelSymmetricZeroSlotClosureSurface :
   SchwarzschildChristoffelZeroSlotClosureSurface
 schwarzschildChristoffelSymmetricZeroSlotClosureSurface =
   schwarzschildChristoffelZeroSlotClosureSurfaceRecord
     schwarzschildChristoffelSymmetricZeroSlotClosureNames
-    ( "zeroSlot54Closure" ∷
-      "complementOfTenSymmetricNamedRows" ∷
+    ( "zeroSlot51Closure" ∷
+      "complementOfThirteenSymmetricNamedRows" ∷
       [] )
     false
 
@@ -2903,14 +3033,14 @@ record SchwarzschildSymmetricZeroSlotCoverageReceiptSurface : Set where
     symmetricLedgerNonzeroCount :
       Nat
 
-    symmetricLedgerNonzeroCountIsTen :
-      symmetricLedgerNonzeroCount ≡ coord4SymmetricNonzeroSlotCount10
+    symmetricLedgerNonzeroCountIsThirteen :
+      symmetricLedgerNonzeroCount ≡ coord4SymmetricNonzeroSlotCount13
 
     symmetricLedgerZeroCount :
       Nat
 
-    symmetricLedgerZeroCountIsFiftyFour :
-      symmetricLedgerZeroCount ≡ coord4SymmetricZeroSlotCount54
+    symmetricLedgerZeroCountIsFiftyOne :
+      symmetricLedgerZeroCount ≡ coord4SymmetricZeroSlotCount51
 
     zeroCoverageBoundary :
       List String
@@ -2924,11 +3054,11 @@ canonicalSchwarzschildSymmetricZeroSlotCoverageReceiptSurface =
   schwarzschildSymmetricZeroSlotCoverageReceiptSurface
     schwarzschildSymmetricSlotClassificationRows
     schwarzschildSymmetricZeroSlotClassificationRows
-    coord4SymmetricNonzeroSlotCount10
+    coord4SymmetricNonzeroSlotCount13
     refl
-    coord4SymmetricZeroSlotCount54
+    coord4SymmetricZeroSlotCount51
     refl
-    ( "symmetric10/54LedgerSource" ∷
+    ( "symmetric13/51LedgerSource" ∷
       "zeroSlotCoverageFromSymmetricLedger" ∷ [] )
     false
 

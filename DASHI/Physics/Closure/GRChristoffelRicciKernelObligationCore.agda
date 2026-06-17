@@ -62,6 +62,9 @@ canonicalSchwarzschildChristoffelFormula =
     (Coord4.schwarzschildGammaRPhiPhiFormula zeroℚ)
     (Coord4.schwarzschildGammaThetaRThetaFormula zeroℚ)
     (Coord4.schwarzschildGammaPhiRPhiFormula zeroℚ)
+    (Coord4.schwarzschildGammaThetaPhiPhiFormula zeroℚ)
+    (Coord4.schwarzschildGammaPhiThetaPhiFormula zeroℚ)
+    (Coord4.schwarzschildGammaPhiPhiThetaFormula zeroℚ)
     []
 
 canonicalSchwarzschildDiagonalFormulaCarrier :
@@ -257,7 +260,7 @@ canonicalRicciDerivativeTermBound44ProjectionName =
 
 canonicalRicciProductTermBoundDependencyName : String
 canonicalRicciProductTermBoundDependencyName =
-  "h_dΓ=11/2; C_shell=8; not global Γ<=1"
+  "h_dΓ=11/2; θ-shell/cot-bound; C_shell=8 (shell-bound, not global Γ<=1); bracket_le=2*r_max; selected r_max=4M; bracket_le=8"
 
 canonicalRicciProductTermBoundProjectionName : String
 canonicalRicciProductTermBoundProjectionName =
@@ -297,11 +300,11 @@ canonicalRicciNonzeroSlotPruningDependencyName =
 
 canonicalRicciFiniteSlotCountDependencyName : String
 canonicalRicciFiniteSlotCountDependencyName =
-  "finite 8-slot count"
+  "angular-slot ledger 13/51; conservative budget note"
 
 canonicalRicciFiniteSlotCountProjectionName : String
 canonicalRicciFiniteSlotCountProjectionName =
-  "finite 8-slot count"
+  "angular-slot ledger 13/51; conservative budget note"
 
 canonicalRicciAbsorptionDependencyName : String
 canonicalRicciAbsorptionDependencyName =
@@ -347,7 +350,7 @@ canonicalConnectionErrorBoundExtractionBounds =
   ∷ "derivative terms"
   ∷ "productTermBound_44"
   ∷ "product terms"
-  ∷ "finite 8-slot count"
+  ∷ "angular-slot ledger 13/51; conservative budget note"
   ∷ "h_dΓ routing"
   ∷ "h_Γ routing"
   ∷ "h_Γ_bg_bound routing"
@@ -367,17 +370,17 @@ canonicalConnectionErrorBoundExtractionDependencyRows =
   ∷ "dependency: ricciPalatiniExpansion"
   ∷ "dependency: connectionErrorBoundExtractionPalatiniExpansionSixTermDependencyName = δRicci_eq_sum_6"
   ∷ "dependency: connectionErrorBoundExtractionDerivativeTermBoundDependencyName = h_∂δΓ_per_slot<=11ε"
-  ∷ "dependency: connectionErrorBoundExtractionProductTermBoundDependencyName = h_dΓ=11/2; C_shell=8; not global Γ<=1"
+  ∷ "dependency: connectionErrorBoundExtractionProductTermBoundDependencyName = h_dΓ=11/2; θ-shell/cot-bound; C_shell=8 (shell-bound, not global Γ<=1); bracket_le=2*r_max; selected r_max=4M; bracket_le=8"
   ∷ "dependency: connectionErrorBoundExtractionConservativeDerivativeTermBoundDependencyName = derivTermBound_44"
   ∷ "dependency: connectionErrorBoundExtractionConservativeProductTermBoundDependencyName = productTermBound_44"
   ∷ "dependency: connectionErrorBoundExtractionHGammaBgBoundDependencyName = h_Γ_bg_bound"
   ∷ "dependency: connectionErrorBoundExtractionFiniteTermCountDependencyName = allTermsLE44"
-  ∷ "dependency: connectionErrorBoundExtractionFiniteSlotCountDependencyName = finite 8-slot count"
+  ∷ "dependency: connectionErrorBoundExtractionFiniteSlotCountDependencyName = angular-slot ledger 13/51; conservative budget note"
   ∷ "dependency: connectionErrorBoundExtractionNonzeroSlotPruningDependencyName = Schwarzschild nonzero-slot pruning"
   ∷ "dependency: allTermsLE44"
   ∷ "dependency: derivative terms"
   ∷ "dependency: product terms"
-  ∷ "dependency: finite 8-slot count = 8"
+  ∷ "dependency: angular-slot ledger 13/51; conservative budget note"
   ∷ "dependency: h_dΓ routing"
   ∷ "dependency: h_Γ routing"
   ∷ "dependency: 176 ε <= 352 ε absorption"
@@ -408,14 +411,14 @@ canonicalConnectionErrorBoundExtractionProjectionRows =
   ∷ "projection: connectionErrorBoundExtractionPalatiniExpansionSixTermDependencyName = δRicci_eq_sum_6"
   ∷ "projection: connectionErrorBoundExtractionPalatiniExpansionSixTermProjectionName = ricciPalatiniExpansion as six-term triangle"
   ∷ "projection: connectionErrorBoundExtractionFiniteTermCountDependencyName = allTermsLE44"
-  ∷ "projection: connectionErrorBoundExtractionFiniteSlotCountProjectionName = finite 8-slot count"
+  ∷ "projection: connectionErrorBoundExtractionFiniteSlotCountProjectionName = angular-slot ledger 13/51; conservative budget note"
   ∷ "projection: connectionErrorBoundExtractionNonzeroSlotPruningDependencyName = Schwarzschild nonzero-slot pruning"
   ∷ "projection: |∂δΓ| <= 11 ε"
   ∷ "projection: |δ(ΓΓ)| <= 44 ε"
   ∷ "projection: connectionErrorBoundExtractionConservativeDerivativeTermBoundProjectionName = |∂δΓ| <= 11 ε"
   ∷ "projection: connectionErrorBoundExtractionConservativeProductTermBoundProjectionName = |δ(ΓΓ)| <= 44 ε"
   ∷ "projection: connectionErrorBoundExtractionHGammaBgBoundProjectionName = h_Γ_bg_bound"
-  ∷ "projection: finite 8-slot count = 8"
+  ∷ "projection: angular-slot ledger 13/51; conservative budget note"
   ∷ "projection: h_dΓ routing"
   ∷ "projection: h_Γ routing"
   ∷ "projection: h_Γ_bg_bound routing"
@@ -431,7 +434,7 @@ canonicalConnectionErrorBoundExtractionProjectionRows =
   ∷ "projection: connectionErrorBoundExtractionConservative640EpsilonExtractionDependencyName = conservative 640 ε extraction"
   ∷ "projection: connectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
   ∷ "projection: connectionErrorBoundExtractionHypotheses = h_dΓ, h_Γ, h_pgi, h_p2g, h_pg"
-  ∷ "projection: connectionErrorBoundExtractionBounds = ricciPalatiniExpansion; δRicci_eq_sum_6; derivTermBound_44; h_∂δΓ_per_slot<=11ε; allTermsLE44; derivative terms; productTermBound_44; h_dΓ=11/2; C_shell=8; not global Γ<=1; finite 8-slot count; h_dΓ routing; h_Γ routing; h_Γ_bg_bound routing; 176 ε <= 352 ε absorption; Schwarzschild nonzero-slot pruning; 176 ε <= 352 ε <= 640 ε; |∂δΓ| <= 11 ε; |δ(ΓΓ)| <= 44 ε; 352 ε <= 640 ε; conservative 640 ε extraction"
+  ∷ "projection: connectionErrorBoundExtractionBounds = ricciPalatiniExpansion; δRicci_eq_sum_6; derivTermBound_44; h_∂δΓ_per_slot<=11ε; allTermsLE44; derivative terms; productTermBound_44; h_dΓ=11/2; θ-shell/cot-bound; C_shell=8 (shell-bound, not global Γ<=1); bracket_le=2*r_max; selected r_max=4M; bracket_le=8; angular-slot ledger 13/51; conservative budget note; h_dΓ routing; h_Γ routing; h_Γ_bg_bound routing; 176 ε <= 352 ε absorption; Schwarzschild nonzero-slot pruning; 176 ε <= 352 ε <= 640 ε; |∂δΓ| <= 11 ε; |δ(ΓΓ)| <= 44 ε; 352 ε <= 640 ε; conservative 640 ε extraction"
   ∷ "projection route text: 176 ε <= 352 ε <= 640 ε"
   ∷ "projection route text: 352 ε <= 640 ε"
   ∷ "projection: connectionErrorBoundExtractionPromoted = false"
@@ -571,8 +574,8 @@ canonicalSymbolicKernelConstructorHandoffDependencyRows =
   ∷ "dependency: allTermsLE44"
   ∷ "dependency: derivative terms"
   ∷ "dependency: product terms"
-  ∷ "dependency: finite 8-slot count = 8"
-  ∷ "dependency: connectionErrorBoundExtractionFiniteSlotCountDependencyName = finite 8-slot count"
+  ∷ "dependency: angular-slot ledger 13/51; conservative budget note"
+  ∷ "dependency: connectionErrorBoundExtractionFiniteSlotCountDependencyName = angular-slot ledger 13/51; conservative budget note"
   ∷ "dependency: h_dΓ routing"
   ∷ "dependency: h_Γ routing"
   ∷ "dependency: h_Γ_bg_bound routing"
@@ -609,9 +612,9 @@ canonicalSymbolicKernelConstructorHandoffProjectionRows =
   ∷ "projection: canonicalPerturbationPGIHypothesis = h_pgi"
   ∷ "projection: canonicalConnectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
   ∷ "projection: canonicalConnectionErrorBoundExtractionHypotheses = h_dΓ, h_Γ, h_pgi, h_p2g, h_pg"
-  ∷ "projection: connectionErrorBoundExtractionFiniteSlotCountProjectionName = finite 8-slot count"
+  ∷ "projection: connectionErrorBoundExtractionFiniteSlotCountProjectionName = angular-slot ledger 13/51; conservative budget note"
   ∷ "projection: connectionErrorBoundExtractionAbsorptionProjectionName = 176 ε <= 352 ε absorption"
-  ∷ "projection: canonicalConnectionErrorBoundExtractionBounds = ricciPalatiniExpansion; δRicci_eq_sum_6; derivTermBound_44; h_∂δΓ_per_slot<=11ε; allTermsLE44; derivative terms; productTermBound_44; h_dΓ=11/2; C_shell=8; not global Γ<=1; finite 8-slot count; h_dΓ routing; h_Γ routing; h_Γ_bg_bound routing; 176 ε <= 352 ε absorption; Schwarzschild nonzero-slot pruning; 176 ε <= 352 ε <= 640 ε; |∂δΓ| <= 11 ε; |δ(ΓΓ)| <= 44 ε; 352 ε <= 640 ε; conservative 640 ε extraction"
+  ∷ "projection: canonicalConnectionErrorBoundExtractionBounds = ricciPalatiniExpansion; δRicci_eq_sum_6; derivTermBound_44; h_∂δΓ_per_slot<=11ε; allTermsLE44; derivative terms; productTermBound_44; h_dΓ=11/2; θ-shell/cot-bound; C_shell=8 (shell-bound, not global Γ<=1); bracket_le=2*r_max; selected r_max=4M; bracket_le=8; angular-slot ledger 13/51; conservative budget note; h_dΓ routing; h_Γ routing; h_Γ_bg_bound routing; 176 ε <= 352 ε absorption; Schwarzschild nonzero-slot pruning; 176 ε <= 352 ε <= 640 ε; |∂δΓ| <= 11 ε; |δ(ΓΓ)| <= 44 ε; 352 ε <= 640 ε; conservative 640 ε extraction"
   ∷ "projection route text: 176 ε <= 352 ε <= 640 ε"
   ∷ "projection route text: 352 ε <= 640 ε"
   ∷ "projection: canonicalConnectionErrorBoundExtractionPromoted = false"
@@ -630,14 +633,14 @@ record GRChristoffelRicciKernelObligationCoreORCSLPGF : Set where
     S : String
     SIsCanonical : S ≡ "fail-closed"
     L : String
-    LIsCanonical : L ≡ "obligation token rows, connection-error extraction rows, finite 8-slot count, h_dΓ/h_Γ routing, 176 ε <= 352 ε absorption, h_Γ_bg_bound routing, and blockers"
+    LIsCanonical : L ≡ "obligation token rows, connection-error extraction rows, angular-slot ledger 13/51, h_dΓ/h_Γ routing, 176 ε <= 352 ε absorption, h_Γ_bg_bound routing, and blockers"
     P : String
     PIsCanonical : P ≡ "all promotions are blocked"
     G : String
     GIsCanonical : G ≡ "geometric surface+symbolic-kernel constructor+connection-error extraction shape"
     F : String
     FIsCanonical : F ≡
-      "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, six-term expansion route δRicci_eq_sum_6, corrected derivative/product receipts (derivTermBound_44 via h_∂δΓ_per_slot<=11ε; productTermBound_44 via h_dΓ=11/2 and C_shell=8, not global Γ<=1), finite term-count and finite 8-slot count, h_dΓ/h_Γ/h_Γ_bg_bound routing, 176 ε <= 352 ε absorption, 176 ε <= 352 ε <= 640 ε, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
+      "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, six-term expansion route δRicci_eq_sum_6, corrected derivative/product receipts (derivTermBound_44 via h_∂δΓ_per_slot<=11ε; productTermBound_44 via h_dΓ=11/2, θ-shell/cot-bound, C_shell=8 as shell-bound not global Γ<=1, and bracket_le=2*r_max with selected r_max=4M for bracket_le=8), finite term-count and angular-slot ledger 13/51 with conservative budget notes, h_dΓ/h_Γ/h_Γ_bg_bound routing, 176 ε <= 352 ε absorption, 176 ε <= 352 ε <= 640 ε, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
 
 open GRChristoffelRicciKernelObligationCoreORCSLPGF public
 
@@ -653,13 +656,13 @@ canonicalGRChristoffelRicciKernelObligationCoreORCSLPGF =
     refl
     "fail-closed"
     refl
-    "obligation token rows, connection-error extraction rows, finite 8-slot count, h_dΓ/h_Γ routing, 176 ε <= 352 ε absorption, h_Γ_bg_bound routing, and blockers"
+    "obligation token rows, connection-error extraction rows, angular-slot ledger 13/51, h_dΓ/h_Γ routing, 176 ε <= 352 ε absorption, h_Γ_bg_bound routing, and blockers"
     refl
     "all promotions are blocked"
     refl
     "geometric surface+symbolic-kernel constructor+connection-error extraction shape"
     refl
-    "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, six-term expansion route δRicci_eq_sum_6, corrected derivative/product receipts (derivTermBound_44 via h_∂δΓ_per_slot<=11ε; productTermBound_44 via h_dΓ=11/2 and C_shell=8, not global Γ<=1), finite term-count and finite 8-slot count, h_dΓ/h_Γ/h_Γ_bg_bound routing, 176 ε <= 352 ε absorption, 176 ε <= 352 ε <= 640 ε, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
+    "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, six-term expansion route δRicci_eq_sum_6, corrected derivative/product receipts (derivTermBound_44 via h_∂δΓ_per_slot<=11ε; productTermBound_44 via h_dΓ=11/2, θ-shell/cot-bound, C_shell=8 as shell-bound not global Γ<=1, and bracket_le=2*r_max with selected r_max=4M for bracket_le=8), finite term-count and angular-slot ledger 13/51 with conservative budget notes, h_dΓ/h_Γ/h_Γ_bg_bound routing, 176 ε <= 352 ε absorption, 176 ε <= 352 ε <= 640 ε, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
     refl
 
 record GRChristoffelRicciKernelObligationCore : Setω where

@@ -255,7 +255,7 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelC0DiagonalZeroLemmaReceiptIsCanonical :
       christoffelC0DiagonalZeroLemmaReceipt
       ≡
-      "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+      "13 explicit nonzero triples / 51 zero triples (symmetric triples counted)"
 
     christoffelC0GammaChristoffelDiagonalName :
       String
@@ -277,13 +277,13 @@ record GRPerturbationBoundShapeCore : Setω where
       ℕ
 
     christoffelC0DiagonalZeroLemmaNonzeroTripleCountIs10 :
-      christoffelC0DiagonalZeroLemmaNonzeroTripleCount ≡ 10
+      christoffelC0DiagonalZeroLemmaNonzeroTripleCount ≡ 13
 
     christoffelC0DiagonalZeroLemmaZeroTripleCount :
       ℕ
 
     christoffelC0DiagonalZeroLemmaZeroTripleCountIs54 :
-      christoffelC0DiagonalZeroLemmaZeroTripleCount ≡ 54
+      christoffelC0DiagonalZeroLemmaZeroTripleCount ≡ 51
 
     christoffelC0DiagonalZeroLemmaSymmetricTripleCount :
       ℕ
@@ -329,7 +329,7 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelC0ShellABracketLe8RouteReceiptIsCanonical :
       christoffelC0ShellABracketLe8RouteReceipt
       ≡
-      "direct Shell A bracket_le=8"
+      "bracket_le=8 is valid only for r_max=4M (M=1 units), with bracket_le = 2*r_max; theta-shell/cot-bound required for the new angular slots"
 
     christoffelC0ShellAFallbackThreeTermRouteName :
       String
@@ -467,7 +467,7 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelFormulaC0StableZeroSlotLedgerReceiptIsCanonical :
       christoffelFormulaC0StableZeroSlotLedgerReceipt
       ≡
-      "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+      "13 explicit nonzero triples / 51 zero triples (symmetric triples counted)"
 
     christoffelFormulaC0StableZeroSlotDependencyName :
       String
@@ -603,7 +603,7 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelFormulaC0StableShellABracketLe8RouteReceiptIsCanonical :
       christoffelFormulaC0StableShellABracketLe8RouteReceipt
       ≡
-      "direct Shell A bracket_le=8"
+      "bracket_le=8 is valid only for r_max=4M (M=1 units), with bracket_le = 2*r_max; theta-shell/cot-bound required for the new angular slots"
 
     christoffelFormulaC0StableShellAFallbackThreeTermRouteName :
       String
@@ -706,7 +706,7 @@ record GRPerturbationBoundShapeCore : Setω where
       christoffelFormulaC0StableReceiptTable
       ≡
       "zero-slot dependency: diagonalZeroLemma"
-      ∷ "zero-slot receipt: 10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+      ∷ "zero-slot receipt: 13 explicit nonzero triples / 51 zero triples (symmetric triples counted)"
       ∷ "bilinear split dependency: christoffelBilinearSplit"
       ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
       ∷ "diagonalZeroLemma dependency chain: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
@@ -714,7 +714,7 @@ record GRPerturbationBoundShapeCore : Setω where
       ∷ "christoffelBilinearSplit telescoping identity: telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
       ∷ "11/2 feed to 22: 11/2<=33/2<=22<=48"
       ∷ "27/2 feed to 22 (3-term bracket): (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
-      ∷ "direct Shell A bracket_le=8 route: direct Shell A bracket_le=8"
+      ∷ "direct Shell A bracket_le=8 route: bracket_le=8 is valid only for r_max=4M (M=1 units), with bracket_le = 2*r_max; theta-shell/cot-bound required for the new angular slots"
       ∷ "fallback 3-term route: (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
       ∷ "conservative route: 33/2 <= 22 <= 48"
       ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
@@ -774,7 +774,7 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelFormulaC0StableTenNonzeroSlotsNameIsCanonical :
       christoffelFormulaC0StableTenNonzeroSlotsName
       ≡
-      "10 nonzero slots"
+      "13 nonzero slots"
 
     christoffelFormulaC0StableSymmetricTripleCountName :
       String
@@ -790,7 +790,7 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelFormulaC0StableTenNonzeroObligationIsCanonical :
       christoffelFormulaC0StableTenNonzeroObligation
       ≡
-      "10 nonzero"
+      "13 nonzero"
 
     christoffelFormulaC0StableFiftyFourZeroSlotsName :
       String
@@ -798,7 +798,7 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelFormulaC0StableFiftyFourZeroSlotsNameIsCanonical :
       christoffelFormulaC0StableFiftyFourZeroSlotsName
       ≡
-      "54 zero slots"
+      "51 zero slots"
 
     christoffelFormulaC0StableFiftyFourZeroObligation :
       String
@@ -806,19 +806,19 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelFormulaC0StableFiftyFourZeroObligationIsCanonical :
       christoffelFormulaC0StableFiftyFourZeroObligation
       ≡
-      "54 zero"
+      "51 zero"
 
     christoffelFormulaC0StableNonzeroSlotCount :
       ℕ
 
     christoffelFormulaC0StableNonzeroSlotCountIs10 :
-      christoffelFormulaC0StableNonzeroSlotCount ≡ 10
+      christoffelFormulaC0StableNonzeroSlotCount ≡ 13
 
     christoffelFormulaC0StableZeroSlotCount :
       ℕ
 
     christoffelFormulaC0StableZeroSlotCountIs54 :
-      christoffelFormulaC0StableZeroSlotCount ≡ 54
+      christoffelFormulaC0StableZeroSlotCount ≡ 51
 
     christoffelFormulaC0StableSymmetricTripleCount :
       ℕ
@@ -1132,7 +1132,7 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelC0ChristoffelBilinearSplitObligationIsCanonical =
         refl
     ; christoffelC0DiagonalZeroLemmaReceipt =
-        "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+        "13 explicit nonzero triples / 51 zero triples (symmetric triples counted)"
     ; christoffelC0DiagonalZeroLemmaReceiptIsCanonical =
         refl
     ; christoffelC0GammaChristoffelDiagonalName =
@@ -1144,11 +1144,11 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelC0GammaChristoffelDiagonalReceiptIsCanonical =
         refl
     ; christoffelC0DiagonalZeroLemmaNonzeroTripleCount =
-        10
+        13
     ; christoffelC0DiagonalZeroLemmaNonzeroTripleCountIs10 =
         refl
     ; christoffelC0DiagonalZeroLemmaZeroTripleCount =
-        54
+        51
     ; christoffelC0DiagonalZeroLemmaZeroTripleCountIs54 =
         refl
     ; christoffelC0DiagonalZeroLemmaSymmetricTripleCount =
@@ -1172,7 +1172,7 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelC0ShellABracketLe8RouteNameIsCanonical =
         refl
     ; christoffelC0ShellABracketLe8RouteReceipt =
-        "direct Shell A bracket_le=8"
+        "bracket_le=8 is valid only for r_max=4M (M=1 units), with bracket_le = 2*r_max; theta-shell/cot-bound required for the new angular slots"
     ; christoffelC0ShellABracketLe8RouteReceiptIsCanonical =
         refl
     ; christoffelC0ShellAFallbackThreeTermRouteName =
@@ -1238,11 +1238,11 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelFormulaC0StableZeroSlotLedgerDependencyNameIsCanonical =
         refl
     ; christoffelFormulaC0StableZeroSlotLedgerDependencyReceipt =
-        "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+        "13 explicit nonzero triples / 51 zero triples (symmetric triples counted)"
     ; christoffelFormulaC0StableZeroSlotLedgerDependencyReceiptIsCanonical =
         refl
     ; christoffelFormulaC0StableZeroSlotLedgerReceipt =
-        "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+        "13 explicit nonzero triples / 51 zero triples (symmetric triples counted)"
     ; christoffelFormulaC0StableZeroSlotLedgerReceiptIsCanonical =
         refl
     ; christoffelFormulaC0StableZeroSlotDependencyName =
@@ -1250,7 +1250,7 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelFormulaC0StableZeroSlotDependencyNameIsCanonical =
         refl
     ; christoffelFormulaC0StableZeroSlotDependencyReceipt =
-        "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+        "13 explicit nonzero triples / 51 zero triples (symmetric triples counted)"
     ; christoffelFormulaC0StableZeroSlotDependencyReceiptIsCanonical =
         refl
     ; christoffelFormulaC0StableBracketZeroOfNotNonzeroDependencyName =
@@ -1310,7 +1310,7 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelFormulaC0StableShellABracketLe8RouteNameIsCanonical =
         refl
     ; christoffelFormulaC0StableShellABracketLe8RouteReceipt =
-        "direct Shell A bracket_le=8"
+        "bracket_le=8 is valid only for r_max=4M (M=1 units), with bracket_le = 2*r_max; theta-shell/cot-bound required for the new angular slots"
     ; christoffelFormulaC0StableShellABracketLe8RouteReceiptIsCanonical =
         refl
     ; christoffelFormulaC0StableShellAFallbackThreeTermRouteName =
@@ -1367,7 +1367,7 @@ canonicalGRPerturbationBoundShapeCore =
         refl
     ; christoffelFormulaC0StableReceiptTable =
         "zero-slot dependency: diagonalZeroLemma"
-        ∷ "zero-slot receipt: 10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+        ∷ "zero-slot receipt: 13 explicit nonzero triples / 51 zero triples (symmetric triples counted)"
         ∷ "bilinear split dependency: christoffelBilinearSplit"
         ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
         ∷ "diagonalZeroLemma dependency chain: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
@@ -1375,7 +1375,7 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "christoffelBilinearSplit telescoping identity: telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
         ∷ "11/2 feed to 22: 11/2<=33/2<=22<=48"
         ∷ "27/2 feed to 22 (3-term bracket): (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
-        ∷ "direct Shell A bracket_le=8 route: direct Shell A bracket_le=8"
+        ∷ "direct Shell A bracket_le=8 route: bracket_le=8 is valid only for r_max=4M (M=1 units), with bracket_le = 2*r_max; theta-shell/cot-bound required for the new angular slots"
         ∷ "fallback 3-term route: (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
         ∷ "conservative route: 33/2 <= 22 <= 48"
         ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
@@ -1407,7 +1407,7 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelFormulaC0StableSafePerSlotBoundObligationIsCanonical =
         refl
     ; christoffelFormulaC0StableTenNonzeroSlotsName =
-        "10 nonzero slots"
+        "13 nonzero slots"
     ; christoffelFormulaC0StableTenNonzeroSlotsNameIsCanonical =
         refl
     ; christoffelFormulaC0StableSymmetricTripleCountName =
@@ -1415,23 +1415,23 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelFormulaC0StableSymmetricTripleCountNameIsCanonical =
         refl
     ; christoffelFormulaC0StableTenNonzeroObligation =
-        "10 nonzero"
+        "13 nonzero"
     ; christoffelFormulaC0StableTenNonzeroObligationIsCanonical =
         refl
     ; christoffelFormulaC0StableFiftyFourZeroSlotsName =
-        "54 zero slots"
+        "51 zero slots"
     ; christoffelFormulaC0StableFiftyFourZeroSlotsNameIsCanonical =
         refl
     ; christoffelFormulaC0StableFiftyFourZeroObligation =
-        "54 zero"
+        "51 zero"
     ; christoffelFormulaC0StableFiftyFourZeroObligationIsCanonical =
         refl
     ; christoffelFormulaC0StableNonzeroSlotCount =
-        10
+        13
     ; christoffelFormulaC0StableNonzeroSlotCountIs10 =
         refl
     ; christoffelFormulaC0StableZeroSlotCount =
-        54
+        51
     ; christoffelFormulaC0StableZeroSlotCountIs54 =
         refl
     ; christoffelFormulaC0StableSymmetricTripleCount =
@@ -1504,13 +1504,13 @@ canonicalGRPerturbationBoundShapeCore =
         "This module is carrier/receipt only and fail-closed."
         ∷ "Christoffel perturbation caveat: two-term split exposed at the linearization level; four-slot finite sum factor; no promotion of full ordered QQ estimate."
         ∷ "Per-slot algebraic control is recorded as 11/2 ε and the explicit next inequality 11/2 ε <= 48 ε."
-        ∷ "DiagonalZeroLemma and christoffelBilinearSplit are recorded with h_static && h_diag, 10 explicit nonzero triples, 54 zero triples, and the exact bilinear split |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)."
+        ∷ "DiagonalZeroLemma and christoffelBilinearSplit are recorded with h_static && h_diag, 13 explicit nonzero triples, 51 zero triples, and the exact bilinear split |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)."
         ∷ "ChristoffelFormulaC0Stable now exposes concrete receipt names for independent inverse-metric closeness, zero-slot ledger dependency, the bilinear split, Shell A constant 22<=48, and the 11/2 ε <= 48 ε slack gate."
         ∷ "The local stable surface now also carries the zero-slot dependency alias, bilinear-split dependency alias, a tighter 11/2<=33/2<=22<=48 feed, and a canonical receipt table for the Shell A constants."
         ∷ "DiagonalZeroLemma is now threaded through an explicit local chain: bracket_zero_of_not_nonzero and partialDeriv_of_zero."
         ∷ "Christoffel bilinear split now also carries the telescoping identity route that expands the split estimate."
         ∷ "Γ_christoffel_diagonal is recorded as the diagonal receipt token for the zero-slot dependency chain."
-        ∷ "Both per-slot routes are recorded: direct Shell A bracket_le=8 and the 3-term fallback route via (1/2)(24ε+3ε)=27/2ε and 27/2<=22."
+        ∷ "Both per-slot routes are recorded: direct Shell A bracket_le=8 is valid only for r_max=4M (M=1 units), with bracket_le = 2*r_max and theta-shell/cot-bound required for the new angular slots; the 3-term fallback route via (1/2)(24ε+3ε)=27/2ε and 27/2<=22 remains."
         ∷ "The conservative route is recorded honestly as 33/2 <= 22 <= 48."
         ∷ "Ricci perturbation route is carried by the canonical Schwarzschild finite Ricci/Bianchi receipt; convergence and authority promotions are blocked."
         ∷ "Contracted-Bianchi still blocks at selected-connection dependency with exact blocker: missingCarrierConnectionIsLeviCivita."
