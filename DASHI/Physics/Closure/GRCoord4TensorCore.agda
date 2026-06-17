@@ -880,10 +880,16 @@ schwarzschildChristoffelSlotDecisionRowFromRow row =
       ∷ [] )
     false
 
+schwarzschildChristoffelSlotDecisionRowsFromRows :
+  List SchwarzschildChristoffelSlotClassificationRow →
+  List SchwarzschildChristoffelSlotDecisionRow
+schwarzschildChristoffelSlotDecisionRowsFromRows rows =
+  map schwarzschildChristoffelSlotDecisionRowFromRow rows
+
 schwarzschildChristoffelSlotDecisionRows :
   List SchwarzschildChristoffelSlotDecisionRow
 schwarzschildChristoffelSlotDecisionRows =
-  map schwarzschildChristoffelSlotDecisionRowFromRow
+  schwarzschildChristoffelSlotDecisionRowsFromRows
     schwarzschildChristoffelSlotClassificationRows
 
 record SchwarzschildChristoffelCheckedSlotClassifierSurface : Set where
@@ -958,13 +964,19 @@ canonicalSchwarzschildChristoffelCheckedSlotClassifierReceiptSurface =
 schwarzschildSymmetricNonzeroSlotDecisionRows :
   List SchwarzschildChristoffelSlotDecisionRow
 schwarzschildSymmetricNonzeroSlotDecisionRows =
-  map schwarzschildChristoffelSlotDecisionRowFromRow
+  schwarzschildChristoffelSlotDecisionRowsFromRows
     schwarzschildSymmetricNonzeroSlotClassificationRows
+
+schwarzschildSymmetricZeroSlotDecisionRows :
+  List SchwarzschildChristoffelSlotDecisionRow
+schwarzschildSymmetricZeroSlotDecisionRows =
+  schwarzschildChristoffelSlotDecisionRowsFromRows
+    schwarzschildSymmetricZeroSlotClassificationRows
 
 schwarzschildSymmetricSlotDecisionRows :
   List SchwarzschildChristoffelSlotDecisionRow
 schwarzschildSymmetricSlotDecisionRows =
-  map schwarzschildChristoffelSlotDecisionRowFromRow
+  schwarzschildChristoffelSlotDecisionRowsFromRows
     schwarzschildSymmetricSlotClassificationRows
 
 schwarzschildSymmetricSlotCheckedSlotClassifierSurface :
@@ -1025,16 +1037,17 @@ schwarzschildSymmetricDiagonalNonzeroSlotBoundary :
   List String
 schwarzschildSymmetricDiagonalNonzeroSlotBoundary =
   schwarzschildSymmetricDiagonalNonzeroSlotQuestionName ∷
-  "13 symmetric diagonal Christoffel slots and 51 zero slots across 64 triples" ∷
-  "angular-slot inclusion: (theta,phi,phi), (phi,theta,phi), (phi,phi,theta)"
-  ∷ []
+  "sign-correct 13 nonzero / 51 zero ledger across 64 diagonal Christoffel triples" ∷
+  "classifier yes-cases: thetaPhiPhi, phiThetaPhi, phiPhiTheta" ∷
+  []
 
 schwarzschildDiagonalNonzeroSlotBoundary :
   List String
 schwarzschildDiagonalNonzeroSlotBoundary =
   schwarzschildDiagonalNonzeroSlotQuestionName ∷
-  "7 symmetry classes and the 64-slot diagonal Christoffel ledger remain receipt-only"
-  ∷ []
+  "7 symmetry classes and the 64-slot diagonal Christoffel ledger remain receipt-only" ∷
+  "authoritative symmetric ledger: sign-correct 13 nonzero / 51 zero classifier cases" ∷
+  []
 
 record SchwarzschildDiagonalNonzeroSlotSurface : Set where
   constructor schwarzschildDiagonalNonzeroSlotSurface
@@ -1069,6 +1082,15 @@ record SchwarzschildDiagonalNonzeroSlotSurface : Set where
     nonzeroDecisionRows :
       List SchwarzschildChristoffelSlotDecisionRow
 
+    zeroClassificationRows :
+      List SchwarzschildChristoffelSlotClassificationRow
+
+    zeroDecisionRows :
+      List SchwarzschildChristoffelSlotDecisionRow
+
+    surfaceBoundary :
+      List String
+
 canonicalSchwarzschildDiagonalNonzeroSlotSurface :
   SchwarzschildDiagonalNonzeroSlotSurface
 canonicalSchwarzschildDiagonalNonzeroSlotSurface =
@@ -1083,6 +1105,10 @@ canonicalSchwarzschildDiagonalNonzeroSlotSurface =
     schwarzschildSevenNonzeroSlotNames
     schwarzschildNonzeroSlotClassificationRows
     schwarzschildNonzeroSlotDecisionRows
+    schwarzschildZeroSlotClassificationRows
+    (schwarzschildChristoffelSlotDecisionRowsFromRows
+      schwarzschildZeroSlotClassificationRows)
+    schwarzschildDiagonalNonzeroSlotBoundary
 
 schwarzschildSymmetricNonzeroSlotNames :
   List String
@@ -1112,6 +1138,9 @@ schwarzschildSymmetricDiagonalNonzeroSlotSurface =
     schwarzschildSymmetricNonzeroSlotNames
     schwarzschildSymmetricNonzeroSlotClassificationRows
     schwarzschildSymmetricNonzeroSlotDecisionRows
+    schwarzschildSymmetricZeroSlotClassificationRows
+    schwarzschildSymmetricZeroSlotDecisionRows
+    schwarzschildSymmetricDiagonalNonzeroSlotBoundary
 
 canonicalSchwarzschildSymmetricDiagonalNonzeroSlotSurface :
   SchwarzschildDiagonalNonzeroSlotSurface
@@ -1177,8 +1206,8 @@ schwarzschildSymmetricDiagonalNonzeroSlotProjectionSurfaceFromSurface surface =
     coord4SymmetricNonzeroSlotCount13
     ( "SymmetricDiagonalNonzeroSlotProjectionSurface" ∷
       "canonicalSchwarzschildSymmetricDiagonalNonzeroSlotSurface" ∷
-      "13 symmetric Schwarzschild nonzero slots" ∷
-      "projection over symmetric13/51 ledger including angular slots thetaPhiPhi, phiThetaPhi, phiPhiTheta" ∷
+      "13 sign-correct symmetric Schwarzschild nonzero slots" ∷
+      "projection over 13/51 ledger with classifier yes-cases thetaPhiPhi, phiThetaPhi, phiPhiTheta" ∷
       [] )
     false
 
@@ -1248,7 +1277,7 @@ schwarzschildSymmetricDiagonalNonzeroSlotCoverageSurfaceFromSurface surface =
     ( "SymmetricDiagonalNonzeroSlotCoverageSurface" ∷
       "checkedSymmetricDiagonalNonzeroSlotClassifier" ∷
       "13-true checked Schwarzschild nonzero slots" ∷
-      "coverage over symmetric13/51 ledger; angular slots thetaPhiPhi, phiThetaPhi, phiPhiTheta included" ∷
+      "coverage over sign-correct 13 nonzero / 51 zero ledger; classifier yes-cases thetaPhiPhi, phiThetaPhi, phiPhiTheta" ∷
       [] )
     false
 
@@ -1318,7 +1347,7 @@ schwarzschildSymmetricDiagonalNonzeroSlotReceiptSurfaceFromSurface surface =
     ( "SymmetricDiagonalNonzeroSlotReceiptSurface" ∷
       "receiptSymmetricDiagonalNonzeroSlotClassifier" ∷
       "checkedSurfaceReceiptForThirteenSymmetricSchwarzschildSlots" ∷
-      "13 true / 51 false checked symmetric nonzero slots include angular permutations thetaPhiPhi, phiThetaPhi, phiPhiTheta" ∷
+      "13 true / 51 false receipt for sign-correct diagonal ledger with classifier yes-cases thetaPhiPhi, phiThetaPhi, phiPhiTheta" ∷
       [] )
     false
 
