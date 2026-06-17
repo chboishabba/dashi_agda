@@ -68,6 +68,20 @@ orderedRationalChristoffel33Over2Le22Le48LawName = "33/2<=22<=48"
 orderedRationalChristoffel22Le44LawName : String
 orderedRationalChristoffel22Le44LawName = "22<=44"
 
+orderedRationalShellA_BracketLeTwiceRMaxLawName : String
+orderedRationalShellA_BracketLeTwiceRMaxLawName =
+  "bracket_le=2*r_max (selected r_max=4M -> bracket_le=8)"
+
+orderedRationalShellA_AngularSlotLedgerLawName : String
+orderedRationalShellA_AngularSlotLedgerLawName =
+  "angular-slot ledger 13/51"
+
+orderedRationalShellA_ThetaShellCotBoundLawName : String
+orderedRationalShellA_ThetaShellCotBoundLawName = "θ-shell/cot-bound"
+
+orderedRationalShellA_CShell8LawName : String
+orderedRationalShellA_CShell8LawName = "C_shell=8"
+
 orderedRationalChristoffelThreeTermBracketFactorLawName : String
 orderedRationalChristoffelThreeTermBracketFactorLawName = "8->24"
 
@@ -411,9 +425,25 @@ canonicalGROrderedRationalFiniteSlotBoundCoreScalarLemmaDependencyProjectionRows
     sevenNonzeroSlotReductionLemmaName
 
 data GROrderedRationalFiniteSlotBoundCoreAdapterRow : Set where
+  christoffel11Over2Le22AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  christoffel11Over2Le48AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
   christoffel22Le48AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  christoffel22Le44AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  christoffel27Over2Le22AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
   christoffel33Over2Le22Le48AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  shellABracketLeTwiceRMaxAdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  shellAThetaShellCotBoundAdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  shellACShell8AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  shellAAngularSlotLedgerAdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
   ricci2144Over27Le80AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
@@ -422,6 +452,8 @@ data GROrderedRationalFiniteSlotBoundCoreAdapterRow : Set where
   ricci252Le640LooseAdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
   ricci4Times8Times11Over2Eq176Le640AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  ricci6Times44Le8Times44Le640AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
   ricci6Times44Le352Le640AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
@@ -437,12 +469,21 @@ data GROrderedRationalFiniteSlotBoundCoreAdapterRow : Set where
 canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRows :
   List GROrderedRationalFiniteSlotBoundCoreAdapterRow
 canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRows =
-  christoffel22Le48AdapterRow
+  christoffel11Over2Le22AdapterRow
+  ∷ christoffel11Over2Le48AdapterRow
+  ∷ christoffel22Le48AdapterRow
+  ∷ christoffel22Le44AdapterRow
+  ∷ christoffel27Over2Le22AdapterRow
   ∷ christoffel33Over2Le22Le48AdapterRow
+  ∷ shellABracketLeTwiceRMaxAdapterRow
+  ∷ shellAThetaShellCotBoundAdapterRow
+  ∷ shellACShell8AdapterRow
+  ∷ shellAAngularSlotLedgerAdapterRow
   ∷ ricci2144Over27Le80AdapterRow
   ∷ ricci80Le640AdapterRow
   ∷ ricci252Le640LooseAdapterRow
   ∷ ricci4Times8Times11Over2Eq176Le640AdapterRow
+  ∷ ricci6Times44Le8Times44Le640AdapterRow
   ∷ ricci6Times44Le352Le640AdapterRow
   ∷ shellA44Le48AdapterRow
   ∷ coord4SevenNonzeroSlotsAdapterRow
@@ -453,10 +494,26 @@ canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRows =
 adapterRowName :
   GROrderedRationalFiniteSlotBoundCoreAdapterRow →
   String
+adapterRowName christoffel11Over2Le22AdapterRow =
+  orderedRationalChristoffel11Over2Le22LawName
+adapterRowName christoffel11Over2Le48AdapterRow =
+  orderedRationalChristoffel11Over2Le48LawName
 adapterRowName christoffel22Le48AdapterRow =
   orderedRationalChristoffel22Le48LawName
+adapterRowName christoffel22Le44AdapterRow =
+  orderedRationalChristoffel22Le44LawName
+adapterRowName christoffel27Over2Le22AdapterRow =
+  orderedRationalChristoffel27Over2Le22LawName
 adapterRowName christoffel33Over2Le22Le48AdapterRow =
   orderedRationalChristoffel33Over2Le22Le48LawName
+adapterRowName shellABracketLeTwiceRMaxAdapterRow =
+  orderedRationalShellA_BracketLeTwiceRMaxLawName
+adapterRowName shellAThetaShellCotBoundAdapterRow =
+  orderedRationalShellA_ThetaShellCotBoundLawName
+adapterRowName shellACShell8AdapterRow =
+  orderedRationalShellA_CShell8LawName
+adapterRowName shellAAngularSlotLedgerAdapterRow =
+  orderedRationalShellA_AngularSlotLedgerLawName
 adapterRowName ricci2144Over27Le80AdapterRow =
   orderedRationalRicci2144Over27Le80LawName
 adapterRowName ricci80Le640AdapterRow =
@@ -465,6 +522,8 @@ adapterRowName ricci252Le640LooseAdapterRow =
   orderedRationalRicci252Le640LooseLawName
 adapterRowName ricci4Times8Times11Over2Eq176Le640AdapterRow =
   orderedRationalRicci4Times8Times11Over2Eq176Le640LawName
+adapterRowName ricci6Times44Le8Times44Le640AdapterRow =
+  orderedRationalRicci6Times44Le8Times44Le640LawName
 adapterRowName ricci6Times44Le352Le640AdapterRow =
   orderedRationalRicci6Times44Le352Le640LawName
 adapterRowName shellA44Le48AdapterRow =
@@ -479,11 +538,20 @@ adapterRowName coord4SixtyFourTriplesAdapterRow =
 record GROrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows : Set where
   constructor grOrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows
   field
+    christoffel11Over2Le22 : String
+    christoffel11Over2Le48 : String
     christoffel22Le48 : String
+    christoffel22Le44 : String
+    christoffel27Over2Le22 : String
     christoffel33Over2Le22Le48 : String
+    shellABracketLeTwiceRMax : String
+    shellAThetaShellCotBound : String
+    shellACShell8 : String
+    shellAAngularSlotLedger : String
     ricci2144Over27 : String
     ricci80Le640 : String
     ricci252Le640Loose : String
+    ricci6Times44Le8Times44Le640 : String
     ricci4Times8Times11Over2Eq176Le640 : String
     ricci6Times44Le352Le640 : String
     shellA44Le48 : String
@@ -497,11 +565,20 @@ canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows :
   GROrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows
 canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows =
   grOrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows
+    orderedRationalChristoffel11Over2Le22LawName
+    orderedRationalChristoffel11Over2Le48LawName
     orderedRationalChristoffel22Le48LawName
+    orderedRationalChristoffel22Le44LawName
+    orderedRationalChristoffel27Over2Le22LawName
     orderedRationalChristoffel33Over2Le22Le48LawName
+    orderedRationalShellA_BracketLeTwiceRMaxLawName
+    orderedRationalShellA_ThetaShellCotBoundLawName
+    orderedRationalShellA_CShell8LawName
+    orderedRationalShellA_AngularSlotLedgerLawName
     orderedRationalRicci2144Over27Le80LawName
     orderedRationalRicci80Le640LawName
     orderedRationalRicci252Le640LooseLawName
+    orderedRationalRicci6Times44Le8Times44Le640LawName
     orderedRationalRicci4Times8Times11Over2Eq176Le640LawName
     orderedRationalRicci6Times44Le352Le640LawName
     orderedRationalShellA44Le48LawName
@@ -862,12 +939,17 @@ canonicalOrderedRationalScalarLemmaNames =
 canonicalGROrderedRationalFiniteSlotBoundCoreAdapterTokens : List String
 canonicalGROrderedRationalFiniteSlotBoundCoreAdapterTokens =
   orderedRationalChristoffel11Over2Le22LawName
+  ∷ orderedRationalChristoffel11Over2Le48LawName
+  ∷ orderedRationalChristoffel33Over2Le22Le48LawName
   ∷ orderedRationalChristoffel22Le44LawName
+  ∷ orderedRationalChristoffel27Over2Le22LawName
+  ∷ orderedRationalShellA_BracketLeTwiceRMaxLawName
+  ∷ orderedRationalShellA_ThetaShellCotBoundLawName
+  ∷ orderedRationalShellA_CShell8LawName
+  ∷ orderedRationalShellA_AngularSlotLedgerLawName
   ∷ orderedRationalChristoffelThreeTermBracketFactorLawName
   ∷ orderedRationalChristoffelHalfSumTo27Over2LawName
-  ∷ orderedRationalChristoffel27Over2Le22LawName
   ∷ orderedRationalChristoffel22Le48LawName
-  ∷ orderedRationalChristoffel33Over2Le22Le48LawName
   ∷ orderedRationalRicci2144Over27Le80LawName
   ∷ orderedRationalRicci80Le640LawName
   ∷ orderedRationalRicci252Le640LooseLawName
