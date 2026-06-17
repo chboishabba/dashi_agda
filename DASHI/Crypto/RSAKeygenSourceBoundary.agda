@@ -12,6 +12,7 @@ import DASHI.Core.BridgeRequirementCore as Bridge
 import DASHI.Core.CandidateOnlyCore as Candidate
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Core.HiddenLiftProjectionCore as HiddenLift
+import DASHI.Core.SourceProcessEvidenceCore as SourceProcessEvidence
 import DASHI.Core.StatisticalEvidenceCore as StatisticalEvidence
 import DASHI.Crypto.RSAVulnerabilityBoundary as RSAVulnerabilityBoundary
 import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
@@ -223,6 +224,10 @@ record RSAKeygenSourceBoundarySurface : Set where
       StatisticalEvidence.StatisticalEvidenceReceipt
         StatisticalEvidence.canonicalStatisticalEvidenceSurface
 
+    sourceProcessEvidenceReceipt :
+      SourceProcessEvidence.SourceProcessEvidenceReceipt
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+
     rsaVulnerabilityBoundary :
       RSAVulnerabilityBoundary.RSAVulnerabilityBoundary
 
@@ -300,6 +305,25 @@ record RSAKeygenSourceBoundaryReceipt
       authorityBoundaryClaims surface
       ≡
       AuthorityBoundary.canonicalBlockedAuthorityClaims
+
+    receiptSourceProcessEvidenceCandidateOnlyIsTrue :
+      Candidate.candidateOnly
+        (SourceProcessEvidence.candidateRow
+          SourceProcessEvidence.canonicalSourceProcessEvidenceSurface)
+      ≡
+      true
+
+    receiptSourceProcessEvidenceSideEvidenceRestrictsFiberIsTrue :
+      SourceProcessEvidence.sideEvidenceRestrictsFiber
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+      ≡
+      true
+
+    receiptSourceProcessEvidenceSourceWideEscalationAuthorityIsFalse :
+      SourceProcessEvidence.sourceWideEscalationAuthority
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+      ≡
+      false
 
     receiptAuthorityBundlePromotesAnyAuthorityIsFalse :
       Authority.promotesAnyAuthority (authorityBundle surface) ≡ false
@@ -388,6 +412,12 @@ canonicalRSAKeygenSourceStatisticalEvidence :
 canonicalRSAKeygenSourceStatisticalEvidence =
   StatisticalEvidence.canonicalStatisticalEvidenceReceipt
 
+canonicalRSAKeygenSourceProcessEvidenceReceipt :
+  SourceProcessEvidence.SourceProcessEvidenceReceipt
+    SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+canonicalRSAKeygenSourceProcessEvidenceReceipt =
+  SourceProcessEvidence.canonicalSourceProcessEvidenceReceipt
+
 canonicalRSAKeygenSourceVulnerabilityBoundary :
   RSAVulnerabilityBoundary.RSAVulnerabilityBoundary
 canonicalRSAKeygenSourceVulnerabilityBoundary =
@@ -429,6 +459,7 @@ canonicalRSAKeygenSourceBoundarySurface =
     canonicalRSAKeygenSourceAdapterReceipt
     canonicalRSAKeygenSourceHiddenLiftEvidence
     canonicalRSAKeygenSourceStatisticalEvidence
+    canonicalRSAKeygenSourceProcessEvidenceReceipt
     canonicalRSAKeygenSourceVulnerabilityBoundary
     canonicalRSAKeygenSourceBoundaryGenericReceipt
     false
@@ -443,6 +474,9 @@ canonicalRSAKeygenSourceBoundaryReceipt :
   RSAKeygenSourceBoundaryReceipt canonicalRSAKeygenSourceBoundarySurface
 canonicalRSAKeygenSourceBoundaryReceipt =
   mkRSAKeygenSourceBoundaryReceipt
+    refl
+    refl
+    refl
     refl
     refl
     refl
@@ -543,6 +577,34 @@ canonicalRSAKeygenSourceAuthorityBoundaryClaimsCanonical :
   AuthorityBoundary.canonicalBlockedAuthorityClaims
 canonicalRSAKeygenSourceAuthorityBoundaryClaimsCanonical =
   receiptAuthorityBoundaryClaimsCanonical
+    canonicalRSAKeygenSourceBoundaryReceipt
+
+canonicalRSAKeygenSourceSourceProcessEvidenceCandidateOnlyIsTrue :
+  Candidate.candidateOnly
+    (SourceProcessEvidence.candidateRow
+      SourceProcessEvidence.canonicalSourceProcessEvidenceSurface)
+  ≡
+  true
+canonicalRSAKeygenSourceSourceProcessEvidenceCandidateOnlyIsTrue =
+  receiptSourceProcessEvidenceCandidateOnlyIsTrue
+    canonicalRSAKeygenSourceBoundaryReceipt
+
+canonicalRSAKeygenSourceSourceProcessEvidenceSideEvidenceRestrictsFiberIsTrue :
+  SourceProcessEvidence.sideEvidenceRestrictsFiber
+    SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+  ≡
+  true
+canonicalRSAKeygenSourceSourceProcessEvidenceSideEvidenceRestrictsFiberIsTrue =
+  receiptSourceProcessEvidenceSideEvidenceRestrictsFiberIsTrue
+    canonicalRSAKeygenSourceBoundaryReceipt
+
+canonicalRSAKeygenSourceSourceProcessEvidenceSourceWideEscalationAuthorityIsFalse :
+  SourceProcessEvidence.sourceWideEscalationAuthority
+    SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+  ≡
+  false
+canonicalRSAKeygenSourceSourceProcessEvidenceSourceWideEscalationAuthorityIsFalse =
+  receiptSourceProcessEvidenceSourceWideEscalationAuthorityIsFalse
     canonicalRSAKeygenSourceBoundaryReceipt
 
 canonicalRSAKeygenSourceAuthorityBundlePromotesAnyAuthorityIsFalse :

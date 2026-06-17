@@ -14,6 +14,7 @@ import DASHI.Core.BridgeRequirementCore as Bridge
 import DASHI.Core.CandidateOnlyCore as Candidate
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Core.HiddenLiftProjectionCore as HiddenLift
+import DASHI.Core.SourceProcessEvidenceCore as SourceProcessEvidence
 import DASHI.Core.StatisticalEvidenceCore as Stats
 import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
 
@@ -367,6 +368,10 @@ record RSABatchSharedPrimeBoundarySurface : Set where
       Stats.StatisticalEvidenceReceipt
         Stats.canonicalStatisticalEvidenceSurface
 
+    sourceProcessEvidenceReceipt :
+      SourceProcessEvidence.SourceProcessEvidenceReceipt
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+
     batchRSAVulnerabilityBoundary :
       RSA.RSAVulnerabilityBoundary
 
@@ -450,6 +455,24 @@ record RSABatchSharedPrimeBoundaryReceipt
       ≡
       canonicalRSABatchSharedPrimeModulusPairCount
 
+    surfaceSourceFiberRestrictsIsTrue :
+      SourceProcessEvidence.sideEvidenceRestrictsFiber
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+      ≡
+      true
+
+    surfaceRecoveredWitnessEscalatesArtifactOnlyIsTrue :
+      SourceProcessEvidence.recoveredWitnessEscalatesArtifactOnly
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+      ≡
+      true
+
+    surfaceSourceWideEscalationAuthorityIsFalse :
+      SourceProcessEvidence.sourceWideEscalationAuthority
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+      ≡
+      false
+
     surfaceArtifactSpecificVulnerabilityReceiptNonPromoting :
       GenericReceipt.promotesClaim
         (artifactSpecificVulnerabilityReceipt surface)
@@ -494,6 +517,7 @@ canonicalRSABatchSharedPrimeBoundarySurface =
     Adapter.canonicalAdapterCanonicalityReceipt
     HiddenLift.canonicalHiddenLiftProjectionReceipt
     Stats.canonicalStatisticalEvidenceReceipt
+    SourceProcessEvidence.canonicalSourceProcessEvidenceReceipt
     RSA.canonicalRSAVulnerabilityBoundary
     BT.canonicalRSABTResidueBraidHypervoxelBoundarySurface
     canonicalRSABatchSharedPrimeBoundaryArtifactReceipt
@@ -512,6 +536,9 @@ canonicalRSABatchSharedPrimeBoundaryReceipt :
     canonicalRSABatchSharedPrimeBoundarySurface
 canonicalRSABatchSharedPrimeBoundaryReceipt =
   mkRSABatchSharedPrimeBoundaryReceipt
+    refl
+    refl
+    refl
     refl
     refl
     refl
@@ -603,6 +630,33 @@ canonicalRSABatchSurfacePairwiseModulusPairCountIsCanonical :
   canonicalRSABatchSharedPrimeModulusPairCount
 canonicalRSABatchSurfacePairwiseModulusPairCountIsCanonical =
   surfacePairwiseModulusPairCountCanonical
+    canonicalRSABatchSharedPrimeBoundaryReceipt
+
+sourceFiberRestrictsIsTrue :
+  SourceProcessEvidence.sideEvidenceRestrictsFiber
+    SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+  ≡
+  true
+sourceFiberRestrictsIsTrue =
+  surfaceSourceFiberRestrictsIsTrue
+    canonicalRSABatchSharedPrimeBoundaryReceipt
+
+recoveredWitnessEscalatesArtifactOnlyIsTrue :
+  SourceProcessEvidence.recoveredWitnessEscalatesArtifactOnly
+    SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+  ≡
+  true
+recoveredWitnessEscalatesArtifactOnlyIsTrue =
+  surfaceRecoveredWitnessEscalatesArtifactOnlyIsTrue
+    canonicalRSABatchSharedPrimeBoundaryReceipt
+
+sourceWideEscalationAuthorityIsFalse :
+  SourceProcessEvidence.sourceWideEscalationAuthority
+    SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+  ≡
+  false
+sourceWideEscalationAuthorityIsFalse =
+  surfaceSourceWideEscalationAuthorityIsFalse
     canonicalRSABatchSharedPrimeBoundaryReceipt
 
 artifactSpecificVulnerabilityReceiptIsNonPromoting :

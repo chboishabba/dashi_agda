@@ -6,6 +6,12 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Source-process evidence generic tranche for `2026-06-17`: adds
+  `DASHI.Core.SourceProcessEvidenceCore` to `DASHI.Everything` and includes it in
+  `scripts/check_reusable_core_regression.py`, with a discovery-only
+  `scripts/audit_source_process_evidence_candidates.py` queue; this is reusable
+  process/evidence plumbing with no promotion claims.
+
 - Formal-lens vocabulary tranche for `2026-06-17`: adds
   `DASHI.Core.FormalLensVocabularyCore` as the broad JMD formal-lens taxonomy
   and wires the projection/hash/RSA tranche regression surfaces.

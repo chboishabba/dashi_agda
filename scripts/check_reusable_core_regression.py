@@ -21,6 +21,7 @@ AGDA_TARGETS = [
     "DASHI/Core/FormalLensVocabularyCore.agda",
     "DASHI/Core/HiddenLiftProjectionCore.agda",
     "DASHI/Core/StatisticalEvidenceCore.agda",
+    "DASHI/Core/SourceProcessEvidenceCore.agda",
     "DASHI/Core/CandidateFunctionalCore.agda",
     "DASHI/Core/OperatorShapeNonAuthorityCore.agda",
     "DASHI/Core/BridgeRequirementCore.agda",
@@ -151,6 +152,13 @@ def main() -> int:
                 sys.executable,
                 "scripts/audit_control_card_candidates.py",
                 "--no-write",
+            ],
+        ),
+        (
+            "source-process evidence candidate audit",
+            [
+                sys.executable,
+                "scripts/audit_source_process_evidence_candidates.py",
             ],
         ),
     ]

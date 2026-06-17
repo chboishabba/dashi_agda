@@ -11,6 +11,7 @@ import DASHI.Core.BridgeRequirementCore as Bridge
 import DASHI.Core.CandidateOnlyCore as CandidateOnly
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Core.HiddenLiftProjectionCore as HiddenLift
+import DASHI.Core.SourceProcessEvidenceCore as SourceProcessEvidence
 import DASHI.Core.StatisticalEvidenceCore as Statistical
 import DASHI.Crypto.RSAVulnerabilityBoundary as RSAVulnerabilityBoundary
 import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary
@@ -502,6 +503,10 @@ record RSAIterationLeakBoundary : Set where
       HiddenLift.HiddenLiftProjectionReceipt
         HiddenLift.canonicalHiddenLiftProjectionSurface
 
+    sourceProcessEvidenceReceiptReference :
+      SourceProcessEvidence.SourceProcessEvidenceReceipt
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+
     statisticalEvidenceCandidateReceiptReference :
       CandidateOnly.CandidateOnlyReceipt
         Statistical.canonicalStatisticalEvidenceCandidateRow
@@ -566,6 +571,24 @@ record RSAIterationLeakBoundary : Set where
     blockedAuthoritiesAreCanonical :
       blockedAuthorities ≡ canonicalRSAIterationLeakBlockedAuthorities
 
+    sourceFiberRestriction :
+      Bool
+
+    sourceFiberRestrictionIsTrue :
+      sourceFiberRestriction ≡ true
+
+    statisticalAnomalyCandidateOnly :
+      Bool
+
+    statisticalAnomalyCandidateOnlyIsTrue :
+      statisticalAnomalyCandidateOnly ≡ true
+
+    sourceWideEscalationAuthority :
+      Bool
+
+    sourceWideEscalationAuthorityIsFalse :
+      sourceWideEscalationAuthority ≡ false
+
     boundaryCandidateOnly :
       Bool
 
@@ -605,6 +628,7 @@ canonicalRSAIterationLeakBoundary =
     "candidate-only RSA keygen side-information boundary"
     "DASHI.Crypto.RSAIterationLeakBoundary"
     HiddenLift.canonicalHiddenLiftProjectionReceipt
+    SourceProcessEvidence.canonicalSourceProcessEvidenceReceipt
     Statistical.canonicalStatisticalEvidenceCandidateReceipt
     Bridge.canonicalBridgeRequirementCoreReceipt
     Adapter.canonicalAdapterCanonicalityReceipt
@@ -624,6 +648,12 @@ canonicalRSAIterationLeakBoundary =
     refl
     canonicalRSAIterationLeakCandidateGenericReceiptsNonPromoting
     canonicalRSAIterationLeakBlockedAuthorities
+    refl
+    true
+    refl
+    true
+    refl
+    false
     refl
     true
     refl
@@ -647,10 +677,26 @@ canonicalRSAIterationLeakBoundaryNonPromoting :
 canonicalRSAIterationLeakBoundaryNonPromoting =
   refl
 
+canonicalRSAIterationLeakBoundarySourceFiberRestrictionIsTrue :
+  sourceFiberRestriction canonicalRSAIterationLeakBoundary ≡ true
+canonicalRSAIterationLeakBoundarySourceFiberRestrictionIsTrue =
+  refl
+
+canonicalRSAIterationLeakBoundaryStatisticalAnomalyCandidateOnlyIsTrue :
+  statisticalAnomalyCandidateOnly canonicalRSAIterationLeakBoundary ≡ true
+canonicalRSAIterationLeakBoundaryStatisticalAnomalyCandidateOnlyIsTrue =
+  refl
+
+canonicalRSAIterationLeakBoundarySourceWideEscalationAuthorityIsFalse :
+  sourceWideEscalationAuthority canonicalRSAIterationLeakBoundary ≡ false
+canonicalRSAIterationLeakBoundarySourceWideEscalationAuthorityIsFalse =
+  refl
+
 canonicalRSAIterationLeakBoundaryLabels :
   List String
 canonicalRSAIterationLeakBoundaryLabels =
   "DASHI.Core.HiddenLiftProjectionCore"
+  ∷ "DASHI.Core.SourceProcessEvidenceCore"
   ∷ "DASHI.Core.StatisticalEvidenceCore"
   ∷ "DASHI.Core.BridgeRequirementCore"
   ∷ "DASHI.Core.AdapterCanonicalityCore"
