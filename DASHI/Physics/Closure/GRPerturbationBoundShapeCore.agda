@@ -231,7 +231,15 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelC0DiagonalNonzeroSlotObligationIsCanonical :
       christoffelC0DiagonalNonzeroSlotObligation
       ≡
-      "DiagonalNonzeroSlot?"
+      "13 nonzero / 51 zero symmetric slots"
+
+    christoffelC0AngularSlotLedger :
+      String
+
+    christoffelC0AngularSlotLedgerIsCanonical :
+      christoffelC0AngularSlotLedger
+      ≡
+      "13 nonzero / 51 zero symmetric slots"
 
     christoffelC0DiagonalZeroLemmaObligation :
       String
@@ -330,6 +338,22 @@ record GRPerturbationBoundShapeCore : Setω where
       christoffelC0ShellABracketLe8RouteReceipt
       ≡
       "bracket_le=8 is valid only for r_max=4M (M=1 units), with bracket_le = 2*r_max; theta-shell/cot-bound required for the new angular slots"
+
+    christoffelC0ShellARadiusSelectionRoute :
+      String
+
+    christoffelC0ShellARadiusSelectionRouteIsCanonical :
+      christoffelC0ShellARadiusSelectionRoute
+      ≡
+      "selected r_max=4M -> bracket_le=8"
+
+    christoffelC0ThetaShellCotRoute :
+      String
+
+    christoffelC0ThetaShellCotRouteIsCanonical :
+      christoffelC0ThetaShellCotRoute
+      ≡
+      "theta-shell/cot-bound required for angular cot slots"
 
     christoffelC0ShellAFallbackThreeTermRouteName :
       String
@@ -709,6 +733,9 @@ record GRPerturbationBoundShapeCore : Setω where
       ∷ "zero-slot receipt: 13 explicit nonzero triples / 51 zero triples (symmetric triples counted)"
       ∷ "bilinear split dependency: christoffelBilinearSplit"
       ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+      ∷ "angular-slot ledger: 13 nonzero / 51 zero symmetric slots"
+      ∷ "shell A angular route: selected r_max=4M -> bracket_le=8"
+      ∷ "shell A angular route: theta-shell/cot-bound required for angular cot slots"
       ∷ "diagonalZeroLemma dependency chain: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
       ∷ "Γ_christoffel_diagonal dependency: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
       ∷ "christoffelBilinearSplit telescoping identity: telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
@@ -719,6 +746,14 @@ record GRPerturbationBoundShapeCore : Setω where
       ∷ "conservative route: 33/2 <= 22 <= 48"
       ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
       ∷ []
+
+    christoffelFormulaC0StableAngularLedgerProjection :
+      String
+
+    christoffelFormulaC0StableAngularLedgerProjectionIsCanonical :
+      christoffelFormulaC0StableAngularLedgerProjection
+      ≡
+      "13 nonzero / 51 zero symmetric slots"
 
     christoffelFormulaC0StableSlackReceipt :
       String
@@ -1120,8 +1155,12 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelC0StaticDiagonalClosenessHypothesisIsCanonical =
         refl
     ; christoffelC0DiagonalNonzeroSlotObligation =
-        "DiagonalNonzeroSlot?"
+        "13 nonzero / 51 zero symmetric slots"
     ; christoffelC0DiagonalNonzeroSlotObligationIsCanonical =
+        refl
+    ; christoffelC0AngularSlotLedger =
+        "13 nonzero / 51 zero symmetric slots"
+    ; christoffelC0AngularSlotLedgerIsCanonical =
         refl
     ; christoffelC0DiagonalZeroLemmaObligation =
         "diagonalZeroLemma"
@@ -1174,6 +1213,14 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelC0ShellABracketLe8RouteReceipt =
         "bracket_le=8 is valid only for r_max=4M (M=1 units), with bracket_le = 2*r_max; theta-shell/cot-bound required for the new angular slots"
     ; christoffelC0ShellABracketLe8RouteReceiptIsCanonical =
+        refl
+    ; christoffelC0ShellARadiusSelectionRoute =
+        "selected r_max=4M -> bracket_le=8"
+    ; christoffelC0ShellARadiusSelectionRouteIsCanonical =
+        refl
+    ; christoffelC0ThetaShellCotRoute =
+        "theta-shell/cot-bound required for angular cot slots"
+    ; christoffelC0ThetaShellCotRouteIsCanonical =
         refl
     ; christoffelC0ShellAFallbackThreeTermRouteName =
         "fallback 3-term route"
@@ -1370,6 +1417,9 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "zero-slot receipt: 13 explicit nonzero triples / 51 zero triples (symmetric triples counted)"
         ∷ "bilinear split dependency: christoffelBilinearSplit"
         ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+        ∷ "angular-slot ledger: 13 nonzero / 51 zero symmetric slots"
+        ∷ "shell A angular route: selected r_max=4M -> bracket_le=8"
+        ∷ "shell A angular route: theta-shell/cot-bound required for angular cot slots"
         ∷ "diagonalZeroLemma dependency chain: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
         ∷ "Γ_christoffel_diagonal dependency: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
         ∷ "christoffelBilinearSplit telescoping identity: telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
@@ -1381,6 +1431,10 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
         ∷ []
     ; christoffelFormulaC0StableReceiptTableIsCanonical =
+        refl
+    ; christoffelFormulaC0StableAngularLedgerProjection =
+        "13 nonzero / 51 zero symmetric slots"
+    ; christoffelFormulaC0StableAngularLedgerProjectionIsCanonical =
         refl
     ; christoffelFormulaC0StableSlackReceipt =
         "11/2 ε <= 48 ε"

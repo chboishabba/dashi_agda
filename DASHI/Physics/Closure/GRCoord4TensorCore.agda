@@ -747,6 +747,7 @@ schwarzschildSymmetricSlotClassificationSurface =
     coord4SymmetricZeroSlotCount51
     ( "64-slot symmetric classification ledger" ∷
       "13 nonzero + 51 zero symmetric diagonal Schwarzschild Christoffel slots" ∷
+      "includes angular slots thetaPhiPhi, phiThetaPhi, phiPhiTheta" ∷
       [] )
     false
 
@@ -1024,7 +1025,8 @@ schwarzschildSymmetricDiagonalNonzeroSlotBoundary :
   List String
 schwarzschildSymmetricDiagonalNonzeroSlotBoundary =
   schwarzschildSymmetricDiagonalNonzeroSlotQuestionName ∷
-  "13 symmetric diagonal Christoffel slots and 51 zero slots across 64 triples"
+  "13 symmetric diagonal Christoffel slots and 51 zero slots across 64 triples" ∷
+  "angular-slot inclusion: (theta,phi,phi), (phi,theta,phi), (phi,phi,theta)"
   ∷ []
 
 schwarzschildDiagonalNonzeroSlotBoundary :
@@ -1175,7 +1177,9 @@ schwarzschildSymmetricDiagonalNonzeroSlotProjectionSurfaceFromSurface surface =
     coord4SymmetricNonzeroSlotCount13
     ( "SymmetricDiagonalNonzeroSlotProjectionSurface" ∷
       "canonicalSchwarzschildSymmetricDiagonalNonzeroSlotSurface" ∷
-      "13 symmetric Schwarzschild nonzero slots" ∷ [] )
+      "13 symmetric Schwarzschild nonzero slots" ∷
+      "projection over symmetric13/51 ledger including angular slots thetaPhiPhi, phiThetaPhi, phiPhiTheta" ∷
+      [] )
     false
 
 canonicalSchwarzschildSymmetricDiagonalNonzeroSlotProjectionSurface :
@@ -1243,7 +1247,9 @@ schwarzschildSymmetricDiagonalNonzeroSlotCoverageSurfaceFromSurface surface =
     coord4SymmetricNonzeroSlotCount13
     ( "SymmetricDiagonalNonzeroSlotCoverageSurface" ∷
       "checkedSymmetricDiagonalNonzeroSlotClassifier" ∷
-      "13-true checked Schwarzschild nonzero slots" ∷ [] )
+      "13-true checked Schwarzschild nonzero slots" ∷
+      "coverage over symmetric13/51 ledger; angular slots thetaPhiPhi, phiThetaPhi, phiPhiTheta included" ∷
+      [] )
     false
 
 canonicalSchwarzschildSymmetricDiagonalNonzeroSlotCoverageSurface :
@@ -1311,7 +1317,9 @@ schwarzschildSymmetricDiagonalNonzeroSlotReceiptSurfaceFromSurface surface =
     coord4SymmetricNonzeroSlotCount13
     ( "SymmetricDiagonalNonzeroSlotReceiptSurface" ∷
       "receiptSymmetricDiagonalNonzeroSlotClassifier" ∷
-      "checkedSurfaceReceiptForThirteenSymmetricSchwarzschildSlots" ∷ [] )
+      "checkedSurfaceReceiptForThirteenSymmetricSchwarzschildSlots" ∷
+      "13 true / 51 false checked symmetric nonzero slots include angular permutations thetaPhiPhi, phiThetaPhi, phiPhiTheta" ∷
+      [] )
     false
 
 canonicalSchwarzschildSymmetricDiagonalNonzeroSlotReceiptSurface :
