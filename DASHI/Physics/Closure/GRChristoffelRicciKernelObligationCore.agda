@@ -260,7 +260,7 @@ canonicalRicciDerivativeTermBound44ProjectionName =
 
 canonicalRicciProductTermBoundDependencyName : String
 canonicalRicciProductTermBoundDependencyName =
-  "h_dΓ=11/2; derivative terms 44 ε each; θ-shell/cot-bound; shell-bound Γ with C_shell=8; slot pruning; bracket_le=2*r_max; selected r_max=4M; bracket_le=8"
+  "productTermBound_88"
 
 canonicalRicciProductTermBoundProjectionName : String
 canonicalRicciProductTermBoundProjectionName =
@@ -268,7 +268,7 @@ canonicalRicciProductTermBoundProjectionName =
 
 canonicalRicciProductTermBound44DependencyName : String
 canonicalRicciProductTermBound44DependencyName =
-  "productTermBound_44"
+  "productTermBound_88"
 
 canonicalRicciProductTermBound44ProjectionName : String
 canonicalRicciProductTermBound44ProjectionName =
@@ -347,7 +347,7 @@ canonicalConnectionErrorBoundExtractionBounds =
   ∷ "derivTermBound_44"
   ∷ "h_∂δΓ_per_slot<=11ε"
   ∷ "derivative terms 44 ε each"
-  ∷ "productTermBound_44"
+  ∷ "productTermBound_88"
   ∷ "product budget <= 440 ε (shell-bound Γ, slot pruning)"
   ∷ "angular-slot ledger 13/51; conservative budget note; slot pruning"
   ∷ "h_dΓ routing"
@@ -373,9 +373,9 @@ canonicalConnectionErrorBoundExtractionDependencyRows =
   ∷ "dependency: connectionErrorBoundExtractionDerivativeTermBoundDependencyName = h_∂δΓ_per_slot<=11ε"
   ∷ "dependency: derivTermBound_44 = h_∂δΓ_per_slot<=11ε"
   ∷ "dependency: connectionErrorBoundExtractionProductTermBoundDependencyName = h_dΓ=11/2; derivative terms 44 ε each; θ-shell/cot-bound; shell-bound Γ with C_shell=8; slot pruning; bracket_le=2*r_max; selected r_max=4M; bracket_le=8"
-  ∷ "dependency: productTermBound_44 = h_dΓ=11/2; derivative terms 44 ε each; θ-shell/cot-bound; shell-bound Γ with C_shell=8; slot pruning; bracket_le=2*r_max; selected r_max=4M; bracket_le=8"
+  ∷ "dependency: productTermBound_88 = h_dΓ=11/2; derivative terms 44 ε each; θ-shell/cot-bound; shell-bound Γ with C_shell=8; slot pruning; bracket_le=2*r_max; selected r_max=4M; bracket_le=8"
   ∷ "dependency: connectionErrorBoundExtractionConservativeDerivativeTermBoundDependencyName = derivTermBound_44"
-  ∷ "dependency: connectionErrorBoundExtractionConservativeProductTermBoundDependencyName = productTermBound_44"
+  ∷ "dependency: connectionErrorBoundExtractionConservativeProductTermBoundDependencyName = productTermBound_88"
   ∷ "dependency: connectionErrorBoundExtractionHGammaBgBoundDependencyName = h_Γ_bg_bound"
   ∷ "dependency: h_Γ_bg_bound = shell-bound Γ with C_shell=8 and slot pruning, not global Γ<=1"
   ∷ "dependency: connectionErrorBoundExtractionFiniteTermCountDependencyName = derivative terms 44 ε each; product budget <= 440 ε"
@@ -397,7 +397,7 @@ canonicalConnectionErrorBoundExtractionDependencyRows =
   ∷ "dependency: |∂δΓ| <= 11 ε"
   ∷ "dependency: |δ(ΓΓ)| <= 440 ε"
   ∷ "dependency: derivTermBound_44"
-  ∷ "dependency: productTermBound_44"
+  ∷ "dependency: productTermBound_88"
   ∷ "dependency: h_Γ_bg_bound"
   ∷ "dependency: 352 ε <= 440 ε"
   ∷ "dependency: 440 ε <= 640 ε"
@@ -440,12 +440,12 @@ canonicalConnectionErrorBoundExtractionProjectionRows =
   ∷ "projection: connectionErrorBoundExtractionDerivativeTermBoundDependencyName = h_∂δΓ_per_slot<=11ε"
   ∷ "projection: connectionErrorBoundExtractionConservativeDerivativeTermBoundDependencyName = derivTermBound_44"
   ∷ "projection: connectionErrorBoundExtractionProductTermBoundDependencyName = product budget <= 440 ε (shell-bound Γ, slot pruning)"
-  ∷ "projection: connectionErrorBoundExtractionConservativeProductTermBoundDependencyName = productTermBound_44"
+  ∷ "projection: connectionErrorBoundExtractionConservativeProductTermBoundDependencyName = productTermBound_88"
   ∷ "projection: connectionErrorBoundExtractionConservative352EpsilonExtractionDependencyName = 352 ε <= 440 ε"
   ∷ "projection: connectionErrorBoundExtractionConservative640EpsilonExtractionDependencyName = conservative 640 ε extraction"
   ∷ "projection: connectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
   ∷ "projection: connectionErrorBoundExtractionHypotheses = h_dΓ, h_Γ, h_pgi, h_p2g, h_pg"
-  ∷ "projection: connectionErrorBoundExtractionBounds = ricciPalatiniExpansion; δRicci_eq_sum_6; derivTermBound_44; h_∂δΓ_per_slot<=11ε; derivative terms 44 ε each; productTermBound_44; h_dΓ=11/2; derivative terms 44 ε each; θ-shell/cot-bound; shell-bound Γ with C_shell=8; slot pruning; bracket_le=2*r_max; selected r_max=4M; bracket_le=8; angular-slot ledger 13/51; conservative budget note; slot pruning; h_dΓ routing; h_Γ routing; h_Γ_bg_bound routing; 176 ε <= 352 ε absorption; Schwarzschild nonzero-slot pruning; 352 ε <= 440 ε; 440 ε <= 640 ε; 176 ε <= 352 ε <= 440 ε <= 640 ε; |∂δΓ| <= 11 ε; |δ(ΓΓ)| <= 440 ε; conservative 640 ε extraction"
+  ∷ "projection: connectionErrorBoundExtractionBounds = ricciPalatiniExpansion; δRicci_eq_sum_6; derivTermBound_44; h_∂δΓ_per_slot<=11ε; derivative terms 44 ε each; productTermBound_88; h_dΓ=11/2; derivative terms 44 ε each; θ-shell/cot-bound; shell-bound Γ with C_shell=8; slot pruning; bracket_le=2*r_max; selected r_max=4M; bracket_le=8; angular-slot ledger 13/51; conservative budget note; slot pruning; h_dΓ routing; h_Γ routing; h_Γ_bg_bound routing; 176 ε <= 352 ε absorption; Schwarzschild nonzero-slot pruning; 352 ε <= 440 ε; 440 ε <= 640 ε; 176 ε <= 352 ε <= 440 ε <= 640 ε; |∂δΓ| <= 11 ε; |δ(ΓΓ)| <= 440 ε; conservative 640 ε extraction"
   ∷ "projection route text: 176 ε <= 352 ε <= 440 ε <= 640 ε"
   ∷ "projection route text: 352 ε <= 440 ε"
   ∷ "projection: connectionErrorBoundExtractionPromoted = false"
@@ -579,7 +579,7 @@ canonicalSymbolicKernelConstructorHandoffDependencyRows =
   ∷ "dependency: ricciPalatiniExpansion"
   ∷ "dependency: δRicci_eq_sum_6"
   ∷ "dependency: derivTermBound_44"
-  ∷ "dependency: productTermBound_44"
+  ∷ "dependency: productTermBound_88"
   ∷ "dependency: h_Γ_bg_bound"
   ∷ "dependency: 176 ε <= 352 ε <= 440 ε <= 640 ε"
   ∷ "dependency: derivative terms 44 ε each; product budget <= 440 ε"
@@ -626,7 +626,7 @@ canonicalSymbolicKernelConstructorHandoffProjectionRows =
   ∷ "projection: canonicalConnectionErrorBoundExtractionHypotheses = h_dΓ, h_Γ, h_pgi, h_p2g, h_pg"
   ∷ "projection: connectionErrorBoundExtractionFiniteSlotCountProjectionName = angular-slot ledger 13/51; conservative budget note; slot pruning"
   ∷ "projection: connectionErrorBoundExtractionAbsorptionProjectionName = 176 ε <= 352 ε absorption"
-  ∷ "projection: canonicalConnectionErrorBoundExtractionBounds = ricciPalatiniExpansion; δRicci_eq_sum_6; derivTermBound_44; h_∂δΓ_per_slot<=11ε; derivative terms 44 ε each; productTermBound_44; h_dΓ=11/2; derivative terms 44 ε each; θ-shell/cot-bound; shell-bound Γ with C_shell=8; slot pruning; bracket_le=2*r_max; selected r_max=4M; bracket_le=8; angular-slot ledger 13/51; conservative budget note; slot pruning; h_dΓ routing; h_Γ routing; h_Γ_bg_bound routing; 176 ε <= 352 ε absorption; Schwarzschild nonzero-slot pruning; 352 ε <= 440 ε; 440 ε <= 640 ε; 176 ε <= 352 ε <= 440 ε <= 640 ε; |∂δΓ| <= 11 ε; |δ(ΓΓ)| <= 440 ε; conservative 640 ε extraction"
+  ∷ "projection: canonicalConnectionErrorBoundExtractionBounds = ricciPalatiniExpansion; δRicci_eq_sum_6; derivTermBound_44; h_∂δΓ_per_slot<=11ε; derivative terms 44 ε each; productTermBound_88; h_dΓ=11/2; derivative terms 44 ε each; θ-shell/cot-bound; shell-bound Γ with C_shell=8; slot pruning; bracket_le=2*r_max; selected r_max=4M; bracket_le=8; angular-slot ledger 13/51; conservative budget note; slot pruning; h_dΓ routing; h_Γ routing; h_Γ_bg_bound routing; 176 ε <= 352 ε absorption; Schwarzschild nonzero-slot pruning; 352 ε <= 440 ε; 440 ε <= 640 ε; 176 ε <= 352 ε <= 440 ε <= 640 ε; |∂δΓ| <= 11 ε; |δ(ΓΓ)| <= 440 ε; conservative 640 ε extraction"
   ∷ "projection route text: 176 ε <= 352 ε <= 440 ε <= 640 ε"
   ∷ "projection route text: 352 ε <= 440 ε"
   ∷ "projection: canonicalConnectionErrorBoundExtractionPromoted = false"
@@ -652,7 +652,7 @@ record GRChristoffelRicciKernelObligationCoreORCSLPGF : Set where
     GIsCanonical : G ≡ "geometric surface+symbolic-kernel constructor+connection-error extraction shape"
     F : String
     FIsCanonical : F ≡
-      "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, six-term expansion route δRicci_eq_sum_6, corrected derivative/product receipts (derivTermBound_44 via h_∂δΓ_per_slot<=11ε; productTermBound_44 via h_dΓ=11/2, derivative terms 44 ε each, θ-shell/cot-bound, shell-bound Γ with C_shell=8 and slot pruning, and bracket_le=2*r_max with selected r_max=4M for bracket_le=8), finite term-count and angular-slot ledger 13/51 with conservative budget notes, h_dΓ/h_Γ/h_Γ_bg_bound routing, 176 ε <= 352 ε absorption, 352 ε <= 440 ε, 440 ε <= 640 ε, 176 ε <= 352 ε <= 440 ε <= 640 ε, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
+      "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, six-term expansion route δRicci_eq_sum_6, corrected derivative/product receipts (derivTermBound_44 via h_∂δΓ_per_slot<=11ε; productTermBound_88 via h_dΓ=11/2, derivative terms 44 ε each, θ-shell/cot-bound, shell-bound Γ with C_shell=8 and slot pruning, and bracket_le=2*r_max with selected r_max=4M for bracket_le=8), finite term-count and angular-slot ledger 13/51 with conservative budget notes, h_dΓ/h_Γ/h_Γ_bg_bound routing, 176 ε <= 352 ε absorption, 352 ε <= 440 ε, 440 ε <= 640 ε, 176 ε <= 352 ε <= 440 ε <= 640 ε, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
 
 open GRChristoffelRicciKernelObligationCoreORCSLPGF public
 
@@ -674,7 +674,7 @@ canonicalGRChristoffelRicciKernelObligationCoreORCSLPGF =
     refl
     "geometric surface+symbolic-kernel constructor+connection-error extraction shape"
     refl
-    "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, six-term expansion route δRicci_eq_sum_6, corrected derivative/product receipts (derivTermBound_44 via h_∂δΓ_per_slot<=11ε; productTermBound_44 via h_dΓ=11/2, derivative terms 44 ε each, θ-shell/cot-bound, shell-bound Γ with C_shell=8 and slot pruning, and bracket_le=2*r_max with selected r_max=4M for bracket_le=8), finite term-count and angular-slot ledger 13/51 with conservative budget notes, h_dΓ/h_Γ/h_Γ_bg_bound routing, 176 ε <= 352 ε absorption, 352 ε <= 440 ε, 440 ε <= 640 ε, 176 ε <= 352 ε <= 440 ε <= 640 ε, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
+    "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, six-term expansion route δRicci_eq_sum_6, corrected derivative/product receipts (derivTermBound_44 via h_∂δΓ_per_slot<=11ε; productTermBound_88 via h_dΓ=11/2, derivative terms 44 ε each, θ-shell/cot-bound, shell-bound Γ with C_shell=8 and slot pruning, and bracket_le=2*r_max with selected r_max=4M for bracket_le=8), finite term-count and angular-slot ledger 13/51 with conservative budget notes, h_dΓ/h_Γ/h_Γ_bg_bound routing, 176 ε <= 352 ε absorption, 352 ε <= 440 ε, 440 ε <= 640 ε, 176 ε <= 352 ε <= 440 ε <= 640 ε, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
     refl
 
 record GRChristoffelRicciKernelObligationCore : Setω where

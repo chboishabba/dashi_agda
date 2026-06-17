@@ -1045,8 +1045,8 @@ schwarzschildDiagonalNonzeroSlotBoundary :
   List String
 schwarzschildDiagonalNonzeroSlotBoundary =
   schwarzschildDiagonalNonzeroSlotQuestionName ∷
-  "7 symmetry classes and the 64-slot diagonal Christoffel ledger remain receipt-only" ∷
-  "authoritative symmetric ledger: sign-correct 13 nonzero / 51 zero classifier cases" ∷
+  "13 symmetric nonzero / 51 zero diagonal Christoffel triples" ∷
+  "angular yes-cases: thetaPhiPhi, phiThetaPhi, phiPhiTheta" ∷
   []
 
 record SchwarzschildDiagonalNonzeroSlotSurface : Set where
@@ -1091,25 +1091,6 @@ record SchwarzschildDiagonalNonzeroSlotSurface : Set where
     surfaceBoundary :
       List String
 
-canonicalSchwarzschildDiagonalNonzeroSlotSurface :
-  SchwarzschildDiagonalNonzeroSlotSurface
-canonicalSchwarzschildDiagonalNonzeroSlotSurface =
-  schwarzschildDiagonalNonzeroSlotSurface
-    canonicalSchwarzschildChristoffelSlotClassificationSurface
-    canonicalSchwarzschildChristoffelCheckedSlotClassifierSurface
-    canonicalSchwarzschildChristoffelCheckedSlotClassifierReceiptSurface
-    coord4SlotCount64
-    coord4NonzeroSlotCount7
-    coord4ZeroSlotCount57
-    schwarzschildNonzeroSlotCoordinates
-    schwarzschildSevenNonzeroSlotNames
-    schwarzschildNonzeroSlotClassificationRows
-    schwarzschildNonzeroSlotDecisionRows
-    schwarzschildZeroSlotClassificationRows
-    (schwarzschildChristoffelSlotDecisionRowsFromRows
-      schwarzschildZeroSlotClassificationRows)
-    schwarzschildDiagonalNonzeroSlotBoundary
-
 schwarzschildSymmetricNonzeroSlotNames :
   List String
 schwarzschildSymmetricNonzeroSlotNames =
@@ -1147,6 +1128,11 @@ canonicalSchwarzschildSymmetricDiagonalNonzeroSlotSurface :
 canonicalSchwarzschildSymmetricDiagonalNonzeroSlotSurface =
   schwarzschildSymmetricDiagonalNonzeroSlotSurface
 
+canonicalSchwarzschildDiagonalNonzeroSlotSurface :
+  SchwarzschildDiagonalNonzeroSlotSurface
+canonicalSchwarzschildDiagonalNonzeroSlotSurface =
+  schwarzschildSymmetricDiagonalNonzeroSlotSurface
+
 schwarzschildDiagonalNonzeroSlotProjectionRowsFromSurface :
   SchwarzschildDiagonalNonzeroSlotSurface →
   List SchwarzschildChristoffelSlotClassificationRow
@@ -1178,10 +1164,10 @@ schwarzschildDiagonalNonzeroSlotProjectionSurfaceFromSurface surface =
   schwarzschildDiagonalNonzeroSlotProjectionSurface
     surface
     (schwarzschildDiagonalNonzeroSlotProjectionRowsFromSurface surface)
-    coord4NonzeroSlotCount7
+    coord4SymmetricNonzeroSlotCount13
     ( "DiagonalNonzeroSlotProjectionSurface" ∷
-      "canonicalSchwarzschildDiagonalNonzeroSlotSurface" ∷
-      "7 canonical Schwarzschild nonzero slots" ∷ [] )
+      "canonicalSchwarzschildSymmetricDiagonalNonzeroSlotSurface" ∷
+      "13 nonzero / 51 zero corrected symmetric Schwarzschild nonzero slots" ∷ [] )
     false
 
 canonicalSchwarzschildDiagonalNonzeroSlotProjectionSurface :
@@ -1248,10 +1234,10 @@ schwarzschildDiagonalNonzeroSlotCoverageSurfaceFromSurface surface =
   schwarzschildDiagonalNonzeroSlotCoverageSurface
     (schwarzschildDiagonalNonzeroSlotProjectionSurfaceFromSurface surface)
     (schwarzschildDiagonalNonzeroSlotCoverageRowsFromSurface surface)
-    coord4NonzeroSlotCount7
+    coord4SymmetricNonzeroSlotCount13
     ( "DiagonalNonzeroSlotCoverageSurface" ∷
       "checkedDiagonalNonzeroSlotClassifier" ∷
-      "7-true checked Schwarzschild nonzero slots" ∷ [] )
+      "13-true checked Schwarzschild nonzero slots (symmetric)" ∷ [] )
     false
 
 canonicalSchwarzschildDiagonalNonzeroSlotCoverageSurface :
@@ -1318,10 +1304,10 @@ schwarzschildDiagonalNonzeroSlotReceiptSurfaceFromSurface surface =
   schwarzschildDiagonalNonzeroSlotReceiptSurface
     (schwarzschildDiagonalNonzeroSlotCoverageSurfaceFromSurface surface)
     (schwarzschildDiagonalNonzeroSlotReceiptRowsFromSurface surface)
-    coord4NonzeroSlotCount7
+    coord4SymmetricNonzeroSlotCount13
     ( "DiagonalNonzeroSlotReceiptSurface" ∷
       "receiptDiagonalNonzeroSlotClassifier" ∷
-      "checkedSurfaceReceiptForSevenSchwarzschildSlots" ∷ [] )
+      "checkedSurfaceReceiptForThirteenSchwarzschildSlots" ∷ [] )
     false
 
 canonicalSchwarzschildDiagonalNonzeroSlotReceiptSurface :
@@ -1385,7 +1371,7 @@ DiagonalNonzeroSlotQuestionName : String
 DiagonalNonzeroSlotQuestionName = schwarzschildDiagonalNonzeroSlotQuestionName
 
 DiagonalNonzeroSlotBoundary : List String
-DiagonalNonzeroSlotBoundary = schwarzschildDiagonalNonzeroSlotBoundary
+DiagonalNonzeroSlotBoundary = schwarzschildSymmetricDiagonalNonzeroSlotBoundary
 
 DiagonalNonzeroSlotSurface : Set
 DiagonalNonzeroSlotSurface = SchwarzschildDiagonalNonzeroSlotSurface
