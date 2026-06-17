@@ -421,6 +421,38 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       christoffelC0DiagonalZeroLemmaReceipt
 
+    christoffelFormulaC0StableBracketZeroOfNotNonzeroDependencyName :
+      String
+
+    christoffelFormulaC0StableBracketZeroOfNotNonzeroDependencyNameIsCanonical :
+      christoffelFormulaC0StableBracketZeroOfNotNonzeroDependencyName
+      ≡
+      "bracket_zero_of_not_nonzero"
+
+    christoffelFormulaC0StablePartialDerivOfZeroDependencyName :
+      String
+
+    christoffelFormulaC0StablePartialDerivOfZeroDependencyNameIsCanonical :
+      christoffelFormulaC0StablePartialDerivOfZeroDependencyName
+      ≡
+      "partialDeriv_of_zero"
+
+    christoffelFormulaC0StableDiagonalZeroLemmaDependencyChainName :
+      String
+
+    christoffelFormulaC0StableDiagonalZeroLemmaDependencyChainNameIsCanonical :
+      christoffelFormulaC0StableDiagonalZeroLemmaDependencyChainName
+      ≡
+      "diagonalZeroLemma dependency chain"
+
+    christoffelFormulaC0StableDiagonalZeroLemmaDependencyChainReceipt :
+      String
+
+    christoffelFormulaC0StableDiagonalZeroLemmaDependencyChainReceiptIsCanonical :
+      christoffelFormulaC0StableDiagonalZeroLemmaDependencyChainReceipt
+      ≡
+      "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+
     christoffelFormulaC0StableBilinearSplitReceipt :
       String
 
@@ -445,6 +477,22 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       christoffelC0ChristoffelBilinearSplitReceipt
 
+    christoffelFormulaC0StableChristoffelBilinearSplitTelescopingIdentityName :
+      String
+
+    christoffelFormulaC0StableChristoffelBilinearSplitTelescopingIdentityNameIsCanonical :
+      christoffelFormulaC0StableChristoffelBilinearSplitTelescopingIdentityName
+      ≡
+      "christoffelBilinearSplit telescoping identity"
+
+    christoffelFormulaC0StableChristoffelBilinearSplitTelescopingIdentityReceipt :
+      String
+
+    christoffelFormulaC0StableChristoffelBilinearSplitTelescopingIdentityReceiptIsCanonical :
+      christoffelFormulaC0StableChristoffelBilinearSplitTelescopingIdentityReceipt
+      ≡
+      "telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+
     christoffelFormulaC0StableFeed11HalfTo22ChainName :
       String
 
@@ -460,6 +508,22 @@ record GRPerturbationBoundShapeCore : Setω where
       christoffelFormulaC0StableFeed11HalfTo22ChainReceipt
       ≡
       "11/2<=33/2<=22<=48"
+
+    christoffelFormulaC0StableFeed27Over2To22ChainName :
+      String
+
+    christoffelFormulaC0StableFeed27Over2To22ChainNameIsCanonical :
+      christoffelFormulaC0StableFeed27Over2To22ChainName
+      ≡
+      OrderedRational.orderedRationalChristoffel27Over2Le22ArithmeticChainName
+
+    christoffelFormulaC0StableFeed27Over2To22ChainReceipt :
+      String
+
+    christoffelFormulaC0StableFeed27Over2To22ChainReceiptIsCanonical :
+      christoffelFormulaC0StableFeed27Over2To22ChainReceipt
+      ≡
+      "(1/2)(24ε+3ε)=27/2ε, 27/2<=22"
 
     christoffelFormulaC0StableShellAConstantName :
       String
@@ -517,7 +581,10 @@ record GRPerturbationBoundShapeCore : Setω where
       ∷ "zero-slot receipt: 10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
       ∷ "bilinear split dependency: christoffelBilinearSplit"
       ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+      ∷ "diagonalZeroLemma dependency chain: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+      ∷ "christoffelBilinearSplit telescoping identity: telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
       ∷ "11/2 feed to 22: 11/2<=33/2<=22<=48"
+      ∷ "27/2 feed to 22 (3-term bracket): (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
       ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
       ∷ []
 
@@ -552,6 +619,22 @@ record GRPerturbationBoundShapeCore : Setω where
       christoffelFormulaC0StablePerSlotBoundObligation
       ≡
       "11/2 ε <= 48 ε"
+
+    christoffelFormulaC0StableSafePerSlotBound :
+      String
+
+    christoffelFormulaC0StableSafePerSlotBoundIsCanonical :
+      christoffelFormulaC0StableSafePerSlotBound
+      ≡
+      "27/2 ε"
+
+    christoffelFormulaC0StableSafePerSlotBoundObligation :
+      String
+
+    christoffelFormulaC0StableSafePerSlotBoundObligationIsCanonical :
+      christoffelFormulaC0StableSafePerSlotBoundObligation
+      ≡
+      "27/2 ε <= 48 ε"
 
     christoffelFormulaC0StableTenNonzeroSlotsName :
       String
@@ -1006,6 +1089,22 @@ canonicalGRPerturbationBoundShapeCore =
         "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
     ; christoffelFormulaC0StableZeroSlotDependencyReceiptIsCanonical =
         refl
+    ; christoffelFormulaC0StableBracketZeroOfNotNonzeroDependencyName =
+        "bracket_zero_of_not_nonzero"
+    ; christoffelFormulaC0StableBracketZeroOfNotNonzeroDependencyNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StablePartialDerivOfZeroDependencyName =
+        "partialDeriv_of_zero"
+    ; christoffelFormulaC0StablePartialDerivOfZeroDependencyNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableDiagonalZeroLemmaDependencyChainName =
+        "diagonalZeroLemma dependency chain"
+    ; christoffelFormulaC0StableDiagonalZeroLemmaDependencyChainNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableDiagonalZeroLemmaDependencyChainReceipt =
+        "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+    ; christoffelFormulaC0StableDiagonalZeroLemmaDependencyChainReceiptIsCanonical =
+        refl
     ; christoffelFormulaC0StableBilinearSplitReceipt =
         "|δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
     ; christoffelFormulaC0StableBilinearSplitReceiptIsCanonical =
@@ -1018,6 +1117,14 @@ canonicalGRPerturbationBoundShapeCore =
         "|δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
     ; christoffelFormulaC0StableBilinearSplitDependencyReceiptIsCanonical =
         refl
+    ; christoffelFormulaC0StableChristoffelBilinearSplitTelescopingIdentityName =
+        "christoffelBilinearSplit telescoping identity"
+    ; christoffelFormulaC0StableChristoffelBilinearSplitTelescopingIdentityNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableChristoffelBilinearSplitTelescopingIdentityReceipt =
+        "telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+    ; christoffelFormulaC0StableChristoffelBilinearSplitTelescopingIdentityReceiptIsCanonical =
+        refl
     ; christoffelFormulaC0StableFeed11HalfTo22ChainName =
         OrderedRational.orderedRationalChristoffel16p5Le22Le48ArithmeticChainName
     ; christoffelFormulaC0StableFeed11HalfTo22ChainNameIsCanonical =
@@ -1025,6 +1132,14 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelFormulaC0StableFeed11HalfTo22ChainReceipt =
         "11/2<=33/2<=22<=48"
     ; christoffelFormulaC0StableFeed11HalfTo22ChainReceiptIsCanonical =
+        refl
+    ; christoffelFormulaC0StableFeed27Over2To22ChainName =
+        OrderedRational.orderedRationalChristoffel27Over2Le22ArithmeticChainName
+    ; christoffelFormulaC0StableFeed27Over2To22ChainNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableFeed27Over2To22ChainReceipt =
+        "(1/2)(24ε+3ε)=27/2ε, 27/2<=22"
+    ; christoffelFormulaC0StableFeed27Over2To22ChainReceiptIsCanonical =
         refl
     ; christoffelFormulaC0StableShellAConstantName =
         "22<=48"
@@ -1059,7 +1174,10 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "zero-slot receipt: 10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
         ∷ "bilinear split dependency: christoffelBilinearSplit"
         ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+        ∷ "diagonalZeroLemma dependency chain: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+        ∷ "christoffelBilinearSplit telescoping identity: telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
         ∷ "11/2 feed to 22: 11/2<=33/2<=22<=48"
+        ∷ "27/2 feed to 22 (3-term bracket): (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
         ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
         ∷ []
     ; christoffelFormulaC0StableReceiptTableIsCanonical =
@@ -1079,6 +1197,14 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelFormulaC0StablePerSlotBoundObligation =
         "11/2 ε <= 48 ε"
     ; christoffelFormulaC0StablePerSlotBoundObligationIsCanonical =
+        refl
+    ; christoffelFormulaC0StableSafePerSlotBound =
+        "27/2 ε"
+    ; christoffelFormulaC0StableSafePerSlotBoundIsCanonical =
+        refl
+    ; christoffelFormulaC0StableSafePerSlotBoundObligation =
+        "27/2 ε <= 48 ε"
+    ; christoffelFormulaC0StableSafePerSlotBoundObligationIsCanonical =
         refl
     ; christoffelFormulaC0StableTenNonzeroSlotsName =
         "10 nonzero slots"
@@ -1181,6 +1307,9 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "DiagonalZeroLemma and christoffelBilinearSplit are recorded with h_static && h_diag, 10 explicit nonzero triples, 54 zero triples, and the exact bilinear split |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)."
         ∷ "ChristoffelFormulaC0Stable now exposes concrete receipt names for independent inverse-metric closeness, zero-slot ledger dependency, the bilinear split, Shell A constant 22<=48, and the 11/2 ε <= 48 ε slack gate."
         ∷ "The local stable surface now also carries the zero-slot dependency alias, bilinear-split dependency alias, a tighter 11/2<=33/2<=22<=48 feed, and a canonical receipt table for the Shell A constants."
+        ∷ "DiagonalZeroLemma is now threaded through an explicit local chain: bracket_zero_of_not_nonzero and partialDeriv_of_zero."
+        ∷ "Christoffel bilinear split now also carries the telescoping identity route that expands the split estimate."
+        ∷ "Both per-slot routes are recorded: tight 11/2 ε feed and a 3-term-bracket-safe 27/2 ε fallback route via (1/2)(24ε+3ε)=27/2ε and 27/2<=22."
         ∷ "Ricci perturbation route is carried by the canonical Schwarzschild finite Ricci/Bianchi receipt; convergence and authority promotions are blocked."
         ∷ "Contracted-Bianchi still blocks at selected-connection dependency with exact blocker: missingCarrierConnectionIsLeviCivita."
         ∷ "Exact boundary arithmetic shapes are carried by symbolic-rational and shell-A law shapes, not by fabricated proofs."
