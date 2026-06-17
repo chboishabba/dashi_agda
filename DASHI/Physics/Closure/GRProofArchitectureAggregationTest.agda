@@ -555,7 +555,7 @@ record GRProofArchitectureNextAnalyticKernelTrancheReceipt : Setω where
       ∷ "corrected tight Shell A L_Gamma=44 is recorded as documentation-only aggregation metadata; final/conservative L_Gamma=48 and legacy 72 overbound projections are preserved"
       ∷ "tier 4: Christoffel C0 stability in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalMachineCheckedChristoffelC0ConstantReceipt and selectedSymbolicRationalChristoffelC0FormulaStabilityIs48"
       ∷ "tier 5: Ricci perturbation extraction in DASHI/Physics/Closure/GRDiscreteRicciCandidateFromCurvature.agda at canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt and canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt"
-      ∷ "current GR analytic-kernel remaining variables are recorded explicitly as five non-promoting aggregation booleans; NS-GW-1 degeneracy context remains numeric-evidence-only and outside promotion"
+      ∷ "current GR analytic-kernel remaining variables are recorded explicitly as five non-promoting aggregation booleans; NS-GW-1 degeneracy context remains numeric-evidence-only and no Clay/continuum promotion is claimed"
       ∷ []
 
 canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt :
@@ -828,7 +828,7 @@ canonicalGRProofArchitectureNextAnalyticKernelTrancheReceipt =
         ∷ "corrected tight Shell A L_Gamma=44 is recorded as documentation-only aggregation metadata; final/conservative L_Gamma=48 and legacy 72 overbound projections are preserved"
         ∷ "tier 4: Christoffel C0 stability in DASHI/Physics/Closure/ContinuumLimitTheorem.agda at canonicalMachineCheckedChristoffelC0ConstantReceipt and selectedSymbolicRationalChristoffelC0FormulaStabilityIs48"
         ∷ "tier 5: Ricci perturbation extraction in DASHI/Physics/Closure/GRDiscreteRicciCandidateFromCurvature.agda at canonicalGRDiscreteRicciExtractionReadinessDependencyReceipt and canonicalGRSchwarzschildFiniteRicciBianchiPerturbationReceipt"
-        ∷ "current GR analytic-kernel remaining variables are recorded explicitly as five non-promoting aggregation booleans; NS-GW-1 degeneracy context remains numeric-evidence-only and outside promotion"
+        ∷ "current GR analytic-kernel remaining variables are recorded explicitly as five non-promoting aggregation booleans; NS-GW-1 degeneracy context remains numeric-evidence-only and no Clay/continuum promotion is claimed"
         ∷ []
     ; requiredAnalyticalProofsAreCanonical =
         refl
@@ -2073,16 +2073,16 @@ record GRProofArchitectureAggregationTest : Setω where
     conservativeGRRouteRowsAreCanonical :
       conservativeGRRouteRows
       ≡
-      "angular ledger=13 nonzero / 51 zero"
-      ∷ "bracket_le=2*r_max and selected r_max=4M => 8"
+      "angular ledger=13/51 nonzero"
+      ∷ "r_max=4M => bracket_le=8"
       ∷ "theta-shell/cot-bound required for angular cot slots"
-      ∷ "C_shell=8 Γ background shell bound"
+      ∷ "C_shell=8 shell-bound (not global Γ<=1)"
       ∷ "christoffel C0 stable=48"
       ∷ "h_dΓ_tight=11/2"
       ∷ "derivTermBound_44"
-      ∷ "ricci extraction conservative bound=640"
-      ∷ "productTermBound via 176<=640"
-      ∷ "fail-closed/no continuum or Clay promotion"
+      ∷ "ricci extraction conservative <=640"
+      ∷ "productTermBound rejects false 44 under C_shell=8"
+      ∷ "fail-closed/no Clay or continuum promotion"
       ∷ []
 
     unsafeExternalSurfaceReceipts :
@@ -2638,16 +2638,16 @@ canonicalGRProofArchitectureAggregationTest =
     ; nextAnalyticKernelNoRicciConvergencePromotion =
         true
     ; conservativeGRRouteRows =
-        "angular ledger=13 nonzero / 51 zero"
-        ∷ "bracket_le=2*r_max and selected r_max=4M => 8"
+        "angular ledger=13/51 nonzero"
+        ∷ "r_max=4M => bracket_le=8"
         ∷ "theta-shell/cot-bound required for angular cot slots"
-        ∷ "C_shell=8 Γ background shell bound"
+        ∷ "C_shell=8 shell-bound (not global Γ<=1)"
         ∷ "christoffel C0 stable=48"
         ∷ "h_dΓ_tight=11/2"
         ∷ "derivTermBound_44"
-        ∷ "ricci extraction conservative bound=640"
-        ∷ "productTermBound via 176<=640"
-        ∷ "fail-closed/no continuum or Clay promotion"
+        ∷ "ricci extraction conservative <=640"
+        ∷ "productTermBound rejects false 44 under C_shell=8"
+        ∷ "fail-closed/no Clay or continuum promotion"
         ∷ []
     ; conservativeGRRouteRowsAreCanonical =
         refl
@@ -2679,7 +2679,7 @@ canonicalGRProofArchitectureAggregationTest =
         ∷ "Imports and checks the Continuum machine-checked Christoffel C0 constants"
         ∷ "Imports and checks Shell A/B selected Christoffel constants and the zero-epsilon selected equality bridge without arbitrary equality promotion"
         ∷ "Imports and checks the next analytic-kernel tranche requirements without promoting the ordered QQ theorem or Ricci convergence"
-        ∷ "Records the conservative GR route rows: angular ledger=13 nonzero / 51 zero, bracket_le=2*r_max and selected r_max=4M => 8, theta-shell/cot-bound required for angular cot slots, C_shell=8 Γ background shell bound, christoffel C0 stable=48, h_dΓ_tight=11/2, derivTermBound_44, ricci extraction conservative bound=640, productTermBound via 176<=640, and fail-closed/no continuum or Clay promotion"
+        ∷ "Records the conservative GR route rows: angular ledger=13/51 nonzero, r_max=4M => bracket_le=8, theta-shell/cot-bound required for angular cot slots, C_shell=8 shell-bound (not global Γ<=1), christoffel C0 stable=48, h_dΓ_tight=11/2, derivTermBound_44, ricci extraction conservative <=640, productTermBound rejects false 44 under C_shell=8, and fail-closed/no Clay or continuum promotion"
         ∷ "Records the five current GR analytic-kernel remaining variables and the settled NS-GW-1 degeneracy status as non-promoting context"
         ∷ "No GR, Schwarzschild, Bianchi, or Einstein-equation promotion is introduced here"
         ∷ []
@@ -3540,15 +3540,15 @@ grProofArchitectureAggregationConservativeGRRouteRows :
   GRProofArchitectureAggregationTest.conservativeGRRouteRows
     canonicalGRProofArchitectureAggregationTest
   ≡
-  "angular ledger=13 nonzero / 51 zero"
-  ∷ "bracket_le=2*r_max and selected r_max=4M => 8"
+  "angular ledger=13/51 nonzero"
+  ∷ "r_max=4M => bracket_le=8"
   ∷ "theta-shell/cot-bound required for angular cot slots"
-  ∷ "C_shell=8 Γ background shell bound"
+  ∷ "C_shell=8 shell-bound (not global Γ<=1)"
   ∷ "christoffel C0 stable=48"
   ∷ "h_dΓ_tight=11/2"
   ∷ "derivTermBound_44"
-  ∷ "ricci extraction conservative bound=640"
-  ∷ "productTermBound via 176<=640"
-  ∷ "fail-closed/no continuum or Clay promotion"
+  ∷ "ricci extraction conservative <=640"
+  ∷ "productTermBound rejects false 44 under C_shell=8"
+  ∷ "fail-closed/no Clay or continuum promotion"
   ∷ []
 grProofArchitectureAggregationConservativeGRRouteRows = refl
