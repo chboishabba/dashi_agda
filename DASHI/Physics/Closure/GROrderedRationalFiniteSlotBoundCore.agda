@@ -56,8 +56,14 @@ orderedRationalChristoffel22Le48LawName = "22<=48"
 orderedRationalChristoffel11Over2Le48LawName : String
 orderedRationalChristoffel11Over2Le48LawName = "11/2<=48"
 
+orderedRationalChristoffel11Over2Le22LawName : String
+orderedRationalChristoffel11Over2Le22LawName = "11/2<=22"
+
 orderedRationalChristoffel16p5Le22Le48LawName : String
 orderedRationalChristoffel16p5Le22Le48LawName = "11/2<=33/2<=22<=48"
+
+orderedRationalChristoffel22Le44LawName : String
+orderedRationalChristoffel22Le44LawName = "22<=44"
 
 orderedRationalRicci19Over2Le44LawName : String
 orderedRationalRicci19Over2Le44LawName = "19/2<=44"
@@ -103,9 +109,17 @@ orderedRationalChristoffel11Over2Le48ArithmeticChainName : String
 orderedRationalChristoffel11Over2Le48ArithmeticChainName =
   orderedRationalChristoffel11Over2Le48LawName
 
+orderedRationalChristoffel11Over2Le22ArithmeticChainName : String
+orderedRationalChristoffel11Over2Le22ArithmeticChainName =
+  orderedRationalChristoffel11Over2Le22LawName
+
 orderedRationalChristoffel16p5Le22Le48ArithmeticChainName : String
 orderedRationalChristoffel16p5Le22Le48ArithmeticChainName =
   orderedRationalChristoffel16p5Le22Le48LawName
+
+orderedRationalChristoffel22Le44ArithmeticChainName : String
+orderedRationalChristoffel22Le44ArithmeticChainName =
+  orderedRationalChristoffel22Le44LawName
 
 orderedRationalIndependentGiClosenessName : String
 orderedRationalIndependentGiClosenessName = "independent gi closeness"
@@ -703,7 +717,9 @@ canonicalOrderedRationalScalarLemmaNames =
 
 canonicalGROrderedRationalFiniteSlotBoundCoreAdapterTokens : List String
 canonicalGROrderedRationalFiniteSlotBoundCoreAdapterTokens =
-  orderedRationalChristoffel22Le48LawName
+  orderedRationalChristoffel11Over2Le22LawName
+  ∷ orderedRationalChristoffel22Le44LawName
+  ∷ orderedRationalChristoffel22Le48LawName
   ∷ orderedRationalRicci2144Over27Le80LawName
   ∷ orderedRationalRicci80Le640LawName
   ∷ orderedRationalRicci252Le640LooseLawName
@@ -791,39 +807,59 @@ canonicalGROrderedRationalFiniteSlotBoundCoreBlockedRows =
   ∷ []
 
 data GROrderedRationalFiniteSlotBoundCoreLawRow : Set where
+  christoffel11Over2Le22LawShape :
+    GROrderedRationalFiniteSlotBoundCoreLawRow
+
   christoffel22Le48LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   christoffel11Over2Le48LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   ricci2144Over27Le80LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   ricci80Le640LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   ricci19Over2Le44LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   ricci352Le640LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   ricci8Times44Eq352LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   ricci252Le640LooseLawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   shellA44Le48LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
+  christoffel22Le44LawShape :
+    GROrderedRationalFiniteSlotBoundCoreLawRow
+
   absSub :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   scaleMonotoneNonnegative :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   finiteSevenSlotReduction :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   finiteFiftySevenZeroSlotClosure :
     GROrderedRationalFiniteSlotBoundCoreLawRow
+
   coord4TriplesExhaustive :
     GROrderedRationalFiniteSlotBoundCoreLawRow
 
 canonicalGROrderedRationalFiniteSlotBoundCoreLawRows :
   List GROrderedRationalFiniteSlotBoundCoreLawRow
 canonicalGROrderedRationalFiniteSlotBoundCoreLawRows =
-  christoffel22Le48LawShape
+  christoffel11Over2Le22LawShape
+  ∷ christoffel22Le48LawShape
   ∷ christoffel11Over2Le48LawShape
   ∷ ricci2144Over27Le80LawShape
   ∷ ricci80Le640LawShape
@@ -832,6 +868,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreLawRows =
   ∷ ricci8Times44Eq352LawShape
   ∷ ricci252Le640LooseLawShape
   ∷ shellA44Le48LawShape
+  ∷ christoffel22Le44LawShape
   ∷ absSub
   ∷ scaleMonotoneNonnegative
   ∷ finiteSevenSlotReduction
@@ -863,7 +900,7 @@ record GROrderedRationalFiniteSlotBoundCoreORCSLPGF : Set where
     F : String
     FIsCanonical :
       F ≡
-      "full ordered-rational proofs remain unpromoted; 11/2<=48, 11/2<=33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 8*44=352, 252<=640, 44<=48, and 7/57/64 Coord4 triple rows are recorded"
+      "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 8*44=352, 252<=640, 22<=44, 44<=48, and 7/57/64 Coord4 triple rows are recorded"
 
 open GROrderedRationalFiniteSlotBoundCoreORCSLPGF public
 
@@ -885,7 +922,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreORCSLPGF =
     refl
     "record the reusable bound shapes, scale/slack constants, dependency names, and exact arithmetic adapters only"
     refl
-    "full ordered-rational proofs remain unpromoted; 11/2<=48, 11/2<=33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 8*44=352, 252<=640, 44<=48, and 7/57/64 Coord4 triple rows are recorded"
+    "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 8*44=352, 252<=640, 22<=44, 44<=48, and 7/57/64 Coord4 triple rows are recorded"
     refl
 
 record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
@@ -1195,7 +1232,7 @@ record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
       ≡
       ("full ordered-rational proofs are intentionally absent until the surrounding Christoffel and Ricci inhabitants are stable"
         ∷ "the file only records reusable scalar lemma names, dependency names, and finite slot shapes"
-        ∷ "the file now also carries exact helper-bound sockets for 11/2<=48, 19/2<=44, 352<=640, and 8*44=352"
+        ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 19/2<=44, 22<=44, 352<=640, and 8*44=352"
         ∷ "no fragile proof terms are duplicated here"
         ∷ [])
 
@@ -1300,7 +1337,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreReceipt =
     coord4SixtyFourTriplesLawName
     ("full ordered-rational proofs are intentionally absent until the surrounding Christoffel and Ricci inhabitants are stable"
       ∷ "the file only records reusable scalar lemma names, dependency names, and finite slot shapes"
-      ∷ "the file now also carries exact helper-bound sockets for 11/2<=48, 19/2<=44, 352<=640, and 8*44=352"
+      ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 19/2<=44, 22<=44, 352<=640, and 8*44=352"
       ∷ "no fragile proof terms are duplicated here"
       ∷ [])
     refl

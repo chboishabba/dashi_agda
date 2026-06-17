@@ -101,6 +101,11 @@ data NSKatoHessianConfinementShape : Set where
   calcEEmpiricalReceiptRecorded : NSKatoHessianConfinementShape
   cl1MathematicallyOpenRecorded : NSKatoHessianConfinementShape
   cl1FailClosedRecorded : NSKatoHessianConfinementShape
+  katoIdentityLeafReceiptRecorded : NSKatoHessianConfinementShape
+  secondDerivExpandLeafRecorded : NSKatoHessianConfinementShape
+  gd3StandardRowRecorded : NSKatoHessianConfinementShape
+  cl2TrichotomyRowRecorded : NSKatoHessianConfinementShape
+  cl2DichotomyRejectedRecorded : NSKatoHessianConfinementShape
 
 canonicalNSKatoHessianConfinementShape : List NSKatoHessianConfinementShape
 canonicalNSKatoHessianConfinementShape =
@@ -131,6 +136,11 @@ canonicalNSKatoHessianConfinementShape =
   ∷ calcEEmpiricalReceiptRecorded
   ∷ cl1MathematicallyOpenRecorded
   ∷ cl1FailClosedRecorded
+  ∷ katoIdentityLeafReceiptRecorded
+  ∷ secondDerivExpandLeafRecorded
+  ∷ gd3StandardRowRecorded
+  ∷ cl2TrichotomyRowRecorded
+  ∷ cl2DichotomyRejectedRecorded
   ∷ []
 
 data NSKatoHessianConfinementBlocker : Set where
@@ -229,6 +239,117 @@ shapeCalcEEmpiricalReceiptText =
 shapeCL1OpenFailClosedText : String
 shapeCL1OpenFailClosedText =
   "CL1 remains mathematically open and fail-closed; no theorem promotion is claimed."
+
+shapeKatoIdentityLeafReceiptText : String
+shapeKatoIdentityLeafReceiptText =
+  "KatoIdentity leaf receipt records the checked secondDeriv-expand surface, the GD3 standard row, and the CL2 trichotomy row without optional calc results."
+
+shapeSecondDerivExpandText : String
+shapeSecondDerivExpandText =
+  "secondDeriv-expand is the checked leaf surface name and is recorded only as a surface marker."
+
+shapeGD3StandardRowText : String
+shapeGD3StandardRowText =
+  "GD3 is recorded as standard on the KatoIdentity leaf receipt, with no promotion beyond the typed row."
+
+shapeCL2TrichotomyRowText : String
+shapeCL2TrichotomyRowText =
+  "CL2 is recorded as trichotomy on the KatoIdentity leaf receipt, not as a dichotomy."
+
+shapeCL2DichotomyRejectedText : String
+shapeCL2DichotomyRejectedText =
+  "CL2 dichotomy semantics are rejected on this leaf receipt surface."
+
+canonicalNSKatoIdentityLeafRows : List String
+canonicalNSKatoIdentityLeafRows =
+  "KatoIdentity"
+  ∷ "secondDeriv-expand"
+  ∷ "GD3"
+  ∷ "CL2"
+  ∷ []
+
+record NSKatoIdentityLeafReceipt : Set where
+  constructor mkNSKatoIdentityLeafReceipt
+  field
+    leafName : String
+    leafNameIsCanonical :
+      leafName ≡ "KatoIdentity"
+    checkedRows : List String
+    checkedRowsIsCanonical :
+      checkedRows ≡ canonicalNSKatoIdentityLeafRows
+    katoIdentityLeafReceiptText : String
+    katoIdentityLeafReceiptTextIsCanonical :
+      katoIdentityLeafReceiptText ≡ shapeKatoIdentityLeafReceiptText
+    secondDerivExpandRowName : String
+    secondDerivExpandRowNameIsCanonical :
+      secondDerivExpandRowName ≡ "secondDeriv-expand"
+    secondDerivExpandRecorded : Bool
+    secondDerivExpandRecordedIsTrue :
+      secondDerivExpandRecorded ≡ true
+    secondDerivExpandText : String
+    secondDerivExpandTextIsCanonical :
+      secondDerivExpandText ≡ shapeSecondDerivExpandText
+    gd3RowName : String
+    gd3RowNameIsCanonical :
+      gd3RowName ≡ "GD3"
+    gd3StandardRowRecorded : Bool
+    gd3StandardRowRecordedIsTrue :
+      gd3StandardRowRecorded ≡ true
+    gd3StandardText : String
+    gd3StandardTextIsCanonical :
+      gd3StandardText ≡ shapeGD3StandardRowText
+    cl2RowName : String
+    cl2RowNameIsCanonical :
+      cl2RowName ≡ "CL2"
+    cl2TrichotomyRowRecorded : Bool
+    cl2TrichotomyRowRecordedIsTrue :
+      cl2TrichotomyRowRecorded ≡ true
+    cl2DichotomyRowRecorded : Bool
+    cl2DichotomyRowRecordedIsFalse :
+      cl2DichotomyRowRecorded ≡ false
+    cl2TrichotomyText : String
+    cl2TrichotomyTextIsCanonical :
+      cl2TrichotomyText ≡ shapeCL2TrichotomyRowText
+    cl2DichotomyRejectedText : String
+    cl2DichotomyRejectedTextIsCanonical :
+      cl2DichotomyRejectedText ≡ shapeCL2DichotomyRejectedText
+    optionalCalcResultsRecorded : Bool
+    optionalCalcResultsRecordedIsFalse :
+      optionalCalcResultsRecorded ≡ false
+
+canonicalNSKatoIdentityLeafReceipt : NSKatoIdentityLeafReceipt
+canonicalNSKatoIdentityLeafReceipt =
+  mkNSKatoIdentityLeafReceipt
+    "KatoIdentity"
+    refl
+    canonicalNSKatoIdentityLeafRows
+    refl
+    shapeKatoIdentityLeafReceiptText
+    refl
+    "secondDeriv-expand"
+    refl
+    true
+    refl
+    shapeSecondDerivExpandText
+    refl
+    "GD3"
+    refl
+    true
+    refl
+    shapeGD3StandardRowText
+    refl
+    "CL2"
+    refl
+    true
+    refl
+    false
+    refl
+    shapeCL2TrichotomyRowText
+    refl
+    shapeCL2DichotomyRejectedText
+    refl
+    false
+    refl
 
 record NSKatoCalcEEmpiricalProjection : Set where
   constructor mkNSKatoCalcEEmpiricalProjection
@@ -382,28 +503,28 @@ record NSKatoHessianConfinementORCSLPGF : Set where
   field
     O : String
     OIsCanonical : O ≡
-      "O: Record the corrected λ2 Hessian/vortex-core confinement receipt with explicit diagonal identity, signed-gap, PSD minimum, curvature, and Clay bridge blocker surfaces."
+      "O: Record the corrected λ2 Hessian/vortex-core confinement receipt with explicit diagonal identity, KatoIdentity leaf, secondDeriv-expand, signed-gap, PSD minimum, curvature, and Clay bridge blocker surfaces."
     R : String
     RIsCanonical : R ≡
-      "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, and explicit fail-closed gate rows."
+      "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the KatoIdentity leaf rows, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, and explicit fail-closed gate rows."
     C : String
     CIsCanonical : C ≡
-      "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, empirical N=128 aggregate metadata, and Calc E/CL1 fail-closed evidence only."
+      "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, the KatoIdentity leaf row checks, empirical N=128 aggregate metadata, and Calc E/CL1 fail-closed evidence only."
     S : String
     SIsCanonical : S ≡
-      "S: Hessian PSD at core, the diagonal identity witness, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, Calc E empirical projection/receipt evidence, CL1 open bookkeeping, and divergence machine-precision are recorded."
+      "S: Hessian PSD at core, the diagonal identity witness, the KatoIdentity leaf checked rows, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, Calc E empirical projection/receipt evidence, CL1 open bookkeeping, and divergence machine-precision are recorded."
     L : String
     LIsCanonical : L ≡
-      "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/Clay bridge surfaces plus Calc E empirical evidence -> keep CL1 open and all promotions fail-closed."
+      "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/KatoIdentity leaf/Clay bridge surfaces plus Calc E empirical evidence -> keep CL1 open and all promotions fail-closed."
     P : String
     PIsCanonical : P ≡
-      "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, Clay bridge claim, Calc E evidence, or CL1 open bookkeeping from this receipt."
+      "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, Clay bridge claim, KatoIdentity leaf row, Calc E evidence, or CL1 open bookkeeping from this receipt."
     G : String
     GIsCanonical : G ≡
-      "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, Calc E remains empirical and non-promoting, CL1 stays mathematically open and fail-closed, no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
+      "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, KatoIdentity leaf rows stay checked only, Calc E remains empirical and non-promoting, CL1 stays mathematically open and fail-closed, no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
     F : String
     FIsCanonical : F ≡
-      "F: Fail-closed due to explicit gate rows, the corrected sign convention, the open Clay bridge blocker, and the open CL1 bookkeeping; proof obligations remain external to this row."
+      "F: Fail-closed due to explicit gate rows, the corrected sign convention, the open Clay bridge blocker, the KatoIdentity leaf checks, and the open CL1 bookkeeping; proof obligations remain external to this row."
 
 data NSKatoHessianConfinementPromotion : Set where
 
@@ -637,6 +758,10 @@ record NSKatoHessianConfinementReceipt : Set where
         refl
         shapeClayBridgeBlockerText
         refl
+    katoIdentityLeafReceipt :
+      NSKatoIdentityLeafReceipt
+    katoIdentityLeafReceiptIsCanonical :
+      katoIdentityLeafReceipt ≡ canonicalNSKatoIdentityLeafReceipt
     hessianPSDRecorded :
       Bool
     hessianPSDRecordedIsTrue :
@@ -752,21 +877,21 @@ canonicalNSKatoHessianConfinementORCSLPGF :
   NSKatoHessianConfinementORCSLPGF
 canonicalNSKatoHessianConfinementORCSLPGF =
   mkNSKatoHessianConfinementORCSLPGF
-    "O: Record the corrected λ2 Hessian/vortex-core confinement receipt with explicit diagonal identity, signed-gap, PSD minimum, curvature, and Clay bridge blocker surfaces."
+    "O: Record the corrected λ2 Hessian/vortex-core confinement receipt with explicit diagonal identity, KatoIdentity leaf, secondDeriv-expand, signed-gap, PSD minimum, curvature, and Clay bridge blocker surfaces."
     refl
-    "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, and explicit fail-closed gate rows."
+    "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the KatoIdentity leaf rows, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, and explicit fail-closed gate rows."
     refl
-    "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, empirical N=128 aggregate metadata, and Calc E/CL1 fail-closed evidence only."
+    "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, the KatoIdentity leaf row checks, empirical N=128 aggregate metadata, and Calc E/CL1 fail-closed evidence only."
     refl
-    "S: Hessian PSD at core, the diagonal identity witness, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, Calc E empirical projection/receipt evidence, CL1 open bookkeeping, and divergence machine-precision are recorded."
+    "S: Hessian PSD at core, the diagonal identity witness, the KatoIdentity leaf checked rows, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, Calc E empirical projection/receipt evidence, CL1 open bookkeeping, and divergence machine-precision are recorded."
     refl
-    "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/Clay bridge surfaces plus Calc E empirical evidence -> keep CL1 open and all promotions fail-closed."
+    "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/KatoIdentity leaf/Clay bridge surfaces plus Calc E empirical evidence -> keep CL1 open and all promotions fail-closed."
     refl
-    "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, Clay bridge claim, Calc E evidence, or CL1 open bookkeeping from this receipt."
+    "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, Clay bridge claim, KatoIdentity leaf row, Calc E evidence, or CL1 open bookkeeping from this receipt."
     refl
-    "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, Calc E remains empirical and non-promoting, CL1 stays mathematically open and fail-closed, no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
+    "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, KatoIdentity leaf rows stay checked only, Calc E remains empirical and non-promoting, CL1 stays mathematically open and fail-closed, no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
     refl
-    "F: Fail-closed due to explicit gate rows, the corrected sign convention, the open Clay bridge blocker, and the open CL1 bookkeeping; proof obligations remain external to this row."
+    "F: Fail-closed due to explicit gate rows, the corrected sign convention, the open Clay bridge blocker, the KatoIdentity leaf checks, and the open CL1 bookkeeping; proof obligations remain external to this row."
     refl
 
 canonicalNSKatoHessianConfinementReceipt : NSKatoHessianConfinementReceipt
@@ -830,6 +955,8 @@ canonicalNSKatoHessianConfinementReceipt =
           shapeClayBridgeBlockerText
           refl
     ; clayBridgeBlockerSurfaceIsCanonical = refl
+    ; katoIdentityLeafReceipt = canonicalNSKatoIdentityLeafReceipt
+    ; katoIdentityLeafReceiptIsCanonical = refl
     ; hessianPSDRecorded = true
     ; hessianPSDRecordedIsTrue = refl
     ; hessianPSDTextRecorded = shapeHessianPSDText
@@ -939,6 +1066,7 @@ record KatoMorseProgramVariables : Set where
     H5 : String
     H6 : String
     h5VsH6Split : String
+    secondDerivExpand : String
     cl2Trichotomy : String
 
 canonicalKatoMorseProgramVariables : KatoMorseProgramVariables
@@ -958,6 +1086,7 @@ canonicalKatoMorseProgramVariables =
     "H5"
     "H6"
     "H5 curvature bound vs H6 Taylor remainder split"
+    "secondDeriv-expand"
     "CL2 trichotomy"
 
 mk1Statement : String
@@ -982,11 +1111,11 @@ gd2Statement =
 
 gd3Statement : String
 gd3Statement =
-  "GD3: H5 versus H6 is recorded as standard: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder."
+  "GD3: H5 versus H6 is recorded as standard on the KatoIdentity leaf receipt; H5 carries the curvature bound for Hess λ2 L∞, H6 carries the Taylor confinement remainder, and secondDeriv-expand is only a checked surface name."
 
 cl2TrichotomyStatement : String
 cl2TrichotomyStatement =
-  "CL2: gap-or-coupling trichotomy is recorded as trichotomy on the current Kato-Morse variables, with no promotion beyond the typed receipt surface."
+  "CL2: gap-or-coupling is recorded as trichotomy, not dichotomy, on the KatoIdentity leaf receipt and the current Kato-Morse variables, with no promotion beyond the typed receipt surface."
 
 theoremCConditionalStatement : String
 theoremCConditionalStatement =
@@ -1174,25 +1303,25 @@ record KatoMorseProgramORCSLPGF : Set where
       "O: Record Kato-Morse theorem-by-theorem rows with explicit statuses and exact variable/shapes names."
     R : String
     RIsCanonical : R ≡
-      "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as a trichotomy row, and MK3, GD1, and conditional Theorem C as open."
+      "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as a trichotomy row rather than a dichotomy, and MK3, GD1, and conditional Theorem C as open."
     C : String
     CIsCanonical : C ≡
-      "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker."
+      "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker, with secondDeriv-expand kept as a checked leaf surface only."
     S : String
     SIsCanonical : S ≡
-      "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, H5, H6, H5 versus H6 curvature/Taylor split, and CL2 trichotomy are recorded as exact program variables and shapes."
+      "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, H5, H6, H5 versus H6 curvature/Taylor split, secondDeriv-expand, and CL2 trichotomy are recorded as exact program variables and shapes."
     L : String
     LIsCanonical : L ≡
-      "L: theorem-by-theorem row surface orders the claims as provable classical, standard, trichotomy, then open blocker, with MK1/MK2 classical, GD2/GD3 standard, CL2 trichotomy, and MK3/GD1/Theorem C open."
+      "L: theorem-by-theorem row surface orders the claims as provable classical, standard, trichotomy, then open blocker, with MK1/MK2 classical, GD2/GD3 standard, CL2 trichotomy rather than dichotomy, and MK3/GD1/Theorem C open."
     P : String
     PIsCanonical : P ≡
       "P: no Clay promotion is performed from this program surface."
     G : String
     GIsCanonical : G ≡
-      "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a trichotomy row, and no Clay promotion is allowed."
+      "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a trichotomy row rather than a dichotomy, secondDeriv-expand is a checked leaf surface, and no Clay promotion is allowed."
     F : String
     FIsCanonical : F ≡
-      "F: status is explicit; MK1 and MK2 are provable classical, GD2 and GD3 are standard, CL2 is trichotomy, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
+      "F: status is explicit; MK1 and MK2 are provable classical, GD2 and GD3 are standard, CL2 is trichotomy rather than dichotomy, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
 
 record KatoMorseProgramSurface : Set where
   constructor mkKatoMorseProgramSurface
@@ -1217,19 +1346,19 @@ canonicalKatoMorseProgramORCSLPGF =
   mkKatoMorseProgramORCSLPGF
     "O: Record Kato-Morse theorem-by-theorem rows with explicit statuses and exact variable/shapes names."
     refl
-    "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as a trichotomy row, and MK3, GD1, and conditional Theorem C as open."
+    "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as a trichotomy row rather than a dichotomy, and MK3, GD1, and conditional Theorem C as open."
     refl
-    "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker."
+    "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker, with secondDeriv-expand kept as a checked leaf surface only."
     refl
-    "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, H5, H6, H5 versus H6 curvature/Taylor split, and CL2 trichotomy are recorded as exact program variables and shapes."
+    "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, H5, H6, H5 versus H6 curvature/Taylor split, secondDeriv-expand, and CL2 trichotomy are recorded as exact program variables and shapes."
     refl
-    "L: theorem-by-theorem row surface orders the claims as provable classical, standard, trichotomy, then open blocker, with MK1/MK2 classical, GD2/GD3 standard, CL2 trichotomy, and MK3/GD1/Theorem C open."
+    "L: theorem-by-theorem row surface orders the claims as provable classical, standard, trichotomy, then open blocker, with MK1/MK2 classical, GD2/GD3 standard, CL2 trichotomy rather than dichotomy, and MK3/GD1/Theorem C open."
     refl
     "P: no Clay promotion is performed from this program surface."
     refl
-    "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a trichotomy row, and no Clay promotion is allowed."
+    "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a trichotomy row rather than a dichotomy, secondDeriv-expand is a checked leaf surface, and no Clay promotion is allowed."
     refl
-    "F: status is explicit; MK1 and MK2 are provable classical, GD2 and GD3 are standard, CL2 is trichotomy, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
+    "F: status is explicit; MK1 and MK2 are provable classical, GD2 and GD3 are standard, CL2 is trichotomy rather than dichotomy, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
     refl
 
 canonicalKatoMorseProgramSurface : KatoMorseProgramSurface
