@@ -14,7 +14,9 @@ open import Data.Empty using (⊥)
 -- true λ2 minimum / vortex-core target: Hess(λ2) should be positive
 -- semidefinite; positive ∂e1∂e2 λ2 is confinement evidence, not adverse
 -- evidence.  The N=128 target record is purely symbolic/typed and is
--- empirical-only.
+-- empirical-only.  The receipt also keeps the diagonal identity, signed gap,
+-- PSD minimum, gap-collapse, H5/H6, and Clay bridge blocker surfaces
+-- explicit while remaining fail-closed.
 
 data NSKatoHessianSign : Set where
   signNegative : NSKatoHessianSign
@@ -72,9 +74,14 @@ canonicalNSKatoHessianFullHessian3DProjection =
 data NSKatoHessianConfinementShape : Set where
   hessianPSDAtTrueLambda2Core : NSKatoHessianConfinementShape
   lambda2NegativeRegionShapeRecorded : NSKatoHessianConfinementShape
+  katoDiagonalIdentityShapeRecorded : NSKatoHessianConfinementShape
+  signedGapStructureShapeRecorded : NSKatoHessianConfinementShape
   positiveCrossDerivativeIsConfinementEvidence : NSKatoHessianConfinementShape
   negativeCrossDerivativeConfinementCorrectionRecorded : NSKatoHessianConfinementShape
   globalLocalMinimumAtTrueVortexCore : NSKatoHessianConfinementShape
+  psdMinimumConfinementRecorded : NSKatoHessianConfinementShape
+  gapCollapseImpliesHessianBlowUpRecorded : NSKatoHessianConfinementShape
+  curvatureSobolevH5H6SplitRecorded : NSKatoHessianConfinementShape
   hessian3DCoreTriaxialRecorded : NSKatoHessianConfinementShape
   hessian3DFullEigenSpectrumRecorded : NSKatoHessianConfinementShape
   n128TwoPlaneHessianPositiveDefiniteRecorded : NSKatoHessianConfinementShape
@@ -86,15 +93,21 @@ data NSKatoHessianConfinementShape : Set where
   katoTubeBoundaryTheoremCandidateOnlyRecorded : NSKatoHessianConfinementShape
   omegaTubeOmegaSheetSplitCorrectedRecorded : NSKatoHessianConfinementShape
   millerBridgeOpenTheoremCandidateOnlyRecorded : NSKatoHessianConfinementShape
+  clayBridgeOpenTheoremCandidateOnlyRecorded : NSKatoHessianConfinementShape
   divergenceMachinePrecisionRecorded : NSKatoHessianConfinementShape
 
 canonicalNSKatoHessianConfinementShape : List NSKatoHessianConfinementShape
 canonicalNSKatoHessianConfinementShape =
   hessianPSDAtTrueLambda2Core
   ∷ lambda2NegativeRegionShapeRecorded
+  ∷ katoDiagonalIdentityShapeRecorded
+  ∷ signedGapStructureShapeRecorded
   ∷ positiveCrossDerivativeIsConfinementEvidence
   ∷ negativeCrossDerivativeConfinementCorrectionRecorded
   ∷ globalLocalMinimumAtTrueVortexCore
+  ∷ psdMinimumConfinementRecorded
+  ∷ gapCollapseImpliesHessianBlowUpRecorded
+  ∷ curvatureSobolevH5H6SplitRecorded
   ∷ hessian3DCoreTriaxialRecorded
   ∷ hessian3DFullEigenSpectrumRecorded
   ∷ n128TwoPlaneHessianPositiveDefiniteRecorded
@@ -106,11 +119,14 @@ canonicalNSKatoHessianConfinementShape =
   ∷ katoTubeBoundaryTheoremCandidateOnlyRecorded
   ∷ omegaTubeOmegaSheetSplitCorrectedRecorded
   ∷ millerBridgeOpenTheoremCandidateOnlyRecorded
+  ∷ clayBridgeOpenTheoremCandidateOnlyRecorded
   ∷ divergenceMachinePrecisionRecorded
   ∷ []
 
 data NSKatoHessianConfinementBlocker : Set where
   millerBridgeOpenTheoremCandidateOnly :
+    NSKatoHessianConfinementBlocker
+  clayBridgeOpenTheoremCandidateOnly :
     NSKatoHessianConfinementBlocker
   noExternalDNSPromotion :
     NSKatoHessianConfinementBlocker
@@ -122,6 +138,7 @@ data NSKatoHessianConfinementBlocker : Set where
 canonicalNSKatoHessianConfinementBlockers : List NSKatoHessianConfinementBlocker
 canonicalNSKatoHessianConfinementBlockers =
   millerBridgeOpenTheoremCandidateOnly
+  ∷ clayBridgeOpenTheoremCandidateOnly
   ∷ noExternalDNSPromotion
   ∷ noFullRegularityInhabitant
   ∷ noClayPromotion
@@ -264,28 +281,28 @@ record NSKatoHessianConfinementORCSLPGF : Set where
   field
     O : String
     OIsCanonical : O ≡
-      "O: Record a corrected λ2 Hessian/vortex-core confinement shape receipt at fail-closed posture."
+      "O: Record the corrected λ2 Hessian/vortex-core confinement receipt with explicit diagonal identity, signed-gap, PSD minimum, curvature, and Clay bridge blocker surfaces."
     R : String
     RIsCanonical : R ≡
-      "R: Record Hess(λ2) PSD-at-minimum, corrected positive cross-derivative confinement signal, full 3D Hessian core geometry + eigen-spectrum, aggregate N=128 stats, and explicit fail-closed gate rows."
+      "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, and explicit fail-closed gate rows."
     C : String
     CIsCanonical : C ≡
-      "C: The receipt stores typed canonical target/value shapes and empirical N=128 aggregate metadata only."
+      "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, and empirical N=128 aggregate metadata only."
     S : String
     SIsCanonical : S ≡
-      "S: Hessian PSD at core, λ2<0 region, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, and divergence machine-precision are recorded."
+      "S: Hessian PSD at core, the diagonal identity witness, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, and divergence machine-precision are recorded."
     L : String
     LIsCanonical : L ≡
-      "L: Corrected sign convention at true λ2 minimum -> record empirical N=128 aggregate rows -> keep all promotions fail-closed."
+      "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/Clay bridge surfaces -> keep all promotions fail-closed."
     P : String
     PIsCanonical : P ≡
-      "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, or Clay claim from this receipt."
+      "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, or Clay bridge claim from this receipt."
     G : String
     GIsCanonical : G ≡
-      "G: Governance guard: Miller bridge open only as theorem-candidate, no external-DNS promotion path, no full/global regularity inhabitant, no Clay promotion."
+      "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
     F : String
     FIsCanonical : F ≡
-      "F: Fail-closed due to explicit gate rows and the corrected sign convention; proof obligations remain external to this row."
+      "F: Fail-closed due to explicit gate rows, the corrected sign convention, and the open Clay bridge blocker; proof obligations remain external to this row."
 
 data NSKatoHessianConfinementPromotion : Set where
 
@@ -341,6 +358,108 @@ canonicalN128Target =
     true
     refl
 
+shapeDiagonalIdentityText : String
+shapeDiagonalIdentityText =
+  "The concrete 3x3 carrier is recorded as the diagonal identity witness on this receipt surface."
+
+shapeSignedGapStructureText : String
+shapeSignedGapStructureText =
+  "The signed gap ledger keeps the Kato-side gap and confinement-side cross-derivative sign distinct; the signs are not collapsed."
+
+shapePSDMinimumConfinementText : String
+shapePSDMinimumConfinementText =
+  "At the true λ2 minimum, the Hessian is recorded as positive semidefinite and the confinement surface is minimum-side only."
+
+shapeGapCollapseHessianBlowUpText : String
+shapeGapCollapseHessianBlowUpText =
+  "Gap collapse is recorded only as a conditional route toward Hessian blow-up; no promotion is claimed here."
+
+shapeCurvatureSobolevSplitText : String
+shapeCurvatureSobolevSplitText =
+  "Curvature-to-Sobolev bookkeeping separates H5 as the curvature bound for Hess λ2 L∞ from H6 as the Taylor confinement remainder."
+
+shapeClayBridgeBlockerText : String
+shapeClayBridgeBlockerText =
+  "Clay bridge remains a typed blocker: no bridge promotion, no Clay promotion, and no terminal claim follow."
+
+record NSKatoDiagonalIdentitySurface : Set where
+  constructor mkNSKatoDiagonalIdentitySurface
+  field
+    diagonalIdentityText : String
+    diagonalIdentityTextIsCanonical :
+      diagonalIdentityText ≡ shapeDiagonalIdentityText
+    diagonalIdentityRecorded : Bool
+    diagonalIdentityRecordedIsTrue :
+      diagonalIdentityRecorded ≡ true
+
+record NSKatoSignedGapStructureSurface : Set where
+  constructor mkNSKatoSignedGapStructureSurface
+  field
+    katoSideGapRecorded : Bool
+    katoSideGapRecordedIsTrue :
+      katoSideGapRecorded ≡ true
+    confinementSideCrossDerivativeRecorded : Bool
+    confinementSideCrossDerivativeRecordedIsTrue :
+      confinementSideCrossDerivativeRecorded ≡ true
+    signedGapText : String
+    signedGapTextIsCanonical :
+      signedGapText ≡ shapeSignedGapStructureText
+
+record NSKatoPSDMinimumConfinementSurface : Set where
+  constructor mkNSKatoPSDMinimumConfinementSurface
+  field
+    hessianPSDAtMinimum : Bool
+    hessianPSDAtMinimumIsTrue :
+      hessianPSDAtMinimum ≡ true
+    confinementAtMinimumRecorded : Bool
+    confinementAtMinimumRecordedIsTrue :
+      confinementAtMinimumRecorded ≡ true
+    psdMinimumConfinementText : String
+    psdMinimumConfinementTextIsCanonical :
+      psdMinimumConfinementText ≡ shapePSDMinimumConfinementText
+
+record NSKatoGapCollapseHessianBlowUpSurface : Set where
+  constructor mkNSKatoGapCollapseHessianBlowUpSurface
+  field
+    gapCollapseRecorded : Bool
+    gapCollapseRecordedIsTrue :
+      gapCollapseRecorded ≡ true
+    gapCollapseImpliesHessianBlowUpSurfaceRecorded : Bool
+    gapCollapseImpliesHessianBlowUpSurfaceRecordedIsTrue :
+      gapCollapseImpliesHessianBlowUpSurfaceRecorded ≡ true
+    gapCollapseImpliesHessianBlowUpPromoted : Bool
+    gapCollapseImpliesHessianBlowUpPromotedIsFalse :
+      gapCollapseImpliesHessianBlowUpPromoted ≡ false
+    gapCollapseHessianBlowUpText : String
+    gapCollapseHessianBlowUpTextIsCanonical :
+      gapCollapseHessianBlowUpText ≡ shapeGapCollapseHessianBlowUpText
+
+record NSKatoCurvatureSobolevSurface : Set where
+  constructor mkNSKatoCurvatureSobolevSurface
+  field
+    h5ForHessianLInfinity : Bool
+    h5ForHessianLInfinityIsTrue :
+      h5ForHessianLInfinity ≡ true
+    h6ForConfinementRemainder : Bool
+    h6ForConfinementRemainderIsTrue :
+      h6ForConfinementRemainder ≡ true
+    curvatureSobolevText : String
+    curvatureSobolevTextIsCanonical :
+      curvatureSobolevText ≡ shapeCurvatureSobolevSplitText
+
+record NSKatoClayBridgeBlockerSurface : Set where
+  constructor mkNSKatoClayBridgeBlockerSurface
+  field
+    clayBridgeOpenCandidateOnly : Bool
+    clayBridgeOpenCandidateOnlyIsTrue :
+      clayBridgeOpenCandidateOnly ≡ true
+    clayBridgePromoted : Bool
+    clayBridgePromotedIsFalse :
+      clayBridgePromoted ≡ false
+    clayBridgeBlockerText : String
+    clayBridgeBlockerTextIsCanonical :
+      clayBridgeBlockerText ≡ shapeClayBridgeBlockerText
+
 record NSKatoHessianConfinementReceipt : Set where
   field
     status :
@@ -351,6 +470,72 @@ record NSKatoHessianConfinementReceipt : Set where
       List NSKatoHessianConfinementShape
     shapeLedgerIsCanonical :
       shapeLedger ≡ canonicalNSKatoHessianConfinementShape
+    diagonalIdentitySurface :
+      NSKatoDiagonalIdentitySurface
+    diagonalIdentitySurfaceIsCanonical :
+      diagonalIdentitySurface ≡
+      mkNSKatoDiagonalIdentitySurface
+        shapeDiagonalIdentityText
+        refl
+        true
+        refl
+    signedGapStructureSurface :
+      NSKatoSignedGapStructureSurface
+    signedGapStructureSurfaceIsCanonical :
+      signedGapStructureSurface ≡
+      mkNSKatoSignedGapStructureSurface
+        true
+        refl
+        true
+        refl
+        shapeSignedGapStructureText
+        refl
+    psdMinimumConfinementSurface :
+      NSKatoPSDMinimumConfinementSurface
+    psdMinimumConfinementSurfaceIsCanonical :
+      psdMinimumConfinementSurface ≡
+      mkNSKatoPSDMinimumConfinementSurface
+        true
+        refl
+        true
+        refl
+        shapePSDMinimumConfinementText
+        refl
+    gapCollapseHessianBlowUpSurface :
+      NSKatoGapCollapseHessianBlowUpSurface
+    gapCollapseHessianBlowUpSurfaceIsCanonical :
+      gapCollapseHessianBlowUpSurface ≡
+      mkNSKatoGapCollapseHessianBlowUpSurface
+        true
+        refl
+        true
+        refl
+        false
+        refl
+        shapeGapCollapseHessianBlowUpText
+        refl
+    curvatureSobolevSurface :
+      NSKatoCurvatureSobolevSurface
+    curvatureSobolevSurfaceIsCanonical :
+      curvatureSobolevSurface ≡
+      mkNSKatoCurvatureSobolevSurface
+        true
+        refl
+        true
+        refl
+        shapeCurvatureSobolevSplitText
+        refl
+    clayBridgeBlockerSurface :
+      NSKatoClayBridgeBlockerSurface
+    clayBridgeBlockerSurfaceIsCanonical :
+      clayBridgeBlockerSurface ≡
+      mkNSKatoClayBridgeBlockerSurface
+        true
+        refl
+        false
+        refl
+        shapeClayBridgeBlockerText
+        refl
     hessianPSDRecorded :
       Bool
     hessianPSDRecordedIsTrue :
@@ -454,21 +639,21 @@ canonicalNSKatoHessianConfinementORCSLPGF :
   NSKatoHessianConfinementORCSLPGF
 canonicalNSKatoHessianConfinementORCSLPGF =
   mkNSKatoHessianConfinementORCSLPGF
-    "O: Record a corrected λ2 Hessian/vortex-core confinement shape receipt at fail-closed posture."
+    "O: Record the corrected λ2 Hessian/vortex-core confinement receipt with explicit diagonal identity, signed-gap, PSD minimum, curvature, and Clay bridge blocker surfaces."
     refl
-    "R: Record Hess(λ2) PSD-at-minimum, corrected positive cross-derivative confinement signal, full 3D Hessian core geometry + eigen-spectrum, aggregate N=128 stats, and explicit fail-closed gate rows."
+    "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, and explicit fail-closed gate rows."
     refl
-    "C: The receipt stores typed canonical target/value shapes and empirical N=128 aggregate metadata only."
+    "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, and empirical N=128 aggregate metadata only."
     refl
-    "S: Hessian PSD at core, λ2<0 region, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, and divergence machine-precision are recorded."
+    "S: Hessian PSD at core, the diagonal identity witness, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, and divergence machine-precision are recorded."
     refl
-    "L: Corrected sign convention at true λ2 minimum -> record empirical N=128 aggregate rows -> keep all promotions fail-closed."
+    "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/Clay bridge surfaces -> keep all promotions fail-closed."
     refl
-    "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, or Clay claim from this receipt."
+    "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, or Clay bridge claim from this receipt."
     refl
-    "G: Governance guard: Miller bridge open only as theorem-candidate, no external-DNS promotion path, no full/global regularity inhabitant, no Clay promotion."
+    "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
     refl
-    "F: Fail-closed due to explicit gate rows and the corrected sign convention; proof obligations remain external to this row."
+    "F: Fail-closed due to explicit gate rows, the corrected sign convention, and the open Clay bridge blocker; proof obligations remain external to this row."
     refl
 
 canonicalNSKatoHessianConfinementReceipt : NSKatoHessianConfinementReceipt
@@ -478,6 +663,60 @@ canonicalNSKatoHessianConfinementReceipt =
     ; statusIsFailClosed = refl
     ; shapeLedger = canonicalNSKatoHessianConfinementShape
     ; shapeLedgerIsCanonical = refl
+    ; diagonalIdentitySurface =
+        mkNSKatoDiagonalIdentitySurface
+          shapeDiagonalIdentityText
+          refl
+          true
+          refl
+    ; diagonalIdentitySurfaceIsCanonical = refl
+    ; signedGapStructureSurface =
+        mkNSKatoSignedGapStructureSurface
+          true
+          refl
+          true
+          refl
+          shapeSignedGapStructureText
+          refl
+    ; signedGapStructureSurfaceIsCanonical = refl
+    ; psdMinimumConfinementSurface =
+        mkNSKatoPSDMinimumConfinementSurface
+          true
+          refl
+          true
+          refl
+          shapePSDMinimumConfinementText
+          refl
+    ; psdMinimumConfinementSurfaceIsCanonical = refl
+    ; gapCollapseHessianBlowUpSurface =
+        mkNSKatoGapCollapseHessianBlowUpSurface
+          true
+          refl
+          true
+          refl
+          false
+          refl
+          shapeGapCollapseHessianBlowUpText
+          refl
+    ; gapCollapseHessianBlowUpSurfaceIsCanonical = refl
+    ; curvatureSobolevSurface =
+        mkNSKatoCurvatureSobolevSurface
+          true
+          refl
+          true
+          refl
+          shapeCurvatureSobolevSplitText
+          refl
+    ; curvatureSobolevSurfaceIsCanonical = refl
+    ; clayBridgeBlockerSurface =
+        mkNSKatoClayBridgeBlockerSurface
+          true
+          refl
+          false
+          refl
+          shapeClayBridgeBlockerText
+          refl
+    ; clayBridgeBlockerSurfaceIsCanonical = refl
     ; hessianPSDRecorded = true
     ; hessianPSDRecordedIsTrue = refl
     ; hessianPSDTextRecorded = shapeHessianPSDText
@@ -534,6 +773,7 @@ open NSKatoHessianConfinementReceipt public
 
 data KatoMorseProofStatus : Set where
   provableClassical : KatoMorseProofStatus
+  standardRecorded : KatoMorseProofStatus
   openBlocker : KatoMorseProofStatus
 
 data KatoMorseTheorem : Set where
@@ -543,6 +783,7 @@ data KatoMorseTheorem : Set where
   GD1 : KatoMorseTheorem
   GD2 : KatoMorseTheorem
   GD3 : KatoMorseTheorem
+  CL2 : KatoMorseTheorem
   theoremCConditional : KatoMorseTheorem
 
 katoMorseTheoremName : KatoMorseTheorem → String
@@ -552,10 +793,12 @@ katoMorseTheoremName MK3 = "MK3"
 katoMorseTheoremName GD1 = "GD1"
 katoMorseTheoremName GD2 = "GD2"
 katoMorseTheoremName GD3 = "GD3"
+katoMorseTheoremName CL2 = "CL2"
 katoMorseTheoremName theoremCConditional = "Theorem C (conditional)"
 
 katoMorseProofStatusName : KatoMorseProofStatus → String
 katoMorseProofStatusName provableClassical = "provable classical"
+katoMorseProofStatusName standardRecorded = "standard"
 katoMorseProofStatusName openBlocker = "open blocker"
 
 record KatoMorseProgramVariables : Set where
@@ -565,12 +808,17 @@ record KatoMorseProgramVariables : Set where
     OmegaBeta : String
     OmegaK : String
     g12 : String
+    g23 : String
     psi12 : String
     B : String
+    B_k : String
+    C_k : String
     c0 : String
     c1 : String
     H5 : String
     H6 : String
+    h5VsH6Split : String
+    cl2GapOrCoupling : String
 
 canonicalKatoMorseProgramVariables : KatoMorseProgramVariables
 canonicalKatoMorseProgramVariables =
@@ -579,24 +827,29 @@ canonicalKatoMorseProgramVariables =
     "OmegaBeta"
     "OmegaK"
     "g12"
+    "g23"
     "B/g12"
     "B"
+    "B_k"
+    "C_k"
     "c0"
     "c1"
     "H5"
     "H6"
+    "H5 curvature bound vs H6 Taylor remainder split"
+    "CL2 gap-or-coupling dichotomy"
 
 mk1Statement : String
 mk1Statement =
-  "MK1: geometric kernel preparation at beta(t)=theta*lambda2min(t), OmegaBeta, and OmegaK is available on a corrected-vortex-core branch."
+  "MK1: geometric kernel preparation at beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, and g23 is recorded as provable classical on the current exact receipt variables."
 
 mk2Statement : String
 mk2Statement =
-  "MK2: local Morse kernel counting step is recorded as provable classical under the Kato-Morse program bundle."
+  "MK2: local Morse kernel counting with B_k and C_k is recorded as provable classical on the current exact receipt variables."
 
 mk3Statement : String
 mk3Statement =
-  "MK3: minimum-split/shape coupling remains an unclosed route and is carried as a pending theorem-program target."
+  "MK3: minimum-split/shape coupling remains conditional and is carried as a pending theorem-program target."
 
 gd1Statement : String
 gd1Statement =
@@ -604,11 +857,15 @@ gd1Statement =
 
 gd2Statement : String
 gd2Statement =
-  "GD2: geometric remainder transfer remains open and is not yet claim-closed."
+  "GD2: standard receipt row on the current Kato-Morse variables; the CL2 gap-or-coupling dichotomy is carried on its own row and remains fail-closed."
 
 gd3Statement : String
 gd3Statement =
-  "GD3: explicit correction: Hess λ2 L∞ is controlled by H5, while the Taylor confinement remainder requires H6."
+  "GD3: H5 versus H6 is recorded as standard: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder."
+
+cl2Statement : String
+cl2Statement =
+  "CL2: gap-or-coupling dichotomy is recorded as standard on the current Kato-Morse variables, with no promotion beyond the typed receipt surface."
 
 theoremCConditionalStatement : String
 theoremCConditionalStatement =
@@ -621,6 +878,7 @@ katoMorseTheoremStatement MK3 = mk3Statement
 katoMorseTheoremStatement GD1 = gd1Statement
 katoMorseTheoremStatement GD2 = gd2Statement
 katoMorseTheoremStatement GD3 = gd3Statement
+katoMorseTheoremStatement CL2 = cl2Statement
 katoMorseTheoremStatement theoremCConditional = theoremCConditionalStatement
 
 record KatoMorseProgramTheoremRow : Set where
@@ -643,8 +901,8 @@ canonicalKatoMorseProgramRows =
     MK1
     (katoMorseTheoremName MK1)
     refl
-    openBlocker
-    (katoMorseProofStatusName openBlocker)
+    provableClassical
+    (katoMorseProofStatusName provableClassical)
     refl
     mk1Statement
     refl
@@ -691,8 +949,8 @@ canonicalKatoMorseProgramRows =
     GD2
     (katoMorseTheoremName GD2)
     refl
-    openBlocker
-    (katoMorseProofStatusName openBlocker)
+    standardRecorded
+    (katoMorseProofStatusName standardRecorded)
     refl
     gd2Statement
     refl
@@ -703,10 +961,22 @@ canonicalKatoMorseProgramRows =
     GD3
     (katoMorseTheoremName GD3)
     refl
-    openBlocker
-    (katoMorseProofStatusName openBlocker)
+    standardRecorded
+    (katoMorseProofStatusName standardRecorded)
     refl
     gd3Statement
+    refl
+    canonicalKatoMorseProgramVariables
+    refl
+    ∷
+  mkKatoMorseProgramTheoremRow
+    CL2
+    (katoMorseTheoremName CL2)
+    refl
+    standardRecorded
+    (katoMorseProofStatusName standardRecorded)
+    refl
+    cl2Statement
     refl
     canonicalKatoMorseProgramVariables
     refl
@@ -743,28 +1013,28 @@ record KatoMorseProgramORCSLPGF : Set where
   field
     O : String
     OIsCanonical : O ≡
-      "O: Record Kato-Morse theorem-by-theorem rows with explicit statuses and exact variable names."
+      "O: Record Kato-Morse theorem-by-theorem rows with explicit statuses and exact variable/shapes names."
     R : String
     RIsCanonical : R ≡
-      "R: The prompt-aligned rows are MK1, MK2, MK3, GD1, GD2, GD3, and conditional Theorem C."
+      "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as the standard gap-or-coupling dichotomy, and MK3, GD1, and conditional Theorem C as open."
     C : String
     CIsCanonical : C ≡
-      "C: Kato-Morse status fields are explicit as provable classical/open blocker."
+      "C: Kato-Morse status fields are explicit as provable classical/standard/open blocker."
     S : String
     SIsCanonical : S ≡
-      "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, psi12=B/g12, B, c0, c1, H5, and H6 are recorded as exact program variables."
+      "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, H5, H6, H5 versus H6 curvature/Taylor split, and CL2 gap-or-coupling dichotomy are recorded as exact program variables and shapes."
     L : String
     LIsCanonical : L ≡
-      "L: theorem-by-theorem row surface feeds into the same confinement ledger as a typed program target, without changing existing exports."
+      "L: theorem-by-theorem row surface orders the claims as provable classical, standard, then open blocker, with MK1/MK2 classical, GD2/GD3/CL2 standard, and MK3/GD1/Theorem C open."
     P : String
     PIsCanonical : P ≡
       "P: no Clay promotion is performed from this program surface."
     G : String
     GIsCanonical : G ≡
-      "G: all pending route rows remain fail-closed; only typed record data is carried."
+      "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a standard gap-or-coupling dichotomy, and no Clay promotion is allowed."
     F : String
     FIsCanonical : F ≡
-      "F: status is explicit; theorem C remains open blocker; GD3 records the H5/H6 correction and remains open."
+      "F: status is explicit; MK1 and MK2 are provable classical, GD2, GD3, and CL2 are standard, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
 
 record KatoMorseProgramSurface : Set where
   constructor mkKatoMorseProgramSurface
@@ -775,7 +1045,7 @@ record KatoMorseProgramSurface : Set where
     variableBundleIsCanonical : variableBundle ≡ canonicalKatoMorseProgramVariables
     curvatureToSobolevRow : String
     curvatureToSobolevRowIsCanonical : curvatureToSobolevRow ≡
-      "The Hessian-vs-remainder correction is explicit: Hess λ2 L∞ requires H5, while Taylor confinement remainder needs H6."
+      "The H5 versus H6 split is explicit: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder."
     programBlockers : List KatoMorseProgramBlocker
     programBlockersAreCanonical : programBlockers ≡ canonicalKatoMorseProgramBlockers
     clayPromoted : Bool
@@ -787,21 +1057,21 @@ record KatoMorseProgramSurface : Set where
 canonicalKatoMorseProgramORCSLPGF : KatoMorseProgramORCSLPGF
 canonicalKatoMorseProgramORCSLPGF =
   mkKatoMorseProgramORCSLPGF
-    "O: Record Kato-Morse theorem-by-theorem rows with explicit statuses and exact variable names."
+    "O: Record Kato-Morse theorem-by-theorem rows with explicit statuses and exact variable/shapes names."
     refl
-    "R: The prompt-aligned rows are MK1, MK2, MK3, GD1, GD2, GD3, and conditional Theorem C."
+    "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as the standard gap-or-coupling dichotomy, and MK3, GD1, and conditional Theorem C as open."
     refl
-    "C: Kato-Morse status fields are explicit as provable classical/open blocker."
+    "C: Kato-Morse status fields are explicit as provable classical/standard/open blocker."
     refl
-    "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, psi12=B/g12, B, c0, c1, H5, and H6 are recorded as exact program variables."
+    "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, H5, H6, H5 versus H6 curvature/Taylor split, and CL2 gap-or-coupling dichotomy are recorded as exact program variables and shapes."
     refl
-    "L: theorem-by-theorem row surface feeds into the same confinement ledger as a typed program target, without changing existing exports."
+    "L: theorem-by-theorem row surface orders the claims as provable classical, standard, then open blocker, with MK1/MK2 classical, GD2/GD3/CL2 standard, and MK3/GD1/Theorem C open."
     refl
     "P: no Clay promotion is performed from this program surface."
     refl
-    "G: all pending route rows remain fail-closed; only typed record data is carried."
+    "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a standard gap-or-coupling dichotomy, and no Clay promotion is allowed."
     refl
-    "F: status is explicit; theorem C remains open blocker; GD3 records the H5/H6 correction and remains open."
+    "F: status is explicit; MK1 and MK2 are provable classical, GD2, GD3, and CL2 are standard, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
     refl
 
 canonicalKatoMorseProgramSurface : KatoMorseProgramSurface
@@ -811,7 +1081,7 @@ canonicalKatoMorseProgramSurface =
     refl
     canonicalKatoMorseProgramVariables
     refl
-    "The Hessian-vs-remainder correction is explicit: Hess λ2 L∞ requires H5, while Taylor confinement remainder needs H6."
+    "The H5 versus H6 split is explicit: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder."
     refl
     canonicalKatoMorseProgramBlockers
     refl

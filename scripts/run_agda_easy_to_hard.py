@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import json
 import subprocess
 import sys
@@ -12,6 +13,32 @@ from typing import Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
 QUEUE_SCRIPT = ROOT / "scripts" / "generate_layer2_long_compute_queue.py"
+AGDA_BIN = None
+
+
+def _resolve_agda_bin() -> str:
+    env_bin = os.environ.get("AGDA_BIN")
+    if env_bin:
+        return env_bin
+
+    try:
+        completed = subprocess.run(
+            ["nix", "build", "--no-link", "--print-out-paths", "/home/c/Documents/code/agda#debug.bin"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if completed.returncode == 0:
+            candidate = Path((completed.stdout or "").strip()) / "bin" / "agda"
+            if candidate.is_file():
+                return str(candidate)
+    except FileNotFoundError:
+        pass
+
+    return "agda"
+
+
+AGDA_BIN = _resolve_agda_bin()
 
 L0_TARGETS = [
     "Ontology/Hecke/Layer2FiniteSearchShell.agda",
@@ -52,7 +79,7 @@ def agda_step(target: str) -> Step:
     return Step(
         name=target,
         kind="agda",
-        command=["agda", "-i", ".", target],
+        command=[AGDA_BIN, "-i", ".", target],
         expected_lane="L0",
     )
 
@@ -61,7 +88,7 @@ def bounded_agda_step(target: str, timeout_s: int) -> Step:
     return Step(
         name=target,
         kind="agda",
-        command=["timeout", str(timeout_s), "agda", "-i", ".", target],
+        command=["timeout", str(timeout_s), AGDA_BIN, "-i", ".", target],
         expected_lane="L1",
     )
 

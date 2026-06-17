@@ -201,13 +201,103 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       "h_gi"
 
+    christoffelC0StaticHypothesis :
+      String
+
+    christoffelC0StaticHypothesisIsCanonical :
+      christoffelC0StaticHypothesis
+      ≡
+      "h_static"
+
+    christoffelC0DiagonalHypothesis :
+      String
+
+    christoffelC0DiagonalHypothesisIsCanonical :
+      christoffelC0DiagonalHypothesis
+      ≡
+      "h_diag"
+
     christoffelC0StaticDiagonalClosenessHypothesis :
       String
 
     christoffelC0StaticDiagonalClosenessHypothesisIsCanonical :
       christoffelC0StaticDiagonalClosenessHypothesis
       ≡
-      "h_static && h_diagonal"
+      "h_static && h_diag"
+
+    christoffelC0DiagonalNonzeroSlotObligation :
+      String
+
+    christoffelC0DiagonalNonzeroSlotObligationIsCanonical :
+      christoffelC0DiagonalNonzeroSlotObligation
+      ≡
+      "DiagonalNonzeroSlot?"
+
+    christoffelC0DiagonalZeroLemmaObligation :
+      String
+
+    christoffelC0DiagonalZeroLemmaObligationIsCanonical :
+      christoffelC0DiagonalZeroLemmaObligation
+      ≡
+      "diagonalZeroLemma"
+
+    christoffelC0ChristoffelBilinearSplitObligation :
+      String
+
+    christoffelC0ChristoffelBilinearSplitObligationIsCanonical :
+      christoffelC0ChristoffelBilinearSplitObligation
+      ≡
+      "christoffelBilinearSplit"
+
+    christoffelC0DiagonalZeroLemmaReceipt :
+      String
+
+    christoffelC0DiagonalZeroLemmaReceiptIsCanonical :
+      christoffelC0DiagonalZeroLemmaReceipt
+      ≡
+      "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+
+    christoffelC0DiagonalZeroLemmaNonzeroTripleCount :
+      ℕ
+
+    christoffelC0DiagonalZeroLemmaNonzeroTripleCountIs10 :
+      christoffelC0DiagonalZeroLemmaNonzeroTripleCount ≡ 10
+
+    christoffelC0DiagonalZeroLemmaZeroTripleCount :
+      ℕ
+
+    christoffelC0DiagonalZeroLemmaZeroTripleCountIs54 :
+      christoffelC0DiagonalZeroLemmaZeroTripleCount ≡ 54
+
+    christoffelC0DiagonalZeroLemmaSymmetricTripleCount :
+      ℕ
+
+    christoffelC0DiagonalZeroLemmaSymmetricTripleCountIs64 :
+      christoffelC0DiagonalZeroLemmaSymmetricTripleCount ≡ 64
+
+    christoffelC0ChristoffelBilinearSplitReceipt :
+      String
+
+    christoffelC0ChristoffelBilinearSplitReceiptIsCanonical :
+      christoffelC0ChristoffelBilinearSplitReceipt
+      ≡
+      "|δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+
+    christoffelC0ChristoffelBilinearSplitStaticDiagonalReceipt :
+      String
+
+    christoffelC0ChristoffelBilinearSplitStaticDiagonalReceiptIsCanonical :
+      christoffelC0ChristoffelBilinearSplitStaticDiagonalReceipt
+      ≡
+      "h_static && h_diag"
+
+    christoffelC0ChristoffelBilinearSplitSlackReceipt :
+      String
+
+    christoffelC0ChristoffelBilinearSplitSlackReceiptIsCanonical :
+      christoffelC0ChristoffelBilinearSplitSlackReceipt
+      ≡
+      "11/2 ε <= 48 ε"
 
     christoffelC0StaticDiagonalClosenessHypothesisPromoted :
       Bool
@@ -241,6 +331,14 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       "11/2 ε"
 
+    christoffelC0PerSlotBoundObligation :
+      String
+
+    christoffelC0PerSlotBoundObligationIsCanonical :
+      christoffelC0PerSlotBoundObligation
+      ≡
+      "11/2 ε <= 48 ε"
+
     christoffelC0PerSlotChain :
       String
 
@@ -248,6 +346,104 @@ record GRPerturbationBoundShapeCore : Setω where
       christoffelC0PerSlotChain
       ≡
       OrderedRational.orderedRationalChristoffel16p5Le22Le48ArithmeticChainName
+
+    christoffelFormulaC0StableSurfaceName :
+      String
+
+    christoffelFormulaC0StableSurfaceNameIsCanonical :
+      christoffelFormulaC0StableSurfaceName
+      ≡
+      "ChristoffelFormulaC0Stable"
+
+    christoffelFormulaC0StablePerSlotBound :
+      String
+
+    christoffelFormulaC0StablePerSlotBoundIsCanonical :
+      christoffelFormulaC0StablePerSlotBound
+      ≡
+      "11/2 ε"
+
+    christoffelFormulaC0StablePerSlotBoundObligation :
+      String
+
+    christoffelFormulaC0StablePerSlotBoundObligationIsCanonical :
+      christoffelFormulaC0StablePerSlotBoundObligation
+      ≡
+      "11/2 ε <= 48 ε"
+
+    christoffelFormulaC0StableTenNonzeroSlotsName :
+      String
+
+    christoffelFormulaC0StableTenNonzeroSlotsNameIsCanonical :
+      christoffelFormulaC0StableTenNonzeroSlotsName
+      ≡
+      "10 nonzero slots"
+
+    christoffelFormulaC0StableSymmetricTripleCountName :
+      String
+
+    christoffelFormulaC0StableSymmetricTripleCountNameIsCanonical :
+      christoffelFormulaC0StableSymmetricTripleCountName
+      ≡
+      OrderedRational.coord4SixtyFourTriplesLawName
+
+    christoffelFormulaC0StableTenNonzeroObligation :
+      String
+
+    christoffelFormulaC0StableTenNonzeroObligationIsCanonical :
+      christoffelFormulaC0StableTenNonzeroObligation
+      ≡
+      "10 nonzero"
+
+    christoffelFormulaC0StableFiftyFourZeroSlotsName :
+      String
+
+    christoffelFormulaC0StableFiftyFourZeroSlotsNameIsCanonical :
+      christoffelFormulaC0StableFiftyFourZeroSlotsName
+      ≡
+      "54 zero slots"
+
+    christoffelFormulaC0StableFiftyFourZeroObligation :
+      String
+
+    christoffelFormulaC0StableFiftyFourZeroObligationIsCanonical :
+      christoffelFormulaC0StableFiftyFourZeroObligation
+      ≡
+      "54 zero"
+
+    christoffelFormulaC0StableNonzeroSlotCount :
+      ℕ
+
+    christoffelFormulaC0StableNonzeroSlotCountIs10 :
+      christoffelFormulaC0StableNonzeroSlotCount ≡ 10
+
+    christoffelFormulaC0StableZeroSlotCount :
+      ℕ
+
+    christoffelFormulaC0StableZeroSlotCountIs54 :
+      christoffelFormulaC0StableZeroSlotCount ≡ 54
+
+    christoffelFormulaC0StableSymmetricTripleCount :
+      ℕ
+
+    christoffelFormulaC0StableSymmetricTripleCountIs64 :
+      christoffelFormulaC0StableSymmetricTripleCount ≡ 64
+
+    christoffelFormulaC0StableEpsilonSlack :
+      String
+
+    christoffelFormulaC0StableEpsilonSlackIsCanonical :
+      christoffelFormulaC0StableEpsilonSlack
+      ≡
+      "48 ε"
+
+    christoffelFormulaC0StableReceiptPromoted :
+      Bool
+
+    christoffelFormulaC0StableReceiptPromotedIsFalse :
+      christoffelFormulaC0StableReceiptPromoted
+      ≡
+      false
 
     ricciSecondPartialC0DistHypothesis :
       String
@@ -514,9 +710,57 @@ canonicalGRPerturbationBoundShapeCore =
         "h_gi"
     ; christoffelC0InverseMetricClosenessHypothesisIsCanonical =
         refl
+    ; christoffelC0StaticHypothesis =
+        "h_static"
+    ; christoffelC0StaticHypothesisIsCanonical =
+        refl
+    ; christoffelC0DiagonalHypothesis =
+        "h_diag"
+    ; christoffelC0DiagonalHypothesisIsCanonical =
+        refl
     ; christoffelC0StaticDiagonalClosenessHypothesis =
-        "h_static && h_diagonal"
+        "h_static && h_diag"
     ; christoffelC0StaticDiagonalClosenessHypothesisIsCanonical =
+        refl
+    ; christoffelC0DiagonalNonzeroSlotObligation =
+        "DiagonalNonzeroSlot?"
+    ; christoffelC0DiagonalNonzeroSlotObligationIsCanonical =
+        refl
+    ; christoffelC0DiagonalZeroLemmaObligation =
+        "diagonalZeroLemma"
+    ; christoffelC0DiagonalZeroLemmaObligationIsCanonical =
+        refl
+    ; christoffelC0ChristoffelBilinearSplitObligation =
+        "christoffelBilinearSplit"
+    ; christoffelC0ChristoffelBilinearSplitObligationIsCanonical =
+        refl
+    ; christoffelC0DiagonalZeroLemmaReceipt =
+        "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+    ; christoffelC0DiagonalZeroLemmaReceiptIsCanonical =
+        refl
+    ; christoffelC0DiagonalZeroLemmaNonzeroTripleCount =
+        10
+    ; christoffelC0DiagonalZeroLemmaNonzeroTripleCountIs10 =
+        refl
+    ; christoffelC0DiagonalZeroLemmaZeroTripleCount =
+        54
+    ; christoffelC0DiagonalZeroLemmaZeroTripleCountIs54 =
+        refl
+    ; christoffelC0DiagonalZeroLemmaSymmetricTripleCount =
+        64
+    ; christoffelC0DiagonalZeroLemmaSymmetricTripleCountIs64 =
+        refl
+    ; christoffelC0ChristoffelBilinearSplitReceipt =
+        "|δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+    ; christoffelC0ChristoffelBilinearSplitReceiptIsCanonical =
+        refl
+    ; christoffelC0ChristoffelBilinearSplitStaticDiagonalReceipt =
+        "h_static && h_diag"
+    ; christoffelC0ChristoffelBilinearSplitStaticDiagonalReceiptIsCanonical =
+        refl
+    ; christoffelC0ChristoffelBilinearSplitSlackReceipt =
+        "11/2 ε <= 48 ε"
+    ; christoffelC0ChristoffelBilinearSplitSlackReceiptIsCanonical =
         refl
     ; christoffelC0StaticDiagonalClosenessHypothesisPromoted =
         false
@@ -532,9 +776,65 @@ canonicalGRPerturbationBoundShapeCore =
         "11/2 ε"
     ; christoffelC0PerSlotBoundIsCanonical =
         refl
+    ; christoffelC0PerSlotBoundObligation =
+        "11/2 ε <= 48 ε"
+    ; christoffelC0PerSlotBoundObligationIsCanonical =
+        refl
     ; christoffelC0PerSlotChain =
         OrderedRational.orderedRationalChristoffel16p5Le22Le48ArithmeticChainName
     ; christoffelC0PerSlotChainIsCanonical =
+        refl
+    ; christoffelFormulaC0StableSurfaceName =
+        "ChristoffelFormulaC0Stable"
+    ; christoffelFormulaC0StableSurfaceNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StablePerSlotBound =
+        "11/2 ε"
+    ; christoffelFormulaC0StablePerSlotBoundIsCanonical =
+        refl
+    ; christoffelFormulaC0StablePerSlotBoundObligation =
+        "11/2 ε <= 48 ε"
+    ; christoffelFormulaC0StablePerSlotBoundObligationIsCanonical =
+        refl
+    ; christoffelFormulaC0StableTenNonzeroSlotsName =
+        "10 nonzero slots"
+    ; christoffelFormulaC0StableTenNonzeroSlotsNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableSymmetricTripleCountName =
+        OrderedRational.coord4SixtyFourTriplesLawName
+    ; christoffelFormulaC0StableSymmetricTripleCountNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableTenNonzeroObligation =
+        "10 nonzero"
+    ; christoffelFormulaC0StableTenNonzeroObligationIsCanonical =
+        refl
+    ; christoffelFormulaC0StableFiftyFourZeroSlotsName =
+        "54 zero slots"
+    ; christoffelFormulaC0StableFiftyFourZeroSlotsNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableFiftyFourZeroObligation =
+        "54 zero"
+    ; christoffelFormulaC0StableFiftyFourZeroObligationIsCanonical =
+        refl
+    ; christoffelFormulaC0StableNonzeroSlotCount =
+        10
+    ; christoffelFormulaC0StableNonzeroSlotCountIs10 =
+        refl
+    ; christoffelFormulaC0StableZeroSlotCount =
+        54
+    ; christoffelFormulaC0StableZeroSlotCountIs54 =
+        refl
+    ; christoffelFormulaC0StableSymmetricTripleCount =
+        64
+    ; christoffelFormulaC0StableSymmetricTripleCountIs64 =
+        refl
+    ; christoffelFormulaC0StableEpsilonSlack =
+        "48 ε"
+    ; christoffelFormulaC0StableEpsilonSlackIsCanonical =
+        refl
+    ; christoffelFormulaC0StableReceiptPromoted =
+        false
+    ; christoffelFormulaC0StableReceiptPromotedIsFalse =
         refl
     ; ricciSecondPartialC0DistHypothesis =
         "h_p2g"
@@ -593,13 +893,17 @@ canonicalGRPerturbationBoundShapeCore =
     ; boundary =
         "This module is carrier/receipt only and fail-closed."
         ∷ "Christoffel perturbation caveat: two-term split exposed at the linearization level; four-slot finite sum factor; no promotion of full ordered QQ estimate."
-        ∷ "Per-slot algebraic control is recorded as 11/2 ε with canonical chain 11/2 <= 33/2 <= 22 <= 48."
+        ∷ "Per-slot algebraic control is recorded as 11/2 ε and the explicit next inequality 11/2 ε <= 48 ε."
+        ∷ "DiagonalZeroLemma and christoffelBilinearSplit are recorded with h_static && h_diag, 10 explicit nonzero triples, 54 zero triples, and the exact bilinear split |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)."
+        ∷ "ChristoffelFormulaC0Stable remains receipt-only with h_gi, h_static, h_diag, DiagonalNonzeroSlot?, diagonalZeroLemma, christoffelBilinearSplit, 10 nonzero, 54 zero, 64 symmetric triples, and 48 ε slack recorded canonically."
         ∷ "Ricci perturbation route is carried by the canonical Schwarzschild finite Ricci/Bianchi receipt; convergence and authority promotions are blocked."
         ∷ "Contracted-Bianchi still blocks at selected-connection dependency with exact blocker: missingCarrierConnectionIsLeviCivita."
         ∷ "Exact boundary arithmetic shapes are carried by symbolic-rational and shell-A law shapes, not by fabricated proofs."
         ∷ "Theorem-socket h_gi is recorded via symbolicRationalKernelShellAInverseMetricAbsMaxIs4 and is typed as a kernel-level inverse-metric max witness."
+        ∷ "Theorem-socket h_static is recorded as a canonical static-hypothesis receipt."
+        ∷ "Theorem-socket h_diag is recorded as a canonical diagonal-hypothesis receipt."
         ∷ "Theorem-socket h_p2g is recorded via symbolicRationalKernelPerturbationRouteDerivativeMaxMatchesDenominatorReceipt and is typed as the route derivative-max matching witness."
-        ∷ "Structural sockets for the Christoffel-C0 correction route additionally record static and diagonal assumptions as local hypotheses: static && diagonal."
+        ∷ "Structural sockets for the Christoffel-C0 correction route additionally record the separate static and diagonal assumptions plus the diagonal/nonzero split obligations and the 11/2 ε <= 48 ε slack gate."
         ∷ "Ricci loose route hypotheses now include h_pgi and h_p2g; the derivative control is logged as ∂δΓ <= 19/2 ε with loose Ricci control δR <= 252 ε <= 640 ε."
         ∷ "The 22ε route is explicitly marked algebraic in independent inputs, not a metric inversion argument."
         ∷ []

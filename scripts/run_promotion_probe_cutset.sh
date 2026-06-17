@@ -5,6 +5,29 @@ set -u
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DEFAULT_TIMEOUT=120
 LOG_ROOT="$REPO_ROOT/logs/agda-promotion-probe-cutset"
+resolve_agda_bin() {
+  if [ -n "${AGDA_BIN:-}" ]; then
+    printf '%s\n' "${AGDA_BIN}"
+    return 0
+  fi
+
+  local candidate_store candidate_bin
+  candidate_store="$(nix build --no-link --print-out-paths /home/c/Documents/code/agda#debug.bin 2>/dev/null)"
+  candidate_bin="${candidate_store}/bin/agda"
+  if [ -n "$candidate_store" ] && [ -x "$candidate_bin" ]; then
+    printf '%s\n' "$candidate_bin"
+    return 0
+  fi
+
+  if command -v agda >/dev/null 2>&1; then
+    command -v agda
+    return 0
+  fi
+
+  echo agda
+}
+
+AGDA_BIN="$(resolve_agda_bin)"
 
 EVERYTHING_TARGET="DASHI/Everything.agda"
 PROBE_TARGETS=(
@@ -70,14 +93,14 @@ run_target() {
 
   {
     echo "== $target =="
-    echo "command: timeout ${timeout_s}s agda -i . -i DCHoTT-Agda -i cubical -l standard-library $target"
+    echo "command: timeout ${timeout_s}s ${AGDA_BIN} -i . -i DCHoTT-Agda -i cubical -l standard-library $target"
     echo "started: $(date -Iseconds)"
     echo
   } >"$log_file"
 
   (
     cd "$REPO_ROOT" || exit 99
-    timeout "${timeout_s}s" agda -i . -i DCHoTT-Agda -i cubical -l standard-library "$target"
+    timeout "${timeout_s}s" "$AGDA_BIN" -i . -i DCHoTT-Agda -i cubical -l standard-library "$target"
   ) >>"$log_file" 2>&1
   status=$?
 
@@ -125,7 +148,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-require_cmd agda
+require_cmd "$AGDA_BIN"
 require_cmd timeout
 
 [[ "$TIMEOUT_S" =~ ^[0-9]+$ ]] || die "--timeout must be an integer"

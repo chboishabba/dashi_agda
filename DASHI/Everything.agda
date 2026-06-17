@@ -403,12 +403,14 @@ import DASHI.Physics.Closure.NSOffDiagonalShellAbsorptionBoundary
 import DASHI.Physics.Closure.NSPointwiseToAbelCompositeA6Boundary
 import DASHI.Physics.Closure.NSPointwiseToAbelAveragingBoundary
 import DASHI.Physics.Closure.NSPointwiseToAbelAveragingProxyHarnessResult
+import DASHI.Physics.Closure.NSPointwiseToAbelAuthorityReductionBoundary
 import DASHI.Physics.Closure.NSPressureCommutatorEstimateContractBoundary
 import DASHI.Physics.Closure.NSPressureLocalizationSubBudgetCompositeBoundary
 import DASHI.Physics.Closure.NSPressureLocalizationSubBudgetProxyHarnessResult
 import DASHI.Physics.Closure.NSPressureSubBudgetComponentSensitivityProxyHarnessResult
 import DASHI.Physics.Closure.NSPressureTailAbsorptionProxyHarnessResult
 import DASHI.Physics.Closure.NSQuantitativeMassOutsideZeroModesBoundary
+import DASHI.Physics.Closure.NSAStationarityAuthorityReductionBoundary
 import DASHI.Physics.Closure.NSQuantitativeStationarityRateBoundary
 import DASHI.Physics.Closure.NSQuantitativeStationarityRateProxyHarnessResult
 import DASHI.Physics.Closure.NSRankOneProjectionCommutatorFormula
@@ -431,6 +433,7 @@ import DASHI.Physics.Closure.NSTrueLerayTriadicZeroModeClassificationBoundary
 -- Superseded for aggregate validation by the true triadic Leray route above.
 -- Keep the module file intact, but do not import it through Everything until
 -- its historical Setω/canonical-equality style is ported.
+import DASHI.Physics.Closure.NSZeroModeGreatCircleGeometryTheorem
 import DASHI.Physics.Closure.NSZeroModeSetClassificationBoundary
 import DASHI.Physics.Closure.P0ClayFiniteHodgeNSTopologicalStackReceipt
 import DASHI.Physics.Closure.PerelmanBTAnalogueDashboard
@@ -577,6 +580,7 @@ import DASHI.Interop.PNFSpectralCoordinateRebuildability
 import DASHI.Interop.PNFSpectralFieldArchitectureReceipt
 import DASHI.Interop.PNFSpectralFieldCore
 import DASHI.Interop.PNFSpectralFieldGraph
+import DASHI.Interop.PNFSpectralNumericABICore
 import DASHI.Interop.PNFSpectralRegistryAnchoring
 import DASHI.Interop.PNFSpectralVectorIndex
 import DASHI.Interop.SweetgrassCarrierSpine
@@ -1361,6 +1365,7 @@ import DASHI.Physics.Closure.NSWeakSolutionSummaryReceipt
 import DASHI.Physics.Closure.NSRegularityGapReceipt
 import DASHI.Physics.Closure.NSRegularityRoadmapFilledReceipt
 import DASHI.Physics.Closure.ClayNSCurrentStateReceipt
+import DASHI.Physics.Closure.NSCandidateCompleteEnstrophyBKMPassageReceipt
 import DASHI.Physics.Closure.NSFinalStateReceipt
 import DASHI.Physics.Closure.NSVorticityNoMechanismReceipt
 import DASHI.Physics.Closure.AdjacentOnlyVortexStretchingReceipt
@@ -1688,6 +1693,8 @@ import DASHI.Physics.Closure.NSPressureVsDepthLPClarificationReceipt
 import DASHI.Physics.Closure.NSPaper1ClayTargetReceipt
 import DASHI.Physics.Closure.EV5ThetaMarginUpgradeReceipt
 import DASHI.Physics.Closure.NSTailRestrictedThetaDiagnosticReceipt
+import DASHI.Physics.Closure.NSSprint83HminusHalfCanonicalLaneReceipt
+import DASHI.Physics.Closure.NSSprint84HminusHalfOneSobolevGapTargetReceipt
 import DASHI.Physics.Closure.NSSprint86KStarHHalfTailObstructionReceipt
 import DASHI.Physics.Closure.NSSprint87DangerShellSupFactorizationReceipt
 import DASHI.Physics.Closure.NSSprint88DangerShellH1TailSmallnessDecisionReceipt
@@ -1817,6 +1824,7 @@ import DASHI.Physics.Closure.ClayProofCampaignDependencyDAGReceipt
 import DASHI.Physics.Closure.ClayRequisiteKernelLemmaReceipt
 import DASHI.Physics.Closure.PhysicalSSPSpreadBoundAttemptReceipt
 import DASHI.Physics.Closure.NSCumulativeTailDominanceObstructionReceipt
+import DASHI.Physics.Closure.NSPromotionProbeCutsetReceipt
 import DASHI.Physics.Closure.YMBalabanMarginSplitReceipt
 import DASHI.Physics.Closure.ClaySolvedLedgerLemmas
 import DASHI.Physics.Closure.ClayNumericPrecisionCorrectionReceipt

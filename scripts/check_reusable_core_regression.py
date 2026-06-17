@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import argparse
+import os
 import shutil
 import subprocess
 import sys
@@ -99,10 +101,10 @@ MISSING_OPTIONAL_AGDA_TARGETS = [
 AGDA_TARGETS = BASE_AGDA_TARGETS + OPTIONAL_AGDA_TARGETS_AVAILABLE
 
 
-def run(label: str, cmd: list[str]) -> int:
+def run(label: str, cmd: list[str], *, env: dict[str, str] | None = None) -> int:
     print(f"\n== {label} ==")
     print("+ " + " ".join(cmd))
-    completed = subprocess.run(cmd, cwd=ROOT)
+    completed = subprocess.run(cmd, cwd=ROOT, env=env)
     if completed.returncode != 0:
         print(f"{label} failed with exit code {completed.returncode}")
     return completed.returncode
@@ -122,7 +124,7 @@ def active_agda_or_ghc() -> int:
     if completed.returncode != 0:
         return 0
 
-    current_pid = str(__import__("os").getpid())
+    current_pid = str(os.getpid())
     hits = []
     for line in completed.stdout.splitlines():
         stripped = line.strip()
@@ -149,7 +151,29 @@ def active_agda_or_ghc() -> int:
     return 0
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Run the focused reusable-core regression tranche."
+    )
+    parser.add_argument(
+        "--agda29-parallel",
+        action="store_true",
+        help="Use the Agda 2.9 parallel shadow-runner for module checks.",
+    )
+    parser.add_argument(
+        "--agda29-jobs",
+        type=int,
+        default=8,
+        help="Parallel jobs for --agda29-parallel (default: 8).",
+    )
+    return parser.parse_args()
+
+
 def main() -> int:
+    args = parse_args()
+    if args.agda29_parallel and args.agda29_jobs < 1:
+        print(f"--agda29-jobs must be >= 1 (got {args.agda29_jobs})")
+        return 1
     active_agda_or_ghc()
 
     if MISSING_OPTIONAL_AGDA_TARGETS:
@@ -157,11 +181,12 @@ def main() -> int:
         for target in MISSING_OPTIONAL_AGDA_TARGETS:
             print(f"  - {target}")
 
-    commands: list[tuple[str, list[str]]] = [
-        ("git diff whitespace check", ["git", "diff", "--check"]),
+    commands: list[tuple[str, list[str], dict[str, str] | None]] = [
+        ("git diff whitespace check", ["git", "diff", "--check"], None),
         (
             "reusable core candidate audit",
             [sys.executable, "scripts/audit_reusable_core_candidates.py"],
+            None,
         ),
         (
             "authority-boundary candidate audit",
@@ -170,6 +195,7 @@ def main() -> int:
                 "scripts/audit_authority_boundary_candidates.py",
                 "--no-write",
             ],
+            None,
         ),
         (
             "control-card candidate audit",
@@ -178,6 +204,7 @@ def main() -> int:
                 "scripts/audit_control_card_candidates.py",
                 "--no-write",
             ],
+            None,
         ),
         (
             "source-process evidence candidate audit",
@@ -185,22 +212,37 @@ def main() -> int:
                 sys.executable,
                 "scripts/audit_source_process_evidence_candidates.py",
             ],
+            None,
         ),
     ]
 
-    if AGDA29_PARALLEL_CHECK.is_file():
+    if args.agda29_parallel:
+        if not AGDA29_PARALLEL_CHECK.is_file():
+            print(
+                f"Requested --agda29-parallel but helper is missing: {AGDA29_PARALLEL_CHECK}"
+            )
+            return 1
+        if not os.access(AGDA29_PARALLEL_CHECK, os.X_OK):
+            print(
+                "Requested --agda29-parallel but helper is not executable: "
+                f"{AGDA29_PARALLEL_CHECK}"
+            )
+            return 1
+        agda29_env = os.environ.copy()
+        agda29_env["AGDA_JOBS"] = str(args.agda29_jobs)
         commands.append(
             (
                 "agda29 parallel reusable core targets",
                 [str(AGDA29_PARALLEL_CHECK.relative_to(ROOT)), *AGDA_TARGETS],
+                agda29_env,
             )
         )
     else:
         for target in AGDA_TARGETS:
-            commands.append((f"agda {target}", ["agda", "-i", ".", target]))
+            commands.append((f"agda {target}", ["agda", "-i", ".", target], None))
 
-    for label, cmd in commands:
-        result = run(label, cmd)
+    for label, cmd, env in commands:
+        result = run(label, cmd, env=env)
         if result != 0:
             return result
 

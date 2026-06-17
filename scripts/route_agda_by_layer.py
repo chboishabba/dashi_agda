@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import json
 import subprocess
 import sys
@@ -13,6 +14,29 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 QUEUE_SCRIPT = ROOT / "scripts" / "generate_layer2_long_compute_queue.py"
 HISTORY_PATH = ROOT / "artifacts" / "agda_route_cost_history.json"
+AGDA_BIN = os.environ.get("AGDA_BIN")
+
+
+def _resolve_agda_bin() -> str:
+    if AGDA_BIN:
+        return AGDA_BIN
+    try:
+        completed = subprocess.run(
+            ["nix", "build", "--no-link", "--print-out-paths", "/home/c/Documents/code/agda#debug.bin"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if completed.returncode == 0:
+            candidate = Path((completed.stdout or "").strip()) / "bin" / "agda"
+            if candidate.is_file():
+                return str(candidate)
+    except FileNotFoundError:
+        pass
+    return "agda"
+
+
+AGDA_BIN = _resolve_agda_bin()
 
 L0_EXACT = {
     "DASHI/Geometry/CausalForcesLorentz31.agda",
@@ -127,7 +151,7 @@ def with_history_override(decision: RouteDecision, history: dict[str, object], b
                 "Observed bounded-history cost is too high for routine execution; "
                 "route this target offline until it is reclassified."
             ),
-            recommended_command=["timeout", str(budget_seconds), "agda", "-i", ".", decision.target],
+            recommended_command=["timeout", str(budget_seconds), AGDA_BIN, "-i", ".", decision.target],
         )
     if timeout_count >= 1 or max_elapsed_s >= 20.0:
         return RouteDecision(
@@ -161,7 +185,7 @@ def classify_target(
             execute_allowed=True,
             policy_reason_code="thin_interactive",
             rationale="Thin or routine validation target; safe for normal interactive loops.",
-            recommended_command=["agda", "-i", ".", target],
+            recommended_command=[AGDA_BIN, "-i", ".", target],
         )
     elif target in L1_EXACT:
         decision = RouteDecision(
@@ -171,7 +195,7 @@ def classify_target(
             execute_allowed=True,
             policy_reason_code="medium_bounded",
             rationale="Medium target; run only with an explicit bounded budget.",
-            recommended_command=["timeout", str(budget_seconds), "agda", "-i", ".", target],
+            recommended_command=["timeout", str(budget_seconds), AGDA_BIN, "-i", ".", target],
         )
     elif target in L2_EXACT:
         recommended_timeout = 10 if target in NATURAL_CHARGE_HEAVY_TIMEOUT_10 else budget_seconds
@@ -205,7 +229,7 @@ def classify_target(
                 execute_allowed=False,
                 policy_reason_code="heavy_offline_only",
                 rationale="Heavy aggregate target; keep it out of the interactive loop.",
-                recommended_command=["timeout", str(recommended_timeout), "agda", "-i", ".", target],
+                recommended_command=["timeout", str(recommended_timeout), AGDA_BIN, "-i", ".", target],
             )
     elif target.startswith("Ontology/Hecke/"):
         decision = RouteDecision(
@@ -215,7 +239,7 @@ def classify_target(
             execute_allowed=True,
             policy_reason_code="hecke_default_bounded",
             rationale="Hecke target outside the known heavy lane; treat conservatively as bounded-only.",
-            recommended_command=["timeout", str(budget_seconds), "agda", "-i", ".", target],
+            recommended_command=["timeout", str(budget_seconds), AGDA_BIN, "-i", ".", target],
         )
     elif "ValidationSummary" in target or target.endswith("Everything.agda"):
         decision = RouteDecision(
@@ -225,7 +249,7 @@ def classify_target(
             execute_allowed=False,
             policy_reason_code="aggregate_offline_only",
             rationale="Aggregate summary surface; conservative offline-only routing.",
-            recommended_command=["timeout", str(budget_seconds), "agda", "-i", ".", target],
+            recommended_command=["timeout", str(budget_seconds), AGDA_BIN, "-i", ".", target],
         )
     else:
         decision = RouteDecision(
@@ -235,7 +259,7 @@ def classify_target(
             execute_allowed=True,
             policy_reason_code="default_bounded",
             rationale="Unknown target; default to bounded execution rather than interactive or heavy-only.",
-            recommended_command=["timeout", str(budget_seconds), "agda", "-i", ".", target],
+            recommended_command=["timeout", str(budget_seconds), AGDA_BIN, "-i", ".", target],
         )
     return with_history_override(decision, history, budget_seconds)
 
