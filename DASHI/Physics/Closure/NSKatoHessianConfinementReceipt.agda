@@ -16,7 +16,9 @@ open import Data.Empty using (⊥)
 -- evidence.  The N=128 target record is purely symbolic/typed and is
 -- empirical-only.  The receipt also keeps the diagonal identity, signed gap,
 -- PSD minimum, gap-collapse, H5/H6, and Clay bridge blocker surfaces
--- explicit while remaining fail-closed.
+-- explicit while remaining fail-closed.  The Kato-Morse program rows below
+-- are corrected so CL2 is a trichotomy surface rather than a dichotomy
+-- surface, CL1 remains open/fail-closed, and Calc E remains empirical-only.
 
 data NSKatoHessianSign : Set where
   signNegative : NSKatoHessianSign
@@ -754,7 +756,7 @@ canonicalNSKatoHessianConfinementORCSLPGF =
     refl
     "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, and explicit fail-closed gate rows."
     refl
-    "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, and empirical N=128 aggregate metadata only."
+    "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, empirical N=128 aggregate metadata, and Calc E/CL1 fail-closed evidence only."
     refl
     "S: Hessian PSD at core, the diagonal identity witness, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, Calc E empirical projection/receipt evidence, CL1 open bookkeeping, and divergence machine-precision are recorded."
     refl
@@ -891,6 +893,7 @@ open NSKatoHessianConfinementReceipt public
 data KatoMorseProofStatus : Set where
   provableClassical : KatoMorseProofStatus
   standardRecorded : KatoMorseProofStatus
+  trichotomyRecorded : KatoMorseProofStatus
   openBlocker : KatoMorseProofStatus
 
 data KatoMorseTheorem : Set where
@@ -916,6 +919,7 @@ katoMorseTheoremName theoremCConditional = "Theorem C (conditional)"
 katoMorseProofStatusName : KatoMorseProofStatus → String
 katoMorseProofStatusName provableClassical = "provable classical"
 katoMorseProofStatusName standardRecorded = "standard"
+katoMorseProofStatusName trichotomyRecorded = "trichotomy"
 katoMorseProofStatusName openBlocker = "open blocker"
 
 record KatoMorseProgramVariables : Set where
@@ -935,7 +939,7 @@ record KatoMorseProgramVariables : Set where
     H5 : String
     H6 : String
     h5VsH6Split : String
-    cl2GapOrCoupling : String
+    cl2Trichotomy : String
 
 canonicalKatoMorseProgramVariables : KatoMorseProgramVariables
 canonicalKatoMorseProgramVariables =
@@ -954,7 +958,7 @@ canonicalKatoMorseProgramVariables =
     "H5"
     "H6"
     "H5 curvature bound vs H6 Taylor remainder split"
-    "CL2 gap-or-coupling dichotomy"
+    "CL2 trichotomy"
 
 mk1Statement : String
 mk1Statement =
@@ -974,15 +978,15 @@ gd1Statement =
 
 gd2Statement : String
 gd2Statement =
-  "GD2: standard receipt row on the current Kato-Morse variables; the CL2 gap-or-coupling dichotomy is carried on its own row and remains fail-closed."
+  "GD2: standard receipt row on the current Kato-Morse variables; the CL2 trichotomy is carried on its own row and remains fail-closed."
 
 gd3Statement : String
 gd3Statement =
   "GD3: H5 versus H6 is recorded as standard: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder."
 
-cl2Statement : String
-cl2Statement =
-  "CL2: gap-or-coupling dichotomy is recorded as standard on the current Kato-Morse variables, with no promotion beyond the typed receipt surface."
+cl2TrichotomyStatement : String
+cl2TrichotomyStatement =
+  "CL2: gap-or-coupling trichotomy is recorded as trichotomy on the current Kato-Morse variables, with no promotion beyond the typed receipt surface."
 
 theoremCConditionalStatement : String
 theoremCConditionalStatement =
@@ -995,8 +999,26 @@ katoMorseTheoremStatement MK3 = mk3Statement
 katoMorseTheoremStatement GD1 = gd1Statement
 katoMorseTheoremStatement GD2 = gd2Statement
 katoMorseTheoremStatement GD3 = gd3Statement
-katoMorseTheoremStatement CL2 = cl2Statement
+katoMorseTheoremStatement CL2 = cl2TrichotomyStatement
 katoMorseTheoremStatement theoremCConditional = theoremCConditionalStatement
+
+katoMorseTheoremExactBlocker : KatoMorseTheorem → String
+katoMorseTheoremExactBlocker MK1 =
+  "MK1 exact blocker: none; this row is already provable classical on the current receipt variables."
+katoMorseTheoremExactBlocker MK2 =
+  "MK2 exact blocker: none; this row is already provable classical on the current receipt variables."
+katoMorseTheoremExactBlocker MK3 =
+  "MK3 exact blocker: conditional theorem target only."
+katoMorseTheoremExactBlocker GD1 =
+  "GD1 exact blocker: open route only; psi12=B/g12 remains unclosed."
+katoMorseTheoremExactBlocker GD2 =
+  "GD2 exact blocker: none; this row is already standard on the current receipt variables."
+katoMorseTheoremExactBlocker GD3 =
+  "GD3 exact blocker: none; this row is already standard on the current receipt variables."
+katoMorseTheoremExactBlocker CL2 =
+  "CL2 exact blocker: trichotomy is recorded, not a dichotomy; the surface remains fail-closed."
+katoMorseTheoremExactBlocker theoremCConditional =
+  "Theorem C exact blocker: the curvature-to-Sobolev H6 transfer remains open."
 
 record KatoMorseProgramTheoremRow : Set where
   constructor mkKatoMorseProgramTheoremRow
@@ -1009,6 +1031,9 @@ record KatoMorseProgramTheoremRow : Set where
     statusTextIsCanonical : statusText ≡ katoMorseProofStatusName status
     statement : String
     statementIsCanonical : statement ≡ katoMorseTheoremStatement theorem
+    exactBlocker : String
+    exactBlockerIsCanonical : exactBlocker ≡
+      katoMorseTheoremExactBlocker theorem
     variables : KatoMorseProgramVariables
     variablesAreCanonical : variables ≡ canonicalKatoMorseProgramVariables
 
@@ -1023,6 +1048,8 @@ canonicalKatoMorseProgramRows =
     refl
     mk1Statement
     refl
+    (katoMorseTheoremExactBlocker MK1)
+    refl
     canonicalKatoMorseProgramVariables
     refl
     ∷
@@ -1034,6 +1061,8 @@ canonicalKatoMorseProgramRows =
     (katoMorseProofStatusName provableClassical)
     refl
     mk2Statement
+    refl
+    (katoMorseTheoremExactBlocker MK2)
     refl
     canonicalKatoMorseProgramVariables
     refl
@@ -1047,6 +1076,8 @@ canonicalKatoMorseProgramRows =
     refl
     mk3Statement
     refl
+    (katoMorseTheoremExactBlocker MK3)
+    refl
     canonicalKatoMorseProgramVariables
     refl
     ∷
@@ -1058,6 +1089,8 @@ canonicalKatoMorseProgramRows =
     (katoMorseProofStatusName openBlocker)
     refl
     gd1Statement
+    refl
+    (katoMorseTheoremExactBlocker GD1)
     refl
     canonicalKatoMorseProgramVariables
     refl
@@ -1071,6 +1104,8 @@ canonicalKatoMorseProgramRows =
     refl
     gd2Statement
     refl
+    (katoMorseTheoremExactBlocker GD2)
+    refl
     canonicalKatoMorseProgramVariables
     refl
     ∷
@@ -1083,6 +1118,8 @@ canonicalKatoMorseProgramRows =
     refl
     gd3Statement
     refl
+    (katoMorseTheoremExactBlocker GD3)
+    refl
     canonicalKatoMorseProgramVariables
     refl
     ∷
@@ -1090,10 +1127,12 @@ canonicalKatoMorseProgramRows =
     CL2
     (katoMorseTheoremName CL2)
     refl
-    standardRecorded
-    (katoMorseProofStatusName standardRecorded)
+    trichotomyRecorded
+    (katoMorseProofStatusName trichotomyRecorded)
     refl
-    cl2Statement
+    cl2TrichotomyStatement
+    refl
+    (katoMorseTheoremExactBlocker CL2)
     refl
     canonicalKatoMorseProgramVariables
     refl
@@ -1106,6 +1145,8 @@ canonicalKatoMorseProgramRows =
     (katoMorseProofStatusName openBlocker)
     refl
     theoremCConditionalStatement
+    refl
+    (katoMorseTheoremExactBlocker theoremCConditional)
     refl
     canonicalKatoMorseProgramVariables
     refl
@@ -1133,25 +1174,25 @@ record KatoMorseProgramORCSLPGF : Set where
       "O: Record Kato-Morse theorem-by-theorem rows with explicit statuses and exact variable/shapes names."
     R : String
     RIsCanonical : R ≡
-      "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as the standard gap-or-coupling dichotomy, and MK3, GD1, and conditional Theorem C as open."
+      "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as a trichotomy row, and MK3, GD1, and conditional Theorem C as open."
     C : String
     CIsCanonical : C ≡
-      "C: Kato-Morse status fields are explicit as provable classical/standard/open blocker."
+      "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker."
     S : String
     SIsCanonical : S ≡
-      "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, H5, H6, H5 versus H6 curvature/Taylor split, and CL2 gap-or-coupling dichotomy are recorded as exact program variables and shapes."
+      "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, H5, H6, H5 versus H6 curvature/Taylor split, and CL2 trichotomy are recorded as exact program variables and shapes."
     L : String
     LIsCanonical : L ≡
-      "L: theorem-by-theorem row surface orders the claims as provable classical, standard, then open blocker, with MK1/MK2 classical, GD2/GD3/CL2 standard, and MK3/GD1/Theorem C open."
+      "L: theorem-by-theorem row surface orders the claims as provable classical, standard, trichotomy, then open blocker, with MK1/MK2 classical, GD2/GD3 standard, CL2 trichotomy, and MK3/GD1/Theorem C open."
     P : String
     PIsCanonical : P ≡
       "P: no Clay promotion is performed from this program surface."
     G : String
     GIsCanonical : G ≡
-      "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a standard gap-or-coupling dichotomy, and no Clay promotion is allowed."
+      "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a trichotomy row, and no Clay promotion is allowed."
     F : String
     FIsCanonical : F ≡
-      "F: status is explicit; MK1 and MK2 are provable classical, GD2, GD3, and CL2 are standard, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
+      "F: status is explicit; MK1 and MK2 are provable classical, GD2 and GD3 are standard, CL2 is trichotomy, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
 
 record KatoMorseProgramSurface : Set where
   constructor mkKatoMorseProgramSurface
@@ -1176,19 +1217,19 @@ canonicalKatoMorseProgramORCSLPGF =
   mkKatoMorseProgramORCSLPGF
     "O: Record Kato-Morse theorem-by-theorem rows with explicit statuses and exact variable/shapes names."
     refl
-    "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as the standard gap-or-coupling dichotomy, and MK3, GD1, and conditional Theorem C as open."
+    "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as a trichotomy row, and MK3, GD1, and conditional Theorem C as open."
     refl
-    "C: Kato-Morse status fields are explicit as provable classical/standard/open blocker."
+    "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker."
     refl
-    "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, H5, H6, H5 versus H6 curvature/Taylor split, and CL2 gap-or-coupling dichotomy are recorded as exact program variables and shapes."
+    "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, H5, H6, H5 versus H6 curvature/Taylor split, and CL2 trichotomy are recorded as exact program variables and shapes."
     refl
-    "L: theorem-by-theorem row surface orders the claims as provable classical, standard, then open blocker, with MK1/MK2 classical, GD2/GD3/CL2 standard, and MK3/GD1/Theorem C open."
+    "L: theorem-by-theorem row surface orders the claims as provable classical, standard, trichotomy, then open blocker, with MK1/MK2 classical, GD2/GD3 standard, CL2 trichotomy, and MK3/GD1/Theorem C open."
     refl
     "P: no Clay promotion is performed from this program surface."
     refl
-    "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a standard gap-or-coupling dichotomy, and no Clay promotion is allowed."
+    "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a trichotomy row, and no Clay promotion is allowed."
     refl
-    "F: status is explicit; MK1 and MK2 are provable classical, GD2, GD3, and CL2 are standard, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
+    "F: status is explicit; MK1 and MK2 are provable classical, GD2 and GD3 are standard, CL2 is trichotomy, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
     refl
 
 canonicalKatoMorseProgramSurface : KatoMorseProgramSurface

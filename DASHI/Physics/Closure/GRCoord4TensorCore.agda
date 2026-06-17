@@ -936,6 +936,135 @@ canonicalSchwarzschildDiagonalNonzeroSlotSurface =
     schwarzschildNonzeroSlotClassificationRows
     schwarzschildNonzeroSlotDecisionRows
 
+schwarzschildDiagonalNonzeroSlotProjectionRowsFromSurface :
+  SchwarzschildDiagonalNonzeroSlotSurface →
+  List SchwarzschildChristoffelSlotClassificationRow
+schwarzschildDiagonalNonzeroSlotProjectionRowsFromSurface surface =
+  SchwarzschildDiagonalNonzeroSlotSurface.nonzeroClassificationRows surface
+
+record SchwarzschildDiagonalNonzeroSlotProjectionSurface : Set where
+  constructor schwarzschildDiagonalNonzeroSlotProjectionSurface
+  field
+    diagonalNonzeroSlotSurface :
+      SchwarzschildDiagonalNonzeroSlotSurface
+
+    projectionRows :
+      List SchwarzschildChristoffelSlotClassificationRow
+
+    projectionCount :
+      Nat
+
+    projectionBoundary :
+      List String
+
+    projectionNotPromoted :
+      Bool
+
+schwarzschildDiagonalNonzeroSlotProjectionSurfaceFromSurface :
+  SchwarzschildDiagonalNonzeroSlotSurface →
+  SchwarzschildDiagonalNonzeroSlotProjectionSurface
+schwarzschildDiagonalNonzeroSlotProjectionSurfaceFromSurface surface =
+  schwarzschildDiagonalNonzeroSlotProjectionSurface
+    surface
+    (schwarzschildDiagonalNonzeroSlotProjectionRowsFromSurface surface)
+    coord4NonzeroSlotCount7
+    ( "DiagonalNonzeroSlotProjectionSurface" ∷
+      "canonicalSchwarzschildDiagonalNonzeroSlotSurface" ∷
+      "7 canonical Schwarzschild nonzero slots" ∷ [] )
+    false
+
+canonicalSchwarzschildDiagonalNonzeroSlotProjectionSurface :
+  SchwarzschildDiagonalNonzeroSlotProjectionSurface
+canonicalSchwarzschildDiagonalNonzeroSlotProjectionSurface =
+  schwarzschildDiagonalNonzeroSlotProjectionSurfaceFromSurface
+    canonicalSchwarzschildDiagonalNonzeroSlotSurface
+
+schwarzschildDiagonalNonzeroSlotCoverageRowsFromSurface :
+  SchwarzschildDiagonalNonzeroSlotSurface →
+  List SchwarzschildChristoffelSlotDecisionRow
+schwarzschildDiagonalNonzeroSlotCoverageRowsFromSurface surface =
+  SchwarzschildDiagonalNonzeroSlotSurface.nonzeroDecisionRows surface
+
+record SchwarzschildDiagonalNonzeroSlotCoverageSurface : Set where
+  constructor schwarzschildDiagonalNonzeroSlotCoverageSurface
+  field
+    projectionSurface :
+      SchwarzschildDiagonalNonzeroSlotProjectionSurface
+
+    coverageRows :
+      List SchwarzschildChristoffelSlotDecisionRow
+
+    coverageCount :
+      Nat
+
+    coverageBoundary :
+      List String
+
+    coverageNotPromoted :
+      Bool
+
+schwarzschildDiagonalNonzeroSlotCoverageSurfaceFromSurface :
+  SchwarzschildDiagonalNonzeroSlotSurface →
+  SchwarzschildDiagonalNonzeroSlotCoverageSurface
+schwarzschildDiagonalNonzeroSlotCoverageSurfaceFromSurface surface =
+  schwarzschildDiagonalNonzeroSlotCoverageSurface
+    (schwarzschildDiagonalNonzeroSlotProjectionSurfaceFromSurface surface)
+    (schwarzschildDiagonalNonzeroSlotCoverageRowsFromSurface surface)
+    coord4NonzeroSlotCount7
+    ( "DiagonalNonzeroSlotCoverageSurface" ∷
+      "checkedDiagonalNonzeroSlotClassifier" ∷
+      "7-true checked Schwarzschild nonzero slots" ∷ [] )
+    false
+
+canonicalSchwarzschildDiagonalNonzeroSlotCoverageSurface :
+  SchwarzschildDiagonalNonzeroSlotCoverageSurface
+canonicalSchwarzschildDiagonalNonzeroSlotCoverageSurface =
+  schwarzschildDiagonalNonzeroSlotCoverageSurfaceFromSurface
+    canonicalSchwarzschildDiagonalNonzeroSlotSurface
+
+schwarzschildDiagonalNonzeroSlotReceiptRowsFromSurface :
+  SchwarzschildDiagonalNonzeroSlotSurface →
+  List SchwarzschildChristoffelSlotDecisionRow
+schwarzschildDiagonalNonzeroSlotReceiptRowsFromSurface surface =
+  SchwarzschildDiagonalNonzeroSlotSurface.nonzeroDecisionRows surface
+
+record SchwarzschildDiagonalNonzeroSlotReceiptSurface : Set where
+  constructor schwarzschildDiagonalNonzeroSlotReceiptSurface
+  field
+    coverageSurface :
+      SchwarzschildDiagonalNonzeroSlotCoverageSurface
+
+    receiptRows :
+      List SchwarzschildChristoffelSlotDecisionRow
+
+    receiptCount :
+      Nat
+
+    receiptBoundary :
+      List String
+
+    receiptNotPromoted :
+      Bool
+
+schwarzschildDiagonalNonzeroSlotReceiptSurfaceFromSurface :
+  SchwarzschildDiagonalNonzeroSlotSurface →
+  SchwarzschildDiagonalNonzeroSlotReceiptSurface
+schwarzschildDiagonalNonzeroSlotReceiptSurfaceFromSurface surface =
+  schwarzschildDiagonalNonzeroSlotReceiptSurface
+    (schwarzschildDiagonalNonzeroSlotCoverageSurfaceFromSurface surface)
+    (schwarzschildDiagonalNonzeroSlotReceiptRowsFromSurface surface)
+    coord4NonzeroSlotCount7
+    ( "DiagonalNonzeroSlotReceiptSurface" ∷
+      "receiptDiagonalNonzeroSlotClassifier" ∷
+      "checkedSurfaceReceiptForSevenSchwarzschildSlots" ∷ [] )
+    false
+
+canonicalSchwarzschildDiagonalNonzeroSlotReceiptSurface :
+  SchwarzschildDiagonalNonzeroSlotReceiptSurface
+canonicalSchwarzschildDiagonalNonzeroSlotReceiptSurface =
+  schwarzschildDiagonalNonzeroSlotReceiptSurfaceFromSurface
+    canonicalSchwarzschildDiagonalNonzeroSlotSurface
+
 DiagonalNonzeroSlotPredicateSurface : Set
 DiagonalNonzeroSlotPredicateSurface =
   SchwarzschildChristoffelSlotClassificationSurface
@@ -947,6 +1076,18 @@ DiagonalNonzeroSlotDecisionSurface =
 DiagonalNonzeroSlotReceiptSurface : Set
 DiagonalNonzeroSlotReceiptSurface =
   SchwarzschildChristoffelCheckedSlotClassifierReceiptSurface
+
+DiagonalNonzeroSlotProjectionSurface : Set
+DiagonalNonzeroSlotProjectionSurface =
+  SchwarzschildDiagonalNonzeroSlotProjectionSurface
+
+DiagonalNonzeroSlotCoverageSurface : Set
+DiagonalNonzeroSlotCoverageSurface =
+  SchwarzschildDiagonalNonzeroSlotCoverageSurface
+
+DiagonalNonzeroSlotCheckedReceiptSurface : Set
+DiagonalNonzeroSlotCheckedReceiptSurface =
+  SchwarzschildDiagonalNonzeroSlotReceiptSurface
 
 DiagonalNonzeroSlotQuestionName : String
 DiagonalNonzeroSlotQuestionName = schwarzschildDiagonalNonzeroSlotQuestionName
