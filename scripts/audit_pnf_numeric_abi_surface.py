@@ -28,7 +28,25 @@ DEFAULT_AGDA_PATH = REPO_ROOT / "DASHI" / "Interop" / "PNFSpectralNumericABICore
 PAYLOAD_GET_RE = re.compile(r'payload\.get\("([^"]+)"\)')
 TOP_LEVEL_SIG_RE = re.compile(r"(?m)^([A-Za-z][A-Za-z0-9']*)\s*:")
 TOP_LEVEL_DECL_RE = re.compile(r"(?m)^(?:data|record|postulate)\s+([A-Za-z][A-Za-z0-9']*)\b")
+AGDA_NAME_SIG_RE = re.compile(r"(?m)^\s+([A-Za-z][A-Za-z0-9']*)\s*:")
 MODULE_RE = re.compile(r"(?m)^module\s+([A-Za-z][A-Za-z0-9'.]*)\s+where\b")
+
+
+EXPECTED_BINDINGS: dict[str, tuple[str, ...]] = {
+    "A": ("gemvMatrixA", "PNFGEMVPayload"),
+    "SCHEMA": ("PNFGEMVPayload",),
+    "_vector": ("PNFGEMVPayload",),
+    "b": ("gemvVectorB", "PNFGEMVPayload"),
+    "cols": ("gemvCols", "PNFGEMVPayload"),
+    "cpu_gemv": ("PNFGEMVPayload", "canonicalPNFGEMVPayloadCandidateOnlyIsTrue"),
+    "dtype": ("gemvDType", "PNFGEMVPayload"),
+    "parity_hash": ("gemvParityHash", "PNFGEMVPayload"),
+    "rows": ("gemvRows", "PNFGEMVPayload"),
+    "row_map": ("PNFRowMapBinding", "PNFGEMVPayload"),
+    "schema": ("PNFGEMVPayload",),
+    "validate_numeric_abi": ("PNFAdmissionRule", "canonicalPNFAdmissionRuleCandidateOnlyIsTrue"),
+    "z": ("gemvVectorZ", "PNFGEMVPayload"),
+}
 
 
 @dataclass
@@ -101,7 +119,7 @@ def collect_python_surface(path: Path) -> Surface:
         def __init__(self) -> None:
             self.fields: list[str] = []
 
-        def visit_Call(self, node: ast.Call) -> Any:
+        def visit_Call(self, node: ast.Call) -> None:
             if isinstance(node.func, ast.Attribute) and node.func.attr == "get":
                 value = node.func.value
                 if isinstance(value, ast.Name) and value.id == "payload":
@@ -109,7 +127,7 @@ def collect_python_surface(path: Path) -> Surface:
                         self.fields.append(node.args[0].value)
             self.generic_visit(node)
 
-        def visit_Dict(self, node: ast.Dict) -> Any:
+        def visit_Dict(self, node: ast.Dict) -> None:
             for key in node.keys:
                 if isinstance(key, ast.Constant) and isinstance(key.value, str):
                     self.fields.append(key.value)
@@ -139,6 +157,7 @@ def collect_agda_surface(path: Path) -> Surface:
     module_name = module_match.group(1) if module_match else None
     names.extend(TOP_LEVEL_SIG_RE.findall(text))
     names.extend(TOP_LEVEL_DECL_RE.findall(text))
+    names.extend(AGDA_NAME_SIG_RE.findall(text))
     names = unique(names)
 
     return Surface(
@@ -154,6 +173,18 @@ def build_report(py_surface: Surface, agda_surface: Surface, limit: int) -> dict
     shared = sorted(set(py_surface.names) & set(agda_surface.names))
     missing_from_agda = sorted(set(py_surface.names) - set(agda_surface.names))
     covered = shared
+    agda_names = set(agda_surface.names)
+    semantic_bindings: dict[str, list[str]] = {}
+    semantic_missing: dict[str, list[str]] = {}
+
+    for py_name in py_surface.names:
+        expected = EXPECTED_BINDINGS.get(py_name, [])
+        present = [name for name in expected if name in agda_names]
+        missing = [name for name in expected if name not in agda_names]
+        if present:
+            semantic_bindings[py_name] = present
+        if missing:
+            semantic_missing[py_name] = missing
 
     return {
         "status": "ok" if agda_surface.present else "agda_missing",
@@ -178,6 +209,10 @@ def build_report(py_surface: Surface, agda_surface: Surface, limit: int) -> dict
             "covered_count": len(covered),
             "missing_from_agda": missing_from_agda[:limit],
             "missing_from_agda_count": len(missing_from_agda),
+            "semantic_bindings": dict(list(sorted(semantic_bindings.items()))[:limit]),
+            "semantic_bindings_count": len(semantic_bindings),
+            "semantic_missing": dict(list(sorted(semantic_missing.items()))[:limit]),
+            "semantic_missing_count": len(semantic_missing),
         },
     }
 
@@ -192,12 +227,34 @@ def render_markdownish(report: dict[str, Any]) -> str:
         f"- python: {'present' if python_block['present'] else 'missing'} ({python_block['path']})",
         f"- agda: {'present' if agda_block['present'] else 'missing'} ({agda_block['path']})",
         f"- shared exact names: {coverage['shared_count']}",
+        f"- semantic bindings: {coverage['semantic_bindings_count']}",
         f"- missing from agda: {coverage['missing_from_agda_count']}",
+        f"- missing semantic bindings: {coverage['semantic_missing_count']}",
         "",
         "Covered:",
         "  " + (", ".join(coverage["covered"]) if coverage["covered"] else "none"),
+        "Semantic bindings:",
+        "  "
+        + (
+            "; ".join(
+                f"{name} -> {', '.join(bindings)}"
+                for name, bindings in coverage["semantic_bindings"].items()
+            )
+            if coverage["semantic_bindings"]
+            else "none"
+        ),
         "Missing:",
         "  " + (", ".join(coverage["missing_from_agda"]) if coverage["missing_from_agda"] else "none"),
+        "Missing semantic bindings:",
+        "  "
+        + (
+            "; ".join(
+                f"{name} -> {', '.join(bindings)}"
+                for name, bindings in coverage["semantic_missing"].items()
+            )
+            if coverage["semantic_missing"]
+            else "none"
+        ),
     ]
     return "\n".join(lines)
 

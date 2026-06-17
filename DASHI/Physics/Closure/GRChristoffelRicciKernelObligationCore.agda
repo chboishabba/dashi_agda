@@ -223,6 +223,26 @@ canonicalConnectionErrorBoundExtractionDependencyName : String
 canonicalConnectionErrorBoundExtractionDependencyName =
   "ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
 
+canonicalRicciPalatiniExpansionProjectionName : String
+canonicalRicciPalatiniExpansionProjectionName =
+  "ricciPalatiniExpansion"
+
+canonicalRicciDerivativeTermBoundProjectionName : String
+canonicalRicciDerivativeTermBoundProjectionName =
+  "|∂δΓ| <= 19/2 ε"
+
+canonicalRicciProductTermBoundProjectionName : String
+canonicalRicciProductTermBoundProjectionName =
+  "|δ(ΓΓ)| <= 44 ε"
+
+canonicalRicciTermCount352EpsilonProjectionName : String
+canonicalRicciTermCount352EpsilonProjectionName =
+  "352 ε <= 640 ε"
+
+canonicalRicciConservative640EpsilonExtractionProjectionName : String
+canonicalRicciConservative640EpsilonExtractionProjectionName =
+  "conservative 640 ε extraction"
+
 canonicalConnectionErrorBoundExtractionHypotheses : List String
 canonicalConnectionErrorBoundExtractionHypotheses =
   "h_dΓ"
@@ -265,7 +285,12 @@ canonicalConnectionErrorBoundExtractionDependencyRows =
 
 canonicalConnectionErrorBoundExtractionProjectionRows : List String
 canonicalConnectionErrorBoundExtractionProjectionRows =
-  "projection: connectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
+  "projection: ricciPalatiniExpansion"
+  ∷ "projection: |∂δΓ| <= 19/2 ε"
+  ∷ "projection: |δ(ΓΓ)| <= 44 ε"
+  ∷ "projection: 352 ε <= 640 ε"
+  ∷ "projection: conservative 640 ε extraction"
+  ∷ "projection: connectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
   ∷ "projection: connectionErrorBoundExtractionHypotheses = h_dΓ, h_Γ, h_pgi, h_p2g, h_pg"
   ∷ "projection: connectionErrorBoundExtractionBounds = derivative terms; product terms; Schwarzschild nonzero-slot pruning; |∂δΓ| <= 19/2 ε; |δ(ΓΓ)| <= 44 ε; 352 ε <= 640 ε"
   ∷ "projection route text: 352 ε <= 640 ε"
@@ -909,6 +934,46 @@ record GRChristoffelRicciKernelObligationCore : Setω where
       ≡
       canonicalConnectionErrorBoundExtractionDependencyName
 
+    connectionErrorBoundExtractionPalatiniExpansionProjectionName :
+      String
+
+    connectionErrorBoundExtractionPalatiniExpansionProjectionNameIsCanonical :
+      connectionErrorBoundExtractionPalatiniExpansionProjectionName
+      ≡
+      canonicalRicciPalatiniExpansionProjectionName
+
+    connectionErrorBoundExtractionDerivativeTermBoundProjectionName :
+      String
+
+    connectionErrorBoundExtractionDerivativeTermBoundProjectionNameIsCanonical :
+      connectionErrorBoundExtractionDerivativeTermBoundProjectionName
+      ≡
+      canonicalRicciDerivativeTermBoundProjectionName
+
+    connectionErrorBoundExtractionProductTermBoundProjectionName :
+      String
+
+    connectionErrorBoundExtractionProductTermBoundProjectionNameIsCanonical :
+      connectionErrorBoundExtractionProductTermBoundProjectionName
+      ≡
+      canonicalRicciProductTermBoundProjectionName
+
+    connectionErrorBoundExtractionTermCount352EpsilonProjectionName :
+      String
+
+    connectionErrorBoundExtractionTermCount352EpsilonProjectionNameIsCanonical :
+      connectionErrorBoundExtractionTermCount352EpsilonProjectionName
+      ≡
+      canonicalRicciTermCount352EpsilonProjectionName
+
+    connectionErrorBoundExtractionConservative640EpsilonExtractionProjectionName :
+      String
+
+    connectionErrorBoundExtractionConservative640EpsilonExtractionProjectionNameIsCanonical :
+      connectionErrorBoundExtractionConservative640EpsilonExtractionProjectionName
+      ≡
+      canonicalRicciConservative640EpsilonExtractionProjectionName
+
     connectionErrorBoundExtractionHypotheses :
       List String
 
@@ -1223,6 +1288,26 @@ canonicalGRChristoffelRicciKernelObligationCore =
     ; connectionErrorBoundExtractionDependencyName =
         canonicalConnectionErrorBoundExtractionDependencyName
     ; connectionErrorBoundExtractionDependencyNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionPalatiniExpansionProjectionName =
+        canonicalRicciPalatiniExpansionProjectionName
+    ; connectionErrorBoundExtractionPalatiniExpansionProjectionNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionDerivativeTermBoundProjectionName =
+        canonicalRicciDerivativeTermBoundProjectionName
+    ; connectionErrorBoundExtractionDerivativeTermBoundProjectionNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionProductTermBoundProjectionName =
+        canonicalRicciProductTermBoundProjectionName
+    ; connectionErrorBoundExtractionProductTermBoundProjectionNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionTermCount352EpsilonProjectionName =
+        canonicalRicciTermCount352EpsilonProjectionName
+    ; connectionErrorBoundExtractionTermCount352EpsilonProjectionNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionConservative640EpsilonExtractionProjectionName =
+        canonicalRicciConservative640EpsilonExtractionProjectionName
+    ; connectionErrorBoundExtractionConservative640EpsilonExtractionProjectionNameIsCanonical =
         refl
     ; connectionErrorBoundExtractionHypotheses =
         canonicalConnectionErrorBoundExtractionHypotheses
