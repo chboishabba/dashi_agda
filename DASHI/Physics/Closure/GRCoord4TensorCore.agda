@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.GRCoord4TensorCore where
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; _∷_; []; map; _++_)
 open import DASHI.Core.Q using (ℚ)
 
@@ -1999,6 +2000,70 @@ canonicalSchwarzschildChristoffelSevenSlotReceiptSurface =
       [] )
     false
 
+record SchwarzschildFiniteUpperNonzeroBoundRow : Set where
+  constructor schwarzschildFiniteUpperNonzeroBoundRow
+  field
+    ledgerRow :
+      SchwarzschildChristoffelSevenSlotLedgerRow
+
+    upperNonzeroCount :
+      Nat
+
+    upperNonzeroCountIsOne :
+      upperNonzeroCount ≡ 1
+
+    rowBoundary :
+      List String
+
+    rowNotPromoted :
+      Bool
+
+schwarzschildFiniteUpperNonzeroBoundRowFromLedgerRow :
+  SchwarzschildChristoffelSevenSlotLedgerRow →
+  SchwarzschildFiniteUpperNonzeroBoundRow
+schwarzschildFiniteUpperNonzeroBoundRowFromLedgerRow row =
+  schwarzschildFiniteUpperNonzeroBoundRow
+    row
+    1
+    refl
+    ( "finiteUpperNonzeroBoundRow" ∷
+      "fixedLowerPairUpperLambdaAtMostOne" ∷ [] )
+    false
+
+record SchwarzschildFiniteUpperNonzeroBoundSurface : Set where
+  constructor schwarzschildFiniteUpperNonzeroBoundSurface
+  field
+    sourceLedgerRows :
+      List SchwarzschildChristoffelSevenSlotLedgerRow
+
+    boundRows :
+      List SchwarzschildFiniteUpperNonzeroBoundRow
+
+    boundRowCount :
+      Nat
+
+    boundRowCountIsSeven :
+      boundRowCount ≡ coord4NonzeroSlotCount7
+
+    boundBoundary :
+      List String
+
+    boundNotPromoted :
+      Bool
+
+canonicalSchwarzschildFiniteUpperNonzeroBoundSurface :
+  SchwarzschildFiniteUpperNonzeroBoundSurface
+canonicalSchwarzschildFiniteUpperNonzeroBoundSurface =
+  schwarzschildFiniteUpperNonzeroBoundSurface
+    schwarzschildChristoffelSevenSlotLedgerRows
+    (map schwarzschildFiniteUpperNonzeroBoundRowFromLedgerRow
+      schwarzschildChristoffelSevenSlotLedgerRows)
+    coord4NonzeroSlotCount7
+    refl
+    ( "finiteUpperNonzeroBoundSurface" ∷
+      "fixedLowerPairUpperLambdaAtMostOne" ∷ [] )
+    false
+
 christoffelFormulaDiagonalShape :
   SchwarzschildChristoffelFormulaLawShape →
   SchwarzschildChristoffelSevenSlotPackage
@@ -2553,6 +2618,51 @@ schwarzschildInverseMetricLawProjectionSurfaceFromLawSurface lawSurface =
   schwarzschildInverseMetricLawProjectionSurfaceFromCarrier
     (SchwarzschildFormulaLawSurface.metricCarrier lawSurface)
 
+record SchwarzschildChristoffelProductPruningReceiptSurface : Set where
+  constructor schwarzschildChristoffelProductPruningReceiptSurface
+  field
+    pruningCarrierRows :
+      List SchwarzschildChristoffelFormulaLawCarrierRow
+
+    pruningTightChristoffelBound :
+      ChristoffelFormulaLaw
+
+    pruningTightChristoffelBoundIsSevenSlot :
+      pruningTightChristoffelBound ≡ sevenSlotNonzeroReduction
+
+    pruningFalseGlobalGammaLeOneClaim :
+      Bool
+
+    pruningBoundary :
+      List String
+
+    pruningNotPromoted :
+      Bool
+
+canonicalSchwarzschildChristoffelProductPruningReceiptSurface :
+  SchwarzschildChristoffelProductPruningReceiptSurface
+canonicalSchwarzschildChristoffelProductPruningReceiptSurface =
+  schwarzschildChristoffelProductPruningReceiptSurface
+    ( schwarzschildChristoffelFormulaLawCarrierRow
+        diagonalOneTermReduction
+        (schwarzschildChristoffelFormulaLawCarrierRowName diagonalOneTermReduction ∷ [])
+        false
+      ∷ schwarzschildChristoffelFormulaLawCarrierRow
+        sevenSlotNonzeroReduction
+        (schwarzschildChristoffelFormulaLawCarrierRowName sevenSlotNonzeroReduction ∷ [])
+        false
+      ∷ schwarzschildChristoffelFormulaLawCarrierRow
+        zeroSlot57Closure
+        (schwarzschildChristoffelFormulaLawCarrierRowName zeroSlot57Closure ∷ [])
+        false
+      ∷ [] )
+    sevenSlotNonzeroReduction
+    refl
+    false
+    ( "productTermPruningViaTightChristoffelBound" ∷
+      "notGlobalGammaLeOneClaim" ∷ [] )
+    false
+
 ------------------------------------------------------------------------
 -- Named Christoffel law rows and the 57-slot zero closure.
 --
@@ -2779,6 +2889,47 @@ schwarzschildChristoffelSymmetricZeroSlotClosureSurface =
     ( "zeroSlot54Closure" ∷
       "complementOfTenSymmetricNamedRows" ∷
       [] )
+    false
+
+record SchwarzschildSymmetricZeroSlotCoverageReceiptSurface : Set where
+  constructor schwarzschildSymmetricZeroSlotCoverageReceiptSurface
+  field
+    symmetricLedgerRows :
+      List SchwarzschildChristoffelSlotClassificationRow
+
+    symmetricZeroSlotRows :
+      List SchwarzschildChristoffelSlotClassificationRow
+
+    symmetricLedgerNonzeroCount :
+      Nat
+
+    symmetricLedgerNonzeroCountIsTen :
+      symmetricLedgerNonzeroCount ≡ coord4SymmetricNonzeroSlotCount10
+
+    symmetricLedgerZeroCount :
+      Nat
+
+    symmetricLedgerZeroCountIsFiftyFour :
+      symmetricLedgerZeroCount ≡ coord4SymmetricZeroSlotCount54
+
+    zeroCoverageBoundary :
+      List String
+
+    zeroCoverageNotPromoted :
+      Bool
+
+canonicalSchwarzschildSymmetricZeroSlotCoverageReceiptSurface :
+  SchwarzschildSymmetricZeroSlotCoverageReceiptSurface
+canonicalSchwarzschildSymmetricZeroSlotCoverageReceiptSurface =
+  schwarzschildSymmetricZeroSlotCoverageReceiptSurface
+    schwarzschildSymmetricSlotClassificationRows
+    schwarzschildSymmetricZeroSlotClassificationRows
+    coord4SymmetricNonzeroSlotCount10
+    refl
+    coord4SymmetricZeroSlotCount54
+    refl
+    ( "symmetric10/54LedgerSource" ∷
+      "zeroSlotCoverageFromSymmetricLedger" ∷ [] )
     false
 
 record SchwarzschildChristoffelDiagonalLawCoreSurface : Set where

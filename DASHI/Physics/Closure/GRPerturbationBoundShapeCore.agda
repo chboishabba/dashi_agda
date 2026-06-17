@@ -257,6 +257,22 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
 
+    christoffelC0GammaChristoffelDiagonalName :
+      String
+
+    christoffelC0GammaChristoffelDiagonalNameIsCanonical :
+      christoffelC0GammaChristoffelDiagonalName
+      ≡
+      "Γ_christoffel_diagonal"
+
+    christoffelC0GammaChristoffelDiagonalReceipt :
+      String
+
+    christoffelC0GammaChristoffelDiagonalReceiptIsCanonical :
+      christoffelC0GammaChristoffelDiagonalReceipt
+      ≡
+      "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+
     christoffelC0DiagonalZeroLemmaNonzeroTripleCount :
       ℕ
 
@@ -298,6 +314,54 @@ record GRPerturbationBoundShapeCore : Setω where
       christoffelC0ChristoffelBilinearSplitSlackReceipt
       ≡
       "11/2 ε <= 48 ε"
+
+    christoffelC0ShellABracketLe8RouteName :
+      String
+
+    christoffelC0ShellABracketLe8RouteNameIsCanonical :
+      christoffelC0ShellABracketLe8RouteName
+      ≡
+      "bracket_le=8"
+
+    christoffelC0ShellABracketLe8RouteReceipt :
+      String
+
+    christoffelC0ShellABracketLe8RouteReceiptIsCanonical :
+      christoffelC0ShellABracketLe8RouteReceipt
+      ≡
+      "direct Shell A bracket_le=8"
+
+    christoffelC0ShellAFallbackThreeTermRouteName :
+      String
+
+    christoffelC0ShellAFallbackThreeTermRouteNameIsCanonical :
+      christoffelC0ShellAFallbackThreeTermRouteName
+      ≡
+      "fallback 3-term route"
+
+    christoffelC0ShellAFallbackThreeTermRouteReceipt :
+      String
+
+    christoffelC0ShellAFallbackThreeTermRouteReceiptIsCanonical :
+      christoffelC0ShellAFallbackThreeTermRouteReceipt
+      ≡
+      "(1/2)(24ε+3ε)=27/2ε, 27/2<=22"
+
+    christoffelC0ShellAConservativeRouteName :
+      String
+
+    christoffelC0ShellAConservativeRouteNameIsCanonical :
+      christoffelC0ShellAConservativeRouteName
+      ≡
+      "33/2<=22<=48"
+
+    christoffelC0ShellAConservativeRouteReceipt :
+      String
+
+    christoffelC0ShellAConservativeRouteReceiptIsCanonical :
+      christoffelC0ShellAConservativeRouteReceipt
+      ≡
+      "33/2 <= 22 <= 48"
 
     christoffelC0StaticDiagonalClosenessHypothesisPromoted :
       Bool
@@ -453,6 +517,22 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
 
+    christoffelFormulaC0StableGammaChristoffelDiagonalDependencyName :
+      String
+
+    christoffelFormulaC0StableGammaChristoffelDiagonalDependencyNameIsCanonical :
+      christoffelFormulaC0StableGammaChristoffelDiagonalDependencyName
+      ≡
+      "Γ_christoffel_diagonal"
+
+    christoffelFormulaC0StableGammaChristoffelDiagonalDependencyReceipt :
+      String
+
+    christoffelFormulaC0StableGammaChristoffelDiagonalDependencyReceiptIsCanonical :
+      christoffelFormulaC0StableGammaChristoffelDiagonalDependencyReceipt
+      ≡
+      "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+
     christoffelFormulaC0StableBilinearSplitReceipt :
       String
 
@@ -508,6 +588,54 @@ record GRPerturbationBoundShapeCore : Setω where
       christoffelFormulaC0StableFeed11HalfTo22ChainReceipt
       ≡
       "11/2<=33/2<=22<=48"
+
+    christoffelFormulaC0StableShellABracketLe8RouteName :
+      String
+
+    christoffelFormulaC0StableShellABracketLe8RouteNameIsCanonical :
+      christoffelFormulaC0StableShellABracketLe8RouteName
+      ≡
+      "bracket_le=8"
+
+    christoffelFormulaC0StableShellABracketLe8RouteReceipt :
+      String
+
+    christoffelFormulaC0StableShellABracketLe8RouteReceiptIsCanonical :
+      christoffelFormulaC0StableShellABracketLe8RouteReceipt
+      ≡
+      "direct Shell A bracket_le=8"
+
+    christoffelFormulaC0StableShellAFallbackThreeTermRouteName :
+      String
+
+    christoffelFormulaC0StableShellAFallbackThreeTermRouteNameIsCanonical :
+      christoffelFormulaC0StableShellAFallbackThreeTermRouteName
+      ≡
+      "fallback 3-term route"
+
+    christoffelFormulaC0StableShellAFallbackThreeTermRouteReceipt :
+      String
+
+    christoffelFormulaC0StableShellAFallbackThreeTermRouteReceiptIsCanonical :
+      christoffelFormulaC0StableShellAFallbackThreeTermRouteReceipt
+      ≡
+      "(1/2)(24ε+3ε)=27/2ε, 27/2<=22"
+
+    christoffelFormulaC0StableShellAConservativeRouteName :
+      String
+
+    christoffelFormulaC0StableShellAConservativeRouteNameIsCanonical :
+      christoffelFormulaC0StableShellAConservativeRouteName
+      ≡
+      "33/2<=22<=48"
+
+    christoffelFormulaC0StableShellAConservativeRouteReceipt :
+      String
+
+    christoffelFormulaC0StableShellAConservativeRouteReceiptIsCanonical :
+      christoffelFormulaC0StableShellAConservativeRouteReceipt
+      ≡
+      "33/2 <= 22 <= 48"
 
     christoffelFormulaC0StableFeed27Over2To22ChainName :
       String
@@ -582,9 +710,13 @@ record GRPerturbationBoundShapeCore : Setω where
       ∷ "bilinear split dependency: christoffelBilinearSplit"
       ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
       ∷ "diagonalZeroLemma dependency chain: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+      ∷ "Γ_christoffel_diagonal dependency: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
       ∷ "christoffelBilinearSplit telescoping identity: telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
       ∷ "11/2 feed to 22: 11/2<=33/2<=22<=48"
       ∷ "27/2 feed to 22 (3-term bracket): (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
+      ∷ "direct Shell A bracket_le=8 route: direct Shell A bracket_le=8"
+      ∷ "fallback 3-term route: (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
+      ∷ "conservative route: 33/2 <= 22 <= 48"
       ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
       ∷ []
 
@@ -1003,6 +1135,14 @@ canonicalGRPerturbationBoundShapeCore =
         "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
     ; christoffelC0DiagonalZeroLemmaReceiptIsCanonical =
         refl
+    ; christoffelC0GammaChristoffelDiagonalName =
+        "Γ_christoffel_diagonal"
+    ; christoffelC0GammaChristoffelDiagonalNameIsCanonical =
+        refl
+    ; christoffelC0GammaChristoffelDiagonalReceipt =
+        "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+    ; christoffelC0GammaChristoffelDiagonalReceiptIsCanonical =
+        refl
     ; christoffelC0DiagonalZeroLemmaNonzeroTripleCount =
         10
     ; christoffelC0DiagonalZeroLemmaNonzeroTripleCountIs10 =
@@ -1026,6 +1166,30 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelC0ChristoffelBilinearSplitSlackReceipt =
         "11/2 ε <= 48 ε"
     ; christoffelC0ChristoffelBilinearSplitSlackReceiptIsCanonical =
+        refl
+    ; christoffelC0ShellABracketLe8RouteName =
+        "bracket_le=8"
+    ; christoffelC0ShellABracketLe8RouteNameIsCanonical =
+        refl
+    ; christoffelC0ShellABracketLe8RouteReceipt =
+        "direct Shell A bracket_le=8"
+    ; christoffelC0ShellABracketLe8RouteReceiptIsCanonical =
+        refl
+    ; christoffelC0ShellAFallbackThreeTermRouteName =
+        "fallback 3-term route"
+    ; christoffelC0ShellAFallbackThreeTermRouteNameIsCanonical =
+        refl
+    ; christoffelC0ShellAFallbackThreeTermRouteReceipt =
+        "(1/2)(24ε+3ε)=27/2ε, 27/2<=22"
+    ; christoffelC0ShellAFallbackThreeTermRouteReceiptIsCanonical =
+        refl
+    ; christoffelC0ShellAConservativeRouteName =
+        "33/2<=22<=48"
+    ; christoffelC0ShellAConservativeRouteNameIsCanonical =
+        refl
+    ; christoffelC0ShellAConservativeRouteReceipt =
+        "33/2 <= 22 <= 48"
+    ; christoffelC0ShellAConservativeRouteReceiptIsCanonical =
         refl
     ; christoffelC0StaticDiagonalClosenessHypothesisPromoted =
         false
@@ -1105,6 +1269,14 @@ canonicalGRPerturbationBoundShapeCore =
         "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
     ; christoffelFormulaC0StableDiagonalZeroLemmaDependencyChainReceiptIsCanonical =
         refl
+    ; christoffelFormulaC0StableGammaChristoffelDiagonalDependencyName =
+        "Γ_christoffel_diagonal"
+    ; christoffelFormulaC0StableGammaChristoffelDiagonalDependencyNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableGammaChristoffelDiagonalDependencyReceipt =
+        "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+    ; christoffelFormulaC0StableGammaChristoffelDiagonalDependencyReceiptIsCanonical =
+        refl
     ; christoffelFormulaC0StableBilinearSplitReceipt =
         "|δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
     ; christoffelFormulaC0StableBilinearSplitReceiptIsCanonical =
@@ -1132,6 +1304,30 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelFormulaC0StableFeed11HalfTo22ChainReceipt =
         "11/2<=33/2<=22<=48"
     ; christoffelFormulaC0StableFeed11HalfTo22ChainReceiptIsCanonical =
+        refl
+    ; christoffelFormulaC0StableShellABracketLe8RouteName =
+        "bracket_le=8"
+    ; christoffelFormulaC0StableShellABracketLe8RouteNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableShellABracketLe8RouteReceipt =
+        "direct Shell A bracket_le=8"
+    ; christoffelFormulaC0StableShellABracketLe8RouteReceiptIsCanonical =
+        refl
+    ; christoffelFormulaC0StableShellAFallbackThreeTermRouteName =
+        "fallback 3-term route"
+    ; christoffelFormulaC0StableShellAFallbackThreeTermRouteNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableShellAFallbackThreeTermRouteReceipt =
+        "(1/2)(24ε+3ε)=27/2ε, 27/2<=22"
+    ; christoffelFormulaC0StableShellAFallbackThreeTermRouteReceiptIsCanonical =
+        refl
+    ; christoffelFormulaC0StableShellAConservativeRouteName =
+        "33/2<=22<=48"
+    ; christoffelFormulaC0StableShellAConservativeRouteNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableShellAConservativeRouteReceipt =
+        "33/2 <= 22 <= 48"
+    ; christoffelFormulaC0StableShellAConservativeRouteReceiptIsCanonical =
         refl
     ; christoffelFormulaC0StableFeed27Over2To22ChainName =
         OrderedRational.orderedRationalChristoffel27Over2Le22ArithmeticChainName
@@ -1175,9 +1371,13 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "bilinear split dependency: christoffelBilinearSplit"
         ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
         ∷ "diagonalZeroLemma dependency chain: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+        ∷ "Γ_christoffel_diagonal dependency: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
         ∷ "christoffelBilinearSplit telescoping identity: telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
         ∷ "11/2 feed to 22: 11/2<=33/2<=22<=48"
         ∷ "27/2 feed to 22 (3-term bracket): (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
+        ∷ "direct Shell A bracket_le=8 route: direct Shell A bracket_le=8"
+        ∷ "fallback 3-term route: (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
+        ∷ "conservative route: 33/2 <= 22 <= 48"
         ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
         ∷ []
     ; christoffelFormulaC0StableReceiptTableIsCanonical =
@@ -1309,7 +1509,9 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "The local stable surface now also carries the zero-slot dependency alias, bilinear-split dependency alias, a tighter 11/2<=33/2<=22<=48 feed, and a canonical receipt table for the Shell A constants."
         ∷ "DiagonalZeroLemma is now threaded through an explicit local chain: bracket_zero_of_not_nonzero and partialDeriv_of_zero."
         ∷ "Christoffel bilinear split now also carries the telescoping identity route that expands the split estimate."
-        ∷ "Both per-slot routes are recorded: tight 11/2 ε feed and a 3-term-bracket-safe 27/2 ε fallback route via (1/2)(24ε+3ε)=27/2ε and 27/2<=22."
+        ∷ "Γ_christoffel_diagonal is recorded as the diagonal receipt token for the zero-slot dependency chain."
+        ∷ "Both per-slot routes are recorded: direct Shell A bracket_le=8 and the 3-term fallback route via (1/2)(24ε+3ε)=27/2ε and 27/2<=22."
+        ∷ "The conservative route is recorded honestly as 33/2 <= 22 <= 48."
         ∷ "Ricci perturbation route is carried by the canonical Schwarzschild finite Ricci/Bianchi receipt; convergence and authority promotions are blocked."
         ∷ "Contracted-Bianchi still blocks at selected-connection dependency with exact blocker: missingCarrierConnectionIsLeviCivita."
         ∷ "Exact boundary arithmetic shapes are carried by symbolic-rational and shell-A law shapes, not by fabricated proofs."

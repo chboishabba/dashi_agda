@@ -62,6 +62,9 @@ orderedRationalChristoffel11Over2Le22LawName = "11/2<=22"
 orderedRationalChristoffel16p5Le22Le48LawName : String
 orderedRationalChristoffel16p5Le22Le48LawName = "11/2<=33/2<=22<=48"
 
+orderedRationalChristoffel33Over2Le22Le48LawName : String
+orderedRationalChristoffel33Over2Le22Le48LawName = "33/2<=22<=48"
+
 orderedRationalChristoffel22Le44LawName : String
 orderedRationalChristoffel22Le44LawName = "22<=44"
 
@@ -105,6 +108,14 @@ orderedRationalRicci6Times44Le8Times44Le640LawName : String
 orderedRationalRicci6Times44Le8Times44Le640LawName =
   "6*44<=8*44=352<=640"
 
+orderedRationalRicci4Times8Times11Over2Eq176Le640LawName : String
+orderedRationalRicci4Times8Times11Over2Eq176Le640LawName =
+  "4*8*(11/2)=176<=640"
+
+orderedRationalRicci6Times44Le352Le640LawName : String
+orderedRationalRicci6Times44Le352Le640LawName =
+  "6*44<=352<=640"
+
 orderedRationalShellA44Le48LawName : String
 orderedRationalShellA44Le48LawName = "44<=48"
 
@@ -132,6 +143,10 @@ orderedRationalChristoffel11Over2Le22ArithmeticChainName =
 orderedRationalChristoffel16p5Le22Le48ArithmeticChainName : String
 orderedRationalChristoffel16p5Le22Le48ArithmeticChainName =
   orderedRationalChristoffel16p5Le22Le48LawName
+
+orderedRationalChristoffel33Over2Le22Le48ArithmeticChainName : String
+orderedRationalChristoffel33Over2Le22Le48ArithmeticChainName =
+  orderedRationalChristoffel33Over2Le22Le48LawName
 
 orderedRationalChristoffel22Le44ArithmeticChainName : String
 orderedRationalChristoffel22Le44ArithmeticChainName =
@@ -181,9 +196,20 @@ orderedRationalRicci6Times44Le8Times44Le640ArithmeticChainName : String
 orderedRationalRicci6Times44Le8Times44Le640ArithmeticChainName =
   orderedRationalRicci6Times44Le8Times44Le640LawName
 
+orderedRationalRicci4Times8Times11Over2Eq176Le640ArithmeticChainName : String
+orderedRationalRicci4Times8Times11Over2Eq176Le640ArithmeticChainName =
+  orderedRationalRicci4Times8Times11Over2Eq176Le640LawName
+
+orderedRationalRicci6Times44Le352Le640ArithmeticChainName : String
+orderedRationalRicci6Times44Le352Le640ArithmeticChainName =
+  orderedRationalRicci6Times44Le352Le640LawName
+
 orderedRationalRicci8Times44Eq352ArithmeticChainName : String
 orderedRationalRicci8Times44Eq352ArithmeticChainName =
   orderedRationalRicci8Times44Eq352LawName
+
+orderedRationalShellAHGammaBgBoundDependencyName : String
+orderedRationalShellAHGammaBgBoundDependencyName = "h_Γ_bg_bound"
 
 data GROrderedRationalFiniteSlotBoundCoreReusableDependencyRow : Set where
   nonnegativeScaleDependencyRow :
@@ -195,6 +221,9 @@ data GROrderedRationalFiniteSlotBoundCoreReusableDependencyRow : Set where
   productDependencyRow :
     GROrderedRationalFiniteSlotBoundCoreReusableDependencyRow
 
+  hGammaBgBoundDependencyRow :
+    GROrderedRationalFiniteSlotBoundCoreReusableDependencyRow
+
 reusableDependencyRowName :
   GROrderedRationalFiniteSlotBoundCoreReusableDependencyRow →
   String
@@ -204,6 +233,8 @@ reusableDependencyRowName triangleDependencyRow =
   orderedRationalTriangleDependencyName
 reusableDependencyRowName productDependencyRow =
   orderedRationalProductDependencyName
+reusableDependencyRowName hGammaBgBoundDependencyRow =
+  orderedRationalShellAHGammaBgBoundDependencyName
 
 record GROrderedRationalFiniteSlotBoundCoreReusableDependencyProjectionRows : Set where
   constructor
@@ -212,6 +243,7 @@ record GROrderedRationalFiniteSlotBoundCoreReusableDependencyProjectionRows : Se
     dependencyNonnegativeScale : String
     dependencyTriangle : String
     dependencyProduct : String
+    dependencyHGammaBgBound : String
 
 open GROrderedRationalFiniteSlotBoundCoreReusableDependencyProjectionRows public
 
@@ -221,6 +253,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreReusableDependencyRows =
   nonnegativeScaleDependencyRow
   ∷ triangleDependencyRow
   ∷ productDependencyRow
+  ∷ hGammaBgBoundDependencyRow
   ∷ []
 
 canonicalGROrderedRationalFiniteSlotBoundCoreReusableDependencyProjectionRows :
@@ -230,6 +263,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreReusableDependencyProjectionRows =
     orderedRationalNonnegativeScaleDependencyName
     orderedRationalTriangleDependencyName
     orderedRationalProductDependencyName
+    orderedRationalShellAHGammaBgBoundDependencyName
 
 data GROrderedRationalFiniteSlotBoundCoreScalarLemmaRow : Set where
   absNonnegLemmaRow :
@@ -378,11 +412,17 @@ canonicalGROrderedRationalFiniteSlotBoundCoreScalarLemmaDependencyProjectionRows
 data GROrderedRationalFiniteSlotBoundCoreAdapterRow : Set where
   christoffel22Le48AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  christoffel33Over2Le22Le48AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
   ricci2144Over27Le80AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
   ricci80Le640AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
   ricci252Le640LooseAdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  ricci4Times8Times11Over2Eq176Le640AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  ricci6Times44Le352Le640AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
   shellA44Le48AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
@@ -397,9 +437,12 @@ canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRows :
   List GROrderedRationalFiniteSlotBoundCoreAdapterRow
 canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRows =
   christoffel22Le48AdapterRow
+  ∷ christoffel33Over2Le22Le48AdapterRow
   ∷ ricci2144Over27Le80AdapterRow
   ∷ ricci80Le640AdapterRow
   ∷ ricci252Le640LooseAdapterRow
+  ∷ ricci4Times8Times11Over2Eq176Le640AdapterRow
+  ∷ ricci6Times44Le352Le640AdapterRow
   ∷ shellA44Le48AdapterRow
   ∷ coord4SevenNonzeroSlotsAdapterRow
   ∷ coord4FiftySevenZeroSlotsAdapterRow
@@ -411,12 +454,18 @@ adapterRowName :
   String
 adapterRowName christoffel22Le48AdapterRow =
   orderedRationalChristoffel22Le48LawName
+adapterRowName christoffel33Over2Le22Le48AdapterRow =
+  orderedRationalChristoffel33Over2Le22Le48LawName
 adapterRowName ricci2144Over27Le80AdapterRow =
   orderedRationalRicci2144Over27Le80LawName
 adapterRowName ricci80Le640AdapterRow =
   orderedRationalRicci80Le640LawName
 adapterRowName ricci252Le640LooseAdapterRow =
   orderedRationalRicci252Le640LooseLawName
+adapterRowName ricci4Times8Times11Over2Eq176Le640AdapterRow =
+  orderedRationalRicci4Times8Times11Over2Eq176Le640LawName
+adapterRowName ricci6Times44Le352Le640AdapterRow =
+  orderedRationalRicci6Times44Le352Le640LawName
 adapterRowName shellA44Le48AdapterRow =
   orderedRationalShellA44Le48LawName
 adapterRowName coord4SevenNonzeroSlotsAdapterRow =
@@ -430,9 +479,12 @@ record GROrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows : Set wher
   constructor grOrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows
   field
     christoffel22Le48 : String
+    christoffel33Over2Le22Le48 : String
     ricci2144Over27 : String
     ricci80Le640 : String
     ricci252Le640Loose : String
+    ricci4Times8Times11Over2Eq176Le640 : String
+    ricci6Times44Le352Le640 : String
     shellA44Le48 : String
     coord4SevenNonzeroSlots : String
     coord4FiftySevenZeroSlots : String
@@ -445,9 +497,12 @@ canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows :
 canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows =
   grOrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows
     orderedRationalChristoffel22Le48LawName
+    orderedRationalChristoffel33Over2Le22Le48LawName
     orderedRationalRicci2144Over27Le80LawName
     orderedRationalRicci80Le640LawName
     orderedRationalRicci252Le640LooseLawName
+    orderedRationalRicci4Times8Times11Over2Eq176Le640LawName
+    orderedRationalRicci6Times44Le352Le640LawName
     orderedRationalShellA44Le48LawName
     coord4SevenNonzeroSlotsLawName
     coord4FiftySevenZeroSlotsLawName
@@ -458,6 +513,9 @@ data GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow : Set where
     GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow
 
   christoffel16p5Le22Le48ArithmeticChainRow :
+    GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow
+
+  christoffel33Over2Le22Le48ArithmeticChainRow :
     GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow
 
   christoffelThreeTermBracketFactorArithmeticChainRow :
@@ -490,6 +548,12 @@ data GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow : Set where
   ricci6Times44Le8Times44Le640ArithmeticChainRow :
     GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow
 
+  ricci4Times8Times11Over2Eq176Le640ArithmeticChainRow :
+    GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow
+
+  ricci6Times44Le352Le640ArithmeticChainRow :
+    GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow
+
   independentGiClosenessArithmeticRow :
     GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow
 
@@ -503,6 +567,8 @@ arithmeticChainRowName christoffel11Over2Le48ArithmeticChainRow =
   orderedRationalChristoffel11Over2Le48ArithmeticChainName
 arithmeticChainRowName christoffel16p5Le22Le48ArithmeticChainRow =
   orderedRationalChristoffel16p5Le22Le48ArithmeticChainName
+arithmeticChainRowName christoffel33Over2Le22Le48ArithmeticChainRow =
+  orderedRationalChristoffel33Over2Le22Le48ArithmeticChainName
 arithmeticChainRowName christoffelThreeTermBracketFactorArithmeticChainRow =
   orderedRationalChristoffelThreeTermBracketFactorArithmeticChainName
 arithmeticChainRowName christoffelHalfSumTo27Over2ArithmeticChainRow =
@@ -523,6 +589,10 @@ arithmeticChainRowName ricci8Times44Eq352ArithmeticChainRow =
   orderedRationalRicci8Times44Eq352ArithmeticChainName
 arithmeticChainRowName ricci6Times44Le8Times44Le640ArithmeticChainRow =
   orderedRationalRicci6Times44Le8Times44Le640ArithmeticChainName
+arithmeticChainRowName ricci4Times8Times11Over2Eq176Le640ArithmeticChainRow =
+  orderedRationalRicci4Times8Times11Over2Eq176Le640ArithmeticChainName
+arithmeticChainRowName ricci6Times44Le352Le640ArithmeticChainRow =
+  orderedRationalRicci6Times44Le352Le640ArithmeticChainName
 arithmeticChainRowName independentGiClosenessArithmeticRow =
   orderedRationalIndependentGiClosenessName
 arithmeticChainRowName secondPartialRicciDerivativeArithmeticRow =
@@ -533,6 +603,7 @@ record GROrderedRationalFiniteSlotBoundCoreArithmeticChainProjectionRows : Set w
   field
     arithmeticChristoffel11Over2Le48 : String
     arithmeticChristoffel16p5Le22Le48 : String
+    arithmeticChristoffel33Over2Le22Le48 : String
     arithmeticChristoffelThreeTermBracketFactor : String
     arithmeticChristoffelHalfSumTo27Over2 : String
     arithmeticChristoffel27Over2Le22 : String
@@ -543,6 +614,8 @@ record GROrderedRationalFiniteSlotBoundCoreArithmeticChainProjectionRows : Set w
     arithmeticRicci352Le640 : String
     arithmeticRicci8Times44Eq352 : String
     arithmeticRicci6Times44Le8Times44Le640 : String
+    arithmeticRicci4Times8Times11Over2Eq176Le640 : String
+    arithmeticRicci6Times44Le352Le640 : String
     arithmeticIndependentGiCloseness : String
     arithmeticSecondPartialRicciDerivative : String
 
@@ -554,6 +627,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreArithmeticChainRows =
   christoffel11Over2Le48ArithmeticChainRow
   ∷
   christoffel16p5Le22Le48ArithmeticChainRow
+  ∷ christoffel33Over2Le22Le48ArithmeticChainRow
   ∷ christoffelThreeTermBracketFactorArithmeticChainRow
   ∷ christoffelHalfSumTo27Over2ArithmeticChainRow
   ∷ christoffel27Over2Le22ArithmeticChainRow
@@ -563,6 +637,8 @@ canonicalGROrderedRationalFiniteSlotBoundCoreArithmeticChainRows =
   ∷ ricci352Le640ArithmeticChainRow
   ∷ ricci8Times44Eq352ArithmeticChainRow
   ∷ ricci6Times44Le8Times44Le640ArithmeticChainRow
+  ∷ ricci4Times8Times11Over2Eq176Le640ArithmeticChainRow
+  ∷ ricci6Times44Le352Le640ArithmeticChainRow
   ∷ ricci252Le640LooseArithmeticChainRow
   ∷
   christoffel22Le48ArithmeticChainRow
@@ -575,6 +651,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreArithmeticChainProjectionRows =
   grOrderedRationalFiniteSlotBoundCoreArithmeticChainProjectionRows
     orderedRationalChristoffel11Over2Le48ArithmeticChainName
     orderedRationalChristoffel16p5Le22Le48ArithmeticChainName
+    orderedRationalChristoffel33Over2Le22Le48ArithmeticChainName
     orderedRationalChristoffelThreeTermBracketFactorArithmeticChainName
     orderedRationalChristoffelHalfSumTo27Over2ArithmeticChainName
     orderedRationalChristoffel27Over2Le22ArithmeticChainName
@@ -585,6 +662,8 @@ canonicalGROrderedRationalFiniteSlotBoundCoreArithmeticChainProjectionRows =
     orderedRationalRicci352Le640ArithmeticChainName
     orderedRationalRicci8Times44Eq352ArithmeticChainName
     orderedRationalRicci6Times44Le8Times44Le640ArithmeticChainName
+    orderedRationalRicci4Times8Times11Over2Eq176Le640ArithmeticChainName
+    orderedRationalRicci6Times44Le352Le640ArithmeticChainName
     orderedRationalIndependentGiClosenessName
     orderedRationalSecondPartialRicciDerivativeName
 
@@ -787,11 +866,15 @@ canonicalGROrderedRationalFiniteSlotBoundCoreAdapterTokens =
   ∷ orderedRationalChristoffelHalfSumTo27Over2LawName
   ∷ orderedRationalChristoffel27Over2Le22LawName
   ∷ orderedRationalChristoffel22Le48LawName
+  ∷ orderedRationalChristoffel33Over2Le22Le48LawName
   ∷ orderedRationalRicci2144Over27Le80LawName
   ∷ orderedRationalRicci80Le640LawName
   ∷ orderedRationalRicci252Le640LooseLawName
   ∷ orderedRationalRicci6Times44Le8Times44LawName
   ∷ orderedRationalRicci6Times44Le8Times44Le640LawName
+  ∷ orderedRationalRicci4Times8Times11Over2Eq176Le640LawName
+  ∷ orderedRationalRicci6Times44Le352Le640LawName
+  ∷ orderedRationalShellAHGammaBgBoundDependencyName
   ∷ orderedRationalShellA44Le48LawName
   ∷ coord4SevenNonzeroSlotsLawName
   ∷ coord4FiftySevenZeroSlotsLawName
@@ -891,6 +974,9 @@ data GROrderedRationalFiniteSlotBoundCoreLawRow : Set where
   ricci80Le640LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
 
+  christoffel33Over2Le22Le48LawShape :
+    GROrderedRationalFiniteSlotBoundCoreLawRow
+
   ricci19Over2Le44LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
 
@@ -898,6 +984,12 @@ data GROrderedRationalFiniteSlotBoundCoreLawRow : Set where
     GROrderedRationalFiniteSlotBoundCoreLawRow
 
   ricci8Times44Eq352LawShape :
+    GROrderedRationalFiniteSlotBoundCoreLawRow
+
+  ricci4Times8Times11Over2Eq176Le640LawShape :
+    GROrderedRationalFiniteSlotBoundCoreLawRow
+
+  ricci6Times44Le352Le640LawShape :
     GROrderedRationalFiniteSlotBoundCoreLawRow
 
   ricci252Le640LooseLawShape :
@@ -932,9 +1024,12 @@ canonicalGROrderedRationalFiniteSlotBoundCoreLawRows =
   ∷ christoffel11Over2Le48LawShape
   ∷ ricci2144Over27Le80LawShape
   ∷ ricci80Le640LawShape
+  ∷ christoffel33Over2Le22Le48LawShape
   ∷ ricci19Over2Le44LawShape
   ∷ ricci352Le640LawShape
   ∷ ricci8Times44Eq352LawShape
+  ∷ ricci4Times8Times11Over2Eq176Le640LawShape
+  ∷ ricci6Times44Le352Le640LawShape
   ∷ ricci252Le640LooseLawShape
   ∷ shellA44Le48LawShape
   ∷ christoffel22Le44LawShape
@@ -965,11 +1060,11 @@ record GROrderedRationalFiniteSlotBoundCoreORCSLPGF : Set where
     G : String
     GIsCanonical :
       G ≡
-      "record the reusable bound shapes, scale/slack constants, dependency names, and exact arithmetic adapters only"
+      "record the reusable bound shapes, scale/slack constants, h_Γ_bg_bound helper routing, dependency names, and exact arithmetic adapters only"
     F : String
     FIsCanonical :
       F ≡
-      "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 27/2<=22, 6*44<=8*44, 8*44=352, 252<=640, 22<=44, 44<=48, and 7/57/64 Coord4 triple rows are recorded"
+      "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 27/2<=22, 252<=640, 22<=44, 44<=48, h_Γ_bg_bound helper routing, and 7/57/64 Coord4 triple rows are recorded"
 
 open GROrderedRationalFiniteSlotBoundCoreORCSLPGF public
 
@@ -989,9 +1084,9 @@ canonicalGROrderedRationalFiniteSlotBoundCoreORCSLPGF =
   refl
   "promotions remain blocked"
   refl
-  "record the reusable bound shapes, scale/slack constants, dependency names, and exact arithmetic adapters only"
+  "record the reusable bound shapes, scale/slack constants, h_Γ_bg_bound helper routing, dependency names, and exact arithmetic adapters only"
   refl
-  "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 27/2<=22, 6*44<=8*44, 8*44=352, 252<=640, 22<=44, 44<=48, and 7/57/64 Coord4 triple rows are recorded"
+  "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 19/2 derivative bound, 2144/27<=80, 80<=640, 352<=640, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 27/2<=22, 252<=640, 22<=44, 44<=48, h_Γ_bg_bound helper routing, and 7/57/64 Coord4 triple rows are recorded"
   refl
 
 record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
@@ -1102,6 +1197,18 @@ record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
       String
 
     orderedRationalRicci6Times44Le8Times44Le640LawRecorded :
+      String
+
+    orderedRationalChristoffel33Over2Le22Le48LawRecorded :
+      String
+
+    orderedRationalRicci4Times8Times11Over2Eq176Le640LawRecorded :
+      String
+
+    orderedRationalRicci6Times44Le352Le640LawRecorded :
+      String
+
+    orderedRationalShellAHGammaBgBoundRecorded :
       String
 
     lawRows :
@@ -1316,7 +1423,7 @@ record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
       ≡
       ("full ordered-rational proofs are intentionally absent until the surrounding Christoffel and Ricci inhabitants are stable"
         ∷ "the file only records reusable scalar lemma names, dependency names, and finite slot shapes"
-        ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 19/2<=44, 27/2<=22, 6*44<=8*44, 352<=640, and 8*44=352"
+        ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 27/2<=22, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 352<=640, and h_Γ_bg_bound routing"
         ∷ "no fragile proof terms are duplicated here"
         ∷ [])
 
@@ -1357,6 +1464,10 @@ canonicalGROrderedRationalFiniteSlotBoundCoreReceipt =
     orderedRationalChristoffel27Over2Le22LawName
     orderedRationalRicci6Times44Le8Times44LawName
     orderedRationalRicci6Times44Le8Times44Le640LawName
+    orderedRationalChristoffel33Over2Le22Le48LawName
+    orderedRationalRicci4Times8Times11Over2Eq176Le640LawName
+    orderedRationalRicci6Times44Le352Le640LawName
+    orderedRationalShellAHGammaBgBoundDependencyName
     canonicalGROrderedRationalFiniteSlotBoundCoreLawRows
     refl
     canonicalGROrderedRationalFiniteSlotBoundCoreDataRows
@@ -1426,7 +1537,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreReceipt =
     coord4SixtyFourTriplesLawName
     ("full ordered-rational proofs are intentionally absent until the surrounding Christoffel and Ricci inhabitants are stable"
       ∷ "the file only records reusable scalar lemma names, dependency names, and finite slot shapes"
-      ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 19/2<=44, 27/2<=22, 6*44<=8*44, 352<=640, and 8*44=352"
+      ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 27/2<=22, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 352<=640, and h_Γ_bg_bound routing"
       ∷ "no fragile proof terms are duplicated here"
       ∷ [])
     refl
