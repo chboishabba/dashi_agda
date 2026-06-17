@@ -1590,7 +1590,6 @@ record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
       ≡
       ("full ordered-rational proofs are intentionally absent until the surrounding Christoffel and Ricci inhabitants are stable"
         ∷ "the file only records reusable scalar lemma names, dependency names, and finite slot shapes"
-        ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 4*11=44, 27/2<=22<=48, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 352<=640, bracket_le=2*r_max with selected r_max=4M => 8, θ-shell/cot-bound, angular ledger 13/51, conservative product/total extraction rows up to <=640, and h_Γ_bg_bound routing"
         ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 4*11=44, 27/2<=22<=48, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=440<=640, 440<=640, productTermBound_88, coord4 angular-slot 13/51, 352<=640, bracket_le=2*r_max with selected r_max=4M => 8, θ-shell/cot-bound, angular ledger 13/51, conservative product/total extraction rows up to <=640, and h_Γ_bg_bound routing"
         ∷ "no fragile proof terms are duplicated here"
         ∷ [])

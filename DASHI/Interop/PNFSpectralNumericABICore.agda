@@ -1203,6 +1203,49 @@ canonicalPNFSpectralNumericABICoreReceipt =
     refl
 
 ------------------------------------------------------------------------
+-- v0.2 compatibility aliases.
+
+spectralSchemaV02 : String
+spectralSchemaV02 =
+  "itir.pnf.spectral_numeric_abi.v0_2"
+
+graphVersion : String
+graphVersion =
+  "v0.2"
+
+operatorProfile : String
+operatorProfile =
+  Vector.graphOperatorProfile Vector.canonicalGraphOperatorProximity
+
+objectRegistry : Rebuild.RegistryPayload
+objectRegistry =
+  Rebuild.canonicalRegistryPayload
+
+adjacencyTable : PNFAdjacencyABI
+adjacencyTable =
+  canonicalPNFAdjacencyABI
+
+degreeTable : List Rebuild.AbsoluteDegreeOperatorRow
+degreeTable =
+  adjacencyDegreeRows canonicalPNFAdjacencyABI
+
+laplacianTable : PNFLaplacianABI
+laplacianTable =
+  canonicalPNFLaplacianABI
+
+phiTable : PNFEigenSpectralCoordinateABI
+phiTable =
+  canonicalPNFEigenSpectralCoordinateABI
+
+psiTable : PNFGEMVPayload
+psiTable =
+  canonicalPNFGEMVPayload
+
+authorityGate : PNFAuthorityBoundaryLemmas
+authorityGate =
+  canonicalPNFAuthorityBoundaryLemmas
+
+------------------------------------------------------------------------
 -- Projection lemmas over the canonical receipt.
 
 canonicalPNFSpectralNumericABICoreReceiptStatusIsCandidateOnly :
