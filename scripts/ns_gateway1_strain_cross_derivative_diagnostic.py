@@ -11,6 +11,8 @@ including the condition
 ``B = 2 * <e2, (d_{e1} S) e1> * <e2, (d_{e2} S) e1>``.
 With ``--integral-conditions`` it also reports weighted integral/average
 diagnostics over vortex-support weights.
+With ``--kato-stability-statistics`` it reports aggregate Kato mixed-plane
+stability statistics over the whole ``lambda2<0`` region.
 
 The built-in Taylor-Green field is synthetic.  A sign pass here is not DNS
 evidence and is not a Navier-Stokes regularity proof.
@@ -444,6 +446,21 @@ def _directional_strain_gradient_vector(
     return np.asarray(directional_matrix @ right_vector, dtype=float)
 
 
+def _project_hessian_to_eigenframe(
+    hessian: np.ndarray,
+    eigenframe: np.ndarray,
+) -> np.ndarray:
+    """Project a symmetric 3x3 Hessian matrix into a local eigenframe basis."""
+
+    local_hessian = np.asarray(hessian, dtype=float)
+    basis = np.asarray(eigenframe, dtype=float)
+    if local_hessian.shape != (3, 3):
+        raise ValueError(f"hessian must be shape (3, 3), got {local_hessian.shape!r}")
+    if basis.shape != (3, 3):
+        raise ValueError(f"eigenframe must be shape (3, 3), got {basis.shape!r}")
+    return basis.T @ local_hessian @ basis
+
+
 def _weighted_field_statistics(
     field: np.ndarray,
     weights: np.ndarray,
@@ -520,6 +537,290 @@ def _target_snapshot_payload(
         "cross_derivative_e1_e2_lambda2_at_target": float(target_cross_derivative),
         "target_pressure_hessian_e1_e2": float(target_pressure_hessian_e1_e2),
         "pressure_hessian_e1_e2_at_target": float(target_pressure_hessian_e1_e2),
+    }
+
+
+def _finite_quantiles(values: np.ndarray) -> dict[str, float | None]:
+    finite = np.asarray(values, dtype=float)
+    finite = finite[np.isfinite(finite)]
+    if finite.size == 0:
+        return {
+            "min": None,
+            "p05": None,
+            "p25": None,
+            "median": None,
+            "p75": None,
+            "p95": None,
+            "max": None,
+        }
+    quantiles = np.quantile(finite, [0.0, 0.05, 0.25, 0.5, 0.75, 0.95, 1.0])
+    return {
+        "min": float(quantiles[0]),
+        "p05": float(quantiles[1]),
+        "p25": float(quantiles[2]),
+        "median": float(quantiles[3]),
+        "p75": float(quantiles[4]),
+        "p95": float(quantiles[5]),
+        "max": float(quantiles[6]),
+    }
+
+
+def _kato_stability_statistics(
+    *,
+    strain: np.ndarray,
+    strain_gradient: np.ndarray,
+    lambda2_field: np.ndarray,
+    lambda2_hessian: np.ndarray,
+    lambda2_min: float,
+    kato_beta_threshold: float | None = None,
+) -> dict[str, Any]:
+    """Aggregate mixed-plane Kato stability statistics over ``lambda2<0``.
+
+    For each nondegenerate point with ``lambda2<0`` this uses the mixed
+    ``e1/e2`` decomposition
+
+        cross = B / gap12 + remainder
+
+    where ``B = 2 * <e2,(d_e1 S)e1> * <e2,(d_e2 S)e1>``.  The reported
+    ``kappa_abs`` is ``abs(B/gap12) / abs(remainder)``.  This is an empirical
+    shape statistic only; it is not a regularity criterion.
+    """
+
+    if lambda2_hessian.shape[:2] != (3, 3):
+        raise ValueError(f"lambda2_hessian must be shape (3,3,N,N,N), got {lambda2_hessian.shape!r}")
+    if not np.isfinite(lambda2_min):
+        raise ValueError(f"lambda2_min must be finite, got {lambda2_min!r}")
+
+    matrices = np.moveaxis(strain, (0, 1), (-2, -1))
+    eigenvalues, eigenvectors = np.linalg.eigh(matrices)
+    mask = lambda2_field < 0.0
+    negative_count = int(np.count_nonzero(mask))
+    beta = (
+        float(kato_beta_threshold * lambda2_min)
+        if kato_beta_threshold is not None
+        else None
+    )
+    if beta is not None:
+        omega_beta_mask = lambda2_field <= beta
+        omega_beta_count = int(np.count_nonzero(omega_beta_mask))
+    else:
+        omega_beta_count = negative_count
+    if negative_count == 0:
+        total_points = int(lambda2_field.size)
+        lambda2_negative_fraction = 0.0
+        omega_beta_fraction = float(omega_beta_count / total_points) if total_points > 0 else 0.0
+        omega_K_inside_Omega_beta_count = 0
+        omega_K_inside_Omega_beta_fraction = (
+            float(omega_K_inside_Omega_beta_count / omega_beta_count)
+            if omega_beta_count > 0
+            else None
+        )
+        omega_K_inside_Omega_beta_fraction_on_domain = (
+            float(omega_K_inside_Omega_beta_count / total_points) if total_points > 0 else 0.0
+        )
+        beta_metrics: dict[str, Any] = {}
+        if beta is not None:
+            beta_metrics = {
+                "kato_stability_omega_K_inside_Omega_beta_count": omega_K_inside_Omega_beta_count,
+                "kato_stability_omega_K_inside_Omega_beta_fraction": omega_K_inside_Omega_beta_fraction,
+                "kato_stability_omega_K_inside_Omega_beta_fraction_on_domain": (
+                    omega_K_inside_Omega_beta_fraction_on_domain
+                ),
+                "kato_stability_omega_beta_threshold": float(kato_beta_threshold),
+                "kato_stability_omega_beta_threshold_lambda2_min": float(lambda2_min),
+                "kato_stability_omega_beta_threshold_beta": float(beta),
+                "kato_stability_beta_threshold": float(kato_beta_threshold),
+                "kato_stability_beta_threshold_lambda2_min": float(lambda2_min),
+                "kato_stability_beta_threshold_beta": float(beta),
+            }
+        return {
+            "kato_stability_statistics_enabled": True,
+            "kato_stability_region": "lambda2<0",
+            "kato_stability_total_points": total_points,
+            "kato_stability_point_count_total": total_points,
+            "kato_stability_omega_beta_count": omega_beta_count,
+            "kato_stability_omega_K_count": 0,
+            "kato_stability_Omega_beta_fraction": omega_beta_fraction,
+            "kato_stability_lambda2_negative_fraction": lambda2_negative_fraction,
+            "kato_stability_omega_tube_fraction": 0.0,
+            "kato_stability_cross_derivative_positive_count": 0,
+            "kato_stability_cross_derivative_positive_fraction": None,
+            "kato_stability_cross_derivative_positive_fraction_on_domain": 0.0,
+            "kato_stability_cross_derivative_positive_fraction_on_lambda2_negative": 0.0,
+            "kato_stability_cross_derivative_fractionally_stable_in_lambda2": 0.0,
+            "kato_stability_omega_K_fraction": 0.0,
+            "kato_stability_point_count": 0,
+            "kato_stability_nonfinite_or_degenerate_count": 0,
+            "kato_stability_finite_count": 0,
+            **beta_metrics,
+            "kato_stability_blocker": "lambda2<0 region is empty",
+        }
+
+    gap12 = eigenvalues[..., 1] - eigenvalues[..., 0]
+    negative_indices = np.argwhere(mask)
+    kappa_abs_values: list[float] = []
+    kappa_signed_values: list[float] = []
+    b_over_gap12_values: list[float] = []
+    remainder_values: list[float] = []
+    cross_values: list[float] = []
+    lambda2_values: list[float] = []
+    b_positive_count = 0
+    omega_K_count = 0
+    omega_K_inside_Omega_beta_count = 0
+    degenerate_or_nonfinite_count = 0
+
+    for raw_index in negative_indices:
+        index = tuple(int(i) for i in raw_index)
+        local_gap12 = float(gap12[index])
+        if not np.isfinite(local_gap12) or abs(local_gap12) <= 1.0e-10:
+            degenerate_or_nonfinite_count += 1
+            continue
+        local_vectors = np.asarray(eigenvectors[index], dtype=float)
+        local_vectors = _canonicalize_eigenvectors(local_vectors)
+        e1 = local_vectors[:, 0]
+        e2 = local_vectors[:, 1]
+        cross = _directional_hessian_cross(lambda2_hessian, index, e1, e2)
+        e2_d_e1S_e1 = _directional_strain_gradient_projection(
+            strain_gradient,
+            index,
+            e2,
+            e1,
+            e1,
+        )
+        e2_d_e2S_e1 = _directional_strain_gradient_projection(
+            strain_gradient,
+            index,
+            e2,
+            e1,
+            e2,
+        )
+        kato_b = 2.0 * e2_d_e1S_e1 * e2_d_e2S_e1
+        b_over_gap12 = kato_b / local_gap12
+        remainder = cross - b_over_gap12
+        if not (
+            np.isfinite(cross)
+            and np.isfinite(kato_b)
+            and np.isfinite(b_over_gap12)
+            and np.isfinite(remainder)
+        ):
+            degenerate_or_nonfinite_count += 1
+            continue
+        if cross > SIGN_TOLERANCE:
+            omega_K_count += 1
+            if beta is not None and float(lambda2_field[index]) <= beta:
+                omega_K_inside_Omega_beta_count += 1
+        if kato_b > 0.0:
+            b_positive_count += 1
+        if abs(remainder) <= SIGN_TOLERANCE:
+            kappa_abs = np.inf
+            kappa_signed = np.inf if b_over_gap12 >= 0.0 else -np.inf
+        else:
+            kappa_abs = abs(b_over_gap12) / abs(remainder)
+            kappa_signed = b_over_gap12 / abs(remainder)
+        kappa_abs_values.append(float(kappa_abs))
+        kappa_signed_values.append(float(kappa_signed))
+        b_over_gap12_values.append(float(b_over_gap12))
+        remainder_values.append(float(remainder))
+        cross_values.append(float(cross))
+        lambda2_values.append(float(lambda2_field[index]))
+
+    kappa_abs_array = np.asarray(kappa_abs_values, dtype=float)
+    kappa_signed_array = np.asarray(kappa_signed_values, dtype=float)
+    finite_count = int(np.count_nonzero(np.isfinite(kappa_abs_array)))
+    valid_count = int(kappa_abs_array.size)
+    cross_derivative_positive_count = int(omega_K_count)
+    if valid_count == 0:
+        fraction_abs_gt_1 = None
+        fraction_signed_gt_1 = None
+        fraction_b_positive = None
+        fraction_cross_derivative_positive = None
+        fraction_cross_derivative_positive_on_lambda2_negative = None
+    else:
+        fraction_abs_gt_1 = float(np.count_nonzero(kappa_abs_array > 1.0) / valid_count)
+        fraction_signed_gt_1 = float(np.count_nonzero(kappa_signed_array > 1.0) / valid_count)
+        fraction_b_positive = float(b_positive_count / valid_count)
+        fraction_cross_derivative_positive = float(cross_derivative_positive_count / valid_count)
+        fraction_cross_derivative_positive_on_lambda2_negative = float(
+            cross_derivative_positive_count / negative_count
+        )
+
+    total_points = int(lambda2_field.size)
+    lambda2_negative_fraction = float(negative_count / total_points) if total_points > 0 else 0.0
+    omega_tube_fraction = float(omega_K_count / total_points) if total_points > 0 else 0.0
+    cross_derivative_positive_fraction_on_domain = (
+        float(cross_derivative_positive_count / total_points) if total_points > 0 else 0.0
+    )
+    fraction_omega_tube = (
+        float(omega_K_count / negative_count) if negative_count > 0 else 0.0
+    )
+    omega_K_inside_Omega_beta_fraction = (
+        float(omega_K_inside_Omega_beta_count / omega_beta_count)
+        if omega_beta_count > 0
+        else None
+    )
+    omega_K_inside_Omega_beta_fraction_on_domain = (
+        float(omega_K_inside_Omega_beta_count / total_points) if total_points > 0 else 0.0
+    )
+    omega_beta_fraction = float(omega_beta_count / total_points) if total_points > 0 else 0.0
+    beta_metrics: dict[str, Any] = {}
+    if beta is not None:
+        beta_metrics = {
+            "kato_stability_omega_K_inside_Omega_beta_count": omega_K_inside_Omega_beta_count,
+            "kato_stability_omega_K_inside_Omega_beta_fraction": omega_K_inside_Omega_beta_fraction,
+            "kato_stability_omega_K_inside_Omega_beta_fraction_on_domain": (
+                omega_K_inside_Omega_beta_fraction_on_domain
+            ),
+            "kato_stability_omega_beta_threshold": float(kato_beta_threshold),
+            "kato_stability_omega_beta_threshold_lambda2_min": float(lambda2_min),
+            "kato_stability_omega_beta_threshold_beta": float(beta),
+            "kato_stability_beta_threshold": float(kato_beta_threshold),
+            "kato_stability_beta_threshold_lambda2_min": float(lambda2_min),
+            "kato_stability_beta_threshold_beta": float(beta),
+        }
+
+    return {
+        "kato_stability_statistics_enabled": True,
+        "kato_stability_region": "lambda2<0",
+        "kato_stability_formula": "cross_e1e2_lambda2 = B/gap12 + remainder; kappa_abs = abs(B/gap12)/abs(remainder)",
+        "kato_stability_total_points": total_points,
+        "kato_stability_point_count_total": total_points,
+        "kato_stability_omega_beta_count": omega_beta_count,
+        "kato_stability_omega_K_count": omega_K_count,
+        "kato_stability_lambda2_negative_fraction": lambda2_negative_fraction,
+        "kato_stability_omega_tube_fraction": omega_tube_fraction,
+        "kato_stability_cross_derivative_positive_fraction_on_domain": cross_derivative_positive_fraction_on_domain,
+        "kato_stability_cross_derivative_positive_fraction": fraction_cross_derivative_positive,
+        "kato_stability_cross_derivative_positive_count": cross_derivative_positive_count,
+        "kato_stability_cross_derivative_positive_fraction_on_lambda2_negative": (
+            fraction_cross_derivative_positive_on_lambda2_negative
+        ),
+        "kato_stability_cross_derivative_fractionally_stable_in_lambda2": fraction_omega_tube,
+        "kato_stability_kappa_abs_gt_1_denominator": valid_count,
+        "kato_stability_kappa_signed_gt_1_denominator": valid_count,
+        "kato_stability_point_count": negative_count,
+        "kato_stability_nonfinite_or_degenerate_count": degenerate_or_nonfinite_count,
+        "kato_stability_valid_count": valid_count,
+        "kato_stability_finite_count": finite_count,
+        "kato_stability_fraction_kappa_abs_gt_1": fraction_abs_gt_1,
+        "kato_stability_fraction_kappa_signed_gt_1": fraction_signed_gt_1,
+        "kato_stability_fraction_B_positive": fraction_b_positive,
+        "kato_stability_omega_K_fraction": fraction_omega_tube,
+        "kato_stability_Omega_beta_fraction": omega_beta_fraction,
+        **beta_metrics,
+        "kato_stability_kappa_abs_quantiles": _finite_quantiles(kappa_abs_array),
+        "kato_stability_kappa_signed_quantiles": _finite_quantiles(kappa_signed_array),
+        "kato_stability_B_over_gap12_quantiles": _finite_quantiles(
+            np.asarray(b_over_gap12_values, dtype=float)
+        ),
+        "kato_stability_remainder_quantiles": _finite_quantiles(
+            np.asarray(remainder_values, dtype=float)
+        ),
+        "kato_stability_cross_derivative_quantiles": _finite_quantiles(
+            np.asarray(cross_values, dtype=float)
+        ),
+        "kato_stability_lambda2_quantiles": _finite_quantiles(
+            np.asarray(lambda2_values, dtype=float)
+        ),
     }
 
 
@@ -692,6 +993,9 @@ def run_diagnostic(
     integral_conditions: bool = False,
     top_enstrophy_percentile: float | None = None,
     kato_alignment: bool = False,
+    kato_stability_statistics: bool = False,
+    kato_beta_threshold: float | None = None,
+    hessian_full_3d: bool = False,
 ) -> dict[str, Any]:
     """Run the NS-GW-1 diagnostic and return a JSON-serializable dict.
 
@@ -702,7 +1006,16 @@ def run_diagnostic(
     diagnostics.  When ``integral_conditions`` is true, additional weighted
     integral and average diagnostics are reported over natural vortex support
     weights.  When ``kato_alignment`` is true, scalar projections defining
-    Kato condition B are added at the selected target point.
+    Kato condition B are added at the selected target point.  When
+    ``kato_stability_statistics`` is true, aggregate Kato mixed-plane
+    statistics are reported over the whole ``lambda2<0`` region.  When
+    ``kato_beta_threshold`` is provided, with ``0 < theta < 1``, bounded
+    counts for the region ``lambda2 <= beta`` are emitted where
+    ``beta = theta * lambda2_min``.  When
+    ``hessian_full_3d`` is true, the full Hessian of lambda2 at the selected
+    target point is projected into that target's strain eigenframe and its full
+    3x3 entries/eigen-data are reported, including ratio-style confinement
+    scales (``length^2`` and ``length``) and principal Taylor semi-axis estimates.
     """
 
     if int(N) != N:
@@ -727,6 +1040,12 @@ def run_diagnostic(
             raise ValueError("top_enstrophy_percentile must be finite")
         if not (0.0 < top_enstrophy_percentile <= 100.0):
             raise ValueError("top_enstrophy_percentile must be in the interval (0, 100]")
+    if kato_beta_threshold is not None:
+        kato_beta_threshold = float(kato_beta_threshold)
+        if not np.isfinite(kato_beta_threshold):
+            raise ValueError("--kato-beta-threshold / kato_beta_threshold must be finite")
+        if not (0.0 < kato_beta_threshold < 1.0):
+            raise ValueError("--kato-beta-threshold / kato_beta_threshold must be in the interval (0, 1)")
 
     field_metadata: dict[str, Any] = {}
     if field is not None:
@@ -784,6 +1103,7 @@ def run_diagnostic(
         lambda2_field,
         axis_convention=derivative_axis_convention,
     )
+    lambda2_min = float(np.min(lambda2_field))
     pressure_hessian = spectral_hessian(pressure, axis_convention=derivative_axis_convention)
     target_selection = _select_target_index(
         target_mode=target,
@@ -816,6 +1136,107 @@ def run_diagnostic(
         eigenframe_degenerate=target_eigenframe_degenerate,
         sign_classification=target_sign_classification,
     )
+
+    target_hessian_full_3d: dict[str, Any] = {
+        "hessian_full_3d_enabled": False,
+    }
+    if hessian_full_3d:
+        target_hessian_matrix = _tensor_at(hessian, target_index)
+        projected_target_hessian = _project_hessian_to_eigenframe(
+            target_hessian_matrix,
+            target_eigenvectors,
+        )
+        projected_target_hessian = np.asarray(projected_target_hessian, dtype=float)
+        (
+            projected_hessian_eigenvalues,
+            projected_hessian_eigenvectors,
+        ) = np.linalg.eigh(projected_target_hessian)
+        projected_trace = float(np.trace(projected_target_hessian))
+        projected_determinant = float(np.linalg.det(projected_target_hessian))
+        projected_lambda_abs_max = float(np.max(np.abs(projected_hessian_eigenvalues)))
+
+        confinement_radius_ratio: float | None
+        confinement_radius_length: float | None
+        if (
+            np.isfinite(target_lambda2)
+            and np.isfinite(projected_lambda_abs_max)
+            and projected_lambda_abs_max > 0.0
+        ):
+            confinement_radius_ratio = float(abs(target_lambda2) / projected_lambda_abs_max)
+            confinement_radius_length = float(np.sqrt(confinement_radius_ratio))
+        else:
+            confinement_radius_ratio = None
+            confinement_radius_length = None
+
+        confinement_principal_axis_semiaxis_squared: list[float | None] = []
+        confinement_principal_axis_semiaxis: list[float | None] = []
+        if np.isfinite(target_lambda2):
+            for hessian_eig in projected_hessian_eigenvalues:
+                if target_lambda2 < 0.0 and np.isfinite(hessian_eig) and hessian_eig > 0.0:
+                    semi_axis_sq = float(-target_lambda2 / hessian_eig)
+                    confinement_principal_axis_semiaxis_squared.append(
+                        semi_axis_sq if semi_axis_sq >= 0.0 else None
+                    )
+                    confinement_principal_axis_semiaxis.append(
+                        float(np.sqrt(semi_axis_sq)) if semi_axis_sq >= 0.0 else None
+                    )
+                else:
+                    confinement_principal_axis_semiaxis_squared.append(None)
+                    confinement_principal_axis_semiaxis.append(None)
+        else:
+            confinement_principal_axis_semiaxis_squared = [None, None, None]
+            confinement_principal_axis_semiaxis = [None, None, None]
+        target_hessian_full_3d.update(
+            {
+                "hessian_full_3d_enabled": True,
+                "target_hessian_full_3d_projection_matrix": _jsonify_matrix(
+                    projected_target_hessian
+                ),
+                "target_hessian_full_3d_entry_h11": float(projected_target_hessian[0, 0]),
+                "target_hessian_full_3d_entry_h22": float(projected_target_hessian[1, 1]),
+                "target_hessian_full_3d_entry_h33": float(projected_target_hessian[2, 2]),
+                "target_hessian_full_3d_entry_h12": float(projected_target_hessian[0, 1]),
+                "target_hessian_full_3d_entry_h13": float(projected_target_hessian[0, 2]),
+                "target_hessian_full_3d_entry_h23": float(projected_target_hessian[1, 2]),
+                "target_hessian_full_3d_eigenvalues": _jsonify_vector(
+                    projected_hessian_eigenvalues
+                ),
+                "target_hessian_full_3d_eigenvectors": _jsonify_matrix(
+                    projected_hessian_eigenvectors
+                ),
+                "target_hessian_full_3d_trace": projected_trace,
+                "target_hessian_full_3d_determinant": projected_determinant,
+                "target_hessian_full_3d_e3e3": float(projected_target_hessian[2, 2]),
+                "target_hessian_full_3d_lambda_max": projected_lambda_abs_max,
+                "target_hessian_full_3d_confinement_radius_estimate": confinement_radius_ratio,
+                "target_hessian_full_3d_confinement_radius_ratio": confinement_radius_ratio,
+                "target_hessian_full_3d_confinement_radius_ratio_units": "length^2",
+                "target_hessian_full_3d_confinement_radius_estimate_units": "length^2",
+                "target_hessian_full_3d_confinement_radius_ratio_abs_lambda2_over_abs_lambda_max": (
+                    confinement_radius_ratio
+                ),
+                "target_hessian_full_3d_confinement_radius_ratio_abs_lambda2_over_abs_lambda_max_units": "length^2",
+                "target_hessian_full_3d_confinement_radius_length_abs_lambda2_over_abs_lambda_max": (
+                    confinement_radius_length
+                ),
+                "target_hessian_full_3d_confinement_radius_length_abs_lambda2_over_abs_lambda_max_units": (
+                    "length"
+                ),
+                "target_hessian_full_3d_confinement_radius_length": confinement_radius_length,
+                "target_hessian_full_3d_confinement_radius_length_units": "length",
+                "target_hessian_full_3d_taylor_principal_axis_semi_axis_squared": (
+                    confinement_principal_axis_semiaxis_squared
+                ),
+                "target_hessian_full_3d_taylor_principal_axis_semi_axis": (
+                    confinement_principal_axis_semiaxis
+                ),
+                "target_hessian_full_3d_taylor_principal_axis_semi_axis_units": "length",
+                "target_hessian_full_3d_taylor_principal_axes_in_target_strain_eigenframe": (
+                    _jsonify_matrix(projected_hessian_eigenvectors)
+                ),
+            }
+        )
+
     local_hessian = _tensor_at(hessian, max_index)
     cross_derivative = _directional_hessian_cross(hessian, max_index, e1, e2)
     pressure_hessian_e1_e2 = _directional_hessian_cross(
@@ -837,16 +1258,23 @@ def run_diagnostic(
         e2,
     )
     kato_alignment_result: dict[str, Any] = {}
+    strain_grad_for_kato: np.ndarray | None = None
+    if kato_alignment or kato_stability_statistics:
+        strain_grad_for_kato = strain_gradient_tensor(
+            strain,
+            axis_convention=derivative_axis_convention,
+        )
     if kato_alignment:
-        strain_grad = strain_gradient_tensor(strain, axis_convention=derivative_axis_convention)
+        if strain_grad_for_kato is None:
+            raise RuntimeError("internal error: missing strain gradient for Kato alignment")
         d_e1S_e1 = _directional_strain_gradient_vector(
-            strain_grad,
+            strain_grad_for_kato,
             target_index,
             target_e1,
             target_e1,
         )
         d_e2S_e1 = _directional_strain_gradient_vector(
-            strain_grad,
+            strain_grad_for_kato,
             target_index,
             target_e2,
             target_e1,
@@ -854,14 +1282,14 @@ def run_diagnostic(
         if not np.all(np.isfinite(d_e1S_e1)) or not np.all(np.isfinite(d_e2S_e1)):
             raise ValueError("Kato alignment directional projected vectors contain non-finite values")
         e2_d_e1S_e1 = _directional_strain_gradient_projection(
-            strain_grad,
+            strain_grad_for_kato,
             target_index,
             target_e2,
             target_e1,
             target_e1,
         )
         e2_d_e2S_e1 = _directional_strain_gradient_projection(
-            strain_grad,
+            strain_grad_for_kato,
             target_index,
             target_e2,
             target_e1,
@@ -950,6 +1378,7 @@ def run_diagnostic(
             target_cross_derivative=target_cross_derivative,
             target_pressure_hessian_e1_e2=target_pressure_hessian_e1_e2,
         ),
+        **target_hessian_full_3d,
         "target_sign_classification": target_sign_classification,
         "target_sign_nonpositive": bool(
             target_sign_classification != "positive_adverse_to_nonpositive_rule"
@@ -1025,6 +1454,19 @@ def run_diagnostic(
         "caveat": CAVEAT,
     }
     result.update(kato_alignment_result)
+    if kato_stability_statistics:
+        if strain_grad_for_kato is None:
+            raise RuntimeError("internal error: missing strain gradient for Kato statistics")
+        result.update(
+            _kato_stability_statistics(
+                strain=strain,
+                strain_gradient=strain_grad_for_kato,
+                lambda2_field=lambda2_field,
+                lambda2_hessian=hessian,
+                lambda2_min=lambda2_min,
+                kato_beta_threshold=kato_beta_threshold,
+            )
+        )
     if integral_conditions:
         cell_volume = float(grid_spacing ** 3)
         pressure_hessian_e1_e2_field = np.einsum(
@@ -1164,6 +1606,29 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="compute and report Kato strain-gradient alignment condition B at the target point",
     )
+    parser.add_argument(
+        "--kato-stability-statistics",
+        action="store_true",
+        help="compute aggregate Kato mixed-plane stability statistics over the lambda2<0 region",
+    )
+    parser.add_argument(
+        "--kato-beta-threshold",
+        type=float,
+        default=None,
+        help=(
+            "optional threshold ratio theta in (0, 1) for bounded Omega_beta "
+            "metrics where beta = theta * lambda2_min"
+        ),
+    )
+    parser.add_argument(
+        "--hessian-full-3d",
+        action="store_true",
+        help=(
+            "compute and report the full Hessian(lambda2) at the selected target in "
+            "its local strain eigenframe (h11,h22,h33,h12,h13,h23), eigenvalues, "
+            "trace, determinant, e3e3, lambda_max, and confinement geometry metrics"
+        ),
+    )
     parser.add_argument("--json-indent", type=int, default=2, help="JSON indentation level for stdout JSON")
     return parser.parse_args()
 
@@ -1180,6 +1645,9 @@ def main() -> None:
         integral_conditions=args.integral_conditions,
         top_enstrophy_percentile=args.top_enstrophy_percentile,
         kato_alignment=args.kato_alignment,
+        kato_stability_statistics=args.kato_stability_statistics,
+        kato_beta_threshold=args.kato_beta_threshold,
+        hessian_full_3d=args.hessian_full_3d,
     )
     if args.output is None:
         print(json.dumps(result, indent=args.json_indent, sort_keys=True))
