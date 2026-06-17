@@ -13,6 +13,7 @@ import DASHI.Core.BridgeRequirementCore as Bridge
 import DASHI.Core.CandidateOnlyCore as CandidateOnly
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Core.HiddenLiftProjectionCore as HiddenLift
+import DASHI.Core.SourceProcessEvidenceCore as SourceProcessEvidence
 import DASHI.Core.StatisticalEvidenceCore as StatisticalEvidence
 import DASHI.Promotion.AuthorityBoundaryCore as PromotionAuthorityBoundary
 import DASHI.Crypto.RSAVulnerabilityBoundary as RSAVulnerabilityBoundary
@@ -269,6 +270,10 @@ record RSAEntropySourceStatisticalBoundarySurface : Set where
       StatisticalEvidence.StatisticalEvidenceReceipt
         StatisticalEvidence.canonicalStatisticalEvidenceSurface
 
+    boundarySourceProcessEvidenceReceipt :
+      SourceProcessEvidence.SourceProcessEvidenceReceipt
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+
     boundaryProjectionShadowAdapterReceipt :
       Adapter.AdapterCanonicalityReceipt
         HiddenLift.ProjectionShadow
@@ -428,6 +433,28 @@ record RSAEntropySourceStatisticalBoundaryReceipt
       ≡
       false
 
+    receiptSourceProcessEvidenceReceipt :
+      SourceProcessEvidence.SourceProcessEvidenceReceipt
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+
+    receiptStatisticalAnomalyCandidateOnlyIsTrue :
+      SourceProcessEvidence.statisticalAnomalyCandidateOnly
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+      ≡
+      true
+
+    receiptStatisticalAnomalySourceCompromiseAuthorityIsFalse :
+      SourceProcessEvidence.statisticalAnomalySourceCompromiseAuthority
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+      ≡
+      false
+
+    receiptSourceWideEscalationAuthorityIsFalse :
+      SourceProcessEvidence.sourceWideEscalationAuthority
+        SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+      ≡
+      false
+
     receiptKindsAreCanonical :
       boundaryKinds surface
       ≡
@@ -488,6 +515,7 @@ canonicalRSAEntropySourceStatisticalBoundarySurface =
     canonicalRSAEntropySourcePromotionAuthorityBundle
     canonicalRSAEntropySourceBridgeRequirementReceipt
     canonicalRSAEntropySourceStatisticalEvidenceReceipt
+    SourceProcessEvidence.canonicalSourceProcessEvidenceReceipt
     canonicalRSAEntropySourceProjectionShadowAdapterReceipt
     canonicalRSAEntropySourceRSAVulnerabilityBoundary
     canonicalRSAEntropySourceStatisticalKinds
@@ -529,6 +557,10 @@ canonicalRSAEntropySourceStatisticalBoundaryReceipt =
     refl
     refl
     refl
+    SourceProcessEvidence.canonicalSourceProcessEvidenceReceipt
+    SourceProcessEvidence.statisticalAnomalyCandidateOnlyIsTrue
+    SourceProcessEvidence.statisticalAnomalySourceCompromiseAuthorityIsFalse
+    SourceProcessEvidence.sourceWideEscalationAuthorityIsFalse
     refl
     refl
     refl
@@ -675,6 +707,33 @@ rsaEntropySourcePromotionAuthorityBundlePromotesAnyAuthorityIsFalse :
   false
 rsaEntropySourcePromotionAuthorityBundlePromotesAnyAuthorityIsFalse =
   receiptPromotionAuthorityBundlePromotesAnyAuthorityIsFalse
+    canonicalRSAEntropySourceStatisticalBoundaryReceipt
+
+rsaEntropySourceStatisticalAnomalyCandidateOnlyIsTrue :
+  SourceProcessEvidence.statisticalAnomalyCandidateOnly
+    SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+  ≡
+  true
+rsaEntropySourceStatisticalAnomalyCandidateOnlyIsTrue =
+  receiptStatisticalAnomalyCandidateOnlyIsTrue
+    canonicalRSAEntropySourceStatisticalBoundaryReceipt
+
+rsaEntropySourceStatisticalAnomalySourceCompromiseAuthorityIsFalse :
+  SourceProcessEvidence.statisticalAnomalySourceCompromiseAuthority
+    SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+  ≡
+  false
+rsaEntropySourceStatisticalAnomalySourceCompromiseAuthorityIsFalse =
+  receiptStatisticalAnomalySourceCompromiseAuthorityIsFalse
+    canonicalRSAEntropySourceStatisticalBoundaryReceipt
+
+rsaEntropySourceSourceWideEscalationAuthorityIsFalse :
+  SourceProcessEvidence.sourceWideEscalationAuthority
+    SourceProcessEvidence.canonicalSourceProcessEvidenceSurface
+  ≡
+  false
+rsaEntropySourceSourceWideEscalationAuthorityIsFalse =
+  receiptSourceWideEscalationAuthorityIsFalse
     canonicalRSAEntropySourceStatisticalBoundaryReceipt
 
 rsaEntropySourceKindsAreCanonical :

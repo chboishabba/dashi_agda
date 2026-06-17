@@ -157,6 +157,7 @@ import DASHI.Core.OperatorShapeNonAuthorityCore
 import DASHI.Core.Prelude
 import DASHI.Core.Q
 import DASHI.Core.StatisticalEvidenceCore
+import DASHI.Core.SourceProcessEvidenceCore
 import DASHI.Core.FingerprintProjectionCore
 import DASHI.Core.AuthorityBoundary
 import DASHI.Core.UniversalOperatorBasis
