@@ -363,6 +363,24 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       "h_gi"
 
+    christoffelFormulaC0StableInverseMetricMax :
+      ℕ
+
+    christoffelFormulaC0StableInverseMetricMaxIs3 :
+      christoffelFormulaC0StableInverseMetricMax ≡ 3
+
+    christoffelFormulaC0StableMetricDerivativeMax :
+      ℕ
+
+    christoffelFormulaC0StableMetricDerivativeMaxIs8 :
+      christoffelFormulaC0StableMetricDerivativeMax ≡ 8
+
+    christoffelFormulaC0StableBilinearSplitExposed :
+      Bool
+
+    christoffelFormulaC0StableBilinearSplitExposedIsTrue :
+      christoffelFormulaC0StableBilinearSplitExposed ≡ true
+
     christoffelFormulaC0StableZeroSlotLedgerDependencyName :
       String
 
@@ -370,6 +388,14 @@ record GRPerturbationBoundShapeCore : Setω where
       christoffelFormulaC0StableZeroSlotLedgerDependencyName
       ≡
       "diagonalZeroLemma"
+
+    christoffelFormulaC0StableZeroSlotLedgerDependencyReceipt :
+      String
+
+    christoffelFormulaC0StableZeroSlotLedgerDependencyReceiptIsCanonical :
+      christoffelFormulaC0StableZeroSlotLedgerDependencyReceipt
+      ≡
+      christoffelC0DiagonalZeroLemmaReceipt
 
     christoffelFormulaC0StableZeroSlotLedgerReceipt :
       String
@@ -403,6 +429,18 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       Continuum.symbolicRationalKernelShellAChristoffelFormula22Le48
 
+    christoffelFormulaC0StableShellAInverseMetricMax :
+      ℕ
+
+    christoffelFormulaC0StableShellAInverseMetricMaxIs3 :
+      christoffelFormulaC0StableShellAInverseMetricMax ≡ 3
+
+    christoffelFormulaC0StableShellAMetricDerivativeMax :
+      ℕ
+
+    christoffelFormulaC0StableShellAMetricDerivativeMaxIs8 :
+      christoffelFormulaC0StableShellAMetricDerivativeMax ≡ 8
+
     christoffelFormulaC0StableSlackReceipt :
       String
 
@@ -410,6 +448,14 @@ record GRPerturbationBoundShapeCore : Setω where
       christoffelFormulaC0StableSlackReceipt
       ≡
       "11/2 ε <= 48 ε"
+
+    christoffelFormulaC0StableSlackArithmeticChainName :
+      String
+
+    christoffelFormulaC0StableSlackArithmeticChainNameIsCanonical :
+      christoffelFormulaC0StableSlackArithmeticChainName
+      ≡
+      OrderedRational.orderedRationalChristoffel16p5Le22Le48ArithmeticChainName
 
     christoffelFormulaC0StablePerSlotBound :
       String
@@ -848,9 +894,25 @@ canonicalGRPerturbationBoundShapeCore =
         "h_gi"
     ; christoffelFormulaC0StableInverseMetricClosenessNameIsCanonical =
         refl
+    ; christoffelFormulaC0StableInverseMetricMax =
+        3
+    ; christoffelFormulaC0StableInverseMetricMaxIs3 =
+        refl
+    ; christoffelFormulaC0StableMetricDerivativeMax =
+        8
+    ; christoffelFormulaC0StableMetricDerivativeMaxIs8 =
+        refl
+    ; christoffelFormulaC0StableBilinearSplitExposed =
+        true
+    ; christoffelFormulaC0StableBilinearSplitExposedIsTrue =
+        refl
     ; christoffelFormulaC0StableZeroSlotLedgerDependencyName =
         "diagonalZeroLemma"
     ; christoffelFormulaC0StableZeroSlotLedgerDependencyNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableZeroSlotLedgerDependencyReceipt =
+        "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+    ; christoffelFormulaC0StableZeroSlotLedgerDependencyReceiptIsCanonical =
         refl
     ; christoffelFormulaC0StableZeroSlotLedgerReceipt =
         "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
@@ -868,9 +930,21 @@ canonicalGRPerturbationBoundShapeCore =
         Continuum.symbolicRationalKernelShellAChristoffelFormula22Le48
     ; christoffelFormulaC0StableShellAConstantWitnessIsCanonical =
         refl
+    ; christoffelFormulaC0StableShellAInverseMetricMax =
+        3
+    ; christoffelFormulaC0StableShellAInverseMetricMaxIs3 =
+        refl
+    ; christoffelFormulaC0StableShellAMetricDerivativeMax =
+        8
+    ; christoffelFormulaC0StableShellAMetricDerivativeMaxIs8 =
+        refl
     ; christoffelFormulaC0StableSlackReceipt =
         "11/2 ε <= 48 ε"
     ; christoffelFormulaC0StableSlackReceiptIsCanonical =
+        refl
+    ; christoffelFormulaC0StableSlackArithmeticChainName =
+        OrderedRational.orderedRationalChristoffel16p5Le22Le48ArithmeticChainName
+    ; christoffelFormulaC0StableSlackArithmeticChainNameIsCanonical =
         refl
     ; christoffelFormulaC0StablePerSlotBound =
         "11/2 ε"
@@ -984,6 +1058,7 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "Contracted-Bianchi still blocks at selected-connection dependency with exact blocker: missingCarrierConnectionIsLeviCivita."
         ∷ "Exact boundary arithmetic shapes are carried by symbolic-rational and shell-A law shapes, not by fabricated proofs."
         ∷ "Theorem-socket h_gi is recorded via symbolicRationalKernelShellAInverseMetricAbsMaxIs4 and is typed as a kernel-level inverse-metric max witness."
+        ∷ "ChristoffelFormulaC0Stable now also records the audited shell-A bound surfaces |gi|<=3 and |∂g|<=8, the zero-slot ledger dependency receipt, and the explicit slack arithmetic chain."
         ∷ "Theorem-socket h_static is recorded as a canonical static-hypothesis receipt."
         ∷ "Theorem-socket h_diag is recorded as a canonical diagonal-hypothesis receipt."
         ∷ "Theorem-socket h_p2g is recorded via symbolicRationalKernelPerturbationRouteDerivativeMaxMatchesDenominatorReceipt and is typed as the route derivative-max matching witness."
