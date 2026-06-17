@@ -273,6 +273,14 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       "bracket_zero_of_not_nonzero"
 
+    christoffelC0BracketZeroOfNotNonzeroDependencyShape :
+      String
+
+    christoffelC0BracketZeroOfNotNonzeroDependencyShapeIsCanonical :
+      christoffelC0BracketZeroOfNotNonzeroDependencyShape
+      ≡
+      "zero-slot bracket kernel: branch vanishes when not-nonzero"
+
     christoffelC0PartialDerivOfZeroDependencyName :
       String
 
@@ -280,6 +288,14 @@ record GRPerturbationBoundShapeCore : Setω where
       christoffelC0PartialDerivOfZeroDependencyName
       ≡
       "partialDeriv_of_zero"
+
+    christoffelC0PartialDerivOfZeroDependencyShape :
+      String
+
+    christoffelC0PartialDerivOfZeroDependencyShapeIsCanonical :
+      christoffelC0PartialDerivOfZeroDependencyShape
+      ≡
+      "zero-slot partial derivative witness"
 
     christoffelC0DiagonalZeroLemmaDependencyChainName :
       String
@@ -294,6 +310,14 @@ record GRPerturbationBoundShapeCore : Setω where
 
     christoffelC0DiagonalZeroLemmaDependencyChainReceiptIsCanonical :
       christoffelC0DiagonalZeroLemmaDependencyChainReceipt
+      ≡
+      "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+
+    christoffelC0DiagonalZeroLemmaDependencyChainShape :
+      String
+
+    christoffelC0DiagonalZeroLemmaDependencyChainShapeIsCanonical :
+      christoffelC0DiagonalZeroLemmaDependencyChainShape
       ≡
       "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
 
@@ -345,16 +369,24 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
 
+    christoffelC0GammaChristoffelDiagonalDependencyShape :
+      String
+
+    christoffelC0GammaChristoffelDiagonalDependencyShapeIsCanonical :
+      christoffelC0GammaChristoffelDiagonalDependencyShape
+      ≡
+      "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+
     christoffelC0DiagonalZeroLemmaNonzeroTripleCount :
       ℕ
 
-    christoffelC0DiagonalZeroLemmaNonzeroTripleCountIs10 :
+    christoffelC0DiagonalZeroLemmaNonzeroTripleCountIs13 :
       christoffelC0DiagonalZeroLemmaNonzeroTripleCount ≡ 13
 
     christoffelC0DiagonalZeroLemmaZeroTripleCount :
       ℕ
 
-    christoffelC0DiagonalZeroLemmaZeroTripleCountIs54 :
+    christoffelC0DiagonalZeroLemmaZeroTripleCountIs51 :
       christoffelC0DiagonalZeroLemmaZeroTripleCount ≡ 51
 
     christoffelC0DiagonalZeroLemmaSymmetricTripleCount :
@@ -401,7 +433,7 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelC0ShellABracketLe8RouteReceiptIsCanonical :
       christoffelC0ShellABracketLe8RouteReceipt
       ≡
-      "bracket_le=2*r_max (selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
+      "bracket_le=2*r_max (for r in [3M,4M], selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
 
     christoffelC0ShellARadiusSelectionRoute :
       String
@@ -409,7 +441,7 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelC0ShellARadiusSelectionRouteIsCanonical :
       christoffelC0ShellARadiusSelectionRoute
       ≡
-      "selected r_max=4M -> bracket_le=8"
+      "r in [3M,4M] and selected r_max=4M -> bracket_le=8"
 
     christoffelC0ThetaShellCotRoute :
       String
@@ -661,6 +693,14 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
 
+    christoffelFormulaC0StableGammaChristoffelDiagonalDependencyShape :
+      String
+
+    christoffelFormulaC0StableGammaChristoffelDiagonalDependencyShapeIsCanonical :
+      christoffelFormulaC0StableGammaChristoffelDiagonalDependencyShape
+      ≡
+      "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+
     christoffelFormulaC0StableBilinearSplitReceipt :
       String
 
@@ -747,7 +787,7 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelFormulaC0StableShellABracketLe8RouteDependencyShapeIsCanonical :
       christoffelFormulaC0StableShellABracketLe8RouteDependencyShape
       ≡
-      "selected r_max=4M -> bracket_le=8"
+      "for r in [3M,4M], selected r_max=4M -> bracket_le=8"
 
     christoffelFormulaC0StableShellABracketLe8RouteReceipt :
       String
@@ -755,7 +795,7 @@ record GRPerturbationBoundShapeCore : Setω where
     christoffelFormulaC0StableShellABracketLe8RouteReceiptIsCanonical :
       christoffelFormulaC0StableShellABracketLe8RouteReceipt
       ≡
-      "bracket_le=2*r_max (selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
+      "bracket_le=2*r_max (for r in [3M,4M], selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
 
     christoffelFormulaC0StableShellAFallbackThreeTermRouteName :
       String
@@ -862,14 +902,14 @@ record GRPerturbationBoundShapeCore : Setω where
       ∷ "bilinear split dependency: christoffelBilinearSplit"
       ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
       ∷ "angular-slot ledger: 13 nonzero / 51 zero symmetric slots"
-      ∷ "shell A angular route: selected r_max=4M -> bracket_le=8"
+      ∷ "shell A angular route: for r in [3M,4M], selected r_max=4M -> bracket_le=8"
       ∷ "shell A angular route: theta-shell/cot-bound required for angular cot slots"
       ∷ "diagonalZeroLemma dependency chain: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
       ∷ "Γ_christoffel_diagonal dependency: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
       ∷ "christoffelBilinearSplit telescoping identity: telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
       ∷ "11/2 feed to 22: 11/2<=33/2<=22<=48"
       ∷ "27/2 feed to 22 (3-term bracket): (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
-      ∷ "direct Shell A bracket_le=8 route: bracket_le=2*r_max (selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
+      ∷ "direct Shell A bracket_le=8 route: bracket_le=2*r_max (for r in [3M,4M], selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
       ∷ "fallback 3-term route: (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
       ∷ "conservative route: 27/2 <= 22 <= 48"
       ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
@@ -955,32 +995,32 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       "13 nonzero"
 
-    christoffelFormulaC0StableFiftyFourZeroSlotsName :
+    christoffelFormulaC0StableFiftyOneZeroSlotsName :
       String
 
-    christoffelFormulaC0StableFiftyFourZeroSlotsNameIsCanonical :
-      christoffelFormulaC0StableFiftyFourZeroSlotsName
+    christoffelFormulaC0StableFiftyOneZeroSlotsNameIsCanonical :
+      christoffelFormulaC0StableFiftyOneZeroSlotsName
       ≡
       "51 zero slots"
 
-    christoffelFormulaC0StableFiftyFourZeroObligation :
+    christoffelFormulaC0StableFiftyOneZeroObligation :
       String
 
-    christoffelFormulaC0StableFiftyFourZeroObligationIsCanonical :
-      christoffelFormulaC0StableFiftyFourZeroObligation
+    christoffelFormulaC0StableFiftyOneZeroObligationIsCanonical :
+      christoffelFormulaC0StableFiftyOneZeroObligation
       ≡
       "51 zero"
 
     christoffelFormulaC0StableNonzeroSlotCount :
       ℕ
 
-    christoffelFormulaC0StableNonzeroSlotCountIs10 :
+    christoffelFormulaC0StableNonzeroSlotCountIs13 :
       christoffelFormulaC0StableNonzeroSlotCount ≡ 13
 
     christoffelFormulaC0StableZeroSlotCount :
       ℕ
 
-    christoffelFormulaC0StableZeroSlotCountIs54 :
+    christoffelFormulaC0StableZeroSlotCountIs51 :
       christoffelFormulaC0StableZeroSlotCount ≡ 51
 
     christoffelFormulaC0StableSymmetricTripleCount :
@@ -1306,9 +1346,17 @@ canonicalGRPerturbationBoundShapeCore =
         "bracket_zero_of_not_nonzero"
     ; christoffelC0BracketZeroOfNotNonzeroDependencyNameIsCanonical =
         refl
+    ; christoffelC0BracketZeroOfNotNonzeroDependencyShape =
+        "zero-slot bracket kernel: branch vanishes when not-nonzero"
+    ; christoffelC0BracketZeroOfNotNonzeroDependencyShapeIsCanonical =
+        refl
     ; christoffelC0PartialDerivOfZeroDependencyName =
         "partialDeriv_of_zero"
     ; christoffelC0PartialDerivOfZeroDependencyNameIsCanonical =
+        refl
+    ; christoffelC0PartialDerivOfZeroDependencyShape =
+        "zero-slot partial derivative witness"
+    ; christoffelC0PartialDerivOfZeroDependencyShapeIsCanonical =
         refl
     ; christoffelC0DiagonalZeroLemmaDependencyChainName =
         "diagonalZeroLemma dependency chain"
@@ -1317,6 +1365,10 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelC0DiagonalZeroLemmaDependencyChainReceipt =
         "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
     ; christoffelC0DiagonalZeroLemmaDependencyChainReceiptIsCanonical =
+        refl
+    ; christoffelC0DiagonalZeroLemmaDependencyChainShape =
+        "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+    ; christoffelC0DiagonalZeroLemmaDependencyChainShapeIsCanonical =
         refl
     ; christoffelC0ChristoffelBilinearSplitObligation =
         "christoffelBilinearSplit"
@@ -1342,13 +1394,17 @@ canonicalGRPerturbationBoundShapeCore =
         "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
     ; christoffelC0GammaChristoffelDiagonalReceiptIsCanonical =
         refl
+    ; christoffelC0GammaChristoffelDiagonalDependencyShape =
+        "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+    ; christoffelC0GammaChristoffelDiagonalDependencyShapeIsCanonical =
+        refl
     ; christoffelC0DiagonalZeroLemmaNonzeroTripleCount =
         13
-    ; christoffelC0DiagonalZeroLemmaNonzeroTripleCountIs10 =
+    ; christoffelC0DiagonalZeroLemmaNonzeroTripleCountIs13 =
         refl
     ; christoffelC0DiagonalZeroLemmaZeroTripleCount =
         51
-    ; christoffelC0DiagonalZeroLemmaZeroTripleCountIs54 =
+    ; christoffelC0DiagonalZeroLemmaZeroTripleCountIs51 =
         refl
     ; christoffelC0DiagonalZeroLemmaSymmetricTripleCount =
         64
@@ -1371,11 +1427,11 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelC0ShellABracketLe8RouteNameIsCanonical =
         refl
     ; christoffelC0ShellABracketLe8RouteReceipt =
-        "bracket_le=2*r_max (selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
+        "bracket_le=2*r_max (for r in [3M,4M], selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
     ; christoffelC0ShellABracketLe8RouteReceiptIsCanonical =
         refl
     ; christoffelC0ShellARadiusSelectionRoute =
-        "selected r_max=4M -> bracket_le=8"
+        "r in [3M,4M] and selected r_max=4M -> bracket_le=8"
     ; christoffelC0ShellARadiusSelectionRouteIsCanonical =
         refl
     ; christoffelC0ThetaShellCotRoute =
@@ -1504,6 +1560,10 @@ canonicalGRPerturbationBoundShapeCore =
         "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
     ; christoffelFormulaC0StableGammaChristoffelDiagonalDependencyReceiptIsCanonical =
         refl
+    ; christoffelFormulaC0StableGammaChristoffelDiagonalDependencyShape =
+        "diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
+    ; christoffelFormulaC0StableGammaChristoffelDiagonalDependencyShapeIsCanonical =
+        refl
     ; christoffelFormulaC0StableBilinearSplitReceipt =
         "|δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
     ; christoffelFormulaC0StableBilinearSplitReceiptIsCanonical =
@@ -1545,11 +1605,11 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelFormulaC0StableShellABracketLe8RouteDependencyNameIsCanonical =
         refl
     ; christoffelFormulaC0StableShellABracketLe8RouteDependencyShape =
-        "selected r_max=4M -> bracket_le=8"
+        "for r in [3M,4M], selected r_max=4M -> bracket_le=8"
     ; christoffelFormulaC0StableShellABracketLe8RouteDependencyShapeIsCanonical =
         refl
     ; christoffelFormulaC0StableShellABracketLe8RouteReceipt =
-        "bracket_le=2*r_max (selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
+        "bracket_le=2*r_max (for r in [3M,4M], selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
     ; christoffelFormulaC0StableShellABracketLe8RouteReceiptIsCanonical =
         refl
     ; christoffelFormulaC0StableShellAFallbackThreeTermRouteName =
@@ -1618,14 +1678,14 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "christoffelBilinearSplit shape: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
         ∷ "angular-slot ledger dependency: angular-slot ledger 13/51; conservative budget note"
         ∷ "angular-slot ledger shape: 13 nonzero / 51 zero symmetric slots"
-        ∷ "shell A angular route: bracket_le=2*r_max (selected r_max=4M -> bracket_le=8)"
+        ∷ "shell A angular route: bracket_le=2*r_max (for r in [3M,4M], selected r_max=4M -> bracket_le=8)"
         ∷ "shell A angular route: theta-shell/cot-bound required for angular cot slots"
         ∷ "diagonalZeroLemma dependency chain: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
         ∷ "Γ_christoffel_diagonal dependency: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
         ∷ "christoffelBilinearSplit telescoping identity: telescoping decomposition gives |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
         ∷ "11/2 feed to 22: 11/2<=33/2<=22<=48"
         ∷ "27/2 feed to 22 (3-term bracket): (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
-        ∷ "direct Shell A bracket_le=8 route: bracket_le=2*r_max (selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
+        ∷ "direct Shell A bracket_le=8 route: bracket_le=2*r_max (for r in [3M,4M], selected r_max=4M -> bracket_le=8); theta-shell/cot-bound required for angular cot slots"
         ∷ "fallback 3-term route: (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
         ∷ "conservative route: 27/2 <= 22 <= 48"
         ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
@@ -1672,21 +1732,21 @@ canonicalGRPerturbationBoundShapeCore =
         "13 nonzero"
     ; christoffelFormulaC0StableTenNonzeroObligationIsCanonical =
         refl
-    ; christoffelFormulaC0StableFiftyFourZeroSlotsName =
+    ; christoffelFormulaC0StableFiftyOneZeroSlotsName =
         "51 zero slots"
-    ; christoffelFormulaC0StableFiftyFourZeroSlotsNameIsCanonical =
+    ; christoffelFormulaC0StableFiftyOneZeroSlotsNameIsCanonical =
         refl
-    ; christoffelFormulaC0StableFiftyFourZeroObligation =
+    ; christoffelFormulaC0StableFiftyOneZeroObligation =
         "51 zero"
-    ; christoffelFormulaC0StableFiftyFourZeroObligationIsCanonical =
+    ; christoffelFormulaC0StableFiftyOneZeroObligationIsCanonical =
         refl
     ; christoffelFormulaC0StableNonzeroSlotCount =
         13
-    ; christoffelFormulaC0StableNonzeroSlotCountIs10 =
+    ; christoffelFormulaC0StableNonzeroSlotCountIs13 =
         refl
     ; christoffelFormulaC0StableZeroSlotCount =
         51
-    ; christoffelFormulaC0StableZeroSlotCountIs54 =
+    ; christoffelFormulaC0StableZeroSlotCountIs51 =
         refl
     ; christoffelFormulaC0StableSymmetricTripleCount =
         64
@@ -1764,7 +1824,7 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "DiagonalZeroLemma is now threaded through an explicit local chain: bracket_zero_of_not_nonzero and partialDeriv_of_zero, with a shape row that records the chain itself."
         ∷ "Christoffel bilinear split now also carries the dependency and shape rows plus the telescoping identity route that expands the split estimate."
         ∷ "Γ_christoffel_diagonal is recorded as the diagonal receipt token for the zero-slot dependency chain."
-        ∷ "Both per-slot routes are recorded: direct Shell A bracket_le=8 uses bracket_le=2*r_max with selected r_max=4M -> bracket_le=8 and theta-shell/cot-bound required for angular cot slots; the 3-term fallback route via (1/2)(24ε+3ε)=27/2ε and 27/2<=22 remains."
+        ∷ "Both per-slot routes are recorded: direct Shell A bracket_le=8 uses bracket_le=2*r_max for r in [3M,4M] with selected r_max=4M -> bracket_le=8 and theta-shell/cot-bound required for angular cot slots; the 3-term fallback route via (1/2)(24ε+3ε)=27/2ε and 27/2<=22 remains."
         ∷ "The conservative route is recorded honestly as 27/2 <= 22 <= 48."
         ∷ "Ricci perturbation route is carried by the canonical Schwarzschild finite Ricci/Bianchi receipt; convergence and authority promotions are blocked."
         ∷ "Contracted-Bianchi still blocks at selected-connection dependency with exact blocker: missingCarrierConnectionIsLeviCivita."

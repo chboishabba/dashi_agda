@@ -76,6 +76,10 @@ orderedRationalShellA_AngularSlotLedgerLawName : String
 orderedRationalShellA_AngularSlotLedgerLawName =
   "angular ledger 13/51"
 
+orderedRationalShellA_AngularSlotCountLedgerLawName : String
+orderedRationalShellA_AngularSlotCountLedgerLawName =
+  "angular-slot ledger 13/51"
+
 orderedRationalShellA_ThetaShellCotBoundLawName : String
 orderedRationalShellA_ThetaShellCotBoundLawName = "θ-shell/cot-bound"
 
@@ -96,6 +100,9 @@ orderedRationalRicci19Over2Le44LawName = "19/2<=44"
 
 orderedRationalRicci252Le640LooseLawName : String
 orderedRationalRicci252Le640LooseLawName = "252<=640"
+
+orderedRationalProductTermBound88LawName : String
+orderedRationalProductTermBound88LawName = "productTermBound_88"
 
 orderedRationalShellA_C_GammaVerifiedLawName : String
 orderedRationalShellA_C_GammaVerifiedLawName = "Shell A C_Gamma=1 (verified)"
@@ -123,6 +130,10 @@ orderedRationalRicci6Times44Le8Times44Le640LawName : String
 orderedRationalRicci6Times44Le8Times44Le640LawName =
   "6*44<=8*44=352<=640"
 
+orderedRationalRicci6Times44Le352Le440Le640LawName : String
+orderedRationalRicci6Times44Le352Le440Le640LawName =
+  "6*44<=352<=440<=640"
+
 orderedRationalRicci4Times8Times11Over2Eq176Le640LawName : String
 orderedRationalRicci4Times8Times11Over2Eq176Le640LawName =
   "4*8*(11/2)=176<=640"
@@ -131,11 +142,17 @@ orderedRationalRicci6Times44Le352Le640LawName : String
 orderedRationalRicci6Times44Le352Le640LawName =
   "6*44<=352<=640"
 
+orderedRationalRicci440Le640LawName : String
+orderedRationalRicci440Le640LawName = "440<=640"
+
 orderedRationalShellA44Le48LawName : String
 orderedRationalShellA44Le48LawName = "44<=48"
 
 coord4SevenNonzeroSlotsLawName : String
 coord4SevenNonzeroSlotsLawName = "13 nonzero slots"
+
+coord4SevenNonzeroSlotCountRatioLawName : String
+coord4SevenNonzeroSlotCountRatioLawName = "coord4 angular-slot 13/51"
 
 coord4FiftySevenZeroSlotsLawName : String
 coord4FiftySevenZeroSlotsLawName = "51 zero symmetric slots"
@@ -210,6 +227,14 @@ orderedRationalRicci352Le640ArithmeticChainName =
 orderedRationalRicci6Times44Le8Times44Le640ArithmeticChainName : String
 orderedRationalRicci6Times44Le8Times44Le640ArithmeticChainName =
   orderedRationalRicci6Times44Le8Times44Le640LawName
+
+orderedRationalRicci6Times44Le352Le440Le640ArithmeticChainName : String
+orderedRationalRicci6Times44Le352Le440Le640ArithmeticChainName =
+  orderedRationalRicci6Times44Le352Le440Le640LawName
+
+orderedRationalRicci440Le640ArithmeticChainName : String
+orderedRationalRicci440Le640ArithmeticChainName =
+  orderedRationalRicci440Le640LawName
 
 orderedRationalRicci4Times8Times11Over2Eq176Le640ArithmeticChainName : String
 orderedRationalRicci4Times8Times11Over2Eq176Le640ArithmeticChainName =
@@ -445,11 +470,19 @@ data GROrderedRationalFiniteSlotBoundCoreAdapterRow : Set where
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
   shellAAngularSlotLedgerAdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  shellAAngularSlotCountLedgerAdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
   ricci2144Over27Le80AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
   ricci80Le640AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
   ricci252Le640LooseAdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  ricciProductTermBound88AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  ricci6Times44Le352Le440Le640AdapterRow :
+    GROrderedRationalFiniteSlotBoundCoreAdapterRow
+  ricci440Le640AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
   ricci4Times8Times11Over2Eq176Le640AdapterRow :
     GROrderedRationalFiniteSlotBoundCoreAdapterRow
@@ -479,9 +512,13 @@ canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRows =
   ∷ shellAThetaShellCotBoundAdapterRow
   ∷ shellACShell8AdapterRow
   ∷ shellAAngularSlotLedgerAdapterRow
+  ∷ shellAAngularSlotCountLedgerAdapterRow
   ∷ ricci2144Over27Le80AdapterRow
   ∷ ricci80Le640AdapterRow
   ∷ ricci252Le640LooseAdapterRow
+  ∷ ricciProductTermBound88AdapterRow
+  ∷ ricci6Times44Le352Le440Le640AdapterRow
+  ∷ ricci440Le640AdapterRow
   ∷ ricci4Times8Times11Over2Eq176Le640AdapterRow
   ∷ ricci6Times44Le8Times44Le640AdapterRow
   ∷ ricci6Times44Le352Le640AdapterRow
@@ -514,12 +551,20 @@ adapterRowName shellACShell8AdapterRow =
   orderedRationalShellA_CShell8LawName
 adapterRowName shellAAngularSlotLedgerAdapterRow =
   orderedRationalShellA_AngularSlotLedgerLawName
+adapterRowName shellAAngularSlotCountLedgerAdapterRow =
+  orderedRationalShellA_AngularSlotCountLedgerLawName
 adapterRowName ricci2144Over27Le80AdapterRow =
   orderedRationalRicci2144Over27Le80LawName
 adapterRowName ricci80Le640AdapterRow =
   orderedRationalRicci80Le640LawName
 adapterRowName ricci252Le640LooseAdapterRow =
   orderedRationalRicci252Le640LooseLawName
+adapterRowName ricciProductTermBound88AdapterRow =
+  orderedRationalProductTermBound88LawName
+adapterRowName ricci6Times44Le352Le440Le640AdapterRow =
+  orderedRationalRicci6Times44Le352Le440Le640LawName
+adapterRowName ricci440Le640AdapterRow =
+  orderedRationalRicci440Le640LawName
 adapterRowName ricci4Times8Times11Over2Eq176Le640AdapterRow =
   orderedRationalRicci4Times8Times11Over2Eq176Le640LawName
 adapterRowName ricci6Times44Le8Times44Le640AdapterRow =
@@ -548,9 +593,13 @@ record GROrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows : Set wher
     shellAThetaShellCotBound : String
     shellACShell8 : String
     shellAAngularSlotLedger : String
+    shellAAngularSlotCountLedger : String
     ricci2144Over27 : String
     ricci80Le640 : String
     ricci252Le640Loose : String
+    ricciProductTermBound88 : String
+    ricci6Times44Le352Le440Le640 : String
+    ricci440Le640 : String
     ricci6Times44Le8Times44Le640 : String
     ricci4Times8Times11Over2Eq176Le640 : String
     ricci6Times44Le352Le640 : String
@@ -575,9 +624,13 @@ canonicalGROrderedRationalFiniteSlotBoundCoreAdapterRouteProjectionRows =
     orderedRationalShellA_ThetaShellCotBoundLawName
     orderedRationalShellA_CShell8LawName
     orderedRationalShellA_AngularSlotLedgerLawName
+    orderedRationalShellA_AngularSlotCountLedgerLawName
     orderedRationalRicci2144Over27Le80LawName
     orderedRationalRicci80Le640LawName
     orderedRationalRicci252Le640LooseLawName
+    orderedRationalProductTermBound88LawName
+    orderedRationalRicci6Times44Le352Le440Le640LawName
+    orderedRationalRicci440Le640LawName
     orderedRationalRicci6Times44Le8Times44Le640LawName
     orderedRationalRicci4Times8Times11Over2Eq176Le640LawName
     orderedRationalRicci6Times44Le352Le640LawName
@@ -632,6 +685,12 @@ data GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow : Set where
   ricci6Times44Le352Le640ArithmeticChainRow :
     GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow
 
+  ricci6Times44Le352Le440Le640ArithmeticChainRow :
+    GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow
+
+  ricci440Le640ArithmeticChainRow :
+    GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow
+
   independentGiClosenessArithmeticRow :
     GROrderedRationalFiniteSlotBoundCoreArithmeticChainRow
 
@@ -671,6 +730,10 @@ arithmeticChainRowName ricci4Times8Times11Over2Eq176Le640ArithmeticChainRow =
   orderedRationalRicci4Times8Times11Over2Eq176Le640ArithmeticChainName
 arithmeticChainRowName ricci6Times44Le352Le640ArithmeticChainRow =
   orderedRationalRicci6Times44Le352Le640ArithmeticChainName
+arithmeticChainRowName ricci6Times44Le352Le440Le640ArithmeticChainRow =
+  orderedRationalRicci6Times44Le352Le440Le640ArithmeticChainName
+arithmeticChainRowName ricci440Le640ArithmeticChainRow =
+  orderedRationalRicci440Le640ArithmeticChainName
 arithmeticChainRowName independentGiClosenessArithmeticRow =
   orderedRationalIndependentGiClosenessName
 arithmeticChainRowName secondPartialRicciDerivativeArithmeticRow =
@@ -694,6 +757,8 @@ record GROrderedRationalFiniteSlotBoundCoreArithmeticChainProjectionRows : Set w
     arithmeticRicci6Times44Le8Times44Le640 : String
     arithmeticRicci4Times8Times11Over2Eq176Le640 : String
     arithmeticRicci6Times44Le352Le640 : String
+    arithmeticRicci6Times44Le352Le440Le640 : String
+    arithmeticRicci440Le640 : String
     arithmeticIndependentGiCloseness : String
     arithmeticSecondPartialRicciDerivative : String
 
@@ -717,6 +782,8 @@ canonicalGROrderedRationalFiniteSlotBoundCoreArithmeticChainRows =
   ∷ ricci6Times44Le8Times44Le640ArithmeticChainRow
   ∷ ricci4Times8Times11Over2Eq176Le640ArithmeticChainRow
   ∷ ricci6Times44Le352Le640ArithmeticChainRow
+  ∷ ricci6Times44Le352Le440Le640ArithmeticChainRow
+  ∷ ricci440Le640ArithmeticChainRow
   ∷ ricci252Le640LooseArithmeticChainRow
   ∷
   christoffel22Le48ArithmeticChainRow
@@ -742,6 +809,8 @@ canonicalGROrderedRationalFiniteSlotBoundCoreArithmeticChainProjectionRows =
     orderedRationalRicci6Times44Le8Times44Le640ArithmeticChainName
     orderedRationalRicci4Times8Times11Over2Eq176Le640ArithmeticChainName
     orderedRationalRicci6Times44Le352Le640ArithmeticChainName
+    orderedRationalRicci6Times44Le352Le440Le640ArithmeticChainName
+    orderedRationalRicci440Le640ArithmeticChainName
     orderedRationalIndependentGiClosenessName
     orderedRationalSecondPartialRicciDerivativeName
 
@@ -957,9 +1026,14 @@ canonicalGROrderedRationalFiniteSlotBoundCoreAdapterTokens =
   ∷ orderedRationalRicci6Times44Le8Times44Le640LawName
   ∷ orderedRationalRicci4Times8Times11Over2Eq176Le640LawName
   ∷ orderedRationalRicci6Times44Le352Le640LawName
+  ∷ orderedRationalRicci6Times44Le352Le440Le640LawName
+  ∷ orderedRationalRicci440Le640LawName
+  ∷ orderedRationalProductTermBound88LawName
   ∷ orderedRationalShellAHGammaBgBoundDependencyName
+  ∷ orderedRationalSecondPartialRicciDerivativeName
   ∷ orderedRationalShellA44Le48LawName
   ∷ coord4SevenNonzeroSlotsLawName
+  ∷ coord4SevenNonzeroSlotCountRatioLawName
   ∷ coord4FiftySevenZeroSlotsLawName
   ∷ coord4SixtyFourTriplesLawName
   ∷ []
@@ -974,6 +1048,9 @@ data GROrderedRationalFiniteSlotBoundCoreFiniteSlotCountRow : Set where
   sevenNonzeroSlotCountRow :
     GROrderedRationalFiniteSlotBoundCoreFiniteSlotCountRow
 
+  coord4SevenNonzeroSlotCountRatioRow :
+    GROrderedRationalFiniteSlotBoundCoreFiniteSlotCountRow
+
   coord4FiftySevenZeroSlotsCountRow :
     GROrderedRationalFiniteSlotBoundCoreFiniteSlotCountRow
 
@@ -986,6 +1063,8 @@ finiteSlotCountRowName :
 finiteSlotCountRowName coord4SlotCountRow = "coord4 slot count = 4"
 finiteSlotCountRowName coord4AllSlotCountRow = "coord4 all slot count = 64"
 finiteSlotCountRowName sevenNonzeroSlotCountRow = "coord4 thirteen nonzero slots = 13"
+finiteSlotCountRowName coord4SevenNonzeroSlotCountRatioRow =
+  coord4SevenNonzeroSlotCountRatioLawName
 finiteSlotCountRowName coord4FiftySevenZeroSlotsCountRow =
   "coord4 nonzero/zero split: 51 zero symmetric slots"
 finiteSlotCountRowName coord4SixtyFourTriplesCountRow =
@@ -997,6 +1076,7 @@ record GROrderedRationalFiniteSlotBoundCoreFiniteSlotCountProjectionRows : Set w
     coord4SlotCountLabel : String
     coord4AllSlotCountLabel : String
     sevenNonzeroSlotCountLabel : String
+    coord4SevenNonzeroSlotCountRatioLabel : String
     coord4FiftySevenZeroSlotsCountLabel : String
     coord4SixtyFourTriplesCountLabel : String
 
@@ -1008,6 +1088,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreFiniteSlotCountRows =
   coord4SlotCountRow
   ∷ coord4AllSlotCountRow
   ∷ sevenNonzeroSlotCountRow
+  ∷ coord4SevenNonzeroSlotCountRatioRow
   ∷ coord4FiftySevenZeroSlotsCountRow
   ∷ coord4SixtyFourTriplesCountRow
   ∷ []
@@ -1019,6 +1100,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreFiniteSlotCountProjectionRows =
     "coord4 slot count = 4"
     "coord4 all slot count = 64"
     "coord4 thirteen nonzero slots = 13"
+    coord4SevenNonzeroSlotCountRatioLawName
     "coord4 nonzero/zero split: 51 zero symmetric slots"
     "coord4 total triples = 64"
 
@@ -1149,7 +1231,7 @@ record GROrderedRationalFiniteSlotBoundCoreORCSLPGF : Set where
     F : String
     FIsCanonical :
       F ≡
-      "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 4*11=44, 2144/27<=80, 80<=640, 352<=640, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 27/2<=22<=48, 252<=640, 22<=44, 44<=48, bracket_le=2*r_max with selected r_max=4M => 8, θ-shell/cot-bound, angular ledger 13/51, conservative product/total extraction rows up to <=640, h_Γ_bg_bound helper routing, and 64 Coord4 triple rows are recorded"
+      "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 4*11=44, 2144/27<=80, 80<=640, 352<=640, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=440<=640, 440<=640, productTermBound_88, coord4 angular-slot 13/51, 27/2<=22<=48, 252<=640, 22<=44, 44<=48, bracket_le=2*r_max with selected r_max=4M => 8, θ-shell/cot-bound, angular ledger 13/51, conservative product/total extraction rows up to <=640, h_Γ_bg_bound helper routing, and 64 Coord4 triple rows are recorded"
 
 open GROrderedRationalFiniteSlotBoundCoreORCSLPGF public
 
@@ -1171,7 +1253,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreORCSLPGF =
   refl
   "record the reusable bound shapes, scale/slack constants, corrected shell route receipts, h_Γ_bg_bound helper routing, dependency names, and exact arithmetic adapters only"
   refl
-  "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 4*11=44, 2144/27<=80, 80<=640, 352<=640, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 27/2<=22<=48, 252<=640, 22<=44, 44<=48, bracket_le=2*r_max with selected r_max=4M => 8, θ-shell/cot-bound, angular ledger 13/51, conservative product/total extraction rows up to <=640, h_Γ_bg_bound helper routing, and 64 Coord4 triple rows are recorded"
+  "full ordered-rational proofs remain unpromoted; 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 4*11=44, 2144/27<=80, 80<=640, 352<=640, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=440<=640, 440<=640, productTermBound_88, coord4 angular-slot 13/51, 27/2<=22<=48, 252<=640, 22<=44, 44<=48, bracket_le=2*r_max with selected r_max=4M => 8, θ-shell/cot-bound, angular ledger 13/51, conservative product/total extraction rows up to <=640, h_Γ_bg_bound helper routing, and 64 Coord4 triple rows are recorded"
   refl
 
 record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
@@ -1509,6 +1591,7 @@ record GROrderedRationalFiniteSlotBoundCoreReceipt : Set where
       ("full ordered-rational proofs are intentionally absent until the surrounding Christoffel and Ricci inhabitants are stable"
         ∷ "the file only records reusable scalar lemma names, dependency names, and finite slot shapes"
         ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 4*11=44, 27/2<=22<=48, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 352<=640, bracket_le=2*r_max with selected r_max=4M => 8, θ-shell/cot-bound, angular ledger 13/51, conservative product/total extraction rows up to <=640, and h_Γ_bg_bound routing"
+        ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 4*11=44, 27/2<=22<=48, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=440<=640, 440<=640, productTermBound_88, coord4 angular-slot 13/51, 352<=640, bracket_le=2*r_max with selected r_max=4M => 8, θ-shell/cot-bound, angular ledger 13/51, conservative product/total extraction rows up to <=640, and h_Γ_bg_bound routing"
         ∷ "no fragile proof terms are duplicated here"
         ∷ [])
 
@@ -1622,7 +1705,7 @@ canonicalGROrderedRationalFiniteSlotBoundCoreReceipt =
     coord4SixtyFourTriplesLawName
     ("full ordered-rational proofs are intentionally absent until the surrounding Christoffel and Ricci inhabitants are stable"
       ∷ "the file only records reusable scalar lemma names, dependency names, and finite slot shapes"
-      ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 4*11=44, 27/2<=22<=48, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=640, 352<=640, bracket_le=2*r_max with selected r_max=4M => 8, θ-shell/cot-bound, angular ledger 13/51, conservative product/total extraction rows up to <=640, and h_Γ_bg_bound routing"
+      ∷ "the file now also carries exact helper-bound sockets for 11/2<=22, 11/2<=48, 11/2<=33/2<=22<=48, 33/2<=22<=48, 19/2<=44, 4*11=44, 27/2<=22<=48, 6*44<=8*44, 8*44=352, 4*8*(11/2)=176<=640, 6*44<=352<=440<=640, 440<=640, productTermBound_88, coord4 angular-slot 13/51, 352<=640, bracket_le=2*r_max with selected r_max=4M => 8, θ-shell/cot-bound, angular ledger 13/51, conservative product/total extraction rows up to <=640, and h_Γ_bg_bound routing"
       ∷ "no fragile proof terms are duplicated here"
       ∷ [])
     refl

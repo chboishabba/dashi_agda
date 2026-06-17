@@ -106,7 +106,13 @@ data NSKatoHessianConfinementShape : Set where
   cl1MathematicallyOpenRecorded : NSKatoHessianConfinementShape
   cl1FailClosedRecorded : NSKatoHessianConfinementShape
   cl1CorrectedBoundaryLayerRecorded : NSKatoHessianConfinementShape
+  cl1CorrectedBoundaryConcentrationStepARecorded : NSKatoHessianConfinementShape
+  cl1CorrectedBoundaryConcentrationStepBRecorded : NSKatoHessianConfinementShape
+  cl1CorrectedBoundaryConcentrationStepCRecorded : NSKatoHessianConfinementShape
   boundaryH_BRecorded : NSKatoHessianConfinementShape
+  boundaryMinG12OnBoundaryKRecorded : NSKatoHessianConfinementShape
+  boundaryRealRhoOnBoundaryKRecorded : NSKatoHessianConfinementShape
+  boundaryBetti0OnBoundaryKRecorded : NSKatoHessianConfinementShape
   boundaryMinG12RhoBettiOptionalCalcRankingRecorded :
     NSKatoHessianConfinementShape
   millerToH5StandardInterpolationRecorded : NSKatoHessianConfinementShape
@@ -148,7 +154,13 @@ canonicalNSKatoHessianConfinementShape =
   ∷ cl1MathematicallyOpenRecorded
   ∷ cl1FailClosedRecorded
   ∷ cl1CorrectedBoundaryLayerRecorded
+  ∷ cl1CorrectedBoundaryConcentrationStepARecorded
+  ∷ cl1CorrectedBoundaryConcentrationStepBRecorded
+  ∷ cl1CorrectedBoundaryConcentrationStepCRecorded
   ∷ boundaryH_BRecorded
+  ∷ boundaryMinG12OnBoundaryKRecorded
+  ∷ boundaryRealRhoOnBoundaryKRecorded
+  ∷ boundaryBetti0OnBoundaryKRecorded
   ∷ boundaryMinG12RhoBettiOptionalCalcRankingRecorded
   ∷ millerToH5StandardInterpolationRecorded
   ∷ cl1bPDEGapOpenRecorded
@@ -196,7 +208,7 @@ data NSKatoHessianConfinementAnalyticalRequirement : Set where
     NSKatoHessianConfinementAnalyticalRequirement
   optionalCalcMinG12OnBoundaryLayer :
     NSKatoHessianConfinementAnalyticalRequirement
-  optionalCalcRhoOnHB :
+  optionalCalcRealRhoOnBoundaryK :
     NSKatoHessianConfinementAnalyticalRequirement
   optionalCalcBetti0 :
     NSKatoHessianConfinementAnalyticalRequirement
@@ -208,7 +220,7 @@ canonicalNSKatoHessianConfinementAnalyticalRequirements =
   ∷ cl1bBoundaryLayerLocalizationOpenPDE
   ∷ noNewCalcERunInThisReceipt
   ∷ optionalCalcMinG12OnBoundaryLayer
-  ∷ optionalCalcRhoOnHB
+  ∷ optionalCalcRealRhoOnBoundaryK
   ∷ optionalCalcBetti0
   ∷ []
 
@@ -274,7 +286,19 @@ shapeMillerBridgeOpenText =
 
 shapeMillerToH5StandardInterpolationText : String
 shapeMillerToH5StandardInterpolationText =
-  "millerToH5 is recorded as closeable by standard interpolation, but the inhabitant is not yet provided here."
+  "millerToH5 is recorded as a closeable standard-interpolation projection row on the boundary-layer CL1 surface; exact shape is `millerToH5` and the inhabitant is not yet provided here."
+
+shapeCL1CorrectedBoundaryConcentrationStepAText : String
+shapeCL1CorrectedBoundaryConcentrationStepAText =
+  "CL1 boundary-concentration Step A is corrected to the boundary layer and is restricted to ∂Ω_K localization; the step is recorded as open and fail-closed."
+
+shapeCL1CorrectedBoundaryConcentrationStepBText : String
+shapeCL1CorrectedBoundaryConcentrationStepBText =
+  "CL1 boundary-concentration Step B is corrected to the boundary layer and is restricted to ∂Ω_K localization; the step is recorded as open and fail-closed."
+
+shapeCL1CorrectedBoundaryConcentrationStepCText : String
+shapeCL1CorrectedBoundaryConcentrationStepCText =
+  "CL1 boundary-concentration Step C is corrected to the boundary layer and is restricted to ∂Ω_K localization; the step is recorded as open and fail-closed."
 
 shapeCL1CorrectedBoundaryLayerText : String
 shapeCL1CorrectedBoundaryLayerText =
@@ -282,15 +306,27 @@ shapeCL1CorrectedBoundaryLayerText =
 
 shapeBoundaryHBText : String
 shapeBoundaryHBText =
-  "H_B is recorded on the boundary layer / ∂Ω_K surface only; no interior Ω_K claim is made."
+  "boundary H_B is recorded on the boundary-layer surface / ∂Ω_K only; no interior Ω_K claim is made."
+
+shapeBoundaryMinG12OnBoundaryKText : String
+shapeBoundaryMinG12OnBoundaryKText =
+  "Diagnostic calc: minimum of g12 on ∂Ω_K."
+
+shapeBoundaryRealRhoOnBoundaryKText : String
+shapeBoundaryRealRhoOnBoundaryKText =
+  "Diagnostic calc: real rho on ∂Ω_K."
+
+shapeBoundaryBetti0OnBoundaryKText : String
+shapeBoundaryBetti0OnBoundaryKText =
+  "Diagnostic calc: Betti-0 on ∂Ω_K."
 
 shapeBoundaryMinG12RhoBettiOptionalCalcRankingText : String
 shapeBoundaryMinG12RhoBettiOptionalCalcRankingText =
-  "Optional calc ranking is boundary-first: real min g12 on ∂Ω_K / the boundary layer, real rho on H_B, then Betti-0 count; Miller λ2+ is outside/at boundary, not interior."
+  "Optional calc ranking is boundary-first and boundary-layer localized: min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 count; Miller λ2+ is outside/at boundary, not interior."
 
 shapeCL1bPDEGapText : String
 shapeCL1bPDEGapText =
-  "CL1b is recorded as an open PDE-gap boundary-layer route near ∂Ω_K and remains uninhabited in this receipt."
+  "CL1b is recorded as an open PDE-gap boundary-layer route near ∂Ω_K and remains fail-closed/uninhabited in this receipt."
 
 shapeDivergenceText : String
 shapeDivergenceText =
@@ -298,11 +334,11 @@ shapeDivergenceText =
 
 shapeCalcEEmpiricalProjectionText : String
 shapeCalcEEmpiricalProjectionText =
-  "Calc E is recorded as empirical, non-promoting evidence: no new NS calc was run or required; CL1 remains open and fail-closed; optional calcs are ranked as boundary min g12 on ∂Ω_K / the boundary layer, real rho on H_B, then Betti-0 count; Miller λ2+ is outside/at boundary; rho approx 8.02 at TG N=128 t≈9; Scenario D unsupported in dataset; H_B numerically supported only."
+  "Calc E is recorded as empirical, non-promoting evidence: no new NS calc was run or required; CL1 remains open and fail-closed; optional calcs are ranked as min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 count; Miller λ2+ is outside/at boundary; rho approx 8.02 at TG N=128 t≈9; Scenario D unsupported in dataset; boundary H_B numerically supported only."
 
 shapeCalcEEmpiricalReceiptText : String
 shapeCalcEEmpiricalReceiptText =
-  "Calc E stays empirical and non-promoting on this receipt surface; no new NS calc was run or required; CL1 remains open and fail-closed; optional calcs are ranked as boundary min g12 on ∂Ω_K / the boundary layer, real rho on H_B, then Betti-0 count."
+  "Calc E stays empirical and non-promoting on this receipt surface; no new NS calc was run or required; CL1 remains open and fail-closed; optional calcs are ranked as min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 count."
 
 shapeCL1OpenFailClosedText : String
 shapeCL1OpenFailClosedText =
@@ -326,7 +362,7 @@ shapeGD3SobolevBoundCorrectRowName =
 
 shapeGD3SobolevBoundCorrectText : String
 shapeGD3SobolevBoundCorrectText =
-  "GD3-SobolevBound-Correct is a checked projection row: the latest payload keeps M, hM_pos, hM, δ0, hδ_pos, hδ, and C_emb as exact names; hess_le_Ak_plus_Bk, Ak_le_D3u, and sobolev_H5_C3 are exact shapes; B_k is carried only through the recorded quadratic bound; and the final GD3-SobolevBound-Correct formula is recorded as a named surface without any promotion claim."
+  "GD3-SobolevBound-Correct is an exact checked projection row on the KatoIdentity leaf: the latest payload keeps M, hM_pos, hM, δ0, hδ_pos, hδ, and C_emb as exact names; hess_le_Ak_plus_Bk, Ak_le_D3u, and sobolev_H5_C3 are exact shapes; B_k is carried only through the recorded quadratic bound; and the final GD3-SobolevBound-Correct formula is recorded as a named surface without any promotion claim."
 
 canonicalGD3SobolevBoundCorrectProjectionRows : List String
 canonicalGD3SobolevBoundCorrectProjectionRows =
@@ -361,7 +397,7 @@ shapeCL2DichotomyRejectedText =
 
 shapeMillerToH5CloseableText : String
 shapeMillerToH5CloseableText =
-  "millerToH5 is recorded as closeable by standard interpolation and stays uninhabited here."
+  "millerToH5 is recorded as a closeable standard-interpolation surface and stays uninhabited here."
 
 shapeGD3CorrectStandardText : String
 shapeGD3CorrectStandardText =
@@ -506,7 +542,16 @@ record NSKatoCalcEEmpiricalProjection : Set where
       scenarioDUnsupportedText ≡ "Scenario D unsupported in dataset"
     hBNumericallySupportedOnlyText : String
     hBNumericallySupportedOnlyTextIsCanonical :
-      hBNumericallySupportedOnlyText ≡ "H_B numerically supported only"
+      hBNumericallySupportedOnlyText ≡ "boundary H_B numerically supported only"
+    boundaryMinG12OnBoundaryKText : String
+    boundaryMinG12OnBoundaryKTextIsCanonical :
+      boundaryMinG12OnBoundaryKText ≡ shapeBoundaryMinG12OnBoundaryKText
+    boundaryRealRhoOnBoundaryKText : String
+    boundaryRealRhoOnBoundaryKTextIsCanonical :
+      boundaryRealRhoOnBoundaryKText ≡ shapeBoundaryRealRhoOnBoundaryKText
+    boundaryBetti0OnBoundaryKText : String
+    boundaryBetti0OnBoundaryKTextIsCanonical :
+      boundaryBetti0OnBoundaryKText ≡ shapeBoundaryBetti0OnBoundaryKText
     boundaryMinG12RhoBettiOptionalCalcRankingText : String
     boundaryMinG12RhoBettiOptionalCalcRankingTextIsCanonical :
       boundaryMinG12RhoBettiOptionalCalcRankingText ≡
@@ -528,7 +573,13 @@ canonicalNSKatoCalcEEmpiricalProjection =
     refl
     "Scenario D unsupported in dataset"
     refl
-    "H_B numerically supported only"
+    "boundary H_B numerically supported only"
+    refl
+    shapeBoundaryMinG12OnBoundaryKText
+    refl
+    shapeBoundaryRealRhoOnBoundaryKText
+    refl
+    shapeBoundaryBetti0OnBoundaryKText
     refl
     shapeBoundaryMinG12RhoBettiOptionalCalcRankingText
     refl
@@ -550,6 +601,18 @@ record NSKatoCalcEEmpiricalReceipt : Set where
     cl1CorrectedBoundaryLayerText : String
     cl1CorrectedBoundaryLayerTextIsCanonical :
       cl1CorrectedBoundaryLayerText ≡ shapeCL1CorrectedBoundaryLayerText
+    cl1BoundaryConcentrationStepAText : String
+    cl1BoundaryConcentrationStepATextIsCanonical :
+      cl1BoundaryConcentrationStepAText ≡
+      shapeCL1CorrectedBoundaryConcentrationStepAText
+    cl1BoundaryConcentrationStepBText : String
+    cl1BoundaryConcentrationStepBTextIsCanonical :
+      cl1BoundaryConcentrationStepBText ≡
+      shapeCL1CorrectedBoundaryConcentrationStepBText
+    cl1BoundaryConcentrationStepCText : String
+    cl1BoundaryConcentrationStepCTextIsCanonical :
+      cl1BoundaryConcentrationStepCText ≡
+      shapeCL1CorrectedBoundaryConcentrationStepCText
     boundaryHBText : String
     boundaryHBTextIsCanonical :
       boundaryHBText ≡ shapeBoundaryHBText
@@ -557,6 +620,10 @@ record NSKatoCalcEEmpiricalReceipt : Set where
     boundaryMinG12RhoBettiOptionalCalcRankingTextIsCanonical :
       boundaryMinG12RhoBettiOptionalCalcRankingText ≡
       shapeBoundaryMinG12RhoBettiOptionalCalcRankingText
+    millerToH5StandardInterpolationText : String
+    millerToH5StandardInterpolationTextIsCanonical :
+      millerToH5StandardInterpolationText ≡
+      shapeMillerToH5StandardInterpolationText
     millerToH5CloseableText : String
     millerToH5CloseableTextIsCanonical :
       millerToH5CloseableText ≡ shapeMillerToH5CloseableText
@@ -586,9 +653,17 @@ canonicalNSKatoCalcEEmpiricalReceipt =
     refl
     shapeCL1CorrectedBoundaryLayerText
     refl
+    shapeCL1CorrectedBoundaryConcentrationStepAText
+    refl
+    shapeCL1CorrectedBoundaryConcentrationStepBText
+    refl
+    shapeCL1CorrectedBoundaryConcentrationStepCText
+    refl
     shapeBoundaryHBText
     refl
     shapeBoundaryMinG12RhoBettiOptionalCalcRankingText
+    refl
+    shapeMillerToH5StandardInterpolationText
     refl
     shapeMillerToH5CloseableText
     refl
@@ -679,13 +754,13 @@ record NSKatoHessianConfinementORCSLPGF : Set where
       "O: Record the corrected λ2 Hessian/vortex-core confinement receipt with explicit diagonal identity, KatoIdentity leaf, secondDeriv-expand, boundary-layer CL1/CL1b surfaces at ∂Ω_K, signed-gap, PSD minimum, curvature, Clay bridge blocker surfaces, and the Calc E note that no new NS calc was run or required."
     R : String
     RIsCanonical : R ≡
-      "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the KatoIdentity leaf rows, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, explicit fail-closed gate rows, millerToH5 closeable-by-standard-interpolation (not yet inhabited), CL1b boundary-layer PDE-gap localization at ∂Ω_K, and the Calc E rank order boundary min g12 on ∂Ω_K / boundary layer, real rho on H_B, then Betti-0 count."
+      "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the KatoIdentity leaf rows, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, explicit fail-closed gate rows, millerToH5 closeable-by-standard-interpolation (not yet inhabited), CL1-bounded Steps A/B/C corrected to ∂Ω_K boundary-layer localization and CL1b boundary-layer PDE-gap localization at ∂Ω_K, and the Calc E diagnostic-rank order: min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0."
     C : String
     CIsCanonical : C ≡
       "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, the KatoIdentity leaf row checks, empirical N=128 aggregate metadata, and Calc E/CL1/CL1b fail-closed evidence only; CL1 and CL1b target ∂Ω_K / the boundary layer, no interior Ω_K localization is claimed, and no new NS calc was required."
     S : String
     SIsCanonical : S ≡
-      "S: Hessian PSD at core, the diagonal identity witness, the KatoIdentity leaf checked rows, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, millerToH5 as closeable by standard interpolation (not yet inhabited), CL1b as an open boundary-layer PDE route near ∂Ω_K, Calc E empirical projection/receipt evidence, CL1/CL1b open bookkeeping, the no-new-NS-calc note, and the ranked optional calcs boundary min g12 on ∂Ω_K / the boundary layer, real rho on H_B, then Betti-0 count are recorded."
+      "S: Hessian PSD at core, the diagonal identity witness, the KatoIdentity leaf checked rows, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, millerToH5 as closeable-by-standard-interpolation (not yet inhabited), CL1 boundary-concentration Steps A/B/C as boundary-layer open surfaces at ∂Ω_K, CL1b as an open boundary-layer PDE route near ∂Ω_K, Calc E empirical projection/receipt evidence, CL1/CL1b open bookkeeping, the no-new-NS-calc note, and the ranked optional calcs: min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 are recorded."
     L : String
     LIsCanonical : L ≡
       "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/KatoIdentity leaf/Clay bridge surfaces plus Calc E empirical evidence -> keep CL1 open, redirect CL1/CL1b to the boundary layer at ∂Ω_K, note that no new NS calc was run or required, and keep all promotions fail-closed."
@@ -694,10 +769,10 @@ record NSKatoHessianConfinementORCSLPGF : Set where
       "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, Clay bridge claim, KatoIdentity leaf row, Calc E evidence, CL1/CL1b open bookkeeping, CL1b boundary-layer PDE gap, or the optional boundary calc ranking from this receipt."
     G : String
     GIsCanonical : G ≡
-      "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, millerToH5 remains closeable-by-standard-interpolation but uninhabited here, CL1b remains an open boundary-layer PDE route near ∂Ω_K, KatoIdentity leaf rows stay checked only, Calc E remains empirical and non-promoting, CL1 stays mathematically open and fail-closed, no new NS calc was required, the optional calc ranking is boundary min g12 on ∂Ω_K / the boundary layer, real rho on H_B, then Betti-0 count, and there is no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
+      "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, millerToH5 remains closeable-by-standard-interpolation but uninhabited here, CL1 boundary-concentration Steps A/B/C remain open fail-closed boundary-layer surfaces at ∂Ω_K, CL1b remains an open boundary-layer PDE route near ∂Ω_K, KatoIdentity leaf rows stay checked only, Calc E remains empirical and non-promoting, CL1 stays mathematically open and fail-closed, no new NS calc was required, the optional calc ranking is min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0, and there is no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
     F : String
     FIsCanonical : F ≡
-      "F: Fail-closed due to explicit gate rows, the corrected sign convention, the open Clay bridge blocker, the KatoIdentity leaf checks, the open CL1/CL1b bookkeeping, and the note that no new NS calc was run or required; proof obligations remain external to this row, CL1/CL1b stay boundary-layer only at ∂Ω_K, and the optional calcs stay ranked as boundary min g12 on ∂Ω_K / the boundary layer, real rho on H_B, then Betti-0 count."
+      "F: Fail-closed due to explicit gate rows, the corrected sign convention, the open Clay bridge blocker, the KatoIdentity leaf checks, the open CL1/CL1b bookkeeping, and the note that no new NS calc was run or required; proof obligations remain external to this row, CL1/CL1b stay boundary-layer only at ∂Ω_K, CL1 boundary-concentration Steps A/B/C remain fail-closed, and the optional calcs stay ranked as min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0."
 
 data NSKatoHessianConfinementPromotion : Set where
 
@@ -1057,19 +1132,19 @@ canonicalNSKatoHessianConfinementORCSLPGF =
   mkNSKatoHessianConfinementORCSLPGF
     "O: Record the corrected λ2 Hessian/vortex-core confinement receipt with explicit diagonal identity, KatoIdentity leaf, secondDeriv-expand, boundary-layer CL1/CL1b surfaces at ∂Ω_K, signed-gap, PSD minimum, curvature, Clay bridge blocker surfaces, and the Calc E note that no new NS calc was run or required."
     refl
-    "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the KatoIdentity leaf rows, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, explicit fail-closed gate rows, millerToH5 closeable-by-standard-interpolation (not yet inhabited), CL1b boundary-layer PDE-gap localization at ∂Ω_K, and the Calc E rank order boundary min g12 on ∂Ω_K / boundary layer, real rho on H_B, then Betti-0 count."
+    "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the KatoIdentity leaf rows, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, explicit fail-closed gate rows, millerToH5 closeable-by-standard-interpolation (not yet inhabited), CL1-bounded Steps A/B/C corrected to ∂Ω_K boundary-layer localization and CL1b boundary-layer PDE-gap localization at ∂Ω_K, and the Calc E diagnostic-rank order: min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0."
     refl
     "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, the KatoIdentity leaf row checks, empirical N=128 aggregate metadata, and Calc E/CL1/CL1b fail-closed evidence only; CL1 and CL1b target ∂Ω_K / the boundary layer, no interior Ω_K localization is claimed, and no new NS calc was required."
     refl
-    "S: Hessian PSD at core, the diagonal identity witness, the KatoIdentity leaf checked rows, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, millerToH5 as closeable by standard interpolation (not yet inhabited), CL1b as an open boundary-layer PDE route near ∂Ω_K, Calc E empirical projection/receipt evidence, CL1/CL1b open bookkeeping, the no-new-NS-calc note, and the ranked optional calcs boundary min g12 on ∂Ω_K / the boundary layer, real rho on H_B, then Betti-0 count are recorded."
+    "S: Hessian PSD at core, the diagonal identity witness, the KatoIdentity leaf checked rows, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, millerToH5 as closeable-by-standard-interpolation (not yet inhabited), CL1 boundary-concentration Steps A/B/C as boundary-layer open surfaces at ∂Ω_K, CL1b as an open boundary-layer PDE route near ∂Ω_K, Calc E empirical projection/receipt evidence, CL1/CL1b open bookkeeping, the no-new-NS-calc note, and the ranked optional calcs: min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 are recorded."
     refl
     "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/KatoIdentity leaf/Clay bridge surfaces plus Calc E empirical evidence -> keep CL1 open, redirect CL1/CL1b to the boundary layer at ∂Ω_K, note that no new NS calc was run or required, and keep all promotions fail-closed."
     refl
     "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, Clay bridge claim, KatoIdentity leaf row, Calc E evidence, CL1/CL1b open bookkeeping, CL1b boundary-layer PDE gap, or the optional boundary calc ranking from this receipt."
     refl
-    "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, millerToH5 remains closeable-by-standard-interpolation but uninhabited here, CL1b remains an open boundary-layer PDE route near ∂Ω_K, KatoIdentity leaf rows stay checked only, Calc E remains empirical and non-promoting, CL1 stays mathematically open and fail-closed, no new NS calc was required, the optional calc ranking is boundary min g12 on ∂Ω_K / the boundary layer, real rho on H_B, then Betti-0 count, and there is no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
+    "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, millerToH5 remains closeable-by-standard-interpolation but uninhabited here, CL1 boundary-concentration Steps A/B/C remain open fail-closed boundary-layer surfaces at ∂Ω_K, CL1b remains an open boundary-layer PDE route near ∂Ω_K, KatoIdentity leaf rows stay checked only, Calc E remains empirical and non-promoting, CL1 stays mathematically open and fail-closed, no new NS calc was required, the optional calc ranking is min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0, and there is no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
     refl
-    "F: Fail-closed due to explicit gate rows, the corrected sign convention, the open Clay bridge blocker, the KatoIdentity leaf checks, the open CL1/CL1b bookkeeping, and the note that no new NS calc was run or required; proof obligations remain external to this row, CL1/CL1b stay boundary-layer only at ∂Ω_K, and the optional calcs stay ranked as boundary min g12 on ∂Ω_K / the boundary layer, real rho on H_B, then Betti-0 count."
+    "F: Fail-closed due to explicit gate rows, the corrected sign convention, the open Clay bridge blocker, the KatoIdentity leaf checks, the open CL1/CL1b bookkeeping, and the note that no new NS calc was run or required; proof obligations remain external to this row, CL1/CL1b stay boundary-layer only at ∂Ω_K, CL1 boundary-concentration Steps A/B/C remain fail-closed, and the optional calcs stay ranked as min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0."
     refl
 
 canonicalNSKatoHessianConfinementReceipt : NSKatoHessianConfinementReceipt
