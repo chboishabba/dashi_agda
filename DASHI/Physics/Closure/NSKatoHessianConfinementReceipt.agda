@@ -242,7 +242,7 @@ shapeCL1OpenFailClosedText =
 
 shapeKatoIdentityLeafReceiptText : String
 shapeKatoIdentityLeafReceiptText =
-  "KatoIdentity leaf receipt records the checked secondDeriv-expand surface, the GD3 standard row, the GD3-SobolevBound-Correct projection, and CL2 trichotomy row without optional calc results."
+  "KatoIdentity leaf receipt records the checked secondDeriv-expand surface, the GD3 standard row, the GD3-SobolevBound-Correct projection, and CL2 trichotomy row without optional calc results; the latest GD3 payload names M, hM_pos, hM, δ0, hδ_pos, hδ, C_emb, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, and the final GD3-SobolevBound-Correct formula are carried on this same leaf surface."
 
 shapeSecondDerivExpandText : String
 shapeSecondDerivExpandText =
@@ -258,7 +258,7 @@ shapeGD3SobolevBoundCorrectRowName =
 
 shapeGD3SobolevBoundCorrectText : String
 shapeGD3SobolevBoundCorrectText =
-  "GD3-SobolevBound-Correct is a checked projection row: H5 is bounded by a canonical parameter M, the gap lower bound is δ0, and B_k is used only via the quadratic-in-H5 honesty relation with C_embed."
+  "GD3-SobolevBound-Correct is a checked projection row: the latest payload keeps M, hM_pos, hM, δ0, hδ_pos, hδ, and C_emb as exact names; hess_le_Ak_plus_Bk, Ak_le_D3u, and sobolev_H5_C3 are exact shapes; B_k is carried only through the recorded quadratic bound; and the final GD3-SobolevBound-Correct formula is recorded as a named surface without any promotion claim."
 
 canonicalGD3SobolevBoundCorrectProjectionRows : List String
 canonicalGD3SobolevBoundCorrectProjectionRows =
@@ -267,6 +267,16 @@ canonicalGD3SobolevBoundCorrectProjectionRows =
   ∷ "H5 <= M"
   ∷ "C_embed"
   ∷ "B_k quadratic in H5"
+  ∷ "hM_pos"
+  ∷ "hM"
+  ∷ "hδ_pos"
+  ∷ "hδ"
+  ∷ "C_emb"
+  ∷ "hess_le_Ak_plus_Bk"
+  ∷ "Ak_le_D3u"
+  ∷ "sobolev_H5_C3"
+  ∷ "Bk quadratic bound"
+  ∷ "final GD3-SobolevBound-Correct formula"
   ∷ []
 
 shapeCL2TrichotomyRowText : String
@@ -1121,6 +1131,16 @@ record KatoMorseProgramVariables : Set where
     M : String
     delta0 : String
     C_embed : String
+    hM_pos : String
+    hM : String
+    hδ_pos : String
+    hδ : String
+    C_emb : String
+    hess_le_Ak_plus_Bk : String
+    Ak_le_D3u : String
+    sobolev_H5_C3 : String
+    BkQuadraticBound : String
+    finalGD3SobolevBoundCorrectFormula : String
     H5 : String
     H6 : String
     h5VsH6Split : String
@@ -1147,11 +1167,21 @@ canonicalKatoMorseProgramVariables =
     "M"
     "δ0"
     "C_embed"
+    "hM_pos"
+    "hM"
+    "hδ_pos"
+    "hδ"
+    "C_emb"
+    "hess_le_Ak_plus_Bk"
+    "Ak_le_D3u"
+    "sobolev_H5_C3"
+    "Bk quadratic bound"
+    "final GD3-SobolevBound-Correct formula: hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, and Bk quadratic bound are the recorded closure shapes with M, hM_pos, hM, δ0, hδ_pos, hδ, and C_emb as the named payload slots"
     "H5"
     "H6"
     "H5 curvature bound vs H6 Taylor remainder split"
     "H5 bounded by M"
-    "Bk quadratic in H5 with C_embed"
+    "Bk quadratic in H5 with C_emb"
     "CL2 branch C"
     "secondDeriv-expand"
     "CL2 trichotomy"
@@ -1178,7 +1208,7 @@ gd2Statement =
 
 gd3Statement : String
 gd3Statement =
-  "GD3-SobolevBound-Correct: the checked GD3 row is standard on the KatoIdentity leaf and records bounded H5 by M with lower-gap δ0, while carrying the curvature-to-Sobolev split with secondDeriv-expand and H6 as the Taylor remainder. B_k is only used through the quadratic-in-H5 honesty note involving C_embed."
+  "GD3-SobolevBound-Correct: the checked GD3 row is standard on the KatoIdentity leaf and records the exact payload names M, hM_pos, hM, δ0, hδ_pos, hδ, C_emb, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, and the final GD3-SobolevBound-Correct formula, while carrying the curvature-to-Sobolev split with secondDeriv-expand and H6 as the Taylor remainder. B_k remains only a recorded quadratic bound and no calcs/proxy claims are introduced."
 
 cl2TrichotomyStatement : String
 cl2TrichotomyStatement =
@@ -1210,7 +1240,7 @@ katoMorseTheoremExactBlocker GD1 =
 katoMorseTheoremExactBlocker GD2 =
   "GD2 exact blocker: none; this row is already standard on the current receipt variables."
 katoMorseTheoremExactBlocker GD3 =
-  "GD3 exact blocker: none; this row is already standard on the current receipt variables, with GD3-SobolevBound-Correct projections checking bounded H5, δ0, and B_k quadratic-in-H5 honesty using C_embed."
+  "GD3 exact blocker: none; this row is already standard on the current receipt variables, with GD3-SobolevBound-Correct projections checking the exact payload names M, hM_pos, hM, δ0, hδ_pos, hδ, C_emb, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, and the final GD3-SobolevBound-Correct formula."
 katoMorseTheoremExactBlocker CL2 =
   "CL2 exact blocker: trichotomy is recorded (branch C is checked), not a dichotomy; the surface remains fail-closed."
 katoMorseTheoremExactBlocker theoremCConditional =
@@ -1376,7 +1406,7 @@ record KatoMorseProgramORCSLPGF : Set where
       "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker, with secondDeriv-expand kept as a checked leaf surface only."
     S : String
     SIsCanonical : S ≡
-      "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, M, δ0, C_embed, H5, H6, H5 bounded by M and H5/H6 split, Bk-quadratic-in-H5 honesty note, CL2 branch C, and secondDeriv-expand are recorded as exact program variables and shapes."
+      "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, M, hM_pos, hM, δ0, hδ_pos, hδ, C_embed, C_emb, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, final GD3-SobolevBound-Correct formula, H5, H6, H5 bounded by M and H5/H6 split, Bk-quadratic-in-H5 honesty note, CL2 branch C, and secondDeriv-expand are recorded as exact program variables and shapes."
     L : String
     LIsCanonical : L ≡
       "L: theorem-by-theorem row surface orders the claims as provable classical, standard, trichotomy, then open blocker, with MK1/MK2 classical, GD2/GD3 standard, CL2 trichotomy (branch C checked) rather than dichotomy, and MK3/GD1/Theorem C open."
@@ -1388,7 +1418,7 @@ record KatoMorseProgramORCSLPGF : Set where
       "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a trichotomy row with branch C checked rather than dichotomy, secondDeriv-expand is a checked leaf surface, and no Clay promotion is allowed."
     F : String
     FIsCanonical : F ≡
-      "F: status is explicit; MK1 and MK2 are provable classical, GD2 and GD3 are standard with GD3-SobolevBound-Correct checks, CL2 is trichotomy rather than dichotomy with branch C checked, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
+      "F: status is explicit; MK1 and MK2 are provable classical, GD2 and GD3 are standard with GD3-SobolevBound-Correct checks, CL2 is trichotomy rather than dichotomy with branch C checked, CL1 remains open and fail-closed elsewhere in the receipt, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
 
 record KatoMorseProgramSurface : Set where
   constructor mkKatoMorseProgramSurface
@@ -1399,7 +1429,7 @@ record KatoMorseProgramSurface : Set where
     variableBundleIsCanonical : variableBundle ≡ canonicalKatoMorseProgramVariables
     curvatureToSobolevRow : String
     curvatureToSobolevRowIsCanonical : curvatureToSobolevRow ≡
-      "The H5 versus H6 split is explicit: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder; GD3-SobolevBound-Correct enforces H5 ≤ M, gap δ0, and B_k quadratic-in-H5 honesty."
+      "The H5 versus H6 split is explicit: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder; GD3-SobolevBound-Correct enforces the exact payload names M, hM_pos, hM, δ0, hδ_pos, hδ, C_emb, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, and the final GD3-SobolevBound-Correct formula."
     programBlockers : List KatoMorseProgramBlocker
     programBlockersAreCanonical : programBlockers ≡ canonicalKatoMorseProgramBlockers
     clayPromoted : Bool
@@ -1417,7 +1447,7 @@ canonicalKatoMorseProgramORCSLPGF =
     refl
     "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker, with secondDeriv-expand kept as a checked leaf surface only."
     refl
-    "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, M, δ0, C_embed, H5, H6, H5 bounded by M and H5/H6 split, Bk-quadratic-in-H5 honesty note, CL2 branch C, and secondDeriv-expand are recorded as exact program variables and shapes."
+    "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, M, hM_pos, hM, δ0, hδ_pos, hδ, C_embed, C_emb, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, final GD3-SobolevBound-Correct formula, H5, H6, H5 bounded by M and H5/H6 split, Bk-quadratic-in-H5 honesty note, CL2 branch C, and secondDeriv-expand are recorded as exact program variables and shapes."
     refl
     "L: theorem-by-theorem row surface orders the claims as provable classical, standard, trichotomy, then open blocker, with MK1/MK2 classical, GD2/GD3 standard, CL2 trichotomy (branch C checked) rather than dichotomy, and MK3/GD1/Theorem C open."
     refl
@@ -1425,7 +1455,7 @@ canonicalKatoMorseProgramORCSLPGF =
     refl
     "G: all pending route rows remain fail-closed; only typed record data is carried, CL2 stays a trichotomy row with branch C checked rather than dichotomy, secondDeriv-expand is a checked leaf surface, and no Clay promotion is allowed."
     refl
-    "F: status is explicit; MK1 and MK2 are provable classical, GD2 and GD3 are standard with GD3-SobolevBound-Correct checks, CL2 is trichotomy rather than dichotomy with branch C checked, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
+    "F: status is explicit; MK1 and MK2 are provable classical, GD2 and GD3 are standard with GD3-SobolevBound-Correct checks, CL2 is trichotomy rather than dichotomy with branch C checked, CL1 remains open and fail-closed elsewhere in the receipt, MK3, GD1, and theorem C remain open, and no Clay promotion is allowed."
     refl
 
 canonicalKatoMorseProgramSurface : KatoMorseProgramSurface
@@ -1435,7 +1465,7 @@ canonicalKatoMorseProgramSurface =
     refl
     canonicalKatoMorseProgramVariables
     refl
-    "The H5 versus H6 split is explicit: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder; GD3-SobolevBound-Correct enforces H5 ≤ M, gap δ0, and B_k quadratic-in-H5 honesty."
+    "The H5 versus H6 split is explicit: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder; GD3-SobolevBound-Correct enforces the exact payload names M, hM_pos, hM, δ0, hδ_pos, hδ, C_emb, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, and the final GD3-SobolevBound-Correct formula."
     refl
     canonicalKatoMorseProgramBlockers
     refl
