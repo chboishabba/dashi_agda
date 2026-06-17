@@ -405,6 +405,22 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
 
+    christoffelFormulaC0StableZeroSlotDependencyName :
+      String
+
+    christoffelFormulaC0StableZeroSlotDependencyNameIsCanonical :
+      christoffelFormulaC0StableZeroSlotDependencyName
+      ≡
+      "diagonalZeroLemma"
+
+    christoffelFormulaC0StableZeroSlotDependencyReceipt :
+      String
+
+    christoffelFormulaC0StableZeroSlotDependencyReceiptIsCanonical :
+      christoffelFormulaC0StableZeroSlotDependencyReceipt
+      ≡
+      christoffelC0DiagonalZeroLemmaReceipt
+
     christoffelFormulaC0StableBilinearSplitReceipt :
       String
 
@@ -412,6 +428,38 @@ record GRPerturbationBoundShapeCore : Setω where
       christoffelFormulaC0StableBilinearSplitReceipt
       ≡
       "|δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+
+    christoffelFormulaC0StableBilinearSplitDependencyName :
+      String
+
+    christoffelFormulaC0StableBilinearSplitDependencyNameIsCanonical :
+      christoffelFormulaC0StableBilinearSplitDependencyName
+      ≡
+      "christoffelBilinearSplit"
+
+    christoffelFormulaC0StableBilinearSplitDependencyReceipt :
+      String
+
+    christoffelFormulaC0StableBilinearSplitDependencyReceiptIsCanonical :
+      christoffelFormulaC0StableBilinearSplitDependencyReceipt
+      ≡
+      christoffelC0ChristoffelBilinearSplitReceipt
+
+    christoffelFormulaC0StableFeed11HalfTo22ChainName :
+      String
+
+    christoffelFormulaC0StableFeed11HalfTo22ChainNameIsCanonical :
+      christoffelFormulaC0StableFeed11HalfTo22ChainName
+      ≡
+      OrderedRational.orderedRationalChristoffel16p5Le22Le48ArithmeticChainName
+
+    christoffelFormulaC0StableFeed11HalfTo22ChainReceipt :
+      String
+
+    christoffelFormulaC0StableFeed11HalfTo22ChainReceiptIsCanonical :
+      christoffelFormulaC0StableFeed11HalfTo22ChainReceipt
+      ≡
+      "11/2<=33/2<=22<=48"
 
     christoffelFormulaC0StableShellAConstantName :
       String
@@ -440,6 +488,38 @@ record GRPerturbationBoundShapeCore : Setω where
 
     christoffelFormulaC0StableShellAMetricDerivativeMaxIs8 :
       christoffelFormulaC0StableShellAMetricDerivativeMax ≡ 8
+
+    christoffelFormulaC0StableShellALegacyLGamma :
+      ℕ
+
+    christoffelFormulaC0StableShellALegacyLGammaIs72 :
+      christoffelFormulaC0StableShellALegacyLGamma ≡ 72
+
+    christoffelFormulaC0StableShellAConservativeLGamma :
+      ℕ
+
+    christoffelFormulaC0StableShellAConservativeLGammaIs48 :
+      christoffelFormulaC0StableShellAConservativeLGamma ≡ 48
+
+    christoffelFormulaC0StableShellATightLGamma :
+      ℕ
+
+    christoffelFormulaC0StableShellATightLGammaIs44 :
+      christoffelFormulaC0StableShellATightLGamma ≡ 44
+
+    christoffelFormulaC0StableReceiptTable :
+      List String
+
+    christoffelFormulaC0StableReceiptTableIsCanonical :
+      christoffelFormulaC0StableReceiptTable
+      ≡
+      "zero-slot dependency: diagonalZeroLemma"
+      ∷ "zero-slot receipt: 10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+      ∷ "bilinear split dependency: christoffelBilinearSplit"
+      ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+      ∷ "11/2 feed to 22: 11/2<=33/2<=22<=48"
+      ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
+      ∷ []
 
     christoffelFormulaC0StableSlackReceipt :
       String
@@ -918,9 +998,33 @@ canonicalGRPerturbationBoundShapeCore =
         "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
     ; christoffelFormulaC0StableZeroSlotLedgerReceiptIsCanonical =
         refl
+    ; christoffelFormulaC0StableZeroSlotDependencyName =
+        "diagonalZeroLemma"
+    ; christoffelFormulaC0StableZeroSlotDependencyNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableZeroSlotDependencyReceipt =
+        "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+    ; christoffelFormulaC0StableZeroSlotDependencyReceiptIsCanonical =
+        refl
     ; christoffelFormulaC0StableBilinearSplitReceipt =
         "|δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
     ; christoffelFormulaC0StableBilinearSplitReceiptIsCanonical =
+        refl
+    ; christoffelFormulaC0StableBilinearSplitDependencyName =
+        "christoffelBilinearSplit"
+    ; christoffelFormulaC0StableBilinearSplitDependencyNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableBilinearSplitDependencyReceipt =
+        "|δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+    ; christoffelFormulaC0StableBilinearSplitDependencyReceiptIsCanonical =
+        refl
+    ; christoffelFormulaC0StableFeed11HalfTo22ChainName =
+        OrderedRational.orderedRationalChristoffel16p5Le22Le48ArithmeticChainName
+    ; christoffelFormulaC0StableFeed11HalfTo22ChainNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableFeed11HalfTo22ChainReceipt =
+        "11/2<=33/2<=22<=48"
+    ; christoffelFormulaC0StableFeed11HalfTo22ChainReceiptIsCanonical =
         refl
     ; christoffelFormulaC0StableShellAConstantName =
         "22<=48"
@@ -937,6 +1041,28 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelFormulaC0StableShellAMetricDerivativeMax =
         8
     ; christoffelFormulaC0StableShellAMetricDerivativeMaxIs8 =
+        refl
+    ; christoffelFormulaC0StableShellALegacyLGamma =
+        72
+    ; christoffelFormulaC0StableShellALegacyLGammaIs72 =
+        refl
+    ; christoffelFormulaC0StableShellAConservativeLGamma =
+        48
+    ; christoffelFormulaC0StableShellAConservativeLGammaIs48 =
+        refl
+    ; christoffelFormulaC0StableShellATightLGamma =
+        44
+    ; christoffelFormulaC0StableShellATightLGammaIs44 =
+        refl
+    ; christoffelFormulaC0StableReceiptTable =
+        "zero-slot dependency: diagonalZeroLemma"
+        ∷ "zero-slot receipt: 10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+        ∷ "bilinear split dependency: christoffelBilinearSplit"
+        ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+        ∷ "11/2 feed to 22: 11/2<=33/2<=22<=48"
+        ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
+        ∷ []
+    ; christoffelFormulaC0StableReceiptTableIsCanonical =
         refl
     ; christoffelFormulaC0StableSlackReceipt =
         "11/2 ε <= 48 ε"
@@ -1054,6 +1180,7 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "Per-slot algebraic control is recorded as 11/2 ε and the explicit next inequality 11/2 ε <= 48 ε."
         ∷ "DiagonalZeroLemma and christoffelBilinearSplit are recorded with h_static && h_diag, 10 explicit nonzero triples, 54 zero triples, and the exact bilinear split |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)."
         ∷ "ChristoffelFormulaC0Stable now exposes concrete receipt names for independent inverse-metric closeness, zero-slot ledger dependency, the bilinear split, Shell A constant 22<=48, and the 11/2 ε <= 48 ε slack gate."
+        ∷ "The local stable surface now also carries the zero-slot dependency alias, bilinear-split dependency alias, a tighter 11/2<=33/2<=22<=48 feed, and a canonical receipt table for the Shell A constants."
         ∷ "Ricci perturbation route is carried by the canonical Schwarzschild finite Ricci/Bianchi receipt; convergence and authority promotions are blocked."
         ∷ "Contracted-Bianchi still blocks at selected-connection dependency with exact blocker: missingCarrierConnectionIsLeviCivita."
         ∷ "Exact boundary arithmetic shapes are carried by symbolic-rational and shell-A law shapes, not by fabricated proofs."
