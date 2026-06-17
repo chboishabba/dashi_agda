@@ -7,790 +7,1260 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 
-import DASHI.Core.FormalStructureLawCore as Structure
+import DASHI.Core.AuthorityBoundary as Boundary
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
+import DASHI.Core.CandidateOnlyCore as CandidateOnly
+import DASHI.Core.FormalStructureLawCore as Formal
 import DASHI.Interop.PNFSpectralCoordinateRebuildability as Rebuild
-import DASHI.Interop.PNFSpectralFieldCore as Core
 import DASHI.Interop.PNFSpectralFieldGraph as Graph
-import DASHI.Interop.PNFSpectralRegistryAnchoring as Registry
 import DASHI.Interop.PNFSpectralVectorIndex as Vector
 import DASHI.Interop.SensibLawResidualLattice as Residual
+import DASHI.Interop.SpectralOperatorShapeCore as ShapeCore
 
 ------------------------------------------------------------------------
--- PNF spectral numeric ABI boundary.
+-- PNF spectral numeric ABI core.
 --
--- This module is the typed socket between the symbolic-relational PNF graph
--- and runtime numeric payloads.  It records only receipt-bound materialization:
--- row maps, residual edge tables, adjacency/Laplacian payloads, coordinate
--- tables, GEMV payloads, rebuildability, and admission gates.  Numeric arrays
--- remain candidate runtime artifacts; they do not promote semantic, evidence,
--- trading, security, legal, clinical, or deployment authority.
+-- This module is a structural candidate surface for runtime numeric ABI
+-- materialization.  It binds the PNF spectral row map, residual edge table,
+-- adjacency, Laplacian, spectral coordinate, GEMV payload, rebuild witness,
+-- and admission / authority boundaries without promoting runtime numeric
+-- values, truth, support, admissibility, or authority.
+
+listCount : ∀ {A : Set} → List A → Nat
+listCount [] =
+  zero
+listCount (_ ∷ xs) =
+  suc (listCount xs)
 
 data PNFSpectralNumericABIStatus : Set where
-  checkedNumericMaterializationCandidateOnly :
+  pnfSpectralNumericABICandidateOnlyNoRuntimePromotion :
     PNFSpectralNumericABIStatus
 
-data NumericABIComponent : Set where
-  objectRegistryRowsComponent :
-    NumericABIComponent
-
+data PNFSpectralNumericABIComponent : Set where
   rowMapBindingComponent :
-    NumericABIComponent
+    PNFSpectralNumericABIComponent
 
   residualEdgeTableComponent :
-    NumericABIComponent
+    PNFSpectralNumericABIComponent
 
-  signedAdjacencyABIComponent :
-    NumericABIComponent
-
-  degreeRowABIComponent :
-    NumericABIComponent
+  adjacencyABIComponent :
+    PNFSpectralNumericABIComponent
 
   laplacianABIComponent :
-    NumericABIComponent
+    PNFSpectralNumericABIComponent
 
-  eigenCoordinateABIComponent :
-    NumericABIComponent
+  eigenSpectralCoordinateABIComponent :
+    PNFSpectralNumericABIComponent
 
   gemvPayloadComponent :
-    NumericABIComponent
-
-  parityHashComponent :
-    NumericABIComponent
+    PNFSpectralNumericABIComponent
 
   rebuildWitnessComponent :
-    NumericABIComponent
+    PNFSpectralNumericABIComponent
 
-  admissionGateComponent :
-    NumericABIComponent
+  admissionRuleComponent :
+    PNFSpectralNumericABIComponent
 
-  numericNonAuthorityComponent :
-    NumericABIComponent
+  authorityBoundaryLemmaComponent :
+    PNFSpectralNumericABIComponent
 
-canonicalNumericABIComponents : List NumericABIComponent
-canonicalNumericABIComponents =
-  objectRegistryRowsComponent
-  ∷ rowMapBindingComponent
+  formalStructureBoundaryComponent :
+    PNFSpectralNumericABIComponent
+
+canonicalPNFSpectralNumericABIComponents :
+  List PNFSpectralNumericABIComponent
+canonicalPNFSpectralNumericABIComponents =
+  rowMapBindingComponent
   ∷ residualEdgeTableComponent
-  ∷ signedAdjacencyABIComponent
-  ∷ degreeRowABIComponent
+  ∷ adjacencyABIComponent
   ∷ laplacianABIComponent
-  ∷ eigenCoordinateABIComponent
+  ∷ eigenSpectralCoordinateABIComponent
   ∷ gemvPayloadComponent
-  ∷ parityHashComponent
   ∷ rebuildWitnessComponent
-  ∷ admissionGateComponent
-  ∷ numericNonAuthorityComponent
+  ∷ admissionRuleComponent
+  ∷ authorityBoundaryLemmaComponent
+  ∷ formalStructureBoundaryComponent
   ∷ []
 
-------------------------------------------------------------------------
--- Runtime ABI vocabulary.
+pnfSpectralNumericABIStatement : String
+pnfSpectralNumericABIStatement =
+  "PNF spectral numeric ABI surfaces remain candidate-only. Row-map binding, residual edges, adjacency, Laplacian, spectral coordinates, GEMV payloads, and rebuild witnesses are materialized as typed structural records; they do not promote truth, support, admissibility, or runtime authority."
 
-data NumericDType : Set where
-  float32DType :
-    NumericDType
+pnfSpectralNumericABIBoundaryStatement : String
+pnfSpectralNumericABIBoundaryStatement =
+  "The numeric ABI is a fail-closed intake surface only. Candidate-only rows, citation/no-artifact boundaries, and formal authority boundaries remain false until a separate promotion artifact exists."
 
-  float64DType :
-    NumericDType
+data PNFSpectralNumericABIPromotion : Set where
 
-  integerFixtureDType :
-    NumericDType
-
-data NumericArrayKind : Set where
-  gemvMatrixA :
-    NumericArrayKind
-
-  gemvInputVectorZ :
-    NumericArrayKind
-
-  gemvOutputVectorB :
-    NumericArrayKind
-
-  signedAdjacencyMatrixW :
-    NumericArrayKind
-
-  diagonalDegreeMatrixD :
-    NumericArrayKind
-
-  laplacianMatrixL :
-    NumericArrayKind
-
-  eigenvalueVectorLambda :
-    NumericArrayKind
-
-  eigenvectorMatrixU :
-    NumericArrayKind
-
-  spectralCoordinateMatrixPhi :
-    NumericArrayKind
-
-data NumericMaterializationKind : Set where
-  gemvMaterialization :
-    NumericMaterializationKind
-
-  signedAdjacencyMaterialization :
-    NumericMaterializationKind
-
-  laplacianMaterialization :
-    NumericMaterializationKind
-
-  eigenCoordinateMaterialization :
-    NumericMaterializationKind
-
-  fullSpectralPayloadMaterialization :
-    NumericMaterializationKind
-
-record NumericArrayDescriptor : Set where
-  constructor numericArrayDescriptor
-  field
-    arrayKind :
-      NumericArrayKind
-
-    dtype :
-      NumericDType
-
-    rowCount :
-      Nat
-
-    columnCount :
-      Nat
-
-    arrayProfile :
-      String
-
-    dtypeBoundByReceipt :
-      Bool
-
-    shapeBoundByReceipt :
-      Bool
-
-open NumericArrayDescriptor public
-
-record GraphVersionBinding : Set where
-  constructor graphVersionBinding
-  field
-    graphVersion :
-      String
-
-    registryHash :
-      Registry.VersionHash
-
-    graphVersionBindsRegistry :
-      Bool
-
-    graphVersionBindsEdges :
-      Bool
-
-    graphVersionBindsCoordinates :
-      Bool
-
-open GraphVersionBinding public
-
-record ParityHashBinding : Set where
-  constructor parityHashBinding
-  field
-    parityHash :
-      String
-
-    hashAlgorithm :
-      Registry.HashAlgorithm
-
-    hashBindsSchema :
-      Bool
-
-    hashBindsDType :
-      Bool
-
-    hashBindsArrays :
-      Bool
-
-    hashBindsRowMap :
-      Bool
-
-    hashBindsReceipts :
-      Bool
-
-    hashBindsGraphVersion :
-      Bool
-
-    hashCarriesTruthAuthority :
-      Bool
-
-open ParityHashBinding public
+pnfSpectralNumericABIPromotionImpossible :
+  PNFSpectralNumericABIPromotion →
+  ⊥
+pnfSpectralNumericABIPromotionImpossible ()
 
 ------------------------------------------------------------------------
--- Row-map and object-registry binding.
+-- Row-map binding.
 
-record ReceiptIdBinding : Set where
-  constructor receiptIdBinding
+record PNFRowMapBinding : Set where
+  constructor pnfRowMapBinding
   field
-    receiptId :
+    rowMapLabel :
       String
 
-    receiptObject :
-      Vector.ObjectRef
+    rowMapOwner :
+      String
 
-    receiptRegistryRow :
-      Registry.ObjectRegistryRow
+    rowMapSurface :
+      String
 
-    receiptBindsObject :
+    rowMap :
+      Rebuild.SpectralCoordinateMapRow
+
+    rowMapIsCanonical :
+      rowMap ≡ Rebuild.canonicalSpectralCoordinateMapRow
+
+    rowMapWitness :
+      Rebuild.CoordinateRebuildabilityWitness
+
+    rowMapWitnessIsCanonical :
+      rowMapWitness ≡ Rebuild.canonicalRebuildabilityWitness
+
+    rowMapRegistryPayload :
+      Rebuild.RegistryPayload
+
+    rowMapRegistryPayloadIsCanonical :
+      rowMapRegistryPayload ≡ Rebuild.canonicalRegistryPayload
+
+    rowMapCoordinate :
+      Vector.VectorCoordinate
+
+    rowMapCoordinateIsWitnessCoordinate :
+      rowMapCoordinate ≡ Rebuild.coordinate rowMapWitness
+
+    rowMapCandidateOnly :
       Bool
 
-    receiptBindsCurrentVersion :
+    rowMapCandidateOnlyIsTrue :
+      rowMapCandidateOnly ≡ true
+
+    rowMapTruthAuthority :
       Bool
 
-open ReceiptIdBinding public
+    rowMapTruthAuthorityIsFalse :
+      rowMapTruthAuthority ≡ false
 
-record RowMapBinding : Set where
-  constructor rowMapBinding
-  field
-    rowIndex :
-      Nat
-
-    rowObject :
-      Vector.ObjectRef
-
-    rowRegistry :
-      Registry.ObjectRegistryRow
-
-    rowObjectHash :
-      Registry.VersionHash
-
-    rowReceipt :
-      ReceiptIdBinding
-
-    rowGraphVersion :
-      GraphVersionBinding
-
-    rowMapSound :
+    rowMapSupportAuthority :
       Bool
 
-    rowRegistryAdmissible :
+    rowMapSupportAuthorityIsFalse :
+      rowMapSupportAuthority ≡ false
+
+    rowMapAdmissibilityAuthority :
       Bool
 
-    rowCandidateMaterialization :
+    rowMapAdmissibilityAuthorityIsFalse :
+      rowMapAdmissibilityAuthority ≡ false
+
+    rowMapRuntimeAuthority :
       Bool
 
-    rowObjectTruthAuthority :
+    rowMapRuntimeAuthorityIsFalse :
+      rowMapRuntimeAuthority ≡ false
+
+    rowMapPromoted :
       Bool
 
-open RowMapBinding public
+    rowMapPromotedIsFalse :
+      rowMapPromoted ≡ false
 
-rowMapSoundCandidateOnly :
-  ∀ row →
-  rowMapSound row ≡ true →
-  rowCandidateMaterialization row ≡ true →
-  rowObjectTruthAuthority row ≡ false →
-  Set
-rowMapSoundCandidateOnly _ _ _ _ =
-  Structure.FormalStructureAuthorityBoundary
+open PNFRowMapBinding public
+
+canonicalPNFRowMapBinding :
+  PNFRowMapBinding
+canonicalPNFRowMapBinding =
+  pnfRowMapBinding
+    "pnf row-map binding"
+    "DASHI.Interop.PNFSpectralNumericABICore"
+    "row-map materialization for a rebuildable spectral coordinate"
+    Rebuild.canonicalSpectralCoordinateMapRow
+    refl
+    Rebuild.canonicalRebuildabilityWitness
+    refl
+    Rebuild.canonicalRegistryPayload
+    refl
+    (Rebuild.coordinate Rebuild.canonicalRebuildabilityWitness)
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+
+canonicalPNFRowMapBindingIsCanonical :
+  rowMap canonicalPNFRowMapBinding ≡ Rebuild.canonicalSpectralCoordinateMapRow
+canonicalPNFRowMapBindingIsCanonical =
+  refl
 
 ------------------------------------------------------------------------
--- Residual edge table and signed adjacency ABI.
+-- Residual edge table ABI.
 
-record ResidualEdgeTableRow : Set where
-  constructor residualEdgeTableRow
+record PNFResidualEdgeTableRow : Set where
+  constructor pnfResidualEdgeTableRow
   field
-    edgeRowIndex :
-      Nat
+    residualEdgeSource :
+      Graph.PNFGraphVertex
 
-    edgeSourceRow :
-      RowMapBinding
+    residualEdgeTarget :
+      Graph.PNFGraphVertex
 
-    edgeTargetRow :
-      RowMapBinding
-
-    edgeKind :
-      Graph.PNFGraphEdgeKind
-
-    edgeResidualLevel :
+    residualEdgeLevel :
       Residual.ResidualLevel
 
-    edgeWeight :
+    residualEdgeSignedWeight :
       Graph.SignedResidualWeight
 
-    edgeWeightMatchesResidual :
-      edgeWeight ≡ Graph.residualSignedWeight edgeResidualLevel
+    residualEdgeSignedWeightIsResidual :
+      residualEdgeSignedWeight
+      ≡
+      Graph.residualSignedWeight residualEdgeLevel
 
-    edgeReceipt :
-      ReceiptIdBinding
-
-    edgeRowSound :
+    residualEdgeCandidateOnly :
       Bool
 
-    edgeCandidateMaterialization :
+    residualEdgeCandidateOnlyIsTrue :
+      residualEdgeCandidateOnly ≡ true
+
+    residualEdgeTruthAuthority :
       Bool
 
-    edgeTruthAuthority :
+    residualEdgeTruthAuthorityIsFalse :
+      residualEdgeTruthAuthority ≡ false
+
+    residualEdgeSupportAuthority :
       Bool
 
-open ResidualEdgeTableRow public
+    residualEdgeSupportAuthorityIsFalse :
+      residualEdgeSupportAuthority ≡ false
 
-mkResidualEdgeTableRow :
-  Nat →
-  RowMapBinding →
-  RowMapBinding →
-  Graph.PNFGraphEdgeKind →
-  Residual.ResidualLevel →
-  ReceiptIdBinding →
-  ResidualEdgeTableRow
-mkResidualEdgeTableRow ix source target kind residual receipt =
-  residualEdgeTableRow
-    ix
-    source
-    target
-    kind
-    residual
-    (Graph.residualSignedWeight residual)
+    residualEdgeAdmissibilityAuthority :
+      Bool
+
+    residualEdgeAdmissibilityAuthorityIsFalse :
+      residualEdgeAdmissibilityAuthority ≡ false
+
+    residualEdgeRuntimeAuthority :
+      Bool
+
+    residualEdgeRuntimeAuthorityIsFalse :
+      residualEdgeRuntimeAuthority ≡ false
+
+open PNFResidualEdgeTableRow public
+
+canonicalPNFResidualEdgeTableRow :
+  PNFResidualEdgeTableRow
+canonicalPNFResidualEdgeTableRow =
+  pnfResidualEdgeTableRow
+    (Rebuild.adjacencySource Rebuild.canonicalSignedAdjacencyRow)
+    (Rebuild.adjacencyTarget Rebuild.canonicalSignedAdjacencyRow)
+    (Rebuild.residualLevel Rebuild.canonicalSignedAdjacencyRow)
+    (Rebuild.signedWeight Rebuild.canonicalSignedAdjacencyRow)
     refl
-    receipt
     true
-    true
+    refl
     false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
 
-record SignedAdjacencyABI : Set where
-  constructor signedAdjacencyABI
+record PNFResidualEdgeTableABI : Set where
+  constructor pnfResidualEdgeTableABI
   field
-    adjacencyDescriptor :
-      NumericArrayDescriptor
+    residualEdgeTableLabel :
+      String
+
+    residualEdgeTableOwner :
+      String
+
+    residualEdgeTableSurface :
+      String
+
+    residualEdgeTableRows :
+      List PNFResidualEdgeTableRow
+
+    residualEdgeTableRowCount :
+      Nat
+
+    residualEdgeTableRowCountIsCanonical :
+      residualEdgeTableRowCount ≡ listCount residualEdgeTableRows
+
+    residualEdgeTableCandidateOnly :
+      Bool
+
+    residualEdgeTableCandidateOnlyIsTrue :
+      residualEdgeTableCandidateOnly ≡ true
+
+    residualEdgeTablePromoted :
+      Bool
+
+    residualEdgeTablePromotedIsFalse :
+      residualEdgeTablePromoted ≡ false
+
+    residualEdgeTableTruthAuthority :
+      Bool
+
+    residualEdgeTableTruthAuthorityIsFalse :
+      residualEdgeTableTruthAuthority ≡ false
+
+    residualEdgeTableSupportAuthority :
+      Bool
+
+    residualEdgeTableSupportAuthorityIsFalse :
+      residualEdgeTableSupportAuthority ≡ false
+
+    residualEdgeTableAdmissibilityAuthority :
+      Bool
+
+    residualEdgeTableAdmissibilityAuthorityIsFalse :
+      residualEdgeTableAdmissibilityAuthority ≡ false
+
+    residualEdgeTableRuntimeAuthority :
+      Bool
+
+    residualEdgeTableRuntimeAuthorityIsFalse :
+      residualEdgeTableRuntimeAuthority ≡ false
+
+    residualEdgeTableStatement :
+      String
+
+open PNFResidualEdgeTableABI public
+
+canonicalPNFResidualEdgeTableABI :
+  PNFResidualEdgeTableABI
+canonicalPNFResidualEdgeTableABI =
+  pnfResidualEdgeTableABI
+    "pnf residual edge table ABI"
+    "DASHI.Interop.PNFSpectralNumericABICore"
+    "residual edge table materialization for signed adjacency rows"
+    (canonicalPNFResidualEdgeTableRow ∷ [])
+    1
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    "Residual edge rows are candidate rows only; they are not runtime truth or support."
+
+------------------------------------------------------------------------
+-- Adjacency ABI.
+
+record PNFAdjacencyABI : Set where
+  constructor pnfAdjacencyABI
+  field
+    adjacencyLabel :
+      String
+
+    adjacencyOwner :
+      String
+
+    adjacencySurface :
+      String
 
     adjacencyRows :
       List Rebuild.SignedAdjacencyRow
 
-    adjacencyEdgeRows :
-      List ResidualEdgeTableRow
-
-    adjacencyRowMap :
-      List RowMapBinding
-
-    adjacencyColumnMap :
-      List RowMapBinding
-
-    adjacencyReceipt :
-      ReceiptIdBinding
-
-    adjacencyGraphVersion :
-      GraphVersionBinding
-
-    adjacencyParityHash :
-      ParityHashBinding
-
-    adjacencyABISound :
-      Bool
-
-    candidateSignedGraphMaterialization :
-      Bool
-
-    semanticGraphAuthority :
-      Bool
-
-open SignedAdjacencyABI public
-
-adjacencyABICandidateOnly :
-  ∀ abi →
-  adjacencyABISound abi ≡ true →
-  candidateSignedGraphMaterialization abi ≡ true →
-  semanticGraphAuthority abi ≡ false →
-  Set
-adjacencyABICandidateOnly _ _ _ _ =
-  Structure.FormalStructureAuthorityBoundary
-
-------------------------------------------------------------------------
--- Degree rows and Laplacian ABI.
-
-record DegreeRowABI : Set where
-  constructor degreeRowABI
-  field
-    degreeRowIndex :
+    adjacencyRowCount :
       Nat
 
-    degreeRowMap :
-      RowMapBinding
+    adjacencyRowCountIsCanonical :
+      adjacencyRowCount ≡ listCount adjacencyRows
 
-    degreeRow :
-      Rebuild.AbsoluteDegreeOperatorRow
+    adjacencyDegreeRows :
+      List Rebuild.AbsoluteDegreeOperatorRow
 
-    signedAdjacencySource :
-      SignedAdjacencyABI
+    adjacencyDegreeRowCount :
+      Nat
 
-    degreeReceipt :
-      ReceiptIdBinding
+    adjacencyDegreeRowCountIsCanonical :
+      adjacencyDegreeRowCount ≡ listCount adjacencyDegreeRows
 
-    degreeBound :
+    adjacencyRowMapBinding :
+      PNFRowMapBinding
+
+    adjacencyRowMapBindingIsCanonical :
+      adjacencyRowMapBinding ≡ canonicalPNFRowMapBinding
+
+    adjacencyCandidateOnly :
       Bool
 
-    degreeCandidateMaterialization :
+    adjacencyCandidateOnlyIsTrue :
+      adjacencyCandidateOnly ≡ true
+
+    adjacencyTruthAuthority :
       Bool
 
-    importanceAuthority :
+    adjacencyTruthAuthorityIsFalse :
+      adjacencyTruthAuthority ≡ false
+
+    adjacencySupportAuthority :
       Bool
 
-open DegreeRowABI public
+    adjacencySupportAuthorityIsFalse :
+      adjacencySupportAuthority ≡ false
 
-record LaplacianABI : Set where
-  constructor laplacianABI
+    adjacencyAdmissibilityAuthority :
+      Bool
+
+    adjacencyAdmissibilityAuthorityIsFalse :
+      adjacencyAdmissibilityAuthority ≡ false
+
+    adjacencyRuntimeAuthority :
+      Bool
+
+    adjacencyRuntimeAuthorityIsFalse :
+      adjacencyRuntimeAuthority ≡ false
+
+    adjacencyStatement :
+      String
+
+open PNFAdjacencyABI public
+
+canonicalPNFAdjacencyABI :
+  PNFAdjacencyABI
+canonicalPNFAdjacencyABI =
+  pnfAdjacencyABI
+    "pnf adjacency ABI"
+    "DASHI.Interop.PNFSpectralNumericABICore"
+    "signed adjacency and absolute-degree materialization"
+    (Rebuild.canonicalSignedAdjacencyRow ∷ [])
+    1
+    refl
+    (Rebuild.canonicalAbsoluteDegreeOperatorRow ∷ [])
+    1
+    refl
+    canonicalPNFRowMapBinding
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    "Adjacency is a candidate materialization surface only."
+
+------------------------------------------------------------------------
+-- Laplacian ABI.
+
+record PNFLaplacianABI : Set where
+  constructor pnfLaplacianABI
   field
-    adjacency :
-      SignedAdjacencyABI
+    laplacianLabel :
+      String
 
-    degreeDescriptor :
-      NumericArrayDescriptor
-
-    laplacianDescriptor :
-      NumericArrayDescriptor
-
-    degreeRows :
-      List DegreeRowABI
-
-    laplacianMethod :
-      Rebuild.SignedLaplacianMethodTag
+    laplacianSurface :
+      String
 
     laplacianReceipt :
-      ReceiptIdBinding
+      ShapeCore.SpectralOperatorShapeReceipt
 
-    laplacianGraphVersion :
-      GraphVersionBinding
+    laplacianReceiptIsCanonical :
+      laplacianReceipt ≡ ShapeCore.canonicalSignedResidualLaplacianReceipt
 
-    laplacianParityHash :
-      ParityHashBinding
-
-    laplacianABISound :
+    laplacianSignedResidualFirstLayer :
       Bool
 
-    candidateLaplacianMaterialization :
+    laplacianSignedResidualFirstLayerIsTrue :
+      laplacianSignedResidualFirstLayer ≡ true
+
+    laplacianHigherHodgeDiagnosticOnly :
       Bool
 
-    supportAuthority :
+    laplacianHigherHodgeDiagnosticOnlyIsTrue :
+      laplacianHigherHodgeDiagnosticOnly ≡ true
+
+    laplacianSemanticTruthPromotion :
       Bool
 
-open LaplacianABI public
+    laplacianSemanticTruthPromotionIsFalse :
+      laplacianSemanticTruthPromotion ≡ false
 
-laplacianABICandidateOnly :
-  ∀ abi →
-  laplacianABISound abi ≡ true →
-  candidateLaplacianMaterialization abi ≡ true →
-  supportAuthority abi ≡ false →
-  Set
-laplacianABICandidateOnly _ _ _ _ =
-  Structure.FormalStructureAuthorityBoundary
+    laplacianRuntimeEvidencePromotion :
+      Bool
+
+    laplacianRuntimeEvidencePromotionIsFalse :
+      laplacianRuntimeEvidencePromotion ≡ false
+
+    laplacianContinuumSpectralPromotion :
+      Bool
+
+    laplacianContinuumSpectralPromotionIsFalse :
+      laplacianContinuumSpectralPromotion ≡ false
+
+    laplacianStatement :
+      String
+
+open PNFLaplacianABI public
+
+canonicalPNFLaplacianABI :
+  PNFLaplacianABI
+canonicalPNFLaplacianABI =
+  pnfLaplacianABI
+    "pnf Laplacian ABI"
+    "DASHI.Interop.PNFSpectralNumericABICore"
+    ShapeCore.canonicalSignedResidualLaplacianReceipt
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    "Signed residual graph Laplacian is the first implementable layer; richer Hodge layers remain diagnostic-only."
 
 ------------------------------------------------------------------------
--- Eigenvector / spectral coordinate ABI.
+-- Rebuild witness and eigen/spectral coordinate ABI.
 
-record EigenCoordinateABI : Set where
-  constructor eigenCoordinateABI
+record PNFRebuildWitness : Set where
+  constructor pnfRebuildWitness
   field
-    eigenvalueDescriptor :
-      NumericArrayDescriptor
-
-    eigenvectorDescriptor :
-      NumericArrayDescriptor
-
-    coordinateDescriptor :
-      NumericArrayDescriptor
-
-    coordinateRows :
-      List Rebuild.SpectralCoordinateMapRow
-
-    coordinateRowMap :
-      List RowMapBinding
-
-    coordinateMethod :
-      Vector.EmbeddingMethodTag
-
-    coordinateLaplacian :
-      LaplacianABI
-
-    coordinateReceipt :
-      ReceiptIdBinding
-
-    coordinateGraphVersion :
-      GraphVersionBinding
-
-    coordinateParityHash :
-      ParityHashBinding
-
-    eigenEquationWitnessSupplied :
-      Bool
-
-    coordinateRowsMatchWitness :
-      Bool
-
-    eigenCoordSound :
-      Bool
-
-    candidateVectorCoordinateMaterialization :
-      Bool
-
-    vectorAuthority :
-      Bool
-
-    evidenceSupportAuthority :
-      Bool
-
-open EigenCoordinateABI public
-
-eigenCoordinateABICandidateOnly :
-  ∀ abi →
-  eigenCoordSound abi ≡ true →
-  candidateVectorCoordinateMaterialization abi ≡ true →
-  vectorAuthority abi ≡ false →
-  evidenceSupportAuthority abi ≡ false →
-  Set
-eigenCoordinateABICandidateOnly _ _ _ _ _ =
-  Structure.FormalStructureAuthorityBoundary
-
-------------------------------------------------------------------------
--- GEMV runtime payload.
-
-record GEMVPayloadABI : Set where
-  constructor gemvPayloadABI
-  field
-    matrixADescriptor :
-      NumericArrayDescriptor
-
-    vectorZDescriptor :
-      NumericArrayDescriptor
-
-    vectorBDescriptor :
-      NumericArrayDescriptor
-
-    gemvRowMap :
-      List RowMapBinding
-
-    gemvReceiptIds :
-      List ReceiptIdBinding
-
-    gemvGraphVersion :
-      GraphVersionBinding
-
-    gemvParityHash :
-      ParityHashBinding
-
-    gemvBound :
-      Bool
-
-    payloadIntegrityCandidate :
-      Bool
-
-    semanticAuthority :
-      Bool
-
-    runtimeAuthority :
-      Bool
-
-open GEMVPayloadABI public
-
-gemvPayloadCandidateOnly :
-  ∀ payload →
-  gemvBound payload ≡ true →
-  payloadIntegrityCandidate payload ≡ true →
-  semanticAuthority payload ≡ false →
-  runtimeAuthority payload ≡ false →
-  Set
-gemvPayloadCandidateOnly _ _ _ _ _ =
-  Structure.FormalStructureAuthorityBoundary
-
-------------------------------------------------------------------------
--- Rebuildability and admission.
-
-record PNFSpectralNumericRebuildWitness : Set where
-  constructor pnfSpectralNumericRebuildWitness
-  field
-    registryRows :
-      List Registry.ObjectRegistryRow
-
-    residualEdgeRows :
-      List ResidualEdgeTableRow
-
-    adjacencyABI :
-      SignedAdjacencyABI
-
-    degreeABI :
-      List DegreeRowABI
-
-    laplacianABIWitness :
-      LaplacianABI
-
-    coordinateABI :
-      EigenCoordinateABI
-
-    gemvABI :
-      GEMVPayloadABI
-
-    coordinateRebuildabilityWitness :
+    rebuildabilityWitness :
       Rebuild.CoordinateRebuildabilityWitness
 
-    registryBound :
-      Bool
+    rebuildabilityWitnessIsCanonical :
+      rebuildabilityWitness ≡ Rebuild.canonicalRebuildabilityWitness
 
-    edgeTableBound :
-      Bool
+    rebuildRegistryPayload :
+      Rebuild.RegistryPayload
 
-    adjacencyBound :
-      Bool
+    rebuildRegistryPayloadIsCanonical :
+      rebuildRegistryPayload ≡ Rebuild.canonicalRegistryPayload
 
-    laplacianBound :
-      Bool
+    rebuildCoordinate :
+      Vector.VectorCoordinate
 
-    coordinateBound :
-      Bool
-
-    parityHashBound :
-      Bool
+    rebuildCoordinateIsRebuilt :
+      rebuildCoordinate ≡ Rebuild.coordinate rebuildabilityWitness
 
     rebuildable :
       Bool
 
-    candidateMaterialization :
+    rebuildableIsTrue :
+      rebuildable ≡ true
+
+    registryPayloadAuthority :
       Bool
 
-    semanticAuthority :
+    registryPayloadAuthorityIsTrue :
+      registryPayloadAuthority ≡ true
+
+    promoted :
       Bool
 
-open PNFSpectralNumericRebuildWitness public
+    promotedIsFalse :
+      promoted ≡ false
 
-rebuildableCandidateOnly :
-  ∀ witness →
-  rebuildable witness ≡ true →
-  candidateMaterialization witness ≡ true →
-  semanticAuthority witness ≡ false →
-  Set
-rebuildableCandidateOnly _ _ _ _ =
-  Structure.FormalStructureAuthorityBoundary
+open PNFRebuildWitness public
 
-record NumericPayloadAdmissionRule : Set where
-  constructor numericPayloadAdmissionRule
+canonicalPNFRebuildWitness :
+  PNFRebuildWitness
+canonicalPNFRebuildWitness =
+  pnfRebuildWitness
+    Rebuild.canonicalRebuildabilityWitness
+    refl
+    Rebuild.canonicalRegistryPayload
+    refl
+    (Rebuild.coordinate Rebuild.canonicalRebuildabilityWitness)
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+
+record PNFEigenSpectralCoordinateABI : Set where
+  constructor pnfEigenSpectralCoordinateABI
   field
-    rebuildWitness :
-      PNFSpectralNumericRebuildWitness
+    spectralLabel :
+      String
 
-    schemaValid :
+    spectralOwner :
+      String
+
+    spectralSurface :
+      String
+
+    spectralMethod :
+      Vector.EmbeddingMethodTag
+
+    spectralMethodIsCanonical :
+      spectralMethod ≡ Vector.pnfSpectralLaplacianV1
+
+    spectralCoordinate :
+      Vector.VectorCoordinate
+
+    spectralCoordinateIsCanonical :
+      spectralCoordinate ≡ Vector.canonicalSampleCoordinate
+
+    spectralObject :
+      Vector.ObjectRef
+
+    spectralObjectIsCanonical :
+      spectralObject ≡ Vector.canonicalSampleObject
+
+    spectralVectorRow :
+      Vector.VectorIndexRow
+
+    spectralVectorRowIsCanonical :
+      spectralVectorRow ≡ Vector.canonicalSampleRow
+
+    spectralCoordinateRow :
+      Rebuild.SpectralCoordinateMapRow
+
+    spectralCoordinateRowIsCanonical :
+      spectralCoordinateRow ≡ Rebuild.canonicalSpectralCoordinateMapRow
+
+    spectralWitness :
+      PNFRebuildWitness
+
+    spectralWitnessIsCanonical :
+      spectralWitness ≡ canonicalPNFRebuildWitness
+
+    spectralCandidateOnly :
       Bool
 
-    registryBoundForAdmission :
+    spectralCandidateOnlyIsTrue :
+      spectralCandidateOnly ≡ true
+
+    spectralTruthAuthority :
       Bool
 
-    graphVersionBound :
+    spectralTruthAuthorityIsFalse :
+      spectralTruthAuthority ≡ false
+
+    spectralSupportAuthority :
       Bool
 
-    receiptCoverage :
+    spectralSupportAuthorityIsFalse :
+      spectralSupportAuthority ≡ false
+
+    spectralAdmissibilityAuthority :
       Bool
 
-    parityHashBoundForAdmission :
-      Bool
+    spectralAdmissibilityAuthorityIsFalse :
+      spectralAdmissibilityAuthority ≡ false
 
-    rebuildableForAdmission :
-      Bool
+    spectralStatement :
+      String
 
-    admitNumericPayload :
-      Bool
+open PNFEigenSpectralCoordinateABI public
 
-    candidateRuntimeArtifact :
-      Bool
-
-    semanticAuthorityPromoted :
-      Bool
-
-    evidenceAuthorityPromoted :
-      Bool
-
-    tradingAuthorityPromoted :
-      Bool
-
-    securityAuthorityPromoted :
-      Bool
-
-    runtimeDeploymentAuthorityPromoted :
-      Bool
-
-open NumericPayloadAdmissionRule public
-
-admittedPayloadCandidateOnly :
-  ∀ rule →
-  admitNumericPayload rule ≡ true →
-  candidateRuntimeArtifact rule ≡ true →
-  semanticAuthorityPromoted rule ≡ false →
-  evidenceAuthorityPromoted rule ≡ false →
-  tradingAuthorityPromoted rule ≡ false →
-  securityAuthorityPromoted rule ≡ false →
-  runtimeDeploymentAuthorityPromoted rule ≡ false →
-  Set
-admittedPayloadCandidateOnly _ _ _ _ _ _ _ _ =
-  Structure.FormalStructureAuthorityBoundary
-
-admissionRequiresSchema :
-  ∀ rule →
-  admitNumericPayload rule ≡ true →
-  schemaValid rule ≡ true →
-  Set
-admissionRequiresSchema _ _ _ =
-  Structure.FormalStructureLawKind
-
-admissionRequiresRebuildability :
-  ∀ rule →
-  admitNumericPayload rule ≡ true →
-  rebuildableForAdmission rule ≡ true →
-  Set
-admissionRequiresRebuildability _ _ _ =
-  Structure.FormalStructureLawKind
+canonicalPNFEigenSpectralCoordinateABI :
+  PNFEigenSpectralCoordinateABI
+canonicalPNFEigenSpectralCoordinateABI =
+  pnfEigenSpectralCoordinateABI
+    "pnf eigen-spectral coordinate ABI"
+    "DASHI.Interop.PNFSpectralNumericABICore"
+    "spectral coordinate materialization from a rebuild witness"
+    Vector.pnfSpectralLaplacianV1
+    refl
+    Vector.canonicalSampleCoordinate
+    refl
+    Vector.canonicalSampleObject
+    refl
+    Vector.canonicalSampleRow
+    refl
+    Rebuild.canonicalSpectralCoordinateMapRow
+    refl
+    canonicalPNFRebuildWitness
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    "Eigen/spectral coordinates are candidate-only ABI rows."
 
 ------------------------------------------------------------------------
--- Symbolic-relational bridge and authority impossibility.
+-- GEMV payload.
 
-record SymbolicPNFNumericMaterialization : Set where
-  constructor symbolicPNFNumericMaterialization
+record PNFGEMVPayload : Set where
+  constructor pnfGEMVPayload
   field
-    symbolicObjects :
-      List Core.PredicateObjectRef
+    gemvLabel :
+      String
 
-    symbolicResidualEdges :
-      List Graph.PNFGraphEdge
+    gemvOwner :
+      String
 
-    symbolicWeightedGraph :
-      Graph.WeightedPNFGraph
+    gemvSurface :
+      String
 
-    numericPayload :
-      PNFSpectralNumericRebuildWitness
+    gemvInputVectorRow :
+      Vector.VectorIndexRow
 
-    admission :
-      NumericPayloadAdmissionRule
+    gemvInputVectorRowIsCanonical :
+      gemvInputVectorRow ≡ Vector.canonicalSampleRow
 
-    materializesSymbolicPNF :
+    gemvInputCandidate :
+      Vector.CandidateRef
+
+    gemvInputCandidateIsCanonical :
+      gemvInputCandidate ≡ Vector.canonicalSampleCandidate
+
+    gemvProposalRow :
+      Vector.VectorArithmeticProposalRow
+
+    gemvProposalRowIsCanonical :
+      gemvProposalRow ≡ Vector.canonicalArithmeticProposalRow
+
+    gemvGraphProximity :
+      Vector.PNFGraphOperatorProximity
+
+    gemvGraphProximityIsCanonical :
+      gemvGraphProximity ≡ Vector.canonicalGraphOperatorProximity
+
+    gemvCandidateOnly :
       Bool
 
-    materializationIsCandidate :
+    gemvCandidateOnlyIsTrue :
+      gemvCandidateOnly ≡ true
+
+    gemvTruthAuthority :
       Bool
 
-    semanticTruth :
+    gemvTruthAuthorityIsFalse :
+      gemvTruthAuthority ≡ false
+
+    gemvSupportAuthority :
       Bool
 
-    admissibleEvidenceAuthority :
+    gemvSupportAuthorityIsFalse :
+      gemvSupportAuthority ≡ false
+
+    gemvAdmissibilityAuthority :
       Bool
 
-    runtimeAuthority :
+    gemvAdmissibilityAuthorityIsFalse :
+      gemvAdmissibilityAuthority ≡ false
+
+    gemvRuntimeAuthority :
       Bool
 
-open SymbolicPNFNumericMaterialization public
+    gemvRuntimeAuthorityIsFalse :
+      gemvRuntimeAuthority ≡ false
 
-materializationCandidateOnly :
-  ∀ bridge →
-  materializesSymbolicPNF bridge ≡ true →
-  materializationIsCandidate bridge ≡ true →
-  semanticTruth bridge ≡ false →
-  admissibleEvidenceAuthority bridge ≡ false →
-  runtimeAuthority bridge ≡ false →
-  Set
-materializationCandidateOnly _ _ _ _ _ _ =
-  Structure.FormalStructureAuthorityBoundary
+    gemvStatement :
+      String
 
-data NumericPayloadPromotion : Set where
+open PNFGEMVPayload public
 
-numericPayloadPromotionImpossible :
-  NumericPayloadPromotion →
-  ⊥
-numericPayloadPromotionImpossible ()
+gemvDType : String
+gemvDType =
+  "float32"
 
-numericArraysDoNotCreateAuthority : String
-numericArraysDoNotCreateAuthority =
-  "Numeric ABI payloads only materialize an already typed symbolic PNF graph under row-map, receipt, graph-version, parity-hash, and rebuildability witnesses. Arrays, GEMV outputs, Laplacian rows, eigenvectors, vector proximity, and parity hashes do not create semantic, evidence, trading, security, legal, clinical, or deployment authority."
+gemvRows : Nat
+gemvRows =
+  1
 
+gemvCols : Nat
+gemvCols =
+  1
+
+gemvMatrixA : String
+gemvMatrixA =
+  "runtime field A: matrix payload bound by PNFGEMVPayload"
+
+gemvVectorZ : String
+gemvVectorZ =
+  "runtime field z: input vector payload bound by PNFGEMVPayload"
+
+gemvVectorB : String
+gemvVectorB =
+  "runtime field b: output vector payload bound by PNFGEMVPayload"
+
+gemvParityHash : String
+gemvParityHash =
+  "runtime field parity_hash: integrity candidate bound by PNFGEMVPayload"
+
+canonicalPNFGEMVPayload :
+  PNFGEMVPayload
+canonicalPNFGEMVPayload =
+  pnfGEMVPayload
+    "pnf GEMV payload"
+    "DASHI.Interop.PNFSpectralNumericABICore"
+    "candidate-only GEMV payload over spectral rows"
+    Vector.canonicalSampleRow
+    refl
+    Vector.canonicalSampleCandidate
+    refl
+    Vector.canonicalArithmeticProposalRow
+    refl
+    Vector.canonicalGraphOperatorProximity
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    "GEMV payload stays in the candidate and proposal lanes."
+
+------------------------------------------------------------------------
+-- Admission rule.
+
+record PNFAdmissionRule : Set where
+  constructor pnfAdmissionRule
+  field
+    admissionLabel :
+      String
+
+    admissionRow :
+      CandidateOnly.CandidateOnlyRow
+
+    admissionReceipt :
+      CandidateOnly.CandidateOnlyReceipt admissionRow
+
+    admissionAuthorityBundle :
+      AuthorityNA.AuthorityNonPromotionBundle
+
+    admissionFormalBoundary :
+      Formal.FormalStructureAuthorityBoundary
+
+    admissionCitationBoundary :
+      Boundary.CitationAuthorityNoArtifact
+
+    admissionCandidateOnlyIsTrue :
+      CandidateOnly.candidateOnly admissionRow ≡ true
+
+    admissionPromotedIsFalse :
+      CandidateOnly.promoted admissionRow ≡ false
+
+    admissionNoTruthAuthority :
+      CandidateOnly.carriesTruthAuthority admissionRow ≡ false
+
+    admissionNoSupportAuthority :
+      CandidateOnly.carriesSupportAuthority admissionRow ≡ false
+
+    admissionNoAdmissibilityAuthority :
+      CandidateOnly.carriesAdmissibilityAuthority admissionRow ≡ false
+
+    admissionNoTradingAuthority :
+      CandidateOnly.carriesTradingAuthority admissionRow ≡ false
+
+    admissionNoRuntimeAuthority :
+      CandidateOnly.carriesRuntimeAuthority admissionRow ≡ false
+
+    admissionNoTheoremAuthority :
+      CandidateOnly.carriesTheoremAuthority admissionRow ≡ false
+
+    admissionAuthorityBundlePromotesAnyAuthority :
+      AuthorityNA.promotesAnyAuthority admissionAuthorityBundle ≡ false
+
+    admissionStatement :
+      String
+
+open PNFAdmissionRule public
+
+canonicalPNFAdmissionCandidateRow :
+  CandidateOnly.CandidateOnlyRow
+canonicalPNFAdmissionCandidateRow =
+  CandidateOnly.mkCandidateOnlyRow
+    "pnf spectral numeric ABI admission candidate"
+    "DASHI.Interop.PNFSpectralNumericABICore"
+    "pnf numeric abi admission"
+    CandidateOnly.rowCandidateKind
+    CandidateOnly.rowCandidateOnlyStatus
+    "admission remains candidate-only"
+    "promotion requires a separate receipt"
+
+canonicalPNFAdmissionReceipt :
+  CandidateOnly.CandidateOnlyReceipt canonicalPNFAdmissionCandidateRow
+canonicalPNFAdmissionReceipt =
+  CandidateOnly.canonicalCandidateOnlyReceipt
+    canonicalPNFAdmissionCandidateRow
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalPNFAuthorityBundle :
+  AuthorityNA.AuthorityNonPromotionBundle
+canonicalPNFAuthorityBundle =
+  AuthorityNA.mkClosedAuthorityNonPromotionBundle
+    "pnf spectral numeric ABI authority bundle"
+
+canonicalPNFAdmissionCitationBoundary :
+  Boundary.CitationAuthorityNoArtifact
+canonicalPNFAdmissionCitationBoundary =
+  record
+    { citationBoundary =
+        record
+          { authorityKind = Boundary.CitationAuthority
+          ; authorityKindMatches = refl
+          ; recordIdentifier =
+              "DASHI.Interop.PNFSpectralNumericABICore"
+          ; citation =
+              "pnf spectral numeric abi candidate-only citation"
+          ; authorityAccepted = true
+          ; artifactAuthority = false
+          ; machineReadableArtifactPresent = false
+          ; notes =
+              "candidate-only numeric ABI boundary" ∷ []
+          }
+    ; citationAuthorityAccepted = refl
+    ; artifactAuthorityIsFalse = refl
+    ; machineReadableArtifactPresentIsFalse = refl
+    }
+
+canonicalPNFAdmissionRule :
+  PNFAdmissionRule
+canonicalPNFAdmissionRule =
+  pnfAdmissionRule
+    "pnf spectral numeric ABI admission rule"
+    canonicalPNFAdmissionCandidateRow
+    canonicalPNFAdmissionReceipt
+    canonicalPNFAuthorityBundle
+    Formal.canonicalFormalStructureAuthorityBoundary
+    canonicalPNFAdmissionCitationBoundary
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    "Admission remains candidate-only and fails closed."
+
+------------------------------------------------------------------------
+-- Authority-boundary lemmas.
+
+record PNFAuthorityBoundaryLemmas : Set where
+  constructor pnfAuthorityBoundaryLemmas
+  field
+    formalBoundary :
+      Formal.FormalStructureAuthorityBoundary
+
+    formalRepresentationAuthorityIsFalse :
+      Formal.FormalStructureAuthorityBoundary.representationAuthority formalBoundary
+      ≡
+      false
+
+    formalStatisticAuthorityIsFalse :
+      Formal.FormalStructureAuthorityBoundary.statisticAuthority formalBoundary
+      ≡
+      false
+
+    formalProjectionAuthorityIsFalse :
+      Formal.FormalStructureAuthorityBoundary.projectionAuthority formalBoundary
+      ≡
+      false
+
+    formalDigestAuthorityIsFalse :
+      Formal.FormalStructureAuthorityBoundary.digestAuthority formalBoundary
+      ≡
+      false
+
+    formalCoordinateModelAuthorityIsFalse :
+      Formal.FormalStructureAuthorityBoundary.coordinateModelAuthority
+        formalBoundary
+      ≡
+      false
+
+    formalSemanticAuthorityIsFalse :
+      Formal.FormalStructureAuthorityBoundary.semanticAuthority formalBoundary
+      ≡
+      false
+
+    formalDomainAuthorityIsFalse :
+      Formal.FormalStructureAuthorityBoundary.domainAuthority formalBoundary
+      ≡
+      false
+
+    citationBoundary :
+      Boundary.CitationAuthorityNoArtifact
+
+    citationAuthorityAcceptedIsTrue :
+      Boundary.authorityAccepted (Boundary.citationBoundary citationBoundary)
+      ≡
+      true
+
+    citationArtifactAuthorityIsFalse :
+      Boundary.artifactAuthority (Boundary.citationBoundary citationBoundary)
+      ≡
+      false
+
+    citationMachineReadableArtifactPresentIsFalse :
+      Boundary.machineReadableArtifactPresent
+        (Boundary.citationBoundary citationBoundary)
+      ≡
+      false
+
+    authorityBundle :
+      AuthorityNA.AuthorityNonPromotionBundle
+
+    authorityBundlePromotesAnyAuthorityIsFalse :
+      AuthorityNA.promotesAnyAuthority authorityBundle ≡ false
+
+    authorityKinds :
+      List AuthorityNA.AuthorityKind
+
+    authorityKindsAreCanonical :
+      authorityKinds ≡ AuthorityNA.canonicalAuthorityKinds
+
+open PNFAuthorityBoundaryLemmas public
+
+canonicalPNFAuthorityBoundaryLemmas :
+  PNFAuthorityBoundaryLemmas
+canonicalPNFAuthorityBoundaryLemmas =
+  pnfAuthorityBoundaryLemmas
+    Formal.canonicalFormalStructureAuthorityBoundary
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    canonicalPNFAdmissionCitationBoundary
+    refl
+    refl
+    refl
+    canonicalPNFAuthorityBundle
+    refl
+    AuthorityNA.canonicalAuthorityKinds
+    refl
+
+------------------------------------------------------------------------
+-- Aggregate numeric ABI receipt.
+
+record PNFSpectralNumericABICoreReceipt : Set where
+  constructor pnfSpectralNumericABICoreReceipt
+  field
+    status :
+      PNFSpectralNumericABIStatus
+
+    statusIsCandidateOnly :
+      status ≡ pnfSpectralNumericABICandidateOnlyNoRuntimePromotion
+
+    components :
+      List PNFSpectralNumericABIComponent
+
+    componentsAreCanonical :
+      components ≡ canonicalPNFSpectralNumericABIComponents
+
+    rowMapBinding :
+      PNFRowMapBinding
+
+    rowMapBindingIsCanonical :
+      rowMapBinding ≡ canonicalPNFRowMapBinding
+
+    residualEdgeTable :
+      PNFResidualEdgeTableABI
+
+    residualEdgeTableIsCanonical :
+      residualEdgeTable ≡ canonicalPNFResidualEdgeTableABI
+
+    adjacencyABI :
+      PNFAdjacencyABI
+
+    adjacencyABIIsCanonical :
+      adjacencyABI ≡ canonicalPNFAdjacencyABI
+
+    laplacianABI :
+      PNFLaplacianABI
+
+    laplacianABIIsCanonical :
+      laplacianABI ≡ canonicalPNFLaplacianABI
+
+    eigenSpectralCoordinateABI :
+      PNFEigenSpectralCoordinateABI
+
+    eigenSpectralCoordinateABIIsCanonical :
+      eigenSpectralCoordinateABI ≡ canonicalPNFEigenSpectralCoordinateABI
+
+    gemvPayload :
+      PNFGEMVPayload
+
+    gemvPayloadIsCanonical :
+      gemvPayload ≡ canonicalPNFGEMVPayload
+
+    rebuildWitness :
+      PNFRebuildWitness
+
+    rebuildWitnessIsCanonical :
+      rebuildWitness ≡ canonicalPNFRebuildWitness
+
+    admissionRule :
+      PNFAdmissionRule
+
+    admissionRuleIsCanonical :
+      admissionRule ≡ canonicalPNFAdmissionRule
+
+    authorityBoundaryLemmas :
+      PNFAuthorityBoundaryLemmas
+
+    authorityBoundaryLemmasIsCanonical :
+      authorityBoundaryLemmas ≡ canonicalPNFAuthorityBoundaryLemmas
+
+    candidateOnly :
+      Bool
+
+    candidateOnlyIsTrue :
+      candidateOnly ≡ true
+
+    promoted :
+      Bool
+
+    promotedIsFalse :
+      promoted ≡ false
+
+    statement :
+      String
+
+    statementIsCanonical :
+      statement ≡ pnfSpectralNumericABIStatement
+
+    boundaryStatement :
+      String
+
+    boundaryStatementIsCanonical :
+      boundaryStatement ≡ pnfSpectralNumericABIBoundaryStatement
+
+open PNFSpectralNumericABICoreReceipt public
+
+canonicalPNFSpectralNumericABICoreReceipt :
+  PNFSpectralNumericABICoreReceipt
+canonicalPNFSpectralNumericABICoreReceipt =
+  pnfSpectralNumericABICoreReceipt
+    pnfSpectralNumericABICandidateOnlyNoRuntimePromotion
+    refl
+    canonicalPNFSpectralNumericABIComponents
+    refl
+    canonicalPNFRowMapBinding
+    refl
+    canonicalPNFResidualEdgeTableABI
+    refl
+    canonicalPNFAdjacencyABI
+    refl
+    canonicalPNFLaplacianABI
+    refl
+    canonicalPNFEigenSpectralCoordinateABI
+    refl
+    canonicalPNFGEMVPayload
+    refl
+    canonicalPNFRebuildWitness
+    refl
+    canonicalPNFAdmissionRule
+    refl
+    canonicalPNFAuthorityBoundaryLemmas
+    refl
+    true
+    refl
+    false
+    refl
+    pnfSpectralNumericABIStatement
+    refl
+    pnfSpectralNumericABIBoundaryStatement
+    refl
+
+------------------------------------------------------------------------
+-- Projection lemmas over the canonical receipt.
+
+canonicalPNFSpectralNumericABICoreReceiptStatusIsCandidateOnly :
+  status canonicalPNFSpectralNumericABICoreReceipt
+  ≡
+  pnfSpectralNumericABICandidateOnlyNoRuntimePromotion
+canonicalPNFSpectralNumericABICoreReceiptStatusIsCandidateOnly =
+  refl
+
+canonicalPNFSpectralNumericABICoreReceiptCandidateOnlyIsTrue :
+  candidateOnly canonicalPNFSpectralNumericABICoreReceipt ≡ true
+canonicalPNFSpectralNumericABICoreReceiptCandidateOnlyIsTrue =
+  refl
+
+canonicalPNFSpectralNumericABICoreReceiptPromotedIsFalse :
+  promoted canonicalPNFSpectralNumericABICoreReceipt ≡ false
+canonicalPNFSpectralNumericABICoreReceiptPromotedIsFalse =
+  refl
+
+canonicalPNFRowMapBindingCandidateOnlyIsTrue :
+  rowMapCandidateOnly canonicalPNFRowMapBinding ≡ true
+canonicalPNFRowMapBindingCandidateOnlyIsTrue =
+  refl
+
+canonicalPNFResidualEdgeTableCandidateOnlyIsTrue :
+  residualEdgeTableCandidateOnly canonicalPNFResidualEdgeTableABI ≡ true
+canonicalPNFResidualEdgeTableCandidateOnlyIsTrue =
+  refl
+
+canonicalPNFAdjacencyABICandidateOnlyIsTrue :
+  adjacencyCandidateOnly canonicalPNFAdjacencyABI ≡ true
+canonicalPNFAdjacencyABICandidateOnlyIsTrue =
+  refl
+
+canonicalPNFLaplacianABISemanticTruthPromotionIsFalse :
+  laplacianSemanticTruthPromotion canonicalPNFLaplacianABI ≡ false
+canonicalPNFLaplacianABISemanticTruthPromotionIsFalse =
+  refl
+
+canonicalPNFEigenSpectralCoordinateABICandidateOnlyIsTrue :
+  spectralCandidateOnly canonicalPNFEigenSpectralCoordinateABI ≡ true
+canonicalPNFEigenSpectralCoordinateABICandidateOnlyIsTrue =
+  refl
+
+canonicalPNFGEMVPayloadCandidateOnlyIsTrue :
+  gemvCandidateOnly canonicalPNFGEMVPayload ≡ true
+canonicalPNFGEMVPayloadCandidateOnlyIsTrue =
+  refl
+
+canonicalPNFAdmissionRuleCandidateOnlyIsTrue :
+  CandidateOnly.candidateOnly (admissionRow canonicalPNFAdmissionRule) ≡ true
+canonicalPNFAdmissionRuleCandidateOnlyIsTrue =
+  refl
+
+canonicalPNFAuthorityBoundaryLemmaPromotesAnyAuthorityIsFalse :
+  AuthorityNA.promotesAnyAuthority
+    (authorityBundle canonicalPNFAuthorityBoundaryLemmas)
+  ≡
+  false
+canonicalPNFAuthorityBoundaryLemmaPromotesAnyAuthorityIsFalse =
+  refl

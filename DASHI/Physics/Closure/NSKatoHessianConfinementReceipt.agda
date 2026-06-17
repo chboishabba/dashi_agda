@@ -95,6 +95,10 @@ data NSKatoHessianConfinementShape : Set where
   millerBridgeOpenTheoremCandidateOnlyRecorded : NSKatoHessianConfinementShape
   clayBridgeOpenTheoremCandidateOnlyRecorded : NSKatoHessianConfinementShape
   divergenceMachinePrecisionRecorded : NSKatoHessianConfinementShape
+  calcEEmpiricalProjectionRecorded : NSKatoHessianConfinementShape
+  calcEEmpiricalReceiptRecorded : NSKatoHessianConfinementShape
+  cl1MathematicallyOpenRecorded : NSKatoHessianConfinementShape
+  cl1FailClosedRecorded : NSKatoHessianConfinementShape
 
 canonicalNSKatoHessianConfinementShape : List NSKatoHessianConfinementShape
 canonicalNSKatoHessianConfinementShape =
@@ -121,6 +125,10 @@ canonicalNSKatoHessianConfinementShape =
   ∷ millerBridgeOpenTheoremCandidateOnlyRecorded
   ∷ clayBridgeOpenTheoremCandidateOnlyRecorded
   ∷ divergenceMachinePrecisionRecorded
+  ∷ calcEEmpiricalProjectionRecorded
+  ∷ calcEEmpiricalReceiptRecorded
+  ∷ cl1MathematicallyOpenRecorded
+  ∷ cl1FailClosedRecorded
   ∷ []
 
 data NSKatoHessianConfinementBlocker : Set where
@@ -208,6 +216,97 @@ shapeDivergenceText : String
 shapeDivergenceText =
   "Machine-precision divergence consistency is recorded as fail-closed empirical state."
 
+shapeCalcEEmpiricalProjectionText : String
+shapeCalcEEmpiricalProjectionText =
+  "Calc E is recorded as empirical, non-promoting evidence: rho approx 8.02 at TG N=128 t≈9; Scenario D unsupported in dataset; H_B numerically supported only."
+
+shapeCalcEEmpiricalReceiptText : String
+shapeCalcEEmpiricalReceiptText =
+  "Calc E stays empirical and non-promoting on this receipt surface."
+
+shapeCL1OpenFailClosedText : String
+shapeCL1OpenFailClosedText =
+  "CL1 remains mathematically open and fail-closed; no theorem promotion is claimed."
+
+record NSKatoCalcEEmpiricalProjection : Set where
+  constructor mkNSKatoCalcEEmpiricalProjection
+  field
+    projectionText : String
+    projectionTextIsCanonical :
+      projectionText ≡ shapeCalcEEmpiricalProjectionText
+    rhoApproxText : String
+    rhoApproxTextIsCanonical :
+      rhoApproxText ≡ "rho approx 8.02 at TG N=128 t≈9"
+    scenarioDUnsupportedText : String
+    scenarioDUnsupportedTextIsCanonical :
+      scenarioDUnsupportedText ≡ "Scenario D unsupported in dataset"
+    hBNumericallySupportedOnlyText : String
+    hBNumericallySupportedOnlyTextIsCanonical :
+      hBNumericallySupportedOnlyText ≡ "H_B numerically supported only"
+    empiricalOnly : Bool
+    empiricalOnlyIsTrue :
+      empiricalOnly ≡ true
+    nonPromoting : Bool
+    nonPromotingIsTrue :
+      nonPromoting ≡ true
+
+canonicalNSKatoCalcEEmpiricalProjection :
+  NSKatoCalcEEmpiricalProjection
+canonicalNSKatoCalcEEmpiricalProjection =
+  mkNSKatoCalcEEmpiricalProjection
+    shapeCalcEEmpiricalProjectionText
+    refl
+    "rho approx 8.02 at TG N=128 t≈9"
+    refl
+    "Scenario D unsupported in dataset"
+    refl
+    "H_B numerically supported only"
+    refl
+    true
+    refl
+    true
+    refl
+
+record NSKatoCalcEEmpiricalReceipt : Set where
+  constructor mkNSKatoCalcEEmpiricalReceipt
+  field
+    projection :
+      NSKatoCalcEEmpiricalProjection
+    projectionIsCanonical :
+      projection ≡ canonicalNSKatoCalcEEmpiricalProjection
+    calcEEmpiricalReceiptText : String
+    calcEEmpiricalReceiptTextIsCanonical :
+      calcEEmpiricalReceiptText ≡ shapeCalcEEmpiricalReceiptText
+    cl1OpenFailClosedText : String
+    cl1OpenFailClosedTextIsCanonical :
+      cl1OpenFailClosedText ≡ shapeCL1OpenFailClosedText
+    cl1MathematicallyOpen : Bool
+    cl1MathematicallyOpenIsTrue :
+      cl1MathematicallyOpen ≡ true
+    cl1FailClosed : Bool
+    cl1FailClosedIsTrue :
+      cl1FailClosed ≡ true
+    calcEPromoted : Bool
+    calcEPromotedIsFalse :
+      calcEPromoted ≡ false
+
+canonicalNSKatoCalcEEmpiricalReceipt :
+  NSKatoCalcEEmpiricalReceipt
+canonicalNSKatoCalcEEmpiricalReceipt =
+  mkNSKatoCalcEEmpiricalReceipt
+    canonicalNSKatoCalcEEmpiricalProjection
+    refl
+    shapeCalcEEmpiricalReceiptText
+    refl
+    shapeCL1OpenFailClosedText
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+
 record NSKatoHessianAggregateStats : Set where
   constructor mkNSKatoHessianAggregateStats
   field
@@ -287,22 +386,22 @@ record NSKatoHessianConfinementORCSLPGF : Set where
       "R: Record Hess(λ2) PSD-at-minimum, the diagonal identity witness, the signed gap split, the conditional gap-collapse-to-Hessian-blow-up route, the H5/H6 curvature distinction, full 3D Hessian geometry, aggregate N=128 stats, and explicit fail-closed gate rows."
     C : String
     CIsCanonical : C ≡
-      "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, and empirical N=128 aggregate metadata only."
+      "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, empirical N=128 aggregate metadata, and Calc E/CL1 fail-closed evidence only."
     S : String
     SIsCanonical : S ≡
-      "S: Hessian PSD at core, the diagonal identity witness, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, and divergence machine-precision are recorded."
+      "S: Hessian PSD at core, the diagonal identity witness, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, Calc E empirical projection/receipt evidence, CL1 open bookkeeping, and divergence machine-precision are recorded."
     L : String
     LIsCanonical : L ≡
-      "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/Clay bridge surfaces -> keep all promotions fail-closed."
+      "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/Clay bridge surfaces plus Calc E empirical evidence -> keep CL1 open and all promotions fail-closed."
     P : String
     PIsCanonical : P ≡
-      "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, or Clay bridge claim from this receipt."
+      "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, Clay bridge claim, Calc E evidence, or CL1 open bookkeeping from this receipt."
     G : String
     GIsCanonical : G ≡
-      "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
+      "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, Calc E remains empirical and non-promoting, CL1 stays mathematically open and fail-closed, no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
     F : String
     FIsCanonical : F ≡
-      "F: Fail-closed due to explicit gate rows, the corrected sign convention, and the open Clay bridge blocker; proof obligations remain external to this row."
+      "F: Fail-closed due to explicit gate rows, the corrected sign convention, the open Clay bridge blocker, and the open CL1 bookkeeping; proof obligations remain external to this row."
 
 data NSKatoHessianConfinementPromotion : Set where
 
@@ -596,6 +695,18 @@ record NSKatoHessianConfinementReceipt : Set where
       String
     divergenceTextRecordedIsCanonical :
       divergenceTextRecorded ≡ shapeDivergenceText
+    calcEEmpiricalReceipt :
+      NSKatoCalcEEmpiricalReceipt
+    calcEEmpiricalReceiptIsCanonical :
+      calcEEmpiricalReceipt ≡ canonicalNSKatoCalcEEmpiricalReceipt
+    cl1MathematicallyOpen :
+      Bool
+    cl1MathematicallyOpenIsTrue :
+      cl1MathematicallyOpen ≡ true
+    cl1FailClosed :
+      Bool
+    cl1FailClosedIsTrue :
+      cl1FailClosed ≡ true
     divergenceRouteRecorded :
       Bool
     divergenceRouteRecordedIsTrue :
@@ -645,15 +756,15 @@ canonicalNSKatoHessianConfinementORCSLPGF =
     refl
     "C: The receipt stores typed canonical target/value shapes, explicit receipt surfaces, and empirical N=128 aggregate metadata only."
     refl
-    "S: Hessian PSD at core, the diagonal identity witness, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, and divergence machine-precision are recorded."
+    "S: Hessian PSD at core, the diagonal identity witness, the signed gap split, the PSD minimum surface, the gap-collapse/Hessian-blow-up route, the H5/H6 curvature split, triaxial full-3D core correction (large h33), positive cross-derivative confinement evidence, corrected Ωtube/Ωsheet split, Calc E empirical projection/receipt evidence, CL1 open bookkeeping, and divergence machine-precision are recorded."
     refl
-    "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/Clay bridge surfaces -> keep all promotions fail-closed."
+    "L: Corrected sign convention at true λ2 minimum -> record the diagonal/gap/PSD/curvature/Clay bridge surfaces plus Calc E empirical evidence -> keep CL1 open and all promotions fail-closed."
     refl
-    "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, or Clay bridge claim from this receipt."
+    "P: Do not promote any confinement theorem, external-DNS bridge, global regularity claim, full regularity theorem, Clay claim, Clay bridge claim, Calc E evidence, or CL1 open bookkeeping from this receipt."
     refl
-    "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
+    "G: Governance guard: Miller bridge open only as theorem-candidate, Clay bridge open only as blocker, Calc E remains empirical and non-promoting, CL1 stays mathematically open and fail-closed, no external-DNS promotion path, no full/global regularity inhabitant, and no Clay promotion."
     refl
-    "F: Fail-closed due to explicit gate rows, the corrected sign convention, and the open Clay bridge blocker; proof obligations remain external to this row."
+    "F: Fail-closed due to explicit gate rows, the corrected sign convention, the open Clay bridge blocker, and the open CL1 bookkeeping; proof obligations remain external to this row."
     refl
 
 canonicalNSKatoHessianConfinementReceipt : NSKatoHessianConfinementReceipt
@@ -747,6 +858,12 @@ canonicalNSKatoHessianConfinementReceipt =
     ; aggregateStatsIsCanonical = refl
     ; divergenceTextRecorded = shapeDivergenceText
     ; divergenceTextRecordedIsCanonical = refl
+    ; calcEEmpiricalReceipt = canonicalNSKatoCalcEEmpiricalReceipt
+    ; calcEEmpiricalReceiptIsCanonical = refl
+    ; cl1MathematicallyOpen = true
+    ; cl1MathematicallyOpenIsTrue = refl
+    ; cl1FailClosed = true
+    ; cl1FailClosedIsTrue = refl
     ; divergenceRouteRecorded = true
     ; divergenceRouteRecordedIsTrue = refl
     ; blockers = canonicalNSKatoHessianConfinementBlockers

@@ -355,6 +355,62 @@ record GRPerturbationBoundShapeCore : Setω where
       ≡
       "ChristoffelFormulaC0Stable"
 
+    christoffelFormulaC0StableInverseMetricClosenessName :
+      String
+
+    christoffelFormulaC0StableInverseMetricClosenessNameIsCanonical :
+      christoffelFormulaC0StableInverseMetricClosenessName
+      ≡
+      "h_gi"
+
+    christoffelFormulaC0StableZeroSlotLedgerDependencyName :
+      String
+
+    christoffelFormulaC0StableZeroSlotLedgerDependencyNameIsCanonical :
+      christoffelFormulaC0StableZeroSlotLedgerDependencyName
+      ≡
+      "diagonalZeroLemma"
+
+    christoffelFormulaC0StableZeroSlotLedgerReceipt :
+      String
+
+    christoffelFormulaC0StableZeroSlotLedgerReceiptIsCanonical :
+      christoffelFormulaC0StableZeroSlotLedgerReceipt
+      ≡
+      "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+
+    christoffelFormulaC0StableBilinearSplitReceipt :
+      String
+
+    christoffelFormulaC0StableBilinearSplitReceiptIsCanonical :
+      christoffelFormulaC0StableBilinearSplitReceipt
+      ≡
+      "|δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+
+    christoffelFormulaC0StableShellAConstantName :
+      String
+
+    christoffelFormulaC0StableShellAConstantNameIsCanonical :
+      christoffelFormulaC0StableShellAConstantName
+      ≡
+      "22<=48"
+
+    christoffelFormulaC0StableShellAConstantWitness :
+      22 ≤ 48
+
+    christoffelFormulaC0StableShellAConstantWitnessIsCanonical :
+      christoffelFormulaC0StableShellAConstantWitness
+      ≡
+      Continuum.symbolicRationalKernelShellAChristoffelFormula22Le48
+
+    christoffelFormulaC0StableSlackReceipt :
+      String
+
+    christoffelFormulaC0StableSlackReceiptIsCanonical :
+      christoffelFormulaC0StableSlackReceipt
+      ≡
+      "11/2 ε <= 48 ε"
+
     christoffelFormulaC0StablePerSlotBound :
       String
 
@@ -788,6 +844,34 @@ canonicalGRPerturbationBoundShapeCore =
         "ChristoffelFormulaC0Stable"
     ; christoffelFormulaC0StableSurfaceNameIsCanonical =
         refl
+    ; christoffelFormulaC0StableInverseMetricClosenessName =
+        "h_gi"
+    ; christoffelFormulaC0StableInverseMetricClosenessNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableZeroSlotLedgerDependencyName =
+        "diagonalZeroLemma"
+    ; christoffelFormulaC0StableZeroSlotLedgerDependencyNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableZeroSlotLedgerReceipt =
+        "10 explicit nonzero triples / 54 zero triples (symmetric triples counted)"
+    ; christoffelFormulaC0StableZeroSlotLedgerReceiptIsCanonical =
+        refl
+    ; christoffelFormulaC0StableBilinearSplitReceipt =
+        "|δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
+    ; christoffelFormulaC0StableBilinearSplitReceiptIsCanonical =
+        refl
+    ; christoffelFormulaC0StableShellAConstantName =
+        "22<=48"
+    ; christoffelFormulaC0StableShellAConstantNameIsCanonical =
+        refl
+    ; christoffelFormulaC0StableShellAConstantWitness =
+        Continuum.symbolicRationalKernelShellAChristoffelFormula22Le48
+    ; christoffelFormulaC0StableShellAConstantWitnessIsCanonical =
+        refl
+    ; christoffelFormulaC0StableSlackReceipt =
+        "11/2 ε <= 48 ε"
+    ; christoffelFormulaC0StableSlackReceiptIsCanonical =
+        refl
     ; christoffelFormulaC0StablePerSlotBound =
         "11/2 ε"
     ; christoffelFormulaC0StablePerSlotBoundIsCanonical =
@@ -895,7 +979,7 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "Christoffel perturbation caveat: two-term split exposed at the linearization level; four-slot finite sum factor; no promotion of full ordered QQ estimate."
         ∷ "Per-slot algebraic control is recorded as 11/2 ε and the explicit next inequality 11/2 ε <= 48 ε."
         ∷ "DiagonalZeroLemma and christoffelBilinearSplit are recorded with h_static && h_diag, 10 explicit nonzero triples, 54 zero triples, and the exact bilinear split |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)."
-        ∷ "ChristoffelFormulaC0Stable remains receipt-only with h_gi, h_static, h_diag, DiagonalNonzeroSlot?, diagonalZeroLemma, christoffelBilinearSplit, 10 nonzero, 54 zero, 64 symmetric triples, and 48 ε slack recorded canonically."
+        ∷ "ChristoffelFormulaC0Stable now exposes concrete receipt names for independent inverse-metric closeness, zero-slot ledger dependency, the bilinear split, Shell A constant 22<=48, and the 11/2 ε <= 48 ε slack gate."
         ∷ "Ricci perturbation route is carried by the canonical Schwarzschild finite Ricci/Bianchi receipt; convergence and authority promotions are blocked."
         ∷ "Contracted-Bianchi still blocks at selected-connection dependency with exact blocker: missingCarrierConnectionIsLeviCivita."
         ∷ "Exact boundary arithmetic shapes are carried by symbolic-rational and shell-A law shapes, not by fabricated proofs."

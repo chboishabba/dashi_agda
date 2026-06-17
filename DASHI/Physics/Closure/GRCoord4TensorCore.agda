@@ -55,6 +55,29 @@ record Coord4Slot : Set where
     lower2 :
       Coord4
 
+schwarzschildSlotUpper :
+  Coord4Slot →
+  Coord4
+schwarzschildSlotUpper (coord4Slot upper lower1 lower2) = upper
+
+schwarzschildSlotLower1 :
+  Coord4Slot →
+  Coord4
+schwarzschildSlotLower1 (coord4Slot upper lower1 lower2) = lower1
+
+schwarzschildSlotLower2 :
+  Coord4Slot →
+  Coord4
+schwarzschildSlotLower2 (coord4Slot upper lower1 lower2) = lower2
+
+schwarzschildSlotCoordinates :
+  Coord4Slot →
+  List Coord4
+schwarzschildSlotCoordinates slot =
+  schwarzschildSlotUpper slot ∷
+  schwarzschildSlotLower1 slot ∷
+  schwarzschildSlotLower2 slot ∷ []
+
 record ScalarRadiusKey : Set where
   constructor scalarRadiusKey
   field
@@ -631,6 +654,80 @@ canonicalSchwarzschildChristoffelSlotClassificationSurface =
       "7 nonzero + 57 zero diagonal Schwarzschild Christoffel slots" ∷
       [] )
     false
+
+schwarzschildChristoffelSlotProjectionRowsFromClassificationSurface :
+  SchwarzschildChristoffelSlotClassificationSurface →
+  List SchwarzschildChristoffelSlotClassificationRow
+schwarzschildChristoffelSlotProjectionRowsFromClassificationSurface surface =
+  SchwarzschildChristoffelSlotClassificationSurface.allSlotRows surface
+
+record SchwarzschildChristoffelSlotProjectionSurface : Set where
+  constructor schwarzschildChristoffelSlotProjectionSurface
+  field
+    classificationSurface :
+      SchwarzschildChristoffelSlotClassificationSurface
+
+    projectionRows :
+      List SchwarzschildChristoffelSlotClassificationRow
+
+    projectionCount :
+      Nat
+
+    projectionBoundary :
+      List String
+
+    projectionNotPromoted :
+      Bool
+
+schwarzschildChristoffelSlotProjectionSurfaceFromClassificationSurface :
+  SchwarzschildChristoffelSlotClassificationSurface →
+  SchwarzschildChristoffelSlotProjectionSurface
+schwarzschildChristoffelSlotProjectionSurfaceFromClassificationSurface surface =
+  schwarzschildChristoffelSlotProjectionSurface
+    surface
+    (schwarzschildChristoffelSlotProjectionRowsFromClassificationSurface surface)
+    coord4SlotCount64
+    ( "slotProjectionSurface"
+      ∷ "64-slot classification projection ledger"
+      ∷ [] )
+    false
+
+canonicalSchwarzschildChristoffelSlotProjectionSurface :
+  SchwarzschildChristoffelSlotProjectionSurface
+canonicalSchwarzschildChristoffelSlotProjectionSurface =
+  schwarzschildChristoffelSlotProjectionSurfaceFromClassificationSurface
+    canonicalSchwarzschildChristoffelSlotClassificationSurface
+
+record SchwarzschildChristoffelSlotProjectionReceiptSurface : Set where
+  constructor schwarzschildChristoffelSlotProjectionReceiptSurface
+  field
+    receiptRows :
+      List SchwarzschildChristoffelSlotClassificationRow
+
+    receiptCount :
+      Nat
+
+    receiptBoundary :
+      List String
+
+    receiptNotPromoted :
+      Bool
+
+schwarzschildChristoffelSlotProjectionReceiptSurfaceFromProjectionSurface :
+  SchwarzschildChristoffelSlotProjectionSurface →
+  SchwarzschildChristoffelSlotProjectionReceiptSurface
+schwarzschildChristoffelSlotProjectionReceiptSurfaceFromProjectionSurface surface =
+  schwarzschildChristoffelSlotProjectionReceiptSurface
+    (SchwarzschildChristoffelSlotProjectionSurface.projectionRows surface)
+    (SchwarzschildChristoffelSlotProjectionSurface.projectionCount surface)
+    (SchwarzschildChristoffelSlotProjectionSurface.projectionBoundary surface)
+    (SchwarzschildChristoffelSlotProjectionSurface.projectionNotPromoted surface)
+
+canonicalSchwarzschildChristoffelSlotProjectionReceiptSurface :
+  SchwarzschildChristoffelSlotProjectionReceiptSurface
+canonicalSchwarzschildChristoffelSlotProjectionReceiptSurface =
+  schwarzschildChristoffelSlotProjectionReceiptSurfaceFromProjectionSurface
+    canonicalSchwarzschildChristoffelSlotProjectionSurface
 
 data SchwarzschildChristoffelSlotDecision : Set where
   slotDecisionTrue :
