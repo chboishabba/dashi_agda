@@ -6,6 +6,19 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Formal structure/lens law tranche for `2026-06-17`: adds
+  `DASHI.Core.FormalStructureLawCore`, `DASHI.Core.FormalLensLawCore`, and
+  `DASHI.Core.SourceProcessEvidenceLawCore` as the candidate-only law-bearing
+  socket layer above formal-lens vocabulary/qualification and source-process
+  evidence. The tranche records finite-sample, vector/product, coordinate
+  projection, equivalence, quotient/fiber, canonical-encoding, residue-system,
+  formal-lens law, invariant/morphism, and source-process inclusion/escalation
+  surfaces while keeping representation, statistic, projection, digest,
+  coordinate-model, semantic, source-compromise, security, theorem, domain, and
+  promotion authority blocked. Adds `scripts/run_agda29_parallel_check.sh` as
+  the Agda 2.9 sibling-flake parallel shadow-tree wrapper and wires the new
+  cores through `DASHI.Everything` plus reusable-core regression.
+
 - Source-process evidence generic tranche for `2026-06-17`: adds
   `DASHI.Core.SourceProcessEvidenceCore` to `DASHI.Everything` and includes it in
   `scripts/check_reusable_core_regression.py`, with a discovery-only

@@ -12,6 +12,7 @@ import DASHI.Core.CandidateOnlyCore as CandidateOnly
 import DASHI.Core.GenericReceipt as GenericReceipt
 import DASHI.Core.HiddenLiftProjectionCore as HiddenLift
 import DASHI.Core.SourceProcessEvidenceCore as SourceProcessEvidence
+import DASHI.Core.SourceProcessEvidenceLawCore as SourceProcessEvidenceLaw
 import DASHI.Core.StatisticalEvidenceCore as Statistical
 import DASHI.Crypto.RSAVulnerabilityBoundary as RSAVulnerabilityBoundary
 import DASHI.Promotion.AuthorityBoundaryCore as AuthorityBoundary

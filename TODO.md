@@ -1,5 +1,24 @@
 # FOR TODO GO TO '# TODO'
 
+Current formal-structure/lens law note for `2026-06-17`:
+- Added the Phase 4 law-bearing socket layer:
+  `DASHI.Core.FormalStructureLawCore`,
+  `DASHI.Core.FormalLensLawCore`, and
+  `DASHI.Core.SourceProcessEvidenceLawCore`.
+- The new cores expose reusable candidate-only law surfaces for finite
+  samples, vector/product and coordinate projections, equivalence relations,
+  quotient/fiber projections, canonical encodings, residue systems, formal
+  lens carrier/structure/law/invariant/morphism sockets, and source-process
+  restricted-fiber/anomaly/witness escalation shapes.
+- Authority remains blocked: generic structure gives affordances only;
+  representation adequacy, semantic/domain authority, source compromise,
+  security authority, theorem authority, and promotion require separate
+  receipts.
+- Added `scripts/run_agda29_parallel_check.sh` as the preferred sibling-Agda
+  2.9 wrapper. It runs `-j8` by default from a temporary source-only Dashi
+  shadow tree with a writable stdlib shadow, avoiding flake churn and the
+  multiple `.agda-lib` project-root rejection.
+
 Current GR analytic-kernel aggregation note for `2026-06-15`:
 - Worker 6 added
   `GRProofArchitectureNextAnalyticKernelTrancheReceipt` in

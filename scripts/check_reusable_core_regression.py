@@ -10,8 +10,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+AGDA29_PARALLEL_CHECK = ROOT / "scripts" / "run_agda29_parallel_check.sh"
 
-AGDA_TARGETS = [
+BASE_AGDA_TARGETS = [
     "DASHI/Core/AdapterCanonicalityCore.agda",
     "DASHI/Core/AuthorityNonPromotionCore.agda",
     "DASHI/Core/EmptyPromotionCore.agda",
@@ -72,11 +73,30 @@ OPTIONAL_AGDA_TARGETS = [
     "DASHI/Crypto/RSASharedPrimeCollapse.agda",
     "DASHI/Crypto/RSAVulnerabilityBoundary.agda",
     "DASHI/Crypto/RSABTResidueBraidHypervoxelBoundary.agda",
+    "DASHI/Core/FormalLensLawCore.agda",
+    "DASHI/Core/FormalStructureLawCore.agda",
+    "DASHI/Core/SourceProcessEvidenceLawCore.agda",
 ]
 
-AGDA_TARGETS.extend(
-    target for target in OPTIONAL_AGDA_TARGETS if (ROOT / target).is_file()
-)
+
+def _existing_targets(targets: list[str]) -> list[str]:
+    """Return existing targets in the fixed order, deduplicated."""
+    seen: set[str] = set()
+    selected: list[str] = []
+    for target in targets:
+        if target in seen:
+            continue
+        if (ROOT / target).is_file():
+            seen.add(target)
+            selected.append(target)
+    return selected
+
+
+OPTIONAL_AGDA_TARGETS_AVAILABLE = _existing_targets(OPTIONAL_AGDA_TARGETS)
+MISSING_OPTIONAL_AGDA_TARGETS = [
+    target for target in OPTIONAL_AGDA_TARGETS if target not in OPTIONAL_AGDA_TARGETS_AVAILABLE
+]
+AGDA_TARGETS = BASE_AGDA_TARGETS + OPTIONAL_AGDA_TARGETS_AVAILABLE
 
 
 def run(label: str, cmd: list[str]) -> int:
@@ -132,6 +152,11 @@ def active_agda_or_ghc() -> int:
 def main() -> int:
     active_agda_or_ghc()
 
+    if MISSING_OPTIONAL_AGDA_TARGETS:
+        print("Optional AGDA targets not present and will be skipped:")
+        for target in MISSING_OPTIONAL_AGDA_TARGETS:
+            print(f"  - {target}")
+
     commands: list[tuple[str, list[str]]] = [
         ("git diff whitespace check", ["git", "diff", "--check"]),
         (
@@ -163,8 +188,16 @@ def main() -> int:
         ),
     ]
 
-    for target in AGDA_TARGETS:
-        commands.append((f"agda {target}", ["agda", "-i", ".", target]))
+    if AGDA29_PARALLEL_CHECK.is_file():
+        commands.append(
+            (
+                "agda29 parallel reusable core targets",
+                [str(AGDA29_PARALLEL_CHECK.relative_to(ROOT)), *AGDA_TARGETS],
+            )
+        )
+    else:
+        for target in AGDA_TARGETS:
+            commands.append((f"agda {target}", ["agda", "-i", ".", target]))
 
     for label, cmd in commands:
         result = run(label, cmd)
