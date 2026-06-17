@@ -231,6 +231,14 @@ canonicalRicciPalatiniExpansionProjectionName : String
 canonicalRicciPalatiniExpansionProjectionName =
   "ricciPalatiniExpansion"
 
+canonicalRicciPalatiniExpansionSixTermDependencyName : String
+canonicalRicciPalatiniExpansionSixTermDependencyName =
+  "δRicci_eq_sum_6"
+
+canonicalRicciPalatiniExpansionSixTermProjectionName : String
+canonicalRicciPalatiniExpansionSixTermProjectionName =
+  "ricciPalatiniExpansion as six-term triangle"
+
 canonicalRicciDerivativeTermBoundDependencyName : String
 canonicalRicciDerivativeTermBoundDependencyName =
   "|∂δΓ| <= 19/2 ε"
@@ -239,6 +247,14 @@ canonicalRicciDerivativeTermBoundProjectionName : String
 canonicalRicciDerivativeTermBoundProjectionName =
   "|∂δΓ| <= 19/2 ε"
 
+canonicalRicciDerivativeTermBound44DependencyName : String
+canonicalRicciDerivativeTermBound44DependencyName =
+  "derivTermBound_44"
+
+canonicalRicciDerivativeTermBound44ProjectionName : String
+canonicalRicciDerivativeTermBound44ProjectionName =
+  "|∂δΓ| <= 44 ε"
+
 canonicalRicciProductTermBoundDependencyName : String
 canonicalRicciProductTermBoundDependencyName =
   "|δ(ΓΓ)| <= 44 ε"
@@ -246,6 +262,30 @@ canonicalRicciProductTermBoundDependencyName =
 canonicalRicciProductTermBoundProjectionName : String
 canonicalRicciProductTermBoundProjectionName =
   "|δ(ΓΓ)| <= 44 ε"
+
+canonicalRicciProductTermBound44DependencyName : String
+canonicalRicciProductTermBound44DependencyName =
+  "productTermBound_44"
+
+canonicalRicciProductTermBound44ProjectionName : String
+canonicalRicciProductTermBound44ProjectionName =
+  "|δ(ΓΓ)| <= 44 ε"
+
+canonicalRicciHGammaBgBoundDependencyName : String
+canonicalRicciHGammaBgBoundDependencyName =
+  "h_Γ_bg_bound"
+
+canonicalRicciHGammaBgBoundProjectionName : String
+canonicalRicciHGammaBgBoundProjectionName =
+  "h_Γ_bg_bound"
+
+canonicalRicci6x44Le8x44Le352Le640DependencyName : String
+canonicalRicci6x44Le8x44Le352Le640DependencyName =
+  "6*44<=8*44=352<=640"
+
+canonicalRicci6x44Le8x44Le352Le640ProjectionName : String
+canonicalRicci6x44Le8x44Le352Le640ProjectionName =
+  "6*44<=8*44=352<=640"
 
 canonicalRicciFiniteTermCountDependencyName : String
 canonicalRicciFiniteTermCountDependencyName =
@@ -294,19 +334,26 @@ canonicalConnectionErrorBoundExtractionHypotheses =
   ∷ canonicalPerturbationPGIHypothesis
   ∷ "h_p2g"
   ∷ "h_pg"
+  ∷ "h_Γ_bg_bound"
   ∷ []
 
 canonicalConnectionErrorBoundExtractionBounds : List String
 canonicalConnectionErrorBoundExtractionBounds =
   "ricciPalatiniExpansion"
+  ∷ "δRicci_eq_sum_6"
+  ∷ "derivTermBound_44"
+  ∷ "|∂δΓ| <= 44 ε"
   ∷ "allTermsLE44"
   ∷ "derivative terms"
+  ∷ "productTermBound_44"
   ∷ "product terms"
   ∷ "finite 8-slot count"
   ∷ "h_dΓ routing"
   ∷ "h_Γ routing"
+  ∷ "h_Γ_bg_bound routing"
   ∷ "19/2 ε <= 44 ε absorption"
   ∷ "Schwarzschild nonzero-slot pruning"
+  ∷ "6*44<=8*44=352<=640"
   ∷ "|∂δΓ| <= 19/2 ε"
   ∷ "|δ(ΓΓ)| <= 44 ε"
   ∷ "352 ε <= 640 ε"
@@ -318,8 +365,12 @@ canonicalConnectionErrorBoundExtractionDependencyRows =
   "dependency: connectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
   ∷ "dependency: connectionErrorBoundExtractionPalatiniExpansionDependencyName = ricciPalatiniExpansion"
   ∷ "dependency: ricciPalatiniExpansion"
+  ∷ "dependency: connectionErrorBoundExtractionPalatiniExpansionSixTermDependencyName = δRicci_eq_sum_6"
   ∷ "dependency: connectionErrorBoundExtractionDerivativeTermBoundDependencyName = |∂δΓ| <= 19/2 ε"
   ∷ "dependency: connectionErrorBoundExtractionProductTermBoundDependencyName = |δ(ΓΓ)| <= 44 ε"
+  ∷ "dependency: connectionErrorBoundExtractionConservativeDerivativeTermBoundDependencyName = derivTermBound_44"
+  ∷ "dependency: connectionErrorBoundExtractionConservativeProductTermBoundDependencyName = productTermBound_44"
+  ∷ "dependency: connectionErrorBoundExtractionHGammaBgBoundDependencyName = h_Γ_bg_bound"
   ∷ "dependency: connectionErrorBoundExtractionFiniteTermCountDependencyName = allTermsLE44"
   ∷ "dependency: connectionErrorBoundExtractionFiniteSlotCountDependencyName = finite 8-slot count"
   ∷ "dependency: connectionErrorBoundExtractionNonzeroSlotPruningDependencyName = Schwarzschild nonzero-slot pruning"
@@ -339,7 +390,12 @@ canonicalConnectionErrorBoundExtractionDependencyRows =
   ∷ "dependency: h_pg"
   ∷ "dependency: |∂δΓ| <= 19/2 ε"
   ∷ "dependency: |δ(ΓΓ)| <= 44 ε"
+  ∷ "dependency: derivTermBound_44"
+  ∷ "dependency: productTermBound_44"
+  ∷ "dependency: h_Γ_bg_bound"
   ∷ "dependency: 352 ε <= 640 ε"
+  ∷ "dependency: 6*44<=8*44=352<=640"
+  ∷ "dependency: connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640DependencyName = 6*44<=8*44=352<=640"
   ∷ "dependency: connectionErrorBoundExtractionConservative352EpsilonExtractionDependencyName = 352 ε <= 640 ε"
   ∷ "dependency: connectionErrorBoundExtractionConservative640EpsilonExtractionDependencyName = conservative 640 ε extraction"
   ∷ "dependency: connectionErrorBoundExtractionPromoted = false"
@@ -349,17 +405,25 @@ canonicalConnectionErrorBoundExtractionProjectionRows : List String
 canonicalConnectionErrorBoundExtractionProjectionRows =
   "projection: connectionErrorBoundExtractionPalatiniExpansionDependencyName = ricciPalatiniExpansion"
   ∷ "projection: ricciPalatiniExpansion"
+  ∷ "projection: connectionErrorBoundExtractionPalatiniExpansionSixTermDependencyName = δRicci_eq_sum_6"
+  ∷ "projection: connectionErrorBoundExtractionPalatiniExpansionSixTermProjectionName = ricciPalatiniExpansion as six-term triangle"
   ∷ "projection: connectionErrorBoundExtractionFiniteTermCountDependencyName = allTermsLE44"
   ∷ "projection: connectionErrorBoundExtractionFiniteSlotCountProjectionName = finite 8-slot count"
   ∷ "projection: connectionErrorBoundExtractionNonzeroSlotPruningDependencyName = Schwarzschild nonzero-slot pruning"
   ∷ "projection: |∂δΓ| <= 19/2 ε"
   ∷ "projection: |δ(ΓΓ)| <= 44 ε"
+  ∷ "projection: connectionErrorBoundExtractionConservativeDerivativeTermBoundProjectionName = |∂δΓ| <= 44 ε"
+  ∷ "projection: connectionErrorBoundExtractionConservativeProductTermBoundProjectionName = |δ(ΓΓ)| <= 44 ε"
+  ∷ "projection: connectionErrorBoundExtractionHGammaBgBoundProjectionName = h_Γ_bg_bound"
   ∷ "projection: finite 8-slot count = 8"
   ∷ "projection: h_dΓ routing"
   ∷ "projection: h_Γ routing"
+  ∷ "projection: h_Γ_bg_bound routing"
   ∷ "projection: 19/2 ε <= 44 ε absorption"
   ∷ "projection: connectionErrorBoundExtractionAbsorptionProjectionName = 19/2 ε <= 44 ε absorption"
   ∷ "projection: 352 ε <= 640 ε"
+  ∷ "projection: 6*44<=8*44=352<=640"
+  ∷ "projection: connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640ProjectionName = 6*44<=8*44=352<=640"
   ∷ "projection: conservative 640 ε extraction"
   ∷ "projection: connectionErrorBoundExtractionDerivativeTermBoundDependencyName = |∂δΓ| <= 19/2 ε"
   ∷ "projection: connectionErrorBoundExtractionProductTermBoundDependencyName = |δ(ΓΓ)| <= 44 ε"
@@ -367,7 +431,8 @@ canonicalConnectionErrorBoundExtractionProjectionRows =
   ∷ "projection: connectionErrorBoundExtractionConservative640EpsilonExtractionDependencyName = conservative 640 ε extraction"
   ∷ "projection: connectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
   ∷ "projection: connectionErrorBoundExtractionHypotheses = h_dΓ, h_Γ, h_pgi, h_p2g, h_pg"
-  ∷ "projection: connectionErrorBoundExtractionBounds = ricciPalatiniExpansion; derivative terms; product terms; finite 8-slot count; h_dΓ routing; h_Γ routing; 19/2 ε <= 44 ε absorption; Schwarzschild nonzero-slot pruning; |∂δΓ| <= 19/2 ε; |δ(ΓΓ)| <= 44 ε; 352 ε <= 640 ε"
+  ∷ "projection: connectionErrorBoundExtractionBounds = ricciPalatiniExpansion; δRicci_eq_sum_6; derivTermBound_44; |∂δΓ| <= 44 ε; allTermsLE44; derivative terms; productTermBound_44; product terms; finite 8-slot count; h_dΓ routing; h_Γ routing; h_Γ_bg_bound routing; 19/2 ε <= 44 ε absorption; Schwarzschild nonzero-slot pruning; 6*44<=8*44=352<=640; |∂δΓ| <= 19/2 ε; |δ(ΓΓ)| <= 44 ε; 352 ε <= 640 ε; conservative 640 ε extraction"
+  ∷ "projection route text: 6*44<=8*44=352<=640"
   ∷ "projection route text: 352 ε <= 640 ε"
   ∷ "projection: connectionErrorBoundExtractionPromoted = false"
   ∷ []
@@ -498,6 +563,11 @@ canonicalSymbolicKernelConstructorHandoffDependencyRows =
   ∷ "dependency: canonicalRicci252Le640LooseRoute"
   ∷ "dependency: connectionErrorBoundExtractionDependencyName = ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel.connectionErrorBoundExtraction"
   ∷ "dependency: ricciPalatiniExpansion"
+  ∷ "dependency: δRicci_eq_sum_6"
+  ∷ "dependency: derivTermBound_44"
+  ∷ "dependency: productTermBound_44"
+  ∷ "dependency: h_Γ_bg_bound"
+  ∷ "dependency: 6*44<=8*44=352<=640"
   ∷ "dependency: allTermsLE44"
   ∷ "dependency: derivative terms"
   ∷ "dependency: product terms"
@@ -505,6 +575,7 @@ canonicalSymbolicKernelConstructorHandoffDependencyRows =
   ∷ "dependency: connectionErrorBoundExtractionFiniteSlotCountDependencyName = finite 8-slot count"
   ∷ "dependency: h_dΓ routing"
   ∷ "dependency: h_Γ routing"
+  ∷ "dependency: h_Γ_bg_bound routing"
   ∷ "dependency: 19/2 ε <= 44 ε absorption"
   ∷ "dependency: connectionErrorBoundExtractionAbsorptionDependencyName = 19/2 ε <= 44 ε absorption"
   ∷ "dependency: Schwarzschild nonzero-slot pruning"
@@ -515,6 +586,7 @@ canonicalSymbolicKernelConstructorHandoffDependencyRows =
   ∷ "dependency: h_pg"
   ∷ "dependency: |∂δΓ| <= 19/2 ε"
   ∷ "dependency: |δ(ΓΓ)| <= 44 ε"
+  ∷ "dependency: |∂δΓ| <= 44 ε"
   ∷ "dependency: 352 ε <= 640 ε"
   ∷ "dependency: connectionErrorBoundExtractionPromoted = false"
   ∷ "dependency: canonicalPerturbationAdapterRouteProjectionRows"
@@ -539,7 +611,8 @@ canonicalSymbolicKernelConstructorHandoffProjectionRows =
   ∷ "projection: canonicalConnectionErrorBoundExtractionHypotheses = h_dΓ, h_Γ, h_pgi, h_p2g, h_pg"
   ∷ "projection: connectionErrorBoundExtractionFiniteSlotCountProjectionName = finite 8-slot count"
   ∷ "projection: connectionErrorBoundExtractionAbsorptionProjectionName = 19/2 ε <= 44 ε absorption"
-  ∷ "projection: canonicalConnectionErrorBoundExtractionBounds = ricciPalatiniExpansion; derivative terms; product terms; finite 8-slot count; h_dΓ routing; h_Γ routing; 19/2 ε <= 44 ε absorption; Schwarzschild nonzero-slot pruning; |∂δΓ| <= 19/2 ε; |δ(ΓΓ)| <= 44 ε; 352 ε <= 640 ε"
+  ∷ "projection: canonicalConnectionErrorBoundExtractionBounds = ricciPalatiniExpansion; δRicci_eq_sum_6; derivTermBound_44; |∂δΓ| <= 44 ε; allTermsLE44; derivative terms; productTermBound_44; product terms; finite 8-slot count; h_dΓ routing; h_Γ routing; h_Γ_bg_bound routing; 19/2 ε <= 44 ε absorption; Schwarzschild nonzero-slot pruning; 6*44<=8*44=352<=640; |∂δΓ| <= 19/2 ε; |δ(ΓΓ)| <= 44 ε; 352 ε <= 640 ε; conservative 640 ε extraction"
+  ∷ "projection route text: 6*44<=8*44=352<=640"
   ∷ "projection route text: 352 ε <= 640 ε"
   ∷ "projection: canonicalConnectionErrorBoundExtractionPromoted = false"
   ∷ "projection: canonicalOrderedRationalProofsPromotedIsFalse = false"
@@ -557,14 +630,14 @@ record GRChristoffelRicciKernelObligationCoreORCSLPGF : Set where
     S : String
     SIsCanonical : S ≡ "fail-closed"
     L : String
-    LIsCanonical : L ≡ "obligation token rows, connection-error extraction rows, finite 8-slot count, h_dΓ/h_Γ routing, 19/2 ε <= 44 ε absorption, and blockers"
+    LIsCanonical : L ≡ "obligation token rows, connection-error extraction rows, finite 8-slot count, h_dΓ/h_Γ routing, 19/2 ε <= 44 ε absorption, h_Γ_bg_bound routing, and blockers"
     P : String
     PIsCanonical : P ≡ "all promotions are blocked"
     G : String
     GIsCanonical : G ≡ "geometric surface+symbolic-kernel constructor+connection-error extraction shape"
     F : String
     FIsCanonical : F ≡
-      "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, derivative/product bounds, finite term-count and finite 8-slot count, h_dΓ/h_Γ routing, 19/2 ε <= 44 ε absorption, Schwarzschild pruning, |∂δΓ| <= 19/2 ε, |δ(ΓΓ)| <= 44 ε, 352 ε <= 640 ε, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
+      "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, six-term expansion route δRicci_eq_sum_6, conservative derivative/product bounds (derivTermBound_44: |∂δΓ| <= 44 ε, productTermBound_44: |δ(ΓΓ)| <= 44 ε), finite term-count and finite 8-slot count, h_dΓ/h_Γ/h_Γ_bg_bound routing, 19/2 ε <= 44 ε absorption, 6*44<=8*44=352<=640, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
 
 open GRChristoffelRicciKernelObligationCoreORCSLPGF public
 
@@ -580,13 +653,13 @@ canonicalGRChristoffelRicciKernelObligationCoreORCSLPGF =
     refl
     "fail-closed"
     refl
-    "obligation token rows, connection-error extraction rows, finite 8-slot count, h_dΓ/h_Γ routing, 19/2 ε <= 44 ε absorption, and blockers"
+    "obligation token rows, connection-error extraction rows, finite 8-slot count, h_dΓ/h_Γ routing, 19/2 ε <= 44 ε absorption, h_Γ_bg_bound routing, and blockers"
     refl
     "all promotions are blocked"
     refl
     "geometric surface+symbolic-kernel constructor+connection-error extraction shape"
     refl
-    "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, derivative/product bounds, finite term-count and finite 8-slot count, h_dΓ/h_Γ routing, 19/2 ε <= 44 ε absorption, Schwarzschild pruning, |∂δΓ| <= 19/2 ε, |δ(ΓΓ)| <= 44 ε, 352 ε <= 640 ε, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
+    "keeps concrete 22<=48 / 2144/27<=80<=640 rows, connectionErrorBoundExtraction Palatini dependency, six-term expansion route δRicci_eq_sum_6, conservative derivative/product bounds (derivTermBound_44: |∂δΓ| <= 44 ε, productTermBound_44: |δ(ΓΓ)| <= 44 ε), finite term-count and finite 8-slot count, h_dΓ/h_Γ/h_Γ_bg_bound routing, 19/2 ε <= 44 ε absorption, 6*44<=8*44=352<=640, and conservative 640 ε extraction rows, with explicit dependency/projection rows; no Ricci-convergence, Schwarzschild-Birkhoff, or Clay promotion"
     refl
 
 record GRChristoffelRicciKernelObligationCore : Setω where
@@ -1033,6 +1106,22 @@ record GRChristoffelRicciKernelObligationCore : Setω where
       ≡
       canonicalRicciPalatiniExpansionProjectionName
 
+    connectionErrorBoundExtractionPalatiniExpansionSixTermDependencyName :
+      String
+
+    connectionErrorBoundExtractionPalatiniExpansionSixTermDependencyNameIsCanonical :
+      connectionErrorBoundExtractionPalatiniExpansionSixTermDependencyName
+      ≡
+      canonicalRicciPalatiniExpansionSixTermDependencyName
+
+    connectionErrorBoundExtractionPalatiniExpansionSixTermProjectionName :
+      String
+
+    connectionErrorBoundExtractionPalatiniExpansionSixTermProjectionNameIsCanonical :
+      connectionErrorBoundExtractionPalatiniExpansionSixTermProjectionName
+      ≡
+      canonicalRicciPalatiniExpansionSixTermProjectionName
+
     connectionErrorBoundExtractionDerivativeTermBoundDependencyName :
       String
 
@@ -1049,6 +1138,22 @@ record GRChristoffelRicciKernelObligationCore : Setω where
       ≡
       canonicalRicciDerivativeTermBoundProjectionName
 
+    connectionErrorBoundExtractionConservativeDerivativeTermBoundDependencyName :
+      String
+
+    connectionErrorBoundExtractionConservativeDerivativeTermBoundDependencyNameIsCanonical :
+      connectionErrorBoundExtractionConservativeDerivativeTermBoundDependencyName
+      ≡
+      canonicalRicciDerivativeTermBound44DependencyName
+
+    connectionErrorBoundExtractionConservativeDerivativeTermBoundProjectionName :
+      String
+
+    connectionErrorBoundExtractionConservativeDerivativeTermBoundProjectionNameIsCanonical :
+      connectionErrorBoundExtractionConservativeDerivativeTermBoundProjectionName
+      ≡
+      canonicalRicciDerivativeTermBound44ProjectionName
+
     connectionErrorBoundExtractionProductTermBoundDependencyName :
       String
 
@@ -1064,6 +1169,38 @@ record GRChristoffelRicciKernelObligationCore : Setω where
       connectionErrorBoundExtractionProductTermBoundProjectionName
       ≡
       canonicalRicciProductTermBoundProjectionName
+
+    connectionErrorBoundExtractionConservativeProductTermBoundDependencyName :
+      String
+
+    connectionErrorBoundExtractionConservativeProductTermBoundDependencyNameIsCanonical :
+      connectionErrorBoundExtractionConservativeProductTermBoundDependencyName
+      ≡
+      canonicalRicciProductTermBound44DependencyName
+
+    connectionErrorBoundExtractionConservativeProductTermBoundProjectionName :
+      String
+
+    connectionErrorBoundExtractionConservativeProductTermBoundProjectionNameIsCanonical :
+      connectionErrorBoundExtractionConservativeProductTermBoundProjectionName
+      ≡
+      canonicalRicciProductTermBound44ProjectionName
+
+    connectionErrorBoundExtractionHGammaBgBoundDependencyName :
+      String
+
+    connectionErrorBoundExtractionHGammaBgBoundDependencyNameIsCanonical :
+      connectionErrorBoundExtractionHGammaBgBoundDependencyName
+      ≡
+      canonicalRicciHGammaBgBoundDependencyName
+
+    connectionErrorBoundExtractionHGammaBgBoundProjectionName :
+      String
+
+    connectionErrorBoundExtractionHGammaBgBoundProjectionNameIsCanonical :
+      connectionErrorBoundExtractionHGammaBgBoundProjectionName
+      ≡
+      canonicalRicciHGammaBgBoundProjectionName
 
     connectionErrorBoundExtractionFiniteTermCountDependencyName :
       String
@@ -1128,6 +1265,22 @@ record GRChristoffelRicciKernelObligationCore : Setω where
       connectionErrorBoundExtractionConservative640EpsilonExtractionDependencyName
       ≡
       canonicalRicciConservative640EpsilonExtractionDependencyName
+
+    connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640DependencyName :
+      String
+
+    connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640DependencyNameIsCanonical :
+      connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640DependencyName
+      ≡
+      canonicalRicci6x44Le8x44Le352Le640DependencyName
+
+    connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640ProjectionName :
+      String
+
+    connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640ProjectionNameIsCanonical :
+      connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640ProjectionName
+      ≡
+      canonicalRicci6x44Le8x44Le352Le640ProjectionName
 
     connectionErrorBoundExtractionFiniteSlotCount :
       Nat
@@ -1476,6 +1629,14 @@ canonicalGRChristoffelRicciKernelObligationCore =
         canonicalRicciPalatiniExpansionProjectionName
     ; connectionErrorBoundExtractionPalatiniExpansionProjectionNameIsCanonical =
         refl
+    ; connectionErrorBoundExtractionPalatiniExpansionSixTermDependencyName =
+        canonicalRicciPalatiniExpansionSixTermDependencyName
+    ; connectionErrorBoundExtractionPalatiniExpansionSixTermDependencyNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionPalatiniExpansionSixTermProjectionName =
+        canonicalRicciPalatiniExpansionSixTermProjectionName
+    ; connectionErrorBoundExtractionPalatiniExpansionSixTermProjectionNameIsCanonical =
+        refl
     ; connectionErrorBoundExtractionDerivativeTermBoundDependencyName =
         canonicalRicciDerivativeTermBoundDependencyName
     ; connectionErrorBoundExtractionDerivativeTermBoundDependencyNameIsCanonical =
@@ -1484,6 +1645,14 @@ canonicalGRChristoffelRicciKernelObligationCore =
         canonicalRicciDerivativeTermBoundProjectionName
     ; connectionErrorBoundExtractionDerivativeTermBoundProjectionNameIsCanonical =
         refl
+    ; connectionErrorBoundExtractionConservativeDerivativeTermBoundDependencyName =
+        canonicalRicciDerivativeTermBound44DependencyName
+    ; connectionErrorBoundExtractionConservativeDerivativeTermBoundDependencyNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionConservativeDerivativeTermBoundProjectionName =
+        canonicalRicciDerivativeTermBound44ProjectionName
+    ; connectionErrorBoundExtractionConservativeDerivativeTermBoundProjectionNameIsCanonical =
+        refl
     ; connectionErrorBoundExtractionProductTermBoundDependencyName =
         canonicalRicciProductTermBoundDependencyName
     ; connectionErrorBoundExtractionProductTermBoundDependencyNameIsCanonical =
@@ -1491,6 +1660,22 @@ canonicalGRChristoffelRicciKernelObligationCore =
     ; connectionErrorBoundExtractionProductTermBoundProjectionName =
         canonicalRicciProductTermBoundProjectionName
     ; connectionErrorBoundExtractionProductTermBoundProjectionNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionConservativeProductTermBoundDependencyName =
+        canonicalRicciProductTermBound44DependencyName
+    ; connectionErrorBoundExtractionConservativeProductTermBoundDependencyNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionConservativeProductTermBoundProjectionName =
+        canonicalRicciProductTermBound44ProjectionName
+    ; connectionErrorBoundExtractionConservativeProductTermBoundProjectionNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionHGammaBgBoundDependencyName =
+        canonicalRicciHGammaBgBoundDependencyName
+    ; connectionErrorBoundExtractionHGammaBgBoundDependencyNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionHGammaBgBoundProjectionName =
+        canonicalRicciHGammaBgBoundProjectionName
+    ; connectionErrorBoundExtractionHGammaBgBoundProjectionNameIsCanonical =
         refl
     ; connectionErrorBoundExtractionFiniteTermCountDependencyName =
         canonicalRicciFiniteTermCountDependencyName
@@ -1535,6 +1720,14 @@ canonicalGRChristoffelRicciKernelObligationCore =
     ; connectionErrorBoundExtractionAbsorptionProjectionName =
         canonicalRicciAbsorptionProjectionName
     ; connectionErrorBoundExtractionAbsorptionProjectionNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640DependencyName =
+        canonicalRicci6x44Le8x44Le352Le640DependencyName
+    ; connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640DependencyNameIsCanonical =
+        refl
+    ; connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640ProjectionName =
+        canonicalRicci6x44Le8x44Le352Le640ProjectionName
+    ; connectionErrorBoundExtractionConservative6x44Le8x44Le352Le640ProjectionNameIsCanonical =
         refl
     ; connectionErrorBoundExtractionHypotheses =
         canonicalConnectionErrorBoundExtractionHypotheses
