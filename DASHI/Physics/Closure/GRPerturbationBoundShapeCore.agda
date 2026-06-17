@@ -10,6 +10,7 @@ open import Data.Nat.Base using (ℕ; _≤_)
 import DASHI.Physics.Closure.ContinuumLimitTheorem as Continuum
 import DASHI.Physics.Closure.GRDiscreteBianchiFiniteR as Bianchi
 import DASHI.Physics.Closure.GRDiscreteRicciCandidateFromCurvature as Ricci
+import DASHI.Physics.Closure.GROrderedRationalFiniteSlotBoundCore as OrderedRational
 
 ------------------------------------------------------------------------
 -- GR perturbation bound shape core.
@@ -192,6 +193,160 @@ record GRPerturbationBoundShapeCore : Setω where
     constant2144Over27Le80Le640Shape :
       String
 
+    christoffelC0InverseMetricClosenessHypothesis :
+      String
+
+    christoffelC0InverseMetricClosenessHypothesisIsCanonical :
+      christoffelC0InverseMetricClosenessHypothesis
+      ≡
+      "h_gi"
+
+    christoffelC0StaticDiagonalClosenessHypothesis :
+      String
+
+    christoffelC0StaticDiagonalClosenessHypothesisIsCanonical :
+      christoffelC0StaticDiagonalClosenessHypothesis
+      ≡
+      "h_static && h_diagonal"
+
+    christoffelC0StaticDiagonalClosenessHypothesisPromoted :
+      Bool
+
+    christoffelC0StaticDiagonalClosenessHypothesisPromotedIsFalse :
+      christoffelC0StaticDiagonalClosenessHypothesisPromoted
+      ≡
+      false
+
+    christoffelC0InverseMetricClosenessSocket :
+      (kernel : Continuum.SymbolicRationalChristoffelC0StabilityKernel) →
+      Continuum.OrderedRationalShellADenominatorReciprocalReceipt.inverseMetricAbsMax
+        (Continuum.SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+          kernel)
+      ≡
+      4
+
+    christoffelC0InverseMetricClosenessPromoted :
+      Bool
+
+    christoffelC0InverseMetricClosenessPromotedIsFalse :
+      christoffelC0InverseMetricClosenessPromoted
+      ≡
+      false
+
+    christoffelC0PerSlotBound :
+      String
+
+    christoffelC0PerSlotBoundIsCanonical :
+      christoffelC0PerSlotBound
+      ≡
+      "11/2 ε"
+
+    christoffelC0PerSlotChain :
+      String
+
+    christoffelC0PerSlotChainIsCanonical :
+      christoffelC0PerSlotChain
+      ≡
+      OrderedRational.orderedRationalChristoffel16p5Le22Le48ArithmeticChainName
+
+    ricciSecondPartialC0DistHypothesis :
+      String
+
+    ricciSecondPartialC0DistHypothesisIsCanonical :
+      ricciSecondPartialC0DistHypothesis
+      ≡
+      "h_p2g"
+
+    ricciLoosePgiHypothesis :
+      String
+
+    ricciLoosePgiHypothesisIsCanonical :
+      ricciLoosePgiHypothesis
+      ≡
+      "h_pgi"
+
+    ricciLoosePgiHypothesisPromoted :
+      Bool
+
+    ricciLoosePgiHypothesisPromotedIsFalse :
+      ricciLoosePgiHypothesisPromoted
+      ≡
+      false
+
+    ricciSecondPartialC0DistSocket :
+      (kernel : Continuum.SymbolicRationalChristoffelC0StabilityKernel) →
+      Continuum.OrderedRationalShellAChristoffelPerturbationRouteReceipt.shellAMetricDerivativeMax
+        (Continuum.SymbolicRationalChristoffelC0StabilityKernel.orderedShellAPerturbationRoute
+          kernel)
+      ≡
+      Continuum.OrderedRationalShellADenominatorReciprocalReceipt.metricDerivativeAbsMax
+        (Continuum.SymbolicRationalChristoffelC0StabilityKernel.shellADenominatorReciprocal
+          kernel)
+
+    ricciSecondPartialC0DistPromoted :
+      Bool
+
+    ricciSecondPartialC0DistPromotedIsFalse :
+      ricciSecondPartialC0DistPromoted
+      ≡
+      false
+
+    ricciLooseDeltaGammaPartialBound :
+      String
+
+    ricciLooseDeltaGammaPartialBoundIsCanonical :
+      ricciLooseDeltaGammaPartialBound
+      ≡
+      "∂δΓ <= 19/2 ε"
+
+    ricciLooseDeltaGammaPartialBoundPromoted :
+      Bool
+
+    ricciLooseDeltaGammaPartialBoundPromotedIsFalse :
+      ricciLooseDeltaGammaPartialBoundPromoted
+      ≡
+      false
+
+    ricciLooseDeltaRBound :
+      String
+
+    ricciLooseDeltaRBoundIsCanonical :
+      ricciLooseDeltaRBound
+      ≡
+      "δR <= 252 ε"
+
+    ricciLooseDeltaRBoundChain :
+      String
+
+    ricciLooseDeltaRBoundChainIsCanonical :
+      ricciLooseDeltaRBoundChain
+      ≡
+      "252 ε <= 640 ε"
+
+    christoffelC0ThirtyTwoLEFortyEightRouteIsAlgebraic :
+      Bool
+
+    christoffelC0ThirtyTwoLEFortyEightRouteIsAlgebraicIsTrue :
+      christoffelC0ThirtyTwoLEFortyEightRouteIsAlgebraic
+      ≡
+      true
+
+    christoffelC0ThirtyTwoLEFortyEightRouteWitness :
+      22 ≤ 48
+
+    christoffelC0ThirtyTwoLEFortyEightRouteWitnessIsCanonical :
+      christoffelC0ThirtyTwoLEFortyEightRouteWitness
+      ≡
+      Continuum.symbolicRationalKernelShellAChristoffelFormula22Le48
+
+    christoffelC0ThirtyTwoRouteNotInversionRoute :
+      String
+
+    christoffelC0ThirtyTwoRouteNotInversionRouteIsCanonical :
+      christoffelC0ThirtyTwoRouteNotInversionRoute
+      ≡
+      "22ε route is algebraic in independent sockets (h_gi, h_pgi, h_p2g, static/diagonal structure), not derived by metric inversion"
+
     concreteChristoffelTensorFormulaLaw :
       Continuum.OrderedRationalShellAChristoffelPerturbationRouteReceipt
 
@@ -355,6 +510,78 @@ canonicalGRPerturbationBoundShapeCore =
         "2144/27<=80<=640"
     ; constant2144Over27Le80Le640Shape =
         "Ricci shell-A constant law shape grDiscreteRicciShellA2144Over27≤80Law"
+    ; christoffelC0InverseMetricClosenessHypothesis =
+        "h_gi"
+    ; christoffelC0InverseMetricClosenessHypothesisIsCanonical =
+        refl
+    ; christoffelC0StaticDiagonalClosenessHypothesis =
+        "h_static && h_diagonal"
+    ; christoffelC0StaticDiagonalClosenessHypothesisIsCanonical =
+        refl
+    ; christoffelC0StaticDiagonalClosenessHypothesisPromoted =
+        false
+    ; christoffelC0StaticDiagonalClosenessHypothesisPromotedIsFalse =
+        refl
+    ; christoffelC0InverseMetricClosenessSocket =
+        Continuum.symbolicRationalKernelShellAInverseMetricAbsMaxIs4
+    ; christoffelC0InverseMetricClosenessPromoted =
+        false
+    ; christoffelC0InverseMetricClosenessPromotedIsFalse =
+        refl
+    ; christoffelC0PerSlotBound =
+        "11/2 ε"
+    ; christoffelC0PerSlotBoundIsCanonical =
+        refl
+    ; christoffelC0PerSlotChain =
+        OrderedRational.orderedRationalChristoffel16p5Le22Le48ArithmeticChainName
+    ; christoffelC0PerSlotChainIsCanonical =
+        refl
+    ; ricciSecondPartialC0DistHypothesis =
+        "h_p2g"
+    ; ricciSecondPartialC0DistHypothesisIsCanonical =
+        refl
+    ; ricciLoosePgiHypothesis =
+        "h_pgi"
+    ; ricciLoosePgiHypothesisIsCanonical =
+        refl
+    ; ricciLoosePgiHypothesisPromoted =
+        false
+    ; ricciLoosePgiHypothesisPromotedIsFalse =
+        refl
+    ; ricciSecondPartialC0DistSocket =
+        Continuum.symbolicRationalKernelPerturbationRouteDerivativeMaxMatchesDenominatorReceipt
+    ; ricciSecondPartialC0DistPromoted =
+        false
+    ; ricciSecondPartialC0DistPromotedIsFalse =
+        refl
+    ; ricciLooseDeltaGammaPartialBound =
+        "∂δΓ <= 19/2 ε"
+    ; ricciLooseDeltaGammaPartialBoundIsCanonical =
+        refl
+    ; ricciLooseDeltaGammaPartialBoundPromoted =
+        false
+    ; ricciLooseDeltaGammaPartialBoundPromotedIsFalse =
+        refl
+    ; ricciLooseDeltaRBound =
+        "δR <= 252 ε"
+    ; ricciLooseDeltaRBoundIsCanonical =
+        refl
+    ; ricciLooseDeltaRBoundChain =
+        "252 ε <= 640 ε"
+    ; ricciLooseDeltaRBoundChainIsCanonical =
+        refl
+    ; christoffelC0ThirtyTwoLEFortyEightRouteIsAlgebraic =
+        true
+    ; christoffelC0ThirtyTwoLEFortyEightRouteIsAlgebraicIsTrue =
+        refl
+    ; christoffelC0ThirtyTwoLEFortyEightRouteWitness =
+        Continuum.symbolicRationalKernelShellAChristoffelFormula22Le48
+    ; christoffelC0ThirtyTwoLEFortyEightRouteWitnessIsCanonical =
+        refl
+    ; christoffelC0ThirtyTwoRouteNotInversionRoute =
+        "22ε route is algebraic in independent sockets (h_gi, h_pgi, h_p2g, static/diagonal structure), not derived by metric inversion"
+    ; christoffelC0ThirtyTwoRouteNotInversionRouteIsCanonical =
+        refl
     ; concreteChristoffelTensorFormulaLaw =
         Continuum.canonicalOrderedRationalShellAChristoffelPerturbationRouteReceipt
     ; concreteChristoffelTensorFormulaLawIsCanonical =
@@ -366,8 +593,14 @@ canonicalGRPerturbationBoundShapeCore =
     ; boundary =
         "This module is carrier/receipt only and fail-closed."
         ∷ "Christoffel perturbation caveat: two-term split exposed at the linearization level; four-slot finite sum factor; no promotion of full ordered QQ estimate."
+        ∷ "Per-slot algebraic control is recorded as 11/2 ε with canonical chain 11/2 <= 33/2 <= 22 <= 48."
         ∷ "Ricci perturbation route is carried by the canonical Schwarzschild finite Ricci/Bianchi receipt; convergence and authority promotions are blocked."
         ∷ "Contracted-Bianchi still blocks at selected-connection dependency with exact blocker: missingCarrierConnectionIsLeviCivita."
         ∷ "Exact boundary arithmetic shapes are carried by symbolic-rational and shell-A law shapes, not by fabricated proofs."
+        ∷ "Theorem-socket h_gi is recorded via symbolicRationalKernelShellAInverseMetricAbsMaxIs4 and is typed as a kernel-level inverse-metric max witness."
+        ∷ "Theorem-socket h_p2g is recorded via symbolicRationalKernelPerturbationRouteDerivativeMaxMatchesDenominatorReceipt and is typed as the route derivative-max matching witness."
+        ∷ "Structural sockets for the Christoffel-C0 correction route additionally record static and diagonal assumptions as local hypotheses: static && diagonal."
+        ∷ "Ricci loose route hypotheses now include h_pgi and h_p2g; the derivative control is logged as ∂δΓ <= 19/2 ε with loose Ricci control δR <= 252 ε <= 640 ε."
+        ∷ "The 22ε route is explicitly marked algebraic in independent inputs, not a metric inversion argument."
         ∷ []
     }

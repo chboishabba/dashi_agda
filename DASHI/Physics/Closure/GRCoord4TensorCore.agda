@@ -2,21 +2,20 @@ module DASHI.Physics.Closure.GRCoord4TensorCore where
 
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Bool using (Bool; false)
-open import Data.List.Base using (List; _∷_; [])
+open import Agda.Builtin.Nat using (Nat)
+open import Data.List.Base using (List; _∷_; []; map; _++_)
 open import DASHI.Core.Q using (ℚ)
 
 ------------------------------------------------------------------------
 -- Minimal four-coordinate tensor API for GR closure work.
 --
--- This module supplies only the component carrier shapes that the current
--- continuum/GR obstruction receipts identify as absent: a concrete Coord4
--- index, metric/inverse metric component families, partial-derivative shape,
--- Christoffel components, and Ricci components.  It intentionally contains no
--- Christoffel formula law, inverse law, Ricci contraction theorem, convergence
--- estimate, Einstein equation, Schwarzschild authority, or GR promotion.
+-- This module supplies the Coord4 index and tensor carriers used by the GR
+-- obstruction receipts, together with explicit Schwarzschild diagonal
+-- bookkeeping rows for formula-law, inverse-metric, and metric-compatibility
+-- surfaces.
 --
--- The diagonal helpers below stay carrier-only and are meant for future
--- Schwarzschild-friendly bookkeeping on the four independent slots only.
+-- The diagonal helpers below provide typed surface rows and 64-slot
+-- classification ledgers while remaining fail-closed and non-promotional.
 
 data Coord4 : Set where
   coord0 : Coord4
@@ -429,6 +428,209 @@ record SchwarzschildChristoffelSlotFormula : Set where
 
     value :
       ℚ
+
+------------------------------------------------------------------------
+-- Explicit slot families and full 64-slot surface coverage for Schwarzschild
+-- diagonal Christoffel shape.
+
+schwarzschildSevenNonzeroSlots :
+  List SchwarzschildChristoffelSlot
+schwarzschildSevenNonzeroSlots =
+  gammaTtr
+    ∷ gammaRtt
+    ∷ gammaRrr
+    ∷ gammaRThetaTheta
+    ∷ gammaRPhiPhi
+    ∷ gammaThetaRTheta
+    ∷ gammaPhiRPhi
+    ∷ []
+
+schwarzschildSlotAxes :
+  List Coord4
+schwarzschildSlotAxes =
+  coord0 ∷ coord1 ∷ coord2 ∷ coord3 ∷ []
+
+schwarzschildSlotsForLower1 :
+  Coord4 →
+  Coord4 →
+  List Coord4Slot
+schwarzschildSlotsForLower1 upper lower1 =
+  map (λ lower2 → schwarzschildSlot upper lower1 lower2) schwarzschildSlotAxes
+
+schwarzschildSlotsForUpper :
+  Coord4 →
+  List Coord4Slot
+schwarzschildSlotsForUpper upper =
+  schwarzschildSlotsForLower1 upper coord0 ++
+  schwarzschildSlotsForLower1 upper coord1 ++
+  schwarzschildSlotsForLower1 upper coord2 ++
+  schwarzschildSlotsForLower1 upper coord3
+
+schwarzschildAllSlots :
+  List Coord4Slot
+schwarzschildAllSlots =
+  schwarzschildSlotsForUpper coord0 ++
+  schwarzschildSlotsForUpper coord1 ++
+  schwarzschildSlotsForUpper coord2 ++
+  schwarzschildSlotsForUpper coord3
+
+coord4SlotCount64 :
+  Nat
+coord4SlotCount64 = 64
+
+coord4NonzeroSlotCount7 :
+  Nat
+coord4NonzeroSlotCount7 = 7
+
+coord4ZeroSlotCount57 :
+  Nat
+coord4ZeroSlotCount57 = 57
+
+data SchwarzschildSlotOccupancy : Set where
+  diagonalSlot :
+    SchwarzschildChristoffelSlot →
+    SchwarzschildSlotOccupancy
+
+  zeroSlot :
+    SchwarzschildSlotOccupancy
+
+record SchwarzschildChristoffelSlotClassificationRow : Set where
+  constructor schwarzschildChristoffelSlotClassificationRow
+  field
+    slot :
+      Coord4Slot
+
+    occupancy :
+      SchwarzschildSlotOccupancy
+
+    slotBoundary :
+      List String
+
+    slotNotPromoted :
+      Bool
+
+schwarzschildSlotOccupancy :
+  Coord4Slot →
+  SchwarzschildSlotOccupancy
+schwarzschildSlotOccupancy (coord4Slot upper lower1 lower2) with upper | lower1 | lower2
+... | coord0 | coord0 | coord1 = diagonalSlot gammaTtr
+... | coord1 | coord0 | coord0 = diagonalSlot gammaRtt
+... | coord1 | coord1 | coord1 = diagonalSlot gammaRrr
+... | coord1 | coord2 | coord2 = diagonalSlot gammaRThetaTheta
+... | coord1 | coord3 | coord3 = diagonalSlot gammaRPhiPhi
+... | coord2 | coord1 | coord2 = diagonalSlot gammaThetaRTheta
+... | coord3 | coord1 | coord3 = diagonalSlot gammaPhiRPhi
+... | _ | _ | _ = zeroSlot
+
+schwarzschildChristoffelSlotClassificationRowFromSlot :
+  Coord4Slot →
+  SchwarzschildChristoffelSlotClassificationRow
+schwarzschildChristoffelSlotClassificationRowFromSlot slot =
+  schwarzschildChristoffelSlotClassificationRow
+    slot
+    (schwarzschildSlotOccupancy slot)
+    ( "slotClassificationRow" ∷ [] )
+    false
+
+schwarzschildChristoffelSlotClassificationRows :
+  List SchwarzschildChristoffelSlotClassificationRow
+schwarzschildChristoffelSlotClassificationRows =
+  map schwarzschildChristoffelSlotClassificationRowFromSlot
+    schwarzschildAllSlots
+
+schwarzschildNonzeroSlotClassificationRowsFromRows :
+  List SchwarzschildChristoffelSlotClassificationRow →
+  List SchwarzschildChristoffelSlotClassificationRow
+schwarzschildNonzeroSlotClassificationRowsFromRows [] = []
+schwarzschildNonzeroSlotClassificationRowsFromRows (row ∷ rows) with
+  SchwarzschildChristoffelSlotClassificationRow.occupancy row
+... | diagonalSlot _ =
+  row ∷ schwarzschildNonzeroSlotClassificationRowsFromRows rows
+... | zeroSlot = schwarzschildNonzeroSlotClassificationRowsFromRows rows
+
+schwarzschildZeroSlotClassificationRowsFromRows :
+  List SchwarzschildChristoffelSlotClassificationRow →
+  List SchwarzschildChristoffelSlotClassificationRow
+schwarzschildZeroSlotClassificationRowsFromRows [] = []
+schwarzschildZeroSlotClassificationRowsFromRows (row ∷ rows) with
+  SchwarzschildChristoffelSlotClassificationRow.occupancy row
+... | diagonalSlot _ = schwarzschildZeroSlotClassificationRowsFromRows rows
+... | zeroSlot = row ∷ schwarzschildZeroSlotClassificationRowsFromRows rows
+
+schwarzschildNonzeroSlotClassificationRows :
+  List SchwarzschildChristoffelSlotClassificationRow
+schwarzschildNonzeroSlotClassificationRows =
+  schwarzschildNonzeroSlotClassificationRowsFromRows
+    schwarzschildChristoffelSlotClassificationRows
+
+schwarzschildNonzeroSlotCoordinates :
+  List Coord4Slot
+schwarzschildNonzeroSlotCoordinates =
+  map SchwarzschildChristoffelSlotClassificationRow.slot
+    schwarzschildNonzeroSlotClassificationRows
+
+-- The dedicated zero-slot closure list in this module is a human-readable
+-- companion to the machine-typed zero-row extraction below.
+schwarzschildZeroSlotClosureRows :
+  List SchwarzschildChristoffelSlotClassificationRow
+schwarzschildZeroSlotClosureRows =
+  schwarzschildZeroSlotClassificationRowsFromRows
+    schwarzschildChristoffelSlotClassificationRows
+
+schwarzschildZeroSlotClassificationRows :
+  List SchwarzschildChristoffelSlotClassificationRow
+schwarzschildZeroSlotClassificationRows =
+  schwarzschildZeroSlotClosureRows
+
+schwarzschildZeroSlotCoordinates :
+  List Coord4Slot
+schwarzschildZeroSlotCoordinates =
+  map SchwarzschildChristoffelSlotClassificationRow.slot
+    schwarzschildZeroSlotClassificationRows
+
+record SchwarzschildChristoffelSlotClassificationSurface : Set where
+  constructor schwarzschildChristoffelSlotClassificationSurface
+  field
+    allSlotRows :
+      List SchwarzschildChristoffelSlotClassificationRow
+
+    nonzeroSlotRows :
+      List SchwarzschildChristoffelSlotClassificationRow
+
+    zeroSlotRows :
+      List SchwarzschildChristoffelSlotClassificationRow
+
+    allSlotCount :
+      Nat
+
+    nonzeroSlotCount :
+      Nat
+
+    zeroSlotCount :
+      Nat
+
+    classificationBoundary :
+      List String
+
+    classificationNotPromoted :
+      Bool
+
+-- This surface is intentionally non-theorem and stays fail-closed at the row
+-- level.  The zero-set is supplied by the dedicated closure list below.
+canonicalSchwarzschildChristoffelSlotClassificationSurface :
+  SchwarzschildChristoffelSlotClassificationSurface
+canonicalSchwarzschildChristoffelSlotClassificationSurface =
+  schwarzschildChristoffelSlotClassificationSurface
+    schwarzschildChristoffelSlotClassificationRows
+    schwarzschildNonzeroSlotClassificationRows
+    schwarzschildZeroSlotClassificationRows
+    coord4SlotCount64
+    coord4NonzeroSlotCount7
+    coord4ZeroSlotCount57
+    ( "64-slot classification ledger" ∷
+      "7 nonzero + 57 zero diagonal Schwarzschild Christoffel slots" ∷
+      [] )
+    false
 
 schwarzschildChristoffelSlotFormulaAt :
   SchwarzschildChristoffelSlot →
@@ -995,6 +1197,407 @@ record SchwarzschildMetricCompatibilityLawSurface : Set where
     lawNotPromoted :
       Bool
 
+record SchwarzschildChristoffelFormulaLawCarrierRow : Set where
+  constructor schwarzschildChristoffelFormulaLawCarrierRow
+  field
+    row :
+      ChristoffelFormulaLaw
+
+    rowBoundary :
+      List String
+
+    rowNotPromoted :
+      Bool
+
+record SchwarzschildInverseMetricLawCarrierRow : Set where
+  constructor schwarzschildInverseMetricLawCarrierRow
+  field
+    row :
+      InverseMetricLaw
+
+    rowBoundary :
+      List String
+
+    rowNotPromoted :
+      Bool
+
+record SchwarzschildMetricCompatibilityLawCarrierRow : Set where
+  constructor schwarzschildMetricCompatibilityLawCarrierRow
+  field
+    row :
+      MetricCompatibilityLaw
+
+    rowBoundary :
+      List String
+
+    rowNotPromoted :
+      Bool
+
+record SchwarzschildDiagonalFormulaLawCarrierSurface : Set where
+  constructor schwarzschildDiagonalFormulaLawCarrierSurface
+  field
+    formulaCarrier :
+      SchwarzschildDiagonalFormulaCarrierSurface
+
+    christoffelFormulaRows :
+      List SchwarzschildChristoffelFormulaLawCarrierRow
+
+    inverseMetricLawRows :
+      List SchwarzschildInverseMetricLawCarrierRow
+
+    metricCompatibilityRows :
+      List SchwarzschildMetricCompatibilityLawCarrierRow
+
+    formulaCarrierBoundary :
+      List String
+
+    formulaCarrierNotPromoted :
+      Bool
+
+schwarzschildDiagonalFormulaLawCarrierSurfaceFromCarrier :
+  SchwarzschildDiagonalFormulaCarrierSurface →
+  SchwarzschildDiagonalFormulaLawCarrierSurface
+schwarzschildDiagonalFormulaLawCarrierSurfaceFromCarrier carrier =
+  schwarzschildDiagonalFormulaLawCarrierSurface
+    carrier
+    ( diagonalOneTermReductionCarrierRow
+      ∷ sevenSlotNonzeroReductionCarrierRow
+      ∷ zeroSlot57ClosureCarrierRow
+      ∷ [] )
+    ( diagonalOneTermInverseReductionCarrierRow ∷ [] )
+    ( diagonalMetricCompatibilityReductionCarrierRow ∷ [] )
+    ( "diagonal Christoffel formula, inverse metric, and metric compatibility rows"
+      ∷ [] )
+    false
+  where
+    diagonalOneTermReductionCarrierRow :
+      SchwarzschildChristoffelFormulaLawCarrierRow
+    diagonalOneTermReductionCarrierRow =
+      schwarzschildChristoffelFormulaLawCarrierRow
+        diagonalOneTermReduction
+        ( "diagonalOneTermReduction" ∷ [] )
+        false
+
+    sevenSlotNonzeroReductionCarrierRow :
+      SchwarzschildChristoffelFormulaLawCarrierRow
+    sevenSlotNonzeroReductionCarrierRow =
+      schwarzschildChristoffelFormulaLawCarrierRow
+        sevenSlotNonzeroReduction
+        ( "sevenSlotNonzeroReduction" ∷ [] )
+        false
+
+    zeroSlot57ClosureCarrierRow :
+      SchwarzschildChristoffelFormulaLawCarrierRow
+    zeroSlot57ClosureCarrierRow =
+      schwarzschildChristoffelFormulaLawCarrierRow
+        zeroSlot57Closure
+        ( "zeroSlot57Closure" ∷ [] )
+        false
+
+    diagonalOneTermInverseReductionCarrierRow :
+      SchwarzschildInverseMetricLawCarrierRow
+    diagonalOneTermInverseReductionCarrierRow =
+      schwarzschildInverseMetricLawCarrierRow
+        diagonalOneTermInverseReduction
+        ( "diagonalOneTermInverseReduction" ∷ [] )
+        false
+
+    diagonalMetricCompatibilityReductionCarrierRow :
+      SchwarzschildMetricCompatibilityLawCarrierRow
+    diagonalMetricCompatibilityReductionCarrierRow =
+      schwarzschildMetricCompatibilityLawCarrierRow
+        diagonalMetricCompatibilityReduction
+        ( "diagonalMetricCompatibilityReduction" ∷ [] )
+        false
+
+------------------------------------------------------------------------
+-- Canonical checked projection rows for the diagonal Christoffel law.
+-- These rows remain fail-closed and concrete so downstream modules can
+-- consume diagonal slot projections without repeating slot enumeration.
+
+schwarzschildChristoffelSlotRowName :
+  SchwarzschildChristoffelSlot →
+  String
+schwarzschildChristoffelSlotRowName gammaTtr = "gammaTtr"
+schwarzschildChristoffelSlotRowName gammaRtt = "gammaRtt"
+schwarzschildChristoffelSlotRowName gammaRrr = "gammaRrr"
+schwarzschildChristoffelSlotRowName gammaRThetaTheta = "gammaRThetaTheta"
+schwarzschildChristoffelSlotRowName gammaRPhiPhi = "gammaRPhiPhi"
+schwarzschildChristoffelSlotRowName gammaThetaRTheta = "gammaThetaRTheta"
+schwarzschildChristoffelSlotRowName gammaPhiRPhi = "gammaPhiRPhi"
+
+schwarzschildFormulaLawFromChristoffelSlot :
+  SchwarzschildChristoffelSlot →
+  ChristoffelFormulaLaw
+schwarzschildFormulaLawFromChristoffelSlot gammaTtr = sevenSlotNonzeroReduction
+schwarzschildFormulaLawFromChristoffelSlot gammaRtt = sevenSlotNonzeroReduction
+schwarzschildFormulaLawFromChristoffelSlot gammaRrr = sevenSlotNonzeroReduction
+schwarzschildFormulaLawFromChristoffelSlot gammaRThetaTheta = sevenSlotNonzeroReduction
+schwarzschildFormulaLawFromChristoffelSlot gammaRPhiPhi = sevenSlotNonzeroReduction
+schwarzschildFormulaLawFromChristoffelSlot gammaThetaRTheta = sevenSlotNonzeroReduction
+schwarzschildFormulaLawFromChristoffelSlot gammaPhiRPhi = sevenSlotNonzeroReduction
+
+schwarzschildFormulaSlotValueFromSurface :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelSlot →
+  SchwarzschildChristoffelSlotFormula
+schwarzschildFormulaSlotValueFromSurface surface gammaTtr =
+  SchwarzschildChristoffelFormulaSurface.ttrFormula surface
+schwarzschildFormulaSlotValueFromSurface surface gammaRtt =
+  SchwarzschildChristoffelFormulaSurface.rttFormula surface
+schwarzschildFormulaSlotValueFromSurface surface gammaRrr =
+  SchwarzschildChristoffelFormulaSurface.rrrFormula surface
+schwarzschildFormulaSlotValueFromSurface surface gammaRThetaTheta =
+  SchwarzschildChristoffelFormulaSurface.rThetaThetaFormula surface
+schwarzschildFormulaSlotValueFromSurface surface gammaRPhiPhi =
+  SchwarzschildChristoffelFormulaSurface.rPhiPhiFormula surface
+schwarzschildFormulaSlotValueFromSurface surface gammaThetaRTheta =
+  SchwarzschildChristoffelFormulaSurface.thetaRThetaFormula surface
+schwarzschildFormulaSlotValueFromSurface surface gammaPhiRPhi =
+  SchwarzschildChristoffelFormulaSurface.phiRPhiFormula surface
+
+record SchwarzschildChristoffelFormulaLawProjectionRow : Set where
+  constructor schwarzschildChristoffelFormulaLawProjectionRow
+  field
+    rowName :
+      String
+
+    lawRow :
+      ChristoffelFormulaLaw
+
+    slot :
+      SchwarzschildChristoffelSlot
+
+    slotFormula :
+      SchwarzschildChristoffelSlotFormula
+
+    rowBoundary :
+      List String
+
+    rowNotPromoted :
+      Bool
+
+schwarzschildChristoffelFormulaLawProjectionRowFromSlot :
+  SchwarzschildChristoffelFormulaSurface →
+  SchwarzschildChristoffelSlot →
+  SchwarzschildChristoffelFormulaLawProjectionRow
+schwarzschildChristoffelFormulaLawProjectionRowFromSlot surface slot =
+  schwarzschildChristoffelFormulaLawProjectionRow
+    (schwarzschildChristoffelSlotRowName slot)
+    (schwarzschildFormulaLawFromChristoffelSlot slot)
+    slot
+    (schwarzschildFormulaSlotValueFromSurface surface slot)
+    ( "christoffelFormulaLawProjectionRow" ∷
+      schwarzschildChristoffelSlotRowName slot
+      ∷ [] )
+    false
+
+schwarzschildChristoffelFormulaLawProjectionRowsFromSurface :
+  SchwarzschildChristoffelFormulaSurface →
+  List SchwarzschildChristoffelFormulaLawProjectionRow
+schwarzschildChristoffelFormulaLawProjectionRowsFromSurface surface =
+  map (schwarzschildChristoffelFormulaLawProjectionRowFromSlot surface)
+    schwarzschildSevenNonzeroSlots
+
+schwarzschildChristoffelFormulaLawProjectionNonzeroCount :
+  Nat
+schwarzschildChristoffelFormulaLawProjectionNonzeroCount =
+  coord4NonzeroSlotCount7
+
+schwarzschildChristoffelFormulaLawCarrierRowName :
+  ChristoffelFormulaLaw →
+  String
+schwarzschildChristoffelFormulaLawCarrierRowName diagonalOneTermReduction =
+  "diagonalOneTermReduction"
+schwarzschildChristoffelFormulaLawCarrierRowName sevenSlotNonzeroReduction =
+  "sevenSlotNonzeroReduction"
+schwarzschildChristoffelFormulaLawCarrierRowName zeroSlot57Closure =
+  "zeroSlot57Closure"
+
+record SchwarzschildChristoffelFormulaLawProjectionSurface : Set where
+  constructor schwarzschildChristoffelFormulaLawProjectionSurface
+  field
+    christoffelFormula :
+      SchwarzschildChristoffelFormulaSurface
+
+    nonzeroProjectionRows :
+      List SchwarzschildChristoffelFormulaLawProjectionRow
+
+    nonzeroProjectionCount :
+      Nat
+
+    reductionRows :
+      List SchwarzschildChristoffelFormulaLawCarrierRow
+
+    projectionBoundary :
+      List String
+
+    projectionNotPromoted :
+      Bool
+
+schwarzschildChristoffelFormulaLawProjectionSurfaceFromCarrier :
+  SchwarzschildDiagonalFormulaCarrierSurface →
+  SchwarzschildChristoffelFormulaLawProjectionSurface
+schwarzschildChristoffelFormulaLawProjectionSurfaceFromCarrier carrier =
+  schwarzschildChristoffelFormulaLawProjectionSurface
+    (SchwarzschildDiagonalFormulaCarrierSurface.christoffelFormula carrier)
+    (schwarzschildChristoffelFormulaLawProjectionRowsFromSurface
+      (SchwarzschildDiagonalFormulaCarrierSurface.christoffelFormula carrier))
+    schwarzschildChristoffelFormulaLawProjectionNonzeroCount
+    ( (schwarzschildChristoffelFormulaLawCarrierRow
+        diagonalOneTermReduction
+        (schwarzschildChristoffelFormulaLawCarrierRowName diagonalOneTermReduction ∷ [])
+        false)
+      ∷ (schwarzschildChristoffelFormulaLawCarrierRow
+        sevenSlotNonzeroReduction
+        (schwarzschildChristoffelFormulaLawCarrierRowName sevenSlotNonzeroReduction ∷ [])
+        false)
+      ∷ (schwarzschildChristoffelFormulaLawCarrierRow
+        zeroSlot57Closure
+        (schwarzschildChristoffelFormulaLawCarrierRowName zeroSlot57Closure ∷ [])
+        false)
+      ∷ [] )
+    ( "projection surface over diagonal Christoffel formula rows"
+      ∷ "7 nonzero canonical slots + 1 zero-closure + 1 one-term law row"
+      ∷ [] )
+    false
+
+-- Canonical inverse-metric law projections, using diagonal slot coordinates.
+-- We keep projections concrete and total so downstream readers can consume
+-- all diagonal inverse-metric diagonal slots without rebuilding rows.
+
+schwarzschildDiagonalCoordName :
+  Coord4 →
+  String
+schwarzschildDiagonalCoordName coord0 = "tt"
+schwarzschildDiagonalCoordName coord1 = "rr"
+schwarzschildDiagonalCoordName coord2 = "thetaTheta"
+schwarzschildDiagonalCoordName coord3 = "phiPhi"
+
+schwarzschildDiagonalSlotFromCoord :
+  Coord4 →
+  Coord4Slot
+schwarzschildDiagonalSlotFromCoord coord0 = schwarzschildSlot coord0 coord0 coord0
+schwarzschildDiagonalSlotFromCoord coord1 = schwarzschildSlot coord1 coord1 coord1
+schwarzschildDiagonalSlotFromCoord coord2 = schwarzschildSlot coord2 coord2 coord2
+schwarzschildDiagonalSlotFromCoord coord3 = schwarzschildSlot coord3 coord3 coord3
+
+schwarzschildInverseMetricLawProjectionRowName :
+  Coord4 →
+  String
+schwarzschildInverseMetricLawProjectionRowName coord0 = "inverseMetricTT"
+schwarzschildInverseMetricLawProjectionRowName coord1 = "inverseMetricRR"
+schwarzschildInverseMetricLawProjectionRowName coord2 = "inverseMetricThetaTheta"
+schwarzschildInverseMetricLawProjectionRowName coord3 = "inverseMetricPhiPhi"
+
+record SchwarzschildInverseMetricLawProjectionRow : Set where
+  constructor schwarzschildInverseMetricLawProjectionRow
+  field
+    rowName :
+      String
+
+    lawRow :
+      InverseMetricLaw
+
+    diagonalCoordinate :
+      Coord4
+
+    metricSlot :
+      Coord4Slot
+
+    inverseMetricSlot :
+      Coord4Slot
+
+    metricValue :
+      ℚ
+
+    inverseMetricValue :
+      ℚ
+
+    rowBoundary :
+      List String
+
+    rowNotPromoted :
+      Bool
+
+schwarzschildInverseMetricLawProjectionRowFromCarrier :
+  SchwarzschildDiagonalFormulaCarrierSurface →
+  Coord4 →
+  SchwarzschildInverseMetricLawProjectionRow
+schwarzschildInverseMetricLawProjectionRowFromCarrier carrier coord =
+  schwarzschildInverseMetricLawProjectionRow
+    (schwarzschildInverseMetricLawProjectionRowName coord)
+    diagonalOneTermInverseReduction
+    coord
+    (schwarzschildDiagonalSlotFromCoord coord)
+    (schwarzschildDiagonalSlotFromCoord coord)
+    (schwarzschildMetricAt
+      (SchwarzschildDiagonalFormulaCarrierSurface.metric carrier)
+      coord)
+    (schwarzschildInverseMetricAt
+      (SchwarzschildDiagonalFormulaCarrierSurface.inverseMetric carrier)
+      coord)
+    ( "inverseMetricLawProjectionRow" ∷
+      schwarzschildDiagonalCoordName coord
+      ∷ [] )
+    false
+
+schwarzschildInverseMetricLawProjectionRowsFromCarrier :
+  SchwarzschildDiagonalFormulaCarrierSurface →
+  List SchwarzschildInverseMetricLawProjectionRow
+schwarzschildInverseMetricLawProjectionRowsFromCarrier carrier =
+  map (schwarzschildInverseMetricLawProjectionRowFromCarrier carrier)
+    schwarzschildSlotAxes
+
+schwarzschildInverseMetricLawProjectionRowCount :
+  Nat
+schwarzschildInverseMetricLawProjectionRowCount = 4
+
+schwarzschildInverseMetricLawCarrierRowName :
+  InverseMetricLaw →
+  String
+schwarzschildInverseMetricLawCarrierRowName diagonalOneTermInverseReduction =
+  "diagonalOneTermInverseReduction"
+
+record SchwarzschildInverseMetricLawProjectionSurface : Set where
+  constructor schwarzschildInverseMetricLawProjectionSurface
+  field
+    inverseMetricCarrier :
+      SchwarzschildDiagonalFormulaCarrierSurface
+
+    projectionRows :
+      List SchwarzschildInverseMetricLawProjectionRow
+
+    projectionCount :
+      Nat
+
+    inverseMetricLawRows :
+      List SchwarzschildInverseMetricLawCarrierRow
+
+    projectionBoundary :
+      List String
+
+    projectionNotPromoted :
+      Bool
+
+schwarzschildInverseMetricLawProjectionSurfaceFromCarrier :
+  SchwarzschildDiagonalFormulaCarrierSurface →
+  SchwarzschildInverseMetricLawProjectionSurface
+schwarzschildInverseMetricLawProjectionSurfaceFromCarrier carrier =
+  schwarzschildInverseMetricLawProjectionSurface
+    carrier
+    (schwarzschildInverseMetricLawProjectionRowsFromCarrier carrier)
+    schwarzschildInverseMetricLawProjectionRowCount
+    ( (schwarzschildInverseMetricLawCarrierRow
+        diagonalOneTermInverseReduction
+        (schwarzschildInverseMetricLawCarrierRowName diagonalOneTermInverseReduction ∷ [])
+        false)
+      ∷ [] )
+    ( "diagonal inverse metric projection by Coord4 slot coordinates"
+      ∷ "4 diagonal components: tt, rr, thetaTheta, phiPhi"
+      ∷ [] )
+    false
+
 record SchwarzschildFormulaLawSurface : Set where
   constructor schwarzschildFormulaLawSurface
   field
@@ -1053,6 +1656,20 @@ schwarzschildFormulaLawSurfaceFromCarrier carrier =
     (schwarzschildInverseMetricLawSurfaceFromCarrier carrier)
     (schwarzschildMetricCompatibilityLawSurfaceFromCarrier carrier)
     false
+
+schwarzschildChristoffelFormulaLawProjectionSurfaceFromLawSurface :
+  SchwarzschildFormulaLawSurface →
+  SchwarzschildChristoffelFormulaLawProjectionSurface
+schwarzschildChristoffelFormulaLawProjectionSurfaceFromLawSurface lawSurface =
+  schwarzschildChristoffelFormulaLawProjectionSurfaceFromCarrier
+    (SchwarzschildFormulaLawSurface.metricCarrier lawSurface)
+
+schwarzschildInverseMetricLawProjectionSurfaceFromLawSurface :
+  SchwarzschildFormulaLawSurface →
+  SchwarzschildInverseMetricLawProjectionSurface
+schwarzschildInverseMetricLawProjectionSurfaceFromLawSurface lawSurface =
+  schwarzschildInverseMetricLawProjectionSurfaceFromCarrier
+    (SchwarzschildFormulaLawSurface.metricCarrier lawSurface)
 
 ------------------------------------------------------------------------
 -- Named Christoffel law rows and the 57-slot zero closure.
