@@ -574,12 +574,14 @@ import DASHI.Interop.PNFBraidTransportField
 import DASHI.Interop.PNFHodgeResidualTopology
 import DASHI.Interop.PNFResidualFieldInvariants
 import DASHI.Interop.PNFResolverSelectorCommitment
+import DASHI.Interop.PNFConciseFactAlgebraCore
 import DASHI.Interop.SensibLawResidualLattice
 import DASHI.Interop.SenateFormalizationPNFAdapter
 import DASHI.Interop.PNFSpectralCoordinateRebuildability
 import DASHI.Interop.PNFSpectralFieldArchitectureReceipt
 import DASHI.Interop.PNFSpectralFieldCore
 import DASHI.Interop.PNFSpectralFieldGraph
+import DASHI.Interop.PNFSpectralPhiPsiABICore
 import DASHI.Interop.PNFSpectralNumericABICore
 import DASHI.Interop.PNFSpectralRegistryAnchoring
 import DASHI.Interop.PNFSpectralVectorIndex

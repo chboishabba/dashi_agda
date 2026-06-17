@@ -22,6 +22,14 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PYTHON_PATH = (
     REPO_ROOT.parent / "ITIR-suite" / "itir-mcp" / "src" / "itir_mcp" / "pnf_numeric_abi.py"
 )
+DEFAULT_SPECTRAL_PYTHON_PATH = (
+    REPO_ROOT.parent
+    / "ITIR-suite"
+    / "itir-mcp"
+    / "src"
+    / "itir_mcp"
+    / "pnf_spectral_numeric_abi.py"
+)
 DEFAULT_AGDA_PATH = REPO_ROOT / "DASHI" / "Interop" / "PNFSpectralNumericABICore.agda"
 
 
@@ -48,6 +56,30 @@ EXPECTED_BINDINGS: dict[str, tuple[str, ...]] = {
     "z": ("gemvVectorZ", "PNFGEMVPayload"),
 }
 
+SPECTRAL_EXPECTED_BINDINGS: dict[str, tuple[str, ...]] = {
+    "SCHEMA": ("spectralSchemaV02", "PNFSpectralNumericABICoreReceipt"),
+    "adjacency": ("adjacencyTable", "PNFAdjacencyABI"),
+    "authority": ("authorityGate", "PNFAuthorityBoundaryLemmas"),
+    "degree": ("degreeTable", "PNFAdjacencyABI"),
+    "gemv": ("PNFGEMVPayload",),
+    "graph_version": ("graphVersion", "PNFSpectralNumericABICoreReceipt"),
+    "laplacian": ("laplacianTable", "PNFLaplacianABI"),
+    "object_registry": ("objectRegistry", "PNFRowMapBinding"),
+    "operator_profile": ("operatorProfile", "PNFLaplacianABI"),
+    "parity_hash": ("gemvParityHash", "PNFGEMVPayload"),
+    "phi": ("phiTable", "PhiCoordinateTable", "PNFEigenSpectralCoordinateABI"),
+    "psi": ("psiTable", "PsiProbeTable"),
+    "rebuild_witness": ("rebuildWitness", "PNFRebuildWitness"),
+    "receipts": ("PNFAdmissionRule",),
+    "residual_edge_table": ("residualEdgeTable", "PNFResidualEdgeTableABI"),
+    "row_map": ("PNFRowMapBinding",),
+    "schema": ("spectralSchemaV02",),
+    "spectral_coordinates": ("phiTable", "psiTable", "PNFEigenSpectralCoordinateABI"),
+    "validate_authority_gate": ("PNFAuthorityBoundaryLemmas", "authorityGate"),
+    "validate_rebuild_witness": ("PNFRebuildWitness", "rebuildWitness"),
+    "validate_spectral_numeric_abi": ("PNFAdmissionRule",),
+}
+
 
 @dataclass
 class Surface:
@@ -61,7 +93,13 @@ class Surface:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--python-path", type=Path, default=DEFAULT_PYTHON_PATH)
+    parser.add_argument("--spectral-python-path", type=Path, default=DEFAULT_SPECTRAL_PYTHON_PATH)
     parser.add_argument("--agda-path", type=Path, default=DEFAULT_AGDA_PATH)
+    parser.add_argument(
+        "--phi-psi-agda-path",
+        type=Path,
+        default=REPO_ROOT / "DASHI" / "Interop" / "PNFSpectralPhiPsiABICore.agda",
+    )
     parser.add_argument("--limit", type=int, default=24, help="Max names shown per list.")
     parser.add_argument("--json-only", action="store_true", help="Print only the JSON payload.")
     return parser.parse_args()
@@ -169,16 +207,39 @@ def collect_agda_surface(path: Path) -> Surface:
     )
 
 
-def build_report(py_surface: Surface, agda_surface: Surface, limit: int) -> dict[str, Any]:
+def merge_surfaces(surfaces: list[Surface], label: str) -> Surface:
+    present = any(surface.present for surface in surfaces)
+    names: list[str] = []
+    notes: list[str] = [f"{label} merged surface"]
+    paths: list[str] = []
+    for surface in surfaces:
+        paths.append(surface.path)
+        names.extend(surface.names)
+        notes.extend(surface.notes)
+    return Surface(
+        present=present,
+        path=", ".join(paths),
+        names=sorted(unique(names)),
+        notes=unique(notes),
+    )
+
+
+def build_report(
+    py_surface: Surface,
+    agda_surface: Surface,
+    limit: int,
+    expected_bindings: dict[str, tuple[str, ...]] | None = None,
+) -> dict[str, Any]:
     shared = sorted(set(py_surface.names) & set(agda_surface.names))
     missing_from_agda = sorted(set(py_surface.names) - set(agda_surface.names))
     covered = shared
     agda_names = set(agda_surface.names)
     semantic_bindings: dict[str, list[str]] = {}
     semantic_missing: dict[str, list[str]] = {}
+    bindings = expected_bindings if expected_bindings is not None else EXPECTED_BINDINGS
 
     for py_name in py_surface.names:
-        expected = EXPECTED_BINDINGS.get(py_name, [])
+        expected = bindings.get(py_name, [])
         present = [name for name in expected if name in agda_names]
         missing = [name for name in expected if name not in agda_names]
         if present:
@@ -262,8 +323,38 @@ def render_markdownish(report: dict[str, Any]) -> str:
 def main() -> int:
     args = parse_args()
     py_surface = collect_python_surface(args.python_path)
+    spectral_py_surface = collect_python_surface(args.spectral_python_path)
     agda_surface = collect_agda_surface(args.agda_path)
-    report = build_report(py_surface, agda_surface, args.limit)
+    phi_psi_agda_surface = collect_agda_surface(args.phi_psi_agda_path)
+    merged_py_surface = merge_surfaces([py_surface, spectral_py_surface], "python")
+    merged_agda_surface = merge_surfaces([agda_surface, phi_psi_agda_surface], "agda")
+    expected_bindings = EXPECTED_BINDINGS | SPECTRAL_EXPECTED_BINDINGS
+    report = build_report(
+        merged_py_surface,
+        merged_agda_surface,
+        args.limit,
+        expected_bindings,
+    )
+    report["python_v0_1"] = {
+        "present": py_surface.present,
+        "path": py_surface.path,
+        "count": len(py_surface.names),
+    }
+    report["python_v0_2"] = {
+        "present": spectral_py_surface.present,
+        "path": spectral_py_surface.path,
+        "count": len(spectral_py_surface.names),
+    }
+    report["agda_numeric_core"] = {
+        "present": agda_surface.present,
+        "path": agda_surface.path,
+        "count": len(agda_surface.names),
+    }
+    report["agda_phi_psi_core"] = {
+        "present": phi_psi_agda_surface.present,
+        "path": phi_psi_agda_surface.path,
+        "count": len(phi_psi_agda_surface.names),
+    }
 
     if args.json_only:
         print(json.dumps(report, indent=2, sort_keys=True))

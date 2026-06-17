@@ -4,7 +4,6 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
-open import Agda.Primitive using (Setω)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
 
@@ -677,7 +676,7 @@ canonicalNSZeroModeGreatCircleGeometryORCSLPGF =
 ------------------------------------------------------------------------
 -- Canonical receipt.
 
-record NSZeroModeGreatCircleGeometryTheoremReceipt : Setω where
+record NSZeroModeGreatCircleGeometryTheoremReceipt : Set₁ where
   constructor nsZeroModeGreatCircleGeometryTheoremReceipt
   field
     gateName :
@@ -908,7 +907,7 @@ zeroModeGreatCircleGeometryObligationCountIs10 :
 zeroModeGreatCircleGeometryObligationCountIs10 =
   refl
 
-record NSZeroModeGreatCircleGeometryFailClosedEnvelope : Setω where
+record NSZeroModeGreatCircleGeometryFailClosedEnvelope : Set₁ where
   constructor nsZeroModeGreatCircleGeometryFailClosedEnvelope
   field
     receipt :

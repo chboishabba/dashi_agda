@@ -1665,20 +1665,12 @@ canonicalGRPerturbationBoundShapeCore =
     ; christoffelFormulaC0StableShellATightLGammaIs44 =
         refl
     ; christoffelFormulaC0StableReceiptTable =
-        "zero-slot dependency: diagonalZeroLemma"
+        ("zero-slot dependency: diagonalZeroLemma"
         ∷ "zero-slot receipt: 13 explicit nonzero triples / 51 zero triples (symmetric triples counted)"
-        ∷ "bracket_zero_of_not_nonzero dependency: bracket_zero_of_not_nonzero"
-        ∷ "bracket_zero_of_not_nonzero shape: zero-slot bracket kernel: branch vanishes when not-nonzero"
-        ∷ "partialDeriv_of_zero dependency: partialDeriv_of_zero"
-        ∷ "partialDeriv_of_zero shape: zero-slot partial derivative witness"
-        ∷ "diagonalZeroLemma dependency: diagonalZeroLemma"
-        ∷ "diagonalZeroLemma shape: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
         ∷ "bilinear split dependency: christoffelBilinearSplit"
         ∷ "bilinear split receipt: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
-        ∷ "christoffelBilinearSplit shape: |δΓ| <= 1/2(|δgi||∂g|+|gi||∂δg|)"
-        ∷ "angular-slot ledger dependency: angular-slot ledger 13/51; conservative budget note"
-        ∷ "angular-slot ledger shape: 13 nonzero / 51 zero symmetric slots"
-        ∷ "shell A angular route: bracket_le=2*r_max (for r in [3M,4M], selected r_max=4M -> bracket_le=8)"
+        ∷ "angular-slot ledger: 13 nonzero / 51 zero symmetric slots"
+        ∷ "shell A angular route: for r in [3M,4M], selected r_max=4M -> bracket_le=8"
         ∷ "shell A angular route: theta-shell/cot-bound required for angular cot slots"
         ∷ "diagonalZeroLemma dependency chain: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
         ∷ "Γ_christoffel_diagonal dependency: diagonalZeroLemma <- [bracket_zero_of_not_nonzero, partialDeriv_of_zero]"
@@ -1689,7 +1681,7 @@ canonicalGRPerturbationBoundShapeCore =
         ∷ "fallback 3-term route: (1/2)(24ε+3ε)=27/2ε, 27/2<=22"
         ∷ "conservative route: 27/2 <= 22 <= 48"
         ∷ "Shell A constants: inverseMetricMax=3, metricDerivativeMax=8, conservative L_Gamma=48, tight L_Gamma=44, legacy envelope=72"
-        ∷ []
+        ∷ [])
     ; christoffelFormulaC0StableReceiptTableIsCanonical =
         refl
     ; christoffelFormulaC0StableAngularLedgerProjection =
