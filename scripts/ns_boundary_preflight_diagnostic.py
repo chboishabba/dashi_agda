@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Fail-closed boundary diagnostics for raw NS tensor data.
+"""Fail-closed boundary diagnostics for derived NS tensor data.
 
-This script inspects one or more raw DNS artifacts in ``.npz`` or flat ``.csv``
-form and reports three boundary diagnostics:
+This script inspects one or more derived DNS tensor artifacts in ``.npz`` or
+flat ``.csv`` form and reports three boundary diagnostics:
 
 1. ``min g12`` on the ``|lambda2| <= band`` boundary layer.
 2. ``rho = B_k / (1 + pressure_hessian_norm)`` on that same boundary layer.
@@ -19,6 +19,10 @@ It is diagnostic only.  In strict mode, missing files, missing columns/keys,
 shape mismatches, empty required layers, unsupported layouts, or a missing
 Betti-0 threshold source are fatal.  No numeric results are fabricated when
 the required data are absent.
+
+It consumes derived archives.  If you are starting from velocity/pressure
+``.npz`` inputs, the intended producer is
+``scripts/ns_boundary_derived_tensor_archive.py``.
 """
 
 from __future__ import annotations
@@ -56,6 +60,8 @@ def _input_contract_lines(args: argparse.Namespace | None = None) -> list[str]:
         f"  rho: requires {lambda2_name}, {b_name}, and {pressure_name} as .npz keys or .csv columns.",
         f"  Betti-0: requires {lambda2_name} plus {beta_name} data or --beta-value.",
         "  layout: .npz must provide matching tensor shapes; .csv must provide a full 3D grid per slice.",
+        "  source note: this script consumes derived archives; velocity/pressure .npz inputs should be",
+        "  produced by scripts/ns_boundary_derived_tensor_archive.py first.",
     ]
 
 
