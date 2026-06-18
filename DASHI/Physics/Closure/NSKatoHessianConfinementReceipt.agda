@@ -110,6 +110,7 @@ data NSKatoHessianConfinementShape : Set where
   cl1CorrectedBoundaryConcentrationStepBRecorded : NSKatoHessianConfinementShape
   cl1CorrectedBoundaryConcentrationStepCRecorded : NSKatoHessianConfinementShape
   boundaryH_BRecorded : NSKatoHessianConfinementShape
+  boundaryHBKornLevelSetHypothesisRecorded : NSKatoHessianConfinementShape
   boundaryMinG12OnBoundaryKRecorded : NSKatoHessianConfinementShape
   boundaryRealRhoOnBoundaryKRecorded : NSKatoHessianConfinementShape
   boundaryBetti0OnBoundaryKRecorded : NSKatoHessianConfinementShape
@@ -158,6 +159,7 @@ canonicalNSKatoHessianConfinementShape =
   ∷ cl1CorrectedBoundaryConcentrationStepBRecorded
   ∷ cl1CorrectedBoundaryConcentrationStepCRecorded
   ∷ boundaryH_BRecorded
+  ∷ boundaryHBKornLevelSetHypothesisRecorded
   ∷ boundaryMinG12OnBoundaryKRecorded
   ∷ boundaryRealRhoOnBoundaryKRecorded
   ∷ boundaryBetti0OnBoundaryKRecorded
@@ -308,6 +310,10 @@ shapeBoundaryHBText : String
 shapeBoundaryHBText =
   "boundary H_B is recorded on the boundary-layer surface / ∂Ω_K only; no interior Ω_K claim is made."
 
+shapeBoundaryHBKornLevelSetHypothesisText : String
+shapeBoundaryHBKornLevelSetHypothesisText =
+  "Calc 10 records the h_strain_dom / alpha_strain_sq BoundaryHB/KornLevelSet hypothesis as an empirical boundary row only: frame 10 component 2 at bands 5e-4, 2.5e-4, and 1e-4 has c_empirical_true in [0.04180143943317622, 0.048108231165891815], alpha_strain_sq in [0.49648633477014364, 0.49956437854373653], and alpha_omega_sq in [0.5004356214562633, 0.5035136652298564]; no Clay theorem authority and no proof of KornLevelSet are claimed."
+
 shapeBoundaryMinG12OnBoundaryKText : String
 shapeBoundaryMinG12OnBoundaryKText =
   "Diagnostic calc: minimum of g12 on ∂Ω_K."
@@ -338,11 +344,11 @@ shapeDivergenceText =
 
 shapeCalcEEmpiricalProjectionText : String
 shapeCalcEEmpiricalProjectionText =
-  "Calc E is recorded as empirical, non-promoting evidence: the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; optional calcs are ranked as min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 count; Miller λ2+ is outside/at boundary; rho_min stays positive with global minimum 0.23098019784845852 and Scenario D unsupported in dataset; boundary H_B numerically supported only; Calc 6 adds frame-10 component-2 Korn proxy ratio c_empirical_proxy = 8.688873662021036 at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_N128_frame10_component2_20260618.json using denominator grad_lambda2_squared_proxy; Calc 8 adds the true velocity_hessian_norm_squared denominator at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_true_N128_frame10_component2_20260618.json with c_empirical_true = 0.04974806822750822 and denominator_proxy_to_true_ratio = 0.0057254910317037335; Calc 9 extends the true denominator to the carrier timeseries at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_true_korn_timeseries_N128_20260618.json with c_empirical_true_min = 0.0026738091511738582, c_empirical_true_mean = 0.04374066464321035, c_empirical_true_max = 0.052591467297035434, and denominator_proxy_to_true_ratio_mean = 0.0053820601514769605; all are empirical and not analytic KornLevelSet proofs."
+  "Calc E is recorded as empirical, non-promoting evidence: the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; optional calcs are ranked as min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 count; Miller λ2+ is outside/at boundary; rho_min stays positive with global minimum 0.23098019784845852 and Scenario D unsupported in dataset; boundary H_B numerically supported only; Calc 6 adds frame-10 component-2 Korn proxy ratio c_empirical_proxy = 8.688873662021036 at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_N128_frame10_component2_20260618.json using denominator grad_lambda2_squared_proxy; Calc 8 adds the true velocity_hessian_norm_squared denominator at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_true_N128_frame10_component2_20260618.json with c_empirical_true = 0.04974806822750822 and denominator_proxy_to_true_ratio = 0.0057254910317037335; Calc 9 extends the true denominator to the carrier timeseries at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_true_korn_timeseries_N128_20260618.json with c_empirical_true_min = 0.0026738091511738582, c_empirical_true_mean = 0.04374066464321035, c_empirical_true_max = 0.052591467297035434, and denominator_proxy_to_true_ratio_mean = 0.0053820601514769605; Calc 10 adds scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_band_sweep_N128_frame10_component2_20260618.json with c_empirical_true in [0.04180143943317622, 0.048108231165891815], alpha_strain_sq in [0.49648633477014364, 0.49956437854373653], and alpha_omega_sq in [0.5004356214562633, 0.5035136652298564]; all are empirical and not analytic KornLevelSet proofs."
 
 shapeCalcEEmpiricalReceiptText : String
 shapeCalcEEmpiricalReceiptText =
-  "Calc E stays empirical and non-promoting on this receipt surface; the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; Calcs 1-9 are now recorded for this archive, including Calc 6 Korn proxy ratio, Calc 7 carrier persistence, Calc 8 true velocity-Hessian Korn denominator for frame-10 component 2, and Calc 9 true velocity-Hessian Korn denominator over the carrier timeseries, but no Clay theorem or BoundaryHB/KornLevelSet promotion is claimed."
+  "Calc E stays empirical and non-promoting on this receipt surface; the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; Calcs 1-10 are now recorded for this archive, including Calc 6 Korn proxy ratio, Calc 7 carrier persistence, Calc 8 true velocity-Hessian Korn denominator for frame-10 component 2, Calc 9 true velocity-Hessian Korn denominator over the carrier timeseries, and Calc 10 h_strain_dom / alpha_strain_sq BoundaryHB/KornLevelSet hypothesis with the frame-10 component-2 band sweep, but no Clay theorem or BoundaryHB/KornLevelSet promotion is claimed."
 
 shapeCL1OpenFailClosedText : String
 shapeCL1OpenFailClosedText =
@@ -553,6 +559,10 @@ record NSKatoCalcEEmpiricalProjection : Set where
     hBNumericallySupportedOnlyText : String
     hBNumericallySupportedOnlyTextIsCanonical :
       hBNumericallySupportedOnlyText ≡ "boundary H_B numerically supported only"
+    calc10BoundaryHBKornLevelSetHypothesisText : String
+    calc10BoundaryHBKornLevelSetHypothesisTextIsCanonical :
+      calc10BoundaryHBKornLevelSetHypothesisText ≡
+      shapeBoundaryHBKornLevelSetHypothesisText
     boundaryMinG12OnBoundaryKText : String
     boundaryMinG12OnBoundaryKTextIsCanonical :
       boundaryMinG12OnBoundaryKText ≡ shapeBoundaryMinG12OnBoundaryKText
@@ -584,6 +594,8 @@ canonicalNSKatoCalcEEmpiricalProjection =
     "Scenario D unsupported in dataset"
     refl
     "boundary H_B numerically supported only"
+    refl
+    shapeBoundaryHBKornLevelSetHypothesisText
     refl
     shapeBoundaryMinG12OnBoundaryKText
     refl
@@ -626,6 +638,10 @@ record NSKatoCalcEEmpiricalReceipt : Set where
     boundaryHBText : String
     boundaryHBTextIsCanonical :
       boundaryHBText ≡ shapeBoundaryHBText
+    boundaryHBKornLevelSetHypothesisText : String
+    boundaryHBKornLevelSetHypothesisTextIsCanonical :
+      boundaryHBKornLevelSetHypothesisText ≡
+      shapeBoundaryHBKornLevelSetHypothesisText
     boundaryMinG12RhoBettiOptionalCalcRankingText : String
     boundaryMinG12RhoBettiOptionalCalcRankingTextIsCanonical :
       boundaryMinG12RhoBettiOptionalCalcRankingText ≡
@@ -674,6 +690,8 @@ canonicalNSKatoCalcEEmpiricalReceipt =
     shapeCL1CorrectedBoundaryConcentrationStepCText
     refl
     shapeBoundaryHBText
+    refl
+    shapeBoundaryHBKornLevelSetHypothesisText
     refl
     shapeBoundaryMinG12RhoBettiOptionalCalcRankingText
     refl

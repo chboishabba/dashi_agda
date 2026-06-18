@@ -17,6 +17,8 @@ Required output arrays:
 Optional output arrays:
 
 * ``velocity_hessian_norm_squared`` when ``--include-velocity-hessian`` is set
+* ``strain_hessian_norm_squared`` when ``--include-velocity-hessian`` is set
+* ``antisym_hessian_norm_squared`` when ``--include-velocity-hessian`` is set
 
 The producer accepts either real-space velocity keys ``u``, ``v``, ``w`` or
 spectral velocity keys ``u_hat``, ``v_hat``, ``w_hat``.  Pressure is optional:
@@ -439,6 +441,13 @@ def _strain_tensor(grad: np.ndarray) -> np.ndarray:
     return 0.5 * (tensor + np.swapaxes(tensor, 0, 1))
 
 
+def _antisym_tensor(grad: np.ndarray) -> np.ndarray:
+    tensor = np.asarray(grad, dtype=np.float64)
+    if tensor.ndim < 5 or tensor.shape[:2] != (3, 3):
+        raise ValueError(f"grad must have shape (3,3,...) , got {tensor.shape!r}")
+    return 0.5 * (tensor - np.swapaxes(tensor, 0, 1))
+
+
 def _vorticity_from_gradient(grad: np.ndarray) -> np.ndarray:
     tensor = np.asarray(grad, dtype=np.float64)
     omega = np.empty((3,) + tensor.shape[2:], dtype=np.float64)
@@ -477,16 +486,32 @@ def _strain_eigensystem(strain: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     return eigenvalues, eigenvectors
 
 
-def _strain_gradient_tensor(strain: np.ndarray, length: float) -> np.ndarray:
-    tensor = np.asarray(strain, dtype=np.float64)
+def _matrix_gradient_tensor(tensor: np.ndarray, length: float, label: str) -> np.ndarray:
+    tensor = np.asarray(tensor, dtype=np.float64)
     if tensor.ndim not in {5, 6} or tensor.shape[:2] != (3, 3):
-        raise ValueError(f"strain must have shape (3,3,...) , got {tensor.shape!r}")
+        raise ValueError(f"{label} must have shape (3,3,...) , got {tensor.shape!r}")
     grad = np.empty((3, 3, 3) + tensor.shape[2:], dtype=np.float64)
     for i in range(3):
         for j in range(3):
             for axis in range(3):
                 grad[i, j, axis] = _spectral_derivative(tensor[i, j], axis, length)
     return grad
+
+
+def _strain_gradient_tensor(strain: np.ndarray, length: float) -> np.ndarray:
+    return _matrix_gradient_tensor(strain, length, "strain")
+
+
+def _matrix_gradient_norm_squared(matrix_gradient: np.ndarray, label: str) -> np.ndarray:
+    tensor = np.asarray(matrix_gradient, dtype=np.float64)
+    if tensor.ndim not in {6, 7} or tensor.shape[:3] != (3, 3, 3):
+        raise ValueError(f"{label} must have shape (3,3,3,...) , got {tensor.shape!r}")
+    total = np.sum(tensor * tensor, axis=(0, 1, 2))
+    if not np.all(np.isfinite(total)):
+        raise ValueError(f"{label} contains non-finite values")
+    if np.any(total < -1.0e-9):
+        raise ValueError(f"{label} contains negative values")
+    return np.maximum(total, 0.0)
 
 
 def _compute_B_k(eigenvectors: np.ndarray, strain_gradient: np.ndarray) -> np.ndarray:
@@ -507,17 +532,24 @@ def _pressure_hessian_norm_from_pressure(pressure: np.ndarray, length: float) ->
 
 
 def _velocity_hessian_norm_squared(u: np.ndarray, v: np.ndarray, w: np.ndarray, length: float) -> np.ndarray:
-    if u.shape != v.shape or u.shape != w.shape:
-        raise ValueError(f"velocity component shapes differ: {u.shape!r}, {v.shape!r}, {w.shape!r}")
-    total = np.zeros_like(u, dtype=np.float64)
-    for component in (u, v, w):
-        hessian = _spectral_hessian(component, length)
-        total += np.sum(hessian * hessian, axis=(0, 1))
+    total, _, _ = _velocity_hessian_split_norm_squared(u, v, w, length)
+    return total
+
+
+def _velocity_hessian_split_norm_squared(
+    u: np.ndarray, v: np.ndarray, w: np.ndarray, length: float
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    grad = _velocity_gradient(u, v, w, length)
+    strain_gradient = _matrix_gradient_tensor(_strain_tensor(grad), length, "strain")
+    antisym_gradient = _matrix_gradient_tensor(_antisym_tensor(grad), length, "antisymmetric velocity gradient")
+    strain_total = _matrix_gradient_norm_squared(strain_gradient, "strain_hessian_norm_squared")
+    antisym_total = _matrix_gradient_norm_squared(antisym_gradient, "antisym_hessian_norm_squared")
+    total = strain_total + antisym_total
     if not np.all(np.isfinite(total)):
         raise ValueError("velocity_hessian_norm_squared contains non-finite values")
     if np.any(total < -1.0e-9):
         raise ValueError("velocity_hessian_norm_squared contains negative values")
-    return np.maximum(total, 0.0)
+    return np.maximum(total, 0.0), np.maximum(strain_total, 0.0), np.maximum(antisym_total, 0.0)
 
 
 def _beta_value(args: argparse.Namespace) -> float:
@@ -554,6 +586,8 @@ def _build_manifest(
     output_keys = ["lambda2", "g12", "B_k", "pressure_hessian_norm", "beta"]
     if include_velocity_hessian:
         output_keys.append("velocity_hessian_norm_squared")
+        output_keys.append("strain_hessian_norm_squared")
+        output_keys.append("antisym_hessian_norm_squared")
     if output_time_shape is not None:
         output_keys.append("time")
     shapes = {
@@ -565,6 +599,8 @@ def _build_manifest(
     }
     if include_velocity_hessian:
         shapes["velocity_hessian_norm_squared"] = _jsonable_shape(series_shape)
+        shapes["strain_hessian_norm_squared"] = _jsonable_shape(series_shape)
+        shapes["antisym_hessian_norm_squared"] = _jsonable_shape(series_shape)
     if output_time_shape is not None:
         shapes["time"] = _jsonable_shape(output_time_shape)
     return {
@@ -593,7 +629,7 @@ def _build_manifest(
             "lambda2 is the second strain eigenvalue",
             "g12 is lambda2 - lambda1",
             "B_k is max_k 2|e1^T (partial_k S) e2|^2",
-            "velocity_hessian_norm_squared is sum_{a,i,j} (partial_i partial_j u_a)^2 when requested",
+            "velocity_hessian_norm_squared = strain_hessian_norm_squared + antisym_hessian_norm_squared up to floating-point roundoff",
         ],
     }
 
@@ -731,10 +767,13 @@ def _build_archive(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, 
         "producer": np.array(PRODUCER_NAME),
     }
     if args.include_velocity_hessian:
-        output_payload["velocity_hessian_norm_squared"] = np.asarray(
-            _velocity_hessian_norm_squared(u, v, w, domain_length),
-            dtype=np.float64,
-        )
+        strain_hessian_norm_squared = _matrix_gradient_norm_squared(strain_gradient, "strain_hessian_norm_squared")
+        antisym_gradient = _matrix_gradient_tensor(_antisym_tensor(grad), domain_length, "antisymmetric velocity gradient")
+        antisym_hessian_norm_squared = _matrix_gradient_norm_squared(antisym_gradient, "antisym_hessian_norm_squared")
+        velocity_hessian_norm_squared = strain_hessian_norm_squared + antisym_hessian_norm_squared
+        output_payload["velocity_hessian_norm_squared"] = np.asarray(velocity_hessian_norm_squared, dtype=np.float64)
+        output_payload["strain_hessian_norm_squared"] = np.asarray(strain_hessian_norm_squared, dtype=np.float64)
+        output_payload["antisym_hessian_norm_squared"] = np.asarray(antisym_hessian_norm_squared, dtype=np.float64)
     if args.snapshot_index is not None:
         output_payload["snapshot_index"] = np.array(args.snapshot_index, dtype=np.int64)
 
@@ -823,7 +862,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--include-velocity-hessian",
         action="store_true",
-        help="also materialize velocity_hessian_norm_squared = sum_{a,i,j} (partial_i partial_j u_a)^2",
+        help=(
+            "also materialize velocity_hessian_norm_squared plus the split "
+            "strain_hessian_norm_squared and antisym_hessian_norm_squared fields"
+        ),
     )
     args = parser.parse_args()
     args.output = _validate_output_path(args.output)
