@@ -6,7 +6,14 @@ Current NS Clay action note for `2026-06-18`:
   `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_N128_frame10_20260618.json`.
   Result: min-g12 cell is not threshold-contained but is adjacent to
   components 2 and 16531; min-rho cell is inside component 2.
-- Next follow-up is Calc 5 layer thickness / sharper normal-gradient proxy.
+- Calc 5 frame-10 layer thickness / sharper normal-gradient proxy is
+  complete. Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_layer_thickness_N128_frame10_20260618.json`.
+  Result: component 2 has 162 boundary-layer samples and resolved transition
+  thickness mean 2.4566 cells / 0.12059 physical units; component 16531 is a
+  singleton with no `|lambda2| <= 1e-3` layer samples. This supports component
+  2 as the coherent boundary-layer carrier and rejects 16531 as a coherent
+  layer carrier at this band.
 - Global connected-boundary Step A is replaced by a component-local
   hypothesis.
 - No theorem promotion.
