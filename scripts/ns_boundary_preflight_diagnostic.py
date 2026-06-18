@@ -8,9 +8,17 @@ form and reports three boundary diagnostics:
 2. ``rho = B_k / (1 + pressure_hessian_norm)`` on that same boundary layer.
 3. Betti-0 connected-component counts of ``{lambda2 <= beta(t)}``.
 
+Fail-closed archive contract:
+
+- ``lambda2`` is required for the boundary mask and the Betti-0 threshold set.
+- ``g12`` is required for ``min g12`` on the boundary layer.
+- ``B_k`` and ``pressure_hessian_norm`` are required for ``rho`` on the boundary layer.
+- Betti-0 requires ``beta(t)`` data or ``--beta-value``; missing both is fatal.
+
 It is diagnostic only.  In strict mode, missing files, missing columns/keys,
-shape mismatches, empty required layers, or unsupported layouts are fatal.
-No numeric results are fabricated when the required data are absent.
+shape mismatches, empty required layers, unsupported layouts, or a missing
+Betti-0 threshold source are fatal.  No numeric results are fabricated when
+the required data are absent.
 """
 
 from __future__ import annotations
@@ -34,6 +42,43 @@ DEFAULT_G12_KEY = "g12"
 DEFAULT_B_KEY = "B_k"
 DEFAULT_PRESSURE_HESSIAN_KEY = "pressure_hessian_norm"
 DEFAULT_BETA_KEY = "beta"
+
+
+def _input_contract_lines(args: argparse.Namespace | None = None) -> list[str]:
+    lambda2_name = DEFAULT_LAMBDA2_KEY if args is None else args.lambda2_key
+    g12_name = DEFAULT_G12_KEY if args is None else args.g12_key
+    b_name = DEFAULT_B_KEY if args is None else args.b_key
+    pressure_name = DEFAULT_PRESSURE_HESSIAN_KEY if args is None else args.pressure_hessian_key
+    beta_name = DEFAULT_BETA_KEY if args is None else args.beta_key
+    return [
+        "input contract:",
+        f"  min_g12: requires {lambda2_name} and {g12_name} as .npz keys or .csv columns.",
+        f"  rho: requires {lambda2_name}, {b_name}, and {pressure_name} as .npz keys or .csv columns.",
+        f"  Betti-0: requires {lambda2_name} plus {beta_name} data or --beta-value.",
+        "  layout: .npz must provide matching tensor shapes; .csv must provide a full 3D grid per slice.",
+    ]
+
+
+def _contract_summary(args: argparse.Namespace | None = None) -> dict[str, Any]:
+    lambda2_name = DEFAULT_LAMBDA2_KEY if args is None else args.lambda2_key
+    g12_name = DEFAULT_G12_KEY if args is None else args.g12_key
+    b_name = DEFAULT_B_KEY if args is None else args.b_key
+    pressure_name = DEFAULT_PRESSURE_HESSIAN_KEY if args is None else args.pressure_hessian_key
+    beta_name = DEFAULT_BETA_KEY if args is None else args.beta_key
+    return {
+        "min_g12": {
+            "required": [lambda2_name, g12_name],
+            "meaning": f"boundary min({g12_name}) on |{lambda2_name}| <= band",
+        },
+        "rho": {
+            "required": [lambda2_name, b_name, pressure_name],
+            "meaning": f"rho = {b_name} / (1 + {pressure_name}) on the same boundary layer",
+        },
+        "betti0": {
+            "required": [lambda2_name, f"{beta_name} or --beta-value"],
+            "meaning": f"Betti-0 connected-component count of {{{lambda2_name} <= beta(t)}}",
+        },
+    }
 
 
 @dataclass(frozen=True)
@@ -96,6 +141,8 @@ def _load_npz_bundle(path: Path, args: argparse.Namespace) -> tuple[dict[str, np
             args.b_key,
             args.pressure_hessian_key,
         }
+        if args.beta_value is None:
+            required.add(args.beta_key)
         missing = sorted(key for key in required if key not in keys)
         if missing:
             return {}, "npz", missing
@@ -125,6 +172,8 @@ def _load_csv_bundle(path: Path, args: argparse.Namespace) -> tuple[list[dict[st
             args.pressure_hessian_col,
             *args.index_cols,
         ]
+        if args.beta_value is None:
+            required.append(args.beta_col)
         missing = [name for name in required if name not in reader.fieldnames]
         rows = list(reader)
         if missing:
@@ -200,7 +249,7 @@ def _beta_for_slice(beta: np.ndarray | None, beta_value: float | None, slice_ind
         return float(beta_value), "cli-beta-value"
 
     if beta is None:
-        return 0.0, "default-zero"
+        raise ValueError("Betti-0 requires beta(t) data or --beta-value; no beta source was supplied")
 
     beta_array = np.asarray(beta)
     if beta_array.ndim == 0:
@@ -603,7 +652,7 @@ def _load_input_path(path: Path, args: argparse.Namespace) -> list[FileDiagnosti
     ]
 
 
-def _summarize(diagnostics: list[FileDiagnostics]) -> dict[str, Any]:
+def _summarize(diagnostics: list[FileDiagnostics], args: argparse.Namespace) -> dict[str, Any]:
     errors = [error for item in diagnostics for error in item.errors]
     missing_files = [missing for item in diagnostics for missing in item.missing_files]
     missing_columns = [column for item in diagnostics for column in item.missing_columns]
@@ -618,6 +667,7 @@ def _summarize(diagnostics: list[FileDiagnostics]) -> dict[str, Any]:
     status = "ok" if not errors and not missing_files and not missing_columns else "error"
     return {
         "status": status,
+        "contract": _contract_summary(args),
         "files": [asdict(item) for item in diagnostics],
         "all_slices": all_slices,
         "aggregate": {
@@ -641,6 +691,11 @@ def _render_text(summary: dict[str, Any], args: argparse.Namespace) -> str:
         f"strict: {args.strict}",
         f"lambda2_band: {args.lambda2_band:g}",
     ]
+    contract = summary["contract"]
+    lines.append("input_contract:")
+    lines.append(f"  min_g12: required={', '.join(contract['min_g12']['required'])}; {contract['min_g12']['meaning']}")
+    lines.append(f"  rho: required={', '.join(contract['rho']['required'])}; {contract['rho']['meaning']}")
+    lines.append(f"  betti0: required={', '.join(contract['betti0']['required'])}; {contract['betti0']['meaning']}")
     aggregate = summary["aggregate"]
     lines.append(f"aggregate.min_g12_boundary: {aggregate['min_g12_boundary']}")
     lines.append(f"aggregate.rho_min_boundary: {aggregate['rho_min_boundary']}")
@@ -683,15 +738,28 @@ def _render_text(summary: dict[str, Any], args: argparse.Namespace) -> str:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="\n".join(_input_contract_lines()),
+    )
     parser.add_argument(
         "--input",
         action="append",
         default=[],
-        help="Raw DNS tensor input file or directory. May be repeated.",
+        help=(
+            "Raw DNS tensor input file or directory. May be repeated. "
+            "Required contract: lambda2/g12 for min_g12, lambda2/B_k/pressure_hessian_norm for rho, "
+            "and lambda2 plus beta(t) or --beta-value for Betti-0."
+        ),
     )
     parser.add_argument("--lambda2-band", type=float, default=DEFAULT_LAMBDA2_BAND)
-    parser.add_argument("--beta-value", type=float, default=None, help="Override beta(t) with a scalar threshold.")
+    parser.add_argument(
+        "--beta-value",
+        type=float,
+        default=None,
+        help="Override beta(t) with a scalar threshold; required if the archive does not provide beta data.",
+    )
     parser.add_argument("--json", action="store_true", help="Emit JSON instead of text.")
     parser.add_argument("--strict", action="store_true", default=True)
     parser.add_argument("--lenient", action="store_true", help="Do not exit nonzero on validation failures.")
@@ -718,6 +786,7 @@ def main() -> None:
     if not args.input:
         summary = {
             "status": "error",
+            "contract": _contract_summary(args),
             "files": [],
             "all_slices": [],
             "aggregate": {
@@ -740,7 +809,7 @@ def main() -> None:
     for input_arg in args.input:
         diagnostics.extend(_load_input_path(Path(input_arg), args))
 
-    summary = _summarize(diagnostics)
+    summary = _summarize(diagnostics, args)
     text = json.dumps(summary, sort_keys=True, separators=(",", ":")) if args.json else _render_text(summary, args)
     print(text)
 
