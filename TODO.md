@@ -38,17 +38,32 @@ Current NS Clay action note for `2026-06-18`:
   `3906`. Summary: `min_g12_min = 1.421602960869846`,
   `rho_min_min = 0.23098019784845852`, and
   `max_grad_lambda2_max = 549.1245325360463`.
+- Calc 9 true Korn denominator carrier-timeseries is complete. Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_true_korn_timeseries_N128_20260618.json`.
+  Result: all 13 rows are `ok` with denominator
+  `velocity_hessian_norm_squared`. The measured-layer true Korn ratio has
+  `c_empirical_true_min = 0.0026738091511738582`,
+  `c_empirical_true_mean = 0.04374066464321035`, and
+  `c_empirical_true_max = 0.052591467297035434`. The global minimum is the
+  singleton frame-9 carrier `11028`; persistent carrier components `1` and
+  `2` remain positive and sit near `0.041..0.053`. The
+  proxy/true denominator ratio remains small:
+  `denominator_proxy_to_true_ratio_mean = 0.0053820601514769605`.
+  This supports a small positive empirical Korn constant on the persistent
+  carriers only; it is still empirical/non-promoting and not a
+  `KornLevelSet` proof.
 - Global connected-boundary Step A is replaced by a component-local
   hypothesis.
 - No theorem promotion.
 - Closeable lemmas: `millerToH5` and corrected two-gap `GD3`.
 - Open PDE lemmas: `BoundaryHB`, `KornLevelSet`, and
   `boundaryConcentrationStepA`.
-- Derived tensor archive producer and Calcs 1-8 are implemented for this N128
+- Derived tensor archive producer and Calcs 1-9 are implemented for this N128
   pressure-reconstructed archive.
-- Next empirical target is extending the true Korn denominator from frame-10
-  component 2 to the persistent carrier timeseries, then checking whether the
-  true ratio remains bounded away from zero across frames.
+- Next empirical target is either a higher-resolution/stricter boundary-band
+  rerun around the frame-9 singleton and frame-10 component 2, or using the
+  Calc 9 timeseries to fit a conservative empirical Korn constant for
+  persistent carrier components only.
 - Real dashiCFD N128 pressure-reconstructed archive found and preflighted over
   13 frames at `lambda2_band = 1e-3`; empirical/non-promoting summary:
   `min-g12 >= 1.4216`, `rho_min >= 0.23098`, `Betti-0 = 16803..20630`.

@@ -134,8 +134,13 @@ def test_korn_ratio_uses_velocity_hessian_when_u_missing(tmp_path: Path) -> None
     assert payload["status"] == "ok"
     assert payload["denominator_kind"] == "velocity_hessian_norm_squared"
     assert payload["denominator_int_layer_true_dx"] > 0
+    assert payload["c_empirical_proxy"] > 0
     assert payload["c_empirical_true"] > 0
     assert payload["denominator_proxy_to_true_ratio"] > 0
+    assert payload["authority"]["candidate_only"] is True
+    assert payload["authority"]["empirical_non_promoting"] is True
+    assert payload["authority"]["theorem_authority"] is False
+    assert payload["authority"]["promoted"] is False
 
 
 def test_korn_ratio_missing_component_reports_non_promoting_component_not_found(
