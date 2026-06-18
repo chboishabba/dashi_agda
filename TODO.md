@@ -4,8 +4,10 @@ Current NS Clay action note for `2026-06-18`:
 - Closeable lemmas: `millerToH5` and corrected two-gap `GD3`.
 - Open PDE lemmas: `BoundaryHB`, `KornLevelSet`, and
   `boundaryConcentrationStepA`.
-- DNS calcs remain blocked on the derived tensor archive and ranked
-  `min-g12` on `∂ΩK`, `rho` on `∂ΩK`, and `Betti-0`.
+- Derived tensor archive producer is implemented / being added this round.
+- DNS calcs remain blocked on raw DNS velocity/pressure input, not on the
+  derived archive code.
+- Ranked calcs remain `min-g12` on `∂ΩK`, `rho` on `∂ΩK`, and `Betti-0`.
 
 Current formal-structure/lens law note for `2026-06-17`:
 - Added the Phase 4 law-bearing socket layer:
