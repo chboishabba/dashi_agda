@@ -326,7 +326,7 @@ shapeBoundaryMinG12RhoBettiOptionalCalcRankingText =
 
 shapeBoundaryConcentrationStepA_PerComponentText : String
 shapeBoundaryConcentrationStepA_PerComponentText =
-  "Revised per-component boundary diagnostic after Betti-0 fragmentation: boundaryConcentrationStepA_PerComponent is the checked surface; the frame-10 component diagnostic ran as empirical/non-promoting JSON at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_N128_frame10_20260618.json; min-g12 is threshold-adjacent to components 2 and 16531 rather than threshold-contained, min-rho is inside component 2, and the frame-10 layer-thickness diagnostic ran as empirical/non-promoting JSON at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_layer_thickness_N128_frame10_20260618.json with component 2 resolved at 162 boundary-layer samples and transition thickness mean 2.4566 cells / 0.12059 physical units while component 16531 has no |lambda2| <= 1e-3 layer samples; global BoundaryConnected is replaced by a component-carrying hypothesis."
+  "Revised per-component boundary diagnostic after Betti-0 fragmentation: boundaryConcentrationStepA_PerComponent is the checked surface; the frame-10 component diagnostic ran as empirical/non-promoting JSON at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_N128_frame10_20260618.json; min-g12 is threshold-adjacent to components 2 and 16531 rather than threshold-contained, min-rho is inside component 2, and the frame-10 layer-thickness diagnostic ran as empirical/non-promoting JSON at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_layer_thickness_N128_frame10_20260618.json with component 2 resolved at 162 boundary-layer samples and transition thickness mean 2.4566 cells / 0.12059 physical units while component 16531 has no |lambda2| <= 1e-3 layer samples; Calc 7 temporal persistence ran as scripts/data/outputs/ns_boundary_carrier_timeseries_N128_20260618.json and records carrier 1 on frames 0-6, carrier 2 on frames 7-8 and 10-12, singleton carrier 11028 on frame 9, and singleton/no-layer warnings for 16531 and 3906; global BoundaryConnected is replaced by a component-carrying hypothesis."
 
 shapeCL1bPDEGapText : String
 shapeCL1bPDEGapText =
@@ -338,11 +338,11 @@ shapeDivergenceText =
 
 shapeCalcEEmpiricalProjectionText : String
 shapeCalcEEmpiricalProjectionText =
-  "Calc E is recorded as empirical, non-promoting evidence: the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; optional calcs are ranked as min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 count; Miller λ2+ is outside/at boundary; rho approx 8.02 at TG N=128 t≈9; Scenario D unsupported in dataset; boundary H_B numerically supported only."
+  "Calc E is recorded as empirical, non-promoting evidence: the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; optional calcs are ranked as min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 count; Miller λ2+ is outside/at boundary; rho_min stays positive with global minimum 0.23098019784845852 and Scenario D unsupported in dataset; boundary H_B numerically supported only; Calc 6 adds frame-10 component-2 Korn proxy ratio c_empirical_proxy = 8.688873662021036 at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_N128_frame10_component2_20260618.json using denominator grad_lambda2_squared_proxy, not analytic |nabla^2 u|^2."
 
 shapeCalcEEmpiricalReceiptText : String
 shapeCalcEEmpiricalReceiptText =
-  "Calc E stays empirical and non-promoting on this receipt surface; the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; optional calcs are ranked as min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 count."
+  "Calc E stays empirical and non-promoting on this receipt surface; the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; Calcs 1-7 are now recorded for this archive, including Calc 6 Korn proxy ratio and Calc 7 carrier persistence, but no Clay theorem or BoundaryHB/KornLevelSet promotion is claimed."
 
 shapeCL1OpenFailClosedText : String
 shapeCL1OpenFailClosedText =

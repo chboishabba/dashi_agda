@@ -14,16 +14,33 @@ Current NS Clay action note for `2026-06-18`:
   singleton with no `|lambda2| <= 1e-3` layer samples. This supports component
   2 as the coherent boundary-layer carrier and rejects 16531 as a coherent
   layer carrier at this band.
+- Calc 6 frame-10 component-2 Korn proxy ratio is complete. Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_N128_frame10_component2_20260618.json`.
+  Result: `c_empirical_proxy = 8.688873662021036`, with 162 boundary cells,
+  4798 proxy-layer cells, numerator `64981.04909224978`, and denominator
+  `7478.650469540277`. The denominator is explicitly
+  `grad_lambda2_squared_proxy`, not analytic `|nabla^2 u|^2`; no Korn theorem
+  promotion is claimed.
+- Calc 7 temporal persistence is complete over all 13 raw N128 frames.
+  Artifact:
+  `scripts/data/outputs/ns_boundary_carrier_timeseries_N128_20260618.json`.
+  Result: carrier component `1` persists on frames 0-6, carrier component `2`
+  persists on frames 7-8 and 10-12, frame 9 selects singleton component
+  `11028`; singleton/no-layer warnings occur for components `16531` and
+  `3906`. Summary: `min_g12_min = 1.421602960869846`,
+  `rho_min_min = 0.23098019784845852`, and
+  `max_grad_lambda2_max = 549.1245325360463`.
 - Global connected-boundary Step A is replaced by a component-local
   hypothesis.
 - No theorem promotion.
 - Closeable lemmas: `millerToH5` and corrected two-gap `GD3`.
 - Open PDE lemmas: `BoundaryHB`, `KornLevelSet`, and
   `boundaryConcentrationStepA`.
-- Derived tensor archive producer is implemented / being added this round.
-- DNS calcs remain blocked on raw DNS velocity/pressure input, not on the
-  derived archive code.
-- Ranked calcs remain `min-g12` on `∂ΩK`, `rho` on `∂ΩK`, and `Betti-0`.
+- Derived tensor archive producer and Calcs 1-7 are implemented for this N128
+  pressure-reconstructed archive.
+- Next empirical target is an actual `|nabla^2 u|^2` materialization if we
+  want Calc 6 to become a true Korn-ratio diagnostic rather than a
+  `grad_lambda2` proxy.
 - Real dashiCFD N128 pressure-reconstructed archive found and preflighted over
   13 frames at `lambda2_band = 1e-3`; empirical/non-promoting summary:
   `min-g12 >= 1.4216`, `rho_min >= 0.23098`, `Betti-0 = 16803..20630`.
