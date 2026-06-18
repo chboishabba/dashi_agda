@@ -30,6 +30,12 @@ CONTROL_CARD = {
     "P": "Use this ledger as a package-status receipt only; it is not a proof completion certificate.",
     "G": "Validation passes only when packages 1-10 are present, every referenced file exists, and all statuses are in the allowed set.",
     "F": "No Clay theorem is promoted by this ledger; open and closeable status labels remain descriptive only.",
+    "first_six_are_formalization": True,
+    "hard_theorem_count": 3,
+    "hard_theorems": ["KornLevelSet", "BoundaryHB", "collapseImpossible"],
+    "concise_regularit_route": "first six packages are formalization/standard packages before the A/B/C hard-theorem distance route",
+    "concise_regularity_route": "first six packages are formalization/standard packages before the A/B/C hard-theorem distance route",
+    "calc11_next": True,
 }
 
 DEFAULT_PACKAGE_SPECS: tuple[dict[str, Any], ...] = (

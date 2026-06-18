@@ -102,6 +102,19 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     assert payload["theorem_promotion"] is False
     assert payload["validation_passed"] is True
     assert payload["status_counts"] == {"Clay": 1, "closeable": 4, "open": 5}
+    assert payload["control_card"]["first_six_are_formalization"] is True
+    assert payload["control_card"]["hard_theorem_count"] == 3
+    assert payload["control_card"]["hard_theorems"] == [
+        "KornLevelSet",
+        "BoundaryHB",
+        "collapseImpossible",
+    ]
+    assert "formalization/standard packages" in payload["control_card"]["concise_regularit_route"]
+    assert (
+        payload["control_card"]["concise_regularity_route"]
+        == payload["control_card"]["concise_regularit_route"]
+    )
+    assert payload["control_card"]["calc11_next"] is True
 
     packages = payload["packages"]
     assert [row["package_id"] for row in packages] == list(range(1, 11))
