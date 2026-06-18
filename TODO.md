@@ -8,6 +8,10 @@ Current NS Clay action note for `2026-06-18`:
 - DNS calcs remain blocked on raw DNS velocity/pressure input, not on the
   derived archive code.
 - Ranked calcs remain `min-g12` on `∂ΩK`, `rho` on `∂ΩK`, and `Betti-0`.
+- Real dashiCFD N128 pressure-reconstructed archive found and preflighted over
+  13 frames at `lambda2_band = 1e-3`; empirical/non-promoting summary:
+  `min-g12 >= 1.4216`, `rho_min >= 0.23098`, `Betti-0 = 16803..20630`.
+  Artifact: `scripts/data/outputs/ns_boundary_preflight_N128_frame_summary_20260618.json`.
 
 Current formal-structure/lens law note for `2026-06-17`:
 - Added the Phase 4 law-bearing socket layer:

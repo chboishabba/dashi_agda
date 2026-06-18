@@ -38,7 +38,10 @@ import numpy as np
 
 
 DOMAIN_DEFAULT = 2.0 * np.pi
-REAL_TOL = 1.0e-10
+# The real DNS archive is float32 and FFT roundoff leaves tiny imaginary
+# residues after inverse transforms.  This tolerance is relative to the real
+# scale and remains fail-closed for material complex leakage.
+REAL_TOL = 1.0e-6
 DIV_TOL = 1.0e-8
 DEFAULT_BETA_VALUE = 0.0
 INPUT_VELOCITY_KEYS = (("u", "v", "w"), ("u_hat", "v_hat", "w_hat"))
@@ -91,7 +94,16 @@ def _prepare_output_path(path: Path) -> Path:
 
 def _load_npz(path: Path) -> dict[str, np.ndarray]:
     with np.load(path, allow_pickle=False) as data:
-        return {name: np.asarray(data[name]) for name in data.files}
+        out = {name: np.asarray(data[name]) for name in data.files}
+    if "meta_json" in out:
+        try:
+            meta = json.loads(str(np.asarray(out["meta_json"]).item()))
+        except Exception as exc:
+            raise ValueError(f"meta_json could not be parsed as JSON: {exc}") from exc
+        for key in ("N", "domain_length", "grid_spacing", "axis_order"):
+            if key in meta and key not in out:
+                out[key] = np.asarray(meta[key])
+    return out
 
 
 def _realize_array(name: str, value: Any, *, tol: float = REAL_TOL) -> np.ndarray:
@@ -172,7 +184,34 @@ def _load_velocity_bundle(data: dict[str, np.ndarray]) -> tuple[np.ndarray, tupl
     )
 
 
-def _load_velocity_components(data: dict[str, np.ndarray]) -> tuple[np.ndarray, np.ndarray, np.ndarray, tuple[str, str, str], str]:
+def _snapshot_axis_to_front(array: np.ndarray, snapshot_index: int | None, label: str) -> np.ndarray:
+    field = np.asarray(array)
+    if snapshot_index is None:
+        return field
+    if field.ndim < 4:
+        raise ValueError(f"--snapshot-index requires {label} to have a leading snapshot axis")
+    if snapshot_index < 0 or snapshot_index >= int(field.shape[0]):
+        raise ValueError(
+            f"--snapshot-index {snapshot_index} is out of range for {label} with {field.shape[0]} snapshots"
+        )
+    return np.asarray(field[snapshot_index])
+
+
+def _load_velocity_components(
+    data: dict[str, np.ndarray],
+    snapshot_index: int | None,
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, tuple[str, str, str] | tuple[str], str]:
+    if "velocity_snapshots" in data:
+        snapshots = _snapshot_axis_to_front(data["velocity_snapshots"], snapshot_index, "velocity_snapshots")
+        velocity = np.asarray(snapshots)
+        if velocity.ndim not in {4, 5} or velocity.shape[-1] != 3:
+            raise ValueError(
+                "velocity_snapshots must have shape (..., N, N, N, 3), "
+                f"got {velocity.shape!r}"
+            )
+        components = tuple(_realize_array(f"velocity_snapshots[...,{idx}]", velocity[..., idx]) for idx in range(3))
+        return components[0], components[1], components[2], ("velocity_snapshots",), "snapshot-real"
+
     real_keys = INPUT_VELOCITY_KEYS[0]
     spectral_keys = INPUT_VELOCITY_KEYS[1]
     real_present = all(key in data for key in real_keys)
@@ -204,7 +243,14 @@ def _load_velocity_components(data: dict[str, np.ndarray]) -> tuple[np.ndarray, 
     return u, v, w, source_keys, source_kind
 
 
-def _load_optional_pressure(data: dict[str, np.ndarray]) -> tuple[np.ndarray | None, str | None, str | None]:
+def _load_optional_pressure(
+    data: dict[str, np.ndarray],
+    snapshot_index: int | None,
+) -> tuple[np.ndarray | None, str | None, str | None]:
+    if "pressure_snapshots" in data:
+        pressure = _snapshot_axis_to_front(data["pressure_snapshots"], snapshot_index, "pressure_snapshots")
+        return _realize_array("pressure_snapshots", pressure), "pressure_snapshots", "real"
+
     for keyset, kind in ((("pressure",), "real"), (("p",), "real"), (("pressure_hat",), "spectral"), (("p_hat",), "spectral")):
         key = keyset[0]
         if key not in data:
@@ -310,6 +356,19 @@ def _time_array(data: dict[str, np.ndarray], n_snapshots: int) -> tuple[np.ndarr
             raise ValueError(f"t length {len(time)} does not match the number of snapshots {n_snapshots}")
         return np.asarray(time, dtype=np.float64), "t"
     return None, None
+
+
+def _time_for_snapshot(time: np.ndarray | None, snapshot_index: int | None) -> np.ndarray | None:
+    if time is None or snapshot_index is None:
+        return time
+    time_array = np.asarray(time)
+    if time_array.shape == ():
+        return time_array
+    if time_array.ndim != 1:
+        raise ValueError(f"time must be scalar or 1D, got shape {time_array.shape!r}")
+    if snapshot_index >= len(time_array):
+        raise ValueError(f"--snapshot-index {snapshot_index} is out of range for time length {len(time_array)}")
+    return np.asarray(time_array[snapshot_index])
 
 
 def _resolve_series_shape(field: np.ndarray) -> tuple[int, ...]:
@@ -550,9 +609,11 @@ def _build_archive(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, 
         raise ValueError("input archive is empty")
 
     input_keys = sorted(data.keys())
-    u, v, w, velocity_keys, velocity_source = _load_velocity_components(data)
+    u, v, w, velocity_keys, velocity_source = _load_velocity_components(data, args.snapshot_index)
     raw_axis_order, axis_name = _optional_text(data, "axis_order")
     axis_order = raw_axis_order.replace(" ", "") if raw_axis_order is not None else "x,y,z"
+    if axis_order.endswith(",component"):
+        axis_order = axis_order.removesuffix(",component")
     if axis_order not in VALID_AXIS_ORDERS:
         raise ValueError(f"{axis_name or 'axis_order'} must be one of {sorted(VALID_AXIS_ORDERS)!r}, got {axis_order!r}")
 
@@ -566,10 +627,11 @@ def _build_archive(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, 
 
     # After normalization every field is stored in x,y,z order.
     time, time_key = _time_array(data, 1 if u.ndim == 3 else int(u.shape[0]))
+    time = _time_for_snapshot(time, args.snapshot_index)
     if time is not None and time.ndim == 1 and time.shape[0] != (1 if u.ndim == 3 else int(u.shape[0])):
         raise ValueError("time metadata length does not match the velocity snapshots")
 
-    pressure, pressure_key, pressure_kind = _load_optional_pressure(data)
+    pressure, pressure_key, pressure_kind = _load_optional_pressure(data, args.snapshot_index)
     if pressure is not None:
         pressure = _standardize_axis_order(pressure, axis_order)
         pressure = _realize_array("pressure", pressure)
@@ -644,6 +706,8 @@ def _build_archive(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, 
         "input_path": np.array(str(input_path)),
         "producer": np.array(PRODUCER_NAME),
     }
+    if args.snapshot_index is not None:
+        output_payload["snapshot_index"] = np.array(args.snapshot_index, dtype=np.int64)
 
     output_time_shape: tuple[int, ...] | None = None
     if time is not None:
@@ -716,6 +780,12 @@ def parse_args() -> argparse.Namespace:
         help="scalar beta threshold to store in the derived archive; defaults to 0",
     )
     parser.add_argument(
+        "--snapshot-index",
+        type=int,
+        default=None,
+        help="derive one leading snapshot from velocity_snapshots/pressure_snapshots or 4D velocity fields",
+    )
+    parser.add_argument(
         "--allow-zero-pressure",
         action="store_true",
         help="store a zero pressure_hessian_norm field when pressure is absent and Poisson recovery is not used",
@@ -728,6 +798,8 @@ def parse_args() -> argparse.Namespace:
             raise ValueError("--domain-length must be positive")
     if args.beta_value is not None:
         args.beta_value = _as_finite_real("--beta-value", args.beta_value)
+    if args.snapshot_index is not None and args.snapshot_index < 0:
+        raise ValueError("--snapshot-index must be nonnegative")
     return args
 
 
