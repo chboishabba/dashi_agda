@@ -14,6 +14,10 @@ Required output arrays:
 * ``beta``
 * ``time`` is optional
 
+Optional output arrays:
+
+* ``velocity_hessian_norm_squared`` when ``--include-velocity-hessian`` is set
+
 The producer accepts either real-space velocity keys ``u``, ``v``, ``w`` or
 spectral velocity keys ``u_hat``, ``v_hat``, ``w_hat``.  Pressure is optional:
 if it is absent, the script tries to recover the pressure via the periodic
@@ -502,6 +506,20 @@ def _pressure_hessian_norm_from_pressure(pressure: np.ndarray, length: float) ->
     return np.sqrt(np.sum(hessian * hessian, axis=(0, 1)))
 
 
+def _velocity_hessian_norm_squared(u: np.ndarray, v: np.ndarray, w: np.ndarray, length: float) -> np.ndarray:
+    if u.shape != v.shape or u.shape != w.shape:
+        raise ValueError(f"velocity component shapes differ: {u.shape!r}, {v.shape!r}, {w.shape!r}")
+    total = np.zeros_like(u, dtype=np.float64)
+    for component in (u, v, w):
+        hessian = _spectral_hessian(component, length)
+        total += np.sum(hessian * hessian, axis=(0, 1))
+    if not np.all(np.isfinite(total)):
+        raise ValueError("velocity_hessian_norm_squared contains non-finite values")
+    if np.any(total < -1.0e-9):
+        raise ValueError("velocity_hessian_norm_squared contains negative values")
+    return np.maximum(total, 0.0)
+
+
 def _beta_value(args: argparse.Namespace) -> float:
     if args.beta_value is None:
         return DEFAULT_BETA_VALUE
@@ -531,8 +549,11 @@ def _build_manifest(
     series_shape: tuple[int, ...],
     output_time_shape: tuple[int, ...] | None,
     beta_value: float,
+    include_velocity_hessian: bool,
 ) -> dict[str, Any]:
     output_keys = ["lambda2", "g12", "B_k", "pressure_hessian_norm", "beta"]
+    if include_velocity_hessian:
+        output_keys.append("velocity_hessian_norm_squared")
     if output_time_shape is not None:
         output_keys.append("time")
     shapes = {
@@ -542,6 +563,8 @@ def _build_manifest(
         "pressure_hessian_norm": _jsonable_shape(series_shape),
         "beta": [],
     }
+    if include_velocity_hessian:
+        shapes["velocity_hessian_norm_squared"] = _jsonable_shape(series_shape)
     if output_time_shape is not None:
         shapes["time"] = _jsonable_shape(output_time_shape)
     return {
@@ -570,6 +593,7 @@ def _build_manifest(
             "lambda2 is the second strain eigenvalue",
             "g12 is lambda2 - lambda1",
             "B_k is max_k 2|e1^T (partial_k S) e2|^2",
+            "velocity_hessian_norm_squared is sum_{a,i,j} (partial_i partial_j u_a)^2 when requested",
         ],
     }
 
@@ -706,6 +730,11 @@ def _build_archive(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, 
         "input_path": np.array(str(input_path)),
         "producer": np.array(PRODUCER_NAME),
     }
+    if args.include_velocity_hessian:
+        output_payload["velocity_hessian_norm_squared"] = np.asarray(
+            _velocity_hessian_norm_squared(u, v, w, domain_length),
+            dtype=np.float64,
+        )
     if args.snapshot_index is not None:
         output_payload["snapshot_index"] = np.array(args.snapshot_index, dtype=np.int64)
 
@@ -735,6 +764,7 @@ def _build_archive(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, 
         series_shape=tuple(int(dim) for dim in lambda2.shape),
         output_time_shape=output_time_shape,
         beta_value=beta_value,
+        include_velocity_hessian=bool(args.include_velocity_hessian),
     )
     return output_payload, manifest
 
@@ -789,6 +819,11 @@ def parse_args() -> argparse.Namespace:
         "--allow-zero-pressure",
         action="store_true",
         help="store a zero pressure_hessian_norm field when pressure is absent and Poisson recovery is not used",
+    )
+    parser.add_argument(
+        "--include-velocity-hessian",
+        action="store_true",
+        help="also materialize velocity_hessian_norm_squared = sum_{a,i,j} (partial_i partial_j u_a)^2",
     )
     args = parser.parse_args()
     args.output = _validate_output_path(args.output)

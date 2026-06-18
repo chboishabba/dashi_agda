@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-"""Calc 6 empirical Korn-level-set proxy diagnostic for NS boundary archives.
+"""Calc 6/8 empirical Korn-level-set diagnostic for NS boundary archives.
 
 This diagnostic consumes a derived tensor archive produced by
 ``scripts/ns_boundary_derived_tensor_archive.py`` and estimates the component
 ratio
 
-    int_{partial C} max_k B_k dH^2 / int_{layer_delta(C)} proxy dx.
+    int_{partial C} max_k B_k dH^2 / int_{layer_delta(C)} denominator dx.
 
-The current derived archive does not materialize ``|nabla^2 u|^2``.  Therefore
-the default denominator is an explicit proxy,
-``|nabla lambda2|^2``.  The JSON payload records ``denominator_kind`` so the
-result cannot be confused with an analytic Korn constant.
+When the derived archive materializes ``velocity_hessian_norm_squared`` (or the
+legacy alias ``u_hessian_norm_squared``), the denominator is the true spectral
+``|nabla^2 u|^2`` field.  Otherwise the script falls back to the explicit proxy
+``|nabla lambda2|^2``.  The JSON payload records ``denominator_kind`` so neither
+result can be confused with an analytic Korn constant.
 """
 
 from __future__ import annotations
@@ -35,6 +36,7 @@ CONTRACT = "ns_boundary_korn_ratio_diagnostic"
 DEFAULT_LAMBDA2_BAND = 1.0e-3
 DEFAULT_LAYER_RADIUS_CELLS = 2
 OK_STATUS = "ok"
+TRUE_DENOMINATOR_FIELDS = ("u_hessian_norm_squared", "velocity_hessian_norm_squared")
 
 try:  # Optional dependency.
     from scipy.ndimage import binary_dilation as scipy_binary_dilation
@@ -68,6 +70,15 @@ def _stats(values: np.ndarray) -> dict[str, float | None]:
         "max": float(np.max(arr)),
         "sum": float(np.sum(arr)),
     }
+
+
+def _squeeze_single_snapshot(field: np.ndarray) -> np.ndarray:
+    value = np.asarray(field, dtype=np.float64)
+    if value.ndim == 4 and int(value.shape[0]) == 1:
+        value = value[0]
+    if value.ndim != 3:
+        raise ValueError(f"true denominator field must be 3D or one-snapshot 4D, got {value.shape!r}")
+    return value
 
 
 def _dilate(mask: np.ndarray, radius_cells: int) -> np.ndarray:
@@ -124,6 +135,20 @@ def parse_args() -> argparse.Namespace:
 
 def _json_text(payload: dict[str, Any]) -> str:
     return json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False)
+
+
+def _load_true_denominator_field(path: Path) -> tuple[str | None, np.ndarray | None]:
+    with np.load(path, allow_pickle=False) as data:
+        for field_name in TRUE_DENOMINATOR_FIELDS:
+            if field_name not in data:
+                continue
+            field = _squeeze_single_snapshot(np.asarray(data[field_name], dtype=np.float64))
+            if not np.all(np.isfinite(field)):
+                raise ValueError(f"{field_name} contains non-finite values")
+            if np.any(field < -1.0e-9):
+                raise ValueError(f"{field_name} contains negative values")
+            return field_name, np.maximum(field, 0.0)
+    return None, None
 
 
 def _component_payload(args: argparse.Namespace) -> dict[str, Any]:
@@ -186,13 +211,30 @@ def _component_payload(args: argparse.Namespace) -> dict[str, Any]:
         return base
 
     _, _, _, grad_mag = _gradient_components(lambda2, spacing)
+    true_denominator_kind, true_denominator_field = _load_true_denominator_field(args.input)
+    if true_denominator_field is not None and true_denominator_field.shape != lambda2.shape:
+        base.update({"status": "missing_required_field", "errors": ["true_denominator_shape_mismatch"]})
+        return base
+    if true_denominator_field is not None and not np.all(np.isfinite(true_denominator_field)):
+        base.update({"status": "missing_required_field", "errors": ["nonfinite_true_denominator_field"]})
+        return base
+
     area_scale = 1.0 if spacing is None else float(spacing) ** 2
     volume_scale = 1.0 if spacing is None else float(spacing) ** 3
     numerator_density = bundle.b_k[boundary_mask]
-    denominator_density = grad_mag[layer_mask] ** 2
+    proxy_denominator_density = grad_mag[layer_mask] ** 2
+    if true_denominator_field is None:
+        denominator_kind = "grad_lambda2_squared_proxy"
+        denominator_density = proxy_denominator_density
+    else:
+        denominator_kind = str(true_denominator_kind)
+        denominator_density = true_denominator_field[layer_mask]
     numerator = float(np.sum(numerator_density) * area_scale)
     denominator = float(np.sum(denominator_density) * volume_scale)
     ratio = None if denominator <= 0.0 else float(numerator / denominator)
+    proxy_denominator = float(np.sum(proxy_denominator_density) * volume_scale)
+    proxy_ratio = None if proxy_denominator <= 0.0 else float(numerator / proxy_denominator)
+    proxy_to_true_ratio = None if true_denominator_field is None or denominator <= 0.0 else float(proxy_denominator / denominator)
     rho = bundle.b_k / (1.0 + bundle.pressure_hessian_norm)
 
     base.update(
@@ -214,19 +256,33 @@ def _component_payload(args: argparse.Namespace) -> dict[str, Any]:
             "surface_area_cell_scale": float(area_scale),
             "volume_cell_scale": float(volume_scale),
             "numerator_int_boundary_Bk_dH2": numerator,
-            "denominator_int_layer_grad_lambda2_squared_dx": denominator,
-            "c_empirical_proxy": ratio,
+            "denominator_kind": denominator_kind,
+            "denominator_int_layer_grad_lambda2_squared_dx": proxy_denominator,
+            "c_empirical_proxy": proxy_ratio,
             "boundary_Bk_stats": _stats(numerator_density),
-            "layer_grad_lambda2_squared_stats": _stats(denominator_density),
+            "layer_grad_lambda2_squared_stats": _stats(proxy_denominator_density),
             "boundary_g12_stats": _stats(bundle.g12[boundary_mask]),
             "boundary_rho_stats": _stats(rho[boundary_mask]),
             "boundary_grad_lambda2_stats": _stats(grad_mag[boundary_mask]),
             "notes": [
-                "denominator is |grad lambda2|^2 proxy because derived archive does not materialize |nabla^2 u|^2",
+                (
+                    "denominator uses a true Hessian-norm field when available"
+                    if true_denominator_field is not None
+                    else "denominator is |grad lambda2|^2 proxy because derived archive does not materialize |nabla^2 u|^2"
+                ),
                 "result is empirical and non-promoting; it is not an analytic KornLevelSet proof",
             ],
         }
     )
+    if true_denominator_field is not None:
+        base.update(
+            {
+                "denominator_int_layer_true_dx": denominator,
+                "c_empirical_true": ratio,
+                "denominator_proxy_to_true_ratio": proxy_to_true_ratio,
+                "layer_true_denominator_stats": _stats(denominator_density),
+            }
+        )
     return base
 
 

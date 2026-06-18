@@ -88,6 +88,49 @@ def _load_npz(path: Path) -> dict[str, np.ndarray]:
         return {name: np.asarray(data[name]) for name in data.files}
 
 
+def _spectral_second_derivative(field: np.ndarray, axis_i: int, axis_j: int, length: float) -> np.ndarray:
+    scalar = np.asarray(field, dtype=np.float64)
+    assert scalar.ndim == 3, f"expected a 3D snapshot, got {scalar.shape!r}"
+    n = int(scalar.shape[0])
+    k = 2.0 * np.pi * np.fft.fftfreq(n, d=length / float(n))
+    shape = [1, 1, 1]
+    shape[axis_i] = n
+    k_i = k.reshape(shape)
+    shape = [1, 1, 1]
+    shape[axis_j] = n
+    k_j = k.reshape(shape)
+    field_hat = np.fft.fftn(scalar, axes=(0, 1, 2))
+    return np.fft.ifftn(-(k_i * k_j) * field_hat, axes=(0, 1, 2)).real
+
+
+def _velocity_hessian_norm_squared(u: np.ndarray, v: np.ndarray, w: np.ndarray, length: float) -> np.ndarray:
+    components = []
+    for component in (u, v, w):
+        hessian = np.empty((3, 3) + component.shape, dtype=np.float64)
+        for axis_i in range(3):
+            for axis_j in range(3):
+                hessian[axis_i, axis_j] = _spectral_second_derivative(component, axis_i, axis_j, length)
+        components.append(hessian)
+    stacked = np.stack(components, axis=0)
+    return np.sum(stacked * stacked, axis=(0, 1, 2))
+
+
+def _assert_optional_velocity_hessian_field(
+    archive: dict[str, np.ndarray],
+    expected_shape: tuple[int, int, int],
+    expected_values: np.ndarray,
+) -> None:
+    present_names = [name for name in ("u_hessian_norm_squared", "velocity_hessian_norm_squared") if name in archive]
+    assert present_names, "missing optional velocity Hessian norm-squared field"
+
+    for name in present_names:
+        value = np.asarray(archive[name], dtype=np.float64)
+        assert value.shape == expected_shape, f"{name} shape mismatch: {value.shape!r} != {expected_shape!r}"
+        assert np.all(np.isfinite(value)), f"{name} contains non-finite values"
+        assert np.all(value >= 0.0), f"{name} should be nonnegative"
+        np.testing.assert_allclose(value, expected_values, rtol=1.0e-10, atol=1.0e-12)
+
+
 def _assert_derived_archive_contract(archive: dict[str, np.ndarray], expected_shape: tuple[int, int, int]) -> None:
     required = ("lambda2", "g12", "B_k", "pressure_hessian_norm")
     for key in required:
@@ -102,6 +145,8 @@ def _assert_derived_archive_contract(archive: dict[str, np.ndarray], expected_sh
     assert beta.ndim in {0, 1}, f"beta should be a scalar or per-slice threshold, got shape {beta.shape!r}"
     assert np.all(np.isfinite(beta)), "beta contains non-finite values"
     assert np.all(archive["pressure_hessian_norm"] >= 0.0), "pressure_hessian_norm should be nonnegative"
+    assert "u_hessian_norm_squared" not in archive
+    assert "velocity_hessian_norm_squared" not in archive
 
 
 def test_boundary_derived_tensor_archive_round_trips_into_preflight(tmp_path: Path) -> None:
@@ -132,6 +177,26 @@ def test_boundary_derived_tensor_archive_round_trips_into_preflight(tmp_path: Pa
 
     archive = _load_npz(output_npz)
     _assert_derived_archive_contract(archive, expected_shape=(8, 8, 8))
+
+    with np.load(input_npz, allow_pickle=False) as input_data:
+        expected_velocity_hessian_norm_squared = _velocity_hessian_norm_squared(
+            np.asarray(input_data["u"], dtype=np.float64),
+            np.asarray(input_data["v"], dtype=np.float64),
+            np.asarray(input_data["w"], dtype=np.float64),
+            float(2.0 * np.pi),
+        )
+    assert expected_velocity_hessian_norm_squared.shape == (8, 8, 8)
+    assert np.all(np.isfinite(expected_velocity_hessian_norm_squared))
+    assert np.all(expected_velocity_hessian_norm_squared >= 0.0)
+
+    augmented_archive = dict(archive)
+    augmented_archive["u_hessian_norm_squared"] = expected_velocity_hessian_norm_squared
+    augmented_archive["velocity_hessian_norm_squared"] = expected_velocity_hessian_norm_squared
+    _assert_optional_velocity_hessian_field(
+        augmented_archive,
+        expected_shape=(8, 8, 8),
+        expected_values=expected_velocity_hessian_norm_squared,
+    )
 
     args = _make_args()
     args.lambda2_band = float(np.nanmax(np.abs(archive["lambda2"]))) + np.finfo(float).eps
@@ -175,3 +240,42 @@ def test_boundary_derived_tensor_archive_round_trips_into_preflight(tmp_path: Pa
     assert "status: ok" in rendered
     assert "aggregate.min_g12_boundary:" in rendered
     assert "boundary_cells=" in rendered
+
+
+def test_boundary_derived_tensor_archive_can_materialize_velocity_hessian_norm_squared(tmp_path: Path) -> None:
+    _require_producer_script()
+    input_npz = tmp_path / "taylor_green_fixture.npz"
+    output_npz = tmp_path / "derived_boundary_archive_with_hessian.npz"
+    _write_taylor_green_fixture(input_npz, n=8)
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--input",
+            str(input_npz),
+            "--output",
+            str(output_npz),
+            "--include-velocity-hessian",
+        ],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+
+    archive = _load_npz(output_npz)
+    with np.load(input_npz, allow_pickle=False) as source:
+        expected_velocity_hessian_norm_squared = _velocity_hessian_norm_squared(
+            np.asarray(source["u"], dtype=np.float64),
+            np.asarray(source["v"], dtype=np.float64),
+            np.asarray(source["w"], dtype=np.float64),
+            float(2.0 * np.pi),
+        )
+
+    _assert_optional_velocity_hessian_field(
+        archive,
+        expected_shape=(8, 8, 8),
+        expected_values=expected_velocity_hessian_norm_squared,
+    )

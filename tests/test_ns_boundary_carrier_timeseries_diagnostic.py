@@ -43,7 +43,13 @@ def _frame(seed: float) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]
     return lambda2, g12, b_k, pressure
 
 
-def _write_derived_series(path: Path, *, omit_scale: bool = False, omit_pressure: bool = False) -> None:
+def _write_derived_series(
+    path: Path,
+    *,
+    omit_scale: bool = False,
+    omit_pressure: bool = False,
+    include_velocity_hessian: bool = False,
+) -> None:
     frames = [_frame(0.0), _frame(0.1)]
     payload = {
         "lambda2": np.stack([frame[0] for frame in frames]),
@@ -54,11 +60,46 @@ def _write_derived_series(path: Path, *, omit_scale: bool = False, omit_pressure
         "grid_spacing": np.array(0.5, dtype=np.float64),
         "time": np.asarray([0.0, 1.0], dtype=np.float64),
     }
+    if include_velocity_hessian:
+        velocity_hessian = np.stack(
+            [
+                np.full_like(frame[0], 7.0 + seed, dtype=np.float64)
+                for seed, frame in ((0.0, frames[0]), (0.1, frames[1]))
+            ]
+        )
+        payload["velocity_hessian_norm_squared"] = velocity_hessian
     if omit_scale:
         payload.pop("grid_spacing")
     if omit_pressure:
         payload.pop("pressure_hessian_norm")
     np.savez(path, **payload)
+
+
+def _write_raw_frame(path: Path, *, include_velocity_hessian: bool = False) -> None:
+    lambda2, g12, b_k, pressure = _frame(0.0)
+    payload = {
+        "lambda2": lambda2,
+        "g12": g12,
+        "B_k": b_k,
+        "pressure_hessian_norm": pressure,
+        "beta": np.array(0.0, dtype=np.float64),
+        "grid_spacing": np.array(0.5, dtype=np.float64),
+    }
+    if include_velocity_hessian:
+        payload["velocity_hessian_norm_squared"] = np.full_like(lambda2, 7.0, dtype=np.float64)
+    np.savez(path, **payload)
+
+
+def _assert_ok_rows(payload: dict[str, object], *, expect_true_denominator_kind: str | None) -> None:
+    assert payload["status"] == "ok"
+    assert payload["warnings"] == []
+    assert payload["errors"] == []
+    for row in payload["rows"]:
+        assert row["status"] == "ok"
+        assert row["carrier_id"] is not None
+        assert row["boundary_samples"] is not None
+        assert row["rho_min"] is not None
+        assert row["true_denominator_kind"] == expect_true_denominator_kind
 
 
 def test_carrier_timeseries_reports_two_derived_frames(tmp_path: Path) -> None:
@@ -82,18 +123,67 @@ def test_carrier_timeseries_reports_two_derived_frames(tmp_path: Path) -> None:
     assert completed.stdout.strip(), completed.stdout + completed.stderr
     assert completed.returncode == 0, completed.stdout + completed.stderr
     payload = json.loads(completed.stdout)
-    assert payload["status"] == "ok"
     assert payload["frame_count"] == 2
     assert len(payload["rows"]) == 2
     assert payload["summary"]["processed_frame_count"] == 2
     assert payload["summary"]["carrier_stable"] is True
-    assert payload["warnings"] == []
-    assert payload["errors"] == []
-    for row in payload["rows"]:
-        assert row["status"] == "ok"
-        assert row["carrier_id"] is not None
-        assert row["boundary_samples"] is not None
-        assert row["rho_min"] is not None
+    _assert_ok_rows(payload, expect_true_denominator_kind=None)
+
+
+def test_carrier_timeseries_preserves_true_denominator_kind_for_derived_frames(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "derived_series_with_velocity_hessian.npz"
+    _write_derived_series(path, include_velocity_hessian=True)
+    completed = _run_subprocess(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--input",
+            str(path),
+            "--output",
+            str(path.with_suffix(".json")),
+            "--lambda2-band",
+            "1e-3",
+            "--strict",
+            "--json",
+        ]
+    )
+
+    assert completed.stdout.strip(), completed.stdout + completed.stderr
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    payload = json.loads(completed.stdout)
+    assert payload["frame_count"] == 2
+    assert len(payload["rows"]) == 2
+    _assert_ok_rows(payload, expect_true_denominator_kind="velocity_hessian_norm_squared")
+
+
+def test_carrier_timeseries_preserves_true_denominator_kind_for_raw_frame(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "raw_frame_with_velocity_hessian.npz"
+    _write_raw_frame(path, include_velocity_hessian=True)
+    completed = _run_subprocess(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--input",
+            str(path),
+            "--output",
+            str(path.with_suffix(".json")),
+            "--lambda2-band",
+            "1e-3",
+            "--strict",
+            "--json",
+        ]
+    )
+
+    assert completed.stdout.strip(), completed.stdout + completed.stderr
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    payload = json.loads(completed.stdout)
+    assert payload["frame_count"] == 1
+    assert len(payload["rows"]) == 1
+    _assert_ok_rows(payload, expect_true_denominator_kind="velocity_hessian_norm_squared")
 
 
 def test_carrier_timeseries_reports_partial_when_scale_metadata_is_missing(

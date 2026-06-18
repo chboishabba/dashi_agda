@@ -21,6 +21,14 @@ Current NS Clay action note for `2026-06-18`:
   `7478.650469540277`. The denominator is explicitly
   `grad_lambda2_squared_proxy`, not analytic `|nabla^2 u|^2`; no Korn theorem
   promotion is claimed.
+- Calc 8 frame-10 component-2 true Korn denominator is complete. Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_true_N128_frame10_component2_20260618.json`.
+  Result: `velocity_hessian_norm_squared` is materialized by the derived
+  tensor archive producer; the true denominator is `1306202.4598639284` and
+  `c_empirical_true = 0.04974806822750822`. The proxy/true denominator ratio
+  is `0.0057254910317037335`, so the prior proxy overstates the Korn ratio
+  for this carrier. This is empirical/non-promoting and still not a
+  `KornLevelSet` proof.
 - Calc 7 temporal persistence is complete over all 13 raw N128 frames.
   Artifact:
   `scripts/data/outputs/ns_boundary_carrier_timeseries_N128_20260618.json`.
@@ -36,11 +44,11 @@ Current NS Clay action note for `2026-06-18`:
 - Closeable lemmas: `millerToH5` and corrected two-gap `GD3`.
 - Open PDE lemmas: `BoundaryHB`, `KornLevelSet`, and
   `boundaryConcentrationStepA`.
-- Derived tensor archive producer and Calcs 1-7 are implemented for this N128
+- Derived tensor archive producer and Calcs 1-8 are implemented for this N128
   pressure-reconstructed archive.
-- Next empirical target is an actual `|nabla^2 u|^2` materialization if we
-  want Calc 6 to become a true Korn-ratio diagnostic rather than a
-  `grad_lambda2` proxy.
+- Next empirical target is extending the true Korn denominator from frame-10
+  component 2 to the persistent carrier timeseries, then checking whether the
+  true ratio remains bounded away from zero across frames.
 - Real dashiCFD N128 pressure-reconstructed archive found and preflighted over
   13 frames at `lambda2_band = 1e-3`; empirical/non-promoting summary:
   `min-g12 >= 1.4216`, `rho_min >= 0.23098`, `Betti-0 = 16803..20630`.
