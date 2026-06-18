@@ -324,6 +324,10 @@ shapeBoundaryMinG12RhoBettiOptionalCalcRankingText : String
 shapeBoundaryMinG12RhoBettiOptionalCalcRankingText =
   "Optional calc ranking is boundary-first and boundary-layer localized: min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 count; Miller λ2+ is outside/at boundary, not interior."
 
+shapeBoundaryConcentrationStepA_PerComponentText : String
+shapeBoundaryConcentrationStepA_PerComponentText =
+  "Revised per-component boundary diagnostic after Betti-0 fragmentation: boundaryConcentrationStepA_PerComponent is the checked surface; the frame-10 component diagnostic ran as empirical/non-promoting JSON at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_N128_frame10_20260618.json; min-g12 is threshold-adjacent to components 2 and 16531 rather than threshold-contained, min-rho is inside component 2, and global BoundaryConnected is replaced by a component-carrying hypothesis."
+
 shapeCL1bPDEGapText : String
 shapeCL1bPDEGapText =
   "CL1b is recorded as an open PDE-gap boundary-layer route near ∂Ω_K and remains fail-closed/uninhabited in this receipt."
@@ -626,6 +630,10 @@ record NSKatoCalcEEmpiricalReceipt : Set where
     boundaryMinG12RhoBettiOptionalCalcRankingTextIsCanonical :
       boundaryMinG12RhoBettiOptionalCalcRankingText ≡
       shapeBoundaryMinG12RhoBettiOptionalCalcRankingText
+    boundaryConcentrationStepA_PerComponentText : String
+    boundaryConcentrationStepA_PerComponentTextIsCanonical :
+      boundaryConcentrationStepA_PerComponentText ≡
+      shapeBoundaryConcentrationStepA_PerComponentText
     millerToH5StandardInterpolationText : String
     millerToH5StandardInterpolationTextIsCanonical :
       millerToH5StandardInterpolationText ≡
@@ -668,6 +676,8 @@ canonicalNSKatoCalcEEmpiricalReceipt =
     shapeBoundaryHBText
     refl
     shapeBoundaryMinG12RhoBettiOptionalCalcRankingText
+    refl
+    shapeBoundaryConcentrationStepA_PerComponentText
     refl
     shapeMillerToH5StandardInterpolationText
     refl

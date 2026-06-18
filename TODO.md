@@ -1,6 +1,15 @@
 # FOR TODO GO TO '# TODO'
 
 Current NS Clay action note for `2026-06-18`:
+- First three calcs are complete.
+- Calc 4 frame-10 per-component `min-g12`/`rho` check is complete.  Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_N128_frame10_20260618.json`.
+  Result: min-g12 cell is not threshold-contained but is adjacent to
+  components 2 and 16531; min-rho cell is inside component 2.
+- Next follow-up is Calc 5 layer thickness / sharper normal-gradient proxy.
+- Global connected-boundary Step A is replaced by a component-local
+  hypothesis.
+- No theorem promotion.
 - Closeable lemmas: `millerToH5` and corrected two-gap `GD3`.
 - Open PDE lemmas: `BoundaryHB`, `KornLevelSet`, and
   `boundaryConcentrationStepA`.
