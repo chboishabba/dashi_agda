@@ -326,7 +326,7 @@ shapeBoundaryMinG12RhoBettiOptionalCalcRankingText =
 
 shapeBoundaryConcentrationStepA_PerComponentText : String
 shapeBoundaryConcentrationStepA_PerComponentText =
-  "Revised per-component boundary diagnostic after Betti-0 fragmentation: boundaryConcentrationStepA_PerComponent is the checked surface; the frame-10 component diagnostic ran as empirical/non-promoting JSON at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_N128_frame10_20260618.json; min-g12 is threshold-adjacent to components 2 and 16531 rather than threshold-contained, min-rho is inside component 2, and global BoundaryConnected is replaced by a component-carrying hypothesis."
+  "Revised per-component boundary diagnostic after Betti-0 fragmentation: boundaryConcentrationStepA_PerComponent is the checked surface; the frame-10 component diagnostic ran as empirical/non-promoting JSON at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_N128_frame10_20260618.json; min-g12 is threshold-adjacent to components 2 and 16531 rather than threshold-contained, min-rho is inside component 2, and the frame-10 layer-thickness diagnostic ran as empirical/non-promoting JSON at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_layer_thickness_N128_frame10_20260618.json with component 2 resolved at 162 boundary-layer samples and transition thickness mean 2.4566 cells / 0.12059 physical units while component 16531 has no |lambda2| <= 1e-3 layer samples; global BoundaryConnected is replaced by a component-carrying hypothesis."
 
 shapeCL1bPDEGapText : String
 shapeCL1bPDEGapText =
