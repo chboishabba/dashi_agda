@@ -82,6 +82,12 @@ def _required_field_name(data: dict[str, np.ndarray]) -> str:
     return "B_k"
 
 
+def _true_denominator_kind(data: dict[str, np.ndarray]) -> str | None:
+    if "velocity_hessian_norm_squared" in data:
+        return "velocity_hessian_norm_squared"
+    return None
+
+
 def _frame_axis_count(data: dict[str, np.ndarray]) -> int:
     frame_counts: set[int] = set()
     saw_3d = False
@@ -416,6 +422,7 @@ def _frame_report(source: FrameSource, lambda2_band: float, strict: bool) -> dic
     status = str(component_report.get("status", "missing_required_field"))
     carrier_id, carrier_source, carrier_component = _component_choice(component_report)
     carrier_component = _component_stats(carrier_component)
+    true_denominator_kind = _true_denominator_kind(source.data)
     if carrier_id is None:
         row_warnings.append("carrier_component_unavailable")
 
@@ -451,6 +458,7 @@ def _frame_report(source: FrameSource, lambda2_band: float, strict: bool) -> dic
         "source": str(source.source_path),
         "carrier_id": None if carrier_id is None else int(carrier_id),
         "carrier_source": carrier_source,
+        "true_denominator_kind": true_denominator_kind,
         "boundary_samples": None if boundary_samples is None else int(boundary_samples),
         "cell_count": None if cell_count is None else int(cell_count),
         "layer_thickness_mean": None if layer_thickness_mean is None else float(layer_thickness_mean),

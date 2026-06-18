@@ -12,7 +12,12 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = REPO_ROOT / "scripts" / "ns_boundary_korn_ratio_diagnostic.py"
 
 
-def _write_fixture(path: Path, *, omit_pressure: bool = False) -> None:
+def _write_fixture(
+    path: Path,
+    *,
+    omit_pressure: bool = False,
+    true_denominator_fields: tuple[str, ...] = (),
+) -> None:
     shape = (4, 4, 4)
     x = np.arange(shape[0], dtype=np.float64)[:, None, None]
     lambda2 = np.full(shape, 0.25, dtype=np.float64)
@@ -29,6 +34,12 @@ def _write_fixture(path: Path, *, omit_pressure: bool = False) -> None:
         "beta": np.array(0.0, dtype=np.float64),
         "grid_spacing": np.array(0.5, dtype=np.float64),
     }
+    for field_name in true_denominator_fields:
+        payload[field_name] = np.full(
+            shape,
+            3.0 if field_name == "u_hessian_norm_squared" else 5.0,
+            dtype=np.float64,
+        )
     if omit_pressure:
         payload.pop("pressure_hessian_norm")
     np.savez(path, **payload)
@@ -67,6 +78,9 @@ def test_korn_ratio_proxy_reports_non_promoting_ratio(tmp_path: Path) -> None:
     assert completed.returncode == 0, completed.stdout + completed.stderr
     assert payload["status"] == "ok"
     assert payload["denominator_kind"] == "grad_lambda2_squared_proxy"
+    assert "denominator_int_layer_true_dx" not in payload
+    assert "c_empirical_true" not in payload
+    assert "denominator_proxy_to_true_ratio" not in payload
     assert payload["boundary_cell_count"] > 0
     assert payload["layer_cell_count"] >= payload["boundary_cell_count"]
     assert payload["numerator_int_boundary_Bk_dH2"] > 0
@@ -87,6 +101,41 @@ def test_korn_ratio_missing_field_fails_closed(tmp_path: Path) -> None:
     assert completed.returncode != 0
     assert payload["status"] == "missing_required_field"
     assert "pressure_hessian_norm" in json.dumps(payload)
+
+
+def test_korn_ratio_prefers_u_hessian_denominator_and_emits_comparison_fields(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "with_true_u_hessian.npz"
+    _write_fixture(
+        path,
+        true_denominator_fields=("u_hessian_norm_squared", "velocity_hessian_norm_squared"),
+    )
+
+    completed, payload = _run(path)
+
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert payload["status"] == "ok"
+    assert payload["denominator_kind"] == "u_hessian_norm_squared"
+    assert payload["denominator_int_layer_grad_lambda2_squared_dx"] > 0
+    assert payload["denominator_int_layer_true_dx"] > 0
+    assert payload["c_empirical_proxy"] > 0
+    assert payload["c_empirical_true"] > 0
+    assert payload["denominator_proxy_to_true_ratio"] > 0
+
+
+def test_korn_ratio_uses_velocity_hessian_when_u_missing(tmp_path: Path) -> None:
+    path = tmp_path / "with_velocity_hessian.npz"
+    _write_fixture(path, true_denominator_fields=("velocity_hessian_norm_squared",))
+
+    completed, payload = _run(path)
+
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert payload["status"] == "ok"
+    assert payload["denominator_kind"] == "velocity_hessian_norm_squared"
+    assert payload["denominator_int_layer_true_dx"] > 0
+    assert payload["c_empirical_true"] > 0
+    assert payload["denominator_proxy_to_true_ratio"] > 0
 
 
 def test_korn_ratio_missing_component_reports_non_promoting_component_not_found(
