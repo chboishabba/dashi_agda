@@ -1,0 +1,146 @@
+from __future__ import annotations
+
+import hashlib
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = REPO_ROOT / "scripts" / "ns_clay_proof_package_ledger.py"
+
+
+def write_json(path: Path, value: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(65536), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def build_fixture_spec(repo_root: Path, statuses: list[str]) -> tuple[Path, list[Path]]:
+    artifacts: list[Path] = []
+    packages: list[dict[str, object]] = []
+
+    for package_id, status in enumerate(statuses, start=1):
+        artifact = repo_root / f"calc/pkg_{package_id}.json"
+        if package_id == 1:
+            payload = {"package": package_id, "status": status, "rows": [1, 2, 3]}
+        elif package_id == 2:
+            payload = {"package": package_id, "status": status, "open": True}
+        elif package_id == 3:
+            payload = ["closeable", package_id, status]
+        else:
+            payload = {"package": package_id, "status": status, "note": f"fixture-{package_id}"}
+        write_json(artifact, payload)
+        artifacts.append(artifact)
+        packages.append(
+            {
+                "package_id": package_id,
+                "package_name": f"fixture_{package_id}",
+                "status": status,
+                "artifacts": [str(artifact.relative_to(repo_root))],
+            }
+        )
+
+    spec = repo_root / "proof_package_spec.json"
+    write_json(spec, {"packages": packages})
+    return spec, artifacts
+
+
+def run_ledger(repo_root: Path, spec: Path, output: Path) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--repo-root",
+            str(repo_root),
+            "--spec",
+            str(spec),
+            "--json-output",
+            str(output),
+        ],
+        cwd=REPO_ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+
+def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
+    statuses = [
+        "closeable",
+        "open",
+        "closeable",
+        "open",
+        "closeable",
+        "open",
+        "open",
+        "closeable",
+        "Clay",
+        "open",
+    ]
+    spec, artifacts = build_fixture_spec(tmp_path, statuses)
+    output = tmp_path / "ledger.json"
+
+    result = run_ledger(tmp_path, spec, output)
+    assert result.returncode == 0, result.stderr
+
+    payload = json.loads(result.stdout)
+    file_payload = json.loads(output.read_text(encoding="utf-8"))
+
+    assert payload == file_payload
+    assert payload["contract"] == "ns_clay_proof_package_ledger"
+    assert payload["package_count"] == 10
+    assert payload["promotion"] is False
+    assert payload["theorem_promotion"] is False
+    assert payload["validation_passed"] is True
+    assert payload["status_counts"] == {"Clay": 1, "closeable": 4, "open": 5}
+
+    packages = payload["packages"]
+    assert [row["package_id"] for row in packages] == list(range(1, 11))
+    assert [row["status"] for row in packages] == statuses
+    assert all(row["promotion"] is False for row in packages)
+    assert all(row["theorem_promotion"] is False for row in packages)
+
+    first_artifact = packages[0]["artifacts"][0]
+    assert first_artifact["exists"] is True
+    assert first_artifact["sha256"] == sha256(artifacts[0])
+    assert first_artifact["kind"] == "dict"
+    assert first_artifact["top_level_keys"] == ["package", "rows", "status"]
+
+    third_artifact = packages[2]["artifacts"][0]
+    assert third_artifact["kind"] == "list"
+    assert third_artifact["item_count"] == 3
+
+
+def test_ledger_fails_when_a_referenced_artifact_is_missing(tmp_path: Path) -> None:
+    spec, _ = build_fixture_spec(
+        tmp_path,
+        [
+            "closeable",
+            "open",
+            "closeable",
+            "open",
+            "closeable",
+            "open",
+            "open",
+            "closeable",
+            "Clay",
+            "open",
+        ],
+    )
+    missing = tmp_path / "calc" / "pkg_5.json"
+    missing.unlink()
+    output = tmp_path / "ledger.json"
+
+    result = run_ledger(tmp_path, spec, output)
+    assert result.returncode == 1
+    assert "missing artifact" in result.stderr
+    assert not output.exists()
