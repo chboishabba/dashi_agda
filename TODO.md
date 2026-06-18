@@ -52,6 +52,16 @@ Current NS Clay action note for `2026-06-18`:
   This supports a small positive empirical Korn constant on the persistent
   carriers only; it is still empirical/non-promoting and not a
   `KornLevelSet` proof.
+- Calc 10 frame-10 component-2 boundary-band sweep is complete. Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_band_sweep_N128_frame10_component2_20260618.json`.
+  Result: bands `5e-4`, `2.5e-4`, and `1e-4` all return `ok` with
+  `c_empirical_true = 0.04180143943317622..0.048108231165891815`,
+  `alpha_strain_sq = 0.49648633477014364..0.49956437854373653`, and
+  `alpha_omega_sq = 0.5004356214562633..0.5035136652298564`. This gives a
+  stable small empirical Korn ratio on the tightened bands and shows the
+  strain/antisym layer denominator split is close to half/half for this
+  component. It remains empirical/non-promoting and is not a `KornLevelSet`
+  proof.
 - Global connected-boundary Step A is replaced by a component-local
   hypothesis.
 - No theorem promotion.
@@ -6780,6 +6790,14 @@ This is the obstruction theorem in numerical form . The \(H^{-1/2}\) defect rati
 ## Chart 4 — Gate3 Frame Lower Bound A_N vs N
 Phase-complete dictionaries (solid blue circles, MirrorA + MirrorB7 + sign, \(\sigma = 0.289\)) maintain \(A_N > 0\) at all cutoffs \(N \in \{8, 16, 32, 64, 128\}\) . Phase-blind dictionaries (dashed orange squares, no MirrorB7) collapse toward zero as \(N\) grows — the inert-prime nesting cross-term \(\mu = p^{-1/2} \approx 0.378\) dominates once \((N-1)\mu > 1\) . The Gershgorin bound \(A_N \geq 1 - (N-1)\mu_\text{taper}\) remains positive throughout for the tapered atoms, confirming the PAWOTG condition is operative and \(\sigma_\text{digit} = 0.289 < \sigma_\text{crit}^\text{3D} = 0.303\) is the live binding condition for the SSP embedding .
 # TODO
+
+## Calc 10 Target
+- [x] Record the Calc 10 frame-10 component-2 band-sweep outputs:
+  `c_empirical_true = 0.04180143943317622..0.048108231165891815`,
+  `alpha_strain_sq = 0.49648633477014364..0.49956437854373653`, explicit
+  carrier/frame provenance, and the true-denominator receipt.
+- [x] Keep the Calc 10 result non-promoting; do not upgrade it to
+  `KornLevelSet` proof or Clay promotion.
 
 ## Active Blocker Board
 
