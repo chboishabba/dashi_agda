@@ -6,6 +6,27 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS pressure-convention normalization tranche for `2026-06-19`: adds
+  `DASHI.Physics.Closure.NSPressurePoissonConventionNormalizationReceipt`,
+  `scripts/ns_pressure_poisson_sign_timeseries_audit.py`,
+  `scripts/ns_raw_derived_tensor_convention_compare.py`,
+  `scripts/ns_interior_budget_timeseries_diagnostic.py`,
+  `scripts/ns_pressure_poisson_bypass_convention_normalized.py`, and
+  `scripts/check_ns_pressure_convention_regression.py`, wired through
+  `DASHI.Everything` and optional local Clay harness surfaces. Across all
+  13 raw-gradient frames the sign audit selects `+Delta p`, with scale
+  min/mean/max `0.17270948315397366 / 0.17532485071188417 /
+  0.17672763906546698`; frame-10 raw/derived comparison records a 2-of-3
+  `lambda2` sign mismatch and large `g12` convention drift; interior-budget
+  telemetry records signed-budget min/mean/max
+  `-237921.7614255873 / 186923.52795757324 / 612014.7221483203`. The
+  convention-normalized component-2 pressure bypass has 78 of 162 pointwise
+  violations under the audit-selected plus convention versus 11 of 162 under
+  the legacy absolute-Delta proxy. This is fail-closed: sign choice does not
+  validate the pressure bypass, and convention normalization, raw/derived
+  tensor reconciliation, pressure-CZ, the interior maximum principle, full NS
+  Clay, and Clay promotion remain open/false.
+
 - NS interior pressure-mediated vorticity tranche for `2026-06-19`: adds
   `DASHI.Physics.Closure.NSInteriorVorticityMaxPrincipleReceipt`,
   `DASHI.Physics.Closure.NSPressureCZEnstrophyClosureReceipt`,

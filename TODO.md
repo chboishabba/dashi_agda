@@ -1,6 +1,28 @@
 # FOR TODO GO TO '# TODO'
 
 Current NS Clay action note for `2026-06-18`:
+- Pressure-convention normalization tranche for `2026-06-19` is recorded.
+  Artifacts:
+  `DASHI/Physics/Closure/NSPressurePoissonConventionNormalizationReceipt.agda`,
+  `scripts/ns_pressure_poisson_sign_timeseries_audit.py`,
+  `scripts/ns_raw_derived_tensor_convention_compare.py`,
+  `scripts/ns_interior_budget_timeseries_diagnostic.py`,
+  `scripts/ns_pressure_poisson_bypass_convention_normalized.py`, and
+  `scripts/check_ns_pressure_convention_regression.py`. The sign-timeseries
+  audit selects `+Delta p` on all 13 frames with best-scale min/mean/max
+  `0.17270948315397366 / 0.17532485071188417 /
+  0.17672763906546698`. The raw/derived convention comparison records a
+  2-of-3 `lambda2` sign mismatch, `lambda2` mean absolute delta
+  `5.934735845299193`, and `g12` mean absolute delta
+  `24.933366854361918` at the selected frame-10 cells. The interior budget
+  timeseries records signed-budget min/mean/max
+  `-237921.7614255873 / 186923.52795757324 / 612014.7221483203`. The
+  convention-normalized pressure bypass on frame-10 component 2 records 78 of
+  162 pointwise violations under the audit-selected plus convention versus
+  11 of 162 under the legacy absolute-Delta proxy, so the pressure bypass is
+  not rescued by sign selection alone. Remaining gates are convention
+  normalization, raw/derived tensor reconciliation, pressure-CZ proof,
+  interior maximum-principle proof, and Clay NS.
 - Interior pressure-mediated vorticity tranche for `2026-06-19` is recorded.
   Artifacts:
   `DASHI/Physics/Closure/NSInteriorVorticityMaxPrincipleReceipt.agda`,

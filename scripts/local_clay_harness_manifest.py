@@ -416,6 +416,18 @@ def build_specs() -> list[HarnessSpec]:
     ns_interior_pressure_regression_out = (
         CHILD_OUT_DIR / "ns_interior_pressure_regression_smoke.json"
     )
+    ns_pressure_poisson_sign_timeseries_out = (
+        CHILD_OUT_DIR / "ns_pressure_poisson_sign_timeseries_smoke.json"
+    )
+    ns_interior_budget_timeseries_out = (
+        CHILD_OUT_DIR / "ns_interior_budget_timeseries_smoke.json"
+    )
+    ns_pressure_poisson_bypass_convention_normalized_out = (
+        CHILD_OUT_DIR / "ns_pressure_poisson_bypass_convention_normalized_smoke.json"
+    )
+    ns_pressure_convention_regression_out = (
+        CHILD_OUT_DIR / "ns_pressure_convention_regression_smoke.json"
+    )
     ns_boundary_derived_smoke_candidates = tuple(
         sorted(Path("/tmp").glob("ns_boundary_derived*.npz"))
     )
@@ -3347,6 +3359,132 @@ def build_specs() -> list[HarnessSpec]:
             ),
             notes=(
                 "optional regression check for interior budget and omega L3 diagnostics",
+                "regression-only/non-promoting; no theorem or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_pressure_poisson_sign_timeseries_audit",
+            path=script("ns_pressure_poisson_sign_timeseries_audit.py"),
+            args=(
+                "--input",
+                str(ns_raw_pressure_smoke_input),
+                "--frames",
+                "0",
+                "--output-json",
+                str(ns_pressure_poisson_sign_timeseries_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else ("--help",),
+            expected_json_path=ns_pressure_poisson_sign_timeseries_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and script("ns_pressure_poisson_sign_timeseries_audit.py").exists()
+            else (
+                "ns_pressure_poisson_sign_timeseries_audit script not found"
+                if not script("ns_pressure_poisson_sign_timeseries_audit.py").exists()
+                else "ns_pressure_poisson_sign_timeseries_audit requires a raw NS pressure archive under /tmp"
+            ),
+            notes=(
+                "optional pressure-Poisson sign timeseries audit",
+                "empirical/non-promoting; does not prove pressure convention normalization or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_interior_budget_timeseries_diagnostic",
+            path=script("ns_interior_budget_timeseries_diagnostic.py"),
+            args=(
+                "--input",
+                str(ns_raw_pressure_smoke_input),
+                "--frames",
+                "0",
+                "--output-json",
+                str(ns_interior_budget_timeseries_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else ("--help",),
+            expected_json_path=ns_interior_budget_timeseries_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and script("ns_interior_budget_timeseries_diagnostic.py").exists()
+            else (
+                "ns_interior_budget_timeseries_diagnostic script not found"
+                if not script("ns_interior_budget_timeseries_diagnostic.py").exists()
+                else "ns_interior_budget_timeseries_diagnostic requires a raw NS pressure archive under /tmp"
+            ),
+            notes=(
+                "optional interior budget timeseries diagnostic",
+                "empirical/non-promoting; does not prove the pressure-mediated maximum principle or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_pressure_poisson_bypass_convention_normalized",
+            path=script("ns_pressure_poisson_bypass_convention_normalized.py"),
+            args=(
+                "--derived-archive",
+                str(ns_boundary_smoke_derived_input),
+                "--lambda2-band",
+                "1e-6",
+                "--convention",
+                "plus",
+                "--output-json",
+                str(ns_pressure_poisson_bypass_convention_normalized_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--help",),
+            expected_json_path=ns_pressure_poisson_bypass_convention_normalized_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None
+            and script("ns_pressure_poisson_bypass_convention_normalized.py").exists()
+            else (
+                "ns_pressure_poisson_bypass_convention_normalized script not found"
+                if not script("ns_pressure_poisson_bypass_convention_normalized.py").exists()
+                else "ns_pressure_poisson_bypass_convention_normalized requires a discoverable derived NS archive under /tmp"
+            ),
+            notes=(
+                "optional convention-normalized pressure-bypass diagnostic",
+                "empirical/non-promoting; does not prove pressure-Poisson bypass or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_pressure_convention_regression",
+            path=script("check_ns_pressure_convention_regression.py"),
+            args=(
+                (
+                    "--sign-timeseries-json",
+                    str(ns_pressure_poisson_sign_timeseries_out),
+                )
+                if ns_pressure_poisson_sign_timeseries_out.exists()
+                else ()
+            )
+            + (
+                (
+                    "--budget-timeseries-json",
+                    str(ns_interior_budget_timeseries_out),
+                )
+                if ns_interior_budget_timeseries_out.exists()
+                else ()
+            )
+            if ns_pressure_poisson_sign_timeseries_out.exists()
+            or ns_interior_budget_timeseries_out.exists()
+            else ("--help",),
+            expected_json_path=ns_pressure_convention_regression_out,
+            optional=True,
+            skip_reason=None
+            if (
+                ns_pressure_poisson_sign_timeseries_out.exists()
+                or ns_interior_budget_timeseries_out.exists()
+            )
+            and script("check_ns_pressure_convention_regression.py").exists()
+            else (
+                "check_ns_pressure_convention_regression script not found"
+                if not script("check_ns_pressure_convention_regression.py").exists()
+                else "check_ns_pressure_convention_regression requires sign or budget convention artifacts"
+            ),
+            notes=(
+                "optional regression check for pressure convention diagnostics",
                 "regression-only/non-promoting; no theorem or Clay promotion",
             ),
         ),
