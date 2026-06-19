@@ -74,9 +74,17 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
         "route_selector": "statistical",
         "beta": 2.2754974180523737,
         "beta_CI_95": [2.129779448947756, 2.4212153871569915],
+        "delta_target": 1.0,
+        "delta_empirical": 1.2754974180523737,
         "r_squared": 0.13893110418597066,
+        "decision": "regularity_consistent",
         "aggregate_decision": "regularity_consistent",
+        "fit_caveat": (
+            "low rSquared caveat: this candidate route is recorded, but fit quality "
+            "remains limited and should not be read as a theorem."
+        ),
         "proof_blocking": False,
+        "calculation_authority": False,
         "clay_promotion": False,
         "theorem_promotion": False,
     }
@@ -113,6 +121,7 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
     )
     assert payload["clay_promotion"] is False
     assert payload["theorem_promotion"] is False
+    assert payload["calculation_authority"] is False
     assert payload["calc12_result_summary"]["source_artifact"] == (
         "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json"
     )
@@ -121,8 +130,19 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
         2.129779448947756,
         2.4212153871569915,
     ]
+    assert payload["calc12_result_summary"]["delta_target"] == 1.0
+    assert payload["calc12_result_summary"]["delta_empirical"] == 1.2754974180523737
     assert payload["calc12_result_summary"]["r_squared"] == 0.13893110418597066
+    assert payload["calc12_result_summary"]["decision"] == "regularity_consistent"
     assert payload["calc12_result_summary"]["aggregate_decision"] == "regularity_consistent"
+    assert (
+        payload["calc12_result_summary"]["fit_caveat"]
+        == "low rSquared caveat: this candidate route is recorded, but fit quality remains limited and should not be read as a theorem."
+    )
+    assert payload["calc12_result_summary"]["proof_blocking"] is False
+    assert payload["calc12_result_summary"]["calculation_authority"] is False
+    assert payload["calc12_result_summary"]["clay_promotion"] is False
+    assert payload["calc12_result_summary"]["theorem_promotion"] is False
     assert payload["calc12_route_selector"]["script"] == "scripts/ns_clay_calc12_route_selector.py"
     assert (
         payload["calc12_route_selector"]["pair_builder_script"]
@@ -159,6 +179,7 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
     )
     assert payload["control_card"]["calc12_result_summary"] == expected_calc12_result_summary
     assert payload["control_card"]["proof_blocking"] is False
+    assert payload["control_card"]["calculation_authority"] is False
     assert payload["control_card"]["no_further_calcs_blocking"] is True
 
 
@@ -186,3 +207,15 @@ def test_post_calc11_summary_validator_rejects_tampering_and_hash_changes() -> N
     tampered_result_summary = json.loads(json.dumps(payload))
     tampered_result_summary["calc12_result_summary"]["aggregate_decision"] = "inconclusive"
     assert module.validate_payload(tampered_result_summary) is False
+
+    tampered_delta = json.loads(json.dumps(payload))
+    tampered_delta["calc12_result_summary"]["delta_empirical"] = 0.0
+    assert module.validate_payload(tampered_delta) is False
+
+    tampered_caveat = json.loads(json.dumps(payload))
+    tampered_caveat["calc12_result_summary"]["fit_caveat"] = "changed"
+    assert module.validate_payload(tampered_caveat) is False
+
+    tampered_flag = json.loads(json.dumps(payload))
+    tampered_flag["calculation_authority"] = True
+    assert module.validate_payload(tampered_flag) is False

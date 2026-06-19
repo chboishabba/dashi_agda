@@ -1,0 +1,29 @@
+{
+  "clay_promotion": false,
+  "contract": "ns_clay_calc12_result_ledger",
+  "control_card": {
+    "C": "A stdlib-only Python CLI reads one selector artifact, validates it, and writes canonical JSON.",
+    "F": "The ledger explicitly records proof_blocking False, theorem_authority False, and clay_promotion False.",
+    "G": "Validation passes only when the expected route-selector shape is present and all promotion flags are false.",
+    "L": "input artifact -> validation -> extracted beta/CI/r_squared/n_pairs_used/decision -> ledger.",
+    "O": "Worker 1 owns the Calc 12 result ledger emitter and its focused test.",
+    "P": "Use the ledger as a non-promoting receipt for the Calc 12 selector result.",
+    "R": "Record the real Calc 12 selector result, keep proof/theorem/Clay promotion false, and emit a deterministic JSON ledger.",
+    "S": "The input is a real route-selector output, not a proof certificate."
+  },
+  "input": "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json",
+  "proof_blocking": false,
+  "result": {
+    "aggregate_decision": "regularity_consistent",
+    "beta": 2.2754974180523737,
+    "ci": [
+      2.129779448947756,
+      2.4212153871569915
+    ],
+    "n_pairs_used": 5808,
+    "r_squared": 0.13893110418597066
+  },
+  "theorem_authority": false,
+  "validation_passed": true,
+  "version": 1
+}

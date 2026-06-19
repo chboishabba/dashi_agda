@@ -137,6 +137,8 @@ def test_ns_clay_calc12_route_selector_regularity_consistent(tmp_path: Path) -> 
     assert fit["beta"] > 1.0
     assert fit["beta_CI_95"][0] > 1.0
     assert fit["beta_CI_95"][1] >= fit["beta_CI_95"][0]
+    assert fit["delta_target"] == pytest.approx(fit["beta"] - 1.0)
+    assert fit["r_squared_caveat"] is None
     assert_false_promotion_flags(payload)
 
 
@@ -188,6 +190,30 @@ def test_ns_clay_calc12_route_selector_inconclusive_for_mixed_signal(tmp_path: P
     low = fit["beta_CI_95"][0]
     high = fit["beta_CI_95"][1]
     assert low <= 1.0 <= high
+    assert_false_promotion_flags(payload)
+
+
+def test_ns_clay_calc12_route_selector_low_r_squared_emits_caveat(
+    tmp_path: Path,
+) -> None:
+    rows = [
+        {"g12": 0.25, "omega_e2_sq": 1.0},
+        {"g12": 0.5, "omega_e2_sq": 2.0},
+        {"g12": 1.0, "omega_e2_sq": 1.0},
+        {"g12": 2.0, "omega_e2_sq": 2.0},
+        {"g12": 4.0, "omega_e2_sq": 1.0},
+    ]
+
+    payload = run_selector(tmp_path, rows, "low_r2")
+    dataset = first_dataset(payload)
+    fit = dataset["fit"]
+
+    assert pick(payload, "route_selector") == "statistical"
+    assert payload["aggregate_decision"] == "blowup_precursor"
+    assert fit["decision"] == "blowup_precursor"
+    assert fit["r_squared"] == pytest.approx(0.0)
+    assert fit["r_squared_caveat"] == "noisy_low_fit"
+    assert fit["delta_target"] is None
     assert_false_promotion_flags(payload)
 
 

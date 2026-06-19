@@ -42,6 +42,8 @@ class PairFit:
     r_squared: float
     standard_error_beta: float
     beta_ci_95: tuple[float, float]
+    delta_target: float | None
+    r_squared_caveat: str | None
     decision: str
 
     def as_dict(self) -> dict[str, Any]:
@@ -57,6 +59,8 @@ class PairFit:
                 "r_squared": self.r_squared,
                 "standard_error_beta": self.standard_error_beta,
                 "beta_CI_95": [self.beta_ci_95[0], self.beta_ci_95[1]],
+                "delta_target": self.delta_target,
+                "r_squared_caveat": self.r_squared_caveat,
                 "ci_method": "normal_approx_1.96",
                 "decision": self.decision,
             },
@@ -223,6 +227,18 @@ def decision_from_ci(beta_ci_95: tuple[float, float]) -> str:
     return "inconclusive"
 
 
+def delta_target_from_fit(beta: float, beta_ci_95: tuple[float, float], decision: str) -> float | None:
+    if decision == "regularity_consistent" and beta_ci_95[0] > 1.0:
+        return beta - 1.0
+    return None
+
+
+def r_squared_caveat_from_fit(r_squared: float) -> str | None:
+    if r_squared < 0.25:
+        return "noisy_low_fit"
+    return None
+
+
 def analyze_dataset(dataset: dict[str, Any], *, index: int) -> dict[str, Any]:
     datum_id, raw_pairs = extract_pairs(dataset, index=index)
     n_pairs_raw = len(raw_pairs)
@@ -234,6 +250,8 @@ def analyze_dataset(dataset: dict[str, Any], *, index: int) -> dict[str, Any]:
     log_C, fitted_C, beta, r_squared, standard_error_beta, beta_ci_95 = fit_power_law(filtered_pairs)
     decision = decision_from_ci(beta_ci_95)
     min_g12_observed = min(g12 for g12, _ in filtered_pairs)
+    delta_target = delta_target_from_fit(beta, beta_ci_95, decision)
+    r_squared_caveat = r_squared_caveat_from_fit(r_squared)
     return PairFit(
         datum_id=datum_id,
         n_pairs_raw=n_pairs_raw,
@@ -245,6 +263,8 @@ def analyze_dataset(dataset: dict[str, Any], *, index: int) -> dict[str, Any]:
         r_squared=r_squared,
         standard_error_beta=standard_error_beta,
         beta_ci_95=beta_ci_95,
+        delta_target=delta_target,
+        r_squared_caveat=r_squared_caveat,
         decision=decision,
     ).as_dict()
 
@@ -318,6 +338,8 @@ def validate_output(payload: dict[str, Any]) -> None:
             "r_squared",
             "standard_error_beta",
             "beta_CI_95",
+            "delta_target",
+            "r_squared_caveat",
             "ci_method",
             "decision",
         }

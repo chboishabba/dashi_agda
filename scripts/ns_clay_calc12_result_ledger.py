@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from pathlib import Path
 from typing import Any
@@ -67,13 +68,29 @@ def read_json(path: Path) -> Any:
         raise InputError(f"input file is not valid JSON: {path}: {exc}") from exc
 
 
+def _require_finite_real(value: Any, label: str) -> float:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise InputError(f"{label} must be a real number")
+    number = float(value)
+    if not math.isfinite(number):
+        raise InputError(f"{label} must be finite")
+    return number
+
+
+def _require_positive_int(value: Any, label: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise InputError(f"{label} must be a positive integer")
+    if value <= 0:
+        raise InputError(f"{label} must be a positive integer")
+    return value
+
+
 def _coerce_ci(value: Any) -> list[float]:
     if not isinstance(value, list) or len(value) != 2:
         raise InputError("beta_CI_95 must be a two-item list")
     lower, upper = value
     for index, entry in enumerate((lower, upper)):
-        if isinstance(entry, bool) or not isinstance(entry, (int, float)):
-            raise InputError(f"beta_CI_95[{index}] must be a real number")
+        _require_finite_real(entry, f"beta_CI_95[{index}]")
     lower_f = float(lower)
     upper_f = float(upper)
     if lower_f > upper_f:
@@ -115,36 +132,63 @@ def validate_input_payload(payload: Any) -> None:
     if not isinstance(dataset, dict):
         raise InputError("dataset 0 must be a JSON object")
     required_dataset_keys = {"datum_id", "fit", "n_pairs_raw", "n_pairs_used", "min_g12_observed"}
+    optional_dataset_keys = {
+        "max_g12_observed",
+        "min_value",
+        "max_value",
+        "n_pairs",
+    }
     missing_dataset = required_dataset_keys - set(dataset)
-    extra_dataset = set(dataset) - required_dataset_keys
+    extra_dataset = set(dataset) - (required_dataset_keys | optional_dataset_keys)
     if missing_dataset or extra_dataset:
         raise InputError(
             f"dataset 0 keys mismatch; missing={sorted(missing_dataset)!r} extra={sorted(extra_dataset)!r}"
         )
 
-    n_pairs_used = dataset.get("n_pairs_used")
-    if isinstance(n_pairs_used, bool) or not isinstance(n_pairs_used, int) or n_pairs_used <= 0:
-        raise InputError("n_pairs_used must be a positive integer")
+    _require_positive_int(dataset.get("n_pairs_raw"), "n_pairs_raw")
+    _require_positive_int(dataset.get("n_pairs_used"), "n_pairs_used")
+    _require_finite_real(dataset.get("min_g12_observed"), "min_g12_observed")
+    for optional_key in ("max_g12_observed", "min_value", "max_value"):
+        if optional_key in dataset:
+            _require_finite_real(dataset.get(optional_key), optional_key)
+    if "n_pairs" in dataset:
+        _require_positive_int(dataset.get("n_pairs"), "n_pairs")
 
     fit = dataset.get("fit")
     if not isinstance(fit, dict):
         raise InputError("dataset 0 fit must be a JSON object")
     missing_fit = REQUIRED_FIT_KEYS - set(fit)
-    extra_fit = set(fit) - (REQUIRED_FIT_KEYS | {"ci_method", "fitted_C", "log_C", "standard_error_beta"})
+    extra_fit = set(fit) - (
+        REQUIRED_FIT_KEYS
+        | {
+            "ci_method",
+            "fitted_C",
+            "log_C",
+            "standard_error_beta",
+            "C",
+            "intercept",
+            "min_value",
+            "max_value",
+            "delta_target",
+            "r_squared_caveat",
+        }
+    )
     if missing_fit or extra_fit:
         raise InputError(f"dataset 0 fit keys mismatch; missing={sorted(missing_fit)!r} extra={sorted(extra_fit)!r}")
 
-    beta = fit.get("beta")
-    r_squared = fit.get("r_squared")
-    if isinstance(beta, bool) or not isinstance(beta, (int, float)):
-        raise InputError("beta must be a real number")
-    if isinstance(r_squared, bool) or not isinstance(r_squared, (int, float)):
-        raise InputError("r_squared must be a real number")
-    r_squared_f = float(r_squared)
+    _require_finite_real(fit.get("beta"), "beta")
+    r_squared_f = _require_finite_real(fit.get("r_squared"), "r_squared")
     if not 0.0 <= r_squared_f <= 1.0:
         raise InputError("r_squared must lie in [0, 1]")
 
     _coerce_ci(fit.get("beta_CI_95"))
+    for optional_key in ("fitted_C", "log_C", "standard_error_beta", "C", "intercept", "min_value", "max_value"):
+        if optional_key in fit:
+            _require_finite_real(fit.get(optional_key), optional_key)
+    if "delta_target" in fit and fit.get("delta_target") is not None:
+        _require_finite_real(fit.get("delta_target"), "delta_target")
+    if "r_squared_caveat" in fit and fit.get("r_squared_caveat") not in {None, "noisy_low_fit"}:
+        raise InputError("r_squared_caveat must be null or noisy_low_fit")
 
 
 def build_payload(input_payload: Any, *, input_path: Path) -> dict[str, Any]:
@@ -209,9 +253,11 @@ def validate_payload(payload: Any) -> bool:
         return False
     if isinstance(result["beta"], bool) or not isinstance(result["beta"], (int, float)):
         return False
+    if not math.isfinite(float(result["beta"])):
+        return False
     if not isinstance(result["ci"], list) or len(result["ci"]) != 2:
         return False
-    if any(isinstance(value, bool) or not isinstance(value, (int, float)) for value in result["ci"]):
+    if any(isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(float(value)) for value in result["ci"]):
         return False
     if isinstance(result["n_pairs_used"], bool) or not isinstance(result["n_pairs_used"], int):
         return False

@@ -19,6 +19,26 @@ CALC12_EXPECTED_REAL_RUN_ARTIFACT = (
     "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json"
 )
 CALC12_RESULT_SUMMARY_ARTIFACT = CALC12_EXPECTED_REAL_RUN_ARTIFACT
+CALC12_RESULT_SUMMARY = {
+    "source_artifact": CALC12_RESULT_SUMMARY_ARTIFACT,
+    "calc": "Calc12",
+    "route_selector": "statistical",
+    "beta": 2.2754974180523737,
+    "beta_CI_95": [2.129779448947756, 2.4212153871569915],
+    "delta_target": 1.0,
+    "delta_empirical": 1.2754974180523737,
+    "r_squared": 0.13893110418597066,
+    "decision": "regularity_consistent",
+    "aggregate_decision": "regularity_consistent",
+    "fit_caveat": (
+        "low rSquared caveat: this candidate route is recorded, but fit quality "
+        "remains limited and should not be read as a theorem."
+    ),
+    "proof_blocking": False,
+    "calculation_authority": False,
+    "clay_promotion": False,
+    "theorem_promotion": False,
+}
 
 CONTROL_CARD = {
     "O": "Worker 5 owns the post-Calc-11 NS Clay summary ledger.",
@@ -37,21 +57,24 @@ CONTROL_CARD = {
     ),
     "P": (
         "Use the ledger as a checkpoint summary for downstream non-promoting"
-        " checks; Calc12 stays optional, and the actual result summary is"
-        " recorded as metadata only."
+        " checks; Calc12 stays optional and non-blocking, the real result"
+        " summary carries beta/CI/delta_target/delta_empirical/r_squared/"
+        "decision/low-rSquared caveat metadata, and the hard walls remain"
+        " KornLevelSet plus collapseImpossible."
     ),
     "G": (
         "Validation passes only when calc11 is marked complete/no_special_alignment,"
         " Calc12 remains an optional non-blocking route selector, the actual"
-        " result summary records beta/CI/r_squared/aggregate_decision, no"
-        " further calcs are blocking, the closeable package list is exact (7),"
-        " remaining hard walls are unchanged, and no theorem/clay promotion is"
-        " true."
+        " result summary records beta/CI/delta_target/delta_empirical/r_squared/"
+        "decision/low-rSquared caveat, no further calcs are blocking, the"
+        " closeable package list is exact (7), remaining hard walls are"
+        " unchanged, and no theorem/clay promotion is true."
     ),
     "F": (
-        "No theorem promotion, no Clay promotion, proof_blocking False, and"
-        " no_further_calcs_blocking True are encoded as explicit fields; the"
-        " Calc12 actual result summary is informational only."
+        "No theorem promotion, no Clay promotion, no calculation authority,"
+        " proof_blocking False, and no_further_calcs_blocking True are encoded"
+        " as explicit fields; the Calc12 actual result summary is"
+        " informational only."
     ),
     "calc12_route_selector": {
         "calc": "Calc12",
@@ -81,19 +104,9 @@ CONTROL_CARD = {
     "calc12_executable": True,
     "calc12_pair_builder_script": CALC12_PAIR_BUILDER_SCRIPT,
     "calc12_expected_real_run_artifact": CALC12_EXPECTED_REAL_RUN_ARTIFACT,
-    "calc12_result_summary": {
-        "source_artifact": CALC12_RESULT_SUMMARY_ARTIFACT,
-        "calc": "Calc12",
-        "route_selector": "statistical",
-        "beta": 2.2754974180523737,
-        "beta_CI_95": [2.129779448947756, 2.4212153871569915],
-        "r_squared": 0.13893110418597066,
-        "aggregate_decision": "regularity_consistent",
-        "proof_blocking": False,
-        "clay_promotion": False,
-        "theorem_promotion": False,
-    },
+    "calc12_result_summary": dict(CALC12_RESULT_SUMMARY),
     "proof_blocking": False,
+    "calculation_authority": False,
     "no_further_calcs_blocking": True,
 }
 
@@ -156,6 +169,7 @@ REQUIRED_KEYS = (
     "calc12_expected_real_run_artifact",
     "calc12_result_summary",
     "proof_blocking",
+    "calculation_authority",
     "clay_promotion",
     "theorem_promotion",
     "parity_hash",
@@ -193,19 +207,9 @@ def build_payload() -> dict[str, Any]:
         "calc12_executable": True,
         "calc12_pair_builder_script": CALC12_PAIR_BUILDER_SCRIPT,
         "calc12_expected_real_run_artifact": CALC12_EXPECTED_REAL_RUN_ARTIFACT,
-        "calc12_result_summary": {
-            "source_artifact": CALC12_RESULT_SUMMARY_ARTIFACT,
-            "calc": "Calc12",
-            "route_selector": "statistical",
-            "beta": 2.2754974180523737,
-            "beta_CI_95": [2.129779448947756, 2.4212153871569915],
-            "r_squared": 0.13893110418597066,
-            "aggregate_decision": "regularity_consistent",
-            "proof_blocking": False,
-            "clay_promotion": False,
-            "theorem_promotion": False,
-        },
+        "calc12_result_summary": dict(CALC12_RESULT_SUMMARY),
         "proof_blocking": False,
+        "calculation_authority": False,
         "clay_promotion": False,
         "theorem_promotion": False,
         "parity_hash": "",
@@ -268,22 +272,13 @@ def validate_payload(payload: dict[str, Any]) -> bool:
         return False
     if payload.get("calc12_expected_real_run_artifact") != CALC12_EXPECTED_REAL_RUN_ARTIFACT:
         return False
-    if payload.get("calc12_result_summary") != {
-        "source_artifact": CALC12_RESULT_SUMMARY_ARTIFACT,
-        "calc": "Calc12",
-        "route_selector": "statistical",
-        "beta": 2.2754974180523737,
-        "beta_CI_95": [2.129779448947756, 2.4212153871569915],
-        "r_squared": 0.13893110418597066,
-        "aggregate_decision": "regularity_consistent",
-        "proof_blocking": False,
-        "clay_promotion": False,
-        "theorem_promotion": False,
-    }:
+    if payload.get("calc12_result_summary") != CALC12_RESULT_SUMMARY:
         return False
     if payload.get("proof_blocking") is not False:
         return False
 
+    if payload.get("calculation_authority") is not False:
+        return False
     if payload.get("clay_promotion") is not False:
         return False
     if payload.get("theorem_promotion") is not False:

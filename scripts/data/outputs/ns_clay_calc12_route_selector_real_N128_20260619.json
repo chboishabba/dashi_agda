@@ -13,9 +13,11 @@
         ],
         "ci_method": "normal_approx_1.96",
         "decision": "regularity_consistent",
+        "delta_target": 1.2754974180523737,
         "fitted_C": 0.7569010321815973,
         "log_C": -0.27852277097181966,
         "r_squared": 0.13893110418597066,
+        "r_squared_caveat": "noisy_low_fit",
         "standard_error_beta": 0.07434590260439683
       },
       "min_g12_observed": 0.00030009993310170513,
