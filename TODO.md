@@ -178,6 +178,26 @@ Current NS Clay action note for `2026-06-18`:
   throughout, and no band reaches 25%; the Shahmurov/SerrinFromQ2Control route remains
   empirical and weak at strict carrier thickness. No theorem promotion,
   carrier upgrade, or Clay promotion is claimed.
+- Weighted `|lambda2|` carrier quantile / signed-region route diagnostic is
+  recorded. Artifacts:
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_weighted_lambda2_carrier_quantile_N128_20260619.json`,
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_weighted_lambda2_carrier_quantile_regression_N128_20260619.json`,
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_lambda2_signed_region_partition_N128_20260619.json`,
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_lambda2_signed_region_partition_regression_N128_20260619.json`,
+  and
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_lambda2_carrier_route_summary_N128_20260619.json`.
+  Result: over 13 N128 frames, the mean `|lambda2|` threshold needed to
+  carry 5%, 10%, 25%, 50%, 75%, and 90% of total `sum(|omega|^2)` is
+  `0.293311984670807`, `0.5879037709216446`,
+  `1.4905889778538952`, `3.1571976803596873`,
+  `5.393640349722717`, and `7.7260941728276205`.
+  Signed-region mean fractions are `lambda2 < 0`:
+  `0.4881386329371345`, `|lambda2| <= 0.1`:
+  `0.017090189859841835`, and `lambda2 > 0`:
+  `0.5118613670628656`. The route summary is
+  `broad_tube_required`; strict-carrier `SerrinFromQ2Control` remains weak
+  empirical evidence only. No theorem promotion, carrier upgrade, or Clay
+  promotion is claimed.
 - Calc 7 temporal persistence is complete over all 13 raw N128 frames.
   Artifact:
   `scripts/data/outputs/ns_boundary_carrier_timeseries_N128_20260618.json`.

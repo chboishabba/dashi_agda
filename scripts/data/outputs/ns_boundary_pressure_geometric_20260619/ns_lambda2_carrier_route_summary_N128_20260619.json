@@ -1,0 +1,53 @@
+{
+  "C": "scripts/ns_lambda2_carrier_route_summary.py",
+  "F": "The script only synthesizes the recorded diagnostics.",
+  "G": "Route code remains conservative when the carrier partition is not strong enough.",
+  "L": "quantile eps -> signed partition fractions -> route code.",
+  "O": "Worker 6 owns the lambda2 carrier route summary.",
+  "P": "FAIL_CLOSED_NS_LAMBDA2_CARRIER_ROUTE_SUMMARY",
+  "R": "Summarize the epsilon thresholds and signed-region fractions from two recorded JSON inputs.",
+  "S": "Fail-closed empirical summary; no theorem is inferred.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_lambda2_carrier_route_summary_N128_20260619.json"
+  ],
+  "contract": "ns_lambda2_carrier_route_summary",
+  "eps_needed_for_omega_l2": {
+    "p05": 0.293311984670807,
+    "p10": 0.5879037709216446,
+    "p25": 1.4905889778538952,
+    "p50": 3.1571976803596873
+  },
+  "errors": [],
+  "inputs": {
+    "output": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_lambda2_carrier_route_summary_N128_20260619.json",
+    "partition_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_lambda2_signed_region_partition_N128_20260619.json",
+    "quantile_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_weighted_lambda2_carrier_quantile_N128_20260619.json"
+  },
+  "region_fractions": {
+    "near_zero": 0.017090189859841835,
+    "negative": 0.4881386329371345,
+    "positive": 0.5118613670628656
+  },
+  "route_code": "broad_tube_required",
+  "route_implication": {
+    "broad_tube_required": true,
+    "code": "broad_tube_required",
+    "fail_closed": true,
+    "reason": "signed mass is too dispersed away from the near-zero carrier, so a broader tube is required to support the route implication",
+    "strict_supported": false
+  },
+  "status": "ok",
+  "summary": {
+    "near_zero_fraction": 0.017090189859841835,
+    "negative_fraction": 0.4881386329371345,
+    "omega_l2_fraction_targets": [
+      0.05,
+      0.1,
+      0.25,
+      0.5
+    ],
+    "positive_fraction": 0.5118613670628656,
+    "route_code": "broad_tube_required"
+  },
+  "warnings": []
+}
