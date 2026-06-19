@@ -1,0 +1,94 @@
+{
+  "C": "scripts/ns_broad_tube_conditional_regularization_summary.py",
+  "F": "The ledger is only valid when all four gates are true, Clay promotion is false, and the expected receipt markers are present.",
+  "G": "Clay promotion stays false and every gate remains explicitly conditional.",
+  "L": "Read the four receipt surfaces, validate their recorded booleans, derive the gate flags, and list the residual analytic obligations.",
+  "O": "Owner 5 records the broad-tube conditional regularization summary.",
+  "P": "FAIL_CLOSED_NS_BROAD_TUBE_CONDITIONAL_REGULARIZATION_SUMMARY",
+  "R": "Summarize four conditional broad-tube gates, keep Clay promotion false, and expose the remaining analytic proof obligations explicitly.",
+  "S": "Fail closed on any missing receipt or missing true/false marker; no promotion claim is inferred from the receipts.",
+  "changed_files": [
+    "DASHI/Physics/Closure/NSBroadTubeNondegenerateGradientReceipt.agda",
+    "DASHI/Physics/Closure/NSBroadTubeVorticityCoverageReceipt.agda",
+    "DASHI/Physics/Closure/NSBroadTubeSerrinExponentDischargeReceipt.agda",
+    "DASHI/Physics/Closure/NSBroadTubeConditionalRegularityTheoremReceipt.agda",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_conditional_regularization_summary_20260620.json"
+  ],
+  "contract": "ns_broad_tube_conditional_regularization_summary",
+  "errors": [],
+  "gate_flags": {
+    "conditional_regularization": true,
+    "nondegenerate_gradient": true,
+    "serrin_exponent_discharge": true,
+    "vorticity_coverage": true
+  },
+  "promotion_flags": {
+    "clay_promotion": false
+  },
+  "receipt_markers": {
+    "conditional_regularization": {
+      "clayPromotion": false,
+      "conditionalRegularitySocketConstructed": true,
+      "unconditionalClayNS": false
+    },
+    "nondegenerate_gradient": {
+      "boundedSecondFundamentalFormRecorded": true,
+      "clayPromotion": false,
+      "finiteTubularRadiusRecorded": true,
+      "gradientLowerBoundOnTubeRecorded": true,
+      "levelSetFoliationRecorded": true,
+      "smoothLambda2FieldRecorded": true,
+      "unconditionalLambda2GradientTheorem": false
+    },
+    "serrin_exponent_discharge": {
+      "clayPromotion": false,
+      "serrinExponentSocketConstructed": true,
+      "unconditionalSerrinBound": false
+    },
+    "vorticity_coverage": {
+      "broadTubeRequired": true,
+      "clayPromotion": false,
+      "coverageSocketConstructed": true,
+      "strictCarrierInsufficient": true,
+      "unconditionalCoverageTheorem": false
+    }
+  },
+  "remaining_analytic_proof_obligations": {
+    "conditional_regularization": [
+      "unconditional Clay NS theorem",
+      "Clay promotion"
+    ],
+    "nondegenerate_gradient": [
+      "unconditional lambda2-gradient theorem",
+      "Clay promotion"
+    ],
+    "serrin_exponent_discharge": [
+      "unconditional Serrin bound",
+      "Clay promotion"
+    ],
+    "vorticity_coverage": [
+      "unconditional coverage theorem",
+      "Clay promotion"
+    ]
+  },
+  "remaining_analytic_proof_obligations_flat": [
+    "unconditional lambda2-gradient theorem",
+    "Clay promotion",
+    "unconditional coverage theorem",
+    "Clay promotion",
+    "unconditional Serrin bound",
+    "Clay promotion",
+    "unconditional Clay NS theorem",
+    "Clay promotion"
+  ],
+  "source_receipts": {
+    "conditional_regularization": "DASHI/Physics/Closure/NSBroadTubeConditionalRegularityTheoremReceipt.agda",
+    "nondegenerate_gradient": "DASHI/Physics/Closure/NSBroadTubeNondegenerateGradientReceipt.agda",
+    "serrin_exponent_discharge": "DASHI/Physics/Closure/NSBroadTubeSerrinExponentDischargeReceipt.agda",
+    "vorticity_coverage": "DASHI/Physics/Closure/NSBroadTubeVorticityCoverageReceipt.agda"
+  },
+  "status": "ok",
+  "warnings": [
+    "all required receipt markers were parsed and validated."
+  ]
+}
