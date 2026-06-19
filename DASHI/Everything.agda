@@ -299,6 +299,10 @@ import DASHI.Physics.Closure.NSGateway1StrainCrossDerivativeDiagnosticReceipt
 import DASHI.Physics.Closure.NSBoundaryLambda3F123EmpiricalReceipt
 import DASHI.Physics.Closure.NSConditionalQGronwallTheoremGReceipt
 import DASHI.Physics.Closure.NSCollapseConditionalGronwallBridgeReceipt
+import DASHI.Physics.Closure.NSBiaxialCancellationIdentityReceipt
+import DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt
+import DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt
+import DASHI.Physics.Closure.NSLayerKornLiteratureClosureReceipt
 import DASHI.Physics.Closure.NSPressureHessianGateShapeCore
 import DASHI.Physics.Closure.NSStrainBMOBoundReceipt
 import DASHI.Physics.Closure.NSIntegralConditionDiagnosticReceipt
