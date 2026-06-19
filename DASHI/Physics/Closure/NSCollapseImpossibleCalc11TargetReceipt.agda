@@ -78,7 +78,7 @@ canonicalNSCollapseImpossibleCalc11TargetShape =
 
 collapseImpossibleObligationText : String
 collapseImpossibleObligationText =
-  "collapseImpossible target receipt: for smooth finite-energy NS on ∂Ω_K, the sharp estimate |<omega,e2>|^2 <= C_* g12^(1+delta) with delta > 0 and data controlled by E0 and ||u0||H1 gives F123 ~ -g12^-1(λ3 - λ1)|<omega,e2>|^2 = O(g12^delta), so the singular forcing is removed; the receipt records g12 = λ₂ - λ₁, omega = curl u, e2, and F123 without claiming collapseImpossible."
+  "collapseImpossible target receipt: on ∂Ω_K, the estimate |<omega,e2>|^2 <= C_* g12^(1+delta), delta > 0, implies F123 = O(g12^delta) whenever the bound is proved, so the singular forcing is removed; the receipt records g12 = λ₂ - λ₁, omega = curl u, e2, F123, E0, and ||u0||H1 without claiming collapseImpossible."
 
 calc11ImplicationText : String
 calc11ImplicationText =
@@ -203,7 +203,7 @@ canonicalNSCollapseImpossibleCalc11TargetReceipt =
         "Candidate-only receipt for the collapseImpossible analytic target after Calc 11"
         ∷ "Exact variables: C_*, delta, E0, ||u0||H1, g12 = λ₂ - λ₁, omega = curl u, e2, and F123"
         ∷ "Sharp boundary estimate: |<omega,e2>|^2 <= C_* g12^(1+delta) on ∂Ω_K"
-        ∷ "F123 ~ -g12^-1(λ3 - λ1)|<omega,e2>|^2 = O(g12^delta), so singular forcing is removed"
+        ∷ "If proved, F123 = O(g12^delta) and the singular forcing is removed"
         ∷ "Calc 11 no_special_alignment is empirical only and non-promoting"
         ∷ "The diagnostic does not claim collapseImpossible"
         ∷ "Clay promotion remains false"

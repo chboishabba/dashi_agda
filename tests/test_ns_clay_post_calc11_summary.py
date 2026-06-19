@@ -43,7 +43,17 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
     expected_calc12 = {
         "calc": "Calc12",
         "route_selector": "statistical",
+        "script": "scripts/ns_clay_calc12_route_selector.py",
         "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+        "fitted_beta": "candidate-only fitted beta placeholder",
+        "fitted_C": "candidate-only fitted C placeholder",
+        "beta_CI_95": "95% CI placeholder; compare the interval to 1 for route selection",
+        "r_squared": "candidate-only r_squared placeholder",
+        "n_pairs_raw": 9,
+        "n_pairs_used": 9,
+        "min_g12_observed": "candidate-only minimum observed g12 placeholder",
+        "decision": "inconclusive",
+        "aggregate_decision": "inconclusive",
         "beta_decision_thresholds": {
             ">1": "regularity_consistent",
             "<1": "blowup_precursor",
@@ -78,6 +88,22 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
     assert payload["optional_next_calc_blocks_proof"] is False
     assert payload["clay_promotion"] is False
     assert payload["theorem_promotion"] is False
+    assert payload["calc12_route_selector"]["script"] == "scripts/ns_clay_calc12_route_selector.py"
+    assert payload["calc12_route_selector"]["fitted_beta"] == "candidate-only fitted beta placeholder"
+    assert payload["calc12_route_selector"]["fitted_C"] == "candidate-only fitted C placeholder"
+    assert (
+        payload["calc12_route_selector"]["beta_CI_95"]
+        == "95% CI placeholder; compare the interval to 1 for route selection"
+    )
+    assert payload["calc12_route_selector"]["r_squared"] == "candidate-only r_squared placeholder"
+    assert payload["calc12_route_selector"]["n_pairs_raw"] == 9
+    assert payload["calc12_route_selector"]["n_pairs_used"] == 9
+    assert (
+        payload["calc12_route_selector"]["min_g12_observed"]
+        == "candidate-only minimum observed g12 placeholder"
+    )
+    assert payload["calc12_route_selector"]["decision"] == "inconclusive"
+    assert payload["calc12_route_selector"]["aggregate_decision"] == "inconclusive"
     assert isinstance(payload["parity_hash"], str) and len(payload["parity_hash"]) == 64
     assert payload["parity_hash"] in text
     assert payload["control_card"]["calc12_route_selector"] == expected_calc12

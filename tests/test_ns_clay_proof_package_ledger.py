@@ -91,7 +91,17 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     expected_calc12 = {
         "calc": "Calc12",
         "route_selector": "statistical",
+        "script": "scripts/ns_clay_calc12_route_selector.py",
         "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+        "fitted_beta": "candidate-only fitted beta placeholder",
+        "fitted_C": "candidate-only fitted C placeholder",
+        "beta_CI_95": "95% CI placeholder; compare the interval to 1 for route selection",
+        "r_squared": "candidate-only r_squared placeholder",
+        "n_pairs_raw": 9,
+        "n_pairs_used": 9,
+        "min_g12_observed": "candidate-only minimum observed g12 placeholder",
+        "decision": "inconclusive",
+        "aggregate_decision": "inconclusive",
         "beta_decision_thresholds": {
             ">1": "regularity_consistent",
             "<1": "blowup_precursor",
@@ -135,6 +145,22 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     assert payload["hard_walls"] == ["KornLevelSet", "collapseImpossible"]
     assert payload["clay_hard_core"] == "collapseImpossible"
     assert payload["calc12_route_selector"] == expected_calc12
+    assert payload["calc12_route_selector"]["script"] == "scripts/ns_clay_calc12_route_selector.py"
+    assert payload["calc12_route_selector"]["fitted_beta"] == "candidate-only fitted beta placeholder"
+    assert payload["calc12_route_selector"]["fitted_C"] == "candidate-only fitted C placeholder"
+    assert (
+        payload["calc12_route_selector"]["beta_CI_95"]
+        == "95% CI placeholder; compare the interval to 1 for route selection"
+    )
+    assert payload["calc12_route_selector"]["r_squared"] == "candidate-only r_squared placeholder"
+    assert payload["calc12_route_selector"]["n_pairs_raw"] == 9
+    assert payload["calc12_route_selector"]["n_pairs_used"] == 9
+    assert (
+        payload["calc12_route_selector"]["min_g12_observed"]
+        == "candidate-only minimum observed g12 placeholder"
+    )
+    assert payload["calc12_route_selector"]["decision"] == "inconclusive"
+    assert payload["calc12_route_selector"]["aggregate_decision"] == "inconclusive"
     assert payload["formal_packages_write_now"] == [
         "millerToH5",
         "GD3-SobolevBound-Correct",
@@ -158,7 +184,17 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         "optional_next_calc": {
             "calc": "Calc12",
             "route_selector": "statistical",
+            "script": "scripts/ns_clay_calc12_route_selector.py",
             "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+            "fitted_beta": "candidate-only fitted beta placeholder",
+            "fitted_C": "candidate-only fitted C placeholder",
+            "beta_CI_95": "95% CI placeholder; compare the interval to 1 for route selection",
+            "r_squared": "candidate-only r_squared placeholder",
+            "n_pairs_raw": 9,
+            "n_pairs_used": 9,
+            "min_g12_observed": "candidate-only minimum observed g12 placeholder",
+            "decision": "inconclusive",
+            "aggregate_decision": "inconclusive",
             "beta_decision_thresholds": {
                 ">1": "regularity_consistent",
                 "<1": "blowup_precursor",
