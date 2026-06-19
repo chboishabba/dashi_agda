@@ -137,6 +137,26 @@ monitor surface.
   strict-carrier SerrinFromQ2Control and stronger only for a broad tube; no
   theorem promotion, carrier upgrade, or Clay promotion claim is made.
 
+- NS weighted `|lambda2|` carrier quantile tranche for `2026-06-19`: adds
+  `DASHI.Physics.Closure.NSWeightedLambda2CarrierQuantileReceipt`,
+  `scripts/ns_weighted_lambda2_carrier_quantile_diagnostic.py`,
+  `scripts/ns_lambda2_signed_region_partition_diagnostic.py`,
+  `scripts/check_ns_weighted_lambda2_carrier_quantile_regression.py`,
+  `scripts/check_ns_lambda2_signed_region_partition_regression.py`, and
+  `scripts/ns_lambda2_carrier_route_summary.py`, wired through
+  `DASHI.Everything` and optional local Clay harness surfaces. Over 13 N128
+  frames, the mean `|lambda2|` threshold needed to carry 5%, 10%, 25%, 50%,
+  75%, and 90% of total `sum(|omega|^2)` is
+  `0.293311984670807`, `0.5879037709216446`,
+  `1.4905889778538952`, `3.1571976803596873`,
+  `5.393640349722717`, and `7.7260941728276205`. Signed-region mean
+  fractions are `lambda2 < 0`: `0.4881386329371345`,
+  `|lambda2| <= 0.1`: `0.017090189859841835`, and
+  `lambda2 > 0`: `0.5118613670628656`. The route summary is
+  `broad_tube_required`: strict-carrier `SerrinFromQ2Control` remains weak
+  empirical evidence only, and no theorem promotion, carrier upgrade, or Clay
+  promotion claim is made.
+
 - Formal structure/lens law tranche for `2026-06-17`: adds
   `DASHI.Core.FormalStructureLawCore`, `DASHI.Core.FormalLensLawCore`, and
   `DASHI.Core.SourceProcessEvidenceLawCore` as the candidate-only law-bearing

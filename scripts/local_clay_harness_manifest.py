@@ -419,6 +419,21 @@ def build_specs() -> list[HarnessSpec]:
     ns_layer_l2_vorticity_fraction_regression_out = (
         CHILD_OUT_DIR / "ns_layer_l2_vorticity_fraction_regression_smoke.json"
     )
+    ns_weighted_lambda2_carrier_quantile_out = (
+        CHILD_OUT_DIR / "ns_weighted_lambda2_carrier_quantile_smoke.json"
+    )
+    ns_weighted_lambda2_carrier_quantile_regression_out = (
+        CHILD_OUT_DIR / "ns_weighted_lambda2_carrier_quantile_regression_smoke.json"
+    )
+    ns_lambda2_signed_region_partition_out = (
+        CHILD_OUT_DIR / "ns_lambda2_signed_region_partition_smoke.json"
+    )
+    ns_lambda2_signed_region_partition_regression_out = (
+        CHILD_OUT_DIR / "ns_lambda2_signed_region_partition_regression_smoke.json"
+    )
+    ns_lambda2_carrier_route_summary_out = (
+        CHILD_OUT_DIR / "ns_lambda2_carrier_route_summary_smoke.json"
+    )
     ns_pressure_poisson_sign_audit_out = (
         CHILD_OUT_DIR / "ns_pressure_poisson_sign_audit_smoke.json"
     )
@@ -3381,6 +3396,144 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional Calc-8 layer-L2 regression gate",
                 "empirical/non-promoting; validates JSON shape only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_weighted_lambda2_carrier_quantile",
+            path=script("ns_weighted_lambda2_carrier_quantile_diagnostic.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--derived-archive",
+                "/tmp/ns_boundary_true_korn_timeseries_N128_20260618",
+                "--output-json",
+                str(ns_weighted_lambda2_carrier_quantile_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            else ("--help",),
+            expected_json_path=ns_weighted_lambda2_carrier_quantile_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            and script("ns_weighted_lambda2_carrier_quantile_diagnostic.py").exists()
+            else (
+                "ns_weighted_lambda2_carrier_quantile_diagnostic script not found"
+                if not script("ns_weighted_lambda2_carrier_quantile_diagnostic.py").exists()
+                else "ns_weighted_lambda2_carrier_quantile requires raw archive and derived frame directory"
+            ),
+            notes=(
+                "optional weighted |lambda2| carrier quantile diagnostic",
+                "empirical/non-promoting; calibrates broad-tube requirement only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_weighted_lambda2_carrier_quantile_regression",
+            path=script("check_ns_weighted_lambda2_carrier_quantile_regression.py"),
+            args=(
+                str(ns_weighted_lambda2_carrier_quantile_out),
+                "--output-json",
+                str(ns_weighted_lambda2_carrier_quantile_regression_out),
+            )
+            if ns_weighted_lambda2_carrier_quantile_out.exists()
+            else ("--help",),
+            expected_json_path=ns_weighted_lambda2_carrier_quantile_regression_out,
+            optional=True,
+            skip_reason=None
+            if ns_weighted_lambda2_carrier_quantile_out.exists()
+            and script("check_ns_weighted_lambda2_carrier_quantile_regression.py").exists()
+            else (
+                "check_ns_weighted_lambda2_carrier_quantile_regression script not found"
+                if not script("check_ns_weighted_lambda2_carrier_quantile_regression.py").exists()
+                else "check_ns_weighted_lambda2_carrier_quantile_regression requires the quantile diagnostic output"
+            ),
+            notes=(
+                "optional weighted |lambda2| carrier quantile regression gate",
+                "validates non-promoting JSON shape and no promotion flags",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_lambda2_signed_region_partition",
+            path=script("ns_lambda2_signed_region_partition_diagnostic.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--derived-archive",
+                "/tmp/ns_boundary_true_korn_timeseries_N128_20260618",
+                "--output-json",
+                str(ns_lambda2_signed_region_partition_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            else ("--help",),
+            expected_json_path=ns_lambda2_signed_region_partition_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            and script("ns_lambda2_signed_region_partition_diagnostic.py").exists()
+            else (
+                "ns_lambda2_signed_region_partition_diagnostic script not found"
+                if not script("ns_lambda2_signed_region_partition_diagnostic.py").exists()
+                else "ns_lambda2_signed_region_partition requires raw archive and derived frame directory"
+            ),
+            notes=(
+                "optional lambda2 signed-region omega-L2 partition diagnostic",
+                "empirical/non-promoting; records near-zero overlap separately",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_lambda2_signed_region_partition_regression",
+            path=script("check_ns_lambda2_signed_region_partition_regression.py"),
+            args=(
+                str(ns_lambda2_signed_region_partition_out),
+                "--output-json",
+                str(ns_lambda2_signed_region_partition_regression_out),
+            )
+            if ns_lambda2_signed_region_partition_out.exists()
+            else ("--help",),
+            expected_json_path=ns_lambda2_signed_region_partition_regression_out,
+            optional=True,
+            skip_reason=None
+            if ns_lambda2_signed_region_partition_out.exists()
+            and script("check_ns_lambda2_signed_region_partition_regression.py").exists()
+            else (
+                "check_ns_lambda2_signed_region_partition_regression script not found"
+                if not script("check_ns_lambda2_signed_region_partition_regression.py").exists()
+                else "check_ns_lambda2_signed_region_partition_regression requires the signed-region output"
+            ),
+            notes=(
+                "optional lambda2 signed-region partition regression gate",
+                "validates exact partition bins while keeping aggregate regions non-promoting",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_lambda2_carrier_route_summary",
+            path=script("ns_lambda2_carrier_route_summary.py"),
+            args=(
+                str(ns_weighted_lambda2_carrier_quantile_out),
+                str(ns_lambda2_signed_region_partition_out),
+                "--output",
+                str(ns_lambda2_carrier_route_summary_out),
+            )
+            if ns_weighted_lambda2_carrier_quantile_out.exists()
+            and ns_lambda2_signed_region_partition_out.exists()
+            else ("--help",),
+            expected_json_path=ns_lambda2_carrier_route_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_weighted_lambda2_carrier_quantile_out.exists()
+            and ns_lambda2_signed_region_partition_out.exists()
+            and script("ns_lambda2_carrier_route_summary.py").exists()
+            else (
+                "ns_lambda2_carrier_route_summary script not found"
+                if not script("ns_lambda2_carrier_route_summary.py").exists()
+                else "ns_lambda2_carrier_route_summary requires quantile and signed-region outputs"
+            ),
+            notes=(
+                "optional carrier-route summary",
+                "records broad_tube_required route code without theorem promotion",
             ),
         ),
         HarnessSpec(
