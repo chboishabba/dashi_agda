@@ -410,6 +410,15 @@ def build_specs() -> list[HarnessSpec]:
     ns_omega_l3_timeseries_out = (
         CHILD_OUT_DIR / "ns_omega_l3_timeseries_smoke.json"
     )
+    ns_layer_l2_vorticity_fraction_out = (
+        CHILD_OUT_DIR / "ns_layer_l2_vorticity_fraction_smoke.json"
+    )
+    ns_layer_l2_vorticity_fraction_summary_out = (
+        CHILD_OUT_DIR / "ns_layer_l2_vorticity_fraction_summary_smoke.json"
+    )
+    ns_layer_l2_vorticity_fraction_regression_out = (
+        CHILD_OUT_DIR / "ns_layer_l2_vorticity_fraction_regression_smoke.json"
+    )
     ns_pressure_poisson_sign_audit_out = (
         CHILD_OUT_DIR / "ns_pressure_poisson_sign_audit_smoke.json"
     )
@@ -3292,6 +3301,86 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional Calc-7 omega L3 timeseries diagnostic",
                 "empirical/non-promoting; does not prove enstrophy Gronwall closure or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_layer_l2_vorticity_fraction",
+            path=script("ns_layer_l2_vorticity_fraction_diagnostic.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--derived-archive",
+                "/tmp/ns_boundary_true_korn_timeseries_N128_20260618",
+                "--output-json",
+                str(ns_layer_l2_vorticity_fraction_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            else ("--help",),
+            expected_json_path=ns_layer_l2_vorticity_fraction_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            and script("ns_layer_l2_vorticity_fraction_diagnostic.py").exists()
+            else (
+                "ns_layer_l2_vorticity_fraction_diagnostic script not found"
+                if not script("ns_layer_l2_vorticity_fraction_diagnostic.py").exists()
+                else "ns_layer_l2_vorticity_fraction requires raw archive and derived frame directory"
+            ),
+            notes=(
+                "optional Calc-8 layer-L2 vorticity fraction diagnostic",
+                "empirical/non-promoting; does not prove SerrinFromQ2Control or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_layer_l2_vorticity_fraction_summary",
+            path=script("ns_layer_l2_vorticity_fraction_summary.py"),
+            args=(
+                str(ns_layer_l2_vorticity_fraction_out),
+                "--output",
+                str(ns_layer_l2_vorticity_fraction_summary_out),
+            )
+            if ns_layer_l2_vorticity_fraction_out.exists()
+            else ("--help",),
+            expected_json_path=ns_layer_l2_vorticity_fraction_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_layer_l2_vorticity_fraction_out.exists()
+            and script("ns_layer_l2_vorticity_fraction_summary.py").exists()
+            else (
+                "ns_layer_l2_vorticity_fraction_summary script not found"
+                if not script("ns_layer_l2_vorticity_fraction_summary.py").exists()
+                else "ns_layer_l2_vorticity_fraction_summary requires the Calc-8 diagnostic output"
+            ),
+            notes=(
+                "optional Calc-8 layer-L2 summary",
+                "heuristic Shahmurov/Serrin route telemetry only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_layer_l2_vorticity_fraction_regression",
+            path=script("check_ns_layer_l2_vorticity_fraction_regression.py"),
+            args=(
+                str(ns_layer_l2_vorticity_fraction_out),
+                "--output-json",
+                str(ns_layer_l2_vorticity_fraction_regression_out),
+            )
+            if ns_layer_l2_vorticity_fraction_out.exists()
+            else ("--help",),
+            expected_json_path=ns_layer_l2_vorticity_fraction_regression_out,
+            optional=True,
+            skip_reason=None
+            if ns_layer_l2_vorticity_fraction_out.exists()
+            and script("check_ns_layer_l2_vorticity_fraction_regression.py").exists()
+            else (
+                "check_ns_layer_l2_vorticity_fraction_regression script not found"
+                if not script("check_ns_layer_l2_vorticity_fraction_regression.py").exists()
+                else "check_ns_layer_l2_vorticity_fraction_regression requires the Calc-8 diagnostic output"
+            ),
+            notes=(
+                "optional Calc-8 layer-L2 regression gate",
+                "empirical/non-promoting; validates JSON shape only",
             ),
         ),
         HarnessSpec(

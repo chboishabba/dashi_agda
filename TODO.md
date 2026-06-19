@@ -158,6 +158,26 @@ Current NS Clay action note for `2026-06-18`:
   is `0.0057254910317037335`, so the prior proxy overstates the Korn ratio
   for this carrier. This is empirical/non-promoting and still not a
   `KornLevelSet` proof.
+- Calc 8 layer L2 vorticity fraction diagnostic is recorded. Artifact:
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_layer_l2_vorticity_fraction_N128_20260619.json`,
+  with summary
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_layer_l2_vorticity_fraction_summary_N128_20260619.json`
+  and regression
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_layer_l2_vorticity_fraction_regression_N128_20260619.json`.
+  Result: over 13 N128 frames the fraction of total domain
+  `sum(|omega|^2)` carried by `|lambda2| < eps` has min/mean/max
+  `0.00013966842124745355 / 0.00017065548618035617 /
+  0.00019310583413265837` for `eps = 0.001`,
+  `0.0015262680936971556 / 0.0017215705676850985 /
+  0.0019673253564923754` for `eps = 0.01`,
+  `0.015319900559077077 / 0.017090189859841835 /
+  0.019062833364576894` for `eps = 0.1`, and
+  `0.15119918559448156 / 0.16999198817491581 /
+  0.18825663224520564` for `eps = 1.0`. The strict bands
+  `eps <= 0.1` remain below 5%, the broad `eps = 1.0` tube is above 5%
+  throughout, and no band reaches 25%; the Shahmurov/SerrinFromQ2Control route remains
+  empirical and weak at strict carrier thickness. No theorem promotion,
+  carrier upgrade, or Clay promotion is claimed.
 - Calc 7 temporal persistence is complete over all 13 raw N128 frames.
   Artifact:
   `scripts/data/outputs/ns_boundary_carrier_timeseries_N128_20260618.json`.

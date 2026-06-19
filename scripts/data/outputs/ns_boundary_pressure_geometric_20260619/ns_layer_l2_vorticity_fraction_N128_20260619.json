@@ -1,0 +1,763 @@
+{
+  "C": "scripts/ns_layer_l2_vorticity_fraction_diagnostic.py",
+  "F": "The run is empirical only and does not promote any proof or claim.",
+  "G": "No theorem, Clay, or runtime authority is claimed by this diagnostic.",
+  "L": "Status is ok only when the archives, frame count, and required fields are usable for every processed frame.",
+  "O": "Emit per-frame Layer-L2 vorticity concentration fractions from NS boundary archives.",
+  "P": "FAIL_CLOSED_LAYER_L2_VORTICITY_FRACTION_DIAGNOSTIC",
+  "R": "Measure how much of total sum(|omega|^2) lies in cells with |lambda2| < eps for each frame.",
+  "S": "Resolve raw and derived NPZ archives, align frames, compute vorticity-square fractions, and fail closed on malformed inputs.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "changed_paths": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_layer_l2_vorticity_fraction_N128_20260619.json"
+  ],
+  "contract": "ns_layer_l2_vorticity_fraction_diagnostic",
+  "derived_archive": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618",
+  "derived_frame_sources": [
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_0.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_1.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_2.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_3.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_4.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_5.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_6.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_7.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_8.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_9.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_10.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_11.npz",
+    "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_12.npz"
+  ],
+  "domain_length_override": null,
+  "eps": [
+    0.001,
+    0.01,
+    0.1,
+    1.0
+  ],
+  "eps_bands": [
+    0.001,
+    0.01,
+    0.1,
+    1.0
+  ],
+  "errors": [],
+  "frame_limit": 13,
+  "input_dir": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619",
+  "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_layer_l2_vorticity_fraction_N128_20260619.json",
+  "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "route_decision": "FAIL_CLOSED_LAYER_L2_VORTICITY_FRACTION_DIAGNOSTIC",
+  "rows": [
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 289,
+          "carrier_cell_fraction": 0.00013780593872070312,
+          "carrier_omega_norm": 696.5073637853642,
+          "carrier_omega_norm_sq": 485122.5078072377,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00014004552205293549
+        },
+        {
+          "carrier_cell_count": 3214,
+          "carrier_cell_fraction": 0.0015325546264648438,
+          "carrier_omega_norm": 2299.35756252706,
+          "carrier_omega_norm_sq": 5287045.200350382,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.0015262680936971556
+        },
+        {
+          "carrier_cell_count": 32114,
+          "carrier_cell_fraction": 0.015313148498535156,
+          "carrier_omega_norm": 7284.824139510039,
+          "carrier_omega_norm_sq": 53068662.74358818,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.015319900559077077
+        },
+        {
+          "carrier_cell_count": 317401,
+          "carrier_cell_fraction": 0.15134859085083008,
+          "carrier_omega_norm": 22885.78559168358,
+          "carrier_omega_norm_sq": 523759182.14851177,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.15119918559448156
+        }
+      ],
+      "frame": 0,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_0.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 58856.04822963696,
+      "total_domain_omega_norm_sq": 3464034413.2093515
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 330,
+          "carrier_cell_fraction": 0.00015735626220703125,
+          "carrier_omega_norm": 721.1031467598577,
+          "carrier_omega_norm_sq": 519989.7482669689,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00015657939808612245
+        },
+        {
+          "carrier_cell_count": 3314,
+          "carrier_cell_fraction": 0.0015802383422851562,
+          "carrier_omega_norm": 2297.8339561944563,
+          "carrier_omega_norm_sq": 5280040.890240266,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.0015899267768630584
+        },
+        {
+          "carrier_cell_count": 32646,
+          "carrier_cell_fraction": 0.015566825866699219,
+          "carrier_omega_norm": 7192.658369426688,
+          "carrier_omega_norm_sq": 51734334.41928379,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.01557825124582786
+        },
+        {
+          "carrier_cell_count": 324509,
+          "carrier_cell_fraction": 0.1547379493713379,
+          "carrier_omega_norm": 22645.371715000565,
+          "carrier_omega_norm_sq": 512812860.1105476,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.15441829235007837
+        }
+      ],
+      "frame": 1,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_1.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 57627.54003678577,
+      "total_domain_omega_norm_sq": 3320933370.691347
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 310,
+          "carrier_cell_fraction": 0.00014781951904296875,
+          "carrier_omega_norm": 667.2880880762904,
+          "carrier_omega_norm_sq": 445273.39248851105,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00013966842124745355
+        },
+        {
+          "carrier_cell_count": 3322,
+          "carrier_cell_fraction": 0.0015840530395507812,
+          "carrier_omega_norm": 2240.0115158576423,
+          "carrier_omega_norm_sq": 5017651.591174852,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.001573881323095781
+        },
+        {
+          "carrier_cell_count": 33421,
+          "carrier_cell_fraction": 0.01593637466430664,
+          "carrier_omega_norm": 7112.088525278054,
+          "carrier_omega_norm_sq": 50581803.19139176,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.01586593925163264
+        },
+        {
+          "carrier_cell_count": 331336,
+          "carrier_cell_fraction": 0.15799331665039062,
+          "carrier_omega_norm": 22418.68321289104,
+          "carrier_omega_norm_sq": 502597356.99996245,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.15764916691522
+        }
+      ],
+      "frame": 2,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_2.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 56463.040401746264,
+      "total_domain_omega_norm_sq": 3188074931.409231
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 351,
+          "carrier_cell_fraction": 0.00016736984252929688,
+          "carrier_omega_norm": 732.6050792210771,
+          "carrier_omega_norm_sq": 536710.2021005206,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.0001751388148010574
+        },
+        {
+          "carrier_cell_count": 3380,
+          "carrier_cell_fraction": 0.0016117095947265625,
+          "carrier_omega_norm": 2210.629752080981,
+          "carrier_omega_norm_sq": 4886883.900785618,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.001594683781124889
+        },
+        {
+          "carrier_cell_count": 33950,
+          "carrier_cell_fraction": 0.016188621520996094,
+          "carrier_omega_norm": 7030.9342520082855,
+          "carrier_omega_norm_sq": 49434036.456063315,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.01613127255987146
+        },
+        {
+          "carrier_cell_count": 337758,
+          "carrier_cell_fraction": 0.1610555648803711,
+          "carrier_omega_norm": 22199.95938107686,
+          "carrier_omega_norm_sq": 492838196.52146244,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.16082253940701796
+        }
+      ],
+      "frame": 3,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_3.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 55357.78723279077,
+      "total_domain_omega_norm_sq": 3064484607.3109326
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 370,
+          "carrier_cell_fraction": 0.00017642974853515625,
+          "carrier_omega_norm": 754.6496585406143,
+          "carrier_omega_norm_sq": 569496.1071354657,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00019310583413265837
+        },
+        {
+          "carrier_cell_count": 3401,
+          "carrier_cell_fraction": 0.0016217231750488281,
+          "carrier_omega_norm": 2195.4944533863772,
+          "carrier_omega_norm_sq": 4820195.894850348,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.001634441284664447
+        },
+        {
+          "carrier_cell_count": 34423,
+          "carrier_cell_fraction": 0.016414165496826172,
+          "carrier_omega_norm": 6918.24168429778,
+          "carrier_omega_norm_sq": 47862068.00235538,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.016229161971620568
+        },
+        {
+          "carrier_cell_count": 343871,
+          "carrier_cell_fraction": 0.1639704704284668,
+          "carrier_omega_norm": 21967.197580735738,
+          "carrier_omega_norm_sq": 482557769.551082,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.16362661559720026
+        }
+      ],
+      "frame": 4,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_4.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 54305.98338580215,
+      "total_domain_omega_norm_sq": 2949139831.4990196
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 358,
+          "carrier_cell_fraction": 0.00017070770263671875,
+          "carrier_omega_norm": 716.5088811783485,
+          "carrier_omega_norm_sq": 513384.97680744866,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00018070330101253512
+        },
+        {
+          "carrier_cell_count": 3597,
+          "carrier_cell_fraction": 0.0017151832580566406,
+          "carrier_omega_norm": 2218.2875456688976,
+          "carrier_omega_norm_sq": 4920799.635269741,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.0017320427707958196
+        },
+        {
+          "carrier_cell_count": 34933,
+          "carrier_cell_fraction": 0.016657352447509766,
+          "carrier_omega_norm": 6884.634232745567,
+          "carrier_omega_norm_sq": 47398188.518692136,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.01668340429555367
+        },
+        {
+          "carrier_cell_count": 350410,
+          "carrier_cell_fraction": 0.16708850860595703,
+          "carrier_omega_norm": 21783.051427270162,
+          "carrier_omega_norm_sq": 474501329.4830967,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.16701687904005702
+        }
+      ],
+      "frame": 5,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_5.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 53301.39000591205,
+      "total_domain_omega_norm_sq": 2841038176.562341
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 353,
+          "carrier_cell_fraction": 0.00016832351684570312,
+          "carrier_omega_norm": 666.2323956620448,
+          "carrier_omega_norm_sq": 443865.6050295874,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00016203909292906407
+        },
+        {
+          "carrier_cell_count": 3594,
+          "carrier_cell_fraction": 0.0017137527465820312,
+          "carrier_omega_norm": 2179.8104636107137,
+          "carrier_omega_norm_sq": 4751573.657266755,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.0017346256990509942
+        },
+        {
+          "carrier_cell_count": 35845,
+          "carrier_cell_fraction": 0.017092227935791016,
+          "carrier_omega_norm": 6846.060822702183,
+          "carrier_omega_norm_sq": 46868548.78813769,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.0171099924086823
+        },
+        {
+          "carrier_cell_count": 357033,
+          "carrier_cell_fraction": 0.17024660110473633,
+          "carrier_omega_norm": 21589.905029717193,
+          "carrier_omega_norm_sq": 466123999.1922077,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.1701648182821879
+        }
+      ],
+      "frame": 6,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_6.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 52337.84597900017,
+      "total_domain_omega_norm_sq": 2739250121.7215443
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 353,
+          "carrier_cell_fraction": 0.00016832351684570312,
+          "carrier_omega_norm": 668.9438136173646,
+          "carrier_omega_norm_sq": 447485.8257769434,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00016931283027017972
+        },
+        {
+          "carrier_cell_count": 3690,
+          "carrier_cell_fraction": 0.0017595291137695312,
+          "carrier_omega_norm": 2154.6014700600176,
+          "carrier_omega_norm_sq": 4642307.494784788,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.001756485179305491
+        },
+        {
+          "carrier_cell_count": 36908,
+          "carrier_cell_fraction": 0.017599105834960938,
+          "carrier_omega_norm": 6786.3028953692765,
+          "carrier_omega_norm_sq": 46053906.98769742,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.01742517167677498
+        },
+        {
+          "carrier_cell_count": 363870,
+          "carrier_cell_fraction": 0.1735067367553711,
+          "carrier_omega_norm": 21409.820852326797,
+          "carrier_omega_norm_sq": 458380428.9287274,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.1734349632809769
+        }
+      ],
+      "frame": 7,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_7.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 51409.65707899677,
+      "total_domain_omega_norm_sq": 2642952840.9800434
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 368,
+          "carrier_cell_fraction": 0.00017547607421875,
+          "carrier_omega_norm": 674.2329685194902,
+          "carrier_omega_norm_sq": 454590.0958386039,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00017816960425277596
+        },
+        {
+          "carrier_cell_count": 3719,
+          "carrier_cell_fraction": 0.0017733573913574219,
+          "carrier_omega_norm": 2149.258076267212,
+          "carrier_omega_norm_sq": 4619310.278399837,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.0018104676977289047
+        },
+        {
+          "carrier_cell_count": 37383,
+          "carrier_cell_fraction": 0.017825603485107422,
+          "carrier_omega_norm": 6730.92046767037,
+          "carrier_omega_norm_sq": 45305290.34210391,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.01775671253004076
+        },
+        {
+          "carrier_cell_count": 370304,
+          "carrier_cell_fraction": 0.17657470703125,
+          "carrier_omega_norm": 21224.704327388274,
+          "carrier_omega_norm_sq": 450488073.78505445,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.17656187972774243
+        }
+      ],
+      "frame": 8,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_8.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 50511.83862642806,
+      "total_domain_omega_norm_sq": 2551445841.42231
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 389,
+          "carrier_cell_fraction": 0.00018548965454101562,
+          "carrier_omega_norm": 679.5102673882323,
+          "carrier_omega_norm_sq": 461734.20348602696,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00018738057768625808
+        },
+        {
+          "carrier_cell_count": 3798,
+          "carrier_cell_fraction": 0.0018110275268554688,
+          "carrier_omega_norm": 2106.056781221429,
+          "carrier_omega_norm_sq": 4435475.1657287665,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.0018000007203115048
+        },
+        {
+          "carrier_cell_count": 38248,
+          "carrier_cell_fraction": 0.018238067626953125,
+          "carrier_omega_norm": 6697.338057652846,
+          "carrier_omega_norm_sq": 44854337.058485195,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.01820274852133071
+        },
+        {
+          "carrier_cell_count": 375981,
+          "carrier_cell_fraction": 0.17928171157836914,
+          "carrier_omega_norm": 21035.446282238656,
+          "carrier_omega_norm_sq": 442490000.29294807,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.17957091168316333
+        }
+      ],
+      "frame": 9,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_9.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 49640.2244531803,
+      "total_domain_omega_norm_sq": 2464151883.7621193
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 370,
+          "carrier_cell_fraction": 0.00017642974853515625,
+          "carrier_omega_norm": 651.916502716558,
+          "carrier_omega_norm_sq": 424995.126514188,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00017852380580868775
+        },
+        {
+          "carrier_cell_count": 3806,
+          "carrier_cell_fraction": 0.0018148422241210938,
+          "carrier_omega_norm": 2073.6618558164687,
+          "carrier_omega_norm_sq": 4300073.492268201,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.001806292442440858
+        },
+        {
+          "carrier_cell_count": 38483,
+          "carrier_cell_fraction": 0.01835012435913086,
+          "carrier_omega_norm": 6590.872779232735,
+          "carrier_omega_norm_sq": 43439603.99203104,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.018247276130167
+        },
+        {
+          "carrier_cell_count": 381760,
+          "carrier_cell_fraction": 0.182037353515625,
+          "carrier_omega_norm": 20811.53060652458,
+          "carrier_omega_norm_sq": 433119806.1863093,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.18193666549943327
+        }
+      ],
+      "frame": 10,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_10.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 48791.4704297485,
+      "total_domain_omega_norm_sq": 2380607586.6970224
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 369,
+          "carrier_cell_fraction": 0.00017595291137695312,
+          "carrier_omega_norm": 657.3587069625473,
+          "carrier_omega_norm_sq": 432120.4696194721,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00018784188711271129
+        },
+        {
+          "carrier_cell_count": 3927,
+          "carrier_cell_fraction": 0.0018725395202636719,
+          "carrier_omega_norm": 2065.181766913307,
+          "carrier_omega_norm_sq": 4264975.730391169,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.001853976254335003
+        },
+        {
+          "carrier_cell_count": 39157,
+          "carrier_cell_fraction": 0.018671512603759766,
+          "carrier_omega_norm": 6534.206979771146,
+          "carrier_omega_norm_sq": 42695860.85448995,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.018559803662787956
+        },
+        {
+          "carrier_cell_count": 388507,
+          "carrier_cell_fraction": 0.18525457382202148,
+          "carrier_omega_norm": 20642.886063552236,
+          "carrier_omega_norm_sq": 426128745.0327991,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.1852372966511407
+        }
+      ],
+      "frame": 11,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_11.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 47962.984401908325,
+      "total_domain_omega_norm_sq": 2300447872.7377014
+    },
+    {
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length+derived:domain_length",
+      "eps_rows": [
+        {
+          "carrier_cell_count": 408,
+          "carrier_cell_fraction": 0.000194549560546875,
+          "carrier_omega_norm": 614.8195799728329,
+          "carrier_omega_norm_sq": 378003.1159179707,
+          "eps": 0.001,
+          "fraction_of_total_omega_norm_sq": 0.00017001223095219103
+        },
+        {
+          "carrier_cell_count": 4088,
+          "carrier_cell_fraction": 0.001949310302734375,
+          "carrier_omega_norm": 2091.4414042199455,
+          "carrier_omega_norm_sq": 4374127.147285497,
+          "eps": 0.01,
+          "fraction_of_total_omega_norm_sq": 0.0019673253564923754
+        },
+        {
+          "carrier_cell_count": 39865,
+          "carrier_cell_fraction": 0.019009113311767578,
+          "carrier_omega_norm": 6510.304959195435,
+          "carrier_omega_norm_sq": 42384070.66172468,
+          "eps": 0.1,
+          "fraction_of_total_omega_norm_sq": 0.019062833364576894
+        },
+        {
+          "carrier_cell_count": 395366,
+          "carrier_cell_fraction": 0.18852519989013672,
+          "carrier_omega_norm": 20458.922129893046,
+          "carrier_omega_norm_sq": 418567494.71702737,
+          "eps": 1.0,
+          "fraction_of_total_omega_norm_sq": 0.18825663224520564
+        }
+      ],
+      "frame": 12,
+      "lambda2_source": "lambda2",
+      "omega_norm_sq_source": "omega_snapshots[...,3]",
+      "shape": [
+        128,
+        128,
+        128
+      ],
+      "source_path": "/tmp/ns_boundary_true_korn_timeseries_N128_20260618/derived_frame_12.npz",
+      "status": "ok",
+      "total_domain_omega_norm": 47152.81301373423,
+      "total_domain_omega_norm_sq": 2223387775.108184
+    }
+  ],
+  "schema_version": 1,
+  "script": "scripts/ns_layer_l2_vorticity_fraction_diagnostic.py",
+  "status": "ok",
+  "summary": {
+    "all_frames_ok": true,
+    "available_frame_count": 13,
+    "eps_stats": {
+      "0.001": {
+        "eps": 0.001,
+        "frame_count": 13,
+        "max": 0.00019310583413265837,
+        "mean": 0.00017065548618035617,
+        "median": 0.0001751388148010574,
+        "min": 0.00013966842124745355
+      },
+      "0.01": {
+        "eps": 0.01,
+        "frame_count": 13,
+        "max": 0.0019673253564923754,
+        "mean": 0.0017215705676850985,
+        "median": 0.0017346256990509942,
+        "min": 0.0015262680936971556
+      },
+      "0.1": {
+        "eps": 0.1,
+        "frame_count": 13,
+        "max": 0.019062833364576894,
+        "mean": 0.017090189859841835,
+        "median": 0.0171099924086823,
+        "min": 0.015319900559077077
+      },
+      "1.0": {
+        "eps": 1.0,
+        "frame_count": 13,
+        "max": 0.18825663224520564,
+        "mean": 0.16999198817491581,
+        "median": 0.1701648182821879,
+        "min": 0.15119918559448156
+      }
+    },
+    "monotone_eps_fraction": true,
+    "ok_frame_count": 13,
+    "processed_frame_count": 13,
+    "requested_frame_limit": 13,
+    "status_counts": {
+      "ok": 13
+    },
+    "total_omega_l2_sq_max": 3464034413.2093515,
+    "total_omega_l2_sq_mean": 2779226865.6239343,
+    "total_omega_l2_sq_min": 2223387775.108184
+  },
+  "total_omega_l2_sq": 2223387775.108184,
+  "warnings": []
+}
