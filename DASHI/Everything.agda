@@ -306,6 +306,8 @@ import DASHI.Physics.Closure.NSLayerKornLiteratureClosureReceipt
 import DASHI.Physics.Closure.NSPressurePoissonBypassReceipt
 import DASHI.Physics.Closure.NSQ3ExtensionalThresholdReceipt
 import DASHI.Physics.Closure.NSGeometricConcentrationCarrierReceipt
+import DASHI.Physics.Closure.NSInteriorVorticityMaxPrincipleReceipt
+import DASHI.Physics.Closure.NSPressureCZEnstrophyClosureReceipt
 import DASHI.Physics.Closure.NSPressureHessianGateShapeCore
 import DASHI.Physics.Closure.NSStrainBMOBoundReceipt
 import DASHI.Physics.Closure.NSIntegralConditionDiagnosticReceipt

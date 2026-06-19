@@ -1,0 +1,99 @@
+{
+  "C": "One stdlib Python script writes deterministic JSON only.",
+  "F": "Missing pressure or proxy fields block a definitive sign audit.",
+  "G": "Authority stays false and no Clay or theorem promotion is allowed.",
+  "L": "pressure -> spectral Laplacian -> source proxy -> sign/scale comparison -> violation notes.",
+  "O": "Audit a pressure sign and convention mismatch on one NS frame.",
+  "P": "Use the best-fitting sign and scale to localize the convention drift behind the bypass violation.",
+  "R": "Compare spectral Delta p and -Delta p against tr(S^2) - |omega|^2 / 4 when the proxy fields are available.",
+  "S": "The audit is fail-closed and records comparison evidence without any theorem or promotion claim.",
+  "authority": false,
+  "best_sign_proxy": {
+    "best_scale": 0.1760513397665311,
+    "candidate": "+Delta p",
+    "opponent": {
+      "candidate": "-Delta p",
+      "raw_rmse": 2.384978218151012,
+      "scaled_rmse": 1.7093977459380623,
+      "sign": "minus"
+    },
+    "raw_correlation": 0.20766112514936563,
+    "raw_rmse": 2.060942612292498,
+    "scaled_correlation": 0.20766112514936444,
+    "scaled_rmse": 1.6907495825034442,
+    "sign": "plus",
+    "sign_factor": 1.0
+  },
+  "comparisons": [
+    {
+      "best_scale": 0.0,
+      "candidate": "-Delta p",
+      "raw_correlation": -0.20766112514936563,
+      "raw_rmse": 2.384978218151012,
+      "scaled_correlation": null,
+      "scaled_rmse": 1.7093977459380623,
+      "sign": "minus",
+      "sign_factor": -1.0
+    },
+    {
+      "best_scale": 0.1760513397665311,
+      "candidate": "+Delta p",
+      "raw_correlation": 0.20766112514936563,
+      "raw_rmse": 2.060942612292498,
+      "scaled_correlation": 0.20766112514936444,
+      "scaled_rmse": 1.6907495825034442,
+      "sign": "plus",
+      "sign_factor": 1.0
+    }
+  ],
+  "domain_length": 128.0,
+  "domain_length_source": "index_units",
+  "errors": [],
+  "explanation_notes": [
+    "The pressure Laplacian was computed spectrally from the selected pressure frame.",
+    "The source proxy compares tr(S^2) against one quarter of |omega|^2, using either direct square fields or a spectral velocity reconstruction when available.",
+    "Best sign proxy: +Delta p with positive scale 0.176051",
+    "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+  ],
+  "frame": 10,
+  "input": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "laplacian_pressure_source": "spectral_fftn",
+  "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_pressure_poisson_sign_audit_N128_frame10_20260619.json",
+  "pressure_shape": [
+    128,
+    128,
+    128
+  ],
+  "pressure_source": "pressure_snapshots",
+  "pretty": true,
+  "requested_domain_length": null,
+  "script": "scripts/ns_pressure_poisson_sign_audit.py",
+  "source_proxy_available": true,
+  "source_proxy_notes": [
+    "source proxy computed spectrally from velocity"
+  ],
+  "source_proxy_source": "computed_from_velocity_snapshots",
+  "spectral_delta_p": {
+    "max": 14.424182269108236,
+    "mean": 4.336808689942018e-19,
+    "min": -10.397833738762133,
+    "rmse_vs_zero": 1.4303014095954647
+  },
+  "spectral_negative_delta_p": {
+    "max": 10.397833738762133,
+    "mean": -4.336808689942018e-19,
+    "min": -14.424182269108236,
+    "rmse_vs_zero": 1.4303014095954647
+  },
+  "status": "ok",
+  "violation": {
+    "best_sign": "+Delta p",
+    "expected_sign": "-Delta p",
+    "kind": "sign_convention_mismatch",
+    "notes": [
+      "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+    ],
+    "present": true
+  },
+  "warnings": []
+}

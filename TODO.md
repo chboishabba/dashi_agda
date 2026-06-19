@@ -1,6 +1,33 @@
 # FOR TODO GO TO '# TODO'
 
 Current NS Clay action note for `2026-06-18`:
+- Interior pressure-mediated vorticity tranche for `2026-06-19` is recorded.
+  Artifacts:
+  `DASHI/Physics/Closure/NSInteriorVorticityMaxPrincipleReceipt.agda`,
+  `DASHI/Physics/Closure/NSPressureCZEnstrophyClosureReceipt.agda`,
+  `scripts/ns_interior_vorticity_budget_diagnostic.py`,
+  `scripts/ns_omega_l3_timeseries_diagnostic.py`,
+  `scripts/ns_pressure_poisson_sign_audit.py`, and
+  `scripts/check_ns_interior_pressure_regression.py`. The tranche records the
+  lambda2-signed vorticity transport / interior maximum-principle proof
+  obligation and the pressure-CZ / enstrophy Gronwall closure socket. It is
+  fail-closed: the interior maximum-principle proof, pressure-CZ theorem,
+  enstrophy-to-BKM bridge, and Clay NS remain unpromoted.
+  Calc 6 on the frame-10 worst-vorticity cell selects `[9,71,29]`, matching
+  the prior off-carrier maximum, and reports raw-gradient eigendata
+  `lambda1 = -33.57836889130863`, `lambda2 = 1.6119109128727063`,
+  `lambda3 = 29.848578811173127`, `omega_norm_sq =
+  12388.906932970465`, extensional gain `165005.0113714222`, middle
+  damping `-21831.27740485321`, compressive absolute gain
+  `191598.84586328908`, signed budget `334772.5798298581`, and
+  `Delta p = 5986.202503491044`. This supports a large local stretching
+  budget, not a closed damping estimate. Calc 7 records finite omega-L3
+  telemetry across all 13 frames: domain `L3` norm min/mean/max
+  `219.35581815648177 / 244.53448709725947 / 273.5247888329034`,
+  with frame-10 domain `L3 = 226.95398122550907`. The pressure-Poisson sign
+  audit prefers `+Delta p` over canonical `-Delta p` with best scale
+  `0.1760513397665311`, recording a sign/convention mismatch rather than
+  pressure-bypass proof validation.
 - Pressure-Poisson bypass / Q3 threshold / geometric concentration tranche for
   `2026-06-19` is recorded. Artifacts:
   `DASHI/Physics/Closure/NSPressurePoissonBypassReceipt.agda`,

@@ -1,0 +1,62 @@
+{
+  "C": "Deterministic numerical diagnostic from raw NPZ snapshots.",
+  "F": "This is empirical finite-domain evidence only; authority flags remain false.",
+  "G": "No theorem, Clay, or promotion authority is claimed.",
+  "L": "status=ok only when all required fields are finite and computed terms are well-defined.",
+  "O": "Pointwise interior NS diagnostic for one selected cell at fixed frame.",
+  "P": "FAIL_CLOSED_NS_INTERIOR_VORTICITY_BUDGET_DIAGNOSTIC",
+  "R": "Compute spectral velocity gradients, strain eigensystem, budget terms, and local pressure Laplacian terms.",
+  "S": "Fail-closed on malformed archives, out-of-range indices, non-finite values, or non-cubic grids.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "budget": {
+    "compressive_abs_gain": 191598.84586328908,
+    "extensional_gain": 165005.0113714222,
+    "lambda1": -33.57836889130863,
+    "lambda2": 1.6119109128727063,
+    "lambda3": 29.848578811173127,
+    "middle_damping": -21831.27740485321,
+    "omega1": 53.41357524897661,
+    "omega2": -82.29132563975298,
+    "omega3": -52.57408712041048,
+    "omega_norm_sq": 12388.906932970465,
+    "signed_budget": 334772.5798298581
+  },
+  "changed_paths": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_interior_vorticity_budget_N128_frame10_worst_20260619.json"
+  ],
+  "contract": "ns_interior_vorticity_budget_diagnostic",
+  "domain_length": 6.283185307179586,
+  "errors": [],
+  "frame": 10,
+  "input": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "norms": {
+    "grid_size": 128,
+    "omega_l3_norm": 226.95398122550907,
+    "volume_element": 0.00011827955886955191
+  },
+  "output": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_interior_vorticity_budget_N128_frame10_worst_20260619.json",
+  "pressure": {
+    "negative_pressure_laplacian": -5986.202503491044,
+    "pressure_laplacian": 5986.202503491044,
+    "pressure_value": -2.2917637825012207
+  },
+  "route_decision": "FAIL_CLOSED_NS_INTERIOR_VORTICITY_BUDGET_DIAGNOSTIC",
+  "schema_version": "1.0.0",
+  "script": "scripts/ns_interior_vorticity_budget_diagnostic.py",
+  "selected_cell": [
+    9,
+    71,
+    29
+  ],
+  "selection": "worst_omega_cell",
+  "status": "ok",
+  "warnings": []
+}

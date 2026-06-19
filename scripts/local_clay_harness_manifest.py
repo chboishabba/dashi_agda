@@ -404,12 +404,32 @@ def build_specs() -> list[HarnessSpec]:
     ns_boundary_g12_bounds_out = (
         CHILD_OUT_DIR / "ns_boundary_g12_bounds_smoke.json"
     )
+    ns_interior_vorticity_budget_out = (
+        CHILD_OUT_DIR / "ns_interior_vorticity_budget_smoke.json"
+    )
+    ns_omega_l3_timeseries_out = (
+        CHILD_OUT_DIR / "ns_omega_l3_timeseries_smoke.json"
+    )
+    ns_pressure_poisson_sign_audit_out = (
+        CHILD_OUT_DIR / "ns_pressure_poisson_sign_audit_smoke.json"
+    )
+    ns_interior_pressure_regression_out = (
+        CHILD_OUT_DIR / "ns_interior_pressure_regression_smoke.json"
+    )
     ns_boundary_derived_smoke_candidates = tuple(
         sorted(Path("/tmp").glob("ns_boundary_derived*.npz"))
     )
     ns_boundary_smoke_derived_input = (
         ns_boundary_derived_smoke_candidates[0]
         if ns_boundary_derived_smoke_candidates
+        else None
+    )
+    ns_raw_pressure_smoke_candidates = tuple(
+        sorted(Path("/tmp").glob("ns3d*_pressure*.npz"))
+    )
+    ns_raw_pressure_smoke_input = (
+        ns_raw_pressure_smoke_candidates[0]
+        if ns_raw_pressure_smoke_candidates
         else None
     )
     unification_authority_review_packet_out = (
@@ -3206,6 +3226,128 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional g12 lower/upper bound telemetry over global, boundary-carrier, and beta regions",
                 "empirical/non-promoting; does not prove GD1 upper-bound or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_interior_vorticity_budget_diagnostic",
+            path=script("ns_interior_vorticity_budget_diagnostic.py"),
+            args=(
+                "--input",
+                str(ns_raw_pressure_smoke_input),
+                "--frame",
+                "0",
+                "--output-json",
+                str(ns_interior_vorticity_budget_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else ("--help",),
+            expected_json_path=ns_interior_vorticity_budget_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and script("ns_interior_vorticity_budget_diagnostic.py").exists()
+            else (
+                "ns_interior_vorticity_budget_diagnostic script not found"
+                if not script("ns_interior_vorticity_budget_diagnostic.py").exists()
+                else "ns_interior_vorticity_budget_diagnostic requires a raw NS pressure archive under /tmp"
+            ),
+            notes=(
+                "optional Calc-6 interior pointwise vorticity budget diagnostic",
+                "empirical/non-promoting; does not prove the interior maximum principle or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_omega_l3_timeseries_diagnostic",
+            path=script("ns_omega_l3_timeseries_diagnostic.py"),
+            args=(
+                "--input",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_omega_l3_timeseries_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else ("--help",),
+            expected_json_path=ns_omega_l3_timeseries_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and script("ns_omega_l3_timeseries_diagnostic.py").exists()
+            else (
+                "ns_omega_l3_timeseries_diagnostic script not found"
+                if not script("ns_omega_l3_timeseries_diagnostic.py").exists()
+                else "ns_omega_l3_timeseries_diagnostic requires a raw NS pressure archive under /tmp"
+            ),
+            notes=(
+                "optional Calc-7 omega L3 timeseries diagnostic",
+                "empirical/non-promoting; does not prove enstrophy Gronwall closure or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_pressure_poisson_sign_audit",
+            path=script("ns_pressure_poisson_sign_audit.py"),
+            args=(
+                "--input",
+                str(ns_raw_pressure_smoke_input),
+                "--frame",
+                "0",
+                "--output-json",
+                str(ns_pressure_poisson_sign_audit_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else ("--help",),
+            expected_json_path=ns_pressure_poisson_sign_audit_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and script("ns_pressure_poisson_sign_audit.py").exists()
+            else (
+                "ns_pressure_poisson_sign_audit script not found"
+                if not script("ns_pressure_poisson_sign_audit.py").exists()
+                else "ns_pressure_poisson_sign_audit requires a raw NS pressure archive under /tmp"
+            ),
+            notes=(
+                "optional pressure-Poisson sign/convention audit",
+                "empirical/non-promoting; does not prove pressure-CZ closure or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_interior_pressure_regression",
+            path=script("check_ns_interior_pressure_regression.py"),
+            args=(
+                (
+                    "--interior-json",
+                    str(ns_interior_vorticity_budget_out),
+                )
+                if ns_interior_vorticity_budget_out.exists()
+                else ()
+            )
+            + (
+                (
+                    "--l3-json",
+                    str(ns_omega_l3_timeseries_out),
+                )
+                if ns_omega_l3_timeseries_out.exists()
+                else ()
+            )
+            if ns_interior_vorticity_budget_out.exists()
+            or ns_omega_l3_timeseries_out.exists()
+            else ("--help",),
+            expected_json_path=ns_interior_pressure_regression_out,
+            optional=True,
+            skip_reason=None
+            if (
+                ns_interior_vorticity_budget_out.exists()
+                or ns_omega_l3_timeseries_out.exists()
+            )
+            and script("check_ns_interior_pressure_regression.py").exists()
+            else (
+                "check_ns_interior_pressure_regression script not found"
+                if not script("check_ns_interior_pressure_regression.py").exists()
+                else "check_ns_interior_pressure_regression requires interior or L3 artifacts"
+            ),
+            notes=(
+                "optional regression check for interior budget and omega L3 diagnostics",
+                "regression-only/non-promoting; no theorem or Clay promotion",
             ),
         ),
         HarnessSpec(
