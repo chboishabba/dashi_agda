@@ -12,8 +12,9 @@ open import Data.List.Base using (List; _∷_; [])
 -- The corrected dependency is:
 --   BoundaryHB pointwise lower bound does not follow from integral Korn
 --   plus continuity alone.
---   It follows from pointwise kornBiaxialBound under biaxial boundary,
---   a lambda3 gap, and a pointwise ||nabla^2 u|| >= eta hypothesis.
+--   It follows from the pointwise route lambda2 = 0, lambda1 = -lambda3,
+--   lambda3 >= lambda_min, and pointwise ||nabla^2 u|| >= eta, which
+--   projects to max_k B_k >= b0 through pointwise kornBiaxialBound.
 --
 -- The explicit blocker is that layer-integral Korn control alone is not
 -- enough to force an all-point lower bound.
@@ -43,6 +44,36 @@ data NSBoundaryHCBoundaryBlocker : Set where
   missingPointwiseNabla2ULowerBoundEta :
     NSBoundaryHCBoundaryBlocker
 
+data NSBoundaryHCPointwiseRouteProjection : Set where
+  lambda2EqualsZeroProjected :
+    NSBoundaryHCPointwiseRouteProjection
+
+  lambda1EqualsNegativeLambda3Projected :
+    NSBoundaryHCPointwiseRouteProjection
+
+  lambda3AtLeastLambdaMinProjected :
+    NSBoundaryHCPointwiseRouteProjection
+
+  pointwiseNabla2ULowerBoundEtaProjected :
+    NSBoundaryHCPointwiseRouteProjection
+
+  pointwiseMaxBKAtLeastB0Projected :
+    NSBoundaryHCPointwiseRouteProjection
+
+canonicalNSBoundaryHCPointwiseRouteProjection :
+  List NSBoundaryHCPointwiseRouteProjection
+canonicalNSBoundaryHCPointwiseRouteProjection =
+  lambda2EqualsZeroProjected
+  ∷ lambda1EqualsNegativeLambda3Projected
+  ∷ lambda3AtLeastLambdaMinProjected
+  ∷ pointwiseNabla2ULowerBoundEtaProjected
+  ∷ pointwiseMaxBKAtLeastB0Projected
+  ∷ []
+
+nsBoundaryHCPointwiseRouteProjectionStatement : String
+nsBoundaryHCPointwiseRouteProjectionStatement =
+  "Pointwise closeability route recorded: lambda2 = 0, lambda1 = -lambda3, lambda3 >= lambda_min, and ||nabla^2 u|| >= eta project to max_k B_k >= b0."
+
 canonicalNSBoundaryHCBoundaryBlockers :
   List NSBoundaryHCBoundaryBlocker
 canonicalNSBoundaryHCBoundaryBlockers =
@@ -56,7 +87,7 @@ canonicalNSBoundaryHCBoundaryBlockers =
 
 nsBoundaryHBPointwiseDependencyStatement : String
 nsBoundaryHBPointwiseDependencyStatement =
-  "BoundaryHB pointwise lower bound is not recovered from integral Korn plus continuity alone; the corrected route uses pointwise kornBiaxialBound under biaxial boundary, a lambda3 gap, and a pointwise ||nabla^2 u|| >= eta hypothesis. Layer-integral Korn alone remains insufficient for an all-point lower bound."
+  "BoundaryHB pointwise lower bound is not recovered from integral Korn plus continuity alone; the corrected route uses lambda2 = 0, lambda1 = -lambda3, lambda3 >= lambda_min, and pointwise ||nabla^2 u|| >= eta, which projects to max_k B_k >= b0 through pointwise kornBiaxialBound. Layer-integral Korn alone remains insufficient for an all-point lower bound."
 
 record NSBoundaryHBCorrectPointwiseReceipt : Setω where
   field
@@ -84,6 +115,19 @@ record NSBoundaryHBCorrectPointwiseReceipt : Setω where
     pointwiseDependencyPromotedIsFalse :
       pointwiseDependencyPromoted ≡ false
 
+    pointwiseRouteProjection :
+      List NSBoundaryHCPointwiseRouteProjection
+
+    pointwiseRouteProjectionIsCanonical :
+      pointwiseRouteProjection ≡ canonicalNSBoundaryHCPointwiseRouteProjection
+
+    pointwiseRouteProjectionStatement :
+      String
+
+    pointwiseRouteProjectionStatementIsCanonical :
+      pointwiseRouteProjectionStatement
+      ≡ nsBoundaryHCPointwiseRouteProjectionStatement
+
     candidateOnly :
       Bool
 
@@ -102,6 +146,24 @@ record NSBoundaryHBCorrectPointwiseReceipt : Setω where
     pointwiseKornBiaxialBoundIsTrue :
       pointwiseKornBiaxialBound ≡ true
 
+    lambda2ZeroRequired :
+      Bool
+
+    lambda2ZeroRequiredIsTrue :
+      lambda2ZeroRequired ≡ true
+
+    lambda1EqualsNegativeLambda3Required :
+      Bool
+
+    lambda1EqualsNegativeLambda3RequiredIsTrue :
+      lambda1EqualsNegativeLambda3Required ≡ true
+
+    lambda3AtLeastLambdaMinRequired :
+      Bool
+
+    lambda3AtLeastLambdaMinRequiredIsTrue :
+      lambda3AtLeastLambdaMinRequired ≡ true
+
     biaxialBoundary :
       Bool
 
@@ -119,6 +181,12 @@ record NSBoundaryHBCorrectPointwiseReceipt : Setω where
 
     nabla2ULowerBoundEtaIsTrue :
       nabla2ULowerBoundEta ≡ true
+
+    pointwiseMaxBKAtLeastB0Closed :
+      Bool
+
+    pointwiseMaxBKAtLeastB0ClosedIsTrue :
+      pointwiseMaxBKAtLeastB0Closed ≡ true
 
     boundaryHBPointwiseDependencyStatement :
       String
@@ -152,6 +220,14 @@ canonicalNSBoundaryHBCorrectPointwiseReceipt =
         false
     ; pointwiseDependencyPromotedIsFalse =
         refl
+    ; pointwiseRouteProjection =
+        canonicalNSBoundaryHCPointwiseRouteProjection
+    ; pointwiseRouteProjectionIsCanonical =
+        refl
+    ; pointwiseRouteProjectionStatement =
+        nsBoundaryHCPointwiseRouteProjectionStatement
+    ; pointwiseRouteProjectionStatementIsCanonical =
+        refl
     ; candidateOnly =
         true
     ; candidateOnlyIsTrue =
@@ -163,6 +239,18 @@ canonicalNSBoundaryHBCorrectPointwiseReceipt =
     ; pointwiseKornBiaxialBound =
         true
     ; pointwiseKornBiaxialBoundIsTrue =
+        refl
+    ; lambda2ZeroRequired =
+        true
+    ; lambda2ZeroRequiredIsTrue =
+        refl
+    ; lambda1EqualsNegativeLambda3Required =
+        true
+    ; lambda1EqualsNegativeLambda3RequiredIsTrue =
+        refl
+    ; lambda3AtLeastLambdaMinRequired =
+        true
+    ; lambda3AtLeastLambdaMinRequiredIsTrue =
         refl
     ; biaxialBoundary =
         true
@@ -176,6 +264,10 @@ canonicalNSBoundaryHBCorrectPointwiseReceipt =
         true
     ; nabla2ULowerBoundEtaIsTrue =
         refl
+    ; pointwiseMaxBKAtLeastB0Closed =
+        true
+    ; pointwiseMaxBKAtLeastB0ClosedIsTrue =
+        refl
     ; boundaryHBPointwiseDependencyStatement =
         nsBoundaryHBPointwiseDependencyStatement
     ; boundaryHBPointwiseDependencyStatementIsCanonical =
@@ -183,7 +275,8 @@ canonicalNSBoundaryHBCorrectPointwiseReceipt =
     ; receiptBoundary =
         "Corrected BoundaryHB dependency: pointwise lower bound follows from pointwise kornBiaxialBound, not from integral Korn plus continuity alone."
         ∷ "Explicit blocker: layer-integral Korn control is insufficient for an all-point lower bound."
-        ∷ "The corrected route requires biaxial boundary, lambda3 gap, and pointwise ||nabla^2 u|| >= eta."
+        ∷ "The corrected route requires lambda2 = 0, lambda1 = -lambda3, lambda3 >= lambda_min, and pointwise ||nabla^2 u|| >= eta."
+        ∷ "The pointwise consequence is max_k B_k >= b0."
         ∷ "Candidate-only receipt surface; Clay Navier-Stokes remains false."
         ∷ []
     }

@@ -40,6 +40,22 @@ canonicalNSCoareaGradientStepAPerComponentRows =
   ∷ noClayPromotion
   ∷ []
 
+data NSCoareaGradientStepAPerComponentSurfaceStage : Set where
+  correctedExponentR1Recorded :
+    NSCoareaGradientStepAPerComponentSurfaceStage
+  stepAPerComponentAssemblyRecorded :
+    NSCoareaGradientStepAPerComponentSurfaceStage
+  failClosedSurfaceRecorded :
+    NSCoareaGradientStepAPerComponentSurfaceStage
+
+canonicalNSCoareaGradientStepAPerComponentSurfaceStages :
+  List NSCoareaGradientStepAPerComponentSurfaceStage
+canonicalNSCoareaGradientStepAPerComponentSurfaceStages =
+  correctedExponentR1Recorded
+  ∷ stepAPerComponentAssemblyRecorded
+  ∷ failClosedSurfaceRecorded
+  ∷ []
+
 linkedReceiptLabels : List String
 linkedReceiptLabels =
   "CorrectedCoareaGradientBoundReceipt"
@@ -175,6 +191,50 @@ boundaryText : String
 boundaryText =
   "Candidate-only geometry receipt: the corrected coarea gradient bound is fixed at r^1, the StepA_PerComponent route is recorded as an explicit assembly of LocalConcentration, pigeon_concentration, and corrected coareaGradientBound, and all promotion flags stay false."
 
+record NSCoareaGradientStepAPerComponentFormalSurface : Set where
+  constructor mkNSCoareaGradientStepAPerComponentFormalSurface
+  field
+    correctedCoareaExponentSurface :
+      String
+    correctedCoareaExponentSurfaceIsCanonical :
+      correctedCoareaExponentSurface ≡ coareaExponentText
+
+    stepAPerComponentAssemblySurface :
+      String
+    stepAPerComponentAssemblySurfaceIsCanonical :
+      stepAPerComponentAssemblySurface ≡ stepAPerComponentText
+
+    closeableSurface :
+      String
+    closeableSurfaceIsCanonical :
+      closeableSurface
+        ≡ "candidate-only closeable StepA_PerComponent surface"
+
+    assemblyWitness :
+      NSCoareaGradientStepAPerComponentAssembly
+    assemblyWitnessIsCanonical :
+      assemblyWitness ≡ canonicalNSCoareaGradientStepAPerComponentAssembly
+
+    surfaceStages :
+      List NSCoareaGradientStepAPerComponentSurfaceStage
+    surfaceStagesIsCanonical :
+      surfaceStages ≡ canonicalNSCoareaGradientStepAPerComponentSurfaceStages
+
+canonicalNSCoareaGradientStepAPerComponentFormalSurface :
+  NSCoareaGradientStepAPerComponentFormalSurface
+canonicalNSCoareaGradientStepAPerComponentFormalSurface =
+  mkNSCoareaGradientStepAPerComponentFormalSurface
+    coareaExponentText
+    refl
+    stepAPerComponentText
+    refl
+    "candidate-only closeable StepA_PerComponent surface"
+    refl
+    canonicalNSCoareaGradientStepAPerComponentAssembly
+    refl
+    canonicalNSCoareaGradientStepAPerComponentSurfaceStages
+    refl
+
 record NSCoareaGradientStepAPerComponentORCSLPGF : Set where
   constructor mkNSCoareaGradientStepAPerComponentORCSLPGF
   field
@@ -307,6 +367,11 @@ record NSCoareaGradientStepAPerComponentReceipt : Set where
     boundaryIsCanonical :
       boundary ≡ boundaryText
 
+    formalSurface :
+      NSCoareaGradientStepAPerComponentFormalSurface
+    formalSurfaceIsCanonical :
+      formalSurface ≡ canonicalNSCoareaGradientStepAPerComponentFormalSurface
+
     routeAssembly :
       NSCoareaGradientStepAPerComponentAssembly
     routeAssemblyIsCanonical :
@@ -356,6 +421,8 @@ canonicalNSCoareaGradientStepAPerComponentReceipt =
     refl
     boundaryText
     refl
+    canonicalNSCoareaGradientStepAPerComponentFormalSurface
+    refl
     canonicalNSCoareaGradientStepAPerComponentAssembly
     refl
     canonicalNSCoareaGradientStepAPerComponentORCSLPGF
@@ -368,5 +435,6 @@ canonicalNSCoareaGradientStepAPerComponentReceipt =
     refl
 
 open NSCoareaGradientStepAPerComponentReceipt public
+open NSCoareaGradientStepAPerComponentFormalSurface public
 open NSCoareaGradientStepAPerComponentAssembly public
 open NSCoareaGradientStepAPerComponentORCSLPGF public

@@ -14,10 +14,11 @@ open import Data.List.Base using (List; _∷_; [])
 -- The transport side records the standard/write-now lambda2plus_transport_ineq
 -- shape with nu, C_NS, t1, t2, lambda2+, L2, and L3 tokens.  The
 -- BoundaryHB side records the corrected route: BoundaryHB_Correct closes
--- only through pointwise kornBiaxialBound under biaxial boundary, a
--- lambda3 gap, and a pointwise ||nabla^2 u|| >= eta hypothesis.  Integral
--- Korn plus continuity is explicitly insufficient, KornLevelSet remains
--- open for h_strain_dom, and no Clay promotion is claimed here.
+-- only through the pointwise route lambda2 = 0, lambda1 = -lambda3,
+-- lambda3 >= lambda_min, and pointwise ||nabla^2 u|| >= eta, which
+-- projects to max_k B_k >= b0 through pointwise kornBiaxialBound.
+-- Integral Korn plus continuity is explicitly insufficient, KornLevelSet
+-- remains open for h_strain_dom, and no Clay promotion is claimed here.
 
 data Lambda2PlusTransportInequalityStatus : Set where
   lambda2PlusTransportShapeRecordedStandardWriteNow :
@@ -94,6 +95,36 @@ data BoundaryHBAssemblyBlocker : Set where
   kornLevelSetOpenForHStrainDom :
     BoundaryHBAssemblyBlocker
 
+data BoundaryHBPointwiseRouteProjection : Set where
+  lambda2EqualsZeroProjected :
+    BoundaryHBPointwiseRouteProjection
+
+  lambda1EqualsNegativeLambda3Projected :
+    BoundaryHBPointwiseRouteProjection
+
+  lambda3AtLeastLambdaMinProjected :
+    BoundaryHBPointwiseRouteProjection
+
+  pointwiseNabla2ULowerBoundEtaProjected :
+    BoundaryHBPointwiseRouteProjection
+
+  pointwiseMaxBKAtLeastB0Projected :
+    BoundaryHBPointwiseRouteProjection
+
+canonicalBoundaryHBPointwiseRouteProjection :
+  List BoundaryHBPointwiseRouteProjection
+canonicalBoundaryHBPointwiseRouteProjection =
+  lambda2EqualsZeroProjected
+  ∷ lambda1EqualsNegativeLambda3Projected
+  ∷ lambda3AtLeastLambdaMinProjected
+  ∷ pointwiseNabla2ULowerBoundEtaProjected
+  ∷ pointwiseMaxBKAtLeastB0Projected
+  ∷ []
+
+boundaryHBPointwiseRouteProjectionStatement : String
+boundaryHBPointwiseRouteProjectionStatement =
+  "BoundaryHB_Correct pointwise route: lambda2 = 0, lambda1 = -lambda3, lambda3 >= lambda_min, and ||nabla^2 u|| >= eta project to max_k B_k >= b0."
+
 canonicalBoundaryHBAssemblyBlockers :
   List BoundaryHBAssemblyBlocker
 canonicalBoundaryHBAssemblyBlockers =
@@ -115,7 +146,7 @@ boundaryHBAssemblyPromotionImpossibleHere ()
 
 boundaryHBAssemblyStatementText : String
 boundaryHBAssemblyStatementText =
-  "BoundaryHB_Correct is closeable only through pointwise kornBiaxialBound under biaxial boundary, lambda3 gap, and pointwise ||nabla^2 u|| >= eta; integral Korn plus continuity is explicitly insufficient; KornLevelSet remains open for h_strain_dom; Clay promotion stays false."
+  "BoundaryHB_Correct is closeable only through pointwise kornBiaxialBound under the pointwise route lambda2 = 0, lambda1 = -lambda3, lambda3 >= lambda_min, and pointwise ||nabla^2 u|| >= eta, with max_k B_k >= b0 recorded as the consequence; integral Korn plus continuity is explicitly insufficient; KornLevelSet remains open for h_strain_dom; Clay promotion stays false."
 
 record Lambda2PlusTransportInequalityReceipt : Setω where
   field
@@ -178,6 +209,24 @@ record BoundaryHBAssemblyReceipt : Setω where
     pointwiseKornBiaxialBoundRequiredIsTrue :
       pointwiseKornBiaxialBoundRequired ≡ true
 
+    lambda2ZeroRequired :
+      Bool
+
+    lambda2ZeroRequiredIsTrue :
+      lambda2ZeroRequired ≡ true
+
+    lambda1EqualsNegativeLambda3Required :
+      Bool
+
+    lambda1EqualsNegativeLambda3RequiredIsTrue :
+      lambda1EqualsNegativeLambda3Required ≡ true
+
+    lambda3AtLeastLambdaMinRequired :
+      Bool
+
+    lambda3AtLeastLambdaMinRequiredIsTrue :
+      lambda3AtLeastLambdaMinRequired ≡ true
+
     biaxialBoundaryRequired :
       Bool
 
@@ -195,6 +244,12 @@ record BoundaryHBAssemblyReceipt : Setω where
 
     pointwiseNabla2ULowerBoundEtaRequiredIsTrue :
       pointwiseNabla2ULowerBoundEtaRequired ≡ true
+
+    pointwiseMaxBKAtLeastB0Required :
+      Bool
+
+    pointwiseMaxBKAtLeastB0RequiredIsTrue :
+      pointwiseMaxBKAtLeastB0Required ≡ true
 
     integralKornPlusContinuityInsufficientFlag :
       Bool
@@ -237,6 +292,19 @@ record BoundaryHBAssemblyReceipt : Setω where
 
     promotionFlagsAreEmpty :
       promotionFlags ≡ []
+
+    pointwiseRouteProjection :
+      List BoundaryHBPointwiseRouteProjection
+
+    pointwiseRouteProjectionIsCanonical :
+      pointwiseRouteProjection ≡ canonicalBoundaryHBPointwiseRouteProjection
+
+    pointwiseRouteProjectionStatement :
+      String
+
+    pointwiseRouteProjectionStatementIsCanonical :
+      pointwiseRouteProjectionStatement
+      ≡ boundaryHBPointwiseRouteProjectionStatement
 
     receiptBoundary :
       List String
@@ -295,6 +363,18 @@ canonicalBoundaryHBAssemblyReceipt =
         true
     ; pointwiseKornBiaxialBoundRequiredIsTrue =
         refl
+    ; lambda2ZeroRequired =
+        true
+    ; lambda2ZeroRequiredIsTrue =
+        refl
+    ; lambda1EqualsNegativeLambda3Required =
+        true
+    ; lambda1EqualsNegativeLambda3RequiredIsTrue =
+        refl
+    ; lambda3AtLeastLambdaMinRequired =
+        true
+    ; lambda3AtLeastLambdaMinRequiredIsTrue =
+        refl
     ; biaxialBoundaryRequired =
         true
     ; biaxialBoundaryRequiredIsTrue =
@@ -306,6 +386,10 @@ canonicalBoundaryHBAssemblyReceipt =
     ; pointwiseNabla2ULowerBoundEtaRequired =
         true
     ; pointwiseNabla2ULowerBoundEtaRequiredIsTrue =
+        refl
+    ; pointwiseMaxBKAtLeastB0Required =
+        true
+    ; pointwiseMaxBKAtLeastB0RequiredIsTrue =
         refl
     ; integralKornPlusContinuityInsufficientFlag =
         true
@@ -335,9 +419,18 @@ canonicalBoundaryHBAssemblyReceipt =
         []
     ; promotionFlagsAreEmpty =
         refl
+    ; pointwiseRouteProjection =
+        canonicalBoundaryHBPointwiseRouteProjection
+    ; pointwiseRouteProjectionIsCanonical =
+        refl
+    ; pointwiseRouteProjectionStatement =
+        boundaryHBPointwiseRouteProjectionStatement
+    ; pointwiseRouteProjectionStatementIsCanonical =
+        refl
     ; receiptBoundary =
         "lambda2plus_transport_ineq is standard/write-now"
-        ∷ "BoundaryHB_Correct closes only through pointwise kornBiaxialBound"
+        ∷ "BoundaryHB_Correct closes only through the pointwise route lambda2 = 0, lambda1 = -lambda3, lambda3 >= lambda_min, and ||nabla^2 u|| >= eta"
+        ∷ "The pointwise consequence max_k B_k >= b0 is recorded"
         ∷ "Integral Korn plus continuity is not the closure route"
         ∷ "KornLevelSet remains open for h_strain_dom"
         ∷ "Clay promotion stays false"
