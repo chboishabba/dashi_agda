@@ -1,0 +1,29 @@
+{
+  "aggregate_decision": "regularity_consistent",
+  "calc": "Calc12",
+  "clay_promotion": false,
+  "datasets": [
+    {
+      "datum_id": "TG_Re1600_N128_frame9_boundary_band_1e-3",
+      "fit": {
+        "beta": 2.2754974180523737,
+        "beta_CI_95": [
+          2.129779448947756,
+          2.4212153871569915
+        ],
+        "ci_method": "normal_approx_1.96",
+        "decision": "regularity_consistent",
+        "fitted_C": 0.7569010321815973,
+        "log_C": -0.27852277097181966,
+        "r_squared": 0.13893110418597066,
+        "standard_error_beta": 0.07434590260439683
+      },
+      "min_g12_observed": 0.00030009993310170513,
+      "n_pairs_raw": 5808,
+      "n_pairs_used": 5808
+    }
+  ],
+  "proof_blocking": false,
+  "route_selector": "statistical",
+  "theorem_authority": false
+}

@@ -92,6 +92,8 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         "calc": "Calc12",
         "route_selector": "statistical",
         "script": "scripts/ns_clay_calc12_route_selector.py",
+        "selector_script": "scripts/ns_clay_calc12_route_selector.py",
+        "pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
         "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
         "fitted_beta": "candidate-only fitted beta placeholder",
         "fitted_C": "candidate-only fitted C placeholder",
@@ -144,8 +146,17 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     assert payload["hard_wall_count"] == 2
     assert payload["hard_walls"] == ["KornLevelSet", "collapseImpossible"]
     assert payload["clay_hard_core"] == "collapseImpossible"
+    assert payload["calc12_executable"] is True
+    assert payload["calc12_non_blocking"] is True
+    assert payload["calc12_pair_builder_script"] == "scripts/ns_clay_calc12_pair_builder.py"
+    assert payload["calc12_selector_script"] == "scripts/ns_clay_calc12_route_selector.py"
     assert payload["calc12_route_selector"] == expected_calc12
     assert payload["calc12_route_selector"]["script"] == "scripts/ns_clay_calc12_route_selector.py"
+    assert payload["calc12_route_selector"]["selector_script"] == "scripts/ns_clay_calc12_route_selector.py"
+    assert (
+        payload["calc12_route_selector"]["pair_builder_script"]
+        == "scripts/ns_clay_calc12_pair_builder.py"
+    )
     assert payload["calc12_route_selector"]["fitted_beta"] == "candidate-only fitted beta placeholder"
     assert payload["calc12_route_selector"]["fitted_C"] == "candidate-only fitted C placeholder"
     assert (
@@ -180,11 +191,17 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         "hard_wall_count": 2,
         "hard_walls": ["KornLevelSet", "collapseImpossible"],
         "clay_hard_core": "collapseImpossible",
+        "calc12_executable": True,
+        "calc12_non_blocking": True,
+        "calc12_pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
+        "calc12_selector_script": "scripts/ns_clay_calc12_route_selector.py",
         "no_further_calcs_blocking": True,
         "optional_next_calc": {
             "calc": "Calc12",
             "route_selector": "statistical",
             "script": "scripts/ns_clay_calc12_route_selector.py",
+            "selector_script": "scripts/ns_clay_calc12_route_selector.py",
+            "pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
             "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
             "fitted_beta": "candidate-only fitted beta placeholder",
             "fitted_C": "candidate-only fitted C placeholder",
@@ -216,6 +233,16 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     assert payload["control_card"]["hard_wall_count"] == payload["hard_wall_count"]
     assert payload["control_card"]["hard_walls"] == payload["hard_walls"]
     assert payload["control_card"]["clay_hard_core"] == payload["clay_hard_core"]
+    assert payload["control_card"]["calc12_executable"] is True
+    assert payload["control_card"]["calc12_non_blocking"] is True
+    assert (
+        payload["control_card"]["calc12_pair_builder_script"]
+        == "scripts/ns_clay_calc12_pair_builder.py"
+    )
+    assert (
+        payload["control_card"]["calc12_selector_script"]
+        == "scripts/ns_clay_calc12_route_selector.py"
+    )
     assert (
         payload["control_card"]["formal_packages_write_now"]
         == payload["formal_packages_write_now"]
@@ -229,6 +256,16 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     assert payload["control_card"]["calc11_next_legacy_field_retained"] is True
     assert payload["control_card"]["post_calc11"] == payload["post_calc11"]
     assert payload["control_card"]["calc12_route_selector"] == expected_calc12
+    assert payload["control_card"]["post_calc11"]["calc12_executable"] is True
+    assert payload["control_card"]["post_calc11"]["calc12_non_blocking"] is True
+    assert (
+        payload["control_card"]["post_calc11"]["calc12_pair_builder_script"]
+        == "scripts/ns_clay_calc12_pair_builder.py"
+    )
+    assert (
+        payload["control_card"]["post_calc11"]["calc12_selector_script"]
+        == "scripts/ns_clay_calc12_route_selector.py"
+    )
     assert payload["control_card"]["optional_next_calc_blocks_proof"] is False
     assert payload["control_card"]["proof_blocking"] is False
     assert payload["calc11_result_summary"] == {
