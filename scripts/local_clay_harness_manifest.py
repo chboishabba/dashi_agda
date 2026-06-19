@@ -377,6 +377,15 @@ def build_specs() -> list[HarnessSpec]:
     ns_boundary_f123_absorption_out = (
         CHILD_OUT_DIR / "ns_boundary_f123_absorption_diagnostic_smoke.json"
     )
+    ns_boundary_corrected_gronwall_margin_out = (
+        CHILD_OUT_DIR / "ns_boundary_corrected_gronwall_margin_smoke.json"
+    )
+    ns_boundary_timeseries_margin_summary_out = (
+        CHILD_OUT_DIR / "ns_boundary_timeseries_margin_summary_smoke.json"
+    )
+    ns_boundary_gronwall_margin_regression_out = (
+        CHILD_OUT_DIR / "ns_boundary_gronwall_margin_regression_smoke.json"
+    )
     ns_boundary_derived_smoke_candidates = tuple(
         sorted(Path("/tmp").glob("ns_boundary_derived*.npz"))
     )
@@ -2914,6 +2923,97 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "boundary f123 absorption diagnostics for near-singular component structure",
                 "empirical/non-promoting; no absorption theorem promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_corrected_gronwall_margin",
+            path=script("ns_boundary_component_lambda3_corrected_gronwall_margin.py"),
+            args=(
+                "--lambda3-json",
+                str(ns_boundary_component_lambda3_out),
+                "--output",
+                str(ns_boundary_corrected_gronwall_margin_out),
+            )
+            + (
+                (
+                    "--f123-json",
+                    str(ns_boundary_f123_absorption_out),
+                )
+                if ns_boundary_f123_absorption_out.exists()
+                else ()
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--help",),
+            expected_json_path=ns_boundary_corrected_gronwall_margin_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None
+            and script("ns_boundary_component_lambda3_corrected_gronwall_margin.py").exists()
+            else (
+                "ns_boundary_corrected_gronwall_margin script not found"
+                if not script("ns_boundary_component_lambda3_corrected_gronwall_margin.py").exists()
+                else "ns_boundary_corrected_gronwall_margin requires derived NS boundary lambda3/f123 diagnostics under /tmp"
+            ),
+            notes=(
+                "optional corrected Gronwall margin diagnostic over boundary lambda3/F123 outputs",
+                "empirical/conditional/non-promoting; does not discharge h_delta1 or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_timeseries_margin_summary",
+            path=script("ns_boundary_timeseries_margin_summary.py"),
+            args=(
+                "--inputs",
+                str(ns_boundary_corrected_gronwall_margin_out),
+                "--output",
+                str(ns_boundary_timeseries_margin_summary_out),
+            ),
+            expected_json_path=ns_boundary_timeseries_margin_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_corrected_gronwall_margin_out.exists()
+            and script("ns_boundary_timeseries_margin_summary.py").exists()
+            else (
+                "ns_boundary_timeseries_margin_summary script not found"
+                if not script("ns_boundary_timeseries_margin_summary.py").exists()
+                else "ns_boundary_timeseries_margin_summary requires corrected-gronwall-margin artifact"
+            ),
+            notes=(
+                "optional aggregate corrected-gronwall timeseries summary from margin diagnostics",
+                "empirical/conditional/non-promoting; does not discharge h_delta1 or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_gronwall_margin_regression",
+            path=script("check_ns_boundary_gronwall_margin_regression.py"),
+            args=(
+                "--margin-json",
+                str(ns_boundary_corrected_gronwall_margin_out),
+            )
+            + (
+                (
+                    "--timeseries-json",
+                    str(ns_boundary_timeseries_margin_summary_out),
+                )
+                if ns_boundary_timeseries_margin_summary_out.exists()
+                else ()
+            )
+            if ns_boundary_timeseries_margin_summary_out.exists()
+            or ns_boundary_corrected_gronwall_margin_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_gronwall_margin_regression_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_corrected_gronwall_margin_out.exists()
+            and script("check_ns_boundary_gronwall_margin_regression.py").exists()
+            else (
+                "check_ns_boundary_gronwall_margin_regression script not found"
+                if not script("check_ns_boundary_gronwall_margin_regression.py").exists()
+                else "check_ns_boundary_gronwall_margin_regression requires corrected-gronwall margin artifact"
+            ),
+            notes=(
+                "optional regression check for corrected Gronwall margin invariants and optional timeseries summary",
+                "empirical/conditional/non-promoting; does not discharge h_delta1 or Clay NS",
             ),
         ),
         HarnessSpec(

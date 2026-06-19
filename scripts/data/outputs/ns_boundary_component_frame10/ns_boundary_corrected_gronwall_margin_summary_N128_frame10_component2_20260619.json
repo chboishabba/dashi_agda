@@ -1,0 +1,134 @@
+{
+  "C": "scripts/ns_boundary_timeseries_margin_summary.py",
+  "F": "Promotion flags intentionally remain false.",
+  "G": "No theorem, Clay, or promotion claim is made by this aggregator.",
+  "L": "Rows with non-pass status or missing delta1/mu are reported as failing items.",
+  "O": "Aggregate per-frame corrected margin JSON artifacts for deterministic review.",
+  "P": "FAIL_CLOSED_BOUNDARY_TIMESERIES_MARGIN",
+  "R": "Collect compatible delta1/mu JSONs, infer frame/component identity, and summarise bounds.",
+  "S": "Frame/component inference is row-first, then metadata, then filename fallback.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "authority_report": {
+    "expected": {
+      "candidate_only": true,
+      "clay_authority": false,
+      "empirical_non_promoting": true,
+      "promoted": false,
+      "runtime_authority": false,
+      "theorem_authority": false,
+      "truth_authority": false
+    },
+    "files": [
+      {
+        "contract": "ns_boundary_component_lambda3_corrected_gronwall_margin",
+        "file_index": 0,
+        "path": "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_N128_frame10_component2_20260619.json",
+        "row_count": 1,
+        "script": "scripts/ns_boundary_component_lambda3_corrected_gronwall_margin.py",
+        "status": "warning"
+      }
+    ],
+    "observed_samples": [
+      {
+        "candidate_only": true,
+        "clay_authority": false,
+        "empirical_non_promoting": true,
+        "promoted": false,
+        "runtime_authority": false,
+        "theorem_authority": false,
+        "truth_authority": false
+      }
+    ],
+    "valid": true,
+    "warnings": []
+  },
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_summary_N128_frame10_component2_20260619.json"
+  ],
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "contract": "ns_boundary_timeseries_margin_summary",
+  "count": 1,
+  "delta1": {
+    "count": 1,
+    "max": 2.0910865534885876,
+    "mean": 2.0910865534885876,
+    "min": 2.0910865534885876
+  },
+  "delta1_count": 1,
+  "delta1_max": 2.0910865534885876,
+  "delta1_mean": 2.0910865534885876,
+  "delta1_min": 2.0910865534885876,
+  "failing_items": [
+    {
+      "component": 2,
+      "file_index": 0,
+      "frame": 10,
+      "path": "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_N128_frame10_component2_20260619.json",
+      "reasons": [
+        "status=warning"
+      ],
+      "row_in_file": 1,
+      "row_index": 1,
+      "source": {
+        "source": "root"
+      },
+      "status": "warning"
+    }
+  ],
+  "full_clay_ns_solved": false,
+  "mu": {
+    "count": 1,
+    "max": 3.703952825596815,
+    "mean": 3.703952825596815,
+    "min": 3.703952825596815
+  },
+  "mu_count": 1,
+  "mu_max": 3.703952825596815,
+  "mu_mean": 3.703952825596815,
+  "mu_min": 3.703952825596815,
+  "proof_blocking": false,
+  "provenance": {
+    "file_count": 1,
+    "inputs": [
+      "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_N128_frame10_component2_20260619.json"
+    ],
+    "row_count": 1,
+    "rows": [
+      {
+        "component": 2,
+        "delta1": 2.0910865534885876,
+        "file_index": 0,
+        "frame": 10,
+        "mu": 3.703952825596815,
+        "path": "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_N128_frame10_component2_20260619.json",
+        "row_in_file": 1,
+        "row_index": 0,
+        "source": {
+          "source": "root"
+        },
+        "status": "warning",
+        "status_key": "warning"
+      }
+    ]
+  },
+  "schema_version": "1.0.0",
+  "script": "scripts/ns_boundary_timeseries_margin_summary.py",
+  "status": "warning",
+  "status_counts": {
+    "warning": 1
+  },
+  "status_reason": "warnings_or_failures",
+  "theorem_promoted": false,
+  "warnings": [
+    "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_N128_frame10_component2_20260619.json:row-1:no_positive_commutator_measurement"
+  ]
+}
