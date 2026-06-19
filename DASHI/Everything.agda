@@ -165,6 +165,7 @@ import DASHI.Core.ParityLaneOperatorCore
 import DASHI.Core.ParityLaneEigenOperatorCore
 import DASHI.Core.Prelude
 import DASHI.Core.Q
+import DASHI.Core.RelationAlgebraCore
 import DASHI.Core.SourceProcessEvidenceCore
 import DASHI.Core.SourceProcessEvidenceLawCore
 import DASHI.Core.StatisticalEvidenceCore
@@ -221,7 +222,12 @@ import DASHI.Foundations.Base369NumeralOntologyBoundary
 import DASHI.Foundations.Base369RingShape
 import DASHI.Foundations.Base369TriTruthField
 import DASHI.Foundations.CarrierPromotionBoundaryCore
+import DASHI.Foundations.PMApparentVariableDescriptionBoundary
+import DASHI.Foundations.PMCardinalProlegomenaCore
+import DASHI.Foundations.PMDeductionBridge
+import DASHI.Foundations.PMVol1ChapterIndexCore
 import DASHI.Foundations.PhysicsLinearAnalysisParity
+import DASHI.Foundations.PrincipiaVol1DashiBridge
 import DASHI.Foundations.SurrealCompactification
 import DASHI.Foundations.SurrealCompactificationBalancedTernaryEmbedding
 import DASHI.Foundations.SurrealCompactificationIntake
