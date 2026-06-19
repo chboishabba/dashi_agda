@@ -1,0 +1,1014 @@
+{
+  "authority": {
+    "cardinal_arithmetic_authority": false,
+    "comparison_bridge_only": true,
+    "direct_pm_formalization_authority": false,
+    "exact_pm_notation_authority": false,
+    "proposition_corpus_authority": false
+  },
+  "row_count": 100,
+  "rows": [
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMDeductionBridge",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-01",
+      "pm_chapter": "*1",
+      "pm_package_id": "pm-vol1-star-01",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMDeductionBridge",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-02",
+      "pm_chapter": "*2",
+      "pm_package_id": "pm-vol1-star-02",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMDeductionBridge",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-03",
+      "pm_chapter": "*3",
+      "pm_package_id": "pm-vol1-star-03",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMDeductionBridge",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-04",
+      "pm_chapter": "*4",
+      "pm_package_id": "pm-vol1-star-04",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMDeductionBridge",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-05",
+      "pm_chapter": "*5",
+      "pm_package_id": "pm-vol1-star-05",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-06",
+      "pm_chapter": "*6",
+      "pm_package_id": "pm-vol1-star-06",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-07",
+      "pm_chapter": "*7",
+      "pm_package_id": "pm-vol1-star-07",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-08",
+      "pm_chapter": "*8",
+      "pm_package_id": "pm-vol1-star-08",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-09",
+      "pm_chapter": "*9",
+      "pm_package_id": "pm-vol1-star-09",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-10",
+      "pm_chapter": "*10",
+      "pm_package_id": "pm-vol1-star-10",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-11",
+      "pm_chapter": "*11",
+      "pm_package_id": "pm-vol1-star-11",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-12",
+      "pm_chapter": "*12",
+      "pm_package_id": "pm-vol1-star-12",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-13",
+      "pm_chapter": "*13",
+      "pm_package_id": "pm-vol1-star-13",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-14",
+      "pm_chapter": "*14",
+      "pm_package_id": "pm-vol1-star-14",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-15",
+      "pm_chapter": "*15",
+      "pm_package_id": "pm-vol1-star-15",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-16",
+      "pm_chapter": "*16",
+      "pm_package_id": "pm-vol1-star-16",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-17",
+      "pm_chapter": "*17",
+      "pm_package_id": "pm-vol1-star-17",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-18",
+      "pm_chapter": "*18",
+      "pm_package_id": "pm-vol1-star-18",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-19",
+      "pm_chapter": "*19",
+      "pm_package_id": "pm-vol1-star-19",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-20",
+      "pm_chapter": "*20",
+      "pm_package_id": "pm-vol1-star-20",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-21",
+      "pm_chapter": "*21",
+      "pm_package_id": "pm-vol1-star-21",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-22",
+      "pm_chapter": "*22",
+      "pm_package_id": "pm-vol1-star-22",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-23",
+      "pm_chapter": "*23",
+      "pm_package_id": "pm-vol1-star-23",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-24",
+      "pm_chapter": "*24",
+      "pm_package_id": "pm-vol1-star-24",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-25",
+      "pm_chapter": "*25",
+      "pm_package_id": "pm-vol1-star-25",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-26",
+      "pm_chapter": "*26",
+      "pm_package_id": "pm-vol1-star-26",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-27",
+      "pm_chapter": "*27",
+      "pm_package_id": "pm-vol1-star-27",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-28",
+      "pm_chapter": "*28",
+      "pm_package_id": "pm-vol1-star-28",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-29",
+      "pm_chapter": "*29",
+      "pm_package_id": "pm-vol1-star-29",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-30",
+      "pm_chapter": "*30",
+      "pm_package_id": "pm-vol1-star-30",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-31",
+      "pm_chapter": "*31",
+      "pm_package_id": "pm-vol1-star-31",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-32",
+      "pm_chapter": "*32",
+      "pm_package_id": "pm-vol1-star-32",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-33",
+      "pm_chapter": "*33",
+      "pm_package_id": "pm-vol1-star-33",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-34",
+      "pm_chapter": "*34",
+      "pm_package_id": "pm-vol1-star-34",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-35",
+      "pm_chapter": "*35",
+      "pm_package_id": "pm-vol1-star-35",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-36",
+      "pm_chapter": "*36",
+      "pm_package_id": "pm-vol1-star-36",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-37",
+      "pm_chapter": "*37",
+      "pm_package_id": "pm-vol1-star-37",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-38",
+      "pm_chapter": "*38",
+      "pm_package_id": "pm-vol1-star-38",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-39",
+      "pm_chapter": "*39",
+      "pm_package_id": "pm-vol1-star-39",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-40",
+      "pm_chapter": "*40",
+      "pm_package_id": "pm-vol1-star-40",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-41",
+      "pm_chapter": "*41",
+      "pm_package_id": "pm-vol1-star-41",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-42",
+      "pm_chapter": "*42",
+      "pm_package_id": "pm-vol1-star-42",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Core.RelationAlgebraCore",
+      "dashi_status": "checked-dashi-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-43",
+      "pm_chapter": "*43",
+      "pm_package_id": "pm-vol1-star-43",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-44",
+      "pm_chapter": "*44",
+      "pm_package_id": "pm-vol1-star-44",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-45",
+      "pm_chapter": "*45",
+      "pm_package_id": "pm-vol1-star-45",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-46",
+      "pm_chapter": "*46",
+      "pm_package_id": "pm-vol1-star-46",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-47",
+      "pm_chapter": "*47",
+      "pm_package_id": "pm-vol1-star-47",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-48",
+      "pm_chapter": "*48",
+      "pm_package_id": "pm-vol1-star-48",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-49",
+      "pm_chapter": "*49",
+      "pm_package_id": "pm-vol1-star-49",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-50",
+      "pm_chapter": "*50",
+      "pm_package_id": "pm-vol1-star-50",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-51",
+      "pm_chapter": "*51",
+      "pm_package_id": "pm-vol1-star-51",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-52",
+      "pm_chapter": "*52",
+      "pm_package_id": "pm-vol1-star-52",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-53",
+      "pm_chapter": "*53",
+      "pm_package_id": "pm-vol1-star-53",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-54",
+      "pm_chapter": "*54",
+      "pm_package_id": "pm-vol1-star-54",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-55",
+      "pm_chapter": "*55",
+      "pm_package_id": "pm-vol1-star-55",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-56",
+      "pm_chapter": "*56",
+      "pm_package_id": "pm-vol1-star-56",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-57",
+      "pm_chapter": "*57",
+      "pm_package_id": "pm-vol1-star-57",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-58",
+      "pm_chapter": "*58",
+      "pm_package_id": "pm-vol1-star-58",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-59",
+      "pm_chapter": "*59",
+      "pm_package_id": "pm-vol1-star-59",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-60",
+      "pm_chapter": "*60",
+      "pm_package_id": "pm-vol1-star-60",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-61",
+      "pm_chapter": "*61",
+      "pm_package_id": "pm-vol1-star-61",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-62",
+      "pm_chapter": "*62",
+      "pm_package_id": "pm-vol1-star-62",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-63",
+      "pm_chapter": "*63",
+      "pm_package_id": "pm-vol1-star-63",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-64",
+      "pm_chapter": "*64",
+      "pm_package_id": "pm-vol1-star-64",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-65",
+      "pm_chapter": "*65",
+      "pm_package_id": "pm-vol1-star-65",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-66",
+      "pm_chapter": "*66",
+      "pm_package_id": "pm-vol1-star-66",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-67",
+      "pm_chapter": "*67",
+      "pm_package_id": "pm-vol1-star-67",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-68",
+      "pm_chapter": "*68",
+      "pm_package_id": "pm-vol1-star-68",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-69",
+      "pm_chapter": "*69",
+      "pm_package_id": "pm-vol1-star-69",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-70",
+      "pm_chapter": "*70",
+      "pm_package_id": "pm-vol1-star-70",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-71",
+      "pm_chapter": "*71",
+      "pm_package_id": "pm-vol1-star-71",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-72",
+      "pm_chapter": "*72",
+      "pm_package_id": "pm-vol1-star-72",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-73",
+      "pm_chapter": "*73",
+      "pm_package_id": "pm-vol1-star-73",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-74",
+      "pm_chapter": "*74",
+      "pm_package_id": "pm-vol1-star-74",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-75",
+      "pm_chapter": "*75",
+      "pm_package_id": "pm-vol1-star-75",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-76",
+      "pm_chapter": "*76",
+      "pm_package_id": "pm-vol1-star-76",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-77",
+      "pm_chapter": "*77",
+      "pm_package_id": "pm-vol1-star-77",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-78",
+      "pm_chapter": "*78",
+      "pm_package_id": "pm-vol1-star-78",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-79",
+      "pm_chapter": "*79",
+      "pm_package_id": "pm-vol1-star-79",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-80",
+      "pm_chapter": "*80",
+      "pm_package_id": "pm-vol1-star-80",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-81",
+      "pm_chapter": "*81",
+      "pm_package_id": "pm-vol1-star-81",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-82",
+      "pm_chapter": "*82",
+      "pm_package_id": "pm-vol1-star-82",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-83",
+      "pm_chapter": "*83",
+      "pm_package_id": "pm-vol1-star-83",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-84",
+      "pm_chapter": "*84",
+      "pm_package_id": "pm-vol1-star-84",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-85",
+      "pm_chapter": "*85",
+      "pm_package_id": "pm-vol1-star-85",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-86",
+      "pm_chapter": "*86",
+      "pm_package_id": "pm-vol1-star-86",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-87",
+      "pm_chapter": "*87",
+      "pm_package_id": "pm-vol1-star-87",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-88",
+      "pm_chapter": "*88",
+      "pm_package_id": "pm-vol1-star-88",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-89",
+      "pm_chapter": "*89",
+      "pm_package_id": "pm-vol1-star-89",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-90",
+      "pm_chapter": "*90",
+      "pm_package_id": "pm-vol1-star-90",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-91",
+      "pm_chapter": "*91",
+      "pm_package_id": "pm-vol1-star-91",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-92",
+      "pm_chapter": "*92",
+      "pm_package_id": "pm-vol1-star-92",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-93",
+      "pm_chapter": "*93",
+      "pm_package_id": "pm-vol1-star-93",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-94",
+      "pm_chapter": "*94",
+      "pm_package_id": "pm-vol1-star-94",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-95",
+      "pm_chapter": "*95",
+      "pm_package_id": "pm-vol1-star-95",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-96",
+      "pm_chapter": "*96",
+      "pm_package_id": "pm-vol1-star-96",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-star-97",
+      "pm_chapter": "*97",
+      "pm_package_id": "pm-vol1-star-97",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMDeductionBridge",
+      "dashi_status": "external-substrate-boundary",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-appendix-star-8",
+      "pm_chapter": "appendix-*8",
+      "pm_package_id": "pm-vol1-appendix-star-8",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMCardinalProlegomenaCore",
+      "dashi_status": "candidate-socket",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-appendix-star-89",
+      "pm_chapter": "appendix-*89",
+      "pm_package_id": "pm-vol1-appendix-star-89",
+      "proposition_completion_authority": false
+    },
+    {
+      "candidate_only": true,
+      "dashi_module": "DASHI.Foundations.PMVol1ChapterIndexCore",
+      "dashi_status": "candidate-inventory-only",
+      "exact_pm_notation_authority": false,
+      "jmd_lean_package_id": "jmd-pm-vol1-appendix-star-99",
+      "pm_chapter": "appendix-*99",
+      "pm_package_id": "pm-vol1-appendix-star-99",
+      "proposition_completion_authority": false
+    }
+  ],
+  "schema": "pm-dashi-crosswalk-v1",
+  "volume": "Principia Mathematica Volume I"
+}
