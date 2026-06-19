@@ -88,6 +88,18 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     ]
     spec, artifacts = build_fixture_spec(tmp_path, statuses)
     output = tmp_path / "ledger.json"
+    expected_calc12 = {
+        "calc": "Calc12",
+        "route_selector": "statistical",
+        "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+        "beta_decision_thresholds": {
+            ">1": "regularity_consistent",
+            "<1": "blowup_precursor",
+            "CI straddles 1": "inconclusive",
+        },
+        "proof_blocking": False,
+        "no_further_calcs_blocking": True,
+    }
 
     result = run_ledger(tmp_path, spec, output)
     assert result.returncode == 0, result.stderr
@@ -117,10 +129,12 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     assert payload["empirical_diagnostics_complete"] is True
     assert payload["closeable_package_count"] == 7
     assert payload["no_further_calcs_blocking"] is True
+    assert payload["proof_blocking"] is False
     assert payload["remaining_math_wall"] == ["KornLevelSet", "collapseImpossible"]
     assert payload["hard_wall_count"] == 2
     assert payload["hard_walls"] == ["KornLevelSet", "collapseImpossible"]
     assert payload["clay_hard_core"] == "collapseImpossible"
+    assert payload["calc12_route_selector"] == expected_calc12
     assert payload["formal_packages_write_now"] == [
         "millerToH5",
         "GD3-SobolevBound-Correct",
@@ -144,6 +158,14 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         "optional_next_calc": {
             "calc": "Calc12",
             "route_selector": "statistical",
+            "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+            "beta_decision_thresholds": {
+                ">1": "regularity_consistent",
+                "<1": "blowup_precursor",
+                "CI straddles 1": "inconclusive",
+            },
+            "proof_blocking": False,
+            "no_further_calcs_blocking": True,
             "blocking": False,
         },
     }
@@ -170,6 +192,9 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     assert payload["control_card"]["calc11_next"] is False
     assert payload["control_card"]["calc11_next_legacy_field_retained"] is True
     assert payload["control_card"]["post_calc11"] == payload["post_calc11"]
+    assert payload["control_card"]["calc12_route_selector"] == expected_calc12
+    assert payload["control_card"]["optional_next_calc_blocks_proof"] is False
+    assert payload["control_card"]["proof_blocking"] is False
     assert payload["calc11_result_summary"] == {
         "bottom_5_percent_g12_mean_omega_e2_fraction": 0.343,
         "random_baseline": 1.0 / 3.0,

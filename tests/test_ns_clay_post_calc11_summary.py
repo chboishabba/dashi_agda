@@ -40,6 +40,18 @@ def run_script(tmp_path: Path) -> tuple[dict[str, Any], str]:
 
 def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> None:
     payload, text = run_script(tmp_path)
+    expected_calc12 = {
+        "calc": "Calc12",
+        "route_selector": "statistical",
+        "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+        "beta_decision_thresholds": {
+            ">1": "regularity_consistent",
+            "<1": "blowup_precursor",
+            "CI straddles 1": "inconclusive",
+        },
+        "proof_blocking": False,
+        "no_further_calcs_blocking": True,
+    }
 
     assert payload["contract"] == "ns_clay_post_calc11_summary"
     assert payload["version"] == 1
@@ -47,6 +59,7 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
     assert payload["calc11_complete"] is True
     assert payload["calc11_decision"] == "no_special_alignment"
     assert payload["no_further_calcs_blocking"] is True
+    assert payload["proof_blocking"] is False
     assert payload["closeable_package_count"] == 7
     assert payload["closeable_packages"] == [
         "millerToH5",
@@ -60,12 +73,17 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
     assert payload["remaining_hard_walls"] == ["KornLevelSet", "collapseImpossible"]
     assert payload["hard_wall_count"] == 2
     assert payload["clay_hard_core"] == "collapseImpossible"
-    assert payload["optional_next_calc"] == "Calc12:parametric_omega_e2_scaling_study"
+    assert payload["optional_next_calc"] == expected_calc12
+    assert payload["calc12_route_selector"] == expected_calc12
     assert payload["optional_next_calc_blocks_proof"] is False
     assert payload["clay_promotion"] is False
     assert payload["theorem_promotion"] is False
     assert isinstance(payload["parity_hash"], str) and len(payload["parity_hash"]) == 64
     assert payload["parity_hash"] in text
+    assert payload["control_card"]["calc12_route_selector"] == expected_calc12
+    assert payload["control_card"]["optional_next_calc_blocks_proof"] is False
+    assert payload["control_card"]["proof_blocking"] is False
+    assert payload["control_card"]["no_further_calcs_blocking"] is True
 
 
 def test_post_calc11_summary_validator_rejects_tampering_and_hash_changes() -> None:

@@ -11,12 +11,14 @@ open import Data.Empty using (⊥)
 -- Candidate-only aggregation receipt for the post-Calc-11 proof-package
 -- surface.
 --
--- This module is a string-label ledger only.  It names the post-Calc-11
--- source surfaces, keeps the two new receipts as labels only when present,
--- and records the lattice:
+-- This module is a string-label ledger only.  It names the current
+-- canonical pipeline as labels:
 --
---   calc11 complete -> closeable proof packages -> conditional theorem
---   package -> hard walls KornLevelSet/collapseImpossible -> Clay false
+--   Calc11 complete/no_special_alignment
+--   -> seven closeable proof packages
+--   -> optional Calc12 non-blocking route-selector
+--   -> hard walls exactly KornLevelSet and collapseImpossible
+--   -> Clay false
 --
 -- No worker-authored modules are imported here.
 
@@ -33,28 +35,31 @@ nsClayPostCalc11ProofPackageAggregationPromotionImpossibleHere ()
 
 sourceSurfaceLabels : List String
 sourceSurfaceLabels =
-  "NSVorticityE2ProjectionCalc11ResultReceipt"
-  ∷ "NSCoareaGradientStepAPerComponentReceipt"
-  ∷ "LocalConcentrationPigeonConcentrationReceipt"
-  ∷ "Lambda2PlusTransportInequalityBoundaryHBReceipt"
-  ∷ "NSBoundaryHBCorrectPointwiseReceipt"
-  ∷ "NSCollapseImpossibleCalc11TargetReceipt"
-  ∷ "NSClayPostCalc11StateAggregationReceipt"
-  ∷ "NSClayConcisePathCalc11IntegrationReceipt"
-  ∷ "NSClayThreeHardTheoremsDistanceReceipt"
+  "Calc11 result complete/no_special_alignment"
+  ∷ "millerToH5 | vars=(E0,Csob,Cint)"
+  ∷ "GD3 two-gap | vars=(M,delta0,delta1,Cemb)"
+  ∷ "coareaGradientBound exponent r^1 | vars=(Cgeo,r,K)"
+  ∷ "LocalConcentration | vars=(tail/L3 weak)"
+  ∷ "pigeon_concentration | vars=(h_fin,Nmax,K/Nmax^(1/3))"
+  ∷ "StepA_PerComponent | vars=(d0,tau0,r/local L3)"
+  ∷ "BoundaryHB_Correct via pointwise kornBiaxialBound | vars=(lambda_min,eta,b0)"
+  ∷ "NSCalc12ParametricOmegaE2ScalingReceipt"
+  ∷ "KornLevelSet"
+  ∷ "collapseImpossible"
+  ∷ "Clay false"
   ∷ []
 
 data NSClayPostCalc11ProofPackageAggregationLatticeStep : Set where
-  calc11Complete :
+  calc11CompleteNoSpecialAlignment :
     NSClayPostCalc11ProofPackageAggregationLatticeStep
 
-  closeableProofPackages :
+  sevenCloseableProofPackages :
     NSClayPostCalc11ProofPackageAggregationLatticeStep
 
-  conditionalTheoremPackage :
+  optionalCalc12NonBlockingRouteSelector :
     NSClayPostCalc11ProofPackageAggregationLatticeStep
 
-  hardWallsKornLevelSetCollapseImpossible :
+  hardWallsExactlyKornLevelSetAndCollapseImpossible :
     NSClayPostCalc11ProofPackageAggregationLatticeStep
 
   clayFalse :
@@ -63,20 +68,20 @@ data NSClayPostCalc11ProofPackageAggregationLatticeStep : Set where
 canonicalNSClayPostCalc11ProofPackageAggregationLatticeSteps :
   List NSClayPostCalc11ProofPackageAggregationLatticeStep
 canonicalNSClayPostCalc11ProofPackageAggregationLatticeSteps =
-  calc11Complete
-  ∷ closeableProofPackages
-  ∷ conditionalTheoremPackage
-  ∷ hardWallsKornLevelSetCollapseImpossible
+  calc11CompleteNoSpecialAlignment
+  ∷ sevenCloseableProofPackages
+  ∷ optionalCalc12NonBlockingRouteSelector
+  ∷ hardWallsExactlyKornLevelSetAndCollapseImpossible
   ∷ clayFalse
   ∷ []
 
 proofPackageAggregationStatementText : String
 proofPackageAggregationStatementText =
-  "Calc 11 is complete; closeable proof packages are recorded as labels only; the conditional theorem package is recorded next; the hard walls remain KornLevelSet/collapseImpossible; Clay stays false."
+  "Calc11 is complete with no_special_alignment; seven closeable packages are recorded; the optional Calc12 route-selector is non-blocking; the hard walls are exactly KornLevelSet and collapseImpossible; Clay stays false."
 
 aggregationBoundaryText : String
 aggregationBoundaryText =
-  "This is a string-label aggregation receipt only.  It names the post-Calc-11 source surfaces, keeps the two new receipts as labels only, and avoids import coupling."
+  "This is a string-label aggregation receipt only.  It names the current canonical pipeline, keeps the optional Calc12 route-selector as a label only, and avoids import coupling."
 
 record NSClayPostCalc11ProofPackageAggregationORCSLPGF : Set where
   constructor mkNSClayPostCalc11ProofPackageAggregationORCSLPGF
@@ -91,7 +96,7 @@ record NSClayPostCalc11ProofPackageAggregationORCSLPGF : Set where
       String
     RIsCanonical :
       R ≡
-      "Name the post-Calc-11 source surfaces as string labels, record the lattice, and keep Clay false."
+      "Record the current canonical pipeline as string labels, keep the optional Calc12 route-selector non-blocking, and keep Clay false."
 
     C :
       String
@@ -103,31 +108,31 @@ record NSClayPostCalc11ProofPackageAggregationORCSLPGF : Set where
       String
     SIsCanonical :
       S ≡
-      "NSVorticityE2ProjectionCalc11ResultReceipt, NSCoareaGradientStepAPerComponentReceipt, LocalConcentrationPigeonConcentrationReceipt, Lambda2PlusTransportInequalityBoundaryHBReceipt, NSBoundaryHBCorrectPointwiseReceipt, NSCollapseImpossibleCalc11TargetReceipt, NSClayPostCalc11StateAggregationReceipt, NSClayConcisePathCalc11IntegrationReceipt, and NSClayThreeHardTheoremsDistanceReceipt are the named post-Calc-11 source surfaces."
+      "Calc11 result complete/no_special_alignment, the seven closeable package rows, the optional Calc12 non-blocking route-selector label, KornLevelSet, collapseImpossible, and Clay false are the canonical source labels."
 
     L :
       String
     LIsCanonical :
       L ≡
-      "calc11 complete -> closeable proof packages -> conditional theorem package -> hard walls KornLevelSet/collapseImpossible -> Clay false"
+      "Calc11 complete/no_special_alignment -> seven closeable packages -> optional Calc12 non-blocking route-selector -> hard walls exactly KornLevelSet and collapseImpossible -> Clay false"
 
     P :
       String
     PIsCanonical :
       P ≡
-      "Use string-label aggregation only; do not import the named surfaces; keep the closeable proof-package and conditional theorem-package lattice as labels."
+      "Use string-label aggregation only; do not import the named surfaces; keep the seven closeable packages and optional Calc12 route-selector as labels."
 
     G :
       String
     GIsCanonical :
       G ≡
-      "Fail closed on Clay promotion; the evidence remains read-only labels."
+      "Fail closed on Clay promotion; the evidence remains read-only labels and the optional Calc12 route-selector is non-blocking only."
 
     F :
       String
     FIsCanonical :
       F ≡
-      "KornLevelSet/collapseImpossible remains the hard wall."
+      "KornLevelSet and collapseImpossible remain the hard walls."
 
 open NSClayPostCalc11ProofPackageAggregationORCSLPGF public
 
@@ -137,19 +142,19 @@ canonicalNSClayPostCalc11ProofPackageAggregationORCSLPGF =
   mkNSClayPostCalc11ProofPackageAggregationORCSLPGF
     "Worker 6 owns the post-Calc-11 proof-package aggregation receipt only."
     refl
-    "Name the post-Calc-11 source surfaces as string labels, record the lattice, and keep Clay false."
+    "Record the current canonical pipeline as string labels, keep the optional Calc12 route-selector non-blocking, and keep Clay false."
     refl
     "NSClayPostCalc11ProofPackageAggregationReceipt.agda is a local ledger surface only; it imports no worker-authored modules."
     refl
-    "NSVorticityE2ProjectionCalc11ResultReceipt, NSCoareaGradientStepAPerComponentReceipt, LocalConcentrationPigeonConcentrationReceipt, Lambda2PlusTransportInequalityBoundaryHBReceipt, NSBoundaryHBCorrectPointwiseReceipt, NSCollapseImpossibleCalc11TargetReceipt, NSClayPostCalc11StateAggregationReceipt, NSClayConcisePathCalc11IntegrationReceipt, and NSClayThreeHardTheoremsDistanceReceipt are the named post-Calc-11 source surfaces."
+    "Calc11 result complete/no_special_alignment, the seven closeable package rows, the optional Calc12 non-blocking route-selector label, KornLevelSet, collapseImpossible, and Clay false are the canonical source labels."
     refl
-    "calc11 complete -> closeable proof packages -> conditional theorem package -> hard walls KornLevelSet/collapseImpossible -> Clay false"
+    "Calc11 complete/no_special_alignment -> seven closeable packages -> optional Calc12 non-blocking route-selector -> hard walls exactly KornLevelSet and collapseImpossible -> Clay false"
     refl
-    "Use string-label aggregation only; do not import the named surfaces; keep the closeable proof-package and conditional theorem-package lattice as labels."
+    "Use string-label aggregation only; do not import the named surfaces; keep the seven closeable packages and optional Calc12 route-selector as labels."
     refl
-    "Fail closed on Clay promotion; the evidence remains read-only labels."
+    "Fail closed on Clay promotion; the evidence remains read-only labels and the optional Calc12 route-selector is non-blocking only."
     refl
-    "KornLevelSet/collapseImpossible remains the hard wall."
+    "KornLevelSet and collapseImpossible remain the hard walls."
     refl
 
 record NSClayPostCalc11ProofPackageAggregationReceipt : Setω where
@@ -208,9 +213,10 @@ record NSClayPostCalc11ProofPackageAggregationReceipt : Setω where
     receiptBoundaryAreCanonical :
       receiptBoundary ≡
       ( "calc11 complete"
-        ∷ "closeable proof packages"
-        ∷ "conditional theorem package"
-        ∷ "hard walls KornLevelSet/collapseImpossible"
+        ∷ "no_special_alignment"
+        ∷ "seven closeable packages"
+        ∷ "optional Calc12 non-blocking route-selector"
+        ∷ "hard walls exactly KornLevelSet and collapseImpossible"
         ∷ "Clay false"
         ∷ [] )
 
@@ -254,9 +260,10 @@ canonicalNSClayPostCalc11ProofPackageAggregationReceipt =
         refl
     ; receiptBoundary =
         "calc11 complete"
-        ∷ "closeable proof packages"
-        ∷ "conditional theorem package"
-        ∷ "hard walls KornLevelSet/collapseImpossible"
+        ∷ "no_special_alignment"
+        ∷ "seven closeable packages"
+        ∷ "optional Calc12 non-blocking route-selector"
+        ∷ "hard walls exactly KornLevelSet and collapseImpossible"
         ∷ "Clay false"
         ∷ []
     ; receiptBoundaryAreCanonical =

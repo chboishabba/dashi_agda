@@ -6,10 +6,11 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
--- Post-Calc-10 KornLevelSet / h_strain_dom receipt.
+-- Post-Calc-11 KornLevelSet / h_strain_dom receipt.
 --
--- This file records the corrected package shape only.  The Calc 10 alpha
--- band is retained as empirical candidate evidence, and the promotion gates
+-- This file records the corrected package shape only.  The Calc 10/11 alpha
+-- band is retained as empirical candidate evidence, the sufficient
+-- h_omega_ctrl relation is recorded explicitly, and the promotion gates
 -- remain explicitly blocked.
 
 data NSKornLevelSetReceiptStatus : Set where
@@ -59,19 +60,37 @@ record NSKornLevelSetProofPackageShape : Set where
       String
     correctedLayerInequalityTextIsCanonical :
       correctedLayerInequalityText ≡
-      "||∂S||²_layer >= alpha_s * ||∇²u||²_layer"
+      "h_sd = ||∂S||^2_L2(layer) >= alpha_s ||∇²u||^2_L2(layer)"
+
+    hOmegaCtrlText :
+      String
+    hOmegaCtrlTextIsCanonical :
+      hOmegaCtrlText ≡
+      "h_omega_ctrl = ||omega||_L4(layer) <= C_omega ||S||_L4(layer)"
+
+    alphaSRelationText :
+      String
+    alphaSRelationTextIsCanonical :
+      alphaSRelationText ≡
+      "alpha_s = 1/(1 + C_omega^2)"
 
     calc10AlphaRangeCandidateText :
       String
     calc10AlphaRangeCandidateTextIsCanonical :
       calc10AlphaRangeCandidateText ≡
-      "Calc 10 empirical alpha range only: alpha_s in [0.49648633477014364, 0.49956437854373653]"
+      "Calc 10/11 empirical alpha_s≈0.5, C_omega≈1"
+
+    noAnalyticNSProofText :
+      String
+    noAnalyticNSProofTextIsCanonical :
+      noAnalyticNSProofText ≡
+      "no analytic proof from NS"
 
     boundaryConclusionText :
       String
     boundaryConclusionTextIsCanonical :
       boundaryConclusionText ≡
-      "integral boundary max B_k >= (2*alpha_s/9)*layer denominator"
+      "∫∂C max_k B_k >= (2 alpha_s/9) ∫layer ||∇²u||²"
 
     packageRows :
       List String
@@ -80,9 +99,12 @@ record NSKornLevelSetProofPackageShape : Set where
       "h_bx"
       ∷ "h_gap"
       ∷ "h_sd"
-      ∷ "||∂S||²_layer >= alpha_s * ||∇²u||²_layer"
-      ∷ "Calc 10 empirical alpha range only: alpha_s in [0.49648633477014364, 0.49956437854373653]"
-      ∷ "integral boundary max B_k >= (2*alpha_s/9)*layer denominator"
+      ∷ "h_sd = ||∂S||^2_L2(layer) >= alpha_s ||∇²u||^2_L2(layer)"
+      ∷ "h_omega_ctrl = ||omega||_L4(layer) <= C_omega ||S||_L4(layer)"
+      ∷ "alpha_s = 1/(1 + C_omega^2)"
+      ∷ "Calc 10/11 empirical alpha_s≈0.5, C_omega≈1"
+      ∷ "no analytic proof from NS"
+      ∷ "∫∂C max_k B_k >= (2 alpha_s/9) ∫layer ||∇²u||²"
       ∷ "non-promotion gates remain explicit and closed"
       ∷ []
 
@@ -97,21 +119,33 @@ canonicalNSKornLevelSetProofPackageShape =
     ; h_sdRowName = "h_sd"
     ; h_sdRowNameIsCanonical = refl
     ; correctedLayerInequalityText =
-        "||∂S||²_layer >= alpha_s * ||∇²u||²_layer"
+        "h_sd = ||∂S||^2_L2(layer) >= alpha_s ||∇²u||^2_L2(layer)"
     ; correctedLayerInequalityTextIsCanonical = refl
+    ; hOmegaCtrlText =
+        "h_omega_ctrl = ||omega||_L4(layer) <= C_omega ||S||_L4(layer)"
+    ; hOmegaCtrlTextIsCanonical = refl
+    ; alphaSRelationText =
+        "alpha_s = 1/(1 + C_omega^2)"
+    ; alphaSRelationTextIsCanonical = refl
     ; calc10AlphaRangeCandidateText =
-        "Calc 10 empirical alpha range only: alpha_s in [0.49648633477014364, 0.49956437854373653]"
+        "Calc 10/11 empirical alpha_s≈0.5, C_omega≈1"
     ; calc10AlphaRangeCandidateTextIsCanonical = refl
+    ; noAnalyticNSProofText =
+        "no analytic proof from NS"
+    ; noAnalyticNSProofTextIsCanonical = refl
     ; boundaryConclusionText =
-        "integral boundary max B_k >= (2*alpha_s/9)*layer denominator"
+        "∫∂C max_k B_k >= (2 alpha_s/9) ∫layer ||∇²u||²"
     ; boundaryConclusionTextIsCanonical = refl
     ; packageRows =
         "h_bx"
         ∷ "h_gap"
         ∷ "h_sd"
-        ∷ "||∂S||²_layer >= alpha_s * ||∇²u||²_layer"
-        ∷ "Calc 10 empirical alpha range only: alpha_s in [0.49648633477014364, 0.49956437854373653]"
-        ∷ "integral boundary max B_k >= (2*alpha_s/9)*layer denominator"
+        ∷ "h_sd = ||∂S||^2_L2(layer) >= alpha_s ||∇²u||^2_L2(layer)"
+        ∷ "h_omega_ctrl = ||omega||_L4(layer) <= C_omega ||S||_L4(layer)"
+        ∷ "alpha_s = 1/(1 + C_omega^2)"
+        ∷ "Calc 10/11 empirical alpha_s≈0.5, C_omega≈1"
+        ∷ "no analytic proof from NS"
+        ∷ "∫∂C max_k B_k >= (2 alpha_s/9) ∫layer ||∇²u||²"
         ∷ "non-promotion gates remain explicit and closed"
         ∷ []
     ; packageRowsIsCanonical = refl
@@ -158,7 +192,7 @@ record NSKornLevelSetHStrainDomReceipt : Set where
       String
     receiptTextIsCanonical :
       receiptText ≡
-      "Post-Calc-10 KornLevelSet / h_strain_dom receipt: h_bx, h_gap, and h_sd are recorded with the corrected layer inequality ||∂S||²_layer >= alpha_s * ||∇²u||²_layer; Calc 10 alpha_s in [0.49648633477014364, 0.49956437854373653] is candidate evidence only; the conclusion is integral boundary max B_k >= (2*alpha_s/9)*layer denominator; no analytic KornLevelSet proof, no h_strain_dom promotion, and no Clay promotion are claimed."
+      "Post-Calc-11 KornLevelSet / h_strain_dom receipt: h_bx, h_gap, and h_sd are recorded with h_sd = ||∂S||^2_L2(layer) >= alpha_s ||∇²u||^2_L2(layer); h_omega_ctrl = ||omega||_L4(layer) <= C_omega ||S||_L4(layer) is recorded as sufficient, with alpha_s = 1/(1 + C_omega^2); Calc 10/11 empirical alpha_s≈0.5 and C_omega≈1 remain candidate evidence only; the conclusion is ∫∂C max_k B_k >= (2 alpha_s/9) ∫layer ||∇²u||²; no analytic proof from NS, no h_strain_dom promotion, and no Clay promotion are claimed."
 
 canonicalNSKornLevelSetHStrainDomReceipt :
   NSKornLevelSetHStrainDomReceipt
@@ -179,7 +213,7 @@ canonicalNSKornLevelSetHStrainDomReceipt =
     ; promotionGates = canonicalNSKornLevelSetPromotionGates
     ; promotionGatesIsCanonical = refl
     ; receiptText =
-        "Post-Calc-10 KornLevelSet / h_strain_dom receipt: h_bx, h_gap, and h_sd are recorded with the corrected layer inequality ||∂S||²_layer >= alpha_s * ||∇²u||²_layer; Calc 10 alpha_s in [0.49648633477014364, 0.49956437854373653] is candidate evidence only; the conclusion is integral boundary max B_k >= (2*alpha_s/9)*layer denominator; no analytic KornLevelSet proof, no h_strain_dom promotion, and no Clay promotion are claimed."
+        "Post-Calc-11 KornLevelSet / h_strain_dom receipt: h_bx, h_gap, and h_sd are recorded with h_sd = ||∂S||^2_L2(layer) >= alpha_s ||∇²u||^2_L2(layer); h_omega_ctrl = ||omega||_L4(layer) <= C_omega ||S||_L4(layer) is recorded as sufficient, with alpha_s = 1/(1 + C_omega^2); Calc 10/11 empirical alpha_s≈0.5 and C_omega≈1 remain candidate evidence only; the conclusion is ∫∂C max_k B_k >= (2 alpha_s/9) ∫layer ||∇²u||²; no analytic proof from NS, no h_strain_dom promotion, and no Clay promotion are claimed."
     ; receiptTextIsCanonical = refl
     }
 
