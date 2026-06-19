@@ -31,6 +31,14 @@ DEFAULT_SPECTRAL_PYTHON_PATH = (
     / "pnf_spectral_numeric_abi.py"
 )
 DEFAULT_AGDA_PATH = REPO_ROOT / "DASHI" / "Interop" / "PNFSpectralNumericABICore.agda"
+DEFAULT_ODD_GRASSMANN_AGDA_PATH = REPO_ROOT / "DASHI" / "Core" / "OddGrassmannLaneCore.agda"
+DEFAULT_EVEN_LANE_AGDA_PATH = REPO_ROOT / "DASHI" / "Core" / "EvenLaneOperatorCore.agda"
+DEFAULT_PARITY_AGDA_PATH = REPO_ROOT / "DASHI" / "Core" / "ParityLaneOperatorCore.agda"
+DEFAULT_TRIT_AGDA_PATH = (
+    REPO_ROOT / "DASHI" / "Algebra" / "Trit" / "OddEvenLaneTritBridge.agda"
+)
+DEFAULT_EIGEN_AGDA_PATH = REPO_ROOT / "DASHI" / "Core" / "ParityLaneEigenOperatorCore.agda"
+DEFAULT_LANE369_AGDA_PATH = REPO_ROOT / "DASHI" / "Interop" / "OddEvenLane369Bridge.agda"
 
 
 PAYLOAD_GET_RE = re.compile(r'payload\.get\("([^"]+)"\)')
@@ -80,6 +88,46 @@ SPECTRAL_EXPECTED_BINDINGS: dict[str, tuple[str, ...]] = {
     "validate_spectral_numeric_abi": ("PNFAdmissionRule",),
 }
 
+ODD_GRASSMANN_EXPECTED_BINDINGS: dict[str, tuple[str, ...]] = {
+    "authorityGate": ("authorityGate",),
+    "candidateOnly": ("candidateOnly",),
+    "nilpotentWitness": ("nilpotentWitness",),
+    "oddCoeff": ("oddCoeff",),
+    "oddDerivative": ("oddDerivative",),
+    "oddIntegral": ("oddIntegral",),
+    "oddMeasure": ("oddMeasure",),
+    "oddProbe": ("oddProbe",),
+    "residualWitness": ("residualWitness",),
+}
+
+EVEN_LANE_EXPECTED_BINDINGS: dict[str, tuple[str, ...]] = {
+    "evenDerivative": ("derivative", "evenDerivative"),
+    "evenIntegral": ("integral", "evenIntegral"),
+}
+
+PARITY_EXPECTED_BINDINGS: dict[str, tuple[str, ...]] = {
+    "laneClass": ("LaneClass", "laneClassLabel", "receiptClass"),
+    "oddCollapsedLane": ("oddCollapsedLane",),
+    "evenSeparatedLane": ("evenSeparatedLane",),
+    "unresolvedLane": ("unresolvedLane",),
+}
+
+TRIT_EXPECTED_BINDINGS: dict[str, tuple[str, ...]] = {
+    "laneClassTrit": ("laneClassToTrit", "OddEvenLaneTritReceipt"),
+    "tritCarrierBridgeSurface": ("OddEvenLaneTritReceipt",),
+}
+
+EIGEN_EXPECTED_BINDINGS: dict[str, tuple[str, ...]] = {
+    "LaneEigenSurface": ("LaneEigenSurface", "canonicalOddLaneEigenSurface"),
+    "HeckeLaneActionSurface": ("HeckeLaneActionSurface", "canonicalOddHeckeLaneActionSurface"),
+}
+
+LANE369_EXPECTED_BINDINGS: dict[str, tuple[str, ...]] = {
+    "lane369Receipt": ("OddEvenLane369Receipt", "canonicalOddEvenLane369Receipt"),
+    "lane369Surface": ("OddEvenLane369Receipt",),
+    "canonicalLane369Receipt": ("canonicalOddEvenLane369Receipt",),
+}
+
 
 @dataclass
 class Surface:
@@ -95,6 +143,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--python-path", type=Path, default=DEFAULT_PYTHON_PATH)
     parser.add_argument("--spectral-python-path", type=Path, default=DEFAULT_SPECTRAL_PYTHON_PATH)
     parser.add_argument("--agda-path", type=Path, default=DEFAULT_AGDA_PATH)
+    parser.add_argument(
+        "--odd-grassmann-agda-path",
+        type=Path,
+        default=DEFAULT_ODD_GRASSMANN_AGDA_PATH,
+    )
+    parser.add_argument("--even-lane-agda-path", type=Path, default=DEFAULT_EVEN_LANE_AGDA_PATH)
+    parser.add_argument("--parity-agda-path", type=Path, default=DEFAULT_PARITY_AGDA_PATH)
+    parser.add_argument("--trit-agda-path", type=Path, default=DEFAULT_TRIT_AGDA_PATH)
+    parser.add_argument("--eigen-agda-path", type=Path, default=DEFAULT_EIGEN_AGDA_PATH)
+    parser.add_argument("--lane369-agda-path", type=Path, default=DEFAULT_LANE369_AGDA_PATH)
     parser.add_argument(
         "--phi-psi-agda-path",
         type=Path,
@@ -325,10 +383,37 @@ def main() -> int:
     py_surface = collect_python_surface(args.python_path)
     spectral_py_surface = collect_python_surface(args.spectral_python_path)
     agda_surface = collect_agda_surface(args.agda_path)
+    odd_grassmann_agda_surface = collect_agda_surface(args.odd_grassmann_agda_path)
+    even_lane_agda_surface = collect_agda_surface(args.even_lane_agda_path)
+    parity_agda_surface = collect_agda_surface(args.parity_agda_path)
+    trit_agda_surface = collect_agda_surface(args.trit_agda_path)
+    eigen_agda_surface = collect_agda_surface(args.eigen_agda_path)
+    lane369_agda_surface = collect_agda_surface(args.lane369_agda_path)
     phi_psi_agda_surface = collect_agda_surface(args.phi_psi_agda_path)
     merged_py_surface = merge_surfaces([py_surface, spectral_py_surface], "python")
-    merged_agda_surface = merge_surfaces([agda_surface, phi_psi_agda_surface], "agda")
-    expected_bindings = EXPECTED_BINDINGS | SPECTRAL_EXPECTED_BINDINGS
+    merged_agda_surface = merge_surfaces(
+        [
+            agda_surface,
+            odd_grassmann_agda_surface,
+            even_lane_agda_surface,
+            parity_agda_surface,
+            trit_agda_surface,
+            eigen_agda_surface,
+            lane369_agda_surface,
+            phi_psi_agda_surface,
+        ],
+        "agda",
+    )
+    expected_bindings = (
+        EXPECTED_BINDINGS
+        | SPECTRAL_EXPECTED_BINDINGS
+        | ODD_GRASSMANN_EXPECTED_BINDINGS
+        | EVEN_LANE_EXPECTED_BINDINGS
+        | PARITY_EXPECTED_BINDINGS
+        | TRIT_EXPECTED_BINDINGS
+        | EIGEN_EXPECTED_BINDINGS
+        | LANE369_EXPECTED_BINDINGS
+    )
     report = build_report(
         merged_py_surface,
         merged_agda_surface,
@@ -354,6 +439,36 @@ def main() -> int:
         "present": phi_psi_agda_surface.present,
         "path": phi_psi_agda_surface.path,
         "count": len(phi_psi_agda_surface.names),
+    }
+    report["agda_odd_grassmann_core"] = {
+        "present": odd_grassmann_agda_surface.present,
+        "path": odd_grassmann_agda_surface.path,
+        "count": len(odd_grassmann_agda_surface.names),
+    }
+    report["agda_even_lane_core"] = {
+        "present": even_lane_agda_surface.present,
+        "path": even_lane_agda_surface.path,
+        "count": len(even_lane_agda_surface.names),
+    }
+    report["agda_parity_core"] = {
+        "present": parity_agda_surface.present,
+        "path": parity_agda_surface.path,
+        "count": len(parity_agda_surface.names),
+    }
+    report["agda_trit_core"] = {
+        "present": trit_agda_surface.present,
+        "path": trit_agda_surface.path,
+        "count": len(trit_agda_surface.names),
+    }
+    report["agda_eigen_core"] = {
+        "present": eigen_agda_surface.present,
+        "path": eigen_agda_surface.path,
+        "count": len(eigen_agda_surface.names),
+    }
+    report["agda_lane369_core"] = {
+        "present": lane369_agda_surface.present,
+        "path": lane369_agda_surface.path,
+        "count": len(lane369_agda_surface.names),
     }
 
     if args.json_only:
