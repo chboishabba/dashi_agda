@@ -371,6 +371,20 @@ def build_specs() -> list[HarnessSpec]:
     ns_paper_submission_packet_out = (
         CHILD_OUT_DIR / "ns_paper_submission_packet_smoke.json"
     )
+    ns_boundary_component_lambda3_out = (
+        CHILD_OUT_DIR / "ns_boundary_component_lambda3_diagnostic_smoke.json"
+    )
+    ns_boundary_f123_absorption_out = (
+        CHILD_OUT_DIR / "ns_boundary_f123_absorption_diagnostic_smoke.json"
+    )
+    ns_boundary_derived_smoke_candidates = tuple(
+        sorted(Path("/tmp").glob("ns_boundary_derived*.npz"))
+    )
+    ns_boundary_smoke_derived_input = (
+        ns_boundary_derived_smoke_candidates[0]
+        if ns_boundary_derived_smoke_candidates
+        else None
+    )
     unification_authority_review_packet_out = (
         CHILD_OUT_DIR / "unification_authority_review_packet_smoke.json"
     )
@@ -2846,6 +2860,60 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional NS submission-packet ledger smoke",
                 "diagnostic only; no submission completion, no Clay promotion, and no terminal promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_component_lambda3_diagnostic",
+            path=script("ns_boundary_component_lambda3_diagnostic.py"),
+            args=(
+                "--input",
+                str(ns_boundary_smoke_derived_input),
+                "--lambda2-band",
+                "1e-6",
+                "--json",
+                "--output",
+                str(ns_boundary_component_lambda3_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--json",),
+            expected_json_path=ns_boundary_component_lambda3_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None and script("ns_boundary_component_lambda3_diagnostic.py").exists()
+            else (
+                "ns_boundary_component_lambda3_diagnostic harness not found"
+                if not script("ns_boundary_component_lambda3_diagnostic.py").exists()
+                else "ns_boundary_component_lambda3_diagnostic requires a discoverable derived NS boundary archive under /tmp"
+            ),
+            notes=(
+                "boundary component lambda3 diagnostics over connected boundary components",
+                "empirical/non-promoting; no lambda3 boundary theorem promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_f123_absorption_diagnostic",
+            path=script("ns_boundary_f123_absorption_diagnostic.py"),
+            args=(
+                "--input",
+                str(ns_boundary_smoke_derived_input),
+                "--json",
+                "--output",
+                str(ns_boundary_f123_absorption_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--json",),
+            expected_json_path=ns_boundary_f123_absorption_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None and script("ns_boundary_f123_absorption_diagnostic.py").exists()
+            else (
+                "ns_boundary_f123_absorption_diagnostic harness not found"
+                if not script("ns_boundary_f123_absorption_diagnostic.py").exists()
+                else "ns_boundary_f123_absorption_diagnostic requires a discoverable derived NS boundary archive under /tmp"
+            ),
+            notes=(
+                "boundary f123 absorption diagnostics for near-singular component structure",
+                "empirical/non-promoting; no absorption theorem promotion",
             ),
         ),
         HarnessSpec(

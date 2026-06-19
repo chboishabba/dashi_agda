@@ -6,6 +6,19 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS boundary lambda3/F123 empirical tranche for `2026-06-19`: adds
+  `scripts/ns_boundary_component_lambda3_diagnostic.py`,
+  `scripts/ns_boundary_f123_absorption_diagnostic.py`,
+  `scripts/ns_boundary_empirical_summary.py`,
+  `scripts/check_ns_boundary_empirical_regression.py`, and the fail-closed
+  receipt `DASHI.Physics.Closure.NSBoundaryLambda3F123EmpiricalReceipt`, wired
+  through `DASHI.Everything`. The frame-10 component-2 N128 artifacts record
+  `lambda3_min = 2.0910865534885876` on the 162-cell boundary band and F123
+  signed damping sum `-8437.74113479362`; positive commutator comparison
+  remains unavailable. The tranche is empirical/non-promoting only:
+  `h_delta1`, `KornLevelSet`, `collapseImpossible`, full NS Clay, and Clay
+  promotion remain open/false.
+
 - Formal structure/lens law tranche for `2026-06-17`: adds
   `DASHI.Core.FormalStructureLawCore`, `DASHI.Core.FormalLensLawCore`, and
   `DASHI.Core.SourceProcessEvidenceLawCore` as the candidate-only law-bearing

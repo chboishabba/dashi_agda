@@ -1,6 +1,23 @@
 # FOR TODO GO TO '# TODO'
 
 Current NS Clay action note for `2026-06-18`:
+- Calc 11 frame-10 component-2 lambda3/F123 empirical support is complete.
+  Artifacts:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_lambda3_N128_frame10_component2_20260619.json`,
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_f123_absorption_N128_frame10_component2_20260619.json`,
+  and
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_lambda3_f123_summary_N128_frame10_component2_20260619.json`.
+  Result: on the 162-cell `|lambda2| <= 1e-3` component-2 boundary band,
+  `lambda3_min = 2.0910865534885876`,
+  `lambda3_mean = 12.992313287056529`, and
+  `lambda3_max = 31.306277536963513`, so the empirical
+  `h_delta1` support is positive on this carrier. The F123 density
+  `-2*lambda3*|<omega,e2>|^2/g12^2` has signed sum
+  `-8437.74113479362`, mean `-52.0848218197137`, and max
+  `-0.00013140575886578512`, so this sample is strictly damping on the
+  measured band. Positive commutator comparison remains unmeasured/proxy
+  unavailable; this is empirical/non-promoting and does not prove
+  `KornLevelSet`, `collapseImpossible`, `h_delta1`, or Clay NS.
 - First three calcs are complete.
 - Calc 4 frame-10 per-component `min-g12`/`rho` check is complete.  Artifact:
   `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_N128_frame10_20260618.json`.
