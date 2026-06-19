@@ -1,0 +1,100 @@
+{
+  "clay_navier_stokes_promoted": false,
+  "collapse_impossible": false,
+  "contract": "check_ns_gd1_q2_contradiction_gate_tranche",
+  "control_card": {
+    "C": "scripts/check_ns_gd1_q2_contradiction_gate_tranche.py",
+    "F": "Missing markers, missing imports, or accidentally promoted gates fail validation.",
+    "G": "Promotion remains blocked unless explicit Agda fields flip under real proof terms.",
+    "L": "Read modules -> require markers -> emit JSON receipt.",
+    "O": "Main agent validates the integrated GD1/Q2 contradiction-gate tranche.",
+    "P": "FAIL_CLOSED_GD1_Q2_CONTRADICTION_GATE_TRANCHE",
+    "R": "Require all six proof-kernel surfaces to be present, wired, and fail-closed.",
+    "S": "This checker validates markers and false gates only; it does not infer continuum analysis."
+  },
+  "details": {
+    "audit": {
+      "exists": true,
+      "markers": {
+        "NSBroadTubeLayerFractionContinuityReceipt": true,
+        "NSQ2BlowupLowerImplicationReceipt": true,
+        "NSQ2UniformUpperBoundFromGD1TheoremGReceipt": true,
+        "clayNavierStokesPromoted =\n        false": true,
+        "contradictionGateDischarged =\n        false": true,
+        "finiteSubintervalUpperBoundDependsOnNewModule =\n        false": true,
+        "millerEnstrophyLowerRouteDependsOnNewModule =\n        false": true
+      },
+      "path": "DASHI/Physics/Closure/NSGD1Q2ContradictionGateAuditReceipt.agda"
+    },
+    "cz": {
+      "exists": true,
+      "markers": {
+        "alpha=1-2*CCZ-positivity-assumption": true,
+        "finalDischarge =\n        false": true,
+        "pressure-hessian-integrated-control-gate": true,
+        "reject-pointwise-Linf-CZ-bound-as-discharge-gate": true,
+        "surface-trace-sobolev-coarea-control-gate": true
+      },
+      "path": "DASHI/Physics/Closure/NSGD1LayerCZIntegratedControlReceipt.agda"
+    },
+    "everything": {
+      "exists": true,
+      "markers": {
+        "import DASHI.Physics.Closure.NSBroadTubeLayerFractionContinuityReceipt": true,
+        "import DASHI.Physics.Closure.NSGD1LayerCZIntegratedControlReceipt": true,
+        "import DASHI.Physics.Closure.NSGD1Q2ContradictionGateAuditReceipt": true,
+        "import DASHI.Physics.Closure.NSQ2BlowupLowerImplicationReceipt": true,
+        "import DASHI.Physics.Closure.NSQ2UniformUpperBoundFromGD1TheoremGReceipt": true
+      },
+      "path": "DASHI/Everything.agda"
+    },
+    "gd1": {
+      "exists": true,
+      "markers": {
+        "Rellich-Kato eigenframe evolution": true,
+        "dOmega_K = {lambda2 = 0}": true,
+        "hDelta1Discharged =\n        false": true,
+        "integrated carrier boundary estimate": true,
+        "lambda3 is identified with g12": true,
+        "pressureCzLInfNotAssumed": true,
+        "viscous Kato gap cost": true
+      },
+      "path": "DASHI/Physics/Closure/NSGD1MinPrincipleNoLambda3CollapseReceipt.agda"
+    },
+    "layer": {
+      "exists": true,
+      "markers": {
+        "DNS 17% telemetry is only evidence": true,
+        "broadTubeCoverageDischarged": true,
+        "broadTubeCoverageDischarged \u2261 false": true,
+        "incompressibility/Poincare": true,
+        "uniform c_layer > 0": true
+      },
+      "path": "DASHI/Physics/Closure/NSBroadTubeLayerFractionContinuityReceipt.agda"
+    },
+    "lower": {
+      "exists": true,
+      "markers": {
+        "finite-time blowup => Q2/carrier divergence": true,
+        "layerFractionDependencyReal =\n        false": true,
+        "nondegenerateCoareaTraceAligned =\n        false": true,
+        "q2BlowupLowerImplicationDischarged =\n        false": true
+      },
+      "path": "DASHI/Physics/Closure/NSQ2BlowupLowerImplicationReceipt.agda"
+    },
+    "upper": {
+      "exists": true,
+      "markers": {
+        "Finite-subinterval Gronwall row": true,
+        "Uniform-to-blowup distinction": true,
+        "dQ2/dt \u2264 -\u03b41 * Q2 + C2 * ||u||_H5^4": true,
+        "finiteSubintervalBoundDischarged =\n        false": true,
+        "uniformToBlowupBoundaryDischarged =\n        false": true
+      },
+      "path": "DASHI/Physics/Closure/NSQ2UniformUpperBoundFromGD1TheoremGReceipt.agda"
+    }
+  },
+  "errors": [],
+  "promotion_gate": false,
+  "status": "ok"
+}

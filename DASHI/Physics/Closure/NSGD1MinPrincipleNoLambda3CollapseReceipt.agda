@@ -41,6 +41,20 @@ data NSGD1MinPrincipleNoLambda3CollapseStage : Set where
     NSGD1MinPrincipleNoLambda3CollapseStage
   criticalGapRecorded :
     NSGD1MinPrincipleNoLambda3CollapseStage
+  lambda2ZeroBoundaryCarrierRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  g12OnBiaxialCarrierRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  rellichStrainEvolutionRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  restoringG12SquareRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  pressureCzIntegratedLInfShapeRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  viscousKatoGapCostRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  twoRegimeGronwallShapeRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
   twoRegimeMinimumPrincipleRecorded :
     NSGD1MinPrincipleNoLambda3CollapseStage
   twoRegimeConditionallyGatedRecorded :
@@ -75,6 +89,13 @@ canonicalNSGD1MinPrincipleNoLambda3CollapseStages :
 canonicalNSGD1MinPrincipleNoLambda3CollapseStages =
   gd1InequalityRecorded
   ∷ criticalGapRecorded
+  ∷ lambda2ZeroBoundaryCarrierRecorded
+  ∷ g12OnBiaxialCarrierRecorded
+  ∷ rellichStrainEvolutionRecorded
+  ∷ restoringG12SquareRecorded
+  ∷ pressureCzIntegratedLInfShapeRecorded
+  ∷ viscousKatoGapCostRecorded
+  ∷ twoRegimeGronwallShapeRecorded
   ∷ twoRegimeMinimumPrincipleRecorded
   ∷ twoRegimeConditionallyGatedRecorded
   ∷ supercriticalRestoringRecorded
@@ -96,9 +117,21 @@ data NSGD1MinPrincipleNoLambda3CollapseBlocker : Set where
     NSGD1MinPrincipleNoLambda3CollapseBlocker
   LayerKornInequality :
     NSGD1MinPrincipleNoLambda3CollapseBlocker
+  Lambda2ZeroBoundaryShapeOpen :
+    NSGD1MinPrincipleNoLambda3CollapseBlocker
+  G12IdentityOnBiaxialCarrierOpen :
+    NSGD1MinPrincipleNoLambda3CollapseBlocker
+  RellichStrainEvolutionOpen :
+    NSGD1MinPrincipleNoLambda3CollapseBlocker
   RellichKatoCommutatorProofTerm :
     NSGD1MinPrincipleNoLambda3CollapseBlocker
   LayerCZ :
+    NSGD1MinPrincipleNoLambda3CollapseBlocker
+  PressureCZIntegratedNotLInf :
+    NSGD1MinPrincipleNoLambda3CollapseBlocker
+  ViscousKatoGapCostNotDischarged :
+    NSGD1MinPrincipleNoLambda3CollapseBlocker
+  TwoRegimeLowerBoundShapePending :
     NSGD1MinPrincipleNoLambda3CollapseBlocker
   exactConstantsStillOpen :
     NSGD1MinPrincipleNoLambda3CollapseBlocker
@@ -114,8 +147,14 @@ canonicalNSGD1MinPrincipleNoLambda3CollapseBlockers :
 canonicalNSGD1MinPrincipleNoLambda3CollapseBlockers =
   NoLambda3CollapseOnKatoCarrier
   ∷ LayerKornInequality
+  ∷ Lambda2ZeroBoundaryShapeOpen
+  ∷ G12IdentityOnBiaxialCarrierOpen
+  ∷ RellichStrainEvolutionOpen
   ∷ RellichKatoCommutatorProofTerm
   ∷ LayerCZ
+  ∷ PressureCZIntegratedNotLInf
+  ∷ ViscousKatoGapCostNotDischarged
+  ∷ TwoRegimeLowerBoundShapePending
   ∷ exactConstantsStillOpen
   ∷ GD1ProofTermsStillOpen
   ∷ hDelta1DischargeStillOpen
@@ -127,6 +166,13 @@ canonicalNSGD1MinPrincipleNoLambda3CollapseDependencyNames :
 canonicalNSGD1MinPrincipleNoLambda3CollapseDependencyNames =
   "D_t g12 >= g12^2(1-CCZ) - Cnu*g12"
   ∷ "gcrit = Cnu/(1-CCZ)"
+  ∷ "surface shape: λ2=0 moving boundary"
+  ∷ "on that boundary, λ3 = g12"
+  ∷ "Rellich-Kato / strain evolution identity feed-through"
+  ∷ "restoring g12^2 term retained in GD1 kernel"
+  ∷ "pressure/CZ control entered as boundary integrated term, not pointwise L∞"
+  ∷ "viscous Kato gap cost: Cnu * g12"
+  ∷ "two-regime (supercritical/subcritical) Gronwall lower-bound shape"
   ∷ "LayerCZ exact-term shape and sign split are required"
   ∷ "supercritical restoring / subcritical exponential lower bound split"
   ∷ "lambda3 = g12 on biaxial carrier"
@@ -150,6 +196,34 @@ criticalGapTextValue =
 twoRegimeMinimumPrincipleTextValue : String
 twoRegimeMinimumPrincipleTextValue =
   "two-regime minimum principle is conditional on exact constants, LayerCZ term, and GD1 proof terms"
+
+lambda2BoundaryShapeTextValue : String
+lambda2BoundaryShapeTextValue =
+  "boundary shape: the Kato carrier is tracked on dOmega_K = {lambda2 = 0}, with biaxial reduction to the λ3-axis."
+
+g12BoundaryIdentityTextValue : String
+g12BoundaryIdentityTextValue =
+  "on the biaxial carrier for the no-collapse argument, lambda3 is identified with g12 and denominator singularity is rewritten in g12."
+
+rellichStrainEvolutionTextValue : String
+rellichStrainEvolutionTextValue =
+  "the GD1 numerator shape includes Rellich-Kato eigenframe evolution and strain transport terms, recorded as the explicit split source in the quotient derivative."
+
+restoringG12SquareTextValue : String
+restoringG12SquareTextValue =
+  "restoring term keeps the g12^2 contribution with coefficient (1 - CCZ), not a pure linear Gronwall closure."
+
+pressureCzIntegratedTextValue : String
+pressureCzIntegratedTextValue =
+  "pressure/CZ control is restricted to an integrated carrier boundary estimate, not a pointwise L∞_{x,t} assumption."
+
+viscousKatoGapCostTextValue : String
+viscousKatoGapCostTextValue =
+  "viscous Kato gap cost is carried explicitly as a Cnu * g12 loss term in the GD1 lower-bound kernel."
+
+twoRegimeLowerBoundTextValue : String
+twoRegimeLowerBoundTextValue =
+  "two-regime Gronwall lower-bound split: supercritical restoring versus subcritical exponential decay at rate Cnu."
 
 supercriticalRestoringTextValue : String
 supercriticalRestoringTextValue =
@@ -195,6 +269,14 @@ failClosedRouteTextValue : String
 failClosedRouteTextValue =
   "fail-closed route only: h_delta1, Q2-uniform-from-GD1, collapseImpossible, and Clay are all explicitly not discharged/promotion false"
 
+kernelBoundaryPressureProfileTextValue : String
+kernelBoundaryPressureProfileTextValue =
+  "kernel-profile: λ2=0 carrier + λ3=g12, Rellich/strain evolution, restoring g12^2, and integrated pressure-CZ + viscous Kato shaping"
+
+kernelGateTextValue : String
+kernelGateTextValue =
+  "gates: surface reduction and identity, Rellich+strain recording, two-regime lower-bound shape, and integrated (not pointwise) pressure-CZ channel are all visible"
+
 receiptBoundaryText : List String
 receiptBoundaryText =
   "GD1 two-regime minimum principle on Kato carrier is recorded"
@@ -206,7 +288,178 @@ receiptBoundaryText =
   ∷ "the conditional contradiction channel needs that Q2-discharge to move from conditional to unconditional"
   ∷ "collapseImpossible is false on this receipt"
   ∷ "Clay Navier-Stokes promotion is false on this receipt"
+  ∷ "surface dOmega_K = {lambda2 = 0}, g12=lambda3, Rellich/strain evolution, and pressure-CZ integrated shape are explicitly included in the kernel"
+  ∷ "two-regime Gronwall lower-bound shape is split and the viscous Kato gap cost is explicit"
   ∷ []
+
+record NSGD1MinPrincipleNoLambda3CollapseKernelShapeProofLedger : Set where
+  field
+    lambda2BoundaryShapeText :
+      String
+    lambda2BoundaryShapeTextIsCanonical :
+      lambda2BoundaryShapeText ≡ lambda2BoundaryShapeTextValue
+
+    g12BoundaryIdentityText :
+      String
+    g12BoundaryIdentityTextIsCanonical :
+      g12BoundaryIdentityText ≡ g12BoundaryIdentityTextValue
+
+    rellichStrainEvolutionText :
+      String
+    rellichStrainEvolutionTextIsCanonical :
+      rellichStrainEvolutionText ≡ rellichStrainEvolutionTextValue
+
+    restoringG12SquareText :
+      String
+    restoringG12SquareTextIsCanonical :
+      restoringG12SquareText ≡ restoringG12SquareTextValue
+
+    pressureCZIntegratedText :
+      String
+    pressureCZIntegratedTextIsCanonical :
+      pressureCZIntegratedText ≡ pressureCzIntegratedTextValue
+
+    viscousKatoGapCostText :
+      String
+    viscousKatoGapCostTextIsCanonical :
+      viscousKatoGapCostText ≡ viscousKatoGapCostTextValue
+
+    twoRegimeLowerBoundText :
+      String
+    twoRegimeLowerBoundTextIsCanonical :
+      twoRegimeLowerBoundText ≡ twoRegimeLowerBoundTextValue
+
+    kernelBoundaryPressureProfileText :
+      String
+    kernelBoundaryPressureProfileTextIsCanonical :
+      kernelBoundaryPressureProfileText ≡ kernelBoundaryPressureProfileTextValue
+
+    kernelGateText :
+      String
+    kernelGateTextIsCanonical :
+      kernelGateText ≡ kernelGateTextValue
+
+canonicalNSGD1MinPrincipleNoLambda3CollapseKernelShapeProofLedger :
+  NSGD1MinPrincipleNoLambda3CollapseKernelShapeProofLedger
+canonicalNSGD1MinPrincipleNoLambda3CollapseKernelShapeProofLedger =
+  record
+    { lambda2BoundaryShapeText =
+        lambda2BoundaryShapeTextValue
+    ; lambda2BoundaryShapeTextIsCanonical =
+        refl
+    ; g12BoundaryIdentityText =
+        g12BoundaryIdentityTextValue
+    ; g12BoundaryIdentityTextIsCanonical =
+        refl
+    ; rellichStrainEvolutionText =
+        rellichStrainEvolutionTextValue
+    ; rellichStrainEvolutionTextIsCanonical =
+        refl
+    ; restoringG12SquareText =
+        restoringG12SquareTextValue
+    ; restoringG12SquareTextIsCanonical =
+        refl
+    ; pressureCZIntegratedText =
+        pressureCzIntegratedTextValue
+    ; pressureCZIntegratedTextIsCanonical =
+        refl
+    ; viscousKatoGapCostText =
+        viscousKatoGapCostTextValue
+    ; viscousKatoGapCostTextIsCanonical =
+        refl
+    ; twoRegimeLowerBoundText =
+        twoRegimeLowerBoundTextValue
+    ; twoRegimeLowerBoundTextIsCanonical =
+        refl
+    ; kernelBoundaryPressureProfileText =
+        kernelBoundaryPressureProfileTextValue
+    ; kernelBoundaryPressureProfileTextIsCanonical =
+        refl
+    ; kernelGateText =
+        kernelGateTextValue
+    ; kernelGateTextIsCanonical =
+        refl
+    }
+
+record NSGD1MinPrincipleNoLambda3CollapseKernelGateLedger : Set where
+  field
+    lambda2BoundaryShapeRecorded :
+      Bool
+    lambda2BoundaryShapeRecordedIsTrue :
+      lambda2BoundaryShapeRecorded ≡ true
+
+    g12OnBiaxialCarrierGateRecorded :
+      Bool
+    g12OnBiaxialCarrierGateRecordedIsTrue :
+      g12OnBiaxialCarrierGateRecorded ≡ true
+
+    rellichStrainEvolutionGateRecorded :
+      Bool
+    rellichStrainEvolutionGateRecordedIsTrue :
+      rellichStrainEvolutionGateRecorded ≡ true
+
+    restoringG12SquareGateRecorded :
+      Bool
+    restoringG12SquareGateRecordedIsTrue :
+      restoringG12SquareGateRecorded ≡ true
+
+    pressureCZIntegratedChannelRecorded :
+      Bool
+    pressureCZIntegratedChannelRecordedIsTrue :
+      pressureCZIntegratedChannelRecorded ≡ true
+
+    pressureCzLInfNotAssumed :
+      Bool
+    pressureCzLInfNotAssumedIsFalse :
+      pressureCzLInfNotAssumed ≡ false
+
+    viscousKatoGapCostGateRecorded :
+      Bool
+    viscousKatoGapCostGateRecordedIsTrue :
+      viscousKatoGapCostGateRecorded ≡ true
+
+    twoRegimeLowerBoundSplitRecorded :
+      Bool
+    twoRegimeLowerBoundSplitRecordedIsTrue :
+      twoRegimeLowerBoundSplitRecorded ≡ true
+
+canonicalNSGD1MinPrincipleNoLambda3CollapseKernelGateLedger :
+  NSGD1MinPrincipleNoLambda3CollapseKernelGateLedger
+canonicalNSGD1MinPrincipleNoLambda3CollapseKernelGateLedger =
+  record
+    { lambda2BoundaryShapeRecorded =
+        true
+    ; lambda2BoundaryShapeRecordedIsTrue =
+        refl
+    ; g12OnBiaxialCarrierGateRecorded =
+        true
+    ; g12OnBiaxialCarrierGateRecordedIsTrue =
+        refl
+    ; rellichStrainEvolutionGateRecorded =
+        true
+    ; rellichStrainEvolutionGateRecordedIsTrue =
+        refl
+    ; restoringG12SquareGateRecorded =
+        true
+    ; restoringG12SquareGateRecordedIsTrue =
+        refl
+    ; pressureCZIntegratedChannelRecorded =
+        true
+    ; pressureCZIntegratedChannelRecordedIsTrue =
+        refl
+    ; pressureCzLInfNotAssumed =
+        false
+    ; pressureCzLInfNotAssumedIsFalse =
+        refl
+    ; viscousKatoGapCostGateRecorded =
+        true
+    ; viscousKatoGapCostGateRecordedIsTrue =
+        refl
+    ; twoRegimeLowerBoundSplitRecorded =
+        true
+    ; twoRegimeLowerBoundSplitRecordedIsTrue =
+        refl
+    }
 
 data NSGD1MinPrincipleNoLambda3CollapsePromotion : Set where
 
@@ -230,6 +483,18 @@ record NSGD1MinPrincipleNoLambda3CollapseReceipt : Setω where
     stageCountIsCanonical :
       stageCount ≡
       listLength canonicalNSGD1MinPrincipleNoLambda3CollapseStages
+
+    kernelShapeProofLedger :
+      NSGD1MinPrincipleNoLambda3CollapseKernelShapeProofLedger
+    kernelShapeProofLedgerIsCanonical :
+      kernelShapeProofLedger ≡
+      canonicalNSGD1MinPrincipleNoLambda3CollapseKernelShapeProofLedger
+
+    kernelGateLedger :
+      NSGD1MinPrincipleNoLambda3CollapseKernelGateLedger
+    kernelGateLedgerIsCanonical :
+      kernelGateLedger ≡
+      canonicalNSGD1MinPrincipleNoLambda3CollapseKernelGateLedger
 
     dependencyNames :
       List String
@@ -424,6 +689,14 @@ canonicalNSGD1MinPrincipleNoLambda3CollapseReceipt =
     ; blockerCount =
         listLength canonicalNSGD1MinPrincipleNoLambda3CollapseBlockers
     ; blockerCountIsCanonical =
+        refl
+    ; kernelShapeProofLedger =
+        canonicalNSGD1MinPrincipleNoLambda3CollapseKernelShapeProofLedger
+    ; kernelShapeProofLedgerIsCanonical =
+        refl
+    ; kernelGateLedger =
+        canonicalNSGD1MinPrincipleNoLambda3CollapseKernelGateLedger
+    ; kernelGateLedgerIsCanonical =
         refl
     ; gd1MinimumPrincipleText =
         gd1MinimumPrincipleTextValue

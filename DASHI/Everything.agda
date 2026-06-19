@@ -307,6 +307,7 @@ import DASHI.Physics.Closure.NSConditionalQGronwallTheoremGReceipt
 import DASHI.Physics.Closure.NSCollapseConditionalGronwallBridgeReceipt
 import DASHI.Physics.Closure.NSBiaxialCancellationIdentityReceipt
 import DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt
+import DASHI.Physics.Closure.NSGD1LayerCZIntegratedControlReceipt
 import DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt
 import DASHI.Physics.Closure.NSLayerKornLiteratureClosureReceipt
 import DASHI.Physics.Closure.NSPressurePoissonBypassReceipt
@@ -316,6 +317,7 @@ import DASHI.Physics.Closure.NSGeometricConcentrationCarrierReceipt
 import DASHI.Physics.Closure.NSInteriorVorticityMaxPrincipleReceipt
 import DASHI.Physics.Closure.NSPressureCZEnstrophyClosureReceipt
 import DASHI.Physics.Closure.NSLayerL2VorticityFractionReceipt
+import DASHI.Physics.Closure.NSBroadTubeLayerFractionContinuityReceipt
 import DASHI.Physics.Closure.NSWeightedLambda2CarrierQuantileReceipt
 import DASHI.Physics.Closure.NSShahmurovTwoPaperClaimIntakeReceipt
 import DASHI.Physics.Closure.NSBroadTubeSerrinLiftGapReceipt
@@ -2211,6 +2213,9 @@ import DASHI.Physics.Closure.ClayBlockerUpdateReceipt
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt
 import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt
 import DASHI.Physics.Closure.NSTheoremGQ2GD1ContradictionChannelReceipt
+import DASHI.Physics.Closure.NSQ2BlowupLowerImplicationReceipt
+import DASHI.Physics.Closure.NSQ2UniformUpperBoundFromGD1TheoremGReceipt
+import DASHI.Physics.Closure.NSGD1Q2ContradictionGateAuditReceipt
 import DASHI.Physics.Closure.ClayRoadmapAssignmentPrep
 import DASHI.Physics.Closure.Paper8CoreThesisReceipt
 import DASHI.Physics.Closure.GeometricSplitSummaryReceipt
