@@ -6,6 +6,29 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS pressure-Poisson bypass / Q3 threshold / geometric concentration tranche
+  for `2026-06-19`: adds
+  `DASHI.Physics.Closure.NSPressurePoissonBypassReceipt`,
+  `DASHI.Physics.Closure.NSQ3ExtensionalThresholdReceipt`,
+  `DASHI.Physics.Closure.NSGeometricConcentrationCarrierReceipt`,
+  `scripts/ns_boundary_pressure_poisson_bypass_diagnostic.py`,
+  `scripts/ns_boundary_geometric_concentration_diagnostic.py`, and
+  `scripts/ns_boundary_g12_bounds_diagnostic.py`, and
+  `scripts/check_ns_boundary_pressure_geometric_regression.py`, wired through
+  `DASHI.Everything` and optional local Clay harness surfaces. The tranche
+  records the pressure-Poisson bypass inequality, the Q3 extensional
+  threshold wall, and the single remaining geometric concentration obstruction
+  as fail-closed route surfaces. Frame-10 N128 telemetry records finite
+  component-2 pressure-bypass fields but 11 pointwise
+  `omega_norm_sq > rhs_proxy` violations; the top-0.1% vorticity concentration
+  diagnostic places only about 0.143% of top cells on the `|lambda2| <= 1e-3`
+  carrier and the worst vorticity cell off-carrier. This is adverse evidence
+  for the naive geometric concentration conjecture at this frame. The same
+  frame records global `g12_min = 0.009662386196279904` and
+  `g12_max = 73.80437777669184`. It is empirical/analytic-route bookkeeping
+  only: layer CZ/coarea, geometric concentration, BKM closure,
+  `collapseImpossible`, full NS Clay, and Clay promotion remain false.
+
 - NS biaxial-cancellation / GD1 no-collapse / LayerKorn literature tranche for
   `2026-06-19`: adds
   `DASHI.Physics.Closure.NSBiaxialCancellationIdentityReceipt`,

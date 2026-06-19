@@ -392,6 +392,18 @@ def build_specs() -> list[HarnessSpec]:
     ns_boundary_cancellation_margin_regression_out = (
         CHILD_OUT_DIR / "ns_boundary_cancellation_margin_regression_smoke.json"
     )
+    ns_boundary_pressure_poisson_bypass_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_poisson_bypass_smoke.json"
+    )
+    ns_boundary_geometric_concentration_out = (
+        CHILD_OUT_DIR / "ns_boundary_geometric_concentration_smoke.json"
+    )
+    ns_boundary_pressure_geometric_regression_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_geometric_regression_smoke.json"
+    )
+    ns_boundary_g12_bounds_out = (
+        CHILD_OUT_DIR / "ns_boundary_g12_bounds_smoke.json"
+    )
     ns_boundary_derived_smoke_candidates = tuple(
         sorted(Path("/tmp").glob("ns_boundary_derived*.npz"))
     )
@@ -3070,6 +3082,130 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional regression check for cancellation-margin invariants",
                 "regression-only/non-promoting; no theorem or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_pressure_poisson_bypass_diagnostic",
+            path=script("ns_boundary_pressure_poisson_bypass_diagnostic.py"),
+            args=(
+                "--derived-archive",
+                str(ns_boundary_smoke_derived_input),
+                "--lambda2-band",
+                "1e-6",
+                "--output-json",
+                str(ns_boundary_pressure_poisson_bypass_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--help",),
+            expected_json_path=ns_boundary_pressure_poisson_bypass_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None
+            and script("ns_boundary_pressure_poisson_bypass_diagnostic.py").exists()
+            else (
+                "ns_boundary_pressure_poisson_bypass_diagnostic script not found"
+                if not script("ns_boundary_pressure_poisson_bypass_diagnostic.py").exists()
+                else "ns_boundary_pressure_poisson_bypass_diagnostic requires a discoverable derived NS boundary archive under /tmp"
+            ),
+            notes=(
+                "optional pressure-Poisson bypass diagnostic over boundary components",
+                "empirical/non-promoting; does not prove layer CZ, geometric concentration, or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_geometric_concentration_diagnostic",
+            path=script("ns_boundary_geometric_concentration_diagnostic.py"),
+            args=(
+                "--derived-archive",
+                str(ns_boundary_smoke_derived_input),
+                "--lambda2-band",
+                "1e-6",
+                "--output-json",
+                str(ns_boundary_geometric_concentration_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--help",),
+            expected_json_path=ns_boundary_geometric_concentration_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None
+            and script("ns_boundary_geometric_concentration_diagnostic.py").exists()
+            else (
+                "ns_boundary_geometric_concentration_diagnostic script not found"
+                if not script("ns_boundary_geometric_concentration_diagnostic.py").exists()
+                else "ns_boundary_geometric_concentration_diagnostic requires a discoverable derived NS boundary archive under /tmp"
+            ),
+            notes=(
+                "optional geometric concentration diagnostic for top-vorticity alignment with Kato carrier",
+                "empirical/non-promoting; does not prove blow-up carrier concentration or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_pressure_geometric_regression",
+            path=script("check_ns_boundary_pressure_geometric_regression.py"),
+            args=(
+                (
+                    "--pressure-json",
+                    str(ns_boundary_pressure_poisson_bypass_out),
+                )
+                if ns_boundary_pressure_poisson_bypass_out.exists()
+                else ()
+            )
+            + (
+                (
+                    "--geometric-json",
+                    str(ns_boundary_geometric_concentration_out),
+                )
+                if ns_boundary_geometric_concentration_out.exists()
+                else ()
+            )
+            if ns_boundary_pressure_poisson_bypass_out.exists()
+            or ns_boundary_geometric_concentration_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_pressure_geometric_regression_out,
+            optional=True,
+            skip_reason=None
+            if (
+                ns_boundary_pressure_poisson_bypass_out.exists()
+                or ns_boundary_geometric_concentration_out.exists()
+            )
+            and script("check_ns_boundary_pressure_geometric_regression.py").exists()
+            else (
+                "check_ns_boundary_pressure_geometric_regression script not found"
+                if not script("check_ns_boundary_pressure_geometric_regression.py").exists()
+                else "check_ns_boundary_pressure_geometric_regression requires pressure/geometric diagnostic artifacts"
+            ),
+            notes=(
+                "optional regression check for pressure-bypass and geometric-concentration diagnostic invariants",
+                "regression-only/non-promoting; no theorem or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_g12_bounds_diagnostic",
+            path=script("ns_boundary_g12_bounds_diagnostic.py"),
+            args=(
+                "--derived-archive",
+                str(ns_boundary_smoke_derived_input),
+                "--lambda2-band",
+                "1e-6",
+                "--output-json",
+                str(ns_boundary_g12_bounds_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--help",),
+            expected_json_path=ns_boundary_g12_bounds_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None
+            and script("ns_boundary_g12_bounds_diagnostic.py").exists()
+            else (
+                "ns_boundary_g12_bounds_diagnostic script not found"
+                if not script("ns_boundary_g12_bounds_diagnostic.py").exists()
+                else "ns_boundary_g12_bounds_diagnostic requires a discoverable derived NS boundary archive under /tmp"
+            ),
+            notes=(
+                "optional g12 lower/upper bound telemetry over global, boundary-carrier, and beta regions",
+                "empirical/non-promoting; does not prove GD1 upper-bound or Clay NS",
             ),
         ),
         HarnessSpec(

@@ -1,0 +1,122 @@
+{
+  "C": "scripts/ns_boundary_geometric_concentration_diagnostic.py",
+  "F": "The diagnostic is fail-closed: any missing required field, invalid argument, or invalid selection produces non-ok status.",
+  "G": "This diagnostic is empirical only and does not assert theorem or Clay promotion.",
+  "L": "Status is ok only when required fields/arguments are valid and top-cell selection is feasible.",
+  "O": "Emit fail-closed geometric concentration diagnostics for top-vorticity alignment.",
+  "P": "FAIL_CLOSED_GEOMETRIC_CONCENTRATION_DIAGNOSTIC",
+  "R": "Quantify overlap of top-|omega| cells with { |lambda2|<=lambda2_band } and {lambda2<=beta}.",
+  "S": "Load a derived archive, resolve vorticity magnitude, select top cells, and measure nearest periodic-carrier distance.",
+  "analysis_cell_count": 2097152,
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "beta": 0.0,
+  "beta_fraction": 0.48183345794677734,
+  "beta_mask_cells": 1010478,
+  "beta_source": "archive",
+  "carrier_fraction": 0.00017642974853515625,
+  "carrier_mask_cells": 370,
+  "contract": "ns_boundary_geometric_concentration_diagnostic",
+  "errors": [],
+  "inputs": {
+    "beta": null,
+    "derived_archive": "/tmp/dashi_ns_pressure_round/ns3d_N128_frame10_augmented.npz",
+    "frame": null,
+    "lambda2_band": 0.001,
+    "pretty": true,
+    "top_fraction": 0.001,
+    "top_k": null
+  },
+  "lambda2_band": 0.001,
+  "nearest_carrier_distance_cells": {
+    "computed_count": 2098,
+    "max": 20.346989949375804,
+    "mean": 9.935324720426742,
+    "median": 9.9498743710662,
+    "method": "scipy_distance_transform_periodic",
+    "min": 0.0,
+    "requested_count": 2098,
+    "source": "top_cells"
+  },
+  "route_decision": "FAIL_CLOSED_GEOMETRIC_CONCENTRATION_DIAGNOSTIC",
+  "schema_version": 1,
+  "script": "scripts/ns_boundary_geometric_concentration_diagnostic.py",
+  "selected_top_cell_count": 2098,
+  "shape": [
+    128,
+    128,
+    128
+  ],
+  "status": "ok",
+  "top_cell_count": 2098,
+  "top_cells_worst": {
+    "flat_index": 156573,
+    "index": [
+      9,
+      71,
+      29
+    ],
+    "lambda2": -3.0129972221683,
+    "lambda2_abs": 3.0129972221683,
+    "nearest_carrier_distance_cells": 13.379088160259652,
+    "nearest_carrier_index": [
+      124,
+      70,
+      32
+    ],
+    "omega": 111.30546677037236,
+    "omega_abs": 111.30546677037236,
+    "on_beta": true,
+    "on_carrier": false
+  },
+  "top_fraction": 0.001,
+  "top_k_effective_request": 2098,
+  "top_k_requested": null,
+  "top_k_selected": 2098,
+  "top_lambda2_abs_median": 2.987354958980702,
+  "top_lambda2_abs_min": 0.0006821869497163479,
+  "top_omega_abs_max": 111.30546677037236,
+  "top_omega_abs_median": 82.66015816328878,
+  "top_omega_abs_min": 79.16581850085637,
+  "top_on_beta_count": 1004,
+  "top_on_beta_fraction": 0.47855100095328884,
+  "top_on_carrier_count": 3,
+  "top_on_carrier_fraction": 0.0014299332697807435,
+  "total_cells": 2097152,
+  "warnings": [
+    "omega_norm_source=omega_norm_sq"
+  ],
+  "worst_cell": {
+    "flat_index": 156573,
+    "index": [
+      9,
+      71,
+      29
+    ],
+    "lambda2": -3.0129972221683,
+    "lambda2_abs": 3.0129972221683,
+    "nearest_carrier_distance_cells": 13.379088160259652,
+    "nearest_carrier_index": [
+      124,
+      70,
+      32
+    ],
+    "omega": 111.30546677037236,
+    "omega_abs": 111.30546677037236,
+    "on_beta": true,
+    "on_carrier": false
+  },
+  "worst_cell_index": [
+    9,
+    71,
+    29
+  ],
+  "worst_cell_value": 111.30546677037236
+}

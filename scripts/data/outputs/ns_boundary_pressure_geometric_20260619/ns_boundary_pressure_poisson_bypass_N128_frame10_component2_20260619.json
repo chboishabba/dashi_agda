@@ -1,0 +1,96 @@
+{
+  "C": "scripts/ns_boundary_pressure_poisson_bypass_diagnostic.py",
+  "F": "Evidence-only diagnostic; empirical/Clay/theorem authority and promotions remain false.",
+  "G": "No theorem claim is made; this is empirical boundary telemetry only.",
+  "L": "Status is ok only when a requested/requested-or-auto component exists and the analysis mask is non-empty.",
+  "O": "Emit fail-closed pressure-Poisson bypass diagnostics from derived NS boundary archives.",
+  "P": "FAIL_CLOSED_PRESSURE_POISSON_BYPASS_DIAGNOSTIC",
+  "R": "Select a {lambda2<=beta} boundary component and report g12/lambda3/delta_p/RHS/omega checks.",
+  "S": "Load scalar tensor fields from a derived NPZ, select a boundary component, and fail on invalid inputs or empty analysis layers.",
+  "analysis_cell_count": 162,
+  "analysis_mask_source": "boundary_abs_lambda2_band",
+  "analysis_mask_sum_g12_abs": 2104.5929689015366,
+  "area_proxy_cell_count": 162,
+  "area_proxy_physical": 0.39035056469152246,
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "beta": 0.0,
+  "beta_source": "archive",
+  "boundary_cell_count": 162,
+  "component_cell_count": 984827,
+  "component_count": 20380,
+  "component_id": 2,
+  "component_selector": "requested",
+  "contract": "ns_boundary_pressure_poisson_bypass_diagnostic",
+  "delta_p_source": "spectral_laplacian_pressure",
+  "delta_p_stats": {
+    "cell_count": 162,
+    "max": 2766.3800666679226,
+    "mean": -73.50954594767961,
+    "min": -1482.6311041236536,
+    "sum": -11908.546443524097
+  },
+  "domain_length": 6.283185307179586,
+  "errors": [],
+  "frame": null,
+  "g12_stats": {
+    "cell_count": 162,
+    "max": 31.30428089278447,
+    "mean": 12.991314622848991,
+    "min": 2.0907661810286142,
+    "sum": 2104.5929689015366
+  },
+  "grid_spacing": 0.04908738521234052,
+  "input": "/tmp/dashi_ns_pressure_round/ns3d_N128_frame10_augmented.npz",
+  "lambda2_band": 0.001,
+  "lambda3_source": "derived_from_g12_minus_2_lambda2",
+  "lambda3_stats": {
+    "cell_count": 162,
+    "max": 31.306277536963513,
+    "mean": 12.992313287056529,
+    "min": 2.0910865534885876,
+    "sum": 2104.7547525031578
+  },
+  "omega_norm_sq": {
+    "max_violation": 1352.2582096580293,
+    "omega_leq_rhs_cells": 151,
+    "ratio_violation": 0.06790123456790123,
+    "source": "omega_norm_sq",
+    "stats": {
+      "cell_count": 162,
+      "max": 6508.018134577102,
+      "mean": 1088.6055333569468,
+      "min": 27.890237463656778,
+      "sum": 176354.0964038254
+    },
+    "violation_count": 11,
+    "violation_mask_source": "omega_norm_sq > rhs_proxy"
+  },
+  "producer": "scripts/ns_boundary_derived_tensor_archive.py",
+  "requested_component_id": 2,
+  "rhs_proxy_stats": {
+    "cell_count": 162,
+    "max": 12358.894354900327,
+    "mean": 3579.2796648603285,
+    "min": 79.92501337111246,
+    "sum": 579843.3057073732
+  },
+  "rhs_proxy_sum": 579843.3057073732,
+  "scale_source": "grid_spacing",
+  "script": "scripts/ns_boundary_pressure_poisson_bypass_diagnostic.py",
+  "shape": [
+    128,
+    128,
+    128
+  ],
+  "status": "ok",
+  "tight_band_cell_count": 984827,
+  "warnings": []
+}
