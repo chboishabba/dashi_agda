@@ -114,7 +114,48 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         payload["control_card"]["concise_regularity_route"]
         == payload["control_card"]["concise_regularit_route"]
     )
-    assert payload["control_card"]["calc11_next"] is True
+    assert payload["calc11_status"] == "complete_no_special_alignment"
+    assert payload["empirical_diagnostics_complete"] is True
+    assert payload["no_further_calcs_blocking"] is True
+    assert payload["remaining_math_wall"] == ["KornLevelSet", "collapseImpossible"]
+    assert payload["formal_packages_write_now"] == [
+        "width_ode_extraction",
+        "cutoff_error_budget",
+        "localized_enstrophy_identity",
+        "source_dissipation_balance",
+        "bkm_bridge_readiness",
+        "bkm_integral_estimate",
+    ]
+    assert payload["boundaryHB_correct_status"] == "closeable"
+    assert payload["boundaryHB_correct_dependency"] == [
+        "pointwise_kornBiaxialBound",
+        "nondegeneracy",
+    ]
+    assert payload["control_card"]["calc11_status"] == payload["calc11_status"]
+    assert (
+        payload["control_card"]["empirical_diagnostics_complete"]
+        == payload["empirical_diagnostics_complete"]
+    )
+    assert payload["control_card"]["no_further_calcs_blocking"] is True
+    assert payload["control_card"]["remaining_math_wall"] == payload["remaining_math_wall"]
+    assert (
+        payload["control_card"]["formal_packages_write_now"]
+        == payload["formal_packages_write_now"]
+    )
+    assert payload["control_card"]["boundaryHB_correct_status"] == "closeable"
+    assert (
+        payload["control_card"]["boundaryHB_correct_dependency"]
+        == payload["boundaryHB_correct_dependency"]
+    )
+    assert payload["control_card"]["calc11_next"] is False
+    assert payload["control_card"]["calc11_next_legacy_field_retained"] is True
+    assert payload["calc11_result_summary"] == {
+        "bottom_5_percent_g12_mean_omega_e2_fraction": 0.343,
+        "random_baseline": 1.0 / 3.0,
+        "full_boundary_layer_mean": 0.432,
+        "decision": "no_special_alignment",
+    }
+    assert payload["control_card"]["calc11_result_summary"] == payload["calc11_result_summary"]
 
     packages = payload["packages"]
     assert [row["package_id"] for row in packages] == list(range(1, 11))

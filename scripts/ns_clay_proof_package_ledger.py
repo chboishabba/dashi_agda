@@ -35,7 +35,31 @@ CONTROL_CARD = {
     "hard_theorems": ["KornLevelSet", "BoundaryHB", "collapseImpossible"],
     "concise_regularit_route": "first six packages are formalization/standard packages before the A/B/C hard-theorem distance route",
     "concise_regularity_route": "first six packages are formalization/standard packages before the A/B/C hard-theorem distance route",
-    "calc11_next": True,
+    "calc11_status": "complete_no_special_alignment",
+    "empirical_diagnostics_complete": True,
+    "no_further_calcs_blocking": True,
+    "remaining_math_wall": ["KornLevelSet", "collapseImpossible"],
+    "formal_packages_write_now": [
+        "width_ode_extraction",
+        "cutoff_error_budget",
+        "localized_enstrophy_identity",
+        "source_dissipation_balance",
+        "bkm_bridge_readiness",
+        "bkm_integral_estimate",
+    ],
+    "boundaryHB_correct_status": "closeable",
+    "boundaryHB_correct_dependency": [
+        "pointwise_kornBiaxialBound",
+        "nondegeneracy",
+    ],
+    "calc11_next": False,
+    "calc11_next_legacy_field_retained": True,
+    "calc11_result_summary": {
+        "bottom_5_percent_g12_mean_omega_e2_fraction": 0.343,
+        "random_baseline": 1.0 / 3.0,
+        "full_boundary_layer_mean": 0.432,
+        "decision": "no_special_alignment",
+    },
 }
 
 DEFAULT_PACKAGE_SPECS: tuple[dict[str, Any], ...] = (
@@ -279,6 +303,29 @@ def build_payload(repo_root: Path, specs: list[dict[str, Any]]) -> dict[str, Any
         ],
         "promotion": False,
         "theorem_promotion": False,
+        "calc11_status": "complete_no_special_alignment",
+        "empirical_diagnostics_complete": True,
+        "no_further_calcs_blocking": True,
+        "remaining_math_wall": ["KornLevelSet", "collapseImpossible"],
+        "formal_packages_write_now": [
+            "width_ode_extraction",
+            "cutoff_error_budget",
+            "localized_enstrophy_identity",
+            "source_dissipation_balance",
+            "bkm_bridge_readiness",
+            "bkm_integral_estimate",
+        ],
+        "boundaryHB_correct_status": "closeable",
+        "boundaryHB_correct_dependency": [
+            "pointwise_kornBiaxialBound",
+            "nondegeneracy",
+        ],
+        "calc11_result_summary": {
+            "bottom_5_percent_g12_mean_omega_e2_fraction": 0.343,
+            "random_baseline": 1.0 / 3.0,
+            "full_boundary_layer_mean": 0.432,
+            "decision": "no_special_alignment",
+        },
         "control_card": CONTROL_CARD,
         "validation_passed": True,
     }
