@@ -8,17 +8,19 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 ------------------------------------------------------------------------
--- Candidate-only receipt surface for the lambda2plus transport inequality
--- shape and the BoundaryHB assembly blockers.
+-- Post-Calc-11 receipt surface for the lambda2plus transport inequality
+-- and the BoundaryHB corrected closeability ledger.
 --
--- The transport side records the symbolic shape with nu, C_NS, t1, t2,
--- lambda2+, L2, and L3 tokens.  The BoundaryHB side records the missing
--- KornLevelSet input, the layer-energy lower bound, and the continuity/
--- Harnack steps that would be needed to upgrade an integral estimate to
--- pointwise b0.  No theorem promotion is claimed here.
+-- The transport side records the standard/write-now lambda2plus_transport_ineq
+-- shape with nu, C_NS, t1, t2, lambda2+, L2, and L3 tokens.  The
+-- BoundaryHB side records the corrected route: BoundaryHB_Correct closes
+-- only through pointwise kornBiaxialBound under biaxial boundary, a
+-- lambda3 gap, and a pointwise ||nabla^2 u|| >= eta hypothesis.  Integral
+-- Korn plus continuity is explicitly insufficient, KornLevelSet remains
+-- open for h_strain_dom, and no Clay promotion is claimed here.
 
 data Lambda2PlusTransportInequalityStatus : Set where
-  lambda2PlusTransportShapeRecordedCandidateOnly :
+  lambda2PlusTransportShapeRecordedStandardWriteNow :
     Lambda2PlusTransportInequalityStatus
 
 data Lambda2PlusTransportInequalityToken : Set where
@@ -64,36 +66,44 @@ lambda2PlusTransportInequalityPromotionImpossibleHere ()
 
 lambda2PlusTransportInequalityStatement : String
 lambda2PlusTransportInequalityStatement =
-  "candidate-only transport inequality shape: nu, C_NS, t1, t2, lambda2+, L2, and L3 terms are recorded, but no theorem promotion is claimed"
+  "standard/write-now transport inequality shape: nu, C_NS, t1, t2, lambda2+, L2, and L3 terms are recorded, and no theorem promotion is claimed"
 
 data BoundaryHBAssemblyStatus : Set where
-  boundaryHBAssemblyBlockedCandidateOnly :
+  boundaryHBCorrectPointwiseRouteRecordedCandidateOnly :
     BoundaryHBAssemblyStatus
 
 data BoundaryHBAssemblyBlocker : Set where
-  kornLevelSetMissing :
+  integralKornPlusContinuityInsufficient :
     BoundaryHBAssemblyBlocker
 
-  layerEnergyLowerBoundMissing :
+  continuityDoesNotUpgradeIntegralToPointwise :
     BoundaryHBAssemblyBlocker
 
-  continuityMissing :
+  missingPointwiseKornBiaxialBound :
     BoundaryHBAssemblyBlocker
 
-  harnackMissing :
+  missingBiaxialBoundaryHypothesis :
     BoundaryHBAssemblyBlocker
 
-  integralToPointwiseB0UpgradeMissing :
+  missingLambda3GapHypothesis :
+    BoundaryHBAssemblyBlocker
+
+  missingPointwiseNabla2ULowerBoundEta :
+    BoundaryHBAssemblyBlocker
+
+  kornLevelSetOpenForHStrainDom :
     BoundaryHBAssemblyBlocker
 
 canonicalBoundaryHBAssemblyBlockers :
   List BoundaryHBAssemblyBlocker
 canonicalBoundaryHBAssemblyBlockers =
-  kornLevelSetMissing
-  ∷ layerEnergyLowerBoundMissing
-  ∷ continuityMissing
-  ∷ harnackMissing
-  ∷ integralToPointwiseB0UpgradeMissing
+  integralKornPlusContinuityInsufficient
+  ∷ continuityDoesNotUpgradeIntegralToPointwise
+  ∷ missingPointwiseKornBiaxialBound
+  ∷ missingBiaxialBoundaryHypothesis
+  ∷ missingLambda3GapHypothesis
+  ∷ missingPointwiseNabla2ULowerBoundEta
+  ∷ kornLevelSetOpenForHStrainDom
   ∷ []
 
 data BoundaryHBAssemblyPromotion : Set where
@@ -105,7 +115,7 @@ boundaryHBAssemblyPromotionImpossibleHere ()
 
 boundaryHBAssemblyStatementText : String
 boundaryHBAssemblyStatementText =
-  "BoundaryHB assembly stays blocked until KornLevelSet, the layer energy lower bound, and continuity/Harnack inputs are supplied so the integral estimate can be upgraded to pointwise b0."
+  "BoundaryHB_Correct is closeable only through pointwise kornBiaxialBound under biaxial boundary, lambda3 gap, and pointwise ||nabla^2 u|| >= eta; integral Korn plus continuity is explicitly insufficient; KornLevelSet remains open for h_strain_dom; Clay promotion stays false."
 
 record Lambda2PlusTransportInequalityReceipt : Setω where
   field
@@ -113,7 +123,7 @@ record Lambda2PlusTransportInequalityReceipt : Setω where
       Lambda2PlusTransportInequalityStatus
 
     statusIsCanonical :
-      status ≡ lambda2PlusTransportShapeRecordedCandidateOnly
+      status ≡ lambda2PlusTransportShapeRecordedStandardWriteNow
 
     tokens :
       List Lambda2PlusTransportInequalityToken
@@ -127,11 +137,11 @@ record Lambda2PlusTransportInequalityReceipt : Setω where
     transportInequalityStatementIsCanonical :
       transportInequalityStatement ≡ lambda2PlusTransportInequalityStatement
 
-    candidateOnly :
+    standardWriteNow :
       Bool
 
-    candidateOnlyIsTrue :
-      candidateOnly ≡ true
+    standardWriteNowIsTrue :
+      standardWriteNow ≡ true
 
     theoremPromoted :
       Bool
@@ -154,7 +164,7 @@ record BoundaryHBAssemblyReceipt : Setω where
       BoundaryHBAssemblyStatus
 
     statusIsCanonical :
-      status ≡ boundaryHBAssemblyBlockedCandidateOnly
+      status ≡ boundaryHBCorrectPointwiseRouteRecordedCandidateOnly
 
     blockers :
       List BoundaryHBAssemblyBlocker
@@ -162,47 +172,59 @@ record BoundaryHBAssemblyReceipt : Setω where
     blockersAreCanonical :
       blockers ≡ canonicalBoundaryHBAssemblyBlockers
 
-    kornLevelSetRequired :
+    pointwiseKornBiaxialBoundRequired :
       Bool
 
-    kornLevelSetRequiredIsTrue :
-      kornLevelSetRequired ≡ true
+    pointwiseKornBiaxialBoundRequiredIsTrue :
+      pointwiseKornBiaxialBoundRequired ≡ true
 
-    layerEnergyLowerBoundRequired :
+    biaxialBoundaryRequired :
       Bool
 
-    layerEnergyLowerBoundRequiredIsTrue :
-      layerEnergyLowerBoundRequired ≡ true
+    biaxialBoundaryRequiredIsTrue :
+      biaxialBoundaryRequired ≡ true
 
-    continuityRequired :
+    lambda3GapRequired :
       Bool
 
-    continuityRequiredIsTrue :
-      continuityRequired ≡ true
+    lambda3GapRequiredIsTrue :
+      lambda3GapRequired ≡ true
 
-    harnackRequired :
+    pointwiseNabla2ULowerBoundEtaRequired :
       Bool
 
-    harnackRequiredIsTrue :
-      harnackRequired ≡ true
+    pointwiseNabla2ULowerBoundEtaRequiredIsTrue :
+      pointwiseNabla2ULowerBoundEtaRequired ≡ true
 
-    integralToPointwiseB0UpgradeRequired :
+    integralKornPlusContinuityInsufficientFlag :
       Bool
 
-    integralToPointwiseB0UpgradeRequiredIsTrue :
-      integralToPointwiseB0UpgradeRequired ≡ true
+    integralKornPlusContinuityInsufficientFlagIsTrue :
+      integralKornPlusContinuityInsufficientFlag ≡ true
 
-    boundaryHBPointwiseB0Proved :
+    kornLevelSetOpenForHStrainDomFlag :
       Bool
 
-    boundaryHBPointwiseB0ProvedIsFalse :
-      boundaryHBPointwiseB0Proved ≡ false
+    kornLevelSetOpenForHStrainDomFlagIsTrue :
+      kornLevelSetOpenForHStrainDomFlag ≡ true
+
+    boundaryHBCorrectCloseabilityRecorded :
+      Bool
+
+    boundaryHBCorrectCloseabilityRecordedIsTrue :
+      boundaryHBCorrectCloseabilityRecorded ≡ true
 
     boundaryHBPromoted :
       Bool
 
     boundaryHBPromotedIsFalse :
       boundaryHBPromoted ≡ false
+
+    clayPromotion :
+      Bool
+
+    clayPromotionIsFalse :
+      clayPromotion ≡ false
 
     boundaryHBAssemblyStatement :
       String
@@ -227,7 +249,7 @@ canonicalLambda2PlusTransportInequalityReceipt :
 canonicalLambda2PlusTransportInequalityReceipt =
   record
     { status =
-        lambda2PlusTransportShapeRecordedCandidateOnly
+        lambda2PlusTransportShapeRecordedStandardWriteNow
     ; statusIsCanonical =
         refl
     ; tokens =
@@ -238,9 +260,9 @@ canonicalLambda2PlusTransportInequalityReceipt =
         lambda2PlusTransportInequalityStatement
     ; transportInequalityStatementIsCanonical =
         refl
-    ; candidateOnly =
+    ; standardWriteNow =
         true
-    ; candidateOnlyIsTrue =
+    ; standardWriteNowIsTrue =
         refl
     ; theoremPromoted =
         false
@@ -251,9 +273,9 @@ canonicalLambda2PlusTransportInequalityReceipt =
     ; promotionFlagsAreEmpty =
         refl
     ; receiptBoundary =
-        "nu, C_NS, t1, t2, lambda2+, L2, and L3 are recorded as a symbolic transport-inequality shape"
+        "lambda2plus_transport_ineq is standard/write-now"
         ∷ "No transport theorem is promoted here"
-        ∷ "The receipt stays candidate-only by construction"
+        ∷ "Clay promotion remains false"
         ∷ []
     }
 
@@ -262,40 +284,48 @@ canonicalBoundaryHBAssemblyReceipt :
 canonicalBoundaryHBAssemblyReceipt =
   record
     { status =
-        boundaryHBAssemblyBlockedCandidateOnly
+        boundaryHBCorrectPointwiseRouteRecordedCandidateOnly
     ; statusIsCanonical =
         refl
     ; blockers =
         canonicalBoundaryHBAssemblyBlockers
     ; blockersAreCanonical =
         refl
-    ; kornLevelSetRequired =
+    ; pointwiseKornBiaxialBoundRequired =
         true
-    ; kornLevelSetRequiredIsTrue =
+    ; pointwiseKornBiaxialBoundRequiredIsTrue =
         refl
-    ; layerEnergyLowerBoundRequired =
+    ; biaxialBoundaryRequired =
         true
-    ; layerEnergyLowerBoundRequiredIsTrue =
+    ; biaxialBoundaryRequiredIsTrue =
         refl
-    ; continuityRequired =
+    ; lambda3GapRequired =
         true
-    ; continuityRequiredIsTrue =
+    ; lambda3GapRequiredIsTrue =
         refl
-    ; harnackRequired =
+    ; pointwiseNabla2ULowerBoundEtaRequired =
         true
-    ; harnackRequiredIsTrue =
+    ; pointwiseNabla2ULowerBoundEtaRequiredIsTrue =
         refl
-    ; integralToPointwiseB0UpgradeRequired =
+    ; integralKornPlusContinuityInsufficientFlag =
         true
-    ; integralToPointwiseB0UpgradeRequiredIsTrue =
+    ; integralKornPlusContinuityInsufficientFlagIsTrue =
         refl
-    ; boundaryHBPointwiseB0Proved =
-        false
-    ; boundaryHBPointwiseB0ProvedIsFalse =
+    ; kornLevelSetOpenForHStrainDomFlag =
+        true
+    ; kornLevelSetOpenForHStrainDomFlagIsTrue =
+        refl
+    ; boundaryHBCorrectCloseabilityRecorded =
+        true
+    ; boundaryHBCorrectCloseabilityRecordedIsTrue =
         refl
     ; boundaryHBPromoted =
         false
     ; boundaryHBPromotedIsFalse =
+        refl
+    ; clayPromotion =
+        false
+    ; clayPromotionIsFalse =
         refl
     ; boundaryHBAssemblyStatement =
         boundaryHBAssemblyStatementText
@@ -306,10 +336,10 @@ canonicalBoundaryHBAssemblyReceipt =
     ; promotionFlagsAreEmpty =
         refl
     ; receiptBoundary =
-        "KornLevelSet remains required"
-        ∷ "The layer-energy lower bound remains required"
-        ∷ "Continuity and Harnack inputs remain required for the pointwise upgrade"
-        ∷ "Integral control has not yet been upgraded to pointwise b0"
-        ∷ "BoundaryHB stays candidate-only and blocked"
+        "lambda2plus_transport_ineq is standard/write-now"
+        ∷ "BoundaryHB_Correct closes only through pointwise kornBiaxialBound"
+        ∷ "Integral Korn plus continuity is not the closure route"
+        ∷ "KornLevelSet remains open for h_strain_dom"
+        ∷ "Clay promotion stays false"
         ∷ []
     }
