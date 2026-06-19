@@ -1,0 +1,277 @@
+{
+  "C": "scripts/ns_raw_derived_tensor_convention_compare.py",
+  "F": "The script is fail-closed and records comparison deltas without promoting any theorem or Clay claim.",
+  "G": "Authority is false and this is empirical comparison telemetry only.",
+  "L": "Status is ok only when the required raw velocity frame, domain length, derived lambda2 field, and requested indices are valid.",
+  "O": "Compare raw velocity-derived strain eigenvalues against derived lambda2/g12/lambda3 archive values.",
+  "P": "FAIL_CLOSED_RAW_DERIVED_TENSOR_CONVENTION_COMPARE",
+  "R": "Report per-cell raw lambda1/lambda2/lambda3, derived lambda2/g12/lambda3, deltas, and sign mismatches.",
+  "S": "Load raw velocity_snapshots, compute the strain eigensystem and vorticity norm, then compare against the derived archive at requested cells and the top-vorticity cell.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "comparison": {
+    "comparison_indices": [
+      [
+        9,
+        71,
+        29
+      ],
+      [
+        124,
+        70,
+        32
+      ],
+      [
+        65,
+        51,
+        58
+      ]
+    ],
+    "requested_indices": [
+      [
+        9,
+        71,
+        29
+      ],
+      [
+        124,
+        70,
+        32
+      ]
+    ],
+    "selected_cells": [
+      {
+        "delta": {
+          "g12": 29.030498015221426,
+          "lambda2": 4.624908135041006,
+          "lambda3": null
+        },
+        "derived": {
+          "g12": 6.159781788959913,
+          "lambda2": -3.0129972221683,
+          "lambda3": null
+        },
+        "index": [
+          9,
+          71,
+          29
+        ],
+        "raw": {
+          "g12": 35.19027980418134,
+          "lambda1": -33.57836889130863,
+          "lambda2": 1.6119109128727063,
+          "lambda3": 29.848578811173127,
+          "omega_norm_sq": 8763.321146305676
+        },
+        "sign_mismatch": {
+          "g12": false,
+          "lambda2": true,
+          "lambda3": null
+        },
+        "tags": [
+          "requested"
+        ]
+      },
+      {
+        "delta": {
+          "g12": 38.94848706158018,
+          "lambda2": 6.923535314966028,
+          "lambda3": null
+        },
+        "derived": {
+          "g12": 12.715021078573935,
+          "lambda2": -0.00092572399512521,
+          "lambda3": null
+        },
+        "index": [
+          124,
+          70,
+          32
+        ],
+        "raw": {
+          "g12": 51.663508140154114,
+          "lambda1": -44.740898549183214,
+          "lambda2": 6.922609590970903,
+          "lambda3": 28.736707629227105,
+          "omega_norm_sq": 1732.3376664141583
+        },
+        "sign_mismatch": {
+          "g12": false,
+          "lambda2": true,
+          "lambda3": null
+        },
+        "tags": [
+          "requested"
+        ]
+      },
+      {
+        "delta": {
+          "g12": 6.8211154862841425,
+          "lambda2": 6.255764085890544,
+          "lambda3": null
+        },
+        "derived": {
+          "g12": 11.724193424643065,
+          "lambda2": -6.843951234680278,
+          "lambda3": null
+        },
+        "index": [
+          65,
+          51,
+          58
+        ],
+        "raw": {
+          "g12": 18.545308910927208,
+          "lambda1": -19.133496059716943,
+          "lambda2": -0.5881871487897343,
+          "lambda3": 22.83962199187779,
+          "omega_norm_sq": 10805.38410302023
+        },
+        "sign_mismatch": {
+          "g12": false,
+          "lambda2": false,
+          "lambda3": null
+        },
+        "tags": [
+          "top_vorticity"
+        ]
+      }
+    ],
+    "top_vorticity_cell": {
+      "delta": {
+        "g12": 6.8211154862841425,
+        "lambda2": 6.255764085890544,
+        "lambda3": null
+      },
+      "derived": {
+        "g12": 11.724193424643065,
+        "lambda2": -6.843951234680278,
+        "lambda3": null
+      },
+      "index": [
+        65,
+        51,
+        58
+      ],
+      "raw": {
+        "g12": 18.545308910927208,
+        "lambda1": -19.133496059716943,
+        "lambda2": -0.5881871487897343,
+        "lambda3": 22.83962199187779,
+        "omega_norm_sq": 10805.38410302023
+      },
+      "sign_mismatch": {
+        "g12": false,
+        "lambda2": false,
+        "lambda3": null
+      },
+      "tags": [
+        "top_vorticity"
+      ]
+    }
+  },
+  "contract": "ns_raw_derived_tensor_convention_compare",
+  "derived": {
+    "fields_available_for_compare": [
+      "lambda2",
+      "g12"
+    ],
+    "fields_present": [
+      "lambda2",
+      "g12"
+    ],
+    "frame_source": "lambda2",
+    "g12_present": true,
+    "lambda2_present": true,
+    "lambda3_present": false,
+    "shape": [
+      128,
+      128,
+      128
+    ]
+  },
+  "derived_archive": "/tmp/dashi_ns_pressure_round/ns3d_N128_frame10_augmented.npz",
+  "domain_length_override": null,
+  "errors": [],
+  "frame": 10,
+  "indices": "9,71,29;124,70,32",
+  "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_raw_derived_tensor_convention_compare_N128_frame10_20260619.json",
+  "pretty": true,
+  "raw": {
+    "domain_length": 6.283185307179586,
+    "frame_source": "cli",
+    "grid_spacing": 0.04908738521234052,
+    "omega_source": "computed_from_velocity_snapshots",
+    "scale_source": "raw:domain_length",
+    "shape": [
+      128,
+      128,
+      128
+    ],
+    "top_vorticity_index": [
+      65,
+      51,
+      58
+    ],
+    "top_vorticity_value": 103.94894950416877,
+    "top_vorticity_value_sq": 10805.38410302023,
+    "velocity_source": "velocity_snapshots[frame]"
+  },
+  "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "schema_version": 1,
+  "script": "scripts/ns_raw_derived_tensor_convention_compare.py",
+  "status": "ok",
+  "summary": {
+    "derived_domain_length": 6.283185307179586,
+    "derived_fields_present": [
+      "lambda2",
+      "g12"
+    ],
+    "domain_length_source": "raw:domain_length",
+    "field_stats": {
+      "g12": {
+        "available_count": 3,
+        "max_abs_delta": 38.94848706158018,
+        "mean_abs_delta": 24.933366854361918,
+        "mean_derived": 10.199665430725638,
+        "mean_raw": 35.13303228508755,
+        "sign_mismatch_count": 0
+      },
+      "lambda2": {
+        "available_count": 3,
+        "max_abs_delta": 6.923535314966028,
+        "mean_abs_delta": 5.934735845299193,
+        "mean_derived": -3.2859580602812346,
+        "mean_raw": 2.6487777850179586,
+        "sign_mismatch_count": 2
+      },
+      "lambda3": {
+        "available_count": 0,
+        "max_abs_delta": null,
+        "mean_abs_delta": null,
+        "mean_derived": null,
+        "mean_raw": 27.141636144092672,
+        "sign_mismatch_count": 0
+      }
+    },
+    "raw_cell_count": 2097152,
+    "raw_domain_length": 6.283185307179586,
+    "raw_strain_eigenvalue_ordering": {
+      "lambda1_le_lambda2": true,
+      "lambda2_le_lambda3": true
+    },
+    "requested_cell_count": 2,
+    "selected_cell_count": 3,
+    "top_vorticity_cell_count": 1,
+    "top_vorticity_cell_in_comparison": true,
+    "top_vorticity_cell_in_requested": false
+  },
+  "warnings": []
+}
