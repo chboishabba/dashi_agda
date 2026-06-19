@@ -1,0 +1,67 @@
+{
+  "C": "scripts/ns_broad_tube_serrin_bkm_bridge_summary.py",
+  "F": "The three gates remain conditional with explicit obligations; no theorem claims or Clay promotion are recorded.",
+  "G": "Clay promotion and full BKM unconditional closure stay explicitly false/open.",
+  "L": "Read the gap-receipt booleans, map them into the three canonical gates, and enumerate remaining external obligations by gate.",
+  "O": "Owner 5 records broad-tube Serrin/BKM bridge summary status.",
+  "P": "FAIL_CLOSED_NS_BROAD_TUBE_SERRIN_BKM_BRIDGE_SUMMARY",
+  "R": "Summarize conditional gate implementation, explicit promotion suppression, and remaining external theorem requirements from the broad-tube Serrin-BKM chain.",
+  "S": "Fail-closed summary-only ledger; only existing receipt fields are synthesized and no theorem promotion is inferred.",
+  "broad_tube_required": true,
+  "changed_files": [
+    "DASHI/Physics/Closure/NSBroadTubeSerrinLiftGapReceipt.agda",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_serrin_bkm_bridge_summary_20260620.json"
+  ],
+  "contract": "ns_broad_tube_serrin_bkm_bridge_summary",
+  "errors": [],
+  "implemented_conditionally": {
+    "bkm_bridge": true,
+    "broad_tube_coarea": true,
+    "serrin_lift": true
+  },
+  "promotion_flags": {
+    "clay_promotion": false
+  },
+  "remaining_external_theorem_requirements": {
+    "bkm_bridge": [
+      "bkm_bridge obligation",
+      "serrin_socket",
+      "vorticity_time_integral_control",
+      "continuation_criterion"
+    ],
+    "broad_tube_coarea": [
+      "broad_tube_coarea obligation",
+      "nondegenerate_lambda2_gradient",
+      "finite_tube_thickness",
+      "surface_layer_control",
+      "coarea_measurability"
+    ],
+    "serrin_lift": [
+      "serrin_lift obligation",
+      "finite_tube_coverage",
+      "interpolation_exponent_admissibility",
+      "velocity_reconstruction"
+    ]
+  },
+  "remaining_external_theorem_requirements_flat": [
+    "broad_tube_coarea obligation",
+    "nondegenerate_lambda2_gradient",
+    "finite_tube_thickness",
+    "surface_layer_control",
+    "coarea_measurability",
+    "serrin_lift obligation",
+    "finite_tube_coverage",
+    "interpolation_exponent_admissibility",
+    "velocity_reconstruction",
+    "bkm_bridge obligation",
+    "serrin_socket",
+    "vorticity_time_integral_control",
+    "continuation_criterion"
+  ],
+  "source_receipt": "DASHI/Physics/Closure/NSBroadTubeSerrinLiftGapReceipt.agda",
+  "status": "ok",
+  "strict_carrier_sufficient": false,
+  "warnings": [
+    "Agda receipt fields were parsed and validated."
+  ]
+}

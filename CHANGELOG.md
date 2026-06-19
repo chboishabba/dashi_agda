@@ -6,6 +6,21 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS broad-tube coarea / Serrin lift / BKM bridge implementation tranche for
+  `2026-06-20`: adds
+  `DASHI.Physics.Closure.NSBroadTubeCoareaBridgeReceipt`,
+  `DASHI.Physics.Closure.NSBroadTubeSerrinLiftReceipt`,
+  `DASHI.Physics.Closure.NSBroadTubeBKMBridgeReceipt`,
+  `DASHI.Physics.Closure.NSBroadTubeSerrinBKMCompositeReceipt`,
+  `scripts/ns_broad_tube_serrin_bkm_bridge_summary.py`, and
+  `scripts/check_ns_broad_tube_serrin_bkm_bridge_summary.py`, wired through
+  `DASHI.Everything` and optional local Clay harness discovery. The three
+  requested gates are now checked conditional sockets and the composite
+  receipt records `broadTubeCoarea -> Serrin lift -> BKM bridge ->
+  conditional no-blowup socket`. This is fail-closed: the hypotheses are
+  explicit, unconditional BKM/Clay closure is not asserted, full NS Clay and
+  `clayPromotion` remain false.
+
 - NS Shahmurov two-paper claim intake / broad-tube Serrin gap tranche for
   `2026-06-19`: adds
   `DASHI.Physics.Closure.NSShahmurovTwoPaperClaimIntakeReceipt`,

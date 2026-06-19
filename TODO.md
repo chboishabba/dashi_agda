@@ -1,6 +1,22 @@
 # FOR TODO GO TO '# TODO'
 
 Current NS Clay action note for `2026-06-18`:
+- Broad-tube coarea / Serrin lift / BKM bridge implementation tranche for
+  `2026-06-20` is recorded. Artifacts:
+  `DASHI/Physics/Closure/NSBroadTubeCoareaBridgeReceipt.agda`,
+  `DASHI/Physics/Closure/NSBroadTubeSerrinLiftReceipt.agda`,
+  `DASHI/Physics/Closure/NSBroadTubeBKMBridgeReceipt.agda`,
+  `DASHI/Physics/Closure/NSBroadTubeSerrinBKMCompositeReceipt.agda`,
+  `scripts/ns_broad_tube_serrin_bkm_bridge_summary.py`, and
+  `scripts/check_ns_broad_tube_serrin_bkm_bridge_summary.py`. The three
+  requested gates are implemented as checked conditional sockets:
+  broad-tube coarea requires nondegenerate `lambda2` gradient, finite tube
+  thickness, surface-layer control, and coarea measurability; Serrin lift
+  requires finite tube coverage, interpolation/exponent admissibility, and
+  velocity reconstruction; BKM bridge requires a Serrin socket, vorticity
+  time-integral control, and a continuation criterion. The composite receipt
+  constructs the conditional no-blowup socket. This is not an unconditional
+  Clay proof: theorem promotion and `clayPromotion` remain false.
 - Shahmurov two-paper claim intake / broad-tube Serrin gap tranche for
   `2026-06-19` is recorded. Artifacts:
   `DASHI/Physics/Closure/NSShahmurovTwoPaperClaimIntakeReceipt.agda`,

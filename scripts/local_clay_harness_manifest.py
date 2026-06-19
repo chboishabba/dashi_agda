@@ -443,8 +443,26 @@ def build_specs() -> list[HarnessSpec]:
     ns_broad_tube_serrin_lift_gap_receipt = (
         REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinLiftGapReceipt.agda"
     )
+    ns_broad_tube_coarea_bridge_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeCoareaBridgeReceipt.agda"
+    )
+    ns_broad_tube_serrin_lift_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinLiftReceipt.agda"
+    )
+    ns_broad_tube_bkm_bridge_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeBKMBridgeReceipt.agda"
+    )
+    ns_broad_tube_serrin_bkm_composite_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinBKMCompositeReceipt.agda"
+    )
     ns_pressure_poisson_sign_audit_out = (
         CHILD_OUT_DIR / "ns_pressure_poisson_sign_audit_smoke.json"
+    )
+    ns_broad_tube_serrin_bkm_bridge_summary = script(
+        "ns_broad_tube_serrin_bkm_bridge_summary.py"
+    )
+    check_ns_broad_tube_serrin_bkm_bridge_summary = script(
+        "check_ns_broad_tube_serrin_bkm_bridge_summary.py"
     )
     ns_interior_pressure_regression_out = (
         CHILD_OUT_DIR / "ns_interior_pressure_regression_smoke.json"
@@ -3563,6 +3581,90 @@ def build_specs() -> list[HarnessSpec]:
                     if ns_broad_tube_serrin_lift_gap_receipt.exists()
                     else f"Agda receipt missing: {rel(ns_broad_tube_serrin_lift_gap_receipt)}"
                 ),
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_coarea_bridge_receipt",
+            path=ns_broad_tube_coarea_bridge_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube coarea bridge receipt present: {rel(ns_broad_tube_coarea_bridge_receipt)}"
+                if ns_broad_tube_coarea_bridge_receipt.exists()
+                else f"Expected broad-tube coarea bridge receipt missing: {rel(ns_broad_tube_coarea_bridge_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional coarea-bridge receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_serrin_lift_receipt",
+            path=ns_broad_tube_serrin_lift_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube Serrin lift receipt present: {rel(ns_broad_tube_serrin_lift_receipt)}"
+                if ns_broad_tube_serrin_lift_receipt.exists()
+                else f"Expected broad-tube Serrin lift receipt missing: {rel(ns_broad_tube_serrin_lift_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional Serrin-lift receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_bkm_bridge_receipt",
+            path=ns_broad_tube_bkm_bridge_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube BKM bridge receipt present: {rel(ns_broad_tube_bkm_bridge_receipt)}"
+                if ns_broad_tube_bkm_bridge_receipt.exists()
+                else f"Expected broad-tube BKM bridge receipt missing: {rel(ns_broad_tube_bkm_bridge_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional BKM-bridge receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_serrin_bkm_composite_receipt",
+            path=ns_broad_tube_serrin_bkm_composite_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube Serrin BKM composite receipt present: {rel(ns_broad_tube_serrin_bkm_composite_receipt)}"
+                if ns_broad_tube_serrin_bkm_composite_receipt.exists()
+                else f"Expected broad-tube Serrin BKM composite receipt missing: {rel(ns_broad_tube_serrin_bkm_composite_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional Serrin-BKM composite receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_serrin_bkm_bridge_summary",
+            path=ns_broad_tube_serrin_bkm_bridge_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected ns_broad_tube_serrin_bkm_bridge_summary.py present: {rel(ns_broad_tube_serrin_bkm_bridge_summary)}"
+                if ns_broad_tube_serrin_bkm_bridge_summary.exists()
+                else f"Expected ns_broad_tube_serrin_bkm_bridge_summary.py missing: {rel(ns_broad_tube_serrin_bkm_bridge_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional broad-tube Serrin-BKM summary script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_broad_tube_serrin_bkm_bridge_summary",
+            path=check_ns_broad_tube_serrin_bkm_bridge_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected check_ns_broad_tube_serrin_bkm_bridge_summary.py present: {rel(check_ns_broad_tube_serrin_bkm_bridge_summary)}"
+                if check_ns_broad_tube_serrin_bkm_bridge_summary.exists()
+                else f"Expected check_ns_broad_tube_serrin_bkm_bridge_summary.py missing: {rel(check_ns_broad_tube_serrin_bkm_bridge_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional broad-tube Serrin-BKM check script",
+                "non-promoting artifact presence/absence signal only",
             ),
         ),
         HarnessSpec(
