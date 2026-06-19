@@ -419,11 +419,17 @@ def build_specs() -> list[HarnessSpec]:
     ns_layer_l2_vorticity_fraction_regression_out = (
         CHILD_OUT_DIR / "ns_layer_l2_vorticity_fraction_regression_smoke.json"
     )
+    ns_shahmurov_two_paper_claim_intake_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSShahmurovTwoPaperClaimIntakeReceipt.agda"
+    )
     ns_weighted_lambda2_carrier_quantile_out = (
         CHILD_OUT_DIR / "ns_weighted_lambda2_carrier_quantile_smoke.json"
     )
     ns_weighted_lambda2_carrier_quantile_regression_out = (
         CHILD_OUT_DIR / "ns_weighted_lambda2_carrier_quantile_regression_smoke.json"
+    )
+    ns_weighted_lambda2_carrier_quantile_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSWeightedLambda2CarrierQuantileReceipt.agda"
     )
     ns_lambda2_signed_region_partition_out = (
         CHILD_OUT_DIR / "ns_lambda2_signed_region_partition_smoke.json"
@@ -433,6 +439,9 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_lambda2_carrier_route_summary_out = (
         CHILD_OUT_DIR / "ns_lambda2_carrier_route_summary_smoke.json"
+    )
+    ns_broad_tube_serrin_lift_gap_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinLiftGapReceipt.agda"
     )
     ns_pressure_poisson_sign_audit_out = (
         CHILD_OUT_DIR / "ns_pressure_poisson_sign_audit_smoke.json"
@@ -3371,6 +3380,11 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional Calc-8 layer-L2 summary",
                 "heuristic Shahmurov/Serrin route telemetry only",
+                (
+                    f"Shahmurov intake receipt present: {rel(ns_shahmurov_two_paper_claim_intake_receipt)}"
+                    if ns_shahmurov_two_paper_claim_intake_receipt.exists()
+                    else f"Shahmurov intake receipt missing: {rel(ns_shahmurov_two_paper_claim_intake_receipt)}"
+                ),
             ),
         ),
         HarnessSpec(
@@ -3396,6 +3410,11 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional Calc-8 layer-L2 regression gate",
                 "empirical/non-promoting; validates JSON shape only",
+                (
+                    f"Shahmurov intake receipt present: {rel(ns_shahmurov_two_paper_claim_intake_receipt)}"
+                    if ns_shahmurov_two_paper_claim_intake_receipt.exists()
+                    else f"Shahmurov intake receipt missing: {rel(ns_shahmurov_two_paper_claim_intake_receipt)}"
+                ),
             ),
         ),
         HarnessSpec(
@@ -3426,6 +3445,11 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional weighted |lambda2| carrier quantile diagnostic",
                 "empirical/non-promoting; calibrates broad-tube requirement only",
+                (
+                    f"Agda receipt present: {rel(ns_weighted_lambda2_carrier_quantile_receipt)}"
+                    if ns_weighted_lambda2_carrier_quantile_receipt.exists()
+                    else f"Agda receipt missing: {rel(ns_weighted_lambda2_carrier_quantile_receipt)}"
+                ),
             ),
         ),
         HarnessSpec(
@@ -3534,6 +3558,11 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional carrier-route summary",
                 "records broad_tube_required route code without theorem promotion",
+                (
+                    f"Agda receipt present: {rel(ns_broad_tube_serrin_lift_gap_receipt)}"
+                    if ns_broad_tube_serrin_lift_gap_receipt.exists()
+                    else f"Agda receipt missing: {rel(ns_broad_tube_serrin_lift_gap_receipt)}"
+                ),
             ),
         ),
         HarnessSpec(

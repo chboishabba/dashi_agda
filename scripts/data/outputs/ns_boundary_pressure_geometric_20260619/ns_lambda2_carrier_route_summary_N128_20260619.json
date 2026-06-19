@@ -18,6 +18,10 @@
     "p50": 3.1571976803596873
   },
   "errors": [],
+  "external_claim_peer_review_verified": false,
+  "external_claim_promotion_allowed": false,
+  "external_claim_route_code": "Shahmurov/SerrinFromQ2Control",
+  "external_claim_route_observed": true,
   "inputs": {
     "output": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_lambda2_carrier_route_summary_N128_20260619.json",
     "partition_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_lambda2_signed_region_partition_N128_20260619.json",
@@ -38,6 +42,10 @@
   },
   "status": "ok",
   "summary": {
+    "external_claim_peer_review_verified": false,
+    "external_claim_promotion_allowed": false,
+    "external_claim_route_code": "Shahmurov/SerrinFromQ2Control",
+    "external_claim_route_observed": true,
     "near_zero_fraction": 0.017090189859841835,
     "negative_fraction": 0.4881386329371345,
     "omega_l2_fraction_targets": [

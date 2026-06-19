@@ -6,6 +6,20 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Shahmurov two-paper claim intake / broad-tube Serrin gap tranche for
+  `2026-06-19`: adds
+  `DASHI.Physics.Closure.NSShahmurovTwoPaperClaimIntakeReceipt`,
+  `DASHI.Physics.Closure.NSBroadTubeSerrinLiftGapReceipt`,
+  `scripts/ns_shahmurov_claim_intake.py`, and
+  `scripts/check_ns_shahmurov_claim_intake_regression.py`; updates
+  `scripts/ns_lambda2_carrier_route_summary.py` and the optional local Clay
+  harness manifest. The Shahmurov lane records arXiv `2605.01875` and
+  `2605.01873` as external preprint-claim intake only. It is fail-closed:
+  peer-review verification, Dashi route supersession, theorem promotion, full
+  NS Clay, and Clay promotion remain false. The internal Dashi route is still
+  `broad_tube_required`, with strict carrier insufficiency recorded and the
+  remaining broad-tube coarea, Serrin lift, and BKM bridge obligations open.
+
 - NS pressure-convention normalization tranche for `2026-06-19`: adds
   `DASHI.Physics.Closure.NSPressurePoissonConventionNormalizationReceipt`,
   `scripts/ns_pressure_poisson_sign_timeseries_audit.py`,
