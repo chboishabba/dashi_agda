@@ -86,7 +86,7 @@ nsBroadTubeSerrinPromotionImpossibleHere ()
 
 nsBroadTubeSerrinLiftGapStatement : String
 nsBroadTubeSerrinLiftGapStatement =
-  "Calc 8 weighted lambda2 evidence makes the strict carrier lane insufficient; the remaining live gap is the broad-tube Serrin lift / interior continuation route, with broad tube coarea, Serrin lift, and BKM bridge obligations still open."
+  "Calc 8 weighted lambda2 evidence makes the strict carrier lane insufficient; the broad-tube coarea, Serrin lift, and BKM bridge gates are now represented by conditional bridge receipts, while unconditional Clay promotion remains false."
 
 record NSBroadTubeSerrinLiftGapReceipt : Setω where
   field
@@ -227,9 +227,9 @@ canonicalNSBroadTubeSerrinLiftGapReceipt =
     ; receiptBoundary =
         "strict carrier insufficient"
         ∷ "broad tube required"
-        ∷ "broad tube coarea open"
-        ∷ "serrin lift open"
-        ∷ "bkm bridge open"
+        ∷ "broad tube coarea conditional bridge receipt implemented"
+        ∷ "serrin lift conditional bridge receipt implemented"
+        ∷ "bkm bridge conditional bridge receipt implemented"
         ∷ "no clay promotion"
         ∷ []
     }
