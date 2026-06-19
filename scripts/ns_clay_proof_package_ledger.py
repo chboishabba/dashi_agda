@@ -46,6 +46,14 @@ CALC12_ROUTE_SELECTOR = {
     "no_further_calcs_blocking": True,
 }
 
+CALC12_RESULT_METADATA = {
+    "result_artifact_path": "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json",
+    "beta": 2.2754974180523737,
+    "beta_CI_95": [2.129779448947756, 2.4212153871569915],
+    "r_squared": 0.13893110418597066,
+    "aggregate_decision": "regularity_consistent",
+}
+
 CONTROL_CARD = {
     "O": "Worker lane 4 owns the NS Clay proof-package ledger emitter.",
     "R": (
@@ -68,6 +76,7 @@ CONTROL_CARD = {
     "calc12_non_blocking": True,
     "calc12_pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
     "calc12_selector_script": "scripts/ns_clay_calc12_route_selector.py",
+    "calc12_result_metadata": CALC12_RESULT_METADATA,
     "first_six_are_formalization": True,
     "hard_theorem_count": 2,
     "hard_theorems": ["KornLevelSet", "collapseImpossible"],
@@ -92,6 +101,7 @@ CONTROL_CARD = {
         "calc12_non_blocking": True,
         "calc12_pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
         "calc12_selector_script": "scripts/ns_clay_calc12_route_selector.py",
+        "calc12_result_metadata": CALC12_RESULT_METADATA,
         "no_further_calcs_blocking": True,
         "optional_next_calc": {**CALC12_ROUTE_SELECTOR, "blocking": False},
     },
@@ -373,6 +383,7 @@ def build_payload(repo_root: Path, specs: list[dict[str, Any]]) -> dict[str, Any
         "calc12_non_blocking": True,
         "calc12_pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
         "calc12_selector_script": "scripts/ns_clay_calc12_route_selector.py",
+        "calc12_result_metadata": CALC12_RESULT_METADATA,
         "calc12_route_selector": CALC12_ROUTE_SELECTOR,
         "formal_packages_write_now": [
             "millerToH5",
@@ -397,6 +408,7 @@ def build_payload(repo_root: Path, specs: list[dict[str, Any]]) -> dict[str, Any
             "calc12_non_blocking": True,
             "calc12_pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
             "calc12_selector_script": "scripts/ns_clay_calc12_route_selector.py",
+            "calc12_result_metadata": CALC12_RESULT_METADATA,
             "no_further_calcs_blocking": True,
             "optional_next_calc": {
                 "calc": "Calc12",

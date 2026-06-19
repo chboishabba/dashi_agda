@@ -76,34 +76,27 @@ def run_selector_expect_failure(
         pytest.skip(f"missing {SCRIPT}")
 
     input_path, output_path = write_input_payload(tmp_path, payload, name)
-    result = subprocess.run(
-        [
-            sys.executable,
-            str(SCRIPT),
-            "--input",
-            str(input_path),
-            "--output",
-            str(output_path),
-        ],
-        cwd=REPO_ROOT,
-        check=False,
-        text=True,
-        capture_output=True,
-    )
-    if result.returncode != 0 and "unrecognized arguments" in (result.stdout + result.stderr):
-        result = subprocess.run(
+
+    def invoke(*flags: str) -> subprocess.CompletedProcess[str]:
+        return subprocess.run(
             [
                 sys.executable,
                 str(SCRIPT),
-                "--json-input",
-                str(input_path),
-                "--json-output",
-                str(output_path),
+                *flags,
             ],
             cwd=REPO_ROOT,
             check=False,
             text=True,
             capture_output=True,
+        )
+
+    result = invoke("--input", str(input_path), "--output", str(output_path))
+    if result.returncode != 0 and "unrecognized arguments" in (result.stdout + result.stderr):
+        result = invoke(
+            "--json-input",
+            str(input_path),
+            "--json-output",
+            str(output_path),
         )
     return result
 
@@ -296,3 +289,87 @@ def test_ns_clay_calc12_route_selector_identical_positive_g12_values_fail_closed
 
     assert result.returncode != 0
     assert "g12 values must not all be identical" in (result.stdout + result.stderr)
+
+
+def test_ns_clay_calc12_route_selector_accepts_parallel_array_input(
+    tmp_path: Path,
+) -> None:
+    rows = valid_power_law_rows(beta=1.4)
+    payload = {
+        "datum_id": "array_form",
+        "g12": [row["g12"] for row in rows],
+        "omega_e2_sq": [row["omega_e2_sq"] for row in rows],
+    }
+
+    result = run_selector_payload(tmp_path, payload, "array_form")
+    dataset = first_dataset(result)
+    fit = dataset["fit"]
+
+    assert pick(result, "route_selector") == "statistical"
+    assert result["aggregate_decision"] == "regularity_consistent"
+    assert fit["decision"] == "regularity_consistent"
+    assert dataset["n_pairs_raw"] == 5
+    assert dataset["n_pairs_used"] == 5
+    assert_false_promotion_flags(result)
+
+
+def test_ns_clay_calc12_route_selector_rejects_mixed_pairs_and_array_fields(
+    tmp_path: Path,
+) -> None:
+    result = run_selector_expect_failure(
+        tmp_path,
+        {
+            "datum_id": "mixed_forms",
+            "pairs": valid_power_law_rows(beta=1.2),
+            "g12": [0.25, 0.5, 1.0, 2.0, 4.0],
+            "omega_e2_sq": [
+                2.0 * math.pow(0.25, 1.2),
+                2.0 * math.pow(0.5, 1.2),
+                2.0,
+                2.0 * math.pow(2.0, 1.2),
+                2.0 * math.pow(4.0, 1.2),
+            ],
+        },
+        "mixed_forms",
+    )
+
+    assert result.returncode != 0
+    assert "provides both pairs and array fields; choose one form" in (
+        result.stdout + result.stderr
+    )
+
+
+def test_ns_clay_calc12_route_selector_rejects_malformed_top_level_datasets(
+    tmp_path: Path,
+) -> None:
+    result = run_selector_expect_failure(
+        tmp_path,
+        {"datasets": "not-a-list"},
+        "malformed_datasets",
+    )
+
+    assert result.returncode != 0
+    assert "top-level datasets must be a non-empty list" in (result.stdout + result.stderr)
+
+
+def test_ns_clay_calc12_route_selector_rejects_too_few_positive_filtered_pairs(
+    tmp_path: Path,
+) -> None:
+    result = run_selector_expect_failure(
+        tmp_path,
+        {
+            "datum_id": "too_few_positive",
+            "pairs": [
+                {"g12": 0.25, "omega_e2_sq": 2.0 * math.pow(0.25, 1.1)},
+                {"g12": 0.5, "omega_e2_sq": 2.0 * math.pow(0.5, 1.1)},
+                {"g12": 0.0, "omega_e2_sq": 1.0},
+                {"g12": 1.0, "omega_e2_sq": -1.0},
+            ],
+        },
+        "too_few_positive",
+    )
+
+    assert result.returncode != 0
+    assert "at least 3 finite positive pairs are required after filtering; got 2" in (
+        result.stdout + result.stderr
+    )

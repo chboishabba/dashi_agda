@@ -66,6 +66,20 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
         "proof_blocking": False,
         "no_further_calcs_blocking": True,
     }
+    expected_calc12_result_summary = {
+        "source_artifact": (
+            "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json"
+        ),
+        "calc": "Calc12",
+        "route_selector": "statistical",
+        "beta": 2.2754974180523737,
+        "beta_CI_95": [2.129779448947756, 2.4212153871569915],
+        "r_squared": 0.13893110418597066,
+        "aggregate_decision": "regularity_consistent",
+        "proof_blocking": False,
+        "clay_promotion": False,
+        "theorem_promotion": False,
+    }
 
     assert payload["contract"] == "ns_clay_post_calc11_summary"
     assert payload["version"] == 1
@@ -89,6 +103,7 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
     assert payload["clay_hard_core"] == "collapseImpossible"
     assert payload["optional_next_calc"] == expected_calc12
     assert payload["calc12_route_selector"] == expected_calc12
+    assert payload["calc12_result_summary"] == expected_calc12_result_summary
     assert payload["optional_next_calc_blocks_proof"] is False
     assert payload["calc12_executable"] is True
     assert payload["calc12_pair_builder_script"] == "scripts/ns_clay_calc12_pair_builder.py"
@@ -98,6 +113,16 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
     )
     assert payload["clay_promotion"] is False
     assert payload["theorem_promotion"] is False
+    assert payload["calc12_result_summary"]["source_artifact"] == (
+        "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json"
+    )
+    assert payload["calc12_result_summary"]["beta"] == 2.2754974180523737
+    assert payload["calc12_result_summary"]["beta_CI_95"] == [
+        2.129779448947756,
+        2.4212153871569915,
+    ]
+    assert payload["calc12_result_summary"]["r_squared"] == 0.13893110418597066
+    assert payload["calc12_result_summary"]["aggregate_decision"] == "regularity_consistent"
     assert payload["calc12_route_selector"]["script"] == "scripts/ns_clay_calc12_route_selector.py"
     assert (
         payload["calc12_route_selector"]["pair_builder_script"]
@@ -132,6 +157,7 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
         payload["control_card"]["calc12_expected_real_run_artifact"]
         == "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json"
     )
+    assert payload["control_card"]["calc12_result_summary"] == expected_calc12_result_summary
     assert payload["control_card"]["proof_blocking"] is False
     assert payload["control_card"]["no_further_calcs_blocking"] is True
 
@@ -156,3 +182,7 @@ def test_post_calc11_summary_validator_rejects_tampering_and_hash_changes() -> N
     tampered_calc12 = json.loads(json.dumps(payload))
     tampered_calc12["calc12_expected_real_run_artifact"] = "scripts/data/outputs/wrong.json"
     assert module.validate_payload(tampered_calc12) is False
+
+    tampered_result_summary = json.loads(json.dumps(payload))
+    tampered_result_summary["calc12_result_summary"]["aggregate_decision"] = "inconclusive"
+    assert module.validate_payload(tampered_result_summary) is False

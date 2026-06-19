@@ -99,6 +99,23 @@ def _run_builder(tmp_path: Path, input_path: Path, *extra_args: str) -> tuple[di
     return file_payload, output_path
 
 
+def _run_builder_expect_failure(tmp_path: Path, *argv_tail: str) -> subprocess.CompletedProcess[str]:
+    _require_script()
+    output_path = tmp_path / "calc12_pairs.json"
+    completed = _invoke_builder(
+        [
+            sys.executable,
+            str(SCRIPT),
+            *argv_tail,
+            "--output",
+            str(output_path),
+        ]
+    )
+    assert completed.returncode != 0
+    assert not output_path.exists()
+    return completed
+
+
 def _pair_entries(payload: dict[str, Any]) -> list[dict[str, Any]]:
     if "datasets" in payload:
         datasets = payload["datasets"]
@@ -163,6 +180,128 @@ def test_pair_builder_computes_omega_e2_sq_from_fraction_times_omega_sq(tmp_path
         (2.0, 4.0),
         (3.0, 9.0),
     ]
+
+
+def test_pair_builder_expands_directory_inputs(tmp_path: Path) -> None:
+    input_dir = tmp_path / "calc12_inputs"
+    input_dir.mkdir()
+    first_input = input_dir / "alpha.npz"
+    second_input = input_dir / "beta.npz"
+
+    _write_fixture(
+        first_input,
+        g12=[1.0, 2.0],
+        lambda2=[0.0, 0.02],
+        omega_e2_sq=[10.0, 20.0],
+        datum_id="alpha",
+    )
+    _write_fixture(
+        second_input,
+        g12=[3.0, 4.0],
+        lambda2=[-0.01, 0.08],
+        omega_e2_sq=[30.0, 40.0],
+        datum_id="beta",
+    )
+
+    payload, _ = _run_builder(tmp_path, input_dir, "--lambda2-band", "0.05")
+
+    dataset = payload["datasets"][0]
+    assert dataset["metadata"]["source_count"] == 2
+    assert dataset["metadata"]["source_paths"] == [str(first_input.resolve()), str(second_input.resolve())]
+    assert _sorted_g12_omega_pairs(payload) == [
+        (1.0, 10.0),
+        (2.0, 20.0),
+        (3.0, 30.0),
+    ]
+
+
+def test_pair_builder_deduplicates_repeated_inputs(tmp_path: Path) -> None:
+    input_path = tmp_path / "duplicate_input_fixture.npz"
+    _write_fixture(
+        input_path,
+        g12=[5.0, 1.0, 4.0, 2.0],
+        lambda2=[0.0, -0.01, 0.01, -0.02],
+        omega_e2_sq=[50.0, 10.0, 40.0, 20.0],
+        datum_id="duplicate-input",
+    )
+
+    _require_script()
+    output_path = tmp_path / "calc12_pairs.json"
+    completed = _invoke_builder(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--input",
+            str(input_path),
+            "--input",
+            str(input_path),
+            "--output",
+            str(output_path),
+            "--lambda2-band",
+            "0.05",
+        ]
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert output_path.exists(), "builder did not write the requested output file"
+
+    payload = json.loads(completed.stdout)
+    file_payload = json.loads(output_path.read_text(encoding="utf-8"))
+    assert payload == file_payload
+    dataset = payload["datasets"][0]
+    assert dataset["metadata"]["source_count"] == 1
+    assert dataset["metadata"]["source_paths"] == [str(input_path.resolve())]
+    assert dataset["metadata"]["pair_count_raw"] == 4
+    assert dataset["metadata"]["pair_count_used"] == 4
+    assert _sorted_g12_omega_pairs(payload) == [
+        (1.0, 10.0),
+        (2.0, 20.0),
+        (4.0, 40.0),
+        (5.0, 50.0),
+    ]
+
+
+def test_pair_builder_rejects_negative_lambda2_band_fail_closed(tmp_path: Path) -> None:
+    input_path = tmp_path / "negative_lambda2_band_fixture.npz"
+    _write_fixture(
+        input_path,
+        g12=[1.0],
+        lambda2=[0.0],
+        omega_e2_sq=[10.0],
+        datum_id="negative-lambda2-band",
+    )
+
+    completed = _run_builder_expect_failure(
+        tmp_path,
+        "--input",
+        str(input_path),
+        "--lambda2-band",
+        "-0.01",
+    )
+    assert "--lambda2-band must be non-negative" in (completed.stdout + completed.stderr)
+
+
+@pytest.mark.parametrize("max_pairs", [0, -1])
+def test_pair_builder_rejects_nonpositive_max_pairs_fail_closed(
+    tmp_path: Path,
+    max_pairs: int,
+) -> None:
+    input_path = tmp_path / f"nonpositive_max_pairs_{max_pairs}.npz"
+    _write_fixture(
+        input_path,
+        g12=[1.0],
+        lambda2=[0.0],
+        omega_e2_sq=[10.0],
+        datum_id=f"nonpositive-max-pairs-{max_pairs}",
+    )
+
+    completed = _run_builder_expect_failure(
+        tmp_path,
+        "--input",
+        str(input_path),
+        "--max-pairs",
+        str(max_pairs),
+    )
+    assert "--max-pairs must be positive" in (completed.stdout + completed.stderr)
 
 
 def test_pair_builder_rejects_missing_omega_fields_fail_closed(tmp_path: Path) -> None:
