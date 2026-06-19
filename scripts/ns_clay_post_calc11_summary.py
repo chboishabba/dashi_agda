@@ -18,23 +18,42 @@ DEFAULT_OUTPUT = Path("outputs") / f"{CONTRACT}.json"
 CONTROL_CARD = {
     "O": "Worker 5 owns the post-Calc-11 NS Clay summary ledger.",
     "R": (
-        "Record post-Calc-11 state fields, closeable-package summary,"
-        " remaining hard walls, and non-promotion checks in one fail-closed"
-        " JSON ledger."
+        "Record post-Calc-11 state fields, the Calc12 optional route selector,"
+        " closeable-package summary, remaining hard walls, and non-promotion"
+        " checks in one fail-closed JSON ledger."
     ),
     "C": "A deterministic Python stdlib CLI emits canonical JSON and validates it before exit.",
     "S": "The lane is governance/status reporting, not proof production.",
     "L": (
-        "post_calc11 -> closeable_packages -> remaining_hard_walls -> non_promotion"
-        " -> parity_hash -> validation"
+        "post_calc11 -> calc12_route_selector -> closeable_packages"
+        " -> remaining_hard_walls -> non_promotion -> parity_hash -> validation"
     ),
-    "P": "Use the ledger as a checkpoint summary for downstream non-promoting checks.",
+    "P": "Use the ledger as a checkpoint summary for downstream non-promoting checks; Calc12 stays optional.",
     "G": (
         "Validation passes only when calc11 is marked complete/no_special_alignment,"
-        " no further calcs are blocking, the closeable package list is exact (7),"
-        " remaining hard walls are unchanged, and no theorem/clay promotion is true."
+        " Calc12 remains an optional non-blocking route selector, no further calcs"
+        " are blocking, the closeable package list is exact (7), remaining hard"
+        " walls are unchanged, and no theorem/clay promotion is true."
     ),
-    "F": "No theorem promotion and no Clay promotion are encoded as explicit false fields.",
+    "F": (
+        "No theorem promotion, no Clay promotion, proof_blocking False, and"
+        " no_further_calcs_blocking True are encoded as explicit fields."
+    ),
+    "calc12_route_selector": {
+        "calc": "Calc12",
+        "route_selector": "statistical",
+        "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+        "beta_decision_thresholds": {
+            ">1": "regularity_consistent",
+            "<1": "blowup_precursor",
+            "CI straddles 1": "inconclusive",
+        },
+        "proof_blocking": False,
+        "no_further_calcs_blocking": True,
+    },
+    "optional_next_calc_blocks_proof": False,
+    "proof_blocking": False,
+    "no_further_calcs_blocking": True,
 }
 
 CLOSEABLE_PACKAGES: tuple[str, ...] = (
@@ -50,7 +69,18 @@ CLOSEABLE_PACKAGES: tuple[str, ...] = (
 REMNANT_HARD_WALLS: tuple[str, ...] = ("KornLevelSet", "collapseImpossible")
 
 CLAY_HARD_CORE = "collapseImpossible"
-OPTIONAL_NEXT_CALC = "Calc12:parametric_omega_e2_scaling_study"
+CALC12_ROUTE_SELECTOR = {
+    "calc": "Calc12",
+    "route_selector": "statistical",
+    "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+    "beta_decision_thresholds": {
+        ">1": "regularity_consistent",
+        "<1": "blowup_precursor",
+        "CI straddles 1": "inconclusive",
+    },
+    "proof_blocking": False,
+    "no_further_calcs_blocking": True,
+}
 
 
 REQUIRED_KEYS = (
@@ -66,7 +96,9 @@ REQUIRED_KEYS = (
     "hard_wall_count",
     "clay_hard_core",
     "optional_next_calc",
+    "calc12_route_selector",
     "optional_next_calc_blocks_proof",
+    "proof_blocking",
     "clay_promotion",
     "theorem_promotion",
     "parity_hash",
@@ -98,8 +130,10 @@ def build_payload() -> dict[str, Any]:
         "remaining_hard_walls": list(REMNANT_HARD_WALLS),
         "hard_wall_count": len(REMNANT_HARD_WALLS),
         "clay_hard_core": CLAY_HARD_CORE,
-        "optional_next_calc": OPTIONAL_NEXT_CALC,
+        "optional_next_calc": CALC12_ROUTE_SELECTOR,
+        "calc12_route_selector": CALC12_ROUTE_SELECTOR,
         "optional_next_calc_blocks_proof": False,
+        "proof_blocking": False,
         "clay_promotion": False,
         "theorem_promotion": False,
         "parity_hash": "",
@@ -150,9 +184,13 @@ def validate_payload(payload: dict[str, Any]) -> bool:
         return False
     if payload.get("clay_hard_core") != CLAY_HARD_CORE:
         return False
-    if payload.get("optional_next_calc") != OPTIONAL_NEXT_CALC:
+    if payload.get("optional_next_calc") != CALC12_ROUTE_SELECTOR:
+        return False
+    if payload.get("calc12_route_selector") != CALC12_ROUTE_SELECTOR:
         return False
     if payload.get("optional_next_calc_blocks_proof") is not False:
+        return False
+    if payload.get("proof_blocking") is not False:
         return False
 
     if payload.get("clay_promotion") is not False:

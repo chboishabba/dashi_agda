@@ -21,15 +21,37 @@ CONTRACT = "ns_clay_proof_package_ledger"
 DEFAULT_OUTPUT = Path("outputs") / f"{CONTRACT}.json"
 ALLOWED_STATUSES = ("closeable", "open", "Clay")
 
+CALC12_ROUTE_SELECTOR = {
+    "calc": "Calc12",
+    "route_selector": "statistical",
+    "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+    "beta_decision_thresholds": {
+        ">1": "regularity_consistent",
+        "<1": "blowup_precursor",
+        "CI straddles 1": "inconclusive",
+    },
+    "proof_blocking": False,
+    "no_further_calcs_blocking": True,
+}
+
 CONTROL_CARD = {
     "O": "Worker lane 4 owns the NS Clay proof-package ledger emitter.",
-    "R": "Record proof packages 1-10 from existing NS calc JSON artifacts without promoting any theorem.",
+    "R": (
+        "Record proof packages 1-10 from existing NS calc JSON artifacts,"
+        " while carrying the Calc12 optional route selector, without promoting"
+        " any theorem."
+    ),
     "C": "A deterministic Python stdlib CLI writes compact JSON and validates every referenced artifact path.",
     "S": "The repo already carries NS Clay-related summary artifacts for width, cutoff, dissipation, BKM, closure, and bridge work.",
-    "L": "Existing JSON artifacts -> validated package records -> compact ledger -> no theorem promotion.",
-    "P": "Use this ledger as a package-status receipt only; it is not a proof completion certificate.",
+    "L": "Existing JSON artifacts -> validated package records -> Calc12 route selector -> compact ledger -> no theorem promotion.",
+    "P": "Use this ledger as a package-status receipt only; Calc12 remains optional and it is not a proof completion certificate.",
     "G": "Validation passes only when packages 1-10 are present, every referenced file exists, and all statuses are in the allowed set.",
-    "F": "No Clay theorem is promoted by this ledger; open and closeable status labels remain descriptive only.",
+    "F": (
+        "No Clay theorem is promoted by this ledger; open and closeable status"
+        " labels remain descriptive only, and the Calc12 route selector is"
+        " non-blocking."
+    ),
+    "optional_next_calc_blocks_proof": False,
     "first_six_are_formalization": True,
     "hard_theorem_count": 2,
     "hard_theorems": ["KornLevelSet", "collapseImpossible"],
@@ -39,10 +61,12 @@ CONTROL_CARD = {
     "calc11_status": "complete_no_special_alignment",
     "empirical_diagnostics_complete": True,
     "no_further_calcs_blocking": True,
+    "proof_blocking": False,
     "remaining_math_wall": ["KornLevelSet", "collapseImpossible"],
     "hard_wall_count": 2,
     "hard_walls": ["KornLevelSet", "collapseImpossible"],
     "clay_hard_core": "collapseImpossible",
+    "calc12_route_selector": CALC12_ROUTE_SELECTOR,
     "post_calc11": {
         "closeable_package_count": 7,
         "hard_wall_count": 2,
@@ -52,6 +76,14 @@ CONTROL_CARD = {
         "optional_next_calc": {
             "calc": "Calc12",
             "route_selector": "statistical",
+            "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+            "beta_decision_thresholds": {
+                ">1": "regularity_consistent",
+                "<1": "blowup_precursor",
+                "CI straddles 1": "inconclusive",
+            },
+            "proof_blocking": False,
+            "no_further_calcs_blocking": True,
             "blocking": False,
         },
     },
@@ -324,10 +356,12 @@ def build_payload(repo_root: Path, specs: list[dict[str, Any]]) -> dict[str, Any
         "empirical_diagnostics_complete": True,
         "closeable_package_count": 7,
         "no_further_calcs_blocking": True,
+        "proof_blocking": False,
         "remaining_math_wall": ["KornLevelSet", "collapseImpossible"],
         "hard_wall_count": 2,
         "hard_walls": ["KornLevelSet", "collapseImpossible"],
         "clay_hard_core": "collapseImpossible",
+        "calc12_route_selector": CALC12_ROUTE_SELECTOR,
         "formal_packages_write_now": [
             "millerToH5",
             "GD3-SobolevBound-Correct",
@@ -351,6 +385,14 @@ def build_payload(repo_root: Path, specs: list[dict[str, Any]]) -> dict[str, Any
             "optional_next_calc": {
                 "calc": "Calc12",
                 "route_selector": "statistical",
+                "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+                "beta_decision_thresholds": {
+                    ">1": "regularity_consistent",
+                    "<1": "blowup_precursor",
+                    "CI straddles 1": "inconclusive",
+                },
+                "proof_blocking": False,
+                "no_further_calcs_blocking": True,
                 "blocking": False,
             },
         },

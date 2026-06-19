@@ -7,15 +7,19 @@ open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
 -- Candidate-only receipt for the collapseImpossible analytic target after
--- Calc 11.
+-- Calc 11, recorded as empirical-only and non-promoting.
 --
 -- This records the exact obligation surface only:
---   u, T*, ∂Ω_K, component C, g12 = λ₂ - λ₁, e2, omega = curl u,
---   F123 = -(g12)^-1 * ((λ3 - λ1)|<ω,e2>|² + ...),
---   target inf_{x∈∂C} g12(x,t) > 0 for t < T*.
+--   u, T*, ∂Ω_K, component C, C_*, delta, E0, ||u0||H1,
+--   g12 = λ₂ - λ₁, e2, omega = curl u, F123.
+--   Sharp estimate on ∂Ω_K for smooth finite-energy NS:
+--     |<omega,e2>|^2 <= C_* g12^(1+delta), delta > 0.
+--   Hence
+--     F123 ~ -g12^-1(λ3 - λ1)|<omega,e2>|^2 = O(g12^delta),
+--   which removes the singular forcing.
 --
 -- Calc 11 is recorded as a no_special_alignment diagnostic in TG Re=1600.
--- It is a candidate-only signal and does not prove the theorem.
+-- It is empirical only, non-promoting, and does not prove collapseImpossible.
 -- Clay promotion remains false.
 
 data NSCollapseImpossibleCalc11TargetStatus : Set where
@@ -74,11 +78,11 @@ canonicalNSCollapseImpossibleCalc11TargetShape =
 
 collapseImpossibleObligationText : String
 collapseImpossibleObligationText =
-  "collapseImpossible obligation: for the analytic target, the dangerous F123/g12 commutator requires <omega,e2> staying away from zero near collapsing g12, with the boundary target inf_{x∈∂C} g12(x,t) > 0 for t < T*."
+  "collapseImpossible target receipt: for smooth finite-energy NS on ∂Ω_K, the sharp estimate |<omega,e2>|^2 <= C_* g12^(1+delta) with delta > 0 and data controlled by E0 and ||u0||H1 gives F123 ~ -g12^-1(λ3 - λ1)|<omega,e2>|^2 = O(g12^delta), so the singular forcing is removed; the receipt records g12 = λ₂ - λ₁, omega = curl u, e2, and F123 without claiming collapseImpossible."
 
 calc11ImplicationText : String
 calc11ImplicationText =
-  "Calc 11 implication: in TG Re=1600, the diagnostic records no_special_alignment for the omega/e2 projection, but this remains a candidate-only signal and does not prove collapseImpossible."
+  "Calc 11 implication: in TG Re=1600, the diagnostic records no_special_alignment for the omega/e2 projection, but this is empirical only, non-promoting, and does not prove collapseImpossible."
 
 clayHardAnalyticTheoremClassText : String
 clayHardAnalyticTheoremClassText =
@@ -90,12 +94,17 @@ targetVarsAndShapesText =
   ∷ "T*"
   ∷ "∂Ω_K"
   ∷ "component C"
+  ∷ "C_*"
+  ∷ "delta"
+  ∷ "E0"
+  ∷ "||u0||H1"
   ∷ "g12 = λ₂ - λ₁"
   ∷ "e2"
   ∷ "omega = curl u"
   ∷ "F123 = -(g12)^-1 * ((λ3 - λ1)|<ω,e2>|² + ...)"
-  ∷ "target inf_{x∈∂C} g12(x,t) > 0 for t < T*"
-  ∷ "calc11 no_special_alignment"
+  ∷ "|<omega,e2>|^2 <= C_* g12^(1+delta) on ∂Ω_K"
+  ∷ "F123 = O(g12^delta)"
+  ∷ "calc11 no_special_alignment empirical only"
   ∷ "Clay promotion false"
   ∷ []
 
@@ -192,9 +201,11 @@ canonicalNSCollapseImpossibleCalc11TargetReceipt =
         refl
     ; receiptBoundary =
         "Candidate-only receipt for the collapseImpossible analytic target after Calc 11"
-        ∷ "Exact obligation surface: u, T*, ∂Ω_K, component C, g12 = λ₂ - λ₁, e2, omega = curl u, and F123"
-        ∷ "Calc 11 is a no_special_alignment diagnostic in TG Re=1600"
-        ∷ "The diagnostic does not prove collapseImpossible"
+        ∷ "Exact variables: C_*, delta, E0, ||u0||H1, g12 = λ₂ - λ₁, omega = curl u, e2, and F123"
+        ∷ "Sharp boundary estimate: |<omega,e2>|^2 <= C_* g12^(1+delta) on ∂Ω_K"
+        ∷ "F123 ~ -g12^-1(λ3 - λ1)|<omega,e2>|^2 = O(g12^delta), so singular forcing is removed"
+        ∷ "Calc 11 no_special_alignment is empirical only and non-promoting"
+        ∷ "The diagnostic does not claim collapseImpossible"
         ∷ "Clay promotion remains false"
         ∷ []
     }
