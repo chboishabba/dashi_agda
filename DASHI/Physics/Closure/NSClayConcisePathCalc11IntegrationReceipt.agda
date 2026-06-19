@@ -14,9 +14,10 @@ open import Data.List.Base using (List; _∷_; [])
 -- This is a boundary/coordination surface only.  It links the recent ledger
 -- receipts by canonical label, and it keeps promotion explicitly false.  Calc
 -- 11 is now recorded as complete with no_special_alignment, the coarea and
--- StepA wiring are recorded, no further calcs are blocking, and the remaining
--- analytic wall is KornLevelSet plus collapseImpossible.  No theorem
--- promotion is recorded here.
+-- StepA wiring are recorded, the optional Calc12 route-selector is recorded
+-- as non-blocking/non-promoting, and the remaining analytic wall is
+-- KornLevelSet plus collapseImpossible.  No theorem promotion is recorded
+-- here.
 
 data NSClayConcisePathCalc11IntegrationStatus : Set where
   ledgerLinkedCalc11CompleteAndCandidateOnly :
@@ -68,17 +69,18 @@ linkedReceiptLabels =
   "ClayDistanceConcisePathProofPackageLedgerReceipt"
   ∷ "CurrentProofProfileReceipt"
   ∷ "NSVorticityE2ProjectionCalc11Receipt"
+  ∷ "NSCalc12ParametricOmegaE2ScalingReceipt"
   ∷ "NSKatoHessianConfinementReceipt"
   ∷ "NSA4DerivativeJacobianLowerBoundCompositeBoundaryReceipt"
   ∷ []
 
 integrationStatement : String
 integrationStatement =
-  "NS concise-path integration stays candidate-only: the recent proof-package ledgers are linked, Calc 11 is recorded complete with no_special_alignment, the coarea/StepA wiring is recorded, no further calcs are blocking, the remaining analytic wall is KornLevelSet plus collapseImpossible, and no theorem promotion is recorded."
+  "NS concise-path integration stays candidate-only: the recent proof-package ledgers are linked, Calc 11 is recorded complete with no_special_alignment, the coarea/StepA wiring is recorded, the optional Calc12 route-selector is non-blocking and can characterize beta/delta or a blowup precursor candidate, the remaining analytic wall is KornLevelSet plus collapseImpossible, and no theorem promotion is recorded."
 
 integrationBoundary : String
 integrationBoundary =
-  "This receipt is a coordination ledger only.  It links existing receipts for the concise path, Calc 11 completion, coarea, and StepA surfaces, and it keeps Clay promotion false."
+  "This receipt is a coordination ledger only.  It links existing receipts for the concise path, Calc 11 completion, optional Calc12 routing, coarea, and StepA surfaces, and it keeps Clay promotion false."
 
 organizationString : String
 organizationString =
@@ -86,7 +88,7 @@ organizationString =
 
 requirementString : String
 requirementString =
-  "R: Record Calc 11 as complete with no_special_alignment, record the coarea/StepA wiring, keep no further calcs blocking, and keep every theorem-promotion flag false."
+  "R: Record Calc 11 as complete with no_special_alignment, record the coarea/StepA wiring, keep the optional Calc12 route-selector non-blocking, and keep every theorem-promotion flag false."
 
 codeArtifactString : String
 codeArtifactString =
@@ -94,23 +96,23 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "S: ClayDistanceConcisePathProofPackageLedgerReceipt, CurrentProofProfileReceipt, NSVorticityE2ProjectionCalc11Receipt, NSKatoHessianConfinementReceipt, and NSA4DerivativeJacobianLowerBoundCompositeBoundaryReceipt are linked here; Calc 11 complete/no_special_alignment and coarea/StepA wiring are recorded, no further calcs block, the KornLevelSet plus collapseImpossible wall remains, and no theorem promotion is claimed."
+  "S: ClayDistanceConcisePathProofPackageLedgerReceipt, CurrentProofProfileReceipt, NSVorticityE2ProjectionCalc11Receipt, NSCalc12ParametricOmegaE2ScalingReceipt, NSKatoHessianConfinementReceipt, and NSA4DerivativeJacobianLowerBoundCompositeBoundaryReceipt are linked here; Calc 11 complete/no_special_alignment and coarea/StepA wiring are recorded, the optional Calc12 route-selector is non-blocking, the KornLevelSet plus collapseImpossible wall remains, and no theorem promotion is claimed."
 
 latticeString : String
 latticeString =
-  "L: ledger linkage -> Calc 11 complete/no_special_alignment -> coarea/StepA wiring recorded -> no further calcs blocking -> KornLevelSet plus collapseImpossible wall -> later theorem promotion only if a separate proof receipt is added."
+  "L: ledger linkage -> Calc 11 complete/no_special_alignment -> optional Calc12 non-blocking route-selector -> coarea/StepA wiring recorded -> KornLevelSet plus collapseImpossible wall -> later theorem promotion only if a separate proof receipt is added."
 
 proposalString : String
 proposalString =
-  "P: Use this receipt as the coordination boundary for the next worker: keep the Calc 11 completion and no_special_alignment record fixed, preserve the coarea and StepA wiring record, and work the KornLevelSet plus collapseImpossible wall without turning the ledger into a theorem claim."
+  "P: Use this receipt as the coordination boundary for the next worker: keep the Calc 11 completion and no_special_alignment record fixed, preserve the coarea and StepA wiring record, keep Calc12 non-blocking, and work the KornLevelSet plus collapseImpossible wall without turning the ledger into a theorem claim."
 
 governanceString : String
 governanceString =
-  "G: Fail closed; promotion flags stay false, imported receipts remain evidence-only, and no theorem promotion is introduced by this module."
+  "G: Fail closed; promotion flags stay false, imported receipts remain evidence-only, Calc12 stays non-promoting, and no theorem promotion is introduced by this module."
 
 gapString : String
 gapString =
-  "F: No further calcs are blocking; the remaining analytic wall is KornLevelSet plus collapseImpossible, while promotion stays false."
+  "F: No further calcs are blocking; Calc12 is optional and non-blocking, the remaining analytic wall is KornLevelSet plus collapseImpossible, BoundaryHB_Correct stays closeable, and promotion stays false."
 
 record NSClayConcisePathCalc11IntegrationORCSLPGF : Set where
   constructor mkNSClayConcisePathCalc11IntegrationORCSLPGF
@@ -188,8 +190,8 @@ record NSClayConcisePathCalc11IntegrationReceipt : Setω where
     linkedReceiptCount :
       Nat
 
-    linkedReceiptCountIsFive :
-      linkedReceiptCount ≡ 5
+    linkedReceiptCountIsSix :
+      linkedReceiptCount ≡ 6
 
     activeNextActionLane :
       List NSClayConcisePathCalc11IntegrationAction
@@ -248,8 +250,8 @@ canonicalNSClayConcisePathCalc11IntegrationReceipt =
     ; linkedReceiptsAreCanonical =
         refl
     ; linkedReceiptCount =
-        5
-    ; linkedReceiptCountIsFive =
+        6
+    ; linkedReceiptCountIsSix =
         refl
     ; activeNextActionLane =
         canonicalNSClayConcisePathCalc11IntegrationActions

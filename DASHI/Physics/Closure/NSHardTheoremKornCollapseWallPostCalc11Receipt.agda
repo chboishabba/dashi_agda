@@ -14,12 +14,18 @@ open import Agda.Builtin.String using (String)
 -- BoundaryHB_Correct is closeable from pointwise kornBiaxialBound /
 -- nondegeneracy and is not counted as a hard wall.
 --
+-- Calc 12 stays an optional, non-blocking statistical route selector for
+-- |<omega,e2>|^2 ~ C*g12^beta: beta > 1 points toward delta = beta - 1,
+-- beta < 1 marks a blowup-precursor candidate, and a CI straddling 1 is
+-- inconclusive.
+--
 -- KornLevelSet still needs h_sd / h_omega_ctrl from NS, with
 -- alpha_s empirically near 0.5 but unproved.
 -- collapseImpossible still needs control of |<omega,e2>|^2 versus g12,
--- especially the estimate |<omega,e2>|^2 <= C*g12^(1+delta), while the
--- F123/g12 term remains dangerous.
--- Calc 11 no_special_alignment is recorded as empirical only.
+-- especially the estimate |<omega,e2>|^2 <= C_* g12^(1+delta), delta > 0,
+-- with F123 = O(g12^delta) as the consequence if proved.
+-- Calc 11 no_special_alignment is recorded as empirical only and
+-- non-promoting.
 
 data NSHardTheoremKornCollapseWallPostCalc11Status : Set where
   candidateOnlyFailClosed :
@@ -72,7 +78,7 @@ record NSHardTheoremKornCollapseWallPostCalc11ORCSLPGF : Set where
       String
     SIsCanonical :
       S ≡
-      "KornLevelSet needs h_sd and h_omega_ctrl from NS with alpha_s ~ 0.5 empirical-only; collapseImpossible needs |<omega,e2>|^2 <= C*g12^(1+delta). BoundaryHB_Correct closes from pointwise kornBiaxialBound / nondegeneracy and is not a hard wall."
+      "KornLevelSet needs h_sd and h_omega_ctrl from NS with alpha_s ~ 0.5 empirical-only; collapseImpossible needs |<omega,e2>|^2 <= C_* g12^(1+delta), delta > 0, with F123 = O(g12^delta) if proved. BoundaryHB_Correct closes from pointwise kornBiaxialBound / nondegeneracy and is not a hard wall."
 
     L :
       String
@@ -84,19 +90,19 @@ record NSHardTheoremKornCollapseWallPostCalc11ORCSLPGF : Set where
       String
     PIsCanonical :
       P ≡
-      "Track KornLevelSet and collapseImpossible as the only hard walls, keep BoundaryHB_Correct closeable, and keep promotion false."
+      "Track KornLevelSet and collapseImpossible as the only hard walls, keep BoundaryHB_Correct closeable, keep Calc 12 optional and non-blocking, and keep promotion false."
 
     G :
       String
     GIsCanonical :
       G ≡
-      "Fail closed on KornLevelSet, collapseImpossible, Clay, and terminal promotion; do not count BoundaryHB_Correct as a hard wall."
+      "Fail closed on KornLevelSet, collapseImpossible, theorem_authority, Clay, and terminal promotion; do not count BoundaryHB_Correct as a hard wall."
 
     F :
       String
     FIsCanonical :
       F ≡
-      "Missing analytic proof of KornLevelSet and of |<omega,e2>|^2 <= C*g12^(1+delta), with F123/g12 still dangerous; BoundaryHB_Correct is only a closeable boundary case."
+      "Missing analytic proof of KornLevelSet and of |<omega,e2>|^2 <= C_* g12^(1+delta), delta > 0, with F123 = O(g12^delta) still unproved; BoundaryHB_Correct is only a closeable boundary case."
 
 open NSHardTheoremKornCollapseWallPostCalc11ORCSLPGF public
 
@@ -109,7 +115,7 @@ kornLevelSetExactVariablesText =
 
 kornLevelSetWallTextValue : String
 kornLevelSetWallTextValue =
-  "KornLevelSet needs h_sd and h_omega_ctrl from NS; alpha_s is empirically ~0.5 and remains empirical-only."
+      "KornLevelSet needs h_sd and h_omega_ctrl from NS; alpha_s is empirically ~0.5 and remains empirical-only."
 
 collapseImpossibleExactVariablesText : List String
 collapseImpossibleExactVariablesText =
@@ -128,7 +134,7 @@ collapseImpossibleExactVariablesText =
 
 collapseImpossibleWallTextValue : String
 collapseImpossibleWallTextValue =
-  "collapseImpossible needs control of |<omega,e2>|^2 versus g12, especially |<omega,e2>|^2 <= C*g12^(1+delta); the F123/g12 term remains dangerous, and Calc 11 no_special_alignment is empirical only."
+      "collapseImpossible needs control of |<omega,e2>|^2 versus g12, especially |<omega,e2>|^2 <= C_* g12^(1+delta), delta > 0, with F123 = O(g12^delta) if proved; Calc 11 no_special_alignment is empirical only and non-promoting."
 
 combinedWallOrderText : List String
 combinedWallOrderText =
@@ -138,7 +144,7 @@ combinedWallOrderText =
 
 candidateOnlyReceiptStatementValue : String
 candidateOnlyReceiptStatementValue =
-  "Candidate-only post-Calc-11 receipt for the two hard walls KornLevelSet and collapseImpossible: the first wall still needs h_sd / h_omega_ctrl and only has empirical alpha_s ~ 0.5 support, while the second wall still needs |<omega,e2>|^2 <= C*g12^(1+delta) and keeps the F123/g12 hazard open. BoundaryHB_Correct is closeable and not counted as a hard wall."
+      "Candidate-only post-Calc-11 receipt for the two hard walls KornLevelSet and collapseImpossible: the first wall still needs h_sd / h_omega_ctrl and only has empirical alpha_s ~ 0.5 support, while the second wall still needs |<omega,e2>|^2 <= C_* g12^(1+delta), delta > 0, with F123 = O(g12^delta) if proved. Calc 12 remains an optional non-blocking route selector: beta > 1 suggests delta = beta - 1, beta < 1 marks a blowup-precursor candidate, and a CI straddling 1 is inconclusive. BoundaryHB_Correct is closeable and not counted as a hard wall."
 
 canonicalNSHardTheoremKornCollapseWallPostCalc11ORCSLPGF :
   NSHardTheoremKornCollapseWallPostCalc11ORCSLPGF
@@ -150,15 +156,15 @@ canonicalNSHardTheoremKornCollapseWallPostCalc11ORCSLPGF =
     refl
     "This is a local receipt surface only; it does not discharge the analytic walls."
     refl
-    "KornLevelSet needs h_sd and h_omega_ctrl from NS with alpha_s ~ 0.5 empirical-only; collapseImpossible needs |<omega,e2>|^2 <= C*g12^(1+delta). BoundaryHB_Correct closes from pointwise kornBiaxialBound / nondegeneracy and is not a hard wall."
+    "KornLevelSet needs h_sd and h_omega_ctrl from NS with alpha_s ~ 0.5 empirical-only; collapseImpossible needs |<omega,e2>|^2 <= C_* g12^(1+delta), delta > 0, with F123 = O(g12^delta) if proved. BoundaryHB_Correct closes from pointwise kornBiaxialBound / nondegeneracy and is not a hard wall."
     refl
     "h_sd -> h_omega_ctrl -> alpha_s; omega -> e2 -> g12 -> F123 -> no_special_alignment; BoundaryHB_Correct -> pointwise kornBiaxialBound / nondegeneracy."
     refl
-    "Track KornLevelSet and collapseImpossible as the only hard walls, keep BoundaryHB_Correct closeable, and keep promotion false."
+    "Track KornLevelSet and collapseImpossible as the only hard walls, keep BoundaryHB_Correct closeable, keep Calc 12 optional and non-blocking, and keep promotion false."
     refl
-    "Fail closed on KornLevelSet, collapseImpossible, Clay, and terminal promotion; do not count BoundaryHB_Correct as a hard wall."
+    "Fail closed on KornLevelSet, collapseImpossible, theorem_authority, Clay, and terminal promotion; do not count BoundaryHB_Correct as a hard wall."
     refl
-    "Missing analytic proof of KornLevelSet and of |<omega,e2>|^2 <= C*g12^(1+delta), with F123/g12 still dangerous; BoundaryHB_Correct is only a closeable boundary case."
+    "Missing analytic proof of KornLevelSet and of |<omega,e2>|^2 <= C_* g12^(1+delta), delta > 0, with F123 = O(g12^delta) still unproved; BoundaryHB_Correct is only a closeable boundary case."
     refl
 
 record NSHardTheoremKornCollapseWallPostCalc11Receipt : Setω where
@@ -306,10 +312,11 @@ canonicalNSHardTheoremKornCollapseWallPostCalc11Receipt =
         "Candidate-only post-Calc-11 receipt for the two remaining hard analytic walls"
         ∷ "KornLevelSet keeps h_sd and h_omega_ctrl explicit"
         ∷ "alpha_s is empirical near 0.5 and stays empirical-only"
-        ∷ "collapseImpossible keeps |<omega,e2>|^2 <= C*g12^(1+delta) explicit"
-        ∷ "Calc 11 no_special_alignment remains empirical only"
+        ∷ "collapseImpossible keeps |<omega,e2>|^2 <= C_* g12^(1+delta), delta > 0, explicit"
+        ∷ "Calc 11 no_special_alignment remains empirical only and non-promoting"
+        ∷ "Calc 12 is an optional non-blocking route selector: beta > 1 -> delta = beta - 1; beta < 1 -> blowup precursor candidate; CI straddling 1 -> inconclusive"
         ∷ "BoundaryHB_Correct closes from pointwise kornBiaxialBound / nondegeneracy and is not a hard wall"
-        ∷ "KornLevelSet, collapseImpossible, Clay, and terminal promotion remain false"
+        ∷ "KornLevelSet, collapseImpossible, theorem_authority, Clay, and terminal promotion remain false"
         ∷ []
     }
 

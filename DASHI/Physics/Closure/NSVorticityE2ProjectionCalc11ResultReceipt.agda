@@ -14,6 +14,11 @@ open import Agda.Builtin.List using (List; []; _∷_)
 -- boundary mean is 0.432, the max value is 1.0 in isolated/scattered
 -- cells, percentile monotonicity fails, the decision is no_special_alignment,
 -- and Clay promotion stays false.
+--
+-- Calc 12 is only an optional, non-blocking statistical route selector:
+-- fit |<omega,e2>|^2 ~ C*g12^beta, treat beta > 1 as delta = beta - 1,
+-- treat beta < 1 as a blowup-precursor candidate, and treat any CI
+-- straddling 1 as inconclusive.
 
 data NSVorticityE2ProjectionCalc11ResultStatus : Set where
   candidateOnlyEmpiricalResultRecorded :
@@ -78,7 +83,7 @@ noSpecialAlignmentText = "no_special_alignment"
 
 collapseImpossibleImplicationText : String
 collapseImpossibleImplicationText =
-  "collapseImpossible remains unsupported by this Calc 11 receipt."
+  "collapseImpossible remains unsupported by this Calc 11 receipt; Calc 12 stays an optional non-blocking route selector."
 
 hStrainDomImplicationText : String
 hStrainDomImplicationText =
@@ -144,6 +149,16 @@ record NSVorticityE2ProjectionCalc11ResultReceipt : Set where
     clayPromotionIsFalse :
       clayPromotion ≡ false
 
+    theoremAuthority :
+      Bool
+    theoremAuthorityIsFalse :
+      theoremAuthority ≡ false
+
+    calculationAuthority :
+      Bool
+    calculationAuthorityIsFalse :
+      calculationAuthority ≡ false
+
     receiptBoundary :
       List String
 
@@ -197,6 +212,14 @@ canonicalNSVorticityE2ProjectionCalc11ResultReceipt =
         false
     ; clayPromotionIsFalse =
         refl
+    ; theoremAuthority =
+        false
+    ; theoremAuthorityIsFalse =
+        refl
+    ; calculationAuthority =
+        false
+    ; calculationAuthorityIsFalse =
+        refl
     ; receiptBoundary =
         "Calc 11 empirical result is candidate-only and non-promoting"
         ∷ "bottom-5% g12 cells mean omega_e2_fraction = 0.343"
@@ -205,9 +228,10 @@ canonicalNSVorticityE2ProjectionCalc11ResultReceipt =
         ∷ "max omega_e2_fraction = 1.0, isolated/scattered"
         ∷ "percentile monotonicity failure is recorded"
         ∷ "decision = no_special_alignment"
+        ∷ "Calc 12 is an optional non-blocking route selector: beta > 1 -> delta = beta - 1; beta < 1 -> blowup precursor candidate; CI straddling 1 -> inconclusive"
         ∷ "collapseImpossible remains unsupported here"
         ∷ "h_strain_dom is empirically consistent but unproved here"
-        ∷ "Clay promotion is false"
+        ∷ "theorem_authority is false and Clay promotion is false"
         ∷ []
     }
 

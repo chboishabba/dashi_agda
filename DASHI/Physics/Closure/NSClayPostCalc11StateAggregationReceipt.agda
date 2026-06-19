@@ -14,7 +14,9 @@ open import Data.Empty using (⊥)
 -- This is a checked string-label ledger only.  It aggregates the existing
 -- receipt names relevant to the Calc 11 / coarea / StepA / Clay-distance
 -- boundary, records the Calc 11 decision as a label, and keeps promotion
--- false.  No worker-authored modules are imported here.
+-- false.  Calc12 is recorded as an optional non-blocking route-selector only,
+-- with beta/delta characterization or a blowup-precursor candidate as a
+-- label-level possibility.  No worker-authored modules are imported here.
 
 data NSClayPostCalc11StateAggregationStatus : Set where
   candidateOnlyAggregationChecked :
@@ -29,6 +31,7 @@ nsClayPostCalc11StateAggregationPromotionImpossibleHere ()
 consultedReceiptNamesText : List String
 consultedReceiptNamesText =
   "NSClayConcisePathCalc11IntegrationReceipt"
+  ∷ "NSCalc12ParametricOmegaE2ScalingReceipt"
   ∷ "NSClayThreeHardTheoremsDistanceReceipt"
   ∷ "NSCollapseImpossibleCalc11TargetReceipt"
   ∷ "NSCoareaGradientStepAPerComponentReceipt"
@@ -40,8 +43,10 @@ calc11DecisionText = "Calc11 result complete/no_special_alignment"
 formalPackagesText : List String
 formalPackagesText =
   "Calc11 result complete/no_special_alignment"
+  ∷ "optional Calc12 non-blocking route-selector"
   ∷ "coarea/StepA wiring recorded"
   ∷ "proof ledger updated"
+  ∷ "no calcs block the proof ledger"
   ∷ []
 
 remainingAnalyticWallText : List String
@@ -62,7 +67,7 @@ record NSClayPostCalc11StateAggregationORCSLPGF : Set where
       String
     RIsCanonical :
       R ≡
-      "Aggregate existing receipt names and record the Calc11 / coarea / StepA boundary as string labels, with promotion false."
+      "Aggregate existing receipt names and record the Calc11 / optional Calc12 / coarea / StepA boundary as string labels, with promotion false."
 
     C :
       String
@@ -74,31 +79,31 @@ record NSClayPostCalc11StateAggregationORCSLPGF : Set where
       String
     SIsCanonical :
       S ≡
-      "NSClayConcisePathCalc11IntegrationReceipt, NSClayThreeHardTheoremsDistanceReceipt, NSCollapseImpossibleCalc11TargetReceipt, and NSCoareaGradientStepAPerComponentReceipt are the consulted source names."
+      "NSClayConcisePathCalc11IntegrationReceipt, NSCalc12ParametricOmegaE2ScalingReceipt, NSClayThreeHardTheoremsDistanceReceipt, NSCollapseImpossibleCalc11TargetReceipt, and NSCoareaGradientStepAPerComponentReceipt are the consulted source names."
 
     L :
       String
     LIsCanonical :
       L ≡
-      "consulted receipts -> Calc11 result complete/no_special_alignment -> coarea/StepA wiring recorded -> proof ledger updated -> remaining analytic wall"
+      "consulted receipts -> Calc11 result complete/no_special_alignment -> optional Calc12 non-blocking route-selector -> coarea/StepA wiring recorded -> proof ledger updated -> remaining analytic wall"
 
     P :
       String
     PIsCanonical :
       P ≡
-      "Use string-label aggregation only; no promotion or theorem discharge is recorded here."
+      "Use string-label aggregation only; no promotion or theorem discharge is recorded here, and Calc12 may characterize beta/delta or a blowup precursor candidate."
 
     G :
       String
     GIsCanonical :
       G ≡
-      "Fail closed on Clay promotion; candidate-only evidence remains read-only."
+      "Fail closed on Clay promotion; candidate-only evidence remains read-only, and Calc12 stays non-promoting."
 
     F :
       String
     FIsCanonical :
       F ≡
-      "KornLevelSet + collapseImpossible remains the open analytic wall."
+      "KornLevelSet + collapseImpossible remains the open analytic wall; BoundaryHB_Correct stays closeable."
 
 open NSClayPostCalc11StateAggregationORCSLPGF public
 
@@ -108,19 +113,19 @@ canonicalNSClayPostCalc11StateAggregationORCSLPGF =
   mkNSClayPostCalc11StateAggregationORCSLPGF
     "Worker 6 owns the post-Calc-11 NS Clay aggregation receipt only."
     refl
-    "Aggregate existing receipt names and record the Calc11 / coarea / StepA boundary as string labels, with promotion false."
+    "Aggregate existing receipt names and record the Calc11 / optional Calc12 / coarea / StepA boundary as string labels, with promotion false."
     refl
     "NSClayPostCalc11StateAggregationReceipt.agda is a local ledger surface only; it imports no worker-authored modules."
     refl
-    "NSClayConcisePathCalc11IntegrationReceipt, NSClayThreeHardTheoremsDistanceReceipt, NSCollapseImpossibleCalc11TargetReceipt, and NSCoareaGradientStepAPerComponentReceipt are the consulted source names."
+    "NSClayConcisePathCalc11IntegrationReceipt, NSCalc12ParametricOmegaE2ScalingReceipt, NSClayThreeHardTheoremsDistanceReceipt, NSCollapseImpossibleCalc11TargetReceipt, and NSCoareaGradientStepAPerComponentReceipt are the consulted source names."
     refl
-    "consulted receipts -> Calc11 result complete/no_special_alignment -> coarea/StepA wiring recorded -> proof ledger updated -> remaining analytic wall"
+    "consulted receipts -> Calc11 result complete/no_special_alignment -> optional Calc12 non-blocking route-selector -> coarea/StepA wiring recorded -> proof ledger updated -> remaining analytic wall"
     refl
-    "Use string-label aggregation only; no promotion or theorem discharge is recorded here."
+    "Use string-label aggregation only; no promotion or theorem discharge is recorded here, and Calc12 may characterize beta/delta or a blowup precursor candidate."
     refl
-    "Fail closed on Clay promotion; candidate-only evidence remains read-only."
+    "Fail closed on Clay promotion; candidate-only evidence remains read-only, and Calc12 stays non-promoting."
     refl
-    "KornLevelSet + collapseImpossible remains the open analytic wall."
+    "KornLevelSet + collapseImpossible remains the open analytic wall; BoundaryHB_Correct stays closeable."
     refl
 
 record NSClayPostCalc11StateAggregationReceipt : Setω where
@@ -179,8 +184,10 @@ record NSClayPostCalc11StateAggregationReceipt : Setω where
     receiptBoundaryAreCanonical :
       receiptBoundary ≡
       ( "Calc11 result complete/no_special_alignment"
+        ∷ "optional Calc12 non-blocking route-selector"
         ∷ "coarea/StepA wiring recorded"
         ∷ "proof ledger updated"
+        ∷ "no calcs block the proof ledger"
         ∷ "remaining analytic wall KornLevelSet + collapseImpossible"
         ∷ [] )
 
@@ -224,8 +231,10 @@ canonicalNSClayPostCalc11StateAggregationReceipt =
         refl
     ; receiptBoundary =
         "Calc11 result complete/no_special_alignment"
+        ∷ "optional Calc12 non-blocking route-selector"
         ∷ "coarea/StepA wiring recorded"
         ∷ "proof ledger updated"
+        ∷ "no calcs block the proof ledger"
         ∷ "remaining analytic wall KornLevelSet + collapseImpossible"
         ∷ []
     ; receiptBoundaryAreCanonical =

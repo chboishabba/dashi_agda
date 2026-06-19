@@ -11,14 +11,18 @@ open import Data.List.Base using (List; _∷_; [])
 --
 -- Candidate-only route selector for the NS Clay chain after Calc 11.
 -- This module records the fit surface only.  It does not claim theorem
--- authority, calculation authority, or Clay promotion.  The equation
--- |<omega,e2>|^2 ~ C*g12^beta is logged as a parametric scaling law,
--- and the decision is routed by the fitted beta interval relative to 1.
+-- authority, calculation authority, or Clay promotion.  The exact
+-- parametric scaling law |<omega,e2>|^2 ~ C*g12^beta is logged together
+-- with the fitted beta interval, sample counts, fit quality, and a
+-- conservative aggregate route selector.
 --
 -- Decision convention:
---   * regularity_consistent when fitted beta > 1
---   * blowup_precursor when fitted beta < 1
+--   * regularity_consistent when the lower CI bound is > 1
+--   * blowup_precursor when the upper CI bound is < 1
 --   * inconclusive when the 95% CI straddles 1
+--   * aggregate_decision uses blowup_precursor > regularity_consistent
+--     only when all regularity-consistent inputs agree, otherwise
+--     inconclusive.
 --
 -- The route is linked to the current 7 closeable + 2 hard-wall proof
 -- distance ledger, but this receipt remains non-blocking and optional.
@@ -40,17 +44,33 @@ data NSCalc12ParametricOmegaE2ScalingShape : Set where
     NSCalc12ParametricOmegaE2ScalingShape
   betaCI95Recorded :
     NSCalc12ParametricOmegaE2ScalingShape
+  betaCI95JsonRecorded :
+    NSCalc12ParametricOmegaE2ScalingShape
   nPairsRecorded :
+    NSCalc12ParametricOmegaE2ScalingShape
+  nPairsRawRecorded :
+    NSCalc12ParametricOmegaE2ScalingShape
+  nPairsUsedRecorded :
     NSCalc12ParametricOmegaE2ScalingShape
   minG12ObservedRecorded :
     NSCalc12ParametricOmegaE2ScalingShape
+  rSquaredRecorded :
+    NSCalc12ParametricOmegaE2ScalingShape
+  standardErrorBetaRecorded :
+    NSCalc12ParametricOmegaE2ScalingShape
   decisionRecorded :
     NSCalc12ParametricOmegaE2ScalingShape
+  aggregateDecisionRecorded :
+    NSCalc12ParametricOmegaE2ScalingShape
   powerLawEquationRecorded :
+    NSCalc12ParametricOmegaE2ScalingShape
+  ciThresholdsRecorded :
     NSCalc12ParametricOmegaE2ScalingShape
   optionalRouteAfterCalc11Recorded :
     NSCalc12ParametricOmegaE2ScalingShape
   proofDistanceSevenPlusTwoRecorded :
+    NSCalc12ParametricOmegaE2ScalingShape
+  proofBlockingRecorded :
     NSCalc12ParametricOmegaE2ScalingShape
   noAuthorityRecorded :
     NSCalc12ParametricOmegaE2ScalingShape
@@ -64,12 +84,20 @@ canonicalNSCalc12ParametricOmegaE2ScalingShape =
   ∷ fittedBetaRecorded
   ∷ fittedCRecorded
   ∷ betaCI95Recorded
+  ∷ betaCI95JsonRecorded
   ∷ nPairsRecorded
+  ∷ nPairsRawRecorded
+  ∷ nPairsUsedRecorded
   ∷ minG12ObservedRecorded
+  ∷ rSquaredRecorded
+  ∷ standardErrorBetaRecorded
   ∷ decisionRecorded
+  ∷ aggregateDecisionRecorded
   ∷ powerLawEquationRecorded
+  ∷ ciThresholdsRecorded
   ∷ optionalRouteAfterCalc11Recorded
   ∷ proofDistanceSevenPlusTwoRecorded
+  ∷ proofBlockingRecorded
   ∷ noAuthorityRecorded
   ∷ noPromotionRecorded
   ∷ []
@@ -90,9 +118,41 @@ betaCI95Text : String
 betaCI95Text =
   "95% CI placeholder; compare the interval to 1 for route selection"
 
+betaCI95JsonText : String
+betaCI95JsonText =
+  betaCI95Text
+
+nPairsRawText : String
+nPairsRawText =
+  "candidate-only raw pair count placeholder"
+
+nPairsUsedText : String
+nPairsUsedText =
+  "candidate-only used pair count placeholder"
+
+minG12ObservedText : String
+minG12ObservedText =
+  "candidate-only minimum observed g12 placeholder"
+
+rSquaredText : String
+rSquaredText =
+  "candidate-only r^2 placeholder"
+
+standardErrorBetaText : String
+standardErrorBetaText =
+  "candidate-only standard error for beta placeholder"
+
 powerLawEquationText : String
 powerLawEquationText =
   "|<omega,e2>|^2 ~ C*g12^beta"
+
+aggregateDecisionText : String
+aggregateDecisionText =
+  "aggregate_decision: any blowup_precursor wins; else all regularity_consistent => regularity_consistent; else inconclusive."
+
+ciThresholdsText : String
+ciThresholdsText =
+  "thresholds: lower CI > 1 => regularity_consistent; upper CI < 1 => blowup_precursor; CI straddles 1 => inconclusive"
 
 optionalRouteText : String
 optionalRouteText =
@@ -101,6 +161,10 @@ optionalRouteText =
 proofDistanceText : String
 proofDistanceText =
   "Linked to the current 7 closeable + 2 hard-wall proof distance ledger."
+
+proofBlockingText : String
+proofBlockingText =
+  "proof_blocking is false"
 
 noAuthorityText : String
 noAuthorityText =
@@ -112,7 +176,7 @@ routeCardOText =
 
 routeCardRText : String
 routeCardRText =
-  "R: record the omega-e2 power-law fit, beta interval, sample count, and minimum observed g12."
+  "R: record the omega-e2 power-law fit, beta interval, sample counts, and minimum observed g12."
 
 routeCardCText : String
 routeCardCText =
@@ -120,7 +184,7 @@ routeCardCText =
 
 routeCardSText : String
 routeCardSText =
-  "S: promotion flags false; decision tracks beta relative to 1."
+  "S: promotion flags false; decision tracks the beta CI relative to 1."
 
 routeCardLText : String
 routeCardLText =
@@ -136,7 +200,11 @@ routeCardGText =
 
 routeCardFText : String
 routeCardFText =
-  "F: route is optional; beta below 1 leans blowup_precursor, beta above 1 leans regularity_consistent, and a CI straddling 1 stays inconclusive."
+  "F: route is optional; lower CI > 1 leans regularity_consistent, upper CI < 1 leans blowup_precursor, and a CI straddling 1 stays inconclusive."
+
+routeCardAggregateText : String
+routeCardAggregateText =
+  "Aggregate: any blowup_precursor wins; otherwise all regularity_consistent inputs yield regularity_consistent; otherwise inconclusive."
 
 routeCardText : List String
 routeCardText =
@@ -148,6 +216,7 @@ routeCardText =
   ∷ routeCardPText
   ∷ routeCardGText
   ∷ routeCardFText
+  ∷ routeCardAggregateText
   ∷ []
 
 record NSCalc12ParametricOmegaE2ScalingReceipt : Set where
@@ -173,25 +242,60 @@ record NSCalc12ParametricOmegaE2ScalingReceipt : Set where
     betaCI95IsCanonical :
       betaCI95 ≡ betaCI95Text
 
+    betaCI95Json :
+      String
+    betaCI95JsonIsCanonical :
+      betaCI95Json ≡ betaCI95JsonText
+
     n_pairs :
       Nat
     n_pairsIsNine :
       n_pairs ≡ 9
 
+    n_pairs_raw :
+      Nat
+    n_pairs_rawIsNine :
+      n_pairs_raw ≡ 9
+
+    n_pairs_used :
+      Nat
+    n_pairs_usedIsNine :
+      n_pairs_used ≡ 9
+
     min_g12_observed :
       String
     min_g12_observedIsCanonical :
-      min_g12_observed ≡ "candidate-only minimum observed g12 placeholder"
+      min_g12_observed ≡ minG12ObservedText
+
+    r_squared :
+      String
+    r_squaredIsCanonical :
+      r_squared ≡ rSquaredText
+
+    standard_error_beta :
+      String
+    standard_error_betaIsCanonical :
+      standard_error_beta ≡ standardErrorBetaText
 
     decision :
       NSCalc12ParametricOmegaE2ScalingDecision
     decisionIsCanonical :
       decision ≡ inconclusive
 
+    aggregate_decision :
+      NSCalc12ParametricOmegaE2ScalingDecision
+    aggregate_decisionIsCanonical :
+      aggregate_decision ≡ inconclusive
+
     power_law_equation :
       String
     power_law_equationIsCanonical :
       power_law_equation ≡ powerLawEquationText
+
+    ci_thresholds :
+      String
+    ci_thresholdsIsCanonical :
+      ci_thresholds ≡ ciThresholdsText
 
     optional_route_after_calc11 :
       String
@@ -217,6 +321,11 @@ record NSCalc12ParametricOmegaE2ScalingReceipt : Set where
       String
     proof_distance_linkIsCanonical :
       proof_distance_link ≡ proofDistanceText
+
+    proof_blocking :
+      Bool
+    proof_blockingIsFalse :
+      proof_blocking ≡ false
 
     theorem_authority :
       Bool
@@ -257,13 +366,27 @@ canonicalNSCalc12ParametricOmegaE2ScalingReceipt =
     refl
     betaCI95Text
     refl
+    betaCI95JsonText
+    refl
     9
     refl
-    "candidate-only minimum observed g12 placeholder"
+    9
+    refl
+    9
+    refl
+    minG12ObservedText
+    refl
+    rSquaredText
+    refl
+    standardErrorBetaText
+    refl
+    inconclusive
     refl
     inconclusive
     refl
     powerLawEquationText
+    refl
+    ciThresholdsText
     refl
     optionalRouteText
     refl
@@ -274,6 +397,8 @@ canonicalNSCalc12ParametricOmegaE2ScalingReceipt =
     9
     refl
     proofDistanceText
+    refl
+    false
     refl
     false
     refl
