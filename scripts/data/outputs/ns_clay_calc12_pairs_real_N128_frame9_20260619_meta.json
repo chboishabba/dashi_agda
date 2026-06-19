@@ -1,0 +1,73 @@
+{
+  "aggregate_decision": "regularity_consistent",
+  "beta": 2.2754974180523737,
+  "beta_CI_95": [
+    2.129779448947756,
+    2.4212153871569915
+  ],
+  "candidate_only": true,
+  "clay_promotion": false,
+  "contract": "ns_clay_calc12_real_n128_run_meta",
+  "datum_id": "TG_Re1600_N128_frame9_boundary_band_1e-3",
+  "decision": "regularity_consistent",
+  "fitted_C": 0.7569010321815973,
+  "materialized_pairfield_npz": "/tmp/ns_clay_calc12_materialized_pairfield_N128_frame9_20260619.npz",
+  "min_g12_observed": 0.00030009993310170513,
+  "n_pairs_raw": 5808,
+  "n_pairs_used": 5808,
+  "pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
+  "pair_json": "scripts/data/outputs/ns_clay_calc12_pairs_real_N128_frame9_20260619.json",
+  "pair_metadata": {
+    "authority": {
+      "candidate_only": true,
+      "clay_authority": false,
+      "empirical_non_promoting": true,
+      "promoted": false,
+      "runtime_authority": false,
+      "theorem_authority": false,
+      "truth_authority": false
+    },
+    "downsampled": false,
+    "lambda2_band": 0.001,
+    "max_pairs": 50000,
+    "pair_count_raw": 5808,
+    "pair_count_used": 5808,
+    "sort_order": [
+      "source",
+      "flat_index"
+    ],
+    "source_count": 1,
+    "source_metadata": [
+      {
+        "g12_shape": [
+          128,
+          128,
+          128
+        ],
+        "lambda2_band": 0.001,
+        "lambda2_band_applied": true,
+        "lambda2_present": true,
+        "lambda2_shape": [
+          128,
+          128,
+          128
+        ],
+        "omega_field_key": "omega_e2_sq",
+        "omega_field_source": "omega_e2_sq",
+        "pair_count_after_lambda2": 5808,
+        "pair_count_raw": 2097152,
+        "resolved_source_path": "/tmp/ns_clay_calc12_materialized_pairfield_N128_frame9_20260619.npz",
+        "source_path": "/tmp/ns_clay_calc12_materialized_pairfield_N128_frame9_20260619.npz"
+      }
+    ],
+    "source_paths": [
+      "/tmp/ns_clay_calc12_materialized_pairfield_N128_frame9_20260619.npz"
+    ]
+  },
+  "proof_blocking": false,
+  "r_squared": 0.13893110418597066,
+  "route_selector_script": "scripts/ns_clay_calc12_route_selector.py",
+  "selector_json": "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json",
+  "source_path": "/tmp/tg_re1600_t9_N128_fluidsim.npz",
+  "theorem_authority": false
+}

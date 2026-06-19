@@ -44,6 +44,10 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
         "calc": "Calc12",
         "route_selector": "statistical",
         "script": "scripts/ns_clay_calc12_route_selector.py",
+        "pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
+        "expected_real_run_artifact": (
+            "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json"
+        ),
         "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
         "fitted_beta": "candidate-only fitted beta placeholder",
         "fitted_C": "candidate-only fitted C placeholder",
@@ -86,9 +90,23 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
     assert payload["optional_next_calc"] == expected_calc12
     assert payload["calc12_route_selector"] == expected_calc12
     assert payload["optional_next_calc_blocks_proof"] is False
+    assert payload["calc12_executable"] is True
+    assert payload["calc12_pair_builder_script"] == "scripts/ns_clay_calc12_pair_builder.py"
+    assert (
+        payload["calc12_expected_real_run_artifact"]
+        == "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json"
+    )
     assert payload["clay_promotion"] is False
     assert payload["theorem_promotion"] is False
     assert payload["calc12_route_selector"]["script"] == "scripts/ns_clay_calc12_route_selector.py"
+    assert (
+        payload["calc12_route_selector"]["pair_builder_script"]
+        == "scripts/ns_clay_calc12_pair_builder.py"
+    )
+    assert (
+        payload["calc12_route_selector"]["expected_real_run_artifact"]
+        == "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json"
+    )
     assert payload["calc12_route_selector"]["fitted_beta"] == "candidate-only fitted beta placeholder"
     assert payload["calc12_route_selector"]["fitted_C"] == "candidate-only fitted C placeholder"
     assert (
@@ -108,6 +126,12 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
     assert payload["parity_hash"] in text
     assert payload["control_card"]["calc12_route_selector"] == expected_calc12
     assert payload["control_card"]["optional_next_calc_blocks_proof"] is False
+    assert payload["control_card"]["calc12_executable"] is True
+    assert payload["control_card"]["calc12_pair_builder_script"] == "scripts/ns_clay_calc12_pair_builder.py"
+    assert (
+        payload["control_card"]["calc12_expected_real_run_artifact"]
+        == "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json"
+    )
     assert payload["control_card"]["proof_blocking"] is False
     assert payload["control_card"]["no_further_calcs_blocking"] is True
 
@@ -128,3 +152,7 @@ def test_post_calc11_summary_validator_rejects_tampering_and_hash_changes() -> N
     tampered_hash = json.loads(json.dumps(payload))
     tampered_hash["parity_hash"] = "0" * 64
     assert module.validate_payload(tampered_hash) is False
+
+    tampered_calc12 = json.loads(json.dumps(payload))
+    tampered_calc12["calc12_expected_real_run_artifact"] = "scripts/data/outputs/wrong.json"
+    assert module.validate_payload(tampered_calc12) is False

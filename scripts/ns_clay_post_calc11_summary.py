@@ -14,6 +14,10 @@ from typing import Any
 CONTRACT = "ns_clay_post_calc11_summary"
 VERSION = 1
 DEFAULT_OUTPUT = Path("outputs") / f"{CONTRACT}.json"
+CALC12_PAIR_BUILDER_SCRIPT = "scripts/ns_clay_calc12_pair_builder.py"
+CALC12_EXPECTED_REAL_RUN_ARTIFACT = (
+    "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json"
+)
 
 CONTROL_CARD = {
     "O": "Worker 5 owns the post-Calc-11 NS Clay summary ledger.",
@@ -43,6 +47,8 @@ CONTROL_CARD = {
         "calc": "Calc12",
         "route_selector": "statistical",
         "script": "scripts/ns_clay_calc12_route_selector.py",
+        "pair_builder_script": CALC12_PAIR_BUILDER_SCRIPT,
+        "expected_real_run_artifact": CALC12_EXPECTED_REAL_RUN_ARTIFACT,
         "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
         "fitted_beta": "candidate-only fitted beta placeholder",
         "fitted_C": "candidate-only fitted C placeholder",
@@ -62,6 +68,9 @@ CONTROL_CARD = {
         "no_further_calcs_blocking": True,
     },
     "optional_next_calc_blocks_proof": False,
+    "calc12_executable": True,
+    "calc12_pair_builder_script": CALC12_PAIR_BUILDER_SCRIPT,
+    "calc12_expected_real_run_artifact": CALC12_EXPECTED_REAL_RUN_ARTIFACT,
     "proof_blocking": False,
     "no_further_calcs_blocking": True,
 }
@@ -83,6 +92,8 @@ CALC12_ROUTE_SELECTOR = {
     "calc": "Calc12",
     "route_selector": "statistical",
     "script": "scripts/ns_clay_calc12_route_selector.py",
+    "pair_builder_script": CALC12_PAIR_BUILDER_SCRIPT,
+    "expected_real_run_artifact": CALC12_EXPECTED_REAL_RUN_ARTIFACT,
     "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
     "fitted_beta": "candidate-only fitted beta placeholder",
     "fitted_C": "candidate-only fitted C placeholder",
@@ -118,6 +129,9 @@ REQUIRED_KEYS = (
     "optional_next_calc",
     "calc12_route_selector",
     "optional_next_calc_blocks_proof",
+    "calc12_executable",
+    "calc12_pair_builder_script",
+    "calc12_expected_real_run_artifact",
     "proof_blocking",
     "clay_promotion",
     "theorem_promotion",
@@ -153,6 +167,9 @@ def build_payload() -> dict[str, Any]:
         "optional_next_calc": CALC12_ROUTE_SELECTOR,
         "calc12_route_selector": CALC12_ROUTE_SELECTOR,
         "optional_next_calc_blocks_proof": False,
+        "calc12_executable": True,
+        "calc12_pair_builder_script": CALC12_PAIR_BUILDER_SCRIPT,
+        "calc12_expected_real_run_artifact": CALC12_EXPECTED_REAL_RUN_ARTIFACT,
         "proof_blocking": False,
         "clay_promotion": False,
         "theorem_promotion": False,
@@ -209,6 +226,12 @@ def validate_payload(payload: dict[str, Any]) -> bool:
     if payload.get("calc12_route_selector") != CALC12_ROUTE_SELECTOR:
         return False
     if payload.get("optional_next_calc_blocks_proof") is not False:
+        return False
+    if payload.get("calc12_executable") is not True:
+        return False
+    if payload.get("calc12_pair_builder_script") != CALC12_PAIR_BUILDER_SCRIPT:
+        return False
+    if payload.get("calc12_expected_real_run_artifact") != CALC12_EXPECTED_REAL_RUN_ARTIFACT:
         return False
     if payload.get("proof_blocking") is not False:
         return False

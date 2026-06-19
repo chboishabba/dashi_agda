@@ -21,21 +21,26 @@ def pick(payload: dict[str, Any], *names: str) -> Any:
     raise AssertionError(f"missing expected key: one of {', '.join(names)}")
 
 
-def write_fixture(tmp_path: Path, rows: list[dict[str, Any]], name: str) -> tuple[Path, Path]:
+def write_input_payload(tmp_path: Path, payload: dict[str, Any], name: str) -> tuple[Path, Path]:
     input_path = tmp_path / f"{name}.json"
     output_path = tmp_path / f"{name}_out.json"
     input_path.write_text(
-        json.dumps({"datum_id": name, "pairs": rows}, indent=2, sort_keys=True) + "\n",
+        json.dumps(payload, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
     return input_path, output_path
 
 
 def run_selector(tmp_path: Path, rows: list[dict[str, Any]], name: str) -> dict[str, Any]:
+    return run_selector_payload(tmp_path, {"datum_id": name, "pairs": rows}, name)
+
+
+def run_selector_payload(tmp_path: Path, payload: dict[str, Any], name: str) -> dict[str, Any]:
     if not SCRIPT.exists():
         pytest.skip(f"missing {SCRIPT}")
 
-    input_path, output_path = write_fixture(tmp_path, rows, name)
+    input_path, output_path = write_input_payload(tmp_path, payload, name)
+
     def invoke(*flags: str) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
             [sys.executable, str(SCRIPT), *flags],
@@ -60,6 +65,47 @@ def run_selector(tmp_path: Path, rows: list[dict[str, Any]], name: str) -> dict[
     file_payload = json.loads(output_path.read_text(encoding="utf-8"))
     assert stdout_payload == file_payload
     return file_payload
+
+
+def run_selector_expect_failure(
+    tmp_path: Path,
+    payload: dict[str, Any],
+    name: str,
+) -> subprocess.CompletedProcess[str]:
+    if not SCRIPT.exists():
+        pytest.skip(f"missing {SCRIPT}")
+
+    input_path, output_path = write_input_payload(tmp_path, payload, name)
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--input",
+            str(input_path),
+            "--output",
+            str(output_path),
+        ],
+        cwd=REPO_ROOT,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+    if result.returncode != 0 and "unrecognized arguments" in (result.stdout + result.stderr):
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT),
+                "--json-input",
+                str(input_path),
+                "--json-output",
+                str(output_path),
+            ],
+            cwd=REPO_ROOT,
+            check=False,
+            text=True,
+            capture_output=True,
+        )
+    return result
 
 
 def valid_power_law_rows(beta: float, scale: float = 2.0, count: int = 5) -> list[dict[str, Any]]:
@@ -150,3 +196,103 @@ def test_ns_clay_calc12_route_selector_inconclusive_for_mixed_signal(tmp_path: P
     high = fit["beta_CI_95"][1]
     assert low <= 1.0 <= high
     assert_false_promotion_flags(payload)
+
+
+def test_ns_clay_calc12_route_selector_aggregate_blowup_precursor_wins(tmp_path: Path) -> None:
+    payload = run_selector_payload(
+        tmp_path,
+        {
+            "datasets": [
+                {"datum_id": "regularity", "pairs": valid_power_law_rows(beta=1.4)},
+                {
+                    "datum_id": "blowup",
+                    "pairs": [
+                        {"g12": 0.25, "omega_e2_sq": 2.0 * math.pow(0.25, 0.6)},
+                        {"g12": 0.5, "omega_e2_sq": 2.0 * math.pow(0.5, 0.6)},
+                        {"g12": 1.0, "omega_e2_sq": 2.0},
+                        {"g12": 2.0, "omega_e2_sq": 2.0 * math.pow(2.0, 0.4)},
+                        {"g12": 4.0, "omega_e2_sq": 2.0 * math.pow(4.0, 0.4)},
+                    ],
+                },
+            ]
+        },
+        "aggregate_blowup",
+    )
+
+    assert payload["aggregate_decision"] == "blowup_precursor"
+    assert [dataset["fit"]["decision"] for dataset in payload["datasets"]] == [
+        "regularity_consistent",
+        "blowup_precursor",
+    ]
+    assert_false_promotion_flags(payload)
+
+
+def test_ns_clay_calc12_route_selector_aggregate_all_regular_promotes(tmp_path: Path) -> None:
+    payload = run_selector_payload(
+        tmp_path,
+        {
+            "datasets": [
+                {"datum_id": "regularity_a", "pairs": valid_power_law_rows(beta=1.25)},
+                {"datum_id": "regularity_b", "pairs": valid_power_law_rows(beta=1.8)},
+            ]
+        },
+        "aggregate_regular",
+    )
+
+    assert payload["aggregate_decision"] == "regularity_consistent"
+    assert [dataset["fit"]["decision"] for dataset in payload["datasets"]] == [
+        "regularity_consistent",
+        "regularity_consistent",
+    ]
+    assert_false_promotion_flags(payload)
+
+
+def test_ns_clay_calc12_route_selector_aggregate_mixed_regular_and_inconclusive_is_inconclusive(
+    tmp_path: Path,
+) -> None:
+    payload = run_selector_payload(
+        tmp_path,
+        {
+            "datasets": [
+                {"datum_id": "regularity", "pairs": valid_power_law_rows(beta=1.3)},
+                {
+                    "datum_id": "inconclusive",
+                    "pairs": [
+                        {"g12": 0.25, "omega_e2_sq": 2.0 * math.pow(0.25, 0.8)},
+                        {"g12": 0.5, "omega_e2_sq": 2.0 * math.pow(0.5, 0.8)},
+                        {"g12": 1.0, "omega_e2_sq": 2.0},
+                        {"g12": 2.0, "omega_e2_sq": 2.0 * math.pow(2.0, 1.2)},
+                        {"g12": 4.0, "omega_e2_sq": 2.0 * math.pow(4.0, 1.2)},
+                    ],
+                },
+            ]
+        },
+        "aggregate_mixed",
+    )
+
+    assert payload["aggregate_decision"] == "inconclusive"
+    assert [dataset["fit"]["decision"] for dataset in payload["datasets"]] == [
+        "regularity_consistent",
+        "inconclusive",
+    ]
+    assert_false_promotion_flags(payload)
+
+
+def test_ns_clay_calc12_route_selector_identical_positive_g12_values_fail_closed(
+    tmp_path: Path,
+) -> None:
+    result = run_selector_expect_failure(
+        tmp_path,
+        {
+            "datum_id": "identical_g12",
+            "pairs": [
+                {"g12": 2.0, "omega_e2_sq": 1.0},
+                {"g12": 2.0, "omega_e2_sq": 1.5},
+                {"g12": 2.0, "omega_e2_sq": 2.0},
+            ],
+        },
+        "identical_positive_g12",
+    )
+
+    assert result.returncode != 0
+    assert "g12 values must not all be identical" in (result.stdout + result.stderr)
