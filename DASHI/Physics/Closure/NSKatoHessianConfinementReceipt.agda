@@ -117,6 +117,12 @@ data NSKatoHessianConfinementShape : Set where
   boundaryMinG12RhoBettiOptionalCalcRankingRecorded :
     NSKatoHessianConfinementShape
   millerToH5StandardInterpolationRecorded : NSKatoHessianConfinementShape
+  millerToH5Lambda2PlusGradientGateRecorded :
+    NSKatoHessianConfinementShape
+  weakL3ToL3Recorded : NSKatoHessianConfinementShape
+  H2ToW13Recorded : NSKatoHessianConfinementShape
+  H1H5InterpolationExponentQuarterRecorded :
+    NSKatoHessianConfinementShape
   cl1bPDEGapOpenRecorded : NSKatoHessianConfinementShape
   katoIdentityLeafReceiptRecorded : NSKatoHessianConfinementShape
   secondDerivExpandLeafRecorded : NSKatoHessianConfinementShape
@@ -165,6 +171,10 @@ canonicalNSKatoHessianConfinementShape =
   ∷ boundaryBetti0OnBoundaryKRecorded
   ∷ boundaryMinG12RhoBettiOptionalCalcRankingRecorded
   ∷ millerToH5StandardInterpolationRecorded
+  ∷ millerToH5Lambda2PlusGradientGateRecorded
+  ∷ weakL3ToL3Recorded
+  ∷ H2ToW13Recorded
+  ∷ H1H5InterpolationExponentQuarterRecorded
   ∷ cl1bPDEGapOpenRecorded
   ∷ katoIdentityLeafReceiptRecorded
   ∷ secondDerivExpandLeafRecorded
@@ -288,7 +298,23 @@ shapeMillerBridgeOpenText =
 
 shapeMillerToH5StandardInterpolationText : String
 shapeMillerToH5StandardInterpolationText =
-  "millerToH5 is recorded as a closeable standard-interpolation projection row on the boundary-layer CL1 surface; exact shape is `millerToH5` and the inhabitant is not yet provided here."
+  "millerToH5 is recorded as a closeable standard-interpolation projection row on the boundary-layer CL1 surface; the chain is lambda2+ <= ||grad u||_F / 2, weak-L3 <= L3, H2 -> W1,3, and H1/H5 interpolation with exponent 1/4, and the inhabitant is not yet provided here."
+
+shapeMillerToH5Lambda2PlusGradientGateText : String
+shapeMillerToH5Lambda2PlusGradientGateText =
+  "millerToH5 records the lambda2+ <= ||grad u||_F / 2 gate as the first closeable standard package step."
+
+shapeWeakL3ToL3Text : String
+shapeWeakL3ToL3Text =
+  "weak-L3 <= L3 is recorded as the standard embedding step in the closeable package."
+
+shapeH2ToW13Text : String
+shapeH2ToW13Text =
+  "H2 -> W1,3 is recorded as the standard Sobolev step in the closeable package."
+
+shapeH1H5InterpolationExponentText : String
+shapeH1H5InterpolationExponentText =
+  "H1/H5 interpolation exponent is recorded as 1/4."
 
 shapeCL1CorrectedBoundaryConcentrationStepAText : String
 shapeCL1CorrectedBoundaryConcentrationStepAText =
@@ -344,11 +370,11 @@ shapeDivergenceText =
 
 shapeCalcEEmpiricalProjectionText : String
 shapeCalcEEmpiricalProjectionText =
-  "Calc E is recorded as empirical, non-promoting evidence: the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; optional calcs are ranked as min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 count; Miller λ2+ is outside/at boundary; rho_min stays positive with global minimum 0.23098019784845852 and Scenario D unsupported in dataset; boundary H_B numerically supported only; Calc 6 adds frame-10 component-2 Korn proxy ratio c_empirical_proxy = 8.688873662021036 at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_N128_frame10_component2_20260618.json using denominator grad_lambda2_squared_proxy; Calc 8 adds the true velocity_hessian_norm_squared denominator at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_true_N128_frame10_component2_20260618.json with c_empirical_true = 0.04974806822750822 and denominator_proxy_to_true_ratio = 0.0057254910317037335; Calc 9 extends the true denominator to the carrier timeseries at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_true_korn_timeseries_N128_20260618.json with c_empirical_true_min = 0.0026738091511738582, c_empirical_true_mean = 0.04374066464321035, c_empirical_true_max = 0.052591467297035434, and denominator_proxy_to_true_ratio_mean = 0.0053820601514769605; Calc 10 adds scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_band_sweep_N128_frame10_component2_20260618.json with c_empirical_true in [0.04180143943317622, 0.048108231165891815], alpha_strain_sq in [0.49648633477014364, 0.49956437854373653], and alpha_omega_sq in [0.5004356214562633, 0.5035136652298564]; all are empirical and not analytic KornLevelSet proofs."
+  "Calc E is recorded as empirical, non-promoting evidence: the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; optional calcs are ranked as min g12 on ∂Ω_K, real rho on ∂Ω_K, then Betti-0 count; the closeable standard package is recorded separately as lambda2+ <= ||grad u||_F / 2, weak-L3 <= L3, H2 -> W1,3, and H1/H5 interpolation exponent 1/4; Miller λ2+ is outside/at boundary; rho_min stays positive with global minimum 0.23098019784845852 and Scenario D unsupported in dataset; boundary H_B numerically supported only; Calc 6 adds frame-10 component-2 Korn proxy ratio c_empirical_proxy = 8.688873662021036 at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_N128_frame10_component2_20260618.json using denominator grad_lambda2_squared_proxy; Calc 8 adds the true velocity_hessian_norm_squared denominator at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_true_N128_frame10_component2_20260618.json with c_empirical_true = 0.04974806822750822 and denominator_proxy_to_true_ratio = 0.0057254910317037335; Calc 9 extends the true denominator to the carrier timeseries at scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_true_korn_timeseries_N128_20260618.json with c_empirical_true_min = 0.0026738091511738582, c_empirical_true_mean = 0.04374066464321035, c_empirical_true_max = 0.052591467297035434, and denominator_proxy_to_true_ratio_mean = 0.0053820601514769605; Calc 10 adds scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_band_sweep_N128_frame10_component2_20260618.json with c_empirical_true in [0.04180143943317622, 0.048108231165891815], alpha_strain_sq in [0.49648633477014364, 0.49956437854373653], and alpha_omega_sq in [0.5004356214562633, 0.5035136652298564]; all are empirical and not analytic KornLevelSet proofs."
 
 shapeCalcEEmpiricalReceiptText : String
 shapeCalcEEmpiricalReceiptText =
-  "Calc E stays empirical and non-promoting on this receipt surface; the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; Calcs 1-10 are now recorded for this archive, including Calc 6 Korn proxy ratio, Calc 7 carrier persistence, Calc 8 true velocity-Hessian Korn denominator for frame-10 component 2, Calc 9 true velocity-Hessian Korn denominator over the carrier timeseries, and Calc 10 h_strain_dom / alpha_strain_sq BoundaryHB/KornLevelSet hypothesis with the frame-10 component-2 band sweep, but no Clay theorem or BoundaryHB/KornLevelSet promotion is claimed."
+  "Calc E stays empirical and non-promoting on this receipt surface; the 2026-06-18 boundary preflight calc was run on dashiCFD N128 frames and remains empirical/non-promoting; CL1 remains open and fail-closed; Calcs 1-10 are now recorded for this archive, including Calc 6 Korn proxy ratio, Calc 7 carrier persistence, Calc 8 true velocity-Hessian Korn denominator for frame-10 component 2, Calc 9 true velocity-Hessian Korn denominator over the carrier timeseries, and Calc 10 h_strain_dom / alpha_strain_sq BoundaryHB/KornLevelSet hypothesis with the frame-10 component-2 band sweep; the closeable standard package is carried as lambda2+ <= ||grad u||_F / 2, weak-L3 <= L3, H2 -> W1,3, and H1/H5 interpolation exponent 1/4; but no Clay theorem or BoundaryHB/KornLevelSet promotion is claimed."
 
 shapeCL1OpenFailClosedText : String
 shapeCL1OpenFailClosedText =
@@ -356,7 +382,7 @@ shapeCL1OpenFailClosedText =
 
 shapeKatoIdentityLeafReceiptText : String
 shapeKatoIdentityLeafReceiptText =
-  "KatoIdentity leaf receipt records the checked secondDeriv-expand surface, the GD3 standard row, the GD3-SobolevBound-Correct projection, and CL2 trichotomy row without optional calc results; the latest GD3 payload names M, hM_pos, hM, δ0, δ1, hδ_pos, hδ, hδ1_pos, hδ1, δmin, C_emb, g23, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, and the final GD3-SobolevBound-Correct bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1 are carried on this same leaf surface, with an optional compressed form using δmin noted but not promoted."
+  "KatoIdentity leaf receipt records the checked secondDeriv-expand surface, the GD3 standard row, the GD3-SobolevBound-Correct projection, and CL2 trichotomy row without optional calc results; the latest GD3 payload names M, hM_pos, hM, δ0, δ1, hδ_pos, hδ, hδ1_pos, hδ1, δmin, C_emb, g23, C_k, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk/g12, Ck/g23, and the final GD3-SobolevBound-Correct bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1 are carried on this same leaf surface, with an optional compressed form using δmin noted but not promoted."
 
 shapeSecondDerivExpandText : String
 shapeSecondDerivExpandText =
@@ -372,17 +398,20 @@ shapeGD3SobolevBoundCorrectRowName =
 
 shapeGD3SobolevBoundCorrectText : String
 shapeGD3SobolevBoundCorrectText =
-  "GD3-SobolevBound-Correct is an exact checked projection row on the KatoIdentity leaf: the latest payload keeps M, hM_pos, hM, δ0, δ1, hδ_pos, hδ, hδ1_pos, hδ1, δmin, C_emb, and g23 as exact names; hess_le_Ak_plus_Bk, Ak_le_D3u, and sobolev_H5_C3 are exact shapes; B_k is carried only through the recorded quadratic bound; the final two-gap upper bound is recorded as C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1; and the optional compressed form C_emb*M + 4*C_emb^2*M^2/δmin is noted without any promotion claim."
+  "GD3-SobolevBound-Correct is an exact checked projection row on the KatoIdentity leaf: the latest payload keeps M, hM_pos, hM, δ0, δ1, hδ_pos, hδ, hδ1_pos, hδ1, δmin, C_emb, g23, and C_k as exact names; hess_le_Ak_plus_Bk, Ak_le_D3u, and sobolev_H5_C3 are exact shapes; B_k/g12 and C_k/g23 are carried as the two-gap Kato bounds; the final two-gap upper bound is recorded as C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1; and the optional compressed form C_emb*M + 4*C_emb^2*M^2/δmin is noted without any promotion claim."
 
 canonicalGD3SobolevBoundCorrectProjectionRows : List String
 canonicalGD3SobolevBoundCorrectProjectionRows =
   "M"
   ∷ "g23"
+  ∷ "C_k"
   ∷ "δ0"
   ∷ "δ1"
   ∷ "δmin"
   ∷ "H5 <= M"
   ∷ "C_embed"
+  ∷ "B_k/g12"
+  ∷ "C_k/g23"
   ∷ "B_k quadratic in H5"
   ∷ "hM_pos"
   ∷ "hM"
@@ -413,7 +442,7 @@ shapeCL2DichotomyRejectedText =
 
 shapeMillerToH5CloseableText : String
 shapeMillerToH5CloseableText =
-  "millerToH5 is recorded as a closeable standard-interpolation surface and stays uninhabited here."
+  "millerToH5 is recorded as a closeable standard-interpolation surface and stays uninhabited here; the package names lambda2+ <= ||grad u||_F / 2, weak-L3 <= L3, H2 -> W1,3, and H1/H5 interpolation exponent 1/4."
 
 shapeGD3CorrectStandardText : String
 shapeGD3CorrectStandardText =
@@ -576,6 +605,20 @@ record NSKatoCalcEEmpiricalProjection : Set where
     boundaryMinG12RhoBettiOptionalCalcRankingTextIsCanonical :
       boundaryMinG12RhoBettiOptionalCalcRankingText ≡
       shapeBoundaryMinG12RhoBettiOptionalCalcRankingText
+    millerToH5Lambda2PlusGradientGateText : String
+    millerToH5Lambda2PlusGradientGateTextIsCanonical :
+      millerToH5Lambda2PlusGradientGateText ≡
+      shapeMillerToH5Lambda2PlusGradientGateText
+    weakL3ToL3Text : String
+    weakL3ToL3TextIsCanonical :
+      weakL3ToL3Text ≡ shapeWeakL3ToL3Text
+    H2ToW13Text : String
+    H2ToW13TextIsCanonical :
+      H2ToW13Text ≡ shapeH2ToW13Text
+    H1H5InterpolationExponentText : String
+    H1H5InterpolationExponentTextIsCanonical :
+      H1H5InterpolationExponentText ≡
+      shapeH1H5InterpolationExponentText
     empiricalOnly : Bool
     empiricalOnlyIsTrue :
       empiricalOnly ≡ true
@@ -604,6 +647,14 @@ canonicalNSKatoCalcEEmpiricalProjection =
     shapeBoundaryBetti0OnBoundaryKText
     refl
     shapeBoundaryMinG12RhoBettiOptionalCalcRankingText
+    refl
+    shapeMillerToH5Lambda2PlusGradientGateText
+    refl
+    shapeWeakL3ToL3Text
+    refl
+    shapeH2ToW13Text
+    refl
+    shapeH1H5InterpolationExponentText
     refl
     true
     refl
@@ -654,6 +705,20 @@ record NSKatoCalcEEmpiricalReceipt : Set where
     millerToH5StandardInterpolationTextIsCanonical :
       millerToH5StandardInterpolationText ≡
       shapeMillerToH5StandardInterpolationText
+    millerToH5Lambda2PlusGradientGateText : String
+    millerToH5Lambda2PlusGradientGateTextIsCanonical :
+      millerToH5Lambda2PlusGradientGateText ≡
+      shapeMillerToH5Lambda2PlusGradientGateText
+    weakL3ToL3Text : String
+    weakL3ToL3TextIsCanonical :
+      weakL3ToL3Text ≡ shapeWeakL3ToL3Text
+    H2ToW13Text : String
+    H2ToW13TextIsCanonical :
+      H2ToW13Text ≡ shapeH2ToW13Text
+    H1H5InterpolationExponentText : String
+    H1H5InterpolationExponentTextIsCanonical :
+      H1H5InterpolationExponentText ≡
+      shapeH1H5InterpolationExponentText
     millerToH5CloseableText : String
     millerToH5CloseableTextIsCanonical :
       millerToH5CloseableText ≡ shapeMillerToH5CloseableText
@@ -698,6 +763,14 @@ canonicalNSKatoCalcEEmpiricalReceipt =
     shapeBoundaryConcentrationStepA_PerComponentText
     refl
     shapeMillerToH5StandardInterpolationText
+    refl
+    shapeMillerToH5Lambda2PlusGradientGateText
+    refl
+    shapeWeakL3ToL3Text
+    refl
+    shapeH2ToW13Text
+    refl
+    shapeH1H5InterpolationExponentText
     refl
     shapeMillerToH5CloseableText
     refl
@@ -1409,10 +1482,10 @@ canonicalKatoMorseProgramVariables =
     "Ak_le_D3u"
     "sobolev_H5_C3"
     "Bk quadratic bound"
-    "final GD3-SobolevBound-Correct bound: C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1 is the recorded two-gap upper bound; optional compressed form uses δmin"
+    "final GD3-SobolevBound-Correct bound: C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1 is the recorded two-gap upper bound with C_k carried through the g23 branch; optional compressed form uses δmin"
     "H5"
     "H6"
-    "H5 curvature bound vs H6 Taylor remainder split"
+    "H5 curvature bound vs H6 Taylor remainder split; H1/H5 interpolation exponent is 1/4 in the closeable standard package"
     "H5 bounded by M"
     "Bk quadratic in H5 with C_emb"
     "CL2 branch C"
@@ -1441,7 +1514,7 @@ gd2Statement =
 
 gd3Statement : String
 gd3Statement =
-  "GD3-SobolevBound-Correct: the checked GD3 row is standard on the KatoIdentity leaf and records the exact payload names M, hM_pos, hM, δ0, δ1, hδ_pos, hδ, hδ1_pos, hδ1, δmin, C_emb, g23, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, and the final two-gap upper bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1, with optional compressed form C_emb*M + 4*C_emb^2*M^2/δmin. The row still carries the curvature-to-Sobolev split with secondDeriv-expand and H6 as the Taylor remainder, B_k remains only a recorded quadratic bound, and no calcs/proxy claims are introduced."
+  "GD3-SobolevBound-Correct: the checked GD3 row is standard on the KatoIdentity leaf and records the exact payload names M, hM_pos, hM, δ0, δ1, hδ_pos, hδ, hδ1_pos, hδ1, δmin, C_emb, g23, C_k, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, B_k/g12, C_k/g23, and the final two-gap upper bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1, with optional compressed form C_emb*M + 4*C_emb^2*M^2/δmin. The row still carries the curvature-to-Sobolev split with secondDeriv-expand and H6 as the Taylor remainder, and no calcs/proxy claims are introduced."
 
 cl2TrichotomyStatement : String
 cl2TrichotomyStatement =
@@ -1473,7 +1546,7 @@ katoMorseTheoremExactBlocker GD1 =
 katoMorseTheoremExactBlocker GD2 =
   "GD2 exact blocker: none; this row is already standard on the current receipt variables."
 katoMorseTheoremExactBlocker GD3 =
-  "GD3 exact blocker: none; this row is already standard on the current receipt variables, with GD3-SobolevBound-Correct projections checking the exact payload names M, hM_pos, hM, δ0, δ1, hδ_pos, hδ, hδ1_pos, hδ1, δmin, C_emb, g23, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, and the final two-gap upper bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1; optional compressed form C_emb*M + 4*C_emb^2*M^2/δmin is recorded but not promoted."
+  "GD3 exact blocker: none; this row is already standard on the current receipt variables, with GD3-SobolevBound-Correct projections checking the exact payload names M, hM_pos, hM, δ0, δ1, hδ_pos, hδ, hδ1_pos, hδ1, δmin, C_emb, g23, C_k, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, B_k/g12, C_k/g23, and the final two-gap upper bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1; optional compressed form C_emb*M + 4*C_emb^2*M^2/δmin is recorded but not promoted."
 katoMorseTheoremExactBlocker CL2 =
   "CL2 exact blocker: trichotomy is recorded (branch C is checked), not a dichotomy; the surface remains fail-closed."
 katoMorseTheoremExactBlocker theoremCConditional =
@@ -1636,10 +1709,10 @@ record KatoMorseProgramORCSLPGF : Set where
       "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as trichotomy (with branch C as the checked branch), and MK3, GD1, and conditional Theorem C as open."
     C : String
     CIsCanonical : C ≡
-      "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker, with secondDeriv-expand kept as a checked leaf surface only."
+      "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker, with secondDeriv-expand kept as a checked leaf surface only, and the closeable standard package is kept separate from any theorem claim."
     S : String
     SIsCanonical : S ≡
-      "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, M, δ0, δ1, δmin, hM_pos, hM, hδ_pos, hδ, hδ1_pos, hδ1, C_embed, C_emb, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, final GD3-SobolevBound-Correct bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1, optional compressed δmin formula, H5, H6, H5 bounded by M and H5/H6 split, Bk-quadratic-in-H5 honesty note, CL2 branch C, and secondDeriv-expand are recorded as exact program variables and shapes."
+      "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, M, δ0, δ1, δmin, hM_pos, hM, hδ_pos, hδ, hδ1_pos, hδ1, C_embed, C_emb, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, B_k/g12, C_k/g23, Bk quadratic bound, final GD3-SobolevBound-Correct bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1, optional compressed δmin formula, H5, H6, H5 bounded by M and H5/H6 split, Bk-quadratic-in-H5 honesty note, CL2 branch C, H1/H5 interpolation exponent 1/4, and secondDeriv-expand are recorded as exact program variables and shapes."
     L : String
     LIsCanonical : L ≡
       "L: theorem-by-theorem row surface orders the claims as provable classical, standard, trichotomy, then open blocker, with MK1/MK2 classical, GD2/GD3 standard, CL2 trichotomy (branch C checked) rather than dichotomy, and MK3/GD1/Theorem C open."
@@ -1662,7 +1735,7 @@ record KatoMorseProgramSurface : Set where
     variableBundleIsCanonical : variableBundle ≡ canonicalKatoMorseProgramVariables
     curvatureToSobolevRow : String
     curvatureToSobolevRowIsCanonical : curvatureToSobolevRow ≡
-      "The H5 versus H6 split is explicit: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder; GD3-SobolevBound-Correct enforces the two-gap upper-bound shape with g23, δ1, hδ1_pos, hδ1, δmin, the final bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1, and the optional compressed form C_emb*M + 4*C_emb^2*M^2/δmin."
+      "The H5 versus H6 split is explicit: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder; the closeable standard package records lambda2+ <= ||grad u||_F / 2, weak-L3 <= L3, H2 -> W1,3, and H1/H5 interpolation exponent 1/4; GD3-SobolevBound-Correct enforces the two-gap upper-bound shape with g23, C_k, δ1, hδ1_pos, hδ1, δmin, the final bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1, and the optional compressed form C_emb*M + 4*C_emb^2*M^2/δmin."
     programBlockers : List KatoMorseProgramBlocker
     programBlockersAreCanonical : programBlockers ≡ canonicalKatoMorseProgramBlockers
     clayPromoted : Bool
@@ -1678,9 +1751,9 @@ canonicalKatoMorseProgramORCSLPGF =
     refl
     "R: The prompt-aligned rows are MK1 and MK2 as provable classical, GD2 and GD3 as standard, CL2 as trichotomy (with branch C as the checked branch), and MK3, GD1, and conditional Theorem C as open."
     refl
-    "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker, with secondDeriv-expand kept as a checked leaf surface only."
+    "C: Kato-Morse status fields are explicit as provable classical/standard/trichotomy/open blocker, with secondDeriv-expand kept as a checked leaf surface only, and the closeable standard package is kept separate from any theorem claim."
     refl
-    "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, M, δ0, δ1, δmin, hM_pos, hM, hδ_pos, hδ, hδ1_pos, hδ1, C_embed, C_emb, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, Bk quadratic bound, final GD3-SobolevBound-Correct bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1, optional compressed δmin formula, H5, H6, H5 bounded by M and H5/H6 split, Bk-quadratic-in-H5 honesty note, CL2 branch C, and secondDeriv-expand are recorded as exact program variables and shapes."
+    "S: beta(t)=theta*lambda2min(t), OmegaBeta, OmegaK, g12, g23, psi12=B/g12, B, B_k, C_k, c0, c1, M, δ0, δ1, δmin, hM_pos, hM, hδ_pos, hδ, hδ1_pos, hδ1, C_embed, C_emb, hess_le_Ak_plus_Bk, Ak_le_D3u, sobolev_H5_C3, B_k/g12, C_k/g23, Bk quadratic bound, final GD3-SobolevBound-Correct bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1, optional compressed δmin formula, H5, H6, H5 bounded by M and H5/H6 split, Bk-quadratic-in-H5 honesty note, CL2 branch C, H1/H5 interpolation exponent 1/4, and secondDeriv-expand are recorded as exact program variables and shapes."
     refl
     "L: theorem-by-theorem row surface orders the claims as provable classical, standard, trichotomy, then open blocker, with MK1/MK2 classical, GD2/GD3 standard, CL2 trichotomy (branch C checked) rather than dichotomy, and MK3/GD1/Theorem C open."
     refl
@@ -1698,7 +1771,7 @@ canonicalKatoMorseProgramSurface =
     refl
     canonicalKatoMorseProgramVariables
     refl
-    "The H5 versus H6 split is explicit: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder; GD3-SobolevBound-Correct enforces the two-gap upper-bound shape with g23, δ1, hδ1_pos, hδ1, δmin, the final bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1, and the optional compressed form C_emb*M + 4*C_emb^2*M^2/δmin."
+    "The H5 versus H6 split is explicit: H5 carries the curvature bound for Hess λ2 L∞, and H6 carries the Taylor confinement remainder; the closeable standard package records lambda2+ <= ||grad u||_F / 2, weak-L3 <= L3, H2 -> W1,3, and H1/H5 interpolation exponent 1/4; GD3-SobolevBound-Correct enforces the two-gap upper-bound shape with g23, C_k, δ1, hδ1_pos, hδ1, δmin, the final bound C_emb*M + 2*C_emb^2*M^2/δ0 + 2*C_emb^2*M^2/δ1, and the optional compressed form C_emb*M + 4*C_emb^2*M^2/δmin."
     refl
     canonicalKatoMorseProgramBlockers
     refl

@@ -9,12 +9,11 @@ open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 ------------------------------------------------------------------------
--- Candidate-only Clay-distance receipt for the three hard theorem
--- distance surface.
---
--- The exact distance is recorded as:
+-- Candidate-only Clay-distance receipt for the two hard analytic walls.
+-- The historical three-hard-theorem ledger has been superseded/refined:
+-- BoundaryHB_Correct is now discharged by pointwise kornBiaxialBound /
+-- nondegeneracy, so the canonical hard walls are just:
 --   A = KornLevelSet
---   B = BoundaryHB
 --   C = collapseImpossible
 --
 -- The first six packages are marked as formalization/standard packages.
@@ -39,7 +38,6 @@ canonicalNSClayThreeHardTheoremsDistanceSteps :
   List NSClayThreeHardTheoremsDistanceStep
 canonicalNSClayThreeHardTheoremsDistanceSteps =
   A_KornLevelSet
-  ∷ B_BoundaryHB
   ∷ C_collapseImpossible
   ∷ []
 
@@ -82,7 +80,7 @@ nsClayThreeHardTheoremsDistancePromotionImpossibleHere ()
 
 nsClayThreeHardTheoremsDistanceStatement : String
 nsClayThreeHardTheoremsDistanceStatement =
-  "Candidate-only Clay distance: A = KornLevelSet, B = BoundaryHB, and C = collapseImpossible; the first six packages are formalization/standard packages; the conditional theorem is recorded before Clay; Clay promotion is false."
+  "Candidate-only Clay distance: A = KornLevelSet and C = collapseImpossible; BoundaryHB_Correct is now closed by pointwise kornBiaxialBound/nondegeneracy and is not a hard wall; the historical three-hard-theorem ledger is superseded/refined; the first six packages are formalization/standard packages; the conditional theorem is recorded before Clay; Clay promotion is false."
 
 record NSClayThreeHardTheoremsDistanceReceipt : Setω where
   field
@@ -101,8 +99,8 @@ record NSClayThreeHardTheoremsDistanceReceipt : Setω where
     exactDistanceStepCount :
       Nat
 
-    exactDistanceStepCountIs3 :
-      exactDistanceStepCount ≡ 3
+    exactDistanceStepCountIs2 :
+      exactDistanceStepCount ≡ 2
 
     packageTrack :
       List NSClayThreeHardTheoremsPackageTrack
@@ -158,8 +156,8 @@ canonicalNSClayThreeHardTheoremsDistanceReceipt =
     ; exactDistanceStepsAreCanonical =
         refl
     ; exactDistanceStepCount =
-        3
-    ; exactDistanceStepCountIs3 =
+        2
+    ; exactDistanceStepCountIs2 =
         refl
     ; packageTrack =
         canonicalNSClayThreeHardTheoremsPackageTrack
@@ -186,9 +184,10 @@ canonicalNSClayThreeHardTheoremsDistanceReceipt =
     ; promotionFlagsAreEmpty =
         refl
     ; receiptBoundary =
-        "A records KornLevelSet as the first hard-theorem distance anchor"
-        ∷ "B records BoundaryHB as the second hard-theorem distance anchor"
-        ∷ "C records collapseImpossible as the third hard-theorem distance anchor"
+        "A records KornLevelSet as a canonical hard-theorem distance anchor"
+        ∷ "B is retained as historical ledger context for BoundaryHB_Correct, now discharged by pointwise kornBiaxialBound/nondegeneracy"
+        ∷ "C records collapseImpossible as a canonical hard-theorem distance anchor"
+        ∷ "The historical three-hard-theorem ledger is superseded/refined to two canonical hard walls"
         ∷ "The first six packages are formalization/standard packages"
         ∷ "The conditional theorem sits before any Clay promotion"
         ∷ "Clay promotion remains false"

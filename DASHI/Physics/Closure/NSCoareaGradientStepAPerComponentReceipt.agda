@@ -11,9 +11,11 @@ open import Agda.Builtin.String using (String)
 -- and the StepA_PerComponent closure route.
 --
 -- This surface records the corrected exponent as r^1, not r^(7/2), and it
--- records the StepA_PerComponent route as closing from local L3 blow-up plus
--- diameter/layer-thickness hypotheses.  It is geometry/standard-lemma
--- bookkeeping only; no Clay promotion or theorem promotion is claimed.
+-- records the StepA_PerComponent route as assembling corrected coarea,
+-- local concentration, and pigeon concentration into the component-local L3
+-- closure with diameter/layer-thickness hypotheses.  It is
+-- geometry/standard-lemma bookkeeping only; no Clay promotion or theorem
+-- promotion is claimed.
 
 data NSCoareaGradientStepAPerComponentStatus : Set where
   candidateOnlyFailClosed :
@@ -41,22 +43,117 @@ canonicalNSCoareaGradientStepAPerComponentRows =
 linkedReceiptLabels : List String
 linkedReceiptLabels =
   "CorrectedCoareaGradientBoundReceipt"
+  ∷ "LocalConcentrationPigeonConcentrationReceipt"
   ∷ "NSKatoHessianConfinementReceipt"
   ∷ []
 
 exactObjectLabels : List String
 exactObjectLabels =
   "f=lambda2+"
-  ∷ "B(x₀,r)"
+  ∷ "B(x0,r)"
   ∷ "K"
   ∷ "C_geo"
   ∷ "r"
   ∷ "C_iso"
-  ∷ "component Cₙ"
+  ∷ "component C_n"
   ∷ "d₀"
   ∷ "τ₀"
-  ∷ "local L3 nbhd(Cₙ)"
+  ∷ "local L3 near component C_n"
+  ∷ "diam(C_n) >= d0"
+  ∷ "layer_thickness >= tau0"
+  ∷ "ball radius r"
+  ∷ "K_n -> infinity"
+  ∷ "sup_{partial C_n}|grad lambda2| -> infinity"
   ∷ []
+
+record NSCoareaGradientStepAPerComponentAssembly : Set where
+  constructor mkNSCoareaGradientStepAPerComponentAssembly
+  field
+    correctedCoareaGradientBoundReceipt :
+      String
+    correctedCoareaGradientBoundReceiptIsCanonical :
+      correctedCoareaGradientBoundReceipt ≡
+      "CorrectedCoareaGradientBoundReceipt"
+
+    localConcentrationPigeonConcentrationReceipt :
+      String
+    localConcentrationPigeonConcentrationReceiptIsCanonical :
+      localConcentrationPigeonConcentrationReceipt ≡
+      "LocalConcentrationPigeonConcentrationReceipt"
+
+    nskatoHessianConfinementReceipt :
+      String
+    nskatoHessianConfinementReceiptIsCanonical :
+      nskatoHessianConfinementReceipt ≡
+      "NSKatoHessianConfinementReceipt"
+
+    localL3NearComponent :
+      String
+    localL3NearComponentIsCanonical :
+      localL3NearComponent ≡ "local L3 near component C_n"
+
+    componentName :
+      String
+    componentNameIsCanonical :
+      componentName ≡ "component C_n"
+
+    diameterLowerBound :
+      String
+    diameterLowerBoundIsCanonical :
+      diameterLowerBound ≡ "diam(C_n) >= d0"
+
+    layerThicknessLowerBound :
+      String
+    layerThicknessLowerBoundIsCanonical :
+      layerThicknessLowerBound ≡ "layer_thickness >= tau0"
+
+    ballRadius :
+      String
+    ballRadiusIsCanonical :
+      ballRadius ≡ "ball radius r"
+
+    kSequence :
+      String
+    kSequenceIsCanonical :
+      kSequence ≡ "K_n -> infinity"
+
+    conclusion :
+      String
+    conclusionIsCanonical :
+      conclusion ≡ "sup_{partial C_n}|grad lambda2| -> infinity"
+
+    assemblyText :
+      String
+    assemblyTextIsCanonical :
+      assemblyText
+        ≡ "LocalConcentration + pigeon_concentration + corrected coareaGradientBound assemble StepA_PerComponent with local L3 near component C_n, diam(C_n) >= d0, layer_thickness >= tau0, ball radius r, and K_n -> infinity."
+
+canonicalNSCoareaGradientStepAPerComponentAssembly :
+  NSCoareaGradientStepAPerComponentAssembly
+canonicalNSCoareaGradientStepAPerComponentAssembly =
+  mkNSCoareaGradientStepAPerComponentAssembly
+    "CorrectedCoareaGradientBoundReceipt"
+    refl
+    "LocalConcentrationPigeonConcentrationReceipt"
+    refl
+    "NSKatoHessianConfinementReceipt"
+    refl
+    "local L3 near component C_n"
+    refl
+    "component C_n"
+    refl
+    "diam(C_n) >= d0"
+    refl
+    "layer_thickness >= tau0"
+    refl
+    "ball radius r"
+    refl
+    "K_n -> infinity"
+    refl
+    "sup_{partial C_n}|grad lambda2| -> infinity"
+    refl
+    "LocalConcentration + pigeon_concentration + corrected coareaGradientBound assemble StepA_PerComponent with local L3 near component C_n, diam(C_n) >= d0, layer_thickness >= tau0, ball radius r, and K_n -> infinity."
+    refl
 
 coareaExponentText : String
 coareaExponentText =
@@ -64,11 +161,11 @@ coareaExponentText =
 
 stepAPerComponentText : String
 stepAPerComponentText =
-  "StepA_PerComponent closes from local L3 blow-up plus diameter/layer-thickness hypotheses"
+  "StepA_PerComponent assembles LocalConcentration + pigeon_concentration + corrected coareaGradientBound to close from local L3 near component C_n with diam(C_n) >= d0, layer_thickness >= tau0, ball radius r, K_n -> infinity, and sup_{partial C_n}|grad lambda2| -> infinity"
 
 conclusionText : String
 conclusionText =
-  "sup_{∂Cₙ}|∇λ₂|→∞"
+  "sup_{partial C_n}|grad lambda2| -> infinity"
 
 geometryNoteText : String
 geometryNoteText =
@@ -76,7 +173,7 @@ geometryNoteText =
 
 boundaryText : String
 boundaryText =
-  "Candidate-only geometry receipt: the corrected coarea gradient bound is fixed at r^1, the StepA_PerComponent route is recorded as a local L3 blow-up plus diameter/layer-thickness closure, and all promotion flags stay false."
+  "Candidate-only geometry receipt: the corrected coarea gradient bound is fixed at r^1, the StepA_PerComponent route is recorded as an explicit assembly of LocalConcentration, pigeon_concentration, and corrected coareaGradientBound, and all promotion flags stay false."
 
 record NSCoareaGradientStepAPerComponentORCSLPGF : Set where
   constructor mkNSCoareaGradientStepAPerComponentORCSLPGF
@@ -85,13 +182,13 @@ record NSCoareaGradientStepAPerComponentORCSLPGF : Set where
       String
     OIsCanonical :
       O ≡
-      "Worker 3 owns the corrected coarea gradient bound receipt surface only."
+      "Worker 2 owns the corrected coarea gradient bound receipt surface only."
 
     R :
       String
     RIsCanonical :
       R ≡
-      "Record the corrected coarea exponent as r^1 and close StepA_PerComponent from local L3 blow-up plus diameter/layer-thickness hypotheses."
+      "Record the corrected coarea exponent as r^1 and close StepA_PerComponent by assembling LocalConcentration + pigeon_concentration + corrected coareaGradientBound around local L3 near component C_n."
 
     C :
       String
@@ -103,19 +200,19 @@ record NSCoareaGradientStepAPerComponentORCSLPGF : Set where
       String
     SIsCanonical :
       S ≡
-      "Related surfaces are CorrectedCoareaGradientBoundReceipt and NSKatoHessianConfinementReceipt; no other files are touched."
+      "Related surfaces are CorrectedCoareaGradientBoundReceipt, LocalConcentrationPigeonConcentrationReceipt, and NSKatoHessianConfinementReceipt; no other files are touched."
 
     L :
       String
     LIsCanonical :
       L ≡
-      "corrected coarea receipt -> main Agda check -> later aggregation"
+      "CorrectedCoareaGradientBoundReceipt -> LocalConcentrationPigeonConcentrationReceipt -> StepA_PerComponent -> sup_{partial C_n}|grad lambda2| -> infinity"
 
     P :
       String
     PIsCanonical :
       P ≡
-      "f=lambda2+, B(x₀,r), K, C_geo, r, C_iso, component Cₙ, d₀, τ₀, local L3 nbhd(Cₙ), conclusion sup_{∂Cₙ}|∇λ₂|→∞"
+      "f=lambda2+, B(x0,r), K, C_geo, r, C_iso, component C_n, d0, tau0, local L3 near component C_n, diam(C_n) >= d0, layer_thickness >= tau0, ball radius r, K_n -> infinity, conclusion sup_{partial C_n}|grad lambda2| -> infinity"
 
     G :
       String
@@ -127,27 +224,34 @@ record NSCoareaGradientStepAPerComponentORCSLPGF : Set where
       String
     FIsCanonical :
       F ≡
-      "Avoid depending on unavailable math libraries; this is a receipt surface, not a full formal coarea proof."
+      "Avoid depending on unavailable math libraries; this is a receipt surface, not a full formal coarea proof, and it stays candidate-only."
+
+    routeAssembly :
+      NSCoareaGradientStepAPerComponentAssembly
+    routeAssemblyIsCanonical :
+      routeAssembly ≡ canonicalNSCoareaGradientStepAPerComponentAssembly
 
 canonicalNSCoareaGradientStepAPerComponentORCSLPGF :
   NSCoareaGradientStepAPerComponentORCSLPGF
 canonicalNSCoareaGradientStepAPerComponentORCSLPGF =
   mkNSCoareaGradientStepAPerComponentORCSLPGF
-    "Worker 3 owns the corrected coarea gradient bound receipt surface only."
+    "Worker 2 owns the corrected coarea gradient bound receipt surface only."
     refl
-    "Record the corrected coarea exponent as r^1 and close StepA_PerComponent from local L3 blow-up plus diameter/layer-thickness hypotheses."
+    "Record the corrected coarea exponent as r^1 and close StepA_PerComponent by assembling LocalConcentration + pigeon_concentration + corrected coareaGradientBound around local L3 near component C_n."
     refl
     "Create only NSCoareaGradientStepAPerComponentReceipt.agda."
     refl
-    "Related surfaces are CorrectedCoareaGradientBoundReceipt and NSKatoHessianConfinementReceipt; no other files are touched."
+    "Related surfaces are CorrectedCoareaGradientBoundReceipt, LocalConcentrationPigeonConcentrationReceipt, and NSKatoHessianConfinementReceipt; no other files are touched."
     refl
-    "corrected coarea receipt -> main Agda check -> later aggregation"
+    "CorrectedCoareaGradientBoundReceipt -> LocalConcentrationPigeonConcentrationReceipt -> StepA_PerComponent -> sup_{partial C_n}|grad lambda2| -> infinity"
     refl
-    "f=lambda2+, B(x₀,r), K, C_geo, r, C_iso, component Cₙ, d₀, τ₀, local L3 nbhd(Cₙ), conclusion sup_{∂Cₙ}|∇λ₂|→∞"
+    "f=lambda2+, B(x0,r), K, C_geo, r, C_iso, component C_n, d0, tau0, local L3 near component C_n, diam(C_n) >= d0, layer_thickness >= tau0, ball radius r, K_n -> infinity, conclusion sup_{partial C_n}|grad lambda2| -> infinity"
     refl
     "Candidate-only; no theorem promotion; main runs Agda."
     refl
-    "Avoid depending on unavailable math libraries; this is a receipt surface, not a full formal coarea proof."
+    "Avoid depending on unavailable math libraries; this is a receipt surface, not a full formal coarea proof, and it stays candidate-only."
+    refl
+    canonicalNSCoareaGradientStepAPerComponentAssembly
     refl
 
 record NSCoareaGradientStepAPerComponentReceipt : Set where
@@ -165,8 +269,8 @@ record NSCoareaGradientStepAPerComponentReceipt : Set where
 
     linkedReceiptCount :
       Nat
-    linkedReceiptCountIsTwo :
-      linkedReceiptCount ≡ 2
+    linkedReceiptCountIsThree :
+      linkedReceiptCount ≡ 3
 
     exactObjectLabelsField :
       List String
@@ -203,6 +307,11 @@ record NSCoareaGradientStepAPerComponentReceipt : Set where
     boundaryIsCanonical :
       boundary ≡ boundaryText
 
+    routeAssembly :
+      NSCoareaGradientStepAPerComponentAssembly
+    routeAssemblyIsCanonical :
+      routeAssembly ≡ canonicalNSCoareaGradientStepAPerComponentAssembly
+
     orcslpgf :
       NSCoareaGradientStepAPerComponentORCSLPGF
     orcslpgfIsCanonical :
@@ -231,7 +340,7 @@ canonicalNSCoareaGradientStepAPerComponentReceipt =
     refl
     linkedReceiptLabels
     refl
-    2
+    3
     refl
     exactObjectLabels
     refl
@@ -247,6 +356,8 @@ canonicalNSCoareaGradientStepAPerComponentReceipt =
     refl
     boundaryText
     refl
+    canonicalNSCoareaGradientStepAPerComponentAssembly
+    refl
     canonicalNSCoareaGradientStepAPerComponentORCSLPGF
     refl
     false
@@ -257,4 +368,5 @@ canonicalNSCoareaGradientStepAPerComponentReceipt =
     refl
 
 open NSCoareaGradientStepAPerComponentReceipt public
+open NSCoareaGradientStepAPerComponentAssembly public
 open NSCoareaGradientStepAPerComponentORCSLPGF public

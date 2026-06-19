@@ -49,6 +49,9 @@ CLOSEABLE_PACKAGES: tuple[str, ...] = (
 
 REMNANT_HARD_WALLS: tuple[str, ...] = ("KornLevelSet", "collapseImpossible")
 
+CLAY_HARD_CORE = "collapseImpossible"
+OPTIONAL_NEXT_CALC = "Calc12:parametric_omega_e2_scaling_study"
+
 
 REQUIRED_KEYS = (
     "contract",
@@ -60,6 +63,10 @@ REQUIRED_KEYS = (
     "closeable_packages",
     "closeable_package_count",
     "remaining_hard_walls",
+    "hard_wall_count",
+    "clay_hard_core",
+    "optional_next_calc",
+    "optional_next_calc_blocks_proof",
     "clay_promotion",
     "theorem_promotion",
     "parity_hash",
@@ -89,6 +96,10 @@ def build_payload() -> dict[str, Any]:
         "closeable_packages": list(CLOSEABLE_PACKAGES),
         "closeable_package_count": len(CLOSEABLE_PACKAGES),
         "remaining_hard_walls": list(REMNANT_HARD_WALLS),
+        "hard_wall_count": len(REMNANT_HARD_WALLS),
+        "clay_hard_core": CLAY_HARD_CORE,
+        "optional_next_calc": OPTIONAL_NEXT_CALC,
+        "optional_next_calc_blocks_proof": False,
         "clay_promotion": False,
         "theorem_promotion": False,
         "parity_hash": "",
@@ -134,6 +145,14 @@ def validate_payload(payload: dict[str, Any]) -> bool:
 
     remaining_walls = payload.get("remaining_hard_walls")
     if not isinstance(remaining_walls, list) or remaining_walls != list(REMNANT_HARD_WALLS):
+        return False
+    if payload.get("hard_wall_count") != len(REMNANT_HARD_WALLS):
+        return False
+    if payload.get("clay_hard_core") != CLAY_HARD_CORE:
+        return False
+    if payload.get("optional_next_calc") != OPTIONAL_NEXT_CALC:
+        return False
+    if payload.get("optional_next_calc_blocks_proof") is not False:
         return False
 
     if payload.get("clay_promotion") is not False:

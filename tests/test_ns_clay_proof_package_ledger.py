@@ -115,8 +115,12 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     )
     assert payload["calc11_status"] == "complete_no_special_alignment"
     assert payload["empirical_diagnostics_complete"] is True
+    assert payload["closeable_package_count"] == 7
     assert payload["no_further_calcs_blocking"] is True
     assert payload["remaining_math_wall"] == ["KornLevelSet", "collapseImpossible"]
+    assert payload["hard_wall_count"] == 2
+    assert payload["hard_walls"] == ["KornLevelSet", "collapseImpossible"]
+    assert payload["clay_hard_core"] == "collapseImpossible"
     assert payload["formal_packages_write_now"] == [
         "millerToH5",
         "GD3-SobolevBound-Correct",
@@ -131,13 +135,29 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         "pointwise_kornBiaxialBound",
         "nondegeneracy",
     ]
+    assert payload["post_calc11"] == {
+        "closeable_package_count": 7,
+        "hard_wall_count": 2,
+        "hard_walls": ["KornLevelSet", "collapseImpossible"],
+        "clay_hard_core": "collapseImpossible",
+        "no_further_calcs_blocking": True,
+        "optional_next_calc": {
+            "calc": "Calc12",
+            "route_selector": "statistical",
+            "blocking": False,
+        },
+    }
     assert payload["control_card"]["calc11_status"] == payload["calc11_status"]
     assert (
         payload["control_card"]["empirical_diagnostics_complete"]
         == payload["empirical_diagnostics_complete"]
     )
+    assert payload["control_card"]["closeable_package_count"] == payload["closeable_package_count"]
     assert payload["control_card"]["no_further_calcs_blocking"] is True
     assert payload["control_card"]["remaining_math_wall"] == payload["remaining_math_wall"]
+    assert payload["control_card"]["hard_wall_count"] == payload["hard_wall_count"]
+    assert payload["control_card"]["hard_walls"] == payload["hard_walls"]
+    assert payload["control_card"]["clay_hard_core"] == payload["clay_hard_core"]
     assert (
         payload["control_card"]["formal_packages_write_now"]
         == payload["formal_packages_write_now"]
@@ -149,6 +169,7 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     )
     assert payload["control_card"]["calc11_next"] is False
     assert payload["control_card"]["calc11_next_legacy_field_retained"] is True
+    assert payload["control_card"]["post_calc11"] == payload["post_calc11"]
     assert payload["calc11_result_summary"] == {
         "bottom_5_percent_g12_mean_omega_e2_fraction": 0.343,
         "random_baseline": 1.0 / 3.0,
