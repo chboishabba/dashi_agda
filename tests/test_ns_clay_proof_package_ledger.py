@@ -95,6 +95,8 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         "selector_script": "scripts/ns_clay_calc12_route_selector.py",
         "pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
         "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+        "collapse_target_candidate": "target delta=1 sufficient; equivalently |<omega,e2>/g12| bounded",
+        "collapse_target_status": "candidate-only proof target",
         "fitted_beta": "candidate-only fitted beta placeholder",
         "fitted_C": "candidate-only fitted C placeholder",
         "beta_CI_95": "95% CI placeholder; compare the interval to 1 for route selection",
@@ -120,6 +122,12 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         "beta_CI_95": [2.129779448947756, 2.4212153871569915],
         "r_squared": 0.13893110418597066,
         "aggregate_decision": "regularity_consistent",
+        "beta_gt_one": True,
+        "regularity_route_supported": True,
+        "candidate_delta_target": 1.2754974180523737,
+        "r_squared_is_low": True,
+        "theorem_authority": False,
+        "clay_authority": False,
     }
 
     result = run_ledger(tmp_path, spec, output)
@@ -167,6 +175,11 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         payload["calc12_route_selector"]["pair_builder_script"]
         == "scripts/ns_clay_calc12_pair_builder.py"
     )
+    assert (
+        payload["calc12_route_selector"]["collapse_target_candidate"]
+        == "target delta=1 sufficient; equivalently |<omega,e2>/g12| bounded"
+    )
+    assert payload["calc12_route_selector"]["collapse_target_status"] == "candidate-only proof target"
     assert payload["calc12_route_selector"]["fitted_beta"] == "candidate-only fitted beta placeholder"
     assert payload["calc12_route_selector"]["fitted_C"] == "candidate-only fitted C placeholder"
     assert (
@@ -214,6 +227,8 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
             "selector_script": "scripts/ns_clay_calc12_route_selector.py",
             "pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
             "power_law": "|<omega,e2>|^2 ~ C*g12^beta",
+            "collapse_target_candidate": "target delta=1 sufficient; equivalently |<omega,e2>/g12| bounded",
+            "collapse_target_status": "candidate-only proof target",
             "fitted_beta": "candidate-only fitted beta placeholder",
             "fitted_C": "candidate-only fitted C placeholder",
             "beta_CI_95": "95% CI placeholder; compare the interval to 1 for route selection",
@@ -255,6 +270,15 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         == "scripts/ns_clay_calc12_route_selector.py"
     )
     assert payload["control_card"]["calc12_result_metadata"] == expected_calc12_result_metadata
+    assert payload["control_card"]["calc12_result_metadata"]["beta_gt_one"] is True
+    assert payload["control_card"]["calc12_result_metadata"]["regularity_route_supported"] is True
+    assert (
+        payload["control_card"]["calc12_result_metadata"]["candidate_delta_target"]
+        == 1.2754974180523737
+    )
+    assert payload["control_card"]["calc12_result_metadata"]["r_squared_is_low"] is True
+    assert payload["control_card"]["calc12_result_metadata"]["theorem_authority"] is False
+    assert payload["control_card"]["calc12_result_metadata"]["clay_authority"] is False
     assert (
         payload["control_card"]["formal_packages_write_now"]
         == payload["formal_packages_write_now"]
