@@ -6,6 +6,27 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS interior pressure-mediated vorticity tranche for `2026-06-19`: adds
+  `DASHI.Physics.Closure.NSInteriorVorticityMaxPrincipleReceipt`,
+  `DASHI.Physics.Closure.NSPressureCZEnstrophyClosureReceipt`,
+  `scripts/ns_interior_vorticity_budget_diagnostic.py`,
+  `scripts/ns_omega_l3_timeseries_diagnostic.py`,
+  `scripts/ns_pressure_poisson_sign_audit.py`, and
+  `scripts/check_ns_interior_pressure_regression.py`, wired through
+  `DASHI.Everything` and the optional local Clay harness manifest. Calc 6 at
+  the frame-10 worst-vorticity cell `[9,71,29]` records raw-gradient
+  `lambda2 = 1.6119109128727063`, `lambda3 = 29.848578811173127`,
+  `omega_norm_sq = 12388.906932970465`, signed budget
+  `334772.5798298581`, and `Delta p = 5986.202503491044`. Calc 7 records
+  finite omega-L3 domain norms across 13 frames with min/mean/max
+  `219.35581815648177 / 244.53448709725947 / 273.5247888329034`. The
+  pressure-Poisson sign audit prefers `+Delta p` with best scale
+  `0.1760513397665311`, so the prior pressure-bypass violations are recorded
+  as a convention/sign issue to resolve, not as a closed pressure proof. This
+  tranche remains empirical and fail-closed: the interior maximum principle,
+  pressure-CZ bound, enstrophy/BKM bridge, full NS Clay, and Clay promotion
+  remain false/open.
+
 - NS pressure-Poisson bypass / Q3 threshold / geometric concentration tranche
   for `2026-06-19`: adds
   `DASHI.Physics.Closure.NSPressurePoissonBypassReceipt`,

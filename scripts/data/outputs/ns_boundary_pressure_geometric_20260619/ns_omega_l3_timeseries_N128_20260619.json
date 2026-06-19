@@ -1,0 +1,397 @@
+{
+  "C": "scripts/ns_omega_l3_timeseries_diagnostic.py",
+  "F": "Fail-closed empirical diagnostic; authority flags remain false.",
+  "G": "No theorem, Clay, or runtime authority is claimed by this diagnostic.",
+  "L": "Status is ok only if required fields and all frame computations are finite.",
+  "O": "Emit a deterministic per-frame periodic-domain omega diagnostics report from raw snapshots.",
+  "P": "FAIL_CLOSED_OMEGA_L3_TIMESERIES_DIAGNOSTIC",
+  "R": "Load raw omega_snapshots and compute L3, Linf, L2/enstrophy-proxy, mean, and max-index stats.",
+  "S": "Validate input shape/metadata and fail-closed on malformed archives or non-finite per-frame data.",
+  "authority": {
+    "candidate_only": false,
+    "clay_authority": false,
+    "empirical_non_promoting": false,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "cell_volume": 0.00011827955886955191,
+  "changed_paths": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_omega_l3_timeseries_N128_20260619.json"
+  ],
+  "contract": "ns_omega_l3_timeseries_diagnostic",
+  "domain_length": 6.283185307179586,
+  "domain_length_source": "metadata",
+  "dt": 0.001,
+  "errors": [],
+  "frame_count": 13,
+  "input": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "integration_method": "sum",
+  "integration_notes": [
+    "sum"
+  ],
+  "output": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_omega_l3_timeseries_N128_20260619.json",
+  "route_decision": "FAIL_CLOSED_OMEGA_L3_TIMESERIES_DIAGNOSTIC",
+  "rows": [
+    {
+      "enstrophy_proxy": 204862.2311516746,
+      "finite_cell_count": 2097152,
+      "frame": 0,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        122,
+        35,
+        35
+      ],
+      "max_value": 133.19590300678558,
+      "mean": 37.438303260685515,
+      "omega_l2_norm": 40.64210040724491,
+      "omega_l2_sq_domain_integral": 409724.4623033492,
+      "omega_l3_domain_integral": 20463978.660629362,
+      "omega_l3_domain_norm": 273.5247888329034,
+      "omega_l3_norm": 43.53282220092344,
+      "omega_linf": 133.19590300678558,
+      "status": "ok",
+      "time": 0.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 196399.26706027333,
+      "finite_cell_count": 2097152,
+      "frame": 1,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        93,
+        120,
+        19
+      ],
+      "max_value": 132.50557916178224,
+      "mean": 36.656764713843216,
+      "omega_l2_norm": 39.793773772568834,
+      "omega_l2_sq_domain_integral": 392798.53412054665,
+      "omega_l3_domain_integral": 19209796.42342541,
+      "omega_l3_domain_norm": 267.81871429382664,
+      "omega_l3_norm": 42.624672232378565,
+      "omega_linf": 132.50557916178224,
+      "status": "ok",
+      "time": 10.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 188542.0482650804,
+      "finite_cell_count": 2097152,
+      "frame": 2,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        93,
+        120,
+        19
+      ],
+      "max_value": 130.45795794777803,
+      "mean": 35.91477134882212,
+      "omega_l2_norm": 38.989647221176554,
+      "omega_l2_sq_domain_integral": 377084.0965301608,
+      "omega_l3_domain_integral": 18071054.219610933,
+      "omega_l3_domain_norm": 262.41852876466925,
+      "omega_l3_norm": 41.76520601179983,
+      "omega_linf": 130.45795794777803,
+      "status": "ok",
+      "time": 20.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 181232.94375763455,
+      "finite_cell_count": 2097152,
+      "frame": 3,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        93,
+        120,
+        19
+      ],
+      "max_value": 125.11365763675677,
+      "mean": 35.208994055576426,
+      "omega_l2_norm": 38.226432366980895,
+      "omega_l2_sq_domain_integral": 362465.8875152691,
+      "omega_l3_domain_integral": 17034475.978230815,
+      "omega_l3_domain_norm": 257.30186022255435,
+      "omega_l3_norm": 40.95086292115945,
+      "omega_linf": 125.11365763675677,
+      "status": "ok",
+      "time": 30.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 174411.4791571643,
+      "finite_cell_count": 2097152,
+      "frame": 4,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        52,
+        106,
+        99
+      ],
+      "max_value": 126.18387566467926,
+      "mean": 34.5363933894646,
+      "omega_l2_norm": 37.50012608506317,
+      "omega_l2_sq_domain_integral": 348822.9583143286,
+      "omega_l3_domain_integral": 16086959.396331523,
+      "omega_l3_domain_norm": 252.43989365682316,
+      "omega_l3_norm": 40.17705690907581,
+      "omega_linf": 126.18387566467926,
+      "status": "ok",
+      "time": 40.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 168018.37112767494,
+      "finite_cell_count": 2097152,
+      "frame": 5,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        52,
+        106,
+        99
+      ],
+      "max_value": 126.03570100628214,
+      "mean": 33.893375311758064,
+      "omega_l2_norm": 36.806420234227815,
+      "omega_l2_sq_domain_integral": 336036.7422553499,
+      "omega_l3_domain_integral": 15216250.753007691,
+      "omega_l3_domain_norm": 247.80071330223825,
+      "omega_l3_norm": 39.43870842374881,
+      "omega_linf": 126.03570100628214,
+      "status": "ok",
+      "time": 50.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 161998.64801529533,
+      "finite_cell_count": 2097152,
+      "frame": 6,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        52,
+        106,
+        99
+      ],
+      "max_value": 123.97744230318658,
+      "mean": 33.27630598781948,
+      "omega_l2_norm": 36.14106035590635,
+      "omega_l2_sq_domain_integral": 323997.29603059066,
+      "omega_l3_domain_integral": 14411448.539932791,
+      "omega_l3_domain_norm": 243.3525371258374,
+      "omega_l3_norm": 38.730759197531,
+      "omega_linf": 123.97744230318658,
+      "status": "ok",
+      "time": 60.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 156303.64807207425,
+      "finite_cell_count": 2097152,
+      "frame": 7,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        52,
+        106,
+        99
+      ],
+      "max_value": 120.19532869173325,
+      "mean": 32.68202127439352,
+      "omega_l2_norm": 35.500114393587516,
+      "omega_l2_sq_domain_integral": 312607.2961441485,
+      "omega_l3_domain_integral": 13663269.10554115,
+      "omega_l3_domain_norm": 239.0662159365107,
+      "omega_l3_norm": 38.04856999257013,
+      "omega_linf": 120.19532869173325,
+      "status": "ok",
+      "time": 70.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 150891.94430149175,
+      "finite_cell_count": 2097152,
+      "frame": 8,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        9,
+        71,
+        29
+      ],
+      "max_value": 115.9161920909837,
+      "mean": 32.10763856754395,
+      "omega_l2_norm": 34.880140256785026,
+      "omega_l2_sq_domain_integral": 301783.8886029835,
+      "omega_l3_domain_integral": 12964102.225898376,
+      "omega_l3_domain_norm": 234.91683929925134,
+      "omega_l3_norm": 37.38817619000027,
+      "omega_linf": 115.9161920909837,
+      "status": "ok",
+      "time": 80.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 145729.39889947942,
+      "finite_cell_count": 2097152,
+      "frame": 9,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        9,
+        71,
+        29
+      ],
+      "max_value": 114.46449552351767,
+      "mean": 31.550629308474072,
+      "omega_l2_norm": 34.27826106490827,
+      "omega_l2_sq_domain_integral": 291458.79779895884,
+      "omega_l3_domain_integral": 12307907.896520587,
+      "omega_l3_domain_norm": 230.88448274023858,
+      "omega_l3_norm": 36.74640671132437,
+      "omega_linf": 114.46449552351767,
+      "status": "ok",
+      "time": 90.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 140788.60759801618,
+      "finite_cell_count": 2097152,
+      "frame": 10,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        9,
+        71,
+        29
+      ],
+      "max_value": 111.30546677037236,
+      "mean": 31.008889965198655,
+      "omega_l2_norm": 33.69216758294734,
+      "omega_l2_sq_domain_integral": 281577.21519603237,
+      "omega_l3_domain_integral": 11689970.537782826,
+      "omega_l3_domain_norm": 226.95398122550907,
+      "omega_l3_norm": 36.12084796642498,
+      "omega_linf": 111.30546677037236,
+      "status": "ok",
+      "time": 100.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 136047.9797949072,
+      "finite_cell_count": 2097152,
+      "frame": 11,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        11,
+        101,
+        65
+      ],
+      "max_value": 107.43263838397617,
+      "mean": 30.480322993798943,
+      "omega_l2_norm": 33.12006984036522,
+      "omega_l2_sq_domain_integral": 272095.9595898144,
+      "omega_l3_domain_integral": 11106576.847206855,
+      "omega_l3_domain_norm": 223.11395870752943,
+      "omega_l3_norm": 35.50968940110434,
+      "omega_linf": 107.43263838397617,
+      "status": "ok",
+      "time": 110.0,
+      "total_cell_count": 2097152
+    },
+    {
+      "enstrophy_proxy": 131490.66261787523,
+      "finite_cell_count": 2097152,
+      "frame": 12,
+      "integration_notes": [
+        "sum",
+        "cell_volume=0.00011828"
+      ],
+      "max_index": [
+        79,
+        49,
+        123
+      ],
+      "max_value": 107.45348584451732,
+      "mean": 29.963716444049037,
+      "omega_l2_norm": 32.560618978547616,
+      "omega_l2_sq_domain_integral": 262981.32523575047,
+      "omega_l3_domain_integral": 10554738.409368224,
+      "omega_l3_domain_norm": 219.35581815648177,
+      "omega_l3_norm": 34.911562755571,
+      "omega_linf": 107.45348584451732,
+      "status": "ok",
+      "time": 120.0,
+      "total_cell_count": 2097152
+    }
+  ],
+  "schema_version": "1.0.0",
+  "script": "scripts/ns_omega_l3_timeseries_diagnostic.py",
+  "status": "ok",
+  "steps": [
+    0.0,
+    10.0,
+    20.0,
+    30.0,
+    40.0,
+    50.0,
+    60.0,
+    70.0,
+    80.0,
+    90.0,
+    100.0,
+    110.0,
+    120.0
+  ],
+  "time": [
+    0.0,
+    10.0,
+    20.0,
+    30.0,
+    40.0,
+    50.0,
+    60.0,
+    70.0,
+    80.0,
+    90.0,
+    100.0,
+    110.0,
+    120.0
+  ],
+  "warnings": []
+}
