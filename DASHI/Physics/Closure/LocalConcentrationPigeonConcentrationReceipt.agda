@@ -19,9 +19,12 @@ open import Data.List.Base using (List; _∷_; [])
 --   4. finite component count h_fin recorded as a hypothesis, with
 --      empirical N_max <= 20630 only as candidate evidence;
 --   5. pigeon bound K / N_max^(1/3);
---   6. no promotion;
---   7. package variables;
---   8. blockers.
+--   6. Leray energy tail bound and epsilon decay;
+--   7. local concentration from L^{3,infty} blow-up;
+--   8. finite component and pigeon lower-bound surfaces;
+--   9. no promotion;
+--  10. package variables;
+--  11. blockers.
 --
 -- No theorem promotion and no Clay promotion are claimed here.
 
@@ -62,6 +65,21 @@ data LocalConcentrationStage : Set where
   empiricalNMaxCandidateEvidenceRecorded :
     LocalConcentrationStage
 
+  lerayEnergyTailBoundRecorded :
+    LocalConcentrationStage
+
+  epsilonDecayRecorded :
+    LocalConcentrationStage
+
+  localL3BlowupConcentrationRecorded :
+    LocalConcentrationStage
+
+  finiteComponentBoundRecorded :
+    LocalConcentrationStage
+
+  pigeonLowerBoundRecorded :
+    LocalConcentrationStage
+
   pigeonBoundKOverNMaxOneThird :
     LocalConcentrationStage
 
@@ -83,6 +101,11 @@ canonicalLocalConcentrationStages =
   ∷ finiteComponentCountHFinRecorded
   ∷ hFinToComponentLocalConcentrationRecorded
   ∷ empiricalNMaxCandidateEvidenceRecorded
+  ∷ lerayEnergyTailBoundRecorded
+  ∷ epsilonDecayRecorded
+  ∷ localL3BlowupConcentrationRecorded
+  ∷ finiteComponentBoundRecorded
+  ∷ pigeonLowerBoundRecorded
   ∷ pigeonBoundKOverNMaxOneThird
   ∷ noPromotionClaimed
   ∷ packageVariablesRecorded
@@ -107,6 +130,11 @@ canonicalLocalConcentrationVariables =
   ∷ "K"
   ∷ "K / N_max^(1/3)"
   ∷ "pigeon_concentration"
+  ∷ "||lambda2+(.,t)||_L3(|x|>R)"
+  ∷ "epsilon(R,E0)"
+  ∷ "epsilon(R,E0) -> 0 as R -> infinity"
+  ∷ "B(0,R0)"
+  ∷ "one component neighbourhood"
   ∷ []
 
 data LocalConcentrationBlocker : Set where
@@ -152,6 +180,10 @@ canonicalLocalConcentrationReceiptBoundary =
   ∷ "local ball concentration is recorded as a surface"
   ∷ "the finite component count h_fin is recorded as a hypothesis, while N_max <= 20630 stays candidate evidence only"
   ∷ "the pigeon_concentration bound K / N_max^(1/3) is recorded as a surface, not a promoted theorem"
+  ∷ "the Leray energy tail bound ||lambda2+(.,t)||_L3(|x|>R) <= epsilon(R,E0) is recorded as a surface, with epsilon(R,E0) -> 0 as R -> infinity"
+  ∷ "the local L3 concentration in B(0,R0) from L3,infty blow-up is recorded as a surface"
+  ∷ "the finite component bound N_max <= 20630 / h_fin is recorded as a surface"
+  ∷ "the pigeon lower bound K / N_max^(1/3) on one component neighbourhood is recorded as a surface"
   ∷ "theorem promotion remains false"
   ∷ "Clay promotion remains false"
   ∷ []
@@ -279,11 +311,74 @@ record LocalConcentrationPigeonConcentrationReceipt : Setω where
     componentCountAnalyticHypothesisIsTrue :
       componentCountAnalyticHypothesis ≡ true
 
+    lerayEnergyTailBoundRecordedFlag :
+      Bool
+
+    lerayEnergyTailBoundRecordedFlagIsTrue :
+      lerayEnergyTailBoundRecordedFlag ≡ true
+
+    epsilonDecayRecordedFlag :
+      Bool
+
+    epsilonDecayRecordedFlagIsTrue :
+      epsilonDecayRecordedFlag ≡ true
+
+    localL3BlowupConcentrationRecordedFlag :
+      Bool
+
+    localL3BlowupConcentrationRecordedFlagIsTrue :
+      localL3BlowupConcentrationRecordedFlag ≡ true
+
+    finiteComponentBoundRecordedFlag :
+      Bool
+
+    finiteComponentBoundRecordedFlagIsTrue :
+      finiteComponentBoundRecordedFlag ≡ true
+
+    pigeonLowerBoundRecordedFlag :
+      Bool
+
+    pigeonLowerBoundRecordedFlagIsTrue :
+      pigeonLowerBoundRecordedFlag ≡ true
+
     componentLocalConcentrationSurface :
       String
 
     componentLocalConcentrationSurfaceIsCanonical :
       componentLocalConcentrationSurface ≡ "K / N_max^(1/3)"
+
+    lerayEnergyTailBoundSurface :
+      String
+
+    lerayEnergyTailBoundSurfaceIsCanonical :
+      lerayEnergyTailBoundSurface ≡
+      "||lambda2+(.,t)||_L3(|x|>R) <= epsilon(R,E0)"
+
+    epsilonDecaySurface :
+      String
+
+    epsilonDecaySurfaceIsCanonical :
+      epsilonDecaySurface ≡ "epsilon(R,E0) -> 0 as R -> infinity"
+
+    localL3BlowupConcentrationSurface :
+      String
+
+    localL3BlowupConcentrationSurfaceIsCanonical :
+      localL3BlowupConcentrationSurface
+      ≡ "local L3 concentration in B(0,R0) from L3,infty blow-up"
+
+    finiteComponentBoundSurface :
+      String
+
+    finiteComponentBoundSurfaceIsCanonical :
+      finiteComponentBoundSurface ≡ "N_max <= 20630 / h_fin"
+
+    pigeonLowerBoundOnComponentNeighbourhoodSurface :
+      String
+
+    pigeonLowerBoundOnComponentNeighbourhoodSurfaceIsCanonical :
+      pigeonLowerBoundOnComponentNeighbourhoodSurface
+      ≡ "K / N_max^(1/3) on one component neighbourhood"
 
     pigeonBoundFormula :
       String
@@ -411,9 +506,49 @@ canonicalLocalConcentrationPigeonConcentrationReceipt =
         true
     ; componentCountAnalyticHypothesisIsTrue =
         refl
+    ; lerayEnergyTailBoundRecordedFlag =
+        true
+    ; lerayEnergyTailBoundRecordedFlagIsTrue =
+        refl
+    ; epsilonDecayRecordedFlag =
+        true
+    ; epsilonDecayRecordedFlagIsTrue =
+        refl
+    ; localL3BlowupConcentrationRecordedFlag =
+        true
+    ; localL3BlowupConcentrationRecordedFlagIsTrue =
+        refl
+    ; finiteComponentBoundRecordedFlag =
+        true
+    ; finiteComponentBoundRecordedFlagIsTrue =
+        refl
+    ; pigeonLowerBoundRecordedFlag =
+        true
+    ; pigeonLowerBoundRecordedFlagIsTrue =
+        refl
     ; componentLocalConcentrationSurface =
         "K / N_max^(1/3)"
     ; componentLocalConcentrationSurfaceIsCanonical =
+        refl
+    ; lerayEnergyTailBoundSurface =
+        "||lambda2+(.,t)||_L3(|x|>R) <= epsilon(R,E0)"
+    ; lerayEnergyTailBoundSurfaceIsCanonical =
+        refl
+    ; epsilonDecaySurface =
+        "epsilon(R,E0) -> 0 as R -> infinity"
+    ; epsilonDecaySurfaceIsCanonical =
+        refl
+    ; localL3BlowupConcentrationSurface =
+        "local L3 concentration in B(0,R0) from L3,infty blow-up"
+    ; localL3BlowupConcentrationSurfaceIsCanonical =
+        refl
+    ; finiteComponentBoundSurface =
+        "N_max <= 20630 / h_fin"
+    ; finiteComponentBoundSurfaceIsCanonical =
+        refl
+    ; pigeonLowerBoundOnComponentNeighbourhoodSurface =
+        "K / N_max^(1/3) on one component neighbourhood"
+    ; pigeonLowerBoundOnComponentNeighbourhoodSurfaceIsCanonical =
         refl
     ; pigeonBoundFormula =
         "K / N_max^(1/3)"
@@ -461,4 +596,43 @@ localConcentrationClayPromotedIsFalse :
   ≡
   false
 localConcentrationClayPromotedIsFalse =
+  refl
+
+localConcentrationLerayEnergyTailBoundSurfaceIsCanonical :
+  lerayEnergyTailBoundSurface
+    canonicalLocalConcentrationPigeonConcentrationReceipt
+  ≡
+  "||lambda2+(.,t)||_L3(|x|>R) <= epsilon(R,E0)"
+localConcentrationLerayEnergyTailBoundSurfaceIsCanonical =
+  refl
+
+localConcentrationEpsilonDecaySurfaceIsCanonical :
+  epsilonDecaySurface canonicalLocalConcentrationPigeonConcentrationReceipt
+  ≡
+  "epsilon(R,E0) -> 0 as R -> infinity"
+localConcentrationEpsilonDecaySurfaceIsCanonical =
+  refl
+
+localConcentrationLocalL3BlowupConcentrationSurfaceIsCanonical :
+  localL3BlowupConcentrationSurface
+    canonicalLocalConcentrationPigeonConcentrationReceipt
+  ≡
+  "local L3 concentration in B(0,R0) from L3,infty blow-up"
+localConcentrationLocalL3BlowupConcentrationSurfaceIsCanonical =
+  refl
+
+localConcentrationFiniteComponentBoundSurfaceIsCanonical :
+  finiteComponentBoundSurface
+    canonicalLocalConcentrationPigeonConcentrationReceipt
+  ≡
+  "N_max <= 20630 / h_fin"
+localConcentrationFiniteComponentBoundSurfaceIsCanonical =
+  refl
+
+localConcentrationPigeonLowerBoundOnComponentNeighbourhoodSurfaceIsCanonical :
+  pigeonLowerBoundOnComponentNeighbourhoodSurface
+    canonicalLocalConcentrationPigeonConcentrationReceipt
+  ≡
+  "K / N_max^(1/3) on one component neighbourhood"
+localConcentrationPigeonLowerBoundOnComponentNeighbourhoodSurfaceIsCanonical =
   refl
