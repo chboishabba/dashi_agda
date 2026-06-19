@@ -317,6 +317,8 @@ import DASHI.Physics.Closure.NSInteriorVorticityMaxPrincipleReceipt
 import DASHI.Physics.Closure.NSPressureCZEnstrophyClosureReceipt
 import DASHI.Physics.Closure.NSLayerL2VorticityFractionReceipt
 import DASHI.Physics.Closure.NSWeightedLambda2CarrierQuantileReceipt
+import DASHI.Physics.Closure.NSShahmurovTwoPaperClaimIntakeReceipt
+import DASHI.Physics.Closure.NSBroadTubeSerrinLiftGapReceipt
 import DASHI.Physics.Closure.NSPressureHessianGateShapeCore
 import DASHI.Physics.Closure.NSStrainBMOBoundReceipt
 import DASHI.Physics.Closure.NSIntegralConditionDiagnosticReceipt

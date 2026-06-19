@@ -23,6 +23,12 @@ DEFAULT_OUTPUT = Path("outputs/ns_lambda2_carrier_route_summary.json")
 TARGET_FRACTIONS = (0.05, 0.10, 0.25, 0.50)
 REGION_KEYS = ("negative", "near_zero", "positive")
 CHECK_CARD_KEYS = ("O", "R", "C", "S", "L", "P", "G", "F")
+SHAHMUROV_INTAKE_PATTERNS = (
+    "*Shahmurov*intake*.json",
+    "*shahmurov*intake*.json",
+    "*Shahmurov*claim*intake*.json",
+    "*shahmurov*claim*intake*.json",
+)
 
 
 def _parse_args() -> argparse.Namespace:
@@ -71,6 +77,105 @@ def _load_json(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ValueError(f"top-level JSON payload is not an object: {path}")
     return payload
+
+
+def _find_shahmurov_intake_json(output_path: Path | None) -> Path | None:
+    search_dir = output_path.parent if output_path is not None else Path.cwd()
+    matches: list[Path] = []
+    for pattern in SHAHMUROV_INTAKE_PATTERNS:
+        matches.extend(search_dir.glob(pattern))
+    candidates = sorted({path for path in matches if path.is_file()})
+    return candidates[0] if candidates else None
+
+
+def _walk_json_nodes(node: Any):
+    yield node
+    if isinstance(node, dict):
+        for value in node.values():
+            yield from _walk_json_nodes(value)
+    elif isinstance(node, list):
+        for value in node:
+            yield from _walk_json_nodes(value)
+
+
+def _extract_first_matching_value(node: Any, keys: tuple[str, ...]) -> Any | None:
+    normalized_targets = {_normalize_key(key) for key in keys}
+    for candidate in _walk_json_nodes(node):
+        if isinstance(candidate, dict):
+            for key, value in candidate.items():
+                if _normalize_key(str(key)) in normalized_targets:
+                    return value
+    return None
+
+
+def _as_bool(value: Any) -> bool | None:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)) and value in (0, 1):
+        return bool(value)
+    if isinstance(value, str):
+        normalized = _normalize_key(value)
+        if normalized in {"true", "yes", "verified", "peerreviewverified", "peerreviewed"}:
+            return True
+        if normalized in {"false", "no", "unverified", "pending", "unknown", "notverified"}:
+            return False
+    return None
+
+
+def _shahmurov_external_claim_summary(output_path: Path | None) -> dict[str, Any]:
+    intake_path = _find_shahmurov_intake_json(output_path)
+    observed = intake_path is not None
+    peer_review_verified = False
+
+    if intake_path is not None:
+        try:
+            payload = _load_json(intake_path)
+        except (OSError, ValueError, json.JSONDecodeError):
+            payload = None
+        if payload is not None:
+            direct_bool = _as_bool(
+                _extract_first_matching_value(
+                    payload,
+                    (
+                        "external_claim_peer_review_verified",
+                        "peer_review_verified",
+                        "peerreviewverified",
+                        "external_review_verified",
+                        "review_verified",
+                    ),
+                )
+            )
+            if direct_bool is not None:
+                peer_review_verified = direct_bool
+            else:
+                peer_review_status = _extract_first_matching_value(
+                    payload,
+                    (
+                        "external_status",
+                        "externalStatus",
+                        "peer_review_status",
+                        "peerReviewStatus",
+                        "review_status",
+                        "reviewStatus",
+                        "status",
+                    ),
+                )
+                if isinstance(peer_review_status, str):
+                    normalized = _normalize_key(peer_review_status)
+                    peer_review_verified = normalized in {
+                        "verified",
+                        "peerreviewverified",
+                        "peerreviewed",
+                        "reviewverified",
+                        "externallyverified",
+                    }
+
+    return {
+        "external_claim_route_observed": observed,
+        "external_claim_peer_review_verified": peer_review_verified,
+        "external_claim_promotion_allowed": False,
+        "external_claim_route_code": "Shahmurov/SerrinFromQ2Control" if observed else None,
+    }
 
 
 def _coerce_number(value: Any) -> float | None:
@@ -460,6 +565,7 @@ def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
     changed_files: list[str] = []
+    external_claim = _shahmurov_external_claim_summary(args.output)
     inputs = {
         "quantile_json": str(args.quantile_json),
         "partition_json": str(args.partition_json),
@@ -535,7 +641,9 @@ def main() -> int:
             "near_zero_fraction": region_fractions["near_zero"],
             "positive_fraction": region_fractions["positive"],
             "route_code": route_code,
+            **external_claim,
         },
+        **external_claim,
         "O": "Worker 6 owns the lambda2 carrier route summary.",
         "R": "Summarize the epsilon thresholds and signed-region fractions from two recorded JSON inputs.",
         "C": SCRIPT_NAME,

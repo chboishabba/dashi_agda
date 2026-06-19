@@ -1,6 +1,20 @@
 # FOR TODO GO TO '# TODO'
 
 Current NS Clay action note for `2026-06-18`:
+- Shahmurov two-paper claim intake / broad-tube Serrin gap tranche for
+  `2026-06-19` is recorded. Artifacts:
+  `DASHI/Physics/Closure/NSShahmurovTwoPaperClaimIntakeReceipt.agda`,
+  `DASHI/Physics/Closure/NSBroadTubeSerrinLiftGapReceipt.agda`,
+  `scripts/ns_shahmurov_claim_intake.py`,
+  `scripts/check_ns_shahmurov_claim_intake_regression.py`, and the updated
+  `scripts/ns_lambda2_carrier_route_summary.py` / local harness manifest. The
+  Shahmurov intake records arXiv `2605.01875` and `2605.01873` as an external
+  fail-closed claim surface only: peer review, Dashi route supersession, and
+  Clay promotion are all false. The manual review gates are zero-defect
+  rigidity, passive-strain visibility, endpoint strictness, finite-overlap
+  descendants, and the Part I dependency. The Dashi route remains
+  `broad_tube_required`; strict-carrier control is insufficient, and the live
+  internal obligations are broad-tube coarea, Serrin lift, and BKM bridge.
 - Pressure-convention normalization tranche for `2026-06-19` is recorded.
   Artifacts:
   `DASHI/Physics/Closure/NSPressurePoissonConventionNormalizationReceipt.agda`,
