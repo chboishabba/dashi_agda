@@ -1,0 +1,128 @@
+{
+  "C": "scripts/ns_layer_l2_vorticity_fraction_summary.py",
+  "F": "Analytic proof obligations remain open; the fractions are only heuristic route indicators.",
+  "G": "Do not promote SerrinFromQ2Control or Clay claims from this telemetry alone.",
+  "L": "The route stays evidence-only; crossing 25% is a stronger empirical signal than crossing 5%, but neither is a theorem.",
+  "O": "Summarize Calc 8 layer-L2 vorticity-fraction telemetry for the Shahmurov/SerrinFromQ2Control route.",
+  "P": "FAIL_CLOSED_NS_LAYER_L2_VORTICITY_FRACTION_SUMMARY",
+  "R": "Compute per-eps fraction aggregates and flag whether the empirical bands cross the 5% and 25% heuristics.",
+  "S": "Group Calc 8 rows by epsilon band, summarize fraction ranges across frames, and keep the output deterministic.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "contract": "ns_layer_l2_vorticity_fraction_summary",
+  "eps_band_count": 4,
+  "eps_bands": [
+    {
+      "crosses_25pct": false,
+      "crosses_5pct": false,
+      "eps": 0.001,
+      "fraction_count": 13,
+      "fraction_field": "vorticity_fraction",
+      "fraction_stats": {
+        "count": 13,
+        "max": 0.00019310583413265837,
+        "mean": 0.00017065548618035617,
+        "min": 0.00013966842124745355
+      },
+      "frame_count": 13,
+      "frame_max": 12,
+      "frame_min": 0,
+      "touches_25pct": false,
+      "touches_5pct": false
+    },
+    {
+      "crosses_25pct": false,
+      "crosses_5pct": false,
+      "eps": 0.01,
+      "fraction_count": 13,
+      "fraction_field": "vorticity_fraction",
+      "fraction_stats": {
+        "count": 13,
+        "max": 0.0019673253564923754,
+        "mean": 0.0017215705676850985,
+        "min": 0.0015262680936971556
+      },
+      "frame_count": 13,
+      "frame_max": 12,
+      "frame_min": 0,
+      "touches_25pct": false,
+      "touches_5pct": false
+    },
+    {
+      "crosses_25pct": false,
+      "crosses_5pct": false,
+      "eps": 0.1,
+      "fraction_count": 13,
+      "fraction_field": "vorticity_fraction",
+      "fraction_stats": {
+        "count": 13,
+        "max": 0.019062833364576894,
+        "mean": 0.017090189859841835,
+        "min": 0.015319900559077077
+      },
+      "frame_count": 13,
+      "frame_max": 12,
+      "frame_min": 0,
+      "touches_25pct": false,
+      "touches_5pct": false
+    },
+    {
+      "crosses_25pct": false,
+      "crosses_5pct": false,
+      "eps": 1.0,
+      "fraction_count": 13,
+      "fraction_field": "vorticity_fraction",
+      "fraction_stats": {
+        "count": 13,
+        "max": 0.18825663224520564,
+        "mean": 0.16999198817491581,
+        "min": 0.15119918559448156
+      },
+      "frame_count": 13,
+      "frame_max": 12,
+      "frame_min": 0,
+      "touches_25pct": false,
+      "touches_5pct": false
+    }
+  ],
+  "fraction_field": "vorticity_fraction",
+  "fraction_field_counts": {
+    "vorticity_fraction": 52
+  },
+  "fraction_overall_stats": {
+    "count": 52,
+    "max": 0.18825663224520564,
+    "mean": 0.04724360102215577,
+    "min": 0.00013966842124745355
+  },
+  "frame_count_stats": {
+    "count": 4,
+    "max": 13.0,
+    "mean": 13.0,
+    "min": 13.0
+  },
+  "input": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_layer_l2_vorticity_fraction_N128_20260619.json",
+  "route": {
+    "any_band_crosses_25pct": false,
+    "any_band_crosses_5pct": false,
+    "implication": "No epsilon band crosses the 5% heuristic threshold, so the Serrin route remains only a weak empirical gate.",
+    "implication_code": "below_5pct",
+    "name": "Shahmurov/SerrinFromQ2Control"
+  },
+  "row_count": 52,
+  "schema_version": "1.0.0",
+  "script": "scripts/ns_layer_l2_vorticity_fraction_summary.py",
+  "status": "ok",
+  "thresholds": {
+    "five_percent": 0.05,
+    "twenty_five_percent": 0.25
+  },
+  "warnings": []
+}

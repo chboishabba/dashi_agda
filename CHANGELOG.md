@@ -117,6 +117,26 @@ monitor surface.
   `h_delta1`, `KornLevelSet`, `collapseImpossible`, full NS Clay, and Clay
   promotion remain open/false.
 
+- Calc 8 layer L2 vorticity fraction tranche for `2026-06-19`: records the
+  layer-L2 vorticity fraction diagnostic as empirical/non-promoting via
+  `DASHI.Physics.Closure.NSLayerL2VorticityFractionReceipt`,
+  `scripts/ns_layer_l2_vorticity_fraction_diagnostic.py`,
+  `scripts/ns_layer_l2_vorticity_fraction_summary.py`, and
+  `scripts/check_ns_layer_l2_vorticity_fraction_regression.py`, wired through
+  `DASHI.Everything` and optional local Clay harness surfaces. Over 13 N128
+  frames, the fraction of total domain `sum(|omega|^2)` in
+  `|lambda2| < eps` has min/mean/max
+  `0.00013966842124745355 / 0.00017065548618035617 /
+  0.00019310583413265837` for `eps = 0.001`,
+  `0.0015262680936971556 / 0.0017215705676850985 /
+  0.0019673253564923754` for `eps = 0.01`,
+  `0.015319900559077077 / 0.017090189859841835 /
+  0.019062833364576894` for `eps = 0.1`, and
+  `0.15119918559448156 / 0.16999198817491581 /
+  0.18825663224520564` for `eps = 1.0`. This is weak support for
+  strict-carrier SerrinFromQ2Control and stronger only for a broad tube; no
+  theorem promotion, carrier upgrade, or Clay promotion claim is made.
+
 - Formal structure/lens law tranche for `2026-06-17`: adds
   `DASHI.Core.FormalStructureLawCore`, `DASHI.Core.FormalLensLawCore`, and
   `DASHI.Core.SourceProcessEvidenceLawCore` as the candidate-only law-bearing
