@@ -27,6 +27,9 @@ data NSBroadTubeVorticityCoverageDependency : Set where
   weightedLambda2QuantileTelemetry :
     NSBroadTubeVorticityCoverageDependency
 
+  broadLayerFractionTelemetry :
+    NSBroadTubeVorticityCoverageDependency
+
   broadTubeMassLowerBound :
     NSBroadTubeVorticityCoverageDependency
 
@@ -36,14 +39,37 @@ data NSBroadTubeVorticityCoverageDependency : Set where
   coareaPartition :
     NSBroadTubeVorticityCoverageDependency
 
+data NSBroadTubeVorticityCoverageKernelWitness : Set where
+  deepInteriorControlWitness :
+    NSBroadTubeVorticityCoverageKernelWitness
+
+  broadLayerFractionWitness :
+    NSBroadTubeVorticityCoverageKernelWitness
+
+  coareaPartitionWitness :
+    NSBroadTubeVorticityCoverageKernelWitness
+
+  coverageKernelSpecificityWitness :
+    NSBroadTubeVorticityCoverageKernelWitness
+
 canonicalNSBroadTubeVorticityCoverageDependencies :
   List NSBroadTubeVorticityCoverageDependency
 canonicalNSBroadTubeVorticityCoverageDependencies =
   layerL2FractionTelemetry
   ∷ weightedLambda2QuantileTelemetry
+  ∷ broadLayerFractionTelemetry
   ∷ broadTubeMassLowerBound
   ∷ deepInteriorControl
   ∷ coareaPartition
+  ∷ []
+
+canonicalNSBroadTubeVorticityCoverageKernelWitnesses :
+  List NSBroadTubeVorticityCoverageKernelWitness
+canonicalNSBroadTubeVorticityCoverageKernelWitnesses =
+  deepInteriorControlWitness
+  ∷ broadLayerFractionWitness
+  ∷ coareaPartitionWitness
+  ∷ coverageKernelSpecificityWitness
   ∷ []
 
 canonicalNSBroadTubeVorticityCoverageDependencyLabels :
@@ -51,6 +77,7 @@ canonicalNSBroadTubeVorticityCoverageDependencyLabels :
 canonicalNSBroadTubeVorticityCoverageDependencyLabels =
   "layerL2FractionTelemetry"
   ∷ "weightedLambda2QuantileTelemetry"
+  ∷ "broadLayerFractionTelemetry"
   ∷ "broadTubeMassLowerBound"
   ∷ "deepInteriorControl"
   ∷ "coareaPartition"
@@ -63,6 +90,9 @@ data NSBroadTubeVorticityCoverageHypothesis : Set where
   weightedLambda2QuantileTelemetryChecked :
     NSBroadTubeVorticityCoverageHypothesis
 
+  broadLayerFractionTelemetryChecked :
+    NSBroadTubeVorticityCoverageHypothesis
+
   broadTubeMassLowerBoundChecked :
     NSBroadTubeVorticityCoverageHypothesis
 
@@ -72,14 +102,45 @@ data NSBroadTubeVorticityCoverageHypothesis : Set where
   coareaPartitionChecked :
     NSBroadTubeVorticityCoverageHypothesis
 
+data NSBroadTubeVorticityCoverageBlocker : Set where
+  strictCarrierLaneInsufficient :
+    NSBroadTubeVorticityCoverageBlocker
+
+  broadLayerFractionNotYetPinned :
+    NSBroadTubeVorticityCoverageBlocker
+
+  coareaPartitionNotYetKernelSpecific :
+    NSBroadTubeVorticityCoverageBlocker
+
+  deepInteriorControlNotYetDischarged :
+    NSBroadTubeVorticityCoverageBlocker
+
+  unconditionalCoverageTheoremAbsent :
+    NSBroadTubeVorticityCoverageBlocker
+
+  clayPromotionForbidden :
+    NSBroadTubeVorticityCoverageBlocker
+
 canonicalNSBroadTubeVorticityCoverageHypotheses :
   List NSBroadTubeVorticityCoverageHypothesis
 canonicalNSBroadTubeVorticityCoverageHypotheses =
   layerL2FractionTelemetryChecked
   ∷ weightedLambda2QuantileTelemetryChecked
+  ∷ broadLayerFractionTelemetryChecked
   ∷ broadTubeMassLowerBoundChecked
   ∷ deepInteriorControlChecked
   ∷ coareaPartitionChecked
+  ∷ []
+
+canonicalNSBroadTubeVorticityCoverageBlockers :
+  List NSBroadTubeVorticityCoverageBlocker
+canonicalNSBroadTubeVorticityCoverageBlockers =
+  strictCarrierLaneInsufficient
+  ∷ broadLayerFractionNotYetPinned
+  ∷ coareaPartitionNotYetKernelSpecific
+  ∷ deepInteriorControlNotYetDischarged
+  ∷ unconditionalCoverageTheoremAbsent
+  ∷ clayPromotionForbidden
   ∷ []
 
 canonicalNSBroadTubeVorticityCoverageHypothesisLabels :
@@ -87,6 +148,7 @@ canonicalNSBroadTubeVorticityCoverageHypothesisLabels :
 canonicalNSBroadTubeVorticityCoverageHypothesisLabels =
   "layerL2FractionTelemetry"
   ∷ "weightedLambda2QuantileTelemetry"
+  ∷ "broadLayerFractionTelemetry"
   ∷ "broadTubeMassLowerBound"
   ∷ "deepInteriorControl"
   ∷ "coareaPartition"
@@ -111,6 +173,9 @@ data NSBroadTubeVorticityCoverageStep : Set where
   constructConditionalCoverageSocket :
     NSBroadTubeVorticityCoverageStep
 
+  recordCoverageBlockers :
+    NSBroadTubeVorticityCoverageStep
+
 canonicalNSBroadTubeVorticityCoverageSteps :
   List NSBroadTubeVorticityCoverageStep
 canonicalNSBroadTubeVorticityCoverageSteps =
@@ -120,6 +185,7 @@ canonicalNSBroadTubeVorticityCoverageSteps =
   ∷ recordDeepInteriorControl
   ∷ recordCoareaPartition
   ∷ constructConditionalCoverageSocket
+  ∷ recordCoverageBlockers
   ∷ []
 
 data NSBroadTubeVorticityCoverageConclusion : Set where
@@ -133,6 +199,10 @@ broadTubeVorticityCoverageSocket :
 broadTubeVorticityCoverageSocket _ _ =
   vorticityCoverageSocketConstructed
 
+canonicalNSBroadTubeVorticityCoverageKernelStatement : String
+canonicalNSBroadTubeVorticityCoverageKernelStatement =
+  "Kernel-specific broad-tube vorticity coverage remains conditional: deep-interior control, broad-layer fraction telemetry, and coarea partition are recorded, but the coverage blockers keep the unconditional theorem and Clay promotion closed."
+
 data NSBroadTubeVorticityCoverageNoPromotion : Set where
 
 nsBroadTubeVorticityCoverageNoPromotion :
@@ -142,11 +212,11 @@ nsBroadTubeVorticityCoverageNoPromotion ()
 
 nsBroadTubeVorticityCoverageStatement : String
 nsBroadTubeVorticityCoverageStatement =
-  "Conditional broad-tube vorticity coverage socket: layer L2 fraction telemetry, weighted lambda2 quantile telemetry, broad tube mass lower bound, deep interior control, and coarea partition yield a vorticity coverage socket conditionally."
+  "Conditional broad-tube vorticity coverage socket: layer L2 fraction telemetry, weighted lambda2 quantile telemetry, broad-layer fraction telemetry, broad tube mass lower bound, deep interior control, and coarea partition are recorded with explicit blockers; no unconditional theorem is claimed."
 
 nsBroadTubeVorticityCoverageBoundary : String
 nsBroadTubeVorticityCoverageBoundary =
-  "strict carrier insufficiency is recorded; broad tube requirement is recorded; no unconditional coverage theorem is claimed; Clay promotion remains false."
+  "strict carrier insufficiency is recorded; broad-layer fraction and coarea partition remain only conditionally pinned; deep interior control is not discharged; no unconditional coverage theorem is claimed; Clay promotion remains false."
 
 record NSBroadTubeVorticityCoverageORCSLPGF : Set where
   constructor mkNSBroadTubeVorticityCoverageORCSLPGF
@@ -164,11 +234,11 @@ canonicalNSBroadTubeVorticityCoverageORCSLPGF :
   NSBroadTubeVorticityCoverageORCSLPGF
 canonicalNSBroadTubeVorticityCoverageORCSLPGF =
   mkNSBroadTubeVorticityCoverageORCSLPGF
-    "Record a conditional broad-tube vorticity coverage socket."
-    "Use layerL2FractionTelemetry, weightedLambda2QuantileTelemetry, broadTubeMassLowerBound, deepInteriorControl, and coareaPartition as the dependency and hypothesis basis."
+    "Record a conditional broad-tube vorticity coverage socket with explicit deep-interior, broad-layer fraction, and coarea witnesses."
+    "Use layerL2FractionTelemetry, weightedLambda2QuantileTelemetry, broadLayerFractionTelemetry, broadTubeMassLowerBound, deepInteriorControl, and coareaPartition as the dependency and hypothesis basis."
     "The conclusion is the conditional socket vorticityCoverageSocketConstructed."
-    "The receipt records strict carrier insufficiency and broad tube requirement."
-    "Link dependencies -> hypotheses -> steps -> conditional socket construction."
+    "The receipt records strict carrier insufficiency plus explicit coverage blockers."
+    "Link dependencies -> hypotheses -> steps -> kernel witnesses -> conditional socket construction."
     "No unconditional coverage theorem is established here."
     "Clay promotion is explicitly false."
     "Keep the promotion payload empty and the receipt fail-closed."
@@ -218,6 +288,19 @@ record NSBroadTubeVorticityCoverageReceipt : Setω where
       coverageConclusion ≡
         broadTubeVorticityCoverageSocket hypotheses steps
 
+    kernelWitnesses :
+      List NSBroadTubeVorticityCoverageKernelWitness
+
+    kernelWitnessesAreCanonical :
+      kernelWitnesses
+      ≡ canonicalNSBroadTubeVorticityCoverageKernelWitnesses
+
+    coverageBlockers :
+      List NSBroadTubeVorticityCoverageBlocker
+
+    coverageBlockersAreCanonical :
+      coverageBlockers ≡ canonicalNSBroadTubeVorticityCoverageBlockers
+
     strictCarrierInsufficient :
       Bool
 
@@ -229,6 +312,30 @@ record NSBroadTubeVorticityCoverageReceipt : Setω where
 
     broadTubeRequiredIsTrue :
       broadTubeRequired ≡ true
+
+    broadLayerFractionTelemetryRecorded :
+      Bool
+
+    broadLayerFractionTelemetryRecordedIsTrue :
+      broadLayerFractionTelemetryRecorded ≡ true
+
+    coareaPartitionTelemetry :
+      Bool
+
+    coareaPartitionTelemetryIsTrue :
+      coareaPartitionTelemetry ≡ true
+
+    deepInteriorControlRecorded :
+      Bool
+
+    deepInteriorControlRecordedIsTrue :
+      deepInteriorControlRecorded ≡ true
+
+    assumptionsDischarged :
+      Bool
+
+    assumptionsDischargedIsFalse :
+      assumptionsDischarged ≡ false
 
     coverageSocketConstructed :
       Bool
@@ -247,6 +354,13 @@ record NSBroadTubeVorticityCoverageReceipt : Setω where
 
     clayPromotionIsFalse :
       clayPromotion ≡ false
+
+    coverageKernelSpecificity :
+      String
+
+    coverageKernelSpecificityIsCanonical :
+      coverageKernelSpecificity
+      ≡ canonicalNSBroadTubeVorticityCoverageKernelStatement
 
     statement :
       String
@@ -309,6 +423,14 @@ canonicalNSBroadTubeVorticityCoverageReceipt =
           canonicalNSBroadTubeVorticityCoverageSteps
     ; coverageConclusionIsCanonical =
         refl
+    ; kernelWitnesses =
+        canonicalNSBroadTubeVorticityCoverageKernelWitnesses
+    ; kernelWitnessesAreCanonical =
+        refl
+    ; coverageBlockers =
+        canonicalNSBroadTubeVorticityCoverageBlockers
+    ; coverageBlockersAreCanonical =
+        refl
     ; strictCarrierInsufficient =
         true
     ; strictCarrierInsufficientIsTrue =
@@ -316,6 +438,22 @@ canonicalNSBroadTubeVorticityCoverageReceipt =
     ; broadTubeRequired =
         true
     ; broadTubeRequiredIsTrue =
+        refl
+    ; broadLayerFractionTelemetryRecorded =
+        true
+    ; broadLayerFractionTelemetryRecordedIsTrue =
+        refl
+    ; coareaPartitionTelemetry =
+        true
+    ; coareaPartitionTelemetryIsTrue =
+        refl
+    ; deepInteriorControlRecorded =
+        true
+    ; deepInteriorControlRecordedIsTrue =
+        refl
+    ; assumptionsDischarged =
+        false
+    ; assumptionsDischargedIsFalse =
         refl
     ; coverageSocketConstructed =
         true
@@ -328,6 +466,10 @@ canonicalNSBroadTubeVorticityCoverageReceipt =
     ; clayPromotion =
         false
     ; clayPromotionIsFalse =
+        refl
+    ; coverageKernelSpecificity =
+        canonicalNSBroadTubeVorticityCoverageKernelStatement
+    ; coverageKernelSpecificityIsCanonical =
         refl
     ; statement =
         nsBroadTubeVorticityCoverageStatement

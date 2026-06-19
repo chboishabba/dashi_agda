@@ -1,7 +1,7 @@
 # FOR TODO GO TO '# TODO'
 
 Current NS Clay action note for `2026-06-20`:
-- Broad-tube conditional regularization tranche is queued. Expected artifacts:
+- Broad-tube conditional regularization tranche is recorded. Artifacts:
   `DASHI/Physics/Closure/NSBroadTubeNondegenerateGradientReceipt.agda`,
   `DASHI/Physics/Closure/NSBroadTubeVorticityCoverageReceipt.agda`,
   `DASHI/Physics/Closure/NSBroadTubeSerrinExponentDischargeReceipt.agda`,
@@ -10,6 +10,11 @@ Current NS Clay action note for `2026-06-20`:
   `scripts/check_ns_broad_tube_conditional_regularization_summary.py`. The
   local Clay harness manifest has discovery entries staged for the new
   receipts and scripts; theorem promotion and Clay promotion remain false.
+  The current proof-kernel blockers remain explicit: the nondegenerate-
+  gradient receipt is conditional only, the vorticity lane is still
+  strict-carrier-insufficient and `broad_tube_required`, the Serrin exponent
+  discharge is conditional only, and the composite receipt keeps
+  `unconditionalClayNS=false` with no-promotion in force.
 
 Current NS Clay action note for `2026-06-18`:
 - Broad-tube coarea / Serrin lift / BKM bridge implementation tranche for
