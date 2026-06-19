@@ -103,10 +103,9 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     assert payload["validation_passed"] is True
     assert payload["status_counts"] == {"Clay": 1, "closeable": 4, "open": 5}
     assert payload["control_card"]["first_six_are_formalization"] is True
-    assert payload["control_card"]["hard_theorem_count"] == 3
+    assert payload["control_card"]["hard_theorem_count"] == 2
     assert payload["control_card"]["hard_theorems"] == [
         "KornLevelSet",
-        "BoundaryHB",
         "collapseImpossible",
     ]
     assert "formalization/standard packages" in payload["control_card"]["concise_regularit_route"]
@@ -119,12 +118,13 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     assert payload["no_further_calcs_blocking"] is True
     assert payload["remaining_math_wall"] == ["KornLevelSet", "collapseImpossible"]
     assert payload["formal_packages_write_now"] == [
-        "width_ode_extraction",
-        "cutoff_error_budget",
-        "localized_enstrophy_identity",
-        "source_dissipation_balance",
-        "bkm_bridge_readiness",
-        "bkm_integral_estimate",
+        "millerToH5",
+        "GD3-SobolevBound-Correct",
+        "coareaGradientBound",
+        "LocalConcentration",
+        "pigeon_concentration",
+        "StepA_PerComponent",
+        "BoundaryHB_Correct",
     ]
     assert payload["boundaryHB_correct_status"] == "closeable"
     assert payload["boundaryHB_correct_dependency"] == [
