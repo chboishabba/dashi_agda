@@ -112,6 +112,15 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         "proof_blocking": False,
         "no_further_calcs_blocking": True,
     }
+    expected_calc12_result_metadata = {
+        "result_artifact_path": (
+            "scripts/data/outputs/ns_clay_calc12_route_selector_real_N128_20260619.json"
+        ),
+        "beta": 2.2754974180523737,
+        "beta_CI_95": [2.129779448947756, 2.4212153871569915],
+        "r_squared": 0.13893110418597066,
+        "aggregate_decision": "regularity_consistent",
+    }
 
     result = run_ledger(tmp_path, spec, output)
     assert result.returncode == 0, result.stderr
@@ -150,6 +159,7 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     assert payload["calc12_non_blocking"] is True
     assert payload["calc12_pair_builder_script"] == "scripts/ns_clay_calc12_pair_builder.py"
     assert payload["calc12_selector_script"] == "scripts/ns_clay_calc12_route_selector.py"
+    assert payload["calc12_result_metadata"] == expected_calc12_result_metadata
     assert payload["calc12_route_selector"] == expected_calc12
     assert payload["calc12_route_selector"]["script"] == "scripts/ns_clay_calc12_route_selector.py"
     assert payload["calc12_route_selector"]["selector_script"] == "scripts/ns_clay_calc12_route_selector.py"
@@ -195,6 +205,7 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         "calc12_non_blocking": True,
         "calc12_pair_builder_script": "scripts/ns_clay_calc12_pair_builder.py",
         "calc12_selector_script": "scripts/ns_clay_calc12_route_selector.py",
+        "calc12_result_metadata": expected_calc12_result_metadata,
         "no_further_calcs_blocking": True,
         "optional_next_calc": {
             "calc": "Calc12",
@@ -243,6 +254,7 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
         payload["control_card"]["calc12_selector_script"]
         == "scripts/ns_clay_calc12_route_selector.py"
     )
+    assert payload["control_card"]["calc12_result_metadata"] == expected_calc12_result_metadata
     assert (
         payload["control_card"]["formal_packages_write_now"]
         == payload["formal_packages_write_now"]
@@ -254,6 +266,7 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     )
     assert payload["control_card"]["calc11_next"] is False
     assert payload["control_card"]["calc11_next_legacy_field_retained"] is True
+    assert payload["post_calc11"]["calc12_result_metadata"] == expected_calc12_result_metadata
     assert payload["control_card"]["post_calc11"] == payload["post_calc11"]
     assert payload["control_card"]["calc12_route_selector"] == expected_calc12
     assert payload["control_card"]["post_calc11"]["calc12_executable"] is True
@@ -265,6 +278,10 @@ def test_ledger_emits_compact_fail_closed_json(tmp_path: Path) -> None:
     assert (
         payload["control_card"]["post_calc11"]["calc12_selector_script"]
         == "scripts/ns_clay_calc12_route_selector.py"
+    )
+    assert (
+        payload["control_card"]["post_calc11"]["calc12_result_metadata"]
+        == expected_calc12_result_metadata
     )
     assert payload["control_card"]["optional_next_calc_blocks_proof"] is False
     assert payload["control_card"]["proof_blocking"] is False
