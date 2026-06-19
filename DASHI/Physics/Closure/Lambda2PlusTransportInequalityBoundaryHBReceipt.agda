@@ -16,7 +16,10 @@ open import Data.List.Base using (List; _∷_; [])
 -- BoundaryHB side records the corrected route: BoundaryHB_Correct closes
 -- only through the pointwise route lambda2 = 0, lambda1 = -lambda3,
 -- lambda3 >= lambda_min, and pointwise ||nabla^2 u|| >= eta, which
--- projects to max_k B_k >= b0 through pointwise kornBiaxialBound.
+-- projects to max_k B_k >= b0 through pointwise kornBiaxialBound, with
+-- the Kato second-derivative formula recording B_k =
+-- 2 lambda3^2 |<partial_k e1, e2>|^2 on the biaxial boundary and the
+-- pointwise lower bound recorded as b0.
 -- Integral Korn plus continuity is explicitly insufficient, KornLevelSet
 -- remains open for h_strain_dom, and no Clay promotion is claimed here.
 
@@ -111,6 +114,48 @@ data BoundaryHBPointwiseRouteProjection : Set where
   pointwiseMaxBKAtLeastB0Projected :
     BoundaryHBPointwiseRouteProjection
 
+data BoundaryHBPointwiseRouteStep : Set where
+  biaxialBoundaryLambda2ZeroAndLambda1NegativeLambda3Recorded :
+    BoundaryHBPointwiseRouteStep
+
+  katoSecondDerivativeFormulaRecorded :
+    BoundaryHBPointwiseRouteStep
+
+  lambda3AtLeastLambdaMinRecorded :
+    BoundaryHBPointwiseRouteStep
+
+  pointwiseNabla2ULowerBoundEtaRecorded :
+    BoundaryHBPointwiseRouteStep
+
+  pointwiseKornBiaxialBoundRecorded :
+    BoundaryHBPointwiseRouteStep
+
+  pointwiseMaxBKAtLeastB0Recorded :
+    BoundaryHBPointwiseRouteStep
+
+canonicalBoundaryHBPointwiseRouteSteps :
+  List BoundaryHBPointwiseRouteStep
+canonicalBoundaryHBPointwiseRouteSteps =
+  biaxialBoundaryLambda2ZeroAndLambda1NegativeLambda3Recorded
+  ∷ katoSecondDerivativeFormulaRecorded
+  ∷ lambda3AtLeastLambdaMinRecorded
+  ∷ pointwiseNabla2ULowerBoundEtaRecorded
+  ∷ pointwiseKornBiaxialBoundRecorded
+  ∷ pointwiseMaxBKAtLeastB0Recorded
+  ∷ []
+
+boundaryHBPointwiseKatoFormulaStatement : String
+boundaryHBPointwiseKatoFormulaStatement =
+  "On the biaxial boundary, lambda2 = 0 and lambda1 = -lambda3; Kato's second-derivative formula gives B_k = 2 lambda3^2 |<partial_k e1, e2>|^2."
+
+boundaryHBPointwiseB0Statement : String
+boundaryHBPointwiseB0Statement =
+  "With lambda3 >= lambda_min and ||nabla^2 u||_F >= eta, pointwise kornBiaxialBound yields max_k B_k >= (2/3) * lambda_min^2 * eta^2 / const, recorded as b0."
+
+boundaryHBPointwiseRouteStatement : String
+boundaryHBPointwiseRouteStatement =
+  "BoundaryHB_Correct pointwise route: on the biaxial boundary lambda2 = 0 and lambda1 = -lambda3; Kato's second-derivative formula gives B_k = 2 lambda3^2 |<partial_k e1, e2>|^2; with lambda3 >= lambda_min and ||nabla^2 u||_F >= eta, pointwise kornBiaxialBound yields max_k B_k >= b0."
+
 canonicalBoundaryHBPointwiseRouteProjection :
   List BoundaryHBPointwiseRouteProjection
 canonicalBoundaryHBPointwiseRouteProjection =
@@ -124,6 +169,189 @@ canonicalBoundaryHBPointwiseRouteProjection =
 boundaryHBPointwiseRouteProjectionStatement : String
 boundaryHBPointwiseRouteProjectionStatement =
   "BoundaryHB_Correct pointwise route: lambda2 = 0, lambda1 = -lambda3, lambda3 >= lambda_min, and ||nabla^2 u|| >= eta project to max_k B_k >= b0."
+
+record BoundaryHBPointwiseRouteReceipt : Set where
+  field
+    status :
+      BoundaryHBAssemblyStatus
+
+    statusIsCanonical :
+      status ≡ boundaryHBCorrectPointwiseRouteRecordedCandidateOnly
+
+    routeSteps :
+      List BoundaryHBPointwiseRouteStep
+
+    routeStepsAreCanonical :
+      routeSteps ≡ canonicalBoundaryHBPointwiseRouteSteps
+
+    routeProjection :
+      List BoundaryHBPointwiseRouteProjection
+
+    routeProjectionIsCanonical :
+      routeProjection ≡ canonicalBoundaryHBPointwiseRouteProjection
+
+    biaxialBoundaryLambda2ZeroAndLambda1NegativeLambda3 :
+      Bool
+
+    biaxialBoundaryLambda2ZeroAndLambda1NegativeLambda3IsTrue :
+      biaxialBoundaryLambda2ZeroAndLambda1NegativeLambda3 ≡ true
+
+    katoSecondDerivativeFormula :
+      Bool
+
+    katoSecondDerivativeFormulaIsTrue :
+      katoSecondDerivativeFormula ≡ true
+
+    katoSecondDerivativeFormulaStatement :
+      String
+
+    katoSecondDerivativeFormulaStatementIsCanonical :
+      katoSecondDerivativeFormulaStatement ≡ boundaryHBPointwiseKatoFormulaStatement
+
+    lambda3AtLeastLambdaMin :
+      Bool
+
+    lambda3AtLeastLambdaMinIsTrue :
+      lambda3AtLeastLambdaMin ≡ true
+
+    pointwiseNabla2ULowerBoundEta :
+      Bool
+
+    pointwiseNabla2ULowerBoundEtaIsTrue :
+      pointwiseNabla2ULowerBoundEta ≡ true
+
+    pointwiseKornBiaxialBound :
+      Bool
+
+    pointwiseKornBiaxialBoundIsTrue :
+      pointwiseKornBiaxialBound ≡ true
+
+    pointwiseMaxBKAtLeastB0 :
+      Bool
+
+    pointwiseMaxBKAtLeastB0IsTrue :
+      pointwiseMaxBKAtLeastB0 ≡ true
+
+    b0Recorded :
+      Bool
+
+    b0RecordedIsTrue :
+      b0Recorded ≡ true
+
+    b0RecordedStatement :
+      String
+
+    b0RecordedStatementIsCanonical :
+      b0RecordedStatement ≡ boundaryHBPointwiseB0Statement
+
+    integralKornPlusContinuityInsufficientRouteFlag :
+      Bool
+
+    integralKornPlusContinuityInsufficientRouteFlagIsTrue :
+      integralKornPlusContinuityInsufficientRouteFlag ≡ true
+
+    kornLevelSetRemainsOpen :
+      Bool
+
+    kornLevelSetRemainsOpenIsTrue :
+      kornLevelSetRemainsOpen ≡ true
+
+    clayPromotion :
+      Bool
+
+    clayPromotionIsFalse :
+      clayPromotion ≡ false
+
+    routeStatement :
+      String
+
+    routeStatementIsCanonical :
+      routeStatement ≡ boundaryHBPointwiseRouteStatement
+
+    receiptBoundary :
+      List String
+
+open BoundaryHBPointwiseRouteReceipt public
+
+canonicalBoundaryHBPointwiseRouteReceipt :
+  BoundaryHBPointwiseRouteReceipt
+canonicalBoundaryHBPointwiseRouteReceipt =
+  record
+    { status =
+        boundaryHBCorrectPointwiseRouteRecordedCandidateOnly
+    ; statusIsCanonical =
+        refl
+    ; routeSteps =
+        canonicalBoundaryHBPointwiseRouteSteps
+    ; routeStepsAreCanonical =
+        refl
+    ; routeProjection =
+        canonicalBoundaryHBPointwiseRouteProjection
+    ; routeProjectionIsCanonical =
+        refl
+    ; biaxialBoundaryLambda2ZeroAndLambda1NegativeLambda3 =
+        true
+    ; biaxialBoundaryLambda2ZeroAndLambda1NegativeLambda3IsTrue =
+        refl
+    ; katoSecondDerivativeFormula =
+        true
+    ; katoSecondDerivativeFormulaIsTrue =
+        refl
+    ; katoSecondDerivativeFormulaStatement =
+        boundaryHBPointwiseKatoFormulaStatement
+    ; katoSecondDerivativeFormulaStatementIsCanonical =
+        refl
+    ; lambda3AtLeastLambdaMin =
+        true
+    ; lambda3AtLeastLambdaMinIsTrue =
+        refl
+    ; pointwiseNabla2ULowerBoundEta =
+        true
+    ; pointwiseNabla2ULowerBoundEtaIsTrue =
+        refl
+    ; pointwiseKornBiaxialBound =
+        true
+    ; pointwiseKornBiaxialBoundIsTrue =
+        refl
+    ; pointwiseMaxBKAtLeastB0 =
+        true
+    ; pointwiseMaxBKAtLeastB0IsTrue =
+        refl
+    ; b0Recorded =
+        true
+    ; b0RecordedIsTrue =
+        refl
+    ; b0RecordedStatement =
+        boundaryHBPointwiseB0Statement
+    ; b0RecordedStatementIsCanonical =
+        refl
+    ; integralKornPlusContinuityInsufficientRouteFlag =
+        true
+    ; integralKornPlusContinuityInsufficientRouteFlagIsTrue =
+        refl
+    ; kornLevelSetRemainsOpen =
+        true
+    ; kornLevelSetRemainsOpenIsTrue =
+        refl
+    ; clayPromotion =
+        false
+    ; clayPromotionIsFalse =
+        refl
+    ; routeStatement =
+        boundaryHBPointwiseRouteStatement
+    ; routeStatementIsCanonical =
+        refl
+    ; receiptBoundary =
+        "BoundaryHB_Correct pointwise route recorded on the biaxial boundary"
+        ∷ "lambda2 = 0 and lambda1 = -lambda3 are recorded explicitly"
+        ∷ "Kato second-derivative formula records B_k = 2 lambda3^2 |<partial_k e1, e2>|^2"
+        ∷ "lambda3 >= lambda_min and ||nabla^2 u||_F >= eta feed pointwise kornBiaxialBound"
+        ∷ "The resulting max_k B_k lower bound is recorded as b0"
+        ∷ "Integral Korn plus continuity is explicitly insufficient"
+        ∷ "KornLevelSet remains open for h_strain_dom"
+        ∷ "Clay promotion stays false"
+        ∷ []
+    }
 
 canonicalBoundaryHBAssemblyBlockers :
   List BoundaryHBAssemblyBlocker
@@ -306,6 +534,12 @@ record BoundaryHBAssemblyReceipt : Setω where
       pointwiseRouteProjectionStatement
       ≡ boundaryHBPointwiseRouteProjectionStatement
 
+    pointwiseRouteReceipt :
+      BoundaryHBPointwiseRouteReceipt
+
+    pointwiseRouteReceiptIsCanonical :
+      pointwiseRouteReceipt ≡ canonicalBoundaryHBPointwiseRouteReceipt
+
     receiptBoundary :
       List String
 
@@ -427,6 +661,10 @@ canonicalBoundaryHBAssemblyReceipt =
         boundaryHBPointwiseRouteProjectionStatement
     ; pointwiseRouteProjectionStatementIsCanonical =
         refl
+    ; pointwiseRouteReceipt =
+        canonicalBoundaryHBPointwiseRouteReceipt
+    ; pointwiseRouteReceiptIsCanonical =
+        refl
     ; receiptBoundary =
         "lambda2plus_transport_ineq is standard/write-now"
         ∷ "BoundaryHB_Correct closes only through the pointwise route lambda2 = 0, lambda1 = -lambda3, lambda3 >= lambda_min, and ||nabla^2 u|| >= eta"
@@ -436,3 +674,59 @@ canonicalBoundaryHBAssemblyReceipt =
         ∷ "Clay promotion stays false"
         ∷ []
     }
+
+boundaryHBPointwiseRouteReceiptProjectionIsCanonical :
+  routeProjection canonicalBoundaryHBPointwiseRouteReceipt
+  ≡ canonicalBoundaryHBPointwiseRouteProjection
+boundaryHBPointwiseRouteReceiptProjectionIsCanonical =
+  refl
+
+boundaryHBPointwiseRouteReceiptStatementIsCanonical :
+  routeStatement canonicalBoundaryHBPointwiseRouteReceipt
+  ≡ boundaryHBPointwiseRouteStatement
+boundaryHBPointwiseRouteReceiptStatementIsCanonical =
+  refl
+
+boundaryHBPointwiseRouteReceiptKatoFormulaStatementIsCanonical :
+  katoSecondDerivativeFormulaStatement canonicalBoundaryHBPointwiseRouteReceipt
+  ≡ boundaryHBPointwiseKatoFormulaStatement
+boundaryHBPointwiseRouteReceiptKatoFormulaStatementIsCanonical =
+  refl
+
+boundaryHBPointwiseRouteReceiptB0StatementIsCanonical :
+  b0RecordedStatement canonicalBoundaryHBPointwiseRouteReceipt
+  ≡ boundaryHBPointwiseB0Statement
+boundaryHBPointwiseRouteReceiptB0StatementIsCanonical =
+  refl
+
+boundaryHBPointwiseRouteReceiptIntegralKornInsufficient :
+  integralKornPlusContinuityInsufficientRouteFlag
+    canonicalBoundaryHBPointwiseRouteReceipt
+  ≡ true
+boundaryHBPointwiseRouteReceiptIntegralKornInsufficient =
+  refl
+
+boundaryHBPointwiseRouteReceiptKornLevelSetOpen :
+  kornLevelSetRemainsOpen canonicalBoundaryHBPointwiseRouteReceipt ≡ true
+boundaryHBPointwiseRouteReceiptKornLevelSetOpen =
+  refl
+
+boundaryHBPointwiseRouteReceiptKeepsClayFalse :
+  clayPromotion canonicalBoundaryHBPointwiseRouteReceipt ≡ false
+boundaryHBPointwiseRouteReceiptKeepsClayFalse =
+  refl
+
+boundaryHBAssemblyKeepsIntegralKornInsufficient :
+  integralKornPlusContinuityInsufficientFlag canonicalBoundaryHBAssemblyReceipt ≡ true
+boundaryHBAssemblyKeepsIntegralKornInsufficient =
+  refl
+
+boundaryHBAssemblyKeepsKornLevelSetOpen :
+  kornLevelSetOpenForHStrainDomFlag canonicalBoundaryHBAssemblyReceipt ≡ true
+boundaryHBAssemblyKeepsKornLevelSetOpen =
+  refl
+
+boundaryHBAssemblyKeepsClayFalse :
+  boundaryHBPromoted canonicalBoundaryHBAssemblyReceipt ≡ false
+boundaryHBAssemblyKeepsClayFalse =
+  refl

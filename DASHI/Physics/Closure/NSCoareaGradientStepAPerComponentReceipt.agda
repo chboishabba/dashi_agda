@@ -17,6 +17,203 @@ open import Agda.Builtin.String using (String)
 -- geometry/standard-lemma bookkeeping only; no Clay promotion or theorem
 -- promotion is claimed.
 
+data CoareaGradientBoundRouteStep : Set where
+  coareaFormulaRouteRecorded :
+    CoareaGradientBoundRouteStep
+  levelSetIsoperimetricStepRecorded :
+    CoareaGradientBoundRouteStep
+  gradLambda2PlusUpperBoundRecorded :
+    CoareaGradientBoundRouteStep
+  l3NormClosureRecorded :
+    CoareaGradientBoundRouteStep
+  gLowerBoundRecorded :
+    CoareaGradientBoundRouteStep
+  exponentR1Recorded :
+    CoareaGradientBoundRouteStep
+
+canonicalCoareaGradientBoundRouteSteps :
+  List CoareaGradientBoundRouteStep
+canonicalCoareaGradientBoundRouteSteps =
+  coareaFormulaRouteRecorded
+  ∷ levelSetIsoperimetricStepRecorded
+  ∷ gradLambda2PlusUpperBoundRecorded
+  ∷ l3NormClosureRecorded
+  ∷ gLowerBoundRecorded
+  ∷ exponentR1Recorded
+  ∷ []
+
+coareaGradientBoundRouteText : String
+coareaGradientBoundRouteText =
+  "coarea formula route -> level-set isoperimetric step -> |grad lambda2+| <= G -> ||lambda2+||_L3 <= Cgeo * G * r -> G >= K/(Cgeo*r)"
+
+coareaGradientBoundExponentText : String
+coareaGradientBoundExponentText =
+  "r^1"
+
+record CoareaGradientBoundRouteReceipt : Set where
+  constructor mkCoareaGradientBoundRouteReceipt
+  field
+    routeSteps :
+      List CoareaGradientBoundRouteStep
+    routeStepsAreCanonical :
+      routeSteps ≡ canonicalCoareaGradientBoundRouteSteps
+    routeText :
+      String
+    routeTextIsCanonical :
+      routeText ≡ coareaGradientBoundRouteText
+    exponentText :
+      String
+    exponentTextIsCanonical :
+      exponentText ≡ coareaGradientBoundExponentText
+    clayPromotion :
+      Bool
+    clayPromotionIsFalse :
+      clayPromotion ≡ false
+
+canonicalCoareaGradientBoundRouteReceipt :
+  CoareaGradientBoundRouteReceipt
+canonicalCoareaGradientBoundRouteReceipt =
+  mkCoareaGradientBoundRouteReceipt
+    canonicalCoareaGradientBoundRouteSteps
+    refl
+    coareaGradientBoundRouteText
+    refl
+    coareaGradientBoundExponentText
+    refl
+    false
+    refl
+
+coareaGradientBoundRouteSteps :
+  List CoareaGradientBoundRouteStep
+coareaGradientBoundRouteSteps =
+  CoareaGradientBoundRouteReceipt.routeSteps
+    canonicalCoareaGradientBoundRouteReceipt
+
+coareaGradientBoundRouteProjection :
+  String
+coareaGradientBoundRouteProjection =
+  CoareaGradientBoundRouteReceipt.routeText
+    canonicalCoareaGradientBoundRouteReceipt
+
+coareaGradientBoundExponentProjection :
+  String
+coareaGradientBoundExponentProjection =
+  CoareaGradientBoundRouteReceipt.exponentText
+    canonicalCoareaGradientBoundRouteReceipt
+
+coareaGradientBoundNoClayProjection :
+  Bool
+coareaGradientBoundNoClayProjection =
+  CoareaGradientBoundRouteReceipt.clayPromotion
+    canonicalCoareaGradientBoundRouteReceipt
+
+data StepAPerComponentAssemblyStep : Set where
+  localConcentrationAssemblyStep :
+    StepAPerComponentAssemblyStep
+  pigeonConcentrationAssemblyStep :
+    StepAPerComponentAssemblyStep
+  correctedCoareaGradientBoundAssemblyStep :
+    StepAPerComponentAssemblyStep
+  rEqualsD0AssemblyStep :
+    StepAPerComponentAssemblyStep
+
+canonicalStepAPerComponentAssemblySteps :
+  List StepAPerComponentAssemblyStep
+canonicalStepAPerComponentAssemblySteps =
+  localConcentrationAssemblyStep
+  ∷ pigeonConcentrationAssemblyStep
+  ∷ correctedCoareaGradientBoundAssemblyStep
+  ∷ rEqualsD0AssemblyStep
+  ∷ []
+
+stepAPerComponentAssemblyText : String
+stepAPerComponentAssemblyText =
+  "StepA_PerComponent assembles LocalConcentration + pigeon_concentration + corrected coareaGradientBound with r = d0"
+
+record StepAPerComponentRouteReceipt : Set where
+  constructor mkStepAPerComponentRouteReceipt
+  field
+    localConcentrationReceipt :
+      String
+    localConcentrationReceiptIsCanonical :
+      localConcentrationReceipt ≡ "LocalConcentration"
+    pigeonConcentrationReceipt :
+      String
+    pigeonConcentrationReceiptIsCanonical :
+      pigeonConcentrationReceipt ≡ "pigeon_concentration"
+    correctedCoareaGradientBoundReceipt :
+      CoareaGradientBoundRouteReceipt
+    correctedCoareaGradientBoundReceiptIsCanonical :
+      correctedCoareaGradientBoundReceipt
+        ≡ canonicalCoareaGradientBoundRouteReceipt
+    stepAPerComponentAssemblySteps :
+      List StepAPerComponentAssemblyStep
+    stepAPerComponentAssemblyStepsAreCanonical :
+      stepAPerComponentAssemblySteps
+        ≡ canonicalStepAPerComponentAssemblySteps
+    assemblyText :
+      String
+    assemblyTextIsCanonical :
+      assemblyText ≡ stepAPerComponentAssemblyText
+    rParameter :
+      String
+    rParameterIsD0 :
+      rParameter ≡ "r = d0"
+    conclusion :
+      String
+    conclusionIsCanonical :
+      conclusion ≡
+      "StepA_PerComponent closes the component-local route with r = d0 and the corrected coareaGradientBound."
+    clayPromotion :
+      Bool
+    clayPromotionIsFalse :
+      clayPromotion ≡ false
+
+canonicalStepAPerComponentRouteReceipt :
+  StepAPerComponentRouteReceipt
+canonicalStepAPerComponentRouteReceipt =
+  mkStepAPerComponentRouteReceipt
+    "LocalConcentration"
+    refl
+    "pigeon_concentration"
+    refl
+    canonicalCoareaGradientBoundRouteReceipt
+    refl
+    canonicalStepAPerComponentAssemblySteps
+    refl
+    stepAPerComponentAssemblyText
+    refl
+    "r = d0"
+    refl
+    "StepA_PerComponent closes the component-local route with r = d0 and the corrected coareaGradientBound."
+    refl
+    false
+    refl
+
+stepAPerComponentAssemblySteps :
+  List StepAPerComponentAssemblyStep
+stepAPerComponentAssemblySteps =
+  StepAPerComponentRouteReceipt.stepAPerComponentAssemblySteps
+    canonicalStepAPerComponentRouteReceipt
+
+stepAPerComponentRouteProjection :
+  String
+stepAPerComponentRouteProjection =
+  StepAPerComponentRouteReceipt.assemblyText
+    canonicalStepAPerComponentRouteReceipt
+
+stepAPerComponentRProjection :
+  String
+stepAPerComponentRProjection =
+  StepAPerComponentRouteReceipt.rParameter
+    canonicalStepAPerComponentRouteReceipt
+
+stepAPerComponentCorrectedCoareaReceiptProjection :
+  CoareaGradientBoundRouteReceipt
+stepAPerComponentCorrectedCoareaReceiptProjection =
+  StepAPerComponentRouteReceipt.correctedCoareaGradientBoundReceipt
+    canonicalStepAPerComponentRouteReceipt
+
 data NSCoareaGradientStepAPerComponentStatus : Set where
   candidateOnlyFailClosed :
     NSCoareaGradientStepAPerComponentStatus
@@ -71,6 +268,12 @@ exactObjectLabels =
   ∷ "C_geo"
   ∷ "r"
   ∷ "C_iso"
+  ∷ "coarea formula route"
+  ∷ "level-set isoperimetric step"
+  ∷ "|grad lambda2+| <= G"
+  ∷ "||lambda2+||_L3 <= Cgeo * G * r"
+  ∷ "G >= K/(Cgeo*r)"
+  ∷ "r^1"
   ∷ "component C_n"
   ∷ "d₀"
   ∷ "τ₀"
@@ -85,11 +288,33 @@ exactObjectLabels =
 record NSCoareaGradientStepAPerComponentAssembly : Set where
   constructor mkNSCoareaGradientStepAPerComponentAssembly
   field
+    coareaGradientBoundRouteReceipt :
+      CoareaGradientBoundRouteReceipt
+    coareaGradientBoundRouteReceiptIsCanonical :
+      coareaGradientBoundRouteReceipt
+        ≡ canonicalCoareaGradientBoundRouteReceipt
     correctedCoareaGradientBoundReceipt :
       String
     correctedCoareaGradientBoundReceiptIsCanonical :
       correctedCoareaGradientBoundReceipt ≡
       "CorrectedCoareaGradientBoundReceipt"
+
+    coareaRouteText :
+      String
+    coareaRouteTextIsCanonical :
+      coareaRouteText ≡ coareaGradientBoundRouteText
+
+    coareaExponentTextField :
+      String
+    coareaExponentTextFieldIsCanonical :
+      coareaExponentTextField
+        ≡ coareaGradientBoundExponentText
+
+    stepAPerComponentRouteReceipt :
+      StepAPerComponentRouteReceipt
+    stepAPerComponentRouteReceiptIsCanonical :
+      stepAPerComponentRouteReceipt
+        ≡ canonicalStepAPerComponentRouteReceipt
 
     localConcentrationPigeonConcentrationReceipt :
       String
@@ -148,7 +373,15 @@ canonicalNSCoareaGradientStepAPerComponentAssembly :
   NSCoareaGradientStepAPerComponentAssembly
 canonicalNSCoareaGradientStepAPerComponentAssembly =
   mkNSCoareaGradientStepAPerComponentAssembly
+    canonicalCoareaGradientBoundRouteReceipt
+    refl
     "CorrectedCoareaGradientBoundReceipt"
+    refl
+    coareaGradientBoundRouteText
+    refl
+    coareaGradientBoundExponentText
+    refl
+    canonicalStepAPerComponentRouteReceipt
     refl
     "LocalConcentrationPigeonConcentrationReceipt"
     refl
@@ -173,11 +406,11 @@ canonicalNSCoareaGradientStepAPerComponentAssembly =
 
 coareaExponentText : String
 coareaExponentText =
-  "coareaGradientBound exponent is r^1, not r^(7/2)"
+  "coareaGradientBound exponent is r^1, with the coarea formula route and level-set isoperimetric step recorded explicitly"
 
 stepAPerComponentText : String
 stepAPerComponentText =
-  "StepA_PerComponent assembles LocalConcentration + pigeon_concentration + corrected coareaGradientBound to close from local L3 near component C_n with diam(C_n) >= d0, layer_thickness >= tau0, ball radius r, K_n -> infinity, and sup_{partial C_n}|grad lambda2| -> infinity"
+  "StepA_PerComponent assembles LocalConcentration + pigeon_concentration + corrected coareaGradientBound with r = d0 to close from local L3 near component C_n with diam(C_n) >= d0, layer_thickness >= tau0, ball radius r, K_n -> infinity, and sup_{partial C_n}|grad lambda2| -> infinity"
 
 conclusionText : String
 conclusionText =
@@ -189,11 +422,17 @@ geometryNoteText =
 
 boundaryText : String
 boundaryText =
-  "Candidate-only geometry receipt: the corrected coarea gradient bound is fixed at r^1, the StepA_PerComponent route is recorded as an explicit assembly of LocalConcentration, pigeon_concentration, and corrected coareaGradientBound, and all promotion flags stay false."
+  "Candidate-only geometry receipt: the corrected coarea gradient bound records the coarea formula route, the level-set isoperimetric step, |grad lambda2+| <= G, ||lambda2+||_L3 <= Cgeo * G * r, and G >= K/(Cgeo*r) with exponent r^1; the StepA_PerComponent route is recorded as an explicit assembly of LocalConcentration, pigeon_concentration, corrected coareaGradientBound, and r = d0, and all promotion flags stay false."
 
 record NSCoareaGradientStepAPerComponentFormalSurface : Set where
   constructor mkNSCoareaGradientStepAPerComponentFormalSurface
   field
+    coareaGradientBoundRouteReceipt :
+      CoareaGradientBoundRouteReceipt
+    coareaGradientBoundRouteReceiptIsCanonical :
+      coareaGradientBoundRouteReceipt
+        ≡ canonicalCoareaGradientBoundRouteReceipt
+
     correctedCoareaExponentSurface :
       String
     correctedCoareaExponentSurfaceIsCanonical :
@@ -203,6 +442,12 @@ record NSCoareaGradientStepAPerComponentFormalSurface : Set where
       String
     stepAPerComponentAssemblySurfaceIsCanonical :
       stepAPerComponentAssemblySurface ≡ stepAPerComponentText
+
+    stepAPerComponentRouteReceipt :
+      StepAPerComponentRouteReceipt
+    stepAPerComponentRouteReceiptIsCanonical :
+      stepAPerComponentRouteReceipt
+        ≡ canonicalStepAPerComponentRouteReceipt
 
     closeableSurface :
       String
@@ -224,9 +469,13 @@ canonicalNSCoareaGradientStepAPerComponentFormalSurface :
   NSCoareaGradientStepAPerComponentFormalSurface
 canonicalNSCoareaGradientStepAPerComponentFormalSurface =
   mkNSCoareaGradientStepAPerComponentFormalSurface
+    canonicalCoareaGradientBoundRouteReceipt
+    refl
     coareaExponentText
     refl
     stepAPerComponentText
+    refl
+    canonicalStepAPerComponentRouteReceipt
     refl
     "candidate-only closeable StepA_PerComponent surface"
     refl
@@ -242,13 +491,13 @@ record NSCoareaGradientStepAPerComponentORCSLPGF : Set where
       String
     OIsCanonical :
       O ≡
-      "Worker 2 owns the corrected coarea gradient bound receipt surface only."
+      "Worker 1 owns the corrected coarea gradient bound receipt surface only."
 
     R :
       String
     RIsCanonical :
       R ≡
-      "Record the corrected coarea exponent as r^1 and close StepA_PerComponent by assembling LocalConcentration + pigeon_concentration + corrected coareaGradientBound around local L3 near component C_n."
+      "Record the corrected coarea exponent as r^1, the coarea formula route, the level-set isoperimetric step, |grad lambda2+| <= G, ||lambda2+||_L3 <= Cgeo * G * r, and G >= K/(Cgeo*r), then close StepA_PerComponent by assembling LocalConcentration + pigeon_concentration + corrected coareaGradientBound around local L3 near component C_n with r = d0."
 
     C :
       String
@@ -260,31 +509,31 @@ record NSCoareaGradientStepAPerComponentORCSLPGF : Set where
       String
     SIsCanonical :
       S ≡
-      "Related surfaces are CorrectedCoareaGradientBoundReceipt, LocalConcentrationPigeonConcentrationReceipt, and NSKatoHessianConfinementReceipt; no other files are touched."
+      "Related surfaces are CoareaGradientBoundRouteReceipt, StepAPerComponentRouteReceipt, CorrectedCoareaGradientBoundReceipt, LocalConcentrationPigeonConcentrationReceipt, and NSKatoHessianConfinementReceipt; no other files are touched."
 
     L :
       String
     LIsCanonical :
       L ≡
-      "CorrectedCoareaGradientBoundReceipt -> LocalConcentrationPigeonConcentrationReceipt -> StepA_PerComponent -> sup_{partial C_n}|grad lambda2| -> infinity"
+      "CoareaGradientBoundRouteReceipt -> StepAPerComponentRouteReceipt -> StepA_PerComponent -> sup_{partial C_n}|grad lambda2| -> infinity"
 
     P :
       String
     PIsCanonical :
       P ≡
-      "f=lambda2+, B(x0,r), K, C_geo, r, C_iso, component C_n, d0, tau0, local L3 near component C_n, diam(C_n) >= d0, layer_thickness >= tau0, ball radius r, K_n -> infinity, conclusion sup_{partial C_n}|grad lambda2| -> infinity"
+      "f=lambda2+, B(x0,r), K, C_geo, r, C_iso, component C_n, d0, tau0, local L3 near component C_n, diam(C_n) >= d0, layer_thickness >= tau0, ball radius r, K_n -> infinity, conclusion sup_{partial C_n}|grad lambda2| -> infinity, exponent r^1"
 
     G :
       String
     GIsCanonical :
       G ≡
-      "Candidate-only; no theorem promotion; main runs Agda."
+      "Candidate-only; no theorem or Clay promotion; main runs Agda."
 
     F :
       String
     FIsCanonical :
       F ≡
-      "Avoid depending on unavailable math libraries; this is a receipt surface, not a full formal coarea proof, and it stays candidate-only."
+      "Avoid depending on unavailable math libraries; this is a receipt surface, not a full formal coarea proof, and it stays candidate-only with checked record/projection inhabitants."
 
     routeAssembly :
       NSCoareaGradientStepAPerComponentAssembly
@@ -295,21 +544,21 @@ canonicalNSCoareaGradientStepAPerComponentORCSLPGF :
   NSCoareaGradientStepAPerComponentORCSLPGF
 canonicalNSCoareaGradientStepAPerComponentORCSLPGF =
   mkNSCoareaGradientStepAPerComponentORCSLPGF
-    "Worker 2 owns the corrected coarea gradient bound receipt surface only."
+    "Worker 1 owns the corrected coarea gradient bound receipt surface only."
     refl
-    "Record the corrected coarea exponent as r^1 and close StepA_PerComponent by assembling LocalConcentration + pigeon_concentration + corrected coareaGradientBound around local L3 near component C_n."
+    "Record the corrected coarea exponent as r^1, the coarea formula route, the level-set isoperimetric step, |grad lambda2+| <= G, ||lambda2+||_L3 <= Cgeo * G * r, and G >= K/(Cgeo*r), then close StepA_PerComponent by assembling LocalConcentration + pigeon_concentration + corrected coareaGradientBound around local L3 near component C_n with r = d0."
     refl
     "Create only NSCoareaGradientStepAPerComponentReceipt.agda."
     refl
-    "Related surfaces are CorrectedCoareaGradientBoundReceipt, LocalConcentrationPigeonConcentrationReceipt, and NSKatoHessianConfinementReceipt; no other files are touched."
+    "Related surfaces are CoareaGradientBoundRouteReceipt, StepAPerComponentRouteReceipt, CorrectedCoareaGradientBoundReceipt, LocalConcentrationPigeonConcentrationReceipt, and NSKatoHessianConfinementReceipt; no other files are touched."
     refl
-    "CorrectedCoareaGradientBoundReceipt -> LocalConcentrationPigeonConcentrationReceipt -> StepA_PerComponent -> sup_{partial C_n}|grad lambda2| -> infinity"
+    "CoareaGradientBoundRouteReceipt -> StepAPerComponentRouteReceipt -> StepA_PerComponent -> sup_{partial C_n}|grad lambda2| -> infinity"
     refl
-    "f=lambda2+, B(x0,r), K, C_geo, r, C_iso, component C_n, d0, tau0, local L3 near component C_n, diam(C_n) >= d0, layer_thickness >= tau0, ball radius r, K_n -> infinity, conclusion sup_{partial C_n}|grad lambda2| -> infinity"
+    "f=lambda2+, B(x0,r), K, C_geo, r, C_iso, component C_n, d0, tau0, local L3 near component C_n, diam(C_n) >= d0, layer_thickness >= tau0, ball radius r, K_n -> infinity, conclusion sup_{partial C_n}|grad lambda2| -> infinity, exponent r^1"
     refl
-    "Candidate-only; no theorem promotion; main runs Agda."
+    "Candidate-only; no theorem or Clay promotion; main runs Agda."
     refl
-    "Avoid depending on unavailable math libraries; this is a receipt surface, not a full formal coarea proof, and it stays candidate-only."
+    "Avoid depending on unavailable math libraries; this is a receipt surface, not a full formal coarea proof, and it stays candidate-only with checked record/projection inhabitants."
     refl
     canonicalNSCoareaGradientStepAPerComponentAssembly
     refl
@@ -337,6 +586,12 @@ record NSCoareaGradientStepAPerComponentReceipt : Set where
     exactObjectLabelsFieldIsCanonical :
       exactObjectLabelsField ≡ exactObjectLabels
 
+    coareaGradientBoundRouteReceipt :
+      CoareaGradientBoundRouteReceipt
+    coareaGradientBoundRouteReceiptIsCanonical :
+      coareaGradientBoundRouteReceipt
+        ≡ canonicalCoareaGradientBoundRouteReceipt
+
     canonicalRows :
       List NSCoareaGradientStepAPerComponentRow
     canonicalRowsIsCanonical :
@@ -351,6 +606,12 @@ record NSCoareaGradientStepAPerComponentReceipt : Set where
       String
     stepAPerComponentClosureIsCanonical :
       stepAPerComponentClosure ≡ stepAPerComponentText
+
+    stepAPerComponentRouteReceipt :
+      StepAPerComponentRouteReceipt
+    stepAPerComponentRouteReceiptIsCanonical :
+      stepAPerComponentRouteReceipt
+        ≡ canonicalStepAPerComponentRouteReceipt
 
     conclusion :
       String
@@ -409,11 +670,15 @@ canonicalNSCoareaGradientStepAPerComponentReceipt =
     refl
     exactObjectLabels
     refl
+    canonicalCoareaGradientBoundRouteReceipt
+    refl
     canonicalNSCoareaGradientStepAPerComponentRows
     refl
     coareaExponentText
     refl
     stepAPerComponentText
+    refl
+    canonicalStepAPerComponentRouteReceipt
     refl
     conclusionText
     refl
