@@ -25,7 +25,8 @@ import DASHI.Physics.Closure.NSBroadTubeSerrinBKMCompositeReceipt as Composite
 -- The record is import-light and list-led so later worker receipts can be
 -- merged with low risk.  It is conditional only: unconditionalClayNS is false,
 -- clayPromotion is false, and the conditional regularity socket is constructed
--- while no-promotion remains in force.
+-- while no-promotion remains in force.  The promotion gate is pinned to the
+-- imported proof-term receipts themselves, not just to route labels.
 
 data NSBroadTubeConditionalRegularityTheoremStatus : Set where
   conditionalRegularitySocketConstructedConditionally :
@@ -265,6 +266,33 @@ record NSBroadTubeConditionalRegularityTheoremReceipt : Setω where
       openBoundaries ≡
       canonicalNSBroadTubeConditionalRegularityTheoremOpenBoundaries
 
+    nondegenerateGradientReceipt :
+      Grad.NSBroadTubeNondegenerateGradientReceipt
+
+    vorticityCoverageReceipt :
+      Vort.NSBroadTubeVorticityCoverageReceipt
+
+    serrinExponentDischargeReceipt :
+      Exp.NSBroadTubeSerrinExponentDischargeReceipt
+
+    broadTubeCoareaBridgeReceipt :
+      Coarea.NSBroadTubeCoareaBridgeReceipt
+
+    broadTubeSerrinLiftReceipt :
+      Serrin.NSBroadTubeSerrinLiftReceipt
+
+    broadTubeBKMBridgeReceipt :
+      BKM.NSBroadTubeBKMBridgeReceipt
+
+    broadTubeSerrinBKMCompositeReceipt :
+      Composite.NSBroadTubeSerrinBKMCompositeReceipt
+
+    promotionGateSatisfied :
+      Bool
+
+    promotionGateSatisfiedIsFalse :
+      promotionGateSatisfied ≡ false
+
     nondegenerateGradientSocketConstructed :
       Bool
 
@@ -306,6 +334,16 @@ record NSBroadTubeConditionalRegularityTheoremReceipt : Setω where
 
     clayPromotionIsFalse :
       clayPromotion ≡ false
+
+    promotionBlockers :
+      List String
+
+    promotionBlockersAreCanonical :
+      promotionBlockers ≡
+      "unconditional Clay promotion remains false"
+      ∷ "unconditional regularity promotion remains false"
+      ∷ "promotion stays conditional on the imported proof-term receipts"
+      ∷ []
 
     statement :
       String
@@ -358,6 +396,24 @@ canonicalNSBroadTubeConditionalRegularityTheoremReceipt =
         canonicalNSBroadTubeConditionalRegularityTheoremOpenBoundaries
     ; openBoundariesAreCanonical =
         refl
+    ; nondegenerateGradientReceipt =
+        Grad.canonicalNSBroadTubeNondegenerateGradientReceipt
+    ; vorticityCoverageReceipt =
+        Vort.canonicalNSBroadTubeVorticityCoverageReceipt
+    ; serrinExponentDischargeReceipt =
+        Exp.canonicalNSBroadTubeSerrinExponentDischargeReceipt
+    ; broadTubeCoareaBridgeReceipt =
+        Coarea.canonicalNSBroadTubeCoareaBridgeReceipt
+    ; broadTubeSerrinLiftReceipt =
+        Serrin.canonicalNSBroadTubeSerrinLiftReceipt
+    ; broadTubeBKMBridgeReceipt =
+        BKM.canonicalNSBroadTubeBKMBridgeReceipt
+    ; broadTubeSerrinBKMCompositeReceipt =
+        Composite.canonicalNSBroadTubeSerrinBKMCompositeReceipt
+    ; promotionGateSatisfied =
+        false
+    ; promotionGateSatisfiedIsFalse =
+        refl
     ; nondegenerateGradientSocketConstructed =
         true
     ; nondegenerateGradientSocketConstructedIsTrue =
@@ -385,6 +441,13 @@ canonicalNSBroadTubeConditionalRegularityTheoremReceipt =
     ; clayPromotion =
         false
     ; clayPromotionIsFalse =
+        refl
+    ; promotionBlockers =
+        "unconditional Clay promotion remains false"
+        ∷ "unconditional regularity promotion remains false"
+        ∷ "promotion stays conditional on the imported proof-term receipts"
+        ∷ []
+    ; promotionBlockersAreCanonical =
         refl
     ; statement =
         routeStatement

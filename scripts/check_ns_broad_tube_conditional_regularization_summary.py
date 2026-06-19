@@ -28,19 +28,19 @@ EXPECTED_GATES = (
 
 CONTROL_CARD = {
     "O": "Owner 5 validates the broad-tube conditional regularization summary fields.",
-    "R": "Fail-closed validation that gate status, promotion suppression, and obligation reporting are explicit.",
+    "R": "Fail-closed validation that gate status, promotion suppression, proof-kernel markers, and obligation reporting are explicit.",
     "C": SCRIPT_NAME,
     "S": (
         "A summary is accepted only if it records four true gates, Clay promotion false, "
-        "and a stable residual-obligation surface."
+        "declared receipt and proof-kernel markers, and a stable residual-obligation surface."
     ),
     "L": (
-        "Load the summary JSON, validate the gate set and promotion flags, and emit a "
-        "canonical checker receipt."
+        "Load the summary JSON, validate the gate set, marker surfaces, and promotion "
+        "flags, and emit a canonical checker receipt."
     ),
     "P": "FAIL_CLOSED_NS_BROAD_TUBE_CONDITIONAL_REGULARIZATION_SUMMARY",
     "G": "No route, theorem, or Clay promotion is inferred by this checker.",
-    "F": "Only an explicit conditional-summary ledger can pass; missing gates fail validation.",
+    "F": "Only an explicit conditional-summary ledger can pass; missing gates or markers fail validation.",
 }
 
 
@@ -115,6 +115,98 @@ def _validate(payload: dict[str, Any]) -> tuple[list[str], list[str]]:
             value = gate_flags.get(gate)
             if value is not True:
                 _record_error(errors, f"gate_flags[{gate}] must be true")
+
+    receipt_markers = payload.get("receipt_markers")
+    if not isinstance(receipt_markers, dict):
+        _record_error(errors, "missing or invalid receipt_markers dict")
+    else:
+        missing_marker_gates = [gate for gate in EXPECTED_GATES if gate not in receipt_markers]
+        extra_marker_gates = sorted(set(receipt_markers) - set(EXPECTED_GATES))
+        if missing_marker_gates:
+            _record_error(errors, f"missing receipt marker gates: {', '.join(missing_marker_gates)}")
+        if extra_marker_gates:
+            _record_error(errors, f"unexpected receipt marker gates: {', '.join(extra_marker_gates)}")
+        for gate in EXPECTED_GATES:
+            if gate not in receipt_markers:
+                continue
+            gate_markers = receipt_markers.get(gate)
+            if not isinstance(gate_markers, dict):
+                _record_error(errors, f"receipt_markers[{gate}] must be a dict")
+                continue
+            if not gate_markers:
+                _record_error(errors, f"receipt_markers[{gate}] must not be empty")
+            missing_values = sorted(name for name, value in gate_markers.items() if value is None)
+            if missing_values:
+                _record_error(
+                    errors,
+                    f"receipt_markers[{gate}] has missing markers: {', '.join(missing_values)}",
+                )
+
+    proof_kernel_markers = payload.get("proof_kernel_markers")
+    if not isinstance(proof_kernel_markers, dict):
+        _record_error(errors, "missing or invalid proof_kernel_markers dict")
+    else:
+        missing_proof_gates = [gate for gate in EXPECTED_GATES if gate not in proof_kernel_markers]
+        extra_proof_gates = sorted(set(proof_kernel_markers) - set(EXPECTED_GATES))
+        if missing_proof_gates:
+            _record_error(errors, f"missing proof-kernel marker gates: {', '.join(missing_proof_gates)}")
+        if extra_proof_gates:
+            _record_error(errors, f"unexpected proof-kernel marker gates: {', '.join(extra_proof_gates)}")
+        for gate in EXPECTED_GATES:
+            if gate not in proof_kernel_markers:
+                continue
+            gate_proofs = proof_kernel_markers.get(gate)
+            if not isinstance(gate_proofs, dict):
+                _record_error(errors, f"proof_kernel_markers[{gate}] must be a dict")
+                continue
+            if not gate_proofs:
+                _record_error(errors, f"proof_kernel_markers[{gate}] must not be empty")
+            invalid = sorted(name for name, value in gate_proofs.items() if value is not True)
+            if invalid:
+                _record_error(
+                    errors,
+                    f"proof_kernel_markers[{gate}] must set all markers true: {', '.join(invalid)}",
+                )
+
+    receipt_field_surface = payload.get("receipt_field_surface")
+    if not isinstance(receipt_field_surface, dict):
+        _record_error(errors, "missing or invalid receipt_field_surface dict")
+    else:
+        missing_surface_gates = [gate for gate in EXPECTED_GATES if gate not in receipt_field_surface]
+        extra_surface_gates = sorted(set(receipt_field_surface) - set(EXPECTED_GATES))
+        if missing_surface_gates:
+            _record_error(errors, f"missing receipt field surfaces: {', '.join(missing_surface_gates)}")
+        if extra_surface_gates:
+            _record_error(errors, f"unexpected receipt field surfaces: {', '.join(extra_surface_gates)}")
+        for gate in EXPECTED_GATES:
+            if gate not in receipt_field_surface:
+                continue
+            surface = receipt_field_surface.get(gate)
+            if not isinstance(surface, dict):
+                _record_error(errors, f"receipt_field_surface[{gate}] must be a dict")
+                continue
+            declared = surface.get("declared_fields")
+            assigned = surface.get("assigned_fields")
+            missing = surface.get("missing_fields")
+            if not isinstance(declared, list):
+                _record_error(errors, f"receipt_field_surface[{gate}].declared_fields must be a list")
+            if not isinstance(assigned, list):
+                _record_error(errors, f"receipt_field_surface[{gate}].assigned_fields must be a list")
+            if not isinstance(missing, list):
+                _record_error(errors, f"receipt_field_surface[{gate}].missing_fields must be a list")
+            elif missing:
+                _record_error(errors, f"receipt_field_surface[{gate}] has missing markers: {', '.join(missing)}")
+            if isinstance(declared, list) and isinstance(assigned, list):
+                if not declared:
+                    _record_error(errors, f"receipt_field_surface[{gate}].declared_fields must not be empty")
+                if not assigned:
+                    _record_error(errors, f"receipt_field_surface[{gate}].assigned_fields must not be empty")
+                missing_declared = [name for name in declared if name not in assigned]
+                if missing_declared:
+                    _record_error(
+                        errors,
+                        f"receipt_field_surface[{gate}] omits declared fields: {', '.join(missing_declared)}",
+                    )
 
     promotion_flags = payload.get("promotion_flags")
     if not isinstance(promotion_flags, dict):
@@ -201,7 +293,9 @@ def main() -> int:
         "status": payload.get("status") if payload is not None else None,
         "contract": payload.get("contract") if payload is not None else None,
         "gate_flags": payload.get("gate_flags") if payload is not None else None,
+        "proof_kernel_markers": payload.get("proof_kernel_markers") if payload is not None else None,
         "promotion_flags": payload.get("promotion_flags") if payload is not None else None,
+        "receipt_field_surface": payload.get("receipt_field_surface") if payload is not None else None,
     }
 
     output_path = args.output_json if args.output_json is not None else None

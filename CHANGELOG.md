@@ -15,7 +15,10 @@ monitor surface.
   `scripts/ns_broad_tube_conditional_regularization_summary.py`, and
   `scripts/check_ns_broad_tube_conditional_regularization_summary.py`. This
   is fail-closed bookkeeping only; full NS Clay and Clay promotion remain
-  false.
+  false. The current proof-kernel blockers are still explicit: no
+  unconditional lambda2-gradient theorem, strict-carrier insufficiency /
+  `broad_tube_required`, no unconditional Serrin bound, and
+  `unconditionalClayNS=false` with `clayPromotion=false`.
 
 - NS broad-tube coarea / Serrin lift / BKM bridge implementation tranche for
   `2026-06-20`: adds

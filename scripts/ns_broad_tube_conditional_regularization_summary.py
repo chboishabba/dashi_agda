@@ -2,9 +2,9 @@
 """Summarize the broad-tube conditional regularization gate chain.
 
 The script is fail-closed and deterministic. It reads the receipt surfaces for
-the four requested gates, requires the expected true/false markers to be
-present, records the remaining analytic proof obligations, and keeps Clay
-promotion explicitly false.
+the four requested gates, requires the expected true/false and proof-kernel
+markers to be present, records the remaining analytic proof obligations, and
+keeps Clay promotion explicitly false.
 """
 
 from __future__ import annotations
@@ -25,6 +25,8 @@ DEFAULT_OUTPUT = Path(
 
 RECEIPT_SPECS = {
     "nondegenerate_gradient": {
+        "record_name": "NSBroadTubeNondegenerateGradientReceipt",
+        "canonical_name": "canonicalNSBroadTubeNondegenerateGradientReceipt",
         "receipt_path": Path(
             "DASHI/Physics/Closure/NSBroadTubeNondegenerateGradientReceipt.agda"
         ),
@@ -34,6 +36,7 @@ RECEIPT_SPECS = {
             "boundedSecondFundamentalFormRecorded",
             "finiteTubularRadiusRecorded",
             "levelSetFoliationRecorded",
+            "allAnalyticAssumptionsStillPresent",
         ),
         "false_fields": (
             "unconditionalLambda2GradientTheorem",
@@ -45,16 +48,20 @@ RECEIPT_SPECS = {
         ),
     },
     "vorticity_coverage": {
+        "record_name": "NSBroadTubeVorticityCoverageReceipt",
+        "canonical_name": "canonicalNSBroadTubeVorticityCoverageReceipt",
         "receipt_path": Path(
             "DASHI/Physics/Closure/NSBroadTubeVorticityCoverageReceipt.agda"
         ),
         "true_fields": (
             "strictCarrierInsufficient",
             "broadTubeRequired",
+            "broadLayerFractionTelemetryRecorded",
             "coverageSocketConstructed",
         ),
         "false_fields": (
             "unconditionalCoverageTheorem",
+            "assumptionsDischarged",
             "clayPromotion",
         ),
         "remaining_obligations": (
@@ -63,6 +70,8 @@ RECEIPT_SPECS = {
         ),
     },
     "serrin_exponent_discharge": {
+        "record_name": "NSBroadTubeSerrinExponentDischargeReceipt",
+        "canonical_name": "canonicalNSBroadTubeSerrinExponentDischargeReceipt",
         "receipt_path": Path(
             "DASHI/Physics/Closure/NSBroadTubeSerrinExponentDischargeReceipt.agda"
         ),
@@ -77,6 +86,8 @@ RECEIPT_SPECS = {
         ),
     },
     "conditional_regularization": {
+        "record_name": "NSBroadTubeConditionalRegularityTheoremReceipt",
+        "canonical_name": "canonicalNSBroadTubeConditionalRegularityTheoremReceipt",
         "receipt_path": Path(
             "DASHI/Physics/Closure/NSBroadTubeConditionalRegularityTheoremReceipt.agda"
         ),
@@ -84,6 +95,7 @@ RECEIPT_SPECS = {
             "conditionalRegularitySocketConstructed",
         ),
         "false_fields": (
+            "promotionGateSatisfied",
             "unconditionalClayNS",
             "clayPromotion",
         ),
@@ -98,26 +110,28 @@ CONTROL_CARD = {
     "O": "Owner 5 records the broad-tube conditional regularization summary.",
     "R": (
         "Summarize four conditional broad-tube gates, keep Clay promotion false, and "
-        "expose the remaining analytic proof obligations explicitly."
+        "expose the remaining analytic proof obligations and proof-kernel markers explicitly."
     ),
     "C": SCRIPT_NAME,
     "S": (
-        "Fail closed on any missing receipt or missing true/false marker; no promotion "
-        "claim is inferred from the receipts."
+        "Fail closed on any missing receipt, missing true/false marker, or missing proof-"
+        "kernel marker; no promotion claim is inferred from the receipts."
     ),
     "L": (
-        "Read the four receipt surfaces, validate their recorded booleans, derive the "
-        "gate flags, and list the residual analytic obligations."
+        "Read the four receipt surfaces, validate their recorded booleans and proof-"
+        "kernel markers, derive the gate flags, and list the residual analytic obligations."
     ),
     "P": "FAIL_CLOSED_NS_BROAD_TUBE_CONDITIONAL_REGULARIZATION_SUMMARY",
     "G": "Clay promotion stays false and every gate remains explicitly conditional.",
     "F": (
         "The ledger is only valid when all four gates are true, Clay promotion is false, "
-        "and the expected receipt markers are present."
+        "and the declared receipt and proof-kernel markers are present."
     ),
 }
 
 BOOL_LINE = re.compile(r"\b([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(true|false)")
+ASSIGNMENT_LINE = re.compile(r"^\s*[;{]?\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$")
+FIELD_NAME_LINE = re.compile(r"^\s*([A-Za-z_][A-Za-z0-9_]*)\s*:\s*$")
 
 
 def _parse_args() -> argparse.Namespace:
@@ -145,11 +159,67 @@ def _read_bool_fields(path: Path) -> dict[str, bool | None]:
     return values
 
 
+def _extract_record_fields(text: str, record_name: str) -> list[str]:
+    fields: list[str] = []
+    in_record = False
+    in_field_block = False
+    for raw_line in text.splitlines():
+        line = raw_line.rstrip()
+        stripped = line.strip()
+        if not in_record:
+            if re.match(rf"^record\s+{re.escape(record_name)}\s*:\s*.*\bwhere\s*$", stripped):
+                in_record = True
+            continue
+        if not in_field_block:
+            if stripped == "field":
+                in_field_block = True
+            continue
+        if re.match(r"^(open|canonical|record|data|module)\b", stripped):
+            break
+        field_match = FIELD_NAME_LINE.match(line)
+        if field_match:
+            fields.append(field_match.group(1))
+    return fields
+
+
+def _extract_canonical_assignments(text: str, canonical_name: str) -> dict[str, str]:
+    assignments: dict[str, str] = {}
+    awaiting_record = False
+    in_block = False
+    for raw_line in text.splitlines():
+        line = raw_line.rstrip()
+        stripped = line.strip()
+        if not in_block:
+            if re.match(rf"^{re.escape(canonical_name)}\s*=\s*$", stripped):
+                awaiting_record = True
+                continue
+            if awaiting_record and stripped == "record":
+                in_block = True
+                awaiting_record = False
+                continue
+            if re.match(rf"^{re.escape(canonical_name)}\s*=\s*record\b", stripped):
+                in_block = True
+            continue
+        if stripped == "}":
+            break
+        match = ASSIGNMENT_LINE.match(line)
+        if match:
+            name = match.group(1)
+            rhs = match.group(2).strip()
+            assignments[name] = rhs
+    return assignments
+
+
 def _evaluate_receipt(
     gate: str, spec: dict[str, Any], errors: list[str]
 ) -> dict[str, Any]:
     receipt_path = spec["receipt_path"]
-    marker_values: dict[str, bool | None] = {name: None for name in spec["true_fields"] + spec["false_fields"]}
+    marker_values: dict[str, bool | None] = {
+        name: None for name in spec["true_fields"] + spec["false_fields"]
+    }
+    proof_kernel_markers: dict[str, bool | None] = {}
+    declared_fields: list[str] = []
+    assigned_fields: list[str] = []
 
     if not receipt_path.exists():
         errors.append(f"missing source receipt: {receipt_path}")
@@ -157,15 +227,45 @@ def _evaluate_receipt(
             "receipt_path": str(receipt_path),
             "gate_flag": False,
             "marker_values": marker_values,
+            "proof_kernel_markers": proof_kernel_markers,
+            "field_surface": {
+                "declared_fields": declared_fields,
+                "assigned_fields": assigned_fields,
+                "missing_fields": [],
+            },
         }
+
+    text = receipt_path.read_text(encoding="utf-8")
+    declared_fields = _extract_record_fields(text, spec["record_name"])
+    canonical_assignments = _extract_canonical_assignments(text, spec["canonical_name"])
+    assigned_fields = sorted(canonical_assignments)
+    if not declared_fields:
+        errors.append(f"{gate}: could not locate declared receipt field surface")
+    if not canonical_assignments:
+        errors.append(f"{gate}: could not locate canonical receipt instance")
+
+    missing_fields = [name for name in declared_fields if name not in canonical_assignments]
+    if missing_fields:
+        errors.append(
+            f"{gate}: missing receipt marker(s): {', '.join(missing_fields)}"
+        )
 
     parsed = _read_bool_fields(receipt_path)
     for name in marker_values:
         marker_values[name] = parsed.get(name)
 
+    for name in declared_fields:
+        proof_kernel_markers[f"{name}_assigned"] = name in canonical_assignments
+    if declared_fields and not proof_kernel_markers:
+        errors.append(f"{gate}: missing proof-kernel marker surface")
+
     true_mode = spec.get("true_mode", "all")
     if true_mode == "any":
-        present_true_values = [marker_values.get(name) for name in spec["true_fields"] if marker_values.get(name) is not None]
+        present_true_values = [
+            marker_values.get(name)
+            for name in spec["true_fields"]
+            if marker_values.get(name) is not None
+        ]
         if not present_true_values:
             errors.append(
                 f"{gate}: missing required true marker one of {', '.join(spec['true_fields'])}"
@@ -199,6 +299,12 @@ def _evaluate_receipt(
         "receipt_path": str(receipt_path),
         "gate_flag": gate_flag,
         "marker_values": marker_values,
+        "proof_kernel_markers": proof_kernel_markers,
+        "field_surface": {
+            "declared_fields": declared_fields,
+            "assigned_fields": assigned_fields,
+            "missing_fields": missing_fields,
+        },
     }
 
 
@@ -208,16 +314,18 @@ def _build_output(output_path: Path) -> dict[str, Any]:
     receipts: dict[str, Any] = {}
     gate_flags: dict[str, bool] = {}
     remaining_obligations: dict[str, list[str]] = {}
+    receipt_fields: dict[str, Any] = {}
 
     for gate, spec in RECEIPT_SPECS.items():
         result = _evaluate_receipt(gate, spec, errors)
         receipts[gate] = result
         gate_flags[gate] = bool(result["gate_flag"])
         remaining_obligations[gate] = list(spec["remaining_obligations"])
+        receipt_fields[gate] = result["field_surface"]
 
     clay_promotion = False
     if not errors:
-        warnings.append("all required receipt markers were parsed and validated.")
+        warnings.append("all declared receipt markers were parsed and validated.")
 
     summary: dict[str, Any] = {
         "contract": CONTRACT,
@@ -227,6 +335,10 @@ def _build_output(output_path: Path) -> dict[str, Any]:
         },
         "gate_flags": gate_flags,
         "receipt_markers": {gate: receipts[gate]["marker_values"] for gate in RECEIPT_SPECS},
+        "proof_kernel_markers": {
+            gate: receipts[gate]["proof_kernel_markers"] for gate in RECEIPT_SPECS
+        },
+        "receipt_field_surface": receipt_fields,
         "promotion_flags": {"clay_promotion": clay_promotion},
         "remaining_analytic_proof_obligations": remaining_obligations,
         "remaining_analytic_proof_obligations_flat": [
