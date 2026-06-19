@@ -386,6 +386,12 @@ def build_specs() -> list[HarnessSpec]:
     ns_boundary_gronwall_margin_regression_out = (
         CHILD_OUT_DIR / "ns_boundary_gronwall_margin_regression_smoke.json"
     )
+    ns_boundary_theoremg_cancellation_margin_out = (
+        CHILD_OUT_DIR / "ns_boundary_theoremg_cancellation_margin_smoke.json"
+    )
+    ns_boundary_cancellation_margin_regression_out = (
+        CHILD_OUT_DIR / "ns_boundary_cancellation_margin_regression_smoke.json"
+    )
     ns_boundary_derived_smoke_candidates = tuple(
         sorted(Path("/tmp").glob("ns_boundary_derived*.npz"))
     )
@@ -3014,6 +3020,56 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional regression check for corrected Gronwall margin invariants and optional timeseries summary",
                 "empirical/conditional/non-promoting; does not discharge h_delta1 or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_theoremg_cancellation_margin",
+            path=script("ns_boundary_theoremg_cancellation_margin.py"),
+            args=(
+                "--margin-json",
+                str(ns_boundary_corrected_gronwall_margin_out),
+                "--output-json",
+                str(ns_boundary_theoremg_cancellation_margin_out),
+            )
+            if ns_boundary_corrected_gronwall_margin_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_theoremg_cancellation_margin_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_corrected_gronwall_margin_out.exists()
+            and script("ns_boundary_theoremg_cancellation_margin.py").exists()
+            else (
+                "ns_boundary_theoremg_cancellation_margin script not found"
+                if not script("ns_boundary_theoremg_cancellation_margin.py").exists()
+                else "ns_boundary_theoremg_cancellation_margin requires corrected-gronwall margin artifact"
+            ),
+            notes=(
+                "optional Theorem-G cancellation-margin upgrade from corrected Gronwall margin artifact",
+                "empirical/non-promoting; records mu_cancellation=delta1 and does not prove Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_cancellation_margin_regression",
+            path=script("check_ns_boundary_cancellation_margin_regression.py"),
+            args=(
+                "--cancellation-json",
+                str(ns_boundary_theoremg_cancellation_margin_out),
+            )
+            if ns_boundary_theoremg_cancellation_margin_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_cancellation_margin_regression_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_theoremg_cancellation_margin_out.exists()
+            and script("check_ns_boundary_cancellation_margin_regression.py").exists()
+            else (
+                "check_ns_boundary_cancellation_margin_regression script not found"
+                if not script("check_ns_boundary_cancellation_margin_regression.py").exists()
+                else "check_ns_boundary_cancellation_margin_regression requires cancellation-margin artifact"
+            ),
+            notes=(
+                "optional regression check for cancellation-margin invariants",
+                "regression-only/non-promoting; no theorem or Clay promotion",
             ),
         ),
         HarnessSpec(

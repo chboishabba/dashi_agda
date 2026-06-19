@@ -1,6 +1,23 @@
 # FOR TODO GO TO '# TODO'
 
 Current NS Clay action note for `2026-06-18`:
+- Biaxial cancellation / GD1 no-collapse / LayerKorn literature tranche for
+  `2026-06-19` is recorded. Artifacts:
+  `DASHI/Physics/Closure/NSBiaxialCancellationIdentityReceipt.agda`,
+  `DASHI/Physics/Closure/NSGD1MinPrincipleNoLambda3CollapseReceipt.agda`,
+  `DASHI/Physics/Closure/NSTheoremGCancellationUpgradeReceipt.agda`,
+  `DASHI/Physics/Closure/NSLayerKornLiteratureClosureReceipt.agda`,
+  `scripts/ns_boundary_theoremg_cancellation_margin.py`, and
+  `scripts/check_ns_boundary_cancellation_margin_regression.py`.
+  The new theorem shape records the exact biaxial identity
+  `<S omega,e2> = lambda2 <omega,e2>`, hence boundary cancellation on
+  `lambda2=0`, and the upgraded cancellation-margin diagnostic records
+  `mu_cancellation = delta1`.  The GD1 lane records the two-regime
+  minimum-principle route and the LayerKorn lane records the GST25 /
+  Bauer-Pauly / trace-theorem proof path.  These are fail-closed
+  proof-route surfaces: theorem applicability, exact constants, GD1 proof
+  terms, LayerCZ, and LayerKorn proof terms remain verification gates, and
+  `collapseImpossible`, `KornLevelSet`, and Clay NS remain unpromoted.
 - Conditional Theorem G / corrected Gronwall-margin tranche for
   `2026-06-19` is complete.  Artifacts:
   `DASHI/Physics/Closure/NSConditionalQGronwallTheoremGReceipt.agda`,

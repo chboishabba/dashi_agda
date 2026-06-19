@@ -6,6 +6,22 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS biaxial-cancellation / GD1 no-collapse / LayerKorn literature tranche for
+  `2026-06-19`: adds
+  `DASHI.Physics.Closure.NSBiaxialCancellationIdentityReceipt`,
+  `DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt`,
+  `DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt`,
+  `DASHI.Physics.Closure.NSLayerKornLiteratureClosureReceipt`,
+  `scripts/ns_boundary_theoremg_cancellation_margin.py`, and
+  `scripts/check_ns_boundary_cancellation_margin_regression.py`, wired through
+  `DASHI.Everything` and the optional local Clay harness manifest.  The tranche
+  records the exact biaxial cancellation identity on `lambda2=0`, the
+  cancellation-upgraded Theorem G shape with `mu_cancellation = delta1`, the
+  GD1 two-regime minimum-principle route, and the LayerKorn literature route.
+  It is fail-closed: exact constants, GD1 proof terms, theorem applicability,
+  LayerCZ, and LayerKorn proof terms remain gated; `collapseImpossible`,
+  `KornLevelSet`, full NS Clay, and Clay promotion remain false.
+
 - NS conditional Theorem G / corrected Gronwall-margin tranche for
   `2026-06-19`: adds
   `DASHI.Physics.Closure.NSConditionalQGronwallTheoremGReceipt`,
