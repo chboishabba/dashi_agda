@@ -6,6 +6,23 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS conditional Theorem G / corrected Gronwall-margin tranche for
+  `2026-06-19`: adds
+  `DASHI.Physics.Closure.NSConditionalQGronwallTheoremGReceipt`,
+  `DASHI.Physics.Closure.NSCollapseConditionalGronwallBridgeReceipt`,
+  `scripts/ns_boundary_component_lambda3_corrected_gronwall_margin.py`,
+  `scripts/ns_boundary_timeseries_margin_summary.py`, and
+  `scripts/check_ns_boundary_gronwall_margin_regression.py`, wired through
+  `DASHI.Everything` and the optional local Clay harness manifest.  The
+  frame-10 component-2 corrected margin artifact records
+  `delta1 = 2.0910865534885876`,
+  `mu = 3.703952825596815`, and F123 signed damping sum
+  `-8437.74113479362`.  This is conditional and empirical/non-promoting:
+  the route is `h_delta1 + TheoremG -> collapseImpossible_conditional`
+  only, positive commutator measurement is still unavailable, and
+  `h_delta1`, unconditional `collapseImpossible`, `KornLevelSet`, full NS
+  Clay, and Clay promotion remain open/false.
+
 - NS boundary lambda3/F123 empirical tranche for `2026-06-19`: adds
   `scripts/ns_boundary_component_lambda3_diagnostic.py`,
   `scripts/ns_boundary_f123_absorption_diagnostic.py`,

@@ -1,6 +1,24 @@
 # FOR TODO GO TO '# TODO'
 
 Current NS Clay action note for `2026-06-18`:
+- Conditional Theorem G / corrected Gronwall-margin tranche for
+  `2026-06-19` is complete.  Artifacts:
+  `DASHI/Physics/Closure/NSConditionalQGronwallTheoremGReceipt.agda`,
+  `DASHI/Physics/Closure/NSCollapseConditionalGronwallBridgeReceipt.agda`,
+  `scripts/ns_boundary_component_lambda3_corrected_gronwall_margin.py`,
+  `scripts/ns_boundary_timeseries_margin_summary.py`,
+  `scripts/check_ns_boundary_gronwall_margin_regression.py`,
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_N128_frame10_component2_20260619.json`,
+  and
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_summary_N128_frame10_component2_20260619.json`.
+  Result: the corrected conditional margin uses
+  `delta1 = lambda3_min = 2.0910865534885876` and records
+  `mu = 2*delta1 - 1/delta1 = 3.703952825596815`, with F123 signed
+  damping sum `-8437.74113479362`.  The lane records
+  `h_delta1 + TheoremG -> collapseImpossible_conditional` only.
+  Positive commutator measurement remains unavailable; `h_delta1`,
+  unconditional `collapseImpossible`, `KornLevelSet`, and full Clay NS
+  remain open/false.
 - Calc 11 frame-10 component-2 lambda3/F123 empirical support is complete.
   Artifacts:
   `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_lambda3_N128_frame10_component2_20260619.json`,

@@ -297,6 +297,8 @@ import DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt
 import DASHI.Physics.Closure.NSFullClayBlockerChainAggregationReceipt
 import DASHI.Physics.Closure.NSGateway1StrainCrossDerivativeDiagnosticReceipt
 import DASHI.Physics.Closure.NSBoundaryLambda3F123EmpiricalReceipt
+import DASHI.Physics.Closure.NSConditionalQGronwallTheoremGReceipt
+import DASHI.Physics.Closure.NSCollapseConditionalGronwallBridgeReceipt
 import DASHI.Physics.Closure.NSPressureHessianGateShapeCore
 import DASHI.Physics.Closure.NSStrainBMOBoundReceipt
 import DASHI.Physics.Closure.NSIntegralConditionDiagnosticReceipt
