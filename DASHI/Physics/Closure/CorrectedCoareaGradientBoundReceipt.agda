@@ -96,6 +96,67 @@ canonicalCorrectedCoareaGradientBoundNonPromotion =
   ∷ proofPackageCandidateOnly
   ∷ []
 
+data CorrectedCoareaGradientBoundSurfaceStage : Set where
+  correctedExponentR1Recorded :
+    CorrectedCoareaGradientBoundSurfaceStage
+  correctedCoareaRouteRecorded :
+    CorrectedCoareaGradientBoundSurfaceStage
+  failClosedSurfaceRecorded :
+    CorrectedCoareaGradientBoundSurfaceStage
+
+canonicalCorrectedCoareaGradientBoundSurfaceStages :
+  List CorrectedCoareaGradientBoundSurfaceStage
+canonicalCorrectedCoareaGradientBoundSurfaceStages =
+  correctedExponentR1Recorded
+  ∷ correctedCoareaRouteRecorded
+  ∷ failClosedSurfaceRecorded
+  ∷ []
+
+record CorrectedCoareaGradientBoundFormalSurface : Set where
+  constructor mkCorrectedCoareaGradientBoundFormalSurface
+  field
+    correctedExponentSurface :
+      String
+    correctedExponentSurfaceIsCanonical :
+      correctedExponentSurface ≡ "r^1"
+
+    correctedExponentProjection :
+      String
+    correctedExponentProjectionIsCanonical :
+      correctedExponentProjection ≡ "corrected exponent of r = r^1"
+
+    closeableSurface :
+      String
+    closeableSurfaceIsCanonical :
+      closeableSurface
+        ≡ "candidate-only closeable corrected coarea gradient bound surface"
+
+    formalizationSummary :
+      String
+    formalizationSummaryIsCanonical :
+      formalizationSummary
+        ≡ "r^1 is explicitly recorded as the corrected exponent; the route remains candidate-only and fail-closed."
+
+    surfaceStages :
+      List CorrectedCoareaGradientBoundSurfaceStage
+    surfaceStagesIsCanonical :
+      surfaceStages ≡ canonicalCorrectedCoareaGradientBoundSurfaceStages
+
+canonicalCorrectedCoareaGradientBoundFormalSurface :
+  CorrectedCoareaGradientBoundFormalSurface
+canonicalCorrectedCoareaGradientBoundFormalSurface =
+  mkCorrectedCoareaGradientBoundFormalSurface
+    "r^1"
+    refl
+    "corrected exponent of r = r^1"
+    refl
+    "candidate-only closeable corrected coarea gradient bound surface"
+    refl
+    "r^1 is explicitly recorded as the corrected exponent; the route remains candidate-only and fail-closed."
+    refl
+    canonicalCorrectedCoareaGradientBoundSurfaceStages
+    refl
+
 record CorrectedCoareaGradientBoundShape : Set where
   constructor mkCorrectedCoareaGradientBoundShape
   field
@@ -215,6 +276,11 @@ record CorrectedCoareaGradientBoundReceipt : Set where
     nonPromotionIsCanonical :
       nonPromotion ≡ canonicalCorrectedCoareaGradientBoundNonPromotion
 
+    formalSurface :
+      CorrectedCoareaGradientBoundFormalSurface
+    formalSurfaceIsCanonical :
+      formalSurface ≡ canonicalCorrectedCoareaGradientBoundFormalSurface
+
     theoremPromoted :
       Bool
     theoremPromotedIsFalse :
@@ -248,6 +314,8 @@ canonicalCorrectedCoareaGradientBoundReceipt =
     refl
     canonicalCorrectedCoareaGradientBoundNonPromotion
     refl
+    canonicalCorrectedCoareaGradientBoundFormalSurface
+    refl
     false
     refl
     false
@@ -259,3 +327,4 @@ canonicalCorrectedCoareaGradientBoundReceipt =
 
 open CorrectedCoareaGradientBoundReceipt public
 open CorrectedCoareaGradientBoundShape public
+open CorrectedCoareaGradientBoundFormalSurface public

@@ -14,12 +14,14 @@ open import Data.List.Base using (List; _∷_; [])
 --
 -- The recorded surfaces are:
 --   1. Calc 11 Leray tail plus ||f||_{L^{3,infty}} <= ||f||_{L^3};
---   2. local ball concentration;
---   3. finite component count h_fin with N_max empirically 20630;
---   4. pigeon bound K / N_max^(1/3);
---   5. no promotion;
---   6. package variables;
---   7. blockers.
+--   2. Leray tail + weak-L3 blowup -> local L3 concentration;
+--   3. local ball concentration;
+--   4. finite component count h_fin recorded as a hypothesis, with
+--      empirical N_max <= 20630 only as candidate evidence;
+--   5. pigeon bound K / N_max^(1/3);
+--   6. no promotion;
+--   7. package variables;
+--   8. blockers.
 --
 -- No theorem promotion and no Clay promotion are claimed here.
 
@@ -45,10 +47,19 @@ data LocalConcentrationStage : Set where
   calc11LerayTailAndWeakL3Control :
     LocalConcentrationStage
 
+  lerayTailWeakL3ToLocalL3ConcentrationRecorded :
+    LocalConcentrationStage
+
   localBallConcentrationRecorded :
     LocalConcentrationStage
 
   finiteComponentCountHFinRecorded :
+    LocalConcentrationStage
+
+  hFinToComponentLocalConcentrationRecorded :
+    LocalConcentrationStage
+
+  empiricalNMaxCandidateEvidenceRecorded :
     LocalConcentrationStage
 
   pigeonBoundKOverNMaxOneThird :
@@ -67,8 +78,11 @@ canonicalLocalConcentrationStages :
   List LocalConcentrationStage
 canonicalLocalConcentrationStages =
   calc11LerayTailAndWeakL3Control
+  ∷ lerayTailWeakL3ToLocalL3ConcentrationRecorded
   ∷ localBallConcentrationRecorded
   ∷ finiteComponentCountHFinRecorded
+  ∷ hFinToComponentLocalConcentrationRecorded
+  ∷ empiricalNMaxCandidateEvidenceRecorded
   ∷ pigeonBoundKOverNMaxOneThird
   ∷ noPromotionClaimed
   ∷ packageVariablesRecorded
@@ -81,10 +95,15 @@ canonicalLocalConcentrationVariables =
   "Calc 11"
   ∷ "Leray tail"
   ∷ "||f||_{L^{3,infty}} <= ||f||_{L^3}"
+  ∷ "Leray tail + weak-L3 blowup"
+  ∷ "local L3 concentration"
   ∷ "local ball concentration"
   ∷ "h_fin"
+  ∷ "h_fin hypothesis"
+  ∷ "component local concentration"
   ∷ "N_max"
   ∷ "N_max = 20630"
+  ∷ "N_max <= 20630 (candidate evidence only)"
   ∷ "K"
   ∷ "K / N_max^(1/3)"
   ∷ "pigeon_concentration"
@@ -97,13 +116,13 @@ data LocalConcentrationBlocker : Set where
   missingLocalBallConcentration :
     LocalConcentrationBlocker
 
-  missingHFinHypothesisRecording :
+  missingHFinNSProof :
     LocalConcentrationBlocker
 
   missingPigeonPackingInequality :
     LocalConcentrationBlocker
 
-  missingVariableInstantiation :
+  missingComponentLocalConcentrationPromotion :
     LocalConcentrationBlocker
 
   theoremPromotionForbidden :
@@ -117,9 +136,9 @@ canonicalLocalConcentrationBlockers :
 canonicalLocalConcentrationBlockers =
   missingCalc11TailUpgrade
   ∷ missingLocalBallConcentration
-  ∷ missingHFinHypothesisRecording
+  ∷ missingHFinNSProof
   ∷ missingPigeonPackingInequality
-  ∷ missingVariableInstantiation
+  ∷ missingComponentLocalConcentrationPromotion
   ∷ theoremPromotionForbidden
   ∷ clayPromotionForbidden
   ∷ []
@@ -129,8 +148,9 @@ canonicalLocalConcentrationReceiptBoundary :
 canonicalLocalConcentrationReceiptBoundary =
   "This receipt is candidate-only and records package shape only"
   ∷ "Calc 11 records Leray tail control together with ||f||_{L^{3,infty}} <= ||f||_{L^3}"
+  ∷ "Leray tail + weak-L3 blowup is recorded as the local L3 concentration route surface"
   ∷ "local ball concentration is recorded as a surface"
-  ∷ "the finite component count h_fin is recorded with empirical N_max = 20630 and analytic hypothesis only"
+  ∷ "the finite component count h_fin is recorded as a hypothesis, while N_max <= 20630 stays candidate evidence only"
   ∷ "the pigeon_concentration bound K / N_max^(1/3) is recorded as a surface, not a promoted theorem"
   ∷ "theorem promotion remains false"
   ∷ "Clay promotion remains false"
@@ -145,7 +165,7 @@ localConcentrationPromotionImpossibleHere ()
 
 localConcentrationPackageSummary : String
 localConcentrationPackageSummary =
-  "Candidate-only component-local concentration package after Calc 11: Leray tail control and ||f||_{L^{3,infty}} <= ||f||_{L^3} are recorded, local ball concentration is recorded, h_fin carries the empirical N_max = 20630 hypothesis, the pigeon_concentration bound K / N_max^(1/3) is recorded, and theorem/Clay promotion remains false."
+  "Candidate-only component-local concentration package after Calc 11: Leray tail control and ||f||_{L^{3,infty}} <= ||f||_{L^3} are recorded, the Leray tail + weak-L3 blowup -> local L3 concentration projection is recorded, local ball concentration is recorded, h_fin is carried as a hypothesis, N_max <= 20630 is kept as candidate evidence only, the component-local concentration surface K / N_max^(1/3) is recorded, and theorem/Clay promotion remains false."
 
 record LocalConcentrationPigeonConcentrationReceipt : Setω where
   field
@@ -185,6 +205,13 @@ record LocalConcentrationPigeonConcentrationReceipt : Setω where
     lerayTailSurfaceIsCanonical :
       lerayTailSurface ≡ "Leray tail"
 
+    lerayTailWeakL3ToLocalL3ConcentrationSurface :
+      String
+
+    lerayTailWeakL3ToLocalL3ConcentrationSurfaceIsCanonical :
+      lerayTailWeakL3ToLocalL3ConcentrationSurface
+      ≡ "Leray tail + weak-L3 blowup -> local L3 concentration"
+
     weakL3Surface :
       String
 
@@ -215,6 +242,18 @@ record LocalConcentrationPigeonConcentrationReceipt : Setω where
     componentCountNameIsCanonical :
       componentCountName ≡ "h_fin"
 
+    hFinHypothesisSurface :
+      String
+
+    hFinHypothesisSurfaceIsCanonical :
+      hFinHypothesisSurface ≡ "h_fin hypothesis"
+
+    hFinHypothesisRecorded :
+      Bool
+
+    hFinHypothesisRecordedIsTrue :
+      hFinHypothesisRecorded ≡ true
+
     componentCountSymbol :
       String
 
@@ -227,11 +266,24 @@ record LocalConcentrationPigeonConcentrationReceipt : Setω where
     empiricalNMaxIsCanonical :
       empiricalNMax ≡ 20630
 
+    empiricalNMaxCandidateEvidenceSurface :
+      String
+
+    empiricalNMaxCandidateEvidenceSurfaceIsCanonical :
+      empiricalNMaxCandidateEvidenceSurface
+      ≡ "N_max <= 20630 (candidate evidence only)"
+
     componentCountAnalyticHypothesis :
       Bool
 
     componentCountAnalyticHypothesisIsTrue :
       componentCountAnalyticHypothesis ≡ true
+
+    componentLocalConcentrationSurface :
+      String
+
+    componentLocalConcentrationSurfaceIsCanonical :
+      componentLocalConcentrationSurface ≡ "K / N_max^(1/3)"
 
     pigeonBoundFormula :
       String
@@ -311,6 +363,10 @@ canonicalLocalConcentrationPigeonConcentrationReceipt =
         "Leray tail"
     ; lerayTailSurfaceIsCanonical =
         refl
+    ; lerayTailWeakL3ToLocalL3ConcentrationSurface =
+        "Leray tail + weak-L3 blowup -> local L3 concentration"
+    ; lerayTailWeakL3ToLocalL3ConcentrationSurfaceIsCanonical =
+        refl
     ; weakL3Surface =
         "||f||_{L^{3,infty}} <= ||f||_{L^3}"
     ; weakL3SurfaceIsCanonical =
@@ -331,6 +387,14 @@ canonicalLocalConcentrationPigeonConcentrationReceipt =
         "h_fin"
     ; componentCountNameIsCanonical =
         refl
+    ; hFinHypothesisSurface =
+        "h_fin hypothesis"
+    ; hFinHypothesisSurfaceIsCanonical =
+        refl
+    ; hFinHypothesisRecorded =
+        true
+    ; hFinHypothesisRecordedIsTrue =
+        refl
     ; componentCountSymbol =
         "N_max"
     ; componentCountSymbolIsCanonical =
@@ -339,9 +403,17 @@ canonicalLocalConcentrationPigeonConcentrationReceipt =
         20630
     ; empiricalNMaxIsCanonical =
         refl
+    ; empiricalNMaxCandidateEvidenceSurface =
+        "N_max <= 20630 (candidate evidence only)"
+    ; empiricalNMaxCandidateEvidenceSurfaceIsCanonical =
+        refl
     ; componentCountAnalyticHypothesis =
         true
     ; componentCountAnalyticHypothesisIsTrue =
+        refl
+    ; componentLocalConcentrationSurface =
+        "K / N_max^(1/3)"
+    ; componentLocalConcentrationSurfaceIsCanonical =
         refl
     ; pigeonBoundFormula =
         "K / N_max^(1/3)"
