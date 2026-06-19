@@ -19,6 +19,11 @@ open import Data.Empty using (⊥)
 -- conclusion is recorded only as a conditional conclusion under h_delta1,
 -- while collapseImpossible, hDelta1Promoted, kornLevelSetPromoted, and
 -- clayNavierStokesPromoted are all left false.
+--
+-- It also now records two separate contradiction requirements:
+--   (i) finite-time blow-up implies Q2/carrier divergence,
+--  (ii) TheoremG + GD1 gives a conditional uniform Q2 bound.
+-- Neither implication is discharged by this receipt.
 
 listLength : ∀ {A : Set} → List A → Nat
 listLength [] = zero
@@ -41,11 +46,23 @@ data NSConditionalQGronwallTheoremGStage : Set where
     NSConditionalQGronwallTheoremGStage
   rellichKatoCommutatorRecorded :
     NSConditionalQGronwallTheoremGStage
+  gd1NoCollapseRecorded :
+    NSConditionalQGronwallTheoremGStage
+  layerCZLayerKornRecorded :
+    NSConditionalQGronwallTheoremGStage
   viscousLowerOrderH5Recorded :
     NSConditionalQGronwallTheoremGStage
   movingBoundarySmoothBeforeTStarRecorded :
     NSConditionalQGronwallTheoremGStage
   qFiniteConclusionRecorded :
+    NSConditionalQGronwallTheoremGStage
+  q2ContradictionChannelRecorded :
+    NSConditionalQGronwallTheoremGStage
+  q2BlowupToCarrierDivergenceRecorded :
+    NSConditionalQGronwallTheoremGStage
+  theoremGPlusGD1UniformQ2BoundRecorded :
+    NSConditionalQGronwallTheoremGStage
+  contradictionRouteVisibleRecorded :
     NSConditionalQGronwallTheoremGStage
   failClosedPromotionsFalseRecorded :
     NSConditionalQGronwallTheoremGStage
@@ -59,9 +76,15 @@ canonicalNSConditionalQGronwallTheoremGStages =
   ∷ muPositivityRecorded
   ∷ f123ExactDampingRecorded
   ∷ rellichKatoCommutatorRecorded
+  ∷ gd1NoCollapseRecorded
+  ∷ layerCZLayerKornRecorded
   ∷ viscousLowerOrderH5Recorded
   ∷ movingBoundarySmoothBeforeTStarRecorded
   ∷ qFiniteConclusionRecorded
+  ∷ q2ContradictionChannelRecorded
+  ∷ q2BlowupToCarrierDivergenceRecorded
+  ∷ theoremGPlusGD1UniformQ2BoundRecorded
+  ∷ contradictionRouteVisibleRecorded
   ∷ failClosedPromotionsFalseRecorded
   ∷ []
 
@@ -81,6 +104,12 @@ data NSConditionalQGronwallTheoremGBlocker : Set where
   movingBoundarySmoothnessStillHypothesis :
     NSConditionalQGronwallTheoremGBlocker
   qFiniteConclusionStillConditional :
+    NSConditionalQGronwallTheoremGBlocker
+  q2BlowupImplicationNotDischarged :
+    NSConditionalQGronwallTheoremGBlocker
+  q2UniformBoundImplicationNotDischarged :
+    NSConditionalQGronwallTheoremGBlocker
+  hDelta1NotDischarged :
     NSConditionalQGronwallTheoremGBlocker
   hDelta1PromotionBlocked :
     NSConditionalQGronwallTheoremGBlocker
@@ -102,10 +131,27 @@ canonicalNSConditionalQGronwallTheoremGBlockers =
   ∷ viscousLowerOrderH5ControlStillOpen
   ∷ movingBoundarySmoothnessStillHypothesis
   ∷ qFiniteConclusionStillConditional
+  ∷ q2BlowupImplicationNotDischarged
+  ∷ q2UniformBoundImplicationNotDischarged
+  ∷ hDelta1NotDischarged
   ∷ hDelta1PromotionBlocked
   ∷ kornLevelSetPromotionBlocked
   ∷ collapseImpossiblePromotionBlocked
   ∷ clayNavierStokesPromotionBlocked
+  ∷ []
+
+canonicalNSConditionalQGronwallTheoremGDependencyNames : List String
+canonicalNSConditionalQGronwallTheoremGDependencyNames =
+  "TheoremG conditional Q2/time-integral channel surface"
+  ∷ "h_delta1 hypothesis (input-only threshold)"
+  ∷ "GD1 no-collapse route on the biaxial carrier"
+  ∷ "Rellich-Kato commutator bound <= (1 / delta1) * Q"
+  ∷ "LayerCZ hypothesis for commutator decomposition"
+  ∷ "LayerKorn coercive control hypothesis"
+  ∷ "moving-boundary smooth-before-T* transport regularity"
+  ∷ "viscous H5 control term"
+  ∷ "finite-time blow-up => Q2/carrier divergence implication"
+  ∷ "TheoremG + GD1 => uniform Q2 bound implication"
   ∷ []
 
 theoremSurfaceTextValue : String
@@ -144,6 +190,18 @@ qFiniteConclusionTextValue : String
 qFiniteConclusionTextValue =
   "Conclusion row: Q(t) is finite under h_delta1, but only as the conditional conclusion surface recorded here."
 
+q2ContradictionRouteTextValue : String
+q2ContradictionRouteTextValue =
+  "TheoremG supplies a conditional Q2/time-integral route under h_delta1 + GD1 no-collapse + RK commutator + LayerCZ/LayerKorn + smooth boundary + H5."
+
+q2BlowupImplicationTextValue : String
+q2BlowupImplicationTextValue =
+  "Implication requirement 1: finite-time blow-up forces Q2 or carrier divergence."
+
+q2UniformBoundImplicationTextValue : String
+q2UniformBoundImplicationTextValue =
+  "Implication requirement 2: TheoremG + GD1 gives a conditional uniform Q2 bound."
+
 receiptBoundaryText : List String
 receiptBoundaryText =
   "conditionalQGronwallTheoremGRecorded is the theorem surface"
@@ -155,6 +213,9 @@ receiptBoundaryText =
   ∷ "viscous lower-order H5 is recorded explicitly"
   ∷ "moving-boundary smooth-before-T* regularity is recorded explicitly"
   ∷ "Q(t) finite is recorded only conditionally under h_delta1"
+  ∷ "TheoremG conditional Q2/time-integral contradiction route is recorded as visible"
+  ∷ "finite-time blow-up -> Q2/carrier divergence implication is required and not discharged"
+  ∷ "TheoremG + GD1 -> uniform Q2 bound implication is required and not discharged"
   ∷ "collapseImpossible remains false"
   ∷ "hDelta1Promoted remains false"
   ∷ "kornLevelSetPromoted remains false"
@@ -232,6 +293,28 @@ record NSConditionalQGronwallTheoremGReceipt : Setω where
       String
     qFiniteConclusionTextIsCanonical :
       qFiniteConclusionText ≡ qFiniteConclusionTextValue
+    q2ContradictionRouteText :
+      String
+    q2ContradictionRouteTextIsCanonical :
+      q2ContradictionRouteText ≡ q2ContradictionRouteTextValue
+    q2BlowupImplicationText :
+      String
+    q2BlowupImplicationTextIsCanonical :
+      q2BlowupImplicationText ≡ q2BlowupImplicationTextValue
+    q2UniformBoundImplicationText :
+      String
+    q2UniformBoundImplicationTextIsCanonical :
+      q2UniformBoundImplicationText ≡ q2UniformBoundImplicationTextValue
+
+    dependencyNames :
+      List String
+    dependencyNamesIsCanonical :
+      dependencyNames ≡ canonicalNSConditionalQGronwallTheoremGDependencyNames
+    dependencyNameCount :
+      Nat
+    dependencyNameCountIsCanonical :
+      dependencyNameCount ≡
+      listLength canonicalNSConditionalQGronwallTheoremGDependencyNames
 
     hDelta1Hypothesis :
       Bool
@@ -247,6 +330,26 @@ record NSConditionalQGronwallTheoremGReceipt : Setω where
       Bool
     movingBoundarySmoothBeforeTStarIsTrue :
       movingBoundarySmoothBeforeTStar ≡ true
+
+    q2ContradictionRouteVisible :
+      Bool
+    q2ContradictionRouteVisibleIsTrue :
+      q2ContradictionRouteVisible ≡ true
+
+    q2BlowupImplicationDischarged :
+      Bool
+    q2BlowupImplicationDischargedIsFalse :
+      q2BlowupImplicationDischarged ≡ false
+
+    q2UniformBoundDischarged :
+      Bool
+    q2UniformBoundDischargedIsFalse :
+      q2UniformBoundDischarged ≡ false
+
+    hDelta1Discharged :
+      Bool
+    hDelta1DischargedIsFalse :
+      hDelta1Discharged ≡ false
 
     hDelta1Promoted :
       Bool
@@ -339,6 +442,26 @@ canonicalNSConditionalQGronwallTheoremGReceipt =
         qFiniteConclusionTextValue
     ; qFiniteConclusionTextIsCanonical =
         refl
+    ; q2ContradictionRouteText =
+        q2ContradictionRouteTextValue
+    ; q2ContradictionRouteTextIsCanonical =
+        refl
+    ; q2BlowupImplicationText =
+        q2BlowupImplicationTextValue
+    ; q2BlowupImplicationTextIsCanonical =
+        refl
+    ; q2UniformBoundImplicationText =
+        q2UniformBoundImplicationTextValue
+    ; q2UniformBoundImplicationTextIsCanonical =
+        refl
+    ; dependencyNames =
+        canonicalNSConditionalQGronwallTheoremGDependencyNames
+    ; dependencyNamesIsCanonical =
+        refl
+    ; dependencyNameCount =
+        listLength canonicalNSConditionalQGronwallTheoremGDependencyNames
+    ; dependencyNameCountIsCanonical =
+        refl
     ; hDelta1Hypothesis =
         true
     ; hDelta1HypothesisIsTrue =
@@ -350,6 +473,22 @@ canonicalNSConditionalQGronwallTheoremGReceipt =
     ; movingBoundarySmoothBeforeTStar =
         true
     ; movingBoundarySmoothBeforeTStarIsTrue =
+        refl
+    ; q2ContradictionRouteVisible =
+        true
+    ; q2ContradictionRouteVisibleIsTrue =
+        refl
+    ; q2BlowupImplicationDischarged =
+        false
+    ; q2BlowupImplicationDischargedIsFalse =
+        refl
+    ; q2UniformBoundDischarged =
+        false
+    ; q2UniformBoundDischargedIsFalse =
+        refl
+    ; hDelta1Discharged =
+        false
+    ; hDelta1DischargedIsFalse =
         refl
     ; hDelta1Promoted =
         false
@@ -429,4 +568,31 @@ canonicalConditionalQGronwallTheoremGClayNavierStokesPromotedIsFalse :
   clayNavierStokesPromoted canonicalNSConditionalQGronwallTheoremGReceipt
   ≡ false
 canonicalConditionalQGronwallTheoremGClayNavierStokesPromotedIsFalse =
+  refl
+
+canonicalConditionalQGronwallTheoremGDependencyNamesAreCanonical :
+  dependencyNames canonicalNSConditionalQGronwallTheoremGReceipt
+  ≡ canonicalNSConditionalQGronwallTheoremGDependencyNames
+canonicalConditionalQGronwallTheoremGDependencyNamesAreCanonical =
+  refl
+
+canonicalConditionalQGronwallTheoremGQ2BlowupImplicationNotDischarged :
+  q2BlowupImplicationDischarged canonicalNSConditionalQGronwallTheoremGReceipt ≡ false
+canonicalConditionalQGronwallTheoremGQ2BlowupImplicationNotDischarged =
+  refl
+
+canonicalConditionalQGronwallTheoremGQ2UniformBoundNotDischarged :
+  q2UniformBoundDischarged canonicalNSConditionalQGronwallTheoremGReceipt ≡ false
+canonicalConditionalQGronwallTheoremGQ2UniformBoundNotDischarged =
+  refl
+
+canonicalConditionalQGronwallTheoremGQ2RouteVisible :
+  q2ContradictionRouteVisible canonicalNSConditionalQGronwallTheoremGReceipt
+  ≡ true
+canonicalConditionalQGronwallTheoremGQ2RouteVisible =
+  refl
+
+canonicalConditionalQGronwallTheoremGHDelta1NotDischarged :
+  hDelta1Discharged canonicalNSConditionalQGronwallTheoremGReceipt ≡ false
+canonicalConditionalQGronwallTheoremGHDelta1NotDischarged =
   refl

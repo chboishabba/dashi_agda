@@ -9,24 +9,22 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 ------------------------------------------------------------------------
--- Fail-closed GD1 two-regime minimum-principle receipt.
+-- Fail-closed GD1 two-regime minimum-principle receipt (strengthened).
 --
--- This module records the conditional GD1 lane only:
+-- This receipt records the conditional GD1 no-collapse lane on the Kato
+-- carrier, including:
+--   * one-sided minimum-principle inequality
+--   * two-regime split (critical supercritical/subcritical)
+--   * explicit candidate/route visibility on h_delta1 and TheoremG/Q2
+--   * explicit dependency on exact constants, LayerCZ term, and GD1 proof terms
+--   * explicit Q2 uniform bound gate from GD1 for the contradiction route
 --
---   D_t g12 >= g12^2(1-CCZ) - Cnu*g12
---
--- with the critical gap
---
---   gcrit = Cnu/(1-CCZ)
---
--- and the two regimes:
---   * supercritical: restoring,
---   * subcritical: exponential lower bound.
---
--- It also records the biaxial-carrier projection lambda3 = g12 and the
--- resulting h_delta1 candidate.  No Clay promotion is claimed unless the
--- exact constants, CZ term, and GD1 proof terms are discharged.  The
--- promotion surface here is deliberately empty.
+-- It is intentionally fail-closed:
+--   * h_delta1 is not discharged
+--   * uniform Q2 bound via GD1 is not discharged
+--   * collapseImpossible is false
+--   * Clay Navier-Stokes promotion is false
+--   * no promotion constructor is inhabited
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -43,6 +41,10 @@ data NSGD1MinPrincipleNoLambda3CollapseStage : Set where
     NSGD1MinPrincipleNoLambda3CollapseStage
   criticalGapRecorded :
     NSGD1MinPrincipleNoLambda3CollapseStage
+  twoRegimeMinimumPrincipleRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  twoRegimeConditionallyGatedRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
   supercriticalRestoringRecorded :
     NSGD1MinPrincipleNoLambda3CollapseStage
   subcriticalExponentialLowerBoundRecorded :
@@ -50,6 +52,16 @@ data NSGD1MinPrincipleNoLambda3CollapseStage : Set where
   lambda3EqualsG12OnBiaxialCarrierRecorded :
     NSGD1MinPrincipleNoLambda3CollapseStage
   hDelta1CandidateRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  hDelta1RouteVisibilityRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  theoremGRouteVisibilityRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  q2RouteVisibilityRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  theoremGQ2GD1ContradictionRouteRecorded :
+    NSGD1MinPrincipleNoLambda3CollapseStage
+  q2UniformBoundFromGD1RoleRecorded :
     NSGD1MinPrincipleNoLambda3CollapseStage
   exactConstantsAndCZAndGD1ProofTermsRequiredRecorded :
     NSGD1MinPrincipleNoLambda3CollapseStage
@@ -63,10 +75,17 @@ canonicalNSGD1MinPrincipleNoLambda3CollapseStages :
 canonicalNSGD1MinPrincipleNoLambda3CollapseStages =
   gd1InequalityRecorded
   ∷ criticalGapRecorded
+  ∷ twoRegimeMinimumPrincipleRecorded
+  ∷ twoRegimeConditionallyGatedRecorded
   ∷ supercriticalRestoringRecorded
   ∷ subcriticalExponentialLowerBoundRecorded
   ∷ lambda3EqualsG12OnBiaxialCarrierRecorded
   ∷ hDelta1CandidateRecorded
+  ∷ hDelta1RouteVisibilityRecorded
+  ∷ theoremGRouteVisibilityRecorded
+  ∷ q2RouteVisibilityRecorded
+  ∷ theoremGQ2GD1ContradictionRouteRecorded
+  ∷ q2UniformBoundFromGD1RoleRecorded
   ∷ exactConstantsAndCZAndGD1ProofTermsRequiredRecorded
   ∷ clayPromotionBlockedRecorded
   ∷ failClosedRouteRecorded
@@ -85,6 +104,10 @@ data NSGD1MinPrincipleNoLambda3CollapseBlocker : Set where
     NSGD1MinPrincipleNoLambda3CollapseBlocker
   GD1ProofTermsStillOpen :
     NSGD1MinPrincipleNoLambda3CollapseBlocker
+  hDelta1DischargeStillOpen :
+    NSGD1MinPrincipleNoLambda3CollapseBlocker
+  q2UniformBoundFromGD1DischargeStillOpen :
+    NSGD1MinPrincipleNoLambda3CollapseBlocker
 
 canonicalNSGD1MinPrincipleNoLambda3CollapseBlockers :
   List NSGD1MinPrincipleNoLambda3CollapseBlocker
@@ -95,17 +118,22 @@ canonicalNSGD1MinPrincipleNoLambda3CollapseBlockers =
   ∷ LayerCZ
   ∷ exactConstantsStillOpen
   ∷ GD1ProofTermsStillOpen
+  ∷ hDelta1DischargeStillOpen
+  ∷ q2UniformBoundFromGD1DischargeStillOpen
   ∷ []
 
 canonicalNSGD1MinPrincipleNoLambda3CollapseDependencyNames :
   List String
 canonicalNSGD1MinPrincipleNoLambda3CollapseDependencyNames =
-  "D_t g12 >= g12^2(1-CCZ)-Cnu*g12"
-  ∷ "gcrit=Cnu/(1-CCZ)"
-  ∷ "supercritical restoring"
-  ∷ "subcritical exponential lower bound"
-  ∷ "lambda3=g12 on biaxial carrier"
-  ∷ "h_delta1 candidate"
+  "D_t g12 >= g12^2(1-CCZ) - Cnu*g12"
+  ∷ "gcrit = Cnu/(1-CCZ)"
+  ∷ "LayerCZ exact-term shape and sign split are required"
+  ∷ "supercritical restoring / subcritical exponential lower bound split"
+  ∷ "lambda3 = g12 on biaxial carrier"
+  ∷ "h_delta1 candidate route"
+  ∷ "conditional TheoremG route"
+  ∷ "Q2 route and denominator conversion lane"
+  ∷ "Q2 uniform upper bound from GD1 (undischarged)"
   ∷ "exact constants"
   ∷ "CZ proof term"
   ∷ "GD1 proof terms"
@@ -118,6 +146,10 @@ gd1MinimumPrincipleTextValue =
 criticalGapTextValue : String
 criticalGapTextValue =
   "gcrit = Cnu/(1-CCZ)"
+
+twoRegimeMinimumPrincipleTextValue : String
+twoRegimeMinimumPrincipleTextValue =
+  "two-regime minimum principle is conditional on exact constants, LayerCZ term, and GD1 proof terms"
 
 supercriticalRestoringTextValue : String
 supercriticalRestoringTextValue =
@@ -133,19 +165,52 @@ lambda3OnBiaxialCarrierTextValue =
 
 hDelta1CandidateTextValue : String
 hDelta1CandidateTextValue =
-  "h_delta1 candidate is recorded, not discharged"
+  "h_delta1 candidate is recorded and marked route-visible"
+
+hDelta1RouteVisibilityTextValue : String
+hDelta1RouteVisibilityTextValue =
+  "h_delta1 route visibility is recorded as an explicit checked true gate"
+
+theoremGRouteVisibilityTextValue : String
+theoremGRouteVisibilityTextValue =
+  "TheoremG route is recorded as conditional and route-visible"
+
+q2RouteVisibilityTextValue : String
+q2RouteVisibilityTextValue =
+  "Q2 route is recorded as conditional and route-visible"
+
+q2UniformBoundFromGD1TextValue : String
+q2UniformBoundFromGD1TextValue =
+  "GD1 is the intended route to the Q2 uniform upper bound from conditional TheoremG, but that gate is not discharged"
 
 exactConstantsCZGD1RequiredTextValue : String
 exactConstantsCZGD1RequiredTextValue =
-  "exact constants, CZ, and GD1 proof terms remain required before any Clay promotion"
+  "exact constants, CZ term, and GD1 proof terms are still open; they are required before collapseImpossible, hDelta1, and Q2-uniform routes can be promoted"
+
+contradictionRouteTextValue : String
+contradictionRouteTextValue =
+  "TheoremG + Q2 + GD1 lane is recorded to convert conditional estimates into a uniform Q2 upper bound; full discharge is explicit and currently absent"
 
 failClosedRouteTextValue : String
 failClosedRouteTextValue =
-  "fail-closed route only; no Clay promotion and no collapse promotion are claimed"
+  "fail-closed route only: h_delta1, Q2-uniform-from-GD1, collapseImpossible, and Clay are all explicitly not discharged/promotion false"
 
-data NSGD1MinPrinciplePromotion : Set where
+receiptBoundaryText : List String
+receiptBoundaryText =
+  "GD1 two-regime minimum principle on Kato carrier is recorded"
+  ∷ "exact constants / LayerCZ / GD1 proof terms are open blockers"
+  ∷ "h_delta1 candidate and route visibility are recorded as true"
+  ∷ "TheoremG route visibility is recorded as conditional"
+  ∷ "Q2 route visibility is recorded as conditional"
+  ∷ "uniform Q2 upper bound from GD1 remains undischarged"
+  ∷ "the conditional contradiction channel needs that Q2-discharge to move from conditional to unconditional"
+  ∷ "collapseImpossible is false on this receipt"
+  ∷ "Clay Navier-Stokes promotion is false on this receipt"
+  ∷ []
 
-promotionEmptyTypeWitness : NSGD1MinPrinciplePromotion → ⊥
+data NSGD1MinPrincipleNoLambda3CollapsePromotion : Set where
+
+promotionEmptyTypeWitness : NSGD1MinPrincipleNoLambda3CollapsePromotion → ⊥
 promotionEmptyTypeWitness ()
 
 record NSGD1MinPrincipleNoLambda3CollapseReceipt : Setω where
@@ -199,6 +264,11 @@ record NSGD1MinPrincipleNoLambda3CollapseReceipt : Setω where
     criticalGapTextIsCanonical :
       criticalGapText ≡ criticalGapTextValue
 
+    twoRegimeMinimumPrincipleText :
+      String
+    twoRegimeMinimumPrincipleTextIsCanonical :
+      twoRegimeMinimumPrincipleText ≡ twoRegimeMinimumPrincipleTextValue
+
     supercriticalRestoringText :
       String
     supercriticalRestoringTextIsCanonical :
@@ -220,10 +290,56 @@ record NSGD1MinPrincipleNoLambda3CollapseReceipt : Setω where
     hDelta1CandidateTextIsCanonical :
       hDelta1CandidateText ≡ hDelta1CandidateTextValue
 
+    hDelta1RouteVisibilityText :
+      String
+    hDelta1RouteVisibilityTextIsCanonical :
+      hDelta1RouteVisibilityText ≡ hDelta1RouteVisibilityTextValue
+
+    theoremGRouteVisibilityText :
+      String
+    theoremGRouteVisibilityTextIsCanonical :
+      theoremGRouteVisibilityText ≡ theoremGRouteVisibilityTextValue
+
+    q2RouteVisibilityText :
+      String
+    q2RouteVisibilityTextIsCanonical :
+      q2RouteVisibilityText ≡ q2RouteVisibilityTextValue
+
+    theoremGQ2GD1ContradictionRouteText :
+      String
+    theoremGQ2GD1ContradictionRouteTextIsCanonical :
+      theoremGQ2GD1ContradictionRouteText ≡ contradictionRouteTextValue
+
+    q2UniformBoundFromGD1Text :
+      String
+    q2UniformBoundFromGD1TextIsCanonical :
+      q2UniformBoundFromGD1Text ≡ q2UniformBoundFromGD1TextValue
+
+    exactConstantsCZGD1RequiredText :
+      String
+    exactConstantsCZGD1RequiredTextIsCanonical :
+      exactConstantsCZGD1RequiredText
+      ≡ exactConstantsCZGD1RequiredTextValue
+
     hDelta1Candidate :
       Bool
     hDelta1CandidateIsTrue :
       hDelta1Candidate ≡ true
+
+    hDelta1RouteVisible :
+      Bool
+    hDelta1RouteVisibleIsTrue :
+      hDelta1RouteVisible ≡ true
+
+    theoremGRouteVisible :
+      Bool
+    theoremGRouteVisibleIsTrue :
+      theoremGRouteVisible ≡ true
+
+    q2RouteVisible :
+      Bool
+    q2RouteVisibleIsTrue :
+      q2RouteVisible ≡ true
 
     exactConstantsDischarged :
       Bool
@@ -240,20 +356,20 @@ record NSGD1MinPrincipleNoLambda3CollapseReceipt : Setω where
     gd1ProofTermsDischargedIsFalse :
       gd1ProofTermsDischarged ≡ false
 
-    exactConstantsCZGD1RequiredText :
-      String
-    exactConstantsCZGD1RequiredTextIsCanonical :
-      exactConstantsCZGD1RequiredText ≡ exactConstantsCZGD1RequiredTextValue
+    hDelta1Discharged :
+      Bool
+    hDelta1DischargedIsFalse :
+      hDelta1Discharged ≡ false
+
+    q2UniformBoundFromGD1Discharged :
+      Bool
+    q2UniformBoundFromGD1DischargedIsFalse :
+      q2UniformBoundFromGD1Discharged ≡ false
 
     collapseImpossible :
       Bool
     collapseImpossibleIsFalse :
       collapseImpossible ≡ false
-
-    hDelta1Discharged :
-      Bool
-    hDelta1DischargedIsFalse :
-      hDelta1Discharged ≡ false
 
     clayNavierStokesPromoted :
       Bool
@@ -261,7 +377,7 @@ record NSGD1MinPrincipleNoLambda3CollapseReceipt : Setω where
       clayNavierStokesPromoted ≡ false
 
     promotionType :
-      NSGD1MinPrinciplePromotion → ⊥
+      NSGD1MinPrincipleNoLambda3CollapsePromotion → ⊥
     promotionTypeIsCanonical :
       promotionType ≡ promotionEmptyTypeWitness
 
@@ -269,6 +385,11 @@ record NSGD1MinPrincipleNoLambda3CollapseReceipt : Setω where
       String
     failClosedRouteTextIsCanonical :
       failClosedRouteText ≡ failClosedRouteTextValue
+
+    receiptBoundary :
+      List String
+    receiptBoundaryIsCanonical :
+      receiptBoundary ≡ receiptBoundaryText
 
 open NSGD1MinPrincipleNoLambda3CollapseReceipt public
 
@@ -312,6 +433,10 @@ canonicalNSGD1MinPrincipleNoLambda3CollapseReceipt =
         criticalGapTextValue
     ; criticalGapTextIsCanonical =
         refl
+    ; twoRegimeMinimumPrincipleText =
+        twoRegimeMinimumPrincipleTextValue
+    ; twoRegimeMinimumPrincipleTextIsCanonical =
+        refl
     ; supercriticalRestoringText =
         supercriticalRestoringTextValue
     ; supercriticalRestoringTextIsCanonical =
@@ -328,9 +453,45 @@ canonicalNSGD1MinPrincipleNoLambda3CollapseReceipt =
         hDelta1CandidateTextValue
     ; hDelta1CandidateTextIsCanonical =
         refl
+    ; hDelta1RouteVisibilityText =
+        hDelta1RouteVisibilityTextValue
+    ; hDelta1RouteVisibilityTextIsCanonical =
+        refl
+    ; theoremGRouteVisibilityText =
+        theoremGRouteVisibilityTextValue
+    ; theoremGRouteVisibilityTextIsCanonical =
+        refl
+    ; q2RouteVisibilityText =
+        q2RouteVisibilityTextValue
+    ; q2RouteVisibilityTextIsCanonical =
+        refl
+    ; theoremGQ2GD1ContradictionRouteText =
+        contradictionRouteTextValue
+    ; theoremGQ2GD1ContradictionRouteTextIsCanonical =
+        refl
+    ; q2UniformBoundFromGD1Text =
+        q2UniformBoundFromGD1TextValue
+    ; q2UniformBoundFromGD1TextIsCanonical =
+        refl
+    ; exactConstantsCZGD1RequiredText =
+        exactConstantsCZGD1RequiredTextValue
+    ; exactConstantsCZGD1RequiredTextIsCanonical =
+        refl
     ; hDelta1Candidate =
         true
     ; hDelta1CandidateIsTrue =
+        refl
+    ; hDelta1RouteVisible =
+        true
+    ; hDelta1RouteVisibleIsTrue =
+        refl
+    ; theoremGRouteVisible =
+        true
+    ; theoremGRouteVisibleIsTrue =
+        refl
+    ; q2RouteVisible =
+        true
+    ; q2RouteVisibleIsTrue =
         refl
     ; exactConstantsDischarged =
         false
@@ -344,17 +505,17 @@ canonicalNSGD1MinPrincipleNoLambda3CollapseReceipt =
         false
     ; gd1ProofTermsDischargedIsFalse =
         refl
-    ; exactConstantsCZGD1RequiredText =
-        exactConstantsCZGD1RequiredTextValue
-    ; exactConstantsCZGD1RequiredTextIsCanonical =
+    ; hDelta1Discharged =
+        false
+    ; hDelta1DischargedIsFalse =
+        refl
+    ; q2UniformBoundFromGD1Discharged =
+        false
+    ; q2UniformBoundFromGD1DischargedIsFalse =
         refl
     ; collapseImpossible =
         false
     ; collapseImpossibleIsFalse =
-        refl
-    ; hDelta1Discharged =
-        false
-    ; hDelta1DischargedIsFalse =
         refl
     ; clayNavierStokesPromoted =
         false
@@ -368,6 +529,10 @@ canonicalNSGD1MinPrincipleNoLambda3CollapseReceipt =
         failClosedRouteTextValue
     ; failClosedRouteTextIsCanonical =
         refl
+    ; receiptBoundary =
+        receiptBoundaryText
+    ; receiptBoundaryIsCanonical =
+        refl
     }
 
 gd1RouteKeepsCollapseImpossibleFalse :
@@ -378,6 +543,12 @@ gd1RouteKeepsCollapseImpossibleFalse =
 gd1RouteKeepsHDelta1DischargedFalse :
   hDelta1Discharged canonicalNSGD1MinPrincipleNoLambda3CollapseReceipt ≡ false
 gd1RouteKeepsHDelta1DischargedFalse =
+  refl
+
+gd1RouteKeepsQ2UniformBoundFromGD1DischargedFalse :
+  q2UniformBoundFromGD1Discharged
+    canonicalNSGD1MinPrincipleNoLambda3CollapseReceipt ≡ false
+gd1RouteKeepsQ2UniformBoundFromGD1DischargedFalse =
   refl
 
 gd1RouteKeepsClayNavierStokesPromotedFalse :

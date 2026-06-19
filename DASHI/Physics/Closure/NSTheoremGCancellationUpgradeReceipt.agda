@@ -11,16 +11,18 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 -- Fail-closed receipt for the upgraded Theorem-G cancellation shape.
 --
--- This receipt records the post-commutator cancellation upgrade path:
---   • stretching numerator is killed on λ2 = 0,
+-- This receipt records the post-commutator cancellation upgrade route:
+--   • singular stretching/F123 numerator cancellation on λ2 = 0 is recorded,
+--   • the λ2 = 0 route is valid on the carrier under the GD1/h_delta1
+--     denominator condition,
 --   • RK/commutator remainder is disposed into ε/AM-GM lower-order H5,
---   • F123 contributes the dissipative term dQ/dt <= -δ1 Q + C2 ||u||H5^2
---     under the weaker threshold δ1 > 0,
---   • `collapseImpossible` remains blocked until GD1 no-collapse and the open
---     analytic proof stack is discharged.
+--   • an explicit Q2 upper-bound route is recorded, only under RK/H5/layer
+--     geometry controls, and remains open here,
+--   • F123 contributes dQ/dt <= -δ1 Q + C2 ||u||H5^2 under δ1 > 0,
+--   • the Theorem-G + Q2 + GD1 contradiction channel is explicit but not
+--     discharged here.
 --
--- The surface is explicitly connected to the conditional Theorem G ledger by name
--- (NSConditionalQGronwallTheoremGReceipt), but no promotion is granted here.
+-- No Clay promotion is granted and failure is explicit.
 
 listLength : ∀ {A : Set} → List A → Nat
 listLength [] = zero
@@ -39,9 +41,19 @@ data NSTheoremGCancellationUpgradeStage : Set where
     NSTheoremGCancellationUpgradeStage
   stretchingNumeratorZeroOnLambda2ZeroRecorded :
     NSTheoremGCancellationUpgradeStage
+  lambda2SingularNumeratorCancelsCarrier :
+    NSTheoremGCancellationUpgradeStage
+  gd1GapDenominatorControlForCarrierRecorded :
+    NSTheoremGCancellationUpgradeStage
   epsilonAMGMLowerOrderRKRecorded :
     NSTheoremGCancellationUpgradeStage
   rkIsLowerOrderH5Recorded :
+    NSTheoremGCancellationUpgradeStage
+  q2CancellationRouteRecordedStage :
+    NSTheoremGCancellationUpgradeStage
+  q2UpperBoundFromCancellationRouteRecorded :
+    NSTheoremGCancellationUpgradeStage
+  rkH5LayerGeometryControlRecorded :
     NSTheoremGCancellationUpgradeStage
   f123DampingFormRecorded :
     NSTheoremGCancellationUpgradeStage
@@ -50,6 +62,8 @@ data NSTheoremGCancellationUpgradeStage : Set where
   delta1PositiveNotSqrtHalfRecorded :
     NSTheoremGCancellationUpgradeStage
   gronwallDifferentialRecorded :
+    NSTheoremGCancellationUpgradeStage
+  theoremGQ2GD1ContradictionChannelRecorded :
     NSTheoremGCancellationUpgradeStage
   collapseImpossibleBlockedUntilGD1AnalyticRecorded :
     NSTheoremGCancellationUpgradeStage
@@ -63,12 +77,18 @@ canonicalNSTheoremGCancellationUpgradeStages =
   ∷ conditionalTheoremGReceiptReferenced
   ∷ lambda2ZeroBoundaryRecorded
   ∷ stretchingNumeratorZeroOnLambda2ZeroRecorded
+  ∷ lambda2SingularNumeratorCancelsCarrier
+  ∷ gd1GapDenominatorControlForCarrierRecorded
   ∷ epsilonAMGMLowerOrderRKRecorded
   ∷ rkIsLowerOrderH5Recorded
+  ∷ q2CancellationRouteRecordedStage
+  ∷ q2UpperBoundFromCancellationRouteRecorded
+  ∷ rkH5LayerGeometryControlRecorded
   ∷ f123DampingFormRecorded
   ∷ f123DampingThresholdRecorded
   ∷ delta1PositiveNotSqrtHalfRecorded
   ∷ gronwallDifferentialRecorded
+  ∷ theoremGQ2GD1ContradictionChannelRecorded
   ∷ collapseImpossibleBlockedUntilGD1AnalyticRecorded
   ∷ noPromotionRecorded
   ∷ []
@@ -77,6 +97,12 @@ data NSTheoremGCancellationUpgradeBlocker : Set where
   lambda2NumeratorCancellationStillBoundaryLocal :
     NSTheoremGCancellationUpgradeBlocker
   rkAbsorptionNeedsEpsilonAMGMLedger :
+    NSTheoremGCancellationUpgradeBlocker
+  q2UniformBoundFromCancellationNotDischarged :
+    NSTheoremGCancellationUpgradeBlocker
+  q2UpperBoundRouteNeedsRKCommutatorControl :
+    NSTheoremGCancellationUpgradeBlocker
+  q2UpperBoundRouteNeedsLayerGeometry :
     NSTheoremGCancellationUpgradeBlocker
   f123DampingNeedsAnalyticControl :
     NSTheoremGCancellationUpgradeBlocker
@@ -102,6 +128,9 @@ canonicalNSTheoremGCancellationUpgradeBlockers :
 canonicalNSTheoremGCancellationUpgradeBlockers =
   lambda2NumeratorCancellationStillBoundaryLocal
   ∷ rkAbsorptionNeedsEpsilonAMGMLedger
+  ∷ q2UniformBoundFromCancellationNotDischarged
+  ∷ q2UpperBoundRouteNeedsRKCommutatorControl
+  ∷ q2UpperBoundRouteNeedsLayerGeometry
   ∷ f123DampingNeedsAnalyticControl
   ∷ f123NeedsEmpiricalBoundarySupport
   ∷ collapseImpossibleRequiresGD1NoCollapse
@@ -123,7 +152,7 @@ conditionalReceiptLinkTextValue =
 
 stretchingNumeratorTextValue : String
 stretchingNumeratorTextValue =
-  "On λ2 = 0, the stretching numerator term vanishes, so it no longer injects a non-dissipative residue."
+  "On λ2 = 0, the singular F123 stretching numerator cancellation is recorded on the carrier, so the non-dissipative residue is removed there."
 
 rkAMGMTextValue : String
 rkAMGMTextValue =
@@ -141,13 +170,42 @@ blockedUntilTextValue : String
 blockedUntilTextValue =
   "collapseImpossible remains blocked until GD1 no-collapse and analytic proof terms beyond empirical support are discharged."
 
+q2CancellationRouteTextValue : String
+q2CancellationRouteTextValue =
+  "q2CancellationRoute is recorded as the explicit Q2 upper-bound lane conditioned by this upgrade."
+
+q2UniformBoundFromCancellationTextValue : String
+q2UniformBoundFromCancellationTextValue =
+  "q2UniformBoundFromCancellation is explicitly not discharged in this receipt and must be settled before contradiction closure."
+
+q2RouteControlTextValue : String
+q2RouteControlTextValue =
+  "The Q2 route is explicitly conditioned on RK commutator absorption, H5 lower-order control, and layer-geometry support."
+
+theoremGQ2GD1RouteTextValue : String
+theoremGQ2GD1RouteTextValue =
+  "Theorem-G + Q2 + GD1 contradiction lane is recorded explicitly as a routed dependency, not as a completed collapse proof."
+
+cancellationUpgradeDependencyNames : List String
+cancellationUpgradeDependencyNames =
+  "NSConditionalQGronwallTheoremGReceipt (conditional Theorem G ledger)"
+  ∷ "NSGD1MinPrincipleNoLambda3CollapseReceipt (GD1 gap / h_delta1 structure)"
+  ∷ "lambda2 = 0: singular F123 numerator cancellation on the carrier"
+  ∷ "RK commutator/H5 decomposition by ε-AM-GM"
+  ∷ "layer-geometry control needed for the Q2 upper-bound lane"
+  ∷ "Q2 upper-bound route remains unclosed until q2UniformBoundFromCancellation is discharged"
+  ∷ []
+
 receiptBoundaryText : List String
 receiptBoundaryText =
   "upgraded Theorem-G derivative shape is recorded"
   ∷ "conditional Theorem G receipt is cited textually for continuity"
-  ∷ "numerator cancellation on λ2=0 is recorded"
-  ∷ "RK term is handled by ε/AM-GM as lower-order H5"
+  ∷ "lambda2 = 0 singular F123 numerator cancellation is recorded"
+  ∷ "GD1/h_delta1 denominator condition is recorded as a carrier prerequisite"
+  ∷ "Q2 cancellation route is recorded and linked to the Q2/GD1 contradiction lane"
+  ∷ "Q2 upper-bound route is conditioned on RK commutator + H5 + layer controls"
   ∷ "F123 contributes dQ/dt <= -δ1 Q + C2 ||u||H5^2"
+  ∷ "q2UniformBoundFromCancellation is still false"
   ∷ "δ1 threshold is explicitly δ1 > 0"
   ∷ "collapseImpossible stays blocked pending GD1 no-collapse + analytic proof stack"
   ∷ "h_delta1 remains a hypothesis"
@@ -181,6 +239,16 @@ record NSTheoremGCancellationUpgradeReceipt : Setω where
       Nat
     blockerCountIsCanonical :
       blockerCount ≡ listLength canonicalNSTheoremGCancellationUpgradeBlockers
+
+    dependencyTrail :
+      List String
+    dependencyTrailIsCanonical :
+      dependencyTrail ≡ cancellationUpgradeDependencyNames
+
+    dependencyCount :
+      Nat
+    dependencyCountIsCanonical :
+      dependencyCount ≡ listLength cancellationUpgradeDependencyNames
 
     theoremGUpgradeSurfaceText :
       String
@@ -217,10 +285,50 @@ record NSTheoremGCancellationUpgradeReceipt : Setω where
     blockedUntilTextIsCanonical :
       blockedUntilText ≡ blockedUntilTextValue
 
+    q2CancellationRouteText :
+      String
+    q2CancellationRouteTextIsCanonical :
+      q2CancellationRouteText ≡ q2CancellationRouteTextValue
+
+    q2UniformBoundFromCancellationText :
+      String
+    q2UniformBoundFromCancellationTextIsCanonical :
+      q2UniformBoundFromCancellationText ≡ q2UniformBoundFromCancellationTextValue
+
+    q2RouteControlText :
+      String
+    q2RouteControlTextIsCanonical :
+      q2RouteControlText ≡ q2RouteControlTextValue
+
+    theoremGQ2GD1RouteText :
+      String
+    theoremGQ2GD1RouteTextIsCanonical :
+      theoremGQ2GD1RouteText ≡ theoremGQ2GD1RouteTextValue
+
     lambda2ZeroNumeratorVanishes :
       Bool
     lambda2ZeroNumeratorVanishesIsTrue :
       lambda2ZeroNumeratorVanishes ≡ true
+
+    q2CancellationRouteRecorded :
+      Bool
+    q2CancellationRouteRecordedIsTrue :
+      q2CancellationRouteRecorded ≡ true
+
+    q2UpperBoundFromCancellationRouteVisible :
+      Bool
+    q2UpperBoundFromCancellationRouteVisibleIsTrue :
+      q2UpperBoundFromCancellationRouteVisible ≡ true
+
+    q2UniformBoundFromCancellationDischarged :
+      Bool
+    q2UniformBoundFromCancellationDischargedIsFalse :
+      q2UniformBoundFromCancellationDischarged ≡ false
+
+    theoremGQ2GD1ContradictionChannelVisible :
+      Bool
+    theoremGQ2GD1ContradictionChannelVisibleIsTrue :
+      theoremGQ2GD1ContradictionChannelVisible ≡ true
 
     rkTermLowerOrderH5 :
       Bool
@@ -302,6 +410,14 @@ canonicalNSTheoremGCancellationUpgradeReceipt =
         listLength canonicalNSTheoremGCancellationUpgradeBlockers
     ; blockerCountIsCanonical =
         refl
+    ; dependencyTrail =
+        cancellationUpgradeDependencyNames
+    ; dependencyTrailIsCanonical =
+        refl
+    ; dependencyCount =
+        listLength cancellationUpgradeDependencyNames
+    ; dependencyCountIsCanonical =
+        refl
     ; theoremGUpgradeSurfaceText =
         upgradedTheoremGSurfaceTextValue
     ; theoremGUpgradeSurfaceTextIsCanonical =
@@ -330,9 +446,41 @@ canonicalNSTheoremGCancellationUpgradeReceipt =
         blockedUntilTextValue
     ; blockedUntilTextIsCanonical =
         refl
+    ; q2CancellationRouteText =
+        q2CancellationRouteTextValue
+    ; q2CancellationRouteTextIsCanonical =
+        refl
+    ; q2UniformBoundFromCancellationText =
+        q2UniformBoundFromCancellationTextValue
+    ; q2UniformBoundFromCancellationTextIsCanonical =
+        refl
+    ; q2RouteControlText =
+        q2RouteControlTextValue
+    ; q2RouteControlTextIsCanonical =
+        refl
+    ; theoremGQ2GD1RouteText =
+        theoremGQ2GD1RouteTextValue
+    ; theoremGQ2GD1RouteTextIsCanonical =
+        refl
     ; lambda2ZeroNumeratorVanishes =
         true
     ; lambda2ZeroNumeratorVanishesIsTrue =
+        refl
+    ; q2CancellationRouteRecorded =
+        true
+    ; q2CancellationRouteRecordedIsTrue =
+        refl
+    ; q2UpperBoundFromCancellationRouteVisible =
+        true
+    ; q2UpperBoundFromCancellationRouteVisibleIsTrue =
+        refl
+    ; q2UniformBoundFromCancellationDischarged =
+        false
+    ; q2UniformBoundFromCancellationDischargedIsFalse =
+        refl
+    ; theoremGQ2GD1ContradictionChannelVisible =
+        true
+    ; theoremGQ2GD1ContradictionChannelVisibleIsTrue =
         refl
     ; rkTermLowerOrderH5 =
         true
@@ -377,3 +525,17 @@ canonicalNSTheoremGCancellationUpgradeReceipt =
     }
 
 open NSTheoremGCancellationUpgradeReceipt public
+
+canonicalNSTheoremGCancellationUpgradeQ2CancellationRouteRecorded :
+  q2CancellationRouteRecorded
+    canonicalNSTheoremGCancellationUpgradeReceipt
+  ≡ true
+canonicalNSTheoremGCancellationUpgradeQ2CancellationRouteRecorded =
+  refl
+
+canonicalNSTheoremGCancellationUpgradeQ2UniformBoundFromCancellationDischarged :
+  q2UniformBoundFromCancellationDischarged
+    canonicalNSTheoremGCancellationUpgradeReceipt
+  ≡ false
+canonicalNSTheoremGCancellationUpgradeQ2UniformBoundFromCancellationDischarged =
+  refl

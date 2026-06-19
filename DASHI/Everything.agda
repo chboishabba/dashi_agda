@@ -2210,6 +2210,7 @@ import DASHI.Physics.Closure.ClayBothBlockerMapReceipt
 import DASHI.Physics.Closure.ClayBlockerUpdateReceipt
 import DASHI.Physics.Closure.ClayYMProofRoadmapReceipt
 import DASHI.Physics.Closure.ClayNSProofRoadmapReceipt
+import DASHI.Physics.Closure.NSTheoremGQ2GD1ContradictionChannelReceipt
 import DASHI.Physics.Closure.ClayRoadmapAssignmentPrep
 import DASHI.Physics.Closure.Paper8CoreThesisReceipt
 import DASHI.Physics.Closure.GeometricSplitSummaryReceipt
