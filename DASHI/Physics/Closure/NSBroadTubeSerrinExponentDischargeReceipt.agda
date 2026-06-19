@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSBroadTubeSerrinExponentDischargeReceipt where
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
@@ -81,12 +82,16 @@ data NSBroadTubeSerrinExponentRelationField : Set where
   serrinExactRelationField :
     NSBroadTubeSerrinExponentRelationField
 
+  serrinRelationMarkerField :
+    NSBroadTubeSerrinExponentRelationField
+
 canonicalNSBroadTubeSerrinExponentRelationFields :
   List NSBroadTubeSerrinExponentRelationField
 canonicalNSBroadTubeSerrinExponentRelationFields =
   serrinTimeExponentField
   ∷ serrinSpaceExponentField
   ∷ serrinExactRelationField
+  ∷ serrinRelationMarkerField
   ∷ []
 
 canonicalNSBroadTubeSerrinExponentRelationFieldLabels :
@@ -95,7 +100,82 @@ canonicalNSBroadTubeSerrinExponentRelationFieldLabels =
   "serrinTimeExponentField"
   ∷ "serrinSpaceExponentField"
   ∷ "serrinExactRelationField"
+  ∷ "serrinRelationMarkerField"
   ∷ []
+
+data NSBroadTubeSerrinExponentAnalyticRoute : Set where
+  biotSavartExponentRelationAttempt :
+    NSBroadTubeSerrinExponentAnalyticRoute
+
+  directEndpointRouteRejected :
+    NSBroadTubeSerrinExponentAnalyticRoute
+
+  circularSobolevCalderonChainRejected :
+    NSBroadTubeSerrinExponentAnalyticRoute
+
+  gagliardoNirenbergEnergyOnlyRoute :
+    NSBroadTubeSerrinExponentAnalyticRoute
+
+  l84NotEnoughForBkmL1Linf :
+    NSBroadTubeSerrinExponentAnalyticRoute
+
+canonicalNSBroadTubeSerrinExponentAnalyticRoutes :
+  List NSBroadTubeSerrinExponentAnalyticRoute
+canonicalNSBroadTubeSerrinExponentAnalyticRoutes =
+  biotSavartExponentRelationAttempt
+  ∷ directEndpointRouteRejected
+  ∷ circularSobolevCalderonChainRejected
+  ∷ gagliardoNirenbergEnergyOnlyRoute
+  ∷ l84NotEnoughForBkmL1Linf
+  ∷ []
+
+canonicalNSBroadTubeSerrinExponentAnalyticRouteLabels :
+  List String
+canonicalNSBroadTubeSerrinExponentAnalyticRouteLabels =
+  "biotSavartExponentRelationAttempt"
+  ∷ "directEndpointRouteRejected"
+  ∷ "circularSobolevCalderonChainRejected"
+  ∷ "gagliardoNirenbergEnergyOnlyRoute"
+  ∷ "l84NotEnoughForBkmL1Linf"
+  ∷ []
+
+data NSBroadTubeSerrinExponentRequiredInput : Set where
+  q2RequiredInput :
+    NSBroadTubeSerrinExponentRequiredInput
+
+  theoremGRequiredInput :
+    NSBroadTubeSerrinExponentRequiredInput
+
+  gd1RequiredInput :
+    NSBroadTubeSerrinExponentRequiredInput
+
+canonicalNSBroadTubeSerrinExponentRequiredInputs :
+  List NSBroadTubeSerrinExponentRequiredInput
+canonicalNSBroadTubeSerrinExponentRequiredInputs =
+  q2RequiredInput
+  ∷ theoremGRequiredInput
+  ∷ gd1RequiredInput
+  ∷ []
+
+canonicalNSBroadTubeSerrinExponentRequiredInputLabels :
+  List String
+canonicalNSBroadTubeSerrinExponentRequiredInputLabels =
+  "q2RequiredInput"
+  ∷ "theoremGRequiredInput"
+  ∷ "gd1RequiredInput"
+  ∷ []
+
+serrinAdmissibleP : Nat
+serrinAdmissibleP =
+  8
+
+serrinAdmissibleQ : Nat
+serrinAdmissibleQ =
+  4
+
+serrinCriticalRelationMarker : String
+serrinCriticalRelationMarker =
+  "Serrin-critical relation marker: 2/8 + 3/4 = 1"
 
 data NSBroadTubeSerrinExponentSocket : Set where
   serrinExponentSocketConstructedHere :
@@ -150,12 +230,12 @@ noNSBroadTubeSerrinExponentPromotion ()
 nsBroadTubeSerrinExponentReceiptStatement :
   String
 nsBroadTubeSerrinExponentReceiptStatement =
-  "Conditional broad-tube Serrin exponent discharge recorded: broadTubeCoareaSocket, vorticityCoverageSocket, biotSavartVelocityReconstruction, sobolevInterpolationOnTube, serrinExponentAdmissibility, and timeIntegrabilityControl assemble a conditional serrinExponentSocketConstructed witness, while the exact Serrin relation 2/p + 3/q = 1 and the time-integrability blocker stay explicit."
+  "Conditional broad-tube Serrin exponent discharge records Biot-Savart exponent relation attempt and explicitly rejects endpoint/direct and circular Sobolev-Calderon routes. It records the admissible Serrin pair (p,q)=(8,4), relation marker 2/8 + 3/4 = 1, and the Gagliardo-Nirenberg energy-only route. It also records the blocker that L^8_t L^4_x velocity alone does not imply BKM or L^1_t L^inf_x vorticity without W^{1,4}/H2, so q2, TheoremG, and GD1 inputs are still required."
 
 nsBroadTubeSerrinExponentReceiptBoundary :
   String
 nsBroadTubeSerrinExponentReceiptBoundary =
-  "Conditional socket only; exact Serrin relation is recorded as 2/p + 3/q = 1, the Biot-Savart reconstruction dependency is explicit, the time-integrability kernel remains blocked, and no Clay promotion is recorded."
+  "Conditional socket only; the Biot-Savart reconstruction dependency, admissible pair (8,4), exact relation marker 2/8 + 3/4 = 1, endpoint/direct route rejection, and circular Sobolev-Calderon rejection are all recorded. q2, TheoremG, and GD1 inputs remain required, and time-integrability is the only kernel blocker. No Clay promotion is recorded."
 
 record NSBroadTubeSerrinExponentDischargeORCSLPGF : Set where
   constructor nsBroadTubeSerrinExponentDischargeORCSLPGF
@@ -174,13 +254,13 @@ canonicalNSBroadTubeSerrinExponentDischargeORCSLPGF :
 canonicalNSBroadTubeSerrinExponentDischargeORCSLPGF =
   nsBroadTubeSerrinExponentDischargeORCSLPGF
     "Organize the broad-tube Serrin exponent discharge socket as a conditional receipt."
-    "Record the dependency surface broadTubeCoareaSocket, vorticityCoverageSocket, and biotSavartVelocityReconstruction, plus the exact Serrin relation 2/p + 3/q = 1."
-    "Conclude only a conditional serrinExponentSocketConstructed witness."
-    "Structure the bridge through sobolevInterpolationOnTube, serrinExponentAdmissibility, and timeIntegrabilityControl while the time-integrability kernel remains blocked."
+    "Record the dependency surface broadTubeCoareaSocket, vorticityCoverageSocket, and biotSavartVelocityReconstruction, the admissible pair (8,4), and exact Serrin relation 2/8 + 3/4 = 1."
+    "Conclude only a conditional serrinExponentSocketConstructed witness while recording that endpoint/direct routes and circular Sobolev-Calderon chains are rejected."
+    "Structure the bridge through sobolevInterpolationOnTube, serrinExponentAdmissibility, and timeIntegrabilityControl while the time-integrability kernel remains blocked and the Gagliardo-Nirenberg energy-only route is explicitly non-closing."
     "Leave the unconditional Serrin bound unclaimed."
     "Keep Clay promotion false and promotion status blocked."
-    "Governance stays fail-closed with an empty no-promotion surface."
-    "Final state: conditional socket recorded, no promotion, no extra theorem claim."
+    "Governance stays fail-closed with an empty no-promotion surface and q2/TheoremG/GD1 required input."
+    "Final state: conditional socket recorded, no promotion, no standalone BKM-from-L8L4 claim."
 
 record NSBroadTubeSerrinExponentDischargeReceipt : Setω where
   field
@@ -225,6 +305,60 @@ record NSBroadTubeSerrinExponentDischargeReceipt : Setω where
 
     serrinRelationFieldLabelsAreCanonical :
       serrinRelationFieldLabels ≡ canonicalNSBroadTubeSerrinExponentRelationFieldLabels
+
+    serrinPValue :
+      Nat
+
+    serrinPValueIsEight :
+      serrinPValue ≡ serrinAdmissibleP
+
+    serrinQValue :
+      Nat
+
+    serrinQValueIsFour :
+      serrinQValue ≡ serrinAdmissibleQ
+
+    serrinRelationMarker :
+      String
+
+    serrinRelationMarkerIsCanonical :
+      serrinRelationMarker ≡ serrinCriticalRelationMarker
+
+    analyticRoutes :
+      List NSBroadTubeSerrinExponentAnalyticRoute
+
+    analyticRoutesAreCanonical :
+      analyticRoutes ≡ canonicalNSBroadTubeSerrinExponentAnalyticRoutes
+
+    analyticRouteLabels :
+      List String
+
+    analyticRouteLabelsAreCanonical :
+      analyticRouteLabels ≡ canonicalNSBroadTubeSerrinExponentAnalyticRouteLabels
+
+    requiredInputs :
+      List NSBroadTubeSerrinExponentRequiredInput
+
+    requiredInputsAreCanonical :
+      requiredInputs ≡ canonicalNSBroadTubeSerrinExponentRequiredInputs
+
+    requiredInputLabels :
+      List String
+
+    requiredInputLabelsAreCanonical :
+      requiredInputLabels ≡ canonicalNSBroadTubeSerrinExponentRequiredInputLabels
+
+    l84vNotEnoughForBkmL1Linf :
+      Bool
+
+    l84vNotEnoughForBkmL1LinfIsTrue :
+      l84vNotEnoughForBkmL1Linf ≡ true
+
+    w14h2ControlRequiredForBkm :
+      Bool
+
+    w14h2ControlRequiredForBkmIsTrue :
+      w14h2ControlRequiredForBkm ≡ true
 
     serrinExactRelation :
       String
@@ -339,6 +473,42 @@ canonicalNSBroadTubeSerrinExponentDischargeReceipt =
     ; serrinRelationFieldLabels =
         canonicalNSBroadTubeSerrinExponentRelationFieldLabels
     ; serrinRelationFieldLabelsAreCanonical =
+        refl
+    ; serrinPValue =
+        serrinAdmissibleP
+    ; serrinPValueIsEight =
+        refl
+    ; serrinQValue =
+        serrinAdmissibleQ
+    ; serrinQValueIsFour =
+        refl
+    ; serrinRelationMarker =
+        serrinCriticalRelationMarker
+    ; serrinRelationMarkerIsCanonical =
+        refl
+    ; analyticRoutes =
+        canonicalNSBroadTubeSerrinExponentAnalyticRoutes
+    ; analyticRoutesAreCanonical =
+        refl
+    ; analyticRouteLabels =
+        canonicalNSBroadTubeSerrinExponentAnalyticRouteLabels
+    ; analyticRouteLabelsAreCanonical =
+        refl
+    ; requiredInputs =
+        canonicalNSBroadTubeSerrinExponentRequiredInputs
+    ; requiredInputsAreCanonical =
+        refl
+    ; requiredInputLabels =
+        canonicalNSBroadTubeSerrinExponentRequiredInputLabels
+    ; requiredInputLabelsAreCanonical =
+        refl
+    ; l84vNotEnoughForBkmL1Linf =
+        true
+    ; l84vNotEnoughForBkmL1LinfIsTrue =
+        refl
+    ; w14h2ControlRequiredForBkm =
+        true
+    ; w14h2ControlRequiredForBkmIsTrue =
         refl
     ; serrinExactRelation =
         "2/p + 3/q = 1"

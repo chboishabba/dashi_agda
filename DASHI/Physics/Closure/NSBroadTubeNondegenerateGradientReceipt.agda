@@ -58,6 +58,27 @@ data NSBroadTubeNondegenerateGradientExactAssumption : Set where
   admissibleBoundaryDataForMinimumPrinciple :
     NSBroadTubeNondegenerateGradientExactAssumption
 
+  rellichFirstDerivativeFormula :
+    NSBroadTubeNondegenerateGradientExactAssumption
+
+  katoHessianLaplacianFormula :
+    NSBroadTubeNondegenerateGradientExactAssumption
+
+  simpleEigenvalueGapLowerBoundG12 :
+    NSBroadTubeNondegenerateGradientExactAssumption
+
+  simpleEigenvalueGapLowerBoundG23 :
+    NSBroadTubeNondegenerateGradientExactAssumption
+
+  h3SardCoareaEstimate :
+    NSBroadTubeNondegenerateGradientExactAssumption
+
+  coareaNondegeneracyAERecorded :
+    NSBroadTubeNondegenerateGradientExactAssumption
+
+  pointwiseLowerBoundNeedsNonFlatNoCriticalManifold :
+    NSBroadTubeNondegenerateGradientExactAssumption
+
 canonicalNSBroadTubeNondegenerateGradientHypotheses :
   List NSBroadTubeNondegenerateGradientHypothesis
 canonicalNSBroadTubeNondegenerateGradientHypotheses =
@@ -88,6 +109,13 @@ canonicalNSBroadTubeNondegenerateGradientExactAssumptions =
   ∷ regularLevelSetFoliationWitness
   ∷ boundedSecondFundamentalFormWitness
   ∷ admissibleBoundaryDataForMinimumPrinciple
+  ∷ rellichFirstDerivativeFormula
+  ∷ katoHessianLaplacianFormula
+  ∷ simpleEigenvalueGapLowerBoundG12
+  ∷ simpleEigenvalueGapLowerBoundG23
+  ∷ h3SardCoareaEstimate
+  ∷ coareaNondegeneracyAERecorded
+  ∷ pointwiseLowerBoundNeedsNonFlatNoCriticalManifold
   ∷ []
 
 canonicalNSBroadTubeNondegenerateGradientExactAssumptionLabels :
@@ -100,6 +128,13 @@ canonicalNSBroadTubeNondegenerateGradientExactAssumptionLabels =
   ∷ "regular level-set foliation witness"
   ∷ "bounded second fundamental form witness"
   ∷ "admissible boundary data for the minimum principle"
+  ∷ "rellich first derivative formula for differentiated gap identities"
+  ∷ "kato hessian/laplacian formula recorded"
+  ∷ "simple eigenvalue gap hypothesis: g12 >= delta1"
+  ∷ "simple eigenvalue gap hypothesis: g23 >= delta3"
+  ∷ "H3 plus Sard coarea estimate as geometric input"
+  ∷ "coarea nondegeneracy recorded a.e. / measure-theoretically"
+  ∷ "pointwise lower-bound blocker: non-flat and no-critical-manifold hypothesis required"
   ∷ []
 
 data NSBroadTubeNondegenerateGradientDependency : Set where
@@ -128,6 +163,30 @@ data NSBroadTubeNondegenerateGradientKernelStep : Set where
   propagateNondegeneracyThroughFoliation :
     NSBroadTubeNondegenerateGradientKernelStep
 
+  recordRellichFirstDerivative :
+    NSBroadTubeNondegenerateGradientKernelStep
+
+  recordKatoHessianLaplacian :
+    NSBroadTubeNondegenerateGradientKernelStep
+
+  splitSimpleEigenvalueGaps :
+    NSBroadTubeNondegenerateGradientKernelStep
+
+  recordGapDenominatorDelta1 :
+    NSBroadTubeNondegenerateGradientKernelStep
+
+  recordGapDenominatorDelta3 :
+    NSBroadTubeNondegenerateGradientKernelStep
+
+  recordH3SardCoareaStep :
+    NSBroadTubeNondegenerateGradientKernelStep
+
+  distinguishCoareaModes :
+    NSBroadTubeNondegenerateGradientKernelStep
+
+  recordPointwiseLowerBoundBlocker :
+    NSBroadTubeNondegenerateGradientKernelStep
+
   keepKernelConditionalUntilAssumptionsDisappear :
     NSBroadTubeNondegenerateGradientKernelStep
 
@@ -141,6 +200,9 @@ data NSBroadTubeNondegenerateGradientPromotionBlocker : Set where
   noUnconditionalLambda2GradientTheorem :
     NSBroadTubeNondegenerateGradientPromotionBlocker
 
+  pointwiseLowerBoundBlocker :
+    NSBroadTubeNondegenerateGradientPromotionBlocker
+
   noClayPromotion :
     NSBroadTubeNondegenerateGradientPromotionBlocker
 
@@ -151,6 +213,14 @@ canonicalNSBroadTubeNondegenerateGradientKernelSteps =
   ∷ reduceToTubeODEAndBoundaryData
   ∷ applyMinimumPrincipleOnTubeSlice
   ∷ propagateNondegeneracyThroughFoliation
+  ∷ recordRellichFirstDerivative
+  ∷ recordKatoHessianLaplacian
+  ∷ splitSimpleEigenvalueGaps
+  ∷ recordGapDenominatorDelta1
+  ∷ recordGapDenominatorDelta3
+  ∷ recordH3SardCoareaStep
+  ∷ distinguishCoareaModes
+  ∷ recordPointwiseLowerBoundBlocker
   ∷ keepKernelConditionalUntilAssumptionsDisappear
   ∷ []
 
@@ -160,6 +230,7 @@ canonicalNSBroadTubeNondegenerateGradientPromotionBlockers =
   residualAnalyticAssumptions
   ∷ oDEMinPrincipleKernelStillConditional
   ∷ noUnconditionalLambda2GradientTheorem
+  ∷ pointwiseLowerBoundBlocker
   ∷ noClayPromotion
   ∷ []
 
@@ -198,6 +269,14 @@ canonicalNSBroadTubeNondegenerateGradientKernelStepLabels =
   ∷ "reduce to tube ODE and boundary data"
   ∷ "apply minimum principle on tube slice"
   ∷ "propagate nondegeneracy through foliation"
+  ∷ "record Rellich first-derivative identity"
+  ∷ "record Kato hessian and Laplacian formulas"
+  ∷ "split and track simple eigenvalue gaps"
+  ∷ "close g12 denominator by g12 >= delta1"
+  ∷ "close g23 denominator by g23 >= delta3"
+  ∷ "insert H3 + Sard + coarea estimate step"
+  ∷ "distinguish a.e. coarea lower bound from pointwise lower bound"
+  ∷ "record blocker: pointwise lower bound needs non-flat/no-critical-manifold"
   ∷ "keep kernel conditional until assumptions disappear"
   ∷ []
 
@@ -232,7 +311,7 @@ noNSBroadTubeNondegenerateGradientPromotion ()
 
 nsBroadTubeNondegenerateGradientStatement : String
 nsBroadTubeNondegenerateGradientStatement =
-  "Conditional broad-tube nondegenerate gradient socket: with exact C1/C2 lambda2 regularity, strict gradient lower bound, finite tubular radius, regular level-set foliation, bounded second fundamental form, and admissible minimum-principle boundary data, the ODE/min-principle kernel constructs the nondegenerate gradient socket only conditionally."
+  "Conditional broad-tube nondegenerate gradient socket: with exact C1/C2 lambda2 regularity, strict gradient lower bound, finite tubular radius, regular level-set foliation, bounded second fundamental form, and admissible minimum-principle boundary data, the ODE/min-principle kernel constructs the nondegenerate gradient socket only conditionally after recording Rellich and Kato first-derivative structures."
 
 nsBroadTubeNondegenerateGradientBoundary : String
 nsBroadTubeNondegenerateGradientBoundary =
@@ -240,11 +319,11 @@ nsBroadTubeNondegenerateGradientBoundary =
 
 nsBroadTubeNondegenerateGradientKernelSummary : String
 nsBroadTubeNondegenerateGradientKernelSummary =
-  "ODE/min-principle kernel: differentiate lambda2 along the tube flow, reduce to a tube ODE with admissible boundary data, apply the minimum principle on each tube slice, and propagate nondegeneracy through the foliation without promoting the global theorem."
+  "ODE/min-principle kernel: differentiate lambda2 along the tube flow, apply Rellich first-derivative expansion, insert Kato hessian/Laplacian formulas, split simple-eigenvalue gaps, close denominators with g12 >= delta1 and g23 >= delta3, apply H3 + Sard + coarea estimates, distinguish a.e. coarea nondegeneracy from pointwise lower bound, and propagate nondegeneracy through the foliation without promoting the global theorem."
 
 nsBroadTubeNondegenerateGradientPromotionBlockerSummary : String
 nsBroadTubeNondegenerateGradientPromotionBlockerSummary =
-  "Promotion stays blocked by residual analytic assumptions, the conditional ODE/min-principle kernel, the missing unconditional lambda2-gradient theorem, and the explicit no-Clay gate."
+  "Promotion stays blocked by residual analytic assumptions, the conditional ODE/min-principle kernel, the missing unconditional lambda2-gradient theorem, the pointwise non-flat/no-critical-manifold requirement for coarea lower bounds, and the explicit no-Clay gate."
 
 record NSBroadTubeNondegenerateGradientKernelReceipt : Set where
   field
@@ -302,6 +381,18 @@ record NSBroadTubeNondegenerateGradientKernelReceipt : Set where
       promotionBlockerSummary ≡
       nsBroadTubeNondegenerateGradientPromotionBlockerSummary
 
+    coareaTheoremRecordedOnAEverywhere :
+      Bool
+
+    coareaTheoremRecordedOnAEverywhereIsTrue :
+      coareaTheoremRecordedOnAEverywhere ≡ true
+
+    pointwiseLowerBoundBlockerRecorded :
+      Bool
+
+    pointwiseLowerBoundBlockerRecordedIsTrue :
+      pointwiseLowerBoundBlockerRecorded ≡ true
+
 canonicalNSBroadTubeNondegenerateGradientKernelReceipt :
   NSBroadTubeNondegenerateGradientKernelReceipt
 canonicalNSBroadTubeNondegenerateGradientKernelReceipt =
@@ -338,6 +429,14 @@ canonicalNSBroadTubeNondegenerateGradientKernelReceipt =
         nsBroadTubeNondegenerateGradientPromotionBlockerSummary
     ; promotionBlockerSummaryIsCanonical =
         refl
+    ; coareaTheoremRecordedOnAEverywhere =
+        true
+    ; coareaTheoremRecordedOnAEverywhereIsTrue =
+        refl
+    ; pointwiseLowerBoundBlockerRecorded =
+        true
+    ; pointwiseLowerBoundBlockerRecordedIsTrue =
+        refl
     }
 
 record NSBroadTubeNondegenerateGradientORCSLPGF : Set where
@@ -356,14 +455,14 @@ canonicalNSBroadTubeNondegenerateGradientORCSLPGF :
   NSBroadTubeNondegenerateGradientORCSLPGF
 canonicalNSBroadTubeNondegenerateGradientORCSLPGF =
   mkNSBroadTubeNondegenerateGradientORCSLPGF
-    "Record a conditional broad-tube nondegenerate gradient socket with explicit hypotheses."
-    "Construct the nondegenerate gradient socket under smooth lambda2 field, gradient lower bound on tube, bounded second fundamental form, finite tubular radius, and level set foliation, while also recording exact C1/C2 lambda2 regularity and boundary-data assumptions for the ODE/min-principle kernel."
-    "Dependencies are the hypothesis record, exact assumption record, tube geometry socket, foliation socket, ODE/min-principle kernel record, and conditional gradient socket."
-    "Hypothesis list is fixed as smooth-lambda2-field, gradient-lower-bound-on-tube, bounded-second-fundamental-form, finite-tubular-radius, and level-set-foliation; exact assumptions add lambda2 C1/C2 regularity, strict nondegeneracy lower bound, finite radius witness, regular foliation witness, bounded curvature witness, and admissible minimum-principle boundary data."
-    "Linking path: hypotheses -> exact assumptions -> ODE/min-principle kernel -> conditional steps -> nondegenerate gradient socket constructed."
+    "Record a conditional broad-tube nondegenerate gradient socket with explicit analytic steps: Rellich first-derivative expansion, Kato hessian/laplacian formulas, and explicit eigen-gap control."
+    "Construct the nondegenerate gradient socket under smooth lambda2 field, gradient lower bound on tube, bounded second fundamental form, finite tubular radius, and level set foliation, while also recording exact C1/C2 lambda2 regularity, explicit Rellich/Kato formulas, gap lower bounds g12 >= delta1 and g23 >= delta3, admissible boundary data, and H3/Sard/coarea geometric control."
+    "Dependencies are the hypothesis record, exact assumption record (expanded with Rellich/Kato/gap/coarea data), tube geometry socket, foliation socket, ODE/min-principle kernel record, and conditional gradient socket."
+    "Hypothesis list is fixed as smooth-lambda2-field, gradient-lower-bound-on-tube, bounded-second-fundamental-form, finite-tubular-radius, and level-set-foliation; exact assumptions add lambda2 C1/C2 regularity, strict nondegeneracy lower bound, finite radius witness, regular foliation witness, bounded curvature witness, admissible minimum-principle boundary data, Rellich first-derivative formula, Kato hessian/laplacian formula, gap hypotheses g12 >= delta1 and g23 >= delta3, H3/Sard/coarea estimate, a.e. coarea nondegeneracy, and the pointwise lower-bound blocker."
+    "Linking path: hypotheses -> exact assumptions -> ODE/min-principle kernel -> explicit Rellich/Kato/spectrum coarea steps -> nondegenerate gradient socket constructed conditionally."
     "No unconditional lambda2-gradient theorem is established at this node."
     "Clay promotion is explicitly false and the kernel remains conditional."
-    "Keep the receipt fail-closed until the exact analytic assumptions disappear."
+    "Keep the receipt fail-closed until the exact analytic assumptions disappear and the pointwise blocker is discharged."
 
 record NSBroadTubeNondegenerateGradientReceipt : Setω where
   field
@@ -500,8 +599,22 @@ record NSBroadTubeNondegenerateGradientReceipt : Setω where
       "no Clay promotion claimed"
       ∷ "no unconditional lambda2-gradient theorem claimed"
       ∷ "conditional socket only"
+      ∷ "coarea nondegeneracy currently only a.e. recorded"
+      ∷ "pointwise lower bound blocked by non-flat/no-critical-manifold condition"
       ∷ "exact analytic assumptions still present"
       ∷ []
+
+    coareaAEMeasureTheoreticRecorded :
+      Bool
+
+    coareaAEMeasureTheoreticRecordedIsTrue :
+      coareaAEMeasureTheoreticRecorded ≡ true
+
+    pointwiseLowerBoundBlockerRecorded :
+      Bool
+
+    pointwiseLowerBoundBlockerRecordedIsTrue :
+      pointwiseLowerBoundBlockerRecorded ≡ true
 
     orcslpgf :
       NSBroadTubeNondegenerateGradientORCSLPGF
@@ -601,9 +714,19 @@ canonicalNSBroadTubeNondegenerateGradientReceipt =
         "no Clay promotion claimed"
         ∷ "no unconditional lambda2-gradient theorem claimed"
         ∷ "conditional socket only"
+        ∷ "coarea nondegeneracy currently only a.e. recorded"
+        ∷ "pointwise lower bound blocked by non-flat/no-critical-manifold condition"
         ∷ "exact analytic assumptions still present"
         ∷ []
     ; receiptBoundaryIsCanonical =
+        refl
+    ; coareaAEMeasureTheoreticRecorded =
+        true
+    ; coareaAEMeasureTheoreticRecordedIsTrue =
+        refl
+    ; pointwiseLowerBoundBlockerRecorded =
+        true
+    ; pointwiseLowerBoundBlockerRecordedIsTrue =
         refl
     ; orcslpgf =
         canonicalNSBroadTubeNondegenerateGradientORCSLPGF
