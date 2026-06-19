@@ -12,9 +12,9 @@ open import Data.List.Base using (List; _∷_; [])
 --
 -- This file records a conditional broad-tube vorticity coverage socket.
 -- The strict carrier lane is recorded as insufficient, the broad-tube
--- requirement is recorded as active, the socket is constructed conditionally,
--- and Clay promotion remains false.  No unconditional coverage theorem is
--- claimed here.
+-- requirement is active, and the route is split into interior and exterior
+-- lambda2 lanes.  Clay promotion remains false and no unconditional
+-- coverage theorem is claimed.
 
 data NSBroadTubeVorticityCoverageStatus : Set where
   broadTubeVorticityCoverageSocketRecorded :
@@ -33,7 +33,22 @@ data NSBroadTubeVorticityCoverageDependency : Set where
   broadTubeMassLowerBound :
     NSBroadTubeVorticityCoverageDependency
 
+  coareaOmegaGradLambda2Telemetry :
+    NSBroadTubeVorticityCoverageDependency
+
+  broadTubeLambda2SplitTelemetry :
+    NSBroadTubeVorticityCoverageDependency
+
   deepInteriorControl :
+    NSBroadTubeVorticityCoverageDependency
+
+  exteriorPressureCZL3Telemetry :
+    NSBroadTubeVorticityCoverageDependency
+
+  l3EnstrophyConditionalTelemetry :
+    NSBroadTubeVorticityCoverageDependency
+
+  conditionalL2GlobalBoundTelemetry :
     NSBroadTubeVorticityCoverageDependency
 
   coareaPartition :
@@ -49,6 +64,24 @@ data NSBroadTubeVorticityCoverageKernelWitness : Set where
   coareaPartitionWitness :
     NSBroadTubeVorticityCoverageKernelWitness
 
+  coareaOmegaGradLambda2Witness :
+    NSBroadTubeVorticityCoverageKernelWitness
+
+  broadTubeLambda2SplitWitness :
+    NSBroadTubeVorticityCoverageKernelWitness
+
+  deepInteriorGronwallWitness :
+    NSBroadTubeVorticityCoverageKernelWitness
+
+  exteriorPressureCZL3Witness :
+    NSBroadTubeVorticityCoverageKernelWitness
+
+  l3EnstrophyConditionalityWitness :
+    NSBroadTubeVorticityCoverageKernelWitness
+
+  conditionalL2BoundWitness :
+    NSBroadTubeVorticityCoverageKernelWitness
+
   coverageKernelSpecificityWitness :
     NSBroadTubeVorticityCoverageKernelWitness
 
@@ -59,7 +92,12 @@ canonicalNSBroadTubeVorticityCoverageDependencies =
   ∷ weightedLambda2QuantileTelemetry
   ∷ broadLayerFractionTelemetry
   ∷ broadTubeMassLowerBound
+  ∷ coareaOmegaGradLambda2Telemetry
+  ∷ broadTubeLambda2SplitTelemetry
   ∷ deepInteriorControl
+  ∷ exteriorPressureCZL3Telemetry
+  ∷ l3EnstrophyConditionalTelemetry
+  ∷ conditionalL2GlobalBoundTelemetry
   ∷ coareaPartition
   ∷ []
 
@@ -69,6 +107,12 @@ canonicalNSBroadTubeVorticityCoverageKernelWitnesses =
   deepInteriorControlWitness
   ∷ broadLayerFractionWitness
   ∷ coareaPartitionWitness
+  ∷ coareaOmegaGradLambda2Witness
+  ∷ broadTubeLambda2SplitWitness
+  ∷ deepInteriorGronwallWitness
+  ∷ exteriorPressureCZL3Witness
+  ∷ l3EnstrophyConditionalityWitness
+  ∷ conditionalL2BoundWitness
   ∷ coverageKernelSpecificityWitness
   ∷ []
 
@@ -79,7 +123,12 @@ canonicalNSBroadTubeVorticityCoverageDependencyLabels =
   ∷ "weightedLambda2QuantileTelemetry"
   ∷ "broadLayerFractionTelemetry"
   ∷ "broadTubeMassLowerBound"
+  ∷ "coareaOmegaGradLambda2Telemetry"
+  ∷ "broadTubeLambda2SplitTelemetry"
   ∷ "deepInteriorControl"
+  ∷ "exteriorPressureCZL3Telemetry"
+  ∷ "l3EnstrophyConditionalTelemetry"
+  ∷ "conditionalL2GlobalBoundTelemetry"
   ∷ "coareaPartition"
   ∷ []
 
@@ -96,7 +145,25 @@ data NSBroadTubeVorticityCoverageHypothesis : Set where
   broadTubeMassLowerBoundChecked :
     NSBroadTubeVorticityCoverageHypothesis
 
+  coareaOmegaGradLambda2Checked :
+    NSBroadTubeVorticityCoverageHypothesis
+
+  broadTubeLambda2SplitChecked :
+    NSBroadTubeVorticityCoverageHypothesis
+
   deepInteriorControlChecked :
+    NSBroadTubeVorticityCoverageHypothesis
+
+  deepInteriorGronwallChecked :
+    NSBroadTubeVorticityCoverageHypothesis
+
+  exteriorPressureCZL3Checked :
+    NSBroadTubeVorticityCoverageHypothesis
+
+  l3EnstrophyConditionalChecked :
+    NSBroadTubeVorticityCoverageHypothesis
+
+  conditionalL2GlobalBoundChecked :
     NSBroadTubeVorticityCoverageHypothesis
 
   coareaPartitionChecked :
@@ -115,6 +182,15 @@ data NSBroadTubeVorticityCoverageBlocker : Set where
   deepInteriorControlNotYetDischarged :
     NSBroadTubeVorticityCoverageBlocker
 
+  assumptionsNotYetDischarged :
+    NSBroadTubeVorticityCoverageBlocker
+
+  exteriorPressureCZL3RouteNotYetDischarged :
+    NSBroadTubeVorticityCoverageBlocker
+
+  l3EnstrophyConditionalityNotYetDischarged :
+    NSBroadTubeVorticityCoverageBlocker
+
   unconditionalCoverageTheoremAbsent :
     NSBroadTubeVorticityCoverageBlocker
 
@@ -128,7 +204,13 @@ canonicalNSBroadTubeVorticityCoverageHypotheses =
   ∷ weightedLambda2QuantileTelemetryChecked
   ∷ broadLayerFractionTelemetryChecked
   ∷ broadTubeMassLowerBoundChecked
+  ∷ coareaOmegaGradLambda2Checked
+  ∷ broadTubeLambda2SplitChecked
   ∷ deepInteriorControlChecked
+  ∷ deepInteriorGronwallChecked
+  ∷ exteriorPressureCZL3Checked
+  ∷ l3EnstrophyConditionalChecked
+  ∷ conditionalL2GlobalBoundChecked
   ∷ coareaPartitionChecked
   ∷ []
 
@@ -139,6 +221,9 @@ canonicalNSBroadTubeVorticityCoverageBlockers =
   ∷ broadLayerFractionNotYetPinned
   ∷ coareaPartitionNotYetKernelSpecific
   ∷ deepInteriorControlNotYetDischarged
+  ∷ assumptionsNotYetDischarged
+  ∷ exteriorPressureCZL3RouteNotYetDischarged
+  ∷ l3EnstrophyConditionalityNotYetDischarged
   ∷ unconditionalCoverageTheoremAbsent
   ∷ clayPromotionForbidden
   ∷ []
@@ -150,8 +235,14 @@ canonicalNSBroadTubeVorticityCoverageHypothesisLabels =
   ∷ "weightedLambda2QuantileTelemetry"
   ∷ "broadLayerFractionTelemetry"
   ∷ "broadTubeMassLowerBound"
-  ∷ "deepInteriorControl"
-  ∷ "coareaPartition"
+  ∷ "coareaOmegaGradLambda2Checked"
+  ∷ "broadTubeLambda2SplitChecked"
+  ∷ "deepInteriorControlChecked"
+  ∷ "deepInteriorGronwallChecked"
+  ∷ "exteriorPressureCZL3Checked"
+  ∷ "l3EnstrophyConditionalChecked"
+  ∷ "conditionalL2GlobalBoundChecked"
+  ∷ "coareaPartitionChecked"
   ∷ []
 
 data NSBroadTubeVorticityCoverageStep : Set where
@@ -164,7 +255,25 @@ data NSBroadTubeVorticityCoverageStep : Set where
   recordBroadTubeMassLowerBound :
     NSBroadTubeVorticityCoverageStep
 
+  recordCoareaOmegaGradLambda2 :
+    NSBroadTubeVorticityCoverageStep
+
+  recordBroadTubeLambda2Split :
+    NSBroadTubeVorticityCoverageStep
+
   recordDeepInteriorControl :
+    NSBroadTubeVorticityCoverageStep
+
+  recordDeepInteriorGronwall :
+    NSBroadTubeVorticityCoverageStep
+
+  recordExteriorPressureCZL3Route :
+    NSBroadTubeVorticityCoverageStep
+
+  recordL3EnstrophyConditionality :
+    NSBroadTubeVorticityCoverageStep
+
+  recordConditionalL2GlobalBound :
     NSBroadTubeVorticityCoverageStep
 
   recordCoareaPartition :
@@ -182,7 +291,13 @@ canonicalNSBroadTubeVorticityCoverageSteps =
   recordLayerL2FractionTelemetry
   ∷ recordWeightedLambda2QuantileTelemetry
   ∷ recordBroadTubeMassLowerBound
+  ∷ recordCoareaOmegaGradLambda2
+  ∷ recordBroadTubeLambda2Split
   ∷ recordDeepInteriorControl
+  ∷ recordDeepInteriorGronwall
+  ∷ recordExteriorPressureCZL3Route
+  ∷ recordL3EnstrophyConditionality
+  ∷ recordConditionalL2GlobalBound
   ∷ recordCoareaPartition
   ∷ constructConditionalCoverageSocket
   ∷ recordCoverageBlockers
@@ -199,9 +314,29 @@ broadTubeVorticityCoverageSocket :
 broadTubeVorticityCoverageSocket _ _ =
   vorticityCoverageSocketConstructed
 
+coareaOmegaGradLambda2Formula : String
+coareaOmegaGradLambda2Formula =
+  "coarea identity for int |omega|^2 * |grad lambda2| (level-set weighted form)"
+
+broadTubeLambda2SplitFormula : String
+broadTubeLambda2SplitFormula =
+  "split domain as { |lambda2| < eps } union { |lambda2| >= eps }"
+
+deepInteriorGronwallRouteFormula : String
+deepInteriorGronwallRouteFormula =
+  "on {lambda2 <= -eps}, use vorticity transport in eigenbasis + maximum-principle budget on |omega|^2 and absorbable pressure term with Gronwall"
+
+exteriorPressureCZL3RouteFormula : String
+exteriorPressureCZL3RouteFormula =
+  "on {lambda2 >= eps}, route is conditional: pressure estimate + Calderon-Zygmund + |omega|_L3 bound / enstrophy route"
+
+conditionalL2GlobalBoundFormula : String
+conditionalL2GlobalBoundFormula =
+  "||omega||_L2(R3)^2 <= ||omega||_L2(broad tube)^2 + C(E0, T), conditional on L3 and enstrophy."
+
 canonicalNSBroadTubeVorticityCoverageKernelStatement : String
 canonicalNSBroadTubeVorticityCoverageKernelStatement =
-  "Kernel-specific broad-tube vorticity coverage remains conditional: deep-interior control, broad-layer fraction telemetry, and coarea partition are recorded, but the coverage blockers keep the unconditional theorem and Clay promotion closed."
+  "Kernel-specific broad-tube vorticity coverage remains conditional: coarea of |omega|^2 |grad lambda2|, split-lambda2 lane decomposition, deep-interior max-principle/Gronwall control, exterior pressure-CZ-L3 conditional control, and the final conditional L2 inequality are recorded, while strict carrier insufficiency and unpaid assumptions keep unconditional status and Clay closed."
 
 data NSBroadTubeVorticityCoverageNoPromotion : Set where
 
@@ -212,11 +347,11 @@ nsBroadTubeVorticityCoverageNoPromotion ()
 
 nsBroadTubeVorticityCoverageStatement : String
 nsBroadTubeVorticityCoverageStatement =
-  "Conditional broad-tube vorticity coverage socket: layer L2 fraction telemetry, weighted lambda2 quantile telemetry, broad-layer fraction telemetry, broad tube mass lower bound, deep interior control, and coarea partition are recorded with explicit blockers; no unconditional theorem is claimed."
+  "Conditional broad-tube vorticity coverage socket: coarea formula, broad-tube lambda2 split, deep interior λ2<=-eps max-principle/Gronwall route, exterior λ2>=eps pressure/CZ/L3 conditional route, and final conditional inequality are recorded with explicit blockers."
 
 nsBroadTubeVorticityCoverageBoundary : String
 nsBroadTubeVorticityCoverageBoundary =
-  "strict carrier insufficiency is recorded; broad-layer fraction and coarea partition remain only conditionally pinned; deep interior control is not discharged; no unconditional coverage theorem is claimed; Clay promotion remains false."
+  "strict carrier insufficiency is explicit; assumptions are not discharged; interior and exterior conditional routes are active; final L2 inequality remains conditional on L3/enstrophy; no unconditional coverage theorem is claimed; Clay promotion stays false."
 
 record NSBroadTubeVorticityCoverageORCSLPGF : Set where
   constructor mkNSBroadTubeVorticityCoverageORCSLPGF
@@ -234,14 +369,14 @@ canonicalNSBroadTubeVorticityCoverageORCSLPGF :
   NSBroadTubeVorticityCoverageORCSLPGF
 canonicalNSBroadTubeVorticityCoverageORCSLPGF =
   mkNSBroadTubeVorticityCoverageORCSLPGF
-    "Record a conditional broad-tube vorticity coverage socket with explicit deep-interior, broad-layer fraction, and coarea witnesses."
-    "Use layerL2FractionTelemetry, weightedLambda2QuantileTelemetry, broadLayerFractionTelemetry, broadTubeMassLowerBound, deepInteriorControl, and coareaPartition as the dependency and hypothesis basis."
+    "Record a conditional broad-tube vorticity coverage socket with explicit coarea and split-lane structure."
+    "Use coareaOmegaGradLambda2Telemetry, broadTubeLambda2SplitTelemetry, deepInteriorGronwall, exteriorPressureCZL3Telemetry, L3/enstrophy conditional route, and conditional L2 bound telemetry."
     "The conclusion is the conditional socket vorticityCoverageSocketConstructed."
-    "The receipt records strict carrier insufficiency plus explicit coverage blockers."
-    "Link dependencies -> hypotheses -> steps -> kernel witnesses -> conditional socket construction."
-    "No unconditional coverage theorem is established here."
-    "Clay promotion is explicitly false."
-    "Keep the promotion payload empty and the receipt fail-closed."
+    "Record strict-carrier insufficiency and assumptionsNotYetDischarged alongside explicit blockers."
+    "Link dependencies -> hypotheses -> step sequence with lane-split and route witnesses -> conditional socket construction."
+    "No unconditional coverage theorem is established; the final estimate is conditional on explicit L3/enstrophy control."
+    "Clay promotion is explicitly false; unconditionalCoverageTheorem remains false."
+    "Keep the receipt fail-closed with canonical blockers and textual dependency witnesses."
 
 record NSBroadTubeVorticityCoverageReceipt : Setω where
   field
@@ -336,6 +471,78 @@ record NSBroadTubeVorticityCoverageReceipt : Setω where
 
     assumptionsDischargedIsFalse :
       assumptionsDischarged ≡ false
+
+    coareaOmegaGradLambda2Recorded :
+      Bool
+
+    coareaOmegaGradLambda2RecordedIsTrue :
+      coareaOmegaGradLambda2Recorded ≡ true
+
+    broadTubeLambda2SplitRecorded :
+      Bool
+
+    broadTubeLambda2SplitRecordedIsTrue :
+      broadTubeLambda2SplitRecorded ≡ true
+
+    deepInteriorGronwallRecorded :
+      Bool
+
+    deepInteriorGronwallRecordedIsTrue :
+      deepInteriorGronwallRecorded ≡ true
+
+    exteriorPressureCZL3Recorded :
+      Bool
+
+    exteriorPressureCZL3RecordedIsTrue :
+      exteriorPressureCZL3Recorded ≡ true
+
+    l3EnstrophyConditionalityRecorded :
+      Bool
+
+    l3EnstrophyConditionalityRecordedIsTrue :
+      l3EnstrophyConditionalityRecorded ≡ true
+
+    conditionalL2GlobalBoundRecorded :
+      Bool
+
+    conditionalL2GlobalBoundRecordedIsTrue :
+      conditionalL2GlobalBoundRecorded ≡ true
+
+    coareaOmegaGradLambda2FormulaText :
+      String
+
+    coareaOmegaGradLambda2FormulaTextIsCanonical :
+      coareaOmegaGradLambda2FormulaText ≡ coareaOmegaGradLambda2Formula
+
+    broadTubeLambda2SplitFormulaText :
+      String
+
+    broadTubeLambda2SplitFormulaTextIsCanonical :
+      broadTubeLambda2SplitFormulaText ≡ broadTubeLambda2SplitFormula
+
+    deepInteriorGronwallFormulaText :
+      String
+
+    deepInteriorGronwallFormulaTextIsCanonical :
+      deepInteriorGronwallFormulaText ≡ deepInteriorGronwallRouteFormula
+
+    exteriorPressureCZL3FormulaText :
+      String
+
+    exteriorPressureCZL3FormulaTextIsCanonical :
+      exteriorPressureCZL3FormulaText ≡ exteriorPressureCZL3RouteFormula
+
+    conditionalL2GlobalBoundFormulaText :
+      String
+
+    conditionalL2GlobalBoundFormulaTextIsCanonical :
+      conditionalL2GlobalBoundFormulaText ≡ conditionalL2GlobalBoundFormula
+
+    assumptionDischargeBlocker :
+      NSBroadTubeVorticityCoverageBlocker
+
+    assumptionDischargeBlockerIsCanonical :
+      assumptionDischargeBlocker ≡ assumptionsNotYetDischarged
 
     coverageSocketConstructed :
       Bool
@@ -454,6 +661,54 @@ canonicalNSBroadTubeVorticityCoverageReceipt =
     ; assumptionsDischarged =
         false
     ; assumptionsDischargedIsFalse =
+        refl
+    ; coareaOmegaGradLambda2Recorded =
+        true
+    ; coareaOmegaGradLambda2RecordedIsTrue =
+        refl
+    ; broadTubeLambda2SplitRecorded =
+        true
+    ; broadTubeLambda2SplitRecordedIsTrue =
+        refl
+    ; deepInteriorGronwallRecorded =
+        true
+    ; deepInteriorGronwallRecordedIsTrue =
+        refl
+    ; exteriorPressureCZL3Recorded =
+        true
+    ; exteriorPressureCZL3RecordedIsTrue =
+        refl
+    ; l3EnstrophyConditionalityRecorded =
+        true
+    ; l3EnstrophyConditionalityRecordedIsTrue =
+        refl
+    ; conditionalL2GlobalBoundRecorded =
+        true
+    ; conditionalL2GlobalBoundRecordedIsTrue =
+        refl
+    ; coareaOmegaGradLambda2FormulaText =
+        coareaOmegaGradLambda2Formula
+    ; coareaOmegaGradLambda2FormulaTextIsCanonical =
+        refl
+    ; broadTubeLambda2SplitFormulaText =
+        broadTubeLambda2SplitFormula
+    ; broadTubeLambda2SplitFormulaTextIsCanonical =
+        refl
+    ; deepInteriorGronwallFormulaText =
+        deepInteriorGronwallRouteFormula
+    ; deepInteriorGronwallFormulaTextIsCanonical =
+        refl
+    ; exteriorPressureCZL3FormulaText =
+        exteriorPressureCZL3RouteFormula
+    ; exteriorPressureCZL3FormulaTextIsCanonical =
+        refl
+    ; conditionalL2GlobalBoundFormulaText =
+        conditionalL2GlobalBoundFormula
+    ; conditionalL2GlobalBoundFormulaTextIsCanonical =
+        refl
+    ; assumptionDischargeBlocker =
+        assumptionsNotYetDischarged
+    ; assumptionDischargeBlockerIsCanonical =
         refl
     ; coverageSocketConstructed =
         true

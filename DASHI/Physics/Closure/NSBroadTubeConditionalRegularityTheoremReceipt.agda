@@ -14,19 +14,21 @@ import DASHI.Physics.Closure.NSBroadTubeCoareaBridgeReceipt as Coarea
 import DASHI.Physics.Closure.NSBroadTubeSerrinLiftReceipt as Serrin
 import DASHI.Physics.Closure.NSBroadTubeBKMBridgeReceipt as BKM
 import DASHI.Physics.Closure.NSBroadTubeSerrinBKMCompositeReceipt as Composite
+import DASHI.Physics.Closure.NSConditionalQGronwallTheoremGReceipt as TheoremG
+import DASHI.Physics.Closure.NSLayerL2VorticityFractionReceipt as Q2
+import DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt as GD1
 
 ------------------------------------------------------------------------
--- Composite conditional regularity socket receipt.
+-- Composite conditional regularity socket receipt (strengthened final-assembly
+-- form).
 --
--- This file records the route:
---   nondegenerate gradient + vorticity coverage + Serrin exponent discharge
---   + broad-tube coarea/Serrin/BKM composite -> conditional regularity socket.
+-- This file now records an explicit final BKM/Serrin contradiction assembly
+-- route, including the BKM criterion requirement of
+-- "int ||omega||_infty dt", the reason L8L4 velocity is insufficient, and
+-- the required TheoremG/Q2 + GD1 biaxial-carrier contradiction chain.
 --
--- The record is import-light and list-led so later worker receipts can be
--- merged with low risk.  It is conditional only: unconditionalClayNS is false,
--- clayPromotion is false, and the conditional regularity socket is constructed
--- while no-promotion remains in force.  The promotion gate is pinned to the
--- imported proof-term receipts themselves, not just to route labels.
+-- The route stays conditional only.  It does not promote Clay, and does not
+-- claim unconditional regularity.  promotionGateSatisfied is explicitly false.
 
 data NSBroadTubeConditionalRegularityTheoremStatus : Set where
   conditionalRegularitySocketConstructedConditionally :
@@ -54,6 +56,18 @@ data NSBroadTubeConditionalRegularityTheoremDependency : Set where
   broadTubeCompositeReceiptDependency :
     NSBroadTubeConditionalRegularityTheoremDependency
 
+  theoremGReceiptDependency :
+    NSBroadTubeConditionalRegularityTheoremDependency
+
+  q2ReceiptDependency :
+    NSBroadTubeConditionalRegularityTheoremDependency
+
+  gd1ReceiptDependency :
+    NSBroadTubeConditionalRegularityTheoremDependency
+
+  standardBridgeDependency :
+    NSBroadTubeConditionalRegularityTheoremDependency
+
 canonicalNSBroadTubeConditionalRegularityTheoremDependencies :
   List NSBroadTubeConditionalRegularityTheoremDependency
 canonicalNSBroadTubeConditionalRegularityTheoremDependencies =
@@ -64,6 +78,10 @@ canonicalNSBroadTubeConditionalRegularityTheoremDependencies =
   ∷ broadTubeSerrinReceiptDependency
   ∷ broadTubeBKMReceiptDependency
   ∷ broadTubeCompositeReceiptDependency
+  ∷ theoremGReceiptDependency
+  ∷ q2ReceiptDependency
+  ∷ gd1ReceiptDependency
+  ∷ standardBridgeDependency
   ∷ []
 
 canonicalNSBroadTubeConditionalRegularityTheoremDependencyNames :
@@ -76,6 +94,92 @@ canonicalNSBroadTubeConditionalRegularityTheoremDependencyNames =
   ∷ "broad-tube Serrin lift receipt"
   ∷ "broad-tube BKM bridge receipt"
   ∷ "broad-tube Serrin/BKM composite receipt"
+  ∷ "TheoremG conditional receipt"
+  ∷ "Q2 (SerrinFromQ2Control) layer-fraction receipt"
+  ∷ "GD1 biaxial-carrier minimum-principle receipt"
+  ∷ "standard bridge: TheoremG+Q2+GD1 assembly"
+  ∷ []
+
+data NSBroadTubeConditionalRegularityTheoremRouteRow : Set where
+  finalBKMSSerrinAssemblyShapeRecorded :
+    NSBroadTubeConditionalRegularityTheoremRouteRow
+
+  bkmCriterionRequiresVorticityIntegral :
+    NSBroadTubeConditionalRegularityTheoremRouteRow
+
+  l84l4VelocityInsufficientForBkm :
+    NSBroadTubeConditionalRegularityTheoremRouteRow
+
+  theoremGQ2GD1BiaxialCarrierChainRecorded :
+    NSBroadTubeConditionalRegularityTheoremRouteRow
+
+  standardBridgeRecordedConditionally :
+    NSBroadTubeConditionalRegularityTheoremRouteRow
+
+  hardLemmasAllConditionallyRecordedRow :
+    NSBroadTubeConditionalRegularityTheoremRouteRow
+
+canonicalNSBroadTubeConditionalRegularityTheoremRouteLedger :
+  List NSBroadTubeConditionalRegularityTheoremRouteRow
+canonicalNSBroadTubeConditionalRegularityTheoremRouteLedger =
+  finalBKMSSerrinAssemblyShapeRecorded
+  ∷ bkmCriterionRequiresVorticityIntegral
+  ∷ l84l4VelocityInsufficientForBkm
+  ∷ theoremGQ2GD1BiaxialCarrierChainRecorded
+  ∷ standardBridgeRecordedConditionally
+  ∷ hardLemmasAllConditionallyRecordedRow
+  ∷ []
+
+finalBKMSSerrinAssemblyText : String
+finalBKMSSerrinAssemblyText =
+  "final BKM/Serrin contradiction assembly: Serrin-admissible (8,4) route + vorticity-time integral continuation"
+
+bkmCriterionRequirementText : String
+bkmCriterionRequirementText =
+  "BKM criterion requirement remains explicit: int ||omega||_infty dt must be bounded for continuation"
+
+l84L4InsufficiencyText : String
+l84L4InsufficiencyText =
+  "velocity L8L4 estimate alone is insufficient; it does not yield the BKM continuation gate without stronger vorticity control"
+
+theoremGQ2GD1ChainText : String
+theoremGQ2GD1ChainText =
+  "actual required contradiction shape: TheoremG + Q2 + GD1 gives a conditional contradiction channel on the biaxial carrier"
+
+standardBridgeConditionalText : String
+standardBridgeConditionalText =
+  "standard bridge is recorded conditionally and is not promoted to unconditional Clay closure"
+
+theoremGReceiptModule : String
+theoremGReceiptModule =
+  "DASHI.Physics.Closure.NSConditionalQGronwallTheoremGReceipt"
+
+q2ReceiptModule : String
+q2ReceiptModule =
+  "DASHI.Physics.Closure.NSLayerL2VorticityFractionReceipt"
+
+gd1ReceiptModule : String
+gd1ReceiptModule =
+  "DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt"
+
+hardLemmaTexts : List String
+hardLemmaTexts =
+  "hard lemma: TheoremG required (and recorded conditionally)"
+  ∷ "hard lemma: Q2 (SerrinFromQ2Control) required (and recorded conditionally)"
+  ∷ "hard lemma: GD1 + biaxial-carrier condition required (and recorded conditionally)"
+  ∷ []
+
+canonicalNSBroadTubeConditionalRegularityTheoremRouteLedgerText :
+  List String
+canonicalNSBroadTubeConditionalRegularityTheoremRouteLedgerText =
+  finalBKMSSerrinAssemblyText
+  ∷ bkmCriterionRequirementText
+  ∷ l84L4InsufficiencyText
+  ∷ theoremGQ2GD1ChainText
+  ∷ standardBridgeConditionalText
+  ∷ "hard lemma: TheoremG required (and recorded conditionally)"
+  ∷ "hard lemma: Q2 (SerrinFromQ2Control) required (and recorded conditionally)"
+  ∷ "hard lemma: GD1 + biaxial-carrier condition required (and recorded conditionally)"
   ∷ []
 
 data NSBroadTubeConditionalRegularityTheoremStep : Set where
@@ -100,6 +204,24 @@ data NSBroadTubeConditionalRegularityTheoremStep : Set where
   importBroadTubeSerrinBKMComposite :
     NSBroadTubeConditionalRegularityTheoremStep
 
+  importTheoremGReceipt :
+    NSBroadTubeConditionalRegularityTheoremStep
+
+  importQ2Receipt :
+    NSBroadTubeConditionalRegularityTheoremStep
+
+  importGD1Receipt :
+    NSBroadTubeConditionalRegularityTheoremStep
+
+  recordStandardBridgeConditionally :
+    NSBroadTubeConditionalRegularityTheoremStep
+
+  recordHardLemmasConditionally :
+    NSBroadTubeConditionalRegularityTheoremStep
+
+  recordFinalBKMSSerrinAssembly :
+    NSBroadTubeConditionalRegularityTheoremStep
+
   constructConditionalRegularitySocket :
     NSBroadTubeConditionalRegularityTheoremStep
 
@@ -113,7 +235,41 @@ canonicalNSBroadTubeConditionalRegularityTheoremSteps =
   ∷ importBroadTubeSerrinLift
   ∷ importBroadTubeBKMBridge
   ∷ importBroadTubeSerrinBKMComposite
+  ∷ importTheoremGReceipt
+  ∷ importQ2Receipt
+  ∷ importGD1Receipt
+  ∷ recordStandardBridgeConditionally
+  ∷ recordHardLemmasConditionally
+  ∷ recordFinalBKMSSerrinAssembly
   ∷ constructConditionalRegularitySocket
+  ∷ []
+
+data NSBroadTubeConditionalRegularityTheoremHardLemma : Set where
+  theoremGRequiredConditionally :
+    NSBroadTubeConditionalRegularityTheoremHardLemma
+
+  q2InputRequiredConditionally :
+    NSBroadTubeConditionalRegularityTheoremHardLemma
+
+  gd1BiaxialCarrierRequiredConditionally :
+    NSBroadTubeConditionalRegularityTheoremHardLemma
+
+canonicalNSBroadTubeConditionalRegularityTheoremHardLemmas :
+  List NSBroadTubeConditionalRegularityTheoremHardLemma
+canonicalNSBroadTubeConditionalRegularityTheoremHardLemmas =
+  theoremGRequiredConditionally
+  ∷ q2InputRequiredConditionally
+  ∷ gd1BiaxialCarrierRequiredConditionally
+  ∷ []
+
+data NSBroadTubeConditionalRegularityTheoremStandardBridge : Set where
+  standardBridgeConditionallyRecorded :
+    NSBroadTubeConditionalRegularityTheoremStandardBridge
+
+canonicalNSBroadTubeConditionalRegularityTheoremStandardBridge :
+  List NSBroadTubeConditionalRegularityTheoremStandardBridge
+canonicalNSBroadTubeConditionalRegularityTheoremStandardBridge =
+  standardBridgeConditionallyRecorded
   ∷ []
 
 data NSBroadTubeConditionalRegularityTheoremOpenBoundary : Set where
@@ -121,6 +277,12 @@ data NSBroadTubeConditionalRegularityTheoremOpenBoundary : Set where
     NSBroadTubeConditionalRegularityTheoremOpenBoundary
 
   conditionalRouteOnly :
+    NSBroadTubeConditionalRegularityTheoremOpenBoundary
+
+  hardLemmasRecordedConditionally :
+    NSBroadTubeConditionalRegularityTheoremOpenBoundary
+
+  standardBridgeRecordedConditionally :
     NSBroadTubeConditionalRegularityTheoremOpenBoundary
 
   unconditionalClayNSNotClaimed :
@@ -137,9 +299,42 @@ canonicalNSBroadTubeConditionalRegularityTheoremOpenBoundaries :
 canonicalNSBroadTubeConditionalRegularityTheoremOpenBoundaries =
   workerReceiptsRemainImportOnly
   ∷ conditionalRouteOnly
+  ∷ hardLemmasRecordedConditionally
+  ∷ standardBridgeRecordedConditionally
   ∷ unconditionalClayNSNotClaimed
   ∷ clayPromotionNotClaimed
   ∷ noPromotionBoundaryRetained
+  ∷ []
+
+data NSBroadTubeConditionalRegularityTheoremFinalAssemblyBlocker : Set where
+  bkmCriterionIntegralRequirementRecordedAsGate :
+    NSBroadTubeConditionalRegularityTheoremFinalAssemblyBlocker
+
+  l84L4GateInsufficient :
+    NSBroadTubeConditionalRegularityTheoremFinalAssemblyBlocker
+
+  theoremGQ2GD1ChainConditionallyOpen :
+    NSBroadTubeConditionalRegularityTheoremFinalAssemblyBlocker
+
+  standardBridgeNotPromoted :
+    NSBroadTubeConditionalRegularityTheoremFinalAssemblyBlocker
+
+canonicalNSBroadTubeConditionalRegularityTheoremFinalAssemblyBlockers :
+  List NSBroadTubeConditionalRegularityTheoremFinalAssemblyBlocker
+canonicalNSBroadTubeConditionalRegularityTheoremFinalAssemblyBlockers =
+  bkmCriterionIntegralRequirementRecordedAsGate
+  ∷ l84L4GateInsufficient
+  ∷ theoremGQ2GD1ChainConditionallyOpen
+  ∷ standardBridgeNotPromoted
+  ∷ []
+
+canonicalNSBroadTubeConditionalRegularityTheoremFinalAssemblyBlockerText :
+  List String
+canonicalNSBroadTubeConditionalRegularityTheoremFinalAssemblyBlockerText =
+  "int ||omega||_infty dt is required for BKM continuation"
+  ∷ "L8L4 velocity alone cannot close BKM"
+  ∷ "TheoremG/Q2 + GD1 contradiction structure is conditional"
+  ∷ "standard bridge remains conditional and is not Clay-promoted"
   ∷ []
 
 data NSBroadTubeConditionalRegularityTheoremNoPromotion : Set where
@@ -151,11 +346,11 @@ noNSBroadTubeConditionalRegularityTheoremPromotion ()
 
 routeStatement : String
 routeStatement =
-  "nondegenerate gradient + vorticity coverage + Serrin exponent discharge + broad-tube coarea/Serrin/BKM composite -> conditional regularity socket"
+  "nondegenerate gradient + vorticity coverage + Serrin exponent discharge + broad-tube coarea/Serrin/BKM composite + final BKM/Serrin contradiction assembly -> conditional regularity socket"
 
 routeBoundary : String
 routeBoundary =
-  "Conditional only: unconditionalClayNS is false, clayPromotion is false, the conditional regularity socket is constructed, and no-promotion remains in force."
+  "Conditional only: promotionGateSatisfied is false, unconditionalClayNS is false, and the conditional regularity socket is assembled from recorded dependencies while hard lemmas and standard bridge remain conditional."
 
 record NSBroadTubeConditionalRegularityTheoremORCSLPGF : Set where
   constructor mkNSBroadTubeConditionalRegularityTheoremORCSLPGF
@@ -164,13 +359,13 @@ record NSBroadTubeConditionalRegularityTheoremORCSLPGF : Set where
       String
     OIsCanonical :
       O ≡
-      "Record a conditional broad-tube regularity route with explicit socket aggregation."
+      "Record the final broad-tube conditional regularity composite with an explicit BKM/Serrin final-assembly ledger."
 
     R :
       String
     RIsCanonical :
       R ≡
-      "Record the nondegenerate gradient, vorticity coverage, Serrin exponent discharge, and broad-tube composite route as a receipt."
+      "Compose nondegenerate gradient, vorticity coverage, Serrin exponent discharge, and TheoremG/Q2/GD1 conditional inputs into the final broad-tube regularity route."
 
     C :
       String
@@ -182,31 +377,31 @@ record NSBroadTubeConditionalRegularityTheoremORCSLPGF : Set where
       String
     SIsCanonical :
       S ≡
-      "nondegenerate gradient, vorticity coverage, Serrin exponent discharge, broad-tube coarea, Serrin lift, BKM bridge, broad-tube composite"
+      "broad-tube gradient/vorticity/serrin/Serrin-BKM nodes + final BKM/Serrin contradiction ledger + conditional hard lemmas + conditional standard bridge"
 
     L :
       String
     LIsCanonical :
       L ≡
-      "nondegenerate gradient -> vorticity coverage -> Serrin exponent discharge -> broad-tube coarea/Serrin/BKM composite -> conditional regularity socket"
+      "route: nondegenerate gradient -> vorticity coverage -> Serrin exponent discharge -> coarea -> Serrin lift -> BKM bridge -> composite -> final BKM/Serrin assembly -> conditional regularity socket"
 
     P :
       String
     PIsCanonical :
       P ≡
-      "nondegenerate gradient receipt; vorticity coverage receipt; Serrin exponent discharge receipt; broad-tube coarea bridge; broad-tube Serrin lift; broad-tube BKM bridge; broad-tube Serrin/BKM composite"
+      "construct BKM/Serrin final-assembly shape, record TheoremG/Q2/GD1 conditional inputs, and register L8L4 insufficiency plus int ||omega||_infty dt requirement."
 
     G :
       String
     GIsCanonical :
       G ≡
-      "unconditionalClayNS=false; clayPromotion=false; conditionalRegularitySocketConstructed=true"
+      "promotionGateSatisfied=false; unconditionalClayNS=false; hard lemmas and standard bridge are conditional"
 
     F :
       String
     FIsCanonical :
       F ≡
-      "no-promotion boundary retained; the route is conditional only"
+      "final assembly remains conditional-only; no promoted Clay route is introduced here."
 
 open NSBroadTubeConditionalRegularityTheoremORCSLPGF public
 
@@ -214,21 +409,21 @@ canonicalNSBroadTubeConditionalRegularityTheoremORCSLPGF :
   NSBroadTubeConditionalRegularityTheoremORCSLPGF
 canonicalNSBroadTubeConditionalRegularityTheoremORCSLPGF =
   mkNSBroadTubeConditionalRegularityTheoremORCSLPGF
-    "Record a conditional broad-tube regularity route with explicit socket aggregation."
+    "Record the final broad-tube conditional regularity composite with an explicit BKM/Serrin final-assembly ledger."
     refl
-    "Record the nondegenerate gradient, vorticity coverage, Serrin exponent discharge, and broad-tube composite route as a receipt."
+    "Compose nondegenerate gradient, vorticity coverage, Serrin exponent discharge, and TheoremG/Q2/GD1 conditional inputs into the final broad-tube regularity route."
     refl
     "Create only NSBroadTubeConditionalRegularityTheoremReceipt.agda."
     refl
-    "nondegenerate gradient, vorticity coverage, Serrin exponent discharge, broad-tube coarea, Serrin lift, BKM bridge, broad-tube composite"
+    "broad-tube gradient/vorticity/serrin/Serrin-BKM nodes + final BKM/Serrin contradiction ledger + conditional hard lemmas + conditional standard bridge"
     refl
-    "nondegenerate gradient -> vorticity coverage -> Serrin exponent discharge -> broad-tube coarea/Serrin/BKM composite -> conditional regularity socket"
+    "route: nondegenerate gradient -> vorticity coverage -> Serrin exponent discharge -> coarea -> Serrin lift -> BKM bridge -> composite -> final BKM/Serrin assembly -> conditional regularity socket"
     refl
-    "nondegenerate gradient receipt; vorticity coverage receipt; Serrin exponent discharge receipt; broad-tube coarea bridge; broad-tube Serrin lift; broad-tube BKM bridge; broad-tube Serrin/BKM composite"
+    "construct BKM/Serrin final-assembly shape, record TheoremG/Q2/GD1 conditional inputs, and register L8L4 insufficiency plus int ||omega||_infty dt requirement."
     refl
-    "unconditionalClayNS=false; clayPromotion=false; conditionalRegularitySocketConstructed=true"
+    "promotionGateSatisfied=false; unconditionalClayNS=false; hard lemmas and standard bridge are conditional"
     refl
-    "no-promotion boundary retained; the route is conditional only"
+    "final assembly remains conditional-only; no promoted Clay route is introduced here."
     refl
 
 record NSBroadTubeConditionalRegularityTheoremReceipt : Setω where
@@ -253,11 +448,51 @@ record NSBroadTubeConditionalRegularityTheoremReceipt : Setω where
       dependencyNames ≡
       canonicalNSBroadTubeConditionalRegularityTheoremDependencyNames
 
+    routeLedger :
+      List NSBroadTubeConditionalRegularityTheoremRouteRow
+
+    routeLedgerAreCanonical :
+      routeLedger ≡
+      canonicalNSBroadTubeConditionalRegularityTheoremRouteLedger
+
+    routeLedgerText :
+      List String
+
+    routeLedgerTextAreCanonical :
+      routeLedgerText ≡
+      canonicalNSBroadTubeConditionalRegularityTheoremRouteLedgerText
+
     steps :
       List NSBroadTubeConditionalRegularityTheoremStep
 
     stepsAreCanonical :
       steps ≡ canonicalNSBroadTubeConditionalRegularityTheoremSteps
+
+    hardLemmas :
+      List NSBroadTubeConditionalRegularityTheoremHardLemma
+
+    hardLemmasAreCanonical :
+      hardLemmas ≡
+      canonicalNSBroadTubeConditionalRegularityTheoremHardLemmas
+
+    hardLemmasConditionallyRecordedFlag :
+      Bool
+
+    hardLemmasConditionallyRecordedFlagIsTrue :
+      hardLemmasConditionallyRecordedFlag ≡ true
+
+    standardBridgeState :
+      List NSBroadTubeConditionalRegularityTheoremStandardBridge
+
+    standardBridgeStateIsCanonical :
+      standardBridgeState ≡
+      canonicalNSBroadTubeConditionalRegularityTheoremStandardBridge
+
+    standardBridgeConditionallyRecordedFlag :
+      Bool
+
+    standardBridgeConditionallyRecordedFlagIsTrue :
+      standardBridgeConditionallyRecordedFlag ≡ true
 
     openBoundaries :
       List NSBroadTubeConditionalRegularityTheoremOpenBoundary
@@ -286,6 +521,54 @@ record NSBroadTubeConditionalRegularityTheoremReceipt : Setω where
 
     broadTubeSerrinBKMCompositeReceipt :
       Composite.NSBroadTubeSerrinBKMCompositeReceipt
+
+    theoremGReceipt :
+      String
+
+    theoremGReceiptIsCanonical :
+      theoremGReceipt ≡ theoremGReceiptModule
+
+    q2Receipt :
+      String
+
+    q2ReceiptIsCanonical :
+      q2Receipt ≡ q2ReceiptModule
+
+    gd1Receipt :
+      String
+
+    gd1ReceiptIsCanonical :
+      gd1Receipt ≡ gd1ReceiptModule
+
+    finalBKMSSerrinAssemblyRecorded :
+      Bool
+
+    finalBKMSSerrinAssemblyRecordedIsTrue :
+      finalBKMSSerrinAssemblyRecorded ≡ true
+
+    bkmCriterionIntegralRequirementRecorded :
+      Bool
+
+    bkmCriterionIntegralRequirementRecordedIsTrue :
+      bkmCriterionIntegralRequirementRecorded ≡ true
+
+    l84L4InsufficientRecorded :
+      Bool
+
+    l84L4InsufficientRecordedIsTrue :
+      l84L4InsufficientRecorded ≡ true
+
+    theoremGQ2GD1ChainRecorded :
+      Bool
+
+    theoremGQ2GD1ChainRecordedIsTrue :
+      theoremGQ2GD1ChainRecorded ≡ true
+
+    standardBridgeRecorded :
+      Bool
+
+    standardBridgeRecordedIsTrue :
+      standardBridgeRecorded ≡ true
 
     promotionGateSatisfied :
       Bool
@@ -335,15 +618,19 @@ record NSBroadTubeConditionalRegularityTheoremReceipt : Setω where
     clayPromotionIsFalse :
       clayPromotion ≡ false
 
-    promotionBlockers :
+    finalAssemblyBlockers :
+      List NSBroadTubeConditionalRegularityTheoremFinalAssemblyBlocker
+
+    finalAssemblyBlockersAreCanonical :
+      finalAssemblyBlockers ≡
+      canonicalNSBroadTubeConditionalRegularityTheoremFinalAssemblyBlockers
+
+    finalAssemblyBlockerText :
       List String
 
-    promotionBlockersAreCanonical :
-      promotionBlockers ≡
-      "unconditional Clay promotion remains false"
-      ∷ "unconditional regularity promotion remains false"
-      ∷ "promotion stays conditional on the imported proof-term receipts"
-      ∷ []
+    finalAssemblyBlockerTextAreCanonical :
+      finalAssemblyBlockerText ≡
+      canonicalNSBroadTubeConditionalRegularityTheoremFinalAssemblyBlockerText
 
     statement :
       String
@@ -388,9 +675,33 @@ canonicalNSBroadTubeConditionalRegularityTheoremReceipt =
         canonicalNSBroadTubeConditionalRegularityTheoremDependencyNames
     ; dependencyNamesAreCanonical =
         refl
+    ; routeLedger =
+        canonicalNSBroadTubeConditionalRegularityTheoremRouteLedger
+    ; routeLedgerAreCanonical =
+        refl
+    ; routeLedgerText =
+        canonicalNSBroadTubeConditionalRegularityTheoremRouteLedgerText
+    ; routeLedgerTextAreCanonical =
+        refl
     ; steps =
         canonicalNSBroadTubeConditionalRegularityTheoremSteps
     ; stepsAreCanonical =
+        refl
+    ; hardLemmas =
+        canonicalNSBroadTubeConditionalRegularityTheoremHardLemmas
+    ; hardLemmasAreCanonical =
+        refl
+    ; hardLemmasConditionallyRecordedFlag =
+        true
+    ; hardLemmasConditionallyRecordedFlagIsTrue =
+        refl
+    ; standardBridgeState =
+        canonicalNSBroadTubeConditionalRegularityTheoremStandardBridge
+    ; standardBridgeStateIsCanonical =
+        refl
+    ; standardBridgeConditionallyRecordedFlag =
+        true
+    ; standardBridgeConditionallyRecordedFlagIsTrue =
         refl
     ; openBoundaries =
         canonicalNSBroadTubeConditionalRegularityTheoremOpenBoundaries
@@ -410,6 +721,38 @@ canonicalNSBroadTubeConditionalRegularityTheoremReceipt =
         BKM.canonicalNSBroadTubeBKMBridgeReceipt
     ; broadTubeSerrinBKMCompositeReceipt =
         Composite.canonicalNSBroadTubeSerrinBKMCompositeReceipt
+    ; theoremGReceipt =
+        theoremGReceiptModule
+    ; theoremGReceiptIsCanonical =
+        refl
+    ; q2Receipt =
+        q2ReceiptModule
+    ; q2ReceiptIsCanonical =
+        refl
+    ; gd1Receipt =
+        gd1ReceiptModule
+    ; gd1ReceiptIsCanonical =
+        refl
+    ; finalBKMSSerrinAssemblyRecorded =
+        true
+    ; finalBKMSSerrinAssemblyRecordedIsTrue =
+        refl
+    ; bkmCriterionIntegralRequirementRecorded =
+        true
+    ; bkmCriterionIntegralRequirementRecordedIsTrue =
+        refl
+    ; l84L4InsufficientRecorded =
+        true
+    ; l84L4InsufficientRecordedIsTrue =
+        refl
+    ; theoremGQ2GD1ChainRecorded =
+        true
+    ; theoremGQ2GD1ChainRecordedIsTrue =
+        refl
+    ; standardBridgeRecorded =
+        true
+    ; standardBridgeRecordedIsTrue =
+        refl
     ; promotionGateSatisfied =
         false
     ; promotionGateSatisfiedIsFalse =
@@ -442,12 +785,13 @@ canonicalNSBroadTubeConditionalRegularityTheoremReceipt =
         false
     ; clayPromotionIsFalse =
         refl
-    ; promotionBlockers =
-        "unconditional Clay promotion remains false"
-        ∷ "unconditional regularity promotion remains false"
-        ∷ "promotion stays conditional on the imported proof-term receipts"
-        ∷ []
-    ; promotionBlockersAreCanonical =
+    ; finalAssemblyBlockers =
+        canonicalNSBroadTubeConditionalRegularityTheoremFinalAssemblyBlockers
+    ; finalAssemblyBlockersAreCanonical =
+        refl
+    ; finalAssemblyBlockerText =
+        canonicalNSBroadTubeConditionalRegularityTheoremFinalAssemblyBlockerText
+    ; finalAssemblyBlockerTextAreCanonical =
         refl
     ; statement =
         routeStatement
