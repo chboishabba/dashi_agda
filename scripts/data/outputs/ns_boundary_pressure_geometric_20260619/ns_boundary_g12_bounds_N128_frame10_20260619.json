@@ -1,0 +1,71 @@
+{
+  "C": "scripts/ns_boundary_g12_bounds_diagnostic.py",
+  "F": "Fail-closed empirical diagnostic; authority markers remain non-promoting.",
+  "G": "No theorem, Clay, or promotion claim is asserted by this diagnostic.",
+  "L": "Status is ok only when required fields parse correctly and both masks are non-empty with finite support.",
+  "O": "Emit a deterministic fail-closed diagnostic of g12 statistics over global, boundary-carrier, and beta-mask regions.",
+  "P": "FAIL_CLOSED_NS_BOUNDARY_G12_BOUNDS_DIAGNOSTIC",
+  "R": "Load a derived NS tensor archive and evaluate g12 finite statistics on frame/domain, |lambda2|<=lambda2_band, and lambda2<=beta sets.",
+  "S": "Validate arguments, required fields, masking, and finite masks; then emit explicit status and structured statistics.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "beta": 0.0,
+  "beta_mask_cell_count": 1010478,
+  "beta_mask_stats": {
+    "cell_count": 1010478,
+    "finite_cell_count": 1010478,
+    "finite_positive_min": 0.009662386196279904,
+    "max": 46.08372410939261,
+    "mean": 10.37391619035564,
+    "min": 0.009662386196279904,
+    "nonfinite_cell_count": 0,
+    "sum": 10482614.084198186
+  },
+  "beta_source": "archive",
+  "boundary_carrier_stats": {
+    "cell_count": 370,
+    "finite_cell_count": 370,
+    "finite_positive_min": 1.421602960869846,
+    "max": 35.42458809161439,
+    "mean": 13.704192113814022,
+    "min": 1.421602960869846,
+    "nonfinite_cell_count": 0,
+    "sum": 5070.551082111188
+  },
+  "boundary_mask_cell_count": 370,
+  "contract": "ns_boundary_g12_bounds_diagnostic",
+  "errors": [],
+  "finite_positive_min": true,
+  "finite_positive_min_value": 0.009662386196279904,
+  "finite_upper_bound_observed": true,
+  "frame": null,
+  "global_g12_stats": {
+    "cell_count": 2097152,
+    "finite_cell_count": 2097152,
+    "finite_positive_min": 0.009662386196279904,
+    "max": 73.80437777669184,
+    "mean": 15.934887457382647,
+    "min": 0.009662386196279904,
+    "nonfinite_cell_count": 0,
+    "sum": 33417881.101024933
+  },
+  "input": "/tmp/dashi_ns_pressure_round/ns3d_N128_frame10_augmented.npz",
+  "lambda2_band": 0.001,
+  "producer": "scripts/ns_boundary_derived_tensor_archive.py",
+  "route_decision": "FAIL_CLOSED_NS_BOUNDARY_G12_BOUNDS_DIAGNOSTIC",
+  "script": "scripts/ns_boundary_g12_bounds_diagnostic.py",
+  "shape": [
+    128,
+    128,
+    128
+  ],
+  "status": "ok",
+  "warnings": []
+}

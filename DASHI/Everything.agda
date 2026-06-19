@@ -303,6 +303,9 @@ import DASHI.Physics.Closure.NSBiaxialCancellationIdentityReceipt
 import DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt
 import DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt
 import DASHI.Physics.Closure.NSLayerKornLiteratureClosureReceipt
+import DASHI.Physics.Closure.NSPressurePoissonBypassReceipt
+import DASHI.Physics.Closure.NSQ3ExtensionalThresholdReceipt
+import DASHI.Physics.Closure.NSGeometricConcentrationCarrierReceipt
 import DASHI.Physics.Closure.NSPressureHessianGateShapeCore
 import DASHI.Physics.Closure.NSStrainBMOBoundReceipt
 import DASHI.Physics.Closure.NSIntegralConditionDiagnosticReceipt

@@ -1,6 +1,34 @@
 # FOR TODO GO TO '# TODO'
 
 Current NS Clay action note for `2026-06-18`:
+- Pressure-Poisson bypass / Q3 threshold / geometric concentration tranche for
+  `2026-06-19` is recorded. Artifacts:
+  `DASHI/Physics/Closure/NSPressurePoissonBypassReceipt.agda`,
+  `DASHI/Physics/Closure/NSQ3ExtensionalThresholdReceipt.agda`,
+  `DASHI/Physics/Closure/NSGeometricConcentrationCarrierReceipt.agda`,
+  `scripts/ns_boundary_pressure_poisson_bypass_diagnostic.py`,
+  `scripts/ns_boundary_geometric_concentration_diagnostic.py`, and
+  `scripts/ns_boundary_g12_bounds_diagnostic.py`, and
+  `scripts/check_ns_boundary_pressure_geometric_regression.py`.
+  The tranche records the pressure-Poisson bypass shape
+  `|omega|^2 <= 4 * (2*g12^2 + |Delta p|)`, the surviving Q3 extensional
+  stretching wall with threshold `g12 > (1 + Cnu)/(1 - C_CZ)`, and the
+  remaining geometric concentration theorem: every possible blow-up carrier
+  must approach `lambda2 = 0`.  These are fail-closed route and telemetry
+  surfaces; layer pressure/CZ/coarea, exact geometric concentration, BKM
+  closure, `KornLevelSet`, `collapseImpossible`, and full Clay NS remain
+  unpromoted.
+  Frame-10 component-2 pressure telemetry now records 162 analysis cells,
+  `rhs_proxy_sum = 579843.3057073732`, `omega_norm_sq_sum =
+  176354.0964038254`, and 11 pointwise `omega_norm_sq > rhs_proxy`
+  violations, so the bypass is not pointwise validated by this sample.  The
+  top-0.1% vorticity concentration diagnostic records only
+  `top_on_carrier_fraction = 0.0014299332697807435`; the worst vorticity cell
+  has `lambda2 = -3.0129972221683`, is off the `|lambda2| <= 1e-3`
+  carrier, and is 13.379 cells from the nearest carrier.  This is adverse
+  evidence for the naive geometric concentration conjecture at frame 10.  The
+  g12 bounds diagnostic records finite positive global `g12_min =
+  0.009662386196279904` and `g12_max = 73.80437777669184` on the same frame.
 - Biaxial cancellation / GD1 no-collapse / LayerKorn literature tranche for
   `2026-06-19` is recorded. Artifacts:
   `DASHI/Physics/Closure/NSBiaxialCancellationIdentityReceipt.agda`,

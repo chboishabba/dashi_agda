@@ -1,0 +1,27 @@
+{
+  "C": "scripts/check_ns_boundary_pressure_geometric_regression.py",
+  "F": "This regression script only validates generated diagnostic output.",
+  "G": "No theorem, Clay, or promotion claim is inferred by this checker.",
+  "L": "Non-empty metadata and consistency checks are hard errors; optional diagnostics are warnings only.",
+  "O": "Regression checker for pressure-poisson and geometric concentration diagnostic JSON.",
+  "P": "FAIL_CLOSED_NS_BOUNDARY_PRESSURE_GEOMETRIC_REGRESSION",
+  "R": "validate contracts, authority constraints, and numeric guardrails for regression artifacts",
+  "S": "Fail-closed on required field/type mismatches and forbidden promotion flags.",
+  "authority_false": true,
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_boundary_geometric_concentration_N128_frame10_top001_20260619.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_boundary_pressure_poisson_bypass_N128_frame10_component2_20260619.json"
+  ],
+  "checked_contracts": [
+    "ns_boundary_geometric_concentration_diagnostic",
+    "ns_boundary_pressure_poisson_bypass_diagnostic"
+  ],
+  "contract": "check_ns_boundary_pressure_geometric_regression",
+  "errors": [],
+  "inputs": {
+    "geometric_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_boundary_geometric_concentration_N128_frame10_top001_20260619.json",
+    "pressure_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_boundary_pressure_poisson_bypass_N128_frame10_component2_20260619.json"
+  },
+  "status": "ok",
+  "warnings": []
+}
