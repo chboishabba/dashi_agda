@@ -1,0 +1,37 @@
+{
+  "C": "scripts/check_ns_broad_tube_conditional_regularization_summary.py",
+  "F": "Only an explicit conditional-summary ledger can pass; missing gates fail validation.",
+  "G": "No route, theorem, or Clay promotion is inferred by this checker.",
+  "L": "Load the summary JSON, validate the gate set and promotion flags, and emit a canonical checker receipt.",
+  "O": "Owner 5 validates the broad-tube conditional regularization summary fields.",
+  "P": "FAIL_CLOSED_NS_BROAD_TUBE_CONDITIONAL_REGULARIZATION_SUMMARY",
+  "R": "Fail-closed validation that gate status, promotion suppression, and obligation reporting are explicit.",
+  "S": "A summary is accepted only if it records four true gates, Clay promotion false, and a stable residual-obligation surface.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_conditional_regularization_summary_20260620.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_conditional_regularization_summary_regression_20260620.json"
+  ],
+  "checked_contract": "ns_broad_tube_conditional_regularization_summary",
+  "checked_summary_path": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_conditional_regularization_summary_20260620.json",
+  "contract": "check_ns_broad_tube_conditional_regularization_summary",
+  "errors": [],
+  "inputs": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_conditional_regularization_summary_regression_20260620.json",
+    "summary_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_conditional_regularization_summary_20260620.json"
+  },
+  "status": "ok",
+  "summary_payload_preview": {
+    "contract": "ns_broad_tube_conditional_regularization_summary",
+    "gate_flags": {
+      "conditional_regularization": true,
+      "nondegenerate_gradient": true,
+      "serrin_exponent_discharge": true,
+      "vorticity_coverage": true
+    },
+    "promotion_flags": {
+      "clay_promotion": false
+    },
+    "status": "ok"
+  },
+  "warnings": []
+}

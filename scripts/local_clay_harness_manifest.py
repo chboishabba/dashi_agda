@@ -443,6 +443,18 @@ def build_specs() -> list[HarnessSpec]:
     ns_broad_tube_serrin_lift_gap_receipt = (
         REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinLiftGapReceipt.agda"
     )
+    ns_broad_tube_nondegenerate_gradient_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeNondegenerateGradientReceipt.agda"
+    )
+    ns_broad_tube_vorticity_coverage_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeVorticityCoverageReceipt.agda"
+    )
+    ns_broad_tube_serrin_exponent_discharge_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinExponentDischargeReceipt.agda"
+    )
+    ns_broad_tube_conditional_regularity_theorem_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeConditionalRegularityTheoremReceipt.agda"
+    )
     ns_broad_tube_coarea_bridge_receipt = (
         REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeCoareaBridgeReceipt.agda"
     )
@@ -463,6 +475,12 @@ def build_specs() -> list[HarnessSpec]:
     )
     check_ns_broad_tube_serrin_bkm_bridge_summary = script(
         "check_ns_broad_tube_serrin_bkm_bridge_summary.py"
+    )
+    ns_broad_tube_conditional_regularization_summary = script(
+        "ns_broad_tube_conditional_regularization_summary.py"
+    )
+    check_ns_broad_tube_conditional_regularization_summary = script(
+        "check_ns_broad_tube_conditional_regularization_summary.py"
     )
     ns_interior_pressure_regression_out = (
         CHILD_OUT_DIR / "ns_interior_pressure_regression_smoke.json"
@@ -3584,6 +3602,62 @@ def build_specs() -> list[HarnessSpec]:
             ),
         ),
         HarnessSpec(
+            name="ns_broad_tube_nondegenerate_gradient_receipt",
+            path=ns_broad_tube_nondegenerate_gradient_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube nondegenerate gradient receipt present: {rel(ns_broad_tube_nondegenerate_gradient_receipt)}"
+                if ns_broad_tube_nondegenerate_gradient_receipt.exists()
+                else f"Expected broad-tube nondegenerate gradient receipt missing: {rel(ns_broad_tube_nondegenerate_gradient_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional nondegenerate-gradient receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_vorticity_coverage_receipt",
+            path=ns_broad_tube_vorticity_coverage_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube vorticity coverage receipt present: {rel(ns_broad_tube_vorticity_coverage_receipt)}"
+                if ns_broad_tube_vorticity_coverage_receipt.exists()
+                else f"Expected broad-tube vorticity coverage receipt missing: {rel(ns_broad_tube_vorticity_coverage_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional vorticity-coverage receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_serrin_exponent_discharge_receipt",
+            path=ns_broad_tube_serrin_exponent_discharge_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube Serrin exponent discharge receipt present: {rel(ns_broad_tube_serrin_exponent_discharge_receipt)}"
+                if ns_broad_tube_serrin_exponent_discharge_receipt.exists()
+                else f"Expected broad-tube Serrin exponent discharge receipt missing: {rel(ns_broad_tube_serrin_exponent_discharge_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional Serrin-exponent receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_conditional_regularity_theorem_receipt",
+            path=ns_broad_tube_conditional_regularity_theorem_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube conditional regularity theorem receipt present: {rel(ns_broad_tube_conditional_regularity_theorem_receipt)}"
+                if ns_broad_tube_conditional_regularity_theorem_receipt.exists()
+                else f"Expected broad-tube conditional regularity theorem receipt missing: {rel(ns_broad_tube_conditional_regularity_theorem_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional conditional-regularity theorem receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
             name="ns_broad_tube_coarea_bridge_receipt",
             path=ns_broad_tube_coarea_bridge_receipt,
             optional=True,
@@ -3664,6 +3738,34 @@ def build_specs() -> list[HarnessSpec]:
             ),
             notes=(
                 "discovery-only record for optional broad-tube Serrin-BKM check script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_conditional_regularization_summary",
+            path=ns_broad_tube_conditional_regularization_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected ns_broad_tube_conditional_regularization_summary.py present: {rel(ns_broad_tube_conditional_regularization_summary)}"
+                if ns_broad_tube_conditional_regularization_summary.exists()
+                else f"Expected ns_broad_tube_conditional_regularization_summary.py missing: {rel(ns_broad_tube_conditional_regularization_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional broad-tube conditional-regularization summary script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_broad_tube_conditional_regularization_summary",
+            path=check_ns_broad_tube_conditional_regularization_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected check_ns_broad_tube_conditional_regularization_summary.py present: {rel(check_ns_broad_tube_conditional_regularization_summary)}"
+                if check_ns_broad_tube_conditional_regularization_summary.exists()
+                else f"Expected check_ns_broad_tube_conditional_regularization_summary.py missing: {rel(check_ns_broad_tube_conditional_regularization_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional broad-tube conditional-regularization check script",
                 "non-promoting artifact presence/absence signal only",
             ),
         ),

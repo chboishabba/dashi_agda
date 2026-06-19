@@ -6,6 +6,17 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS broad-tube conditional regularization tranche for `2026-06-20`: stages
+  discovery-only local Clay manifest entries for
+  `DASHI.Physics.Closure.NSBroadTubeNondegenerateGradientReceipt`,
+  `DASHI.Physics.Closure.NSBroadTubeVorticityCoverageReceipt`,
+  `DASHI.Physics.Closure.NSBroadTubeSerrinExponentDischargeReceipt`,
+  `DASHI.Physics.Closure.NSBroadTubeConditionalRegularityTheoremReceipt`,
+  `scripts/ns_broad_tube_conditional_regularization_summary.py`, and
+  `scripts/check_ns_broad_tube_conditional_regularization_summary.py`. This
+  is fail-closed bookkeeping only; full NS Clay and Clay promotion remain
+  false.
+
 - NS broad-tube coarea / Serrin lift / BKM bridge implementation tranche for
   `2026-06-20`: adds
   `DASHI.Physics.Closure.NSBroadTubeCoareaBridgeReceipt`,
