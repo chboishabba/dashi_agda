@@ -58,6 +58,10 @@ def test_post_calc11_summary_ledger_emits_deterministic_json(tmp_path: Path) -> 
         "BoundaryHB_Correct",
     ]
     assert payload["remaining_hard_walls"] == ["KornLevelSet", "collapseImpossible"]
+    assert payload["hard_wall_count"] == 2
+    assert payload["clay_hard_core"] == "collapseImpossible"
+    assert payload["optional_next_calc"] == "Calc12:parametric_omega_e2_scaling_study"
+    assert payload["optional_next_calc_blocks_proof"] is False
     assert payload["clay_promotion"] is False
     assert payload["theorem_promotion"] is False
     assert isinstance(payload["parity_hash"], str) and len(payload["parity_hash"]) == 64

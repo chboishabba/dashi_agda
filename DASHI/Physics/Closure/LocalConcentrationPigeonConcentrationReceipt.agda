@@ -3,6 +3,7 @@ module DASHI.Physics.Closure.LocalConcentrationPigeonConcentrationReceipt where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
@@ -12,11 +13,13 @@ open import Data.List.Base using (List; _∷_; [])
 -- pigeon_concentration proof-package shape.
 --
 -- The recorded surfaces are:
---   1. weak-L3 to local L3 with tail control;
---   2. finite component count N_max;
---   3. pigeon bound K / N_max^(1/3);
---   4. package variables;
---   5. blockers.
+--   1. Calc 11 Leray tail plus ||f||_{L^{3,infty}} <= ||f||_{L^3};
+--   2. local ball concentration;
+--   3. finite component count h_fin with N_max empirically 20630;
+--   4. pigeon bound K / N_max^(1/3);
+--   5. no promotion;
+--   6. package variables;
+--   7. blockers.
 --
 -- No theorem promotion and no Clay promotion are claimed here.
 
@@ -39,13 +42,19 @@ canonicalLocalConcentrationPackageShapes =
   ∷ []
 
 data LocalConcentrationStage : Set where
-  weakL3ToLocalL3WithTailControl :
+  calc11LerayTailAndWeakL3Control :
     LocalConcentrationStage
 
-  finiteComponentCountNMax :
+  localBallConcentrationRecorded :
+    LocalConcentrationStage
+
+  finiteComponentCountHFinRecorded :
     LocalConcentrationStage
 
   pigeonBoundKOverNMaxOneThird :
+    LocalConcentrationStage
+
+  noPromotionClaimed :
     LocalConcentrationStage
 
   packageVariablesRecorded :
@@ -57,9 +66,11 @@ data LocalConcentrationStage : Set where
 canonicalLocalConcentrationStages :
   List LocalConcentrationStage
 canonicalLocalConcentrationStages =
-  weakL3ToLocalL3WithTailControl
-  ∷ finiteComponentCountNMax
+  calc11LerayTailAndWeakL3Control
+  ∷ localBallConcentrationRecorded
+  ∷ finiteComponentCountHFinRecorded
   ∷ pigeonBoundKOverNMaxOneThird
+  ∷ noPromotionClaimed
   ∷ packageVariablesRecorded
   ∷ blockerSetRecorded
   ∷ []
@@ -67,20 +78,26 @@ canonicalLocalConcentrationStages =
 canonicalLocalConcentrationVariables :
   List String
 canonicalLocalConcentrationVariables =
-  "weak-L3"
-  ∷ "local L3"
-  ∷ "tail control"
+  "Calc 11"
+  ∷ "Leray tail"
+  ∷ "||f||_{L^{3,infty}} <= ||f||_{L^3}"
+  ∷ "local ball concentration"
+  ∷ "h_fin"
   ∷ "N_max"
+  ∷ "N_max = 20630"
   ∷ "K"
   ∷ "K / N_max^(1/3)"
   ∷ "pigeon_concentration"
   ∷ []
 
 data LocalConcentrationBlocker : Set where
-  missingTailControlUpgrade :
+  missingCalc11TailUpgrade :
     LocalConcentrationBlocker
 
-  missingFiniteComponentDischarge :
+  missingLocalBallConcentration :
+    LocalConcentrationBlocker
+
+  missingHFinHypothesisRecording :
     LocalConcentrationBlocker
 
   missingPigeonPackingInequality :
@@ -98,8 +115,9 @@ data LocalConcentrationBlocker : Set where
 canonicalLocalConcentrationBlockers :
   List LocalConcentrationBlocker
 canonicalLocalConcentrationBlockers =
-  missingTailControlUpgrade
-  ∷ missingFiniteComponentDischarge
+  missingCalc11TailUpgrade
+  ∷ missingLocalBallConcentration
+  ∷ missingHFinHypothesisRecording
   ∷ missingPigeonPackingInequality
   ∷ missingVariableInstantiation
   ∷ theoremPromotionForbidden
@@ -110,8 +128,9 @@ canonicalLocalConcentrationReceiptBoundary :
   List String
 canonicalLocalConcentrationReceiptBoundary =
   "This receipt is candidate-only and records package shape only"
-  ∷ "weak-L3 to local L3 is recorded with tail control"
-  ∷ "the finite component count N_max is recorded as a surface, not a promoted theorem"
+  ∷ "Calc 11 records Leray tail control together with ||f||_{L^{3,infty}} <= ||f||_{L^3}"
+  ∷ "local ball concentration is recorded as a surface"
+  ∷ "the finite component count h_fin is recorded with empirical N_max = 20630 and analytic hypothesis only"
   ∷ "the pigeon_concentration bound K / N_max^(1/3) is recorded as a surface, not a promoted theorem"
   ∷ "theorem promotion remains false"
   ∷ "Clay promotion remains false"
@@ -126,7 +145,7 @@ localConcentrationPromotionImpossibleHere ()
 
 localConcentrationPackageSummary : String
 localConcentrationPackageSummary =
-  "Candidate-only component-local concentration package: weak-L3 is routed to local L3 with tail control, the finite component count N_max is recorded, the pigeon_concentration bound K / N_max^(1/3) is recorded, and theorem/Clay promotion remains false."
+  "Candidate-only component-local concentration package after Calc 11: Leray tail control and ||f||_{L^{3,infty}} <= ||f||_{L^3} are recorded, local ball concentration is recorded, h_fin carries the empirical N_max = 20630 hypothesis, the pigeon_concentration bound K / N_max^(1/3) is recorded, and theorem/Clay promotion remains false."
 
 record LocalConcentrationPigeonConcentrationReceipt : Setω where
   field
@@ -154,29 +173,65 @@ record LocalConcentrationPigeonConcentrationReceipt : Setω where
     variablesAreCanonical :
       variables ≡ canonicalLocalConcentrationVariables
 
+    calc11RouteSummary :
+      String
+
+    calc11RouteSummaryIsCanonical :
+      calc11RouteSummary ≡ localConcentrationPackageSummary
+
+    lerayTailSurface :
+      String
+
+    lerayTailSurfaceIsCanonical :
+      lerayTailSurface ≡ "Leray tail"
+
     weakL3Surface :
       String
 
     weakL3SurfaceIsCanonical :
-      weakL3Surface ≡ "weak-L3"
+      weakL3Surface ≡ "||f||_{L^{3,infty}} <= ||f||_{L^3}"
 
     localL3Surface :
       String
 
     localL3SurfaceIsCanonical :
-      localL3Surface ≡ "local L3"
+      localL3Surface ≡ "local ball concentration"
+
+    localBallConcentrationSurface :
+      String
+
+    localBallConcentrationSurfaceIsCanonical :
+      localBallConcentrationSurface ≡ "local ball concentration"
 
     tailControlSurface :
       String
 
     tailControlSurfaceIsCanonical :
-      tailControlSurface ≡ "tail control"
+      tailControlSurface ≡ "Leray tail"
 
     componentCountName :
       String
 
     componentCountNameIsCanonical :
-      componentCountName ≡ "N_max"
+      componentCountName ≡ "h_fin"
+
+    componentCountSymbol :
+      String
+
+    componentCountSymbolIsCanonical :
+      componentCountSymbol ≡ "N_max"
+
+    empiricalNMax :
+      Nat
+
+    empiricalNMaxIsCanonical :
+      empiricalNMax ≡ 20630
+
+    componentCountAnalyticHypothesis :
+      Bool
+
+    componentCountAnalyticHypothesisIsTrue :
+      componentCountAnalyticHypothesis ≡ true
 
     pigeonBoundFormula :
       String
@@ -248,21 +303,45 @@ canonicalLocalConcentrationPigeonConcentrationReceipt =
         canonicalLocalConcentrationVariables
     ; variablesAreCanonical =
         refl
+    ; calc11RouteSummary =
+        localConcentrationPackageSummary
+    ; calc11RouteSummaryIsCanonical =
+        refl
+    ; lerayTailSurface =
+        "Leray tail"
+    ; lerayTailSurfaceIsCanonical =
+        refl
     ; weakL3Surface =
-        "weak-L3"
+        "||f||_{L^{3,infty}} <= ||f||_{L^3}"
     ; weakL3SurfaceIsCanonical =
         refl
     ; localL3Surface =
-        "local L3"
+        "local ball concentration"
     ; localL3SurfaceIsCanonical =
         refl
+    ; localBallConcentrationSurface =
+        "local ball concentration"
+    ; localBallConcentrationSurfaceIsCanonical =
+        refl
     ; tailControlSurface =
-        "tail control"
+        "Leray tail"
     ; tailControlSurfaceIsCanonical =
         refl
     ; componentCountName =
-        "N_max"
+        "h_fin"
     ; componentCountNameIsCanonical =
+        refl
+    ; componentCountSymbol =
+        "N_max"
+    ; componentCountSymbolIsCanonical =
+        refl
+    ; empiricalNMax =
+        20630
+    ; empiricalNMaxIsCanonical =
+        refl
+    ; componentCountAnalyticHypothesis =
+        true
+    ; componentCountAnalyticHypothesisIsTrue =
         refl
     ; pigeonBoundFormula =
         "K / N_max^(1/3)"
