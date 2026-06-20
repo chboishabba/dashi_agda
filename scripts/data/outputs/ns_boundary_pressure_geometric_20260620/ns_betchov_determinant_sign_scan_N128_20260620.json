@@ -64,6 +64,8 @@
     "global_lambda2_zero_fraction": 0.0,
     "global_mismatch_count": 871735,
     "global_mismatch_fraction": 0.031975049238938555,
+    "global_sign_success_count": 26391241,
+    "global_sign_success_fraction": 0.9680249507610614,
     "global_valid_cell_count": 27262976,
     "missing_frames": 0,
     "ok_frames": 13,
@@ -732,7 +734,7 @@
     "zero_eps": 1e-12
   },
   "route_decision": "FAIL_CLOSED_BETCHOV_DETERMINANT_SIGN_SCAN",
-  "status": "partial",
+  "status": "ok",
   "warnings": [
     "velocity_snapshots detected as legacy (T,N,N,N,3)"
   ]

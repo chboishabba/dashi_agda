@@ -58,7 +58,7 @@ CONTROL_CARD = {
     "O": "Validate the corrected Betchov determinant sign scan contract.",
     "R": (
         "Require contract keys, authority invariants, per-frame sign counts/fractions, "
-        "mismatch accounting, and aggregate consistency."
+        "aggregate consistency, and sign-rule success versus mismatch summary."
     ),
     "C": SCRIPT_NAME,
     "S": (
@@ -427,6 +427,8 @@ def _validate_aggregate(
             ("aggregate", "error_frames"),
             f"must match frame status count {status_counts['error_frames']!r}",
         )
+    if aggregate.get("global_sign_success_count") is None:
+        _record_error(errors, ("aggregate", "global_sign_success_count"), "must be present")
 
     row_global_count = {
         "global_lambda2_positive_count": 0,
@@ -473,6 +475,7 @@ def _validate_aggregate(
         ("global_det_negative_fraction", "global_det_negative_count"),
         ("global_det_zero_fraction", "global_det_zero_count"),
         ("global_mismatch_fraction", "global_mismatch_count"),
+        ("global_sign_success_fraction", "global_sign_success_count"),
     )
     for fraction_key, count_key in fraction_specs:
         fraction = _coerce_finite_float(aggregate.get(fraction_key))
@@ -494,6 +497,21 @@ def _validate_aggregate(
         value = aggregate.get(key)
         if value is not None and _coerce_finite_float(value) is None:
             _record_error(errors, ("aggregate", key), "must be finite if present")
+
+    global_valid_cell_count = _coerce_nonnegative_int(aggregate.get("global_valid_cell_count"))
+    global_mismatch_count = _coerce_nonnegative_int(aggregate.get("global_mismatch_count"))
+    global_sign_success_count = _coerce_nonnegative_int(aggregate.get("global_sign_success_count"))
+    if (
+        global_valid_cell_count is not None
+        and global_mismatch_count is not None
+        and global_sign_success_count is not None
+        and global_sign_success_count + global_mismatch_count != global_valid_cell_count
+    ):
+        _record_error(
+            errors,
+            ("aggregate", "global_sign_success_count"),
+            "must satisfy global_sign_success_count + global_mismatch_count == global_valid_cell_count",
+        )
 
 
 def _validate(payload: dict[str, Any]) -> tuple[list[str], list[str], dict[str, Any]]:

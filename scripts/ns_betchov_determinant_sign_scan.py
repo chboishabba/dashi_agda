@@ -22,6 +22,10 @@ OK_STATUS = "ok"
 PARTIAL_STATUS = "partial"
 MISSING_REQUIRED_STATUS = "missing_required_field"
 ERROR_STATUS = "error"
+LEGACY_AXIS_WARNING_SUFFIXES = (
+    "velocity_snapshots detected as legacy (T,N,N,N,3)",
+    "5D velocity layout interpreted as (T,N,N,N,3)",
+)
 
 DEFAULT_DERIVED_ARCHIVE = DEFAULT_RAW_ARCHIVE = Path(
     "/home/c/Documents/code/dashiCFD/outputs/"
@@ -182,6 +186,12 @@ def _fraction(numerator: int, denominator: int) -> float:
     if denominator <= 0:
         return 0.0
     return float(numerator) / float(denominator)
+
+
+def _is_benign_warning(warning: str) -> bool:
+    if not isinstance(warning, str):
+        return False
+    return any(suffix in warning for suffix in LEGACY_AXIS_WARNING_SUFFIXES)
 
 
 def _sign_counts(values: np.ndarray, eps: float) -> tuple[int, int, int]:
@@ -766,6 +776,7 @@ def _build_aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "global_det_negative_count": 0,
         "global_det_zero_count": 0,
         "global_mismatch_count": 0,
+        "global_sign_success_count": 0,
         "global_lambda2_min": None,
         "global_lambda2_max": None,
         "global_det_min": None,
@@ -843,6 +854,8 @@ def _build_aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
                     }
 
     v = int(aggregate["global_valid_cell_count"])
+    aggregate["global_sign_success_count"] = max(v - int(aggregate["global_mismatch_count"]), 0)
+    aggregate["global_sign_success_fraction"] = _fraction(aggregate["global_sign_success_count"], v)
     aggregate["global_lambda2_positive_fraction"] = _fraction(aggregate["global_lambda2_positive_count"], v)
     aggregate["global_lambda2_negative_fraction"] = _fraction(aggregate["global_lambda2_negative_count"], v)
     aggregate["global_lambda2_zero_fraction"] = _fraction(aggregate["global_lambda2_zero_count"], v)
@@ -955,7 +968,7 @@ def main() -> int:
         status = ERROR_STATUS
     elif any(status == MISSING_REQUIRED_STATUS for status in frame_statuses):
         status = PARTIAL_STATUS
-    elif warnings:
+    elif any(not _is_benign_warning(warning) for warning in warnings):
         status = PARTIAL_STATUS
     else:
         status = OK_STATUS

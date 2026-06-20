@@ -16692,3 +16692,22 @@ Cleanup
 - [x] Extend
   `DASHI.Physics.Closure.SiblingCodecFiningContinuousSupportReceipt` with the
   new archive surfaces and explicit non-promotion boundaries.
+
+## 2026-06-20 NS Determinant-Side Telemetry Pass
+
+- [x] Add the determinant-side target receipt
+  `DASHI.Physics.Closure.NSDeterminantAreaRouteTargetReceipt` so the old
+  `Qvel -> Omega_K` route is explicitly rejected and the corrected
+  `det(S)^+ -> |Omega_K| -> H_area` target is isolated fail-closed.
+- [x] Add the Sard boundary-regularity receipt
+  `DASHI.Physics.Closure.NSSardBoundaryRegularityReceipt` for the
+  `lambda2 = 0` carrier and the a.e. `delta1 > 0` partial closure.
+- [x] Add empirical telemetry/checker lanes for:
+  `ns_betchov_identity_scan`, `ns_det_omega_k_measure_scan`, and
+  `ns_lambda2_boundary_regularity_scan`.
+- [x] Wire the new determinant-side receipts into `DASHI/Everything.agda`.
+- [x] Wire the new determinant-side telemetry/checker scripts into
+  `scripts/local_clay_harness_manifest.py`.
+- [ ] Next analytic lane: replace the dead `Qvel` area bridge with a real
+  determinant-side lower-bound route for `∫ det(S)^+` under the corrected sign
+  decomposition.

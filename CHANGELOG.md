@@ -12105,3 +12105,23 @@ monitor surface.
     369/supervoxel/anisotropy/twist modeling grammar,
   - explicitly classified personal/no-title execution and hygiene traces as
     reviewed but non-promoting.
+
+## 2026-06-20 NS determinant-side telemetry pass
+
+- Added `DASHI.Physics.Closure.NSDeterminantAreaRouteTargetReceipt` to record
+  the corrected determinant-side `det(S)^+ -> |Omega_K| -> H_area` target and
+  to mark the old `Qvel -> Omega_K` bridge invalid for the strain-side set.
+- Added `DASHI.Physics.Closure.NSSardBoundaryRegularityReceipt` to record the
+  `lambda2 = 0` boundary carrier, the regular-point framing, the boundary
+  `delta1 = |lambda1|` identity, and the a.e. `delta1 > 0` partial closure.
+- Added three empirical NS telemetry/checker lanes:
+  `ns_betchov_identity_scan`,
+  `ns_det_omega_k_measure_scan`,
+  `ns_lambda2_boundary_regularity_scan`.
+- Updated `scripts/ns_betchov_determinant_sign_scan.py` and its checker so the
+  legacy-axis warning no longer downgrades otherwise complete runs and the
+  aggregate sign-success fraction is recorded explicitly.
+- Wired the new determinant-side receipts into `DASHI/Everything.agda` and the
+  new telemetry lanes into `scripts/local_clay_harness_manifest.py`.
+- Kept all theorem/Clay promotion gates closed; the determinant-side `H_area`
+  route and the quantitative `delta1 >= 1` gate remain open.

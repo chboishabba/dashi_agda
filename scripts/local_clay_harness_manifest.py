@@ -407,8 +407,14 @@ def build_specs() -> list[HarnessSpec]:
     ns_calc7_reynolds_boundary_scan_out = (
         CHILD_OUT_DIR / "ns_calc7_reynolds_boundary_scan_smoke.json"
     )
+    ns_betchov_identity_scan_out = (
+        CHILD_OUT_DIR / "ns_betchov_identity_scan_smoke.json"
+    )
     ns_betchov_determinant_sign_scan_out = (
         CHILD_OUT_DIR / "ns_betchov_determinant_sign_scan_smoke.json"
+    )
+    ns_det_omega_k_measure_scan_out = (
+        CHILD_OUT_DIR / "ns_det_omega_k_measure_scan_smoke.json"
     )
     ns_interior_vorticity_budget_out = (
         CHILD_OUT_DIR / "ns_interior_vorticity_budget_smoke.json"
@@ -449,8 +455,20 @@ def build_specs() -> list[HarnessSpec]:
     ns_calc7_reynolds_boundary_scan_check_out = (
         CHILD_OUT_DIR / "ns_calc7_reynolds_boundary_scan_check_smoke.json"
     )
+    ns_betchov_identity_scan_check_out = (
+        CHILD_OUT_DIR / "ns_betchov_identity_scan_check_smoke.json"
+    )
     ns_betchov_determinant_sign_scan_check_out = (
         CHILD_OUT_DIR / "ns_betchov_determinant_sign_scan_check_smoke.json"
+    )
+    ns_det_omega_k_measure_scan_check_out = (
+        CHILD_OUT_DIR / "ns_det_omega_k_measure_scan_check_smoke.json"
+    )
+    ns_lambda2_boundary_regularity_scan_out = (
+        CHILD_OUT_DIR / "ns_lambda2_boundary_regularity_scan_smoke.json"
+    )
+    ns_lambda2_boundary_regularity_scan_check_out = (
+        CHILD_OUT_DIR / "ns_lambda2_boundary_regularity_scan_check_smoke.json"
     )
     ns_broad_tube_serrin_lift_gap_receipt = (
         REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinLiftGapReceipt.agda"
@@ -3680,6 +3698,56 @@ def build_specs() -> list[HarnessSpec]:
             ),
         ),
         HarnessSpec(
+            name="ns_betchov_identity_scan",
+            path=script("ns_betchov_identity_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_betchov_identity_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_betchov_identity_scan_out),
+            ),
+            expected_json_path=ns_betchov_identity_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_betchov_identity_scan.py").exists()
+            else "ns_betchov_identity_scan script not found",
+            notes=(
+                "optional Betchov identity telemetry scan",
+                "empirical/non-promoting; measures integral det(S), Pi, and residual closure on raw N128 data",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_betchov_identity_scan",
+            path=script("check_ns_betchov_identity_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_betchov_identity_scan_out),
+                "--output-json",
+                str(ns_betchov_identity_scan_check_out),
+            )
+            if ns_betchov_identity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_betchov_identity_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_betchov_identity_scan_out.exists()
+            and script("check_ns_betchov_identity_scan.py").exists()
+            else (
+                "check_ns_betchov_identity_scan script not found"
+                if not script("check_ns_betchov_identity_scan.py").exists()
+                else "check_ns_betchov_identity_scan requires the Betchov identity scan output"
+            ),
+            notes=(
+                "optional Betchov identity scan regression gate",
+                "validates non-promoting residual and aggregate bookkeeping",
+            ),
+        ),
+        HarnessSpec(
             name="ns_betchov_determinant_sign_scan",
             path=script("ns_betchov_determinant_sign_scan.py"),
             args=(
@@ -3727,6 +3795,106 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional determinant sign scan regression gate",
                 "validates non-promoting determinant/lambda2 telemetry bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_det_omega_k_measure_scan",
+            path=script("ns_det_omega_k_measure_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_det_omega_k_measure_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_det_omega_k_measure_scan_out),
+            ),
+            expected_json_path=ns_det_omega_k_measure_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_det_omega_k_measure_scan.py").exists()
+            else "ns_det_omega_k_measure_scan script not found",
+            notes=(
+                "optional determinant-to-Omega_K measure scan",
+                "empirical/non-promoting; audits lambda2<0 versus det(S)>0 cell-level agreement",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_det_omega_k_measure_scan",
+            path=script("check_ns_det_omega_k_measure_scan.py"),
+            args=(
+                "--input-json",
+                str(ns_det_omega_k_measure_scan_out),
+                "--output-json",
+                str(ns_det_omega_k_measure_scan_check_out),
+            )
+            if ns_det_omega_k_measure_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_det_omega_k_measure_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_det_omega_k_measure_scan_out.exists()
+            and script("check_ns_det_omega_k_measure_scan.py").exists()
+            else (
+                "check_ns_det_omega_k_measure_scan script not found"
+                if not script("check_ns_det_omega_k_measure_scan.py").exists()
+                else "check_ns_det_omega_k_measure_scan requires the determinant/measure scan output"
+            ),
+            notes=(
+                "optional determinant/Omega_K measure scan regression gate",
+                "validates non-promoting sign-partition mismatch bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_lambda2_boundary_regularity_scan",
+            path=script("ns_lambda2_boundary_regularity_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_lambda2_boundary_regularity_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_lambda2_boundary_regularity_scan_out),
+            ),
+            expected_json_path=ns_lambda2_boundary_regularity_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_lambda2_boundary_regularity_scan.py").exists()
+            else "ns_lambda2_boundary_regularity_scan script not found",
+            notes=(
+                "optional lambda2 boundary regularity proxy scan",
+                "empirical/non-promoting; measures |grad lambda2| on a narrow |lambda2| band",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_lambda2_boundary_regularity_scan",
+            path=script("check_ns_lambda2_boundary_regularity_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_lambda2_boundary_regularity_scan_out),
+                "--output-json",
+                str(ns_lambda2_boundary_regularity_scan_check_out),
+            )
+            if ns_lambda2_boundary_regularity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_lambda2_boundary_regularity_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_lambda2_boundary_regularity_scan_out.exists()
+            and script("check_ns_lambda2_boundary_regularity_scan.py").exists()
+            else (
+                "check_ns_lambda2_boundary_regularity_scan script not found"
+                if not script("check_ns_lambda2_boundary_regularity_scan.py").exists()
+                else "check_ns_lambda2_boundary_regularity_scan requires the lambda2 boundary scan output"
+            ),
+            notes=(
+                "optional lambda2 boundary regularity regression gate",
+                "validates non-promoting Sard-proxy threshold and aggregate bookkeeping",
             ),
         ),
         HarnessSpec(

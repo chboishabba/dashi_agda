@@ -325,6 +325,7 @@ import DASHI.Physics.Closure.NSBetchovBKMPositiveMeasureReceipt
 import DASHI.Physics.Closure.NSBetchovDeterminantIdentityReceipt
 import DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt
 import DASHI.Physics.Closure.NSGD1LayerCZIntegratedControlReceipt
+import DASHI.Physics.Closure.NSDeterminantAreaRouteTargetReceipt
 import DASHI.Physics.Closure.NSDeterminantSignRuleReceipt
 import DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt
 import DASHI.Physics.Closure.NSLayerKornLiteratureClosureReceipt
@@ -334,6 +335,7 @@ import DASHI.Physics.Closure.NSQCriterionZeroMeanIdentityReceipt
 import DASHI.Physics.Closure.NSPressurePoissonConventionNormalizationReceipt
 import DASHI.Physics.Closure.NSQ3ExtensionalThresholdReceipt
 import DASHI.Physics.Closure.NSGeometricConcentrationCarrierReceipt
+import DASHI.Physics.Closure.NSSardBoundaryRegularityReceipt
 import DASHI.Physics.Closure.NSSharpTheoremGHierarchyReceipt
 import DASHI.Physics.Closure.NSTypeIHAreaUniformizationReceipt
 import DASHI.Physics.Closure.NSInteriorVorticityMaxPrincipleReceipt
