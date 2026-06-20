@@ -1,6 +1,28 @@
 # FOR TODO GO TO '# TODO'
 
 Current NS Clay action note for `2026-06-20`:
+- Sharp conditional TheoremG exponent-comparison tranche is recorded.
+  Artifacts:
+  `DASHI/Physics/Closure/NSConditionalQGronwallTheoremGReceipt.agda`,
+  `DASHI/Physics/Closure/NSTheoremGCancellationUpgradeReceipt.agda`,
+  `DASHI/Physics/Closure/NSCollapseConditionalGronwallBridgeReceipt.agda`,
+  `DASHI/Physics/Closure/NSTheoremGQ2GD1ContradictionChannelReceipt.agda`,
+  `DASHI/Physics/Closure/NSKatoHessianConfinementReceipt.agda`,
+  `scripts/ns_theoremg_sharp_conditional_summary.py`,
+  `scripts/check_ns_theoremg_sharp_conditional_summary.py`, and
+  `scripts/check_ns_theoremg_q2_gd1_contradiction_channel.py`. The route now
+  records exact `lambda2 = 0` stretching cancellation, an enstrophy-driven
+  source lane, sharp hypotheses `(H_B)`, `(H_area)`, `(H_g12++)`, and
+  contradiction by exponent mismatch between lower rate `(T*-t)^(-2)` and
+  upper rate `(T*-t)^(-2/delta1)`, requiring `delta1 > 1`. The CSV-backed
+  summary over the supplied 13 frames records
+  `H_area_direct_min = 0.696366`, `H_area_isop_lower_min = 7.6445`,
+  `H_B_rho_min = 0.231`, `H_g12_min = 1.4216`, `delta1_min = 1.4303`, and
+  exponent margin `2 - 2/delta1 = 0.601691952737188`. This remains
+  fail-closed and non-promoting: the sharp hypotheses stay open inputs,
+  contradiction discharge remains false, `collapseImpossible` remains false,
+  full NS Clay remains false, and `clayPromotion` remains false.
+
 - Broad-tube conditional regularization tranche is recorded. Artifacts:
   `DASHI/Physics/Closure/NSBroadTubeNondegenerateGradientReceipt.agda`,
   `DASHI/Physics/Closure/NSBroadTubeVorticityCoverageReceipt.agda`,

@@ -30,36 +30,44 @@ REQUIRED_MODULE_IMPORTS = (
 
 TRUE_FIELDS = (
     "routeRecorded",
+    "hBRecorded",
+    "hAreaRecorded",
+    "hG12SharpRecorded",
+    "delta1GreaterThanOneRecordedFlag",
+    "surfaceQ2DivergenceRecordedFlag",
+    "theoremGExponentComparisonRecordedFlag",
+    "exponentMismatchContradictionRecordedFlag",
 )
 
 FALSE_FIELDS = (
-    "q2BlowupLowerImplicationDischarged",
-    "q2UniformUpperBoundDischarged",
-    "gd1NoCollapseDischarged",
-    "theoremGUniformizationDischarged",
-    "serrinBKMBridgeDischarged",
+    "surfaceQ2DivergenceDischarged",
+    "theoremGExponentComparisonDischarged",
+    "exponentMismatchContradictionDischarged",
     "collapseImpossible",
     "clayNavierStokesPromoted",
 )
 
 REQUIRED_TEXT_MARKERS = (
-    "finite-time blow-up",
-    "Q2/carrier divergence",
-    "uniform Q2",
-    "BKM/Serrin",
+    "delta1 > 1",
+    "surface/Q2 divergence",
+    "TheoremG exponent comparison",
+    "exponent mismatch",
+    "exponent mismatch contradiction",
+    "energy-only closure",
     "fail-closed",
 )
 
 CONTROL_CARD = {
     "O": "Owner 5 validates the TheoremG/Q2/GD1 contradiction-channel receipt.",
     "R": (
-        "Require the composite route to be recorded while all hard analytic "
+        "Require the sharp contradiction route to be recorded while all hard analytic "
         "discharge and promotion gates remain explicitly false."
     ),
     "C": SCRIPT_NAME,
     "S": (
         "A receipt passes only if the five dependency imports are present, the "
-        "route-recorded field is true, and every Q2/GD1/TheoremG/BKM/Clay "
+        "route-recorded field is true, the sharp hypothesis/route booleans are true, "
+        "and every contradiction-discharge and Clay "
         "discharge flag remains false."
     ),
     "L": "Scan the Agda receipt text deterministically and emit a JSON check receipt.",

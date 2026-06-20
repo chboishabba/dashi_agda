@@ -482,6 +482,18 @@ def build_specs() -> list[HarnessSpec]:
     check_ns_broad_tube_conditional_regularization_summary = script(
         "check_ns_broad_tube_conditional_regularization_summary.py"
     )
+    ns_theoremg_sharp_conditional_summary = script(
+        "ns_theoremg_sharp_conditional_summary.py"
+    )
+    check_ns_theoremg_sharp_conditional_summary = script(
+        "check_ns_theoremg_sharp_conditional_summary.py"
+    )
+    check_ns_theoremg_q2_gd1_contradiction_channel = script(
+        "check_ns_theoremg_q2_gd1_contradiction_channel.py"
+    )
+    check_ns_theoremg_q2_gd1_contradiction_channel_out = (
+        CHILD_OUT_DIR / "check_ns_theoremg_q2_gd1_contradiction_channel_smoke.json"
+    )
     ns_interior_pressure_regression_out = (
         CHILD_OUT_DIR / "ns_interior_pressure_regression_smoke.json"
     )
@@ -3766,6 +3778,53 @@ def build_specs() -> list[HarnessSpec]:
             ),
             notes=(
                 "discovery-only record for optional broad-tube conditional-regularization check script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_theoremg_sharp_conditional_summary",
+            path=ns_theoremg_sharp_conditional_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected ns_theoremg_sharp_conditional_summary.py present: {rel(ns_theoremg_sharp_conditional_summary)}"
+                if ns_theoremg_sharp_conditional_summary.exists()
+                else f"Expected ns_theoremg_sharp_conditional_summary.py missing: {rel(ns_theoremg_sharp_conditional_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional sharp TheoremG conditional summary script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_theoremg_sharp_conditional_summary",
+            path=check_ns_theoremg_sharp_conditional_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected check_ns_theoremg_sharp_conditional_summary.py present: {rel(check_ns_theoremg_sharp_conditional_summary)}"
+                if check_ns_theoremg_sharp_conditional_summary.exists()
+                else f"Expected check_ns_theoremg_sharp_conditional_summary.py missing: {rel(check_ns_theoremg_sharp_conditional_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional sharp TheoremG conditional summary check script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_theoremg_q2_gd1_contradiction_channel",
+            path=check_ns_theoremg_q2_gd1_contradiction_channel,
+            args=(
+                "--output-json",
+                str(check_ns_theoremg_q2_gd1_contradiction_channel_out),
+            ),
+            expected_json_path=check_ns_theoremg_q2_gd1_contradiction_channel_out,
+            optional=True,
+            skip_reason=(
+                f"Expected check_ns_theoremg_q2_gd1_contradiction_channel.py present: {rel(check_ns_theoremg_q2_gd1_contradiction_channel)}"
+                if check_ns_theoremg_q2_gd1_contradiction_channel.exists()
+                else f"Expected check_ns_theoremg_q2_gd1_contradiction_channel.py missing: {rel(check_ns_theoremg_q2_gd1_contradiction_channel)}"
+            ),
+            notes=(
+                "discovery-only record for optional sharp contradiction-channel check script",
                 "non-promoting artifact presence/absence signal only",
             ),
         ),

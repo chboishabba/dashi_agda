@@ -11,16 +11,14 @@ open import Data.Empty using (⊥)
 ------------------------------------------------------------------------
 -- Fail-closed receipt for the upgraded Theorem-G cancellation shape.
 --
--- This receipt records the post-commutator cancellation upgrade route:
---   • singular stretching/F123 numerator cancellation on λ2 = 0 is recorded,
---   • the λ2 = 0 route is valid on the carrier under the GD1/h_delta1
---     denominator condition,
---   • RK/commutator remainder is disposed into ε/AM-GM lower-order H5,
---   • an explicit Q2 upper-bound route is recorded, only under RK/H5/layer
---     geometry controls, and remains open here,
---   • F123 contributes dQ/dt <= -δ1 Q + C2 ||u||H5^2 under δ1 > 0,
---   • the Theorem-G + Q2 + GD1 contradiction channel is explicit but not
---     discharged here.
+-- This receipt records the resolved cancellation story without promoting it:
+--   • the λ2 = 0 stretching term cancels exactly on the carrier,
+--   • the pressure term is energy-only on the boundary,
+--   • viscous/curvature leftovers are archived as Omega(t) source pieces,
+--   • the comparison route uses upper divergence ~(T*-t)^(-2/delta1) and
+--     lower divergence ~(T*-t)^(-2), so contradiction is forced only when
+--     delta1 > 1,
+--   • the route stays fail-closed and does not assert any promotion.
 --
 -- No Clay promotion is granted and failure is explicit.
 
@@ -39,33 +37,29 @@ data NSTheoremGCancellationUpgradeStage : Set where
     NSTheoremGCancellationUpgradeStage
   lambda2ZeroBoundaryRecorded :
     NSTheoremGCancellationUpgradeStage
-  stretchingNumeratorZeroOnLambda2ZeroRecorded :
+  stretchingTermExactlyCancelsOnLambda2ZeroRecorded :
     NSTheoremGCancellationUpgradeStage
-  lambda2SingularNumeratorCancelsCarrier :
+  pressureTermEnergyOnlyOnBoundaryRecorded :
     NSTheoremGCancellationUpgradeStage
-  gd1GapDenominatorControlForCarrierRecorded :
+  omegaSourcePiecesRecorded :
     NSTheoremGCancellationUpgradeStage
-  epsilonAMGMLowerOrderRKRecorded :
+  viscosityCurvatureOmegaSourceRecorded :
     NSTheoremGCancellationUpgradeStage
-  rkIsLowerOrderH5Recorded :
+  exponentComparisonRouteRecorded :
     NSTheoremGCancellationUpgradeStage
-  q2CancellationRouteRecordedStage :
+  upperBoundDivergenceRecorded :
     NSTheoremGCancellationUpgradeStage
-  q2UpperBoundFromCancellationRouteRecorded :
+  lowerBoundDivergenceRecorded :
     NSTheoremGCancellationUpgradeStage
-  rkH5LayerGeometryControlRecorded :
+  delta1GreaterThanOneRecorded :
     NSTheoremGCancellationUpgradeStage
-  f123DampingFormRecorded :
-    NSTheoremGCancellationUpgradeStage
-  f123DampingThresholdRecorded :
-    NSTheoremGCancellationUpgradeStage
-  delta1PositiveNotSqrtHalfRecorded :
+  contradictionOnlyUnderDelta1GtOneRecorded :
     NSTheoremGCancellationUpgradeStage
   gronwallDifferentialRecorded :
     NSTheoremGCancellationUpgradeStage
-  theoremGQ2GD1ContradictionChannelRecorded :
+  theoremGOmegaComparisonContradictionChannelRecorded :
     NSTheoremGCancellationUpgradeStage
-  collapseImpossibleBlockedUntilGD1AnalyticRecorded :
+  collapseImpossibleBlockedUntilDelta1GtOneAnalyticRecorded :
     NSTheoremGCancellationUpgradeStage
   noPromotionRecorded :
     NSTheoremGCancellationUpgradeStage
@@ -76,41 +70,35 @@ canonicalNSTheoremGCancellationUpgradeStages =
   upgradedTheoremGSurfaceRecorded
   ∷ conditionalTheoremGReceiptReferenced
   ∷ lambda2ZeroBoundaryRecorded
-  ∷ stretchingNumeratorZeroOnLambda2ZeroRecorded
-  ∷ lambda2SingularNumeratorCancelsCarrier
-  ∷ gd1GapDenominatorControlForCarrierRecorded
-  ∷ epsilonAMGMLowerOrderRKRecorded
-  ∷ rkIsLowerOrderH5Recorded
-  ∷ q2CancellationRouteRecordedStage
-  ∷ q2UpperBoundFromCancellationRouteRecorded
-  ∷ rkH5LayerGeometryControlRecorded
-  ∷ f123DampingFormRecorded
-  ∷ f123DampingThresholdRecorded
-  ∷ delta1PositiveNotSqrtHalfRecorded
+  ∷ stretchingTermExactlyCancelsOnLambda2ZeroRecorded
+  ∷ pressureTermEnergyOnlyOnBoundaryRecorded
+  ∷ omegaSourcePiecesRecorded
+  ∷ viscosityCurvatureOmegaSourceRecorded
+  ∷ exponentComparisonRouteRecorded
+  ∷ upperBoundDivergenceRecorded
+  ∷ lowerBoundDivergenceRecorded
+  ∷ delta1GreaterThanOneRecorded
+  ∷ contradictionOnlyUnderDelta1GtOneRecorded
   ∷ gronwallDifferentialRecorded
-  ∷ theoremGQ2GD1ContradictionChannelRecorded
-  ∷ collapseImpossibleBlockedUntilGD1AnalyticRecorded
+  ∷ theoremGOmegaComparisonContradictionChannelRecorded
+  ∷ collapseImpossibleBlockedUntilDelta1GtOneAnalyticRecorded
   ∷ noPromotionRecorded
   ∷ []
 
 data NSTheoremGCancellationUpgradeBlocker : Set where
-  lambda2NumeratorCancellationStillBoundaryLocal :
+  lambda2StretchingCancellationStillBoundaryLocal :
     NSTheoremGCancellationUpgradeBlocker
-  rkAbsorptionNeedsEpsilonAMGMLedger :
+  pressureBoundaryEnergyOnlyNeedsLedger :
     NSTheoremGCancellationUpgradeBlocker
-  q2UniformBoundFromCancellationNotDischarged :
+  omegaSourcePiecesNeedAccounting :
     NSTheoremGCancellationUpgradeBlocker
-  q2UpperBoundRouteNeedsRKCommutatorControl :
+  exponentComparisonRouteNeedsClosure :
     NSTheoremGCancellationUpgradeBlocker
-  q2UpperBoundRouteNeedsLayerGeometry :
+  upperBoundDivergenceNeedsComparisonLedger :
     NSTheoremGCancellationUpgradeBlocker
-  f123DampingNeedsAnalyticControl :
+  lowerBoundDivergenceNeedsComparisonLedger :
     NSTheoremGCancellationUpgradeBlocker
-  f123NeedsEmpiricalBoundarySupport :
-    NSTheoremGCancellationUpgradeBlocker
-  collapseImpossibleRequiresGD1NoCollapse :
-    NSTheoremGCancellationUpgradeBlocker
-  collapseImpossibleRequiresAnalyticProofTerms :
+  contradictionOnlyUnderDelta1GtOneNeedsAnalyticProof :
     NSTheoremGCancellationUpgradeBlocker
   hDelta1StillHypothesis :
     NSTheoremGCancellationUpgradeBlocker
@@ -126,15 +114,13 @@ data NSTheoremGCancellationUpgradeBlocker : Set where
 canonicalNSTheoremGCancellationUpgradeBlockers :
   List NSTheoremGCancellationUpgradeBlocker
 canonicalNSTheoremGCancellationUpgradeBlockers =
-  lambda2NumeratorCancellationStillBoundaryLocal
-  ∷ rkAbsorptionNeedsEpsilonAMGMLedger
-  ∷ q2UniformBoundFromCancellationNotDischarged
-  ∷ q2UpperBoundRouteNeedsRKCommutatorControl
-  ∷ q2UpperBoundRouteNeedsLayerGeometry
-  ∷ f123DampingNeedsAnalyticControl
-  ∷ f123NeedsEmpiricalBoundarySupport
-  ∷ collapseImpossibleRequiresGD1NoCollapse
-  ∷ collapseImpossibleRequiresAnalyticProofTerms
+  lambda2StretchingCancellationStillBoundaryLocal
+  ∷ pressureBoundaryEnergyOnlyNeedsLedger
+  ∷ omegaSourcePiecesNeedAccounting
+  ∷ exponentComparisonRouteNeedsClosure
+  ∷ upperBoundDivergenceNeedsComparisonLedger
+  ∷ lowerBoundDivergenceNeedsComparisonLedger
+  ∷ contradictionOnlyUnderDelta1GtOneNeedsAnalyticProof
   ∷ hDelta1StillHypothesis
   ∷ kornLevelSetNotPromoted
   ∷ collapseImpossibleNotPromoted
@@ -144,70 +130,71 @@ canonicalNSTheoremGCancellationUpgradeBlockers =
 
 upgradedTheoremGSurfaceTextValue : String
 upgradedTheoremGSurfaceTextValue =
-  "NSTheoremGCancellationUpgradeReceipt records the upgraded Theorem-G derivative shape on the boundary, linked textually to the existing conditional Theorem G receipt surface."
+  "NSTheoremGCancellationUpgradeReceipt records the resolved Theorem-G cancellation surface, linked textually to the existing conditional Theorem G receipt surface."
 
 conditionalReceiptLinkTextValue : String
 conditionalReceiptLinkTextValue =
-  "The conditional surface is aligned with NSConditionalQGronwallTheoremGReceipt while keeping all promotions blocked."
+  "The conditional surface is aligned with NSConditionalQGronwallTheoremGReceipt while keeping the receipt fail-closed and non-promoting."
 
-stretchingNumeratorTextValue : String
-stretchingNumeratorTextValue =
-  "On λ2 = 0, the singular F123 stretching numerator cancellation is recorded on the carrier, so the non-dissipative residue is removed there."
+stretchingCancellationTextValue : String
+stretchingCancellationTextValue =
+  "On λ2 = 0, the stretching term cancels exactly on the carrier, so the boundary contribution vanishes by algebra rather than by estimate."
 
-rkAMGMTextValue : String
-rkAMGMTextValue =
-  "The RK commutator remainder is absorbed by an ε/AM-GM split and is recorded as lower-order H5."
+pressureBoundaryEnergyTextValue : String
+pressureBoundaryEnergyTextValue =
+  "The pressure contribution is energy-only on the boundary, while the viscous and curvature remainder is recorded as Omega(t) source pieces."
 
-f123DampingTextValue : String
-f123DampingTextValue =
-  "F123 damping is recorded as dQ/dt <= -δ1 * Q + C2 * ||u||_H5^2."
+omegaSourceComparisonTextValue : String
+omegaSourceComparisonTextValue =
+  "The comparison route records upper divergence like (T*-t)^(-2/delta1) and lower divergence like (T*-t)^(-2)."
 
-delta1TextValue : String
-delta1TextValue =
-  "The threshold used in this upgraded shape is δ1 > 0, not δ1 > 1/sqrt(2)."
+delta1ComparisonThresholdTextValue : String
+delta1ComparisonThresholdTextValue =
+  "The contradiction gate is the exponent comparison, and it only forces collapse inconsistency when delta1 > 1."
 
 blockedUntilTextValue : String
 blockedUntilTextValue =
-  "collapseImpossible remains blocked until GD1 no-collapse and analytic proof terms beyond empirical support are discharged."
+  "collapseImpossible remains blocked until the delta1 > 1 exponent comparison is discharged with analytic proof terms."
 
-q2CancellationRouteTextValue : String
-q2CancellationRouteTextValue =
-  "q2CancellationRoute is recorded as the explicit Q2 upper-bound lane conditioned by this upgrade."
+omegaSourceLedgerTextValue : String
+omegaSourceLedgerTextValue =
+  "The Omega(t) source ledger is recorded as the explicit viscous/curvature remainder lane for the upgraded route."
 
-q2UniformBoundFromCancellationTextValue : String
-q2UniformBoundFromCancellationTextValue =
-  "q2UniformBoundFromCancellation is explicitly not discharged in this receipt and must be settled before contradiction closure."
+upperBoundComparisonTextValue : String
+upperBoundComparisonTextValue =
+  "The upper-bound comparison is explicitly not discharged in this receipt and remains a routed dependency."
 
-q2RouteControlTextValue : String
-q2RouteControlTextValue =
-  "The Q2 route is explicitly conditioned on RK commutator absorption, H5 lower-order control, and layer-geometry support."
+comparisonRouteControlTextValue : String
+comparisonRouteControlTextValue =
+  "The comparison route is explicitly conditioned on exact boundary cancellation, Omega(t) source accounting, and exponent separation."
 
-theoremGQ2GD1RouteTextValue : String
-theoremGQ2GD1RouteTextValue =
-  "Theorem-G + Q2 + GD1 contradiction lane is recorded explicitly as a routed dependency, not as a completed collapse proof."
+theoremGOmegaComparisonRouteTextValue : String
+theoremGOmegaComparisonRouteTextValue =
+  "Theorem-G + Omega(t) + exponent-comparison contradiction lane is recorded explicitly as a routed dependency, not as a completed collapse proof."
 
 cancellationUpgradeDependencyNames : List String
 cancellationUpgradeDependencyNames =
   "NSConditionalQGronwallTheoremGReceipt (conditional Theorem G ledger)"
   ∷ "NSGD1MinPrincipleNoLambda3CollapseReceipt (GD1 gap / h_delta1 structure)"
-  ∷ "lambda2 = 0: singular F123 numerator cancellation on the carrier"
-  ∷ "RK commutator/H5 decomposition by ε-AM-GM"
-  ∷ "layer-geometry control needed for the Q2 upper-bound lane"
-  ∷ "Q2 upper-bound route remains unclosed until q2UniformBoundFromCancellation is discharged"
+  ∷ "lambda2 = 0: exact stretching cancellation on the carrier"
+  ∷ "boundary pressure recorded as energy-only"
+  ∷ "viscous/curvature residue archived as Omega(t) source pieces"
+  ∷ "comparison of (T*-t)^(-2/delta1) with (T*-t)^(-2)"
+  ∷ "upper-bound route remains unclosed until the exponent comparison is discharged"
   ∷ []
 
 receiptBoundaryText : List String
 receiptBoundaryText =
-  "upgraded Theorem-G derivative shape is recorded"
+  "resolved Theorem-G cancellation surface is recorded"
   ∷ "conditional Theorem G receipt is cited textually for continuity"
-  ∷ "lambda2 = 0 singular F123 numerator cancellation is recorded"
-  ∷ "GD1/h_delta1 denominator condition is recorded as a carrier prerequisite"
-  ∷ "Q2 cancellation route is recorded and linked to the Q2/GD1 contradiction lane"
-  ∷ "Q2 upper-bound route is conditioned on RK commutator + H5 + layer controls"
-  ∷ "F123 contributes dQ/dt <= -δ1 Q + C2 ||u||H5^2"
-  ∷ "q2UniformBoundFromCancellation is still false"
-  ∷ "δ1 threshold is explicitly δ1 > 0"
-  ∷ "collapseImpossible stays blocked pending GD1 no-collapse + analytic proof stack"
+  ∷ "lambda2 = 0 stretching cancellation is exact"
+  ∷ "boundary pressure is energy-only"
+  ∷ "viscous/curvature leftovers are recorded as Omega(t) source pieces"
+  ∷ "comparison route records upper divergence ~(T*-t)^(-2/delta1)"
+  ∷ "comparison route records lower divergence ~(T*-t)^(-2)"
+  ∷ "contradiction requires delta1 > 1"
+  ∷ "upper-bound comparison is still false"
+  ∷ "collapseImpossible stays blocked pending exponent-comparison closure"
   ∷ "h_delta1 remains a hypothesis"
   ∷ "kornLevelSet remains not promoted"
   ∷ "clay promotion remains false"
@@ -260,90 +247,90 @@ record NSTheoremGCancellationUpgradeReceipt : Setω where
     conditionalReceiptLinkTextIsCanonical :
       conditionalReceiptLinkText ≡ conditionalReceiptLinkTextValue
 
-    stretchingNumeratorText :
+    stretchingCancellationText :
       String
-    stretchingNumeratorTextIsCanonical :
-      stretchingNumeratorText ≡ stretchingNumeratorTextValue
+    stretchingCancellationTextIsCanonical :
+      stretchingCancellationText ≡ stretchingCancellationTextValue
 
-    rkAMGMText :
+    pressureBoundaryEnergyText :
       String
-    rkAMGMTextIsCanonical :
-      rkAMGMText ≡ rkAMGMTextValue
+    pressureBoundaryEnergyTextIsCanonical :
+      pressureBoundaryEnergyText ≡ pressureBoundaryEnergyTextValue
 
-    f123DampingText :
+    omegaSourceComparisonText :
       String
-    f123DampingTextIsCanonical :
-      f123DampingText ≡ f123DampingTextValue
+    omegaSourceComparisonTextIsCanonical :
+      omegaSourceComparisonText ≡ omegaSourceComparisonTextValue
 
-    delta1ThresholdText :
+    delta1ComparisonThresholdText :
       String
-    delta1ThresholdTextIsCanonical :
-      delta1ThresholdText ≡ delta1TextValue
+    delta1ComparisonThresholdTextIsCanonical :
+      delta1ComparisonThresholdText ≡ delta1ComparisonThresholdTextValue
 
     blockedUntilText :
       String
     blockedUntilTextIsCanonical :
       blockedUntilText ≡ blockedUntilTextValue
 
-    q2CancellationRouteText :
+    omegaSourceLedgerText :
       String
-    q2CancellationRouteTextIsCanonical :
-      q2CancellationRouteText ≡ q2CancellationRouteTextValue
+    omegaSourceLedgerTextIsCanonical :
+      omegaSourceLedgerText ≡ omegaSourceLedgerTextValue
 
-    q2UniformBoundFromCancellationText :
+    upperBoundComparisonText :
       String
-    q2UniformBoundFromCancellationTextIsCanonical :
-      q2UniformBoundFromCancellationText ≡ q2UniformBoundFromCancellationTextValue
+    upperBoundComparisonTextIsCanonical :
+      upperBoundComparisonText ≡ upperBoundComparisonTextValue
 
-    q2RouteControlText :
+    comparisonRouteControlText :
       String
-    q2RouteControlTextIsCanonical :
-      q2RouteControlText ≡ q2RouteControlTextValue
+    comparisonRouteControlTextIsCanonical :
+      comparisonRouteControlText ≡ comparisonRouteControlTextValue
 
-    theoremGQ2GD1RouteText :
+    theoremGOmegaComparisonRouteText :
       String
-    theoremGQ2GD1RouteTextIsCanonical :
-      theoremGQ2GD1RouteText ≡ theoremGQ2GD1RouteTextValue
+    theoremGOmegaComparisonRouteTextIsCanonical :
+      theoremGOmegaComparisonRouteText ≡ theoremGOmegaComparisonRouteTextValue
 
-    lambda2ZeroNumeratorVanishes :
+    stretchingCancellationExact :
       Bool
-    lambda2ZeroNumeratorVanishesIsTrue :
-      lambda2ZeroNumeratorVanishes ≡ true
+    stretchingCancellationExactIsTrue :
+      stretchingCancellationExact ≡ true
 
-    q2CancellationRouteRecorded :
+    omegaSourceLedgerRecorded :
       Bool
-    q2CancellationRouteRecordedIsTrue :
-      q2CancellationRouteRecorded ≡ true
+    omegaSourceLedgerRecordedIsTrue :
+      omegaSourceLedgerRecorded ≡ true
 
-    q2UpperBoundFromCancellationRouteVisible :
+    upperBoundComparisonVisible :
       Bool
-    q2UpperBoundFromCancellationRouteVisibleIsTrue :
-      q2UpperBoundFromCancellationRouteVisible ≡ true
+    upperBoundComparisonVisibleIsTrue :
+      upperBoundComparisonVisible ≡ true
 
-    q2UniformBoundFromCancellationDischarged :
+    upperBoundComparisonDischarged :
       Bool
-    q2UniformBoundFromCancellationDischargedIsFalse :
-      q2UniformBoundFromCancellationDischarged ≡ false
+    upperBoundComparisonDischargedIsFalse :
+      upperBoundComparisonDischarged ≡ false
 
-    theoremGQ2GD1ContradictionChannelVisible :
+    theoremGOmegaComparisonContradictionChannelVisible :
       Bool
-    theoremGQ2GD1ContradictionChannelVisibleIsTrue :
-      theoremGQ2GD1ContradictionChannelVisible ≡ true
+    theoremGOmegaComparisonContradictionChannelVisibleIsTrue :
+      theoremGOmegaComparisonContradictionChannelVisible ≡ true
 
-    rkTermLowerOrderH5 :
+    omegaSourcePiecesRecordedBool :
       Bool
-    rkTermLowerOrderH5IsTrue :
-      rkTermLowerOrderH5 ≡ true
+    omegaSourcePiecesRecordedBoolIsTrue :
+      omegaSourcePiecesRecordedBool ≡ true
 
-    f123DampingExactIneq :
+    exponentComparisonRecorded :
       Bool
-    f123DampingExactIneqIsTrue :
-      f123DampingExactIneq ≡ true
+    exponentComparisonRecordedIsTrue :
+      exponentComparisonRecorded ≡ true
 
-    delta1Positive :
+    delta1GreaterThanOneNeeded :
       Bool
-    delta1PositiveIsTrue :
-      delta1Positive ≡ true
+    delta1GreaterThanOneNeededIsTrue :
+      delta1GreaterThanOneNeeded ≡ true
 
     hDelta1 :
       Bool
@@ -370,10 +357,10 @@ record NSTheoremGCancellationUpgradeReceipt : Setω where
     clayPromotionIsFalse :
       clayPromotion ≡ false
 
-    empiricalF123Support :
+    analyticExponentComparisonSupport :
       Bool
-    empiricalF123SupportIsTrue :
-      empiricalF123Support ≡ true
+    analyticExponentComparisonSupportIsTrue :
+      analyticExponentComparisonSupport ≡ true
 
     receiptBoundary :
       List String
@@ -426,73 +413,73 @@ canonicalNSTheoremGCancellationUpgradeReceipt =
         conditionalReceiptLinkTextValue
     ; conditionalReceiptLinkTextIsCanonical =
         refl
-    ; stretchingNumeratorText =
-        stretchingNumeratorTextValue
-    ; stretchingNumeratorTextIsCanonical =
+    ; stretchingCancellationText =
+        stretchingCancellationTextValue
+    ; stretchingCancellationTextIsCanonical =
         refl
-    ; rkAMGMText =
-        rkAMGMTextValue
-    ; rkAMGMTextIsCanonical =
+    ; pressureBoundaryEnergyText =
+        pressureBoundaryEnergyTextValue
+    ; pressureBoundaryEnergyTextIsCanonical =
         refl
-    ; f123DampingText =
-        f123DampingTextValue
-    ; f123DampingTextIsCanonical =
+    ; omegaSourceComparisonText =
+        omegaSourceComparisonTextValue
+    ; omegaSourceComparisonTextIsCanonical =
         refl
-    ; delta1ThresholdText =
-        delta1TextValue
-    ; delta1ThresholdTextIsCanonical =
+    ; delta1ComparisonThresholdText =
+        delta1ComparisonThresholdTextValue
+    ; delta1ComparisonThresholdTextIsCanonical =
         refl
     ; blockedUntilText =
         blockedUntilTextValue
     ; blockedUntilTextIsCanonical =
         refl
-    ; q2CancellationRouteText =
-        q2CancellationRouteTextValue
-    ; q2CancellationRouteTextIsCanonical =
+    ; omegaSourceLedgerText =
+        omegaSourceLedgerTextValue
+    ; omegaSourceLedgerTextIsCanonical =
         refl
-    ; q2UniformBoundFromCancellationText =
-        q2UniformBoundFromCancellationTextValue
-    ; q2UniformBoundFromCancellationTextIsCanonical =
+    ; upperBoundComparisonText =
+        upperBoundComparisonTextValue
+    ; upperBoundComparisonTextIsCanonical =
         refl
-    ; q2RouteControlText =
-        q2RouteControlTextValue
-    ; q2RouteControlTextIsCanonical =
+    ; comparisonRouteControlText =
+        comparisonRouteControlTextValue
+    ; comparisonRouteControlTextIsCanonical =
         refl
-    ; theoremGQ2GD1RouteText =
-        theoremGQ2GD1RouteTextValue
-    ; theoremGQ2GD1RouteTextIsCanonical =
+    ; theoremGOmegaComparisonRouteText =
+        theoremGOmegaComparisonRouteTextValue
+    ; theoremGOmegaComparisonRouteTextIsCanonical =
         refl
-    ; lambda2ZeroNumeratorVanishes =
+    ; stretchingCancellationExact =
         true
-    ; lambda2ZeroNumeratorVanishesIsTrue =
+    ; stretchingCancellationExactIsTrue =
         refl
-    ; q2CancellationRouteRecorded =
+    ; omegaSourceLedgerRecorded =
         true
-    ; q2CancellationRouteRecordedIsTrue =
+    ; omegaSourceLedgerRecordedIsTrue =
         refl
-    ; q2UpperBoundFromCancellationRouteVisible =
+    ; upperBoundComparisonVisible =
         true
-    ; q2UpperBoundFromCancellationRouteVisibleIsTrue =
+    ; upperBoundComparisonVisibleIsTrue =
         refl
-    ; q2UniformBoundFromCancellationDischarged =
+    ; upperBoundComparisonDischarged =
         false
-    ; q2UniformBoundFromCancellationDischargedIsFalse =
+    ; upperBoundComparisonDischargedIsFalse =
         refl
-    ; theoremGQ2GD1ContradictionChannelVisible =
+    ; theoremGOmegaComparisonContradictionChannelVisible =
         true
-    ; theoremGQ2GD1ContradictionChannelVisibleIsTrue =
+    ; theoremGOmegaComparisonContradictionChannelVisibleIsTrue =
         refl
-    ; rkTermLowerOrderH5 =
+    ; omegaSourcePiecesRecordedBool =
         true
-    ; rkTermLowerOrderH5IsTrue =
+    ; omegaSourcePiecesRecordedBoolIsTrue =
         refl
-    ; f123DampingExactIneq =
+    ; exponentComparisonRecorded =
         true
-    ; f123DampingExactIneqIsTrue =
+    ; exponentComparisonRecordedIsTrue =
         refl
-    ; delta1Positive =
+    ; delta1GreaterThanOneNeeded =
         true
-    ; delta1PositiveIsTrue =
+    ; delta1GreaterThanOneNeededIsTrue =
         refl
     ; hDelta1 =
         true
@@ -514,9 +501,9 @@ canonicalNSTheoremGCancellationUpgradeReceipt =
         false
     ; clayPromotionIsFalse =
         refl
-    ; empiricalF123Support =
+    ; analyticExponentComparisonSupport =
         true
-    ; empiricalF123SupportIsTrue =
+    ; analyticExponentComparisonSupportIsTrue =
         refl
     ; receiptBoundary =
         receiptBoundaryText
@@ -526,16 +513,16 @@ canonicalNSTheoremGCancellationUpgradeReceipt =
 
 open NSTheoremGCancellationUpgradeReceipt public
 
-canonicalNSTheoremGCancellationUpgradeQ2CancellationRouteRecorded :
-  q2CancellationRouteRecorded
+canonicalNSTheoremGCancellationUpgradeOmegaSourceLedgerRecorded :
+  omegaSourceLedgerRecorded
     canonicalNSTheoremGCancellationUpgradeReceipt
   ≡ true
-canonicalNSTheoremGCancellationUpgradeQ2CancellationRouteRecorded =
+canonicalNSTheoremGCancellationUpgradeOmegaSourceLedgerRecorded =
   refl
 
-canonicalNSTheoremGCancellationUpgradeQ2UniformBoundFromCancellationDischarged :
-  q2UniformBoundFromCancellationDischarged
+canonicalNSTheoremGCancellationUpgradeUpperBoundComparisonDischarged :
+  upperBoundComparisonDischarged
     canonicalNSTheoremGCancellationUpgradeReceipt
   ≡ false
-canonicalNSTheoremGCancellationUpgradeQ2UniformBoundFromCancellationDischarged =
+canonicalNSTheoremGCancellationUpgradeUpperBoundComparisonDischarged =
   refl
