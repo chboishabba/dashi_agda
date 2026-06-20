@@ -1,5 +1,24 @@
 # FOR TODO GO TO '# TODO'
 
+Current odd-lane / topology intake note for `2026-06-20`:
+- Candidate-only odd/topology tranche is recorded. Artifacts:
+  `DASHI/Core/SuperPayloadReadingBoundary.agda`,
+  `DASHI/Core/OddGrassmannCoefficientGate.agda`,
+  `DASHI/Core/OddBerezinTopCoefficientBoundary.agda`,
+  `DASHI/Geometry/MobiusOrientationGate.agda`,
+  `DASHI/Geometry/KleinClosureReceipt.agda`,
+  `DASHI/Promotion/KleinHodgeDualityBoundary.agda`,
+  `DASHI/Foundations/Base369MobiusTransport.agda`, and
+  `DASHI/Foundations/Base369MobiusTransportRegression.agda`. The route now
+  records `R^{p|q}` as even carrier body plus odd nilpotent witness lanes,
+  the one-generator odd coefficient gate `∂_θ = ∫ dθ = [θ]`, the `q > 1`
+  ordered top-coefficient/sign boundary, the Möbius one-loop orientation
+  flip, the Klein non-orientable closure surface, the Hodge
+  metric-orientation obstruction with double-cover/twisted repair
+  candidates, and the Base369 hex transport `k ↦ k + 3 mod 6`. This remains
+  fail-closed and non-promoting: supergeometry, topology, and Hodge-theory
+  authority are not promoted.
+
 Current NS Clay action note for `2026-06-20`:
 - Sharp conditional TheoremG exponent-comparison tranche is recorded.
   Artifacts:

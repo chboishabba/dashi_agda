@@ -157,6 +157,8 @@ import DASHI.Core.GenericReceipt
 import DASHI.Core.HiddenLiftProjectionCore
 import DASHI.Core.KernelMonoid
 import DASHI.Core.LensKernel
+import DASHI.Core.OddBerezinTopCoefficientBoundary
+import DASHI.Core.OddGrassmannCoefficientGate
 import DASHI.Core.OperatorShapeNonAuthorityCore
 import DASHI.Core.OperatorTypes
 import DASHI.Core.EvenLaneOperatorCore
@@ -169,6 +171,7 @@ import DASHI.Core.RelationAlgebraCore
 import DASHI.Core.SourceProcessEvidenceCore
 import DASHI.Core.SourceProcessEvidenceLawCore
 import DASHI.Core.StatisticalEvidenceCore
+import DASHI.Core.SuperPayloadReadingBoundary
 import DASHI.Core.UniversalOperatorBasis
 import DASHI.Crypto.HashCandidateBoundary
 import DASHI.Crypto.RSAArithmeticCore
@@ -216,6 +219,8 @@ import DASHI.Examples.ConcreteInstances
 import DASHI.Foundations.Base369FiniteRingLaws
 import DASHI.Foundations.Base369FiniteRingRegression
 import DASHI.Foundations.Base369HexTruthRing
+import DASHI.Foundations.Base369MobiusTransport
+import DASHI.Foundations.Base369MobiusTransportRegression
 import DASHI.Foundations.Base369Nat
 import DASHI.Foundations.Base369NonaryTruthRing
 import DASHI.Foundations.Base369NumeralOntologyBoundary
@@ -237,6 +242,8 @@ import DASHI.Foundations.SurrealCompactificationQQCarrier
 import DASHI.Foundations.SurrealCompactificationRationalBridge
 import DASHI.Foundations.SurrealCompactificationTailBoundBridge
 import DASHI.Geometry.DifferentialGeometryParity
+import DASHI.Geometry.KleinClosureReceipt
+import DASHI.Geometry.MobiusOrientationGate
 import DASHI.Interop.ITIRJoinBridge
 import DASHI.Interop.AggregateBidirectionalTranslationDischarge
 import DASHI.Interop.AvianCompassPNFSemanticBridge
@@ -258,6 +265,7 @@ import DASHI.Interop.SeaMeInItROMSeamAtlas
 import DASHI.Interop.SeaMeInItSeamDerivationFormalism
 import DASHI.Promotion.BiologyFiniteScopeClarification
 import DASHI.Promotion.ChemistryAuthorityBinding
+import DASHI.Promotion.KleinHodgeDualityBoundary
 import DASHI.Promotion.ChemistryFiniteComputationSurface
 import DASHI.Promotion.ChemistryFiniteRuleTargets
 import DASHI.Promotion.Cs133NumericAuthorityPayloadRequest
@@ -311,6 +319,7 @@ import DASHI.Physics.Closure.NSGD1LayerCZIntegratedControlReceipt
 import DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt
 import DASHI.Physics.Closure.NSLayerKornLiteratureClosureReceipt
 import DASHI.Physics.Closure.NSPressurePoissonBypassReceipt
+import DASHI.Physics.Closure.NSQCriterionZeroMeanIdentityReceipt
 import DASHI.Physics.Closure.NSPressurePoissonConventionNormalizationReceipt
 import DASHI.Physics.Closure.NSQ3ExtensionalThresholdReceipt
 import DASHI.Physics.Closure.NSGeometricConcentrationCarrierReceipt
@@ -2840,3 +2849,4 @@ import Verification.Prelude
 import Verification.SourceHash
 import Verification.ZK
 import Z6_RegularInverse
+open import DASHI.Physics.Closure.NSTypeIHAreaUniformizationReceipt

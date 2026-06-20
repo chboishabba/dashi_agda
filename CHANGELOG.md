@@ -6,6 +6,26 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Odd-lane / Möbius / Klein / Hodge / Base369 intake tranche for
+  `2026-06-20`: adds `DASHI.Core.SuperPayloadReadingBoundary`,
+  `DASHI.Core.OddGrassmannCoefficientGate`,
+  `DASHI.Core.OddBerezinTopCoefficientBoundary`,
+  `DASHI.Geometry.MobiusOrientationGate`,
+  `DASHI.Geometry.KleinClosureReceipt`,
+  `DASHI.Promotion.KleinHodgeDualityBoundary`,
+  `DASHI.Foundations.Base369MobiusTransport`, and
+  `DASHI.Foundations.Base369MobiusTransportRegression`, wired through
+  `DASHI.Everything`. The tranche records `R^{p|q}` as even carrier body plus
+  odd nilpotent witness lanes, the one-generator collapse
+  `∂_θ = ∫ dθ = [θ]` at the coefficient-extraction surface, the `q > 1`
+  ordered top-coefficient/sign-convention boundary, the Möbius one-loop
+  orientation flip and Klein two-band non-orientable closure, the
+  metric-plus-orientation gate for ordinary global Hodge duality with torus
+  double-cover / twisted repair candidates, and the Base369 mod-6 transport
+  `k ↦ k + 3` that preserves triadic phase while flipping polarity. This is
+  candidate-only and fail-closed: semantic, proof, measure, and promotion
+  authority remain false.
+
 - Sharp conditional TheoremG exponent-comparison tranche for `2026-06-20`:
   updates
   `DASHI.Physics.Closure.NSConditionalQGronwallTheoremGReceipt`,
