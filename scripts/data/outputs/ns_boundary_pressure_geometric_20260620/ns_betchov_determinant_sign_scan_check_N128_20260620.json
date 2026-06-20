@@ -5,7 +5,7 @@
   "L": "Load scan JSON, validate telemetry arithmetic and frame/aggregate invariants, then emit checker JSON.",
   "O": "Validate the corrected Betchov determinant sign scan contract.",
   "P": "FAIL_CLOSED_BETCHOV_DETERMINANT_SIGN_SCAN_CHECK",
-  "R": "Require contract keys, authority invariants, per-frame sign counts/fractions, mismatch accounting, and aggregate consistency.",
+  "R": "Require contract keys, authority invariants, per-frame sign counts/fractions, aggregate consistency, and sign-rule success versus mismatch summary.",
   "S": "Fail-closed checker: malformed schema, authority drift, count/fraction mismatches, or aggregate inconsistencies produce error status.",
   "changed_files": [
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_betchov_determinant_sign_scan_N128_20260620.json",
@@ -19,13 +19,13 @@
     "L": "Load scan JSON, validate telemetry arithmetic and frame/aggregate invariants, then emit checker JSON.",
     "O": "Validate the corrected Betchov determinant sign scan contract.",
     "P": "FAIL_CLOSED_BETCHOV_DETERMINANT_SIGN_SCAN_CHECK",
-    "R": "Require contract keys, authority invariants, per-frame sign counts/fractions, mismatch accounting, and aggregate consistency.",
+    "R": "Require contract keys, authority invariants, per-frame sign counts/fractions, aggregate consistency, and sign-rule success versus mismatch summary.",
     "S": "Fail-closed checker: malformed schema, authority drift, count/fraction mismatches, or aggregate inconsistencies produce error status."
   },
   "details": {
     "ok_rows": 13,
     "row_count": 13,
-    "status": "partial",
+    "status": "ok",
     "status_counts": {
       "error_frames": 0,
       "missing_frames": 0,

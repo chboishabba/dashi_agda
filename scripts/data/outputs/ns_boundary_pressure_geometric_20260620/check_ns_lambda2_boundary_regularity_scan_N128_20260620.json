@@ -1,0 +1,46 @@
+{
+  "C": "scripts/check_ns_lambda2_boundary_regularity_scan.py",
+  "F": "Mismatches become hard errors; degraded rows are expected when metadata fallback is triggered.",
+  "G": "This is an empirical telemetry checker; no mathematical claim is promoted.",
+  "L": "Load scan JSON, validate metadata/rows/summary, and emit checker status JSON.",
+  "O": "Validate the N128 lambda2-boundary regularity proxy scan contract.",
+  "P": "FAIL_CLOSED_LAMBDA2_BOUNDARY_REGULARITY_SCAN_CHECK",
+  "R": "Check control-card fields, authority booleans, per-frame row arithmetic, and aggregate reconciliation.",
+  "S": "Fail-closed schema and consistency checks: malformed row shape, status/count/fraction mismatches, or aggregate mismatch are errors.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_lambda2_boundary_regularity_scan_N128_20260620.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/check_ns_lambda2_boundary_regularity_scan_N128_20260620.json"
+  ],
+  "contract": "check_ns_lambda2_boundary_regularity_scan",
+  "control_card": {
+    "C": "scripts/check_ns_lambda2_boundary_regularity_scan.py",
+    "F": "Mismatches become hard errors; degraded rows are expected when metadata fallback is triggered.",
+    "G": "This is an empirical telemetry checker; no mathematical claim is promoted.",
+    "L": "Load scan JSON, validate metadata/rows/summary, and emit checker status JSON.",
+    "O": "Validate the N128 lambda2-boundary regularity proxy scan contract.",
+    "P": "FAIL_CLOSED_LAMBDA2_BOUNDARY_REGULARITY_SCAN_CHECK",
+    "R": "Check control-card fields, authority booleans, per-frame row arithmetic, and aggregate reconciliation.",
+    "S": "Fail-closed schema and consistency checks: malformed row shape, status/count/fraction mismatches, or aggregate mismatch are errors."
+  },
+  "details": {
+    "error_count": 0,
+    "row_count": 13,
+    "status_counts": {
+      "degraded": 0,
+      "error": 0,
+      "missing_required_field": 0,
+      "ok": 13
+    },
+    "threshold_count": 4,
+    "warn_count": 0
+  },
+  "errors": [],
+  "input": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/check_ns_lambda2_boundary_regularity_scan_N128_20260620.json",
+    "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_lambda2_boundary_regularity_scan_N128_20260620.json"
+  },
+  "input_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_lambda2_boundary_regularity_scan_N128_20260620.json",
+  "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_lambda2_boundary_regularity_scan_N128_20260620.json",
+  "status": "ok",
+  "warnings": []
+}

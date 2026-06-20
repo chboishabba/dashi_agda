@@ -1,0 +1,39 @@
+{
+  "C": "scripts/check_ns_betchov_identity_scan.py",
+  "F": "Partial rows, missing quantities, and finite-cell degradation are accepted only when explicitly declared.",
+  "G": "This checker only validates empirical telemetry and does not promote theorem/Clay claims.",
+  "L": "Read scan JSON, validate control card/authority, verify row-level and aggregate-level invariants.",
+  "O": "Validate the Betchov identity scan contract.",
+  "P": "FAIL_CLOSED_BETCHOV_IDENTITY_SCAN_CHECK",
+  "R": "Fail-closed check of frame payload, aggregate bookkeeping, and authority fields for raw-archive reconstruction outputs.",
+  "S": "Schema violations, non-finite non-optional quantities, residual mismatches, or aggregate-count inconsistency are hard errors.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_betchov_identity_scan_N128_20260620.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/check_ns_betchov_identity_scan_N128_20260620.json"
+  ],
+  "contract": "check_ns_betchov_identity_scan",
+  "control_card": {
+    "C": "scripts/check_ns_betchov_identity_scan.py",
+    "F": "Partial rows, missing quantities, and finite-cell degradation are accepted only when explicitly declared.",
+    "G": "This checker only validates empirical telemetry and does not promote theorem/Clay claims.",
+    "L": "Read scan JSON, validate control card/authority, verify row-level and aggregate-level invariants.",
+    "O": "Validate the Betchov identity scan contract.",
+    "P": "FAIL_CLOSED_BETCHOV_IDENTITY_SCAN_CHECK",
+    "R": "Fail-closed check of frame payload, aggregate bookkeeping, and authority fields for raw-archive reconstruction outputs.",
+    "S": "Schema violations, non-finite non-optional quantities, residual mismatches, or aggregate-count inconsistency are hard errors."
+  },
+  "details": {
+    "error_count": 0,
+    "row_count": 13,
+    "status": "ok",
+    "warn_count": 0
+  },
+  "errors": [],
+  "input": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/check_ns_betchov_identity_scan_N128_20260620.json",
+    "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_betchov_identity_scan_N128_20260620.json"
+  },
+  "input_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_betchov_identity_scan_N128_20260620.json",
+  "status": "ok",
+  "warnings": []
+}
