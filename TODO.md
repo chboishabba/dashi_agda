@@ -18,6 +18,20 @@ Current odd-lane / topology intake note for `2026-06-20`:
   candidates, and the Base369 hex transport `k ↦ k + 3 mod 6`. This remains
   fail-closed and non-promoting: supergeometry, topology, and Hodge-theory
   authority are not promoted.
+- Typed SSP/Base369 follow-on tranche is recorded. Artifacts:
+  `DASHI/Foundations/SSPTritCarrier.agda`,
+  `DASHI/Foundations/FifteenSSPSurface.agda`,
+  `DASHI/Core/SuperSSPOddPayload.agda`,
+  `DASHI/Core/OddSSPCoefficientGate.agda`,
+  `DASHI/Foundations/HexTruthPolarityFactor.agda`,
+  `DASHI/Foundations/StageAtlasZeroToEleven.agda`, and
+  `DASHI/Foundations/NumberRoleBoundary.agda`. The route now types the odd
+  residual lane over `15SSP[-1,0,1]`, records `oddCoeff = derivative =
+  Berezin integral` as a typed 15SSP surface projection, factors `HexTruth`
+  as `TriTruth × Polarity`, records the `0..11` spiral atlas with
+  residue/revolution separation, and forbids automatic promotion between
+  algebra-carrier, factor-coordinate, phase-topological, quotient-transport,
+  and narrative-mnemonic number roles.
 
 Current NS Clay action note for `2026-06-20`:
 - Sharp conditional TheoremG exponent-comparison tranche is recorded.

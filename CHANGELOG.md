@@ -6,6 +6,24 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Typed SSP/Base369 odd-lane spine tranche for `2026-06-20`: adds
+  `DASHI.Foundations.SSPTritCarrier`,
+  `DASHI.Foundations.FifteenSSPSurface`,
+  `DASHI.Core.SuperSSPOddPayload`,
+  `DASHI.Core.OddSSPCoefficientGate`,
+  `DASHI.Foundations.HexTruthPolarityFactor`,
+  `DASHI.Foundations.StageAtlasZeroToEleven`, and
+  `DASHI.Foundations.NumberRoleBoundary`, wired through
+  `DASHI.Everything`. The tranche replaces the loose odd-lane coefficient
+  story with a typed spine: `SSPTrit = {-1,0,+1}`, `15SSP[-1,0,1]` as the
+  15-lane residual surface, `SuperSSP` as `A + B theta` with typed even body
+  and odd residue, the one-generator collapse
+  `oddCoeff = oddDerivative = berezinIntegral`, `HexTruth ≅ TriTruth ×
+  Polarity`, a spiral-aware `0..11` stage atlas, and an explicit number-role
+  boundary separating algebra, coordinate, phase, transport, and mnemonic
+  readings. This remains candidate-only and fail-closed: no supergeometry,
+  topology, ontology, or Clay authority is promoted.
+
 - Odd-lane / Möbius / Klein / Hodge / Base369 intake tranche for
   `2026-06-20`: adds `DASHI.Core.SuperPayloadReadingBoundary`,
   `DASHI.Core.OddGrassmannCoefficientGate`,
