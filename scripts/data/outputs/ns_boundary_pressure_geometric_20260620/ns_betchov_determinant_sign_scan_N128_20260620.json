@@ -1,0 +1,739 @@
+{
+  "C": "scripts/ns_betchov_determinant_sign_scan.py",
+  "F": "If lambda2 or det(S) are unavailable in derived data and cannot be reconstructed from raw velocity, output degrades with explicit missing status/warnings.",
+  "G": "No theorem, Clay, or promotion authority is inferred by this script.",
+  "L": "Load derived NPZ frames (or a single archive), optional raw archive reconstruction, then emit per-frame and aggregate stats.",
+  "O": "Measure the corrected Betchov determinant gate on the available N128 archive.",
+  "P": "FAIL_CLOSED_BETCHOV_DETERMINANT_SIGN_SCAN",
+  "R": "Per-frame and aggregate counts/fractions for sign bins of lambda2 and det(S), mismatch counts, and minima/maxima.",
+  "S": "Fail-closed empirical scan: if required inputs are unavailable the scan is marked partial/missing, never promoting conclusions.",
+  "aggregate": {
+    "error_frames": 0,
+    "global_cell_count": 27262976,
+    "global_det_max": 97666.70240809806,
+    "global_det_max_frame": {
+      "frame": 0,
+      "index": [
+        54,
+        36,
+        94
+      ],
+      "snapshot_index": 0
+    },
+    "global_det_min": -96363.481856576,
+    "global_det_min_frame": {
+      "frame": 0,
+      "index": [
+        4,
+        84,
+        49
+      ],
+      "snapshot_index": 0
+    },
+    "global_det_negative_count": 13647239,
+    "global_det_negative_fraction": 0.5005777432368352,
+    "global_det_positive_count": 13615737,
+    "global_det_positive_fraction": 0.4994222567631648,
+    "global_det_zero_count": 0,
+    "global_det_zero_fraction": 0.0,
+    "global_lambda2_max": 44.716208267621624,
+    "global_lambda2_max_frame": {
+      "frame": 0,
+      "index": [
+        27,
+        19,
+        64
+      ],
+      "snapshot_index": 0
+    },
+    "global_lambda2_min": -47.33419584482424,
+    "global_lambda2_min_frame": {
+      "frame": 0,
+      "index": [
+        124,
+        126,
+        79
+      ],
+      "snapshot_index": 0
+    },
+    "global_lambda2_negative_count": 13582898,
+    "global_lambda2_negative_fraction": 0.49821772942176235,
+    "global_lambda2_positive_count": 13680078,
+    "global_lambda2_positive_fraction": 0.5017822705782377,
+    "global_lambda2_zero_count": 0,
+    "global_lambda2_zero_fraction": 0.0,
+    "global_mismatch_count": 871735,
+    "global_mismatch_fraction": 0.031975049238938555,
+    "global_valid_cell_count": 27262976,
+    "missing_frames": 0,
+    "ok_frames": 13,
+    "partial_frames": 0,
+    "processed_frames": 13
+  },
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_betchov_determinant_sign_scan_N128_20260620.json"
+  ],
+  "contract": "ns_betchov_determinant_sign_scan",
+  "errors": [],
+  "frames": [
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        54,
+        36,
+        94
+      ],
+      "det_argmin": [
+        4,
+        84,
+        49
+      ],
+      "det_max": 97666.70240809806,
+      "det_min": -96363.481856576,
+      "det_negative_count": 1049292,
+      "det_negative_fraction": 0.5003414154052734,
+      "det_positive_count": 1047860,
+      "det_positive_fraction": 0.49965858459472656,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=0",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 0,
+      "lambda2_argmax": [
+        27,
+        19,
+        64
+      ],
+      "lambda2_argmin": [
+        124,
+        126,
+        79
+      ],
+      "lambda2_max": 44.716208267621624,
+      "lambda2_min": -47.33419584482424,
+      "lambda2_negative_count": 1047671,
+      "lambda2_negative_fraction": 0.49956846237182617,
+      "lambda2_positive_count": 1049481,
+      "lambda2_positive_fraction": 0.5004315376281738,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=0",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 66317,
+      "mismatch_fraction": 0.03162240982055664,
+      "snapshot_index": 0,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        54,
+        36,
+        94
+      ],
+      "det_argmin": [
+        4,
+        84,
+        49
+      ],
+      "det_max": 77949.71958629649,
+      "det_min": -95387.80893275898,
+      "det_negative_count": 1049425,
+      "det_negative_fraction": 0.5004048347473145,
+      "det_positive_count": 1047727,
+      "det_positive_fraction": 0.49959516525268555,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=1",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 1,
+      "lambda2_argmax": [
+        27,
+        19,
+        64
+      ],
+      "lambda2_argmin": [
+        124,
+        126,
+        79
+      ],
+      "lambda2_max": 43.82603504211817,
+      "lambda2_min": -44.12527361006982,
+      "lambda2_negative_count": 1047192,
+      "lambda2_negative_fraction": 0.4993400573730469,
+      "lambda2_positive_count": 1049960,
+      "lambda2_positive_fraction": 0.5006599426269531,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=1",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 66545,
+      "mismatch_fraction": 0.03173112869262695,
+      "snapshot_index": 1,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        20,
+        81,
+        115
+      ],
+      "det_argmin": [
+        4,
+        84,
+        49
+      ],
+      "det_max": 70984.93977530862,
+      "det_min": -88834.64148679587,
+      "det_negative_count": 1050061,
+      "det_negative_fraction": 0.5007081031799316,
+      "det_positive_count": 1047091,
+      "det_positive_fraction": 0.49929189682006836,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=2",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 2,
+      "lambda2_argmax": [
+        13,
+        78,
+        123
+      ],
+      "lambda2_argmin": [
+        112,
+        15,
+        51
+      ],
+      "lambda2_max": 43.26667691407253,
+      "lambda2_min": -42.47546844643425,
+      "lambda2_negative_count": 1046105,
+      "lambda2_negative_fraction": 0.4988217353820801,
+      "lambda2_positive_count": 1051047,
+      "lambda2_positive_fraction": 0.5011782646179199,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=2",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 66548,
+      "mismatch_fraction": 0.03173255920410156,
+      "snapshot_index": 2,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        20,
+        81,
+        115
+      ],
+      "det_argmin": [
+        106,
+        100,
+        66
+      ],
+      "det_max": 68826.08331659166,
+      "det_min": -87523.53917951093,
+      "det_negative_count": 1049853,
+      "det_negative_fraction": 0.5006089210510254,
+      "det_positive_count": 1047299,
+      "det_positive_fraction": 0.4993910789489746,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=3",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 3,
+      "lambda2_argmax": [
+        13,
+        78,
+        123
+      ],
+      "lambda2_argmin": [
+        112,
+        15,
+        51
+      ],
+      "lambda2_max": 41.63410106415674,
+      "lambda2_min": -43.0002890607447,
+      "lambda2_negative_count": 1045630,
+      "lambda2_negative_fraction": 0.4985952377319336,
+      "lambda2_positive_count": 1051522,
+      "lambda2_positive_fraction": 0.5014047622680664,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=3",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 66695,
+      "mismatch_fraction": 0.03180265426635742,
+      "snapshot_index": 3,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        110,
+        15,
+        112
+      ],
+      "det_argmin": [
+        106,
+        100,
+        66
+      ],
+      "det_max": 70495.22311520389,
+      "det_min": -81596.21143864279,
+      "det_negative_count": 1049954,
+      "det_negative_fraction": 0.5006570816040039,
+      "det_positive_count": 1047198,
+      "det_positive_fraction": 0.4993429183959961,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=4",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 4,
+      "lambda2_argmax": [
+        27,
+        18,
+        74
+      ],
+      "lambda2_argmin": [
+        112,
+        15,
+        51
+      ],
+      "lambda2_max": 40.56303027985062,
+      "lambda2_min": -42.40983360389445,
+      "lambda2_negative_count": 1045046,
+      "lambda2_negative_fraction": 0.49831676483154297,
+      "lambda2_positive_count": 1052106,
+      "lambda2_positive_fraction": 0.501683235168457,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=4",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 66864,
+      "mismatch_fraction": 0.03188323974609375,
+      "snapshot_index": 4,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        110,
+        15,
+        112
+      ],
+      "det_argmin": [
+        106,
+        100,
+        66
+      ],
+      "det_max": 68947.69489515436,
+      "det_min": -71876.4257749366,
+      "det_negative_count": 1049512,
+      "det_negative_fraction": 0.5004463195800781,
+      "det_positive_count": 1047640,
+      "det_positive_fraction": 0.4995536804199219,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=5",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 5,
+      "lambda2_argmax": [
+        27,
+        18,
+        74
+      ],
+      "lambda2_argmin": [
+        112,
+        15,
+        51
+      ],
+      "lambda2_max": 40.26007989702215,
+      "lambda2_min": -40.6645353613743,
+      "lambda2_negative_count": 1045142,
+      "lambda2_negative_fraction": 0.49836254119873047,
+      "lambda2_positive_count": 1052010,
+      "lambda2_positive_fraction": 0.5016374588012695,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=5",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 67020,
+      "mismatch_fraction": 0.03195762634277344,
+      "snapshot_index": 5,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        110,
+        15,
+        112
+      ],
+      "det_argmin": [
+        2,
+        31,
+        121
+      ],
+      "det_max": 64189.77431713819,
+      "det_min": -60360.52627525321,
+      "det_negative_count": 1048998,
+      "det_negative_fraction": 0.5002012252807617,
+      "det_positive_count": 1048154,
+      "det_positive_fraction": 0.4997987747192383,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=6",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 6,
+      "lambda2_argmax": [
+        120,
+        30,
+        67
+      ],
+      "lambda2_argmin": [
+        112,
+        15,
+        51
+      ],
+      "lambda2_max": 41.49818649143776,
+      "lambda2_min": -37.82388467278452,
+      "lambda2_negative_count": 1045233,
+      "lambda2_negative_fraction": 0.49840593338012695,
+      "lambda2_positive_count": 1051919,
+      "lambda2_positive_fraction": 0.501594066619873,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=6",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 67329,
+      "mismatch_fraction": 0.0321049690246582,
+      "snapshot_index": 6,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        34,
+        123,
+        125
+      ],
+      "det_argmin": [
+        2,
+        31,
+        121
+      ],
+      "det_max": 58092.88699173688,
+      "det_min": -57215.203714803334,
+      "det_negative_count": 1049224,
+      "det_negative_fraction": 0.5003089904785156,
+      "det_positive_count": 1047928,
+      "det_positive_fraction": 0.4996910095214844,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=7",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 7,
+      "lambda2_argmax": [
+        120,
+        30,
+        67
+      ],
+      "lambda2_argmin": [
+        15,
+        122,
+        121
+      ],
+      "lambda2_max": 43.63274238712461,
+      "lambda2_min": -37.4628199068174,
+      "lambda2_negative_count": 1044784,
+      "lambda2_negative_fraction": 0.49819183349609375,
+      "lambda2_positive_count": 1052368,
+      "lambda2_positive_fraction": 0.5018081665039062,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=7",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 67328,
+      "mismatch_fraction": 0.0321044921875,
+      "snapshot_index": 7,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        53,
+        59,
+        89
+      ],
+      "det_argmin": [
+        2,
+        31,
+        121
+      ],
+      "det_max": 68049.20107282109,
+      "det_min": -52055.581890094654,
+      "det_negative_count": 1049763,
+      "det_negative_fraction": 0.5005660057067871,
+      "det_positive_count": 1047389,
+      "det_positive_fraction": 0.4994339942932129,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=8",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 8,
+      "lambda2_argmax": [
+        120,
+        30,
+        67
+      ],
+      "lambda2_argmin": [
+        15,
+        122,
+        121
+      ],
+      "lambda2_max": 43.73014782458189,
+      "lambda2_min": -37.70328897671535,
+      "lambda2_negative_count": 1044135,
+      "lambda2_negative_fraction": 0.4978823661804199,
+      "lambda2_positive_count": 1053017,
+      "lambda2_positive_fraction": 0.5021176338195801,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=8",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 67540,
+      "mismatch_fraction": 0.03220558166503906,
+      "snapshot_index": 8,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        53,
+        59,
+        89
+      ],
+      "det_argmin": [
+        114,
+        16,
+        50
+      ],
+      "det_max": 72690.30854314502,
+      "det_min": -48922.863007110966,
+      "det_negative_count": 1050295,
+      "det_negative_fraction": 0.5008196830749512,
+      "det_positive_count": 1046857,
+      "det_positive_fraction": 0.49918031692504883,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=9",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 9,
+      "lambda2_argmax": [
+        120,
+        30,
+        67
+      ],
+      "lambda2_argmin": [
+        15,
+        122,
+        121
+      ],
+      "lambda2_max": 42.27166242264276,
+      "lambda2_min": -37.7041331632245,
+      "lambda2_negative_count": 1043490,
+      "lambda2_negative_fraction": 0.4975748062133789,
+      "lambda2_positive_count": 1053662,
+      "lambda2_positive_fraction": 0.5024251937866211,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=9",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 67481,
+      "mismatch_fraction": 0.03217744827270508,
+      "snapshot_index": 9,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        53,
+        59,
+        89
+      ],
+      "det_argmin": [
+        114,
+        16,
+        50
+      ],
+      "det_max": 70821.96084265265,
+      "det_min": -47252.44739054184,
+      "det_negative_count": 1050372,
+      "det_negative_fraction": 0.5008563995361328,
+      "det_positive_count": 1046780,
+      "det_positive_fraction": 0.4991436004638672,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=10",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 10,
+      "lambda2_argmax": [
+        120,
+        30,
+        67
+      ],
+      "lambda2_argmin": [
+        15,
+        122,
+        121
+      ],
+      "lambda2_max": 40.248464325243525,
+      "lambda2_min": -37.434557680547684,
+      "lambda2_negative_count": 1043024,
+      "lambda2_negative_fraction": 0.49735260009765625,
+      "lambda2_positive_count": 1054128,
+      "lambda2_positive_fraction": 0.5026473999023438,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=10",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 67466,
+      "mismatch_fraction": 0.03217029571533203,
+      "snapshot_index": 10,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        53,
+        59,
+        89
+      ],
+      "det_argmin": [
+        40,
+        119,
+        58
+      ],
+      "det_max": 64194.746784042145,
+      "det_min": -46950.7044965675,
+      "det_negative_count": 1050229,
+      "det_negative_fraction": 0.5007882118225098,
+      "det_positive_count": 1046923,
+      "det_positive_fraction": 0.49921178817749023,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=11",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 11,
+      "lambda2_argmax": [
+        120,
+        30,
+        67
+      ],
+      "lambda2_argmin": [
+        15,
+        122,
+        121
+      ],
+      "lambda2_max": 37.86659479447268,
+      "lambda2_min": -36.877249059975995,
+      "lambda2_negative_count": 1042866,
+      "lambda2_negative_fraction": 0.49727725982666016,
+      "lambda2_positive_count": 1054286,
+      "lambda2_positive_fraction": 0.5027227401733398,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=11",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 67239,
+      "mismatch_fraction": 0.03206205368041992,
+      "snapshot_index": 11,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    },
+    {
+      "cell_count": 2097152,
+      "det_argmax": [
+        53,
+        59,
+        89
+      ],
+      "det_argmin": [
+        40,
+        119,
+        58
+      ],
+      "det_max": 54973.78155703206,
+      "det_min": -48552.75031837929,
+      "det_negative_count": 1050261,
+      "det_negative_fraction": 0.5008034706115723,
+      "det_positive_count": 1046891,
+      "det_positive_fraction": 0.49919652938842773,
+      "det_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=12",
+      "det_zero_count": 0,
+      "det_zero_fraction": 0.0,
+      "expected_relation": "sign(lambda2) * sign(det(S)) <= 0",
+      "frame": 12,
+      "lambda2_argmax": [
+        120,
+        30,
+        67
+      ],
+      "lambda2_argmin": [
+        32,
+        1,
+        117
+      ],
+      "lambda2_max": 35.24142525143693,
+      "lambda2_min": -36.72055401466317,
+      "lambda2_negative_count": 1042580,
+      "lambda2_negative_fraction": 0.49714088439941406,
+      "lambda2_positive_count": 1054572,
+      "lambda2_positive_fraction": 0.5028591156005859,
+      "lambda2_source": "raw:ns3d_N128_seed0_gpu_pressure.npz#snapshot=12",
+      "lambda2_zero_count": 0,
+      "lambda2_zero_fraction": 0.0,
+      "mismatch_count": 67363,
+      "mismatch_fraction": 0.03212118148803711,
+      "snapshot_index": 12,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "valid_cell_count": 2097152
+    }
+  ],
+  "inputs": {
+    "derived_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+    "frame": null,
+    "frame_limit": null,
+    "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+    "raw_archive_auto_detected": false,
+    "zero_eps": 1e-12
+  },
+  "route_decision": "FAIL_CLOSED_BETCHOV_DETERMINANT_SIGN_SCAN",
+  "status": "partial",
+  "warnings": [
+    "velocity_snapshots detected as legacy (T,N,N,N,3)"
+  ]
+}

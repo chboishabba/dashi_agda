@@ -1,0 +1,44 @@
+{
+  "C": "scripts/check_ns_betchov_determinant_sign_scan.py",
+  "F": "Missing lambda2/det(S) data and partial/missing scan status are contract-valid when explicitly stated.",
+  "G": "This checker validates empirical telemetry only and does not promote any theorem or Clay claim.",
+  "L": "Load scan JSON, validate telemetry arithmetic and frame/aggregate invariants, then emit checker JSON.",
+  "O": "Validate the corrected Betchov determinant sign scan contract.",
+  "P": "FAIL_CLOSED_BETCHOV_DETERMINANT_SIGN_SCAN_CHECK",
+  "R": "Require contract keys, authority invariants, per-frame sign counts/fractions, mismatch accounting, and aggregate consistency.",
+  "S": "Fail-closed checker: malformed schema, authority drift, count/fraction mismatches, or aggregate inconsistencies produce error status.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_betchov_determinant_sign_scan_N128_20260620.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_betchov_determinant_sign_scan_check_N128_20260620.json"
+  ],
+  "contract": "check_ns_betchov_determinant_sign_scan",
+  "control_card": {
+    "C": "scripts/check_ns_betchov_determinant_sign_scan.py",
+    "F": "Missing lambda2/det(S) data and partial/missing scan status are contract-valid when explicitly stated.",
+    "G": "This checker validates empirical telemetry only and does not promote any theorem or Clay claim.",
+    "L": "Load scan JSON, validate telemetry arithmetic and frame/aggregate invariants, then emit checker JSON.",
+    "O": "Validate the corrected Betchov determinant sign scan contract.",
+    "P": "FAIL_CLOSED_BETCHOV_DETERMINANT_SIGN_SCAN_CHECK",
+    "R": "Require contract keys, authority invariants, per-frame sign counts/fractions, mismatch accounting, and aggregate consistency.",
+    "S": "Fail-closed checker: malformed schema, authority drift, count/fraction mismatches, or aggregate inconsistencies produce error status."
+  },
+  "details": {
+    "ok_rows": 13,
+    "row_count": 13,
+    "status": "partial",
+    "status_counts": {
+      "error_frames": 0,
+      "missing_frames": 0,
+      "ok_frames": 13,
+      "partial_frames": 0
+    }
+  },
+  "errors": [],
+  "input": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_betchov_determinant_sign_scan_check_N128_20260620.json",
+    "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_betchov_determinant_sign_scan_N128_20260620.json"
+  },
+  "input_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_betchov_determinant_sign_scan_N128_20260620.json",
+  "status": "ok",
+  "warnings": []
+}

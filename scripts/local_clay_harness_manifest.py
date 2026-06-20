@@ -407,6 +407,9 @@ def build_specs() -> list[HarnessSpec]:
     ns_calc7_reynolds_boundary_scan_out = (
         CHILD_OUT_DIR / "ns_calc7_reynolds_boundary_scan_smoke.json"
     )
+    ns_betchov_determinant_sign_scan_out = (
+        CHILD_OUT_DIR / "ns_betchov_determinant_sign_scan_smoke.json"
+    )
     ns_interior_vorticity_budget_out = (
         CHILD_OUT_DIR / "ns_interior_vorticity_budget_smoke.json"
     )
@@ -445,6 +448,9 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_calc7_reynolds_boundary_scan_check_out = (
         CHILD_OUT_DIR / "ns_calc7_reynolds_boundary_scan_check_smoke.json"
+    )
+    ns_betchov_determinant_sign_scan_check_out = (
+        CHILD_OUT_DIR / "ns_betchov_determinant_sign_scan_check_smoke.json"
     )
     ns_broad_tube_serrin_lift_gap_receipt = (
         REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinLiftGapReceipt.agda"
@@ -3671,6 +3677,56 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional Calc-7 Reynolds scan regression gate",
                 "validates non-promoting telemetry and explicit degradation bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_betchov_determinant_sign_scan",
+            path=script("ns_betchov_determinant_sign_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output",
+                str(ns_betchov_determinant_sign_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output",
+                str(ns_betchov_determinant_sign_scan_out),
+            ),
+            expected_json_path=ns_betchov_determinant_sign_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_betchov_determinant_sign_scan.py").exists()
+            else "ns_betchov_determinant_sign_scan script not found",
+            notes=(
+                "optional corrected determinant/lambda2 sign scan",
+                "empirical/non-promoting; checks the determinant gate on available N128 data",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_betchov_determinant_sign_scan",
+            path=script("check_ns_betchov_determinant_sign_scan.py"),
+            args=(
+                "--input-json",
+                str(ns_betchov_determinant_sign_scan_out),
+                "--output-json",
+                str(ns_betchov_determinant_sign_scan_check_out),
+            )
+            if ns_betchov_determinant_sign_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_betchov_determinant_sign_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_betchov_determinant_sign_scan_out.exists()
+            and script("check_ns_betchov_determinant_sign_scan.py").exists()
+            else (
+                "check_ns_betchov_determinant_sign_scan script not found"
+                if not script("check_ns_betchov_determinant_sign_scan.py").exists()
+                else "check_ns_betchov_determinant_sign_scan requires the determinant sign scan output"
+            ),
+            notes=(
+                "optional determinant sign scan regression gate",
+                "validates non-promoting determinant/lambda2 telemetry bookkeeping",
             ),
         ),
         HarnessSpec(

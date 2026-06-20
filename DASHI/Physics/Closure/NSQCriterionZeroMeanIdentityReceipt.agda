@@ -14,8 +14,10 @@ open import Data.List.Base using (List; _∷_; [])
 -- This module is a fail-closed ledger for the classical Q-criterion on T^3.
 -- It records the smooth incompressible carrier, the algebraic form of Qvel,
 -- the zero-mean integral identity, the nontriviality caveat, and the
--- immediate sign-change consequence for Omega_K = {Qvel > 0} and its
--- complement at nontrivial times.  No theorem, promotion, or Clay claim is
+-- immediate sign-change consequence for Omega_Q = {Qvel > 0} and its
+-- complement at nontrivial times.  The receipt also records explicitly that
+-- this does not control the strain-defined set Omega_K = {lambda2S < 0}.
+-- No theorem, promotion, or Clay claim is
 -- discharged here.
 
 listLength : {A : Set} → List A → Nat
@@ -35,7 +37,9 @@ data NSQCriterionZeroMeanIdentityStage : Set where
     NSQCriterionZeroMeanIdentityStage
   nontrivialityCaveatRecorded :
     NSQCriterionZeroMeanIdentityStage
-  signChangeConsequenceRecorded :
+  qCriterionSignChangeConsequenceRecorded :
+    NSQCriterionZeroMeanIdentityStage
+  noImplicationForStrainOmegaKRecorded :
     NSQCriterionZeroMeanIdentityStage
   theoremFlagKeptFalseRecorded :
     NSQCriterionZeroMeanIdentityStage
@@ -51,7 +55,8 @@ canonicalNSQCriterionZeroMeanIdentityStages =
   ∷ qvelFormulaRecorded
   ∷ zeroMeanIntegralRecorded
   ∷ nontrivialityCaveatRecorded
-  ∷ signChangeConsequenceRecorded
+  ∷ qCriterionSignChangeConsequenceRecorded
+  ∷ noImplicationForStrainOmegaKRecorded
   ∷ theoremFlagKeptFalseRecorded
   ∷ promotionFlagKeptFalseRecorded
   ∷ clayFlagKeptFalseRecorded
@@ -60,9 +65,11 @@ canonicalNSQCriterionZeroMeanIdentityStages =
 data NSQCriterionZeroMeanIdentityBlocker : Set where
   trivialFlowCaseStillOpen :
     NSQCriterionZeroMeanIdentityBlocker
-  measureTheoreticSignChangeNotProved :
+  measureTheoreticQSignChangeNotProved :
     NSQCriterionZeroMeanIdentityBlocker
   nontrivialTimesNeedSeparateJustification :
+    NSQCriterionZeroMeanIdentityBlocker
+  noStrainOmegaKControlFromQvelIdentity :
     NSQCriterionZeroMeanIdentityBlocker
   theoremPromotionGateKeptClosed :
     NSQCriterionZeroMeanIdentityBlocker
@@ -73,8 +80,9 @@ canonicalNSQCriterionZeroMeanIdentityBlockers :
   List NSQCriterionZeroMeanIdentityBlocker
 canonicalNSQCriterionZeroMeanIdentityBlockers =
   trivialFlowCaseStillOpen
-  ∷ measureTheoreticSignChangeNotProved
+  ∷ measureTheoreticQSignChangeNotProved
   ∷ nontrivialTimesNeedSeparateJustification
+  ∷ noStrainOmegaKControlFromQvelIdentity
   ∷ theoremPromotionGateKeptClosed
   ∷ clayGateKeptClosed
   ∷ []
@@ -104,7 +112,11 @@ canonicalNontrivialityCaveatStatement =
 
 canonicalSignChangeConsequenceStatement : String
 canonicalSignChangeConsequenceStatement =
-  "For nontrivial times, Omega_K = {Qvel > 0} and its complement both have positive measure."
+  "For nontrivial times, Omega_Q = {Qvel > 0} and its complement both have positive measure."
+
+canonicalNoStrainOmegaKImplicationStatement : String
+canonicalNoStrainOmegaKImplicationStatement =
+  "This Qvel sign-change statement does not imply positive measure for the strain-defined Omega_K = {lambda2S < 0}."
 
 canonicalBoundaryStatement : String
 canonicalBoundaryStatement =
@@ -124,7 +136,7 @@ canonicalCStatement =
 
 canonicalSStatement : String
 canonicalSStatement =
-  "S: For nontrivial times, Omega_K and its complement are both recorded as positive-measure sets."
+  "S: For nontrivial times, Omega_Q and its complement are both recorded as positive-measure sets, with no implication claimed for strain-defined Omega_K."
 
 canonicalLStatement : String
 canonicalLStatement =
@@ -136,7 +148,7 @@ canonicalPStatement =
 
 canonicalGStatement : String
 canonicalGStatement =
-  "G: Fail closed: the sign-change consequence is visible, but not promoted as a theorem here."
+  "G: Fail closed: the Qvel sign-change consequence is visible, but it is not promoted and it does not bridge to strain-defined Omega_K."
 
 canonicalFStatement : String
 canonicalFStatement =
@@ -149,7 +161,8 @@ canonicalReceiptBoundaryText =
   ∷ "Qvel is recorded in the strain/vorticity form 1/2(||Omega_ant||_F^2 - ||S||_F^2) = 1/4|omega|^2 - 1/2 tr(S^2)."
   ∷ "The zero-mean identity integral_{T^3} Qvel = 0 is recorded."
   ∷ "The nontriviality caveat is explicit."
-  ∷ "For nontrivial times, Omega_K = {Qvel > 0} and its complement are both recorded as positive-measure sets."
+  ∷ "For nontrivial times, Omega_Q = {Qvel > 0} and its complement are both recorded as positive-measure sets."
+  ∷ "No implication is claimed for the strain-defined set Omega_K = {lambda2S < 0}."
   ∷ "Theorem, promotion, and Clay flags remain false."
   ∷ []
 
@@ -202,6 +215,11 @@ record NSQCriterionZeroMeanIdentityReceipt : Setω where
       String
     signChangeConsequenceStatementIsCanonical :
       signChangeConsequenceStatement ≡ canonicalSignChangeConsequenceStatement
+
+    noStrainOmegaKImplicationStatement :
+      String
+    noStrainOmegaKImplicationStatementIsCanonical :
+      noStrainOmegaKImplicationStatement ≡ canonicalNoStrainOmegaKImplicationStatement
 
     theoremFlag :
       Bool
@@ -308,6 +326,10 @@ canonicalNSQCriterionZeroMeanIdentityReceipt =
     ; signChangeConsequenceStatement =
         canonicalSignChangeConsequenceStatement
     ; signChangeConsequenceStatementIsCanonical =
+        refl
+    ; noStrainOmegaKImplicationStatement =
+        canonicalNoStrainOmegaKImplicationStatement
+    ; noStrainOmegaKImplicationStatementIsCanonical =
         refl
     ; theoremFlag =
         false
