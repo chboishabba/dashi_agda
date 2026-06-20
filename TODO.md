@@ -34,6 +34,26 @@ Current odd-lane / topology intake note for `2026-06-20`:
   and narrative-mnemonic number roles.
 
 Current NS Clay action note for `2026-06-20`:
+- Strain-type-I / pressure-factor / alignment-obstruction tranche is now
+  landed. Artifacts:
+  `DASHI/Physics/Closure/NSPressurePoissonIdentityCorrectionReceipt.agda`,
+  `DASHI/Physics/Closure/NSCompressionDominatesExtensionReceipt.agda`,
+  `DASHI/Physics/Closure/NSStrainTypeIOmegaKPositiveReceipt.agda`,
+  `DASHI/Physics/Closure/NSBkTrajectoryMinimumReceipt.agda`,
+  `DASHI/Physics/Closure/NSVorticityAlignmentObstructionReceipt.agda`,
+  `scripts/ns_vorticity_alignment_obstruction_scan.py`, and
+  `scripts/check_ns_vorticity_alignment_obstruction_scan.py`. The route now
+  records the corrected pressure identity factor `-Δp = tr(S^2) - |ω|^2/2`
+  and `Δp = 2 Qvel`, the algebraic compression-dominates-extension lemma on
+  `{lambda2S >= 0}`, the corrected Level-2 lane
+  `Miller + strain-type-I => |Omega_K(t)| > 0`, the `B_k = 0` second-
+  variation minimum surface, and the alignment obstruction that isolates
+  misaligned vorticity in the compressive zone as the residual sign gate.
+  This remains fail-closed and non-promoting: the new receipts are route
+  ledgers only, the quantitative `delta1` and strict `H_B` gates stay open,
+  and the new alignment scan is empirical telemetry rather than theorem
+  closure.
+
 - Sharp conditional TheoremG exponent-comparison tranche is recorded.
   Artifacts:
   `DASHI/Physics/Closure/NSConditionalQGronwallTheoremGReceipt.agda`,
