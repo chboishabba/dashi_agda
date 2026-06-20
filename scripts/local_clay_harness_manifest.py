@@ -404,6 +404,9 @@ def build_specs() -> list[HarnessSpec]:
     ns_boundary_g12_bounds_out = (
         CHILD_OUT_DIR / "ns_boundary_g12_bounds_smoke.json"
     )
+    ns_calc7_reynolds_boundary_scan_out = (
+        CHILD_OUT_DIR / "ns_calc7_reynolds_boundary_scan_smoke.json"
+    )
     ns_interior_vorticity_budget_out = (
         CHILD_OUT_DIR / "ns_interior_vorticity_budget_smoke.json"
     )
@@ -439,6 +442,9 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_lambda2_carrier_route_summary_out = (
         CHILD_OUT_DIR / "ns_lambda2_carrier_route_summary_smoke.json"
+    )
+    ns_calc7_reynolds_boundary_scan_check_out = (
+        CHILD_OUT_DIR / "ns_calc7_reynolds_boundary_scan_check_smoke.json"
     )
     ns_broad_tube_serrin_lift_gap_receipt = (
         REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinLiftGapReceipt.agda"
@@ -3611,6 +3617,60 @@ def build_specs() -> list[HarnessSpec]:
                     if ns_broad_tube_serrin_lift_gap_receipt.exists()
                     else f"Agda receipt missing: {rel(ns_broad_tube_serrin_lift_gap_receipt)}"
                 ),
+            ),
+        ),
+        HarnessSpec(
+            name="ns_calc7_reynolds_boundary_scan",
+            path=script("ns_calc7_reynolds_boundary_scan.py"),
+            args=(
+                "--timeseries-json",
+                str(REPO_ROOT / "scripts/data/outputs/ns_boundary_carrier_timeseries_N128_20260618.json"),
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_calc7_reynolds_boundary_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--timeseries-json",
+                str(REPO_ROOT / "scripts/data/outputs/ns_boundary_carrier_timeseries_N128_20260618.json"),
+                "--output-json",
+                str(ns_calc7_reynolds_boundary_scan_out),
+            ),
+            expected_json_path=ns_calc7_reynolds_boundary_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_calc7_reynolds_boundary_scan.py").exists()
+            else "ns_calc7_reynolds_boundary_scan script not found",
+            notes=(
+                "optional Calc-7 Reynolds/delta1/Bk boundary scan",
+                "empirical/non-promoting; sharpens open delta1 and H_B gates only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_calc7_reynolds_boundary_scan",
+            path=script("check_ns_calc7_reynolds_boundary_scan.py"),
+            args=(
+                "--input-json",
+                str(ns_calc7_reynolds_boundary_scan_out),
+                "--output-json",
+                str(ns_calc7_reynolds_boundary_scan_check_out),
+            )
+            if ns_calc7_reynolds_boundary_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_calc7_reynolds_boundary_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_calc7_reynolds_boundary_scan_out.exists()
+            and script("check_ns_calc7_reynolds_boundary_scan.py").exists()
+            else (
+                "check_ns_calc7_reynolds_boundary_scan script not found"
+                if not script("check_ns_calc7_reynolds_boundary_scan.py").exists()
+                else "check_ns_calc7_reynolds_boundary_scan requires the Calc-7 Reynolds scan output"
+            ),
+            notes=(
+                "optional Calc-7 Reynolds scan regression gate",
+                "validates non-promoting telemetry and explicit degradation bookkeeping",
             ),
         ),
         HarnessSpec(

@@ -1,0 +1,32 @@
+{
+  "C": "scripts/check_ns_calc7_reynolds_boundary_scan.py",
+  "F": "Residual degradation is allowed only when Reynolds labels or raw-archive Bk rows are unavailable and the payload says so explicitly.",
+  "G": "This checker validates telemetry bookkeeping only and does not promote any theorem.",
+  "L": "read scan json -> validate summary and successful rows -> emit deterministic JSON",
+  "O": "Owner validates the Calc 7 Reynolds boundary scan contract.",
+  "P": "FAIL_CLOSED_CALC7_REYNOLDS_BOUNDARY_SCAN_CHECK",
+  "R": "Require authority/non-promotion integrity plus finite delta1 and boundary Bk minima on rows that claim successful boundary-Bk scans.",
+  "S": "Fail closed on malformed schema, authority drift, non-finite successful-row minima, or inconsistent Reynolds-availability flags.",
+  "contract": "check_ns_calc7_reynolds_boundary_scan",
+  "control_card": {
+    "C": "scripts/check_ns_calc7_reynolds_boundary_scan.py",
+    "F": "Residual degradation is allowed only when Reynolds labels or raw-archive Bk rows are unavailable and the payload says so explicitly.",
+    "G": "This checker validates telemetry bookkeeping only and does not promote any theorem.",
+    "L": "read scan json -> validate summary and successful rows -> emit deterministic JSON",
+    "O": "Owner validates the Calc 7 Reynolds boundary scan contract.",
+    "P": "FAIL_CLOSED_CALC7_REYNOLDS_BOUNDARY_SCAN_CHECK",
+    "R": "Require authority/non-promotion integrity plus finite delta1 and boundary Bk minima on rows that claim successful boundary-Bk scans.",
+    "S": "Fail closed on malformed schema, authority drift, non-finite successful-row minima, or inconsistent Reynolds-availability flags."
+  },
+  "details": {
+    "boundary_bk_min_global": null,
+    "delta1_min_global": 1.421602960869846,
+    "ok_boundary_bk_rows": 0,
+    "reynolds_label_available": false,
+    "row_count": 13,
+    "status": "degraded"
+  },
+  "errors": [],
+  "input_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_calc7_reynolds_boundary_scan_N128_20260620.json",
+  "status": "ok"
+}
