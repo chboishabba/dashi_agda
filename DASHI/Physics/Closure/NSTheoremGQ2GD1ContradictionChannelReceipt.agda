@@ -14,16 +14,17 @@ import DASHI.Physics.Closure.NSLayerL2VorticityFractionReceipt as LayerL2
 import DASHI.Physics.Closure.NSCollapseConditionalGronwallBridgeReceipt as Bridge
 
 ------------------------------------------------------------------------
--- Fail-closed composite socket for the Q2 / TheoremG / GD1 contradiction
--- channel.
+-- Fail-closed composite socket for the sharp conditional theorem channel.
 --
 -- This receipt records one conditional contradiction route:
---   finite-time blow-up ⇒ Q2/carrier divergence
---   GD1 + h_delta1 + TheoremG/cancellation ⇒ a uniform Q2 upper bound
---   both together would conflict with the BKM/Serrin blow-up boundary.
+--   H_B + H_area + H_g12++ + delta1 > 1
+--   surface/Q2 divergence ~ (T*-t)^(-2)
+--   TheoremG exponent comparison ~ (T*-t)^(-2/delta1)
+--   exponent mismatch closes the contradiction channel
 --
--- Route recording is explicit (`routeRecorded = true`) while all discharge and
--- promotion flags remain false.
+-- Route recording is explicit (`routeRecorded = true`) while all discharge
+-- and promotion flags remain false.  No Clay promotion is granted and no
+-- energy-only closure is claimed.
 
 listLength : ∀ {A : Set} → List A → Nat
 listLength [] = zero
@@ -44,11 +45,13 @@ data NSTheoremGQ2GD1ContradictionChannelStage : Set where
     NSTheoremGQ2GD1ContradictionChannelStage
   bridgeRouteImported :
     NSTheoremGQ2GD1ContradictionChannelStage
-  blowupImpliesQ2CarrierDivergenceRecorded :
+  sharpHypothesesRecorded :
     NSTheoremGQ2GD1ContradictionChannelStage
-  gd1TheoremGUniformUpperBoundRecorded :
+  surfaceQ2DivergenceRecorded :
     NSTheoremGQ2GD1ContradictionChannelStage
-  contradictionAgainstBKMRecorded :
+  theoremGExponentComparisonRecorded :
+    NSTheoremGQ2GD1ContradictionChannelStage
+  exponentMismatchContradictionRecorded :
     NSTheoremGQ2GD1ContradictionChannelStage
   conditionalRouteRecorded :
     NSTheoremGQ2GD1ContradictionChannelStage
@@ -63,25 +66,30 @@ canonicalNSTheoremGQ2GD1ContradictionChannelStages =
   ∷ theoremGUpgradeRouteImported
   ∷ layerL2RouteImported
   ∷ bridgeRouteImported
-  ∷ blowupImpliesQ2CarrierDivergenceRecorded
-  ∷ gd1TheoremGUniformUpperBoundRecorded
-  ∷ contradictionAgainstBKMRecorded
+  ∷ sharpHypothesesRecorded
+  ∷ surfaceQ2DivergenceRecorded
+  ∷ theoremGExponentComparisonRecorded
+  ∷ exponentMismatchContradictionRecorded
   ∷ conditionalRouteRecorded
   ∷ failClosedStateRecorded
   ∷ []
 
 data NSTheoremGQ2GD1ContradictionChannelBlocker : Set where
-  q2BlowupLowerImplicationUndischarged :
+  hBHypothesisUndischarged :
     NSTheoremGQ2GD1ContradictionChannelBlocker
-  q2UniformUpperBoundFromGD1Undischarged :
+  hAreaHypothesisUndischarged :
     NSTheoremGQ2GD1ContradictionChannelBlocker
-  gd1NoCollapseUndischarged :
+  hG12SharpHypothesisUndischarged :
     NSTheoremGQ2GD1ContradictionChannelBlocker
-  theoremGUniformizationUndischarged :
+  delta1GreaterThanOneUndischarged :
     NSTheoremGQ2GD1ContradictionChannelBlocker
-  serrinBKMBridgeUndischarged :
+  q2SurfaceDivergenceUndischarged :
     NSTheoremGQ2GD1ContradictionChannelBlocker
-  collapseImpossibleUndischarged :
+  theoremGExponentComparisonUndischarged :
+    NSTheoremGQ2GD1ContradictionChannelBlocker
+  exponentMismatchClosureUndischarged :
+    NSTheoremGQ2GD1ContradictionChannelBlocker
+  energyOnlyClosureRejected :
     NSTheoremGQ2GD1ContradictionChannelBlocker
   clayNavierStokesPromotedFalse :
     NSTheoremGQ2GD1ContradictionChannelBlocker
@@ -89,12 +97,14 @@ data NSTheoremGQ2GD1ContradictionChannelBlocker : Set where
 canonicalNSTheoremGQ2GD1ContradictionChannelBlockers :
   List NSTheoremGQ2GD1ContradictionChannelBlocker
 canonicalNSTheoremGQ2GD1ContradictionChannelBlockers =
-  q2BlowupLowerImplicationUndischarged
-  ∷ q2UniformUpperBoundFromGD1Undischarged
-  ∷ gd1NoCollapseUndischarged
-  ∷ theoremGUniformizationUndischarged
-  ∷ serrinBKMBridgeUndischarged
-  ∷ collapseImpossibleUndischarged
+  hBHypothesisUndischarged
+  ∷ hAreaHypothesisUndischarged
+  ∷ hG12SharpHypothesisUndischarged
+  ∷ delta1GreaterThanOneUndischarged
+  ∷ q2SurfaceDivergenceUndischarged
+  ∷ theoremGExponentComparisonUndischarged
+  ∷ exponentMismatchClosureUndischarged
+  ∷ energyOnlyClosureRejected
   ∷ clayNavierStokesPromotedFalse
   ∷ []
 
@@ -105,23 +115,30 @@ canonicalNSTheoremGQ2GD1ContradictionChannelDependencyNames =
   ∷ "DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt"
   ∷ "DASHI.Physics.Closure.NSLayerL2VorticityFractionReceipt"
   ∷ "DASHI.Physics.Closure.NSCollapseConditionalGronwallBridgeReceipt"
-  ∷ "finite-time blow-up ⇒ Q2/carrier divergence"
-  ∷ "GD1 + h_delta1 + TheoremG/cancellation ⇒ uniform Q2"
-  ∷ "TheoremG + Q2 + GD1 contradiction route is unresolved"
+  ∷ "(H_B)"
+  ∷ "(H_area)"
+  ∷ "(H_g12++)"
+  ∷ "delta1 > 1"
+  ∷ "surface/Q2 divergence at rate (T*-t)^(-2)"
+  ∷ "TheoremG exponent comparison at rate (T*-t)^(-2/delta1)"
+  ∷ "exponent mismatch contradiction"
+  ∷ "no energy-only closure"
   ∷ []
 
 contradictionRouteTextValue : String
 contradictionRouteTextValue =
-  "Fail-closed contradiction channel: finite-time blow-up would force Q2/carrier divergence, and GD1 + h_delta1 + TheoremG/cancellation would need to force a uniform Q2 bound; together these conditions are required to close against the BKM/Serrin blow-up route."
+  "Fail-closed contradiction channel: H_B, H_area, and H_g12++ with delta1 > 1 force the surface/Q2 lower bound at (T*-t)^(-2) and the TheoremG exponent-comparison upper bound at (T*-t)^(-2/delta1); the contradiction is the exponent mismatch, not a uniform energy-only bound."
 
 canonicalReceiptBoundary : List String
 canonicalReceiptBoundary =
-  "This channel records a composed route and is explicitly conditional."
-  ∷ "The finite-time blow-up to Q2/carrier divergence implication is carried as a blocker."
-  ∷ "The GD1 + TheoremG/cancellation to uniform Q2 implication is carried as a blocker."
-  ∷ "BKM/Serrin bridge integration is recorded but unresolved."
-  ∷ "Discharge flags for q2BlowupLowerImplication, q2UniformUpperBound, gd1NoCollapse, theoremGUniformization, and serrinBKMBridge are all false."
-  ∷ "collapseImpossible and clayNavierStokesPromoted are explicitly false."
+  "This channel records the sharp conditional theorem route and is explicitly conditional."
+  ∷ "The H_B, H_area, and H_g12++ hypotheses are carried as blockers."
+  ∷ "The delta1 > 1 gate is carried as a blocker."
+  ∷ "The surface/Q2 divergence lower bound at (T*-t)^(-2) is recorded and remains open."
+  ∷ "TheoremG exponent comparison at (T*-t)^(-2/delta1) is recorded and remains open."
+  ∷ "Exponent mismatch is the recorded contradiction shape, not a uniform energy-only closure."
+  ∷ "Discharge flags for q2SurfaceDivergence, theoremGExponentComparison, exponentMismatchClosure, and clayNavierStokesPromoted are all false."
+  ∷ "collapseImpossible is explicitly false."
   ∷ []
 
 record NSTheoremGQ2GD1ContradictionChannelReceipt : Setω where
@@ -184,30 +201,55 @@ record NSTheoremGQ2GD1ContradictionChannelReceipt : Setω where
     contradictionRouteTextIsCanonical :
       contradictionRouteText ≡ contradictionRouteTextValue
 
-    q2BlowupLowerImplicationDischarged :
+    hBRecorded :
       Bool
-    q2BlowupLowerImplicationDischargedIsFalse :
-      q2BlowupLowerImplicationDischarged ≡ false
+    hBRecordedIsTrue :
+      hBRecorded ≡ true
 
-    q2UniformUpperBoundDischarged :
+    hAreaRecorded :
       Bool
-    q2UniformUpperBoundDischargedIsFalse :
-      q2UniformUpperBoundDischarged ≡ false
+    hAreaRecordedIsTrue :
+      hAreaRecorded ≡ true
 
-    gd1NoCollapseDischarged :
+    hG12SharpRecorded :
       Bool
-    gd1NoCollapseDischargedIsFalse :
-      gd1NoCollapseDischarged ≡ false
+    hG12SharpRecordedIsTrue :
+      hG12SharpRecorded ≡ true
 
-    theoremGUniformizationDischarged :
+    delta1GreaterThanOneRecordedFlag :
       Bool
-    theoremGUniformizationDischargedIsFalse :
-      theoremGUniformizationDischarged ≡ false
+    delta1GreaterThanOneRecordedFlagIsTrue :
+      delta1GreaterThanOneRecordedFlag ≡ true
 
-    serrinBKMBridgeDischarged :
+    surfaceQ2DivergenceRecordedFlag :
       Bool
-    serrinBKMBridgeDischargedIsFalse :
-      serrinBKMBridgeDischarged ≡ false
+    surfaceQ2DivergenceRecordedFlagIsTrue :
+      surfaceQ2DivergenceRecordedFlag ≡ true
+
+    theoremGExponentComparisonRecordedFlag :
+      Bool
+    theoremGExponentComparisonRecordedFlagIsTrue :
+      theoremGExponentComparisonRecordedFlag ≡ true
+
+    exponentMismatchContradictionRecordedFlag :
+      Bool
+    exponentMismatchContradictionRecordedFlagIsTrue :
+      exponentMismatchContradictionRecordedFlag ≡ true
+
+    surfaceQ2DivergenceDischarged :
+      Bool
+    surfaceQ2DivergenceDischargedIsFalse :
+      surfaceQ2DivergenceDischarged ≡ false
+
+    theoremGExponentComparisonDischarged :
+      Bool
+    theoremGExponentComparisonDischargedIsFalse :
+      theoremGExponentComparisonDischarged ≡ false
+
+    exponentMismatchContradictionDischarged :
+      Bool
+    exponentMismatchContradictionDischargedIsFalse :
+      exponentMismatchContradictionDischarged ≡ false
 
     collapseImpossible :
       Bool
@@ -276,25 +318,45 @@ canonicalNSTheoremGQ2GD1ContradictionChannelReceipt =
         contradictionRouteTextValue
     ; contradictionRouteTextIsCanonical =
         refl
-    ; q2BlowupLowerImplicationDischarged =
-        false
-    ; q2BlowupLowerImplicationDischargedIsFalse =
+    ; hBRecorded =
+        true
+    ; hBRecordedIsTrue =
         refl
-    ; q2UniformUpperBoundDischarged =
-        false
-    ; q2UniformUpperBoundDischargedIsFalse =
+    ; hAreaRecorded =
+        true
+    ; hAreaRecordedIsTrue =
         refl
-    ; gd1NoCollapseDischarged =
-        false
-    ; gd1NoCollapseDischargedIsFalse =
+    ; hG12SharpRecorded =
+        true
+    ; hG12SharpRecordedIsTrue =
         refl
-    ; theoremGUniformizationDischarged =
-        false
-    ; theoremGUniformizationDischargedIsFalse =
+    ; delta1GreaterThanOneRecordedFlag =
+        true
+    ; delta1GreaterThanOneRecordedFlagIsTrue =
         refl
-    ; serrinBKMBridgeDischarged =
+    ; surfaceQ2DivergenceRecordedFlag =
+        true
+    ; surfaceQ2DivergenceRecordedFlagIsTrue =
+        refl
+    ; theoremGExponentComparisonRecordedFlag =
+        true
+    ; theoremGExponentComparisonRecordedFlagIsTrue =
+        refl
+    ; exponentMismatchContradictionRecordedFlag =
+        true
+    ; exponentMismatchContradictionRecordedFlagIsTrue =
+        refl
+    ; surfaceQ2DivergenceDischarged =
         false
-    ; serrinBKMBridgeDischargedIsFalse =
+    ; surfaceQ2DivergenceDischargedIsFalse =
+        refl
+    ; theoremGExponentComparisonDischarged =
+        false
+    ; theoremGExponentComparisonDischargedIsFalse =
+        refl
+    ; exponentMismatchContradictionDischarged =
+        false
+    ; exponentMismatchContradictionDischargedIsFalse =
         refl
     ; collapseImpossible =
         false
@@ -315,34 +377,61 @@ theoremGQ2GD1ContradictionChannelRouteRecorded :
 theoremGQ2GD1ContradictionChannelRouteRecorded =
   refl
 
-theoremGQ2GD1ContradictionChannelKeepsQ2BlowupLowerImplicationDischargedFalse :
-  q2BlowupLowerImplicationDischarged
-    canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ false
-theoremGQ2GD1ContradictionChannelKeepsQ2BlowupLowerImplicationDischargedFalse =
+theoremGQ2GD1ContradictionChannelKeepsHBRecordedTrue :
+  hBRecorded canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ true
+theoremGQ2GD1ContradictionChannelKeepsHBRecordedTrue =
   refl
 
-theoremGQ2GD1ContradictionChannelKeepsQ2UniformUpperBoundDischargedFalse :
-  q2UniformUpperBoundDischarged
-    canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ false
-theoremGQ2GD1ContradictionChannelKeepsQ2UniformUpperBoundDischargedFalse =
+theoremGQ2GD1ContradictionChannelKeepsHAreaRecordedTrue :
+  hAreaRecorded canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ true
+theoremGQ2GD1ContradictionChannelKeepsHAreaRecordedTrue =
   refl
 
-theoremGQ2GD1ContradictionChannelKeepsGD1NoCollapseDischargedFalse :
-  gd1NoCollapseDischarged
-    canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ false
-theoremGQ2GD1ContradictionChannelKeepsGD1NoCollapseDischargedFalse =
+theoremGQ2GD1ContradictionChannelKeepsHG12SharpRecordedTrue :
+  hG12SharpRecorded canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ true
+theoremGQ2GD1ContradictionChannelKeepsHG12SharpRecordedTrue =
   refl
 
-theoremGQ2GD1ContradictionChannelKeepsTheoremGUniformizationDischargedFalse :
-  theoremGUniformizationDischarged
-    canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ false
-theoremGQ2GD1ContradictionChannelKeepsTheoremGUniformizationDischargedFalse =
+theoremGQ2GD1ContradictionChannelKeepsDelta1GreaterThanOneRecordedTrue :
+  delta1GreaterThanOneRecordedFlag
+    canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ true
+theoremGQ2GD1ContradictionChannelKeepsDelta1GreaterThanOneRecordedTrue =
   refl
 
-theoremGQ2GD1ContradictionChannelKeepsSerrinBKMBridgeDischargedFalse :
-  serrinBKMBridgeDischarged
+theoremGQ2GD1ContradictionChannelKeepsSurfaceQ2DivergenceRecordedTrue :
+  surfaceQ2DivergenceRecordedFlag
+    canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ true
+theoremGQ2GD1ContradictionChannelKeepsSurfaceQ2DivergenceRecordedTrue =
+  refl
+
+theoremGQ2GD1ContradictionChannelKeepsTheoremGExponentComparisonRecordedTrue :
+  theoremGExponentComparisonRecordedFlag
+    canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ true
+theoremGQ2GD1ContradictionChannelKeepsTheoremGExponentComparisonRecordedTrue =
+  refl
+
+theoremGQ2GD1ContradictionChannelKeepsExponentMismatchContradictionRecordedTrue :
+  exponentMismatchContradictionRecordedFlag
+    canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ true
+theoremGQ2GD1ContradictionChannelKeepsExponentMismatchContradictionRecordedTrue =
+  refl
+
+theoremGQ2GD1ContradictionChannelKeepsSurfaceQ2DivergenceDischargedFalse :
+  surfaceQ2DivergenceDischarged
     canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ false
-theoremGQ2GD1ContradictionChannelKeepsSerrinBKMBridgeDischargedFalse =
+theoremGQ2GD1ContradictionChannelKeepsSurfaceQ2DivergenceDischargedFalse =
+  refl
+
+theoremGQ2GD1ContradictionChannelKeepsTheoremGExponentComparisonDischargedFalse :
+  theoremGExponentComparisonDischarged
+    canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ false
+theoremGQ2GD1ContradictionChannelKeepsTheoremGExponentComparisonDischargedFalse =
+  refl
+
+theoremGQ2GD1ContradictionChannelKeepsExponentMismatchContradictionDischargedFalse :
+  exponentMismatchContradictionDischarged
+    canonicalNSTheoremGQ2GD1ContradictionChannelReceipt ≡ false
+theoremGQ2GD1ContradictionChannelKeepsExponentMismatchContradictionDischargedFalse =
   refl
 
 theoremGQ2GD1ContradictionChannelKeepsCollapseImpossibleFalse :

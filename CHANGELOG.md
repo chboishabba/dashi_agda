@@ -6,6 +6,29 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Sharp conditional TheoremG exponent-comparison tranche for `2026-06-20`:
+  updates
+  `DASHI.Physics.Closure.NSConditionalQGronwallTheoremGReceipt`,
+  `DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt`,
+  `DASHI.Physics.Closure.NSCollapseConditionalGronwallBridgeReceipt`,
+  `DASHI.Physics.Closure.NSTheoremGQ2GD1ContradictionChannelReceipt`, and
+  `DASHI.Physics.Closure.NSKatoHessianConfinementReceipt`; adds
+  `scripts/ns_theoremg_sharp_conditional_summary.py` and
+  `scripts/check_ns_theoremg_sharp_conditional_summary.py`; updates
+  `scripts/check_ns_theoremg_q2_gd1_contradiction_channel.py` and the local
+  Clay harness manifest discovery surface. The theorem route now records
+  exact `lambda2 = 0` stretching cancellation, an enstrophy-driven source
+  lane, open sharp hypotheses `(H_B)`, `(H_area)`, `(H_g12++)`, and the
+  exponent-comparison contradiction route
+  `(T*-t)^(-2)` versus `(T*-t)^(-2/delta1)` with gate `delta1 > 1`, while
+  rejecting the older uniform energy-only source story. The CSV-backed
+  summary over the supplied 13 frames records
+  `H_area_direct_min = 0.696366`, `H_area_isop_lower_min = 7.6445`,
+  `H_B_rho_min = 0.231`, `H_g12_min = 1.4216`, `delta1_min = 1.4303`, and
+  exponent margin `0.601691952737188`. This is fail-closed bookkeeping only:
+  contradiction discharge remains false, `collapseImpossible` remains false,
+  full NS Clay remains false, and Clay promotion remains false.
+
 - NS broad-tube conditional regularization tranche for `2026-06-20`: stages
   discovery-only local Clay manifest entries for
   `DASHI.Physics.Closure.NSBroadTubeNondegenerateGradientReceipt`,

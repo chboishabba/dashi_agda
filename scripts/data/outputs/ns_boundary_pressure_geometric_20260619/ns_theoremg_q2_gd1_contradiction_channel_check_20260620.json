@@ -9,8 +9,8 @@
     "L": "Scan the Agda receipt text deterministically and emit a JSON check receipt.",
     "O": "Owner 5 validates the TheoremG/Q2/GD1 contradiction-channel receipt.",
     "P": "FAIL_CLOSED_THEOREMG_Q2_GD1_CONTRADICTION_CHANNEL",
-    "R": "Require the composite route to be recorded while all hard analytic discharge and promotion gates remain explicitly false.",
-    "S": "A receipt passes only if the five dependency imports are present, the route-recorded field is true, and every Q2/GD1/TheoremG/BKM/Clay discharge flag remains false."
+    "R": "Require the sharp contradiction route to be recorded while all hard analytic discharge and promotion gates remain explicitly false.",
+    "S": "A receipt passes only if the five dependency imports are present, the route-recorded field is true, the sharp hypothesis/route booleans are true, and every contradiction-discharge and Clay discharge flag remains false."
   },
   "details": {
     "dependency_imports": {
@@ -23,21 +23,28 @@
     "false_fields": {
       "clayNavierStokesPromoted": true,
       "collapseImpossible": true,
-      "gd1NoCollapseDischarged": true,
-      "q2BlowupLowerImplicationDischarged": true,
-      "q2UniformUpperBoundDischarged": true,
-      "serrinBKMBridgeDischarged": true,
-      "theoremGUniformizationDischarged": true
+      "exponentMismatchContradictionDischarged": true,
+      "surfaceQ2DivergenceDischarged": true,
+      "theoremGExponentComparisonDischarged": true
     },
     "text_markers": {
-      "BKM/Serrin": true,
-      "Q2/carrier divergence": true,
+      "TheoremG exponent comparison": true,
+      "delta1 > 1": true,
+      "energy-only closure": true,
+      "exponent mismatch": true,
+      "exponent mismatch contradiction": true,
       "fail-closed": true,
-      "finite-time blow-up": true,
-      "uniform Q2": true
+      "surface/Q2 divergence": true
     },
     "true_fields": {
-      "routeRecorded": true
+      "delta1GreaterThanOneRecordedFlag": true,
+      "exponentMismatchContradictionRecordedFlag": true,
+      "hAreaRecorded": true,
+      "hBRecorded": true,
+      "hG12SharpRecorded": true,
+      "routeRecorded": true,
+      "surfaceQ2DivergenceRecordedFlag": true,
+      "theoremGExponentComparisonRecordedFlag": true
     }
   },
   "errors": [],

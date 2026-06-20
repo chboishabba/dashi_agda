@@ -94,6 +94,9 @@
           ];
           buildPhase = ''
             runHook preBuild
+            cp -R ${dchottSrc}/. DCHoTT-Agda
+            cp -R ${cubicalSrc}/. cubical
+            rm -f dchott-agda.agda-lib
             agda ${agdaArgs} DASHI/Everything.agda
             runHook postBuild
           '';
@@ -112,7 +115,10 @@
           export LOCALE_ARCHIVE="${pkgs.glibcLocales}/lib/locale/locale-archive"
           export LANG="C.UTF-8"
           export LC_ALL="C.UTF-8"
+          cp -R ${dchottSrc}/. "$workdir/DCHoTT-Agda"
+          cp -R ${cubicalSrc}/. "$workdir/cubical"
           cd "$workdir"
+          rm -f dchott-agda.agda-lib
           agda ${agdaArgs} DASHI/Everything.agda \
             > "$out/check.log" 2>&1
           touch "$out/passed"

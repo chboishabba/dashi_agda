@@ -23,15 +23,19 @@ import DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt
   as GD1Route
 
 ------------------------------------------------------------------------
--- Fail-closed bridge receipt for the conditional Gronwall route.
+-- Fail-closed bridge receipt for the sharp conditional theorem route.
 --
 -- This module only records the checked bridge surface:
---  * h_delta1 + TheoremG -> collapseImpossible_conditional
---  * finite-time blow-up ⇒ Q2/carrier divergence (open implication)
---  * GD1 + TheoremG + cancellation ⇒ uniform Q2 bound (open implication)
--- and explicitly does not claim the contradiction assembly or any
--- unconditional promotion.  The module records only this conditional bridge
--- surface; TheoremG is imported as a visible dependency and kept conditional.
+--  * (H_B), (H_area), and (H_g12++) are the visible hypotheses
+--  * delta1 > 1 is kept explicit on the conditional surface
+--  * the lower bound is surface/Q2 divergence at rate (T*-t)^(-2)
+--  * the upper bound is TheoremG exponent comparison at rate
+--    (T*-t)^(-2/delta1)
+--  * the contradiction closes by exponent mismatch, not by a uniform
+--    energy-only bound
+-- and explicitly does not claim unconditional promotion.  The module records
+-- only this sharp conditional bridge surface; TheoremG is imported as a
+-- visible dependency and kept conditional.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -44,71 +48,74 @@ data NSCollapseConditionalGronwallBridgeStatus : Set where
     NSCollapseConditionalGronwallBridgeStatus
 
 data NSCollapseConditionalGronwallBridgeStage : Set where
-  qRouteBoundaryEnergyImported :
+  hBRouteImported :
     NSCollapseConditionalGronwallBridgeStage
-  ratioAbsorptionCriterionImported :
+  hAreaRouteImported :
     NSCollapseConditionalGronwallBridgeStage
-  empiricalBoundaryImported :
+  hG12SharpRouteImported :
     NSCollapseConditionalGronwallBridgeStage
-  singularAbsorptionImported :
+  delta1GreaterThanOneRecorded :
     NSCollapseConditionalGronwallBridgeStage
-  theoremGImported :
+  surfaceQ2DivergenceRecorded :
     NSCollapseConditionalGronwallBridgeStage
-  q2RouteImported :
+  theoremGExponentComparisonRecorded :
     NSCollapseConditionalGronwallBridgeStage
-  gd1RouteImported :
+  exponentMismatchContradictionRecorded :
     NSCollapseConditionalGronwallBridgeStage
-  blowupLowerImplicationRecorded :
+  sharpConditionalRouteRecorded :
     NSCollapseConditionalGronwallBridgeStage
-  uniformUpperBoundImplicationRecorded :
+  failClosedPromotionBlockedRecorded :
     NSCollapseConditionalGronwallBridgeStage
-  contradictionAssemblyRecorded :
-    NSCollapseConditionalGronwallBridgeStage
-  conditionalSurfaceRecorded :
+  clayPromotionFalseRecorded :
     NSCollapseConditionalGronwallBridgeStage
 
 canonicalNSCollapseConditionalGronwallBridgeStages :
   List NSCollapseConditionalGronwallBridgeStage
 canonicalNSCollapseConditionalGronwallBridgeStages =
-  qRouteBoundaryEnergyImported
-  ∷ ratioAbsorptionCriterionImported
-  ∷ empiricalBoundaryImported
-  ∷ singularAbsorptionImported
-  ∷ theoremGImported
-  ∷ q2RouteImported
-  ∷ gd1RouteImported
-  ∷ blowupLowerImplicationRecorded
-  ∷ uniformUpperBoundImplicationRecorded
-  ∷ contradictionAssemblyRecorded
-  ∷ conditionalSurfaceRecorded
+  hBRouteImported
+  ∷ hAreaRouteImported
+  ∷ hG12SharpRouteImported
+  ∷ delta1GreaterThanOneRecorded
+  ∷ surfaceQ2DivergenceRecorded
+  ∷ theoremGExponentComparisonRecorded
+  ∷ exponentMismatchContradictionRecorded
+  ∷ sharpConditionalRouteRecorded
+  ∷ failClosedPromotionBlockedRecorded
+  ∷ clayPromotionFalseRecorded
   ∷ []
 
 data NSCollapseConditionalGronwallBridgeBlocker : Set where
-  NoLambda3CollapseOnKatoCarrier :
+  hBStillHypothesis :
     NSCollapseConditionalGronwallBridgeBlocker
-  LayerKornInequality :
+  hAreaStillHypothesis :
     NSCollapseConditionalGronwallBridgeBlocker
-  RellichKatoCommutatorProofTerm :
+  hG12SharpStillHypothesis :
     NSCollapseConditionalGronwallBridgeBlocker
-  LayerCZ :
+  delta1ThresholdStillOpen :
     NSCollapseConditionalGronwallBridgeBlocker
-  Q2BlowupLowerImplicationOpen :
+  surfaceQ2DivergenceOpen :
     NSCollapseConditionalGronwallBridgeBlocker
-  Q2UniformUpperBoundImplicationOpen :
+  theoremGExponentComparisonOpen :
     NSCollapseConditionalGronwallBridgeBlocker
-  ContradictionAssemblyNotDischarged :
+  exponentMismatchContradictionOpen :
+    NSCollapseConditionalGronwallBridgeBlocker
+  energyOnlyClosureRejected :
+    NSCollapseConditionalGronwallBridgeBlocker
+  clayPromotionFalse :
     NSCollapseConditionalGronwallBridgeBlocker
 
 canonicalNSCollapseConditionalGronwallBridgeBlockers :
   List NSCollapseConditionalGronwallBridgeBlocker
 canonicalNSCollapseConditionalGronwallBridgeBlockers =
-  NoLambda3CollapseOnKatoCarrier
-  ∷ LayerKornInequality
-  ∷ RellichKatoCommutatorProofTerm
-  ∷ LayerCZ
-  ∷ Q2BlowupLowerImplicationOpen
-  ∷ Q2UniformUpperBoundImplicationOpen
-  ∷ ContradictionAssemblyNotDischarged
+  hBStillHypothesis
+  ∷ hAreaStillHypothesis
+  ∷ hG12SharpStillHypothesis
+  ∷ delta1ThresholdStillOpen
+  ∷ surfaceQ2DivergenceOpen
+  ∷ theoremGExponentComparisonOpen
+  ∷ exponentMismatchContradictionOpen
+  ∷ energyOnlyClosureRejected
+  ∷ clayPromotionFalse
   ∷ []
 
 canonicalNSCollapseConditionalGronwallDependencyNames :
@@ -121,47 +128,48 @@ canonicalNSCollapseConditionalGronwallDependencyNames =
   ∷ "DASHI.Physics.Closure.NSConditionalQGronwallTheoremGReceipt"
   ∷ "DASHI.Physics.Closure.NSLayerL2VorticityFractionReceipt"
   ∷ "DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt"
-  ∷ "h_delta1"
-  ∷ "TheoremG"
-  ∷ "GD1"
-  ∷ "q2"
-  ∷ "finiteTimeBlowupImpliesQ2CarrierDivergence"
-  ∷ "gd1TheoremGPlusCancellationImpliesUniformQ2"
+  ∷ "(H_B)"
+  ∷ "(H_area)"
+  ∷ "(H_g12++)"
+  ∷ "delta1 > 1"
+  ∷ "surface/Q2 divergence at rate (T*-t)^(-2)"
+  ∷ "TheoremG exponent comparison at rate (T*-t)^(-2/delta1)"
+  ∷ "exponent mismatch contradiction"
   ∷ "collapseImpossible_conditional"
   ∷ []
 
 conditionalRouteText : String
 conditionalRouteText =
-  "conditional bridge route recorded: finite-time blow-up => carrier/Q2 divergence (open) and GD1+TheoremG+cancellation => uniform Q2 bound (open); no contradiction is discharged."
+  "sharp conditional bridge route recorded: (H_B), (H_area), and (H_g12++) with delta1 > 1; the lower bound is surface/Q2 divergence at (T*-t)^(-2), the upper bound is TheoremG exponent comparison at (T*-t)^(-2/delta1), and the contradiction is by exponent mismatch rather than a uniform energy-only bound."
 
 routeRecordedText : String
 routeRecordedText =
-  "The only live route surface today is the conditional Gronwall bridge route through the local (Q2, TheoremG, GD1) contradiction chain."
+  "The only live route surface today is the sharp conditional theorem bridge through the local exponent-mismatch contradiction chain."
 
 theoremGSurfaceImportedText : String
 theoremGSurfaceImportedText =
-  "TheoremG is imported as a conditional surface; its route is recorded but it does not close h_delta1 or promote collapse."
+  "TheoremG is imported as the exponent-comparison surface; its route is recorded but it does not close the sharp conditional theorem or promote collapse."
 
-q2BlowupLowerImplicationText : String
-q2BlowupLowerImplicationText =
-  "finite-time blow-up ⇒ Q2/carrier divergence implication is explicitly retained as a recorded route stage and remains open."
+surfaceQ2DivergenceText : String
+surfaceQ2DivergenceText =
+  "surface/Q2 divergence lower bound: the boundary route is recorded at rate (T*-t)^(-2) and remains open."
 
-q2UniformUpperBoundText : String
-q2UniformUpperBoundText =
-  "GD1 + TheoremG + cancellation ⇒ uniform Q2 bound implication is explicitly retained as a recorded route stage and remains open."
+theoremGExponentComparisonText : String
+theoremGExponentComparisonText =
+  "TheoremG exponent comparison upper bound: the comparison route is recorded at rate (T*-t)^(-2/delta1) and remains open."
 
-contradictionAssemblyText : String
-contradictionAssemblyText =
-  "The full local bridge assembly that would combine the two open implications into a contradiction is itself not discharged."
+exponentMismatchContradictionText : String
+exponentMismatchContradictionText =
+  "Exponent mismatch contradiction: the route is recorded as the clash between the two rates, not as a uniform energy-only closure."
 
 receiptBoundaryText : List String
 receiptBoundaryText =
-  "This bridge connects the Q(t) boundary-energy route to the ratio, empirical, and singular F123 receipts"
-  ∷ "The current repo records only the conditional bridge route and no unconditional extension."
-  ∷ "Route-stage analytics are recorded as two implication requirements: finite-time blow-up ⇒ Q2/carrier divergence, and GD1+TheoremG+cancellation ⇒ uniform Q2 bound."
-  ∷ "The contradiction assembly combining those implications is open and remains undischargeably false in this surface."
+  "This bridge connects the Q(t) boundary-energy route to the sharp (H_B), (H_area), and (H_g12++) theorem surface"
+  ∷ "The current repo records only the sharp conditional bridge route and no unconditional extension."
+  ∷ "Route-stage analytics are recorded as two implication requirements: surface/Q2 divergence at (T*-t)^(-2), and TheoremG exponent comparison at (T*-t)^(-2/delta1)."
+  ∷ "The contradiction assembly is recorded as an exponent mismatch and not as a uniform energy-only bound."
   ∷ "TheoremG is imported and visible; this bridge stays conditional-only."
-  ∷ "collapseImpossible, q2BlowupLowerImplicationDischarged, q2UniformUpperBoundDischarged, contradictionAssemblyDischarged, hDelta1Discharged, and clayNavierStokesPromoted remain false."
+  ∷ "collapseImpossible, surfaceQ2DivergenceDischarged, theoremGExponentComparisonDischarged, exponentMismatchContradictionDischarged, and clayNavierStokesPromoted remain false."
   ∷ []
 
 record NSCollapseConditionalGronwallBridgeReceipt : Setω where
@@ -269,45 +277,60 @@ record NSCollapseConditionalGronwallBridgeReceipt : Setω where
     routeBoundaryTextIsCanonical :
       routeBoundaryText ≡ routeRecordedText
 
-    q2BlowupLowerImplication :
+    surfaceQ2Divergence :
       String
-    q2BlowupLowerImplicationIsCanonical :
-      q2BlowupLowerImplication ≡ q2BlowupLowerImplicationText
+    surfaceQ2DivergenceIsCanonical :
+      surfaceQ2Divergence ≡ surfaceQ2DivergenceText
 
-    q2UniformUpperBound :
+    theoremGExponentComparison :
       String
-    q2UniformUpperBoundIsCanonical :
-      q2UniformUpperBound ≡ q2UniformUpperBoundText
+    theoremGExponentComparisonIsCanonical :
+      theoremGExponentComparison ≡ theoremGExponentComparisonText
 
-    contradictionAssembly :
+    exponentMismatchContradiction :
       String
-    contradictionAssemblyIsCanonical :
-      contradictionAssembly ≡ contradictionAssemblyText
+    exponentMismatchContradictionIsCanonical :
+      exponentMismatchContradiction ≡ exponentMismatchContradictionText
+
+    hBRecorded :
+      Bool
+    hBRecordedIsTrue :
+      hBRecorded ≡ true
+
+    hAreaRecorded :
+      Bool
+    hAreaRecordedIsTrue :
+      hAreaRecorded ≡ true
+
+    hG12SharpRecorded :
+      Bool
+    hG12SharpRecordedIsTrue :
+      hG12SharpRecorded ≡ true
+
+    delta1GreaterThanOneRecordedFlag :
+      Bool
+    delta1GreaterThanOneRecordedFlagIsTrue :
+      delta1GreaterThanOneRecordedFlag ≡ true
+
+    surfaceQ2DivergenceDischarged :
+      Bool
+    surfaceQ2DivergenceDischargedIsFalse :
+      surfaceQ2DivergenceDischarged ≡ false
+
+    theoremGExponentComparisonDischarged :
+      Bool
+    theoremGExponentComparisonDischargedIsFalse :
+      theoremGExponentComparisonDischarged ≡ false
+
+    exponentMismatchContradictionDischarged :
+      Bool
+    exponentMismatchContradictionDischargedIsFalse :
+      exponentMismatchContradictionDischarged ≡ false
 
     collapseImpossible :
       Bool
     collapseImpossibleIsFalse :
       collapseImpossible ≡ false
-
-    hDelta1Discharged :
-      Bool
-    hDelta1DischargedIsFalse :
-      hDelta1Discharged ≡ false
-
-    q2BlowupLowerImplicationDischarged :
-      Bool
-    q2BlowupLowerImplicationDischargedIsFalse :
-      q2BlowupLowerImplicationDischarged ≡ false
-
-    q2UniformUpperBoundDischarged :
-      Bool
-    q2UniformUpperBoundDischargedIsFalse :
-      q2UniformUpperBoundDischarged ≡ false
-
-    contradictionAssemblyDischarged :
-      Bool
-    contradictionAssemblyDischargedIsFalse :
-      contradictionAssemblyDischarged ≡ false
 
     clayNavierStokesPromoted :
       Bool
@@ -405,37 +428,49 @@ canonicalNSCollapseConditionalGronwallBridgeReceipt =
         routeRecordedText
     ; routeBoundaryTextIsCanonical =
         refl
-    ; q2BlowupLowerImplication =
-        q2BlowupLowerImplicationText
-    ; q2BlowupLowerImplicationIsCanonical =
+    ; surfaceQ2Divergence =
+        surfaceQ2DivergenceText
+    ; surfaceQ2DivergenceIsCanonical =
         refl
-    ; q2UniformUpperBound =
-        q2UniformUpperBoundText
-    ; q2UniformUpperBoundIsCanonical =
+    ; theoremGExponentComparison =
+        theoremGExponentComparisonText
+    ; theoremGExponentComparisonIsCanonical =
         refl
-    ; contradictionAssembly =
-        contradictionAssemblyText
-    ; contradictionAssemblyIsCanonical =
+    ; exponentMismatchContradiction =
+        exponentMismatchContradictionText
+    ; exponentMismatchContradictionIsCanonical =
+        refl
+    ; hBRecorded =
+        true
+    ; hBRecordedIsTrue =
+        refl
+    ; hAreaRecorded =
+        true
+    ; hAreaRecordedIsTrue =
+        refl
+    ; hG12SharpRecorded =
+        true
+    ; hG12SharpRecordedIsTrue =
+        refl
+    ; delta1GreaterThanOneRecordedFlag =
+        true
+    ; delta1GreaterThanOneRecordedFlagIsTrue =
+        refl
+    ; surfaceQ2DivergenceDischarged =
+        false
+    ; surfaceQ2DivergenceDischargedIsFalse =
+        refl
+    ; theoremGExponentComparisonDischarged =
+        false
+    ; theoremGExponentComparisonDischargedIsFalse =
+        refl
+    ; exponentMismatchContradictionDischarged =
+        false
+    ; exponentMismatchContradictionDischargedIsFalse =
         refl
     ; collapseImpossible =
         false
     ; collapseImpossibleIsFalse =
-        refl
-    ; hDelta1Discharged =
-        false
-    ; hDelta1DischargedIsFalse =
-        refl
-    ; q2BlowupLowerImplicationDischarged =
-        false
-    ; q2BlowupLowerImplicationDischargedIsFalse =
-        refl
-    ; q2UniformUpperBoundDischarged =
-        false
-    ; q2UniformUpperBoundDischargedIsFalse =
-        refl
-    ; contradictionAssemblyDischarged =
-        false
-    ; contradictionAssemblyDischargedIsFalse =
         refl
     ; clayNavierStokesPromoted =
         false
@@ -452,37 +487,42 @@ bridgeKeepsCollapseImpossibleFalse :
 bridgeKeepsCollapseImpossibleFalse =
   refl
 
-bridgeKeepsHDelta1DischargedFalse :
-  hDelta1Discharged canonicalNSCollapseConditionalGronwallBridgeReceipt ≡ false
-bridgeKeepsHDelta1DischargedFalse =
+bridgeKeepsHBRecordedTrue :
+  hBRecorded canonicalNSCollapseConditionalGronwallBridgeReceipt ≡ true
+bridgeKeepsHBRecordedTrue =
   refl
 
-bridgeKeepsQ2ReceiptImported :
-  q2ReceiptImported canonicalNSCollapseConditionalGronwallBridgeReceipt ≡ true
-bridgeKeepsQ2ReceiptImported =
+bridgeKeepsHAreaRecordedTrue :
+  hAreaRecorded canonicalNSCollapseConditionalGronwallBridgeReceipt ≡ true
+bridgeKeepsHAreaRecordedTrue =
   refl
 
-bridgeKeepsGD1ReceiptImported :
-  gd1ReceiptImported canonicalNSCollapseConditionalGronwallBridgeReceipt ≡ true
-bridgeKeepsGD1ReceiptImported =
+bridgeKeepsHG12SharpRecordedTrue :
+  hG12SharpRecorded canonicalNSCollapseConditionalGronwallBridgeReceipt ≡ true
+bridgeKeepsHG12SharpRecordedTrue =
   refl
 
-bridgeKeepsQ2BlowupLowerImplicationDischargedFalse :
-  q2BlowupLowerImplicationDischarged
+bridgeKeepsDelta1GreaterThanOneRecordedTrue :
+  delta1GreaterThanOneRecordedFlag canonicalNSCollapseConditionalGronwallBridgeReceipt ≡ true
+bridgeKeepsDelta1GreaterThanOneRecordedTrue =
+  refl
+
+bridgeKeepsSurfaceQ2DivergenceDischargedFalse :
+  surfaceQ2DivergenceDischarged
     canonicalNSCollapseConditionalGronwallBridgeReceipt ≡ false
-bridgeKeepsQ2BlowupLowerImplicationDischargedFalse =
+bridgeKeepsSurfaceQ2DivergenceDischargedFalse =
   refl
 
-bridgeKeepsQ2UniformUpperBoundDischargedFalse :
-  q2UniformUpperBoundDischarged
+bridgeKeepsTheoremGExponentComparisonDischargedFalse :
+  theoremGExponentComparisonDischarged
     canonicalNSCollapseConditionalGronwallBridgeReceipt ≡ false
-bridgeKeepsQ2UniformUpperBoundDischargedFalse =
+bridgeKeepsTheoremGExponentComparisonDischargedFalse =
   refl
 
-bridgeKeepsContradictionAssemblyDischargedFalse :
-  contradictionAssemblyDischarged
+bridgeKeepsExponentMismatchContradictionDischargedFalse :
+  exponentMismatchContradictionDischarged
     canonicalNSCollapseConditionalGronwallBridgeReceipt ≡ false
-bridgeKeepsContradictionAssemblyDischargedFalse =
+bridgeKeepsExponentMismatchContradictionDischargedFalse =
   refl
 
 bridgeKeepsClayNavierStokesPromotedFalse :

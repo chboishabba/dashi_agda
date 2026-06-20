@@ -348,6 +348,7 @@ canonicalNSGD1LayerCZIntegratedControlReceipt =
     }
 
 canonicalNSGD1LayerCZIntegratedControlNoDischarge :
-  clayNavierStokesPromoted canonicalNSGD1LayerCZIntegratedControlReceipt ≡ false
+  NSGD1LayerCZIntegratedControlReceipt.clayNavierStokesPromoted
+    canonicalNSGD1LayerCZIntegratedControlReceipt ≡ false
 canonicalNSGD1LayerCZIntegratedControlNoDischarge =
   refl
