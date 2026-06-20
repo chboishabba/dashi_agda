@@ -27,6 +27,19 @@ non-promoting.
 The broader route/lane joining plan is `Docs/support/reference/UnifiedRoutesLanePlan.md`, which
 extends the same receipt-gated architecture across physics, empirical,
 biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
+The current formal-geometry intake also includes a compact candidate-only
+odd/topology tranche: `DASHI.Core.SuperPayloadReadingBoundary`,
+`DASHI.Core.OddGrassmannCoefficientGate`,
+`DASHI.Core.OddBerezinTopCoefficientBoundary`,
+`DASHI.Geometry.MobiusOrientationGate`,
+`DASHI.Geometry.KleinClosureReceipt`,
+`DASHI.Promotion.KleinHodgeDualityBoundary`,
+`DASHI.Foundations.Base369MobiusTransport`, and
+`DASHI.Foundations.Base369MobiusTransportRegression`. These modules record the
+one-generator odd coefficient-collapse law, the multi-odd ordered top-
+coefficient boundary, the Möbius/Klein orientation obstruction surfaces, the
+non-orientable Hodge repair gate, and the `k ↦ k + 3 mod 6` Base369 transport
+without promoting supergeometry, topology, or Hodge-theory authority.
 
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL
