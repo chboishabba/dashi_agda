@@ -1,0 +1,34 @@
+{
+  "C": "scripts/check_ns_vorticity_alignment_obstruction_scan.py",
+  "F": "Missing/invalid scan fields and failed schema checks are non-negotiable errors.",
+  "G": "Checker is empirical only and does not infer any theorem or Clay claim.",
+  "L": "Load scan JSON, validate schema, and report checker-level status.",
+  "O": "Validate the compressive/ extensional vorticity alignment obstruction scan contract.",
+  "P": "FAIL_CLOSED_NS_VORTICITY_ALIGNMENT_OBSTRUCTION_SCAN_CHECK",
+  "R": "Validate per-frame and aggregate counts/fractions, region coverage, alignment-tally consistency, and frame/aggregate telemetry arithmetic.",
+  "S": "Fail-closed checker: malformed schema, status mismatches, or arithmetic inconsistencies produce error.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_vorticity_alignment_obstruction_scan_N128_20260621.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_vorticity_alignment_obstruction_scan_check_N128_20260621.json"
+  ],
+  "contract": "check_ns_vorticity_alignment_obstruction_scan",
+  "details": {
+    "ok_rows": 13,
+    "row_count": 13,
+    "status": "ok",
+    "status_counts": {
+      "error_frames": 0,
+      "missing_frames": 0,
+      "ok_frames": 13,
+      "partial_frames": 0
+    }
+  },
+  "errors": [],
+  "input": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_vorticity_alignment_obstruction_scan_check_N128_20260621.json",
+    "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_vorticity_alignment_obstruction_scan_N128_20260621.json"
+  },
+  "input_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_vorticity_alignment_obstruction_scan_N128_20260621.json",
+  "status": "ok",
+  "warnings": []
+}

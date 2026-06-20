@@ -416,6 +416,9 @@ def build_specs() -> list[HarnessSpec]:
     ns_det_omega_k_measure_scan_out = (
         CHILD_OUT_DIR / "ns_det_omega_k_measure_scan_smoke.json"
     )
+    ns_vorticity_alignment_obstruction_scan_out = (
+        CHILD_OUT_DIR / "ns_vorticity_alignment_obstruction_scan_smoke.json"
+    )
     ns_interior_vorticity_budget_out = (
         CHILD_OUT_DIR / "ns_interior_vorticity_budget_smoke.json"
     )
@@ -463,6 +466,9 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_det_omega_k_measure_scan_check_out = (
         CHILD_OUT_DIR / "ns_det_omega_k_measure_scan_check_smoke.json"
+    )
+    ns_vorticity_alignment_obstruction_scan_check_out = (
+        CHILD_OUT_DIR / "ns_vorticity_alignment_obstruction_scan_check_smoke.json"
     )
     ns_lambda2_boundary_regularity_scan_out = (
         CHILD_OUT_DIR / "ns_lambda2_boundary_regularity_scan_smoke.json"
@@ -3845,6 +3851,56 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional determinant/Omega_K measure scan regression gate",
                 "validates non-promoting sign-partition mismatch bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_vorticity_alignment_obstruction_scan",
+            path=script("ns_vorticity_alignment_obstruction_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_vorticity_alignment_obstruction_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_vorticity_alignment_obstruction_scan_out),
+            ),
+            expected_json_path=ns_vorticity_alignment_obstruction_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_vorticity_alignment_obstruction_scan.py").exists()
+            else "ns_vorticity_alignment_obstruction_scan script not found",
+            notes=(
+                "optional vorticity-alignment obstruction scan",
+                "empirical/non-promoting; measures compressive-versus-extensional alignment in the lambda2>=0 region",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_vorticity_alignment_obstruction_scan",
+            path=script("check_ns_vorticity_alignment_obstruction_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_vorticity_alignment_obstruction_scan_out),
+                "--output-json",
+                str(ns_vorticity_alignment_obstruction_scan_check_out),
+            )
+            if ns_vorticity_alignment_obstruction_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_vorticity_alignment_obstruction_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_vorticity_alignment_obstruction_scan_out.exists()
+            and script("check_ns_vorticity_alignment_obstruction_scan.py").exists()
+            else (
+                "check_ns_vorticity_alignment_obstruction_scan script not found"
+                if not script("check_ns_vorticity_alignment_obstruction_scan.py").exists()
+                else "check_ns_vorticity_alignment_obstruction_scan requires the alignment scan output"
+            ),
+            notes=(
+                "optional vorticity-alignment obstruction regression gate",
+                "validates non-promoting compressive-region alignment bookkeeping",
             ),
         ),
         HarnessSpec(

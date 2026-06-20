@@ -6,6 +6,26 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS strain-type-I / pressure-factor / alignment-obstruction tranche for
+  `2026-06-21`: adds
+  `DASHI.Physics.Closure.NSPressurePoissonIdentityCorrectionReceipt`,
+  `DASHI.Physics.Closure.NSCompressionDominatesExtensionReceipt`,
+  `DASHI.Physics.Closure.NSStrainTypeIOmegaKPositiveReceipt`,
+  `DASHI.Physics.Closure.NSBkTrajectoryMinimumReceipt`, and
+  `DASHI.Physics.Closure.NSVorticityAlignmentObstructionReceipt`; adds
+  `scripts/ns_vorticity_alignment_obstruction_scan.py` and
+  `scripts/check_ns_vorticity_alignment_obstruction_scan.py`; and stages the
+  new scan/check pair in the local Clay harness manifest. The tranche records
+  the corrected pressure identity factor `-Delta p = tr(S^2) - |omega|^2/2`
+  together with `Delta p = 2 Qvel`, the algebraic compression-dominates-
+  extension lemma on `{lambda2S>=0}`, the Level-2 corrected route
+  `Miller + strain-type-I => |Omega_K(t)| > 0`, the `B_k = 0` trajectory-
+  minimum second-variation reading, and the vorticity-alignment obstruction
+  that leaves misaligned vorticity in the compressive zone as the residual
+  sign gate. This is fail-closed bookkeeping only: theorem promotion, Clay
+  promotion, quantitative `delta1`, and strict `H_B` remain open/false, and
+  the alignment scan is empirical rather than theorem-bearing.
+
 - Typed SSP/Base369 odd-lane spine tranche for `2026-06-20`: adds
   `DASHI.Foundations.SSPTritCarrier`,
   `DASHI.Foundations.FifteenSSPSurface`,
