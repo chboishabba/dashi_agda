@@ -4,43 +4,45 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
-record Level1UnconditionalFacts : Set where
-  constructor mkLevel1UnconditionalFacts
+record Level1DeterminantLedgerFacts : Set where
+  constructor mkLevel1DeterminantLedgerFacts
   field
-    qVelZeroMeanRecorded :
+    betchovDetIdentityRecorded :
       String
-    omegaKPositiveMeasureRecorded :
+    positiveMeasureLambda2GreaterThanZeroNearBlowUpRecorded :
       String
-    boundaryLambda2CancellationRecorded :
+    delta1PositiveAlmostEverywhereOnDOmegaKRecorded :
       String
-    theoremGSourceRecorded :
+    level1HandoffRecorded :
       String
 
-record Level2TypeIConditionalFacts : Set where
-  constructor mkLevel2TypeIConditionalFacts
+record Level2PromotableConditionalFacts : Set where
+  constructor mkLevel2PromotableConditionalFacts
   field
-    conditionalNoBlowupStatement :
+    conditionalPromotionUnderHBAndHAreaAndDelta1Ge1Recorded :
       String
-    hAreaUniformUnderTypeIRecorded :
+    hAreaMustBeRederivedViaDetSPlusNotQvelRecorded :
       String
 
 record Level3OpenGates : Set where
   constructor mkLevel3OpenGates
   field
-    delta1GreaterThanOneFromPDEAloneOpen :
+    delta1Ge1FromPDEAloneOpen :
       String
     hBStrictPositivityPropagationOpen :
       String
-    hAreaUnderTypeIIOpen :
+    uniformHAreaLowerBoundForOmegaKOpen :
       String
 
 record NSSharpTheoremGHierarchyReceipt : Set where
   constructor mkNSSharpTheoremGHierarchyReceipt
   field
+    hierarchySummary :
+      String
     level1 :
-      Level1UnconditionalFacts
+      Level1DeterminantLedgerFacts
     level2 :
-      Level2TypeIConditionalFacts
+      Level2PromotableConditionalFacts
     level3 :
       Level3OpenGates
     candidateOnly :
@@ -56,8 +58,8 @@ record NSSharpTheoremGHierarchyReceipt : Set where
     clayPromotionIsFalse :
       clayPromotion ≡ false
 
-open Level1UnconditionalFacts public
-open Level2TypeIConditionalFacts public
+open Level1DeterminantLedgerFacts public
+open Level2PromotableConditionalFacts public
 open Level3OpenGates public
 open NSSharpTheoremGHierarchyReceipt public
 
@@ -65,18 +67,19 @@ canonicalNSSharpTheoremGHierarchyReceipt :
   NSSharpTheoremGHierarchyReceipt
 canonicalNSSharpTheoremGHierarchyReceipt =
   mkNSSharpTheoremGHierarchyReceipt
-    (mkLevel1UnconditionalFacts
-      "Level 1: the Qvel zero-mean identity is recorded unconditionally."
-      "Level 1: for nontrivial times, Omega_K and its complement are recorded as positive-measure sets."
-      "Level 1: the exact boundary cancellation lambda2 * |<omega,e2>|^2 = 0 on {lambda2 = 0} is recorded."
-      "Level 1: the TheoremG source lane is recorded as enstrophy-controlled rather than H5-controlled.")
-    (mkLevel2TypeIConditionalFacts
-      "Level 2: type I + delta1 > 1 + H_B implies T* = infinity is recorded as a conditional no-blowup route."
-      "Level 2: H_area is recorded as uniform under type I.")
+    "Old hierarchy: Qvel-sign-change and Omega_K were placed in Level 1, and type-I H_area was treated as already routed. Corrected hierarchy: Level 1 is the determinant-ledger proof row, Level 2 is the promotable conditional theorem, and Level 3 contains only open gates. Handoff: keep the receipt fail-closed and do not strengthen beyond the ledger."
+    (mkLevel1DeterminantLedgerFacts
+      "Level 1: the Betchov determinant identity is recorded as proved."
+      "Level 1: near blow-up, the row {lambda2 > 0} is recorded as positive-measure."
+      "Level 1: delta1 > 0 is recorded almost everywhere on dOmega_K."
+      "Level 1 handoff: these unconditional rows feed the conditional lane without claiming a stronger theorem.")
+    (mkLevel2PromotableConditionalFacts
+      "Level 2: the promotable conditional theorem is recorded under H_B + H_area + delta1 >= 1."
+      "Level 2 note: H_area must be rederived via det(S)+, not via Qvel.")
     (mkLevel3OpenGates
-      "Level 3 open gate: deriving delta1 > 1 from PDE alone remains open."
+      "Level 3 open gate: deriving delta1 >= 1 from the PDE alone remains open."
       "Level 3 open gate: strict positivity propagation for H_B remains open."
-      "Level 3 open gate: H_area under type II remains open.")
+      "Level 3 open gate: a uniform lower bound for H_area on Omega_K remains open.")
     true
     refl
     false

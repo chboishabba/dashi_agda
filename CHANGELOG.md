@@ -67,6 +67,26 @@ monitor surface.
   contradiction discharge remains false, `collapseImpossible` remains false,
   full NS Clay remains false, and Clay promotion remains false.
 
+- NS determinant-ledger correction tranche for `2026-06-20`: adds
+  `DASHI.Physics.Closure.NSBetchovDeterminantIdentityReceipt`,
+  `DASHI.Physics.Closure.NSDeterminantSignRuleReceipt`, and
+  `DASHI.Physics.Closure.NSBetchovBKMPositiveMeasureReceipt`; rewrites
+  `DASHI.Physics.Closure.NSDelta1BoundaryStrainGateReceipt`,
+  `DASHI.Physics.Closure.NSSharpTheoremGHierarchyReceipt`,
+  `DASHI.Physics.Closure.NSQCriterionZeroMeanIdentityReceipt`, and
+  `DASHI.Physics.Closure.NSTypeIHAreaUniformizationReceipt`; adds
+  `scripts/ns_betchov_determinant_sign_scan.py` and
+  `scripts/check_ns_betchov_determinant_sign_scan.py`; and stages the new
+  scan/check pair in the local Clay harness manifest. The tranche corrects
+  the old `Qvel -> Omega_K` overreach: `Qvel` now remains a ledger only for
+  `Omega_Q={Qvel>0}`, while the strain route is rebuilt around
+  `∫ det(S) = -Pi/4`, the sign rule
+  `{lambda2S<0}={det(S)>0}` / `{lambda2S>0}={det(S)<0}`, the unconditional
+  near-blow-up positive-measure result for `{lambda2S>0}`, and the Sard
+  partial closure `delta1>0` a.e. on `dOmega_K`. This remains fail-closed:
+  `delta1>=1`, strict `H_B`, and determinant-side `H_area` lower bounds are
+  still open, and no Clay promotion is claimed.
+
 - NS broad-tube conditional regularization tranche for `2026-06-20`: stages
   discovery-only local Clay manifest entries for
   `DASHI.Physics.Closure.NSBroadTubeNondegenerateGradientReceipt`,

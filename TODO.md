@@ -56,6 +56,18 @@ Current NS Clay action note for `2026-06-20`:
   contradiction discharge remains false, `collapseImpossible` remains false,
   full NS Clay remains false, and `clayPromotion` remains false.
 
+- NS determinant-ledger correction tranche is now required and partially
+  landed. The prior `Qvel` zero-mean route only controls `Omega_Q={Qvel>0}`,
+  not the strain-defined `Omega_K={lambda2S<0}`. The corrected local theorem
+  ledger is: non-homogeneous Betchov/Newton identity
+  `∫ det(S) = -Pi/4`, determinant sign rule
+  `{lambda2S<0}={det(S)>0}` and `{lambda2S>0}={det(S)<0}`, unconditional
+  near-blow-up positive measure for `{lambda2S>0}` from BKM+Betchov, and
+  Sard-level partial closure `delta1>0` a.e. on `dOmega_K`. The remaining
+  open quantitative gates are unchanged in substance: derive `delta1>=1`
+  from PDE alone, propagate strict `H_B`, and re-derive `H_area` via a
+  determinant-side lower bound on `∫ det(S)+`, not via `Qvel`.
+
 - Broad-tube conditional regularization tranche is recorded. Artifacts:
   `DASHI/Physics/Closure/NSBroadTubeNondegenerateGradientReceipt.agda`,
   `DASHI/Physics/Closure/NSBroadTubeVorticityCoverageReceipt.agda`,

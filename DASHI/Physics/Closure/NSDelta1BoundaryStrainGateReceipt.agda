@@ -7,11 +7,10 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- Sharp delta1 gate at the vortex boundary.
 --
--- This is a fail-closed receipt only. It records the exact boundary algebra
--- on {lambda2 = 0}, the reformulation delta1 > 1 <=> |lambda1| > 1 there,
--- and the honest analytic gap: current energy/enstrophy control is upper
--- control and does not provide the needed pointwise lower bound on a
--- codimension-1 level set.
+-- This is a fail-closed receipt only. It records the exact boundary identity
+-- on {lambda2 = 0}, the Sard-based partial closure delta1 > 0 at H^2-a.e.
+-- regular boundary point, and the honest analytic gap: the quantitative
+-- threshold delta1 >= 1 remains open.
 
 record NSDelta1BoundaryStrainGateReceipt : Set where
   constructor mkNSDelta1BoundaryStrainGateReceipt
@@ -23,6 +22,9 @@ record NSDelta1BoundaryStrainGateReceipt : Set where
       String
 
     boundaryGapIdentity :
+      String
+
+    sardPartialClosureStatement :
       String
 
     delta1ThresholdStatement :
@@ -60,9 +62,10 @@ canonicalNSDelta1BoundaryStrainGateReceipt =
   mkNSDelta1BoundaryStrainGateReceipt
     "{lambda2 = 0} vortex-boundary carrier"
     "Tracelessness on the boundary gives lambda3 = -lambda1."
-    "On {lambda2 = 0}, g12 = lambda2 - lambda1 = -lambda1 = |lambda1|."
-    "Therefore delta1 > 1 is exactly the boundary statement |lambda1| > 1."
-    "Current energy/enstrophy control is only upper control and does not force a pointwise lower bound for |lambda1| on the boundary."
+    "On {lambda2 = 0}, tracelessness collapses the boundary eigenframe to lambda3 = -lambda1, so the exact boundary identity is delta1 = |lambda1|."
+    "By Sard, at H^2-a.e. regular point of the boundary we recover the partial closure delta1 > 0."
+    "The quantitative tranche delta1 >= 1 is still open and is not certified by this receipt."
+    "Current energy/enstrophy control remains upper control only and does not force a pointwise lower bound strong enough for the threshold delta1 >= 1."
     "Missing PDE ingredient: a pointwise strain lower bound on the codimension-1 level set {lambda2 = 0}."
     true
     refl
@@ -70,4 +73,3 @@ canonicalNSDelta1BoundaryStrainGateReceipt =
     refl
     false
     refl
-
