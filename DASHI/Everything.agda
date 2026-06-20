@@ -318,11 +318,14 @@ import DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt
 import DASHI.Physics.Closure.NSGD1LayerCZIntegratedControlReceipt
 import DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt
 import DASHI.Physics.Closure.NSLayerKornLiteratureClosureReceipt
+import DASHI.Physics.Closure.NSDelta1BoundaryStrainGateReceipt
 import DASHI.Physics.Closure.NSPressurePoissonBypassReceipt
 import DASHI.Physics.Closure.NSQCriterionZeroMeanIdentityReceipt
 import DASHI.Physics.Closure.NSPressurePoissonConventionNormalizationReceipt
 import DASHI.Physics.Closure.NSQ3ExtensionalThresholdReceipt
 import DASHI.Physics.Closure.NSGeometricConcentrationCarrierReceipt
+import DASHI.Physics.Closure.NSSharpTheoremGHierarchyReceipt
+import DASHI.Physics.Closure.NSTypeIHAreaUniformizationReceipt
 import DASHI.Physics.Closure.NSInteriorVorticityMaxPrincipleReceipt
 import DASHI.Physics.Closure.NSPressureCZEnstrophyClosureReceipt
 import DASHI.Physics.Closure.NSLayerL2VorticityFractionReceipt
@@ -2849,4 +2852,3 @@ import Verification.Prelude
 import Verification.SourceHash
 import Verification.ZK
 import Z6_RegularInverse
-open import DASHI.Physics.Closure.NSTypeIHAreaUniformizationReceipt
