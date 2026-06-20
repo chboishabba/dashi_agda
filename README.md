@@ -40,6 +40,17 @@ one-generator odd coefficient-collapse law, the multi-odd ordered top-
 coefficient boundary, the Möbius/Klein orientation obstruction surfaces, the
 non-orientable Hodge repair gate, and the `k ↦ k + 3 mod 6` Base369 transport
 without promoting supergeometry, topology, or Hodge-theory authority.
+The richer typed follow-on tranche now sits directly on the SSP/Base369 spine:
+`DASHI.Foundations.SSPTritCarrier`,
+`DASHI.Foundations.FifteenSSPSurface`,
+`DASHI.Core.SuperSSPOddPayload`,
+`DASHI.Core.OddSSPCoefficientGate`,
+`DASHI.Foundations.HexTruthPolarityFactor`,
+`DASHI.Foundations.StageAtlasZeroToEleven`, and
+`DASHI.Foundations.NumberRoleBoundary`. These modules make the odd lane return
+typed 15SSP trit residual surfaces, factor `HexTruth` as `TriTruth × Polarity`,
+distinguish spiral stage from residue/revolution trace, and keep algebra,
+coordinate, phase, transport, and mnemonic readings explicitly separated.
 
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL
