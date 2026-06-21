@@ -431,6 +431,15 @@ def build_specs() -> list[HarnessSpec]:
     ns_alignment_pressure_bridge_summary_out = (
         CHILD_OUT_DIR / "ns_alignment_pressure_bridge_summary_smoke.json"
     )
+    ns_case_a_transition_shell_scan_out = (
+        CHILD_OUT_DIR / "ns_case_a_transition_shell_scan_smoke.json"
+    )
+    ns_boundary_delta1_uniformity_scan_out = (
+        CHILD_OUT_DIR / "ns_boundary_delta1_uniformity_scan_smoke.json"
+    )
+    ns_case_a_geometric_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_case_a_geometric_bridge_summary_smoke.json"
+    )
     ns_interior_vorticity_budget_out = (
         CHILD_OUT_DIR / "ns_interior_vorticity_budget_smoke.json"
     )
@@ -493,6 +502,15 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_alignment_pressure_bridge_summary_check_out = (
         CHILD_OUT_DIR / "ns_alignment_pressure_bridge_summary_check_smoke.json"
+    )
+    ns_case_a_transition_shell_scan_check_out = (
+        CHILD_OUT_DIR / "ns_case_a_transition_shell_scan_check_smoke.json"
+    )
+    ns_boundary_delta1_uniformity_scan_check_out = (
+        CHILD_OUT_DIR / "ns_boundary_delta1_uniformity_scan_check_smoke.json"
+    )
+    ns_case_a_geometric_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_case_a_geometric_bridge_summary_check_smoke.json"
     )
     ns_lambda2_boundary_regularity_scan_out = (
         CHILD_OUT_DIR / "ns_lambda2_boundary_regularity_scan_smoke.json"
@@ -4143,6 +4161,170 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional alignment-pressure bridge regression gate",
                 "validates non-promoting cross-surface delta1-bin summary consistency",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_case_a_transition_shell_scan",
+            path=script("ns_case_a_transition_shell_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output",
+                str(ns_case_a_transition_shell_scan_out),
+                "--max-frames",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output",
+                str(ns_case_a_transition_shell_scan_out),
+                "--max-frames",
+                "1",
+            ),
+            expected_json_path=ns_case_a_transition_shell_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_case_a_transition_shell_scan.py").exists()
+            else "ns_case_a_transition_shell_scan script not found",
+            notes=(
+                "optional Case A transition-shell scan",
+                "empirical/non-promoting; tracks compressive high-strain shell size and graph-distance separation from a lambda2 boundary proxy",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_case_a_transition_shell_scan",
+            path=script("check_ns_case_a_transition_shell_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_case_a_transition_shell_scan_out),
+                "--output-json",
+                str(ns_case_a_transition_shell_scan_check_out),
+            )
+            if ns_case_a_transition_shell_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_case_a_transition_shell_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_case_a_transition_shell_scan_out.exists()
+            and script("check_ns_case_a_transition_shell_scan.py").exists()
+            else (
+                "check_ns_case_a_transition_shell_scan script not found"
+                if not script("check_ns_case_a_transition_shell_scan.py").exists()
+                else "check_ns_case_a_transition_shell_scan requires the transition-shell scan output"
+            ),
+            notes=(
+                "optional Case A transition-shell regression gate",
+                "validates non-promoting transition-shell and boundary-gap telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_delta1_uniformity_scan",
+            path=script("ns_boundary_delta1_uniformity_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output",
+                str(ns_boundary_delta1_uniformity_scan_out),
+                "--max-frames",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output",
+                str(ns_boundary_delta1_uniformity_scan_out),
+                "--max-frames",
+                "1",
+            ),
+            expected_json_path=ns_boundary_delta1_uniformity_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_boundary_delta1_uniformity_scan.py").exists()
+            else "ns_boundary_delta1_uniformity_scan script not found",
+            notes=(
+                "optional boundary-delta1 uniformity scan",
+                "empirical/non-promoting; tracks boundary-band delta1 minima, quantiles, and norm-identity residuals",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_delta1_uniformity_scan",
+            path=script("check_ns_boundary_delta1_uniformity_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_boundary_delta1_uniformity_scan_out),
+                "--output-json",
+                str(ns_boundary_delta1_uniformity_scan_check_out),
+            )
+            if ns_boundary_delta1_uniformity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_delta1_uniformity_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_delta1_uniformity_scan_out.exists()
+            and script("check_ns_boundary_delta1_uniformity_scan.py").exists()
+            else (
+                "check_ns_boundary_delta1_uniformity_scan script not found"
+                if not script("check_ns_boundary_delta1_uniformity_scan.py").exists()
+                else "check_ns_boundary_delta1_uniformity_scan requires the boundary-delta1 scan output"
+            ),
+            notes=(
+                "optional boundary-delta1 uniformity regression gate",
+                "validates non-promoting boundary lower-bound and norm-identity telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_case_a_geometric_bridge_summary",
+            path=script("ns_case_a_geometric_bridge_summary.py"),
+            args=(
+                "--case-a-json",
+                str(ns_case_a_transition_shell_scan_out),
+                "--boundary-delta1-json",
+                str(ns_boundary_delta1_uniformity_scan_out),
+                "--output-json",
+                str(ns_case_a_geometric_bridge_summary_out),
+            )
+            if ns_case_a_transition_shell_scan_out.exists()
+            and ns_boundary_delta1_uniformity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_case_a_geometric_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_case_a_transition_shell_scan_out.exists()
+            and ns_boundary_delta1_uniformity_scan_out.exists()
+            and script("ns_case_a_geometric_bridge_summary.py").exists()
+            else (
+                "ns_case_a_geometric_bridge_summary script not found"
+                if not script("ns_case_a_geometric_bridge_summary.py").exists()
+                else "ns_case_a_geometric_bridge_summary requires both Case A and boundary-delta1 scan outputs"
+            ),
+            notes=(
+                "optional Case A geometric bridge summary",
+                "empirical/non-promoting; joins transition-shell shrinkage with boundary-delta1 minima and quantiles",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_case_a_geometric_bridge_summary",
+            path=script("check_ns_case_a_geometric_bridge_summary.py"),
+            args=(
+                "--summary-json",
+                str(ns_case_a_geometric_bridge_summary_out),
+                "--output-json",
+                str(ns_case_a_geometric_bridge_summary_check_out),
+            )
+            if ns_case_a_geometric_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_case_a_geometric_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_case_a_geometric_bridge_summary_out.exists()
+            and script("check_ns_case_a_geometric_bridge_summary.py").exists()
+            else (
+                "check_ns_case_a_geometric_bridge_summary script not found"
+                if not script("check_ns_case_a_geometric_bridge_summary.py").exists()
+                else "check_ns_case_a_geometric_bridge_summary requires the Case A bridge summary output"
+            ),
+            notes=(
+                "optional Case A geometric bridge regression gate",
+                "validates non-promoting cross-surface shell and boundary-delta1 summary consistency",
             ),
         ),
         HarnessSpec(

@@ -1,0 +1,15 @@
+{
+  "checked_scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_boundary_delta1_uniformity_scan_N128_20260621.json",
+  "contract": "check_ns_boundary_delta1_uniformity_scan",
+  "errors": [],
+  "route_decision": "FAIL_CLOSED_NS_BOUNDARY_DELTA1_UNIFORMITY_SCAN_CHECK",
+  "script": "scripts/check_ns_boundary_delta1_uniformity_scan.py",
+  "status": "ok",
+  "summary": {
+    "aggregate_band_count": 4,
+    "aggregate_gap_threshold_count": 5,
+    "frame_count": 13,
+    "ok_frames": 13
+  },
+  "warnings": []
+}

@@ -6,6 +6,26 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Case A / boundary-`delta1` geometric tranche for `2026-06-21`: adds
+  `DASHI.Physics.Closure.NSDelta1BoundaryNormIdentityReceipt`,
+  `DASHI.Physics.Closure.NSSZeroBoundaryGenericityReceipt`, and
+  `DASHI.Physics.Closure.NSDeterminantConcentrationImpossibilityReceipt`;
+  adds `scripts/ns_case_a_transition_shell_scan.py`,
+  `scripts/check_ns_case_a_transition_shell_scan.py`,
+  `scripts/ns_boundary_delta1_uniformity_scan.py`,
+  `scripts/check_ns_boundary_delta1_uniformity_scan.py`,
+  `scripts/ns_case_a_geometric_bridge_summary.py`, and
+  `scripts/check_ns_case_a_geometric_bridge_summary.py`; and stages the new
+  scan/check surfaces in the local Clay harness manifest. The tranche records
+  the exact boundary-side `delta1` norm identity ledger on `dOmega_K`,
+  records the `S=0` subset/genericity route around the boundary gate,
+  records the determinant-side Case B / bounded-concentration impossibility
+  rows, and adds empirical transition-shell, boundary-gap, and
+  boundary-`delta1` telemetry on the raw N128 archive. This remains
+  fail-closed: theorem promotion and Clay promotion stay false, Case A
+  co-area/trace closure is not proved, pressure-correction sign control is
+  not proved, and the boundary-`delta1` lower bound is empirical only.
+
 - NS pressure-correction / uniform-`delta1` reduction tranche for
   `2026-06-21`: adds
   `DASHI.Physics.Closure.NSPressureCorrectionEigenframeScaleReceipt`,
