@@ -347,6 +347,7 @@ import DASHI.Physics.Closure.NSCompressiveZonePiDecompositionReceipt
 import DASHI.Physics.Closure.NSCompressionDominatesExtensionReceipt
 import DASHI.Physics.Closure.NSDelta1BoundaryNormIdentityReceipt
 import DASHI.Physics.Closure.NSBoundaryDelta1LevelSetEvolutionReceipt
+import DASHI.Physics.Closure.NSBoundaryHelicityQSignBridgeReceipt
 import DASHI.Physics.Closure.NSDelta1UniformGateReductionReceipt
 import DASHI.Physics.Closure.NSDeterminantAreaRouteTargetReceipt
 import DASHI.Physics.Closure.NSDeterminantConcentrationImpossibilityReceipt
@@ -365,9 +366,11 @@ import DASHI.Physics.Closure.NSPressurePoissonConventionNormalizationReceipt
 import DASHI.Physics.Closure.NSQ3ExtensionalThresholdReceipt
 import DASHI.Physics.Closure.NSGeometricConcentrationCarrierReceipt
 import DASHI.Physics.Closure.NSSardBoundaryRegularityReceipt
+import DASHI.Physics.Closure.NSSingleTubePressureCaseExclusionReceipt
 import DASHI.Physics.Closure.NSSZeroBoundaryGenericityReceipt
 import DASHI.Physics.Closure.NSSharpTheoremGHierarchyReceipt
 import DASHI.Physics.Closure.NSStrainTypeIOmegaKPositiveReceipt
+import DASHI.Physics.Closure.NSTubeMorphologyForcedLocalizationRouteAuditReceipt
 import DASHI.Physics.Closure.NSTypeIHAreaUniformizationReceipt
 import DASHI.Physics.Closure.NSInteriorVorticityMaxPrincipleReceipt
 import DASHI.Physics.Closure.NSPressureCZEnstrophyClosureReceipt

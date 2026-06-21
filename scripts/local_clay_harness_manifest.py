@@ -437,6 +437,15 @@ def build_specs() -> list[HarnessSpec]:
     ns_boundary_pressure_q_bridge_summary_out = (
         CHILD_OUT_DIR / "ns_boundary_pressure_q_bridge_summary_smoke.json"
     )
+    ns_tube_morphology_scan_out = (
+        CHILD_OUT_DIR / "ns_tube_morphology_scan_smoke.json"
+    )
+    ns_boundary_helicity_q_scan_out = (
+        CHILD_OUT_DIR / "ns_boundary_helicity_q_scan_smoke.json"
+    )
+    ns_tube_pressure_helicity_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_tube_pressure_helicity_bridge_summary_smoke.json"
+    )
     ns_case_a_transition_shell_scan_out = (
         CHILD_OUT_DIR / "ns_case_a_transition_shell_scan_smoke.json"
     )
@@ -514,6 +523,15 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_boundary_pressure_q_bridge_summary_check_out = (
         CHILD_OUT_DIR / "ns_boundary_pressure_q_bridge_summary_check_smoke.json"
+    )
+    ns_tube_morphology_scan_check_out = (
+        CHILD_OUT_DIR / "ns_tube_morphology_scan_check_smoke.json"
+    )
+    ns_boundary_helicity_q_scan_check_out = (
+        CHILD_OUT_DIR / "ns_boundary_helicity_q_scan_check_smoke.json"
+    )
+    ns_tube_pressure_helicity_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_tube_pressure_helicity_bridge_summary_check_smoke.json"
     )
     ns_case_a_transition_shell_scan_check_out = (
         CHILD_OUT_DIR / "ns_case_a_transition_shell_scan_check_smoke.json"
@@ -4294,6 +4312,174 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional boundary pressure/Q bridge regression gate",
                 "validates non-promoting cross-surface pressure-boundary bridge consistency",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_tube_morphology_scan",
+            path=script("ns_tube_morphology_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_tube_morphology_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_tube_morphology_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_tube_morphology_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_tube_morphology_scan.py").exists()
+            else "ns_tube_morphology_scan script not found",
+            notes=(
+                "optional tube-morphology scan",
+                "empirical/non-promoting; classifies high-enstrophy carrier voxels by local tube/sheet/blob proxies",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_tube_morphology_scan",
+            path=script("check_ns_tube_morphology_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_tube_morphology_scan_out),
+                "--output-json",
+                str(ns_tube_morphology_scan_check_out),
+            )
+            if ns_tube_morphology_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_tube_morphology_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_tube_morphology_scan_out.exists()
+            and script("check_ns_tube_morphology_scan.py").exists()
+            else (
+                "check_ns_tube_morphology_scan script not found"
+                if not script("check_ns_tube_morphology_scan.py").exists()
+                else "check_ns_tube_morphology_scan requires the morphology scan output"
+            ),
+            notes=(
+                "optional tube-morphology regression gate",
+                "validates non-promoting local morphology threshold bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_helicity_q_scan",
+            path=script("ns_boundary_helicity_q_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_boundary_helicity_q_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_boundary_helicity_q_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_boundary_helicity_q_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_boundary_helicity_q_scan.py").exists()
+            else "ns_boundary_helicity_q_scan script not found",
+            notes=(
+                "optional boundary helicity/Q scan",
+                "empirical/non-promoting; tracks local helicity and Q signs on the lambda2 boundary band",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_helicity_q_scan",
+            path=script("check_ns_boundary_helicity_q_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_boundary_helicity_q_scan_out),
+                "--output-json",
+                str(ns_boundary_helicity_q_scan_check_out),
+            )
+            if ns_boundary_helicity_q_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_helicity_q_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_helicity_q_scan_out.exists()
+            and script("check_ns_boundary_helicity_q_scan.py").exists()
+            else (
+                "check_ns_boundary_helicity_q_scan script not found"
+                if not script("check_ns_boundary_helicity_q_scan.py").exists()
+                else "check_ns_boundary_helicity_q_scan requires the helicity/Q scan output"
+            ),
+            notes=(
+                "optional boundary helicity/Q regression gate",
+                "validates non-promoting boundary helicity-Q threshold bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_tube_pressure_helicity_bridge_summary",
+            path=script("ns_tube_pressure_helicity_bridge_summary.py"),
+            args=(
+                "--morphology-json",
+                str(ns_tube_morphology_scan_out),
+                "--boundary-helicity-json",
+                str(ns_boundary_helicity_q_scan_out),
+                "--boundary-pressure-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--output-json",
+                str(ns_tube_pressure_helicity_bridge_summary_out),
+            )
+            if ns_tube_morphology_scan_out.exists()
+            and ns_boundary_helicity_q_scan_out.exists()
+            and ns_boundary_pressure_gate_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_tube_pressure_helicity_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_tube_morphology_scan_out.exists()
+            and ns_boundary_helicity_q_scan_out.exists()
+            and ns_boundary_pressure_gate_scan_out.exists()
+            and script("ns_tube_pressure_helicity_bridge_summary.py").exists()
+            else (
+                "ns_tube_pressure_helicity_bridge_summary script not found"
+                if not script("ns_tube_pressure_helicity_bridge_summary.py").exists()
+                else "ns_tube_pressure_helicity_bridge_summary requires morphology, helicity/Q, and boundary pressure outputs"
+            ),
+            notes=(
+                "optional tube-pressure-helicity bridge summary",
+                "empirical/non-promoting; joins morphology, boundary helicity/Q, and boundary pressure rows by frame",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_tube_pressure_helicity_bridge_summary",
+            path=script("check_ns_tube_pressure_helicity_bridge_summary.py"),
+            args=(
+                "--summary-json",
+                str(ns_tube_pressure_helicity_bridge_summary_out),
+                "--output-json",
+                str(ns_tube_pressure_helicity_bridge_summary_check_out),
+            )
+            if ns_tube_pressure_helicity_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_tube_pressure_helicity_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_tube_pressure_helicity_bridge_summary_out.exists()
+            and script("check_ns_tube_pressure_helicity_bridge_summary.py").exists()
+            else (
+                "check_ns_tube_pressure_helicity_bridge_summary script not found"
+                if not script("check_ns_tube_pressure_helicity_bridge_summary.py").exists()
+                else "check_ns_tube_pressure_helicity_bridge_summary requires the bridge summary output"
+            ),
+            notes=(
+                "optional tube-pressure-helicity bridge regression gate",
+                "validates non-promoting framewise morphology/helicity/pressure bridge consistency",
             ),
         ),
         HarnessSpec(
