@@ -88,6 +88,19 @@ Base369 while preserving the focused prime seam, connect finite p-adic bridges
 to the same ultrametric address geometry, tighten odd extraction around the
 focused prime supervoxel, and assemble one compact consumer regression surface
 for canonical p3/p7/p11 and root/depth3 examples.
+The next symmetry-action tranche now upgrades those local symmetry profiles
+into finite operators:
+`DASHI.Foundations.SSPPrimeLaneUnitAction`,
+`DASHI.Geometry.SSP369TreeAutomorphism`,
+`DASHI.Geometry.SSP369SymmetryIsometry`,
+`DASHI.Core.SuperSSP369EquivariantOddGate`,
+`DASHI.Physics.Closure.SSPPrimeLane369ActionPhaseBridge`, and
+`DASHI.Foundations.SSPPrimeLaneUnitActionRegression`. These modules record a
+typed per-prime unit-action step, its induced rotation on `369` digits and
+hex phase/polarity, tree/prefix compatibility, self-isometry receipts on the
+shared ultrametric geometry, an equivariant odd-field extraction seam on the
+focused supervoxel carrier, and one compact regression surface for canonical
+`p7`/`p11` and root/depth3 witnesses.
 
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL

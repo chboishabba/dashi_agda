@@ -154,6 +154,24 @@ monitor surface.
   and fail-closed: no analytic p-adic completion, continuum BT authority,
   phase promotion, or Clay authority is claimed.
 
+- Prime-lane symmetry-action tranche for `2026-06-21`: adds
+  `DASHI.Foundations.SSPPrimeLaneUnitAction`,
+  `DASHI.Geometry.SSP369TreeAutomorphism`,
+  `DASHI.Geometry.SSP369SymmetryIsometry`,
+  `DASHI.Core.SuperSSP369EquivariantOddGate`,
+  `DASHI.Physics.Closure.SSPPrimeLane369ActionPhaseBridge`, and
+  `DASHI.Foundations.SSPPrimeLaneUnitActionRegression`, wired through
+  `DASHI.Everything`. The tranche upgrades the prior static symmetry-profile
+  lane into finite local action receipts: each tracked prime lane now admits
+  a typed unit-action step, an induced rotation on `369` digits and hex
+  phase/polarity, tree/prefix compatibility over depth-refined addresses,
+  self-isometry receipts on the shared ultrametric geometry, an equivariant
+  odd-field extraction seam on the focused supervoxel carrier, and one compact
+  regression surface tying canonical `p7`/`p11` and root/depth3 witnesses
+  together. This remains candidate-only and fail-closed: no full
+  `(\u2124/p\u2124)^×` action, analytic p-adic dynamics, continuum BT
+  symmetry authority, or Clay promotion is claimed.
+
 - Odd-lane / Möbius / Klein / Hodge / Base369 intake tranche for
   `2026-06-20`: adds `DASHI.Core.SuperPayloadReadingBoundary`,
   `DASHI.Core.OddGrassmannCoefficientGate`,
