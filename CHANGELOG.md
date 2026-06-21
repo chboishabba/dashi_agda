@@ -84,6 +84,21 @@ monitor surface.
   readings. This remains candidate-only and fail-closed: no supergeometry,
   topology, ontology, or Clay authority is promoted.
 
+- Prime-lane `369` depth/ultrametric tranche for `2026-06-21`: adds
+  `DASHI.Foundations.SSPPrimeLane369Signature`,
+  `DASHI.Foundations.SSPPrimeLane369Refinement`,
+  `DASHI.Foundations.FifteenSSP369Forest`,
+  `DASHI.Geometry.SSP369Ultrametric`,
+  `DASHI.Foundations.SSPPrimeLaneSymmetryProfile`, and
+  `DASHI.Core.SuperSSP369Field`, wired through `DASHI.Everything`. The
+  tranche records typed per-prime `mod [3,6,9]` fingerprints for the 15 SSP
+  lanes, recursive depth-refined `369` addresses, the 15-lane refinement
+  forest, prefix-agreement ultrametric geometry, local symmetry profiles with
+  both prime-identity and unit-order stage readings, and a typed supervoxel
+  field lift over that carrier stack. This remains candidate-only and
+  fail-closed: it sharpens the carrier geometry without promoting p-adic,
+  BT-tree, wavefield, or Clay authority.
+
 - Odd-lane / Möbius / Klein / Hodge / Base369 intake tranche for
   `2026-06-20`: adds `DASHI.Core.SuperPayloadReadingBoundary`,
   `DASHI.Core.OddGrassmannCoefficientGate`,

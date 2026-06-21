@@ -51,6 +51,17 @@ The richer typed follow-on tranche now sits directly on the SSP/Base369 spine:
 typed 15SSP trit residual surfaces, factor `HexTruth` as `TriTruth × Polarity`,
 distinguish spiral stage from residue/revolution trace, and keep algebra,
 coordinate, phase, transport, and mnemonic readings explicitly separated.
+The next carrier tranche now extends that spine per prime and per depth:
+`DASHI.Foundations.SSPPrimeLane369Signature`,
+`DASHI.Foundations.SSPPrimeLane369Refinement`,
+`DASHI.Foundations.FifteenSSP369Forest`,
+`DASHI.Geometry.SSP369Ultrametric`,
+`DASHI.Foundations.SSPPrimeLaneSymmetryProfile`, and
+`DASHI.Core.SuperSSP369Field`. These modules record each tracked SSP prime's
+typed `mod [3,6,9]` fingerprint, recursive depth-refined `369` lane addresses,
+the 15-lane forest product, a prefix-based ultrametric surface, local prime
+symmetry chambers with both prime and unit-order stage readings, and a typed
+supervoxel field lift over the resulting carrier stack.
 
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL
