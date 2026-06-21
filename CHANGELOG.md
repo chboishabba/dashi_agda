@@ -135,6 +135,25 @@ monitor surface.
   fail-closed: no analytic p-adic completion, continuum BT authority, phase
   promotion, or Clay authority is claimed.
 
+- Prime-lane bridge-consumer deepening tranche for `2026-06-21`: adds
+  `DASHI.Physics.Closure.SSPPrimeLane369ResidueFactorBridge`,
+  `DASHI.Physics.Closure.SSPPrimeLane369DepthPhaseBridge`,
+  `DASHI.Physics.Closure.SSPPrimeLane369BTUltrametricBridge`,
+  `DASHI.Physics.Closure.SSPPrimeLane369FieldPhaseBridge`,
+  `DASHI.Physics.Closure.SSPPrimeLane369PAdicUltrametricBridge`,
+  `DASHI.Core.OddSSP369FocusedPrimeGate`, and
+  `DASHI.Foundations.SSPPrimeLane369ConsumerRegression`, wired through
+  `DASHI.Everything`. The tranche deepens the consumer side of the SSP/369
+  stack: per-prime signatures now admit explicit residue-factor consumers,
+  depth-indexed 369 refinements now feed typed stage-atlas readings, BT
+  profiles now share a prefix-ultrametric seam, field focus now admits typed
+  phase and Base369 surface readouts, finite p-adic coordinates now share the
+  same address geometry, focused odd extraction now exposes the prime-lane
+  supervoxel seam directly, and one compact regression surface packages the
+  canonical p3/p7/p11 and root/depth3 witnesses. This remains candidate-only
+  and fail-closed: no analytic p-adic completion, continuum BT authority,
+  phase promotion, or Clay authority is claimed.
+
 - Odd-lane / Möbius / Klein / Hodge / Base369 intake tranche for
   `2026-06-20`: adds `DASHI.Core.SuperPayloadReadingBoundary`,
   `DASHI.Core.OddGrassmannCoefficientGate`,

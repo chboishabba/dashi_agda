@@ -160,6 +160,7 @@ import DASHI.Core.LensKernel
 import DASHI.Core.OddBerezinTopCoefficientBoundary
 import DASHI.Core.OddGrassmannCoefficientGate
 import DASHI.Core.OddSSP369FieldGate
+import DASHI.Core.OddSSP369FocusedPrimeGate
 import DASHI.Core.OddSSPCoefficientGate
 import DASHI.Core.OperatorShapeNonAuthorityCore
 import DASHI.Core.OperatorTypes
@@ -528,8 +529,13 @@ import DASHI.Physics.Closure.PerelmanBTLedgerExactCounts
 import DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf
 import DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary
 import DASHI.Physics.Closure.SSPPrimeLane369BTBridge
+import DASHI.Physics.Closure.SSPPrimeLane369BTUltrametricBridge
+import DASHI.Physics.Closure.SSPPrimeLane369DepthPhaseBridge
+import DASHI.Physics.Closure.SSPPrimeLane369FieldPhaseBridge
 import DASHI.Physics.Closure.SSPPrimeLane369PAdicBridge
+import DASHI.Physics.Closure.SSPPrimeLane369PAdicUltrametricBridge
 import DASHI.Physics.Closure.SSPPrimeLane369PhaseBridge
+import DASHI.Physics.Closure.SSPPrimeLane369ResidueFactorBridge
 import DASHI.Physics.Closure.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt
 import DASHI.Physics.Closure.SurgeryObligationBlockerNormalization
 import DASHI.Physics.Closure.UniformProjectionNonlocalityGapFinite
