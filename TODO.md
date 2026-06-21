@@ -34,6 +34,25 @@ Current odd-lane / topology intake note for `2026-06-20`:
   and narrative-mnemonic number roles.
 
 Current NS Clay action note for `2026-06-20`:
+- Dual-dominance / exact-alignment-ODE tranche is now landed. Artifacts:
+  `DASHI/Physics/Closure/NSExtensionDominatesCompressionReceipt.agda`,
+  `DASHI/Physics/Closure/NSVorticityStretchingExactReceipt.agda`,
+  `DASHI/Physics/Closure/NSAlignmentProjectionODEReceipt.agda`,
+  `DASHI/Physics/Closure/NSEulerAlignmentGapControlReceipt.agda`,
+  `DASHI/Physics/Closure/NSResidualAlignmentObstructionHierarchyReceipt.agda`,
+  `scripts/ns_alignment_gap_bin_scan.py`, and
+  `scripts/check_ns_alignment_gap_bin_scan.py`. The route now records exact
+  extensional dominance on `Omega_K={lambda2S<0}`, exact
+  `Dt omega = S·omega` with antisymmetric cancellation, the exact
+  eigenframe-projection ODE lane with explicit rotation cancellation, the
+  conditional Euler-limit `delta1 >> ||u||_H1` gap-control route on
+  `Omega_K^c`, and the sharpened `R1/R2/R3` residual hierarchy with
+  `delta1` as the live quantitative gate. The new gap-bin scan adds empirical
+  telemetry for compressive-region alignment versus `delta1` thresholds.
+  This remains fail-closed and non-promoting: the pressure-correction sign
+  gate is not closed, the uniform `delta1` lower bound remains open, and the
+  new telemetry is empirical only.
+
 - Strain-type-I / pressure-factor / alignment-obstruction tranche is now
   landed. Artifacts:
   `DASHI/Physics/Closure/NSPressurePoissonIdentityCorrectionReceipt.agda`,
