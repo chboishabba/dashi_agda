@@ -84,6 +84,27 @@ Current odd-lane / topology intake note for `2026-06-20`:
   dynamics, continuum BT symmetry, or Clay authority is promoted.
 
 Current NS Clay action note for `2026-06-20`:
+- Tube-morphology / boundary-helicity Route 1 tranche is now landed. Artifacts:
+  `DASHI/Physics/Closure/NSTubeMorphologyForcedLocalizationRouteAuditReceipt.agda`,
+  `DASHI/Physics/Closure/NSSingleTubePressureCaseExclusionReceipt.agda`,
+  `DASHI/Physics/Closure/NSBoundaryHelicityQSignBridgeReceipt.agda`,
+  `scripts/ns_tube_morphology_scan.py`,
+  `scripts/check_ns_tube_morphology_scan.py`,
+  `scripts/ns_boundary_helicity_q_scan.py`,
+  `scripts/check_ns_boundary_helicity_q_scan.py`,
+  `scripts/ns_tube_pressure_helicity_bridge_summary.py`, and
+  `scripts/check_ns_tube_pressure_helicity_bridge_summary.py`. The route now
+  records the fail-closed tube-morphology / forced-localization audit
+  surface, a straight-tube versus curved-tube non-promoting pressure gate
+  ledger, and the boundary helicity / `Q` sign bridge as an observed or
+  external route only. The new empirical telemetry classifies high-enstrophy
+  carrier voxels by local tube/sheet/blob proxies, measures boundary-band
+  helicity versus `Q` co-movement on the raw N128 archive, and joins those
+  rows back to the existing boundary pressure scan frame-by-frame. This
+  remains fail-closed and non-promoting: tube morphology is not proved,
+  helicity-to-`Q` sign control is not proved, and the new scans are
+  empirical only.
+
 - Boundary pressure-gate / Route 1 audit tranche is now landed. Artifacts:
   `DASHI/Physics/Closure/NSBoundaryDelta1LevelSetEvolutionReceipt.agda`,
   `DASHI/Physics/Closure/NSPressureRieszCompatibilityReceipt.agda`,

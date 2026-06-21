@@ -1,0 +1,18 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "contract": "check_ns_tube_morphology_scan",
+  "errors": [],
+  "route_decision": "FAIL_CLOSED_NS_TUBE_MORPHOLOGY_SCAN_CHECK",
+  "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_tube_morphology_scan_N128_20260621.json",
+  "schema_version": "1.0.0",
+  "script": "scripts/check_ns_tube_morphology_scan.py",
+  "status": "ok"
+}

@@ -6,6 +6,27 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS tube-morphology / boundary-helicity Route 1 tranche for `2026-06-21`:
+  adds `DASHI.Physics.Closure.NSTubeMorphologyForcedLocalizationRouteAuditReceipt`,
+  `DASHI.Physics.Closure.NSSingleTubePressureCaseExclusionReceipt`, and
+  `DASHI.Physics.Closure.NSBoundaryHelicityQSignBridgeReceipt`; adds
+  `scripts/ns_tube_morphology_scan.py`,
+  `scripts/check_ns_tube_morphology_scan.py`,
+  `scripts/ns_boundary_helicity_q_scan.py`,
+  `scripts/check_ns_boundary_helicity_q_scan.py`,
+  `scripts/ns_tube_pressure_helicity_bridge_summary.py`, and
+  `scripts/check_ns_tube_pressure_helicity_bridge_summary.py`; and stages the
+  new scan/check surfaces in the local Clay harness manifest. The tranche
+  records the fail-closed Route 1 tube-morphology / forced-localization audit
+  surface, a straight-tube versus curved-tube non-promoting pressure-case
+  ledger, and the boundary helicity / `Q` sign bridge as an observed or
+  external route only. It also adds empirical telemetry for high-enstrophy
+  tube/sheet/blob proxies, boundary-band helicity versus `Q` sign/co-movement,
+  and a compact framewise bridge back to the existing boundary pressure scan.
+  This remains fail-closed: theorem promotion and Clay promotion stay false,
+  tube morphology is not proved, helicity-to-`Q` sign control is not proved,
+  and the new scans are empirical only.
+
 - NS boundary pressure-gate / Route 1 audit tranche for `2026-06-21`: adds
   `DASHI.Physics.Closure.NSBoundaryDelta1LevelSetEvolutionReceipt`,
   `DASHI.Physics.Closure.NSPressureRieszCompatibilityReceipt`, and
