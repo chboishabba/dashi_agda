@@ -6,6 +6,32 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Sacasa/Kiriukhin orbit-coherence bridge tranche for `2026-06-21`: adds
+  `DASHI.Physics.Closure.NSKiriukhinOrbitStretchingCarrierReceipt`,
+  `DASHI.Physics.Closure.NSSacasaCosphereCoherenceCarrierReceipt`,
+  `DASHI.Physics.Closure.NSSacasaKiriukhinIdentificationBoundary`,
+  `DASHI.Physics.Closure.NSNonSobolevBridgeNoCircularityGate`, and
+  `DASHI.Physics.Closure.NSTriadPhaseLockingLiveWallReceipt`; adds
+  `scripts/ns_orbit_phase_coherence_scan.py`,
+  `scripts/check_ns_orbit_phase_coherence_scan.py`,
+  `scripts/ns_non_sobolev_coherence_gate_scan.py`,
+  `scripts/check_ns_non_sobolev_coherence_gate_scan.py`,
+  `scripts/ns_sacasa_kiriukhin_bridge_summary.py`, and
+  `scripts/check_ns_sacasa_kiriukhin_bridge_summary.py`; and stages the new
+  scan/check surfaces in the local Clay harness manifest. The tranche records
+  the Kiriukhin orbit-level stretching matrix `V_N` as a model-only carrier,
+  records the Sacasa cosphere bundle / directional energy / angular entropy /
+  dissipation route as a candidate-only coherence carrier, records the
+  explicit no-circularity gate against `H^s(s>2)`-only / expectation-only /
+  model-only shortcuts, and isolates the live wall as realization-level
+  triadic phase-locking exclusion via a genuinely non-Sobolev coherence
+  bound. It also adds empirical telemetry for selected-mode resonant
+  orbit-phase coherence, same-amplitude phase-shuffled non-Sobolev gap
+  proxies, and a compact bridge summary over the shared raw N128 frames. This
+  remains fail-closed: theorem promotion and Clay promotion stay false, the
+  Sacasa-Kiriukhin bridge is not proved, continuation closure is not proved,
+  and the new scans are empirical only.
+
 - NS tube-morphology / boundary-helicity Route 1 tranche for `2026-06-21`:
   adds `DASHI.Physics.Closure.NSTubeMorphologyForcedLocalizationRouteAuditReceipt`,
   `DASHI.Physics.Closure.NSSingleTubePressureCaseExclusionReceipt`, and

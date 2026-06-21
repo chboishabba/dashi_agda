@@ -1,0 +1,30 @@
+{
+  "C": "scripts/check_ns_sacasa_kiriukhin_bridge_summary.py",
+  "F": "The live wall must remain explicitly unproved and the summary must remain empirically scoped.",
+  "G": "No theorem, Clay, or proof claim is permitted through this checker.",
+  "L": "Load the bridge summary JSON, validate schema, source routes, aggregate surface, and emit a checker receipt.",
+  "O": "Validate the orbit-phase/non-Sobolev bridge summary schema and source routes.",
+  "P": "FAIL_CLOSED_NS_SACASA_KIRIUKHIN_BRIDGE_SUMMARY_CHECK",
+  "R": "Verify the explicit source-route ledger, shared-key bridge surface, compact correlations, and the unproved live-wall marker.",
+  "S": "Fail-closed validation: missing routes, malformed source payloads, or authority drift are hard errors.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_sacasa_kiriukhin_bridge_summary_20260621.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/check_ns_sacasa_kiriukhin_bridge_summary_20260621.json"
+  ],
+  "checked_contract": "ns_sacasa_kiriukhin_bridge_summary",
+  "checked_summary_path": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_sacasa_kiriukhin_bridge_summary_20260621.json",
+  "contract": "check_ns_sacasa_kiriukhin_bridge_summary",
+  "errors": [],
+  "inputs": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/check_ns_sacasa_kiriukhin_bridge_summary_20260621.json",
+    "summary_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_sacasa_kiriukhin_bridge_summary_20260621.json"
+  },
+  "status": "ok",
+  "summary_preview": {
+    "contract": "ns_sacasa_kiriukhin_bridge_summary",
+    "live_wall_status": "unproved",
+    "route_decision": "FAIL_CLOSED_NS_SACASA_KIRIUKHIN_BRIDGE_SUMMARY",
+    "status": "ok"
+  },
+  "warnings": []
+}
