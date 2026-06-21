@@ -6,6 +6,29 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS pressure-correction / uniform-`delta1` reduction tranche for
+  `2026-06-21`: adds
+  `DASHI.Physics.Closure.NSPressureCorrectionEigenframeScaleReceipt`,
+  `DASHI.Physics.Closure.NSCompressiveZonePiDecompositionReceipt`, and
+  `DASHI.Physics.Closure.NSDelta1UniformGateReductionReceipt`; adds
+  `scripts/ns_pressure_eigenframe_gap_scan.py`,
+  `scripts/check_ns_pressure_eigenframe_gap_scan.py`,
+  `scripts/ns_compressive_pi_decomposition_scan.py`,
+  `scripts/check_ns_compressive_pi_decomposition_scan.py`,
+  `scripts/ns_alignment_pressure_bridge_summary.py`, and
+  `scripts/check_ns_alignment_pressure_bridge_summary.py`; and stages the new
+  scan/check surfaces in the local Clay harness manifest. The tranche records
+  the pressure-correction scale explicitly as off-diagonal pressure-Hessian
+  projections divided by strain-eigenvalue gaps, records the compressive-zone
+  `Pi_c` decomposition on `Omega_K^c={lambda2>=0}`, and records the reduction
+  of the residual L3-a alignment obstruction to the live quantitative gate
+  `delta1 >= delta0 > 0` once the alignment ODE / pressure-correction scale
+  are accepted. The new telemetry joins pressure proxies, compressive Pi
+  balance, and alignment-gap bins across the raw N128 frames. This remains
+  fail-closed: theorem promotion and Clay promotion stay false, pressure-
+  correction sign control is not proved, the uniform `delta1` lower bound is
+  not proved, and the new scans are empirical only.
+
 - NS dual-dominance / exact-alignment-ODE tranche for `2026-06-21`: adds
   `DASHI.Physics.Closure.NSExtensionDominatesCompressionReceipt`,
   `DASHI.Physics.Closure.NSVorticityStretchingExactReceipt`,

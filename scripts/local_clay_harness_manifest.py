@@ -422,6 +422,15 @@ def build_specs() -> list[HarnessSpec]:
     ns_alignment_gap_bin_scan_out = (
         CHILD_OUT_DIR / "ns_alignment_gap_bin_scan_smoke.json"
     )
+    ns_pressure_eigenframe_gap_scan_out = (
+        CHILD_OUT_DIR / "ns_pressure_eigenframe_gap_scan_smoke.json"
+    )
+    ns_compressive_pi_decomposition_scan_out = (
+        CHILD_OUT_DIR / "ns_compressive_pi_decomposition_scan_smoke.json"
+    )
+    ns_alignment_pressure_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_alignment_pressure_bridge_summary_smoke.json"
+    )
     ns_interior_vorticity_budget_out = (
         CHILD_OUT_DIR / "ns_interior_vorticity_budget_smoke.json"
     )
@@ -475,6 +484,15 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_alignment_gap_bin_scan_check_out = (
         CHILD_OUT_DIR / "ns_alignment_gap_bin_scan_check_smoke.json"
+    )
+    ns_pressure_eigenframe_gap_scan_check_out = (
+        CHILD_OUT_DIR / "ns_pressure_eigenframe_gap_scan_check_smoke.json"
+    )
+    ns_compressive_pi_decomposition_scan_check_out = (
+        CHILD_OUT_DIR / "ns_compressive_pi_decomposition_scan_check_smoke.json"
+    )
+    ns_alignment_pressure_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_alignment_pressure_bridge_summary_check_smoke.json"
     )
     ns_lambda2_boundary_regularity_scan_out = (
         CHILD_OUT_DIR / "ns_lambda2_boundary_regularity_scan_smoke.json"
@@ -3961,6 +3979,170 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional compressive-gap alignment regression gate",
                 "validates non-promoting gap-bin alignment bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_pressure_eigenframe_gap_scan",
+            path=script("ns_pressure_eigenframe_gap_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_pressure_eigenframe_gap_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_pressure_eigenframe_gap_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_pressure_eigenframe_gap_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_pressure_eigenframe_gap_scan.py").exists()
+            else "ns_pressure_eigenframe_gap_scan script not found",
+            notes=(
+                "optional pressure-eigenframe gap scan",
+                "empirical/non-promoting; bins pressure-Hessian eigenframe proxies by delta1 on the compressive zone",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_pressure_eigenframe_gap_scan",
+            path=script("check_ns_pressure_eigenframe_gap_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_pressure_eigenframe_gap_scan_out),
+                "--output-json",
+                str(ns_pressure_eigenframe_gap_scan_check_out),
+            )
+            if ns_pressure_eigenframe_gap_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_pressure_eigenframe_gap_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_pressure_eigenframe_gap_scan_out.exists()
+            and script("check_ns_pressure_eigenframe_gap_scan.py").exists()
+            else (
+                "check_ns_pressure_eigenframe_gap_scan script not found"
+                if not script("check_ns_pressure_eigenframe_gap_scan.py").exists()
+                else "check_ns_pressure_eigenframe_gap_scan requires the pressure-eigenframe scan output"
+            ),
+            notes=(
+                "optional pressure-eigenframe gap regression gate",
+                "validates non-promoting pressure-proxy bookkeeping by delta1 threshold",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_compressive_pi_decomposition_scan",
+            path=script("ns_compressive_pi_decomposition_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_compressive_pi_decomposition_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_compressive_pi_decomposition_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_compressive_pi_decomposition_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_compressive_pi_decomposition_scan.py").exists()
+            else "ns_compressive_pi_decomposition_scan script not found",
+            notes=(
+                "optional compressive Pi decomposition scan",
+                "empirical/non-promoting; tracks lambda_i omega_i^2 contributions on the lambda2>=0 region",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_compressive_pi_decomposition_scan",
+            path=script("check_ns_compressive_pi_decomposition_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_compressive_pi_decomposition_scan_out),
+                "--output-json",
+                str(ns_compressive_pi_decomposition_scan_check_out),
+            )
+            if ns_compressive_pi_decomposition_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_compressive_pi_decomposition_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_compressive_pi_decomposition_scan_out.exists()
+            and script("check_ns_compressive_pi_decomposition_scan.py").exists()
+            else (
+                "check_ns_compressive_pi_decomposition_scan script not found"
+                if not script("check_ns_compressive_pi_decomposition_scan.py").exists()
+                else "check_ns_compressive_pi_decomposition_scan requires the Pi decomposition scan output"
+            ),
+            notes=(
+                "optional compressive Pi decomposition regression gate",
+                "validates non-promoting compressive-versus-extensional contribution accounting",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_alignment_pressure_bridge_summary",
+            path=script("ns_alignment_pressure_bridge_summary.py"),
+            args=(
+                "--alignment-gap-json",
+                str(ns_alignment_gap_bin_scan_out),
+                "--pressure-eigenframe-json",
+                str(ns_pressure_eigenframe_gap_scan_out),
+                "--compressive-pi-json",
+                str(ns_compressive_pi_decomposition_scan_out),
+                "--output-json",
+                str(ns_alignment_pressure_bridge_summary_out),
+            )
+            if ns_alignment_gap_bin_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_alignment_pressure_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_alignment_gap_bin_scan_out.exists()
+            and script("ns_alignment_pressure_bridge_summary.py").exists()
+            else (
+                "ns_alignment_pressure_bridge_summary script not found"
+                if not script("ns_alignment_pressure_bridge_summary.py").exists()
+                else "ns_alignment_pressure_bridge_summary requires the alignment gap scan output"
+            ),
+            notes=(
+                "optional alignment-pressure bridge summary",
+                "empirical/non-promoting; joins delta1 bins across alignment, pressure proxy, and Pi decomposition surfaces",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_alignment_pressure_bridge_summary",
+            path=script("check_ns_alignment_pressure_bridge_summary.py"),
+            args=(
+                "--summary-json",
+                str(ns_alignment_pressure_bridge_summary_out),
+                "--output-json",
+                str(ns_alignment_pressure_bridge_summary_check_out),
+            )
+            if ns_alignment_pressure_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_alignment_pressure_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_alignment_pressure_bridge_summary_out.exists()
+            and script("check_ns_alignment_pressure_bridge_summary.py").exists()
+            else (
+                "check_ns_alignment_pressure_bridge_summary script not found"
+                if not script("check_ns_alignment_pressure_bridge_summary.py").exists()
+                else "check_ns_alignment_pressure_bridge_summary requires the bridge summary output"
+            ),
+            notes=(
+                "optional alignment-pressure bridge regression gate",
+                "validates non-promoting cross-surface delta1-bin summary consistency",
             ),
         ),
         HarnessSpec(

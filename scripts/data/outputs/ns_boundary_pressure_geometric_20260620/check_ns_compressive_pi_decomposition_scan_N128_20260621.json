@@ -1,0 +1,53 @@
+{
+  "C": "scripts/check_ns_compressive_pi_decomposition_scan.py",
+  "F": "All output invariants and schema fields are required for non-error rows.",
+  "G": "Checker is empirical only.",
+  "L": "Load scan JSON, validate rows and aggregates, and emit checker status.",
+  "O": "Validate Pi decomposition scan output for schema and arithmetic invariants.",
+  "P": "FAIL_CLOSED_NS_COMPRESSIVE_PI_DECOMPOSITION_SCAN_CHECK",
+  "R": "Validate per-frame aggregate shape, sign-count accounting, compressive-vs-extensional dominance, and aggregate consistency for lambda_i*omega_i^2 telemetry.",
+  "S": "Fail-closed checker: schema failures, count mismatches, or invariant drift produce hard errors.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_compressive_pi_decomposition_scan_N128_20260621.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/check_ns_compressive_pi_decomposition_scan_N128_20260621.json"
+  ],
+  "contract": "check_ns_compressive_pi_decomposition_scan",
+  "control_card": {
+    "C": "scripts/check_ns_compressive_pi_decomposition_scan.py",
+    "F": "All output invariants and schema fields are required for non-error rows.",
+    "G": "Checker is empirical only.",
+    "L": "Load scan JSON, validate rows and aggregates, and emit checker status.",
+    "O": "Validate Pi decomposition scan output for schema and arithmetic invariants.",
+    "P": "FAIL_CLOSED_NS_COMPRESSIVE_PI_DECOMPOSITION_SCAN_CHECK",
+    "R": "Validate per-frame aggregate shape, sign-count accounting, compressive-vs-extensional dominance, and aggregate consistency for lambda_i*omega_i^2 telemetry.",
+    "S": "Fail-closed checker: schema failures, count mismatches, or invariant drift produce hard errors."
+  },
+  "details": {
+    "ok_rows": 13,
+    "row_count": 13,
+    "status": "ok",
+    "status_counts": {
+      "error_frames": 0,
+      "missing_frames": 0,
+      "ok_frames": 13,
+      "partial_frames": 0
+    }
+  },
+  "errors": [],
+  "input": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/check_ns_compressive_pi_decomposition_scan_N128_20260621.json",
+    "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_compressive_pi_decomposition_scan_N128_20260621.json"
+  },
+  "route_decision": "FAIL_CLOSED_NS_COMPRESSIVE_PI_DECOMPOSITION_SCAN_CHECK",
+  "status": "ok",
+  "warnings": []
+}
