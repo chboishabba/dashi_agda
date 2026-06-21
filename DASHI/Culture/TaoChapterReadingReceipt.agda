@@ -269,6 +269,108 @@ canonicalTaoBoundaryFailClosed =
     refl
     refl
 
+taoLeanPastebinUrl : String
+taoLeanPastebinUrl =
+  "https://pastebin.xware.online/paste/20260621_131250_taoteching_lean"
+
+taoLeanPastebinCanonicalId : String
+taoLeanPastebinCanonicalId =
+  "pastebin.xware.online/paste/20260621_131250_taoteching_lean"
+
+record TaoExternalFormalismSource : Set where
+  constructor taoExternalFormalismSource
+  field
+    sourceUrl : String
+    canonicalId : String
+    sourceHost : String
+    sourceKind : String
+    sourceRole : String
+    sourceCandidateOnly : Bool
+    sourcePromotesAuthority : Bool
+
+open TaoExternalFormalismSource public
+
+canonicalTaoExternalFormalismSource : TaoExternalFormalismSource
+canonicalTaoExternalFormalismSource =
+  taoExternalFormalismSource
+    taoLeanPastebinUrl
+    taoLeanPastebinCanonicalId
+    "pastebin.xware.online"
+    "Lean formalism paste"
+    "candidate external formalism source for Tao chapter receipts"
+    true
+    false
+
+record TaoSourceProvenanceSurface : Set where
+  constructor taoSourceProvenanceSurface
+  field
+    provenanceExternalSource : TaoExternalFormalismSource
+    normalizedCitationUrl : String
+    normalizedCitationId : String
+    citationStyle : String
+    provenanceMode : String
+    provenanceCandidateOnly : Bool
+    provenancePromotesAuthority : Bool
+
+open TaoSourceProvenanceSurface public
+
+canonicalTaoSourceProvenanceSurface : TaoSourceProvenanceSurface
+canonicalTaoSourceProvenanceSurface =
+  taoSourceProvenanceSurface
+    canonicalTaoExternalFormalismSource
+    taoLeanPastebinUrl
+    taoLeanPastebinCanonicalId
+    "canonical URL citation"
+    "candidate-only provenance surface"
+    true
+    false
+
+record TaoExternalFormalismSourceWitness : Set where
+  constructor taoExternalFormalismSourceWitness
+  field
+    urlIsCanonical :
+      sourceUrl canonicalTaoExternalFormalismSource ≡ taoLeanPastebinUrl
+    canonicalIdIsCanonical :
+      canonicalId canonicalTaoExternalFormalismSource ≡ taoLeanPastebinCanonicalId
+    candidateOnlyTrue :
+      sourceCandidateOnly canonicalTaoExternalFormalismSource ≡ true
+    promotesAuthorityFalse :
+      sourcePromotesAuthority canonicalTaoExternalFormalismSource ≡ false
+
+open TaoExternalFormalismSourceWitness public
+
+canonicalTaoExternalFormalismSourceWitness :
+  TaoExternalFormalismSourceWitness
+canonicalTaoExternalFormalismSourceWitness =
+  taoExternalFormalismSourceWitness
+    refl
+    refl
+    refl
+    refl
+
+record TaoSourceProvenanceSurfaceWitness : Set where
+  constructor taoSourceProvenanceSurfaceWitness
+  field
+    normalizedUrlIsCanonical :
+      normalizedCitationUrl canonicalTaoSourceProvenanceSurface ≡ taoLeanPastebinUrl
+    normalizedIdIsCanonical :
+      normalizedCitationId canonicalTaoSourceProvenanceSurface ≡ taoLeanPastebinCanonicalId
+    candidateOnlyTrue :
+      provenanceCandidateOnly canonicalTaoSourceProvenanceSurface ≡ true
+    promotesAuthorityFalse :
+      provenancePromotesAuthority canonicalTaoSourceProvenanceSurface ≡ false
+
+open TaoSourceProvenanceSurfaceWitness public
+
+canonicalTaoSourceProvenanceSurfaceWitness :
+  TaoSourceProvenanceSurfaceWitness
+canonicalTaoSourceProvenanceSurfaceWitness =
+  taoSourceProvenanceSurfaceWitness
+    refl
+    refl
+    refl
+    refl
+
 record TaoSourceReceipt : Set where
   constructor taoSourceReceipt
   field
@@ -281,6 +383,8 @@ record TaoSourceReceipt : Set where
     redactionStatus : String
     formalizer : Maybe String
     artifactHash : Maybe String
+    externalFormalismSource : TaoExternalFormalismSource
+    provenanceSurface : TaoSourceProvenanceSurface
     authorityBits : TaoAuthorityBits
     failClosed : TaoBoundaryFailClosed
 
@@ -298,8 +402,34 @@ canonicalTaoSourceReceipt =
     "chapter-local approximation"
     nothing
     nothing
+    canonicalTaoExternalFormalismSource
+    canonicalTaoSourceProvenanceSurface
     canonicalTaoAuthorityBits
     canonicalTaoBoundaryFailClosed
+
+record TaoSourceReceiptWitness : Set where
+  constructor taoSourceReceiptWitness
+  field
+    externalSourceIsCanonical :
+      externalFormalismSource canonicalTaoSourceReceipt
+      ≡ canonicalTaoExternalFormalismSource
+    provenanceSurfaceIsCanonical :
+      provenanceSurface canonicalTaoSourceReceipt
+      ≡ canonicalTaoSourceProvenanceSurface
+    authorityBitsAreCanonical :
+      authorityBits canonicalTaoSourceReceipt ≡ canonicalTaoAuthorityBits
+    failClosedIsCanonical :
+      failClosed canonicalTaoSourceReceipt ≡ canonicalTaoBoundaryFailClosed
+
+open TaoSourceReceiptWitness public
+
+canonicalTaoSourceReceiptWitness : TaoSourceReceiptWitness
+canonicalTaoSourceReceiptWitness =
+  taoSourceReceiptWitness
+    refl
+    refl
+    refl
+    refl
 
 record AssertionStrengthProfile : Set where
   constructor assertionStrengthProfile
@@ -397,4 +527,3 @@ chapter1Receipt =
     (chapter1PrimaryRow ∷ [])
     canonicalTaoAuthorityBits
     canonicalTaoBoundaryFailClosed
-

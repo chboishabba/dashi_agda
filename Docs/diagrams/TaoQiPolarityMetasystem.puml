@@ -1,0 +1,79 @@
+@startuml TaoQiPolarityMetasystem
+title Tao / YinYang / Qi Polarity Metasystem
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName Courier
+skinparam packageStyle rectangle
+skinparam ArrowColor #333333
+skinparam RectangleBorderColor #333333
+skinparam RectangleFontColor #111111
+
+rectangle "Tao Source Layer" as TaoSource #E8F1E8 {
+  rectangle "TaoChapterReadingReceipt\ncandidate source + provenance" as TaoChapter
+  rectangle "TaoOperatorGrammar\napophatic / emptiness / non-action / reversal" as TaoOps
+}
+
+rectangle "Polarity Layer" as Polarity #FFF4D6 {
+  rectangle "YinYangPolarityBoundary\npaired poles + transition grammar" as YinYangBoundary
+  rectangle "TaoYinYangAdapter\nchapter motifs -> polarity rows" as TaoYinYang
+}
+
+rectangle "Qi Bridge Layer" as QiBridgeLayer #E6F0FA {
+  rectangle "YinYangQiAdapter\npolarity rows -> Qi carriers / roles / lenses" as YinYangQi
+  rectangle "TaoQiReadingAdapter\ndirect Tao -> Qi candidate rows" as TaoQi
+  rectangle "TaoMeditationQiAdapter\nTao -> meditation-state candidate rows" as TaoMeditation
+}
+
+rectangle "Phase / Field Layer" as FieldLayer #F4E8FA {
+  rectangle "PolarityPhaseFieldBridge\n369 + voxel + supervoxel + wave + superposition" as PhaseField
+}
+
+rectangle "Qi Substrate" as QiSubstrate #EAF7FF {
+  rectangle "QiCarrierFieldBridge" as QiCarrier
+  rectangle "QiOperatorTheoryBoundary" as QiOperator
+}
+
+rectangle "Governance Layer" as Governance #FDECEC {
+  rectangle "PolarityFieldObligationIndex" as PolarityIndex
+  rectangle "TaoQiObligationIndex" as TaoQiIndex
+}
+
+TaoChapter --> TaoOps
+TaoOps --> YinYangBoundary
+TaoChapter --> TaoYinYang
+YinYangBoundary --> TaoYinYang
+TaoYinYang --> YinYangQi
+YinYangBoundary --> YinYangQi
+YinYangQi --> PhaseField
+YinYangQi --> QiCarrier
+YinYangQi --> QiOperator
+TaoQi --> QiCarrier
+TaoQi --> QiOperator
+TaoMeditation --> QiCarrier
+PhaseField --> QiCarrier
+PhaseField --> QiOperator
+
+TaoChapter --> PolarityIndex
+YinYangBoundary --> PolarityIndex
+TaoYinYang --> PolarityIndex
+YinYangQi --> PolarityIndex
+PhaseField --> PolarityIndex
+
+TaoChapter --> TaoQiIndex
+TaoOps --> TaoQiIndex
+YinYangBoundary --> TaoQiIndex
+TaoYinYang --> TaoQiIndex
+YinYangQi --> TaoQiIndex
+TaoQi --> TaoQiIndex
+TaoMeditation --> TaoQiIndex
+PolarityIndex --> TaoQiIndex
+
+note bottom of Governance
+All routes are candidate-only.
+No doctrine, empirical, clinical, spiritual,
+mystical, metaphysical, theorem, runtime,
+or reciprocal validation authority is promoted.
+end note
+
+@enduml

@@ -9,9 +9,14 @@ open import Data.List.Base using (List; []; _∷_)
 import DASHI.Culture.QiOperatorTheoryBoundary as QiTheory
 import DASHI.Culture.TaoOperatorGrammar as TaoGrammar
 import DASHI.Culture.TaoChapterReadingReceipt as Tao
+import DASHI.Culture.YinYangPolarityBoundary as YinYang
+import DASHI.Interop.PolarityPhaseFieldBridge as PhaseField
 import DASHI.Interop.QiCarrierFieldBridge as QiBridge
 import DASHI.Interop.TaoMeditationQiAdapter as TaoMeditation
 import DASHI.Interop.TaoQiReadingAdapter as TaoQi
+import DASHI.Interop.TaoYinYangAdapter as TaoYinYang
+import DASHI.Interop.YinYangQiAdapter as YinYangQi
+import DASHI.Promotion.PolarityFieldObligationIndex as PolarityField
 
 ------------------------------------------------------------------------
 -- Tao / Qi obligation index.
@@ -29,6 +34,7 @@ listCount (_ ∷ xs) = suc (listCount xs)
 data TaoQiLane : Set where
   taoSourceLane : TaoQiLane
   taoReadingLane : TaoQiLane
+  yinYangBoundaryLane : TaoQiLane
   qiRoleGrammarLane : TaoQiLane
   qiCarrierFieldLane : TaoQiLane
   taoQiBridgeLane : TaoQiLane
@@ -60,12 +66,22 @@ record TaoQiGovernanceRow : Set where
     taoChapterReceipt : Tao.TaoChapterReceipt
     taoOperatorGrammarReceipt :
       TaoGrammar.TaoOperatorGrammarReceipt
+    yinYangBoundaryReceipt :
+      YinYang.YinYangPolarityBoundaryReceipt
+    taoYinYangBridgeReceipt :
+      TaoYinYang.TaoYinYangBridgeReceipt
+    yinYangQiBridgeReceipt :
+      YinYangQi.YinYangQiBridgeReceipt
+    polarityPhaseFieldBridgeReceipt :
+      PhaseField.PolarityPhaseFieldBridge
     qiOperatorReceipt : QiTheory.QiOperatorTheoryBoundaryReceipt
     qiCarrierBridgeReceipt : QiBridge.QiCarrierFieldBridgeReceipt
     taoQiBridgeReceipt :
       TaoQi.TaoQiBridgeReceipt
     taoMeditationBridgeReceipt :
       TaoMeditation.TaoMeditationQiBridgeReceipt
+    polarityFieldObligationReceipt :
+      PolarityField.PolarityFieldObligationIndexReceipt
     candidateOnlyPayload : Bool
     candidateOnlyPayloadIsTrue : candidateOnlyPayload ≡ true
     authorityBlocked : Bool
@@ -85,12 +101,22 @@ record TaoQiObligationIndexReceipt : Set where
     taoChapterReceipt : Tao.TaoChapterReceipt
     taoOperatorGrammarReceipt :
       TaoGrammar.TaoOperatorGrammarReceipt
+    yinYangBoundaryReceipt :
+      YinYang.YinYangPolarityBoundaryReceipt
+    taoYinYangBridgeReceipt :
+      TaoYinYang.TaoYinYangBridgeReceipt
+    yinYangQiBridgeReceipt :
+      YinYangQi.YinYangQiBridgeReceipt
+    polarityPhaseFieldBridgeReceipt :
+      PhaseField.PolarityPhaseFieldBridge
     qiOperatorReceipt : QiTheory.QiOperatorTheoryBoundaryReceipt
     qiCarrierBridgeReceipt : QiBridge.QiCarrierFieldBridgeReceipt
     taoQiBridgeReceipt :
       TaoQi.TaoQiBridgeReceipt
     taoMeditationBridgeReceipt :
       TaoMeditation.TaoMeditationQiBridgeReceipt
+    polarityFieldObligationReceipt :
+      PolarityField.PolarityFieldObligationIndexReceipt
     summaryRows : List TaoQiSummaryRow
     governanceRows : List TaoQiGovernanceRow
     indexCandidateOnlyPayload : Bool
@@ -132,15 +158,21 @@ mkTaoQiGovernanceRow :
   Tao.TaoBoundaryFailClosed →
   Tao.TaoChapterReceipt →
   TaoGrammar.TaoOperatorGrammarReceipt →
+  YinYang.YinYangPolarityBoundaryReceipt →
+  TaoYinYang.TaoYinYangBridgeReceipt →
+  YinYangQi.YinYangQiBridgeReceipt →
+  PhaseField.PolarityPhaseFieldBridge →
   QiTheory.QiOperatorTheoryBoundaryReceipt →
   QiBridge.QiCarrierFieldBridgeReceipt →
   TaoQi.TaoQiBridgeReceipt →
   TaoMeditation.TaoMeditationQiBridgeReceipt →
+  PolarityField.PolarityFieldObligationIndexReceipt →
   String →
   String →
   TaoQiGovernanceRow
-mkTaoQiGovernanceRow lane moduleName taoSource taoFail taoChapter taoGrammar qiOperator
-  qiBridge taoQi taoMeditation note command =
+mkTaoQiGovernanceRow lane moduleName taoSource taoFail taoChapter taoGrammar
+  yinYang taoYinYang yinYangQi polarityPhaseField qiOperator qiBridge taoQi
+  taoMeditation polarityField note command =
   taoQiGovernanceRow
     lane
     moduleName
@@ -148,10 +180,15 @@ mkTaoQiGovernanceRow lane moduleName taoSource taoFail taoChapter taoGrammar qiO
     taoFail
     taoChapter
     taoGrammar
+    yinYang
+    taoYinYang
+    yinYangQi
+    polarityPhaseField
     qiOperator
     qiBridge
     taoQi
     taoMeditation
+    polarityField
     true
     refl
     true
@@ -190,6 +227,42 @@ canonicalTaoQiSummaryRows =
     "operator families remain interpretive grammar only"
     "doctrinal, empirical, political, clinical, and metaphysical authority stay blocked"
     "agda -i . DASHI/Culture/TaoOperatorGrammar.agda"
+  ∷ mkTaoQiSummaryRow
+    yinYangBoundaryLane
+    "DASHI.Culture.YinYangPolarityBoundary"
+    "canonicalYinYangPolarityBoundaryReceipt"
+    "Yin/yang sits between Tao operator grammar and Qi formal-lens/operator grammar as a candidate-only polarity and transition boundary."
+    YinYang.canonicalYinYangPolarityBoundaryRowCount
+    "polarity rows remain interpretive grammar only"
+    "empirical, clinical, spiritual, mystical, metaphysical, canonical-text, and reciprocal Tao/Qi promotion authority stay blocked"
+    "agda -i . DASHI/Culture/YinYangPolarityBoundary.agda"
+  ∷ mkTaoQiSummaryRow
+    yinYangBoundaryLane
+    "DASHI.Interop.TaoYinYangAdapter"
+    "canonicalTaoYinYangBridgeReceipt"
+    "Tao chapter motifs are re-read as candidate-only yin/yang polarity rows with fail-closed governance."
+    (listCount TaoYinYang.canonicalTaoYinYangAdapterRows)
+    "the Tao-to-yinyang bridge remains descriptive only"
+    "no doctrine, empirical, clinical, spiritual, or metaphysical authority is promoted"
+    "agda -i . DASHI/Interop/TaoYinYangAdapter.agda"
+  ∷ mkTaoQiSummaryRow
+    yinYangBoundaryLane
+    "DASHI.Interop.YinYangQiAdapter"
+    "canonicalYinYangQiBridgeReceipt"
+    "Yin/yang polarity rows are carried into Qi carrier, role, and formal-lens surfaces as candidate-only bridges."
+    (listCount YinYangQi.canonicalYinYangQiAdapterRows)
+    "the yinyang-to-Qi bridge remains descriptive only"
+    "truth, support, admissibility, runtime, theorem, clinical, and metaphysical authority remain false"
+    "agda -i . DASHI/Interop/YinYangQiAdapter.agda"
+  ∷ mkTaoQiSummaryRow
+    yinYangBoundaryLane
+    "DASHI.Interop.PolarityPhaseFieldBridge"
+    "canonicalPolarityPhaseFieldBridge"
+    "The polarity layer is extended into 369 phase rows, voxel/supervoxel support, wave mixtures, and superposition candidates under blocked authority governance."
+    (listCount PhaseField.canonicalCarrierRows)
+    "phase/field rows remain candidate-only interpretation surfaces"
+    "no theorem, runtime, external, spiritual, metaphysical, or empirical authority is promoted"
+    "agda -i . DASHI/Interop/PolarityPhaseFieldBridge.agda"
   ∷ mkTaoQiSummaryRow
     qiRoleGrammarLane
     "DASHI.Culture.QiOperatorTheoryBoundary"
@@ -237,10 +310,15 @@ canonicalTaoQiGovernanceRows =
     Tao.canonicalTaoBoundaryFailClosed
     Tao.chapter1Receipt
     TaoGrammar.canonicalTaoOperatorGrammarReceipt
+    YinYang.canonicalYinYangPolarityBoundaryReceipt
+    TaoYinYang.canonicalTaoYinYangBridgeReceipt
+    YinYangQi.canonicalYinYangQiBridgeReceipt
+    PhaseField.canonicalPolarityPhaseFieldBridge
     QiTheory.canonicalQiOperatorTheoryBoundaryReceipt
     QiBridge.canonicalQiCarrierFieldBridgeReceipt
     TaoQi.canonicalTaoQiBridgeReceipt
     TaoMeditation.canonicalTaoMeditationQiBridgeReceipt
+    PolarityField.canonicalPolarityFieldObligationIndexReceipt
     "Tao authority is fail-closed: empirical, spiritual, mystical, clinical, political, metaphysical, philological, canonical-text, and promoted-doctrine bits stay false while interpretiveCandidate and poeticFormalPayload remain true."
     "agda -i . DASHI/Culture/TaoChapterReadingReceipt.agda && agda -i . DASHI/Culture/QiOperatorTheoryBoundary.agda"
   ∷ mkTaoQiGovernanceRow
@@ -250,10 +328,15 @@ canonicalTaoQiGovernanceRows =
     Tao.canonicalTaoBoundaryFailClosed
     Tao.chapter1Receipt
     TaoGrammar.canonicalTaoOperatorGrammarReceipt
+    YinYang.canonicalYinYangPolarityBoundaryReceipt
+    TaoYinYang.canonicalTaoYinYangBridgeReceipt
+    YinYangQi.canonicalYinYangQiBridgeReceipt
+    PhaseField.canonicalPolarityPhaseFieldBridge
     QiTheory.canonicalQiOperatorTheoryBoundaryReceipt
     QiBridge.canonicalQiCarrierFieldBridgeReceipt
     TaoQi.canonicalTaoQiBridgeReceipt
     TaoMeditation.canonicalTaoMeditationQiBridgeReceipt
+    PolarityField.canonicalPolarityFieldObligationIndexReceipt
     "Qi authority is fail-closed: the operator-theory receipt remains candidate-only role grammar, and the core role family carries no external authority."
     "agda -i . DASHI/Culture/QiOperatorTheoryBoundary.agda && agda -i . DASHI/Interop/QiCarrierFieldBridge.agda"
   ∷ mkTaoQiGovernanceRow
@@ -263,11 +346,16 @@ canonicalTaoQiGovernanceRows =
     Tao.canonicalTaoBoundaryFailClosed
     Tao.chapter1Receipt
     TaoGrammar.canonicalTaoOperatorGrammarReceipt
+    YinYang.canonicalYinYangPolarityBoundaryReceipt
+    TaoYinYang.canonicalTaoYinYangBridgeReceipt
+    YinYangQi.canonicalYinYangQiBridgeReceipt
+    PhaseField.canonicalPolarityPhaseFieldBridge
     QiTheory.canonicalQiOperatorTheoryBoundaryReceipt
     QiBridge.canonicalQiCarrierFieldBridgeReceipt
     TaoQi.canonicalTaoQiBridgeReceipt
     TaoMeditation.canonicalTaoMeditationQiBridgeReceipt
-    "The bridge surface stays candidate-only: Tao and Qi are joined as receipts and role grammar, not as promoted doctrine, empirical validity, or clinical/metaphysical authority."
+    PolarityField.canonicalPolarityFieldObligationIndexReceipt
+    "The bridge surface stays candidate-only: Tao, yin/yang, Qi, and the 369/voxel/wave field grammar are joined as receipts and role grammar, not as promoted doctrine, empirical validity, clinical instruction, or metaphysical authority."
     "agda -i . DASHI/Promotion/TaoQiObligationIndex.agda"
   ∷ []
 
@@ -278,10 +366,15 @@ canonicalTaoQiObligationIndexReceipt =
     Tao.canonicalTaoBoundaryFailClosed
     Tao.chapter1Receipt
     TaoGrammar.canonicalTaoOperatorGrammarReceipt
+    YinYang.canonicalYinYangPolarityBoundaryReceipt
+    TaoYinYang.canonicalTaoYinYangBridgeReceipt
+    YinYangQi.canonicalYinYangQiBridgeReceipt
+    PhaseField.canonicalPolarityPhaseFieldBridge
     QiTheory.canonicalQiOperatorTheoryBoundaryReceipt
     QiBridge.canonicalQiCarrierFieldBridgeReceipt
     TaoQi.canonicalTaoQiBridgeReceipt
     TaoMeditation.canonicalTaoMeditationQiBridgeReceipt
+    PolarityField.canonicalPolarityFieldObligationIndexReceipt
     canonicalTaoQiSummaryRows
     canonicalTaoQiGovernanceRows
     true

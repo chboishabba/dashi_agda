@@ -14,6 +14,13 @@ Rendered Agda dependency graphs currently checked in here:
 
 They can be regenerated with `./scripts/render_agda_dependency_graph.sh <module>`.
 
+Canonical interpretive-stack diagram source:
+
+- `TaoQiPolarityMetasystem.puml`
+  This is the normalized textual metasystem view for the Tao -> yin/yang ->
+  Qi -> polarity/phase/field stack. It is a governance/support diagram, not a
+  promoted theorem surface.
+
 Publication-routing smoke checks:
 
 - `python scripts/check_diagram_reproducibility.py`

@@ -135,6 +135,7 @@ import DASHI.Culture.KnotWeaveTopologyCultureBridge
 import DASHI.Culture.QiOperatorTheoryBoundary
 import DASHI.Culture.TaoChapterReadingReceipt
 import DASHI.Culture.TaoOperatorGrammar
+import DASHI.Culture.YinYangPolarityBoundary
 import DASHI.Combinatorics.String.Compatibility
 import DASHI.Combinatorics.String.HilbertToy
 import DASHI.Combinatorics.String.LieAlgebra
@@ -289,6 +290,9 @@ import DASHI.Interop.PhysicsChemistryBiologyDNAUnificationDischarge
 import DASHI.Interop.QiCarrierFieldBridge
 import DASHI.Interop.TaoMeditationQiAdapter
 import DASHI.Interop.TaoQiReadingAdapter
+import DASHI.Interop.TaoYinYangAdapter
+import DASHI.Interop.YinYangQiAdapter
+import DASHI.Interop.PolarityPhaseFieldBridge
 import DASHI.Interop.QuantumPathLightTransportAnalogyDischarge
 import DASHI.Interop.SeaMeInItBT369SphereUnwrap
 import DASHI.Interop.SeaMeInItROMKernelFormalism
@@ -298,6 +302,7 @@ import DASHI.Promotion.BiologyFiniteScopeClarification
 import DASHI.Promotion.ChemistryAuthorityBinding
 import DASHI.Promotion.KleinHodgeDualityBoundary
 import DASHI.Promotion.TaoQiObligationIndex
+import DASHI.Promotion.PolarityFieldObligationIndex
 import DASHI.Promotion.ChemistryFiniteComputationSurface
 import DASHI.Promotion.ChemistryFiniteRuleTargets
 import DASHI.Promotion.Cs133NumericAuthorityPayloadRequest
