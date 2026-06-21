@@ -159,6 +159,7 @@ import DASHI.Core.KernelMonoid
 import DASHI.Core.LensKernel
 import DASHI.Core.OddBerezinTopCoefficientBoundary
 import DASHI.Core.OddGrassmannCoefficientGate
+import DASHI.Core.OddSSP369FieldGate
 import DASHI.Core.OddSSPCoefficientGate
 import DASHI.Core.OperatorShapeNonAuthorityCore
 import DASHI.Core.OperatorTypes
@@ -229,6 +230,7 @@ import DASHI.Foundations.Base369NonaryTruthRing
 import DASHI.Foundations.Base369NumeralOntologyBoundary
 import DASHI.Foundations.Base369RingShape
 import DASHI.Foundations.Base369TriTruthField
+import DASHI.Foundations.SSPBase369Bridge
 import DASHI.Foundations.FifteenSSP369Forest
 import DASHI.Foundations.FifteenSSPSurface
 import DASHI.Foundations.HexTruthPolarityFactor
@@ -242,6 +244,7 @@ import DASHI.Foundations.PhysicsLinearAnalysisParity
 import DASHI.Foundations.PrincipiaVol1DashiBridge
 import DASHI.Foundations.SSPTritCarrier
 import DASHI.Foundations.SSPPrimeLane369Refinement
+import DASHI.Foundations.SSPPrimeLane369BridgeRegression
 import DASHI.Foundations.SSPPrimeLane369Signature
 import DASHI.Foundations.SSPPrimeLaneSymmetryProfile
 import DASHI.Foundations.StageAtlasZeroToEleven
@@ -336,8 +339,10 @@ import DASHI.Physics.Closure.NSGD1LayerCZIntegratedControlReceipt
 import DASHI.Physics.Closure.NSAlignmentProjectionODEReceipt
 import DASHI.Physics.Closure.NSCompressiveZonePiDecompositionReceipt
 import DASHI.Physics.Closure.NSCompressionDominatesExtensionReceipt
+import DASHI.Physics.Closure.NSDelta1BoundaryNormIdentityReceipt
 import DASHI.Physics.Closure.NSDelta1UniformGateReductionReceipt
 import DASHI.Physics.Closure.NSDeterminantAreaRouteTargetReceipt
+import DASHI.Physics.Closure.NSDeterminantConcentrationImpossibilityReceipt
 import DASHI.Physics.Closure.NSDeterminantSignRuleReceipt
 import DASHI.Physics.Closure.NSEulerAlignmentGapControlReceipt
 import DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt
@@ -351,6 +356,7 @@ import DASHI.Physics.Closure.NSPressurePoissonConventionNormalizationReceipt
 import DASHI.Physics.Closure.NSQ3ExtensionalThresholdReceipt
 import DASHI.Physics.Closure.NSGeometricConcentrationCarrierReceipt
 import DASHI.Physics.Closure.NSSardBoundaryRegularityReceipt
+import DASHI.Physics.Closure.NSSZeroBoundaryGenericityReceipt
 import DASHI.Physics.Closure.NSSharpTheoremGHierarchyReceipt
 import DASHI.Physics.Closure.NSStrainTypeIOmegaKPositiveReceipt
 import DASHI.Physics.Closure.NSTypeIHAreaUniformizationReceipt
@@ -521,6 +527,9 @@ import DASHI.Physics.Closure.PerelmanBTAnalogueDashboard
 import DASHI.Physics.Closure.PerelmanBTLedgerExactCounts
 import DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf
 import DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary
+import DASHI.Physics.Closure.SSPPrimeLane369BTBridge
+import DASHI.Physics.Closure.SSPPrimeLane369PAdicBridge
+import DASHI.Physics.Closure.SSPPrimeLane369PhaseBridge
 import DASHI.Physics.Closure.Sprint166ProjectionNonlocalityLeakagePrincipleReceipt
 import DASHI.Physics.Closure.SurgeryObligationBlockerNormalization
 import DASHI.Physics.Closure.UniformProjectionNonlocalityGapFinite

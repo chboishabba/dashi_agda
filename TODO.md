@@ -44,6 +44,17 @@ Current odd-lane / topology intake note for `2026-06-20`:
   ultrametric geometry, local prime symmetry chambers with both prime-stage
   and unit-order-stage readings, and a typed supervoxel field lift over the
   resulting carrier stack.
+- Prime-lane bridge-consumer tranche is recorded. Artifacts:
+  `DASHI/Foundations/SSPBase369Bridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369BTBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369PAdicBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369PhaseBridge.agda`,
+  `DASHI/Core/OddSSP369FieldGate.agda`, and
+  `DASHI/Foundations/SSPPrimeLane369BridgeRegression.agda`. The route now
+  bridges the typed 15SSP carrier into Base369 quotient readouts, BT valency
+  consumers, explicit finite p-adic coordinate witnesses, unified phase/stage
+  profiles, field-level odd extraction, and a single typed regression surface
+  for importing the new stack.
 
 Current NS Clay action note for `2026-06-20`:
 - Pressure-correction / uniform-`delta1` reduction tranche is now landed.

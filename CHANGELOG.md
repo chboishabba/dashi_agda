@@ -99,6 +99,22 @@ monitor surface.
   fail-closed: it sharpens the carrier geometry without promoting p-adic,
   BT-tree, wavefield, or Clay authority.
 
+- Prime-lane bridge-consumer tranche for `2026-06-21`: adds
+  `DASHI.Foundations.SSPBase369Bridge`,
+  `DASHI.Physics.Closure.SSPPrimeLane369BTBridge`,
+  `DASHI.Physics.Closure.SSPPrimeLane369PAdicBridge`,
+  `DASHI.Physics.Closure.SSPPrimeLane369PhaseBridge`,
+  `DASHI.Core.OddSSP369FieldGate`, and
+  `DASHI.Foundations.SSPPrimeLane369BridgeRegression`, wired through
+  `DASHI.Everything`. The tranche turns the new carrier stack into live
+  consumers: 15SSP surfaces now admit typed Base369 readouts, prime lanes now
+  admit typed BT valencies and finite p-adic coordinate witnesses, phase/stage
+  consumers now receive a unified typed seam, the field lift now participates
+  in odd extraction, and one compact regression surface ties canonical p7/p11/
+  p71 and root/depth3 examples together. This remains candidate-only and
+  fail-closed: no analytic p-adic completion, continuum BT authority, phase
+  promotion, or Clay authority is claimed.
+
 - Odd-lane / Möbius / Klein / Hodge / Base369 intake tranche for
   `2026-06-20`: adds `DASHI.Core.SuperPayloadReadingBoundary`,
   `DASHI.Core.OddGrassmannCoefficientGate`,
