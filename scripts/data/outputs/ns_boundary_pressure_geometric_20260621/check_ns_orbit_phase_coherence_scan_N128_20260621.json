@@ -1,0 +1,16 @@
+{
+  "C": "scripts/check_ns_orbit_phase_coherence_scan.py",
+  "F": "Any malformed field or authority drift is a hard error.",
+  "G": "Checker remains empirical and non-promoting.",
+  "L": "Load the scan JSON, validate rows and aggregates, then emit a checker receipt.",
+  "O": "Validate orbit-phase coherence telemetry output.",
+  "P": "FAIL_CLOSED_NS_ORBIT_PHASE_COHERENCE_SCAN_CHECK",
+  "R": "Check the schema, authority flags, aggregate rows, and framewise coherence fields.",
+  "S": "Fail-closed checker for malformed telemetry surfaces.",
+  "contract": "check_ns_orbit_phase_coherence_scan",
+  "errors": [],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_ORBIT_PHASE_COHERENCE_SCAN_CHECK",
+  "status": "ok",
+  "warnings": []
+}

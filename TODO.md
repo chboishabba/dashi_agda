@@ -84,6 +84,30 @@ Current odd-lane / topology intake note for `2026-06-20`:
   dynamics, continuum BT symmetry, or Clay authority is promoted.
 
 Current NS Clay action note for `2026-06-20`:
+- Sacasa/Kiriukhin orbit-coherence bridge tranche is now landed. Artifacts:
+  `DASHI/Physics/Closure/NSKiriukhinOrbitStretchingCarrierReceipt.agda`,
+  `DASHI/Physics/Closure/NSSacasaCosphereCoherenceCarrierReceipt.agda`,
+  `DASHI/Physics/Closure/NSSacasaKiriukhinIdentificationBoundary.agda`,
+  `DASHI/Physics/Closure/NSNonSobolevBridgeNoCircularityGate.agda`,
+  `DASHI/Physics/Closure/NSTriadPhaseLockingLiveWallReceipt.agda`,
+  `scripts/ns_orbit_phase_coherence_scan.py`,
+  `scripts/check_ns_orbit_phase_coherence_scan.py`,
+  `scripts/ns_non_sobolev_coherence_gate_scan.py`,
+  `scripts/check_ns_non_sobolev_coherence_gate_scan.py`,
+  `scripts/ns_sacasa_kiriukhin_bridge_summary.py`, and
+  `scripts/check_ns_sacasa_kiriukhin_bridge_summary.py`. The route now
+  records the Kiriukhin orbit-level stretching carrier `V_N` as model-only,
+  records the Sacasa cosphere carrier and its candidate observables
+  directionally, records the explicit no-circularity gate against
+  `H^s(s>2)`-only / expectation-only / model-only shortcuts, and isolates the
+  live wall as realization-level triadic phase-locking exclusion via a
+  genuinely non-Sobolev coherence bound. The new telemetry measures
+  resonant selected-mode orbit-phase coherence, same-amplitude phase-shuffled
+  non-Sobolev gap proxies, and a compact bridge summary over the shared raw
+  N128 frames. This remains fail-closed and non-promoting: no
+  Sacasa-Kiriukhin bridge theorem is proved, no continuation closure is
+  proved, and no Clay promotion is made.
+
 - Tube-morphology / boundary-helicity Route 1 tranche is now landed. Artifacts:
   `DASHI/Physics/Closure/NSTubeMorphologyForcedLocalizationRouteAuditReceipt.agda`,
   `DASHI/Physics/Closure/NSSingleTubePressureCaseExclusionReceipt.agda`,

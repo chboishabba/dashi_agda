@@ -1,0 +1,426 @@
+{
+  "C": "scripts/ns_sacasa_kiriukhin_bridge_summary.py",
+  "F": "The live wall is recorded as unproved; absent or unusable inputs remain explicit errors.",
+  "G": "No theorem, Clay, or proof claim is inferred from this telemetry bridge.",
+  "L": "Normalize both scans onto a shared phase key, compute bridge rows and simple correlations, and surface explicit source routes plus the live-wall status.",
+  "O": "Summarize orbit-phase/coherence telemetry against non-Sobolev telemetry.",
+  "P": "FAIL_CLOSED_NS_SACASA_KIRIUKHIN_BRIDGE_SUMMARY",
+  "R": "Join the shared orbit-phase keys across the orbit/coherence scan and the non-Sobolev scan, then emit compact correlations, aggregates, and route metadata.",
+  "S": "Fail-closed on missing inputs, malformed rows, or absent shared keys; no hidden promotion path exists.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "bridge_rows": [
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.5264613325671392,
+      "orbit_coherence": 0.628310928727831,
+      "orbit_extra": 0.05535822213779082,
+      "orbit_phase": 0.0,
+      "orbit_phase_raw": 0.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.35506535478699536,
+      "orbit_coherence": 0.621728680809369,
+      "orbit_extra": 0.05526271632693327,
+      "orbit_phase": 1.0,
+      "orbit_phase_raw": 1.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.508798920714173,
+      "orbit_coherence": 0.6075915231765348,
+      "orbit_extra": 0.05518267872448645,
+      "orbit_phase": 2.0,
+      "orbit_phase_raw": 2.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.161039055880145,
+      "orbit_coherence": 0.5857811341447093,
+      "orbit_extra": 0.0551261294337241,
+      "orbit_phase": 3.0,
+      "orbit_phase_raw": 3.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.1864694619300729,
+      "orbit_coherence": 0.555750321305412,
+      "orbit_extra": 0.055093935415444203,
+      "orbit_phase": 4.0,
+      "orbit_phase_raw": 4.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.37384549884232676,
+      "orbit_coherence": 0.5166887712043822,
+      "orbit_extra": 0.055081396012715805,
+      "orbit_phase": 5.0,
+      "orbit_phase_raw": 5.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": -0.00051537016384684,
+      "orbit_coherence": 0.2103807052717409,
+      "orbit_extra": 0.00614192745176717,
+      "orbit_phase": 6.0,
+      "orbit_phase_raw": 6.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.1574490985795597,
+      "orbit_coherence": 0.3080956505183135,
+      "orbit_extra": 0.006138433403085673,
+      "orbit_phase": 7.0,
+      "orbit_phase_raw": 7.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.10525628560031725,
+      "orbit_coherence": 0.42148645110340816,
+      "orbit_extra": 0.05506925224665918,
+      "orbit_phase": 8.0,
+      "orbit_phase_raw": 8.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.1115811822324167,
+      "orbit_coherence": 0.43885929518470845,
+      "orbit_extra": 0.05506217072769315,
+      "orbit_phase": 9.0,
+      "orbit_phase_raw": 9.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.1880870918862551,
+      "orbit_coherence": 0.4524088564171377,
+      "orbit_extra": 0.055065370737454676,
+      "orbit_phase": 10.0,
+      "orbit_phase_raw": 10.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.0,
+      "orbit_coherence": 0.0,
+      "orbit_extra": 0.0,
+      "orbit_phase": 11.0,
+      "orbit_phase_raw": 11.0,
+      "phase_label": null
+    },
+    {
+      "live_wall_unproved": false,
+      "non_sobolev_metric": 0.7015797903487673,
+      "orbit_coherence": 0.9999786227692732,
+      "orbit_extra": 0.05544799183885427,
+      "orbit_phase": 12.0,
+      "orbit_phase_raw": 12.0,
+      "phase_label": null
+    }
+  ],
+  "bridge_surface": {
+    "bridge_row_count": 13,
+    "coherence": {
+      "non_sobolev": {
+        "count": 13,
+        "max": 0.7015797903487673,
+        "mean": 0.2596244387080247,
+        "min": -0.00051537016384684
+      },
+      "orbit": {
+        "count": 13,
+        "max": 0.9999786227692732,
+        "mean": 0.4882354569717554,
+        "min": 0.0
+      },
+      "orbit_extra": {
+        "count": 13,
+        "max": 0.05544799183885427,
+        "mean": 0.04338694034281606,
+        "min": 0.0
+      }
+    },
+    "correlations": {
+      "coherence_vs_non_sobolev": 0.8580263448092831,
+      "orbit_phase_vs_coherence": -0.21654613776835824,
+      "orbit_phase_vs_non_sobolev": -0.2505706032193142
+    },
+    "coverage_fraction": 1.0,
+    "live_wall_proved": false,
+    "live_wall_status": "unproved",
+    "non_sobolev_only_key_count": 0,
+    "non_sobolev_row_count": 13,
+    "orbit_only_key_count": 0,
+    "orbit_phase_row_count": 13,
+    "shared_key_count": 13
+  },
+  "contract": "ns_sacasa_kiriukhin_bridge_summary",
+  "control_card": {
+    "C": "scripts/ns_sacasa_kiriukhin_bridge_summary.py",
+    "F": "The live wall is recorded as unproved; absent or unusable inputs remain explicit errors.",
+    "G": "No theorem, Clay, or proof claim is inferred from this telemetry bridge.",
+    "L": "Normalize both scans onto a shared phase key, compute bridge rows and simple correlations, and surface explicit source routes plus the live-wall status.",
+    "O": "Summarize orbit-phase/coherence telemetry against non-Sobolev telemetry.",
+    "P": "FAIL_CLOSED_NS_SACASA_KIRIUKHIN_BRIDGE_SUMMARY",
+    "R": "Join the shared orbit-phase keys across the orbit/coherence scan and the non-Sobolev scan, then emit compact correlations, aggregates, and route metadata.",
+    "S": "Fail-closed on missing inputs, malformed rows, or absent shared keys; no hidden promotion path exists."
+  },
+  "errors": [],
+  "inputs": {
+    "non_sobolev_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_non_sobolev_telemetry_scan_N128_20260621.json",
+    "orbit_phase_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_orbit_phase_coherence_scan_N128_20260621.json",
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_sacasa_kiriukhin_bridge_summary_20260621.json"
+  },
+  "live_wall_proved": false,
+  "live_wall_status": "unproved",
+  "route_decision": "FAIL_CLOSED_NS_SACASA_KIRIUKHIN_BRIDGE_SUMMARY",
+  "schema_version": "1.0.0",
+  "script": "scripts/ns_sacasa_kiriukhin_bridge_summary.py",
+  "source_routes": {
+    "non_sobolev_scan": {
+      "path": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_non_sobolev_telemetry_scan_N128_20260621.json",
+      "present": true,
+      "row_count": 13,
+      "rows": [
+        {
+          "coherence": 0.5264613325671392,
+          "extra": -0.6545771134705479,
+          "phase_key": 0.0,
+          "phase_key_raw": 0.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.35506535478699536,
+          "extra": -0.4352884123666174,
+          "phase_key": 1.0,
+          "phase_key_raw": 1.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.508798920714173,
+          "extra": -0.6971714614109258,
+          "phase_key": 2.0,
+          "phase_key_raw": 2.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.161039055880145,
+          "extra": -0.9423327051139037,
+          "phase_key": 3.0,
+          "phase_key_raw": 3.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.1864694619300729,
+          "extra": -0.7299987286727986,
+          "phase_key": 4.0,
+          "phase_key_raw": 4.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.37384549884232676,
+          "extra": -0.6333211365699442,
+          "phase_key": 5.0,
+          "phase_key_raw": 5.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": -0.00051537016384684,
+          "extra": -0.084973017980888,
+          "phase_key": 6.0,
+          "phase_key_raw": 6.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.1574490985795597,
+          "extra": -0.34615285185269085,
+          "phase_key": 7.0,
+          "phase_key_raw": 7.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.10525628560031725,
+          "extra": -0.2499978608738845,
+          "phase_key": 8.0,
+          "phase_key_raw": 8.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.1115811822324167,
+          "extra": -0.3823483294457388,
+          "phase_key": 9.0,
+          "phase_key_raw": 9.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.1880870918862551,
+          "extra": -0.42079320678383403,
+          "phase_key": 10.0,
+          "phase_key_raw": 10.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.0,
+          "extra": 0.0,
+          "phase_key": 11.0,
+          "phase_key_raw": 11.0,
+          "phase_label": null,
+          "status": "partial"
+        },
+        {
+          "coherence": 0.7015797903487673,
+          "extra": -0.7210301874351208,
+          "phase_key": 12.0,
+          "phase_key_raw": 12.0,
+          "phase_label": null,
+          "status": "ok"
+        }
+      ],
+      "status": "ok",
+      "usable_row_count": 13
+    },
+    "orbit_phase_scan": {
+      "path": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_orbit_phase_coherence_scan_N128_20260621.json",
+      "present": true,
+      "row_count": 13,
+      "rows": [
+        {
+          "coherence": 0.628310928727831,
+          "extra": 0.05535822213779082,
+          "phase_key": 0.0,
+          "phase_key_raw": 0.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.621728680809369,
+          "extra": 0.05526271632693327,
+          "phase_key": 1.0,
+          "phase_key_raw": 1.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.6075915231765348,
+          "extra": 0.05518267872448645,
+          "phase_key": 2.0,
+          "phase_key_raw": 2.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.5857811341447093,
+          "extra": 0.0551261294337241,
+          "phase_key": 3.0,
+          "phase_key_raw": 3.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.555750321305412,
+          "extra": 0.055093935415444203,
+          "phase_key": 4.0,
+          "phase_key_raw": 4.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.5166887712043822,
+          "extra": 0.055081396012715805,
+          "phase_key": 5.0,
+          "phase_key_raw": 5.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.2103807052717409,
+          "extra": 0.00614192745176717,
+          "phase_key": 6.0,
+          "phase_key_raw": 6.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.3080956505183135,
+          "extra": 0.006138433403085673,
+          "phase_key": 7.0,
+          "phase_key_raw": 7.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.42148645110340816,
+          "extra": 0.05506925224665918,
+          "phase_key": 8.0,
+          "phase_key_raw": 8.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.43885929518470845,
+          "extra": 0.05506217072769315,
+          "phase_key": 9.0,
+          "phase_key_raw": 9.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.4524088564171377,
+          "extra": 0.055065370737454676,
+          "phase_key": 10.0,
+          "phase_key_raw": 10.0,
+          "phase_label": null,
+          "status": "ok"
+        },
+        {
+          "coherence": 0.0,
+          "extra": 0.0,
+          "phase_key": 11.0,
+          "phase_key_raw": 11.0,
+          "phase_label": null,
+          "status": "partial"
+        },
+        {
+          "coherence": 0.9999786227692732,
+          "extra": 0.05544799183885427,
+          "phase_key": 12.0,
+          "phase_key_raw": 12.0,
+          "phase_label": null,
+          "status": "ok"
+        }
+      ],
+      "status": "ok",
+      "usable_row_count": 13
+    }
+  },
+  "status": "ok",
+  "warnings": []
+}

@@ -437,6 +437,15 @@ def build_specs() -> list[HarnessSpec]:
     ns_boundary_pressure_q_bridge_summary_out = (
         CHILD_OUT_DIR / "ns_boundary_pressure_q_bridge_summary_smoke.json"
     )
+    ns_orbit_phase_coherence_scan_out = (
+        CHILD_OUT_DIR / "ns_orbit_phase_coherence_scan_smoke.json"
+    )
+    ns_non_sobolev_coherence_gate_scan_out = (
+        CHILD_OUT_DIR / "ns_non_sobolev_coherence_gate_scan_smoke.json"
+    )
+    ns_sacasa_kiriukhin_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_sacasa_kiriukhin_bridge_summary_smoke.json"
+    )
     ns_tube_morphology_scan_out = (
         CHILD_OUT_DIR / "ns_tube_morphology_scan_smoke.json"
     )
@@ -523,6 +532,15 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_boundary_pressure_q_bridge_summary_check_out = (
         CHILD_OUT_DIR / "ns_boundary_pressure_q_bridge_summary_check_smoke.json"
+    )
+    ns_orbit_phase_coherence_scan_check_out = (
+        CHILD_OUT_DIR / "ns_orbit_phase_coherence_scan_check_smoke.json"
+    )
+    ns_non_sobolev_coherence_gate_scan_check_out = (
+        CHILD_OUT_DIR / "ns_non_sobolev_coherence_gate_scan_check_smoke.json"
+    )
+    ns_sacasa_kiriukhin_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_sacasa_kiriukhin_bridge_summary_check_smoke.json"
     )
     ns_tube_morphology_scan_check_out = (
         CHILD_OUT_DIR / "ns_tube_morphology_scan_check_smoke.json"
@@ -4340,6 +4358,170 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional tube-morphology scan",
                 "empirical/non-promoting; classifies high-enstrophy carrier voxels by local tube/sheet/blob proxies",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_orbit_phase_coherence_scan",
+            path=script("ns_orbit_phase_coherence_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_orbit_phase_coherence_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_orbit_phase_coherence_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_orbit_phase_coherence_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_orbit_phase_coherence_scan.py").exists()
+            else "ns_orbit_phase_coherence_scan script not found",
+            notes=(
+                "optional orbit-phase coherence scan",
+                "empirical/non-promoting; builds selected-mode resonant triad phase-coherence telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_orbit_phase_coherence_scan",
+            path=script("check_ns_orbit_phase_coherence_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_orbit_phase_coherence_scan_out),
+                "--output-json",
+                str(ns_orbit_phase_coherence_scan_check_out),
+            )
+            if ns_orbit_phase_coherence_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_orbit_phase_coherence_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_orbit_phase_coherence_scan_out.exists()
+            and script("check_ns_orbit_phase_coherence_scan.py").exists()
+            else (
+                "check_ns_orbit_phase_coherence_scan script not found"
+                if not script("check_ns_orbit_phase_coherence_scan.py").exists()
+                else "check_ns_orbit_phase_coherence_scan requires the orbit-phase scan output"
+            ),
+            notes=(
+                "optional orbit-phase coherence regression gate",
+                "validates non-promoting orbit-phase row and aggregate telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_non_sobolev_coherence_gate_scan",
+            path=script("ns_non_sobolev_coherence_gate_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_non_sobolev_coherence_gate_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_non_sobolev_coherence_gate_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_non_sobolev_coherence_gate_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_non_sobolev_coherence_gate_scan.py").exists()
+            else "ns_non_sobolev_coherence_gate_scan script not found",
+            notes=(
+                "optional non-Sobolev coherence gate scan",
+                "empirical/non-promoting; compares observed coherence to same-amplitude phase-shuffled controls",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_non_sobolev_coherence_gate_scan",
+            path=script("check_ns_non_sobolev_coherence_gate_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_non_sobolev_coherence_gate_scan_out),
+                "--output-json",
+                str(ns_non_sobolev_coherence_gate_scan_check_out),
+            )
+            if ns_non_sobolev_coherence_gate_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_non_sobolev_coherence_gate_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_non_sobolev_coherence_gate_scan_out.exists()
+            and script("check_ns_non_sobolev_coherence_gate_scan.py").exists()
+            else (
+                "check_ns_non_sobolev_coherence_gate_scan script not found"
+                if not script("check_ns_non_sobolev_coherence_gate_scan.py").exists()
+                else "check_ns_non_sobolev_coherence_gate_scan requires the non-Sobolev scan output"
+            ),
+            notes=(
+                "optional non-Sobolev coherence regression gate",
+                "validates same-H^s-control and non-promoting coherence-gap telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_sacasa_kiriukhin_bridge_summary",
+            path=script("ns_sacasa_kiriukhin_bridge_summary.py"),
+            args=(
+                "--orbit-phase-json",
+                str(ns_orbit_phase_coherence_scan_out),
+                "--non-sobolev-json",
+                str(ns_non_sobolev_coherence_gate_scan_out),
+                "--output-json",
+                str(ns_sacasa_kiriukhin_bridge_summary_out),
+            )
+            if ns_orbit_phase_coherence_scan_out.exists()
+            and ns_non_sobolev_coherence_gate_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_sacasa_kiriukhin_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_orbit_phase_coherence_scan_out.exists()
+            and ns_non_sobolev_coherence_gate_scan_out.exists()
+            and script("ns_sacasa_kiriukhin_bridge_summary.py").exists()
+            else (
+                "ns_sacasa_kiriukhin_bridge_summary script not found"
+                if not script("ns_sacasa_kiriukhin_bridge_summary.py").exists()
+                else "ns_sacasa_kiriukhin_bridge_summary requires orbit-phase and non-Sobolev outputs"
+            ),
+            notes=(
+                "optional Sacasa-Kiriukhin bridge summary",
+                "empirical/non-promoting; joins orbit-phase and non-Sobolev telemetry and keeps the live wall unproved",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_sacasa_kiriukhin_bridge_summary",
+            path=script("check_ns_sacasa_kiriukhin_bridge_summary.py"),
+            args=(
+                "--summary-json",
+                str(ns_sacasa_kiriukhin_bridge_summary_out),
+                "--output-json",
+                str(ns_sacasa_kiriukhin_bridge_summary_check_out),
+            )
+            if ns_sacasa_kiriukhin_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_sacasa_kiriukhin_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_sacasa_kiriukhin_bridge_summary_out.exists()
+            and script("check_ns_sacasa_kiriukhin_bridge_summary.py").exists()
+            else (
+                "check_ns_sacasa_kiriukhin_bridge_summary script not found"
+                if not script("check_ns_sacasa_kiriukhin_bridge_summary.py").exists()
+                else "check_ns_sacasa_kiriukhin_bridge_summary requires the bridge summary output"
+            ),
+            notes=(
+                "optional Sacasa-Kiriukhin bridge regression gate",
+                "validates non-promoting source-route, bridge-row, and live-wall bookkeeping",
             ),
         ),
         HarnessSpec(
