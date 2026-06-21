@@ -62,6 +62,16 @@ typed `mod [3,6,9]` fingerprint, recursive depth-refined `369` lane addresses,
 the 15-lane forest product, a prefix-based ultrametric surface, local prime
 symmetry chambers with both prime and unit-order stage readings, and a typed
 supervoxel field lift over the resulting carrier stack.
+The next bridge tranche now connects those carriers to live consumers:
+`DASHI.Foundations.SSPBase369Bridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369BTBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369PAdicBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369PhaseBridge`,
+`DASHI.Core.OddSSP369FieldGate`, and
+`DASHI.Foundations.SSPPrimeLane369BridgeRegression`. These modules expose
+typed quotient readouts from 15SSP into Base369, typed BT valencies, explicit
+p-adic-style depth-coordinate bridges, a unified phase/stage seam, field-level
+odd extraction, and one compact regression surface for importing the tranche.
 
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL
