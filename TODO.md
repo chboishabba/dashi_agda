@@ -84,6 +84,24 @@ Current odd-lane / topology intake note for `2026-06-20`:
   dynamics, continuum BT symmetry, or Clay authority is promoted.
 
 Current NS Clay action note for `2026-06-20`:
+- Boundary pressure-gate / Route 1 audit tranche is now landed. Artifacts:
+  `DASHI/Physics/Closure/NSBoundaryDelta1LevelSetEvolutionReceipt.agda`,
+  `DASHI/Physics/Closure/NSPressureRieszCompatibilityReceipt.agda`,
+  `DASHI/Physics/Closure/NSPressureQObservableRouteAuditReceipt.agda`,
+  `scripts/ns_boundary_pressure_gate_scan.py`,
+  `scripts/check_ns_boundary_pressure_gate_scan.py`,
+  `scripts/ns_boundary_pressure_q_bridge_summary.py`, and
+  `scripts/check_ns_boundary_pressure_q_bridge_summary.py`. The route now
+  records the fail-closed level-set `delta1` boundary evolution ledger,
+  records the torus pressure/Riesz compatibility surface
+  `-Delta p = h`, `h = ||S||_F^2 - |omega|^2/2`, `integral h = 0`, records
+  the `Q = <e2, Hess p e1>` / `I_Q` sign-gate audit as the live Route 1
+  pressure observable, and adds empirical boundary-band telemetry for
+  `P11/P22/P33/Q` plus a compact bridge to the existing `delta1` and
+  pressure-gap scans on the raw N128 archive. This remains fail-closed and
+  non-promoting: pressure-sign control is not proved, the `Q/I_Q` sign gate
+  is not closed, and the new scans are empirical only.
+
 - Case A / boundary-`delta1` geometric tranche is now landed. Artifacts:
   `DASHI/Physics/Closure/NSDelta1BoundaryNormIdentityReceipt.agda`,
   `DASHI/Physics/Closure/NSSZeroBoundaryGenericityReceipt.agda`,
