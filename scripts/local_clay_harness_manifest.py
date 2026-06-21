@@ -446,6 +446,18 @@ def build_specs() -> list[HarnessSpec]:
     ns_sacasa_kiriukhin_bridge_summary_out = (
         CHILD_OUT_DIR / "ns_sacasa_kiriukhin_bridge_summary_smoke.json"
     )
+    ns_triad_incidence_cocycle_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_incidence_cocycle_scan_smoke.json"
+    )
+    ns_triad_frustration_defect_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_frustration_defect_scan_smoke.json"
+    )
+    ns_adversarial_phase_reference_scan_out = (
+        CHILD_OUT_DIR / "ns_adversarial_phase_reference_scan_smoke.json"
+    )
+    ns_triad_frustration_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_triad_frustration_bridge_summary_smoke.json"
+    )
     ns_tube_morphology_scan_out = (
         CHILD_OUT_DIR / "ns_tube_morphology_scan_smoke.json"
     )
@@ -541,6 +553,18 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_sacasa_kiriukhin_bridge_summary_check_out = (
         CHILD_OUT_DIR / "ns_sacasa_kiriukhin_bridge_summary_check_smoke.json"
+    )
+    ns_triad_incidence_cocycle_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_incidence_cocycle_scan_check_smoke.json"
+    )
+    ns_triad_frustration_defect_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_frustration_defect_scan_check_smoke.json"
+    )
+    ns_adversarial_phase_reference_scan_check_out = (
+        CHILD_OUT_DIR / "ns_adversarial_phase_reference_scan_check_smoke.json"
+    )
+    ns_triad_frustration_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_triad_frustration_bridge_summary_check_smoke.json"
     )
     ns_tube_morphology_scan_check_out = (
         CHILD_OUT_DIR / "ns_tube_morphology_scan_check_smoke.json"
@@ -4522,6 +4546,228 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional Sacasa-Kiriukhin bridge regression gate",
                 "validates non-promoting source-route, bridge-row, and live-wall bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_incidence_cocycle_scan",
+            path=script("ns_triad_incidence_cocycle_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_incidence_cocycle_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_incidence_cocycle_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_incidence_cocycle_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_incidence_cocycle_scan.py").exists()
+            else "ns_triad_incidence_cocycle_scan script not found",
+            notes=(
+                "optional triad-incidence cocycle scan",
+                "empirical/non-promoting; builds selected-mode resonant triad incidence and cycle-rank telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_incidence_cocycle_scan",
+            path=script("check_ns_triad_incidence_cocycle_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_incidence_cocycle_scan_out),
+                "--output-json",
+                str(ns_triad_incidence_cocycle_scan_check_out),
+            )
+            if ns_triad_incidence_cocycle_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_incidence_cocycle_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_incidence_cocycle_scan_out.exists()
+            and script("check_ns_triad_incidence_cocycle_scan.py").exists()
+            else (
+                "check_ns_triad_incidence_cocycle_scan script not found"
+                if not script("check_ns_triad_incidence_cocycle_scan.py").exists()
+                else "check_ns_triad_incidence_cocycle_scan requires the triad-incidence scan output"
+            ),
+            notes=(
+                "optional triad-incidence cocycle regression gate",
+                "validates non-promoting incidence-density, cycle-rank, and exact-lock proxy telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_frustration_defect_scan",
+            path=script("ns_triad_frustration_defect_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_frustration_defect_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_frustration_defect_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_frustration_defect_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_frustration_defect_scan.py").exists()
+            else "ns_triad_frustration_defect_scan script not found",
+            notes=(
+                "optional triad-frustration defect scan",
+                "empirical/non-promoting; fits low-dimensional phase fields and measures weighted phase-closure residuals",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_frustration_defect_scan",
+            path=script("check_ns_triad_frustration_defect_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_frustration_defect_scan_out),
+                "--output-json",
+                str(ns_triad_frustration_defect_scan_check_out),
+            )
+            if ns_triad_frustration_defect_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_frustration_defect_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_frustration_defect_scan_out.exists()
+            and script("check_ns_triad_frustration_defect_scan.py").exists()
+            else (
+                "check_ns_triad_frustration_defect_scan script not found"
+                if not script("check_ns_triad_frustration_defect_scan.py").exists()
+                else "check_ns_triad_frustration_defect_scan requires the frustration scan output"
+            ),
+            notes=(
+                "optional triad-frustration defect regression gate",
+                "validates non-promoting frustration residuals, coherence-loss proxies, and concentration telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_adversarial_phase_reference_scan",
+            path=script("ns_adversarial_phase_reference_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_adversarial_phase_reference_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_adversarial_phase_reference_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_adversarial_phase_reference_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_adversarial_phase_reference_scan.py").exists()
+            else "ns_adversarial_phase_reference_scan script not found",
+            notes=(
+                "optional adversarial phase-reference scan",
+                "empirical/non-promoting; compares zero phase to a restricted family of geometry-aware phase references",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_adversarial_phase_reference_scan",
+            path=script("check_ns_adversarial_phase_reference_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_adversarial_phase_reference_scan_out),
+                "--output-json",
+                str(ns_adversarial_phase_reference_scan_check_out),
+            )
+            if ns_adversarial_phase_reference_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_adversarial_phase_reference_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_adversarial_phase_reference_scan_out.exists()
+            and script("check_ns_adversarial_phase_reference_scan.py").exists()
+            else (
+                "check_ns_adversarial_phase_reference_scan script not found"
+                if not script("check_ns_adversarial_phase_reference_scan.py").exists()
+                else "check_ns_adversarial_phase_reference_scan requires the adversarial-reference scan output"
+            ),
+            notes=(
+                "optional adversarial phase-reference regression gate",
+                "validates non-promoting winning-reference and zero-phase-comparison telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_frustration_bridge_summary",
+            path=script("ns_triad_frustration_bridge_summary.py"),
+            args=(
+                "--incidence-json",
+                str(ns_triad_incidence_cocycle_scan_out),
+                "--frustration-json",
+                str(ns_triad_frustration_defect_scan_out),
+                "--adversarial-json",
+                str(ns_adversarial_phase_reference_scan_out),
+                "--output-json",
+                str(ns_triad_frustration_bridge_summary_out),
+            )
+            if ns_triad_incidence_cocycle_scan_out.exists()
+            and ns_triad_frustration_defect_scan_out.exists()
+            and ns_adversarial_phase_reference_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_frustration_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_incidence_cocycle_scan_out.exists()
+            and ns_triad_frustration_defect_scan_out.exists()
+            and ns_adversarial_phase_reference_scan_out.exists()
+            and script("ns_triad_frustration_bridge_summary.py").exists()
+            else (
+                "ns_triad_frustration_bridge_summary script not found"
+                if not script("ns_triad_frustration_bridge_summary.py").exists()
+                else "ns_triad_frustration_bridge_summary requires incidence, frustration, and adversarial outputs"
+            ),
+            notes=(
+                "optional triad-frustration bridge summary",
+                "empirical/non-promoting; joins the cocycle, frustration, and adversarial reference surfaces and keeps the live wall unproved",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_frustration_bridge_summary",
+            path=script("check_ns_triad_frustration_bridge_summary.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_frustration_bridge_summary_out),
+                "--output-json",
+                str(ns_triad_frustration_bridge_summary_check_out),
+            )
+            if ns_triad_frustration_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_frustration_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_frustration_bridge_summary_out.exists()
+            and script("check_ns_triad_frustration_bridge_summary.py").exists()
+            else (
+                "check_ns_triad_frustration_bridge_summary script not found"
+                if not script("check_ns_triad_frustration_bridge_summary.py").exists()
+                else "check_ns_triad_frustration_bridge_summary requires the bridge summary output"
+            ),
+            notes=(
+                "optional triad-frustration bridge regression gate",
+                "validates non-promoting bridge-row metrics, correlations, and the explicit unproved-wall marker",
             ),
         ),
         HarnessSpec(

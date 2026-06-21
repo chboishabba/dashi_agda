@@ -1,0 +1,4425 @@
+{
+  "C": "scripts/ns_triad_incidence_cocycle_scan.py",
+  "F": "A low residual or low cycle rank is still only empirical telemetry, not a proof of solvability or promotion.",
+  "G": "No theorem, Clay, or route promotion is inferred from this scan.",
+  "L": "Load raw frames, construct a dominant mode carrier, form resonant triads, build incidence records, and emit framewise cocycle metrics.",
+  "O": "Measure candidate resonant-triad incidence and cocycle telemetry on the raw N128 archive.",
+  "P": "FAIL_CLOSED_NS_TRIAD_INCIDENCE_COCYCLE_SCAN",
+  "R": "Build a fail-closed carrier from dominant Fourier-vorticity modes, extract resonant selected-mode triads, assemble an incidence-style triad graph, and track cycle-rank and exact-lock proxies.",
+  "S": "Telemetry only; the incidence/cycle carrier is empirical and non-promoting.",
+  "aggregate": {
+    "carrier_mode_count_mean": 8.0,
+    "cycle_rank_proxy_mean": 9.333333333333334,
+    "error_frames": 0,
+    "exact_lock_residual_rms_mean": 2.181154200301622,
+    "exact_lock_score_mean": 0.3169231906279573,
+    "exact_lock_score_vs_density_correlation": -0.4967983842200984,
+    "incidence_density_mean": 0.4444444444444444,
+    "incidence_density_vs_cycle_rank_correlation": -0.9999999999999999,
+    "ok_frames": 12,
+    "partial_frames": 1,
+    "processed_frames": 13,
+    "top_k": 48,
+    "triad_count_mean": 8.0
+  },
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "contract": "ns_triad_incidence_cocycle_scan",
+  "control_card": {
+    "C": "scripts/ns_triad_incidence_cocycle_scan.py",
+    "F": "A low residual or low cycle rank is still only empirical telemetry, not a proof of solvability or promotion.",
+    "G": "No theorem, Clay, or route promotion is inferred from this scan.",
+    "L": "Load raw frames, construct a dominant mode carrier, form resonant triads, build incidence records, and emit framewise cocycle metrics.",
+    "O": "Measure candidate resonant-triad incidence and cocycle telemetry on the raw N128 archive.",
+    "P": "FAIL_CLOSED_NS_TRIAD_INCIDENCE_COCYCLE_SCAN",
+    "R": "Build a fail-closed carrier from dominant Fourier-vorticity modes, extract resonant selected-mode triads, assemble an incidence-style triad graph, and track cycle-rank and exact-lock proxies.",
+    "S": "Telemetry only; the incidence/cycle carrier is empirical and non-promoting."
+  },
+  "errors": [],
+  "inputs": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_incidence_cocycle_scan_N128_20260621.json",
+    "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz"
+  },
+  "parameters": {
+    "frame": null,
+    "frame_limit": null,
+    "lock_eps": 1e-06,
+    "pool_multiplier": 24,
+    "top_k": 48,
+    "zero_eps": 1e-12
+  },
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_INCIDENCE_COCYCLE_SCAN",
+  "schema_version": "1.0.0",
+  "script": "scripts/ns_triad_incidence_cocycle_scan.py",
+  "status": "ok",
+  "triad_incidence_rows": [
+    {
+      "carrier_mode_count": 6,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 7,
+      "dominant_mode_amplitude": 334987.4785775603,
+      "dominant_mode_key": [
+        -11,
+        42,
+        -29
+      ],
+      "dominant_mode_phase": -2.7263496874125703,
+      "dominant_mode_shell_radius": 52.21110992882645,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 2.250176481838536,
+      "exact_lock_residual_rms": 2.250176481838535,
+      "exact_lock_score": 0.3076756002598135,
+      "frame": 0,
+      "incidence_density": 0.5,
+      "incidence_nonzero_count": 18,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 2.250176481838536,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            3,
+            5
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              27,
+              1,
+              -23
+            ]
+          ],
+          "phase_mismatch": 2.250176481838536,
+          "weight": 3.0646880736299044e+16
+        },
+        {
+          "abs_phase_mismatch": 2.250176481838535,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            4,
+            2
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ]
+          ],
+          "phase_mismatch": 2.250176481838535,
+          "weight": 3.0646880736299052e+16
+        },
+        {
+          "abs_phase_mismatch": 2.250176481838535,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            2,
+            4
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -27,
+              -1,
+              23
+            ]
+          ],
+          "phase_mismatch": -2.250176481838535,
+          "weight": 3.0646880736299052e+16
+        },
+        {
+          "abs_phase_mismatch": 2.250176481838536,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            5,
+            3
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              38,
+              -41,
+              6
+            ]
+          ],
+          "phase_mismatch": -2.250176481838536,
+          "weight": 3.0646880736299044e+16
+        },
+        {
+          "abs_phase_mismatch": 2.250176481838535,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            5,
+            0
+          ],
+          "mode_keys": [
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              -11,
+              42,
+              -29
+            ]
+          ],
+          "phase_mismatch": -2.250176481838535,
+          "weight": 3.0646880736299044e+16
+        },
+        {
+          "abs_phase_mismatch": 2.250176481838535,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            4,
+            1
+          ],
+          "mode_keys": [
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              11,
+              -42,
+              29
+            ]
+          ],
+          "phase_mismatch": 2.250176481838535,
+          "weight": 3.0646880736299056e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.17819688602962763,
+      "mode_count": 6,
+      "mode_graph_component_count": 1,
+      "mode_graph_edge_count": 12,
+      "orbit_phase": 0.0,
+      "selected_mode_keys": [
+        [
+          -11,
+          42,
+          -29
+        ],
+        [
+          11,
+          -42,
+          29
+        ],
+        [
+          -38,
+          41,
+          -6
+        ],
+        [
+          38,
+          -41,
+          6
+        ],
+        [
+          -27,
+          -1,
+          23
+        ],
+        [
+          27,
+          1,
+          -23
+        ]
+      ],
+      "snapshot_index": 0,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_shell_spread_mean": 20.740381189062045
+    },
+    {
+      "carrier_mode_count": 6,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 7,
+      "dominant_mode_amplitude": 345385.70388390135,
+      "dominant_mode_key": [
+        -11,
+        42,
+        -29
+      ],
+      "dominant_mode_phase": -2.724533445537592,
+      "dominant_mode_shell_radius": 52.21110992882645,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 2.2417442118687987,
+      "exact_lock_residual_rms": 2.2417442118687987,
+      "exact_lock_score": 0.3084759113130399,
+      "frame": 1,
+      "incidence_density": 0.5,
+      "incidence_nonzero_count": 18,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 2.2417442118687987,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            3,
+            5
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              27,
+              1,
+              -23
+            ]
+          ],
+          "phase_mismatch": 2.2417442118687987,
+          "weight": 3.2085433207032348e+16
+        },
+        {
+          "abs_phase_mismatch": 2.2417442118687987,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            4,
+            2
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ]
+          ],
+          "phase_mismatch": 2.2417442118687987,
+          "weight": 3.2085433207032344e+16
+        },
+        {
+          "abs_phase_mismatch": 2.2417442118687987,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            2,
+            4
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -27,
+              -1,
+              23
+            ]
+          ],
+          "phase_mismatch": -2.2417442118687987,
+          "weight": 3.2085433207032344e+16
+        },
+        {
+          "abs_phase_mismatch": 2.2417442118687987,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            5,
+            3
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              38,
+              -41,
+              6
+            ]
+          ],
+          "phase_mismatch": -2.2417442118687987,
+          "weight": 3.208543320703235e+16
+        },
+        {
+          "abs_phase_mismatch": 2.2417442118687987,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            5,
+            0
+          ],
+          "mode_keys": [
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              -11,
+              42,
+              -29
+            ]
+          ],
+          "phase_mismatch": -2.2417442118687987,
+          "weight": 3.2085433207032348e+16
+        },
+        {
+          "abs_phase_mismatch": 2.2417442118687987,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            4,
+            1
+          ],
+          "mode_keys": [
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              11,
+              -42,
+              29
+            ]
+          ],
+          "phase_mismatch": 2.2417442118687987,
+          "weight": 3.2085433207032344e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.1808362040952092,
+      "mode_count": 6,
+      "mode_graph_component_count": 1,
+      "mode_graph_edge_count": 12,
+      "orbit_phase": 1.0,
+      "selected_mode_keys": [
+        [
+          -11,
+          42,
+          -29
+        ],
+        [
+          11,
+          -42,
+          29
+        ],
+        [
+          -38,
+          41,
+          -6
+        ],
+        [
+          38,
+          -41,
+          6
+        ],
+        [
+          -27,
+          -1,
+          23
+        ],
+        [
+          27,
+          1,
+          -23
+        ]
+      ],
+      "snapshot_index": 1,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_shell_spread_mean": 20.740381189062045
+    },
+    {
+      "carrier_mode_count": 6,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 7,
+      "dominant_mode_amplitude": 348782.52470583207,
+      "dominant_mode_key": [
+        11,
+        -42,
+        29
+      ],
+      "dominant_mode_phase": 2.726410734965061,
+      "dominant_mode_shell_radius": 52.21110992882645,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 2.2238209950822636,
+      "exact_lock_residual_rms": 2.2238209950822627,
+      "exact_lock_score": 0.3101909198821639,
+      "frame": 2,
+      "incidence_density": 0.5,
+      "incidence_nonzero_count": 18,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 2.2238209950822636,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            3,
+            5
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              38,
+              -41,
+              6
+            ]
+          ],
+          "phase_mismatch": -2.2238209950822636,
+          "weight": 3.2005564472757096e+16
+        },
+        {
+          "abs_phase_mismatch": 2.223820995082262,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            4,
+            2
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -27,
+              -1,
+              23
+            ]
+          ],
+          "phase_mismatch": -2.223820995082262,
+          "weight": 3.2005564472757096e+16
+        },
+        {
+          "abs_phase_mismatch": 2.2238209950822627,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            2,
+            4
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ]
+          ],
+          "phase_mismatch": 2.2238209950822627,
+          "weight": 3.2005564472757092e+16
+        },
+        {
+          "abs_phase_mismatch": 2.2238209950822627,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            5,
+            3
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              27,
+              1,
+              -23
+            ]
+          ],
+          "phase_mismatch": 2.2238209950822627,
+          "weight": 3.200556447275709e+16
+        },
+        {
+          "abs_phase_mismatch": 2.2238209950822627,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            5,
+            0
+          ],
+          "mode_keys": [
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              11,
+              -42,
+              29
+            ]
+          ],
+          "phase_mismatch": 2.2238209950822627,
+          "weight": 3.2005564472757096e+16
+        },
+        {
+          "abs_phase_mismatch": 2.2238209950822636,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            4,
+            1
+          ],
+          "mode_keys": [
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -11,
+              42,
+              -29
+            ]
+          ],
+          "phase_mismatch": -2.2238209950822636,
+          "weight": 3.2005564472757092e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.1826782030100013,
+      "mode_count": 6,
+      "mode_graph_component_count": 1,
+      "mode_graph_edge_count": 12,
+      "orbit_phase": 2.0,
+      "selected_mode_keys": [
+        [
+          11,
+          -42,
+          29
+        ],
+        [
+          -11,
+          42,
+          -29
+        ],
+        [
+          -27,
+          -1,
+          23
+        ],
+        [
+          27,
+          1,
+          -23
+        ],
+        [
+          -38,
+          41,
+          -6
+        ],
+        [
+          38,
+          -41,
+          6
+        ]
+      ],
+      "snapshot_index": 2,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_shell_spread_mean": 20.740381189062045
+    },
+    {
+      "carrier_mode_count": 6,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 7,
+      "dominant_mode_amplitude": 345751.6390042837,
+      "dominant_mode_key": [
+        -11,
+        42,
+        -29
+      ],
+      "dominant_mode_phase": -2.7310661914274217,
+      "dominant_mode_shell_radius": 52.21110992882645,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 2.1966398539891854,
+      "exact_lock_residual_rms": 2.196639853989185,
+      "exact_lock_score": 0.31282848418224823,
+      "frame": 3,
+      "incidence_density": 0.5,
+      "incidence_nonzero_count": 18,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 2.1966398539891845,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            2,
+            4
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ]
+          ],
+          "phase_mismatch": 2.1966398539891845,
+          "weight": 3.0578579378666028e+16
+        },
+        {
+          "abs_phase_mismatch": 2.1966398539891845,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            5,
+            3
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              27,
+              1,
+              -23
+            ]
+          ],
+          "phase_mismatch": 2.1966398539891845,
+          "weight": 3.0578579378666024e+16
+        },
+        {
+          "abs_phase_mismatch": 2.1966398539891854,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            3,
+            5
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              38,
+              -41,
+              6
+            ]
+          ],
+          "phase_mismatch": -2.1966398539891854,
+          "weight": 3.0578579378666016e+16
+        },
+        {
+          "abs_phase_mismatch": 2.1966398539891845,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            4,
+            2
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -27,
+              -1,
+              23
+            ]
+          ],
+          "phase_mismatch": -2.1966398539891845,
+          "weight": 3.057857937866602e+16
+        },
+        {
+          "abs_phase_mismatch": 2.1966398539891845,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            5,
+            1
+          ],
+          "mode_keys": [
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              11,
+              -42,
+              29
+            ]
+          ],
+          "phase_mismatch": 2.1966398539891845,
+          "weight": 3.0578579378666024e+16
+        },
+        {
+          "abs_phase_mismatch": 2.1966398539891845,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            4,
+            0
+          ],
+          "mode_keys": [
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -11,
+              42,
+              -29
+            ]
+          ],
+          "phase_mismatch": -2.1966398539891845,
+          "weight": 3.0578579378666024e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.18380214017779195,
+      "mode_count": 6,
+      "mode_graph_component_count": 1,
+      "mode_graph_edge_count": 12,
+      "orbit_phase": 3.0,
+      "selected_mode_keys": [
+        [
+          -11,
+          42,
+          -29
+        ],
+        [
+          11,
+          -42,
+          29
+        ],
+        [
+          -27,
+          -1,
+          23
+        ],
+        [
+          27,
+          1,
+          -23
+        ],
+        [
+          -38,
+          41,
+          -6
+        ],
+        [
+          38,
+          -41,
+          6
+        ]
+      ],
+      "snapshot_index": 3,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_shell_spread_mean": 20.740381189062045
+    },
+    {
+      "carrier_mode_count": 6,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 7,
+      "dominant_mode_amplitude": 337323.19497144903,
+      "dominant_mode_key": [
+        11,
+        -42,
+        29
+      ],
+      "dominant_mode_phase": 2.7380011717387016,
+      "dominant_mode_shell_radius": 52.21110992882645,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 2.160061555359272,
+      "exact_lock_residual_rms": 2.1600615553592717,
+      "exact_lock_score": 0.3164495319099278,
+      "frame": 4,
+      "incidence_density": 0.5,
+      "incidence_nonzero_count": 18,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 2.160061555359272,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            3,
+            5
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              38,
+              -41,
+              6
+            ]
+          ],
+          "phase_mismatch": -2.160061555359272,
+          "weight": 2.8128935471893116e+16
+        },
+        {
+          "abs_phase_mismatch": 2.1600615553592712,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            4,
+            2
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -27,
+              -1,
+              23
+            ]
+          ],
+          "phase_mismatch": -2.1600615553592712,
+          "weight": 2.812893547189313e+16
+        },
+        {
+          "abs_phase_mismatch": 2.160061555359272,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            2,
+            4
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ]
+          ],
+          "phase_mismatch": 2.160061555359272,
+          "weight": 2.812893547189313e+16
+        },
+        {
+          "abs_phase_mismatch": 2.1600615553592712,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            5,
+            3
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              27,
+              1,
+              -23
+            ]
+          ],
+          "phase_mismatch": 2.1600615553592712,
+          "weight": 2.812893547189311e+16
+        },
+        {
+          "abs_phase_mismatch": 2.160061555359272,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            5,
+            0
+          ],
+          "mode_keys": [
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              11,
+              -42,
+              29
+            ]
+          ],
+          "phase_mismatch": 2.160061555359272,
+          "weight": 2.812893547189311e+16
+        },
+        {
+          "abs_phase_mismatch": 2.160061555359272,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            4,
+            1
+          ],
+          "mode_keys": [
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -11,
+              42,
+              -29
+            ]
+          ],
+          "phase_mismatch": -2.160061555359272,
+          "weight": 2.8128935471893124e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.1843469497380463,
+      "mode_count": 6,
+      "mode_graph_component_count": 1,
+      "mode_graph_edge_count": 12,
+      "orbit_phase": 4.0,
+      "selected_mode_keys": [
+        [
+          11,
+          -42,
+          29
+        ],
+        [
+          -11,
+          42,
+          -29
+        ],
+        [
+          -27,
+          -1,
+          23
+        ],
+        [
+          27,
+          1,
+          -23
+        ],
+        [
+          -38,
+          41,
+          -6
+        ],
+        [
+          38,
+          -41,
+          6
+        ]
+      ],
+      "snapshot_index": 4,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_shell_spread_mean": 20.740381189062045
+    },
+    {
+      "carrier_mode_count": 6,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 7,
+      "dominant_mode_amplitude": 324797.23151609977,
+      "dominant_mode_key": [
+        11,
+        -42,
+        29
+      ],
+      "dominant_mode_phase": 2.7469923507077665,
+      "dominant_mode_shell_radius": 52.21110992882645,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 2.1137752689815548,
+      "exact_lock_residual_rms": 2.113775268981554,
+      "exact_lock_score": 0.3211535559298978,
+      "frame": 5,
+      "incidence_density": 0.5,
+      "incidence_nonzero_count": 18,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 2.113775268981554,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            2,
+            4
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              38,
+              -41,
+              6
+            ]
+          ],
+          "phase_mismatch": -2.113775268981554,
+          "weight": 2.5042593816743628e+16
+        },
+        {
+          "abs_phase_mismatch": 2.113775268981554,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            5,
+            3
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -27,
+              -1,
+              23
+            ]
+          ],
+          "phase_mismatch": -2.113775268981554,
+          "weight": 2.504259381674362e+16
+        },
+        {
+          "abs_phase_mismatch": 2.113775268981554,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            3,
+            5
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ]
+          ],
+          "phase_mismatch": 2.113775268981554,
+          "weight": 2.504259381674362e+16
+        },
+        {
+          "abs_phase_mismatch": 2.113775268981554,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            4,
+            2
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              27,
+              1,
+              -23
+            ]
+          ],
+          "phase_mismatch": 2.113775268981554,
+          "weight": 2.504259381674363e+16
+        },
+        {
+          "abs_phase_mismatch": 2.1137752689815548,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            5,
+            1
+          ],
+          "mode_keys": [
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -11,
+              42,
+              -29
+            ]
+          ],
+          "phase_mismatch": -2.1137752689815548,
+          "weight": 2.5042593816743628e+16
+        },
+        {
+          "abs_phase_mismatch": 2.113775268981554,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            4,
+            0
+          ],
+          "mode_keys": [
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              11,
+              -42,
+              29
+            ]
+          ],
+          "phase_mismatch": 2.113775268981554,
+          "weight": 2.5042593816743628e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.18449889942861725,
+      "mode_count": 6,
+      "mode_graph_component_count": 1,
+      "mode_graph_edge_count": 12,
+      "orbit_phase": 5.0,
+      "selected_mode_keys": [
+        [
+          11,
+          -42,
+          29
+        ],
+        [
+          -11,
+          42,
+          -29
+        ],
+        [
+          27,
+          1,
+          -23
+        ],
+        [
+          -27,
+          -1,
+          23
+        ],
+        [
+          38,
+          -41,
+          6
+        ],
+        [
+          -38,
+          41,
+          -6
+        ]
+      ],
+      "snapshot_index": 5,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_shell_spread_mean": 20.740381189062045
+    },
+    {
+      "carrier_mode_count": 18,
+      "carrier_shell_radius_mean": 46.28162878697243,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 21,
+      "dominant_mode_amplitude": 309542.14301352936,
+      "dominant_mode_key": [
+        11,
+        -42,
+        29
+      ],
+      "dominant_mode_phase": 2.757973307229048,
+      "dominant_mode_shell_radius": 52.21110992882645,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 2.057473160206479,
+      "exact_lock_residual_rms": 1.8194785598191252,
+      "exact_lock_score": 0.35467551136978737,
+      "frame": 6,
+      "incidence_density": 0.16666666666666666,
+      "incidence_nonzero_count": 54,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 2.057473160206478,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            6,
+            12
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              38,
+              -41,
+              6
+            ]
+          ],
+          "phase_mismatch": -2.057473160206478,
+          "weight": 2.1685565509512424e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0574731602064773,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            13,
+            7
+          ],
+          "mode_keys": [
+            [
+              11,
+              -42,
+              29
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -27,
+              -1,
+              23
+            ]
+          ],
+          "phase_mismatch": -2.0574731602064773,
+          "weight": 2.168556550951242e+16
+        },
+        {
+          "abs_phase_mismatch": 2.057473160206478,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            7,
+            13
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ]
+          ],
+          "phase_mismatch": 2.057473160206478,
+          "weight": 2.1685565509512412e+16
+        },
+        {
+          "abs_phase_mismatch": 2.057473160206478,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            12,
+            6
+          ],
+          "mode_keys": [
+            [
+              -11,
+              42,
+              -29
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              27,
+              1,
+              -23
+            ]
+          ],
+          "phase_mismatch": 2.057473160206478,
+          "weight": 2.168556550951242e+16
+        },
+        {
+          "abs_phase_mismatch": 1.9467371463832595,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            8,
+            10
+          ],
+          "mode_keys": [
+            [
+              -20,
+              39,
+              -37
+            ],
+            [
+              -17,
+              1,
+              27
+            ],
+            [
+              -37,
+              40,
+              -10
+            ]
+          ],
+          "phase_mismatch": -1.9467371463832595,
+          "weight": 2.1506014475018136e+16
+        },
+        {
+          "abs_phase_mismatch": 1.9467371463832597,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            11,
+            9
+          ],
+          "mode_keys": [
+            [
+              -20,
+              39,
+              -37
+            ],
+            [
+              37,
+              -40,
+              10
+            ],
+            [
+              17,
+              -1,
+              -27
+            ]
+          ],
+          "phase_mismatch": -1.9467371463832597,
+          "weight": 2.1506014475018136e+16
+        },
+        {
+          "abs_phase_mismatch": 1.946737146383259,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            9,
+            11
+          ],
+          "mode_keys": [
+            [
+              20,
+              -39,
+              37
+            ],
+            [
+              17,
+              -1,
+              -27
+            ],
+            [
+              37,
+              -40,
+              10
+            ]
+          ],
+          "phase_mismatch": 1.946737146383259,
+          "weight": 2.1506014475018132e+16
+        },
+        {
+          "abs_phase_mismatch": 1.9467371463832588,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            10,
+            8
+          ],
+          "mode_keys": [
+            [
+              20,
+              -39,
+              37
+            ],
+            [
+              -37,
+              40,
+              -10
+            ],
+            [
+              -17,
+              1,
+              27
+            ]
+          ],
+          "phase_mismatch": 1.9467371463832588,
+          "weight": 2.1506014475018132e+16
+        },
+        {
+          "abs_phase_mismatch": 1.2969745451458479,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            4,
+            14,
+            16
+          ],
+          "mode_keys": [
+            [
+              34,
+              -36,
+              38
+            ],
+            [
+              -25,
+              12,
+              -19
+            ],
+            [
+              9,
+              -24,
+              19
+            ]
+          ],
+          "phase_mismatch": 1.2969745451458479,
+          "weight": 1.861788492033847e+16
+        },
+        {
+          "abs_phase_mismatch": 1.296974545145848,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            4,
+            17,
+            15
+          ],
+          "mode_keys": [
+            [
+              34,
+              -36,
+              38
+            ],
+            [
+              -9,
+              24,
+              -19
+            ],
+            [
+              25,
+              -12,
+              19
+            ]
+          ],
+          "phase_mismatch": 1.296974545145848,
+          "weight": 1.861788492033847e+16
+        },
+        {
+          "abs_phase_mismatch": 1.2969745451458483,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            5,
+            15,
+            17
+          ],
+          "mode_keys": [
+            [
+              -34,
+              36,
+              -38
+            ],
+            [
+              25,
+              -12,
+              19
+            ],
+            [
+              -9,
+              24,
+              -19
+            ]
+          ],
+          "phase_mismatch": -1.2969745451458483,
+          "weight": 1.861788492033847e+16
+        },
+        {
+          "abs_phase_mismatch": 1.296974545145848,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            5,
+            16,
+            14
+          ],
+          "mode_keys": [
+            [
+              -34,
+              36,
+              -38
+            ],
+            [
+              9,
+              -24,
+              19
+            ],
+            [
+              -25,
+              12,
+              -19
+            ]
+          ],
+          "phase_mismatch": -1.296974545145848,
+          "weight": 1.8617884920338476e+16
+        },
+        {
+          "abs_phase_mismatch": 2.057473160206479,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            6,
+            13,
+            1
+          ],
+          "mode_keys": [
+            [
+              27,
+              1,
+              -23
+            ],
+            [
+              -38,
+              41,
+              -6
+            ],
+            [
+              -11,
+              42,
+              -29
+            ]
+          ],
+          "phase_mismatch": -2.057473160206479,
+          "weight": 2.168556550951242e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0574731602064773,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            7,
+            12,
+            0
+          ],
+          "mode_keys": [
+            [
+              -27,
+              -1,
+              23
+            ],
+            [
+              38,
+              -41,
+              6
+            ],
+            [
+              11,
+              -42,
+              29
+            ]
+          ],
+          "phase_mismatch": 2.0574731602064773,
+          "weight": 2.168556550951242e+16
+        },
+        {
+          "abs_phase_mismatch": 1.946737146383259,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            8,
+            11,
+            3
+          ],
+          "mode_keys": [
+            [
+              -17,
+              1,
+              27
+            ],
+            [
+              37,
+              -40,
+              10
+            ],
+            [
+              20,
+              -39,
+              37
+            ]
+          ],
+          "phase_mismatch": -1.946737146383259,
+          "weight": 2.1506014475018132e+16
+        },
+        {
+          "abs_phase_mismatch": 1.9467371463832595,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            9,
+            10,
+            2
+          ],
+          "mode_keys": [
+            [
+              17,
+              -1,
+              -27
+            ],
+            [
+              -37,
+              40,
+              -10
+            ],
+            [
+              -20,
+              39,
+              -37
+            ]
+          ],
+          "phase_mismatch": 1.9467371463832595,
+          "weight": 2.1506014475018136e+16
+        },
+        {
+          "abs_phase_mismatch": 1.2969745451458479,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            14,
+            17,
+            5
+          ],
+          "mode_keys": [
+            [
+              -25,
+              12,
+              -19
+            ],
+            [
+              -9,
+              24,
+              -19
+            ],
+            [
+              -34,
+              36,
+              -38
+            ]
+          ],
+          "phase_mismatch": 1.2969745451458479,
+          "weight": 1.861788492033847e+16
+        },
+        {
+          "abs_phase_mismatch": 1.296974545145848,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            15,
+            16,
+            4
+          ],
+          "mode_keys": [
+            [
+              25,
+              -12,
+              19
+            ],
+            [
+              9,
+              -24,
+              19
+            ],
+            [
+              34,
+              -36,
+              38
+            ]
+          ],
+          "phase_mismatch": -1.296974545145848,
+          "weight": 1.8617884920338476e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.0626242593306761,
+      "mode_count": 18,
+      "mode_graph_component_count": 3,
+      "mode_graph_edge_count": 36,
+      "orbit_phase": 6.0,
+      "selected_mode_keys": [
+        [
+          11,
+          -42,
+          29
+        ],
+        [
+          -11,
+          42,
+          -29
+        ],
+        [
+          -20,
+          39,
+          -37
+        ],
+        [
+          20,
+          -39,
+          37
+        ],
+        [
+          34,
+          -36,
+          38
+        ],
+        [
+          -34,
+          36,
+          -38
+        ],
+        [
+          27,
+          1,
+          -23
+        ],
+        [
+          -27,
+          -1,
+          23
+        ],
+        [
+          -17,
+          1,
+          27
+        ],
+        [
+          17,
+          -1,
+          -27
+        ],
+        [
+          -37,
+          40,
+          -10
+        ],
+        [
+          37,
+          -40,
+          10
+        ],
+        [
+          38,
+          -41,
+          6
+        ],
+        [
+          -38,
+          41,
+          -6
+        ],
+        [
+          -25,
+          12,
+          -19
+        ],
+        [
+          25,
+          -12,
+          19
+        ],
+        [
+          9,
+          -24,
+          19
+        ],
+        [
+          -9,
+          24,
+          -19
+        ]
+      ],
+      "snapshot_index": 6,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 18,
+      "triad_shell_spread_mean": 25.562985753019518
+    },
+    {
+      "carrier_mode_count": 18,
+      "carrier_shell_radius_mean": 46.44054877600339,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 21,
+      "dominant_mode_amplitude": 307666.1141088175,
+      "dominant_mode_key": [
+        -20,
+        39,
+        -37
+      ],
+      "dominant_mode_phase": -1.9935610918481803,
+      "dominant_mode_shell_radius": 57.358521598799946,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 2.3866763288807173,
+      "exact_lock_residual_rms": 1.9618333110229522,
+      "exact_lock_score": 0.33762872349309286,
+      "frame": 7,
+      "incidence_density": 0.16666666666666666,
+      "incidence_nonzero_count": 54,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 1.9803542328077357,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            7,
+            8
+          ],
+          "mode_keys": [
+            [
+              -20,
+              39,
+              -37
+            ],
+            [
+              37,
+              -40,
+              10
+            ],
+            [
+              17,
+              -1,
+              -27
+            ]
+          ],
+          "phase_mismatch": -1.9803542328077357,
+          "weight": 2.1178306099137932e+16
+        },
+        {
+          "abs_phase_mismatch": 1.9803542328077357,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            9,
+            6
+          ],
+          "mode_keys": [
+            [
+              -20,
+              39,
+              -37
+            ],
+            [
+              -17,
+              1,
+              27
+            ],
+            [
+              -37,
+              40,
+              -10
+            ]
+          ],
+          "phase_mismatch": -1.9803542328077357,
+          "weight": 2.117830609913794e+16
+        },
+        {
+          "abs_phase_mismatch": 1.9803542328077355,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            6,
+            9
+          ],
+          "mode_keys": [
+            [
+              20,
+              -39,
+              37
+            ],
+            [
+              -37,
+              40,
+              -10
+            ],
+            [
+              -17,
+              1,
+              27
+            ]
+          ],
+          "phase_mismatch": 1.9803542328077355,
+          "weight": 2.1178306099137936e+16
+        },
+        {
+          "abs_phase_mismatch": 1.9803542328077355,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            8,
+            7
+          ],
+          "mode_keys": [
+            [
+              20,
+              -39,
+              37
+            ],
+            [
+              17,
+              -1,
+              -27
+            ],
+            [
+              37,
+              -40,
+              10
+            ]
+          ],
+          "phase_mismatch": 1.9803542328077355,
+          "weight": 2.117830609913793e+16
+        },
+        {
+          "abs_phase_mismatch": 2.386676328880717,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            12,
+            15
+          ],
+          "mode_keys": [
+            [
+              -21,
+              -5,
+              22
+            ],
+            [
+              37,
+              -37,
+              17
+            ],
+            [
+              16,
+              -42,
+              39
+            ]
+          ],
+          "phase_mismatch": 2.386676328880717,
+          "weight": 2.0327750043238244e+16
+        },
+        {
+          "abs_phase_mismatch": 2.386676328880717,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            14,
+            13
+          ],
+          "mode_keys": [
+            [
+              -21,
+              -5,
+              22
+            ],
+            [
+              -16,
+              42,
+              -39
+            ],
+            [
+              -37,
+              37,
+              -17
+            ]
+          ],
+          "phase_mismatch": 2.386676328880717,
+          "weight": 2.0327750043238244e+16
+        },
+        {
+          "abs_phase_mismatch": 2.386676328880717,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            13,
+            14
+          ],
+          "mode_keys": [
+            [
+              21,
+              5,
+              -22
+            ],
+            [
+              -37,
+              37,
+              -17
+            ],
+            [
+              -16,
+              42,
+              -39
+            ]
+          ],
+          "phase_mismatch": -2.386676328880717,
+          "weight": 2.0327750043238236e+16
+        },
+        {
+          "abs_phase_mismatch": 2.386676328880717,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            15,
+            12
+          ],
+          "mode_keys": [
+            [
+              21,
+              5,
+              -22
+            ],
+            [
+              16,
+              -42,
+              39
+            ],
+            [
+              37,
+              -37,
+              17
+            ]
+          ],
+          "phase_mismatch": -2.386676328880717,
+          "weight": 2.0327750043238236e+16
+        },
+        {
+          "abs_phase_mismatch": 1.2947839613723848,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            4,
+            11,
+            17
+          ],
+          "mode_keys": [
+            [
+              -34,
+              36,
+              -38
+            ],
+            [
+              9,
+              -24,
+              19
+            ],
+            [
+              -25,
+              12,
+              -19
+            ]
+          ],
+          "phase_mismatch": -1.2947839613723848,
+          "weight": 1.7999367714591344e+16
+        },
+        {
+          "abs_phase_mismatch": 1.2947839613723848,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            4,
+            16,
+            10
+          ],
+          "mode_keys": [
+            [
+              -34,
+              36,
+              -38
+            ],
+            [
+              25,
+              -12,
+              19
+            ],
+            [
+              -9,
+              24,
+              -19
+            ]
+          ],
+          "phase_mismatch": -1.2947839613723848,
+          "weight": 1.7999367714591352e+16
+        },
+        {
+          "abs_phase_mismatch": 1.2947839613723846,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            5,
+            10,
+            16
+          ],
+          "mode_keys": [
+            [
+              34,
+              -36,
+              38
+            ],
+            [
+              -9,
+              24,
+              -19
+            ],
+            [
+              25,
+              -12,
+              19
+            ]
+          ],
+          "phase_mismatch": 1.2947839613723846,
+          "weight": 1.7999367714591352e+16
+        },
+        {
+          "abs_phase_mismatch": 1.2947839613723846,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            5,
+            17,
+            11
+          ],
+          "mode_keys": [
+            [
+              34,
+              -36,
+              38
+            ],
+            [
+              -25,
+              12,
+              -19
+            ],
+            [
+              9,
+              -24,
+              19
+            ]
+          ],
+          "phase_mismatch": 1.2947839613723846,
+          "weight": 1.799936771459134e+16
+        },
+        {
+          "abs_phase_mismatch": 1.9803542328077355,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            6,
+            8,
+            0
+          ],
+          "mode_keys": [
+            [
+              -37,
+              40,
+              -10
+            ],
+            [
+              17,
+              -1,
+              -27
+            ],
+            [
+              -20,
+              39,
+              -37
+            ]
+          ],
+          "phase_mismatch": 1.9803542328077355,
+          "weight": 2.117830609913794e+16
+        },
+        {
+          "abs_phase_mismatch": 1.9803542328077357,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            7,
+            9,
+            1
+          ],
+          "mode_keys": [
+            [
+              37,
+              -40,
+              10
+            ],
+            [
+              -17,
+              1,
+              27
+            ],
+            [
+              20,
+              -39,
+              37
+            ]
+          ],
+          "phase_mismatch": -1.9803542328077357,
+          "weight": 2.1178306099137932e+16
+        },
+        {
+          "abs_phase_mismatch": 1.2947839613723846,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            10,
+            17,
+            4
+          ],
+          "mode_keys": [
+            [
+              -9,
+              24,
+              -19
+            ],
+            [
+              -25,
+              12,
+              -19
+            ],
+            [
+              -34,
+              36,
+              -38
+            ]
+          ],
+          "phase_mismatch": 1.2947839613723846,
+          "weight": 1.7999367714591348e+16
+        },
+        {
+          "abs_phase_mismatch": 1.294783961372385,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            11,
+            16,
+            5
+          ],
+          "mode_keys": [
+            [
+              9,
+              -24,
+              19
+            ],
+            [
+              25,
+              -12,
+              19
+            ],
+            [
+              34,
+              -36,
+              38
+            ]
+          ],
+          "phase_mismatch": -1.294783961372385,
+          "weight": 1.7999367714591344e+16
+        },
+        {
+          "abs_phase_mismatch": 2.3866763288807165,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            12,
+            14,
+            3
+          ],
+          "mode_keys": [
+            [
+              37,
+              -37,
+              17
+            ],
+            [
+              -16,
+              42,
+              -39
+            ],
+            [
+              21,
+              5,
+              -22
+            ]
+          ],
+          "phase_mismatch": 2.3866763288807165,
+          "weight": 2.0327750043238244e+16
+        },
+        {
+          "abs_phase_mismatch": 2.3866763288807173,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            13,
+            15,
+            2
+          ],
+          "mode_keys": [
+            [
+              -37,
+              37,
+              -17
+            ],
+            [
+              16,
+              -42,
+              39
+            ],
+            [
+              -21,
+              -5,
+              22
+            ]
+          ],
+          "phase_mismatch": -2.3866763288807173,
+          "weight": 2.032775004323824e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.06302597644277438,
+      "mode_count": 18,
+      "mode_graph_component_count": 3,
+      "mode_graph_edge_count": 36,
+      "orbit_phase": 7.0,
+      "selected_mode_keys": [
+        [
+          -20,
+          39,
+          -37
+        ],
+        [
+          20,
+          -39,
+          37
+        ],
+        [
+          -21,
+          -5,
+          22
+        ],
+        [
+          21,
+          5,
+          -22
+        ],
+        [
+          -34,
+          36,
+          -38
+        ],
+        [
+          34,
+          -36,
+          38
+        ],
+        [
+          -37,
+          40,
+          -10
+        ],
+        [
+          37,
+          -40,
+          10
+        ],
+        [
+          17,
+          -1,
+          -27
+        ],
+        [
+          -17,
+          1,
+          27
+        ],
+        [
+          -9,
+          24,
+          -19
+        ],
+        [
+          9,
+          -24,
+          19
+        ],
+        [
+          37,
+          -37,
+          17
+        ],
+        [
+          -37,
+          37,
+          -17
+        ],
+        [
+          -16,
+          42,
+          -39
+        ],
+        [
+          16,
+          -42,
+          39
+        ],
+        [
+          25,
+          -12,
+          19
+        ],
+        [
+          -25,
+          12,
+          -19
+        ]
+      ],
+      "snapshot_index": 7,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 18,
+      "triad_shell_spread_mean": 28.210936080799662
+    },
+    {
+      "carrier_mode_count": 6,
+      "carrier_shell_radius_mean": 48.22628564522762,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 7,
+      "dominant_mode_amplitude": 302621.6136928756,
+      "dominant_mode_key": [
+        20,
+        -39,
+        37
+      ],
+      "dominant_mode_phase": 1.9835562341606159,
+      "dominant_mode_shell_radius": 57.358521598799946,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 2.0058801880044737,
+      "exact_lock_residual_rms": 2.0058801880044737,
+      "exact_lock_score": 0.3326812572206593,
+      "frame": 8,
+      "incidence_density": 0.5,
+      "incidence_nonzero_count": 18,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 2.005880188004473,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            2,
+            5
+          ],
+          "mode_keys": [
+            [
+              20,
+              -39,
+              37
+            ],
+            [
+              -37,
+              40,
+              -10
+            ],
+            [
+              -17,
+              1,
+              27
+            ]
+          ],
+          "phase_mismatch": 2.005880188004473,
+          "weight": 2.017039498544461e+16
+        },
+        {
+          "abs_phase_mismatch": 2.005880188004473,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            4,
+            3
+          ],
+          "mode_keys": [
+            [
+              20,
+              -39,
+              37
+            ],
+            [
+              17,
+              -1,
+              -27
+            ],
+            [
+              37,
+              -40,
+              10
+            ]
+          ],
+          "phase_mismatch": 2.005880188004473,
+          "weight": 2.01703949854446e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0058801880044737,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            3,
+            4
+          ],
+          "mode_keys": [
+            [
+              -20,
+              39,
+              -37
+            ],
+            [
+              37,
+              -40,
+              10
+            ],
+            [
+              17,
+              -1,
+              -27
+            ]
+          ],
+          "phase_mismatch": -2.0058801880044737,
+          "weight": 2.01703949854446e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0058801880044737,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            5,
+            2
+          ],
+          "mode_keys": [
+            [
+              -20,
+              39,
+              -37
+            ],
+            [
+              -17,
+              1,
+              27
+            ],
+            [
+              -37,
+              40,
+              -10
+            ]
+          ],
+          "phase_mismatch": -2.0058801880044737,
+          "weight": 2.017039498544461e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0058801880044737,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            4,
+            1
+          ],
+          "mode_keys": [
+            [
+              -37,
+              40,
+              -10
+            ],
+            [
+              17,
+              -1,
+              -27
+            ],
+            [
+              -20,
+              39,
+              -37
+            ]
+          ],
+          "phase_mismatch": 2.0058801880044737,
+          "weight": 2.0170394985444612e+16
+        },
+        {
+          "abs_phase_mismatch": 2.005880188004473,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            5,
+            0
+          ],
+          "mode_keys": [
+            [
+              37,
+              -40,
+              10
+            ],
+            [
+              -17,
+              1,
+              27
+            ],
+            [
+              20,
+              -39,
+              37
+            ]
+          ],
+          "phase_mismatch": -2.005880188004473,
+          "weight": 2.01703949854446e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.18474433056089962,
+      "mode_count": 6,
+      "mode_graph_component_count": 1,
+      "mode_graph_edge_count": 12,
+      "orbit_phase": 8.0,
+      "selected_mode_keys": [
+        [
+          20,
+          -39,
+          37
+        ],
+        [
+          -20,
+          39,
+          -37
+        ],
+        [
+          -37,
+          40,
+          -10
+        ],
+        [
+          37,
+          -40,
+          10
+        ],
+        [
+          17,
+          -1,
+          -27
+        ],
+        [
+          -17,
+          1,
+          27
+        ]
+      ],
+      "snapshot_index": 8,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_shell_spread_mean": 25.43674219977521
+    },
+    {
+      "carrier_mode_count": 6,
+      "carrier_shell_radius_mean": 48.22628564522762,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 7,
+      "dominant_mode_amplitude": 294485.2739512787,
+      "dominant_mode_key": [
+        -20,
+        39,
+        -37
+      ],
+      "dominant_mode_phase": -1.9759207174035276,
+      "dominant_mode_shell_radius": 57.358521598799946,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 2.025125119145573,
+      "exact_lock_residual_rms": 2.0251251191455726,
+      "exact_lock_score": 0.33056483967262934,
+      "frame": 9,
+      "incidence_density": 0.5,
+      "incidence_nonzero_count": 18,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 2.025125119145573,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            2,
+            5
+          ],
+          "mode_keys": [
+            [
+              -20,
+              39,
+              -37
+            ],
+            [
+              37,
+              -40,
+              10
+            ],
+            [
+              17,
+              -1,
+              -27
+            ]
+          ],
+          "phase_mismatch": -2.025125119145573,
+          "weight": 1.8619365124224396e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0251251191455726,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            4,
+            3
+          ],
+          "mode_keys": [
+            [
+              -20,
+              39,
+              -37
+            ],
+            [
+              -17,
+              1,
+              27
+            ],
+            [
+              -37,
+              40,
+              -10
+            ]
+          ],
+          "phase_mismatch": -2.0251251191455726,
+          "weight": 1.861936512422439e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0251251191455726,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            3,
+            4
+          ],
+          "mode_keys": [
+            [
+              20,
+              -39,
+              37
+            ],
+            [
+              -37,
+              40,
+              -10
+            ],
+            [
+              -17,
+              1,
+              27
+            ]
+          ],
+          "phase_mismatch": 2.0251251191455726,
+          "weight": 1.8619365124224388e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0251251191455726,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            5,
+            2
+          ],
+          "mode_keys": [
+            [
+              20,
+              -39,
+              37
+            ],
+            [
+              17,
+              -1,
+              -27
+            ],
+            [
+              37,
+              -40,
+              10
+            ]
+          ],
+          "phase_mismatch": 2.0251251191455726,
+          "weight": 1.8619365124224388e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0251251191455726,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            4,
+            1
+          ],
+          "mode_keys": [
+            [
+              37,
+              -40,
+              10
+            ],
+            [
+              -17,
+              1,
+              27
+            ],
+            [
+              20,
+              -39,
+              37
+            ]
+          ],
+          "phase_mismatch": -2.0251251191455726,
+          "weight": 1.8619365124224388e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0251251191455726,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            5,
+            0
+          ],
+          "mode_keys": [
+            [
+              -37,
+              40,
+              -10
+            ],
+            [
+              17,
+              -1,
+              -27
+            ],
+            [
+              -20,
+              39,
+              -37
+            ]
+          ],
+          "phase_mismatch": 2.0251251191455726,
+          "weight": 1.861936512422439e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.18462874616412403,
+      "mode_count": 6,
+      "mode_graph_component_count": 1,
+      "mode_graph_edge_count": 12,
+      "orbit_phase": 9.0,
+      "selected_mode_keys": [
+        [
+          -20,
+          39,
+          -37
+        ],
+        [
+          20,
+          -39,
+          37
+        ],
+        [
+          37,
+          -40,
+          10
+        ],
+        [
+          -37,
+          40,
+          -10
+        ],
+        [
+          -17,
+          1,
+          27
+        ],
+        [
+          17,
+          -1,
+          -27
+        ]
+      ],
+      "snapshot_index": 9,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_shell_spread_mean": 25.43674219977521
+    },
+    {
+      "carrier_mode_count": 6,
+      "carrier_shell_radius_mean": 48.22628564522762,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 7,
+      "dominant_mode_amplitude": 283805.53115411854,
+      "dominant_mode_key": [
+        -20,
+        39,
+        -37
+      ],
+      "dominant_mode_phase": -1.971255089457692,
+      "dominant_mode_shell_radius": 57.358521598799946,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 2.040260906148591,
+      "exact_lock_residual_rms": 2.040260906148591,
+      "exact_lock_score": 0.32891913913625337,
+      "frame": 10,
+      "incidence_density": 0.5,
+      "incidence_nonzero_count": 18,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 2.040260906148591,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            2,
+            5
+          ],
+          "mode_keys": [
+            [
+              20,
+              -39,
+              37
+            ],
+            [
+              -37,
+              40,
+              -10
+            ],
+            [
+              -17,
+              1,
+              27
+            ]
+          ],
+          "phase_mismatch": 2.040260906148591,
+          "weight": 1.6694309714498564e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0402609061485903,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            4,
+            3
+          ],
+          "mode_keys": [
+            [
+              20,
+              -39,
+              37
+            ],
+            [
+              17,
+              -1,
+              -27
+            ],
+            [
+              37,
+              -40,
+              10
+            ]
+          ],
+          "phase_mismatch": 2.0402609061485903,
+          "weight": 1.6694309714498564e+16
+        },
+        {
+          "abs_phase_mismatch": 2.040260906148591,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            3,
+            4
+          ],
+          "mode_keys": [
+            [
+              -20,
+              39,
+              -37
+            ],
+            [
+              37,
+              -40,
+              10
+            ],
+            [
+              17,
+              -1,
+              -27
+            ]
+          ],
+          "phase_mismatch": -2.040260906148591,
+          "weight": 1.6694309714498568e+16
+        },
+        {
+          "abs_phase_mismatch": 2.040260906148591,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            5,
+            2
+          ],
+          "mode_keys": [
+            [
+              -20,
+              39,
+              -37
+            ],
+            [
+              -17,
+              1,
+              27
+            ],
+            [
+              -37,
+              40,
+              -10
+            ]
+          ],
+          "phase_mismatch": -2.040260906148591,
+          "weight": 1.6694309714498568e+16
+        },
+        {
+          "abs_phase_mismatch": 2.040260906148591,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            4,
+            1
+          ],
+          "mode_keys": [
+            [
+              -37,
+              40,
+              -10
+            ],
+            [
+              17,
+              -1,
+              -27
+            ],
+            [
+              -20,
+              39,
+              -37
+            ]
+          ],
+          "phase_mismatch": 2.040260906148591,
+          "weight": 1.6694309714498572e+16
+        },
+        {
+          "abs_phase_mismatch": 2.0402609061485903,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            5,
+            0
+          ],
+          "mode_keys": [
+            [
+              37,
+              -40,
+              10
+            ],
+            [
+              -17,
+              1,
+              27
+            ],
+            [
+              20,
+              -39,
+              37
+            ]
+          ],
+          "phase_mismatch": -2.0402609061485903,
+          "weight": 1.669430971449856e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.18452865106802765,
+      "mode_count": 6,
+      "mode_graph_component_count": 1,
+      "mode_graph_edge_count": 12,
+      "orbit_phase": 10.0,
+      "selected_mode_keys": [
+        [
+          20,
+          -39,
+          37
+        ],
+        [
+          -20,
+          39,
+          -37
+        ],
+        [
+          -37,
+          40,
+          -10
+        ],
+        [
+          37,
+          -40,
+          10
+        ],
+        [
+          17,
+          -1,
+          -27
+        ],
+        [
+          -17,
+          1,
+          27
+        ]
+      ],
+      "snapshot_index": 10,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_shell_spread_mean": 25.43674219977521
+    },
+    {
+      "carrier_mode_count": 48,
+      "carrier_shell_radius_mean": 53.742168388769414,
+      "cycle_basis_proxy": 0.0,
+      "cycle_rank_proxy": 0,
+      "dominant_mode_amplitude": 383571.5590388223,
+      "dominant_mode_key": [
+        29,
+        -34,
+        22
+      ],
+      "dominant_mode_phase": 1.4543400818323682,
+      "dominant_mode_shell_radius": 49.80963762164909,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 0.0,
+      "exact_lock_residual_rms": 0.0,
+      "exact_lock_score": 0.0,
+      "frame": 11,
+      "incidence_density": 0.0,
+      "incidence_nonzero_count": 0,
+      "incidence_records": [],
+      "mode_concentration_fraction": 0.023758517262782042,
+      "mode_count": 48,
+      "mode_graph_component_count": 48,
+      "mode_graph_edge_count": 0,
+      "orbit_phase": 11.0,
+      "selected_mode_keys": [
+        [
+          29,
+          -34,
+          22
+        ],
+        [
+          -29,
+          34,
+          -22
+        ],
+        [
+          -38,
+          33,
+          -35
+        ],
+        [
+          38,
+          -33,
+          35
+        ],
+        [
+          34,
+          -5,
+          -42
+        ],
+        [
+          -34,
+          5,
+          42
+        ],
+        [
+          -33,
+          10,
+          39
+        ],
+        [
+          33,
+          -10,
+          -39
+        ],
+        [
+          16,
+          -39,
+          25
+        ],
+        [
+          -16,
+          39,
+          -25
+        ],
+        [
+          40,
+          17,
+          -32
+        ],
+        [
+          -40,
+          -17,
+          32
+        ],
+        [
+          38,
+          23,
+          -32
+        ],
+        [
+          -38,
+          -23,
+          32
+        ],
+        [
+          -41,
+          40,
+          -39
+        ],
+        [
+          41,
+          -40,
+          39
+        ],
+        [
+          35,
+          7,
+          -39
+        ],
+        [
+          -35,
+          -7,
+          39
+        ],
+        [
+          -25,
+          42,
+          -25
+        ],
+        [
+          25,
+          -42,
+          25
+        ],
+        [
+          -34,
+          22,
+          -37
+        ],
+        [
+          34,
+          -22,
+          37
+        ],
+        [
+          24,
+          -42,
+          36
+        ],
+        [
+          -24,
+          42,
+          -36
+        ],
+        [
+          38,
+          -7,
+          -39
+        ],
+        [
+          -38,
+          7,
+          39
+        ],
+        [
+          -28,
+          25,
+          -19
+        ],
+        [
+          28,
+          -25,
+          19
+        ],
+        [
+          40,
+          11,
+          -38
+        ],
+        [
+          -40,
+          -11,
+          38
+        ],
+        [
+          24,
+          -42,
+          27
+        ],
+        [
+          -24,
+          42,
+          -27
+        ],
+        [
+          19,
+          -40,
+          11
+        ],
+        [
+          -19,
+          40,
+          -11
+        ],
+        [
+          40,
+          -20,
+          32
+        ],
+        [
+          -40,
+          20,
+          -32
+        ],
+        [
+          -38,
+          37,
+          -38
+        ],
+        [
+          38,
+          -37,
+          38
+        ],
+        [
+          36,
+          13,
+          -29
+        ],
+        [
+          -36,
+          -13,
+          29
+        ],
+        [
+          -36,
+          -1,
+          27
+        ],
+        [
+          36,
+          1,
+          -27
+        ],
+        [
+          41,
+          -10,
+          -35
+        ],
+        [
+          -41,
+          10,
+          35
+        ],
+        [
+          -42,
+          -9,
+          22
+        ],
+        [
+          42,
+          9,
+          -22
+        ],
+        [
+          38,
+          -4,
+          -35
+        ],
+        [
+          -38,
+          4,
+          35
+        ]
+      ],
+      "snapshot_index": 11,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "top_k": 48,
+      "triad_count": 0,
+      "triad_shell_spread_mean": 0.0,
+      "warnings": [
+        "no resonant triads found for selected carrier modes"
+      ]
+    },
+    {
+      "carrier_mode_count": 6,
+      "carrier_shell_radius_mean": 45.93536999165217,
+      "cycle_basis_proxy": 0.5833333333333334,
+      "cycle_rank_proxy": 7,
+      "dominant_mode_amplitude": 249366.1710056784,
+      "dominant_mode_key": [
+        38,
+        -8,
+        -18
+      ],
+      "dominant_mode_phase": 0.6311581537393021,
+      "dominant_mode_shell_radius": 42.80186911806539,
+      "exact_lock_near_lock_fraction": 0.0,
+      "exact_lock_residual_max": 3.1350539523591507,
+      "exact_lock_residual_rms": 3.1350539523591507,
+      "exact_lock_score": 0.24183481316597458,
+      "frame": 12,
+      "incidence_density": 0.5,
+      "incidence_nonzero_count": 18,
+      "incidence_records": [
+        {
+          "abs_phase_mismatch": 3.1350539523591507,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            3,
+            5
+          ],
+          "mode_keys": [
+            [
+              -38,
+              8,
+              18
+            ],
+            [
+              37,
+              28,
+              -32
+            ],
+            [
+              -1,
+              36,
+              -14
+            ]
+          ],
+          "phase_mismatch": 3.1350539523591507,
+          "weight": 1.3327580488911174e+16
+        },
+        {
+          "abs_phase_mismatch": 3.1350539523591507,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            0,
+            4,
+            2
+          ],
+          "mode_keys": [
+            [
+              -38,
+              8,
+              18
+            ],
+            [
+              1,
+              -36,
+              14
+            ],
+            [
+              -37,
+              -28,
+              32
+            ]
+          ],
+          "phase_mismatch": 3.1350539523591507,
+          "weight": 1.3327580488911176e+16
+        },
+        {
+          "abs_phase_mismatch": 3.1350539523591507,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            2,
+            4
+          ],
+          "mode_keys": [
+            [
+              38,
+              -8,
+              -18
+            ],
+            [
+              -37,
+              -28,
+              32
+            ],
+            [
+              1,
+              -36,
+              14
+            ]
+          ],
+          "phase_mismatch": -3.1350539523591507,
+          "weight": 1.3327580488911178e+16
+        },
+        {
+          "abs_phase_mismatch": 3.1350539523591507,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            1,
+            5,
+            3
+          ],
+          "mode_keys": [
+            [
+              38,
+              -8,
+              -18
+            ],
+            [
+              -1,
+              36,
+              -14
+            ],
+            [
+              37,
+              28,
+              -32
+            ]
+          ],
+          "phase_mismatch": -3.1350539523591507,
+          "weight": 1.3327580488911176e+16
+        },
+        {
+          "abs_phase_mismatch": 3.1350539523591507,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            2,
+            5,
+            0
+          ],
+          "mode_keys": [
+            [
+              -37,
+              -28,
+              32
+            ],
+            [
+              -1,
+              36,
+              -14
+            ],
+            [
+              -38,
+              8,
+              18
+            ]
+          ],
+          "phase_mismatch": -3.1350539523591507,
+          "weight": 1.3327580488911176e+16
+        },
+        {
+          "abs_phase_mismatch": 3.1350539523591507,
+          "exact_lock_hit": false,
+          "incidence_signs": [
+            1,
+            1,
+            -1
+          ],
+          "mode_indices": [
+            3,
+            4,
+            1
+          ],
+          "mode_keys": [
+            [
+              37,
+              28,
+              -32
+            ],
+            [
+              1,
+              -36,
+              14
+            ],
+            [
+              38,
+              -8,
+              -18
+            ]
+          ],
+          "phase_mismatch": 3.1350539523591507,
+          "weight": 1.3327580488911176e+16
+        }
+      ],
+      "mode_concentration_fraction": 0.17518165464228808,
+      "mode_count": 6,
+      "mode_graph_component_count": 1,
+      "mode_graph_edge_count": 12,
+      "orbit_phase": 12.0,
+      "selected_mode_keys": [
+        [
+          -38,
+          8,
+          18
+        ],
+        [
+          38,
+          -8,
+          -18
+        ],
+        [
+          -37,
+          -28,
+          32
+        ],
+        [
+          37,
+          28,
+          -32
+        ],
+        [
+          1,
+          -36,
+          14
+        ],
+        [
+          -1,
+          36,
+          -14
+        ]
+      ],
+      "snapshot_index": 12,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_shell_spread_mean": 17.725524511444494
+    }
+  ],
+  "warnings": [
+    "velocity_snapshots trailing channel layout detected"
+  ]
+}

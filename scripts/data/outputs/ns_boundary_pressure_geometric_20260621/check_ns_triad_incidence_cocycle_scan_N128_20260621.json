@@ -1,0 +1,17 @@
+{
+  "C": "scripts/check_ns_triad_incidence_cocycle_scan.py",
+  "F": "Any malformed field, invalid proxy, or authority drift is a hard error.",
+  "G": "Checker remains empirical and non-promoting.",
+  "L": "Load the scan JSON, validate rows and aggregates, then emit a checker receipt.",
+  "O": "Validate triad incidence and cocycle telemetry output.",
+  "P": "FAIL_CLOSED_NS_TRIAD_INCIDENCE_COCYCLE_SCAN_CHECK",
+  "R": "Check the schema, authority flags, row counts, incidence records, and cycle proxies.",
+  "S": "Fail-closed checker for malformed incidence/cycle telemetry surfaces.",
+  "contract": "check_ns_triad_incidence_cocycle_scan",
+  "errors": [],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_INCIDENCE_COCYCLE_SCAN_CHECK",
+  "scan_contract": "ns_triad_incidence_cocycle_scan",
+  "status": "ok",
+  "warnings": []
+}

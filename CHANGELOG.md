@@ -6,6 +6,36 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS triad incidence / frustration / adversarial-reference tranche for
+  `2026-06-21`: adds
+  `DASHI.Physics.Closure.NSTriadIncidenceCocycleReceipt`,
+  `DASHI.Physics.Closure.NSTriadKernelPhaseCocycleReceipt`,
+  `DASHI.Physics.Closure.NSTriadFrustrationDefectBoundary`,
+  `DASHI.Physics.Closure.NSAdversarialGibbsPhaseReferenceReceipt`,
+  `DASHI.Physics.Closure.NSSacasaTriadFrustrationBridgeBoundary`, and
+  `DASHI.Physics.Closure.NSTriadFrustrationRegression`; adds
+  `scripts/ns_triad_incidence_cocycle_scan.py`,
+  `scripts/check_ns_triad_incidence_cocycle_scan.py`,
+  `scripts/ns_triad_frustration_defect_scan.py`,
+  `scripts/check_ns_triad_frustration_defect_scan.py`,
+  `scripts/ns_adversarial_phase_reference_scan.py`,
+  `scripts/check_ns_adversarial_phase_reference_scan.py`,
+  `scripts/ns_triad_frustration_bridge_summary.py`, and
+  `scripts/check_ns_triad_frustration_bridge_summary.py`; and stages the new
+  scan/check surfaces in the local Clay harness manifest. The tranche records
+  the explicit triad-incidence carrier `B`, the kernel-phase cocycle target
+  `B phi = psi`, the weighted frustration-defect boundary
+  `F_N(psi) = inf_phi ||B phi - psi||^2`, the regularized adversarial Gibbs
+  reference, and the fail-closed Sacasa->Kiriukhin bridge boundary that
+  keeps orbit-to-cosphere identification, realization-level `|V_N| <= C_N`,
+  and integrable `sup_N C_N` all explicitly open. It also adds empirical
+  telemetry for carrier density, cycle-rank proxies, exact-lock scores,
+  frustration residuals, coherence-loss proxies, adversarial phase gain over
+  the zero reference, and a compact bridge summary over the shared raw N128
+  frames. This remains fail-closed: theorem promotion and Clay promotion stay
+  false, the bridge theorem is not proved, and the new scans are empirical
+  only.
+
 - NS Sacasa/Kiriukhin orbit-coherence bridge tranche for `2026-06-21`: adds
   `DASHI.Physics.Closure.NSKiriukhinOrbitStretchingCarrierReceipt`,
   `DASHI.Physics.Closure.NSSacasaCosphereCoherenceCarrierReceipt`,
