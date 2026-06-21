@@ -101,6 +101,21 @@ hex phase/polarity, tree/prefix compatibility, self-isometry receipts on the
 shared ultrametric geometry, an equivariant odd-field extraction seam on the
 focused supervoxel carrier, and one compact regression surface for canonical
 `p7`/`p11` and root/depth3 witnesses.
+The next p7 quotient-action exemplar now sharpens that symmetry lane into one
+typed golden case:
+`DASHI.Foundations.SSPPrimeLaneUnitGroup`,
+`DASHI.Foundations.P7UnitGroupC6Witness`,
+`DASHI.Foundations.P7HexTruthActionQuotient`,
+`DASHI.Geometry.P7UnitActionTreeIsometry`,
+`DASHI.Core.P7EquivariantOddFieldGate`, and
+`DASHI.Physics.Closure.P7Stage7C6HexRegression`. These modules record a
+finite `C6` quotient carrier for the p7 unit lane, explicit Stage-7 /
+Stage-6 witness rows, p7-specific HexTruth/Möbius transport receipts,
+p7-specific tree/depth self-isometry receipts, p7-specific odd-field
+equivariance receipts, and one compact regression surface tying those
+receipts together. This remains candidate-only and fail-closed: it is a
+typed p7 exemplar, not a promoted general `(\u2124/p\u2124)^×` action theorem
+or analytic BT/p-adic authority surface.
 
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL
