@@ -1,0 +1,91 @@
+{
+  "C": "scripts/ns_boundary_pressure_q_bridge_summary.py",
+  "F": "Any missing or inconsistent threshold surface remains explicit in status/source metadata.",
+  "G": "Bridge is empirical and non-promoting.",
+  "L": "Extract canonical threshold rows, intersect thresholds, compute bridge rows and compact correlations.",
+  "O": "Bridge boundary pressure-gate telemetry with delta1 and pressure-gap summaries.",
+  "P": "FAIL_CLOSED_NS_BOUNDARY_PRESSURE_Q_BRIDGE_SUMMARY",
+  "R": "Join shared delta1 thresholds across the boundary pressure scan, boundary-delta1 scan, and pressure-eigenframe gap scan, then emit compact co-movement metrics.",
+  "S": "Fail-closed on malformed required sources; optional missing sources degrade to partial, never silent success.",
+  "aggregate": {
+    "abs_q_mean_vs_boundary_delta1_min_correlation": -0.9999999999999999,
+    "p11_negative_fraction_mean": 0.4561245654754075,
+    "q_negative_fraction_mean": 0.49880115620445503,
+    "q_vs_p11_negative_fraction_correlation": 1.0,
+    "q_vs_pressure_gap_p12_scaled_mean_correlation": 1.0,
+    "threshold_count": 2
+  },
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "bridge_rows": [
+    {
+      "boundary_delta1_min": 0.5329499641379039,
+      "boundary_gap_separation": 0.008481344394431923,
+      "boundary_omega2_dominant_fraction": 0.3429541473019734,
+      "boundary_p11_mean": 43.66602643555963,
+      "boundary_p11_negative_fraction": 0.4561670213844127,
+      "boundary_q_mean": 0.5820393056057072,
+      "boundary_q_negative_fraction": 0.49880554228380314,
+      "delta1_threshold": 0.5,
+      "pressure_gap_p12_scaled_mean": 17.259455081333233,
+      "pressure_gap_p13_scaled_mean": 17.31429168482807,
+      "pressure_gap_p23_scaled_mean": 17.136153431434394
+    },
+    {
+      "boundary_delta1_min": 1.0024021732020667,
+      "boundary_gap_separation": 0.012992159333958355,
+      "boundary_omega2_dominant_fraction": 0.34302199156289415,
+      "boundary_p11_mean": 43.71351035889124,
+      "boundary_p11_negative_fraction": 0.4560821095664023,
+      "boundary_q_mean": 0.5751979861705893,
+      "boundary_q_negative_fraction": 0.4987967701251069,
+      "delta1_threshold": 1.0,
+      "pressure_gap_p12_scaled_mean": 15.151053349041678,
+      "pressure_gap_p13_scaled_mean": 15.202909009888085,
+      "pressure_gap_p23_scaled_mean": 15.059800665434118
+    }
+  ],
+  "contract": "ns_boundary_pressure_q_bridge_summary",
+  "errors": [],
+  "inputs": {
+    "boundary_delta1_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_boundary_delta1_uniformity_scan_N128_20260621.json",
+    "boundary_pressure_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_boundary_pressure_gate_scan_N128_20260621.json",
+    "pressure_gap_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_pressure_eigenframe_gap_scan_N128_20260621.json"
+  },
+  "route_decision": "FAIL_CLOSED_NS_BOUNDARY_PRESSURE_Q_BRIDGE_SUMMARY",
+  "schema_version": "1.0.0",
+  "script": "scripts/ns_boundary_pressure_q_bridge_summary.py",
+  "shared_thresholds": [
+    0.5,
+    1.0
+  ],
+  "status": "ok",
+  "status_by_source": {
+    "boundary_delta1": {
+      "bin_count": 5,
+      "path": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_boundary_delta1_uniformity_scan_N128_20260621.json",
+      "present": true,
+      "status": "ok"
+    },
+    "boundary_pressure": {
+      "bin_count": 5,
+      "path": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_boundary_pressure_gate_scan_N128_20260621.json",
+      "present": true,
+      "status": "ok"
+    },
+    "pressure_gap": {
+      "bin_count": 6,
+      "path": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_pressure_eigenframe_gap_scan_N128_20260621.json",
+      "present": true,
+      "status": "ok"
+    }
+  },
+  "warnings": []
+}

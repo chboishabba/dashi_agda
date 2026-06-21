@@ -6,6 +6,25 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS boundary pressure-gate / Route 1 audit tranche for `2026-06-21`: adds
+  `DASHI.Physics.Closure.NSBoundaryDelta1LevelSetEvolutionReceipt`,
+  `DASHI.Physics.Closure.NSPressureRieszCompatibilityReceipt`, and
+  `DASHI.Physics.Closure.NSPressureQObservableRouteAuditReceipt`; adds
+  `scripts/ns_boundary_pressure_gate_scan.py`,
+  `scripts/check_ns_boundary_pressure_gate_scan.py`,
+  `scripts/ns_boundary_pressure_q_bridge_summary.py`, and
+  `scripts/check_ns_boundary_pressure_q_bridge_summary.py`; and stages the
+  new scan/check surfaces in the local Clay harness manifest. The tranche
+  records the fail-closed Route 1 boundary level-set `delta1` evolution
+  ledger, the torus pressure/Riesz compatibility route
+  `-Delta p = h`, `h = ||S||_F^2 - |omega|^2/2`, `integral h = 0`, and the
+  `Q = <e2, Hess p e1>` / `I_Q` observable audit as the live sign gate. It
+  also adds empirical boundary-band telemetry for `P11/P22/P33/Q` and a
+  compact bridge to the existing boundary-`delta1` and pressure-gap scans on
+  the raw N128 archive. This remains fail-closed: theorem promotion and Clay
+  promotion stay false, pressure-sign control is not proved, and the new
+  scans are empirical only.
+
 - NS Case A / boundary-`delta1` geometric tranche for `2026-06-21`: adds
   `DASHI.Physics.Closure.NSDelta1BoundaryNormIdentityReceipt`,
   `DASHI.Physics.Closure.NSSZeroBoundaryGenericityReceipt`, and

@@ -346,6 +346,7 @@ import DASHI.Physics.Closure.NSAlignmentProjectionODEReceipt
 import DASHI.Physics.Closure.NSCompressiveZonePiDecompositionReceipt
 import DASHI.Physics.Closure.NSCompressionDominatesExtensionReceipt
 import DASHI.Physics.Closure.NSDelta1BoundaryNormIdentityReceipt
+import DASHI.Physics.Closure.NSBoundaryDelta1LevelSetEvolutionReceipt
 import DASHI.Physics.Closure.NSDelta1UniformGateReductionReceipt
 import DASHI.Physics.Closure.NSDeterminantAreaRouteTargetReceipt
 import DASHI.Physics.Closure.NSDeterminantConcentrationImpossibilityReceipt
@@ -356,6 +357,8 @@ import DASHI.Physics.Closure.NSLayerKornLiteratureClosureReceipt
 import DASHI.Physics.Closure.NSDelta1BoundaryStrainGateReceipt
 import DASHI.Physics.Closure.NSPressurePoissonIdentityCorrectionReceipt
 import DASHI.Physics.Closure.NSPressureCorrectionEigenframeScaleReceipt
+import DASHI.Physics.Closure.NSPressureQObservableRouteAuditReceipt
+import DASHI.Physics.Closure.NSPressureRieszCompatibilityReceipt
 import DASHI.Physics.Closure.NSPressurePoissonBypassReceipt
 import DASHI.Physics.Closure.NSQCriterionZeroMeanIdentityReceipt
 import DASHI.Physics.Closure.NSPressurePoissonConventionNormalizationReceipt

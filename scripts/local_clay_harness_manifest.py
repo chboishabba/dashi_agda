@@ -425,11 +425,17 @@ def build_specs() -> list[HarnessSpec]:
     ns_pressure_eigenframe_gap_scan_out = (
         CHILD_OUT_DIR / "ns_pressure_eigenframe_gap_scan_smoke.json"
     )
+    ns_boundary_pressure_gate_scan_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_gate_scan_smoke.json"
+    )
     ns_compressive_pi_decomposition_scan_out = (
         CHILD_OUT_DIR / "ns_compressive_pi_decomposition_scan_smoke.json"
     )
     ns_alignment_pressure_bridge_summary_out = (
         CHILD_OUT_DIR / "ns_alignment_pressure_bridge_summary_smoke.json"
+    )
+    ns_boundary_pressure_q_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_q_bridge_summary_smoke.json"
     )
     ns_case_a_transition_shell_scan_out = (
         CHILD_OUT_DIR / "ns_case_a_transition_shell_scan_smoke.json"
@@ -497,11 +503,17 @@ def build_specs() -> list[HarnessSpec]:
     ns_pressure_eigenframe_gap_scan_check_out = (
         CHILD_OUT_DIR / "ns_pressure_eigenframe_gap_scan_check_smoke.json"
     )
+    ns_boundary_pressure_gate_scan_check_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_gate_scan_check_smoke.json"
+    )
     ns_compressive_pi_decomposition_scan_check_out = (
         CHILD_OUT_DIR / "ns_compressive_pi_decomposition_scan_check_smoke.json"
     )
     ns_alignment_pressure_bridge_summary_check_out = (
         CHILD_OUT_DIR / "ns_alignment_pressure_bridge_summary_check_smoke.json"
+    )
+    ns_boundary_pressure_q_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_q_bridge_summary_check_smoke.json"
     )
     ns_case_a_transition_shell_scan_check_out = (
         CHILD_OUT_DIR / "ns_case_a_transition_shell_scan_check_smoke.json"
@@ -4054,6 +4066,60 @@ def build_specs() -> list[HarnessSpec]:
             ),
         ),
         HarnessSpec(
+            name="ns_boundary_pressure_gate_scan",
+            path=script("ns_boundary_pressure_gate_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_boundary_pressure_gate_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_boundary_pressure_gate_scan.py").exists()
+            else "ns_boundary_pressure_gate_scan script not found",
+            notes=(
+                "optional boundary pressure-gate scan",
+                "empirical/non-promoting; tracks P11/P22/P33 and Q on a narrow |lambda2| boundary band by delta1 threshold",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_pressure_gate_scan",
+            path=script("check_ns_boundary_pressure_gate_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--output-json",
+                str(ns_boundary_pressure_gate_scan_check_out),
+            )
+            if ns_boundary_pressure_gate_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_pressure_gate_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_pressure_gate_scan_out.exists()
+            and script("check_ns_boundary_pressure_gate_scan.py").exists()
+            else (
+                "check_ns_boundary_pressure_gate_scan script not found"
+                if not script("check_ns_boundary_pressure_gate_scan.py").exists()
+                else "check_ns_boundary_pressure_gate_scan requires the boundary pressure scan output"
+            ),
+            notes=(
+                "optional boundary pressure-gate regression gate",
+                "validates non-promoting boundary P11/Q threshold bookkeeping",
+            ),
+        ),
+        HarnessSpec(
             name="ns_compressive_pi_decomposition_scan",
             path=script("ns_compressive_pi_decomposition_scan.py"),
             args=(
@@ -4161,6 +4227,73 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional alignment-pressure bridge regression gate",
                 "validates non-promoting cross-surface delta1-bin summary consistency",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_pressure_q_bridge_summary",
+            path=script("ns_boundary_pressure_q_bridge_summary.py"),
+            args=(
+                "--boundary-pressure-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--boundary-delta1-json",
+                str(ns_boundary_delta1_uniformity_scan_out),
+                "--pressure-gap-json",
+                str(ns_pressure_eigenframe_gap_scan_out),
+                "--output-json",
+                str(ns_boundary_pressure_q_bridge_summary_out),
+            )
+            if ns_boundary_pressure_gate_scan_out.exists()
+            and ns_boundary_delta1_uniformity_scan_out.exists()
+            and ns_pressure_eigenframe_gap_scan_out.exists()
+            else (
+                "--boundary-pressure-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--output-json",
+                str(ns_boundary_pressure_q_bridge_summary_out),
+                "--no-boundary-delta1",
+                "--no-pressure-gap",
+            )
+            if ns_boundary_pressure_gate_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_pressure_q_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_pressure_gate_scan_out.exists()
+            and script("ns_boundary_pressure_q_bridge_summary.py").exists()
+            else (
+                "ns_boundary_pressure_q_bridge_summary script not found"
+                if not script("ns_boundary_pressure_q_bridge_summary.py").exists()
+                else "ns_boundary_pressure_q_bridge_summary requires the boundary pressure scan output"
+            ),
+            notes=(
+                "optional boundary pressure/Q bridge summary",
+                "empirical/non-promoting; joins boundary P11/Q telemetry with boundary-delta1 and pressure-gap rows",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_pressure_q_bridge_summary",
+            path=script("check_ns_boundary_pressure_q_bridge_summary.py"),
+            args=(
+                "--summary-json",
+                str(ns_boundary_pressure_q_bridge_summary_out),
+                "--output-json",
+                str(ns_boundary_pressure_q_bridge_summary_check_out),
+            )
+            if ns_boundary_pressure_q_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_pressure_q_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_pressure_q_bridge_summary_out.exists()
+            and script("check_ns_boundary_pressure_q_bridge_summary.py").exists()
+            else (
+                "check_ns_boundary_pressure_q_bridge_summary script not found"
+                if not script("check_ns_boundary_pressure_q_bridge_summary.py").exists()
+                else "check_ns_boundary_pressure_q_bridge_summary requires the bridge summary output"
+            ),
+            notes=(
+                "optional boundary pressure/Q bridge regression gate",
+                "validates non-promoting cross-surface pressure-boundary bridge consistency",
             ),
         ),
         HarnessSpec(
