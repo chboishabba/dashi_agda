@@ -324,11 +324,14 @@ import DASHI.Physics.Closure.NSBiaxialCancellationIdentityReceipt
 import DASHI.Physics.Closure.NSBetchovBKMPositiveMeasureReceipt
 import DASHI.Physics.Closure.NSBetchovDeterminantIdentityReceipt
 import DASHI.Physics.Closure.NSBkTrajectoryMinimumReceipt
+import DASHI.Physics.Closure.NSExtensionDominatesCompressionReceipt
 import DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt
 import DASHI.Physics.Closure.NSGD1LayerCZIntegratedControlReceipt
+import DASHI.Physics.Closure.NSAlignmentProjectionODEReceipt
 import DASHI.Physics.Closure.NSCompressionDominatesExtensionReceipt
 import DASHI.Physics.Closure.NSDeterminantAreaRouteTargetReceipt
 import DASHI.Physics.Closure.NSDeterminantSignRuleReceipt
+import DASHI.Physics.Closure.NSEulerAlignmentGapControlReceipt
 import DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt
 import DASHI.Physics.Closure.NSLayerKornLiteratureClosureReceipt
 import DASHI.Physics.Closure.NSDelta1BoundaryStrainGateReceipt
@@ -346,7 +349,9 @@ import DASHI.Physics.Closure.NSInteriorVorticityMaxPrincipleReceipt
 import DASHI.Physics.Closure.NSPressureCZEnstrophyClosureReceipt
 import DASHI.Physics.Closure.NSLayerL2VorticityFractionReceipt
 import DASHI.Physics.Closure.NSBroadTubeLayerFractionContinuityReceipt
+import DASHI.Physics.Closure.NSResidualAlignmentObstructionHierarchyReceipt
 import DASHI.Physics.Closure.NSVorticityAlignmentObstructionReceipt
+import DASHI.Physics.Closure.NSVorticityStretchingExactReceipt
 import DASHI.Physics.Closure.NSWeightedLambda2CarrierQuantileReceipt
 import DASHI.Physics.Closure.NSShahmurovTwoPaperClaimIntakeReceipt
 import DASHI.Physics.Closure.NSBroadTubeSerrinLiftGapReceipt

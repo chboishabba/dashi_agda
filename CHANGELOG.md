@@ -6,6 +6,23 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS dual-dominance / exact-alignment-ODE tranche for `2026-06-21`: adds
+  `DASHI.Physics.Closure.NSExtensionDominatesCompressionReceipt`,
+  `DASHI.Physics.Closure.NSVorticityStretchingExactReceipt`,
+  `DASHI.Physics.Closure.NSAlignmentProjectionODEReceipt`,
+  `DASHI.Physics.Closure.NSEulerAlignmentGapControlReceipt`, and
+  `DASHI.Physics.Closure.NSResidualAlignmentObstructionHierarchyReceipt`;
+  adds `scripts/ns_alignment_gap_bin_scan.py` and
+  `scripts/check_ns_alignment_gap_bin_scan.py`; and stages the new scan/check
+  pair in the local Clay harness manifest. The tranche records exact
+  extensional dominance on `Omega_K`, exact `Dt omega = S·omega`
+  antisymmetric cancellation, the eigenframe projection ODE with explicit
+  rotation cancellation, the conditional Euler-limit gap-control route, and
+  the sharpened `R1/R2/R3` residual hierarchy. This remains fail-closed:
+  theorem promotion and Clay promotion stay false, the pressure-correction
+  sign gate is not closed, the uniform `delta1` lower bound remains open,
+  and the gap-bin scan is empirical telemetry only.
+
 - NS strain-type-I / pressure-factor / alignment-obstruction tranche for
   `2026-06-21`: adds
   `DASHI.Physics.Closure.NSPressurePoissonIdentityCorrectionReceipt`,

@@ -419,6 +419,9 @@ def build_specs() -> list[HarnessSpec]:
     ns_vorticity_alignment_obstruction_scan_out = (
         CHILD_OUT_DIR / "ns_vorticity_alignment_obstruction_scan_smoke.json"
     )
+    ns_alignment_gap_bin_scan_out = (
+        CHILD_OUT_DIR / "ns_alignment_gap_bin_scan_smoke.json"
+    )
     ns_interior_vorticity_budget_out = (
         CHILD_OUT_DIR / "ns_interior_vorticity_budget_smoke.json"
     )
@@ -469,6 +472,9 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_vorticity_alignment_obstruction_scan_check_out = (
         CHILD_OUT_DIR / "ns_vorticity_alignment_obstruction_scan_check_smoke.json"
+    )
+    ns_alignment_gap_bin_scan_check_out = (
+        CHILD_OUT_DIR / "ns_alignment_gap_bin_scan_check_smoke.json"
     )
     ns_lambda2_boundary_regularity_scan_out = (
         CHILD_OUT_DIR / "ns_lambda2_boundary_regularity_scan_smoke.json"
@@ -3901,6 +3907,60 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional vorticity-alignment obstruction regression gate",
                 "validates non-promoting compressive-region alignment bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_alignment_gap_bin_scan",
+            path=script("ns_alignment_gap_bin_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_alignment_gap_bin_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_alignment_gap_bin_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_alignment_gap_bin_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_alignment_gap_bin_scan.py").exists()
+            else "ns_alignment_gap_bin_scan script not found",
+            notes=(
+                "optional compressive-gap alignment scan",
+                "empirical/non-promoting; bins compressive-region alignment by delta1 thresholds",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_alignment_gap_bin_scan",
+            path=script("check_ns_alignment_gap_bin_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_alignment_gap_bin_scan_out),
+                "--output-json",
+                str(ns_alignment_gap_bin_scan_check_out),
+            )
+            if ns_alignment_gap_bin_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_alignment_gap_bin_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_alignment_gap_bin_scan_out.exists()
+            and script("check_ns_alignment_gap_bin_scan.py").exists()
+            else (
+                "check_ns_alignment_gap_bin_scan script not found"
+                if not script("check_ns_alignment_gap_bin_scan.py").exists()
+                else "check_ns_alignment_gap_bin_scan requires the gap-bin scan output"
+            ),
+            notes=(
+                "optional compressive-gap alignment regression gate",
+                "validates non-promoting gap-bin alignment bookkeeping",
             ),
         ),
         HarnessSpec(

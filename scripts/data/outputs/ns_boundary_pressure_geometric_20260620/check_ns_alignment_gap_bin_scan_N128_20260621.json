@@ -1,0 +1,46 @@
+{
+  "C": "scripts/check_ns_alignment_gap_bin_scan.py",
+  "F": "Any mismatched count/fraction or threshold aggregation is a hard error.",
+  "G": "Checker is empirical only and does not introduce theorem-level claims.",
+  "L": "Load scan JSON, verify control card, per-frame/gap rows, and aggregate counters.",
+  "O": "Validate compressive-gap vorticity alignment scan output.",
+  "P": "FAIL_CLOSED_NS_ALIGNMENT_GAP_BIN_SCAN_CHECK",
+  "R": "Validate raw reconstruction scan rows, gap-threshold rows, and aggregate tally reconciliation against declared threshold bins and arithmetic identities.",
+  "S": "Fail-closed checker: schema violations, arithmetic mismatches, or invariant failures are errors.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_alignment_gap_bin_scan_N128_20260621.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/check_ns_alignment_gap_bin_scan_N128_20260621.json"
+  ],
+  "contract": "check_ns_alignment_gap_bin_scan",
+  "control_card": {
+    "C": "scripts/check_ns_alignment_gap_bin_scan.py",
+    "F": "Any mismatched count/fraction or threshold aggregation is a hard error.",
+    "G": "Checker is empirical only and does not introduce theorem-level claims.",
+    "L": "Load scan JSON, verify control card, per-frame/gap rows, and aggregate counters.",
+    "O": "Validate compressive-gap vorticity alignment scan output.",
+    "P": "FAIL_CLOSED_NS_ALIGNMENT_GAP_BIN_SCAN_CHECK",
+    "R": "Validate raw reconstruction scan rows, gap-threshold rows, and aggregate tally reconciliation against declared threshold bins and arithmetic identities.",
+    "S": "Fail-closed checker: schema violations, arithmetic mismatches, or invariant failures are errors."
+  },
+  "details": {
+    "error_count": 0,
+    "input_threshold_count": 6,
+    "row_count": 13,
+    "status_counts": {
+      "error_frames": 0,
+      "missing_frames": 0,
+      "ok_frames": 13,
+      "partial_frames": 0
+    },
+    "warn_count": 0
+  },
+  "errors": [],
+  "input": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/check_ns_alignment_gap_bin_scan_N128_20260621.json",
+    "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_alignment_gap_bin_scan_N128_20260621.json"
+  },
+  "input_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_alignment_gap_bin_scan_N128_20260621.json",
+  "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_alignment_gap_bin_scan_N128_20260621.json",
+  "status": "ok",
+  "warnings": []
+}
