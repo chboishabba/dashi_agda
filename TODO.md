@@ -57,6 +57,25 @@ Current odd-lane / topology intake note for `2026-06-20`:
   for importing the new stack.
 
 Current NS Clay action note for `2026-06-20`:
+- Case A / boundary-`delta1` geometric tranche is now landed. Artifacts:
+  `DASHI/Physics/Closure/NSDelta1BoundaryNormIdentityReceipt.agda`,
+  `DASHI/Physics/Closure/NSSZeroBoundaryGenericityReceipt.agda`,
+  `DASHI/Physics/Closure/NSDeterminantConcentrationImpossibilityReceipt.agda`,
+  `scripts/ns_case_a_transition_shell_scan.py`,
+  `scripts/check_ns_case_a_transition_shell_scan.py`,
+  `scripts/ns_boundary_delta1_uniformity_scan.py`,
+  `scripts/check_ns_boundary_delta1_uniformity_scan.py`,
+  `scripts/ns_case_a_geometric_bridge_summary.py`, and
+  `scripts/check_ns_case_a_geometric_bridge_summary.py`. The route now
+  records the exact boundary norm identity for `delta1` on `dOmega_K`,
+  records the fail-closed `S=0`/genericity surface, records the determinant
+  concentration impossibility rows for Case B / bounded-determinant
+  concentration, and adds empirical telemetry for transition-shell shrinkage,
+  boundary-gap separation, and boundary-`delta1` minima/quantiles on the raw
+  N128 archive. This remains fail-closed and non-promoting: Case A
+  geometric/co-area closure is not proved, pressure-sign control is not
+  proved, and uniform `delta1` lower bounds remain empirical only.
+
 - Pressure-correction / uniform-`delta1` reduction tranche is now landed.
   Artifacts:
   `DASHI/Physics/Closure/NSPressureCorrectionEigenframeScaleReceipt.agda`,

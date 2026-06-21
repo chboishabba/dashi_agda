@@ -1,0 +1,4997 @@
+{
+  "aggregate": {
+    "band_rows": [
+      {
+        "band_eps": 0.01,
+        "boundary_count": 27784,
+        "boundary_fraction": 0.0010191110464242788,
+        "gap_threshold_rows": [
+          {
+            "active_count": 27771,
+            "active_fraction_of_boundary": 0.9995321048085228,
+            "boundary_gap_separation": 0.008481344394431923,
+            "delta1_min": 0.5329499641379039,
+            "delta1_quantiles": {
+              "p05": 4.739367447696607,
+              "p25": 10.540751481347368,
+              "p50": 15.729786375440362,
+              "p75": 21.813185922749405,
+              "p95": 31.95869533090719
+            },
+            "delta1_threshold": 0.5
+          },
+          {
+            "active_count": 27739,
+            "active_fraction_of_boundary": 0.9983803627987331,
+            "boundary_gap_separation": 0.012992159333958355,
+            "delta1_min": 1.0024021732020667,
+            "delta1_quantiles": {
+              "p05": 4.790347977145125,
+              "p25": 10.559729074562465,
+              "p50": 15.740844220413626,
+              "p75": 21.822323063741198,
+              "p95": 31.964637091718853
+            },
+            "delta1_threshold": 1.0
+          },
+          {
+            "active_count": 27559,
+            "active_fraction_of_boundary": 0.9919018139936654,
+            "boundary_gap_separation": 0.02322226738039751,
+            "delta1_min": 2.0004675950477075,
+            "delta1_quantiles": {
+              "p05": 5.070782569622589,
+              "p25": 10.669956191953217,
+              "p50": 15.800388324341036,
+              "p75": 21.861841747801147,
+              "p95": 32.00192556911281
+            },
+            "delta1_threshold": 2.0
+          },
+          {
+            "active_count": 26793,
+            "active_fraction_of_boundary": 0.9643319896343219,
+            "boundary_gap_separation": 0.04637405835881783,
+            "delta1_min": 4.007478939735816,
+            "delta1_quantiles": {
+              "p05": 6.027187057068466,
+              "p25": 11.087249227927561,
+              "p50": 16.100015558093677,
+              "p75": 22.072364385934478,
+              "p95": 32.208870714231516
+            },
+            "delta1_threshold": 4.0
+          },
+          {
+            "active_count": 23633,
+            "active_fraction_of_boundary": 0.8505974661675785,
+            "boundary_gap_separation": 0.09221277742208074,
+            "delta1_min": 8.000117093214588,
+            "delta1_quantiles": {
+              "p05": 9.105042195823767,
+              "p25": 12.791987112522754,
+              "p50": 17.28751656735872,
+              "p75": 22.97022348599188,
+              "p95": 32.83892900810806
+            },
+            "delta1_threshold": 8.0
+          }
+        ]
+      },
+      {
+        "band_eps": 0.05,
+        "boundary_count": 138203,
+        "boundary_fraction": 0.005069255828857422,
+        "gap_threshold_rows": [
+          {
+            "active_count": 138138,
+            "active_fraction_of_boundary": 0.999529677358668,
+            "boundary_gap_separation": 0.006262374329259209,
+            "delta1_min": 0.5042641289122691,
+            "delta1_quantiles": {
+              "p05": 4.819435417312728,
+              "p25": 10.494392419985221,
+              "p50": 15.687055199582064,
+              "p75": 21.771067751612414,
+              "p95": 31.942597247600833
+            },
+            "delta1_threshold": 0.5
+          },
+          {
+            "active_count": 137962,
+            "active_fraction_of_boundary": 0.9982561883606,
+            "boundary_gap_separation": 0.011832179645129318,
+            "delta1_min": 1.0024021732020667,
+            "delta1_quantiles": {
+              "p05": 4.866099685783878,
+              "p25": 10.518067498981404,
+              "p50": 15.700487362043946,
+              "p75": 21.780068403393564,
+              "p95": 31.94803198658287
+            },
+            "delta1_threshold": 1.0
+          },
+          {
+            "active_count": 137083,
+            "active_fraction_of_boundary": 0.9918959791032033,
+            "boundary_gap_separation": 0.023109037153071714,
+            "delta1_min": 2.0000353983585257,
+            "delta1_quantiles": {
+              "p05": 5.110033474626875,
+              "p25": 10.61933776091278,
+              "p50": 15.766044881361758,
+              "p75": 21.821460252048105,
+              "p95": 31.98374498866226
+            },
+            "delta1_threshold": 2.0
+          },
+          {
+            "active_count": 133356,
+            "active_fraction_of_boundary": 0.9649284024225234,
+            "boundary_gap_separation": 0.046145357074405854,
+            "delta1_min": 4.000132728854763,
+            "delta1_quantiles": {
+              "p05": 6.061399793991486,
+              "p25": 11.04834923873442,
+              "p50": 16.04141921107557,
+              "p75": 22.021326769175182,
+              "p95": 32.138231828348815
+            },
+            "delta1_threshold": 4.0
+          },
+          {
+            "active_count": 117554,
+            "active_fraction_of_boundary": 0.8505893504482537,
+            "boundary_gap_separation": 0.09211291745747603,
+            "delta1_min": 8.000117093214588,
+            "delta1_quantiles": {
+              "p05": 9.076593580737754,
+              "p25": 12.788441886132624,
+              "p50": 17.24312286711647,
+              "p75": 22.926116666325314,
+              "p95": 32.81616983366259
+            },
+            "delta1_threshold": 8.0
+          }
+        ]
+      },
+      {
+        "band_eps": 0.1,
+        "boundary_count": 276445,
+        "boundary_fraction": 0.010139942169189453,
+        "gap_threshold_rows": [
+          {
+            "active_count": 276295,
+            "active_fraction_of_boundary": 0.9994573965888333,
+            "boundary_gap_separation": 0.005985658559285716,
+            "delta1_min": 0.5042641289122691,
+            "delta1_quantiles": {
+              "p05": 4.803940301922626,
+              "p25": 10.458416424594676,
+              "p50": 15.675743616844056,
+              "p75": 21.782090040539472,
+              "p95": 31.987564645547174
+            },
+            "delta1_threshold": 0.5
+          },
+          {
+            "active_count": 275929,
+            "active_fraction_of_boundary": 0.9981334442655863,
+            "boundary_gap_separation": 0.011705527780696046,
+            "delta1_min": 1.0009261313508042,
+            "delta1_quantiles": {
+              "p05": 4.851958030886915,
+              "p25": 10.479119242590347,
+              "p50": 15.688996487524273,
+              "p75": 21.79172524128614,
+              "p95": 31.999411778239864
+            },
+            "delta1_threshold": 1.0
+          },
+          {
+            "active_count": 274182,
+            "active_fraction_of_boundary": 0.9918139232035306,
+            "boundary_gap_separation": 0.02306756415971064,
+            "delta1_min": 2.0000353983585257,
+            "delta1_quantiles": {
+              "p05": 5.093759798034711,
+              "p25": 10.583008362368235,
+              "p50": 15.749716933416169,
+              "p75": 21.836971387042727,
+              "p95": 32.03508069915933
+            },
+            "delta1_threshold": 2.0
+          },
+          {
+            "active_count": 266707,
+            "active_fraction_of_boundary": 0.9647741865470527,
+            "boundary_gap_separation": 0.04610471221055891,
+            "delta1_min": 4.000132728854763,
+            "delta1_quantiles": {
+              "p05": 6.0438725562237225,
+              "p25": 11.019634366288264,
+              "p50": 16.03259927863809,
+              "p75": 22.040871146767437,
+              "p95": 32.18250152505839
+            },
+            "delta1_threshold": 4.0
+          },
+          {
+            "active_count": 234688,
+            "active_fraction_of_boundary": 0.8489500623993923,
+            "boundary_gap_separation": 0.09210528090056316,
+            "delta1_min": 8.000029245047692,
+            "delta1_quantiles": {
+              "p05": 9.082266063948223,
+              "p25": 12.803213734934628,
+              "p50": 17.25553335732146,
+              "p75": 22.965969711609947,
+              "p95": 32.867745832968914
+            },
+            "delta1_threshold": 8.0
+          }
+        ]
+      },
+      {
+        "band_eps": 0.2,
+        "boundary_count": 553301,
+        "boundary_fraction": 0.020294959728534404,
+        "gap_threshold_rows": [
+          {
+            "active_count": 553006,
+            "active_fraction_of_boundary": 0.9994668363151341,
+            "boundary_gap_separation": 0.005910466703792919,
+            "delta1_min": 0.5001630702981834,
+            "delta1_quantiles": {
+              "p05": 4.8108599562917504,
+              "p25": 10.465281202507391,
+              "p50": 15.684243968498956,
+              "p75": 21.79749486144493,
+              "p95": 32.02597396924814
+            },
+            "delta1_threshold": 0.5
+          },
+          {
+            "active_count": 552243,
+            "active_fraction_of_boundary": 0.9980878400725826,
+            "boundary_gap_separation": 0.011614968255923284,
+            "delta1_min": 1.00069269567003,
+            "delta1_quantiles": {
+              "p05": 4.866753600712224,
+              "p25": 10.487012718934254,
+              "p50": 15.698013521636296,
+              "p75": 21.80792117681297,
+              "p95": 32.032467334062765
+            },
+            "delta1_threshold": 1.0
+          },
+          {
+            "active_count": 548797,
+            "active_fraction_of_boundary": 0.9918597652995386,
+            "boundary_gap_separation": 0.023053518945363265,
+            "delta1_min": 2.0000353983585257,
+            "delta1_quantiles": {
+              "p05": 5.109651278865984,
+              "p25": 10.587968596227991,
+              "p50": 15.759256444601741,
+              "p75": 21.854486828721683,
+              "p95": 32.0716651555622
+            },
+            "delta1_threshold": 2.0
+          },
+          {
+            "active_count": 533877,
+            "active_fraction_of_boundary": 0.9648943341869977,
+            "boundary_gap_separation": 0.04606456032200701,
+            "delta1_min": 4.000132728854763,
+            "delta1_quantiles": {
+              "p05": 6.05567014848155,
+              "p25": 11.02455702072475,
+              "p50": 16.04022511536082,
+              "p75": 22.055290121258114,
+              "p95": 32.224485446055546
+            },
+            "delta1_threshold": 4.0
+          },
+          {
+            "active_count": 470125,
+            "active_fraction_of_boundary": 0.8496731435511593,
+            "boundary_gap_separation": 0.09209879075792278,
+            "delta1_min": 8.000029245047692,
+            "delta1_quantiles": {
+              "p05": 9.078455724520323,
+              "p25": 12.799224364602203,
+              "p50": 17.261005401665166,
+              "p75": 22.987803349702723,
+              "p95": 32.9075781187296
+            },
+            "delta1_threshold": 8.0
+          }
+        ]
+      }
+    ],
+    "finite_cell_count": 27262976,
+    "gap_threshold_rows": [
+      {
+        "active_count": 27771,
+        "active_fraction_of_boundary": 0.9995321048085228,
+        "band_eps": 0.01,
+        "boundary_gap_separation": 0.008481344394431923,
+        "delta1_min": 0.5329499641379039,
+        "delta1_quantiles": {
+          "p05": 4.739367447696607,
+          "p25": 10.540751481347368,
+          "p50": 15.729786375440362,
+          "p75": 21.813185922749405,
+          "p95": 31.95869533090719
+        },
+        "delta1_threshold": 0.5
+      },
+      {
+        "active_count": 27739,
+        "active_fraction_of_boundary": 0.9983803627987331,
+        "band_eps": 0.01,
+        "boundary_gap_separation": 0.012992159333958355,
+        "delta1_min": 1.0024021732020667,
+        "delta1_quantiles": {
+          "p05": 4.790347977145125,
+          "p25": 10.559729074562465,
+          "p50": 15.740844220413626,
+          "p75": 21.822323063741198,
+          "p95": 31.964637091718853
+        },
+        "delta1_threshold": 1.0
+      },
+      {
+        "active_count": 27559,
+        "active_fraction_of_boundary": 0.9919018139936654,
+        "band_eps": 0.01,
+        "boundary_gap_separation": 0.02322226738039751,
+        "delta1_min": 2.0004675950477075,
+        "delta1_quantiles": {
+          "p05": 5.070782569622589,
+          "p25": 10.669956191953217,
+          "p50": 15.800388324341036,
+          "p75": 21.861841747801147,
+          "p95": 32.00192556911281
+        },
+        "delta1_threshold": 2.0
+      },
+      {
+        "active_count": 26793,
+        "active_fraction_of_boundary": 0.9643319896343219,
+        "band_eps": 0.01,
+        "boundary_gap_separation": 0.04637405835881783,
+        "delta1_min": 4.007478939735816,
+        "delta1_quantiles": {
+          "p05": 6.027187057068466,
+          "p25": 11.087249227927561,
+          "p50": 16.100015558093677,
+          "p75": 22.072364385934478,
+          "p95": 32.208870714231516
+        },
+        "delta1_threshold": 4.0
+      },
+      {
+        "active_count": 23633,
+        "active_fraction_of_boundary": 0.8505974661675785,
+        "band_eps": 0.01,
+        "boundary_gap_separation": 0.09221277742208074,
+        "delta1_min": 8.000117093214588,
+        "delta1_quantiles": {
+          "p05": 9.105042195823767,
+          "p25": 12.791987112522754,
+          "p50": 17.28751656735872,
+          "p75": 22.97022348599188,
+          "p95": 32.83892900810806
+        },
+        "delta1_threshold": 8.0
+      }
+    ],
+    "global_strain_frob_max": 95.95097546244487,
+    "ok_frames": 13,
+    "processed_frames": 13,
+    "status_counts": {
+      "ok": 13
+    },
+    "velocity_rms_mean": 0.9097859284454385
+  },
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "contract": "ns_boundary_delta1_uniformity_scan",
+  "control_card": {
+    "C": "scripts/ns_boundary_delta1_uniformity_scan.py",
+    "F": "Boundary is approximated by finite |lambda2| bands and all lower bounds remain telemetry rather than proof.",
+    "G": "Empirical scan only; no theorem, closure, or Clay promotion.",
+    "L": "Emit per-frame and aggregate telemetry on boundary bands, delta1 thresholds, identity residuals, and normalized lower-bound proxies.",
+    "O": "Scan raw N128 flow for boundary-delta1 lower-bound telemetry.",
+    "P": "FAIL_CLOSED_NS_BOUNDARY_DELTA1_UNIFORMITY_SCAN",
+    "R": "Approximate dOmega_K by small-|lambda2| bands, compute delta1=|lambda1| and strain norms there, test the exact operator/Frobenius boundary identities numerically, and bin minima/quantiles by delta1 thresholds.",
+    "S": "Fail-closed: malformed archive, non-finite fields, or arithmetic mismatches become explicit errors."
+  },
+  "frame_rows": [
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 1872,
+          "boundary_fraction": 0.00089263916015625,
+          "frob_delta1_residual_max": 33.276526875753,
+          "gap_threshold_rows": [
+            {
+              "active_count": 1871,
+              "active_fraction_of_boundary": 0.999465811965812,
+              "boundary_gap_separation": 0.011570153416324124,
+              "delta1_min": 1.1101675065464387,
+              "delta1_quantiles": {
+                "p05": 5.278239381427079,
+                "p25": 11.670164273170313,
+                "p50": 17.917707802820352,
+                "p75": 24.453362550253942,
+                "p95": 36.01979087460842
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 1.1101675065038108
+            },
+            {
+              "active_count": 1871,
+              "active_fraction_of_boundary": 0.999465811965812,
+              "boundary_gap_separation": 0.011570153416324124,
+              "delta1_min": 1.1101675065464387,
+              "delta1_quantiles": {
+                "p05": 5.278239381427079,
+                "p25": 11.670164273170313,
+                "p50": 17.917707802820352,
+                "p75": 24.453362550253942,
+                "p95": 36.01979087460842
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1101675065038108
+            },
+            {
+              "active_count": 1865,
+              "active_fraction_of_boundary": 0.9962606837606838,
+              "boundary_gap_separation": 0.02109251342986114,
+              "delta1_min": 2.0238472385498953,
+              "delta1_quantiles": {
+                "p05": 5.430259546520965,
+                "p25": 11.695396704537899,
+                "p50": 17.942625144471986,
+                "p75": 24.461989286614493,
+                "p95": 36.0373770432145
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.023847238472184
+            },
+            {
+              "active_count": 1829,
+              "active_fraction_of_boundary": 0.9770299145299145,
+              "boundary_gap_separation": 0.0420569120051637,
+              "delta1_min": 4.035401731833665,
+              "delta1_quantiles": {
+                "p05": 6.247996214675186,
+                "p25": 12.0934713417985,
+                "p50": 18.120847813701637,
+                "p75": 24.573960919849426,
+                "p95": 36.175573913926556
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.035401731678715
+            },
+            {
+              "active_count": 1646,
+              "active_fraction_of_boundary": 0.8792735042735043,
+              "boundary_gap_separation": 0.08341219301142964,
+              "delta1_min": 8.003481284908402,
+              "delta1_quantiles": {
+                "p05": 9.222706671539907,
+                "p25": 13.910544577592216,
+                "p50": 19.46957071448,
+                "p75": 25.340242617270906,
+                "p95": 36.7778136416305
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.003481284601087
+            }
+          ],
+          "operator_delta1_residual_max": 49.02932433923064
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 9375,
+          "boundary_fraction": 0.004470348358154297,
+          "frob_delta1_residual_max": 33.276526875753,
+          "gap_threshold_rows": [
+            {
+              "active_count": 9371,
+              "active_fraction_of_boundary": 0.9995733333333333,
+              "boundary_gap_separation": 0.005772547879670912,
+              "delta1_min": 0.5538815999580918,
+              "delta1_quantiles": {
+                "p05": 5.371498321632587,
+                "p25": 11.696136734506169,
+                "p50": 17.688961426121054,
+                "p75": 24.312766001221046,
+                "p95": 36.05275633628304
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5538815999368241
+            },
+            {
+              "active_count": 9360,
+              "active_fraction_of_boundary": 0.9984,
+              "boundary_gap_separation": 0.011088020451928296,
+              "delta1_min": 1.0639063783100589,
+              "delta1_quantiles": {
+                "p05": 5.4182707589262895,
+                "p25": 11.725664486149643,
+                "p50": 17.697950134687012,
+                "p75": 24.32105711875271,
+                "p95": 36.056433254782114
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0639063782692073
+            },
+            {
+              "active_count": 9318,
+              "active_fraction_of_boundary": 0.99392,
+              "boundary_gap_separation": 0.02109251342986114,
+              "delta1_min": 2.0238472385498953,
+              "delta1_quantiles": {
+                "p05": 5.592005293701761,
+                "p25": 11.832856400263845,
+                "p50": 17.75270131492494,
+                "p75": 24.360476949933375,
+                "p95": 36.07470121375284
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.023847238472184
+            },
+            {
+              "active_count": 9126,
+              "active_fraction_of_boundary": 0.97344,
+              "boundary_gap_separation": 0.041689338848049665,
+              "delta1_min": 4.000132728854763,
+              "delta1_quantiles": {
+                "p05": 6.47418557869592,
+                "p25": 12.213068721616718,
+                "p50": 17.99125614614558,
+                "p75": 24.531783378663082,
+                "p95": 36.18618720742539
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.000132728701167
+            },
+            {
+              "active_count": 8286,
+              "active_fraction_of_boundary": 0.88384,
+              "boundary_gap_separation": 0.08341219301142964,
+              "delta1_min": 8.003481284908402,
+              "delta1_quantiles": {
+                "p05": 9.260571888737545,
+                "p25": 13.801393593221476,
+                "p50": 19.105533020096388,
+                "p75": 25.338809057113945,
+                "p95": 36.671654445536475
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.003481284601087
+            }
+          ],
+          "operator_delta1_residual_max": 49.02932433923064
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 18890,
+          "boundary_fraction": 0.009007453918457031,
+          "frob_delta1_residual_max": 33.276526875753,
+          "gap_threshold_rows": [
+            {
+              "active_count": 18883,
+              "active_fraction_of_boundary": 0.9996294335627316,
+              "boundary_gap_separation": 0.005429278237268882,
+              "delta1_min": 0.5209445429229724,
+              "delta1_quantiles": {
+                "p05": 5.35964925442558,
+                "p25": 11.670431261729368,
+                "p50": 17.553458905138935,
+                "p75": 24.35608913918488,
+                "p95": 35.887588798467746
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5209445429029693
+            },
+            {
+              "active_count": 18864,
+              "active_fraction_of_boundary": 0.9986236103758602,
+              "boundary_gap_separation": 0.010527627792796099,
+              "delta1_min": 1.0101361560243312,
+              "delta1_quantiles": {
+                "p05": 5.410638302631923,
+                "p25": 11.684429193541153,
+                "p50": 17.56381686790397,
+                "p75": 24.36661974151468,
+                "p95": 35.895808868357484
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0101361559855442
+            },
+            {
+              "active_count": 18772,
+              "active_fraction_of_boundary": 0.9937533086289042,
+              "boundary_gap_separation": 0.020966344379653647,
+              "delta1_min": 2.011741195109316,
+              "delta1_quantiles": {
+                "p05": 5.627809739672417,
+                "p25": 11.783871630463898,
+                "p50": 17.61111313278458,
+                "p75": 24.398512012518005,
+                "p95": 35.909245833060034
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.01174119503207
+            },
+            {
+              "active_count": 18388,
+              "active_fraction_of_boundary": 0.9734250926416094,
+              "boundary_gap_separation": 0.041689338848049665,
+              "delta1_min": 4.000132728854763,
+              "delta1_quantiles": {
+                "p05": 6.504555057236052,
+                "p25": 12.16500982266073,
+                "p50": 17.85443451130689,
+                "p75": 24.570898021844176,
+                "p95": 36.01074953815919
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.000132728701167
+            },
+            {
+              "active_count": 16677,
+              "active_fraction_of_boundary": 0.88284806776072,
+              "boundary_gap_separation": 0.08339451152498349,
+              "delta1_min": 8.001784729036267,
+              "delta1_quantiles": {
+                "p05": 9.253250270274057,
+                "p25": 13.76756045279137,
+                "p50": 18.927567774843798,
+                "p75": 25.420613354444512,
+                "p95": 36.56613775887861
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.001784728729016
+            }
+          ],
+          "operator_delta1_residual_max": 49.09017008091073
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 37581,
+          "boundary_fraction": 0.01792001724243164,
+          "frob_delta1_residual_max": 35.09187603989682,
+          "gap_threshold_rows": [
+            {
+              "active_count": 37564,
+              "active_fraction_of_boundary": 0.9995476437561533,
+              "boundary_gap_separation": 0.005429278237268882,
+              "delta1_min": 0.5209445429229724,
+              "delta1_quantiles": {
+                "p05": 5.407939162180981,
+                "p25": 11.700450250925703,
+                "p50": 17.535882228947937,
+                "p75": 24.332308333054677,
+                "p95": 35.796123060456125
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5209445429029693
+            },
+            {
+              "active_count": 37521,
+              "active_fraction_of_boundary": 0.9984034485511296,
+              "boundary_gap_separation": 0.010527627792796099,
+              "delta1_min": 1.0101361560243312,
+              "delta1_quantiles": {
+                "p05": 5.450367161126771,
+                "p25": 11.722468440155273,
+                "p50": 17.545753401105095,
+                "p75": 24.34310740994702,
+                "p95": 35.798838761541234
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0101361559855442
+            },
+            {
+              "active_count": 37336,
+              "active_fraction_of_boundary": 0.9934807482504457,
+              "boundary_gap_separation": 0.02095046702849292,
+              "delta1_min": 2.0102177477776846,
+              "delta1_quantiles": {
+                "p05": 5.682424206436309,
+                "p25": 11.809332931329568,
+                "p50": 17.598128111164396,
+                "p75": 24.37846443715752,
+                "p95": 35.837705206990016
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.010217747700497
+            },
+            {
+              "active_count": 36594,
+              "active_fraction_of_boundary": 0.9737367286660813,
+              "boundary_gap_separation": 0.041689338848049665,
+              "delta1_min": 4.000132728854763,
+              "delta1_quantiles": {
+                "p05": 6.5021714003479945,
+                "p25": 12.169647102914873,
+                "p50": 17.823991422850078,
+                "p75": 24.542372266252716,
+                "p95": 35.947892469530174
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.000132728701167
+            },
+            {
+              "active_count": 33182,
+              "active_fraction_of_boundary": 0.8829461696069822,
+              "boundary_gap_separation": 0.08339451152498349,
+              "delta1_min": 8.001784729036267,
+              "delta1_quantiles": {
+                "p05": 9.315338967639233,
+                "p25": 13.752200391777158,
+                "p50": 18.904836218338048,
+                "p75": 25.369151329809768,
+                "p95": 36.52812502081327
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.001784728729016
+            }
+          ],
+          "operator_delta1_residual_max": 52.00264668319227
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 0,
+      "global_strain_frob_max": 95.95097546244487,
+      "snapshot_index": 0,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 1.0000000000383977,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 1952,
+          "boundary_fraction": 0.0009307861328125,
+          "frob_delta1_residual_max": 26.17896455601796,
+          "gap_threshold_rows": [
+            {
+              "active_count": 1952,
+              "active_fraction_of_boundary": 1.0,
+              "boundary_gap_separation": 0.00849699909237692,
+              "delta1_min": 0.7969549698792446,
+              "delta1_quantiles": {
+                "p05": 5.333614638771949,
+                "p25": 11.50274305910192,
+                "p50": 17.393845665354057,
+                "p75": 23.797653515128335,
+                "p95": 35.124094908325276
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.8101657809830749
+            },
+            {
+              "active_count": 1950,
+              "active_fraction_of_boundary": 0.9989754098360656,
+              "boundary_gap_separation": 0.012679617596559303,
+              "delta1_min": 1.1892533057714496,
+              "delta1_quantiles": {
+                "p05": 5.355117868022418,
+                "p25": 11.509812295899756,
+                "p50": 17.401233067074003,
+                "p75": 23.80195111015037,
+                "p95": 35.126837185189814
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.208967093088107
+            },
+            {
+              "active_count": 1940,
+              "active_fraction_of_boundary": 0.9938524590163934,
+              "boundary_gap_separation": 0.021476348721375504,
+              "delta1_min": 2.0143208987412153,
+              "delta1_quantiles": {
+                "p05": 5.496879390911409,
+                "p25": 11.638853163007031,
+                "p50": 17.47131105802221,
+                "p75": 23.85043811641201,
+                "p95": 35.147881851292766
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.0477115091289013
+            },
+            {
+              "active_count": 1893,
+              "active_fraction_of_boundary": 0.9697745901639344,
+              "boundary_gap_separation": 0.04326189135710228,
+              "delta1_min": 4.057641874335414,
+              "delta1_quantiles": {
+                "p05": 6.316628591625277,
+                "p25": 12.087403851779666,
+                "p50": 17.735096202520207,
+                "p75": 24.092455665869068,
+                "p95": 35.449014150249916
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.124903818052208
+            },
+            {
+              "active_count": 1719,
+              "active_fraction_of_boundary": 0.8806352459016393,
+              "boundary_gap_separation": 0.0855232339131807,
+              "delta1_min": 8.021439753759958,
+              "delta1_quantiles": {
+                "p05": 9.337766142381165,
+                "p25": 13.544468274228475,
+                "p50": 18.733199769859883,
+                "p75": 24.835871242426357,
+                "p95": 35.92200862892632
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.154408025962006
+            }
+          ],
+          "operator_delta1_residual_max": 39.54195849813339
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 9571,
+          "boundary_fraction": 0.004563808441162109,
+          "frob_delta1_residual_max": 28.94684398873699,
+          "gap_threshold_rows": [
+            {
+              "active_count": 9569,
+              "active_fraction_of_boundary": 0.9997910354194964,
+              "boundary_gap_separation": 0.005537097006612036,
+              "delta1_min": 0.5193382899242519,
+              "delta1_quantiles": {
+                "p05": 5.416355952042943,
+                "p25": 11.426803033389023,
+                "p50": 17.049051258977958,
+                "p75": 23.695361437525655,
+                "p95": 34.834075946078904
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5279471578107463
+            },
+            {
+              "active_count": 9562,
+              "active_fraction_of_boundary": 0.9990596593877338,
+              "boundary_gap_separation": 0.011527256860965644,
+              "delta1_min": 1.0811704867266656,
+              "delta1_quantiles": {
+                "p05": 5.450898053300345,
+                "p25": 11.442302702422676,
+                "p50": 17.053927821804486,
+                "p75": 23.701331650771248,
+                "p95": 34.83418353336347
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0990926273883224
+            },
+            {
+              "active_count": 9515,
+              "active_fraction_of_boundary": 0.9941489917458991,
+              "boundary_gap_separation": 0.021362831837761696,
+              "delta1_min": 2.003673863996632,
+              "delta1_quantiles": {
+                "p05": 5.639414293334791,
+                "p25": 11.516366515829015,
+                "p50": 17.10303864977285,
+                "p75": 23.731084914474604,
+                "p95": 34.86439286727369
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.0368879826499757
+            },
+            {
+              "active_count": 9313,
+              "active_fraction_of_boundary": 0.973043569115035,
+              "boundary_gap_separation": 0.04289776183910726,
+              "delta1_min": 4.02348924869771,
+              "delta1_quantiles": {
+                "p05": 6.513698561740699,
+                "p25": 11.877088588997129,
+                "p50": 17.337453057064934,
+                "p75": 23.888124554024763,
+                "p95": 35.03505664275406
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.090185057685376
+            },
+            {
+              "active_count": 8428,
+              "active_fraction_of_boundary": 0.88057674224219,
+              "boundary_gap_separation": 0.0853403342894884,
+              "delta1_min": 8.004285136876288,
+              "delta1_quantiles": {
+                "p05": 9.300324882939377,
+                "p25": 13.312121131327654,
+                "p50": 18.430108092785566,
+                "p75": 24.660104065508186,
+                "p95": 35.48996501421791
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.136969043697889
+            }
+          ],
+          "operator_delta1_residual_max": 44.40265682501784
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 19221,
+          "boundary_fraction": 0.009165287017822266,
+          "frob_delta1_residual_max": 42.38492843993836,
+          "gap_threshold_rows": [
+            {
+              "active_count": 19213,
+              "active_fraction_of_boundary": 0.9995837885645908,
+              "boundary_gap_separation": 0.005537097006612036,
+              "delta1_min": 0.5193382899242519,
+              "delta1_quantiles": {
+                "p05": 5.228023775272231,
+                "p25": 11.418009468787654,
+                "p50": 17.121419119196755,
+                "p75": 23.754679134576246,
+                "p95": 34.98007693397561
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5279471578107463
+            },
+            {
+              "active_count": 19196,
+              "active_fraction_of_boundary": 0.9986993392643463,
+              "boundary_gap_separation": 0.010924682702987113,
+              "delta1_min": 1.0246535370717427,
+              "delta1_quantiles": {
+                "p05": 5.252704214859805,
+                "p25": 11.429881400558726,
+                "p50": 17.133366318261885,
+                "p75": 23.759498362985102,
+                "p95": 34.98180853331693
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.041638818344507
+            },
+            {
+              "active_count": 19098,
+              "active_fraction_of_boundary": 0.9936007491805837,
+              "boundary_gap_separation": 0.021362831837761696,
+              "delta1_min": 2.003673863996632,
+              "delta1_quantiles": {
+                "p05": 5.474641431971092,
+                "p25": 11.5298399231208,
+                "p50": 17.19159823928536,
+                "p75": 23.80032352086609,
+                "p95": 35.00517649244274
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.0368879826499757
+            },
+            {
+              "active_count": 18670,
+              "active_fraction_of_boundary": 0.9713334373861922,
+              "boundary_gap_separation": 0.042866180010033256,
+              "delta1_min": 4.020527109315938,
+              "delta1_quantiles": {
+                "p05": 6.373411126529669,
+                "p25": 11.89489598145924,
+                "p50": 17.455215831458005,
+                "p75": 23.981127791538242,
+                "p95": 35.141011887967366
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.08717381607661
+            },
+            {
+              "active_count": 16817,
+              "active_fraction_of_boundary": 0.874928463659539,
+              "boundary_gap_separation": 0.08530531225655846,
+              "delta1_min": 8.001000332100467,
+              "delta1_quantiles": {
+                "p05": 9.319836833658954,
+                "p25": 13.534812240124602,
+                "p50": 18.580302533505126,
+                "p75": 24.8146395235037,
+                "p95": 35.685934869182084
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.133629787996925
+            }
+          ],
+          "operator_delta1_residual_max": 61.3611241249658
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 38522,
+          "boundary_fraction": 0.01836872100830078,
+          "frob_delta1_residual_max": 42.38492843993836,
+          "gap_threshold_rows": [
+            {
+              "active_count": 38502,
+              "active_fraction_of_boundary": 0.9994808161570012,
+              "boundary_gap_separation": 0.005427571738131317,
+              "delta1_min": 0.5090656388277752,
+              "delta1_quantiles": {
+                "p05": 5.295116775720509,
+                "p25": 11.43435440307919,
+                "p50": 17.148427982710547,
+                "p75": 23.77755615957261,
+                "p95": 34.817255998073556
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5175042209913615
+            },
+            {
+              "active_count": 38465,
+              "active_fraction_of_boundary": 0.9985203260474534,
+              "boundary_gap_separation": 0.010924682702987113,
+              "delta1_min": 1.0246535370717427,
+              "delta1_quantiles": {
+                "p05": 5.335798429256165,
+                "p25": 11.456032650060875,
+                "p50": 17.16186279794573,
+                "p75": 23.783876089845023,
+                "p95": 34.817933760454714
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.041638818344507
+            },
+            {
+              "active_count": 38283,
+              "active_fraction_of_boundary": 0.9937957530761643,
+              "boundary_gap_separation": 0.021362831837761696,
+              "delta1_min": 2.003673863996632,
+              "delta1_quantiles": {
+                "p05": 5.553062705116926,
+                "p25": 11.537209482035218,
+                "p50": 17.213158264666934,
+                "p75": 23.826199538646414,
+                "p95": 34.84083127011173
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.0368879826499757
+            },
+            {
+              "active_count": 37438,
+              "active_fraction_of_boundary": 0.9718602357094647,
+              "boundary_gap_separation": 0.042663581327015275,
+              "delta1_min": 4.001524867987347,
+              "delta1_quantiles": {
+                "p05": 6.412341128423714,
+                "p25": 11.915078138377456,
+                "p50": 17.484927407205625,
+                "p75": 23.997980403039946,
+                "p95": 34.98469632615047
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.067856582019157
+            },
+            {
+              "active_count": 33784,
+              "active_fraction_of_boundary": 0.8770053475935828,
+              "boundary_gap_separation": 0.08530531225655846,
+              "delta1_min": 8.001000332100467,
+              "delta1_quantiles": {
+                "p05": 9.287831123489298,
+                "p25": 13.546946282127788,
+                "p50": 18.580167422808344,
+                "p75": 24.843800588887536,
+                "p95": 35.559123077148364
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.133629787996925
+            }
+          ],
+          "operator_delta1_residual_max": 61.3611241249658
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 1,
+      "global_strain_frob_max": 93.79252147905164,
+      "snapshot_index": 1,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.9836936940390151,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 1987,
+          "boundary_fraction": 0.0009474754333496094,
+          "frob_delta1_residual_max": 25.588685348905145,
+          "gap_threshold_rows": [
+            {
+              "active_count": 1984,
+              "active_fraction_of_boundary": 0.9984901862103673,
+              "boundary_gap_separation": 0.006502376272203761,
+              "delta1_min": 0.5931591821471837,
+              "delta1_quantiles": {
+                "p05": 5.143362599390719,
+                "p25": 11.3919077911531,
+                "p50": 16.482778539047352,
+                "p75": 22.856186457004057,
+                "p95": 34.088031219885664
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.6128992936588642
+            },
+            {
+              "active_count": 1983,
+              "active_fraction_of_boundary": 0.9979869149471565,
+              "boundary_gap_separation": 0.01231986877941989,
+              "delta1_min": 1.1238419592234155,
+              "delta1_quantiles": {
+                "p05": 5.230171117344379,
+                "p25": 11.396542431994094,
+                "p50": 16.493051220200627,
+                "p75": 22.860771811669828,
+                "p95": 34.090426063040226
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1612429912975863
+            },
+            {
+              "active_count": 1977,
+              "active_fraction_of_boundary": 0.9949672873678913,
+              "boundary_gap_separation": 0.02208257158563926,
+              "delta1_min": 2.014414354554898,
+              "delta1_quantiles": {
+                "p05": 5.432725647858533,
+                "p25": 11.433302210775116,
+                "p50": 16.510120818847806,
+                "p75": 22.89606990013155,
+                "p95": 34.109226063714935
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.081453296522716
+            },
+            {
+              "active_count": 1938,
+              "active_fraction_of_boundary": 0.9753397081026673,
+              "boundary_gap_separation": 0.043947685110322696,
+              "delta1_min": 4.008991769476009,
+              "delta1_quantiles": {
+                "p05": 6.067242646177677,
+                "p25": 11.772302616112237,
+                "p50": 16.770121456772205,
+                "p75": 23.0914669833285,
+                "p95": 34.21815687881606
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.142409487621067
+            },
+            {
+              "active_count": 1737,
+              "active_fraction_of_boundary": 0.8741821841972823,
+              "boundary_gap_separation": 0.08784511967037784,
+              "delta1_min": 8.01339958778534,
+              "delta1_quantiles": {
+                "p05": 9.362318924928584,
+                "p25": 13.37852826946136,
+                "p50": 17.92253998149559,
+                "p75": 24.063283199832007,
+                "p95": 34.514092385605906
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.280082471927704
+            }
+          ],
+          "operator_delta1_residual_max": 39.34012044177228
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 9978,
+          "boundary_fraction": 0.004757881164550781,
+          "frob_delta1_residual_max": 32.16552187723823,
+          "gap_threshold_rows": [
+            {
+              "active_count": 9973,
+              "active_fraction_of_boundary": 0.9994988975746643,
+              "boundary_gap_separation": 0.005724690069900117,
+              "delta1_min": 0.5222171615050532,
+              "delta1_quantiles": {
+                "p05": 5.297030554889896,
+                "p25": 11.239758469125192,
+                "p50": 16.838614793486943,
+                "p75": 23.165564474306805,
+                "p95": 34.16227416898581
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5395963496078263
+            },
+            {
+              "active_count": 9962,
+              "active_fraction_of_boundary": 0.9983964722389257,
+              "boundary_gap_separation": 0.011215245304079718,
+              "delta1_min": 1.023076096132061,
+              "delta1_quantiles": {
+                "p05": 5.340448876967246,
+                "p25": 11.26373857358479,
+                "p50": 16.84897076059754,
+                "p75": 23.16803262395436,
+                "p95": 34.165017891827986
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0571236786873461
+            },
+            {
+              "active_count": 9916,
+              "active_fraction_of_boundary": 0.9937863299258368,
+              "boundary_gap_separation": 0.021985386431615867,
+              "delta1_min": 2.0055489391953176,
+              "delta1_quantiles": {
+                "p05": 5.527933846581956,
+                "p25": 11.355776098309427,
+                "p50": 16.89800369060202,
+                "p75": 23.19330769834628,
+                "p95": 34.18320588012696
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.072292843518836
+            },
+            {
+              "active_count": 9726,
+              "active_fraction_of_boundary": 0.9747444377630787,
+              "boundary_gap_separation": 0.043903554707960084,
+              "delta1_min": 4.004966109889816,
+              "delta1_quantiles": {
+                "p05": 6.260035836361023,
+                "p25": 11.717165447124556,
+                "p50": 17.10584576873641,
+                "p75": 23.351361919546665,
+                "p95": 34.32119514999933
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.138249855618141
+            },
+            {
+              "active_count": 8678,
+              "active_fraction_of_boundary": 0.8697133694127079,
+              "boundary_gap_separation": 0.08773954470631933,
+              "delta1_min": 8.003768837931034,
+              "delta1_quantiles": {
+                "p05": 9.320299126309063,
+                "p25": 13.447003368102845,
+                "p50": 18.227468097583312,
+                "p75": 24.240936538438827,
+                "p95": 35.066869392475525
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.270131214388806
+            }
+          ],
+          "operator_delta1_residual_max": 50.02999165221184
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 19813,
+          "boundary_fraction": 0.009447574615478516,
+          "frob_delta1_residual_max": 33.049511544521806,
+          "gap_threshold_rows": [
+            {
+              "active_count": 19801,
+              "active_fraction_of_boundary": 0.9993943370514309,
+              "boundary_gap_separation": 0.005724690069900117,
+              "delta1_min": 0.5222171615050532,
+              "delta1_quantiles": {
+                "p05": 5.2367319262580505,
+                "p25": 11.180914580073761,
+                "p50": 16.82993010270823,
+                "p75": 23.26477508679499,
+                "p95": 34.21896619587453
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5395963496078263
+            },
+            {
+              "active_count": 19777,
+              "active_fraction_of_boundary": 0.9981830111542926,
+              "boundary_gap_separation": 0.011215245304079718,
+              "delta1_min": 1.023076096132061,
+              "delta1_quantiles": {
+                "p05": 5.279380041713821,
+                "p25": 11.207360378174709,
+                "p50": 16.838874062440823,
+                "p75": 23.27432528340847,
+                "p95": 34.2372689638489
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0571236786873461
+            },
+            {
+              "active_count": 19689,
+              "active_fraction_of_boundary": 0.9937414828647857,
+              "boundary_gap_separation": 0.021985386431615867,
+              "delta1_min": 2.0055489391953176,
+              "delta1_quantiles": {
+                "p05": 5.464504105374521,
+                "p25": 11.28585445436277,
+                "p50": 16.891796035930014,
+                "p75": 23.330916020090417,
+                "p95": 34.25621551461721
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.072292843518836
+            },
+            {
+              "active_count": 19277,
+              "active_fraction_of_boundary": 0.9729470549639125,
+              "boundary_gap_separation": 0.043903554707960084,
+              "delta1_min": 4.004966109889816,
+              "delta1_quantiles": {
+                "p05": 6.270072823910638,
+                "p25": 11.650470790256326,
+                "p50": 17.128195878484195,
+                "p75": 23.48819247523774,
+                "p95": 34.35263579866576
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.138249855618141
+            },
+            {
+              "active_count": 17261,
+              "active_fraction_of_boundary": 0.8711956796043002,
+              "boundary_gap_separation": 0.08773954470631933,
+              "delta1_min": 8.003768837931034,
+              "delta1_quantiles": {
+                "p05": 9.286315477390358,
+                "p25": 13.379521832770894,
+                "p50": 18.24937932765823,
+                "p75": 24.35078507856491,
+                "p95": 35.055397294748246
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.270131214388806
+            }
+          ],
+          "operator_delta1_residual_max": 50.02999165221184
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 39416,
+          "boundary_fraction": 0.018795013427734375,
+          "frob_delta1_residual_max": 33.049511544521806,
+          "gap_threshold_rows": [
+            {
+              "active_count": 39400,
+              "active_fraction_of_boundary": 0.9995940734727015,
+              "boundary_gap_separation": 0.005606684969462663,
+              "delta1_min": 0.5114525108705008,
+              "delta1_quantiles": {
+                "p05": 5.213747547020774,
+                "p25": 11.258914289643792,
+                "p50": 16.84264497946371,
+                "p75": 23.361729790047455,
+                "p95": 34.29180321940844
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5284734555028768
+            },
+            {
+              "active_count": 39356,
+              "active_fraction_of_boundary": 0.9984777755226304,
+              "boundary_gap_separation": 0.011010819407459316,
+              "delta1_min": 1.0044279754184982,
+              "delta1_quantiles": {
+                "p05": 5.259074304701129,
+                "p25": 11.279567461822827,
+                "p50": 16.854356359324715,
+                "p75": 23.370617645243094,
+                "p95": 34.29513250848664
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.037854955623776
+            },
+            {
+              "active_count": 39181,
+              "active_fraction_of_boundary": 0.9940379541303024,
+              "boundary_gap_separation": 0.021985386431615867,
+              "delta1_min": 2.0055489391953176,
+              "delta1_quantiles": {
+                "p05": 5.454576497303312,
+                "p25": 11.354953379489595,
+                "p50": 16.898121184632117,
+                "p75": 23.399533561515753,
+                "p95": 34.32627822871112
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.072292843518836
+            },
+            {
+              "active_count": 38307,
+              "active_fraction_of_boundary": 0.9718642175766187,
+              "boundary_gap_separation": 0.04388519705050914,
+              "delta1_min": 4.003291489316674,
+              "delta1_quantiles": {
+                "p05": 6.339323408303675,
+                "p25": 11.72965612954768,
+                "p50": 17.15723221813518,
+                "p75": 23.566193109652446,
+                "p95": 34.446212270302915
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.136519504310571
+            },
+            {
+              "active_count": 34440,
+              "active_fraction_of_boundary": 0.8737568500101481,
+              "boundary_gap_separation": 0.08770012615502473,
+              "delta1_min": 8.000173002398219,
+              "delta1_quantiles": {
+                "p05": 9.242370232154462,
+                "p25": 13.379764324258621,
+                "p50": 18.262002764990456,
+                "p75": 24.400987092250787,
+                "p95": 35.097001945518365
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.266415710819937
+            }
+          ],
+          "operator_delta1_residual_max": 50.02999165221184
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 2,
+      "global_strain_frob_max": 91.22190985514167,
+      "snapshot_index": 2,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.9677922430064543,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 2038,
+          "boundary_fraction": 0.0009717941284179688,
+          "frob_delta1_residual_max": 27.878865244922235,
+          "gap_threshold_rows": [
+            {
+              "active_count": 2036,
+              "active_fraction_of_boundary": 0.9990186457311089,
+              "boundary_gap_separation": 0.00996849797024201,
+              "delta1_min": 0.899728113435325,
+              "delta1_quantiles": {
+                "p05": 4.893160001980828,
+                "p25": 10.993297102641115,
+                "p50": 16.838135934654268,
+                "p75": 22.989742996526722,
+                "p95": 33.486419759908756
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.9448275278721872
+            },
+            {
+              "active_count": 2035,
+              "active_fraction_of_boundary": 0.9985279685966634,
+              "boundary_gap_separation": 0.015417123563874561,
+              "delta1_min": 1.3915054745592124,
+              "delta1_quantiles": {
+                "p05": 4.922071051675648,
+                "p25": 10.994866313310515,
+                "p50": 16.83896729054548,
+                "p75": 22.991218207362238,
+                "p95": 33.490863255793954
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.4612555258815996
+            },
+            {
+              "active_count": 2024,
+              "active_fraction_of_boundary": 0.9931305201177625,
+              "boundary_gap_separation": 0.022451184352860025,
+              "delta1_min": 2.0263796815215716,
+              "delta1_quantiles": {
+                "p05": 5.0434354456857315,
+                "p25": 11.092608367327577,
+                "p50": 16.864266810385498,
+                "p75": 23.016399746548846,
+                "p95": 33.5397417105311
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.127953185448708
+            },
+            {
+              "active_count": 1959,
+              "active_fraction_of_boundary": 0.9612365063788028,
+              "boundary_gap_separation": 0.04518903510011729,
+              "delta1_min": 4.078633051836208,
+              "delta1_quantiles": {
+                "p05": 6.4025534910114565,
+                "p25": 11.834763237065307,
+                "p50": 17.22653111182381,
+                "p75": 23.30956433920304,
+                "p95": 33.819782415231266
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.283076993949247
+            },
+            {
+              "active_count": 1745,
+              "active_fraction_of_boundary": 0.8562315996074583,
+              "boundary_gap_separation": 0.08867395447132874,
+              "delta1_min": 8.00345749234291,
+              "delta1_quantiles": {
+                "p05": 9.305107140196531,
+                "p25": 13.453050137420423,
+                "p50": 18.36194949087523,
+                "p75": 24.066524244304112,
+                "p95": 34.33990453291159
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.404635627142772
+            }
+          ],
+          "operator_delta1_residual_max": 41.71984887966941
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 10131,
+          "boundary_fraction": 0.004830837249755859,
+          "frob_delta1_residual_max": 31.89450287556234,
+          "gap_threshold_rows": [
+            {
+              "active_count": 10124,
+              "active_fraction_of_boundary": 0.9993090514263153,
+              "boundary_gap_separation": 0.0057384003181200505,
+              "delta1_min": 0.5179315988999973,
+              "delta1_quantiles": {
+                "p05": 5.044829207703387,
+                "p25": 11.057028469908044,
+                "p50": 16.70480228903734,
+                "p75": 22.811029101299408,
+                "p95": 33.80185164784156
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5438932327313011
+            },
+            {
+              "active_count": 10115,
+              "active_fraction_of_boundary": 0.9984206889744349,
+              "boundary_gap_separation": 0.011328030144550185,
+              "delta1_min": 1.0224355987552245,
+              "delta1_quantiles": {
+                "p05": 5.0719955068405325,
+                "p25": 11.065604446786914,
+                "p50": 16.719963008941278,
+                "p75": 22.815852954506276,
+                "p95": 33.80774697425795
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0736857999156642
+            },
+            {
+              "active_count": 10065,
+              "active_fraction_of_boundary": 0.993485342019544,
+              "boundary_gap_separation": 0.022180824857247507,
+              "delta1_min": 2.001977806769435,
+              "delta1_quantiles": {
+                "p05": 5.328150016355521,
+                "p25": 11.147064804446234,
+                "p50": 16.763629265879658,
+                "p75": 22.853602640521554,
+                "p95": 33.84930426160935
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.1023281520044628
+            },
+            {
+              "active_count": 9811,
+              "active_fraction_of_boundary": 0.968413779488698,
+              "boundary_gap_separation": 0.04456465100476763,
+              "delta1_min": 4.0222779293448365,
+              "delta1_quantiles": {
+                "p05": 6.254414693547332,
+                "p25": 11.60373846778407,
+                "p50": 17.032705788888336,
+                "p75": 23.068768617210132,
+                "p95": 34.05853137025588
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.223897036947398
+            },
+            {
+              "active_count": 8776,
+              "active_fraction_of_boundary": 0.8662520975224558,
+              "boundary_gap_separation": 0.08867395447132874,
+              "delta1_min": 8.00345749234291,
+              "delta1_quantiles": {
+                "p05": 9.197429491912777,
+                "p25": 13.313519050548962,
+                "p50": 18.148958696932624,
+                "p75": 23.90004176133671,
+                "p95": 34.59219596636294
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.404635627142772
+            }
+          ],
+          "operator_delta1_residual_max": 48.74407041153043
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 20107,
+          "boundary_fraction": 0.009587764739990234,
+          "frob_delta1_residual_max": 31.89450287556234,
+          "gap_threshold_rows": [
+            {
+              "active_count": 20096,
+              "active_fraction_of_boundary": 0.9994529268413985,
+              "boundary_gap_separation": 0.0057384003181200505,
+              "delta1_min": 0.5179315988999973,
+              "delta1_quantiles": {
+                "p05": 5.048327726870416,
+                "p25": 11.002429106596546,
+                "p50": 16.533433215324273,
+                "p75": 22.834407929625062,
+                "p95": 33.626049730618654
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5438932327313011
+            },
+            {
+              "active_count": 20075,
+              "active_fraction_of_boundary": 0.9984085144477047,
+              "boundary_gap_separation": 0.011328030144550185,
+              "delta1_min": 1.0224355987552245,
+              "delta1_quantiles": {
+                "p05": 5.085025366199855,
+                "p25": 11.025685776834305,
+                "p50": 16.54437773356399,
+                "p75": 22.841759272456233,
+                "p95": 33.629545762053134
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0736857999156642
+            },
+            {
+              "active_count": 19973,
+              "active_fraction_of_boundary": 0.9933356542497638,
+              "boundary_gap_separation": 0.022180824857247507,
+              "delta1_min": 2.001977806769435,
+              "delta1_quantiles": {
+                "p05": 5.337435182101719,
+                "p25": 11.094679878802774,
+                "p50": 16.602441995190652,
+                "p75": 22.871112389469303,
+                "p95": 33.66000334454336
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.1023281520044628
+            },
+            {
+              "active_count": 19479,
+              "active_fraction_of_boundary": 0.9687670960362063,
+              "boundary_gap_separation": 0.04432578524328065,
+              "delta1_min": 4.0007185889518775,
+              "delta1_quantiles": {
+                "p05": 6.230588707697722,
+                "p25": 11.533524260548695,
+                "p50": 16.878290960146128,
+                "p75": 23.07414327592155,
+                "p95": 33.80215605391404
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.201257021611811
+            },
+            {
+              "active_count": 17396,
+              "active_fraction_of_boundary": 0.8651713333664893,
+              "boundary_gap_separation": 0.08867395447132874,
+              "delta1_min": 8.00345749234291,
+              "delta1_quantiles": {
+                "p05": 9.188275644063125,
+                "p25": 13.245847924502486,
+                "p50": 18.002934548388435,
+                "p75": 23.920069055077814,
+                "p95": 34.4690930122359
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.404635627142772
+            }
+          ],
+          "operator_delta1_residual_max": 48.74407041153043
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 40121,
+          "boundary_fraction": 0.019131183624267578,
+          "frob_delta1_residual_max": 34.633668144543975,
+          "gap_threshold_rows": [
+            {
+              "active_count": 40100,
+              "active_fraction_of_boundary": 0.9994765833354103,
+              "boundary_gap_separation": 0.0057384003181200505,
+              "delta1_min": 0.5179315988999973,
+              "delta1_quantiles": {
+                "p05": 5.105901117003808,
+                "p25": 11.060671506075096,
+                "p50": 16.50554425603135,
+                "p75": 22.877022936886984,
+                "p95": 33.530101858827265
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5438932327313011
+            },
+            {
+              "active_count": 40060,
+              "active_fraction_of_boundary": 0.9984795992123825,
+              "boundary_gap_separation": 0.011328030144550185,
+              "delta1_min": 1.0224355987552245,
+              "delta1_quantiles": {
+                "p05": 5.155240152490017,
+                "p25": 11.072921064008476,
+                "p50": 16.51570293095358,
+                "p75": 22.882847401671434,
+                "p95": 33.541130112284584
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0736857999156642
+            },
+            {
+              "active_count": 39849,
+              "active_fraction_of_boundary": 0.9932205079634107,
+              "boundary_gap_separation": 0.022180824857247507,
+              "delta1_min": 2.001977806769435,
+              "delta1_quantiles": {
+                "p05": 5.410769026836583,
+                "p25": 11.157825641054432,
+                "p50": 16.567895858682117,
+                "p75": 22.93409648929013,
+                "p95": 33.567626611870544
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.1023281520044628
+            },
+            {
+              "active_count": 38913,
+              "active_fraction_of_boundary": 0.9698910794845592,
+              "boundary_gap_separation": 0.04432578524328065,
+              "delta1_min": 4.0007185889518775,
+              "delta1_quantiles": {
+                "p05": 6.295595520731413,
+                "p25": 11.569404672390373,
+                "p50": 16.82358741409934,
+                "p75": 23.11080986843773,
+                "p95": 33.690916833739806
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.201257021611811
+            },
+            {
+              "active_count": 34862,
+              "active_fraction_of_boundary": 0.8689215124249147,
+              "boundary_gap_separation": 0.08865133424992726,
+              "delta1_min": 8.001415855860884,
+              "delta1_quantiles": {
+                "p05": 9.189925979601695,
+                "p25": 13.275012536466194,
+                "p50": 17.955484494405127,
+                "p75": 23.951021048148178,
+                "p95": 34.34244486488844
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.40249165240049
+            }
+          ],
+          "operator_delta1_residual_max": 51.04755231427369
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 3,
+      "global_strain_frob_max": 90.25713965345592,
+      "snapshot_index": 3,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.9522670401671838,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 2056,
+          "boundary_fraction": 0.000980377197265625,
+          "frob_delta1_residual_max": 29.856472745725863,
+          "gap_threshold_rows": [
+            {
+              "active_count": 2055,
+              "active_fraction_of_boundary": 0.9995136186770428,
+              "boundary_gap_separation": 0.006359379931439774,
+              "delta1_min": 0.5780352496064791,
+              "delta1_quantiles": {
+                "p05": 4.771578166914041,
+                "p25": 10.995312941307098,
+                "p50": 16.209529672042045,
+                "p75": 22.94082602095996,
+                "p95": 33.46924590953866
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.616839237668378
+            },
+            {
+              "active_count": 2051,
+              "active_fraction_of_boundary": 0.997568093385214,
+              "boundary_gap_separation": 0.01160835691201108,
+              "delta1_min": 1.0551405258839848,
+              "delta1_quantiles": {
+                "p05": 4.857552750212125,
+                "p25": 11.021814848375048,
+                "p50": 16.2342968028888,
+                "p75": 22.949279752009883,
+                "p95": 33.47108659927034
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1259729887794603
+            },
+            {
+              "active_count": 2040,
+              "active_fraction_of_boundary": 0.9922178988326849,
+              "boundary_gap_separation": 0.022559624458162866,
+              "delta1_min": 2.050554974744254,
+              "delta1_quantiles": {
+                "p05": 5.25437371781401,
+                "p25": 11.114289952011422,
+                "p50": 16.268391925978033,
+                "p75": 22.998433502144096,
+                "p95": 33.477385236625736
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.188210439206696
+            },
+            {
+              "active_count": 1989,
+              "active_fraction_of_boundary": 0.9674124513618677,
+              "boundary_gap_separation": 0.044180729908780976,
+              "delta1_min": 4.015803351261135,
+              "delta1_quantiles": {
+                "p05": 6.218970492006487,
+                "p25": 11.401663369481724,
+                "p50": 16.55858687140896,
+                "p75": 23.153107872410917,
+                "p95": 33.576593297032254
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.285387577149362
+            },
+            {
+              "active_count": 1793,
+              "active_fraction_of_boundary": 0.8720817120622568,
+              "boundary_gap_separation": 0.08802618241716507,
+              "delta1_min": 8.001131694280083,
+              "delta1_quantiles": {
+                "p05": 9.224254781671338,
+                "p25": 12.751125942052267,
+                "p50": 17.775763724072444,
+                "p75": 24.03554379982518,
+                "p95": 34.3536602903875
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.538254333354248
+            }
+          ],
+          "operator_delta1_residual_max": 45.466023851208334
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 10209,
+          "boundary_fraction": 0.004868030548095703,
+          "frob_delta1_residual_max": 30.115374615712227,
+          "gap_threshold_rows": [
+            {
+              "active_count": 10205,
+              "active_fraction_of_boundary": 0.9996081888529729,
+              "boundary_gap_separation": 0.006208333023882397,
+              "delta1_min": 0.5643058549400957,
+              "delta1_quantiles": {
+                "p05": 4.85399893536758,
+                "p25": 10.808839654539232,
+                "p50": 16.047832992955115,
+                "p75": 22.52472224248212,
+                "p95": 33.47873826729701
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.6021881772954583
+            },
+            {
+              "active_count": 10194,
+              "active_fraction_of_boundary": 0.9985307081986482,
+              "boundary_gap_separation": 0.011320643809971838,
+              "delta1_min": 1.028988870133696,
+              "delta1_quantiles": {
+                "p05": 4.907406139362982,
+                "p25": 10.834356512475726,
+                "p50": 16.071375605628273,
+                "p75": 22.53694912656827,
+                "p95": 33.48209031527076
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.098065750582904
+            },
+            {
+              "active_count": 10141,
+              "active_fraction_of_boundary": 0.9933392105005387,
+              "boundary_gap_separation": 0.022379969933273226,
+              "delta1_min": 2.034225293351244,
+              "delta1_quantiles": {
+                "p05": 5.110183852685569,
+                "p25": 10.932492686845764,
+                "p50": 16.12118454796029,
+                "p75": 22.584874200661385,
+                "p95": 33.509626584123055
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.1707845326920165
+            },
+            {
+              "active_count": 9867,
+              "active_fraction_of_boundary": 0.9665001469291802,
+              "boundary_gap_separation": 0.044054006992962524,
+              "delta1_min": 4.004284883569993,
+              "delta1_quantiles": {
+                "p05": 6.174493172451781,
+                "p25": 11.36377925602308,
+                "p50": 16.417996007549842,
+                "p75": 22.76564729473106,
+                "p95": 33.71999776096345
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.2730958651222
+            },
+            {
+              "active_count": 8796,
+              "active_fraction_of_boundary": 0.8615927123126653,
+              "boundary_gap_separation": 0.08802618241716507,
+              "delta1_min": 8.001131694280083,
+              "delta1_quantiles": {
+                "p05": 9.1920080014612,
+                "p25": 12.948842007116047,
+                "p50": 17.598829828152486,
+                "p75": 23.670008072938558,
+                "p95": 34.365666833957874
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.538254333354248
+            }
+          ],
+          "operator_delta1_residual_max": 45.466023851208334
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 20357,
+          "boundary_fraction": 0.009706974029541016,
+          "frob_delta1_residual_max": 34.7615247460161,
+          "gap_threshold_rows": [
+            {
+              "active_count": 20348,
+              "active_fraction_of_boundary": 0.9995578916343273,
+              "boundary_gap_separation": 0.005626413361877405,
+              "delta1_min": 0.5114123211829738,
+              "delta1_quantiles": {
+                "p05": 4.898462424803087,
+                "p25": 10.730860464694157,
+                "p50": 16.05274183600629,
+                "p75": 22.411556240761453,
+                "p95": 33.15587051803191
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5457438565338063
+            },
+            {
+              "active_count": 20329,
+              "active_fraction_of_boundary": 0.9986245517512403,
+              "boundary_gap_separation": 0.011320643809971838,
+              "delta1_min": 1.028988870133696,
+              "delta1_quantiles": {
+                "p05": 4.930647523682603,
+                "p25": 10.744756423020684,
+                "p50": 16.066834915772198,
+                "p75": 22.417147829602786,
+                "p95": 33.16906760253466
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.098065750582904
+            },
+            {
+              "active_count": 20218,
+              "active_fraction_of_boundary": 0.9931718819079433,
+              "boundary_gap_separation": 0.022027052410846557,
+              "delta1_min": 2.0021468878516977,
+              "delta1_quantiles": {
+                "p05": 5.127802771583765,
+                "p25": 10.854522091824533,
+                "p50": 16.124138408125113,
+                "p75": 22.45378563224881,
+                "p95": 33.204635456422984
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.136552677095964
+            },
+            {
+              "active_count": 19692,
+              "active_fraction_of_boundary": 0.9673331040919585,
+              "boundary_gap_separation": 0.044054006992962524,
+              "delta1_min": 4.004284883569993,
+              "delta1_quantiles": {
+                "p05": 6.108899397360808,
+                "p25": 11.28305391885446,
+                "p50": 16.40377140253097,
+                "p75": 22.66993925557286,
+                "p95": 33.3467583424578
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.2730958651222
+            },
+            {
+              "active_count": 17487,
+              "active_fraction_of_boundary": 0.8590165545021369,
+              "boundary_gap_separation": 0.08802393586186272,
+              "delta1_min": 8.000927493844042,
+              "delta1_quantiles": {
+                "p05": 9.171969595107605,
+                "p25": 12.992201954213652,
+                "p50": 17.60782626296857,
+                "p75": 23.60029130064563,
+                "p95": 33.97813016473618
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.538036424772747
+            }
+          ],
+          "operator_delta1_residual_max": 51.12125495006566
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 40862,
+          "boundary_fraction": 0.019484519958496094,
+          "frob_delta1_residual_max": 34.7615247460161,
+          "gap_threshold_rows": [
+            {
+              "active_count": 40849,
+              "active_fraction_of_boundary": 0.9996818560031325,
+              "boundary_gap_separation": 0.005502652293033992,
+              "delta1_min": 0.5001630702981834,
+              "delta1_quantiles": {
+                "p05": 4.926249137616601,
+                "p25": 10.751076553821283,
+                "p50": 16.113796422260204,
+                "p75": 22.453822755255686,
+                "p95": 33.12727231067671
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.533739434061581
+            },
+            {
+              "active_count": 40799,
+              "active_fraction_of_boundary": 0.9984582252459497,
+              "boundary_gap_separation": 0.01100933732106262,
+              "delta1_min": 1.00069269567003,
+              "delta1_quantiles": {
+                "p05": 4.973517091021072,
+                "p25": 10.77781396336599,
+                "p50": 16.12658998642416,
+                "p75": 22.464529331600446,
+                "p95": 33.13063435748052
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0678700303444204
+            },
+            {
+              "active_count": 40579,
+              "active_fraction_of_boundary": 0.9930742499143459,
+              "boundary_gap_separation": 0.022027052410846557,
+              "delta1_min": 2.0021468878516977,
+              "delta1_quantiles": {
+                "p05": 5.182300460158299,
+                "p25": 10.87362870530626,
+                "p50": 16.189311410748804,
+                "p75": 22.49927474744366,
+                "p95": 33.15819895838482
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.136552677095964
+            },
+            {
+              "active_count": 39561,
+              "active_fraction_of_boundary": 0.9681611276981058,
+              "boundary_gap_separation": 0.04404454980117862,
+              "delta1_min": 4.003425272999102,
+              "delta1_quantiles": {
+                "p05": 6.157343653513737,
+                "p25": 11.294831666147614,
+                "p50": 16.470352941392303,
+                "p75": 22.68144602690151,
+                "p95": 33.308556768396315
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.272178548177253
+            },
+            {
+              "active_count": 35182,
+              "active_fraction_of_boundary": 0.8609955459840438,
+              "boundary_gap_separation": 0.08801424940160417,
+              "delta1_min": 8.00004704393639,
+              "delta1_quantiles": {
+                "p05": 9.160344387793854,
+                "p25": 13.035607131944895,
+                "p50": 17.671440446590864,
+                "p75": 23.605298487452828,
+                "p95": 33.9261651908967
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.537096869528996
+            }
+          ],
+          "operator_delta1_residual_max": 51.12125495006566
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 4,
+      "global_strain_frob_max": 90.89490733974924,
+      "snapshot_index": 4,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.9370922183735002,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 2139,
+          "boundary_fraction": 0.0010199546813964844,
+          "frob_delta1_residual_max": 24.108495169362968,
+          "gap_threshold_rows": [
+            {
+              "active_count": 2138,
+              "active_fraction_of_boundary": 0.9995324918186068,
+              "boundary_gap_separation": 0.0059064386987769035,
+              "delta1_min": 0.5329499641379039,
+              "delta1_quantiles": {
+                "p05": 4.544163350574726,
+                "p25": 10.6503884988954,
+                "p50": 15.981212719450204,
+                "p75": 22.054783268513475,
+                "p95": 32.51306229510288
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5778832471514173
+            },
+            {
+              "active_count": 2137,
+              "active_fraction_of_boundary": 0.9990649836372136,
+              "boundary_gap_separation": 0.011109161058141585,
+              "delta1_min": 1.0024021732020667,
+              "delta1_quantiles": {
+                "p05": 4.5608916381228735,
+                "p25": 10.668730364367057,
+                "p50": 15.982870868744259,
+                "p75": 22.061770179352706,
+                "p95": 32.51835062561774
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0869152111468345
+            },
+            {
+              "active_count": 2123,
+              "active_fraction_of_boundary": 0.9925198690977092,
+              "boundary_gap_separation": 0.022426278759840844,
+              "delta1_min": 2.023568696866156,
+              "delta1_quantiles": {
+                "p05": 4.768277966324586,
+                "p25": 10.81060248867384,
+                "p50": 16.081222591819966,
+                "p75": 22.139169657762444,
+                "p95": 32.592387252825986
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.1941768047035475
+            },
+            {
+              "active_count": 2061,
+              "active_fraction_of_boundary": 0.9635343618513323,
+              "boundary_gap_separation": 0.04447366041881826,
+              "delta1_min": 4.012948738501041,
+              "delta1_quantiles": {
+                "p05": 5.816257851859875,
+                "p25": 11.135487629996092,
+                "p50": 16.372703026781316,
+                "p75": 22.414501008996808,
+                "p95": 32.879895275806575
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.351282491234218
+            },
+            {
+              "active_count": 1812,
+              "active_fraction_of_boundary": 0.847124824684432,
+              "boundary_gap_separation": 0.08880670339585069,
+              "delta1_min": 8.013209279531678,
+              "delta1_quantiles": {
+                "p05": 9.177164373929976,
+                "p25": 13.131146361628758,
+                "p50": 17.542893295989316,
+                "p75": 23.56970294179777,
+                "p95": 33.43874382016396
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.688807036604688
+            }
+          ],
+          "operator_delta1_residual_max": 35.443194829494324
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 10441,
+          "boundary_fraction": 0.004978656768798828,
+          "frob_delta1_residual_max": 30.155093930295966,
+          "gap_threshold_rows": [
+            {
+              "active_count": 10436,
+              "active_fraction_of_boundary": 0.9995211186667944,
+              "boundary_gap_separation": 0.0059064386987769035,
+              "delta1_min": 0.5329499641379039,
+              "delta1_quantiles": {
+                "p05": 4.720424448995822,
+                "p25": 10.695541866926,
+                "p50": 15.907105255837354,
+                "p75": 22.163039840632276,
+                "p95": 32.28226629371083
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5778832471514173
+            },
+            {
+              "active_count": 10420,
+              "active_fraction_of_boundary": 0.9979886984005364,
+              "boundary_gap_separation": 0.011109161058141585,
+              "delta1_min": 1.0024021732020667,
+              "delta1_quantiles": {
+                "p05": 4.760139934058213,
+                "p25": 10.723091594112727,
+                "p50": 15.919377396558481,
+                "p75": 22.170873167016104,
+                "p95": 32.2845020492089
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0869152111468345
+            },
+            {
+              "active_count": 10356,
+              "active_fraction_of_boundary": 0.9918590173355043,
+              "boundary_gap_separation": 0.022341891524053036,
+              "delta1_min": 2.015954265128107,
+              "delta1_quantiles": {
+                "p05": 5.009416829978257,
+                "p25": 10.812130424570656,
+                "p50": 15.976102328772015,
+                "p75": 22.197904957758432,
+                "p95": 32.34451755206795
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.1859203963461242
+            },
+            {
+              "active_count": 10074,
+              "active_fraction_of_boundary": 0.9648501101427066,
+              "boundary_gap_separation": 0.04447366041881826,
+              "delta1_min": 4.012948738501041,
+              "delta1_quantiles": {
+                "p05": 6.006109491666692,
+                "p25": 11.254908604384639,
+                "p50": 16.26406092492615,
+                "p75": 22.379872229811156,
+                "p95": 32.500321206654526
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.351282491234218
+            },
+            {
+              "active_count": 8958,
+              "active_fraction_of_boundary": 0.8579637965712097,
+              "boundary_gap_separation": 0.08867808493389336,
+              "delta1_min": 8.001603774390004,
+              "delta1_quantiles": {
+                "p05": 9.137089833610249,
+                "p25": 12.957831776885833,
+                "p50": 17.457067492185715,
+                "p75": 23.22434272882462,
+                "p95": 33.12497708183788
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.676223065411534
+            }
+          ],
+          "operator_delta1_residual_max": 44.851099747182715
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 20901,
+          "boundary_fraction": 0.009966373443603516,
+          "frob_delta1_residual_max": 30.923923113752863,
+          "gap_threshold_rows": [
+            {
+              "active_count": 20889,
+              "active_fraction_of_boundary": 0.9994258647911584,
+              "boundary_gap_separation": 0.0059064386987769035,
+              "delta1_min": 0.5329499641379039,
+              "delta1_quantiles": {
+                "p05": 4.775349564465721,
+                "p25": 10.644390883788494,
+                "p50": 15.919711027928635,
+                "p75": 22.170871289446715,
+                "p95": 32.34261651713277
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5778832471514173
+            },
+            {
+              "active_count": 20859,
+              "active_fraction_of_boundary": 0.9979905267690541,
+              "boundary_gap_separation": 0.011109161058141585,
+              "delta1_min": 1.0024021732020667,
+              "delta1_quantiles": {
+                "p05": 4.831632863669845,
+                "p25": 10.671356569878919,
+                "p50": 15.936921971485955,
+                "p75": 22.18185757329686,
+                "p95": 32.35490401277909
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0869152111468345
+            },
+            {
+              "active_count": 20730,
+              "active_fraction_of_boundary": 0.991818573274006,
+              "boundary_gap_separation": 0.022341891524053036,
+              "delta1_min": 2.015954265128107,
+              "delta1_quantiles": {
+                "p05": 5.070447057258167,
+                "p25": 10.767278739162025,
+                "p50": 15.984994651791476,
+                "p75": 22.214199268676122,
+                "p95": 32.38208674648251
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.1859203963461242
+            },
+            {
+              "active_count": 20169,
+              "active_fraction_of_boundary": 0.9649777522606574,
+              "boundary_gap_separation": 0.04446278418927501,
+              "delta1_min": 4.011967354211684,
+              "delta1_quantiles": {
+                "p05": 6.031078146231486,
+                "p25": 11.232016420226325,
+                "p50": 16.268492851865297,
+                "p75": 22.406462504507992,
+                "p95": 32.559169681615195
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.350218365935412
+            },
+            {
+              "active_count": 17923,
+              "active_fraction_of_boundary": 0.8575187790057892,
+              "boundary_gap_separation": 0.08866353992932847,
+              "delta1_min": 8.000291349076448,
+              "delta1_quantiles": {
+                "p05": 9.113209395922686,
+                "p25": 12.987726557748353,
+                "p50": 17.430049921643214,
+                "p75": 23.224037161369047,
+                "p95": 33.180931623867124
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.674799988851115
+            }
+          ],
+          "operator_delta1_residual_max": 45.928282681162386
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 41680,
+          "boundary_fraction": 0.01987457275390625,
+          "frob_delta1_residual_max": 32.919900526679875,
+          "gap_threshold_rows": [
+            {
+              "active_count": 41657,
+              "active_fraction_of_boundary": 0.9994481765834933,
+              "boundary_gap_separation": 0.0055702486224118095,
+              "delta1_min": 0.502614850496684,
+              "delta1_quantiles": {
+                "p05": 4.823589638791335,
+                "p25": 10.546916188635333,
+                "p50": 15.902563556220128,
+                "p75": 22.10012543715224,
+                "p95": 32.383791473696704
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5449905646234203
+            },
+            {
+              "active_count": 41605,
+              "active_fraction_of_boundary": 0.998200575815739,
+              "boundary_gap_separation": 0.011109161058141585,
+              "delta1_min": 1.0024021732020667,
+              "delta1_quantiles": {
+                "p05": 4.876345911826268,
+                "p25": 10.560481886897689,
+                "p50": 15.914586954945104,
+                "p75": 22.107344217864497,
+                "p95": 32.397318926835155
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.0869152111468345
+            },
+            {
+              "active_count": 41344,
+              "active_fraction_of_boundary": 0.9919385796545106,
+              "boundary_gap_separation": 0.022219304615710953,
+              "delta1_min": 2.004892999323686,
+              "delta1_quantiles": {
+                "p05": 5.11975424826076,
+                "p25": 10.689894040403793,
+                "p50": 15.973390162002921,
+                "p75": 22.162150667504733,
+                "p95": 32.43871969847715
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.173926549586038
+            },
+            {
+              "active_count": 40256,
+              "active_fraction_of_boundary": 0.9658349328214971,
+              "boundary_gap_separation": 0.044348071700177606,
+              "delta1_min": 4.001616613254482,
+              "delta1_quantiles": {
+                "p05": 6.04023189790121,
+                "p25": 11.142036803805707,
+                "p50": 16.24699535535401,
+                "p75": 22.35866513558487,
+                "p95": 32.592336349081634
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.338994948734424
+            },
+            {
+              "active_count": 35688,
+              "active_fraction_of_boundary": 0.8562380038387716,
+              "boundary_gap_separation": 0.08866353992932847,
+              "delta1_min": 8.000291349076448,
+              "delta1_quantiles": {
+                "p05": 9.094706791407432,
+                "p25": 12.925922286956137,
+                "p50": 17.433291766316948,
+                "p75": 23.213007235048593,
+                "p95": 33.2565366891674
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.674799988851115
+            }
+          ],
+          "operator_delta1_residual_max": 47.626443536694055
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 5,
+      "global_strain_frob_max": 90.23203173991568,
+      "snapshot_index": 5,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.9222450499560165,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 2130,
+          "boundary_fraction": 0.0010156631469726562,
+          "frob_delta1_residual_max": 31.420081615979946,
+          "gap_threshold_rows": [
+            {
+              "active_count": 2129,
+              "active_fraction_of_boundary": 0.9995305164319249,
+              "boundary_gap_separation": 0.006793066087048219,
+              "delta1_min": 0.6002351971278783,
+              "delta1_quantiles": {
+                "p05": 5.023277213503807,
+                "p25": 10.378932485966292,
+                "p50": 15.7170474203079,
+                "p75": 21.67639643677165,
+                "p95": 32.02455210312079
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.6612660582656812
+            },
+            {
+              "active_count": 2126,
+              "active_fraction_of_boundary": 0.9981220657276996,
+              "boundary_gap_separation": 0.015098561475332502,
+              "delta1_min": 1.3341086200784469,
+              "delta1_quantiles": {
+                "p05": 5.0754493371474245,
+                "p25": 10.398911977255866,
+                "p50": 15.728944392486166,
+                "p75": 21.713653991894454,
+                "p95": 32.053737571023
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.4697584425552965
+            },
+            {
+              "active_count": 2117,
+              "active_fraction_of_boundary": 0.9938967136150235,
+              "boundary_gap_separation": 0.022701229894598766,
+              "delta1_min": 2.005880264702488,
+              "delta1_quantiles": {
+                "p05": 5.243432691847052,
+                "p25": 10.471171908700637,
+                "p50": 15.766689146607401,
+                "p75": 21.74050870943095,
+                "p95": 32.10844772675441
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.2098346487171185
+            },
+            {
+              "active_count": 2062,
+              "active_fraction_of_boundary": 0.968075117370892,
+              "boundary_gap_separation": 0.04552117494430918,
+              "delta1_min": 4.02225019837292,
+              "delta1_quantiles": {
+                "p05": 6.089326022011745,
+                "p25": 10.892111631501676,
+                "p50": 16.04829872015547,
+                "p75": 21.977251994117296,
+                "p95": 32.297851184609335
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.431225537528346
+            },
+            {
+              "active_count": 1810,
+              "active_fraction_of_boundary": 0.8497652582159625,
+              "boundary_gap_separation": 0.09060047868184318,
+              "delta1_min": 8.005456664872023,
+              "delta1_quantiles": {
+                "p05": 8.954200743827233,
+                "p25": 12.757651083756034,
+                "p50": 17.237036164735024,
+                "p75": 22.874916771451197,
+                "p95": 33.10118365865935
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.819437445066777
+            }
+          ],
+          "operator_delta1_residual_max": 46.40310946979296
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 10662,
+          "boundary_fraction": 0.005084037780761719,
+          "frob_delta1_residual_max": 31.999523174275996,
+          "gap_threshold_rows": [
+            {
+              "active_count": 10654,
+              "active_fraction_of_boundary": 0.9992496717313825,
+              "boundary_gap_separation": 0.006061278980300056,
+              "delta1_min": 0.5355745015530047,
+              "delta1_quantiles": {
+                "p05": 4.7593138743924905,
+                "p25": 10.374091936720928,
+                "p50": 15.598518907980942,
+                "p75": 21.543444926279033,
+                "p95": 31.347710576231222
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5900307766758807
+            },
+            {
+              "active_count": 10643,
+              "active_fraction_of_boundary": 0.9982179703620334,
+              "boundary_gap_separation": 0.011353554915224152,
+              "delta1_min": 1.003199907864136,
+              "delta1_quantiles": {
+                "p05": 4.802972650157746,
+                "p25": 10.394349793668402,
+                "p50": 15.612763834984154,
+                "p75": 21.54804881173903,
+                "p95": 31.360830051217754
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1052035133895692
+            },
+            {
+              "active_count": 10569,
+              "active_fraction_of_boundary": 0.9912774338773214,
+              "boundary_gap_separation": 0.022701229894598766,
+              "delta1_min": 2.005880264702488,
+              "delta1_quantiles": {
+                "p05": 5.065731181447195,
+                "p25": 10.484049269441531,
+                "p50": 15.684326510021073,
+                "p75": 21.589911525157216,
+                "p95": 31.407838922020602
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.2098346487171185
+            },
+            {
+              "active_count": 10270,
+              "active_fraction_of_boundary": 0.9632339148377416,
+              "boundary_gap_separation": 0.045379633366603715,
+              "delta1_min": 4.009743587115625,
+              "delta1_quantiles": {
+                "p05": 6.0805001519473665,
+                "p25": 10.952012282318048,
+                "p50": 15.961870406154027,
+                "p75": 21.818471855698984,
+                "p95": 31.514419662446045
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.4174472759936245
+            },
+            {
+              "active_count": 9045,
+              "active_fraction_of_boundary": 0.8483398987056837,
+              "boundary_gap_separation": 0.09054015501260254,
+              "delta1_min": 8.000126466544177,
+              "delta1_quantiles": {
+                "p05": 9.043514300622123,
+                "p25": 12.82824227510058,
+                "p50": 17.101189378774045,
+                "p75": 22.757878711362814,
+                "p95": 32.13125589840582
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.81356528153006
+            }
+          ],
+          "operator_delta1_residual_max": 46.605997409929955
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 21508,
+          "boundary_fraction": 0.010255813598632812,
+          "frob_delta1_residual_max": 33.82621048173964,
+          "gap_threshold_rows": [
+            {
+              "active_count": 21492,
+              "active_fraction_of_boundary": 0.9992560907569277,
+              "boundary_gap_separation": 0.005933031803264989,
+              "delta1_min": 0.5242425832995512,
+              "delta1_quantiles": {
+                "p05": 4.747849808897875,
+                "p25": 10.363111009335068,
+                "p50": 15.644747151189542,
+                "p75": 21.71323113815648,
+                "p95": 31.800259237140924
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5775466488674714
+            },
+            {
+              "active_count": 21468,
+              "active_fraction_of_boundary": 0.9981402268923192,
+              "boundary_gap_separation": 0.011353554915224152,
+              "delta1_min": 1.003199907864136,
+              "delta1_quantiles": {
+                "p05": 4.790075699228365,
+                "p25": 10.387254368039398,
+                "p50": 15.654971465329698,
+                "p75": 21.71854684459738,
+                "p95": 31.805557298625875
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1052035133895692
+            },
+            {
+              "active_count": 21319,
+              "active_fraction_of_boundary": 0.9912125720662079,
+              "boundary_gap_separation": 0.022641167553539003,
+              "delta1_min": 2.0005731573279983,
+              "delta1_quantiles": {
+                "p05": 5.056836830187075,
+                "p25": 10.493444173963862,
+                "p50": 15.72476617487933,
+                "p75": 21.774760674928793,
+                "p95": 31.838568291621737
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.2039879239813582
+            },
+            {
+              "active_count": 20724,
+              "active_fraction_of_boundary": 0.9635484470894551,
+              "boundary_gap_separation": 0.04537305587696062,
+              "delta1_min": 4.009162400249203,
+              "delta1_quantiles": {
+                "p05": 6.047061179335725,
+                "p25": 10.98259288937302,
+                "p50": 15.995007945989299,
+                "p75": 21.992058120014732,
+                "p95": 31.949766875285032
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.416806995066891
+            },
+            {
+              "active_count": 18258,
+              "active_fraction_of_boundary": 0.8488934350009298,
+              "boundary_gap_separation": 0.09054015501260254,
+              "delta1_min": 8.000126466544177,
+              "delta1_quantiles": {
+                "p05": 9.058021826731531,
+                "p25": 12.840597569063018,
+                "p50": 17.230004818817452,
+                "p75": 22.92961518433646,
+                "p95": 32.61713239370049
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.81356528153006
+            }
+          ],
+          "operator_delta1_residual_max": 49.65497696026086
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 42783,
+          "boundary_fraction": 0.020400524139404297,
+          "frob_delta1_residual_max": 33.82621048173964,
+          "gap_threshold_rows": [
+            {
+              "active_count": 42758,
+              "active_fraction_of_boundary": 0.9994156557511161,
+              "boundary_gap_separation": 0.005933031803264989,
+              "delta1_min": 0.5242425832995512,
+              "delta1_quantiles": {
+                "p05": 4.7238302485767125,
+                "p25": 10.407871607914181,
+                "p50": 15.662271400859526,
+                "p75": 21.73926548178443,
+                "p95": 31.865197957794493
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5775466488674714
+            },
+            {
+              "active_count": 42693,
+              "active_fraction_of_boundary": 0.997896360704018,
+              "boundary_gap_separation": 0.011353554915224152,
+              "delta1_min": 1.003199907864136,
+              "delta1_quantiles": {
+                "p05": 4.7893610866969745,
+                "p25": 10.43076212255644,
+                "p50": 15.680263260339025,
+                "p75": 21.749540893375606,
+                "p95": 31.870475675895694
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1052035133895692
+            },
+            {
+              "active_count": 42418,
+              "active_fraction_of_boundary": 0.9914685739662951,
+              "boundary_gap_separation": 0.022641167553539003,
+              "delta1_min": 2.0005731573279983,
+              "delta1_quantiles": {
+                "p05": 5.038103621377625,
+                "p25": 10.532413903298329,
+                "p50": 15.74650276637333,
+                "p75": 21.80268551839066,
+                "p95": 31.900338453246917
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.2039879239813582
+            },
+            {
+              "active_count": 41240,
+              "active_fraction_of_boundary": 0.9639342729588856,
+              "boundary_gap_separation": 0.045298304520415514,
+              "delta1_min": 4.002557371730935,
+              "delta1_quantiles": {
+                "p05": 6.024792523085551,
+                "p25": 11.01974078704998,
+                "p50": 16.025685664453043,
+                "p75": 22.011650022514143,
+                "p95": 32.082833078185544
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.40953037884394
+            },
+            {
+              "active_count": 36360,
+              "active_fraction_of_boundary": 0.8498702755767478,
+              "boundary_gap_separation": 0.09054015501260254,
+              "delta1_min": 8.000126466544177,
+              "delta1_quantiles": {
+                "p05": 9.060454335785025,
+                "p25": 12.799195940002319,
+                "p50": 17.250256820807884,
+                "p75": 22.987814367571993,
+                "p95": 32.79190395037941
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.81356528153006
+            }
+          ],
+          "operator_delta1_residual_max": 49.65497696026086
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 6,
+      "global_strain_frob_max": 88.3599819928585,
+      "snapshot_index": 6,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.9077060430141084,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 2285,
+          "boundary_fraction": 0.0010895729064941406,
+          "frob_delta1_residual_max": 30.786341675203968,
+          "gap_threshold_rows": [
+            {
+              "active_count": 2285,
+              "active_fraction_of_boundary": 1.0,
+              "boundary_gap_separation": 0.008236400670981617,
+              "delta1_min": 0.7062330834662705,
+              "delta1_quantiles": {
+                "p05": 4.866046132263877,
+                "p25": 10.072975817418483,
+                "p50": 15.129358813511619,
+                "p75": 20.75779146133433,
+                "p95": 30.923215979246343
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.7904484132908702
+            },
+            {
+              "active_count": 2284,
+              "active_fraction_of_boundary": 0.999562363238512,
+              "boundary_gap_separation": 0.012004300037753051,
+              "delta1_min": 1.0293129449597567,
+              "delta1_quantiles": {
+                "p05": 4.870325440701717,
+                "p25": 10.108920421454457,
+                "p50": 15.131154172082674,
+                "p75": 20.75842312383926,
+                "p95": 30.926861718498387
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1520541916981022
+            },
+            {
+              "active_count": 2260,
+              "active_fraction_of_boundary": 0.9890590809628009,
+              "boundary_gap_separation": 0.02338523238517553,
+              "delta1_min": 2.005175007226729,
+              "delta1_quantiles": {
+                "p05": 5.167415364690967,
+                "p25": 10.346277854391897,
+                "p50": 15.216922739902632,
+                "p75": 20.838646674521677,
+                "p95": 30.976769381541416
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.24428370737545
+            },
+            {
+              "active_count": 2209,
+              "active_fraction_of_boundary": 0.9667396061269147,
+              "boundary_gap_separation": 0.04676561616034662,
+              "delta1_min": 4.009934268676783,
+              "delta1_quantiles": {
+                "p05": 5.966891221066603,
+                "p25": 10.688672059940656,
+                "p50": 15.481178915674288,
+                "p75": 21.027001329829105,
+                "p95": 31.178177913860175
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.4881020930360185
+            },
+            {
+              "active_count": 1936,
+              "active_fraction_of_boundary": 0.8472647702407002,
+              "boundary_gap_separation": 0.09330088229664638,
+              "delta1_min": 8.000117093214588,
+              "delta1_quantiles": {
+                "p05": 8.987913364473453,
+                "p25": 12.5687689202483,
+                "p50": 16.717305186808915,
+                "p75": 22.076351614032113,
+                "p95": 31.815055059335585
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.95409746515317
+            }
+          ],
+          "operator_delta1_residual_max": 45.599579108648996
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 10892,
+          "boundary_fraction": 0.0051937103271484375,
+          "frob_delta1_residual_max": 30.786341675203968,
+          "gap_threshold_rows": [
+            {
+              "active_count": 10889,
+              "active_fraction_of_boundary": 0.9997245684906353,
+              "boundary_gap_separation": 0.00791706214382063,
+              "delta1_min": 0.6788512887096048,
+              "delta1_quantiles": {
+                "p05": 4.735768635569749,
+                "p25": 10.1485235846253,
+                "p50": 15.215769582715048,
+                "p75": 21.262112410107125,
+                "p95": 30.943549406351536
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.7598014544819851
+            },
+            {
+              "active_count": 10884,
+              "active_fraction_of_boundary": 0.9992655159750276,
+              "boundary_gap_separation": 0.012004300037753051,
+              "delta1_min": 1.0293129449597567,
+              "delta1_quantiles": {
+                "p05": 4.758281493828238,
+                "p25": 10.153260840435198,
+                "p50": 15.219310203316677,
+                "p75": 21.26889118486704,
+                "p95": 30.945945435558638
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1520541916981022
+            },
+            {
+              "active_count": 10805,
+              "active_fraction_of_boundary": 0.9920124862284245,
+              "boundary_gap_separation": 0.02338523238517553,
+              "delta1_min": 2.005175007226729,
+              "delta1_quantiles": {
+                "p05": 5.052309736573176,
+                "p25": 10.300329726812514,
+                "p50": 15.30936248503699,
+                "p75": 21.316129731598686,
+                "p95": 30.973125389251262
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.24428370737545
+            },
+            {
+              "active_count": 10500,
+              "active_fraction_of_boundary": 0.9640102827763496,
+              "boundary_gap_separation": 0.04676561616034662,
+              "delta1_min": 4.009934268676783,
+              "delta1_quantiles": {
+                "p05": 5.986896699813571,
+                "p25": 10.701364937627918,
+                "p50": 15.596332490507868,
+                "p75": 21.521615508725255,
+                "p95": 31.101869768023207
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.4881020930360185
+            },
+            {
+              "active_count": 9239,
+              "active_fraction_of_boundary": 0.8482372383400661,
+              "boundary_gap_separation": 0.09330088229664638,
+              "delta1_min": 8.000117093214588,
+              "delta1_quantiles": {
+                "p05": 8.964924753559313,
+                "p25": 12.516415066995283,
+                "p50": 16.825772039588166,
+                "p75": 22.472510169533017,
+                "p95": 31.803377725787215
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.95409746515317
+            }
+          ],
+          "operator_delta1_residual_max": 45.599579108648996
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 21776,
+          "boundary_fraction": 0.01038360595703125,
+          "frob_delta1_residual_max": 32.241606202817565,
+          "gap_threshold_rows": [
+            {
+              "active_count": 21763,
+              "active_fraction_of_boundary": 0.9994030124908155,
+              "boundary_gap_separation": 0.006310681412265735,
+              "delta1_min": 0.5411116057357301,
+              "delta1_quantiles": {
+                "p05": 4.743770256975703,
+                "p25": 10.248533652449165,
+                "p50": 15.321847153457789,
+                "p75": 21.349712721084757,
+                "p95": 31.144048425139285
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.6056368926640785
+            },
+            {
+              "active_count": 21743,
+              "active_fraction_of_boundary": 0.9984845701689934,
+              "boundary_gap_separation": 0.012004300037753051,
+              "delta1_min": 1.0293129449597567,
+              "delta1_quantiles": {
+                "p05": 4.794607540827459,
+                "p25": 10.265469882379826,
+                "p50": 15.329148799868042,
+                "p75": 21.357780956286597,
+                "p95": 31.14817594729424
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1520541916981022
+            },
+            {
+              "active_count": 21590,
+              "active_fraction_of_boundary": 0.9914584864070536,
+              "boundary_gap_separation": 0.02338523238517553,
+              "delta1_min": 2.005175007226729,
+              "delta1_quantiles": {
+                "p05": 5.079483978481346,
+                "p25": 10.379836146088211,
+                "p50": 15.39458774813585,
+                "p75": 21.394788484492324,
+                "p95": 31.21968530700864
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.24428370737545
+            },
+            {
+              "active_count": 21001,
+              "active_fraction_of_boundary": 0.9644103600293902,
+              "boundary_gap_separation": 0.04665205472663478,
+              "delta1_min": 4.000196903449309,
+              "delta1_quantiles": {
+                "p05": 6.004529380601761,
+                "p25": 10.788090765380758,
+                "p50": 15.68202182700504,
+                "p75": 21.605847583703074,
+                "p95": 31.35801482020866
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.4772035878910685
+            },
+            {
+              "active_count": 18478,
+              "active_fraction_of_boundary": 0.848548861131521,
+              "boundary_gap_separation": 0.09330088229664638,
+              "delta1_min": 8.000117093214588,
+              "delta1_quantiles": {
+                "p05": 9.047006674483825,
+                "p25": 12.564334660045429,
+                "p50": 16.91721700780942,
+                "p75": 22.527074524249134,
+                "p95": 32.0011115455756
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.95409746515317
+            }
+          ],
+          "operator_delta1_residual_max": 48.02528343098511
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 43687,
+          "boundary_fraction": 0.020831584930419922,
+          "frob_delta1_residual_max": 32.241606202817565,
+          "gap_threshold_rows": [
+            {
+              "active_count": 43661,
+              "active_fraction_of_boundary": 0.9994048572801978,
+              "boundary_gap_separation": 0.006068497308968366,
+              "delta1_min": 0.5203454442932914,
+              "delta1_quantiles": {
+                "p05": 4.789310592377856,
+                "p25": 10.257341001456869,
+                "p50": 15.363195258845973,
+                "p75": 21.39100584632848,
+                "p95": 31.254577872617347
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5823944536639779
+            },
+            {
+              "active_count": 43613,
+              "active_fraction_of_boundary": 0.9983061322590244,
+              "boundary_gap_separation": 0.011689392629668477,
+              "delta1_min": 1.0023110980727432,
+              "delta1_quantiles": {
+                "p05": 4.833421091740682,
+                "p25": 10.277014006280432,
+                "p50": 15.371242238415732,
+                "p75": 21.395405119018918,
+                "p95": 31.257492700662667
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1218324879469748
+            },
+            {
+              "active_count": 43330,
+              "active_fraction_of_boundary": 0.9918282326550232,
+              "boundary_gap_separation": 0.02335517489982845,
+              "delta1_min": 2.002597717533587,
+              "delta1_quantiles": {
+                "p05": 5.055541665133147,
+                "p25": 10.378856521936182,
+                "p50": 15.434334935598685,
+                "p75": 21.451344276394735,
+                "p95": 31.287236751289996
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.2413990867080975
+            },
+            {
+              "active_count": 42155,
+              "active_fraction_of_boundary": 0.964932359740884,
+              "boundary_gap_separation": 0.04665205472663478,
+              "delta1_min": 4.000196903449309,
+              "delta1_quantiles": {
+                "p05": 5.984377050011358,
+                "p25": 10.803759752865552,
+                "p50": 15.718006383760203,
+                "p75": 21.655603724889176,
+                "p95": 31.41922746096756
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.4772035878910685
+            },
+            {
+              "active_count": 37068,
+              "active_fraction_of_boundary": 0.848490397601117,
+              "boundary_gap_separation": 0.09330088229664638,
+              "delta1_min": 8.000117093214588,
+              "delta1_quantiles": {
+                "p05": 9.037675696936507,
+                "p25": 12.562663544885128,
+                "p50": 16.929415792721297,
+                "p75": 22.582786628466778,
+                "p95": 32.12720528735401
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 8.95409746515317
+            }
+          ],
+          "operator_delta1_residual_max": 48.02528343098511
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 7,
+      "global_strain_frob_max": 85.74535305870462,
+      "snapshot_index": 7,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.8934587907210966,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 2172,
+          "boundary_fraction": 0.0010356903076171875,
+          "frob_delta1_residual_max": 30.5867943510637,
+          "gap_threshold_rows": [
+            {
+              "active_count": 2171,
+              "active_fraction_of_boundary": 0.9995395948434622,
+              "boundary_gap_separation": 0.012145698593497687,
+              "delta1_min": 1.025963862528457,
+              "delta1_quantiles": {
+                "p05": 4.848874790756074,
+                "p25": 10.34231627127985,
+                "p50": 15.174753195455006,
+                "p75": 21.40410496672021,
+                "p95": 30.691435974700035
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 1.1665445479147245
+            },
+            {
+              "active_count": 2171,
+              "active_fraction_of_boundary": 0.9995395948434622,
+              "boundary_gap_separation": 0.012145698593497687,
+              "delta1_min": 1.025963862528457,
+              "delta1_quantiles": {
+                "p05": 4.848874790756074,
+                "p25": 10.34231627127985,
+                "p50": 15.174753195455006,
+                "p75": 21.40410496672021,
+                "p95": 30.691435974700035
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1665445479147245
+            },
+            {
+              "active_count": 2160,
+              "active_fraction_of_boundary": 0.994475138121547,
+              "boundary_gap_separation": 0.02408099299495887,
+              "delta1_min": 2.0341545936151775,
+              "delta1_quantiles": {
+                "p05": 5.186592282894525,
+                "p25": 10.377044522520865,
+                "p50": 15.230465125439217,
+                "p75": 21.43666038017455,
+                "p95": 30.740353139577188
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.3128806359216765
+            },
+            {
+              "active_count": 2106,
+              "active_fraction_of_boundary": 0.9696132596685083,
+              "boundary_gap_separation": 0.047710178128302735,
+              "delta1_min": 4.030144355849522,
+              "delta1_quantiles": {
+                "p05": 6.089286645559225,
+                "p25": 10.79571398800754,
+                "p50": 15.509218874829513,
+                "p75": 21.573117906275087,
+                "p95": 30.955760977784784
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.582366979319565
+            },
+            {
+              "active_count": 1855,
+              "active_fraction_of_boundary": 0.8540515653775322,
+              "boundary_gap_separation": 0.0950674600503752,
+              "delta1_min": 8.030479083868375,
+              "delta1_quantiles": {
+                "p05": 9.044693631007208,
+                "p25": 12.466539747046552,
+                "p50": 16.739243551086574,
+                "p75": 22.455372695529327,
+                "p95": 31.46811298127391
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.130839725039582
+            }
+          ],
+          "operator_delta1_residual_max": 44.908055127368264
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 11036,
+          "boundary_fraction": 0.0052623748779296875,
+          "frob_delta1_residual_max": 30.5867943510637,
+          "gap_threshold_rows": [
+            {
+              "active_count": 11032,
+              "active_fraction_of_boundary": 0.9996375498368975,
+              "boundary_gap_separation": 0.005969645077154172,
+              "delta1_min": 0.5042641289122691,
+              "delta1_quantiles": {
+                "p05": 4.856907512399387,
+                "p25": 10.3317550007268,
+                "p50": 15.190258996688897,
+                "p75": 21.1545195751697,
+                "p95": 30.62847786765908
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5733599318419066
+            },
+            {
+              "active_count": 11016,
+              "active_fraction_of_boundary": 0.9981877491844872,
+              "boundary_gap_separation": 0.011868901042279585,
+              "delta1_min": 1.0025823927348483,
+              "delta1_quantiles": {
+                "p05": 4.9169528800506805,
+                "p25": 10.347857531056714,
+                "p50": 15.20419753378888,
+                "p75": 21.162962436086982,
+                "p95": 30.63218162512258
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1399592780956225
+            },
+            {
+              "active_count": 10955,
+              "active_fraction_of_boundary": 0.9926603841971728,
+              "boundary_gap_separation": 0.02369782019089015,
+              "delta1_min": 2.0017874599297865,
+              "delta1_quantiles": {
+                "p05": 5.104416971020423,
+                "p25": 10.4402388949698,
+                "p50": 15.270834097823533,
+                "p75": 21.196185287749497,
+                "p95": 30.66058034883258
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.2760784592453294
+            },
+            {
+              "active_count": 10693,
+              "active_fraction_of_boundary": 0.9689198985139543,
+              "boundary_gap_separation": 0.047502457256492096,
+              "delta1_min": 4.012597888157272,
+              "delta1_quantiles": {
+                "p05": 5.89623586709318,
+                "p25": 10.783486509178235,
+                "p50": 15.512288027870992,
+                "p75": 21.351920208132682,
+                "p95": 30.83487453271112
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.5624162413168525
+            },
+            {
+              "active_count": 9379,
+              "active_fraction_of_boundary": 0.849855019934759,
+              "boundary_gap_separation": 0.09474156480612267,
+              "delta1_min": 8.002950264426735,
+              "delta1_quantiles": {
+                "p05": 8.987437480261153,
+                "p25": 12.591639655165002,
+                "p50": 16.78010246256715,
+                "p75": 22.25688595573358,
+                "p95": 31.500884616767053
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.099538823123767
+            }
+          ],
+          "operator_delta1_residual_max": 44.908055127368264
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 22012,
+          "boundary_fraction": 0.010496139526367188,
+          "frob_delta1_residual_max": 31.91006095439216,
+          "gap_threshold_rows": [
+            {
+              "active_count": 22004,
+              "active_fraction_of_boundary": 0.9996365618753407,
+              "boundary_gap_separation": 0.005969645077154172,
+              "delta1_min": 0.5042641289122691,
+              "delta1_quantiles": {
+                "p05": 4.797405535984815,
+                "p25": 10.215864563291955,
+                "p50": 15.222583228782435,
+                "p75": 21.111924108060446,
+                "p95": 30.664149124940938
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5733599318419066
+            },
+            {
+              "active_count": 21972,
+              "active_fraction_of_boundary": 0.9981828093767036,
+              "boundary_gap_separation": 0.011868901042279585,
+              "delta1_min": 1.0025823927348483,
+              "delta1_quantiles": {
+                "p05": 4.841042051865323,
+                "p25": 10.228782897601395,
+                "p50": 15.236796149926379,
+                "p75": 21.116971004610157,
+                "p95": 30.682825759406096
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1399592780956225
+            },
+            {
+              "active_count": 21835,
+              "active_fraction_of_boundary": 0.9919589314919135,
+              "boundary_gap_separation": 0.02369782019089015,
+              "delta1_min": 2.0017874599297865,
+              "delta1_quantiles": {
+                "p05": 5.043345891485721,
+                "p25": 10.337560945005201,
+                "p50": 15.29931666883682,
+                "p75": 21.181088101299473,
+                "p95": 30.733534735758198
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.2760784592453294
+            },
+            {
+              "active_count": 21271,
+              "active_fraction_of_boundary": 0.9663365437034345,
+              "boundary_gap_separation": 0.04742069015540939,
+              "delta1_min": 4.005690908685586,
+              "delta1_quantiles": {
+                "p05": 5.9003957784823555,
+                "p25": 10.74220035643485,
+                "p50": 15.565100580086586,
+                "p75": 21.35867476202289,
+                "p95": 30.852749615054066
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.554562846534119
+            },
+            {
+              "active_count": 18597,
+              "active_fraction_of_boundary": 0.8448573505360712,
+              "boundary_gap_separation": 0.09473653560222325,
+              "delta1_min": 8.002525440657369,
+              "delta1_quantiles": {
+                "p05": 9.00712487685194,
+                "p25": 12.58670208755025,
+                "p50": 16.852524808404755,
+                "p75": 22.30538344726821,
+                "p95": 31.596594382399903
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.099055788710881
+            }
+          ],
+          "operator_delta1_residual_max": 46.46186540753335
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 44201,
+          "boundary_fraction": 0.021076679229736328,
+          "frob_delta1_residual_max": 33.8122038834447,
+          "gap_threshold_rows": [
+            {
+              "active_count": 44181,
+              "active_fraction_of_boundary": 0.9995475215492862,
+              "boundary_gap_separation": 0.0059218165731718475,
+              "delta1_min": 0.5002239894088129,
+              "delta1_quantiles": {
+                "p05": 4.67182303412115,
+                "p25": 10.112262837749364,
+                "p50": 15.120589904277896,
+                "p75": 21.046163904611383,
+                "p95": 30.883355505947694
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5687662001494893
+            },
+            {
+              "active_count": 44111,
+              "active_fraction_of_boundary": 0.997963846971788,
+              "boundary_gap_separation": 0.011868901042279585,
+              "delta1_min": 1.0025823927348483,
+              "delta1_quantiles": {
+                "p05": 4.7584209298545375,
+                "p25": 10.134306545804703,
+                "p50": 15.13539137335904,
+                "p75": 21.05711427627467,
+                "p95": 30.893061926456618
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1399592780956225
+            },
+            {
+              "active_count": 43815,
+              "active_fraction_of_boundary": 0.991267165901224,
+              "boundary_gap_separation": 0.02369782019089015,
+              "delta1_min": 2.0017874599297865,
+              "delta1_quantiles": {
+                "p05": 4.9920917297977505,
+                "p25": 10.246675501668872,
+                "p50": 15.197812118425915,
+                "p75": 21.105277559451643,
+                "p95": 30.947631465044047
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.2760784592453294
+            },
+            {
+              "active_count": 42626,
+              "active_fraction_of_boundary": 0.9643673220062895,
+              "boundary_gap_separation": 0.04742069015540939,
+              "delta1_min": 4.005690908685586,
+              "delta1_quantiles": {
+                "p05": 5.89942005694772,
+                "p25": 10.668748909021577,
+                "p50": 15.473386100305756,
+                "p75": 21.302276168688675,
+                "p95": 31.09105045360528
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.554562846534119
+            },
+            {
+              "active_count": 37210,
+              "active_fraction_of_boundary": 0.8418361575529966,
+              "boundary_gap_separation": 0.09472442096832981,
+              "delta1_min": 8.001502100872772,
+              "delta1_quantiles": {
+                "p05": 9.011845842341707,
+                "p25": 12.509825922326021,
+                "p50": 16.785326203711513,
+                "p75": 22.28052113759715,
+                "p95": 31.859831684983348
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.097892227800028
+            }
+          ],
+          "operator_delta1_residual_max": 51.45772021793758
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 8,
+      "global_strain_frob_max": 84.47137516467899,
+      "snapshot_index": 8,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.8794896554635957,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 2194,
+          "boundary_fraction": 0.0010461807250976562,
+          "frob_delta1_residual_max": 22.63087477210823,
+          "gap_threshold_rows": [
+            {
+              "active_count": 2194,
+              "active_fraction_of_boundary": 1.0,
+              "boundary_gap_separation": 0.008303856638176387,
+              "delta1_min": 0.6860278917005681,
+              "delta1_quantiles": {
+                "p05": 4.3151366275274174,
+                "p25": 9.97760235680931,
+                "p50": 14.48830790168491,
+                "p75": 20.50400499430429,
+                "p95": 30.322431444808615
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.79237457663203
+            },
+            {
+              "active_count": 2192,
+              "active_fraction_of_boundary": 0.9990884229717412,
+              "boundary_gap_separation": 0.015070178879313967,
+              "delta1_min": 1.2450314949556556,
+              "delta1_quantiles": {
+                "p05": 4.327899367536566,
+                "p25": 10.008447558330587,
+                "p50": 14.500684805763232,
+                "p75": 20.519422186988827,
+                "p95": 30.32835331074985
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.4380338112253084
+            },
+            {
+              "active_count": 2177,
+              "active_fraction_of_boundary": 0.9922515952597994,
+              "boundary_gap_separation": 0.024325832825148427,
+              "delta1_min": 2.0096926686058434,
+              "delta1_quantiles": {
+                "p05": 4.6377633349324245,
+                "p25": 10.11738245913628,
+                "p50": 14.604512664466244,
+                "p75": 20.53797344618917,
+                "p95": 30.389140104371474
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.3212312454230366
+            },
+            {
+              "active_count": 2104,
+              "active_fraction_of_boundary": 0.95897903372835,
+              "boundary_gap_separation": 0.04854668177866535,
+              "delta1_min": 4.010712034280756,
+              "delta1_quantiles": {
+                "p05": 5.731124872050673,
+                "p25": 10.518782875914084,
+                "p50": 14.842254640349864,
+                "p75": 20.847180858792235,
+                "p95": 30.671681419231604
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.63244466967431
+            },
+            {
+              "active_count": 1832,
+              "active_fraction_of_boundary": 0.8350045578851413,
+              "boundary_gap_separation": 0.09696661378312361,
+              "delta1_min": 8.010952563071756,
+              "delta1_quantiles": {
+                "p05": 8.97807849155308,
+                "p25": 12.312636162603617,
+                "p50": 16.097324873539755,
+                "p75": 21.800341798780902,
+                "p95": 31.781249893037515
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.252794561819128
+            }
+          ],
+          "operator_delta1_residual_max": 34.24084832857422
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 11173,
+          "boundary_fraction": 0.005327701568603516,
+          "frob_delta1_residual_max": 33.272755518344155,
+          "gap_threshold_rows": [
+            {
+              "active_count": 11168,
+              "active_fraction_of_boundary": 0.9995524926161282,
+              "boundary_gap_separation": 0.0067201481286941565,
+              "delta1_min": 0.5551889024008994,
+              "delta1_quantiles": {
+                "p05": 4.531227076817821,
+                "p25": 9.860291064968598,
+                "p50": 14.669244932320376,
+                "p75": 20.617943140991343,
+                "p95": 30.078503745585262
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.6412531863685882
+            },
+            {
+              "active_count": 11152,
+              "active_fraction_of_boundary": 0.9981204689877383,
+              "boundary_gap_separation": 0.012436499283714113,
+              "delta1_min": 1.0274485405393134,
+              "delta1_quantiles": {
+                "p05": 4.575405135180599,
+                "p25": 9.889817600049989,
+                "p50": 14.68024425424283,
+                "p75": 20.633047519437188,
+                "p95": 30.090259152842307
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.186721578189678
+            },
+            {
+              "active_count": 11060,
+              "active_fraction_of_boundary": 0.9898863331244966,
+              "boundary_gap_separation": 0.024223755311913814,
+              "delta1_min": 2.001259476145315,
+              "delta1_quantiles": {
+                "p05": 4.884682855702786,
+                "p25": 9.983756609418716,
+                "p50": 14.755119036540771,
+                "p75": 20.68334465939126,
+                "p95": 30.148560479574556
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.3114907561712026
+            },
+            {
+              "active_count": 10731,
+              "active_fraction_of_boundary": 0.9604403472657299,
+              "boundary_gap_separation": 0.048484373423853304,
+              "delta1_min": 4.005564393714502,
+              "delta1_quantiles": {
+                "p05": 5.837959238022405,
+                "p25": 10.461773367514763,
+                "p50": 15.019502084533958,
+                "p75": 20.922051738618823,
+                "p95": 30.303243598550075
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.626499052063591
+            },
+            {
+              "active_count": 9330,
+              "active_fraction_of_boundary": 0.835048778304842,
+              "boundary_gap_separation": 0.09684142867070554,
+              "delta1_min": 8.000610323015534,
+              "delta1_quantiles": {
+                "p05": 8.911373494070661,
+                "p25": 12.291325039004674,
+                "p50": 16.313496641252588,
+                "p75": 21.901738797351978,
+                "p95": 31.186746558777273
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.240849088194636
+            }
+          ],
+          "operator_delta1_residual_max": 47.320712861682175
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 22357,
+          "boundary_fraction": 0.010660648345947266,
+          "frob_delta1_residual_max": 33.272755518344155,
+          "gap_threshold_rows": [
+            {
+              "active_count": 22346,
+              "active_fraction_of_boundary": 0.9995079840765756,
+              "boundary_gap_separation": 0.006269106980822338,
+              "delta1_min": 0.5179258785762658,
+              "delta1_quantiles": {
+                "p05": 4.506377404412071,
+                "p25": 9.831233580853963,
+                "p50": 14.74183014209039,
+                "p75": 20.633596686277397,
+                "p95": 30.359205213978772
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.598213722398863
+            },
+            {
+              "active_count": 22309,
+              "active_fraction_of_boundary": 0.997853021425057,
+              "boundary_gap_separation": 0.012436499283714113,
+              "delta1_min": 1.0274485405393134,
+              "delta1_quantiles": {
+                "p05": 4.555632824433178,
+                "p25": 9.858627313000019,
+                "p50": 14.753649556494283,
+                "p75": 20.644130403517543,
+                "p95": 30.366985411235728
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.186721578189678
+            },
+            {
+              "active_count": 22135,
+              "active_fraction_of_boundary": 0.9900702240908887,
+              "boundary_gap_separation": 0.024223755311913814,
+              "delta1_min": 2.001259476145315,
+              "delta1_quantiles": {
+                "p05": 4.857149248076502,
+                "p25": 9.966619893015448,
+                "p50": 14.817156004963588,
+                "p75": 20.694953152373138,
+                "p95": 30.433823082579927
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.3114907561712026
+            },
+            {
+              "active_count": 21472,
+              "active_fraction_of_boundary": 0.9604150825244889,
+              "boundary_gap_separation": 0.048484373423853304,
+              "delta1_min": 4.005564393714502,
+              "delta1_quantiles": {
+                "p05": 5.896548764987632,
+                "p25": 10.430007996002706,
+                "p50": 15.101132432294271,
+                "p75": 20.93824288210282,
+                "p95": 30.620860285528344
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.626499052063591
+            },
+            {
+              "active_count": 18661,
+              "active_fraction_of_boundary": 0.8346826497293912,
+              "boundary_gap_separation": 0.09684142867070554,
+              "delta1_min": 8.000610323015534,
+              "delta1_quantiles": {
+                "p05": 8.925394663080906,
+                "p25": 12.304678020008053,
+                "p50": 16.41950355935409,
+                "p75": 21.927493102377845,
+                "p95": 31.36564075287818
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.240849088194636
+            }
+          ],
+          "operator_delta1_residual_max": 47.320712861682175
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 45191,
+          "boundary_fraction": 0.021548748016357422,
+          "frob_delta1_residual_max": 33.272755518344155,
+          "gap_threshold_rows": [
+            {
+              "active_count": 45170,
+              "active_fraction_of_boundary": 0.9995353057024629,
+              "boundary_gap_separation": 0.006269106980822338,
+              "delta1_min": 0.5179258785762658,
+              "delta1_quantiles": {
+                "p05": 4.482880303275229,
+                "p25": 9.852610697614535,
+                "p50": 14.76264498308361,
+                "p75": 20.579875114915108,
+                "p95": 30.377059708447575
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.598213722398863
+            },
+            {
+              "active_count": 45093,
+              "active_fraction_of_boundary": 0.9978314266114935,
+              "boundary_gap_separation": 0.012336205302604177,
+              "delta1_min": 1.0191626956109723,
+              "delta1_quantiles": {
+                "p05": 4.553346617014106,
+                "p25": 9.87962532236366,
+                "p50": 14.779739594457975,
+                "p75": 20.595250911069375,
+                "p95": 30.3825114083812
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.1771512779926145
+            },
+            {
+              "active_count": 44766,
+              "active_fraction_of_boundary": 0.990595472549844,
+              "boundary_gap_separation": 0.024209689270247817,
+              "delta1_min": 2.0000974020237154,
+              "delta1_quantiles": {
+                "p05": 4.859823970817267,
+                "p25": 9.982956976517217,
+                "p50": 14.84500052723379,
+                "p75": 20.65171981345366,
+                "p95": 30.444657233342017
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.310148539621035
+            },
+            {
+              "active_count": 43390,
+              "active_fraction_of_boundary": 0.9601469319112212,
+              "boundary_gap_separation": 0.0484207928882396,
+              "delta1_min": 4.000311651199688,
+              "delta1_quantiles": {
+                "p05": 5.916677358333016,
+                "p25": 10.465019373523473,
+                "p50": 15.159367454106413,
+                "p75": 20.901503709224475,
+                "p95": 30.62615482982354
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.620432039808426
+            },
+            {
+              "active_count": 37772,
+              "active_fraction_of_boundary": 0.8358301431701003,
+              "boundary_gap_separation": 0.09684142867070554,
+              "delta1_min": 8.000610323015534,
+              "delta1_quantiles": {
+                "p05": 8.914627167639885,
+                "p25": 12.313685169448167,
+                "p50": 16.42771243120403,
+                "p75": 21.893560662501194,
+                "p95": 31.36682076438686
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.240849088194636
+            }
+          ],
+          "operator_delta1_residual_max": 47.320712861682175
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 9,
+      "global_strain_frob_max": 82.6155750987564,
+      "snapshot_index": 9,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.8657873585703796,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 2247,
+          "boundary_fraction": 0.0010714530944824219,
+          "frob_delta1_residual_max": 26.03632412746934,
+          "gap_threshold_rows": [
+            {
+              "active_count": 2245,
+              "active_fraction_of_boundary": 0.9991099243435692,
+              "boundary_gap_separation": 0.008073300913892693,
+              "delta1_min": 0.6608785250531375,
+              "delta1_quantiles": {
+                "p05": 4.135377152869374,
+                "p25": 10.024538239908162,
+                "p50": 14.490495225950593,
+                "p75": 20.21121706131923,
+                "p95": 29.21042008313996
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.7753672863867255
+            },
+            {
+              "active_count": 2236,
+              "active_fraction_of_boundary": 0.9951045838896306,
+              "boundary_gap_separation": 0.012574975935814766,
+              "delta1_min": 1.0293845897331828,
+              "delta1_quantiles": {
+                "p05": 4.359490510420353,
+                "p25": 10.058045486743636,
+                "p50": 14.536663989509353,
+                "p75": 20.22896685950969,
+                "p95": 29.216091245915372
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.2077123188797152
+            },
+            {
+              "active_count": 2217,
+              "active_fraction_of_boundary": 0.986648865153538,
+              "boundary_gap_separation": 0.024559647704277723,
+              "delta1_min": 2.0104470183561736,
+              "delta1_quantiles": {
+                "p05": 4.8778308028255495,
+                "p25": 10.191705118649761,
+                "p50": 14.583754558402635,
+                "p75": 20.262085098244377,
+                "p95": 29.226778674008106
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.3587312795823903
+            },
+            {
+              "active_count": 2143,
+              "active_fraction_of_boundary": 0.9537160658655985,
+              "boundary_gap_separation": 0.04939775034729614,
+              "delta1_min": 4.043688292887295,
+              "delta1_quantiles": {
+                "p05": 5.872022930366396,
+                "p25": 10.660139426564346,
+                "p50": 14.995679794151707,
+                "p75": 20.441912040078112,
+                "p95": 29.368423603776904
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.744205629011319
+            },
+            {
+              "active_count": 1865,
+              "active_fraction_of_boundary": 0.8299955496217178,
+              "boundary_gap_separation": 0.09779036141120317,
+              "delta1_min": 8.005096119065358,
+              "delta1_quantiles": {
+                "p05": 9.062556005124021,
+                "p25": 12.177187036330608,
+                "p50": 16.16613736813079,
+                "p75": 21.280577008497183,
+                "p95": 29.938953741002223
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.391876751639877
+            }
+          ],
+          "operator_delta1_residual_max": 38.18641321544854
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 11298,
+          "boundary_fraction": 0.005387306213378906,
+          "frob_delta1_residual_max": 30.120156793822492,
+          "gap_threshold_rows": [
+            {
+              "active_count": 11292,
+              "active_fraction_of_boundary": 0.9994689325544344,
+              "boundary_gap_separation": 0.0061692690930457445,
+              "delta1_min": 0.5050149254132175,
+              "delta1_quantiles": {
+                "p05": 4.3655864830062585,
+                "p25": 9.773629897105746,
+                "p50": 14.488852568650053,
+                "p75": 20.261893322238468,
+                "p95": 29.658444658292083
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5925023093630662
+            },
+            {
+              "active_count": 11267,
+              "active_fraction_of_boundary": 0.9972561515312445,
+              "boundary_gap_separation": 0.012574975935814766,
+              "delta1_min": 1.0293845897331828,
+              "delta1_quantiles": {
+                "p05": 4.460756616544331,
+                "p25": 9.818390973007855,
+                "p50": 14.502045750352117,
+                "p75": 20.271021607574358,
+                "p95": 29.665101413197263
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.2077123188797152
+            },
+            {
+              "active_count": 11182,
+              "active_fraction_of_boundary": 0.9897326960523987,
+              "boundary_gap_separation": 0.024455699634646555,
+              "delta1_min": 2.0019378536820622,
+              "delta1_quantiles": {
+                "p05": 4.743598869797553,
+                "p25": 9.94082403656081,
+                "p50": 14.583240670630452,
+                "p75": 20.326433802653963,
+                "p95": 29.68209842245143
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.34874801083833
+            },
+            {
+              "active_count": 10814,
+              "active_fraction_of_boundary": 0.9571605593910426,
+              "boundary_gap_separation": 0.04890050856481121,
+              "delta1_min": 4.00298419684178,
+              "delta1_quantiles": {
+                "p05": 5.888393403912982,
+                "p25": 10.409341515746878,
+                "p50": 14.929699353086036,
+                "p75": 20.529437319243623,
+                "p95": 29.81270520710173
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.696450068345918
+            },
+            {
+              "active_count": 9392,
+              "active_fraction_of_boundary": 0.8312975747919986,
+              "boundary_gap_separation": 0.09772965563353943,
+              "delta1_min": 8.000126758300471,
+              "delta1_quantiles": {
+                "p05": 8.96187550394119,
+                "p25": 12.176207460686166,
+                "p50": 16.240145237016524,
+                "p75": 21.474208516359084,
+                "p95": 30.639445938924755
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.38604651260913
+            }
+          ],
+          "operator_delta1_residual_max": 43.68399825687701
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 22750,
+          "boundary_fraction": 0.010848045349121094,
+          "frob_delta1_residual_max": 30.120156793822492,
+          "gap_threshold_rows": [
+            {
+              "active_count": 22739,
+              "active_fraction_of_boundary": 0.9995164835164835,
+              "boundary_gap_separation": 0.0061692690930457445,
+              "delta1_min": 0.5050149254132175,
+              "delta1_quantiles": {
+                "p05": 4.4366069817681515,
+                "p25": 9.675754341857463,
+                "p50": 14.436148024073093,
+                "p75": 20.212769698701134,
+                "p95": 29.855225290338748
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5925023093630662
+            },
+            {
+              "active_count": 22696,
+              "active_fraction_of_boundary": 0.9976263736263736,
+              "boundary_gap_separation": 0.012574975935814766,
+              "delta1_min": 1.0293845897331828,
+              "delta1_quantiles": {
+                "p05": 4.501374535517216,
+                "p25": 9.701994013599402,
+                "p50": 14.447872752044773,
+                "p75": 20.23086140587607,
+                "p95": 29.88824746552978
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.2077123188797152
+            },
+            {
+              "active_count": 22527,
+              "active_fraction_of_boundary": 0.9901978021978022,
+              "boundary_gap_separation": 0.024455699634646555,
+              "delta1_min": 2.0019378536820622,
+              "delta1_quantiles": {
+                "p05": 4.777334625313986,
+                "p25": 9.824926548970819,
+                "p50": 14.503628626665124,
+                "p75": 20.283210023708996,
+                "p95": 29.905823295346273
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.34874801083833
+            },
+            {
+              "active_count": 21799,
+              "active_fraction_of_boundary": 0.9581978021978022,
+              "boundary_gap_separation": 0.04886804409154613,
+              "delta1_min": 4.00032666265138,
+              "delta1_quantiles": {
+                "p05": 5.8417844372336365,
+                "p25": 10.306407649372957,
+                "p50": 14.826919418407792,
+                "p75": 20.50403056752883,
+                "p95": 30.130798495167628
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.693332150308674
+            },
+            {
+              "active_count": 18836,
+              "active_fraction_of_boundary": 0.8279560439560439,
+              "boundary_gap_separation": 0.09772965563353943,
+              "delta1_min": 8.000126758300471,
+              "delta1_quantiles": {
+                "p05": 8.930378402997803,
+                "p25": 12.153446709222784,
+                "p50": 16.147112293786243,
+                "p75": 21.494647999352903,
+                "p95": 30.96451915183473
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.38604651260913
+            }
+          ],
+          "operator_delta1_residual_max": 43.68399825687701
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 45690,
+          "boundary_fraction": 0.02178668975830078,
+          "frob_delta1_residual_max": 31.62810363378302,
+          "gap_threshold_rows": [
+            {
+              "active_count": 45668,
+              "active_fraction_of_boundary": 0.9995184942000438,
+              "boundary_gap_separation": 0.0061692690930457445,
+              "delta1_min": 0.5050149254132175,
+              "delta1_quantiles": {
+                "p05": 4.446377395651027,
+                "p25": 9.66901505766159,
+                "p50": 14.471191842420167,
+                "p75": 20.268680128708873,
+                "p95": 29.950737425335618
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.5925023093630662
+            },
+            {
+              "active_count": 45593,
+              "active_fraction_of_boundary": 0.9978769971547384,
+              "boundary_gap_separation": 0.012389863724815424,
+              "delta1_min": 1.0142313474250644,
+              "delta1_quantiles": {
+                "p05": 4.49292328812196,
+                "p25": 9.690674005995302,
+                "p50": 14.486420708716253,
+                "p75": 20.27771597154346,
+                "p95": 29.962191548120614
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.189933970933757
+            },
+            {
+              "active_count": 45274,
+              "active_fraction_of_boundary": 0.9908951630553732,
+              "boundary_gap_separation": 0.024455699634646555,
+              "delta1_min": 2.0019378536820622,
+              "delta1_quantiles": {
+                "p05": 4.74459076081669,
+                "p25": 9.806629999320855,
+                "p50": 14.55160920773773,
+                "p75": 20.32252197262155,
+                "p95": 30.016210669994994
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.34874801083833
+            },
+            {
+              "active_count": 43850,
+              "active_fraction_of_boundary": 0.9597286058218428,
+              "boundary_gap_separation": 0.04886804409154613,
+              "delta1_min": 4.00032666265138,
+              "delta1_quantiles": {
+                "p05": 5.742232193764466,
+                "p25": 10.265588407615294,
+                "p50": 14.858217029806191,
+                "p75": 20.54476840326344,
+                "p95": 30.200268457313587
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.693332150308674
+            },
+            {
+              "active_count": 37817,
+              "active_fraction_of_boundary": 0.827686583497483,
+              "boundary_gap_separation": 0.09772965563353943,
+              "delta1_min": 8.000126758300471,
+              "delta1_quantiles": {
+                "p05": 8.926088965580213,
+                "p25": 12.177119569923834,
+                "p50": 16.21555963925969,
+                "p75": 21.574246917637023,
+                "p95": 31.016451552934704
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.38604651260913
+            }
+          ],
+          "operator_delta1_residual_max": 45.74236368843583
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 10,
+      "global_strain_frob_max": 81.85976617270451,
+      "snapshot_index": 10,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.852342543535574,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 2282,
+          "boundary_fraction": 0.0010881423950195312,
+          "frob_delta1_residual_max": 33.658907875138404,
+          "gap_threshold_rows": [
+            {
+              "active_count": 2281,
+              "active_fraction_of_boundary": 0.9995617879053462,
+              "boundary_gap_separation": 0.007783113781677711,
+              "delta1_min": 0.6245617776296314,
+              "delta1_quantiles": {
+                "p05": 4.338479758461505,
+                "p25": 9.616769206713654,
+                "p50": 14.39317005828536,
+                "p75": 19.928295468674442,
+                "p95": 28.91677283136028
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.7442814103015685
+            },
+            {
+              "active_count": 2276,
+              "active_fraction_of_boundary": 0.9973707274320771,
+              "boundary_gap_separation": 0.013628479593272815,
+              "delta1_min": 1.0936275223422,
+              "delta1_quantiles": {
+                "p05": 4.432429463936353,
+                "p25": 9.666228731380055,
+                "p50": 14.41182897285844,
+                "p75": 19.949504540648228,
+                "p95": 28.929349302220785
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.3032604040590992
+            },
+            {
+              "active_count": 2256,
+              "active_fraction_of_boundary": 0.9886064855390009,
+              "boundary_gap_separation": 0.025061571714009773,
+              "delta1_min": 2.011084537494763,
+              "delta1_quantiles": {
+                "p05": 4.772608206413901,
+                "p25": 9.835889348323391,
+                "p50": 14.47569421058713,
+                "p75": 19.99208179087828,
+                "p95": 28.98306930852817
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.39658091387382
+            },
+            {
+              "active_count": 2184,
+              "active_fraction_of_boundary": 0.9570552147239264,
+              "boundary_gap_separation": 0.04994007908075548,
+              "delta1_min": 4.007478939735816,
+              "delta1_quantiles": {
+                "p05": 5.80395905784684,
+                "p25": 10.1997379408715,
+                "p50": 14.795458908965573,
+                "p75": 20.23073852754258,
+                "p95": 29.059787395240477
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.775655801961612
+            },
+            {
+              "active_count": 1889,
+              "active_fraction_of_boundary": 0.8277826468010517,
+              "boundary_gap_separation": 0.0998508513190223,
+              "delta1_min": 8.012606130010573,
+              "delta1_quantiles": {
+                "p05": 8.879649275330936,
+                "p25": 12.001366552067166,
+                "p50": 15.940093223239725,
+                "p75": 21.055928786205158,
+                "p95": 29.6278991826332
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.548509057452648
+            }
+          ],
+          "operator_delta1_residual_max": 48.13885422870723
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 11624,
+          "boundary_fraction": 0.005542755126953125,
+          "frob_delta1_residual_max": 33.658907875138404,
+          "gap_threshold_rows": [
+            {
+              "active_count": 11619,
+              "active_fraction_of_boundary": 0.9995698554714384,
+              "boundary_gap_separation": 0.006362132134743456,
+              "delta1_min": 0.510534044220724,
+              "delta1_quantiles": {
+                "p05": 4.5531325365075865,
+                "p25": 9.66825856911063,
+                "p50": 14.431751508204341,
+                "p75": 19.985071656003136,
+                "p95": 29.25282650786941
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.6083961780077016
+            },
+            {
+              "active_count": 11601,
+              "active_fraction_of_boundary": 0.9980213351686167,
+              "boundary_gap_separation": 0.012956768267389557,
+              "delta1_min": 1.039725545380844,
+              "delta1_quantiles": {
+                "p05": 4.604197911099302,
+                "p25": 9.69856781892396,
+                "p50": 14.45233507624829,
+                "p75": 19.989794038608046,
+                "p95": 29.253024786886222
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.2390261827734173
+            },
+            {
+              "active_count": 11522,
+              "active_fraction_of_boundary": 0.9912250516173434,
+              "boundary_gap_separation": 0.024923880439636083,
+              "delta1_min": 2.0000353983585257,
+              "delta1_quantiles": {
+                "p05": 4.852760729333572,
+                "p25": 9.815584140278036,
+                "p50": 14.529320876494184,
+                "p75": 20.02483889891111,
+                "p95": 29.290429880211203
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.3834138115094268
+            },
+            {
+              "active_count": 11181,
+              "active_fraction_of_boundary": 0.9618891947694426,
+              "boundary_gap_separation": 0.04989201625750032,
+              "delta1_min": 4.003622102591689,
+              "delta1_quantiles": {
+                "p05": 5.774444606850735,
+                "p25": 10.238311838895225,
+                "p50": 14.80646320691439,
+                "p75": 20.24843370788512,
+                "p95": 29.426555437014947
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.7710596638504565
+            },
+            {
+              "active_count": 9627,
+              "active_fraction_of_boundary": 0.8282002752924983,
+              "boundary_gap_separation": 0.09971326625975263,
+              "delta1_min": 8.001565514184676,
+              "delta1_quantiles": {
+                "p05": 8.90805149062367,
+                "p25": 12.047527565832887,
+                "p50": 16.089035028190395,
+                "p75": 21.223741992279642,
+                "p95": 30.20502479752468
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.535352112196275
+            }
+          ],
+          "operator_delta1_residual_max": 48.13885422870723
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 23104,
+          "boundary_fraction": 0.011016845703125,
+          "frob_delta1_residual_max": 33.658907875138404,
+          "gap_threshold_rows": [
+            {
+              "active_count": 23087,
+              "active_fraction_of_boundary": 0.9992641966759003,
+              "boundary_gap_separation": 0.006362132134743456,
+              "delta1_min": 0.510534044220724,
+              "delta1_quantiles": {
+                "p05": 4.4356332434308445,
+                "p25": 9.597903755489343,
+                "p50": 14.306776456901638,
+                "p75": 19.850186751573602,
+                "p95": 29.143593915716924
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.6083961780077016
+            },
+            {
+              "active_count": 23049,
+              "active_fraction_of_boundary": 0.997619459833795,
+              "boundary_gap_separation": 0.012473260846867743,
+              "delta1_min": 1.0009261313508042,
+              "delta1_quantiles": {
+                "p05": 4.4978118830117495,
+                "p25": 9.617480464308205,
+                "p50": 14.32922530279083,
+                "p75": 19.867013178342525,
+                "p95": 29.152234668812206
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.192789471486424
+            },
+            {
+              "active_count": 22889,
+              "active_fraction_of_boundary": 0.9906942520775623,
+              "boundary_gap_separation": 0.024923880439636083,
+              "delta1_min": 2.0000353983585257,
+              "delta1_quantiles": {
+                "p05": 4.727305220976933,
+                "p25": 9.743694042816065,
+                "p50": 14.391423306426326,
+                "p75": 19.90686662955693,
+                "p95": 29.180063471890715
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.3834138115094268
+            },
+            {
+              "active_count": 22178,
+              "active_fraction_of_boundary": 0.9599203601108033,
+              "boundary_gap_separation": 0.04989201625750032,
+              "delta1_min": 4.003622102591689,
+              "delta1_quantiles": {
+                "p05": 5.7178549374115,
+                "p25": 10.207048676331217,
+                "p50": 14.704851610430893,
+                "p75": 20.091680351663175,
+                "p95": 29.341660052739797
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.7710596638504565
+            },
+            {
+              "active_count": 19040,
+              "active_fraction_of_boundary": 0.8240997229916898,
+              "boundary_gap_separation": 0.0996941217044489,
+              "delta1_min": 8.000029245047692,
+              "delta1_quantiles": {
+                "p05": 8.908866548752345,
+                "p25": 12.052438533836169,
+                "p50": 16.04102839382987,
+                "p75": 21.11739365137001,
+                "p95": 30.088473296987566
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.533521362059407
+            }
+          ],
+          "operator_delta1_residual_max": 48.13885422870723
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 46256,
+          "boundary_fraction": 0.02205657958984375,
+          "frob_delta1_residual_max": 36.10506118623001,
+          "gap_threshold_rows": [
+            {
+              "active_count": 46226,
+              "active_fraction_of_boundary": 0.99935143548945,
+              "boundary_gap_separation": 0.006362132134743456,
+              "delta1_min": 0.510534044220724,
+              "delta1_quantiles": {
+                "p05": 4.419146859664263,
+                "p25": 9.578983914929887,
+                "p50": 14.349003321355026,
+                "p75": 19.884629222979484,
+                "p95": 29.208904771734804
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.6083961780077016
+            },
+            {
+              "active_count": 46145,
+              "active_fraction_of_boundary": 0.997600311310965,
+              "boundary_gap_separation": 0.012473260846867743,
+              "delta1_min": 1.0009261313508042,
+              "delta1_quantiles": {
+                "p05": 4.490258555432473,
+                "p25": 9.604391090323325,
+                "p50": 14.367558625475462,
+                "p75": 19.90490540354832,
+                "p95": 29.218224758949724
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.192789471486424
+            },
+            {
+              "active_count": 45804,
+              "active_fraction_of_boundary": 0.9902282947077136,
+              "boundary_gap_separation": 0.024923880439636083,
+              "delta1_min": 2.0000353983585257,
+              "delta1_quantiles": {
+                "p05": 4.73793474884472,
+                "p25": 9.72129358360202,
+                "p50": 14.441910148005444,
+                "p75": 19.949214198928026,
+                "p95": 29.27076378546547
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.3834138115094268
+            },
+            {
+              "active_count": 44368,
+              "active_fraction_of_boundary": 0.9591836734693877,
+              "boundary_gap_separation": 0.049853499619834596,
+              "delta1_min": 4.0005313062390195,
+              "delta1_quantiles": {
+                "p05": 5.713111752258517,
+                "p25": 10.19247883643618,
+                "p50": 14.741996756360612,
+                "p75": 20.16322357633976,
+                "p95": 29.44667113209291
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.767376405683346
+            },
+            {
+              "active_count": 38128,
+              "active_fraction_of_boundary": 0.8242822552749913,
+              "boundary_gap_separation": 0.0996941217044489,
+              "delta1_min": 8.000029245047692,
+              "delta1_quantiles": {
+                "p05": 8.904232428625935,
+                "p25": 12.072117542154148,
+                "p50": 16.06167599795699,
+                "p75": 21.200845960072733,
+                "p95": 30.11903144742174
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.533521362059407
+            }
+          ],
+          "operator_delta1_residual_max": 51.761257795948296
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 11,
+      "global_strain_frob_max": 80.2457467729583,
+      "snapshot_index": 11,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.8391473560740568,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    },
+    {
+      "boundary_band_rows": [
+        {
+          "band_eps": 0.01,
+          "boundary_count": 2430,
+          "boundary_fraction": 0.0011587142944335938,
+          "frob_delta1_residual_max": 30.079985231439906,
+          "gap_threshold_rows": [
+            {
+              "active_count": 2430,
+              "active_fraction_of_boundary": 1.0,
+              "boundary_gap_separation": 0.010118195060977183,
+              "delta1_min": 0.7880078255229178,
+              "delta1_quantiles": {
+                "p05": 4.12046700561448,
+                "p25": 9.412821213151057,
+                "p50": 14.270879932161051,
+                "p75": 19.997051798231606,
+                "p95": 28.673565918047807
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.9537793768332996
+            },
+            {
+              "active_count": 2427,
+              "active_fraction_of_boundary": 0.9987654320987654,
+              "boundary_gap_separation": 0.013671595500143302,
+              "delta1_min": 1.0647476330088044,
+              "delta1_quantiles": {
+                "p05": 4.156010985583614,
+                "p25": 9.431676995750825,
+                "p50": 14.278818284948741,
+                "p75": 19.99777054823592,
+                "p95": 28.677098465717155
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.2887363564212893
+            },
+            {
+              "active_count": 2403,
+              "active_fraction_of_boundary": 0.9888888888888889,
+              "boundary_gap_separation": 0.025686447119258896,
+              "delta1_min": 2.0004675950477075,
+              "delta1_quantiles": {
+                "p05": 4.608579006374013,
+                "p25": 9.584906397336098,
+                "p50": 14.389071421502724,
+                "p75": 20.033486412362464,
+                "p95": 28.696474905480674
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.4213017617098793
+            },
+            {
+              "active_count": 2316,
+              "active_fraction_of_boundary": 0.9530864197530864,
+              "boundary_gap_separation": 0.05187136432465103,
+              "delta1_min": 4.039756178057683,
+              "delta1_quantiles": {
+                "p05": 5.7311717056326215,
+                "p25": 10.05398999402496,
+                "p50": 14.84422591808325,
+                "p75": 20.208477570856036,
+                "p95": 29.064620859443778
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.889591201089246
+            },
+            {
+              "active_count": 1994,
+              "active_fraction_of_boundary": 0.8205761316872427,
+              "boundary_gap_separation": 0.10290207206550317,
+              "delta1_min": 8.01404178921893,
+              "delta1_quantiles": {
+                "p05": 8.829138999745549,
+                "p25": 11.842819398360016,
+                "p50": 16.03465803135009,
+                "p75": 21.15824859794221,
+                "p95": 29.82739928983724
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.699938929622917
+            }
+          ],
+          "operator_delta1_residual_max": 44.37209814245082
+        },
+        {
+          "band_eps": 0.05,
+          "boundary_count": 11813,
+          "boundary_fraction": 0.005632877349853516,
+          "frob_delta1_residual_max": 35.06270769212594,
+          "gap_threshold_rows": [
+            {
+              "active_count": 11806,
+              "active_fraction_of_boundary": 0.99940743248963,
+              "boundary_gap_separation": 0.007323823725649077,
+              "delta1_min": 0.5703814142524068,
+              "delta1_quantiles": {
+                "p05": 4.146586885739955,
+                "p25": 9.346443178156226,
+                "p50": 14.10095308159141,
+                "p75": 19.52641264270529,
+                "p95": 28.73228879662505
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.6903713544747467
+            },
+            {
+              "active_count": 11786,
+              "active_fraction_of_boundary": 0.9977143824600017,
+              "boundary_gap_separation": 0.013034978274868653,
+              "delta1_min": 1.0151677077004004,
+              "delta1_quantiles": {
+                "p05": 4.191569958873901,
+                "p25": 9.377874614083662,
+                "p50": 14.12387432542127,
+                "p75": 19.553027004234742,
+                "p95": 28.747099342041366
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.228726406351681
+            },
+            {
+              "active_count": 11679,
+              "active_fraction_of_boundary": 0.9886565648014899,
+              "boundary_gap_separation": 0.025686447119258896,
+              "delta1_min": 2.0004675950477075,
+              "delta1_quantiles": {
+                "p05": 4.519830693636825,
+                "p25": 9.489921284119774,
+                "p50": 14.211719983244055,
+                "p75": 19.620888009468043,
+                "p95": 28.800303051313907
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.4213017617098793
+            },
+            {
+              "active_count": 11250,
+              "active_fraction_of_boundary": 0.9523406416659612,
+              "boundary_gap_separation": 0.05138206312600344,
+              "delta1_min": 4.001649265584817,
+              "delta1_quantiles": {
+                "p05": 5.650830019785634,
+                "p25": 10.052500566336217,
+                "p50": 14.562976481603876,
+                "p75": 19.899759666986057,
+                "p95": 28.98205622463479
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.843467817470191
+            },
+            {
+              "active_count": 9620,
+              "active_fraction_of_boundary": 0.8143570642512487,
+              "boundary_gap_separation": 0.10273068043819457,
+              "delta1_min": 8.000693761953755,
+              "delta1_quantiles": {
+                "p05": 8.810816301542491,
+                "p25": 12.01767652973672,
+                "p50": 15.842891257389146,
+                "p75": 20.91831029544808,
+                "p95": 29.8321435670383
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.683782905894999
+            }
+          ],
+          "operator_delta1_residual_max": 51.358918432569965
+        },
+        {
+          "band_eps": 0.1,
+          "boundary_count": 23649,
+          "boundary_fraction": 0.011276721954345703,
+          "frob_delta1_residual_max": 35.06270769212594,
+          "gap_threshold_rows": [
+            {
+              "active_count": 23634,
+              "active_fraction_of_boundary": 0.9993657237092477,
+              "boundary_gap_separation": 0.006837377076862492,
+              "delta1_min": 0.5324968149110093,
+              "delta1_quantiles": {
+                "p05": 4.237036021429595,
+                "p25": 9.379976850783859,
+                "p50": 14.100040656174732,
+                "p75": 19.50337060276999,
+                "p95": 28.66069049075647
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.6445170515337331
+            },
+            {
+              "active_count": 23592,
+              "active_fraction_of_boundary": 0.9975897500951414,
+              "boundary_gap_separation": 0.013034978274868653,
+              "delta1_min": 1.0151677077004004,
+              "delta1_quantiles": {
+                "p05": 4.304881553888753,
+                "p25": 9.40547147273778,
+                "p50": 14.121098441932709,
+                "p75": 19.515916280225436,
+                "p95": 28.679922823324123
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.228726406351681
+            },
+            {
+              "active_count": 23407,
+              "active_fraction_of_boundary": 0.9897670091758637,
+              "boundary_gap_separation": 0.025686447119258896,
+              "delta1_min": 2.0004675950477075,
+              "delta1_quantiles": {
+                "p05": 4.574781291967997,
+                "p25": 9.51698024319063,
+                "p50": 14.209359141395964,
+                "p75": 19.576112121327036,
+                "p95": 28.727187517296965
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.4213017617098793
+            },
+            {
+              "active_count": 22587,
+              "active_fraction_of_boundary": 0.9550932386147406,
+              "boundary_gap_separation": 0.051369374213800195,
+              "delta1_min": 4.0006610495983415,
+              "delta1_quantiles": {
+                "p05": 5.643563493889401,
+                "p25": 10.03992723484615,
+                "p50": 14.560355372289843,
+                "p75": 19.850027316318588,
+                "p95": 28.906188378996273
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.842271712562055
+            },
+            {
+              "active_count": 19257,
+              "active_fraction_of_boundary": 0.8142839020677407,
+              "boundary_gap_separation": 0.10272507403677388,
+              "delta1_min": 8.000257133862885,
+              "delta1_quantiles": {
+                "p05": 8.859808622011776,
+                "p25": 12.03191001227311,
+                "p50": 15.916482394169778,
+                "p75": 20.92556286836915,
+                "p95": 29.711599581571253
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.683254425269642
+            }
+          ],
+          "operator_delta1_residual_max": 51.358918432569965
+        },
+        {
+          "band_eps": 0.2,
+          "boundary_count": 47311,
+          "boundary_fraction": 0.022559642791748047,
+          "frob_delta1_residual_max": 35.06270769212594,
+          "gap_threshold_rows": [
+            {
+              "active_count": 47270,
+              "active_fraction_of_boundary": 0.9991333939253028,
+              "boundary_gap_separation": 0.006837377076862492,
+              "delta1_min": 0.5324968149110093,
+              "delta1_quantiles": {
+                "p05": 4.235267619792514,
+                "p25": 9.41818732308925,
+                "p50": 14.117415454010349,
+                "p75": 19.555248087486692,
+                "p95": 28.851480437209528
+              },
+              "delta1_threshold": 0.5,
+              "velocity_rms_ratio_min": 0.6445170515337331
+            },
+            {
+              "active_count": 47189,
+              "active_fraction_of_boundary": 0.9974213185094376,
+              "boundary_gap_separation": 0.0129737504385462,
+              "delta1_min": 1.0103992668993325,
+              "delta1_quantiles": {
+                "p05": 4.299722189976756,
+                "p25": 9.4451067865103,
+                "p50": 14.134707549809988,
+                "p75": 19.57072062756678,
+                "p95": 28.85712889726658
+              },
+              "delta1_threshold": 1.0,
+              "velocity_rms_ratio_min": 1.2229548386737952
+            },
+            {
+              "active_count": 46818,
+              "active_fraction_of_boundary": 0.9895795903701042,
+              "boundary_gap_separation": 0.025686447119258896,
+              "delta1_min": 2.0004675950477075,
+              "delta1_quantiles": {
+                "p05": 4.594492984358405,
+                "p25": 9.551921085001531,
+                "p50": 14.213159084550446,
+                "p75": 19.625845992583386,
+                "p95": 28.89544868937985
+              },
+              "delta1_threshold": 2.0,
+              "velocity_rms_ratio_min": 2.4213017617098793
+            },
+            {
+              "active_count": 45179,
+              "active_fraction_of_boundary": 0.9549364841157447,
+              "boundary_gap_separation": 0.051369374213800195,
+              "delta1_min": 4.0006610495983415,
+              "delta1_quantiles": {
+                "p05": 5.696093986637774,
+                "p25": 10.083250689725988,
+                "p50": 14.539180351861916,
+                "p75": 19.882279161566593,
+                "p95": 29.08149436953235
+              },
+              "delta1_threshold": 4.0,
+              "velocity_rms_ratio_min": 4.842271712562055
+            },
+            {
+              "active_count": 38632,
+              "active_fraction_of_boundary": 0.8165542897000697,
+              "boundary_gap_separation": 0.1027245420492969,
+              "delta1_min": 8.000215702531268,
+              "delta1_quantiles": {
+                "p05": 8.874482499768956,
+                "p25": 12.03985609755823,
+                "p50": 15.915900222535996,
+                "p75": 20.93840209069084,
+                "p95": 29.807874067592266
+              },
+              "delta1_threshold": 8.0,
+              "velocity_rms_ratio_min": 9.683204278115804
+            }
+          ],
+          "operator_delta1_residual_max": 51.358918432569965
+        }
+      ],
+      "finite_cell_count": 2097152,
+      "frame": 12,
+      "global_strain_frob_max": 77.88027615340462,
+      "snapshot_index": 12,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "velocity_rms": 0.8261950768313214,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ]
+    }
+  ],
+  "parameters": {
+    "band_eps_values": [
+      0.01,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "delta1_thresholds": [
+      0.5,
+      1.0,
+      2.0,
+      4.0,
+      8.0
+    ],
+    "requested_frame_count": 13
+  },
+  "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "route_decision": "FAIL_CLOSED_NS_BOUNDARY_DELTA1_UNIFORMITY_SCAN",
+  "script": "scripts/ns_boundary_delta1_uniformity_scan.py",
+  "status": "ok",
+  "status_counts": {
+    "ok": 13
+  },
+  "warnings": [
+    "velocity_snapshots trailing channel layout detected"
+  ]
+}
