@@ -4167,6 +4167,15 @@ depends on that surface.
 	  ITIR commits receipts; and `DASHI/Culture/QiOperatorTheoryBoundary.agda`
 	  records the Feng-Shui/Qi operator-theory mapping as non-promoting role
 	  grammar with Sheng/Sha/Si spectral rows and a Sweetgrass reciprocity gate.
+	  The Tao follow-on stack now keeps Daodejing Book One chapter payload as
+	  candidate-only source receipts and bridges it into the existing Qi
+	  carrier/operator/meditation surfaces without promoting doctrine,
+	  philology, spirituality, clinical practice, or metaphysical authority:
+	  `DASHI/Culture/TaoChapterReadingReceipt.agda`,
+	  `DASHI/Culture/TaoOperatorGrammar.agda`,
+	  `DASHI/Interop/TaoQiReadingAdapter.agda`,
+	  `DASHI/Interop/TaoMeditationQiAdapter.agda`, and
+	  `DASHI/Promotion/TaoQiObligationIndex.agda`.
 	  `WrapperState` now includes `performativeEvidence`, which maps to
 	  `scopeExceeded6` when emitted by the pipeline; `PNFEmissionReceipt` records
   parser profile, reducer profile, source span, and emitted atom so residual
