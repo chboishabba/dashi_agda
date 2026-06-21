@@ -82,6 +82,20 @@ Current odd-lane / topology intake note for `2026-06-20`:
   supervoxels, and one compact regression surface. This remains fail-closed
   and candidate-only: no full `(\u2124/p\u2124)^×` action, analytic p-adic
   dynamics, continuum BT symmetry, or Clay authority is promoted.
+- P7 quotient-action exemplar tranche is recorded. Artifacts:
+  `DASHI/Foundations/SSPPrimeLaneUnitGroup.agda`,
+  `DASHI/Foundations/P7UnitGroupC6Witness.agda`,
+  `DASHI/Foundations/P7HexTruthActionQuotient.agda`,
+  `DASHI/Geometry/P7UnitActionTreeIsometry.agda`,
+  `DASHI/Core/P7EquivariantOddFieldGate.agda`, and
+  `DASHI/Physics/Closure/P7Stage7C6HexRegression.agda`. The route now
+  tightens the p7 lane into a typed `C6` quotient carrier with explicit
+  identity/generator/Möbius elements, Stage-7 and Stage-6 witness rows,
+  p7-specific HexTruth transport receipts, p7-specific address/depth
+  self-isometry receipts, p7-specific odd-field equivariance rows, and one
+  compact regression surface. This remains candidate-only and fail-closed:
+  general local unit-group action, analytic BT/p-adic dynamics, and Clay
+  authority are not promoted.
 
 Current NS Clay action note for `2026-06-20`:
 - Sacasa/Kiriukhin orbit-coherence bridge tranche is now landed. Artifacts:

@@ -238,6 +238,22 @@ monitor surface.
   `(\u2124/p\u2124)^×` action, analytic p-adic dynamics, continuum BT
   symmetry authority, or Clay promotion is claimed.
 
+- P7 quotient-action exemplar tranche for `2026-06-21`: adds
+  `DASHI.Foundations.SSPPrimeLaneUnitGroup`,
+  `DASHI.Foundations.P7UnitGroupC6Witness`,
+  `DASHI.Foundations.P7HexTruthActionQuotient`,
+  `DASHI.Geometry.P7UnitActionTreeIsometry`,
+  `DASHI.Core.P7EquivariantOddFieldGate`, and
+  `DASHI.Physics.Closure.P7Stage7C6HexRegression`, wired through
+  `DASHI.Everything`. The tranche upgrades the p7 lane from a generic
+  step-transport receipt into a typed `C6` quotient exemplar with explicit
+  identity, generator, inverse, and Möbius elements; explicit Stage-7 /
+  Stage-6 witness rows; p7-specific HexTruth/Möbius transport receipts;
+  p7-specific canonical-address tree/depth self-isometry receipts; and
+  p7-specific odd-field equivariance receipts. This remains candidate-only
+  and fail-closed: it does not promote a full general `(\u2124/p\u2124)^×`
+  action, analytic BT/p-adic symmetry dynamics, or any Clay authority.
+
 - Odd-lane / Möbius / Klein / Hodge / Base369 intake tranche for
   `2026-06-20`: adds `DASHI.Core.SuperPayloadReadingBoundary`,
   `DASHI.Core.OddGrassmannCoefficientGate`,

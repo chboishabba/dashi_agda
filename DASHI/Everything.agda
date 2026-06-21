@@ -162,6 +162,7 @@ import DASHI.Core.OddGrassmannCoefficientGate
 import DASHI.Core.OddSSP369FieldGate
 import DASHI.Core.OddSSP369FocusedPrimeGate
 import DASHI.Core.OddSSPCoefficientGate
+import DASHI.Core.P7EquivariantOddFieldGate
 import DASHI.Core.OperatorShapeNonAuthorityCore
 import DASHI.Core.OperatorTypes
 import DASHI.Core.EvenLaneOperatorCore
@@ -242,10 +243,13 @@ import DASHI.Foundations.PMApparentVariableDescriptionBoundary
 import DASHI.Foundations.PMCardinalProlegomenaCore
 import DASHI.Foundations.PMDeductionBridge
 import DASHI.Foundations.PMVol1ChapterIndexCore
+import DASHI.Foundations.P7HexTruthActionQuotient
+import DASHI.Foundations.P7UnitGroupC6Witness
 import DASHI.Foundations.PhysicsLinearAnalysisParity
 import DASHI.Foundations.PrincipiaVol1DashiBridge
 import DASHI.Foundations.SSPTritCarrier
 import DASHI.Foundations.SSPPrimeLaneUnitAction
+import DASHI.Foundations.SSPPrimeLaneUnitGroup
 import DASHI.Foundations.SSPPrimeLaneUnitActionRegression
 import DASHI.Foundations.SSPPrimeLane369Refinement
 import DASHI.Foundations.SSPPrimeLane369BridgeRegression
@@ -263,6 +267,7 @@ import DASHI.Foundations.SurrealCompactificationTailBoundBridge
 import DASHI.Geometry.DifferentialGeometryParity
 import DASHI.Geometry.KleinClosureReceipt
 import DASHI.Geometry.MobiusOrientationGate
+import DASHI.Geometry.P7UnitActionTreeIsometry
 import DASHI.Geometry.SSP369SymmetryIsometry
 import DASHI.Geometry.SSP369TreeAutomorphism
 import DASHI.Geometry.SSP369Ultrametric
@@ -374,7 +379,13 @@ import DASHI.Physics.Closure.NSSingleTubePressureCaseExclusionReceipt
 import DASHI.Physics.Closure.NSSZeroBoundaryGenericityReceipt
 import DASHI.Physics.Closure.NSSharpTheoremGHierarchyReceipt
 import DASHI.Physics.Closure.NSStrainTypeIOmegaKPositiveReceipt
+import DASHI.Physics.Closure.NSTriadFrustrationDefectBoundary
+import DASHI.Physics.Closure.NSTriadFrustrationRegression
+import DASHI.Physics.Closure.NSTriadIncidenceCocycleReceipt
+import DASHI.Physics.Closure.NSTriadKernelPhaseCocycleReceipt
 import DASHI.Physics.Closure.NSTriadPhaseLockingLiveWallReceipt
+import DASHI.Physics.Closure.NSAdversarialGibbsPhaseReferenceReceipt
+import DASHI.Physics.Closure.NSSacasaTriadFrustrationBridgeBoundary
 import DASHI.Physics.Closure.NSTubeMorphologyForcedLocalizationRouteAuditReceipt
 import DASHI.Physics.Closure.NSTypeIHAreaUniformizationReceipt
 import DASHI.Physics.Closure.NSInteriorVorticityMaxPrincipleReceipt
@@ -544,6 +555,7 @@ import DASHI.Physics.Closure.PerelmanBTAnalogueDashboard
 import DASHI.Physics.Closure.PerelmanBTLedgerExactCounts
 import DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf
 import DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary
+import DASHI.Physics.Closure.P7Stage7C6HexRegression
 import DASHI.Physics.Closure.SSPPrimeLane369ActionPhaseBridge
 import DASHI.Physics.Closure.SSPPrimeLane369BTBridge
 import DASHI.Physics.Closure.SSPPrimeLane369BTUltrametricBridge
