@@ -68,6 +68,20 @@ Current odd-lane / topology intake note for `2026-06-20`:
   ultrametric seams, focused odd-prime extraction receipts, and one compact
   consumer regression surface tying the canonical p3/p7/p11 and root/depth3
   examples together.
+- Prime-lane symmetry-action tranche is recorded. Artifacts:
+  `DASHI/Foundations/SSPPrimeLaneUnitAction.agda`,
+  `DASHI/Geometry/SSP369TreeAutomorphism.agda`,
+  `DASHI/Geometry/SSP369SymmetryIsometry.agda`,
+  `DASHI/Core/SuperSSP369EquivariantOddGate.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369ActionPhaseBridge.agda`, and
+  `DASHI/Foundations/SSPPrimeLaneUnitActionRegression.agda`. The route now
+  records a finite local unit-action step per tracked prime lane, its
+  induced rotation on depth-refined `369` addresses and hex phase/polarity,
+  prefix/tree compatibility receipts, self-isometry receipts on the shared
+  ultrametric geometry, an odd-field equivariance seam on focused
+  supervoxels, and one compact regression surface. This remains fail-closed
+  and candidate-only: no full `(\u2124/p\u2124)^×` action, analytic p-adic
+  dynamics, continuum BT symmetry, or Clay authority is promoted.
 
 Current NS Clay action note for `2026-06-20`:
 - Case A / boundary-`delta1` geometric tranche is now landed. Artifacts:

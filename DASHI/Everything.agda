@@ -174,6 +174,7 @@ import DASHI.Core.RelationAlgebraCore
 import DASHI.Core.SourceProcessEvidenceCore
 import DASHI.Core.SourceProcessEvidenceLawCore
 import DASHI.Core.StatisticalEvidenceCore
+import DASHI.Core.SuperSSP369EquivariantOddGate
 import DASHI.Core.SuperSSP369Field
 import DASHI.Core.SuperSSPOddPayload
 import DASHI.Core.SuperPayloadReadingBoundary
@@ -244,6 +245,8 @@ import DASHI.Foundations.PMVol1ChapterIndexCore
 import DASHI.Foundations.PhysicsLinearAnalysisParity
 import DASHI.Foundations.PrincipiaVol1DashiBridge
 import DASHI.Foundations.SSPTritCarrier
+import DASHI.Foundations.SSPPrimeLaneUnitAction
+import DASHI.Foundations.SSPPrimeLaneUnitActionRegression
 import DASHI.Foundations.SSPPrimeLane369Refinement
 import DASHI.Foundations.SSPPrimeLane369BridgeRegression
 import DASHI.Foundations.SSPPrimeLane369Signature
@@ -260,6 +263,8 @@ import DASHI.Foundations.SurrealCompactificationTailBoundBridge
 import DASHI.Geometry.DifferentialGeometryParity
 import DASHI.Geometry.KleinClosureReceipt
 import DASHI.Geometry.MobiusOrientationGate
+import DASHI.Geometry.SSP369SymmetryIsometry
+import DASHI.Geometry.SSP369TreeAutomorphism
 import DASHI.Geometry.SSP369Ultrametric
 import DASHI.Interop.ITIRJoinBridge
 import DASHI.Interop.AggregateBidirectionalTranslationDischarge
@@ -528,6 +533,7 @@ import DASHI.Physics.Closure.PerelmanBTAnalogueDashboard
 import DASHI.Physics.Closure.PerelmanBTLedgerExactCounts
 import DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf
 import DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary
+import DASHI.Physics.Closure.SSPPrimeLane369ActionPhaseBridge
 import DASHI.Physics.Closure.SSPPrimeLane369BTBridge
 import DASHI.Physics.Closure.SSPPrimeLane369BTUltrametricBridge
 import DASHI.Physics.Closure.SSPPrimeLane369DepthPhaseBridge
