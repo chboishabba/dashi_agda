@@ -55,6 +55,19 @@ Current odd-lane / topology intake note for `2026-06-20`:
   consumers, explicit finite p-adic coordinate witnesses, unified phase/stage
   profiles, field-level odd extraction, and a single typed regression surface
   for importing the new stack.
+- Prime-lane bridge-consumer deepening tranche is recorded. Artifacts:
+  `DASHI/Physics/Closure/SSPPrimeLane369ResidueFactorBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369DepthPhaseBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369BTUltrametricBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369FieldPhaseBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369PAdicUltrametricBridge.agda`,
+  `DASHI/Core/OddSSP369FocusedPrimeGate.agda`, and
+  `DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda`. The route now
+  records typed residue-factor consumers, depth-to-stage seams, BT-to-
+  ultrametric seams, focused field-to-phase/Base369 seams, p-adic-to-
+  ultrametric seams, focused odd-prime extraction receipts, and one compact
+  consumer regression surface tying the canonical p3/p7/p11 and root/depth3
+  examples together.
 
 Current NS Clay action note for `2026-06-20`:
 - Case A / boundary-`delta1` geometric tranche is now landed. Artifacts:

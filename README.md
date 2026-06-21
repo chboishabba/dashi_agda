@@ -72,6 +72,22 @@ The next bridge tranche now connects those carriers to live consumers:
 typed quotient readouts from 15SSP into Base369, typed BT valencies, explicit
 p-adic-style depth-coordinate bridges, a unified phase/stage seam, field-level
 odd extraction, and one compact regression surface for importing the tranche.
+The next consumer-deepening tranche now threads those bridges back into one
+another:
+`DASHI.Physics.Closure.SSPPrimeLane369ResidueFactorBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369DepthPhaseBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369BTUltrametricBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369FieldPhaseBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369PAdicUltrametricBridge`,
+`DASHI.Core.OddSSP369FocusedPrimeGate`, and
+`DASHI.Foundations.SSPPrimeLane369ConsumerRegression`. These modules expose a
+typed `(TriTruth × Polarity × NonaryTruth)` residue factor per tracked prime,
+tie depth-indexed 369 addresses into the stage atlas, connect BT profiles to
+prefix ultrametric receipts, read focused field body/residue surfaces through
+Base369 while preserving the focused prime seam, connect finite p-adic bridges
+to the same ultrametric address geometry, tighten odd extraction around the
+focused prime supervoxel, and assemble one compact consumer regression surface
+for canonical p3/p7/p11 and root/depth3 examples.
 
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL
