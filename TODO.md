@@ -34,6 +34,30 @@ Current odd-lane / topology intake note for `2026-06-20`:
   and narrative-mnemonic number roles.
 
 Current NS Clay action note for `2026-06-20`:
+- Pressure-correction / uniform-`delta1` reduction tranche is now landed.
+  Artifacts:
+  `DASHI/Physics/Closure/NSPressureCorrectionEigenframeScaleReceipt.agda`,
+  `DASHI/Physics/Closure/NSCompressiveZonePiDecompositionReceipt.agda`,
+  `DASHI/Physics/Closure/NSDelta1UniformGateReductionReceipt.agda`,
+  `scripts/ns_pressure_eigenframe_gap_scan.py`,
+  `scripts/check_ns_pressure_eigenframe_gap_scan.py`,
+  `scripts/ns_compressive_pi_decomposition_scan.py`,
+  `scripts/check_ns_compressive_pi_decomposition_scan.py`,
+  `scripts/ns_alignment_pressure_bridge_summary.py`, and
+  `scripts/check_ns_alignment_pressure_bridge_summary.py`. The route now
+  records the pressure-correction scale explicitly as off-diagonal
+  pressure-Hessian projections normalized by eigenvalue gaps in the strain
+  eigenframe, isolates the compressive-zone
+  `Pi_c = ∫_{Omega_K^c}(lambda1*omega1^2 + lambda2*omega2^2 + lambda3*omega3^2)`
+  decomposition, and reduces the residual L3-a alignment obstruction to the
+  live quantitative gate `delta1 >= delta0 > 0` once the alignment ODE and
+  pressure-correction scale are accepted. The new scans add empirical
+  telemetry for pressure-eigenframe proxies, compressive-versus-extensional
+  `Pi_c` balance, and their co-movement across `delta1` bins. This remains
+  fail-closed and non-promoting: pressure-correction sign control is not
+  proved, the uniform `delta1` lower bound is not proved, and the new
+  telemetry is empirical only.
+
 - Dual-dominance / exact-alignment-ODE tranche is now landed. Artifacts:
   `DASHI/Physics/Closure/NSExtensionDominatesCompressionReceipt.agda`,
   `DASHI/Physics/Closure/NSVorticityStretchingExactReceipt.agda`,
