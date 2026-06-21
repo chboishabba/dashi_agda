@@ -98,6 +98,35 @@ Current odd-lane / topology intake note for `2026-06-20`:
   authority are not promoted.
 
 Current NS Clay action note for `2026-06-20`:
+- Triad incidence / frustration / adversarial-reference tranche is now
+  recorded for `2026-06-21`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadIncidenceCocycleReceipt.agda`,
+  `DASHI/Physics/Closure/NSTriadKernelPhaseCocycleReceipt.agda`,
+  `DASHI/Physics/Closure/NSTriadFrustrationDefectBoundary.agda`,
+  `DASHI/Physics/Closure/NSAdversarialGibbsPhaseReferenceReceipt.agda`,
+  `DASHI/Physics/Closure/NSSacasaTriadFrustrationBridgeBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadFrustrationRegression.agda`,
+  `scripts/ns_triad_incidence_cocycle_scan.py`,
+  `scripts/check_ns_triad_incidence_cocycle_scan.py`,
+  `scripts/ns_triad_frustration_defect_scan.py`,
+  `scripts/check_ns_triad_frustration_defect_scan.py`,
+  `scripts/ns_adversarial_phase_reference_scan.py`,
+  `scripts/check_ns_adversarial_phase_reference_scan.py`,
+  `scripts/ns_triad_frustration_bridge_summary.py`, and
+  `scripts/check_ns_triad_frustration_bridge_summary.py`. The route now
+  records the finite triad-incidence carrier `B`, the kernel-phase cocycle
+  target `B phi = psi`, the weighted frustration-defect boundary
+  `F_N(psi) = inf_phi ||B phi - psi||^2`, the regularized adversarial Gibbs
+  phase reference, and the fail-closed Sacasa->Kiriukhin bridge boundary
+  that keeps orbit-to-cosphere identification, realization-level
+  `|V_N| <= C_N`, and integrable `sup_N C_N` all explicitly open. The new
+  telemetry measures carrier density, cycle-rank proxies, exact-lock scores,
+  frustration residuals, coherence-loss proxies, adversarial phase gain over
+  zero reference, and a compact bridge summary over the shared raw N128
+  frames. This remains fail-closed and non-promoting: the bridge theorem is
+  not proved, the live wall stays unproved, and the new scans are empirical
+  only.
+
 - Sacasa/Kiriukhin orbit-coherence bridge tranche is now landed. Artifacts:
   `DASHI/Physics/Closure/NSKiriukhinOrbitStretchingCarrierReceipt.agda`,
   `DASHI/Physics/Closure/NSSacasaCosphereCoherenceCarrierReceipt.agda`,

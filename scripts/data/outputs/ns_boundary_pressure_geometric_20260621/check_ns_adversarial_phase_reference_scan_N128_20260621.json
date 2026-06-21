@@ -1,0 +1,17 @@
+{
+  "C": "scripts/check_ns_adversarial_phase_reference_scan.py",
+  "F": "Any malformed field, authority drift, or promoted-like marker is a hard error.",
+  "G": "Checker remains empirical and non-promoting.",
+  "L": "Load the scan JSON, validate rows and aggregates, then emit a checker receipt.",
+  "O": "Validate adversarial phase-reference telemetry output.",
+  "P": "FAIL_CLOSED_NS_ADVERSARIAL_PHASE_REFERENCE_SCAN_CHECK",
+  "R": "Check schema, authority flags, explicit non-promotion markers, row counts, and candidate-reference metrics.",
+  "S": "Fail-closed checker for malformed phase-reference telemetry surfaces.",
+  "contract": "check_ns_adversarial_phase_reference_scan",
+  "errors": [],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_ADVERSARIAL_PHASE_REFERENCE_SCAN_CHECK",
+  "schema_version": "1.0.0",
+  "status": "ok",
+  "warnings": []
+}
