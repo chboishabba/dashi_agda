@@ -97,6 +97,7 @@ import DASHI.Foundations.PAdicSocioeconomicBoundary as PAdicBoundary
 import DASHI.Physics.Closure.MonsterAnalogyPromotionBoundary as MonsterAnalogyBoundary
 import DASHI.Promotion.PoliticalRoleAssignmentBoundary as PoliticalRoleBoundary
 import DASHI.Culture.QiOperatorTheoryBoundary as QiOperatorTheory
+import DASHI.Promotion.TaoQiObligationIndex as TaoQiBoundary
 
 -- Sprint165 support vocabulary for the P0 stack:
 -- finite depth boundary observable, Maxwell, Yang Mills, Navier Stokes.
@@ -249,6 +250,8 @@ data CrossDomainInterpretationBoundaryLane : Set where
   wikidataCandidateRoleBridgeBoundaryLane :
     CrossDomainInterpretationBoundaryLane
   qiOperatorTheoryBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  taoQiBoundaryLane :
     CrossDomainInterpretationBoundaryLane
 
 record PromotionLaneSummary : Set where
@@ -1387,15 +1390,22 @@ canonicalCrossDomainInterpretationBoundarySummaries =
     "operator theory is mapped as Qi-field role grammar with operator-family rows, Sheng/Sha/Si spectral rows, and Sweetgrass reciprocity gate"
     "empirical, spiritual, mystical, clinical, environmental, legal, and scientific authority remain false without validation"
     "agda -i . DASHI/Culture/QiOperatorTheoryBoundary.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
+    taoQiBoundaryLane
+    "DASHI.Promotion.TaoQiObligationIndex"
+    "canonicalTaoQiObligationIndexReceipt"
+    "Tao source receipts, Tao operator grammar, Tao-to-Qi carrier/lens rows, and Tao-to-meditation candidate rows are joined as interpretive-only bridge surfaces"
+    "doctrine, empirical, clinical, spiritual, mystical, metaphysical, political, philological, and reciprocal validation authority remain false"
+    "agda -i . DASHI/Promotion/TaoQiObligationIndex.agda"
   ∷ []
 
 crossDomainInterpretationBoundaryCount :
   Nat
-crossDomainInterpretationBoundaryCount = 23
+crossDomainInterpretationBoundaryCount = 24
 
-crossDomainInterpretationBoundaryCountIs23 :
-  crossDomainInterpretationBoundaryCount ≡ 23
-crossDomainInterpretationBoundaryCountIs23 = refl
+crossDomainInterpretationBoundaryCountIs24 :
+  crossDomainInterpretationBoundaryCount ≡ 24
+crossDomainInterpretationBoundaryCountIs24 = refl
 
 record UnifiedPromotionObligationIndex : Setω where
   field
