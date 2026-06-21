@@ -3875,6 +3875,7 @@ depends on that surface.
   `AtomicChemistryRecoveryTheorem.agda`,
   `PhysicsUnificationToCanonicalClosureAdapter.agda`
 - Repo reader metasystem: `Docs/RepoMetasystem.puml` and `Docs/RepoMetasystem.svg`
+- Tao/yinyang/Qi metasystem: `Docs/diagrams/TaoQiPolarityMetasystem.puml`
 - Public Paper 1 narrative flow: `Docs/PublicPaperNarrativeFlow.puml` and
   `Docs/PublicPaperNarrativeFlow.svg`
 - Paper 1 manuscript source: `Docs/papers/drafts/PaperDraftWorkingFolder/Paper1_Manuscript.md`
@@ -4173,9 +4174,24 @@ depends on that surface.
 	  philology, spirituality, clinical practice, or metaphysical authority:
 	  `DASHI/Culture/TaoChapterReadingReceipt.agda`,
 	  `DASHI/Culture/TaoOperatorGrammar.agda`,
+	  `DASHI/Culture/YinYangPolarityBoundary.agda`,
+	  `DASHI/Interop/TaoYinYangAdapter.agda`,
+	  `DASHI/Interop/YinYangQiAdapter.agda`,
+	  `DASHI/Interop/PolarityPhaseFieldBridge.agda`,
 	  `DASHI/Interop/TaoQiReadingAdapter.agda`,
 	  `DASHI/Interop/TaoMeditationQiAdapter.agda`, and
 	  `DASHI/Promotion/TaoQiObligationIndex.agda`.
+	  The external formalism provenance is recorded directly in
+	  `canonicalTaoSourceReceipt`, with the source URL
+	  `https://pastebin.xware.online/paste/20260621_131250_taoteching_lean`
+	  preserved as candidate-only provenance rather than promoted authority.
+	  The current canonical interpretive stack is:
+	  Tao source receipt -> Tao operator grammar -> yin/yang polarity boundary
+	  -> Tao-to-yinyang adapter -> yinyang-to-Qi adapter -> 369/voxel/wave
+	  polarity-phase-field bridge -> Qi carrier/operator/meditation surfaces,
+	  with `DASHI/Promotion/PolarityFieldObligationIndex.agda` and
+	  `DASHI/Promotion/TaoQiObligationIndex.agda` keeping every promotion path
+	  blocked.
 	  `WrapperState` now includes `performativeEvidence`, which maps to
 	  `scopeExceeded6` when emitted by the pipeline; `PNFEmissionReceipt` records
   parser profile, reducer profile, source span, and emitted atom so residual

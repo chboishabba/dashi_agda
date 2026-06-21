@@ -34,6 +34,7 @@ The canonical textual diagram surfaces for this repo are:
 
 - `Docs/RepoMetasystem.puml`
 - `Docs/RepoMetasystem.svg`
+- `Docs/diagrams/TaoQiPolarityMetasystem.puml`
 - `Docs/CanonicalProofSpine.puml`
 - `Docs/CanonicalProofSpine.svg`
 - `Docs/PhysicsUnificationMap.puml`
@@ -54,11 +55,12 @@ Regenerate rendered SVG and PNG previews with:
 Use them in this order:
 
 1. `Docs/RepoMetasystem.*` for repo-level orientation
-2. `Docs/CanonicalProofSpine.*` for the canonical theorem route
-3. `Docs/OriginTraceabilityLedger.md` for origin/disconnection governance
-4. `Docs/PhysicsUnificationMap.*` for claim boundaries and open gaps
-5. `Docs/PhysicsRealityRoadmap.*` for "how this touches actual physics"
-6. child graphs such as observable/signature and training-dynamics only after the first five
+2. `Docs/diagrams/TaoQiPolarityMetasystem.puml` for the Tao -> yin/yang -> Qi -> phase/field interpretive stack
+3. `Docs/CanonicalProofSpine.*` for the canonical theorem route
+4. `Docs/OriginTraceabilityLedger.md` for origin/disconnection governance
+5. `Docs/PhysicsUnificationMap.*` for claim boundaries and open gaps
+6. `Docs/PhysicsRealityRoadmap.*` for "how this touches actual physics"
+7. child graphs such as observable/signature and training-dynamics only after the first six
 
 Diagram-reading rule:
 the status boards in `RepoMetasystem`, `CanonicalProofSpine`,
@@ -139,6 +141,29 @@ Current status: implemented and validated with targeted checks on
 `CliffordEvenLiftBridge`, `CliffordToEvenWaveLiftBridgeTheorem`,
 `CanonicalContractionToCliffordBridgeTheorem`, and
 `KnownLimitsQFTBridgeTheorem`.
+
+## Tao/YinYang/Qi Interpretive Stack
+
+The current cultural/interpretive stack is now explicitly layered as:
+
+1. `DASHI.Culture.TaoChapterReadingReceipt`
+2. `DASHI.Culture.TaoOperatorGrammar`
+3. `DASHI.Culture.YinYangPolarityBoundary`
+4. `DASHI.Interop.TaoYinYangAdapter`
+5. `DASHI.Interop.YinYangQiAdapter`
+6. `DASHI.Interop.PolarityPhaseFieldBridge`
+7. `DASHI.Interop.TaoQiReadingAdapter`
+8. `DASHI.Interop.TaoMeditationQiAdapter`
+9. `DASHI.Promotion.PolarityFieldObligationIndex`
+10. `DASHI.Promotion.TaoQiObligationIndex`
+
+Architecture rule for this stack:
+
+- Tao supplies source-dependent motifs and chapter-local candidate readings.
+- Yin/yang supplies the polarity and transition grammar between Tao operators and Qi formal-lens/operator surfaces.
+- The polarity-phase-field bridge is where local `TriTruth`/`HexTruth`/`NonaryTruth`, voxel/supervoxel support, and wave/superposition grammar sit.
+- Qi remains the carrier/role/formal-lens substrate.
+- Every layer is candidate-only and fail-closed on doctrine, empirical, clinical, spiritual, mystical, metaphysical, political, philological, theorem, runtime, and reciprocal validation authority.
 
 ## Performance Intent
 Reducing parallel dependency paths lowers normalization and transport overhead.

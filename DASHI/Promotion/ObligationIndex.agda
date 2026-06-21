@@ -97,6 +97,7 @@ import DASHI.Foundations.PAdicSocioeconomicBoundary as PAdicBoundary
 import DASHI.Physics.Closure.MonsterAnalogyPromotionBoundary as MonsterAnalogyBoundary
 import DASHI.Promotion.PoliticalRoleAssignmentBoundary as PoliticalRoleBoundary
 import DASHI.Culture.QiOperatorTheoryBoundary as QiOperatorTheory
+import DASHI.Promotion.PolarityFieldObligationIndex as PolarityFieldBoundary
 import DASHI.Promotion.TaoQiObligationIndex as TaoQiBoundary
 
 -- Sprint165 support vocabulary for the P0 stack:
@@ -250,6 +251,8 @@ data CrossDomainInterpretationBoundaryLane : Set where
   wikidataCandidateRoleBridgeBoundaryLane :
     CrossDomainInterpretationBoundaryLane
   qiOperatorTheoryBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  polarityFieldBoundaryLane :
     CrossDomainInterpretationBoundaryLane
   taoQiBoundaryLane :
     CrossDomainInterpretationBoundaryLane
@@ -1391,21 +1394,28 @@ canonicalCrossDomainInterpretationBoundarySummaries =
     "empirical, spiritual, mystical, clinical, environmental, legal, and scientific authority remain false without validation"
     "agda -i . DASHI/Culture/QiOperatorTheoryBoundary.agda"
   ∷ mkCrossDomainInterpretationBoundarySummary
+    polarityFieldBoundaryLane
+    "DASHI.Promotion.PolarityFieldObligationIndex"
+    "canonicalPolarityFieldObligationIndexReceipt"
+    "yin/yang polarity boundary, Tao-to-yinyang bridge, yinyang-to-Qi bridge, and polarity-phase-field bridge are joined as candidate-only interpretation and field-grammar surfaces"
+    "metaphysical, clinical, spiritual, theorem, runtime, and reciprocal validation authority remain blocked while the 369/voxel/wave stack stays candidate-only"
+    "agda -i . DASHI/Promotion/PolarityFieldObligationIndex.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
     taoQiBoundaryLane
     "DASHI.Promotion.TaoQiObligationIndex"
     "canonicalTaoQiObligationIndexReceipt"
-    "Tao source receipts, Tao operator grammar, Tao-to-Qi carrier/lens rows, and Tao-to-meditation candidate rows are joined as interpretive-only bridge surfaces"
-    "doctrine, empirical, clinical, spiritual, mystical, metaphysical, political, philological, and reciprocal validation authority remain false"
+    "Tao source receipts, Tao operator grammar, Tao-to-yinyang rows, yinyang-to-Qi carrier/lens rows, and Tao-to-meditation candidate rows are joined as interpretive-only bridge surfaces"
+    "doctrine, empirical, clinical, spiritual, mystical, metaphysical, political, philological, and reciprocal Tao/Qi/yinyang validation authority remain false"
     "agda -i . DASHI/Promotion/TaoQiObligationIndex.agda"
   ∷ []
 
 crossDomainInterpretationBoundaryCount :
   Nat
-crossDomainInterpretationBoundaryCount = 24
+crossDomainInterpretationBoundaryCount = 25
 
-crossDomainInterpretationBoundaryCountIs24 :
-  crossDomainInterpretationBoundaryCount ≡ 24
-crossDomainInterpretationBoundaryCountIs24 = refl
+crossDomainInterpretationBoundaryCountIs25 :
+  crossDomainInterpretationBoundaryCount ≡ 25
+crossDomainInterpretationBoundaryCountIs25 = refl
 
 record UnifiedPromotionObligationIndex : Setω where
   field
