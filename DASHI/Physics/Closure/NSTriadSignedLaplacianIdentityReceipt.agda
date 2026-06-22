@@ -15,23 +15,27 @@ listLength (_ ∷ xs) = suc (listLength xs)
 -- NS triad signed-operator identity receipt.
 --
 -- Candidate surface only:
---   L_signed_norm = I - K_N
+--   on im(L_abs), L_signed_norm = I - 2 K_N
 --
 -- This module records the signed-operator identity as an audited receipt,
--- not as a promoted theorem.  The exact endpoint confusion between lower and
--- upper spectral edges is explicitly guarded against.  All promotion flags
--- remain false.
+-- not as a promoted theorem.  The naming cleanup uses L_abs, L_neg, and
+-- L_signed.  The exact endpoint confusion between lower and upper spectral
+-- edges is explicitly guarded against.  All promotion flags remain false.
 
 data NSTriadSignedLaplacianIdentityStatus : Set where
   candidateSignedOperatorIdentityRecorded :
     NSTriadSignedLaplacianIdentityStatus
 
 data NSTriadSignedLaplacianIdentityAssumption : Set where
-  signedOperatorIdentitySurface :
+  lAbsNamingCleanup :
     NSTriadSignedLaplacianIdentityAssumption
-  normalizedSignedLaplacianNotation :
+  lNegNamingCleanup :
     NSTriadSignedLaplacianIdentityAssumption
-  endpointConfusionGuard :
+  lSignedNamingCleanup :
+    NSTriadSignedLaplacianIdentityAssumption
+  positiveSubspaceRestriction :
+    NSTriadSignedLaplacianIdentityAssumption
+  exactIdentityOnImLAbs :
     NSTriadSignedLaplacianIdentityAssumption
   nonPromotingAuditMode :
     NSTriadSignedLaplacianIdentityAssumption
@@ -39,19 +43,21 @@ data NSTriadSignedLaplacianIdentityAssumption : Set where
 canonicalNSTriadSignedLaplacianIdentityAssumptions :
   List NSTriadSignedLaplacianIdentityAssumption
 canonicalNSTriadSignedLaplacianIdentityAssumptions =
-  signedOperatorIdentitySurface
-  ∷ normalizedSignedLaplacianNotation
-  ∷ endpointConfusionGuard
+  lAbsNamingCleanup
+  ∷ lNegNamingCleanup
+  ∷ lSignedNamingCleanup
+  ∷ positiveSubspaceRestriction
+  ∷ exactIdentityOnImLAbs
   ∷ nonPromotingAuditMode
   ∷ []
 
 candidateSignedOperatorIdentityText : String
 candidateSignedOperatorIdentityText =
-  "candidate identity surface recorded: L_signed_norm = I - K_N"
+  "candidate identity surface recorded on im(L_abs): L_signed_norm = I - 2 K_N"
 
 endpointConfusionGuardText : String
 endpointConfusionGuardText =
-  "exact endpoint confusion is guarded against: the lower spectral edge is not the upper spectral edge, and the audited endpoint labels must not be swapped"
+  "exact endpoint confusion is guarded against: the lower spectral edge is not the upper spectral edge, the audited labels are L_abs, L_neg, and L_signed, and the positive-subspace restriction must not be swapped"
 
 auditModeText : String
 auditModeText =
@@ -81,11 +87,11 @@ record NSTriadSignedLaplacianIdentityReceiptORCSLPGF : Set where
   field
     O : String
     OIsCanonical : O ≡
-      "O: record the active NS triad signed-operator identity surface."
+      "O: record the active NS triad signed-operator receipt boundary."
 
     R : String
     RIsCanonical : R ≡
-      "R: record L_signed_norm = I - K_N as an audited candidate identity, with the endpoint labels guarded from confusion."
+      "R: record the naming cleanup L_abs, L_neg, and L_signed, and record the positive-subspace identity on im(L_abs) as an audited candidate receipt."
 
     C : String
     CIsCanonical : C ≡
@@ -93,15 +99,15 @@ record NSTriadSignedLaplacianIdentityReceiptORCSLPGF : Set where
 
     S : String
     SIsCanonical : S ≡
-      "S: the identity surface is candidate-only; endpoint confusion is explicitly blocked; promotion flags remain false."
+      "S: the identity surface is candidate-only; the positive-subspace restriction is explicit; endpoint confusion is blocked; promotion flags remain false."
 
     L : String
     LIsCanonical : L ≡
-      "L: signed operator identity -> endpoint guard -> audited receipt -> no theorem promotion."
+      "L: L_abs -> L_neg -> L_signed -> im(L_abs) exact identity -> audited receipt -> no theorem promotion."
 
     P : String
     PIsCanonical : P ≡
-      "P: keep L_signed_norm = I - K_N as an audit boundary, not a promoted proof."
+      "P: keep the positive-subspace identity on im(L_abs) as an audit boundary, not a promoted proof."
 
     G : String
     GIsCanonical : G ≡
@@ -109,27 +115,27 @@ record NSTriadSignedLaplacianIdentityReceiptORCSLPGF : Set where
 
     F : String
     FIsCanonical : F ≡
-      "F: the exact endpoint labels are guarded; lower/upper edge confusion is excluded from the receipt."
+      "F: the exact positive-subspace identity is guarded; lower/upper edge confusion is excluded from the receipt."
 
 canonicalNSTriadSignedLaplacianIdentityReceiptORCSLPGF :
   NSTriadSignedLaplacianIdentityReceiptORCSLPGF
 canonicalNSTriadSignedLaplacianIdentityReceiptORCSLPGF =
   mkNSTriadSignedLaplacianIdentityReceiptORCSLPGF
-    "O: record the active NS triad signed-operator identity surface."
+    "O: record the active NS triad signed-operator receipt boundary."
     refl
-    "R: record L_signed_norm = I - K_N as an audited candidate identity, with the endpoint labels guarded from confusion."
+    "R: record the naming cleanup L_abs, L_neg, and L_signed, and record the positive-subspace identity on im(L_abs) as an audited candidate receipt."
     refl
     "C: this is a fail-closed receipt module, not a theorem carrier."
     refl
-    "S: the identity surface is candidate-only; endpoint confusion is explicitly blocked; promotion flags remain false."
+    "S: the identity surface is candidate-only; the positive-subspace restriction is explicit; endpoint confusion is blocked; promotion flags remain false."
     refl
-    "L: signed operator identity -> endpoint guard -> audited receipt -> no theorem promotion."
+    "L: L_abs -> L_neg -> L_signed -> im(L_abs) exact identity -> audited receipt -> no theorem promotion."
     refl
-    "P: keep L_signed_norm = I - K_N as an audit boundary, not a promoted proof."
+    "P: keep the positive-subspace identity on im(L_abs) as an audit boundary, not a promoted proof."
     refl
     "G: theorem, full NS, and Clay promotion remain false."
     refl
-    "F: the exact endpoint labels are guarded; lower/upper edge confusion is excluded from the receipt."
+    "F: the exact positive-subspace identity is guarded; lower/upper edge confusion is excluded from the receipt."
     refl
 
 record NSTriadSignedLaplacianIdentityReceipt : Setω where
@@ -183,6 +189,18 @@ record NSTriadSignedLaplacianIdentityReceipt : Setω where
     auditModeIsCanonical :
       auditMode ≡ auditModeText
 
+    positiveSubspaceRestricted :
+      Bool
+
+    positiveSubspaceRestrictedIsTrue :
+      positiveSubspaceRestricted ≡ true
+
+    exactIdentityOnImLAbsRecorded :
+      Bool
+
+    exactIdentityOnImLAbsRecordedIsTrue :
+      exactIdentityOnImLAbsRecorded ≡ true
+
     identitySurfaceAudited :
       Bool
 
@@ -224,7 +242,7 @@ record NSTriadSignedLaplacianIdentityReceipt : Setω where
 
     statementIsCanonical :
       statement ≡
-      "Candidate-only NS triad signed-operator identity receipt: L_signed_norm = I - K_N is recorded, exact endpoint confusion is guarded against, and theorem/full-NS/Clay promotion stays false."
+      "Candidate-only NS triad signed-operator identity receipt: on im(L_abs), L_signed_norm = I - 2 K_N is recorded with the L_abs, L_neg, and L_signed naming cleanup, exact endpoint confusion is guarded against, and theorem/full-NS/Clay promotion stays false."
 
 open NSTriadSignedLaplacianIdentityReceipt public
 
@@ -236,7 +254,7 @@ canonicalNSTriadSignedLaplacianIdentityReceipt =
     refl
     canonicalNSTriadSignedLaplacianIdentityAssumptions
     refl
-    4
+    6
     refl
     canonicalNSTriadSignedLaplacianIdentityBlockers
     refl
@@ -252,6 +270,10 @@ canonicalNSTriadSignedLaplacianIdentityReceipt =
     refl
     true
     refl
+    true
+    refl
+    true
+    refl
     false
     refl
     false
@@ -260,5 +282,5 @@ canonicalNSTriadSignedLaplacianIdentityReceipt =
     refl
     canonicalNSTriadSignedLaplacianIdentityReceiptORCSLPGF
     refl
-    "Candidate-only NS triad signed-operator identity receipt: L_signed_norm = I - K_N is recorded, exact endpoint confusion is guarded against, and theorem/full-NS/Clay promotion stays false."
+    "Candidate-only NS triad signed-operator identity receipt: on im(L_abs), L_signed_norm = I - 2 K_N is recorded with the L_abs, L_neg, and L_signed naming cleanup, exact endpoint confusion is guarded against, and theorem/full-NS/Clay promotion stays false."
     refl
