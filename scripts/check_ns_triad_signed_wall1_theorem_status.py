@@ -30,6 +30,7 @@ ALLOWED_SIGNED_STATUS = {"fail-closed", "partial", "unavailable"}
 ALLOWED_SIGNED_SOURCE = {
     "reconciliation_json",
     "carrier_ranking_json",
+    "carrier_ranking_json+continuous_coherence_capacity_json",
     "legacy_chart",
     "missing",
     "explicit",
@@ -145,6 +146,50 @@ def main() -> int:
             errors.append(
                 "aggregate.signed_wall1_route_names: must be the ordered signed Wall 1 route list"
             )
+        if aggregate.get("continuous_coherence_capacity_status") not in ("fail-closed", "partial", "unavailable"):
+            errors.append(
+                "aggregate.continuous_coherence_capacity_status: must be 'fail-closed', 'partial', or 'unavailable'"
+            )
+        if aggregate.get("continuous_coherence_capacity_source") not in (
+            "continuous_coherence_json",
+            "missing",
+            "explicit",
+            "source-json",
+        ):
+            errors.append(
+                "aggregate.continuous_coherence_capacity_source: must be 'continuous_coherence_json', 'missing', 'explicit', or 'source-json'"
+            )
+        for key in (
+            "continuous_coherence_capacity_proxy_mean",
+            "continuous_coherence_deficit_proxy_mean",
+            "continuous_coherence_route_explanatory_fraction_mean",
+        ):
+            value = _finite_float(aggregate.get(key))
+            if value is None or value < -1.0e-12:
+                errors.append(f"aggregate.{key}: must be finite nonnegative")
+        for key in ("continuous_coherence_identity_residual_mean", "continuous_coherence_identity_residual_max"):
+            value = _finite_float(aggregate.get(key))
+            if value is None or value < -1.0e-12:
+                errors.append(f"aggregate.{key}: must be finite nonnegative")
+        if aggregate.get("continuous_wall1_status") not in ("fail-closed", "unavailable"):
+            errors.append("aggregate.continuous_wall1_status: must be 'fail-closed' or 'unavailable'")
+        if aggregate.get("continuous_wall1_candidate_only") is not True:
+            errors.append("aggregate.continuous_wall1_candidate_only: must be true")
+        if aggregate.get("continuous_wall1_fail_closed") is not True:
+            errors.append("aggregate.continuous_wall1_fail_closed: must be true")
+        if aggregate.get("continuous_wall1_theorem_promoted") is not False:
+            errors.append("aggregate.continuous_wall1_theorem_promoted: must be false")
+        if aggregate.get("continuous_wall1_full_ns_promoted") is not False:
+            errors.append("aggregate.continuous_wall1_full_ns_promoted: must be false")
+        if aggregate.get("continuous_wall1_clay_promoted") is not False:
+            errors.append("aggregate.continuous_wall1_clay_promoted: must be false")
+        if aggregate.get("continuous_wall1_route_names") not in (
+            None,
+            ["continuous-coherence-carrier-wall-1a", "coherence-deficit-floor-wall-1a"],
+        ):
+            errors.append(
+                "aggregate.continuous_wall1_route_names: must be the ordered continuous Wall 1 route list"
+            )
 
     signed_wall1_rows = payload.get("signed_wall1_rows")
     if not isinstance(signed_wall1_rows, list):
@@ -254,6 +299,41 @@ def main() -> int:
                 errors.append(f"signed_wall1_rows[{index}].upper_spectral_edge_carries_xy_floor_risk: must be true")
             if row.get("signed_xor_distance_bridge_open") is not True:
                 errors.append(f"signed_wall1_rows[{index}].signed_xor_distance_bridge_open: must be true")
+    continuous_wall1_rows = payload.get("continuous_wall1_rows")
+    if not isinstance(continuous_wall1_rows, list):
+        errors.append("continuous_wall1_rows: must be list")
+        continuous_wall1_rows = []
+    if len(continuous_wall1_rows) != 2:
+        errors.append("continuous_wall1_rows: must contain exactly 2 rows")
+    for index, row in enumerate(continuous_wall1_rows):
+        if not isinstance(row, dict):
+            errors.append(f"continuous_wall1_rows[{index}]: must be object")
+            continue
+        if row.get("surface") not in ("continuous_coherence_carrier", "coherence_deficit_floor"):
+            errors.append(
+                f"continuous_wall1_rows[{index}].surface: must be 'continuous_coherence_carrier' or 'coherence_deficit_floor'"
+            )
+        for key in ("module_path", "receipt_name", "route_name", "boundary_summary", "bridge_summary"):
+            if not isinstance(row.get(key), str):
+                errors.append(f"continuous_wall1_rows[{index}].{key}: must be string")
+        if row.get("candidate_only") is not True:
+            errors.append(f"continuous_wall1_rows[{index}].candidate_only: must be true")
+        if row.get("fail_closed") is not True:
+            errors.append(f"continuous_wall1_rows[{index}].fail_closed: must be true")
+        if row.get("theorem_promoted") is not False:
+            errors.append(f"continuous_wall1_rows[{index}].theorem_promoted: must be false")
+        if row.get("full_ns_promoted") is not False:
+            errors.append(f"continuous_wall1_rows[{index}].full_ns_promoted: must be false")
+        if row.get("clay_promoted") is not False:
+            errors.append(f"continuous_wall1_rows[{index}].clay_promoted: must be false")
+        if row.get("wall1_status") != "unproved":
+            errors.append(f"continuous_wall1_rows[{index}].wall1_status: must be 'unproved'")
+        if row.get("continuous_coherence_route_open") is not True:
+            errors.append(f"continuous_wall1_rows[{index}].continuous_coherence_route_open: must be true")
+        if row.get("continuous_coherence_status") not in ("fail-closed", "partial", "unavailable"):
+            errors.append(
+                f"continuous_wall1_rows[{index}].continuous_coherence_status: must be 'fail-closed', 'partial', or 'unavailable'"
+            )
     out = {
         "script_name": SCRIPT_NAME,
         "contract": CONTRACT,

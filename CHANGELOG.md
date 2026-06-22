@@ -6,6 +6,31 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Wall 1 continuous coherence carrier / coherence-deficit floor tranche
+  for `2026-06-23`: adds
+  `DASHI.Physics.Closure.NSTriadContinuousCoherenceCarrierBoundary`,
+  `DASHI.Physics.Closure.NSTriadCoherenceDeficitFloorBoundary`,
+  `scripts/ns_triad_continuous_coherence_capacity_scan.py`, and
+  `scripts/check_ns_triad_continuous_coherence_capacity_scan.py`;
+  strengthens `scripts/ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/check_ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The tranche records the
+  continuous triadic coherence carrier as the positive Wall 1a candidate
+  route after the raw signed-XOR reduction failed on the active shell
+  extraction, records the coherence-deficit floor implication
+  `cap_N <= kappa < 1 -> floor >= (1 - kappa) / 2` as shape only, derives a
+  fail-closed continuous-capacity surface from the existing floor telemetry,
+  and threads that route through carrier-ranking, signed theorem-status, the
+  shell bridge, and the local harness manifest. This remains fail-closed:
+  theorem promotion and Clay promotion stay false, the new continuous route
+  is candidate-only, its current telemetry is derived rather than an
+  independent certificate, and the first live Wall 1 theorem bottleneck is
+  still a real continuous coherence bound on the active shell carrier.
+
 - NS Wall 1 signed carrier reconciliation / carrier-identification tranche
   for `2026-06-22`: adds
   `DASHI.Physics.Closure.NSTriadSignedCarrierReconciliationBoundary`,

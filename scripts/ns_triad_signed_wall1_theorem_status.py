@@ -27,6 +27,10 @@ DEFAULT_CARRIER_RANKING_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_wall1_carrier_explanatory_rank_scan_N128_20260622.json"
 )
+DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_continuous_coherence_capacity_scan_N128_20260623.json"
+)
 DEFAULT_SPECTRAL_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_signed_spectral_audit_scan_N128_20260622.json"
@@ -54,6 +58,11 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--gaugeability-json", type=Path, default=DEFAULT_GAUGEABILITY_JSON)
     parser.add_argument("--reconciliation-json", type=Path, default=DEFAULT_RECONCILIATION_JSON)
     parser.add_argument("--carrier-ranking-json", type=Path, default=DEFAULT_CARRIER_RANKING_JSON)
+    parser.add_argument(
+        "--continuous-coherence-capacity-json",
+        type=Path,
+        default=DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON,
+    )
     parser.add_argument("--spectral-json", type=Path, default=DEFAULT_SPECTRAL_JSON)
     parser.add_argument("--cocycle-json", type=Path, default=DEFAULT_COCYCLE_JSON)
     parser.add_argument("--schur-json", type=Path, default=DEFAULT_SCHUR_JSON)
@@ -152,6 +161,47 @@ def _safe_float(value: Any, default: float = 0.0) -> float:
     return parsed if math.isfinite(parsed) else default
 
 
+def _first_float_from_payload(payload: dict[str, Any], keys: tuple[str, ...], default: float = 0.0) -> float:
+    aggregate = payload.get("aggregate")
+    if isinstance(aggregate, dict):
+        for key in keys:
+            value = aggregate.get(key)
+            if value is None or isinstance(value, bool):
+                continue
+            try:
+                parsed = float(value)
+            except (TypeError, ValueError):
+                continue
+            if math.isfinite(parsed):
+                return parsed
+    for key in keys:
+        value = payload.get(key)
+        if value is None or isinstance(value, bool):
+            continue
+        try:
+            parsed = float(value)
+        except (TypeError, ValueError):
+            continue
+        if math.isfinite(parsed):
+            return parsed
+    rows = payload.get("rows")
+    if isinstance(rows, list):
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+            for key in keys:
+                value = row.get(key)
+                if value is None or isinstance(value, bool):
+                    continue
+                try:
+                    parsed = float(value)
+                except (TypeError, ValueError):
+                    continue
+                if math.isfinite(parsed):
+                    return parsed
+    return default
+
+
 def _payload_status(payload: dict[str, Any] | None, status_keys: tuple[str, ...]) -> tuple[str | None, str | None]:
     if not isinstance(payload, dict):
         return None, None
@@ -197,6 +247,33 @@ def main() -> int:
     reconciliation_aggregate = reconciliation.get("aggregate", {}) if isinstance(reconciliation, dict) else {}
     carrier_ranking = _read_json_or_empty(args.carrier_ranking_json)
     carrier_ranking_aggregate = carrier_ranking.get("aggregate", {}) if isinstance(carrier_ranking, dict) else {}
+    continuous_coherence_capacity = _read_json_or_empty(args.continuous_coherence_capacity_json)
+    continuous_coherence_capacity_aggregate = (
+        continuous_coherence_capacity.get("aggregate", {})
+        if isinstance(continuous_coherence_capacity, dict)
+        else {}
+    )
+    continuous_coherence_status, continuous_coherence_source = _derive_status(
+        _status_value(
+            continuous_coherence_capacity_aggregate,
+            (
+                "continuous_coherence_capacity_status",
+                "continuous_positive_route_status",
+                "carrier_identification_status",
+                "status",
+            ),
+        ),
+        _status_value(
+            continuous_coherence_capacity_aggregate,
+            (
+                "continuous_coherence_capacity_source",
+                "continuous_positive_route_source",
+                "carrier_identification_source",
+            ),
+        ),
+        bool(continuous_coherence_capacity),
+        True,
+    )
     spectral = _read_json(args.spectral_json)
     cocycle = _read_json(args.cocycle_json)
     schur = _read_json(args.schur_json)
@@ -212,6 +289,11 @@ def main() -> int:
             k = _key(row)
             if k is not None:
                 by_key.setdefault(k, {}).update({"spectral": row})
+    for row in _rows(continuous_coherence_capacity):
+        if isinstance(row, dict):
+            k = _key(row)
+            if k is not None:
+                by_key.setdefault(k, {}).update({"continuous": row})
     for row in _reconciliation_rows(reconciliation):
         if isinstance(row, dict):
             k = _key(row)
@@ -232,12 +314,13 @@ def main() -> int:
     reconciliation_statuses: list[str] = []
     carrier_identification_statuses: list[str] = []
     for (frame, shell), payloads in sorted(by_key.items()):
-        if set(payloads) < {"gauge", "spectral", "cocycle", "schur"}:
+        if set(payloads) < {"gauge", "spectral", "cocycle", "schur", "continuous"}:
             continue
         g = payloads["gauge"]
         s = payloads["spectral"]
         c = payloads["cocycle"]
         h = payloads["schur"]
+        u = payloads["continuous"]
         gauge_fields = (
             "psi_pi_weight_fraction",
             "signed_xor_weighted_distance_fraction",
@@ -312,6 +395,9 @@ def main() -> int:
                 "signed_xor_distance_vs_balance_capacity": float(g["signed_xor_distance_vs_balance_capacity"]),
                 "observed_floor_ratio": float(c.get("frustration_floor_ratio_vs_raw", 0.0)),
                 "observed_floor_proxy": float(c.get("frustration_floor_proxy", 0.0)),
+                "continuous_coherence_capacity_proxy": float(u.get("continuous_coherence_capacity_proxy", 0.0)),
+                "continuous_coherence_deficit_proxy": float(u.get("continuous_coherence_deficit_proxy", 0.0)),
+                "continuous_coherence_identity_residual": float(u.get("continuous_coherence_identity_residual", 0.0)),
                 "spectral_floor_lower_bound": float(s["xy_floor_spectral_lower_bound"]),
                 "signed_laplacian_lambda_min": float(s["signed_laplacian_lambda_min"]),
                 "signed_laplacian_lambda_max": float(s["signed_laplacian_lambda_max"]),
@@ -330,6 +416,7 @@ def main() -> int:
         )
         reconciliation_statuses.append(rec_status)
         carrier_identification_statuses.append(carrier_status)
+        carrier_identification_statuses.append(continuous_coherence_status)
 
     aggregate = {
         "shared_frame_shell_count": len(summary_rows),
@@ -339,6 +426,19 @@ def main() -> int:
             [row["signed_xor_distance_vs_balance_capacity"] for row in summary_rows]
         ),
         "observed_floor_ratio_mean": _mean([row["observed_floor_ratio"] for row in summary_rows]),
+        "continuous_coherence_capacity_proxy_mean": _mean(
+            [row["continuous_coherence_capacity_proxy"] for row in summary_rows]
+        ),
+        "continuous_coherence_deficit_proxy_mean": _mean(
+            [row["continuous_coherence_deficit_proxy"] for row in summary_rows]
+        ),
+        "continuous_coherence_identity_residual_mean": _mean(
+            [row["continuous_coherence_identity_residual"] for row in summary_rows]
+        ),
+        "continuous_coherence_identity_residual_max": max(
+            [row["continuous_coherence_identity_residual"] for row in summary_rows],
+            default=0.0,
+        ),
         "spectral_floor_lower_bound_mean": _mean([row["spectral_floor_lower_bound"] for row in summary_rows]),
         "signed_frame_gap_lower_edge_mean": _mean([row["signed_frame_gap_lower_edge"] for row in summary_rows]),
         "schur_gap_mean": _mean([row["schur_gap"] for row in summary_rows]),
@@ -367,11 +467,38 @@ def main() -> int:
             else "missing"
         ),
         "carrier_identification_source": (
-            "carrier_ranking_json"
+            "carrier_ranking_json+continuous_coherence_capacity_json"
+            if carrier_ranking and continuous_coherence_capacity and carrier_identification_statuses
+            else "carrier_ranking_json"
             if carrier_ranking and carrier_identification_statuses
             else "legacy_chart"
             if summary_rows
             else "missing"
+        ),
+        "continuous_coherence_capacity_status": (
+            "fail-closed"
+            if continuous_coherence_status == "fail-closed"
+            else "partial"
+            if continuous_coherence_status == "partial"
+            else "unavailable"
+        ),
+        "continuous_coherence_capacity_source": continuous_coherence_source,
+        "continuous_coherence_capacity_candidate_only": True,
+        "continuous_coherence_capacity_independent_proof_certificate": False,
+        "continuous_coherence_route_explanatory_fraction_mean": _first_float_from_payload(
+            continuous_coherence_capacity,
+            (
+                "continuous_coherence_route_explanatory_fraction_mean",
+                "continuous_coherence_capacity_mean",
+                "continuous_coherence_capacity_proxy_mean",
+                "continuous_coherence_deficit_proxy_mean",
+                "continuous_positive_route_capacity_mean",
+                "continuous_positive_route_support_mean",
+                "positive_route_capacity_mean",
+                "positive_route_support_mean",
+                "observed_floor_ratio_mean",
+                "observed_floor_proxy_mean",
+            ),
         ),
     }
 
@@ -425,6 +552,49 @@ def main() -> int:
         },
     ]
 
+    continuous_wall1_rows = [
+        {
+            "surface": "continuous_coherence_carrier",
+            "module_path": "DASHI/Physics/Closure/NSTriadContinuousCoherenceCarrierBoundary.agda",
+            "receipt_name": "NSTriadContinuousCoherenceCarrierBoundary",
+            "route_name": "continuous-coherence-carrier-wall-1a",
+            "boundary_summary": (
+                "The positive Wall 1a carrier is the continuous signed triadic coherence carrier, while the current signed-XOR carrier is no longer canonical."
+            ),
+            "bridge_summary": (
+                "This surface is derived from observed floor telemetry and keeps the positive theorem target explicit without claiming an independent certificate."
+            ),
+            "candidate_only": True,
+            "fail_closed": True,
+            "theorem_promoted": False,
+            "full_ns_promoted": False,
+            "clay_promoted": False,
+            "wall1_status": "unproved",
+            "continuous_coherence_route_open": True,
+            "continuous_coherence_status": aggregate["continuous_coherence_capacity_status"],
+        },
+        {
+            "surface": "coherence_deficit_floor",
+            "module_path": "DASHI/Physics/Closure/NSTriadCoherenceDeficitFloorBoundary.agda",
+            "receipt_name": "NSTriadCoherenceDeficitFloorBoundary",
+            "route_name": "coherence-deficit-floor-wall-1a",
+            "boundary_summary": (
+                "The positive theorem shape cap_N <= kappa < 1 -> floor >= (1 - kappa) / 2 is recorded, but no proof is claimed."
+            ),
+            "bridge_summary": (
+                "The floor theorem remains separate from the Schur/frame-gap route; this row keeps the implication surface fail-closed."
+            ),
+            "candidate_only": True,
+            "fail_closed": True,
+            "theorem_promoted": False,
+            "full_ns_promoted": False,
+            "clay_promoted": False,
+            "wall1_status": "unproved",
+            "continuous_coherence_route_open": True,
+            "continuous_coherence_status": aggregate["continuous_coherence_capacity_status"],
+        },
+    ]
+
     aggregate.update(
         {
             "signed_wall1_row_count": len(signed_wall1_rows),
@@ -443,6 +613,15 @@ def main() -> int:
             "signed_carrier_reconciliation_source": aggregate["signed_carrier_reconciliation_source"],
             "carrier_identification_source": aggregate["carrier_identification_source"],
             "signed_wall1_route_names": [row["route_name"] for row in signed_wall1_rows],
+            "continuous_wall1_row_count": len(continuous_wall1_rows),
+            "continuous_wall1_surface_count": len({row["surface"] for row in continuous_wall1_rows}),
+            "continuous_wall1_status": "fail-closed",
+            "continuous_wall1_candidate_only": True,
+            "continuous_wall1_fail_closed": True,
+            "continuous_wall1_theorem_promoted": False,
+            "continuous_wall1_full_ns_promoted": False,
+            "continuous_wall1_clay_promoted": False,
+            "continuous_wall1_route_names": [row["route_name"] for row in continuous_wall1_rows],
         }
     )
 
@@ -460,12 +639,14 @@ def main() -> int:
             "gaugeability_json": str(args.gaugeability_json),
             "reconciliation_json": str(args.reconciliation_json),
             "carrier_ranking_json": str(args.carrier_ranking_json),
+            "continuous_coherence_capacity_json": str(args.continuous_coherence_capacity_json),
             "spectral_json": str(args.spectral_json),
             "cocycle_json": str(args.cocycle_json),
             "schur_json": str(args.schur_json),
         },
         "rows": summary_rows,
         "signed_wall1_rows": signed_wall1_rows,
+        "continuous_wall1_rows": continuous_wall1_rows,
         "aggregate": aggregate,
     }
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
@@ -483,6 +664,9 @@ def main() -> int:
                 "signed_xor_distance_vs_balance_capacity",
                 "observed_floor_ratio",
                 "observed_floor_proxy",
+                "continuous_coherence_capacity_proxy",
+                "continuous_coherence_deficit_proxy",
+                "continuous_coherence_identity_residual",
                 "spectral_floor_lower_bound",
                 "signed_laplacian_lambda_min",
                 "signed_laplacian_lambda_max",
@@ -495,6 +679,8 @@ def main() -> int:
                 "signed_carrier_reconciliation_source",
                 "carrier_identification_status",
                 "carrier_identification_source",
+                "continuous_coherence_capacity_status",
+                "continuous_coherence_capacity_source",
                 "carrier_rank",
                 "carrier_id",
             ],

@@ -75,6 +75,13 @@ def main() -> int:
             errors.append("aggregate.carrier_identification_status: must be 'fail-closed'")
         if aggregate.get("current_primary_carrier_identified") is not False:
             errors.append("aggregate.current_primary_carrier_identified: must be false")
+        if aggregate.get("continuous_coherence_capacity_status") not in ("fail-closed", "partial", "unavailable"):
+            errors.append("aggregate.continuous_coherence_capacity_status: must be fail-closed|partial|unavailable")
+        if aggregate.get("continuous_coherence_capacity_source") not in (
+            "continuous_coherence_capacity_json",
+            "missing",
+        ):
+            errors.append("aggregate.continuous_coherence_capacity_source: must be continuous_coherence_capacity_json|missing")
     rows = payload.get("rows")
     if not isinstance(rows, list):
         errors.append("rows: must be list")

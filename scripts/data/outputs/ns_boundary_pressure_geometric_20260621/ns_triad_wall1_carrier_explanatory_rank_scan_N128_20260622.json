@@ -1,10 +1,15 @@
 {
   "aggregate": {
     "carrier_identification_status": "fail-closed",
-    "carrier_identification_top_candidate": "cycle-family-local-obstruction",
-    "carrier_identification_top_support_mean": 0.020165852785257742,
-    "carrier_row_count": 4,
-    "carrier_story_conclusion": "Observed floor remains real, but current discrete/spectral carriers are not canonical on the active shell extraction.",
+    "carrier_identification_top_candidate": "continuous-coherence-positive-route",
+    "carrier_identification_top_support_mean": 1.6175315223912248,
+    "carrier_row_count": 5,
+    "carrier_story_conclusion": "Observed floor remains real, the continuous coherence route is candidate-only, and current discrete/spectral carriers are not canonical on the active shell extraction.",
+    "continuous_coherence_capacity_candidate_only": true,
+    "continuous_coherence_capacity_independent_proof_certificate": false,
+    "continuous_coherence_capacity_source": "continuous_coherence_capacity_json",
+    "continuous_coherence_capacity_status": "fail-closed",
+    "continuous_coherence_route_explanatory_fraction_mean": 1.6175315223912248,
     "current_primary_carrier_identified": false,
     "cycle_family_route_explanatory_fraction_mean": 0.020165852785257742,
     "observed_floor_ratio_mean": 0.42404722262486105,
@@ -34,6 +39,7 @@
   },
   "errors": [],
   "parameters": {
+    "continuous_coherence_capacity_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_continuous_coherence_capacity_scan_N128_20260623.json",
     "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_wall1_carrier_explanatory_rank_scan_N128_20260622.json",
     "signed_theorem_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_signed_wall1_theorem_status_20260622.json",
     "wall1_bridge_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_wall1_shell_bridge_summary_20260621.json"
@@ -41,8 +47,24 @@
   "route_decision": "FAIL_CLOSED_NS_TRIAD_WALL1_CARRIER_EXPLANATORY_RANK_SCAN",
   "rows": [
     {
-      "carrier_id": "cycle-family-local-obstruction",
+      "candidate_only": true,
+      "carrier_id": "continuous-coherence-positive-route",
       "carrier_rank": 1,
+      "clay_promoted": false,
+      "empirical_non_promoting": true,
+      "full_ns_promoted": false,
+      "independent_proof_certificate": false,
+      "primary_candidate": false,
+      "proof_certificate": false,
+      "route_name": "wall1a-continuous-coherence-capacity-positive-route",
+      "status": "fail-closed",
+      "support_ratio_vs_observed_floor": 1.6175315223912248,
+      "support_value": 0.6859097495781621,
+      "theorem_promoted": false
+    },
+    {
+      "carrier_id": "cycle-family-local-obstruction",
+      "carrier_rank": 2,
       "primary_candidate": false,
       "route_name": "cycle-family-lower-bound",
       "status": "insufficient",
@@ -51,7 +73,7 @@
     },
     {
       "carrier_id": "raw-signed-xor",
-      "carrier_rank": 2,
+      "carrier_rank": 3,
       "primary_candidate": false,
       "route_name": "wall1a-signed-xor-gaugeability",
       "status": "insufficient",
@@ -60,7 +82,7 @@
     },
     {
       "carrier_id": "signed-spectral-proxy",
-      "carrier_rank": 3,
+      "carrier_rank": 4,
       "primary_candidate": false,
       "route_name": "signed-XY-spectral-frustration-wall-1a",
       "status": "insufficient",
@@ -69,7 +91,7 @@
     },
     {
       "carrier_id": "schur-frame-gap",
-      "carrier_rank": 4,
+      "carrier_rank": 5,
       "primary_candidate": false,
       "route_name": "schur-frame-gap-wall-1b",
       "status": "unproved",
