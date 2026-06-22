@@ -5716,6 +5716,10 @@ def build_specs() -> list[HarnessSpec]:
             args=(
                 "--gaugeability-json",
                 str(ns_triad_signed_xor_gaugeability_scan_out),
+                "--reconciliation-json",
+                str(ns_triad_signed_carrier_reconciliation_scan_out),
+                "--carrier-ranking-json",
+                str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
                 "--spectral-json",
                 str(ns_triad_signed_spectral_audit_scan_out),
                 "--cocycle-json",
@@ -5726,6 +5730,8 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_signed_wall1_theorem_status_out),
             )
             if ns_triad_signed_xor_gaugeability_scan_out.exists()
+            and ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
             and ns_triad_signed_spectral_audit_scan_out.exists()
             and ns_triad_cocycle_floor_scan_out.exists()
             and ns_triad_schur_directional_audit_scan_out.exists()
@@ -5734,6 +5740,8 @@ def build_specs() -> list[HarnessSpec]:
             optional=True,
             skip_reason=None
             if ns_triad_signed_xor_gaugeability_scan_out.exists()
+            and ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
             and ns_triad_signed_spectral_audit_scan_out.exists()
             and ns_triad_cocycle_floor_scan_out.exists()
             and ns_triad_schur_directional_audit_scan_out.exists()
@@ -5741,11 +5749,11 @@ def build_specs() -> list[HarnessSpec]:
             else (
                 "ns_triad_signed_wall1_theorem_status script not found"
                 if not script("ns_triad_signed_wall1_theorem_status.py").exists()
-                else "ns_triad_signed_wall1_theorem_status requires signed gaugeability, signed spectral, cocycle, and Schur outputs"
+                else "ns_triad_signed_wall1_theorem_status requires signed gaugeability, reconciliation, carrier-ranking, signed spectral, cocycle, and Schur outputs"
             ),
             notes=(
                 "optional Wall 1 signed theorem-status summary",
-                "empirical/non-promoting; joins signed-XOR, signed-spectrum, cocycle-floor, and Schur telemetry into one fail-closed surface",
+                "empirical/non-promoting; joins signed-XOR, reconciliation, carrier-ranking, signed-spectrum, cocycle-floor, and Schur telemetry into one fail-closed surface",
             ),
         ),
         HarnessSpec(
@@ -5787,9 +5795,9 @@ def build_specs() -> list[HarnessSpec]:
                 "--schur-json",
                 str(ns_triad_schur_directional_audit_scan_out),
                 "--signed-wall1-reconciliation-json",
-                str(ns_triad_signed_wall1_reconciliation_scan_out),
+                str(ns_triad_signed_carrier_reconciliation_scan_out),
                 "--signed-wall1-carrier-ranking-json",
-                str(ns_triad_signed_wall1_carrier_ranking_scan_out),
+                str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
                 "--cycle-json",
                 str(ns_triad_cycle_obstruction_scan_out),
                 "--cycle-packing-json",
@@ -5811,6 +5819,8 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_cycle_packing_overlap_scan_out.exists()
             and ns_triad_low_frustration_hessian_scan_out.exists()
             and ns_triad_k01_geometry_audit_scan_out.exists()
+            and ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
             and ns_triad_signed_wall1_theorem_status_out.exists()
             else ("--help",),
             expected_json_path=ns_triad_wall1_shell_bridge_summary_out,
@@ -5824,6 +5834,8 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_cycle_packing_overlap_scan_out.exists()
             and ns_triad_low_frustration_hessian_scan_out.exists()
             and ns_triad_k01_geometry_audit_scan_out.exists()
+            and ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
             and ns_triad_signed_wall1_theorem_status_out.exists()
             and script("ns_triad_wall1_shell_bridge_summary.py").exists()
             else (

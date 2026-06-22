@@ -194,6 +194,7 @@ def main() -> int:
     args = _parse_args()
     gauge = _read_json(args.gaugeability_json)
     reconciliation = _read_json_or_empty(args.reconciliation_json)
+    reconciliation_aggregate = reconciliation.get("aggregate", {}) if isinstance(reconciliation, dict) else {}
     carrier_ranking = _read_json_or_empty(args.carrier_ranking_json)
     carrier_ranking_aggregate = carrier_ranking.get("aggregate", {}) if isinstance(carrier_ranking, dict) else {}
     spectral = _read_json(args.spectral_json)
@@ -237,7 +238,6 @@ def main() -> int:
         s = payloads["spectral"]
         c = payloads["cocycle"]
         h = payloads["schur"]
-        r = payloads.get("reconciliation")
         gauge_fields = (
             "psi_pi_weight_fraction",
             "signed_xor_weighted_distance_fraction",
@@ -257,7 +257,7 @@ def main() -> int:
         legacy_chart_fields_present = True
         rec_status, rec_source = _derive_status(
             _status_value(
-                r,
+                reconciliation_aggregate,
                 (
                     "signed_carrier_reconciliation_status",
                     "carrier_reconciliation_status",
@@ -266,14 +266,14 @@ def main() -> int:
                 ),
             ),
             _status_value(
-                r,
+                reconciliation_aggregate,
                 (
                     "signed_carrier_reconciliation_source",
                     "carrier_reconciliation_source",
                     "reconciliation_source",
                 ),
             ),
-            r is not None,
+            bool(reconciliation),
             legacy_chart_fields_present,
         )
         carrier_status, carrier_source = _derive_status(
