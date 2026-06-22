@@ -42,6 +42,26 @@ monitor surface.
   uniform cocycle floor theorem is proved, no floor-to-frame theorem is
   proved, and the strengthened scans are empirical only.
 
+- NS Wall 1 cycle-family packing / K01 geometry tranche for `2026-06-22`:
+  adds `scripts/ns_triad_cycle_packing_overlap_scan.py`,
+  `scripts/check_ns_triad_cycle_packing_overlap_scan.py`,
+  `scripts/ns_triad_k01_geometry_audit_scan.py`, and
+  `scripts/check_ns_triad_k01_geometry_audit_scan.py`; sharpens
+  `DASHI.Physics.Closure.NSTriadCycleFamilyLowerBoundBoundary` and
+  `DASHI.Physics.Closure.NSSchurComplementFrameGapBoundary`; strengthens
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The tranche records the
+  cycle-family packing/overlap surface as a candidate-only empirical audit of
+  obstruction-direction collapse versus spread, records a candidate-only K01
+  geometry audit around shell ratio / angular mismatch / coupling
+  concentration proxies, wires both into the Wall 1 shell bridge and local
+  harness manifest, and tightens the Agda boundary language around the
+  family quadratic obstruction and the non-adversarial `K01 / Schur` bridge.
+  This remains fail-closed: theorem promotion and Clay promotion stay false,
+  the cycle-family lower-bound theorem is not proved, the non-adversarial
+  Schur gap is not proved, and the new scans are empirical only.
+
 - NS Wall 1 phase-regime / cocycle-floor / floor-to-frame tranche for
   `2026-06-22`: adds
   `DASHI.Physics.Closure.NSPhaseRegimeSeparationBoundary`,

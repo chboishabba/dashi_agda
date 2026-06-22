@@ -11,8 +11,8 @@ open import Data.List.Base using (List; []; _∷_)
 ------------------------------------------------------------------------
 -- Fail-closed NS Wall 1 cycle-family quadratic lower-bound boundary.
 --
--- This receipt separates the one-cycle quantitative law from the family law
--- on the Wall 1 shell carrier.  It records the target shape
+-- This receipt separates the one-cycle quantitative law from the family quadratic obstruction
+-- on the active Wall 1 shell carrier.  It records the target shape
 --
 --   d^T (C W^-1 C^T)^dagger d
 --
@@ -35,7 +35,7 @@ data NSTriadCycleFamilyLowerBoundRow : Set where
     NSTriadCycleFamilyLowerBoundRow
   explicitQuadraticTargetShapeRecorded :
     NSTriadCycleFamilyLowerBoundRow
-  shellCarrierWall1Recorded :
+  activeWall1ShellCarrierRecorded :
     NSTriadCycleFamilyLowerBoundRow
   uniformC0FloorStillOpen :
     NSTriadCycleFamilyLowerBoundRow
@@ -50,7 +50,7 @@ canonicalNSTriadCycleFamilyLowerBoundRows =
   oneCycleLawRecorded
   ∷ wall1FamilyQuadraticObstructionRecorded
   ∷ explicitQuadraticTargetShapeRecorded
-  ∷ shellCarrierWall1Recorded
+  ∷ activeWall1ShellCarrierRecorded
   ∷ uniformC0FloorStillOpen
   ∷ familyToFrameGapStillOpen
   ∷ failClosedPromotionWallRecorded
@@ -68,7 +68,7 @@ nstriadCycleFamilyLowerBoundRowCountIs7 =
 data NSTriadCycleFamilyLowerBoundGap : Set where
   oneCycleLawIsNotTheFamilyLaw :
     NSTriadCycleFamilyLowerBoundGap
-  targetShapeDoesNotYetYieldUniformFloor :
+  wall1QuadraticTargetDoesNotYetYieldUniformFamilyFloor :
     NSTriadCycleFamilyLowerBoundGap
   uniformC0GreaterThanZeroStillFalse :
     NSTriadCycleFamilyLowerBoundGap
@@ -81,7 +81,7 @@ canonicalNSTriadCycleFamilyLowerBoundGaps :
   List NSTriadCycleFamilyLowerBoundGap
 canonicalNSTriadCycleFamilyLowerBoundGaps =
   oneCycleLawIsNotTheFamilyLaw
-  ∷ targetShapeDoesNotYetYieldUniformFloor
+  ∷ wall1QuadraticTargetDoesNotYetYieldUniformFamilyFloor
   ∷ uniformC0GreaterThanZeroStillFalse
   ∷ shellCarrierInstantiatedOnlyAsCandidate
   ∷ theoremAndClayPromotionRemainFalse
@@ -108,11 +108,11 @@ canonicalTargetShapeText =
 
 canonicalOText : String
 canonicalOText =
-  "O: record the Wall 1 shell carrier as a candidate-only cycle-family lower-bound boundary."
+  "O: record the active Wall 1 shell carrier as a candidate-only cycle-family lower-bound boundary."
 
 canonicalRText : String
 canonicalRText =
-  "R: distinguish the one-cycle law from the Wall 1 family law and record the d^T (C W^-1 C^T)^dagger d obstruction target."
+  "R: distinguish the one-cycle law from the Wall 1 family quadratic obstruction on the active shell carrier and record the d^T (C W^-1 C^T)^dagger d target."
 
 canonicalCText : String
 canonicalCText =
@@ -120,11 +120,11 @@ canonicalCText =
 
 canonicalSText : String
 canonicalSText =
-  "S: the one-cycle law is recorded separately from the Wall 1 family law, while uniform c0 > 0 remains false."
+  "S: the one-cycle law is recorded separately from the Wall 1 family quadratic obstruction, while the active shell carrier and uniform c0 > 0 remain non-promoting and false."
 
 canonicalLText : String
 canonicalLText =
-  "L: one-cycle law -> Wall 1 family quadratic obstruction -> explicit target shape -> shell carrier -> false uniform floor -> no promotion."
+  "L: one-cycle law -> Wall 1 family quadratic obstruction -> explicit target shape -> active shell carrier -> false uniform family floor -> no promotion."
 
 canonicalPText : String
 canonicalPText =
@@ -136,7 +136,7 @@ canonicalGText =
 
 canonicalFText : String
 canonicalFText =
-  "F: the missing evidence is a uniform c0 > 0 floor on the shell carrier family; that floor is still false."
+  "F: the missing evidence is a uniform c0 > 0 floor on the active shell carrier family; that floor is still false."
 
 record NSTriadCycleFamilyLowerBoundORCSLPGF : Set where
   constructor mkNSTriadCycleFamilyLowerBoundORCSLPGF
@@ -222,6 +222,11 @@ record NSTriadCycleFamilyLowerBoundBoundary : Setω where
     wall1FamilyQuadraticObstructionRecordedHereIsTrue :
       wall1FamilyQuadraticObstructionRecordedHere ≡ true
 
+    activeWall1ShellCarrierRecordedHere :
+      Bool
+    activeWall1ShellCarrierRecordedHereIsTrue :
+      activeWall1ShellCarrierRecordedHere ≡ true
+
     uniformC0GreaterThanZeroProved :
       Bool
     uniformC0GreaterThanZeroProvedIsFalse :
@@ -261,6 +266,6 @@ record NSTriadCycleFamilyLowerBoundBoundary : Setω where
       String
     statementIsCanonical :
       statement ≡
-      "Candidate-only Wall 1 cycle-family lower-bound boundary: the one-cycle law is distinct from the Wall 1 family quadratic obstruction, the target shape d^T (C W^-1 C^T)^dagger d is recorded, and uniform c0 > 0 remains false."
+      "Candidate-only Wall 1 cycle-family lower-bound boundary: the one-cycle law is distinct from the Wall 1 family quadratic obstruction on the active shell carrier, the target shape d^T (C W^-1 C^T)^dagger d is recorded, and uniform c0 > 0 remains false."
 
 open NSTriadCycleFamilyLowerBoundBoundary public

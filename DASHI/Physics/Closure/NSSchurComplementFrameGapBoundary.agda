@@ -14,7 +14,7 @@ open import Data.List.Base using (List; []; _∷_)
 --
 --   S_N = (I - K11) - K10 (I - K00)^-1 K01
 --
--- together with the diagonal shell-gap and cross-shell coupling roles.
+-- together with the active shell-carrier, diagonal shell-gap, and cross-shell coupling roles.
 -- It keeps the non-adversarial K01 / Schur bridge explicit and unproved, and
 -- leaves theorem/full-NS/Clay promotion false.
 
@@ -25,13 +25,15 @@ listLength (_ ∷ xs) = suc (listLength xs)
 data NSSchurComplementFrameGapRow : Set where
   schurTargetRecorded :
     NSSchurComplementFrameGapRow
+  activeWall1ShellCarrierRecorded :
+    NSSchurComplementFrameGapRow
   k00DiagonalGapRecorded :
     NSSchurComplementFrameGapRow
   k11DiagonalGapRecorded :
     NSSchurComplementFrameGapRow
   k01CrossShellCouplingRecorded :
     NSSchurComplementFrameGapRow
-  nonAdversarialCrossShellBridgeRecorded :
+  nonAdversarialK01SchurBridgeRecorded :
     NSSchurComplementFrameGapRow
   frameGapTargetRecorded :
     NSSchurComplementFrameGapRow
@@ -42,10 +44,11 @@ canonicalNSSchurComplementFrameGapRows :
   List NSSchurComplementFrameGapRow
 canonicalNSSchurComplementFrameGapRows =
   schurTargetRecorded
+  ∷ activeWall1ShellCarrierRecorded
   ∷ k00DiagonalGapRecorded
   ∷ k11DiagonalGapRecorded
   ∷ k01CrossShellCouplingRecorded
-  ∷ nonAdversarialCrossShellBridgeRecorded
+  ∷ nonAdversarialK01SchurBridgeRecorded
   ∷ frameGapTargetRecorded
   ∷ failClosedPromotionWallRecorded
   ∷ []
@@ -54,9 +57,9 @@ nsschurComplementFrameGapRowCount : Nat
 nsschurComplementFrameGapRowCount =
   listLength canonicalNSSchurComplementFrameGapRows
 
-nsschurComplementFrameGapRowCountIs7 :
-  nsschurComplementFrameGapRowCount ≡ 7
-nsschurComplementFrameGapRowCountIs7 = refl
+nsschurComplementFrameGapRowCountIs8 :
+  nsschurComplementFrameGapRowCount ≡ 8
+nsschurComplementFrameGapRowCountIs8 = refl
 
 data NSSchurComplementFrameGapGap : Set where
   diagonalShellGapsOnlyNumerical :
@@ -65,7 +68,7 @@ data NSSchurComplementFrameGapGap : Set where
     NSSchurComplementFrameGapGap
   naiveNormBoundInsufficient :
     NSSchurComplementFrameGapGap
-  nonAdversarialCrossShellBridgeUnproved :
+  nonAdversarialK01SchurBridgeUnproved :
     NSSchurComplementFrameGapGap
   uniformSchurGapStillOpen :
     NSSchurComplementFrameGapGap
@@ -78,7 +81,7 @@ canonicalNSSchurComplementFrameGapGaps =
   diagonalShellGapsOnlyNumerical
   ∷ crossShellCouplingOnlyNumerical
   ∷ naiveNormBoundInsufficient
-  ∷ nonAdversarialCrossShellBridgeUnproved
+  ∷ nonAdversarialK01SchurBridgeUnproved
   ∷ uniformSchurGapStillOpen
   ∷ theoremAndClayPromotionRemainFalse
   ∷ []
@@ -109,15 +112,15 @@ canonicalCText =
 
 canonicalSText : String
 canonicalSText =
-  "S: diagonal shell gaps and Schur telemetry exist numerically, but the non-adversarial K01 bridge is still unproved."
+  "S: the active shell carrier, diagonal shell gaps, and Schur telemetry exist numerically, but the non-adversarial K01 / Schur bridge is still unproved."
 
 canonicalLText : String
 canonicalLText =
-  "L: diagonal shell gaps -> cross-shell coupling audit -> Schur-complement positivity target -> frame gap -> only then Wall 1 stability."
+  "L: active shell carrier -> diagonal shell gaps -> K01 cross-shell coupling audit -> Schur-complement positivity target -> frame gap -> only then Wall 1 stability."
 
 canonicalPText : String
 canonicalPText =
-  "P: treat the Schur-complement target as the live Wall 1b theorem boundary and promote nothing until the K01 bridge is proved."
+  "P: treat the Schur-complement target as the live Wall 1b theorem boundary and promote nothing until the active shell carrier and K01 / Schur bridge are proved."
 
 canonicalGText : String
 canonicalGText =
@@ -125,7 +128,7 @@ canonicalGText =
 
 canonicalFText : String
 canonicalFText =
-  "F: the missing evidence is a non-adversarial cross-shell coupling bound strong enough to keep the Schur complement positive uniformly."
+  "F: the missing evidence is an active shell-carrier coupling bound together with a non-adversarial K01 / Schur coupling bound strong enough to keep the Schur complement positive uniformly."
 
 record NSSchurComplementFrameGapORCSLPGF : Set where
   constructor mkNSSchurComplementFrameGapORCSLPGF
@@ -196,15 +199,20 @@ record NSSchurComplementFrameGapBoundary : Setω where
     schurTargetIsCanonical :
       schurTarget ≡ canonicalSchurTargetText
 
+    activeWall1ShellCarrierRecordedHere :
+      Bool
+    activeWall1ShellCarrierRecordedHereIsTrue :
+      activeWall1ShellCarrierRecordedHere ≡ true
+
     diagonalShellGapsProved :
       Bool
     diagonalShellGapsProvedIsFalse :
       diagonalShellGapsProved ≡ false
 
-    crossShellCouplingBridgeProved :
+    k01SchurBridgeProved :
       Bool
-    crossShellCouplingBridgeProvedIsFalse :
-      crossShellCouplingBridgeProved ≡ false
+    k01SchurBridgeProvedIsFalse :
+      k01SchurBridgeProved ≡ false
 
     schurComplementGapProved :
       Bool
@@ -235,7 +243,7 @@ record NSSchurComplementFrameGapBoundary : Setω where
       String
     statementIsCanonical :
       statement ≡
-      "Candidate-only Schur-complement frame-gap boundary: the target S_N = (I - K11) - K10 (I - K00)^-1 K01 is recorded, but the non-adversarial cross-shell bridge and the uniform frame gap remain unproved."
+      "Candidate-only Schur-complement frame-gap boundary: the active shell carrier records the target S_N = (I - K11) - K10 (I - K00)^-1 K01, but the non-adversarial K01 / Schur bridge and the uniform frame gap remain unproved."
 
 open NSSchurComplementFrameGapBoundary public
 
@@ -253,6 +261,8 @@ canonicalNSSchurComplementFrameGapBoundary =
     refl
     canonicalSchurTargetText
     refl
+    true
+    refl
     false
     refl
     false
@@ -267,5 +277,5 @@ canonicalNSSchurComplementFrameGapBoundary =
     refl
     canonicalNSSchurComplementFrameGapORCSLPGF
     refl
-    "Candidate-only Schur-complement frame-gap boundary: the target S_N = (I - K11) - K10 (I - K00)^-1 K01 is recorded, but the non-adversarial cross-shell bridge and the uniform frame gap remain unproved."
+    "Candidate-only Schur-complement frame-gap boundary: the active shell carrier records the target S_N = (I - K11) - K10 (I - K00)^-1 K01, but the non-adversarial K01 / Schur bridge and the uniform frame gap remain unproved."
     refl

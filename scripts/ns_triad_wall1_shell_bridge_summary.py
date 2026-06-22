@@ -38,6 +38,14 @@ DEFAULT_HESSIAN_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_low_frustration_hessian_scan_N128_20260621.json"
 )
+DEFAULT_CYCLE_PACKING_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_cycle_packing_overlap_scan_N128_20260622.json"
+)
+DEFAULT_K01_GEOMETRY_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_k01_geometry_audit_scan_N128_20260621.json"
+)
 DEFAULT_SCHUR_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_schur_directional_audit_scan_N128_20260622.json"
@@ -51,7 +59,7 @@ CONTROL_CARD = {
     "O": "Summarize the active NS triad Wall 1 shell-level telemetry surfaces.",
     "R": (
         "Join the shell-indexed phase-regime, frame-stability, cocycle-floor, cycle-obstruction, "
-        "Hessian basin, and optional Schur directional audit outputs into one compact fail-closed Wall 1 summary."
+        "cycle-packing overlap, K01 geometry, Hessian basin, and optional Schur directional audit outputs into one compact fail-closed Wall 1 summary."
     ),
     "C": SCRIPT_NAME,
     "S": "Candidate-only shell bridge summary; all outputs remain empirical and non-promoting.",
@@ -68,6 +76,11 @@ LOWER_BOUND_SUPPORT_KEYS = (
     "cycle_lower_bound_normalized_max",
     "cycle_lower_bound_normalized_mean",
     "cycle_lower_bound_normalized_sum",
+    "family_obstruction_packing_support",
+    "cycle_packing_overlap_proxy",
+    "cycle_packing_overlap",
+    "packing_overlap_proxy",
+    "packing_overlap",
     "lower_bound_proxy",
     "mean_cycle_lower_bound",
     "max_cycle_lower_bound",
@@ -91,7 +104,9 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--frame-stability-json", type=Path, default=DEFAULT_FRAME_STABILITY_JSON)
     parser.add_argument("--cocycle-floor-json", type=Path, default=DEFAULT_COCYCLE_FLOOR_JSON)
     parser.add_argument("--cycle-json", type=Path, default=DEFAULT_CYCLE_JSON)
+    parser.add_argument("--cycle-packing-json", type=Path, default=DEFAULT_CYCLE_PACKING_JSON)
     parser.add_argument("--hessian-json", type=Path, default=DEFAULT_HESSIAN_JSON)
+    parser.add_argument("--k01-geometry-json", type=Path, default=DEFAULT_K01_GEOMETRY_JSON)
     parser.add_argument("--schur-json", type=Path, default=DEFAULT_SCHUR_JSON)
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT_JSON)
     parser.add_argument("--pretty", action="store_true")
@@ -139,13 +154,35 @@ def _rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
         "phase_regime_separation_rows",
         "triad_frame_stability_rows",
         "triad_cycle_obstruction_rows",
+        "triad_cycle_packing_rows",
+        "cycle_packing_rows",
+        "cycle_packing_overlap_rows",
+        "family_obstruction_packing_rows",
         "low_frustration_hessian_rows",
         "triad_cocycle_floor_rows",
+        "k01_geometry_rows",
+        "geometry_rows",
     ):
         value = payload.get(key)
         if isinstance(value, list):
             return value
     return []
+
+
+def _first_rows(payload: dict[str, Any], candidate_keys: tuple[str, ...]) -> list[dict[str, Any]]:
+    for key in candidate_keys:
+        value = payload.get(key)
+        if isinstance(value, list):
+            return value
+    return []
+
+
+def _first_float(row: dict[str, Any], keys: tuple[str, ...]) -> float | None:
+    for key in keys:
+        value = _coerce_float(row.get(key))
+        if value is not None:
+            return value
+    return None
 
 
 def _schur_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
@@ -159,6 +196,36 @@ def _schur_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
         if isinstance(value, list):
             return value
     return []
+
+
+def _cycle_packing_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    return _first_rows(
+        payload,
+        (
+            "triad_cycle_packing_overlap_rows",
+            "rows",
+            "family_rows",
+            "cycle_family_rows",
+            "cycle_packing_rows",
+            "cycle_packing_overlap_rows",
+            "family_obstruction_packing_rows",
+            "packing_rows",
+            "overlap_rows",
+        ),
+    )
+
+
+def _k01_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    return _first_rows(
+        payload,
+        (
+            "rows",
+            "k01_rows",
+            "k01_geometry_rows",
+            "geometry_rows",
+            "audit_rows",
+        ),
+    )
 
 
 def _cocycle_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
@@ -244,6 +311,158 @@ def _lower_bound_support(row: dict[str, Any]) -> tuple[float | None, str | None,
     return best_value, best_source, support_count
 
 
+def _packing_metrics(row: dict[str, Any] | None) -> dict[str, float | None]:
+    if row is None:
+        return {
+            "family_obstruction_packing_support": None,
+            "family_obstruction_packing_overlap": None,
+            "family_obstruction_packing_lower_bound": None,
+            "family_obstruction_packing_ratio": None,
+            "cycle_family_support_overlap_mean": None,
+            "cycle_family_support_overlap_max": None,
+            "cycle_family_support_overlap_density": None,
+            "cycle_family_lower_bound_normalized_mean": None,
+            "cycle_family_lower_bound_normalized_max": None,
+            "cycle_family_lower_bound_normalized_sum": None,
+            "cycle_family_lower_bound": None,
+            "cycle_family_lower_bound_max": None,
+            "cycle_family_packing_concentration": None,
+            "cycle_family_obstruction_collapse_score": None,
+            "cycle_family_normalized_support_vs_F_max": None,
+            "cycle_family_lower_bound_support_over_F_max": None,
+            "cycle_family_lower_bound_support_weighted_sum": None,
+        }
+    support = _first_float(
+        row,
+        (
+            "family_obstruction_packing_support",
+            "cycle_family_support_coverage",
+            "cycle_family_support_overlap_mean",
+            "cycle_family_support_overlap_row_mean",
+            "cycle_family_support_overlap_max",
+            "cycle_family_support_overlap_density",
+            "cycle_family_packing_concentration",
+        ),
+    )
+    overlap = _first_float(
+        row,
+        (
+            "family_obstruction_packing_overlap",
+            "cycle_family_support_overlap_max",
+            "cycle_family_support_overlap_mean",
+            "cycle_family_support_overlap_row_max",
+            "cycle_family_support_overlap_density",
+        ),
+    )
+    lower_bound = _first_float(
+        row,
+        (
+            "family_obstruction_packing_lower_bound",
+            "cycle_family_lower_bound_normalized_upper",
+            "cycle_family_lower_bound_normalized_mean",
+            "cycle_family_lower_bound_normalized_max",
+            "cycle_family_lower_bound_normalized_sum",
+            "cycle_family_lower_bound",
+            "cycle_family_lower_bound_max",
+        ),
+    )
+    ratio = _first_float(row, ("family_obstruction_packing_ratio",))
+    if ratio is None and support is not None and support > 0.0 and lower_bound is not None:
+        ratio = lower_bound / support
+    if ratio is None:
+        ratio = _first_float(
+            row,
+            (
+                "packing_ratio_proxy",
+                "packing_ratio",
+                "cycle_family_obstruction_collapse_score",
+                "cycle_family_support_overlap_density",
+            ),
+        )
+    return {
+        "family_obstruction_packing_support": support,
+        "family_obstruction_packing_overlap": overlap,
+        "family_obstruction_packing_lower_bound": lower_bound,
+        "family_obstruction_packing_ratio": ratio,
+        "cycle_family_support_overlap_mean": _first_float(row, ("cycle_family_support_overlap_mean",)),
+        "cycle_family_support_overlap_max": _first_float(row, ("cycle_family_support_overlap_max",)),
+        "cycle_family_support_overlap_density": _first_float(row, ("cycle_family_support_overlap_density",)),
+        "cycle_family_lower_bound_normalized_mean": _first_float(row, ("cycle_family_lower_bound_normalized_mean",)),
+        "cycle_family_lower_bound_normalized_max": _first_float(row, ("cycle_family_lower_bound_normalized_max",)),
+        "cycle_family_lower_bound_normalized_sum": _first_float(row, ("cycle_family_lower_bound_normalized_sum",)),
+        "cycle_family_lower_bound": _first_float(row, ("cycle_family_lower_bound",)),
+        "cycle_family_lower_bound_max": _first_float(row, ("cycle_family_lower_bound_max",)),
+        "cycle_family_packing_concentration": _first_float(row, ("cycle_family_packing_concentration",)),
+        "cycle_family_obstruction_collapse_score": _first_float(row, ("cycle_family_obstruction_collapse_score",)),
+        "cycle_family_normalized_support_vs_F_max": _first_float(row, ("cycle_family_normalized_support_vs_F_max",)),
+        "cycle_family_lower_bound_support_over_F_max": _first_float(row, ("cycle_family_lower_bound_support_over_F_max",)),
+        "cycle_family_lower_bound_support_weighted_sum": _first_float(row, ("cycle_family_lower_bound_support_weighted_sum",)),
+    }
+
+
+def _k01_metrics(row: dict[str, Any] | None) -> dict[str, float | None]:
+    if row is None:
+        return {
+            "k01_geometry_ratio": None,
+            "k01_ratio_proxy": None,
+            "k01_geometry_signal": None,
+            "k01_geometry_lower_bound": None,
+            "geometry_alignment_proxy": None,
+            "geometry_stability_proxy": None,
+            "directional_gap_proxy": None,
+            "directional_gap_lower_bound": None,
+            "frame_geometry_proxy": None,
+            "projection_proxy": None,
+            "combined_operator_gap_proxy": None,
+            "dangerous_subspace_weight_fraction": None,
+            "k01_operator_norm": None,
+        }
+    ratio = _first_float(row, ("k01_geometry_ratio",))
+    ratio_proxy = _first_float(row, ("k01_ratio_proxy",))
+    signal = _first_float(
+        row,
+        (
+            "k01_geometry_signal",
+            "off_diagonal_share_proxy",
+            "directional_off_diagonal_pressure_proxy",
+            "off_diagonal_vs_diagonal_ratio",
+            "geometry_alignment_proxy",
+            "directional_gap_proxy",
+            "geometry_stability_proxy",
+            "k01_ratio_proxy",
+            "k01_geometry_ratio",
+        ),
+    )
+    lower_bound = _first_float(
+        row,
+        (
+            "k01_geometry_lower_bound",
+            "directional_gap_lower_bound",
+            "directional_gap_proxy",
+            "geometry_lower_bound_proxy",
+            "geometry_lower_bound",
+        ),
+    )
+    return {
+        "k01_geometry_ratio": ratio,
+        "k01_ratio_proxy": ratio_proxy,
+        "k01_geometry_signal": signal,
+        "k01_geometry_lower_bound": lower_bound,
+        "geometry_alignment_proxy": _first_float(row, ("geometry_alignment_proxy",)),
+        "geometry_stability_proxy": _first_float(row, ("geometry_stability_proxy",)),
+        "directional_gap_proxy": _first_float(row, ("directional_gap_proxy",)),
+        "directional_gap_lower_bound": _first_float(row, ("directional_gap_lower_bound",)),
+        "frame_geometry_proxy": _first_float(row, ("frame_geometry_proxy",)),
+        "projection_proxy": _first_float(row, ("projection_proxy",)),
+        "combined_operator_gap_proxy": _first_float(row, ("combined_operator_gap_proxy",)),
+        "dangerous_subspace_weight_fraction": _first_float(row, ("dangerous_subspace_weight_fraction",)),
+        "off_diagonal_share_proxy": _first_float(row, ("off_diagonal_share_proxy",)),
+        "directional_off_diagonal_pressure_proxy": _first_float(row, ("directional_off_diagonal_pressure_proxy",)),
+        "off_diagonal_vs_diagonal_ratio": _first_float(row, ("off_diagonal_vs_diagonal_ratio",)),
+        "k01_operator_norm": _first_float(row, ("k01_operator_norm",)),
+    }
+
+
 def _schur_directional_metrics(row: dict[str, Any]) -> dict[str, float | None]:
     directional_gap = _coerce_float(row.get("schur_directional_gap_proxy"))
     if directional_gap is None:
@@ -289,14 +508,18 @@ def main() -> int:
     frame_payload = _read_json(args.frame_stability_json)
     cocycle_payload = _read_json(args.cocycle_floor_json)
     cycle_payload = _read_json(args.cycle_json)
+    cycle_packing_payload = _read_json(args.cycle_packing_json)
     hessian_payload = _read_json(args.hessian_json)
+    k01_geometry_payload = _read_json(args.k01_geometry_json)
     schur_payload = _read_json(args.schur_json) if args.schur_json is not None else {}
 
     phase_by_key = {key: row for row in _rows(phase_payload) if (key := _frame_shell_key(row)) is not None}
     cocycle_by_key = {key: row for row in _cocycle_rows(cocycle_payload) if (key := _frame_shell_key(row)) is not None}
     frame_by_frame = {key: row for row in _rows(frame_payload) if (key := _frame_key(row)) is not None}
     cycle_by_frame = {key: row for row in _rows(cycle_payload) if (key := _frame_key(row)) is not None}
+    cycle_packing_by_key = {key: row for row in _cycle_packing_rows(cycle_packing_payload) if (key := _frame_shell_key(row)) is not None}
     hessian_by_frame = {key: row for row in _rows(hessian_payload) if (key := _frame_key(row)) is not None}
+    k01_geometry_by_key = {key: row for row in _k01_rows(k01_geometry_payload) if (key := _frame_shell_key(row)) is not None}
     schur_by_key = {key: row for row in _schur_rows(schur_payload) if (key := _frame_shell_key(row)) is not None}
 
     shared_keys = sorted(set(phase_by_key) & set(cocycle_by_key))
@@ -319,6 +542,28 @@ def main() -> int:
     schur_gap_lower_bounds: list[float] = []
     schur_gap_residuals: list[float] = []
     schur_gap_ratios: list[float] = []
+    packing_supports: list[float] = []
+    packing_support_overlaps: list[float] = []
+    packing_lower_bounds: list[float] = []
+    packing_ratios: list[float] = []
+    packing_support_phase_xs: list[float] = []
+    packing_support_phase_ys: list[float] = []
+    packing_support_floor_xs: list[float] = []
+    packing_support_floor_ys: list[float] = []
+    packing_support_cycle_xs: list[float] = []
+    packing_support_cycle_ys: list[float] = []
+    packing_support_k01_xs: list[float] = []
+    packing_support_k01_ys: list[float] = []
+    k01_signals: list[float] = []
+    k01_alignments: list[float] = []
+    k01_stabilities: list[float] = []
+    k01_directional_gaps: list[float] = []
+    k01_signal_phase_xs: list[float] = []
+    k01_signal_phase_ys: list[float] = []
+    k01_signal_floor_xs: list[float] = []
+    k01_signal_floor_ys: list[float] = []
+    k01_signal_cycle_xs: list[float] = []
+    k01_signal_cycle_ys: list[float] = []
     support_sources: list[str] = []
     support_counts: list[int] = []
 
@@ -328,7 +573,9 @@ def main() -> int:
         cocycle_row = cocycle_by_key[key]
         frame_row = frame_by_frame.get(frame, {})
         cycle_row = cycle_by_frame.get(frame, {})
+        packing_row = cycle_packing_by_key.get(key)
         hessian_row = hessian_by_frame.get(frame, {})
+        k01_row = k01_geometry_by_key.get(key)
         schur_row = schur_by_key.get(key, {})
         phase_gap = _coerce_float(phase_row.get("optimized_lambda_gap_proxy"))
         cocycle_bound = _coerce_float(cocycle_row.get("mean_cycle_lower_bound"))
@@ -344,6 +591,8 @@ def main() -> int:
         strongest_support, strongest_source, support_count = _lower_bound_support(cocycle_row)
         cocycle_cycle_defect = _coerce_float(cocycle_row.get("cycle_defect_proxy"))
         cocycle_floor_proxy = _coerce_float(cocycle_row.get("frustration_floor_proxy"))
+        packing_metrics = _packing_metrics(packing_row)
+        k01_metrics = _k01_metrics(k01_row)
         schur_metrics = _schur_directional_metrics(schur_row)
         bridge_rows.append(
             {
@@ -361,6 +610,36 @@ def main() -> int:
                 "lower_bound_proxy": _coerce_float(cocycle_row.get("lower_bound_proxy")),
                 "cycle_defect_proxy": cocycle_cycle_defect,
                 "frustration_floor_proxy": cocycle_floor_proxy,
+                "family_obstruction_packing_support": packing_metrics["family_obstruction_packing_support"],
+                "family_obstruction_packing_overlap": packing_metrics["family_obstruction_packing_overlap"],
+                "family_obstruction_packing_lower_bound": packing_metrics["family_obstruction_packing_lower_bound"],
+                "family_obstruction_packing_ratio": packing_metrics["family_obstruction_packing_ratio"],
+                "cycle_family_support_overlap_mean": packing_metrics["cycle_family_support_overlap_mean"],
+                "cycle_family_support_overlap_max": packing_metrics["cycle_family_support_overlap_max"],
+                "cycle_family_support_overlap_density": packing_metrics["cycle_family_support_overlap_density"],
+                "cycle_family_lower_bound_normalized_mean": packing_metrics["cycle_family_lower_bound_normalized_mean"],
+                "cycle_family_lower_bound_normalized_max": packing_metrics["cycle_family_lower_bound_normalized_max"],
+                "cycle_family_lower_bound_normalized_sum": packing_metrics["cycle_family_lower_bound_normalized_sum"],
+                "cycle_family_lower_bound": packing_metrics["cycle_family_lower_bound"],
+                "cycle_family_lower_bound_max": packing_metrics["cycle_family_lower_bound_max"],
+                "cycle_family_packing_concentration": packing_metrics["cycle_family_packing_concentration"],
+                "cycle_family_obstruction_collapse_score": packing_metrics["cycle_family_obstruction_collapse_score"],
+                "cycle_family_normalized_support_vs_F_max": packing_metrics["cycle_family_normalized_support_vs_F_max"],
+                "cycle_family_lower_bound_support_over_F_max": packing_metrics["cycle_family_lower_bound_support_over_F_max"],
+                "cycle_family_lower_bound_support_weighted_sum": packing_metrics["cycle_family_lower_bound_support_weighted_sum"],
+                "k01_geometry_ratio": k01_metrics["k01_geometry_ratio"],
+                "k01_ratio_proxy": k01_metrics["k01_ratio_proxy"],
+                "k01_geometry_signal": k01_metrics["k01_geometry_signal"],
+                "k01_geometry_lower_bound": k01_metrics["k01_geometry_lower_bound"],
+                "geometry_alignment_proxy": k01_metrics["geometry_alignment_proxy"],
+                "geometry_stability_proxy": k01_metrics["geometry_stability_proxy"],
+                "directional_gap_proxy": k01_metrics["directional_gap_proxy"],
+                "directional_gap_lower_bound": k01_metrics["directional_gap_lower_bound"],
+                "frame_geometry_proxy": k01_metrics["frame_geometry_proxy"],
+                "projection_proxy": k01_metrics["projection_proxy"],
+                "combined_operator_gap_proxy": k01_metrics["combined_operator_gap_proxy"],
+                "dangerous_subspace_weight_fraction": k01_metrics["dangerous_subspace_weight_fraction"],
+                "k01_operator_norm": k01_metrics["k01_operator_norm"],
                 "strongest_lower_bound_support": strongest_support,
                 "strongest_lower_bound_source": strongest_source,
                 "strongest_lower_bound_support_count": int(support_count),
@@ -390,6 +669,45 @@ def main() -> int:
             schur_gap_residuals.append(float(schur_metrics["schur_directional_gap_residual"]))
         if schur_metrics["schur_directional_gap_ratio"] is not None:
             schur_gap_ratios.append(float(schur_metrics["schur_directional_gap_ratio"]))
+        if packing_metrics["family_obstruction_packing_support"] is not None:
+            support_value = float(packing_metrics["family_obstruction_packing_support"])
+            packing_supports.append(support_value)
+            if phase_gap is not None:
+                packing_support_phase_xs.append(support_value)
+                packing_support_phase_ys.append(phase_gap)
+            if floor_ratio is not None:
+                packing_support_floor_xs.append(support_value)
+                packing_support_floor_ys.append(floor_ratio)
+            if cocycle_bound is not None:
+                packing_support_cycle_xs.append(support_value)
+                packing_support_cycle_ys.append(cocycle_bound)
+        if packing_metrics["family_obstruction_packing_overlap"] is not None:
+            packing_support_overlaps.append(float(packing_metrics["family_obstruction_packing_overlap"]))
+        if packing_metrics["family_obstruction_packing_lower_bound"] is not None:
+            packing_lower_bounds.append(float(packing_metrics["family_obstruction_packing_lower_bound"]))
+        if packing_metrics["family_obstruction_packing_ratio"] is not None:
+            packing_ratios.append(float(packing_metrics["family_obstruction_packing_ratio"]))
+        if k01_metrics["k01_geometry_signal"] is not None:
+            k01_value = float(k01_metrics["k01_geometry_signal"])
+            k01_signals.append(k01_value)
+            if phase_gap is not None:
+                k01_signal_phase_xs.append(k01_value)
+                k01_signal_phase_ys.append(phase_gap)
+            if floor_ratio is not None:
+                k01_signal_floor_xs.append(k01_value)
+                k01_signal_floor_ys.append(floor_ratio)
+            if cocycle_bound is not None:
+                k01_signal_cycle_xs.append(k01_value)
+                k01_signal_cycle_ys.append(cocycle_bound)
+        if k01_metrics["geometry_alignment_proxy"] is not None:
+            k01_alignments.append(float(k01_metrics["geometry_alignment_proxy"]))
+        if k01_metrics["geometry_stability_proxy"] is not None:
+            k01_stabilities.append(float(k01_metrics["geometry_stability_proxy"]))
+        if k01_metrics["directional_gap_proxy"] is not None:
+            k01_directional_gaps.append(float(k01_metrics["directional_gap_proxy"]))
+        if packing_metrics["family_obstruction_packing_support"] is not None and k01_metrics["k01_geometry_signal"] is not None:
+            packing_support_k01_xs.append(float(packing_metrics["family_obstruction_packing_support"]))
+            packing_support_k01_ys.append(float(k01_metrics["k01_geometry_signal"]))
         if strongest_support is not None and strongest_source is not None:
             strongest_supports.append(strongest_support)
             if phase_gap is not None:
@@ -418,7 +736,9 @@ def main() -> int:
             "frame_stability_json": str(args.frame_stability_json),
             "cocycle_floor_json": str(args.cocycle_floor_json),
             "cycle_json": str(args.cycle_json),
+            "cycle_packing_json": str(args.cycle_packing_json),
             "hessian_json": str(args.hessian_json),
+            "k01_geometry_json": str(args.k01_geometry_json),
             "schur_json": str(args.schur_json) if args.schur_json is not None else None,
         },
         "rows": bridge_rows,
@@ -434,6 +754,22 @@ def main() -> int:
             "strongest_lower_bound_support_max": max(strongest_supports) if strongest_supports else None,
             "strongest_lower_bound_support_count_mean": _mean([float(value) for value in support_counts]) if support_counts else None,
             "strongest_lower_bound_source_modes": sorted({source for source in support_sources}) if support_sources else [],
+            "family_obstruction_packing_support_mean": _mean(packing_supports),
+            "family_obstruction_packing_support_max": max(packing_supports) if packing_supports else None,
+            "family_obstruction_packing_overlap_mean": _mean(packing_support_overlaps),
+            "family_obstruction_packing_overlap_max": max(packing_support_overlaps) if packing_support_overlaps else None,
+            "family_obstruction_packing_lower_bound_mean": _mean(packing_lower_bounds),
+            "family_obstruction_packing_lower_bound_max": max(packing_lower_bounds) if packing_lower_bounds else None,
+            "family_obstruction_packing_ratio_mean": _mean(packing_ratios),
+            "family_obstruction_packing_ratio_max": max(packing_ratios) if packing_ratios else None,
+            "k01_geometry_signal_mean": _mean(k01_signals),
+            "k01_geometry_signal_max": max(k01_signals) if k01_signals else None,
+            "geometry_alignment_proxy_mean": _mean(k01_alignments),
+            "geometry_alignment_proxy_max": max(k01_alignments) if k01_alignments else None,
+            "geometry_stability_proxy_mean": _mean(k01_stabilities),
+            "geometry_stability_proxy_max": max(k01_stabilities) if k01_stabilities else None,
+            "directional_gap_proxy_mean": _mean(k01_directional_gaps),
+            "directional_gap_proxy_max": max(k01_directional_gaps) if k01_directional_gaps else None,
             "phase_gap_vs_cycle_bound_correlation": _pearson(phase_eps, cocycle_bounds),
             "phase_gap_vs_frame_margin_correlation": _pearson(phase_eps, frame_gaps),
             "floor_ratio_vs_frame_margin_correlation": _pearson(floor_ratio_xs, floor_ratio_ys),
@@ -444,6 +780,34 @@ def main() -> int:
             "strongest_lower_bound_support_vs_frame_margin_correlation": _pearson(
                 strongest_support_frame_xs,
                 strongest_support_frame_ys,
+            ),
+            "family_obstruction_packing_support_vs_phase_gap_correlation": _pearson(
+                packing_support_phase_xs,
+                packing_support_phase_ys,
+            ),
+            "family_obstruction_packing_support_vs_floor_ratio_correlation": _pearson(
+                packing_support_floor_xs,
+                packing_support_floor_ys,
+            ),
+            "family_obstruction_packing_support_vs_cycle_bound_correlation": _pearson(
+                packing_support_cycle_xs,
+                packing_support_cycle_ys,
+            ),
+            "k01_geometry_signal_vs_phase_gap_correlation": _pearson(
+                k01_signal_phase_xs,
+                k01_signal_phase_ys,
+            ),
+            "k01_geometry_signal_vs_floor_ratio_correlation": _pearson(
+                k01_signal_floor_xs,
+                k01_signal_floor_ys,
+            ),
+            "k01_geometry_signal_vs_cycle_bound_correlation": _pearson(
+                k01_signal_cycle_xs,
+                k01_signal_cycle_ys,
+            ),
+            "family_obstruction_packing_support_vs_k01_geometry_signal_correlation": _pearson(
+                packing_support_k01_xs,
+                packing_support_k01_ys,
             ),
             "schur_directional_gap_proxy_mean": _mean(schur_gap_values),
             "schur_directional_gap_proxy_max": max(schur_gap_values) if schur_gap_values else None,
