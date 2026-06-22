@@ -98,6 +98,25 @@ Current odd-lane / topology intake note for `2026-06-20`:
   authority are not promoted.
 
 Current NS Clay action note for `2026-06-20`:
+- Wall 1 phase-regime / cocycle-floor / floor-to-frame tranche is now
+  recorded for `2026-06-22`. Artifacts:
+  `DASHI/Physics/Closure/NSPhaseRegimeSeparationBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadCocycleFrustrationFloorBoundary.agda`,
+  `DASHI/Physics/Closure/NSFloorToFrameStabilityBoundary.agda`,
+  `scripts/ns_triad_phase_regime_separation_scan.py`,
+  `scripts/check_ns_triad_phase_regime_separation_scan.py`,
+  `scripts/ns_triad_frame_stability_scan.py`,
+  `scripts/check_ns_triad_frame_stability_scan.py`,
+  `scripts/ns_triad_cocycle_floor_scan.py`,
+  `scripts/check_ns_triad_cocycle_floor_scan.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`. The route now
+  records random-phase-vs-optimized shell telemetry as candidate-only phase
+  regime separation, an explicit cocycle-frustration floor boundary around
+  cycle-defect lower-bound targets, and the floor-to-frame stability warning
+  that a scalar floor alone does not prove `K_N < 1`. This remains
+  fail-closed and non-promoting: no uniform cocycle floor theorem is proved,
+  no floor-to-frame bridge is proved, and Wall 1 remains open.
 - Wall 1 entropy-barrier / Wall 2 residence-compression tranche is now
   recorded for `2026-06-22`. Artifacts:
   `DASHI/Physics/Closure/NSTriadEntropyBarrierTheoremBoundary.agda`,

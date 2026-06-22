@@ -1,0 +1,2455 @@
+{
+  "C": "scripts/ns_triad_frame_stability_scan.py",
+  "F": "This script records finite operator proxies only; it does not prove any stability or decomposition claim.",
+  "G": "No theorem, Clay, or route promotion is inferred from this scan.",
+  "L": "Load raw frames, select dominant Fourier-vorticity modes, form resonant triads, split them into positive-backbone and negative-frame families, and emit operator telemetry.",
+  "O": "Measure candidate frame-stability telemetry around the selected K_N carrier.",
+  "P": "FAIL_CLOSED_NS_TRIAD_FRAME_STABILITY_SCAN",
+  "R": "Build positive-backbone and negative-frame triad operator proxies from the selected mode carrier, then summarize frame-stability and stratum-aware decomposition signals.",
+  "S": "Telemetry only; the carrier, operator family, and stratum proxy are empirical and non-promoting.",
+  "aggregate": {
+    "backbone_gap_vs_negative_gap_correlation": -1.0,
+    "combined_operator_gap_proxy_mean": 8035616284011914.0,
+    "decomposition_vs_negative_mass_correlation": -1.0,
+    "error_frames": 0,
+    "frame_stability_margin_proxy_mean": 0.0,
+    "frame_stability_proxy_mean": 5.960870058081516e-19,
+    "frame_stability_vs_decomposition_correlation": -1.0,
+    "frame_stability_vs_negative_mass_correlation": 1.0,
+    "negative_frame_operator_gap_proxy_mean": 0.2137741658619356,
+    "ok_frames": 2,
+    "partial_frames": 11,
+    "pool_multiplier": 24,
+    "positive_backbone_operator_gap_proxy_mean": 0.26498011883121825,
+    "positive_backbone_vs_negative_frame_gap_ratio_mean": 1.8679976536050313,
+    "processed_frames": 13,
+    "selected_mode_count_mean": 18.0,
+    "stratum_cross_mass_ratio_mean": 1.0,
+    "stratum_decomposition_proxy_mean": 0.7491825391767535,
+    "stratum_internal_mass_ratio_mean": 0.0,
+    "top_k": 48,
+    "triad_count_mean": 18.0,
+    "triad_count_total": 36,
+    "triad_negative_frame_mass_ratio_mean": 0.3411807352728711,
+    "triad_phase_coherence_mean": -0.2592381778950272,
+    "triad_positive_backbone_mass_ratio_mean": 0.08194255737784395,
+    "triad_sample_limit": 8,
+    "triad_shell_spread_mean": 26.699492901009783,
+    "triad_shell_spread_p95_mean": 30.511833870221306,
+    "triad_weight_sum_mean": 3.639446662855096e+17,
+    "zero_eps": 1e-12
+  },
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "contract": "ns_triad_frame_stability_scan",
+  "control_card": {
+    "C": "scripts/ns_triad_frame_stability_scan.py",
+    "F": "This script records finite operator proxies only; it does not prove any stability or decomposition claim.",
+    "G": "No theorem, Clay, or route promotion is inferred from this scan.",
+    "L": "Load raw frames, select dominant Fourier-vorticity modes, form resonant triads, split them into positive-backbone and negative-frame families, and emit operator telemetry.",
+    "O": "Measure candidate frame-stability telemetry around the selected K_N carrier.",
+    "P": "FAIL_CLOSED_NS_TRIAD_FRAME_STABILITY_SCAN",
+    "R": "Build positive-backbone and negative-frame triad operator proxies from the selected mode carrier, then summarize frame-stability and stratum-aware decomposition signals.",
+    "S": "Telemetry only; the carrier, operator family, and stratum proxy are empirical and non-promoting."
+  },
+  "errors": [],
+  "fail_closed": true,
+  "inputs": {
+    "frame": null,
+    "frame_limit": null,
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_frame_stability_scan_N128_20260621.json",
+    "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz"
+  },
+  "ok": false,
+  "parameters": {
+    "frame": null,
+    "frame_limit": null,
+    "pool_multiplier": 24,
+    "top_k": 48,
+    "triad_sample_limit": 8,
+    "zero_eps": 1e-12
+  },
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_FRAME_STABILITY_SCAN",
+  "route_mode": "fail-closed",
+  "schema_version": "1.0.0",
+  "script": "scripts/ns_triad_frame_stability_scan.py",
+  "status": "partial",
+  "triad_frame_stability_rows": [
+    {
+      "backbone_vs_negative_gap_ratio": 0.0,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "carrier_shell_radius_p95": 56.22277118748239,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        46.63486995202442,
+        53.54833034837843
+      ],
+      "combined_operator_gap_proxy": 1.9255770098035124e+16,
+      "combined_operator_trace": 2.3106924117642144e+17,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 0,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 0.0,
+      "mode_concentration_fraction": 0.17819688602962763,
+      "negative_frame_operator_gap_proxy": 3.2092950163391876e+16,
+      "negative_frame_operator_trace": 2.3106924117642144e+17,
+      "negative_frame_operator_zero_eigen_count": 0,
+      "operator_family": "K_N",
+      "orbit_phase": 0.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.0,
+      "positive_backbone_operator_trace": 0.0,
+      "positive_backbone_operator_zero_eigen_count": 6,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 1879872.7971142218,
+      "selected_mode_count": 6,
+      "snapshot_index": 0,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "stratum_balance_entropy_normalized": 0.9989095164946786,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.4994547582473393,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 600872.9727544058,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.31963491023265045,
+          "negative_frame_mass_fraction": 0.20943697624261023,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.33333333333333337
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 669974.9571551206,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.35639377205925526,
+          "negative_frame_mass_fraction": 0.20943697624261023,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.33333333333333337
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 609024.8672046956,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.32397131770809434,
+          "negative_frame_mass_fraction": 0.20943697624261023,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.33333333333333337
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_negative_frame_count": 6,
+      "triad_negative_frame_mass": 1.1553462058821074e+17,
+      "triad_negative_frame_mass_ratio": 0.6283109287278308,
+      "triad_phase_coherence_abs_mean": 0.6283109287278308,
+      "triad_phase_coherence_mean": -0.6283109287278308,
+      "triad_positive_backbone_count": 0,
+      "triad_positive_backbone_mass": 0.0,
+      "triad_positive_backbone_mass_ratio": 0.0,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": 2.250176481838536,
+          "coherence": -0.6283109287278312,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 5,
+          "right": 3,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.0646880736299044e+16
+        },
+        {
+          "closure": -2.250176481838536,
+          "coherence": -0.6283109287278312,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 3,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.0646880736299044e+16
+        },
+        {
+          "closure": 2.250176481838535,
+          "coherence": -0.6283109287278306,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 1,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.0646880736299056e+16
+        },
+        {
+          "closure": 2.250176481838535,
+          "coherence": -0.6283109287278306,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 2,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.0646880736299052e+16
+        },
+        {
+          "closure": -2.250176481838535,
+          "coherence": -0.6283109287278306,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 4,
+          "right": 2,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.0646880736299052e+16
+        },
+        {
+          "closure": -2.250176481838535,
+          "coherence": -0.6283109287278306,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 0,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.0646880736299044e+16
+        }
+      ],
+      "triad_shell_spread_mean": 20.74038118906204,
+      "triad_shell_spread_p95": 20.74038118906204,
+      "triad_weight_mean": 3.0646880736299052e+16,
+      "triad_weight_p95": 3.0646880736299056e+16,
+      "triad_weight_sum": 1.838812844177943e+17,
+      "warnings": [
+        "positive-backbone operator has no positive spectral-gap proxy"
+      ],
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 0.0,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "carrier_shell_radius_p95": 56.22277118748239,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        46.63486995202442,
+        53.54833034837843
+      ],
+      "combined_operator_gap_proxy": 1.994843406100533e+16,
+      "combined_operator_trace": 2.3938120873206394e+17,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 1,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 0.0,
+      "mode_concentration_fraction": 0.1808362040952092,
+      "negative_frame_operator_gap_proxy": 3.3247390101675544e+16,
+      "negative_frame_operator_trace": 2.3938120873206394e+17,
+      "negative_frame_operator_zero_eigen_count": 0,
+      "operator_family": "K_N",
+      "orbit_phase": 1.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.0,
+      "positive_backbone_operator_trace": 0.0,
+      "positive_backbone_operator_zero_eigen_count": 6,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 1909936.7054954206,
+      "selected_mode_count": 6,
+      "snapshot_index": 1,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "stratum_balance_entropy_normalized": 0.9983759880087004,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.4991879940043502,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 608393.6652236427,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.31854127075160366,
+          "negative_frame_mass_fraction": 0.2072428936031229,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 690771.4077678027,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3616724081904184,
+          "negative_frame_mass_fraction": 0.2072428936031229,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 610771.6325039752,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.31978632105797794,
+          "negative_frame_mass_fraction": 0.2072428936031229,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.3333333333333333
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_negative_frame_count": 6,
+      "triad_negative_frame_mass": 1.1969060436603197e+17,
+      "triad_negative_frame_mass_ratio": 0.6217286808093685,
+      "triad_phase_coherence_abs_mean": 0.6217286808093685,
+      "triad_phase_coherence_mean": -0.6217286808093685,
+      "triad_positive_backbone_count": 0,
+      "triad_positive_backbone_mass": 0.0,
+      "triad_positive_backbone_mass_ratio": 0.0,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": -2.2417442118687987,
+          "coherence": -0.6217286808093686,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 3,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.208543320703235e+16
+        },
+        {
+          "closure": 2.2417442118687987,
+          "coherence": -0.6217286808093686,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 5,
+          "right": 3,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.2085433207032348e+16
+        },
+        {
+          "closure": -2.2417442118687987,
+          "coherence": -0.6217286808093686,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 0,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.2085433207032348e+16
+        },
+        {
+          "closure": 2.2417442118687987,
+          "coherence": -0.6217286808093686,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 2,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.2085433207032344e+16
+        },
+        {
+          "closure": -2.2417442118687987,
+          "coherence": -0.6217286808093686,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 4,
+          "right": 2,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.2085433207032344e+16
+        },
+        {
+          "closure": 2.2417442118687987,
+          "coherence": -0.6217286808093686,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 1,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.2085433207032344e+16
+        }
+      ],
+      "triad_shell_spread_mean": 20.740381189062045,
+      "triad_shell_spread_p95": 20.74038118906204,
+      "triad_weight_mean": 3.2085433207032348e+16,
+      "triad_weight_p95": 3.208543320703235e+16,
+      "triad_weight_sum": 1.9251259924219408e+17,
+      "warnings": [
+        "positive-backbone operator has no positive spectral-gap proxy"
+      ],
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 0.0,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "carrier_shell_radius_p95": 56.22277118748239,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        46.63486995202442,
+        53.54833034837843
+      ],
+      "combined_operator_gap_proxy": 1.9446309668127264e+16,
+      "combined_operator_trace": 2.3335571601752717e+17,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 2,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 0.0,
+      "mode_concentration_fraction": 0.1826782030100013,
+      "negative_frame_operator_gap_proxy": 2.9375,
+      "negative_frame_operator_trace": 2.3335571601752717e+17,
+      "negative_frame_operator_zero_eigen_count": 0,
+      "operator_family": "K_N",
+      "orbit_phase": 2.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.0,
+      "positive_backbone_operator_trace": 0.0,
+      "positive_backbone_operator_zero_eigen_count": 6,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 1909272.8029886351,
+      "selected_mode_count": 6,
+      "snapshot_index": 2,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "stratum_balance_entropy_normalized": 0.9979277602164249,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.49896388010821247,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 607913.0803104313,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3184003246465612,
+          "negative_frame_mass_fraction": 0.20253050772551157,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.33333333333333337
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 697565.049411664,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3653564060200025,
+          "negative_frame_mass_fraction": 0.20253050772551157,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.33333333333333337
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 603794.6732665399,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3162432693334364,
+          "negative_frame_mass_fraction": 0.20253050772551157,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.33333333333333337
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_negative_frame_count": 6,
+      "triad_negative_frame_mass": 1.166778580087636e+17,
+      "triad_negative_frame_mass_ratio": 0.6075915231765346,
+      "triad_phase_coherence_abs_mean": 0.6075915231765346,
+      "triad_phase_coherence_mean": -0.6075915231765346,
+      "triad_positive_backbone_count": 0,
+      "triad_positive_backbone_mass": 0.0,
+      "triad_positive_backbone_mass_ratio": 0.0,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": -2.2238209950822636,
+          "coherence": -0.6075915231765352,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 5,
+          "right": 3,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.2005564472757096e+16
+        },
+        {
+          "closure": -2.2238209950822636,
+          "coherence": -0.6075915231765352,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 1,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.2005564472757092e+16
+        },
+        {
+          "closure": 2.2238209950822627,
+          "coherence": -0.6075915231765345,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 0,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.2005564472757096e+16
+        },
+        {
+          "closure": 2.2238209950822627,
+          "coherence": -0.6075915231765345,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 4,
+          "right": 2,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.2005564472757092e+16
+        },
+        {
+          "closure": 2.2238209950822627,
+          "coherence": -0.6075915231765345,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 3,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.200556447275709e+16
+        },
+        {
+          "closure": -2.223820995082262,
+          "coherence": -0.6075915231765339,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 2,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.2005564472757096e+16
+        }
+      ],
+      "triad_shell_spread_mean": 20.74038118906204,
+      "triad_shell_spread_p95": 20.74038118906204,
+      "triad_weight_mean": 3.2005564472757092e+16,
+      "triad_weight_p95": 3.2005564472757096e+16,
+      "triad_weight_sum": 1.9203338683654256e+17,
+      "warnings": [
+        "positive-backbone operator has no positive spectral-gap proxy"
+      ],
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 0.0,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "carrier_shell_radius_p95": 56.22277118748239,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        46.63486995202442,
+        53.54833034837843
+      ],
+      "combined_operator_gap_proxy": 1.7912354908968994e+16,
+      "combined_operator_trace": 2.14948258907628e+17,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 3,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 0.0,
+      "mode_concentration_fraction": 0.18380214017779195,
+      "negative_frame_operator_gap_proxy": 2.9853924848281664e+16,
+      "negative_frame_operator_trace": 2.14948258907628e+17,
+      "negative_frame_operator_zero_eigen_count": 0,
+      "operator_family": "K_N",
+      "orbit_phase": 3.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.0,
+      "positive_backbone_operator_trace": 0.0,
+      "positive_backbone_operator_zero_eigen_count": 6,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 1881107.7970574112,
+      "selected_mode_count": 6,
+      "snapshot_index": 3,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "stratum_balance_entropy_normalized": 0.9976114556128309,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.49880572780641547,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 599921.4432179439,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.31891922629654296,
+          "negative_frame_mass_fraction": 0.1952603780482364,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 691503.2780085673,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.36760428035558385,
+          "negative_frame_mass_fraction": 0.1952603780482364,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 589683.0758309,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3134764933478732,
+          "negative_frame_mass_fraction": 0.1952603780482364,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.3333333333333333
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_negative_frame_count": 6,
+      "triad_negative_frame_mass": 1.07474129453814e+17,
+      "triad_negative_frame_mass_ratio": 0.5857811341447092,
+      "triad_phase_coherence_abs_mean": 0.5857811341447092,
+      "triad_phase_coherence_mean": -0.5857811341447092,
+      "triad_positive_backbone_count": 0,
+      "triad_positive_backbone_mass": 0.0,
+      "triad_positive_backbone_mass_ratio": 0.0,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": -2.1966398539891854,
+          "coherence": -0.5857811341447098,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 5,
+          "right": 3,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.0578579378666016e+16
+        },
+        {
+          "closure": 2.1966398539891845,
+          "coherence": -0.5857811341447091,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 4,
+          "right": 2,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.0578579378666028e+16
+        },
+        {
+          "closure": 2.1966398539891845,
+          "coherence": -0.5857811341447091,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 3,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.0578579378666024e+16
+        },
+        {
+          "closure": 2.1966398539891845,
+          "coherence": -0.5857811341447091,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 1,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.0578579378666024e+16
+        },
+        {
+          "closure": -2.1966398539891845,
+          "coherence": -0.5857811341447091,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 0,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.0578579378666024e+16
+        },
+        {
+          "closure": -2.1966398539891845,
+          "coherence": -0.5857811341447091,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 2,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 3.057857937866602e+16
+        }
+      ],
+      "triad_shell_spread_mean": 20.74038118906204,
+      "triad_shell_spread_p95": 20.74038118906204,
+      "triad_weight_mean": 3.057857937866602e+16,
+      "triad_weight_p95": 3.0578579378666028e+16,
+      "triad_weight_sum": 1.8347147627199613e+17,
+      "warnings": [
+        "positive-backbone operator has no positive spectral-gap proxy"
+      ],
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 0.0,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "carrier_shell_radius_p95": 56.22277118748239,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        46.63486995202442,
+        53.54833034837843
+      ],
+      "combined_operator_gap_proxy": 1.5632664926483792e+16,
+      "combined_operator_trace": 1.875919791178056e+17,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 4,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 0.0,
+      "mode_concentration_fraction": 0.1843469497380463,
+      "negative_frame_operator_gap_proxy": 2.6054441544139656e+16,
+      "negative_frame_operator_trace": 1.875919791178056e+17,
+      "negative_frame_operator_zero_eigen_count": 0,
+      "operator_family": "K_N",
+      "orbit_phase": 4.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.0,
+      "positive_backbone_operator_trace": 0.0,
+      "positive_backbone_operator_zero_eigen_count": 6,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 1829827.9166038777,
+      "selected_mode_count": 6,
+      "snapshot_index": 4,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "stratum_balance_entropy_normalized": 0.997432491424953,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.4987162457124765,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 585099.1384563375,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3197563733437127,
+          "negative_frame_mass_fraction": 0.18525010710180398,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 674646.3899428981,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3686938994760926,
+          "negative_frame_mass_fraction": 0.18525010710180398,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 570082.388204642,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.31154972718019464,
+          "negative_frame_mass_fraction": 0.18525010710180398,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.3333333333333333
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_negative_frame_count": 6,
+      "triad_negative_frame_mass": 9.37959895589028e+16,
+      "triad_negative_frame_mass_ratio": 0.5557503213054119,
+      "triad_phase_coherence_abs_mean": 0.5557503213054119,
+      "triad_phase_coherence_mean": -0.5557503213054119,
+      "triad_positive_backbone_count": 0,
+      "triad_positive_backbone_mass": 0.0,
+      "triad_positive_backbone_mass_ratio": 0.0,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": 2.160061555359272,
+          "coherence": -0.5557503213054121,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 4,
+          "right": 2,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.812893547189313e+16
+        },
+        {
+          "closure": -2.160061555359272,
+          "coherence": -0.5557503213054121,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 1,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.8128935471893124e+16
+        },
+        {
+          "closure": -2.160061555359272,
+          "coherence": -0.5557503213054121,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 5,
+          "right": 3,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.8128935471893116e+16
+        },
+        {
+          "closure": 2.160061555359272,
+          "coherence": -0.5557503213054121,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 0,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.812893547189311e+16
+        },
+        {
+          "closure": -2.1600615553592712,
+          "coherence": -0.5557503213054114,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 2,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.812893547189313e+16
+        },
+        {
+          "closure": 2.1600615553592712,
+          "coherence": -0.5557503213054114,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 3,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.812893547189311e+16
+        }
+      ],
+      "triad_shell_spread_mean": 20.74038118906204,
+      "triad_shell_spread_p95": 20.74038118906204,
+      "triad_weight_mean": 2.812893547189312e+16,
+      "triad_weight_p95": 2.812893547189313e+16,
+      "triad_weight_sum": 1.6877361283135872e+17,
+      "warnings": [
+        "positive-backbone operator has no positive spectral-gap proxy"
+      ],
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 0.0,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 47.97209037157639,
+      "carrier_shell_radius_p95": 56.22277118748239,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        46.63486995202442,
+        53.54833034837843
+      ],
+      "combined_operator_gap_proxy": 1.2939227026943712e+16,
+      "combined_operator_trace": 1.5527072432332458e+17,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 5,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 0.0,
+      "mode_concentration_fraction": 0.18449889942861725,
+      "negative_frame_operator_gap_proxy": 2.1565378378239516e+16,
+      "negative_frame_operator_trace": 1.5527072432332458e+17,
+      "negative_frame_operator_zero_eigen_count": 0,
+      "operator_family": "K_N",
+      "orbit_phase": 5.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.0,
+      "positive_backbone_operator_trace": 0.0,
+      "positive_backbone_operator_zero_eigen_count": 6,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 1760429.100238422,
+      "selected_mode_count": 6,
+      "snapshot_index": 5,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "stratum_balance_entropy_normalized": 0.9973639421774253,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.49868197108871265,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 564330.3001243472,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.32056406023276807,
+          "negative_frame_mass_fraction": 0.17222959040146063,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 649594.4630321995,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3689977988572345,
+          "negative_frame_mass_fraction": 0.17222959040146063,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 546504.337081875,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3104381409099973,
+          "negative_frame_mass_fraction": 0.17222959040146063,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.3333333333333333
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_negative_frame_count": 6,
+      "triad_negative_frame_mass": 7.763536216166229e+16,
+      "triad_negative_frame_mass_ratio": 0.5166887712043818,
+      "triad_phase_coherence_abs_mean": 0.5166887712043818,
+      "triad_phase_coherence_mean": -0.5166887712043818,
+      "triad_positive_backbone_count": 0,
+      "triad_positive_backbone_mass": 0.0,
+      "triad_positive_backbone_mass_ratio": 0.0,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": -2.1137752689815548,
+          "coherence": -0.5166887712043825,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 1,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.5042593816743628e+16
+        },
+        {
+          "closure": 2.113775268981554,
+          "coherence": -0.5166887712043817,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 2,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.504259381674363e+16
+        },
+        {
+          "closure": -2.113775268981554,
+          "coherence": -0.5166887712043817,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 4,
+          "right": 2,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.5042593816743628e+16
+        },
+        {
+          "closure": 2.113775268981554,
+          "coherence": -0.5166887712043817,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 0,
+          "right": 4,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.5042593816743628e+16
+        },
+        {
+          "closure": -2.113775268981554,
+          "coherence": -0.5166887712043817,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 3,
+          "right": 5,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.504259381674362e+16
+        },
+        {
+          "closure": 2.113775268981554,
+          "coherence": -0.5166887712043817,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 5,
+          "right": 3,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.504259381674362e+16
+        }
+      ],
+      "triad_shell_spread_mean": 20.74038118906204,
+      "triad_shell_spread_p95": 20.74038118906204,
+      "triad_weight_mean": 2.5042593816743628e+16,
+      "triad_weight_p95": 2.504259381674363e+16,
+      "triad_weight_sum": 1.5025556290046176e+17,
+      "warnings": [
+        "positive-backbone operator has no positive spectral-gap proxy"
+      ],
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 0.10764222718539962,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 46.28162878697243,
+      "carrier_shell_radius_p95": 62.41794613730894,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        34.860084208261306,
+        55.67329435439957
+      ],
+      "combined_operator_gap_proxy": 7895886044355306.0,
+      "combined_operator_trace": 2.7687057198663856e+17,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 6,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 1.0216127963545764e-19,
+      "mode_concentration_fraction": 0.0626242593306761,
+      "negative_frame_operator_gap_proxy": 0.2900937087143528,
+      "negative_frame_operator_trace": 2.164563989082508e+17,
+      "negative_frame_operator_zero_eigen_count": 4,
+      "operator_family": "K_N",
+      "orbit_phase": 6.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.031226332898593147,
+      "positive_backbone_operator_trace": 6.041417307838777e+16,
+      "positive_backbone_operator_zero_eigen_count": 7,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 4942847.1701205745,
+      "selected_mode_count": 18,
+      "snapshot_index": 6,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "stratum_balance_entropy_normalized": 0.9994062192807105,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.9986256846768881,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.05430143998115934,
+          "mode_amplitude_sum": 1564529.818864338,
+          "mode_count": 6,
+          "mode_mass_fraction": 0.3165240123793213,
+          "negative_frame_mass_fraction": 0.04258186054249064,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.3167895855761714
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 1679558.1681897147,
+          "mode_count": 6,
+          "mode_mass_fraction": 0.339795690698797,
+          "negative_frame_mass_fraction": 0.15197338295316248,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.3498770810904954
+        },
+        {
+          "backbone_mass_fraction": 0.027150719990579678,
+          "mode_amplitude_sum": 1698759.1830665218,
+          "mode_count": 6,
+          "mode_mass_fraction": 0.3436802969218817,
+          "negative_frame_mass_fraction": 0.09727762174782657,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.3333333333333334
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 18,
+      "triad_negative_frame_count": 12,
+      "triad_negative_frame_mass": 1.0822819945412538e+17,
+      "triad_negative_frame_mass_ratio": 0.2918328652434797,
+      "triad_phase_coherence_abs_mean": 0.37328502521521867,
+      "triad_phase_coherence_mean": -0.21038070527174071,
+      "triad_positive_backbone_count": 6,
+      "triad_positive_backbone_mass": 3.020708653919389e+16,
+      "triad_positive_backbone_mass_ratio": 0.08145215997173903,
+      "triad_profile_entropy_normalized": 0.9978451500730656,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": -2.057473160206479,
+          "coherence": -0.46769115583128656,
+          "distinct_strata": 2,
+          "family": "negative_frame",
+          "left": 6,
+          "out": 1,
+          "right": 13,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            1,
+            1,
+            2
+          ],
+          "weight": 2.168556550951242e+16
+        },
+        {
+          "closure": -2.057473160206478,
+          "coherence": -0.4676911558312858,
+          "distinct_strata": 2,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 12,
+          "right": 6,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            1,
+            1,
+            2
+          ],
+          "weight": 2.1685565509512424e+16
+        },
+        {
+          "closure": 2.057473160206478,
+          "coherence": -0.4676911558312858,
+          "distinct_strata": 2,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 6,
+          "right": 12,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            1,
+            1,
+            2
+          ],
+          "weight": 2.168556550951242e+16
+        },
+        {
+          "closure": 2.057473160206478,
+          "coherence": -0.4676911558312858,
+          "distinct_strata": 2,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 13,
+          "right": 7,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            1,
+            1,
+            2
+          ],
+          "weight": 2.1685565509512412e+16
+        },
+        {
+          "closure": -2.0574731602064773,
+          "coherence": -0.467691155831285,
+          "distinct_strata": 2,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 7,
+          "right": 13,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            1,
+            1,
+            2
+          ],
+          "weight": 2.168556550951242e+16
+        },
+        {
+          "closure": 2.0574731602064773,
+          "coherence": -0.467691155831285,
+          "distinct_strata": 2,
+          "family": "negative_frame",
+          "left": 7,
+          "out": 0,
+          "right": 12,
+          "shell_spread": 20.74038118906204,
+          "stratum_profile": [
+            1,
+            1,
+            2
+          ],
+          "weight": 2.168556550951242e+16
+        },
+        {
+          "closure": 1.94673714638326,
+          "coherence": -0.36714780665322044,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 9,
+          "out": 2,
+          "right": 10,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.1506014475018136e+16
+        },
+        {
+          "closure": -1.9467371463832597,
+          "coherence": -0.3671478066532202,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 9,
+          "right": 11,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.1506014475018136e+16
+        }
+      ],
+      "triad_shell_spread_mean": 25.31773499456921,
+      "triad_shell_spread_p95": 30.511833870221306,
+      "triad_weight_mean": 2.060315496828968e+16,
+      "triad_weight_p95": 2.1685565509512424e+16,
+      "triad_weight_sum": 3.7085678942921414e+17,
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 3.628353080024663,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 46.44054877600339,
+      "carrier_shell_radius_p95": 62.41794613730894,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        33.050908218303725,
+        56.051877824838755
+      ],
+      "combined_operator_gap_proxy": 8175346523668523.0,
+      "combined_operator_trace": 3.377253372117916e+17,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 7,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 1.0900127319808455e-18,
+      "mode_concentration_fraction": 0.06302597644277438,
+      "negative_frame_operator_gap_proxy": 0.13745462300951838,
+      "negative_frame_operator_trace": 2.7886284224137818e+17,
+      "negative_frame_operator_zero_eigen_count": 2,
+      "operator_family": "K_N",
+      "orbit_phase": 7.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.4987339047638433,
+      "positive_backbone_operator_trace": 5.8862494970413416e+16,
+      "positive_backbone_operator_zero_eigen_count": 8,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 4881576.319379497,
+      "selected_mode_count": 18,
+      "snapshot_index": 7,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok",
+      "stratum_balance_entropy_normalized": 0.9994787873532377,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.49973939367661885,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.02747765159464963,
+          "mode_amplitude_sum": 1659625.4760040573,
+          "mode_count": 6,
+          "mode_mass_fraction": 0.3399773694852351,
+          "negative_frame_mass_fraction": 0.13017620176742087,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.33333333333333326
+        },
+        {
+          "backbone_mass_fraction": 0.02747765159464963,
+          "mode_amplitude_sum": 1549953.6853508006,
+          "mode_count": 6,
+          "mode_mass_fraction": 0.31751089892779083,
+          "negative_frame_mass_fraction": 0.13017620176742087,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.33333333333333326
+        },
+        {
+          "backbone_mass_fraction": 0.02747765159464963,
+          "mode_amplitude_sum": 1671997.1580246398,
+          "mode_count": 6,
+          "mode_mass_fraction": 0.3425117315869742,
+          "negative_frame_mass_fraction": 0.13017620176742087,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.33333333333333326
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 18,
+      "triad_negative_frame_count": 12,
+      "triad_negative_frame_mass": 1.3943142112068907e+17,
+      "triad_negative_frame_mass_ratio": 0.3905286053022626,
+      "triad_phase_coherence_abs_mean": 0.47296156008621154,
+      "triad_phase_coherence_mean": -0.30809565051831367,
+      "triad_positive_backbone_count": 6,
+      "triad_positive_backbone_mass": 2.9431247485206704e+16,
+      "triad_positive_backbone_mass_ratio": 0.08243295478394888,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": -2.3866763288807173,
+          "coherence": -0.728328882361821,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 13,
+          "out": 2,
+          "right": 15,
+          "shell_spread": 28.684232172402474,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.032775004323824e+16
+        },
+        {
+          "closure": 2.386676328880717,
+          "coherence": -0.7283288823618207,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 15,
+          "right": 12,
+          "shell_spread": 28.684232172402474,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.0327750043238244e+16
+        },
+        {
+          "closure": 2.386676328880717,
+          "coherence": -0.7283288823618207,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 13,
+          "right": 14,
+          "shell_spread": 28.684232172402474,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.0327750043238244e+16
+        },
+        {
+          "closure": -2.386676328880717,
+          "coherence": -0.7283288823618207,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 14,
+          "right": 13,
+          "shell_spread": 28.684232172402474,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.0327750043238236e+16
+        },
+        {
+          "closure": -2.386676328880717,
+          "coherence": -0.7283288823618207,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 12,
+          "right": 15,
+          "shell_spread": 28.684232172402474,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.0327750043238236e+16
+        },
+        {
+          "closure": 2.386676328880716,
+          "coherence": -0.7283288823618201,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 12,
+          "out": 3,
+          "right": 14,
+          "shell_spread": 28.684232172402474,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.0327750043238244e+16
+        },
+        {
+          "closure": 1.980354232807736,
+          "coherence": -0.3982038354428466,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 6,
+          "out": 0,
+          "right": 8,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.117830609913794e+16
+        },
+        {
+          "closure": 1.980354232807736,
+          "coherence": -0.3982038354428466,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 9,
+          "right": 6,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.1178306099137936e+16
+        }
+      ],
+      "triad_shell_spread_mean": 28.081250807450353,
+      "triad_shell_spread_p95": 30.511833870221306,
+      "triad_weight_mean": 1.9835141285655844e+16,
+      "triad_weight_p95": 2.117830609913794e+16,
+      "triad_weight_sum": 3.570325431418052e+17,
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 0.0,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 48.22628564522762,
+      "carrier_shell_radius_p95": 57.358521598799946,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        47.57296375824701,
+        56.051877824838755
+      ],
+      "combined_operator_gap_proxy": 8501548199769028.0,
+      "combined_operator_trace": 1.0201857839722834e+17,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 8,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 0.0,
+      "mode_concentration_fraction": 0.18474433056089962,
+      "negative_frame_operator_gap_proxy": 1.4169246999615052e+16,
+      "negative_frame_operator_trace": 1.0201857839722834e+17,
+      "negative_frame_operator_zero_eigen_count": 0,
+      "operator_family": "K_N",
+      "orbit_phase": 8.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.0,
+      "positive_backbone_operator_trace": 0.0,
+      "positive_backbone_operator_zero_eigen_count": 6,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 1638056.2952816493,
+      "selected_mode_count": 6,
+      "snapshot_index": 8,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "stratum_balance_entropy_normalized": 0.9972954277574457,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.49864771387872286,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 508225.70596791315,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.31026144060606187,
+          "negative_frame_mass_fraction": 0.1404954837011361,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.3333333333333334
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 524587.361927985,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.32024989827213896,
+          "negative_frame_mass_fraction": 0.1404954837011361,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.3333333333333334
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 605243.2273857512,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.36948866112179923,
+          "negative_frame_mass_fraction": 0.1404954837011361,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.3333333333333334
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_negative_frame_count": 6,
+      "triad_negative_frame_mass": 5.100928919861418e+16,
+      "triad_negative_frame_mass_ratio": 0.4214864511034083,
+      "triad_phase_coherence_abs_mean": 0.4214864511034083,
+      "triad_phase_coherence_mean": -0.4214864511034083,
+      "triad_positive_backbone_count": 0,
+      "triad_positive_backbone_mass": 0.0,
+      "triad_positive_backbone_mass_ratio": 0.0,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": 2.0058801880044737,
+          "coherence": -0.4214864511034083,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 1,
+          "right": 4,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.0170394985444612e+16
+        },
+        {
+          "closure": 2.0058801880044737,
+          "coherence": -0.4214864511034083,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 5,
+          "right": 2,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.017039498544461e+16
+        },
+        {
+          "closure": -2.0058801880044737,
+          "coherence": -0.4214864511034083,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 2,
+          "right": 5,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.017039498544461e+16
+        },
+        {
+          "closure": 2.0058801880044737,
+          "coherence": -0.4214864511034083,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 3,
+          "right": 4,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.01703949854446e+16
+        },
+        {
+          "closure": -2.0058801880044737,
+          "coherence": -0.4214864511034083,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 4,
+          "right": 3,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.01703949854446e+16
+        },
+        {
+          "closure": -2.005880188004473,
+          "coherence": -0.42148645110340793,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 0,
+          "right": 5,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 2.01703949854446e+16
+        }
+      ],
+      "triad_shell_spread_mean": 25.43674219977521,
+      "triad_shell_spread_p95": 25.43674219977521,
+      "triad_weight_mean": 2.0170394985444604e+16,
+      "triad_weight_p95": 2.0170394985444612e+16,
+      "triad_weight_sum": 1.2102236991266762e+17,
+      "warnings": [
+        "positive-backbone operator has no positive spectral-gap proxy"
+      ],
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 0.0,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 48.22628564522762,
+      "carrier_shell_radius_p95": 57.358521598799946,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        47.57296375824701,
+        56.051877824838755
+      ],
+      "combined_operator_gap_proxy": 8171281455203854.0,
+      "combined_operator_trace": 9.805537746244627e+16,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 9,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 0.0,
+      "mode_concentration_fraction": 0.18462874616412403,
+      "negative_frame_operator_gap_proxy": 9.984375,
+      "negative_frame_operator_trace": 9.805537746244627e+16,
+      "negative_frame_operator_zero_eigen_count": 0,
+      "operator_family": "K_N",
+      "orbit_phase": 9.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.0,
+      "positive_backbone_operator_trace": 0.0,
+      "positive_backbone_operator_zero_eigen_count": 6,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 1595013.1280721514,
+      "selected_mode_count": 6,
+      "snapshot_index": 9,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "stratum_balance_entropy_normalized": 0.99726099646966,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.49863049823483,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 491923.12313783827,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3084132127065388,
+          "negative_frame_mass_fraction": 0.14628643172823613,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 514119.45703175594,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.32232929496521323,
+          "negative_frame_mass_fraction": 0.14628643172823613,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 588970.5479025573,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.369257492328248,
+          "negative_frame_mass_fraction": 0.14628643172823613,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.3333333333333333
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_negative_frame_count": 6,
+      "triad_negative_frame_mass": 4.902768873122314e+16,
+      "triad_negative_frame_mass_ratio": 0.4388592951847084,
+      "triad_phase_coherence_abs_mean": 0.4388592951847084,
+      "triad_phase_coherence_mean": -0.4388592951847084,
+      "triad_positive_backbone_count": 0,
+      "triad_positive_backbone_mass": 0.0,
+      "triad_positive_backbone_mass_ratio": 0.0,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": -2.025125119145573,
+          "coherence": -0.4388592951847087,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 5,
+          "right": 2,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.8619365124224396e+16
+        },
+        {
+          "closure": -2.0251251191455726,
+          "coherence": -0.4388592951847083,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 3,
+          "right": 4,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.861936512422439e+16
+        },
+        {
+          "closure": 2.0251251191455726,
+          "coherence": -0.4388592951847083,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 0,
+          "right": 5,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.861936512422439e+16
+        },
+        {
+          "closure": 2.0251251191455726,
+          "coherence": -0.4388592951847083,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 4,
+          "right": 3,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.8619365124224388e+16
+        },
+        {
+          "closure": 2.0251251191455726,
+          "coherence": -0.4388592951847083,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 2,
+          "right": 5,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.8619365124224388e+16
+        },
+        {
+          "closure": -2.0251251191455726,
+          "coherence": -0.4388592951847083,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 1,
+          "right": 4,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.8619365124224388e+16
+        }
+      ],
+      "triad_shell_spread_mean": 25.436742199775207,
+      "triad_shell_spread_p95": 25.43674219977521,
+      "triad_weight_mean": 1.8619365124224388e+16,
+      "triad_weight_p95": 1.8619365124224396e+16,
+      "triad_weight_sum": 1.1171619074534634e+17,
+      "warnings": [
+        "positive-backbone operator has no positive spectral-gap proxy"
+      ],
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 0.0,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 48.22628564522762,
+      "carrier_shell_radius_p95": 57.358521598799946,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        47.57296375824701,
+        56.051877824838755
+      ],
+      "combined_operator_gap_proxy": 7552653566609810.0,
+      "combined_operator_trace": 9.063184279931773e+16,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 10,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 0.0,
+      "mode_concentration_fraction": 0.18452865106802765,
+      "negative_frame_operator_gap_proxy": 1.86474609375,
+      "negative_frame_operator_trace": 9.063184279931773e+16,
+      "negative_frame_operator_zero_eigen_count": 0,
+      "operator_family": "K_N",
+      "orbit_phase": 10.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.0,
+      "positive_backbone_operator_trace": 0.0,
+      "positive_backbone_operator_zero_eigen_count": 6,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 1538002.5243315296,
+      "selected_mode_count": 6,
+      "snapshot_index": 10,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "stratum_balance_entropy_normalized": 0.997279780124133,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.4986398900620665,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 474120.6048471613,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3082703684463918,
+          "negative_frame_mass_fraction": 0.15080295213904596,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.33333333333333337
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 496270.8571761312,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.32267232941755286,
+          "negative_frame_mass_fraction": 0.15080295213904596,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.33333333333333337
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 567611.062308237,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3690573021360552,
+          "negative_frame_mass_fraction": 0.15080295213904596,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.33333333333333337
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_negative_frame_count": 6,
+      "triad_negative_frame_mass": 4.5315921399658856e+16,
+      "triad_negative_frame_mass_ratio": 0.45240885641713774,
+      "triad_phase_coherence_abs_mean": 0.45240885641713774,
+      "triad_phase_coherence_mean": -0.45240885641713774,
+      "triad_positive_backbone_count": 0,
+      "triad_positive_backbone_mass": 0.0,
+      "triad_positive_backbone_mass_ratio": 0.0,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": 2.040260906148591,
+          "coherence": -0.45240885641713785,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 1,
+          "right": 4,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.6694309714498572e+16
+        },
+        {
+          "closure": -2.040260906148591,
+          "coherence": -0.45240885641713785,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 4,
+          "right": 3,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.6694309714498568e+16
+        },
+        {
+          "closure": -2.040260906148591,
+          "coherence": -0.45240885641713785,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 2,
+          "right": 5,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.6694309714498568e+16
+        },
+        {
+          "closure": 2.040260906148591,
+          "coherence": -0.45240885641713785,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 5,
+          "right": 2,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.6694309714498564e+16
+        },
+        {
+          "closure": 2.040260906148591,
+          "coherence": -0.45240885641713785,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 3,
+          "right": 4,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.6694309714498564e+16
+        },
+        {
+          "closure": -2.0402609061485903,
+          "coherence": -0.45240885641713746,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 0,
+          "right": 5,
+          "shell_spread": 25.43674219977521,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.669430971449856e+16
+        }
+      ],
+      "triad_shell_spread_mean": 25.436742199775207,
+      "triad_shell_spread_p95": 25.43674219977521,
+      "triad_weight_mean": 1.6694309714498566e+16,
+      "triad_weight_p95": 1.6694309714498572e+16,
+      "triad_weight_sum": 1.001658582869914e+17,
+      "warnings": [
+        "positive-backbone operator has no positive spectral-gap proxy"
+      ],
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 0.0,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 53.742168388769414,
+      "carrier_shell_radius_p95": 65.24568951279464,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        51.97743543689648,
+        54.89990892524322
+      ],
+      "combined_operator_gap_proxy": 0.0,
+      "combined_operator_trace": 0.0,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 11,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 0.0,
+      "mode_concentration_fraction": 0.023758517262782042,
+      "negative_frame_operator_gap_proxy": 0.0,
+      "negative_frame_operator_trace": 0.0,
+      "negative_frame_operator_zero_eigen_count": 0,
+      "operator_family": "K_N",
+      "orbit_phase": 11.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.0,
+      "positive_backbone_operator_trace": 0.0,
+      "positive_backbone_operator_zero_eigen_count": 0,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 16144591.634078572,
+      "selected_mode_count": 48,
+      "snapshot_index": 11,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "stratum_balance_entropy_normalized": 0.994667754509893,
+      "stratum_cross_mass_ratio": 0.0,
+      "stratum_decomposition_proxy": 0.0,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [],
+      "top_k": 48,
+      "triad_count": 0,
+      "triad_negative_frame_count": 0,
+      "triad_negative_frame_mass": 0.0,
+      "triad_negative_frame_mass_ratio": 0.0,
+      "triad_phase_coherence_abs_mean": 0.0,
+      "triad_phase_coherence_mean": 0.0,
+      "triad_positive_backbone_count": 0,
+      "triad_positive_backbone_mass": 0.0,
+      "triad_positive_backbone_mass_ratio": 0.0,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [],
+      "triad_shell_spread_mean": 0.0,
+      "triad_shell_spread_p95": 0.0,
+      "triad_weight_mean": 0.0,
+      "triad_weight_p95": 0.0,
+      "triad_weight_sum": 0.0,
+      "warnings": [
+        "no resonant selected-mode triads found",
+        "positive-backbone operator has no positive spectral-gap proxy",
+        "negative-frame operator has no positive spectral-gap proxy"
+      ],
+      "zero_eps": 1e-12
+    },
+    {
+      "backbone_vs_negative_gap_ratio": 0.0,
+      "candidate_only": true,
+      "carrier_shell_radius_mean": 45.93536999165217,
+      "carrier_shell_radius_p95": 56.36488268416781,
+      "carrier_stratum_count": 3,
+      "carrier_stratum_thresholds": [
+        41.41436546961803,
+        47.32287364009952
+      ],
+      "combined_operator_gap_proxy": 1.3327295582148032e+16,
+      "combined_operator_trace": 1.599275469857764e+17,
+      "combined_operator_zero_eigen_count": 0,
+      "empirical_non_promoting": true,
+      "fail_closed": true,
+      "frame": 12,
+      "frame_stability_margin_proxy": 0.0,
+      "frame_stability_proxy": 0.0,
+      "mode_concentration_fraction": 0.17518165464228808,
+      "negative_frame_operator_gap_proxy": 2.2212159303580052e+16,
+      "negative_frame_operator_trace": 1.599275469857764e+17,
+      "negative_frame_operator_zero_eigen_count": 0,
+      "operator_family": "K_N",
+      "orbit_phase": 12.0,
+      "pool_multiplier": 24,
+      "positive_backbone_operator_gap_proxy": 0.0,
+      "positive_backbone_operator_trace": 0.0,
+      "positive_backbone_operator_zero_eigen_count": 6,
+      "route_mode": "fail-closed",
+      "selected_mode_amplitude_sum": 1423471.9469619766,
+      "selected_mode_count": 6,
+      "snapshot_index": 12,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "partial",
+      "stratum_balance_entropy_normalized": 0.9994073861047295,
+      "stratum_cross_mass_ratio": 1.0,
+      "stratum_decomposition_proxy": 0.49970369305236473,
+      "stratum_internal_mass_ratio": 0.0,
+      "stratum_records": [
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 460776.62565529026,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.32369912637807563,
+          "negative_frame_mass_fraction": 0.3333262075897577,
+          "stratum_index": 0,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 498732.3420113567,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3503633092845761,
+          "negative_frame_mass_fraction": 0.3333262075897577,
+          "stratum_index": 1,
+          "triad_mass_fraction": 0.3333333333333333
+        },
+        {
+          "backbone_mass_fraction": 0.0,
+          "mode_amplitude_sum": 463962.97929532966,
+          "mode_count": 2,
+          "mode_mass_fraction": 0.3259375643373483,
+          "negative_frame_mass_fraction": 0.3333262075897577,
+          "stratum_index": 2,
+          "triad_mass_fraction": 0.3333333333333333
+        }
+      ],
+      "top_k": 48,
+      "triad_count": 6,
+      "triad_negative_frame_count": 6,
+      "triad_negative_frame_mass": 7.99637734928882e+16,
+      "triad_negative_frame_mass_ratio": 0.999978622769273,
+      "triad_phase_coherence_abs_mean": 0.999978622769273,
+      "triad_phase_coherence_mean": -0.999978622769273,
+      "triad_positive_backbone_count": 0,
+      "triad_positive_backbone_mass": 0.0,
+      "triad_positive_backbone_mass_ratio": 0.0,
+      "triad_profile_entropy_normalized": 0.0,
+      "triad_sample_limit": 8,
+      "triad_samples": [
+        {
+          "closure": -3.1350539523591507,
+          "coherence": -0.999978622769273,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 4,
+          "right": 2,
+          "shell_spread": 17.725524511444497,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.3327580488911178e+16
+        },
+        {
+          "closure": 3.1350539523591507,
+          "coherence": -0.999978622769273,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 2,
+          "right": 4,
+          "shell_spread": 17.725524511444497,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.3327580488911176e+16
+        },
+        {
+          "closure": -3.1350539523591507,
+          "coherence": -0.999978622769273,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 1,
+          "out": 3,
+          "right": 5,
+          "shell_spread": 17.725524511444497,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.3327580488911176e+16
+        },
+        {
+          "closure": -3.1350539523591507,
+          "coherence": -0.999978622769273,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 2,
+          "out": 0,
+          "right": 5,
+          "shell_spread": 17.725524511444497,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.3327580488911176e+16
+        },
+        {
+          "closure": 3.1350539523591507,
+          "coherence": -0.999978622769273,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 3,
+          "out": 1,
+          "right": 4,
+          "shell_spread": 17.725524511444497,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.3327580488911176e+16
+        },
+        {
+          "closure": 3.1350539523591507,
+          "coherence": -0.999978622769273,
+          "distinct_strata": 3,
+          "family": "negative_frame",
+          "left": 0,
+          "out": 5,
+          "right": 3,
+          "shell_spread": 17.725524511444497,
+          "stratum_profile": [
+            0,
+            1,
+            2
+          ],
+          "weight": 1.3327580488911174e+16
+        }
+      ],
+      "triad_shell_spread_mean": 17.725524511444497,
+      "triad_shell_spread_p95": 17.725524511444497,
+      "triad_weight_mean": 1.3327580488911176e+16,
+      "triad_weight_p95": 1.3327580488911178e+16,
+      "triad_weight_sum": 7.996548293346706e+16,
+      "warnings": [
+        "positive-backbone operator has no positive spectral-gap proxy"
+      ],
+      "zero_eps": 1e-12
+    }
+  ],
+  "warnings": [
+    "velocity_snapshots trailing channel layout detected"
+  ]
+}

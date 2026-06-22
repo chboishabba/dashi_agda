@@ -473,6 +473,18 @@ def build_specs() -> list[HarnessSpec]:
     ns_triad_low_frustration_hessian_scan_out = (
         CHILD_OUT_DIR / "ns_triad_low_frustration_hessian_scan_smoke.json"
     )
+    ns_triad_phase_regime_separation_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_phase_regime_separation_scan_smoke.json"
+    )
+    ns_triad_frame_stability_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_frame_stability_scan_smoke.json"
+    )
+    ns_triad_cocycle_floor_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_cocycle_floor_scan_smoke.json"
+    )
+    ns_triad_wall1_shell_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_triad_wall1_shell_bridge_summary_smoke.json"
+    )
     ns_tube_morphology_scan_out = (
         CHILD_OUT_DIR / "ns_tube_morphology_scan_smoke.json"
     )
@@ -595,6 +607,18 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_triad_low_frustration_hessian_scan_check_out = (
         CHILD_OUT_DIR / "ns_triad_low_frustration_hessian_scan_check_smoke.json"
+    )
+    ns_triad_phase_regime_separation_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_phase_regime_separation_scan_check_smoke.json"
+    )
+    ns_triad_frame_stability_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_frame_stability_scan_check_smoke.json"
+    )
+    ns_triad_cocycle_floor_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_cocycle_floor_scan_check_smoke.json"
+    )
+    ns_triad_wall1_shell_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_triad_wall1_shell_bridge_summary_check_smoke.json"
     )
     ns_tube_morphology_scan_check_out = (
         CHILD_OUT_DIR / "ns_tube_morphology_scan_check_smoke.json"
@@ -5070,6 +5094,236 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional low-frustration Hessian regression gate",
                 "validates non-promoting Hessian-proxy basin telemetry for the Wall 1 barrier route",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_phase_regime_separation_scan",
+            path=script("ns_triad_phase_regime_separation_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_phase_regime_separation_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_phase_regime_separation_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_phase_regime_separation_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_phase_regime_separation_scan.py").exists()
+            else "ns_triad_phase_regime_separation_scan script not found",
+            notes=(
+                "optional triad phase-regime separation scan",
+                "empirical/non-promoting; compares random-phase and optimized low-frustration shell carriers",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_phase_regime_separation_scan",
+            path=script("check_ns_triad_phase_regime_separation_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_phase_regime_separation_scan_out),
+                "--output-json",
+                str(ns_triad_phase_regime_separation_scan_check_out),
+            )
+            if ns_triad_phase_regime_separation_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_phase_regime_separation_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_phase_regime_separation_scan_out.exists()
+            and script("check_ns_triad_phase_regime_separation_scan.py").exists()
+            else (
+                "check_ns_triad_phase_regime_separation_scan script not found"
+                if not script("check_ns_triad_phase_regime_separation_scan.py").exists()
+                else "check_ns_triad_phase_regime_separation_scan requires the phase-regime scan output"
+            ),
+            notes=(
+                "optional triad phase-regime separation regression gate",
+                "validates non-promoting shellwise random-vs-optimized telemetry and epsilon-gap proxies",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_frame_stability_scan",
+            path=script("ns_triad_frame_stability_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_frame_stability_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_frame_stability_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_frame_stability_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_frame_stability_scan.py").exists()
+            else "ns_triad_frame_stability_scan script not found",
+            notes=(
+                "optional triad frame-stability scan",
+                "empirical/non-promoting; measures positive-backbone, negative-frame, and stratum-aware operator proxies",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_frame_stability_scan",
+            path=script("check_ns_triad_frame_stability_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_frame_stability_scan_out),
+                "--output-json",
+                str(ns_triad_frame_stability_scan_check_out),
+            )
+            if ns_triad_frame_stability_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_frame_stability_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_frame_stability_scan_out.exists()
+            and script("check_ns_triad_frame_stability_scan.py").exists()
+            else (
+                "check_ns_triad_frame_stability_scan script not found"
+                if not script("check_ns_triad_frame_stability_scan.py").exists()
+                else "check_ns_triad_frame_stability_scan requires the frame-stability scan output"
+            ),
+            notes=(
+                "optional triad frame-stability regression gate",
+                "validates non-promoting backbone/negative-frame and stratum-decomposition telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_cocycle_floor_scan",
+            path=script("ns_triad_cocycle_floor_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_cocycle_floor_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_cocycle_floor_scan.py").exists()
+            else "ns_triad_cocycle_floor_scan script not found",
+            notes=(
+                "optional triad cocycle-floor scan",
+                "empirical/non-promoting; estimates cycle-defect lower bounds and shellwise irreducible-floor proxies",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_cocycle_floor_scan",
+            path=script("check_ns_triad_cocycle_floor_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--output-json",
+                str(ns_triad_cocycle_floor_scan_check_out),
+            )
+            if ns_triad_cocycle_floor_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_cocycle_floor_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_cocycle_floor_scan_out.exists()
+            and script("check_ns_triad_cocycle_floor_scan.py").exists()
+            else (
+                "check_ns_triad_cocycle_floor_scan script not found"
+                if not script("check_ns_triad_cocycle_floor_scan.py").exists()
+                else "check_ns_triad_cocycle_floor_scan requires the cocycle-floor scan output"
+            ),
+            notes=(
+                "optional triad cocycle-floor regression gate",
+                "validates non-promoting cycle-defect and floor-ratio telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_wall1_shell_bridge_summary",
+            path=script("ns_triad_wall1_shell_bridge_summary.py"),
+            args=(
+                "--phase-regime-json",
+                str(ns_triad_phase_regime_separation_scan_out),
+                "--frame-stability-json",
+                str(ns_triad_frame_stability_scan_out),
+                "--cocycle-floor-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--cycle-json",
+                str(ns_triad_cycle_obstruction_scan_out),
+                "--hessian-json",
+                str(ns_triad_low_frustration_hessian_scan_out),
+                "--output-json",
+                str(ns_triad_wall1_shell_bridge_summary_out),
+            )
+            if ns_triad_phase_regime_separation_scan_out.exists()
+            and ns_triad_frame_stability_scan_out.exists()
+            and ns_triad_cocycle_floor_scan_out.exists()
+            and ns_triad_cycle_obstruction_scan_out.exists()
+            and ns_triad_low_frustration_hessian_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_wall1_shell_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_phase_regime_separation_scan_out.exists()
+            and ns_triad_frame_stability_scan_out.exists()
+            and ns_triad_cocycle_floor_scan_out.exists()
+            and ns_triad_cycle_obstruction_scan_out.exists()
+            and ns_triad_low_frustration_hessian_scan_out.exists()
+            and script("ns_triad_wall1_shell_bridge_summary.py").exists()
+            else (
+                "ns_triad_wall1_shell_bridge_summary script not found"
+                if not script("ns_triad_wall1_shell_bridge_summary.py").exists()
+                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs"
+            ),
+            notes=(
+                "optional Wall 1 shell bridge summary",
+                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, cycle, and Hessian telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_wall1_shell_bridge_summary",
+            path=script("check_ns_triad_wall1_shell_bridge_summary.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_wall1_shell_bridge_summary_out),
+                "--output-json",
+                str(ns_triad_wall1_shell_bridge_summary_check_out),
+            )
+            if ns_triad_wall1_shell_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_wall1_shell_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_wall1_shell_bridge_summary_out.exists()
+            and script("check_ns_triad_wall1_shell_bridge_summary.py").exists()
+            else (
+                "check_ns_triad_wall1_shell_bridge_summary script not found"
+                if not script("check_ns_triad_wall1_shell_bridge_summary.py").exists()
+                else "check_ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell bridge summary output"
+            ),
+            notes=(
+                "optional Wall 1 shell bridge regression gate",
+                "validates non-promoting shell-bridge metrics and explicit unproved-wall bookkeeping",
             ),
         ),
         HarnessSpec(
