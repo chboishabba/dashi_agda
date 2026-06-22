@@ -268,6 +268,8 @@ def test_prime_lane_stage12_adapter_reclassifies_p7_as_local_exemplar() -> None:
     assert "unitGroupLabel" in adapter_text
     assert "stageWindowWitness" in adapter_text
     assert "stageWindowWitnessIsCanonical" in adapter_text
+    assert "successorField0To111" in adapter_text
+    assert "successorField0To111IsCanonical" in adapter_text
     assert "stageIdentityPointIsAtlas7" in adapter_text
     assert "unitOrderStagePointIsAtlas6" in adapter_text
     assert "carryDepthSeamPointIsAtlas11" in adapter_text
@@ -282,6 +284,7 @@ def test_prime_lane_stage12_adapter_reclassifies_p7_as_local_exemplar() -> None:
     assert "Stage12FibreSurface is the spine" in architecture_text
     assert "p7" in architecture_text
     assert "p13" in architecture_text
+    assert "111 -> 112 = 2^4 * 7" in adapter_text
 
 
 def test_prime_successor_witness_surface_marks_the_full_stage12_lane() -> None:
@@ -305,6 +308,12 @@ def test_prime_successor_witness_surface_marks_the_full_stage12_lane() -> None:
             "canonicalStage6SuccessorWitness",
             "canonicalStage11SuccessorWitness",
             "canonicalStageSuccessorWitnesses",
+            "record StageWindowSuccessorField : Set where",
+            "canonicalStage0To111SuccessorField",
+            "canonicalStage99SuccessorWitness",
+            "canonicalStage109SuccessorWitness",
+            "canonicalStage110SuccessorWitness",
+            "canonicalStage111SuccessorWitness",
             "stage12ClosurePrimeWitness",
             "canonicalP2PrimeSuccessorWitness",
             "canonicalP3PrimeSuccessorWitness",
@@ -323,6 +332,13 @@ def test_prime_successor_witness_surface_marks_the_full_stage12_lane() -> None:
     assert "8 is witnessed by 9 = 3^2" in witness_text
     assert "9 is witnessed by 10 = 2*5" in witness_text
     assert "11 is witnessed by 12 = 2^2*3" in witness_text
+    assert "The 0..111 inclusive window has size 112 = 2^4 * 7." in witness_text
+    assert "0..111 contains nine full Stage12 blocks plus a four-stage overflow: 108..111." in witness_text
+    assert "111 is witnessed by 112 = 2^4 * 7." in witness_text
+    assert "111 = 100 + 10 + 1 = j2 + j1 + j0" in witness_text
+    assert "99 is witnessed by 100 = 2^2 * 5^2" in witness_text
+    assert "109 is witnessed by 110 = 2 * 5 * 11" in witness_text
+    assert "110 is witnessed by 111 = 3 * 37" in witness_text
 
     assert "Stage12FibreSurface" in readme_text
     assert "spine" in readme_text
@@ -361,6 +377,23 @@ def test_docs_cover_full_0_to_11_successor_witness_taxonomy() -> None:
     assert "Stage12FibreSurface remains the" in readme_text
     assert "Stage12FibreSurface is the spine" in readme_text
     assert "Stage12FibreSurface is the spine" in architecture_text
+
+
+def test_docs_cover_0_to_111_successor_field() -> None:
+    readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    architecture_text = (REPO_ROOT / "architecture.md").read_text(
+        encoding="utf-8"
+    )
+
+    for text in (readme_text, architecture_text):
+        assert "0..111" in text
+        assert "111 = 100 + 10 + 1 = j2 + j1 + j0" in text
+        assert "111 -> 112 = 2^4 * 7" in text
+        assert "112 = 2^4 * 7" in text
+        assert "nine full Stage12 blocks plus a four-stage overflow: 108..111" in text
+        assert "99 -> 100 = 2^2 * 5^2" in text
+        assert "109 -> 110 = 2 * 5 * 11" in text
+        assert "110 -> 111 = 3 * 37" in text
 
 
 def test_recovered_carry_and_successor_adapter_slice_markers() -> None:

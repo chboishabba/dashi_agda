@@ -199,6 +199,13 @@ Architecture rule for this tranche:
 - `p13` is the natural full Stage12 witness because `13 - 1 = 12`; inside the `0..11` atlas it is recorded as the successor witness over the whole Stage12 carrier rather than as a replacement for that carrier.
 - `P7Stage7C6HexRegression` is therefore a local regression witness over the Stage12 surface, not the definition of Stage12 itself.
 - Future prime lanes should consume the same Stage12 quotient/carry-depth seam rather than inventing parallel stage semantics.
+- The same successor law is now widened to a typed `0..111` window receipt: for every stage `n`, the witness is still `n + 1`, but the larger field is classified by factorization and carry layer rather than only by the `0..11` microcycle.
+- `0..111` is split into three decimal carry layers: `0..9`, `10..99`, and `100..111`.
+- `111 = 100 + 10 + 1 = j2 + j1 + j0` is the first tri-marked decimal/carry state in that widened window.
+- `111 -> 112 = 2^4 * 7`, so the final witness of the window couples fourth-depth binary carry recursion to the `p7` / `HexTruth` lane.
+- The inclusive window size is itself `112 = 2^4 * 7`, which means `0..111` forms a `112`-stage witness field rather than just a longer tabulation.
+- `0..111` contains nine full Stage12 blocks plus a four-stage overflow: 108..111.
+- The main carry/composite seam highlights in that widened field are `99 -> 100 = 2^2 * 5^2`, `109 -> 110 = 2 * 5 * 11`, `110 -> 111 = 3 * 37`, and `111 -> 112 = 2^4 * 7`.
 
 ## Performance Intent
 Reducing parallel dependency paths lowers normalization and transport overhead.

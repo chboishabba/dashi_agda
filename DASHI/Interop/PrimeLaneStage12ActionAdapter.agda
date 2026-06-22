@@ -81,6 +81,10 @@ record PrimeLaneStage12ActionAdapter : Set where
       Successor.StageSuccessorWitness
     stageWindowWitnessIsCanonical :
       stageWindowWitness ≡ Successor.canonicalStage6SuccessorWitness
+    successorField0To111 :
+      Successor.StageWindowSuccessorField
+    successorField0To111IsCanonical :
+      successorField0To111 ≡ Successor.canonicalStage0To111SuccessorField
     stageIdentityPoint :
       Atlas.StageAtlasZeroToEleven
     stageIdentityPointIsAtlas7 :
@@ -151,6 +155,10 @@ canonicalP7PrimeLaneStage12ActionAdapter =
         Successor.canonicalStage6SuccessorWitness
     ; stageWindowWitnessIsCanonical =
         refl
+    ; successorField0To111 =
+        Successor.canonicalStage0To111SuccessorField
+    ; successorField0To111IsCanonical =
+        refl
     ; stageIdentityPoint =
         Atlas.atlas-7
     ; stageIdentityPointIsAtlas7 =
@@ -191,6 +199,7 @@ canonicalP7PrimeLaneStage12ActionAdapter =
         "Stage12FibreSurface is now the general stage/carry/fibre grammar; prime lanes are local unit-action adapters into it."
       ∷ "The prime-successor rule is explicit here: 6-action ecology +1 = 7-prime lane."
       ∷ "The p7 row is also the stage-6 successor witness inside the full 0..11 table, not a replacement for that table."
+      ∷ "The same p7 row now sits inside the widened 0..111 witness field whose final seam is 111 -> 112 = 2^4 * 7."
       ∷ "The p7 lane is the first canonical C6/HexTruth local witness: Stage-7 is its identity placement and Stage-6 is its unit-order placement."
       ∷ "atlas-11/rev-2 remains the more global carry-depth seam and is not reducible to the p7 lane."
       ∷ []
