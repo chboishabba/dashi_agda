@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -24,6 +25,17 @@ DEFAULT_OUTPUT_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "check_ns_triad_signed_wall1_theorem_status_20260622.json"
 )
+
+ALLOWED_SIGNED_STATUS = {"fail-closed", "partial", "unavailable"}
+ALLOWED_SIGNED_SOURCE = {
+    "reconciliation_json",
+    "carrier_ranking_json",
+    "legacy_chart",
+    "missing",
+    "explicit",
+    "legacy-optimistic-chart",
+    "source-json",
+}
 
 
 def _parse_args() -> argparse.Namespace:
@@ -54,6 +66,16 @@ def _load_json(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ValueError("payload must be object")
     return payload
+
+
+def _finite_float(value: Any) -> float | None:
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError):
+        return None
+    return parsed if math.isfinite(parsed) else None
 
 
 def main() -> int:
@@ -102,6 +124,16 @@ def main() -> int:
             errors.append("aggregate.signed_xor_bridge_open: must be true")
         if aggregate.get("signed_spectral_bridge_open") is not True:
             errors.append("aggregate.signed_spectral_bridge_open: must be true")
+        for key in ("signed_carrier_reconciliation_status", "carrier_identification_status"):
+            if aggregate.get(key) not in ALLOWED_SIGNED_STATUS:
+                errors.append(f"aggregate.{key}: must be one of {sorted(ALLOWED_SIGNED_STATUS)!r}")
+        for key in ("signed_carrier_reconciliation_source", "carrier_identification_source"):
+            if aggregate.get(key) not in ALLOWED_SIGNED_SOURCE:
+                errors.append(f"aggregate.{key}: must be one of {sorted(ALLOWED_SIGNED_SOURCE)!r}")
+        if aggregate.get("signed_carrier_reconciliation_status") == "fail-closed" and aggregate.get("signed_carrier_reconciliation_source") == "missing":
+            errors.append("aggregate.signed_carrier_reconciliation_source: fail-closed status requires a non-missing provenance tag")
+        if aggregate.get("carrier_identification_status") == "fail-closed" and aggregate.get("carrier_identification_source") == "missing":
+            errors.append("aggregate.carrier_identification_source: fail-closed status requires a non-missing provenance tag")
         if aggregate.get("signed_wall1_route_names") is not None and not isinstance(
             aggregate.get("signed_wall1_route_names"), list
         ):
@@ -150,6 +182,26 @@ def main() -> int:
             errors.append(f"signed_wall1_rows[{index}].clay_promoted: must be false")
         if row.get("wall1_status") != "unproved":
             errors.append(f"signed_wall1_rows[{index}].wall1_status: must be 'unproved'")
+        if row.get("signed_carrier_reconciliation_status") is not None and row.get("signed_carrier_reconciliation_status") not in ALLOWED_SIGNED_STATUS:
+            errors.append(
+                f"signed_wall1_rows[{index}].signed_carrier_reconciliation_status: must be fail-closed|partial|unavailable or null"
+            )
+        if row.get("carrier_identification_status") is not None and row.get("carrier_identification_status") not in ALLOWED_SIGNED_STATUS:
+            errors.append(
+                f"signed_wall1_rows[{index}].carrier_identification_status: must be fail-closed|partial|unavailable or null"
+            )
+        if row.get("signed_carrier_reconciliation_source") is not None and row.get("signed_carrier_reconciliation_source") not in ALLOWED_SIGNED_SOURCE:
+            errors.append(
+                f"signed_wall1_rows[{index}].signed_carrier_reconciliation_source: must be an allowed provenance tag or null"
+            )
+        if row.get("carrier_identification_source") is not None and row.get("carrier_identification_source") not in ALLOWED_SIGNED_SOURCE:
+            errors.append(
+                f"signed_wall1_rows[{index}].carrier_identification_source: must be an allowed provenance tag or null"
+            )
+        if row.get("carrier_rank") is not None and _finite_float(row.get("carrier_rank")) is None:
+            errors.append(f"signed_wall1_rows[{index}].carrier_rank: must be finite or null")
+        if row.get("carrier_id") is not None and not isinstance(row.get("carrier_id"), str):
+            errors.append(f"signed_wall1_rows[{index}].carrier_id: must be string or null")
         if row.get("surface") == "signed_xor_gaugeability":
             if row.get("route_name") != "wall1a-signed-xor-gaugeability":
                 errors.append(
