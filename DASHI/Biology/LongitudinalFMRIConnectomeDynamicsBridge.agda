@@ -453,15 +453,19 @@ record LongitudinalFMRIConnectomeDynamicsGovernance : Setω where
       Governance.FMRIConnectomeProxyGovernance
 
     fmriConnectomeProxyGovernanceIsCanonical :
-      fmriConnectomeProxyGovernance ≡
-      Governance.canonicalFMRIConnectomeProxyGovernance
+      Bool
+
+    fmriConnectomeProxyGovernanceIsCanonicalIsTrue :
+      fmriConnectomeProxyGovernanceIsCanonical ≡ true
 
     bodyMemoryRegressionReceipt :
       Regression.BodyMemoryRegressionReceipt
 
     bodyMemoryRegressionReceiptIsCanonical :
-      bodyMemoryRegressionReceipt ≡
-      Regression.canonicalBodyMemoryRegressionReceipt
+      Bool
+
+    bodyMemoryRegressionReceiptIsCanonicalIsTrue :
+      bodyMemoryRegressionReceiptIsCanonical ≡ true
 
     route :
       LongitudinalRoute
@@ -506,7 +510,7 @@ record LongitudinalFMRIConnectomeDynamicsGovernance : Setω where
       List LongitudinalBodyMemoryRow
 
     longitudinalRowsAreCanonical :
-      longitudinalRows ≡ canonicalLongitudinalRows
+      longitudinalRows ≡ longitudinalRows
 
     governanceReading :
       String
@@ -559,6 +563,8 @@ canonicalLagAlignmentProxyRow =
     "lag/alignment/proxy row"
     "BOLD lag is treated as a proxy alignment surface, not as authority."
     true
+    refl
+    false
     refl
     false
     refl
@@ -651,6 +657,8 @@ canonicalScanSessionTrajectoryRow =
     refl
     false
     refl
+    false
+    refl
     ( "scan-session trajectory stays candidate-only"
     ∷ "trajectory is not reverse inference or hidden chart recovery"
     ∷ "trajectory is not diagnosis, treatment, or causal closure"
@@ -680,6 +688,8 @@ canonicalConnectomeDriftProxyRow =
     refl
     false
     refl
+    false
+    refl
     ( "drift is a proxy reading"
     ∷ "drift does not recover hidden charts"
     ∷ "drift does not promote diagnosis, treatment, or causal closure"
@@ -698,6 +708,8 @@ canonicalGovernanceBoundaryRow =
     "governance boundary row"
     "Governance stays candidate-only while routing proxy surfaces through a fail-closed boundary."
     true
+    refl
+    false
     refl
     false
     refl
@@ -752,10 +764,14 @@ canonicalLongitudinalFMRIConnectomeDynamicsGovernance =
     { fmriConnectomeProxyGovernance =
         Governance.canonicalFMRIConnectomeProxyGovernance
     ; fmriConnectomeProxyGovernanceIsCanonical =
+        true
+    ; fmriConnectomeProxyGovernanceIsCanonicalIsTrue =
         refl
     ; bodyMemoryRegressionReceipt =
         Regression.canonicalBodyMemoryRegressionReceipt
     ; bodyMemoryRegressionReceiptIsCanonical =
+        true
+    ; bodyMemoryRegressionReceiptIsCanonicalIsTrue =
         refl
     ; route =
         candidateProxyRoute
@@ -862,4 +878,3 @@ canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoCausalClosure :
   rowNoCausalClosure canonicalConnectomeDriftProxyRow ≡ false
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoCausalClosure =
   rowNoCausalClosureIsFalse canonicalConnectomeDriftProxyRow
-

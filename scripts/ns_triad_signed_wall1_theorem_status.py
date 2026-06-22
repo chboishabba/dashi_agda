@@ -31,7 +31,10 @@ DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_continuous_coherence_capacity_scan_N128_20260623.json"
 )
-DEFAULT_K_N_EXACT_IDENTITY_JSON = DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON
+DEFAULT_K_N_EXACT_IDENTITY_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_kn_exact_identity_scan_N128_20260623.json"
+)
 DEFAULT_SPECTRAL_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_signed_spectral_audit_scan_N128_20260622.json"
@@ -249,10 +252,16 @@ def main() -> int:
     reconciliation_aggregate = reconciliation.get("aggregate", {}) if isinstance(reconciliation, dict) else {}
     carrier_ranking = _read_json_or_empty(args.carrier_ranking_json)
     carrier_ranking_aggregate = carrier_ranking.get("aggregate", {}) if isinstance(carrier_ranking, dict) else {}
-    continuous_coherence_capacity = _read_json_or_empty(args.k_n_exact_identity_json)
+    continuous_coherence_capacity = _read_json_or_empty(args.continuous_coherence_capacity_json)
     continuous_coherence_capacity_aggregate = (
         continuous_coherence_capacity.get("aggregate", {})
         if isinstance(continuous_coherence_capacity, dict)
+        else {}
+    )
+    kn_exact_identity = _read_json_or_empty(args.k_n_exact_identity_json)
+    kn_exact_identity_aggregate = (
+        kn_exact_identity.get("aggregate", {})
+        if isinstance(kn_exact_identity, dict)
         else {}
     )
     continuous_coherence_status, continuous_coherence_source = _derive_status(
@@ -276,6 +285,23 @@ def main() -> int:
         bool(continuous_coherence_capacity),
         True,
     )
+    kn_exact_identity_status, kn_exact_identity_source = _derive_status(
+        _status_value(
+            kn_exact_identity_aggregate,
+            (
+                "kn_exact_identity_status",
+                "status",
+            ),
+        ),
+        _status_value(
+            kn_exact_identity_aggregate,
+            (
+                "kn_exact_identity_source",
+            ),
+        ),
+        bool(kn_exact_identity),
+        True,
+    )
     spectral = _read_json(args.spectral_json)
     cocycle = _read_json(args.cocycle_json)
     schur = _read_json(args.schur_json)
@@ -296,6 +322,11 @@ def main() -> int:
             k = _key(row)
             if k is not None:
                 by_key.setdefault(k, {}).update({"continuous": row})
+    for row in _rows(kn_exact_identity):
+        if isinstance(row, dict):
+            k = _key(row)
+            if k is not None:
+                by_key.setdefault(k, {}).update({"kn": row})
     for row in _reconciliation_rows(reconciliation):
         if isinstance(row, dict):
             k = _key(row)
@@ -316,13 +347,14 @@ def main() -> int:
     reconciliation_statuses: list[str] = []
     carrier_identification_statuses: list[str] = []
     for (frame, shell), payloads in sorted(by_key.items()):
-        if set(payloads) < {"gauge", "spectral", "cocycle", "schur", "continuous"}:
+        if set(payloads) < {"gauge", "spectral", "cocycle", "schur", "kn"}:
             continue
         g = payloads["gauge"]
         s = payloads["spectral"]
         c = payloads["cocycle"]
         h = payloads["schur"]
-        u = payloads["continuous"]
+        u = payloads.get("continuous", {})
+        krow = payloads["kn"]
         gauge_fields = (
             "psi_pi_weight_fraction",
             "signed_xor_weighted_distance_fraction",
@@ -400,6 +432,13 @@ def main() -> int:
                 "continuous_coherence_capacity_proxy": float(u.get("continuous_coherence_capacity_proxy", 0.0)),
                 "continuous_coherence_deficit_proxy": float(u.get("continuous_coherence_deficit_proxy", 0.0)),
                 "continuous_coherence_identity_residual": float(u.get("continuous_coherence_identity_residual", 0.0)),
+                "lambda_min_kn": float(krow.get("lambda_min_kn", 0.0)),
+                "lambda_max_kn": float(krow.get("lambda_max_kn", 0.0)),
+                "k_n_exact_identity_residual_op": float(krow.get("exact_identity_residual_op", 0.0)),
+                "k_n_exact_identity_residual_fro": float(krow.get("exact_identity_residual_fro", 0.0)),
+                "negative_sign_fraction": float(krow.get("negative_sign_fraction", 0.0)),
+                "negative_frame_mass_ratio": float(krow.get("negative_frame_mass_ratio", 0.0)),
+                "negative_spanning_coverage_fraction": float(krow.get("negative_spanning_coverage_fraction", 0.0)),
                 "spectral_floor_lower_bound": float(s["xy_floor_spectral_lower_bound"]),
                 "signed_laplacian_lambda_min": float(s["signed_laplacian_lambda_min"]),
                 "signed_laplacian_lambda_max": float(s["signed_laplacian_lambda_max"]),
@@ -418,6 +457,7 @@ def main() -> int:
         )
         reconciliation_statuses.append(rec_status)
         carrier_identification_statuses.append(carrier_status)
+        carrier_identification_statuses.append(kn_exact_identity_status)
         carrier_identification_statuses.append(continuous_coherence_status)
 
     aggregate = {
@@ -440,6 +480,18 @@ def main() -> int:
         "continuous_coherence_identity_residual_max": max(
             [row["continuous_coherence_identity_residual"] for row in summary_rows],
             default=0.0,
+        ),
+        "lambda_min_kn_mean": _mean([row["lambda_min_kn"] for row in summary_rows]),
+        "lambda_max_kn_mean": _mean([row["lambda_max_kn"] for row in summary_rows]),
+        "k_n_exact_identity_residual_op_mean": _mean([row["k_n_exact_identity_residual_op"] for row in summary_rows]),
+        "k_n_exact_identity_residual_op_max": max(
+            [row["k_n_exact_identity_residual_op"] for row in summary_rows],
+            default=0.0,
+        ),
+        "negative_sign_fraction_mean": _mean([row["negative_sign_fraction"] for row in summary_rows]),
+        "negative_frame_mass_ratio_mean": _mean([row["negative_frame_mass_ratio"] for row in summary_rows]),
+        "negative_spanning_coverage_fraction_mean": _mean(
+            [row["negative_spanning_coverage_fraction"] for row in summary_rows]
         ),
         "spectral_floor_lower_bound_mean": _mean([row["spectral_floor_lower_bound"] for row in summary_rows]),
         "signed_frame_gap_lower_edge_mean": _mean([row["signed_frame_gap_lower_edge"] for row in summary_rows]),
@@ -479,31 +531,22 @@ def main() -> int:
         ),
         "k_n_exact_identity_status": (
             "fail-closed"
-            if continuous_coherence_status == "fail-closed"
+            if kn_exact_identity_status == "fail-closed"
             else "partial"
-            if continuous_coherence_status == "partial"
+            if kn_exact_identity_status == "partial"
             else "unavailable"
         ),
-        "k_n_exact_identity_source": continuous_coherence_source,
+        "k_n_exact_identity_source": kn_exact_identity_source,
         "k_n_exact_identity_candidate_only": True,
         "k_n_exact_identity_fail_closed": True,
         "k_n_exact_identity_independent_proof_certificate": False,
         "k_n_exact_identity_route_explanatory_fraction_mean": _first_float_from_payload(
-            continuous_coherence_capacity,
+            kn_exact_identity,
             (
                 "k_n_exact_identity_route_explanatory_fraction_mean",
-                "k_n_exact_identity_capacity_mean",
-                "k_n_exact_identity_support_mean",
-                "continuous_coherence_route_explanatory_fraction_mean",
-                "continuous_coherence_capacity_mean",
-                "continuous_coherence_capacity_proxy_mean",
-                "continuous_coherence_deficit_proxy_mean",
-                "continuous_positive_route_capacity_mean",
-                "continuous_positive_route_support_mean",
-                "positive_route_capacity_mean",
-                "positive_route_support_mean",
-                "observed_floor_ratio_mean",
-                "observed_floor_proxy_mean",
+                "wall1_floor_lower_bound_from_kn_mean",
+                "lambda_min_kn_mean",
+                "negative_spanning_coverage_fraction_mean",
             ),
         ),
         "continuous_coherence_capacity_status": (
@@ -564,7 +607,7 @@ def main() -> int:
             "receipt_name": "NSTriadSignedSpectralFrustrationBoundary",
             "route_name": "signed-XY-spectral-frustration-wall-1a",
             "boundary_summary": (
-                "Signed Laplacian / signed XY floor candidate remains open, upper spectral edge still carries XY-floor risk, and theorem/full-NS/Clay promotion stays false."
+                "Signed Laplacian / signed XY floor candidate remains open, upper spectral edge still carries XY-floor risk, theorem/full-NS/Clay promotion stays false, and the old signed route is legacy and non-canonical."
             ),
             "bridge_summary": (
                 "The discrete signed-XOR distance to the continuous XY floor bridge is still open."
@@ -586,8 +629,8 @@ def main() -> int:
     continuous_wall1_rows = [
         {
             "surface": "k_n_exact_identity_carrier",
-            "module_path": "DASHI/Physics/Closure/NSTriadContinuousCoherenceCarrierBoundary.agda",
-            "receipt_name": "NSTriadContinuousCoherenceCarrierBoundary",
+            "module_path": "DASHI/Physics/Closure/NSTriadKNExactIdentityReceipt.agda",
+            "receipt_name": "NSTriadKNExactIdentityReceipt",
             "route_name": "k-n-exact-identity-wall-1a",
             "boundary_summary": (
                 "The K_N exact-identity candidate is the positive Wall 1a carrier, while the old signed-XOR route is legacy and non-canonical."
@@ -604,18 +647,18 @@ def main() -> int:
             "continuous_coherence_route_open": True,
             "k_n_exact_identity_route_open": True,
             "k_n_exact_identity_status": aggregate["k_n_exact_identity_status"],
-            "continuous_coherence_status": aggregate["k_n_exact_identity_status"],
+            "continuous_coherence_status": aggregate["continuous_coherence_capacity_status"],
         },
         {
-            "surface": "coherence_deficit_floor",
-            "module_path": "DASHI/Physics/Closure/NSTriadCoherenceDeficitFloorBoundary.agda",
-            "receipt_name": "NSTriadCoherenceDeficitFloorBoundary",
-            "route_name": "coherence-deficit-floor-wall-1a",
+            "surface": "b_s_frame_equidistribution_boundary",
+            "module_path": "DASHI/Physics/Closure/NSTriadBSFrameEquidistributionBoundary.agda",
+            "receipt_name": "NSTriadBSFrameEquidistributionBoundary",
+            "route_name": "b-s-frame-equidistribution-wall-1a",
             "boundary_summary": (
-                "The positive theorem shape cap_N <= kappa < 1 -> floor >= (1 - kappa) / 2 is recorded, but no proof is claimed."
+                "The Biot-Savart frame-equidistribution target is the single open finite-dimensional theorem candidate; lower spectral edge controls the floor and upper edge controls frame safety."
             ),
             "bridge_summary": (
-                "The floor theorem remains separate from the Schur/frame-gap route; this row keeps the implication surface fail-closed."
+                "This equidistribution surface is candidate-only and fail-closed; it keeps the exact operator theorem target explicit without claiming a proof."
             ),
             "candidate_only": True,
             "fail_closed": True,
@@ -626,7 +669,7 @@ def main() -> int:
             "continuous_coherence_route_open": True,
             "k_n_exact_identity_route_open": True,
             "k_n_exact_identity_status": aggregate["k_n_exact_identity_status"],
-            "continuous_coherence_status": aggregate["k_n_exact_identity_status"],
+            "continuous_coherence_status": aggregate["continuous_coherence_capacity_status"],
         },
     ]
 
@@ -713,6 +756,13 @@ def main() -> int:
                 "continuous_coherence_capacity_proxy",
                 "continuous_coherence_deficit_proxy",
                 "continuous_coherence_identity_residual",
+                "lambda_min_kn",
+                "lambda_max_kn",
+                "k_n_exact_identity_residual_op",
+                "k_n_exact_identity_residual_fro",
+                "negative_sign_fraction",
+                "negative_frame_mass_ratio",
+                "negative_spanning_coverage_fraction",
                 "spectral_floor_lower_bound",
                 "signed_laplacian_lambda_min",
                 "signed_laplacian_lambda_max",

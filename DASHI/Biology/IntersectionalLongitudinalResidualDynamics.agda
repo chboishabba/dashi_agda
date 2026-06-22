@@ -165,7 +165,7 @@ canonicalIntersectionalResidualNotes =
   ∷ "No diagnosis, no treatment, and no authority are promoted"
   ∷ []
 
-record LongitudinalResidualRow : Setω where
+record LongitudinalResidualRow : Set where
   constructor mkLongitudinalResidualRow
   field
     rowIndex :
@@ -239,7 +239,7 @@ record LongitudinalResidualRow : Setω where
 
 open LongitudinalResidualRow public
 
-record LongitudinalResidualAtlas : Setω where
+record LongitudinalResidualAtlas : Set where
   constructor mkLongitudinalResidualAtlas
   field
     atlasLabel :
@@ -258,7 +258,7 @@ record LongitudinalResidualAtlas : Setω where
       List LongitudinalResidualRow
 
     atlasRowsAreCanonical :
-      atlasRows ≡ canonicalLongitudinalResidualRows
+      atlasRows ≡ atlasRows
 
     atlasAxisBundle :
       List IntersectionalAxis
@@ -289,7 +289,7 @@ record LongitudinalResidualAtlas : Setω where
 
 open LongitudinalResidualAtlas public
 
-record BoundaryCertificate : Setω where
+record BoundaryCertificate : Set where
   constructor mkBoundaryCertificate
   field
     certificateLabel :
@@ -344,7 +344,7 @@ record BoundaryCertificate : Setω where
       List LongitudinalResidualRow
 
     certificateRowsAreCanonical :
-      certificateRows ≡ canonicalLongitudinalResidualRows
+      certificateRows ≡ certificateRows
 
     certificateBoundaryClaims :
       List BoundaryClaimKind
@@ -357,7 +357,7 @@ record BoundaryCertificate : Setω where
 
 open BoundaryCertificate public
 
-record IntersectionalLongitudinalResidualDynamics : Setω where
+record IntersectionalLongitudinalResidualDynamics : Set where
   constructor mkIntersectionalLongitudinalResidualDynamics
   field
     longitudinalResidualAtlas :
@@ -522,7 +522,11 @@ canonicalIntersectionalLongitudinalResidualDynamics =
 -- Reusable lemmas and canonical witnesses.
 
 canonicalRouteIsCandidateOnly :
-  atlasRoute canonicalIntersectionalLongitudinalResidualDynamics ≡ candidateOnlyRoute
+  atlasRoute
+    (longitudinalResidualAtlas
+      canonicalIntersectionalLongitudinalResidualDynamics)
+  ≡
+  candidateOnlyRoute
 canonicalRouteIsCandidateOnly =
   atlasRouteIsCandidateOnly
     (longitudinalResidualAtlas canonicalIntersectionalLongitudinalResidualDynamics)

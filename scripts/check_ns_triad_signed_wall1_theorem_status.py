@@ -160,14 +160,13 @@ def main() -> int:
         if aggregate.get("k_n_exact_identity_fail_closed") is not True:
             errors.append("aggregate.k_n_exact_identity_fail_closed: must be true")
         if aggregate.get("continuous_coherence_capacity_source") not in (
-            "continuous_coherence_json",
-            "k_n_exact_identity_json",
+            "continuous_coherence_capacity_json",
             "missing",
             "explicit",
             "source-json",
         ):
             errors.append(
-                "aggregate.continuous_coherence_capacity_source: must be 'continuous_coherence_json', 'missing', 'explicit', or 'source-json'"
+                "aggregate.continuous_coherence_capacity_source: must be 'continuous_coherence_capacity_json', 'missing', 'explicit', or 'source-json'"
             )
         for key in (
             "continuous_coherence_capacity_proxy_mean",
@@ -185,7 +184,7 @@ def main() -> int:
             errors.append("aggregate.k_n_exact_identity_status: must be 'fail-closed' or 'unavailable'")
         if aggregate.get("k_n_exact_identity_route_names") not in (
             None,
-            ["k-n-exact-identity-wall-1a", "coherence-deficit-floor-wall-1a"],
+            ["k-n-exact-identity-wall-1a", "b-s-frame-equidistribution-wall-1a"],
         ):
             errors.append(
                 "aggregate.k_n_exact_identity_route_names: must be the ordered K_N exact-identity route list"
@@ -204,7 +203,7 @@ def main() -> int:
             errors.append("aggregate.continuous_wall1_clay_promoted: must be false")
         if aggregate.get("continuous_wall1_route_names") not in (
             None,
-            ["k-n-exact-identity-wall-1a", "coherence-deficit-floor-wall-1a"],
+            ["k-n-exact-identity-wall-1a", "b-s-frame-equidistribution-wall-1a"],
         ):
             errors.append(
                 "aggregate.continuous_wall1_route_names: must be the ordered continuous Wall 1 route list"
@@ -272,7 +271,7 @@ def main() -> int:
                     f"signed_wall1_rows[{index}].route_name: must be 'wall1a-signed-xor-gaugeability'"
                 )
             if row.get("boundary_summary") != (
-                "Sign balance does not imply frustration; gaugeable signed XOR is satisfiable; the non-gaugeable signed XOR obstruction surface remains empirical and the legacy signed route is non-canonical."
+                "Sign balance does not imply frustration; gaugeable signed XOR is satisfiable; the non-gaugeable signed XOR obstruction surface remains empirical."
             ):
                 errors.append(
                     f"signed_wall1_rows[{index}].boundary_summary: must match the canonical signed XOR note"
@@ -301,7 +300,7 @@ def main() -> int:
                     f"signed_wall1_rows[{index}].route_name: must be 'signed-XY-spectral-frustration-wall-1a'"
                 )
             if row.get("boundary_summary") != (
-                "Signed Laplacian / signed XY floor candidate remains open, upper spectral edge still carries XY-floor risk, and theorem/full-NS/Clay promotion stays false; the signed route is legacy and non-canonical."
+                "Signed Laplacian / signed XY floor candidate remains open, upper spectral edge still carries XY-floor risk, theorem/full-NS/Clay promotion stays false, and the old signed route is legacy and non-canonical."
             ):
                 errors.append(
                     f"signed_wall1_rows[{index}].boundary_summary: must match the canonical signed spectral note"
@@ -328,9 +327,9 @@ def main() -> int:
         if not isinstance(row, dict):
             errors.append(f"continuous_wall1_rows[{index}]: must be object")
             continue
-        if row.get("surface") not in ("k_n_exact_identity_carrier", "coherence_deficit_floor"):
+        if row.get("surface") not in ("k_n_exact_identity_carrier", "b_s_frame_equidistribution_boundary"):
             errors.append(
-                f"continuous_wall1_rows[{index}].surface: must be 'k_n_exact_identity_carrier' or 'coherence_deficit_floor'"
+                f"continuous_wall1_rows[{index}].surface: must be 'k_n_exact_identity_carrier' or 'b_s_frame_equidistribution_boundary'"
             )
         for key in ("module_path", "receipt_name", "route_name", "boundary_summary", "bridge_summary"):
             if not isinstance(row.get(key), str):
@@ -351,6 +350,23 @@ def main() -> int:
             errors.append(
                 f"continuous_wall1_rows[{index}].bridge_summary: must match the canonical K_N exact-identity note"
             )
+        if row.get("surface") == "b_s_frame_equidistribution_boundary":
+            if row.get("route_name") != "b-s-frame-equidistribution-wall-1a":
+                errors.append(
+                    f"continuous_wall1_rows[{index}].route_name: must be 'b-s-frame-equidistribution-wall-1a'"
+                )
+            if row.get("boundary_summary") != (
+                "The Biot-Savart frame-equidistribution target is the single open finite-dimensional theorem candidate; lower spectral edge controls the floor and upper edge controls frame safety."
+            ):
+                errors.append(
+                    f"continuous_wall1_rows[{index}].boundary_summary: must match the canonical frame-equidistribution note"
+                )
+            if row.get("bridge_summary") != (
+                "This equidistribution surface is candidate-only and fail-closed; it keeps the exact operator theorem target explicit without claiming a proof."
+            ):
+                errors.append(
+                    f"continuous_wall1_rows[{index}].bridge_summary: must match the canonical frame-equidistribution note"
+                )
         if row.get("candidate_only") is not True:
             errors.append(f"continuous_wall1_rows[{index}].candidate_only: must be true")
         if row.get("fail_closed") is not True:

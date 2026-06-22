@@ -312,6 +312,22 @@ def main() -> int:
             value = aggregate.get(key)
             if value is not None and value is not True:
                 errors.append(f"aggregate.{key}: must be true or null")
+        k_n_exact_identity_status = aggregate.get("k_n_exact_identity_status")
+        if k_n_exact_identity_status not in ("fail-closed", "unavailable"):
+            errors.append("aggregate.k_n_exact_identity_status: must be 'fail-closed' or 'unavailable'")
+        for key in (
+            "k_n_exact_identity_candidate_only",
+            "k_n_exact_identity_fail_closed",
+            "k_n_exact_identity_aggregate_status",
+            "k_n_exact_identity_aggregate_candidate_only",
+            "k_n_exact_identity_aggregate_fail_closed",
+        ):
+            value = aggregate.get(key)
+            if key.endswith("_status"):
+                if value not in ("fail-closed", "unavailable"):
+                    errors.append(f"aggregate.{key}: must be 'fail-closed' or 'unavailable'")
+            elif value is not None and value is not True:
+                errors.append(f"aggregate.{key}: must be true or null")
         if signed_wall1_status == "fail-closed" and not signed_wall1_rows:
             errors.append("aggregate.signed_wall1_status: fail-closed requires signed_wall1_rows")
         if signed_wall1_status == "unavailable" and signed_wall1_rows:
@@ -320,6 +336,9 @@ def main() -> int:
             errors.append("aggregate.signed_surface_consensus: fail-closed requires signed_wall1_rows")
         if signed_surface_consensus == "unavailable" and signed_wall1_rows:
             errors.append("aggregate.signed_surface_consensus: unavailable requires no signed_wall1_rows")
+        k_n_exact_identity_rows = payload.get("k_n_exact_identity_rows")
+        if k_n_exact_identity_rows is not None and not isinstance(k_n_exact_identity_rows, list):
+            errors.append("k_n_exact_identity_rows: must be list or null")
         for key in (
             "signed_wall1_reconciliation_input_status",
             "signed_wall1_carrier_ranking_input_status",
@@ -461,7 +480,7 @@ def main() -> int:
                             f"signed_wall1_rows[{index}].route_name: must be 'signed-XY-spectral-frustration-wall-1a'"
                         )
                     if row.get("boundary_summary") != (
-                        "Signed Laplacian / signed XY floor candidate remains open, upper spectral edge still carries XY-floor risk, and theorem/full-NS/Clay promotion stays false."
+                        "Signed Laplacian / signed XY floor candidate remains open, upper spectral edge still carries XY-floor risk, theorem/full-NS/Clay promotion stays false, and the old signed route is legacy and non-canonical."
                     ):
                         errors.append(
                             f"signed_wall1_rows[{index}].boundary_summary: must match the canonical signed spectral note"
@@ -480,11 +499,112 @@ def main() -> int:
                         errors.append(
                             f"signed_wall1_rows[{index}].upper_spectral_edge_carries_xy_floor_risk: must be true"
                         )
-                    if row.get("signed_xor_distance_bridge_open") is not True:
+                if row.get("signed_xor_distance_bridge_open") is not True:
+                    errors.append(
+                        f"signed_wall1_rows[{index}].signed_xor_distance_bridge_open: must be true"
+                    )
+        if isinstance(k_n_exact_identity_rows, list) and k_n_exact_identity_rows:
+            row_count = len(k_n_exact_identity_rows)
+            surface_count = len(
+                {
+                    row.get("surface")
+                    for row in k_n_exact_identity_rows
+                    if isinstance(row, dict) and isinstance(row.get("surface"), str)
+                }
+            )
+            if _nonnegative_int(aggregate.get("k_n_exact_identity_row_count")) is None:
+                errors.append("aggregate.k_n_exact_identity_row_count: must be nonnegative int")
+            if _nonnegative_int(aggregate.get("k_n_exact_identity_surface_count")) is None:
+                errors.append("aggregate.k_n_exact_identity_surface_count: must be nonnegative int")
+            if aggregate.get("k_n_exact_identity_status") != "fail-closed":
+                errors.append("aggregate.k_n_exact_identity_status: must be 'fail-closed'")
+            if aggregate.get("k_n_exact_identity_candidate_only") is not True:
+                errors.append("aggregate.k_n_exact_identity_candidate_only: must be true")
+            if aggregate.get("k_n_exact_identity_fail_closed") is not True:
+                errors.append("aggregate.k_n_exact_identity_fail_closed: must be true")
+            if aggregate.get("k_n_exact_identity_aggregate_status") not in ("fail-closed", "unavailable"):
+                errors.append(
+                    "aggregate.k_n_exact_identity_aggregate_status: must be 'fail-closed' or 'unavailable'"
+                )
+            for key in (
+                "k_n_exact_identity_aggregate_candidate_only",
+                "k_n_exact_identity_aggregate_fail_closed",
+            ):
+                if aggregate.get(key) is not True:
+                    errors.append(f"aggregate.{key}: must be true")
+            if len(k_n_exact_identity_rows) != 2:
+                errors.append("k_n_exact_identity_rows: must contain exactly 2 rows when present")
+            if aggregate.get("k_n_exact_identity_row_count") != row_count:
+                errors.append("aggregate.k_n_exact_identity_row_count: must match k_n_exact_identity_rows length")
+            if aggregate.get("k_n_exact_identity_surface_count") != surface_count:
+                errors.append(
+                    "aggregate.k_n_exact_identity_surface_count: must match k_n_exact_identity_rows surface count"
+                )
+            for index, row in enumerate(k_n_exact_identity_rows):
+                if not isinstance(row, dict):
+                    errors.append(f"k_n_exact_identity_rows[{index}]: must be object")
+                    continue
+                if row.get("surface") not in ("k_n_exact_identity_carrier", "coherence_deficit_floor"):
+                    errors.append(
+                        f"k_n_exact_identity_rows[{index}].surface: must be 'k_n_exact_identity_carrier' or 'coherence_deficit_floor'"
+                    )
+                if row.get("candidate_only") is not True:
+                    errors.append(f"k_n_exact_identity_rows[{index}].candidate_only: must be true")
+                if row.get("fail_closed") is not True:
+                    errors.append(f"k_n_exact_identity_rows[{index}].fail_closed: must be true")
+                if row.get("theorem_promoted") is not False:
+                    errors.append(f"k_n_exact_identity_rows[{index}].theorem_promoted: must be false")
+                if row.get("full_ns_promoted") is not False:
+                    errors.append(f"k_n_exact_identity_rows[{index}].full_ns_promoted: must be false")
+                if row.get("clay_promoted") is not False:
+                    errors.append(f"k_n_exact_identity_rows[{index}].clay_promoted: must be false")
+                if row.get("wall1_status") != "unproved":
+                    errors.append(f"k_n_exact_identity_rows[{index}].wall1_status: must be 'unproved'")
+                if row.get("k_n_exact_identity_route_open") is not True:
+                    errors.append(f"k_n_exact_identity_rows[{index}].k_n_exact_identity_route_open: must be true")
+                if row.get("continuous_coherence_route_open") is not True:
+                    errors.append(
+                        f"k_n_exact_identity_rows[{index}].continuous_coherence_route_open: must be true"
+                    )
+                if row.get("k_n_exact_identity_status") != "fail-closed":
+                    errors.append(f"k_n_exact_identity_rows[{index}].k_n_exact_identity_status: must be 'fail-closed'")
+                if row.get("continuous_coherence_status") != "fail-closed":
+                    errors.append(
+                        f"k_n_exact_identity_rows[{index}].continuous_coherence_status: must be 'fail-closed'"
+                    )
+                if row.get("route_name") != (
+                    "k-n-exact-identity-wall-1a"
+                    if row.get("surface") == "k_n_exact_identity_carrier"
+                    else "coherence-deficit-floor-wall-1a"
+                ):
+                    errors.append(f"k_n_exact_identity_rows[{index}].route_name: must match the canonical route")
+                if row.get("surface") == "k_n_exact_identity_carrier":
+                    if row.get("boundary_summary") != (
+                        "The K_N exact-identity candidate is the positive Wall 1a carrier, while the old signed-XOR route is legacy and non-canonical."
+                    ):
                         errors.append(
-                            f"signed_wall1_rows[{index}].signed_xor_distance_bridge_open: must be true"
+                            f"k_n_exact_identity_rows[{index}].boundary_summary: must match the canonical K_N note"
                         )
-        elif signed_wall1_rows == []:
+                    if row.get("bridge_summary") != (
+                        "This exact-identity surface is candidate-only and fail-closed; it keeps the positive theorem target explicit without claiming an independent certificate."
+                    ):
+                        errors.append(
+                            f"k_n_exact_identity_rows[{index}].bridge_summary: must match the canonical K_N bridge note"
+                        )
+                else:
+                    if row.get("boundary_summary") != (
+                        "The positive theorem shape cap_N <= kappa < 1 -> floor >= (1 - kappa) / 2 is recorded, but no proof is claimed."
+                    ):
+                        errors.append(
+                            f"k_n_exact_identity_rows[{index}].boundary_summary: must match the canonical floor note"
+                        )
+                    if row.get("bridge_summary") != (
+                        "The floor theorem remains separate from the Schur/frame-gap route; this row keeps the implication surface fail-closed."
+                    ):
+                        errors.append(
+                            f"k_n_exact_identity_rows[{index}].bridge_summary: must match the canonical floor bridge note"
+                        )
+        if signed_wall1_rows == []:
             if aggregate.get("signed_wall1_row_count") != 0:
                 errors.append("aggregate.signed_wall1_row_count: must be 0 when no signed_wall1_rows are present")
             if aggregate.get("signed_wall1_surface_count") != 0:
