@@ -274,6 +274,33 @@ canonicalBalancedRowHex :
   phaseCarrierRowToHexTruth canonicalBalancedPhaseCarrierRow ≡ hex-1
 canonicalBalancedRowHex = refl
 
+canonicalPlusOnePhaseCarrierRow : PhaseCarrierRow
+canonicalPlusOnePhaseCarrierRow =
+  mkPhaseCarrierRow
+    "+1-phase-row"
+    tri-high
+    positive
+    yang
+    refl
+    hex-2
+    refl
+    non-6
+    refl
+    non-2
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalPlusOneRowFactor :
+  phaseCarrierRowToFactor canonicalPlusOnePhaseCarrierRow ≡ (tri-high , positive)
+canonicalPlusOneRowFactor = refl
+
+canonicalPlusOneRowHex :
+  phaseCarrierRowToHexTruth canonicalPlusOnePhaseCarrierRow ≡ hex-2
+canonicalPlusOneRowHex = refl
+
 phaseCarrierRowYinYangMatchesPolarity :
   ∀ row →
   yinYangToPolarity (phaseCarrierRowToYinYang row) ≡ phaseCarrierRowToPolarity row
@@ -392,6 +419,22 @@ canonicalBalancedSupportGeometry =
     refl
     refl
 
+canonicalPlusOneSupportGeometry : SupportGeometry
+canonicalPlusOneSupportGeometry =
+  mkSupportGeometry
+    "+1-support-voxel"
+    supportVoxelKind
+    (mkVoxelCoordinate (suc (suc zero)) zero zero)
+    canonicalPlusOnePhaseCarrierRow
+    (suc (suc zero))
+    (suc (suc (suc zero)))
+    non-6
+    refl
+    true
+    false
+    refl
+    refl
+
 ------------------------------------------------------------------------
 -- Supervoxel grammar.
 
@@ -487,6 +530,21 @@ canonicalBalancedSupervoxel =
     canonicalYinSupportGeometry
     canonicalBalancedPhaseCarrierRow
     non-3
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalPlusOneSupervoxel : Supervoxel
+canonicalPlusOneSupervoxel =
+  mkSupervoxel
+    "+1-supervoxel"
+    canonicalPlusOneSupportGeometry
+    canonicalBalancedSupportGeometry
+    canonicalYinSupportGeometry
+    canonicalPlusOnePhaseCarrierRow
+    non-6
     refl
     true
     false
@@ -678,6 +736,271 @@ canonicalYinYangSuperposition =
     refl
 
 ------------------------------------------------------------------------
+-- Explicit local field grammar.
+
+data LocalFieldSurfaceKind : Set where
+  plusOneLocalFieldKind : LocalFieldSurfaceKind
+  seedLocalFieldKind : LocalFieldSurfaceKind
+  carryLocalFieldKind : LocalFieldSurfaceKind
+  adapterLocalFieldKind : LocalFieldSurfaceKind
+  bodyLocalFieldKind : LocalFieldSurfaceKind
+  boundaryLocalFieldKind : LocalFieldSurfaceKind
+  supportLocalFieldKind : LocalFieldSurfaceKind
+
+localFieldSurfaceCount : Nat
+localFieldSurfaceCount = suc (suc (suc (suc (suc (suc (suc zero))))))
+
+record LocalFieldSurface : Set where
+  constructor mkLocalFieldSurface
+  field
+    localFieldSurfaceLabel :
+      String
+
+    localFieldSurfaceKind :
+      LocalFieldSurfaceKind
+
+    localFieldPhaseRow :
+      PhaseCarrierRow
+
+    localFieldSupportGeometry :
+      SupportGeometry
+
+    localFieldSupervoxel :
+      Supervoxel
+
+    localFieldHexTruth :
+      HexTruth
+
+    localFieldFactorMatches :
+      hexTruthToFactor localFieldHexTruth ≡
+      (rowTriTruth localFieldPhaseRow , rowPolarity localFieldPhaseRow)
+
+    localFieldOrdinal :
+      NonaryTruth
+
+    localFieldOrdinalMatches :
+      localFieldOrdinal ≡ hexTruthToProbeOrdinal localFieldHexTruth
+
+    localFieldCandidateOnly :
+      Bool
+
+    localFieldPromoted :
+      Bool
+
+    localFieldCandidateOnlyIsTrue :
+      localFieldCandidateOnly ≡ true
+
+    localFieldPromotedIsFalse :
+      localFieldPromoted ≡ false
+
+open LocalFieldSurface public
+
+canonicalPlusOneLocalFieldSurface : LocalFieldSurface
+canonicalPlusOneLocalFieldSurface =
+  mkLocalFieldSurface
+    "+1-local-field"
+    plusOneLocalFieldKind
+    canonicalPlusOnePhaseCarrierRow
+    canonicalPlusOneSupportGeometry
+    canonicalPlusOneSupervoxel
+    hex-2
+    refl
+    non-2
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalSeedLocalFieldSurface : LocalFieldSurface
+canonicalSeedLocalFieldSurface =
+  mkLocalFieldSurface
+    "seed-local-field"
+    seedLocalFieldKind
+    canonicalBalancedPhaseCarrierRow
+    canonicalBalancedSupportGeometry
+    canonicalBalancedSupervoxel
+    hex-1
+    refl
+    non-1
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalCarryLocalFieldSurface : LocalFieldSurface
+canonicalCarryLocalFieldSurface =
+  mkLocalFieldSurface
+    "carry-local-field"
+    carryLocalFieldKind
+    canonicalYinPhaseCarrierRow
+    canonicalYinSupportGeometry
+    canonicalYinSupervoxel
+    hex-3
+    refl
+    non-3
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalAdapterLocalFieldSurface : LocalFieldSurface
+canonicalAdapterLocalFieldSurface =
+  mkLocalFieldSurface
+    "adapter-local-field"
+    adapterLocalFieldKind
+    canonicalYangPhaseCarrierRow
+    canonicalYangSupportGeometry
+    canonicalYangSupervoxel
+    hex-0
+    refl
+    non-0
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalBodyLocalFieldSurface : LocalFieldSurface
+canonicalBodyLocalFieldSurface =
+  mkLocalFieldSurface
+    "body-local-field"
+    bodyLocalFieldKind
+    canonicalPlusOnePhaseCarrierRow
+    canonicalPlusOneSupportGeometry
+    canonicalPlusOneSupervoxel
+    hex-2
+    refl
+    non-2
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalBoundaryLocalFieldSurface : LocalFieldSurface
+canonicalBoundaryLocalFieldSurface =
+  mkLocalFieldSurface
+    "boundary-local-field"
+    boundaryLocalFieldKind
+    canonicalYinPhaseCarrierRow
+    canonicalYinSupportGeometry
+    canonicalYinSupervoxel
+    hex-3
+    refl
+    non-3
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalSupportLocalFieldSurface : LocalFieldSurface
+canonicalSupportLocalFieldSurface =
+  mkLocalFieldSurface
+    "support-local-field"
+    supportLocalFieldKind
+    canonicalYangPhaseCarrierRow
+    canonicalYangSupportGeometry
+    canonicalYangSupervoxel
+    hex-0
+    refl
+    non-0
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalLocalFieldSurfaces : List LocalFieldSurface
+canonicalLocalFieldSurfaces =
+  canonicalPlusOneLocalFieldSurface
+  ∷ canonicalSeedLocalFieldSurface
+  ∷ canonicalCarryLocalFieldSurface
+  ∷ canonicalAdapterLocalFieldSurface
+  ∷ canonicalBodyLocalFieldSurface
+  ∷ canonicalBoundaryLocalFieldSurface
+  ∷ canonicalSupportLocalFieldSurface
+  ∷ []
+
+canonicalLocalFieldGrammarSummary : String
+canonicalLocalFieldGrammarSummary =
+  "Candidate-only local field grammar names +1, seed, carry, adapter, body, boundary, and support as explicit finite 369/polarity/voxel/supervoxel surfaces."
+
+record LocalFieldGrammar : Set where
+  constructor mkLocalFieldGrammar
+  field
+    localFieldGrammarLabel :
+      String
+
+    localFieldGrammarSurfaces :
+      List LocalFieldSurface
+
+    localFieldGrammarSurfaceCount :
+      Nat
+
+    localFieldGrammarSurfaceCountIsSeven :
+      localFieldGrammarSurfaceCount ≡ localFieldSurfaceCount
+
+    localFieldGrammarCandidateOnly :
+      Bool
+
+    localFieldGrammarCandidateOnlyIsTrue :
+      localFieldGrammarCandidateOnly ≡ true
+
+    localFieldGrammarPromoted :
+      Bool
+
+    localFieldGrammarPromotedIsFalse :
+      localFieldGrammarPromoted ≡ false
+
+    localFieldGrammarSummary :
+      String
+
+open LocalFieldGrammar public
+
+canonicalLocalFieldGrammar : LocalFieldGrammar
+canonicalLocalFieldGrammar =
+  mkLocalFieldGrammar
+    "polarity-phase-local-field-grammar"
+    canonicalLocalFieldSurfaces
+    localFieldSurfaceCount
+    refl
+    true
+    refl
+    false
+    refl
+    canonicalLocalFieldGrammarSummary
+
+canonicalLocalFieldSurfacesAreCanonical :
+  localFieldGrammarSurfaces canonicalLocalFieldGrammar ≡ canonicalLocalFieldSurfaces
+canonicalLocalFieldSurfacesAreCanonical =
+  refl
+
+canonicalLocalFieldGrammarSurfaceCountIsSeven :
+  localFieldGrammarSurfaceCount canonicalLocalFieldGrammar ≡ localFieldSurfaceCount
+canonicalLocalFieldGrammarSurfaceCountIsSeven =
+  refl
+
+canonicalLocalFieldGrammarCandidateOnlyIsTrue :
+  localFieldGrammarCandidateOnly canonicalLocalFieldGrammar ≡ true
+canonicalLocalFieldGrammarCandidateOnlyIsTrue =
+  refl
+
+canonicalLocalFieldGrammarPromotedIsFalse :
+  localFieldGrammarPromoted canonicalLocalFieldGrammar ≡ false
+canonicalLocalFieldGrammarPromotedIsFalse =
+  refl
+
+canonicalLocalFieldGrammarSummaryIsCanonical :
+  localFieldGrammarSummary canonicalLocalFieldGrammar ≡
+  canonicalLocalFieldGrammarSummary
+canonicalLocalFieldGrammarSummaryIsCanonical =
+  refl
+
+------------------------------------------------------------------------
 -- Candidate-only and blocked-authority governance.
 
 bridgeCandidateOnlyRow : CandidateOnly.CandidateOnlyRow
@@ -688,8 +1011,8 @@ bridgeCandidateOnlyRow =
     "DASHI/Interop/PolarityPhaseFieldBridge"
     CandidateOnly.bridgeCandidateKind
     CandidateOnly.bridgeCandidateOnlyStatus
-    "candidate-only bridge from yin/yang polarity into 369 phase rows, voxel support geometry, wave mixtures, and superposition candidates"
-    "blocked authority, no promotion, no external theorem or runtime authority"
+    "candidate-only bridge from yin/yang polarity into 369 phase rows, voxel support geometry, explicit +1/seed/carry/adapter/body/boundary/support local field grammar, wave mixtures, and superposition candidates"
+    "blocked authority, no promotion, no external theorem or runtime authority; local field grammar stays candidate-only"
 
 bridgeCandidateOnlyReceipt : CandidateOnly.CandidateOnlyReceipt bridgeCandidateOnlyRow
 bridgeCandidateOnlyReceipt =
@@ -773,6 +1096,9 @@ record PolarityPhaseFieldBridge : Set where
     bridgePhaseRow :
       PhaseCarrierRow
 
+    bridgeLocalFieldGrammar :
+      LocalFieldGrammar
+
     bridgeSupportGeometry :
       SupportGeometry
 
@@ -817,6 +1143,7 @@ canonicalPolarityPhaseFieldBridge =
   mkPolarityPhaseFieldBridge
     "polarity-phase-field-bridge"
     canonicalYinPhaseCarrierRow
+    canonicalLocalFieldGrammar
     canonicalYinSupportGeometry
     canonicalYinSupervoxel
     canonicalYinYangWave
@@ -834,6 +1161,46 @@ bridgePhaseRowFactor :
   phaseCarrierRowToFactor (bridgePhaseRow canonicalPolarityPhaseFieldBridge) ≡
   (tri-low , negative)
 bridgePhaseRowFactor = refl
+
+bridgeLocalFieldGrammarSurfacesAreCanonical :
+  localFieldGrammarSurfaces
+    (bridgeLocalFieldGrammar canonicalPolarityPhaseFieldBridge)
+  ≡
+  canonicalLocalFieldSurfaces
+bridgeLocalFieldGrammarSurfacesAreCanonical =
+  refl
+
+bridgeLocalFieldGrammarSurfaceCountIsSeven :
+  localFieldGrammarSurfaceCount
+    (bridgeLocalFieldGrammar canonicalPolarityPhaseFieldBridge)
+  ≡
+  localFieldSurfaceCount
+bridgeLocalFieldGrammarSurfaceCountIsSeven =
+  refl
+
+bridgeLocalFieldGrammarCandidateOnlyIsTrue :
+  localFieldGrammarCandidateOnly
+    (bridgeLocalFieldGrammar canonicalPolarityPhaseFieldBridge)
+  ≡
+  true
+bridgeLocalFieldGrammarCandidateOnlyIsTrue =
+  refl
+
+bridgeLocalFieldGrammarPromotedIsFalse :
+  localFieldGrammarPromoted
+    (bridgeLocalFieldGrammar canonicalPolarityPhaseFieldBridge)
+  ≡
+  false
+bridgeLocalFieldGrammarPromotedIsFalse =
+  refl
+
+bridgeLocalFieldGrammarSummaryIsCanonical :
+  localFieldGrammarSummary
+    (bridgeLocalFieldGrammar canonicalPolarityPhaseFieldBridge)
+  ≡
+  canonicalLocalFieldGrammarSummary
+bridgeLocalFieldGrammarSummaryIsCanonical =
+  refl
 
 bridgePhaseRowHex :
   phaseCarrierRowToHexTruth (bridgePhaseRow canonicalPolarityPhaseFieldBridge) ≡
@@ -878,6 +1245,16 @@ bridgeGovernanceBlockedKindsFalse :
 bridgeGovernanceBlockedKindsFalse =
   governanceBlockedAuthorityKindsFalse canonicalBridgeGovernance
 
+canonicalPolarityPhaseFieldBridgeSummary : String
+canonicalPolarityPhaseFieldBridgeSummary =
+  "Candidate-only polarity/phase bridge with explicit +1, seed, carry, adapter, body, boundary, and support local field grammar; authority stays blocked."
+
+canonicalPolarityPhaseFieldBridgeSummaryIsCanonical :
+  canonicalPolarityPhaseFieldBridgeSummary ≡
+  "Candidate-only polarity/phase bridge with explicit +1, seed, carry, adapter, body, boundary, and support local field grammar; authority stays blocked."
+canonicalPolarityPhaseFieldBridgeSummaryIsCanonical =
+  refl
+
 bridgeGovernanceBlockedKindsAreCanonical :
   governanceBlockedAuthorityKinds (bridgeGovernance canonicalPolarityPhaseFieldBridge) ≡
   bridgeBlockedAuthorityKinds
@@ -899,4 +1276,10 @@ bridgeCandidateOnlyReceiptIsCanonical = refl
 
 bridgePolicySummary : String
 bridgePolicySummary =
-  "candidate-only yin/yang polarity bridge with 369 phase rows, voxel/supervoxel support geometry, wave/superposition candidates, and blocked authority governance"
+  "candidate-only yin/yang polarity bridge with 369 phase rows, explicit local field grammar, voxel/supervoxel support geometry, wave/superposition candidates, and blocked authority governance"
+
+bridgePolicySummaryIsCanonical :
+  bridgePolicySummary ≡
+  "candidate-only yin/yang polarity bridge with 369 phase rows, explicit local field grammar, voxel/supervoxel support geometry, wave/superposition candidates, and blocked authority governance"
+bridgePolicySummaryIsCanonical =
+  refl

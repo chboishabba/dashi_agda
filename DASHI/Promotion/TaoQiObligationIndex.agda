@@ -26,8 +26,11 @@ import DASHI.Promotion.PolarityFieldObligationIndex as PolarityField
 -- This module keeps the Tao and Qi surfaces candidate-only.  The Tao source
 -- receipt is treated as translation-dependent reading material, the Qi
 -- operator-theory receipt is treated as role grammar only, and the Qi
--- carrier-field bridge remains descriptive.  No doctrine, empirical, clinical,
--- mystical, metaphysical, or authority claim is promoted here.
+-- carrier-field bridge remains descriptive.  The current seed/carry/body/
+-- boundary expansions, the local polarity/phase-field geometry surfaces, and
+-- the local Betti-to-Qi topology bridge are recorded as candidate-only
+-- obligation rows.  No doctrine, empirical, clinical, mystical,
+-- metaphysical, or authority claim is promoted here.
 
 listCount : ∀ {A : Set} → List A → Nat
 listCount [] = zero
@@ -244,6 +247,10 @@ canonicalBettiQiAdapterSurfaceName : String
 canonicalBettiQiAdapterSurfaceName =
   "canonicalBettiQiBridgeReceipt"
 
+canonicalYinYangQiAdapterModuleName : String
+canonicalYinYangQiAdapterModuleName =
+  "DASHI.Interop.YinYangQiAdapter"
+
 canonicalYinYangGeometryBoundaryModuleName : String
 canonicalYinYangGeometryBoundaryModuleName =
   "DASHI.Culture.YinYangSymbolGeometryBoundary"
@@ -321,11 +328,20 @@ canonicalTaoQiSummaryRows =
     yinYangBoundaryLane
     "DASHI.Interop.PolarityPhaseFieldBridge"
     "canonicalPolarityPhaseFieldBridge"
-    "The polarity layer, grounded by candidate-only yin-yang geometry support, is extended into 369 phase rows, voxel/supervoxel support, Betti-ready field shape, wave mixtures, and superposition candidates under blocked authority governance."
-    (listCount PhaseField.canonicalCarrierRows)
-    "phase/field rows remain candidate-only interpretation surfaces"
+    PhaseField.canonicalLocalFieldGrammarSummary
+    (listCount PhaseField.canonicalLocalFieldSurfaces)
+    "seed, carry, body, boundary, and support local-field surfaces remain candidate-only"
     "no theorem, runtime, external, spiritual, metaphysical, or empirical authority is promoted"
     "agda -i . DASHI/Interop/PolarityPhaseFieldBridge.agda"
+  ∷ mkTaoQiSummaryRow
+    yinYangBoundaryLane
+    canonicalYinYangQiAdapterModuleName
+    "canonicalYinYangQiCandidateOnlyReceipt"
+    "Yin/Yang polarity rows are carried into seed, carry, body, and boundary Qi carrier, role, and formal-lens surfaces as candidate-only readings."
+    (listCount YinYangQi.canonicalYinYangPolarityRowKinds)
+    "the seed/carry/body/boundary bridge remains candidate-only and descriptive"
+    "truth, support, admissibility, runtime, theorem, clinical, and metaphysical authority remain false"
+    "agda -i . DASHI/Interop/YinYangQiAdapter.agda"
   ∷ mkTaoQiSummaryRow
     bettiSupportLane
     canonicalBettiSupportBoundaryModuleName
@@ -338,9 +354,18 @@ canonicalTaoQiSummaryRows =
   ∷ mkTaoQiSummaryRow
     bettiSupportLane
     canonicalBettiQiAdapterModuleName
+    "canonicalBettiQiCandidateOnlyReceipt"
+    "Betti support summaries are carried into Qi body, boundary, seed, carry, threshold, and aperture surfaces as candidate-only topology readings."
+    (listCount BettiQi.canonicalBettiSummaryKinds)
+    "body/boundary/seed/carry topology readings remain candidate-only"
+    "truth, support, admissibility, runtime, theorem, clinical, and metaphysical authority remain false"
+    "agda -i . DASHI/Interop/BettiQiAdapter.agda"
+  ∷ mkTaoQiSummaryRow
+    bettiSupportLane
+    canonicalBettiQiAdapterModuleName
     canonicalBettiQiAdapterSurfaceName
-    "Betti support summaries are carried into Qi role, carrier, and formal-lens surfaces as candidate-only topology-to-Qi adapter rows."
-    (listCount BettiQi.canonicalBettiQiAdapterRows)
+    "Betti support summaries are carried into Qi role, carrier, and formal-lens surfaces as candidate-only topology-to-Qi adapter rows, with carry-propagation and carry-completion style readings kept descriptive only."
+    (listCount BettiQi.canonicalBettiQiFormalLensSurfaces)
     "the Betti-to-Qi bridge remains descriptive only"
     "truth, support, admissibility, runtime, theorem, clinical, and metaphysical authority remain false"
     "agda -i . DASHI/Interop/BettiQiAdapter.agda"
@@ -454,7 +479,7 @@ canonicalTaoQiGovernanceRows =
     TaoQi.canonicalTaoQiBridgeReceipt
     TaoMeditation.canonicalTaoMeditationQiBridgeReceipt
     PolarityField.canonicalPolarityFieldObligationIndexReceipt
-    "The bridge surface stays candidate-only: Tao, yin/yang, yin-yang support geometry, Betti support, Qi, and the 369/voxel/wave field grammar are joined as receipts and role grammar, not as promoted doctrine, empirical validity, clinical instruction, or metaphysical authority."
+    "The bridge surface stays candidate-only: Tao, yin/yang, yin-yang support geometry, the local seed/carry/body/boundary field grammar, Betti support, Qi, and the 369/voxel/wave field grammar are joined as receipts and role grammar, not as promoted doctrine, empirical validity, clinical instruction, or metaphysical authority."
     "agda -i . DASHI/Promotion/TaoQiObligationIndex.agda"
   ∷ []
 

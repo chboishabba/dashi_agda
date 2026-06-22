@@ -40,6 +40,14 @@ data PolarityTerm : Set where
   stillnessPole : PolarityTerm
   emptinessPole : PolarityTerm
   complementPole : PolarityTerm
+  localBodyPole : PolarityTerm
+  boundaryCutPole : PolarityTerm
+  bodyBoundarySeedPole : PolarityTerm
+  oppositeSeedPole : PolarityTerm
+  carryPole : PolarityTerm
+  successorPole : PolarityTerm
+  p31Plus0Plus1Pole : PolarityTerm
+  seedCarryPole : PolarityTerm
 
 polarityTermLabel : PolarityTerm → String
 polarityTermLabel yinPole = "yin pole"
@@ -52,6 +60,14 @@ polarityTermLabel softnessPole = "softness pole"
 polarityTermLabel stillnessPole = "stillness pole"
 polarityTermLabel emptinessPole = "emptiness pole"
 polarityTermLabel complementPole = "complement pole"
+polarityTermLabel localBodyPole = "local body pole"
+polarityTermLabel boundaryCutPole = "boundary cut pole"
+polarityTermLabel bodyBoundarySeedPole = "body-boundary-seed pole"
+polarityTermLabel oppositeSeedPole = "opposite seed pole"
+polarityTermLabel carryPole = "carry pole"
+polarityTermLabel successorPole = "successor pole"
+polarityTermLabel p31Plus0Plus1Pole = "31+0+1 pole"
+polarityTermLabel seedCarryPole = "seed-carry pole"
 
 data RelationKind : Set where
   contrastiveRelation : RelationKind
@@ -62,6 +78,14 @@ data RelationKind : Set where
   reversingRelation : RelationKind
   complementaryRelation : RelationKind
   constrainingRelation : RelationKind
+  localBodyRelation : RelationKind
+  boundaryCutRelation : RelationKind
+  bodyBoundarySeedRelation : RelationKind
+  oppositeSeedRelation : RelationKind
+  carryRelation : RelationKind
+  successorRelation : RelationKind
+  p31Plus0Plus1Relation : RelationKind
+  seedCarryRelation : RelationKind
 
 relationKindLabel : RelationKind → String
 relationKindLabel contrastiveRelation = "contrastive"
@@ -72,6 +96,14 @@ relationKindLabel stabilizingRelation = "stabilizing"
 relationKindLabel reversingRelation = "reversing"
 relationKindLabel complementaryRelation = "complementary"
 relationKindLabel constrainingRelation = "constraining"
+relationKindLabel localBodyRelation = "local-body"
+relationKindLabel boundaryCutRelation = "boundary-cut"
+relationKindLabel bodyBoundarySeedRelation = "body-boundary-seed"
+relationKindLabel oppositeSeedRelation = "opposite-seed"
+relationKindLabel carryRelation = "carry"
+relationKindLabel successorRelation = "successor"
+relationKindLabel p31Plus0Plus1Relation = "31+0+1"
+relationKindLabel seedCarryRelation = "seed-carry"
 
 relationKindToTaoRelation : RelationKind → Tao.TaoRelation
 relationKindToTaoRelation contrastiveRelation =
@@ -90,6 +122,22 @@ relationKindToTaoRelation complementaryRelation =
   Tao.alignsWith
 relationKindToTaoRelation constrainingRelation =
   Tao.reduces
+relationKindToTaoRelation localBodyRelation =
+  Tao.associatedWith
+relationKindToTaoRelation boundaryCutRelation =
+  Tao.reduces
+relationKindToTaoRelation bodyBoundarySeedRelation =
+  Tao.coArisesWith
+relationKindToTaoRelation oppositeSeedRelation =
+  Tao.contrastsWith
+relationKindToTaoRelation carryRelation =
+  Tao.follows
+relationKindToTaoRelation successorRelation =
+  Tao.selfOrders
+relationKindToTaoRelation p31Plus0Plus1Relation =
+  Tao.resolves
+relationKindToTaoRelation seedCarryRelation =
+  Tao.enablesUse
 
 data TransitionKind : Set where
   yinToYangTransition : TransitionKind
@@ -102,6 +150,14 @@ data TransitionKind : Set where
   returnTransition : TransitionKind
   softeningTransition : TransitionKind
   reversalTransition : TransitionKind
+  localBodyTransition : TransitionKind
+  boundaryCutTransition : TransitionKind
+  bodyBoundarySeedTransition : TransitionKind
+  oppositeSeedTransition : TransitionKind
+  carryTransition : TransitionKind
+  successorTransition : TransitionKind
+  p31Plus0Plus1Transition : TransitionKind
+  seedCarryTransition : TransitionKind
 
 transitionKindLabel : TransitionKind → String
 transitionKindLabel yinToYangTransition = "yin-to-yang"
@@ -114,6 +170,14 @@ transitionKindLabel thresholdCrossingTransition = "threshold-crossing"
 transitionKindLabel returnTransition = "return"
 transitionKindLabel softeningTransition = "softening"
 transitionKindLabel reversalTransition = "reversal"
+transitionKindLabel localBodyTransition = "local-body"
+transitionKindLabel boundaryCutTransition = "boundary-cut"
+transitionKindLabel bodyBoundarySeedTransition = "body-boundary-seed"
+transitionKindLabel oppositeSeedTransition = "opposite-seed"
+transitionKindLabel carryTransition = "carry"
+transitionKindLabel successorTransition = "successor"
+transitionKindLabel p31Plus0Plus1Transition = "31+0+1"
+transitionKindLabel seedCarryTransition = "seed-carry"
 
 data YinYangAuthorityBit : Set where
   empiricalAuthorityBit : YinYangAuthorityBit
@@ -287,6 +351,14 @@ canonicalPolarityTerms =
   ∷ stillnessPole
   ∷ emptinessPole
   ∷ complementPole
+  ∷ localBodyPole
+  ∷ boundaryCutPole
+  ∷ bodyBoundarySeedPole
+  ∷ oppositeSeedPole
+  ∷ carryPole
+  ∷ successorPole
+  ∷ p31Plus0Plus1Pole
+  ∷ seedCarryPole
   ∷ []
 
 canonicalPolarityTermCount : Nat
@@ -303,6 +375,14 @@ canonicalRelationKinds =
   ∷ reversingRelation
   ∷ complementaryRelation
   ∷ constrainingRelation
+  ∷ localBodyRelation
+  ∷ boundaryCutRelation
+  ∷ bodyBoundarySeedRelation
+  ∷ oppositeSeedRelation
+  ∷ carryRelation
+  ∷ successorRelation
+  ∷ p31Plus0Plus1Relation
+  ∷ seedCarryRelation
   ∷ []
 
 canonicalRelationKindCount : Nat
@@ -321,6 +401,14 @@ canonicalTransitionKinds =
   ∷ returnTransition
   ∷ softeningTransition
   ∷ reversalTransition
+  ∷ localBodyTransition
+  ∷ boundaryCutTransition
+  ∷ bodyBoundarySeedTransition
+  ∷ oppositeSeedTransition
+  ∷ carryTransition
+  ∷ successorTransition
+  ∷ p31Plus0Plus1Transition
+  ∷ seedCarryTransition
   ∷ []
 
 canonicalTransitionKindCount : Nat
@@ -433,6 +521,32 @@ canonicalYinYangPolarityBoundaryRows =
     QiTheory.QiSpectrumTool
     QiTheory.qiSpectralReading
     "Reversal records the pivot from one pole to the other as a candidate-only spectral boundary row."
+  ∷ mkYinYangPolarityBoundaryRow
+    (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))
+    TaoGrammar.ApophaticBoundaryOperator
+    Tao.threshold
+    Tao.ApophaticBoundary
+    Tao.candidateOnlyQualifier
+    Tao.NegativeBoundary
+    bodyBoundarySeedRelation
+    boundaryCutTransition
+    bodyBoundarySeedPole
+    QiTheory.QiBoundaryGate
+    QiTheory.qiCategoryReading
+    "Local body and boundary cut read together as a body-boundary-seed gate that stays candidate-only and fail-closed."
+  ∷ mkYinYangPolarityBoundaryRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))
+    TaoGrammar.UseThroughEmptinessOperator
+    Tao.breath
+    Tao.EmptinessUtilityGrammar
+    Tao.candidateOnlyQualifier
+    Tao.PracticeGrammar
+    p31Plus0Plus1Relation
+    successorTransition
+    p31Plus0Plus1Pole
+    QiTheory.QiOperator
+    QiTheory.qiFunctionalReading
+    "Recovered 31+0+1 keeps the opposite seed, carry, and successor in one candidate-only continuation grammar."
   ∷ []
 
 canonicalYinYangPolarityBoundaryRowCount : Nat
@@ -449,6 +563,8 @@ canonicalYinYangPolarityBoundaryRowReceipts =
   ∷ "Anti-excess row receipt"
   ∷ "Anti-possession row receipt"
   ∷ "Reversal row receipt"
+  ∷ "Body-boundary-seed / boundary-cut row receipt"
+  ∷ "Recovered 31+0+1 carry-successor row receipt"
   ∷ []
 
 canonicalYinYangSymbolGeometryBoundaryModuleName : String
@@ -601,5 +717,5 @@ canonicalYinYangPolarityBoundaryReceipt =
     ; nonPromotingTrue =
         refl
     ; boundarySummary =
-        "Candidate-only yin/yang polarity boundary linking Tao operator grammar to Qi formal-lens/operator grammar with fail-closed authority bits and a first-class yin/yang symbol geometry support reference."
+        "Candidate-only yin/yang polarity boundary linking Tao operator grammar to Qi formal-lens/operator grammar with fail-closed authority bits, a first-class yin/yang symbol geometry support reference, and a deeper 31+0+1/body-boundary-seed/carry successor middle layer."
     }

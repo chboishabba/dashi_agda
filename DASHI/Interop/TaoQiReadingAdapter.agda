@@ -19,7 +19,10 @@ import DASHI.Interop.TypedTermRoleFunctor as TypedTermRole
 -- grammar, and Qi formal-lens readings.  It is interpretive and fail-closed:
 -- Tao does not validate Qi, Qi does not validate Tao, and no empirical,
 -- clinical, spiritual, mystical, metaphysical, political, or philological
--- authority is promoted here.
+-- authority is promoted here.  It also carries the newer body, boundary,
+-- seed, carry, and completion/stage material on the direct Tao -> Qi path
+-- where that remains a useful candidate-only rereading beside the Tao ->
+-- Yin/Yang -> Qi route.
 
 data TaoQiAdapterStrength : Set where
   LexicalResonance : TaoQiAdapterStrength
@@ -137,10 +140,26 @@ gateThresholdRow =
     false
     "Gate and naming-boundary motifs map candidate-only into the Feng Shui threshold carrier and Qi boundary-gate grammar."
 
+boundaryThresholdRow : TaoQiAdapterRow
+boundaryThresholdRow =
+  taoQiAdapterRow
+    (suc zero)
+    Tao.chapter11
+    Tao.boundary
+    Tao.EmptinessUtilityGrammar
+    QiBridge.fengShuiQiDomain
+    QiBridge.thresholdQiCarrier
+    QiTheory.QiBoundaryGate
+    QiTheory.qiCategoryReading
+    BoundaryAlignment
+    true
+    false
+    "Boundary motifs map candidate-only into the Feng Shui threshold carrier and Qi boundary-gate grammar through emptiness-as-useful-space."
+
 valleyLandscapeRow : TaoQiAdapterRow
 valleyLandscapeRow =
   taoQiAdapterRow
-    (suc zero)
+    (suc (suc zero))
     Tao.chapter6
     Tao.valley
     Tao.OriginMetaphor
@@ -156,7 +175,7 @@ valleyLandscapeRow =
 breathCarrierRow : TaoQiAdapterRow
 breathCarrierRow =
   taoQiAdapterRow
-    (suc (suc zero))
+    (suc (suc (suc zero)))
     Tao.chapter10
     Tao.breath
     Tao.PracticeAphorism
@@ -172,7 +191,7 @@ breathCarrierRow =
 stillnessMeditationRow : TaoQiAdapterRow
 stillnessMeditationRow =
   taoQiAdapterRow
-    (suc (suc (suc zero)))
+    (suc (suc (suc (suc zero))))
     Tao.chapter16
     Tao.stillness
     Tao.StillnessGrammar
@@ -188,7 +207,7 @@ stillnessMeditationRow =
 waterFlowRow : TaoQiAdapterRow
 waterFlowRow =
   taoQiAdapterRow
-    (suc (suc (suc (suc zero))))
+    (suc (suc (suc (suc (suc zero)))))
     Tao.chapter8
     Tao.water
     Tao.SoftOverHardOperator
@@ -201,10 +220,42 @@ waterFlowRow =
     false
     "Water motifs map candidate-only into the movement carrier as non-contentious flow grammar."
 
+completionStageRow : TaoQiAdapterRow
+completionStageRow =
+  taoQiAdapterRow
+    (suc (suc (suc (suc (suc (suc zero))))))
+    Tao.chapter10
+    Tao.returnToRoot
+    Tao.ReturnToRootGrammar
+    QiBridge.meditationQiDomain
+    QiBridge.attentionQiCarrier
+    QiTheory.QiBoundaryGate
+    QiTheory.qiGradientFlowReading
+    MeditationStateAlignment
+    true
+    false
+    "Return-to-root motifs map candidate-only into the meditation attention carrier as a completion/stage rereading rather than a promoted conclusion."
+
+bodyStageRow : TaoQiAdapterRow
+bodyStageRow =
+  taoQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc zero)))))))
+    Tao.chapter28
+    Tao.body
+    Tao.UncarvedBlockGrammar
+    QiBridge.taiChiQiDomain
+    QiBridge.bodyQiCarrier
+    QiTheory.QiStateSpace
+    QiTheory.qiCategoryReading
+    CarrierAlignment
+    true
+    false
+    "Body motifs map candidate-only into the Tai Chi body carrier as a stage-space surface of uncarved potential."
+
 desireReductionRow : TaoQiAdapterRow
 desireReductionRow =
   taoQiAdapterRow
-    (suc (suc (suc (suc (suc zero)))))
+    (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))
     Tao.chapter19
     Tao.desireReduction
     Tao.DesireReductionGrammar
@@ -220,7 +271,7 @@ desireReductionRow =
 complementarityRow : TaoQiAdapterRow
 complementarityRow =
   taoQiAdapterRow
-    (suc (suc (suc (suc (suc (suc zero))))))
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))
     Tao.chapter2
     Tao.complementarity
     Tao.ComplementarityGrammar
@@ -233,10 +284,42 @@ complementarityRow =
     false
     "Complementarity motifs map candidate-only into relation carriers and symbolic-rational algebra grammar."
 
+seedCarryRow : TaoQiAdapterRow
+seedCarryRow =
+  taoQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))
+    Tao.chapter37
+    Tao.seed
+    Tao.CarrySeedGrammar
+    QiBridge.meditationQiDomain
+    QiBridge.memoryQiCarrier
+    QiTheory.QiStateSpace
+    QiTheory.qiCategoryReading
+    CarrierAlignment
+    true
+    false
+    "Seed motifs map candidate-only into the meditation memory carrier as a stage-bearing precondition for the next transition."
+
+carryBodyRow : TaoQiAdapterRow
+carryBodyRow =
+  taoQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))
+    Tao.chapter37
+    Tao.carry
+    Tao.CarrySeedGrammar
+    QiBridge.taiChiQiDomain
+    QiBridge.bodyQiCarrier
+    QiTheory.QiOperator
+    QiTheory.qiGradientFlowReading
+    FlowAlignment
+    true
+    false
+    "Carry motifs map candidate-only into the Tai Chi body carrier as a carried flow rather than a promoted completion claim."
+
 softnessSpectralRow : TaoQiAdapterRow
 softnessSpectralRow =
   taoQiAdapterRow
-    (suc (suc (suc (suc (suc (suc (suc zero)))))))
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))
     Tao.chapter36
     Tao.softness
     Tao.ReversalGrammar
@@ -252,17 +335,25 @@ softnessSpectralRow =
 canonicalTaoQiAdapterRows : List TaoQiAdapterRow
 canonicalTaoQiAdapterRows =
   gateThresholdRow
+  ∷ boundaryThresholdRow
   ∷ valleyLandscapeRow
   ∷ breathCarrierRow
   ∷ stillnessMeditationRow
   ∷ waterFlowRow
+  ∷ completionStageRow
+  ∷ bodyStageRow
   ∷ desireReductionRow
   ∷ complementarityRow
+  ∷ seedCarryRow
+  ∷ carryBodyRow
   ∷ softnessSpectralRow
   ∷ []
 
 gateThresholdRowReceipt : TaoQiAdapterRowReceipt gateThresholdRow
 gateThresholdRowReceipt = taoQiAdapterRowReceipt refl refl
+
+boundaryThresholdRowReceipt : TaoQiAdapterRowReceipt boundaryThresholdRow
+boundaryThresholdRowReceipt = taoQiAdapterRowReceipt refl refl
 
 valleyLandscapeRowReceipt : TaoQiAdapterRowReceipt valleyLandscapeRow
 valleyLandscapeRowReceipt = taoQiAdapterRowReceipt refl refl
@@ -276,11 +367,23 @@ stillnessMeditationRowReceipt = taoQiAdapterRowReceipt refl refl
 waterFlowRowReceipt : TaoQiAdapterRowReceipt waterFlowRow
 waterFlowRowReceipt = taoQiAdapterRowReceipt refl refl
 
+completionStageRowReceipt : TaoQiAdapterRowReceipt completionStageRow
+completionStageRowReceipt = taoQiAdapterRowReceipt refl refl
+
+bodyStageRowReceipt : TaoQiAdapterRowReceipt bodyStageRow
+bodyStageRowReceipt = taoQiAdapterRowReceipt refl refl
+
 desireReductionRowReceipt : TaoQiAdapterRowReceipt desireReductionRow
 desireReductionRowReceipt = taoQiAdapterRowReceipt refl refl
 
 complementarityRowReceipt : TaoQiAdapterRowReceipt complementarityRow
 complementarityRowReceipt = taoQiAdapterRowReceipt refl refl
+
+seedCarryRowReceipt : TaoQiAdapterRowReceipt seedCarryRow
+seedCarryRowReceipt = taoQiAdapterRowReceipt refl refl
+
+carryBodyRowReceipt : TaoQiAdapterRowReceipt carryBodyRow
+carryBodyRowReceipt = taoQiAdapterRowReceipt refl refl
 
 softnessSpectralRowReceipt : TaoQiAdapterRowReceipt softnessSpectralRow
 softnessSpectralRowReceipt = taoQiAdapterRowReceipt refl refl

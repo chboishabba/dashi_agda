@@ -19,9 +19,10 @@ import DASHI.Interop.QiCarrierFieldBridge as QiBridge
 --
 -- This module reads candidate-only Betti support summaries through existing
 -- Qi carrier, role, and formal-lens surfaces.  The bridge is interpretive
--- only: connected components, cycle summaries, and void summaries remain
--- topology diagnostics and do not promote empirical, theorem, clinical,
--- runtime, or metaphysical authority.
+-- only: connected components, cycle summaries, void summaries, and the richer
+-- body / boundary / seed / carry readings remain topology diagnostics and do
+-- not promote empirical, theorem, clinical, runtime, or metaphysical
+-- authority.
 
 data BettiQiBridgeStatus : Set where
   bettiQiBridge_candidateOnly :
@@ -44,13 +45,47 @@ data BettiSummaryKind : Set where
   voidSummary :
     BettiSummaryKind
 
+  bodySummary :
+    BettiSummaryKind
+
+  boundarySummary :
+    BettiSummaryKind
+
+  seedSummary :
+    BettiSummaryKind
+
+  carrySummary :
+    BettiSummaryKind
+
 canonicalBettiSummaryKinds :
   List BettiSummaryKind
 canonicalBettiSummaryKinds =
   connectedComponentSummary
   ∷ cycleSummary
   ∷ voidSummary
+  ∷ bodySummary
+  ∷ boundarySummary
+  ∷ seedSummary
+  ∷ carrySummary
   ∷ []
+
+rowKindRecoveredBettiSummary :
+  BettiSummaryKind →
+  Betti.BettiSummaryKind
+rowKindRecoveredBettiSummary connectedComponentSummary =
+  Betti.beta0Summary
+rowKindRecoveredBettiSummary cycleSummary =
+  Betti.beta1Summary
+rowKindRecoveredBettiSummary voidSummary =
+  Betti.beta2Summary
+rowKindRecoveredBettiSummary bodySummary =
+  Betti.beta0Summary
+rowKindRecoveredBettiSummary boundarySummary =
+  Betti.beta2Summary
+rowKindRecoveredBettiSummary seedSummary =
+  Betti.beta0Summary
+rowKindRecoveredBettiSummary carrySummary =
+  Betti.beta1Summary
 
 rowKindQiDomain :
   BettiSummaryKind →
@@ -61,6 +96,14 @@ rowKindQiDomain cycleSummary =
   QiBridge.taiChiQiDomain
 rowKindQiDomain voidSummary =
   QiBridge.fengShuiQiDomain
+rowKindQiDomain bodySummary =
+  QiBridge.taiChiQiDomain
+rowKindQiDomain boundarySummary =
+  QiBridge.fengShuiQiDomain
+rowKindQiDomain seedSummary =
+  QiBridge.meditationQiDomain
+rowKindQiDomain carrySummary =
+  QiBridge.taiChiQiDomain
 
 rowKindQiCarrier :
   BettiSummaryKind →
@@ -71,6 +114,14 @@ rowKindQiCarrier cycleSummary =
   QiBridge.movementQiCarrier
 rowKindQiCarrier voidSummary =
   QiBridge.thresholdQiCarrier
+rowKindQiCarrier bodySummary =
+  QiBridge.bodyQiCarrier
+rowKindQiCarrier boundarySummary =
+  QiBridge.thresholdQiCarrier
+rowKindQiCarrier seedSummary =
+  QiBridge.attentionQiCarrier
+rowKindQiCarrier carrySummary =
+  QiBridge.movementQiCarrier
 
 rowKindQiRole :
   BettiSummaryKind →
@@ -81,6 +132,14 @@ rowKindQiRole cycleSummary =
   QiTheory.QiSpectrumTool
 rowKindQiRole voidSummary =
   QiTheory.QiBoundaryGate
+rowKindQiRole bodySummary =
+  QiTheory.QiStateSpace
+rowKindQiRole boundarySummary =
+  QiTheory.QiBoundaryGate
+rowKindQiRole seedSummary =
+  QiTheory.QiOperator
+rowKindQiRole carrySummary =
+  QiTheory.QiOperator
 
 rowKindFormalLensSurface :
   BettiSummaryKind →
@@ -91,6 +150,14 @@ rowKindFormalLensSurface cycleSummary =
   Lens.canonicalGradientResistiveQualificationSurface
 rowKindFormalLensSurface voidSummary =
   Lens.canonicalGenericFormalLensQualificationSurface
+rowKindFormalLensSurface bodySummary =
+  Lens.canonicalGenericFormalLensQualificationSurface
+rowKindFormalLensSurface boundarySummary =
+  Lens.canonicalGenericFormalLensQualificationSurface
+rowKindFormalLensSurface seedSummary =
+  Lens.canonicalGenericFormalLensQualificationSurface
+rowKindFormalLensSurface carrySummary =
+  Lens.canonicalGradientResistiveQualificationSurface
 
 rowKindFormalLensReceipt :
   (kind : BettiSummaryKind) →
@@ -101,6 +168,14 @@ rowKindFormalLensReceipt cycleSummary =
   Lens.canonicalGradientResistiveQualificationReceipt
 rowKindFormalLensReceipt voidSummary =
   Lens.canonicalGenericFormalLensQualificationReceipt
+rowKindFormalLensReceipt bodySummary =
+  Lens.canonicalGenericFormalLensQualificationReceipt
+rowKindFormalLensReceipt boundarySummary =
+  Lens.canonicalGenericFormalLensQualificationReceipt
+rowKindFormalLensReceipt seedSummary =
+  Lens.canonicalGenericFormalLensQualificationReceipt
+rowKindFormalLensReceipt carrySummary =
+  Lens.canonicalGradientResistiveQualificationReceipt
 
 rowKindProfile :
   BettiSummaryKind →
@@ -111,6 +186,14 @@ rowKindProfile cycleSummary =
   "betti-cycles"
 rowKindProfile voidSummary =
   "betti-voids"
+rowKindProfile bodySummary =
+  "betti-body-coherence"
+rowKindProfile boundarySummary =
+  "betti-boundary-threshold"
+rowKindProfile seedSummary =
+  "betti-seed-aperture"
+rowKindProfile carrySummary =
+  "betti-carry-propagation"
 
 rowKindStatement :
   BettiSummaryKind →
@@ -121,6 +204,49 @@ rowKindStatement cycleSummary =
   "Cycle summaries are read as candidate-only Qi spectrum and circulation surfaces in the Tai Chi movement carrier."
 rowKindStatement voidSummary =
   "Void summaries are read as candidate-only Qi boundary-gate aperture surfaces in the Feng Shui threshold carrier."
+rowKindStatement bodySummary =
+  "Body summaries are read as candidate-only Tai Chi body coherence surfaces in the body carrier."
+rowKindStatement boundarySummary =
+  "Boundary summaries are read as candidate-only threshold and aperture surfaces in the Feng Shui threshold carrier."
+rowKindStatement seedSummary =
+  "Seed summaries are read as candidate-only aperture-initiation surfaces in the meditation attention carrier."
+rowKindStatement carrySummary =
+  "Carry summaries are read as candidate-only propagation surfaces in the Tai Chi movement carrier."
+
+connectedComponentRecoveredAsBeta0 :
+  rowKindRecoveredBettiSummary connectedComponentSummary ≡ Betti.beta0Summary
+connectedComponentRecoveredAsBeta0 =
+  refl
+
+cycleRecoveredAsBeta1 :
+  rowKindRecoveredBettiSummary cycleSummary ≡ Betti.beta1Summary
+cycleRecoveredAsBeta1 =
+  refl
+
+voidRecoveredAsBeta2 :
+  rowKindRecoveredBettiSummary voidSummary ≡ Betti.beta2Summary
+voidRecoveredAsBeta2 =
+  refl
+
+bodyRecoveredAsBeta0 :
+  rowKindRecoveredBettiSummary bodySummary ≡ Betti.beta0Summary
+bodyRecoveredAsBeta0 =
+  refl
+
+boundaryRecoveredAsBeta2 :
+  rowKindRecoveredBettiSummary boundarySummary ≡ Betti.beta2Summary
+boundaryRecoveredAsBeta2 =
+  refl
+
+seedRecoveredAsBeta0 :
+  rowKindRecoveredBettiSummary seedSummary ≡ Betti.beta0Summary
+seedRecoveredAsBeta0 =
+  refl
+
+carryRecoveredAsBeta1 :
+  rowKindRecoveredBettiSummary carrySummary ≡ Betti.beta1Summary
+carryRecoveredAsBeta1 =
+  refl
 
 connectedComponentMapsToAttentionCarrier :
   rowKindQiCarrier connectedComponentSummary
@@ -141,6 +267,34 @@ voidMapsToThresholdCarrier :
   ≡
   QiBridge.thresholdQiCarrier
 voidMapsToThresholdCarrier =
+  refl
+
+bodyMapsToBodyCarrier :
+  rowKindQiCarrier bodySummary
+  ≡
+  QiBridge.bodyQiCarrier
+bodyMapsToBodyCarrier =
+  refl
+
+boundaryMapsToThresholdCarrier :
+  rowKindQiCarrier boundarySummary
+  ≡
+  QiBridge.thresholdQiCarrier
+boundaryMapsToThresholdCarrier =
+  refl
+
+seedMapsToAttentionCarrier :
+  rowKindQiCarrier seedSummary
+  ≡
+  QiBridge.attentionQiCarrier
+seedMapsToAttentionCarrier =
+  refl
+
+carryMapsToMovementCarrier :
+  rowKindQiCarrier carrySummary
+  ≡
+  QiBridge.movementQiCarrier
+carryMapsToMovementCarrier =
   refl
 
 record BettiQiAuthorityClosure : Set where
@@ -382,12 +536,52 @@ canonicalVoidBettiQiRow =
     (rowKindProfile voidSummary)
     (rowKindStatement voidSummary)
 
+canonicalBodyBettiQiRow :
+  BettiQiAdapterRow
+canonicalBodyBettiQiRow =
+  mkBettiQiAdapterRow
+    (suc (suc (suc zero)))
+    bodySummary
+    (rowKindProfile bodySummary)
+    (rowKindStatement bodySummary)
+
+canonicalBoundaryBettiQiRow :
+  BettiQiAdapterRow
+canonicalBoundaryBettiQiRow =
+  mkBettiQiAdapterRow
+    (suc (suc (suc (suc zero))))
+    boundarySummary
+    (rowKindProfile boundarySummary)
+    (rowKindStatement boundarySummary)
+
+canonicalSeedBettiQiRow :
+  BettiQiAdapterRow
+canonicalSeedBettiQiRow =
+  mkBettiQiAdapterRow
+    (suc (suc (suc (suc (suc zero)))))
+    seedSummary
+    (rowKindProfile seedSummary)
+    (rowKindStatement seedSummary)
+
+canonicalCarryBettiQiRow :
+  BettiQiAdapterRow
+canonicalCarryBettiQiRow =
+  mkBettiQiAdapterRow
+    (suc (suc (suc (suc (suc (suc zero))))))
+    carrySummary
+    (rowKindProfile carrySummary)
+    (rowKindStatement carrySummary)
+
 canonicalBettiQiAdapterRows :
   List BettiQiAdapterRow
 canonicalBettiQiAdapterRows =
   canonicalConnectedComponentBettiQiRow
   ∷ canonicalCycleBettiQiRow
   ∷ canonicalVoidBettiQiRow
+  ∷ canonicalBodyBettiQiRow
+  ∷ canonicalBoundaryBettiQiRow
+  ∷ canonicalSeedBettiQiRow
+  ∷ canonicalCarryBettiQiRow
   ∷ []
 
 canonicalConnectedComponentBettiQiRowReceipt :
@@ -450,12 +644,96 @@ canonicalVoidBettiQiRowReceipt =
     refl
     refl
 
+canonicalBodyBettiQiRowReceipt :
+  BettiQiAdapterRowReceipt canonicalBodyBettiQiRow
+canonicalBodyBettiQiRowReceipt =
+  bettiQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalBoundaryBettiQiRowReceipt :
+  BettiQiAdapterRowReceipt canonicalBoundaryBettiQiRow
+canonicalBoundaryBettiQiRowReceipt =
+  bettiQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalSeedBettiQiRowReceipt :
+  BettiQiAdapterRowReceipt canonicalSeedBettiQiRow
+canonicalSeedBettiQiRowReceipt =
+  bettiQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+canonicalCarryBettiQiRowReceipt :
+  BettiQiAdapterRowReceipt canonicalCarryBettiQiRow
+canonicalCarryBettiQiRowReceipt =
+  bettiQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
 canonicalBettiQiFormalLensSurfaces :
   List Lens.FormalLensQualificationSurface
 canonicalBettiQiFormalLensSurfaces =
   rowKindFormalLensSurface connectedComponentSummary
   ∷ rowKindFormalLensSurface cycleSummary
   ∷ rowKindFormalLensSurface voidSummary
+  ∷ rowKindFormalLensSurface bodySummary
+  ∷ rowKindFormalLensSurface boundarySummary
+  ∷ rowKindFormalLensSurface seedSummary
+  ∷ rowKindFormalLensSurface carrySummary
   ∷ []
 
 bettiQiCandidateOnlyRow :
@@ -467,7 +745,7 @@ bettiQiCandidateOnlyRow =
     "bettiQiCandidateOnlyRow"
     Candidate.bridgeCandidateKind
     Candidate.bridgeCandidateOnlyStatus
-    "Betti support summaries are carried into Qi carrier, role, and formal-lens surfaces as candidate-only topology readings."
+    "Betti support summaries are carried into candidate-only Qi body, boundary, seed, carry, threshold, and aperture surfaces as topology readings."
     "No truth, support, admissibility, runtime, theorem, clinical, or metaphysical authority is supplied."
 
 canonicalBettiQiCandidateOnlyReceipt :
@@ -592,7 +870,7 @@ canonicalBettiQiBridgeReceipt =
     false
     refl
     bettiQiPromotionImpossible
-    "Betti support summaries are interpreted as candidate-only Qi carrier, role, and formal-lens bridges with all authority lanes blocked."
+    "Betti support summaries are interpreted as candidate-only Qi carrier, role, and formal-lens bridges with body, boundary, seed, carry, threshold, and aperture readings while all authority lanes remain blocked."
 
 canonicalBettiQiAdapterReceipt :
   BettiQiAdapterReceipt

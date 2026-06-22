@@ -459,3 +459,430 @@ boundaryGovernanceBlockedKindsFalse =
 boundaryPolicySummary : String
 boundaryPolicySummary =
   "candidate-only local Betti boundary over polarity-phase support geometry and supervoxels, with beta-0 components, beta-1 loops, beta-2 cavities, and receipt-only residual topology references"
+
+------------------------------------------------------------------------
+-- Stage fibres, quotient support, and carry-depth summaries.
+
+data BettiTopologyStage : Set where
+  supportGeometryStage : BettiTopologyStage
+  quotientSupportStage : BettiTopologyStage
+  carryDepthStage : BettiTopologyStage
+
+record BettiStageFibre : Set where
+  constructor mkBettiStageFibre
+  field
+    stageFibreLabel :
+      String
+
+    stageFibreStage :
+      BettiTopologyStage
+
+    stageFibreRow :
+      BettiSupportRow
+
+    stageFibreSupportSurface :
+      BettiSupportSurface
+
+    stageFibreSupportSurfaceMatches :
+      stageFibreSupportSurface ≡ rowSupportSurface stageFibreRow
+
+    stageFibreSupportGeometry :
+      PhaseField.SupportGeometry
+
+    stageFibreSupportSupervoxel :
+      PhaseField.Supervoxel
+
+    stageFibreSupportWave :
+      PhaseField.WaveCandidateMixture
+
+    stageFibreCarryDepth :
+      Nat
+
+    stageFibreCarryDepthMatches :
+      stageFibreCarryDepth ≡ rowLocalScale stageFibreRow
+
+    stageFibreCandidateOnly :
+      Bool
+
+    stageFibrePromoted :
+      Bool
+
+    stageFibreCandidateOnlyIsTrue :
+      stageFibreCandidateOnly ≡ true
+
+    stageFibrePromotedIsFalse :
+      stageFibrePromoted ≡ false
+
+open BettiStageFibre public
+
+canonicalBeta0StageFibre : BettiStageFibre
+canonicalBeta0StageFibre =
+  mkBettiStageFibre
+    "beta-0-stage-fibre"
+    supportGeometryStage
+    canonicalBeta0Row
+    supportGeometrySurface
+    refl
+    PhaseField.canonicalBalancedSupportGeometry
+    PhaseField.canonicalBalancedSupervoxel
+    PhaseField.canonicalStandingWave
+    (suc (suc zero))
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalBeta1StageFibre : BettiStageFibre
+canonicalBeta1StageFibre =
+  mkBettiStageFibre
+    "beta-1-stage-fibre"
+    quotientSupportStage
+    canonicalBeta1Row
+    mixedLocalSurface
+    refl
+    PhaseField.canonicalYinSupportGeometry
+    PhaseField.canonicalYinYangSupervoxel
+    PhaseField.canonicalYinYangWave
+    (suc zero)
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalBeta2StageFibre : BettiStageFibre
+canonicalBeta2StageFibre =
+  mkBettiStageFibre
+    "beta-2-stage-fibre"
+    carryDepthStage
+    canonicalBeta2Row
+    supervoxelSurface
+    refl
+    PhaseField.canonicalYangSupportGeometry
+    PhaseField.canonicalBalancedSupervoxel
+    PhaseField.canonicalCounterWave
+    (suc zero)
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalBettiStageFibres : List BettiStageFibre
+canonicalBettiStageFibres =
+  canonicalBeta0StageFibre
+  ∷ canonicalBeta1StageFibre
+  ∷ canonicalBeta2StageFibre
+  ∷ []
+
+canonicalBettiStageFibreCount : Nat
+canonicalBettiStageFibreCount =
+  listCount canonicalBettiStageFibres
+
+canonicalBettiStageFibreCountIs3 :
+  canonicalBettiStageFibreCount ≡ 3
+canonicalBettiStageFibreCountIs3 = refl
+
+bettiStageFibrePolicySummary : String
+bettiStageFibrePolicySummary =
+  "candidate-only stage fibres read the beta rows as stage-local support geometry, quotient support, and carry-depth summaries without promoting topology authority"
+
+data BettiQuotientSupportKind : Set where
+  geometryQuotientSupport : BettiQuotientSupportKind
+  quotientSurfaceSupport : BettiQuotientSupportKind
+  carryDepthQuotientSupport : BettiQuotientSupportKind
+
+record BettiQuotientSupport : Set where
+  constructor mkBettiQuotientSupport
+  field
+    quotientSupportLabel :
+      String
+
+    quotientSupportKind :
+      BettiQuotientSupportKind
+
+    quotientSupportRow :
+      BettiSupportRow
+
+    quotientSupportSurface :
+      BettiSupportSurface
+
+    quotientSupportSurfaceMatches :
+      quotientSupportSurface ≡ rowSupportSurface quotientSupportRow
+
+    quotientSupportGeometry :
+      PhaseField.SupportGeometry
+
+    quotientSupportSupervoxel :
+      PhaseField.Supervoxel
+
+    quotientSupportWave :
+      PhaseField.WaveCandidateMixture
+
+    quotientSupportCarryDepth :
+      Nat
+
+    quotientSupportCarryDepthMatches :
+      quotientSupportCarryDepth ≡ rowLocalScale quotientSupportRow
+
+    quotientSupportCandidateOnly :
+      Bool
+
+    quotientSupportPromoted :
+      Bool
+
+    quotientSupportCandidateOnlyIsTrue :
+      quotientSupportCandidateOnly ≡ true
+
+    quotientSupportPromotedIsFalse :
+      quotientSupportPromoted ≡ false
+
+open BettiQuotientSupport public
+
+canonicalBeta0QuotientSupport : BettiQuotientSupport
+canonicalBeta0QuotientSupport =
+  mkBettiQuotientSupport
+    "beta-0-quotient-support"
+    geometryQuotientSupport
+    canonicalBeta0Row
+    supportGeometrySurface
+    refl
+    PhaseField.canonicalBalancedSupportGeometry
+    PhaseField.canonicalBalancedSupervoxel
+    PhaseField.canonicalStandingWave
+    (suc (suc zero))
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalBeta1QuotientSupport : BettiQuotientSupport
+canonicalBeta1QuotientSupport =
+  mkBettiQuotientSupport
+    "beta-1-quotient-support"
+    quotientSurfaceSupport
+    canonicalBeta1Row
+    mixedLocalSurface
+    refl
+    PhaseField.canonicalYinSupportGeometry
+    PhaseField.canonicalYinYangSupervoxel
+    PhaseField.canonicalYinYangWave
+    (suc zero)
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalBeta2QuotientSupport : BettiQuotientSupport
+canonicalBeta2QuotientSupport =
+  mkBettiQuotientSupport
+    "beta-2-quotient-support"
+    carryDepthQuotientSupport
+    canonicalBeta2Row
+    supervoxelSurface
+    refl
+    PhaseField.canonicalYangSupportGeometry
+    PhaseField.canonicalBalancedSupervoxel
+    PhaseField.canonicalCounterWave
+    (suc zero)
+    refl
+    true
+    false
+    refl
+    refl
+
+canonicalBettiQuotientSupports : List BettiQuotientSupport
+canonicalBettiQuotientSupports =
+  canonicalBeta0QuotientSupport
+  ∷ canonicalBeta1QuotientSupport
+  ∷ canonicalBeta2QuotientSupport
+  ∷ []
+
+canonicalBettiQuotientSupportCount : Nat
+canonicalBettiQuotientSupportCount =
+  listCount canonicalBettiQuotientSupports
+
+canonicalBettiQuotientSupportCountIs3 :
+  canonicalBettiQuotientSupportCount ≡ 3
+canonicalBettiQuotientSupportCountIs3 = refl
+
+bettiQuotientSupportPolicySummary : String
+bettiQuotientSupportPolicySummary =
+  "quotient support keeps the three Betti rows as finite quotient surfaces over local polarity-phase geometry, with candidate-only carries and blocked promotion"
+
+record BettiCarryDepthSummary : Set where
+  constructor mkBettiCarryDepthSummary
+  field
+    carryDepthSummaryLabel :
+      String
+
+    carryDepthSummaryRow :
+      BettiSupportRow
+
+    carryDepthSummaryStageFibre :
+      BettiStageFibre
+
+    carryDepthSummaryMeasure :
+      Nat
+
+    carryDepthSummaryMeasureMatches :
+      carryDepthSummaryMeasure ≡ rowLocalScale carryDepthSummaryRow
+
+    carryDepthSummarySurface :
+      BettiSupportSurface
+
+    carryDepthSummarySurfaceMatches :
+      carryDepthSummarySurface ≡
+      stageFibreSupportSurface carryDepthSummaryStageFibre
+
+    carryDepthSummaryCandidateOnly :
+      Bool
+
+    carryDepthSummaryPromoted :
+      Bool
+
+    carryDepthSummaryCandidateOnlyIsTrue :
+      carryDepthSummaryCandidateOnly ≡ true
+
+    carryDepthSummaryPromotedIsFalse :
+      carryDepthSummaryPromoted ≡ false
+
+    carryDepthSummaryText :
+      String
+
+open BettiCarryDepthSummary public
+
+canonicalBeta0CarryDepthSummary : BettiCarryDepthSummary
+canonicalBeta0CarryDepthSummary =
+  mkBettiCarryDepthSummary
+    "beta-0-carry-depth-summary"
+    canonicalBeta0Row
+    canonicalBeta0StageFibre
+    (suc (suc zero))
+    refl
+    supportGeometrySurface
+    refl
+    true
+    false
+    refl
+    refl
+    "beta-0 carry depth tracks the local support geometry scale and the stage-fibre quotient surface"
+
+canonicalBeta1CarryDepthSummary : BettiCarryDepthSummary
+canonicalBeta1CarryDepthSummary =
+  mkBettiCarryDepthSummary
+    "beta-1-carry-depth-summary"
+    canonicalBeta1Row
+    canonicalBeta1StageFibre
+    (suc zero)
+    refl
+    mixedLocalSurface
+    refl
+    true
+    false
+    refl
+    refl
+    "beta-1 carry depth tracks the quotient-support surface and the local residual loop reading"
+
+canonicalBeta2CarryDepthSummary : BettiCarryDepthSummary
+canonicalBeta2CarryDepthSummary =
+  mkBettiCarryDepthSummary
+    "beta-2-carry-depth-summary"
+    canonicalBeta2Row
+    canonicalBeta2StageFibre
+    (suc zero)
+    refl
+    supervoxelSurface
+    refl
+    true
+    false
+    refl
+    refl
+    "beta-2 carry depth tracks the supervoxel quotient and the cavity-style topological summary"
+
+canonicalBettiCarryDepthSummaries : List BettiCarryDepthSummary
+canonicalBettiCarryDepthSummaries =
+  canonicalBeta0CarryDepthSummary
+  ∷ canonicalBeta1CarryDepthSummary
+  ∷ canonicalBeta2CarryDepthSummary
+  ∷ []
+
+canonicalBettiCarryDepthSummaryCount : Nat
+canonicalBettiCarryDepthSummaryCount =
+  listCount canonicalBettiCarryDepthSummaries
+
+canonicalBettiCarryDepthSummaryCountIs3 :
+  canonicalBettiCarryDepthSummaryCount ≡ 3
+canonicalBettiCarryDepthSummaryCountIs3 = refl
+
+bettiCarryDepthPolicySummary : String
+bettiCarryDepthPolicySummary =
+  "carry-depth summaries expose the beta rows as bounded local depth readings over the stage fibres, quotient support, and polarity-phase support geometry"
+
+record BettiSupportTopologySummary : Set where
+  constructor mkBettiSupportTopologySummary
+  field
+    supportTopologySummaryLabel :
+      String
+
+    supportTopologyStageFibres :
+      List BettiStageFibre
+
+    supportTopologyQuotientSupports :
+      List BettiQuotientSupport
+
+    supportTopologyCarryDepthSummaries :
+      List BettiCarryDepthSummary
+
+    supportTopologyCandidateOnly :
+      Bool
+
+    supportTopologyPromoted :
+      Bool
+
+    supportTopologyCandidateOnlyIsTrue :
+      supportTopologyCandidateOnly ≡ true
+
+    supportTopologyPromotedIsFalse :
+      supportTopologyPromoted ≡ false
+
+    supportTopologyPolicySummary :
+      String
+
+open BettiSupportTopologySummary public
+
+canonicalBettiSupportTopologySummary : BettiSupportTopologySummary
+canonicalBettiSupportTopologySummary =
+  mkBettiSupportTopologySummary
+    "polarity-betti-support-topology-summary"
+    canonicalBettiStageFibres
+    canonicalBettiQuotientSupports
+    canonicalBettiCarryDepthSummaries
+    true
+    false
+    refl
+    refl
+    "candidate-only topology summary over stage fibres, quotient support, and carry-depth readings for the canonical beta rows"
+
+canonicalBettiSupportTopologySummaryReceipt :
+  BettiSupportTopologySummary
+canonicalBettiSupportTopologySummaryReceipt =
+  canonicalBettiSupportTopologySummary
+
+canonicalBettiTopologySummaryStageFibreCount :
+  listCount (supportTopologyStageFibres canonicalBettiSupportTopologySummary) ≡ 3
+canonicalBettiTopologySummaryStageFibreCount =
+  refl
+
+canonicalBettiTopologySummaryQuotientSupportCount :
+  listCount (supportTopologyQuotientSupports canonicalBettiSupportTopologySummary) ≡ 3
+canonicalBettiTopologySummaryQuotientSupportCount =
+  refl
+
+canonicalBettiTopologySummaryCarryDepthCount :
+  listCount (supportTopologyCarryDepthSummaries canonicalBettiSupportTopologySummary) ≡ 3
+canonicalBettiTopologySummaryCarryDepthCount =
+  refl
