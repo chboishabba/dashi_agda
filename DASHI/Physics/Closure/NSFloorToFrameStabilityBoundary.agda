@@ -253,7 +253,7 @@ canonicalNSFloorToFrameStabilityBoundaryGaps :
   List NSFloorToFrameStabilityBoundaryGap
 canonicalNSFloorToFrameStabilityBoundaryGaps =
   quantitativeCocycleLowerBoundBridgeMissing
-  scalarFloorDoesNotForceFrameGap
+  ∷ scalarFloorDoesNotForceFrameGap
   ∷ distributedResidualStratumCurvatureBridgeUnproved
   ∷ frameGapTargetStillOpen
   ∷ theoremChainClosureStillOpen
@@ -391,10 +391,10 @@ record NSFloorToFrameStabilityBoundary : Setω where
     frameGapTargetRecordedIsTrue :
       frameGapTargetRecorded ≡ true
 
-    distributedResidualStratumCurvatureBridgeRecorded :
+    distributedResidualStratumCurvatureBridgeFlag :
       Bool
-    distributedResidualStratumCurvatureBridgeRecordedIsTrue :
-      distributedResidualStratumCurvatureBridgeRecorded ≡ true
+    distributedResidualStratumCurvatureBridgeFlagIsTrue :
+      distributedResidualStratumCurvatureBridgeFlag ≡ true
 
     distributedResidualStratumCurvatureBridgeProved :
       Bool
@@ -497,9 +497,9 @@ canonicalNSFloorToFrameStabilityBoundary =
         true
     ; frameGapTargetRecordedIsTrue =
         refl
-    ; distributedResidualStratumCurvatureBridgeRecorded =
+    ; distributedResidualStratumCurvatureBridgeFlag =
         true
-    ; distributedResidualStratumCurvatureBridgeRecordedIsTrue =
+    ; distributedResidualStratumCurvatureBridgeFlagIsTrue =
         refl
     ; distributedResidualStratumCurvatureBridgeProved =
         false
