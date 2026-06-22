@@ -23,6 +23,7 @@ def test_everything_imports_tao_qi_boundary_stack() -> None:
         "import DASHI.Interop.PolarityPhaseFieldBridge",
         "import DASHI.Interop.PolarityBettiSupportBoundary",
         "import DASHI.Interop.BettiQiAdapter",
+        "import DASHI.Interop.CarryCompletionSpectralBridge",
         "import DASHI.Interop.TaoQiReadingAdapter",
         "import DASHI.Interop.TaoMeditationQiAdapter",
         "import DASHI.Promotion.PolarityFieldObligationIndex",
@@ -168,6 +169,40 @@ def test_recovered_31_plus_0_plus_1_phase_field_slice_markers() -> None:
     assert "support geometry" in phase_bridge_text
     assert "superposition candidates" in phase_bridge_text
     assert "blocked authority governance" in phase_bridge_text
+
+
+def test_carry_completion_bridge_and_stage12_fibre_markers() -> None:
+    carry_bridge_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "CarryCompletionSpectralBridge.agda"
+    ).read_text(encoding="utf-8")
+    stage_quotient_text = (
+        REPO_ROOT / "DASHI" / "Algebra" / "StageQuotient.agda"
+    ).read_text(encoding="utf-8")
+
+    assert_any_marker(
+        carry_bridge_text,
+        (
+            "threeAdicCompletionReceipt",
+            "moonshineCarrySeedReceipt",
+            "stageQuotientReceipt",
+            "generalizedStage12Receipt",
+            "canonicalCarryCompletionSpectralBridgeReceipt",
+            "atlas11CarryDepthIsRev2",
+        ),
+    )
+    assert "196883 + 1 = 196884" in carry_bridge_text
+    assert "q(next overflow) fails to commute with rotateTri" in carry_bridge_text
+    assert_any_marker(
+        stage_quotient_text,
+        (
+            "Stage12FibreSurface",
+            "canonicalStage12FibreSurface",
+            "atlasRowsAreCanonical",
+            "carry-depth",
+            "fibre-of-quotient",
+            "successor-non-equivariant",
+        ),
+    )
 
 
 def test_recovered_carry_and_successor_adapter_slice_markers() -> None:
