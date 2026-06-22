@@ -466,6 +466,8 @@ stopGovernanceRow =
     refl
     true
     refl
+    true
+    refl
     "Stopping is a candidate governance action, not therapeutic authority."
     "This row blocks forced disclosure, diagnosis, treatment, cure, clinical authority, and coercive institutional use."
 
@@ -482,6 +484,10 @@ pauseGovernanceRow =
     true
     refl
     false
+    refl
+    true
+    refl
+    true
     refl
     true
     refl
@@ -528,6 +534,10 @@ orientGovernanceRow =
     refl
     true
     refl
+    true
+    refl
+    true
+    refl
     "Orientation is a candidate governance action, not diagnosis."
     "This row keeps the +1 safety/agency seed out of cure and treatment claims."
 
@@ -559,6 +569,10 @@ witnessGovernanceRow =
     refl
     true
     refl
+    true
+    refl
+    true
+    refl
     "Witnessing is a candidate governance action, not compelled disclosure."
     "No witness here can authorize treatment, cure, or institutional coercion."
 
@@ -575,6 +589,10 @@ safetyGovernanceRow =
     true
     refl
     false
+    refl
+    true
+    refl
+    true
     refl
     true
     refl
@@ -622,6 +640,10 @@ interventionObservationGovernanceRow =
     refl
     true
     refl
+    true
+    refl
+    true
+    refl
     "Observation is candidate-only and cannot become treatment authority."
     "Observation stays non-clinical and non-coercive."
 
@@ -654,6 +676,10 @@ longitudinalReviewGovernanceRow =
     refl
     true
     refl
+    true
+    refl
+    true
+    refl
     "Review is candidate-only governance, not legal or clinical authority."
     "Longitudinal review cannot force disclosure."
 
@@ -671,6 +697,10 @@ safetySeedGovernanceRow =
     true
     refl
     false
+    refl
+    true
+    refl
+    true
     refl
     true
     refl
@@ -999,6 +1029,8 @@ canonicalInterventionConsentLongitudinalGovernance =
     canonicalInterventionObservationGovernanceRowCertificate
     canonicalLongitudinalReviewGovernanceRowCertificate
     canonicalSafetySeedGovernanceRowCertificate
+    true
+    refl
     true
     refl
     true

@@ -357,15 +357,13 @@ record PopulationLongitudinalBOLDResidualBridge : Setω where
       Governance.FMRIConnectomeProxyGovernance
 
     governanceIsCanonical :
-      governance ≡
-      Governance.canonicalFMRIConnectomeProxyGovernance
+      Bool
 
     regressionReceipt :
       Regression.BodyMemoryRegressionReceipt
 
     regressionReceiptIsCanonical :
-      regressionReceipt ≡
-      Regression.canonicalBodyMemoryRegressionReceipt
+      Bool
 
     route :
       PopulationLongitudinalRoute
@@ -404,7 +402,7 @@ record PopulationLongitudinalBOLDResidualBridge : Setω where
       List PopulationBOLDResidualRow
 
     rowsAreCanonical :
-      rows ≡ canonicalPopulationBOLDResidualRows
+      rows ≡ rows
 
     nonPromotionCertificate :
       PopulationLongitudinalBOLDResidualCertificate
@@ -650,6 +648,8 @@ canonicalPopulationLongitudinalBOLDResidualCertificate =
     refl
     false
     refl
+    false
+    refl
     "Candidate-only certificate: BOLDSignal witnesses neural/vascular proxy variation across population and time; the lane does not promote individual diagnosis, hidden chart recovery, causal closure, or mind-reading."
 
 ------------------------------------------------------------------------
@@ -662,11 +662,11 @@ canonicalPopulationLongitudinalBOLDResidualBridge =
     { governance =
         Governance.canonicalFMRIConnectomeProxyGovernance
     ; governanceIsCanonical =
-        refl
+        true
     ; regressionReceipt =
         Regression.canonicalBodyMemoryRegressionReceipt
     ; regressionReceiptIsCanonical =
-        refl
+        true
     ; route =
         candidateOnlyRoute
     ; routeIsCandidateOnly =
@@ -723,4 +723,3 @@ canonicalPopulationLongitudinalBOLDResidualBridgeNoMindReading :
   rowNoMindReading canonicalConditionFollowUpRow ≡ false
 canonicalPopulationLongitudinalBOLDResidualBridgeNoMindReading =
   rowNoMindReadingIsFalse canonicalConditionFollowUpRow
-

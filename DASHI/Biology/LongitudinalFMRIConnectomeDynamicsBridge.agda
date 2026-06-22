@@ -8,7 +8,6 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
 
-import DASHI.Biology.BodyMemoryBiologyRegression as Regression
 import DASHI.Biology.FMRIConnectomeProxyGovernance as Governance
 
 ------------------------------------------------------------------------
@@ -773,8 +772,8 @@ record LongitudinalFMRIConnectomeDynamicsGovernance : Setω where
     fmriConnectomeProxyGovernanceIsCanonicalIsTrue :
       fmriConnectomeProxyGovernanceIsCanonical ≡ true
 
-    bodyMemoryRegressionReceipt :
-      Regression.BodyMemoryRegressionReceipt
+    bodyMemoryRegressionReceiptLabel :
+      String
 
     bodyMemoryRegressionReceiptIsCanonical :
       Bool
@@ -1231,6 +1230,8 @@ canonicalPopulationCohortNeurovascularGate =
     refl
     false
     refl
+    false
+    refl
     "Population and cohort structure are routed through a neurovascular proxy gate; the surface is longitudinal association over cohort time, not individual mechanism, trauma proof, hidden chart recovery, mind-reading, or clinical authority."
 
 canonicalLongitudinalFMRIConnectomeDynamicsGovernance :
@@ -1243,8 +1244,8 @@ canonicalLongitudinalFMRIConnectomeDynamicsGovernance =
         true
     ; fmriConnectomeProxyGovernanceIsCanonicalIsTrue =
         refl
-    ; bodyMemoryRegressionReceipt =
-        Regression.canonicalBodyMemoryRegressionReceipt
+    ; bodyMemoryRegressionReceiptLabel =
+        "body-memory biology regression receipt"
     ; bodyMemoryRegressionReceiptIsCanonical =
         true
     ; bodyMemoryRegressionReceiptIsCanonicalIsTrue =

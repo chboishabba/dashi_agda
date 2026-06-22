@@ -745,6 +745,8 @@ canonicalNeurodivergentAtlasBodyMemoryBridge =
     refl
     false
     refl
+    false
+    refl
     canonicalNonPromotionCertificate
     refl
     "Neuroaffirming body-memory bridge: NT/ND are chart-building styles with different priors and weights, not normal or broken."

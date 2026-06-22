@@ -120,7 +120,7 @@ mkFailClosedLocatorRow :
   String →
   (importedBoundaryPromotionFlag' : Bool) →
   importedBoundaryPromotionFlag' ≡ false →
-  StageQuotient.Stage12FibreSurface →
+  (stage12FibreSurfaceReceipt' : StageQuotient.Stage12FibreSurface) →
   stage12FibreSurfaceReceipt' ≡ StageQuotient.canonicalStage12FibreSurface →
   StageQuotient.Stage12FibreSurface.carry-depth
     stage12FibreSurfaceReceipt'

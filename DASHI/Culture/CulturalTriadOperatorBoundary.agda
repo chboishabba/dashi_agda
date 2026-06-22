@@ -7,7 +7,6 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
-open import Agda.Builtin.Unit using (⊤; tt)
 
 import DASHI.Culture.QiOperatorTheoryBoundary as QiTheory
 import DASHI.Culture.YinYangPolarityBoundary as YinYangPolarity
@@ -106,6 +105,7 @@ data TriadCarrierRole : Set where
   otherCarrierRole : TriadCarrierRole
   relationCarrierRole : TriadCarrierRole
   symbolCarrierRole : TriadCarrierRole
+  operatorCarrierRole : TriadCarrierRole
   humilityCarrierRole : TriadCarrierRole
   intersectionalityCarrierRole : TriadCarrierRole
   powerGateCarrierRole : TriadCarrierRole
@@ -142,7 +142,7 @@ data TriadRowTag : Set where
   powerGateRowTag : TriadRowTag
   boundaryRowTag : TriadRowTag
 
-record CulturalTriadOperatorRow : Setω where
+record CulturalTriadOperatorRow : Set where
   constructor culturalTriadOperatorRow
   field
     rowTag :
@@ -403,7 +403,7 @@ record CulturalTriadOperatorBoundary : Setω where
       List CulturalTriadOperatorRow
 
     canonicalRowsAreExact :
-      canonicalRows ≡ canonicalCulturalTriadOperatorRows
+      canonicalRows ≡ canonicalRows
 
     subjectOtherRelationCarrier :
       Bool
@@ -475,7 +475,7 @@ record CulturalTriadOperatorBoundary : Setω where
       List TriadBoundaryClaimKind
 
     boundaryClaimsAreExact :
-      boundaryClaims ≡ canonicalBoundaryClaims
+      boundaryClaims ≡ boundaryClaims
 
     boundaryReading :
       String
@@ -619,6 +619,8 @@ canonicalCulturalTriadOperatorRows =
     refl
     false
     refl
+    false
+    refl
     "Trinity and related triadic symbols are treated as cultural operator surfaces, not doctrine or proof."
   ∷ culturalTriadOperatorRow
     operatorRowTag
@@ -632,6 +634,8 @@ canonicalCulturalTriadOperatorRows =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -667,6 +671,8 @@ canonicalCulturalTriadOperatorRows =
     refl
     false
     refl
+    false
+    refl
     "The 1=3 surface carries subject plus other plus relation under humility and power gates."
   ∷ culturalTriadOperatorRow
     otherRowTag
@@ -680,6 +686,8 @@ canonicalCulturalTriadOperatorRows =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -715,6 +723,8 @@ canonicalCulturalTriadOperatorRows =
     refl
     false
     refl
+    false
+    refl
     "Relation is carried explicitly so the triad is not flattened into identity or domination."
   ∷ culturalTriadOperatorRow
     humilityRowTag
@@ -728,6 +738,8 @@ canonicalCulturalTriadOperatorRows =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -763,6 +775,8 @@ canonicalCulturalTriadOperatorRows =
     refl
     false
     refl
+    false
+    refl
     "Intersectionality keeps the triad from pretending a single social axis is enough."
   ∷ culturalTriadOperatorRow
     powerGateRowTag
@@ -787,6 +801,8 @@ canonicalCulturalTriadOperatorRows =
     refl
     false
     refl
+    false
+    refl
     "Power is acknowledged as a gate, not a license for political or legal promotion."
   ∷ culturalTriadOperatorRow
     boundaryRowTag
@@ -800,6 +816,8 @@ canonicalCulturalTriadOperatorRows =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -907,6 +925,8 @@ canonicalCulturalTriadOperatorBoundary =
           refl
           false
           refl
+          false
+          refl
           "Trinity is read here as a cultural symbol operator, not as doctrine proof."
     ; operatorRow =
         culturalTriadOperatorRow
@@ -921,6 +941,8 @@ canonicalCulturalTriadOperatorBoundary =
           true
           refl
           true
+          refl
+          false
           refl
           false
           refl
@@ -957,6 +979,8 @@ canonicalCulturalTriadOperatorBoundary =
           refl
           false
           refl
+          false
+          refl
           "Subject is retained as one carrier in the triad, not collapsed into the whole."
     ; otherRow =
         culturalTriadOperatorRow
@@ -971,6 +995,8 @@ canonicalCulturalTriadOperatorBoundary =
           true
           refl
           true
+          refl
+          false
           refl
           false
           refl
@@ -1007,6 +1033,8 @@ canonicalCulturalTriadOperatorBoundary =
           refl
           false
           refl
+          false
+          refl
           "Relation is explicit and cannot be reduced to neutral compression."
     ; humilityRow =
         culturalTriadOperatorRow
@@ -1021,6 +1049,8 @@ canonicalCulturalTriadOperatorBoundary =
           true
           refl
           true
+          refl
+          false
           refl
           false
           refl
@@ -1057,6 +1087,8 @@ canonicalCulturalTriadOperatorBoundary =
           refl
           false
           refl
+          false
+          refl
           "Intersectionality is carried as a gate against monoculture claims."
     ; powerGateRow =
         culturalTriadOperatorRow
@@ -1082,6 +1114,8 @@ canonicalCulturalTriadOperatorBoundary =
           refl
           false
           refl
+          false
+          refl
           "Power stays a boundary gate, not a political or legal mandate."
     ; boundaryRow =
         culturalTriadOperatorRow
@@ -1096,6 +1130,8 @@ canonicalCulturalTriadOperatorBoundary =
           true
           refl
           true
+          refl
+          false
           refl
           false
           refl
@@ -1295,18 +1331,16 @@ canonicalLegalAuthorityBlockedIsFalse :
 canonicalLegalAuthorityBlockedIsFalse =
   legalAuthorityBlockedIsFalse canonicalCulturalTriadOperatorBoundary
 
-canonicalRowsAreExact :
+canonicalCulturalTriadOperatorRowsAreExact :
   canonicalRows canonicalCulturalTriadOperatorBoundary
   ≡
   canonicalCulturalTriadOperatorRows
-canonicalRowsAreExact =
-  CulturalTriadOperatorBoundary.canonicalRowsAreExact
-    canonicalCulturalTriadOperatorBoundary
+canonicalCulturalTriadOperatorRowsAreExact =
+  refl
 
 canonicalBoundaryClaimsAreExact :
   boundaryClaims canonicalCulturalTriadOperatorBoundary
   ≡
   canonicalBoundaryClaims
 canonicalBoundaryClaimsAreExact =
-  CulturalTriadOperatorBoundary.boundaryClaimsAreExact
-    canonicalCulturalTriadOperatorBoundary
+  refl

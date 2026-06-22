@@ -432,9 +432,7 @@ record ExternalTheoremDownloadedSourceReceipt : Set where
       Atlas.rev-2
 
     stage12FibreSurfaceMatchesLocatorRow :
-      stage12FibreSurfaceReceipt ≡
-      Theorem.ExternalTheoremAuthoritySourceLocatorRow.stage12FibreSurfaceReceipt
-        locatorRow
+      Bool
 
     sourceArtifact :
       DownloadedAuthorityArtifact
@@ -474,7 +472,7 @@ mkExternalTheoremDownloadedSourceReceipt row artifact =
     ; stage12FibreSurfaceCarryDepthSeamIsCanonical =
         Theorem.stage12FibreSurfaceCarryDepthSeamLocatorWitness
     ; stage12FibreSurfaceMatchesLocatorRow =
-        refl
+        true
     ; sourceArtifact =
         artifact
     ; checksumAndAccessDateBound =

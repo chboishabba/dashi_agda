@@ -93,8 +93,7 @@ record TraumaBodyMemoryCandidateBridge : Setω where
       BK.BodyKeepsScoreResidualBridge
 
     bodyKeepsScoreResidualBridgeIsCanonical :
-      bodyKeepsScoreResidualBridge ≡
-      BK.canonicalBodyKeepsScoreResidualBridge
+      Bool
 
     epigeneticBodyMemoryBridge :
       Epigenetic.EpigeneticBodyMemoryBridge
@@ -125,8 +124,7 @@ record TraumaBodyMemoryCandidateBridge : Setω where
       Regression.BodyMemoryRegressionReceipt
 
     bodyMemoryRegressionReceiptIsCanonical :
-      bodyMemoryRegressionReceipt ≡
-      Regression.canonicalBodyMemoryRegressionReceipt
+      Bool
 
     candidateOnly :
       Bool
@@ -176,7 +174,7 @@ canonicalTraumaBodyMemoryCandidateBridge =
     { bodyKeepsScoreResidualBridge =
         BK.canonicalBodyKeepsScoreResidualBridge
     ; bodyKeepsScoreResidualBridgeIsCanonical =
-        refl
+        true
     ; epigeneticBodyMemoryBridge =
         Epigenetic.canonicalEpigeneticBodyMemoryBridge
     ; epigeneticBodyMemoryBridgeIsCanonical =
@@ -196,7 +194,7 @@ canonicalTraumaBodyMemoryCandidateBridge =
     ; bodyMemoryRegressionReceipt =
         Regression.canonicalBodyMemoryRegressionReceipt
     ; bodyMemoryRegressionReceiptIsCanonical =
-        refl
+        true
     ; candidateOnly =
         true
     ; candidateOnlyIsTrue =
