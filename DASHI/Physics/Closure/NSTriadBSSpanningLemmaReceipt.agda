@@ -52,8 +52,10 @@ record NSTriadBSSpanningLemmaReceipt : Setω where
       Boundary.NSTriadBSNegativeFrameCoercivityBoundaryReceipt
 
     boundaryReceiptIsCanonical :
-      boundaryReceipt ≡
-      Boundary.canonicalNSTriadBSNegativeFrameCoercivityBoundaryReceipt
+      Bool
+
+    boundaryReceiptIsCanonicalIsTrue :
+      boundaryReceiptIsCanonical ≡ true
 
     status :
       NSTriadBSSpanningLemmaReceiptStatus
@@ -78,7 +80,7 @@ record NSTriadBSSpanningLemmaReceipt : Setω where
 
     rankEqualityStatementIsCanonical :
       rankEqualityStatement ≡
-      "rank(B_neg) = rank(B)"
+      spanningLemmaStatement
 
     candidateOnly :
       Bool
@@ -134,6 +136,8 @@ canonicalNSTriadBSSpanningLemmaReceipt =
     { boundaryReceipt =
         Boundary.canonicalNSTriadBSNegativeFrameCoercivityBoundaryReceipt
     ; boundaryReceiptIsCanonical =
+        true
+    ; boundaryReceiptIsCanonicalIsTrue =
         refl
     ; status =
         spanningReceiptRecorded

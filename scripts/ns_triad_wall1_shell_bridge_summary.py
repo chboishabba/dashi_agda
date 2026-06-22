@@ -598,9 +598,13 @@ def main() -> int:
     except Exception:
         signed_wall1_carrier_ranking_payload = {}
     try:
-        continuous_coherence_capacity_payload = _read_json(args.k_n_exact_identity_json)
+        continuous_coherence_capacity_payload = _read_json(args.continuous_coherence_capacity_json)
     except Exception:
         continuous_coherence_capacity_payload = {}
+    try:
+        k_n_exact_identity_payload = _read_json(args.k_n_exact_identity_json)
+    except Exception:
+        k_n_exact_identity_payload = {}
     try:
         signed_wall1_payload = _read_json(args.signed_wall1_json)
     except Exception:
@@ -620,6 +624,11 @@ def main() -> int:
         if isinstance(explicit_signed_rows, list):
             signed_wall1_rows = explicit_signed_rows
     continuous_coherence_capacity_rows = _rows(continuous_coherence_capacity_payload)
+    k_n_exact_identity_scan_rows = _rows(k_n_exact_identity_payload)
+    k_n_exact_identity_by_key = {
+        key: row for row in k_n_exact_identity_scan_rows if (key := _frame_shell_key(row)) is not None
+    }
+    k_n_exact_identity_rows = []
     signed_wall1_route_names = None
     if signed_wall1_rows:
         ordered_route_names: list[str] = []
@@ -630,6 +639,9 @@ def main() -> int:
             if isinstance(route_name, str) and route_name not in ordered_route_names:
                 ordered_route_names.append(route_name)
         signed_wall1_route_names = ordered_route_names
+        explicit_k_n_rows = signed_wall1_payload.get("k_n_exact_identity_rows")
+        if isinstance(explicit_k_n_rows, list):
+            k_n_exact_identity_rows = explicit_k_n_rows
     signed_xor_bridge_open = any(
         isinstance(row, dict)
         and row.get("surface") == "signed_xor_gaugeability"
@@ -684,6 +696,11 @@ def main() -> int:
     signed_wall1_carrier_top_support = _coerce_float(
         signed_wall1_carrier_ranking_aggregate.get("carrier_identification_top_support_mean")
     )
+    signed_wall1_aggregate = (
+        signed_wall1_payload.get("aggregate", {})
+        if isinstance(signed_wall1_payload, dict)
+        else {}
+    )
     continuous_coherence_capacity_input_status = _payload_status(continuous_coherence_capacity_payload)
     continuous_coherence_capacity_status = _effective_fail_closed_status(continuous_coherence_capacity_payload)
     continuous_coherence_capacity_candidate_only = _payload_candidate_only(continuous_coherence_capacity_payload)
@@ -700,13 +717,67 @@ def main() -> int:
     continuous_coherence_capacity_aggregate_fail_closed = _payload_fail_closed(
         continuous_coherence_capacity_aggregate
     )
-    k_n_exact_identity_input_status = continuous_coherence_capacity_input_status
-    k_n_exact_identity_status = continuous_coherence_capacity_status
-    k_n_exact_identity_candidate_only = continuous_coherence_capacity_candidate_only
-    k_n_exact_identity_fail_closed = continuous_coherence_capacity_fail_closed
-    k_n_exact_identity_aggregate_status = continuous_coherence_capacity_aggregate_status
-    k_n_exact_identity_aggregate_candidate_only = continuous_coherence_capacity_aggregate_candidate_only
-    k_n_exact_identity_aggregate_fail_closed = continuous_coherence_capacity_aggregate_fail_closed
+    k_n_exact_identity_input_status = _payload_status(k_n_exact_identity_payload)
+    k_n_exact_identity_surface_status = (
+        signed_wall1_aggregate.get("k_n_exact_identity_status")
+        if isinstance(signed_wall1_aggregate.get("k_n_exact_identity_status"), str)
+        else None
+    )
+    k_n_exact_identity_status = (
+        k_n_exact_identity_surface_status
+        if k_n_exact_identity_surface_status is not None
+        else _effective_fail_closed_status(k_n_exact_identity_payload)
+    )
+    k_n_exact_identity_surface_candidate_only = signed_wall1_aggregate.get("k_n_exact_identity_candidate_only")
+    k_n_exact_identity_candidate_only = (
+        bool(k_n_exact_identity_surface_candidate_only)
+        if isinstance(k_n_exact_identity_surface_candidate_only, bool)
+        else _payload_candidate_only(k_n_exact_identity_payload)
+    )
+    k_n_exact_identity_surface_fail_closed = signed_wall1_aggregate.get("k_n_exact_identity_fail_closed")
+    k_n_exact_identity_fail_closed = (
+        bool(k_n_exact_identity_surface_fail_closed)
+        if isinstance(k_n_exact_identity_surface_fail_closed, bool)
+        else _payload_fail_closed(k_n_exact_identity_payload)
+    )
+    k_n_exact_identity_aggregate = (
+        k_n_exact_identity_payload.get("aggregate", {})
+        if isinstance(k_n_exact_identity_payload, dict)
+        else {}
+    )
+    k_n_exact_identity_surface_aggregate_status = signed_wall1_aggregate.get("k_n_exact_identity_aggregate_status")
+    k_n_exact_identity_aggregate_status = (
+        k_n_exact_identity_surface_aggregate_status
+        if isinstance(k_n_exact_identity_surface_aggregate_status, str)
+        else (
+            _payload_status(k_n_exact_identity_aggregate)
+            or ("fail-closed" if k_n_exact_identity_status == "fail-closed" else "unavailable")
+        )
+    )
+    k_n_exact_identity_surface_aggregate_candidate_only = signed_wall1_aggregate.get(
+        "k_n_exact_identity_aggregate_candidate_only"
+    )
+    k_n_exact_identity_aggregate_candidate_only = (
+        bool(k_n_exact_identity_surface_aggregate_candidate_only)
+        if isinstance(k_n_exact_identity_surface_aggregate_candidate_only, bool)
+        else (
+            _payload_candidate_only(k_n_exact_identity_aggregate)
+            if _payload_candidate_only(k_n_exact_identity_aggregate) is not None
+            else (True if k_n_exact_identity_status == "fail-closed" else None)
+        )
+    )
+    k_n_exact_identity_surface_aggregate_fail_closed = signed_wall1_aggregate.get(
+        "k_n_exact_identity_aggregate_fail_closed"
+    )
+    k_n_exact_identity_aggregate_fail_closed = (
+        bool(k_n_exact_identity_surface_aggregate_fail_closed)
+        if isinstance(k_n_exact_identity_surface_aggregate_fail_closed, bool)
+        else (
+            _payload_fail_closed(k_n_exact_identity_aggregate)
+            if _payload_fail_closed(k_n_exact_identity_aggregate) is not None
+            else (True if k_n_exact_identity_status == "fail-closed" else None)
+        )
+    )
     for row in signed_wall1_rows:
         if not isinstance(row, dict):
             continue
@@ -714,20 +785,30 @@ def main() -> int:
         row["reconciliation_status"] = signed_wall1_reconciliation_status
         row["carrier_ranking_input_status"] = signed_wall1_carrier_ranking_input_status
         row["carrier_ranking_status"] = signed_wall1_carrier_ranking_status
+        if row.get("surface") == "signed_xor_gaugeability" and row.get("signed_xor_distance_bridge_open") is None:
+            row["signed_xor_distance_bridge_open"] = row.get("signed_xor_bridge_open")
     for row in continuous_coherence_capacity_rows:
         if not isinstance(row, dict):
             continue
-        row["input_status"] = k_n_exact_identity_input_status
-        row["status"] = k_n_exact_identity_status
-        row["candidate_only"] = k_n_exact_identity_candidate_only
-        row["fail_closed"] = k_n_exact_identity_fail_closed
-        row["aggregate_status"] = k_n_exact_identity_aggregate_status
-        row["aggregate_candidate_only"] = k_n_exact_identity_aggregate_candidate_only
-        row["aggregate_fail_closed"] = k_n_exact_identity_aggregate_fail_closed
+        row["input_status"] = continuous_coherence_capacity_input_status
+        row["status"] = continuous_coherence_capacity_status
+        row["candidate_only"] = continuous_coherence_capacity_candidate_only
+        row["fail_closed"] = continuous_coherence_capacity_fail_closed
+        row["aggregate_status"] = continuous_coherence_capacity_aggregate_status
+        row["aggregate_candidate_only"] = continuous_coherence_capacity_aggregate_candidate_only
+        row["aggregate_fail_closed"] = continuous_coherence_capacity_aggregate_fail_closed
+    for row in k_n_exact_identity_rows:
+        if not isinstance(row, dict):
+            continue
         row["continuous_coherence_route_open"] = True
         row["k_n_exact_identity_route_open"] = True
         row["k_n_exact_identity_status"] = k_n_exact_identity_status
-        row["continuous_coherence_status"] = k_n_exact_identity_status
+        row["continuous_coherence_status"] = continuous_coherence_capacity_status
+        row["input_status"] = k_n_exact_identity_input_status
+        row["status"] = k_n_exact_identity_status
+        row["aggregate_status"] = k_n_exact_identity_aggregate_status
+        row["aggregate_candidate_only"] = k_n_exact_identity_aggregate_candidate_only
+        row["aggregate_fail_closed"] = k_n_exact_identity_aggregate_fail_closed
 
     shared_keys = sorted(set(phase_by_key) & set(cocycle_by_key))
     bridge_rows: list[dict[str, Any]] = []
@@ -784,6 +865,7 @@ def main() -> int:
         hessian_row = hessian_by_frame.get(frame, {})
         k01_row = k01_geometry_by_key.get(key)
         schur_row = schur_by_key.get(key, {})
+        k_n_identity_row = k_n_exact_identity_by_key.get(key)
         phase_gap = _coerce_float(phase_row.get("optimized_lambda_gap_proxy"))
         cocycle_bound = _coerce_float(cocycle_row.get("mean_cycle_lower_bound"))
         if cocycle_bound is None:
@@ -866,6 +948,16 @@ def main() -> int:
                 "k_n_exact_identity_aggregate_status": k_n_exact_identity_aggregate_status,
                 "k_n_exact_identity_aggregate_candidate_only": k_n_exact_identity_aggregate_candidate_only,
                 "k_n_exact_identity_aggregate_fail_closed": k_n_exact_identity_aggregate_fail_closed,
+                "k_n_exact_identity_residual_op": _first_float(k_n_identity_row, ("exact_identity_residual_op",)),
+                "k_n_exact_identity_residual_fro": _first_float(k_n_identity_row, ("exact_identity_residual_fro",)),
+                "lambda_min_kn": _first_float(k_n_identity_row, ("lambda_min_kn",)),
+                "lambda_max_kn": _first_float(k_n_identity_row, ("lambda_max_kn",)),
+                "negative_sign_fraction": _first_float(k_n_identity_row, ("negative_sign_fraction",)),
+                "negative_frame_mass_ratio": _first_float(k_n_identity_row, ("negative_frame_mass_ratio",)),
+                "negative_spanning_coverage_fraction": _first_float(
+                    k_n_identity_row,
+                    ("negative_spanning_coverage_fraction",),
+                ),
                 **schur_metrics,
             }
         )
@@ -977,7 +1069,8 @@ def main() -> int:
         "rows": bridge_rows,
         "signed_wall1_rows": signed_wall1_rows,
         "continuous_coherence_capacity_rows": continuous_coherence_capacity_rows,
-        "k_n_exact_identity_rows": continuous_coherence_capacity_rows,
+        "k_n_exact_identity_scan_rows": k_n_exact_identity_scan_rows,
+        "k_n_exact_identity_rows": k_n_exact_identity_rows,
         "aggregate": {
             "shared_frame_shell_count": int(len(shared_keys)),
             "shared_frame_count": int(len({frame for frame, _ in shared_keys})),
@@ -1095,6 +1188,30 @@ def main() -> int:
             "k_n_exact_identity_aggregate_candidate_only": k_n_exact_identity_aggregate_candidate_only,
             "k_n_exact_identity_aggregate_fail_closed": k_n_exact_identity_aggregate_fail_closed,
             "continuous_coherence_capacity_aggregate": continuous_coherence_capacity_aggregate,
+            "k_n_exact_identity_aggregate": k_n_exact_identity_aggregate,
+            "k_n_exact_identity_row_count": int(len(k_n_exact_identity_rows)) if k_n_exact_identity_rows else None,
+            "k_n_exact_identity_surface_count": (
+                int(
+                    len(
+                        {
+                            row.get("surface")
+                            for row in k_n_exact_identity_rows
+                            if isinstance(row, dict) and isinstance(row.get("surface"), str)
+                        }
+                    )
+                )
+                if k_n_exact_identity_rows
+                else None
+            ),
+            "k_n_exact_identity_route_names": (
+                [
+                    row.get("route_name")
+                    for row in k_n_exact_identity_rows
+                    if isinstance(row, dict) and isinstance(row.get("route_name"), str)
+                ]
+                if k_n_exact_identity_rows
+                else None
+            ),
             "signed_xor_bridge_open": signed_xor_bridge_open if signed_wall1_rows else None,
             "signed_spectral_bridge_open": signed_spectral_bridge_open if signed_wall1_rows else None,
             "signed_surface_consensus": "fail-closed" if signed_wall1_rows else "unavailable",

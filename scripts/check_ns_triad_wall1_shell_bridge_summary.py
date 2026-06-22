@@ -544,9 +544,12 @@ def main() -> int:
                 if not isinstance(row, dict):
                     errors.append(f"k_n_exact_identity_rows[{index}]: must be object")
                     continue
-                if row.get("surface") not in ("k_n_exact_identity_carrier", "coherence_deficit_floor"):
+                if row.get("surface") not in (
+                    "k_n_exact_identity_carrier",
+                    "b_s_frame_equidistribution_boundary",
+                ):
                     errors.append(
-                        f"k_n_exact_identity_rows[{index}].surface: must be 'k_n_exact_identity_carrier' or 'coherence_deficit_floor'"
+                        f"k_n_exact_identity_rows[{index}].surface: must be 'k_n_exact_identity_carrier' or 'b_s_frame_equidistribution_boundary'"
                     )
                 if row.get("candidate_only") is not True:
                     errors.append(f"k_n_exact_identity_rows[{index}].candidate_only: must be true")
@@ -575,7 +578,7 @@ def main() -> int:
                 if row.get("route_name") != (
                     "k-n-exact-identity-wall-1a"
                     if row.get("surface") == "k_n_exact_identity_carrier"
-                    else "coherence-deficit-floor-wall-1a"
+                    else "b-s-frame-equidistribution-wall-1a"
                 ):
                     errors.append(f"k_n_exact_identity_rows[{index}].route_name: must match the canonical route")
                 if row.get("surface") == "k_n_exact_identity_carrier":
@@ -593,16 +596,16 @@ def main() -> int:
                         )
                 else:
                     if row.get("boundary_summary") != (
-                        "The positive theorem shape cap_N <= kappa < 1 -> floor >= (1 - kappa) / 2 is recorded, but no proof is claimed."
+                        "The Biot-Savart frame-equidistribution target is the single open finite-dimensional theorem candidate; lower spectral edge controls the floor and upper edge controls frame safety."
                     ):
                         errors.append(
-                            f"k_n_exact_identity_rows[{index}].boundary_summary: must match the canonical floor note"
+                            f"k_n_exact_identity_rows[{index}].boundary_summary: must match the canonical frame-equidistribution note"
                         )
                     if row.get("bridge_summary") != (
-                        "The floor theorem remains separate from the Schur/frame-gap route; this row keeps the implication surface fail-closed."
+                        "This equidistribution surface is candidate-only and fail-closed; it keeps the exact operator theorem target explicit without claiming a proof."
                     ):
                         errors.append(
-                            f"k_n_exact_identity_rows[{index}].bridge_summary: must match the canonical floor bridge note"
+                            f"k_n_exact_identity_rows[{index}].bridge_summary: must match the canonical frame-equidistribution bridge note"
                         )
         if signed_wall1_rows == []:
             if aggregate.get("signed_wall1_row_count") != 0:

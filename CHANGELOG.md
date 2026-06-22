@@ -6,6 +6,31 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Wall 1 `K_N` exact-identity / negative-frame tranche for `2026-06-23`:
+  adds `DASHI.Physics.Closure.NSTriadKNExactIdentityReceipt`,
+  `DASHI.Physics.Closure.NSTriadBSNegativeFrameCoercivityBoundary`,
+  `DASHI.Physics.Closure.NSTriadBSSpanningLemmaReceipt`,
+  `DASHI.Physics.Closure.NSTriadBSFrameEquidistributionBoundary`,
+  `scripts/ns_triad_kn_exact_identity_scan.py`, and
+  `scripts/check_ns_triad_kn_exact_identity_scan.py`; strengthens
+  `DASHI.Physics.Closure.NSTriadSignedLaplacianIdentityReceipt`,
+  `scripts/ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The tranche retires the raw
+  signed-XOR route as a primary Wall 1a carrier, records the corrected
+  positive-subspace identity `L_signed_norm = I - 2 K_N` as the canonical
+  positive operator route, records negative-frame coercivity / spanning /
+  frame-equidistribution as the candidate finite-dimensional theorem stack,
+  and wires the new `K_N` surface through carrier-ranking, signed
+  theorem-status, the Wall 1 shell bridge, and the local harness manifest.
+  This remains fail-closed: the active archive still reports degenerate sign
+  telemetry (`negative_sign_fraction_mean = 1.0` on the current local
+  extraction), the new scan is empirical only, and theorem/full-NS/Clay
+  promotion remain false.
+
 - NS Wall 1 continuous coherence carrier / coherence-deficit floor tranche
   for `2026-06-23`: adds
   `DASHI.Physics.Closure.NSTriadContinuousCoherenceCarrierBoundary`,
