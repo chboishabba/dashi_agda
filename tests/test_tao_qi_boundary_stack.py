@@ -16,6 +16,8 @@ def test_everything_imports_tao_qi_boundary_stack() -> None:
         "import DASHI.Interop.TaoYinYangAdapter",
         "import DASHI.Interop.YinYangQiAdapter",
         "import DASHI.Interop.PolarityPhaseFieldBridge",
+        "import DASHI.Interop.PolarityBettiSupportBoundary",
+        "import DASHI.Interop.BettiQiAdapter",
         "import DASHI.Interop.TaoQiReadingAdapter",
         "import DASHI.Interop.TaoMeditationQiAdapter",
         "import DASHI.Promotion.PolarityFieldObligationIndex",
@@ -33,6 +35,7 @@ def test_promotion_index_references_tao_qi_boundary_surface() -> None:
 
     assert "taoQiBoundaryLane" in text
     assert "polarityFieldBoundaryLane" in text
+    assert "bettiSupportBoundaryLane" in text
     assert (
         "import DASHI.Promotion.PolarityFieldObligationIndex as PolarityFieldBoundary"
         in text
@@ -42,7 +45,9 @@ def test_promotion_index_references_tao_qi_boundary_surface() -> None:
     assert '"canonicalPolarityFieldObligationIndexReceipt"' in text
     assert '"DASHI.Promotion.TaoQiObligationIndex"' in text
     assert '"canonicalTaoQiObligationIndexReceipt"' in text
-    assert "crossDomainInterpretationBoundaryCount = 25" in text
+    assert '"DASHI.Interop.PolarityBettiSupportBoundary"' in text
+    assert '"canonicalPolarityBettiSupportBoundary"' in text
+    assert "crossDomainInterpretationBoundaryCount = 26" in text
 
 
 def test_tao_qi_obligation_module_mentions_full_bridge_stack() -> None:
@@ -58,6 +63,10 @@ def test_tao_qi_obligation_module_mentions_full_bridge_stack() -> None:
     assert "canonicalTaoYinYangBridgeReceipt" in text
     assert "canonicalYinYangQiBridgeReceipt" in text
     assert "canonicalPolarityPhaseFieldBridge" in text
+    assert "canonicalBettiSupportBoundaryModuleName" in text
+    assert "canonicalBettiSupportBoundarySurfaceName" in text
+    assert "canonicalBettiQiAdapterModuleName" in text
+    assert "canonicalBettiQiAdapterSurfaceName" in text
     assert "canonicalQiOperatorTheoryBoundaryReceipt" in text
     assert "canonicalQiCarrierFieldBridgeReceipt" in text
     assert "canonicalTaoQiBridgeReceipt" in text
@@ -85,4 +94,8 @@ def test_polarity_field_index_mentions_actual_middle_layer_modules() -> None:
     assert "DASHI.Interop.TaoYinYangAdapter" in text
     assert "DASHI.Interop.YinYangQiAdapter" in text
     assert "DASHI.Interop.PolarityPhaseFieldBridge" in text
+    assert "DASHI.Interop.PolarityBettiSupportBoundary" in text
+    assert "DASHI.Interop.BettiQiAdapter" in text
+    assert "canonicalPolarityBettiSupportBoundaryReceipt" in text
+    assert "canonicalBettiQiBridgeReceipt" in text
     assert "canonicalPolarityFieldObligationIndexReceipt" in text

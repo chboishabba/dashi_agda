@@ -152,16 +152,19 @@ The current cultural/interpretive stack is now explicitly layered as:
 4. `DASHI.Interop.TaoYinYangAdapter`
 5. `DASHI.Interop.YinYangQiAdapter`
 6. `DASHI.Interop.PolarityPhaseFieldBridge`
-7. `DASHI.Interop.TaoQiReadingAdapter`
-8. `DASHI.Interop.TaoMeditationQiAdapter`
-9. `DASHI.Promotion.PolarityFieldObligationIndex`
-10. `DASHI.Promotion.TaoQiObligationIndex`
+7. `DASHI.Interop.PolarityBettiSupportBoundary`
+8. `DASHI.Interop.BettiQiAdapter`
+9. `DASHI.Interop.TaoQiReadingAdapter`
+10. `DASHI.Interop.TaoMeditationQiAdapter`
+11. `DASHI.Promotion.PolarityFieldObligationIndex`
+12. `DASHI.Promotion.TaoQiObligationIndex`
 
 Architecture rule for this stack:
 
 - Tao supplies source-dependent motifs and chapter-local candidate readings.
 - Yin/yang supplies the polarity and transition grammar between Tao operators and Qi formal-lens/operator surfaces.
 - The polarity-phase-field bridge is where local `TriTruth`/`HexTruth`/`NonaryTruth`, voxel/supervoxel support, and wave/superposition grammar sit.
+- Betti support sits over that local support geometry as a candidate-only topology summary layer for connected components, loops, and voids before Qi interpretation.
 - Qi remains the carrier/role/formal-lens substrate.
 - Every layer is candidate-only and fail-closed on doctrine, empirical, clinical, spiritual, mystical, metaphysical, political, philological, theorem, runtime, and reciprocal validation authority.
 

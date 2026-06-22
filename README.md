@@ -4178,6 +4178,8 @@ depends on that surface.
 	  `DASHI/Interop/TaoYinYangAdapter.agda`,
 	  `DASHI/Interop/YinYangQiAdapter.agda`,
 	  `DASHI/Interop/PolarityPhaseFieldBridge.agda`,
+	  `DASHI/Interop/PolarityBettiSupportBoundary.agda`,
+	  `DASHI/Interop/BettiQiAdapter.agda`,
 	  `DASHI/Interop/TaoQiReadingAdapter.agda`,
 	  `DASHI/Interop/TaoMeditationQiAdapter.agda`, and
 	  `DASHI/Promotion/TaoQiObligationIndex.agda`.
@@ -4188,8 +4190,9 @@ depends on that surface.
 	  The current canonical interpretive stack is:
 	  Tao source receipt -> Tao operator grammar -> yin/yang polarity boundary
 	  -> Tao-to-yinyang adapter -> yinyang-to-Qi adapter -> 369/voxel/wave
-	  polarity-phase-field bridge -> Qi carrier/operator/meditation surfaces,
-	  with `DASHI/Promotion/PolarityFieldObligationIndex.agda` and
+	  polarity-phase-field bridge -> Betti support boundary -> Betti-to-Qi
+	  adapter -> Qi carrier/operator/meditation surfaces, with
+	  `DASHI/Promotion/PolarityFieldObligationIndex.agda` and
 	  `DASHI/Promotion/TaoQiObligationIndex.agda` keeping every promotion path
 	  blocked.
 	  `WrapperState` now includes `performativeEvidence`, which maps to
