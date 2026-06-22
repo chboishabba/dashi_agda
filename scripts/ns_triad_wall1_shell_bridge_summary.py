@@ -50,6 +50,14 @@ DEFAULT_SCHUR_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_schur_directional_audit_scan_N128_20260622.json"
 )
+DEFAULT_SIGNED_WALL1_RECONCILIATION_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_signed_carrier_reconciliation_scan_N128_20260622.json"
+)
+DEFAULT_SIGNED_WALL1_CARRIER_RANKING_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_wall1_carrier_explanatory_rank_scan_N128_20260622.json"
+)
 DEFAULT_SIGNED_WALL1_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_signed_wall1_theorem_status_20260622.json"
@@ -63,17 +71,17 @@ CONTROL_CARD = {
     "O": "Summarize the active NS triad Wall 1 shell-level telemetry surfaces.",
     "R": (
         "Join the shell-indexed phase-regime, frame-stability, cocycle-floor, cycle-obstruction, "
-        "cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, and signed-XOR/signed-spectral Wall 1 receipts into one compact fail-closed Wall 1 summary."
+        "cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, signed-XOR/signed-spectral Wall 1 receipts, and the new reconciliation/carrier-ranking scans into one compact fail-closed Wall 1 summary."
     ),
     "C": SCRIPT_NAME,
     "S": "Candidate-only shell bridge summary; all outputs remain empirical and non-promoting.",
     "L": (
-        "Read each shell-level JSON surface plus the signed Wall 1 receipt, normalize onto shared frame-shell keys, "
+        "Read each shell-level JSON surface plus the signed Wall 1 receipt and the reconciliation/carrier-ranking scans, normalize onto shared frame-shell keys, "
         "compute compact correlations, and emit explicit unproved Wall 1 markers."
     ),
     "P": ROUTE_DECISION,
     "G": "No theorem, continuation, or Clay claim is inferred from this bridge summary.",
-    "F": "Wall 1 remains unproved; the signed Wall 1 receipt only sharpens the finite-dimensional telemetry surface.",
+    "F": "Wall 1 remains unproved; the signed Wall 1 receipt and reconciliation/carrier-ranking scans only sharpen the finite-dimensional telemetry surface.",
 }
 
 LOWER_BOUND_SUPPORT_KEYS = (
@@ -112,6 +120,8 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--hessian-json", type=Path, default=DEFAULT_HESSIAN_JSON)
     parser.add_argument("--k01-geometry-json", type=Path, default=DEFAULT_K01_GEOMETRY_JSON)
     parser.add_argument("--schur-json", type=Path, default=DEFAULT_SCHUR_JSON)
+    parser.add_argument("--signed-wall1-reconciliation-json", type=Path, default=DEFAULT_SIGNED_WALL1_RECONCILIATION_JSON)
+    parser.add_argument("--signed-wall1-carrier-ranking-json", type=Path, default=DEFAULT_SIGNED_WALL1_CARRIER_RANKING_JSON)
     parser.add_argument("--signed-wall1-json", type=Path, default=DEFAULT_SIGNED_WALL1_JSON)
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT_JSON)
     parser.add_argument("--pretty", action="store_true")
@@ -201,6 +211,27 @@ def _schur_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
         if isinstance(value, list):
             return value
     return []
+
+
+def _payload_status(payload: dict[str, Any] | None) -> str | None:
+    if not isinstance(payload, dict):
+        return None
+    status = payload.get("status")
+    if isinstance(status, str):
+        return status
+    aggregate = payload.get("aggregate")
+    if isinstance(aggregate, dict):
+        aggregate_status = aggregate.get("status")
+        if isinstance(aggregate_status, str):
+            return aggregate_status
+    return None
+
+
+def _effective_fail_closed_status(payload: dict[str, Any] | None) -> str:
+    status = _payload_status(payload)
+    if status in ("ok", "fail-closed"):
+        return "fail-closed"
+    return "unavailable"
 
 
 def _cycle_packing_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
@@ -518,6 +549,14 @@ def main() -> int:
     k01_geometry_payload = _read_json(args.k01_geometry_json)
     schur_payload = _read_json(args.schur_json) if args.schur_json is not None else {}
     try:
+        signed_wall1_reconciliation_payload = _read_json(args.signed_wall1_reconciliation_json)
+    except Exception:
+        signed_wall1_reconciliation_payload = {}
+    try:
+        signed_wall1_carrier_ranking_payload = _read_json(args.signed_wall1_carrier_ranking_json)
+    except Exception:
+        signed_wall1_carrier_ranking_payload = {}
+    try:
         signed_wall1_payload = _read_json(args.signed_wall1_json)
     except Exception:
         signed_wall1_payload = {}
@@ -582,6 +621,30 @@ def main() -> int:
         if signed_wall1_rows
         else None
     )
+    signed_wall1_reconciliation_input_status = _payload_status(signed_wall1_reconciliation_payload)
+    signed_wall1_carrier_ranking_input_status = _payload_status(signed_wall1_carrier_ranking_payload)
+    signed_wall1_reconciliation_status = _effective_fail_closed_status(signed_wall1_reconciliation_payload)
+    signed_wall1_carrier_ranking_status = _effective_fail_closed_status(signed_wall1_carrier_ranking_payload)
+    signed_wall1_carrier_ranking_aggregate = (
+        signed_wall1_carrier_ranking_payload.get("aggregate", {})
+        if isinstance(signed_wall1_carrier_ranking_payload, dict)
+        else {}
+    )
+    signed_wall1_carrier_top_candidate = (
+        signed_wall1_carrier_ranking_aggregate.get("carrier_identification_top_candidate")
+        if isinstance(signed_wall1_carrier_ranking_aggregate.get("carrier_identification_top_candidate"), str)
+        else None
+    )
+    signed_wall1_carrier_top_support = _coerce_float(
+        signed_wall1_carrier_ranking_aggregate.get("carrier_identification_top_support_mean")
+    )
+    for row in signed_wall1_rows:
+        if not isinstance(row, dict):
+            continue
+        row["reconciliation_input_status"] = signed_wall1_reconciliation_input_status
+        row["reconciliation_status"] = signed_wall1_reconciliation_status
+        row["carrier_ranking_input_status"] = signed_wall1_carrier_ranking_input_status
+        row["carrier_ranking_status"] = signed_wall1_carrier_ranking_status
 
     shared_keys = sorted(set(phase_by_key) & set(cocycle_by_key))
     bridge_rows: list[dict[str, Any]] = []
@@ -707,6 +770,8 @@ def main() -> int:
                 "frame_stability_margin_proxy": frame_margin,
                 "cycle_rank_proxy": cycle_rank,
                 "best_reference_hessian_proxy": hessian_proxy,
+                "signed_wall1_reconciliation_status": signed_wall1_reconciliation_status,
+                "signed_wall1_carrier_ranking_status": signed_wall1_carrier_ranking_status,
                 **schur_metrics,
             }
         )
@@ -801,6 +866,12 @@ def main() -> int:
             "hessian_json": str(args.hessian_json),
             "k01_geometry_json": str(args.k01_geometry_json),
             "schur_json": str(args.schur_json) if args.schur_json is not None else None,
+            "signed_wall1_reconciliation_json": str(args.signed_wall1_reconciliation_json)
+            if args.signed_wall1_reconciliation_json is not None
+            else None,
+            "signed_wall1_carrier_ranking_json": str(args.signed_wall1_carrier_ranking_json)
+            if args.signed_wall1_carrier_ranking_json is not None
+            else None,
             "signed_wall1_json": str(args.signed_wall1_json) if args.signed_wall1_json is not None else None,
         },
         "rows": bridge_rows,
@@ -901,6 +972,12 @@ def main() -> int:
             "signed_wall1_theorem_promoted": signed_wall1_theorem_promoted,
             "signed_wall1_full_ns_promoted": signed_wall1_full_ns_promoted,
             "signed_wall1_clay_promoted": signed_wall1_clay_promoted,
+            "signed_wall1_reconciliation_input_status": signed_wall1_reconciliation_input_status,
+            "signed_wall1_carrier_ranking_input_status": signed_wall1_carrier_ranking_input_status,
+            "signed_wall1_reconciliation_status": signed_wall1_reconciliation_status,
+            "signed_wall1_carrier_ranking_status": signed_wall1_carrier_ranking_status,
+            "signed_wall1_carrier_top_candidate": signed_wall1_carrier_top_candidate,
+            "signed_wall1_carrier_top_support_mean": signed_wall1_carrier_top_support,
             "signed_xor_bridge_open": signed_xor_bridge_open if signed_wall1_rows else None,
             "signed_spectral_bridge_open": signed_spectral_bridge_open if signed_wall1_rows else None,
             "signed_surface_consensus": "fail-closed" if signed_wall1_rows else "unavailable",

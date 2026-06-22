@@ -290,6 +290,16 @@ def main() -> int:
         signed_surface_consensus = aggregate.get("signed_surface_consensus")
         if signed_surface_consensus not in ("fail-closed", "unavailable"):
             errors.append("aggregate.signed_surface_consensus: must be 'fail-closed' or 'unavailable'")
+        signed_wall1_reconciliation_status = aggregate.get("signed_wall1_reconciliation_status")
+        if signed_wall1_reconciliation_status not in ("fail-closed", "unavailable"):
+            errors.append(
+                "aggregate.signed_wall1_reconciliation_status: must be 'fail-closed' or 'unavailable'"
+            )
+        signed_wall1_carrier_ranking_status = aggregate.get("signed_wall1_carrier_ranking_status")
+        if signed_wall1_carrier_ranking_status not in ("fail-closed", "unavailable"):
+            errors.append(
+                "aggregate.signed_wall1_carrier_ranking_status: must be 'fail-closed' or 'unavailable'"
+            )
         if signed_wall1_status == "fail-closed" and not signed_wall1_rows:
             errors.append("aggregate.signed_wall1_status: fail-closed requires signed_wall1_rows")
         if signed_wall1_status == "unavailable" and signed_wall1_rows:
@@ -298,6 +308,12 @@ def main() -> int:
             errors.append("aggregate.signed_surface_consensus: fail-closed requires signed_wall1_rows")
         if signed_surface_consensus == "unavailable" and signed_wall1_rows:
             errors.append("aggregate.signed_surface_consensus: unavailable requires no signed_wall1_rows")
+        for key in (
+            "signed_wall1_reconciliation_input_status",
+            "signed_wall1_carrier_ranking_input_status",
+        ):
+            if aggregate.get(key) is not None and not isinstance(aggregate.get(key), str):
+                errors.append(f"aggregate.{key}: must be string or null")
         if isinstance(signed_wall1_rows, list) and signed_wall1_rows:
             row_count = len(signed_wall1_rows)
             surface_count = len(
@@ -327,6 +343,14 @@ def main() -> int:
                 errors.append("aggregate.signed_xor_bridge_open: must be true")
             if aggregate.get("signed_spectral_bridge_open") is not True:
                 errors.append("aggregate.signed_spectral_bridge_open: must be true")
+            if aggregate.get("signed_wall1_reconciliation_status") not in ("fail-closed", "unavailable"):
+                errors.append(
+                    "aggregate.signed_wall1_reconciliation_status: must be 'fail-closed' or 'unavailable'"
+                )
+            if aggregate.get("signed_wall1_carrier_ranking_status") not in ("fail-closed", "unavailable"):
+                errors.append(
+                    "aggregate.signed_wall1_carrier_ranking_status: must be 'fail-closed' or 'unavailable'"
+                )
             route_names = aggregate.get("signed_wall1_route_names")
             if route_names is not None and not isinstance(route_names, list):
                 errors.append("aggregate.signed_wall1_route_names: must be list or null")
@@ -368,6 +392,26 @@ def main() -> int:
                     errors.append(f"signed_wall1_rows[{index}].clay_promoted: must be false")
                 if row.get("wall1_status") != "unproved":
                     errors.append(f"signed_wall1_rows[{index}].wall1_status: must be 'unproved'")
+                if row.get("reconciliation_status") not in ("fail-closed", "unavailable"):
+                    errors.append(
+                        f"signed_wall1_rows[{index}].reconciliation_status: must be 'fail-closed' or 'unavailable'"
+                    )
+                if row.get("carrier_ranking_status") not in ("fail-closed", "unavailable"):
+                    errors.append(
+                        f"signed_wall1_rows[{index}].carrier_ranking_status: must be 'fail-closed' or 'unavailable'"
+                    )
+                if row.get("reconciliation_input_status") is not None and not isinstance(
+                    row.get("reconciliation_input_status"), str
+                ):
+                    errors.append(
+                        f"signed_wall1_rows[{index}].reconciliation_input_status: must be string or null"
+                    )
+                if row.get("carrier_ranking_input_status") is not None and not isinstance(
+                    row.get("carrier_ranking_input_status"), str
+                ):
+                    errors.append(
+                        f"signed_wall1_rows[{index}].carrier_ranking_input_status: must be string or null"
+                    )
                 if row.get("surface") == "signed_xor_gaugeability":
                     if row.get("route_name") != "wall1a-signed-xor-gaugeability":
                         errors.append(
@@ -445,6 +489,14 @@ def main() -> int:
             ):
                 if aggregate.get(key) is not None:
                     errors.append(f"aggregate.{key}: must be null when no signed_wall1_rows are present")
+            if aggregate.get("signed_wall1_reconciliation_status") not in ("fail-closed", "unavailable"):
+                errors.append(
+                    "aggregate.signed_wall1_reconciliation_status: must be 'fail-closed' or 'unavailable' when no signed_wall1_rows are present"
+                )
+            if aggregate.get("signed_wall1_carrier_ranking_status") not in ("fail-closed", "unavailable"):
+                errors.append(
+                    "aggregate.signed_wall1_carrier_ranking_status: must be 'fail-closed' or 'unavailable' when no signed_wall1_rows are present"
+                )
 
     status = OK_STATUS if not errors else ERROR_STATUS
     receipt = {

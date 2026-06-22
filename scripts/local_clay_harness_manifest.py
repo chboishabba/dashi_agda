@@ -500,6 +500,18 @@ def build_specs() -> list[HarnessSpec]:
     ns_triad_schur_directional_audit_scan_out = (
         CHILD_OUT_DIR / "ns_triad_schur_directional_audit_scan_smoke.json"
     )
+    ns_triad_signed_carrier_reconciliation_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_carrier_reconciliation_scan_smoke.json"
+    )
+    ns_triad_signed_carrier_reconciliation_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_carrier_reconciliation_scan_check_smoke.json"
+    )
+    ns_triad_wall1_carrier_explanatory_rank_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_wall1_carrier_explanatory_rank_scan_smoke.json"
+    )
+    ns_triad_wall1_carrier_explanatory_rank_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_wall1_carrier_explanatory_rank_scan_check_smoke.json"
+    )
     ns_triad_signed_xor_gaugeability_scan_out = (
         CHILD_OUT_DIR / "ns_triad_signed_xor_gaugeability_scan_smoke.json"
     )
@@ -5519,6 +5531,96 @@ def build_specs() -> list[HarnessSpec]:
             ),
         ),
         HarnessSpec(
+            name="ns_triad_signed_carrier_reconciliation_scan",
+            path=script("ns_triad_signed_carrier_reconciliation_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_signed_carrier_reconciliation_scan_out),
+            )
+            if script("ns_triad_signed_carrier_reconciliation_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_carrier_reconciliation_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_signed_carrier_reconciliation_scan.py").exists()
+            else "ns_triad_signed_carrier_reconciliation_scan script not found",
+            notes=(
+                "optional Wall 1 signed carrier reconciliation scan",
+                "empirical/non-promoting; reconciles theorem-status chart surfaces against the active fail-closed signed extraction",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_signed_carrier_reconciliation_scan",
+            path=script("check_ns_triad_signed_carrier_reconciliation_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_signed_carrier_reconciliation_scan_out),
+                "--output-json",
+                str(ns_triad_signed_carrier_reconciliation_scan_check_out),
+            )
+            if ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_carrier_reconciliation_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            and script("check_ns_triad_signed_carrier_reconciliation_scan.py").exists()
+            else (
+                "check_ns_triad_signed_carrier_reconciliation_scan script not found"
+                if not script("check_ns_triad_signed_carrier_reconciliation_scan.py").exists()
+                else "check_ns_triad_signed_carrier_reconciliation_scan requires the reconciliation scan output"
+            ),
+            notes=(
+                "optional Wall 1 signed carrier reconciliation regression gate",
+                "validates fail-closed reconciliation bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_wall1_carrier_explanatory_rank_scan",
+            path=script("ns_triad_wall1_carrier_explanatory_rank_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
+            )
+            if script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_wall1_carrier_explanatory_rank_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+            else "ns_triad_wall1_carrier_explanatory_rank_scan script not found",
+            notes=(
+                "optional Wall 1 carrier explanatory-rank scan",
+                "empirical/non-promoting; ranks current Wall 1 carrier candidates against the observed floor",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_wall1_carrier_explanatory_rank_scan",
+            path=script("check_ns_triad_wall1_carrier_explanatory_rank_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
+                "--output-json",
+                str(ns_triad_wall1_carrier_explanatory_rank_scan_check_out),
+            )
+            if ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_wall1_carrier_explanatory_rank_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and script("check_ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+            else (
+                "check_ns_triad_wall1_carrier_explanatory_rank_scan script not found"
+                if not script("check_ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+                else "check_ns_triad_wall1_carrier_explanatory_rank_scan requires the carrier-ranking scan output"
+            ),
+            notes=(
+                "optional Wall 1 carrier explanatory-rank regression gate",
+                "validates fail-closed candidate-carrier ranking bookkeeping",
+            ),
+        ),
+        HarnessSpec(
             name="ns_triad_signed_xor_gaugeability_scan",
             path=script("ns_triad_signed_xor_gaugeability_scan.py"),
             args=(
@@ -5684,6 +5786,10 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_cocycle_floor_scan_out),
                 "--schur-json",
                 str(ns_triad_schur_directional_audit_scan_out),
+                "--signed-wall1-reconciliation-json",
+                str(ns_triad_signed_wall1_reconciliation_scan_out),
+                "--signed-wall1-carrier-ranking-json",
+                str(ns_triad_signed_wall1_carrier_ranking_scan_out),
                 "--cycle-json",
                 str(ns_triad_cycle_obstruction_scan_out),
                 "--cycle-packing-json",
@@ -5723,11 +5829,11 @@ def build_specs() -> list[HarnessSpec]:
             else (
                 "ns_triad_wall1_shell_bridge_summary script not found"
                 if not script("ns_triad_wall1_shell_bridge_summary.py").exists()
-                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including signed theorem-status, cycle-packing, K01 geometry, and Schur directional audit"
+                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including signed theorem-status, signed reconciliation, signed carrier ranking, cycle-packing, K01 geometry, and Schur directional audit"
             ),
             notes=(
                 "optional Wall 1 shell bridge summary",
-                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, signed theorem-status, cycle-packing, K01 geometry, Schur, cycle, and Hessian telemetry",
+                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, signed theorem-status, signed reconciliation, signed carrier ranking, cycle-packing, K01 geometry, Schur, cycle, and Hessian telemetry",
             ),
         ),
         HarnessSpec(
