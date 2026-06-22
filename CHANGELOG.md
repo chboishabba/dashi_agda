@@ -62,6 +62,33 @@ monitor surface.
   the cycle-family lower-bound theorem is not proved, the non-adversarial
   Schur gap is not proved, and the new scans are empirical only.
 
+- NS Wall 1 signed-XOR / signed-spectrum correction tranche for `2026-06-22`:
+  adds `DASHI.Physics.Closure.NSTriadSignedXORGaugeabilityBoundary`,
+  `DASHI.Physics.Closure.NSTriadSignedSpectralFrustrationBoundary`,
+  `DASHI.Physics.Closure.NSTriadSignedLaplacianIdentityReceipt`,
+  `DASHI.Physics.Closure.NSTriadSignedLaplacianSpectrumAuditReceipt`,
+  `scripts/ns_triad_signed_xor_gaugeability_scan.py`,
+  `scripts/check_ns_triad_signed_xor_gaugeability_scan.py`,
+  `scripts/ns_triad_signed_spectral_audit_scan.py`,
+  `scripts/check_ns_triad_signed_spectral_audit_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`; strengthens
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The tranche records signed
+  balance-versus-gaugeability as a candidate-only Wall 1a surface, records
+  the signed-Laplacian / `I - K_N` identity only as an audited receipt with
+  explicit endpoint-confusion guards, and wires a signed theorem-status
+  summary into the Wall 1 shell bridge. The resulting telemetry is sharply
+  negative and fail-closed on the active shell carrier: the signed mod-2 XOR
+  surface is gaugeable (`signed_xor_weighted_distance_fraction_mean = 0`),
+  while the candidate signed-Laplacian proxy is not the same operator as
+  `I - K_N` (`identity_error_op_mean ≈ 7.42e25`,
+  `xy_floor_spectral_lower_bound_mean = 0`). This sharpens the live
+  bottleneck without promoting anything: theorem promotion and Clay
+  promotion stay false, signed non-gaugeability is not proved, and the
+  signed spectral route remains unproved.
+
 - NS Wall 1 phase-regime / cocycle-floor / floor-to-frame tranche for
   `2026-06-22`: adds
   `DASHI.Physics.Closure.NSPhaseRegimeSeparationBoundary`,

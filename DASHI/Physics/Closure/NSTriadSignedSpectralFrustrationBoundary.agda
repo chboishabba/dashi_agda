@@ -156,9 +156,9 @@ signedXORBridgeIsOpen :
 signedXORBridgeIsOpen =
   refl
 
-promotionFlagsAreEmpty :
+canonicalPromotionFlagsAreEmpty :
   promotionFlags canonicalNSTriadSignedSpectralFrustrationBoundaryReceipt ≡ []
-promotionFlagsAreEmpty =
+canonicalPromotionFlagsAreEmpty =
   refl
 
 ------------------------------------------------------------------------
@@ -167,4 +167,3 @@ promotionFlagsAreEmpty =
 boundaryStatement : String
 boundaryStatement =
   "Wall 1a signed Laplacian / signed XY floor remains the primary candidate; the upper spectral edge still carries XY-floor risk; theorem, full-NS, and Clay promotion remain false; the signed-XOR bridge to the continuous XY floor remains open."
-

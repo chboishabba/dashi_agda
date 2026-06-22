@@ -500,6 +500,15 @@ def build_specs() -> list[HarnessSpec]:
     ns_triad_schur_directional_audit_scan_out = (
         CHILD_OUT_DIR / "ns_triad_schur_directional_audit_scan_smoke.json"
     )
+    ns_triad_signed_xor_gaugeability_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_xor_gaugeability_scan_smoke.json"
+    )
+    ns_triad_signed_spectral_audit_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_spectral_audit_scan_smoke.json"
+    )
+    ns_triad_signed_wall1_theorem_status_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_wall1_theorem_status_smoke.json"
+    )
     ns_triad_wall1_shell_bridge_summary_out = (
         CHILD_OUT_DIR / "ns_triad_wall1_shell_bridge_summary_smoke.json"
     )
@@ -640,6 +649,15 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_triad_schur_directional_audit_scan_check_out = (
         CHILD_OUT_DIR / "ns_triad_schur_directional_audit_scan_check_smoke.json"
+    )
+    ns_triad_signed_xor_gaugeability_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_xor_gaugeability_scan_check_smoke.json"
+    )
+    ns_triad_signed_spectral_audit_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_spectral_audit_scan_check_smoke.json"
+    )
+    ns_triad_signed_wall1_theorem_status_check_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_wall1_theorem_status_check_smoke.json"
     )
     ns_triad_wall1_shell_bridge_summary_check_out = (
         CHILD_OUT_DIR / "ns_triad_wall1_shell_bridge_summary_check_smoke.json"
@@ -5501,6 +5519,160 @@ def build_specs() -> list[HarnessSpec]:
             ),
         ),
         HarnessSpec(
+            name="ns_triad_signed_xor_gaugeability_scan",
+            path=script("ns_triad_signed_xor_gaugeability_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_signed_xor_gaugeability_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_signed_xor_gaugeability_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_signed_xor_gaugeability_scan.py").exists()
+            else "ns_triad_signed_xor_gaugeability_scan script not found",
+            notes=(
+                "optional Wall 1 signed-XOR gaugeability audit",
+                "empirical/non-promoting; tests whether the signed mod-2 shell carrier is gaugeable or far from gaugeable",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_signed_xor_gaugeability_scan",
+            path=script("check_ns_triad_signed_xor_gaugeability_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_signed_xor_gaugeability_scan_out),
+                "--output-json",
+                str(ns_triad_signed_xor_gaugeability_scan_check_out),
+            )
+            if ns_triad_signed_xor_gaugeability_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_xor_gaugeability_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_signed_xor_gaugeability_scan_out.exists()
+            and script("check_ns_triad_signed_xor_gaugeability_scan.py").exists()
+            else (
+                "check_ns_triad_signed_xor_gaugeability_scan script not found"
+                if not script("check_ns_triad_signed_xor_gaugeability_scan.py").exists()
+                else "check_ns_triad_signed_xor_gaugeability_scan requires the signed gaugeability output"
+            ),
+            notes=(
+                "optional Wall 1 signed-XOR regression gate",
+                "validates fail-closed signed mod-2 gaugeability telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_signed_spectral_audit_scan",
+            path=script("ns_triad_signed_spectral_audit_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_signed_spectral_audit_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_signed_spectral_audit_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_signed_spectral_audit_scan.py").exists()
+            else "ns_triad_signed_spectral_audit_scan script not found",
+            notes=(
+                "optional Wall 1 signed spectral audit",
+                "empirical/non-promoting; audits candidate signed-Laplacian versus I-K identity and endpoint consistency",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_signed_spectral_audit_scan",
+            path=script("check_ns_triad_signed_spectral_audit_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_signed_spectral_audit_scan_out),
+                "--output-json",
+                str(ns_triad_signed_spectral_audit_scan_check_out),
+            )
+            if ns_triad_signed_spectral_audit_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_spectral_audit_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_signed_spectral_audit_scan_out.exists()
+            and script("check_ns_triad_signed_spectral_audit_scan.py").exists()
+            else (
+                "check_ns_triad_signed_spectral_audit_scan script not found"
+                if not script("check_ns_triad_signed_spectral_audit_scan.py").exists()
+                else "check_ns_triad_signed_spectral_audit_scan requires the signed spectral audit output"
+            ),
+            notes=(
+                "optional Wall 1 signed spectral regression gate",
+                "validates fail-closed identity-error and signed-spectrum bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_signed_wall1_theorem_status",
+            path=script("ns_triad_signed_wall1_theorem_status.py"),
+            args=(
+                "--gaugeability-json",
+                str(ns_triad_signed_xor_gaugeability_scan_out),
+                "--spectral-json",
+                str(ns_triad_signed_spectral_audit_scan_out),
+                "--cocycle-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--schur-json",
+                str(ns_triad_schur_directional_audit_scan_out),
+                "--output-json",
+                str(ns_triad_signed_wall1_theorem_status_out),
+            )
+            if ns_triad_signed_xor_gaugeability_scan_out.exists()
+            and ns_triad_signed_spectral_audit_scan_out.exists()
+            and ns_triad_cocycle_floor_scan_out.exists()
+            and ns_triad_schur_directional_audit_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_wall1_theorem_status_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_signed_xor_gaugeability_scan_out.exists()
+            and ns_triad_signed_spectral_audit_scan_out.exists()
+            and ns_triad_cocycle_floor_scan_out.exists()
+            and ns_triad_schur_directional_audit_scan_out.exists()
+            and script("ns_triad_signed_wall1_theorem_status.py").exists()
+            else (
+                "ns_triad_signed_wall1_theorem_status script not found"
+                if not script("ns_triad_signed_wall1_theorem_status.py").exists()
+                else "ns_triad_signed_wall1_theorem_status requires signed gaugeability, signed spectral, cocycle, and Schur outputs"
+            ),
+            notes=(
+                "optional Wall 1 signed theorem-status summary",
+                "empirical/non-promoting; joins signed-XOR, signed-spectrum, cocycle-floor, and Schur telemetry into one fail-closed surface",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_signed_wall1_theorem_status",
+            path=script("check_ns_triad_signed_wall1_theorem_status.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_signed_wall1_theorem_status_out),
+                "--output-json",
+                str(ns_triad_signed_wall1_theorem_status_check_out),
+            )
+            if ns_triad_signed_wall1_theorem_status_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_wall1_theorem_status_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_signed_wall1_theorem_status_out.exists()
+            and script("check_ns_triad_signed_wall1_theorem_status.py").exists()
+            else (
+                "check_ns_triad_signed_wall1_theorem_status script not found"
+                if not script("check_ns_triad_signed_wall1_theorem_status.py").exists()
+                else "check_ns_triad_signed_wall1_theorem_status requires the signed theorem-status output"
+            ),
+            notes=(
+                "optional Wall 1 signed theorem-status regression gate",
+                "validates fail-closed signed Wall 1 surface bookkeeping",
+            ),
+        ),
+        HarnessSpec(
             name="ns_triad_wall1_shell_bridge_summary",
             path=script("ns_triad_wall1_shell_bridge_summary.py"),
             args=(
@@ -5520,6 +5692,8 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_low_frustration_hessian_scan_out),
                 "--k01-geometry-json",
                 str(ns_triad_k01_geometry_audit_scan_out),
+                "--signed-wall1-json",
+                str(ns_triad_signed_wall1_theorem_status_out),
                 "--output-json",
                 str(ns_triad_wall1_shell_bridge_summary_out),
             )
@@ -5531,6 +5705,7 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_cycle_packing_overlap_scan_out.exists()
             and ns_triad_low_frustration_hessian_scan_out.exists()
             and ns_triad_k01_geometry_audit_scan_out.exists()
+            and ns_triad_signed_wall1_theorem_status_out.exists()
             else ("--help",),
             expected_json_path=ns_triad_wall1_shell_bridge_summary_out,
             optional=True,
@@ -5543,15 +5718,16 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_cycle_packing_overlap_scan_out.exists()
             and ns_triad_low_frustration_hessian_scan_out.exists()
             and ns_triad_k01_geometry_audit_scan_out.exists()
+            and ns_triad_signed_wall1_theorem_status_out.exists()
             and script("ns_triad_wall1_shell_bridge_summary.py").exists()
             else (
                 "ns_triad_wall1_shell_bridge_summary script not found"
                 if not script("ns_triad_wall1_shell_bridge_summary.py").exists()
-                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including cycle-packing, K01 geometry, and Schur directional audit"
+                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including signed theorem-status, cycle-packing, K01 geometry, and Schur directional audit"
             ),
             notes=(
                 "optional Wall 1 shell bridge summary",
-                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, cycle-packing, K01 geometry, Schur, cycle, and Hessian telemetry",
+                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, signed theorem-status, cycle-packing, K01 geometry, Schur, cycle, and Hessian telemetry",
             ),
         ),
         HarnessSpec(
