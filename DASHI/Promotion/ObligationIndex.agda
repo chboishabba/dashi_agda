@@ -1404,11 +1404,11 @@ canonicalCrossDomainInterpretationBoundarySummaries =
     "agda -i . DASHI/Promotion/PolarityFieldObligationIndex.agda"
   ∷ mkCrossDomainInterpretationBoundarySummary
     bettiSupportBoundaryLane
-    "DASHI.Interop.PNFHodgeResidualTopology"
-    "canonicalPNFHodgeResidualTopologyReceipt"
-    "Betti-style support topology is recorded as candidate-only residual-field shape grammar over 0/1/2-cell support, boundary maps, and Hodge/Laplacian diagnostics, giving the polarity/phase-field stack a finite connected-component and loop-summary layer"
+    "DASHI.Interop.PolarityBettiSupportBoundary"
+    "canonicalPolarityBettiSupportBoundary"
+    "Betti support topology is recorded as a candidate-only summary layer over polarity/phase support geometry, supervoxels, and residual-topology diagnostics, and is then carried into Qi through the BettiQi adapter"
     "beta-style support summaries remain diagnostic-only and do not promote theorem, empirical, runtime, clinical, spiritual, or metaphysical authority"
-    "agda -i . DASHI/Interop/PNFHodgeResidualTopology.agda"
+    "agda -i . DASHI/Interop/PolarityBettiSupportBoundary.agda && agda -i . DASHI/Interop/BettiQiAdapter.agda"
   ∷ mkCrossDomainInterpretationBoundarySummary
     taoQiBoundaryLane
     "DASHI.Promotion.TaoQiObligationIndex"

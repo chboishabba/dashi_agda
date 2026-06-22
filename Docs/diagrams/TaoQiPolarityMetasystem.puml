@@ -27,6 +27,8 @@ rectangle "Qi Bridge Layer" as QiBridgeLayer #E6F0FA {
 
 rectangle "Phase / Field Layer" as FieldLayer #F4E8FA {
   rectangle "PolarityPhaseFieldBridge\n369 + voxel + supervoxel + wave + superposition" as PhaseField
+  rectangle "PolarityBettiSupportBoundary\nbeta-0 / beta-1 / beta-2 support summaries" as BettiSupport
+  rectangle "BettiQiAdapter\nBetti support -> Qi carriers / roles / lenses" as BettiQi
 }
 
 rectangle "Qi Substrate" as QiSubstrate #EAF7FF {
@@ -46,6 +48,10 @@ YinYangBoundary --> TaoYinYang
 TaoYinYang --> YinYangQi
 YinYangBoundary --> YinYangQi
 YinYangQi --> PhaseField
+PhaseField --> BettiSupport
+BettiSupport --> BettiQi
+BettiQi --> QiCarrier
+BettiQi --> QiOperator
 YinYangQi --> QiCarrier
 YinYangQi --> QiOperator
 TaoQi --> QiCarrier
@@ -59,12 +65,16 @@ YinYangBoundary --> PolarityIndex
 TaoYinYang --> PolarityIndex
 YinYangQi --> PolarityIndex
 PhaseField --> PolarityIndex
+BettiSupport --> PolarityIndex
+BettiQi --> PolarityIndex
 
 TaoChapter --> TaoQiIndex
 TaoOps --> TaoQiIndex
 YinYangBoundary --> TaoQiIndex
 TaoYinYang --> TaoQiIndex
 YinYangQi --> TaoQiIndex
+BettiSupport --> TaoQiIndex
+BettiQi --> TaoQiIndex
 TaoQi --> TaoQiIndex
 TaoMeditation --> TaoQiIndex
 PolarityIndex --> TaoQiIndex

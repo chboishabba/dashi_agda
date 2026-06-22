@@ -18,8 +18,8 @@ Canonical interpretive-stack diagram source:
 
 - `TaoQiPolarityMetasystem.puml`
   This is the normalized textual metasystem view for the Tao -> yin/yang ->
-  Qi -> polarity/phase/field stack. It is a governance/support diagram, not a
-  promoted theorem surface.
+  Betti support -> Qi -> polarity/phase/field stack. It is a
+  governance/support diagram, not a promoted theorem surface.
 
 Publication-routing smoke checks:
 
