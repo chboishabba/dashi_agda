@@ -160,6 +160,31 @@ Current NS Clay action note for `2026-06-20`:
   quadratic obstruction and the non-adversarial `K01 / Schur` bridge. This
   remains fail-closed and non-promoting: no cycle-family theorem is proved,
   no non-adversarial Schur gap is proved, and Wall 1 remains open.
+- Wall 1 signed-XOR / signed-spectrum correction tranche is now recorded for
+  `2026-06-22`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadSignedXORGaugeabilityBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadSignedSpectralFrustrationBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadSignedLaplacianIdentityReceipt.agda`,
+  `DASHI/Physics/Closure/NSTriadSignedLaplacianSpectrumAuditReceipt.agda`,
+  `scripts/ns_triad_signed_xor_gaugeability_scan.py`,
+  `scripts/check_ns_triad_signed_xor_gaugeability_scan.py`,
+  `scripts/ns_triad_signed_spectral_audit_scan.py`,
+  `scripts/check_ns_triad_signed_spectral_audit_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`. The route now
+  records sign-balance-vs-gaugeability as a candidate-only Wall 1a surface,
+  records the signed-Laplacian / `I - K_N` identity only as an audited
+  receipt, and stages a signed theorem-status summary plus shell-bridge
+  integration. Current telemetry is fail-closed and negative on the active
+  shell carrier: the signed mod-2 XOR surface is gaugeable
+  (`signed_xor_weighted_distance_fraction_mean = 0`), while the candidate
+  signed-Laplacian proxy is not the same operator as `I - K_N`
+  (`identity_error_op_mean ≈ 7.42e25`, `xy_floor_spectral_lower_bound_mean = 0`).
+  This sharpens the live bottleneck but does not close it: theorem promotion
+  and Clay promotion stay false, signed non-gaugeability is not proved, and
+  the signed spectral route remains unproved.
 - Wall 1 phase-regime / cocycle-floor / floor-to-frame tranche is now
   recorded for `2026-06-22`. Artifacts:
   `DASHI/Physics/Closure/NSPhaseRegimeSeparationBoundary.agda`,

@@ -111,6 +111,27 @@ record NSTriadSignedLaplacianIdentityReceiptORCSLPGF : Set where
     FIsCanonical : F ≡
       "F: the exact endpoint labels are guarded; lower/upper edge confusion is excluded from the receipt."
 
+canonicalNSTriadSignedLaplacianIdentityReceiptORCSLPGF :
+  NSTriadSignedLaplacianIdentityReceiptORCSLPGF
+canonicalNSTriadSignedLaplacianIdentityReceiptORCSLPGF =
+  mkNSTriadSignedLaplacianIdentityReceiptORCSLPGF
+    "O: record the active NS triad signed-operator identity surface."
+    refl
+    "R: record L_signed_norm = I - K_N as an audited candidate identity, with the endpoint labels guarded from confusion."
+    refl
+    "C: this is a fail-closed receipt module, not a theorem carrier."
+    refl
+    "S: the identity surface is candidate-only; endpoint confusion is explicitly blocked; promotion flags remain false."
+    refl
+    "L: signed operator identity -> endpoint guard -> audited receipt -> no theorem promotion."
+    refl
+    "P: keep L_signed_norm = I - K_N as an audit boundary, not a promoted proof."
+    refl
+    "G: theorem, full NS, and Clay promotion remain false."
+    refl
+    "F: the exact endpoint labels are guarded; lower/upper edge confusion is excluded from the receipt."
+    refl
+
 record NSTriadSignedLaplacianIdentityReceipt : Setω where
   constructor mkNSTriadSignedLaplacianIdentityReceipt
   field
@@ -144,11 +165,11 @@ record NSTriadSignedLaplacianIdentityReceipt : Setω where
     blockerCountIsCanonical :
       blockerCount ≡ listLength canonicalNSTriadSignedLaplacianIdentityBlockers
 
-    signedOperatorIdentitySurface :
+    signedOperatorIdentitySurfaceTextField :
       String
 
-    signedOperatorIdentitySurfaceIsCanonical :
-      signedOperatorIdentitySurface ≡ candidateSignedOperatorIdentityText
+    signedOperatorIdentitySurfaceTextFieldIsCanonical :
+      signedOperatorIdentitySurfaceTextField ≡ candidateSignedOperatorIdentityText
 
     endpointConfusionGuardTextField :
       String
@@ -207,27 +228,6 @@ record NSTriadSignedLaplacianIdentityReceipt : Setω where
 
 open NSTriadSignedLaplacianIdentityReceipt public
 
-canonicalNSTriadSignedLaplacianIdentityReceiptORCSLPGF :
-  NSTriadSignedLaplacianIdentityReceiptORCSLPGF
-canonicalNSTriadSignedLaplacianIdentityReceiptORCSLPGF =
-  mkNSTriadSignedLaplacianIdentityReceiptORCSLPGF
-    "O: record the active NS triad signed-operator identity surface."
-    refl
-    "R: record L_signed_norm = I - K_N as an audited candidate identity, with the endpoint labels guarded from confusion."
-    refl
-    "C: this is a fail-closed receipt module, not a theorem carrier."
-    refl
-    "S: the identity surface is candidate-only; endpoint confusion is explicitly blocked; promotion flags remain false."
-    refl
-    "L: signed operator identity -> endpoint guard -> audited receipt -> no theorem promotion."
-    refl
-    "P: keep L_signed_norm = I - K_N as an audit boundary, not a promoted proof."
-    refl
-    "G: theorem, full NS, and Clay promotion remain false."
-    refl
-    "F: the exact endpoint labels are guarded; lower/upper edge confusion is excluded from the receipt."
-    refl
-
 canonicalNSTriadSignedLaplacianIdentityReceipt :
   NSTriadSignedLaplacianIdentityReceipt
 canonicalNSTriadSignedLaplacianIdentityReceipt =
@@ -239,6 +239,8 @@ canonicalNSTriadSignedLaplacianIdentityReceipt =
     4
     refl
     canonicalNSTriadSignedLaplacianIdentityBlockers
+    refl
+    4
     refl
     candidateSignedOperatorIdentityText
     refl
@@ -258,5 +260,5 @@ canonicalNSTriadSignedLaplacianIdentityReceipt =
     refl
     canonicalNSTriadSignedLaplacianIdentityReceiptORCSLPGF
     refl
-    "Candidate-only signed-operator identity receipt: L_signed_norm = I - K_N is recorded as an audit surface, the endpoint labels are guarded from confusion, and no theorem is promoted."
+    "Candidate-only NS triad signed-operator identity receipt: L_signed_norm = I - K_N is recorded, exact endpoint confusion is guarded against, and theorem/full-NS/Clay promotion stays false."
     refl

@@ -42,6 +42,21 @@
     "schur_directional_gap_residual_mean": 0.0,
     "shared_frame_count": 13,
     "shared_frame_shell_count": 26,
+    "signed_spectral_bridge_open": true,
+    "signed_surface_consensus": "fail-closed",
+    "signed_wall1_candidate_only": true,
+    "signed_wall1_clay_promoted": false,
+    "signed_wall1_fail_closed": true,
+    "signed_wall1_full_ns_promoted": false,
+    "signed_wall1_route_names": [
+      "wall1a-signed-xor-gaugeability",
+      "signed-XY-spectral-frustration-wall-1a"
+    ],
+    "signed_wall1_row_count": 2,
+    "signed_wall1_status": "fail-closed",
+    "signed_wall1_surface_count": 2,
+    "signed_wall1_theorem_promoted": false,
+    "signed_xor_bridge_open": true,
     "strongest_lower_bound_source_modes": [
       "cycle_lower_bound_normalized_max",
       "cycle_lower_bound_normalized_sum"
@@ -67,12 +82,12 @@
   "contract": "ns_triad_wall1_shell_bridge_summary",
   "control_card": {
     "C": "scripts/ns_triad_wall1_shell_bridge_summary.py",
-    "F": "Wall 1 remains unproved; this summary only sharpens the finite-dimensional telemetry surface.",
+    "F": "Wall 1 remains unproved; the signed Wall 1 receipt only sharpens the finite-dimensional telemetry surface.",
     "G": "No theorem, continuation, or Clay claim is inferred from this bridge summary.",
-    "L": "Read each shell-level JSON surface, normalize onto shared frame-shell keys, compute compact correlations, and emit explicit unproved Wall 1 markers.",
+    "L": "Read each shell-level JSON surface plus the signed Wall 1 receipt, normalize onto shared frame-shell keys, compute compact correlations, and emit explicit unproved Wall 1 markers.",
     "O": "Summarize the active NS triad Wall 1 shell-level telemetry surfaces.",
     "P": "FAIL_CLOSED_NS_TRIAD_WALL1_SHELL_BRIDGE_SUMMARY",
-    "R": "Join the shell-indexed phase-regime, frame-stability, cocycle-floor, cycle-obstruction, cycle-packing overlap, K01 geometry, Hessian basin, and optional Schur directional audit outputs into one compact fail-closed Wall 1 summary.",
+    "R": "Join the shell-indexed phase-regime, frame-stability, cocycle-floor, cycle-obstruction, cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, and signed-XOR/signed-spectral Wall 1 receipts into one compact fail-closed Wall 1 summary.",
     "S": "Candidate-only shell bridge summary; all outputs remain empirical and non-promoting."
   },
   "empirical_non_promoting": true,
@@ -85,7 +100,8 @@
     "hessian_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_low_frustration_hessian_scan_N128_20260621.json",
     "k01_geometry_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_k01_geometry_audit_scan_N128_20260621.json",
     "phase_regime_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_phase_regime_separation_scan_N128_20260621.json",
-    "schur_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_schur_directional_audit_scan_N128_20260622.json"
+    "schur_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_schur_directional_audit_scan_N128_20260622.json",
+    "signed_wall1_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_signed_wall1_theorem_status_20260622.json"
   },
   "route_decision": "FAIL_CLOSED_NS_TRIAD_WALL1_SHELL_BRIDGE_SUMMARY",
   "rows": [
@@ -1547,5 +1563,42 @@
     }
   ],
   "schema_version": "1.0.0",
-  "script_name": "scripts/ns_triad_wall1_shell_bridge_summary.py"
+  "script_name": "scripts/ns_triad_wall1_shell_bridge_summary.py",
+  "signed_wall1_rows": [
+    {
+      "boundary_summary": "Sign balance does not imply frustration; gaugeable signed XOR is satisfiable; the non-gaugeable signed XOR obstruction surface remains empirical.",
+      "bridge_summary": "The weighted-distance bridge to gaugeability remains open; d_W(b, im B\u2082) is the quantitative target.",
+      "candidate_only": true,
+      "clay_promoted": false,
+      "fail_closed": true,
+      "full_ns_promoted": false,
+      "gaugeable_signed_xor_satisfiable": true,
+      "module_path": "DASHI/Physics/Closure/NSTriadSignedXORGaugeabilityBoundary.agda",
+      "non_gaugeable_signed_xor_is_actual_obstruction_surface": true,
+      "receipt_name": "NSTriadSignedXORGaugeabilityBoundary",
+      "route_name": "wall1a-signed-xor-gaugeability",
+      "signed_xor_bridge_open": true,
+      "surface": "signed_xor_gaugeability",
+      "theorem_promoted": false,
+      "wall1_status": "unproved",
+      "weighted_distance_target_text": "d_W(b, im B\u2082)"
+    },
+    {
+      "boundary_summary": "Signed Laplacian / signed XY floor candidate remains open, upper spectral edge still carries XY-floor risk, and theorem/full-NS/Clay promotion stays false.",
+      "bridge_summary": "The discrete signed-XOR distance to the continuous XY floor bridge is still open.",
+      "candidate_only": true,
+      "clay_promoted": false,
+      "fail_closed": true,
+      "full_ns_promoted": false,
+      "module_path": "DASHI/Physics/Closure/NSTriadSignedSpectralFrustrationBoundary.agda",
+      "primary_wall1a_candidate": true,
+      "receipt_name": "NSTriadSignedSpectralFrustrationBoundary",
+      "route_name": "signed-XY-spectral-frustration-wall-1a",
+      "signed_xor_distance_bridge_open": true,
+      "surface": "signed_spectral_frustration",
+      "theorem_promoted": false,
+      "upper_spectral_edge_carries_xy_floor_risk": true,
+      "wall1_status": "unproved"
+    }
+  ]
 }

@@ -50,6 +50,10 @@ DEFAULT_SCHUR_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_schur_directional_audit_scan_N128_20260622.json"
 )
+DEFAULT_SIGNED_WALL1_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_signed_wall1_theorem_status_20260622.json"
+)
 DEFAULT_OUTPUT_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_wall1_shell_bridge_summary_20260621.json"
@@ -59,17 +63,17 @@ CONTROL_CARD = {
     "O": "Summarize the active NS triad Wall 1 shell-level telemetry surfaces.",
     "R": (
         "Join the shell-indexed phase-regime, frame-stability, cocycle-floor, cycle-obstruction, "
-        "cycle-packing overlap, K01 geometry, Hessian basin, and optional Schur directional audit outputs into one compact fail-closed Wall 1 summary."
+        "cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, and signed-XOR/signed-spectral Wall 1 receipts into one compact fail-closed Wall 1 summary."
     ),
     "C": SCRIPT_NAME,
     "S": "Candidate-only shell bridge summary; all outputs remain empirical and non-promoting.",
     "L": (
-        "Read each shell-level JSON surface, normalize onto shared frame-shell keys, "
+        "Read each shell-level JSON surface plus the signed Wall 1 receipt, normalize onto shared frame-shell keys, "
         "compute compact correlations, and emit explicit unproved Wall 1 markers."
     ),
     "P": ROUTE_DECISION,
     "G": "No theorem, continuation, or Clay claim is inferred from this bridge summary.",
-    "F": "Wall 1 remains unproved; this summary only sharpens the finite-dimensional telemetry surface.",
+    "F": "Wall 1 remains unproved; the signed Wall 1 receipt only sharpens the finite-dimensional telemetry surface.",
 }
 
 LOWER_BOUND_SUPPORT_KEYS = (
@@ -108,6 +112,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--hessian-json", type=Path, default=DEFAULT_HESSIAN_JSON)
     parser.add_argument("--k01-geometry-json", type=Path, default=DEFAULT_K01_GEOMETRY_JSON)
     parser.add_argument("--schur-json", type=Path, default=DEFAULT_SCHUR_JSON)
+    parser.add_argument("--signed-wall1-json", type=Path, default=DEFAULT_SIGNED_WALL1_JSON)
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT_JSON)
     parser.add_argument("--pretty", action="store_true")
     return parser.parse_args()
@@ -512,6 +517,10 @@ def main() -> int:
     hessian_payload = _read_json(args.hessian_json)
     k01_geometry_payload = _read_json(args.k01_geometry_json)
     schur_payload = _read_json(args.schur_json) if args.schur_json is not None else {}
+    try:
+        signed_wall1_payload = _read_json(args.signed_wall1_json)
+    except Exception:
+        signed_wall1_payload = {}
 
     phase_by_key = {key: row for row in _rows(phase_payload) if (key := _frame_shell_key(row)) is not None}
     cocycle_by_key = {key: row for row in _cocycle_rows(cocycle_payload) if (key := _frame_shell_key(row)) is not None}
@@ -521,6 +530,58 @@ def main() -> int:
     hessian_by_frame = {key: row for row in _rows(hessian_payload) if (key := _frame_key(row)) is not None}
     k01_geometry_by_key = {key: row for row in _k01_rows(k01_geometry_payload) if (key := _frame_shell_key(row)) is not None}
     schur_by_key = {key: row for row in _schur_rows(schur_payload) if (key := _frame_shell_key(row)) is not None}
+    signed_wall1_rows = []
+    if isinstance(signed_wall1_payload, dict):
+        explicit_signed_rows = signed_wall1_payload.get("signed_wall1_rows")
+        if isinstance(explicit_signed_rows, list):
+            signed_wall1_rows = explicit_signed_rows
+    signed_wall1_route_names = None
+    if signed_wall1_rows:
+        ordered_route_names: list[str] = []
+        for row in signed_wall1_rows:
+            if not isinstance(row, dict):
+                continue
+            route_name = row.get("route_name")
+            if isinstance(route_name, str) and route_name not in ordered_route_names:
+                ordered_route_names.append(route_name)
+        signed_wall1_route_names = ordered_route_names
+    signed_xor_bridge_open = any(
+        isinstance(row, dict)
+        and row.get("surface") == "signed_xor_gaugeability"
+        and row.get("signed_xor_bridge_open") is True
+        for row in signed_wall1_rows
+    )
+    signed_spectral_bridge_open = any(
+        isinstance(row, dict)
+        and row.get("surface") == "signed_spectral_frustration"
+        and row.get("signed_xor_distance_bridge_open") is True
+        for row in signed_wall1_rows
+    )
+    signed_wall1_candidate_only = (
+        all(isinstance(row, dict) and row.get("candidate_only") is True for row in signed_wall1_rows)
+        if signed_wall1_rows
+        else None
+    )
+    signed_wall1_fail_closed = (
+        all(isinstance(row, dict) and row.get("fail_closed") is True for row in signed_wall1_rows)
+        if signed_wall1_rows
+        else None
+    )
+    signed_wall1_theorem_promoted = (
+        any(isinstance(row, dict) and row.get("theorem_promoted") is True for row in signed_wall1_rows)
+        if signed_wall1_rows
+        else None
+    )
+    signed_wall1_full_ns_promoted = (
+        any(isinstance(row, dict) and row.get("full_ns_promoted") is True for row in signed_wall1_rows)
+        if signed_wall1_rows
+        else None
+    )
+    signed_wall1_clay_promoted = (
+        any(isinstance(row, dict) and row.get("clay_promoted") is True for row in signed_wall1_rows)
+        if signed_wall1_rows
+        else None
+    )
 
     shared_keys = sorted(set(phase_by_key) & set(cocycle_by_key))
     bridge_rows: list[dict[str, Any]] = []
@@ -740,8 +801,10 @@ def main() -> int:
             "hessian_json": str(args.hessian_json),
             "k01_geometry_json": str(args.k01_geometry_json),
             "schur_json": str(args.schur_json) if args.schur_json is not None else None,
+            "signed_wall1_json": str(args.signed_wall1_json) if args.signed_wall1_json is not None else None,
         },
         "rows": bridge_rows,
+        "signed_wall1_rows": signed_wall1_rows,
         "aggregate": {
             "shared_frame_shell_count": int(len(shared_keys)),
             "shared_frame_count": int(len({frame for frame, _ in shared_keys})),
@@ -818,6 +881,30 @@ def main() -> int:
             "schur_directional_audit_status": (
                 "fail-closed" if schur_payload and schur_gap_values else "unavailable"
             ),
+            "signed_wall1_row_count": int(len(signed_wall1_rows)) if signed_wall1_rows else None,
+            "signed_wall1_surface_count": (
+                int(
+                    len(
+                        {
+                            row.get("surface")
+                            for row in signed_wall1_rows
+                            if isinstance(row, dict) and isinstance(row.get("surface"), str)
+                        }
+                    )
+                )
+                if signed_wall1_rows
+                else None
+            ),
+            "signed_wall1_status": "fail-closed" if signed_wall1_rows else "unavailable",
+            "signed_wall1_candidate_only": signed_wall1_candidate_only,
+            "signed_wall1_fail_closed": signed_wall1_fail_closed,
+            "signed_wall1_theorem_promoted": signed_wall1_theorem_promoted,
+            "signed_wall1_full_ns_promoted": signed_wall1_full_ns_promoted,
+            "signed_wall1_clay_promoted": signed_wall1_clay_promoted,
+            "signed_xor_bridge_open": signed_xor_bridge_open if signed_wall1_rows else None,
+            "signed_spectral_bridge_open": signed_spectral_bridge_open if signed_wall1_rows else None,
+            "signed_surface_consensus": "fail-closed" if signed_wall1_rows else "unavailable",
+            "signed_wall1_route_names": signed_wall1_route_names,
             "fail_closed": True,
             "wall1_status": "unproved",
             "theorem_authority": False,

@@ -117,6 +117,27 @@ record NSTriadSignedLaplacianSpectrumAuditReceiptORCSLPGF : Set where
     FIsCanonical : F ≡
       "F: the spectral endpoints are audited distinctly; lower-edge frame/Schur risk must not be confused with upper-edge XY floor risk."
 
+canonicalNSTriadSignedLaplacianSpectrumAuditReceiptORCSLPGF :
+  NSTriadSignedLaplacianSpectrumAuditReceiptORCSLPGF
+canonicalNSTriadSignedLaplacianSpectrumAuditReceiptORCSLPGF =
+  mkNSTriadSignedLaplacianSpectrumAuditReceiptORCSLPGF
+    "O: record the active NS triad signed-Laplacian spectrum audit."
+    refl
+    "R: record the lower spectral edge as frame/Schur risk and the upper spectral edge as XY floor risk."
+    refl
+    "C: this is a fail-closed audit receipt, not a theorem carrier."
+    refl
+    "S: the imported identity surface is audited, exact endpoint confusion is guarded against, and promotion flags remain false."
+    refl
+    "L: signed operator identity -> lower/upper spectral risk audit -> endpoint guard -> no promotion."
+    refl
+    "P: keep the spectrum split as an audit surface, not a promoted proof."
+    refl
+    "G: theorem, full NS, and Clay promotion remain false."
+    refl
+    "F: the spectral endpoints are audited distinctly; lower-edge frame/Schur risk must not be confused with upper-edge XY floor risk."
+    refl
+
 record NSTriadSignedLaplacianSpectrumAuditReceipt : Setω where
   constructor mkNSTriadSignedLaplacianSpectrumAuditReceipt
   field
@@ -126,11 +147,11 @@ record NSTriadSignedLaplacianSpectrumAuditReceipt : Setω where
     statusIsCanonical :
       status ≡ candidateSignedSpectrumAuditRecorded
 
-    identityReceipt :
-      Identity.NSTriadSignedLaplacianIdentityReceipt
+    identityReceiptImported :
+      Bool
 
-    identityReceiptIsCanonical :
-      identityReceipt ≡ Identity.canonicalNSTriadSignedLaplacianIdentityReceipt
+    identityReceiptImportedIsTrue :
+      identityReceiptImported ≡ true
 
     assumptionLedger :
       List NSTriadSignedLaplacianSpectrumAuditAssumption
@@ -231,40 +252,21 @@ record NSTriadSignedLaplacianSpectrumAuditReceipt : Setω where
 
 open NSTriadSignedLaplacianSpectrumAuditReceipt public
 
-canonicalNSTriadSignedLaplacianSpectrumAuditReceiptORCSLPGF :
-  NSTriadSignedLaplacianSpectrumAuditReceiptORCSLPGF
-canonicalNSTriadSignedLaplacianSpectrumAuditReceiptORCSLPGF =
-  mkNSTriadSignedLaplacianSpectrumAuditReceiptORCSLPGF
-    "O: record the active NS triad signed-Laplacian spectrum audit."
-    refl
-    "R: record the lower spectral edge as frame/Schur risk and the upper spectral edge as XY floor risk."
-    refl
-    "C: this is a fail-closed audit receipt, not a theorem carrier."
-    refl
-    "S: the imported identity surface is audited, exact endpoint confusion is guarded against, and promotion flags remain false."
-    refl
-    "L: signed operator identity -> lower/upper spectral risk audit -> endpoint guard -> no promotion."
-    refl
-    "P: keep the spectrum split as an audit surface, not a promoted proof."
-    refl
-    "G: theorem, full NS, and Clay promotion remain false."
-    refl
-    "F: the spectral endpoints are audited distinctly; lower-edge frame/Schur risk must not be confused with upper-edge XY floor risk."
-    refl
-
 canonicalNSTriadSignedLaplacianSpectrumAuditReceipt :
   NSTriadSignedLaplacianSpectrumAuditReceipt
 canonicalNSTriadSignedLaplacianSpectrumAuditReceipt =
   mkNSTriadSignedLaplacianSpectrumAuditReceipt
     candidateSignedSpectrumAuditRecorded
     refl
-    Identity.canonicalNSTriadSignedLaplacianIdentityReceipt
+    true
     refl
     canonicalNSTriadSignedLaplacianSpectrumAuditAssumptions
     refl
     4
     refl
     canonicalNSTriadSignedLaplacianSpectrumAuditBlockers
+    refl
+    4
     refl
     lowerSpectralEdgeText
     refl
@@ -288,5 +290,5 @@ canonicalNSTriadSignedLaplacianSpectrumAuditReceipt =
     refl
     canonicalNSTriadSignedLaplacianSpectrumAuditReceiptORCSLPGF
     refl
-    "Candidate-only signed-Laplacian spectrum audit: the imported L_signed_norm = I - K_N identity is preserved, the lower spectral edge is frame/Schur risk, the upper spectral edge is XY floor risk, exact endpoint confusion is guarded against, and no theorem is promoted."
+    "Candidate-only NS triad signed-Laplacian spectrum audit receipt: the lower spectral edge is frame/Schur risk, the upper spectral edge is XY floor risk, exact endpoint confusion is guarded against, and theorem/full-NS/Clay promotion stays false."
     refl
