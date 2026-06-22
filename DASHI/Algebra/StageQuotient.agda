@@ -1,6 +1,7 @@
 module DASHI.Algebra.StageQuotient where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
 
 open import Base369 using
@@ -13,6 +14,18 @@ open import LogicTlurey using
   ; seed ; counter ; resonance ; overflow
   ; next
   ; stageTone
+  )
+open import DASHI.Foundations.StageAtlasZeroToEleven using
+  ( StageAtlasZeroToEleven
+  ; StageAtlasRevolution
+  ; StageAtlasZeroToElevenRow
+  ; atlas-11
+  ; rev-2
+  ; canonicalStageAtlasZeroToElevenRows
+  ; residue-of
+  ; tone-of
+  ; revolution-of
+  ; tone-of-stage
   )
 
 _≢_ : ∀ {A : Set} → A → A → Set
@@ -71,6 +84,42 @@ record StageQuotientSeam : Set where
       quotient (next resonance) ≡ rotateTri (quotient resonance)
     overflow-seam :
       quotient (next overflow) ≢ rotateTri (quotient overflow)
+
+record Stage12FibreSurface : Set where
+  constructor mkStage12FibreSurface
+  field
+    atlasRows : List StageAtlasZeroToElevenRow
+    atlasRowsAreCanonical :
+      atlasRows ≡ canonicalStageAtlasZeroToElevenRows
+    residue : StageAtlasZeroToEleven → Stage
+    quotient : StageAtlasZeroToEleven → TriTruth
+    carry-depth : StageAtlasZeroToEleven → StageAtlasRevolution
+    fibre-of-quotient :
+      ∀ c →
+      quotient c ≡ stageTone (residue c)
+    carry-depth-matches :
+      ∀ c →
+      carry-depth c ≡ revolution-of c
+    seam :
+      quotient atlas-11 ≡ tri-low
+    carry-depth-seam :
+      carry-depth atlas-11 ≡ rev-2
+    successor-non-equivariant :
+      quotient atlas-11 ≢ rotateTri (quotient atlas-11)
+
+canonicalStage12FibreSurface : Stage12FibreSurface
+canonicalStage12FibreSurface =
+  mkStage12FibreSurface
+    canonicalStageAtlasZeroToElevenRows
+    refl
+    residue-of
+    tone-of
+    revolution-of
+    tone-of-stage
+    (λ c → refl)
+    refl
+    refl
+    (λ ())
 
 stageQuotientSeamSurface : StageQuotientSeam
 stageQuotientSeamSurface =

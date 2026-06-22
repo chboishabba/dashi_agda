@@ -129,6 +129,88 @@ data ParametricCurveKind : Set where
   upperSCurveKind : ParametricCurveKind
   lowerSCurveKind : ParametricCurveKind
 
+data BodyBoundarySeedFacetKind : Set where
+  localBodyFacetKind : BodyBoundarySeedFacetKind
+  boundaryTraceFacetKind : BodyBoundarySeedFacetKind
+  oppositeSeedFacetKind : BodyBoundarySeedFacetKind
+
+data BodyBoundarySeedPolarityKind : Set where
+  yangPolarityKind : BodyBoundarySeedPolarityKind
+  yinPolarityKind : BodyBoundarySeedPolarityKind
+  pairedPolarityKind : BodyBoundarySeedPolarityKind
+
+record BodyBoundarySeedRow : Set where
+  constructor bodyBoundarySeedRow
+  field
+    rowId : Nat
+    polarityKind : BodyBoundarySeedPolarityKind
+    facetKind : BodyBoundarySeedFacetKind
+    symbolName : String
+    geometryPayload : String
+    interpretation : String
+    candidateOnly : Bool
+    promoted : Bool
+    authorityBits : YinYangGeometryAuthorityBits
+
+open BodyBoundarySeedRow public
+
+record CandidateOnlyBodyBoundarySeedReceipt
+  (row : BodyBoundarySeedRow) : Set where
+  constructor candidateOnlyBodyBoundarySeedReceipt
+  field
+    candidateOnlyTrue : candidateOnly row ≡ true
+    promotedFalse : promoted row ≡ false
+
+record YinYangBodyBoundarySeedSurface : Set where
+  constructor yinYangBodyBoundarySeedSurface
+  field
+    bodyRows : List BodyBoundarySeedRow
+    boundaryRows : List BodyBoundarySeedRow
+    seedRows : List BodyBoundarySeedRow
+    bodyRowCount : Nat
+    boundaryRowCount : Nat
+    seedRowCount : Nat
+    bodyRowCountMatches :
+      bodyRowCount ≡ listCount bodyRows
+    boundaryRowCountMatches :
+      boundaryRowCount ≡ listCount boundaryRows
+    seedRowCountMatches :
+      seedRowCount ≡ listCount seedRows
+    candidateOnly : Bool
+    promoted : Bool
+    authorityBits : YinYangGeometryAuthorityBits
+    readingSummary : String
+    surfaceInterpretation : String
+
+open YinYangBodyBoundarySeedSurface public
+
+record CandidateOnlyYinYangBodyBoundarySeedSurfaceReceipt
+  (surface : YinYangBodyBoundarySeedSurface) : Set where
+  constructor candidateOnlyYinYangBodyBoundarySeedSurfaceReceipt
+  field
+    candidateOnlyTrue : candidateOnly surface ≡ true
+    promotedFalse : promoted surface ≡ false
+
+mkBodyBoundarySeedRow :
+  Nat →
+  BodyBoundarySeedPolarityKind →
+  BodyBoundarySeedFacetKind →
+  String →
+  String →
+  String →
+  BodyBoundarySeedRow
+mkBodyBoundarySeedRow rowId polarityKind facetKind symbolName geometryPayload interpretation =
+  bodyBoundarySeedRow
+    rowId
+    polarityKind
+    facetKind
+    symbolName
+    geometryPayload
+    interpretation
+    true
+    false
+    canonicalYinYangGeometryAuthorityBits
+
 record ComponentEquationRow : Set where
   constructor componentEquationRow
   field
@@ -437,6 +519,286 @@ canonicalLowerSCurveRowReceipt :
 canonicalLowerSCurveRowReceipt =
   candidateOnlyParametricCurveReceipt refl refl
 
+canonicalBodyRows : List BodyBoundarySeedRow
+canonicalBodyRows =
+  mkBodyBoundarySeedRow
+    1
+    yangPolarityKind
+    localBodyFacetKind
+    "YB01"
+    "Yang local body band 01 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    2
+    yangPolarityKind
+    localBodyFacetKind
+    "YB02"
+    "Yang local body band 02 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    3
+    yangPolarityKind
+    localBodyFacetKind
+    "YB03"
+    "Yang local body band 03 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    4
+    yangPolarityKind
+    localBodyFacetKind
+    "YB04"
+    "Yang local body band 04 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    5
+    yangPolarityKind
+    localBodyFacetKind
+    "YB05"
+    "Yang local body band 05 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    6
+    yangPolarityKind
+    localBodyFacetKind
+    "YB06"
+    "Yang local body band 06 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    7
+    yangPolarityKind
+    localBodyFacetKind
+    "YB07"
+    "Yang local body band 07 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    8
+    yangPolarityKind
+    localBodyFacetKind
+    "YB08"
+    "Yang local body band 08 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    9
+    yangPolarityKind
+    localBodyFacetKind
+    "YB09"
+    "Yang local body band 09 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    10
+    yangPolarityKind
+    localBodyFacetKind
+    "YB10"
+    "Yang local body band 10 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    11
+    yangPolarityKind
+    localBodyFacetKind
+    "YB11"
+    "Yang local body band 11 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    12
+    yangPolarityKind
+    localBodyFacetKind
+    "YB12"
+    "Yang local body band 12 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    13
+    yangPolarityKind
+    localBodyFacetKind
+    "YB13"
+    "Yang local body band 13 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    14
+    yangPolarityKind
+    localBodyFacetKind
+    "YB14"
+    "Yang local body band 14 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    15
+    yangPolarityKind
+    localBodyFacetKind
+    "YB15"
+    "Yang local body band 15 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    16
+    yangPolarityKind
+    localBodyFacetKind
+    "YB16"
+    "Yang local body band 16 inside Teardrop_A."
+    "Local body receipt for the yang half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    17
+    yinPolarityKind
+    localBodyFacetKind
+    "YI01"
+    "Yin local body band 01 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    18
+    yinPolarityKind
+    localBodyFacetKind
+    "YI02"
+    "Yin local body band 02 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    19
+    yinPolarityKind
+    localBodyFacetKind
+    "YI03"
+    "Yin local body band 03 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    20
+    yinPolarityKind
+    localBodyFacetKind
+    "YI04"
+    "Yin local body band 04 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    21
+    yinPolarityKind
+    localBodyFacetKind
+    "YI05"
+    "Yin local body band 05 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    22
+    yinPolarityKind
+    localBodyFacetKind
+    "YI06"
+    "Yin local body band 06 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    23
+    yinPolarityKind
+    localBodyFacetKind
+    "YI07"
+    "Yin local body band 07 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    24
+    yinPolarityKind
+    localBodyFacetKind
+    "YI08"
+    "Yin local body band 08 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    25
+    yinPolarityKind
+    localBodyFacetKind
+    "YI09"
+    "Yin local body band 09 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    26
+    yinPolarityKind
+    localBodyFacetKind
+    "YI10"
+    "Yin local body band 10 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    27
+    yinPolarityKind
+    localBodyFacetKind
+    "YI11"
+    "Yin local body band 11 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    28
+    yinPolarityKind
+    localBodyFacetKind
+    "YI12"
+    "Yin local body band 12 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    29
+    yinPolarityKind
+    localBodyFacetKind
+    "YI13"
+    "Yin local body band 13 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    30
+    yinPolarityKind
+    localBodyFacetKind
+    "YI14"
+    "Yin local body band 14 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ mkBodyBoundarySeedRow
+    31
+    yinPolarityKind
+    localBodyFacetKind
+    "YI15"
+    "Yin local body band 15 inside Teardrop_B."
+    "Local body receipt for the yin half; the boundary is carried by the S-curve rows."
+  ∷ []
+
+canonicalBoundaryRows : List BodyBoundarySeedRow
+canonicalBoundaryRows =
+  []
+
+canonicalSeedRows : List BodyBoundarySeedRow
+canonicalSeedRows =
+  mkBodyBoundarySeedRow
+    32
+    pairedPolarityKind
+    oppositeSeedFacetKind
+    "Seed_01"
+    "Opposite-seed exchange: Yang body points to E2 and Yin body points to E1."
+    "Single opposite-eye seed receipt for the decomposition ledger; the boundary remains in the parametric curve layer."
+  ∷ []
+
+canonicalBodyRowCount : Nat
+canonicalBodyRowCount =
+  listCount canonicalBodyRows
+
+canonicalBoundaryRowCount : Nat
+canonicalBoundaryRowCount =
+  listCount canonicalBoundaryRows
+
+canonicalSeedRowCount : Nat
+canonicalSeedRowCount =
+  listCount canonicalSeedRows
+
+canonicalBodyBoundarySeedReadingSummary : String
+canonicalBodyBoundarySeedReadingSummary =
+  "31 + 0 + 1"
+
+canonicalBodyBoundarySeedSurfaceSummary : String
+canonicalBodyBoundarySeedSurfaceSummary =
+  "Candidate-only body/boundary/seed ledger: 31 local-body rows, 0 explicit boundary rows, and 1 opposite-seed row; the S-curve boundary is kept in the parametric curve layer."
+
+canonicalYinYangBodyBoundarySeedSurface : YinYangBodyBoundarySeedSurface
+canonicalYinYangBodyBoundarySeedSurface =
+  yinYangBodyBoundarySeedSurface
+    canonicalBodyRows
+    canonicalBoundaryRows
+    canonicalSeedRows
+    canonicalBodyRowCount
+    canonicalBoundaryRowCount
+    canonicalSeedRowCount
+    refl
+    refl
+    refl
+    true
+    false
+    canonicalYinYangGeometryAuthorityBits
+    canonicalBodyBoundarySeedReadingSummary
+    canonicalBodyBoundarySeedSurfaceSummary
+
+canonicalYinYangBodyBoundarySeedSurfaceReceipt :
+  CandidateOnlyYinYangBodyBoundarySeedSurfaceReceipt
+    canonicalYinYangBodyBoundarySeedSurface
+canonicalYinYangBodyBoundarySeedSurfaceReceipt =
+  candidateOnlyYinYangBodyBoundarySeedSurfaceReceipt refl refl
+
 record YinYangSymbolGeometryBoundary : Set where
   constructor yinYangSymbolGeometryBoundary
   field
@@ -445,6 +807,7 @@ record YinYangSymbolGeometryBoundary : Set where
     teardropRows : List SetConstructionRow
     regionRows : List SetConstructionRow
     parametricCurveRows : List ParametricCurveRow
+    bodyBoundarySeedSurface : YinYangBodyBoundarySeedSurface
     authorityBits : YinYangGeometryAuthorityBits
     failClosed : YinYangGeometryAuthorityFailClosed
     boundaryInterpretation : String
@@ -464,9 +827,10 @@ canonicalYinYangSymbolGeometryBoundary =
     canonicalTeardropRows
     canonicalRegionRows
     canonicalParametricCurveRows
+    canonicalYinYangBodyBoundarySeedSurface
     canonicalYinYangGeometryAuthorityBits
     canonicalYinYangGeometryAuthorityFailClosed
-    "Candidate-only Cartesian and set-theoretic geometry boundary for the yin-yang symbol."
+    "Candidate-only Cartesian and set-theoretic geometry boundary for the yin-yang symbol, now carrying a 31 + 0 + 1 body/boundary/seed ledger alongside the S-curve boundary rows."
 
 canonicalYinYangSymbolGeometryBoundaryReceipt :
   YinYangSymbolGeometryBoundaryReceipt
@@ -495,4 +859,4 @@ canonicalParametricCurveRowCountIs2 =
 
 boundaryPolicySummary : String
 boundaryPolicySummary =
-  "Symbol geometry is preserved as candidate-only formal payload with blocked authority and theorem-thin string equations."
+  "Symbol geometry is preserved as candidate-only formal payload with blocked authority, theorem-thin string equations, and an explicit 31 + 0 + 1 body/boundary/seed ledger."

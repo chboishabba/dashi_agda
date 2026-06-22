@@ -6,6 +6,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
+def assert_any_marker(text: str, markers: tuple[str, ...]) -> None:
+    assert any(marker in text for marker in markers), markers
+
+
 def test_everything_imports_tao_qi_boundary_stack() -> None:
     text = (REPO_ROOT / "DASHI" / "Everything.agda").read_text(encoding="utf-8")
 
@@ -76,6 +80,161 @@ def test_tao_qi_obligation_module_mentions_full_bridge_stack() -> None:
     assert "canonicalTaoQiBridgeReceipt" in text
     assert "canonicalTaoMeditationQiBridgeReceipt" in text
     assert "canonicalPolarityFieldObligationIndexReceipt" in text
+
+
+def test_recovered_boundary_geometry_and_polarity_slice_markers() -> None:
+    geometry_text = (
+        REPO_ROOT / "DASHI" / "Culture" / "YinYangSymbolGeometryBoundary.agda"
+    ).read_text(encoding="utf-8")
+    polarity_text = (
+        REPO_ROOT / "DASHI" / "Culture" / "YinYangPolarityBoundary.agda"
+    ).read_text(encoding="utf-8")
+
+    assert_any_marker(
+        geometry_text,
+        (
+            "candidateOnlyGeometryBoundary",
+            "canonicalYinYangGeometryAuthorityBits",
+            "canonicalLargeEnclosingCircleEquation",
+            "canonicalTeardropARow",
+            "canonicalYangRegionRow",
+            "canonicalUpperSCurveRow",
+            "boundaryPolicySummary",
+        ),
+    )
+    assert "31 + 0 + 1 body/boundary/seed ledger" in geometry_text
+    assert (
+        "Candidate-only Cartesian and set-theoretic geometry boundary for the yin-yang symbol, now carrying a 31 + 0 + 1 body/boundary/seed ledger alongside the S-curve boundary rows."
+        in geometry_text
+    )
+    assert_any_marker(
+        polarity_text,
+        (
+            "canonicalYinYangPolarityBoundaryRows",
+            "canonicalYinYangGeometrySupportReference",
+            "boundaryRowsAreCanonical",
+            "geometrySupportReferenceIsCanonical",
+            "boundaryRowCountMatchesCanonical",
+            "canonicalYinYangPolarityBoundaryReceipt",
+        ),
+    )
+    assert (
+        "Candidate-only yin/yang symbol geometry support surface covering enclosing-circle, inner-circle, eye-dot, teardrop, and S-curve boundary readings."
+        in polarity_text
+    )
+    assert "boundaryRowCount" in polarity_text
+    assert "geometrySupportReference" in polarity_text
+
+
+def test_recovered_31_plus_0_plus_1_phase_field_slice_markers() -> None:
+    field_bridge_text = (
+        REPO_ROOT
+        / "DASHI"
+        / "Physics"
+        / "Closure"
+        / "SSPPrimeLane369FieldPhaseBridge.agda"
+    ).read_text(encoding="utf-8")
+    phase_bridge_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "PolarityPhaseFieldBridge.agda"
+    ).read_text(encoding="utf-8")
+
+    assert_any_marker(
+        field_bridge_text,
+        (
+            "bodySurfaceBridge",
+            "residueSurfaceBridge",
+            "focusBodySurface",
+            "focusResidueSurface",
+            "canonicalRootFieldPhaseBridge",
+            "canonicalDepth3FieldPhaseBridge",
+            "canonicalRootFieldBodyReceipt",
+            "canonicalDepth3FieldResidueReceipt",
+        ),
+    )
+    assert "Base369 readouts for the focused body and residue surfaces" in field_bridge_text
+    assert_any_marker(
+        phase_bridge_text,
+        (
+            "canonicalYangPhaseCarrierRow",
+            "canonicalYinPhaseCarrierRow",
+            "canonicalBalancedPhaseCarrierRow",
+            "canonicalYangSupportGeometry",
+            "canonicalYinYangSupervoxel",
+            "canonicalYinYangWave",
+            "canonicalYinYangSuperposition",
+            "candidate-only bridge from yin/yang polarity into 369 phase rows",
+        ),
+    )
+    assert "support geometry" in phase_bridge_text
+    assert "superposition candidates" in phase_bridge_text
+    assert "blocked authority governance" in phase_bridge_text
+
+
+def test_recovered_carry_and_successor_adapter_slice_markers() -> None:
+    yin_yang_qi_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "YinYangQiAdapter.agda"
+    ).read_text(encoding="utf-8")
+    tao_yin_yang_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "TaoYinYangAdapter.agda"
+    ).read_text(encoding="utf-8")
+    tao_qi_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "TaoQiReadingAdapter.agda"
+    ).read_text(encoding="utf-8")
+
+    assert_any_marker(
+        yin_yang_qi_text,
+        (
+            "seedAttention",
+            "seedThreshold",
+            "carryBreath",
+            "carryBody",
+            "carryMemory",
+            "carryResidual",
+            "boundaryThreshold",
+            "boundaryRelation",
+            "bodyMovement",
+            "bodyPosture",
+        ),
+    )
+    assert_any_marker(
+        yin_yang_qi_text,
+        (
+            "canonicalYinYangPolarityRowKinds",
+            "rowKindProfile",
+            "rowKindStatement",
+            "canonicalYinYangQiAuthorityClosure",
+            "canonicalYinYangQiBridgeReceipt",
+        ),
+    )
+    assert_any_marker(
+        tao_yin_yang_text,
+        (
+            "chapter1YinBoundaryRow",
+            "chapter2YangComplementarityRow",
+            "chapter6YinValleyRow",
+            "chapter8YinWaterRow",
+            "candidateInteropOnlyTrue",
+            "canonicalTaoYinYangAuthorityBits",
+            "canonicalTaoYinYangGovernance",
+        ),
+    )
+    assert_any_marker(
+        tao_qi_text,
+        (
+            "gateThresholdRow",
+            "valleyLandscapeRow",
+            "breathCarrierRow",
+            "stillnessMeditationRow",
+            "waterFlowRow",
+            "desireReductionRow",
+            "complementarityRow",
+            "softnessSpectralRow",
+            "canonicalTaoQiAdapterRows",
+            "qiCarrierBridgeIsCanonical",
+        ),
+    )
+    assert "boundary-gate grammar" in tao_qi_text
+    assert "candidate-only Qi carrier, role, and formal-lens grammar" in tao_qi_text
 
 
 def test_tao_source_receipt_mentions_external_lean_formalism() -> None:

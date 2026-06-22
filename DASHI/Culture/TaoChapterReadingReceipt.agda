@@ -4,7 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 
 ------------------------------------------------------------------------
@@ -121,6 +121,7 @@ data TaoReadingKind : Set where
   ReversalGrammar : TaoReadingKind
   UncarvedBlockGrammar : TaoReadingKind
   DesireReductionGrammar : TaoReadingKind
+  CarrySeedGrammar : TaoReadingKind
 
 data AssertionStrength : Set where
   LiteralAssertion : AssertionStrength
@@ -171,6 +172,12 @@ data TaoMotif : Set where
   speechRestraint : TaoMotif
   greatImage : TaoMotif
   muddySettling : TaoMotif
+  body : TaoMotif
+  boundary : TaoMotif
+  seed : TaoMotif
+  carry : TaoMotif
+  successor : TaoMotif
+  oppositeSeed : TaoMotif
 
 data TaoRelation : Set where
   contrastsWith : TaoRelation
@@ -527,3 +534,252 @@ chapter1Receipt =
     (chapter1PrimaryRow ∷ [])
     canonicalTaoAuthorityBits
     canonicalTaoBoundaryFailClosed
+
+chapter11PrimaryRow : TaoReadingRow
+chapter11PrimaryRow =
+  taoReadingRow
+    1
+    chapter11
+    emptiness
+    enablesUse
+    usefulnessThroughAbsence
+    translationDependentQualifier
+    EmptinessUtilityGrammar
+    CandidateAnalogy
+    false
+    "Chapter 11 reads emptiness as enabling use rather than originating form."
+
+chapter11PrimaryRowReceipt : TaoReadingRowReceipt chapter11PrimaryRow
+chapter11PrimaryRowReceipt =
+  taoReadingRowReceipt refl
+
+chapter11Receipt : TaoChapterReceipt
+chapter11Receipt =
+  taoChapterReceipt
+    chapter11
+    canonicalTaoSourceReceipt
+    "It is their empty space that is of use."
+    (candidateFormalPayload
+      (just "TaoTeChing.Cosmos.chapter11")
+      (just "DASHI.Culture.TaoChapterReadingReceipt.chapter11Receipt")
+      1)
+    (EmptinessUtilityGrammar ∷ NonBeingUsefulness ∷ TranslationDependentMetaphor ∷ [])
+    (emptiness ∷ usefulnessThroughAbsence ∷ boundary ∷ [])
+    (assertionStrengthProfile 0 0 1 0 0 true "medium")
+    (chapter11PrimaryRow ∷ [])
+    canonicalTaoAuthorityBits
+    canonicalTaoBoundaryFailClosed
+
+chapter16PrimaryRow : TaoReadingRow
+chapter16PrimaryRow =
+  taoReadingRow
+    2
+    chapter16
+    returnToRoot
+    returnsTo
+    stillness
+    translationDependentQualifier
+    ReturnToRootGrammar
+    PracticeGrammar
+    false
+    "Chapter 16 reads return to the root as a stillness grammar rather than a metaphysical proof."
+
+chapter16PrimaryRowReceipt : TaoReadingRowReceipt chapter16PrimaryRow
+chapter16PrimaryRowReceipt =
+  taoReadingRowReceipt refl
+
+chapter16Receipt : TaoChapterReceipt
+chapter16Receipt =
+  taoChapterReceipt
+    chapter16
+    canonicalTaoSourceReceipt
+    "Returning to the root is stillness."
+    (candidateFormalPayload
+      (just "TaoTeChing.Cosmos.chapter16")
+      (just "DASHI.Culture.TaoChapterReadingReceipt.chapter16Receipt")
+      1)
+    (ReturnToRootGrammar ∷ StillnessGrammar ∷ PracticeAphorism ∷ [])
+    (returnToRoot ∷ stillness ∷ dao ∷ [])
+    (assertionStrengthProfile 0 0 0 1 0 true "medium")
+    (chapter16PrimaryRow ∷ [])
+    canonicalTaoAuthorityBits
+    canonicalTaoBoundaryFailClosed
+
+chapter22PrimaryRow : TaoReadingRow
+chapter22PrimaryRow =
+  taoReadingRow
+    3
+    chapter22
+    reversal
+    alignsWith
+    complementarity
+    translationDependentQualifier
+    ReversalGrammar
+    ContrastiveReading
+    false
+    "Chapter 22 reads yielding and reversal as a candidate polarity grammar of renewal."
+
+chapter22PrimaryRowReceipt : TaoReadingRowReceipt chapter22PrimaryRow
+chapter22PrimaryRowReceipt =
+  taoReadingRowReceipt refl
+
+chapter22Receipt : TaoChapterReceipt
+chapter22Receipt =
+  taoChapterReceipt
+    chapter22
+    canonicalTaoSourceReceipt
+    "Yield and remain whole; empty and become full."
+    (candidateFormalPayload
+      (just "TaoTeChing.Cosmos.chapter22")
+      (just "DASHI.Culture.TaoChapterReadingReceipt.chapter22Receipt")
+      1)
+    (ReversalGrammar ∷ ComplementarityGrammar ∷ SelfEffacementGrammar ∷ [])
+    (reversal ∷ emptiness ∷ complementarity ∷ selfEffacement ∷ [])
+    (assertionStrengthProfile 0 0 1 1 0 true "medium")
+    (chapter22PrimaryRow ∷ [])
+    canonicalTaoAuthorityBits
+    canonicalTaoBoundaryFailClosed
+
+chapter28PrimaryRow : TaoReadingRow
+chapter28PrimaryRow =
+  taoReadingRow
+    4
+    chapter28
+    uncarvedBlock
+    associatedWith
+    complementarity
+    translationDependentQualifier
+    UncarvedBlockGrammar
+    MetaphoricMapping
+    false
+    "Chapter 28 reads the uncarved block as a candidate polarity-retention grammar across paired aspects."
+
+chapter28PrimaryRowReceipt : TaoReadingRowReceipt chapter28PrimaryRow
+chapter28PrimaryRowReceipt =
+  taoReadingRowReceipt refl
+
+chapter28Receipt : TaoChapterReceipt
+chapter28Receipt =
+  taoChapterReceipt
+    chapter28
+    canonicalTaoSourceReceipt
+    "Know the male but keep to the female."
+    (candidateFormalPayload
+      (just "TaoTeChing.Cosmos.chapter28")
+      (just "DASHI.Culture.TaoChapterReadingReceipt.chapter28Receipt")
+      1)
+    (UncarvedBlockGrammar ∷ ComplementarityGrammar ∷ ReturnToRootGrammar ∷ [])
+    (uncarvedBlock ∷ complementarity ∷ returnToRoot ∷ infant ∷ [])
+    (assertionStrengthProfile 0 0 1 0 0 true "medium")
+    (chapter28PrimaryRow ∷ [])
+    canonicalTaoAuthorityBits
+    canonicalTaoBoundaryFailClosed
+
+chapter36PrimaryRow : TaoReadingRow
+chapter36PrimaryRow =
+  taoReadingRow
+    5
+    chapter36
+    softness
+    overcomes
+    antiExcess
+    translationDependentQualifier
+    ReversalGrammar
+    ConditionalAphorism
+    false
+    "Chapter 36 reads softness and weakness as reversal-at-extreme grammar rather than general strategic law."
+
+chapter36PrimaryRowReceipt : TaoReadingRowReceipt chapter36PrimaryRow
+chapter36PrimaryRowReceipt =
+  taoReadingRowReceipt refl
+
+chapter36Receipt : TaoChapterReceipt
+chapter36Receipt =
+  taoChapterReceipt
+    chapter36
+    canonicalTaoSourceReceipt
+    "The soft overcomes the hard, the weak the strong."
+    (candidateFormalPayload
+      (just "TaoTeChing.Cosmos.chapter36")
+      (just "DASHI.Culture.TaoChapterReadingReceipt.chapter36Receipt")
+      1)
+    (ReversalGrammar ∷ SoftOverHardOperator ∷ PracticeAphorism ∷ [])
+    (softness ∷ antiExcess ∷ threshold ∷ [])
+    (assertionStrengthProfile 0 0 0 1 0 true "medium")
+    (chapter36PrimaryRow ∷ [])
+    canonicalTaoAuthorityBits
+    canonicalTaoBoundaryFailClosed
+
+chapter37PrimaryRow : TaoReadingRow
+chapter37PrimaryRow =
+  taoReadingRow
+    6
+    chapter37
+    nonAction
+    selfOrders
+    spontaneousOrdering
+    authorityBlockedQualifier
+    NonActionGovernance
+    PracticeGrammar
+    false
+    "Chapter 37 reads non-action as a candidate self-ordering grammar with desire stilled by nameless simplicity."
+
+chapter37PrimaryRowReceipt : TaoReadingRowReceipt chapter37PrimaryRow
+chapter37PrimaryRowReceipt =
+  taoReadingRowReceipt refl
+
+chapter37CarryRow : TaoReadingRow
+chapter37CarryRow =
+  taoReadingRow
+    7
+    chapter37
+    seed
+    alignsWith
+    carry
+    candidateOnlyQualifier
+    CarrySeedGrammar
+    CandidateAnalogy
+    false
+    "Chapter 37 supports a candidate-only seed/carry reading in which simplicity opens the next non-forced transition."
+
+chapter37CarryRowReceipt : TaoReadingRowReceipt chapter37CarryRow
+chapter37CarryRowReceipt =
+  taoReadingRowReceipt refl
+
+chapter37Receipt : TaoChapterReceipt
+chapter37Receipt =
+  taoChapterReceipt
+    chapter37
+    canonicalTaoSourceReceipt
+    "The Dao does nothing, yet nothing is left undone."
+    (candidateFormalPayload
+      (just "TaoTeChing.Cosmos.chapter37")
+      (just "DASHI.Culture.TaoChapterReadingReceipt.chapter37Receipt")
+      2)
+    (NonActionGovernance ∷ DesireReductionGrammar ∷ CarrySeedGrammar ∷ [])
+    (nonAction ∷ spontaneousOrdering ∷ simplicity ∷ seed ∷ carry ∷ [])
+    (assertionStrengthProfile 0 0 1 1 0 true "medium")
+    (chapter37PrimaryRow ∷ chapter37CarryRow ∷ [])
+    canonicalTaoAuthorityBits
+    canonicalTaoBoundaryFailClosed
+
+canonicalTaoChapterReceipts : List TaoChapterReceipt
+canonicalTaoChapterReceipts =
+  chapter1Receipt
+  ∷ chapter11Receipt
+  ∷ chapter16Receipt
+  ∷ chapter22Receipt
+  ∷ chapter28Receipt
+  ∷ chapter36Receipt
+  ∷ chapter37Receipt
+  ∷ []
+
+taoChapterReceiptCount : List TaoChapterReceipt → Nat
+taoChapterReceiptCount [] =
+  zero
+taoChapterReceiptCount (_ ∷ receipts) =
+  suc (taoChapterReceiptCount receipts)
+
+canonicalTaoChapterReceiptCount : Nat
+canonicalTaoChapterReceiptCount =
+  taoChapterReceiptCount canonicalTaoChapterReceipts

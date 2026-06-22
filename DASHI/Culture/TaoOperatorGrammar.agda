@@ -37,6 +37,12 @@ six = suc five
 seven : Nat
 seven = suc six
 
+eight : Nat
+eight = suc seven
+
+nine : Nat
+nine = suc eight
+
 data TaoOperatorFamily : Set where
   ApophaticBoundaryOperator : TaoOperatorFamily
   UseThroughEmptinessOperator : TaoOperatorFamily
@@ -46,6 +52,8 @@ data TaoOperatorFamily : Set where
   AntiExcessOperator : TaoOperatorFamily
   AntiPossessionOperator : TaoOperatorFamily
   ReversalOperator : TaoOperatorFamily
+  BodyBoundarySeedOperator : TaoOperatorFamily
+  SuccessorCarryOperator : TaoOperatorFamily
 
 operatorFamilyLabel : TaoOperatorFamily → String
 operatorFamilyLabel ApophaticBoundaryOperator =
@@ -64,6 +72,10 @@ operatorFamilyLabel AntiPossessionOperator =
   "anti-possession"
 operatorFamilyLabel ReversalOperator =
   "reversal"
+operatorFamilyLabel BodyBoundarySeedOperator =
+  "body boundary seed"
+operatorFamilyLabel SuccessorCarryOperator =
+  "successor carry"
 
 taoOperatorFamilyCount : List TaoOperatorFamily → Nat
 taoOperatorFamilyCount [] =
@@ -81,6 +93,8 @@ canonicalTaoOperatorFamilies =
   ∷ AntiExcessOperator
   ∷ AntiPossessionOperator
   ∷ ReversalOperator
+  ∷ BodyBoundarySeedOperator
+  ∷ SuccessorCarryOperator
   ∷ []
 
 canonicalTaoOperatorFamilyCount : Nat
@@ -445,6 +459,74 @@ reversalOperatorReceipt =
     reversalOperatorRowReceipt
     "Reversal is encoded as a blocked-authority candidate row."
 
+bodyBoundarySeedOperatorReadingRow : TaoReceipt.TaoReadingRow
+bodyBoundarySeedOperatorReadingRow =
+  TaoReceipt.taoReadingRow
+    eight
+    TaoReceipt.chapter11
+    TaoReceipt.body
+    TaoReceipt.alignsWith
+    TaoReceipt.seed
+    TaoReceipt.candidateOnlyQualifier
+    TaoReceipt.CarrySeedGrammar
+    TaoReceipt.CandidateAnalogy
+    false
+    "Body-boundary-seed operator: local form is treated as incomplete without a boundary and opposite-seed reading."
+
+bodyBoundarySeedOperatorRowReceipt :
+  TaoReceipt.TaoReadingRowReceipt bodyBoundarySeedOperatorReadingRow
+bodyBoundarySeedOperatorRowReceipt =
+  TaoReceipt.taoReadingRowReceipt refl
+
+bodyBoundarySeedOperatorRow : TaoOperatorRow
+bodyBoundarySeedOperatorRow =
+  taoOperatorRow
+    BodyBoundarySeedOperator
+    bodyBoundarySeedOperatorReadingRow
+    true
+    refl
+
+bodyBoundarySeedOperatorReceipt : TaoOperatorReceipt
+bodyBoundarySeedOperatorReceipt =
+  mkCanonicalTaoOperatorReceipt
+    bodyBoundarySeedOperatorRow
+    bodyBoundarySeedOperatorRowReceipt
+    "Body-boundary-seed is recorded as a candidate decomposition grammar with no promoted authority."
+
+successorCarryOperatorReadingRow : TaoReceipt.TaoReadingRow
+successorCarryOperatorReadingRow =
+  TaoReceipt.taoReadingRow
+    nine
+    TaoReceipt.chapter37
+    TaoReceipt.carry
+    TaoReceipt.alignsWith
+    TaoReceipt.successor
+    TaoReceipt.authorityBlockedQualifier
+    TaoReceipt.CarrySeedGrammar
+    TaoReceipt.PracticeGrammar
+    false
+    "Successor-carry operator: a completed body is re-read through a candidate carry lane that opens the next chart without promoting metaphysical law."
+
+successorCarryOperatorRowReceipt :
+  TaoReceipt.TaoReadingRowReceipt successorCarryOperatorReadingRow
+successorCarryOperatorRowReceipt =
+  TaoReceipt.taoReadingRowReceipt refl
+
+successorCarryOperatorRow : TaoOperatorRow
+successorCarryOperatorRow =
+  taoOperatorRow
+    SuccessorCarryOperator
+    successorCarryOperatorReadingRow
+    true
+    refl
+
+successorCarryOperatorReceipt : TaoOperatorReceipt
+successorCarryOperatorReceipt =
+  mkCanonicalTaoOperatorReceipt
+    successorCarryOperatorRow
+    successorCarryOperatorRowReceipt
+    "Successor-carry stays candidate-only and serves only as blocked operator grammar."
+
 canonicalTaoOperatorReceipts : List TaoOperatorReceipt
 canonicalTaoOperatorReceipts =
   apophaticBoundaryOperatorReceipt
@@ -455,6 +537,8 @@ canonicalTaoOperatorReceipts =
   ∷ antiExcessOperatorReceipt
   ∷ antiPossessionOperatorReceipt
   ∷ reversalOperatorReceipt
+  ∷ bodyBoundarySeedOperatorReceipt
+  ∷ successorCarryOperatorReceipt
   ∷ []
 
 taoOperatorReceiptCount : List TaoOperatorReceipt → Nat
@@ -471,7 +555,7 @@ canonicalTaoOperatorGrammarReceipt : TaoOperatorGrammarReceipt
 canonicalTaoOperatorGrammarReceipt =
   taoOperatorGrammarReceipt
     TaoReceipt.canonicalTaoSourceReceipt
-    TaoReceipt.chapter1Receipt
+    TaoReceipt.chapter37Receipt
     canonicalTaoOperatorReceipts
     canonicalTaoOperatorReceiptCount
     true
@@ -480,4 +564,4 @@ canonicalTaoOperatorGrammarReceipt =
     refl
     TaoReceipt.canonicalTaoAuthorityBits
     TaoReceipt.canonicalTaoBoundaryFailClosed
-    "Candidate-only Tao operator grammar over chapter 1 receipts; all operator rows are blocked-authority surfaces."
+    "Candidate-only Tao operator grammar over chapter, reversal, and carry receipts; all operator rows are blocked-authority surfaces."

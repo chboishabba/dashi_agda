@@ -50,6 +50,36 @@ data YinYangPolarityRowKind : Set where
   relationCycle :
     YinYangPolarityRowKind
 
+  seedAttention :
+    YinYangPolarityRowKind
+
+  seedThreshold :
+    YinYangPolarityRowKind
+
+  carryBreath :
+    YinYangPolarityRowKind
+
+  carryBody :
+    YinYangPolarityRowKind
+
+  carryMemory :
+    YinYangPolarityRowKind
+
+  carryResidual :
+    YinYangPolarityRowKind
+
+  boundaryThreshold :
+    YinYangPolarityRowKind
+
+  boundaryRelation :
+    YinYangPolarityRowKind
+
+  bodyMovement :
+    YinYangPolarityRowKind
+
+  bodyPosture :
+    YinYangPolarityRowKind
+
 canonicalYinYangPolarityRowKinds :
   List YinYangPolarityRowKind
 canonicalYinYangPolarityRowKinds =
@@ -59,6 +89,16 @@ canonicalYinYangPolarityRowKinds =
   ∷ breathCirculation
   ∷ residualQuiet
   ∷ relationCycle
+  ∷ seedAttention
+  ∷ seedThreshold
+  ∷ carryBreath
+  ∷ carryBody
+  ∷ carryMemory
+  ∷ carryResidual
+  ∷ boundaryThreshold
+  ∷ boundaryRelation
+  ∷ bodyMovement
+  ∷ bodyPosture
   ∷ []
 
 data YinYangQiLensProfile : Set where
@@ -66,6 +106,18 @@ data YinYangQiLensProfile : Set where
     YinYangQiLensProfile
 
   gradientLensProfile :
+    YinYangQiLensProfile
+
+  seedLensProfile :
+    YinYangQiLensProfile
+
+  carryLensProfile :
+    YinYangQiLensProfile
+
+  boundaryLensProfile :
+    YinYangQiLensProfile
+
+  bodyLensProfile :
     YinYangQiLensProfile
 
 rowKindLensProfile :
@@ -83,6 +135,26 @@ rowKindLensProfile residualQuiet =
   genericLensProfile
 rowKindLensProfile relationCycle =
   genericLensProfile
+rowKindLensProfile seedAttention =
+  seedLensProfile
+rowKindLensProfile seedThreshold =
+  seedLensProfile
+rowKindLensProfile carryBreath =
+  carryLensProfile
+rowKindLensProfile carryBody =
+  carryLensProfile
+rowKindLensProfile carryMemory =
+  carryLensProfile
+rowKindLensProfile carryResidual =
+  carryLensProfile
+rowKindLensProfile boundaryThreshold =
+  boundaryLensProfile
+rowKindLensProfile boundaryRelation =
+  boundaryLensProfile
+rowKindLensProfile bodyMovement =
+  bodyLensProfile
+rowKindLensProfile bodyPosture =
+  bodyLensProfile
 
 rowKindQiDomain :
   YinYangPolarityRowKind →
@@ -99,6 +171,26 @@ rowKindQiDomain residualQuiet =
   QiBridge.meditationQiDomain
 rowKindQiDomain relationCycle =
   QiBridge.fengShuiQiDomain
+rowKindQiDomain seedAttention =
+  QiBridge.meditationQiDomain
+rowKindQiDomain seedThreshold =
+  QiBridge.fengShuiQiDomain
+rowKindQiDomain carryBreath =
+  QiBridge.taiChiQiDomain
+rowKindQiDomain carryBody =
+  QiBridge.taiChiQiDomain
+rowKindQiDomain carryMemory =
+  QiBridge.meditationQiDomain
+rowKindQiDomain carryResidual =
+  QiBridge.meditationQiDomain
+rowKindQiDomain boundaryThreshold =
+  QiBridge.fengShuiQiDomain
+rowKindQiDomain boundaryRelation =
+  QiBridge.fengShuiQiDomain
+rowKindQiDomain bodyMovement =
+  QiBridge.taiChiQiDomain
+rowKindQiDomain bodyPosture =
+  QiBridge.taiChiQiDomain
 
 rowKindQiCarrier :
   YinYangPolarityRowKind →
@@ -115,6 +207,26 @@ rowKindQiCarrier residualQuiet =
   QiBridge.residualMindNoiseQiCarrier
 rowKindQiCarrier relationCycle =
   QiBridge.relationQiCarrier
+rowKindQiCarrier seedAttention =
+  QiBridge.attentionQiCarrier
+rowKindQiCarrier seedThreshold =
+  QiBridge.thresholdQiCarrier
+rowKindQiCarrier carryBreath =
+  QiBridge.breathQiCarrier
+rowKindQiCarrier carryBody =
+  QiBridge.bodyQiCarrier
+rowKindQiCarrier carryMemory =
+  QiBridge.memoryQiCarrier
+rowKindQiCarrier carryResidual =
+  QiBridge.residualMindNoiseQiCarrier
+rowKindQiCarrier boundaryThreshold =
+  QiBridge.thresholdQiCarrier
+rowKindQiCarrier boundaryRelation =
+  QiBridge.relationQiCarrier
+rowKindQiCarrier bodyMovement =
+  QiBridge.movementQiCarrier
+rowKindQiCarrier bodyPosture =
+  QiBridge.postureQiCarrier
 
 rowKindQiRole :
   YinYangPolarityRowKind →
@@ -131,6 +243,26 @@ rowKindQiRole residualQuiet =
   QiTheory.QiObstruction
 rowKindQiRole relationCycle =
   QiTheory.QiAlgebra
+rowKindQiRole seedAttention =
+  QiTheory.QiBoundaryGate
+rowKindQiRole seedThreshold =
+  QiTheory.QiStateSpace
+rowKindQiRole carryBreath =
+  QiTheory.QiObservable
+rowKindQiRole carryBody =
+  QiTheory.QiOperator
+rowKindQiRole carryMemory =
+  QiTheory.QiStateSpace
+rowKindQiRole carryResidual =
+  QiTheory.QiObstruction
+rowKindQiRole boundaryThreshold =
+  QiTheory.QiBoundaryGate
+rowKindQiRole boundaryRelation =
+  QiTheory.QiAlgebra
+rowKindQiRole bodyMovement =
+  QiTheory.QiOperator
+rowKindQiRole bodyPosture =
+  QiTheory.QiStateSpace
 
 rowKindFormalLensSurface :
   YinYangPolarityRowKind →
@@ -146,6 +278,26 @@ rowKindFormalLensSurface breathCirculation =
 rowKindFormalLensSurface residualQuiet =
   Lens.canonicalGenericFormalLensQualificationSurface
 rowKindFormalLensSurface relationCycle =
+  Lens.canonicalGenericFormalLensQualificationSurface
+rowKindFormalLensSurface seedAttention =
+  Lens.canonicalGenericFormalLensQualificationSurface
+rowKindFormalLensSurface seedThreshold =
+  Lens.canonicalGenericFormalLensQualificationSurface
+rowKindFormalLensSurface carryBreath =
+  Lens.canonicalGradientResistiveQualificationSurface
+rowKindFormalLensSurface carryBody =
+  Lens.canonicalGradientResistiveQualificationSurface
+rowKindFormalLensSurface carryMemory =
+  Lens.canonicalGenericFormalLensQualificationSurface
+rowKindFormalLensSurface carryResidual =
+  Lens.canonicalGenericFormalLensQualificationSurface
+rowKindFormalLensSurface boundaryThreshold =
+  Lens.canonicalGenericFormalLensQualificationSurface
+rowKindFormalLensSurface boundaryRelation =
+  Lens.canonicalGenericFormalLensQualificationSurface
+rowKindFormalLensSurface bodyMovement =
+  Lens.canonicalGradientResistiveQualificationSurface
+rowKindFormalLensSurface bodyPosture =
   Lens.canonicalGenericFormalLensQualificationSurface
 
 rowKindFormalLensReceipt :
@@ -163,6 +315,26 @@ rowKindFormalLensReceipt residualQuiet =
   Lens.canonicalGenericFormalLensQualificationReceipt
 rowKindFormalLensReceipt relationCycle =
   Lens.canonicalGenericFormalLensQualificationReceipt
+rowKindFormalLensReceipt seedAttention =
+  Lens.canonicalGenericFormalLensQualificationReceipt
+rowKindFormalLensReceipt seedThreshold =
+  Lens.canonicalGenericFormalLensQualificationReceipt
+rowKindFormalLensReceipt carryBreath =
+  Lens.canonicalGradientResistiveQualificationReceipt
+rowKindFormalLensReceipt carryBody =
+  Lens.canonicalGradientResistiveQualificationReceipt
+rowKindFormalLensReceipt carryMemory =
+  Lens.canonicalGenericFormalLensQualificationReceipt
+rowKindFormalLensReceipt carryResidual =
+  Lens.canonicalGenericFormalLensQualificationReceipt
+rowKindFormalLensReceipt boundaryThreshold =
+  Lens.canonicalGenericFormalLensQualificationReceipt
+rowKindFormalLensReceipt boundaryRelation =
+  Lens.canonicalGenericFormalLensQualificationReceipt
+rowKindFormalLensReceipt bodyMovement =
+  Lens.canonicalGradientResistiveQualificationReceipt
+rowKindFormalLensReceipt bodyPosture =
+  Lens.canonicalGenericFormalLensQualificationReceipt
 
 rowKindProfile :
   YinYangPolarityRowKind →
@@ -179,6 +351,26 @@ rowKindProfile residualQuiet =
   "residual-quiet"
 rowKindProfile relationCycle =
   "relation-cycle"
+rowKindProfile seedAttention =
+  "seed-attention"
+rowKindProfile seedThreshold =
+  "seed-threshold"
+rowKindProfile carryBreath =
+  "carry-breath"
+rowKindProfile carryBody =
+  "carry-body"
+rowKindProfile carryMemory =
+  "carry-memory"
+rowKindProfile carryResidual =
+  "carry-residual"
+rowKindProfile boundaryThreshold =
+  "boundary-threshold"
+rowKindProfile boundaryRelation =
+  "boundary-relation"
+rowKindProfile bodyMovement =
+  "body-movement"
+rowKindProfile bodyPosture =
+  "body-posture"
 
 rowKindStatement :
   YinYangPolarityRowKind →
@@ -195,6 +387,26 @@ rowKindStatement residualQuiet =
   "Residual quiet is read as a candidate-only Qi obstruction surface in the meditation carrier."
 rowKindStatement relationCycle =
   "Relation cycle is read as a candidate-only Qi algebra surface in the Feng Shui carrier."
+rowKindStatement seedAttention =
+  "Seed attention is read as a candidate-only Qi boundary gate in the meditation carrier."
+rowKindStatement seedThreshold =
+  "Seed threshold is read as a candidate-only Qi state-space threshold in the Feng Shui carrier."
+rowKindStatement carryBreath =
+  "Carry breath is read as a candidate-only Qi observable in the Tai Chi carrier."
+rowKindStatement carryBody =
+  "Carry body is read as a candidate-only Qi operator in the Tai Chi carrier."
+rowKindStatement carryMemory =
+  "Carry memory is read as a candidate-only Qi state-space surface in the meditation carrier."
+rowKindStatement carryResidual =
+  "Carry residual is read as a candidate-only Qi obstruction surface in the meditation carrier."
+rowKindStatement boundaryThreshold =
+  "Boundary threshold is read as a candidate-only Qi boundary gate in the Feng Shui carrier."
+rowKindStatement boundaryRelation =
+  "Boundary relation is read as a candidate-only Qi algebra surface in the Feng Shui carrier."
+rowKindStatement bodyMovement =
+  "Body movement is read as a candidate-only Qi operator in the Tai Chi carrier."
+rowKindStatement bodyPosture =
+  "Body posture is read as a candidate-only Qi state-space surface in the Tai Chi carrier."
 
 yinStillnessMapsToMeditationCarrier :
   rowKindQiCarrier yinStillness ≡ QiBridge.attentionQiCarrier
@@ -224,6 +436,56 @@ residualQuietMapsToResidualCarrier =
 relationCycleMapsToRelationCarrier :
   rowKindQiCarrier relationCycle ≡ QiBridge.relationQiCarrier
 relationCycleMapsToRelationCarrier =
+  refl
+
+seedAttentionMapsToAttentionCarrier :
+  rowKindQiCarrier seedAttention ≡ QiBridge.attentionQiCarrier
+seedAttentionMapsToAttentionCarrier =
+  refl
+
+seedThresholdMapsToThresholdCarrier :
+  rowKindQiCarrier seedThreshold ≡ QiBridge.thresholdQiCarrier
+seedThresholdMapsToThresholdCarrier =
+  refl
+
+carryBreathMapsToBreathCarrier :
+  rowKindQiCarrier carryBreath ≡ QiBridge.breathQiCarrier
+carryBreathMapsToBreathCarrier =
+  refl
+
+carryBodyMapsToBodyCarrier :
+  rowKindQiCarrier carryBody ≡ QiBridge.bodyQiCarrier
+carryBodyMapsToBodyCarrier =
+  refl
+
+carryMemoryMapsToMemoryCarrier :
+  rowKindQiCarrier carryMemory ≡ QiBridge.memoryQiCarrier
+carryMemoryMapsToMemoryCarrier =
+  refl
+
+carryResidualMapsToResidualCarrier :
+  rowKindQiCarrier carryResidual ≡ QiBridge.residualMindNoiseQiCarrier
+carryResidualMapsToResidualCarrier =
+  refl
+
+boundaryThresholdMapsToThresholdCarrier :
+  rowKindQiCarrier boundaryThreshold ≡ QiBridge.thresholdQiCarrier
+boundaryThresholdMapsToThresholdCarrier =
+  refl
+
+boundaryRelationMapsToRelationCarrier :
+  rowKindQiCarrier boundaryRelation ≡ QiBridge.relationQiCarrier
+boundaryRelationMapsToRelationCarrier =
+  refl
+
+bodyMovementMapsToMovementCarrier :
+  rowKindQiCarrier bodyMovement ≡ QiBridge.movementQiCarrier
+bodyMovementMapsToMovementCarrier =
+  refl
+
+bodyPostureMapsToPostureCarrier :
+  rowKindQiCarrier bodyPosture ≡ QiBridge.postureQiCarrier
+bodyPostureMapsToPostureCarrier =
   refl
 
 record YinYangQiAuthorityClosure : Set where
@@ -503,6 +765,96 @@ relationCycleRow =
     (rowKindProfile relationCycle)
     (rowKindStatement relationCycle)
 
+seedAttentionRow :
+  YinYangQiAdapterRow
+seedAttentionRow =
+  mkYinYangQiAdapterRow
+    (suc (suc (suc (suc (suc (suc zero))))))
+    seedAttention
+    (rowKindProfile seedAttention)
+    (rowKindStatement seedAttention)
+
+seedThresholdRow :
+  YinYangQiAdapterRow
+seedThresholdRow =
+  mkYinYangQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc zero)))))))
+    seedThreshold
+    (rowKindProfile seedThreshold)
+    (rowKindStatement seedThreshold)
+
+carryBreathRow :
+  YinYangQiAdapterRow
+carryBreathRow =
+  mkYinYangQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))
+    carryBreath
+    (rowKindProfile carryBreath)
+    (rowKindStatement carryBreath)
+
+carryBodyRow :
+  YinYangQiAdapterRow
+carryBodyRow =
+  mkYinYangQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))
+    carryBody
+    (rowKindProfile carryBody)
+    (rowKindStatement carryBody)
+
+carryMemoryRow :
+  YinYangQiAdapterRow
+carryMemoryRow =
+  mkYinYangQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))
+    carryMemory
+    (rowKindProfile carryMemory)
+    (rowKindStatement carryMemory)
+
+carryResidualRow :
+  YinYangQiAdapterRow
+carryResidualRow =
+  mkYinYangQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))
+    carryResidual
+    (rowKindProfile carryResidual)
+    (rowKindStatement carryResidual)
+
+boundaryThresholdRow :
+  YinYangQiAdapterRow
+boundaryThresholdRow =
+  mkYinYangQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))
+    boundaryThreshold
+    (rowKindProfile boundaryThreshold)
+    (rowKindStatement boundaryThreshold)
+
+boundaryRelationRow :
+  YinYangQiAdapterRow
+boundaryRelationRow =
+  mkYinYangQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))
+    boundaryRelation
+    (rowKindProfile boundaryRelation)
+    (rowKindStatement boundaryRelation)
+
+bodyMovementRow :
+  YinYangQiAdapterRow
+bodyMovementRow =
+  mkYinYangQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))))
+    bodyMovement
+    (rowKindProfile bodyMovement)
+    (rowKindStatement bodyMovement)
+
+bodyPostureRow :
+  YinYangQiAdapterRow
+bodyPostureRow =
+  mkYinYangQiAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))))
+    bodyPosture
+    (rowKindProfile bodyPosture)
+    (rowKindStatement bodyPosture)
+
 canonicalYinYangQiAdapterRows :
   List YinYangQiAdapterRow
 canonicalYinYangQiAdapterRows =
@@ -512,6 +864,16 @@ canonicalYinYangQiAdapterRows =
   ∷ breathCirculationRow
   ∷ residualQuietRow
   ∷ relationCycleRow
+  ∷ seedAttentionRow
+  ∷ seedThresholdRow
+  ∷ carryBreathRow
+  ∷ carryBodyRow
+  ∷ carryMemoryRow
+  ∷ carryResidualRow
+  ∷ boundaryThresholdRow
+  ∷ boundaryRelationRow
+  ∷ bodyMovementRow
+  ∷ bodyPostureRow
   ∷ []
 
 yinStillnessRowReceipt :
@@ -640,6 +1002,216 @@ relationCycleRowReceipt =
     refl
     refl
 
+seedAttentionRowReceipt :
+  YinYangQiAdapterRowReceipt seedAttentionRow
+seedAttentionRowReceipt =
+  yinYangQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+seedThresholdRowReceipt :
+  YinYangQiAdapterRowReceipt seedThresholdRow
+seedThresholdRowReceipt =
+  yinYangQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+carryBreathRowReceipt :
+  YinYangQiAdapterRowReceipt carryBreathRow
+carryBreathRowReceipt =
+  yinYangQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+carryBodyRowReceipt :
+  YinYangQiAdapterRowReceipt carryBodyRow
+carryBodyRowReceipt =
+  yinYangQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+carryMemoryRowReceipt :
+  YinYangQiAdapterRowReceipt carryMemoryRow
+carryMemoryRowReceipt =
+  yinYangQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+carryResidualRowReceipt :
+  YinYangQiAdapterRowReceipt carryResidualRow
+carryResidualRowReceipt =
+  yinYangQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+boundaryThresholdRowReceipt :
+  YinYangQiAdapterRowReceipt boundaryThresholdRow
+boundaryThresholdRowReceipt =
+  yinYangQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+boundaryRelationRowReceipt :
+  YinYangQiAdapterRowReceipt boundaryRelationRow
+boundaryRelationRowReceipt =
+  yinYangQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+bodyMovementRowReceipt :
+  YinYangQiAdapterRowReceipt bodyMovementRow
+bodyMovementRowReceipt =
+  yinYangQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
+bodyPostureRowReceipt :
+  YinYangQiAdapterRowReceipt bodyPostureRow
+bodyPostureRowReceipt =
+  yinYangQiAdapterRowReceipt
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
+
 canonicalYinYangQiFormalLensSurfaces :
   List Lens.FormalLensQualificationSurface
 canonicalYinYangQiFormalLensSurfaces =
@@ -649,6 +1221,16 @@ canonicalYinYangQiFormalLensSurfaces =
   ∷ rowKindFormalLensSurface breathCirculation
   ∷ rowKindFormalLensSurface residualQuiet
   ∷ rowKindFormalLensSurface relationCycle
+  ∷ rowKindFormalLensSurface seedAttention
+  ∷ rowKindFormalLensSurface seedThreshold
+  ∷ rowKindFormalLensSurface carryBreath
+  ∷ rowKindFormalLensSurface carryBody
+  ∷ rowKindFormalLensSurface carryMemory
+  ∷ rowKindFormalLensSurface carryResidual
+  ∷ rowKindFormalLensSurface boundaryThreshold
+  ∷ rowKindFormalLensSurface boundaryRelation
+  ∷ rowKindFormalLensSurface bodyMovement
+  ∷ rowKindFormalLensSurface bodyPosture
   ∷ []
 
 yinYangQiCandidateOnlyRow :
@@ -660,7 +1242,7 @@ yinYangQiCandidateOnlyRow =
     "yinYangQiCandidateOnlyRow"
     Candidate.bridgeCandidateKind
     Candidate.bridgeCandidateOnlyStatus
-    "Yin/Yang polarity rows are carried into Qi carrier, role, and formal-lens surfaces as candidate-only readings."
+    "Yin/Yang polarity rows are carried into seed, carry, body, and boundary Qi carrier, role, and formal-lens surfaces as candidate-only readings."
     "No truth, support, admissibility, trading, runtime, theorem, clinical, or metaphysical authority is supplied."
 
 canonicalYinYangQiCandidateOnlyReceipt :
@@ -773,7 +1355,7 @@ canonicalYinYangQiBridgeReceipt =
     false
     refl
     yinYangQiPromotionImpossible
-    "Yin/Yang polarity rows are interpreted as candidate-only Qi carrier, role, and formal-lens bridges with all authority lanes blocked."
+    "Yin/Yang polarity rows are interpreted as candidate-only seed, carry, body, and boundary Qi carrier, role, and formal-lens bridges with all authority lanes blocked."
 
 canonicalYinYangQiBridgeCandidateOnly :
   candidateOnly canonicalYinYangQiBridgeReceipt ≡ true

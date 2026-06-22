@@ -8,6 +8,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Culture.TaoChapterReadingReceipt as Tao
+import DASHI.Culture.TaoOperatorGrammar as TaoGrammar
 import DASHI.Culture.YinYangPolarityBoundary as YinYang
 
 ------------------------------------------------------------------------
@@ -34,6 +35,11 @@ data TaoYinYangAdapterStrength : Set where
   DesireReductionAlignment : TaoYinYangAdapterStrength
   SoftnessReversalAlignment : TaoYinYangAdapterStrength
   MinimalGovernanceAlignment : TaoYinYangAdapterStrength
+  BodyBoundarySeedAlignment : TaoYinYangAdapterStrength
+  BoundaryCutAlignment : TaoYinYangAdapterStrength
+  SeedRetentionAlignment : TaoYinYangAdapterStrength
+  CarryContinuationAlignment : TaoYinYangAdapterStrength
+  SuccessorContinuationAlignment : TaoYinYangAdapterStrength
   CandidateOnlyAlignment : TaoYinYangAdapterStrength
 
 record TaoYinYangAuthorityBits : Set where
@@ -256,10 +262,25 @@ chapter10YinRootReturnRow =
     true
     false
 
+chapter11YinBodyBoundarySeedRow : TaoYinYangAdapterRow
+chapter11YinBodyBoundarySeedRow =
+  taoYinYangAdapterRow
+    (suc (suc (suc (suc (suc zero)))))
+    Tao.chapter11
+    Tao.body
+    Tao.EmptinessUtilityGrammar
+    Tao.translationDependentQualifier
+    yin
+    BodyBoundarySeedAlignment
+    "yin-body-boundary-seed"
+    "Chapter 11 is read as yin body-boundary-seed material because body, boundary, and seed are held together as a receptive local gate."
+    true
+    false
+
 chapter16YinStillnessRow : TaoYinYangAdapterRow
 chapter16YinStillnessRow =
   taoYinYangAdapterRow
-    (suc (suc (suc (suc (suc zero)))))
+    (suc (suc (suc (suc (suc (suc zero))))))
     Tao.chapter16
     Tao.stillness
     Tao.StillnessGrammar
@@ -274,7 +295,7 @@ chapter16YinStillnessRow =
 chapter17YangMinimalGovernanceRow : TaoYinYangAdapterRow
 chapter17YangMinimalGovernanceRow =
   taoYinYangAdapterRow
-    (suc (suc (suc (suc (suc (suc zero))))))
+    (suc (suc (suc (suc (suc (suc (suc zero)))))))
     Tao.chapter17
     Tao.rulerBarelyKnown
     Tao.RulerTaxonomy
@@ -289,7 +310,7 @@ chapter17YangMinimalGovernanceRow =
 chapter19YinDesireReductionRow : TaoYinYangAdapterRow
 chapter19YinDesireReductionRow =
   taoYinYangAdapterRow
-    (suc (suc (suc (suc (suc (suc (suc zero)))))))
+    (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))
     Tao.chapter19
     Tao.desireReduction
     Tao.DesireReductionGrammar
@@ -301,10 +322,40 @@ chapter19YinDesireReductionRow =
     true
     false
 
+chapter22YinBoundaryCutRow : TaoYinYangAdapterRow
+chapter22YinBoundaryCutRow =
+  taoYinYangAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))
+    Tao.chapter22
+    Tao.boundary
+    Tao.ReversalGrammar
+    Tao.translationDependentQualifier
+    yin
+    BoundaryCutAlignment
+    "yin-boundary-cut"
+    "Chapter 22 is read as yin boundary-cut material because reversal, emptiness, and self-effacement are treated as a thresholding move rather than a promotion claim."
+    true
+    false
+
+chapter28YinSeedRetentionRow : TaoYinYangAdapterRow
+chapter28YinSeedRetentionRow =
+  taoYinYangAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))
+    Tao.chapter28
+    Tao.seed
+    Tao.UncarvedBlockGrammar
+    Tao.translationDependentQualifier
+    yin
+    SeedRetentionAlignment
+    "yin-seed-retention"
+    "Chapter 28 is read as yin seed-retention material because the uncarved block keeps latent form available without forcing it into doctrine."
+    true
+    false
+
 chapter36YinSoftnessRow : TaoYinYangAdapterRow
 chapter36YinSoftnessRow =
   taoYinYangAdapterRow
-    (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))
     Tao.chapter36
     Tao.softness
     Tao.ReversalGrammar
@@ -319,7 +370,7 @@ chapter36YinSoftnessRow =
 chapter37YangSpontaneityRow : TaoYinYangAdapterRow
 chapter37YangSpontaneityRow =
   taoYinYangAdapterRow
-    (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))
     Tao.chapter37
     Tao.spontaneousOrdering
     Tao.NonActionGovernance
@@ -331,6 +382,36 @@ chapter37YangSpontaneityRow =
     true
     false
 
+chapter37YangCarryRow : TaoYinYangAdapterRow
+chapter37YangCarryRow =
+  taoYinYangAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))))
+    Tao.chapter37
+    Tao.carry
+    Tao.CarrySeedGrammar
+    Tao.authorityBlockedQualifier
+    yang
+    CarryContinuationAlignment
+    "yang-carry-continuation"
+    "Chapter 37 is read as yang carry material because the carried lane is treated as an active continuation rather than a closed residue."
+    true
+    false
+
+chapter37YangSuccessorRow : TaoYinYangAdapterRow
+chapter37YangSuccessorRow =
+  taoYinYangAdapterRow
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))))))
+    Tao.chapter37
+    Tao.successor
+    Tao.CarrySeedGrammar
+    Tao.authorityBlockedQualifier
+    yang
+    SuccessorContinuationAlignment
+    "yang-successor-continuation"
+    "Chapter 37 is read as yang successor material because the next step is treated as a candidate continuation that stays blocked from promotion."
+    true
+    false
+
 canonicalTaoYinYangAdapterRows : List TaoYinYangAdapterRow
 canonicalTaoYinYangAdapterRows =
   chapter1YinBoundaryRow
@@ -338,11 +419,16 @@ canonicalTaoYinYangAdapterRows =
   ∷ chapter6YinValleyRow
   ∷ chapter8YinWaterRow
   ∷ chapter10YinRootReturnRow
+  ∷ chapter11YinBodyBoundarySeedRow
   ∷ chapter16YinStillnessRow
   ∷ chapter17YangMinimalGovernanceRow
   ∷ chapter19YinDesireReductionRow
+  ∷ chapter22YinBoundaryCutRow
+  ∷ chapter28YinSeedRetentionRow
   ∷ chapter36YinSoftnessRow
   ∷ chapter37YangSpontaneityRow
+  ∷ chapter37YangCarryRow
+  ∷ chapter37YangSuccessorRow
   ∷ []
 
 chapter1YinBoundaryRowReceipt :
@@ -370,6 +456,11 @@ chapter10YinRootReturnRowReceipt :
 chapter10YinRootReturnRowReceipt =
   taoYinYangAdapterRowReceipt refl refl
 
+chapter11YinBodyBoundarySeedRowReceipt :
+  TaoYinYangAdapterRowReceipt chapter11YinBodyBoundarySeedRow
+chapter11YinBodyBoundarySeedRowReceipt =
+  taoYinYangAdapterRowReceipt refl refl
+
 chapter16YinStillnessRowReceipt :
   TaoYinYangAdapterRowReceipt chapter16YinStillnessRow
 chapter16YinStillnessRowReceipt =
@@ -385,6 +476,16 @@ chapter19YinDesireReductionRowReceipt :
 chapter19YinDesireReductionRowReceipt =
   taoYinYangAdapterRowReceipt refl refl
 
+chapter22YinBoundaryCutRowReceipt :
+  TaoYinYangAdapterRowReceipt chapter22YinBoundaryCutRow
+chapter22YinBoundaryCutRowReceipt =
+  taoYinYangAdapterRowReceipt refl refl
+
+chapter28YinSeedRetentionRowReceipt :
+  TaoYinYangAdapterRowReceipt chapter28YinSeedRetentionRow
+chapter28YinSeedRetentionRowReceipt =
+  taoYinYangAdapterRowReceipt refl refl
+
 chapter36YinSoftnessRowReceipt :
   TaoYinYangAdapterRowReceipt chapter36YinSoftnessRow
 chapter36YinSoftnessRowReceipt =
@@ -393,6 +494,16 @@ chapter36YinSoftnessRowReceipt =
 chapter37YangSpontaneityRowReceipt :
   TaoYinYangAdapterRowReceipt chapter37YangSpontaneityRow
 chapter37YangSpontaneityRowReceipt =
+  taoYinYangAdapterRowReceipt refl refl
+
+chapter37YangCarryRowReceipt :
+  TaoYinYangAdapterRowReceipt chapter37YangCarryRow
+chapter37YangCarryRowReceipt =
+  taoYinYangAdapterRowReceipt refl refl
+
+chapter37YangSuccessorRowReceipt :
+  TaoYinYangAdapterRowReceipt chapter37YangSuccessorRow
+chapter37YangSuccessorRowReceipt =
   taoYinYangAdapterRowReceipt refl refl
 
 record TaoYinYangBridgeReceipt : Set where
@@ -426,7 +537,7 @@ canonicalTaoYinYangBridgeReceipt =
     refl
     canonicalTaoYinYangAdapterRows
     refl
-    "Tao motifs are re-read as candidate-only yin/yang polarity rows with explicit fail-closed governance and no authority promotion."
+    "Tao motifs are re-read as candidate-only yin/yang polarity rows with explicit body, boundary, seed, carry, and successor recoveries, fail-closed governance, and no authority promotion."
 
 canonicalTaoYinYangBridgeReceiptCandidateOnly :
   candidateOnly (governance canonicalTaoYinYangBridgeReceipt) ≡ true
