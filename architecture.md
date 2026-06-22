@@ -172,6 +172,24 @@ Architecture rule for this stack:
 - Qi remains the carrier/role/formal-lens substrate.
 - Every layer is candidate-only and fail-closed on doctrine, empirical, clinical, spiritual, mystical, metaphysical, political, philological, theorem, runtime, and reciprocal validation authority.
 
+## Stage12 And Prime-Lane Hierarchy
+
+The stage/carry route is now ordered as:
+
+1. `DASHI.Algebra.StageQuotient`
+2. `DASHI.Algebra.StageQuotientIrreversibilityBoundary`
+3. `DASHI.Interop.CarryCompletionSpectralBridge`
+4. `DASHI.Interop.PrimeLaneStage12ActionAdapter`
+5. prime-local witnesses such as `DASHI.Physics.Closure.P7Stage7C6HexRegression`
+
+Architecture rule for this tranche:
+
+- `Stage12FibreSurface` is the global stage/carry/fibre atlas.
+- Prime-local unit-group lanes plug into that atlas through typed local adapters; they do not replace it.
+- The p7 tranche is the first clean prime-local exemplar because `(Z/7Z)^x` has order `6`, aligning naturally with the `HexTruth` lane.
+- `P7Stage7C6HexRegression` is therefore a local regression witness over the Stage12 surface, not the definition of Stage12 itself.
+- Future prime lanes should consume the same Stage12 quotient/carry-depth seam rather than inventing parallel stage semantics.
+
 ## Performance Intent
 Reducing parallel dependency paths lowers normalization and transport overhead.
 Expected effect: lower compile pressure without changing theorem content.

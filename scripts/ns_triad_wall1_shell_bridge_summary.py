@@ -60,6 +60,16 @@ CONTROL_CARD = {
     "F": "Wall 1 remains unproved; this summary only sharpens the finite-dimensional telemetry surface.",
 }
 
+LOWER_BOUND_SUPPORT_KEYS = (
+    "cycle_lower_bound_normalized_max",
+    "cycle_lower_bound_normalized_mean",
+    "cycle_lower_bound_normalized_sum",
+    "lower_bound_proxy",
+    "mean_cycle_lower_bound",
+    "max_cycle_lower_bound",
+    "cycle_lower_bound_sum",
+)
+
 AUTHORITY = {
     "candidate_only": True,
     "empirical_non_promoting": True,
@@ -125,11 +135,50 @@ def _rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
         "triad_frame_stability_rows",
         "triad_cycle_obstruction_rows",
         "low_frustration_hessian_rows",
+        "triad_cocycle_floor_rows",
     ):
         value = payload.get(key)
         if isinstance(value, list):
             return value
     return []
+
+
+def _cocycle_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    top_level_rows = payload.get("triad_cocycle_floor_rows")
+    if isinstance(top_level_rows, list):
+        for frame_row in top_level_rows:
+            if not isinstance(frame_row, dict):
+                continue
+            frame = _coerce_int(frame_row.get("frame"))
+            shell_rows = frame_row.get("shell_rows")
+            if isinstance(shell_rows, list):
+                for shell_row in shell_rows:
+                    if not isinstance(shell_row, dict):
+                        continue
+                    row = dict(shell_row)
+                    if frame is not None and row.get("frame") is None:
+                        row["frame"] = frame
+                    if row.get("shell") is None:
+                        shell = _coerce_int(row.get("shell_cutoff"))
+                        if shell is None:
+                            shell = _coerce_int(frame_row.get("shell"))
+                        if shell is not None:
+                            row["shell"] = shell
+                    rows.append(row)
+                continue
+            row = dict(frame_row)
+            if frame is not None and row.get("frame") is None:
+                row["frame"] = frame
+            shell = _coerce_int(row.get("shell"))
+            if shell is None:
+                shell = _coerce_int(row.get("shell_cutoff"))
+            if shell is not None:
+                row["shell"] = shell
+            rows.append(row)
+        return rows
+
+    return _rows(payload)
 
 
 def _frame_shell_key(row: dict[str, Any]) -> tuple[int, int] | None:
@@ -144,6 +193,37 @@ def _frame_shell_key(row: dict[str, Any]) -> tuple[int, int] | None:
 
 def _frame_key(row: dict[str, Any]) -> int | None:
     return _coerce_int(row.get("frame"))
+
+
+def _shell_key(row: dict[str, Any]) -> int | None:
+    shell = _coerce_int(row.get("shell"))
+    if shell is None:
+        shell = _coerce_int(row.get("shell_n"))
+    if shell is None:
+        shell = _coerce_int(row.get("shell_cutoff"))
+    return shell
+
+
+def _lower_bound_support(row: dict[str, Any]) -> tuple[float | None, str | None, int]:
+    preferred_keys = (
+        "cycle_lower_bound_normalized_max",
+        "cycle_lower_bound_normalized_mean",
+        "cycle_lower_bound_normalized_sum",
+    )
+    available_preferred = [key for key in preferred_keys if _coerce_float(row.get(key)) is not None]
+    candidate_keys = available_preferred if available_preferred else list(LOWER_BOUND_SUPPORT_KEYS)
+    best_value: float | None = None
+    best_source: str | None = None
+    support_count = 0
+    for key in candidate_keys:
+        value = _coerce_float(row.get(key))
+        if value is None:
+            continue
+        support_count += 1
+        if best_value is None or value > best_value:
+            best_value = value
+            best_source = key
+    return best_value, best_source, support_count
 
 
 def _pearson(xs: list[float], ys: list[float]) -> float | None:
@@ -173,7 +253,7 @@ def main() -> int:
     hessian_payload = _read_json(args.hessian_json)
 
     phase_by_key = {key: row for row in _rows(phase_payload) if (key := _frame_shell_key(row)) is not None}
-    cocycle_by_key = {key: row for row in _rows(cocycle_payload) if (key := _frame_shell_key(row)) is not None}
+    cocycle_by_key = {key: row for row in _cocycle_rows(cocycle_payload) if (key := _frame_shell_key(row)) is not None}
     frame_by_frame = {key: row for row in _rows(frame_payload) if (key := _frame_key(row)) is not None}
     cycle_by_frame = {key: row for row in _rows(cycle_payload) if (key := _frame_key(row)) is not None}
     hessian_by_frame = {key: row for row in _rows(hessian_payload) if (key := _frame_key(row)) is not None}
@@ -182,8 +262,20 @@ def main() -> int:
     bridge_rows: list[dict[str, Any]] = []
     phase_eps: list[float] = []
     cocycle_bounds: list[float] = []
+    max_cocycle_bounds: list[float] = []
     floor_ratios: list[float] = []
     frame_gaps: list[float] = []
+    strongest_supports: list[float] = []
+    strongest_support_phase_eps: list[float] = []
+    strongest_support_frame_gaps: list[float] = []
+    strongest_support_xs: list[float] = []
+    strongest_support_ys: list[float] = []
+    strongest_support_frame_xs: list[float] = []
+    strongest_support_frame_ys: list[float] = []
+    floor_ratio_xs: list[float] = []
+    floor_ratio_ys: list[float] = []
+    support_sources: list[str] = []
+    support_counts: list[int] = []
 
     for key in shared_keys:
         frame, shell = key
@@ -194,10 +286,18 @@ def main() -> int:
         hessian_row = hessian_by_frame.get(frame, {})
         phase_gap = _coerce_float(phase_row.get("optimized_lambda_gap_proxy"))
         cocycle_bound = _coerce_float(cocycle_row.get("mean_cycle_lower_bound"))
+        if cocycle_bound is None:
+            cocycle_bound = _coerce_float(cocycle_row.get("lower_bound_proxy"))
+        cocycle_max_bound = _coerce_float(cocycle_row.get("max_cycle_lower_bound"))
         floor_ratio = _coerce_float(cocycle_row.get("frustration_floor_ratio_vs_raw"))
+        if floor_ratio is None:
+            floor_ratio = _coerce_float(cocycle_row.get("floor_ratio_proxy"))
         frame_margin = _coerce_float(frame_row.get("frame_stability_margin_proxy"))
         cycle_rank = _coerce_float(cycle_row.get("cycle_rank_proxy"))
         hessian_proxy = _coerce_float(hessian_row.get("best_reference_hessian_proxy"))
+        strongest_support, strongest_source, support_count = _lower_bound_support(cocycle_row)
+        cocycle_cycle_defect = _coerce_float(cocycle_row.get("cycle_defect_proxy"))
+        cocycle_floor_proxy = _coerce_float(cocycle_row.get("frustration_floor_proxy"))
         bridge_rows.append(
             {
                 "frame": int(frame),
@@ -206,7 +306,17 @@ def main() -> int:
                 "optimized_lambda_max_proxy": _coerce_float(phase_row.get("optimized_lambda_max_proxy")),
                 "random_lambda_max_proxy_mean": _coerce_float(phase_row.get("random_lambda_max_proxy_mean")),
                 "frustration_floor_ratio_vs_raw": floor_ratio,
+                "cycle_lower_bound_normalized_mean": _coerce_float(cocycle_row.get("cycle_lower_bound_normalized_mean")),
+                "cycle_lower_bound_normalized_max": _coerce_float(cocycle_row.get("cycle_lower_bound_normalized_max")),
+                "cycle_lower_bound_normalized_sum": _coerce_float(cocycle_row.get("cycle_lower_bound_normalized_sum")),
                 "mean_cycle_lower_bound": cocycle_bound,
+                "max_cycle_lower_bound": cocycle_max_bound,
+                "lower_bound_proxy": _coerce_float(cocycle_row.get("lower_bound_proxy")),
+                "cycle_defect_proxy": cocycle_cycle_defect,
+                "frustration_floor_proxy": cocycle_floor_proxy,
+                "strongest_lower_bound_support": strongest_support,
+                "strongest_lower_bound_source": strongest_source,
+                "strongest_lower_bound_support_count": int(support_count),
                 "frame_stability_margin_proxy": frame_margin,
                 "cycle_rank_proxy": cycle_rank,
                 "best_reference_hessian_proxy": hessian_proxy,
@@ -215,10 +325,27 @@ def main() -> int:
         if phase_gap is not None and cocycle_bound is not None:
             phase_eps.append(phase_gap)
             cocycle_bounds.append(cocycle_bound)
+        if cocycle_max_bound is not None:
+            max_cocycle_bounds.append(cocycle_max_bound)
         if floor_ratio is not None:
             floor_ratios.append(floor_ratio)
         if frame_margin is not None:
             frame_gaps.append(frame_margin)
+        if floor_ratio is not None and frame_margin is not None:
+            floor_ratio_xs.append(floor_ratio)
+            floor_ratio_ys.append(frame_margin)
+        if strongest_support is not None and strongest_source is not None:
+            strongest_supports.append(strongest_support)
+            if phase_gap is not None:
+                strongest_support_phase_eps.append(phase_gap)
+                strongest_support_xs.append(strongest_support)
+                strongest_support_ys.append(phase_gap)
+            if frame_margin is not None:
+                strongest_support_frame_gaps.append(frame_margin)
+                strongest_support_frame_xs.append(strongest_support)
+                strongest_support_frame_ys.append(frame_margin)
+            support_sources.append(strongest_source)
+            support_counts.append(int(support_count))
 
     payload = {
         "contract": CONTRACT,
@@ -240,13 +367,24 @@ def main() -> int:
             "shared_frame_count": int(len({frame for frame, _ in shared_keys})),
             "optimized_lambda_gap_proxy_mean": _mean(phase_eps),
             "mean_cycle_lower_bound_mean": _mean(cocycle_bounds),
+            "max_cycle_lower_bound_mean": _mean(max_cocycle_bounds),
             "frustration_floor_ratio_vs_raw_mean": _mean(floor_ratios),
             "frame_stability_margin_proxy_mean": _mean(frame_gaps),
+            "strongest_lower_bound_support_mean": _mean(strongest_supports),
+            "strongest_lower_bound_support_max": max(strongest_supports) if strongest_supports else None,
+            "strongest_lower_bound_support_count_mean": _mean([float(value) for value in support_counts]) if support_counts else None,
+            "strongest_lower_bound_source_modes": sorted({source for source in support_sources}) if support_sources else [],
             "phase_gap_vs_cycle_bound_correlation": _pearson(phase_eps, cocycle_bounds),
             "phase_gap_vs_frame_margin_correlation": _pearson(phase_eps, frame_gaps),
-            "floor_ratio_vs_frame_margin_correlation": _pearson(floor_ratios, frame_gaps[: len(floor_ratios)])
-            if floor_ratios and len(frame_gaps) == len(floor_ratios)
-            else None,
+            "floor_ratio_vs_frame_margin_correlation": _pearson(floor_ratio_xs, floor_ratio_ys),
+            "strongest_lower_bound_support_vs_phase_gap_correlation": _pearson(
+                strongest_support_xs,
+                strongest_support_ys,
+            ),
+            "strongest_lower_bound_support_vs_frame_margin_correlation": _pearson(
+                strongest_support_frame_xs,
+                strongest_support_frame_ys,
+            ),
             "wall1_status": "unproved",
             "theorem_authority": False,
             "clay_authority": False,

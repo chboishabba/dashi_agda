@@ -24,6 +24,7 @@ def test_everything_imports_tao_qi_boundary_stack() -> None:
         "import DASHI.Interop.PolarityBettiSupportBoundary",
         "import DASHI.Interop.BettiQiAdapter",
         "import DASHI.Interop.CarryCompletionSpectralBridge",
+        "import DASHI.Interop.PrimeLaneStage12ActionAdapter",
         "import DASHI.Interop.TaoQiReadingAdapter",
         "import DASHI.Interop.TaoMeditationQiAdapter",
         "import DASHI.Promotion.PolarityFieldObligationIndex",
@@ -221,6 +222,12 @@ def test_stage12_fibre_surface_carry_depth_seam_hits_irreversibility_boundary() 
         / "Promotion"
         / "ExternalTheoremAuthoritySourceLocator.agda"
     ).read_text(encoding="utf-8")
+    downloaded_receipt_text = (
+        REPO_ROOT
+        / "DASHI"
+        / "Promotion"
+        / "DownloadedAuthorityArtifactReceipt.agda"
+    ).read_text(encoding="utf-8")
     carry_bridge_text = (
         REPO_ROOT / "DASHI" / "Interop" / "CarryCompletionSpectralBridge.agda"
     ).read_text(encoding="utf-8")
@@ -238,8 +245,36 @@ def test_stage12_fibre_surface_carry_depth_seam_hits_irreversibility_boundary() 
     assert "stage12FibreSurfaceCarryDepthSeamLocatorWitness" in locator_text
     assert "Located at the StageQuotient irreversibility boundary" in locator_text
     assert "typed provenance" in locator_text
+    assert "stage12FibreSurfaceReceipt" in downloaded_receipt_text
+    assert "stage12FibreSurfaceReceiptIsCanonical" in downloaded_receipt_text
+    assert "stage12FibreSurfaceCarryDepthSeamIsCanonical" in downloaded_receipt_text
+    assert "stage12FibreSurfaceMatchesLocatorRow" in downloaded_receipt_text
+    assert "Theorem.stage12FibreSurfaceLocatorReference" in downloaded_receipt_text
     assert "Stage12FibreSurface preserves atlas-11 as a seam with carry-depth rev-2" in carry_bridge_text
     assert "StageQuotient.Stage12FibreSurface.carry-depth" in carry_bridge_text
+
+
+def test_prime_lane_stage12_adapter_reclassifies_p7_as_local_exemplar() -> None:
+    adapter_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "PrimeLaneStage12ActionAdapter.agda"
+    ).read_text(encoding="utf-8")
+    readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    architecture_text = (REPO_ROOT / "architecture.md").read_text(encoding="utf-8")
+
+    assert "PrimeLaneStage12ActionAdapter" in adapter_text
+    assert "canonicalP7PrimeLaneStage12ActionAdapter" in adapter_text
+    assert "Stage12FibreSurface is now the general stage/carry/fibre grammar" in adapter_text
+    assert "unitGroupLabel" in adapter_text
+    assert "stageIdentityPointIsAtlas7" in adapter_text
+    assert "unitOrderStagePointIsAtlas6" in adapter_text
+    assert "carryDepthSeamPointIsAtlas11" in adapter_text
+    assert "carryDepthSeam" in adapter_text
+    assert "localRegression" in adapter_text
+    assert "promotedStageSpineIsFalse" in adapter_text
+    assert "prime lanes are local unit-action adapters into it" in readme_text
+    assert "`P7Stage7C6HexRegression` is the first canonical local witness" in readme_text
+    assert "Stage12 And Prime-Lane Hierarchy" in architecture_text
+    assert "`P7Stage7C6HexRegression` is therefore a local regression witness over the Stage12 surface" in architecture_text
 
 
 def test_recovered_carry_and_successor_adapter_slice_markers() -> None:

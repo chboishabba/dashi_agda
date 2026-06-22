@@ -96,6 +96,12 @@ Current odd-lane / topology intake note for `2026-06-20`:
   compact regression surface. This remains candidate-only and fail-closed:
   general local unit-group action, analytic BT/p-adic dynamics, and Clay
   authority are not promoted.
+- Stage12 prime-lane adapter tranche is recorded. Artifact:
+  `DASHI/Interop/PrimeLaneStage12ActionAdapter.agda`. This route makes the
+  corrected hierarchy explicit: `Stage12FibreSurface` is the global
+  stage/carry/fibre grammar, prime lanes act through typed local adapters,
+  and the p7 tranche is the first canonical `C6` / `HexTruth` local witness
+  rather than a parallel stage spine.
 
 Current NS Clay action note for `2026-06-20`:
 - Wall 1 phase-regime / cocycle-floor / floor-to-frame tranche is now

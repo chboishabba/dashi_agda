@@ -102,7 +102,8 @@ shared ultrametric geometry, an equivariant odd-field extraction seam on the
 focused supervoxel carrier, and one compact regression surface for canonical
 `p7`/`p11` and root/depth3 witnesses.
 The next p7 quotient-action exemplar now sharpens that symmetry lane into one
-typed golden case:
+typed golden case, but it now sits under the wider `0..11` stage-fibre atlas
+rather than acting as a parallel stage spine:
 `DASHI.Foundations.SSPPrimeLaneUnitGroup`,
 `DASHI.Foundations.P7UnitGroupC6Witness`,
 `DASHI.Foundations.P7HexTruthActionQuotient`,
@@ -116,6 +117,12 @@ equivariance receipts, and one compact regression surface tying those
 receipts together. This remains candidate-only and fail-closed: it is a
 typed p7 exemplar, not a promoted general `(\u2124/p\u2124)^×` action theorem
 or analytic BT/p-adic authority surface.
+`DASHI.Interop.PrimeLaneStage12ActionAdapter` makes the corrected hierarchy
+explicit: `Stage12FibreSurface` is the global stage/carry/fibre grammar,
+prime lanes are local unit-action adapters into it, and
+`P7Stage7C6HexRegression` is the first canonical local witness. Future prime
+lanes should route through the same Stage12 surface rather than inventing
+parallel stage semantics.
 
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL

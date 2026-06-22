@@ -98,6 +98,14 @@ def _check_fraction(errors: list[str], path: str, value: Any) -> None:
         errors.append(f"{path}: must be finite fraction in [0,1]")
 
 
+def _check_optional_nonnegative_float(errors: list[str], path: str, value: Any) -> None:
+    if value is None:
+        return
+    parsed = _finite_float(value)
+    if parsed is None or parsed < -1.0e-12:
+        errors.append(f"{path}: must be finite nonnegative or null")
+
+
 def _check_row(row: dict[str, Any], path: str, errors: list[str]) -> None:
     if row.get("status") not in ALLOWED_STATUSES:
         errors.append(f"{path}.status: must be ok|partial|error")
@@ -125,6 +133,20 @@ def _check_row(row: dict[str, Any], path: str, errors: list[str]) -> None:
         value = _finite_float(row.get(key))
         if value is None or value < -1.0e-12:
             errors.append(f"{path}.{key}: must be finite nonnegative")
+    if row.get("cocycle_floor_input_available") not in (True, False):
+        errors.append(f"{path}.cocycle_floor_input_available: must be boolean")
+    if row.get("cocycle_floor_selected_shell") is not None and _nonnegative_int(row.get("cocycle_floor_selected_shell")) is None:
+        errors.append(f"{path}.cocycle_floor_selected_shell: must be nonnegative int or null")
+    if row.get("cocycle_floor_selected_reference_id") is not None and not isinstance(row.get("cocycle_floor_selected_reference_id"), str):
+        errors.append(f"{path}.cocycle_floor_selected_reference_id: must be string or null")
+    if row.get("cocycle_floor_selected_reference_kind") is not None and not isinstance(row.get("cocycle_floor_selected_reference_kind"), str):
+        errors.append(f"{path}.cocycle_floor_selected_reference_kind: must be string or null")
+    _check_optional_nonnegative_float(errors, f"{path}.cocycle_floor_selected_floor_proxy", row.get("cocycle_floor_selected_floor_proxy"))
+    _check_optional_nonnegative_float(errors, f"{path}.cocycle_floor_selected_floor_ratio_vs_raw", row.get("cocycle_floor_selected_floor_ratio_vs_raw"))
+    if row.get("cocycle_floor_selected_lambda_max_proxy") is not None and _finite_float(row.get("cocycle_floor_selected_lambda_max_proxy")) is None:
+        errors.append(f"{path}.cocycle_floor_selected_lambda_max_proxy: must be finite or null")
+    _check_optional_nonnegative_float(errors, f"{path}.cocycle_floor_selected_mean_cycle_lower_bound", row.get("cocycle_floor_selected_mean_cycle_lower_bound"))
+    _check_optional_nonnegative_float(errors, f"{path}.cocycle_floor_selected_mean_cycle_lower_bound_normalized", row.get("cocycle_floor_selected_mean_cycle_lower_bound_normalized"))
     if row.get("stratum_records") is not None and not isinstance(row.get("stratum_records"), list):
         errors.append(f"{path}.stratum_records: must be list or null")
     if row.get("triad_samples") is not None and not isinstance(row.get("triad_samples"), list):
@@ -167,10 +189,27 @@ def main() -> int:
     else:
         if _nonnegative_int(aggregate.get("processed_frames")) != len(rows):
             errors.append("aggregate.processed_frames: must match row count")
-        for key in ("frame_stability_proxy_mean", "frame_stability_margin_proxy_mean", "stratum_decomposition_proxy_mean"):
+        for key in (
+            "frame_stability_proxy_mean",
+            "frame_stability_margin_proxy_mean",
+            "stratum_decomposition_proxy_mean",
+            "cocycle_floor_selected_floor_proxy_mean",
+            "cocycle_floor_selected_floor_ratio_vs_raw_mean",
+            "cocycle_floor_selected_lambda_max_proxy_mean",
+            "cocycle_floor_selected_mean_cycle_lower_bound_mean",
+            "cocycle_floor_selected_mean_cycle_lower_bound_normalized_mean",
+        ):
             value = aggregate.get(key)
             if value is not None and (_finite_float(value) is None or float(value) < -1.0e-12):
                 errors.append(f"aggregate.{key}: must be finite nonnegative or null")
+        for key in (
+            "frame_stability_vs_cocycle_floor_correlation",
+            "frame_margin_vs_cocycle_floor_correlation",
+            "frame_margin_vs_cocycle_floor_normalized_lower_bound_correlation",
+        ):
+            value = aggregate.get(key)
+            if value is not None and _finite_float(value) is None:
+                errors.append(f"aggregate.{key}: must be finite or null")
 
     status = OK_STATUS if not errors else ERROR_STATUS
     receipt = {

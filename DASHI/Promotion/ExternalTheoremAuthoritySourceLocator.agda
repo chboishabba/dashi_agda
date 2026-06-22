@@ -8,6 +8,7 @@ open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Algebra.StageQuotient as StageQuotient
 import DASHI.Algebra.StageQuotientIrreversibilityBoundary as StageQuotientBoundary
+import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Physics.Closure.CRTMonsterFixedPointCompactificationBoundary as CRTMonster
 
 ------------------------------------------------------------------------
@@ -99,9 +100,9 @@ record ExternalTheoremAuthoritySourceLocatorRow : Set where
     stage12FibreSurfaceCarryDepthSeamIsCanonical :
       StageQuotient.Stage12FibreSurface.carry-depth
         stage12FibreSurfaceReceipt
-        StageQuotient.atlas-11
+        Atlas.atlas-11
       ≡
-      StageQuotient.rev-2
+      Atlas.rev-2
 
     locatorNotes :
       List String
@@ -123,9 +124,9 @@ mkFailClosedLocatorRow :
   stage12FibreSurfaceReceipt' ≡ StageQuotient.canonicalStage12FibreSurface →
   StageQuotient.Stage12FibreSurface.carry-depth
     stage12FibreSurfaceReceipt'
-    StageQuotient.atlas-11
+    Atlas.atlas-11
   ≡
-  StageQuotient.rev-2 →
+  Atlas.rev-2 →
   List String →
   ExternalTheoremAuthoritySourceLocatorRow
 mkFailClosedLocatorRow
@@ -207,9 +208,9 @@ stage12FibreSurfaceLocatorReference =
 stage12FibreSurfaceCarryDepthSeamLocatorWitness :
   StageQuotient.Stage12FibreSurface.carry-depth
     stage12FibreSurfaceLocatorReference
-    StageQuotient.atlas-11
+    Atlas.atlas-11
   ≡
-  StageQuotient.rev-2
+  Atlas.rev-2
 stage12FibreSurfaceCarryDepthSeamLocatorWitness =
   refl
 

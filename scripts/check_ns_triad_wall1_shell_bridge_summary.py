@@ -106,13 +106,27 @@ def main() -> int:
         if _nonnegative_int(row.get("shell")) is None:
             errors.append(f"rows[{index}].shell: must be nonnegative int")
         for key in (
+            "cycle_lower_bound_normalized_mean",
+            "cycle_lower_bound_normalized_max",
+            "cycle_lower_bound_normalized_sum",
             "optimized_lambda_gap_proxy",
             "frustration_floor_ratio_vs_raw",
             "mean_cycle_lower_bound",
+            "max_cycle_lower_bound",
+            "lower_bound_proxy",
+            "cycle_defect_proxy",
+            "frustration_floor_proxy",
+            "strongest_lower_bound_support",
         ):
             value = row.get(key)
             if value is not None and (_finite_float(value) is None or float(value) < -1.0e-12):
                 errors.append(f"rows[{index}].{key}: must be finite nonnegative or null")
+        support_count = row.get("strongest_lower_bound_support_count")
+        if support_count is not None and _nonnegative_int(support_count) is None:
+            errors.append(f"rows[{index}].strongest_lower_bound_support_count: must be nonnegative int or null")
+        support_source = row.get("strongest_lower_bound_source")
+        if row.get("strongest_lower_bound_support") is not None and not isinstance(support_source, str):
+            errors.append(f"rows[{index}].strongest_lower_bound_source: must be string when support is present")
 
     aggregate = payload.get("aggregate")
     if not isinstance(aggregate, dict):
@@ -122,6 +136,20 @@ def main() -> int:
             errors.append("aggregate.shared_frame_shell_count: must be nonnegative int")
         if aggregate.get("wall1_status") != "unproved":
             errors.append("aggregate.wall1_status: must be 'unproved'")
+        for key in (
+            "mean_cycle_lower_bound_mean",
+            "max_cycle_lower_bound_mean",
+            "frustration_floor_ratio_vs_raw_mean",
+            "strongest_lower_bound_support_mean",
+            "strongest_lower_bound_support_max",
+        ):
+            value = aggregate.get(key)
+            if value is not None and (_finite_float(value) is None or float(value) < -1.0e-12):
+                errors.append(f"aggregate.{key}: must be finite nonnegative or null")
+        if aggregate.get("strongest_lower_bound_source_modes") is not None and not isinstance(
+            aggregate.get("strongest_lower_bound_source_modes"), list
+        ):
+            errors.append("aggregate.strongest_lower_bound_source_modes: must be list or null")
 
     status = OK_STATUS if not errors else ERROR_STATUS
     receipt = {
