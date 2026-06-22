@@ -124,8 +124,58 @@ def _check_row(row: dict[str, Any], path: str, errors: list[str]) -> None:
         value = _finite_float(row.get(key))
         if value is None or value < -1.0e-12:
             errors.append(f"{path}.{key}: must be finite nonnegative")
+    best_floor_proxy = _finite_float(row.get("best_reference_floor_proxy"))
+    best_floor_rmse = _finite_float(row.get("best_reference_floor_rmse"))
+    best_lambda_max = _finite_float(row.get("best_reference_lambda_max_proxy"))
+    floor_ratio = _finite_float(row.get("frustration_floor_ratio_vs_raw"))
+    max_cycle_lower_bound = _finite_float(row.get("max_cycle_lower_bound"))
+    mean_cycle_lower_bound = _finite_float(row.get("mean_cycle_lower_bound"))
+    cycle_lower_bound_sum = _finite_float(row.get("cycle_lower_bound_sum"))
+    cocycle_defect_mean = _finite_float(row.get("cocycle_defect_mean"))
+    cocycle_defect_max = _finite_float(row.get("cocycle_defect_max"))
+    if best_floor_proxy is not None and best_floor_rmse is not None and best_floor_rmse + 1.0e-12 < best_floor_proxy:
+        errors.append(f"{path}.best_reference_floor_rmse: must dominate best_reference_floor_proxy")
+    if best_lambda_max is not None and not (0.0 - 1.0e-12 <= best_lambda_max <= 1.0 + 1.0e-12):
+        errors.append(f"{path}.best_reference_lambda_max_proxy: must be within [0, 1]")
+    if floor_ratio is not None and not (0.0 - 1.0e-12 <= floor_ratio <= 1.0 + 1.0e-12):
+        errors.append(f"{path}.frustration_floor_ratio_vs_raw: must be within [0, 1]")
+    if max_cycle_lower_bound is not None and mean_cycle_lower_bound is not None and max_cycle_lower_bound + 1.0e-12 < mean_cycle_lower_bound:
+        errors.append(f"{path}.max_cycle_lower_bound: must dominate mean_cycle_lower_bound")
+    if cycle_lower_bound_sum is not None and max_cycle_lower_bound is not None and cycle_lower_bound_sum + 1.0e-12 < max_cycle_lower_bound:
+        errors.append(f"{path}.cycle_lower_bound_sum: must dominate max_cycle_lower_bound")
+    if cocycle_defect_mean is not None and cocycle_defect_max is not None and cocycle_defect_max + 1.0e-12 < cocycle_defect_mean:
+        errors.append(f"{path}.cocycle_defect_max: must dominate cocycle_defect_mean")
+    for key, value in row.items():
+        if isinstance(key, str) and (key.endswith("_lower_bound") or key.endswith("_floor_ratio")):
+            parsed = _finite_float(value)
+            if parsed is None or parsed < -1.0e-12:
+                errors.append(f"{path}.{key}: must be finite nonnegative")
     if row.get("cycle_records_head") is not None and not isinstance(row.get("cycle_records_head"), list):
         errors.append(f"{path}.cycle_records_head: must be list or null")
+    cycle_records = row.get("cycle_records_head")
+    if isinstance(cycle_records, list):
+        for index, record in enumerate(cycle_records):
+            record_path = f"{path}.cycle_records_head[{index}]"
+            if not isinstance(record, dict):
+                errors.append(f"{record_path}: must be object")
+                continue
+            for key in ("cycle_index",):
+                if _nonnegative_int(record.get(key)) is None:
+                    errors.append(f"{record_path}.{key}: must be nonnegative int")
+            dual_norm = _finite_float(record.get("cycle_dual_norm"))
+            if dual_norm is None or dual_norm < -1.0e-12:
+                errors.append(f"{record_path}.cycle_dual_norm: must be finite nonnegative")
+            raw_defect = _finite_float(record.get("cycle_raw_defect"))
+            if raw_defect is None:
+                errors.append(f"{record_path}.cycle_raw_defect: must be finite")
+            cycle_defect = _finite_float(record.get("cycle_defect"))
+            if cycle_defect is None or cycle_defect < -1.0e-12:
+                errors.append(f"{record_path}.cycle_defect: must be finite nonnegative")
+            cycle_lower_bound = _finite_float(record.get("cycle_lower_bound"))
+            if cycle_lower_bound is None or cycle_lower_bound < -1.0e-12:
+                errors.append(f"{record_path}.cycle_lower_bound: must be finite nonnegative")
+            if cycle_defect is not None and cycle_defect > math.pi + 1.0e-12:
+                errors.append(f"{record_path}.cycle_defect: must be at most pi")
 
 
 def main() -> int:
@@ -166,6 +216,36 @@ def main() -> int:
             errors.append("aggregate.processed_rows: must match row count")
         if aggregate.get("wall1_status") not in (None, "unproved"):
             errors.append("aggregate.wall1_status: if present must be 'unproved'")
+        for key in (
+            "cycle_rank_proxy_mean",
+            "mean_cycle_lower_bound_mean",
+            "max_cycle_lower_bound_mean",
+            "frustration_floor_ratio_vs_raw_mean",
+            "best_reference_lambda_max_proxy_mean",
+            "cocycle_defect_mean_mean",
+        ):
+            value = aggregate.get(key)
+            if value is not None and _finite_float(value) is None:
+                errors.append(f"aggregate.{key}: must be finite or null")
+        for key in (
+            "cycle_rank_proxy_mean",
+            "mean_cycle_lower_bound_mean",
+            "max_cycle_lower_bound_mean",
+            "frustration_floor_ratio_vs_raw_mean",
+            "best_reference_lambda_max_proxy_mean",
+            "cocycle_defect_mean_mean",
+        ):
+            value = _finite_float(aggregate.get(key))
+            if value is not None and value < -1.0e-12:
+                errors.append(f"aggregate.{key}: must be nonnegative when present")
+        for key in ("frustration_floor_ratio_vs_raw_mean", "best_reference_lambda_max_proxy_mean"):
+            value = _finite_float(aggregate.get(key))
+            if value is not None and value > 1.0 + 1.0e-12:
+                errors.append(f"aggregate.{key}: must be within [0, 1]")
+        mean_lower = _finite_float(aggregate.get("mean_cycle_lower_bound_mean"))
+        max_lower = _finite_float(aggregate.get("max_cycle_lower_bound_mean"))
+        if mean_lower is not None and max_lower is not None and max_lower + 1.0e-12 < mean_lower:
+            errors.append("aggregate.max_cycle_lower_bound_mean: must dominate mean_cycle_lower_bound_mean")
 
     status = OK_STATUS if not errors else ERROR_STATUS
     receipt = {

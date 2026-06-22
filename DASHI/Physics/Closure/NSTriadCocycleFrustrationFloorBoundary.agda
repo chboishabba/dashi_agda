@@ -8,29 +8,33 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 
 ------------------------------------------------------------------------
--- NS triad cocycle-frustration floor boundary.
+-- NS triad cocycle-frustration floor theorem boundary.
 --
 -- This receipt is intentionally fail-closed. It records the quantitative
 -- cocycle-defect lower-bound target for the active NS triad route together
--- with the empirical irreducible-floor signal. The target statement is:
+-- with the empirical irreducible-floor signal. The active inequality shape is
+-- the candidate lower-bound ledger:
 --
---   F*_N / F^max_N >= c0 > 0
+--   cycle-defect numerator >= c0 * weighted-dual-norm denominator
 --
--- with cycle-defect lower bounds derived from n · ψ on ker(B^T).  Neither the
--- floor target nor the telemetry prove Wall 1, full NS regularity, or Clay.
+-- with a possible independent-cycle aggregation refinement on the numerator
+-- side.  The uniform c0 constant remains open, and neither the floor target
+-- nor the telemetry prove Wall 1, full NS regularity, or Clay.
 
 listLength : {A : Set} → List A → Nat
 listLength [] = zero
 listLength (_ ∷ xs) = suc (listLength xs)
 
 data NSTriadCocycleFrustrationFloorBoundaryRow : Set where
-  cocycleDefectLowerBoundTargetRecorded :
+  cycleDefectLowerBoundShapeRecorded :
+    NSTriadCocycleFrustrationFloorBoundaryRow
+  weightedDualNormDenominatorRecorded :
+    NSTriadCocycleFrustrationFloorBoundaryRow
+  independentCycleAggregationPossibleRecorded :
     NSTriadCocycleFrustrationFloorBoundaryRow
   empiricalIrreducibleFloorSignalRecorded :
     NSTriadCocycleFrustrationFloorBoundaryRow
-  cycleWeightedDualNormTargetRecorded :
-    NSTriadCocycleFrustrationFloorBoundaryRow
-  floorDoesNotYetProveWallOneRecorded :
+  wallOneEntropyBarrierStillOpenRecorded :
     NSTriadCocycleFrustrationFloorBoundaryRow
   failClosedPromotionWallRecorded :
     NSTriadCocycleFrustrationFloorBoundaryRow
@@ -38,10 +42,11 @@ data NSTriadCocycleFrustrationFloorBoundaryRow : Set where
 canonicalNSTriadCocycleFrustrationFloorBoundaryRows :
   List NSTriadCocycleFrustrationFloorBoundaryRow
 canonicalNSTriadCocycleFrustrationFloorBoundaryRows =
-  cocycleDefectLowerBoundTargetRecorded
+  cycleDefectLowerBoundShapeRecorded
+  ∷ weightedDualNormDenominatorRecorded
+  ∷ independentCycleAggregationPossibleRecorded
   ∷ empiricalIrreducibleFloorSignalRecorded
-  ∷ cycleWeightedDualNormTargetRecorded
-  ∷ floorDoesNotYetProveWallOneRecorded
+  ∷ wallOneEntropyBarrierStillOpenRecorded
   ∷ failClosedPromotionWallRecorded
   ∷ []
 
@@ -49,15 +54,15 @@ nstriadCocycleFrustrationFloorBoundaryRowCount : Nat
 nstriadCocycleFrustrationFloorBoundaryRowCount =
   listLength canonicalNSTriadCocycleFrustrationFloorBoundaryRows
 
-nstriadCocycleFrustrationFloorBoundaryRowCountIs5 :
-  nstriadCocycleFrustrationFloorBoundaryRowCount ≡ 5
-nstriadCocycleFrustrationFloorBoundaryRowCountIs5 =
+nstriadCocycleFrustrationFloorBoundaryRowCountIs6 :
+  nstriadCocycleFrustrationFloorBoundaryRowCount ≡ 6
+nstriadCocycleFrustrationFloorBoundaryRowCountIs6 =
   refl
 
 data NSTriadCocycleFrustrationFloorBoundaryGap : Set where
-  uniformCocycleFloorConstantMissing :
+  uniformC0StillOpen :
     NSTriadCocycleFrustrationFloorBoundaryGap
-  enoughDefectiveCyclesMissing :
+  enoughDefectiveCyclesForAggregationStillMissing :
     NSTriadCocycleFrustrationFloorBoundaryGap
   floorToFrameStabilityBridgeMissing :
     NSTriadCocycleFrustrationFloorBoundaryGap
@@ -69,8 +74,8 @@ data NSTriadCocycleFrustrationFloorBoundaryGap : Set where
 canonicalNSTriadCocycleFrustrationFloorBoundaryGaps :
   List NSTriadCocycleFrustrationFloorBoundaryGap
 canonicalNSTriadCocycleFrustrationFloorBoundaryGaps =
-  uniformCocycleFloorConstantMissing
-  ∷ enoughDefectiveCyclesMissing
+  uniformC0StillOpen
+  ∷ enoughDefectiveCyclesForAggregationStillMissing
   ∷ floorToFrameStabilityBridgeMissing
   ∷ wallOneEntropyBarrierStillOpen
   ∷ theoremFullNSClayPromotionClosed
@@ -87,31 +92,31 @@ nstriadCocycleFrustrationFloorBoundaryGapCountIs5 =
 
 canonicalWitnessTerm : String
 canonicalWitnessTerm =
-  "candidate-only witness: cycle defects impose quantitative lower-bound targets, but no uniform cocycle floor theorem is proved"
+  "candidate-only witness: cycle defects impose a quantitative lower-bound shape against a weighted dual-norm denominator, but the uniform c0 theorem remains open"
 
 organizationString : String
 organizationString =
-  "O: record the active NS triad cocycle-frustration floor boundary as a fail-closed Wall 1 receipt."
+  "O: record the active NS triad cocycle-frustration floor theorem boundary as a fail-closed Wall 1 receipt."
 
 requirementString : String
 requirementString =
-  "R: isolate the cycle-defect lower-bound target, the empirical irreducible floor signal, and the explicit non-promotion gates."
+  "R: isolate the cycle-defect lower-bound shape, the weighted dual-norm denominator, the possible independent-cycle aggregation, the empirical irreducible floor signal, and the explicit non-promotion gates."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: export canonical rows, gap rows, ORCSLPGF text, and false promotion flags without external proof imports."
+  "C: export canonical row texts, gap texts, ORCSLPGF text, and false promotion flags without external proof imports."
 
 stateString : String
 stateString =
-  "S: cycle-defect lower bounds are structurally meaningful and the floor is empirically signaled, but the uniform floor theorem remains open."
+  "S: the cycle-defect lower-bound ledger is structurally meaningful and the floor is empirically signaled, but the uniform c0 theorem remains open."
 
 latticeString : String
 latticeString =
-  "L: cycle defects -> quantitative lower-bound target -> cocycle floor target -> floor-to-frame bridge -> only then Wall 1 closure."
+  "L: cycle-defect numerator -> weighted dual-norm denominator -> optional independent-cycle aggregation -> cocycle floor target -> floor-to-frame bridge -> only then Wall 1 closure."
 
 proposalString : String
 proposalString =
-  "P: keep the cocycle-frustration floor as a target boundary and empirical signal, not as a proved theorem."
+  "P: keep the cocycle-frustration floor as a target boundary and empirical signal, not as a proved theorem; uniform c0 stays open."
 
 governanceString : String
 governanceString =
@@ -119,7 +124,7 @@ governanceString =
 
 failString : String
 failString =
-  "F: the missing evidence is a uniform cocycle floor constant and the bridge from floor to frame stability."
+  "F: the missing evidence is a uniform c0 constant, adequate independent-cycle aggregation, and the bridge from floor to frame stability."
 
 record NSTriadCocycleFrustrationFloorBoundaryORCSLPGF : Set where
   constructor mkNSTriadCocycleFrustrationFloorBoundaryORCSLPGF
@@ -205,15 +210,20 @@ record NSTriadCocycleFrustrationFloorBoundary : Setω where
     failClosedIsTrue :
       failClosed ≡ true
 
-    cocycleDefectLowerBoundTargetFlag :
+    cycleDefectLowerBoundShapeFlag :
       Bool
-    cocycleDefectLowerBoundTargetFlagIsTrue :
-      cocycleDefectLowerBoundTargetFlag ≡ true
+    cycleDefectLowerBoundShapeFlagIsTrue :
+      cycleDefectLowerBoundShapeFlag ≡ true
 
     empiricalIrreducibleFloorSignalFlag :
       Bool
     empiricalIrreducibleFloorSignalFlagIsTrue :
       empiricalIrreducibleFloorSignalFlag ≡ true
+
+    independentCycleAggregationPossibleFlag :
+      Bool
+    independentCycleAggregationPossibleFlagIsTrue :
+      independentCycleAggregationPossibleFlag ≡ true
 
     uniformCocycleFloorProved :
       Bool
@@ -249,7 +259,7 @@ record NSTriadCocycleFrustrationFloorBoundary : Setω where
       String
     statementIsCanonical :
       statement ≡
-      "Candidate-only cocycle-frustration floor boundary: lower-bound targets and empirical floor telemetry are recorded, but no uniform floor theorem or Wall 1 closure is promoted."
+      "Candidate-only cocycle-frustration floor theorem boundary: the cycle-defect lower-bound shape, weighted dual-norm denominator, possible independent-cycle aggregation, and empirical floor telemetry are recorded, but no uniform c0 theorem or Wall 1 closure is promoted."
 
 open NSTriadCocycleFrustrationFloorBoundary public
 
@@ -277,6 +287,8 @@ canonicalNSTriadCocycleFrustrationFloorBoundary =
     refl
     true
     refl
+    true
+    refl
     false
     refl
     false
@@ -289,5 +301,5 @@ canonicalNSTriadCocycleFrustrationFloorBoundary =
     refl
     canonicalNSTriadCocycleFrustrationFloorBoundaryORCSLPGF
     refl
-    "Candidate-only cocycle-frustration floor boundary: lower-bound targets and empirical floor telemetry are recorded, but no uniform floor theorem or Wall 1 closure is promoted."
+    "Candidate-only cocycle-frustration floor theorem boundary: the cycle-defect lower-bound shape, weighted dual-norm denominator, possible independent-cycle aggregation, and empirical floor telemetry are recorded, but no uniform c0 theorem or Wall 1 closure is promoted."
     refl

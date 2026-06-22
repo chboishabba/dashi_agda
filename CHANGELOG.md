@@ -328,6 +328,14 @@ monitor surface.
   and fail-closed: it does not promote a full general `(\u2124/p\u2124)^×`
   action, analytic BT/p-adic symmetry dynamics, or any Clay authority.
 
+- Stage12 prime-lane hierarchy update for `2026-06-22`: adds
+  `DASHI.Interop.PrimeLaneStage12ActionAdapter`, wires it through
+  `DASHI.Everything`, and reclassifies the p7 tranche as the first canonical
+  prime-local `C6` / `HexTruth` witness under `Stage12FibreSurface` rather
+  than as a parallel stage spine. The adapter binds the p7 witness to the
+  global `atlas-7`, `atlas-6`, and `atlas-11 / rev-2` Stage12 receipts while
+  preserving candidate-only and fail-closed governance.
+
 - Odd-lane / Möbius / Klein / Hodge / Base369 intake tranche for
   `2026-06-20`: adds `DASHI.Core.SuperPayloadReadingBoundary`,
   `DASHI.Core.OddGrassmannCoefficientGate`,

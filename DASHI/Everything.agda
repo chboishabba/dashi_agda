@@ -294,6 +294,7 @@ import DASHI.Interop.TaoQiReadingAdapter
 import DASHI.Interop.TaoYinYangAdapter
 import DASHI.Interop.YinYangQiAdapter
 import DASHI.Interop.CarryCompletionSpectralBridge
+import DASHI.Interop.PrimeLaneStage12ActionAdapter
 import DASHI.Interop.PolarityPhaseFieldBridge
 import DASHI.Interop.PolarityBettiSupportBoundary
 import DASHI.Interop.BettiQiAdapter
@@ -396,6 +397,7 @@ import DASHI.Physics.Closure.NSStrainTypeIOmegaKPositiveReceipt
 import DASHI.Physics.Closure.NSTriadFrustrationDefectBoundary
 import DASHI.Physics.Closure.NSTriadFrustrationRegression
 import DASHI.Physics.Closure.NSTriadCocycleFrustrationFloorBoundary
+import DASHI.Physics.Closure.NSTriadCycleDefectLowerBoundReceipt
 import DASHI.Physics.Closure.NSTriadEntropyBarrierTheoremBoundary
 import DASHI.Physics.Closure.NSTriadIncidenceCocycleReceipt
 import DASHI.Physics.Closure.NSTriadKernelPhaseCocycleReceipt

@@ -6,6 +6,8 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Algebra.StageQuotient as StageQuotient
+import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Promotion.ExternalTheoremAuthoritySourceLocator as Theorem
 import DASHI.Promotion.SIMetrologyExternalSourceLocator as SI
 
@@ -415,6 +417,25 @@ record ExternalTheoremDownloadedSourceReceipt : Set where
     locatorRow :
       Theorem.ExternalTheoremAuthoritySourceLocatorRow
 
+    stage12FibreSurfaceReceipt :
+      StageQuotient.Stage12FibreSurface
+
+    stage12FibreSurfaceReceiptIsCanonical :
+      stage12FibreSurfaceReceipt ≡
+      Theorem.stage12FibreSurfaceLocatorReference
+
+    stage12FibreSurfaceCarryDepthSeamIsCanonical :
+      StageQuotient.Stage12FibreSurface.carry-depth
+        stage12FibreSurfaceReceipt
+        Atlas.atlas-11
+      ≡
+      Atlas.rev-2
+
+    stage12FibreSurfaceMatchesLocatorRow :
+      stage12FibreSurfaceReceipt ≡
+      Theorem.ExternalTheoremAuthoritySourceLocatorRow.stage12FibreSurfaceReceipt
+        locatorRow
+
     sourceArtifact :
       DownloadedAuthorityArtifact
 
@@ -446,6 +467,14 @@ mkExternalTheoremDownloadedSourceReceipt row artifact =
   record
     { locatorRow =
         row
+    ; stage12FibreSurfaceReceipt =
+        Theorem.stage12FibreSurfaceLocatorReference
+    ; stage12FibreSurfaceReceiptIsCanonical =
+        refl
+    ; stage12FibreSurfaceCarryDepthSeamIsCanonical =
+        Theorem.stage12FibreSurfaceCarryDepthSeamLocatorWitness
+    ; stage12FibreSurfaceMatchesLocatorRow =
+        refl
     ; sourceArtifact =
         artifact
     ; checksumAndAccessDateBound =

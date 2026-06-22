@@ -11,11 +11,11 @@ open import Data.List.Base using (List; []; _∷_)
 -- NS floor-to-frame stability boundary.
 --
 -- This module is a fail-closed receipt for the active NS triad route that
--- separates a scalar cocycle frustration floor from the stronger frame-gap
--- target K_N < 1.  The floor alone does not imply the frame gap.  The extra
--- stratum-distributed curvature requirement is isolated explicitly, the target
--- theorem chain is exposed as canonical ledger data, and all promotions stay
--- false.
+-- separates a quantitative cocycle lower-bound input from the stronger
+-- frame-gap target K_N < 1.  The floor alone does not imply the frame gap.
+-- The distributed-residual/stratum-curvature bridge is isolated explicitly,
+-- the Wall 1 theorem chain is exposed as canonical ledger data, and all
+-- promotions stay false.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -24,13 +24,15 @@ listLength (_ ∷ xs) =
   suc (listLength xs)
 
 data NSFloorToFrameStabilityBoundaryRowKey : Set where
+  quantitativeCocycleLowerBoundInputRecorded :
+    NSFloorToFrameStabilityBoundaryRowKey
   scalarCocycleFrustrationFloorRecorded :
     NSFloorToFrameStabilityBoundaryRowKey
   floorAloneDoesNotImplyFrameGapRecorded :
     NSFloorToFrameStabilityBoundaryRowKey
   frameGapTargetKLessThanOneRecorded :
     NSFloorToFrameStabilityBoundaryRowKey
-  additionalStratumDistributedCurvatureRequirementRecorded :
+  distributedResidualStratumCurvatureBridgeRecorded :
     NSFloorToFrameStabilityBoundaryRowKey
   theoremChainSurfaceExposedRecorded :
     NSFloorToFrameStabilityBoundaryRowKey
@@ -39,16 +41,18 @@ data NSFloorToFrameStabilityBoundaryRowKey : Set where
 
 rowStatement :
   NSFloorToFrameStabilityBoundaryRowKey → String
+rowStatement quantitativeCocycleLowerBoundInputRecorded =
+  "Target: record the quantitative cocycle lower-bound input as the Wall 1 seed."
 rowStatement scalarCocycleFrustrationFloorRecorded =
   "Target: record the scalar cocycle frustration floor as a diagnostic input only."
 rowStatement floorAloneDoesNotImplyFrameGapRecorded =
   "Target: state that the scalar floor alone does not imply a K_N < 1 frame gap."
 rowStatement frameGapTargetKLessThanOneRecorded =
   "Target: keep the K_N < 1 frame-gap objective visible as an open boundary."
-rowStatement additionalStratumDistributedCurvatureRequirementRecorded =
-  "Target: isolate the additional stratum-distributed curvature requirement."
+rowStatement distributedResidualStratumCurvatureBridgeRecorded =
+  "Target: isolate the distributed-residual / stratum-curvature bridge."
 rowStatement theoremChainSurfaceExposedRecorded =
-  "Target: expose the theorem chain from floor to frame gap to curvature to stability."
+  "Target: expose the Wall 1 theorem chain from input to floor to bridge to stability."
 rowStatement failClosedPromotionWallRecorded =
   "Target: keep theorem, full-NS, and Clay promotion walls closed."
 
@@ -65,6 +69,14 @@ canonicalNSFloorToFrameStabilityBoundaryRows :
   List NSFloorToFrameStabilityBoundaryRow
 canonicalNSFloorToFrameStabilityBoundaryRows =
   record
+    { key =
+        quantitativeCocycleLowerBoundInputRecorded
+    ; statement =
+        rowStatement quantitativeCocycleLowerBoundInputRecorded
+    ; statementIsCanonical =
+        refl
+    }
+  ∷ record
     { key =
         scalarCocycleFrustrationFloorRecorded
     ; statement =
@@ -90,9 +102,9 @@ canonicalNSFloorToFrameStabilityBoundaryRows =
     }
   ∷ record
     { key =
-        additionalStratumDistributedCurvatureRequirementRecorded
+        distributedResidualStratumCurvatureBridgeRecorded
     ; statement =
-        rowStatement additionalStratumDistributedCurvatureRequirementRecorded
+        rowStatement distributedResidualStratumCurvatureBridgeRecorded
     ; statementIsCanonical =
         refl
     }
@@ -118,17 +130,19 @@ nSFloorToFrameStabilityBoundaryRowCount : Nat
 nSFloorToFrameStabilityBoundaryRowCount =
   listLength canonicalNSFloorToFrameStabilityBoundaryRows
 
-nSFloorToFrameStabilityBoundaryRowCountIs6 :
-  nSFloorToFrameStabilityBoundaryRowCount ≡ 6
-nSFloorToFrameStabilityBoundaryRowCountIs6 =
+nSFloorToFrameStabilityBoundaryRowCountIs7 :
+  nSFloorToFrameStabilityBoundaryRowCount ≡ 7
+nSFloorToFrameStabilityBoundaryRowCountIs7 =
   refl
 
 data NSFloorToFrameStabilityTheoremChainStep : Set where
+  quantitativeCocycleLowerBoundInputStep :
+    NSFloorToFrameStabilityTheoremChainStep
   scalarCocycleFrustrationFloorStep :
     NSFloorToFrameStabilityTheoremChainStep
   frameGapTargetStep :
     NSFloorToFrameStabilityTheoremChainStep
-  stratumDistributedCurvatureStep :
+  distributedResidualStratumCurvatureBridgeStep :
     NSFloorToFrameStabilityTheoremChainStep
   targetStabilityTheoremStep :
     NSFloorToFrameStabilityTheoremChainStep
@@ -137,14 +151,16 @@ data NSFloorToFrameStabilityTheoremChainStep : Set where
 
 theoremChainStatement :
   NSFloorToFrameStabilityTheoremChainStep → String
+theoremChainStatement quantitativeCocycleLowerBoundInputStep =
+  "Chain step: begin with the quantitative cocycle lower-bound input."
 theoremChainStatement scalarCocycleFrustrationFloorStep =
-  "Chain step: begin with the scalar cocycle frustration floor ledger."
+  "Chain step: record the scalar cocycle frustration floor ledger."
 theoremChainStatement frameGapTargetStep =
   "Chain step: carry the open K_N < 1 frame-gap target forward."
-theoremChainStatement stratumDistributedCurvatureStep =
-  "Chain step: add the extra stratum-distributed curvature requirement."
+theoremChainStatement distributedResidualStratumCurvatureBridgeStep =
+  "Chain step: add the distributed-residual / stratum-curvature bridge."
 theoremChainStatement targetStabilityTheoremStep =
-  "Chain step: expose the stability theorem target only as a target."
+  "Chain step: expose the Wall 1 stability theorem target only as a target."
 theoremChainStatement failClosedPromotionGateStep =
   "Chain step: keep theorem, full-NS, and Clay promotion gates closed."
 
@@ -162,6 +178,14 @@ canonicalNSFloorToFrameStabilityTheoremChainRows :
 canonicalNSFloorToFrameStabilityTheoremChainRows =
   record
     { step =
+        quantitativeCocycleLowerBoundInputStep
+    ; statement =
+        theoremChainStatement quantitativeCocycleLowerBoundInputStep
+    ; statementIsCanonical =
+        refl
+    }
+  ∷ record
+    { step =
         scalarCocycleFrustrationFloorStep
     ; statement =
         theoremChainStatement scalarCocycleFrustrationFloorStep
@@ -178,9 +202,9 @@ canonicalNSFloorToFrameStabilityTheoremChainRows =
     }
   ∷ record
     { step =
-        stratumDistributedCurvatureStep
+        distributedResidualStratumCurvatureBridgeStep
     ; statement =
-        theoremChainStatement stratumDistributedCurvatureStep
+        theoremChainStatement distributedResidualStratumCurvatureBridgeStep
     ; statementIsCanonical =
         refl
     }
@@ -206,15 +230,17 @@ nSFloorToFrameStabilityTheoremChainRowCount : Nat
 nSFloorToFrameStabilityTheoremChainRowCount =
   listLength canonicalNSFloorToFrameStabilityTheoremChainRows
 
-nSFloorToFrameStabilityTheoremChainRowCountIs5 :
-  nSFloorToFrameStabilityTheoremChainRowCount ≡ 5
-nSFloorToFrameStabilityTheoremChainRowCountIs5 =
+nSFloorToFrameStabilityTheoremChainRowCountIs6 :
+  nSFloorToFrameStabilityTheoremChainRowCount ≡ 6
+nSFloorToFrameStabilityTheoremChainRowCountIs6 =
   refl
 
 data NSFloorToFrameStabilityBoundaryGap : Set where
+  quantitativeCocycleLowerBoundBridgeMissing :
+    NSFloorToFrameStabilityBoundaryGap
   scalarFloorDoesNotForceFrameGap :
     NSFloorToFrameStabilityBoundaryGap
-  additionalCurvatureRequirementUnproved :
+  distributedResidualStratumCurvatureBridgeUnproved :
     NSFloorToFrameStabilityBoundaryGap
   frameGapTargetStillOpen :
     NSFloorToFrameStabilityBoundaryGap
@@ -226,8 +252,9 @@ data NSFloorToFrameStabilityBoundaryGap : Set where
 canonicalNSFloorToFrameStabilityBoundaryGaps :
   List NSFloorToFrameStabilityBoundaryGap
 canonicalNSFloorToFrameStabilityBoundaryGaps =
+  quantitativeCocycleLowerBoundBridgeMissing
   scalarFloorDoesNotForceFrameGap
-  ∷ additionalCurvatureRequirementUnproved
+  ∷ distributedResidualStratumCurvatureBridgeUnproved
   ∷ frameGapTargetStillOpen
   ∷ theoremChainClosureStillOpen
   ∷ theoremFullNSClayPromotionClosed
@@ -237,14 +264,14 @@ nSFloorToFrameStabilityBoundaryGapCount : Nat
 nSFloorToFrameStabilityBoundaryGapCount =
   listLength canonicalNSFloorToFrameStabilityBoundaryGaps
 
-nSFloorToFrameStabilityBoundaryGapCountIs5 :
-  nSFloorToFrameStabilityBoundaryGapCount ≡ 5
-nSFloorToFrameStabilityBoundaryGapCountIs5 =
+nSFloorToFrameStabilityBoundaryGapCountIs6 :
+  nSFloorToFrameStabilityBoundaryGapCount ≡ 6
+nSFloorToFrameStabilityBoundaryGapCountIs6 =
   refl
 
 canonicalWitnessTerm : String
 canonicalWitnessTerm =
-  "candidate-only receipt: the scalar cocycle frustration floor is recorded, but it does not imply K_N < 1; the extra stratum-distributed curvature requirement remains open."
+  "candidate-only receipt: the quantitative cocycle lower-bound input and scalar floor are recorded, but they do not imply K_N < 1; the distributed-residual / stratum-curvature bridge remains open."
 
 organizationString : String
 organizationString =
@@ -252,7 +279,7 @@ organizationString =
 
 requirementString : String
 requirementString =
-  "R: record that a scalar cocycle frustration floor alone does not imply a K_N < 1 frame gap, and isolate the extra stratum-distributed curvature requirement."
+  "R: record that the quantitative cocycle lower-bound input and scalar floor still do not imply a K_N < 1 frame gap, and isolate the distributed-residual / stratum-curvature bridge."
 
 codeArtifactString : String
 codeArtifactString =
@@ -260,15 +287,15 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "S: the floor is recorded, the frame gap remains open, the extra curvature layer is isolated, and theorem/full-NS/Clay promotions stay false."
+  "S: the quantitative input and floor are recorded, the frame gap remains open, the distributed-residual / stratum-curvature bridge is isolated, and theorem/full-NS/Clay promotions stay false."
 
 latticeString : String
 latticeString =
-  "L: scalar cocycle frustration floor -> open K_N < 1 frame gap -> stratum-distributed curvature requirement -> target theorem chain -> fail-closed boundary."
+  "L: quantitative cocycle lower-bound input -> scalar cocycle frustration floor -> open K_N < 1 frame gap -> distributed-residual / stratum-curvature bridge -> target theorem chain -> fail-closed boundary."
 
 proposalString : String
 proposalString =
-  "P: keep the floor as a diagnostic input only and promote nothing until the curvature layer is genuinely discharged."
+  "P: keep the quantitative input and floor as diagnostic inputs only and promote nothing until the bridge and curvature layer are genuinely discharged."
 
 governanceString : String
 governanceString =
@@ -276,7 +303,7 @@ governanceString =
 
 failString : String
 failString =
-  "F: the missing evidence is the stratum-distributed curvature control that would bridge the floor to the frame gap."
+  "F: the missing evidence is the quantitative cocycle lower-bound proof chain and the distributed-residual / stratum-curvature control that would bridge the floor to the frame gap."
 
 record NSFloorToFrameStabilityBoundaryORCSLPGF : Set where
   constructor mkNSFloorToFrameStabilityBoundaryORCSLPGF
@@ -349,6 +376,11 @@ record NSFloorToFrameStabilityBoundary : Setω where
     scalarCocycleFrustrationFloorFlagIsTrue :
       scalarCocycleFrustrationFloorFlag ≡ true
 
+    quantitativeCocycleLowerBoundInputFlag :
+      Bool
+    quantitativeCocycleLowerBoundInputFlagIsTrue :
+      quantitativeCocycleLowerBoundInputFlag ≡ true
+
     floorAloneImpliesFrameGap :
       Bool
     floorAloneImpliesFrameGapIsFalse :
@@ -359,15 +391,15 @@ record NSFloorToFrameStabilityBoundary : Setω where
     frameGapTargetRecordedIsTrue :
       frameGapTargetRecorded ≡ true
 
-    additionalStratumDistributedCurvatureRequirementFlag :
+    distributedResidualStratumCurvatureBridgeRecorded :
       Bool
-    additionalStratumDistributedCurvatureRequirementFlagIsTrue :
-      additionalStratumDistributedCurvatureRequirementFlag ≡ true
+    distributedResidualStratumCurvatureBridgeRecordedIsTrue :
+      distributedResidualStratumCurvatureBridgeRecorded ≡ true
 
-    additionalStratumDistributedCurvatureRequirementDischarged :
+    distributedResidualStratumCurvatureBridgeProved :
       Bool
-    additionalStratumDistributedCurvatureRequirementDischargedIsFalse :
-      additionalStratumDistributedCurvatureRequirementDischarged ≡ false
+    distributedResidualStratumCurvatureBridgeProvedIsFalse :
+      distributedResidualStratumCurvatureBridgeProved ≡ false
 
     targetTheoremChainExposed :
       Bool
@@ -425,66 +457,113 @@ record NSFloorToFrameStabilityBoundary : Setω where
       String
     statementIsCanonical :
       statement ≡
-      "Candidate-only floor-to-frame stability boundary: the scalar cocycle frustration floor is recorded, but it does not imply K_N < 1; the extra stratum-distributed curvature requirement remains open and theorem/full-NS/Clay flags stay false."
+      "Candidate-only floor-to-frame stability boundary: the quantitative cocycle lower-bound input and scalar cocycle frustration floor are recorded, but they do not imply K_N < 1; the distributed-residual / stratum-curvature bridge remains open and theorem/full-NS/Clay flags stay false."
 
 open NSFloorToFrameStabilityBoundary public
 
 canonicalNSFloorToFrameStabilityBoundary :
   NSFloorToFrameStabilityBoundary
 canonicalNSFloorToFrameStabilityBoundary =
-  mkNSFloorToFrameStabilityBoundary
-    "NSFloorToFrameStabilityBoundary"
-    refl
-    canonicalWitnessTerm
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    false
-    refl
-    true
-    refl
-    true
-    refl
-    false
-    refl
-    true
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    canonicalNSFloorToFrameStabilityBoundaryORCSLPGF
-    refl
-    canonicalNSFloorToFrameStabilityBoundaryRows
-    refl
-    nSFloorToFrameStabilityBoundaryRowCount
-    refl
-    canonicalNSFloorToFrameStabilityTheoremChainRows
-    refl
-    nSFloorToFrameStabilityTheoremChainRowCount
-    refl
-    canonicalNSFloorToFrameStabilityBoundaryGaps
-    refl
-    nSFloorToFrameStabilityBoundaryGapCount
-    refl
-    "Candidate-only floor-to-frame stability boundary: the scalar cocycle frustration floor is recorded, but it does not imply K_N < 1; the extra stratum-distributed curvature requirement remains open and theorem/full-NS/Clay flags stay false."
-    refl
+  record
+    { receiptName =
+        "NSFloorToFrameStabilityBoundary"
+    ; receiptNameIsCanonical =
+        refl
+    ; witnessTerm =
+        canonicalWitnessTerm
+    ; witnessTermIsCanonical =
+        refl
+    ; candidateOnly =
+        true
+    ; candidateOnlyIsTrue =
+        refl
+    ; failClosed =
+        true
+    ; failClosedIsTrue =
+        refl
+    ; scalarCocycleFrustrationFloorFlag =
+        true
+    ; scalarCocycleFrustrationFloorFlagIsTrue =
+        refl
+    ; quantitativeCocycleLowerBoundInputFlag =
+        true
+    ; quantitativeCocycleLowerBoundInputFlagIsTrue =
+        refl
+    ; floorAloneImpliesFrameGap =
+        false
+    ; floorAloneImpliesFrameGapIsFalse =
+        refl
+    ; frameGapTargetRecorded =
+        true
+    ; frameGapTargetRecordedIsTrue =
+        refl
+    ; distributedResidualStratumCurvatureBridgeRecorded =
+        true
+    ; distributedResidualStratumCurvatureBridgeRecordedIsTrue =
+        refl
+    ; distributedResidualStratumCurvatureBridgeProved =
+        false
+    ; distributedResidualStratumCurvatureBridgeProvedIsFalse =
+        refl
+    ; targetTheoremChainExposed =
+        true
+    ; targetTheoremChainExposedIsTrue =
+        refl
+    ; theoremPromoted =
+        false
+    ; theoremPromotedIsFalse =
+        refl
+    ; fullNSPromoted =
+        false
+    ; fullNSPromotedIsFalse =
+        refl
+    ; clayPromoted =
+        false
+    ; clayPromotedIsFalse =
+        refl
+    ; orcslpgf =
+        canonicalNSFloorToFrameStabilityBoundaryORCSLPGF
+    ; orcslpgfIsCanonical =
+        refl
+    ; rows =
+        canonicalNSFloorToFrameStabilityBoundaryRows
+    ; rowsAreCanonical =
+        refl
+    ; rowCount =
+        nSFloorToFrameStabilityBoundaryRowCount
+    ; rowCountIsCanonical =
+        refl
+    ; theoremChainRows =
+        canonicalNSFloorToFrameStabilityTheoremChainRows
+    ; theoremChainRowsAreCanonical =
+        refl
+    ; theoremChainRowCount =
+        nSFloorToFrameStabilityTheoremChainRowCount
+    ; theoremChainRowCountIsCanonical =
+        refl
+    ; gaps =
+        canonicalNSFloorToFrameStabilityBoundaryGaps
+    ; gapsAreCanonical =
+        refl
+    ; gapCount =
+        nSFloorToFrameStabilityBoundaryGapCount
+    ; gapCountIsCanonical =
+        refl
+    ; statement =
+        "Candidate-only floor-to-frame stability boundary: the quantitative cocycle lower-bound input and scalar cocycle frustration floor are recorded, but they do not imply K_N < 1; the distributed-residual / stratum-curvature bridge remains open and theorem/full-NS/Clay flags stay false."
+    ; statementIsCanonical =
+        refl
+    }
 
 scalarFloorDoesNotImplyFrameGap :
   floorAloneImpliesFrameGap canonicalNSFloorToFrameStabilityBoundary ≡ false
 scalarFloorDoesNotImplyFrameGap =
   refl
 
-additionalCurvatureRequirementStillOpen :
-  additionalStratumDistributedCurvatureRequirementDischarged canonicalNSFloorToFrameStabilityBoundary
+distributedResidualStratumCurvatureBridgeStillOpen :
+  distributedResidualStratumCurvatureBridgeProved canonicalNSFloorToFrameStabilityBoundary
   ≡ false
-additionalCurvatureRequirementStillOpen =
+distributedResidualStratumCurvatureBridgeStillOpen =
   refl
 
 allPromotionsFalse :

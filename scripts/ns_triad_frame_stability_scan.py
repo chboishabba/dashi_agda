@@ -4,8 +4,9 @@
 This producer is candidate-only and fail-closed. It reuses the raw N128 archive
 and the local triad carrier conventions from the orbit/frustration scans, then
 splits resonant triads into positive-backbone and negative-frame families,
-builds finite operator proxies for each family, and adds a stratum-aware
-decomposition proxy from the selected mode shell radii.
+builds finite operator proxies for each family, adds a stratum-aware
+decomposition proxy from the selected mode shell radii, and mirrors the
+cocycle-floor carrier summary when that companion scan is available.
 """
 
 from __future__ import annotations
@@ -45,6 +46,10 @@ DEFAULT_RAW_ARCHIVE = Path(
     "/home/c/Documents/code/dashiCFD/outputs/"
     "sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz"
 )
+DEFAULT_COCYCLE_FLOOR_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_cocycle_floor_scan_N128_20260621.json"
+)
 DEFAULT_OUTPUT_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_frame_stability_scan_N128_20260621.json"
@@ -58,17 +63,19 @@ CONTROL_CARD = {
     "O": "Measure candidate frame-stability telemetry around the selected K_N carrier.",
     "R": (
         "Build positive-backbone and negative-frame triad operator proxies from the selected "
-        "mode carrier, then summarize frame-stability and stratum-aware decomposition signals."
+        "mode carrier, mirror the cocycle-floor lower-bound input when present, then summarize "
+        "frame-stability and stratum-aware decomposition signals."
     ),
     "C": SCRIPT_NAME,
-    "S": "Telemetry only; the carrier, operator family, and stratum proxy are empirical and non-promoting.",
+    "S": "Telemetry only; the carrier, operator family, cocycle-floor mirror, and stratum proxy are empirical and non-promoting.",
     "L": (
         "Load raw frames, select dominant Fourier-vorticity modes, form resonant triads, "
-        "split them into positive-backbone and negative-frame families, and emit operator telemetry."
+        "split them into positive-backbone and negative-frame families, import the cocycle-floor "
+        "carrier summary, and emit operator telemetry."
     ),
     "P": ROUTE_DECISION,
     "G": "No theorem, Clay, or route promotion is inferred from this scan.",
-    "F": "This script records finite operator proxies only; it does not prove any stability or decomposition claim.",
+    "F": "This script records finite operator proxies and mirrored lower-bound inputs only; it does not prove any stability or decomposition claim.",
 }
 
 
@@ -85,9 +92,89 @@ class TriadRecord:
     stratum_profile: tuple[int, int, int]
 
 
+def _coerce_int(value: Any) -> int | None:
+    if value is None or isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return int(value)
+    if isinstance(value, float) and math.isfinite(value) and value.is_integer():
+        return int(value)
+    return None
+
+
+def _coerce_float(value: Any) -> float | None:
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        parsed = float(value)
+    except (TypeError, ValueError):
+        return None
+    return parsed if math.isfinite(parsed) else None
+
+
+def _load_json(path: Path) -> dict[str, Any] | None:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        return None
+    if not isinstance(payload, dict):
+        return None
+    return payload
+
+
+def _rows(payload: dict[str, Any] | None) -> list[dict[str, Any]]:
+    if not isinstance(payload, dict):
+        return []
+    for key in ("rows", "triad_frame_stability_rows"):
+        value = payload.get(key)
+        if isinstance(value, list):
+            return [row for row in value if isinstance(row, dict)]
+    return []
+
+
+def _select_cocycle_floor_carrier(payload: dict[str, Any] | None) -> dict[int, dict[str, Any]]:
+    selected: dict[int, dict[str, Any]] = {}
+    for row in _rows(payload):
+        frame = _coerce_int(row.get("frame"))
+        if frame is None:
+            continue
+        candidate = {
+            "frame": int(frame),
+            "shell": _coerce_int(row.get("shell")),
+            "reference_id": row.get("best_reference_id"),
+            "reference_kind": row.get("best_reference_kind"),
+            "floor_proxy": _coerce_float(row.get("best_reference_floor_proxy")),
+            "floor_ratio_vs_raw": _coerce_float(row.get("frustration_floor_ratio_vs_raw")),
+            "lambda_max_proxy": _coerce_float(row.get("best_reference_lambda_max_proxy")),
+            "mean_cycle_lower_bound": _coerce_float(row.get("mean_cycle_lower_bound")),
+            "mean_cycle_lower_bound_normalized": _coerce_float(row.get("cycle_lower_bound_normalized_mean")),
+        }
+        existing = selected.get(int(frame))
+        if existing is None:
+            selected[int(frame)] = candidate
+            continue
+        existing_floor = existing.get("floor_proxy")
+        candidate_floor = candidate.get("floor_proxy")
+        existing_lambda = existing.get("lambda_max_proxy")
+        candidate_lambda = candidate.get("lambda_max_proxy")
+        better = False
+        if candidate_floor is not None and existing_floor is not None:
+            better = candidate_floor < existing_floor or (
+                candidate_floor == existing_floor
+                and candidate_lambda is not None
+                and (existing_lambda is None or candidate_lambda > existing_lambda)
+            )
+        elif candidate_floor is not None and existing_floor is None:
+            better = True
+        if better:
+            selected[int(frame)] = candidate
+    return selected
+
+
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--raw-archive", type=Path, default=DEFAULT_RAW_ARCHIVE)
+    parser.add_argument("--cocycle-floor-json", type=Path, default=DEFAULT_COCYCLE_FLOOR_JSON)
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT_JSON)
     parser.add_argument("--frame", type=int, default=None)
     parser.add_argument("--frame-limit", type=int, default=None)
@@ -531,6 +618,7 @@ def _evaluate_frame(
     slot: int,
     snapshot: int,
     bundle: Any,
+    cocycle_floor_record: dict[str, Any] | None,
     top_k: int,
     pool_multiplier: int,
     zero_eps: float,
@@ -545,6 +633,7 @@ def _evaluate_frame(
         "pool_multiplier": int(pool_multiplier),
         "zero_eps": float(zero_eps),
         "triad_sample_limit": int(triad_sample_limit),
+        "cocycle_floor_input_available": bool(cocycle_floor_record is not None),
         "operator_family": "K_N",
         "route_mode": "fail-closed",
         "fail_closed": True,
@@ -606,6 +695,15 @@ def _evaluate_frame(
             "stratum_balance_entropy_normalized": float(metrics["stratum_balance_entropy_normalized"]),
             "triad_profile_entropy_normalized": float(metrics["triad_profile_entropy_normalized"]),
             "stratum_decomposition_proxy": float(metrics["stratum_decomposition_proxy"]),
+            "cocycle_floor_input_available": bool(cocycle_floor_record is not None),
+            "cocycle_floor_selected_shell": int(cocycle_floor_record["shell"]) if cocycle_floor_record and cocycle_floor_record.get("shell") is not None else None,
+            "cocycle_floor_selected_reference_id": cocycle_floor_record.get("reference_id") if cocycle_floor_record else None,
+            "cocycle_floor_selected_reference_kind": cocycle_floor_record.get("reference_kind") if cocycle_floor_record else None,
+            "cocycle_floor_selected_floor_proxy": float(cocycle_floor_record["floor_proxy"]) if cocycle_floor_record and cocycle_floor_record.get("floor_proxy") is not None else None,
+            "cocycle_floor_selected_floor_ratio_vs_raw": float(cocycle_floor_record["floor_ratio_vs_raw"]) if cocycle_floor_record and cocycle_floor_record.get("floor_ratio_vs_raw") is not None else None,
+            "cocycle_floor_selected_lambda_max_proxy": float(cocycle_floor_record["lambda_max_proxy"]) if cocycle_floor_record and cocycle_floor_record.get("lambda_max_proxy") is not None else None,
+            "cocycle_floor_selected_mean_cycle_lower_bound": float(cocycle_floor_record["mean_cycle_lower_bound"]) if cocycle_floor_record and cocycle_floor_record.get("mean_cycle_lower_bound") is not None else None,
+            "cocycle_floor_selected_mean_cycle_lower_bound_normalized": float(cocycle_floor_record["mean_cycle_lower_bound_normalized"]) if cocycle_floor_record and cocycle_floor_record.get("mean_cycle_lower_bound_normalized") is not None else None,
             "stratum_records": list(metrics["stratum_records"]),
             "triad_samples": list(metrics["triad_samples"]),
         }
@@ -620,6 +718,8 @@ def _evaluate_frame(
         warnings.append("negative-frame operator has no positive spectral-gap proxy")
     if float(metrics["carrier_stratum_count"]) <= 1:
         warnings.append("stratum-aware decomposition collapsed to a single stratum")
+    if cocycle_floor_record is None:
+        warnings.append("no matching cocycle-floor carrier summary found for this frame")
     if warnings:
         row["status"] = PARTIAL_STATUS
         row["warnings"] = warnings
@@ -656,6 +756,11 @@ def _aggregate_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
     series_gap_ratio = _series("backbone_vs_negative_gap_ratio")
     series_shell_mean = _series("triad_shell_spread_mean")
     series_shell_p95 = _series("triad_shell_spread_p95")
+    series_cocycle_floor = _series("cocycle_floor_selected_floor_proxy")
+    series_cocycle_floor_ratio = _series("cocycle_floor_selected_floor_ratio_vs_raw")
+    series_cocycle_lambda_max = _series("cocycle_floor_selected_lambda_max_proxy")
+    series_cocycle_cycle_lower_bound = _series("cocycle_floor_selected_mean_cycle_lower_bound")
+    series_cocycle_cycle_lower_bound_normalized = _series("cocycle_floor_selected_mean_cycle_lower_bound_normalized")
 
     return {
         "processed_frames": len(rows),
@@ -684,6 +789,11 @@ def _aggregate_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "positive_backbone_vs_negative_frame_gap_ratio_mean": float(np.mean(series_gap_ratio)) if series_gap_ratio else 0.0,
         "triad_shell_spread_mean": float(np.mean(series_shell_mean)) if series_shell_mean else 0.0,
         "triad_shell_spread_p95_mean": float(np.mean(series_shell_p95)) if series_shell_p95 else 0.0,
+        "cocycle_floor_selected_floor_proxy_mean": float(np.mean(series_cocycle_floor)) if series_cocycle_floor else 0.0,
+        "cocycle_floor_selected_floor_ratio_vs_raw_mean": float(np.mean(series_cocycle_floor_ratio)) if series_cocycle_floor_ratio else 0.0,
+        "cocycle_floor_selected_lambda_max_proxy_mean": float(np.mean(series_cocycle_lambda_max)) if series_cocycle_lambda_max else 0.0,
+        "cocycle_floor_selected_mean_cycle_lower_bound_mean": float(np.mean(series_cocycle_cycle_lower_bound)) if series_cocycle_cycle_lower_bound else 0.0,
+        "cocycle_floor_selected_mean_cycle_lower_bound_normalized_mean": float(np.mean(series_cocycle_cycle_lower_bound_normalized)) if series_cocycle_cycle_lower_bound_normalized else 0.0,
         "frame_stability_vs_negative_mass_correlation": _pearson(
             series_frame_stability,
             series_negative_ratio,
@@ -691,6 +801,18 @@ def _aggregate_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "frame_stability_vs_decomposition_correlation": _pearson(
             series_frame_stability,
             series_stratum_decomposition,
+        ),
+        "frame_stability_vs_cocycle_floor_correlation": _pearson(
+            series_frame_stability,
+            series_cocycle_floor,
+        ),
+        "frame_margin_vs_cocycle_floor_correlation": _pearson(
+            series_frame_margin,
+            series_cocycle_floor,
+        ),
+        "frame_margin_vs_cocycle_floor_normalized_lower_bound_correlation": _pearson(
+            series_frame_margin,
+            series_cocycle_cycle_lower_bound_normalized,
         ),
         "backbone_gap_vs_negative_gap_correlation": _pearson(
             series_positive_gap,
@@ -706,6 +828,9 @@ def _aggregate_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
 def main() -> int:
     args = _parse_args()
     warnings: list[str] = []
+    cocycle_payload = _load_json(Path(args.cocycle_floor_json))
+    if cocycle_payload is None:
+        warnings.append(f"missing or invalid cocycle floor json: {args.cocycle_floor_json}")
     try:
         bundle = _load_raw_bundle(Path(args.raw_archive), warnings)
     except Exception as exc:  # noqa: BLE001
@@ -725,6 +850,7 @@ def main() -> int:
             "warnings": warnings,
             "inputs": {
                 "raw_archive": str(args.raw_archive),
+                "cocycle_floor_json": str(args.cocycle_floor_json),
                 "output_json": str(args.output_json),
             },
             "parameters": {
@@ -760,6 +886,7 @@ def main() -> int:
             "warnings": warnings,
             "inputs": {
                 "raw_archive": str(args.raw_archive),
+                "cocycle_floor_json": str(args.cocycle_floor_json),
                 "output_json": str(args.output_json),
             },
             "parameters": {
@@ -779,11 +906,13 @@ def main() -> int:
 
     rows: list[dict[str, Any]] = []
     counts = {OK_STATUS: 0, PARTIAL_STATUS: 0, ERROR_STATUS: 0}
+    cocycle_floor_by_frame = _select_cocycle_floor_carrier(cocycle_payload)
     for slot in slots:
         status, row = _evaluate_frame(
             slot=slot,
             snapshot=slot,
             bundle=bundle,
+            cocycle_floor_record=cocycle_floor_by_frame.get(int(slot)),
             top_k=int(args.top_k),
             pool_multiplier=int(args.pool_multiplier),
             zero_eps=float(args.zero_eps),
@@ -811,6 +940,7 @@ def main() -> int:
         "ok": status == OK_STATUS,
         "inputs": {
             "raw_archive": str(args.raw_archive),
+            "cocycle_floor_json": str(args.cocycle_floor_json),
             "output_json": str(args.output_json),
             "frame": args.frame,
             "frame_limit": args.frame_limit,
