@@ -10,19 +10,18 @@ open import Base369 using (tri-high; tri-low)
 open import LogicTlurey using (overflow; resonance)
 
 import DASHI.Algebra.StageQuotient as StageQuotient
-import DASHI.Interop.PrimeSuccessorWitness as Successor
-import DASHI.Foundations.P7UnitGroupC6Witness as P7C6
+import DASHI.Foundations.PrimeLaneUnitActionQuotient as Quotient
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
-import DASHI.Physics.Closure.P7Stage7C6HexRegression as P7Regression
+import DASHI.Interop.PrimeSuccessorWitness as Successor
+import DASHI.Physics.Closure.SSPPrimeLane369PhaseBridge as Phase
 
 ------------------------------------------------------------------------
 -- Prime-lane adapters into the global Stage12 fibre atlas.
 --
--- Stage12FibreSurface is now the general stage/carry/fibre grammar.
--- Prime-local unit-action lanes plug into that atlas through adapter rows.
--- The p7 tranche is the first clean worked exemplar: it witnesses the
--- Stage-7 identity placement, the Stage-6 unit-order placement, and the
--- atlas-11 carry-depth seam without claiming that p7 defines the stage spine.
+-- Stage12FibreSurface is the global stage/carry/fibre grammar.
+-- Prime-local quotient-action lanes plug into that atlas through adapter rows.
+-- The shared surface is now generic enough that both p7 and p11 consume the
+-- same adapter contract rather than leaving the Stage12 route p7-only.
 
 record PrimeLaneStage12ActionAuthorityBits : Set where
   field
@@ -73,42 +72,72 @@ record PrimeLaneStage12ActionAdapter : Set where
       StageQuotient.Stage12FibreSurface
     stage12FibreSurfaceIsCanonical :
       stage12FibreSurface ≡ StageQuotient.canonicalStage12FibreSurface
+    quotientSurface :
+      Quotient.PrimeLaneUnitActionQuotientSurface
     successorWitness :
       Successor.PrimeSuccessorWitness
-    successorWitnessIsCanonical :
-      successorWitness ≡ Successor.canonicalP7PrimeSuccessorWitness
+    quotientPrimeMatchesSuccessorWitness :
+      Quotient.primeIdentity quotientSurface
+      ≡
+      Successor.witnessPrime successorWitness
     stageWindowWitness :
       Successor.StageSuccessorWitness
-    stageWindowWitnessIsCanonical :
-      stageWindowWitness ≡ Successor.canonicalStage6SuccessorWitness
+    stageWindowWitnessMatchesSuccessorWitness :
+      Successor.stage stageWindowWitness
+      ≡
+      Successor.stageWitnessed successorWitness
+    stageWindowProjectedWitnessMatchesPrime :
+      Successor.projectedWitnessPoint stageWindowWitness
+      ≡
+      Successor.primeLaneStagePoint successorWitness
     successorField0To111 :
       Successor.StageWindowSuccessorField
     successorField0To111IsCanonical :
       successorField0To111 ≡ Successor.canonicalStage0To111SuccessorField
     stageIdentityPoint :
       Atlas.StageAtlasZeroToEleven
-    stageIdentityPointIsAtlas7 :
-      stageIdentityPoint ≡ Atlas.atlas-7
+    stageIdentityPointMatchesSuccessorWitness :
+      stageIdentityPoint ≡ Successor.primeLaneStagePoint successorWitness
+    stageIdentityPointMatchesPhaseBridge :
+      stageIdentityPoint ≡
+      Phase.primeIdentityStage (Quotient.phaseBridge quotientSurface)
     stageIdentityResidue :
-      StageQuotient.Stage12FibreSurface.residue stage12FibreSurface stageIdentityPoint
-      ≡ overflow
+      StageQuotient.Stage12FibreSurface.residue
+        stage12FibreSurface
+        stageIdentityPoint
+      ≡
+      Successor.primeLaneResidue successorWitness
     stageIdentityTone :
-      StageQuotient.Stage12FibreSurface.quotient stage12FibreSurface stageIdentityPoint
-      ≡ tri-low
+      StageQuotient.Stage12FibreSurface.quotient
+        stage12FibreSurface
+        stageIdentityPoint
+      ≡
+      Successor.primeLaneTone successorWitness
     unitActionOrder :
       Nat
-    unitActionOrderIs6 :
-      unitActionOrder ≡ 6
+    unitActionOrderMatchesSuccessorWitness :
+      unitActionOrder ≡ Successor.witnessSpaceOrder successorWitness
+    unitActionOrderMatchesPhaseBridge :
+      unitActionOrder ≡ Phase.unitOrder (Quotient.phaseBridge quotientSurface)
     unitOrderStagePoint :
       Atlas.StageAtlasZeroToEleven
-    unitOrderStagePointIsAtlas6 :
-      unitOrderStagePoint ≡ Atlas.atlas-6
+    unitOrderStagePointMatchesSuccessorWitness :
+      unitOrderStagePoint ≡ Successor.witnessSpaceStagePoint successorWitness
+    unitOrderStagePointMatchesPhaseBridge :
+      unitOrderStagePoint ≡
+      Phase.unitOrderStage (Quotient.phaseBridge quotientSurface)
     unitOrderResidue :
-      StageQuotient.Stage12FibreSurface.residue stage12FibreSurface unitOrderStagePoint
-      ≡ resonance
+      StageQuotient.Stage12FibreSurface.residue
+        stage12FibreSurface
+        unitOrderStagePoint
+      ≡
+      Successor.witnessSpaceResidue successorWitness
     unitOrderTone :
-      StageQuotient.Stage12FibreSurface.quotient stage12FibreSurface unitOrderStagePoint
-      ≡ tri-high
+      StageQuotient.Stage12FibreSurface.quotient
+        stage12FibreSurface
+        unitOrderStagePoint
+      ≡
+      Successor.witnessSpaceTone successorWitness
     carryDepthSeamPoint :
       Atlas.StageAtlasZeroToEleven
     carryDepthSeamPointIsAtlas11 :
@@ -119,14 +148,6 @@ record PrimeLaneStage12ActionAdapter : Set where
         carryDepthSeamPoint
       ≡
       Atlas.rev-2
-    localRegression :
-      P7Regression.P7Stage7C6HexRegression
-    localRegressionStage7Witness :
-      P7C6.p7IdentityStageIsStage7 ≡ refl
-    localRegressionStage6Witness :
-      P7C6.p7UnitStageIsStage6 ≡ refl
-    localRegressionMobiusWitness :
-      P7C6.p7GeneratorCubedIsMobius ≡ refl
     authorityBits :
       PrimeLaneStage12ActionAuthorityBits
     notes :
@@ -147,13 +168,17 @@ canonicalP7PrimeLaneStage12ActionAdapter =
         StageQuotient.canonicalStage12FibreSurface
     ; stage12FibreSurfaceIsCanonical =
         refl
+    ; quotientSurface =
+        Quotient.p7C6PrimeLaneUnitActionQuotientSurface
     ; successorWitness =
         Successor.canonicalP7PrimeSuccessorWitness
-    ; successorWitnessIsCanonical =
+    ; quotientPrimeMatchesSuccessorWitness =
         refl
     ; stageWindowWitness =
         Successor.canonicalStage6SuccessorWitness
-    ; stageWindowWitnessIsCanonical =
+    ; stageWindowWitnessMatchesSuccessorWitness =
+        refl
+    ; stageWindowProjectedWitnessMatchesPrime =
         refl
     ; successorField0To111 =
         Successor.canonicalStage0To111SuccessorField
@@ -161,7 +186,9 @@ canonicalP7PrimeLaneStage12ActionAdapter =
         refl
     ; stageIdentityPoint =
         Atlas.atlas-7
-    ; stageIdentityPointIsAtlas7 =
+    ; stageIdentityPointMatchesSuccessorWitness =
+        refl
+    ; stageIdentityPointMatchesPhaseBridge =
         refl
     ; stageIdentityResidue =
         refl
@@ -169,11 +196,15 @@ canonicalP7PrimeLaneStage12ActionAdapter =
         refl
     ; unitActionOrder =
         6
-    ; unitActionOrderIs6 =
+    ; unitActionOrderMatchesSuccessorWitness =
+        refl
+    ; unitActionOrderMatchesPhaseBridge =
         refl
     ; unitOrderStagePoint =
         Atlas.atlas-6
-    ; unitOrderStagePointIsAtlas6 =
+    ; unitOrderStagePointMatchesSuccessorWitness =
+        refl
+    ; unitOrderStagePointMatchesPhaseBridge =
         refl
     ; unitOrderResidue =
         refl
@@ -185,22 +216,89 @@ canonicalP7PrimeLaneStage12ActionAdapter =
         refl
     ; carryDepthSeam =
         refl
-    ; localRegression =
-        P7Regression.canonicalP7Stage7C6HexRegression
-    ; localRegressionStage7Witness =
+    ; authorityBits =
+        canonicalPrimeLaneStage12ActionAuthorityBits
+    ; notes =
+        "Stage12FibreSurface is the global stage/carry/fibre grammar; p7 consumes it through the shared prime-lane adapter contract."
+      ∷ "The prime-successor rule is explicit here: 6-action ecology +1 = 7-prime lane."
+      ∷ "The p7 row remains the first canonical C6/HexTruth local witness under Stage12 rather than a replacement for the stage spine."
+      ∷ "atlas-11/rev-2 remains the global carry-depth seam and is not reducible to the p7 lane."
+      ∷ []
+    }
+
+canonicalP11PrimeLaneStage12ActionAdapter :
+  PrimeLaneStage12ActionAdapter
+canonicalP11PrimeLaneStage12ActionAdapter =
+  record
+    { primeLaneLabel =
+        "p11"
+    ; unitGroupLabel =
+        "(Z/11Z)^x ~= C10"
+    ; stage12FibreSurface =
+        StageQuotient.canonicalStage12FibreSurface
+    ; stage12FibreSurfaceIsCanonical =
         refl
-    ; localRegressionStage6Witness =
+    ; quotientSurface =
+        Quotient.p11C10PrimeLaneUnitActionQuotientSurface
+    ; successorWitness =
+        Successor.canonicalP11PrimeSuccessorWitness
+    ; quotientPrimeMatchesSuccessorWitness =
         refl
-    ; localRegressionMobiusWitness =
+    ; stageWindowWitness =
+        Successor.canonicalStage10SuccessorWitness
+    ; stageWindowWitnessMatchesSuccessorWitness =
+        refl
+    ; stageWindowProjectedWitnessMatchesPrime =
+        refl
+    ; successorField0To111 =
+        Successor.canonicalStage0To111SuccessorField
+    ; successorField0To111IsCanonical =
+        refl
+    ; stageIdentityPoint =
+        Atlas.atlas-11
+    ; stageIdentityPointMatchesSuccessorWitness =
+        refl
+    ; stageIdentityPointMatchesPhaseBridge =
+        refl
+    ; stageIdentityResidue =
+        refl
+    ; stageIdentityTone =
+        refl
+    ; unitActionOrder =
+        10
+    ; unitActionOrderMatchesSuccessorWitness =
+        refl
+    ; unitActionOrderMatchesPhaseBridge =
+        refl
+    ; unitOrderStagePoint =
+        Atlas.atlas-10
+    ; unitOrderStagePointMatchesSuccessorWitness =
+        refl
+    ; unitOrderStagePointMatchesPhaseBridge =
+        refl
+    ; unitOrderResidue =
+        refl
+    ; unitOrderTone =
+        refl
+    ; carryDepthSeamPoint =
+        Atlas.atlas-11
+    ; carryDepthSeamPointIsAtlas11 =
+        refl
+    ; carryDepthSeam =
         refl
     ; authorityBits =
         canonicalPrimeLaneStage12ActionAuthorityBits
     ; notes =
-        "Stage12FibreSurface is now the general stage/carry/fibre grammar; prime lanes are local unit-action adapters into it."
-      ∷ "The prime-successor rule is explicit here: 6-action ecology +1 = 7-prime lane."
-      ∷ "The p7 row is also the stage-6 successor witness inside the full 0..11 table, not a replacement for that table."
-      ∷ "The same p7 row now sits inside the widened 0..111 witness field whose final seam is 111 -> 112 = 2^4 * 7."
-      ∷ "The p7 lane is the first canonical C6/HexTruth local witness: Stage-7 is its identity placement and Stage-6 is its unit-order placement."
-      ∷ "atlas-11/rev-2 remains the more global carry-depth seam and is not reducible to the p7 lane."
+        "Stage12FibreSurface is the global stage/carry/fibre grammar; p11 now consumes the same adapter contract as p7."
+      ∷ "The prime-successor rule is explicit here: 10-cycle witness-space +1 = 11-prime lane."
+      ∷ "The p11 row records Stage-11 identity placement and Stage-10 unit-order placement without claiming that p11 defines the stage spine."
+      ∷ "atlas-11/rev-2 remains the shared carry-depth seam, so p11 joins the same global Stage12 route instead of a parallel one."
       ∷ []
     }
+
+canonicalPrimeLaneStage12ActionAdapters :
+  List PrimeLaneStage12ActionAdapter
+canonicalPrimeLaneStage12ActionAdapters =
+  canonicalP7PrimeLaneStage12ActionAdapter
+  ∷ canonicalP11PrimeLaneStage12ActionAdapter
+  ∷ []

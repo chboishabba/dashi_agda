@@ -117,12 +117,19 @@ equivariance receipts, and one compact regression surface tying those
 receipts together. This remains candidate-only and fail-closed: it is a
 typed p7 exemplar, not a promoted general `(\u2124/p\u2124)^×` action theorem
 or analytic BT/p-adic authority surface.
-`DASHI.Interop.PrimeLaneStage12ActionAdapter` makes the corrected hierarchy
-explicit: `Stage12FibreSurface` is the global stage/carry/fibre grammar,
-prime lanes are local unit-action adapters into it, and
-`P7Stage7C6HexRegression` is the first canonical local witness. Future prime
-lanes should route through the same Stage12 surface rather than inventing
-parallel stage semantics.
+`DASHI.Interop.PrimeLaneStage12ActionAdapter` now carries the shared adapter
+contract directly: `Stage12FibreSurface` is the global stage/carry/fibre
+grammar, prime lanes are local unit-action adapters into it, and both `p7`
+and `p11` now consume that same contract through canonical rows. The
+follow-on interop consumers
+`DASHI.Interop.P7PrimeLaneStage12ActionBridge`,
+`DASHI.Interop.P11PrimeLaneStage12ActionBridge`,
+`DASHI.Interop.PrimeLaneStage12ActionAdapterRegistry`,
+`DASHI.Interop.PrimeLaneStage12ActionCarryBridge`,
+`DASHI.Interop.PrimeLaneStage12ActionSuccessorBridge`, and
+`DASHI.Interop.PrimeLaneStage12ActionRegression` keep that route normalized:
+`p7` remains the first clean local exemplar, but `p11` now follows the same
+Stage12 adapter story instead of sitting beside it.
 `DASHI.Interop.PrimeSuccessorWitness` now makes the cleaner `p - 1` / `+1`
 number-theoretic rule explicit: `p` is the new prime lane, `p - 1` is the
 witness-space that proves what `p` can act on, and `+1` is the successor move
