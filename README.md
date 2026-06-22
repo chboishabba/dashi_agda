@@ -163,6 +163,24 @@ The sharp repo-level reading for the current window is:
 `11 -> 12` manifold composite witness,
 and `12 -> 13` the full Stage12 prime witness.
 
+The same rule now scales to `0..111` through the typed
+`canonicalStage0To111SuccessorField`. The immediate witness of stage `n`
+remains `n + 1`, but the wider window crosses two decimal carry layers:
+`0..9` is the first visible decimal cycle, `10..99` is the first carried
+layer, and `100..111` is the beginning of the second carried layer. The
+field-level summary is:
+
+- `111 = 100 + 10 + 1 = j2 + j1 + j0`
+- `111 -> 112 = 2^4 * 7`
+- `0..111` has size `112 = 2^4 * 7`
+- `0..111` therefore contains `nine full Stage12 blocks plus a four-stage overflow: 108..111`
+
+This means the whole `0..111` window is not just a longer list. It is a
+`112`-stage witness field whose size already factors as fourth-depth binary
+carry recursion coupled to the `p7` / `HexTruth` lane. The most important
+highlight seams are `99 -> 100 = 2^2 * 5^2`, `109 -> 110 = 2 * 5 * 11`,
+`110 -> 111 = 3 * 37`, and `111 -> 112 = 2^4 * 7`.
+
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL
 `https://chatgpt.com/c/6a2e6b6c-f4b0-83ec-b233-126757c70248` into canonical

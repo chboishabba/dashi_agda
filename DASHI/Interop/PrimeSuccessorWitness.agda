@@ -532,6 +532,279 @@ canonicalStageSuccessorWitnesses =
   ∷ canonicalStage11SuccessorWitness
   ∷ []
 
+record WindowWitnessHighlight : Set where
+  field
+    stage : Nat
+    witness : Nat
+    successorLaw : witness ≡ suc stage
+    witnessKind : WitnessKind
+    factorLabels : List String
+    interpretation : List String
+
+record CarryLayerSummary : Set where
+  field
+    layerLabel : String
+    layerStart : Nat
+    layerEnd : Nat
+    interpretation : List String
+
+record StageWindowSuccessorField : Set where
+  field
+    startStage : Nat
+    endStage : Nat
+    windowSize : Nat
+    finalStageWitness : WindowWitnessHighlight
+    windowSizeMatchesFinalWitness :
+      windowSize ≡ WindowWitnessHighlight.witness finalStageWitness
+    primeWitnessedStages : List Nat
+    primeWitnesses : List Nat
+    primePowerWitnesses : List WindowWitnessHighlight
+    compositeCouplingWitnesses : List WindowWitnessHighlight
+    decimalCarryLayers : List CarryLayerSummary
+    interpretation : List String
+    authorityBits : PrimeSuccessorWitnessAuthorityBits
+
+open WindowWitnessHighlight public
+open CarryLayerSummary public
+open StageWindowSuccessorField public
+
+canonicalStage15SuccessorWitness : WindowWitnessHighlight
+canonicalStage15SuccessorWitness =
+  record
+    { stage = 15
+    ; witness = 16
+    ; successorLaw = refl
+    ; witnessKind = primePowerDepthWitness
+    ; factorLabels = "2^4" ∷ "v2=4" ∷ []
+    ; interpretation =
+        "15 is witnessed by 16 = 2^4, a fourth-depth dyadic witness."
+      ∷ "This is the next pure 2-adic depth witness after 7 -> 8 = 2^3."
+      ∷ []
+    }
+
+canonicalStage24SuccessorWitness : WindowWitnessHighlight
+canonicalStage24SuccessorWitness =
+  record
+    { stage = 24
+    ; witness = 25
+    ; successorLaw = refl
+    ; witnessKind = primePowerDepthWitness
+    ; factorLabels = "5^2" ∷ "v5=2" ∷ []
+    ; interpretation =
+        "24 is witnessed by 25 = 5^2, a second-depth p5 decision witness."
+      ∷ []
+    }
+
+canonicalStage26SuccessorWitness : WindowWitnessHighlight
+canonicalStage26SuccessorWitness =
+  record
+    { stage = 26
+    ; witness = 27
+    ; successorLaw = refl
+    ; witnessKind = primePowerDepthWitness
+    ; factorLabels = "3^3" ∷ "v3=3" ∷ []
+    ; interpretation =
+        "26 is witnessed by 27 = 3^3, a third-depth triadic refinement witness."
+      ∷ []
+    }
+
+canonicalStage31SuccessorWitness : WindowWitnessHighlight
+canonicalStage31SuccessorWitness =
+  record
+    { stage = 31
+    ; witness = 32
+    ; successorLaw = refl
+    ; witnessKind = primePowerDepthWitness
+    ; factorLabels = "2^5" ∷ "v2=5" ∷ []
+    ; interpretation =
+        "31 is witnessed by 32 = 2^5, extending the dyadic carry-depth ladder."
+      ∷ []
+    }
+
+canonicalStage48SuccessorWitness : WindowWitnessHighlight
+canonicalStage48SuccessorWitness =
+  record
+    { stage = 48
+    ; witness = 49
+    ; successorLaw = refl
+    ; witnessKind = primePowerDepthWitness
+    ; factorLabels = "7^2" ∷ "v7=2" ∷ []
+    ; interpretation =
+        "48 is witnessed by 49 = 7^2, a second-depth p7 / HexTruth witness."
+      ∷ []
+    }
+
+canonicalStage63SuccessorWitness : WindowWitnessHighlight
+canonicalStage63SuccessorWitness =
+  record
+    { stage = 63
+    ; witness = 64
+    ; successorLaw = refl
+    ; witnessKind = primePowerDepthWitness
+    ; factorLabels = "2^6" ∷ "v2=6" ∷ []
+    ; interpretation =
+        "63 is witnessed by 64 = 2^6, a sixth-depth dyadic witness."
+      ∷ []
+    }
+
+canonicalStage80SuccessorWitness : WindowWitnessHighlight
+canonicalStage80SuccessorWitness =
+  record
+    { stage = 80
+    ; witness = 81
+    ; successorLaw = refl
+    ; witnessKind = primePowerDepthWitness
+    ; factorLabels = "3^4" ∷ "v3=4" ∷ []
+    ; interpretation =
+        "80 is witnessed by 81 = 3^4, a fourth-depth triadic refinement witness."
+      ∷ []
+    }
+
+canonicalStage99SuccessorWitness : WindowWitnessHighlight
+canonicalStage99SuccessorWitness =
+  record
+    { stage = 99
+    ; witness = 100
+    ; successorLaw = refl
+    ; witnessKind = compositeCouplingWitness
+    ; factorLabels = "2^2" ∷ "5^2" ∷ "10^2" ∷ []
+    ; interpretation =
+        "99 is witnessed by 100 = 2^2 * 5^2, the squared decimal carry body."
+      ∷ "99 -> 100 is the second decimal carry seam, not merely another 10."
+      ∷ []
+    }
+
+canonicalStage109SuccessorWitness : WindowWitnessHighlight
+canonicalStage109SuccessorWitness =
+  record
+    { stage = 109
+    ; witness = 110
+    ; successorLaw = refl
+    ; witnessKind = compositeCouplingWitness
+    ; factorLabels = "2" ∷ "5" ∷ "11" ∷ []
+    ; interpretation =
+        "109 is witnessed by 110 = 2 * 5 * 11, a pre-111 coupling seam."
+      ∷ "110 couples dyadic carry, p5 decision, and the p11 10-cycle witness."
+      ∷ []
+    }
+
+canonicalStage110SuccessorWitness : WindowWitnessHighlight
+canonicalStage110SuccessorWitness =
+  record
+    { stage = 110
+    ; witness = 111
+    ; successorLaw = refl
+    ; witnessKind = compositeCouplingWitness
+    ; factorLabels = "3" ∷ "37" ∷ []
+    ; interpretation =
+        "110 is witnessed by 111 = 3 * 37, a coupled triadic / p37 witness."
+      ∷ "111 is not prime and not a pure decimal carry body."
+      ∷ []
+    }
+
+canonicalStage111SuccessorWitness : WindowWitnessHighlight
+canonicalStage111SuccessorWitness =
+  record
+    { stage = 111
+    ; witness = 112
+    ; successorLaw = refl
+    ; witnessKind = compositeCouplingWitness
+    ; factorLabels = "2^4" ∷ "7" ∷ "v2=4" ∷ "v7=1" ∷ []
+    ; interpretation =
+        "111 is witnessed by 112 = 2^4 * 7."
+      ∷ "111 = 100 + 10 + 1 = j2 + j1 + j0 is the tri-marked decimal/carry state."
+      ∷ "112 couples fourth-depth binary carry recursion to the p7 / HexTruth witness lane."
+      ∷ []
+    }
+
+canonicalPrimeWitnessedStages0To111 : List Nat
+canonicalPrimeWitnessedStages0To111 =
+  1 ∷ 2 ∷ 4 ∷ 6 ∷ 10 ∷ 12 ∷ 16 ∷ 18 ∷ 22 ∷ 28 ∷ 30 ∷ 36 ∷ 40 ∷ 42 ∷ 46 ∷
+  52 ∷ 58 ∷ 60 ∷ 66 ∷ 70 ∷ 72 ∷ 78 ∷ 82 ∷ 88 ∷ 96 ∷ 100 ∷ 102 ∷ 106 ∷
+  108 ∷ []
+
+canonicalPrimeWitnesses1To112 : List Nat
+canonicalPrimeWitnesses1To112 =
+  2 ∷ 3 ∷ 5 ∷ 7 ∷ 11 ∷ 13 ∷ 17 ∷ 19 ∷ 23 ∷ 29 ∷ 31 ∷ 37 ∷ 41 ∷ 43 ∷ 47 ∷
+  53 ∷ 59 ∷ 61 ∷ 67 ∷ 71 ∷ 73 ∷ 79 ∷ 83 ∷ 89 ∷ 97 ∷ 101 ∷ 103 ∷ 107 ∷
+  109 ∷ []
+
+canonicalDecimalLayer0To9 : CarryLayerSummary
+canonicalDecimalLayer0To9 =
+  record
+    { layerLabel = "0..9"
+    ; layerStart = 0
+    ; layerEnd = 9
+    ; interpretation =
+        "0..9 is the first visible decimal cycle."
+      ∷ "This layer contains the full seed-to-carry microcycle ending at 9 -> 10."
+      ∷ []
+    }
+
+canonicalDecimalLayer10To99 : CarryLayerSummary
+canonicalDecimalLayer10To99 =
+  record
+    { layerLabel = "10..99"
+    ; layerStart = 10
+    ; layerEnd = 99
+    ; interpretation =
+        "10..99 is the first carried decimal layer."
+      ∷ "99 -> 100 = 10^2 is the major closure seam of this layer."
+      ∷ []
+    }
+
+canonicalDecimalLayer100To111 : CarryLayerSummary
+canonicalDecimalLayer100To111 =
+  record
+    { layerLabel = "100..111"
+    ; layerStart = 100
+    ; layerEnd = 111
+    ; interpretation =
+        "100..111 is the beginning of the second carried layer."
+      ∷ "111 is the first point where hundreds, tens, and ones are all marked."
+      ∷ []
+    }
+
+canonicalStage0To111SuccessorField : StageWindowSuccessorField
+canonicalStage0To111SuccessorField =
+  record
+    { startStage = 0
+    ; endStage = 111
+    ; windowSize = 112
+    ; finalStageWitness = canonicalStage111SuccessorWitness
+    ; windowSizeMatchesFinalWitness = refl
+    ; primeWitnessedStages = canonicalPrimeWitnessedStages0To111
+    ; primeWitnesses = canonicalPrimeWitnesses1To112
+    ; primePowerWitnesses =
+        canonicalStage15SuccessorWitness
+      ∷ canonicalStage24SuccessorWitness
+      ∷ canonicalStage26SuccessorWitness
+      ∷ canonicalStage31SuccessorWitness
+      ∷ canonicalStage48SuccessorWitness
+      ∷ canonicalStage63SuccessorWitness
+      ∷ canonicalStage80SuccessorWitness
+      ∷ []
+    ; compositeCouplingWitnesses =
+        canonicalStage99SuccessorWitness
+      ∷ canonicalStage109SuccessorWitness
+      ∷ canonicalStage110SuccessorWitness
+      ∷ canonicalStage111SuccessorWitness
+      ∷ []
+    ; decimalCarryLayers =
+        canonicalDecimalLayer0To9
+      ∷ canonicalDecimalLayer10To99
+      ∷ canonicalDecimalLayer100To111
+      ∷ []
+    ; interpretation =
+        "For 0..111, witness(n) = n + 1 and factorization classifies the witness as identity, prime-axis, prime-power depth, or composite coupling."
+      ∷ "The 0..111 inclusive window has size 112 = 2^4 * 7."
+      ∷ "0..111 therefore forms a 112-stage field: four levels of binary carry-depth coupled to the p7 / HexTruth lane."
+      ∷ "0..111 contains nine full Stage12 blocks plus a four-stage overflow: 108..111."
+      ∷ "The next prime witness just outside the window is stage 112 witnessed by p113."
+      ∷ []
+    ; authorityBits = canonicalPrimeSuccessorWitnessAuthorityBits
+    }
+
 record PrimeSuccessorWitness : Set where
   field
     witnessPrime : TrackedPrimes.SSP
