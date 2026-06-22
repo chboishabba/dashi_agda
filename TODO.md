@@ -1,5 +1,27 @@
 # FOR TODO GO TO '# TODO'
 
+Current NS Wall 1 `K_N` exact-identity / negative-frame note for `2026-06-23`:
+- Candidate-only corrected positive route is now recorded. Artifacts:
+  `DASHI/Physics/Closure/NSTriadKNExactIdentityReceipt.agda`,
+  `DASHI/Physics/Closure/NSTriadBSNegativeFrameCoercivityBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadBSSpanningLemmaReceipt.agda`,
+  `DASHI/Physics/Closure/NSTriadBSFrameEquidistributionBoundary.agda`,
+  `scripts/ns_triad_kn_exact_identity_scan.py`,
+  `scripts/check_ns_triad_kn_exact_identity_scan.py`,
+  `scripts/ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The route now records the
+  positive-subspace identity `L_signed_norm = I - 2 K_N`, promotes the
+  negative-frame coercivity / spanning / frame-equidistribution stack as the
+  live Wall 1a operator candidate, and demotes the raw signed-XOR route to
+  legacy negative evidence. This remains fail-closed and non-promoting: the
+  active local extraction still shows degenerate sign telemetry
+  (`negative_sign_fraction_mean = 1.0`), the exact-identity scan is
+  empirical only, and Wall 1 remains unproved.
+
 Current odd-lane / topology intake note for `2026-06-20`:
 - Candidate-only odd/topology tranche is recorded. Artifacts:
   `DASHI/Core/SuperPayloadReadingBoundary.agda`,

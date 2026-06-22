@@ -518,6 +518,12 @@ def build_specs() -> list[HarnessSpec]:
     ns_triad_continuous_coherence_capacity_scan_check_out = (
         CHILD_OUT_DIR / "ns_triad_continuous_coherence_capacity_scan_check_smoke.json"
     )
+    ns_triad_kn_exact_identity_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_kn_exact_identity_scan_smoke.json"
+    )
+    ns_triad_kn_exact_identity_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_kn_exact_identity_scan_check_smoke.json"
+    )
     ns_triad_signed_xor_gaugeability_scan_out = (
         CHILD_OUT_DIR / "ns_triad_signed_xor_gaugeability_scan_smoke.json"
     )
@@ -5587,21 +5593,25 @@ def build_specs() -> list[HarnessSpec]:
             args=(
                 "--continuous-coherence-capacity-json",
                 str(ns_triad_continuous_coherence_capacity_scan_out),
+                "--k-n-exact-identity-json",
+                str(ns_triad_kn_exact_identity_scan_out),
                 "--output-json",
                 str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
             )
             if ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
             and script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
             else ("--help",),
             expected_json_path=ns_triad_wall1_carrier_explanatory_rank_scan_out,
             optional=True,
             skip_reason=None
             if ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
             and script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
             else (
                 "ns_triad_wall1_carrier_explanatory_rank_scan script not found"
                 if not script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
-                else "ns_triad_wall1_carrier_explanatory_rank_scan requires the continuous-coherence-capacity scan output"
+                else "ns_triad_wall1_carrier_explanatory_rank_scan requires the continuous-coherence-capacity and K_N exact-identity scan outputs"
             ),
             notes=(
                 "optional Wall 1 carrier explanatory-rank scan",
@@ -5657,8 +5667,8 @@ def build_specs() -> list[HarnessSpec]:
                 else "ns_triad_continuous_coherence_capacity_scan requires the cocycle-floor scan output"
             ),
             notes=(
-                "optional Wall 1 K_N exact-identity scan",
-                "empirical/non-promoting; fail-closed candidate-only surface for the K_N exact-identity telemetry",
+                "optional Wall 1 continuous coherence-capacity scan",
+                "empirical/non-promoting; fail-closed candidate-only surface for the continuous triadic coherence carrier",
             ),
         ),
         HarnessSpec(
@@ -5681,6 +5691,51 @@ def build_specs() -> list[HarnessSpec]:
                 "check_ns_triad_continuous_coherence_capacity_scan script not found"
                 if not script("check_ns_triad_continuous_coherence_capacity_scan.py").exists()
                 else "check_ns_triad_continuous_coherence_capacity_scan requires the continuous-coherence-capacity scan output"
+            ),
+            notes=(
+                "optional Wall 1 continuous coherence-capacity regression gate",
+                "validates fail-closed candidate-only and aggregate bookkeeping for the continuous coherence surface",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_kn_exact_identity_scan",
+            path=script("ns_triad_kn_exact_identity_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_kn_exact_identity_scan_out),
+            )
+            if script("ns_triad_kn_exact_identity_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_kn_exact_identity_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_kn_exact_identity_scan.py").exists()
+            else "ns_triad_kn_exact_identity_scan script not found",
+            notes=(
+                "optional Wall 1 K_N exact-identity scan",
+                "empirical/non-promoting; fail-closed positive-subspace telemetry for L_signed_norm = I - 2 K_N and negative-frame coverage",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_kn_exact_identity_scan",
+            path=script("check_ns_triad_kn_exact_identity_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_kn_exact_identity_scan_out),
+                "--output-json",
+                str(ns_triad_kn_exact_identity_scan_check_out),
+            )
+            if ns_triad_kn_exact_identity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_kn_exact_identity_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_kn_exact_identity_scan_out.exists()
+            and script("check_ns_triad_kn_exact_identity_scan.py").exists()
+            else (
+                "check_ns_triad_kn_exact_identity_scan script not found"
+                if not script("check_ns_triad_kn_exact_identity_scan.py").exists()
+                else "check_ns_triad_kn_exact_identity_scan requires the K_N exact-identity scan output"
             ),
             notes=(
                 "optional Wall 1 K_N exact-identity regression gate",
@@ -5788,7 +5843,7 @@ def build_specs() -> list[HarnessSpec]:
                 "--carrier-ranking-json",
                 str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
                 "--k-n-exact-identity-json",
-                str(ns_triad_continuous_coherence_capacity_scan_out),
+                str(ns_triad_kn_exact_identity_scan_out),
                 "--continuous-coherence-capacity-json",
                 str(ns_triad_continuous_coherence_capacity_scan_out),
                 "--spectral-json",
@@ -5803,6 +5858,7 @@ def build_specs() -> list[HarnessSpec]:
             if ns_triad_signed_xor_gaugeability_scan_out.exists()
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
             and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_spectral_audit_scan_out.exists()
             and ns_triad_cocycle_floor_scan_out.exists()
@@ -5814,6 +5870,7 @@ def build_specs() -> list[HarnessSpec]:
             if ns_triad_signed_xor_gaugeability_scan_out.exists()
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
             and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_spectral_audit_scan_out.exists()
             and ns_triad_cocycle_floor_scan_out.exists()
@@ -5872,7 +5929,7 @@ def build_specs() -> list[HarnessSpec]:
                 "--signed-wall1-carrier-ranking-json",
                 str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
                 "--k-n-exact-identity-json",
-                str(ns_triad_continuous_coherence_capacity_scan_out),
+                str(ns_triad_kn_exact_identity_scan_out),
                 "--continuous-coherence-capacity-json",
                 str(ns_triad_continuous_coherence_capacity_scan_out),
                 "--cycle-json",
@@ -5898,6 +5955,7 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_k01_geometry_audit_scan_out.exists()
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
             and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_wall1_theorem_status_out.exists()
             else ("--help",),
@@ -5914,6 +5972,7 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_k01_geometry_audit_scan_out.exists()
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
             and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_wall1_theorem_status_out.exists()
             and script("ns_triad_wall1_shell_bridge_summary.py").exists()
