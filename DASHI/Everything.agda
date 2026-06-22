@@ -101,6 +101,9 @@ import DASHI.Biology.BodyMemoryCompiledInverseBridge
 import DASHI.Biology.BodyMemoryMeasurementProxyBoundary
 import DASHI.Biology.BrainDNABodyMemoryBridge
 import DASHI.Biology.EpigeneticBodyMemoryBridge
+import DASHI.Biology.EducationBodyMemoryBridge
+import DASHI.Biology.FMRIConnectomeProxyGovernance
+import DASHI.Biology.FormalLayerExplanationBoundary
 import DASHI.Biology.FunctionalConnectomeBodyMemoryBridge
 import DASHI.Biology.NeurochemicalAtomicChemistryBridge
 import DASHI.Biology.NeurochemicalBrainCarrierBridge
@@ -113,9 +116,12 @@ import DASHI.Biology.CrossSpeciesOntologyTranslationBridge
 import DASHI.Biology.EmbodiedMotorMultisensoryBridge
 import DASHI.Biology.EvolutionaryTransportMDLBridge
 import DASHI.Biology.EvolvedSensoryTransport
+import DASHI.Biology.GenomeEpigenomeConnectomeBodyMemoryBridge
 import DASHI.Biology.GenomeSensorimotorConnectomeBridge
 import DASHI.Biology.ObserverPerceptualManifoldResidual
 import DASHI.Biology.ProteinHormoneChemistryCellBridge
+import DASHI.Biology.RelationalChartResidualMachine
+import DASHI.Biology.RelationalQiEducationTraumaBridge
 import DASHI.Biology.RelationalQiBodyMemoryBridge
 import DASHI.Biology.RetinalPerturbationObservationBridge
 import DASHI.Biology.TraumaBodyMemoryCandidateBridge

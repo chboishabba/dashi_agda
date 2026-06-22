@@ -382,6 +382,8 @@ qiRelationalFlowReceipt =
     refl
     false
     refl
+    false
+    refl
     ( "Qi is held as relation-carrier infrastructure only"
     ∷ "no mystical substance authority is promoted"
     ∷ []
@@ -393,6 +395,8 @@ patternMindRelationReceipt =
     "PatternMind relation cognition candidate-only receipt"
     patternMindRelationAspect
     true
+    refl
+    false
     refl
     false
     refl
@@ -422,6 +426,8 @@ reciprocityRepairReceipt =
     refl
     false
     refl
+    false
+    refl
     ( "reciprocity is a repair context"
     ∷ "no therapeutic authority is attached"
     ∷ []
@@ -433,6 +439,8 @@ kinStoryLongTimeReceipt =
     "kin story long-time candidate-only receipt"
     kinStoryLongTimeAspect
     true
+    refl
+    false
     refl
     false
     refl
@@ -462,6 +470,8 @@ bodyMemoryPlaceBreathReceipt =
     refl
     false
     refl
+    false
+    refl
     ( "body-memory is place-sensitive and breath-mediated"
     ∷ "no diagnostic or empirical-validation authority is promoted"
     ∷ []
@@ -473,6 +483,8 @@ conductFlowGovernanceReceipt =
     "conduct flow governance candidate-only receipt"
     conductFlowGovernanceAspect
     true
+    refl
+    false
     refl
     false
     refl
@@ -514,6 +526,8 @@ canonicalRelationalQiBridgeRegistry =
     ∷ []
     )
     true
+    refl
+    false
     refl
     false
     refl
