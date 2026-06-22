@@ -300,6 +300,18 @@ def main() -> int:
             errors.append(
                 "aggregate.signed_wall1_carrier_ranking_status: must be 'fail-closed' or 'unavailable'"
             )
+        continuous_coherence_capacity_status = aggregate.get("continuous_coherence_capacity_status")
+        if continuous_coherence_capacity_status not in ("fail-closed", "unavailable"):
+            errors.append(
+                "aggregate.continuous_coherence_capacity_status: must be 'fail-closed' or 'unavailable'"
+            )
+        for key in (
+            "continuous_coherence_capacity_candidate_only",
+            "continuous_coherence_capacity_fail_closed",
+        ):
+            value = aggregate.get(key)
+            if value is not None and value is not True:
+                errors.append(f"aggregate.{key}: must be true or null")
         if signed_wall1_status == "fail-closed" and not signed_wall1_rows:
             errors.append("aggregate.signed_wall1_status: fail-closed requires signed_wall1_rows")
         if signed_wall1_status == "unavailable" and signed_wall1_rows:

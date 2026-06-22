@@ -126,6 +126,30 @@ Current odd-lane / topology intake note for `2026-06-20`:
   not group-faithful on the reduced surface. This remains candidate-only and
   fail-closed: the general all-primes local unit-group action remains open.
 Current NS Clay action note for `2026-06-20`:
+- Wall 1 continuous coherence carrier / coherence-deficit floor tranche is
+  now recorded for `2026-06-23`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadContinuousCoherenceCarrierBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadCoherenceDeficitFloorBoundary.agda`,
+  `scripts/ns_triad_continuous_coherence_capacity_scan.py`,
+  `scripts/check_ns_triad_continuous_coherence_capacity_scan.py`,
+  `scripts/ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/check_ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The route now records the
+  positive Wall 1a carrier as continuous triadic coherence capacity rather
+  than the failed raw signed-XOR reduction, records the coherence-deficit
+  floor implication `cap_N <= kappa < 1 -> floor >= (1 - kappa) / 2` as a
+  candidate-only theorem shape, derives a fail-closed continuous-capacity
+  surface from the active floor telemetry, and threads that candidate route
+  through the carrier-ranking, signed theorem-status, shell-bridge, and
+  local harness surfaces. This remains fail-closed and non-promoting: the
+  new continuous route is only a positive candidate carrier, the capacity
+  telemetry is derived rather than independently certified, theorem/full-NS/
+  Clay promotion stay false, and the first live theorem bottleneck remains
+  proving a genuine continuous coherence bound on the active shell carrier.
 - Wall 1 signed carrier reconciliation / carrier-identification tranche is
   now recorded for `2026-06-22`. Artifacts:
   `DASHI/Physics/Closure/NSTriadSignedCarrierReconciliationBoundary.agda`,

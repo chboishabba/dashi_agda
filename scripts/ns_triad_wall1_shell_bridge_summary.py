@@ -58,6 +58,10 @@ DEFAULT_SIGNED_WALL1_CARRIER_RANKING_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_wall1_carrier_explanatory_rank_scan_N128_20260622.json"
 )
+DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_continuous_coherence_capacity_scan_N128_20260623.json"
+)
 DEFAULT_SIGNED_WALL1_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_signed_wall1_theorem_status_20260622.json"
@@ -71,17 +75,17 @@ CONTROL_CARD = {
     "O": "Summarize the active NS triad Wall 1 shell-level telemetry surfaces.",
     "R": (
         "Join the shell-indexed phase-regime, frame-stability, cocycle-floor, cycle-obstruction, "
-        "cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, signed-XOR/signed-spectral Wall 1 receipts, and the new reconciliation/carrier-ranking scans into one compact fail-closed Wall 1 summary."
+        "cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, signed-XOR/signed-spectral Wall 1 receipts, the reconciliation/carrier-ranking scans, and the continuous-coherence-capacity scan into one compact fail-closed Wall 1 summary."
     ),
     "C": SCRIPT_NAME,
     "S": "Candidate-only shell bridge summary; all outputs remain empirical and non-promoting.",
     "L": (
-        "Read each shell-level JSON surface plus the signed Wall 1 receipt and the reconciliation/carrier-ranking scans, normalize onto shared frame-shell keys, "
+        "Read each shell-level JSON surface plus the signed Wall 1 receipt, the reconciliation/carrier-ranking scans, and the continuous-coherence-capacity surface, normalize onto shared frame-shell keys, "
         "compute compact correlations, and emit explicit unproved Wall 1 markers."
     ),
     "P": ROUTE_DECISION,
     "G": "No theorem, continuation, or Clay claim is inferred from this bridge summary.",
-    "F": "Wall 1 remains unproved; the signed Wall 1 receipt and reconciliation/carrier-ranking scans only sharpen the finite-dimensional telemetry surface.",
+    "F": "Wall 1 remains unproved; the signed Wall 1 receipt, reconciliation/carrier-ranking scans, and continuous-coherence-capacity surface only sharpen the finite-dimensional telemetry surface.",
 }
 
 LOWER_BOUND_SUPPORT_KEYS = (
@@ -122,6 +126,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--schur-json", type=Path, default=DEFAULT_SCHUR_JSON)
     parser.add_argument("--signed-wall1-reconciliation-json", type=Path, default=DEFAULT_SIGNED_WALL1_RECONCILIATION_JSON)
     parser.add_argument("--signed-wall1-carrier-ranking-json", type=Path, default=DEFAULT_SIGNED_WALL1_CARRIER_RANKING_JSON)
+    parser.add_argument("--continuous-coherence-capacity-json", type=Path, default=DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON)
     parser.add_argument("--signed-wall1-json", type=Path, default=DEFAULT_SIGNED_WALL1_JSON)
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT_JSON)
     parser.add_argument("--pretty", action="store_true")
@@ -177,6 +182,9 @@ def _rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
         "triad_cocycle_floor_rows",
         "k01_geometry_rows",
         "geometry_rows",
+        "continuous_coherence_capacity_rows",
+        "continuous_coherence_rows",
+        "coherence_capacity_rows",
     ):
         value = payload.get(key)
         if isinstance(value, list):
@@ -224,6 +232,34 @@ def _payload_status(payload: dict[str, Any] | None) -> str | None:
         aggregate_status = aggregate.get("status")
         if isinstance(aggregate_status, str):
             return aggregate_status
+    return None
+
+
+def _payload_candidate_only(payload: dict[str, Any] | None) -> bool | None:
+    if not isinstance(payload, dict):
+        return None
+    candidate_only = payload.get("candidate_only")
+    if isinstance(candidate_only, bool):
+        return candidate_only
+    aggregate = payload.get("aggregate")
+    if isinstance(aggregate, dict):
+        aggregate_candidate_only = aggregate.get("candidate_only")
+        if isinstance(aggregate_candidate_only, bool):
+            return aggregate_candidate_only
+    return None
+
+
+def _payload_fail_closed(payload: dict[str, Any] | None) -> bool | None:
+    if not isinstance(payload, dict):
+        return None
+    fail_closed = payload.get("fail_closed")
+    if isinstance(fail_closed, bool):
+        return fail_closed
+    aggregate = payload.get("aggregate")
+    if isinstance(aggregate, dict):
+        aggregate_fail_closed = aggregate.get("fail_closed")
+        if isinstance(aggregate_fail_closed, bool):
+            return aggregate_fail_closed
     return None
 
 
@@ -557,6 +593,10 @@ def main() -> int:
     except Exception:
         signed_wall1_carrier_ranking_payload = {}
     try:
+        continuous_coherence_capacity_payload = _read_json(args.continuous_coherence_capacity_json)
+    except Exception:
+        continuous_coherence_capacity_payload = {}
+    try:
         signed_wall1_payload = _read_json(args.signed_wall1_json)
     except Exception:
         signed_wall1_payload = {}
@@ -574,6 +614,7 @@ def main() -> int:
         explicit_signed_rows = signed_wall1_payload.get("signed_wall1_rows")
         if isinstance(explicit_signed_rows, list):
             signed_wall1_rows = explicit_signed_rows
+    continuous_coherence_capacity_rows = _rows(continuous_coherence_capacity_payload)
     signed_wall1_route_names = None
     if signed_wall1_rows:
         ordered_route_names: list[str] = []
@@ -638,6 +679,22 @@ def main() -> int:
     signed_wall1_carrier_top_support = _coerce_float(
         signed_wall1_carrier_ranking_aggregate.get("carrier_identification_top_support_mean")
     )
+    continuous_coherence_capacity_input_status = _payload_status(continuous_coherence_capacity_payload)
+    continuous_coherence_capacity_status = _effective_fail_closed_status(continuous_coherence_capacity_payload)
+    continuous_coherence_capacity_candidate_only = _payload_candidate_only(continuous_coherence_capacity_payload)
+    continuous_coherence_capacity_fail_closed = _payload_fail_closed(continuous_coherence_capacity_payload)
+    continuous_coherence_capacity_aggregate = (
+        continuous_coherence_capacity_payload.get("aggregate", {})
+        if isinstance(continuous_coherence_capacity_payload, dict)
+        else {}
+    )
+    continuous_coherence_capacity_aggregate_status = _payload_status(continuous_coherence_capacity_aggregate)
+    continuous_coherence_capacity_aggregate_candidate_only = _payload_candidate_only(
+        continuous_coherence_capacity_aggregate
+    )
+    continuous_coherence_capacity_aggregate_fail_closed = _payload_fail_closed(
+        continuous_coherence_capacity_aggregate
+    )
     for row in signed_wall1_rows:
         if not isinstance(row, dict):
             continue
@@ -645,6 +702,16 @@ def main() -> int:
         row["reconciliation_status"] = signed_wall1_reconciliation_status
         row["carrier_ranking_input_status"] = signed_wall1_carrier_ranking_input_status
         row["carrier_ranking_status"] = signed_wall1_carrier_ranking_status
+    for row in continuous_coherence_capacity_rows:
+        if not isinstance(row, dict):
+            continue
+        row["input_status"] = continuous_coherence_capacity_input_status
+        row["status"] = continuous_coherence_capacity_status
+        row["candidate_only"] = continuous_coherence_capacity_candidate_only
+        row["fail_closed"] = continuous_coherence_capacity_fail_closed
+        row["aggregate_status"] = continuous_coherence_capacity_aggregate_status
+        row["aggregate_candidate_only"] = continuous_coherence_capacity_aggregate_candidate_only
+        row["aggregate_fail_closed"] = continuous_coherence_capacity_aggregate_fail_closed
 
     shared_keys = sorted(set(phase_by_key) & set(cocycle_by_key))
     bridge_rows: list[dict[str, Any]] = []
@@ -772,6 +839,10 @@ def main() -> int:
                 "best_reference_hessian_proxy": hessian_proxy,
                 "signed_wall1_reconciliation_status": signed_wall1_reconciliation_status,
                 "signed_wall1_carrier_ranking_status": signed_wall1_carrier_ranking_status,
+                "continuous_coherence_capacity_input_status": continuous_coherence_capacity_input_status,
+                "continuous_coherence_capacity_status": continuous_coherence_capacity_status,
+                "continuous_coherence_capacity_candidate_only": continuous_coherence_capacity_candidate_only,
+                "continuous_coherence_capacity_fail_closed": continuous_coherence_capacity_fail_closed,
                 **schur_metrics,
             }
         )
@@ -872,10 +943,14 @@ def main() -> int:
             "signed_wall1_carrier_ranking_json": str(args.signed_wall1_carrier_ranking_json)
             if args.signed_wall1_carrier_ranking_json is not None
             else None,
+            "continuous_coherence_capacity_json": str(args.continuous_coherence_capacity_json)
+            if args.continuous_coherence_capacity_json is not None
+            else None,
             "signed_wall1_json": str(args.signed_wall1_json) if args.signed_wall1_json is not None else None,
         },
         "rows": bridge_rows,
         "signed_wall1_rows": signed_wall1_rows,
+        "continuous_coherence_capacity_rows": continuous_coherence_capacity_rows,
         "aggregate": {
             "shared_frame_shell_count": int(len(shared_keys)),
             "shared_frame_count": int(len({frame for frame, _ in shared_keys})),
@@ -978,6 +1053,14 @@ def main() -> int:
             "signed_wall1_carrier_ranking_status": signed_wall1_carrier_ranking_status,
             "signed_wall1_carrier_top_candidate": signed_wall1_carrier_top_candidate,
             "signed_wall1_carrier_top_support_mean": signed_wall1_carrier_top_support,
+            "continuous_coherence_capacity_input_status": continuous_coherence_capacity_input_status,
+            "continuous_coherence_capacity_status": continuous_coherence_capacity_status,
+            "continuous_coherence_capacity_candidate_only": continuous_coherence_capacity_candidate_only,
+            "continuous_coherence_capacity_fail_closed": continuous_coherence_capacity_fail_closed,
+            "continuous_coherence_capacity_aggregate_status": continuous_coherence_capacity_aggregate_status,
+            "continuous_coherence_capacity_aggregate_candidate_only": continuous_coherence_capacity_aggregate_candidate_only,
+            "continuous_coherence_capacity_aggregate_fail_closed": continuous_coherence_capacity_aggregate_fail_closed,
+            "continuous_coherence_capacity_aggregate": continuous_coherence_capacity_aggregate,
             "signed_xor_bridge_open": signed_xor_bridge_open if signed_wall1_rows else None,
             "signed_spectral_bridge_open": signed_spectral_bridge_open if signed_wall1_rows else None,
             "signed_surface_consensus": "fail-closed" if signed_wall1_rows else "unavailable",

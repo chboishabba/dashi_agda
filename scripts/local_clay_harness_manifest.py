@@ -512,6 +512,12 @@ def build_specs() -> list[HarnessSpec]:
     ns_triad_wall1_carrier_explanatory_rank_scan_check_out = (
         CHILD_OUT_DIR / "ns_triad_wall1_carrier_explanatory_rank_scan_check_smoke.json"
     )
+    ns_triad_continuous_coherence_capacity_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_continuous_coherence_capacity_scan_smoke.json"
+    )
+    ns_triad_continuous_coherence_capacity_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_continuous_coherence_capacity_scan_check_smoke.json"
+    )
     ns_triad_signed_xor_gaugeability_scan_out = (
         CHILD_OUT_DIR / "ns_triad_signed_xor_gaugeability_scan_smoke.json"
     )
@@ -5579,16 +5585,24 @@ def build_specs() -> list[HarnessSpec]:
             name="ns_triad_wall1_carrier_explanatory_rank_scan",
             path=script("ns_triad_wall1_carrier_explanatory_rank_scan.py"),
             args=(
+                "--continuous-coherence-capacity-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
                 "--output-json",
                 str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
             )
-            if script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+            if ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
             else ("--help",),
             expected_json_path=ns_triad_wall1_carrier_explanatory_rank_scan_out,
             optional=True,
             skip_reason=None
-            if script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
-            else "ns_triad_wall1_carrier_explanatory_rank_scan script not found",
+            if ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+            else (
+                "ns_triad_wall1_carrier_explanatory_rank_scan script not found"
+                if not script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+                else "ns_triad_wall1_carrier_explanatory_rank_scan requires the continuous-coherence-capacity scan output"
+            ),
             notes=(
                 "optional Wall 1 carrier explanatory-rank scan",
                 "empirical/non-promoting; ranks current Wall 1 carrier candidates against the observed floor",
@@ -5618,6 +5632,59 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional Wall 1 carrier explanatory-rank regression gate",
                 "validates fail-closed candidate-carrier ranking bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_continuous_coherence_capacity_scan",
+            path=script("ns_triad_continuous_coherence_capacity_scan.py"),
+            args=(
+                "--cocycle-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--output-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
+            )
+            if ns_triad_cocycle_floor_scan_out.exists()
+            and script("ns_triad_continuous_coherence_capacity_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_continuous_coherence_capacity_scan_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_cocycle_floor_scan_out.exists()
+            and script("ns_triad_continuous_coherence_capacity_scan.py").exists()
+            else (
+                "ns_triad_continuous_coherence_capacity_scan script not found"
+                if not script("ns_triad_continuous_coherence_capacity_scan.py").exists()
+                else "ns_triad_continuous_coherence_capacity_scan requires the cocycle-floor scan output"
+            ),
+            notes=(
+                "optional Wall 1 continuous-coherence-capacity scan",
+                "empirical/non-promoting; fail-closed candidate-only surface for the continuous coherence capacity telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_continuous_coherence_capacity_scan",
+            path=script("check_ns_triad_continuous_coherence_capacity_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
+                "--output-json",
+                str(ns_triad_continuous_coherence_capacity_scan_check_out),
+            )
+            if ns_triad_continuous_coherence_capacity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_continuous_coherence_capacity_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and script("check_ns_triad_continuous_coherence_capacity_scan.py").exists()
+            else (
+                "check_ns_triad_continuous_coherence_capacity_scan script not found"
+                if not script("check_ns_triad_continuous_coherence_capacity_scan.py").exists()
+                else "check_ns_triad_continuous_coherence_capacity_scan requires the continuous-coherence-capacity scan output"
+            ),
+            notes=(
+                "optional Wall 1 continuous-coherence-capacity regression gate",
+                "validates fail-closed candidate-only and aggregate bookkeeping for the continuous coherence capacity surface",
             ),
         ),
         HarnessSpec(
@@ -5720,6 +5787,8 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_signed_carrier_reconciliation_scan_out),
                 "--carrier-ranking-json",
                 str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
+                "--continuous-coherence-capacity-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
                 "--spectral-json",
                 str(ns_triad_signed_spectral_audit_scan_out),
                 "--cocycle-json",
@@ -5732,6 +5801,7 @@ def build_specs() -> list[HarnessSpec]:
             if ns_triad_signed_xor_gaugeability_scan_out.exists()
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_spectral_audit_scan_out.exists()
             and ns_triad_cocycle_floor_scan_out.exists()
             and ns_triad_schur_directional_audit_scan_out.exists()
@@ -5742,6 +5812,7 @@ def build_specs() -> list[HarnessSpec]:
             if ns_triad_signed_xor_gaugeability_scan_out.exists()
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_spectral_audit_scan_out.exists()
             and ns_triad_cocycle_floor_scan_out.exists()
             and ns_triad_schur_directional_audit_scan_out.exists()
@@ -5749,7 +5820,7 @@ def build_specs() -> list[HarnessSpec]:
             else (
                 "ns_triad_signed_wall1_theorem_status script not found"
                 if not script("ns_triad_signed_wall1_theorem_status.py").exists()
-                else "ns_triad_signed_wall1_theorem_status requires signed gaugeability, reconciliation, carrier-ranking, signed spectral, cocycle, and Schur outputs"
+                else "ns_triad_signed_wall1_theorem_status requires signed gaugeability, reconciliation, carrier-ranking, continuous coherence, signed spectral, cocycle, and Schur outputs"
             ),
             notes=(
                 "optional Wall 1 signed theorem-status summary",
@@ -5798,6 +5869,8 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_signed_carrier_reconciliation_scan_out),
                 "--signed-wall1-carrier-ranking-json",
                 str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
+                "--continuous-coherence-capacity-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
                 "--cycle-json",
                 str(ns_triad_cycle_obstruction_scan_out),
                 "--cycle-packing-json",
@@ -5821,6 +5894,7 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_k01_geometry_audit_scan_out.exists()
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_wall1_theorem_status_out.exists()
             else ("--help",),
             expected_json_path=ns_triad_wall1_shell_bridge_summary_out,
@@ -5836,16 +5910,17 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_k01_geometry_audit_scan_out.exists()
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_wall1_theorem_status_out.exists()
             and script("ns_triad_wall1_shell_bridge_summary.py").exists()
             else (
                 "ns_triad_wall1_shell_bridge_summary script not found"
                 if not script("ns_triad_wall1_shell_bridge_summary.py").exists()
-                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including signed theorem-status, signed reconciliation, signed carrier ranking, cycle-packing, K01 geometry, and Schur directional audit"
+                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including signed theorem-status, signed reconciliation, signed carrier ranking, continuous coherence capacity, cycle-packing, K01 geometry, and Schur directional audit"
             ),
             notes=(
                 "optional Wall 1 shell bridge summary",
-                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, signed theorem-status, signed reconciliation, signed carrier ranking, cycle-packing, K01 geometry, Schur, cycle, and Hessian telemetry",
+                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, signed theorem-status, signed reconciliation, signed carrier ranking, continuous coherence capacity, cycle-packing, K01 geometry, Schur, cycle, and Hessian telemetry",
             ),
         ),
         HarnessSpec(
