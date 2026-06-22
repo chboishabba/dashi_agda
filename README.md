@@ -67,6 +67,12 @@ developmental window is not destiny, consent/agency seed is not treatment,
 click is not learning, survey is not voice, access is not equity, nudge is not
 care, formal typing is not proof of social/clinical truth, and no clinical,
 educational, legal, mystical, or power authority is promoted.
+The Crenshaw/intersectionality refinement in
+`DASHI.Biology.HyperfabricIntersectionalBodyMemoryBridge` treats triads as
+axis-loaded role carriers rather than neutral universals: single-axis
+projection, abstract-humanity gluing, stable-nine justice promotion, and
+neutral-triad projection are rejected while prime-product / p-adic language
+remains candidate-only and axis-preserving.
 The broader route/lane joining plan is `Docs/support/reference/UnifiedRoutesLanePlan.md`, which
 extends the same receipt-gated architecture across physics, empirical,
 biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
