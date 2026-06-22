@@ -371,6 +371,20 @@ monitor surface.
   global `atlas-7`, `atlas-6`, and `atlas-11 / rev-2` Stage12 receipts while
   preserving candidate-only and fail-closed governance.
 
+- Stage12 adapter generalization update for `2026-06-22`: extends
+  `DASHI.Interop.PrimeLaneStage12ActionAdapter` so the shared adapter contract
+  admits both canonical `p7` and `p11` rows, adds
+  `DASHI.Interop.P7PrimeLaneStage12ActionBridge`,
+  `DASHI.Interop.P11PrimeLaneStage12ActionBridge`,
+  `DASHI.Interop.PrimeLaneStage12ActionAdapterRegistry`,
+  `DASHI.Interop.PrimeLaneStage12ActionCarryBridge`,
+  `DASHI.Interop.PrimeLaneStage12ActionSuccessorBridge`, and
+  `DASHI.Interop.PrimeLaneStage12ActionRegression`, and wires them through
+  `DASHI.Everything`. The route now makes `p11` consume the same Stage12
+  prime-lane adapter story as `p7`, keeps `atlas-11 / rev-2` as the shared
+  carry-depth seam, and enumerates the canonical adapter set without
+  promoting any new stage-spine or universal-prime authority.
+
 - Odd-lane / Möbius / Klein / Hodge / Base369 intake tranche for
   `2026-06-20`: adds `DASHI.Core.SuperPayloadReadingBoundary`,
   `DASHI.Core.OddGrassmannCoefficientGate`,

@@ -300,7 +300,13 @@ import DASHI.Interop.TaoQiReadingAdapter
 import DASHI.Interop.TaoYinYangAdapter
 import DASHI.Interop.YinYangQiAdapter
 import DASHI.Interop.CarryCompletionSpectralBridge
+import DASHI.Interop.P11PrimeLaneStage12ActionBridge
+import DASHI.Interop.P7PrimeLaneStage12ActionBridge
 import DASHI.Interop.PrimeLaneStage12ActionAdapter
+import DASHI.Interop.PrimeLaneStage12ActionAdapterRegistry
+import DASHI.Interop.PrimeLaneStage12ActionCarryBridge
+import DASHI.Interop.PrimeLaneStage12ActionRegression
+import DASHI.Interop.PrimeLaneStage12ActionSuccessorBridge
 import DASHI.Interop.PrimeSuccessorWitness
 import DASHI.Interop.PolarityPhaseFieldBridge
 import DASHI.Interop.PolarityBettiSupportBoundary
@@ -404,6 +410,7 @@ import DASHI.Physics.Closure.NSStrainTypeIOmegaKPositiveReceipt
 import DASHI.Physics.Closure.NSTriadFrustrationDefectBoundary
 import DASHI.Physics.Closure.NSTriadFrustrationRegression
 import DASHI.Physics.Closure.NSTriadCocycleFrustrationFloorBoundary
+import DASHI.Physics.Closure.NSTriadCycleFamilyLowerBoundBoundary
 import DASHI.Physics.Closure.NSTriadCycleDefectLowerBoundReceipt
 import DASHI.Physics.Closure.NSTriadEntropyBarrierTheoremBoundary
 import DASHI.Physics.Closure.NSTriadIncidenceCocycleReceipt
@@ -414,6 +421,7 @@ import DASHI.Physics.Closure.NSTriadResidenceTimeCompressionBoundary
 import DASHI.Physics.Closure.NSTriadPhaseLockingLiveWallReceipt
 import DASHI.Physics.Closure.NSPhaseRegimeSeparationBoundary
 import DASHI.Physics.Closure.NSFloorToFrameStabilityBoundary
+import DASHI.Physics.Closure.NSSchurComplementFrameGapBoundary
 import DASHI.Physics.Closure.NSAdversarialGibbsPhaseReferenceReceipt
 import DASHI.Physics.Closure.NSSacasaTriadFrustrationBridgeBoundary
 import DASHI.Physics.Closure.NSTubeMorphologyForcedLocalizationRouteAuditReceipt
