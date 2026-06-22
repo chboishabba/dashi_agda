@@ -290,6 +290,8 @@ canonicalNSTriadCycleDefectLowerBoundReceipt =
     refl
     false
     refl
+    false
+    refl
     canonicalNSTriadCycleDefectLowerBoundORCSLPGF
     refl
     "Candidate-only quantitative cycle-defect lower-bound receipt: the exact Δ_n(ψ)^2 / Σ(n_e^2 / w_e) law shape is recorded, but its shell-carrier target cocycle, uniform floor, and floor-to-frame consequences remain unproved."

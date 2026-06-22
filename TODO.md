@@ -102,8 +102,23 @@ Current odd-lane / topology intake note for `2026-06-20`:
   stage/carry/fibre grammar, prime lanes act through typed local adapters,
   and the p7 tranche is the first canonical `C6` / `HexTruth` local witness
   rather than a parallel stage spine.
-
 Current NS Clay action note for `2026-06-20`:
+- Quantitative cycle-defect lower-bound tranche is now recorded for
+  `2026-06-22`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadCycleDefectLowerBoundReceipt.agda`,
+  `scripts/ns_triad_cocycle_floor_scan.py`,
+  `scripts/check_ns_triad_cocycle_floor_scan.py`,
+  `scripts/ns_triad_frame_stability_scan.py`,
+  `scripts/check_ns_triad_frame_stability_scan.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`. The route now
+  records the exact cycle-defect law shape
+  `F_N(psi) >= (4 / pi^2) * Delta_n(psi)^2 / sum(n_e^2 / w_e)` as a
+  candidate-only receipt, replaces floating nullspace witnesses with integer
+  cycle witnesses on the shell carrier, and tracks normalized lower-bound
+  support against the optimized Wall 1 phase-gap surface. This remains
+  fail-closed and non-promoting: no uniform `c0 > 0` cocycle floor is
+  proved, no floor-to-frame theorem is proved, and Wall 1 remains open.
 - Wall 1 phase-regime / cocycle-floor / floor-to-frame tranche is now
   recorded for `2026-06-22`. Artifacts:
   `DASHI/Physics/Closure/NSPhaseRegimeSeparationBoundary.agda`,

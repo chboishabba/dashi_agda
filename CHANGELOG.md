@@ -6,6 +6,24 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS quantitative cycle-defect lower-bound tranche for `2026-06-22`: adds
+  `DASHI.Physics.Closure.NSTriadCycleDefectLowerBoundReceipt`; strengthens
+  `scripts/ns_triad_cocycle_floor_scan.py`,
+  `scripts/check_ns_triad_cocycle_floor_scan.py`,
+  `scripts/ns_triad_frame_stability_scan.py`,
+  `scripts/check_ns_triad_frame_stability_scan.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`; and keeps the new
+  surfaces staged in the local Clay harness manifest. The tranche records the
+  exact cycle-defect lower-bound law
+  `F_N(psi) >= (4 / pi^2) * Delta_n(psi)^2 / sum(n_e^2 / w_e)` as a
+  fail-closed receipt, swaps floating nullspace witnesses for integer
+  cycle-basis witnesses on the shell carrier, and adds normalized lower-bound
+  support telemetry against the optimized Wall 1 phase-gap surface. This
+  remains fail-closed: theorem promotion and Clay promotion stay false, no
+  uniform cocycle floor theorem is proved, no floor-to-frame theorem is
+  proved, and the strengthened scans are empirical only.
+
 - NS Wall 1 phase-regime / cocycle-floor / floor-to-frame tranche for
   `2026-06-22`: adds
   `DASHI.Physics.Closure.NSPhaseRegimeSeparationBoundary`,
