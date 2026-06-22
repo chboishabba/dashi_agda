@@ -126,6 +126,31 @@ Current odd-lane / topology intake note for `2026-06-20`:
   not group-faithful on the reduced surface. This remains candidate-only and
   fail-closed: the general all-primes local unit-group action remains open.
 Current NS Clay action note for `2026-06-20`:
+- Wall 1 signed carrier reconciliation / carrier-identification tranche is
+  now recorded for `2026-06-22`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadSignedCarrierReconciliationBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadWall1CarrierIdentificationBoundary.agda`,
+  `scripts/ns_triad_signed_carrier_reconciliation_scan.py`,
+  `scripts/check_ns_triad_signed_carrier_reconciliation_scan.py`,
+  `scripts/ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/check_ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`. The route now
+  records the signed-carrier reconciliation boundary explicitly, records
+  corrected carrier identification as the new first Wall 1 theorem
+  bottleneck, reconciles the repo-local theorem-status CSV against the active
+  signed gaugeability/spectral extractions, ranks current carrier candidates
+  by explanatory support relative to the observed floor, and threads those
+  fail-closed statuses through the signed theorem-status and shell-bridge
+  summaries. Current telemetry is still harsh and fail-closed: the repo-local
+  signed chart agrees with the active negative extraction, the cycle-family
+  route explains only about 2 percent of the observed floor, the raw
+  signed-XOR route explains 0 percent, and the current signed-spectral route
+  explains 0 percent. This keeps Wall 1 open and sharpens the next analytic
+  lane to corrected carrier identification before any new theorem-promotion
+  attempt.
 - Quantitative cycle-defect lower-bound tranche is now recorded for
   `2026-06-22`. Artifacts:
   `DASHI/Physics/Closure/NSTriadCycleDefectLowerBoundReceipt.agda`,

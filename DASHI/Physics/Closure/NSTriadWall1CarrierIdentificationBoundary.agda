@@ -201,45 +201,47 @@ canonicalNSTriadWall1CarrierIdentificationBoundaryReceipt =
     refl
     false
     refl
+    false
+    refl
     ("corrected discrete carrier" ∷ "plaquette/packing carrier" ∷ "direct continuous XY/operator carrier" ∷ [])
     refl
 
 ------------------------------------------------------------------------
 -- Contract witnesses.
 
-observedWall1FloorIsRealIsTrue :
+observedWall1FloorIsRealProof :
   observedWall1FloorIsReal canonicalNSTriadWall1CarrierIdentificationBoundaryReceipt ≡ true
-observedWall1FloorIsRealIsTrue =
+observedWall1FloorIsRealProof =
   refl
 
-cycleFamilyCarrierSufficientIsFalse :
+cycleFamilyCarrierSufficientProof :
   cycleFamilyCarrierSufficient canonicalNSTriadWall1CarrierIdentificationBoundaryReceipt ≡ false
-cycleFamilyCarrierSufficientIsFalse =
+cycleFamilyCarrierSufficientProof =
   refl
 
-rawSignedXORCarrierSufficientIsFalse :
+rawSignedXORCarrierSufficientProof :
   rawSignedXORCarrierSufficient canonicalNSTriadWall1CarrierIdentificationBoundaryReceipt ≡ false
-rawSignedXORCarrierSufficientIsFalse =
+rawSignedXORCarrierSufficientProof =
   refl
 
-signedSpectralCarrierSufficientIsFalse :
+signedSpectralCarrierSufficientProof :
   signedSpectralCarrierSufficient canonicalNSTriadWall1CarrierIdentificationBoundaryReceipt ≡ false
-signedSpectralCarrierSufficientIsFalse =
+signedSpectralCarrierSufficientProof =
   refl
 
-theoremPromotedIsFalse :
+theoremPromotedProof :
   theoremPromoted canonicalNSTriadWall1CarrierIdentificationBoundaryReceipt ≡ false
-theoremPromotedIsFalse =
+theoremPromotedProof =
   refl
 
-fullNSPromotedIsFalse :
+fullNSPromotedProof :
   fullNSPromoted canonicalNSTriadWall1CarrierIdentificationBoundaryReceipt ≡ false
-fullNSPromotedIsFalse =
+fullNSPromotedProof =
   refl
 
-clayPromotedIsFalse :
+clayPromotedProof :
   clayPromoted canonicalNSTriadWall1CarrierIdentificationBoundaryReceipt ≡ false
-clayPromotedIsFalse =
+clayPromotedProof =
   refl
 
 rowsAreCanonicalProof :

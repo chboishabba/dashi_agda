@@ -6,6 +6,33 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Wall 1 signed carrier reconciliation / carrier-identification tranche
+  for `2026-06-22`: adds
+  `DASHI.Physics.Closure.NSTriadSignedCarrierReconciliationBoundary`,
+  `DASHI.Physics.Closure.NSTriadWall1CarrierIdentificationBoundary`,
+  `scripts/ns_triad_signed_carrier_reconciliation_scan.py`,
+  `scripts/check_ns_triad_signed_carrier_reconciliation_scan.py`,
+  `scripts/ns_triad_wall1_carrier_explanatory_rank_scan.py`, and
+  `scripts/check_ns_triad_wall1_carrier_explanatory_rank_scan.py`;
+  strengthens `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The tranche records the signed
+  carrier reconciliation problem explicitly, records corrected carrier
+  identification as the new first Wall 1 theorem bottleneck, reconciles the
+  repo-local theorem-status CSV against the active signed gaugeability and
+  signed spectral extractions, and ranks the current carrier candidates by
+  explanatory support relative to the observed floor. The resulting telemetry
+  is fail-closed and harsh: the repo-local signed chart agrees with the
+  active negative extraction, the cycle-family route explains only about
+  `0.0202` of the observed floor, the raw signed-XOR route explains `0`, and
+  the current signed-spectral route explains `0`. This sharpens the live Wall
+  1 bottleneck without promoting anything: theorem promotion and Clay
+  promotion stay false, corrected carrier identification remains open, and
+  the signed discrete/spectral routes remain insufficient on the active shell
+  extraction.
+
 - Stage12 p13 witness-row generalization for `2026-06-22`: extends
   `DASHI.Interop.PrimeSuccessorWitness` with the explicit
   `canonicalStage12SuccessorWitness` row, adds
