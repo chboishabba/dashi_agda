@@ -312,6 +312,27 @@ def main() -> int:
             value = aggregate.get(key)
             if value is not None and value is not True:
                 errors.append(f"aggregate.{key}: must be true or null")
+        for prefix in ("amplitude_weighted_negative_frame", "energy_budgeted_fork"):
+            if aggregate.get(f"{prefix}_status") not in ("fail-closed", "unavailable"):
+                errors.append(f"aggregate.{prefix}_status: must be 'fail-closed' or 'unavailable'")
+            if aggregate.get(f"{prefix}_aggregate_status") not in ("fail-closed", "unavailable"):
+                errors.append(f"aggregate.{prefix}_aggregate_status: must be 'fail-closed' or 'unavailable'")
+            for key in (
+                f"{prefix}_candidate_only",
+                f"{prefix}_fail_closed",
+                f"{prefix}_aggregate_candidate_only",
+                f"{prefix}_aggregate_fail_closed",
+            ):
+                value = aggregate.get(key)
+                if value is not None and value is not True:
+                    errors.append(f"aggregate.{key}: must be true or null")
+            if _nonnegative_int(aggregate.get(f"{prefix}_row_count")) is None:
+                errors.append(f"aggregate.{prefix}_row_count: must be nonnegative int or null")
+            if _nonnegative_int(aggregate.get(f"{prefix}_surface_count")) is None:
+                errors.append(f"aggregate.{prefix}_surface_count: must be nonnegative int or null")
+            route_names = aggregate.get(f"{prefix}_route_names")
+            if route_names is not None and not isinstance(route_names, list):
+                errors.append(f"aggregate.{prefix}_route_names: must be list or null")
         k_n_exact_identity_status = aggregate.get("k_n_exact_identity_status")
         if k_n_exact_identity_status not in ("fail-closed", "unavailable"):
             errors.append("aggregate.k_n_exact_identity_status: must be 'fail-closed' or 'unavailable'")
@@ -607,6 +628,14 @@ def main() -> int:
                         errors.append(
                             f"k_n_exact_identity_rows[{index}].bridge_summary: must match the canonical frame-equidistribution bridge note"
                         )
+        for key in ("amplitude_weighted_negative_frame_rows", "energy_budgeted_fork_rows"):
+            rows_value = payload.get(key)
+            if rows_value is not None and not isinstance(rows_value, list):
+                errors.append(f"{key}: must be list or null")
+            if isinstance(rows_value, list) and rows_value:
+                row_count_key = f"{key.removesuffix('_rows')}_row_count"
+                if aggregate.get(row_count_key) != len(rows_value):
+                    errors.append(f"aggregate.{row_count_key}: must match {key} length")
         if signed_wall1_rows == []:
             if aggregate.get("signed_wall1_row_count") != 0:
                 errors.append("aggregate.signed_wall1_row_count: must be 0 when no signed_wall1_rows are present")

@@ -1,5 +1,29 @@
 # FOR TODO GO TO '# TODO'
 
+Current NS Wall 1 amplitude-weighted / energy-fork note for `2026-06-23`:
+- Candidate-only amplitude-budgeted Wall 1/2 bridge is now recorded. Artifacts:
+  `DASHI/Physics/Closure/NSAmplitudeWeightedNegativeFrameBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadEnergyBudgetedCoherenceForkBoundary.agda`,
+  `DASHI/Physics/Closure/NSPointwiseTriadCloudBoundary.agda`,
+  `scripts/ns_triad_amplitude_weighted_negative_frame_scan.py`,
+  `scripts/check_ns_triad_amplitude_weighted_negative_frame_scan.py`,
+  `scripts/ns_triad_energy_budgeted_fork_scan.py`,
+  `scripts/check_ns_triad_energy_budgeted_fork_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The route now records the
+  amplitude-weighted negative-frame object `K_N(A)`, the energy-budgeted
+  three-way fork `frame-coercive / low-band bounded / high-dissipation
+  residence-limited`, and the pointwise triad-cloud bridge that keeps
+  single-mode stretching zero while forcing BKM-active spikes to recruit a
+  coherent triad cloud. This remains fail-closed and non-promoting: the new
+  scans are candidate-only surfaces derived from local CSV telemetry, the
+  active theorem-status and shell-bridge summaries stay `unproved`, and the
+  next live analytic bottleneck is still a uniform amplitude-weighted
+  negative-frame theorem or energy-fork theorem on genuine Biot-Savart data.
+
 Current NS Wall 1 `K_N` exact-identity / negative-frame note for `2026-06-23`:
 - Candidate-only corrected positive route is now recorded. Artifacts:
   `DASHI/Physics/Closure/NSTriadKNExactIdentityReceipt.agda`,
