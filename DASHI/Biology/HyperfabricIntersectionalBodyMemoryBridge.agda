@@ -353,6 +353,8 @@ mkStageSpiralHyperfabricCandidateRow
     refl
     true
     refl
+    true
+    refl
     reading
 
 canonicalDialecticStageRow : StageSpiralHyperfabricRow
@@ -554,6 +556,8 @@ mkCandidateIntersectionalAxisAuditRow label axis axisReading auditReading =
     refl
     true
     refl
+    true
+    refl
     auditReading
 
 canonicalDialecticAxisAuditRow : IntersectionalAxisAuditRow
@@ -650,6 +654,436 @@ canonicalIntersectionalAxisAuditRows =
   ∷ canonicalBodyMemoryAxisAuditRow
   ∷ []
 
+data CulturalTriadRole : Set where
+  originAuthorityRole :
+    CulturalTriadRole
+
+  embodiedSubjectRole :
+    CulturalTriadRole
+
+  relationalMediatorRole :
+    CulturalTriadRole
+
+culturalTriadRoleName : CulturalTriadRole → String
+culturalTriadRoleName originAuthorityRole =
+  "origin-authority-role"
+culturalTriadRoleName embodiedSubjectRole =
+  "embodied-subject-role"
+culturalTriadRoleName relationalMediatorRole =
+  "relational-mediator-role"
+
+data PowerAtlasAxis : Set where
+  racePowerAxis :
+    PowerAtlasAxis
+
+  classPowerAxis :
+    PowerAtlasAxis
+
+  genderPowerAxis :
+    PowerAtlasAxis
+
+  sexualityPowerAxis :
+    PowerAtlasAxis
+
+  disabilityPowerAxis :
+    PowerAtlasAxis
+
+  neurotypePowerAxis :
+    PowerAtlasAxis
+
+  religionPowerAxis :
+    PowerAtlasAxis
+
+  colonialityPowerAxis :
+    PowerAtlasAxis
+
+  lawPowerAxis :
+    PowerAtlasAxis
+
+  landPowerAxis :
+    PowerAtlasAxis
+
+  familyPowerAxis :
+    PowerAtlasAxis
+
+  institutionPowerAxis :
+    PowerAtlasAxis
+
+powerAtlasAxisName : PowerAtlasAxis → String
+powerAtlasAxisName racePowerAxis =
+  "race-power-axis"
+powerAtlasAxisName classPowerAxis =
+  "class-power-axis"
+powerAtlasAxisName genderPowerAxis =
+  "gender-power-axis"
+powerAtlasAxisName sexualityPowerAxis =
+  "sexuality-power-axis"
+powerAtlasAxisName disabilityPowerAxis =
+  "disability-power-axis"
+powerAtlasAxisName neurotypePowerAxis =
+  "neurotype-power-axis"
+powerAtlasAxisName religionPowerAxis =
+  "religion-power-axis"
+powerAtlasAxisName colonialityPowerAxis =
+  "coloniality-power-axis"
+powerAtlasAxisName lawPowerAxis =
+  "law-power-axis"
+powerAtlasAxisName landPowerAxis =
+  "land-power-axis"
+powerAtlasAxisName familyPowerAxis =
+  "family-power-axis"
+powerAtlasAxisName institutionPowerAxis =
+  "institution-power-axis"
+
+canonicalPowerAtlasAxes : List PowerAtlasAxis
+canonicalPowerAtlasAxes =
+  racePowerAxis
+  ∷ classPowerAxis
+  ∷ genderPowerAxis
+  ∷ sexualityPowerAxis
+  ∷ disabilityPowerAxis
+  ∷ neurotypePowerAxis
+  ∷ religionPowerAxis
+  ∷ colonialityPowerAxis
+  ∷ lawPowerAxis
+  ∷ landPowerAxis
+  ∷ familyPowerAxis
+  ∷ institutionPowerAxis
+  ∷ []
+
+data CrenshawTheoremKind : Set where
+  trinityIntersectionalDeconstructionKind :
+    CrenshawTheoremKind
+
+  intersectionalTriTruthKind :
+    CrenshawTheoremKind
+
+  singleAxisProjectionLossKind :
+    CrenshawTheoremKind
+
+  primeFibreIntersectionalityKind :
+    CrenshawTheoremKind
+
+  padicSharedRootNotReductionKind :
+    CrenshawTheoremKind
+
+  stableNineNotJusticeKind :
+    CrenshawTheoremKind
+
+  hypervoxelLocalRepairKind :
+    CrenshawTheoremKind
+
+  hyperfabricNoErasureGluingKind :
+    CrenshawTheoremKind
+
+crenshawTheoremKindName : CrenshawTheoremKind → String
+crenshawTheoremKindName trinityIntersectionalDeconstructionKind =
+  "trinity-intersectional-deconstruction"
+crenshawTheoremKindName intersectionalTriTruthKind =
+  "intersectional-tri-truth"
+crenshawTheoremKindName singleAxisProjectionLossKind =
+  "single-axis-projection-loss"
+crenshawTheoremKindName primeFibreIntersectionalityKind =
+  "prime-fibre-intersectionality"
+crenshawTheoremKindName padicSharedRootNotReductionKind =
+  "p-adic-shared-root-not-reduction"
+crenshawTheoremKindName stableNineNotJusticeKind =
+  "stable-nine-not-justice"
+crenshawTheoremKindName hypervoxelLocalRepairKind =
+  "hypervoxel-local-repair"
+crenshawTheoremKindName hyperfabricNoErasureGluingKind =
+  "hyperfabric-no-erasure-gluing"
+
+data ProjectionForm : Set where
+  axisPreservingProductProjection :
+    ProjectionForm
+
+  singleAxisCollapseProjection :
+    ProjectionForm
+
+  abstractHumanityProjection :
+    ProjectionForm
+
+  neutralTriadProjection :
+    ProjectionForm
+
+ProjectionAdmissible : ProjectionForm → Set
+ProjectionAdmissible axisPreservingProductProjection = ⊤
+ProjectionAdmissible singleAxisCollapseProjection = Never
+ProjectionAdmissible abstractHumanityProjection = Never
+ProjectionAdmissible neutralTriadProjection = Never
+
+singleAxisCollapseProjectionRejected :
+  ProjectionAdmissible singleAxisCollapseProjection →
+  Never
+singleAxisCollapseProjectionRejected ()
+
+abstractHumanityProjectionRejected :
+  ProjectionAdmissible abstractHumanityProjection →
+  Never
+abstractHumanityProjectionRejected ()
+
+neutralTriadProjectionRejected :
+  ProjectionAdmissible neutralTriadProjection →
+  Never
+neutralTriadProjectionRejected ()
+
+record AxisLoadedTriadRoleRow : Set where
+  constructor mkAxisLoadedTriadRoleRow
+  field
+    rowLabel :
+      String
+
+    rowRole :
+      CulturalTriadRole
+
+    rowRoleName :
+      String
+
+    rowPowerAxes :
+      List PowerAtlasAxis
+
+    rowPowerAxesAreCanonical :
+      rowPowerAxes ≡ canonicalPowerAtlasAxes
+
+    rowTriadNotNeutral :
+      Bool
+
+    rowTriadNotNeutralIsTrue :
+      rowTriadNotNeutral ≡ true
+
+    rowCandidateOnly :
+      Bool
+
+    rowCandidateOnlyIsTrue :
+      rowCandidateOnly ≡ true
+
+    rowNoAuthorityPromotion :
+      Bool
+
+    rowNoAuthorityPromotionIsTrue :
+      rowNoAuthorityPromotion ≡ true
+
+    rowReading :
+      String
+
+open AxisLoadedTriadRoleRow public
+
+mkAxisLoadedTriadRoleRowCanonical :
+  String →
+  CulturalTriadRole →
+  String →
+  String →
+  AxisLoadedTriadRoleRow
+mkAxisLoadedTriadRoleRowCanonical label role roleReading reading =
+  mkAxisLoadedTriadRoleRow
+    label
+    role
+    roleReading
+    canonicalPowerAtlasAxes
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    reading
+
+canonicalOriginAuthorityTriadRoleRow : AxisLoadedTriadRoleRow
+canonicalOriginAuthorityTriadRoleRow =
+  mkAxisLoadedTriadRoleRowCanonical
+    "origin-authority-axis-loaded-triad-role-row"
+    originAuthorityRole
+    "origin authority role"
+    "The origin term of a cultural triad is axis-loaded by authority, law, lineage, family, property, and institution."
+
+canonicalEmbodiedSubjectTriadRoleRow : AxisLoadedTriadRoleRow
+canonicalEmbodiedSubjectTriadRoleRow =
+  mkAxisLoadedTriadRoleRowCanonical
+    "embodied-subject-axis-loaded-triad-role-row"
+    embodiedSubjectRole
+    "embodied subject role"
+    "The embodied subject term is not neutral: body, gender, race, class, disability, neurotype, and coloniality stay explicit."
+
+canonicalRelationalMediatorTriadRoleRow : AxisLoadedTriadRoleRow
+canonicalRelationalMediatorTriadRoleRow =
+  mkAxisLoadedTriadRoleRowCanonical
+    "relational-mediator-axis-loaded-triad-role-row"
+    relationalMediatorRole
+    "relational mediator role"
+    "The mediator term is not empty relation: conscience, church, law, family, institution, and norm transmission remain auditable."
+
+canonicalAxisLoadedTriadRoleRows : List AxisLoadedTriadRoleRow
+canonicalAxisLoadedTriadRoleRows =
+  canonicalOriginAuthorityTriadRoleRow
+  ∷ canonicalEmbodiedSubjectTriadRoleRow
+  ∷ canonicalRelationalMediatorTriadRoleRow
+  ∷ []
+
+record CrenshawDeconstructionTheoremRow : Set where
+  constructor mkCrenshawDeconstructionTheoremRow
+  field
+    rowLabel :
+      String
+
+    rowTheoremKind :
+      CrenshawTheoremKind
+
+    rowTheoremName :
+      String
+
+    rowProjectionForm :
+      ProjectionForm
+
+    rowProjectionAdmissible :
+      ProjectionAdmissible rowProjectionForm
+
+    rowAxisBundle :
+      List PowerAtlasAxis
+
+    rowAxisBundleIsCanonical :
+      rowAxisBundle ≡ canonicalPowerAtlasAxes
+
+    rowCandidateOnly :
+      Bool
+
+    rowCandidateOnlyIsTrue :
+      rowCandidateOnly ≡ true
+
+    rowIntersectionPreserved :
+      Bool
+
+    rowIntersectionPreservedIsTrue :
+      rowIntersectionPreserved ≡ true
+
+    rowNoSingleAxisReduction :
+      Bool
+
+    rowNoSingleAxisReductionIsTrue :
+      rowNoSingleAxisReduction ≡ true
+
+    rowNoStableSystemJusticePromotion :
+      Bool
+
+    rowNoStableSystemJusticePromotionIsTrue :
+      rowNoStableSystemJusticePromotion ≡ true
+
+    rowReading :
+      String
+
+open CrenshawDeconstructionTheoremRow public
+
+mkCrenshawTheoremCandidateRow :
+  String →
+  CrenshawTheoremKind →
+  String →
+  String →
+  CrenshawDeconstructionTheoremRow
+mkCrenshawTheoremCandidateRow label theoremKind theoremName reading =
+  mkCrenshawDeconstructionTheoremRow
+    label
+    theoremKind
+    theoremName
+    axisPreservingProductProjection
+    tt
+    canonicalPowerAtlasAxes
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    reading
+
+canonicalTrinityIntersectionalDeconstructionRow :
+  CrenshawDeconstructionTheoremRow
+canonicalTrinityIntersectionalDeconstructionRow =
+  mkCrenshawTheoremCandidateRow
+    "trinity-intersectional-deconstruction-row"
+    trinityIntersectionalDeconstructionKind
+    "TrinityIntersectionalDeconstruction"
+    "A triadic relation may carry unity, subject, other, and relation only inside an explicit stratified power atlas."
+
+canonicalIntersectionalTriTruthRow :
+  CrenshawDeconstructionTheoremRow
+canonicalIntersectionalTriTruthRow =
+  mkCrenshawTheoremCandidateRow
+    "intersectional-tri-truth-row"
+    intersectionalTriTruthKind
+    "IntersectionalTriTruth"
+    "Every trit and tri-truth surface declares its axis context; axis-free trit promotion is rejected."
+
+canonicalSingleAxisProjectionLossRow :
+  CrenshawDeconstructionTheoremRow
+canonicalSingleAxisProjectionLossRow =
+  mkCrenshawTheoremCandidateRow
+    "single-axis-projection-loss-row"
+    singleAxisProjectionLossKind
+    "SingleAxisProjectionLoss"
+    "Projecting an intersection to one axis loses the intersectional harm and cannot serve as a valid glue."
+
+canonicalPrimeFibreIntersectionalityRow :
+  CrenshawDeconstructionTheoremRow
+canonicalPrimeFibreIntersectionalityRow =
+  mkCrenshawTheoremCandidateRow
+    "prime-fibre-intersectionality-row"
+    primeFibreIntersectionalityKind
+    "PrimeFibreIntersectionality"
+    "Prime-product addresses preserve axis factors; a product fibre is not reducible to either single prime fibre."
+
+canonicalPadicSharedRootNotReductionRow :
+  CrenshawDeconstructionTheoremRow
+canonicalPadicSharedRootNotReductionRow =
+  mkCrenshawTheoremCandidateRow
+    "p-adic-shared-root-not-reduction-row"
+    padicSharedRootNotReductionKind
+    "PAdicSharedRootNotReduction"
+    "P-adic shared-root closeness is candidate structural affinity, not identity, diagnosis, or legal proof."
+
+canonicalStableNineNotJusticeRow :
+  CrenshawDeconstructionTheoremRow
+canonicalStableNineNotJusticeRow =
+  mkCrenshawTheoremCandidateRow
+    "stable-nine-not-justice-row"
+    stableNineNotJusticeKind
+    "StableNineNotJustice"
+    "A stable stage-nine attractor can be hegemony; justice requires intersectional, power, material, care, and anti-domination gates."
+
+canonicalHypervoxelLocalRepairRow :
+  CrenshawDeconstructionTheoremRow
+canonicalHypervoxelLocalRepairRow =
+  mkCrenshawTheoremCandidateRow
+    "hypervoxel-local-repair-row"
+    hypervoxelLocalRepairKind
+    "HypervoxelLocalRepair"
+    "A plus-one handle is repair-candidate only when it is local to subject, body, time, place, relation, institution, and axis bundle."
+
+canonicalHyperfabricNoErasureGluingRow :
+  CrenshawDeconstructionTheoremRow
+canonicalHyperfabricNoErasureGluingRow =
+  mkCrenshawTheoremCandidateRow
+    "hyperfabric-no-erasure-gluing-row"
+    hyperfabricNoErasureGluingKind
+    "HyperfabricNoErasureGluing"
+    "Global gluing is invalid when it preserves categories while erasing their intersections."
+
+canonicalCrenshawDeconstructionTheoremRows :
+  List CrenshawDeconstructionTheoremRow
+canonicalCrenshawDeconstructionTheoremRows =
+  canonicalTrinityIntersectionalDeconstructionRow
+  ∷ canonicalIntersectionalTriTruthRow
+  ∷ canonicalSingleAxisProjectionLossRow
+  ∷ canonicalPrimeFibreIntersectionalityRow
+  ∷ canonicalPadicSharedRootNotReductionRow
+  ∷ canonicalStableNineNotJusticeRow
+  ∷ canonicalHypervoxelLocalRepairRow
+  ∷ canonicalHyperfabricNoErasureGluingRow
+  ∷ []
+
 record HyperfabricIntersectionalBodyMemoryBridge : Set where
   constructor mkHyperfabricIntersectionalBodyMemoryBridge
   field
@@ -682,6 +1116,20 @@ record HyperfabricIntersectionalBodyMemoryBridge : Set where
 
     intersectionalAxisAuditRowsAreCanonical :
       intersectionalAxisAuditRows ≡ canonicalIntersectionalAxisAuditRows
+
+    axisLoadedTriadRoleRows :
+      List AxisLoadedTriadRoleRow
+
+    axisLoadedTriadRoleRowsAreCanonical :
+      axisLoadedTriadRoleRows ≡ canonicalAxisLoadedTriadRoleRows
+
+    crenshawDeconstructionTheoremRows :
+      List CrenshawDeconstructionTheoremRow
+
+    crenshawDeconstructionTheoremRowsAreCanonical :
+      crenshawDeconstructionTheoremRows
+      ≡
+      canonicalCrenshawDeconstructionTheoremRows
 
     bodyMemoryCarrier :
       String
@@ -773,6 +1221,22 @@ record HyperfabricIntersectionalBodyMemoryCertificate
       HyperfabricIntersectionalBodyMemoryBridge.intersectionalAxisAuditRows
         bridge
 
+    certificateAxisLoadedTriadRoleRows :
+      List AxisLoadedTriadRoleRow
+
+    certificateAxisLoadedTriadRoleRowsMatch :
+      certificateAxisLoadedTriadRoleRows ≡
+      HyperfabricIntersectionalBodyMemoryBridge.axisLoadedTriadRoleRows
+        bridge
+
+    certificateCrenshawRows :
+      List CrenshawDeconstructionTheoremRow
+
+    certificateCrenshawRowsMatch :
+      certificateCrenshawRows ≡
+      HyperfabricIntersectionalBodyMemoryBridge.crenshawDeconstructionTheoremRows
+        bridge
+
     certificateBodyMemoryCarrier :
       String
 
@@ -825,8 +1289,14 @@ canonicalHyperfabricIntersectionalBodyMemoryBridge =
     refl
     canonicalIntersectionalAxisAuditRows
     refl
+    canonicalAxisLoadedTriadRoleRows
+    refl
+    canonicalCrenshawDeconstructionTheoremRows
+    refl
     "body-memory"
     true
+    refl
+    false
     refl
     false
     refl
@@ -855,6 +1325,12 @@ canonicalHyperfabricIntersectionalBodyMemoryCertificate =
     ; certificateStageRowsMatch = refl
     ; certificateAxisRows = canonicalIntersectionalAxisAuditRows
     ; certificateAxisRowsMatch = refl
+    ; certificateAxisLoadedTriadRoleRows =
+        canonicalAxisLoadedTriadRoleRows
+    ; certificateAxisLoadedTriadRoleRowsMatch = refl
+    ; certificateCrenshawRows =
+        canonicalCrenshawDeconstructionTheoremRows
+    ; certificateCrenshawRowsMatch = refl
     ; certificateBodyMemoryCarrier = "body-memory"
     ; certificateBodyMemoryCarrierIsCandidate = true
     ; certificateBodyMemoryCarrierIsCandidateIsTrue = refl
@@ -941,8 +1417,10 @@ canonicalCertificateRouteMatches =
 canonicalCertificateRouteAdmissible :
   HyperfabricIntersectionalBodyMemoryCertificate.certificateRouteAdmissible
     canonicalHyperfabricIntersectionalBodyMemoryCertificate
-canonicalCertificateRouteAdmissible =
+  ≡
   tt
+canonicalCertificateRouteAdmissible =
+  refl
 
 canonicalCertificateBodyMemoryCarrierIsCandidate :
   HyperfabricIntersectionalBodyMemoryCertificate.certificateBodyMemoryCarrierIsCandidate
@@ -982,4 +1460,20 @@ canonicalCertificateNoEducationalAuthorityIsFalse :
   ≡
   false
 canonicalCertificateNoEducationalAuthorityIsFalse =
+  refl
+
+canonicalAxisLoadedTriadRoleRowsAreCanonical :
+  axisLoadedTriadRoleRows
+    canonicalHyperfabricIntersectionalBodyMemoryBridge
+  ≡
+  canonicalAxisLoadedTriadRoleRows
+canonicalAxisLoadedTriadRoleRowsAreCanonical =
+  refl
+
+canonicalCrenshawDeconstructionTheoremRowsAreCanonical :
+  crenshawDeconstructionTheoremRows
+    canonicalHyperfabricIntersectionalBodyMemoryBridge
+  ≡
+  canonicalCrenshawDeconstructionTheoremRows
+canonicalCrenshawDeconstructionTheoremRowsAreCanonical =
   refl
