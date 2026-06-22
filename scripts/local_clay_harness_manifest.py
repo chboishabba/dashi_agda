@@ -458,6 +458,21 @@ def build_specs() -> list[HarnessSpec]:
     ns_triad_frustration_bridge_summary_out = (
         CHILD_OUT_DIR / "ns_triad_frustration_bridge_summary_smoke.json"
     )
+    ns_triad_phase_laplacian_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_phase_laplacian_scan_smoke.json"
+    )
+    ns_low_frustration_basin_scan_out = (
+        CHILD_OUT_DIR / "ns_low_frustration_basin_scan_smoke.json"
+    )
+    ns_triad_entropy_residence_summary_out = (
+        CHILD_OUT_DIR / "ns_triad_entropy_residence_summary_smoke.json"
+    )
+    ns_triad_cycle_obstruction_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_cycle_obstruction_scan_smoke.json"
+    )
+    ns_triad_low_frustration_hessian_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_low_frustration_hessian_scan_smoke.json"
+    )
     ns_tube_morphology_scan_out = (
         CHILD_OUT_DIR / "ns_tube_morphology_scan_smoke.json"
     )
@@ -565,6 +580,21 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_triad_frustration_bridge_summary_check_out = (
         CHILD_OUT_DIR / "ns_triad_frustration_bridge_summary_check_smoke.json"
+    )
+    ns_triad_phase_laplacian_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_phase_laplacian_scan_check_smoke.json"
+    )
+    ns_low_frustration_basin_scan_check_out = (
+        CHILD_OUT_DIR / "ns_low_frustration_basin_scan_check_smoke.json"
+    )
+    ns_triad_entropy_residence_summary_check_out = (
+        CHILD_OUT_DIR / "ns_triad_entropy_residence_summary_check_smoke.json"
+    )
+    ns_triad_cycle_obstruction_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_cycle_obstruction_scan_check_smoke.json"
+    )
+    ns_triad_low_frustration_hessian_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_low_frustration_hessian_scan_check_smoke.json"
     )
     ns_tube_morphology_scan_check_out = (
         CHILD_OUT_DIR / "ns_tube_morphology_scan_check_smoke.json"
@@ -4768,6 +4798,278 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional triad-frustration bridge regression gate",
                 "validates non-promoting bridge-row metrics, correlations, and the explicit unproved-wall marker",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_phase_laplacian_scan",
+            path=script("ns_triad_phase_laplacian_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_phase_laplacian_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_phase_laplacian_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_phase_laplacian_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_phase_laplacian_scan.py").exists()
+            else "ns_triad_phase_laplacian_scan script not found",
+            notes=(
+                "optional triad phase-Laplacian scan",
+                "empirical/non-promoting; measures finite-dimensional Hessian, gap, and negative-frame proxies on the selected triad carrier",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_phase_laplacian_scan",
+            path=script("check_ns_triad_phase_laplacian_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_phase_laplacian_scan_out),
+                "--output-json",
+                str(ns_triad_phase_laplacian_scan_check_out),
+            )
+            if ns_triad_phase_laplacian_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_phase_laplacian_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_phase_laplacian_scan_out.exists()
+            and script("check_ns_triad_phase_laplacian_scan.py").exists()
+            else (
+                "check_ns_triad_phase_laplacian_scan script not found"
+                if not script("check_ns_triad_phase_laplacian_scan.py").exists()
+                else "check_ns_triad_phase_laplacian_scan requires the phase-Laplacian scan output"
+            ),
+            notes=(
+                "optional triad phase-Laplacian regression gate",
+                "validates non-promoting Hessian, gap, and negative-frame telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_low_frustration_basin_scan",
+            path=script("ns_low_frustration_basin_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_low_frustration_basin_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_low_frustration_basin_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_low_frustration_basin_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_low_frustration_basin_scan.py").exists()
+            else "ns_low_frustration_basin_scan script not found",
+            notes=(
+                "optional low-frustration basin scan",
+                "empirical/non-promoting; estimates basin occupancy, rarity, and structured perturbation sensitivity around low-frustration phase states",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_low_frustration_basin_scan",
+            path=script("check_ns_low_frustration_basin_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_low_frustration_basin_scan_out),
+                "--output-json",
+                str(ns_low_frustration_basin_scan_check_out),
+            )
+            if ns_low_frustration_basin_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_low_frustration_basin_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_low_frustration_basin_scan_out.exists()
+            and script("check_ns_low_frustration_basin_scan.py").exists()
+            else (
+                "check_ns_low_frustration_basin_scan script not found"
+                if not script("check_ns_low_frustration_basin_scan.py").exists()
+                else "check_ns_low_frustration_basin_scan requires the basin scan output"
+            ),
+            notes=(
+                "optional low-frustration basin regression gate",
+                "validates non-promoting basin occupancy and rarity telemetry for the entropy wall",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_entropy_residence_summary",
+            path=script("ns_triad_entropy_residence_summary.py"),
+            args=(
+                "--phase-laplacian-json",
+                str(ns_triad_phase_laplacian_scan_out),
+                "--low-frustration-json",
+                str(ns_low_frustration_basin_scan_out),
+                "--output-json",
+                str(ns_triad_entropy_residence_summary_out),
+            )
+            if ns_triad_phase_laplacian_scan_out.exists()
+            and ns_low_frustration_basin_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_entropy_residence_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_phase_laplacian_scan_out.exists()
+            and ns_low_frustration_basin_scan_out.exists()
+            and script("ns_triad_entropy_residence_summary.py").exists()
+            else (
+                "ns_triad_entropy_residence_summary script not found"
+                if not script("ns_triad_entropy_residence_summary.py").exists()
+                else "ns_triad_entropy_residence_summary requires the phase-Laplacian and basin outputs"
+            ),
+            notes=(
+                "optional triad entropy/residence summary",
+                "empirical/non-promoting; joins the Wall 1 and Wall 2 telemetry surfaces and keeps both walls explicitly unproved",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_entropy_residence_summary",
+            path=script("check_ns_triad_entropy_residence_summary.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_entropy_residence_summary_out),
+                "--output-json",
+                str(ns_triad_entropy_residence_summary_check_out),
+            )
+            if ns_triad_entropy_residence_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_entropy_residence_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_entropy_residence_summary_out.exists()
+            and script("check_ns_triad_entropy_residence_summary.py").exists()
+            else (
+                "check_ns_triad_entropy_residence_summary script not found"
+                if not script("check_ns_triad_entropy_residence_summary.py").exists()
+                else "check_ns_triad_entropy_residence_summary requires the entropy/residence summary output"
+            ),
+            notes=(
+                "optional triad entropy/residence regression gate",
+                "validates non-promoting Wall 1 / Wall 2 bridge metrics and the explicit unproved-wall markers",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_cycle_obstruction_scan",
+            path=script("ns_triad_cycle_obstruction_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_cycle_obstruction_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_cycle_obstruction_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_cycle_obstruction_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_cycle_obstruction_scan.py").exists()
+            else "ns_triad_cycle_obstruction_scan script not found",
+            notes=(
+                "optional triad cycle-obstruction scan",
+                "empirical/non-promoting; measures cycle-rank and cocycle-residue structure on the selected resonant triad carrier",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_cycle_obstruction_scan",
+            path=script("check_ns_triad_cycle_obstruction_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_cycle_obstruction_scan_out),
+                "--output-json",
+                str(ns_triad_cycle_obstruction_scan_check_out),
+            )
+            if ns_triad_cycle_obstruction_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_cycle_obstruction_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_cycle_obstruction_scan_out.exists()
+            and script("check_ns_triad_cycle_obstruction_scan.py").exists()
+            else (
+                "check_ns_triad_cycle_obstruction_scan script not found"
+                if not script("check_ns_triad_cycle_obstruction_scan.py").exists()
+                else "check_ns_triad_cycle_obstruction_scan requires the cycle-obstruction scan output"
+            ),
+            notes=(
+                "optional triad cycle-obstruction regression gate",
+                "validates non-promoting cycle-rank, residue, and exact-lock telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_low_frustration_hessian_scan",
+            path=script("ns_triad_low_frustration_hessian_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_low_frustration_hessian_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_low_frustration_hessian_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_low_frustration_hessian_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_low_frustration_hessian_scan.py").exists()
+            else "ns_triad_low_frustration_hessian_scan script not found",
+            notes=(
+                "optional low-frustration Hessian scan",
+                "empirical/non-promoting; measures second-moment Hessian proxies around the best low-frustration references",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_low_frustration_hessian_scan",
+            path=script("check_ns_triad_low_frustration_hessian_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_low_frustration_hessian_scan_out),
+                "--output-json",
+                str(ns_triad_low_frustration_hessian_scan_check_out),
+            )
+            if ns_triad_low_frustration_hessian_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_low_frustration_hessian_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_low_frustration_hessian_scan_out.exists()
+            and script("check_ns_triad_low_frustration_hessian_scan.py").exists()
+            else (
+                "check_ns_triad_low_frustration_hessian_scan script not found"
+                if not script("check_ns_triad_low_frustration_hessian_scan.py").exists()
+                else "check_ns_triad_low_frustration_hessian_scan requires the Hessian scan output"
+            ),
+            notes=(
+                "optional low-frustration Hessian regression gate",
+                "validates non-promoting Hessian-proxy basin telemetry for the Wall 1 barrier route",
             ),
         ),
         HarnessSpec(

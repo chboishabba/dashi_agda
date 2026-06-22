@@ -6,6 +6,27 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Wall 1 entropy-barrier / Wall 2 residence-compression tranche for
+  `2026-06-22`: adds
+  `DASHI.Physics.Closure.NSTriadEntropyBarrierTheoremBoundary` and
+  `DASHI.Physics.Closure.NSTriadResidenceTimeCompressionBoundary`; adds
+  `scripts/ns_triad_cycle_obstruction_scan.py`,
+  `scripts/check_ns_triad_cycle_obstruction_scan.py`,
+  `scripts/ns_triad_low_frustration_hessian_scan.py`, and
+  `scripts/check_ns_triad_low_frustration_hessian_scan.py`; and stages the
+  new scan/check surfaces in the local Clay harness manifest. The tranche
+  records the explicit Wall 1 entropy-barrier theorem boundary around
+  low-frustration basin volume, Hessian expansion, and determinant lower-bound
+  dependencies; records the explicit Wall 2 residence-time compression
+  boundary around low-frustration basin residence, cosphere
+  transport-dissipation, and the non-Sobolev bridge requirement; and adds new
+  empirical telemetry for cycle-rank proxies, cocycle residues, exact-lock
+  scores, and Hessian-style low-frustration basin proxies on the shared raw
+  N128 archive. This remains fail-closed: theorem promotion and Clay
+  promotion stay false, the entropy-barrier theorem is not proved,
+  residence-time exclusion is not proved, and the new scans are empirical
+  only.
+
 - NS triad incidence / frustration / adversarial-reference tranche for
   `2026-06-21`: adds
   `DASHI.Physics.Closure.NSTriadIncidenceCocycleReceipt`,

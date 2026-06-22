@@ -1,0 +1,16 @@
+{
+  "C": "scripts/check_ns_triad_entropy_residence_summary.py",
+  "F": "Any malformed field, authority drift, or proved-wall claim is a hard error.",
+  "G": "Checker remains empirical and non-promoting.",
+  "L": "Load the summary JSON, validate rows and aggregates, then emit a checker receipt.",
+  "O": "Validate the Wall 1 / Wall 2 triad entropy-residence summary output.",
+  "P": "FAIL_CLOSED_NS_TRIAD_ENTROPY_RESIDENCE_SUMMARY_CHECK",
+  "R": "Check schema, source routes, bridge rows, aggregate metrics, and explicit unproved-wall markers.",
+  "S": "Fail-closed checker for malformed entropy-residence bridge summaries.",
+  "contract": "check_ns_triad_entropy_residence_summary",
+  "errors": [],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_ENTROPY_RESIDENCE_SUMMARY_CHECK",
+  "status": "ok",
+  "warnings": []
+}
