@@ -12,11 +12,11 @@ open import Data.List.Base using (List; []; _∷_)
 -- Fail-closed NS Wall 1 cycle-family quadratic lower-bound boundary.
 --
 -- This receipt separates the one-cycle quantitative law from the family law
--- on the shell carrier.  It records the target shape
+-- on the Wall 1 shell carrier.  It records the target shape
 --
 --   d^T (C W^-1 C^T)^dagger d
 --
--- as the family-level quadratic lower-bound surface, while keeping the
+-- as the Wall 1 family quadratic obstruction surface, while keeping the
 -- uniform c0 > 0 floor explicitly false.  No uniform family bound, Wall 1
 -- closure, full NS theorem, or Clay promotion is claimed.
 
@@ -31,9 +31,9 @@ data NSTriadCycleFamilyLowerBoundStatus : Set where
 data NSTriadCycleFamilyLowerBoundRow : Set where
   oneCycleLawRecorded :
     NSTriadCycleFamilyLowerBoundRow
-  familyLawRecorded :
+  wall1FamilyQuadraticObstructionRecorded :
     NSTriadCycleFamilyLowerBoundRow
-  targetShapeRecorded :
+  explicitQuadraticTargetShapeRecorded :
     NSTriadCycleFamilyLowerBoundRow
   shellCarrierWall1Recorded :
     NSTriadCycleFamilyLowerBoundRow
@@ -48,8 +48,8 @@ canonicalNSTriadCycleFamilyLowerBoundRows :
   List NSTriadCycleFamilyLowerBoundRow
 canonicalNSTriadCycleFamilyLowerBoundRows =
   oneCycleLawRecorded
-  ∷ familyLawRecorded
-  ∷ targetShapeRecorded
+  ∷ wall1FamilyQuadraticObstructionRecorded
+  ∷ explicitQuadraticTargetShapeRecorded
   ∷ shellCarrierWall1Recorded
   ∷ uniformC0FloorStillOpen
   ∷ familyToFrameGapStillOpen
@@ -104,7 +104,7 @@ nsTriadCycleFamilyLowerBoundPromotionImpossibleHere ()
 
 canonicalTargetShapeText : String
 canonicalTargetShapeText =
-  "family-level quadratic lower-bound target shape: d^T (C W^-1 C^T)^dagger d"
+  "Wall 1 family quadratic obstruction target: d^T (C W^-1 C^T)^dagger d"
 
 canonicalOText : String
 canonicalOText =
@@ -112,7 +112,7 @@ canonicalOText =
 
 canonicalRText : String
 canonicalRText =
-  "R: distinguish the one-cycle law from the family law and record the d^T (C W^-1 C^T)^dagger d target shape."
+  "R: distinguish the one-cycle law from the Wall 1 family law and record the d^T (C W^-1 C^T)^dagger d obstruction target."
 
 canonicalCText : String
 canonicalCText =
@@ -120,15 +120,15 @@ canonicalCText =
 
 canonicalSText : String
 canonicalSText =
-  "S: the one-cycle law is recorded separately from the family law, while uniform c0 > 0 remains false."
+  "S: the one-cycle law is recorded separately from the Wall 1 family law, while uniform c0 > 0 remains false."
 
 canonicalLText : String
 canonicalLText =
-  "L: one-cycle law -> family law -> quadratic target shape -> shell carrier -> false uniform floor -> no promotion."
+  "L: one-cycle law -> Wall 1 family quadratic obstruction -> explicit target shape -> shell carrier -> false uniform floor -> no promotion."
 
 canonicalPText : String
 canonicalPText =
-  "P: keep the family lower-bound target candidate-only; do not promote Wall 1, theorem, or Clay status."
+  "P: keep the Wall 1 family quadratic obstruction candidate-only; do not promote Wall 1, theorem, or Clay status."
 
 canonicalGText : String
 canonicalGText =
@@ -217,10 +217,10 @@ record NSTriadCycleFamilyLowerBoundBoundary : Setω where
     oneCycleLawRecordedHereIsTrue :
       oneCycleLawRecordedHere ≡ true
 
-    familyLawRecordedHere :
+    wall1FamilyQuadraticObstructionRecordedHere :
       Bool
-    familyLawRecordedHereIsTrue :
-      familyLawRecordedHere ≡ true
+    wall1FamilyQuadraticObstructionRecordedHereIsTrue :
+      wall1FamilyQuadraticObstructionRecordedHere ≡ true
 
     uniformC0GreaterThanZeroProved :
       Bool
@@ -261,7 +261,6 @@ record NSTriadCycleFamilyLowerBoundBoundary : Setω where
       String
     statementIsCanonical :
       statement ≡
-      "Candidate-only Wall 1 cycle-family lower-bound boundary: the one-cycle law is distinct from the family law, the target shape d^T (C W^-1 C^T)^dagger d is recorded, and uniform c0 > 0 remains false."
+      "Candidate-only Wall 1 cycle-family lower-bound boundary: the one-cycle law is distinct from the Wall 1 family quadratic obstruction, the target shape d^T (C W^-1 C^T)^dagger d is recorded, and uniform c0 > 0 remains false."
 
 open NSTriadCycleFamilyLowerBoundBoundary public
-
