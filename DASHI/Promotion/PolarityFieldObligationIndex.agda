@@ -9,6 +9,8 @@ open import Data.List.Base using (List; []; _∷_)
 import DASHI.Culture.YinYangPolarityBoundary as YinYang
 import DASHI.Core.FiniteReceiptList as FiniteReceiptList
 import DASHI.Core.GenericReceipt as GenericReceipt
+import DASHI.Interop.BettiQiAdapter as BettiQi
+import DASHI.Interop.PolarityBettiSupportBoundary as Betti
 import DASHI.Interop.PolarityPhaseFieldBridge as PhaseField
 import DASHI.Interop.TaoYinYangAdapter as TaoYinYang
 import DASHI.Interop.YinYangQiAdapter as YinYangQi
@@ -29,6 +31,7 @@ data StackLane : Set where
   yangLane : StackLane
   polarityLane : StackLane
   phaseLane : StackLane
+  bettiLane : StackLane
   fieldLane : StackLane
   governanceSurfaceLane : StackLane
 
@@ -92,6 +95,7 @@ canonicalStackLanes =
   ∷ yangLane
   ∷ polarityLane
   ∷ phaseLane
+  ∷ bettiLane
   ∷ fieldLane
   ∷ governanceSurfaceLane
   ∷ []
@@ -100,9 +104,9 @@ canonicalStackLaneCount : Nat
 canonicalStackLaneCount =
   listCount canonicalStackLanes
 
-canonicalStackLaneCountIs6 :
-  canonicalStackLaneCount ≡ 6
-canonicalStackLaneCountIs6 = refl
+canonicalStackLaneCountIs7 :
+  canonicalStackLaneCount ≡ 7
+canonicalStackLaneCountIs7 = refl
 
 canonicalBlockedAuthorities : List String
 canonicalBlockedAuthorities =
@@ -124,6 +128,8 @@ canonicalReceiptReferenceNames =
   ∷ "DASHI.Interop.TaoYinYangAdapter.canonicalTaoYinYangBridgeReceipt"
   ∷ "DASHI.Interop.YinYangQiAdapter.canonicalYinYangQiBridgeReceipt"
   ∷ "DASHI.Interop.PolarityPhaseFieldBridge.canonicalPolarityPhaseFieldBridge"
+  ∷ "DASHI.Interop.PolarityBettiSupportBoundary.canonicalPolarityBettiSupportBoundaryReceipt"
+  ∷ "DASHI.Interop.BettiQiAdapter.canonicalBettiQiBridgeReceipt"
   ∷ "DASHI.Promotion.PolarityFieldObligationIndex.canonicalPolarityFieldObligationIndexReceipt"
   ∷ []
 
@@ -194,11 +200,43 @@ canonicalSummaryRows =
     false
     refl
   ∷ mkSummaryRow
-    "governance summary"
+    "betti support summary"
+    bettiLane
+    "DASHI.Interop.PolarityBettiSupportBoundary"
+    "candidate-only Betti summaries over voxel, supervoxel, and boundary support geometry"
+    ( "DASHI.Interop.PolarityBettiSupportBoundary.canonicalPolarityBettiSupportBoundaryReceipt"
+      ∷ "DASHI.Interop.PolarityPhaseFieldBridge.canonicalPolarityPhaseFieldBridge"
+      ∷ []
+    )
+    true
+    refl
+    true
+    refl
+    false
+    refl
+  ∷ mkSummaryRow
+    "betti to qi summary"
     fieldLane
+    "DASHI.Interop.BettiQiAdapter"
+    "Betti topology summaries carried into Qi carrier, role, and formal-lens surfaces"
+    ( "DASHI.Interop.BettiQiAdapter.canonicalBettiQiBridgeReceipt"
+      ∷ "DASHI.Interop.PolarityBettiSupportBoundary.canonicalPolarityBettiSupportBoundaryReceipt"
+      ∷ []
+    )
+    true
+    refl
+    true
+    refl
+    false
+    refl
+  ∷ mkSummaryRow
+    "governance summary"
+    governanceSurfaceLane
     "DASHI.Promotion.PolarityFieldObligationIndex"
     "obligation index for the polarity-to-field stack"
     ( "DASHI.Promotion.PolarityFieldObligationIndex.canonicalPolarityFieldObligationIndexReceipt"
+      ∷ "DASHI.Interop.BettiQiAdapter.canonicalBettiQiBridgeReceipt"
+      ∷ "DASHI.Interop.PolarityBettiSupportBoundary.canonicalPolarityBettiSupportBoundaryReceipt"
       ∷ "DASHI.Interop.PolarityPhaseFieldBridge.canonicalPolarityPhaseFieldBridge"
       ∷ []
     )
@@ -259,6 +297,25 @@ canonicalGovernanceRows =
     canonicalReceiptReferenceNames
     ( "canonical receipt names are tracked explicitly"
       ∷ "future sibling modules may supply the referenced receipts"
+      ∷ []
+    )
+    true
+    refl
+    true
+    refl
+    false
+    refl
+  ∷ mkGovernanceRow
+    "betti topology governance"
+    governanceSurfaceLane
+    "DASHI.Promotion.PolarityFieldObligationIndex"
+    authorityBlockedGate
+    ( "DASHI.Interop.PolarityBettiSupportBoundary.canonicalPolarityBettiSupportBoundaryReceipt"
+      ∷ "DASHI.Interop.BettiQiAdapter.canonicalBettiQiBridgeReceipt"
+      ∷ []
+    )
+    ( "Betti support summaries remain candidate-only topology diagnostics"
+      ∷ "Betti-to-Qi transport remains non-promoting and authority-blocked"
       ∷ []
     )
     true
@@ -563,21 +620,21 @@ canonicalPolarityFieldObligationIndexReceipt =
         ∷ []
     }
 
-canonicalSummaryRowCountIs5 :
-  canonicalSummaryRowCount ≡ 5
-canonicalSummaryRowCountIs5 = refl
+canonicalSummaryRowCountIs7 :
+  canonicalSummaryRowCount ≡ 7
+canonicalSummaryRowCountIs7 = refl
 
-canonicalGovernanceRowCountIs5 :
-  canonicalGovernanceRowCount ≡ 5
-canonicalGovernanceRowCountIs5 = refl
+canonicalGovernanceRowCountIs6 :
+  canonicalGovernanceRowCount ≡ 6
+canonicalGovernanceRowCountIs6 = refl
 
-canonicalTotalRowCountIs10 :
-  canonicalTotalRowCount ≡ 10
-canonicalTotalRowCountIs10 = refl
+canonicalTotalRowCountIs13 :
+  canonicalTotalRowCount ≡ 13
+canonicalTotalRowCountIs13 = refl
 
-canonicalReceiptReferenceNameCountIs5 :
-  canonicalReceiptReferenceNameCount ≡ 5
-canonicalReceiptReferenceNameCountIs5 = refl
+canonicalReceiptReferenceNameCountIs7 :
+  canonicalReceiptReferenceNameCount ≡ 7
+canonicalReceiptReferenceNameCountIs7 = refl
 
 canonicalSummaryRowsCandidateOnly :
   AllSummaryRowsCandidateOnly canonicalSummaryRows

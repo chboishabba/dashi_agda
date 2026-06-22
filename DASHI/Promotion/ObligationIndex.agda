@@ -254,6 +254,8 @@ data CrossDomainInterpretationBoundaryLane : Set where
     CrossDomainInterpretationBoundaryLane
   polarityFieldBoundaryLane :
     CrossDomainInterpretationBoundaryLane
+  bettiSupportBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
   taoQiBoundaryLane :
     CrossDomainInterpretationBoundaryLane
 
@@ -1401,6 +1403,13 @@ canonicalCrossDomainInterpretationBoundarySummaries =
     "metaphysical, clinical, spiritual, theorem, runtime, and reciprocal validation authority remain blocked while the 369/voxel/wave stack stays candidate-only"
     "agda -i . DASHI/Promotion/PolarityFieldObligationIndex.agda"
   ∷ mkCrossDomainInterpretationBoundarySummary
+    bettiSupportBoundaryLane
+    "DASHI.Interop.PNFHodgeResidualTopology"
+    "canonicalPNFHodgeResidualTopologyReceipt"
+    "Betti-style support topology is recorded as candidate-only residual-field shape grammar over 0/1/2-cell support, boundary maps, and Hodge/Laplacian diagnostics, giving the polarity/phase-field stack a finite connected-component and loop-summary layer"
+    "beta-style support summaries remain diagnostic-only and do not promote theorem, empirical, runtime, clinical, spiritual, or metaphysical authority"
+    "agda -i . DASHI/Interop/PNFHodgeResidualTopology.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
     taoQiBoundaryLane
     "DASHI.Promotion.TaoQiObligationIndex"
     "canonicalTaoQiObligationIndexReceipt"
@@ -1411,11 +1420,11 @@ canonicalCrossDomainInterpretationBoundarySummaries =
 
 crossDomainInterpretationBoundaryCount :
   Nat
-crossDomainInterpretationBoundaryCount = 25
+crossDomainInterpretationBoundaryCount = 26
 
-crossDomainInterpretationBoundaryCountIs25 :
-  crossDomainInterpretationBoundaryCount ≡ 25
-crossDomainInterpretationBoundaryCountIs25 = refl
+crossDomainInterpretationBoundaryCountIs26 :
+  crossDomainInterpretationBoundaryCount ≡ 26
+crossDomainInterpretationBoundaryCountIs26 = refl
 
 record UnifiedPromotionObligationIndex : Setω where
   field

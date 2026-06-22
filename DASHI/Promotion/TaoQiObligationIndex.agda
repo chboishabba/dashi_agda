@@ -10,6 +10,8 @@ import DASHI.Culture.QiOperatorTheoryBoundary as QiTheory
 import DASHI.Culture.TaoOperatorGrammar as TaoGrammar
 import DASHI.Culture.TaoChapterReadingReceipt as Tao
 import DASHI.Culture.YinYangPolarityBoundary as YinYang
+import DASHI.Interop.BettiQiAdapter as BettiQi
+import DASHI.Interop.PolarityBettiSupportBoundary as Betti
 import DASHI.Interop.PolarityPhaseFieldBridge as PhaseField
 import DASHI.Interop.QiCarrierFieldBridge as QiBridge
 import DASHI.Interop.TaoMeditationQiAdapter as TaoMeditation
@@ -35,6 +37,7 @@ data TaoQiLane : Set where
   taoSourceLane : TaoQiLane
   taoReadingLane : TaoQiLane
   yinYangBoundaryLane : TaoQiLane
+  bettiSupportLane : TaoQiLane
   qiRoleGrammarLane : TaoQiLane
   qiCarrierFieldLane : TaoQiLane
   taoQiBridgeLane : TaoQiLane
@@ -74,6 +77,10 @@ record TaoQiGovernanceRow : Set where
       YinYangQi.YinYangQiBridgeReceipt
     polarityPhaseFieldBridgeReceipt :
       PhaseField.PolarityPhaseFieldBridge
+    bettiSupportBoundaryModule : String
+    bettiSupportBoundarySurface : String
+    bettiQiAdapterModule : String
+    bettiQiAdapterSurface : String
     qiOperatorReceipt : QiTheory.QiOperatorTheoryBoundaryReceipt
     qiCarrierBridgeReceipt : QiBridge.QiCarrierFieldBridgeReceipt
     taoQiBridgeReceipt :
@@ -109,6 +116,10 @@ record TaoQiObligationIndexReceipt : Set where
       YinYangQi.YinYangQiBridgeReceipt
     polarityPhaseFieldBridgeReceipt :
       PhaseField.PolarityPhaseFieldBridge
+    bettiSupportBoundaryModule : String
+    bettiSupportBoundarySurface : String
+    bettiQiAdapterModule : String
+    bettiQiAdapterSurface : String
     qiOperatorReceipt : QiTheory.QiOperatorTheoryBoundaryReceipt
     qiCarrierBridgeReceipt : QiBridge.QiCarrierFieldBridgeReceipt
     taoQiBridgeReceipt :
@@ -162,6 +173,10 @@ mkTaoQiGovernanceRow :
   TaoYinYang.TaoYinYangBridgeReceipt →
   YinYangQi.YinYangQiBridgeReceipt →
   PhaseField.PolarityPhaseFieldBridge →
+  String →
+  String →
+  String →
+  String →
   QiTheory.QiOperatorTheoryBoundaryReceipt →
   QiBridge.QiCarrierFieldBridgeReceipt →
   TaoQi.TaoQiBridgeReceipt →
@@ -171,8 +186,10 @@ mkTaoQiGovernanceRow :
   String →
   TaoQiGovernanceRow
 mkTaoQiGovernanceRow lane moduleName taoSource taoFail taoChapter taoGrammar
-  yinYang taoYinYang yinYangQi polarityPhaseField qiOperator qiBridge taoQi
-  taoMeditation polarityField note command =
+  yinYang taoYinYang yinYangQi polarityPhaseField
+  bettiBoundaryModule bettiBoundarySurface bettiAdapterModule
+  bettiAdapterSurface qiOperator qiBridge taoQi taoMeditation polarityField
+  note command =
   taoQiGovernanceRow
     lane
     moduleName
@@ -184,6 +201,10 @@ mkTaoQiGovernanceRow lane moduleName taoSource taoFail taoChapter taoGrammar
     taoYinYang
     yinYangQi
     polarityPhaseField
+    bettiBoundaryModule
+    bettiBoundarySurface
+    bettiAdapterModule
+    bettiAdapterSurface
     qiOperator
     qiBridge
     taoQi
@@ -197,6 +218,22 @@ mkTaoQiGovernanceRow lane moduleName taoSource taoFail taoChapter taoGrammar
     refl
     note
     command
+
+canonicalBettiSupportBoundaryModuleName : String
+canonicalBettiSupportBoundaryModuleName =
+  "DASHI.Interop.PolarityBettiSupportBoundary"
+
+canonicalBettiSupportBoundarySurfaceName : String
+canonicalBettiSupportBoundarySurfaceName =
+  "canonicalPolarityBettiSupportBoundary"
+
+canonicalBettiQiAdapterModuleName : String
+canonicalBettiQiAdapterModuleName =
+  "DASHI.Interop.BettiQiAdapter"
+
+canonicalBettiQiAdapterSurfaceName : String
+canonicalBettiQiAdapterSurfaceName =
+  "canonicalBettiQiBridgeReceipt"
 
 canonicalTaoQiSummaryRows : List TaoQiSummaryRow
 canonicalTaoQiSummaryRows =
@@ -258,11 +295,29 @@ canonicalTaoQiSummaryRows =
     yinYangBoundaryLane
     "DASHI.Interop.PolarityPhaseFieldBridge"
     "canonicalPolarityPhaseFieldBridge"
-    "The polarity layer is extended into 369 phase rows, voxel/supervoxel support, wave mixtures, and superposition candidates under blocked authority governance."
+    "The polarity layer is extended into 369 phase rows, voxel/supervoxel support, Betti-ready field shape, wave mixtures, and superposition candidates under blocked authority governance."
     (listCount PhaseField.canonicalCarrierRows)
     "phase/field rows remain candidate-only interpretation surfaces"
     "no theorem, runtime, external, spiritual, metaphysical, or empirical authority is promoted"
     "agda -i . DASHI/Interop/PolarityPhaseFieldBridge.agda"
+  ∷ mkTaoQiSummaryRow
+    bettiSupportLane
+    canonicalBettiSupportBoundaryModuleName
+    canonicalBettiSupportBoundarySurfaceName
+    "Betti support summaries sit over voxel/supervoxel support geometry as candidate-only topology diagnostics for connectedness, cycles, and void structure."
+    Betti.canonicalBettiRowCount
+    "Betti support remains a candidate-only topology summary surface"
+    "no empirical, clinical, metaphysical, doctrinal, or theorem authority is promoted from topology diagnostics"
+    "agda -i . DASHI/Interop/PolarityBettiSupportBoundary.agda"
+  ∷ mkTaoQiSummaryRow
+    bettiSupportLane
+    canonicalBettiQiAdapterModuleName
+    canonicalBettiQiAdapterSurfaceName
+    "Betti support summaries are carried into Qi role, carrier, and formal-lens surfaces as candidate-only topology-to-Qi adapter rows."
+    (listCount BettiQi.canonicalBettiQiAdapterRows)
+    "the Betti-to-Qi bridge remains descriptive only"
+    "truth, support, admissibility, runtime, theorem, clinical, and metaphysical authority remain false"
+    "agda -i . DASHI/Interop/BettiQiAdapter.agda"
   ∷ mkTaoQiSummaryRow
     qiRoleGrammarLane
     "DASHI.Culture.QiOperatorTheoryBoundary"
@@ -314,6 +369,10 @@ canonicalTaoQiGovernanceRows =
     TaoYinYang.canonicalTaoYinYangBridgeReceipt
     YinYangQi.canonicalYinYangQiBridgeReceipt
     PhaseField.canonicalPolarityPhaseFieldBridge
+    canonicalBettiSupportBoundaryModuleName
+    canonicalBettiSupportBoundarySurfaceName
+    canonicalBettiQiAdapterModuleName
+    canonicalBettiQiAdapterSurfaceName
     QiTheory.canonicalQiOperatorTheoryBoundaryReceipt
     QiBridge.canonicalQiCarrierFieldBridgeReceipt
     TaoQi.canonicalTaoQiBridgeReceipt
@@ -332,6 +391,10 @@ canonicalTaoQiGovernanceRows =
     TaoYinYang.canonicalTaoYinYangBridgeReceipt
     YinYangQi.canonicalYinYangQiBridgeReceipt
     PhaseField.canonicalPolarityPhaseFieldBridge
+    canonicalBettiSupportBoundaryModuleName
+    canonicalBettiSupportBoundarySurfaceName
+    canonicalBettiQiAdapterModuleName
+    canonicalBettiQiAdapterSurfaceName
     QiTheory.canonicalQiOperatorTheoryBoundaryReceipt
     QiBridge.canonicalQiCarrierFieldBridgeReceipt
     TaoQi.canonicalTaoQiBridgeReceipt
@@ -350,12 +413,16 @@ canonicalTaoQiGovernanceRows =
     TaoYinYang.canonicalTaoYinYangBridgeReceipt
     YinYangQi.canonicalYinYangQiBridgeReceipt
     PhaseField.canonicalPolarityPhaseFieldBridge
+    canonicalBettiSupportBoundaryModuleName
+    canonicalBettiSupportBoundarySurfaceName
+    canonicalBettiQiAdapterModuleName
+    canonicalBettiQiAdapterSurfaceName
     QiTheory.canonicalQiOperatorTheoryBoundaryReceipt
     QiBridge.canonicalQiCarrierFieldBridgeReceipt
     TaoQi.canonicalTaoQiBridgeReceipt
     TaoMeditation.canonicalTaoMeditationQiBridgeReceipt
     PolarityField.canonicalPolarityFieldObligationIndexReceipt
-    "The bridge surface stays candidate-only: Tao, yin/yang, Qi, and the 369/voxel/wave field grammar are joined as receipts and role grammar, not as promoted doctrine, empirical validity, clinical instruction, or metaphysical authority."
+    "The bridge surface stays candidate-only: Tao, yin/yang, Betti support, Qi, and the 369/voxel/wave field grammar are joined as receipts and role grammar, not as promoted doctrine, empirical validity, clinical instruction, or metaphysical authority."
     "agda -i . DASHI/Promotion/TaoQiObligationIndex.agda"
   ∷ []
 
@@ -370,6 +437,10 @@ canonicalTaoQiObligationIndexReceipt =
     TaoYinYang.canonicalTaoYinYangBridgeReceipt
     YinYangQi.canonicalYinYangQiBridgeReceipt
     PhaseField.canonicalPolarityPhaseFieldBridge
+    canonicalBettiSupportBoundaryModuleName
+    canonicalBettiSupportBoundarySurfaceName
+    canonicalBettiQiAdapterModuleName
+    canonicalBettiQiAdapterSurfaceName
     QiTheory.canonicalQiOperatorTheoryBoundaryReceipt
     QiBridge.canonicalQiCarrierFieldBridgeReceipt
     TaoQi.canonicalTaoQiBridgeReceipt
