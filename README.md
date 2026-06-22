@@ -132,6 +132,36 @@ witnessing `6`, `p11` witnessing `10`, and `p13` witnessing `12`. This keeps
 `Stage12FibreSurface` as the spine. `Stage12FibreSurface is the spine` for
 this tranche, keeps `p7` as the first local exemplar,
 and marks `p13` as the natural full Stage12 witness.
+The full `0..11` successor-witness generalization is broader than the prime
+rows alone. For each stage `n`, the immediate witness is `n + 1`, and the
+factorization of that successor tells you what kind of witness has appeared.
+The repo now treats three witness kinds as first-class documentation language:
+prime successor witnesses, prime-power depth witnesses, and composite coupling witnesses.
+Prime successor witnesses open a new irreducible lane, as in
+`1 -> 2`, `2 -> 3`, `4 -> 5`, `6 -> 7`, `10 -> 11`, and `12 -> 13`.
+Prime-power depth witnesses deepen an existing axis rather than opening a new
+one, as in `3 -> 4 = 2^2`, `7 -> 8 = 2^3`, and `8 -> 9 = 3^2`. Composite
+coupling witnesses bind previously opened axes into one assembled carrier, as
+in `5 -> 6 = 2 * 3`, `9 -> 10 = 2 * 5`, and `11 -> 12 = 2^2 * 3`.
+This preserves the existing hierarchy: `Stage12FibreSurface` remains the general
+stage/carry/fibre grammar, while successor witnesses describe what the
+next carrier body looks like over that spine.
+Stated plainly for regression and reader clarity: Stage12FibreSurface remains the
+general stage/carry/fibre grammar for this tranche.
+The sharp repo-level reading for the current window is:
+`0 -> 1` identity witness,
+`1 -> 2` new p2 axis,
+`2 -> 3` new p3 axis,
+`3 -> 4` dyadic depth witness,
+`4 -> 5` new p5 axis,
+`5 -> 6` dyad-triad coupling witness,
+`6 -> 7` new p7 axis,
+`7 -> 8` high dyadic-depth witness,
+`8 -> 9` triadic-depth witness,
+`9 -> 10` dyad-decision coupling witness,
+`10 -> 11` new p11 axis,
+`11 -> 12` manifold composite witness,
+and `12 -> 13` the full Stage12 prime witness.
 
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL

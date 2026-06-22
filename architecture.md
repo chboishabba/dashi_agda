@@ -189,6 +189,11 @@ Architecture rule for this tranche:
 - `Stage12FibreSurface is the spine` for this tranche.
 - `PrimeSuccessorWitness` records the cleaner successor law: `p` is the new prime lane, `p - 1` is the witness-space that proves what `p` can act on, and `+1` is the move from witness-space into the new prime lane.
 - The canonical successor rows are `p2 -> 1`, `p3 -> 2`, `p5 -> 4`, `p7 -> 6`, `p11 -> 10`, and `p13 -> 12`.
+- The wider `0..11` stage window is classified by successor-witness kind, not only by prime cases. The immediate witness of stage `n` is `n + 1`.
+- prime successor witnesses open a new irreducible lane: `1 -> 2`, `2 -> 3`, `4 -> 5`, `6 -> 7`, `10 -> 11`, and `12 -> 13`.
+- prime-power depth witnesses deepen one existing axis: `3 -> 4 = 2^2`, `7 -> 8 = 2^3`, and `8 -> 9 = 3^2`.
+- composite coupling witnesses couple previously opened axes: `5 -> 6 = 2 * 3`, `9 -> 10 = 2 * 5`, and `11 -> 12 = 2^2 * 3`.
+- The witness-body rule is therefore: successor prime means new prime-axis witness, successor prime power means p-adic depth witness, and successor composite with multiple primes means coupled-axis witness.
 - Prime-local unit-group lanes plug into that atlas through typed local adapters; they do not replace it.
 - The p7 tranche is the first clean prime-local exemplar because `(Z/7Z)^x` has order `6`, aligning naturally with the `HexTruth` lane.
 - `p13` is the natural full Stage12 witness because `13 - 1 = 12`; inside the `0..11` atlas it is recorded as the successor witness over the whole Stage12 carrier rather than as a replacement for that carrier.
