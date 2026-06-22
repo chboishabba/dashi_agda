@@ -231,7 +231,13 @@ def test_stage12_fibre_surface_carry_depth_seam_hits_irreversibility_boundary() 
     assert "irreversibilityCause" in boundary_text
     assert "nonInjectiveQuotient" in boundary_text
     assert "stageQuotientIrreversibilityBoundaryAnchor" in locator_text
+    assert "stage12FibreSurfaceReceipt" in locator_text
+    assert "stage12FibreSurfaceReceiptIsCanonical" in locator_text
+    assert "stage12FibreSurfaceCarryDepthSeamIsCanonical" in locator_text
+    assert "stage12FibreSurfaceLocatorReference" in locator_text
+    assert "stage12FibreSurfaceCarryDepthSeamLocatorWitness" in locator_text
     assert "Located at the StageQuotient irreversibility boundary" in locator_text
+    assert "typed provenance" in locator_text
     assert "Stage12FibreSurface preserves atlas-11 as a seam with carry-depth rev-2" in carry_bridge_text
     assert "StageQuotient.Stage12FibreSurface.carry-depth" in carry_bridge_text
 
