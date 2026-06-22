@@ -123,6 +123,15 @@ prime lanes are local unit-action adapters into it, and
 `P7Stage7C6HexRegression` is the first canonical local witness. Future prime
 lanes should route through the same Stage12 surface rather than inventing
 parallel stage semantics.
+`DASHI.Interop.PrimeSuccessorWitness` now makes the cleaner `p - 1` / `+1`
+number-theoretic rule explicit: `p` is the new prime lane, `p - 1` is the
+witness-space that proves what `p` can act on, and `+1` is the successor move
+from witness-space into the new prime lane. The canonical worked rows are
+`p2` witnessing `1`, `p3` witnessing `2`, `p5` witnessing `4`, `p7`
+witnessing `6`, `p11` witnessing `10`, and `p13` witnessing `12`. This keeps
+`Stage12FibreSurface` as the spine. `Stage12FibreSurface is the spine` for
+this tranche, keeps `p7` as the first local exemplar,
+and marks `p13` as the natural full Stage12 witness.
 
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL
