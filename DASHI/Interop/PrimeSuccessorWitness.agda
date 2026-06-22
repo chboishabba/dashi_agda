@@ -516,6 +516,33 @@ canonicalStage11SuccessorWitness =
     ; authorityBits = canonicalPrimeSuccessorWitnessAuthorityBits
     }
 
+canonicalStage12SuccessorWitness : StageSuccessorWitness
+canonicalStage12SuccessorWitness =
+  record
+    { stage = twelve
+    ; witness = thirteen
+    ; successorLaw = refl
+    ; stagePoint = Atlas.atlas-0
+    ; stagePointMatches = refl
+    ; projectedWitnessPoint = Atlas.atlas-1
+    ; projectedWitnessPointMatches = refl
+    ; stageResidue = StageQuotient.Stage12FibreSurface.residue StageQuotient.canonicalStage12FibreSurface Atlas.atlas-0
+    ; stageResidueMatches = refl
+    ; stageTone = StageQuotient.Stage12FibreSurface.quotient StageQuotient.canonicalStage12FibreSurface Atlas.atlas-0
+    ; stageToneMatches = refl
+    ; projectedWitnessResidue = StageQuotient.Stage12FibreSurface.residue StageQuotient.canonicalStage12FibreSurface Atlas.atlas-1
+    ; projectedWitnessResidueMatches = refl
+    ; projectedWitnessTone = StageQuotient.Stage12FibreSurface.quotient StageQuotient.canonicalStage12FibreSurface Atlas.atlas-1
+    ; projectedWitnessToneMatches = refl
+    ; witnessKind = primeAxisWitness
+    ; factorSupport = axis13-1 ∷ []
+    ; interpretation =
+        "12 is witnessed by 13: the full Stage12 carrier receives the p13 prime lane."
+      ∷ "This is the closure-to-new-prime step rather than a replacement of the Stage12 atlas."
+      ∷ []
+    ; authorityBits = canonicalPrimeSuccessorWitnessAuthorityBits
+    }
+
 canonicalStageSuccessorWitnesses : List StageSuccessorWitness
 canonicalStageSuccessorWitnesses =
   canonicalStage0SuccessorWitness
@@ -530,6 +557,7 @@ canonicalStageSuccessorWitnesses =
   ∷ canonicalStage9SuccessorWitness
   ∷ canonicalStage10SuccessorWitness
   ∷ canonicalStage11SuccessorWitness
+  ∷ canonicalStage12SuccessorWitness
   ∷ []
 
 record WindowWitnessHighlight : Set where

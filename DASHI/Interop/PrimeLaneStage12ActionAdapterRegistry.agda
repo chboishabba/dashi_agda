@@ -11,7 +11,8 @@ import DASHI.Interop.PrimeLaneStage12ActionAdapter as Adapter
 ------------------------------------------------------------------------
 -- Canonical prime-lane Stage12 adapter registry.
 --
--- The Stage12 adapter layer now has two concrete canonical rows, p7 and p11.
+-- The Stage12 adapter layer now has three concrete canonical rows, p7, p11,
+-- and the full p13 closure witness.
 -- This registry enumerates those rows without inventing any extra authority.
 
 data PrimeLaneStage12ActionAdapterRegistryBoundary : Set where
@@ -48,6 +49,10 @@ record PrimeLaneStage12ActionAdapterRegistry : Set₁ where
       Bool
     enumeratesP11IsTrue :
       enumeratesP11 ≡ true
+    enumeratesP13 :
+      Bool
+    enumeratesP13IsTrue :
+      enumeratesP13 ≡ true
     notes :
       List String
 
@@ -63,6 +68,9 @@ canonicalPrimeLaneStage12ActionAdapterEntries =
   ∷ canonicalAdapterEntry
     "p11"
     Adapter.canonicalP11PrimeLaneStage12ActionAdapter
+  ∷ canonicalAdapterEntry
+    "p13"
+    Adapter.canonicalP13PrimeLaneStage12ActionAdapter
   ∷ []
 
 canonicalPrimeLaneStage12ActionAdapterRegistry :
@@ -76,9 +84,9 @@ canonicalPrimeLaneStage12ActionAdapterRegistry =
     ; registryEntries =
         canonicalPrimeLaneStage12ActionAdapterEntries
     ; registeredAdapterCount =
-        2
+        3
     ; canonicalAdapterCount =
-        2
+        3
     ; enumeratesP7 =
         true
     ; enumeratesP7IsTrue =
@@ -87,8 +95,12 @@ canonicalPrimeLaneStage12ActionAdapterRegistry =
         true
     ; enumeratesP11IsTrue =
         refl
+    ; enumeratesP13 =
+        true
+    ; enumeratesP13IsTrue =
+        refl
     ; notes =
-        "p7 and p11 now consume the same Stage12 prime-lane adapter contract and are both enumerated here."
+        "p7, p11, and the p13 full Stage12 witness now consume the same Stage12 prime-lane adapter contract and are enumerated here."
       ∷ "The registry is intentionally narrow: it enumerates canonical prime-lane Stage12 adapters only."
       ∷ "Future prime lanes should join this registry by consuming the same shared Stage12 adapter contract."
       ∷ []

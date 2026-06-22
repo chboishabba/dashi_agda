@@ -16,7 +16,7 @@ open import DASHI.Physics.Closure.SSPPrimeLane369PhaseBridge as Phase using
   ; primeLane369PhaseBridge
   ; unitOrder
   )
-open import DASHI.TrackedPrimes using (SSP; p7; p11)
+open import DASHI.TrackedPrimes using (SSP; p7; p11; p13)
 
 ------------------------------------------------------------------------
 -- Prime-lane quotient-action surface.
@@ -139,6 +139,19 @@ p11C10PrimeLaneQuotientCarrier =
     (normalizedUnitStep p11 canonicalGeneratorStep)
     refl
 
+p13C12PrimeLaneQuotientCarrier : PrimeLaneQuotientCarrier
+p13C12PrimeLaneQuotientCarrier =
+  mkPrimeLaneQuotientCarrier
+    "p13/C12"
+    12
+    zero
+    refl
+    (normalizedUnitStep p13)
+    (normalizedUnitStep p13 zero)
+    refl
+    (normalizedUnitStep p13 canonicalGeneratorStep)
+    refl
+
 p7CandidateOnlyAuthority : PrimeLaneCandidateOnlyAuthority
 p7CandidateOnlyAuthority =
   mkPrimeLaneCandidateOnlyAuthority
@@ -151,6 +164,16 @@ p7CandidateOnlyAuthority =
 
 p11CandidateOnlyAuthority : PrimeLaneCandidateOnlyAuthority
 p11CandidateOnlyAuthority =
+  mkPrimeLaneCandidateOnlyAuthority
+    true
+    refl
+    true
+    refl
+    true
+    refl
+
+p13CandidateOnlyAuthority : PrimeLaneCandidateOnlyAuthority
+p13CandidateOnlyAuthority =
   mkPrimeLaneCandidateOnlyAuthority
     true
     refl
@@ -185,3 +208,15 @@ p11C10PrimeLaneUnitActionQuotientSurface =
     p11CandidateOnlyAuthority
     refl
 
+p13C12PrimeLaneUnitActionQuotientSurface :
+  PrimeLaneUnitActionQuotientSurface
+p13C12PrimeLaneUnitActionQuotientSurface =
+  mkPrimeLaneUnitActionQuotientSurface
+    p13
+    p13C12PrimeLaneQuotientCarrier
+    (primeLane369PhaseBridge p13)
+    refl
+    (primeLaneUnitActionProfile p13 canonicalGeneratorStep)
+    refl
+    p13CandidateOnlyAuthority
+    refl

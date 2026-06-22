@@ -167,6 +167,7 @@ import DASHI.Core.OddSSP369FieldGate
 import DASHI.Core.OddSSP369FocusedPrimeGate
 import DASHI.Core.OddSSPCoefficientGate
 import DASHI.Core.P11EquivariantOddFieldGate
+import DASHI.Core.P13EquivariantOddFieldGate
 import DASHI.Core.P7EquivariantOddFieldGate
 import DASHI.Core.OperatorShapeNonAuthorityCore
 import DASHI.Core.OperatorTypes
@@ -253,6 +254,8 @@ import DASHI.Foundations.P7HexTruthActionQuotient
 import DASHI.Foundations.P7UnitGroupC6Witness
 import DASHI.Foundations.P11HexTruthActionQuotient
 import DASHI.Foundations.P11UnitGroupC10Witness
+import DASHI.Foundations.P13HexTruthActionQuotient
+import DASHI.Foundations.P13UnitGroupC12Witness
 import DASHI.Foundations.PhysicsLinearAnalysisParity
 import DASHI.Foundations.PrimeLaneUnitActionQuotient
 import DASHI.Foundations.PrincipiaVol1DashiBridge
@@ -278,6 +281,7 @@ import DASHI.Geometry.KleinClosureReceipt
 import DASHI.Geometry.MobiusOrientationGate
 import DASHI.Geometry.P7UnitActionTreeIsometry
 import DASHI.Geometry.P11UnitActionTreeIsometry
+import DASHI.Geometry.P13UnitActionTreeIsometry
 import DASHI.Geometry.SSP369SymmetryIsometry
 import DASHI.Geometry.SSP369TreeAutomorphism
 import DASHI.Geometry.SSP369Ultrametric
@@ -301,6 +305,7 @@ import DASHI.Interop.TaoYinYangAdapter
 import DASHI.Interop.YinYangQiAdapter
 import DASHI.Interop.CarryCompletionSpectralBridge
 import DASHI.Interop.P11PrimeLaneStage12ActionBridge
+import DASHI.Interop.P13PrimeLaneStage12ActionBridge
 import DASHI.Interop.P7PrimeLaneStage12ActionBridge
 import DASHI.Interop.PrimeLaneStage12ActionAdapter
 import DASHI.Interop.PrimeLaneStage12ActionAdapterRegistry
@@ -594,6 +599,7 @@ import DASHI.Physics.Closure.PerelmanBTLedgerExactCounts
 import DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf
 import DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary
 import DASHI.Physics.Closure.P11Stage11C10Regression
+import DASHI.Physics.Closure.P13Stage12C12Regression
 import DASHI.Physics.Closure.P7Stage7C6HexRegression
 import DASHI.Physics.Closure.SSPPrimeLane369ActionPhaseBridge
 import DASHI.Physics.Closure.SSPPrimeLane369BTBridge
