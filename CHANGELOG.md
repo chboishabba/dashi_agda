@@ -6,6 +6,29 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Wall 1 phase-regime / cocycle-floor / floor-to-frame tranche for
+  `2026-06-22`: adds
+  `DASHI.Physics.Closure.NSPhaseRegimeSeparationBoundary`,
+  `DASHI.Physics.Closure.NSTriadCocycleFrustrationFloorBoundary`, and
+  `DASHI.Physics.Closure.NSFloorToFrameStabilityBoundary`; adds
+  `scripts/ns_triad_phase_regime_separation_scan.py`,
+  `scripts/check_ns_triad_phase_regime_separation_scan.py`,
+  `scripts/ns_triad_frame_stability_scan.py`,
+  `scripts/check_ns_triad_frame_stability_scan.py`,
+  `scripts/ns_triad_cocycle_floor_scan.py`,
+  `scripts/check_ns_triad_cocycle_floor_scan.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`; and stages the new
+  scan/check surfaces in the local Clay harness manifest. The tranche records
+  shellwise random-phase versus optimized low-frustration telemetry as a
+  candidate-only phase-regime boundary, records the explicit cocycle-floor
+  target around cycle-defect lower-bound proxies and irreducible floor
+  telemetry, and records the floor-to-frame stability warning that a scalar
+  floor alone does not imply `K_N < 1`. This remains fail-closed: theorem
+  promotion and Clay promotion stay false, the cocycle-floor theorem is not
+  proved, the floor-to-frame bridge is not proved, and the new scans are
+  empirical only.
+
 - NS Wall 1 entropy-barrier / Wall 2 residence-compression tranche for
   `2026-06-22`: adds
   `DASHI.Physics.Closure.NSTriadEntropyBarrierTheoremBoundary` and
