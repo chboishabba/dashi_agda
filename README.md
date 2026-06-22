@@ -39,6 +39,8 @@ clinical-adjacent, not diagnostic or therapeutic authority:
 `DASHI.Biology.GenomeEpigenomeConnectomeBodyMemoryBridge`,
 `DASHI.Biology.IntersectionalLongitudinalResidualDynamics`,
 `DASHI.Biology.LongitudinalFMRIConnectomeDynamicsBridge`,
+`DASHI.Biology.NeurodivergentAtlasBodyMemoryBridge`,
+`DASHI.Biology.PopulationLongitudinalBOLDResidualBridge`,
 `DASHI.Biology.EpigeneticTemporalRegulationBridge`,
 `DASHI.Biology.DevelopmentalWindowBodyMemoryBridge`,
 `DASHI.Biology.InterventionConsentLongitudinalGovernance`,
@@ -73,6 +75,16 @@ axis-loaded role carriers rather than neutral universals: single-axis
 projection, abstract-humanity gluing, stable-nine justice promotion, and
 neutral-triad projection are rejected while prime-product / p-adic language
 remains candidate-only and axis-preserving.
+`DASHI.Biology.NeurodivergentAtlasBodyMemoryBridge` keeps NT/ND differences as
+neuro-affirming chart-prior, compression-style, sensory-weight, social-code,
+and threshold variation rather than normal/broken classification.
+`DASHI.Biology.PopulationLongitudinalBOLDResidualBridge` keeps longitudinal
+BOLD/connectome readings at bounded neural/vascular population-proxy status:
+proxy drift is not diagnosis, mind reading, hidden-chart recovery, treatment,
+or causal closure. `DASHI.Culture.CulturalTriadOperatorBoundary` records
+secular triad operators such as `1 = subject + other + relation` under
+humility, intersectionality, and power gates; it does not promote theology,
+monoculture, enemy-coding, political authority, or legal authority.
 The broader route/lane joining plan is `Docs/support/reference/UnifiedRoutesLanePlan.md`, which
 extends the same receipt-gated architecture across physics, empirical,
 biology, runtime, arithmetic, Gate 3, NS, and YM lanes.

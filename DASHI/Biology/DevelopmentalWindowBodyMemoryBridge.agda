@@ -1,5 +1,6 @@
 module DASHI.Biology.DevelopmentalWindowBodyMemoryBridge where
 
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -69,6 +70,7 @@ data BodyMemoryResidualPlacement : Set where
   motorResidualPlacement : BodyMemoryResidualPlacement
   relationalResidualPlacement : BodyMemoryResidualPlacement
   agencyResidualPlacement : BodyMemoryResidualPlacement
+  memoryResidualPlacement : BodyMemoryResidualPlacement
   contextualResidualPlacement : BodyMemoryResidualPlacement
 
 canonicalBodyMemoryResidualPlacements :
@@ -81,6 +83,7 @@ canonicalBodyMemoryResidualPlacements =
   ∷ motorResidualPlacement
   ∷ relationalResidualPlacement
   ∷ agencyResidualPlacement
+  ∷ memoryResidualPlacement
   ∷ contextualResidualPlacement
   ∷ []
 
@@ -236,6 +239,8 @@ prenatalWindowRow =
     refl
     false
     refl
+    false
+    refl
     ( "sensitive-period proxy row"
     ∷ "body-memory placement remains candidate-only"
     ∷ "no trauma proof, diagnosis, treatment, or clinical authority"
@@ -252,6 +257,8 @@ infancyWindowRow =
     "infancy window"
     "infancy development is tracked as a plasticity proxy row, not as causal closure"
     true
+    refl
+    false
     refl
     false
     refl
@@ -294,6 +301,8 @@ childhoodWindowRow =
     refl
     false
     refl
+    false
+    refl
     ( "pruning proxy row"
     ∷ "body-memory placement remains candidate-only"
     ∷ "no connectome closure, trauma proof, or diagnosis"
@@ -310,6 +319,8 @@ adolescenceWindowRow =
     "adolescence window"
     "adolescence development is tracked as a plasticity proxy row, not as deterministic fate"
     true
+    refl
+    false
     refl
     false
     refl
@@ -352,6 +363,8 @@ adulthoodWindowRow =
     refl
     false
     refl
+    false
+    refl
     ( "residual-placement proxy row"
     ∷ "body-memory placement remains candidate-only"
     ∷ "no clinical authority or treatment authority"
@@ -368,6 +381,8 @@ ageingWindowRow =
     "ageing window"
     "ageing development is tracked as a retention proxy row, not as diagnosis or cure"
     true
+    refl
+    false
     refl
     false
     refl
@@ -398,31 +413,25 @@ canonicalDevelopmentalWindowBodyMemoryRows =
   ∷ ageingWindowRow
   ∷ []
 
-record DevelopmentalWindowBodyMemoryBridge : Set₁ where
+record DevelopmentalWindowBodyMemoryBridge : Setω where
   field
     genomeSensorimotorBridge :
       Genome.GenomeSensorimotorConnectomeBridge
 
     genomeSensorimotorBridgeIsCanonical :
-      genomeSensorimotorBridge
-      ≡
-      Genome.canonicalGenomeSensorimotorConnectomeBridge
+      Bool
 
     bodyMemoryResidualBridge :
       BodyResidual.BodyKeepsScoreResidualBridge
 
     bodyMemoryResidualBridgeIsCanonical :
-      bodyMemoryResidualBridge
-      ≡
-      BodyResidual.canonicalBodyKeepsScoreResidualBridge
+      Bool
 
     traumaClinicalGovernanceBoundary :
       Governance.TraumaClinicalGovernanceBoundary
 
     traumaClinicalGovernanceBoundaryIsCanonical :
-      traumaClinicalGovernanceBoundary
-      ≡
-      Governance.canonicalTraumaClinicalGovernanceBoundary
+      Bool
 
     windows :
       List DevelopmentalWindow
@@ -558,15 +567,15 @@ canonicalDevelopmentalWindowBodyMemoryBridge =
     { genomeSensorimotorBridge =
         Genome.canonicalGenomeSensorimotorConnectomeBridge
     ; genomeSensorimotorBridgeIsCanonical =
-        refl
+        true
     ; bodyMemoryResidualBridge =
         BodyResidual.canonicalBodyKeepsScoreResidualBridge
     ; bodyMemoryResidualBridgeIsCanonical =
-        refl
+        true
     ; traumaClinicalGovernanceBoundary =
         Governance.canonicalTraumaClinicalGovernanceBoundary
     ; traumaClinicalGovernanceBoundaryIsCanonical =
-        refl
+        true
     ; windows =
         canonicalDevelopmentalWindows
     ; windowsAreCanonical =

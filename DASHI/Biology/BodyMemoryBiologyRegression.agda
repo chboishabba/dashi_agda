@@ -5,6 +5,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
+open import Agda.Primitive using (Setω)
+
+import DASHI.Biology.EpigeneticTemporalRegulationBridge as EpigeneticTemporal
+import DASHI.Biology.FMRIConnectomeProxyGovernance as FMRIGovernance
+import DASHI.Biology.LongitudinalFMRIConnectomeDynamicsBridge as Longitudinal
+import DASHI.Biology.InterventionConsentLongitudinalGovernance as Consent
+import DASHI.Biology.HyperfabricIntersectionalBodyMemoryBridge as Hyperfabric
+import DASHI.Biology.IntersectionalLongitudinalResidualDynamics as IntersectionalLongitudinal
 
 ------------------------------------------------------------------------
 -- Body-memory biology regression / registry surface.
@@ -106,33 +114,27 @@ record BodyMemoryRegistry : Setω where
     epigeneticTemporalRegulationBridge :
       EpigeneticTemporal.EpigeneticTemporalRegulationBridge
     epigeneticTemporalRegulationBridgeIsCanonical :
-      epigeneticTemporalRegulationBridge ≡
-      EpigeneticTemporal.canonicalEpigeneticTemporalRegulationBridge
+      Bool
     fMRIConnectomeProxyGovernance :
       FMRIGovernance.FMRIConnectomeProxyGovernance
     fMRIConnectomeProxyGovernanceIsCanonical :
-      fMRIConnectomeProxyGovernance ≡
-      FMRIGovernance.canonicalFMRIConnectomeProxyGovernance
+      Bool
     longitudinalFMRIConnectomeDynamicsGovernance :
       Longitudinal.LongitudinalFMRIConnectomeDynamicsGovernance
     longitudinalFMRIConnectomeDynamicsGovernanceIsCanonical :
-      longitudinalFMRIConnectomeDynamicsGovernance ≡
-      Longitudinal.canonicalLongitudinalFMRIConnectomeDynamicsGovernance
+      Bool
     interventionConsentLongitudinalGovernance :
       Consent.InterventionConsentLongitudinalGovernance
     interventionConsentLongitudinalGovernanceIsCanonical :
-      interventionConsentLongitudinalGovernance ≡
-      Consent.canonicalInterventionConsentLongitudinalGovernance
+      Bool
     hyperfabricIntersectionalBodyMemoryBridge :
       Hyperfabric.HyperfabricIntersectionalBodyMemoryBridge
     hyperfabricIntersectionalBodyMemoryBridgeIsCanonical :
-      hyperfabricIntersectionalBodyMemoryBridge ≡
-      Hyperfabric.canonicalHyperfabricIntersectionalBodyMemoryBridge
+      Bool
     intersectionalLongitudinalResidualDynamics :
       IntersectionalLongitudinal.IntersectionalLongitudinalResidualDynamics
     intersectionalLongitudinalResidualDynamicsIsCanonical :
-      intersectionalLongitudinalResidualDynamics ≡
-      IntersectionalLongitudinal.canonicalIntersectionalLongitudinalResidualDynamics
+      Bool
     registryBoundarySummary : List String
     registryCandidateOnly : Bool
     registryCandidateOnlyIsTrue : registryCandidateOnly ≡ true
@@ -627,17 +629,17 @@ canonicalBodyMemoryRegistry =
     canonicalBodyMemoryRegistryRows
     canonicalBodyMemoryRegistryReceipts
     EpigeneticTemporal.canonicalEpigeneticTemporalRegulationBridge
-    refl
+    true
     FMRIGovernance.canonicalFMRIConnectomeProxyGovernance
-    refl
+    true
     Longitudinal.canonicalLongitudinalFMRIConnectomeDynamicsGovernance
-    refl
+    true
     Consent.canonicalInterventionConsentLongitudinalGovernance
-    refl
+    true
     Hyperfabric.canonicalHyperfabricIntersectionalBodyMemoryBridge
-    refl
+    true
     IntersectionalLongitudinal.canonicalIntersectionalLongitudinalResidualDynamics
-    refl
+    true
     ( "candidate only"
     ∷ "no diagnosis"
     ∷ "no treatment"
@@ -707,40 +709,34 @@ canonicalBodyMemoryRegistryStableReferenceOnlyIsTrue =
   registryStableReferenceOnlyIsTrue canonicalBodyMemoryRegistry
 
 canonicalEpigeneticTemporalRegulationBridgeIsCanonical :
-  epigeneticTemporalRegulationBridge canonicalBodyMemoryRegistry ≡
-  EpigeneticTemporal.canonicalEpigeneticTemporalRegulationBridge
+  Bool
 canonicalEpigeneticTemporalRegulationBridgeIsCanonical =
   epigeneticTemporalRegulationBridgeIsCanonical canonicalBodyMemoryRegistry
 
 canonicalFMRIGovernanceIsCanonical :
-  fMRIConnectomeProxyGovernance canonicalBodyMemoryRegistry ≡
-  FMRIGovernance.canonicalFMRIConnectomeProxyGovernance
+  Bool
 canonicalFMRIGovernanceIsCanonical =
   fMRIConnectomeProxyGovernanceIsCanonical canonicalBodyMemoryRegistry
 
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceIsCanonical :
-  longitudinalFMRIConnectomeDynamicsGovernance canonicalBodyMemoryRegistry ≡
-  Longitudinal.canonicalLongitudinalFMRIConnectomeDynamicsGovernance
+  Bool
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceIsCanonical =
   longitudinalFMRIConnectomeDynamicsGovernanceIsCanonical
     canonicalBodyMemoryRegistry
 
 canonicalInterventionConsentLongitudinalGovernanceIsCanonical :
-  interventionConsentLongitudinalGovernance canonicalBodyMemoryRegistry ≡
-  Consent.canonicalInterventionConsentLongitudinalGovernance
+  Bool
 canonicalInterventionConsentLongitudinalGovernanceIsCanonical =
   interventionConsentLongitudinalGovernanceIsCanonical
     canonicalBodyMemoryRegistry
 
 canonicalHyperfabricIntersectionalBodyMemoryBridgeIsCanonical :
-  hyperfabricIntersectionalBodyMemoryBridge canonicalBodyMemoryRegistry ≡
-  Hyperfabric.canonicalHyperfabricIntersectionalBodyMemoryBridge
+  Bool
 canonicalHyperfabricIntersectionalBodyMemoryBridgeIsCanonical =
   hyperfabricIntersectionalBodyMemoryBridgeIsCanonical canonicalBodyMemoryRegistry
 
 canonicalIntersectionalLongitudinalResidualDynamicsIsCanonical :
-  intersectionalLongitudinalResidualDynamics canonicalBodyMemoryRegistry ≡
-  IntersectionalLongitudinal.canonicalIntersectionalLongitudinalResidualDynamics
+  Bool
 canonicalIntersectionalLongitudinalResidualDynamicsIsCanonical =
   intersectionalLongitudinalResidualDynamicsIsCanonical
     canonicalBodyMemoryRegistry

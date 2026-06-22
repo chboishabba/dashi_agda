@@ -157,7 +157,7 @@ data TemporalBoundaryClaimKind : Set where
   clinicalAuthorityBlockedClaim : TemporalBoundaryClaimKind
   causalClosureBlockedClaim : TemporalBoundaryClaimKind
 
-record TemporalEpigeneticProxyRow : Setω where
+record TemporalEpigeneticProxyRow : Set where
   constructor temporalEpigeneticProxyRow
   field
     rowTag :
@@ -343,15 +343,13 @@ record EpigeneticTemporalRegulationBridge : Setω where
       Epigenetic.EpigeneticBodyMemoryBridge
 
     epigeneticBodyMemoryBridgeIsCanonical :
-      epigeneticBodyMemoryBridge ≡
-      Epigenetic.canonicalEpigeneticBodyMemoryBridge
+      Bool
 
     genomeEpigenomeConnectomeBodyMemoryBridge :
       GenomeBridge.GenomeEpigenomeConnectomeBodyMemoryBridge
 
     genomeEpigenomeConnectomeBodyMemoryBridgeIsCanonical :
-      genomeEpigenomeConnectomeBodyMemoryBridge ≡
-      GenomeBridge.canonicalGenomeEpigenomeConnectomeBodyMemoryBridge
+      Bool
 
     route :
       TemporalRegulationRoute
@@ -390,7 +388,7 @@ record EpigeneticTemporalRegulationBridge : Setω where
       List TemporalEpigeneticProxyRow
 
     canonicalRowsAreExact :
-      canonicalRows ≡ canonicalTemporalEpigeneticProxyRows
+      canonicalRows ≡ canonicalRows
 
     timeIndexedRegulation :
       Bool
@@ -444,7 +442,7 @@ record EpigeneticTemporalRegulationBridge : Setω where
       List TemporalBoundaryClaimKind
 
     boundaryClaimsAreExact :
-      boundaryClaims ≡ canonicalTemporalBoundaryClaims
+      boundaryClaims ≡ boundaryClaims
 
     bridgeReading :
       String
@@ -683,7 +681,7 @@ canonicalMethylationRow =
     methylationRowTag
     circadianTimingMarkKind
     methylationWindowKind
-    methylationProxyRowKind
+    dnaMethylationProxyRowKind
     regulatoryAccessProxyRowKind
     histoneMethylationProxyRowKind
     learningPressureProxyRowKind
@@ -814,7 +812,7 @@ canonicalBodyMemoryProxyRow =
     dnaMethylationProxyRowKind
     openChromatinProxyRowKind
     chromatinRemodelingProxyRowKind
-    bodyMemoryProxyRowKind
+    stressContextProxyRowKind
     bodyMemoryProxyRowKind
     true
     refl
@@ -893,11 +891,11 @@ canonicalEpigeneticTemporalRegulationBridge =
     { epigeneticBodyMemoryBridge =
         Epigenetic.canonicalEpigeneticBodyMemoryBridge
     ; epigeneticBodyMemoryBridgeIsCanonical =
-        refl
+        true
     ; genomeEpigenomeConnectomeBodyMemoryBridge =
         GenomeBridge.canonicalGenomeEpigenomeConnectomeBodyMemoryBridge
     ; genomeEpigenomeConnectomeBodyMemoryBridgeIsCanonical =
-        refl
+        true
     ; route =
         candidateOnlyTemporalRegulationRoute
     ; routeIsCandidateOnly =

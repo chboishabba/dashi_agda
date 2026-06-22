@@ -111,6 +111,7 @@ import DASHI.Biology.HyperfabricIntersectionalBodyMemoryBridge
 import DASHI.Biology.IntersectionalLongitudinalResidualDynamics
 import DASHI.Biology.InterventionConsentLongitudinalGovernance
 import DASHI.Biology.LongitudinalFMRIConnectomeDynamicsBridge
+import DASHI.Biology.NeurodivergentAtlasBodyMemoryBridge
 import DASHI.Biology.NeurochemicalAtomicChemistryBridge
 import DASHI.Biology.NeurochemicalBrainCarrierBridge
 import DASHI.Biology.NeurochemicalGenomicExpressionBridge
@@ -125,6 +126,7 @@ import DASHI.Biology.EvolvedSensoryTransport
 import DASHI.Biology.GenomeEpigenomeConnectomeBodyMemoryBridge
 import DASHI.Biology.GenomeSensorimotorConnectomeBridge
 import DASHI.Biology.ObserverPerceptualManifoldResidual
+import DASHI.Biology.PopulationLongitudinalBOLDResidualBridge
 import DASHI.Biology.ProteinHormoneChemistryCellBridge
 import DASHI.Biology.RelationalChartResidualMachine
 import DASHI.Biology.RelationalQiEducationTraumaBridge
@@ -154,6 +156,7 @@ import DASHI.Computation.PersistentTransportMotifs
 import DASHI.Constants.Registry
 import DASHI.Culture.InverseBidirectionalCultureOperators
 import DASHI.Culture.KnotWeaveTopologyCultureBridge
+import DASHI.Culture.CulturalTriadOperatorBoundary
 import DASHI.Culture.QiOperatorTheoryBoundary
 import DASHI.Culture.TaoChapterReadingReceipt
 import DASHI.Culture.TaoOperatorGrammar
@@ -447,6 +450,9 @@ import DASHI.Physics.Closure.NSTriadLowFrustrationBasinEntropyBoundary
 import DASHI.Physics.Closure.NSTriadNegativeFrameOperatorBoundary
 import DASHI.Physics.Closure.NSTriadResidenceTimeCompressionBoundary
 import DASHI.Physics.Closure.NSTriadPhaseLockingLiveWallReceipt
+import DASHI.Physics.Closure.NSAmplitudeWeightedNegativeFrameBoundary
+import DASHI.Physics.Closure.NSPointwiseTriadCloudBoundary
+import DASHI.Physics.Closure.NSTriadEnergyBudgetedCoherenceForkBoundary
 import DASHI.Physics.Closure.NSPhaseRegimeSeparationBoundary
 import DASHI.Physics.Closure.NSFloorToFrameStabilityBoundary
 import DASHI.Physics.Closure.NSSchurComplementFrameGapBoundary

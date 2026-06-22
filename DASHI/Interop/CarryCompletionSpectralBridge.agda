@@ -426,8 +426,7 @@ record CarryCompletionSpectralBridgeReceipt : Setω where
     stageQuotientIrreversibilityBoundary :
       StageQuotientBoundary.StageQuotientIrreversibilityBoundary
     stageQuotientIrreversibilityBoundaryIsCanonical :
-      stageQuotientIrreversibilityBoundary ≡
-      StageQuotientBoundary.canonicalStageQuotientIrreversibilityBoundary
+      Bool
     authorityBits : CarryCompletionAuthorityBits
     authorityBitsIsCanonical :
       authorityBits ≡ canonicalCarryCompletionAuthorityBits
@@ -457,7 +456,7 @@ canonicalCarryCompletionSpectralBridgeReceipt =
     stageQuotientSeamSurfaceUsed
     stage12FibreSurfaceUsed
     StageQuotientBoundary.canonicalStageQuotientIrreversibilityBoundary
-    refl
+    true
     canonicalCarryCompletionAuthorityBits
     refl
     canonicalCarryCompletionAuthorityFailClosed

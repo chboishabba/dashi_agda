@@ -898,11 +898,11 @@ record CulturalOperatorExplanationCertificate
     receiptRowMatches :
       receiptRow ≡ row
 
-    routeKindGuidesInterpretationOnly :
+    certificateRouteKindGuidesInterpretationOnly :
       Bool
 
-    routeKindGuidesInterpretationOnlyMatches :
-      routeKindGuidesInterpretationOnly ≡
+    certificateRouteKindGuidesInterpretationOnlyMatches :
+      certificateRouteKindGuidesInterpretationOnly ≡
       routeKindGuidesInterpretationOnly (rowRouteKind row)
 
     routeKindBlocksTruthClaimsIsTrue :
@@ -1238,8 +1238,8 @@ canonicalCulturalOperatorExplanationBoundary =
     (mkCulturalOperatorExplanationCertificate
       "cultural narrative explanation certificate"
       culturalNarrativeExplanationRow
-      true
       refl
+      true
       refl
       refl
       refl
@@ -1253,8 +1253,8 @@ canonicalCulturalOperatorExplanationBoundary =
     (mkCulturalOperatorExplanationCertificate
       "operator interpretation explanation certificate"
       operatorInterpretationExplanationRow
-      true
       refl
+      true
       refl
       refl
       refl
@@ -1268,8 +1268,8 @@ canonicalCulturalOperatorExplanationBoundary =
     (mkCulturalOperatorExplanationCertificate
       "neuro-affirming boundary explanation certificate"
       neuroAffirmingBoundaryExplanationRow
-      true
       refl
+      true
       refl
       refl
       refl
@@ -1283,8 +1283,8 @@ canonicalCulturalOperatorExplanationBoundary =
     (mkCulturalOperatorExplanationCertificate
       "social truth limit explanation certificate"
       socialTruthLimitExplanationRow
-      false
       refl
+      false
       refl
       refl
       refl
@@ -1298,8 +1298,8 @@ canonicalCulturalOperatorExplanationBoundary =
     (mkCulturalOperatorExplanationCertificate
       "clinical truth limit explanation certificate"
       clinicalTruthLimitExplanationRow
-      false
       refl
+      false
       refl
       refl
       refl
@@ -1313,8 +1313,8 @@ canonicalCulturalOperatorExplanationBoundary =
     (mkCulturalOperatorExplanationCertificate
       "neurological truth limit explanation certificate"
       neurologicalTruthLimitExplanationRow
-      false
       refl
+      false
       refl
       refl
       refl
@@ -1328,8 +1328,8 @@ canonicalCulturalOperatorExplanationBoundary =
     (mkCulturalOperatorExplanationCertificate
       "biological truth limit explanation certificate"
       biologicalTruthLimitExplanationRow
-      false
       refl
+      false
       refl
       refl
       refl
@@ -1343,8 +1343,8 @@ canonicalCulturalOperatorExplanationBoundary =
     (mkCulturalOperatorExplanationCertificate
       "authority boundary explanation certificate"
       authorityBoundaryExplanationRow
-      false
       refl
+      false
       refl
       refl
       refl
