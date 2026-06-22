@@ -90,6 +90,19 @@ record ExternalTheoremAuthoritySourceLocatorRow : Set where
     importedBoundaryPromotionFlagIsFalse :
       importedBoundaryPromotionFlag ≡ false
 
+    stage12FibreSurfaceReceipt :
+      StageQuotient.Stage12FibreSurface
+
+    stage12FibreSurfaceReceiptIsCanonical :
+      stage12FibreSurfaceReceipt ≡ StageQuotient.canonicalStage12FibreSurface
+
+    stage12FibreSurfaceCarryDepthSeamIsCanonical :
+      StageQuotient.Stage12FibreSurface.carry-depth
+        stage12FibreSurfaceReceipt
+        StageQuotient.atlas-11
+      ≡
+      StageQuotient.rev-2
+
     locatorNotes :
       List String
 
@@ -106,6 +119,13 @@ mkFailClosedLocatorRow :
   String →
   (importedBoundaryPromotionFlag' : Bool) →
   importedBoundaryPromotionFlag' ≡ false →
+  StageQuotient.Stage12FibreSurface →
+  stage12FibreSurfaceReceipt' ≡ StageQuotient.canonicalStage12FibreSurface →
+  StageQuotient.Stage12FibreSurface.carry-depth
+    stage12FibreSurfaceReceipt'
+    StageQuotient.atlas-11
+  ≡
+  StageQuotient.rev-2 →
   List String →
   ExternalTheoremAuthoritySourceLocatorRow
 mkFailClosedLocatorRow
@@ -119,6 +139,9 @@ mkFailClosedLocatorRow
   consumerGate'
   importedBoundaryPromotionFlag'
   importedBoundaryPromotionFlagIsFalse'
+  stage12FibreSurfaceReceipt'
+  stage12FibreSurfaceReceiptIsCanonical'
+  stage12FibreSurfaceCarryDepthSeamIsCanonical'
   locatorNotes' =
   record
     { lane =
@@ -153,6 +176,12 @@ mkFailClosedLocatorRow
         importedBoundaryPromotionFlag'
     ; importedBoundaryPromotionFlagIsFalse =
         importedBoundaryPromotionFlagIsFalse'
+    ; stage12FibreSurfaceReceipt =
+        stage12FibreSurfaceReceipt'
+    ; stage12FibreSurfaceReceiptIsCanonical =
+        stage12FibreSurfaceReceiptIsCanonical'
+    ; stage12FibreSurfaceCarryDepthSeamIsCanonical =
+        stage12FibreSurfaceCarryDepthSeamIsCanonical'
     ; locatorNotes =
         locatorNotes'
     }
@@ -171,6 +200,19 @@ crtMonsterBoundaryLocatorReference :
 crtMonsterBoundaryLocatorReference =
   CRTMonster.canonicalCRTMonsterFixedPointCompactificationBoundaryReceipt
 
+stage12FibreSurfaceLocatorReference : StageQuotient.Stage12FibreSurface
+stage12FibreSurfaceLocatorReference =
+  StageQuotient.canonicalStage12FibreSurface
+
+stage12FibreSurfaceCarryDepthSeamLocatorWitness :
+  StageQuotient.Stage12FibreSurface.carry-depth
+    stage12FibreSurfaceLocatorReference
+    StageQuotient.atlas-11
+  ≡
+  StageQuotient.rev-2
+stage12FibreSurfaceCarryDepthSeamLocatorWitness =
+  refl
+
 monsterMoonshineExternalAuthorityLocatorRow :
   ExternalTheoremAuthoritySourceLocatorRow
 monsterMoonshineExternalAuthorityLocatorRow =
@@ -186,9 +228,13 @@ monsterMoonshineExternalAuthorityLocatorRow =
     (CRTMonster.monsterTheoremPromoted
       crtMonsterBoundaryLocatorReference)
     CRTMonster.canonicalCRTMonsterTheoremPromotionFalse
+    stage12FibreSurfaceLocatorReference
+    refl
+    stage12FibreSurfaceCarryDepthSeamLocatorWitness
     ( "Located at the CRT/Monster fixed-point compactification boundary as a request for external theorem authority"
     ∷ "The checked CRT/196884/Monster receipt is not accepted here as a Monster/Moonshine proof"
     ∷ "Monster theorem, surreal isomorphism, and terminal promotion remain false at the imported boundary"
+    ∷ "The Stage12FibreSurface receipt is tracked as typed provenance, but remains candidate-only and not promoted"
     ∷ []
     )
 
@@ -208,8 +254,12 @@ carnotThermodynamicExternalAuthorityLocatorRow =
       stageQuotientIrreversibilityLocatorReference)
     (StageQuotientBoundary.StageQuotientIrreversibilityBoundary.thermodynamicCarnotPromotionIsFalse
       stageQuotientIrreversibilityLocatorReference)
+    stage12FibreSurfaceLocatorReference
+    refl
+    stage12FibreSurfaceCarryDepthSeamLocatorWitness
     ( "Located at the StageQuotient irreversibility boundary as a request for external proof authority"
     ∷ "The Stage -> TriTruth quotient seam is an imported finite boundary, not a thermodynamic proof"
+    ∷ "The canonical Stage12FibreSurface receipt carries the atlas-11 carry-depth seam as typed provenance"
     ∷ "No thermodynamic Carnot theorem or physical Carnot theorem is promoted from the imported boundary"
     ∷ []
     )
