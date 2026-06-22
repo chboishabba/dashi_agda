@@ -80,6 +80,13 @@ def _nonnegative_int(value: Any) -> int | None:
     return None
 
 
+def _fraction(value: Any) -> float | None:
+    parsed = _finite_float(value)
+    if parsed is None or parsed < -1.0e-12 or parsed > 1.0 + 1.0e-12:
+        return None
+    return parsed
+
+
 def main() -> int:
     args = _parse_args()
     source_json = _input_path(args)
@@ -123,7 +130,37 @@ def main() -> int:
             "lower_bound_proxy",
             "cycle_defect_proxy",
             "frustration_floor_proxy",
+            "cycle_family_support_overlap_mean",
+            "cycle_family_support_overlap_max",
+            "cycle_family_support_overlap_density",
+            "cycle_family_lower_bound_normalized_mean",
+            "cycle_family_lower_bound_normalized_max",
+            "cycle_family_lower_bound_normalized_sum",
+            "cycle_family_lower_bound",
+            "cycle_family_lower_bound_max",
+            "cycle_family_packing_concentration",
+            "cycle_family_obstruction_collapse_score",
+            "cycle_family_normalized_support_vs_F_max",
+            "cycle_family_lower_bound_support_over_F_max",
+            "cycle_family_lower_bound_support_weighted_sum",
             "strongest_lower_bound_support",
+            "family_obstruction_packing_support",
+            "family_obstruction_packing_overlap",
+            "family_obstruction_packing_lower_bound",
+            "family_obstruction_packing_ratio",
+            "k01_geometry_ratio",
+            "k01_ratio_proxy",
+            "k01_geometry_signal",
+            "k01_geometry_lower_bound",
+            "geometry_alignment_proxy",
+            "geometry_stability_proxy",
+            "directional_gap_proxy",
+            "directional_gap_lower_bound",
+            "frame_geometry_proxy",
+            "projection_proxy",
+            "combined_operator_gap_proxy",
+            "dangerous_subspace_weight_fraction",
+            "k01_operator_norm",
             "schur_directional_gap_proxy",
             "schur_directional_gap_lower_bound",
             "schur_directional_gap_residual",
@@ -138,6 +175,29 @@ def main() -> int:
         support_source = row.get("strongest_lower_bound_source")
         if row.get("strongest_lower_bound_support") is not None and not isinstance(support_source, str):
             errors.append(f"rows[{index}].strongest_lower_bound_source: must be string when support is present")
+        for key in (
+            "cycle_family_support_overlap_mean",
+            "cycle_family_support_overlap_max",
+            "cycle_family_support_overlap_density",
+            "cycle_family_packing_concentration",
+            "cycle_family_obstruction_collapse_score",
+            "family_obstruction_packing_support",
+            "family_obstruction_packing_overlap",
+            "family_obstruction_packing_ratio",
+            "k01_geometry_ratio",
+            "k01_ratio_proxy",
+            "k01_geometry_signal",
+            "geometry_alignment_proxy",
+            "geometry_stability_proxy",
+            "directional_gap_proxy",
+        ):
+            value = row.get(key)
+            if value is not None and _fraction(value) is None:
+                errors.append(f"rows[{index}].{key}: must be finite fraction or null")
+        for key in ("family_obstruction_packing_lower_bound", "k01_geometry_lower_bound"):
+            value = row.get(key)
+            if value is not None and (_finite_float(value) is None or float(value) < -1.0e-12):
+                errors.append(f"rows[{index}].{key}: must be finite nonnegative or null")
 
     aggregate = payload.get("aggregate")
     if not isinstance(aggregate, dict):
@@ -153,6 +213,22 @@ def main() -> int:
             "frustration_floor_ratio_vs_raw_mean",
             "strongest_lower_bound_support_mean",
             "strongest_lower_bound_support_max",
+            "family_obstruction_packing_support_mean",
+            "family_obstruction_packing_support_max",
+            "family_obstruction_packing_overlap_mean",
+            "family_obstruction_packing_overlap_max",
+            "family_obstruction_packing_lower_bound_mean",
+            "family_obstruction_packing_lower_bound_max",
+            "family_obstruction_packing_ratio_mean",
+            "family_obstruction_packing_ratio_max",
+            "k01_geometry_signal_mean",
+            "k01_geometry_signal_max",
+            "geometry_alignment_proxy_mean",
+            "geometry_alignment_proxy_max",
+            "geometry_stability_proxy_mean",
+            "geometry_stability_proxy_max",
+            "directional_gap_proxy_mean",
+            "directional_gap_proxy_max",
             "schur_directional_gap_proxy_mean",
             "schur_directional_gap_proxy_max",
             "schur_directional_gap_lower_bound_mean",
@@ -163,10 +239,45 @@ def main() -> int:
             value = aggregate.get(key)
             if value is not None and (_finite_float(value) is None or float(value) < -1.0e-12):
                 errors.append(f"aggregate.{key}: must be finite nonnegative or null")
+        for key in (
+            "phase_gap_vs_cycle_bound_correlation",
+            "phase_gap_vs_frame_margin_correlation",
+            "floor_ratio_vs_frame_margin_correlation",
+            "strongest_lower_bound_support_vs_phase_gap_correlation",
+            "strongest_lower_bound_support_vs_frame_margin_correlation",
+            "family_obstruction_packing_support_vs_phase_gap_correlation",
+            "family_obstruction_packing_support_vs_floor_ratio_correlation",
+            "family_obstruction_packing_support_vs_cycle_bound_correlation",
+            "family_obstruction_packing_support_vs_k01_geometry_signal_correlation",
+            "k01_geometry_signal_vs_phase_gap_correlation",
+            "k01_geometry_signal_vs_floor_ratio_correlation",
+            "k01_geometry_signal_vs_cycle_bound_correlation",
+        ):
+            if aggregate.get(key) is not None and _finite_float(aggregate.get(key)) is None:
+                errors.append(f"aggregate.{key}: must be finite or null")
         if aggregate.get("strongest_lower_bound_source_modes") is not None and not isinstance(
             aggregate.get("strongest_lower_bound_source_modes"), list
         ):
             errors.append("aggregate.strongest_lower_bound_source_modes: must be list or null")
+        for key in ("family_obstruction_packing_support_mean", "family_obstruction_packing_support_max", "k01_geometry_signal_mean", "k01_geometry_signal_max"):
+            value = aggregate.get(key)
+            if value is not None and (_fraction(value) is None):
+                errors.append(f"aggregate.{key}: must be finite fraction or null")
+        for key in (
+            "family_obstruction_packing_overlap_mean",
+            "family_obstruction_packing_overlap_max",
+            "family_obstruction_packing_ratio_mean",
+            "family_obstruction_packing_ratio_max",
+            "geometry_alignment_proxy_mean",
+            "geometry_alignment_proxy_max",
+            "geometry_stability_proxy_mean",
+            "geometry_stability_proxy_max",
+            "directional_gap_proxy_mean",
+            "directional_gap_proxy_max",
+        ):
+            value = aggregate.get(key)
+            if value is not None and (_fraction(value) is None):
+                errors.append(f"aggregate.{key}: must be finite fraction or null")
         schur_status = aggregate.get("schur_directional_audit_status")
         if schur_status is not None and schur_status not in ("fail-closed", "unavailable"):
             errors.append("aggregate.schur_directional_audit_status: must be 'fail-closed' or 'unavailable'")

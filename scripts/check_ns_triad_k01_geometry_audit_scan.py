@@ -19,9 +19,8 @@ ROUTE_DECISION = "FAIL_CLOSED_NS_TRIAD_K01_GEOMETRY_AUDIT_SCAN_CHECK"
 SCHEMA_VERSION = "1.0.0"
 
 OK_STATUS = "ok"
-PARTIAL_STATUS = "partial"
 ERROR_STATUS = "error"
-ALLOWED_STATUSES = {OK_STATUS, PARTIAL_STATUS, ERROR_STATUS}
+ALLOWED_SOURCE_STATUSES = {"ok", "partial", "error"}
 
 DEFAULT_SOURCE_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
@@ -32,31 +31,6 @@ DEFAULT_OUTPUT_JSON = Path(
     "check_ns_triad_k01_geometry_audit_scan_N128_20260621.json"
 )
 
-SOURCE_CONTROL_CARD = {
-    "O": "Measure K01 geometry audit telemetry for the active NS triad Wall 1 route.",
-    "R": (
-        "Record K01 geometry ratios, directional proxies, and frame-shell consistency "
-        "as candidate-only fail-closed telemetry."
-    ),
-    "C": SOURCE_SCRIPT_NAME,
-    "S": "Candidate-only telemetry; the K01 geometry audit is empirical and non-promoting.",
-    "L": "Load the audit rows, validate bounded metrics, and expose the wall as unproved.",
-    "P": SOURCE_ROUTE_DECISION,
-    "G": "No theorem, continuation, or Clay claim is inferred from this audit scan.",
-    "F": "K01 geometry telemetry is diagnostic only; fail-closed status is not a proof.",
-}
-
-CONTROL_CARD = {
-    "O": "Validate the K01 geometry audit scan output.",
-    "R": "Check control card, authority flags, bounded metrics, and fail-closed closure markers.",
-    "C": SCRIPT_NAME,
-    "S": "Fail-closed checker for malformed K01 geometry telemetry surfaces.",
-    "L": "Load the audit JSON, validate rows and aggregates, then emit a checker receipt.",
-    "P": ROUTE_DECISION,
-    "G": "Checker remains empirical and non-promoting.",
-    "F": "Any malformed field, authority drift, or route-marker mismatch is a hard error.",
-}
-
 EXPECTED_AUTHORITY = {
     "candidate_only": True,
     "empirical_non_promoting": True,
@@ -65,6 +39,74 @@ EXPECTED_AUTHORITY = {
     "clay_authority": False,
     "runtime_authority": False,
     "promoted": False,
+}
+
+REQUIRED_ROW_KEYS = {
+    "frame",
+    "shell",
+    "snapshot_index",
+    "source",
+    "route_mode",
+    "candidate_only",
+    "empirical_non_promoting",
+    "fail_closed",
+    "wall1_status",
+    "wall1_proved",
+    "status",
+}
+
+OPTIONAL_FINITE_NONNEGATIVE_ROW_KEYS = {
+    "selected_mode_count",
+    "triad_count",
+    "carrier_stratum_count",
+    "low_block_size",
+    "high_block_size",
+    "shell_ratio",
+    "shell_fraction",
+    "shell_imbalance",
+    "shell_curvature_proxy",
+    "k00_lambda_max",
+    "k01_operator_norm",
+    "k11_lambda_max",
+    "k01_geometry_ratio",
+    "k01_ratio_proxy",
+    "k01_to_k00_ratio",
+    "k01_to_k11_ratio",
+    "off_diagonal_vs_diagonal_ratio",
+    "off_diagonal_share_proxy",
+    "off_diagonal_contrast_proxy",
+    "off_diagonal_pressure_proxy",
+    "directional_off_diagonal_pressure_proxy",
+    "angular_mismatch_proxy",
+    "frame_geometry_proxy",
+    "incompressibility_proxy",
+    "projection_proxy",
+    "directional_gap_proxy",
+    "directional_gap_lower_bound",
+    "directional_gap_residual",
+    "directional_gap_ratio",
+    "directional_gap_residual_ratio",
+    "geometry_stability_proxy",
+    "geometry_alignment_proxy",
+    "coupling_concentration",
+    "dangerous_subspace_weight_fraction",
+    "frame_stability_margin_proxy",
+    "positive_backbone_operator_gap_proxy",
+    "negative_frame_operator_gap_proxy",
+    "combined_operator_gap_proxy",
+    "frame_stability_proxy",
+    "selected_mode_amplitude_sum",
+    "mode_concentration_fraction",
+    "carrier_shell_radius_mean",
+    "carrier_shell_radius_p95",
+    "backbone_vs_negative_gap_ratio",
+    "stratum_cross_mass_ratio",
+    "stratum_internal_mass_ratio",
+    "stratum_balance_entropy_normalized",
+    "triad_phase_coherence_abs_mean",
+    "triad_shell_spread_mean",
+    "triad_shell_spread_p95",
+    "geometry_completeness",
 }
 
 
@@ -92,11 +134,9 @@ def _json_text(payload: dict[str, Any], pretty: bool) -> str:
 
 
 def _load_json(path: Path) -> dict[str, Any]:
-    if not path.exists():
-        raise FileNotFoundError(f"missing input json: {path}")
     payload = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
-        raise ValueError(f"{path}: payload must be object")
+        raise ValueError("payload must be object")
     return payload
 
 
@@ -120,193 +160,197 @@ def _nonnegative_int(value: Any) -> int | None:
     return None
 
 
-def _fraction(value: Any) -> float | None:
+def _check_fraction(errors: list[str], path: str, value: Any) -> None:
     parsed = _finite_float(value)
     if parsed is None or parsed < -1.0e-12 or parsed > 1.0 + 1.0e-12:
-        return None
-    return parsed
+        errors.append(f"{path}: must be finite fraction in [0,1]")
 
 
-def _check_metric_range(
-    errors: list[str],
-    path: str,
-    value: Any,
-    *,
-    lower: float | None = 0.0,
-    upper: float | None = None,
-) -> None:
-    parsed = _finite_float(value)
-    if parsed is None:
-        errors.append(f"{path}: must be finite")
+def _check_authority(authority: Any, errors: list[str]) -> None:
+    if not isinstance(authority, dict):
+        errors.append("authority: must be object")
         return
-    if lower is not None and parsed < lower - 1.0e-12:
-        errors.append(f"{path}: must be >= {lower}")
-    if upper is not None and parsed > upper + 1.0e-12:
-        errors.append(f"{path}: must be <= {upper}")
+    for key, expected in EXPECTED_AUTHORITY.items():
+        if authority.get(key) is not expected:
+            errors.append(f"authority.{key}: must be {expected!r}")
 
 
-def _check_row(row: dict[str, Any], path: str, errors: list[str]) -> None:
-    if row.get("status") not in ALLOWED_STATUSES:
-        errors.append(f"{path}.status: must be ok|partial|error")
+def _check_row(row: dict[str, Any], index: int, errors: list[str]) -> None:
+    path = f"rows[{index}]"
+    missing = sorted(REQUIRED_ROW_KEYS - set(row))
+    if missing:
+        errors.append(f"{path}: missing required keys {missing}")
     if _nonnegative_int(row.get("frame")) is None:
         errors.append(f"{path}.frame: must be nonnegative int")
-    if _nonnegative_int(row.get("shell")) is None and _nonnegative_int(row.get("shell_n")) is None:
+    if _nonnegative_int(row.get("shell")) is None:
         errors.append(f"{path}.shell: must be nonnegative int")
-    for key in ("candidate_only", "empirical_non_promoting"):
-        if row.get(key) is not True:
-            errors.append(f"{path}.{key}: must be true")
+    if _nonnegative_int(row.get("snapshot_index")) is None:
+        errors.append(f"{path}.snapshot_index: must be nonnegative int")
+    if not isinstance(row.get("source"), str) or not row.get("source"):
+        errors.append(f"{path}.source: must be non-empty string")
     if row.get("route_mode") != "fail-closed":
         errors.append(f"{path}.route_mode: must be 'fail-closed'")
+    if row.get("candidate_only") is not True:
+        errors.append(f"{path}.candidate_only: must be true")
+    if row.get("empirical_non_promoting") is not True:
+        errors.append(f"{path}.empirical_non_promoting: must be true")
     if row.get("fail_closed") is not True:
         errors.append(f"{path}.fail_closed: must be true")
-
-    for key in ("selected_mode_count", "triad_count", "geometry_bin_count"):
-        if key in row and _nonnegative_int(row.get(key)) is None:
-            errors.append(f"{path}.{key}: must be nonnegative int or null")
-
-    geometry_fields = (
-        ("k01_geometry_ratio", 0.0, 1.0),
-        ("k01_ratio_proxy", 0.0, 1.0),
-        ("frame_geometry_proxy", 0.0, None),
-        ("directional_gap_proxy", 0.0, None),
-        ("directional_gap_lower_bound", 0.0, None),
-        ("directional_gap_residual", 0.0, None),
-        ("geometry_stability_proxy", 0.0, None),
-        ("geometry_alignment_proxy", 0.0, None),
-        ("shell_curvature_proxy", 0.0, None),
-    )
-    seen_any = False
-    for key, lower, upper in geometry_fields:
-        if key in row:
-            seen_any = True
-            _check_metric_range(errors, f"{path}.{key}", row.get(key), lower=lower, upper=upper)
-    if not seen_any:
-        errors.append(f"{path}: must contain at least one geometry metric field")
-
+    if row.get("wall1_status") != "unproved":
+        errors.append(f"{path}.wall1_status: must be 'unproved'")
+    if row.get("wall1_proved") is not False:
+        errors.append(f"{path}.wall1_proved: must be false")
+    if row.get("status") not in ALLOWED_SOURCE_STATUSES:
+        errors.append(f"{path}.status: must be one of {sorted(ALLOWED_SOURCE_STATUSES)!r}")
     if row.get("warnings") is not None and not isinstance(row.get("warnings"), list):
         errors.append(f"{path}.warnings: must be list or null")
     if row.get("errors") is not None and not isinstance(row.get("errors"), list):
         errors.append(f"{path}.errors: must be list or null")
 
+    if row.get("dangerous_shell_is_high") not in (True, False):
+        errors.append(f"{path}.dangerous_shell_is_high: must be bool")
+    if not isinstance(row.get("dangerous_shell_partition"), str) or not row.get("dangerous_shell_partition"):
+        errors.append(f"{path}.dangerous_shell_partition: must be non-empty string")
 
-def _check_aggregate(aggregate: dict[str, Any], row_count: int, errors: list[str]) -> None:
-    if _nonnegative_int(aggregate.get("processed_rows")) != row_count:
-        errors.append("aggregate.processed_rows: must match row count")
-    for key in ("ok_rows", "partial_rows", "error_rows"):
+    for key in OPTIONAL_FINITE_NONNEGATIVE_ROW_KEYS:
+        value = row.get(key)
+        if value is None:
+            continue
+        parsed = _finite_float(value)
+        if parsed is None or parsed < -1.0e-12:
+            errors.append(f"{path}.{key}: must be finite nonnegative or null")
+
+    for key in (
+        "shell_fraction",
+        "shell_imbalance",
+        "k01_geometry_ratio",
+        "k01_ratio_proxy",
+        "k01_to_k00_ratio",
+        "k01_to_k11_ratio",
+        "off_diagonal_vs_diagonal_ratio",
+        "off_diagonal_share_proxy",
+        "off_diagonal_contrast_proxy",
+        "off_diagonal_pressure_proxy",
+        "directional_gap_ratio",
+        "directional_gap_residual_ratio",
+        "geometry_alignment_proxy",
+        "coupling_concentration",
+        "dangerous_subspace_weight_fraction",
+        "mode_concentration_fraction",
+        "stratum_cross_mass_ratio",
+        "stratum_internal_mass_ratio",
+        "stratum_balance_entropy_normalized",
+        "triad_phase_coherence_abs_mean",
+        "geometry_completeness",
+    ):
+        value = row.get(key)
+        if value is not None:
+            _check_fraction(errors, f"{path}.{key}", value)
+
+    coherence = _finite_float(row.get("triad_phase_coherence_mean"))
+    if coherence is not None and (coherence < -1.0 - 1.0e-12 or coherence > 1.0 + 1.0e-12):
+        errors.append(f"{path}.triad_phase_coherence_mean: must lie in [-1,1] when present")
+
+
+def _check_aggregate(aggregate: Any, row_count: int, errors: list[str]) -> None:
+    if not isinstance(aggregate, dict):
+        errors.append("aggregate: must be object")
+        return
+    for key in ("processed_rows", "ok_rows", "partial_rows", "error_rows", "shared_frame_count", "shared_frame_shell_count", "shared_shell_count"):
         if _nonnegative_int(aggregate.get(key)) is None:
             errors.append(f"aggregate.{key}: must be nonnegative int")
-    if aggregate.get("wall1_status") not in (None, "unproved"):
-        errors.append("aggregate.wall1_status: if present must be 'unproved'")
-    if aggregate.get("fail_closed") is not True:
-        errors.append("aggregate.fail_closed: must be true")
-
-    for key in (
-        "k01_geometry_ratio_mean",
-        "k01_geometry_ratio_max",
-        "frame_geometry_proxy_mean",
-        "directional_gap_proxy_mean",
-        "directional_gap_lower_bound_mean",
-        "directional_gap_residual_mean",
-        "geometry_stability_proxy_mean",
-        "geometry_alignment_proxy_mean",
-    ):
-        value = aggregate.get(key)
-        if value is not None:
-            if _finite_float(value) is None:
-                errors.append(f"aggregate.{key}: must be finite or null")
-
-    for key in ("k01_geometry_ratio_mean", "k01_geometry_ratio_max"):
-        value = _fraction(aggregate.get(key))
-        if value is None and aggregate.get(key) is not None:
-            errors.append(f"aggregate.{key}: must be within [0,1]")
-
-    for key in (
-        "frame_geometry_proxy_mean",
-        "directional_gap_proxy_mean",
-        "directional_gap_lower_bound_mean",
-        "directional_gap_residual_mean",
-        "geometry_stability_proxy_mean",
-        "geometry_alignment_proxy_mean",
-    ):
-        value = _finite_float(aggregate.get(key))
-        if value is not None and value < -1.0e-12:
-            errors.append(f"aggregate.{key}: must be nonnegative when present")
-
+    processed_rows = _nonnegative_int(aggregate.get("processed_rows")) or 0
+    if processed_rows != row_count:
+        errors.append("aggregate.processed_rows: must match row count")
+    counts = [_nonnegative_int(aggregate.get(key)) or 0 for key in ("ok_rows", "partial_rows", "error_rows")]
+    if sum(counts) != processed_rows:
+        errors.append("aggregate row status counts must sum to processed_rows")
+    if aggregate.get("wall1_status") != "unproved":
+        errors.append("aggregate.wall1_status: must be 'unproved'")
     if aggregate.get("candidate_only") is not True:
         errors.append("aggregate.candidate_only: must be true")
     if aggregate.get("empirical_non_promoting") is not True:
         errors.append("aggregate.empirical_non_promoting: must be true")
+    if aggregate.get("fail_closed") is not True:
+        errors.append("aggregate.fail_closed: must be true")
+    if aggregate.get("theorem_authority") is not False:
+        errors.append("aggregate.theorem_authority: must be false")
+    if aggregate.get("clay_authority") is not False:
+        errors.append("aggregate.clay_authority: must be false")
+    if aggregate.get("geometry_sufficiency_counts") is not None and not isinstance(aggregate.get("geometry_sufficiency_counts"), dict):
+        errors.append("aggregate.geometry_sufficiency_counts: must be object or null")
+
+    for key, value in aggregate.items():
+        if key in {
+            "processed_rows",
+            "ok_rows",
+            "partial_rows",
+            "error_rows",
+            "shared_frame_count",
+            "shared_frame_shell_count",
+            "shared_shell_count",
+            "present_surface_count",
+            "source_surface_count",
+            "wall1_status",
+            "wall1_proved",
+            "candidate_only",
+            "empirical_non_promoting",
+            "fail_closed",
+            "theorem_authority",
+            "clay_authority",
+            "geometry_sufficiency_counts",
+        }:
+            continue
+        if value is None:
+            continue
+        if key.endswith("_correlation"):
+            parsed = _finite_float(value)
+            if parsed is None or parsed < -1.0 - 1.0e-12 or parsed > 1.0 + 1.0e-12:
+                errors.append(f"aggregate.{key}: must be finite in [-1,1] or null")
+            continue
+        parsed = _finite_float(value)
+        if parsed is None or parsed < -1.0e-12:
+            errors.append(f"aggregate.{key}: must be finite nonnegative or null")
 
 
 def main() -> int:
     args = _parse_args()
     source_json = _input_path(args)
+    payload = _load_json(source_json)
     errors: list[str] = []
-
-    try:
-        payload = _load_json(source_json)
-    except Exception as exc:  # noqa: BLE001
-        receipt = {
-            "contract": CONTRACT,
-            "schema_version": SCHEMA_VERSION,
-            "route_decision": ROUTE_DECISION,
-            "script_name": SCRIPT_NAME,
-            "control_card": CONTROL_CARD,
-            "source_json": str(source_json),
-            "status": ERROR_STATUS,
-            "ok": False,
-            "error_count": 1,
-            "errors": [str(exc)],
-        }
-        args.output_json.parent.mkdir(parents=True, exist_ok=True)
-        args.output_json.write_text(_json_text(receipt, args.pretty) + "\n", encoding="utf-8")
-        print(_json_text(receipt, args.pretty))
-        return 1
 
     if payload.get("contract") != SOURCE_CONTRACT:
         errors.append(f"contract: must be {SOURCE_CONTRACT!r}")
-    if payload.get("schema_version") != SCHEMA_VERSION:
-        errors.append(f"schema_version: must be {SCHEMA_VERSION!r}")
     if payload.get("route_decision") != SOURCE_ROUTE_DECISION:
         errors.append(f"route_decision: must be {SOURCE_ROUTE_DECISION!r}")
     if payload.get("script_name") != SOURCE_SCRIPT_NAME:
         errors.append(f"script_name: must be {SOURCE_SCRIPT_NAME!r}")
-    if payload.get("control_card") != SOURCE_CONTROL_CARD:
-        errors.append("control_card: must exactly match the source control card")
-    if payload.get("status") not in ALLOWED_STATUSES:
-        errors.append("status: must be ok|partial|error")
-    if not isinstance(payload.get("ok"), bool):
-        errors.append("ok: must be bool")
-    if payload.get("fail_closed") is not True:
-        errors.append("fail_closed: must be true")
+    if payload.get("status") not in ALLOWED_SOURCE_STATUSES:
+        errors.append(f"status: must be one of {sorted(ALLOWED_SOURCE_STATUSES)!r}")
     if payload.get("candidate_only") is not True:
         errors.append("candidate_only: must be true")
     if payload.get("empirical_non_promoting") is not True:
         errors.append("empirical_non_promoting: must be true")
+    if payload.get("fail_closed") is not True:
+        errors.append("fail_closed: must be true")
+    if payload.get("wall1_status") != "unproved":
+        errors.append("wall1_status: must be 'unproved'")
+    if payload.get("wall1_proved") is not False:
+        errors.append("wall1_proved: must be false")
 
-    authority = payload.get("authority")
-    if not isinstance(authority, dict):
-        errors.append("authority: must be object")
-    else:
-        for key, expected in EXPECTED_AUTHORITY.items():
-            if authority.get(key) is not expected:
-                errors.append(f"authority.{key}: must be {expected!r}")
+    _check_authority(payload.get("authority"), errors)
 
     rows = payload.get("rows")
-    if not isinstance(rows, list) or not rows:
-        errors.append("rows: must be non-empty list")
+    if not isinstance(rows, list):
+        errors.append("rows: must be list")
         rows = []
     for index, row in enumerate(rows):
         if not isinstance(row, dict):
             errors.append(f"rows[{index}]: must be object")
             continue
-        _check_row(row, f"rows[{index}]", errors)
+        _check_row(row, index, errors)
 
-    aggregate = payload.get("aggregate")
-    if not isinstance(aggregate, dict):
-        errors.append("aggregate: must be object")
-    else:
-        _check_aggregate(aggregate, len(rows), errors)
+    _check_aggregate(payload.get("aggregate"), len(rows), errors)
 
     status = OK_STATUS if not errors else ERROR_STATUS
     receipt = {
@@ -314,7 +358,6 @@ def main() -> int:
         "schema_version": SCHEMA_VERSION,
         "route_decision": ROUTE_DECISION,
         "script_name": SCRIPT_NAME,
-        "control_card": CONTROL_CARD,
         "source_json": str(source_json),
         "status": status,
         "ok": status == OK_STATUS,

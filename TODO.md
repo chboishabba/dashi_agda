@@ -142,6 +142,24 @@ Current NS Clay action note for `2026-06-20`:
   support against the optimized Wall 1 phase-gap surface. This remains
   fail-closed and non-promoting: no uniform `c0 > 0` cocycle floor is
   proved, no floor-to-frame theorem is proved, and Wall 1 remains open.
+- Wall 1 cycle-family packing / K01 geometry tranche is now recorded for
+  `2026-06-22`. Artifacts:
+  `scripts/ns_triad_cycle_packing_overlap_scan.py`,
+  `scripts/check_ns_triad_cycle_packing_overlap_scan.py`,
+  `scripts/ns_triad_k01_geometry_audit_scan.py`,
+  `scripts/check_ns_triad_k01_geometry_audit_scan.py`,
+  `DASHI/Physics/Closure/NSTriadCycleFamilyLowerBoundBoundary.agda`,
+  `DASHI/Physics/Closure/NSSchurComplementFrameGapBoundary.agda`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`. The route now
+  records the cycle-family packing/overlap surface on the active shell
+  carrier, adds a candidate-only K01 geometry audit surface around shell
+  ratio / angular mismatch / coupling concentration proxies, sharpens the
+  Wall 1 summary to join those surfaces with the existing phase/floor/Schur
+  telemetry, and tightens the Agda boundary language around the family
+  quadratic obstruction and the non-adversarial `K01 / Schur` bridge. This
+  remains fail-closed and non-promoting: no cycle-family theorem is proved,
+  no non-adversarial Schur gap is proved, and Wall 1 remains open.
 - Wall 1 phase-regime / cocycle-floor / floor-to-frame tranche is now
   recorded for `2026-06-22`. Artifacts:
   `DASHI/Physics/Closure/NSPhaseRegimeSeparationBoundary.agda`,
