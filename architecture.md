@@ -206,6 +206,9 @@ Architecture rule for this tranche:
 - The inclusive window size is itself `112 = 2^4 * 7`, which means `0..111` forms a `112`-stage witness field rather than just a longer tabulation.
 - `0..111` contains nine full Stage12 blocks plus a four-stage overflow: 108..111.
 - The main carry/composite seam highlights in that widened field are `99 -> 100 = 2^2 * 5^2`, `109 -> 110 = 2 * 5 * 11`, `110 -> 111 = 3 * 37`, and `111 -> 112 = 2^4 * 7`.
+- The glyph string `111` is typed by base: `111_10 = 3 * 37`, while `111_3 = 13`.
+- `111_3 = 13` is the `p13` witness of Stage12 because `13 - 1 = 12`.
+- `111_3` is also the length-3 finite prefix of the all-ones 3-adic expansion `111..._3 = -1/2` in `Q3`, so finite-prefix and completion-boundary readings stay distinct but linked.
 
 ## Performance Intent
 Reducing parallel dependency paths lowers normalization and transport overhead.

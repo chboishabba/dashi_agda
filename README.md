@@ -181,6 +181,17 @@ carry recursion coupled to the `p7` / `HexTruth` lane. The most important
 highlight seams are `99 -> 100 = 2^2 * 5^2`, `109 -> 110 = 2 * 5 * 11`,
 `110 -> 111 = 3 * 37`, and `111 -> 112 = 2^4 * 7`.
 
+The same glyph string now has an explicit base-sensitive receipt too. As
+decimal, `111_10 = 3 * 37`, so it is a coupled triadic/p37 state whose
+successor witness is `112 = 2^4 * 7`. As ternary, `111_3 = 1 + 3 + 9 = 13`,
+so `111_3 = 13` is the short-form stage witness summary, and the same visible
+glyph is the `p13` witness of Stage12. The repo now keeps
+both readings at once: `111_10` is a decimal carry state, while `111_3` is the
+prime `+1` witness of the `12`-stage atlas. This is also recorded as a finite
+3-adic prefix: `111_3` is the length-3 prefix of the all-ones expansion
+`111..._3 = -1/2` in `Q3`, without promoting the finite prefix into the full
+completion boundary.
+
 Current Agda/PhysLean physics-library parity context:
 the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL
 `https://chatgpt.com/c/6a2e6b6c-f4b0-83ec-b233-126757c70248` into canonical

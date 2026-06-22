@@ -568,6 +568,23 @@ open WindowWitnessHighlight public
 open CarryLayerSummary public
 open StageWindowSuccessorField public
 
+record Glyph111StageReceipt : Set where
+  field
+    glyph : String
+    decimalValue : Nat
+    decimalFactorLabels : List String
+    decimalInterpretation : List String
+    decimalSuccessorWitness : WindowWitnessHighlight
+    ternaryValue : Nat
+    ternaryValueMatchesP13 : ternaryValue ≡ thirteen
+    ternaryFactorLabels : List String
+    ternaryInterpretation : List String
+    ternaryPrimeWitnessLabel : String
+    threeAdicPrefixInterpretation : List String
+    authorityBits : PrimeSuccessorWitnessAuthorityBits
+
+open Glyph111StageReceipt public
+
 canonicalStage15SuccessorWitness : WindowWitnessHighlight
 canonicalStage15SuccessorWitness =
   record
@@ -800,6 +817,7 @@ canonicalStage0To111SuccessorField =
       ∷ "The 0..111 inclusive window has size 112 = 2^4 * 7."
       ∷ "0..111 therefore forms a 112-stage field: four levels of binary carry-depth coupled to the p7 / HexTruth lane."
       ∷ "0..111 contains nine full Stage12 blocks plus a four-stage overflow: 108..111."
+      ∷ "The glyph string 111 is base-sensitive: 111_10 ends the decimal field while 111_3 = 13 gives the p13 witness of Stage12."
       ∷ "The next prime witness just outside the window is stage 112 witnessed by p113."
       ∷ []
     ; authorityBits = canonicalPrimeSuccessorWitnessAuthorityBits
@@ -1076,3 +1094,42 @@ canonicalPrimeSuccessorWitnesses =
 
 stage12ClosurePrimeWitness : PrimeSuccessorWitness
 stage12ClosurePrimeWitness = canonicalP13PrimeSuccessorWitness
+
+canonicalGlyph111StageReceipt : Glyph111StageReceipt
+canonicalGlyph111StageReceipt =
+  record
+    { glyph = "111"
+    ; decimalValue = 111
+    ; decimalFactorLabels = "3" ∷ "37" ∷ "3*37" ∷ []
+    ; decimalInterpretation =
+        "As decimal, 111 = 3 * 37."
+      ∷ "111_10 is not prime and not a pure decimal carry body; it is a coupled witness with triadic support."
+      ∷ "Its decimal glyph decomposition is 111 = 100 + 10 + 1 = j2 + j1 + j0."
+      ∷ []
+    ; decimalSuccessorWitness = canonicalStage111SuccessorWitness
+    ; ternaryValue = thirteen
+    ; ternaryValueMatchesP13 = refl
+    ; ternaryFactorLabels = "111_3" ∷ "1+3+9" ∷ "13" ∷ "prime" ∷ []
+    ; ternaryInterpretation =
+        "As ternary, 111_3 = 1 + 3 + 9 = 13."
+      ∷ "111_3 is the p13 prime witness of Stage12 because 13 - 1 = 12."
+      ∷ "The same visible glyph therefore lands in a different fibre once the base is typed."
+      ∷ []
+    ; ternaryPrimeWitnessLabel = "p13 witnesses stage 12"
+    ; threeAdicPrefixInterpretation =
+        "111_3 is the length-3 finite prefix of the all-ones 3-adic expansion."
+      ∷ "1111111111_3 = 1 + 3 + ... + 3^9 = 29524 records a longer finite saturation."
+      ∷ "111..._3 = -1/2 in Q3 is the infinite completion boundary; the finite prefix is not itself that completion."
+      ∷ []
+    ; authorityBits = canonicalPrimeSuccessorWitnessAuthorityBits
+    }
+
+canonicalGlyph111DecimalSuccessorWitness :
+  Glyph111StageReceipt.decimalSuccessorWitness canonicalGlyph111StageReceipt ≡
+  canonicalStage111SuccessorWitness
+canonicalGlyph111DecimalSuccessorWitness = refl
+
+canonicalGlyph111TernaryValueMatchesStage12ClosurePrime :
+  Glyph111StageReceipt.ternaryValue canonicalGlyph111StageReceipt ≡
+  TrackedPrimes.toNat (PrimeSuccessorWitness.witnessPrime stage12ClosurePrimeWitness)
+canonicalGlyph111TernaryValueMatchesStage12ClosurePrime = refl
