@@ -98,6 +98,23 @@ monitor surface.
   false, the bridge theorem is not proved, and the new scans are empirical
   only.
 
+- Generic quotient-action and p11 second-lane tranche for `2026-06-22`: adds
+  `DASHI.Foundations.PrimeLaneUnitActionQuotient`,
+  `DASHI.Foundations.P11UnitGroupC10Witness`,
+  `DASHI.Foundations.P11HexTruthActionQuotient`,
+  `DASHI.Geometry.P11UnitActionTreeIsometry`,
+  `DASHI.Core.P11EquivariantOddFieldGate`, and
+  `DASHI.Physics.Closure.P11Stage11C10Regression`, wired through
+  `DASHI.Everything`. The tranche generalizes the local prime-lane quotient
+  surface beyond the p7-only exemplar, adds a concrete `p11 / C10` witness
+  with Stage-11 identity and Stage-10 unit-order receipts, threads that lane
+  through canonical address/depth self-isometry and odd-field equivariance
+  consumers, and keeps the reduced HexTruth transport honest by recording the
+  p11 half-turn as a fail-closed transport quotient rather than a clean
+  group-faithful action. This remains candidate-only and fail-closed: no
+  all-primes `(\u2124/p\u2124)^×` action theorem, analytic BT/p-adic symmetry
+  dynamics, or Clay authority is promoted.
+
 - NS Sacasa/Kiriukhin orbit-coherence bridge tranche for `2026-06-21`: adds
   `DASHI.Physics.Closure.NSKiriukhinOrbitStretchingCarrierReceipt`,
   `DASHI.Physics.Closure.NSSacasaCosphereCoherenceCarrierReceipt`,
