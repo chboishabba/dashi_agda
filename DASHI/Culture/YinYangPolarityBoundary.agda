@@ -451,6 +451,42 @@ canonicalYinYangPolarityBoundaryRowReceipts =
   ∷ "Reversal row receipt"
   ∷ []
 
+canonicalYinYangSymbolGeometryBoundaryModuleName : String
+canonicalYinYangSymbolGeometryBoundaryModuleName =
+  "DASHI.Culture.YinYangSymbolGeometryBoundary"
+
+canonicalYinYangSymbolGeometryBoundarySurfaceName : String
+canonicalYinYangSymbolGeometryBoundarySurfaceName =
+  "canonicalYinYangSymbolGeometryBoundaryReceipt"
+
+canonicalYinYangSymbolGeometryBoundarySummary : String
+canonicalYinYangSymbolGeometryBoundarySummary =
+  "Candidate-only yin/yang symbol geometry support surface covering enclosing-circle, inner-circle, eye-dot, teardrop, and S-curve boundary readings."
+
+record YinYangGeometrySupportReference : Set where
+  constructor yinYangGeometrySupportReference
+  field
+    geometryBoundaryModuleName : String
+    geometryBoundarySurfaceName : String
+    candidateOnly : Bool
+    candidateOnlyTrue : candidateOnly ≡ true
+    promoted : Bool
+    promotedFalse : promoted ≡ false
+    geometryBoundarySummary : String
+
+open YinYangGeometrySupportReference public
+
+canonicalYinYangGeometrySupportReference : YinYangGeometrySupportReference
+canonicalYinYangGeometrySupportReference =
+  yinYangGeometrySupportReference
+    canonicalYinYangSymbolGeometryBoundaryModuleName
+    canonicalYinYangSymbolGeometryBoundarySurfaceName
+    true
+    refl
+    false
+    refl
+    canonicalYinYangSymbolGeometryBoundarySummary
+
 record YinYangPolarityBoundaryReceipt : Set where
   constructor yinYangPolarityBoundaryReceipt
   field
@@ -477,6 +513,10 @@ record YinYangPolarityBoundaryReceipt : Set where
       List YinYangPolarityBoundaryRow
     boundaryRowsAreCanonical :
       boundaryRows ≡ canonicalYinYangPolarityBoundaryRows
+    geometrySupportReference :
+      YinYangGeometrySupportReference
+    geometrySupportReferenceIsCanonical :
+      geometrySupportReference ≡ canonicalYinYangGeometrySupportReference
     boundaryRowCount :
       Nat
     boundaryRowCountMatchesCanonical :
@@ -532,6 +572,10 @@ canonicalYinYangPolarityBoundaryReceipt =
         canonicalYinYangPolarityBoundaryRows
     ; boundaryRowsAreCanonical =
         refl
+    ; geometrySupportReference =
+        canonicalYinYangGeometrySupportReference
+    ; geometrySupportReferenceIsCanonical =
+        refl
     ; boundaryRowCount =
         canonicalYinYangPolarityBoundaryRowCount
     ; boundaryRowCountMatchesCanonical =
@@ -557,5 +601,5 @@ canonicalYinYangPolarityBoundaryReceipt =
     ; nonPromotingTrue =
         refl
     ; boundarySummary =
-        "Candidate-only yin/yang polarity boundary linking Tao operator grammar to Qi formal-lens/operator grammar with fail-closed authority bits."
+        "Candidate-only yin/yang polarity boundary linking Tao operator grammar to Qi formal-lens/operator grammar with fail-closed authority bits and a first-class yin/yang symbol geometry support reference."
     }

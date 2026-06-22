@@ -97,6 +97,7 @@ import DASHI.Foundations.PAdicSocioeconomicBoundary as PAdicBoundary
 import DASHI.Physics.Closure.MonsterAnalogyPromotionBoundary as MonsterAnalogyBoundary
 import DASHI.Promotion.PoliticalRoleAssignmentBoundary as PoliticalRoleBoundary
 import DASHI.Culture.QiOperatorTheoryBoundary as QiOperatorTheory
+import DASHI.Culture.YinYangSymbolGeometryBoundary as YinYangSymbolGeometry
 import DASHI.Promotion.PolarityFieldObligationIndex as PolarityFieldBoundary
 import DASHI.Promotion.TaoQiObligationIndex as TaoQiBoundary
 
@@ -251,6 +252,8 @@ data CrossDomainInterpretationBoundaryLane : Set where
   wikidataCandidateRoleBridgeBoundaryLane :
     CrossDomainInterpretationBoundaryLane
   qiOperatorTheoryBoundaryLane :
+    CrossDomainInterpretationBoundaryLane
+  yinYangSymbolGeometryBoundaryLane :
     CrossDomainInterpretationBoundaryLane
   polarityFieldBoundaryLane :
     CrossDomainInterpretationBoundaryLane
@@ -1396,6 +1399,13 @@ canonicalCrossDomainInterpretationBoundarySummaries =
     "empirical, spiritual, mystical, clinical, environmental, legal, and scientific authority remain false without validation"
     "agda -i . DASHI/Culture/QiOperatorTheoryBoundary.agda"
   ∷ mkCrossDomainInterpretationBoundarySummary
+    yinYangSymbolGeometryBoundaryLane
+    "DASHI.Culture.YinYangSymbolGeometryBoundary"
+    "canonicalYinYangSymbolGeometryBoundaryReceipt"
+    "the radius-R yin-yang symbol is recorded as candidate-only circle/set/teardrop/eye geometry with a parametric S-curve boundary surface that can feed Tao/yinyang/polarity interpretation layers without promoting doctrine"
+    "metaphysical, spiritual, clinical, symbolic-canonical, empirical, and theorem authority remain false while the symbol geometry stays a bounded cultural geometry surface"
+    "agda -i . DASHI/Culture/YinYangSymbolGeometryBoundary.agda"
+  ∷ mkCrossDomainInterpretationBoundarySummary
     polarityFieldBoundaryLane
     "DASHI.Promotion.PolarityFieldObligationIndex"
     "canonicalPolarityFieldObligationIndexReceipt"
@@ -1420,11 +1430,11 @@ canonicalCrossDomainInterpretationBoundarySummaries =
 
 crossDomainInterpretationBoundaryCount :
   Nat
-crossDomainInterpretationBoundaryCount = 26
+crossDomainInterpretationBoundaryCount = 27
 
-crossDomainInterpretationBoundaryCountIs26 :
-  crossDomainInterpretationBoundaryCount ≡ 26
-crossDomainInterpretationBoundaryCountIs26 = refl
+crossDomainInterpretationBoundaryCountIs27 :
+  crossDomainInterpretationBoundaryCount ≡ 27
+crossDomainInterpretationBoundaryCountIs27 = refl
 
 record UnifiedPromotionObligationIndex : Setω where
   field

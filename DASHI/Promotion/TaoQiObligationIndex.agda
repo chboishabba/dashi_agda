@@ -37,6 +37,7 @@ data TaoQiLane : Set where
   taoSourceLane : TaoQiLane
   taoReadingLane : TaoQiLane
   yinYangBoundaryLane : TaoQiLane
+  yinYangGeometryLane : TaoQiLane
   bettiSupportLane : TaoQiLane
   qiRoleGrammarLane : TaoQiLane
   qiCarrierFieldLane : TaoQiLane
@@ -71,6 +72,8 @@ record TaoQiGovernanceRow : Set where
       TaoGrammar.TaoOperatorGrammarReceipt
     yinYangBoundaryReceipt :
       YinYang.YinYangPolarityBoundaryReceipt
+    yinYangGeometryBoundaryModule : String
+    yinYangGeometryBoundarySurface : String
     taoYinYangBridgeReceipt :
       TaoYinYang.TaoYinYangBridgeReceipt
     yinYangQiBridgeReceipt :
@@ -110,6 +113,8 @@ record TaoQiObligationIndexReceipt : Set where
       TaoGrammar.TaoOperatorGrammarReceipt
     yinYangBoundaryReceipt :
       YinYang.YinYangPolarityBoundaryReceipt
+    yinYangGeometryBoundaryModule : String
+    yinYangGeometryBoundarySurface : String
     taoYinYangBridgeReceipt :
       TaoYinYang.TaoYinYangBridgeReceipt
     yinYangQiBridgeReceipt :
@@ -170,6 +175,8 @@ mkTaoQiGovernanceRow :
   Tao.TaoChapterReceipt →
   TaoGrammar.TaoOperatorGrammarReceipt →
   YinYang.YinYangPolarityBoundaryReceipt →
+  String →
+  String →
   TaoYinYang.TaoYinYangBridgeReceipt →
   YinYangQi.YinYangQiBridgeReceipt →
   PhaseField.PolarityPhaseFieldBridge →
@@ -186,7 +193,7 @@ mkTaoQiGovernanceRow :
   String →
   TaoQiGovernanceRow
 mkTaoQiGovernanceRow lane moduleName taoSource taoFail taoChapter taoGrammar
-  yinYang taoYinYang yinYangQi polarityPhaseField
+  yinYang yinYangGeometryModule yinYangGeometrySurface taoYinYang yinYangQi polarityPhaseField
   bettiBoundaryModule bettiBoundarySurface bettiAdapterModule
   bettiAdapterSurface qiOperator qiBridge taoQi taoMeditation polarityField
   note command =
@@ -198,6 +205,8 @@ mkTaoQiGovernanceRow lane moduleName taoSource taoFail taoChapter taoGrammar
     taoChapter
     taoGrammar
     yinYang
+    yinYangGeometryModule
+    yinYangGeometrySurface
     taoYinYang
     yinYangQi
     polarityPhaseField
@@ -234,6 +243,14 @@ canonicalBettiQiAdapterModuleName =
 canonicalBettiQiAdapterSurfaceName : String
 canonicalBettiQiAdapterSurfaceName =
   "canonicalBettiQiBridgeReceipt"
+
+canonicalYinYangGeometryBoundaryModuleName : String
+canonicalYinYangGeometryBoundaryModuleName =
+  "DASHI.Culture.YinYangSymbolGeometryBoundary"
+
+canonicalYinYangGeometryBoundarySurfaceName : String
+canonicalYinYangGeometryBoundarySurfaceName =
+  "canonicalYinYangSymbolGeometryBoundaryReceipt"
 
 canonicalTaoQiSummaryRows : List TaoQiSummaryRow
 canonicalTaoQiSummaryRows =
@@ -292,10 +309,19 @@ canonicalTaoQiSummaryRows =
     "truth, support, admissibility, runtime, theorem, clinical, and metaphysical authority remain false"
     "agda -i . DASHI/Interop/YinYangQiAdapter.agda"
   ∷ mkTaoQiSummaryRow
+    yinYangGeometryLane
+    canonicalYinYangGeometryBoundaryModuleName
+    canonicalYinYangGeometryBoundarySurfaceName
+    "The yin-yang symbol is tracked as candidate-only support geometry using enclosing, inner, and eye-circle regions plus teardrop and piecewise yin/yang set definitions."
+    5
+    "symbol geometry remains a geometric support surface only"
+    "no metaphysical, empirical, doctrinal, clinical, or theorem authority is promoted from symbolic geometry"
+    "agda -i . DASHI/Culture/YinYangSymbolGeometryBoundary.agda"
+  ∷ mkTaoQiSummaryRow
     yinYangBoundaryLane
     "DASHI.Interop.PolarityPhaseFieldBridge"
     "canonicalPolarityPhaseFieldBridge"
-    "The polarity layer is extended into 369 phase rows, voxel/supervoxel support, Betti-ready field shape, wave mixtures, and superposition candidates under blocked authority governance."
+    "The polarity layer, grounded by candidate-only yin-yang geometry support, is extended into 369 phase rows, voxel/supervoxel support, Betti-ready field shape, wave mixtures, and superposition candidates under blocked authority governance."
     (listCount PhaseField.canonicalCarrierRows)
     "phase/field rows remain candidate-only interpretation surfaces"
     "no theorem, runtime, external, spiritual, metaphysical, or empirical authority is promoted"
@@ -366,6 +392,8 @@ canonicalTaoQiGovernanceRows =
     Tao.chapter1Receipt
     TaoGrammar.canonicalTaoOperatorGrammarReceipt
     YinYang.canonicalYinYangPolarityBoundaryReceipt
+    canonicalYinYangGeometryBoundaryModuleName
+    canonicalYinYangGeometryBoundarySurfaceName
     TaoYinYang.canonicalTaoYinYangBridgeReceipt
     YinYangQi.canonicalYinYangQiBridgeReceipt
     PhaseField.canonicalPolarityPhaseFieldBridge
@@ -378,7 +406,7 @@ canonicalTaoQiGovernanceRows =
     TaoQi.canonicalTaoQiBridgeReceipt
     TaoMeditation.canonicalTaoMeditationQiBridgeReceipt
     PolarityField.canonicalPolarityFieldObligationIndexReceipt
-    "Tao authority is fail-closed: empirical, spiritual, mystical, clinical, political, metaphysical, philological, canonical-text, and promoted-doctrine bits stay false while interpretiveCandidate and poeticFormalPayload remain true."
+    "Tao authority is fail-closed: empirical, spiritual, mystical, clinical, political, metaphysical, philological, canonical-text, and promoted-doctrine bits stay false while interpretiveCandidate and poeticFormalPayload remain true. The yin-yang geometry layer contributes candidate-only support geometry, not doctrine."
     "agda -i . DASHI/Culture/TaoChapterReadingReceipt.agda && agda -i . DASHI/Culture/QiOperatorTheoryBoundary.agda"
   ∷ mkTaoQiGovernanceRow
     governanceLane
@@ -388,6 +416,8 @@ canonicalTaoQiGovernanceRows =
     Tao.chapter1Receipt
     TaoGrammar.canonicalTaoOperatorGrammarReceipt
     YinYang.canonicalYinYangPolarityBoundaryReceipt
+    canonicalYinYangGeometryBoundaryModuleName
+    canonicalYinYangGeometryBoundarySurfaceName
     TaoYinYang.canonicalTaoYinYangBridgeReceipt
     YinYangQi.canonicalYinYangQiBridgeReceipt
     PhaseField.canonicalPolarityPhaseFieldBridge
@@ -400,7 +430,7 @@ canonicalTaoQiGovernanceRows =
     TaoQi.canonicalTaoQiBridgeReceipt
     TaoMeditation.canonicalTaoMeditationQiBridgeReceipt
     PolarityField.canonicalPolarityFieldObligationIndexReceipt
-    "Qi authority is fail-closed: the operator-theory receipt remains candidate-only role grammar, and the core role family carries no external authority."
+    "Qi authority is fail-closed: the operator-theory receipt remains candidate-only role grammar, and the core role family carries no external authority. Upstream yin-yang geometry remains a support layer only."
     "agda -i . DASHI/Culture/QiOperatorTheoryBoundary.agda && agda -i . DASHI/Interop/QiCarrierFieldBridge.agda"
   ∷ mkTaoQiGovernanceRow
     governanceLane
@@ -410,6 +440,8 @@ canonicalTaoQiGovernanceRows =
     Tao.chapter1Receipt
     TaoGrammar.canonicalTaoOperatorGrammarReceipt
     YinYang.canonicalYinYangPolarityBoundaryReceipt
+    canonicalYinYangGeometryBoundaryModuleName
+    canonicalYinYangGeometryBoundarySurfaceName
     TaoYinYang.canonicalTaoYinYangBridgeReceipt
     YinYangQi.canonicalYinYangQiBridgeReceipt
     PhaseField.canonicalPolarityPhaseFieldBridge
@@ -422,7 +454,7 @@ canonicalTaoQiGovernanceRows =
     TaoQi.canonicalTaoQiBridgeReceipt
     TaoMeditation.canonicalTaoMeditationQiBridgeReceipt
     PolarityField.canonicalPolarityFieldObligationIndexReceipt
-    "The bridge surface stays candidate-only: Tao, yin/yang, Betti support, Qi, and the 369/voxel/wave field grammar are joined as receipts and role grammar, not as promoted doctrine, empirical validity, clinical instruction, or metaphysical authority."
+    "The bridge surface stays candidate-only: Tao, yin/yang, yin-yang support geometry, Betti support, Qi, and the 369/voxel/wave field grammar are joined as receipts and role grammar, not as promoted doctrine, empirical validity, clinical instruction, or metaphysical authority."
     "agda -i . DASHI/Promotion/TaoQiObligationIndex.agda"
   ∷ []
 
@@ -434,6 +466,8 @@ canonicalTaoQiObligationIndexReceipt =
     Tao.chapter1Receipt
     TaoGrammar.canonicalTaoOperatorGrammarReceipt
     YinYang.canonicalYinYangPolarityBoundaryReceipt
+    canonicalYinYangGeometryBoundaryModuleName
+    canonicalYinYangGeometryBoundarySurfaceName
     TaoYinYang.canonicalTaoYinYangBridgeReceipt
     YinYangQi.canonicalYinYangQiBridgeReceipt
     PhaseField.canonicalPolarityPhaseFieldBridge

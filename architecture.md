@@ -55,7 +55,7 @@ Regenerate rendered SVG and PNG previews with:
 Use them in this order:
 
 1. `Docs/RepoMetasystem.*` for repo-level orientation
-2. `Docs/diagrams/TaoQiPolarityMetasystem.puml` for the Tao -> yin/yang -> Qi -> phase/field interpretive stack
+2. `Docs/diagrams/TaoQiPolarityMetasystem.puml` for the Tao -> symbol geometry -> yin/yang -> Qi -> phase/field interpretive stack
 3. `Docs/CanonicalProofSpine.*` for the canonical theorem route
 4. `Docs/OriginTraceabilityLedger.md` for origin/disconnection governance
 5. `Docs/PhysicsUnificationMap.*` for claim boundaries and open gaps
@@ -148,20 +148,22 @@ The current cultural/interpretive stack is now explicitly layered as:
 
 1. `DASHI.Culture.TaoChapterReadingReceipt`
 2. `DASHI.Culture.TaoOperatorGrammar`
-3. `DASHI.Culture.YinYangPolarityBoundary`
-4. `DASHI.Interop.TaoYinYangAdapter`
-5. `DASHI.Interop.YinYangQiAdapter`
-6. `DASHI.Interop.PolarityPhaseFieldBridge`
-7. `DASHI.Interop.PolarityBettiSupportBoundary`
-8. `DASHI.Interop.BettiQiAdapter`
-9. `DASHI.Interop.TaoQiReadingAdapter`
-10. `DASHI.Interop.TaoMeditationQiAdapter`
-11. `DASHI.Promotion.PolarityFieldObligationIndex`
-12. `DASHI.Promotion.TaoQiObligationIndex`
+3. `DASHI.Culture.YinYangSymbolGeometryBoundary`
+4. `DASHI.Culture.YinYangPolarityBoundary`
+5. `DASHI.Interop.TaoYinYangAdapter`
+6. `DASHI.Interop.YinYangQiAdapter`
+7. `DASHI.Interop.PolarityPhaseFieldBridge`
+8. `DASHI.Interop.PolarityBettiSupportBoundary`
+9. `DASHI.Interop.BettiQiAdapter`
+10. `DASHI.Interop.TaoQiReadingAdapter`
+11. `DASHI.Interop.TaoMeditationQiAdapter`
+12. `DASHI.Promotion.PolarityFieldObligationIndex`
+13. `DASHI.Promotion.TaoQiObligationIndex`
 
 Architecture rule for this stack:
 
 - Tao supplies source-dependent motifs and chapter-local candidate readings.
+- Yin-yang symbol geometry supplies the formulaic circle, eye, teardrop, region, and S-curve support surface for the polarity boundary.
 - Yin/yang supplies the polarity and transition grammar between Tao operators and Qi formal-lens/operator surfaces.
 - The polarity-phase-field bridge is where local `TriTruth`/`HexTruth`/`NonaryTruth`, voxel/supervoxel support, and wave/superposition grammar sit.
 - Betti support sits over that local support geometry as a candidate-only topology summary layer for connected components, loops, and voids before Qi interpretation.

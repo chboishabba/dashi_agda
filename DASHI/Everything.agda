@@ -136,6 +136,7 @@ import DASHI.Culture.QiOperatorTheoryBoundary
 import DASHI.Culture.TaoChapterReadingReceipt
 import DASHI.Culture.TaoOperatorGrammar
 import DASHI.Culture.YinYangPolarityBoundary
+import DASHI.Culture.YinYangSymbolGeometryBoundary
 import DASHI.Combinatorics.String.Compatibility
 import DASHI.Combinatorics.String.HilbertToy
 import DASHI.Combinatorics.String.LieAlgebra
@@ -395,6 +396,8 @@ import DASHI.Physics.Closure.NSTriadFrustrationDefectBoundary
 import DASHI.Physics.Closure.NSTriadFrustrationRegression
 import DASHI.Physics.Closure.NSTriadIncidenceCocycleReceipt
 import DASHI.Physics.Closure.NSTriadKernelPhaseCocycleReceipt
+import DASHI.Physics.Closure.NSTriadLowFrustrationBasinEntropyBoundary
+import DASHI.Physics.Closure.NSTriadNegativeFrameOperatorBoundary
 import DASHI.Physics.Closure.NSTriadPhaseLockingLiveWallReceipt
 import DASHI.Physics.Closure.NSAdversarialGibbsPhaseReferenceReceipt
 import DASHI.Physics.Closure.NSSacasaTriadFrustrationBridgeBoundary

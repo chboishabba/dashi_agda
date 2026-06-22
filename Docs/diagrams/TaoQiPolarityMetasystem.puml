@@ -15,6 +15,7 @@ rectangle "Tao Source Layer" as TaoSource #E8F1E8 {
 }
 
 rectangle "Polarity Layer" as Polarity #FFF4D6 {
+  rectangle "YinYangSymbolGeometryBoundary\ncircle + teardrop + eye + S-curve support" as YinYangGeometry
   rectangle "YinYangPolarityBoundary\npaired poles + transition grammar" as YinYangBoundary
   rectangle "TaoYinYangAdapter\nchapter motifs -> polarity rows" as TaoYinYang
 }
@@ -42,6 +43,8 @@ rectangle "Governance Layer" as Governance #FDECEC {
 }
 
 TaoChapter --> TaoOps
+TaoOps --> YinYangGeometry
+YinYangGeometry --> YinYangBoundary
 TaoOps --> YinYangBoundary
 TaoChapter --> TaoYinYang
 YinYangBoundary --> TaoYinYang
@@ -61,6 +64,7 @@ PhaseField --> QiCarrier
 PhaseField --> QiOperator
 
 TaoChapter --> PolarityIndex
+YinYangGeometry --> PolarityIndex
 YinYangBoundary --> PolarityIndex
 TaoYinYang --> PolarityIndex
 YinYangQi --> PolarityIndex
@@ -70,6 +74,7 @@ BettiQi --> PolarityIndex
 
 TaoChapter --> TaoQiIndex
 TaoOps --> TaoQiIndex
+YinYangGeometry --> TaoQiIndex
 YinYangBoundary --> TaoQiIndex
 TaoYinYang --> TaoQiIndex
 YinYangQi --> TaoQiIndex
