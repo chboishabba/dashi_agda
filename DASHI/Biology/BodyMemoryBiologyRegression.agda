@@ -16,16 +16,26 @@ open import Agda.Builtin.String using (String)
 data BodyMemoryAspect : Set where
   bodyFibresAspect : BodyMemoryAspect
   epigeneticRegulationAspect : BodyMemoryAspect
+  epigeneticTemporalRegulationAspect : BodyMemoryAspect
   neuroendocrineImmuneCellSignalAspect : BodyMemoryAspect
   fmriConnectomeProxyAspect : BodyMemoryAspect
+  longitudinalFMRIConnectomeDynamicsAspect : BodyMemoryAspect
+  developmentalWindowAspect : BodyMemoryAspect
+  interventionConsentAspect : BodyMemoryAspect
+  hyperfabricIntersectionalAspect : BodyMemoryAspect
   brainDnaRepresentationAspect : BodyMemoryAspect
   clinicalGovernanceGatesAspect : BodyMemoryAspect
 
 data BodyMemoryCandidateForm : Set where
   fibreNetworkCandidate : BodyMemoryCandidateForm
   epigeneticStateCandidate : BodyMemoryCandidateForm
+  temporalRegulationCandidate : BodyMemoryCandidateForm
   signallingMeshCandidate : BodyMemoryCandidateForm
   imagingProxyCandidate : BodyMemoryCandidateForm
+  longitudinalTrajectoryCandidate : BodyMemoryCandidateForm
+  developmentalWindowCandidate : BodyMemoryCandidateForm
+  consentGovernanceCandidate : BodyMemoryCandidateForm
+  hyperfabricInterpretiveCandidate : BodyMemoryCandidateForm
   representationGraphCandidate : BodyMemoryCandidateForm
   governanceBoundaryCandidate : BodyMemoryCandidateForm
 
@@ -43,8 +53,13 @@ data GovernanceStatus : Set where
 data MemoryTraceClaim : Set where
   tissueSupportTrace : MemoryTraceClaim
   chromatinTrace : MemoryTraceClaim
+  temporalRegulationTrace : MemoryTraceClaim
   signallingTrace : MemoryTraceClaim
   proxyTrace : MemoryTraceClaim
+  longitudinalTrace : MemoryTraceClaim
+  developmentalWindowTrace : MemoryTraceClaim
+  consentTrace : MemoryTraceClaim
+  hyperfabricTrace : MemoryTraceClaim
   representationTrace : MemoryTraceClaim
   gateTrace : MemoryTraceClaim
 
@@ -81,13 +96,43 @@ record CandidateOnlyReceipt : Set where
 
 open CandidateOnlyReceipt public
 
-record BodyMemoryRegistry : Set where
+record BodyMemoryRegistry : Setω where
   constructor mkBodyMemoryRegistry
   field
     registryLabel : String
     registryVersion : String
     registryRows : List BodyMemoryRegistryRow
     registryReceipts : List CandidateOnlyReceipt
+    epigeneticTemporalRegulationBridge :
+      EpigeneticTemporal.EpigeneticTemporalRegulationBridge
+    epigeneticTemporalRegulationBridgeIsCanonical :
+      epigeneticTemporalRegulationBridge ≡
+      EpigeneticTemporal.canonicalEpigeneticTemporalRegulationBridge
+    fMRIConnectomeProxyGovernance :
+      FMRIGovernance.FMRIConnectomeProxyGovernance
+    fMRIConnectomeProxyGovernanceIsCanonical :
+      fMRIConnectomeProxyGovernance ≡
+      FMRIGovernance.canonicalFMRIConnectomeProxyGovernance
+    longitudinalFMRIConnectomeDynamicsGovernance :
+      Longitudinal.LongitudinalFMRIConnectomeDynamicsGovernance
+    longitudinalFMRIConnectomeDynamicsGovernanceIsCanonical :
+      longitudinalFMRIConnectomeDynamicsGovernance ≡
+      Longitudinal.canonicalLongitudinalFMRIConnectomeDynamicsGovernance
+    interventionConsentLongitudinalGovernance :
+      Consent.InterventionConsentLongitudinalGovernance
+    interventionConsentLongitudinalGovernanceIsCanonical :
+      interventionConsentLongitudinalGovernance ≡
+      Consent.canonicalInterventionConsentLongitudinalGovernance
+    hyperfabricIntersectionalBodyMemoryBridge :
+      Hyperfabric.HyperfabricIntersectionalBodyMemoryBridge
+    hyperfabricIntersectionalBodyMemoryBridgeIsCanonical :
+      hyperfabricIntersectionalBodyMemoryBridge ≡
+      Hyperfabric.canonicalHyperfabricIntersectionalBodyMemoryBridge
+    intersectionalLongitudinalResidualDynamics :
+      IntersectionalLongitudinal.IntersectionalLongitudinalResidualDynamics
+    intersectionalLongitudinalResidualDynamicsIsCanonical :
+      intersectionalLongitudinalResidualDynamics ≡
+      IntersectionalLongitudinal.canonicalIntersectionalLongitudinalResidualDynamics
     registryBoundarySummary : List String
     registryCandidateOnly : Bool
     registryCandidateOnlyIsTrue : registryCandidateOnly ≡ true
@@ -148,10 +193,32 @@ epigeneticRegulationRow =
     ∷ []
     )
 
+epigeneticTemporalRegulationRow : BodyMemoryRegistryRow
+epigeneticTemporalRegulationRow =
+  mkBodyMemoryRegistryRow
+    (suc (suc zero))
+    epigeneticTemporalRegulationAspect
+    "epigenetic temporal regulation"
+    "candidate registry row for time-indexed epigenetic regulation and association-only state"
+    temporalRegulationCandidate
+    temporalRegulationTrace
+    ( candidateOnlyGate
+    ∷ noDiagnosisGate
+    ∷ noTreatmentGate
+    ∷ noClinicalAuthorityGate
+    ∷ []
+    )
+    registryCandidateStatus
+    ( "epigenetic time-indexing is recorded as a candidate-only row"
+    ∷ "association remains distinct from causation"
+    ∷ "no trauma proof or inherited destiny claim is promoted"
+    ∷ []
+    )
+
 neuroendocrineImmuneCellSignalRow : BodyMemoryRegistryRow
 neuroendocrineImmuneCellSignalRow =
   mkBodyMemoryRegistryRow
-    (suc (suc zero))
+    (suc (suc (suc zero)))
     neuroendocrineImmuneCellSignalAspect
     "neuroendocrine / immune / cell signalling"
     "candidate registry row for coupled endocrine, immune, and cell-signalling proxies"
@@ -173,7 +240,7 @@ neuroendocrineImmuneCellSignalRow =
 fmriConnectomeProxyRow : BodyMemoryRegistryRow
 fmriConnectomeProxyRow =
   mkBodyMemoryRegistryRow
-    (suc (suc (suc zero)))
+    (suc (suc (suc (suc zero))))
     fmriConnectomeProxyAspect
     "fMRI / connectome proxy"
     "candidate registry row for imaging-derived proxy structure, not direct brain-state authority"
@@ -192,10 +259,98 @@ fmriConnectomeProxyRow =
     ∷ []
     )
 
+longitudinalFMRIConnectomeDynamicsRow : BodyMemoryRegistryRow
+longitudinalFMRIConnectomeDynamicsRow =
+  mkBodyMemoryRegistryRow
+    (suc (suc (suc (suc (suc zero)))))
+    longitudinalFMRIConnectomeDynamicsAspect
+    "longitudinal fMRI / connectome dynamics"
+    "candidate registry row for longitudinal session trajectories and residual drift"
+    longitudinalTrajectoryCandidate
+    longitudinalTrace
+    ( candidateOnlyGate
+    ∷ noDiagnosisGate
+    ∷ noTreatmentGate
+    ∷ noClinicalAuthorityGate
+    ∷ []
+    )
+    registryNonClinicalStatus
+    ( "longitudinal proxy trajectories remain candidate-only"
+    ∷ "reverse inference and hidden-chart recovery stay blocked in the imported bridge"
+    ∷ "fMRI/connectome longitudinal placement is treated as a proxy lane"
+    ∷ []
+    )
+
+developmentalWindowRow : BodyMemoryRegistryRow
+developmentalWindowRow =
+  mkBodyMemoryRegistryRow
+    (suc (suc (suc (suc (suc (suc zero))))))
+    developmentalWindowAspect
+    "developmental window"
+    "candidate registry row for developmental windows and plasticity/pruning proxies"
+    developmentalWindowCandidate
+    developmentalWindowTrace
+    ( candidateOnlyGate
+    ∷ noDiagnosisGate
+    ∷ noTreatmentGate
+    ∷ noClinicalAuthorityGate
+    ∷ []
+    )
+    registryCandidateStatus
+    ( "developmental windows are tracked as candidate contexts only"
+    ∷ "plasticity and pruning remain proxy vocabulary"
+    ∷ "DNA destiny and critical-period determinism are not promoted"
+    ∷ []
+    )
+
+interventionConsentRow : BodyMemoryRegistryRow
+interventionConsentRow =
+  mkBodyMemoryRegistryRow
+    (suc (suc (suc (suc (suc (suc (suc zero)))))))
+    interventionConsentAspect
+    "intervention / consent"
+    "candidate registry row for pacing, consent, review, and safety-seed governance"
+    consentGovernanceCandidate
+    consentTrace
+    ( candidateOnlyGate
+    ∷ noDiagnosisGate
+    ∷ noTreatmentGate
+    ∷ noClinicalAuthorityGate
+    ∷ []
+    )
+    registryNoAuthorityStatus
+    ( "consent and pacing stay explicitly longitudinal"
+    ∷ "forced disclosure and therapeutic authority remain blocked in the imported governance bridge"
+    ∷ "the safety seed is governance, not treatment or cure"
+    ∷ []
+    )
+
+hyperfabricIntersectionalRow : BodyMemoryRegistryRow
+hyperfabricIntersectionalRow =
+  mkBodyMemoryRegistryRow
+    (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))
+    hyperfabricIntersectionalAspect
+    "hyperfabric / intersectional"
+    "candidate registry row for hyperfabric interpretive carriers and axis auditing"
+    hyperfabricInterpretiveCandidate
+    hyperfabricTrace
+    ( candidateOnlyGate
+    ∷ noDiagnosisGate
+    ∷ noTreatmentGate
+    ∷ noClinicalAuthorityGate
+    ∷ []
+    )
+    registryCandidateStatus
+    ( "dialectic and hyperfabric vocabulary remain candidate interpretive material"
+    ∷ "social truth, legal authority, and educational authority are not promoted"
+    ∷ "intersectional longitudinal residual dynamics remain a residual gap surface"
+    ∷ []
+    )
+
 brainDnaRepresentationRow : BodyMemoryRegistryRow
 brainDnaRepresentationRow =
   mkBodyMemoryRegistryRow
-    (suc (suc (suc (suc zero))))
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc zero)))))))))
     brainDnaRepresentationAspect
     "BrainDNA representation"
     "candidate registry row for symbolic brain-DNA representation, not causal identity"
@@ -217,7 +372,7 @@ brainDnaRepresentationRow =
 clinicalGovernanceGatesRow : BodyMemoryRegistryRow
 clinicalGovernanceGatesRow =
   mkBodyMemoryRegistryRow
-    (suc (suc (suc (suc (suc zero)))))
+    (suc (suc (suc (suc (suc (suc (suc (suc (suc (suc zero))))))))))
     clinicalGovernanceGatesAspect
     "clinical governance gates"
     "candidate registry row encoding explicit fail-closed clinical boundaries"
@@ -240,8 +395,13 @@ canonicalBodyMemoryRegistryRows : List BodyMemoryRegistryRow
 canonicalBodyMemoryRegistryRows =
   bodyFibreRow
   ∷ epigeneticRegulationRow
+  ∷ epigeneticTemporalRegulationRow
   ∷ neuroendocrineImmuneCellSignalRow
   ∷ fmriConnectomeProxyRow
+  ∷ longitudinalFMRIConnectomeDynamicsRow
+  ∷ developmentalWindowRow
+  ∷ interventionConsentRow
+  ∷ hyperfabricIntersectionalRow
   ∷ brainDnaRepresentationRow
   ∷ clinicalGovernanceGatesRow
   ∷ []
@@ -282,6 +442,24 @@ epigeneticRegulationReceipt =
     ∷ []
     )
 
+epigeneticTemporalRegulationReceipt : CandidateOnlyReceipt
+epigeneticTemporalRegulationReceipt =
+  mkCandidateOnlyReceipt
+    "epigenetic temporal regulation candidate-only receipt"
+    epigeneticTemporalRegulationAspect
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    ( "time-indexed epigenetic regulation remains candidate-only"
+    ∷ "association does not become causation"
+    ∷ []
+    )
+
 neuroendocrineImmuneCellSignalReceipt : CandidateOnlyReceipt
 neuroendocrineImmuneCellSignalReceipt =
   mkCandidateOnlyReceipt
@@ -315,6 +493,78 @@ fmriConnectomeProxyReceipt =
     refl
     ( "imaging proxy is kept non-clinical"
     ∷ "no authority to infer treatment or diagnosis"
+    ∷ []
+    )
+
+longitudinalFMRIConnectomeDynamicsReceipt : CandidateOnlyReceipt
+longitudinalFMRIConnectomeDynamicsReceipt =
+  mkCandidateOnlyReceipt
+    "longitudinal fMRI connectome dynamics candidate-only receipt"
+    longitudinalFMRIConnectomeDynamicsAspect
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    ( "longitudinal scan dynamics remain a proxy carrier"
+    ∷ "session trajectories are not hidden chart recovery"
+    ∷ []
+    )
+
+developmentalWindowReceipt : CandidateOnlyReceipt
+developmentalWindowReceipt =
+  mkCandidateOnlyReceipt
+    "developmental window candidate-only receipt"
+    developmentalWindowAspect
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    ( "developmental windows remain candidate contexts"
+    ∷ "plasticity and pruning stay proxy vocabulary"
+    ∷ []
+    )
+
+interventionConsentReceipt : CandidateOnlyReceipt
+interventionConsentReceipt =
+  mkCandidateOnlyReceipt
+    "intervention consent candidate-only receipt"
+    interventionConsentAspect
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    ( "consent and pacing remain explicit governance gates"
+    ∷ "forced disclosure and therapeutic authority remain blocked"
+    ∷ []
+    )
+
+hyperfabricIntersectionalReceipt : CandidateOnlyReceipt
+hyperfabricIntersectionalReceipt =
+  mkCandidateOnlyReceipt
+    "hyperfabric intersectional candidate-only receipt"
+    hyperfabricIntersectionalAspect
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    ( "hyperfabric and intersectional vocabularies remain interpretive carriers"
+    ∷ "no social truth proof, clinical authority, or monoculture compression"
     ∷ []
     )
 
@@ -358,8 +608,13 @@ canonicalBodyMemoryRegistryReceipts : List CandidateOnlyReceipt
 canonicalBodyMemoryRegistryReceipts =
   bodyFibreReceipt
   ∷ epigeneticRegulationReceipt
+  ∷ epigeneticTemporalRegulationReceipt
   ∷ neuroendocrineImmuneCellSignalReceipt
   ∷ fmriConnectomeProxyReceipt
+  ∷ longitudinalFMRIConnectomeDynamicsReceipt
+  ∷ developmentalWindowReceipt
+  ∷ interventionConsentReceipt
+  ∷ hyperfabricIntersectionalReceipt
   ∷ brainDnaRepresentationReceipt
   ∷ clinicalGovernanceGatesReceipt
   ∷ []
@@ -371,11 +626,28 @@ canonicalBodyMemoryRegistry =
     "candidate-registry-0"
     canonicalBodyMemoryRegistryRows
     canonicalBodyMemoryRegistryReceipts
+    EpigeneticTemporal.canonicalEpigeneticTemporalRegulationBridge
+    refl
+    FMRIGovernance.canonicalFMRIConnectomeProxyGovernance
+    refl
+    Longitudinal.canonicalLongitudinalFMRIConnectomeDynamicsGovernance
+    refl
+    Consent.canonicalInterventionConsentLongitudinalGovernance
+    refl
+    Hyperfabric.canonicalHyperfabricIntersectionalBodyMemoryBridge
+    refl
+    IntersectionalLongitudinal.canonicalIntersectionalLongitudinalResidualDynamics
+    refl
     ( "candidate only"
     ∷ "no diagnosis"
     ∷ "no treatment"
     ∷ "no clinical authority"
     ∷ "reference only"
+    ∷ "epigenetic temporal regulation imported"
+    ∷ "fMRI/connectome longitudinal governance imported"
+    ∷ "intervention/consent longitudinal governance imported"
+    ∷ "hyperfabric intersectional bridge imported"
+    ∷ "intersectional longitudinal residual dynamics imported"
     ∷ []
     )
     true
@@ -434,6 +706,45 @@ canonicalBodyMemoryRegistryStableReferenceOnlyIsTrue :
 canonicalBodyMemoryRegistryStableReferenceOnlyIsTrue =
   registryStableReferenceOnlyIsTrue canonicalBodyMemoryRegistry
 
+canonicalEpigeneticTemporalRegulationBridgeIsCanonical :
+  epigeneticTemporalRegulationBridge canonicalBodyMemoryRegistry ≡
+  EpigeneticTemporal.canonicalEpigeneticTemporalRegulationBridge
+canonicalEpigeneticTemporalRegulationBridgeIsCanonical =
+  epigeneticTemporalRegulationBridgeIsCanonical canonicalBodyMemoryRegistry
+
+canonicalFMRIGovernanceIsCanonical :
+  fMRIConnectomeProxyGovernance canonicalBodyMemoryRegistry ≡
+  FMRIGovernance.canonicalFMRIConnectomeProxyGovernance
+canonicalFMRIGovernanceIsCanonical =
+  fMRIConnectomeProxyGovernanceIsCanonical canonicalBodyMemoryRegistry
+
+canonicalLongitudinalFMRIConnectomeDynamicsGovernanceIsCanonical :
+  longitudinalFMRIConnectomeDynamicsGovernance canonicalBodyMemoryRegistry ≡
+  Longitudinal.canonicalLongitudinalFMRIConnectomeDynamicsGovernance
+canonicalLongitudinalFMRIConnectomeDynamicsGovernanceIsCanonical =
+  longitudinalFMRIConnectomeDynamicsGovernanceIsCanonical
+    canonicalBodyMemoryRegistry
+
+canonicalInterventionConsentLongitudinalGovernanceIsCanonical :
+  interventionConsentLongitudinalGovernance canonicalBodyMemoryRegistry ≡
+  Consent.canonicalInterventionConsentLongitudinalGovernance
+canonicalInterventionConsentLongitudinalGovernanceIsCanonical =
+  interventionConsentLongitudinalGovernanceIsCanonical
+    canonicalBodyMemoryRegistry
+
+canonicalHyperfabricIntersectionalBodyMemoryBridgeIsCanonical :
+  hyperfabricIntersectionalBodyMemoryBridge canonicalBodyMemoryRegistry ≡
+  Hyperfabric.canonicalHyperfabricIntersectionalBodyMemoryBridge
+canonicalHyperfabricIntersectionalBodyMemoryBridgeIsCanonical =
+  hyperfabricIntersectionalBodyMemoryBridgeIsCanonical canonicalBodyMemoryRegistry
+
+canonicalIntersectionalLongitudinalResidualDynamicsIsCanonical :
+  intersectionalLongitudinalResidualDynamics canonicalBodyMemoryRegistry ≡
+  IntersectionalLongitudinal.canonicalIntersectionalLongitudinalResidualDynamics
+canonicalIntersectionalLongitudinalResidualDynamicsIsCanonical =
+  intersectionalLongitudinalResidualDynamicsIsCanonical
+    canonicalBodyMemoryRegistry
+
 ------------------------------------------------------------------------
 -- Regression surface.
 --
@@ -441,7 +752,7 @@ canonicalBodyMemoryRegistryStableReferenceOnlyIsTrue =
 -- is proving that the registry rows and hard gates are present and fail-closed
 -- at the surface level.
 
-record BodyMemoryRegressionReceipt : Set where
+record BodyMemoryRegressionReceipt : Setω where
   constructor mkBodyMemoryRegressionReceipt
   field
     receiptRows : List BodyMemoryRegistryRow
@@ -507,4 +818,3 @@ bodyMemoryRegressionNoClinicalAuthorityIsFalse :
   receiptNoClinicalAuthority canonicalBodyMemoryRegressionReceipt ≡ false
 bodyMemoryRegressionNoClinicalAuthorityIsFalse =
   receiptNoClinicalAuthorityIsFalse canonicalBodyMemoryRegressionReceipt
-

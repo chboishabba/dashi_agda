@@ -56,6 +56,142 @@ data ProxyCarrierKind : Set where
   trajectoryProxyCarrierKind : ProxyCarrierKind
   governanceProxyCarrierKind : ProxyCarrierKind
 
+data PopulationScope : Set where
+  singleCohortScope : PopulationScope
+  multiCohortScope : PopulationScope
+  populationAggregateScope : PopulationScope
+  longitudinalPanelScope : PopulationScope
+
+data CohortKind : Set where
+  baselineCohortKind : CohortKind
+  followUpCohortKind : CohortKind
+  stratifiedCohortKind : CohortKind
+  pooledPopulationCohortKind : CohortKind
+
+data NeurovascularProxyKind : Set where
+  boldHemodynamicProxyKind : NeurovascularProxyKind
+  vascularCouplingProxyKind : NeurovascularProxyKind
+  neurovascularLagProxyKind : NeurovascularProxyKind
+  populationBOLDProxyKind : NeurovascularProxyKind
+
+data LongitudinalGateKind : Set where
+  populationScopeGate : LongitudinalGateKind
+  cohortCompositionGate : LongitudinalGateKind
+  neurovascularProxyGate : LongitudinalGateKind
+  timeSeriesProxyGate : LongitudinalGateKind
+  individualMechanismGate : LongitudinalGateKind
+  traumaProofGate : LongitudinalGateKind
+  hiddenChartRecoveryGate : LongitudinalGateKind
+  mindReadingGate : LongitudinalGateKind
+  diagnosisGate : LongitudinalGateKind
+  treatmentGate : LongitudinalGateKind
+  clinicalAuthorityGate : LongitudinalGateKind
+
+canonicalPopulationScopes :
+  List PopulationScope
+canonicalPopulationScopes =
+  singleCohortScope
+  ∷ multiCohortScope
+  ∷ populationAggregateScope
+  ∷ longitudinalPanelScope
+  ∷ []
+
+canonicalCohortKinds :
+  List CohortKind
+canonicalCohortKinds =
+  baselineCohortKind
+  ∷ followUpCohortKind
+  ∷ stratifiedCohortKind
+  ∷ pooledPopulationCohortKind
+  ∷ []
+
+canonicalNeurovascularProxyKinds :
+  List NeurovascularProxyKind
+canonicalNeurovascularProxyKinds =
+  boldHemodynamicProxyKind
+  ∷ vascularCouplingProxyKind
+  ∷ neurovascularLagProxyKind
+  ∷ populationBOLDProxyKind
+  ∷ []
+
+canonicalLongitudinalGateKinds :
+  List LongitudinalGateKind
+canonicalLongitudinalGateKinds =
+  populationScopeGate
+  ∷ cohortCompositionGate
+  ∷ neurovascularProxyGate
+  ∷ timeSeriesProxyGate
+  ∷ individualMechanismGate
+  ∷ traumaProofGate
+  ∷ hiddenChartRecoveryGate
+  ∷ mindReadingGate
+  ∷ diagnosisGate
+  ∷ treatmentGate
+  ∷ clinicalAuthorityGate
+  ∷ []
+
+populationScopeName :
+  PopulationScope →
+  String
+populationScopeName singleCohortScope =
+  "single cohort scope"
+populationScopeName multiCohortScope =
+  "multi cohort scope"
+populationScopeName populationAggregateScope =
+  "population aggregate scope"
+populationScopeName longitudinalPanelScope =
+  "longitudinal panel scope"
+
+cohortKindName :
+  CohortKind →
+  String
+cohortKindName baselineCohortKind =
+  "baseline cohort"
+cohortKindName followUpCohortKind =
+  "follow-up cohort"
+cohortKindName stratifiedCohortKind =
+  "stratified cohort"
+cohortKindName pooledPopulationCohortKind =
+  "pooled population cohort"
+
+neurovascularProxyKindName :
+  NeurovascularProxyKind →
+  String
+neurovascularProxyKindName boldHemodynamicProxyKind =
+  "BOLD hemodynamic proxy"
+neurovascularProxyKindName vascularCouplingProxyKind =
+  "vascular coupling proxy"
+neurovascularProxyKindName neurovascularLagProxyKind =
+  "neurovascular lag proxy"
+neurovascularProxyKindName populationBOLDProxyKind =
+  "population BOLD proxy"
+
+longitudinalGateKindName :
+  LongitudinalGateKind →
+  String
+longitudinalGateKindName populationScopeGate =
+  "population scope gate"
+longitudinalGateKindName cohortCompositionGate =
+  "cohort composition gate"
+longitudinalGateKindName neurovascularProxyGate =
+  "neurovascular proxy gate"
+longitudinalGateKindName timeSeriesProxyGate =
+  "time series proxy gate"
+longitudinalGateKindName individualMechanismGate =
+  "individual mechanism gate"
+longitudinalGateKindName traumaProofGate =
+  "trauma proof gate"
+longitudinalGateKindName hiddenChartRecoveryGate =
+  "hidden chart recovery gate"
+longitudinalGateKindName mindReadingGate =
+  "mind reading gate"
+longitudinalGateKindName diagnosisGate =
+  "diagnosis gate"
+longitudinalGateKindName treatmentGate =
+  "treatment gate"
+longitudinalGateKindName clinicalAuthorityGate =
+  "clinical authority gate"
+
 canonicalTemporalSamplingWindows :
   List TemporalSamplingWindow
 canonicalTemporalSamplingWindows =
@@ -261,6 +397,18 @@ record LongitudinalBodyMemoryRow : Set where
     rowProxyKind :
       ProxyCarrierKind
 
+    rowPopulationScope :
+      PopulationScope
+
+    rowCohortKind :
+      CohortKind
+
+    rowNeurovascularProxyKind :
+      NeurovascularProxyKind
+
+    rowGateKind :
+      LongitudinalGateKind
+
     rowLabel :
       String
 
@@ -272,6 +420,30 @@ record LongitudinalBodyMemoryRow : Set where
 
     rowCandidateOnlyIsTrue :
       rowCandidateOnly ≡ true
+
+    rowPopulationAssociation :
+      Bool
+
+    rowPopulationAssociationIsTrue :
+      rowPopulationAssociation ≡ true
+
+    rowCohortAssociation :
+      Bool
+
+    rowCohortAssociationIsTrue :
+      rowCohortAssociation ≡ true
+
+    rowNeurovascularProxyAssociation :
+      Bool
+
+    rowNeurovascularProxyAssociationIsTrue :
+      rowNeurovascularProxyAssociation ≡ true
+
+    rowNoIndividualMechanism :
+      Bool
+
+    rowNoIndividualMechanismIsFalse :
+      rowNoIndividualMechanism ≡ false
 
     rowNoReverseInference :
       Bool
@@ -332,6 +504,18 @@ record ScanSessionTrajectory : Set where
     trajectoryProxyKind :
       ProxyCarrierKind
 
+    trajectoryPopulationScope :
+      PopulationScope
+
+    trajectoryCohortKind :
+      CohortKind
+
+    trajectoryNeurovascularProxyKind :
+      NeurovascularProxyKind
+
+    trajectoryGateKind :
+      LongitudinalGateKind
+
     trajectoryCandidateOnly :
       Bool
 
@@ -374,6 +558,30 @@ record ScanSessionTrajectory : Set where
     trajectoryNoCausalClosureIsFalse :
       trajectoryNoCausalClosure ≡ false
 
+    trajectoryPopulationAssociation :
+      Bool
+
+    trajectoryPopulationAssociationIsTrue :
+      trajectoryPopulationAssociation ≡ true
+
+    trajectoryCohortAssociation :
+      Bool
+
+    trajectoryCohortAssociationIsTrue :
+      trajectoryCohortAssociation ≡ true
+
+    trajectoryNeurovascularProxyAssociation :
+      Bool
+
+    trajectoryNeurovascularProxyAssociationIsTrue :
+      trajectoryNeurovascularProxyAssociation ≡ true
+
+    trajectoryNoIndividualMechanism :
+      Bool
+
+    trajectoryNoIndividualMechanismIsFalse :
+      trajectoryNoIndividualMechanism ≡ false
+
     trajectoryReading :
       String
 
@@ -396,6 +604,18 @@ record ConnectomeDriftProxy : Set where
 
     driftProxyKind :
       ProxyCarrierKind
+
+    driftPopulationScope :
+      PopulationScope
+
+    driftCohortKind :
+      CohortKind
+
+    driftNeurovascularProxyKind :
+      NeurovascularProxyKind
+
+    driftGateKind :
+      LongitudinalGateKind
 
     driftCandidateOnly :
       Bool
@@ -439,8 +659,103 @@ record ConnectomeDriftProxy : Set where
     driftNoCausalClosureIsFalse :
       driftNoCausalClosure ≡ false
 
+    driftPopulationAssociation :
+      Bool
+
+    driftPopulationAssociationIsTrue :
+      driftPopulationAssociation ≡ true
+
+    driftCohortAssociation :
+      Bool
+
+    driftCohortAssociationIsTrue :
+      driftCohortAssociation ≡ true
+
+    driftNeurovascularProxyAssociation :
+      Bool
+
+    driftNeurovascularProxyAssociationIsTrue :
+      driftNeurovascularProxyAssociation ≡ true
+
+    driftNoIndividualMechanism :
+      Bool
+
+    driftNoIndividualMechanismIsFalse :
+      driftNoIndividualMechanism ≡ false
+
     driftReading :
       String
+
+record PopulationCohortNeurovascularGate : Set where
+  constructor mkPopulationCohortNeurovascularGate
+  field
+    gateLabel :
+      String
+
+    gatePopulationScope :
+      PopulationScope
+
+    gateCohortKind :
+      CohortKind
+
+    gateNeurovascularProxyKind :
+      NeurovascularProxyKind
+
+    gateKind :
+      LongitudinalGateKind
+
+    gatePopulationIsAggregate :
+      Bool
+
+    gatePopulationIsAggregateIsTrue :
+      gatePopulationIsAggregate ≡ true
+
+    gateCohortIsStratifiedOrPooled :
+      Bool
+
+    gateCohortIsStratifiedOrPooledIsTrue :
+      gateCohortIsStratifiedOrPooled ≡ true
+
+    gateNeurovascularProxyIsBOLD :
+      Bool
+
+    gateNeurovascularProxyIsBOLDIsTrue :
+      gateNeurovascularProxyIsBOLD ≡ true
+
+    gateNoIndividualMechanism :
+      Bool
+
+    gateNoIndividualMechanismIsFalse :
+      gateNoIndividualMechanism ≡ false
+
+    gateNoTraumaProof :
+      Bool
+
+    gateNoTraumaProofIsFalse :
+      gateNoTraumaProof ≡ false
+
+    gateNoHiddenChartRecovery :
+      Bool
+
+    gateNoHiddenChartRecoveryIsFalse :
+      gateNoHiddenChartRecovery ≡ false
+
+    gateNoMindReading :
+      Bool
+
+    gateNoMindReadingIsFalse :
+      gateNoMindReading ≡ false
+
+    gateNoClinicalAuthority :
+      Bool
+
+    gateNoClinicalAuthorityIsFalse :
+      gateNoClinicalAuthority ≡ false
+
+    gateReading :
+      String
+
+open PopulationCohortNeurovascularGate public
 
 open ConnectomeDriftProxy public
 
@@ -500,6 +815,39 @@ record LongitudinalFMRIConnectomeDynamicsGovernance : Setω where
     proxyCarrierKindsAreCanonical :
       proxyCarrierKinds ≡ canonicalProxyCarrierKinds
 
+    populationScopes :
+      List PopulationScope
+
+    populationScopesAreCanonical :
+      populationScopes ≡ canonicalPopulationScopes
+
+    cohortKinds :
+      List CohortKind
+
+    cohortKindsAreCanonical :
+      cohortKinds ≡ canonicalCohortKinds
+
+    neurovascularProxyKinds :
+      List NeurovascularProxyKind
+
+    neurovascularProxyKindsAreCanonical :
+      neurovascularProxyKinds ≡ canonicalNeurovascularProxyKinds
+
+    longitudinalGateKinds :
+      List LongitudinalGateKind
+
+    longitudinalGateKindsAreCanonical :
+      longitudinalGateKinds ≡ canonicalLongitudinalGateKinds
+
+    populationCohortNeurovascularGate :
+      PopulationCohortNeurovascularGate
+
+    populationCohortNeurovascularGateIsCanonical :
+      Bool
+
+    populationCohortNeurovascularGateIsCanonicalIsTrue :
+      populationCohortNeurovascularGateIsCanonical ≡ true
+
     scanSessionTrajectory :
       ScanSessionTrajectory
 
@@ -529,9 +877,21 @@ canonicalBaselineWindowRow =
     zeroLag
     sessionAlignedMode
     fMRIProxyCarrierKind
+    singleCohortScope
+    baselineCohortKind
+    boldHemodynamicProxyKind
+    populationScopeGate
     "baseline sampling row"
     "Baseline fMRI/BOLD/body-memory placement is treated as a proxy surface."
     true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
     refl
     false
     refl
@@ -560,9 +920,21 @@ canonicalLagAlignmentProxyRow =
     shortLag
     eventAlignedMode
     boldProxyCarrierKind
+    multiCohortScope
+    stratifiedCohortKind
+    vascularCouplingProxyKind
+    neurovascularProxyGate
     "lag/alignment/proxy row"
     "BOLD lag is treated as a proxy alignment surface, not as authority."
     true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
     refl
     false
     refl
@@ -597,6 +969,10 @@ canonicalScanSessionTrajectory =
     residualLag
     proxyAlignedMode
     trajectoryProxyCarrierKind
+    longitudinalPanelScope
+    followUpCohortKind
+    populationBOLDProxyKind
+    timeSeriesProxyGate
     true
     refl
     false
@@ -606,6 +982,16 @@ canonicalScanSessionTrajectory =
     false
     refl
     false
+    refl
+    false
+    refl
+    false
+    refl
+    true
+    refl
+    true
+    refl
+    true
     refl
     false
     refl
@@ -620,6 +1006,10 @@ canonicalConnectomeDriftProxy =
     longLag
     driftAlignedMode
     connectomeProxyCarrierKind
+    populationAggregateScope
+    pooledPopulationCohortKind
+    neurovascularLagProxyKind
+    neurovascularProxyGate
     true
     refl
     false
@@ -629,6 +1019,16 @@ canonicalConnectomeDriftProxy =
     false
     refl
     false
+    refl
+    false
+    refl
+    false
+    refl
+    true
+    refl
+    true
+    refl
+    true
     refl
     false
     refl
@@ -643,9 +1043,21 @@ canonicalScanSessionTrajectoryRow =
     residualLag
     proxyAlignedMode
     trajectoryProxyCarrierKind
+    longitudinalPanelScope
+    followUpCohortKind
+    populationBOLDProxyKind
+    timeSeriesProxyGate
     "scan-session trajectory row"
     "The scan-session trajectory is a candidate-only longitudinal proxy surface."
     true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
     refl
     false
     refl
@@ -674,9 +1086,21 @@ canonicalConnectomeDriftProxyRow =
     longLag
     driftAlignedMode
     connectomeProxyCarrierKind
+    populationAggregateScope
+    pooledPopulationCohortKind
+    neurovascularLagProxyKind
+    neurovascularProxyGate
     "connectome drift proxy row"
     "Connectome drift is retained as a proxy residual, not a closure claim."
     true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
     refl
     false
     refl
@@ -705,9 +1129,21 @@ canonicalGovernanceBoundaryRow =
     residualLag
     residualAlignedMode
     governanceProxyCarrierKind
+    populationAggregateScope
+    stratifiedCohortKind
+    populationBOLDProxyKind
+    clinicalAuthorityGate
     "governance boundary row"
     "Governance stays candidate-only while routing proxy surfaces through a fail-closed boundary."
     true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
     refl
     false
     refl
@@ -757,6 +1193,46 @@ canonicalLongitudinalProxyCarrierKinds :
 canonicalLongitudinalProxyCarrierKinds =
   canonicalProxyCarrierKinds
 
+canonicalLongitudinalPopulationScopes :
+  List PopulationScope
+canonicalLongitudinalPopulationScopes =
+  canonicalPopulationScopes
+
+canonicalLongitudinalCohortKinds :
+  List CohortKind
+canonicalLongitudinalCohortKinds =
+  canonicalCohortKinds
+
+canonicalLongitudinalNeurovascularProxyKinds :
+  List NeurovascularProxyKind
+canonicalLongitudinalNeurovascularProxyKinds =
+  canonicalNeurovascularProxyKinds
+
+canonicalPopulationCohortNeurovascularGate :
+  PopulationCohortNeurovascularGate
+canonicalPopulationCohortNeurovascularGate =
+  mkPopulationCohortNeurovascularGate
+    "population-cohort-neurovascular-gate"
+    populationAggregateScope
+    pooledPopulationCohortKind
+    populationBOLDProxyKind
+    neurovascularProxyGate
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    "Population and cohort structure are routed through a neurovascular proxy gate; the surface is longitudinal association over cohort time, not individual mechanism, trauma proof, hidden chart recovery, mind-reading, or clinical authority."
+
 canonicalLongitudinalFMRIConnectomeDynamicsGovernance :
   LongitudinalFMRIConnectomeDynamicsGovernance
 canonicalLongitudinalFMRIConnectomeDynamicsGovernance =
@@ -795,6 +1271,28 @@ canonicalLongitudinalFMRIConnectomeDynamicsGovernance =
         canonicalLongitudinalProxyCarrierKinds
     ; proxyCarrierKindsAreCanonical =
         refl
+    ; populationScopes =
+        canonicalLongitudinalPopulationScopes
+    ; populationScopesAreCanonical =
+        refl
+    ; cohortKinds =
+        canonicalLongitudinalCohortKinds
+    ; cohortKindsAreCanonical =
+        refl
+    ; neurovascularProxyKinds =
+        canonicalLongitudinalNeurovascularProxyKinds
+    ; neurovascularProxyKindsAreCanonical =
+        refl
+    ; longitudinalGateKinds =
+        canonicalLongitudinalGateKinds
+    ; longitudinalGateKindsAreCanonical =
+        refl
+    ; populationCohortNeurovascularGate =
+        canonicalPopulationCohortNeurovascularGate
+    ; populationCohortNeurovascularGateIsCanonical =
+        true
+    ; populationCohortNeurovascularGateIsCanonicalIsTrue =
+        refl
     ; scanSessionTrajectory =
         canonicalScanSessionTrajectory
     ; connectomeDriftProxy =
@@ -804,7 +1302,7 @@ canonicalLongitudinalFMRIConnectomeDynamicsGovernance =
     ; longitudinalRowsAreCanonical =
         refl
     ; governanceReading =
-        "Candidate-only longitudinal fMRI/BOLD/connectome bridge: the temporal windows, lag/alignment/proxy rows, scan-session trajectory, and connectome drift proxy remain residual surfaces only, while reverse inference, hidden chart recovery, mind-reading, diagnosis, treatment, and causal closure stay blocked."
+        "Candidate-only longitudinal fMRI/BOLD/connectome bridge: the temporal windows, lag/alignment/proxy rows, population/cohort gates, scan-session trajectory, and connectome drift proxy remain bounded association surfaces only, while reverse inference, hidden chart recovery, mind-reading, diagnosis, treatment, causal closure, and individual mechanism promotion stay blocked."
     }
 
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceIsCandidateOnly :
@@ -848,6 +1346,34 @@ canonicalLongitudinalFMRIConnectomeDynamicsGovernanceCausalClosureBlocked :
   Never
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceCausalClosureBlocked =
   causalClosureRouteRejected
+
+canonicalLongitudinalPopulationScopesAreCanonical :
+  canonicalLongitudinalPopulationScopes ≡ canonicalPopulationScopes
+canonicalLongitudinalPopulationScopesAreCanonical =
+  refl
+
+canonicalLongitudinalCohortKindsAreCanonical :
+  canonicalLongitudinalCohortKinds ≡ canonicalCohortKinds
+canonicalLongitudinalCohortKindsAreCanonical =
+  refl
+
+canonicalLongitudinalNeurovascularProxyKindsAreCanonical :
+  canonicalLongitudinalNeurovascularProxyKinds ≡ canonicalNeurovascularProxyKinds
+canonicalLongitudinalNeurovascularProxyKindsAreCanonical =
+  refl
+
+canonicalLongitudinalGateKindsAreCanonical :
+  canonicalLongitudinalGateKinds ≡ canonicalLongitudinalGateKinds
+canonicalLongitudinalGateKindsAreCanonical =
+  refl
+
+canonicalPopulationCohortNeurovascularGateIsCanonical :
+  populationCohortNeurovascularGateIsCanonical
+    canonicalLongitudinalFMRIConnectomeDynamicsGovernance
+  ≡
+  true
+canonicalPopulationCohortNeurovascularGateIsCanonical =
+  refl
 
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoReverseInference :
   rowNoReverseInference canonicalBaselineWindowRow ≡ false
