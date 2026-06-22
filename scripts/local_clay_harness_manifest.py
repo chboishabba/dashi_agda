@@ -518,6 +518,18 @@ def build_specs() -> list[HarnessSpec]:
     ns_triad_continuous_coherence_capacity_scan_check_out = (
         CHILD_OUT_DIR / "ns_triad_continuous_coherence_capacity_scan_check_smoke.json"
     )
+    ns_triad_amplitude_weighted_negative_frame_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_amplitude_weighted_negative_frame_scan_smoke.json"
+    )
+    ns_triad_amplitude_weighted_negative_frame_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_amplitude_weighted_negative_frame_scan_check_smoke.json"
+    )
+    ns_triad_energy_budgeted_fork_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_energy_budgeted_fork_scan_smoke.json"
+    )
+    ns_triad_energy_budgeted_fork_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_energy_budgeted_fork_scan_check_smoke.json"
+    )
     ns_triad_kn_exact_identity_scan_out = (
         CHILD_OUT_DIR / "ns_triad_kn_exact_identity_scan_smoke.json"
     )
@@ -5717,6 +5729,96 @@ def build_specs() -> list[HarnessSpec]:
             ),
         ),
         HarnessSpec(
+            name="ns_triad_amplitude_weighted_negative_frame_scan",
+            path=script("ns_triad_amplitude_weighted_negative_frame_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+            )
+            if script("ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_amplitude_weighted_negative_frame_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else "ns_triad_amplitude_weighted_negative_frame_scan script not found",
+            notes=(
+                "optional Wall 1 amplitude-weighted negative-frame scan",
+                "empirical/non-promoting; fail-closed candidate-only telemetry for the amplitude-weighted negative-frame surface",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_amplitude_weighted_negative_frame_scan",
+            path=script("check_ns_triad_amplitude_weighted_negative_frame_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+                "--output-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_check_out),
+            )
+            if ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_amplitude_weighted_negative_frame_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and script("check_ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else (
+                "check_ns_triad_amplitude_weighted_negative_frame_scan script not found"
+                if not script("check_ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+                else "check_ns_triad_amplitude_weighted_negative_frame_scan requires the amplitude-weighted negative-frame scan output"
+            ),
+            notes=(
+                "optional Wall 1 amplitude-weighted negative-frame regression gate",
+                "validates fail-closed candidate-only bookkeeping for the amplitude-weighted negative-frame surface",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_energy_budgeted_fork_scan",
+            path=script("ns_triad_energy_budgeted_fork_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
+            )
+            if script("ns_triad_energy_budgeted_fork_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_energy_budgeted_fork_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_energy_budgeted_fork_scan.py").exists()
+            else "ns_triad_energy_budgeted_fork_scan script not found",
+            notes=(
+                "optional Wall 1 energy-budgeted fork scan",
+                "empirical/non-promoting; fail-closed candidate-only telemetry for the energy-budgeted fork surface",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_energy_budgeted_fork_scan",
+            path=script("check_ns_triad_energy_budgeted_fork_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
+                "--output-json",
+                str(ns_triad_energy_budgeted_fork_scan_check_out),
+            )
+            if ns_triad_energy_budgeted_fork_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_energy_budgeted_fork_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_energy_budgeted_fork_scan_out.exists()
+            and script("check_ns_triad_energy_budgeted_fork_scan.py").exists()
+            else (
+                "check_ns_triad_energy_budgeted_fork_scan script not found"
+                if not script("check_ns_triad_energy_budgeted_fork_scan.py").exists()
+                else "check_ns_triad_energy_budgeted_fork_scan requires the energy-budgeted fork scan output"
+            ),
+            notes=(
+                "optional Wall 1 energy-budgeted fork regression gate",
+                "validates fail-closed candidate-only bookkeeping for the energy-budgeted fork surface",
+            ),
+        ),
+        HarnessSpec(
             name="check_ns_triad_kn_exact_identity_scan",
             path=script("check_ns_triad_kn_exact_identity_scan.py"),
             args=(
@@ -5740,6 +5842,96 @@ def build_specs() -> list[HarnessSpec]:
             notes=(
                 "optional Wall 1 K_N exact-identity regression gate",
                 "validates fail-closed candidate-only and aggregate bookkeeping for the K_N exact-identity surface",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_amplitude_weighted_negative_frame_scan",
+            path=script("ns_triad_amplitude_weighted_negative_frame_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+            )
+            if script("ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_amplitude_weighted_negative_frame_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else "ns_triad_amplitude_weighted_negative_frame_scan script not found",
+            notes=(
+                "optional Wall 1 amplitude-weighted negative-frame scan",
+                "empirical/non-promoting; summarizes K_N(A) profile telemetry across fixed amplitude profiles",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_amplitude_weighted_negative_frame_scan",
+            path=script("check_ns_triad_amplitude_weighted_negative_frame_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+                "--output-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_check_out),
+            )
+            if ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_amplitude_weighted_negative_frame_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and script("check_ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else (
+                "check_ns_triad_amplitude_weighted_negative_frame_scan script not found"
+                if not script("check_ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+                else "check_ns_triad_amplitude_weighted_negative_frame_scan requires the amplitude-weighted scan output"
+            ),
+            notes=(
+                "optional Wall 1 amplitude-weighted negative-frame regression gate",
+                "validates fail-closed candidate-only bookkeeping for the amplitude-weighted K_N(A) surface",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_energy_budgeted_fork_scan",
+            path=script("ns_triad_energy_budgeted_fork_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
+            )
+            if script("ns_triad_energy_budgeted_fork_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_energy_budgeted_fork_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_energy_budgeted_fork_scan.py").exists()
+            else "ns_triad_energy_budgeted_fork_scan script not found",
+            notes=(
+                "optional Wall 1 energy-budgeted fork scan",
+                "empirical/non-promoting; classifies adversarial amplitude rows into frame-coercive, low-band, or high-dissipation branches",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_energy_budgeted_fork_scan",
+            path=script("check_ns_triad_energy_budgeted_fork_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
+                "--output-json",
+                str(ns_triad_energy_budgeted_fork_scan_check_out),
+            )
+            if ns_triad_energy_budgeted_fork_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_energy_budgeted_fork_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_energy_budgeted_fork_scan_out.exists()
+            and script("check_ns_triad_energy_budgeted_fork_scan.py").exists()
+            else (
+                "check_ns_triad_energy_budgeted_fork_scan script not found"
+                if not script("check_ns_triad_energy_budgeted_fork_scan.py").exists()
+                else "check_ns_triad_energy_budgeted_fork_scan requires the energy-budgeted fork output"
+            ),
+            notes=(
+                "optional Wall 1 energy-budgeted fork regression gate",
+                "validates fail-closed candidate-only bookkeeping for the branch-classification surface",
             ),
         ),
         HarnessSpec(
@@ -5844,6 +6036,10 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
                 "--k-n-exact-identity-json",
                 str(ns_triad_kn_exact_identity_scan_out),
+                "--amplitude-weighted-negative-frame-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+                "--energy-budgeted-fork-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
                 "--continuous-coherence-capacity-json",
                 str(ns_triad_continuous_coherence_capacity_scan_out),
                 "--spectral-json",
@@ -5859,6 +6055,8 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
             and ns_triad_kn_exact_identity_scan_out.exists()
+            and ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and ns_triad_energy_budgeted_fork_scan_out.exists()
             and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_spectral_audit_scan_out.exists()
             and ns_triad_cocycle_floor_scan_out.exists()
@@ -5871,6 +6069,8 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
             and ns_triad_kn_exact_identity_scan_out.exists()
+            and ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and ns_triad_energy_budgeted_fork_scan_out.exists()
             and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_spectral_audit_scan_out.exists()
             and ns_triad_cocycle_floor_scan_out.exists()
@@ -5879,11 +6079,11 @@ def build_specs() -> list[HarnessSpec]:
             else (
                 "ns_triad_signed_wall1_theorem_status script not found"
                 if not script("ns_triad_signed_wall1_theorem_status.py").exists()
-                else "ns_triad_signed_wall1_theorem_status requires signed gaugeability, reconciliation, carrier-ranking, K_N exact-identity, signed spectral, cocycle, and Schur outputs"
+                else "ns_triad_signed_wall1_theorem_status requires signed gaugeability, reconciliation, carrier-ranking, K_N exact-identity, amplitude-weighted negative-frame, energy-budgeted fork, continuous coherence, signed spectral, cocycle, and Schur outputs"
             ),
             notes=(
                 "optional Wall 1 signed theorem-status summary",
-                "empirical/non-promoting; joins signed-XOR, reconciliation, carrier-ranking, K_N exact-identity, signed-spectrum, cocycle-floor, and Schur telemetry into one fail-closed surface",
+                "empirical/non-promoting; joins signed-XOR, reconciliation, carrier-ranking, K_N exact-identity, amplitude/fork, signed-spectrum, cocycle-floor, and Schur telemetry into one fail-closed surface",
             ),
         ),
         HarnessSpec(
@@ -5894,6 +6094,10 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_signed_wall1_theorem_status_out),
                 "--output-json",
                 str(ns_triad_signed_wall1_theorem_status_check_out),
+                "--amplitude-weighted-negative-frame-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+                "--energy-budgeted-fork-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
             )
             if ns_triad_signed_wall1_theorem_status_out.exists()
             else ("--help",),
@@ -5930,6 +6134,10 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
                 "--k-n-exact-identity-json",
                 str(ns_triad_kn_exact_identity_scan_out),
+                "--amplitude-weighted-negative-frame-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+                "--energy-budgeted-fork-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
                 "--continuous-coherence-capacity-json",
                 str(ns_triad_continuous_coherence_capacity_scan_out),
                 "--cycle-json",
@@ -5956,6 +6164,8 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
             and ns_triad_kn_exact_identity_scan_out.exists()
+            and ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and ns_triad_energy_budgeted_fork_scan_out.exists()
             and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_wall1_theorem_status_out.exists()
             else ("--help",),
@@ -5973,17 +6183,19 @@ def build_specs() -> list[HarnessSpec]:
             and ns_triad_signed_carrier_reconciliation_scan_out.exists()
             and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
             and ns_triad_kn_exact_identity_scan_out.exists()
+            and ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and ns_triad_energy_budgeted_fork_scan_out.exists()
             and ns_triad_continuous_coherence_capacity_scan_out.exists()
             and ns_triad_signed_wall1_theorem_status_out.exists()
             and script("ns_triad_wall1_shell_bridge_summary.py").exists()
             else (
                 "ns_triad_wall1_shell_bridge_summary script not found"
                 if not script("ns_triad_wall1_shell_bridge_summary.py").exists()
-                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including signed theorem-status, signed reconciliation, signed carrier ranking, K_N exact-identity, cycle-packing, K01 geometry, and Schur directional audit"
+                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including signed theorem-status, signed reconciliation, signed carrier ranking, K_N exact-identity, amplitude/fork, cycle-packing, K01 geometry, and Schur directional audit"
             ),
             notes=(
                 "optional Wall 1 shell bridge summary",
-                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, signed theorem-status, signed reconciliation, signed carrier ranking, K_N exact-identity, cycle-packing, K01 geometry, Schur, cycle, and Hessian telemetry",
+                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, signed theorem-status, signed reconciliation, signed carrier ranking, K_N exact-identity, amplitude/fork, cycle-packing, K01 geometry, Schur, cycle, and Hessian telemetry",
             ),
         ),
         HarnessSpec(
@@ -5994,6 +6206,10 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_wall1_shell_bridge_summary_out),
                 "--output-json",
                 str(ns_triad_wall1_shell_bridge_summary_check_out),
+                "--amplitude-weighted-negative-frame-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+                "--energy-budgeted-fork-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
             )
             if ns_triad_wall1_shell_bridge_summary_out.exists()
             else ("--help",),
@@ -7066,12 +7282,13 @@ def build_manifest(results: list[HarnessResult], timeout_seconds: int) -> dict[s
     ]
     executed = [result for result in results if not result.skipped]
     skipped = [result for result in results if result.skipped]
+    by_name = {result.name: result for result in results}
     return {
         "control": {
             "O": "Local Clay diagnostic harness integration runner.",
-            "R": "Discover and smoke-run local NS/YM/unification/Gray-Scott diagnostic harnesses.",
+            "R": "Discover and smoke-run local NS/YM/unification/Gray-Scott diagnostic harnesses, including the Wall 1 candidate-only fail-closed summaries.",
             "C": "scripts/local_clay_harness_manifest.py -> outputs/local_clay_harness_manifest.json",
-            "S": "Diagnostics only; exact proof gates remain open.",
+            "S": "Diagnostics only; exact proof gates remain open while the Wall 1 candidate-only summaries stay fail-closed.",
             "L": "discover -> smoke execute -> parse summaries -> fail-closed manifest",
             "P": "Use tiny local runs and preserve promotion=false globally and per harness.",
             "G": "No Clay, YM, NS, or unification promotion from numerical diagnostics.",
@@ -7082,6 +7299,14 @@ def build_manifest(results: list[HarnessResult], timeout_seconds: int) -> dict[s
         "timeout_seconds_per_harness": timeout_seconds,
         "repo_root": str(REPO_ROOT),
         "output_path": str(DEFAULT_OUT),
+        "fail_closed_summaries": {
+            "ns_triad_signed_wall1_theorem_status": by_name["ns_triad_signed_wall1_theorem_status"].parsed_json_summary
+            if "ns_triad_signed_wall1_theorem_status" in by_name
+            else None,
+            "ns_triad_wall1_shell_bridge_summary": by_name["ns_triad_wall1_shell_bridge_summary"].parsed_json_summary
+            if "ns_triad_wall1_shell_bridge_summary" in by_name
+            else None,
+        },
         "summary": {
             "harnesses_total": len(results),
             "executed": len(executed),

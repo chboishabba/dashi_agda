@@ -32,6 +32,8 @@ ALLOWED_SIGNED_SOURCE = {
     "carrier_ranking_json",
     "carrier_ranking_json+continuous_coherence_capacity_json",
     "k_n_exact_identity_json",
+    "amplitude_weighted_negative_frame_json",
+    "energy_budgeted_fork_json",
     "legacy_chart",
     "missing",
     "explicit",
@@ -78,6 +80,16 @@ def _finite_float(value: Any) -> float | None:
     except (TypeError, ValueError):
         return None
     return parsed if math.isfinite(parsed) else None
+
+
+def _nonnegative_int(value: Any) -> int | None:
+    if value is None or isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return value if value >= 0 else None
+    if isinstance(value, float) and math.isfinite(value) and value.is_integer() and value >= 0:
+        return int(value)
+    return None
 
 
 def main() -> int:
@@ -208,6 +220,28 @@ def main() -> int:
             errors.append(
                 "aggregate.continuous_wall1_route_names: must be the ordered continuous Wall 1 route list"
             )
+        for prefix in ("amplitude_weighted_negative_frame", "energy_budgeted_fork"):
+            if aggregate.get(f"{prefix}_status") not in ("fail-closed", "partial", "unavailable"):
+                errors.append(
+                    f"aggregate.{prefix}_status: must be 'fail-closed', 'partial', or 'unavailable'"
+                )
+            if aggregate.get(f"{prefix}_candidate_only") is not True:
+                errors.append(f"aggregate.{prefix}_candidate_only: must be true")
+            if aggregate.get(f"{prefix}_fail_closed") is not True:
+                errors.append(f"aggregate.{prefix}_fail_closed: must be true")
+            if aggregate.get(f"{prefix}_independent_proof_certificate") is not False:
+                errors.append(f"aggregate.{prefix}_independent_proof_certificate: must be false")
+            if _nonnegative_int(aggregate.get(f"{prefix}_row_count")) is None:
+                errors.append(f"aggregate.{prefix}_row_count: must be nonnegative int")
+            if _nonnegative_int(aggregate.get(f"{prefix}_surface_count")) is None:
+                errors.append(f"aggregate.{prefix}_surface_count: must be nonnegative int")
+            route_names = aggregate.get(f"{prefix}_route_names")
+            if route_names is not None and not isinstance(route_names, list):
+                errors.append(f"aggregate.{prefix}_route_names: must be list or null")
+            if isinstance(route_names, list):
+                for route_index, route_name in enumerate(route_names):
+                    if not isinstance(route_name, str):
+                        errors.append(f"aggregate.{prefix}_route_names[{route_index}]: must be string")
 
     signed_wall1_rows = payload.get("signed_wall1_rows")
     if not isinstance(signed_wall1_rows, list):
@@ -391,6 +425,52 @@ def main() -> int:
             errors.append(
                 f"continuous_wall1_rows[{index}].continuous_coherence_status: must be 'fail-closed', 'partial', or 'unavailable'"
             )
+    for surface_key, surface_name, route_name in (
+        (
+            "amplitude_weighted_negative_frame_rows",
+            "amplitude_weighted_negative_frame_scan",
+            "amplitude-weighted-negative-frame-wall-1a",
+        ),
+        (
+            "energy_budgeted_fork_rows",
+            "energy_budgeted_fork_scan",
+            "energy-budgeted-fork-wall-1a",
+        ),
+    ):
+        surface_rows = payload.get(surface_key)
+        if not isinstance(surface_rows, list):
+            errors.append(f"{surface_key}: must be list")
+            surface_rows = []
+        if not surface_rows:
+            errors.append(f"{surface_key}: must contain at least 1 row")
+        for index, row in enumerate(surface_rows):
+            if not isinstance(row, dict):
+                errors.append(f"{surface_key}[{index}]: must be object")
+                continue
+            if not isinstance(row.get("surface"), str):
+                errors.append(f"{surface_key}[{index}].surface: must be string")
+            if not isinstance(row.get("route_name"), str):
+                errors.append(f"{surface_key}[{index}].route_name: must be string")
+            if not isinstance(row.get("module_path"), str):
+                errors.append(f"{surface_key}[{index}].module_path: must be string")
+            if not isinstance(row.get("receipt_name"), str):
+                errors.append(f"{surface_key}[{index}].receipt_name: must be string")
+            if not isinstance(row.get("boundary_summary"), str):
+                errors.append(f"{surface_key}[{index}].boundary_summary: must be string")
+            if not isinstance(row.get("bridge_summary"), str):
+                errors.append(f"{surface_key}[{index}].bridge_summary: must be string")
+            if row.get("candidate_only") is not True:
+                errors.append(f"{surface_key}[{index}].candidate_only: must be true")
+            if row.get("fail_closed") is not True:
+                errors.append(f"{surface_key}[{index}].fail_closed: must be true")
+            if row.get("theorem_promoted") is not False:
+                errors.append(f"{surface_key}[{index}].theorem_promoted: must be false")
+            if row.get("full_ns_promoted") is not False:
+                errors.append(f"{surface_key}[{index}].full_ns_promoted: must be false")
+            if row.get("clay_promoted") is not False:
+                errors.append(f"{surface_key}[{index}].clay_promoted: must be false")
+            if row.get("wall1_status") != "unproved":
+                errors.append(f"{surface_key}[{index}].wall1_status: must be 'unproved'")
     out = {
         "script_name": SCRIPT_NAME,
         "contract": CONTRACT,

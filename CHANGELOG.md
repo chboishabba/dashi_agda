@@ -6,6 +6,31 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Wall 1 amplitude-weighted negative-frame / energy-budgeted fork tranche
+  for `2026-06-23`: adds
+  `DASHI.Physics.Closure.NSAmplitudeWeightedNegativeFrameBoundary`,
+  `DASHI.Physics.Closure.NSTriadEnergyBudgetedCoherenceForkBoundary`,
+  `DASHI.Physics.Closure.NSPointwiseTriadCloudBoundary`,
+  `scripts/ns_triad_amplitude_weighted_negative_frame_scan.py`,
+  `scripts/check_ns_triad_amplitude_weighted_negative_frame_scan.py`,
+  `scripts/ns_triad_energy_budgeted_fork_scan.py`, and
+  `scripts/check_ns_triad_energy_budgeted_fork_scan.py`; strengthens
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The tranche records the
+  amplitude-weighted operator `K_N(A)` as the next positive Wall 1 object,
+  records the energy-budgeted fork
+  `frame-coercive / low-band bounded / high-dissipation residence-limited`
+  as the candidate Wall 1/2 bridge, records the pointwise triad-cloud
+  boundary that keeps single-mode stretching zero while forcing any BKM-like
+  spike to recruit a coherent triad cloud, and threads the new candidate
+  surfaces through signed theorem-status, the Wall 1 shell bridge, and the
+  local harness manifest. This remains fail-closed: the new surfaces are
+  empirical/candidate-only, theorem promotion and Clay promotion stay false,
+  and Wall 1 remains unproved.
+
 - NS Wall 1 `K_N` exact-identity / negative-frame tranche for `2026-06-23`:
   adds `DASHI.Physics.Closure.NSTriadKNExactIdentityReceipt`,
   `DASHI.Physics.Closure.NSTriadBSNegativeFrameCoercivityBoundary`,

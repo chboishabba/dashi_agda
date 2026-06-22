@@ -31,6 +31,14 @@ DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_continuous_coherence_capacity_scan_N128_20260623.json"
 )
+DEFAULT_AMPLITUDE_WEIGHTED_NEGATIVE_FRAME_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_amplitude_weighted_negative_frame_scan_N128_20260623.json"
+)
+DEFAULT_ENERGY_BUDGETED_FORK_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_energy_budgeted_fork_scan_N128_20260623.json"
+)
 DEFAULT_K_N_EXACT_IDENTITY_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_kn_exact_identity_scan_N128_20260623.json"
@@ -67,6 +75,12 @@ def _parse_args() -> argparse.Namespace:
         type=Path,
         default=DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON,
     )
+    parser.add_argument(
+        "--amplitude-weighted-negative-frame-json",
+        type=Path,
+        default=DEFAULT_AMPLITUDE_WEIGHTED_NEGATIVE_FRAME_JSON,
+    )
+    parser.add_argument("--energy-budgeted-fork-json", type=Path, default=DEFAULT_ENERGY_BUDGETED_FORK_JSON)
     parser.add_argument("--k-n-exact-identity-json", type=Path, default=DEFAULT_K_N_EXACT_IDENTITY_JSON)
     parser.add_argument("--spectral-json", type=Path, default=DEFAULT_SPECTRAL_JSON)
     parser.add_argument("--cocycle-json", type=Path, default=DEFAULT_COCYCLE_JSON)
@@ -245,6 +259,15 @@ def _status_value(payload: dict[str, Any] | None, keys: tuple[str, ...]) -> str 
     return None
 
 
+def _route_names(rows: list[dict[str, Any]]) -> list[str] | None:
+    ordered: list[str] = []
+    for row in rows:
+        route_name = row.get("route_name")
+        if isinstance(route_name, str) and route_name not in ordered:
+            ordered.append(route_name)
+    return ordered or None
+
+
 def main() -> int:
     args = _parse_args()
     gauge = _read_json(args.gaugeability_json)
@@ -256,6 +279,18 @@ def main() -> int:
     continuous_coherence_capacity_aggregate = (
         continuous_coherence_capacity.get("aggregate", {})
         if isinstance(continuous_coherence_capacity, dict)
+        else {}
+    )
+    amplitude_weighted_negative_frame = _read_json_or_empty(args.amplitude_weighted_negative_frame_json)
+    amplitude_weighted_negative_frame_aggregate = (
+        amplitude_weighted_negative_frame.get("aggregate", {})
+        if isinstance(amplitude_weighted_negative_frame, dict)
+        else {}
+    )
+    energy_budgeted_fork = _read_json_or_empty(args.energy_budgeted_fork_json)
+    energy_budgeted_fork_aggregate = (
+        energy_budgeted_fork.get("aggregate", {})
+        if isinstance(energy_budgeted_fork, dict)
         else {}
     )
     kn_exact_identity = _read_json_or_empty(args.k_n_exact_identity_json)
@@ -285,6 +320,46 @@ def main() -> int:
         bool(continuous_coherence_capacity),
         True,
     )
+    amplitude_weighted_negative_frame_status, amplitude_weighted_negative_frame_source = _derive_status(
+        _status_value(
+            amplitude_weighted_negative_frame_aggregate,
+            (
+                "amplitude_weighted_negative_frame_status",
+                "status",
+            ),
+        ),
+        _status_value(
+            amplitude_weighted_negative_frame_aggregate,
+            (
+                "amplitude_weighted_negative_frame_source",
+                "source",
+            ),
+        ),
+        bool(amplitude_weighted_negative_frame),
+        True,
+    )
+    if amplitude_weighted_negative_frame and amplitude_weighted_negative_frame_source == "source-json":
+        amplitude_weighted_negative_frame_source = "amplitude_weighted_negative_frame_json"
+    energy_budgeted_fork_status, energy_budgeted_fork_source = _derive_status(
+        _status_value(
+            energy_budgeted_fork_aggregate,
+            (
+                "energy_budgeted_fork_status",
+                "status",
+            ),
+        ),
+        _status_value(
+            energy_budgeted_fork_aggregate,
+            (
+                "energy_budgeted_fork_source",
+                "source",
+            ),
+        ),
+        bool(energy_budgeted_fork),
+        True,
+    )
+    if energy_budgeted_fork and energy_budgeted_fork_source == "source-json":
+        energy_budgeted_fork_source = "energy_budgeted_fork_json"
     kn_exact_identity_status, kn_exact_identity_source = _derive_status(
         _status_value(
             kn_exact_identity_aggregate,
@@ -346,6 +421,24 @@ def main() -> int:
     summary_rows: list[dict[str, Any]] = []
     reconciliation_statuses: list[str] = []
     carrier_identification_statuses: list[str] = []
+    amplitude_weighted_negative_frame_rows = _first_rows(
+        amplitude_weighted_negative_frame,
+        (
+            "amplitude_weighted_negative_frame_rows",
+            "amplitude_weighted_negative_frame_surface_rows",
+            "triad_negative_frame_rows",
+            "negative_frame_rows",
+        ),
+    )
+    energy_budgeted_fork_rows = _first_rows(
+        energy_budgeted_fork,
+        (
+            "energy_budgeted_fork_rows",
+            "energy_budgeted_fork_surface_rows",
+            "triad_fork_rows",
+            "fork_rows",
+        ),
+    )
     for (frame, shell), payloads in sorted(by_key.items()):
         if set(payloads) < {"gauge", "spectral", "cocycle", "schur", "kn"}:
             continue
@@ -459,6 +552,9 @@ def main() -> int:
         carrier_identification_statuses.append(carrier_status)
         carrier_identification_statuses.append(kn_exact_identity_status)
         carrier_identification_statuses.append(continuous_coherence_status)
+
+    amplitude_weighted_negative_frame_route_names = _route_names(amplitude_weighted_negative_frame_rows)
+    energy_budgeted_fork_route_names = _route_names(energy_budgeted_fork_rows)
 
     aggregate = {
         "shared_frame_shell_count": len(summary_rows),
@@ -574,6 +670,38 @@ def main() -> int:
                 "observed_floor_proxy_mean",
             ),
         ),
+        "amplitude_weighted_negative_frame_status": (
+            "fail-closed"
+            if amplitude_weighted_negative_frame_status == "fail-closed"
+            else "partial"
+            if amplitude_weighted_negative_frame_status == "partial"
+            else "unavailable"
+        ),
+        "amplitude_weighted_negative_frame_source": amplitude_weighted_negative_frame_source,
+        "amplitude_weighted_negative_frame_candidate_only": True,
+        "amplitude_weighted_negative_frame_fail_closed": True,
+        "amplitude_weighted_negative_frame_independent_proof_certificate": False,
+        "amplitude_weighted_negative_frame_row_count": len(amplitude_weighted_negative_frame_rows),
+        "amplitude_weighted_negative_frame_surface_count": len(
+            {row.get("surface") for row in amplitude_weighted_negative_frame_rows if isinstance(row, dict)}
+        ),
+        "amplitude_weighted_negative_frame_route_names": amplitude_weighted_negative_frame_route_names,
+        "energy_budgeted_fork_status": (
+            "fail-closed"
+            if energy_budgeted_fork_status == "fail-closed"
+            else "partial"
+            if energy_budgeted_fork_status == "partial"
+            else "unavailable"
+        ),
+        "energy_budgeted_fork_source": energy_budgeted_fork_source,
+        "energy_budgeted_fork_candidate_only": True,
+        "energy_budgeted_fork_fail_closed": True,
+        "energy_budgeted_fork_independent_proof_certificate": False,
+        "energy_budgeted_fork_row_count": len(energy_budgeted_fork_rows),
+        "energy_budgeted_fork_surface_count": len(
+            {row.get("surface") for row in energy_budgeted_fork_rows if isinstance(row, dict)}
+        ),
+        "energy_budgeted_fork_route_names": energy_budgeted_fork_route_names,
     }
 
     signed_wall1_rows = [
@@ -673,6 +801,69 @@ def main() -> int:
         },
     ]
 
+    amplitude_weighted_negative_frame_surface_rows = [
+        {
+            "surface": "amplitude_weighted_negative_frame_scan",
+            "module_path": "DASHI/Physics/Closure/NSAmplitudeWeightedNegativeFrameBoundary.agda",
+            "receipt_name": "NSAmplitudeWeightedNegativeFrameBoundary",
+            "route_name": "amplitude-weighted-negative-frame-wall-1a",
+            "boundary_summary": (
+                "The amplitude-weighted negative-frame scan keeps the candidate negative-frame carrier explicit without claiming promotion."
+            ),
+            "bridge_summary": (
+                "This amplitude-weighted negative-frame surface is candidate-only and fail-closed; it preserves the route without asserting a certificate."
+            ),
+            "candidate_only": True,
+            "fail_closed": True,
+            "theorem_promoted": False,
+            "full_ns_promoted": False,
+            "clay_promoted": False,
+            "wall1_status": "unproved",
+        }
+    ]
+
+    energy_budgeted_fork_surface_rows = [
+        {
+            "surface": "energy_budgeted_fork_scan",
+            "module_path": "DASHI/Physics/Closure/NSTriadEnergyBudgetedCoherenceForkBoundary.agda",
+            "receipt_name": "NSTriadEnergyBudgetedCoherenceForkBoundary",
+            "route_name": "energy-budgeted-fork-wall-1a",
+            "boundary_summary": (
+                "The energy-budgeted fork scan keeps the candidate fork route explicit while the bridge remains open."
+            ),
+            "bridge_summary": (
+                "This energy-budgeted fork surface is candidate-only and fail-closed; it records the fork route without claiming promotion."
+            ),
+            "candidate_only": True,
+            "fail_closed": True,
+            "theorem_promoted": False,
+            "full_ns_promoted": False,
+            "clay_promoted": False,
+            "wall1_status": "unproved",
+        }
+    ]
+    if not any(isinstance(row, dict) and row.get("surface") == "pointwise_triad_cloud_boundary" for row in energy_budgeted_fork_surface_rows):
+        energy_budgeted_fork_surface_rows.append(
+            {
+                "surface": "pointwise_triad_cloud_boundary",
+                "module_path": "DASHI/Physics/Closure/NSPointwiseTriadCloudBoundary.agda",
+                "receipt_name": "NSPointwiseTriadCloudBoundary",
+                "route_name": "pointwise-triad-cloud-wall-2-bridge",
+                "boundary_summary": (
+                    "The pointwise triad-cloud bridge keeps single-mode stretching zero and forces BKM-active spikes to recruit a coherent multi-mode cloud."
+                ),
+                "bridge_summary": (
+                    "This pointwise triad-cloud surface is candidate-only and fail-closed; it records the multi-mode cloud, finite energy budget, and high-frequency dissipation bridge without claiming promotion."
+                ),
+                "candidate_only": True,
+                "fail_closed": True,
+                "theorem_promoted": False,
+                "full_ns_promoted": False,
+                "clay_promoted": False,
+                "wall1_status": "unproved",
+            }
+        )
+
     aggregate.update(
         {
             "signed_wall1_row_count": len(signed_wall1_rows),
@@ -709,6 +900,28 @@ def main() -> int:
             "continuous_wall1_full_ns_promoted": False,
             "continuous_wall1_clay_promoted": False,
             "continuous_wall1_route_names": [row["route_name"] for row in continuous_wall1_rows],
+            "amplitude_weighted_negative_frame_row_count": len(amplitude_weighted_negative_frame_surface_rows),
+            "amplitude_weighted_negative_frame_surface_count": len(
+                {row["surface"] for row in amplitude_weighted_negative_frame_surface_rows}
+            ),
+            "amplitude_weighted_negative_frame_status": aggregate["amplitude_weighted_negative_frame_status"],
+            "amplitude_weighted_negative_frame_candidate_only": True,
+            "amplitude_weighted_negative_frame_fail_closed": True,
+            "amplitude_weighted_negative_frame_theorem_promoted": False,
+            "amplitude_weighted_negative_frame_full_ns_promoted": False,
+            "amplitude_weighted_negative_frame_clay_promoted": False,
+            "amplitude_weighted_negative_frame_route_names": [
+                row["route_name"] for row in amplitude_weighted_negative_frame_surface_rows
+            ],
+            "energy_budgeted_fork_row_count": len(energy_budgeted_fork_surface_rows),
+            "energy_budgeted_fork_surface_count": len({row["surface"] for row in energy_budgeted_fork_surface_rows}),
+            "energy_budgeted_fork_status": aggregate["energy_budgeted_fork_status"],
+            "energy_budgeted_fork_candidate_only": True,
+            "energy_budgeted_fork_fail_closed": True,
+            "energy_budgeted_fork_theorem_promoted": False,
+            "energy_budgeted_fork_full_ns_promoted": False,
+            "energy_budgeted_fork_clay_promoted": False,
+            "energy_budgeted_fork_route_names": [row["route_name"] for row in energy_budgeted_fork_surface_rows],
         }
     )
 
@@ -727,6 +940,8 @@ def main() -> int:
             "reconciliation_json": str(args.reconciliation_json),
             "carrier_ranking_json": str(args.carrier_ranking_json),
             "continuous_coherence_capacity_json": str(args.continuous_coherence_capacity_json),
+            "amplitude_weighted_negative_frame_json": str(args.amplitude_weighted_negative_frame_json),
+            "energy_budgeted_fork_json": str(args.energy_budgeted_fork_json),
             "k_n_exact_identity_json": str(args.k_n_exact_identity_json),
             "spectral_json": str(args.spectral_json),
             "cocycle_json": str(args.cocycle_json),
@@ -736,6 +951,8 @@ def main() -> int:
         "signed_wall1_rows": signed_wall1_rows,
         "k_n_exact_identity_rows": continuous_wall1_rows,
         "continuous_wall1_rows": continuous_wall1_rows,
+        "amplitude_weighted_negative_frame_rows": amplitude_weighted_negative_frame_surface_rows,
+        "energy_budgeted_fork_rows": energy_budgeted_fork_surface_rows,
         "aggregate": aggregate,
     }
     args.output_json.parent.mkdir(parents=True, exist_ok=True)

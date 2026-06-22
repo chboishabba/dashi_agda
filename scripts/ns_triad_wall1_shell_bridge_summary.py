@@ -62,6 +62,14 @@ DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_continuous_coherence_capacity_scan_N128_20260623.json"
 )
+DEFAULT_AMPLITUDE_WEIGHTED_NEGATIVE_FRAME_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_amplitude_weighted_negative_frame_scan_N128_20260623.json"
+)
+DEFAULT_ENERGY_BUDGETED_FORK_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_energy_budgeted_fork_scan_N128_20260623.json"
+)
 DEFAULT_K_N_EXACT_IDENTITY_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_kn_exact_identity_scan_N128_20260623.json"
@@ -79,17 +87,16 @@ CONTROL_CARD = {
     "O": "Summarize the active NS triad Wall 1 shell-level telemetry surfaces.",
     "R": (
         "Join the shell-indexed phase-regime, frame-stability, cocycle-floor, cycle-obstruction, "
-        "cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, signed-XOR/signed-spectral Wall 1 receipts, the reconciliation/carrier-ranking scans, and the K_N exact-identity scan into one compact fail-closed Wall 1 summary."
+        "cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, signed-XOR/signed-spectral Wall 1 receipts, the reconciliation/carrier-ranking scans, the K_N exact-identity scan, and the amplitude-weighted negative-frame plus energy-budgeted fork candidate surfaces into one compact fail-closed Wall 1 summary."
     ),
     "C": SCRIPT_NAME,
-    "S": "Candidate-only shell bridge summary; the K_N exact-identity route is fail-closed and the old signed route remains legacy.",
+    "S": "Candidate-only shell bridge summary; the K_N exact-identity route, amplitude-weighted negative-frame surface, and energy-budgeted fork surface are fail-closed while the old signed route remains legacy.",
     "L": (
-        "Read each shell-level JSON surface plus the signed Wall 1 receipt, the reconciliation/carrier-ranking scans, and the K_N exact-identity surface, normalize onto shared frame-shell keys, "
-        "compute compact correlations, and emit explicit unproved Wall 1 markers."
+        "Read each shell-level JSON surface plus the signed Wall 1 receipt, the reconciliation/carrier-ranking scans, the K_N exact-identity surface, and the two new candidate-only surfaces, normalize onto shared frame-shell keys, compute compact correlations, and emit explicit unproved Wall 1 markers."
     ),
     "P": ROUTE_DECISION,
     "G": "No theorem, continuation, or Clay claim is inferred from this bridge summary.",
-    "F": "Wall 1 remains unproved; the signed Wall 1 receipt, reconciliation/carrier-ranking scans, and K_N exact-identity surface only sharpen the finite-dimensional telemetry surface.",
+    "F": "Wall 1 remains unproved; the signed Wall 1 receipt, reconciliation/carrier-ranking scans, K_N exact-identity surface, amplitude-weighted negative-frame surface, and energy-budgeted fork surface only sharpen the finite-dimensional telemetry surface.",
 }
 
 LOWER_BOUND_SUPPORT_KEYS = (
@@ -131,6 +138,12 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--signed-wall1-reconciliation-json", type=Path, default=DEFAULT_SIGNED_WALL1_RECONCILIATION_JSON)
     parser.add_argument("--signed-wall1-carrier-ranking-json", type=Path, default=DEFAULT_SIGNED_WALL1_CARRIER_RANKING_JSON)
     parser.add_argument("--continuous-coherence-capacity-json", type=Path, default=DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON)
+    parser.add_argument(
+        "--amplitude-weighted-negative-frame-json",
+        type=Path,
+        default=DEFAULT_AMPLITUDE_WEIGHTED_NEGATIVE_FRAME_JSON,
+    )
+    parser.add_argument("--energy-budgeted-fork-json", type=Path, default=DEFAULT_ENERGY_BUDGETED_FORK_JSON)
     parser.add_argument("--k-n-exact-identity-json", type=Path, default=DEFAULT_K_N_EXACT_IDENTITY_JSON)
     parser.add_argument("--signed-wall1-json", type=Path, default=DEFAULT_SIGNED_WALL1_JSON)
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT_JSON)
@@ -203,6 +216,15 @@ def _first_rows(payload: dict[str, Any], candidate_keys: tuple[str, ...]) -> lis
         if isinstance(value, list):
             return value
     return []
+
+
+def _route_names(rows: list[dict[str, Any]]) -> list[str] | None:
+    ordered: list[str] = []
+    for row in rows:
+        route_name = row.get("route_name")
+        if isinstance(route_name, str) and route_name not in ordered:
+            ordered.append(route_name)
+    return ordered or None
 
 
 def _first_float(row: dict[str, Any], keys: tuple[str, ...]) -> float | None:
@@ -602,6 +624,14 @@ def main() -> int:
     except Exception:
         continuous_coherence_capacity_payload = {}
     try:
+        amplitude_weighted_negative_frame_payload = _read_json(args.amplitude_weighted_negative_frame_json)
+    except Exception:
+        amplitude_weighted_negative_frame_payload = {}
+    try:
+        energy_budgeted_fork_payload = _read_json(args.energy_budgeted_fork_json)
+    except Exception:
+        energy_budgeted_fork_payload = {}
+    try:
         k_n_exact_identity_payload = _read_json(args.k_n_exact_identity_json)
     except Exception:
         k_n_exact_identity_payload = {}
@@ -619,14 +649,24 @@ def main() -> int:
     k01_geometry_by_key = {key: row for row in _k01_rows(k01_geometry_payload) if (key := _frame_shell_key(row)) is not None}
     schur_by_key = {key: row for row in _schur_rows(schur_payload) if (key := _frame_shell_key(row)) is not None}
     signed_wall1_rows = []
+    amplitude_weighted_negative_frame_rows: list[dict[str, Any]] = []
+    energy_budgeted_fork_rows: list[dict[str, Any]] = []
     if isinstance(signed_wall1_payload, dict):
         explicit_signed_rows = signed_wall1_payload.get("signed_wall1_rows")
         if isinstance(explicit_signed_rows, list):
             signed_wall1_rows = explicit_signed_rows
     continuous_coherence_capacity_rows = _rows(continuous_coherence_capacity_payload)
+    amplitude_weighted_negative_frame_scan_rows = _rows(amplitude_weighted_negative_frame_payload)
+    energy_budgeted_fork_scan_rows = _rows(energy_budgeted_fork_payload)
     k_n_exact_identity_scan_rows = _rows(k_n_exact_identity_payload)
     k_n_exact_identity_by_key = {
         key: row for row in k_n_exact_identity_scan_rows if (key := _frame_shell_key(row)) is not None
+    }
+    amplitude_weighted_negative_frame_by_key = {
+        key: row for row in amplitude_weighted_negative_frame_scan_rows if (key := _frame_shell_key(row)) is not None
+    }
+    energy_budgeted_fork_by_key = {
+        key: row for row in energy_budgeted_fork_scan_rows if (key := _frame_shell_key(row)) is not None
     }
     k_n_exact_identity_rows = []
     signed_wall1_route_names = None
@@ -705,6 +745,42 @@ def main() -> int:
     continuous_coherence_capacity_status = _effective_fail_closed_status(continuous_coherence_capacity_payload)
     continuous_coherence_capacity_candidate_only = _payload_candidate_only(continuous_coherence_capacity_payload)
     continuous_coherence_capacity_fail_closed = _payload_fail_closed(continuous_coherence_capacity_payload)
+    amplitude_weighted_negative_frame_input_status = _payload_status(amplitude_weighted_negative_frame_payload)
+    amplitude_weighted_negative_frame_status = _effective_fail_closed_status(
+        amplitude_weighted_negative_frame_payload
+    )
+    amplitude_weighted_negative_frame_candidate_only = _payload_candidate_only(
+        amplitude_weighted_negative_frame_payload
+    )
+    amplitude_weighted_negative_frame_fail_closed = _payload_fail_closed(
+        amplitude_weighted_negative_frame_payload
+    )
+    amplitude_weighted_negative_frame_aggregate = (
+        amplitude_weighted_negative_frame_payload.get("aggregate", {})
+        if isinstance(amplitude_weighted_negative_frame_payload, dict)
+        else {}
+    )
+    amplitude_weighted_negative_frame_aggregate_status = _payload_status(
+        amplitude_weighted_negative_frame_aggregate
+    )
+    amplitude_weighted_negative_frame_aggregate_candidate_only = _payload_candidate_only(
+        amplitude_weighted_negative_frame_aggregate
+    )
+    amplitude_weighted_negative_frame_aggregate_fail_closed = _payload_fail_closed(
+        amplitude_weighted_negative_frame_aggregate
+    )
+    energy_budgeted_fork_input_status = _payload_status(energy_budgeted_fork_payload)
+    energy_budgeted_fork_status = _effective_fail_closed_status(energy_budgeted_fork_payload)
+    energy_budgeted_fork_candidate_only = _payload_candidate_only(energy_budgeted_fork_payload)
+    energy_budgeted_fork_fail_closed = _payload_fail_closed(energy_budgeted_fork_payload)
+    energy_budgeted_fork_aggregate = (
+        energy_budgeted_fork_payload.get("aggregate", {})
+        if isinstance(energy_budgeted_fork_payload, dict)
+        else {}
+    )
+    energy_budgeted_fork_aggregate_status = _payload_status(energy_budgeted_fork_aggregate)
+    energy_budgeted_fork_aggregate_candidate_only = _payload_candidate_only(energy_budgeted_fork_aggregate)
+    energy_budgeted_fork_aggregate_fail_closed = _payload_fail_closed(energy_budgeted_fork_aggregate)
     continuous_coherence_capacity_aggregate = (
         continuous_coherence_capacity_payload.get("aggregate", {})
         if isinstance(continuous_coherence_capacity_payload, dict)
@@ -941,6 +1017,20 @@ def main() -> int:
                 "continuous_coherence_capacity_status": continuous_coherence_capacity_status,
                 "continuous_coherence_capacity_candidate_only": continuous_coherence_capacity_candidate_only,
                 "continuous_coherence_capacity_fail_closed": continuous_coherence_capacity_fail_closed,
+                "amplitude_weighted_negative_frame_input_status": amplitude_weighted_negative_frame_input_status,
+                "amplitude_weighted_negative_frame_status": amplitude_weighted_negative_frame_status,
+                "amplitude_weighted_negative_frame_candidate_only": amplitude_weighted_negative_frame_candidate_only,
+                "amplitude_weighted_negative_frame_fail_closed": amplitude_weighted_negative_frame_fail_closed,
+                "amplitude_weighted_negative_frame_aggregate_status": amplitude_weighted_negative_frame_aggregate_status,
+                "amplitude_weighted_negative_frame_aggregate_candidate_only": amplitude_weighted_negative_frame_aggregate_candidate_only,
+                "amplitude_weighted_negative_frame_aggregate_fail_closed": amplitude_weighted_negative_frame_aggregate_fail_closed,
+                "energy_budgeted_fork_input_status": energy_budgeted_fork_input_status,
+                "energy_budgeted_fork_status": energy_budgeted_fork_status,
+                "energy_budgeted_fork_candidate_only": energy_budgeted_fork_candidate_only,
+                "energy_budgeted_fork_fail_closed": energy_budgeted_fork_fail_closed,
+                "energy_budgeted_fork_aggregate_status": energy_budgeted_fork_aggregate_status,
+                "energy_budgeted_fork_aggregate_candidate_only": energy_budgeted_fork_aggregate_candidate_only,
+                "energy_budgeted_fork_aggregate_fail_closed": energy_budgeted_fork_aggregate_fail_closed,
                 "k_n_exact_identity_input_status": k_n_exact_identity_input_status,
                 "k_n_exact_identity_status": k_n_exact_identity_status,
                 "k_n_exact_identity_candidate_only": k_n_exact_identity_candidate_only,
@@ -1033,6 +1123,68 @@ def main() -> int:
             support_sources.append(strongest_source)
             support_counts.append(int(support_count))
 
+    amplitude_weighted_negative_frame_rows = amplitude_weighted_negative_frame_rows or [
+        {
+            "surface": "amplitude_weighted_negative_frame_scan",
+            "module_path": "DASHI/Physics/Closure/NSAmplitudeWeightedNegativeFrameBoundary.agda",
+            "receipt_name": "NSAmplitudeWeightedNegativeFrameBoundary",
+            "route_name": "amplitude-weighted-negative-frame-wall-1a",
+            "boundary_summary": (
+                "The amplitude-weighted negative-frame scan keeps the candidate negative-frame carrier explicit without claiming promotion."
+            ),
+            "bridge_summary": (
+                "This amplitude-weighted negative-frame surface is candidate-only and fail-closed; it preserves the route without asserting a certificate."
+            ),
+            "candidate_only": True,
+            "fail_closed": True,
+            "theorem_promoted": False,
+            "full_ns_promoted": False,
+            "clay_promoted": False,
+            "wall1_status": "unproved",
+        }
+    ]
+    energy_budgeted_fork_rows = energy_budgeted_fork_rows or [
+        {
+            "surface": "energy_budgeted_fork_scan",
+            "module_path": "DASHI/Physics/Closure/NSTriadEnergyBudgetedCoherenceForkBoundary.agda",
+            "receipt_name": "NSTriadEnergyBudgetedCoherenceForkBoundary",
+            "route_name": "energy-budgeted-fork-wall-1a",
+            "boundary_summary": (
+                "The energy-budgeted fork scan keeps the candidate fork route explicit while the bridge remains open."
+            ),
+            "bridge_summary": (
+                "This energy-budgeted fork surface is candidate-only and fail-closed; it records the fork route without claiming promotion."
+            ),
+            "candidate_only": True,
+            "fail_closed": True,
+            "theorem_promoted": False,
+            "full_ns_promoted": False,
+            "clay_promoted": False,
+            "wall1_status": "unproved",
+        }
+    ]
+    if not any(isinstance(row, dict) and row.get("surface") == "pointwise_triad_cloud_boundary" for row in energy_budgeted_fork_rows):
+        energy_budgeted_fork_rows.append(
+            {
+                "surface": "pointwise_triad_cloud_boundary",
+                "module_path": "DASHI/Physics/Closure/NSPointwiseTriadCloudBoundary.agda",
+                "receipt_name": "NSPointwiseTriadCloudBoundary",
+                "route_name": "pointwise-triad-cloud-wall-2-bridge",
+                "boundary_summary": (
+                    "The pointwise triad-cloud bridge keeps single-mode stretching zero and forces BKM-active spikes to recruit a coherent multi-mode cloud."
+                ),
+                "bridge_summary": (
+                    "This pointwise triad-cloud surface is candidate-only and fail-closed; it records the multi-mode cloud, finite energy budget, and high-frequency dissipation bridge without claiming promotion."
+                ),
+                "candidate_only": True,
+                "fail_closed": True,
+                "theorem_promoted": False,
+                "full_ns_promoted": False,
+                "clay_promoted": False,
+                "wall1_status": "unproved",
+            }
+        )
+
     payload = {
         "contract": CONTRACT,
         "schema_version": SCHEMA_VERSION,
@@ -1061,6 +1213,12 @@ def main() -> int:
             "continuous_coherence_capacity_json": str(args.continuous_coherence_capacity_json)
             if args.continuous_coherence_capacity_json is not None
             else None,
+            "amplitude_weighted_negative_frame_json": str(args.amplitude_weighted_negative_frame_json)
+            if args.amplitude_weighted_negative_frame_json is not None
+            else None,
+            "energy_budgeted_fork_json": str(args.energy_budgeted_fork_json)
+            if args.energy_budgeted_fork_json is not None
+            else None,
             "k_n_exact_identity_json": str(args.k_n_exact_identity_json)
             if args.k_n_exact_identity_json is not None
             else None,
@@ -1069,6 +1227,8 @@ def main() -> int:
         "rows": bridge_rows,
         "signed_wall1_rows": signed_wall1_rows,
         "continuous_coherence_capacity_rows": continuous_coherence_capacity_rows,
+        "amplitude_weighted_negative_frame_rows": amplitude_weighted_negative_frame_rows,
+        "energy_budgeted_fork_rows": energy_budgeted_fork_rows,
         "k_n_exact_identity_scan_rows": k_n_exact_identity_scan_rows,
         "k_n_exact_identity_rows": k_n_exact_identity_rows,
         "aggregate": {
@@ -1180,6 +1340,28 @@ def main() -> int:
             "continuous_coherence_capacity_aggregate_status": continuous_coherence_capacity_aggregate_status,
             "continuous_coherence_capacity_aggregate_candidate_only": continuous_coherence_capacity_aggregate_candidate_only,
             "continuous_coherence_capacity_aggregate_fail_closed": continuous_coherence_capacity_aggregate_fail_closed,
+            "amplitude_weighted_negative_frame_input_status": amplitude_weighted_negative_frame_input_status,
+            "amplitude_weighted_negative_frame_status": amplitude_weighted_negative_frame_status,
+            "amplitude_weighted_negative_frame_candidate_only": amplitude_weighted_negative_frame_candidate_only,
+            "amplitude_weighted_negative_frame_fail_closed": amplitude_weighted_negative_frame_fail_closed,
+            "amplitude_weighted_negative_frame_aggregate_status": (
+                "fail-closed"
+                if amplitude_weighted_negative_frame_aggregate_status in ("ok", "fail-closed")
+                else "unavailable"
+            ),
+            "amplitude_weighted_negative_frame_aggregate_candidate_only": amplitude_weighted_negative_frame_aggregate_candidate_only,
+            "amplitude_weighted_negative_frame_aggregate_fail_closed": amplitude_weighted_negative_frame_aggregate_fail_closed,
+            "energy_budgeted_fork_input_status": energy_budgeted_fork_input_status,
+            "energy_budgeted_fork_status": energy_budgeted_fork_status,
+            "energy_budgeted_fork_candidate_only": energy_budgeted_fork_candidate_only,
+            "energy_budgeted_fork_fail_closed": energy_budgeted_fork_fail_closed,
+            "energy_budgeted_fork_aggregate_status": (
+                "fail-closed"
+                if energy_budgeted_fork_aggregate_status in ("ok", "fail-closed")
+                else "unavailable"
+            ),
+            "energy_budgeted_fork_aggregate_candidate_only": energy_budgeted_fork_aggregate_candidate_only,
+            "energy_budgeted_fork_aggregate_fail_closed": energy_budgeted_fork_aggregate_fail_closed,
             "k_n_exact_identity_input_status": k_n_exact_identity_input_status,
             "k_n_exact_identity_status": k_n_exact_identity_status,
             "k_n_exact_identity_candidate_only": k_n_exact_identity_candidate_only,
@@ -1188,7 +1370,45 @@ def main() -> int:
             "k_n_exact_identity_aggregate_candidate_only": k_n_exact_identity_aggregate_candidate_only,
             "k_n_exact_identity_aggregate_fail_closed": k_n_exact_identity_aggregate_fail_closed,
             "continuous_coherence_capacity_aggregate": continuous_coherence_capacity_aggregate,
+            "amplitude_weighted_negative_frame_aggregate": amplitude_weighted_negative_frame_aggregate,
+            "energy_budgeted_fork_aggregate": energy_budgeted_fork_aggregate,
             "k_n_exact_identity_aggregate": k_n_exact_identity_aggregate,
+            "amplitude_weighted_negative_frame_row_count": int(len(amplitude_weighted_negative_frame_rows))
+            if amplitude_weighted_negative_frame_rows
+            else None,
+            "amplitude_weighted_negative_frame_surface_count": (
+                int(
+                    len(
+                        {
+                            row.get("surface")
+                            for row in amplitude_weighted_negative_frame_rows
+                            if isinstance(row, dict) and isinstance(row.get("surface"), str)
+                        }
+                    )
+                )
+                if amplitude_weighted_negative_frame_rows
+                else None
+            ),
+            "amplitude_weighted_negative_frame_route_names": _route_names(
+                [row for row in amplitude_weighted_negative_frame_rows if isinstance(row, dict)]
+            ),
+            "energy_budgeted_fork_row_count": int(len(energy_budgeted_fork_rows)) if energy_budgeted_fork_rows else None,
+            "energy_budgeted_fork_surface_count": (
+                int(
+                    len(
+                        {
+                            row.get("surface")
+                            for row in energy_budgeted_fork_rows
+                            if isinstance(row, dict) and isinstance(row.get("surface"), str)
+                        }
+                    )
+                )
+                if energy_budgeted_fork_rows
+                else None
+            ),
+            "energy_budgeted_fork_route_names": _route_names(
+                [row for row in energy_budgeted_fork_rows if isinstance(row, dict)]
+            ),
             "k_n_exact_identity_row_count": int(len(k_n_exact_identity_rows)) if k_n_exact_identity_rows else None,
             "k_n_exact_identity_surface_count": (
                 int(
