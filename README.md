@@ -119,17 +119,21 @@ typed p7 exemplar, not a promoted general `(\u2124/p\u2124)^×` action theorem
 or analytic BT/p-adic authority surface.
 `DASHI.Interop.PrimeLaneStage12ActionAdapter` now carries the shared adapter
 contract directly: `Stage12FibreSurface` is the global stage/carry/fibre
-grammar, prime lanes are local unit-action adapters into it, and both `p7`
-and `p11` now consume that same contract through canonical rows. The
+grammar, prime lanes are local unit-action adapters into it, and `p7`, `p11`,
+and the full `12 -> 13` closure witness now consume that same contract through
+canonical rows. The
 follow-on interop consumers
 `DASHI.Interop.P7PrimeLaneStage12ActionBridge`,
 `DASHI.Interop.P11PrimeLaneStage12ActionBridge`,
+`DASHI.Interop.P13PrimeLaneStage12ActionBridge`,
 `DASHI.Interop.PrimeLaneStage12ActionAdapterRegistry`,
 `DASHI.Interop.PrimeLaneStage12ActionCarryBridge`,
 `DASHI.Interop.PrimeLaneStage12ActionSuccessorBridge`, and
 `DASHI.Interop.PrimeLaneStage12ActionRegression` keep that route normalized:
 `p7` remains the first clean local exemplar, but `p11` now follows the same
-Stage12 adapter story instead of sitting beside it.
+Stage12 adapter story instead of sitting beside it, and `p13` now lands as
+the first full Stage12 witness row rather than remaining only a successor
+receipt.
 `DASHI.Interop.PrimeSuccessorWitness` now makes the cleaner `p - 1` / `+1`
 number-theoretic rule explicit: `p` is the new prime lane, `p - 1` is the
 witness-space that proves what `p` can act on, and `+1` is the successor move
@@ -153,6 +157,18 @@ second concrete prime lane:
 `DASHI.Core.P11EquivariantOddFieldGate`, and
 `DASHI.Physics.Closure.P11Stage11C10Regression`. These modules record a shared
 typed quotient-action surface, a `p11 / C10` local witness with Stage-11
+
+That Stage12 path now extends one step further with
+`DASHI.Foundations.P13UnitGroupC12Witness`,
+`DASHI.Foundations.P13HexTruthActionQuotient`,
+`DASHI.Geometry.P13UnitActionTreeIsometry`,
+`DASHI.Core.P13EquivariantOddFieldGate`,
+`DASHI.Physics.Closure.P13Stage12C12Regression`, and
+`DASHI.Interop.P13PrimeLaneStage12ActionBridge`. These modules record the
+first full `12 -> 13` Stage12 witness row: `p13` consumes the shared
+adapter/carry/successor story, carries a finite `C12` local witness, keeps
+Stage-1 identity and Stage-0 unit-order placement explicit inside the
+`0..11` atlas, and remains candidate-only/fail-closed.
 identity and Stage-10 unit-order rows, p11-specific address/depth and odd-field
 consumers, and an explicit fail-closed HexTruth transport boundary where the
 p11 half-turn does not descend as cleanly as the p7 Möbius element. This

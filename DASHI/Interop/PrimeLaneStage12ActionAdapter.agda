@@ -20,8 +20,8 @@ import DASHI.Physics.Closure.SSPPrimeLane369PhaseBridge as Phase
 --
 -- Stage12FibreSurface is the global stage/carry/fibre grammar.
 -- Prime-local quotient-action lanes plug into that atlas through adapter rows.
--- The shared surface is now generic enough that both p7 and p11 consume the
--- same adapter contract rather than leaving the Stage12 route p7-only.
+-- The shared surface is now generic enough that p7, p11, and the full
+-- 12->13 closure witness all consume the same adapter contract.
 
 record PrimeLaneStage12ActionAuthorityBits : Set where
   field
@@ -296,9 +296,80 @@ canonicalP11PrimeLaneStage12ActionAdapter =
       ∷ []
     }
 
+canonicalP13PrimeLaneStage12ActionAdapter :
+  PrimeLaneStage12ActionAdapter
+canonicalP13PrimeLaneStage12ActionAdapter =
+  record
+    { primeLaneLabel =
+        "p13"
+    ; unitGroupLabel =
+        "(Z/13Z)^x ~= C12"
+    ; stage12FibreSurface =
+        StageQuotient.canonicalStage12FibreSurface
+    ; stage12FibreSurfaceIsCanonical =
+        refl
+    ; quotientSurface =
+        Quotient.p13C12PrimeLaneUnitActionQuotientSurface
+    ; successorWitness =
+        Successor.canonicalP13PrimeSuccessorWitness
+    ; quotientPrimeMatchesSuccessorWitness =
+        refl
+    ; stageWindowWitness =
+        Successor.canonicalStage12SuccessorWitness
+    ; stageWindowWitnessMatchesSuccessorWitness =
+        refl
+    ; stageWindowProjectedWitnessMatchesPrime =
+        refl
+    ; successorField0To111 =
+        Successor.canonicalStage0To111SuccessorField
+    ; successorField0To111IsCanonical =
+        refl
+    ; stageIdentityPoint =
+        Atlas.atlas-1
+    ; stageIdentityPointMatchesSuccessorWitness =
+        refl
+    ; stageIdentityPointMatchesPhaseBridge =
+        refl
+    ; stageIdentityResidue =
+        refl
+    ; stageIdentityTone =
+        refl
+    ; unitActionOrder =
+        12
+    ; unitActionOrderMatchesSuccessorWitness =
+        refl
+    ; unitActionOrderMatchesPhaseBridge =
+        refl
+    ; unitOrderStagePoint =
+        Atlas.atlas-0
+    ; unitOrderStagePointMatchesSuccessorWitness =
+        refl
+    ; unitOrderStagePointMatchesPhaseBridge =
+        refl
+    ; unitOrderResidue =
+        refl
+    ; unitOrderTone =
+        refl
+    ; carryDepthSeamPoint =
+        Atlas.atlas-11
+    ; carryDepthSeamPointIsAtlas11 =
+        refl
+    ; carryDepthSeam =
+        refl
+    ; authorityBits =
+        canonicalPrimeLaneStage12ActionAuthorityBits
+    ; notes =
+        "Stage12FibreSurface remains the global stage/carry/fibre grammar; p13 consumes it as the first full 12->13 closure witness row."
+      ∷ "The prime-successor rule is explicit here: the Stage12 witness-space +1 = 13-prime lane."
+      ∷ "The p13 row records the closure witness over the whole Stage12 carrier without claiming that p13 replaces the stage spine."
+      ∷ "atlas-11/rev-2 remains the shared carry-depth seam, so the closure witness joins the same global Stage12 route as p7 and p11."
+      ∷ []
+    }
+
 canonicalPrimeLaneStage12ActionAdapters :
   List PrimeLaneStage12ActionAdapter
 canonicalPrimeLaneStage12ActionAdapters =
   canonicalP7PrimeLaneStage12ActionAdapter
   ∷ canonicalP11PrimeLaneStage12ActionAdapter
+  ∷ canonicalP13PrimeLaneStage12ActionAdapter
   ∷ []

@@ -52,6 +52,10 @@ record PrimeLaneStage12ActionCarryBridge : Set where
       Adapter.PrimeLaneStage12ActionAdapter
     p11AdapterIsCanonical :
       p11Adapter ≡ Adapter.canonicalP11PrimeLaneStage12ActionAdapter
+    p13Adapter :
+      Adapter.PrimeLaneStage12ActionAdapter
+    p13AdapterIsCanonical :
+      p13Adapter ≡ Adapter.canonicalP13PrimeLaneStage12ActionAdapter
     p7CarryDepthSeamPointIsAtlas11 :
       Adapter.carryDepthSeamPoint p7Adapter ≡ Atlas.atlas-11
     p7CarryDepthSeam :
@@ -66,6 +70,14 @@ record PrimeLaneStage12ActionCarryBridge : Set where
       StageQuotient.Stage12FibreSurface.carry-depth
         (Adapter.stage12FibreSurface p11Adapter)
         (Adapter.carryDepthSeamPoint p11Adapter)
+      ≡
+      Atlas.rev-2
+    p13CarryDepthSeamPointIsAtlas11 :
+      Adapter.carryDepthSeamPoint p13Adapter ≡ Atlas.atlas-11
+    p13CarryDepthSeam :
+      StageQuotient.Stage12FibreSurface.carry-depth
+        (Adapter.stage12FibreSurface p13Adapter)
+        (Adapter.carryDepthSeamPoint p13Adapter)
       ≡
       Atlas.rev-2
     notes :
@@ -86,12 +98,16 @@ canonicalPrimeLaneStage12ActionCarryBridge =
     ; p7AdapterIsCanonical = refl
     ; p11Adapter = Adapter.canonicalP11PrimeLaneStage12ActionAdapter
     ; p11AdapterIsCanonical = refl
+    ; p13Adapter = Adapter.canonicalP13PrimeLaneStage12ActionAdapter
+    ; p13AdapterIsCanonical = refl
     ; p7CarryDepthSeamPointIsAtlas11 = refl
     ; p7CarryDepthSeam = refl
     ; p11CarryDepthSeamPointIsAtlas11 = refl
     ; p11CarryDepthSeam = refl
+    ; p13CarryDepthSeamPointIsAtlas11 = refl
+    ; p13CarryDepthSeam = refl
     ; notes =
-        "p7 and p11 now consume the same atlas-11/rev-2 carry-depth seam under Stage12FibreSurface."
+        "p7, p11, and p13 now consume the same atlas-11/rev-2 carry-depth seam under Stage12FibreSurface."
       ∷ "The carry seam stays global; the prime lanes are local adapters into it."
       ∷ []
     ; authorityBits = canonicalPrimeLaneStage12ActionCarryBridgeAuthorityBits

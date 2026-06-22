@@ -19,6 +19,8 @@ import DASHI.Foundations.SSPPrimeLaneSymmetryProfile as Symmetry
 open import DASHI.Foundations.StageAtlasZeroToEleven as StageAtlas using
   ( StageAtlasTopologicalReading
   ; StageAtlasZeroToEleven
+  ; atlas-0
+  ; atlas-1
   ; atlas-6
   ; atlas-7
   ; atlas-10
@@ -148,3 +150,23 @@ p11CarrierPhaseReceiptIsCanonical :
   carrierPhaseReceipt p11SSPPrimeLane369PhaseBridge
   ≡ canonicalCarrierPhaseStructureReceipt
 p11CarrierPhaseReceiptIsCanonical = refl
+
+p13SSPPrimeLane369PhaseBridge : SSPPrimeLane369PhaseBridge
+p13SSPPrimeLane369PhaseBridge = primeLane369PhaseBridge p13
+
+p13PrimeIdentityStageIsAtlas1 :
+  primeIdentityStage p13SSPPrimeLane369PhaseBridge ≡ atlas-1
+p13PrimeIdentityStageIsAtlas1 = refl
+
+p13UnitOrderIs12 :
+  unitOrder p13SSPPrimeLane369PhaseBridge ≡ 12
+p13UnitOrderIs12 = refl
+
+p13UnitOrderStageIsAtlas0 :
+  unitOrderStage p13SSPPrimeLane369PhaseBridge ≡ atlas-0
+p13UnitOrderStageIsAtlas0 = refl
+
+p13CarrierPhaseReceiptIsCanonical :
+  carrierPhaseReceipt p13SSPPrimeLane369PhaseBridge
+  ≡ canonicalCarrierPhaseStructureReceipt
+p13CarrierPhaseReceiptIsCanonical = refl

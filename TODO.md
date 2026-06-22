@@ -17031,3 +17031,23 @@ Cleanup
 - [ ] Next analytic lane: replace the dead `Qvel` area bridge with a real
   determinant-side lower-bound route for `∫ det(S)^+` under the corrected sign
   decomposition.
+
+## 2026-06-22 Stage12 p13 Witness Row
+
+- [x] Extend `DASHI.Interop.PrimeSuccessorWitness` with the explicit
+  `canonicalStage12SuccessorWitness` row so the `12 -> 13` closure witness is
+  typed directly instead of being special-cased.
+- [x] Add the canonical `p13 / C12` quotient and witness surfaces:
+  `DASHI.Foundations.P13UnitGroupC12Witness`,
+  `DASHI.Foundations.P13HexTruthActionQuotient`,
+  `DASHI.Geometry.P13UnitActionTreeIsometry`,
+  `DASHI.Core.P13EquivariantOddFieldGate`, and
+  `DASHI.Physics.Closure.P13Stage12C12Regression`.
+- [x] Generalize the shared Stage12 adapter path so `p13` joins the canonical
+  adapter list, registry, carry bridge, successor bridge, and regression
+  consumers instead of remaining only a successor witness.
+- [x] Add `DASHI.Interop.P13PrimeLaneStage12ActionBridge` and wire the full
+  p13 row into `DASHI/Everything.agda`.
+- [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
+  beyond the p13 closure row without breaking the candidate-only/fail-closed
+  boundary.

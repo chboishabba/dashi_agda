@@ -6,6 +6,24 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- Stage12 p13 witness-row generalization for `2026-06-22`: extends
+  `DASHI.Interop.PrimeSuccessorWitness` with the explicit
+  `canonicalStage12SuccessorWitness` row, adds
+  `DASHI.Foundations.P13UnitGroupC12Witness`,
+  `DASHI.Foundations.P13HexTruthActionQuotient`,
+  `DASHI.Geometry.P13UnitActionTreeIsometry`,
+  `DASHI.Core.P13EquivariantOddFieldGate`,
+  `DASHI.Physics.Closure.P13Stage12C12Regression`, and
+  `DASHI.Interop.P13PrimeLaneStage12ActionBridge`, and generalizes
+  `DASHI.Interop.PrimeLaneStage12ActionAdapter`,
+  `DASHI.Interop.PrimeLaneStage12ActionAdapterRegistry`,
+  `DASHI.Interop.PrimeLaneStage12ActionCarryBridge`,
+  `DASHI.Interop.PrimeLaneStage12ActionSuccessorBridge`, and
+  `DASHI.Interop.PrimeLaneStage12ActionRegression` so `p13` consumes the same
+  shared Stage12 adapter story as `p7` and `p11`. `Stage12FibreSurface`
+  remains the spine, `p13` is the first full `12 -> 13` witness row over that
+  spine, and all authority remains candidate-only/fail-closed.
+
 - NS quantitative cycle-defect lower-bound tranche for `2026-06-22`: adds
   `DASHI.Physics.Closure.NSTriadCycleDefectLowerBoundReceipt`; strengthens
   `scripts/ns_triad_cocycle_floor_scan.py`,
