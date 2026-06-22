@@ -15,8 +15,8 @@ open import Data.List.Base using (List; []; _∷_)
 --   S_N = (I - K11) - K10 (I - K00)^-1 K01
 --
 -- together with the diagonal shell-gap and cross-shell coupling roles.
--- It keeps the non-adversarial Biot-Savart cross-shell bridge explicit and
--- unproved, and leaves theorem/full-NS/Clay promotion false.
+-- It keeps the non-adversarial K01 / Schur bridge explicit and unproved, and
+-- leaves theorem/full-NS/Clay promotion false.
 
 listLength : ∀ {A : Set} → List A → Nat
 listLength [] = zero
