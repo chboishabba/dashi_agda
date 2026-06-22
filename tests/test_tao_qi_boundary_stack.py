@@ -205,6 +205,37 @@ def test_carry_completion_bridge_and_stage12_fibre_markers() -> None:
     )
 
 
+def test_stage12_fibre_surface_carry_depth_seam_hits_irreversibility_boundary() -> None:
+    stage_quotient_text = (
+        REPO_ROOT / "DASHI" / "Algebra" / "StageQuotient.agda"
+    ).read_text(encoding="utf-8")
+    boundary_text = (
+        REPO_ROOT
+        / "DASHI"
+        / "Algebra"
+        / "StageQuotientIrreversibilityBoundary.agda"
+    ).read_text(encoding="utf-8")
+    locator_text = (
+        REPO_ROOT
+        / "DASHI"
+        / "Promotion"
+        / "ExternalTheoremAuthoritySourceLocator.agda"
+    ).read_text(encoding="utf-8")
+    carry_bridge_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "CarryCompletionSpectralBridge.agda"
+    ).read_text(encoding="utf-8")
+
+    assert "carry-depth-seam" in stage_quotient_text
+    assert "canonicalStage12FibreSurface" in stage_quotient_text
+    assert "StageQuotientIrreversibilityBoundary" in boundary_text
+    assert "irreversibilityCause" in boundary_text
+    assert "nonInjectiveQuotient" in boundary_text
+    assert "stageQuotientIrreversibilityBoundaryAnchor" in locator_text
+    assert "Located at the StageQuotient irreversibility boundary" in locator_text
+    assert "Stage12FibreSurface preserves atlas-11 as a seam with carry-depth rev-2" in carry_bridge_text
+    assert "StageQuotient.Stage12FibreSurface.carry-depth" in carry_bridge_text
+
+
 def test_recovered_carry_and_successor_adapter_slice_markers() -> None:
     yin_yang_qi_text = (
         REPO_ROOT / "DASHI" / "Interop" / "YinYangQiAdapter.agda"
