@@ -1248,7 +1248,7 @@ canonicalCrossDomainInterpretationBoundarySummaries =
     pnfVoidScopeBoundaryLane
     "DASHI.Interop.PNFVoidScopeBoundary"
     "canonicalPNFVoidScopeBoundaryRows"
-    "same-fibre NO_TYPED_MEET is separated from cross-domain SCOPE_EXCEEDED and fibre-collapse boundaries"
+    "same-fibre NO_TYPED_MEET is separated from cross-domain SCOPE_EXCEEDED, the generalized Stage12 fibre/carry-depth irreversibility seam, and fibre-collapse boundaries"
     "truth, support, admissibility, and live actor classification promotion remain false"
     "agda -i . DASHI/Interop/PNFVoidScopeBoundary.agda"
   ∷ mkCrossDomainInterpretationBoundarySummary

@@ -1,5 +1,6 @@
 module DASHI.Interop.CarryCompletionSpectralBridge where
 
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
@@ -9,6 +10,7 @@ open import Agda.Builtin.String using (String)
 open import Base369 using (TriTruth; tri-low; tri-mid; tri-high)
 
 import DASHI.Algebra.MoonshineBridge as Moonshine
+import DASHI.Algebra.StageQuotientIrreversibilityBoundary as StageQuotientBoundary
 import DASHI.Algebra.StageQuotient as StageQuotient
 import DASHI.Foundations.PAdicSocioeconomicBoundary as PAdicBoundary
 import DASHI.Foundations.StageAtlasZeroToEleven as StageAtlas
@@ -57,6 +59,7 @@ data ExactSurfaceKind : Set where
 
 data AdapterSurfaceKind : Set where
   completionBoundaryAdapter : AdapterSurfaceKind
+  irreversibilityBoundaryAdapter : AdapterSurfaceKind
   carrySeedAdapter : AdapterSurfaceKind
   quotientOverflowAdapter : AdapterSurfaceKind
   stageFibreAdapter : AdapterSurfaceKind
@@ -273,10 +276,23 @@ completionBoundaryRow =
     false
     refl
 
+irreversibilityBoundaryRow : CandidateAdapterRow
+irreversibilityBoundaryRow =
+  candidateAdapterRow
+    one
+    irreversibilityBoundaryAdapter
+    "irreversibility-boundary"
+    "StageQuotientIrreversibilityBoundary.canonicalStageQuotientIrreversibilityBoundary"
+    "Stage quotient irreversibility is threaded through as candidate-only boundary grammar: geometric compression and non-injectivity remain blocked from promotion."
+    true
+    refl
+    false
+    refl
+
 carrySeedRow : CandidateAdapterRow
 carrySeedRow =
   candidateAdapterRow
-    one
+    two
     carrySeedAdapter
     "carry-seed"
     "MoonshineBridge.moonshineScalarBridgeSurface"
@@ -289,7 +305,7 @@ carrySeedRow =
 quotientOverflowRow : CandidateAdapterRow
 quotientOverflowRow =
   candidateAdapterRow
-    two
+    three
     quotientOverflowAdapter
     "quotient-overflow"
     "StageQuotient.stageQuotientSeamSurface"
@@ -302,7 +318,7 @@ quotientOverflowRow =
 stageFibreRow : CandidateAdapterRow
 stageFibreRow =
   candidateAdapterRow
-    three
+    four
     stageFibreAdapter
     "stage-fibre"
     "StageQuotient.canonicalStage12FibreSurface"
@@ -315,7 +331,7 @@ stageFibreRow =
 spectralIdentityRow : CandidateAdapterRow
 spectralIdentityRow =
   candidateAdapterRow
-    four
+    five
     spectralIdentityAdapter
     "spectral-identity"
     "MoonshineBridge.MoonshineBridge"
@@ -328,7 +344,7 @@ spectralIdentityRow =
 guardedInterpretiveRow : CandidateAdapterRow
 guardedInterpretiveRow =
   candidateAdapterRow
-    five
+    six
     guardedInterpretiveAdapter
     "guarded-interpretive"
     "PAdicSocioeconomicBoundary + StageQuotient + MoonshineBridge"
@@ -341,6 +357,7 @@ guardedInterpretiveRow =
 canonicalCandidateAdapterRows : List CandidateAdapterRow
 canonicalCandidateAdapterRows =
   completionBoundaryRow
+  ∷ irreversibilityBoundaryRow
   ∷ carrySeedRow
   ∷ quotientOverflowRow
   ∷ stageFibreRow
@@ -387,7 +404,7 @@ atlas11CarryDepth =
 atlas11CarryDepthIsRev2 : atlas11CarryDepth ≡ StageAtlas.rev-2
 atlas11CarryDepthIsRev2 = refl
 
-record CarryCompletionSpectralBridgeReceipt : Set where
+record CarryCompletionSpectralBridgeReceipt : Setω where
   constructor carryCompletionSpectralBridgeReceipt
   field
     exactReceipts : List ExactMathReceipt
@@ -406,6 +423,11 @@ record CarryCompletionSpectralBridgeReceipt : Set where
       StageQuotient.StageQuotientSeam
     stage12FibreSurface :
       StageQuotient.Stage12FibreSurface
+    stageQuotientIrreversibilityBoundary :
+      StageQuotientBoundary.StageQuotientIrreversibilityBoundary
+    stageQuotientIrreversibilityBoundaryIsCanonical :
+      stageQuotientIrreversibilityBoundary ≡
+      StageQuotientBoundary.canonicalStageQuotientIrreversibilityBoundary
     authorityBits : CarryCompletionAuthorityBits
     authorityBitsIsCanonical :
       authorityBits ≡ canonicalCarryCompletionAuthorityBits
@@ -434,6 +456,8 @@ canonicalCarryCompletionSpectralBridgeReceipt =
     Moonshine.moonshineScalarBridgeSurface
     stageQuotientSeamSurfaceUsed
     stage12FibreSurfaceUsed
+    StageQuotientBoundary.canonicalStageQuotientIrreversibilityBoundary
+    refl
     canonicalCarryCompletionAuthorityBits
     refl
     canonicalCarryCompletionAuthorityFailClosed
@@ -442,4 +466,4 @@ canonicalCarryCompletionSpectralBridgeReceipt =
     refl
     false
     refl
-    "Exact mathematics proves completion, quotient, and carry identities; this bridge re-exposes them as candidate-only stage, seed, carry, fibre, and spectral grammar without promoting metaphysics, politics, quantum measurement, or numerology."
+    "Exact mathematics proves completion, quotient, carry, and irreversibility identities; this bridge re-exposes them as candidate-only stage, seed, carry, fibre, spectral, and boundary grammar without promoting metaphysics, politics, quantum measurement, or numerology."

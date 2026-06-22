@@ -257,6 +257,12 @@ record StageQuotientIrreversibilityBoundary : Setω where
     nonClaimBoundary :
       List String
 
+    stage12FibreSurfaceReceipt :
+      SQ.Stage12FibreSurface
+
+    stage12FibreSurfaceReceiptIsCanonical :
+      stage12FibreSurfaceReceipt ≡ SQ.canonicalStage12FibreSurface
+
 canonicalStageQuotientIrreversibilityBoundary :
   StageQuotientIrreversibilityBoundary
 canonicalStageQuotientIrreversibilityBoundary =
@@ -310,6 +316,9 @@ canonicalStageQuotientIrreversibilityBoundary =
     ; nonClaimBoundary =
         "Irreversibility is recorded as geometric compression through the non-injective Stage -> TriTruth quotient"
         ∷ "The seam is not explained by absence of additive inverse in the GF(3)-style TriTruth operation"
+        ∷ "The Stage12FibreSurface receipt is carried conservatively from DASHI.Algebra.StageQuotient"
+        ∷ "Its atlas-11 carry-depth seam is retained as imported evidence, not promoted as a new theorem"
+        ∷ "The atlas-11 quotient seam remains part of the stage-fibre receipt rather than a collapse claim"
         ∷ "No total left-inverse section can recover both seed and overflow from their shared quotient tone"
         ∷ "No order-preserving held-to-start reversal is supplied; the internal potential order would require 2 <= 0"
         ∷ "shiftConvergesToHeldWithin2 is consumed as an imported finite shift-dynamics witness"
@@ -317,4 +326,8 @@ canonicalStageQuotientIrreversibilityBoundary =
         ∷ "No thermodynamic Carnot theorem is promoted from this boundary"
         ∷ "No physical Carnot theorem is promoted from this boundary"
         ∷ []
+    ; stage12FibreSurfaceReceipt =
+        SQ.canonicalStage12FibreSurface
+    ; stage12FibreSurfaceReceiptIsCanonical =
+        refl
     }
