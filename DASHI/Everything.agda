@@ -95,6 +95,13 @@ import DASHI.Biology.AvianVisualOverlayQuotient
 import DASHI.Biology.BioAnimalexicStackDischarge
 import DASHI.Biology.BioactiveAuthorityBoundaryCore
 import DASHI.Biology.BioactiveMolecularRecognitionBridge
+import DASHI.Biology.BodyKeepsScoreResidualBridge
+import DASHI.Biology.BodyMemoryBiologyRegression
+import DASHI.Biology.BodyMemoryCompiledInverseBridge
+import DASHI.Biology.BodyMemoryMeasurementProxyBoundary
+import DASHI.Biology.BrainDNABodyMemoryBridge
+import DASHI.Biology.EpigeneticBodyMemoryBridge
+import DASHI.Biology.FunctionalConnectomeBodyMemoryBridge
 import DASHI.Biology.NeurochemicalAtomicChemistryBridge
 import DASHI.Biology.NeurochemicalBrainCarrierBridge
 import DASHI.Biology.NeurochemicalGenomicExpressionBridge
@@ -109,7 +116,10 @@ import DASHI.Biology.EvolvedSensoryTransport
 import DASHI.Biology.GenomeSensorimotorConnectomeBridge
 import DASHI.Biology.ObserverPerceptualManifoldResidual
 import DASHI.Biology.ProteinHormoneChemistryCellBridge
+import DASHI.Biology.RelationalQiBodyMemoryBridge
 import DASHI.Biology.RetinalPerturbationObservationBridge
+import DASHI.Biology.TraumaBodyMemoryCandidateBridge
+import DASHI.Biology.TraumaClinicalGovernanceBoundary
 import Ontology.ClinicalDiagnostics
 import DASHI.Combinatorics.Confluence
 import DASHI.Combinatorics.Entropy

@@ -24,6 +24,23 @@ The first executable slice is now present as
 `scripts/run_stellar_composition_proxy_diagnostic.py` with the Agda guard
 `DASHI.Unified.StellarCompositionProxyReceipt`; it remains proxy-only and
 non-promoting.
+The current trauma/body-memory biology tranche is candidate-only and
+clinical-adjacent, not diagnostic or therapeutic authority:
+`DASHI.Biology.BodyKeepsScoreResidualBridge`,
+`DASHI.Biology.EpigeneticBodyMemoryBridge`,
+`DASHI.Biology.FunctionalConnectomeBodyMemoryBridge`,
+`DASHI.Biology.BrainDNABodyMemoryBridge`,
+`DASHI.Biology.BodyMemoryMeasurementProxyBoundary`,
+`DASHI.Biology.BodyMemoryCompiledInverseBridge`,
+`DASHI.Biology.RelationalQiBodyMemoryBridge`,
+`DASHI.Biology.TraumaClinicalGovernanceBoundary`,
+`DASHI.Biology.BodyMemoryBiologyRegression`, and
+`DASHI.Biology.TraumaBodyMemoryCandidateBridge`. These modules place body-state
+fibres, epigenetic regulatory marks, fMRI/connectome proxies, BrainDNA
+representation constraints, chart-local compiled inverses, and relational
+Qi/PatternMind repair context behind hard gates: public symptom is not hidden
+factorisation, `+1` safety seed is not cure or diagnosis, proxy is not hidden
+chart, association is not causation, and no clinical authority is promoted.
 The broader route/lane joining plan is `Docs/support/reference/UnifiedRoutesLanePlan.md`, which
 extends the same receipt-gated architecture across physics, empirical,
 biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
