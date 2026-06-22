@@ -4181,6 +4181,7 @@ depends on that surface.
 	  `DASHI/Interop/PolarityPhaseFieldBridge.agda`,
 	  `DASHI/Interop/PolarityBettiSupportBoundary.agda`,
 	  `DASHI/Interop/BettiQiAdapter.agda`,
+	  `DASHI/Interop/CarryCompletionSpectralBridge.agda`,
 	  `DASHI/Interop/TaoQiReadingAdapter.agda`,
 	  `DASHI/Interop/TaoMeditationQiAdapter.agda`, and
 	  `DASHI/Promotion/TaoQiObligationIndex.agda`.
@@ -4189,6 +4190,7 @@ depends on that surface.
 	  `https://pastebin.xware.online/paste/20260621_131250_taoteching_lean`
 	  preserved as candidate-only provenance rather than promoted authority.
 	  The current canonical interpretive stack is:
+	  exact carry/completion/quotient seam receipts ->
 	  Tao source receipt -> Tao operator grammar -> yin-yang symbol geometry
 	  boundary -> yin/yang polarity boundary -> Tao-to-yinyang adapter ->
 	  yinyang-to-Qi adapter -> 369/voxel/wave polarity-phase-field bridge ->
@@ -4197,6 +4199,11 @@ depends on that surface.
 	  `DASHI/Promotion/PolarityFieldObligationIndex.agda` and
 	  `DASHI/Promotion/TaoQiObligationIndex.agda` keeping every promotion path
 	  blocked.
+	  `DASHI/Interop/CarryCompletionSpectralBridge.agda` keeps the 3-adic
+	  completion identity, the moonshine `196883 + 1 = 196884` bridge, the
+	  finite stage-quotient overflow seam, and the `0..11` stage-fibre
+	  carry-depth surface on the exact/receipt side before Tao/yinyang/Qi
+	  candidate rereadings attach.
 	  `WrapperState` now includes `performativeEvidence`, which maps to
 	  `scopeExceeded6` when emitted by the pipeline; `PNFEmissionReceipt` records
   parser profile, reducer profile, source span, and emitted atom so residual

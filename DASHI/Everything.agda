@@ -293,6 +293,7 @@ import DASHI.Interop.TaoMeditationQiAdapter
 import DASHI.Interop.TaoQiReadingAdapter
 import DASHI.Interop.TaoYinYangAdapter
 import DASHI.Interop.YinYangQiAdapter
+import DASHI.Interop.CarryCompletionSpectralBridge
 import DASHI.Interop.PolarityPhaseFieldBridge
 import DASHI.Interop.PolarityBettiSupportBoundary
 import DASHI.Interop.BettiQiAdapter

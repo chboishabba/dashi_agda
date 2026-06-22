@@ -27,6 +27,7 @@ rectangle "Qi Bridge Layer" as QiBridgeLayer #E6F0FA {
 }
 
 rectangle "Phase / Field Layer" as FieldLayer #F4E8FA {
+  rectangle "CarryCompletionSpectralBridge\n3-adic + moonshine + quotient seam + carry-depth receipts" as CarryCompletion
   rectangle "PolarityPhaseFieldBridge\n369 + voxel + supervoxel + wave + superposition" as PhaseField
   rectangle "PolarityBettiSupportBoundary\nbeta-0 / beta-1 / beta-2 support summaries" as BettiSupport
   rectangle "BettiQiAdapter\nBetti support -> Qi carriers / roles / lenses" as BettiQi
@@ -43,6 +44,7 @@ rectangle "Governance Layer" as Governance #FDECEC {
 }
 
 TaoChapter --> TaoOps
+CarryCompletion --> TaoOps
 TaoOps --> YinYangGeometry
 YinYangGeometry --> YinYangBoundary
 TaoOps --> YinYangBoundary
@@ -51,6 +53,7 @@ YinYangBoundary --> TaoYinYang
 TaoYinYang --> YinYangQi
 YinYangBoundary --> YinYangQi
 YinYangQi --> PhaseField
+CarryCompletion --> PhaseField
 PhaseField --> BettiSupport
 BettiSupport --> BettiQi
 BettiQi --> QiCarrier
