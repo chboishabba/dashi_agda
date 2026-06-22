@@ -394,10 +394,12 @@ import DASHI.Physics.Closure.NSSharpTheoremGHierarchyReceipt
 import DASHI.Physics.Closure.NSStrainTypeIOmegaKPositiveReceipt
 import DASHI.Physics.Closure.NSTriadFrustrationDefectBoundary
 import DASHI.Physics.Closure.NSTriadFrustrationRegression
+import DASHI.Physics.Closure.NSTriadEntropyBarrierTheoremBoundary
 import DASHI.Physics.Closure.NSTriadIncidenceCocycleReceipt
 import DASHI.Physics.Closure.NSTriadKernelPhaseCocycleReceipt
 import DASHI.Physics.Closure.NSTriadLowFrustrationBasinEntropyBoundary
 import DASHI.Physics.Closure.NSTriadNegativeFrameOperatorBoundary
+import DASHI.Physics.Closure.NSTriadResidenceTimeCompressionBoundary
 import DASHI.Physics.Closure.NSTriadPhaseLockingLiveWallReceipt
 import DASHI.Physics.Closure.NSAdversarialGibbsPhaseReferenceReceipt
 import DASHI.Physics.Closure.NSSacasaTriadFrustrationBridgeBoundary

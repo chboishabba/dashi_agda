@@ -1,0 +1,19 @@
+{
+  "C": "scripts/check_ns_triad_cycle_obstruction_scan.py",
+  "F": "Any malformed field, authority drift, or route-marker mismatch is a hard error.",
+  "G": "Checker remains empirical and non-promoting.",
+  "L": "Load the scan JSON, validate rows and aggregates, then emit a checker receipt.",
+  "O": "Validate triad cycle-obstruction telemetry output.",
+  "P": "FAIL_CLOSED_NS_TRIAD_CYCLE_OBSTRUCTION_SCAN_CHECK",
+  "R": "Check control card, authority flags, fail-closed markers, obstruction metrics, and aggregate reconciliation.",
+  "S": "Fail-closed checker for malformed triad cycle-obstruction telemetry surfaces.",
+  "contract": "check_ns_triad_cycle_obstruction_scan",
+  "errors": [],
+  "fail_closed": true,
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_CYCLE_OBSTRUCTION_SCAN_CHECK",
+  "route_mode": "fail-closed",
+  "schema_version": "1.0.0",
+  "status": "ok",
+  "warnings": []
+}

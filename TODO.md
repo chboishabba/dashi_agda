@@ -98,6 +98,25 @@ Current odd-lane / topology intake note for `2026-06-20`:
   authority are not promoted.
 
 Current NS Clay action note for `2026-06-20`:
+- Wall 1 entropy-barrier / Wall 2 residence-compression tranche is now
+  recorded for `2026-06-22`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadEntropyBarrierTheoremBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadResidenceTimeCompressionBoundary.agda`,
+  `scripts/ns_triad_cycle_obstruction_scan.py`,
+  `scripts/check_ns_triad_cycle_obstruction_scan.py`,
+  `scripts/ns_triad_low_frustration_hessian_scan.py`, and
+  `scripts/check_ns_triad_low_frustration_hessian_scan.py`. The route now
+  records the explicit Wall 1 entropy-barrier theorem boundary around
+  low-frustration basin volume / Hessian expansion / determinant lower-bound
+  dependencies, records the explicit Wall 2 residence-time compression
+  boundary around low-frustration basin residence / cosphere
+  transport-dissipation / non-Sobolev bridge requirements, and adds new raw
+  N128 telemetry for cycle-rank proxies, cocycle residues, exact-lock scores,
+  Hessian-style second-moment basin proxies, and structured-vs-random
+  low-frustration occupancy. This remains fail-closed and non-promoting: the
+  entropy-barrier theorem is not proved, residence-time exclusion is not
+  proved, and the new scans are empirical only.
+
 - Triad incidence / frustration / adversarial-reference tranche is now
   recorded for `2026-06-21`. Artifacts:
   `DASHI/Physics/Closure/NSTriadIncidenceCocycleReceipt.agda`,

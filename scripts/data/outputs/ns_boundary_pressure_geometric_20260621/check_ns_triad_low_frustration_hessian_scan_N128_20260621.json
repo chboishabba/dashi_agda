@@ -1,0 +1,22 @@
+{
+  "C": "scripts/check_ns_triad_low_frustration_hessian_scan.py",
+  "F": "Any malformed field, authority drift, or route-marker mismatch is a hard error.",
+  "G": "Checker remains empirical and non-promoting.",
+  "L": "Load the scan JSON, validate row and aggregate surfaces, and emit a checker receipt.",
+  "O": "Validate the low-frustration triad Hessian scan contract and receipt surface.",
+  "P": "FAIL_CLOSED_NS_TRIAD_LOW_FRUSTRATION_HESSIAN_SCAN_CHECK",
+  "R": "Check control card, authority flags, row metrics, and aggregate Hessian summaries.",
+  "S": "Fail-closed checker: any schema drift, authority drift, or malformed metric is an error.",
+  "contract": "check_ns_triad_low_frustration_hessian_scan",
+  "errors": [],
+  "fail_closed": true,
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_LOW_FRUSTRATION_HESSIAN_SCAN_CHECK",
+  "route_mode": "fail-closed",
+  "scan_contract": "ns_triad_low_frustration_hessian_scan",
+  "scan_route_decision": "FAIL_CLOSED_NS_TRIAD_LOW_FRUSTRATION_HESSIAN_SCAN",
+  "scan_route_mode": "fail-closed",
+  "schema_version": "1.0.0",
+  "status": "ok",
+  "warnings": []
+}
