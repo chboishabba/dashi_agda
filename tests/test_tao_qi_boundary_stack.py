@@ -309,11 +309,15 @@ def test_prime_successor_witness_surface_marks_the_full_stage12_lane() -> None:
             "canonicalStage11SuccessorWitness",
             "canonicalStageSuccessorWitnesses",
             "record StageWindowSuccessorField : Set where",
+            "record Glyph111StageReceipt : Set where",
             "canonicalStage0To111SuccessorField",
             "canonicalStage99SuccessorWitness",
             "canonicalStage109SuccessorWitness",
             "canonicalStage110SuccessorWitness",
             "canonicalStage111SuccessorWitness",
+            "canonicalGlyph111StageReceipt",
+            "canonicalGlyph111DecimalSuccessorWitness",
+            "canonicalGlyph111TernaryValueMatchesStage12ClosurePrime",
             "stage12ClosurePrimeWitness",
             "canonicalP2PrimeSuccessorWitness",
             "canonicalP3PrimeSuccessorWitness",
@@ -339,6 +343,10 @@ def test_prime_successor_witness_surface_marks_the_full_stage12_lane() -> None:
     assert "99 is witnessed by 100 = 2^2 * 5^2" in witness_text
     assert "109 is witnessed by 110 = 2 * 5 * 11" in witness_text
     assert "110 is witnessed by 111 = 3 * 37" in witness_text
+    assert "As decimal, 111 = 3 * 37." in witness_text
+    assert "As ternary, 111_3 = 1 + 3 + 9 = 13." in witness_text
+    assert "111_3 is the p13 prime witness of Stage12 because 13 - 1 = 12." in witness_text
+    assert "111..._3 = -1/2 in Q3 is the infinite completion boundary" in witness_text
 
     assert "Stage12FibreSurface" in readme_text
     assert "spine" in readme_text
@@ -394,6 +402,10 @@ def test_docs_cover_0_to_111_successor_field() -> None:
         assert "99 -> 100 = 2^2 * 5^2" in text
         assert "109 -> 110 = 2 * 5 * 11" in text
         assert "110 -> 111 = 3 * 37" in text
+        assert "111_10 = 3 * 37" in text
+        assert "111_3 = 13" in text
+        assert "p13" in text
+        assert "111..._3 = -1/2" in text
 
 
 def test_recovered_carry_and_successor_adapter_slice_markers() -> None:
