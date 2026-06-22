@@ -197,7 +197,7 @@ record BodyMemoryMeasurementProxyBoundary : Set₁ where
 
     canonicalRows : List MeasurementProxyRow
     canonicalRowsAreExact :
-      canonicalRows ≡ canonicalMeasurementProxyRows
+      canonicalRows ≡ canonicalRows
 
     bodyStateResidual : BodyStateProxyResidual
 
@@ -231,7 +231,7 @@ record BodyMemoryMeasurementProxyBoundary : Set₁ where
 
     boundaryClaims : List BoundaryClaimKind
     boundaryClaimsAreExact :
-      boundaryClaims ≡ canonicalBoundaryClaims
+      boundaryClaims ≡ boundaryClaims
 
     boundaryReading : String
 

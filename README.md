@@ -33,14 +33,28 @@ clinical-adjacent, not diagnostic or therapeutic authority:
 `DASHI.Biology.BodyMemoryMeasurementProxyBoundary`,
 `DASHI.Biology.BodyMemoryCompiledInverseBridge`,
 `DASHI.Biology.RelationalQiBodyMemoryBridge`,
+`DASHI.Biology.RelationalChartResidualMachine`,
+`DASHI.Biology.EducationBodyMemoryBridge`,
+`DASHI.Biology.FMRIConnectomeProxyGovernance`,
+`DASHI.Biology.GenomeEpigenomeConnectomeBodyMemoryBridge`,
+`DASHI.Biology.RelationalQiEducationTraumaBridge`,
+`DASHI.Biology.FormalLayerExplanationBoundary`,
 `DASHI.Biology.TraumaClinicalGovernanceBoundary`,
 `DASHI.Biology.BodyMemoryBiologyRegression`, and
 `DASHI.Biology.TraumaBodyMemoryCandidateBridge`. These modules place body-state
 fibres, epigenetic regulatory marks, fMRI/connectome proxies, BrainDNA
 representation constraints, chart-local compiled inverses, and relational
-Qi/PatternMind repair context behind hard gates: public symptom is not hidden
-factorisation, `+1` safety seed is not cure or diagnosis, proxy is not hidden
-chart, association is not causation, and no clinical authority is promoted.
+Qi/PatternMind repair context behind hard gates. The follow-on relational
+chart tranche adds the shared chart/residual/`j+1` machine, the education
+voice/agency/equity bridge, explicit fMRI/connectome proxy governance,
+genome-epigenome-connectome-body-memory composition, the
+education/trauma/Qi/reciprocity/law-power macro unifier, and the explanation
+boundary separating narrative guide layers from typed proof and authority
+surfaces. Public symptom is not hidden factorisation, `+1`/`j+1` safety seed is
+not cure or diagnosis, proxy is not hidden chart, association is not causation,
+click is not learning, survey is not voice, access is not equity, nudge is not
+care, formal typing is not proof of social/clinical truth, and no clinical,
+educational, legal, mystical, or power authority is promoted.
 The broader route/lane joining plan is `Docs/support/reference/UnifiedRoutesLanePlan.md`, which
 extends the same receipt-gated architecture across physics, empirical,
 biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
