@@ -1,0 +1,11 @@
+{
+  "contract": "check_ns_triad_schur_directional_audit_scan",
+  "error_count": 0,
+  "errors": [],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_SCHUR_DIRECTIONAL_AUDIT_SCAN_CHECK",
+  "schema_version": "1.0.0",
+  "script_name": "scripts/check_ns_triad_schur_directional_audit_scan.py",
+  "source_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_schur_directional_audit_scan_N128_20260622.json",
+  "status": "ok"
+}

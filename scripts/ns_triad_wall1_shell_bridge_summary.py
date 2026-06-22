@@ -38,6 +38,10 @@ DEFAULT_HESSIAN_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_low_frustration_hessian_scan_N128_20260621.json"
 )
+DEFAULT_SCHUR_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_schur_directional_audit_scan_N128_20260622.json"
+)
 DEFAULT_OUTPUT_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_wall1_shell_bridge_summary_20260621.json"
@@ -47,7 +51,7 @@ CONTROL_CARD = {
     "O": "Summarize the active NS triad Wall 1 shell-level telemetry surfaces.",
     "R": (
         "Join the shell-indexed phase-regime, frame-stability, cocycle-floor, cycle-obstruction, "
-        "and Hessian basin outputs into one compact fail-closed Wall 1 summary."
+        "Hessian basin, and optional Schur directional audit outputs into one compact fail-closed Wall 1 summary."
     ),
     "C": SCRIPT_NAME,
     "S": "Candidate-only shell bridge summary; all outputs remain empirical and non-promoting.",
@@ -88,6 +92,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--cocycle-floor-json", type=Path, default=DEFAULT_COCYCLE_FLOOR_JSON)
     parser.add_argument("--cycle-json", type=Path, default=DEFAULT_CYCLE_JSON)
     parser.add_argument("--hessian-json", type=Path, default=DEFAULT_HESSIAN_JSON)
+    parser.add_argument("--schur-json", type=Path, default=DEFAULT_SCHUR_JSON)
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT_JSON)
     parser.add_argument("--pretty", action="store_true")
     return parser.parse_args()
@@ -136,6 +141,19 @@ def _rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
         "triad_cycle_obstruction_rows",
         "low_frustration_hessian_rows",
         "triad_cocycle_floor_rows",
+    ):
+        value = payload.get(key)
+        if isinstance(value, list):
+            return value
+    return []
+
+
+def _schur_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    for key in (
+        "rows",
+        "schur_rows",
+        "directional_audit_rows",
+        "schur_directional_audit_rows",
     ):
         value = payload.get(key)
         if isinstance(value, list):
@@ -226,6 +244,27 @@ def _lower_bound_support(row: dict[str, Any]) -> tuple[float | None, str | None,
     return best_value, best_source, support_count
 
 
+def _schur_directional_metrics(row: dict[str, Any]) -> dict[str, float | None]:
+    directional_gap = _coerce_float(row.get("schur_directional_gap_proxy"))
+    if directional_gap is None:
+        directional_gap = _coerce_float(row.get("directional_gap_proxy"))
+    directional_lower = _coerce_float(row.get("schur_directional_gap_lower_bound"))
+    if directional_lower is None:
+        directional_lower = _coerce_float(row.get("directional_gap_lower_bound"))
+    directional_residual = _coerce_float(row.get("schur_directional_gap_residual"))
+    if directional_residual is None:
+        directional_residual = _coerce_float(row.get("directional_gap_residual"))
+    directional_ratio = _coerce_float(row.get("schur_directional_gap_ratio"))
+    if directional_ratio is None:
+        directional_ratio = _coerce_float(row.get("directional_gap_ratio"))
+    return {
+        "schur_directional_gap_proxy": directional_gap,
+        "schur_directional_gap_lower_bound": directional_lower,
+        "schur_directional_gap_residual": directional_residual,
+        "schur_directional_gap_ratio": directional_ratio,
+    }
+
+
 def _pearson(xs: list[float], ys: list[float]) -> float | None:
     if len(xs) != len(ys) or len(xs) < 2:
         return None
@@ -251,12 +290,14 @@ def main() -> int:
     cocycle_payload = _read_json(args.cocycle_floor_json)
     cycle_payload = _read_json(args.cycle_json)
     hessian_payload = _read_json(args.hessian_json)
+    schur_payload = _read_json(args.schur_json) if args.schur_json is not None else {}
 
     phase_by_key = {key: row for row in _rows(phase_payload) if (key := _frame_shell_key(row)) is not None}
     cocycle_by_key = {key: row for row in _cocycle_rows(cocycle_payload) if (key := _frame_shell_key(row)) is not None}
     frame_by_frame = {key: row for row in _rows(frame_payload) if (key := _frame_key(row)) is not None}
     cycle_by_frame = {key: row for row in _rows(cycle_payload) if (key := _frame_key(row)) is not None}
     hessian_by_frame = {key: row for row in _rows(hessian_payload) if (key := _frame_key(row)) is not None}
+    schur_by_key = {key: row for row in _schur_rows(schur_payload) if (key := _frame_shell_key(row)) is not None}
 
     shared_keys = sorted(set(phase_by_key) & set(cocycle_by_key))
     bridge_rows: list[dict[str, Any]] = []
@@ -274,6 +315,10 @@ def main() -> int:
     strongest_support_frame_ys: list[float] = []
     floor_ratio_xs: list[float] = []
     floor_ratio_ys: list[float] = []
+    schur_gap_values: list[float] = []
+    schur_gap_lower_bounds: list[float] = []
+    schur_gap_residuals: list[float] = []
+    schur_gap_ratios: list[float] = []
     support_sources: list[str] = []
     support_counts: list[int] = []
 
@@ -284,6 +329,7 @@ def main() -> int:
         frame_row = frame_by_frame.get(frame, {})
         cycle_row = cycle_by_frame.get(frame, {})
         hessian_row = hessian_by_frame.get(frame, {})
+        schur_row = schur_by_key.get(key, {})
         phase_gap = _coerce_float(phase_row.get("optimized_lambda_gap_proxy"))
         cocycle_bound = _coerce_float(cocycle_row.get("mean_cycle_lower_bound"))
         if cocycle_bound is None:
@@ -298,6 +344,7 @@ def main() -> int:
         strongest_support, strongest_source, support_count = _lower_bound_support(cocycle_row)
         cocycle_cycle_defect = _coerce_float(cocycle_row.get("cycle_defect_proxy"))
         cocycle_floor_proxy = _coerce_float(cocycle_row.get("frustration_floor_proxy"))
+        schur_metrics = _schur_directional_metrics(schur_row)
         bridge_rows.append(
             {
                 "frame": int(frame),
@@ -320,6 +367,7 @@ def main() -> int:
                 "frame_stability_margin_proxy": frame_margin,
                 "cycle_rank_proxy": cycle_rank,
                 "best_reference_hessian_proxy": hessian_proxy,
+                **schur_metrics,
             }
         )
         if phase_gap is not None and cocycle_bound is not None:
@@ -334,6 +382,14 @@ def main() -> int:
         if floor_ratio is not None and frame_margin is not None:
             floor_ratio_xs.append(floor_ratio)
             floor_ratio_ys.append(frame_margin)
+        if schur_metrics["schur_directional_gap_proxy"] is not None:
+            schur_gap_values.append(float(schur_metrics["schur_directional_gap_proxy"]))
+        if schur_metrics["schur_directional_gap_lower_bound"] is not None:
+            schur_gap_lower_bounds.append(float(schur_metrics["schur_directional_gap_lower_bound"]))
+        if schur_metrics["schur_directional_gap_residual"] is not None:
+            schur_gap_residuals.append(float(schur_metrics["schur_directional_gap_residual"]))
+        if schur_metrics["schur_directional_gap_ratio"] is not None:
+            schur_gap_ratios.append(float(schur_metrics["schur_directional_gap_ratio"]))
         if strongest_support is not None and strongest_source is not None:
             strongest_supports.append(strongest_support)
             if phase_gap is not None:
@@ -354,12 +410,16 @@ def main() -> int:
         "script_name": SCRIPT_NAME,
         "control_card": CONTROL_CARD,
         "authority": AUTHORITY,
+        "candidate_only": True,
+        "empirical_non_promoting": True,
+        "fail_closed": True,
         "inputs": {
             "phase_regime_json": str(args.phase_regime_json),
             "frame_stability_json": str(args.frame_stability_json),
             "cocycle_floor_json": str(args.cocycle_floor_json),
             "cycle_json": str(args.cycle_json),
             "hessian_json": str(args.hessian_json),
+            "schur_json": str(args.schur_json) if args.schur_json is not None else None,
         },
         "rows": bridge_rows,
         "aggregate": {
@@ -385,6 +445,16 @@ def main() -> int:
                 strongest_support_frame_xs,
                 strongest_support_frame_ys,
             ),
+            "schur_directional_gap_proxy_mean": _mean(schur_gap_values),
+            "schur_directional_gap_proxy_max": max(schur_gap_values) if schur_gap_values else None,
+            "schur_directional_gap_lower_bound_mean": _mean(schur_gap_lower_bounds),
+            "schur_directional_gap_residual_mean": _mean(schur_gap_residuals),
+            "schur_directional_gap_ratio_mean": _mean(schur_gap_ratios),
+            "schur_directional_gap_ratio_max": max(schur_gap_ratios) if schur_gap_ratios else None,
+            "schur_directional_audit_status": (
+                "fail-closed" if schur_payload and schur_gap_values else "unavailable"
+            ),
+            "fail_closed": True,
             "wall1_status": "unproved",
             "theorem_authority": False,
             "clay_authority": False,

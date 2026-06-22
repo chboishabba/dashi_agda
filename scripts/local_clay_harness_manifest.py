@@ -482,6 +482,12 @@ def build_specs() -> list[HarnessSpec]:
     ns_triad_cocycle_floor_scan_out = (
         CHILD_OUT_DIR / "ns_triad_cocycle_floor_scan_smoke.json"
     )
+    ns_triad_cycle_family_lower_bound_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_cycle_family_lower_bound_scan_smoke.json"
+    )
+    ns_triad_schur_directional_audit_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_schur_directional_audit_scan_smoke.json"
+    )
     ns_triad_wall1_shell_bridge_summary_out = (
         CHILD_OUT_DIR / "ns_triad_wall1_shell_bridge_summary_smoke.json"
     )
@@ -616,6 +622,12 @@ def build_specs() -> list[HarnessSpec]:
     )
     ns_triad_cocycle_floor_scan_check_out = (
         CHILD_OUT_DIR / "ns_triad_cocycle_floor_scan_check_smoke.json"
+    )
+    ns_triad_cycle_family_lower_bound_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_cycle_family_lower_bound_scan_check_smoke.json"
+    )
+    ns_triad_schur_directional_audit_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_schur_directional_audit_scan_check_smoke.json"
     )
     ns_triad_wall1_shell_bridge_summary_check_out = (
         CHILD_OUT_DIR / "ns_triad_wall1_shell_bridge_summary_check_smoke.json"
@@ -5259,6 +5271,114 @@ def build_specs() -> list[HarnessSpec]:
             ),
         ),
         HarnessSpec(
+            name="ns_triad_cycle_family_lower_bound_scan",
+            path=script("ns_triad_cycle_family_lower_bound_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_cycle_family_lower_bound_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_cycle_family_lower_bound_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_cycle_family_lower_bound_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_cycle_family_lower_bound_scan.py").exists()
+            else "ns_triad_cycle_family_lower_bound_scan script not found",
+            notes=(
+                "optional Wall 1 cycle-family lower-bound scan",
+                "empirical/non-promoting; estimates the cycle-family quadratic obstruction d^T (C W^-1 C^T)^dagger d",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_cycle_family_lower_bound_scan",
+            path=script("check_ns_triad_cycle_family_lower_bound_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_cycle_family_lower_bound_scan_out),
+                "--output-json",
+                str(ns_triad_cycle_family_lower_bound_scan_check_out),
+            )
+            if ns_triad_cycle_family_lower_bound_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_cycle_family_lower_bound_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_cycle_family_lower_bound_scan_out.exists()
+            and script("check_ns_triad_cycle_family_lower_bound_scan.py").exists()
+            else (
+                "check_ns_triad_cycle_family_lower_bound_scan script not found"
+                if not script("check_ns_triad_cycle_family_lower_bound_scan.py").exists()
+                else "check_ns_triad_cycle_family_lower_bound_scan requires the cycle-family scan output"
+            ),
+            notes=(
+                "optional Wall 1 cycle-family regression gate",
+                "validates non-promoting family-lower-bound, effective-rank, and Gram conditioning telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_schur_directional_audit_scan",
+            path=script("ns_triad_schur_directional_audit_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_schur_directional_audit_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_schur_directional_audit_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_schur_directional_audit_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_schur_directional_audit_scan.py").exists()
+            else "ns_triad_schur_directional_audit_scan script not found",
+            notes=(
+                "optional Wall 1 Schur directional audit",
+                "empirical/non-promoting; measures blockwise K00/K01/K11 and directional Schur-gap proxies",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_schur_directional_audit_scan",
+            path=script("check_ns_triad_schur_directional_audit_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_schur_directional_audit_scan_out),
+                "--output-json",
+                str(ns_triad_schur_directional_audit_scan_check_out),
+            )
+            if ns_triad_schur_directional_audit_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_schur_directional_audit_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_schur_directional_audit_scan_out.exists()
+            and script("check_ns_triad_schur_directional_audit_scan.py").exists()
+            else (
+                "check_ns_triad_schur_directional_audit_scan script not found"
+                if not script("check_ns_triad_schur_directional_audit_scan.py").exists()
+                else "check_ns_triad_schur_directional_audit_scan requires the Schur audit output"
+            ),
+            notes=(
+                "optional Wall 1 Schur-directional regression gate",
+                "validates non-promoting directional q_diag - q_coup and block-gap telemetry",
+            ),
+        ),
+        HarnessSpec(
             name="ns_triad_wall1_shell_bridge_summary",
             path=script("ns_triad_wall1_shell_bridge_summary.py"),
             args=(
@@ -5268,6 +5388,8 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_frame_stability_scan_out),
                 "--cocycle-floor-json",
                 str(ns_triad_cocycle_floor_scan_out),
+                "--schur-json",
+                str(ns_triad_schur_directional_audit_scan_out),
                 "--cycle-json",
                 str(ns_triad_cycle_obstruction_scan_out),
                 "--hessian-json",
@@ -5278,6 +5400,7 @@ def build_specs() -> list[HarnessSpec]:
             if ns_triad_phase_regime_separation_scan_out.exists()
             and ns_triad_frame_stability_scan_out.exists()
             and ns_triad_cocycle_floor_scan_out.exists()
+            and ns_triad_schur_directional_audit_scan_out.exists()
             and ns_triad_cycle_obstruction_scan_out.exists()
             and ns_triad_low_frustration_hessian_scan_out.exists()
             else ("--help",),
@@ -5287,17 +5410,18 @@ def build_specs() -> list[HarnessSpec]:
             if ns_triad_phase_regime_separation_scan_out.exists()
             and ns_triad_frame_stability_scan_out.exists()
             and ns_triad_cocycle_floor_scan_out.exists()
+            and ns_triad_schur_directional_audit_scan_out.exists()
             and ns_triad_cycle_obstruction_scan_out.exists()
             and ns_triad_low_frustration_hessian_scan_out.exists()
             and script("ns_triad_wall1_shell_bridge_summary.py").exists()
             else (
                 "ns_triad_wall1_shell_bridge_summary script not found"
                 if not script("ns_triad_wall1_shell_bridge_summary.py").exists()
-                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs"
+                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including Schur directional audit"
             ),
             notes=(
                 "optional Wall 1 shell bridge summary",
-                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, cycle, and Hessian telemetry",
+                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, Schur, cycle, and Hessian telemetry",
             ),
         ),
         HarnessSpec(

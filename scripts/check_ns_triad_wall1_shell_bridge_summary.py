@@ -92,6 +92,13 @@ def main() -> int:
         errors.append(f"route_decision: must be {SOURCE_ROUTE_DECISION!r}")
     if payload.get("script_name") != SOURCE_SCRIPT_NAME:
         errors.append(f"script_name: must be {SOURCE_SCRIPT_NAME!r}")
+    for key, expected in (
+        ("candidate_only", True),
+        ("empirical_non_promoting", True),
+        ("fail_closed", True),
+    ):
+        if payload.get(key) is not expected:
+            errors.append(f"{key}: must be {expected!r}")
 
     rows = payload.get("rows")
     if not isinstance(rows, list):
@@ -117,6 +124,10 @@ def main() -> int:
             "cycle_defect_proxy",
             "frustration_floor_proxy",
             "strongest_lower_bound_support",
+            "schur_directional_gap_proxy",
+            "schur_directional_gap_lower_bound",
+            "schur_directional_gap_residual",
+            "schur_directional_gap_ratio",
         ):
             value = row.get(key)
             if value is not None and (_finite_float(value) is None or float(value) < -1.0e-12):
@@ -142,6 +153,12 @@ def main() -> int:
             "frustration_floor_ratio_vs_raw_mean",
             "strongest_lower_bound_support_mean",
             "strongest_lower_bound_support_max",
+            "schur_directional_gap_proxy_mean",
+            "schur_directional_gap_proxy_max",
+            "schur_directional_gap_lower_bound_mean",
+            "schur_directional_gap_residual_mean",
+            "schur_directional_gap_ratio_mean",
+            "schur_directional_gap_ratio_max",
         ):
             value = aggregate.get(key)
             if value is not None and (_finite_float(value) is None or float(value) < -1.0e-12):
@@ -150,6 +167,9 @@ def main() -> int:
             aggregate.get("strongest_lower_bound_source_modes"), list
         ):
             errors.append("aggregate.strongest_lower_bound_source_modes: must be list or null")
+        schur_status = aggregate.get("schur_directional_audit_status")
+        if schur_status is not None and schur_status not in ("fail-closed", "unavailable"):
+            errors.append("aggregate.schur_directional_audit_status: must be 'fail-closed' or 'unavailable'")
 
     status = OK_STATUS if not errors else ERROR_STATUS
     receipt = {
