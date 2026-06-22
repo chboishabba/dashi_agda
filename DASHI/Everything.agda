@@ -196,6 +196,7 @@ import DASHI.Crypto.RSAIterationLeakBoundary
 import DASHI.Crypto.RSAKeygenTraceCore
 import DASHI.Crypto.RSAKeygenSourceBoundary
 import DASHI.Crypto.RSAPlusOneIdentitySection
+import DASHI.Algebra.MoonshinePlusOneAnalogue
 import DASHI.Crypto.RSASharedPrimeCollapse
 import DASHI.Crypto.RSAVulnerabilityBoundary
 import DASHI.DCHoTT.All
