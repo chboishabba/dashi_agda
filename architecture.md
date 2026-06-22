@@ -179,14 +179,19 @@ The stage/carry route is now ordered as:
 1. `DASHI.Algebra.StageQuotient`
 2. `DASHI.Algebra.StageQuotientIrreversibilityBoundary`
 3. `DASHI.Interop.CarryCompletionSpectralBridge`
-4. `DASHI.Interop.PrimeLaneStage12ActionAdapter`
-5. prime-local witnesses such as `DASHI.Physics.Closure.P7Stage7C6HexRegression`
+4. `DASHI.Interop.PrimeSuccessorWitness`
+5. `DASHI.Interop.PrimeLaneStage12ActionAdapter`
+6. prime-local witnesses such as `DASHI.Physics.Closure.P7Stage7C6HexRegression`
 
 Architecture rule for this tranche:
 
 - `Stage12FibreSurface` is the global stage/carry/fibre atlas.
+- `Stage12FibreSurface is the spine` for this tranche.
+- `PrimeSuccessorWitness` records the cleaner successor law: `p` is the new prime lane, `p - 1` is the witness-space that proves what `p` can act on, and `+1` is the move from witness-space into the new prime lane.
+- The canonical successor rows are `p2 -> 1`, `p3 -> 2`, `p5 -> 4`, `p7 -> 6`, `p11 -> 10`, and `p13 -> 12`.
 - Prime-local unit-group lanes plug into that atlas through typed local adapters; they do not replace it.
 - The p7 tranche is the first clean prime-local exemplar because `(Z/7Z)^x` has order `6`, aligning naturally with the `HexTruth` lane.
+- `p13` is the natural full Stage12 witness because `13 - 1 = 12`; inside the `0..11` atlas it is recorded as the successor witness over the whole Stage12 carrier rather than as a replacement for that carrier.
 - `P7Stage7C6HexRegression` is therefore a local regression witness over the Stage12 surface, not the definition of Stage12 itself.
 - Future prime lanes should consume the same Stage12 quotient/carry-depth seam rather than inventing parallel stage semantics.
 

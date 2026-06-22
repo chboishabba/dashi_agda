@@ -10,6 +10,7 @@ open import Base369 using (tri-high; tri-low)
 open import LogicTlurey using (overflow; resonance)
 
 import DASHI.Algebra.StageQuotient as StageQuotient
+import DASHI.Interop.PrimeSuccessorWitness as Successor
 import DASHI.Foundations.P7UnitGroupC6Witness as P7C6
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Physics.Closure.P7Stage7C6HexRegression as P7Regression
@@ -72,6 +73,10 @@ record PrimeLaneStage12ActionAdapter : Set where
       StageQuotient.Stage12FibreSurface
     stage12FibreSurfaceIsCanonical :
       stage12FibreSurface ≡ StageQuotient.canonicalStage12FibreSurface
+    successorWitness :
+      Successor.PrimeSuccessorWitness
+    successorWitnessIsCanonical :
+      successorWitness ≡ Successor.canonicalP7PrimeSuccessorWitness
     stageIdentityPoint :
       Atlas.StageAtlasZeroToEleven
     stageIdentityPointIsAtlas7 :
@@ -134,6 +139,10 @@ canonicalP7PrimeLaneStage12ActionAdapter =
         StageQuotient.canonicalStage12FibreSurface
     ; stage12FibreSurfaceIsCanonical =
         refl
+    ; successorWitness =
+        Successor.canonicalP7PrimeSuccessorWitness
+    ; successorWitnessIsCanonical =
+        refl
     ; stageIdentityPoint =
         Atlas.atlas-7
     ; stageIdentityPointIsAtlas7 =
@@ -172,6 +181,7 @@ canonicalP7PrimeLaneStage12ActionAdapter =
         canonicalPrimeLaneStage12ActionAuthorityBits
     ; notes =
         "Stage12FibreSurface is now the general stage/carry/fibre grammar; prime lanes are local unit-action adapters into it."
+      ∷ "The prime-successor rule is explicit here: 6-action ecology +1 = 7-prime lane."
       ∷ "The p7 lane is the first canonical C6/HexTruth local witness: Stage-7 is its identity placement and Stage-6 is its unit-order placement."
       ∷ "atlas-11/rev-2 remains the more global carry-depth seam and is not reducible to the p7 lane."
       ∷ []
