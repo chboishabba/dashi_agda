@@ -11,9 +11,7 @@ open import Data.Nat.DivMod using (_%_)
 import DASHI.Crypto.RSAArithmeticCore as RSAA
 import DASHI.Crypto.RSACRTChamberCore as RSACRT
 import DASHI.Crypto.RSAVulnerabilityBoundary as RSAB
-import DASHI.Algebra.MoonshineBridge as MB
-import CRTPeriod as CRT
-import JFixedPoint as J
+import DASHI.Algebra.MoonshinePlusOneAnalogue as MPA
 
 ------------------------------------------------------------------------
 -- Thin RSA +1 identity-section adapter.
@@ -113,9 +111,6 @@ record RSAPlusOneIdentitySectionRow
     rsaCRTChamberReference :
       RSACRT.RSACRTChamberCore
 
-    rsaVulnerabilityBoundaryReference :
-      RSAB.RSAVulnerabilityBoundary
-
     publicBodyLabel :
       String
 
@@ -129,12 +124,6 @@ record RSAPlusOneIdentitySectionRow
       String
 
     identitySectionLabel :
-      String
-
-    publicLimitationLabel :
-      String
-
-    noBreakWitnessLabel :
       String
 
     publicModulusField :
@@ -191,12 +180,6 @@ record RSAPlusOneIdentitySectionRow
     primeSumBridgeField :
       pAxis + qAxis ≡ publicModulusField - phiField + 1
 
-    noFactorOracle :
-      Bool
-
-    noFactorOracleIsFalse :
-      noFactorOracle ≡ false
-
 open RSAPlusOneIdentitySectionRow public
 
 rsaNPlusOneIdentitySection :
@@ -205,14 +188,11 @@ rsaNPlusOneIdentitySection =
   mkRSAPlusOneIdentitySectionRow
     RSAA.rsaArithmeticCoreSurface
     RSACRT.canonicalRSACRTChamberCore
-    RSAB.canonicalRSAVulnerabilityBoundary
     "public closed composite body"
     "hidden prime axes"
     rsaWitnessEcologyHiddenLabel
     "zero section"
     "identity section"
-    "the identity section is not a factor oracle"
-    "no-break witness"
     rsaPublicModulus
     rsaPublicModulusPlusOne
     rsaPrimeP
@@ -231,51 +211,42 @@ rsaNPlusOneIdentitySection =
     rsaPrimeWitnessRuleQ
     refl
     rsaPrimeSumBridge
-    rsaPlusOneNoFactorOracle
-    refl
 
 ------------------------------------------------------------------------
--- Moonshine analogue row.
---
--- This attaches the existing 196883 -> 196884 witness rather than
--- re-proving it locally.
+-- Boundary receipt wrapper.
 
-record MoonshinePlusOneAnalogueRow : Set₁ where
-  constructor mkMoonshinePlusOneAnalogueRow
+record RSAPlusOneBoundaryReceipt : Set₁ where
+  constructor mkRSAPlusOneBoundaryReceipt
   field
-    analogueLabel :
+    rsaArithmeticRow :
+      RSAPlusOneIdentitySectionRow rsaPrimeP rsaPrimeQ
+
+    rsaVulnerabilityBoundaryReference :
+      RSAB.RSAVulnerabilityBoundary
+
+    publicLimitationLabel :
       String
 
-    periodReference :
-      Nat
+    noBreakWitnessLabel :
+      String
 
-    moonshineCoefficientReference :
-      Nat
-
-    existingBridgeReference :
-      CRT.period + 1 ≡ J.contract J.unit-obs
-
-    scalarBridgeSurface :
-      MB.MoonshineScalarBridge
-
-    analogueCandidateOnly :
+    noFactorOracle :
       Bool
 
-    analogueCandidateOnlyIsTrue :
-      analogueCandidateOnly ≡ true
+    noFactorOracleIsFalse :
+      noFactorOracle ≡ false
 
-open MoonshinePlusOneAnalogueRow public
+open RSAPlusOneBoundaryReceipt public
 
-moonshinePlusOneAnalogueRow :
-  MoonshinePlusOneAnalogueRow
-moonshinePlusOneAnalogueRow =
-  mkMoonshinePlusOneAnalogueRow
-    "196883 + 1 identity-section analogy"
-    CRT.period
-    MB.moonshineCoefficient
-    MB.MoonshineBridge
-    MB.moonshineScalarBridgeSurface
-    true
+rsaPlusOneBoundaryReceipt :
+  RSAPlusOneBoundaryReceipt
+rsaPlusOneBoundaryReceipt =
+  mkRSAPlusOneBoundaryReceipt
+    rsaNPlusOneIdentitySection
+    RSAB.canonicalRSAVulnerabilityBoundary
+    "the identity section is not a factor oracle"
+    "no-break witness"
+    rsaPlusOneNoFactorOracle
     refl
 
 ------------------------------------------------------------------------
@@ -284,11 +255,14 @@ moonshinePlusOneAnalogueRow =
 record RSAPlusOneIdentitySectionReceipt : Set₁ where
   constructor mkRSAPlusOneIdentitySectionReceipt
   field
-    rsaRow :
+    rsaArithmeticRow :
       RSAPlusOneIdentitySectionRow rsaPrimeP rsaPrimeQ
 
+    rsaBoundaryReceipt :
+      RSAPlusOneBoundaryReceipt
+
     moonshineRow :
-      MoonshinePlusOneAnalogueRow
+      MPA.MoonshinePlusOneAnalogueRow
 
     rsaWitnessEcologyHiddenRow :
       String
@@ -303,6 +277,7 @@ rsaPlusOneIdentitySectionReceipt :
 rsaPlusOneIdentitySectionReceipt =
   mkRSAPlusOneIdentitySectionReceipt
     rsaNPlusOneIdentitySection
-    moonshinePlusOneAnalogueRow
+    rsaPlusOneBoundaryReceipt
+    MPA.canonicalMoonshinePlusOneAnalogueRow
     rsaWitnessEcologyHidden
     refl
