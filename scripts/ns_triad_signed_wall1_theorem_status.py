@@ -31,6 +31,7 @@ DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_continuous_coherence_capacity_scan_N128_20260623.json"
 )
+DEFAULT_K_N_EXACT_IDENTITY_JSON = DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON
 DEFAULT_SPECTRAL_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_signed_spectral_audit_scan_N128_20260622.json"
@@ -63,6 +64,7 @@ def _parse_args() -> argparse.Namespace:
         type=Path,
         default=DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON,
     )
+    parser.add_argument("--k-n-exact-identity-json", type=Path, default=DEFAULT_K_N_EXACT_IDENTITY_JSON)
     parser.add_argument("--spectral-json", type=Path, default=DEFAULT_SPECTRAL_JSON)
     parser.add_argument("--cocycle-json", type=Path, default=DEFAULT_COCYCLE_JSON)
     parser.add_argument("--schur-json", type=Path, default=DEFAULT_SCHUR_JSON)
@@ -247,7 +249,7 @@ def main() -> int:
     reconciliation_aggregate = reconciliation.get("aggregate", {}) if isinstance(reconciliation, dict) else {}
     carrier_ranking = _read_json_or_empty(args.carrier_ranking_json)
     carrier_ranking_aggregate = carrier_ranking.get("aggregate", {}) if isinstance(carrier_ranking, dict) else {}
-    continuous_coherence_capacity = _read_json_or_empty(args.continuous_coherence_capacity_json)
+    continuous_coherence_capacity = _read_json_or_empty(args.k_n_exact_identity_json)
     continuous_coherence_capacity_aggregate = (
         continuous_coherence_capacity.get("aggregate", {})
         if isinstance(continuous_coherence_capacity, dict)
@@ -475,6 +477,35 @@ def main() -> int:
             if summary_rows
             else "missing"
         ),
+        "k_n_exact_identity_status": (
+            "fail-closed"
+            if continuous_coherence_status == "fail-closed"
+            else "partial"
+            if continuous_coherence_status == "partial"
+            else "unavailable"
+        ),
+        "k_n_exact_identity_source": continuous_coherence_source,
+        "k_n_exact_identity_candidate_only": True,
+        "k_n_exact_identity_fail_closed": True,
+        "k_n_exact_identity_independent_proof_certificate": False,
+        "k_n_exact_identity_route_explanatory_fraction_mean": _first_float_from_payload(
+            continuous_coherence_capacity,
+            (
+                "k_n_exact_identity_route_explanatory_fraction_mean",
+                "k_n_exact_identity_capacity_mean",
+                "k_n_exact_identity_support_mean",
+                "continuous_coherence_route_explanatory_fraction_mean",
+                "continuous_coherence_capacity_mean",
+                "continuous_coherence_capacity_proxy_mean",
+                "continuous_coherence_deficit_proxy_mean",
+                "continuous_positive_route_capacity_mean",
+                "continuous_positive_route_support_mean",
+                "positive_route_capacity_mean",
+                "positive_route_support_mean",
+                "observed_floor_ratio_mean",
+                "observed_floor_proxy_mean",
+            ),
+        ),
         "continuous_coherence_capacity_status": (
             "fail-closed"
             if continuous_coherence_status == "fail-closed"
@@ -554,15 +585,15 @@ def main() -> int:
 
     continuous_wall1_rows = [
         {
-            "surface": "continuous_coherence_carrier",
+            "surface": "k_n_exact_identity_carrier",
             "module_path": "DASHI/Physics/Closure/NSTriadContinuousCoherenceCarrierBoundary.agda",
             "receipt_name": "NSTriadContinuousCoherenceCarrierBoundary",
-            "route_name": "continuous-coherence-carrier-wall-1a",
+            "route_name": "k-n-exact-identity-wall-1a",
             "boundary_summary": (
-                "The positive Wall 1a carrier is the continuous signed triadic coherence carrier, while the current signed-XOR carrier is no longer canonical."
+                "The K_N exact-identity candidate is the positive Wall 1a carrier, while the old signed-XOR route is legacy and non-canonical."
             ),
             "bridge_summary": (
-                "This surface is derived from observed floor telemetry and keeps the positive theorem target explicit without claiming an independent certificate."
+                "This exact-identity surface is candidate-only and fail-closed; it keeps the positive theorem target explicit without claiming an independent certificate."
             ),
             "candidate_only": True,
             "fail_closed": True,
@@ -571,7 +602,9 @@ def main() -> int:
             "clay_promoted": False,
             "wall1_status": "unproved",
             "continuous_coherence_route_open": True,
-            "continuous_coherence_status": aggregate["continuous_coherence_capacity_status"],
+            "k_n_exact_identity_route_open": True,
+            "k_n_exact_identity_status": aggregate["k_n_exact_identity_status"],
+            "continuous_coherence_status": aggregate["k_n_exact_identity_status"],
         },
         {
             "surface": "coherence_deficit_floor",
@@ -591,7 +624,9 @@ def main() -> int:
             "clay_promoted": False,
             "wall1_status": "unproved",
             "continuous_coherence_route_open": True,
-            "continuous_coherence_status": aggregate["continuous_coherence_capacity_status"],
+            "k_n_exact_identity_route_open": True,
+            "k_n_exact_identity_status": aggregate["k_n_exact_identity_status"],
+            "continuous_coherence_status": aggregate["k_n_exact_identity_status"],
         },
     ]
 
@@ -613,6 +648,15 @@ def main() -> int:
             "signed_carrier_reconciliation_source": aggregate["signed_carrier_reconciliation_source"],
             "carrier_identification_source": aggregate["carrier_identification_source"],
             "signed_wall1_route_names": [row["route_name"] for row in signed_wall1_rows],
+            "k_n_exact_identity_row_count": len(continuous_wall1_rows),
+            "k_n_exact_identity_surface_count": len({row["surface"] for row in continuous_wall1_rows}),
+            "k_n_exact_identity_status": "fail-closed",
+            "k_n_exact_identity_candidate_only": True,
+            "k_n_exact_identity_fail_closed": True,
+            "k_n_exact_identity_theorem_promoted": False,
+            "k_n_exact_identity_full_ns_promoted": False,
+            "k_n_exact_identity_clay_promoted": False,
+            "k_n_exact_identity_route_names": [row["route_name"] for row in continuous_wall1_rows],
             "continuous_wall1_row_count": len(continuous_wall1_rows),
             "continuous_wall1_surface_count": len({row["surface"] for row in continuous_wall1_rows}),
             "continuous_wall1_status": "fail-closed",
@@ -640,12 +684,14 @@ def main() -> int:
             "reconciliation_json": str(args.reconciliation_json),
             "carrier_ranking_json": str(args.carrier_ranking_json),
             "continuous_coherence_capacity_json": str(args.continuous_coherence_capacity_json),
+            "k_n_exact_identity_json": str(args.k_n_exact_identity_json),
             "spectral_json": str(args.spectral_json),
             "cocycle_json": str(args.cocycle_json),
             "schur_json": str(args.schur_json),
         },
         "rows": summary_rows,
         "signed_wall1_rows": signed_wall1_rows,
+        "k_n_exact_identity_rows": continuous_wall1_rows,
         "continuous_wall1_rows": continuous_wall1_rows,
         "aggregate": aggregate,
     }
