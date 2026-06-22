@@ -102,6 +102,19 @@ Current odd-lane / topology intake note for `2026-06-20`:
   stage/carry/fibre grammar, prime lanes act through typed local adapters,
   and the p7 tranche is the first canonical `C6` / `HexTruth` local witness
   rather than a parallel stage spine.
+- Generic quotient-action and p11 second-lane tranche is recorded. Artifacts:
+  `DASHI/Foundations/PrimeLaneUnitActionQuotient.agda`,
+  `DASHI/Foundations/P11UnitGroupC10Witness.agda`,
+  `DASHI/Foundations/P11HexTruthActionQuotient.agda`,
+  `DASHI/Geometry/P11UnitActionTreeIsometry.agda`,
+  `DASHI/Core/P11EquivariantOddFieldGate.agda`, and
+  `DASHI/Physics/Closure/P11Stage11C10Regression.agda`. The route now
+  records one shared typed quotient-action surface and a second concrete
+  `p11 / C10` lane with Stage-11 identity, Stage-10 unit-order, p11-specific
+  tree/isometry receipts, p11-specific odd-field equivariance receipts, and
+  an explicit fail-closed HexTruth boundary where the half-turn transport is
+  not group-faithful on the reduced surface. This remains candidate-only and
+  fail-closed: the general all-primes local unit-group action remains open.
 Current NS Clay action note for `2026-06-20`:
 - Quantitative cycle-defect lower-bound tranche is now recorded for
   `2026-06-22`. Artifacts:

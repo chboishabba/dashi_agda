@@ -137,6 +137,21 @@ rows alone. For each stage `n`, the immediate witness is `n + 1`, and the
 factorization of that successor tells you what kind of witness has appeared.
 The repo now treats three witness kinds as first-class documentation language:
 prime successor witnesses, prime-power depth witnesses, and composite coupling witnesses.
+The next quotient-action generalization now adds a generic local surface plus a
+second concrete prime lane:
+`DASHI.Foundations.PrimeLaneUnitActionQuotient`,
+`DASHI.Foundations.P11UnitGroupC10Witness`,
+`DASHI.Foundations.P11HexTruthActionQuotient`,
+`DASHI.Geometry.P11UnitActionTreeIsometry`,
+`DASHI.Core.P11EquivariantOddFieldGate`, and
+`DASHI.Physics.Closure.P11Stage11C10Regression`. These modules record a shared
+typed quotient-action surface, a `p11 / C10` local witness with Stage-11
+identity and Stage-10 unit-order rows, p11-specific address/depth and odd-field
+consumers, and an explicit fail-closed HexTruth transport boundary where the
+p11 half-turn does not descend as cleanly as the p7 Möbius element. This
+remains candidate-only and fail-closed: the repo now has a generic surface and
+two concrete prime lanes, not a promoted all-primes `(\u2124/p\u2124)^×`
+action theorem.
 Prime successor witnesses open a new irreducible lane, as in
 `1 -> 2`, `2 -> 3`, `4 -> 5`, `6 -> 7`, `10 -> 11`, and `12 -> 13`.
 Prime-power depth witnesses deepen an existing axis rather than opening a new

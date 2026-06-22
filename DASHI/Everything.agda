@@ -166,6 +166,7 @@ import DASHI.Core.OddGrassmannCoefficientGate
 import DASHI.Core.OddSSP369FieldGate
 import DASHI.Core.OddSSP369FocusedPrimeGate
 import DASHI.Core.OddSSPCoefficientGate
+import DASHI.Core.P11EquivariantOddFieldGate
 import DASHI.Core.P7EquivariantOddFieldGate
 import DASHI.Core.OperatorShapeNonAuthorityCore
 import DASHI.Core.OperatorTypes
@@ -193,6 +194,7 @@ import DASHI.Crypto.RSAEntropySourceStatisticalBoundary
 import DASHI.Crypto.RSAIterationLeakBoundary
 import DASHI.Crypto.RSAKeygenTraceCore
 import DASHI.Crypto.RSAKeygenSourceBoundary
+import DASHI.Crypto.RSAPlusOneIdentitySection
 import DASHI.Crypto.RSASharedPrimeCollapse
 import DASHI.Crypto.RSAVulnerabilityBoundary
 import DASHI.DCHoTT.All
@@ -249,7 +251,10 @@ import DASHI.Foundations.PMDeductionBridge
 import DASHI.Foundations.PMVol1ChapterIndexCore
 import DASHI.Foundations.P7HexTruthActionQuotient
 import DASHI.Foundations.P7UnitGroupC6Witness
+import DASHI.Foundations.P11HexTruthActionQuotient
+import DASHI.Foundations.P11UnitGroupC10Witness
 import DASHI.Foundations.PhysicsLinearAnalysisParity
+import DASHI.Foundations.PrimeLaneUnitActionQuotient
 import DASHI.Foundations.PrincipiaVol1DashiBridge
 import DASHI.Foundations.SSPTritCarrier
 import DASHI.Foundations.SSPPrimeLaneUnitAction
@@ -272,6 +277,7 @@ import DASHI.Geometry.DifferentialGeometryParity
 import DASHI.Geometry.KleinClosureReceipt
 import DASHI.Geometry.MobiusOrientationGate
 import DASHI.Geometry.P7UnitActionTreeIsometry
+import DASHI.Geometry.P11UnitActionTreeIsometry
 import DASHI.Geometry.SSP369SymmetryIsometry
 import DASHI.Geometry.SSP369TreeAutomorphism
 import DASHI.Geometry.SSP369Ultrametric
@@ -579,6 +585,7 @@ import DASHI.Physics.Closure.PerelmanBTAnalogueDashboard
 import DASHI.Physics.Closure.PerelmanBTLedgerExactCounts
 import DASHI.Physics.Closure.ProjectionNonlocalityDefectLaplacianZeroModeSheaf
 import DASHI.Physics.Closure.ProjectionNonlocalityLeakagePrincipleBoundary
+import DASHI.Physics.Closure.P11Stage11C10Regression
 import DASHI.Physics.Closure.P7Stage7C6HexRegression
 import DASHI.Physics.Closure.SSPPrimeLane369ActionPhaseBridge
 import DASHI.Physics.Closure.SSPPrimeLane369BTBridge
