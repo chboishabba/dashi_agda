@@ -30,6 +30,7 @@ data StackLane : Set where
   yinLane : StackLane
   yangLane : StackLane
   polarityLane : StackLane
+  geometryLane : StackLane
   phaseLane : StackLane
   bettiLane : StackLane
   fieldLane : StackLane
@@ -94,6 +95,7 @@ canonicalStackLanes =
   yinLane
   ∷ yangLane
   ∷ polarityLane
+  ∷ geometryLane
   ∷ phaseLane
   ∷ bettiLane
   ∷ fieldLane
@@ -104,9 +106,9 @@ canonicalStackLaneCount : Nat
 canonicalStackLaneCount =
   listCount canonicalStackLanes
 
-canonicalStackLaneCountIs7 :
-  canonicalStackLaneCount ≡ 7
-canonicalStackLaneCountIs7 = refl
+canonicalStackLaneCountIs8 :
+  canonicalStackLaneCount ≡ 8
+canonicalStackLaneCountIs8 = refl
 
 canonicalBlockedAuthorities : List String
 canonicalBlockedAuthorities =
@@ -127,6 +129,7 @@ canonicalReceiptReferenceNames =
   "DASHI.Culture.YinYangPolarityBoundary.canonicalYinYangPolarityBoundaryReceipt"
   ∷ "DASHI.Interop.TaoYinYangAdapter.canonicalTaoYinYangBridgeReceipt"
   ∷ "DASHI.Interop.YinYangQiAdapter.canonicalYinYangQiBridgeReceipt"
+  ∷ "DASHI.Culture.YinYangSymbolGeometryBoundary.canonicalYinYangSymbolGeometryBoundaryReceipt"
   ∷ "DASHI.Interop.PolarityPhaseFieldBridge.canonicalPolarityPhaseFieldBridge"
   ∷ "DASHI.Interop.PolarityBettiSupportBoundary.canonicalPolarityBettiSupportBoundaryReceipt"
   ∷ "DASHI.Interop.BettiQiAdapter.canonicalBettiQiBridgeReceipt"
@@ -175,6 +178,21 @@ canonicalSummaryRows =
     "DASHI.Interop.YinYangQiAdapter"
     "yin/yang polarity rows carried into Qi carrier, role, and formal-lens surfaces"
     ( "DASHI.Interop.YinYangQiAdapter.canonicalYinYangQiBridgeReceipt"
+      ∷ "DASHI.Culture.YinYangPolarityBoundary.canonicalYinYangPolarityBoundaryReceipt"
+      ∷ []
+    )
+    true
+    refl
+    true
+    refl
+    false
+    refl
+  ∷ mkSummaryRow
+    "yin-yang symbol geometry summary"
+    geometryLane
+    "DASHI.Culture.YinYangSymbolGeometryBoundary"
+    "formulaic cartesian and set-theoretic receipt for the canonical yin-yang symbol geometry"
+    ( "DASHI.Culture.YinYangSymbolGeometryBoundary.canonicalYinYangSymbolGeometryBoundaryReceipt"
       ∷ "DASHI.Culture.YinYangPolarityBoundary.canonicalYinYangPolarityBoundaryReceipt"
       ∷ []
     )
@@ -297,6 +315,25 @@ canonicalGovernanceRows =
     canonicalReceiptReferenceNames
     ( "canonical receipt names are tracked explicitly"
       ∷ "future sibling modules may supply the referenced receipts"
+      ∷ []
+    )
+    true
+    refl
+    true
+    refl
+    false
+    refl
+  ∷ mkGovernanceRow
+    "symbol geometry governance"
+    geometryLane
+    "DASHI.Promotion.PolarityFieldObligationIndex"
+    authorityBlockedGate
+    ( "DASHI.Culture.YinYangSymbolGeometryBoundary.canonicalYinYangSymbolGeometryBoundaryReceipt"
+      ∷ "DASHI.Culture.YinYangPolarityBoundary.canonicalYinYangPolarityBoundaryReceipt"
+      ∷ []
+    )
+    ( "yin-yang symbol geometry remains a candidate-only formulaic boundary"
+      ∷ "symbol geometry does not promote metaphysical, empirical, or doctrine authority"
       ∷ []
     )
     true
@@ -620,21 +657,21 @@ canonicalPolarityFieldObligationIndexReceipt =
         ∷ []
     }
 
-canonicalSummaryRowCountIs7 :
-  canonicalSummaryRowCount ≡ 7
-canonicalSummaryRowCountIs7 = refl
+canonicalSummaryRowCountIs8 :
+  canonicalSummaryRowCount ≡ 8
+canonicalSummaryRowCountIs8 = refl
 
-canonicalGovernanceRowCountIs6 :
-  canonicalGovernanceRowCount ≡ 6
-canonicalGovernanceRowCountIs6 = refl
+canonicalGovernanceRowCountIs7 :
+  canonicalGovernanceRowCount ≡ 7
+canonicalGovernanceRowCountIs7 = refl
 
-canonicalTotalRowCountIs13 :
-  canonicalTotalRowCount ≡ 13
-canonicalTotalRowCountIs13 = refl
+canonicalTotalRowCountIs15 :
+  canonicalTotalRowCount ≡ 15
+canonicalTotalRowCountIs15 = refl
 
-canonicalReceiptReferenceNameCountIs7 :
-  canonicalReceiptReferenceNameCount ≡ 7
-canonicalReceiptReferenceNameCountIs7 = refl
+canonicalReceiptReferenceNameCountIs8 :
+  canonicalReceiptReferenceNameCount ≡ 8
+canonicalReceiptReferenceNameCountIs8 = refl
 
 canonicalSummaryRowsCandidateOnly :
   AllSummaryRowsCandidateOnly canonicalSummaryRows

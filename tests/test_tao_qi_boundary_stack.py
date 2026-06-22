@@ -13,6 +13,7 @@ def test_everything_imports_tao_qi_boundary_stack() -> None:
         "import DASHI.Culture.TaoChapterReadingReceipt",
         "import DASHI.Culture.TaoOperatorGrammar",
         "import DASHI.Culture.YinYangPolarityBoundary",
+        "import DASHI.Culture.YinYangSymbolGeometryBoundary",
         "import DASHI.Interop.TaoYinYangAdapter",
         "import DASHI.Interop.YinYangQiAdapter",
         "import DASHI.Interop.PolarityPhaseFieldBridge",
@@ -41,13 +42,15 @@ def test_promotion_index_references_tao_qi_boundary_surface() -> None:
         in text
     )
     assert "import DASHI.Promotion.TaoQiObligationIndex as TaoQiBoundary" in text
+    assert '"DASHI.Culture.YinYangSymbolGeometryBoundary"' in text
+    assert '"canonicalYinYangSymbolGeometryBoundaryReceipt"' in text
     assert '"DASHI.Promotion.PolarityFieldObligationIndex"' in text
     assert '"canonicalPolarityFieldObligationIndexReceipt"' in text
     assert '"DASHI.Promotion.TaoQiObligationIndex"' in text
     assert '"canonicalTaoQiObligationIndexReceipt"' in text
     assert '"DASHI.Interop.PolarityBettiSupportBoundary"' in text
     assert '"canonicalPolarityBettiSupportBoundary"' in text
-    assert "crossDomainInterpretationBoundaryCount = 26" in text
+    assert "crossDomainInterpretationBoundaryCount = 27" in text
 
 
 def test_tao_qi_obligation_module_mentions_full_bridge_stack() -> None:
@@ -60,6 +63,7 @@ def test_tao_qi_obligation_module_mentions_full_bridge_stack() -> None:
     assert "canonicalTaoSourceReceipt" in text
     assert "canonicalTaoOperatorGrammarReceipt" in text
     assert "canonicalYinYangPolarityBoundaryReceipt" in text
+    assert "canonicalYinYangSymbolGeometryBoundaryReceipt" in text
     assert "canonicalTaoYinYangBridgeReceipt" in text
     assert "canonicalYinYangQiBridgeReceipt" in text
     assert "canonicalPolarityPhaseFieldBridge" in text
@@ -91,11 +95,13 @@ def test_polarity_field_index_mentions_actual_middle_layer_modules() -> None:
     ).read_text(encoding="utf-8")
 
     assert "DASHI.Culture.YinYangPolarityBoundary" in text
+    assert "DASHI.Culture.YinYangSymbolGeometryBoundary" in text
     assert "DASHI.Interop.TaoYinYangAdapter" in text
     assert "DASHI.Interop.YinYangQiAdapter" in text
     assert "DASHI.Interop.PolarityPhaseFieldBridge" in text
     assert "DASHI.Interop.PolarityBettiSupportBoundary" in text
     assert "DASHI.Interop.BettiQiAdapter" in text
+    assert "canonicalYinYangSymbolGeometryBoundaryReceipt" in text
     assert "canonicalPolarityBettiSupportBoundaryReceipt" in text
     assert "canonicalBettiQiBridgeReceipt" in text
     assert "canonicalPolarityFieldObligationIndexReceipt" in text
