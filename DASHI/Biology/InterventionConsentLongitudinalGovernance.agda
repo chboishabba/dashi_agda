@@ -49,6 +49,8 @@ data GovernanceRoute : Set where
   coerciveInstitutionalUseRoute :
     GovernanceRoute
 
+data Never : Set where
+
 AdmissibleGovernanceRoute :
   GovernanceRoute →
   Set
@@ -60,8 +62,6 @@ AdmissibleGovernanceRoute diagnosisRoute = Never
 AdmissibleGovernanceRoute treatmentRoute = Never
 AdmissibleGovernanceRoute clinicalAuthorityRoute = Never
 AdmissibleGovernanceRoute coerciveInstitutionalUseRoute = Never
-
-data Never : Set where
 
 forcedDisclosureRouteRejected :
   AdmissibleGovernanceRoute forcedDisclosureRoute →
@@ -1019,6 +1019,24 @@ canonicalInterventionConsentLongitudinalGovernance =
     refl
     "Candidate-only longitudinal governance for body-memory intervention pacing, consent, review, and +1 safety/agency seed protection."
 
+record InterventionConsentLongitudinalGovernanceCertificate : Set where
+  constructor mkInterventionConsentLongitudinalGovernanceCertificate
+  field
+    governance :
+      InterventionConsentLongitudinalGovernance
+
+    governanceIsCanonical :
+      governance ≡ canonicalInterventionConsentLongitudinalGovernance
+
+open InterventionConsentLongitudinalGovernanceCertificate public
+
+canonicalInterventionConsentLongitudinalGovernanceCertificate :
+  InterventionConsentLongitudinalGovernanceCertificate
+canonicalInterventionConsentLongitudinalGovernanceCertificate =
+  mkInterventionConsentLongitudinalGovernanceCertificate
+    canonicalInterventionConsentLongitudinalGovernance
+    refl
+
 canonicalGovernanceRouteIsCandidate :
   governanceRoute canonicalInterventionConsentLongitudinalGovernance
   ≡
@@ -1092,4 +1110,3 @@ canonicalLongitudinalReviewGateCountIsCanonical :
   canonicalLongitudinalReviewGateCount ≡ suc (suc (suc (suc (suc (suc (suc zero)))))) 
 canonicalLongitudinalReviewGateCountIsCanonical =
   refl
-

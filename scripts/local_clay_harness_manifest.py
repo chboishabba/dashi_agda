@@ -5657,8 +5657,8 @@ def build_specs() -> list[HarnessSpec]:
                 else "ns_triad_continuous_coherence_capacity_scan requires the cocycle-floor scan output"
             ),
             notes=(
-                "optional Wall 1 continuous-coherence-capacity scan",
-                "empirical/non-promoting; fail-closed candidate-only surface for the continuous coherence capacity telemetry",
+                "optional Wall 1 K_N exact-identity scan",
+                "empirical/non-promoting; fail-closed candidate-only surface for the K_N exact-identity telemetry",
             ),
         ),
         HarnessSpec(
@@ -5683,8 +5683,8 @@ def build_specs() -> list[HarnessSpec]:
                 else "check_ns_triad_continuous_coherence_capacity_scan requires the continuous-coherence-capacity scan output"
             ),
             notes=(
-                "optional Wall 1 continuous-coherence-capacity regression gate",
-                "validates fail-closed candidate-only and aggregate bookkeeping for the continuous coherence capacity surface",
+                "optional Wall 1 K_N exact-identity regression gate",
+                "validates fail-closed candidate-only and aggregate bookkeeping for the K_N exact-identity surface",
             ),
         ),
         HarnessSpec(
@@ -5787,6 +5787,8 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_signed_carrier_reconciliation_scan_out),
                 "--carrier-ranking-json",
                 str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
+                "--k-n-exact-identity-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
                 "--continuous-coherence-capacity-json",
                 str(ns_triad_continuous_coherence_capacity_scan_out),
                 "--spectral-json",
@@ -5820,11 +5822,11 @@ def build_specs() -> list[HarnessSpec]:
             else (
                 "ns_triad_signed_wall1_theorem_status script not found"
                 if not script("ns_triad_signed_wall1_theorem_status.py").exists()
-                else "ns_triad_signed_wall1_theorem_status requires signed gaugeability, reconciliation, carrier-ranking, continuous coherence, signed spectral, cocycle, and Schur outputs"
+                else "ns_triad_signed_wall1_theorem_status requires signed gaugeability, reconciliation, carrier-ranking, K_N exact-identity, signed spectral, cocycle, and Schur outputs"
             ),
             notes=(
                 "optional Wall 1 signed theorem-status summary",
-                "empirical/non-promoting; joins signed-XOR, reconciliation, carrier-ranking, signed-spectrum, cocycle-floor, and Schur telemetry into one fail-closed surface",
+                "empirical/non-promoting; joins signed-XOR, reconciliation, carrier-ranking, K_N exact-identity, signed-spectrum, cocycle-floor, and Schur telemetry into one fail-closed surface",
             ),
         ),
         HarnessSpec(
@@ -5869,6 +5871,8 @@ def build_specs() -> list[HarnessSpec]:
                 str(ns_triad_signed_carrier_reconciliation_scan_out),
                 "--signed-wall1-carrier-ranking-json",
                 str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
+                "--k-n-exact-identity-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
                 "--continuous-coherence-capacity-json",
                 str(ns_triad_continuous_coherence_capacity_scan_out),
                 "--cycle-json",
@@ -5916,11 +5920,11 @@ def build_specs() -> list[HarnessSpec]:
             else (
                 "ns_triad_wall1_shell_bridge_summary script not found"
                 if not script("ns_triad_wall1_shell_bridge_summary.py").exists()
-                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including signed theorem-status, signed reconciliation, signed carrier ranking, continuous coherence capacity, cycle-packing, K01 geometry, and Schur directional audit"
+                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including signed theorem-status, signed reconciliation, signed carrier ranking, K_N exact-identity, cycle-packing, K01 geometry, and Schur directional audit"
             ),
             notes=(
                 "optional Wall 1 shell bridge summary",
-                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, signed theorem-status, signed reconciliation, signed carrier ranking, continuous coherence capacity, cycle-packing, K01 geometry, Schur, cycle, and Hessian telemetry",
+                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, signed theorem-status, signed reconciliation, signed carrier ranking, K_N exact-identity, cycle-packing, K01 geometry, Schur, cycle, and Hessian telemetry",
             ),
         ),
         HarnessSpec(

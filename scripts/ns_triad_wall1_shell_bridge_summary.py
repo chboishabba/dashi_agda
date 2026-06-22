@@ -62,6 +62,10 @@ DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_continuous_coherence_capacity_scan_N128_20260623.json"
 )
+DEFAULT_K_N_EXACT_IDENTITY_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_kn_exact_identity_scan_N128_20260623.json"
+)
 DEFAULT_SIGNED_WALL1_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_signed_wall1_theorem_status_20260622.json"
@@ -75,17 +79,17 @@ CONTROL_CARD = {
     "O": "Summarize the active NS triad Wall 1 shell-level telemetry surfaces.",
     "R": (
         "Join the shell-indexed phase-regime, frame-stability, cocycle-floor, cycle-obstruction, "
-        "cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, signed-XOR/signed-spectral Wall 1 receipts, the reconciliation/carrier-ranking scans, and the continuous-coherence-capacity scan into one compact fail-closed Wall 1 summary."
+        "cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, signed-XOR/signed-spectral Wall 1 receipts, the reconciliation/carrier-ranking scans, and the K_N exact-identity scan into one compact fail-closed Wall 1 summary."
     ),
     "C": SCRIPT_NAME,
-    "S": "Candidate-only shell bridge summary; all outputs remain empirical and non-promoting.",
+    "S": "Candidate-only shell bridge summary; the K_N exact-identity route is fail-closed and the old signed route remains legacy.",
     "L": (
-        "Read each shell-level JSON surface plus the signed Wall 1 receipt, the reconciliation/carrier-ranking scans, and the continuous-coherence-capacity surface, normalize onto shared frame-shell keys, "
+        "Read each shell-level JSON surface plus the signed Wall 1 receipt, the reconciliation/carrier-ranking scans, and the K_N exact-identity surface, normalize onto shared frame-shell keys, "
         "compute compact correlations, and emit explicit unproved Wall 1 markers."
     ),
     "P": ROUTE_DECISION,
     "G": "No theorem, continuation, or Clay claim is inferred from this bridge summary.",
-    "F": "Wall 1 remains unproved; the signed Wall 1 receipt, reconciliation/carrier-ranking scans, and continuous-coherence-capacity surface only sharpen the finite-dimensional telemetry surface.",
+    "F": "Wall 1 remains unproved; the signed Wall 1 receipt, reconciliation/carrier-ranking scans, and K_N exact-identity surface only sharpen the finite-dimensional telemetry surface.",
 }
 
 LOWER_BOUND_SUPPORT_KEYS = (
@@ -127,6 +131,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--signed-wall1-reconciliation-json", type=Path, default=DEFAULT_SIGNED_WALL1_RECONCILIATION_JSON)
     parser.add_argument("--signed-wall1-carrier-ranking-json", type=Path, default=DEFAULT_SIGNED_WALL1_CARRIER_RANKING_JSON)
     parser.add_argument("--continuous-coherence-capacity-json", type=Path, default=DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON)
+    parser.add_argument("--k-n-exact-identity-json", type=Path, default=DEFAULT_K_N_EXACT_IDENTITY_JSON)
     parser.add_argument("--signed-wall1-json", type=Path, default=DEFAULT_SIGNED_WALL1_JSON)
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT_JSON)
     parser.add_argument("--pretty", action="store_true")
@@ -593,7 +598,7 @@ def main() -> int:
     except Exception:
         signed_wall1_carrier_ranking_payload = {}
     try:
-        continuous_coherence_capacity_payload = _read_json(args.continuous_coherence_capacity_json)
+        continuous_coherence_capacity_payload = _read_json(args.k_n_exact_identity_json)
     except Exception:
         continuous_coherence_capacity_payload = {}
     try:
@@ -695,6 +700,13 @@ def main() -> int:
     continuous_coherence_capacity_aggregate_fail_closed = _payload_fail_closed(
         continuous_coherence_capacity_aggregate
     )
+    k_n_exact_identity_input_status = continuous_coherence_capacity_input_status
+    k_n_exact_identity_status = continuous_coherence_capacity_status
+    k_n_exact_identity_candidate_only = continuous_coherence_capacity_candidate_only
+    k_n_exact_identity_fail_closed = continuous_coherence_capacity_fail_closed
+    k_n_exact_identity_aggregate_status = continuous_coherence_capacity_aggregate_status
+    k_n_exact_identity_aggregate_candidate_only = continuous_coherence_capacity_aggregate_candidate_only
+    k_n_exact_identity_aggregate_fail_closed = continuous_coherence_capacity_aggregate_fail_closed
     for row in signed_wall1_rows:
         if not isinstance(row, dict):
             continue
@@ -705,13 +717,17 @@ def main() -> int:
     for row in continuous_coherence_capacity_rows:
         if not isinstance(row, dict):
             continue
-        row["input_status"] = continuous_coherence_capacity_input_status
-        row["status"] = continuous_coherence_capacity_status
-        row["candidate_only"] = continuous_coherence_capacity_candidate_only
-        row["fail_closed"] = continuous_coherence_capacity_fail_closed
-        row["aggregate_status"] = continuous_coherence_capacity_aggregate_status
-        row["aggregate_candidate_only"] = continuous_coherence_capacity_aggregate_candidate_only
-        row["aggregate_fail_closed"] = continuous_coherence_capacity_aggregate_fail_closed
+        row["input_status"] = k_n_exact_identity_input_status
+        row["status"] = k_n_exact_identity_status
+        row["candidate_only"] = k_n_exact_identity_candidate_only
+        row["fail_closed"] = k_n_exact_identity_fail_closed
+        row["aggregate_status"] = k_n_exact_identity_aggregate_status
+        row["aggregate_candidate_only"] = k_n_exact_identity_aggregate_candidate_only
+        row["aggregate_fail_closed"] = k_n_exact_identity_aggregate_fail_closed
+        row["continuous_coherence_route_open"] = True
+        row["k_n_exact_identity_route_open"] = True
+        row["k_n_exact_identity_status"] = k_n_exact_identity_status
+        row["continuous_coherence_status"] = k_n_exact_identity_status
 
     shared_keys = sorted(set(phase_by_key) & set(cocycle_by_key))
     bridge_rows: list[dict[str, Any]] = []
@@ -843,6 +859,13 @@ def main() -> int:
                 "continuous_coherence_capacity_status": continuous_coherence_capacity_status,
                 "continuous_coherence_capacity_candidate_only": continuous_coherence_capacity_candidate_only,
                 "continuous_coherence_capacity_fail_closed": continuous_coherence_capacity_fail_closed,
+                "k_n_exact_identity_input_status": k_n_exact_identity_input_status,
+                "k_n_exact_identity_status": k_n_exact_identity_status,
+                "k_n_exact_identity_candidate_only": k_n_exact_identity_candidate_only,
+                "k_n_exact_identity_fail_closed": k_n_exact_identity_fail_closed,
+                "k_n_exact_identity_aggregate_status": k_n_exact_identity_aggregate_status,
+                "k_n_exact_identity_aggregate_candidate_only": k_n_exact_identity_aggregate_candidate_only,
+                "k_n_exact_identity_aggregate_fail_closed": k_n_exact_identity_aggregate_fail_closed,
                 **schur_metrics,
             }
         )
@@ -946,11 +969,15 @@ def main() -> int:
             "continuous_coherence_capacity_json": str(args.continuous_coherence_capacity_json)
             if args.continuous_coherence_capacity_json is not None
             else None,
+            "k_n_exact_identity_json": str(args.k_n_exact_identity_json)
+            if args.k_n_exact_identity_json is not None
+            else None,
             "signed_wall1_json": str(args.signed_wall1_json) if args.signed_wall1_json is not None else None,
         },
         "rows": bridge_rows,
         "signed_wall1_rows": signed_wall1_rows,
         "continuous_coherence_capacity_rows": continuous_coherence_capacity_rows,
+        "k_n_exact_identity_rows": continuous_coherence_capacity_rows,
         "aggregate": {
             "shared_frame_shell_count": int(len(shared_keys)),
             "shared_frame_count": int(len({frame for frame, _ in shared_keys})),
@@ -1060,6 +1087,13 @@ def main() -> int:
             "continuous_coherence_capacity_aggregate_status": continuous_coherence_capacity_aggregate_status,
             "continuous_coherence_capacity_aggregate_candidate_only": continuous_coherence_capacity_aggregate_candidate_only,
             "continuous_coherence_capacity_aggregate_fail_closed": continuous_coherence_capacity_aggregate_fail_closed,
+            "k_n_exact_identity_input_status": k_n_exact_identity_input_status,
+            "k_n_exact_identity_status": k_n_exact_identity_status,
+            "k_n_exact_identity_candidate_only": k_n_exact_identity_candidate_only,
+            "k_n_exact_identity_fail_closed": k_n_exact_identity_fail_closed,
+            "k_n_exact_identity_aggregate_status": k_n_exact_identity_aggregate_status,
+            "k_n_exact_identity_aggregate_candidate_only": k_n_exact_identity_aggregate_candidate_only,
+            "k_n_exact_identity_aggregate_fail_closed": k_n_exact_identity_aggregate_fail_closed,
             "continuous_coherence_capacity_aggregate": continuous_coherence_capacity_aggregate,
             "signed_xor_bridge_open": signed_xor_bridge_open if signed_wall1_rows else None,
             "signed_spectral_bridge_open": signed_spectral_bridge_open if signed_wall1_rows else None,

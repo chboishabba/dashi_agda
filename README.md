@@ -37,6 +37,12 @@ clinical-adjacent, not diagnostic or therapeutic authority:
 `DASHI.Biology.EducationBodyMemoryBridge`,
 `DASHI.Biology.FMRIConnectomeProxyGovernance`,
 `DASHI.Biology.GenomeEpigenomeConnectomeBodyMemoryBridge`,
+`DASHI.Biology.IntersectionalLongitudinalResidualDynamics`,
+`DASHI.Biology.LongitudinalFMRIConnectomeDynamicsBridge`,
+`DASHI.Biology.EpigeneticTemporalRegulationBridge`,
+`DASHI.Biology.DevelopmentalWindowBodyMemoryBridge`,
+`DASHI.Biology.InterventionConsentLongitudinalGovernance`,
+`DASHI.Biology.HyperfabricIntersectionalBodyMemoryBridge`,
 `DASHI.Biology.RelationalQiEducationTraumaBridge`,
 `DASHI.Biology.FormalLayerExplanationBoundary`,
 `DASHI.Biology.TraumaClinicalGovernanceBoundary`,
@@ -44,14 +50,20 @@ clinical-adjacent, not diagnostic or therapeutic authority:
 `DASHI.Biology.TraumaBodyMemoryCandidateBridge`. These modules place body-state
 fibres, epigenetic regulatory marks, fMRI/connectome proxies, BrainDNA
 representation constraints, chart-local compiled inverses, and relational
-Qi/PatternMind repair context behind hard gates. The follow-on relational
-chart tranche adds the shared chart/residual/`j+1` machine, the education
-voice/agency/equity bridge, explicit fMRI/connectome proxy governance,
-genome-epigenome-connectome-body-memory composition, the
-education/trauma/Qi/reciprocity/law-power macro unifier, and the explanation
-boundary separating narrative guide layers from typed proof and authority
-surfaces. Public symptom is not hidden factorisation, `+1`/`j+1` safety seed is
-not cure or diagnosis, proxy is not hidden chart, association is not causation,
+Qi/PatternMind repair context behind hard gates. The follow-on relational and
+longitudinal tranche adds the shared chart/residual/`j+1` machine, the
+education voice/agency/equity bridge, explicit fMRI/connectome proxy
+governance, genome-epigenome-connectome-body-memory composition,
+intersectional time/place/relation/institution/axis-bundle residual dynamics,
+longitudinal fMRI/connectome proxy drift, epigenetic temporal-regulation
+proxies, developmental-window context, consent/pacing governance, the
+education/trauma/Qi/reciprocity/law-power macro unifier, the hyperfabric
+intersectional interpretive carrier, and the explanation boundary separating
+narrative guide layers from typed proof and authority surfaces. Public symptom
+is not hidden factorisation, there is no axis-free body-memory residual,
+`+1`/`j+1` safety seed is not cure or diagnosis, proxy is not hidden chart,
+association is not causation, longitudinal association is not causal closure,
+developmental window is not destiny, consent/agency seed is not treatment,
 click is not learning, survey is not voice, access is not equity, nudge is not
 care, formal typing is not proof of social/clinical truth, and no clinical,
 educational, legal, mystical, or power authority is promoted.

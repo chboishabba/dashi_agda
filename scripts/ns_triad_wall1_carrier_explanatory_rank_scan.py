@@ -26,6 +26,10 @@ DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_continuous_coherence_capacity_scan_N128_20260623.json"
 )
+DEFAULT_K_N_EXACT_IDENTITY_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_kn_exact_identity_scan_N128_20260623.json"
+)
 DEFAULT_OUTPUT_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_wall1_carrier_explanatory_rank_scan_N128_20260622.json"
@@ -68,6 +72,7 @@ def _parse_args() -> argparse.Namespace:
         type=Path,
         default=DEFAULT_CONTINUOUS_COHERENCE_CAPACITY_JSON,
     )
+    parser.add_argument("--k-n-exact-identity-json", type=Path, default=DEFAULT_K_N_EXACT_IDENTITY_JSON)
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT_JSON)
     parser.add_argument("--pretty", action="store_true")
     return parser.parse_args()
@@ -154,17 +159,14 @@ def main() -> int:
     theorem_payload = _read_json(args.signed_theorem_json)
     bridge_payload = _read_json(args.wall1_bridge_json)
     continuous_coherence_capacity_payload = _read_json_or_empty(args.continuous_coherence_capacity_json)
+    kn_exact_identity_payload = _read_json_or_empty(args.k_n_exact_identity_json)
     theorem_agg = theorem_payload.get("aggregate", {})
     bridge_agg = bridge_payload.get("aggregate", {})
-    continuous_coherence_capacity_agg = (
-        continuous_coherence_capacity_payload.get("aggregate", {})
-        if isinstance(continuous_coherence_capacity_payload, dict)
-        else {}
-    )
 
     observed_floor = _safe_float(theorem_agg.get("observed_floor_ratio_mean"), 0.0)
     eps = max(observed_floor, 1.0e-12)
     continuous_coherence_capacity_status = _payload_status(continuous_coherence_capacity_payload)
+    kn_exact_identity_status = _payload_status(kn_exact_identity_payload)
     continuous_coherence_capacity_route_explanatory_fraction = max(
         0.0,
         _first_float_from_payload(
@@ -184,6 +186,19 @@ def main() -> int:
             default=0.0,
         ),
     )
+    kn_exact_identity_route_explanatory_fraction = max(
+        0.0,
+        _first_float_from_payload(
+            kn_exact_identity_payload,
+            (
+                "k_n_exact_identity_route_explanatory_fraction_mean",
+                "wall1_floor_lower_bound_from_kn_mean",
+                "lambda_min_kn_mean",
+                "negative_spanning_coverage_fraction_mean",
+            ),
+            default=0.0,
+        ),
+    )
 
     carrier_rows = [
         {
@@ -195,15 +210,15 @@ def main() -> int:
             "primary_candidate": False,
         },
         {
-            "carrier_id": "continuous-coherence-positive-route",
-            "route_name": "wall1a-continuous-coherence-capacity-positive-route",
-            "support_value": continuous_coherence_capacity_route_explanatory_fraction,
-            "support_ratio_vs_observed_floor": continuous_coherence_capacity_route_explanatory_fraction / eps,
+            "carrier_id": "k-n-exact-identity-positive-route",
+            "route_name": "wall1a-k-n-exact-identity-positive-route",
+            "support_value": kn_exact_identity_route_explanatory_fraction,
+            "support_ratio_vs_observed_floor": kn_exact_identity_route_explanatory_fraction / eps,
             "status": (
                 "fail-closed"
-                if continuous_coherence_capacity_status in ("ok", "fail-closed")
+                if kn_exact_identity_status in ("ok", "fail-closed")
                 else "unavailable"
-                if not continuous_coherence_capacity_payload
+                if not kn_exact_identity_payload
                 else "candidate"
             ),
             "candidate_only": True,
@@ -241,16 +256,16 @@ def main() -> int:
         },
     ]
 
-    continuous_coherence_capacity_row_status = (
+    kn_exact_identity_row_status = (
         "fail-closed"
-        if continuous_coherence_capacity_status in ("ok", "fail-closed")
+        if kn_exact_identity_status in ("ok", "fail-closed")
         else "partial"
-        if continuous_coherence_capacity_status == "partial"
+        if kn_exact_identity_status == "partial"
         else "unavailable"
-        if not continuous_coherence_capacity_payload
+        if not kn_exact_identity_payload
         else "candidate"
     )
-    carrier_rows[1]["status"] = continuous_coherence_capacity_row_status
+    carrier_rows[1]["status"] = kn_exact_identity_row_status
 
     carrier_rows.sort(
         key=lambda row: (
@@ -287,12 +302,29 @@ def main() -> int:
         "continuous_coherence_route_explanatory_fraction_mean": (
             continuous_coherence_capacity_route_explanatory_fraction / eps
         ),
+        "k_n_exact_identity_status": (
+            "fail-closed"
+            if kn_exact_identity_status in ("ok", "fail-closed")
+            else "unavailable"
+            if not kn_exact_identity_payload
+            else "partial"
+        ),
+        "k_n_exact_identity_source": (
+            "k_n_exact_identity_json"
+            if kn_exact_identity_payload
+            else "missing"
+        ),
+        "k_n_exact_identity_candidate_only": True,
+        "k_n_exact_identity_independent_proof_certificate": False,
+        "k_n_exact_identity_route_explanatory_fraction_mean": (
+            kn_exact_identity_route_explanatory_fraction / eps
+        ),
         "signed_discrete_route_explanatory_fraction_mean": _safe_float(theorem_agg.get("signed_xor_distance_fraction_mean"), 0.0) / eps,
         "signed_spectral_route_explanatory_fraction_mean": _safe_float(theorem_agg.get("spectral_floor_lower_bound_mean"), 0.0) / eps,
         "cycle_family_route_explanatory_fraction_mean": _safe_float(bridge_agg.get("strongest_lower_bound_support_mean"), 0.0) / eps,
         "schur_route_explanatory_fraction_mean": max(0.0, _safe_float(theorem_agg.get("schur_gap_mean"), 0.0)) / eps,
         "carrier_story_conclusion": (
-            "Observed floor remains real, the continuous coherence route is candidate-only, and current discrete/spectral carriers are not canonical on the active shell extraction."
+            "Observed floor remains real, the K_N exact-identity route is the new positive candidate, and current discrete/spectral carriers are not canonical on the active shell extraction."
         ),
     }
 
@@ -307,6 +339,7 @@ def main() -> int:
             "signed_theorem_json": str(args.signed_theorem_json),
             "wall1_bridge_json": str(args.wall1_bridge_json),
             "continuous_coherence_capacity_json": str(args.continuous_coherence_capacity_json),
+            "k_n_exact_identity_json": str(args.k_n_exact_identity_json),
             "output_json": str(args.output_json),
         },
         "status": "ok",
