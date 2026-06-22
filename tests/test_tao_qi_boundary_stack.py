@@ -266,6 +266,8 @@ def test_prime_lane_stage12_adapter_reclassifies_p7_as_local_exemplar() -> None:
     assert "canonicalP7PrimeLaneStage12ActionAdapter" in adapter_text
     assert "Stage12FibreSurface is now the general stage/carry/fibre grammar" in adapter_text
     assert "unitGroupLabel" in adapter_text
+    assert "stageWindowWitness" in adapter_text
+    assert "stageWindowWitnessIsCanonical" in adapter_text
     assert "stageIdentityPointIsAtlas7" in adapter_text
     assert "unitOrderStagePointIsAtlas6" in adapter_text
     assert "carryDepthSeamPointIsAtlas11" in adapter_text
@@ -294,6 +296,16 @@ def test_prime_successor_witness_surface_marks_the_full_stage12_lane() -> None:
     assert_any_marker(
         witness_text,
         (
+            "record StageSuccessorWitness : Set where",
+            "identityWitness",
+            "primeAxisWitness",
+            "primePowerDepthWitness",
+            "compositeCouplingWitness",
+            "canonicalStage0SuccessorWitness",
+            "canonicalStage6SuccessorWitness",
+            "canonicalStage11SuccessorWitness",
+            "canonicalStageSuccessorWitnesses",
+            "stage12ClosurePrimeWitness",
             "canonicalP2PrimeSuccessorWitness",
             "canonicalP3PrimeSuccessorWitness",
             "canonicalP5PrimeSuccessorWitness",
@@ -304,6 +316,13 @@ def test_prime_successor_witness_surface_marks_the_full_stage12_lane() -> None:
     )
     assert "p is the new prime lane" in witness_text
     assert "p - 1 is the witness-space" in witness_text
+    assert "0 = unmarked ground; 1 = the first mark / identity witness." in witness_text
+    assert "3 is witnessed by 4 = 2^2" in witness_text
+    assert "5 is witnessed by 6 = 2*3" in witness_text
+    assert "7 is witnessed by 8 = 2^3" in witness_text
+    assert "8 is witnessed by 9 = 3^2" in witness_text
+    assert "9 is witnessed by 10 = 2*5" in witness_text
+    assert "11 is witnessed by 12 = 2^2*3" in witness_text
 
     assert "Stage12FibreSurface" in readme_text
     assert "spine" in readme_text
@@ -318,6 +337,30 @@ def test_prime_successor_witness_surface_marks_the_full_stage12_lane() -> None:
     assert "p13" in architecture_text
     assert "local exemplar" in architecture_text
     assert "natural full Stage12 witness" in architecture_text
+
+
+def test_docs_cover_full_0_to_11_successor_witness_taxonomy() -> None:
+    readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    architecture_text = (REPO_ROOT / "architecture.md").read_text(
+        encoding="utf-8"
+    )
+
+    for text in (readme_text, architecture_text):
+        assert "prime successor witnesses" in text
+        assert "prime-power depth witnesses" in text
+        assert "composite coupling witnesses" in text
+        assert "The immediate witness of stage `n` is `n + 1`" in text or "the immediate witness is `n + 1`" in text
+        assert "3 -> 4 = 2^2" in text
+        assert "7 -> 8 = 2^3" in text
+        assert "8 -> 9 = 3^2" in text
+        assert "5 -> 6 = 2 * 3" in text
+        assert "9 -> 10 = 2 * 5" in text
+        assert "11 -> 12 = 2^2 * 3" in text
+        assert "12 -> 13" in text
+
+    assert "Stage12FibreSurface remains the" in readme_text
+    assert "Stage12FibreSurface is the spine" in readme_text
+    assert "Stage12FibreSurface is the spine" in architecture_text
 
 
 def test_recovered_carry_and_successor_adapter_slice_markers() -> None:
