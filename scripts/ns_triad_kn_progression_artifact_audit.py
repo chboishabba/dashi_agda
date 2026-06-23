@@ -19,6 +19,7 @@ from typing import Any
 
 SCRIPT_NAME = "scripts/ns_triad_kn_progression_artifact_audit.py"
 SCHEMA_VERSION = "1.0.0"
+REPO_ROOT = Path(__file__).resolve().parents[1]
 
 NEAR_ZERO_LAMBDA_EPS = 1.0e-8
 LOW_D_MAX = 3.0
@@ -84,6 +85,42 @@ SHELL_KEY_HINTS = (
     "topshell",
     "shellmax",
     "highestshell",
+)
+
+COVERAGE_STATE_KEY_HINTS = (
+    "triadcoverage",
+    "triadcoveragefraction",
+    "triadcoverageratio",
+    "triadcoveragecount",
+    "cycleindependentsupportcoverage",
+    "cyclebasissupportfraction",
+    "cyclebasisweightfraction",
+    "cyclesignificantcount",
+    "triadcount",
+    "triadsignificantcount",
+    "coveragefraction",
+    "coverageratio",
+    "coveragecount",
+    "coveragelevel",
+    "coveragestatus",
+    "coveragetype",
+    "limitedcoverage",
+    "sparsecoverage",
+)
+
+JSON_PATH_KEY_HINTS = (
+    "receipt",
+    "receipts",
+    "receiptpath",
+    "receiptpaths",
+    "manifest",
+    "manifests",
+    "manifestpath",
+    "manifestpaths",
+    "sourcejson",
+    "outputjson",
+    "jsonoutput",
+    "jsonreceipt",
 )
 
 COVERAGE_KEY_HINTS = (
@@ -207,13 +244,78 @@ def _rows_from_json_payload(payload: Any) -> list[dict[str, Any]]:
     return [payload] if row_hints else []
 
 
-def _load_rows(path: Path) -> tuple[list[dict[str, Any]], str]:
+def _resolve_json_path(raw_path: str, base_dir: Path) -> Path | None:
+    candidate = Path(raw_path.strip())
+    if not candidate.is_absolute():
+        candidate = base_dir / candidate
+    if candidate.exists():
+        return candidate
+    repo_candidate = REPO_ROOT / raw_path.strip()
+    return repo_candidate if repo_candidate.exists() else None
+
+
+def _iter_json_child_paths(payload: Any, base_dir: Path) -> list[tuple[str, Path]]:
+    child_paths: list[tuple[str, Path]] = []
+
+    def visit(value: Any) -> None:
+        if isinstance(value, dict):
+            for key, item in value.items():
+                normalized = _normalize_key(str(key))
+                if not any(hint in normalized for hint in JSON_PATH_KEY_HINTS):
+                    if isinstance(item, (dict, list)):
+                        visit(item)
+                    continue
+                if isinstance(item, str):
+                    resolved = _resolve_json_path(item, base_dir)
+                    if resolved is not None:
+                        child_paths.append((item.strip(), resolved))
+                elif isinstance(item, list):
+                    for entry in item:
+                        if isinstance(entry, str):
+                            resolved = _resolve_json_path(entry, base_dir)
+                            if resolved is not None:
+                                child_paths.append((entry.strip(), resolved))
+                        else:
+                            visit(entry)
+                else:
+                    visit(item)
+        elif isinstance(value, list):
+            for item in value:
+                visit(item)
+
+    visit(payload)
+    deduped: list[tuple[str, Path]] = []
+    seen: set[Path] = set()
+    for label, path in child_paths:
+        resolved = path.resolve()
+        if resolved in seen:
+            continue
+        seen.add(resolved)
+        deduped.append((label, path))
+    return deduped
+
+
+def _load_json_rows(path: Path, *, source_input: str, visited: set[Path]) -> list[tuple[dict[str, Any], str, str]]:
+    resolved = path.resolve()
+    if resolved in visited:
+        return []
+    visited.add(resolved)
+
+    payload = _load_json(path)
+    rows: list[tuple[dict[str, Any], str, str]] = [
+        (row, source_input, "json") for row in _rows_from_json_payload(payload)
+    ]
+    for child_input, child_path in _iter_json_child_paths(payload, path.parent):
+        rows.extend(_load_json_rows(child_path, source_input=child_input, visited=visited))
+    return rows
+
+
+def _load_rows(path: Path) -> list[tuple[dict[str, Any], str, str]]:
     suffix = path.suffix.lower()
     if suffix == ".csv":
-        return _coerce_csv_rows(path), "csv"
+        return [(row, path.as_posix(), "csv") for row in _coerce_csv_rows(path)]
     if suffix == ".json":
-        payload = _load_json(path)
-        return _rows_from_json_payload(payload), "json"
+        return _load_json_rows(path, source_input=path.as_posix(), visited=set())
     raise ValueError(f"unsupported input type: {path}")
 
 
@@ -295,6 +397,61 @@ def _coverage_reasons(row: dict[str, Any]) -> list[str]:
                 if numeric is not None and numeric <= 0.0:
                     reasons.append(f"{key}=zero")
     return sorted(set(reasons))
+
+
+def _triad_coverage_metadata(row: dict[str, Any]) -> dict[str, Any] | None:
+    coverage_fields: dict[str, Any] = {}
+    evidence: list[str] = []
+    status: str | None = None
+    triad_count_value: float | None = None
+
+    for key, value in row.items():
+        normalized = _normalize_key(str(key))
+        if not any(hint in normalized for hint in COVERAGE_STATE_KEY_HINTS):
+            continue
+        normalized_value = _normalize_value(value)
+        coverage_fields[str(key)] = normalized_value
+
+        if isinstance(normalized_value, str):
+            lowered = normalized_value.lower()
+            if "sparse" in lowered:
+                status = "sparse"
+                evidence.append(f"{key}=sparse")
+            elif "limited" in lowered and status != "sparse":
+                status = "limited"
+                evidence.append(f"{key}=limited")
+            elif "full" in lowered and status is None:
+                status = "full"
+        else:
+            numeric = _scalar_number(normalized_value)
+            if numeric is not None:
+                if numeric <= 0.0:
+                    if status != "sparse":
+                        status = "sparse"
+                    evidence.append(f"{key}=zero")
+                elif numeric < 1.0 and status not in {"sparse", "limited"}:
+                    status = "limited"
+                    evidence.append(f"{key}={numeric:g}")
+                elif numeric >= 1.0 and status is None:
+                    status = "full"
+            if "triadcount" in normalized:
+                triad_count_value = numeric
+
+    if not coverage_fields:
+        return None
+
+    triad_count = triad_count_value
+    if triad_count is not None and triad_count <= 0.0:
+        status = "sparse"
+        evidence.append("triad_count=0")
+
+    metadata = {
+        "status": status or "unknown",
+        "fields": coverage_fields,
+    }
+    if evidence:
+        metadata["evidence"] = sorted(set(evidence))
+    return metadata
 
 
 def _condition_number_reasons(row: dict[str, Any]) -> list[str]:
@@ -381,6 +538,14 @@ def _near_zero_lambda_low_d_top_shell(row: dict[str, Any]) -> list[str]:
     return reasons
 
 
+def _is_sparse_coverage(row: dict[str, Any]) -> bool:
+    metadata = _triad_coverage_metadata(row)
+    if metadata is None:
+        return False
+    status = str(metadata.get("status", "")).lower()
+    return status in {"sparse", "limited", "sparse_sampled"} or "sparse" in status or "limited" in status
+
+
 def _suspect_reasons(row: dict[str, Any]) -> list[str]:
     reasons = []
     coverage_reasons = _coverage_reasons(row)
@@ -409,6 +574,7 @@ def _row_record(row: dict[str, Any], *, source_input: str, source_format: str, r
         canonical_row = {"value": canonical_row}
     artifact_reasons = _artifact_reasons(canonical_row)
     suspect_reasons = _suspect_reasons(canonical_row)
+    triad_coverage = _triad_coverage_metadata(canonical_row)
     return {
         **canonical_row,
         "_audit": {
@@ -418,6 +584,7 @@ def _row_record(row: dict[str, Any], *, source_input: str, source_format: str, r
             "artifact": bool(artifact_reasons),
             "suspect": bool(suspect_reasons),
             "reasons": suspect_reasons,
+            "triad_coverage": triad_coverage,
         },
     }
 
@@ -427,13 +594,14 @@ def main() -> int:
 
     ordered_rows: list[dict[str, Any]] = []
     merged: dict[str, dict[str, Any]] = {}
-    artifact_count = 0
+    explicit_artifact_count = 0
     suspect_count = 0
+    near_zero_low_d_top_shell_count = 0
+    sparse_coverage_count = 0
 
     for input_path in args.input:
-        rows, source_format = _load_rows(input_path)
-        for row_index, row in enumerate(rows):
-            record = _row_record(row, source_input=input_path.as_posix(), source_format=source_format, row_index=row_index)
+        for row_index, (row, source_input, source_format) in enumerate(_load_rows(input_path)):
+            record = _row_record(row, source_input=source_input, source_format=source_format, row_index=row_index)
             audit = record["_audit"]
             fingerprint = _canonical_fingerprint({key: value for key, value in record.items() if key != "_audit"})
 
@@ -442,20 +610,26 @@ def main() -> int:
                 ordered_rows.append(record)
             else:
                 existing = merged[fingerprint]
-                _merge_sources(existing["_audit"], input_path.as_posix())
+                _merge_sources(existing["_audit"], source_input)
                 existing["_audit"]["artifact"] = bool(existing["_audit"]["artifact"] or audit["artifact"])
                 existing["_audit"]["suspect"] = bool(existing["_audit"]["suspect"] or audit["suspect"])
                 existing["_audit"]["reasons"] = sorted(
                     set(existing["_audit"]["reasons"]) | set(audit["reasons"])
                 )
+                if existing["_audit"].get("triad_coverage") is None and audit.get("triad_coverage") is not None:
+                    existing["_audit"]["triad_coverage"] = audit["triad_coverage"]
 
     canonical_rows: list[dict[str, Any]] = []
     for record in ordered_rows:
         audit = record["_audit"]
         if audit["artifact"]:
-            artifact_count += 1
+            explicit_artifact_count += 1
         if audit["suspect"]:
             suspect_count += 1
+        if _near_zero_lambda_low_d_top_shell(record):
+            near_zero_low_d_top_shell_count += 1
+        if _is_sparse_coverage(record):
+            sparse_coverage_count += 1
         if not audit["artifact"]:
             canonical_rows.append(record)
 
@@ -473,8 +647,11 @@ def main() -> int:
         "clay_promoted": False,
         "input_count": len(args.input),
         "row_count": len(ordered_rows),
-        "artifact_count": artifact_count,
+        "artifact_count": explicit_artifact_count,
         "suspect_count": suspect_count,
+        "near_zero_low_d_top_shell_count": near_zero_low_d_top_shell_count,
+        "sparse_coverage_count": sparse_coverage_count,
+        "explicit_artifact_count": explicit_artifact_count,
         "canonical_rows_excluding_artifacts": canonical_rows,
     }
     text = _json_text(payload, args.pretty)

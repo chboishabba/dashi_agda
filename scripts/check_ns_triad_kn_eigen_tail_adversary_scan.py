@@ -204,6 +204,51 @@ def _validate_tail_grid_detail(detail: Any, path: str, errors: list[str]) -> Non
         errors.append(f"{path}.summary: must be null when mode is 'none'")
 
 
+def _validate_triad_coverage_metadata(
+    payload: dict[str, Any],
+    path: str,
+    errors: list[str],
+    *,
+    selected_mode_count: Any = None,
+    triad_count: Any = None,
+) -> None:
+    coverage_metadata_present = False
+
+    sample_limit = payload.get("triad_sample_limit")
+    if sample_limit is not None:
+        coverage_metadata_present = True
+        if _nonnegative_int(sample_limit) is None:
+            errors.append(f"{path}.triad_sample_limit: must be nonnegative int")
+
+    coverage_status = payload.get("triad_coverage_status")
+    if coverage_status is not None:
+        coverage_metadata_present = True
+        if not isinstance(coverage_status, str) or not coverage_status.strip():
+            errors.append(f"{path}.triad_coverage_status: must be non-empty string")
+
+    for key, value in payload.items():
+        if not isinstance(key, str) or not key.startswith("triad_coverage_"):
+            continue
+        coverage_metadata_present = True
+        if key == "triad_coverage_status":
+            continue
+        if key.endswith("_count"):
+            if _nonnegative_int(value) is None:
+                errors.append(f"{path}.{key}: must be nonnegative int")
+        elif key.endswith("_fraction") or key.endswith("_ratio"):
+            parsed = _finite(value)
+            if parsed is None or parsed < -1.0e-12 or parsed > 1.0 + 1.0e-12:
+                errors.append(f"{path}.{key}: must be finite fraction in [0,1]")
+
+    if coverage_metadata_present and coverage_status is None:
+        selected_modes = _nonnegative_int(selected_mode_count)
+        triads = _nonnegative_int(triad_count)
+        if selected_modes is not None and triads is not None and selected_modes >= 6 and triads > 0:
+            errors.append(
+                f"{path}.triad_coverage_status: required for sparse-like rows with selected_mode_count >= 6"
+            )
+
+
 def _validate_metrics(metrics: Any, path: str, errors: list[str]) -> None:
     if not isinstance(metrics, dict):
         errors.append(f"{path}: must be object")
@@ -316,6 +361,13 @@ def _validate_candidate_profile(profile: Any, path: str, backend: str, errors: l
         _validate_tail_grid_summary(profile.get("tail_grid_summary"), f"{path}.tail_grid_summary", errors)
     if tail_grid_detail is None or profile.get("tail_grid") is not None:
         _validate_tail_grid(profile.get("tail_grid"), f"{path}.tail_grid", errors)
+    _validate_triad_coverage_metadata(
+        profile,
+        path,
+        errors,
+        selected_mode_count=profile.get("selected_mode_count"),
+        triad_count=profile.get("triad_count"),
+    )
 
     warnings = profile.get("warnings")
     if warnings is not None and not isinstance(warnings, list):
@@ -345,6 +397,8 @@ def _validate_parameters(payload: dict[str, Any], errors: list[str]) -> dict[str
     for key in ("r0", "d0", "parity_tol", "lobpcg_tol", "generalized_mass_shift"):
         if _finite(parameters.get(key)) is None:
             errors.append(f"parameters.{key}: must be finite")
+    if parameters.get("triad_sample_limit") is not None and _nonnegative_int(parameters.get("triad_sample_limit")) is None:
+        errors.append("parameters.triad_sample_limit: must be nonnegative int or null")
 
     for key in ("seeds", "shells", "c0_values", "tail_cutoffs", "tail_etas"):
         value = parameters.get(key)
@@ -401,6 +455,13 @@ def _validate_row(row: dict[str, Any], index: int, parameters: dict[str, Any], e
     for key in ("block_matvec_backend", "vulkan_icd"):
         if row.get(key) is not None and not isinstance(row.get(key), str):
             errors.append(f"rows[{index}].{key}: must be string or null")
+    _validate_triad_coverage_metadata(
+        row,
+        f"rows[{index}]",
+        errors,
+        selected_mode_count=row.get("selected_mode_count"),
+        triad_count=row.get("triad_count"),
+    )
 
     for key in (
         "selected_mode_count",
@@ -473,6 +534,7 @@ def _validate_aggregate(aggregate: Any, rows: list[dict[str, Any]], parameters: 
         errors.append("aggregate.dense_eigensolve_scope: must be 'small_shell_oracle_only'")
     if aggregate.get("tail_adversary_status") not in {"candidate-tail-telemetry", "fail-closed"}:
         errors.append("aggregate.tail_adversary_status: invalid")
+    _validate_triad_coverage_metadata(aggregate, "aggregate", errors)
 
     _validate_candidate_profile(aggregate.get("best_global_low_lambda_profile"), "aggregate.best_global_low_lambda_profile", str(parameters.get("kn_backend")), errors)
 

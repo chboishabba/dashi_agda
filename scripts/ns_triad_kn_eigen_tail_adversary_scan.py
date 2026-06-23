@@ -58,6 +58,7 @@ DEFAULT_OUTPUT_JSON = Path(
 )
 DEFAULT_SHELLS = (4, 5)
 DEFAULT_SAMPLE_COUNT = 4
+DEFAULT_TRIAD_SAMPLE_LIMIT = 8
 DEFAULT_MIX_COUNT = 2
 DEFAULT_SEEDS = (0,)
 DEFAULT_C0_VALUES = (0.10, 0.25)
@@ -103,6 +104,47 @@ def _parse_csv_numbers(value: str, cast: type[int] | type[float]) -> list[Any]:
     return parsed
 
 
+def _triad_coverage_metadata(
+    *,
+    requested_limit: int,
+    selected_mode_count: int,
+    triad_count: int,
+    sample_count: int,
+) -> dict[str, Any]:
+    requested_limit = max(0, int(requested_limit))
+    selected_mode_count = max(0, int(selected_mode_count))
+    triad_count = max(0, int(triad_count))
+    triad_sample_count = max(0, int(sample_count))
+    warnings: list[str] = []
+
+    if selected_mode_count < 3:
+        status = "insufficient_modes"
+        warnings.append("selected_mode_count_below_triad_threshold")
+    elif triad_count == 0:
+        status = "empty"
+        warnings.append("no_triad_candidates")
+    elif requested_limit <= 0:
+        status = "sparse_sampled"
+        warnings.append("triad_sample_limit_nonpositive")
+        warnings.append("triad_samples_not_materialized")
+    elif triad_count > requested_limit:
+        status = "sparse_sampled"
+        warnings.append("triad_count_exceeds_triad_sample_limit")
+    else:
+        status = "fully_covered"
+
+    coverage_ratio = float(triad_sample_count / triad_count) if triad_count > 0 else 0.0
+    return {
+        "triad_sample_limit": int(requested_limit),
+        "triad_sample_count": int(triad_sample_count),
+        "triad_count": int(triad_count),
+        "selected_mode_count": int(selected_mode_count),
+        "triad_coverage_status": status,
+        "triad_coverage_warnings": warnings,
+        "triad_coverage_ratio": float(coverage_ratio),
+    }
+
+
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--raw-archive", type=Path, default=DEFAULT_RAW_ARCHIVE)
@@ -112,6 +154,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--frame-limit", type=int, default=1)
     parser.add_argument("--zero-eps", type=float, default=DEFAULT_ZERO_EPS)
     parser.add_argument("--sample-count", type=int, default=DEFAULT_SAMPLE_COUNT)
+    parser.add_argument("--triad-sample-limit", type=int, default=DEFAULT_TRIAD_SAMPLE_LIMIT)
     parser.add_argument("--mix-count", type=int, default=DEFAULT_MIX_COUNT)
     parser.add_argument("--seed", dest="seeds", action="append", type=int, default=None)
     parser.add_argument("--c0-values", type=lambda text: _parse_csv_numbers(text, float), default=list(DEFAULT_C0_VALUES))
@@ -362,6 +405,7 @@ def _row(
     gpu_checks: int,
     max_profiles_per_row: int,
     profile_sample_limit: int,
+    triad_sample_limit: int,
     tail_grid_detail: str,
     force_tail_profiles: bool,
 ) -> dict[str, Any]:
@@ -377,12 +421,23 @@ def _row(
         "full_ns_promoted": False,
         "clay_promoted": False,
         "dense_reconstruction_used": False,
+        "triad_sample_limit": int(triad_sample_limit),
+        "triad_sample_count": 0,
+        "triad_count": 0,
+        "selected_mode_count": 0,
+        "triad_coverage_status": "unavailable",
+        "triad_coverage_warnings": [],
+        "triad_coverage_ratio": 0.0,
     }
     try:
         u, v, w = _frame_velocity(bundle, snapshot)
         spectrum = _scalar_vorticity_spectrum(u, v, w, bundle.domain_length)
         shell_modes = _cube_modes(spectrum, shell_n=shell_n, zero_eps=zero_eps)
-        triads, frame_metrics = _build_frame_surface(shell_modes, zero_eps=zero_eps, triad_sample_limit=8)
+        triads, frame_metrics = _build_frame_surface(
+            shell_modes,
+            zero_eps=zero_eps,
+            triad_sample_limit=triad_sample_limit,
+        )
     except Exception as exc:  # noqa: BLE001
         row["status"] = ERROR_STATUS
         row["errors"] = [f"eigen_tail_adversary_scan_error: {exc}"]
@@ -390,6 +445,13 @@ def _row(
 
     row["selected_mode_count"] = int(len(shell_modes))
     row["triad_count"] = int(len(triads))
+    coverage = _triad_coverage_metadata(
+        requested_limit=int(triad_sample_limit),
+        selected_mode_count=int(frame_metrics.get("selected_mode_count", len(shell_modes))),
+        triad_count=int(frame_metrics.get("triad_count", len(triads))),
+        sample_count=int(len(frame_metrics.get("triad_samples", []) or [])),
+    )
+    row.update(coverage)
     row["carrier_stratum_count"] = int(frame_metrics.get("carrier_stratum_count", 0))
     row["dense_oracle_used"] = bool(int(shell_n) <= int(dense_oracle_shell_limit))
     row["tail_biased_scan"] = True
@@ -397,7 +459,7 @@ def _row(
         row["dense_reconstruction_used"] = False
     if len(shell_modes) < 3 or not triads:
         row["status"] = PARTIAL_STATUS
-        row["warnings"] = ["no_shell_triads_or_insufficient_modes"]
+        row["warnings"] = ["no_shell_triads_or_insufficient_modes", *coverage["triad_coverage_warnings"]]
         row["profile_count"] = 0
         row["candidate_receipt_count"] = 0
         row["tail_grid_point_count"] = 0
@@ -542,13 +604,20 @@ def _row(
             "gpu_matvec_max_abs_error_abs": solved.get("gpu_matvec_max_abs_error_abs"),
             "gpu_matvec_max_abs_error_neg": solved.get("gpu_matvec_max_abs_error_neg"),
             "vulkan_icd": solved.get("vulkan_icd"),
+            "triad_sample_limit": int(coverage["triad_sample_limit"]),
+            "triad_sample_count": int(coverage["triad_sample_count"]),
+            "triad_count": int(coverage["triad_count"]),
+            "selected_mode_count": int(coverage["selected_mode_count"]),
+            "triad_coverage_status": coverage["triad_coverage_status"],
+            "triad_coverage_warnings": list(coverage["triad_coverage_warnings"]),
+            "triad_coverage_ratio": float(coverage["triad_coverage_ratio"]),
             "metrics": metrics,
             **tail_grid_counts,
             "tail_grid_detail": {
                 "mode": tail_grid_detail,
                 "summary": tail_grid_summary if tail_grid_detail == "summary" else None,
             },
-            "warnings": row_warnings,
+            "warnings": row_warnings + list(coverage["triad_coverage_warnings"]),
         }
         if tail_grid_detail in {"full", "summary"}:
             row_payload["tail_grid_summary"] = tail_grid_summary
@@ -633,7 +702,59 @@ def _row(
             "candidate_receipts": evaluated[: min(max(0, int(profile_sample_limit)), len(evaluated))],
         }
     )
+    if any(item.get("triad_coverage_status") == "sparse_sampled" for item in evaluated):
+        row["triad_coverage_status"] = "sparse_sampled"
+    row["triad_coverage_warnings"] = list(
+        dict.fromkeys(
+            [
+                *row.get("triad_coverage_warnings", []),
+                *(
+                    warning
+                    for item in evaluated
+                    for warning in item.get("triad_coverage_warnings", [])
+                ),
+            ]
+        )
+    )
     return row
+
+
+def _summarize_triad_coverage(rows: list[dict[str, Any]], requested_limit: int) -> dict[str, Any]:
+    triad_count = sum(int(row.get("triad_count", 0)) for row in rows)
+    selected_mode_count = sum(int(row.get("selected_mode_count", 0)) for row in rows)
+    triad_sample_count = sum(int(row.get("triad_sample_count", 0)) for row in rows)
+    warnings: list[str] = []
+    status = "unavailable"
+    saw_valid_status = False
+
+    for row in rows:
+        row_status = str(row.get("triad_coverage_status", ""))
+        if row_status == "sparse_sampled":
+            status = "sparse_sampled"
+            saw_valid_status = True
+        elif status != "sparse_sampled" and row_status == "insufficient_modes":
+            status = "insufficient_modes"
+            saw_valid_status = True
+        elif status not in {"sparse_sampled", "insufficient_modes"} and row_status == "empty":
+            status = "empty"
+            saw_valid_status = True
+        elif row_status == "fully_covered" and not saw_valid_status:
+            status = "fully_covered"
+            saw_valid_status = True
+        for warning in row.get("triad_coverage_warnings", []) or []:
+            if warning not in warnings:
+                warnings.append(str(warning))
+
+    if not saw_valid_status:
+        warnings.append("triad_coverage_summary_unavailable")
+    return {
+        "triad_sample_limit": int(requested_limit),
+        "triad_count": int(triad_count),
+        "selected_mode_count": int(selected_mode_count),
+        "triad_sample_count": int(triad_sample_count),
+        "triad_coverage_status": status,
+        "triad_coverage_warnings": warnings,
+    }
 
 
 def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
@@ -780,12 +901,14 @@ def main() -> int:
             gpu_checks=int(args.gpu_matvec_checks),
             max_profiles_per_row=int(args.max_profiles_per_row),
             profile_sample_limit=int(args.profile_sample_limit),
+            triad_sample_limit=int(args.triad_sample_limit),
             tail_grid_detail=str(args.tail_grid_detail),
             force_tail_profiles=force_tail_profiles,
         )
         for slot, snapshot in enumerate(snapshots)
         for shell_n in shells
     ]
+    triad_coverage_summary = _summarize_triad_coverage(rows, int(args.triad_sample_limit))
     payload = {
         "script_name": SCRIPT_NAME,
         "contract": CONTRACT,
@@ -801,6 +924,7 @@ def main() -> int:
             "frame_limit": int(args.frame_limit),
             "zero_eps": float(args.zero_eps),
             "sample_count": int(args.sample_count),
+            "triad_sample_limit": int(args.triad_sample_limit),
             "mix_count": int(args.mix_count),
             "seeds": seeds,
             "shells": [int(shell) for shell in shells],
@@ -820,6 +944,11 @@ def main() -> int:
             "max_profiles_per_row": int(args.max_profiles_per_row),
             "tail_grid_detail": str(args.tail_grid_detail),
             "force_tail_profiles": force_tail_profiles,
+            "triad_count": int(triad_coverage_summary["triad_count"]),
+            "selected_mode_count": int(triad_coverage_summary["selected_mode_count"]),
+            "triad_sample_count": int(triad_coverage_summary["triad_sample_count"]),
+            "triad_coverage_status": str(triad_coverage_summary["triad_coverage_status"]),
+            "triad_coverage_warnings": list(triad_coverage_summary["triad_coverage_warnings"]),
         },
         "tail_grid_detail": str(args.tail_grid_detail),
         "status": ERROR_STATUS if any(row.get("status") == ERROR_STATUS for row in rows) else (

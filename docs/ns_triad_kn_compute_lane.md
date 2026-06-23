@@ -19,6 +19,7 @@ C:
 - `scripts/check_ns_triad_kn_external_wall1_csv_ingest.py`
 - `scripts/ns_triad_kn_progression_artifact_audit.py`
 - `scripts/run_ns_triad_kn_eigen_tail_progression_batch.py`
+- `scripts/ns_triad_kn_batch_manifest_summary.py`
 - `scripts/check_ns_triad_kn_exact_identity_scan.py`
 - `scripts/check_ns_triad_kn_tail_progression_scan.py`
 - `scripts/check_ns_triad_kn_lobpcg_scan.py`
@@ -35,6 +36,9 @@ S:
   progression artifact and zero `danger=true` rows in the N=3 eigenmode file.
 - The 2026-06-23 Vulkan batch smoke for shells 4 and 5 returned checker-ok receipts,
   `tail_escape_candidate_count = 0` for both shells, and `gpu_kn_authority = false`.
+- The 2026-06-23 Vulkan shell-6 compact batch with explicit triad sample metadata returned
+  checker-ok, `lambda_min ~= 0.19363`, worst eigen shell `1`, `tail_escape_candidate_count = 0`,
+  and `triad_coverage_status = sparse_sampled`.
 - The remaining open proof items are the negative-frame coercivity, spanning, and
   Biot-Savart frame-equidistribution obligations.
 
@@ -104,6 +108,19 @@ VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.json \
   --icd /usr/share/vulkan/icd.d/radeon_icd.json \
   --tail-grid-detail compact \
   --tail-grid-serialization summary
+
+VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.json \
+  python3 scripts/run_ns_triad_kn_eigen_tail_progression_batch.py \
+  --shells 6 \
+  --backend vulkan-matvec \
+  --icd /usr/share/vulkan/icd.d/radeon_icd.json \
+  --tail-grid-detail compact \
+  --tail-grid-serialization summary \
+  --triad-sample-limit 64
+
+python3 scripts/ns_triad_kn_batch_manifest_summary.py \
+  --input scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_eigen_tail_adversary_batch_20260623_vulkan_shell6_cov64/ns_triad_kn_eigen_tail_adversary_batch_manifest.json \
+  --output-json scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_batch_manifest_summary_20260623_vulkan_shell6_cov64.json
 
 python3 scripts/ns_triad_kn_schur_finite_shell_audit.py
 ```
