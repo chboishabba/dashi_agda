@@ -133,6 +133,16 @@ COVERAGE_KEY_HINTS = (
     "shellcoverage",
 )
 
+OPERATOR_COVERAGE_KEY_HINTS = (
+    "operatorcoverage",
+    "operatoractivemodecount",
+    "operatorzerodegreemodecount",
+    "operatorzerodegreemodefraction",
+    "operatoremptytriadcount",
+    "operatorcoverageconfidence",
+    "operatorconfidence",
+)
+
 COND_KEY_HINTS = (
     "conditionnumber",
     "conditionnum",
@@ -414,7 +424,10 @@ def _triad_coverage_metadata(row: dict[str, Any]) -> dict[str, Any] | None:
 
         if isinstance(normalized_value, str):
             lowered = normalized_value.lower()
-            if "sparse" in lowered:
+            if "sampled" in lowered and "sparse" in lowered:
+                status = "sparse_sampled"
+                evidence.append(f"{key}=sparse_sampled")
+            elif "sparse" in lowered:
                 status = "sparse"
                 evidence.append(f"{key}=sparse")
             elif "limited" in lowered and status != "sparse":
@@ -452,6 +465,57 @@ def _triad_coverage_metadata(row: dict[str, Any]) -> dict[str, Any] | None:
     if evidence:
         metadata["evidence"] = sorted(set(evidence))
     return metadata
+
+
+def _operator_coverage_confident(row: dict[str, Any]) -> bool:
+    for key, value in row.items():
+        normalized = _normalize_key(str(key))
+        if not any(hint in normalized for hint in OPERATOR_COVERAGE_KEY_HINTS):
+            continue
+        normalized_value = _normalize_value(value)
+        if normalized_value is None:
+            continue
+        if isinstance(normalized_value, str):
+            if not _falsey(normalized_value):
+                return True
+            continue
+        if isinstance(normalized_value, bool):
+            if normalized_value:
+                return True
+            continue
+        if isinstance(normalized_value, (int, float)):
+            if math.isfinite(float(normalized_value)):
+                return True
+        else:
+            return True
+    return False
+
+
+def _sparse_receipt_sampling(row: dict[str, Any]) -> bool:
+    metadata = _triad_coverage_metadata(row)
+    if metadata is None:
+        return False
+    status = str(metadata.get("status", "")).lower()
+    return status == "sparse_sampled"
+
+
+def _operator_artifact(row: dict[str, Any]) -> bool:
+    empty_triad_count = _scalar_number(row.get("operator_empty_triad_count"))
+    if empty_triad_count is not None and empty_triad_count > 0.0:
+        return True
+    zero_degree_count = _scalar_number(row.get("operator_zero_degree_mode_count"))
+    if zero_degree_count is not None and zero_degree_count > 0.0:
+        return True
+    zero_degree_fraction = _scalar_number(row.get("operator_zero_degree_mode_fraction"))
+    if zero_degree_fraction is not None and zero_degree_fraction > 0.0:
+        return True
+    for key, value in row.items():
+        normalized = _normalize_key(str(key))
+        if "operator" not in normalized or "artifact" not in normalized:
+            continue
+        if _truthy(value):
+            return True
+    return False
 
 
 def _condition_number_reasons(row: dict[str, Any]) -> list[str]:
@@ -597,6 +661,10 @@ def main() -> int:
     explicit_artifact_count = 0
     suspect_count = 0
     near_zero_low_d_top_shell_count = 0
+    near_zero_low_d_top_shell_with_operator_coverage_confidence_count = 0
+    near_zero_low_d_top_shell_without_operator_coverage_confidence_count = 0
+    sparse_receipt_sampling_count = 0
+    operator_artifact_count = 0
     sparse_coverage_count = 0
 
     for input_path in args.input:
@@ -628,6 +696,14 @@ def main() -> int:
             suspect_count += 1
         if _near_zero_lambda_low_d_top_shell(record):
             near_zero_low_d_top_shell_count += 1
+            if _operator_coverage_confident(record):
+                near_zero_low_d_top_shell_with_operator_coverage_confidence_count += 1
+            else:
+                near_zero_low_d_top_shell_without_operator_coverage_confidence_count += 1
+        if _operator_artifact(record):
+            operator_artifact_count += 1
+        elif _sparse_receipt_sampling(record):
+            sparse_receipt_sampling_count += 1
         if _is_sparse_coverage(record):
             sparse_coverage_count += 1
         if not audit["artifact"]:
@@ -650,6 +726,10 @@ def main() -> int:
         "artifact_count": explicit_artifact_count,
         "suspect_count": suspect_count,
         "near_zero_low_d_top_shell_count": near_zero_low_d_top_shell_count,
+        "near_zero_low_d_top_shell_with_operator_coverage_confidence_count": near_zero_low_d_top_shell_with_operator_coverage_confidence_count,
+        "near_zero_low_d_top_shell_without_operator_coverage_confidence_count": near_zero_low_d_top_shell_without_operator_coverage_confidence_count,
+        "sparse_receipt_sampling_count": sparse_receipt_sampling_count,
+        "operator_artifact_count": operator_artifact_count,
         "sparse_coverage_count": sparse_coverage_count,
         "explicit_artifact_count": explicit_artifact_count,
         "canonical_rows_excluding_artifacts": canonical_rows,

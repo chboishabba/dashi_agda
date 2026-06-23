@@ -74,6 +74,7 @@ DEFAULT_LOBPCG_TOL = 1.0e-5
 DEFAULT_LOBPCG_MAXITER = 40
 DEFAULT_GENERALIZED_MASS_SHIFT = 1.0e-8
 DEFAULT_TRIAD_SAMPLE_LIMIT = 8
+TAIL_THRESHOLD_EPS = 1.0e-12
 
 CONTROL_CARD = {
     "O": "Classify matrix-free K_N(A) low-frame rows by radial tail cutoff and shell progression.",
@@ -102,6 +103,54 @@ def _parse_csv_numbers(value: str, cast: type[int] | type[float]) -> list[Any]:
     if not parsed:
         raise argparse.ArgumentTypeError("must contain at least one value")
     return parsed
+
+
+def _triad_coverage_metadata(
+    *,
+    requested_limit: int,
+    triad_count: int,
+    sample_count: int,
+) -> dict[str, Any]:
+    requested_limit = max(0, int(requested_limit))
+    triad_count = max(0, int(triad_count))
+    sample_count = max(0, int(sample_count))
+    warnings: list[str] = []
+
+    if triad_count == 0:
+        legacy_status = "empty"
+        sample_materialization_status = "empty"
+        operator_coverage_status = "unavailable"
+        warnings.append("no_triad_candidates")
+    else:
+        operator_coverage_status = "full"
+        if sample_count >= triad_count:
+            sample_materialization_status = "fully_materialized"
+        else:
+            sample_materialization_status = "sampled"
+            if requested_limit <= 0:
+                warnings.append("triad_sample_limit_nonpositive")
+            elif triad_count > requested_limit:
+                warnings.append("triad_count_exceeds_triad_sample_limit")
+            warnings.append("triad_sample_limit_only_bounds_sample_materialization_not_operator_coverage")
+
+        if requested_limit <= 0:
+            legacy_status = "sparse"
+        elif triad_count > requested_limit:
+            legacy_status = "sparse"
+        else:
+            legacy_status = "full"
+
+    return {
+        "triad_sample_limit": int(requested_limit),
+        "triad_sample_materialization_limit": int(requested_limit),
+        "triad_sample_materialization_count": int(sample_count),
+        "triad_sample_materialization_status": sample_materialization_status,
+        "triad_operator_coverage_count": int(triad_count),
+        "triad_operator_coverage_status": operator_coverage_status,
+        "triad_sample_limit_is_operator_truncation": False,
+        "triad_coverage_status": legacy_status,
+        "triad_coverage_warnings": warnings,
+    }
 
 
 def _parse_args() -> argparse.Namespace:
@@ -143,6 +192,12 @@ def _tail_mass(shell_levels: np.ndarray, probability: np.ndarray, cutoff: int) -
     return float(np.sum(p[shells >= float(cutoff)]))
 
 
+def _meets_tail_threshold(value: Any, eta: float) -> bool:
+    if not isinstance(value, (int, float)) or not math.isfinite(float(value)):
+        return False
+    return float(value) + TAIL_THRESHOLD_EPS >= float(eta)
+
+
 def _radial_max_with_mass_eta(shell_levels: np.ndarray, probability: np.ndarray, eta: float) -> int | None:
     shells = np.asarray(shell_levels, dtype=np.float64)
     p = np.asarray(probability, dtype=np.float64)
@@ -150,7 +205,7 @@ def _radial_max_with_mass_eta(shell_levels: np.ndarray, probability: np.ndarray,
     for shell_value, mass in zip(shells, p, strict=False):
         shell = int(shell_value)
         shell_mass[shell] = shell_mass.get(shell, 0.0) + float(mass)
-    active = [shell for shell, mass in shell_mass.items() if mass >= float(eta)]
+    active = [shell for shell, mass in shell_mass.items() if _meets_tail_threshold(mass, float(eta))]
     if len(active) == 0:
         return None
     return int(max(active))
@@ -257,8 +312,8 @@ def _eigen_shell_telemetry(
         telemetry["eigen_shell_variance"] = variance
         telemetry["eigen_shell_max_with_mass_eta"] = {
             f"{float(eta):.6g}": (
-                int(max(shell for shell, mass in shell_mass.items() if mass >= float(eta)))
-                if any(mass >= float(eta) for mass in shell_mass.values())
+                int(max(shell for shell, mass in shell_mass.items() if _meets_tail_threshold(mass, float(eta))))
+                if any(_meets_tail_threshold(mass, float(eta)) for mass in shell_mass.values())
                 else None
             )
             for eta in tail_etas
@@ -289,15 +344,16 @@ def _classify_tail(
     if dissipation > float(d0):
         return "high-dissipation"
     high_tail = float(metrics["high_shell_mass_by_cutoff"][str(int(cutoff))])
-    radial_low = float(metrics["radial_effective_scale"]) <= float(r0) and high_tail < float(eta)
+    profile_tail_high = _meets_tail_threshold(high_tail, float(eta))
+    radial_low = float(metrics["radial_effective_scale"]) <= float(r0) and not profile_tail_high
     if radial_low:
         return "low-radial-band"
     radial_shell_max = metrics.get("radial_shell_max")
-    if high_tail < float(eta) and isinstance(radial_shell_max, (int, float)) and float(radial_shell_max) < float(cutoff):
+    if not profile_tail_high and isinstance(radial_shell_max, (int, float)) and float(radial_shell_max) < float(cutoff):
         return "finite-low-shell-degeneracy"
     if isinstance(worst_shell, (int, float)) and int(worst_shell) <= int(finite_shell_cutoff):
         return "finite-low-shell-degeneracy"
-    if high_tail >= float(eta):
+    if profile_tail_high:
         if not isinstance(worst_shell, (int, float)):
             return "partial"
         return "asymptotic-tail-danger"
@@ -326,12 +382,12 @@ def _tail_grid(
                     profile_tail_mass = profile_tail_mass_by_cutoff.get(str(int(cutoff)))
                     eigen_tail_mass = eigen_tail_mass_by_cutoff.get(str(int(cutoff)))
                     profile_tail_high = (
-                        float(profile_tail_mass) >= float(eta)
+                        _meets_tail_threshold(profile_tail_mass, float(eta))
                         if profile_tail_mass is not None
                         else False
                     )
                     eigen_tail_high = (
-                        bool(float(eigen_tail_mass) >= float(eta))
+                        _meets_tail_threshold(eigen_tail_mass, float(eta))
                         if eigen_tail_mass is not None
                         else None
                     )
@@ -478,6 +534,12 @@ def _row(
         "gpu_kn_authority": False,
         "dense_reconstruction_used": False,
         "triad_sample_limit": int(triad_sample_limit),
+        "triad_sample_materialization_limit": int(triad_sample_limit),
+        "triad_sample_materialization_count": 0,
+        "triad_sample_materialization_status": "unavailable",
+        "triad_operator_coverage_count": 0,
+        "triad_operator_coverage_status": "unavailable",
+        "triad_sample_limit_is_operator_truncation": False,
         "triad_coverage_status": "unavailable",
     }
     try:
@@ -496,18 +558,21 @@ def _row(
 
     row["selected_mode_count"] = int(len(shell_modes))
     row["triad_count"] = int(len(triads))
-    row["triad_coverage_status"] = (
-        "empty"
-        if len(triads) == 0
-        else ("full" if int(triad_sample_limit) >= int(len(triads)) else "sparse")
+    coverage = _triad_coverage_metadata(
+        requested_limit=int(triad_sample_limit),
+        triad_count=int(len(triads)),
+        sample_count=int(len(frame_metrics.get("triad_samples", []) or [])),
     )
+    row.update(coverage)
     row["carrier_stratum_count"] = int(frame_metrics.get("carrier_stratum_count", 0))
     row["dense_oracle_used"] = bool(int(shell_n) <= int(dense_oracle_shell_limit))
     if row["triad_coverage_status"] == "sparse":
-        row.setdefault("warnings", []).append("triad sample limit is sparse for selected triads")
+        row.setdefault("warnings", []).append(
+            "triad_sample_limit_only_bounds_sample_materialization_not_operator_coverage"
+        )
     if len(shell_modes) < 3 or not triads:
         row["status"] = PARTIAL_STATUS
-        row["warnings"] = ["no_shell_triads_or_insufficient_modes"]
+        row["warnings"] = ["no_shell_triads_or_insufficient_modes", *row.get("triad_coverage_warnings", [])]
         row["profile_count"] = 0
         return row
 
@@ -617,6 +682,16 @@ def _row(
                 "metrics": metrics,
                 "tail_grid_summary": _summarize_grid(tail_grid),
                 "tail_grid": tail_grid,
+                "triad_sample_limit": int(triad_sample_limit),
+                "triad_sample_materialization_limit": int(coverage["triad_sample_materialization_limit"]),
+                "triad_sample_materialization_count": int(coverage["triad_sample_materialization_count"]),
+                "triad_sample_materialization_status": coverage["triad_sample_materialization_status"],
+                "triad_operator_coverage_count": int(coverage["triad_operator_coverage_count"]),
+                "triad_operator_coverage_status": coverage["triad_operator_coverage_status"],
+                "triad_sample_limit_is_operator_truncation": bool(
+                    coverage["triad_sample_limit_is_operator_truncation"]
+                ),
+                "triad_coverage_status": coverage["triad_coverage_status"],
                 "warnings": row_warnings,
             }
         )
@@ -691,6 +766,17 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
         "clay_promoted": False,
         "dense_eigensolve_scope": "small_shell_oracle_only",
         "dense_reconstruction_used_by_iterative_lane": False,
+        "triad_sample_materialization_count": int(
+            sum(int(row.get("triad_sample_materialization_count", 0)) for row in rows)
+        ),
+        "triad_operator_coverage_count": int(sum(int(row.get("triad_operator_coverage_count", 0)) for row in rows)),
+        "triad_sample_materialization_sparse_count": int(
+            sum(1 for row in rows if row.get("triad_sample_materialization_status") == "sampled")
+        ),
+        "triad_operator_coverage_full_count": int(
+            sum(1 for row in rows if row.get("triad_operator_coverage_status") == "full")
+        ),
+        "triad_sample_limit_is_operator_truncation": False,
         "tail_progression_status": "fail-closed" if parity_mismatches else "candidate-tail-telemetry",
     }
 
@@ -759,6 +845,8 @@ def main() -> int:
             "max_profiles_per_row": int(args.max_profiles_per_row),
             "profile_sample_limit": int(args.profile_sample_limit),
             "triad_sample_limit": int(args.triad_sample_limit),
+            "triad_sample_materialization_limit": int(args.triad_sample_limit),
+            "triad_sample_limit_is_operator_truncation": False,
             "seeds": seeds,
             "shells": [int(shell) for shell in shells],
             "c0_values": c0_values,

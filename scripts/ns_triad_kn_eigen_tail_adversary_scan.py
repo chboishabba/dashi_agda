@@ -73,6 +73,7 @@ DEFAULT_LOBPCG_MAXITER = 40
 DEFAULT_GENERALIZED_MASS_SHIFT = 1.0e-8
 DEFAULT_DENSE_ORACLE_SHELL_LIMIT = 3
 DEFAULT_GPU_MATVEC_CHECKS = 1
+TAIL_THRESHOLD_EPS = 1.0e-12
 
 CONTROL_CARD = {
     "O": "Run a focused adversary scan that pushes K_N(A) profile tails upward and ranks the low-lambda survivors.",
@@ -116,6 +117,7 @@ def _triad_coverage_metadata(
     triad_count = max(0, int(triad_count))
     triad_sample_count = max(0, int(sample_count))
     warnings: list[str] = []
+    sample_scope = "receipt_samples_only"
 
     if selected_mode_count < 3:
         status = "insufficient_modes"
@@ -126,10 +128,12 @@ def _triad_coverage_metadata(
     elif requested_limit <= 0:
         status = "sparse_sampled"
         warnings.append("triad_sample_limit_nonpositive")
+        warnings.append("triad_receipt_samples_not_materialized")
         warnings.append("triad_samples_not_materialized")
     elif triad_count > requested_limit:
         status = "sparse_sampled"
         warnings.append("triad_count_exceeds_triad_sample_limit")
+        warnings.append("triad_sample_limit_controls_receipt_sample_materialization_only")
     else:
         status = "fully_covered"
 
@@ -137,11 +141,42 @@ def _triad_coverage_metadata(
     return {
         "triad_sample_limit": int(requested_limit),
         "triad_sample_count": int(triad_sample_count),
+        "triad_sample_materialized_count": int(triad_sample_count),
+        "triad_sample_limit_scope": sample_scope,
+        "operator_selected_mode_count": int(selected_mode_count),
+        "operator_triad_count": int(triad_count),
         "triad_count": int(triad_count),
         "selected_mode_count": int(selected_mode_count),
         "triad_coverage_status": status,
         "triad_coverage_warnings": warnings,
         "triad_coverage_ratio": float(coverage_ratio),
+    }
+
+
+def _operator_coverage_metadata(triads: list[Any], selected_mode_count: int) -> dict[str, Any]:
+    selected_mode_count = max(0, int(selected_mode_count))
+    if selected_mode_count == 0:
+        return {
+            "operator_empty_triad_count": 1 if len(triads) == 0 else 0,
+            "operator_zero_degree_mode_count": 0,
+            "operator_zero_degree_mode_fraction": 0.0,
+            "operator_active_mode_count": 0,
+        }
+
+    degree_counts = np.zeros(int(selected_mode_count), dtype=np.int64)
+    for triad in triads:
+        for attr in ("left", "right", "out"):
+            index = getattr(triad, attr, None)
+            if isinstance(index, (int, np.integer)) and 0 <= int(index) < selected_mode_count:
+                degree_counts[int(index)] += 1
+
+    zero_degree_mode_count = int(np.sum(degree_counts == 0))
+    active_mode_count = int(selected_mode_count - zero_degree_mode_count)
+    return {
+        "operator_empty_triad_count": 1 if len(triads) == 0 else 0,
+        "operator_zero_degree_mode_count": int(zero_degree_mode_count),
+        "operator_zero_degree_mode_fraction": float(zero_degree_mode_count / selected_mode_count),
+        "operator_active_mode_count": int(active_mode_count),
     }
 
 
@@ -190,6 +225,12 @@ def _tail_mass(shell_levels: np.ndarray, probability: np.ndarray, cutoff: int) -
     return float(np.sum(p[shells >= float(cutoff)]))
 
 
+def _meets_tail_threshold(value: Any, eta: float) -> bool:
+    if not isinstance(value, (int, float)) or not math.isfinite(float(value)):
+        return False
+    return float(value) + TAIL_THRESHOLD_EPS >= float(eta)
+
+
 def _radial_max_with_mass_eta(shell_levels: np.ndarray, probability: np.ndarray, eta: float) -> int | None:
     shells = np.asarray(shell_levels, dtype=np.float64)
     p = np.asarray(probability, dtype=np.float64)
@@ -197,7 +238,7 @@ def _radial_max_with_mass_eta(shell_levels: np.ndarray, probability: np.ndarray,
     for shell_value, mass in zip(shells, p, strict=False):
         shell = int(shell_value)
         shell_mass[shell] = shell_mass.get(shell, 0.0) + float(mass)
-    active = [shell for shell, mass in shell_mass.items() if mass >= float(eta)]
+    active = [shell for shell, mass in shell_mass.items() if _meets_tail_threshold(mass, float(eta))]
     if len(active) == 0:
         return None
     return int(max(active))
@@ -227,14 +268,15 @@ def _classify_tail_escape(
     worst_shell_value = int(worst_shell) if isinstance(worst_shell, (int, float)) else None
     shell_escape = worst_shell_value is not None and worst_shell_value >= int(cutoff)
     eigen_tail_escape = (
-        float(eigen_tail_mass) >= float(eta)
+        _meets_tail_threshold(eigen_tail_mass, float(eta))
         if isinstance(eigen_tail_mass, (int, float)) and math.isfinite(float(eigen_tail_mass))
         else shell_escape
     )
 
-    if high_tail >= float(eta) and eigen_tail_escape:
+    profile_tail_escape = _meets_tail_threshold(high_tail, float(eta))
+    if profile_tail_escape and eigen_tail_escape:
         return "tail-escape"
-    if high_tail >= float(eta):
+    if profile_tail_escape:
         return "tail-loaded"
     if eigen_tail_escape:
         return "eigenvector-tail-escape"
@@ -272,7 +314,7 @@ def _tail_grid(
                             else None
                         ),
                         "eigen_tail_high": (
-                            bool(float(eigen_tail_mass) >= float(eta))
+                            _meets_tail_threshold(eigen_tail_mass, float(eta))
                             if isinstance(eigen_tail_mass, (int, float)) and math.isfinite(float(eigen_tail_mass))
                             else None
                         ),
@@ -305,7 +347,7 @@ def _summarize_grid(grid: list[dict[str, Any]]) -> dict[str, Any]:
             and math.isfinite(float(high_shell_mass))
             and isinstance(tail_eta, (int, float))
             and math.isfinite(float(tail_eta))
-            and float(high_shell_mass) >= float(tail_eta)
+            and _meets_tail_threshold(high_shell_mass, float(tail_eta))
         )
         if profile_tail_high:
             profile_tail_high_count += 1
@@ -423,8 +465,16 @@ def _row(
         "dense_reconstruction_used": False,
         "triad_sample_limit": int(triad_sample_limit),
         "triad_sample_count": 0,
+        "triad_sample_materialized_count": 0,
+        "triad_sample_limit_scope": "receipt_samples_only",
         "triad_count": 0,
         "selected_mode_count": 0,
+        "operator_triad_count": 0,
+        "operator_selected_mode_count": 0,
+        "operator_empty_triad_count": 0,
+        "operator_zero_degree_mode_count": 0,
+        "operator_zero_degree_mode_fraction": 0.0,
+        "operator_active_mode_count": 0,
         "triad_coverage_status": "unavailable",
         "triad_coverage_warnings": [],
         "triad_coverage_ratio": 0.0,
@@ -452,6 +502,7 @@ def _row(
         sample_count=int(len(frame_metrics.get("triad_samples", []) or [])),
     )
     row.update(coverage)
+    row.update(_operator_coverage_metadata(triads, int(row["selected_mode_count"])))
     row["carrier_stratum_count"] = int(frame_metrics.get("carrier_stratum_count", 0))
     row["dense_oracle_used"] = bool(int(shell_n) <= int(dense_oracle_shell_limit))
     row["tail_biased_scan"] = True
@@ -606,8 +657,16 @@ def _row(
             "vulkan_icd": solved.get("vulkan_icd"),
             "triad_sample_limit": int(coverage["triad_sample_limit"]),
             "triad_sample_count": int(coverage["triad_sample_count"]),
+            "triad_sample_materialized_count": int(coverage["triad_sample_materialized_count"]),
+            "triad_sample_limit_scope": str(coverage["triad_sample_limit_scope"]),
             "triad_count": int(coverage["triad_count"]),
             "selected_mode_count": int(coverage["selected_mode_count"]),
+            "operator_triad_count": int(coverage["operator_triad_count"]),
+            "operator_selected_mode_count": int(coverage["operator_selected_mode_count"]),
+            "operator_empty_triad_count": int(row["operator_empty_triad_count"]),
+            "operator_zero_degree_mode_count": int(row["operator_zero_degree_mode_count"]),
+            "operator_zero_degree_mode_fraction": float(row["operator_zero_degree_mode_fraction"]),
+            "operator_active_mode_count": int(row["operator_active_mode_count"]),
             "triad_coverage_status": coverage["triad_coverage_status"],
             "triad_coverage_warnings": list(coverage["triad_coverage_warnings"]),
             "triad_coverage_ratio": float(coverage["triad_coverage_ratio"]),
@@ -644,6 +703,12 @@ def _row(
             "status": OK_STATUS if evaluated and all(item.get("parity_ok") is True for item in evaluated) else PARTIAL_STATUS,
             "profile_count": int(len(evaluated)),
             "candidate_receipt_count": int(len(evaluated)),
+            "operator_triad_count": int(row["operator_triad_count"]),
+            "operator_selected_mode_count": int(row["operator_selected_mode_count"]),
+            "operator_empty_triad_count": int(row["operator_empty_triad_count"]),
+            "operator_zero_degree_mode_count": int(row["operator_zero_degree_mode_count"]),
+            "operator_zero_degree_mode_fraction": float(row["operator_zero_degree_mode_fraction"]),
+            "operator_active_mode_count": int(row["operator_active_mode_count"]),
             "parity_ok_count": int(sum(1 for item in evaluated if item.get("parity_ok") is True)),
             "parity_mismatch_count": int(sum(1 for item in evaluated if item.get("parity_ok") is not True)),
             "tail_escape_candidate_count": int(len(tail_escape_candidates)),
@@ -723,6 +788,10 @@ def _summarize_triad_coverage(rows: list[dict[str, Any]], requested_limit: int) 
     triad_count = sum(int(row.get("triad_count", 0)) for row in rows)
     selected_mode_count = sum(int(row.get("selected_mode_count", 0)) for row in rows)
     triad_sample_count = sum(int(row.get("triad_sample_count", 0)) for row in rows)
+    operator_triad_count = sum(int(row.get("operator_triad_count", row.get("triad_count", 0))) for row in rows)
+    operator_selected_mode_count = sum(
+        int(row.get("operator_selected_mode_count", row.get("selected_mode_count", 0))) for row in rows
+    )
     warnings: list[str] = []
     status = "unavailable"
     saw_valid_status = False
@@ -749,9 +818,13 @@ def _summarize_triad_coverage(rows: list[dict[str, Any]], requested_limit: int) 
         warnings.append("triad_coverage_summary_unavailable")
     return {
         "triad_sample_limit": int(requested_limit),
+        "triad_sample_materialized_count": int(triad_sample_count),
         "triad_count": int(triad_count),
         "selected_mode_count": int(selected_mode_count),
+        "operator_triad_count": int(operator_triad_count),
+        "operator_selected_mode_count": int(operator_selected_mode_count),
         "triad_sample_count": int(triad_sample_count),
+        "triad_sample_limit_scope": "receipt_samples_only",
         "triad_coverage_status": status,
         "triad_coverage_warnings": warnings,
     }
@@ -777,6 +850,19 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
     profile_tail_high_eigen_tail_unavailable_count = sum(
         int(row.get("profile_tail_high_eigen_tail_unavailable_count", 0)) for row in rows
     )
+    zero_degree_fractions = [
+        float(row.get("operator_zero_degree_mode_fraction", 0.0))
+        for row in rows
+        if isinstance(row.get("operator_zero_degree_mode_fraction"), (int, float))
+        and math.isfinite(float(row.get("operator_zero_degree_mode_fraction")))
+    ]
+    operator_triad_count = sum(int(row.get("operator_triad_count", row.get("triad_count", 0))) for row in rows)
+    operator_selected_mode_count = sum(
+        int(row.get("operator_selected_mode_count", row.get("selected_mode_count", 0))) for row in rows
+    )
+    operator_empty_triad_count = sum(int(row.get("operator_empty_triad_count", 0)) for row in rows)
+    operator_zero_degree_mode_count = sum(int(row.get("operator_zero_degree_mode_count", 0)) for row in rows)
+    operator_active_mode_count = sum(int(row.get("operator_active_mode_count", 0)) for row in rows)
     best_profiles = [
         row.get("best_low_lambda_profile")
         for row in rows
@@ -796,6 +882,7 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
         "error_rows": int(sum(1 for row in rows if row.get("status") == ERROR_STATUS)),
         "kn_backend": backend,
         "candidate_receipt_count": int(total_candidates),
+        "triad_sample_materialized_count": int(sum(int(row.get("triad_sample_count", 0)) for row in rows)),
         "parity_mismatch_count": int(parity_mismatches),
         "tail_escape_candidate_count": int(tail_escape_candidates),
         "tail_grid_point_count": int(tail_grid_point_count),
@@ -808,6 +895,12 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
         "profile_tail_high_eigen_tail_high_count": int(profile_tail_high_eigen_tail_high_count),
         "profile_tail_high_eigen_tail_low_count": int(profile_tail_high_eigen_tail_low_count),
         "profile_tail_high_eigen_tail_unavailable_count": int(profile_tail_high_eigen_tail_unavailable_count),
+        "operator_triad_count": int(operator_triad_count),
+        "operator_selected_mode_count": int(operator_selected_mode_count),
+        "operator_empty_triad_count": int(operator_empty_triad_count),
+        "operator_zero_degree_mode_count": int(operator_zero_degree_mode_count),
+        "operator_active_mode_count": int(operator_active_mode_count),
+        "operator_zero_degree_mode_fraction_mean": float(np.mean(zero_degree_fractions)) if zero_degree_fractions else 0.0,
         "best_global_low_lambda_profile": best_global,
         "best_global_low_lambda": (
             float(best_global["lambda_min_iterative"])
@@ -925,6 +1018,7 @@ def main() -> int:
             "zero_eps": float(args.zero_eps),
             "sample_count": int(args.sample_count),
             "triad_sample_limit": int(args.triad_sample_limit),
+            "triad_sample_limit_scope": str(triad_coverage_summary["triad_sample_limit_scope"]),
             "mix_count": int(args.mix_count),
             "seeds": seeds,
             "shells": [int(shell) for shell in shells],
@@ -946,7 +1040,10 @@ def main() -> int:
             "force_tail_profiles": force_tail_profiles,
             "triad_count": int(triad_coverage_summary["triad_count"]),
             "selected_mode_count": int(triad_coverage_summary["selected_mode_count"]),
+            "operator_triad_count": int(triad_coverage_summary["operator_triad_count"]),
+            "operator_selected_mode_count": int(triad_coverage_summary["operator_selected_mode_count"]),
             "triad_sample_count": int(triad_coverage_summary["triad_sample_count"]),
+            "triad_sample_materialized_count": int(triad_coverage_summary["triad_sample_materialized_count"]),
             "triad_coverage_status": str(triad_coverage_summary["triad_coverage_status"]),
             "triad_coverage_warnings": list(triad_coverage_summary["triad_coverage_warnings"]),
         },

@@ -128,6 +128,25 @@ def _validate_expected_flags(payload: dict[str, Any], field_name: str, expected:
     for key, expected_value in expected.items():
         if field.get(key) is not expected_value:
             errors.append(f"{field_name}.{key}: must be {expected_value!r}")
+    for key, value in field.items():
+        if isinstance(key, str) and key.startswith("operator_") and key.endswith("_authority") and value is not False:
+            errors.append(f"{field_name}.{key}: must be false")
+
+
+def _validate_optional_false_flags(payload: dict[str, Any], path: str, errors: list[str], keys: tuple[str, ...]) -> None:
+    for key in keys:
+        if key in payload and payload.get(key) is not False:
+            errors.append(f"{path}.{key}: must be false")
+    for key, value in payload.items():
+        if isinstance(key, str) and key.startswith("operator_") and key.endswith("_authority") and value is not False:
+            errors.append(f"{path}.{key}: must be false")
+
+
+def _claims_full_coverage(status: Any) -> bool:
+    if not isinstance(status, str):
+        return False
+    normalized = status.strip().lower().replace("-", "_").replace(" ", "_")
+    return normalized in {"fully_covered", "full_coverage", "full_covered"}
 
 
 def _validate_control_card(payload: dict[str, Any], errors: list[str]) -> None:
@@ -212,25 +231,46 @@ def _validate_triad_coverage_metadata(
     selected_mode_count: Any = None,
     triad_count: Any = None,
 ) -> None:
-    coverage_metadata_present = False
-
     sample_limit = payload.get("triad_sample_limit")
     if sample_limit is not None:
-        coverage_metadata_present = True
         if _nonnegative_int(sample_limit) is None:
             errors.append(f"{path}.triad_sample_limit: must be nonnegative int")
 
+    sample_count = payload.get("triad_sample_count")
+    if sample_count is not None and _nonnegative_int(sample_count) is None:
+        errors.append(f"{path}.triad_sample_count: must be nonnegative int")
+
+    sample_materialized_count = payload.get("triad_sample_materialized_count")
+    if sample_materialized_count is not None and _nonnegative_int(sample_materialized_count) is None:
+        errors.append(f"{path}.triad_sample_materialized_count: must be nonnegative int")
+
+    sample_limit_scope = payload.get("triad_sample_limit_scope")
+    if sample_limit_scope is not None and (not isinstance(sample_limit_scope, str) or not sample_limit_scope.strip()):
+        errors.append(f"{path}.triad_sample_limit_scope: must be non-empty string")
+
     coverage_status = payload.get("triad_coverage_status")
     if coverage_status is not None:
-        coverage_metadata_present = True
         if not isinstance(coverage_status, str) or not coverage_status.strip():
             errors.append(f"{path}.triad_coverage_status: must be non-empty string")
+
+    coverage_ratio = payload.get("triad_coverage_ratio")
+    if coverage_ratio is not None:
+        parsed_ratio = _finite(coverage_ratio)
+        if parsed_ratio is None or parsed_ratio < -1.0e-12 or parsed_ratio > 1.0 + 1.0e-12:
+            errors.append(f"{path}.triad_coverage_ratio: must be finite fraction in [0,1]")
+
+    warnings = payload.get("triad_coverage_warnings")
+    if warnings is not None and not isinstance(warnings, list):
+        errors.append(f"{path}.triad_coverage_warnings: must be list or null")
 
     for key, value in payload.items():
         if not isinstance(key, str) or not key.startswith("triad_coverage_"):
             continue
-        coverage_metadata_present = True
         if key == "triad_coverage_status":
+            continue
+        if key == "triad_coverage_warnings":
+            continue
+        if key == "triad_coverage_ratio":
             continue
         if key.endswith("_count"):
             if _nonnegative_int(value) is None:
@@ -240,13 +280,84 @@ def _validate_triad_coverage_metadata(
             if parsed is None or parsed < -1.0e-12 or parsed > 1.0 + 1.0e-12:
                 errors.append(f"{path}.{key}: must be finite fraction in [0,1]")
 
-    if coverage_metadata_present and coverage_status is None:
-        selected_modes = _nonnegative_int(selected_mode_count)
-        triads = _nonnegative_int(triad_count)
-        if selected_modes is not None and triads is not None and selected_modes >= 6 and triads > 0:
+    operator_selected_mode_count = payload.get("operator_selected_mode_count")
+    if operator_selected_mode_count is not None and _nonnegative_int(operator_selected_mode_count) is None:
+        errors.append(f"{path}.operator_selected_mode_count: must be nonnegative int")
+
+    operator_triad_count = payload.get("operator_triad_count")
+    if operator_triad_count is not None and _nonnegative_int(operator_triad_count) is None:
+        errors.append(f"{path}.operator_triad_count: must be nonnegative int")
+
+    operator_empty_triad_count = payload.get("operator_empty_triad_count")
+    if operator_empty_triad_count is not None and _nonnegative_int(operator_empty_triad_count) is None:
+        errors.append(f"{path}.operator_empty_triad_count: must be nonnegative int")
+
+    operator_zero_degree_mode_count = payload.get("operator_zero_degree_mode_count")
+    if operator_zero_degree_mode_count is not None and _nonnegative_int(operator_zero_degree_mode_count) is None:
+        errors.append(f"{path}.operator_zero_degree_mode_count: must be nonnegative int")
+
+    operator_zero_degree_mode_fraction = payload.get("operator_zero_degree_mode_fraction")
+    if operator_zero_degree_mode_fraction is not None:
+        parsed_fraction = _finite(operator_zero_degree_mode_fraction)
+        if parsed_fraction is None or parsed_fraction < -1.0e-12 or parsed_fraction > 1.0 + 1.0e-12:
+            errors.append(f"{path}.operator_zero_degree_mode_fraction: must be finite fraction in [0,1]")
+
+    operator_active_mode_count = payload.get("operator_active_mode_count")
+    if operator_active_mode_count is not None and _nonnegative_int(operator_active_mode_count) is None:
+        errors.append(f"{path}.operator_active_mode_count: must be nonnegative int")
+
+    if (
+        _nonnegative_int(operator_selected_mode_count) is not None
+        and _nonnegative_int(operator_zero_degree_mode_count) is not None
+        and _nonnegative_int(operator_active_mode_count) is not None
+    ):
+        if int(operator_zero_degree_mode_count) + int(operator_active_mode_count) != int(operator_selected_mode_count):
             errors.append(
-                f"{path}.triad_coverage_status: required for sparse-like rows with selected_mode_count >= 6"
+                f"{path}.operator_active_mode_count/operator_zero_degree_mode_count: must sum to operator_selected_mode_count"
             )
+
+    if _nonnegative_int(selected_mode_count) is not None and _nonnegative_int(operator_selected_mode_count) is not None:
+        if int(selected_mode_count) != int(operator_selected_mode_count):
+            errors.append(f"{path}.operator_selected_mode_count: must match selected_mode_count")
+
+    if _nonnegative_int(triad_count) is not None and _nonnegative_int(operator_triad_count) is not None:
+        if int(triad_count) != int(operator_triad_count):
+            errors.append(f"{path}.operator_triad_count: must match triad_count")
+
+    if (
+        _nonnegative_int(operator_selected_mode_count) is not None
+        and _nonnegative_int(operator_zero_degree_mode_count) is not None
+        and operator_zero_degree_mode_fraction is not None
+        and _finite(operator_zero_degree_mode_fraction) is not None
+        and int(operator_selected_mode_count) > 0
+    ):
+        expected_fraction = int(operator_zero_degree_mode_count) / int(operator_selected_mode_count)
+        if abs(float(operator_zero_degree_mode_fraction) - expected_fraction) > 1.0e-12:
+            errors.append(
+                f"{path}.operator_zero_degree_mode_fraction: must match operator_zero_degree_mode_count/operator_selected_mode_count"
+            )
+
+    triads = _nonnegative_int(triad_count)
+    sample_total = _nonnegative_int(sample_count)
+    if _claims_full_coverage(coverage_status) and triads is not None:
+        effective_samples = sample_total
+        if effective_samples is None:
+            effective_samples = _nonnegative_int(sample_limit)
+        if effective_samples is not None and effective_samples < triads:
+            errors.append(
+                f"{path}.triad_coverage_status: full coverage claim is incompatible with triad_sample_count < triad_count"
+            )
+
+    if _nonnegative_int(sample_materialized_count) is not None and sample_total is not None:
+        if int(sample_materialized_count) != int(sample_total):
+            errors.append(f"{path}.triad_sample_materialized_count: must match triad_sample_count")
+
+    if _nonnegative_int(operator_empty_triad_count) is not None and triads is not None:
+        expected_empty = 1 if triads == 0 else 0
+        if int(operator_empty_triad_count) not in {0, 1}:
+            errors.append(f"{path}.operator_empty_triad_count: must be 0 or 1")
+        elif int(operator_empty_triad_count) != expected_empty:
+            errors.append(f"{path}.operator_empty_triad_count: inconsistent with triad_count")
 
 
 def _validate_metrics(metrics: Any, path: str, errors: list[str]) -> None:
@@ -320,11 +431,14 @@ def _validate_candidate_profile(profile: Any, path: str, backend: str, errors: l
     if profile.get("dense_oracle_used") not in (True, False):
         errors.append(f"{path}.dense_oracle_used: must be bool")
     for key in ("candidate_only", "fail_closed"):
-        if profile.get(key) is not True:
+        if key in profile and profile.get(key) is not True:
             errors.append(f"{path}.{key}: must be true")
-    for key in ("gpu_kn_authority", "theorem_promoted", "full_ns_promoted", "clay_promoted", "dense_reconstruction_used"):
-        if profile.get(key) is not False:
-            errors.append(f"{path}.{key}: must be false")
+    _validate_optional_false_flags(
+        profile,
+        path,
+        errors,
+        ("gpu_kn_authority", "theorem_promoted", "full_ns_promoted", "clay_promoted", "dense_reconstruction_used"),
+    )
 
     if profile.get("block_matvec_enabled") not in (True, False):
         errors.append(f"{path}.block_matvec_enabled: must be bool")
@@ -436,16 +550,15 @@ def _validate_row(row: dict[str, Any], index: int, parameters: dict[str, Any], e
         errors.append(f"rows[{index}].snapshot_index: must be nonnegative int")
     if _nonnegative_int(row.get("shell")) is None:
         errors.append(f"rows[{index}].shell: must be nonnegative int")
-    for key in (
-        "candidate_only",
-        "fail_closed",
-        "tail_biased_scan",
-    ):
-        if row.get(key) is not True:
+    for key in ("candidate_only", "fail_closed", "tail_biased_scan"):
+        if key in row and row.get(key) is not True:
             errors.append(f"rows[{index}].{key}: must be true")
-    for key in ("gpu_kn_authority", "theorem_promoted", "full_ns_promoted", "clay_promoted", "dense_reconstruction_used"):
-        if row.get(key) is not False:
-            errors.append(f"rows[{index}].{key}: must be false")
+    _validate_optional_false_flags(
+        row,
+        f"rows[{index}]",
+        errors,
+        ("gpu_kn_authority", "theorem_promoted", "full_ns_promoted", "clay_promoted", "dense_reconstruction_used"),
+    )
     if row.get("kn_backend") != parameters.get("kn_backend"):
         errors.append(f"rows[{index}].kn_backend: must match parameters.kn_backend")
     if row.get("dense_oracle_used") not in (True, False):
@@ -525,11 +638,14 @@ def _validate_aggregate(aggregate: Any, rows: list[dict[str, Any]], parameters: 
     if aggregate.get("kn_backend") != parameters.get("kn_backend"):
         errors.append("aggregate.kn_backend: must match parameters.kn_backend")
     for key in ("candidate_only", "fail_closed"):
-        if aggregate.get(key) is not True:
+        if key in aggregate and aggregate.get(key) is not True:
             errors.append(f"aggregate.{key}: must be true")
-    for key in ("gpu_kn_authority", "theorem_promoted", "full_ns_promoted", "clay_promoted", "dense_reconstruction_used_by_iterative_lane"):
-        if aggregate.get(key) is not False:
-            errors.append(f"aggregate.{key}: must be false")
+    _validate_optional_false_flags(
+        aggregate,
+        "aggregate",
+        errors,
+        ("gpu_kn_authority", "theorem_promoted", "full_ns_promoted", "clay_promoted", "dense_reconstruction_used_by_iterative_lane"),
+    )
     if aggregate.get("dense_eigensolve_scope") != "small_shell_oracle_only":
         errors.append("aggregate.dense_eigensolve_scope: must be 'small_shell_oracle_only'")
     if aggregate.get("tail_adversary_status") not in {"candidate-tail-telemetry", "fail-closed"}:
