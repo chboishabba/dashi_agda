@@ -29,6 +29,10 @@ ALLOWED_TAIL_BRANCHES = {
     "tail-loaded",
     "eigenvector-tail-escape",
     "tail-contained",
+    "mixed-tail",
+    "dominant-shell",
+    "mixed_tail",
+    "dominant_shell",
 }
 ALLOWED_TAIL_GRID_DETAIL_MODES = {"full", "summary", "none"}
 
@@ -129,7 +133,7 @@ def _validate_expected_flags(payload: dict[str, Any], field_name: str, expected:
         if field.get(key) is not expected_value:
             errors.append(f"{field_name}.{key}: must be {expected_value!r}")
     for key, value in field.items():
-        if isinstance(key, str) and key.startswith("operator_") and key.endswith("_authority") and value is not False:
+        if isinstance(key, str) and key.endswith("_authority") and value is not False:
             errors.append(f"{field_name}.{key}: must be false")
 
 
@@ -138,8 +142,51 @@ def _validate_optional_false_flags(payload: dict[str, Any], path: str, errors: l
         if key in payload and payload.get(key) is not False:
             errors.append(f"{path}.{key}: must be false")
     for key, value in payload.items():
-        if isinstance(key, str) and key.startswith("operator_") and key.endswith("_authority") and value is not False:
+        if isinstance(key, str) and key.endswith("_authority") and value is not False:
             errors.append(f"{path}.{key}: must be false")
+
+
+def _validate_optional_bool_count_pair(
+    payload: dict[str, Any],
+    path: str,
+    errors: list[str],
+    base_names: tuple[str, ...],
+) -> None:
+    bool_suffixes = ("_present", "_enabled", "_active", "_is_present", "")
+    count_suffixes = ("_count", "_row_count", "_profile_count", "_branch_count")
+    for base_name in base_names:
+        bool_key = next((f"{base_name}{suffix}" for suffix in bool_suffixes if f"{base_name}{suffix}" in payload), None)
+        count_key = next((f"{base_name}{suffix}" for suffix in count_suffixes if f"{base_name}{suffix}" in payload), None)
+
+        bool_value = payload.get(bool_key) if bool_key is not None else None
+        if bool_key is not None and not isinstance(bool_value, bool):
+            errors.append(f"{path}.{bool_key}: must be bool")
+
+        count_value = payload.get(count_key) if count_key is not None else None
+        if count_key is not None and _nonnegative_int(count_value) is None:
+            errors.append(f"{path}.{count_key}: must be nonnegative int")
+
+        if bool_key is not None and count_key is not None and isinstance(bool_value, bool) and _nonnegative_int(count_value) is not None:
+            expected_bool = int(count_value) > 0
+            if bool_value is not expected_bool:
+                errors.append(f"{path}.{bool_key}/{count_key}: boolean/count mismatch")
+
+
+def _validate_profile_tail_high_consistency(payload: dict[str, Any], path: str, errors: list[str]) -> None:
+    profile_tail_high_count = _nonnegative_int(payload.get("profile_tail_high_count"))
+    subcount_keys = (
+        "profile_tail_high_eigen_tail_high_count",
+        "profile_tail_high_eigen_tail_low_count",
+        "profile_tail_high_eigen_tail_unavailable_count",
+    )
+    subcount_values = [
+        int(payload[key])
+        for key in subcount_keys
+        if _nonnegative_int(payload.get(key)) is not None
+    ]
+    if profile_tail_high_count is not None and subcount_values:
+        if sum(subcount_values) != int(profile_tail_high_count):
+            errors.append(f"{path}.profile_tail_high_count: must match profile_tail_high_* subcounts")
 
 
 def _claims_full_coverage(status: Any) -> bool:
@@ -181,6 +228,7 @@ def _validate_tail_grid(tail_grid: Any, path: str, errors: list[str]) -> None:
             errors.append(f"{path}[{index}].eigen_tail_high: must be bool or null")
         if _nonnegative_int(item.get("tail_cutoff")) is None:
             errors.append(f"{path}[{index}].tail_cutoff: must be nonnegative int")
+        _validate_optional_bool_count_pair(item, f"{path}[{index}]", errors, ("mixed_tail", "dominant_shell"))
         _validate_tail_branch(item.get("branch"), f"{path}[{index}].branch", errors)
 
 
@@ -188,18 +236,45 @@ def _validate_tail_grid_summary(summary: Any, path: str, errors: list[str]) -> N
     if not isinstance(summary, dict):
         errors.append(f"{path}: must be object")
         return
-    for key in ("grid_point_count", "frame_coercive_count", "tail_escape_count", "tail_loaded_count", "tail_contained_count", "eigenvector_tail_escape_count"):
+    for key in (
+        "grid_point_count",
+        "frame_coercive_count",
+        "tail_escape_count",
+        "tail_loaded_count",
+        "tail_contained_count",
+        "eigenvector_tail_escape_count",
+    ):
         if _nonnegative_int(summary.get(key)) is None:
             errors.append(f"{path}.{key}: must be nonnegative int")
+    for key in (
+        "profile_tail_high_count",
+        "profile_tail_high_eigen_tail_high_count",
+        "profile_tail_high_eigen_tail_low_count",
+        "profile_tail_high_eigen_tail_unavailable_count",
+        "profile_tail_threshold_met_count",
+        "eigen_tail_mass_threshold_met_count",
+        "dominant_shell_escape_count",
+        "top_shell_escape_count",
+        "mixed_tail_candidate_count",
+    ):
+        if key in summary and _nonnegative_int(summary.get(key)) is None:
+            errors.append(f"{path}.{key}: must be nonnegative int")
+    _validate_optional_bool_count_pair(summary, path, errors, ("mixed_tail", "dominant_shell"))
     branch_counts = summary.get("branch_counts")
     if not isinstance(branch_counts, dict):
         errors.append(f"{path}.branch_counts: must be object")
     else:
+        branch_total = 0
         for key, value in branch_counts.items():
             if key not in ALLOWED_TAIL_BRANCHES:
                 errors.append(f"{path}.branch_counts.{key}: invalid tail branch")
             if _nonnegative_int(value) is None:
                 errors.append(f"{path}.branch_counts.{key}: must be nonnegative int")
+            else:
+                branch_total += int(value)
+        if _nonnegative_int(summary.get("grid_point_count")) is not None and branch_total != int(summary["grid_point_count"]):
+            errors.append(f"{path}.branch_counts: must sum to grid_point_count")
+    _validate_profile_tail_high_consistency(summary, path, errors)
 
 
 def _validate_tail_grid_detail(detail: Any, path: str, errors: list[str]) -> None:
@@ -439,6 +514,7 @@ def _validate_candidate_profile(profile: Any, path: str, backend: str, errors: l
         errors,
         ("gpu_kn_authority", "theorem_promoted", "full_ns_promoted", "clay_promoted", "dense_reconstruction_used"),
     )
+    _validate_optional_bool_count_pair(profile, path, errors, ("mixed_tail", "dominant_shell"))
 
     if profile.get("block_matvec_enabled") not in (True, False):
         errors.append(f"{path}.block_matvec_enabled: must be bool")
@@ -559,6 +635,8 @@ def _validate_row(row: dict[str, Any], index: int, parameters: dict[str, Any], e
         errors,
         ("gpu_kn_authority", "theorem_promoted", "full_ns_promoted", "clay_promoted", "dense_reconstruction_used"),
     )
+    _validate_optional_bool_count_pair(row, f"rows[{index}]", errors, ("mixed_tail", "dominant_shell"))
+    _validate_profile_tail_high_consistency(row, f"rows[{index}]", errors)
     if row.get("kn_backend") != parameters.get("kn_backend"):
         errors.append(f"rows[{index}].kn_backend: must match parameters.kn_backend")
     if row.get("dense_oracle_used") not in (True, False):
@@ -587,6 +665,19 @@ def _validate_row(row: dict[str, Any], index: int, parameters: dict[str, Any], e
         "tail_escape_candidate_count",
     ):
         if _nonnegative_int(row.get(key)) is None:
+            errors.append(f"rows[{index}].{key}: must be nonnegative int")
+    for key in (
+        "profile_tail_high_count",
+        "profile_tail_high_eigen_tail_high_count",
+        "profile_tail_high_eigen_tail_low_count",
+        "profile_tail_high_eigen_tail_unavailable_count",
+        "profile_tail_threshold_met_count",
+        "eigen_tail_mass_threshold_met_count",
+        "dominant_shell_escape_count",
+        "top_shell_escape_count",
+        "mixed_tail_candidate_count",
+    ):
+        if key in row and _nonnegative_int(row.get(key)) is None:
             errors.append(f"rows[{index}].{key}: must be nonnegative int")
 
     for key in ("best_low_lambda_profile", "best_tail_escape_profile"):
@@ -626,6 +717,19 @@ def _validate_aggregate(aggregate: Any, rows: list[dict[str, Any]], parameters: 
     for key in ("processed_rows", "ok_rows", "partial_rows", "error_rows", "candidate_receipt_count", "parity_mismatch_count", "tail_escape_candidate_count"):
         if _nonnegative_int(aggregate.get(key)) is None:
             errors.append(f"aggregate.{key}: must be nonnegative int")
+    for key in (
+        "profile_tail_high_count",
+        "profile_tail_high_eigen_tail_high_count",
+        "profile_tail_high_eigen_tail_low_count",
+        "profile_tail_high_eigen_tail_unavailable_count",
+        "profile_tail_threshold_met_count",
+        "eigen_tail_mass_threshold_met_count",
+        "dominant_shell_escape_count",
+        "top_shell_escape_count",
+        "mixed_tail_candidate_count",
+    ):
+        if key in aggregate and _nonnegative_int(aggregate.get(key)) is None:
+            errors.append(f"aggregate.{key}: must be nonnegative int")
     if _nonnegative_int(aggregate.get("processed_rows")) is not None and aggregate.get("processed_rows") != len(rows):
         errors.append("aggregate.processed_rows: must match row count")
     if _nonnegative_int(aggregate.get("ok_rows")) is not None and aggregate.get("ok_rows") != sum(1 for row in rows if row.get("status") == OK_STATUS):
@@ -646,6 +750,8 @@ def _validate_aggregate(aggregate: Any, rows: list[dict[str, Any]], parameters: 
         errors,
         ("gpu_kn_authority", "theorem_promoted", "full_ns_promoted", "clay_promoted", "dense_reconstruction_used_by_iterative_lane"),
     )
+    _validate_optional_bool_count_pair(aggregate, "aggregate", errors, ("mixed_tail", "dominant_shell"))
+    _validate_profile_tail_high_consistency(aggregate, "aggregate", errors)
     if aggregate.get("dense_eigensolve_scope") != "small_shell_oracle_only":
         errors.append("aggregate.dense_eigensolve_scope: must be 'small_shell_oracle_only'")
     if aggregate.get("tail_adversary_status") not in {"candidate-tail-telemetry", "fail-closed"}:

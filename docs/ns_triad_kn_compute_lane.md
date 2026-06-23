@@ -40,9 +40,12 @@ S:
   metadata and tolerant tail-threshold classification returned checker-ok,
   `lambda_min ~= 0.19363`, worst eigen shell `1`, worst shell mass `~0.454`,
   `operator_zero_degree_mode_count = 0`, and `tail_escape_candidate_count = 1`.
-  This is a mass-threshold tail candidate, not a dominant-top-shell eigenmode:
+  The shell-6 v3 correction reclassifies this receipt into the three-way branch:
+  finite-shell, dominant escaping top-shell, or mixed-tail broad eigenmode.
+  For this batch the evidence points to the mixed-tail broad eigenmode branch:
   the eigenvector has high tail mass beyond cutoff `K=4`, but its largest shell
-  component remains shell `1`.
+  component remains shell `1`, so the remaining proof work must separate tail
+  mass from coherence, Schur structure, and residence.
 - `triad_sample_limit` is receipt sample materialization only. It does not truncate
   the matvec operator; receipts now expose `operator_triad_count`,
   `operator_selected_mode_count`, zero-degree counters, and
@@ -72,9 +75,10 @@ F:
 - The Clay-relevant gap is the asymptotic theorem:
   `low lambda_min`, low/moderate `D`, and an escaping bad eigenmode cannot coexist
   along a sequence of increasing radial shells.
-  The shell-6 v3 smoke makes the gap sharper: tail mass in the eigenvector can be
-  high while the dominant bad shell is still low, so proof and telemetry should
-  distinguish tail-mass escape from dominant-shell escape.
+  The shell-6 v3 smoke makes the gap sharper: the lane now distinguishes
+  finite-shell, dominant escaping top-shell, and mixed-tail broad eigenmode
+  cases, and the latter needs coherence, Schur, and residence arguments rather
+  than a simple tail-mass or dominant-shell readout.
 
 Smoke commands:
 

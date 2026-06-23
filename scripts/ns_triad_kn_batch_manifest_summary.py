@@ -49,6 +49,38 @@ TAIL_ESCAPE_KEYS = (
     "tail_escape_count",
     "eigenvector_tail_escape_count",
 )
+MIXED_TAIL_BRANCH_COUNTERS = {
+    "profile_tail_high_count": (
+        "profile_tail_high_count",
+        "profile_tail_high",
+        "profile-tail-high",
+    ),
+    "profile_tail_threshold_met_count": (
+        "profile_tail_threshold_met_count",
+        "profile_tail_threshold_met",
+        "profile-tail-high",
+    ),
+    "eigen_tail_mass_threshold_met_count": (
+        "eigen_tail_mass_threshold_met_count",
+        "eigen_tail_mass_threshold_met",
+        "eigen-tail-mass-high",
+    ),
+    "dominant_shell_escape_count": (
+        "dominant_shell_escape_count",
+        "dominant_shell_escape",
+        "dominant-shell-escape",
+    ),
+    "top_shell_escape_count": (
+        "top_shell_escape_count",
+        "top_shell_escape",
+        "top-shell-escape",
+    ),
+    "mixed_tail_candidate_count": (
+        "mixed_tail_candidate_count",
+        "mixed_tail_candidate",
+        "mixed-tail-candidate",
+    ),
+}
 TRIAD_COVERAGE_KEYS = (
     "triad_coverage_status",
     "coverage_status",
@@ -319,6 +351,54 @@ def _degree_counter(container: dict[str, Any], keys: tuple[str, ...]) -> int | N
     return None
 
 
+def _summary_sources(*values: Any) -> list[dict[str, Any]]:
+    sources: list[dict[str, Any]] = []
+    seen: set[int] = set()
+
+    def add(value: Any) -> None:
+        if not isinstance(value, dict):
+            return
+        identifier = id(value)
+        if identifier in seen:
+            return
+        seen.add(identifier)
+        sources.append(value)
+
+    for value in values:
+        add(value)
+
+    index = 0
+    while index < len(sources):
+        container = sources[index]
+        index += 1
+        for key in ("aggregate", "summary", "best_profile", "tail_grid_summary"):
+            add(container.get(key))
+        for key in ("rows", "candidate_receipts", "profile_samples", "tail_grid"):
+            value = container.get(key)
+            if isinstance(value, list):
+                for item in value:
+                    add(item)
+    return sources
+
+
+def _branch_counter(
+    sources: list[dict[str, Any]],
+    keys: tuple[str, ...],
+    branch_labels: tuple[str, ...] = (),
+) -> int | None:
+    for source in sources:
+        value = _first_int(source, keys)
+        if value is not None:
+            return value
+        branch_counts = source.get("branch_counts")
+        if isinstance(branch_counts, dict):
+            for branch_label in branch_labels:
+                counter = _coerce_int(branch_counts.get(branch_label))
+                if counter is not None:
+                    return counter
+    return None
+
+
 def _coverage_counts_by_status(shells: list[dict[str, Any]]) -> dict[str, int]:
     counts: dict[str, int] = {}
     for shell in shells:
@@ -353,6 +433,8 @@ def _merge_record(existing: dict[str, Any], incoming: dict[str, Any]) -> dict[st
     merged["tail_escape_candidate_count"] = int(merged.get("tail_escape_candidate_count", 0)) + int(
         incoming.get("tail_escape_candidate_count", 0) or 0
     )
+    for key in MIXED_TAIL_BRANCH_COUNTERS:
+        merged[key] = int(merged.get(key, 0) or 0) + int(incoming.get(key, 0) or 0)
     for key in ("triad_coverage_ratio", "operator_sample_coverage_ratio"):
         merged_value = _coerce_float(merged.get(key))
         incoming_value = _coerce_float(incoming.get(key))
@@ -438,6 +520,7 @@ def _summarize_manifest(manifest: dict[str, Any], manifest_path: Path) -> list[d
         coverage_sample_limit = _coverage_sample_limit(source)
         zero_degree_count = _degree_counter(source, ZERO_DEGREE_COUNT_KEYS)
         empty_degree_count = _degree_counter(source, EMPTY_DEGREE_COUNT_KEYS)
+        summary_sources = _summary_sources(run, scan_payload, row, source, best_profile, profile_source)
         summary = {
             "shell": shell,
             "ok": run.get("ok"),
@@ -455,6 +538,10 @@ def _summarize_manifest(manifest: dict[str, Any], manifest_path: Path) -> list[d
             "operator_sample_coverage_status": operator_sample_coverage_status,
             "operator_sample_coverage_ratio": coverage_ratio,
         }
+        for key, aliases in MIXED_TAIL_BRANCH_COUNTERS.items():
+            summary[key] = _branch_counter(summary_sources, aliases, tuple(alias.replace("_", "-") for alias in aliases))
+            if summary[key] is None:
+                summary[key] = 0
         if zero_degree_count is not None:
             summary["zero_degree_count"] = zero_degree_count
         if empty_degree_count is not None:
@@ -560,6 +647,8 @@ def main() -> int:
         "operator_sample_coverage_ratio_min": operator_sample_coverage_ratio_min,
         "shells": shells,
     }
+    for key in MIXED_TAIL_BRANCH_COUNTERS:
+        payload[key] = sum(int(shell.get(key, 0) or 0) for shell in shells)
     if zero_degree_count_values:
         payload["zero_degree_count"] = sum(int(value or 0) for value in zero_degree_count_values)
     if empty_degree_count_values:
