@@ -312,7 +312,12 @@ def main() -> int:
             value = aggregate.get(key)
             if value is not None and value is not True:
                 errors.append(f"aggregate.{key}: must be true or null")
-        for prefix in ("amplitude_weighted_negative_frame", "energy_budgeted_fork"):
+        for prefix in (
+            "amplitude_weighted_negative_frame",
+            "no_triple_danger",
+            "energy_budgeted_fork",
+            "spectral_sharpness_square_wave_stack",
+        ):
             if aggregate.get(f"{prefix}_status") not in ("fail-closed", "unavailable"):
                 errors.append(f"aggregate.{prefix}_status: must be 'fail-closed' or 'unavailable'")
             if aggregate.get(f"{prefix}_aggregate_status") not in ("fail-closed", "unavailable"):
@@ -628,14 +633,87 @@ def main() -> int:
                         errors.append(
                             f"k_n_exact_identity_rows[{index}].bridge_summary: must match the canonical frame-equidistribution bridge note"
                         )
-        for key in ("amplitude_weighted_negative_frame_rows", "energy_budgeted_fork_rows"):
-            rows_value = payload.get(key)
+        pointwise_energy_bridge_spec = (
+            "pointwise_triad_cloud_boundary",
+            "pointwise-triad-cloud-wall-2-bridge",
+            "The pointwise triad-cloud bridge keeps single-mode stretching zero and forces BKM-active spikes to recruit a coherent multi-mode cloud.",
+            "This pointwise triad-cloud surface is candidate-only and fail-closed; it records the multi-mode cloud, finite energy budget, and high-frequency dissipation bridge without claiming promotion.",
+        )
+        for surface_key, surface_name, route_name, boundary_summary, bridge_summary in (
+            (
+                "amplitude_weighted_negative_frame_rows",
+                "amplitude_weighted_negative_frame_scan",
+                "amplitude-weighted-negative-frame-wall-1a",
+                "The amplitude-weighted negative-frame scan keeps the candidate negative-frame carrier explicit without claiming promotion.",
+                "This amplitude-weighted negative-frame surface is candidate-only and fail-closed; it preserves the route without asserting a certificate.",
+            ),
+            (
+                "no_triple_danger_rows",
+                "no_triple_danger_scan",
+                "no-triple-danger-wall-1a",
+                "The no-triple-danger scan keeps the triple-danger carrier explicit while the bridge remains open.",
+                "This no-triple-danger surface is candidate-only and fail-closed; it records the route without claiming promotion.",
+            ),
+            (
+                "energy_budgeted_fork_rows",
+                "energy_budgeted_fork_scan",
+                "energy-budgeted-fork-wall-1a",
+                "The energy-budgeted fork scan keeps the candidate fork route explicit while the bridge remains open.",
+                "This energy-budgeted fork surface is candidate-only and fail-closed; it records the fork route without claiming promotion.",
+            ),
+            (
+                "spectral_sharpness_square_wave_stack_rows",
+                "spectral_sharpness_square_wave_stack_scan",
+                "spectral-sharpness-square-wave-stack-wall-1a",
+                "The spectral-sharpness square-wave stack scan keeps the stacked sharpness carrier explicit without claiming promotion.",
+                "This spectral-sharpness square-wave stack surface is candidate-only and fail-closed; it preserves the route without asserting a certificate.",
+            ),
+        ):
+            rows_value = payload.get(surface_key)
             if rows_value is not None and not isinstance(rows_value, list):
-                errors.append(f"{key}: must be list or null")
+                errors.append(f"{surface_key}: must be list or null")
             if isinstance(rows_value, list) and rows_value:
-                row_count_key = f"{key.removesuffix('_rows')}_row_count"
+                row_count_key = f"{surface_key.removesuffix('_rows')}_row_count"
                 if aggregate.get(row_count_key) != len(rows_value):
-                    errors.append(f"aggregate.{row_count_key}: must match {key} length")
+                    errors.append(f"aggregate.{row_count_key}: must match {surface_key} length")
+                for index, row in enumerate(rows_value):
+                    if not isinstance(row, dict):
+                        errors.append(f"{surface_key}[{index}]: must be object")
+                        continue
+                    expected_surface_name = surface_name
+                    if surface_key == "energy_budgeted_fork_rows" and row.get("surface") == pointwise_energy_bridge_spec[0]:
+                        expected_surface_name = pointwise_energy_bridge_spec[0]
+                    if row.get("surface") != expected_surface_name:
+                        errors.append(f"{surface_key}[{index}].surface: must match the canonical surface name")
+                    row_route_name = row.get("route_name")
+                    expected_route_name = route_name
+                    expected_boundary_summary = boundary_summary
+                    expected_bridge_summary = bridge_summary
+                    if surface_key == "energy_budgeted_fork_rows" and row.get("surface") == pointwise_energy_bridge_spec[0]:
+                        (
+                            _pointwise_surface,
+                            expected_route_name,
+                            expected_boundary_summary,
+                            expected_bridge_summary,
+                        ) = pointwise_energy_bridge_spec
+                    if row_route_name != expected_route_name:
+                        errors.append(f"{surface_key}[{index}].route_name: must be {expected_route_name!r}")
+                    if row.get("boundary_summary") != expected_boundary_summary:
+                        errors.append(f"{surface_key}[{index}].boundary_summary: must match the canonical summary")
+                    if row.get("bridge_summary") != expected_bridge_summary:
+                        errors.append(f"{surface_key}[{index}].bridge_summary: must match the canonical summary")
+                    if row.get("candidate_only") is not True:
+                        errors.append(f"{surface_key}[{index}].candidate_only: must be true")
+                    if row.get("fail_closed") is not True:
+                        errors.append(f"{surface_key}[{index}].fail_closed: must be true")
+                    if row.get("theorem_promoted") is not False:
+                        errors.append(f"{surface_key}[{index}].theorem_promoted: must be false")
+                    if row.get("full_ns_promoted") is not False:
+                        errors.append(f"{surface_key}[{index}].full_ns_promoted: must be false")
+                    if row.get("clay_promoted") is not False:
+                        errors.append(f"{surface_key}[{index}].clay_promoted: must be false")
+                    if row.get("wall1_status") != "unproved":
+                        errors.append(f"{surface_key}[{index}].wall1_status: must be 'unproved'")
         if signed_wall1_rows == []:
             if aggregate.get("signed_wall1_row_count") != 0:
                 errors.append("aggregate.signed_wall1_row_count: must be 0 when no signed_wall1_rows are present")

@@ -6,6 +6,29 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Wall 1 no-triple-danger / square-wave / backward-chain tranche for
+  `2026-06-23`: adds `DASHI.Physics.Closure.NSNoTripleDangerBoundary`,
+  `DASHI.Physics.Closure.NSSpectralSharpnessForkBoundary`,
+  `scripts/ns_triad_no_triple_danger_scan.py`,
+  `scripts/check_ns_triad_no_triple_danger_scan.py`,
+  `scripts/ns_triad_square_wave_stack_scan.py`, and
+  `scripts/check_ns_triad_square_wave_stack_scan.py`; strengthens
+  `DASHI.Physics.Closure.NSA9SingularityContradictionRouteBoundary`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The tranche records the
+  no-triple-danger fork explicitly as the sharper finite-dimensional Wall 1a
+  target, records the spectral-sharpness / square-wave stack as the
+  candidate sharpness lane that never reaches triple-danger on the attached
+  adversarial scans, and rewrites the A9 singularity contradiction route as
+  a backward BKM -> triad-cloud -> amplitude-fork -> triple-danger
+  contradiction chain. This remains fail-closed: the new surfaces are
+  empirical/candidate-only, theorem promotion and Clay promotion stay false,
+  and the live analytic bottleneck is still an actual proof of the
+  no-triple-danger fork on genuine Biot-Savart data.
+
 - NS Wall 1 amplitude-weighted negative-frame / energy-budgeted fork tranche
   for `2026-06-23`: adds
   `DASHI.Physics.Closure.NSAmplitudeWeightedNegativeFrameBoundary`,

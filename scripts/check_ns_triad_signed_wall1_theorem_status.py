@@ -33,7 +33,11 @@ ALLOWED_SIGNED_SOURCE = {
     "carrier_ranking_json+continuous_coherence_capacity_json",
     "k_n_exact_identity_json",
     "amplitude_weighted_negative_frame_json",
+    "no_triple_danger_json",
     "energy_budgeted_fork_json",
+    "spectral_sharpness_square_wave_stack_json",
+    "wall1_fork_adversarial_csv",
+    "wall1_squarewave_fork_csv",
     "legacy_chart",
     "missing",
     "explicit",
@@ -148,6 +152,13 @@ def main() -> int:
             errors.append("aggregate.signed_carrier_reconciliation_source: fail-closed status requires a non-missing provenance tag")
         if aggregate.get("carrier_identification_status") == "fail-closed" and aggregate.get("carrier_identification_source") == "missing":
             errors.append("aggregate.carrier_identification_source: fail-closed status requires a non-missing provenance tag")
+        for key in ("no_triple_danger_source", "spectral_sharpness_square_wave_stack_source"):
+            if aggregate.get(key) not in ALLOWED_SIGNED_SOURCE:
+                errors.append(f"aggregate.{key}: must be one of {sorted(ALLOWED_SIGNED_SOURCE)!r}")
+        if aggregate.get("no_triple_danger_status") == "fail-closed" and aggregate.get("no_triple_danger_source") == "missing":
+            errors.append("aggregate.no_triple_danger_source: fail-closed status requires a non-missing provenance tag")
+        if aggregate.get("spectral_sharpness_square_wave_stack_status") == "fail-closed" and aggregate.get("spectral_sharpness_square_wave_stack_source") == "missing":
+            errors.append("aggregate.spectral_sharpness_square_wave_stack_source: fail-closed status requires a non-missing provenance tag")
         if aggregate.get("signed_wall1_route_names") is not None and not isinstance(
             aggregate.get("signed_wall1_route_names"), list
         ):
@@ -220,7 +231,12 @@ def main() -> int:
             errors.append(
                 "aggregate.continuous_wall1_route_names: must be the ordered continuous Wall 1 route list"
             )
-        for prefix in ("amplitude_weighted_negative_frame", "energy_budgeted_fork"):
+        for prefix in (
+            "amplitude_weighted_negative_frame",
+            "no_triple_danger",
+            "energy_budgeted_fork",
+            "spectral_sharpness_square_wave_stack",
+        ):
             if aggregate.get(f"{prefix}_status") not in ("fail-closed", "partial", "unavailable"):
                 errors.append(
                     f"aggregate.{prefix}_status: must be 'fail-closed', 'partial', or 'unavailable'"
@@ -425,16 +441,40 @@ def main() -> int:
             errors.append(
                 f"continuous_wall1_rows[{index}].continuous_coherence_status: must be 'fail-closed', 'partial', or 'unavailable'"
             )
-    for surface_key, surface_name, route_name in (
+    pointwise_energy_bridge_spec = (
+        "pointwise_triad_cloud_boundary",
+        "pointwise-triad-cloud-wall-2-bridge",
+        "The pointwise triad-cloud bridge keeps single-mode stretching zero and forces BKM-active spikes to recruit a coherent multi-mode cloud.",
+        "This pointwise triad-cloud surface is candidate-only and fail-closed; it records the multi-mode cloud, finite energy budget, and high-frequency dissipation bridge without claiming promotion.",
+    )
+    for surface_key, surface_name, route_name, boundary_summary, bridge_summary in (
         (
             "amplitude_weighted_negative_frame_rows",
             "amplitude_weighted_negative_frame_scan",
             "amplitude-weighted-negative-frame-wall-1a",
+            "The amplitude-weighted negative-frame scan keeps the candidate negative-frame carrier explicit without claiming promotion.",
+            "This amplitude-weighted negative-frame surface is candidate-only and fail-closed; it preserves the route without asserting a certificate.",
+        ),
+        (
+            "no_triple_danger_rows",
+            "no_triple_danger_scan",
+            "no-triple-danger-wall-1a",
+            "The no-triple-danger scan keeps the triple-danger carrier explicit while the bridge remains open.",
+            "This no-triple-danger surface is candidate-only and fail-closed; it records the route without claiming promotion.",
         ),
         (
             "energy_budgeted_fork_rows",
             "energy_budgeted_fork_scan",
             "energy-budgeted-fork-wall-1a",
+            "The energy-budgeted fork scan keeps the candidate fork route explicit while the bridge remains open.",
+            "This energy-budgeted fork surface is candidate-only and fail-closed; it records the fork route without claiming promotion.",
+        ),
+        (
+            "spectral_sharpness_square_wave_stack_rows",
+            "spectral_sharpness_square_wave_stack_scan",
+            "spectral-sharpness-square-wave-stack-wall-1a",
+            "The spectral-sharpness square-wave stack scan keeps the stacked sharpness carrier explicit without claiming promotion.",
+            "This spectral-sharpness square-wave stack surface is candidate-only and fail-closed; it preserves the route without asserting a certificate.",
         ),
     ):
         surface_rows = payload.get(surface_key)
@@ -471,6 +511,23 @@ def main() -> int:
                 errors.append(f"{surface_key}[{index}].clay_promoted: must be false")
             if row.get("wall1_status") != "unproved":
                 errors.append(f"{surface_key}[{index}].wall1_status: must be 'unproved'")
+            row_route_name = row.get("route_name")
+            expected_route_name = route_name
+            expected_boundary_summary = boundary_summary
+            expected_bridge_summary = bridge_summary
+            if surface_key == "energy_budgeted_fork_rows" and row.get("surface") == pointwise_energy_bridge_spec[0]:
+                (
+                    _pointwise_surface,
+                    expected_route_name,
+                    expected_boundary_summary,
+                    expected_bridge_summary,
+                ) = pointwise_energy_bridge_spec
+            if row_route_name != expected_route_name:
+                errors.append(f"{surface_key}[{index}].route_name: must be {expected_route_name!r}")
+            if row.get("boundary_summary") != expected_boundary_summary:
+                errors.append(f"{surface_key}[{index}].boundary_summary: must match the canonical summary")
+            if row.get("bridge_summary") != expected_bridge_summary:
+                errors.append(f"{surface_key}[{index}].bridge_summary: must match the canonical summary")
     out = {
         "script_name": SCRIPT_NAME,
         "contract": CONTRACT,

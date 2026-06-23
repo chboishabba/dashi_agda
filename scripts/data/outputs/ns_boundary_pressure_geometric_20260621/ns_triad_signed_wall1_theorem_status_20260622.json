@@ -73,6 +73,19 @@
     "negative_frame_mass_ratio_mean": 0.5828584584842764,
     "negative_sign_fraction_mean": 1.0,
     "negative_spanning_coverage_fraction_mean": 1.0,
+    "no_triple_danger_candidate_only": true,
+    "no_triple_danger_clay_promoted": false,
+    "no_triple_danger_fail_closed": true,
+    "no_triple_danger_full_ns_promoted": false,
+    "no_triple_danger_independent_proof_certificate": false,
+    "no_triple_danger_route_names": [
+      "no-triple-danger-wall-1a"
+    ],
+    "no_triple_danger_row_count": 1,
+    "no_triple_danger_source": "wall1_fork_adversarial_csv",
+    "no_triple_danger_status": "fail-closed",
+    "no_triple_danger_surface_count": 1,
+    "no_triple_danger_theorem_promoted": false,
     "observed_floor_ratio_mean": 0.42404722262486105,
     "psi_pi_fraction_mean": 1.0,
     "schur_gap_mean": 0.0,
@@ -98,6 +111,19 @@
     "signed_xor_distance_fraction_mean": 0.0,
     "signed_xor_distance_vs_balance_capacity_mean": 0.0,
     "spectral_floor_lower_bound_mean": 0.0,
+    "spectral_sharpness_square_wave_stack_candidate_only": true,
+    "spectral_sharpness_square_wave_stack_clay_promoted": false,
+    "spectral_sharpness_square_wave_stack_fail_closed": true,
+    "spectral_sharpness_square_wave_stack_full_ns_promoted": false,
+    "spectral_sharpness_square_wave_stack_independent_proof_certificate": false,
+    "spectral_sharpness_square_wave_stack_route_names": [
+      "spectral-sharpness-square-wave-stack-wall-1a"
+    ],
+    "spectral_sharpness_square_wave_stack_row_count": 1,
+    "spectral_sharpness_square_wave_stack_source": "wall1_squarewave_fork_csv",
+    "spectral_sharpness_square_wave_stack_status": "fail-closed",
+    "spectral_sharpness_square_wave_stack_surface_count": 1,
+    "spectral_sharpness_square_wave_stack_theorem_promoted": false,
     "wall1a_status": "unproved",
     "wall1b_status": "unproved"
   },
@@ -198,9 +224,11 @@
     "energy_budgeted_fork_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_energy_budgeted_fork_scan_N128_20260623.json",
     "gaugeability_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_signed_xor_gaugeability_scan_N128_20260622.json",
     "k_n_exact_identity_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_exact_identity_scan_N128_20260623.json",
+    "no_triple_danger_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_no_triple_danger_scan_N128_20260623.json",
     "reconciliation_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_signed_carrier_reconciliation_scan_N128_20260622.json",
     "schur_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_schur_directional_audit_scan_N128_20260622.json",
-    "spectral_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_signed_spectral_audit_scan_N128_20260622.json"
+    "spectral_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_signed_spectral_audit_scan_N128_20260622.json",
+    "spectral_sharpness_square_wave_stack_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_spectral_sharpness_square_wave_stack_scan_N128_20260623.json"
   },
   "k_n_exact_identity_rows": [
     {
@@ -236,6 +264,22 @@
       "receipt_name": "NSTriadBSFrameEquidistributionBoundary",
       "route_name": "b-s-frame-equidistribution-wall-1a",
       "surface": "b_s_frame_equidistribution_boundary",
+      "theorem_promoted": false,
+      "wall1_status": "unproved"
+    }
+  ],
+  "no_triple_danger_rows": [
+    {
+      "boundary_summary": "The no-triple-danger scan keeps the triple-danger carrier explicit while the bridge remains open.",
+      "bridge_summary": "This no-triple-danger surface is candidate-only and fail-closed; it records the route without claiming promotion.",
+      "candidate_only": true,
+      "clay_promoted": false,
+      "fail_closed": true,
+      "full_ns_promoted": false,
+      "module_path": "DASHI/Physics/Closure/NSNoTripleDangerBoundary.agda",
+      "receipt_name": "NSNoTripleDangerBoundary",
+      "route_name": "no-triple-danger-wall-1a",
+      "surface": "no_triple_danger_scan",
       "theorem_promoted": false,
       "wall1_status": "unproved"
     }
@@ -623,6 +667,22 @@
       "surface": "signed_spectral_frustration",
       "theorem_promoted": false,
       "upper_spectral_edge_carries_xy_floor_risk": true,
+      "wall1_status": "unproved"
+    }
+  ],
+  "spectral_sharpness_square_wave_stack_rows": [
+    {
+      "boundary_summary": "The spectral-sharpness square-wave stack scan keeps the stacked sharpness carrier explicit without claiming promotion.",
+      "bridge_summary": "This spectral-sharpness square-wave stack surface is candidate-only and fail-closed; it preserves the route without asserting a certificate.",
+      "candidate_only": true,
+      "clay_promoted": false,
+      "fail_closed": true,
+      "full_ns_promoted": false,
+      "module_path": "DASHI/Physics/Closure/NSSpectralSharpnessForkBoundary.agda",
+      "receipt_name": "NSSpectralSharpnessForkBoundary",
+      "route_name": "spectral-sharpness-square-wave-stack-wall-1a",
+      "surface": "spectral_sharpness_square_wave_stack_scan",
+      "theorem_promoted": false,
       "wall1_status": "unproved"
     }
   ],

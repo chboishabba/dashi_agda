@@ -66,9 +66,17 @@ DEFAULT_AMPLITUDE_WEIGHTED_NEGATIVE_FRAME_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_amplitude_weighted_negative_frame_scan_N128_20260623.json"
 )
+DEFAULT_NO_TRIPLE_DANGER_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_no_triple_danger_scan_N128_20260623.json"
+)
 DEFAULT_ENERGY_BUDGETED_FORK_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
     "ns_triad_energy_budgeted_fork_scan_N128_20260623.json"
+)
+DEFAULT_SPECTRAL_SHARPNESS_SQUARE_WAVE_STACK_JSON = Path(
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
+    "ns_triad_spectral_sharpness_square_wave_stack_scan_N128_20260623.json"
 )
 DEFAULT_K_N_EXACT_IDENTITY_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
@@ -87,16 +95,16 @@ CONTROL_CARD = {
     "O": "Summarize the active NS triad Wall 1 shell-level telemetry surfaces.",
     "R": (
         "Join the shell-indexed phase-regime, frame-stability, cocycle-floor, cycle-obstruction, "
-        "cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, signed-XOR/signed-spectral Wall 1 receipts, the reconciliation/carrier-ranking scans, the K_N exact-identity scan, and the amplitude-weighted negative-frame plus energy-budgeted fork candidate surfaces into one compact fail-closed Wall 1 summary."
+        "cycle-packing overlap, K01 geometry, Hessian basin, optional Schur directional audit, signed-XOR/signed-spectral Wall 1 receipts, the reconciliation/carrier-ranking scans, the K_N exact-identity scan, and the amplitude-weighted negative-frame, no-triple-danger, energy-budgeted fork, plus spectral-sharpness square-wave stack candidate surfaces into one compact fail-closed Wall 1 summary."
     ),
     "C": SCRIPT_NAME,
-    "S": "Candidate-only shell bridge summary; the K_N exact-identity route, amplitude-weighted negative-frame surface, and energy-budgeted fork surface are fail-closed while the old signed route remains legacy.",
+    "S": "Candidate-only shell bridge summary; the K_N exact-identity route, amplitude-weighted negative-frame surface, no-triple-danger surface, energy-budgeted fork surface, and spectral-sharpness square-wave stack surface are fail-closed while the old signed route remains legacy.",
     "L": (
-        "Read each shell-level JSON surface plus the signed Wall 1 receipt, the reconciliation/carrier-ranking scans, the K_N exact-identity surface, and the two new candidate-only surfaces, normalize onto shared frame-shell keys, compute compact correlations, and emit explicit unproved Wall 1 markers."
+        "Read each shell-level JSON surface plus the signed Wall 1 receipt, the reconciliation/carrier-ranking scans, the K_N exact-identity surface, and the four candidate-only tranche surfaces, normalize onto shared frame-shell keys, compute compact correlations, and emit explicit unproved Wall 1 markers."
     ),
     "P": ROUTE_DECISION,
     "G": "No theorem, continuation, or Clay claim is inferred from this bridge summary.",
-    "F": "Wall 1 remains unproved; the signed Wall 1 receipt, reconciliation/carrier-ranking scans, K_N exact-identity surface, amplitude-weighted negative-frame surface, and energy-budgeted fork surface only sharpen the finite-dimensional telemetry surface.",
+    "F": "Wall 1 remains unproved; the signed Wall 1 receipt, reconciliation/carrier-ranking scans, K_N exact-identity surface, amplitude-weighted negative-frame surface, no-triple-danger surface, energy-budgeted fork surface, and spectral-sharpness square-wave stack surface only sharpen the finite-dimensional telemetry surface.",
 }
 
 LOWER_BOUND_SUPPORT_KEYS = (
@@ -143,7 +151,13 @@ def _parse_args() -> argparse.Namespace:
         type=Path,
         default=DEFAULT_AMPLITUDE_WEIGHTED_NEGATIVE_FRAME_JSON,
     )
+    parser.add_argument("--no-triple-danger-json", type=Path, default=DEFAULT_NO_TRIPLE_DANGER_JSON)
     parser.add_argument("--energy-budgeted-fork-json", type=Path, default=DEFAULT_ENERGY_BUDGETED_FORK_JSON)
+    parser.add_argument(
+        "--spectral-sharpness-square-wave-stack-json",
+        type=Path,
+        default=DEFAULT_SPECTRAL_SHARPNESS_SQUARE_WAVE_STACK_JSON,
+    )
     parser.add_argument("--k-n-exact-identity-json", type=Path, default=DEFAULT_K_N_EXACT_IDENTITY_JSON)
     parser.add_argument("--signed-wall1-json", type=Path, default=DEFAULT_SIGNED_WALL1_JSON)
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT_JSON)
@@ -769,6 +783,20 @@ def main() -> int:
     amplitude_weighted_negative_frame_aggregate_fail_closed = _payload_fail_closed(
         amplitude_weighted_negative_frame_aggregate
     )
+    try:
+        no_triple_danger_payload = _read_json(args.no_triple_danger_json)
+    except Exception:
+        no_triple_danger_payload = {}
+    no_triple_danger_input_status = _payload_status(no_triple_danger_payload)
+    no_triple_danger_status = _effective_fail_closed_status(no_triple_danger_payload)
+    no_triple_danger_candidate_only = _payload_candidate_only(no_triple_danger_payload)
+    no_triple_danger_fail_closed = _payload_fail_closed(no_triple_danger_payload)
+    no_triple_danger_aggregate = (
+        no_triple_danger_payload.get("aggregate", {}) if isinstance(no_triple_danger_payload, dict) else {}
+    )
+    no_triple_danger_aggregate_status = _payload_status(no_triple_danger_aggregate)
+    no_triple_danger_aggregate_candidate_only = _payload_candidate_only(no_triple_danger_aggregate)
+    no_triple_danger_aggregate_fail_closed = _payload_fail_closed(no_triple_danger_aggregate)
     energy_budgeted_fork_input_status = _payload_status(energy_budgeted_fork_payload)
     energy_budgeted_fork_status = _effective_fail_closed_status(energy_budgeted_fork_payload)
     energy_budgeted_fork_candidate_only = _payload_candidate_only(energy_budgeted_fork_payload)
@@ -781,6 +809,38 @@ def main() -> int:
     energy_budgeted_fork_aggregate_status = _payload_status(energy_budgeted_fork_aggregate)
     energy_budgeted_fork_aggregate_candidate_only = _payload_candidate_only(energy_budgeted_fork_aggregate)
     energy_budgeted_fork_aggregate_fail_closed = _payload_fail_closed(energy_budgeted_fork_aggregate)
+    try:
+        spectral_sharpness_square_wave_stack_payload = _read_json(
+            args.spectral_sharpness_square_wave_stack_json
+        )
+    except Exception:
+        spectral_sharpness_square_wave_stack_payload = {}
+    spectral_sharpness_square_wave_stack_input_status = _payload_status(
+        spectral_sharpness_square_wave_stack_payload
+    )
+    spectral_sharpness_square_wave_stack_status = _effective_fail_closed_status(
+        spectral_sharpness_square_wave_stack_payload
+    )
+    spectral_sharpness_square_wave_stack_candidate_only = _payload_candidate_only(
+        spectral_sharpness_square_wave_stack_payload
+    )
+    spectral_sharpness_square_wave_stack_fail_closed = _payload_fail_closed(
+        spectral_sharpness_square_wave_stack_payload
+    )
+    spectral_sharpness_square_wave_stack_aggregate = (
+        spectral_sharpness_square_wave_stack_payload.get("aggregate", {})
+        if isinstance(spectral_sharpness_square_wave_stack_payload, dict)
+        else {}
+    )
+    spectral_sharpness_square_wave_stack_aggregate_status = _payload_status(
+        spectral_sharpness_square_wave_stack_aggregate
+    )
+    spectral_sharpness_square_wave_stack_aggregate_candidate_only = _payload_candidate_only(
+        spectral_sharpness_square_wave_stack_aggregate
+    )
+    spectral_sharpness_square_wave_stack_aggregate_fail_closed = _payload_fail_closed(
+        spectral_sharpness_square_wave_stack_aggregate
+    )
     continuous_coherence_capacity_aggregate = (
         continuous_coherence_capacity_payload.get("aggregate", {})
         if isinstance(continuous_coherence_capacity_payload, dict)
@@ -1024,6 +1084,13 @@ def main() -> int:
                 "amplitude_weighted_negative_frame_aggregate_status": amplitude_weighted_negative_frame_aggregate_status,
                 "amplitude_weighted_negative_frame_aggregate_candidate_only": amplitude_weighted_negative_frame_aggregate_candidate_only,
                 "amplitude_weighted_negative_frame_aggregate_fail_closed": amplitude_weighted_negative_frame_aggregate_fail_closed,
+                "no_triple_danger_input_status": no_triple_danger_input_status,
+                "no_triple_danger_status": no_triple_danger_status,
+                "no_triple_danger_candidate_only": no_triple_danger_candidate_only,
+                "no_triple_danger_fail_closed": no_triple_danger_fail_closed,
+                "no_triple_danger_aggregate_status": no_triple_danger_aggregate_status,
+                "no_triple_danger_aggregate_candidate_only": no_triple_danger_aggregate_candidate_only,
+                "no_triple_danger_aggregate_fail_closed": no_triple_danger_aggregate_fail_closed,
                 "energy_budgeted_fork_input_status": energy_budgeted_fork_input_status,
                 "energy_budgeted_fork_status": energy_budgeted_fork_status,
                 "energy_budgeted_fork_candidate_only": energy_budgeted_fork_candidate_only,
@@ -1031,6 +1098,13 @@ def main() -> int:
                 "energy_budgeted_fork_aggregate_status": energy_budgeted_fork_aggregate_status,
                 "energy_budgeted_fork_aggregate_candidate_only": energy_budgeted_fork_aggregate_candidate_only,
                 "energy_budgeted_fork_aggregate_fail_closed": energy_budgeted_fork_aggregate_fail_closed,
+                "spectral_sharpness_square_wave_stack_input_status": spectral_sharpness_square_wave_stack_input_status,
+                "spectral_sharpness_square_wave_stack_status": spectral_sharpness_square_wave_stack_status,
+                "spectral_sharpness_square_wave_stack_candidate_only": spectral_sharpness_square_wave_stack_candidate_only,
+                "spectral_sharpness_square_wave_stack_fail_closed": spectral_sharpness_square_wave_stack_fail_closed,
+                "spectral_sharpness_square_wave_stack_aggregate_status": spectral_sharpness_square_wave_stack_aggregate_status,
+                "spectral_sharpness_square_wave_stack_aggregate_candidate_only": spectral_sharpness_square_wave_stack_aggregate_candidate_only,
+                "spectral_sharpness_square_wave_stack_aggregate_fail_closed": spectral_sharpness_square_wave_stack_aggregate_fail_closed,
                 "k_n_exact_identity_input_status": k_n_exact_identity_input_status,
                 "k_n_exact_identity_status": k_n_exact_identity_status,
                 "k_n_exact_identity_candidate_only": k_n_exact_identity_candidate_only,
@@ -1143,6 +1217,28 @@ def main() -> int:
             "wall1_status": "unproved",
         }
     ]
+    no_triple_danger_rows = no_triple_danger_payload.get("no_triple_danger_rows")
+    if not isinstance(no_triple_danger_rows, list) or not no_triple_danger_rows:
+        no_triple_danger_rows = [
+            {
+                "surface": "no_triple_danger_scan",
+                "module_path": "DASHI/Physics/Closure/NSNoTripleDangerBoundary.agda",
+                "receipt_name": "NSNoTripleDangerBoundary",
+                "route_name": "no-triple-danger-wall-1a",
+                "boundary_summary": (
+                    "The no-triple-danger scan keeps the triple-danger carrier explicit while the bridge remains open."
+                ),
+                "bridge_summary": (
+                    "This no-triple-danger surface is candidate-only and fail-closed; it records the route without claiming promotion."
+                ),
+                "candidate_only": True,
+                "fail_closed": True,
+                "theorem_promoted": False,
+                "full_ns_promoted": False,
+                "clay_promoted": False,
+                "wall1_status": "unproved",
+            }
+        ]
     energy_budgeted_fork_rows = energy_budgeted_fork_rows or [
         {
             "surface": "energy_budgeted_fork_scan",
@@ -1163,6 +1259,30 @@ def main() -> int:
             "wall1_status": "unproved",
         }
     ]
+    spectral_sharpness_square_wave_stack_rows = spectral_sharpness_square_wave_stack_payload.get(
+        "spectral_sharpness_square_wave_stack_rows"
+    )
+    if not isinstance(spectral_sharpness_square_wave_stack_rows, list) or not spectral_sharpness_square_wave_stack_rows:
+        spectral_sharpness_square_wave_stack_rows = [
+            {
+                "surface": "spectral_sharpness_square_wave_stack_scan",
+                "module_path": "DASHI/Physics/Closure/NSSpectralSharpnessForkBoundary.agda",
+                "receipt_name": "NSSpectralSharpnessForkBoundary",
+                "route_name": "spectral-sharpness-square-wave-stack-wall-1a",
+                "boundary_summary": (
+                    "The spectral-sharpness square-wave stack scan keeps the stacked sharpness carrier explicit without claiming promotion."
+                ),
+                "bridge_summary": (
+                    "This spectral-sharpness square-wave stack surface is candidate-only and fail-closed; it preserves the route without asserting a certificate."
+                ),
+                "candidate_only": True,
+                "fail_closed": True,
+                "theorem_promoted": False,
+                "full_ns_promoted": False,
+                "clay_promoted": False,
+                "wall1_status": "unproved",
+            }
+        ]
     if not any(isinstance(row, dict) and row.get("surface") == "pointwise_triad_cloud_boundary" for row in energy_budgeted_fork_rows):
         energy_budgeted_fork_rows.append(
             {
@@ -1216,8 +1336,12 @@ def main() -> int:
             "amplitude_weighted_negative_frame_json": str(args.amplitude_weighted_negative_frame_json)
             if args.amplitude_weighted_negative_frame_json is not None
             else None,
+            "no_triple_danger_json": str(args.no_triple_danger_json) if args.no_triple_danger_json is not None else None,
             "energy_budgeted_fork_json": str(args.energy_budgeted_fork_json)
             if args.energy_budgeted_fork_json is not None
+            else None,
+            "spectral_sharpness_square_wave_stack_json": str(args.spectral_sharpness_square_wave_stack_json)
+            if args.spectral_sharpness_square_wave_stack_json is not None
             else None,
             "k_n_exact_identity_json": str(args.k_n_exact_identity_json)
             if args.k_n_exact_identity_json is not None
@@ -1228,7 +1352,9 @@ def main() -> int:
         "signed_wall1_rows": signed_wall1_rows,
         "continuous_coherence_capacity_rows": continuous_coherence_capacity_rows,
         "amplitude_weighted_negative_frame_rows": amplitude_weighted_negative_frame_rows,
+        "no_triple_danger_rows": no_triple_danger_rows,
         "energy_budgeted_fork_rows": energy_budgeted_fork_rows,
+        "spectral_sharpness_square_wave_stack_rows": spectral_sharpness_square_wave_stack_rows,
         "k_n_exact_identity_scan_rows": k_n_exact_identity_scan_rows,
         "k_n_exact_identity_rows": k_n_exact_identity_rows,
         "aggregate": {
@@ -1351,28 +1477,6 @@ def main() -> int:
             ),
             "amplitude_weighted_negative_frame_aggregate_candidate_only": amplitude_weighted_negative_frame_aggregate_candidate_only,
             "amplitude_weighted_negative_frame_aggregate_fail_closed": amplitude_weighted_negative_frame_aggregate_fail_closed,
-            "energy_budgeted_fork_input_status": energy_budgeted_fork_input_status,
-            "energy_budgeted_fork_status": energy_budgeted_fork_status,
-            "energy_budgeted_fork_candidate_only": energy_budgeted_fork_candidate_only,
-            "energy_budgeted_fork_fail_closed": energy_budgeted_fork_fail_closed,
-            "energy_budgeted_fork_aggregate_status": (
-                "fail-closed"
-                if energy_budgeted_fork_aggregate_status in ("ok", "fail-closed")
-                else "unavailable"
-            ),
-            "energy_budgeted_fork_aggregate_candidate_only": energy_budgeted_fork_aggregate_candidate_only,
-            "energy_budgeted_fork_aggregate_fail_closed": energy_budgeted_fork_aggregate_fail_closed,
-            "k_n_exact_identity_input_status": k_n_exact_identity_input_status,
-            "k_n_exact_identity_status": k_n_exact_identity_status,
-            "k_n_exact_identity_candidate_only": k_n_exact_identity_candidate_only,
-            "k_n_exact_identity_fail_closed": k_n_exact_identity_fail_closed,
-            "k_n_exact_identity_aggregate_status": k_n_exact_identity_aggregate_status,
-            "k_n_exact_identity_aggregate_candidate_only": k_n_exact_identity_aggregate_candidate_only,
-            "k_n_exact_identity_aggregate_fail_closed": k_n_exact_identity_aggregate_fail_closed,
-            "continuous_coherence_capacity_aggregate": continuous_coherence_capacity_aggregate,
-            "amplitude_weighted_negative_frame_aggregate": amplitude_weighted_negative_frame_aggregate,
-            "energy_budgeted_fork_aggregate": energy_budgeted_fork_aggregate,
-            "k_n_exact_identity_aggregate": k_n_exact_identity_aggregate,
             "amplitude_weighted_negative_frame_row_count": int(len(amplitude_weighted_negative_frame_rows))
             if amplitude_weighted_negative_frame_rows
             else None,
@@ -1392,6 +1496,43 @@ def main() -> int:
             "amplitude_weighted_negative_frame_route_names": _route_names(
                 [row for row in amplitude_weighted_negative_frame_rows if isinstance(row, dict)]
             ),
+            "no_triple_danger_input_status": no_triple_danger_input_status,
+            "no_triple_danger_status": no_triple_danger_status,
+            "no_triple_danger_candidate_only": no_triple_danger_candidate_only,
+            "no_triple_danger_fail_closed": no_triple_danger_fail_closed,
+            "no_triple_danger_aggregate_status": (
+                "fail-closed"
+                if no_triple_danger_aggregate_status in ("ok", "fail-closed")
+                else "unavailable"
+            ),
+            "no_triple_danger_aggregate_candidate_only": no_triple_danger_aggregate_candidate_only,
+            "no_triple_danger_aggregate_fail_closed": no_triple_danger_aggregate_fail_closed,
+            "no_triple_danger_row_count": int(len(no_triple_danger_rows)) if no_triple_danger_rows else None,
+            "no_triple_danger_surface_count": (
+                int(
+                    len(
+                        {
+                            row.get("surface")
+                            for row in no_triple_danger_rows
+                            if isinstance(row, dict) and isinstance(row.get("surface"), str)
+                        }
+                    )
+                )
+                if no_triple_danger_rows
+                else None
+            ),
+            "no_triple_danger_route_names": _route_names([row for row in no_triple_danger_rows if isinstance(row, dict)]),
+            "energy_budgeted_fork_input_status": energy_budgeted_fork_input_status,
+            "energy_budgeted_fork_status": energy_budgeted_fork_status,
+            "energy_budgeted_fork_candidate_only": energy_budgeted_fork_candidate_only,
+            "energy_budgeted_fork_fail_closed": energy_budgeted_fork_fail_closed,
+            "energy_budgeted_fork_aggregate_status": (
+                "fail-closed"
+                if energy_budgeted_fork_aggregate_status in ("ok", "fail-closed")
+                else "unavailable"
+            ),
+            "energy_budgeted_fork_aggregate_candidate_only": energy_budgeted_fork_aggregate_candidate_only,
+            "energy_budgeted_fork_aggregate_fail_closed": energy_budgeted_fork_aggregate_fail_closed,
             "energy_budgeted_fork_row_count": int(len(energy_budgeted_fork_rows)) if energy_budgeted_fork_rows else None,
             "energy_budgeted_fork_surface_count": (
                 int(
@@ -1409,6 +1550,47 @@ def main() -> int:
             "energy_budgeted_fork_route_names": _route_names(
                 [row for row in energy_budgeted_fork_rows if isinstance(row, dict)]
             ),
+            "spectral_sharpness_square_wave_stack_input_status": spectral_sharpness_square_wave_stack_input_status,
+            "spectral_sharpness_square_wave_stack_status": spectral_sharpness_square_wave_stack_status,
+            "spectral_sharpness_square_wave_stack_candidate_only": spectral_sharpness_square_wave_stack_candidate_only,
+            "spectral_sharpness_square_wave_stack_fail_closed": spectral_sharpness_square_wave_stack_fail_closed,
+            "spectral_sharpness_square_wave_stack_aggregate_status": (
+                "fail-closed"
+                if spectral_sharpness_square_wave_stack_aggregate_status in ("ok", "fail-closed")
+                else "unavailable"
+            ),
+            "spectral_sharpness_square_wave_stack_aggregate_candidate_only": spectral_sharpness_square_wave_stack_aggregate_candidate_only,
+            "spectral_sharpness_square_wave_stack_aggregate_fail_closed": spectral_sharpness_square_wave_stack_aggregate_fail_closed,
+            "spectral_sharpness_square_wave_stack_row_count": int(len(spectral_sharpness_square_wave_stack_rows))
+            if spectral_sharpness_square_wave_stack_rows
+            else None,
+            "spectral_sharpness_square_wave_stack_surface_count": (
+                int(
+                    len(
+                        {
+                            row.get("surface")
+                            for row in spectral_sharpness_square_wave_stack_rows
+                            if isinstance(row, dict) and isinstance(row.get("surface"), str)
+                        }
+                    )
+                )
+                if spectral_sharpness_square_wave_stack_rows
+                else None
+            ),
+            "spectral_sharpness_square_wave_stack_route_names": _route_names(
+                [row for row in spectral_sharpness_square_wave_stack_rows if isinstance(row, dict)]
+            ),
+            "k_n_exact_identity_input_status": k_n_exact_identity_input_status,
+            "k_n_exact_identity_status": k_n_exact_identity_status,
+            "k_n_exact_identity_candidate_only": k_n_exact_identity_candidate_only,
+            "k_n_exact_identity_fail_closed": k_n_exact_identity_fail_closed,
+            "k_n_exact_identity_aggregate_status": k_n_exact_identity_aggregate_status,
+            "k_n_exact_identity_aggregate_candidate_only": k_n_exact_identity_aggregate_candidate_only,
+            "k_n_exact_identity_aggregate_fail_closed": k_n_exact_identity_aggregate_fail_closed,
+            "continuous_coherence_capacity_aggregate": continuous_coherence_capacity_aggregate,
+            "amplitude_weighted_negative_frame_aggregate": amplitude_weighted_negative_frame_aggregate,
+            "energy_budgeted_fork_aggregate": energy_budgeted_fork_aggregate,
+            "k_n_exact_identity_aggregate": k_n_exact_identity_aggregate,
             "k_n_exact_identity_row_count": int(len(k_n_exact_identity_rows)) if k_n_exact_identity_rows else None,
             "k_n_exact_identity_surface_count": (
                 int(
