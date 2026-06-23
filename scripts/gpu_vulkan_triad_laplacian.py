@@ -132,6 +132,11 @@ class VulkanTriadLaplacianExecutor:
         self.profile = profile
         self.mode_count = int(profile.mode_count)
         self.edge_count = int(len(profile.edge_left))
+        self.row_ptr, self.neighbor, self.directed_edge_index = self._build_csr_incidence(profile)
+        self.incidence_count = int(len(self.neighbor))
+        self.directed_weights_abs = self._directed_weights(profile.weights_abs)
+        self.directed_weights_neg = self._directed_weights(profile.weights_neg)
+        self._last_weight_key: str | None = None
         self.workgroup_size = int(workgroup_size)
         self.spv_path = compile_shader(spv_path)
         self.external_handles = handles
@@ -143,6 +148,39 @@ class VulkanTriadLaplacianExecutor:
         self.queue_family_index = self.handles.queue_family_index
         self._build_pipeline()
         self._allocate_buffers()
+
+    def _build_csr_incidence(self, profile: MatrixFreeKNProfile) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        adjacency: list[list[tuple[int, int]]] = [[] for _ in range(int(profile.mode_count))]
+        for edge_index, (left, right) in enumerate(zip(profile.edge_left, profile.edge_right, strict=False)):
+            l = int(left)
+            r = int(right)
+            if l < 0 or r < 0 or l >= int(profile.mode_count) or r >= int(profile.mode_count):
+                raise ValueError("edge index out of mode range")
+            adjacency[l].append((r, int(edge_index)))
+            adjacency[r].append((l, int(edge_index)))
+        row_ptr = np.zeros(int(profile.mode_count) + 1, dtype=np.uint32)
+        total = 0
+        for index, entries in enumerate(adjacency):
+            row_ptr[index] = total
+            total += len(entries)
+        row_ptr[int(profile.mode_count)] = total
+        neighbor = np.zeros(max(1, total), dtype=np.uint32)
+        directed_edge_index = np.zeros(max(1, total), dtype=np.uint32)
+        cursor = 0
+        for entries in adjacency:
+            for target, edge_index in entries:
+                neighbor[cursor] = np.uint32(target)
+                directed_edge_index[cursor] = np.uint32(edge_index)
+                cursor += 1
+        return row_ptr, neighbor, directed_edge_index
+
+    def _directed_weights(self, weights: np.ndarray) -> np.ndarray:
+        weights32 = np.asarray(weights, dtype=np.float32, order="C")
+        if self.edge_count == 0:
+            return np.zeros(1, dtype=np.float32)
+        if int(weights32.shape[0]) != self.edge_count:
+            raise ValueError(f"weights must be length {self.edge_count}")
+        return np.asarray(weights32[self.directed_edge_index[: self.incidence_count]], dtype=np.float32, order="C")
 
     def _build_pipeline(self) -> None:
         bindings = [
@@ -212,23 +250,19 @@ class VulkanTriadLaplacianExecutor:
     def _allocate_buffers(self) -> None:
         usage = vk.VK_BUFFER_USAGE_STORAGE_BUFFER_BIT
         flags = HOST_VISIBLE_COHERENT
-        edge_bytes = max(1, self.edge_count) * np.dtype(np.uint32).itemsize
-        weight_bytes = max(1, self.edge_count) * np.dtype(np.float32).itemsize
+        row_ptr_bytes = max(1, self.mode_count + 1) * np.dtype(np.uint32).itemsize
+        incidence_bytes = max(1, self.incidence_count) * np.dtype(np.uint32).itemsize
+        weight_bytes = max(1, self.incidence_count) * np.dtype(np.float32).itemsize
         vec_bytes = max(1, self.mode_count) * np.dtype(np.float32).itemsize
-        self.buf_left, self.mem_left = _create_buffer(self.device, self.mem_props, edge_bytes, usage, flags)
-        self.buf_right, self.mem_right = _create_buffer(self.device, self.mem_props, edge_bytes, usage, flags)
+        self.buf_left, self.mem_left = _create_buffer(self.device, self.mem_props, row_ptr_bytes, usage, flags)
+        self.buf_right, self.mem_right = _create_buffer(self.device, self.mem_props, incidence_bytes, usage, flags)
         self.buf_weight, self.mem_weight = _create_buffer(self.device, self.mem_props, weight_bytes, usage, flags)
         self.buf_x, self.mem_x = _create_buffer(self.device, self.mem_props, vec_bytes, usage, flags)
         self.buf_y, self.mem_y = _create_buffer(self.device, self.mem_props, vec_bytes, usage, flags)
 
-        left = np.asarray(self.profile.edge_left, dtype=np.uint32, order="C")
-        right = np.asarray(self.profile.edge_right, dtype=np.uint32, order="C")
-        if self.edge_count == 0:
-            left = np.zeros(1, dtype=np.uint32)
-            right = np.zeros(1, dtype=np.uint32)
-        _write_buffer(self.device, self.mem_left, left)
-        _write_buffer(self.device, self.mem_right, right)
-        self._update_descriptors(edge_bytes, weight_bytes, vec_bytes)
+        _write_buffer(self.device, self.mem_left, np.asarray(self.row_ptr, dtype=np.uint32, order="C"))
+        _write_buffer(self.device, self.mem_right, np.asarray(self.neighbor, dtype=np.uint32, order="C"))
+        self._update_descriptors(row_ptr_bytes, incidence_bytes, weight_bytes, vec_bytes)
 
         pool_info = vk.VkCommandPoolCreateInfo(
             sType=vk.VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
@@ -244,10 +278,10 @@ class VulkanTriadLaplacianExecutor:
         )
         self.command_buffer = vk.vkAllocateCommandBuffers(self.device, alloc_info)[0]
 
-    def _update_descriptors(self, edge_bytes: int, weight_bytes: int, vec_bytes: int) -> None:
+    def _update_descriptors(self, row_ptr_bytes: int, incidence_bytes: int, weight_bytes: int, vec_bytes: int) -> None:
         buffers = [
-            (self.buf_left, edge_bytes),
-            (self.buf_right, edge_bytes),
+            (self.buf_left, row_ptr_bytes),
+            (self.buf_right, incidence_bytes),
             (self.buf_weight, weight_bytes),
             (self.buf_x, vec_bytes),
             (self.buf_y, vec_bytes),
@@ -269,12 +303,18 @@ class VulkanTriadLaplacianExecutor:
         vec = np.asarray(x, dtype=np.float32, order="C")
         if vec.ndim != 1 or int(vec.shape[0]) != self.mode_count:
             raise ValueError(f"x must be length {self.mode_count}")
-        weights32 = np.asarray(weights, dtype=np.float32, order="C")
-        if int(weights32.shape[0]) != self.edge_count:
-            raise ValueError(f"weights must be length {self.edge_count}")
-        if self.edge_count == 0:
-            weights32 = np.zeros(1, dtype=np.float32)
-        _write_buffer(self.device, self.mem_weight, weights32)
+        if weights is self.profile.weights_abs:
+            weight_key = "abs"
+            directed_weights = self.directed_weights_abs
+        elif weights is self.profile.weights_neg:
+            weight_key = "neg"
+            directed_weights = self.directed_weights_neg
+        else:
+            weight_key = "custom"
+            directed_weights = self._directed_weights(weights)
+        if self._last_weight_key != weight_key or weight_key == "custom":
+            _write_buffer(self.device, self.mem_weight, directed_weights)
+            self._last_weight_key = weight_key
         _write_buffer(self.device, self.mem_x, vec)
 
         begin_info = vk.VkCommandBufferBeginInfo(
@@ -294,9 +334,9 @@ class VulkanTriadLaplacianExecutor:
             None,
         )
         if hasattr(vk, "ffi"):
-            push_data = vk.ffi.new("uint32_t[]", [self.mode_count, self.edge_count])
+            push_data = vk.ffi.new("uint32_t[]", [self.mode_count, self.incidence_count])
         else:
-            push_data = np.asarray([self.mode_count, self.edge_count], dtype=np.uint32)
+            push_data = np.asarray([self.mode_count, self.incidence_count], dtype=np.uint32)
         vk.vkCmdPushConstants(
             self.command_buffer,
             self.pipeline_layout,
