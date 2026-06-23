@@ -283,6 +283,78 @@ def _classify_tail_escape(
     return "tail-contained"
 
 
+def _mixed_tail_telemetry(
+    *,
+    lambda_min: Any,
+    metrics: dict[str, Any],
+    worst_shell: Any,
+    cutoff: int,
+    eta: float,
+    c0: float,
+) -> dict[str, Any]:
+    high_tail = float(metrics["high_shell_mass_by_cutoff"][str(int(cutoff))])
+    eigen_tail_map = metrics.get("eigen_tail_mass_by_cutoff")
+    eigen_tail_mass = (
+        eigen_tail_map.get(str(int(cutoff)))
+        if isinstance(eigen_tail_map, dict)
+        else None
+    )
+    worst_shell_value = int(worst_shell) if isinstance(worst_shell, (int, float)) else None
+    top_shell_value = metrics.get("radial_shell_max")
+    top_shell_value = (
+        float(top_shell_value)
+        if isinstance(top_shell_value, (int, float)) and math.isfinite(float(top_shell_value))
+        else None
+    )
+
+    profile_tail_threshold_met = _meets_tail_threshold(high_tail, float(eta))
+    eigen_tail_mass_threshold_met = (
+        _meets_tail_threshold(eigen_tail_mass, float(eta))
+        if isinstance(eigen_tail_mass, (int, float)) and math.isfinite(float(eigen_tail_mass))
+        else None
+    )
+    dominant_shell_escape = worst_shell_value is not None and worst_shell_value >= int(cutoff)
+    top_shell_escape = (
+        worst_shell_value is not None
+        and top_shell_value is not None
+        and float(worst_shell_value) >= float(top_shell_value)
+    )
+    mixed_tail_candidate = bool(
+        profile_tail_threshold_met
+        and eigen_tail_mass_threshold_met is True
+        and not dominant_shell_escape
+        and not top_shell_escape
+    )
+
+    if not isinstance(lambda_min, (int, float)) or not math.isfinite(float(lambda_min)):
+        branch = "unavailable"
+    elif float(lambda_min) >= float(c0):
+        branch = "frame-coercive"
+    elif mixed_tail_candidate:
+        branch = "mixed-tail"
+    elif profile_tail_threshold_met and eigen_tail_mass_threshold_met is True:
+        branch = "tail-escape"
+    elif profile_tail_threshold_met:
+        branch = "tail-loaded"
+    elif eigen_tail_mass_threshold_met is True:
+        branch = "eigenvector-tail-escape"
+    elif eigen_tail_mass_threshold_met is None and (dominant_shell_escape or top_shell_escape):
+        branch = "eigenvector-tail-escape"
+    else:
+        branch = "tail-contained"
+
+    return {
+        "profile_tail_threshold_eta": float(eta),
+        "profile_tail_threshold_met": bool(profile_tail_threshold_met),
+        "eigen_tail_mass_threshold_eta": float(eta),
+        "eigen_tail_mass_threshold_met": eigen_tail_mass_threshold_met,
+        "dominant_shell_escape": bool(dominant_shell_escape),
+        "top_shell_escape": bool(top_shell_escape),
+        "mixed_tail_candidate": bool(mixed_tail_candidate),
+        "branch": branch,
+    }
+
+
 def _tail_grid(
     *,
     lambda_min: Any,
@@ -293,10 +365,18 @@ def _tail_grid(
     tail_etas: list[float],
 ) -> list[dict[str, Any]]:
     grid: list[dict[str, Any]] = []
-    eigen_tail_map = metrics.get("eigen_tail_mass_by_cutoff")
     for c0 in c0_values:
         for cutoff in tail_cutoffs:
             for eta in tail_etas:
+                telemetry = _mixed_tail_telemetry(
+                    lambda_min=lambda_min,
+                    metrics=metrics,
+                    worst_shell=worst_shell,
+                    cutoff=int(cutoff),
+                    eta=float(eta),
+                    c0=float(c0),
+                )
+                eigen_tail_map = metrics.get("eigen_tail_mass_by_cutoff")
                 eigen_tail_mass = (
                     eigen_tail_map.get(str(int(cutoff)))
                     if isinstance(eigen_tail_map, dict)
@@ -307,25 +387,21 @@ def _tail_grid(
                         "c0": float(c0),
                         "tail_cutoff": int(cutoff),
                         "tail_eta": float(eta),
+                        "profile_tail_threshold_eta": telemetry["profile_tail_threshold_eta"],
+                        "profile_tail_threshold_met": telemetry["profile_tail_threshold_met"],
+                        "eigen_tail_mass_threshold_eta": telemetry["eigen_tail_mass_threshold_eta"],
+                        "eigen_tail_mass_threshold_met": telemetry["eigen_tail_mass_threshold_met"],
+                        "dominant_shell_escape": telemetry["dominant_shell_escape"],
+                        "top_shell_escape": telemetry["top_shell_escape"],
+                        "mixed_tail_candidate": telemetry["mixed_tail_candidate"],
                         "high_shell_mass_k": float(metrics["high_shell_mass_by_cutoff"][str(int(cutoff))]),
                         "eigen_tail_mass_k": (
                             float(eigen_tail_mass)
                             if isinstance(eigen_tail_mass, (int, float)) and math.isfinite(float(eigen_tail_mass))
                             else None
                         ),
-                        "eigen_tail_high": (
-                            _meets_tail_threshold(eigen_tail_mass, float(eta))
-                            if isinstance(eigen_tail_mass, (int, float)) and math.isfinite(float(eigen_tail_mass))
-                            else None
-                        ),
-                        "branch": _classify_tail_escape(
-                            lambda_min=lambda_min,
-                            metrics=metrics,
-                            worst_shell=worst_shell,
-                            cutoff=int(cutoff),
-                            eta=float(eta),
-                            c0=float(c0),
-                        ),
+                        "eigen_tail_high": telemetry["eigen_tail_mass_threshold_met"],
+                        "branch": telemetry["branch"],
                     }
                 )
     return grid
@@ -337,9 +413,24 @@ def _summarize_grid(grid: list[dict[str, Any]]) -> dict[str, Any]:
     profile_tail_high_eigen_tail_high_count = 0
     profile_tail_high_eigen_tail_low_count = 0
     profile_tail_high_eigen_tail_unavailable_count = 0
+    profile_tail_threshold_met_count = 0
+    eigen_tail_mass_threshold_met_count = 0
+    dominant_shell_escape_count = 0
+    top_shell_escape_count = 0
+    mixed_tail_candidate_count = 0
     for item in grid:
         branch = str(item.get("branch"))
         counts[branch] = counts.get(branch, 0) + 1
+        if item.get("profile_tail_threshold_met") is True:
+            profile_tail_threshold_met_count += 1
+        if item.get("eigen_tail_mass_threshold_met") is True:
+            eigen_tail_mass_threshold_met_count += 1
+        if item.get("dominant_shell_escape") is True:
+            dominant_shell_escape_count += 1
+        if item.get("top_shell_escape") is True:
+            top_shell_escape_count += 1
+        if item.get("mixed_tail_candidate") is True:
+            mixed_tail_candidate_count += 1
         high_shell_mass = item.get("high_shell_mass_k")
         tail_eta = item.get("tail_eta")
         profile_tail_high = (
@@ -370,6 +461,11 @@ def _summarize_grid(grid: list[dict[str, Any]]) -> dict[str, Any]:
         "profile_tail_high_eigen_tail_high_count": int(profile_tail_high_eigen_tail_high_count),
         "profile_tail_high_eigen_tail_low_count": int(profile_tail_high_eigen_tail_low_count),
         "profile_tail_high_eigen_tail_unavailable_count": int(profile_tail_high_eigen_tail_unavailable_count),
+        "profile_tail_threshold_met_count": int(profile_tail_threshold_met_count),
+        "eigen_tail_mass_threshold_met_count": int(eigen_tail_mass_threshold_met_count),
+        "dominant_shell_escape_count": int(dominant_shell_escape_count),
+        "top_shell_escape_count": int(top_shell_escape_count),
+        "mixed_tail_candidate_count": int(mixed_tail_candidate_count),
     }
 
 
@@ -478,6 +574,11 @@ def _row(
         "triad_coverage_status": "unavailable",
         "triad_coverage_warnings": [],
         "triad_coverage_ratio": 0.0,
+        "profile_tail_threshold_met": False,
+        "eigen_tail_mass_threshold_met": None,
+        "dominant_shell_escape": False,
+        "top_shell_escape": False,
+        "mixed_tail_candidate": False,
     }
     try:
         u, v, w = _frame_velocity(bundle, snapshot)
@@ -523,6 +624,11 @@ def _row(
         row["profile_tail_high_eigen_tail_high_count"] = 0
         row["profile_tail_high_eigen_tail_low_count"] = 0
         row["profile_tail_high_eigen_tail_unavailable_count"] = 0
+        row["profile_tail_threshold_met_count"] = 0
+        row["eigen_tail_mass_threshold_met_count"] = 0
+        row["dominant_shell_escape_count"] = 0
+        row["top_shell_escape_count"] = 0
+        row["mixed_tail_candidate_count"] = 0
         return row
 
     amplitudes = np.asarray([float(mode.amplitude) for mode in shell_modes], dtype=np.float64)
@@ -625,6 +731,13 @@ def _row(
             "profile_tail_high_eigen_tail_unavailable_count": int(
                 tail_grid_summary.get("profile_tail_high_eigen_tail_unavailable_count", 0)
             ),
+            "profile_tail_threshold_met_count": int(tail_grid_summary.get("profile_tail_threshold_met_count", 0)),
+            "eigen_tail_mass_threshold_met_count": int(
+                tail_grid_summary.get("eigen_tail_mass_threshold_met_count", 0)
+            ),
+            "dominant_shell_escape_count": int(tail_grid_summary.get("dominant_shell_escape_count", 0)),
+            "top_shell_escape_count": int(tail_grid_summary.get("top_shell_escape_count", 0)),
+            "mixed_tail_candidate_count": int(tail_grid_summary.get("mixed_tail_candidate_count", 0)),
         }
         row_payload: dict[str, Any] = {
             "profile_id": unique_id,
@@ -670,6 +783,11 @@ def _row(
             "triad_coverage_status": coverage["triad_coverage_status"],
             "triad_coverage_warnings": list(coverage["triad_coverage_warnings"]),
             "triad_coverage_ratio": float(coverage["triad_coverage_ratio"]),
+            "profile_tail_threshold_met": bool(tail_grid_summary.get("profile_tail_threshold_met_count", 0) > 0),
+            "eigen_tail_mass_threshold_met": bool(tail_grid_summary.get("eigen_tail_mass_threshold_met_count", 0) > 0),
+            "dominant_shell_escape": bool(tail_grid_summary.get("dominant_shell_escape_count", 0) > 0),
+            "top_shell_escape": bool(tail_grid_summary.get("top_shell_escape_count", 0) > 0),
+            "mixed_tail_candidate": bool(tail_grid_summary.get("mixed_tail_candidate_count", 0) > 0),
             "metrics": metrics,
             **tail_grid_counts,
             "tail_grid_detail": {
@@ -730,6 +848,24 @@ def _row(
             "profile_tail_high_eigen_tail_unavailable_count": int(
                 sum(int(item.get("profile_tail_high_eigen_tail_unavailable_count", 0)) for item in evaluated)
             ),
+            "profile_tail_threshold_met_count": int(
+                sum(int(item.get("profile_tail_threshold_met_count", 0)) for item in evaluated)
+            ),
+            "eigen_tail_mass_threshold_met_count": int(
+                sum(int(item.get("eigen_tail_mass_threshold_met_count", 0)) for item in evaluated)
+            ),
+            "dominant_shell_escape_count": int(sum(int(item.get("dominant_shell_escape_count", 0)) for item in evaluated)),
+            "top_shell_escape_count": int(sum(int(item.get("top_shell_escape_count", 0)) for item in evaluated)),
+            "mixed_tail_candidate_count": int(sum(int(item.get("mixed_tail_candidate_count", 0)) for item in evaluated)),
+            "profile_tail_threshold_met": bool(any(item.get("profile_tail_threshold_met") is True for item in evaluated)),
+            "eigen_tail_mass_threshold_met": (
+                True
+                if any(item.get("eigen_tail_mass_threshold_met") is True for item in evaluated)
+                else False
+            ),
+            "dominant_shell_escape": bool(any(item.get("dominant_shell_escape") is True for item in evaluated)),
+            "top_shell_escape": bool(any(item.get("top_shell_escape") is True for item in evaluated)),
+            "mixed_tail_candidate": bool(any(item.get("mixed_tail_candidate") is True for item in evaluated)),
             "best_low_lambda_profile": best,
             "best_tail_escape_profile": min(
                 tail_escape_candidates,
@@ -751,6 +887,15 @@ def _row(
                     ),
                     "tail_escape_count": int(item.get("tail_escape_count", 0)),
                     "tail_escape_candidate": bool(int(item.get("tail_escape_count", 0)) > 0),
+                    "profile_tail_threshold_met": bool(item.get("profile_tail_threshold_met") is True),
+                    "eigen_tail_mass_threshold_met": (
+                        bool(item.get("eigen_tail_mass_threshold_met"))
+                        if item.get("eigen_tail_mass_threshold_met") is not None
+                        else None
+                    ),
+                    "dominant_shell_escape": bool(item.get("dominant_shell_escape") is True),
+                    "top_shell_escape": bool(item.get("top_shell_escape") is True),
+                    "mixed_tail_candidate": bool(item.get("mixed_tail_candidate") is True),
                     "worst_eigenvector_shell_iterative": (
                         float(item["worst_eigenvector_shell_iterative"])
                         if isinstance(item.get("worst_eigenvector_shell_iterative"), (int, float))
@@ -850,6 +995,11 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
     profile_tail_high_eigen_tail_unavailable_count = sum(
         int(row.get("profile_tail_high_eigen_tail_unavailable_count", 0)) for row in rows
     )
+    profile_tail_threshold_met_count = sum(int(row.get("profile_tail_threshold_met_count", 0)) for row in rows)
+    eigen_tail_mass_threshold_met_count = sum(int(row.get("eigen_tail_mass_threshold_met_count", 0)) for row in rows)
+    dominant_shell_escape_count = sum(int(row.get("dominant_shell_escape_count", 0)) for row in rows)
+    top_shell_escape_count = sum(int(row.get("top_shell_escape_count", 0)) for row in rows)
+    mixed_tail_candidate_count = sum(int(row.get("mixed_tail_candidate_count", 0)) for row in rows)
     zero_degree_fractions = [
         float(row.get("operator_zero_degree_mode_fraction", 0.0))
         for row in rows
@@ -895,6 +1045,11 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
         "profile_tail_high_eigen_tail_high_count": int(profile_tail_high_eigen_tail_high_count),
         "profile_tail_high_eigen_tail_low_count": int(profile_tail_high_eigen_tail_low_count),
         "profile_tail_high_eigen_tail_unavailable_count": int(profile_tail_high_eigen_tail_unavailable_count),
+        "profile_tail_threshold_met_count": int(profile_tail_threshold_met_count),
+        "eigen_tail_mass_threshold_met_count": int(eigen_tail_mass_threshold_met_count),
+        "dominant_shell_escape_count": int(dominant_shell_escape_count),
+        "top_shell_escape_count": int(top_shell_escape_count),
+        "mixed_tail_candidate_count": int(mixed_tail_candidate_count),
         "operator_triad_count": int(operator_triad_count),
         "operator_selected_mode_count": int(operator_selected_mode_count),
         "operator_empty_triad_count": int(operator_empty_triad_count),

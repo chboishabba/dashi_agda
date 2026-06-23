@@ -152,6 +152,23 @@ COND_KEY_HINTS = (
     "cond",
 )
 
+MASS_TAIL_KEY_HINTS = (
+    "masstail",
+)
+
+MASS_TAIL_COUNT_KEYS = (
+    "tail_escape_candidate_count",
+    "tail_escape_count",
+    "eigen_tail_mass_threshold_met_count",
+    "eigen_tail_high_count",
+    "mixed_tail_candidate_count",
+)
+
+DOMINANT_ESCAPE_COUNT_KEYS = (
+    "dominant_shell_escape_count",
+    "top_shell_escape_count",
+)
+
 
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -531,6 +548,35 @@ def _condition_number_reasons(row: dict[str, Any]) -> list[str]:
     return sorted(set(reasons))
 
 
+def _mass_tail_evidence(row: dict[str, Any]) -> list[str]:
+    evidence: list[str] = []
+    for key in MASS_TAIL_COUNT_KEYS:
+        value = _scalar_number(row.get(key))
+        if value is not None and value > 0.0:
+            evidence.append(key)
+    for key, value in row.items():
+        normalized = _normalize_key(str(key))
+        if not any(hint in normalized for hint in MASS_TAIL_KEY_HINTS):
+            continue
+        if _truthy(value) or (isinstance(value, str) and not _falsey(value)):
+            evidence.append(str(key))
+
+    return sorted(set(evidence))
+
+
+def _dominant_escape_evidence(row: dict[str, Any]) -> list[str]:
+    evidence: list[str] = []
+    for key in DOMINANT_ESCAPE_COUNT_KEYS:
+        value = _scalar_number(row.get(key))
+        if value is not None and value > 0.0:
+            evidence.append(key)
+    for key in ("dominant_shell_escape", "top_shell_escape"):
+        if _truthy(row.get(key)):
+            evidence.append(key)
+    evidence.extend(_near_zero_lambda_low_d_top_shell(row))
+    return sorted(set(evidence))
+
+
 def _lambda_field(row: dict[str, Any]) -> tuple[str | None, float | None]:
     for key in row:
         normalized = _normalize_key(str(key))
@@ -658,6 +704,9 @@ def main() -> int:
 
     ordered_rows: list[dict[str, Any]] = []
     merged: dict[str, dict[str, Any]] = {}
+    mass_tail_candidate_count = 0
+    dominant_top_shell_escape_candidate_count = 0
+    mixed_tail_unresolved_count = 0
     explicit_artifact_count = 0
     suspect_count = 0
     near_zero_low_d_top_shell_count = 0
@@ -690,16 +739,27 @@ def main() -> int:
     canonical_rows: list[dict[str, Any]] = []
     for record in ordered_rows:
         audit = record["_audit"]
+        mass_tail_evidence = _mass_tail_evidence(record)
+        dominant_top_shell_escape_evidence = _dominant_escape_evidence(record)
+        mass_tail_candidate = bool(mass_tail_evidence)
+        dominant_top_shell_escape_candidate = bool(dominant_top_shell_escape_evidence)
+
+        if mass_tail_candidate:
+            mass_tail_candidate_count += 1
+        if dominant_top_shell_escape_candidate:
+            dominant_top_shell_escape_candidate_count += 1
         if audit["artifact"]:
             explicit_artifact_count += 1
         if audit["suspect"]:
             suspect_count += 1
-        if _near_zero_lambda_low_d_top_shell(record):
+        if dominant_top_shell_escape_candidate:
             near_zero_low_d_top_shell_count += 1
             if _operator_coverage_confident(record):
                 near_zero_low_d_top_shell_with_operator_coverage_confidence_count += 1
             else:
                 near_zero_low_d_top_shell_without_operator_coverage_confidence_count += 1
+        if mass_tail_candidate and not dominant_top_shell_escape_candidate and not audit["artifact"]:
+            mixed_tail_unresolved_count += 1
         if _operator_artifact(record):
             operator_artifact_count += 1
         elif _sparse_receipt_sampling(record):
@@ -723,6 +783,9 @@ def main() -> int:
         "clay_promoted": False,
         "input_count": len(args.input),
         "row_count": len(ordered_rows),
+        "mass_tail_candidate_count": mass_tail_candidate_count,
+        "dominant_top_shell_escape_candidate_count": dominant_top_shell_escape_candidate_count,
+        "mixed_tail_unresolved_count": mixed_tail_unresolved_count,
         "artifact_count": explicit_artifact_count,
         "suspect_count": suspect_count,
         "near_zero_low_d_top_shell_count": near_zero_low_d_top_shell_count,

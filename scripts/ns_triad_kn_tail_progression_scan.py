@@ -360,6 +360,23 @@ def _classify_tail(
     return "partial"
 
 
+def _classify_tail_escape(
+    *,
+    profile_tail_high: bool,
+    eigen_tail_escape: bool | None,
+    mixed_tail_candidate: bool = False,
+) -> str:
+    if mixed_tail_candidate:
+        return "mixed-tail"
+    if profile_tail_high and eigen_tail_escape is True:
+        return "tail-escape"
+    if profile_tail_high:
+        return "tail-loaded"
+    if eigen_tail_escape is True:
+        return "eigenvector-tail-escape"
+    return "tail-contained"
+
+
 def _tail_grid(
     *,
     lambda_min: Any,
@@ -391,6 +408,29 @@ def _tail_grid(
                         if eigen_tail_mass is not None
                         else None
                     )
+                    dominant_shell_escape = (
+                        int(worst_shell) >= int(cutoff)
+                        if isinstance(worst_shell, (int, float))
+                        else None
+                    )
+                    top_shell_value = metrics.get("radial_shell_max")
+                    top_shell_escape = (
+                        int(worst_shell) >= int(top_shell_value)
+                        if isinstance(worst_shell, (int, float))
+                        and isinstance(top_shell_value, (int, float))
+                        else None
+                    )
+                    eigen_tail_escape = (
+                        eigen_tail_high
+                        if eigen_tail_high is not None
+                        else dominant_shell_escape
+                    )
+                    mixed_tail_candidate = bool(
+                        profile_tail_high
+                        and eigen_tail_high is True
+                        and dominant_shell_escape is not True
+                        and top_shell_escape is not True
+                    )
                     grid.append(
                         {
                             "c0": float(c0),
@@ -401,6 +441,17 @@ def _tail_grid(
                             "eigen_tail_mass_k": float(eigen_tail_mass) if eigen_tail_mass is not None else None,
                             "profile_tail_high": bool(profile_tail_high),
                             "eigen_tail_high": eigen_tail_high,
+                            "profile_tail_threshold_met": bool(profile_tail_high),
+                            "eigen_tail_mass_threshold_met": eigen_tail_high,
+                            "dominant_shell_escape": dominant_shell_escape,
+                            "top_shell_escape": top_shell_escape,
+                            "eigen_tail_escape": eigen_tail_escape,
+                            "mixed_tail_candidate": bool(mixed_tail_candidate),
+                            "escape_branch": _classify_tail_escape(
+                                profile_tail_high=bool(profile_tail_high),
+                                eigen_tail_escape=eigen_tail_escape,
+                                mixed_tail_candidate=bool(mixed_tail_candidate),
+                            ),
                             "branch": _classify_tail(
                                 lambda_min=lambda_min,
                                 metrics=metrics,
@@ -422,6 +473,10 @@ def _summarize_grid(grid: list[dict[str, Any]]) -> dict[str, Any]:
     for item in grid:
         branch = str(item.get("branch"))
         counts[branch] = counts.get(branch, 0) + 1
+    escape_counts: dict[str, int] = {}
+    for item in grid:
+        escape_branch = str(item.get("escape_branch"))
+        escape_counts[escape_branch] = escape_counts.get(escape_branch, 0) + 1
     profile_tail_high_count = sum(1 for item in grid if item.get("profile_tail_high") is True)
     profile_tail_high_eigen_tail_high_count = sum(
         1 for item in grid if item.get("profile_tail_high") is True and item.get("eigen_tail_high") is True
@@ -432,13 +487,32 @@ def _summarize_grid(grid: list[dict[str, Any]]) -> dict[str, Any]:
     profile_tail_high_eigen_tail_unavailable_count = sum(
         1 for item in grid if item.get("profile_tail_high") is True and item.get("eigen_tail_high") is None
     )
+    tail_escape_count = sum(1 for item in grid if item.get("escape_branch") == "tail-escape")
+    eigenvector_tail_escape_count = sum(
+        1 for item in grid if item.get("escape_branch") == "eigenvector-tail-escape"
+    )
+    tail_loaded_count = sum(1 for item in grid if item.get("escape_branch") == "tail-loaded")
+    tail_contained_count = sum(1 for item in grid if item.get("escape_branch") == "tail-contained")
+    dominant_shell_escape_count = sum(1 for item in grid if item.get("dominant_shell_escape") is True)
+    top_shell_escape_count = sum(1 for item in grid if item.get("top_shell_escape") is True)
+    eigen_tail_high_count = sum(1 for item in grid if item.get("eigen_tail_high") is True)
+    mixed_tail_candidate_count = sum(1 for item in grid if item.get("mixed_tail_candidate") is True)
     return {
         "grid_point_count": int(len(grid)),
         "branch_counts": counts,
+        "escape_branch_counts": escape_counts,
         "asymptotic_tail_danger_count": int(counts.get("asymptotic-tail-danger", 0)),
         "finite_low_shell_degeneracy_count": int(counts.get("finite-low-shell-degeneracy", 0)),
         "high_dissipation_count": int(counts.get("high-dissipation", 0)),
         "frame_coercive_count": int(counts.get("frame-coercive", 0)),
+        "dominant_shell_escape_count": int(dominant_shell_escape_count),
+        "top_shell_escape_count": int(top_shell_escape_count),
+        "eigen_tail_high_count": int(eigen_tail_high_count),
+        "mixed_tail_candidate_count": int(mixed_tail_candidate_count),
+        "tail_escape_count": int(tail_escape_count),
+        "eigenvector_tail_escape_count": int(eigenvector_tail_escape_count),
+        "tail_loaded_count": int(tail_loaded_count),
+        "tail_contained_count": int(tail_contained_count),
         "profile_tail_high_count": int(profile_tail_high_count),
         "profile_tail_high_eigen_tail_low_count": int(profile_tail_high_eigen_tail_low_count),
         "profile_tail_high_eigen_tail_high_count": int(profile_tail_high_eigen_tail_high_count),
@@ -574,6 +648,16 @@ def _row(
         row["status"] = PARTIAL_STATUS
         row["warnings"] = ["no_shell_triads_or_insufficient_modes", *row.get("triad_coverage_warnings", [])]
         row["profile_count"] = 0
+        row["asymptotic_tail_candidate_count"] = 0
+        row["tail_escape_candidate_count"] = 0
+        row["tail_escape_count"] = 0
+        row["eigenvector_tail_escape_count"] = 0
+        row["tail_loaded_count"] = 0
+        row["tail_contained_count"] = 0
+        row["dominant_shell_escape_count"] = 0
+        row["top_shell_escape_count"] = 0
+        row["eigen_tail_high_count"] = 0
+        row["mixed_tail_candidate_count"] = 0
         return row
 
     amplitudes = np.asarray([float(mode.amplitude) for mode in shell_modes], dtype=np.float64)
@@ -655,6 +739,18 @@ def _row(
             d0_values=d0_values,
             finite_shell_cutoff=finite_shell_cutoff,
         )
+        tail_escape_candidates = [
+            item for item in tail_grid if str(item.get("escape_branch")) == "tail-escape"
+        ]
+        eigenvector_tail_escape_candidates = [
+            item for item in tail_grid if str(item.get("escape_branch")) == "eigenvector-tail-escape"
+        ]
+        tail_loaded_candidates = [
+            item for item in tail_grid if str(item.get("escape_branch")) == "tail-loaded"
+        ]
+        tail_contained_candidates = [
+            item for item in tail_grid if str(item.get("escape_branch")) == "tail-contained"
+        ]
         evaluated.append(
             {
                 "profile_id": unique_id,
@@ -682,6 +778,19 @@ def _row(
                 "metrics": metrics,
                 "tail_grid_summary": _summarize_grid(tail_grid),
                 "tail_grid": tail_grid,
+                "tail_escape_candidate_count": int(len(tail_escape_candidates) > 0),
+                "tail_escape_count": int(len(tail_escape_candidates)),
+                "eigenvector_tail_escape_count": int(len(eigenvector_tail_escape_candidates)),
+                "tail_loaded_count": int(len(tail_loaded_candidates)),
+                "tail_contained_count": int(len(tail_contained_candidates)),
+                "dominant_shell_escape_count": int(
+                    sum(1 for item in tail_grid if item.get("dominant_shell_escape") is True)
+                ),
+                "top_shell_escape_count": int(sum(1 for item in tail_grid if item.get("top_shell_escape") is True)),
+                "eigen_tail_high_count": int(sum(1 for item in tail_grid if item.get("eigen_tail_high") is True)),
+                "mixed_tail_candidate_count": int(
+                    sum(1 for item in tail_grid if item.get("mixed_tail_candidate") is True)
+                ),
                 "triad_sample_limit": int(triad_sample_limit),
                 "triad_sample_materialization_limit": int(coverage["triad_sample_materialization_limit"]),
                 "triad_sample_materialization_count": int(coverage["triad_sample_materialization_count"]),
@@ -713,6 +822,21 @@ def _row(
             "parity_ok_count": int(sum(1 for item in evaluated if item.get("parity_ok") is True)),
             "parity_mismatch_count": int(sum(1 for item in evaluated if item.get("parity_ok") is not True)),
             "asymptotic_tail_candidate_count": int(len(asymptotic_candidates)),
+            "tail_escape_candidate_count": int(
+                sum(1 for item in evaluated if int(item.get("tail_escape_count", 0)) > 0)
+            ),
+            "tail_escape_count": int(sum(int(item.get("tail_escape_count", 0)) for item in evaluated)),
+            "eigenvector_tail_escape_count": int(
+                sum(int(item.get("eigenvector_tail_escape_count", 0)) for item in evaluated)
+            ),
+            "tail_loaded_count": int(sum(int(item.get("tail_loaded_count", 0)) for item in evaluated)),
+            "tail_contained_count": int(sum(int(item.get("tail_contained_count", 0)) for item in evaluated)),
+            "dominant_shell_escape_count": int(sum(int(item.get("dominant_shell_escape_count", 0)) for item in evaluated)),
+            "top_shell_escape_count": int(sum(int(item.get("top_shell_escape_count", 0)) for item in evaluated)),
+            "eigen_tail_high_count": int(sum(int(item.get("eigen_tail_high_count", 0)) for item in evaluated)),
+            "mixed_tail_candidate_count": int(
+                sum(int(item.get("mixed_tail_candidate_count", 0)) for item in evaluated)
+            ),
             "profile_tail_high_eigen_tail_low_count": int(
                 sum(int(item["tail_grid_summary"].get("profile_tail_high_eigen_tail_low_count", 0)) for item in evaluated)
             ),
@@ -730,6 +854,15 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
     total_profiles = sum(int(row.get("profile_count", 0)) for row in rows)
     parity_mismatches = sum(int(row.get("parity_mismatch_count", 0)) for row in rows)
     asymptotic_candidates = sum(int(row.get("asymptotic_tail_candidate_count", 0)) for row in rows)
+    tail_escape_candidates = sum(1 for row in rows if int(row.get("tail_escape_count", 0)) > 0)
+    tail_escape_count = sum(int(row.get("tail_escape_count", 0)) for row in rows)
+    eigenvector_tail_escape_count = sum(int(row.get("eigenvector_tail_escape_count", 0)) for row in rows)
+    tail_loaded_count = sum(int(row.get("tail_loaded_count", 0)) for row in rows)
+    tail_contained_count = sum(int(row.get("tail_contained_count", 0)) for row in rows)
+    dominant_shell_escape_count = sum(int(row.get("dominant_shell_escape_count", 0)) for row in rows)
+    top_shell_escape_count = sum(int(row.get("top_shell_escape_count", 0)) for row in rows)
+    eigen_tail_high_count = sum(int(row.get("eigen_tail_high_count", 0)) for row in rows)
+    mixed_tail_candidate_count = sum(int(row.get("mixed_tail_candidate_count", 0)) for row in rows)
     profile_tail_high_eigen_tail_low = sum(int(row.get("profile_tail_high_eigen_tail_low_count", 0)) for row in rows)
     profile_tail_high_eigen_tail_high = sum(int(row.get("profile_tail_high_eigen_tail_high_count", 0)) for row in rows)
     best_profiles = [
@@ -753,6 +886,15 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
         "sampled_profile_count": int(total_profiles),
         "parity_mismatch_count": int(parity_mismatches),
         "asymptotic_tail_candidate_count": int(asymptotic_candidates),
+        "tail_escape_candidate_count": int(tail_escape_candidates),
+        "tail_escape_count": int(tail_escape_count),
+        "eigenvector_tail_escape_count": int(eigenvector_tail_escape_count),
+        "tail_loaded_count": int(tail_loaded_count),
+        "tail_contained_count": int(tail_contained_count),
+        "dominant_shell_escape_count": int(dominant_shell_escape_count),
+        "top_shell_escape_count": int(top_shell_escape_count),
+        "eigen_tail_high_count": int(eigen_tail_high_count),
+        "mixed_tail_candidate_count": int(mixed_tail_candidate_count),
         "profile_tail_high_eigen_tail_low_count": int(profile_tail_high_eigen_tail_low),
         "profile_tail_high_eigen_tail_high_count": int(profile_tail_high_eigen_tail_high),
         "best_global_profile": best_global,
