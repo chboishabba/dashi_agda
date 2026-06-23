@@ -14,6 +14,7 @@ import os
 import shlex
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -135,8 +136,9 @@ def _run_command(
     env: dict[str, str],
     stdout_path: Path,
     stderr_path: Path,
-) -> subprocess.CompletedProcess[str]:
+) -> tuple[subprocess.CompletedProcess[str], int]:
     print("+ " + " ".join(shlex.quote(part) for part in cmd), flush=True)
+    started = time.perf_counter()
     completed = subprocess.run(
         cmd,
         cwd=cwd,
@@ -145,9 +147,10 @@ def _run_command(
         capture_output=True,
         text=True,
     )
+    elapsed_ms = int(round((time.perf_counter() - started) * 1000.0))
     _write_text(stdout_path, completed.stdout)
     _write_text(stderr_path, completed.stderr)
-    return completed
+    return completed, elapsed_ms
 
 
 def _receipt_summary(payload: dict[str, Any] | None) -> dict[str, Any]:
@@ -174,6 +177,7 @@ def _scan_args(
     sample_count: int,
     mix_count: int,
     profile_sample_limit: int,
+    triad_sample_limit: int,
     max_profiles_per_row: int,
     lobpcg_maxiter: int,
     tail_grid_detail: str,
@@ -193,6 +197,8 @@ def _scan_args(
         str(mix_count),
         "--profile-sample-limit",
         str(profile_sample_limit),
+        "--triad-sample-limit",
+        str(triad_sample_limit),
         "--max-profiles-per-row",
         str(max_profiles_per_row),
         "--lobpcg-maxiter",
@@ -252,6 +258,7 @@ def _run_shell(
 ) -> dict[str, Any]:
     shell_dir = out_dir / f"shell_{shell:02d}"
     shell_dir.mkdir(parents=True, exist_ok=True)
+    shell_started = time.perf_counter()
 
     scan_json = shell_dir / "ns_triad_kn_eigen_tail_adversary_scan.json"
     scan_stdout = shell_dir / "scan.stdout.json"
@@ -272,6 +279,7 @@ def _run_shell(
         sample_count=sample_count,
         mix_count=mix_count,
         profile_sample_limit=profile_sample_limit,
+        triad_sample_limit=triad_sample_limit,
         max_profiles_per_row=max_profiles_per_row,
         lobpcg_maxiter=lobpcg_maxiter,
         tail_grid_detail=tail_grid_detail,
@@ -285,21 +293,36 @@ def _run_shell(
         scan_summary = _receipt_summary(scan_payload)
         checker_summary = _receipt_summary(checker_payload)
         ok = bool(scan_summary["ok"] is True and checker_summary["ok"] is True)
+        shell_elapsed_ms = int(round((time.perf_counter() - shell_started) * 1000.0))
         return {
             "shell": int(shell),
             "shell_dir": str(shell_dir),
+            "shell_status": "reused_existing_ok",
+            "shell_elapsed_ms": shell_elapsed_ms,
             "skipped_existing_ok": True,
+            "scan_command": scan_cmd,
+            "scan_status": "reused_existing_ok",
+            "scan_elapsed_ms": 0,
             "scan": {
                 "command": scan_cmd,
                 "return_code": 0,
+                "status": "reused_existing_ok",
+                "elapsed_ms": 0,
                 "stdout_path": str(scan_stdout),
                 "stderr_path": str(scan_stderr),
                 "receipt_path": str(scan_json),
                 **scan_summary,
             },
+            "check_command": checker_cmd,
+            "checker_command": checker_cmd,
+            "check_status": "reused_existing_ok",
+            "checker_status": "reused_existing_ok",
+            "checker_elapsed_ms": 0,
             "checker": {
                 "command": checker_cmd,
                 "return_code": 0,
+                "status": "reused_existing_ok",
+                "elapsed_ms": 0,
                 "stdout_path": str(check_stdout),
                 "stderr_path": str(check_stderr),
                 "receipt_path": str(check_json),
@@ -308,7 +331,7 @@ def _run_shell(
             "ok": ok,
         }
 
-    scan_completed = _run_command(
+    scan_completed, scan_elapsed_ms = _run_command(
         scan_cmd,
         cwd=ROOT,
         env=env,
@@ -319,8 +342,9 @@ def _run_shell(
 
     checker_completed: subprocess.CompletedProcess[str] | None = None
     checker_payload: dict[str, Any] | None = None
+    checker_elapsed_ms = 0
     if scan_json.exists():
-        checker_completed = _run_command(
+        checker_completed, checker_elapsed_ms = _run_command(
             checker_cmd,
             cwd=ROOT,
             env=env,
@@ -340,22 +364,45 @@ def _run_shell(
         and checker_completed.returncode == 0
         and checker_summary["ok"] is True
     )
+    shell_elapsed_ms = int(round((time.perf_counter() - shell_started) * 1000.0))
+    scan_status = "completed" if scan_completed.returncode == 0 else "failed"
+    checker_status = (
+        "completed"
+        if checker_completed is not None and checker_completed.returncode == 0 and checker_summary["ok"] is True
+        else "skipped_scan_receipt_missing"
+        if checker_completed is None
+        else "failed"
+    )
 
     return {
         "shell": int(shell),
         "shell_dir": str(shell_dir),
+        "shell_status": "ok" if ok else "not_ok",
+        "shell_elapsed_ms": shell_elapsed_ms,
         "skipped_existing_ok": False,
+        "scan_command": scan_cmd,
+        "scan_status": scan_status,
+        "scan_elapsed_ms": scan_elapsed_ms,
         "scan": {
             "command": scan_cmd,
             "return_code": int(scan_completed.returncode),
+            "status": scan_status,
+            "elapsed_ms": scan_elapsed_ms,
             "stdout_path": str(scan_stdout),
             "stderr_path": str(scan_stderr),
             "receipt_path": str(scan_json),
             **scan_summary,
         },
+        "check_command": checker_cmd,
+        "checker_command": checker_cmd,
+        "check_status": checker_status,
+        "checker_status": checker_status,
+        "checker_elapsed_ms": checker_elapsed_ms,
         "checker": {
             "command": checker_cmd,
             "return_code": None if checker_completed is None else int(checker_completed.returncode),
+            "status": checker_status,
+            "elapsed_ms": checker_elapsed_ms,
             "stdout_path": str(check_stdout),
             "stderr_path": str(check_stderr),
             "receipt_path": str(check_json),
@@ -455,6 +502,21 @@ def main() -> int:
             "tail_grid_serialization": str(args.tail_grid_serialization),
             "output_dir": str(output_dir),
             "skip_existing_ok": bool(args.skip_existing_ok),
+            "profile_adversary_coverage": {
+                "shells": shells,
+                "backend": args.backend,
+                "icd": args.icd,
+                "sample_count": int(args.sample_count),
+                "mix_count": int(args.mix_count),
+                "profile_sample_limit": int(args.profile_sample_limit),
+                "max_profiles_per_row": int(args.max_profiles_per_row),
+                "lobpcg_maxiter": int(args.lobpcg_maxiter),
+                "tail_grid_detail": str(args.tail_grid_detail),
+                "tail_grid_serialization": str(args.tail_grid_serialization),
+            },
+            "receipt_triad_sample_materialization": {
+                "triad_sample_limit": int(args.triad_sample_limit),
+            },
         },
         "runs": runs,
         "summary": _summary(runs),

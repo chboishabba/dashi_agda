@@ -55,6 +55,34 @@ TRIAD_COVERAGE_KEYS = (
     "triad_coverage",
     "coverage",
 )
+SPARSE_SAMPLE_COVERAGE_STATUSES = {
+    "sparse",
+    "sparse_sampled",
+    "limited",
+    "partial",
+}
+FULL_SAMPLE_COVERAGE_STATUSES = {
+    "full",
+    "fully_covered",
+    "covered",
+    "complete",
+    "operator_full",
+    "sample_full",
+}
+ZERO_DEGREE_COUNT_KEYS = (
+    "operator_zero_degree_mode_count",
+    "zero_degree_count",
+    "degree_zero_count",
+    "zero_degree_counter",
+    "degree_zero_counter",
+)
+EMPTY_DEGREE_COUNT_KEYS = (
+    "operator_empty_triad_count",
+    "empty_degree_count",
+    "degree_empty_count",
+    "empty_degree_counter",
+    "degree_empty_counter",
+)
 
 
 def _json_text(payload: dict[str, Any]) -> str:
@@ -210,6 +238,104 @@ def _coverage_status(container: dict[str, Any]) -> Any | None:
     return None
 
 
+def _coverage_ratio(container: dict[str, Any]) -> float | None:
+    for key in ("triad_coverage_ratio", "coverage_ratio", "ratio"):
+        value = _coerce_float(container.get(key))
+        if value is not None:
+            return value
+    for key in TRIAD_COVERAGE_KEYS:
+        value = container.get(key)
+        if isinstance(value, dict):
+            ratio = _first_float(value, ("triad_coverage_ratio", "coverage_ratio", "ratio"))
+            if ratio is not None:
+                return ratio
+    return None
+
+
+def _coverage_sample_count(container: dict[str, Any]) -> int | None:
+    for key in ("triad_sample_count", "sample_count", "coverage_sample_count"):
+        value = _coerce_int(container.get(key))
+        if value is not None:
+            return value
+    for key in TRIAD_COVERAGE_KEYS:
+        value = container.get(key)
+        if isinstance(value, dict):
+            sample_count = _first_int(value, ("triad_sample_count", "sample_count", "coverage_sample_count"))
+            if sample_count is not None:
+                return sample_count
+    return None
+
+
+def _coverage_sample_limit(container: dict[str, Any]) -> int | None:
+    for key in ("triad_sample_limit", "sample_limit", "coverage_sample_limit"):
+        value = _coerce_int(container.get(key))
+        if value is not None:
+            return value
+    for key in TRIAD_COVERAGE_KEYS:
+        value = container.get(key)
+        if isinstance(value, dict):
+            sample_limit = _first_int(value, ("triad_sample_limit", "sample_limit", "coverage_sample_limit"))
+            if sample_limit is not None:
+                return sample_limit
+    return None
+
+
+def _normalize_operator_sample_coverage_status(value: Any | None) -> str | None:
+    if value is None:
+        return None
+    if isinstance(value, dict):
+        for inner_key in ("status", "value", "mode"):
+            inner_value = value.get(inner_key)
+            if inner_value is not None:
+                return _normalize_operator_sample_coverage_status(inner_value)
+        return None
+    text = str(value).strip().lower().replace("-", "_")
+    if not text:
+        return None
+    if "sparse" in text or "limited" in text:
+        return "sparse_sampled"
+    if text in FULL_SAMPLE_COVERAGE_STATUSES or text.endswith("_full") or "full" in text:
+        return "operator_full"
+    if text in {"unknown", "unavailable", "mixed"}:
+        return text
+    return "unknown"
+
+
+def _operator_sample_coverage_status(container: dict[str, Any]) -> str | None:
+    return _normalize_operator_sample_coverage_status(_coverage_status(container))
+
+
+def _degree_counter(container: dict[str, Any], keys: tuple[str, ...]) -> int | None:
+    for key in keys:
+        value = _coerce_int(container.get(key))
+        if value is not None:
+            return value
+    for key in TRIAD_COVERAGE_KEYS:
+        value = container.get(key)
+        if isinstance(value, dict):
+            counter = _first_int(value, keys)
+            if counter is not None:
+                return counter
+    return None
+
+
+def _coverage_counts_by_status(shells: list[dict[str, Any]]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for shell in shells:
+        status = shell.get("operator_sample_coverage_status")
+        if not isinstance(status, str) or not status:
+            continue
+        counts[status] = counts.get(status, 0) + 1
+    return counts
+
+
+def _min_float(values: list[float | None]) -> float | None:
+    filtered = [value for value in values if value is not None]
+    if not filtered:
+        return None
+    return min(filtered)
+
+
 def _merge_record(existing: dict[str, Any], incoming: dict[str, Any]) -> dict[str, Any]:
     merged = dict(existing)
     for key in ("best_lambda", "worst_eigen_shell", "worst_eigen_mass"):
@@ -227,6 +353,14 @@ def _merge_record(existing: dict[str, Any], incoming: dict[str, Any]) -> dict[st
     merged["tail_escape_candidate_count"] = int(merged.get("tail_escape_candidate_count", 0)) + int(
         incoming.get("tail_escape_candidate_count", 0) or 0
     )
+    for key in ("triad_coverage_ratio", "operator_sample_coverage_ratio"):
+        merged_value = _coerce_float(merged.get(key))
+        incoming_value = _coerce_float(incoming.get(key))
+        if merged_value is None:
+            if incoming_value is not None:
+                merged[key] = incoming_value
+        elif incoming_value is not None:
+            merged[key] = min(merged_value, incoming_value)
 
     merged_ok = merged.get("ok")
     incoming_ok = incoming.get("ok")
@@ -252,6 +386,29 @@ def _merge_record(existing: dict[str, Any], incoming: dict[str, Any]) -> dict[st
     else:
         unique = {json.dumps(status, sort_keys=True, default=str) for status in statuses}
         merged["triad_coverage_status"] = statuses[0] if len(unique) == 1 else "mixed"
+
+    operator_statuses = [
+        status
+        for status in (
+            merged.get("operator_sample_coverage_status"),
+            incoming.get("operator_sample_coverage_status"),
+        )
+        if status is not None
+    ]
+    if not operator_statuses:
+        merged["operator_sample_coverage_status"] = None
+    else:
+        unique = {json.dumps(status, sort_keys=True, default=str) for status in operator_statuses}
+        merged["operator_sample_coverage_status"] = operator_statuses[0] if len(unique) == 1 else "mixed"
+
+    for key in ("zero_degree_count", "empty_degree_count"):
+        merged_value = _coerce_int(merged.get(key))
+        incoming_value = _coerce_int(incoming.get(key))
+        if merged_value is None:
+            if incoming_value is not None:
+                merged[key] = incoming_value
+        elif incoming_value is not None:
+            merged[key] = int(merged_value) + int(incoming_value)
     return merged
 
 
@@ -274,6 +431,13 @@ def _summarize_manifest(manifest: dict[str, Any], manifest_path: Path) -> list[d
         source = row if isinstance(row, dict) else (scan_payload if isinstance(scan_payload, dict) else run)
         best_profile, best_lambda = _best_profile(source)
         profile_source = best_profile if isinstance(best_profile, dict) else source
+        coverage_status = _coverage_status(source)
+        operator_sample_coverage_status = _operator_sample_coverage_status(source)
+        coverage_ratio = _coverage_ratio(source)
+        coverage_sample_count = _coverage_sample_count(source)
+        coverage_sample_limit = _coverage_sample_limit(source)
+        zero_degree_count = _degree_counter(source, ZERO_DEGREE_COUNT_KEYS)
+        empty_degree_count = _degree_counter(source, EMPTY_DEGREE_COUNT_KEYS)
         summary = {
             "shell": shell,
             "ok": run.get("ok"),
@@ -284,8 +448,17 @@ def _summarize_manifest(manifest: dict[str, Any], manifest_path: Path) -> list[d
             "worst_eigen_shell": _first_int(profile_source, WORST_SHELL_KEYS),
             "worst_eigen_mass": _first_float(profile_source, WORST_MASS_KEYS),
             "tail_escape_candidate_count": _first_int(source, TAIL_ESCAPE_KEYS) or 0,
-            "triad_coverage_status": _coverage_status(source),
+            "triad_coverage_status": coverage_status,
+            "triad_coverage_ratio": coverage_ratio,
+            "triad_sample_count": coverage_sample_count,
+            "triad_sample_limit": coverage_sample_limit,
+            "operator_sample_coverage_status": operator_sample_coverage_status,
+            "operator_sample_coverage_ratio": coverage_ratio,
         }
+        if zero_degree_count is not None:
+            summary["zero_degree_count"] = zero_degree_count
+        if empty_degree_count is not None:
+            summary["empty_degree_count"] = empty_degree_count
         if shell is None:
             continue
         existing = summaries.get(shell)
@@ -316,6 +489,20 @@ def main() -> int:
         merged[shell] = summary if existing is None else _merge_record(existing, summary)
 
     shells = [merged[shell] for shell in sorted(merged)]
+    operator_sample_coverage_status_values = [
+        shell.get("operator_sample_coverage_status")
+        for shell in shells
+        if shell.get("operator_sample_coverage_status") is not None
+    ]
+    operator_sample_coverage_ratio_min = _min_float(
+        [
+            _coerce_float(shell.get("operator_sample_coverage_ratio"))
+            for shell in shells
+        ]
+    )
+    triad_coverage_ratio_min = _min_float(
+        [_coerce_float(shell.get("triad_coverage_ratio")) for shell in shells]
+    )
     triad_coverage_values = [
         shell.get("triad_coverage_status")
         for shell in shells
@@ -331,6 +518,14 @@ def main() -> int:
         triad_coverage_status = triad_coverage_values[0]
     else:
         triad_coverage_status = "mixed"
+    operator_sample_coverage_counts = _coverage_counts_by_status(shells)
+
+    zero_degree_count_values = [
+        _coerce_int(shell.get("zero_degree_count")) for shell in shells if shell.get("zero_degree_count") is not None
+    ]
+    empty_degree_count_values = [
+        _coerce_int(shell.get("empty_degree_count")) for shell in shells if shell.get("empty_degree_count") is not None
+    ]
 
     payload = {
         "script_name": SCRIPT_NAME,
@@ -347,8 +542,28 @@ def main() -> int:
             int(shell.get("tail_escape_candidate_count", 0) or 0) for shell in shells
         ),
         "triad_coverage_status": triad_coverage_status,
+        "triad_coverage_ratio_min": triad_coverage_ratio_min,
+        "operator_sample_coverage_status": (
+            None
+            if not operator_sample_coverage_status_values
+            else (
+                operator_sample_coverage_status_values[0]
+                if len({
+                    json.dumps(value, sort_keys=True, default=str)
+                    for value in operator_sample_coverage_status_values
+                })
+                == 1
+                else "mixed"
+            )
+        ),
+        "operator_sample_coverage_status_counts": operator_sample_coverage_counts,
+        "operator_sample_coverage_ratio_min": operator_sample_coverage_ratio_min,
         "shells": shells,
     }
+    if zero_degree_count_values:
+        payload["zero_degree_count"] = sum(int(value or 0) for value in zero_degree_count_values)
+    if empty_degree_count_values:
+        payload["empty_degree_count"] = sum(int(value or 0) for value in empty_degree_count_values)
 
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(_json_text(payload) + "\n", encoding="utf-8")

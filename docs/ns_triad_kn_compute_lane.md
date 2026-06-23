@@ -36,9 +36,17 @@ S:
   progression artifact and zero `danger=true` rows in the N=3 eigenmode file.
 - The 2026-06-23 Vulkan batch smoke for shells 4 and 5 returned checker-ok receipts,
   `tail_escape_candidate_count = 0` for both shells, and `gpu_kn_authority = false`.
-- The 2026-06-23 Vulkan shell-6 compact batch with explicit triad sample metadata returned
-  checker-ok, `lambda_min ~= 0.19363`, worst eigen shell `1`, `tail_escape_candidate_count = 0`,
-  and `triad_coverage_status = sparse_sampled`.
+- The corrected 2026-06-23 Vulkan shell-6 compact batch with explicit triad sample
+  metadata and tolerant tail-threshold classification returned checker-ok,
+  `lambda_min ~= 0.19363`, worst eigen shell `1`, worst shell mass `~0.454`,
+  `operator_zero_degree_mode_count = 0`, and `tail_escape_candidate_count = 1`.
+  This is a mass-threshold tail candidate, not a dominant-top-shell eigenmode:
+  the eigenvector has high tail mass beyond cutoff `K=4`, but its largest shell
+  component remains shell `1`.
+- `triad_sample_limit` is receipt sample materialization only. It does not truncate
+  the matvec operator; receipts now expose `operator_triad_count`,
+  `operator_selected_mode_count`, zero-degree counters, and
+  `triad_sample_limit_scope = receipt_samples_only`.
 - The remaining open proof items are the negative-frame coercivity, spanning, and
   Biot-Savart frame-equidistribution obligations.
 
@@ -62,8 +70,11 @@ F:
   - `NSTriadBSSpanningLemmaReceipt`
   - `NSTriadBSFrameEquidistributionBoundary`
 - The Clay-relevant gap is the asymptotic theorem:
-  `low lambda_min`, low/moderate `D`, and escaping worst eigenmode cannot coexist
+  `low lambda_min`, low/moderate `D`, and an escaping bad eigenmode cannot coexist
   along a sequence of increasing radial shells.
+  The shell-6 v3 smoke makes the gap sharper: tail mass in the eigenvector can be
+  high while the dominant bad shell is still low, so proof and telemetry should
+  distinguish tail-mass escape from dominant-shell escape.
 
 Smoke commands:
 
@@ -119,8 +130,8 @@ VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.json \
   --triad-sample-limit 64
 
 python3 scripts/ns_triad_kn_batch_manifest_summary.py \
-  --input scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_eigen_tail_adversary_batch_20260623_vulkan_shell6_cov64/ns_triad_kn_eigen_tail_adversary_batch_manifest.json \
-  --output-json scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_batch_manifest_summary_20260623_vulkan_shell6_cov64.json
+  --input scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_eigen_tail_adversary_batch_20260623_vulkan_shell6_operator_cov64_v3/ns_triad_kn_eigen_tail_adversary_batch_manifest.json \
+  --output-json scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_batch_manifest_summary_20260623_vulkan_shell6_operator_cov64_v3.json
 
 python3 scripts/ns_triad_kn_schur_finite_shell_audit.py
 ```
