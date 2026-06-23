@@ -121,6 +121,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--dense-oracle-shell-limit", type=int, default=3)
     parser.add_argument("--gpu-matvec-checks", type=int, default=1)
     parser.add_argument("--finite-shell-cutoff", type=int, default=3)
+    parser.add_argument("--no-force-tail-profiles", action="store_true")
     parser.add_argument("--shell", dest="shells", action="append", type=int, default=None)
     parser.add_argument("--pretty", action="store_true")
     return parser.parse_args()
@@ -171,9 +172,11 @@ def _classify_tail(
     radial_shell_max = metrics.get("radial_shell_max")
     if high_tail < float(eta) and isinstance(radial_shell_max, (int, float)) and float(radial_shell_max) < float(cutoff):
         return "finite-low-shell-degeneracy"
-    if isinstance(worst_shell, (int, float)) and int(worst_shell) <= int(finite_shell_cutoff) and high_tail < float(eta):
+    if isinstance(worst_shell, (int, float)) and int(worst_shell) <= int(finite_shell_cutoff):
         return "finite-low-shell-degeneracy"
     if high_tail >= float(eta):
+        if not isinstance(worst_shell, (int, float)):
+            return "partial"
         return "asymptotic-tail-danger"
     return "partial"
 
@@ -251,6 +254,34 @@ def _metrics_for_all_cutoffs(
     return base
 
 
+def _forced_tail_profiles(
+    shell_levels: np.ndarray,
+    tail_cutoffs: list[int],
+    tail_etas: list[float],
+    zero_eps: float,
+) -> list[tuple[str, np.ndarray]]:
+    profiles: list[tuple[str, np.ndarray]] = []
+    shells = np.asarray(shell_levels, dtype=np.float64)
+    low_shell = float(np.min(shells))
+    low_mask = shells <= low_shell + 1.0e-12
+    if not np.any(low_mask):
+        return profiles
+    low_reference = _normalize_profile(np.where(low_mask, 1.0, 0.0), zero_eps)
+    for cutoff in tail_cutoffs:
+        high_mask = shells >= float(cutoff)
+        if not np.any(high_mask):
+            continue
+        high_reference = _normalize_profile(np.where(high_mask, 1.0, 0.0), zero_eps)
+        for eta in tail_etas:
+            eta_value = min(max(float(eta), 0.0), 1.0)
+            probability = _normalize_profile(
+                (1.0 - eta_value) * low_reference + eta_value * high_reference,
+                zero_eps,
+            )
+            profiles.append((f"forced_tail_K{int(cutoff)}_eta_{eta_value:.3f}", probability))
+    return profiles
+
+
 def _row(
     *,
     slot: int,
@@ -277,6 +308,7 @@ def _row(
     max_profiles_per_row: int,
     profile_sample_limit: int,
     finite_shell_cutoff: int,
+    force_tail_profiles: bool,
 ) -> dict[str, Any]:
     row: dict[str, Any] = {
         "frame": int(slot),
@@ -315,78 +347,83 @@ def _row(
 
     evaluated: list[dict[str, Any]] = []
     seen: set[str] = set()
+    profile_queue: list[tuple[str, np.ndarray]] = []
+    if force_tail_profiles:
+        profile_queue.extend(_forced_tail_profiles(levels, tail_cutoffs, tail_etas, zero_eps))
     for seed in seeds:
-        for profile_id, probability in _candidate_profiles(base_probability, levels, sample_count, mix_count, seed, zero_eps):
-            if int(max_profiles_per_row) > 0 and len(evaluated) >= int(max_profiles_per_row):
-                break
-            unique_id = f"seed{seed}:{profile_id}"
-            if unique_id in seen:
-                continue
-            seen.add(unique_id)
-            solved = _evaluate(
-                triads=triads,
-                probability=probability,
-                shell_levels=levels,
-                profile_id=unique_id,
-                shell_n=shell_n,
-                backend=backend,
-                zero_eps=zero_eps,
-                high_shell_cutoff=float(min(tail_cutoffs)),
-                r0=r0,
-                high_shell_eta=min(tail_etas),
-                d0=max(d0_values),
-                parity_tol=parity_tol,
-                lobpcg_tol=lobpcg_tol,
-                lobpcg_maxiter=lobpcg_maxiter,
-                block_size=block_size,
-                generalized_mass_shift=generalized_mass_shift,
-                dense_oracle_shell_limit=dense_oracle_shell_limit,
-                gpu_checks=gpu_checks,
-            )
-            metrics = _metrics_for_all_cutoffs(probability, levels, zero_eps, tail_cutoffs, tail_etas)
-            tail_grid = _tail_grid(
-                lambda_min=solved.get("lambda_min_iterative"),
-                metrics=metrics,
-                worst_shell=solved.get("worst_eigenvector_shell_iterative"),
-                c0_values=c0_values,
-                r0=r0,
-                tail_cutoffs=tail_cutoffs,
-                tail_etas=tail_etas,
-                d0_values=d0_values,
-                finite_shell_cutoff=finite_shell_cutoff,
-            )
-            evaluated.append(
-                {
-                    "profile_id": unique_id,
-                    "status": solved.get("status"),
-                    "parity_ok": solved.get("parity_ok"),
-                    "candidate_only": True,
-                    "fail_closed": True,
-                    "kn_backend": backend,
-                    "gpu_kn_authority": False,
-                    "dense_oracle_used": solved.get("dense_oracle_used"),
-                    "dense_reconstruction_used": False,
-                    "lambda_min_dense_cpu": solved.get("lambda_min_dense_cpu"),
-                    "lambda_min_iterative": solved.get("lambda_min_iterative"),
-                    "relative_error_vs_dense": solved.get("relative_error_vs_dense"),
-                    "worst_eigenvector_shell_iterative": solved.get("worst_eigenvector_shell_iterative"),
-                    "worst_eigenvector_shell_mass_iterative": solved.get("worst_eigenvector_shell_mass_iterative"),
-                    "iterations": solved.get("iterations"),
-                    "residual_norm": solved.get("residual_norm"),
-                    "elapsed_ms": solved.get("elapsed_ms"),
-                    "block_matvec_enabled": solved.get("block_matvec_enabled"),
-                    "block_matvec_backend": solved.get("block_matvec_backend"),
-                    "gpu_matvec_parity_ok": solved.get("gpu_matvec_parity_ok"),
-                    "gpu_block_matvec_parity_ok": solved.get("gpu_block_matvec_parity_ok"),
-                    "vulkan_icd": solved.get("vulkan_icd"),
-                    "metrics": metrics,
-                    "tail_grid_summary": _summarize_grid(tail_grid),
-                    "tail_grid": tail_grid,
-                    "warnings": solved.get("warnings", []),
-                }
-            )
+        profile_queue.extend(
+            (f"seed{seed}:{profile_id}", probability)
+            for profile_id, probability in _candidate_profiles(base_probability, levels, sample_count, mix_count, seed, zero_eps)
+        )
+
+    for unique_id, probability in profile_queue:
         if int(max_profiles_per_row) > 0 and len(evaluated) >= int(max_profiles_per_row):
             break
+        if unique_id in seen:
+            continue
+        seen.add(unique_id)
+        solved = _evaluate(
+            triads=triads,
+            probability=probability,
+            shell_levels=levels,
+            profile_id=unique_id,
+            shell_n=shell_n,
+            backend=backend,
+            zero_eps=zero_eps,
+            high_shell_cutoff=float(min(tail_cutoffs)),
+            r0=r0,
+            high_shell_eta=min(tail_etas),
+            d0=max(d0_values),
+            parity_tol=parity_tol,
+            lobpcg_tol=lobpcg_tol,
+            lobpcg_maxiter=lobpcg_maxiter,
+            block_size=block_size,
+            generalized_mass_shift=generalized_mass_shift,
+            dense_oracle_shell_limit=dense_oracle_shell_limit,
+            gpu_checks=gpu_checks,
+        )
+        metrics = _metrics_for_all_cutoffs(probability, levels, zero_eps, tail_cutoffs, tail_etas)
+        tail_grid = _tail_grid(
+            lambda_min=solved.get("lambda_min_iterative"),
+            metrics=metrics,
+            worst_shell=solved.get("worst_eigenvector_shell_iterative"),
+            c0_values=c0_values,
+            r0=r0,
+            tail_cutoffs=tail_cutoffs,
+            tail_etas=tail_etas,
+            d0_values=d0_values,
+            finite_shell_cutoff=finite_shell_cutoff,
+        )
+        evaluated.append(
+            {
+                "profile_id": unique_id,
+                "status": solved.get("status"),
+                "parity_ok": solved.get("parity_ok"),
+                "candidate_only": True,
+                "fail_closed": True,
+                "kn_backend": backend,
+                "gpu_kn_authority": False,
+                "dense_oracle_used": solved.get("dense_oracle_used"),
+                "dense_reconstruction_used": False,
+                "lambda_min_dense_cpu": solved.get("lambda_min_dense_cpu"),
+                "lambda_min_iterative": solved.get("lambda_min_iterative"),
+                "relative_error_vs_dense": solved.get("relative_error_vs_dense"),
+                "worst_eigenvector_shell_iterative": solved.get("worst_eigenvector_shell_iterative"),
+                "worst_eigenvector_shell_mass_iterative": solved.get("worst_eigenvector_shell_mass_iterative"),
+                "iterations": solved.get("iterations"),
+                "residual_norm": solved.get("residual_norm"),
+                "elapsed_ms": solved.get("elapsed_ms"),
+                "block_matvec_enabled": solved.get("block_matvec_enabled"),
+                "block_matvec_backend": solved.get("block_matvec_backend"),
+                "gpu_matvec_parity_ok": solved.get("gpu_matvec_parity_ok"),
+                "gpu_block_matvec_parity_ok": solved.get("gpu_block_matvec_parity_ok"),
+                "vulkan_icd": solved.get("vulkan_icd"),
+                "metrics": metrics,
+                "tail_grid_summary": _summarize_grid(tail_grid),
+                "tail_grid": tail_grid,
+                "warnings": solved.get("warnings", []),
+            }
+        )
 
     best = min(
         (item for item in evaluated if isinstance(item.get("lambda_min_iterative"), (int, float))),
@@ -491,6 +528,7 @@ def main() -> int:
             max_profiles_per_row=int(args.max_profiles_per_row),
             profile_sample_limit=int(args.profile_sample_limit),
             finite_shell_cutoff=int(args.finite_shell_cutoff),
+            force_tail_profiles=not bool(args.no_force_tail_profiles),
         )
         for slot, snapshot in enumerate(snapshots)
         for shell_n in shells
@@ -521,6 +559,7 @@ def main() -> int:
             "tail_etas": tail_etas,
             "d0_values": d0_values,
             "finite_shell_cutoff": int(args.finite_shell_cutoff),
+            "force_tail_profiles": not bool(args.no_force_tail_profiles),
             "parity_tol": float(args.parity_tol),
             "lobpcg_tol": float(args.lobpcg_tol),
             "lobpcg_maxiter": int(args.lobpcg_maxiter),
