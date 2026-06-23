@@ -202,7 +202,7 @@ class VulkanTriadLaplacianExecutor:
         push_constant_range = vk.VkPushConstantRange(
             stageFlags=vk.VK_SHADER_STAGE_COMPUTE_BIT,
             offset=0,
-            size=8,
+            size=16,
         )
         pipeline_layout_info = vk.VkPipelineLayoutCreateInfo(
             sType=vk.VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
@@ -253,7 +253,8 @@ class VulkanTriadLaplacianExecutor:
         row_ptr_bytes = max(1, self.mode_count + 1) * np.dtype(np.uint32).itemsize
         incidence_bytes = max(1, self.incidence_count) * np.dtype(np.uint32).itemsize
         weight_bytes = max(1, self.incidence_count) * np.dtype(np.float32).itemsize
-        vec_bytes = max(1, self.mode_count) * np.dtype(np.float32).itemsize
+        self.vector_buffer_capacity = int(self.mode_count)
+        vec_bytes = max(1, self.vector_buffer_capacity) * np.dtype(np.float32).itemsize
         self.buf_left, self.mem_left = _create_buffer(self.device, self.mem_props, row_ptr_bytes, usage, flags)
         self.buf_right, self.mem_right = _create_buffer(self.device, self.mem_props, incidence_bytes, usage, flags)
         self.buf_weight, self.mem_weight = _create_buffer(self.device, self.mem_props, weight_bytes, usage, flags)
@@ -299,10 +300,28 @@ class VulkanTriadLaplacianExecutor:
         ]
         vk.vkUpdateDescriptorSets(self.device, len(write_sets), write_sets, 0, None)
 
-    def matvec(self, x: np.ndarray, weights: np.ndarray) -> np.ndarray:
-        vec = np.asarray(x, dtype=np.float32, order="C")
-        if vec.ndim != 1 or int(vec.shape[0]) != self.mode_count:
-            raise ValueError(f"x must be length {self.mode_count}")
+    def _ensure_vector_buffers(self, value_count: int) -> None:
+        if int(value_count) <= int(self.vector_buffer_capacity):
+            return
+        usage = vk.VK_BUFFER_USAGE_STORAGE_BUFFER_BIT
+        flags = HOST_VISIBLE_COHERENT
+        for name in ("x", "y"):
+            buffer = getattr(self, f"buf_{name}", None)
+            memory = getattr(self, f"mem_{name}", None)
+            if buffer is not None:
+                vk.vkDestroyBuffer(self.device, buffer, None)
+            if memory is not None:
+                vk.vkFreeMemory(self.device, memory, None)
+        self.vector_buffer_capacity = int(value_count)
+        vec_bytes = max(1, self.vector_buffer_capacity) * np.dtype(np.float32).itemsize
+        self.buf_x, self.mem_x = _create_buffer(self.device, self.mem_props, vec_bytes, usage, flags)
+        self.buf_y, self.mem_y = _create_buffer(self.device, self.mem_props, vec_bytes, usage, flags)
+        row_ptr_bytes = max(1, self.mode_count + 1) * np.dtype(np.uint32).itemsize
+        incidence_bytes = max(1, self.incidence_count) * np.dtype(np.uint32).itemsize
+        weight_bytes = max(1, self.incidence_count) * np.dtype(np.float32).itemsize
+        self._update_descriptors(row_ptr_bytes, incidence_bytes, weight_bytes, vec_bytes)
+
+    def _select_weights(self, weights: np.ndarray) -> tuple[str, np.ndarray]:
         if weights is self.profile.weights_abs:
             weight_key = "abs"
             directed_weights = self.directed_weights_abs
@@ -312,10 +331,24 @@ class VulkanTriadLaplacianExecutor:
         else:
             weight_key = "custom"
             directed_weights = self._directed_weights(weights)
+        return weight_key, directed_weights
+
+    def matmat(self, x: np.ndarray, weights: np.ndarray) -> np.ndarray:
+        matrix = np.asarray(x, dtype=np.float32)
+        if matrix.ndim == 1:
+            return self.matvec(matrix, weights)[:, None]
+        if matrix.ndim != 2 or int(matrix.shape[0]) != self.mode_count:
+            raise ValueError(f"x must have shape ({self.mode_count}, block_size)")
+        block_size = int(matrix.shape[1])
+        if block_size <= 0:
+            return np.zeros((self.mode_count, 0), dtype=np.float64)
+        packed = np.ascontiguousarray(matrix.T, dtype=np.float32)
+        self._ensure_vector_buffers(int(self.mode_count * block_size))
+        weight_key, directed_weights = self._select_weights(weights)
         if self._last_weight_key != weight_key or weight_key == "custom":
             _write_buffer(self.device, self.mem_weight, directed_weights)
             self._last_weight_key = weight_key
-        _write_buffer(self.device, self.mem_x, vec)
+        _write_buffer(self.device, self.mem_x, packed)
 
         begin_info = vk.VkCommandBufferBeginInfo(
             sType=vk.VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
@@ -334,19 +367,19 @@ class VulkanTriadLaplacianExecutor:
             None,
         )
         if hasattr(vk, "ffi"):
-            push_data = vk.ffi.new("uint32_t[]", [self.mode_count, self.incidence_count])
+            push_data = vk.ffi.new("uint32_t[]", [self.mode_count, self.incidence_count, block_size, self.mode_count])
         else:
-            push_data = np.asarray([self.mode_count, self.incidence_count], dtype=np.uint32)
+            push_data = np.asarray([self.mode_count, self.incidence_count, block_size, self.mode_count], dtype=np.uint32)
         vk.vkCmdPushConstants(
             self.command_buffer,
             self.pipeline_layout,
             vk.VK_SHADER_STAGE_COMPUTE_BIT,
             0,
-            8,
+            16,
             push_data,
         )
         groups = math.ceil(self.mode_count / self.workgroup_size)
-        vk.vkCmdDispatch(self.command_buffer, groups, 1, 1)
+        vk.vkCmdDispatch(self.command_buffer, groups, block_size, 1)
         vk.vkEndCommandBuffer(self.command_buffer)
         submit_info = vk.VkSubmitInfo(
             sType=vk.VK_STRUCTURE_TYPE_SUBMIT_INFO,
@@ -365,16 +398,28 @@ class VulkanTriadLaplacianExecutor:
         vk.vkDestroyFence(self.device, fence, None)
         if result not in (None, vk.VK_SUCCESS):
             raise RuntimeError(f"vkWaitForFences failed with code {result}")
-        out = _read_buffer(self.device, self.mem_y, (self.mode_count,), np.float32)
+        out = _read_buffer(self.device, self.mem_y, (block_size, self.mode_count), np.float32)
         vk.vkResetCommandBuffer(self.command_buffer, 0)
         self.last_fence_wait_ms = elapsed_ms
-        return np.asarray(out, dtype=np.float64)
+        return np.asarray(out.T, dtype=np.float64)
+
+    def matvec(self, x: np.ndarray, weights: np.ndarray) -> np.ndarray:
+        vec = np.asarray(x, dtype=np.float32, order="C")
+        if vec.ndim != 1 or int(vec.shape[0]) != self.mode_count:
+            raise ValueError(f"x must be length {self.mode_count}")
+        return np.asarray(self.matmat(vec[:, None], weights)[:, 0], dtype=np.float64)
 
     def matvec_abs(self, x: np.ndarray) -> np.ndarray:
         return self.matvec(x, self.profile.weights_abs)
 
     def matvec_neg(self, x: np.ndarray) -> np.ndarray:
         return self.matvec(x, self.profile.weights_neg)
+
+    def matmat_abs(self, x: np.ndarray) -> np.ndarray:
+        return self.matmat(x, self.profile.weights_abs)
+
+    def matmat_neg(self, x: np.ndarray) -> np.ndarray:
+        return self.matmat(x, self.profile.weights_neg)
 
     def close(self) -> None:
         if vk is None or not getattr(self, "device", None):

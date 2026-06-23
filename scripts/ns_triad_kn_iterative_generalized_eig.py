@@ -114,12 +114,16 @@ class BackendMatvec:
         name: str,
         abs_mv: Callable[[np.ndarray], np.ndarray],
         neg_mv: Callable[[np.ndarray], np.ndarray],
+        abs_mm: Callable[[np.ndarray], np.ndarray] | None = None,
+        neg_mm: Callable[[np.ndarray], np.ndarray] | None = None,
         close: Callable[[], None] | None = None,
         info: dict[str, Any] | None = None,
     ) -> None:
         self.name = name
         self.abs_mv = abs_mv
         self.neg_mv = neg_mv
+        self.abs_mm = abs_mm or (lambda matrix: np.column_stack([abs_mv(matrix[:, column]) for column in range(matrix.shape[1])]))
+        self.neg_mm = neg_mm or (lambda matrix: np.column_stack([neg_mv(matrix[:, column]) for column in range(matrix.shape[1])]))
         self.close = close or (lambda: None)
         self.info = info or {}
 
@@ -160,12 +164,20 @@ def _parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def _operator_from_matvec(matvec: Callable[[np.ndarray], np.ndarray], n: int) -> LinearOperator:
+def _operator_from_matvec(
+    matvec: Callable[[np.ndarray], np.ndarray],
+    matmat: Callable[[np.ndarray], np.ndarray] | None,
+    n: int,
+) -> LinearOperator:
     def apply(array: np.ndarray) -> np.ndarray:
         values = np.asarray(array, dtype=np.float64)
         if values.ndim == 1:
             return np.asarray(matvec(values), dtype=np.float64)
         if values.ndim == 2:
+            if values.shape[1] == 0:
+                return np.zeros((n, 0), dtype=np.float64)
+            if matmat is not None:
+                return np.asarray(matmat(values), dtype=np.float64)
             return np.column_stack([np.asarray(matvec(values[:, column]), dtype=np.float64) for column in range(values.shape[1])])
         raise ValueError(f"operator input must be vector or matrix, got ndim={values.ndim}")
 
@@ -180,6 +192,7 @@ def _operator_from_matvec(matvec: Callable[[np.ndarray], np.ndarray], n: int) ->
 
 def _shifted_operator_from_matvec(
     matvec: Callable[[np.ndarray], np.ndarray],
+    matmat: Callable[[np.ndarray], np.ndarray] | None,
     n: int,
     shift: float,
 ) -> LinearOperator:
@@ -187,7 +200,14 @@ def _shifted_operator_from_matvec(
         values = np.asarray(array, dtype=np.float64)
         return np.asarray(matvec(values), dtype=np.float64) + float(shift) * values
 
-    return _operator_from_matvec(shifted, n)
+    def shifted_matmat(matrix: np.ndarray) -> np.ndarray:
+        values = np.asarray(matrix, dtype=np.float64)
+        base = np.asarray(matmat(values), dtype=np.float64) if matmat is not None else np.column_stack(
+            [np.asarray(matvec(values[:, column]), dtype=np.float64) for column in range(values.shape[1])]
+        )
+        return base + float(shift) * values
+
+    return _operator_from_matvec(shifted, shifted_matmat, n)
 
 
 def _shell_localization(vector: np.ndarray, profile: MatrixFreeKNProfile, zero_eps: float) -> tuple[int | None, float | None]:
@@ -211,16 +231,25 @@ def _shell_localization(vector: np.ndarray, profile: MatrixFreeKNProfile, zero_e
 
 def _make_backend(profile: MatrixFreeKNProfile, backend: str, zero_eps: float, gpu_checks: int) -> BackendMatvec:
     if backend == "cpu-matrix-free":
+        cpu_abs_mv = lambda vec: matvec_abs(vec, profile)
+        cpu_neg_mv = lambda vec: matvec_neg(vec, profile)
         return BackendMatvec(
             name=backend,
-            abs_mv=lambda vec: matvec_abs(vec, profile),
-            neg_mv=lambda vec: matvec_neg(vec, profile),
+            abs_mv=cpu_abs_mv,
+            neg_mv=cpu_neg_mv,
+            abs_mm=lambda matrix: np.column_stack([cpu_abs_mv(matrix[:, column]) for column in range(matrix.shape[1])]),
+            neg_mm=lambda matrix: np.column_stack([cpu_neg_mv(matrix[:, column]) for column in range(matrix.shape[1])]),
             info={
                 "gpu_matvec_parity_ok": None,
                 "gpu_matvec_max_abs_error_abs": None,
                 "gpu_matvec_max_abs_error_neg": None,
                 "vulkan_icd": None,
                 "icd_probe_errors": None,
+                "block_matvec_enabled": True,
+                "block_matvec_backend": "cpu-column-loop",
+                "gpu_block_matvec_parity_ok": None,
+                "gpu_block_matvec_max_abs_error_abs": None,
+                "gpu_block_matvec_max_abs_error_neg": None,
             },
         )
     if create_vulkan_triad_laplacian_executor is None or not has_vulkan_triad_laplacian():
@@ -229,6 +258,8 @@ def _make_backend(profile: MatrixFreeKNProfile, backend: str, zero_eps: float, g
     rng = np.random.default_rng(12345)
     abs_errors: list[float] = []
     neg_errors: list[float] = []
+    block_abs_errors: list[float] = []
+    block_neg_errors: list[float] = []
     for _ in range(max(0, int(gpu_checks))):
         vec = rng.normal(size=int(profile.mode_count))
         norm = float(np.linalg.norm(vec))
@@ -236,24 +267,49 @@ def _make_backend(profile: MatrixFreeKNProfile, backend: str, zero_eps: float, g
             vec = vec / norm
         abs_errors.append(float(np.max(np.abs(executor.matvec_abs(vec) - matvec_abs(vec, profile)))))
         neg_errors.append(float(np.max(np.abs(executor.matvec_neg(vec) - matvec_neg(vec, profile)))))
+        block = rng.normal(size=(int(profile.mode_count), 3))
+        block_norms = np.linalg.norm(block, axis=0)
+        for column, norm_value in enumerate(block_norms):
+            if float(norm_value) > float(zero_eps):
+                block[:, column] /= float(norm_value)
+        cpu_abs_block = np.column_stack([matvec_abs(block[:, column], profile) for column in range(block.shape[1])])
+        cpu_neg_block = np.column_stack([matvec_neg(block[:, column], profile) for column in range(block.shape[1])])
+        block_abs_errors.append(float(np.max(np.abs(executor.matmat_abs(block) - cpu_abs_block))))
+        block_neg_errors.append(float(np.max(np.abs(executor.matmat_neg(block) - cpu_neg_block))))
     abs_error = max(abs_errors) if abs_errors else None
     neg_error = max(neg_errors) if neg_errors else None
+    block_abs_error = max(block_abs_errors) if block_abs_errors else None
+    block_neg_error = max(block_neg_errors) if block_neg_errors else None
+    scalar_parity_ok = bool(
+        abs_error is not None
+        and neg_error is not None
+        and abs_error <= 5.0e-5
+        and neg_error <= 5.0e-5
+    )
+    block_parity_ok = bool(
+        block_abs_error is not None
+        and block_neg_error is not None
+        and block_abs_error <= 5.0e-5
+        and block_neg_error <= 5.0e-5
+    )
     return BackendMatvec(
         name=backend,
         abs_mv=executor.matvec_abs,
         neg_mv=executor.matvec_neg,
+        abs_mm=executor.matmat_abs,
+        neg_mm=executor.matmat_neg,
         close=executor.close,
         info={
-            "gpu_matvec_parity_ok": bool(
-                abs_error is not None
-                and neg_error is not None
-                and abs_error <= 5.0e-5
-                and neg_error <= 5.0e-5
-            ),
+            "gpu_matvec_parity_ok": bool(scalar_parity_ok and block_parity_ok),
             "gpu_matvec_max_abs_error_abs": abs_error,
             "gpu_matvec_max_abs_error_neg": neg_error,
             "vulkan_icd": probe_info.get("vulkan_icd"),
             "icd_probe_errors": probe_info.get("icd_probe_errors", []),
+            "block_matvec_enabled": True,
+            "block_matvec_backend": "vulkan-csr-block",
+            "gpu_block_matvec_parity_ok": block_parity_ok,
+            "gpu_block_matvec_max_abs_error_abs": block_abs_error,
+            "gpu_block_matvec_max_abs_error_neg": block_neg_error,
         },
     )
 
@@ -284,9 +340,10 @@ def _iterative_generalized(
     backend_handle: BackendMatvec | None = None
     try:
         backend_handle = _make_backend(profile, backend, zero_eps, gpu_checks)
-        a_op = _operator_from_matvec(backend_handle.neg_mv, n)
+        a_op = _operator_from_matvec(backend_handle.neg_mv, backend_handle.neg_mm, n)
         b_op = _shifted_operator_from_matvec(
             backend_handle.abs_mv,
+            backend_handle.abs_mm,
             n,
             max(float(generalized_mass_shift), 0.0),
         )
@@ -375,6 +432,11 @@ def _iterative_generalized(
             "gpu_matvec_max_abs_error_neg": None,
             "vulkan_icd": None,
             "icd_probe_errors": None,
+            "block_matvec_enabled": False,
+            "block_matvec_backend": None,
+            "gpu_block_matvec_parity_ok": None,
+            "gpu_block_matvec_max_abs_error_abs": None,
+            "gpu_block_matvec_max_abs_error_neg": None,
             "warnings": [f"iterative_generalized_failed: {type(exc).__name__}: {exc}"],
         }
     finally:
@@ -522,6 +584,11 @@ def _evaluate(
         "gpu_matvec_parity_ok": iterative.get("gpu_matvec_parity_ok"),
         "vulkan_icd": iterative.get("vulkan_icd"),
         "icd_probe_errors": iterative.get("icd_probe_errors"),
+        "block_matvec_enabled": iterative.get("block_matvec_enabled"),
+        "block_matvec_backend": iterative.get("block_matvec_backend"),
+        "gpu_block_matvec_parity_ok": iterative.get("gpu_block_matvec_parity_ok"),
+        "gpu_block_matvec_max_abs_error_abs": iterative.get("gpu_block_matvec_max_abs_error_abs"),
+        "gpu_block_matvec_max_abs_error_neg": iterative.get("gpu_block_matvec_max_abs_error_neg"),
         "parity_ok": parity_ok,
         "warnings": list(iterative.get("warnings", [])) + ([] if dense is None else list(dense.get("warnings", []))),
         "metrics": metrics,
