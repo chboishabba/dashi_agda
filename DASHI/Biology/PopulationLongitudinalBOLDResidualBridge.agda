@@ -281,6 +281,12 @@ record PopulationBOLDResidualRow : Set where
     rowNoIndividualDiagnosisIsFalse :
       rowNoIndividualDiagnosis ≡ false
 
+    rowNoTraumaMechanism :
+      Bool
+
+    rowNoTraumaMechanismIsFalse :
+      rowNoTraumaMechanism ≡ false
+
     rowNoHiddenChartRecovery :
       Bool
 
@@ -327,6 +333,12 @@ record PopulationLongitudinalBOLDResidualCertificate : Set where
 
     certificateNoIndividualDiagnosisIsFalse :
       certificateNoIndividualDiagnosis ≡ false
+
+    certificateNoTraumaMechanism :
+      Bool
+
+    certificateNoTraumaMechanismIsFalse :
+      certificateNoTraumaMechanism ≡ false
 
     certificateNoHiddenChartRecovery :
       Bool
@@ -438,6 +450,8 @@ canonicalPopulationBaselineRow =
     refl
     false
     refl
+    false
+    refl
     ( "population baseline"
     ∷ "candidate-only proxy variation"
     ∷ "no diagnosis, hidden chart recovery, causal closure, or mind-reading"
@@ -458,6 +472,8 @@ canonicalAgeBandDriftRow =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -496,6 +512,8 @@ canonicalSiteStratumAssociationRow =
     refl
     false
     refl
+    false
+    refl
     ( "site stratum"
     ∷ "cohort association only"
     ∷ "no reverse inference or hidden chart recovery"
@@ -516,6 +534,8 @@ canonicalScannerDriftRow =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -554,6 +574,8 @@ canonicalConditionFollowUpRow =
     refl
     false
     refl
+    false
+    refl
     ( "condition follow-up"
     ∷ "residual slope remains bounded"
     ∷ "no hidden chart recovery or treatment authority"
@@ -583,6 +605,8 @@ canonicalTreatmentExposureGuardRow =
     refl
     false
     refl
+    false
+    refl
     ( "treatment-exposure stratum"
     ∷ "exposure is not treatment authority"
     ∷ "no individual diagnosis or causal closure"
@@ -603,6 +627,8 @@ canonicalFollowUpResidualRow =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -650,7 +676,9 @@ canonicalPopulationLongitudinalBOLDResidualCertificate =
     refl
     false
     refl
-    "Candidate-only certificate: BOLDSignal witnesses neural/vascular proxy variation across population and time; the lane does not promote individual diagnosis, hidden chart recovery, causal closure, or mind-reading."
+    false
+    refl
+    "Candidate-only certificate: BOLDSignal witnesses neural/vascular proxy variation across population and time; the lane does not promote individual diagnosis, trauma mechanism recovery, hidden chart recovery, causal closure, or mind-reading."
 
 ------------------------------------------------------------------------
 -- Canonical bridge.
@@ -696,7 +724,7 @@ canonicalPopulationLongitudinalBOLDResidualBridge =
     ; nonPromotionCertificate =
         canonicalPopulationLongitudinalBOLDResidualCertificate
     ; bridgeReading =
-        "Candidate-only population longitudinal BOLD residual bridge: BOLDSignal witnesses neural/vascular proxy variation, and the module only permits bounded drift and cohort association rows while blocking individual diagnosis, hidden chart recovery, causal closure, and mind-reading."
+        "Candidate-only population longitudinal BOLD residual bridge: BOLDSignal witnesses neural/vascular proxy variation, and the module only permits bounded drift and cohort association rows while blocking individual diagnosis, trauma mechanism recovery, hidden chart recovery, causal closure, and mind-reading."
     }
 
 canonicalPopulationLongitudinalBOLDResidualBridgeIsCandidateOnly :
@@ -708,6 +736,11 @@ canonicalPopulationLongitudinalBOLDResidualBridgeNoDiagnosis :
   rowNoIndividualDiagnosis canonicalPopulationBaselineRow ≡ false
 canonicalPopulationLongitudinalBOLDResidualBridgeNoDiagnosis =
   rowNoIndividualDiagnosisIsFalse canonicalPopulationBaselineRow
+
+canonicalPopulationLongitudinalBOLDResidualBridgeNoTraumaMechanism :
+  rowNoTraumaMechanism canonicalPopulationBaselineRow ≡ false
+canonicalPopulationLongitudinalBOLDResidualBridgeNoTraumaMechanism =
+  rowNoTraumaMechanismIsFalse canonicalPopulationBaselineRow
 
 canonicalPopulationLongitudinalBOLDResidualBridgeNoHiddenChartRecovery :
   rowNoHiddenChartRecovery canonicalSiteStratumAssociationRow ≡ false

@@ -13,10 +13,12 @@ open import Agda.Primitive using (Setω)
 --
 -- This module is candidate-only. It records a sharpened gap surface for
 -- body-memory residuals that are indexed by time and situated through
--- body, place, relation, institution, and axis-bundle context.
+-- body, place, relation, institution, and axis-bundle context. The carrier
+-- is explicitly body × time × place × relation × institution × axis-bundle.
 --
 -- The surface remains fail-closed:
 --   - no axis-neutral universalism,
+--   - no axis-free body-memory residual,
 --   - no causal certainty,
 --   - no diagnosis,
 --   - no treatment,
@@ -158,12 +160,66 @@ canonicalHandleKinds =
 canonicalIntersectionalResidualNotes : List String
 canonicalIntersectionalResidualNotes =
   "Residuals are indexed longitudinally rather than treated as axis-free"
+  ∷ "The carrier is body × time × place × relation × institution × axis-bundle"
   ∷ "Body, time, place, relation, institution, and axis-bundle stay explicit"
   ∷ "Intersectional axes remain concrete and non-collapsed"
   ∷ "A sharpened gap stays a residual gap and does not become certainty"
   ∷ "The small safe j+1 handle carries over-threshold residual pressure"
   ∷ "No diagnosis, no treatment, and no authority are promoted"
   ∷ []
+
+record IntersectionalResidualCarrier : Set where
+  constructor mkIntersectionalResidualCarrier
+  field
+    carrierBody :
+      String
+
+    carrierTime :
+      Nat
+
+    carrierPlace :
+      String
+
+    carrierRelation :
+      String
+
+    carrierInstitution :
+      String
+
+    carrierAxisBundle :
+      List IntersectionalAxis
+
+    carrierAxisFreeResidual :
+      Bool
+
+    carrierAxisFreeResidualIsFalse :
+      carrierAxisFreeResidual ≡ false
+
+    carrierReading :
+      String
+
+open IntersectionalResidualCarrier public
+
+mkIntersectionalResidualCarrierOf :
+  String →
+  Nat →
+  String →
+  String →
+  String →
+  List IntersectionalAxis →
+  String →
+  IntersectionalResidualCarrier
+mkIntersectionalResidualCarrierOf body time place relation institution axes reading =
+  mkIntersectionalResidualCarrier
+    body
+    time
+    place
+    relation
+    institution
+    axes
+    false
+    refl
+    reading
 
 record LongitudinalResidualRow : Set where
   constructor mkLongitudinalResidualRow
@@ -188,6 +244,9 @@ record LongitudinalResidualRow : Set where
 
     rowAxisBundle :
       List IntersectionalAxis
+
+    rowCarrier :
+      IntersectionalResidualCarrier
 
     rowResidualKind :
       LongitudinalResidualKind
@@ -233,6 +292,12 @@ record LongitudinalResidualRow : Set where
 
     rowAuthorityBlockedIsFalse :
       rowAuthorityBlocked ≡ false
+
+    rowNoAxisFreeBodyMemoryResidual :
+      Bool
+
+    rowNoAxisFreeBodyMemoryResidualIsFalse :
+      rowNoAxisFreeBodyMemoryResidual ≡ false
 
     rowReading :
       String
@@ -402,10 +467,20 @@ mkRow index time body place relation institution axes reading =
     relation
     institution
     axes
+    (mkIntersectionalResidualCarrierOf
+      body
+      time
+      place
+      relation
+      institution
+      axes
+      reading)
     longitudinalGapResidual
     refl
     "candidate-only longitudinal residual row"
     true
+    refl
+    false
     refl
     false
     refl
@@ -490,7 +565,7 @@ canonicalBoundaryCertificate =
     refl
     canonicalBoundaryClaimKinds
     refl
-    "The certificate is candidate-only and blocks axis-neutral universalism, causal certainty, diagnosis, treatment, and authority."
+    "The certificate is candidate-only and blocks axis-neutral universalism, causal certainty, diagnosis, treatment, authority, and any axis-free body-memory residual."
 
 canonicalIntersectionalLongitudinalResidualDynamics :
   IntersectionalLongitudinalResidualDynamics
@@ -562,6 +637,19 @@ canonicalAuthorityBlocked :
   certificateAuthorityBlocked canonicalBoundaryCertificate ≡ false
 canonicalAuthorityBlocked =
   certificateAuthorityBlockedIsFalse canonicalBoundaryCertificate
+
+canonicalLongitudinalResidualRowCarrierAxisFreeResidualIsFalse :
+  carrierAxisFreeResidual
+    (rowCarrier canonicalLongitudinalResidualRow)
+  ≡
+  false
+canonicalLongitudinalResidualRowCarrierAxisFreeResidualIsFalse =
+  refl
+
+canonicalLongitudinalResidualRowNoAxisFreeBodyMemoryResidualIsFalse :
+  rowNoAxisFreeBodyMemoryResidual canonicalLongitudinalResidualRow ≡ false
+canonicalLongitudinalResidualRowNoAxisFreeBodyMemoryResidualIsFalse =
+  refl
 
 canonicalAxisBundleIsCanonical :
   certificateAxisBundle canonicalBoundaryCertificate ≡ canonicalIntersectionalAxes
