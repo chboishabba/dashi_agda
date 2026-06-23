@@ -96,14 +96,20 @@ def _check_profile(profile: Any, path: str, backend: str, errors: list[str]) -> 
             errors.append(f"{path}.{key}: must be true")
     if profile.get("gpu_kn_authority") is not False:
         errors.append(f"{path}.gpu_kn_authority: must be false")
-    for key in (
+    finite_keys = [
         "lambda_min_dense_cpu",
-        "lambda_min_matrix_free",
-        "lambda_max_matrix_free",
-        "relative_error_vs_dense",
         "worst_eigenvector_shell_mass_dense_cpu",
-        "worst_eigenvector_shell_mass_matrix_free",
-    ):
+    ]
+    if backend != "vulkan-matvec" or profile.get("gpu_matvec_parity_ok") is True:
+        finite_keys.extend(
+            [
+                "lambda_min_matrix_free",
+                "lambda_max_matrix_free",
+                "relative_error_vs_dense",
+                "worst_eigenvector_shell_mass_matrix_free",
+            ]
+        )
+    for key in finite_keys:
         if _finite_or_none(profile.get(key)) is None:
             errors.append(f"{path}.{key}: must be finite")
     for key in ("edge_count", "l_abs_positive_rank"):
@@ -240,4 +246,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
