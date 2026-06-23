@@ -1,5 +1,29 @@
 # FOR TODO GO TO '# TODO'
 
+Current NS Wall 1 no-triple-danger / square-wave / backward-chain note for `2026-06-23`:
+- Candidate-only no-triple-danger fork tranche is now recorded. Artifacts:
+  `DASHI/Physics/Closure/NSNoTripleDangerBoundary.agda`,
+  `DASHI/Physics/Closure/NSSpectralSharpnessForkBoundary.agda`,
+  `DASHI/Physics/Closure/NSA9SingularityContradictionRouteBoundary.agda`,
+  `scripts/ns_triad_no_triple_danger_scan.py`,
+  `scripts/check_ns_triad_no_triple_danger_scan.py`,
+  `scripts/ns_triad_square_wave_stack_scan.py`,
+  `scripts/check_ns_triad_square_wave_stack_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The route now records the
+  no-triple-danger carrier explicitly, records the spectral-sharpness /
+  square-wave stack fork as a candidate-only Wall 1a surface, and rewrites
+  the A9 singularity contradiction boundary into the backward chain
+  `BKM divergence -> triad cloud -> amplitude fork -> triple-danger
+  requirement -> contradiction target`. This remains fail-closed and
+  non-promoting: the new scans are candidate-only surfaces derived from the
+  attached adversarial CSVs, both theorem-status and shell-bridge summaries
+  stay `unproved`, and the next live analytic bottleneck is still proving
+  the no-triple-danger fork analytically on genuine Biot-Savart data.
+
 Current NS Wall 1 amplitude-weighted / energy-fork note for `2026-06-23`:
 - Candidate-only amplitude-budgeted Wall 1/2 bridge is now recorded. Artifacts:
   `DASHI/Physics/Closure/NSAmplitudeWeightedNegativeFrameBoundary.agda`,
