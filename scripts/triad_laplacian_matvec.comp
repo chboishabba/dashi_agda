@@ -19,21 +19,26 @@ layout(std430, set=0, binding=4) writeonly buffer Y { float y[]; };
 layout(push_constant) uniform PC {
   uint mode_count;
   uint incidence_count;
+  uint vector_count;
+  uint vector_stride;
 } pc;
 
 void main() {
   uint i = gl_GlobalInvocationID.x;
+  uint column = gl_GlobalInvocationID.y;
   if (i >= pc.mode_count) return;
+  if (column >= pc.vector_count) return;
 
   float acc = 0.0;
-  float xi = x[i];
+  uint offset = column * pc.vector_stride;
+  float xi = x[offset + i];
   uint start = row_ptr[i];
   uint stop = row_ptr[i + 1u];
   for (uint cursor = start; cursor < stop; cursor++) {
     if (cursor >= pc.incidence_count) break;
     uint j = neighbor[cursor];
     float w = weights[cursor];
-    acc += w * (xi - x[j]);
+    acc += w * (xi - x[offset + j]);
   }
-  y[i] = acc;
+  y[offset + i] = acc;
 }

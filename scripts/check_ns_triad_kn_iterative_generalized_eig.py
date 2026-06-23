@@ -108,6 +108,10 @@ def _check_profile(profile: Any, path: str, backend: str, errors: list[str]) -> 
         errors.append(f"{path}.dense_reconstruction_used: iterative lane must not reconstruct dense operators")
     if profile.get("iterative_solver") != "scipy_lobpcg_linear_operator":
         errors.append(f"{path}.iterative_solver: invalid")
+    if profile.get("block_matvec_enabled") is not True:
+        errors.append(f"{path}.block_matvec_enabled: must be true")
+    if profile.get("block_matvec_backend") not in {"cpu-column-loop", "vulkan-csr-block"}:
+        errors.append(f"{path}.block_matvec_backend: invalid")
     for key in ("edge_count", "iterations"):
         if _nonnegative_int(profile.get(key)) is None:
             errors.append(f"{path}.{key}: must be nonnegative int")
@@ -147,7 +151,14 @@ def _check_profile(profile: Any, path: str, backend: str, errors: list[str]) -> 
             errors.append(f"{path}.gpu_kn_authority: vulkan backend is non-authoritative")
         if profile.get("gpu_matvec_parity_ok") is not True:
             errors.append(f"{path}.gpu_matvec_parity_ok: vulkan matvec parity must pass")
-        for key in ("gpu_matvec_max_abs_error_abs", "gpu_matvec_max_abs_error_neg"):
+        if profile.get("gpu_block_matvec_parity_ok") is not True:
+            errors.append(f"{path}.gpu_block_matvec_parity_ok: vulkan block matvec parity must pass")
+        for key in (
+            "gpu_matvec_max_abs_error_abs",
+            "gpu_matvec_max_abs_error_neg",
+            "gpu_block_matvec_max_abs_error_abs",
+            "gpu_block_matvec_max_abs_error_neg",
+        ):
             if _finite_or_none(profile.get(key)) is None:
                 errors.append(f"{path}.{key}: must be finite for vulkan backend")
 
