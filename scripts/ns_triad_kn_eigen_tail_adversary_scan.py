@@ -65,6 +65,7 @@ DEFAULT_TAIL_CUTOFFS = (4, 5, 6)
 DEFAULT_TAIL_ETAS = (0.25, 0.40)
 DEFAULT_PROFILE_SAMPLE_LIMIT = 6
 DEFAULT_MAX_PROFILES_PER_ROW = 4
+TAIL_GRID_DETAIL_CHOICES = ("full", "summary", "none")
 DEFAULT_PARITY_TOL = 1.0e-4
 DEFAULT_LOBPCG_TOL = 1.0e-5
 DEFAULT_LOBPCG_MAXITER = 40
@@ -127,6 +128,12 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--gpu-matvec-checks", type=int, default=DEFAULT_GPU_MATVEC_CHECKS)
     parser.add_argument("--profile-sample-limit", type=int, default=DEFAULT_PROFILE_SAMPLE_LIMIT)
     parser.add_argument("--max-profiles-per-row", type=int, default=DEFAULT_MAX_PROFILES_PER_ROW)
+    parser.add_argument(
+        "--tail-grid-detail",
+        choices=TAIL_GRID_DETAIL_CHOICES,
+        default="full",
+        help="control how much tail-grid detail is serialized per profile",
+    )
     parser.add_argument("--force-tail-profiles", action="store_true", default=True)
     parser.add_argument("--no-force-tail-profiles", action="store_true")
     parser.add_argument("--shell", dest="shells", action="append", type=int, default=None)
@@ -241,9 +248,31 @@ def _tail_grid(
 
 def _summarize_grid(grid: list[dict[str, Any]]) -> dict[str, Any]:
     counts: dict[str, int] = {}
+    profile_tail_high_count = 0
+    profile_tail_high_eigen_tail_high_count = 0
+    profile_tail_high_eigen_tail_low_count = 0
+    profile_tail_high_eigen_tail_unavailable_count = 0
     for item in grid:
         branch = str(item.get("branch"))
         counts[branch] = counts.get(branch, 0) + 1
+        high_shell_mass = item.get("high_shell_mass_k")
+        tail_eta = item.get("tail_eta")
+        profile_tail_high = (
+            isinstance(high_shell_mass, (int, float))
+            and math.isfinite(float(high_shell_mass))
+            and isinstance(tail_eta, (int, float))
+            and math.isfinite(float(tail_eta))
+            and float(high_shell_mass) >= float(tail_eta)
+        )
+        if profile_tail_high:
+            profile_tail_high_count += 1
+            eigen_tail_high = item.get("eigen_tail_high")
+            if eigen_tail_high is True:
+                profile_tail_high_eigen_tail_high_count += 1
+            elif eigen_tail_high is False:
+                profile_tail_high_eigen_tail_low_count += 1
+            else:
+                profile_tail_high_eigen_tail_unavailable_count += 1
     return {
         "grid_point_count": int(len(grid)),
         "branch_counts": counts,
@@ -252,6 +281,10 @@ def _summarize_grid(grid: list[dict[str, Any]]) -> dict[str, Any]:
         "tail_loaded_count": int(counts.get("tail-loaded", 0)),
         "tail_contained_count": int(counts.get("tail-contained", 0)),
         "frame_coercive_count": int(counts.get("frame-coercive", 0)),
+        "profile_tail_high_count": int(profile_tail_high_count),
+        "profile_tail_high_eigen_tail_high_count": int(profile_tail_high_eigen_tail_high_count),
+        "profile_tail_high_eigen_tail_low_count": int(profile_tail_high_eigen_tail_low_count),
+        "profile_tail_high_eigen_tail_unavailable_count": int(profile_tail_high_eigen_tail_unavailable_count),
     }
 
 
@@ -329,6 +362,7 @@ def _row(
     gpu_checks: int,
     max_profiles_per_row: int,
     profile_sample_limit: int,
+    tail_grid_detail: str,
     force_tail_profiles: bool,
 ) -> dict[str, Any]:
     row: dict[str, Any] = {
@@ -366,6 +400,16 @@ def _row(
         row["warnings"] = ["no_shell_triads_or_insufficient_modes"]
         row["profile_count"] = 0
         row["candidate_receipt_count"] = 0
+        row["tail_grid_point_count"] = 0
+        row["tail_escape_count"] = 0
+        row["eigenvector_tail_escape_count"] = 0
+        row["tail_loaded_count"] = 0
+        row["tail_contained_count"] = 0
+        row["frame_coercive_count"] = 0
+        row["profile_tail_high_count"] = 0
+        row["profile_tail_high_eigen_tail_high_count"] = 0
+        row["profile_tail_high_eigen_tail_low_count"] = 0
+        row["profile_tail_high_eigen_tail_unavailable_count"] = 0
         return row
 
     amplitudes = np.asarray([float(mode.amplitude) for mode in shell_modes], dtype=np.float64)
@@ -450,41 +494,68 @@ def _row(
             if isinstance(lmin, (int, float)) and math.isfinite(float(lmin))
             else None
         )
+        tail_grid_summary = _summarize_grid(tail_grid)
+        tail_grid_counts = {
+            "tail_grid_point_count": int(tail_grid_summary.get("grid_point_count", 0)),
+            "tail_escape_count": int(tail_grid_summary.get("tail_escape_count", 0)),
+            "eigenvector_tail_escape_count": int(tail_grid_summary.get("eigenvector_tail_escape_count", 0)),
+            "tail_loaded_count": int(tail_grid_summary.get("tail_loaded_count", 0)),
+            "tail_contained_count": int(tail_grid_summary.get("tail_contained_count", 0)),
+            "frame_coercive_count": int(tail_grid_summary.get("frame_coercive_count", 0)),
+            "profile_tail_high_count": int(tail_grid_summary.get("profile_tail_high_count", 0)),
+            "profile_tail_high_eigen_tail_high_count": int(
+                tail_grid_summary.get("profile_tail_high_eigen_tail_high_count", 0)
+            ),
+            "profile_tail_high_eigen_tail_low_count": int(
+                tail_grid_summary.get("profile_tail_high_eigen_tail_low_count", 0)
+            ),
+            "profile_tail_high_eigen_tail_unavailable_count": int(
+                tail_grid_summary.get("profile_tail_high_eigen_tail_unavailable_count", 0)
+            ),
+        }
+        row_payload: dict[str, Any] = {
+            "profile_id": unique_id,
+            "status": solved.get("status"),
+            "parity_ok": solved.get("parity_ok"),
+            "candidate_only": True,
+            "fail_closed": True,
+            "kn_backend": backend,
+            "gpu_kn_authority": False,
+            "theorem_promoted": False,
+            "full_ns_promoted": False,
+            "clay_promoted": False,
+            "dense_oracle_used": solved.get("dense_oracle_used"),
+            "dense_reconstruction_used": False,
+            "lambda_min_dense_cpu": solved.get("lambda_min_dense_cpu"),
+            "lambda_min_iterative": lmin,
+            "lambda_rank": lambda_rank,
+            "relative_error_vs_dense": solved.get("relative_error_vs_dense"),
+            "worst_eigenvector_shell_iterative": solved.get("worst_eigenvector_shell_iterative"),
+            "worst_eigenvector_shell_mass_iterative": solved.get("worst_eigenvector_shell_mass_iterative"),
+            "iterations": solved.get("iterations"),
+            "residual_norm": solved.get("residual_norm"),
+            "elapsed_ms": solved.get("elapsed_ms"),
+            "block_matvec_enabled": solved.get("block_matvec_enabled"),
+            "block_matvec_backend": solved.get("block_matvec_backend"),
+            "gpu_matvec_parity_ok": solved.get("gpu_matvec_parity_ok"),
+            "gpu_block_matvec_parity_ok": solved.get("gpu_block_matvec_parity_ok"),
+            "gpu_matvec_max_abs_error_abs": solved.get("gpu_matvec_max_abs_error_abs"),
+            "gpu_matvec_max_abs_error_neg": solved.get("gpu_matvec_max_abs_error_neg"),
+            "vulkan_icd": solved.get("vulkan_icd"),
+            "metrics": metrics,
+            **tail_grid_counts,
+            "tail_grid_detail": {
+                "mode": tail_grid_detail,
+                "summary": tail_grid_summary if tail_grid_detail == "summary" else None,
+            },
+            "warnings": row_warnings,
+        }
+        if tail_grid_detail in {"full", "summary"}:
+            row_payload["tail_grid_summary"] = tail_grid_summary
+        if tail_grid_detail == "full":
+            row_payload["tail_grid"] = tail_grid
         evaluated.append(
-            {
-                "profile_id": unique_id,
-                "status": solved.get("status"),
-                "parity_ok": solved.get("parity_ok"),
-                "candidate_only": True,
-                "fail_closed": True,
-                "kn_backend": backend,
-                "gpu_kn_authority": False,
-                "theorem_promoted": False,
-                "full_ns_promoted": False,
-                "clay_promoted": False,
-                "dense_oracle_used": solved.get("dense_oracle_used"),
-                "dense_reconstruction_used": False,
-                "lambda_min_dense_cpu": solved.get("lambda_min_dense_cpu"),
-                "lambda_min_iterative": lmin,
-                "lambda_rank": lambda_rank,
-                "relative_error_vs_dense": solved.get("relative_error_vs_dense"),
-                "worst_eigenvector_shell_iterative": solved.get("worst_eigenvector_shell_iterative"),
-                "worst_eigenvector_shell_mass_iterative": solved.get("worst_eigenvector_shell_mass_iterative"),
-                "iterations": solved.get("iterations"),
-                "residual_norm": solved.get("residual_norm"),
-                "elapsed_ms": solved.get("elapsed_ms"),
-                "block_matvec_enabled": solved.get("block_matvec_enabled"),
-                "block_matvec_backend": solved.get("block_matvec_backend"),
-                "gpu_matvec_parity_ok": solved.get("gpu_matvec_parity_ok"),
-                "gpu_block_matvec_parity_ok": solved.get("gpu_block_matvec_parity_ok"),
-                "gpu_matvec_max_abs_error_abs": solved.get("gpu_matvec_max_abs_error_abs"),
-                "gpu_matvec_max_abs_error_neg": solved.get("gpu_matvec_max_abs_error_neg"),
-                "vulkan_icd": solved.get("vulkan_icd"),
-                "metrics": metrics,
-                "tail_grid_summary": _summarize_grid(tail_grid),
-                "tail_grid": tail_grid,
-                "warnings": row_warnings,
-            }
+            row_payload
         )
 
     evaluated.sort(
@@ -492,12 +563,12 @@ def _row(
             float("inf")
             if not isinstance(item.get("lambda_min_iterative"), (int, float))
             else float(item["lambda_min_iterative"]),
-            -int(item["tail_grid_summary"].get("tail_escape_count", 0)),
+            -int(item.get("tail_escape_count", 0)),
         )
     )
     best = evaluated[0] if evaluated else None
     tail_escape_candidates = [
-        item for item in evaluated if int(item["tail_grid_summary"].get("tail_escape_count", 0)) > 0
+        item for item in evaluated if int(item.get("tail_escape_count", 0)) > 0
     ]
     row.update(
         {
@@ -507,6 +578,24 @@ def _row(
             "parity_ok_count": int(sum(1 for item in evaluated if item.get("parity_ok") is True)),
             "parity_mismatch_count": int(sum(1 for item in evaluated if item.get("parity_ok") is not True)),
             "tail_escape_candidate_count": int(len(tail_escape_candidates)),
+            "tail_grid_point_count": int(sum(int(item.get("tail_grid_point_count", 0)) for item in evaluated)),
+            "tail_escape_count": int(sum(int(item.get("tail_escape_count", 0)) for item in evaluated)),
+            "eigenvector_tail_escape_count": int(
+                sum(int(item.get("eigenvector_tail_escape_count", 0)) for item in evaluated)
+            ),
+            "tail_loaded_count": int(sum(int(item.get("tail_loaded_count", 0)) for item in evaluated)),
+            "tail_contained_count": int(sum(int(item.get("tail_contained_count", 0)) for item in evaluated)),
+            "frame_coercive_count": int(sum(int(item.get("frame_coercive_count", 0)) for item in evaluated)),
+            "profile_tail_high_count": int(sum(int(item.get("profile_tail_high_count", 0)) for item in evaluated)),
+            "profile_tail_high_eigen_tail_high_count": int(
+                sum(int(item.get("profile_tail_high_eigen_tail_high_count", 0)) for item in evaluated)
+            ),
+            "profile_tail_high_eigen_tail_low_count": int(
+                sum(int(item.get("profile_tail_high_eigen_tail_low_count", 0)) for item in evaluated)
+            ),
+            "profile_tail_high_eigen_tail_unavailable_count": int(
+                sum(int(item.get("profile_tail_high_eigen_tail_unavailable_count", 0)) for item in evaluated)
+            ),
             "best_low_lambda_profile": best,
             "best_tail_escape_profile": min(
                 tail_escape_candidates,
@@ -515,6 +604,32 @@ def _row(
                 else float("inf"),
                 default=None,
             ),
+            "best_low_lambda_rows": [
+                {
+                    "frame": int(slot),
+                    "snapshot_index": int(snapshot),
+                    "shell": int(shell_n),
+                    "profile_id": item.get("profile_id"),
+                    "lambda_min_iterative": (
+                        float(item["lambda_min_iterative"])
+                        if isinstance(item.get("lambda_min_iterative"), (int, float))
+                        else None
+                    ),
+                    "tail_escape_count": int(item.get("tail_escape_count", 0)),
+                    "tail_escape_candidate": bool(int(item.get("tail_escape_count", 0)) > 0),
+                    "worst_eigenvector_shell_iterative": (
+                        float(item["worst_eigenvector_shell_iterative"])
+                        if isinstance(item.get("worst_eigenvector_shell_iterative"), (int, float))
+                        else None
+                    ),
+                    "worst_eigenvector_shell_mass_iterative": (
+                        float(item["worst_eigenvector_shell_mass_iterative"])
+                        if isinstance(item.get("worst_eigenvector_shell_mass_iterative"), (int, float))
+                        else None
+                    ),
+                }
+                for item in evaluated[: min(5, len(evaluated))]
+            ],
             "candidate_receipts": evaluated[: min(max(0, int(profile_sample_limit)), len(evaluated))],
         }
     )
@@ -525,6 +640,22 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
     total_candidates = sum(int(row.get("candidate_receipt_count", 0)) for row in rows)
     parity_mismatches = sum(int(row.get("parity_mismatch_count", 0)) for row in rows)
     tail_escape_candidates = sum(int(row.get("tail_escape_candidate_count", 0)) for row in rows)
+    tail_grid_point_count = sum(int(row.get("tail_grid_point_count", 0)) for row in rows)
+    tail_escape_count = sum(int(row.get("tail_escape_count", 0)) for row in rows)
+    eigenvector_tail_escape_count = sum(int(row.get("eigenvector_tail_escape_count", 0)) for row in rows)
+    tail_loaded_count = sum(int(row.get("tail_loaded_count", 0)) for row in rows)
+    tail_contained_count = sum(int(row.get("tail_contained_count", 0)) for row in rows)
+    frame_coercive_count = sum(int(row.get("frame_coercive_count", 0)) for row in rows)
+    profile_tail_high_count = sum(int(row.get("profile_tail_high_count", 0)) for row in rows)
+    profile_tail_high_eigen_tail_high_count = sum(
+        int(row.get("profile_tail_high_eigen_tail_high_count", 0)) for row in rows
+    )
+    profile_tail_high_eigen_tail_low_count = sum(
+        int(row.get("profile_tail_high_eigen_tail_low_count", 0)) for row in rows
+    )
+    profile_tail_high_eigen_tail_unavailable_count = sum(
+        int(row.get("profile_tail_high_eigen_tail_unavailable_count", 0)) for row in rows
+    )
     best_profiles = [
         row.get("best_low_lambda_profile")
         for row in rows
@@ -546,12 +677,57 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
         "candidate_receipt_count": int(total_candidates),
         "parity_mismatch_count": int(parity_mismatches),
         "tail_escape_candidate_count": int(tail_escape_candidates),
+        "tail_grid_point_count": int(tail_grid_point_count),
+        "tail_escape_count": int(tail_escape_count),
+        "eigenvector_tail_escape_count": int(eigenvector_tail_escape_count),
+        "tail_loaded_count": int(tail_loaded_count),
+        "tail_contained_count": int(tail_contained_count),
+        "frame_coercive_count": int(frame_coercive_count),
+        "profile_tail_high_count": int(profile_tail_high_count),
+        "profile_tail_high_eigen_tail_high_count": int(profile_tail_high_eigen_tail_high_count),
+        "profile_tail_high_eigen_tail_low_count": int(profile_tail_high_eigen_tail_low_count),
+        "profile_tail_high_eigen_tail_unavailable_count": int(profile_tail_high_eigen_tail_unavailable_count),
         "best_global_low_lambda_profile": best_global,
         "best_global_low_lambda": (
             float(best_global["lambda_min_iterative"])
             if isinstance(best_global, dict) and isinstance(best_global.get("lambda_min_iterative"), (int, float))
             else None
         ),
+        "best_low_lambda_rows": [
+            {
+                "frame": int(row["frame"]),
+                "snapshot_index": int(row["snapshot_index"]),
+                "shell": int(row["shell"]),
+                "profile_id": row.get("best_low_lambda_profile", {}).get("profile_id")
+                if isinstance(row.get("best_low_lambda_profile"), dict)
+                else None,
+                "lambda_min_iterative": (
+                    float(row["best_low_lambda_profile"]["lambda_min_iterative"])
+                    if isinstance(row.get("best_low_lambda_profile"), dict)
+                    and isinstance(row.get("best_low_lambda_profile", {}).get("lambda_min_iterative"), (int, float))
+                    else None
+                ),
+                "tail_escape_candidate_count": int(row.get("tail_escape_candidate_count", 0)),
+                "worst_eigenvector_shell_iterative": (
+                    float(row["best_low_lambda_profile"]["worst_eigenvector_shell_iterative"])
+                    if isinstance(row.get("best_low_lambda_profile"), dict)
+                    and isinstance(row.get("best_low_lambda_profile", {}).get("worst_eigenvector_shell_iterative"), (int, float))
+                    else None
+                ),
+            }
+            for row in sorted(
+                rows,
+                key=lambda row_item: (
+                    float("inf")
+                    if not isinstance(row_item.get("best_low_lambda_profile"), dict)
+                    or not isinstance(row_item.get("best_low_lambda_profile", {}).get("lambda_min_iterative"), (int, float))
+                    else float(row_item["best_low_lambda_profile"]["lambda_min_iterative"]),
+                    -int(row_item.get("tail_escape_candidate_count", 0)),
+                ),
+            )
+            if isinstance(row.get("best_low_lambda_profile"), dict)
+            and isinstance(row.get("best_low_lambda_profile", {}).get("lambda_min_iterative"), (int, float))
+        ],
         "best_profile_worst_shells": worst_shells,
         "worst_shell_progression_max": max(worst_shells) if worst_shells else None,
         "candidate_only": True,
@@ -604,6 +780,7 @@ def main() -> int:
             gpu_checks=int(args.gpu_matvec_checks),
             max_profiles_per_row=int(args.max_profiles_per_row),
             profile_sample_limit=int(args.profile_sample_limit),
+            tail_grid_detail=str(args.tail_grid_detail),
             force_tail_profiles=force_tail_profiles,
         )
         for slot, snapshot in enumerate(snapshots)
@@ -641,8 +818,10 @@ def main() -> int:
             "gpu_matvec_checks": int(args.gpu_matvec_checks),
             "profile_sample_limit": int(args.profile_sample_limit),
             "max_profiles_per_row": int(args.max_profiles_per_row),
+            "tail_grid_detail": str(args.tail_grid_detail),
             "force_tail_profiles": force_tail_profiles,
         },
+        "tail_grid_detail": str(args.tail_grid_detail),
         "status": ERROR_STATUS if any(row.get("status") == ERROR_STATUS for row in rows) else (
             OK_STATUS if rows and all(row.get("status") == OK_STATUS for row in rows) else PARTIAL_STATUS
         ),

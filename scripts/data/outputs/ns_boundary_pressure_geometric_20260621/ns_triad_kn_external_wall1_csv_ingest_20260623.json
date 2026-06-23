@@ -1,0 +1,557 @@
+{
+  "C": "scripts/ns_triad_kn_external_wall1_csv_ingest.py",
+  "F": "Focus on lambda_min/lmin, D, worst_e_shell, worst_eigen_shell, artifact, and danger fields.",
+  "G": "Candidate-only telemetry: theorem_promoted and clay_promoted stay false.",
+  "L": "Read repeated --csv inputs or the five default Wall1 CSVs, then write JSON to --output-json.",
+  "O": "Ingest the five external Wall1 CSVs and summarize their numeric and danger-style structure.",
+  "P": "FAIL_CLOSED_WALL1_EXTERNAL_CSV_INGEST",
+  "R": "Produce per-file row counts, column inventories, numeric stats, and a canonical Wall1 summary.",
+  "S": "Deterministic CSV parse and summarization only; no theorem or Clay promotion is inferred.",
+  "artifact_handling": {
+    "handled": true,
+    "path": "/home/c/Downloads/wall1_progression_N3_N6.csv",
+    "policy": "artifact rows are recorded and excluded by downstream artifact audit before canonical progression claims",
+    "present": true,
+    "recorded": true
+  },
+  "authority": {
+    "candidate_only": true,
+    "clay_promoted": false,
+    "empirical_non_promoting": true,
+    "theorem_promoted": false
+  },
+  "candidate_only": true,
+  "canonical_summary": {
+    "D": {
+      "count": 240,
+      "max": 76.2,
+      "mean": 10.356274782095943,
+      "min": 1.511434904399345
+    },
+    "artifact": {
+      "false_count": 11,
+      "other_count": 0,
+      "present": true,
+      "true_count": 1
+    },
+    "candidate_only": true,
+    "clay_promoted": false,
+    "danger": {
+      "false_count": 93,
+      "other_count": 0,
+      "present": true,
+      "true_count": 0
+    },
+    "empirical_non_promoting": true,
+    "file_count": 5,
+    "file_summary_count": 5,
+    "files": [
+      "wall1_progression_N3_N6.csv",
+      "wall1_N3_eigenmode_escape.csv",
+      "wall1_eigenmode_audit_N2.csv",
+      "wall1_constrained_adversarial.csv",
+      "wall1_squarewave_fork.csv"
+    ],
+    "lambda_min_lmin": {
+      "max": {
+        "column": "lmin",
+        "source_file": "wall1_N3_eigenmode_escape.csv",
+        "value": 0.40628945456731225
+      },
+      "min": {
+        "column": "lmin",
+        "source_file": "wall1_progression_N3_N6.csv",
+        "value": 0.0
+      },
+      "stats": {
+        "count": 240,
+        "max": 0.40628945456731225,
+        "mean": 0.33670336965216247,
+        "min": 0.0
+      }
+    },
+    "row_count": 240,
+    "source_files_with_focus_columns": [
+      "wall1_N3_eigenmode_escape.csv",
+      "wall1_constrained_adversarial.csv",
+      "wall1_eigenmode_audit_N2.csv",
+      "wall1_progression_N3_N6.csv",
+      "wall1_squarewave_fork.csv"
+    ],
+    "summarized_file_count": 5,
+    "theorem_promoted": false,
+    "worst_e_shell": {
+      "count": 93,
+      "max": 2.0,
+      "mean": 1.6989247311827957,
+      "min": 0.0
+    },
+    "worst_eigen_shell": null
+  },
+  "clay_promoted": false,
+  "contract": "ns_triad_kn_external_wall1_csv_ingest",
+  "empirical_non_promoting": true,
+  "error_count": 0,
+  "file_summaries": [
+    {
+      "candidate_only": true,
+      "clay_promoted": false,
+      "columns": [
+        "N",
+        "n_shells",
+        "strategy",
+        "lmin",
+        "D",
+        "we_s",
+        "max_s",
+        "branch",
+        "artifact"
+      ],
+      "counts": {
+        "artifact": {
+          "false_count": 11,
+          "kind": "boolean",
+          "other_count": 0,
+          "true_count": 1
+        },
+        "artifact_false_count": 11,
+        "artifact_other_count": 0,
+        "artifact_true_count": 1,
+        "branch": {
+          "distinct_count": 4,
+          "kind": "categorical",
+          "value_counts": {
+            "ARTIFACT": 1,
+            "Bernstein-safe": 1,
+            "frame-coercive": 1,
+            "high-diss-safe": 9
+          }
+        },
+        "branch_value_count": 12,
+        "branch_values": [
+          "Bernstein-safe",
+          "frame-coercive",
+          "high-diss-safe",
+          "ARTIFACT"
+        ]
+      },
+      "empirical_non_promoting": true,
+      "filename": "wall1_progression_N3_N6.csv",
+      "focus_numeric_stats": {
+        "D": {
+          "count": 12,
+          "max": 76.2,
+          "mean": 27.09166666666667,
+          "min": 2.1
+        },
+        "lmin": {
+          "count": 12,
+          "max": 0.324,
+          "mean": 0.06591666666666667,
+          "min": 0.0
+        }
+      },
+      "numeric_stats": {
+        "D": {
+          "count": 12,
+          "max": 76.2,
+          "mean": 27.09166666666667,
+          "min": 2.1
+        },
+        "N": {
+          "count": 12,
+          "max": 6.0,
+          "mean": 4.083333333333333,
+          "min": 2.0
+        },
+        "lmin": {
+          "count": 12,
+          "max": 0.324,
+          "mean": 0.06591666666666667,
+          "min": 0.0
+        },
+        "max_s": {
+          "count": 12,
+          "max": 3.0,
+          "mean": 2.25,
+          "min": 1.0
+        },
+        "n_shells": {
+          "count": 12,
+          "max": 4.0,
+          "mean": 3.25,
+          "min": 2.0
+        },
+        "we_s": {
+          "count": 12,
+          "max": 3.0,
+          "mean": 2.0833333333333335,
+          "min": 1.0
+        }
+      },
+      "path": "/home/c/Downloads/wall1_progression_N3_N6.csv",
+      "row_count": 12,
+      "theorem_promoted": false
+    },
+    {
+      "candidate_only": true,
+      "clay_promoted": false,
+      "columns": [
+        "strategy",
+        "beta",
+        "lmin",
+        "lmax",
+        "R_eff",
+        "D",
+        "worst_e_shell",
+        "worst_e_mass",
+        "danger"
+      ],
+      "counts": {
+        "danger": {
+          "false_count": 93,
+          "kind": "boolean",
+          "other_count": 0,
+          "true_count": 0
+        },
+        "danger_false_count": 93,
+        "danger_other_count": 0,
+        "danger_true_count": 0
+      },
+      "empirical_non_promoting": true,
+      "filename": "wall1_N3_eigenmode_escape.csv",
+      "focus_numeric_stats": {
+        "D": {
+          "count": 93,
+          "max": 19.82351643295295,
+          "mean": 14.841888214214798,
+          "min": 2.2011187146037017
+        },
+        "lmin": {
+          "count": 93,
+          "max": 0.40628945456731225,
+          "mean": 0.36697023884860563,
+          "min": 0.22035276180613428
+        },
+        "worst_e_shell": {
+          "count": 93,
+          "max": 2.0,
+          "mean": 1.6989247311827957,
+          "min": 0.0
+        }
+      },
+      "numeric_stats": {
+        "D": {
+          "count": 93,
+          "max": 19.82351643295295,
+          "mean": 14.841888214214798,
+          "min": 2.2011187146037017
+        },
+        "R_eff": {
+          "count": 93,
+          "max": 4.44115954045659,
+          "mean": 3.726414633867137,
+          "min": 1.3540290445892273
+        },
+        "beta": {
+          "count": 93,
+          "max": 2.5,
+          "mean": 0.5529569892473118,
+          "min": -2.5
+        },
+        "lmax": {
+          "count": 93,
+          "max": 0.8784224398401774,
+          "mean": 0.6391217883076277,
+          "min": 0.5851589556283522
+        },
+        "lmin": {
+          "count": 93,
+          "max": 0.40628945456731225,
+          "mean": 0.36697023884860563,
+          "min": 0.22035276180613428
+        },
+        "worst_e_mass": {
+          "count": 93,
+          "max": 0.995915860590016,
+          "mean": 0.7687677678315095,
+          "min": 0.4179159874355099
+        },
+        "worst_e_shell": {
+          "count": 93,
+          "max": 2.0,
+          "mean": 1.6989247311827957,
+          "min": 0.0
+        }
+      },
+      "path": "/home/c/Downloads/wall1_N3_eigenmode_escape.csv",
+      "row_count": 93,
+      "theorem_promoted": false
+    },
+    {
+      "candidate_only": true,
+      "clay_promoted": false,
+      "columns": [
+        "name",
+        "lmin",
+        "Reff",
+        "D",
+        "s0_eigen",
+        "s1_eigen",
+        "s0_profile",
+        "s1_profile",
+        "profile_type",
+        "danger_class"
+      ],
+      "counts": {},
+      "empirical_non_promoting": true,
+      "filename": "wall1_eigenmode_audit_N2.csv",
+      "focus_numeric_stats": {
+        "D": {
+          "count": 22,
+          "max": 11.394131338084831,
+          "mean": 6.3338015963861265,
+          "min": 1.511434904399345
+        },
+        "lmin": {
+          "count": 22,
+          "max": 0.3733477420546686,
+          "mean": 0.31757586793467873,
+          "min": 0.09941899066779998
+        }
+      },
+      "numeric_stats": {
+        "D": {
+          "count": 22,
+          "max": 11.394131338084831,
+          "mean": 6.3338015963861265,
+          "min": 1.511434904399345
+        },
+        "Reff": {
+          "count": 22,
+          "max": 3.369182036811768,
+          "mean": 2.366555801415268,
+          "min": 1.189269234476251
+        },
+        "lmin": {
+          "count": 22,
+          "max": 0.3733477420546686,
+          "mean": 0.31757586793467873,
+          "min": 0.09941899066779998
+        },
+        "s0_eigen": {
+          "count": 22,
+          "max": 0.9878582965423071,
+          "mean": 0.1848203057119731,
+          "min": 0.004517537312021783
+        },
+        "s0_profile": {
+          "count": 22,
+          "max": 0.9996232189405534,
+          "mean": 0.33251046533633577,
+          "min": 2.652990839018557e-05
+        },
+        "s1_eigen": {
+          "count": 22,
+          "max": 0.9954824626879781,
+          "mean": 0.8151796942880271,
+          "min": 0.012141703457692549
+        },
+        "s1_profile": {
+          "count": 22,
+          "max": 0.9999734700916099,
+          "mean": 0.6674895346636642,
+          "min": 0.0003767810594468239
+        }
+      },
+      "path": "/home/c/Downloads/wall1_eigenmode_audit_N2.csv",
+      "row_count": 22,
+      "theorem_promoted": false
+    },
+    {
+      "candidate_only": true,
+      "clay_promoted": false,
+      "columns": [
+        "strategy",
+        "beta",
+        "lmin",
+        "Neff_r",
+        "D",
+        "BKM",
+        "tail_mass",
+        "branch",
+        "triple"
+      ],
+      "counts": {
+        "branch": {
+          "distinct_count": 2,
+          "kind": "categorical",
+          "value_counts": {
+            "frame-coerc": 76,
+            "low-band": 1
+          }
+        },
+        "branch_value_count": 77,
+        "branch_values": [
+          "frame-coerc",
+          "low-band"
+        ]
+      },
+      "empirical_non_promoting": true,
+      "filename": "wall1_constrained_adversarial.csv",
+      "focus_numeric_stats": {
+        "D": {
+          "count": 77,
+          "max": 8.35135135135135,
+          "mean": 5.854721412887826,
+          "min": 2.1288485870940512
+        },
+        "lmin": {
+          "count": 77,
+          "max": 0.3642480858760615,
+          "mean": 0.3500444691455599,
+          "min": 0.1962689997545923
+        }
+      },
+      "numeric_stats": {
+        "BKM": {
+          "count": 77,
+          "max": 13.768705032468471,
+          "mean": 8.527153211660112,
+          "min": 2.4410751488528173
+        },
+        "D": {
+          "count": 77,
+          "max": 8.35135135135135,
+          "mean": 5.854721412887826,
+          "min": 2.1288485870940512
+        },
+        "Neff_r": {
+          "count": 77,
+          "max": 2.8546787253778714,
+          "mean": 2.324767511730173,
+          "min": 1.429000760034164
+        },
+        "beta": {
+          "count": 77,
+          "max": 2.0,
+          "mean": 0.3896103896103896,
+          "min": -2.0
+        },
+        "lmin": {
+          "count": 77,
+          "max": 0.3642480858760615,
+          "mean": 0.3500444691455599,
+          "min": 0.1962689997545923
+        },
+        "tail_mass": {
+          "count": 77,
+          "max": 1.0000000000000004,
+          "mean": 1.0,
+          "min": 0.9999999999999997
+        }
+      },
+      "path": "/home/c/Downloads/wall1_constrained_adversarial.csv",
+      "row_count": 77,
+      "theorem_promoted": false
+    },
+    {
+      "candidate_only": true,
+      "clay_promoted": false,
+      "columns": [
+        "profile",
+        "lmin",
+        "lmax",
+        "Neff",
+        "D",
+        "BKM",
+        "branch",
+        "triple"
+      ],
+      "counts": {
+        "branch": {
+          "distinct_count": 3,
+          "kind": "categorical",
+          "value_counts": {
+            "frame-coerc": 32,
+            "high-diss": 1,
+            "low-band": 3
+          }
+        },
+        "branch_value_count": 36,
+        "branch_values": [
+          "frame-coerc",
+          "high-diss",
+          "low-band"
+        ]
+      },
+      "empirical_non_promoting": true,
+      "filename": "wall1_squarewave_fork.csv",
+      "focus_numeric_stats": {
+        "D": {
+          "count": 36,
+          "max": 7.101907500413252,
+          "mean": 5.2764766630053535,
+          "min": 2.078816446108775
+        },
+        "lmin": {
+          "count": 36,
+          "max": 0.37776530538794084,
+          "mean": 0.33193009124521194,
+          "min": 0.09941899066779998
+        }
+      },
+      "numeric_stats": {
+        "BKM": {
+          "count": 36,
+          "max": 11.25699093470492,
+          "mean": 7.610633089968234,
+          "min": 2.389643430944261
+        },
+        "D": {
+          "count": 36,
+          "max": 7.101907500413252,
+          "mean": 5.2764766630053535,
+          "min": 2.078816446108775
+        },
+        "Neff": {
+          "count": 36,
+          "max": 2.6337159055144297,
+          "mean": 2.1888683873034314,
+          "min": 1.4168805581511068
+        },
+        "lmax": {
+          "count": 6,
+          "max": 0.7787897033893175,
+          "mean": 0.6950308656031181,
+          "min": 0.630922859547129
+        },
+        "lmin": {
+          "count": 36,
+          "max": 0.37776530538794084,
+          "mean": 0.33193009124521194,
+          "min": 0.09941899066779998
+        }
+      },
+      "path": "/home/c/Downloads/wall1_squarewave_fork.csv",
+      "row_count": 36,
+      "theorem_promoted": false
+    }
+  ],
+  "inputs": [
+    "/home/c/Downloads/wall1_progression_N3_N6.csv",
+    "/home/c/Downloads/wall1_N3_eigenmode_escape.csv",
+    "/home/c/Downloads/wall1_eigenmode_audit_N2.csv",
+    "/home/c/Downloads/wall1_constrained_adversarial.csv",
+    "/home/c/Downloads/wall1_squarewave_fork.csv"
+  ],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_EXTERNAL_WALL1_CSV_INGEST",
+  "row_count": 240,
+  "schema_version": "1.0.0",
+  "script_name": "scripts/ns_triad_kn_external_wall1_csv_ingest.py",
+  "status": "ok",
+  "theorem_promoted": false,
+  "total_row_count": 240,
+  "warnings": []
+}

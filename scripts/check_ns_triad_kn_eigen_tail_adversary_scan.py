@@ -30,6 +30,7 @@ ALLOWED_TAIL_BRANCHES = {
     "eigenvector-tail-escape",
     "tail-contained",
 }
+ALLOWED_TAIL_GRID_DETAIL_MODES = {"full", "summary", "none"}
 
 EXPECTED_AUTHORITY = {
     "candidate_only": True,
@@ -182,6 +183,27 @@ def _validate_tail_grid_summary(summary: Any, path: str, errors: list[str]) -> N
                 errors.append(f"{path}.branch_counts.{key}: must be nonnegative int")
 
 
+def _validate_tail_grid_detail(detail: Any, path: str, errors: list[str]) -> None:
+    if not isinstance(detail, dict):
+        errors.append(f"{path}: must be object")
+        return
+    mode = detail.get("mode")
+    if mode not in ALLOWED_TAIL_GRID_DETAIL_MODES:
+        errors.append(f"{path}.mode: invalid")
+        return
+    summary = detail.get("summary")
+    if mode == "full":
+        if summary is not None:
+            errors.append(f"{path}.summary: must be null when mode is 'full'")
+    elif mode == "summary":
+        if not isinstance(summary, dict):
+            errors.append(f"{path}.summary: must be object")
+        else:
+            _validate_tail_grid_summary(summary, f"{path}.summary", errors)
+    elif summary is not None:
+        errors.append(f"{path}.summary: must be null when mode is 'none'")
+
+
 def _validate_metrics(metrics: Any, path: str, errors: list[str]) -> None:
     if not isinstance(metrics, dict):
         errors.append(f"{path}: must be object")
@@ -287,8 +309,13 @@ def _validate_candidate_profile(profile: Any, path: str, backend: str, errors: l
                 errors.append(f"{path}.{key}: must be finite when dense oracle is used")
 
     _validate_metrics(profile.get("metrics"), f"{path}.metrics", errors)
-    _validate_tail_grid_summary(profile.get("tail_grid_summary"), f"{path}.tail_grid_summary", errors)
-    _validate_tail_grid(profile.get("tail_grid"), f"{path}.tail_grid", errors)
+    tail_grid_detail = profile.get("tail_grid_detail")
+    if tail_grid_detail is not None:
+        _validate_tail_grid_detail(tail_grid_detail, f"{path}.tail_grid_detail", errors)
+    if tail_grid_detail is None or profile.get("tail_grid_summary") is not None:
+        _validate_tail_grid_summary(profile.get("tail_grid_summary"), f"{path}.tail_grid_summary", errors)
+    if tail_grid_detail is None or profile.get("tail_grid") is not None:
+        _validate_tail_grid(profile.get("tail_grid"), f"{path}.tail_grid", errors)
 
     warnings = profile.get("warnings")
     if warnings is not None and not isinstance(warnings, list):
