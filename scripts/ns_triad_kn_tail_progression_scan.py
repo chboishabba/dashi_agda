@@ -73,6 +73,7 @@ DEFAULT_PARITY_TOL = 1.0e-4
 DEFAULT_LOBPCG_TOL = 1.0e-5
 DEFAULT_LOBPCG_MAXITER = 40
 DEFAULT_GENERALIZED_MASS_SHIFT = 1.0e-8
+DEFAULT_TRIAD_SAMPLE_LIMIT = 8
 
 CONTROL_CARD = {
     "O": "Classify matrix-free K_N(A) low-frame rows by radial tail cutoff and shell progression.",
@@ -129,6 +130,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--dense-oracle-shell-limit", type=int, default=3)
     parser.add_argument("--gpu-matvec-checks", type=int, default=1)
     parser.add_argument("--finite-shell-cutoff", type=int, default=3)
+    parser.add_argument("--triad-sample-limit", type=int, default=DEFAULT_TRIAD_SAMPLE_LIMIT)
     parser.add_argument("--no-force-tail-profiles", action="store_true")
     parser.add_argument("--shell", dest="shells", action="append", type=int, default=None)
     parser.add_argument("--pretty", action="store_true")
@@ -462,6 +464,7 @@ def _row(
     gpu_checks: int,
     max_profiles_per_row: int,
     profile_sample_limit: int,
+    triad_sample_limit: int,
     finite_shell_cutoff: int,
     force_tail_profiles: bool,
 ) -> dict[str, Any]:
@@ -474,12 +477,18 @@ def _row(
         "fail_closed": True,
         "gpu_kn_authority": False,
         "dense_reconstruction_used": False,
+        "triad_sample_limit": int(triad_sample_limit),
+        "triad_coverage_status": "unavailable",
     }
     try:
         u, v, w = _frame_velocity(bundle, snapshot)
         spectrum = _scalar_vorticity_spectrum(u, v, w, bundle.domain_length)
         shell_modes = _cube_modes(spectrum, shell_n=shell_n, zero_eps=zero_eps)
-        triads, frame_metrics = _build_frame_surface(shell_modes, zero_eps=zero_eps, triad_sample_limit=8)
+        triads, frame_metrics = _build_frame_surface(
+            shell_modes,
+            zero_eps=zero_eps,
+            triad_sample_limit=triad_sample_limit,
+        )
     except Exception as exc:  # noqa: BLE001
         row["status"] = ERROR_STATUS
         row["errors"] = [f"tail_progression_scan_error: {exc}"]
@@ -487,8 +496,15 @@ def _row(
 
     row["selected_mode_count"] = int(len(shell_modes))
     row["triad_count"] = int(len(triads))
+    row["triad_coverage_status"] = (
+        "empty"
+        if len(triads) == 0
+        else ("full" if int(triad_sample_limit) >= int(len(triads)) else "sparse")
+    )
     row["carrier_stratum_count"] = int(frame_metrics.get("carrier_stratum_count", 0))
     row["dense_oracle_used"] = bool(int(shell_n) <= int(dense_oracle_shell_limit))
+    if row["triad_coverage_status"] == "sparse":
+        row.setdefault("warnings", []).append("triad sample limit is sparse for selected triads")
     if len(shell_modes) < 3 or not triads:
         row["status"] = PARTIAL_STATUS
         row["warnings"] = ["no_shell_triads_or_insufficient_modes"]
@@ -717,6 +733,7 @@ def main() -> int:
             gpu_checks=int(args.gpu_matvec_checks),
             max_profiles_per_row=int(args.max_profiles_per_row),
             profile_sample_limit=int(args.profile_sample_limit),
+            triad_sample_limit=int(args.triad_sample_limit),
             finite_shell_cutoff=int(args.finite_shell_cutoff),
             force_tail_profiles=not bool(args.no_force_tail_profiles),
         )
@@ -741,6 +758,7 @@ def main() -> int:
             "mix_count": int(args.mix_count),
             "max_profiles_per_row": int(args.max_profiles_per_row),
             "profile_sample_limit": int(args.profile_sample_limit),
+            "triad_sample_limit": int(args.triad_sample_limit),
             "seeds": seeds,
             "shells": [int(shell) for shell in shells],
             "c0_values": c0_values,

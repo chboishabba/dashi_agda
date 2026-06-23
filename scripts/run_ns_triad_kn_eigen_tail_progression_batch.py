@@ -29,6 +29,7 @@ DEFAULT_LOBPCG_MAXITER = 40
 DEFAULT_SAMPLE_COUNT = 4
 DEFAULT_MIX_COUNT = 2
 DEFAULT_PROFILE_SAMPLE_LIMIT = 6
+DEFAULT_TRIAD_SAMPLE_LIMIT = 8
 DEFAULT_MAX_PROFILES_PER_ROW = 4
 
 TAIL_GRID_PRESETS: dict[str, dict[str, list[float] | list[int]]] = {
@@ -221,6 +222,18 @@ def _check_args(*, source_json: Path, output_json: Path) -> list[str]:
     ]
 
 
+def _existing_ok_receipts(scan_json: Path, check_json: Path) -> tuple[dict[str, Any], dict[str, Any]] | None:
+    if not scan_json.exists() or not check_json.exists():
+        return None
+    scan_payload = _read_json_source(scan_json)
+    checker_payload = _read_json_source(check_json)
+    if scan_payload is None or checker_payload is None:
+        return None
+    if _receipt_summary(checker_payload)["ok"] is not True:
+        return None
+    return scan_payload, checker_payload
+
+
 def _run_shell(
     *,
     shell: int,
@@ -230,10 +243,12 @@ def _run_shell(
     sample_count: int,
     mix_count: int,
     profile_sample_limit: int,
+    triad_sample_limit: int,
     max_profiles_per_row: int,
     lobpcg_maxiter: int,
     tail_grid_detail: str,
     tail_grid_serialization: str,
+    skip_existing_ok: bool,
 ) -> dict[str, Any]:
     shell_dir = out_dir / f"shell_{shell:02d}"
     shell_dir.mkdir(parents=True, exist_ok=True)
@@ -248,6 +263,7 @@ def _run_shell(
     env = os.environ.copy()
     if icd:
         env["VK_ICD_FILENAMES"] = icd
+    env["TRIAD_SAMPLE_LIMIT"] = str(triad_sample_limit)
 
     scan_cmd = _scan_args(
         backend=backend,
@@ -261,6 +277,37 @@ def _run_shell(
         tail_grid_detail=tail_grid_detail,
         tail_grid_serialization=tail_grid_serialization,
     )
+    checker_cmd = _check_args(source_json=scan_json, output_json=check_json)
+
+    existing_receipts = _existing_ok_receipts(scan_json, check_json) if skip_existing_ok else None
+    if existing_receipts is not None:
+        scan_payload, checker_payload = existing_receipts
+        scan_summary = _receipt_summary(scan_payload)
+        checker_summary = _receipt_summary(checker_payload)
+        ok = bool(scan_summary["ok"] is True and checker_summary["ok"] is True)
+        return {
+            "shell": int(shell),
+            "shell_dir": str(shell_dir),
+            "skipped_existing_ok": True,
+            "scan": {
+                "command": scan_cmd,
+                "return_code": 0,
+                "stdout_path": str(scan_stdout),
+                "stderr_path": str(scan_stderr),
+                "receipt_path": str(scan_json),
+                **scan_summary,
+            },
+            "checker": {
+                "command": checker_cmd,
+                "return_code": 0,
+                "stdout_path": str(check_stdout),
+                "stderr_path": str(check_stderr),
+                "receipt_path": str(check_json),
+                **checker_summary,
+            },
+            "ok": ok,
+        }
+
     scan_completed = _run_command(
         scan_cmd,
         cwd=ROOT,
@@ -272,9 +319,7 @@ def _run_shell(
 
     checker_completed: subprocess.CompletedProcess[str] | None = None
     checker_payload: dict[str, Any] | None = None
-    checker_cmd: list[str] = []
     if scan_json.exists():
-        checker_cmd = _check_args(source_json=scan_json, output_json=check_json)
         checker_completed = _run_command(
             checker_cmd,
             cwd=ROOT,
@@ -299,6 +344,7 @@ def _run_shell(
     return {
         "shell": int(shell),
         "shell_dir": str(shell_dir),
+        "skipped_existing_ok": False,
         "scan": {
             "command": scan_cmd,
             "return_code": int(scan_completed.returncode),
@@ -322,6 +368,7 @@ def _run_shell(
 def _summary(runs: list[dict[str, Any]]) -> dict[str, Any]:
     return {
         "shell_count": len(runs),
+        "skipped_existing_ok_count": sum(1 for run in runs if run.get("skipped_existing_ok") is True),
         "ok_shell_count": sum(1 for run in runs if run.get("ok") is True),
         "scan_return_code_nonzero_count": sum(1 for run in runs if int(run["scan"]["return_code"]) != 0),
         "checker_return_code_nonzero_count": sum(
@@ -345,6 +392,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--sample-count", type=int, default=DEFAULT_SAMPLE_COUNT)
     parser.add_argument("--mix-count", type=int, default=DEFAULT_MIX_COUNT)
     parser.add_argument("--profile-sample-limit", type=int, default=DEFAULT_PROFILE_SAMPLE_LIMIT)
+    parser.add_argument("--triad-sample-limit", type=int, default=DEFAULT_TRIAD_SAMPLE_LIMIT)
     parser.add_argument("--max-profiles-per-row", type=int, default=DEFAULT_MAX_PROFILES_PER_ROW)
     parser.add_argument(
         "--tail-grid-detail",
@@ -359,6 +407,7 @@ def _parse_args() -> argparse.Namespace:
         help="Per-profile tail-grid serialization passed to the scan: full/summary/none.",
     )
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--skip-existing-ok", action="store_true")
     parser.add_argument("--pretty", action="store_true")
     return parser.parse_args()
 
@@ -378,10 +427,12 @@ def main() -> int:
             sample_count=int(args.sample_count),
             mix_count=int(args.mix_count),
             profile_sample_limit=int(args.profile_sample_limit),
+            triad_sample_limit=int(args.triad_sample_limit),
             max_profiles_per_row=int(args.max_profiles_per_row),
             lobpcg_maxiter=int(args.lobpcg_maxiter),
             tail_grid_detail=str(args.tail_grid_detail),
             tail_grid_serialization=str(args.tail_grid_serialization),
+            skip_existing_ok=bool(args.skip_existing_ok),
         )
         for shell in shells
     ]
@@ -398,10 +449,12 @@ def main() -> int:
             "sample_count": int(args.sample_count),
             "mix_count": int(args.mix_count),
             "profile_sample_limit": int(args.profile_sample_limit),
+            "triad_sample_limit": int(args.triad_sample_limit),
             "max_profiles_per_row": int(args.max_profiles_per_row),
             "tail_grid_detail": str(args.tail_grid_detail),
             "tail_grid_serialization": str(args.tail_grid_serialization),
             "output_dir": str(output_dir),
+            "skip_existing_ok": bool(args.skip_existing_ok),
         },
         "runs": runs,
         "summary": _summary(runs),
