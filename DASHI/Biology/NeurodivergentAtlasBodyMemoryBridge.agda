@@ -91,6 +91,25 @@ data AtlasStyle : Set where
   mixedBridgeStyle : AtlasStyle
   reciprocalAtlasStyle : AtlasStyle
 
+data ChartCompressionKind : Set where
+  neurotypicalCompressionKind : ChartCompressionKind
+  neurodivergentCompressionKind : ChartCompressionKind
+  mixedBridgeCompressionKind : ChartCompressionKind
+  reciprocalCompressionKind : ChartCompressionKind
+
+data SocialCodeThresholdKind : Set where
+  explicitSocialCodeThresholdKind : SocialCodeThresholdKind
+  negotiatedSocialCodeThresholdKind : SocialCodeThresholdKind
+  contextualSocialCodeThresholdKind : SocialCodeThresholdKind
+  neuroaffirmingSocialCodeThresholdKind : SocialCodeThresholdKind
+  noForcedNormalizationThresholdKind : SocialCodeThresholdKind
+
+data NeurotypeKind : Set where
+  neurotypicalKind : NeurotypeKind
+  neurodivergentKind : NeurotypeKind
+  mixedBridgeKind : NeurotypeKind
+  reciprocalAtlasKind : NeurotypeKind
+
 data AtlasPriorKind : Set where
   explicitPriorKind : AtlasPriorKind
   accommodativePriorKind : AtlasPriorKind
@@ -128,6 +147,7 @@ data BodyMemoryAxis : Set where
   atlasAxis : BodyMemoryAxis
 
 data BoundaryClaimKind : Set where
+  normalBrokenClassificationBlockedClaim : BoundaryClaimKind
   pathologyPromotionBlockedClaim : BoundaryClaimKind
   cureFramingBlockedClaim : BoundaryClaimKind
   forcedNormalizationBlockedClaim : BoundaryClaimKind
@@ -161,6 +181,31 @@ canonicalAtlasStyles =
   ∷ neurodivergentChartStyle
   ∷ mixedBridgeStyle
   ∷ reciprocalAtlasStyle
+  ∷ []
+
+canonicalChartCompressionKinds : List ChartCompressionKind
+canonicalChartCompressionKinds =
+  neurotypicalCompressionKind
+  ∷ neurodivergentCompressionKind
+  ∷ mixedBridgeCompressionKind
+  ∷ reciprocalCompressionKind
+  ∷ []
+
+canonicalSocialCodeThresholdKinds : List SocialCodeThresholdKind
+canonicalSocialCodeThresholdKinds =
+  explicitSocialCodeThresholdKind
+  ∷ negotiatedSocialCodeThresholdKind
+  ∷ contextualSocialCodeThresholdKind
+  ∷ neuroaffirmingSocialCodeThresholdKind
+  ∷ noForcedNormalizationThresholdKind
+  ∷ []
+
+canonicalNeurotypeKinds : List NeurotypeKind
+canonicalNeurotypeKinds =
+  neurotypicalKind
+  ∷ neurodivergentKind
+  ∷ mixedBridgeKind
+  ∷ reciprocalAtlasKind
   ∷ []
 
 canonicalAtlasPriors : List AtlasPriorKind
@@ -200,7 +245,8 @@ canonicalResidualThresholdKinds =
 
 canonicalBoundaryClaimKinds : List BoundaryClaimKind
 canonicalBoundaryClaimKinds =
-  pathologyPromotionBlockedClaim
+  normalBrokenClassificationBlockedClaim
+  ∷ pathologyPromotionBlockedClaim
   ∷ cureFramingBlockedClaim
   ∷ forcedNormalizationBlockedClaim
   ∷ diagnosisBlockedClaim
@@ -222,11 +268,13 @@ canonicalHandleKinds =
 canonicalBridgeNotes : List String
 canonicalBridgeNotes =
   "NT and ND are treated as distinct chart-building styles, not normal and broken"
-  ∷ "Atlas priors stay explicit and can be reciprocal or accommodative"
+  ∷ "Atlas priors stay explicit and chart compression stays distinct from sensory weight"
+  ∷ "NT/ND chart compression is different from social-code thresholding"
   ∷ "Sensory weights are modeled as different weightings, not deficits"
-  ∷ "Social-code assumptions remain negotiated and neuroaffirming"
+  ∷ "Social-code assumptions and thresholds remain negotiated and neuroaffirming"
   ∷ "Residual thresholds vary by chart style and can carry j+1 safely"
   ∷ "Pathology promotion, cure framing, forced normalization, diagnosis, treatment authority, mind reading, and overclaim stay blocked"
+  ∷ "Normal/broken classification stays blocked"
   ∷ []
 
 record NeurodivergentAtlasRow : Set where
@@ -256,6 +304,9 @@ record NeurodivergentAtlasRow : Set where
     rowAtlasStyle :
       AtlasStyle
 
+    rowChartCompression :
+      ChartCompressionKind
+
     rowAtlasPrior :
       AtlasPriorKind
 
@@ -265,6 +316,12 @@ record NeurodivergentAtlasRow : Set where
     rowSocialCodeAssumption :
       SocialCodeAssumptionKind
 
+    rowSocialCodeThreshold :
+      SocialCodeThresholdKind
+
+    rowNeurotypeKind :
+      NeurotypeKind
+
     rowResidualThreshold :
       ResidualThresholdKind
 
@@ -273,6 +330,12 @@ record NeurodivergentAtlasRow : Set where
 
     rowResidualThresholdIsCanonical :
       rowResidualThreshold ≡ rowResidualThresholdProfile
+
+    rowNormalBrokenClassificationBlocked :
+      Bool
+
+    rowNormalBrokenClassificationBlockedIsFalse :
+      rowNormalBrokenClassificationBlocked ≡ false
 
     rowResidualKind :
       String
@@ -440,6 +503,12 @@ record NeurodivergentAtlasBodyMemoryBridge : Setω where
     atlasStylesAreCanonical :
       atlasStyles ≡ canonicalAtlasStyles
 
+    chartCompressionKinds :
+      List ChartCompressionKind
+
+    chartCompressionKindsAreCanonical :
+      chartCompressionKinds ≡ canonicalChartCompressionKinds
+
     atlasPriors :
       List AtlasPriorKind
 
@@ -457,6 +526,18 @@ record NeurodivergentAtlasBodyMemoryBridge : Setω where
 
     socialCodeAssumptionsAreCanonical :
       socialCodeAssumptions ≡ canonicalSocialCodeAssumptions
+
+    socialCodeThresholdKinds :
+      List SocialCodeThresholdKind
+
+    socialCodeThresholdKindsAreCanonical :
+      socialCodeThresholdKinds ≡ canonicalSocialCodeThresholdKinds
+
+    neurotypeKinds :
+      List NeurotypeKind
+
+    neurotypeKindsAreCanonical :
+      neurotypeKinds ≡ canonicalNeurotypeKinds
 
     residualThresholdKinds :
       List ResidualThresholdKind
@@ -530,6 +611,12 @@ record NeurodivergentAtlasBodyMemoryBridge : Setω where
     connectomeOverclaimBlockedIsFalse :
       connectomeOverclaimBlocked ≡ false
 
+    normalBrokenClassificationBlocked :
+      Bool
+
+    normalBrokenClassificationBlockedIsFalse :
+      normalBrokenClassificationBlocked ≡ false
+
     nonPromotionCertificate :
       NonPromotionCertificate
 
@@ -556,13 +643,16 @@ mkBridgeRow :
   String →
   List BodyMemoryAxis →
   AtlasStyle →
+  ChartCompressionKind →
   AtlasPriorKind →
   SensoryWeightKind →
   SocialCodeAssumptionKind →
+  SocialCodeThresholdKind →
+  NeurotypeKind →
   ResidualThresholdKind →
   String →
   NeurodivergentAtlasRow
-mkBridgeRow index time body place relation institution axes style prior weight social thresholdKind threshold =
+mkBridgeRow index time body place relation institution axes style compression prior weight socialAssumption socialThreshold neurotype residualThreshold reading =
   mkNeurodivergentAtlasRow
     index
     time
@@ -572,13 +662,18 @@ mkBridgeRow index time body place relation institution axes style prior weight s
     institution
     axes
     style
+    compression
     prior
     weight
-    social
-    thresholdKind
-    thresholdKind
+    socialAssumption
+    socialThreshold
+    neurotype
+    residualThreshold
+    residualThreshold
     refl
-    threshold
+    false
+    refl
+    reading
     true
     refl
     false
@@ -597,7 +692,7 @@ mkBridgeRow index time body place relation institution axes style prior weight s
     refl
     false
     refl
-    threshold
+    reading
 
 canonicalNTRow :
   NeurodivergentAtlasRow
@@ -611,9 +706,12 @@ canonicalNTRow =
     "institutional setting"
     canonicalAxes
     neurotypicalChartStyle
+    neurotypicalCompressionKind
     explicitPriorKind
     balancedWeightKind
     explicitSocialCodeKind
+    explicitSocialCodeThresholdKind
+    neurotypicalKind
     conservativeThresholdKind
     "NT chart-building style keeps a conservative residual threshold and does not imply pathology."
 
@@ -629,9 +727,12 @@ canonicalNDRow =
     "community and institution"
     canonicalAxes
     neurodivergentChartStyle
+    neurodivergentCompressionKind
     accommodativePriorKind
     highWeightKind
     neuroaffirmingAssumptionKind
+    neuroaffirmingSocialCodeThresholdKind
+    neurodivergentKind
     adaptiveThresholdKind
     "ND chart-building style keeps an adaptive residual threshold and does not imply brokenness."
 
@@ -647,9 +748,12 @@ canonicalBridgeResidualRow =
     "institutional setting"
     canonicalAxes
     mixedBridgeStyle
+    mixedBridgeCompressionKind
     reciprocalPriorKind
     selectiveFilterWeightKind
     contextualSocialCodeKind
+    contextualSocialCodeThresholdKind
+    mixedBridgeKind
     tightThresholdKind
     "Bridge row keeps the residual open, negotiated, and candidate-only."
 
@@ -717,11 +821,17 @@ canonicalNeurodivergentAtlasBodyMemoryBridge =
     refl
     canonicalAtlasStyles
     refl
+    canonicalChartCompressionKinds
+    refl
     canonicalAtlasPriors
     refl
     canonicalSensoryWeights
     refl
     canonicalSocialCodeAssumptions
+    refl
+    canonicalSocialCodeThresholdKinds
+    refl
+    canonicalNeurotypeKinds
     refl
     canonicalResidualThresholdKinds
     refl
@@ -747,9 +857,11 @@ canonicalNeurodivergentAtlasBodyMemoryBridge =
     refl
     false
     refl
+    false
+    refl
     canonicalNonPromotionCertificate
     refl
-    "Neuroaffirming body-memory bridge: NT/ND are chart-building styles with different priors and weights, not normal or broken."
+    "Neuroaffirming body-memory bridge: NT/ND are chart-building styles with different priors, compression styles, sensory weights, and social-code thresholds, not normal or broken."
     canonicalBridgeNotes
 
 ------------------------------------------------------------------------
@@ -855,3 +967,26 @@ canonicalBridgeCandidateOnlyIsTrue :
   candidateOnly canonicalNeurodivergentAtlasBodyMemoryBridge ≡ true
 canonicalBridgeCandidateOnlyIsTrue =
   candidateOnlyIsTrue canonicalNeurodivergentAtlasBodyMemoryBridge
+
+canonicalChartCompressionKindsAreCanonical :
+  chartCompressionKinds canonicalNeurodivergentAtlasBodyMemoryBridge ≡
+  canonicalChartCompressionKinds
+canonicalChartCompressionKindsAreCanonical =
+  chartCompressionKindsAreCanonical canonicalNeurodivergentAtlasBodyMemoryBridge
+
+canonicalSocialCodeThresholdKindsAreCanonical :
+  socialCodeThresholdKinds canonicalNeurodivergentAtlasBodyMemoryBridge ≡
+  canonicalSocialCodeThresholdKinds
+canonicalSocialCodeThresholdKindsAreCanonical =
+  socialCodeThresholdKindsAreCanonical canonicalNeurodivergentAtlasBodyMemoryBridge
+
+canonicalNeurotypeKindsAreCanonical :
+  neurotypeKinds canonicalNeurodivergentAtlasBodyMemoryBridge ≡
+  canonicalNeurotypeKinds
+canonicalNeurotypeKindsAreCanonical =
+  neurotypeKindsAreCanonical canonicalNeurodivergentAtlasBodyMemoryBridge
+
+canonicalNormalBrokenClassificationBlockedIsFalse :
+  normalBrokenClassificationBlocked canonicalNeurodivergentAtlasBodyMemoryBridge ≡ false
+canonicalNormalBrokenClassificationBlockedIsFalse =
+  normalBrokenClassificationBlockedIsFalse canonicalNeurodivergentAtlasBodyMemoryBridge

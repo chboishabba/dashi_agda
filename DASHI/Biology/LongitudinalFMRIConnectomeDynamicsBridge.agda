@@ -444,6 +444,12 @@ record LongitudinalBodyMemoryRow : Set where
     rowNoIndividualMechanismIsFalse :
       rowNoIndividualMechanism ≡ false
 
+    rowNoTraumaMechanism :
+      Bool
+
+    rowNoTraumaMechanismIsFalse :
+      rowNoTraumaMechanism ≡ false
+
     rowNoReverseInference :
       Bool
 
@@ -581,6 +587,12 @@ record ScanSessionTrajectory : Set where
     trajectoryNoIndividualMechanismIsFalse :
       trajectoryNoIndividualMechanism ≡ false
 
+    trajectoryNoTraumaMechanism :
+      Bool
+
+    trajectoryNoTraumaMechanismIsFalse :
+      trajectoryNoTraumaMechanism ≡ false
+
     trajectoryReading :
       String
 
@@ -682,6 +694,12 @@ record ConnectomeDriftProxy : Set where
     driftNoIndividualMechanismIsFalse :
       driftNoIndividualMechanism ≡ false
 
+    driftNoTraumaMechanism :
+      Bool
+
+    driftNoTraumaMechanismIsFalse :
+      driftNoTraumaMechanism ≡ false
+
     driftReading :
       String
 
@@ -726,6 +744,12 @@ record PopulationCohortNeurovascularGate : Set where
 
     gateNoIndividualMechanismIsFalse :
       gateNoIndividualMechanism ≡ false
+
+    gateNoTraumaMechanism :
+      Bool
+
+    gateNoTraumaMechanismIsFalse :
+      gateNoTraumaMechanism ≡ false
 
     gateNoTraumaProof :
       Bool
@@ -904,6 +928,8 @@ canonicalBaselineWindowRow =
     refl
     false
     refl
+    false
+    refl
     ( "baseline window"
     ∷ "candidate-only longitudinal anchor"
     ∷ "no reverse inference, hidden chart recovery, mind-reading, diagnosis, treatment, or causal closure"
@@ -932,6 +958,8 @@ canonicalLagAlignmentProxyRow =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -994,7 +1022,9 @@ canonicalScanSessionTrajectory =
     refl
     false
     refl
-    "Longitudinal scan sessions are treated as proxy trajectories over body-memory residual placement, not as hidden chart recovery."
+    false
+    refl
+    "Longitudinal scan sessions are treated as proxy trajectories over body-memory residual placement, not as hidden chart recovery or trauma mechanism."
 
 canonicalConnectomeDriftProxy :
   ConnectomeDriftProxy
@@ -1031,7 +1061,9 @@ canonicalConnectomeDriftProxy =
     refl
     false
     refl
-    "Connectome drift is tracked as a proxy residual, not as causal closure or clinical authority."
+    false
+    refl
+    "Connectome drift is tracked as a proxy residual, not as causal closure, trauma mechanism, or clinical authority."
 
 canonicalScanSessionTrajectoryRow :
   LongitudinalBodyMemoryRow
@@ -1055,6 +1087,8 @@ canonicalScanSessionTrajectoryRow =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -1113,6 +1147,8 @@ canonicalConnectomeDriftProxyRow =
     refl
     false
     refl
+    false
+    refl
     ( "drift is a proxy reading"
     ∷ "drift does not recover hidden charts"
     ∷ "drift does not promote diagnosis, treatment, or causal closure"
@@ -1141,6 +1177,8 @@ canonicalGovernanceBoundaryRow =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -1232,7 +1270,9 @@ canonicalPopulationCohortNeurovascularGate =
     refl
     false
     refl
-    "Population and cohort structure are routed through a neurovascular proxy gate; the surface is longitudinal association over cohort time, not individual mechanism, trauma proof, hidden chart recovery, mind-reading, or clinical authority."
+    false
+    refl
+    "Population and cohort structure are routed through a neurovascular proxy gate; the surface is longitudinal association over cohort time, not individual mechanism, trauma proof, hidden chart recovery, trauma mechanism, mind-reading, or clinical authority."
 
 canonicalLongitudinalFMRIConnectomeDynamicsGovernance :
   LongitudinalFMRIConnectomeDynamicsGovernance
@@ -1303,7 +1343,7 @@ canonicalLongitudinalFMRIConnectomeDynamicsGovernance =
     ; longitudinalRowsAreCanonical =
         refl
     ; governanceReading =
-        "Candidate-only longitudinal fMRI/BOLD/connectome bridge: the temporal windows, lag/alignment/proxy rows, population/cohort gates, scan-session trajectory, and connectome drift proxy remain bounded association surfaces only, while reverse inference, hidden chart recovery, mind-reading, diagnosis, treatment, causal closure, and individual mechanism promotion stay blocked."
+        "Candidate-only longitudinal fMRI/BOLD/connectome bridge: the temporal windows, lag/alignment/proxy rows, population/cohort gates, scan-session trajectory, and connectome drift proxy remain bounded association surfaces only, while reverse inference, hidden chart recovery, trauma mechanism recovery, mind-reading, diagnosis, treatment, causal closure, and individual mechanism promotion stay blocked."
     }
 
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceIsCandidateOnly :
@@ -1381,10 +1421,25 @@ canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoReverseInference :
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoReverseInference =
   rowNoReverseInferenceIsFalse canonicalBaselineWindowRow
 
+canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoTraumaMechanism :
+  rowNoTraumaMechanism canonicalBaselineWindowRow ≡ false
+canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoTraumaMechanism =
+  rowNoTraumaMechanismIsFalse canonicalBaselineWindowRow
+
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoHiddenChartRecovery :
   rowNoHiddenChartRecovery canonicalConnectomeDriftProxyRow ≡ false
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoHiddenChartRecovery =
   rowNoHiddenChartRecoveryIsFalse canonicalConnectomeDriftProxyRow
+
+canonicalLongitudinalFMRIConnectomeDynamicsGovernanceTrajectoryNoTraumaMechanism :
+  trajectoryNoTraumaMechanism canonicalScanSessionTrajectory ≡ false
+canonicalLongitudinalFMRIConnectomeDynamicsGovernanceTrajectoryNoTraumaMechanism =
+  trajectoryNoTraumaMechanismIsFalse canonicalScanSessionTrajectory
+
+canonicalLongitudinalFMRIConnectomeDynamicsGovernanceDriftNoTraumaMechanism :
+  driftNoTraumaMechanism canonicalConnectomeDriftProxy ≡ false
+canonicalLongitudinalFMRIConnectomeDynamicsGovernanceDriftNoTraumaMechanism =
+  driftNoTraumaMechanismIsFalse canonicalConnectomeDriftProxy
 
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoMindReading :
   rowNoMindReading canonicalScanSessionTrajectoryRow ≡ false
@@ -1405,3 +1460,8 @@ canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoCausalClosure :
   rowNoCausalClosure canonicalConnectomeDriftProxyRow ≡ false
 canonicalLongitudinalFMRIConnectomeDynamicsGovernanceNoCausalClosure =
   rowNoCausalClosureIsFalse canonicalConnectomeDriftProxyRow
+
+canonicalPopulationCohortNeurovascularGateNoTraumaMechanism :
+  gateNoTraumaMechanism canonicalPopulationCohortNeurovascularGate ≡ false
+canonicalPopulationCohortNeurovascularGateNoTraumaMechanism =
+  gateNoTraumaMechanismIsFalse canonicalPopulationCohortNeurovascularGate

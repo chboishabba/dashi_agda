@@ -37,6 +37,10 @@ data Never : Set where
 data CulturalTriadOperatorRoute : Set where
   candidateOnlyTriadOperatorRoute :
     CulturalTriadOperatorRoute
+  secularCandidateOnlyTriadOperatorRoute :
+    CulturalTriadOperatorRoute
+  trinityMetaphorRejectionRoute :
+    CulturalTriadOperatorRoute
   theologyPromotionRoute :
     CulturalTriadOperatorRoute
   monocultureCompressionRoute :
@@ -54,12 +58,19 @@ AdmissibleCulturalTriadOperatorRoute :
   CulturalTriadOperatorRoute →
   Set
 AdmissibleCulturalTriadOperatorRoute candidateOnlyTriadOperatorRoute = ⊤
+AdmissibleCulturalTriadOperatorRoute secularCandidateOnlyTriadOperatorRoute = ⊤
+AdmissibleCulturalTriadOperatorRoute trinityMetaphorRejectionRoute = Never
 AdmissibleCulturalTriadOperatorRoute theologyPromotionRoute = Never
 AdmissibleCulturalTriadOperatorRoute monocultureCompressionRoute = Never
 AdmissibleCulturalTriadOperatorRoute enemyCodingDominationRoute = Never
 AdmissibleCulturalTriadOperatorRoute neutralTriadClaimRoute = Never
 AdmissibleCulturalTriadOperatorRoute politicalAuthorityRoute = Never
 AdmissibleCulturalTriadOperatorRoute legalAuthorityRoute = Never
+
+trinityMetaphorRejectionRouteRejected :
+  AdmissibleCulturalTriadOperatorRoute trinityMetaphorRejectionRoute →
+  Never
+trinityMetaphorRejectionRouteRejected impossible = impossible
 
 theologyPromotionRouteRejected :
   AdmissibleCulturalTriadOperatorRoute theologyPromotionRoute →
@@ -93,12 +104,14 @@ legalAuthorityRouteRejected impossible = impossible
 
 data TriadSymbolKind : Set where
   trinitySymbolKind : TriadSymbolKind
+  secularTriadSymbolKind : TriadSymbolKind
   yinYangTriadSymbolKind : TriadSymbolKind
   subjectOtherRelationSymbolKind : TriadSymbolKind
   socialTriadSymbolKind : TriadSymbolKind
   intersectionalTriadSymbolKind : TriadSymbolKind
   humilityTriadSymbolKind : TriadSymbolKind
   powerGatedTriadSymbolKind : TriadSymbolKind
+  trinityMetaphorRejectionSymbolKind : TriadSymbolKind
 
 data TriadCarrierRole : Set where
   subjectCarrierRole : TriadCarrierRole
@@ -121,6 +134,10 @@ data TriadOperatorKind : Set where
 data TriadBoundaryClaimKind : Set where
   subjectOtherRelationClaim : TriadBoundaryClaimKind
   oneEqualsThreeClaim : TriadBoundaryClaimKind
+  secularOperatorGrammarClaim : TriadBoundaryClaimKind
+  culturalEvidenceOnlyClaim : TriadBoundaryClaimKind
+  metaphysicalAuthorityBlockedClaim : TriadBoundaryClaimKind
+  trinityMetaphorRejectedClaim : TriadBoundaryClaimKind
   humilityGateClaim : TriadBoundaryClaimKind
   intersectionalityGateClaim : TriadBoundaryClaimKind
   powerGateClaim : TriadBoundaryClaimKind
@@ -133,6 +150,7 @@ data TriadBoundaryClaimKind : Set where
 
 data TriadRowTag : Set where
   symbolRowTag : TriadRowTag
+  secularRowTag : TriadRowTag
   operatorRowTag : TriadRowTag
   subjectRowTag : TriadRowTag
   otherRowTag : TriadRowTag
@@ -140,6 +158,7 @@ data TriadRowTag : Set where
   humilityRowTag : TriadRowTag
   intersectionalityRowTag : TriadRowTag
   powerGateRowTag : TriadRowTag
+  rejectionRowTag : TriadRowTag
   boundaryRowTag : TriadRowTag
 
 record CulturalTriadOperatorRow : Set where
@@ -582,6 +601,10 @@ canonicalBoundaryClaims :
 canonicalBoundaryClaims =
   subjectOtherRelationClaim
   ∷ oneEqualsThreeClaim
+  ∷ secularOperatorGrammarClaim
+  ∷ culturalEvidenceOnlyClaim
+  ∷ metaphysicalAuthorityBlockedClaim
+  ∷ trinityMetaphorRejectedClaim
   ∷ humilityGateClaim
   ∷ intersectionalityGateClaim
   ∷ powerGateClaim
@@ -621,7 +644,33 @@ canonicalCulturalTriadOperatorRows =
     refl
     false
     refl
-    "Trinity and related triadic symbols are treated as cultural operator surfaces, not doctrine or proof."
+    "Trinity and related triadic symbols are treated as secular cultural operator surfaces, not doctrine or proof."
+  ∷ culturalTriadOperatorRow
+    secularRowTag
+    secularTriadSymbolKind
+    symbolicOperatorKind
+    operatorCarrierRole
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    "Cultural symbols are evidence of operator grammars, not truth of doctrine."
   ∷ culturalTriadOperatorRow
     operatorRowTag
     yinYangTriadSymbolKind
@@ -673,7 +722,7 @@ canonicalCulturalTriadOperatorRows =
     refl
     false
     refl
-    "The 1=3 surface carries subject plus other plus relation under humility and power gates."
+    "The 1=3 surface carries subject plus other plus relation under humility and power gates, and stays candidate-only."
   ∷ culturalTriadOperatorRow
     otherRowTag
     socialTriadSymbolKind
@@ -805,6 +854,32 @@ canonicalCulturalTriadOperatorRows =
     refl
     "Power is acknowledged as a gate, not a license for political or legal promotion."
   ∷ culturalTriadOperatorRow
+    rejectionRowTag
+    trinityMetaphorRejectionSymbolKind
+    boundaryOperatorKind
+    symbolCarrierRole
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    "The Trinity metaphor is rejected as doctrine and retained only as a secular candidate reading."
+  ∷ culturalTriadOperatorRow
     boundaryRowTag
     trinitySymbolKind
     culturalOperatorKind
@@ -875,7 +950,7 @@ canonicalCulturalTriadOperatorSurface =
     refl
     false
     refl
-    "Triadic symbols are encoded as cultural operator surfaces with subject, other, and relation carriers, while theology, monoculture, enemy-coding, neutrality-as-compression, and political/legal authority stay blocked."
+    "Triadic symbols are encoded as secular cultural operator surfaces with subject, other, and relation carriers; cultural symbols remain evidence of operator grammar, while theology, monoculture, enemy-coding, neutrality-as-compression, metaphysical authority, and political/legal authority stay blocked."
 
 canonicalCulturalTriadOperatorBoundary :
   CulturalTriadOperatorBoundary
@@ -1197,7 +1272,7 @@ canonicalCulturalTriadOperatorBoundary =
     ; boundaryClaimsAreExact =
         refl
     ; boundaryReading =
-        "Candidate-only cultural triad operator boundary: Trinity, yin-yang, and other triadic social symbols are treated as cultural operator surfaces. The 1=3 surface is carried by subject, other, and relation under humility, intersectionality, and power gates, while theology promotion, monoculture compression, enemy-coding domination, neutral triad claims, and political/legal authority remain blocked."
+        "Candidate-only secular cultural triad operator boundary: Trinity, yin-yang, and other triadic social symbols are treated as operator-grammar evidence surfaces, not doctrine or proof. The 1=3 surface stays candidate-only under humility, intersectionality, and power gates, while theology promotion, metaphysical authority, monoculture compression, enemy-coding domination, neutral triad claims, and political/legal authority remain blocked."
     }
 
 canonicalCulturalTriadOperatorCertificate :
@@ -1264,7 +1339,7 @@ canonicalCulturalTriadOperatorCertificate =
     ; certificateLegalAuthorityBlockedIsFalse =
         refl
     ; certificateReading =
-        "Non-promotion certificate: the cultural triad operator boundary remains candidate-only; subject, other, and relation are carried under humility, intersectionality, and power gates; theology promotion, monoculture compression, enemy-coding domination, neutral triad claims, and political/legal authority remain blocked."
+        "Non-promotion certificate: the secular cultural triad operator boundary remains candidate-only; subject, other, and relation are carried as operator grammar evidence under humility, intersectionality, and power gates; theology promotion, metaphysical authority, monoculture compression, enemy-coding domination, neutral triad claims, and political/legal authority remain blocked."
     }
 
 canonicalRouteIsCandidateOnly :

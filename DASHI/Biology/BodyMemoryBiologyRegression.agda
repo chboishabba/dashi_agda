@@ -345,7 +345,7 @@ hyperfabricIntersectionalRow =
     registryCandidateStatus
     ( "dialectic and hyperfabric vocabulary remain candidate interpretive material"
     ∷ "social truth, legal authority, and educational authority are not promoted"
-    ∷ "intersectional longitudinal residual dynamics remain a residual gap surface"
+    ∷ "intersectional longitudinal residual dynamics remain a residual gap surface with no axis-free body-memory residual"
     ∷ []
     )
 
@@ -650,6 +650,8 @@ canonicalBodyMemoryRegistry =
     ∷ "intervention/consent longitudinal governance imported"
     ∷ "hyperfabric intersectional bridge imported"
     ∷ "intersectional longitudinal residual dynamics imported"
+    ∷ "residual carrier stays body, time, place, relation, institution, and axis-bundle"
+    ∷ "no abstract-humanity gluing and no stable-nine justice promotion"
     ∷ []
     )
     true

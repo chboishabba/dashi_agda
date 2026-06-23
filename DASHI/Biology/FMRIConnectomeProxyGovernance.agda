@@ -159,6 +159,12 @@ record ProxyPlacementRow : Set where
     rowMeasurementIsNotDiagnosisIsTrue :
       rowMeasurementIsNotDiagnosis ≡ true
 
+    rowTraumaMechanismBlocked :
+      Bool
+
+    rowTraumaMechanismBlockedIsFalse :
+      rowTraumaMechanismBlocked ≡ false
+
     rowReverseInferenceBlocked :
       Bool
 
@@ -229,6 +235,18 @@ record BOLDSignalProxySurface : Set₁ where
 
     measurementProxyOnlyIsTrue :
       measurementProxyOnly ≡ true
+
+    witnessesNeuralVascularVariation :
+      Bool
+
+    witnessesNeuralVascularVariationIsTrue :
+      witnessesNeuralVascularVariation ≡ true
+
+    notLongitudinalTraumaMechanism :
+      Bool
+
+    notLongitudinalTraumaMechanismIsFalse :
+      notLongitudinalTraumaMechanism ≡ false
 
     hiddenChartRecoveryBlocked :
       Bool
@@ -414,6 +432,18 @@ record FMRIConnectomeProxyGovernance : Setω where
     measurementIsNotDiagnosisIsTrue :
       measurementIsNotDiagnosis ≡ true
 
+    boldWitnessesNeuralVascularVariation :
+      Bool
+
+    boldWitnessesNeuralVascularVariationIsTrue :
+      boldWitnessesNeuralVascularVariation ≡ true
+
+    boldNotTraumaMechanism :
+      Bool
+
+    boldNotTraumaMechanismIsFalse :
+      boldNotTraumaMechanism ≡ false
+
     reverseInferenceBlocked :
       Bool
 
@@ -472,7 +502,7 @@ canonicalBOLDSignalProxySurface =
     measurementProxySurface
     true
     refl
-    false
+    true
     refl
     false
     refl
@@ -480,7 +510,11 @@ canonicalBOLDSignalProxySurface =
     refl
     false
     refl
-    "BOLD is treated as a signal proxy for measurement and not as hidden-chart recovery, reverse inference, mind-reading, diagnosis, or clinical authority."
+    false
+    refl
+    false
+    refl
+    "BOLD is treated as a signal proxy for neural/vascular variation and not as hidden-chart recovery, trauma mechanism, reverse inference, mind-reading, diagnosis, or clinical authority."
 
 canonicalFunctionalConnectivityProxyCarrier : FunctionalConnectivityProxyCarrier
 canonicalFunctionalConnectivityProxyCarrier =
@@ -531,6 +565,8 @@ canonicalFMRIMeasurementRow =
     refl
     false
     refl
+    false
+    refl
     "fMRI measurement is a proxy surface, not a hidden chart."
 
 canonicalBOLDSignalRow : ProxyPlacementRow
@@ -553,7 +589,9 @@ canonicalBOLDSignalRow =
     refl
     false
     refl
-    "BOLD is a signal proxy over hemodynamic change, not an inference engine."
+    false
+    refl
+    "BOLD is a signal proxy over hemodynamic change and neural/vascular variation, not a trauma mechanism or inference engine."
 
 canonicalConnectomeGraphRow : ProxyPlacementRow
 canonicalConnectomeGraphRow =
@@ -564,6 +602,8 @@ canonicalConnectomeGraphRow =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -597,6 +637,8 @@ canonicalFunctionalConnectivityRow =
     refl
     false
     refl
+    false
+    refl
     "Functional connectivity is a proxy relation over observed coupling, not mind-reading or clinical authority."
 
 canonicalReverseInferenceBoundaryRow : ProxyPlacementRow
@@ -608,6 +650,8 @@ canonicalReverseInferenceBoundaryRow =
     true
     refl
     true
+    refl
+    false
     refl
     false
     refl
@@ -692,6 +736,14 @@ canonicalFMRIConnectomeProxyGovernance =
         true
     ; measurementIsNotDiagnosisIsTrue =
         refl
+    ; boldWitnessesNeuralVascularVariation =
+        true
+    ; boldWitnessesNeuralVascularVariationIsTrue =
+        refl
+    ; boldNotTraumaMechanism =
+        false
+    ; boldNotTraumaMechanismIsFalse =
+        refl
     ; reverseInferenceBlocked =
         false
     ; reverseInferenceBlockedIsFalse =
@@ -717,5 +769,30 @@ canonicalFMRIConnectomeProxyGovernance =
     ; boundaryClaimsAreExact =
         refl
     ; governanceReading =
-        "Candidate-only governance for fMRI, BOLD, connectome graph, and functional connectivity placement: the surface remains a proxy and boundary layer, not hidden-chart recovery, reverse inference authority, mind-reading, diagnosis, treatment, or clinical authority."
+        "Candidate-only governance for fMRI, BOLD, connectome graph, and functional connectivity placement: the surface remains a proxy and boundary layer, witnesses neural/vascular variation, and is not hidden-chart recovery, trauma mechanism recovery, reverse inference authority, mind-reading, diagnosis, treatment, or clinical authority."
     }
+
+canonicalBOLDSignalProxySurfaceWitnessesNeuralVascularVariation :
+  witnessesNeuralVascularVariation canonicalBOLDSignalProxySurface ≡ true
+canonicalBOLDSignalProxySurfaceWitnessesNeuralVascularVariation =
+  witnessesNeuralVascularVariationIsTrue canonicalBOLDSignalProxySurface
+
+canonicalBOLDSignalProxySurfaceNotLongitudinalTraumaMechanism :
+  notLongitudinalTraumaMechanism canonicalBOLDSignalProxySurface ≡ false
+canonicalBOLDSignalProxySurfaceNotLongitudinalTraumaMechanism =
+  notLongitudinalTraumaMechanismIsFalse canonicalBOLDSignalProxySurface
+
+canonicalFMRIConnectomeProxyGovernanceBoldNotTraumaMechanism :
+  boldNotTraumaMechanism canonicalFMRIConnectomeProxyGovernance ≡ false
+canonicalFMRIConnectomeProxyGovernanceBoldNotTraumaMechanism =
+  boldNotTraumaMechanismIsFalse canonicalFMRIConnectomeProxyGovernance
+
+canonicalFMRIMeasurementRowTraumaMechanismBlocked :
+  rowTraumaMechanismBlocked canonicalFMRIMeasurementRow ≡ false
+canonicalFMRIMeasurementRowTraumaMechanismBlocked =
+  rowTraumaMechanismBlockedIsFalse canonicalFMRIMeasurementRow
+
+canonicalBOLDSignalRowTraumaMechanismBlocked :
+  rowTraumaMechanismBlocked canonicalBOLDSignalRow ≡ false
+canonicalBOLDSignalRowTraumaMechanismBlocked =
+  rowTraumaMechanismBlockedIsFalse canonicalBOLDSignalRow

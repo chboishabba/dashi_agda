@@ -14,6 +14,7 @@ open import Agda.Builtin.Unit using (⊤; tt)
 -- intersectional axis auditing as candidate interpretive carrier material.
 -- It does not promote any of that vocabulary to proof of social truth,
 -- clinical authority, legal authority, or educational authority.
+-- It also blocks abstract-humanity gluing and stable-nine justice promotion.
 
 data Never : Set where
 
@@ -804,14 +805,22 @@ data ProjectionForm : Set where
   abstractHumanityProjection :
     ProjectionForm
 
+  abstractHumanityGluingProjection :
+    ProjectionForm
+
   neutralTriadProjection :
+    ProjectionForm
+
+  stableNineJusticePromotionProjection :
     ProjectionForm
 
 ProjectionAdmissible : ProjectionForm → Set
 ProjectionAdmissible axisPreservingProductProjection = ⊤
 ProjectionAdmissible singleAxisCollapseProjection = Never
 ProjectionAdmissible abstractHumanityProjection = Never
+ProjectionAdmissible abstractHumanityGluingProjection = Never
 ProjectionAdmissible neutralTriadProjection = Never
+ProjectionAdmissible stableNineJusticePromotionProjection = Never
 
 singleAxisCollapseProjectionRejected :
   ProjectionAdmissible singleAxisCollapseProjection →
@@ -823,10 +832,20 @@ abstractHumanityProjectionRejected :
   Never
 abstractHumanityProjectionRejected ()
 
+abstractHumanityGluingProjectionRejected :
+  ProjectionAdmissible abstractHumanityGluingProjection →
+  Never
+abstractHumanityGluingProjectionRejected ()
+
 neutralTriadProjectionRejected :
   ProjectionAdmissible neutralTriadProjection →
   Never
 neutralTriadProjectionRejected ()
+
+stableNineJusticePromotionProjectionRejected :
+  ProjectionAdmissible stableNineJusticePromotionProjection →
+  Never
+stableNineJusticePromotionProjectionRejected ()
 
 record AxisLoadedTriadRoleRow : Set where
   constructor mkAxisLoadedTriadRoleRow
@@ -1176,6 +1195,18 @@ record HyperfabricIntersectionalBodyMemoryBridge : Set where
     noEducationalAuthorityIsFalse :
       noEducationalAuthority ≡ false
 
+    noAbstractHumanityGluing :
+      Bool
+
+    noAbstractHumanityGluingIsFalse :
+      noAbstractHumanityGluing ≡ false
+
+    noStableNineJusticePromotion :
+      Bool
+
+    noStableNineJusticePromotionIsFalse :
+      noStableNineJusticePromotion ≡ false
+
     bridgeReading :
       String
 
@@ -1270,6 +1301,18 @@ record HyperfabricIntersectionalBodyMemoryCertificate
     certificateNoEducationalAuthorityIsFalse :
       certificateNoEducationalAuthority ≡ false
 
+    certificateNoAbstractHumanityGluing :
+      Bool
+
+    certificateNoAbstractHumanityGluingIsFalse :
+      certificateNoAbstractHumanityGluing ≡ false
+
+    certificateNoStableNineJusticePromotion :
+      Bool
+
+    certificateNoStableNineJusticePromotionIsFalse :
+      certificateNoStableNineJusticePromotion ≡ false
+
     certificateReading :
       String
 
@@ -1295,6 +1338,10 @@ canonicalHyperfabricIntersectionalBodyMemoryBridge =
     refl
     "body-memory"
     true
+    refl
+    false
+    refl
+    false
     refl
     false
     refl
@@ -1342,8 +1389,12 @@ canonicalHyperfabricIntersectionalBodyMemoryCertificate =
     ; certificateNoLegalAuthorityIsFalse = refl
     ; certificateNoEducationalAuthority = false
     ; certificateNoEducationalAuthorityIsFalse = refl
+    ; certificateNoAbstractHumanityGluing = false
+    ; certificateNoAbstractHumanityGluingIsFalse = refl
+    ; certificateNoStableNineJusticePromotion = false
+    ; certificateNoStableNineJusticePromotionIsFalse = refl
     ; certificateReading =
-        "Candidate interpretive body-memory carrier only: no neutral triad universalism, no monoculture compression, no proof of social truth, and no clinical, legal, or educational authority promotion."
+        "Candidate interpretive body-memory carrier only: no neutral triad universalism, no monoculture compression, no proof of social truth, and no clinical, legal, educational, abstract-humanity, or stable-nine justice promotion."
     }
 
 canonicalInterpretiveRouteIsCandidate :
@@ -1406,6 +1457,22 @@ canonicalNoEducationalAuthorityIsFalse :
 canonicalNoEducationalAuthorityIsFalse =
   refl
 
+canonicalNoAbstractHumanityGluingIsFalse :
+  noAbstractHumanityGluing
+    canonicalHyperfabricIntersectionalBodyMemoryBridge
+  ≡
+  false
+canonicalNoAbstractHumanityGluingIsFalse =
+  refl
+
+canonicalNoStableNineJusticePromotionIsFalse :
+  noStableNineJusticePromotion
+    canonicalHyperfabricIntersectionalBodyMemoryBridge
+  ≡
+  false
+canonicalNoStableNineJusticePromotionIsFalse =
+  refl
+
 canonicalCertificateRouteMatches :
   HyperfabricIntersectionalBodyMemoryCertificate.certificateRoute
     canonicalHyperfabricIntersectionalBodyMemoryCertificate
@@ -1460,6 +1527,22 @@ canonicalCertificateNoEducationalAuthorityIsFalse :
   ≡
   false
 canonicalCertificateNoEducationalAuthorityIsFalse =
+  refl
+
+canonicalCertificateNoAbstractHumanityGluingIsFalse :
+  HyperfabricIntersectionalBodyMemoryCertificate.certificateNoAbstractHumanityGluing
+    canonicalHyperfabricIntersectionalBodyMemoryCertificate
+  ≡
+  false
+canonicalCertificateNoAbstractHumanityGluingIsFalse =
+  refl
+
+canonicalCertificateNoStableNineJusticePromotionIsFalse :
+  HyperfabricIntersectionalBodyMemoryCertificate.certificateNoStableNineJusticePromotion
+    canonicalHyperfabricIntersectionalBodyMemoryCertificate
+  ≡
+  false
+canonicalCertificateNoStableNineJusticePromotionIsFalse =
   refl
 
 canonicalAxisLoadedTriadRoleRowsAreCanonical :

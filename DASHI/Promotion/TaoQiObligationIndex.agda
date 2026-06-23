@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Culture.QiOperatorTheoryBoundary as QiTheory
+import DASHI.Culture.CulturalTriadOperatorBoundary as Triad
 import DASHI.Culture.TaoOperatorGrammar as TaoGrammar
 import DASHI.Culture.TaoChapterReadingReceipt as Tao
 import DASHI.Culture.YinYangPolarityBoundary as YinYang
@@ -41,6 +42,7 @@ data TaoQiLane : Set where
   taoReadingLane : TaoQiLane
   yinYangBoundaryLane : TaoQiLane
   yinYangGeometryLane : TaoQiLane
+  triadBoundaryLane : TaoQiLane
   bettiSupportLane : TaoQiLane
   qiRoleGrammarLane : TaoQiLane
   qiCarrierFieldLane : TaoQiLane
@@ -342,6 +344,15 @@ canonicalTaoQiSummaryRows =
     "the seed/carry/body/boundary bridge remains candidate-only and descriptive"
     "truth, support, admissibility, runtime, theorem, clinical, and metaphysical authority remain false"
     "agda -i . DASHI/Interop/YinYangQiAdapter.agda"
+  ∷ mkTaoQiSummaryRow
+    triadBoundaryLane
+    "DASHI.Culture.CulturalTriadOperatorBoundary"
+    "canonicalCulturalTriadOperatorBoundary"
+    "Secular triad and Trinity-metaphor readings are tracked as candidate-only operator grammar evidence: cultural symbols witness reusable social/algebraic operator surfaces, not doctrinal truth."
+    (listCount Triad.canonicalCulturalTriadOperatorRows)
+    "triadic social structure stays in the operator-grammar layer"
+    "theology promotion, metaphysical authority, monoculture compression, enemy-coding domination, and political/legal authority stay blocked"
+    "agda -i . DASHI/Culture/CulturalTriadOperatorBoundary.agda"
   ∷ mkTaoQiSummaryRow
     bettiSupportLane
     canonicalBettiSupportBoundaryModuleName
