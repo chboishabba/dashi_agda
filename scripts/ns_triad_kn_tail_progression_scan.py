@@ -12,10 +12,12 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import warnings
 from pathlib import Path
 from typing import Any
 
 import numpy as np
+from scipy.sparse.linalg import lobpcg
 
 from ns_boundary_pressure_gate_scan import _frame_indices  # type: ignore
 from ns_triad_cocycle_floor_scan import _validate_shells  # type: ignore
@@ -41,6 +43,12 @@ from ns_triad_frame_stability_scan import (  # type: ignore
     _load_raw_bundle,
     _scalar_vorticity_spectrum,
 )
+from ns_triad_kn_iterative_generalized_eig import (  # type: ignore
+    _make_backend,
+    _operator_from_matvec,
+    _shifted_operator_from_matvec,
+)
+from ns_triad_kn_matrix_free_operator import build_profile  # type: ignore
 from ns_triad_kn_iterative_generalized_eig import _evaluate  # type: ignore
 
 
@@ -76,7 +84,7 @@ CONTROL_CARD = {
     "S": "Candidate-only telemetry; no theorem, full-NS, or Clay promotion is inferred.",
     "L": (
         "Load shell carriers, sample energy profiles, solve L_neg x = lambda L_abs x without "
-        "dense reconstruction, compute tail masses, and classify branches against each threshold grid point."
+        "dense reconstruction, compute profile and eigen tail shells, and classify branches against each threshold grid point."
     ),
     "P": ROUTE_DECISION,
     "G": "GPU matvec acceleration remains non-authoritative and gpu_kn_authority is always false.",
@@ -146,6 +154,119 @@ def _radial_max_with_mass_eta(shell_levels: np.ndarray, probability: np.ndarray,
     return int(max(active))
 
 
+def _eigen_shell_telemetry(
+    *,
+    triads: list[Any],
+    probability: np.ndarray,
+    shell_levels: np.ndarray,
+    profile_id: str,
+    backend: str,
+    zero_eps: float,
+    tail_cutoffs: list[int],
+    tail_etas: list[float],
+    lobpcg_tol: float,
+    lobpcg_maxiter: int,
+    block_size: int,
+    generalized_mass_shift: float,
+    gpu_checks: int,
+) -> dict[str, Any]:
+    telemetry: dict[str, Any] = {
+        "eigen_tail_mass_by_cutoff": {str(int(cutoff)): None for cutoff in tail_cutoffs},
+        "eigen_shell_barycenter": None,
+        "eigen_shell_variance": None,
+        "eigen_shell_max_with_mass_eta": {f"{float(eta):.6g}": None for eta in tail_etas},
+    }
+    mode_count = int(len(probability))
+    if mode_count < 3 or not triads:
+        return telemetry
+
+    profile = build_profile(
+        triads=triads,
+        probability=probability,
+        mode_count=mode_count,
+        zero_eps=zero_eps,
+        shell_levels=shell_levels,
+        profile_id=profile_id,
+    )
+    backend_handle = None
+    try:
+        backend_handle = _make_backend(profile, backend, zero_eps, gpu_checks)
+        a_op = _operator_from_matvec(backend_handle.neg_mv, backend_handle.neg_mm, mode_count)
+        b_op = _shifted_operator_from_matvec(
+            backend_handle.abs_mv,
+            backend_handle.abs_mm,
+            mode_count,
+            max(float(generalized_mass_shift), 0.0),
+        )
+        k = max(1, min(int(block_size), mode_count - 2))
+        rng = np.random.default_rng(abs(hash(profile.profile_id)) % (2**32))
+        x0 = rng.normal(size=(mode_count, k))
+        y = np.ones((mode_count, 1), dtype=np.float64)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            _, vecs, _, _ = lobpcg(
+                a_op,
+                x0,
+                B=b_op,
+                Y=y,
+                tol=float(lobpcg_tol),
+                maxiter=int(lobpcg_maxiter),
+                largest=False,
+                retLambdaHistory=True,
+                retResidualNormsHistory=True,
+                restartControl=20,
+            )
+        vecs = np.asarray(vecs, dtype=np.float64)
+        if vecs.ndim == 1:
+            vecs = vecs[:, np.newaxis]
+        rayleighs: list[float] = []
+        for column in range(vecs.shape[1]):
+            vec = vecs[:, column]
+            av_col = np.asarray(backend_handle.neg_mv(vec), dtype=np.float64)
+            bv_col = np.asarray(backend_handle.abs_mv(vec), dtype=np.float64)
+            denominator_col = float(vec @ bv_col)
+            rayleighs.append(
+                float((vec @ av_col) / denominator_col) if abs(denominator_col) > float(zero_eps) else float("inf")
+            )
+        order = np.argsort(np.asarray(rayleighs, dtype=np.float64))
+        worst_vec = np.asarray(vecs[:, int(order[0])], dtype=np.float64)
+        norm = float(np.linalg.norm(worst_vec))
+        if norm > float(zero_eps):
+            worst_vec = worst_vec / norm
+        masses = np.maximum(worst_vec * worst_vec, 0.0)
+        total_mass = float(np.sum(masses))
+        if total_mass <= float(zero_eps) or not math.isfinite(total_mass):
+            return telemetry
+        masses = masses / total_mass
+        shells = np.asarray(shell_levels, dtype=np.float64)
+        shell_mass: dict[int, float] = {}
+        for shell_value, mass in zip(shells, masses, strict=False):
+            shell = int(shell_value)
+            shell_mass[shell] = shell_mass.get(shell, 0.0) + float(mass)
+        if not shell_mass:
+            return telemetry
+        barycenter = float(sum(shell * mass for shell, mass in shell_mass.items()))
+        variance = float(sum(((shell - barycenter) ** 2) * mass for shell, mass in shell_mass.items()))
+        telemetry["eigen_tail_mass_by_cutoff"] = {
+            str(int(cutoff)): float(sum(mass for shell, mass in shell_mass.items() if shell >= int(cutoff)))
+            for cutoff in tail_cutoffs
+        }
+        telemetry["eigen_shell_barycenter"] = barycenter
+        telemetry["eigen_shell_variance"] = variance
+        telemetry["eigen_shell_max_with_mass_eta"] = {
+            f"{float(eta):.6g}": (
+                int(max(shell for shell, mass in shell_mass.items() if mass >= float(eta)))
+                if any(mass >= float(eta) for mass in shell_mass.values())
+                else None
+            )
+            for eta in tail_etas
+        }
+        return telemetry
+    finally:
+        if backend_handle is not None:
+            backend_handle.close()
+
+
 def _classify_tail(
     *,
     lambda_min: Any,
@@ -194,17 +315,34 @@ def _tail_grid(
     finite_shell_cutoff: int,
 ) -> list[dict[str, Any]]:
     grid: list[dict[str, Any]] = []
+    profile_tail_mass_by_cutoff = metrics.get("high_shell_mass_by_cutoff") or {}
+    eigen_tail_mass_by_cutoff = metrics.get("eigen_tail_mass_by_cutoff") or {}
     for c0 in c0_values:
         for cutoff in tail_cutoffs:
             for eta in tail_etas:
                 for d0 in d0_values:
+                    profile_tail_mass = profile_tail_mass_by_cutoff.get(str(int(cutoff)))
+                    eigen_tail_mass = eigen_tail_mass_by_cutoff.get(str(int(cutoff)))
+                    profile_tail_high = (
+                        float(profile_tail_mass) >= float(eta)
+                        if profile_tail_mass is not None
+                        else False
+                    )
+                    eigen_tail_high = (
+                        bool(float(eigen_tail_mass) >= float(eta))
+                        if eigen_tail_mass is not None
+                        else None
+                    )
                     grid.append(
                         {
                             "c0": float(c0),
                             "tail_cutoff": int(cutoff),
                             "tail_eta": float(eta),
                             "d0": float(d0),
-                            "high_shell_mass_k": float(metrics["high_shell_mass_by_cutoff"][str(int(cutoff))]),
+                            "high_shell_mass_k": float(profile_tail_mass) if profile_tail_mass is not None else None,
+                            "eigen_tail_mass_k": float(eigen_tail_mass) if eigen_tail_mass is not None else None,
+                            "profile_tail_high": bool(profile_tail_high),
+                            "eigen_tail_high": eigen_tail_high,
                             "branch": _classify_tail(
                                 lambda_min=lambda_min,
                                 metrics=metrics,
@@ -226,6 +364,16 @@ def _summarize_grid(grid: list[dict[str, Any]]) -> dict[str, Any]:
     for item in grid:
         branch = str(item.get("branch"))
         counts[branch] = counts.get(branch, 0) + 1
+    profile_tail_high_count = sum(1 for item in grid if item.get("profile_tail_high") is True)
+    profile_tail_high_eigen_tail_high_count = sum(
+        1 for item in grid if item.get("profile_tail_high") is True and item.get("eigen_tail_high") is True
+    )
+    profile_tail_high_eigen_tail_low_count = sum(
+        1 for item in grid if item.get("profile_tail_high") is True and item.get("eigen_tail_high") is False
+    )
+    profile_tail_high_eigen_tail_unavailable_count = sum(
+        1 for item in grid if item.get("profile_tail_high") is True and item.get("eigen_tail_high") is None
+    )
     return {
         "grid_point_count": int(len(grid)),
         "branch_counts": counts,
@@ -233,6 +381,10 @@ def _summarize_grid(grid: list[dict[str, Any]]) -> dict[str, Any]:
         "finite_low_shell_degeneracy_count": int(counts.get("finite-low-shell-degeneracy", 0)),
         "high_dissipation_count": int(counts.get("high-dissipation", 0)),
         "frame_coercive_count": int(counts.get("frame-coercive", 0)),
+        "profile_tail_high_count": int(profile_tail_high_count),
+        "profile_tail_high_eigen_tail_low_count": int(profile_tail_high_eigen_tail_low_count),
+        "profile_tail_high_eigen_tail_high_count": int(profile_tail_high_eigen_tail_high_count),
+        "profile_tail_high_eigen_tail_unavailable_count": int(profile_tail_high_eigen_tail_unavailable_count),
     }
 
 
@@ -242,6 +394,7 @@ def _metrics_for_all_cutoffs(
     zero_eps: float,
     tail_cutoffs: list[int],
     eta_values: list[float],
+    eigen_telemetry: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     base = _profile_metrics(probability, shell_levels, zero_eps, min(tail_cutoffs))
     base["high_shell_mass_by_cutoff"] = {
@@ -251,6 +404,8 @@ def _metrics_for_all_cutoffs(
         f"{float(eta):.6g}": _radial_max_with_mass_eta(shell_levels, probability, float(eta))
         for eta in eta_values
     }
+    if eigen_telemetry is not None:
+        base.update(eigen_telemetry)
     return base
 
 
@@ -382,7 +537,32 @@ def _row(
             dense_oracle_shell_limit=dense_oracle_shell_limit,
             gpu_checks=gpu_checks,
         )
-        metrics = _metrics_for_all_cutoffs(probability, levels, zero_eps, tail_cutoffs, tail_etas)
+        row_warnings = list(solved.get("warnings", []) or [])
+        try:
+            eigen_telemetry = _eigen_shell_telemetry(
+                triads=triads,
+                probability=probability,
+                shell_levels=levels,
+                profile_id=unique_id,
+                backend=backend,
+                zero_eps=zero_eps,
+                tail_cutoffs=tail_cutoffs,
+                tail_etas=tail_etas,
+                lobpcg_tol=lobpcg_tol,
+                lobpcg_maxiter=lobpcg_maxiter,
+                block_size=block_size,
+                generalized_mass_shift=generalized_mass_shift,
+                gpu_checks=gpu_checks,
+            )
+        except Exception as exc:  # noqa: BLE001
+            eigen_telemetry = {
+                "eigen_tail_mass_by_cutoff": {str(int(cutoff)): None for cutoff in tail_cutoffs},
+                "eigen_shell_barycenter": None,
+                "eigen_shell_variance": None,
+                "eigen_shell_max_with_mass_eta": {f"{float(eta):.6g}": None for eta in tail_etas},
+            }
+            row_warnings.append(f"eigen_tail_telemetry_error: {type(exc).__name__}: {exc}")
+        metrics = _metrics_for_all_cutoffs(probability, levels, zero_eps, tail_cutoffs, tail_etas, eigen_telemetry)
         tail_grid = _tail_grid(
             lambda_min=solved.get("lambda_min_iterative"),
             metrics=metrics,
@@ -421,7 +601,7 @@ def _row(
                 "metrics": metrics,
                 "tail_grid_summary": _summarize_grid(tail_grid),
                 "tail_grid": tail_grid,
-                "warnings": solved.get("warnings", []),
+                "warnings": row_warnings,
             }
         )
 
@@ -442,6 +622,12 @@ def _row(
             "parity_ok_count": int(sum(1 for item in evaluated if item.get("parity_ok") is True)),
             "parity_mismatch_count": int(sum(1 for item in evaluated if item.get("parity_ok") is not True)),
             "asymptotic_tail_candidate_count": int(len(asymptotic_candidates)),
+            "profile_tail_high_eigen_tail_low_count": int(
+                sum(int(item["tail_grid_summary"].get("profile_tail_high_eigen_tail_low_count", 0)) for item in evaluated)
+            ),
+            "profile_tail_high_eigen_tail_high_count": int(
+                sum(int(item["tail_grid_summary"].get("profile_tail_high_eigen_tail_high_count", 0)) for item in evaluated)
+            ),
             "best_profile": best,
             "profile_samples": evaluated[: min(max(0, int(profile_sample_limit)), len(evaluated))],
         }
@@ -453,6 +639,8 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
     total_profiles = sum(int(row.get("profile_count", 0)) for row in rows)
     parity_mismatches = sum(int(row.get("parity_mismatch_count", 0)) for row in rows)
     asymptotic_candidates = sum(int(row.get("asymptotic_tail_candidate_count", 0)) for row in rows)
+    profile_tail_high_eigen_tail_low = sum(int(row.get("profile_tail_high_eigen_tail_low_count", 0)) for row in rows)
+    profile_tail_high_eigen_tail_high = sum(int(row.get("profile_tail_high_eigen_tail_high_count", 0)) for row in rows)
     best_profiles = [
         row.get("best_profile")
         for row in rows
@@ -474,6 +662,8 @@ def _aggregate(rows: list[dict[str, Any]], backend: str) -> dict[str, Any]:
         "sampled_profile_count": int(total_profiles),
         "parity_mismatch_count": int(parity_mismatches),
         "asymptotic_tail_candidate_count": int(asymptotic_candidates),
+        "profile_tail_high_eigen_tail_low_count": int(profile_tail_high_eigen_tail_low),
+        "profile_tail_high_eigen_tail_high_count": int(profile_tail_high_eigen_tail_high),
         "best_global_profile": best_global,
         "best_profile_worst_shells": worst_shells,
         "worst_shell_progression_max": max(worst_shells) if worst_shells else None,

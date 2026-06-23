@@ -31,6 +31,7 @@ BRANCHES = {
     "partial",
     "unavailable",
 }
+EIGENMODE_TAIL_PREFIXES = ("eigen_tail_", "eigenmode_tail_", "eigenvector_tail_")
 
 DEFAULT_SOURCE_JSON = Path(
     "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/"
@@ -92,6 +93,87 @@ def _nonnegative_int(value: Any) -> int | None:
     return None
 
 
+def _branch_label(payload: dict[str, Any]) -> str | None:
+    branch = payload.get("branch")
+    if isinstance(branch, str):
+        return branch
+    branch = payload.get("branch_classification_iterative")
+    if isinstance(branch, str):
+        return branch
+    return None
+
+
+def _check_optional_eigenmode_tail_telemetry(
+    payload: dict[str, Any], path: str, errors: list[str], branch: str | None = None
+) -> None:
+    tail_keys = [
+        key
+        for key in payload
+        if key.startswith(EIGENMODE_TAIL_PREFIXES)
+        or key in {
+            "worst_eigenvector_shell_finite",
+            "worst_eigenvector_shell_is_finite",
+        }
+    ]
+    if not tail_keys:
+        return
+
+    for key in tail_keys:
+        value = payload.get(key)
+        if value is None:
+            continue
+        if isinstance(value, dict):
+            for nested_key, nested_value in value.items():
+                if nested_value is None:
+                    continue
+                if "mass" in key or "fraction" in key:
+                    numeric = _finite_or_none(nested_value)
+                    if numeric is None:
+                        errors.append(f"{path}.{key}.{nested_key}: must be finite or null when present")
+                    elif numeric < 0.0:
+                        errors.append(f"{path}.{key}.{nested_key}: must be nonnegative when present")
+                elif "shell" in key and _nonnegative_int(nested_value) is None:
+                    errors.append(f"{path}.{key}.{nested_key}: must be nonnegative int or null when present")
+            continue
+        if key.endswith(("_present", "_absent", "_finite", "_is_finite")):
+            if not isinstance(value, bool):
+                errors.append(f"{path}.{key}: must be bool when present")
+            continue
+        if "mass" in key or "fraction" in key:
+            numeric = _finite_or_none(value)
+            if numeric is None:
+                errors.append(f"{path}.{key}: must be finite when present")
+                continue
+            if numeric < 0.0:
+                errors.append(f"{path}.{key}: must be nonnegative when present")
+            continue
+        if "shell" in key:
+            if _nonnegative_int(value) is None:
+                errors.append(f"{path}.{key}: must be nonnegative int when present")
+            continue
+        if "count" in key:
+            if _nonnegative_int(value) is None:
+                errors.append(f"{path}.{key}: must be nonnegative int when present")
+            continue
+
+    branch = _branch_label(payload) if branch is None else branch
+    if branch != "asymptotic-tail-danger":
+        return
+
+    mass_keys = [key for key in tail_keys if "mass" in key or "fraction" in key]
+    finite_mass_keys = [key for key in mass_keys if _finite_or_none(payload.get(key)) is not None]
+    absent_mass_keys = [key for key in mass_keys if payload.get(key) is None]
+    if not finite_mass_keys:
+        errors.append(f"{path}: asymptotic-tail-danger requires finite eigenmode-tail mass telemetry")
+    for key in tail_keys:
+        if key.endswith("_absent") and payload.get(key) is True:
+            errors.append(f"{path}.{key}: must be false for asymptotic-tail-danger")
+        if key.endswith(("_present", "_finite", "_is_finite")) and payload.get(key) is False:
+            errors.append(f"{path}.{key}: must be true for asymptotic-tail-danger")
+    if absent_mass_keys and len(absent_mass_keys) == len(mass_keys):
+        errors.append(f"{path}: asymptotic-tail-danger cannot be reported with absent eigenmode-tail mass")
+
+
 def _check_tail_grid(profile: dict[str, Any], path: str, errors: list[str]) -> None:
     summary = profile.get("tail_grid_summary")
     grid = profile.get("tail_grid")
@@ -111,6 +193,30 @@ def _check_tail_grid(profile: dict[str, Any], path: str, errors: list[str]) -> N
             errors.append(f"{path}.tail_grid[{index}].tail_cutoff: must be nonnegative int")
         if item.get("branch") not in BRANCHES:
             errors.append(f"{path}.tail_grid[{index}].branch: invalid")
+        _check_optional_eigenmode_tail_telemetry(
+            item,
+            f"{path}.tail_grid[{index}]",
+            errors,
+            branch=str(item.get("branch")) if isinstance(item.get("branch"), str) else None,
+        )
+    if isinstance(summary, dict):
+        branch_counts = summary.get("branch_counts")
+        if isinstance(branch_counts, dict):
+            counted = sum(
+                int(branch_counts.get(branch, 0))
+                for branch in (
+                    "frame-coercive",
+                    "low-radial-band",
+                    "finite-low-shell-degeneracy",
+                    "asymptotic-tail-danger",
+                    "high-dissipation",
+                    "partial",
+                    "unavailable",
+                )
+            )
+            if _nonnegative_int(summary.get("grid_point_count")) is not None and counted != int(summary["grid_point_count"]):
+                errors.append(f"{path}.tail_grid_summary.branch_counts: must sum to grid_point_count")
+        _check_optional_eigenmode_tail_telemetry(summary, f"{path}.tail_grid_summary", errors, branch=_branch_label(profile))
 
 
 def _check_profile(profile: Any, path: str, backend: str, errors: list[str]) -> None:
@@ -140,6 +246,13 @@ def _check_profile(profile: Any, path: str, backend: str, errors: list[str]) -> 
     if not isinstance(profile.get("metrics"), dict):
         errors.append(f"{path}.metrics: must be object")
     _check_tail_grid(profile, path, errors)
+    _check_optional_eigenmode_tail_telemetry(profile, path, errors)
+    _check_optional_eigenmode_tail_telemetry(
+        profile.get("metrics") if isinstance(profile.get("metrics"), dict) else {},
+        f"{path}.metrics",
+        errors,
+        branch=_branch_label(profile),
+    )
     if backend == "vulkan-matvec":
         if profile.get("gpu_matvec_parity_ok") is not True:
             errors.append(f"{path}.gpu_matvec_parity_ok: must be true for vulkan backend")
@@ -198,6 +311,7 @@ def main() -> int:
         ):
             if row.get(key) is not None and _nonnegative_int(row.get(key)) is None:
                 errors.append(f"rows[{index}].{key}: must be nonnegative int")
+        _check_optional_eigenmode_tail_telemetry(row, f"rows[{index}]", errors)
         _check_profile(row.get("best_profile"), f"rows[{index}].best_profile", str(backend), errors)
         samples = row.get("profile_samples")
         if samples is not None:
