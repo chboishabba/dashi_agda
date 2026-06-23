@@ -1,0 +1,41 @@
+#version 450
+layout(local_size_x = 256) in;
+
+/*
+TRIAD_LAPLACIAN_MATVEC:
+  y[i] = sum_{edges e incident on i} w[e] * (x[i] - x[j])
+
+This is intentionally one output vertex per invocation.  It avoids float
+atomics, keeps accumulation order deterministic, and consumes incidence buffers
+directly instead of materializing a dense Laplacian.
+*/
+
+layout(std430, set=0, binding=0) readonly buffer LEFT { uint edge_left[]; };
+layout(std430, set=0, binding=1) readonly buffer RIGHT { uint edge_right[]; };
+layout(std430, set=0, binding=2) readonly buffer WEIGHT { float weights[]; };
+layout(std430, set=0, binding=3) readonly buffer X { float x[]; };
+layout(std430, set=0, binding=4) writeonly buffer Y { float y[]; };
+
+layout(push_constant) uniform PC {
+  uint mode_count;
+  uint edge_count;
+} pc;
+
+void main() {
+  uint i = gl_GlobalInvocationID.x;
+  if (i >= pc.mode_count) return;
+
+  float acc = 0.0;
+  float xi = x[i];
+  for (uint e = 0u; e < pc.edge_count; e++) {
+    uint l = edge_left[e];
+    uint r = edge_right[e];
+    float w = weights[e];
+    if (l == i) {
+      acc += w * (xi - x[r]);
+    } else if (r == i) {
+      acc += w * (xi - x[l]);
+    }
+  }
+  y[i] = acc;
+}

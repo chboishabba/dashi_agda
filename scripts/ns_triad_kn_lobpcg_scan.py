@@ -6,9 +6,9 @@ This lane replaces full K_N(A) materialization with the generalized problem
     L_neg(A) x = lambda L_abs(A) x.
 
 For N=2,3 it still computes a dense CPU oracle as a parity receipt.  The
-``vulkan-matvec`` backend is currently a fail-closed placeholder: GPU authority
-is explicitly false until a dashiCORE/dashiCFD incidence kernel is wired and
-passes parity.
+``vulkan-matvec`` backend uses an incidence-aware Vulkan matvec, but GPU
+authority is explicitly false until dense CPU, CPU matrix-free, and GPU matvec
+receipts all agree.
 """
 
 from __future__ import annotations
@@ -56,6 +56,19 @@ from ns_triad_kn_matrix_free_operator import (  # type: ignore
     matvec_abs,
     matvec_neg,
 )
+
+try:
+    from gpu_vulkan_triad_laplacian import (  # type: ignore
+        VulkanTriadLaplacianExecutor,
+        create_vulkan_triad_laplacian_executor,
+        has_vulkan_triad_laplacian,
+    )
+except Exception:  # pragma: no cover - optional Vulkan runtime
+    VulkanTriadLaplacianExecutor = None  # type: ignore
+    create_vulkan_triad_laplacian_executor = None  # type: ignore
+
+    def has_vulkan_triad_laplacian() -> bool:  # type: ignore
+        return False
 
 
 SCRIPT_NAME = "scripts/ns_triad_kn_lobpcg_scan.py"
@@ -133,14 +146,16 @@ def _matvec_dense_matrix(matvec: Any, n: int) -> np.ndarray:
     return 0.5 * (matrix + matrix.T)
 
 
-def _matrix_free_generalized(profile: MatrixFreeKNProfile, zero_eps: float) -> dict[str, Any]:
-    """CPU matrix-free parity solve; dense only materializes L_abs/L_neg, not K_N."""
-
-    n = int(profile.mode_count)
-    l_abs = _matvec_dense_matrix(lambda vec: matvec_abs(vec, profile), n)
-    l_neg = _matvec_dense_matrix(lambda vec: matvec_neg(vec, profile), n)
+def _generalized_from_laplacians(
+    l_abs: np.ndarray,
+    l_neg: np.ndarray,
+    profile: MatrixFreeKNProfile,
+    zero_eps: float,
+    positive_tol: float | None = None,
+) -> dict[str, Any]:
     evals, basis = np.linalg.eigh(l_abs)
-    mask = np.asarray(evals > max(float(zero_eps), 1.0e-10), dtype=bool)
+    tol = max(float(zero_eps), 1.0e-10 if positive_tol is None else float(positive_tol))
+    mask = np.asarray(evals > tol, dtype=bool)
     if not np.any(mask):
         return {
             "status": PARTIAL_STATUS,
@@ -186,13 +201,99 @@ def _matrix_free_generalized(profile: MatrixFreeKNProfile, zero_eps: float) -> d
     }
 
 
+def _matrix_free_generalized(profile: MatrixFreeKNProfile, zero_eps: float) -> dict[str, Any]:
+    """CPU matrix-free parity solve; dense only materializes L_abs/L_neg, not K_N."""
+
+    n = int(profile.mode_count)
+    l_abs = _matvec_dense_matrix(lambda vec: matvec_abs(vec, profile), n)
+    l_neg = _matvec_dense_matrix(lambda vec: matvec_neg(vec, profile), n)
+    return _generalized_from_laplacians(l_abs, l_neg, profile, zero_eps)
+
+
 def _vulkan_generalized(profile: MatrixFreeKNProfile, zero_eps: float) -> dict[str, Any]:
-    cpu = _matrix_free_generalized(profile, zero_eps)
-    return {
-        **cpu,
-        "status": PARTIAL_STATUS if cpu["status"] == OK_STATUS else cpu["status"],
-        "warnings": list(cpu.get("warnings", [])) + ["vulkan_matvec_backend_not_wired_cpu_fallback_non_authoritative"],
-    }
+    if (
+        VulkanTriadLaplacianExecutor is None
+        or create_vulkan_triad_laplacian_executor is None
+        or not has_vulkan_triad_laplacian()
+    ):
+        return {
+            "status": PARTIAL_STATUS,
+            "lambda_min": None,
+            "lambda_max": None,
+            "l_abs_positive_rank": 0,
+            "worst_eigenvector_shell": None,
+            "worst_eigenvector_shell_mass_fraction": None,
+            "gpu_matvec_max_abs_error_abs": None,
+            "gpu_matvec_max_abs_error_neg": None,
+            "gpu_matvec_parity_ok": False,
+            "vulkan_icd": None,
+            "icd_probe_errors": [],
+            "warnings": ["vulkan_triad_laplacian_unavailable"],
+        }
+
+    n = int(profile.mode_count)
+    try:
+        executor, probe_info = create_vulkan_triad_laplacian_executor(profile)
+    except Exception as exc:  # noqa: BLE001
+        return {
+            "status": PARTIAL_STATUS,
+            "lambda_min": None,
+            "lambda_max": None,
+            "l_abs_positive_rank": 0,
+            "worst_eigenvector_shell": None,
+            "worst_eigenvector_shell_mass_fraction": None,
+            "gpu_matvec_max_abs_error_abs": None,
+            "gpu_matvec_max_abs_error_neg": None,
+            "gpu_matvec_parity_ok": False,
+            "vulkan_icd": None,
+            "icd_probe_errors": [],
+            "warnings": [f"vulkan_triad_laplacian_init_failed: {type(exc).__name__}: {exc}"],
+        }
+    try:
+        l_abs_gpu = _matvec_dense_matrix(executor.matvec_abs, n)
+        l_neg_gpu = _matvec_dense_matrix(executor.matvec_neg, n)
+    finally:
+        executor.close()
+    l_abs_cpu = _matvec_dense_matrix(lambda vec: matvec_abs(vec, profile), n)
+    l_neg_cpu = _matvec_dense_matrix(lambda vec: matvec_neg(vec, profile), n)
+    abs_error = float(np.max(np.abs(l_abs_gpu - l_abs_cpu))) if n else 0.0
+    neg_error = float(np.max(np.abs(l_neg_gpu - l_neg_cpu))) if n else 0.0
+    result = _generalized_from_laplacians(l_abs_gpu, l_neg_gpu, profile, zero_eps, positive_tol=1.0e-6)
+    result["gpu_matvec_max_abs_error_abs"] = abs_error
+    result["gpu_matvec_max_abs_error_neg"] = neg_error
+    result["gpu_matvec_parity_ok"] = bool(abs_error <= 5.0e-5 and neg_error <= 5.0e-5)
+    result["vulkan_icd"] = probe_info.get("vulkan_icd")
+    result["icd_probe_errors"] = probe_info.get("icd_probe_errors", [])
+    if not result["gpu_matvec_parity_ok"]:
+        result["warnings"] = list(result.get("warnings", [])) + ["vulkan_matvec_cpu_parity_mismatch"]
+    return result
+
+
+def _backend_parity_ok(
+    backend: str,
+    dense: dict[str, Any],
+    matrix_free: dict[str, Any],
+    relative_error: float | None,
+    absolute_error: float | None,
+    branch_agrees: bool,
+    shell_agrees: bool,
+    parity_tol: float,
+) -> bool:
+    eigen_agrees = bool(
+        relative_error is not None
+        and absolute_error is not None
+        and (relative_error <= float(parity_tol) or absolute_error <= float(parity_tol))
+    )
+    common = bool(
+        dense["status"] == OK_STATUS
+        and matrix_free["status"] == OK_STATUS
+        and eigen_agrees
+        and branch_agrees
+        and shell_agrees
+    )
+    if backend == "vulkan-matvec":
+        return bool(common and matrix_free.get("gpu_matvec_parity_ok") is True)
+    return common
 
 
 def _evaluate(
@@ -235,8 +336,10 @@ def _evaluate(
     dense_lambda = dense.get("lambda_min")
     mf_lambda = matrix_free.get("lambda_min")
     relative_error = None
+    absolute_error = None
     if isinstance(dense_lambda, (int, float)) and isinstance(mf_lambda, (int, float)):
-        relative_error = float(abs(float(mf_lambda) - float(dense_lambda)) / max(abs(float(dense_lambda)), 1.0e-12))
+        absolute_error = float(abs(float(mf_lambda) - float(dense_lambda)))
+        relative_error = float(absolute_error / max(abs(float(dense_lambda)), 1.0e-12))
 
     metrics = _profile_metrics(probability, shell_levels, zero_eps, high_shell_cutoff)
     dense_branch_input = {**metrics, "lambda_min_kn_a": dense_lambda, "status": dense["status"]}
@@ -245,14 +348,15 @@ def _evaluate(
     mf_branch = _branch(mf_branch_input, c0=0.25, r0=r0, high_shell_eta=high_shell_eta, d0=d0)
     shell_agrees = dense.get("worst_eigenvector_shell") == matrix_free.get("worst_eigenvector_shell")
     branch_agrees = dense_branch == mf_branch
-    parity_ok = bool(
-        backend != "vulkan-matvec"
-        and dense["status"] == OK_STATUS
-        and matrix_free["status"] == OK_STATUS
-        and relative_error is not None
-        and relative_error <= float(parity_tol)
-        and branch_agrees
-        and shell_agrees
+    parity_ok = _backend_parity_ok(
+        backend,
+        dense,
+        matrix_free,
+        relative_error,
+        absolute_error,
+        branch_agrees,
+        shell_agrees,
+        parity_tol,
     )
     return {
         "profile_id": profile_id,
@@ -266,6 +370,7 @@ def _evaluate(
         "lambda_min_dense_cpu": dense_lambda,
         "lambda_min_matrix_free": mf_lambda,
         "lambda_max_matrix_free": matrix_free.get("lambda_max"),
+        "absolute_error_vs_dense": absolute_error,
         "relative_error_vs_dense": relative_error,
         "branch_classification_dense_cpu": dense_branch,
         "branch_classification_matrix_free": mf_branch,
@@ -275,6 +380,11 @@ def _evaluate(
         "worst_eigenvector_shell_mass_dense_cpu": dense.get("worst_eigenvector_shell_mass_fraction"),
         "worst_eigenvector_shell_mass_matrix_free": matrix_free.get("worst_eigenvector_shell_mass_fraction"),
         "worst_eigenvector_shell_mass_agrees": shell_agrees,
+        "gpu_matvec_max_abs_error_abs": matrix_free.get("gpu_matvec_max_abs_error_abs"),
+        "gpu_matvec_max_abs_error_neg": matrix_free.get("gpu_matvec_max_abs_error_neg"),
+        "gpu_matvec_parity_ok": matrix_free.get("gpu_matvec_parity_ok"),
+        "vulkan_icd": matrix_free.get("vulkan_icd"),
+        "icd_probe_errors": matrix_free.get("icd_probe_errors"),
         "parity_ok": parity_ok,
         "warnings": list(dense.get("warnings", [])) + list(matrix_free.get("warnings", [])),
         "metrics": metrics,
@@ -404,7 +514,7 @@ def main() -> int:
     seeds = [int(seed) for seed in (args.seeds if args.seeds is not None else list(DEFAULT_SEEDS))]
     warnings: list[str] = []
     if args.kn_backend == "vulkan-matvec":
-        warnings.append("vulkan_matvec_backend_placeholder_cpu_fallback_non_authoritative")
+        warnings.append("vulkan_matvec_backend_non_authoritative_gpu_kn_authority_false")
     bundle = _load_raw_bundle(Path(args.raw_archive), warnings)
     snapshots = _frame_indices(bundle.frame_count, frame=args.frame, frame_limit=args.frame_limit)
     rows = [
