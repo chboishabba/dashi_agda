@@ -1,0 +1,180 @@
+{
+  "analysis_read": "Finite-shell Schur-test proof readout: the exact mixed-tail positive cross block has row/output absolute-sum supremum in 0.0114691..0.0116587, column/input absolute-sum supremum in 9.17093e-05..0.000340859, and therefore Schur bound ||L_FT^+||_op <= sqrt(row_sup * col_sup) in 0.00103187..0.00197721.  The sampled normalization is consistent with N * ||L_FT^+||_op staying in 0.011826..0.0127705 while N^2 * column_sum_sup stays in 0.0121631..0.0139883.  This proves the exact finite-shell inequality on the sampled rows only; uniform/profile-independent theorem promotion remains open.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "bkm_exclusion_proved": false,
+  "candidate_only": true,
+  "canonical_schur_test_statement": "||L_FT^+||_op^2 <= (sup_k sum_p |L_FT^+(k,p)|) * (sup_p sum_k |L_FT^+(k,p)|)",
+  "clay_promoted": false,
+  "column_sum_sup_stats": {
+    "count": 4,
+    "max": 0.00034085935063711564,
+    "mean": 0.00019062510080165493,
+    "min": 9.170933372028357e-05,
+    "relative_range": 1.3070157910425038,
+    "sample_stdev": 0.00010790386001819414
+  },
+  "contract": "ns_triad_kn_acl_schur_test_proof",
+  "control_card": {
+    "C": "scripts/ns_triad_kn_acl_schur_test_proof.py",
+    "F": "The remaining gap is uniform/profile-independent promotion of the sampled N^-1 block scale.",
+    "G": "Keep the result fail-closed: the finite-shell proof does not imply a uniform asymptotic theorem.",
+    "L": "Explicit positive-sector cross block -> exact row/column absolute sums -> Schur-test inequality -> sampled N^-1 operator-norm scale.",
+    "O": "Prove the sampled mixed-tail Schur-test inequality for the exact finite-shell L_FT^+ cross block.",
+    "P": "FAIL_CLOSED_NS_TRIAD_KN_ACL_SCHUR_TEST_PROOF",
+    "R": "Rebuild the forced-tail profiles at N=6,8,10,12, compute the exact positive-sector finite-to-tail block, and certify the row/column kernel-sum bound without theorem promotion.",
+    "S": "Finite-shell candidate-only proof artifact; no theorem, full-NS, BKM, or Clay promotion."
+  },
+  "fail_closed": true,
+  "fits": {
+    "column_sum_sup_vs_N": {
+      "count": 4,
+      "exp_intercept": 0.009152589084452597,
+      "log_log_slope": -1.8419624572467745
+    },
+    "schur_bound_vs_N": {
+      "count": 4,
+      "exp_intercept": 0.010041020799012793,
+      "log_log_slope": -0.9098652969034343
+    }
+  },
+  "full_ns_promoted": false,
+  "n_squared_times_column_sum_sup_stats": {
+    "count": 4,
+    "max": 0.01398832271517856,
+    "mean": 0.012907126715617848,
+    "min": 0.012163103468635831,
+    "relative_range": 0.14141173994473777,
+    "sample_stdev": 0.000859593815943388
+  },
+  "n_times_schur_bound_stats": {
+    "count": 4,
+    "max": 0.012770482924846045,
+    "mean": 0.012210549300046756,
+    "min": 0.011826038240410694,
+    "relative_range": 0.07734661735747915,
+    "sample_stdev": 0.0004514896716907435
+  },
+  "proof_scope": "finite_shell_only",
+  "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_ACL_SCHUR_TEST_PROOF",
+  "row_count": 4,
+  "row_sum_sup_stats": {
+    "count": 4,
+    "max": 0.011658669695747196,
+    "mean": 0.011559044614785905,
+    "min": 0.011469115826422354,
+    "relative_range": 0.01639874882759525,
+    "sample_stdev": 9.000944036304578e-05
+  },
+  "rows": [
+    {
+      "D": 8.62227520435967,
+      "D_q_gap": 0.004557249030978871,
+      "K": 5,
+      "N": 6,
+      "N2_q_gap": 0.019027572331753617,
+      "N_squared_times_column_sum_sup": 0.012270936622936162,
+      "N_times_schur_bound": 0.011863253913962342,
+      "column_sum_sup": 0.00034085935063711564,
+      "core_mode_count": 728,
+      "cross_edge_count": 38868,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.23831255403534013,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_20260624/shell6_K5_eta250.json",
+      "max_cross_entry_abs": 9.64132338831123e-06,
+      "q_gap": 0.0005285436758820449,
+      "row_sum_sup": 0.011469115826422354,
+      "schur_bound": 0.0019772089856603904,
+      "schur_bound_squared": 3.90935537297619e-06,
+      "tail_mode_count": 1468
+    },
+    {
+      "D": 15.123527245949925,
+      "D_q_gap": 0.004095172011266396,
+      "K": 7,
+      "N": 8,
+      "N2_q_gap": 0.01733001861660528,
+      "N_squared_times_column_sum_sup": 0.012163103468635831,
+      "N_times_schur_bound": 0.011826038240410694,
+      "column_sum_sup": 0.00019004849169743486,
+      "core_mode_count": 2196,
+      "cross_edge_count": 71208,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.23468265308453265,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_20260624/shell8_K7_eta250.json",
+      "max_cross_entry_abs": 5.211142452904807e-06,
+      "q_gap": 0.0002707815408844575,
+      "row_sum_sup": 0.011498313799951723,
+      "schur_bound": 0.0014782547800513367,
+      "schur_bound_squared": 2.1852371947446257e-06,
+      "tail_mode_count": 2716
+    },
+    {
+      "D": 23.624080036798535,
+      "D_q_gap": 0.0041093953784676895,
+      "K": 9,
+      "N": 10,
+      "N2_q_gap": 0.01739494351554264,
+      "N_squared_times_column_sum_sup": 0.01398832271517856,
+      "N_times_schur_bound": 0.012770482924846045,
+      "column_sum_sup": 0.0001398832271517856,
+      "core_mode_count": 4912,
+      "cross_edge_count": 114030,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.2372186220049377,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_20260624/shell10_K9_eta250.json",
+      "max_cross_entry_abs": 3.2551662652048063e-06,
+      "q_gap": 0.00017394943515542638,
+      "row_sum_sup": 0.011658669695747196,
+      "schur_bound": 0.0012770482924846045,
+      "schur_bound_squared": 1.6308523413378441e-06,
+      "tail_mode_count": 4348
+    },
+    {
+      "D": 34.124371464487744,
+      "D_q_gap": 0.0038749044553088806,
+      "K": 11,
+      "N": 12,
+      "N2_q_gap": 0.016351546347019436,
+      "N_squared_times_column_sum_sup": 0.013206144055720834,
+      "N_times_schur_bound": 0.012382422120967941,
+      "column_sum_sup": 9.170933372028357e-05,
+      "core_mode_count": 9260,
+      "cross_edge_count": 164598,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.23398605177746845,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_shell12_20260624/shell12_K11_eta250.json",
+      "max_cross_entry_abs": 2.2239884700022058e-06,
+      "q_gap": 0.00011355240518763496,
+      "row_sum_sup": 0.01161007913702235,
+      "schur_bound": 0.0010318685100806618,
+      "schur_bound_squared": 1.0647526220960847e-06,
+      "tail_mode_count": 6364
+    }
+  ],
+  "scaling_summary": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_fit_20260624/summary.json",
+  "schema_version": "1.0.0",
+  "schur_bound_stats": {
+    "count": 4,
+    "max": 0.0019772089856603904,
+    "mean": 0.0014410951420692484,
+    "min": 0.0010318685100806618,
+    "relative_range": 0.6559875527873388,
+    "sample_stdev": 0.00040132144106372564
+  },
+  "script_name": "scripts/ns_triad_kn_acl_schur_test_proof.py",
+  "status": "ok",
+  "terminal_promoted": false,
+  "theorem_promoted": false,
+  "warnings": [
+    "velocity_snapshots trailing channel layout detected"
+  ]
+}

@@ -67,11 +67,23 @@ Audit checklist:
    - Square the `N^-1` block bound into the `N^-2` Schur residue scale.
    - State exactly which profile assumptions are needed for the transfer.
 
+Addendum, 2026-06-24:
+
+- `scripts/ns_triad_kn_acl_schur_test_proof.py` now proves the exact finite-shell
+  Schur-test inequality for the sampled `N=6,8,10,12` mixed-tail rows by
+  reconstructing the positive-sector cross block `L_FT^+` and computing the
+  exact row/column absolute sums.
+- On those sampled rows the row/output sum stays on an `O(1)` scale, the
+  column/input sum stays on an `O(N^-2)` scale, and the resulting Schur bound
+  `sqrt(row_sup * col_sup)` stays on an `O(N^-1)` scale.
+- This is still finite-shell and candidate-only.  It does not by itself
+  promote a uniform/profile-independent theorem.
+
 Open gaps that remain after the audit:
 
 - the exact `L_FT^+` normalization;
 - the positive/absolute-sector relation to the ACL factor;
-- the operator-norm lifting step;
+- the uniform/profile-independent operator-norm lifting step;
 - the residue-to-gap normalization step;
 - the profile-scope question.
 
@@ -79,5 +91,5 @@ Conclusion:
 
 The route is still candidate-only and fail-closed. The next theorem-shaped
 object, if the audit succeeds, is the `N^-1` operator norm bound; the current
-Agda receipt now records the explicit Schur-test kernel-sum bound socket
-without promoting the theorem.
+Agda receipt now records the explicit Schur-test kernel-sum witness and the
+finite-shell proof artifact without promoting the theorem.

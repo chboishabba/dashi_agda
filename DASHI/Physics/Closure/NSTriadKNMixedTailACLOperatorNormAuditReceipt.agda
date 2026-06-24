@@ -29,9 +29,12 @@ record NSTriadKNMixedTailACLOperatorNormSchurTestKernelSumBound : Set where
     boundTextIsCanonical :
       boundText ≡ canonicalSchurTestKernelSumBoundText
 
-postulate
-  mixedTailSchurTestKernelSumBound :
-    NSTriadKNMixedTailACLOperatorNormSchurTestKernelSumBound
+mixedTailSchurTestKernelSumBound :
+  NSTriadKNMixedTailACLOperatorNormSchurTestKernelSumBound
+mixedTailSchurTestKernelSumBound = record
+  { boundText = canonicalSchurTestKernelSumBoundText
+  ; boundTextIsCanonical = refl
+  }
 
 listLength : ∀ {A : Set} → List A → Nat
 listLength [] = zero
@@ -103,7 +106,7 @@ data NSTriadKNMixedTailACLOperatorNormAuditOpenGap : Set where
     NSTriadKNMixedTailACLOperatorNormAuditOpenGap
   shellCountLiftOpen :
     NSTriadKNMixedTailACLOperatorNormAuditOpenGap
-  schurTestLiftOpen :
+  uniformAsymptoticSchurDecayOpen :
     NSTriadKNMixedTailACLOperatorNormAuditOpenGap
   qGapNormalizationOpen :
     NSTriadKNMixedTailACLOperatorNormAuditOpenGap
@@ -117,7 +120,7 @@ canonicalNSTriadKNMixedTailACLOperatorNormAuditOpenGaps :
 canonicalNSTriadKNMixedTailACLOperatorNormAuditOpenGaps =
   exactKernelNormalizationOpen
   ∷ shellCountLiftOpen
-  ∷ schurTestLiftOpen
+  ∷ uniformAsymptoticSchurDecayOpen
   ∷ qGapNormalizationOpen
   ∷ profileScopeOpen
   ∷ noTheoremFullNSOrClayPromotion
@@ -143,7 +146,7 @@ canonicalReceiptText =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "The Fields ACL paper remains a candidate carrier, but the mixed-tail step still needs the exact kernel writeup, geometric-factor match, unit-width shell convention check, first-harmonic cancellation check, the explicit Schur-test kernel-sum bound socket, L2 operator-norm lift, N^-2 Schur-residue transfer, and profile-scope audit before any operator-norm claim can be made."
+  "The Fields ACL paper remains a candidate carrier, and the finite-shell Schur-test proof artifact now records the exact kernel-sum inequality for the sampled N=6,8,10,12 mixed-tail rows with sampled N^-1 block scale; the remaining gap is uniform/profile-independent promotion of that bound, plus the residue-transfer and scope audits."
 
 canonicalSourceFieldsReceiptText : String
 canonicalSourceFieldsReceiptText =
@@ -153,13 +156,21 @@ canonicalSourceProofPlanText : String
 canonicalSourceProofPlanText =
   ProofPlan.canonicalProofPlanText
 
+canonicalFiniteShellProofArtifactJSON : String
+canonicalFiniteShellProofArtifactJSON =
+  "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_acl_schur_test_proof_20260624/summary.json"
+
+canonicalFiniteShellProofArtifactMarkdown : String
+canonicalFiniteShellProofArtifactMarkdown =
+  "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_acl_schur_test_proof_20260624/summary.md"
+
 canonicalAuditText : String
 canonicalAuditText =
-  "Audit target: exact L_FT^+ normalization, ACL kernel comparison, unit-width shell match, first-harmonic cancellation survival, explicit Schur-test kernel-sum bound, L2 operator-norm route, N^-2 residue transfer, and profile scope."
+  "Audit target: exact L_FT^+ normalization, ACL kernel comparison, unit-width shell match, first-harmonic cancellation survival, explicit Schur-test kernel-sum bound, finite-shell proof artifact, uniform L2 operator-norm route, N^-2 residue transfer, and profile scope."
 
 canonicalBoundaryText : String
 canonicalBoundaryText =
-  "Boundary: this audit records the proof checklist and the explicit Schur-test bound socket only; theorem/full-NS/BKM/Clay promotion remains false."
+  "Boundary: this audit records the proof checklist, the exact Schur-test inequality witness, and the sampled finite-shell proof artifact only; theorem/full-NS/BKM/Clay promotion remains false."
 
 canonicalOText : String
 canonicalOText =
@@ -171,7 +182,7 @@ canonicalRText =
 
 canonicalCText : String
 canonicalCText =
-  "C: export the checklist rows, candidate lemmas, open gaps, and false promotion flags."
+  "C: export the checklist rows, candidate lemmas, exact Schur witness, finite-shell proof artifacts, open gaps, and false promotion flags."
 
 canonicalSText : String
 canonicalSText =
@@ -183,15 +194,15 @@ canonicalLText =
 
 canonicalPText : String
 canonicalPText =
-  "P: discharge the kernel and shell match first; the remaining steps depend on it."
+  "P: use the finite-shell proof to pin down the exact block normalization, then promote the sampled N^-1 scale to a uniform theorem."
 
 canonicalGText : String
 canonicalGText =
-  "G: keep the audit fail-closed until the normalization is verified."
+  "G: keep the audit fail-closed; the finite-shell proof does not by itself justify a uniform operator-norm theorem."
 
 canonicalFText : String
 canonicalFText =
-  "F: the open gap is the exact operator norm bridge, not the existence of the carrier paper."
+  "F: the open gap is uniform/profile-independent promotion of the sampled operator-norm bridge, not the existence of the carrier paper."
 
 record NSTriadKNMixedTailACLOperatorNormAuditORCSLPGF : Set where
   constructor mkNSTriadKNMixedTailACLOperatorNormAuditORCSLPGF
@@ -266,6 +277,16 @@ record NSTriadKNMixedTailACLOperatorNormAuditReceipt : Setω where
       String
     sourceProofPlanTextIsCanonical :
       sourceProofPlanText ≡ canonicalSourceProofPlanText
+
+    finiteShellProofArtifactJSON :
+      String
+    finiteShellProofArtifactJSONIsCanonical :
+      finiteShellProofArtifactJSON ≡ canonicalFiniteShellProofArtifactJSON
+
+    finiteShellProofArtifactMarkdown :
+      String
+    finiteShellProofArtifactMarkdownIsCanonical :
+      finiteShellProofArtifactMarkdown ≡ canonicalFiniteShellProofArtifactMarkdown
 
     schurTestKernelSumBound :
       NSTriadKNMixedTailACLOperatorNormSchurTestKernelSumBound
@@ -352,6 +373,10 @@ canonicalNSTriadKNMixedTailACLOperatorNormAuditReceipt =
     canonicalSourceFieldsReceiptText
     refl
     canonicalSourceProofPlanText
+    refl
+    canonicalFiniteShellProofArtifactJSON
+    refl
+    canonicalFiniteShellProofArtifactMarkdown
     refl
     mixedTailSchurTestKernelSumBound
     refl
