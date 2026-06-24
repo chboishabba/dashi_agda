@@ -1,0 +1,59 @@
+{
+  "bridge_readout": [
+    "Fields ACL -> SchurResidueScale carrier candidate only",
+    "Shahmurov reduction -> endpoint-reduction carrier candidate only"
+  ],
+  "candidate_only": true,
+  "clay_promotion": false,
+  "full_ns_promotion": false,
+  "papers": [
+    {
+      "candidate_only": true,
+      "clay_promotion": false,
+      "full_ns_promotion": false,
+      "keywords_found": {
+        "Angular Cancellation Lemma": true,
+        "G(k,p)": false,
+        "Theorem 4.27": true,
+        "resonant set": true,
+        "unit-width shells": true
+      },
+      "name": "Fields ACL",
+      "page_count": 84,
+      "pdf_path": "/home/c/Downloads/D663F306-4179-11F1-A876-C7C17E70DEF5.pdf",
+      "snippets": {
+        "Angular Cancellation Lemma": "establish global regularity for the three-dimensional incompressible Navier\u2013Stokes equations on the periodic domain T3 for arbitrary smooth initial data. The proof introduces three new structural mechanisms. First, the Angular Cancellation Lemma (ACL, Theorem 4.27) provides a sharp bound on the local cascade interaction within each Littlewood\u2013 Paley shell, establishing that azimuthal oscillation of the Leray-projected coupling kernel produces deterministic geom",
+        "G(k,p)": "",
+        "Theorem 4.27": "the three-dimensional incompressible Navier\u2013Stokes equations on the periodic domain T3 for arbitrary smooth initial data. The proof introduces three new structural mechanisms. First, the Angular Cancellation Lemma (ACL, Theorem 4.27) provides a sharp bound on the local cascade interaction within each Littlewood\u2013 Paley shell, establishing that azimuthal oscillation of the Leray-projected coupling kernel produces deterministic geometric cancellation.",
+        "resonant set": ".5 The Angular Cancellation Lemma Remark 4.18 (Central geometric mechanism). The results of this subsection constitute the primary geometric contribution of this paper. The geometric factor decomposition (Lemma 4.20), resonant set geometry (Lemma 4.22), amplitude-geometry decoupling (Lemma 4.24), and Theorem 4.27 (the assembled ACL bound) together establish a new geometric mechanism in the theory of incompressible fluid dynamics, formalised and m",
+        "unit-width shells": "emark 2.4 (Lattice Geometry and Shell Scaling). The spectrum is the discrete lattice Z3 . While the Littlewood\u2013Paley decomposition (Definition 2.3) uses dyadic frequency blocks, the closure argument in Section 4 employs unit-width shells \ud835\udc46\ud835\udc57 = {\ud835\udc58 \u2208 Z3 : \ud835\udc57 \u2264 |\ud835\udc58| < \ud835\udc57 + 1}, for which #\ud835\udc46\ud835\udc57 = \ud835\udc42(\ud835\udc57 2 ) (spherical surface area, thickness 1). This distinction is essential: for dyadic shells of thickness \u223c 2\ud835\udc57 , the lattice count #\ud835\udc46\ud835\udc57 \u223c 23\ud835\udc57 is volumetric, which would"
+      },
+      "theorem_promotion": false
+    },
+    {
+      "candidate_only": true,
+      "clay_promotion": false,
+      "full_ns_promotion": false,
+      "keywords_found": {
+        "Corollary 2.3": true,
+        "Theorem 2.2": true,
+        "axisymmetric-with-swirl": true,
+        "companion axisymmetric-with-swirl endpoint theorem": false,
+        "reduction theorem": true
+      },
+      "name": "Shahmurov reduction",
+      "page_count": 68,
+      "pdf_path": "/home/c/Downloads/2606.07875v1.pdf",
+      "snippets": {
+        "Corollary 2.3": "uction hulls generate a named output or a strict active descendant, and closed positive-production hulls are ruled out by the kinetic-energy Liouville theorem. The remaining terminal endpoint is axisymmetric with swirl. Corollary 2.3 (Reduction of global regularity to the axisymmetric-with-swirl endpoint). If smooth finite-energy axisymmetric Navier\u2013Stokes solutions with arbitrary swirl are globally regular, then smooth finite-energy three-dimension",
+        "Theorem 2.2": "a field-level equivariance statement by using a quantitative axis-equivariance defect; Appendix K and Appendix L record the absolute estimates behind the flux-hull routing. The reader may first follow the proof through Theorem 2.2, treating these estimates as lemmas, and then return to the appendices for the line-by-line inequalities. Relation to the literature The proof belongs to the classical regularity tradition initiated by Leray\u2019s construc",
+        "axisymmetric-with-swirl": "is a reduction theorem: any hypothetical first singularity of a general three-dimensional solution generates, after scale normalization, threshold selection, and endpoint extraction, a terminal singular endpoint in the axisymmetric-with-swirl class. Thus a proof of the companion axisymmetricwith-swirl endpoint theorem closes the corresponding full three-dimensional finite-energy regularity statement. The proof is organized around the scalar vorticity-amplitu",
+        "companion axisymmetric-with-swirl endpoint theorem": "",
+        "reduction theorem": "e data; vorticity; vortex stretching; flux-closed active hulls; Nash inequality. MSC 2020. 35Q30, 76D05, 35B65, 35B44, 42B37. 1 Contents 1 Introduction: the reduction problem 4 2 Equations and the singular-endpoint reduction theorem 6 3 Packets, threshold bands, and outputs 7 4 The amplitude identity 9 5 Zero production and Nash\u2013Liouville 10 6 Positive production and active rebase 11 7 Flux-closed active hulls 12 7.1 Solenoidal hull opera"
+      },
+      "theorem_promotion": false
+    }
+  ],
+  "status": "ok",
+  "theorem_promotion": false
+}

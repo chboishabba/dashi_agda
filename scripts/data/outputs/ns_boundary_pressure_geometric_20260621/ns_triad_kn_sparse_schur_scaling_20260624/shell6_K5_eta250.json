@@ -1,0 +1,516 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "candidate_only": true,
+  "clay_promoted": false,
+  "contract": "ns_triad_kn_shell6_mixed_tail_decomposition",
+  "control_card": {
+    "C": "scripts/ns_triad_kn_shell6_mixed_tail_decomposition.py",
+    "F": "This does not prove coherence orthogonality, Schur repair, or residence-time exclusion.",
+    "G": "All outputs are candidate-only and fail-closed.",
+    "L": "Report eigen/profile shell masses, shell-pair numerator and denominator, positive/negative sector weights, Schur repair quadratics, tail/finite/cross Rayleigh splits, and BKM-proxy projections.",
+    "O": "Decompose the shell-6 mixed-tail candidate into shell and shell-pair accounting tables.",
+    "P": "FAIL_CLOSED_NS_TRIAD_KN_SHELL6_MIXED_TAIL_DECOMPOSITION",
+    "R": "Rebuild forced_tail_K4_eta_0.250 on the shell-6 carrier, solve L_neg x = lambda L_abs x, and test whether the K>=4 tail drives the low Rayleigh quotient.",
+    "S": "Finite numerical receipt only; no theorem, full-NS, or Clay promotion."
+  },
+  "fail_closed": true,
+  "full_ns_promoted": false,
+  "result": {
+    "backend_info": {
+      "block_matvec_backend": "cpu-column-loop",
+      "block_matvec_enabled": true,
+      "gpu_block_matvec_max_abs_error_abs": null,
+      "gpu_block_matvec_max_abs_error_neg": null,
+      "gpu_block_matvec_parity_ok": null,
+      "gpu_matvec_max_abs_error_abs": null,
+      "gpu_matvec_max_abs_error_neg": null,
+      "gpu_matvec_parity_ok": null,
+      "icd_probe_errors": null,
+      "vulkan_icd": null
+    },
+    "bkm_stretching_proxy_projection_rows": [
+      {
+        "bkm_proxy_mass": 0.08698400158009068,
+        "bkm_proxy_projection_fraction_sq": 0.00016335252924787466,
+        "bkm_proxy_projection_on_eigen_piece": -0.012780943988918606,
+        "component": "shell_1_component",
+        "eigen_mass": 0.3966114009246985,
+        "mode_count": 26
+      },
+      {
+        "bkm_proxy_mass": 0.9130159984199071,
+        "bkm_proxy_projection_fraction_sq": 4.850428100066944e-05,
+        "bkm_proxy_projection_on_eigen_piece": 0.006964501489745654,
+        "component": "tail_K_ge_4_component",
+        "eigen_mass": 0.587273194369191,
+        "mode_count": 1854
+      },
+      {
+        "bkm_proxy_mass": 0.9130159984199071,
+        "bkm_proxy_projection_fraction_sq": 4.850428100066944e-05,
+        "bkm_proxy_projection_on_eigen_piece": 0.006964501489745654,
+        "component": "tail_K_ge_5_component",
+        "eigen_mass": 0.5730938509746395,
+        "mode_count": 1468
+      },
+      {
+        "bkm_proxy_mass": 0.6157614062808596,
+        "bkm_proxy_projection_fraction_sq": 0.0004864275547562777,
+        "bkm_proxy_projection_on_eigen_piece": 0.022055102692036546,
+        "component": "tail_K_ge_6_component",
+        "eigen_mass": 0.3481136436071523,
+        "mode_count": 866
+      },
+      {
+        "bkm_proxy_mass": 0.6157614062808596,
+        "bkm_proxy_projection_fraction_sq": 0.0004864275547562777,
+        "bkm_proxy_projection_on_eigen_piece": 0.022055102692036546,
+        "component": "top_shell_6_component",
+        "eigen_mass": 0.3481136436071523,
+        "mode_count": 866
+      }
+    ],
+    "component_rayleigh_splits": [
+      {
+        "cross_l_abs_fraction_of_full_denominator": -0.004038254632346641,
+        "cross_l_neg_fraction_of_full_numerator": -0.09712079356934952,
+        "cross_term_rayleigh": 4.021691686411186,
+        "finite_euclidean_mass": 0.41272680563080866,
+        "finite_l_abs_fraction_of_full_denominator": 0.9731944994769499,
+        "finite_l_neg_fraction_of_full_numerator": 1.0197304439301618,
+        "finite_mode_count": 342,
+        "finite_only_rayleigh": 0.17521689929964346,
+        "full_rayleigh_from_terms": 0.16722078234382698,
+        "l_abs_split": {
+          "finite_finite": 0.9731939258948226,
+          "finite_tail_cross": -0.0040382522522770005,
+          "tail_tail": 0.03084373697668056,
+          "total_direct": 0.9999994106192263,
+          "total_from_terms": 0.999999410619226
+        },
+        "l_neg_split": {
+          "finite_finite": 0.1705200221125378,
+          "finite_tail_cross": -0.01624060551061366,
+          "tail_tail": 0.012941267185188704,
+          "total_direct": 0.16722068378711288,
+          "total_from_terms": 0.16722068378711286
+        },
+        "l_pos_split": {
+          "finite_finite": 0.802673903782285,
+          "finite_tail_cross": 0.012202353258336658,
+          "tail_tail": 0.01790246979149186,
+          "total_direct": 0.8327787268321135,
+          "total_from_terms": 0.8327787268321135
+        },
+        "tail_cutoff": 4,
+        "tail_euclidean_mass": 0.5872731943691915,
+        "tail_l_abs_fraction_of_full_denominator": 0.030843755155396845,
+        "tail_l_neg_fraction_of_full_numerator": 0.07739034963918766,
+        "tail_mode_count": 1854,
+        "tail_only_rayleigh": 0.4195752024137984
+      },
+      {
+        "cross_l_abs_fraction_of_full_denominator": -0.004038254632346641,
+        "cross_l_neg_fraction_of_full_numerator": -0.09712079356934952,
+        "cross_term_rayleigh": 4.021691686411186,
+        "finite_euclidean_mass": 0.4269061490253601,
+        "finite_l_abs_fraction_of_full_denominator": 0.9731944994769499,
+        "finite_l_neg_fraction_of_full_numerator": 1.0197304439301618,
+        "finite_mode_count": 728,
+        "finite_only_rayleigh": 0.17521689929964346,
+        "full_rayleigh_from_terms": 0.16722078234382698,
+        "l_abs_split": {
+          "finite_finite": 0.9731939258948226,
+          "finite_tail_cross": -0.0040382522522770005,
+          "tail_tail": 0.03084373697668056,
+          "total_direct": 0.9999994106192263,
+          "total_from_terms": 0.999999410619226
+        },
+        "l_neg_split": {
+          "finite_finite": 0.1705200221125378,
+          "finite_tail_cross": -0.01624060551061366,
+          "tail_tail": 0.012941267185188704,
+          "total_direct": 0.16722068378711288,
+          "total_from_terms": 0.16722068378711286
+        },
+        "l_pos_split": {
+          "finite_finite": 0.802673903782285,
+          "finite_tail_cross": 0.012202353258336658,
+          "tail_tail": 0.01790246979149186,
+          "total_direct": 0.8327787268321135,
+          "total_from_terms": 0.8327787268321135
+        },
+        "tail_cutoff": 5,
+        "tail_euclidean_mass": 0.57309385097464,
+        "tail_l_abs_fraction_of_full_denominator": 0.030843755155396845,
+        "tail_l_neg_fraction_of_full_numerator": 0.07739034963918766,
+        "tail_mode_count": 1468,
+        "tail_only_rayleigh": 0.4195752024137984
+      },
+      {
+        "cross_l_abs_fraction_of_full_denominator": -0.0024776899234575235,
+        "cross_l_neg_fraction_of_full_numerator": -0.055159475125289084,
+        "cross_term_rayleigh": 3.7227461341305457,
+        "finite_euclidean_mass": 0.6518863563928474,
+        "finite_l_abs_fraction_of_full_denominator": 0.9849077209055321,
+        "finite_l_neg_fraction_of_full_numerator": 1.0112433776200975,
+        "finite_mode_count": 1330,
+        "finite_only_rayleigh": 0.17169213435566735,
+        "full_rayleigh_from_terms": 0.16722078234382695,
+        "l_abs_split": {
+          "finite_finite": 0.9849071404198573,
+          "finite_tail_cross": -0.0024776884631547186,
+          "tail_tail": 0.01756995866252363,
+          "total_direct": 0.9999994106192263,
+          "total_from_terms": 0.999999410619226
+        },
+        "l_neg_split": {
+          "finite_finite": 0.16910080908082226,
+          "finite_tail_cross": -0.009223805147789081,
+          "tail_tail": 0.007343679854079665,
+          "total_direct": 0.16722068378711288,
+          "total_from_terms": 0.16722068378711283
+        },
+        "l_pos_split": {
+          "finite_finite": 0.8158063313390351,
+          "finite_tail_cross": 0.006746116684634365,
+          "tail_tail": 0.01022627880844396,
+          "total_direct": 0.8327787268321135,
+          "total_from_terms": 0.8327787268321134
+        },
+        "tail_cutoff": 6,
+        "tail_euclidean_mass": 0.3481136436071526,
+        "tail_l_abs_fraction_of_full_denominator": 0.01756996901792557,
+        "tail_l_neg_fraction_of_full_numerator": 0.04391609750519163,
+        "tail_mode_count": 866,
+        "tail_only_rayleigh": 0.417967964247041
+      }
+    ],
+    "edge_count": 638388,
+    "eigen_mass_by_shell": [
+      {
+        "eigen_mass": 0.3966114009246984,
+        "fraction": 0.39661140092469865,
+        "shell": 1
+      },
+      {
+        "eigen_mass": 0.0047447353230357205,
+        "fraction": 0.004744735323035724,
+        "shell": 2
+      },
+      {
+        "eigen_mass": 0.011370669383074142,
+        "fraction": 0.011370669383074149,
+        "shell": 3
+      },
+      {
+        "eigen_mass": 0.014179343394551479,
+        "fraction": 0.014179343394551487,
+        "shell": 4
+      },
+      {
+        "eigen_mass": 0.22498020736748722,
+        "fraction": 0.22498020736748736,
+        "shell": 5
+      },
+      {
+        "eigen_mass": 0.3481136436071523,
+        "fraction": 0.3481136436071525,
+        "shell": 6
+      }
+    ],
+    "frame_metrics": {
+      "carrier_stratum_count": 2,
+      "triad_sample_count": 64
+    },
+    "gpu_kn_authority": false,
+    "interpretation": "The K>=5 tail carries the reported eigen mass. The low Rayleigh quotient is not tail-internal in this split: the largest eigen shell is 1 with mass 0.397. Shell pairs touching K>=5 carry 0.984 of the numerator and 0.375 of the denominator in this recomputation. The K>=5 tail-only quotient is 0.420; the finite-only quotient is 0.175; the finite-tail cross term carries -0.097 of the L_neg numerator.",
+    "kn_backend": "cpu-matrix-free",
+    "lambda_min": 0.1672207823438274,
+    "operator_triad_count": 1020684,
+    "profile_builder": "frame-surface",
+    "profile_id": "forced_tail_K5_eta_0.250",
+    "profile_mass_by_shell": [
+      {
+        "fraction": 0.75,
+        "profile_mass": 0.75,
+        "shell": 1
+      },
+      {
+        "fraction": 0.0,
+        "profile_mass": 0.0,
+        "shell": 2
+      },
+      {
+        "fraction": 0.0,
+        "profile_mass": 0.0,
+        "shell": 3
+      },
+      {
+        "fraction": 0.0,
+        "profile_mass": 0.0,
+        "shell": 4
+      },
+      {
+        "fraction": 0.10252043596730243,
+        "profile_mass": 0.10252043596730243,
+        "shell": 5
+      },
+      {
+        "fraction": 0.1474795640326975,
+        "profile_mass": 0.1474795640326975,
+        "shell": 6
+      }
+    ],
+    "profile_metrics": {
+      "angular_entropy": 4.828821600428536,
+      "angular_mode_count": 1494.0,
+      "bkm_proxy": 111.50330874504522,
+      "dissipation_proxy": 8.62227520435967,
+      "energy": 1.0,
+      "high_shell_mass_by_cutoff": {
+        "2": 0.24999999999999994,
+        "3": 0.24999999999999994,
+        "4": 0.24999999999999992,
+        "5": 0.24999999999999992
+      },
+      "high_shell_mass_fraction": 0.24999999999999992,
+      "n_eff": 46.131439794530884,
+      "radial_effective_scale": 2.936371094456501,
+      "radial_shell_barycenter": 2.1474795640326976,
+      "radial_shell_max": 6.0,
+      "radial_shell_min": 1.0,
+      "radial_shell_variance": 4.010606726421608
+    },
+    "rayleigh_denominator": 0.9999994106192245,
+    "rayleigh_numerator": 0.16722068378711302,
+    "schur_repair_rows": [
+      {
+        "cg_info": 0,
+        "cg_relative_residual": 7.45861859278786e-09,
+        "cg_residual_norm": 9.820310809808813e-12,
+        "cg_rhs_norm": 0.0013166393599083617,
+        "core_mode_count": 342,
+        "q_core": 0.802673903782285,
+        "q_coup": 0.012202353258336658,
+        "q_coup_fraction_of_q_diag": 0.6816016672814509,
+        "q_diag": 0.01790246979149186,
+        "q_diag_gap_lite": 0.000517221781304357,
+        "q_gap": 0.000515782319921639,
+        "q_gap_kind": "sparse_positive_schur_per_tail_mass",
+        "q_schur": 0.01785264607011815,
+        "q_schur_sparse": 0.01785264607011815,
+        "q_schur_subtraction": 4.9823721373361836e-05,
+        "q_total": 0.8327787268321135,
+        "skip_reason": "dense_schur_skipped_large_mode_count",
+        "skipped": true,
+        "sparse_schur_ridge": 1e-12,
+        "tail_cutoff": 4,
+        "tail_euclidean_mass": 0.5872731943691915,
+        "tail_mode_count": 1854
+      },
+      {
+        "cg_info": 0,
+        "cg_relative_residual": 7.45861859278786e-09,
+        "cg_residual_norm": 9.820310809808813e-12,
+        "cg_rhs_norm": 0.0013166393599083617,
+        "core_mode_count": 728,
+        "q_core": 0.802673903782285,
+        "q_coup": 0.012202353258336658,
+        "q_coup_fraction_of_q_diag": 0.6816016672814509,
+        "q_diag": 0.01790246979149186,
+        "q_diag_gap_lite": 0.0005300187520549307,
+        "q_gap": 0.0005285436758820449,
+        "q_gap_kind": "sparse_positive_schur_per_tail_mass",
+        "q_schur": 0.01785264607011815,
+        "q_schur_sparse": 0.01785264607011815,
+        "q_schur_subtraction": 4.9823721373361836e-05,
+        "q_total": 0.8327787268321135,
+        "skip_reason": "dense_schur_skipped_large_mode_count",
+        "skipped": true,
+        "sparse_schur_ridge": 1e-12,
+        "tail_cutoff": 5,
+        "tail_euclidean_mass": 0.57309385097464,
+        "tail_mode_count": 1468
+      },
+      {
+        "cg_info": 0,
+        "cg_relative_residual": 6.135785719378229e-09,
+        "cg_residual_norm": 4.999777911073762e-12,
+        "cg_rhs_norm": 0.0008148553648611469,
+        "core_mode_count": 1330,
+        "q_core": 0.8158063313390351,
+        "q_coup": 0.006746116684634365,
+        "q_coup_fraction_of_q_diag": 0.6596844082780157,
+        "q_diag": 0.01022627880844396,
+        "q_diag_gap_lite": 0.0004984259192980448,
+        "q_gap": 0.0004915160365146409,
+        "q_gap_kind": "sparse_positive_schur_per_tail_mass",
+        "q_schur": 0.010084507714403996,
+        "q_schur_sparse": 0.010084507714403996,
+        "q_schur_subtraction": 0.00014177109403986035,
+        "q_total": 0.8327787268321134,
+        "skip_reason": "dense_schur_skipped_large_mode_count",
+        "skipped": true,
+        "sparse_schur_ridge": 1e-12,
+        "tail_cutoff": 6,
+        "tail_euclidean_mass": 0.3481136436071526,
+        "tail_mode_count": 866
+      }
+    ],
+    "selected_mode_count": 2196,
+    "shell": 6,
+    "shell_pair_accounting": {
+      "rows": [
+        {
+          "absolute_frame_weight": 0.4523492310718501,
+          "l_abs_denominator": 0.6246582761399058,
+          "l_abs_denominator_fraction": 0.6246586443017015,
+          "l_neg_numerator": 0.0026246991576947217,
+          "l_neg_numerator_fraction": 0.015696019764135184,
+          "l_pos_denominator": 0.6220335769822111,
+          "l_pos_denominator_fraction": 0.6220339435970587,
+          "negative_frame_weight": 0.19969848039800353,
+          "negative_frame_weight_fraction": 0.2985424963899342,
+          "negative_sector_denominator": 0.0026246991576947217,
+          "negative_sector_denominator_fraction": 0.0026247007046428564,
+          "positive_frame_weight": 0.25265075067384646,
+          "positive_frame_weight_fraction": 0.3445994678932491,
+          "positive_sector_denominator": 0.6220335769822111,
+          "positive_sector_denominator_fraction": 0.6220339435970587,
+          "shell_pair": "1-1"
+        },
+        {
+          "absolute_frame_weight": 0.21312613296520225,
+          "l_abs_denominator": 0.17473000633676006,
+          "l_abs_denominator_fraction": 0.17473010931932725,
+          "l_neg_numerator": 0.07778445302932015,
+          "l_neg_numerator_fraction": 0.4651604769679502,
+          "l_pos_denominator": 0.09694555330743991,
+          "l_pos_denominator_fraction": 0.09694561044531891,
+          "negative_frame_weight": 0.10552278389550221,
+          "negative_frame_weight_fraction": 0.15775300476694926,
+          "negative_sector_denominator": 0.07778445302932015,
+          "negative_sector_denominator_fraction": 0.07778449887400836,
+          "positive_frame_weight": 0.10760334906970223,
+          "positive_frame_weight_fraction": 0.14676408731838106,
+          "positive_sector_denominator": 0.09694555330743991,
+          "positive_sector_denominator_fraction": 0.09694561044531891,
+          "shell_pair": "1-5"
+        },
+        {
+          "absolute_frame_weight": 0.25553667651315704,
+          "l_abs_denominator": 0.18070786456676688,
+          "l_abs_denominator_fraction": 0.18070797107257086,
+          "l_neg_numerator": 0.07844647733340018,
+          "l_neg_numerator_fraction": 0.46911946271712257,
+          "l_pos_denominator": 0.1022613872333667,
+          "l_pos_denominator_fraction": 0.10226144750429786,
+          "negative_frame_weight": 0.12482747154751865,
+          "negative_frame_weight_fraction": 0.18661286204866018,
+          "negative_sector_denominator": 0.07844647733340018,
+          "negative_sector_denominator_fraction": 0.07844652356827302,
+          "positive_frame_weight": 0.13070920496563906,
+          "positive_frame_weight_fraction": 0.17827899723145954,
+          "positive_sector_denominator": 0.1022613872333667,
+          "positive_sector_denominator_fraction": 0.10226144750429786,
+          "shell_pair": "1-6"
+        },
+        {
+          "absolute_frame_weight": 0.10082623932011069,
+          "l_abs_denominator": 0.0039831688298162665,
+          "l_abs_denominator_fraction": 0.003983171177420781,
+          "l_neg_numerator": 0.0016893424594480555,
+          "l_neg_numerator_fraction": 0.01010247309835632,
+          "l_pos_denominator": 0.002293826370368211,
+          "l_pos_denominator_fraction": 0.002293827722306171,
+          "negative_frame_weight": 0.049881494250342565,
+          "negative_frame_weight_fraction": 0.07457115240675762,
+          "negative_sector_denominator": 0.0016893424594480555,
+          "negative_sector_denominator_fraction": 0.00168934345511461,
+          "positive_frame_weight": 0.050944745069766505,
+          "positive_frame_weight_fraction": 0.06948537455826388,
+          "positive_sector_denominator": 0.002293826370368211,
+          "positive_sector_denominator_fraction": 0.002293827722306171,
+          "shell_pair": "5-5"
+        },
+        {
+          "absolute_frame_weight": 0.23490033221261322,
+          "l_abs_denominator": 0.009641595628370577,
+          "l_abs_denominator_fraction": 0.009641601310945028,
+          "l_neg_numerator": 0.004173279168413639,
+          "l_neg_numerator_fraction": 0.02495671632180745,
+          "l_pos_denominator": 0.005468316459956938,
+          "l_pos_denominator_fraction": 0.005468319682879429,
+          "negative_frame_weight": 0.11746028558905201,
+          "negative_frame_weight_fraction": 0.1755991673874589,
+          "negative_sector_denominator": 0.004173279168413639,
+          "negative_sector_denominator_fraction": 0.004173281628065599,
+          "positive_frame_weight": 0.11744004662354396,
+          "positive_frame_weight_fraction": 0.16018071376354276,
+          "positive_sector_denominator": 0.005468316459956938,
+          "positive_sector_denominator_fraction": 0.005468319682879429,
+          "shell_pair": "5-6"
+        },
+        {
+          "absolute_frame_weight": 0.14534499383648922,
+          "l_abs_denominator": 0.006278499117605735,
+          "l_abs_denominator_fraction": 0.00627850281803459,
+          "l_neg_numerator": 0.0025024326388360116,
+          "l_neg_numerator_fraction": 0.0149648511306283,
+          "l_pos_denominator": 0.0037760664787697233,
+          "l_pos_denominator_fraction": 0.003776068704312022,
+          "negative_frame_weight": 0.07152088826648212,
+          "negative_frame_weight_fraction": 0.10692131700023988,
+          "negative_sector_denominator": 0.0025024326388360116,
+          "negative_sector_denominator_fraction": 0.0025024341137225682,
+          "positive_frame_weight": 0.07382410557000532,
+          "positive_frame_weight_fraction": 0.10069135923510365,
+          "positive_sector_denominator": 0.0037760664787697233,
+          "positive_sector_denominator_fraction": 0.003776068704312022,
+          "shell_pair": "6-6"
+        }
+      ],
+      "totals": {
+        "l_abs_denominator": 0.9999994106192253,
+        "l_neg_numerator": 0.16722068378711274,
+        "l_pos_denominator": 0.8327787268321125,
+        "negative_frame_weight": 0.6689114039469011,
+        "positive_frame_weight": 0.7331722019725035,
+        "rayleigh_quotient": 0.167220782343827
+      }
+    },
+    "snapshot_index": 0,
+    "tail_eta": 0.25,
+    "tail_responsibility_summary": {
+      "dominant_shell_escape": false,
+      "eigen_tail_mass": 0.5730938509746395,
+      "mixed_tail_candidate": true,
+      "profile_tail_mass": 0.24999999999999992,
+      "tail_cutoff": 5,
+      "tail_touching_rayleigh_denominator_fraction": 0.3753413556982988,
+      "tail_touching_rayleigh_numerator_fraction": 0.9843039802358633,
+      "top_shell_escape": false,
+      "worst_eigen_shell": 1,
+      "worst_eigen_shell_mass": 0.3966114009246984
+    },
+    "triad_sample_limit_scope": "receipt_samples_only"
+  },
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_SHELL6_MIXED_TAIL_DECOMPOSITION",
+  "schema_version": "1.1.0",
+  "script_name": "scripts/ns_triad_kn_shell6_mixed_tail_decomposition.py",
+  "status": "ok",
+  "theorem_promoted": false,
+  "warnings": [
+    "velocity_snapshots trailing channel layout detected",
+    "dense_schur_skipped_large_mode_count: mode_count=2196 > dense_schur_mode_limit=0"
+  ]
+}

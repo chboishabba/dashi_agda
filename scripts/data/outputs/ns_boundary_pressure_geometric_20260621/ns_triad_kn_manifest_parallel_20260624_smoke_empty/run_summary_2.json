@@ -1,0 +1,46 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "candidate_only": true,
+  "clay_promoted": false,
+  "contract": "ns_triad_kn_run_manifest_parallel",
+  "fail_closed": true,
+  "failure_count": 0,
+  "full_ns_promoted": false,
+  "gpu_jobs": 1,
+  "jobs": 2,
+  "manifest_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_smoke_empty/manifest.json",
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_RUN_MANIFEST_PARALLEL",
+  "run_count": 1,
+  "runs": [
+    {
+      "K": 5,
+      "backend": "cpu-matrix-free",
+      "eta": 0.25,
+      "job_id": "cpu_matrix_free_shell_04_K_05_eta_0p250_forced_tail",
+      "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_smoke_empty/receipts/cpu-matrix-free/cpu_matrix_free_shell_04_K_05_eta_0p250_forced_tail.json",
+      "profile_family": "forced-tail",
+      "shell": 4,
+      "skip_reason": "empty_tail_subspace",
+      "status": "skipped",
+      "stderr_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_smoke_empty/receipts/cpu-matrix-free/cpu_matrix_free_shell_04_K_05_eta_0p250_forced_tail.stderr.log",
+      "stdout_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_smoke_empty/receipts/cpu-matrix-free/cpu_matrix_free_shell_04_K_05_eta_0p250_forced_tail.stdout.json",
+      "warnings": [
+        "empty tail subspace because K=5 exceeds shell N=4"
+      ]
+    }
+  ],
+  "schema_version": "1.0.0",
+  "script_name": "scripts/ns_triad_kn_run_manifest_parallel.py",
+  "skip_existing_ok": true,
+  "status": "ok",
+  "theorem_promoted": false,
+  "timeout_per_job": 1800.0
+}

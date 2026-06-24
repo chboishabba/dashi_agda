@@ -1,0 +1,173 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "branch_counts": {
+    "finite_anchor_mixed_low_frame": 3,
+    "tail_internal_low_frame": 1
+  },
+  "branch_counts_by_D0": {
+    "10": {
+      "finite_anchor_mixed_low_frame": 3,
+      "high_D_tail_internal_low_frame": 1
+    },
+    "14": {
+      "finite_anchor_mixed_low_frame": 3,
+      "high_D_tail_internal_low_frame": 1
+    },
+    "18": {
+      "finite_anchor_mixed_low_frame": 3,
+      "high_D_tail_internal_low_frame": 1
+    },
+    "8": {
+      "finite_anchor_mixed_low_frame": 3,
+      "high_D_tail_internal_low_frame": 1
+    }
+  },
+  "c0": 0.25,
+  "candidate_only": true,
+  "clay_promoted": false,
+  "contract": "check_ns_triad_kn_manifest_summary",
+  "fail_closed": true,
+  "full_ns_promoted": false,
+  "missing_or_failed_count": 0,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_MANIFEST_SUMMARY",
+  "row_count": 4,
+  "rows": [
+    {
+      "D": 12.842495219885278,
+      "K": 5,
+      "R_cross": 4.712569608193369,
+      "R_finite": 0.21573197147576145,
+      "R_full": 0.21001518498677346,
+      "R_tail": 0.4674339377625566,
+      "backend": "vulkan-matvec",
+      "branch": "finite_anchor_mixed_low_frame",
+      "branch_by_D0": {
+        "10": "finite_anchor_mixed_low_frame",
+        "14": "finite_anchor_mixed_low_frame",
+        "18": "finite_anchor_mixed_low_frame",
+        "8": "finite_anchor_mixed_low_frame"
+      },
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_shell8_vulkan_confirm/receipts/vulkan-matvec/vulkan_matvec_shell_08_K_05_eta_0p250_forced_tail.json",
+      "eta": 0.25,
+      "finite_mass": 0.3442988861920269,
+      "job_id": "vulkan_matvec_shell_08_K_05_eta_0p250_forced_tail",
+      "lambda_min": 0.2100150737547731,
+      "profile_family": "forced-tail",
+      "profile_tail_mass": 0.25,
+      "shell": 8,
+      "status": "ok",
+      "tail_mass": 0.6557011138079729,
+      "tail_only_worst_shell": 8,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 1
+    },
+    {
+      "D": 13.824399776661084,
+      "K": 6,
+      "R_cross": 4.275843171771945,
+      "R_finite": 0.20560909625405502,
+      "R_full": 0.19896770445286732,
+      "R_tail": 0.4523932130065914,
+      "backend": "vulkan-matvec",
+      "branch": "finite_anchor_mixed_low_frame",
+      "branch_by_D0": {
+        "10": "finite_anchor_mixed_low_frame",
+        "14": "finite_anchor_mixed_low_frame",
+        "18": "finite_anchor_mixed_low_frame",
+        "8": "finite_anchor_mixed_low_frame"
+      },
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_shell8_vulkan_confirm/receipts/vulkan-matvec/vulkan_matvec_shell_08_K_06_eta_0p250_forced_tail.json",
+      "eta": 0.25,
+      "finite_mass": 0.3069292783976804,
+      "job_id": "vulkan_matvec_shell_08_K_06_eta_0p250_forced_tail",
+      "lambda_min": 0.19896772481917044,
+      "profile_family": "forced-tail",
+      "profile_tail_mass": 0.25,
+      "shell": 8,
+      "status": "ok",
+      "tail_mass": 0.6930707216023196,
+      "tail_only_worst_shell": 8,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 8
+    },
+    {
+      "D": 15.123527245949925,
+      "K": 7,
+      "R_cross": 4.281377930964181,
+      "R_finite": 0.1750183389985928,
+      "R_full": 0.16740192436004614,
+      "R_tail": 0.43622215241702267,
+      "backend": "vulkan-matvec",
+      "branch": "finite_anchor_mixed_low_frame",
+      "branch_by_D0": {
+        "10": "finite_anchor_mixed_low_frame",
+        "14": "finite_anchor_mixed_low_frame",
+        "18": "finite_anchor_mixed_low_frame",
+        "8": "finite_anchor_mixed_low_frame"
+      },
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_shell8_vulkan_confirm/receipts/vulkan-matvec/vulkan_matvec_shell_08_K_07_eta_0p250_forced_tail.json",
+      "eta": 0.25,
+      "finite_mass": 0.30199914261357197,
+      "job_id": "vulkan_matvec_shell_08_K_07_eta_0p250_forced_tail",
+      "lambda_min": 0.16740173899090366,
+      "profile_family": "forced-tail",
+      "profile_tail_mass": 0.25,
+      "shell": 8,
+      "status": "ok",
+      "tail_mass": 0.698000857386428,
+      "tail_only_worst_shell": 8,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 8
+    },
+    {
+      "D": 23.597643593519884,
+      "K": 7,
+      "R_cross": -2.830442221072391,
+      "R_finite": 0.3912232590959634,
+      "R_full": 0.1954422793362182,
+      "R_tail": 0.1956068400479919,
+      "backend": "vulkan-matvec",
+      "branch": "tail_internal_low_frame",
+      "branch_by_D0": {
+        "10": "high_D_tail_internal_low_frame",
+        "14": "high_D_tail_internal_low_frame",
+        "18": "high_D_tail_internal_low_frame",
+        "8": "high_D_tail_internal_low_frame"
+      },
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_shell8_vulkan_confirm/receipts/vulkan-matvec/vulkan_matvec_shell_08_K_07_eta_0p400_forced_tail.json",
+      "eta": 0.4,
+      "finite_mass": 0.001343924289041309,
+      "job_id": "vulkan_matvec_shell_08_K_07_eta_0p400_forced_tail",
+      "lambda_min": 0.19544212635240507,
+      "profile_family": "forced-tail",
+      "profile_tail_mass": 0.4,
+      "shell": 8,
+      "status": "ok",
+      "tail_mass": 0.9986560757109584,
+      "tail_only_worst_shell": 8,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 8
+    }
+  ],
+  "schema_version": "1.0.0",
+  "script_name": "scripts/check_ns_triad_kn_manifest_summary.py",
+  "source_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_shell8_vulkan_confirm/run_summary.json",
+  "status": "ok",
+  "theorem_promoted": false
+}
