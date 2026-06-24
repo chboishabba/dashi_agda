@@ -165,6 +165,9 @@ def _markdown(payload: dict[str, Any]) -> str:
             return f"{value:.6g}"
         return str(value)
 
+    def shell_or_n(row: dict[str, Any]) -> Any:
+        return row.get("N", row.get("shell"))
+
     lines = [
         "# NS Triad K_N Schur Gap Anatomy",
         "",
@@ -180,7 +183,7 @@ def _markdown(payload: dict[str, Any]) -> str:
     ]
     for row in payload["rows"]:
         lines.append(
-            f"| {row['N']} | {row['K']} | {fmt(row['q_diag'])} | {fmt(row['q_schur'])} | "
+            f"| {shell_or_n(row)} | {row['K']} | {fmt(row['q_diag'])} | {fmt(row['q_schur'])} | "
             f"{fmt(row['q_schur_subtraction'])} | {fmt(row['q_gap'])} | "
             f"{fmt(row['q_gap_over_q_diag'])} | {fmt(row['q_schur_subtraction_over_q_diag'])} | "
             f"{fmt(row['D'])} | {fmt(row['D_q_gap'])} | {fmt(row['N2_q_gap'])} | "

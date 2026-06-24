@@ -45,6 +45,9 @@ Audit checklist:
    - Identify summable row/column bounds for `L_FT^+`.
    - Check whether a standard Schur test is enough, or whether a Hilbert–
      Schmidt bound is the only honest route.
+   - Record the exact Schur-test kernel-sum bound as a fail-closed socket in
+     `NSTriadKNMixedTailACLOperatorNormAuditReceipt.agda` while keeping
+     `theoremPromoted` false.
 
 5. Normalization transfer
 
@@ -75,4 +78,6 @@ Open gaps that remain after the audit:
 Conclusion:
 
 The route is still candidate-only and fail-closed. The next theorem-shaped
-object, if the audit succeeds, is the `N^-1` operator norm bound.
+object, if the audit succeeds, is the `N^-1` operator norm bound; the current
+Agda receipt now records the explicit Schur-test kernel-sum bound socket
+without promoting the theorem.

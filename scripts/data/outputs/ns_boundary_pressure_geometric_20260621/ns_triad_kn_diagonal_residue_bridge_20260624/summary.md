@@ -1,6 +1,6 @@
 # NS Triad K_N Diagonal Residue Bridge
 
-- status: `ok`
+- status: `partial`
 - candidate only: `True`
 - theorem promoted: `False`
 - full NS promoted: `False`
@@ -12,7 +12,6 @@
 | 6 | 5 | q_diag(N) >= c_diag > 0 | q_gap(N) >= c_gap / N^2 | 0.419575 | -0.0971208 | 4.85043e-05 |
 | 8 | 7 | q_diag(N) >= c_diag > 0 | q_gap(N) >= c_gap / N^2 | 0.436214 | -0.093081 | 5.9914e-05 |
 | 10 | 9 | q_diag(N) >= c_diag > 0 | q_gap(N) >= c_gap / N^2 | 0.426831 | -0.0911436 | 1.93843e-05 |
-| 12 | 11 | q_diag(N) >= c_diag > 0 | q_gap(N) >= c_gap / N^2 | 0.436254 | -0.0932165 | 1.29391e-06 |
 
 ## Readout
 

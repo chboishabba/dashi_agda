@@ -76,7 +76,7 @@ def _derive_rows(subtraction_rows: list[dict[str, Any]]) -> list[dict[str, Any]]
         shell = _finite_float(row.get("N")) or _finite_float(row.get("shell"))
         rows.append(
             {
-                "N": row.get("N"),
+                "N": row.get("N", row.get("shell")),
                 "K": row.get("K"),
                 "TailDiagonalStable": {
                     "evidence": "q_diag and q_schur stay on the sampled 10^-2 scale; the subtraction remains tiny relative to q_diag.",

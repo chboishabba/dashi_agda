@@ -18,6 +18,21 @@ import DASHI.Physics.Closure.NSTriadKNMixedTailACLSchurResidueProofPlanReceipt a
 -- exact analytic checklist that must be discharged before the Fields ACL
 -- carrier can be used for the mixed-tail Schur residue step.
 
+canonicalSchurTestKernelSumBoundText : String
+canonicalSchurTestKernelSumBoundText =
+  "||L_FT^+||_op^2 <= (sup_k sum_p |L_FT^+(k,p)|) * (sup_p sum_k |L_FT^+(k,p)|)"
+
+record NSTriadKNMixedTailACLOperatorNormSchurTestKernelSumBound : Set where
+  field
+    boundText :
+      String
+    boundTextIsCanonical :
+      boundText ≡ canonicalSchurTestKernelSumBoundText
+
+postulate
+  mixedTailSchurTestKernelSumBound :
+    NSTriadKNMixedTailACLOperatorNormSchurTestKernelSumBound
+
 listLength : ∀ {A : Set} → List A → Nat
 listLength [] = zero
 listLength (_ ∷ xs) = suc (listLength xs)
@@ -128,7 +143,7 @@ canonicalReceiptText =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "The Fields ACL paper remains a candidate carrier, but the mixed-tail step still needs the exact kernel writeup, geometric-factor match, unit-width shell convention check, first-harmonic cancellation check, L2 operator-norm lift, N^-2 Schur-residue transfer, and profile-scope audit before any operator-norm claim can be made."
+  "The Fields ACL paper remains a candidate carrier, but the mixed-tail step still needs the exact kernel writeup, geometric-factor match, unit-width shell convention check, first-harmonic cancellation check, the explicit Schur-test kernel-sum bound socket, L2 operator-norm lift, N^-2 Schur-residue transfer, and profile-scope audit before any operator-norm claim can be made."
 
 canonicalSourceFieldsReceiptText : String
 canonicalSourceFieldsReceiptText =
@@ -140,11 +155,11 @@ canonicalSourceProofPlanText =
 
 canonicalAuditText : String
 canonicalAuditText =
-  "Audit target: exact L_FT^+ normalization, ACL kernel comparison, unit-width shell match, first-harmonic cancellation survival, L2 operator-norm route, N^-2 residue transfer, and profile scope."
+  "Audit target: exact L_FT^+ normalization, ACL kernel comparison, unit-width shell match, first-harmonic cancellation survival, explicit Schur-test kernel-sum bound, L2 operator-norm route, N^-2 residue transfer, and profile scope."
 
 canonicalBoundaryText : String
 canonicalBoundaryText =
-  "Boundary: this audit records the proof checklist only; theorem/full-NS/BKM/Clay promotion remains false."
+  "Boundary: this audit records the proof checklist and the explicit Schur-test bound socket only; theorem/full-NS/BKM/Clay promotion remains false."
 
 canonicalOText : String
 canonicalOText =
@@ -252,6 +267,11 @@ record NSTriadKNMixedTailACLOperatorNormAuditReceipt : Setω where
     sourceProofPlanTextIsCanonical :
       sourceProofPlanText ≡ canonicalSourceProofPlanText
 
+    schurTestKernelSumBound :
+      NSTriadKNMixedTailACLOperatorNormSchurTestKernelSumBound
+    schurTestKernelSumBoundIsCanonical :
+      schurTestKernelSumBound ≡ mixedTailSchurTestKernelSumBound
+
     auditText :
       String
     auditTextIsCanonical :
@@ -332,6 +352,8 @@ canonicalNSTriadKNMixedTailACLOperatorNormAuditReceipt =
     canonicalSourceFieldsReceiptText
     refl
     canonicalSourceProofPlanText
+    refl
+    mixedTailSchurTestKernelSumBound
     refl
     canonicalAuditText
     refl
