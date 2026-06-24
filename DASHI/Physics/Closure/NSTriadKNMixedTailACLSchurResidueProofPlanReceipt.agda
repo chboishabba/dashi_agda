@@ -133,7 +133,7 @@ canonicalReceiptText =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "The Fields ACL paper is recorded as a carrier for the off-diagonal shell-cancellation side, the sampled finite-shell Schur-test witness now certifies the exact N=6,8,10,12 kernel-sum inequality and sampled N^-1 block scale, and the remaining gap is to promote that sampled bound to a uniform/profile-independent operator-norm theorem on L_FT^+."
+  "The sampled finite-shell Schur-test witness certifies the exact N=6,8,10,12 kernel-sum inequality and sampled N^-1 block scale, but the direct Fields ACL kernel match now fails for the current positive-sector L_FT^+ and the corrected signed half-sum test leaves S_+ = S_abs/2; the remaining gap is therefore a direct positive-sector magnitude/counting theorem plus a uniform/profile-independent operator-norm theorem."
 
 canonicalSourceFieldsReceiptText : String
 canonicalSourceFieldsReceiptText =
@@ -149,11 +149,11 @@ canonicalSourceBridgeReadoutText =
 
 canonicalProofPlanText : String
 canonicalProofPlanText =
-  "Promote the sampled finite-shell Schur-test witness to a uniform |L_FT^+|_op <= C / N theorem, then transfer that bound to q_gap(N) >= c / N^2 under the current normalization, and only then combine with D(N) ~ N^2."
+  "Abandon the dead signed ACL lane, then promote the sampled finite-shell Schur-test witness to a direct positive-sector |L_FT^+|_op <= C / N theorem, then transfer that bound to q_gap(N) >= c / N^2 under the current normalization, and only then combine with D(N) ~ N^2."
 
 canonicalBoundaryText : String
 canonicalBoundaryText =
-  "Boundary: the shell match, kernel match, uniform Schur-test promotion, residue transfer, and trajectory scope remain open; theorem/full-NS/BKM/Clay promotion stays false."
+  "Boundary: the direct kernel match and the signed rescue are now negatively resolved for the current positive-sector block, while the direct positive-sector theorem, uniform Schur-test promotion, residue transfer, and trajectory scope remain open; theorem/full-NS/BKM/Clay promotion stays false."
 
 canonicalOText : String
 canonicalOText =
@@ -161,7 +161,7 @@ canonicalOText =
 
 canonicalRText : String
 canonicalRText =
-  "R: attack the finite-to-tail operator norm with the ACL carrier and the current mixed-tail normalization."
+  "R: attack the finite-to-tail operator norm on the current mixed-tail normalization after the ACL signed lane has been ruled out."
 
 canonicalCText : String
 canonicalCText =
@@ -173,19 +173,19 @@ canonicalSText =
 
 canonicalLText : String
 canonicalLText =
-  "L: Fields ACL carrier -> L_FT^+ operator norm -> q_gap residue transfer -> dissipation bridge."
+  "L: sampled witness -> failed direct ACL carrier -> failed signed rescue -> direct positive-sector L_FT^+ operator-norm route -> q_gap residue transfer -> dissipation bridge."
 
 canonicalPText : String
 canonicalPText =
-  "P: promote the sampled finite-shell witness to a uniform theorem first, because everything downstream depends on that gate."
+  "P: prove the direct positive-sector theorem next, because both ACL-based routes are dead and everything downstream depends on that gate."
 
 canonicalGText : String
 canonicalGText =
-  "G: keep the receipt candidate-only and fail-closed until the exact normalization is audited."
+  "G: keep the receipt candidate-only and fail-closed until a viable carrier survives the exact normalization audit."
 
 canonicalFText : String
 canonicalFText =
-  "F: the open gap is the operator-norm estimate, not the existence of the carrier geometry."
+  "F: the open gap is the operator-norm estimate on a viable carrier, not the existence of sampled finite-shell evidence."
 
 record NSTriadKNMixedTailACLSchurResidueProofPlanORCSLPGF : Set where
   constructor mkNSTriadKNMixedTailACLSchurResidueProofPlanORCSLPGF

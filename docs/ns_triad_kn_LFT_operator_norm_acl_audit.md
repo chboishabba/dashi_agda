@@ -79,17 +79,39 @@ Addendum, 2026-06-24:
 - This is still finite-shell and candidate-only.  It does not by itself
   promote a uniform/profile-independent theorem.
 
+Addendum, kernel match result:
+
+- `docs/ns_triad_kn_LFT_kernel_ACL_match.md` now writes the exact mixed-tail
+  cross-block entry and kills the direct ACL kernel match for the current
+  positive-sector `L_FT^+`.
+- The exact entry carries profile amplitudes
+  `sqrt(pi_i pi_j pi_l) / 3` and the truncated factor `max(cos(closure), 0)`.
+- Therefore the signed ACL factor does not survive entrywise, the kernel is not
+  profile-independent, and the current ACL route does not close the Schur gate.
+
+Addendum, fork resolution:
+
+- `scripts/ns_triad_kn_acl_signed_half_sum_proof.py` now runs the corrected
+  ACL half-sum test on the sampled same-shell transverse sets with its own
+  timer/logger.
+- The old closure-angle cosine is one-signed on that set, so its near-zero
+  behavior never measured positive/negative cancellation.
+- The corrected ACL first harmonic does cancel exactly in signed form, but the
+  positive block remains `S_+ = S_- = S_abs / 2`.
+- Therefore Fork A is dead for the current positive-sector Schur block. The
+  live analytic target is a direct positive-sector magnitude/counting theorem.
+
 Open gaps that remain after the audit:
 
-- the exact `L_FT^+` normalization;
-- the positive/absolute-sector relation to the ACL factor;
+- the direct positive-sector row/column bound, since both the direct ACL kernel
+  match and the signed rescue failed;
 - the uniform/profile-independent operator-norm lifting step;
 - the residue-to-gap normalization step;
 - the profile-scope question.
 
 Conclusion:
 
-The route is still candidate-only and fail-closed. The next theorem-shaped
-object, if the audit succeeds, is the `N^-1` operator norm bound; the current
-Agda receipt now records the explicit Schur-test kernel-sum witness and the
-finite-shell proof artifact without promoting the theorem.
+The route is still fail-closed. The sampled finite-shell Schur witness remains
+valid, but neither the direct Fields ACL kernel match nor the signed ACL half
+sum controls the current positive-sector block. The profile-independent theorem
+therefore needs a direct positive-sector analytic bridge.

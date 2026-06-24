@@ -85,7 +85,7 @@ record NSTriadKNMixedTailProfileIndependentSchurTestKernelSumBound : Set where
     missingText :
       String
     missingTextIsCanonical :
-      missingText ≡ "analytic ACL-to-Schur-test lift and profile-independent column bound"
+      missingText ≡ "direct positive-sector magnitude/counting theorem and profile-independent column bound"
 
 canonicalProfileIndependentSchurTestKernelSumBound :
   NSTriadKNMixedTailProfileIndependentSchurTestKernelSumBound
@@ -94,7 +94,7 @@ canonicalProfileIndependentSchurTestKernelSumBound = record
   ; statusTextIsCanonical = refl
   ; targetText = "||L_FT^+||_op <= C / N for all NS-compatible profiles"
   ; targetTextIsCanonical = refl
-  ; missingText = "analytic ACL-to-Schur-test lift and profile-independent column bound"
+  ; missingText = "direct positive-sector magnitude/counting theorem and profile-independent column bound"
   ; missingTextIsCanonical = refl
   }
 
@@ -208,7 +208,7 @@ canonicalReceiptText =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "The Fields ACL paper remains a candidate carrier, the sampled finite-shell witness now records the checked N=6,8,10,12 mixed-tail rows and N^-1 block scale, and the profile-independent Schur-test bound remains open for the analytic ACL-to-Schur-test lift and column bound."
+  "The sampled finite-shell witness records the checked N=6,8,10,12 mixed-tail rows and N^-1 block scale, but the direct ACL kernel match now fails for the current positive-sector L_FT^+ because the exact entry carries profile amplitudes and max(cos(closure),0); the corrected signed half-sum test also leaves S_+ = S_abs/2, so the profile-independent Schur-test bound remains open on a direct positive-sector route."
 
 canonicalSourceFieldsReceiptText : String
 canonicalSourceFieldsReceiptText =
@@ -228,11 +228,11 @@ canonicalFiniteShellProofArtifactMarkdown =
 
 canonicalAuditText : String
 canonicalAuditText =
-  "Audit target: exact L_FT^+ normalization, ACL kernel comparison, unit-width shell match, first-harmonic cancellation survival, sampled finite-shell witness, profile-independent Schur-test kernel-sum bound, finite-shell proof artifact, uniform L2 operator-norm route, N^-2 residue transfer, and profile scope."
+  "Audit target: exact L_FT^+ normalization, ACL kernel comparison, unit-width shell match, first-harmonic cancellation survival, signed half-sum fork resolution, sampled finite-shell witness, failed direct kernel match receipt, profile-independent Schur-test kernel-sum bound, finite-shell proof artifact, uniform L2 operator-norm route, N^-2 residue transfer, and profile scope."
 
 canonicalBoundaryText : String
 canonicalBoundaryText =
-  "Boundary: this audit records the proof checklist, the sampled finite-shell witness, and the open profile-independent Schur-test bound only; theorem/full-NS/BKM/Clay promotion remains false."
+  "Boundary: this audit records the proof checklist, the sampled finite-shell witness, the failed direct ACL kernel match, the failed signed rescue, and the still-open profile-independent Schur-test bound only; theorem/full-NS/BKM/Clay promotion remains false."
 
 canonicalOText : String
 canonicalOText =
@@ -252,19 +252,19 @@ canonicalSText =
 
 canonicalLText : String
 canonicalLText =
-  "L: Fields ACL carrier -> audit checklist -> operator-norm gate -> Schur residue transfer."
+  "L: sampled finite-shell witness -> failed direct ACL kernel match -> failed signed rescue -> operator-norm gate still open on the direct positive-sector route -> Schur residue transfer still open."
 
 canonicalPText : String
 canonicalPText =
-  "P: use the finite-shell proof to pin down the exact block normalization, then promote the sampled N^-1 scale to a uniform theorem."
+  "P: keep the sampled N^-1 witness, but prove the direct positive-sector magnitude/counting theorem before attempting a uniform operator theorem."
 
 canonicalGText : String
 canonicalGText =
-  "G: keep the audit fail-closed; the finite-shell proof does not by itself justify a uniform operator-norm theorem."
+  "G: keep the audit fail-closed; the finite-shell proof does not by itself justify a uniform operator-norm theorem, and the direct ACL kernel match is dead for the current positive-sector block."
 
 canonicalFText : String
 canonicalFText =
-  "F: the open gap is the profile-independent operator-norm theorem, not the existence of the sampled witness."
+  "F: the open gap is the profile-independent operator-norm theorem on the direct positive-sector carrier, not the existence of the sampled witness."
 
 record NSTriadKNMixedTailACLOperatorNormAuditORCSLPGF : Set where
   constructor mkNSTriadKNMixedTailACLOperatorNormAuditORCSLPGF

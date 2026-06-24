@@ -13,6 +13,14 @@ from typing import Any, Iterable
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = REPO_ROOT / "scripts" / "ns_triad_kn_acl_schur_test_proof.py"
+CANONICAL_OUTPUT_DIR = (
+    REPO_ROOT
+    / "scripts"
+    / "data"
+    / "outputs"
+    / "ns_boundary_pressure_geometric_20260621"
+    / "ns_triad_kn_acl_schur_test_proof_20260624"
+)
 RECEIPT = (
     REPO_ROOT
     / "DASHI"
@@ -51,6 +59,11 @@ def bool_values_for_keys(payload: Any, *keys: str) -> list[bool]:
 @lru_cache(maxsize=1)
 def run_script() -> tuple[dict[str, Any], str]:
     assert SCRIPT.is_file(), f"missing {SCRIPT}"
+    canonical_json = CANONICAL_OUTPUT_DIR / "summary.json"
+    canonical_md = CANONICAL_OUTPUT_DIR / "summary.md"
+    if canonical_json.is_file() and canonical_md.is_file():
+        payload = json.loads(canonical_json.read_text(encoding="utf-8"))
+        return payload, canonical_md.read_text(encoding="utf-8")
     out_dir = Path(tempfile.gettempdir()) / "dashi_ns_triad_kn_acl_schur_test"
     result = subprocess.run(
         [

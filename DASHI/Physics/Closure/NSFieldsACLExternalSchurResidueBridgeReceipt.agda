@@ -124,7 +124,7 @@ canonicalReceiptText =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "The Fields paper gives the Angular Cancellation Lemma, records unit-width shell geometry and O(k_j) resonant-set counting, and therefore looks like a structural carrier for a future finite-to-tail Schur-residue estimate; this receipt does not prove that estimate."
+  "The Fields paper gives the Angular Cancellation Lemma, records unit-width shell geometry and O(k_j) resonant-set counting, but the exact mixed-tail positive-sector L_FT^+ kernel no longer matches that carrier entrywise because it is profile-weighted and uses max(cos(closure),0); the corrected signed half-sum test also leaves S_+ = S_abs/2, so this receipt records structural relevance only, not a live direct proof carrier."
 
 canonicalSourcePdfPath : String
 canonicalSourcePdfPath =
@@ -156,7 +156,7 @@ canonicalSourceResonantSetText =
 
 canonicalBridgeTargetText : String
 canonicalBridgeTargetText =
-  "Candidate bridge target: the ACL carrier may support a spectral-norm bound for the finite-to-tail block L_FT^+ and hence the SchurResidueScale gate."
+  "Bridge target status: the direct ACL carrier does not match the current positive-sector finite-to-tail block L_FT^+ entrywise, so any future bridge must come from a reformulation or a different carrier."
 
 canonicalSourceDiagonalBridgeText : String
 canonicalSourceDiagonalBridgeText =
@@ -184,19 +184,19 @@ canonicalSText =
 
 canonicalLText : String
 canonicalLText =
-  "L: ACL geometry -> shell counting -> finite-to-tail norm bound -> SchurResidueScale remains open."
+  "L: ACL geometry -> shell counting remains structurally relevant, but both the direct finite-to-tail norm carrier and the signed rescue fail for the current positive-sector block."
 
 canonicalPText : String
 canonicalPText =
-  "P: use the ACL carrier to attack the off-diagonal block estimate, then feed it into q_gap >= c / N^2."
+  "P: do not treat the ACL paper as the current direct off-diagonal block carrier; the live route is direct positive-sector magnitude/counting control before feeding anything into q_gap >= c / N^2."
 
 canonicalGText : String
 canonicalGText =
-  "G: keep the receipt candidate-only and fail-closed until the exact L_FT normalization is audited."
+  "G: keep the receipt candidate-only and fail-closed; the exact L_FT normalization audit now kills the direct kernel match."
 
 canonicalFText : String
 canonicalFText =
-  "F: the open gap is the analytic operator-norm estimate, not the availability of the external ACL theorem."
+  "F: the open gap is a viable analytic operator-norm route, not the availability of the external ACL theorem."
 
 record NSFieldsACLExternalSchurResidueBridgeORCSLPGF : Set where
   constructor mkNSFieldsACLExternalSchurResidueBridgeORCSLPGF

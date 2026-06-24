@@ -492,6 +492,7 @@ def _build_lookup(symbols: list[SymbolRecord]) -> tuple[dict[str, list[str]], di
 
 def _scan_references(
     root: Path,
+    files: list[FileRecord],
     symbols: list[SymbolRecord],
     query_symbols: list[SymbolRecord],
     source: str | None,
@@ -508,22 +509,56 @@ def _scan_references(
         for symbol in query_symbols
         if symbol.module
     }
+    query_modules = {
+        symbol.module
+        for symbol in query_symbols
+        if symbol.module
+    }
+    query_symbol_files = {
+        symbol.file
+        for symbol in query_symbols
+    }
+
+    candidate_paths: set[str] = set()
+    for file_record in files:
+        if file_record.language != LANG_AGDA:
+            continue
+        if file_record.path in query_symbol_files:
+            candidate_paths.add(file_record.path)
+            continue
+        if file_record.module and file_record.module in query_modules:
+            candidate_paths.add(file_record.path)
+            continue
+        if any(import_name in query_modules or import_name in query_terms for import_name in file_record.imports):
+            candidate_paths.add(file_record.path)
+
+    if not candidate_paths:
+        candidate_paths = {
+            file_record.path
+            for file_record in files
+            if file_record.language == LANG_AGDA
+        }
 
     refs: list[RefRecord] = []
     seen: set[tuple[str, str, str, str, int]] = set()
 
     for path in _iter_files(root):
-        if source and source != "all":
-            if source == "agda" and path.suffix != ".agda":
-                continue
-            if source == "docs" and path.suffix != ".md":
-                continue
+        rel_path = _relpath(path, root)
+        is_agda = path.suffix == ".agda"
+        is_docs = path.suffix == ".md"
+
+        if source == "agda" and not is_agda:
+            continue
+        if source == "docs" and not is_docs:
+            continue
+        if is_agda and rel_path not in candidate_paths:
+            continue
 
         text = _read_text(path)
         if text is None:
             continue
         lines = text.splitlines()
-        file_path = _relpath(path, root)
+        file_path = rel_path
 
         if path.suffix == ".agda":
             file_owner = next(
@@ -709,7 +744,7 @@ def _resolve_symbols(index: RepoIndex, query: str, kind: str | None, source: str
 
 def _refs_for_symbols(index: RepoIndex, symbols: list[SymbolRecord], source: str | None) -> list[RefRecord]:
     query_root = Path(index.root)
-    return _scan_references(query_root, index.symbols, symbols, source)
+    return _scan_references(query_root, index.files, index.symbols, symbols, source)
 
 
 def _pretty_symbol(symbol: SymbolRecord) -> str:
@@ -796,6 +831,22 @@ def _graph_node(symbol: SymbolRecord, refs: list[RefRecord], depth: int, index: 
             outgoing.append(_graph_node(match, refs, depth - 1, index, seen.copy()))
         else:
             outgoing.append({"symbol_id": target, "kind": item.get("kind"), "unresolved": True})
+
+    file_record = next((item for item in index.files if item.path == symbol.file), None)
+    if file_record is not None:
+        for import_name in file_record.imports:
+            match = next(
+                (
+                    candidate
+                    for candidate in index.symbols
+                    if candidate.symbol_id == import_name or candidate.module == import_name or candidate.name == import_name.split(".")[-1]
+                ),
+                None,
+            )
+            if match is not None:
+                outgoing.append(_graph_node(match, refs, depth - 1, index, seen.copy()))
+            else:
+                outgoing.append({"symbol_id": import_name, "kind": "import", "unresolved": True})
 
     incoming = [
         {
