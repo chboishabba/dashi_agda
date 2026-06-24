@@ -19,6 +19,8 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -486,6 +488,28 @@ def _analysis_read(rows: list[dict[str, Any]], adversarial_rows: list[dict[str, 
     )
 
 
+def _iso_now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _make_logger(entries: list[dict[str, Any]]):
+    started = time.perf_counter()
+
+    def log(message: str, **fields: Any) -> None:
+        entry: dict[str, Any] = {
+            "at": _iso_now(),
+            "elapsed_ms": round((time.perf_counter() - started) * 1000.0, 3),
+            "message": message,
+        }
+        if fields:
+            entry.update(fields)
+        entries.append(entry)
+        details = json.dumps(fields, sort_keys=True, default=str) if fields else "{}"
+        print(f"[acl-schur] {entry['at']} +{entry['elapsed_ms']}ms {message} {details}", flush=True)
+
+    return log, started
+
+
 def _markdown(payload: dict[str, Any]) -> str:
     def fmt(value: Any) -> str:
         if value is None:
@@ -574,7 +598,21 @@ def _markdown(payload: dict[str, Any]) -> str:
 def main() -> int:
     args = _parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
+    log_entries: list[dict[str, Any]] = []
+    log, started_perf = _make_logger(log_entries)
+    started_at = _iso_now()
+    log(
+        "started analytic proof run",
+        output_dir=str(args.output_dir),
+        shells=[int(shell) for shell in args.shells],
+        tail_eta=float(args.tail_eta),
+    )
     rows, adversarial_rows, warnings = _derive_rows(args)
+    log(
+        "derived sampled proof rows",
+        row_count=len(rows),
+        adversarial_row_count=len(adversarial_rows),
+    )
     row_sups = [float(row["row_sum_sup"]) for row in rows]
     col_sups = [float(row["column_sum_sup"]) for row in rows]
     schur = [float(row["schur_bound"]) for row in rows]
@@ -591,6 +629,7 @@ def main() -> int:
         "schema_version": SCHEMA_VERSION,
         "authority": AUTHORITY,
         "control_card": CONTROL_CARD,
+        "started_at": started_at,
         "status": OK_STATUS if len(rows) == len({int(value) for value in args.shells}) else "partial",
         "candidate_only": True,
         "fail_closed": True,
@@ -623,12 +662,27 @@ def main() -> int:
         },
         "analysis_read": _analysis_read(rows, adversarial_rows),
         "warnings": warnings,
+        "log_entries": log_entries,
     }
 
     output_json = args.output_dir / "summary.json"
     output_md = args.output_dir / "summary.md"
     output_json.write_text(_json_text(payload, bool(args.pretty)), encoding="utf-8")
     output_md.write_text(_markdown(payload), encoding="utf-8")
+    finished_at = _iso_now()
+    elapsed_ms = round((time.perf_counter() - started_perf) * 1000.0, 3)
+    payload["finished_at"] = finished_at
+    payload["elapsed_ms"] = elapsed_ms
+    payload["log_entries"].append(
+        {
+            "at": finished_at,
+            "elapsed_ms": elapsed_ms,
+            "message": "wrote proof artifacts",
+            "output_json": str(output_json),
+            "output_md": str(output_md),
+        }
+    )
+    output_json.write_text(_json_text(payload, bool(args.pretty)), encoding="utf-8")
     print(_json_text(payload, bool(args.pretty)))
     return 0
 

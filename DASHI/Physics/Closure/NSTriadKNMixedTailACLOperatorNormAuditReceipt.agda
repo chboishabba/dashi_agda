@@ -18,22 +18,84 @@ import DASHI.Physics.Closure.NSTriadKNMixedTailACLSchurResidueProofPlanReceipt a
 -- exact analytic checklist that must be discharged before the Fields ACL
 -- carrier can be used for the mixed-tail Schur residue step.
 
-canonicalSchurTestKernelSumBoundText : String
-canonicalSchurTestKernelSumBoundText =
-  "||L_FT^+||_op^2 <= (sup_k sum_p |L_FT^+(k,p)|) * (sup_p sum_k |L_FT^+(k,p)|)"
+canonicalSampledFiniteShellSchurTestWitnessText : String
+canonicalSampledFiniteShellSchurTestWitnessText =
+  "sampled finite-shell witness: checked"
 
-record NSTriadKNMixedTailACLOperatorNormSchurTestKernelSumBound : Set where
+canonicalProfileIndependentSchurTestKernelSumBoundText : String
+canonicalProfileIndependentSchurTestKernelSumBoundText =
+  "profile-independent kernel-sum bound: open"
+
+record NSTriadKNMixedTailSampledFiniteShellSchurTestWitness : Set where
   field
-    boundText :
+    statusText :
       String
-    boundTextIsCanonical :
-      boundText ≡ canonicalSchurTestKernelSumBoundText
+    statusTextIsCanonical :
+      statusText ≡ canonicalSampledFiniteShellSchurTestWitnessText
+    scopeText :
+      String
+    scopeTextIsCanonical :
+      scopeText ≡ "N=6,8,10,12; forced-tail rows + sampled adversarial equal-mass worst-tail sweep"
+    rowSupRangeText :
+      String
+    rowSupRangeTextIsCanonical :
+      rowSupRangeText ≡ "[0.01147, 0.01166]"
+    columnSupRangeText :
+      String
+    columnSupRangeTextIsCanonical :
+      columnSupRangeText ≡ "[9.16e-4, 1.78e-3] adversarial; [9.17e-5, 3.41e-4] forced-tail"
+    nTimesBoundText :
+      String
+    nTimesBoundTextIsCanonical :
+      nTimesBoundText ≡ "[0.0118, 0.0128] near-flat"
+    profileIndependentText :
+      String
+    profileIndependentTextIsCanonical :
+      profileIndependentText ≡ "false"
 
-mixedTailSchurTestKernelSumBound :
-  NSTriadKNMixedTailACLOperatorNormSchurTestKernelSumBound
-mixedTailSchurTestKernelSumBound = record
-  { boundText = canonicalSchurTestKernelSumBoundText
-  ; boundTextIsCanonical = refl
+canonicalSampledFiniteShellSchurTestWitness :
+  NSTriadKNMixedTailSampledFiniteShellSchurTestWitness
+canonicalSampledFiniteShellSchurTestWitness = record
+  { statusText = canonicalSampledFiniteShellSchurTestWitnessText
+  ; statusTextIsCanonical = refl
+  ; scopeText =
+      "N=6,8,10,12; forced-tail rows + sampled adversarial equal-mass worst-tail sweep"
+  ; scopeTextIsCanonical = refl
+  ; rowSupRangeText = "[0.01147, 0.01166]"
+  ; rowSupRangeTextIsCanonical = refl
+  ; columnSupRangeText =
+      "[9.16e-4, 1.78e-3] adversarial; [9.17e-5, 3.41e-4] forced-tail"
+  ; columnSupRangeTextIsCanonical = refl
+  ; nTimesBoundText = "[0.0118, 0.0128] near-flat"
+  ; nTimesBoundTextIsCanonical = refl
+  ; profileIndependentText = "false"
+  ; profileIndependentTextIsCanonical = refl
+  }
+
+record NSTriadKNMixedTailProfileIndependentSchurTestKernelSumBound : Set where
+  field
+    statusText :
+      String
+    statusTextIsCanonical :
+      statusText ≡ canonicalProfileIndependentSchurTestKernelSumBoundText
+    targetText :
+      String
+    targetTextIsCanonical :
+      targetText ≡ "||L_FT^+||_op <= C / N for all NS-compatible profiles"
+    missingText :
+      String
+    missingTextIsCanonical :
+      missingText ≡ "analytic ACL-to-Schur-test lift and profile-independent column bound"
+
+canonicalProfileIndependentSchurTestKernelSumBound :
+  NSTriadKNMixedTailProfileIndependentSchurTestKernelSumBound
+canonicalProfileIndependentSchurTestKernelSumBound = record
+  { statusText = canonicalProfileIndependentSchurTestKernelSumBoundText
+  ; statusTextIsCanonical = refl
+  ; targetText = "||L_FT^+||_op <= C / N for all NS-compatible profiles"
+  ; targetTextIsCanonical = refl
+  ; missingText = "analytic ACL-to-Schur-test lift and profile-independent column bound"
+  ; missingTextIsCanonical = refl
   }
 
 listLength : ∀ {A : Set} → List A → Nat
@@ -146,7 +208,7 @@ canonicalReceiptText =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "The Fields ACL paper remains a candidate carrier, and the finite-shell Schur-test proof artifact now records the exact kernel-sum inequality for the sampled N=6,8,10,12 mixed-tail rows with sampled N^-1 block scale; the remaining gap is uniform/profile-independent promotion of that bound, plus the residue-transfer and scope audits."
+  "The Fields ACL paper remains a candidate carrier, the sampled finite-shell witness now records the checked N=6,8,10,12 mixed-tail rows and N^-1 block scale, and the profile-independent Schur-test bound remains open for the analytic ACL-to-Schur-test lift and column bound."
 
 canonicalSourceFieldsReceiptText : String
 canonicalSourceFieldsReceiptText =
@@ -166,11 +228,11 @@ canonicalFiniteShellProofArtifactMarkdown =
 
 canonicalAuditText : String
 canonicalAuditText =
-  "Audit target: exact L_FT^+ normalization, ACL kernel comparison, unit-width shell match, first-harmonic cancellation survival, explicit Schur-test kernel-sum bound, finite-shell proof artifact, uniform L2 operator-norm route, N^-2 residue transfer, and profile scope."
+  "Audit target: exact L_FT^+ normalization, ACL kernel comparison, unit-width shell match, first-harmonic cancellation survival, sampled finite-shell witness, profile-independent Schur-test kernel-sum bound, finite-shell proof artifact, uniform L2 operator-norm route, N^-2 residue transfer, and profile scope."
 
 canonicalBoundaryText : String
 canonicalBoundaryText =
-  "Boundary: this audit records the proof checklist, the exact Schur-test inequality witness, and the sampled finite-shell proof artifact only; theorem/full-NS/BKM/Clay promotion remains false."
+  "Boundary: this audit records the proof checklist, the sampled finite-shell witness, and the open profile-independent Schur-test bound only; theorem/full-NS/BKM/Clay promotion remains false."
 
 canonicalOText : String
 canonicalOText =
@@ -182,7 +244,7 @@ canonicalRText =
 
 canonicalCText : String
 canonicalCText =
-  "C: export the checklist rows, candidate lemmas, exact Schur witness, finite-shell proof artifacts, open gaps, and false promotion flags."
+  "C: export the checklist rows, candidate lemmas, sampled witness, open profile-independent bound, finite-shell proof artifacts, open gaps, and false promotion flags."
 
 canonicalSText : String
 canonicalSText =
@@ -202,7 +264,7 @@ canonicalGText =
 
 canonicalFText : String
 canonicalFText =
-  "F: the open gap is uniform/profile-independent promotion of the sampled operator-norm bridge, not the existence of the carrier paper."
+  "F: the open gap is the profile-independent operator-norm theorem, not the existence of the sampled witness."
 
 record NSTriadKNMixedTailACLOperatorNormAuditORCSLPGF : Set where
   constructor mkNSTriadKNMixedTailACLOperatorNormAuditORCSLPGF
@@ -288,10 +350,15 @@ record NSTriadKNMixedTailACLOperatorNormAuditReceipt : Setω where
     finiteShellProofArtifactMarkdownIsCanonical :
       finiteShellProofArtifactMarkdown ≡ canonicalFiniteShellProofArtifactMarkdown
 
-    schurTestKernelSumBound :
-      NSTriadKNMixedTailACLOperatorNormSchurTestKernelSumBound
-    schurTestKernelSumBoundIsCanonical :
-      schurTestKernelSumBound ≡ mixedTailSchurTestKernelSumBound
+    sampledFiniteShellSchurTestWitness :
+      NSTriadKNMixedTailSampledFiniteShellSchurTestWitness
+    sampledFiniteShellSchurTestWitnessIsCanonical :
+      sampledFiniteShellSchurTestWitness ≡ canonicalSampledFiniteShellSchurTestWitness
+
+    profileIndependentSchurTestKernelSumBound :
+      NSTriadKNMixedTailProfileIndependentSchurTestKernelSumBound
+    profileIndependentSchurTestKernelSumBoundIsCanonical :
+      profileIndependentSchurTestKernelSumBound ≡ canonicalProfileIndependentSchurTestKernelSumBound
 
     auditText :
       String
@@ -378,7 +445,9 @@ canonicalNSTriadKNMixedTailACLOperatorNormAuditReceipt =
     refl
     canonicalFiniteShellProofArtifactMarkdown
     refl
-    mixedTailSchurTestKernelSumBound
+    canonicalSampledFiniteShellSchurTestWitness
+    refl
+    canonicalProfileIndependentSchurTestKernelSumBound
     refl
     canonicalAuditText
     refl

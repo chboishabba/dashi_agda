@@ -19,13 +19,14 @@ import argparse
 import json
 import re
 import sys
+import tempfile
 from collections import defaultdict
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Iterable
 
 
-SCHEMA_VERSION = "1.0.0"
+SCHEMA_VERSION = "1.1.0"
 DEFAULT_INDEX_PATH = Path(".repo-index/index.json")
 LANG_AGDA = "agda"
 LANG_MD = "md"
@@ -61,9 +62,6 @@ class SymbolRecord:
     file: str
     line_start: int
     line_end: int
-    signature: str
-    snippet: str
-    doc: str
     status: dict[str, str]
     tags: list[str] = field(default_factory=list)
     requirements: dict[str, list[dict[str, str]]] = field(default_factory=dict)
@@ -74,6 +72,7 @@ class FileRecord:
     path: str
     language: str
     module: str | None
+    fingerprint: str = ""
     imports: list[str] = field(default_factory=list)
     doc_links: list[str] = field(default_factory=list)
     symbols: list[str] = field(default_factory=list)
@@ -134,6 +133,11 @@ def _read_text(path: Path) -> str | None:
         return None
 
 
+def _fingerprint(path: Path) -> str:
+    stat = path.stat()
+    return f"{stat.st_mtime_ns}:{stat.st_size}"
+
+
 def _stable_unique(items: Iterable[str]) -> list[str]:
     seen: set[str] = set()
     out: list[str] = []
@@ -159,7 +163,7 @@ def _status_from_text(text: str) -> dict[str, str]:
         promotion = "candidate-only"
     if "promotedistrue" in lowered or "promoted ≡ true" in lowered or "promoted true" in lowered:
         promotion = "promoted"
-    if "promotionimpossible" in lowered or "blocked" in lowered or "fail-closed" in lowered:
+    if "blocked" in lowered:
         promotion = "blocked"
     if "external-authority-required" in lowered:
         authority = "external-authority-required"
@@ -268,16 +272,33 @@ def _match_lookup_keys(
 
 def _iter_files(root: Path) -> list[Path]:
     files: list[Path] = []
+    allowed_toplevel = {"DASHI", "Docs", "Kernel", "Verification"}
     for path in root.rglob("*"):
         if not path.is_file():
             continue
         rel = path.relative_to(root)
         parts = rel.parts
-        if any(part in {".git", ".repo-index", "node_modules", ".venv", "__pycache__"} for part in parts):
+        if any(part in {".git", ".repo-index", ".pytest_cache", ".venv", ".venv-fluid", ".codex_skill_work", "__pycache__", "build", "dist", "node_modules", "outputs", "monster", "cubical", "temp-DOWNLOADED"} for part in parts):
+            continue
+        if len(parts) > 1 and parts[0] not in allowed_toplevel:
+            continue
+        if len(parts) > 1 and parts[0] == "Docs" and parts[1] not in {"support", "roadmaps"}:
             continue
         if path.suffix == ".agda" or path.suffix == ".md":
             files.append(path)
     return sorted(files)
+
+
+def _existing_index_maps(
+    index: RepoIndex | None,
+) -> tuple[dict[str, FileRecord], dict[str, list[SymbolRecord]]]:
+    if index is None:
+        return {}, {}
+    files = {item.path: item for item in index.files}
+    symbols_by_file: dict[str, list[SymbolRecord]] = defaultdict(list)
+    for symbol in index.symbols:
+        symbols_by_file[symbol.file].append(symbol)
+    return files, symbols_by_file
 
 
 def _parse_agda_file(path: Path, root: Path) -> tuple[FileRecord, list[SymbolRecord]]:
@@ -299,7 +320,6 @@ def _parse_agda_file(path: Path, root: Path) -> tuple[FileRecord, list[SymbolRec
             break
 
     if module_name:
-        doc = _collect_doc_block(lines, module_line_no - 1)
         signature = f"module {module_name} where"
         symbols.append(
             SymbolRecord(
@@ -311,9 +331,6 @@ def _parse_agda_file(path: Path, root: Path) -> tuple[FileRecord, list[SymbolRec
                 file=_relpath(path, root),
                 line_start=module_line_no,
                 line_end=module_line_no,
-                signature=signature,
-                snippet=signature,
-                doc=doc,
                 status={"promotion": "unknown", "authority": "unknown", "truth": "unknown", "source": "agda"},
                 tags=["module"],
                 requirements={},
@@ -368,14 +385,9 @@ def _parse_agda_file(path: Path, root: Path) -> tuple[FileRecord, list[SymbolRec
 
         block_text = "\n".join(lines[start:end])
         doc = _collect_doc_block(lines, start)
-        snippet = _snippet_from_lines(lines, start, min(end, start + 4))
         status = _status_from_text(f"{name}\n{signature}\n{doc}\n{block_text}")
         symbol_id = f"{module_name}.{name}" if module_name else name
-        requirements = {
-            "syntactic_requirements": [
-                {"kind": "import", "symbol": item, "source": "parsed-import"} for item in imports
-            ],
-        }
+        requirements = {"syntactic_requirements": []}
         symbols.append(
             SymbolRecord(
                 symbol_id=symbol_id,
@@ -386,9 +398,6 @@ def _parse_agda_file(path: Path, root: Path) -> tuple[FileRecord, list[SymbolRec
                 file=_relpath(path, root),
                 line_start=start + 1,
                 line_end=end,
-                signature=signature,
-                snippet=snippet,
-                doc=doc,
                 status=status,
                 tags=[module_name.split(".")[0]] if module_name else [],
                 requirements=requirements,
@@ -408,69 +417,21 @@ def _parse_agda_file(path: Path, root: Path) -> tuple[FileRecord, list[SymbolRec
                 field_match = re.match(r"^\s+([A-Za-z][A-Za-z0-9']*)\s*:", inner)
                 if field_match:
                     field_lines.append((inner_idx, field_match.group(1), "field"))
+            requirements["syntactic_requirements"].extend(
+                {"kind": "field", "symbol": field_name, "source": "local-record-field"}
+                for _inner_idx, field_name, _field_kind in field_lines
+            )
             for inner_idx, field_name, field_kind in field_lines:
-                field_signature = lines[inner_idx].strip()
-                symbols.append(
-                    SymbolRecord(
-                        symbol_id=f"{symbol_id}.{field_name}",
-                        name=field_name,
-                        kind=field_kind,
-                        language=LANG_AGDA,
-                        module=module_name,
-                        file=_relpath(path, root),
-                        line_start=inner_idx + 1,
-                        line_end=inner_idx + 1,
-                        signature=field_signature,
-                        snippet=field_signature,
-                        doc="",
-                        status=_status_from_text(f"{field_name}\n{field_signature}\n{block_text}"),
-                        tags=["record-field"],
-                        requirements={
-                            "syntactic_requirements": [
-                                {"kind": "record", "symbol": symbol_id, "source": "local-record-field"}
-                            ]
-                        },
-                    )
-                )
+                _ = (inner_idx, field_name, field_kind)
 
         if kind == "data":
-            for inner_idx in range(start + 1, end):
-                inner = lines[inner_idx]
-                inner_match = re.match(r"^\s+([A-Za-z][A-Za-z0-9']*)\b", inner)
-                if not inner_match:
-                    continue
-                constructor = inner_match.group(1)
-                if constructor in {"data", "record", "field", "where"}:
-                    continue
-                if not inner.lstrip().startswith(constructor):
-                    continue
-                symbols.append(
-                    SymbolRecord(
-                        symbol_id=f"{symbol_id}.{constructor}",
-                        name=constructor,
-                        kind="constructor",
-                        language=LANG_AGDA,
-                        module=module_name,
-                        file=_relpath(path, root),
-                        line_start=inner_idx + 1,
-                        line_end=inner_idx + 1,
-                        signature=inner.strip(),
-                        snippet=inner.strip(),
-                        doc="",
-                        status=_status_from_text(f"{constructor}\n{inner.strip()}\n{block_text}"),
-                        tags=["constructor"],
-                        requirements={
-                            "syntactic_requirements": [
-                                {"kind": "data", "symbol": symbol_id, "source": "local-data-constructor"}
-                            ]
-                        },
-                    )
-                )
+            pass
 
     file_record = FileRecord(
         path=_relpath(path, root),
         language=LANG_AGDA,
         module=module_name,
+        fingerprint=_fingerprint(path),
         imports=_stable_unique(imports),
         doc_links=[],
         symbols=[symbol.symbol_id for symbol in symbols],
@@ -491,6 +452,7 @@ def _parse_markdown_file(path: Path, root: Path) -> tuple[FileRecord, list[Symbo
         path=_relpath(path, root),
         language=LANG_MD,
         module=None,
+        fingerprint=_fingerprint(path),
         imports=[],
         doc_links=doc_links,
         symbols=[],
@@ -507,9 +469,6 @@ def _parse_markdown_file(path: Path, root: Path) -> tuple[FileRecord, list[Symbo
             file=_relpath(path, root),
             line_start=1,
             line_end=max(1, len(lines)),
-            signature=title,
-            snippet=_snippet_from_lines(lines, 0, min(len(lines), 3)),
-            doc="",
             status={"promotion": "unknown", "authority": "unknown", "truth": "unknown", "source": "docs"},
             tags=["doc"],
             requirements={},
@@ -531,53 +490,79 @@ def _build_lookup(symbols: list[SymbolRecord]) -> tuple[dict[str, list[str]], di
     return by_symbol_id, by_module, by_name
 
 
-def _build_references(root: Path, files: list[FileRecord], symbols: list[SymbolRecord]) -> list[RefRecord]:
-    by_symbol_id, by_module, by_name = _build_lookup(symbols)
-    symbol_index = {symbol.symbol_id: symbol for symbol in symbols}
+def _scan_references(
+    root: Path,
+    symbols: list[SymbolRecord],
+    query_symbols: list[SymbolRecord],
+    source: str | None,
+) -> list[RefRecord]:
+    by_symbol_id, by_module, by_name = _build_lookup(query_symbols)
+    query_terms = {
+        symbol.symbol_id
+        for symbol in query_symbols
+    } | {
+        symbol.name
+        for symbol in query_symbols
+    } | {
+        symbol.module
+        for symbol in query_symbols
+        if symbol.module
+    }
+
     refs: list[RefRecord] = []
     seen: set[tuple[str, str, str, str, int]] = set()
 
-    for file_record in files:
-        path = root / file_record.path
+    for path in _iter_files(root):
+        if source and source != "all":
+            if source == "agda" and path.suffix != ".agda":
+                continue
+            if source == "docs" and path.suffix != ".md":
+                continue
+
         text = _read_text(path)
         if text is None:
             continue
         lines = text.splitlines()
+        file_path = _relpath(path, root)
 
-        if file_record.language == LANG_AGDA:
+        if path.suffix == ".agda":
+            file_owner = next(
+                (symbol.symbol_id for symbol in symbols if symbol.kind == "module" and symbol.file == file_path),
+                file_path,
+            )
             for line_no, line in enumerate(lines, start=1):
                 stripped = line.strip()
                 if not stripped or stripped.startswith("--"):
                     continue
 
-                owner = _best_owner_symbol(symbols, file_record.path, line_no)
+                owner = _best_owner_symbol(symbols, file_path, line_no) or file_owner
                 for token in IDENT_RE.findall(line):
+                    if token not in query_terms and token.split(".")[-1] not in query_terms:
+                        continue
                     for target in _match_lookup_keys(token, by_symbol_id, by_module, by_name):
                         if owner and target == owner:
                             continue
-                        key = (owner or file_record.path, target, "definition-use", file_record.path, line_no)
+                        key = (owner, target, "definition-use", file_path, line_no)
                         if key in seen:
                             continue
                         seen.add(key)
                         refs.append(
                             RefRecord(
-                                from_symbol=owner or file_record.path,
+                                from_symbol=owner,
                                 to_symbol=target,
                                 ref_kind="definition-use",
-                                file=file_record.path,
+                                file=file_path,
                                 line=line_no,
                                 snippet=line.strip(),
                             )
                         )
 
-            if file_record.module:
-                owner = file_record.module
-                for line_no, line in enumerate(lines, start=1):
-                    match = AGDA_IMPORT_RE.match(line)
-                    if not match:
+                import_match = AGDA_IMPORT_RE.match(line)
+                if import_match:
+                    target = import_match.group(1)
+                    if target not in query_terms:
                         continue
-                    target = match.group(1)
-                    key = (owner, target, "import-use", file_record.path, line_no)
+                    key = (owner, target, "import-use", file_path, line_no)
                     if key in seen:
                         continue
                     seen.add(key)
@@ -586,17 +571,19 @@ def _build_references(root: Path, files: list[FileRecord], symbols: list[SymbolR
                             from_symbol=owner,
                             to_symbol=target,
                             ref_kind="import-use",
-                            file=file_record.path,
+                            file=file_path,
                             line=line_no,
                             snippet=line.strip(),
                         )
                     )
         else:
-            owner = file_record.symbols[0] if file_record.symbols else file_record.path
+            owner = f"docs:{file_path}"
             for line_no, line in enumerate(lines, start=1):
                 for token in IDENT_RE.findall(line):
+                    if token not in query_terms and token.split(".")[-1] not in query_terms:
+                        continue
                     for target in _match_lookup_keys(token, by_symbol_id, by_module, by_name):
-                        key = (owner, target, "doc-mention", file_record.path, line_no)
+                        key = (owner, target, "doc-mention", file_path, line_no)
                         if key in seen:
                             continue
                         seen.add(key)
@@ -605,57 +592,63 @@ def _build_references(root: Path, files: list[FileRecord], symbols: list[SymbolR
                                 from_symbol=owner,
                                 to_symbol=target,
                                 ref_kind="doc-mention",
-                                file=file_record.path,
+                                file=file_path,
                                 line=line_no,
                                 snippet=line.strip(),
                             )
                         )
 
-    # Add a small unknown bucket for direct symbol text that remains unresolved in docs.
-    for file_record in files:
-        if file_record.language != LANG_MD:
-            continue
-        path = root / file_record.path
-        text = _read_text(path)
-        if text is None:
-            continue
-        for line_no, line in enumerate(text.splitlines(), start=1):
-            if "TODO" in line or "unknown" in line.lower():
-                refs.append(
-                    RefRecord(
-                        from_symbol=file_record.symbols[0] if file_record.symbols else file_record.path,
-                        to_symbol="unknown",
-                        ref_kind="unknown",
-                        file=file_record.path,
-                        line=line_no,
-                        snippet=line.strip(),
+            for line_no, line in enumerate(lines, start=1):
+                if "TODO" in line or "unknown" in line.lower():
+                    refs.append(
+                        RefRecord(
+                            from_symbol=owner,
+                            to_symbol="unknown",
+                            ref_kind="unknown",
+                            file=file_path,
+                            line=line_no,
+                            snippet=line.strip(),
+                        )
                     )
-                )
-                break
+                    break
 
     return refs
 
 
-def scan_repo(root: Path) -> RepoIndex:
+def scan_repo(root: Path, *, progress: bool = False, existing: RepoIndex | None = None) -> RepoIndex:
+    paths = _iter_files(root)
     files: list[FileRecord] = []
     symbols: list[SymbolRecord] = []
+    cached_files, cached_symbols_by_file = _existing_index_maps(existing)
 
-    for path in _iter_files(root):
+    total = len(paths)
+    for idx, path in enumerate(paths, start=1):
+        rel_path = _relpath(path, root)
+        fingerprint = _fingerprint(path)
+        cached_file = cached_files.get(rel_path)
+        if cached_file is not None and cached_file.fingerprint == fingerprint:
+            files.append(cached_file)
+            symbols.extend(cached_symbols_by_file.get(rel_path, []))
+            if progress:
+                print(f"[repo-index] reused {idx}/{total}: {rel_path}", file=sys.stderr, flush=True)
+            continue
         if path.suffix == ".agda":
             file_record, file_symbols = _parse_agda_file(path, root)
         else:
             file_record, file_symbols = _parse_markdown_file(path, root)
+        file_record.fingerprint = fingerprint
         files.append(file_record)
         symbols.extend(file_symbols)
+        if progress:
+            print(f"[repo-index] scanned {idx}/{total}: {rel_path}", file=sys.stderr, flush=True)
 
-    references = _build_references(root, files, symbols)
     return RepoIndex(
         schema_version=SCHEMA_VERSION,
         root=root.as_posix(),
         generated_at="source-scan",
         files=files,
         symbols=symbols,
-        references=references,
+        references=[],
     )
 
 
@@ -668,7 +661,18 @@ def load_index(root: Path, index_path: Path) -> RepoIndex:
 
 def write_index(index: RepoIndex, index_path: Path) -> None:
     index_path.parent.mkdir(parents=True, exist_ok=True)
-    index_path.write_text(json.dumps(index.to_json(), indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=index_path.parent, delete=False) as tmp:
+        tmp_path = Path(tmp.name)
+        try:
+            json.dump(index.to_json(), tmp, indent=2, sort_keys=True)
+            tmp.write("\n")
+            tmp.flush()
+        except BaseException:
+            try:
+                tmp_path.unlink(missing_ok=True)
+            finally:
+                raise
+    tmp_path.replace(index_path)
 
 
 def _symbol_score(symbol: SymbolRecord, query: str) -> tuple[int, int, int, int, str]:
@@ -704,19 +708,8 @@ def _resolve_symbols(index: RepoIndex, query: str, kind: str | None, source: str
 
 
 def _refs_for_symbols(index: RepoIndex, symbols: list[SymbolRecord], source: str | None) -> list[RefRecord]:
-    symbol_ids = {symbol.symbol_id for symbol in symbols}
-    symbol_names = {symbol.name for symbol in symbols}
-    module_names = {symbol.module for symbol in symbols if symbol.module}
-    matches: list[RefRecord] = []
-    for ref in index.references:
-        if source and source != "all":
-            if source == "agda" and ref.file.endswith(".md"):
-                continue
-            if source == "docs" and not ref.file.endswith(".md"):
-                continue
-        if ref.to_symbol in symbol_ids or ref.to_symbol in symbol_names or ref.to_symbol in module_names:
-            matches.append(ref)
-    return matches
+    query_root = Path(index.root)
+    return _scan_references(query_root, index.symbols, symbols, source)
 
 
 def _pretty_symbol(symbol: SymbolRecord) -> str:
@@ -727,10 +720,7 @@ def _pretty_symbol(symbol: SymbolRecord) -> str:
         f"  file: {symbol.file}:{symbol.line_start}",
         f"  status: {symbol.status.get('promotion', 'unknown')}",
     ]
-    if symbol.doc:
-        pieces.append(f"  doc: {symbol.doc}")
-    if symbol.snippet:
-        pieces.append(f"  summary: {symbol.snippet}")
+    pieces.append(f"  summary: {symbol.file}:{symbol.line_start}")
     return "\n".join(pieces)
 
 
@@ -769,12 +759,7 @@ def _pretty_reqs(symbol: SymbolRecord) -> str:
 
 def _pretty_hover(symbol: SymbolRecord) -> str:
     lines = [symbol.symbol_id, f"kind: {symbol.kind}", f"module: {symbol.module or 'unknown'}"]
-    if symbol.doc:
-        lines.append(f"doc: {symbol.doc}")
-    if symbol.signature:
-        lines.append(f"signature: {symbol.signature}")
-    if symbol.snippet:
-        lines.append(f"summary: {symbol.snippet}")
+    lines.append(f"summary: {symbol.file}:{symbol.line_start}")
     lines.append(f"status: {symbol.status.get('promotion', 'unknown')}")
     return "\n".join(lines)
 
@@ -885,6 +870,19 @@ def _render_command_payload(
         payload["matches"] = [asdict(symbol) for symbol in matches]
         if not matches:
             return payload, "no matches"
+        match = asdict(matches[0])
+        file_record = next((item for item in index.files if item.path == matches[0].file), None)
+        syntactic = list(match.get("requirements", {}).get("syntactic_requirements", []))
+        if file_record is not None:
+            syntactic = [
+                {"kind": "import", "symbol": item, "source": "parsed-import"}
+                for item in file_record.imports
+            ] + syntactic
+        match["requirements"] = {
+            "syntactic_requirements": syntactic,
+            "semantic_requirements": match.get("requirements", {}).get("semantic_requirements", []),
+        }
+        payload["matches"] = [match]
         return payload, _pretty_reqs(matches[0])
 
     if command == "refs":
@@ -927,7 +925,13 @@ def main(argv: list[str] | None = None) -> int:
     index_path = (root / args.index) if not args.index.is_absolute() else args.index
 
     if args.command == "build":
-        index = scan_repo(root)
+        existing = None
+        if index_path.exists():
+            try:
+                existing = load_index(root, index_path)
+            except Exception:
+                existing = None
+        index = scan_repo(root, progress=True, existing=existing)
         write_index(index, index_path)
     else:
         index = load_index(root, index_path)
@@ -943,4 +947,8 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except KeyboardInterrupt:
+        print("[repo-index] interrupted", file=sys.stderr)
+        raise SystemExit(130)

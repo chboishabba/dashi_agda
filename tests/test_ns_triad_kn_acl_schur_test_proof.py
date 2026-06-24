@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+from functools import lru_cache
 import json
 import math
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -46,9 +48,10 @@ def bool_values_for_keys(payload: Any, *keys: str) -> list[bool]:
     return values
 
 
-def run_script(tmp_path: Path) -> tuple[dict[str, Any], str]:
+@lru_cache(maxsize=1)
+def run_script() -> tuple[dict[str, Any], str]:
     assert SCRIPT.is_file(), f"missing {SCRIPT}"
-    out_dir = tmp_path / "acl_schur_test"
+    out_dir = Path(tempfile.gettempdir()) / "dashi_ns_triad_kn_acl_schur_test"
     result = subprocess.run(
         [
             sys.executable,
@@ -71,8 +74,8 @@ def run_script(tmp_path: Path) -> tuple[dict[str, Any], str]:
     return payload, text + "\n" + summary_md.read_text(encoding="utf-8")
 
 
-def test_acl_schur_test_proof_emits_fail_closed_rows(tmp_path: Path) -> None:
-    payload, text = run_script(tmp_path)
+def test_acl_schur_test_proof_emits_fail_closed_rows() -> None:
+    payload, text = run_script()
     combined = normalize(json.dumps(payload, sort_keys=True)) + "\n" + normalize(text)
 
     assert payload["status"] == "ok"
@@ -80,6 +83,12 @@ def test_acl_schur_test_proof_emits_fail_closed_rows(tmp_path: Path) -> None:
     assert payload["fail_closed"] is True
     assert payload["row_count"] == 4
     assert payload["adversarial_row_count"] == 4
+    assert isinstance(payload["started_at"], str) and payload["started_at"]
+    assert isinstance(payload["finished_at"], str) and payload["finished_at"]
+    assert float(payload["elapsed_ms"]) >= 0.0
+    assert payload["log_entries"], payload
+    assert payload["log_entries"][0]["message"] == "started analytic proof run"
+    assert payload["log_entries"][-1]["message"] == "wrote proof artifacts"
     assert "schur_test_statement" in combined
     assert "finite_shell_only" in combined
     assert "n_times_schur_bound" in combined
@@ -118,8 +127,8 @@ def test_acl_schur_test_proof_emits_fail_closed_rows(tmp_path: Path) -> None:
         assert int(row["worst_tail_active_finite_k_count"]) > 0
 
 
-def test_acl_schur_test_proof_supports_sampled_n_inverse_scale(tmp_path: Path) -> None:
-    payload, _text = run_script(tmp_path)
+def test_acl_schur_test_proof_supports_sampled_n_inverse_scale() -> None:
+    payload, _text = run_script()
     stats = payload["n_times_schur_bound_stats"]
     fit = payload["fits"]["schur_bound_vs_N"]
     adv_stats = payload["adversarial_n_times_schur_bound_stats"]
@@ -138,5 +147,7 @@ def test_acl_operator_norm_receipt_records_proof_artifact() -> None:
     text = RECEIPT.read_text(encoding="utf-8")
     assert "ns_triad_kn_acl_schur_test_proof_20260624/summary.json" in text
     assert "ns_triad_kn_acl_schur_test_proof_20260624/summary.md" in text
-    assert "mixedTailSchurTestKernelSumBound = record" in text
+    assert "canonicalSampledFiniteShellSchurTestWitness = record" in text
+    assert "canonicalProfileIndependentSchurTestKernelSumBound = record" in text
+    assert "mixedTailSchurTestKernelSumBound" not in text
     assert "postulate\n  mixedTailSchurTestKernelSumBound" not in text

@@ -133,7 +133,7 @@ canonicalReceiptText =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "The Fields ACL paper is recorded as a carrier for the off-diagonal shell-cancellation side, the finite-shell Schur-test proof artifact now certifies the exact sampled kernel-sum inequality and sampled N^-1 block scale on N=6,8,10,12, and the remaining gap is to promote that sampled bound to a uniform/profile-independent operator-norm theorem on L_FT^+."
+  "The Fields ACL paper is recorded as a carrier for the off-diagonal shell-cancellation side, the sampled finite-shell Schur-test witness now certifies the exact N=6,8,10,12 kernel-sum inequality and sampled N^-1 block scale, and the remaining gap is to promote that sampled bound to a uniform/profile-independent operator-norm theorem on L_FT^+."
 
 canonicalSourceFieldsReceiptText : String
 canonicalSourceFieldsReceiptText =
@@ -149,7 +149,7 @@ canonicalSourceBridgeReadoutText =
 
 canonicalProofPlanText : String
 canonicalProofPlanText =
-  "Promote the sampled finite-shell Schur-test proof to a uniform |L_FT^+|_op <= C / N theorem, then transfer that bound to q_gap(N) >= c / N^2 under the current normalization, and only then combine with D(N) ~ N^2."
+  "Promote the sampled finite-shell Schur-test witness to a uniform |L_FT^+|_op <= C / N theorem, then transfer that bound to q_gap(N) >= c / N^2 under the current normalization, and only then combine with D(N) ~ N^2."
 
 canonicalBoundaryText : String
 canonicalBoundaryText =
@@ -177,7 +177,7 @@ canonicalLText =
 
 canonicalPText : String
 canonicalPText =
-  "P: promote the sampled finite-shell operator norm bound to a uniform theorem first, because everything downstream depends on that gate."
+  "P: promote the sampled finite-shell witness to a uniform theorem first, because everything downstream depends on that gate."
 
 canonicalGText : String
 canonicalGText =
