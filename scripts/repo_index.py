@@ -34,6 +34,8 @@ DEFAULT_INDEX_PATH = Path(".repo-index/index.sqlite3")
 LANG_AGDA = "agda"
 LANG_MD = "md"
 REF_BATCH_SIZE = 10000
+MAX_BARE_NAME_FANOUT = 8
+MIN_BARE_NAME_LENGTH = 4
 KNOWN_STATUS_VALUES = {
     "promoted",
     "candidate-only",
@@ -119,6 +121,12 @@ class PhaseTimer:
 
     def finish(self) -> float:
         return max(0.0, time.monotonic() - self.start)
+
+
+@dataclass(slots=True)
+class SymbolCatalog:
+    exact_tokens: set[str]
+    bare_name_counts: dict[str, int]
 
 
 def _relpath(path: Path, root: Path) -> str:
@@ -385,7 +393,7 @@ def _ensure_schema(conn: sqlite3.Connection) -> None:
     )
 
 
-def _create_secondary_indexes(conn: sqlite3.Connection) -> None:
+def _create_lookup_indexes(conn: sqlite3.Connection) -> None:
     conn.executescript(
         """
         CREATE INDEX IF NOT EXISTS idx_symbols_name ON symbols(name);
@@ -395,11 +403,23 @@ def _create_secondary_indexes(conn: sqlite3.Connection) -> None:
         CREATE INDEX IF NOT EXISTS idx_imports_module ON imports(imported_module);
         CREATE INDEX IF NOT EXISTS idx_mentions_token ON mentions(token);
         CREATE INDEX IF NOT EXISTS idx_mentions_file ON mentions(file);
+        """
+    )
+
+
+def _create_ref_indexes(conn: sqlite3.Connection) -> None:
+    conn.executescript(
+        """
         CREATE INDEX IF NOT EXISTS idx_refs_to_symbol ON refs(to_symbol);
         CREATE INDEX IF NOT EXISTS idx_refs_from_symbol ON refs(from_symbol);
         CREATE INDEX IF NOT EXISTS idx_refs_file ON refs(file);
         """
     )
+
+
+def _create_secondary_indexes(conn: sqlite3.Connection) -> None:
+    _create_lookup_indexes(conn)
+    _create_ref_indexes(conn)
 
 
 def _drop_secondary_indexes(conn: sqlite3.Connection) -> None:
@@ -726,32 +746,35 @@ def _parse_file_task(path: Path, root: Path, indexed_at: int) -> tuple[FileRecor
     return _parse_file(path, root, sha256, indexed_at)
 
 
-def _known_symbol_tokens(conn: sqlite3.Connection) -> set[str]:
-    tokens: set[str] = set()
+def _build_symbol_catalog(conn: sqlite3.Connection) -> SymbolCatalog:
+    exact_tokens: set[str] = set()
+    bare_name_counts: dict[str, int] = {}
     for row in conn.execute("SELECT symbol_id, module, name FROM symbols"):
-        tokens.add(row["symbol_id"])
-        tokens.add(row["name"])
+        exact_tokens.add(row["symbol_id"])
+        bare_name_counts[row["name"]] = bare_name_counts.get(row["name"], 0) + 1
         if row["module"]:
-            tokens.add(row["module"])
-            tokens.add(_last_ident(row["module"]))
-        tokens.add(_last_ident(row["symbol_id"]))
-    return tokens
+            exact_tokens.add(row["module"])
+            module_last = _last_ident(row["module"])
+            bare_name_counts[module_last] = bare_name_counts.get(module_last, 0) + 1
+    return SymbolCatalog(exact_tokens=exact_tokens, bare_name_counts=bare_name_counts)
 
 
-def _should_keep_mention(token: str, known_tokens: set[str]) -> bool:
-    if token in known_tokens:
+def _should_keep_mention(token: str, catalog: SymbolCatalog) -> bool:
+    if token in catalog.exact_tokens:
         return True
     last = _last_ident(token)
-    if last in known_tokens:
-        return True
-    return "." in token and token[:1].isupper()
+    if "." in token:
+        return last in catalog.bare_name_counts
+    if len(token) < MIN_BARE_NAME_LENGTH:
+        return False
+    return catalog.bare_name_counts.get(token, 0) <= MAX_BARE_NAME_FANOUT
 
 
 def _extract_mentions_from_path(
     path: Path,
     root: Path,
     owner_rows: list[tuple[str, int, int]],
-    known_tokens: set[str],
+    catalog: SymbolCatalog,
 ) -> tuple[str, list[tuple[int, str | None, str, str, str]]]:
     text = _read_text(path)
     rel_path = _relpath(path, root)
@@ -770,7 +793,7 @@ def _extract_mentions_from_path(
             continue
         owner_symbol = _best_owner_symbol_for_rows(owner_rows, line_no)
         for token in _stable_unique(IDENT_RE.findall(line)):
-            if not _should_keep_mention(token, known_tokens):
+            if not _should_keep_mention(token, catalog):
                 continue
             mentions.append((line_no, owner_symbol, token, stripped, source_kind))
     return rel_path, mentions
@@ -904,7 +927,7 @@ def _populate_mentions(
     jobs: int = 1,
     commit_every: int = 100,
 ) -> int:
-    known_tokens = _known_symbol_tokens(conn)
+    catalog = _build_symbol_catalog(conn)
     tasks = [
         (path, _owner_rows_for_file(conn, _relpath(path, root)))
         for path in paths
@@ -916,7 +939,7 @@ def _populate_mentions(
 
     def mention_task(item: tuple[Path, list[tuple[str, int, int]]]) -> tuple[str, list[tuple[int, str | None, str, str, str]]]:
         path, owner_rows = item
-        return _extract_mentions_from_path(path, root, owner_rows, known_tokens)
+        return _extract_mentions_from_path(path, root, owner_rows, catalog)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, jobs)) as executor:
         for rel_path, mentions in executor.map(mention_task, tasks):
@@ -935,12 +958,26 @@ def _populate_mentions(
 
 def _relink_all(conn: sqlite3.Connection, *, progress: bool = False) -> int:
     conn.execute("DELETE FROM refs")
+    conn.execute("DROP TABLE IF EXISTS temp.ref_stage")
+    conn.execute(
+        """
+        CREATE TEMP TABLE ref_stage (
+            from_symbol TEXT NOT NULL,
+            to_symbol TEXT NOT NULL,
+            ref_kind TEXT NOT NULL,
+            file TEXT NOT NULL,
+            line INTEGER NOT NULL,
+            snippet TEXT NOT NULL,
+            UNIQUE(from_symbol, to_symbol, ref_kind, file, line, snippet)
+        )
+        """
+    )
     if progress:
         print("[repo-index] link imports", file=sys.stderr, flush=True)
     conn.execute(
         """
-        INSERT INTO refs(from_symbol, to_symbol, ref_kind, file, line, snippet)
-        SELECT DISTINCT
+        INSERT OR IGNORE INTO ref_stage(from_symbol, to_symbol, ref_kind, file, line, snippet)
+        SELECT
             COALESCE(i.owner_symbol, i.file),
             s.symbol_id,
             'import-use',
@@ -948,33 +985,50 @@ def _relink_all(conn: sqlite3.Connection, *, progress: bool = False) -> int:
             i.line,
             ''
         FROM imports i
-        JOIN symbols s
-          ON s.symbol_id = i.imported_module
-          OR s.module = i.imported_module
+        JOIN symbols s ON s.symbol_id = i.imported_module
+        WHERE COALESCE(i.owner_symbol, i.file) <> s.symbol_id
+        """
+    )
+    conn.execute(
+        """
+        INSERT OR IGNORE INTO ref_stage(from_symbol, to_symbol, ref_kind, file, line, snippet)
+        SELECT
+            COALESCE(i.owner_symbol, i.file),
+            s.symbol_id,
+            'import-use',
+            i.file,
+            i.line,
+            ''
+        FROM imports i
+        JOIN symbols s ON s.module = i.imported_module
         WHERE COALESCE(i.owner_symbol, i.file) <> s.symbol_id
         """
     )
     if progress:
         print("[repo-index] link mentions", file=sys.stderr, flush=True)
-    conn.execute(
-        """
-        INSERT INTO refs(from_symbol, to_symbol, ref_kind, file, line, snippet)
-        SELECT DISTINCT
-            COALESCE(m.owner_symbol, m.file),
-            s.symbol_id,
-            CASE WHEN m.source_kind = 'docs' THEN 'doc-mention' ELSE 'definition-use' END,
-            m.file,
-            m.line,
-            m.snippet
-        FROM mentions m
-        JOIN symbols s
-          ON s.symbol_id = m.token
-          OR s.module = m.token
-          OR s.name = m.token
-          OR (instr(m.token, '.') > 0 AND s.name = last_ident(m.token))
-        WHERE COALESCE(m.owner_symbol, m.file) <> s.symbol_id
-        """
-    )
+    for predicate in (
+        "s.symbol_id = m.token",
+        "s.module = m.token",
+        "s.name = m.token",
+        "instr(m.token, '.') > 0 AND s.name = last_ident(m.token)",
+    ):
+        conn.execute(
+            f"""
+            INSERT OR IGNORE INTO ref_stage(from_symbol, to_symbol, ref_kind, file, line, snippet)
+            SELECT
+                COALESCE(m.owner_symbol, m.file),
+                s.symbol_id,
+                CASE WHEN m.source_kind = 'docs' THEN 'doc-mention' ELSE 'definition-use' END,
+                m.file,
+                m.line,
+                m.snippet
+            FROM mentions m
+            JOIN symbols s ON {predicate}
+            WHERE COALESCE(m.owner_symbol, m.file) <> s.symbol_id
+            """
+        )
+    conn.execute("INSERT INTO refs SELECT * FROM ref_stage")
+    conn.execute("DROP TABLE ref_stage")
     row = conn.execute("SELECT COUNT(*) AS count FROM refs").fetchone()
     return int(row["count"])
 
@@ -1025,13 +1079,18 @@ def _build_full(
     mention_count = _populate_mentions(root, conn, paths, progress=progress, jobs=jobs, commit_every=commit_every)
     phases["mentions"] = timer.finish()
 
+    timer = PhaseTimer("link-prepare")
+    _create_lookup_indexes(conn)
+    conn.commit()
+    phases["link-prepare"] = timer.finish()
+
     timer = PhaseTimer("link")
     ref_count = _relink_all(conn, progress=progress)
     conn.commit()
     phases["link"] = timer.finish()
 
     timer = PhaseTimer("finalize")
-    _create_secondary_indexes(conn)
+    _create_ref_indexes(conn)
     conn.execute("ANALYZE")
     _set_meta(conn, root, indexed_at)
     conn.commit()
@@ -1141,13 +1200,18 @@ def _update_incremental(
     mention_count = _populate_mentions(root, conn, reparsed_paths, progress=progress, jobs=jobs, commit_every=commit_every)
     phases["mentions"] = timer.finish()
 
+    timer = PhaseTimer("link-prepare")
+    _create_lookup_indexes(conn)
+    conn.commit()
+    phases["link-prepare"] = timer.finish()
+
     timer = PhaseTimer("link")
     ref_count = _relink_all(conn, progress=progress)
     conn.commit()
     phases["link"] = timer.finish()
 
     timer = PhaseTimer("finalize")
-    _create_secondary_indexes(conn)
+    _create_ref_indexes(conn)
     conn.execute("ANALYZE")
     _set_meta(conn, root, indexed_at)
     conn.commit()

@@ -55,6 +55,24 @@ def _edge_laplacian_matvec(x: np.ndarray, left: np.ndarray, right: np.ndarray, w
     return out
 
 
+def _edge_laplacian_matmat(X: np.ndarray, left: np.ndarray, right: np.ndarray, weights: np.ndarray) -> np.ndarray:
+    """Batched variant of _edge_laplacian_matvec.
+
+    X is (mode_count, n_cols).  Returns (mode_count, n_cols).
+    Applies the same weighted incidence operator to every column simultaneously,
+    replacing the O(n_cols) serial matvec loop used to build dense matrices.
+    Sign and weight conventions are identical to the scalar path.
+    """
+    out = np.zeros_like(X, dtype=np.float64)
+    if len(weights) == 0:
+        return out
+    diff = X[left, :] - X[right, :]      # (E, n_cols)
+    contrib = weights[:, None] * diff     # (E, n_cols)
+    np.add.at(out, left, contrib)
+    np.add.at(out, right, -contrib)
+    return out
+
+
 def matvec_abs(x: np.ndarray, profile: MatrixFreeKNProfile) -> np.ndarray:
     """Return ``L_abs(A) x`` using weighted edge incidence."""
 
