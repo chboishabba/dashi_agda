@@ -1019,6 +1019,14 @@ def main() -> None:
         and (r["S_C"].get("nullity_estimate", r["S_C"].get("nullity")) == 1)
         for r in results
     )
+    dense_domination_rows = [
+        r for r in results
+        if (r.get("signed_factorization_diagnostics") or {}).get("dense_audit_available")
+    ]
+    domination_ratio_below_one_observed = bool(dense_domination_rows) and all(
+        (r["signed_factorization_diagnostics"] or {}).get("domination_holds_strictly_observed") is True
+        for r in dense_domination_rows
+    )
 
     payload = {
         "script": SCRIPT_NAME,
@@ -1031,10 +1039,15 @@ def main() -> None:
         "theorem_promoted": False,
         "gate1_closed": False,
         "gate1_supported_at_tested_shells": bool(psd_verified and nullity_one_observed),
-        "gate1_target": "S_C = M_CC − M_CG M_GG⁻¹ M_GC ⪰ 0 and dim ker S_C = 1",
+        "gate1_target": (
+            "Uniform signed domination on 1_C^⊥: "
+            "sup_x⊥1_C (x^T L_bad x)/(x^T L_good x) ≤ rho_* < 1"
+        ),
         "schurNullModeIsConstantProved": True,
         "kronStyleSchurReductionIdentified": True,
         "ordinaryKronLaplacianIdentified": False,
+        "ordinaryKronLaplacianRoute": False,
+        "balancedSignedGraphRoute": False,
         "effectiveOffdiagNonpositiveProved": False,
         "effectiveGraphConnectedProved": False,
         "effectiveGraphConnectedObserved": bool(
@@ -1056,6 +1069,11 @@ def main() -> None:
                 for r in results
             )
         ),
+        "signedDominationProbeInstalled": bool(
+            any(r.get("signed_factorization_diagnostics") is not None for r in results)
+        ),
+        "signedDominationRatioBelowOneObserved": domination_ratio_below_one_observed,
+        "signedDominationRatioUniformlyBounded": False,
         "schurComplementMatrixFreeAuditInstalled": True,
         "schurNullModeConstantOnCObserved": bool(
             all(
@@ -1069,6 +1087,7 @@ def main() -> None:
         "schurNullModeIdentified": False,
         "schurSignedFactorizationProved": False,
         "schurNullModeFactorizationProved": False,
+        "gate1ConditionalTheoremProved": False,
     }
 
     json_path = output_dir / "schur_audit.json"

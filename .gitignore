@@ -20,6 +20,9 @@ result
 temp-DOWNLOADED/
 .playwright-mcp/
 .cache/
+.tmp-cache/
+.tmp-nix-state/
+.tmp-nix-cache/
 scripts/data/hepdata/ins1784890/
 scripts/data/hepdata/lhcb_prl125_011802_arxiv2003_04831/LHCb-PAPER-2020-002-supplementary.zip
 scripts/data/hepdata/lhcb_prl125_011802_arxiv2003_04831/extracted/

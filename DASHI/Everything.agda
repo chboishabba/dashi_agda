@@ -154,6 +154,7 @@ import DASHI.Combinatorics.Restoration
 import DASHI.Combinatorics.StrictContractionFinite
 import DASHI.Combinatorics.TriadicVideoCodecObservationQuotient
 import DASHI.Cognition.ResidualPhaseGeometry
+import DASHI.Cognition.ResidualPhaseEmpiricalContact
 import DASHI.Cognition.TlureyNumerologyStateSpace
 import DASHI.Cognition.TlureyDyadicNonaryTraceReceipt
 import DASHI.Cognition.TlureyPrimorialBridge
@@ -183,8 +184,12 @@ import DASHI.Core.BridgeRequirementCore
 import DASHI.Core.CandidateFunctionalCore
 import DASHI.Core.CandidateOnlyCore
 import DASHI.Core.ControlCardCore
+import DASHI.Core.ContactHamiltonian
+import DASHI.Core.ComparisonLawCore
 import DASHI.Core.DashiMarkov
+import DASHI.Core.EmpiricalContactReceipt
 import DASHI.Core.EmptyPromotionCore
+import DASHI.Core.FibreRestrictionCore
 import DASHI.Core.FingerprintProjectionCore
 import DASHI.Core.FiniteReceiptList
 import DASHI.Core.FormalLensLawCore
@@ -193,8 +198,10 @@ import DASHI.Core.FormalLensVocabularyCore
 import DASHI.Core.FormalStructureLawCore
 import DASHI.Core.GenericReceipt
 import DASHI.Core.HiddenLiftProjectionCore
+import DASHI.Core.InterconnectionExistingCoreBridge
 import DASHI.Core.KernelMonoid
 import DASHI.Core.LensKernel
+import DASHI.Core.ObservableContactGeometry
 import DASHI.Core.OddBerezinTopCoefficientBoundary
 import DASHI.Core.OddGrassmannCoefficientGate
 import DASHI.Core.OddSSP369FieldGate

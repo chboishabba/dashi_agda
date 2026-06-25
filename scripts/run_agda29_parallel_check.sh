@@ -15,7 +15,7 @@ AGDA_LOG_PATH="${AGDA_LOG_PATH:-/home/c/.gemini/antigravity/scratch/dashi-agda29
 AGDA_LOG_PREV="${AGDA_LOG_PATH}.1"
 
 if [ -z "${XDG_CACHE_HOME:-}" ]; then
-  export XDG_CACHE_HOME="/tmp/dashi-nix-cache"
+  export XDG_CACHE_HOME="$REPO_ROOT/.cache"
   mkdir -p "$XDG_CACHE_HOME"
 fi
 

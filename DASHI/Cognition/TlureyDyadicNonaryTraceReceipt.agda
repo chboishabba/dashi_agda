@@ -7,6 +7,7 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 open import Data.String using (_++_)
 
+import DASHI.Cognition.ResidualPhaseEmpiricalContact as Contact
 import DASHI.Cognition.ResidualPhaseGeometry as Geometry
 
 ------------------------------------------------------------------------
@@ -29,13 +30,14 @@ false ∧ _ = false
 -- chaos) is candidate-only and requires MDL/ZKP gates.
 ------------------------------------------------------------------------
 
-record DyadicNonaryTraceReceipt : Set where
+record DyadicNonaryTraceReceipt : Set₁ where
   constructor dyadicNonaryTraceReceipt
   field
     -------------------------------------------------------
     -- Source admission
     -------------------------------------------------------
     generalTheory : Geometry.ResidualPhaseGeometryReceipt
+    empiricalContact : Contact.EmpiricalContactReceipt
     traceObserved : Bool
 
     -------------------------------------------------------
@@ -76,6 +78,10 @@ record DyadicNonaryTraceReceipt : Set where
   allGatesClosed =
     Geometry.ResidualPhaseGeometryReceipt.allClosed generalTheory
     ∧
+    Contact.EmpiricalContactReceipt.observableContactClosed empiricalContact
+    ∧
+    Contact.EmpiricalContactReceipt.nonPromotionBoundaryClosed empiricalContact
+    ∧
     traceObserved
     ∧ dyadicSurfaceDetected
     ∧ recursiveBranchingDetected
@@ -99,6 +105,8 @@ record DyadicNonaryTraceReceipt : Set where
   closureStatement : String
   closureStatement =
     "The uploaded trace is admitted only as a noisy generative source. "
+    ++ "Observable contact is typed through replayable public split, branch depth, "
+    ++ "transition, residual mismatch, private lexeme, and fixation surfaces. "
     ++ "Promoted: dyadic recursion over hidden residual state-space. "
     ++ "Branch algebra promotable. "
     ++ "Candidate-only: triadic/nonary organisation; 369/666 resonance; "
@@ -115,6 +123,7 @@ canonicalTraceReceipt : DyadicNonaryTraceReceipt
 canonicalTraceReceipt =
   record
     { generalTheory                  = Geometry.canonicalResidualPhaseGeometryReceipt
+    ; empiricalContact               = Contact.canonicalEmpiricalContactReceipt
     ; traceObserved                  = true
     ; dyadicSurfaceDetected          = true
     ; recursiveBranchingDetected     = true

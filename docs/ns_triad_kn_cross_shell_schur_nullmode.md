@@ -23,7 +23,7 @@ M = \begin{pmatrix} M_{GG} & M_{GC} \\ M_{CG} & M_{CC} \end{pmatrix},
 G = \{\text{shell } 1\},\ C = \{\text{shells } N-1,\, N\}.
 $$
 
-**Gate 1 target:**
+**Legacy Schur target, now reduced to signed domination:**
 
 $$
 \boxed{S_C \mathbf{1}_C = 0,\qquad S_C \succeq 0,\qquad \dim\ker S_C = 1,}
@@ -36,6 +36,17 @@ S_C = M_{CC} - M_{CG}\, M_{GG}^{-1}\, M_{GC}
 $$
 
 is the Schur complement of $M_{GG}$ in $M$.
+
+The live proof obligation is now recorded separately in
+`docs/ns_triad_kn_cross_shell_signed_domination.md`: prove a uniform bound
+\(\rho_N \le \rho_* < 1\) for
+\[
+\rho_N
+=
+\sup_{x \perp \mathbf{1}_C}
+\frac{x^\top L_{\mathrm{bad}} x}
+     {x^\top L_{\mathrm{good}} x}.
+\]
 
 ---
 
@@ -154,13 +165,14 @@ seam block Gram matrix.
 | Question | Status |
 |---|---|
 | Is $S_C \mathbf{1}_C = 0$? | **Yes.** Follows from $M\mathbf{1}=0$ and Schur complementation. |
-| Is $S_C \succeq 0$ (PSD) for all N? | Observed at N=6,8,10,12,14. Proof open. |
+| Is $S_C \succeq 0$ (PSD) for all N? | Observed at N=6,8,10,12,14. Proof open; live route is signed domination. |
 | Is $\dim\ker S_C = 1$ for all N? | Observed at N=6,8,10,12,14. Connectivity proof open. |
 | What is the null vector $v_0$? | The constant vector $\mathbf{1}_C$ up to scale/sign. |
 | Is $v_0$ a shell-balance indicator? | No. Correlation is small at N=12,14. |
 | Are ordinary Kron-reduced edge weights nonnegative? | Open; this is a strong sufficient shortcut, not the definition of Gate 1 admissibility. |
 | Is the ordinary Kron-reduced graph connected? | Open; only relevant if the nonpositive-offdiagonal shortcut closes. |
-| Can $S_C = B_{\mathrm{eff}}^T W_{\mathrm{eff}} B_{\mathrm{eff}}$ be factored? | Open explicit factorization; this is the general signed-PSD route if ordinary Laplacian signs fail. |
+| Can the bad signed part be uniformly dominated by the good signed part on $\mathbf{1}_C^\perp$? | Open. This is the live Gate 1 theorem target. |
+| Can $S_C = B_{\mathrm{eff}}^T W_{\mathrm{eff}} B_{\mathrm{eff}}$ be factored? | Open explicit factorization; useful, but no longer the primary theorem target. |
 | Does $\lambda_{\min}(M_{CC}) \to 0$ as $N \to \infty$? | Supported by N=6,8,10,12,14 decay. Proof open. |
 
 ---
@@ -213,6 +225,9 @@ domination ratio
 At the audited dense shells, \(\rho_{\mathrm{obs}} < 1\) is supporting
 evidence for the signed-PSD Schur route, not a proof.
 
+The dedicated proof-target note for this route is
+`docs/ns_triad_kn_cross_shell_signed_domination.md`.
+
 ---
 
 ## Receipt Flags
@@ -230,9 +245,15 @@ effectiveOffdiagNonpositiveProved      = false
 effectiveGraphConnectedProved          = false
 effectiveGraphConnectedObserved        = true
 schurSignedPsdRequired                 = true
+signedDominationProbeInstalled         = true
+signedDominationRatioBelowOneObserved  = true
 schurComplementPsdProved               = false
 schurSignedFactorizationProved         = false
 schurNullModeFactorizationProved       = false
+signedDominationRatioUniformlyBounded  = false
+gate1ConditionalTheoremProved          = false
+ordinaryKronLaplacianRoute             = false
+balancedSignedGraphRoute               = false
 ```
 
 ---
@@ -246,9 +267,9 @@ schurNullModeFactorizationProved       = false
 > The 3-point confirmation at N=6,8,10 fixed the proof target, and the
 > matrix-free `N=12,14` audit strengthens the evidence for a Schur-reduction
 > PSD theorem. The constant null mode is proved from row-sum zero; ordinary
-> nonpositive Kron edge weights would be a sufficient shortcut, but the exact
-> remaining theorem target is \(S_C \succeq 0\) on \(\mathbf{1}_C^\perp\), via
-> either the ordinary Laplacian route or an explicit signed factorization.
+> nonpositive Kron edge weights would be a sufficient shortcut, but the live
+> remaining theorem target is a uniform signed domination bound
+> \(\rho_N \le \rho_* < 1\) on \(\mathbf{1}_C^\perp\).
 
 Do not upgrade this to a generic "balanced signed graph" theorem. The current
 \(S_C\) is a row-sum-zero Schur form and the live proof target is a direct PSD
