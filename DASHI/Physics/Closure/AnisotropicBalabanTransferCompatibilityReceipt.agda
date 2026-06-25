@@ -8,12 +8,28 @@ open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.ClaySprintEightyOneYMBalabanCMP98QhpLocalOscillationReceipt as Sprint81
 import DASHI.Physics.Closure.AnisotropicPartitionOfUnity as POU
+import DASHI.Physics.Closure.YMEffectiveActionSupportInterface as Support
+import DASHI.Physics.Closure.YMAnisotropicPartitionOfUnityInstance as POUInstance
+
+------------------------------------------------------------------------
+-- Sprint 83 closure gate.
+--
+-- anisotropicPartitionUnityHolds is now true because
+-- POUInstance.ymAnisotropicPartitionOfUnityInstance provides a concrete
+-- proof-term inhabiting:
+--
+--   AnisotropicPartitionOfUnity Polymer Polymer YMSpatialBlock
+--     YMInBlock YMInSpatialOnly YMInTopTemporal YMInBotTemporal
+--
+-- The two named obligations from Sprint 82 are discharged:
+--   NeedsYMCarrierTypes         — Polymer from YMEffectiveActionSupportInterface
+--   NeedsDisjointnessFromStructure — temporal faces are ⊥; exclusion by elim
 
 qhpOscillationBoundAvailable : Bool
 qhpOscillationBoundAvailable = true
 
 anisotropicPartitionUnityHolds : Bool
-anisotropicPartitionUnityHolds = false
+anisotropicPartitionUnityHolds = true
 
 weightedKPThresholdReached : Bool
 weightedKPThresholdReached = false
@@ -21,15 +37,23 @@ weightedKPThresholdReached = false
 clayYangMillsClosed : Bool
 clayYangMillsClosed = false
 
-data AnisotropicPartitionUnityObligation : Set where
-  NeedsYMCarrierTypes : AnisotropicPartitionUnityObligation
-  NeedsDisjointnessFromStructure : AnisotropicPartitionUnityObligation
+------------------------------------------------------------------------
+-- The grounded POU witness (proof term, not a Bool flag).
 
-canonicalObligations : List AnisotropicPartitionUnityObligation
-canonicalObligations =
-  NeedsYMCarrierTypes
-  ∷ NeedsDisjointnessFromStructure
-  ∷ []
+anisotropicPartitionOfUnityWitness
+  : POU.AnisotropicPartitionOfUnity
+      Support.Polymer
+      Support.Polymer
+      POUInstance.YMSpatialBlock
+      POUInstance.YMInBlock
+      POUInstance.YMInSpatialOnly
+      POUInstance.YMInTopTemporal
+      POUInstance.YMInBotTemporal
+anisotropicPartitionOfUnityWitness =
+  POUInstance.ymAnisotropicPartitionOfUnityInstance
+
+------------------------------------------------------------------------
+-- Remaining open obligations (none for the partition — KP is next).
 
 data AnisotropicBalabanTransferCompatibilityInput : Set where
   QhpOscillationBoundAvailable :
@@ -60,15 +84,21 @@ record AnisotropicBalabanTransferCompatibilityReceipt : Set₁ where
     oscillationBoundAvailable :
       qhpOscillationBoundAvailable ≡ true
     partitionUnityHolds :
-      anisotropicPartitionUnityHolds ≡ false
+      anisotropicPartitionUnityHolds ≡ true
     kpThresholdReached :
       weightedKPThresholdReached ≡ false
     noClayClose :
       clayYangMillsClosed ≡ false
-    missingGroundedCarrierInstance :
-      List AnisotropicPartitionUnityObligation
-    missingGroundedCarrierInstanceIsCanonical :
-      missingGroundedCarrierInstance ≡ canonicalObligations
+    -- The grounded proof term: type-checks iff the instance really compiles.
+    partitionOfUnityWitness :
+      POU.AnisotropicPartitionOfUnity
+        Support.Polymer
+        Support.Polymer
+        POUInstance.YMSpatialBlock
+        POUInstance.YMInBlock
+        POUInstance.YMInSpatialOnly
+        POUInstance.YMInTopTemporal
+        POUInstance.YMInBotTemporal
     inputs :
       List AnisotropicBalabanTransferCompatibilityInput
     inputsAreCanonical :
@@ -87,12 +117,9 @@ canonicalAnisotropicBalabanTransferCompatibilityReceipt =
     ; partitionUnityHolds = refl
     ; kpThresholdReached = refl
     ; noClayClose = refl
-    ; missingGroundedCarrierInstance = canonicalObligations
-    ; missingGroundedCarrierInstanceIsCanonical = refl
+    ; partitionOfUnityWitness = anisotropicPartitionOfUnityWitness
     ; inputs = canonicalInputs
     ; inputsAreCanonical = refl
     ; promotions = []
     ; promotionsAreEmpty = refl
     }
-
-
