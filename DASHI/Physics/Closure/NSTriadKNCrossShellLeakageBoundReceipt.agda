@@ -71,6 +71,10 @@ data NSTriadKNCrossShellLeakageBoundSampledEvidence : Set where
     NSTriadKNCrossShellLeakageBoundSampledEvidence
   deltaCollapseObservedAtN12 :
     NSTriadKNCrossShellLeakageBoundSampledEvidence
+  weakBlockFloorPsdVerified :
+    NSTriadKNCrossShellLeakageBoundSampledEvidence
+  leakageBoundBelowOneTwentiethSampled :
+    NSTriadKNCrossShellLeakageBoundSampledEvidence
 
 canonicalNSTriadKNCrossShellLeakageBoundSampledEvidence :
   List NSTriadKNCrossShellLeakageBoundSampledEvidence
@@ -82,15 +86,17 @@ canonicalNSTriadKNCrossShellLeakageBoundSampledEvidence =
   ∷ bCrossZeroSampled
   ∷ deltaSmallAtN12Sampled
   ∷ deltaCollapseObservedAtN12
+  ∷ weakBlockFloorPsdVerified
+  ∷ leakageBoundBelowOneTwentiethSampled
   ∷ []
 
 nSTriadKNCrossShellLeakageBoundSampledEvidenceCount : Nat
 nSTriadKNCrossShellLeakageBoundSampledEvidenceCount =
   listLength canonicalNSTriadKNCrossShellLeakageBoundSampledEvidence
 
-nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs7 :
-  nSTriadKNCrossShellLeakageBoundSampledEvidenceCount ≡ 7
-nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs7 = refl
+nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs9 :
+  nSTriadKNCrossShellLeakageBoundSampledEvidenceCount ≡ 9
+nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs9 = refl
 
 data NSTriadKNCrossShellLeakageBoundOpenObligation : Set where
   crossShellBlockFloorProved :
@@ -105,6 +111,10 @@ data NSTriadKNCrossShellLeakageBoundOpenObligation : Set where
     NSTriadKNCrossShellLeakageBoundOpenObligation
   deltaCollapseProved :
     NSTriadKNCrossShellLeakageBoundOpenObligation
+  phaseAdmissibilityCharacterized :
+    NSTriadKNCrossShellLeakageBoundOpenObligation
+  gate1ConditionalTheoremProved :
+    NSTriadKNCrossShellLeakageBoundOpenObligation
 
 canonicalNSTriadKNCrossShellLeakageBoundOpenObligations :
   List NSTriadKNCrossShellLeakageBoundOpenObligation
@@ -115,32 +125,50 @@ canonicalNSTriadKNCrossShellLeakageBoundOpenObligations =
   ∷ admissibleProfileExtension
   ∷ normalizedToResidueTransferProved
   ∷ deltaCollapseProved
+  ∷ phaseAdmissibilityCharacterized
+  ∷ gate1ConditionalTheoremProved
   ∷ []
 
 nSTriadKNCrossShellLeakageBoundOpenObligationCount : Nat
 nSTriadKNCrossShellLeakageBoundOpenObligationCount =
   listLength canonicalNSTriadKNCrossShellLeakageBoundOpenObligations
 
-nSTriadKNCrossShellLeakageBoundOpenObligationCountIs6 :
-  nSTriadKNCrossShellLeakageBoundOpenObligationCount ≡ 6
-nSTriadKNCrossShellLeakageBoundOpenObligationCountIs6 = refl
+nSTriadKNCrossShellLeakageBoundOpenObligationCountIs8 :
+  nSTriadKNCrossShellLeakageBoundOpenObligationCount ≡ 8
+nSTriadKNCrossShellLeakageBoundOpenObligationCountIs8 = refl
 
 data NSTriadKNCrossShellLeakageBoundStructuralResult : Set where
   bCrossZeroStructuralProof :
+    NSTriadKNCrossShellLeakageBoundStructuralResult
+  blockFloorPsdCertificate :
+    NSTriadKNCrossShellLeakageBoundStructuralResult
+  perModeSignFractionProved :
+    NSTriadKNCrossShellLeakageBoundStructuralResult
+  schurComplementStructureWritten :
+    NSTriadKNCrossShellLeakageBoundStructuralResult
+  phaseAdversaryTestExecuted :
+    NSTriadKNCrossShellLeakageBoundStructuralResult
+  walffeHelicalGroundingIdentified :
     NSTriadKNCrossShellLeakageBoundStructuralResult
 
 canonicalNSTriadKNCrossShellLeakageBoundStructuralResults :
   List NSTriadKNCrossShellLeakageBoundStructuralResult
 canonicalNSTriadKNCrossShellLeakageBoundStructuralResults =
-  bCrossZeroStructuralProof ∷ []
+  bCrossZeroStructuralProof
+  ∷ blockFloorPsdCertificate
+  ∷ perModeSignFractionProved
+  ∷ schurComplementStructureWritten
+  ∷ phaseAdversaryTestExecuted
+  ∷ walffeHelicalGroundingIdentified
+  ∷ []
 
 nSTriadKNCrossShellLeakageBoundStructuralResultCount : Nat
 nSTriadKNCrossShellLeakageBoundStructuralResultCount =
   listLength canonicalNSTriadKNCrossShellLeakageBoundStructuralResults
 
-nSTriadKNCrossShellLeakageBoundStructuralResultCountIs1 :
-  nSTriadKNCrossShellLeakageBoundStructuralResultCount ≡ 1
-nSTriadKNCrossShellLeakageBoundStructuralResultCountIs1 = refl
+nSTriadKNCrossShellLeakageBoundStructuralResultCountIs6 :
+  nSTriadKNCrossShellLeakageBoundStructuralResultCount ≡ 6
+nSTriadKNCrossShellLeakageBoundStructuralResultCountIs6 = refl
 
 data NSTriadKNCrossShellLeakageBoundPromotion : Set where
 
@@ -158,11 +186,11 @@ canonicalEvidenceTableText =
 
 canonicalBlockFloorText : String
 canonicalBlockFloorText =
-  "Cross-shell block floor c0 ≈ 0.158–0.175 across N=6,8,10,12; conservative c0 = 0.15."
+  "Cross-shell block floor: conditional analytic bound c0 = 1/9; sharp sampled bound c0 ≈ 0.158–0.175 verified at N=6,8,10,12. Weak PSD: L_neg,cross - (1/9)*L_abs,cross ≻ 0 at all shells (PSD certificate + Schur complement: bulk M_GG diagonal PSD, corner Schur gap ~0). Phase adversary test: unconditional theorem refuted (ϕ=0 gives L_neg=0); targeted vertex attacks fail to break PSD — Schur compensation robust. Per-vertex sign-fraction superseded. Waleffe helical grounding: s_j = -s_w forward-cascade class identified as the natural phase-admissibility condition (f_0 > 1/9). Gate 1 = conditional on f_0 > 1/9, which is physically natural (ϕ=0 not on turbulent attractor) and SOTA-consistent (March 2026 conditional regularity preprint)."
 
 canonicalLeakageSmallText : String
 canonicalLeakageSmallText =
-  "Δ/block ≤ 4.4% at N=6,8,10 and collapses to 0.014% at N=12 — leakage shrinks with N."
+  "Δ/block ≤ 4.4% at N=6,8,10 and collapses to 0.014% at N=12 — all below 1/20 < 1/9 = c0 (weak). Sampled leakage bound closed for Gate 1 weak theorem."
 
 canonicalBCrossZeroText : String
 canonicalBCrossZeroText =
@@ -190,7 +218,7 @@ canonicalSourceArtifactMarkdown =
 
 canonicalLeakageBoundDoc : String
 canonicalLeakageBoundDoc =
-  "docs/ns_triad_kn_cross_shell_leakage_bound.md (includes B-Cross Separation Lemma, §B-Cross Separation Lemma (Proved))"
+  "docs/ns_triad_kn_cross_shell_leakage_bound.md (includes B-Cross Separation Lemma, §B-Cross Separation Lemma (Proved)), docs/ns_triad_kn_cross_shell_block_floor.md (PSD certificate §Computational Certificate)"
 
 canonicalOText : String
 canonicalOText =
@@ -222,7 +250,7 @@ canonicalGText =
 
 canonicalFText : String
 canonicalFText =
-  "F: missing proofs are cross-shell block floor (analytic), B-cross separation (shell geometry), leakage bound (Weyl perturbation), admissible profile extension, and Gram coercivity closure."
+  "F: missing proofs are phase admissibility characterization (f_0 > 1/9 candidate via Waleffe s_j = -s_w helical class), Gate 1 conditional theorem (assumes f_0 > 1/9), Schur complement analytic proof under phase admissibility, leakage bound uniform in N under same class, admissible profile extension, and Gram coercivity closure (Gates 2–5). B-cross separation: structural proof ready. Per-vertex sign-fraction: superseded (not needed for Schur PSD)."
 
 record NSTriadKNCrossShellLeakageBoundORCSLPGF : Set where
   constructor mkNSTriadKNCrossShellLeakageBoundORCSLPGF

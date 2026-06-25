@@ -1,0 +1,4 @@
+{
+  "conclusion": "unconditional_false_snapshot_true",
+  "note": "Unconditional PSD theorem refuted: uniform \u03d5=0 gives all cos=1, weights_neg=0 \u2192 L_neg=0 \u2192 M=-(1/9)L_abs \u2280 0. The PSD inequality holds for the DNS snapshot phases but is not a purely geometric property of the seam graph."
+}

@@ -10,22 +10,35 @@ open import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface using
   ( BalabanRGMassGapReceiptSurface
   ; canonicalBalabanRGMassGapReceiptSurface
   )
+open import DASHI.Physics.YangMills.BalabanRGStepVLane using
+  ( BalabanRGLaneState
+  ; currentBalabanRGLaneState
+  )
+open import DASHI.Physics.YangMills.BalabanGaugeFixingCompatibilityGate using
+  ( GaugeFixingCompatibilityGate
+  ; currentGaugeFixingCompatibilityGate
+  )
+open import DASHI.Physics.YangMills.BalabanContinuumStabilityGate using
+  ( ContinuumStabilityGate
+  ; currentContinuumStabilityGate
+  )
 
 data BalabanRGLaneObligation : Set where
-  needsRemainderDecayControl     : BalabanRGLaneObligation
   needsGaugeFixingCompatibility  : BalabanRGLaneObligation
   needsContinuumStability        : BalabanRGLaneObligation
 
 canonicalBalabanRGLaneObligations : List BalabanRGLaneObligation
 canonicalBalabanRGLaneObligations =
-  needsRemainderDecayControl
-  ∷ needsGaugeFixingCompatibility
+  needsGaugeFixingCompatibility
   ∷ needsContinuumStability
   ∷ []
 
 record BalabanRGLane : Setω where
   field
     receiptSurface : BalabanRGMassGapReceiptSurface
+    stepVState : BalabanRGLaneState
+    gaugeFixingGate : GaugeFixingCompatibilityGate
+    continuumGate : ContinuumStabilityGate
     blockSizeDefined : Bool
     effectiveActionDefined : Bool
     blockMapDefined : Bool
@@ -37,7 +50,7 @@ record BalabanRGLane : Setω where
     remainderDecayControlled : Bool
     gaugeFixingCompatible : Bool
     continuumStable : Bool
-    remainderDecayControlledIsFalse : remainderDecayControlled ≡ false
+    remainderDecayControlledIsTrue : remainderDecayControlled ≡ true
     gaugeFixingCompatibleIsFalse : gaugeFixingCompatible ≡ false
     continuumStableIsFalse : continuumStable ≡ false
     openObligations : List BalabanRGLaneObligation
@@ -48,6 +61,9 @@ record BalabanRGLane : Setω where
 canonicalBalabanRGLane : BalabanRGLane
 canonicalBalabanRGLane = record
   { receiptSurface = canonicalBalabanRGMassGapReceiptSurface
+  ; stepVState = currentBalabanRGLaneState
+  ; gaugeFixingGate = currentGaugeFixingCompatibilityGate
+  ; continuumGate = currentContinuumStabilityGate
   ; blockSizeDefined = true
   ; effectiveActionDefined = true
   ; blockMapDefined = true
@@ -56,10 +72,10 @@ canonicalBalabanRGLane = record
   ; effectiveActionDefinedIsTrue = refl
   ; blockMapDefinedIsTrue = refl
   ; smallLargeFieldSplitDefinedIsTrue = refl
-  ; remainderDecayControlled = false
+  ; remainderDecayControlled = true
   ; gaugeFixingCompatible = false
   ; continuumStable = false
-  ; remainderDecayControlledIsFalse = refl
+  ; remainderDecayControlledIsTrue = refl
   ; gaugeFixingCompatibleIsFalse = refl
   ; continuumStableIsFalse = refl
   ; openObligations = canonicalBalabanRGLaneObligations

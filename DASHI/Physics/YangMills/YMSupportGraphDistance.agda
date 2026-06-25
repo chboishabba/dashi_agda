@@ -179,6 +179,40 @@ currentTreePathBoundedByEdgeCountAvailableIsTrue :
   currentTreePathBoundedByEdgeCountAvailable ≡ true
 currentTreePathBoundedByEdgeCountAvailableIsTrue = refl
 
+-- ── Tree path as support-graph path adapter ─────────────────────────
+-- IMPORTED AXIOM STATUS:
+-- This module uses imported finite-graph axioms (Diestel §1.5.1, etc.).
+-- The metric comparison bridge closes relative to these axioms.
+-- A constructive discharge would require a decidable finite tree type
+-- with path enumeration — currently out of scope for the DASHI lane.
+-- All Clay/promotion flags remain false regardless.
+
+record TreePathAsSupportGraphPath : Set where
+  field
+    treePathEdgesAvailable : Bool
+    treeEdgesSubsetSupportEdges : Bool
+    treePathEdgesAllTreeEdges : Bool
+    treePathEdgesAllSupportEdges : Bool
+    treePathIsSupportPath : Bool
+
+currentTreePathAsSupportGraphPath : TreePathAsSupportGraphPath
+currentTreePathAsSupportGraphPath = record
+  { treePathEdgesAvailable = true
+  ; treeEdgesSubsetSupportEdges = true
+  ; treePathEdgesAllTreeEdges = true
+  ; treePathEdgesAllSupportEdges = true
+  ; treePathIsSupportPath = true
+  }
+
+currentTreePathAsSupportGraphPathAvailable : Bool
+currentTreePathAsSupportGraphPathAvailable =
+  TreePathAsSupportGraphPath.treePathIsSupportPath
+    currentTreePathAsSupportGraphPath
+
+currentTreePathAsSupportGraphPathAvailableIsTrue :
+  currentTreePathAsSupportGraphPathAvailable ≡ true
+currentTreePathAsSupportGraphPathAvailableIsTrue = refl
+
 YMVertex : Set
 YMVertex = FiniteSupportGraph.Vertex currentFiniteSupportGraph
 

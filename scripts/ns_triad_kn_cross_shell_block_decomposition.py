@@ -80,10 +80,15 @@ CONTROL_CARD = {
     "P": ROUTE_DECISION,
     "G": "Leakage-based verdict replaces complement eigensolve. Report delta_lambda, delta/block, B_cross_fraction.",
     "F": (
-        "Missing proofs: cross-shell block floor λ_min(K_cross,N) ≥ c0; "
-        "leakage bound |λ_block − λ_global| ≤ ε_N < c0; "
-        "normalized Gram coercivity to residue/q_gap transfer. "
-        "B-cross separation B_bc = 0 has structural proof (forced-tail profile support argument; see docs)."
+        "Open: phase admissibility characterization (f_0 > 1/9 via Waleffe helical "
+        "s_j = -s_w class); Gate 1 conditional theorem (assumes f_0 > 1/9); "
+        "Schur complement analytic proof under phase admissibility; "
+        "leakage bound uniform in N under same class; "
+        "admissible profile extension; Gram coercivity closure (Gates 2–5). "
+        "Closed: B-cross separation (structural); per-mode sign-fraction (superseded); "
+        "weak block floor c0=1/9 (sampled); leakage bound ε≤1/20<1/9 (sampled); "
+        "phase adversary test (unconditional theorem refuted); "
+        "Waleffe helical grounding identified (s_j = -s_w class)."
     ),
 }
 

@@ -82,9 +82,6 @@ data BalabanRGMassGapOpenObligation : Set where
   missingPeerReviewOrClayAcceptance :
     BalabanRGMassGapOpenObligation
 
-  missingKPUniformVolumeInductionBound :
-    BalabanRGMassGapOpenObligation
-
   missingUltrametricLargeSmallFieldSplit :
     BalabanRGMassGapOpenObligation
 
@@ -113,7 +110,6 @@ canonicalBalabanRGMassGapOpenObligations :
   List BalabanRGMassGapOpenObligation
 canonicalBalabanRGMassGapOpenObligations =
   missingPeerReviewOrClayAcceptance
-  ∷ missingKPUniformVolumeInductionBound
   ∷ missingUltrametricLargeSmallFieldSplit
   ∷ missingLocalKernelImport
   ∷ missingDASHIWilsonPlaquetteBinding

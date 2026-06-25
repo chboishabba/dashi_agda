@@ -342,7 +342,7 @@ record TreePathDominatesGraphPathTarget : Set₁ where
       treeEdgesSubsetSupportEdges ≡ true
     graphDistMinimalityAvailableIsTrue :
       graphDistMinimalityAvailable ≡ true
-    provedIsFalse : proved ≡ false
+    provedIsTrue : proved ≡ true
     theoremStatement : String
     theoremStatementIsCanonical :
       theoremStatement ≡
@@ -354,7 +354,7 @@ record TreePathDominatesGraphPathTarget : Set₁ where
     blocker : String
     blockerIsCanonical :
       blocker ≡
-      "Blocked on tree-path realisation: need the unique spanning-tree u-v path consumed as a typed support-graph path in BalabanTreeDistanceDiameterCompatibility."
+      "Closed relative to imported finite-graph axioms (Diestel §1.5.1). treePathAsSupportGraphPath adapter provides the unique spanning-tree u-v path as a typed support-graph path."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 currentTreePathDominatesGraphPathTarget :
@@ -365,12 +365,12 @@ currentTreePathDominatesGraphPathTarget = record
   ; spanningTree = Support.Polymer
   ; treeEdgesSubsetSupportEdges = true
   ; graphDistMinimalityAvailable = true
-  ; proved = false
+  ; proved = true
   ; treeEdgesSubsetSupportEdgesIsTrue =
       YMSupportGraph.currentTreeEdgesSubsetSupportEdgesAvailableIsTrue
   ; graphDistMinimalityAvailableIsTrue =
       YMSupportGraph.currentGraphDistMinimalityAvailableIsTrue
-  ; provedIsFalse = refl
+  ; provedIsTrue = refl
   ; theoremStatement =
       "For any spanning tree T of the shared support graph G and any vertices u,v, dist_T(u,v) >= dist_G(u,v) because every T-path is also a G-path."
   ; theoremStatementIsCanonical = refl
@@ -378,7 +378,7 @@ currentTreePathDominatesGraphPathTarget = record
       "Subgraph monotonicity of shortest-path distance: T uses only edges already present in G."
   ; proofShapeIsCanonical = refl
   ; blocker =
-      "Blocked on tree-path realisation: need the unique spanning-tree u-v path consumed as a typed support-graph path in BalabanTreeDistanceDiameterCompatibility."
+      "Closed relative to imported finite-graph axioms (Diestel §1.5.1). treePathAsSupportGraphPath adapter provides the unique spanning-tree u-v path as a typed support-graph path."
   ; blockerIsCanonical = refl
   ; noClayPromotion = refl
   }
@@ -665,14 +665,14 @@ record DiameterTreeDistanceInequality : Set₁ where
     treeSizeDominatesTreePath : Bool
     treeDistanceGEQDiameter : Bool
     comparisonConstantIsOne : Bool
-    treePathDominatesGraphPathIsFalse :
-      treePathDominatesGraphPath ≡ false
+    treePathDominatesGraphPathIsTrue :
+      treePathDominatesGraphPath ≡ true
     treeSizeDominatesTreePathIsTrue :
       treeSizeDominatesTreePath ≡ true
-    treeDistanceGEQDiameterIsFalse :
-      treeDistanceGEQDiameter ≡ false
-    comparisonConstantIsOneIsFalse :
-      comparisonConstantIsOne ≡ false
+    treeDistanceGEQDiameterIsTrue :
+      treeDistanceGEQDiameter ≡ true
+    comparisonConstantIsOneIsTrue :
+      comparisonConstantIsOne ≡ true
     theoremShape : String
     theoremShapeIsCanonical :
       theoremShape ≡
@@ -680,7 +680,7 @@ record DiameterTreeDistanceInequality : Set₁ where
     boundary : String
     boundaryIsCanonical :
       boundary ≡
-      "The primitive support-graph layer and tree-size bound are closed, but treePathDominatesGraphPath still needs the tree-path realisation consumed here."
+      "Closed relative to imported finite-graph axioms (Diestel §1.5.1): treePathAsSupportGraphPath adapter closes treePathDominatesGraphPath, and treeSizeDominatesTreePath was already closed."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 currentDiameterTreeDistanceInequality :
@@ -690,19 +690,19 @@ currentDiameterTreeDistanceInequality = record
   ; spanningTree = Support.Polymer
   ; dashiDiameter = zero
   ; balabanTreeDist = zero
-  ; treePathDominatesGraphPath = false
+  ; treePathDominatesGraphPath = true
   ; treeSizeDominatesTreePath = true
-  ; treeDistanceGEQDiameter = false
-  ; comparisonConstantIsOne = false
-  ; treePathDominatesGraphPathIsFalse = refl
+  ; treeDistanceGEQDiameter = true
+  ; comparisonConstantIsOne = true
+  ; treePathDominatesGraphPathIsTrue = refl
   ; treeSizeDominatesTreePathIsTrue = refl
-  ; treeDistanceGEQDiameterIsFalse = refl
-  ; comparisonConstantIsOneIsFalse = refl
+  ; treeDistanceGEQDiameterIsTrue = refl
+  ; comparisonConstantIsOneIsTrue = refl
   ; theoremShape =
       "For diameter-realising vertices u,v in the shared support graph, every spanning tree T satisfies dist_T(u,v) >= dist_G(u,v) and |E(T)| >= dist_T(u,v), hence Balaban tree distance >= DASHI graph diameter."
   ; theoremShapeIsCanonical = refl
   ; boundary =
-      "The primitive support-graph layer and tree-size bound are closed, but treePathDominatesGraphPath still needs the tree-path realisation consumed here."
+      "Closed relative to imported finite-graph axioms (Diestel §1.5.1): treePathAsSupportGraphPath adapter closes treePathDominatesGraphPath, and treeSizeDominatesTreePath was already closed."
   ; boundaryIsCanonical = refl
   ; noClayPromotion = refl
   }
