@@ -62,11 +62,20 @@ is PSD at all four shells, with corner (shell \(N\)) Schur gap at machine zero
 confirms that the PSD inequality is NOT an unconditional structural property
 of the seam graph — uniform \(\phi = 0\) (all triads maximally coherent) gives
 \(L_{\mathrm{neg}} = 0\) and \(M_N = -(1/9)L_{\mathrm{abs}} \not\succeq 0\).
-However, targeted attacks on individual shell-1 vertices (setting all their
-incident edges to \(\cos = 1\)) did NOT break the block PSD: the Schur
-compensation mechanism keeps the inequality stable.  The only breaking case
-is the extreme \(\phi_k = \text{const}\) where *all* antivcolerent weight
-vanishes globally.  See the block floor doc for the full adversary table.
+Under the DASHI weight convention (\(\gamma_e = \cos(\phi_\ell+\phi_r-\phi_o)\),
+\(w_{\text{neg}} = \max(-\gamma_e,0)\), \(w_{\text{abs}} = |\gamma_e|\)), the
+correct sufficient condition for PSD is the **Schur block structure**:
+\(M_{GG} \succeq 0\), \(M_{GC} = 0\), \(M_{CC} \succeq 0\) (Level 1a in the
+phase admissibility architecture).  Cut domination (Level 1b) is a downstream
+diagnostic, not a sufficient condition — cut control ≠ Loewner control.
+Targeted attacks on individual shell-1 vertices did NOT break the block PSD
+because the Schur compensation mechanism keeps the inequality stable even
+with local \(\gamma_e = 1\).  The only breaking case is the extreme
+\(\phi_k = \text{const}\) where *all* anticolherent weight vanishes globally.
+See the phase admissibility doc
+([`ns_triad_kn_gate1_phase_admissibility.md`](ns_triad_kn_gate1_phase_admissibility.md))
+for the corrected architecture and the block floor doc for the full
+adversary table.
 
 ---
 
@@ -261,10 +270,14 @@ ingredient.
 
 | Obligation | Status | Notes |
 |:---|---:|---|
-| 1–\((N-1)\)–\(N\) cross-shell block floor \(\lambda_{\min}(K_{\mathrm{cross},N}) \ge c_0\) | 🟡 sampled PSD at 4 shells; Schur structure written; per-vertex sign-fraction **superseded** (not needed — targeted vertex test confirms PSD holds without it) |
+| Phase-admissibility architecture (corrected) | ✅ written | `ns_triad_kn_gate1_phase_admissibility.md` with Levels 0/1a/1b/2 |
+| \(M_{GG} \succeq 0\) (Level 1a) | ✅ | \(M_{GG} = 0\) — no G-G edges in seam |
+| \(M_{GC} = 0\) (Level 1a range condition) | ✅ | supported by \(B_{\text{cross}} = 0\) at all tested N |
+| **\(M_{CC} \succeq 0\) (Level 1a — THE OPEN GATE)** | **⬜** | single remaining Gate 1 target |
+| Gate 1 conditional theorem (Level 0) | ⬜ | block floor \(\geq 1/9\) conditional on \(M_{CC} \succeq 0\) |
 | \(B\)-cross block separation (\(B_{\mathrm{bc}} = 0\)) | ✅ proved | structural proof |
 | Leakage bound \(|\lambda_{\mathrm{block}} - \lambda_{\mathrm{global}}| \le \varepsilon_N\) | ✅ sampled \(\varepsilon_N \le 4.4\%\) | ⬜ structural bound via block mass |
-| Phase-admissibility test | ✅ | unconditional theorem refuted (\(\phi=0\)); snapshot phases and random/per-target perturbations all PSD |
+| Phase-adversary test | ✅ | unconditional theorem refuted (\(\phi=0\)); snapshot and random/per-target all PSD |
 | Normalized Gram coercivity to residue / \(q_{\mathrm{gap}}\) transfer | ❌ | untouched |
 | Sharp block floor \(c_0 \approx 0.15\) | ✅ PSD certificate | ❌ deferred; \(c_0 = 1/9\) sufficient for Gate 1 |
 

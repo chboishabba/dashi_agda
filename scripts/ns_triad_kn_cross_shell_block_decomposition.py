@@ -80,15 +80,15 @@ CONTROL_CARD = {
     "P": ROUTE_DECISION,
     "G": "Leakage-based verdict replaces complement eigensolve. Report delta_lambda, delta/block, B_cross_fraction.",
     "F": (
-        "Open: phase admissibility characterization (f_0 > 1/9 via Waleffe helical "
-        "s_j = -s_w class); Gate 1 conditional theorem (assumes f_0 > 1/9); "
-        "Schur complement analytic proof under phase admissibility; "
-        "leakage bound uniform in N under same class; "
-        "admissible profile extension; Gram coercivity closure (Gates 2–5). "
+        "Open: mCCPsdProved — M_CC ⪰ 0 for the seam bulk block (single Gate 1 target); "
+        "gate1ConditionalTheoremProved (block floor ≥ 1/9 conditional on M_CC ⪰ 0); "
+        "leakage bound analytic uniform in N; admissible profile extension; "
+        "Gram coercivity closure (Gates 2–5). "
         "Closed: B-cross separation (structural); per-mode sign-fraction (superseded); "
         "weak block floor c0=1/9 (sampled); leakage bound ε≤1/20<1/9 (sampled); "
         "phase adversary test (unconditional theorem refuted); "
-        "Waleffe helical grounding identified (s_j = -s_w class)."
+        "Schur PSD architecture written (M_GG=0, M_GC=0 supported, M_CC⬜); "
+        "Waleffe helical grounding identified (motivation only, not proof)."
     ),
 }
 

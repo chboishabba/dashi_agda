@@ -87,46 +87,51 @@ which fails only when *all* edges are positive.
 
 ---
 
-## Waleffe Helical Grounding — The Natural Phase-Admissibility Class
+## Phase-Admissibility Architecture
 
-The \(\phi = 0\) pathology has a clean physical explanation via
-Waleffe's helical decomposition (Waleffe 1992).
-In the eight helical triad interaction classes, energy transfer is
-dominated by the \(s_j = -s_w\) class (forward cascade, ≈86% of
-transfer in EDQNM).  The \(s_j = s_w\) class (reverse cascade) nearly
-cancels itself.  Globally coherent phase alignment (\(\phi = \text{const}\))
-collapses all eight classes into a single constructive superposition—
-exactly the pathological case — which is **not on the turbulent attractor**
-and violates the helical instability mechanism that drives turbulence
-toward the forward-cascade state.
-
-**Definition (Gate-1 Phase Admissibility, proposed):** A seam phase
-profile \(\phi\) is Gate-1-admissible if the helical forward-cascade
-fraction satisfies
+The DASHI weight convention uses sign-split phase coherence:
 
 \[
-f_0(\phi) = \frac{\text{weight}(s_j = -s_w \text{ class})}
-                 {\text{total seam weight}} > \frac{1}{9}.
+\gamma_e = \cos(\phi_\ell + \phi_r - \phi_o), \qquad
+w_{\text{neg}} = \max(-\gamma_e, 0), \qquad
+w_{\text{abs}} = |\gamma_e|
 \]
 
-The \(\phi = 0\) pathology has \(f_0 = 0\).  The DNS snapshot has
-\(\min(\text{frac\_neg}) = 0.185 > 1/9\).  All 5 random phase draws
-also satisfy \(f_0 > 1/9\).  This aligns with the March 2026
-conditional regularity preprint framework (sciety
-10.20944/preprints202603.1591.v1), which uses a structurally analogous
-High–High absorption condition.
+The negative-sector weight is a **sign partition** — every edge is either fully
+negative (\(\gamma_e < 0\)) or fully positive (\(\gamma_e \geq 0\)).  This is
+not the smooth \((1-\cos)/2\) weighting.
 
-## Gate 1 Conditional Theorem
+A corrected architecture is defined in
+[`ns_triad_kn_gate1_phase_admissibility.md`](ns_triad_kn_gate1_phase_admissibility.md):
+
+| Level | Condition | Role |
+|-------|-----------|------|
+| 0 | \(L_{\text{neg,cross}} - (1/9)L_{\text{abs,cross}} \succeq 0\) | Exact target (tautological) |
+| 1a | \(M_{GG} \succeq 0,\; M_{GC} = 0,\; M_{CC} \succeq 0\) (Schur PSD) | **Correct sufficient condition** ⇒ Level 0 |
+| 1b | Every seam cut has \(\geq 1/9\) negative-weight fraction | Downstream diagnostic only (does NOT imply Level 0) |
+| 2 | Waleffe helical F-class | Motivation only (not a proof route) |
+
+**Key corrections from the earlier draft:**
+1. Cut domination (Level 1b) is **downstream** of Level 0, not a path to it. Spectral sparsification literature is precise: every Loewner sparsifier is a cut sparsifier, but the converse fails in general.
+2. The W→C sign identity is a diagnostic bridge candidate, not a high-confidence theorem target. Waleffe's coefficient and DASHI's \(\gamma_e\) are correlated but not identically signed.
+
+The universal arbitrary-phase theorem is dead.  The conditional theorem is alive.
+
+## Gate 1 Conditional Theorem (Revised)
 
 \[
 \boxed{
 \textbf{Theorem (Conditional Seam Block Floor, proposed):}\\
-\text{If } \phi \text{ is Gate-1-admissible, then}
-\quad
+M_{GC} = 0 \text{ and } M_{CC} \succeq 0 \;\Longrightarrow\;
 L_{\mathrm{neg,cross}} - \frac19 L_{\mathrm{abs,cross}} \succeq 0,
 \qquad
 \lambda_{\min}(K_{\mathrm{cross},N}) \ge \frac19 .
 }
+\]
+
+The Schur block condition reduces Gate 1 to the single open target:
+\[
+\boxed{M_{CC} \succeq 0 \text{ for the seam bulk block under NS-compatible phases.}}
 \]
 
 The leakage bound \(\varepsilon_N \le 1/20\) is a separate structural claim
@@ -138,14 +143,6 @@ about the complement-to-block coupling.  Combined:
 \ge \frac19 - \frac1{20}
 = \frac{11}{180} > 0 .
 \]
-
-This is **not** circular: the condition \(f_0 > 1/9\) says "the helical
-forward-cascade class carries at least \(1/9\) of the seam weight,"
-which is a physical condition about phase mixing — the same \(1/9\)
-that was already the candidate floor constant.
-
-The universal arbitrary-phase theorem is dead.  The
-conditional/snapshot-certified theorem is alive and structurally natural.
 
 ---
 
@@ -282,14 +279,20 @@ complement structure already avoids the per-vertex condition.
 ## Status
 
 | Check | Status |
-|---|---|
+|---|---|---|
 | Sampled evidence | ✅ all four shells above 0.158 |
 | Weak PSD certificate (\(c_0 = 1/9\)) | ✅ verified for N=6,8,10,12 (gap ≥ 0.047) |
 | Unconditional theorem (all phase profiles) | ❌ refuted by \(\phi = 0\) |
 | Per-vertex sign-fraction | 🟡 proved (superseded — not needed for Schur proof) |
 | Schur complement structure written | ✅ bulk \(M_{GG}\) diagonal PSD; corner Schur compensation demonstrated |
 | Phase-adversary test | ✅ unconditional theorem refuted; targeted PSD holds via Schur compensation |
-| Weak quadratic-form PSD (\(1/9\)) | ⬜ Schur reduction written; analytic bound verification pending |
+| Phase-admissibility architecture (corrected) | ✅ Level 0/1a/1b/2 in `ns_triad_kn_gate1_phase_admissibility.md` |
+| \(M_{GG} \succeq 0\) (Level 1a) | ✅ \(M_{GG} = 0\) — no G-G edges in seam |
+| \(M_{GC} = 0\) (Level 1a range condition) | ✅ supported by \(B_{\text{cross}} = 0\) at all tested N |
+| **\(M_{CC} \succeq 0\) (Level 1a — THE OPEN GATE)** | **⬜ single remaining Gate 1 target** |
+| Cut domination (Level 1b) | ⬜ downstream diagnostic — NOT a proof path |
+| Waleffe helical (Level 2) | ✅ motivation only — NOT a proof route |
+| Gate 1 conditional theorem (Level 0) | ⬜ open — block floor \(\geq 1/9\) conditional on \(M_{CC} \succeq 0\) |
 | Sharp PSD certificate (\(c_0 = 0.15\)) | ✅ verified for N=6,8,10,12 (gap ≥ 0.008) |
 | Sharp PSD analytic proof | ❌ — deferred; \(c_0=1/9\) sufficient for weak Gate 1 |
 
@@ -297,6 +300,7 @@ complement structure already avoids the per-vertex condition.
 
 ## Dependencies
 
+- [`ns_triad_kn_gate1_phase_admissibility.md`](ns_triad_kn_gate1_phase_admissibility.md) — three-level phase-admissibility architecture
 - [`ns_triad_kn_cross_shell_leakage_bound.md`](ns_triad_kn_cross_shell_leakage_bound.md)
 - [`ns_triad_kn_cross_shell_block_decomposition.py`](../scripts/ns_triad_kn_cross_shell_block_decomposition.py)
 - [`ns_triad_kn_cross_shell_psd_verify.py`](../scripts/ns_triad_kn_cross_shell_psd_verify.py)
