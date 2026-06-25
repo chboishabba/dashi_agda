@@ -198,7 +198,7 @@ canonicalEvidenceTableText =
 
 canonicalBlockFloorText : String
 canonicalBlockFloorText =
-  "Cross-shell block floor: conditional analytic bound c0 = 1/9; sharp sampled bound c0 ≈ 0.158–0.175 verified at N=6,8,10,12. DASHI weight convention: γ_e = cos(φ_ℓ+φ_r−φ_o), w_neg = max(−γ_e,0), w_abs = |γ_e|. Phase-admissibility architecture (docs/ns_triad_kn_gate1_phase_admissibility.md): Level 0 (exact PSD); Level 1a (Schur PSD: M_GG ⪰ 0, M_CC ⪰ 0 via Schur); Level 1b (cut domination demoted); Level 2 (Waleffe helical — motivation). Schur audit (N=6,8,10,12): M_GG PSD rank 26/26 λ_min ~ 1e-4; ‖M_GC‖ ≈ 4.3e-3 stable; M_CC PSD at all N with λ_min decreasing from 1.7e-5 (N=6) to 2.7e-6 (N=12). Single open gate: M_CC ⪰ 0 for forced-tail seam bulk."
+  "Cross-shell block floor: conditional analytic bound c0 = 1/9; sharp sampled bound c0 ≈ 0.158–0.175 verified at N=6,8,10,12. DASHI weight convention: γ_e = cos(φ_ℓ+φ_r−φ_o), w_neg = max(−γ_e,0), w_abs = |γ_e|. Phase-admissibility architecture (docs/ns_triad_kn_gate1_phase_admissibility.md): Level 0 (exact PSD); Level 1a (Schur/Kron PSD: M_GG ≻ 0 and S_C = M_CC − M_CG M_GG⁻¹ M_GC with S_C 1_C = 0 analytically); Level 1b (cut domination demoted); Level 2 (Waleffe helical — motivation). Schur audit: M_GG PSD rank 26/26 λ_min ~ 1e-4; ‖M_GC‖ ≈ 4.3e-3 stable; S_C nullity one observed with constant-on-C gauge mode and machine-zero row sums at sampled shells. Open gates: nonnegative Kron-reduced edge weights and Kron-reduced graph connectivity under NS-compatible phases."
 
 canonicalLeakageSmallText : String
 canonicalLeakageSmallText =
@@ -230,7 +230,7 @@ canonicalSourceArtifactMarkdown =
 
 canonicalLeakageBoundDoc : String
 canonicalLeakageBoundDoc =
-  "docs/ns_triad_kn_cross_shell_leakage_bound.md (includes B-Cross Separation Lemma, §B-Cross Separation Lemma (Proved)), docs/ns_triad_kn_cross_shell_block_floor.md (PSD certificate §Computational Certificate), docs/ns_triad_kn_gate1_phase_admissibility.md (three-level phase-admissibility architecture), scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py (Schur audit for N=6,8,10,12)"
+  "docs/ns_triad_kn_cross_shell_leakage_bound.md (includes B-Cross Separation Lemma, §B-Cross Separation Lemma (Proved)), docs/ns_triad_kn_cross_shell_block_floor.md (Kron-reduced PSD certificate §Computational Certificate), docs/ns_triad_kn_gate1_phase_admissibility.md (three-level phase-admissibility architecture), docs/ns_triad_kn_cross_shell_schur_nullmode.md (Kron gauge-mode target), scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py (Schur/Kron audit)"
 
 canonicalOText : String
 canonicalOText =
@@ -262,7 +262,7 @@ canonicalGText =
 
 canonicalFText : String
 canonicalFText =
-  "F: missing proofs: (1) mCCPsdProved — the single Gate 1 target: prove M_CC ⪰ 0 for the seam bulk block (C = shells N-1,N) under NS-compatible phases; (2) gate1ConditionalTheoremProved: block floor ≥ 1/9 conditional on M_CC ⪰ 0; (3) leakage bound analytic uniform in N; (4) admissible profile extension; (5) Gram coercivity closure (Gates 2–5). Schur audit: M_GG PSD full rank (λ_min ~ 1e-4), ‖M_GC‖ ≈ 4.3e-3 stable — both non-zero but small; M_CC PSD at N=6,8,10,12 with λ_min shrinking (1.7e-5 → 2.7e-6). Cut domination demoted (does not imply Loewner). Waleffe/helical is motivation only."
+  "F: missing proofs: (1) kronEdgeWeightsNonnegativeProved — prove all off-diagonals of the Schur complement satisfy −S_C[i,j] ≥ 0 under NS-compatible phases; (2) kronReducedGraphConnectedProved — prove the Kron-reduced seam graph on C = shells N-1,N is connected; (3) gate1ConditionalTheoremProved: block floor ≥ 1/9 conditional on those Kron gates; (4) leakage bound analytic uniform in N; (5) admissible profile extension; (6) Gram coercivity closure (Gates 2–5). Schur/Kron audit: M_GG PSD full rank (λ_min ~ 1e-4), ‖M_GC‖ ≈ 4.3e-3 stable, S_C 1_C = 0 analytically and at machine precision numerically, nullity one observed, constant-on-C gauge mode observed. Cut domination demoted (does not imply Loewner). Waleffe/helical is motivation only."
 
 record NSTriadKNCrossShellLeakageBoundORCSLPGF : Set where
   constructor mkNSTriadKNCrossShellLeakageBoundORCSLPGF

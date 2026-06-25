@@ -20,15 +20,17 @@ SUMMARY = (
 def test_schur_nullmode_doc_uses_candidate_only_language() -> None:
     text = DOC.read_text(encoding="utf-8")
     squashed = " ".join(text.split())
-    assert "Proof target fixed" in text
+    assert "Kron-reduction gauge mode" in text
     assert "supporting evidence" in text
     assert "No promotion claim made." in text
     assert "matrix-free `eigsh`" in text
     assert "Observed at N=6,8,10,12,14. Proof open." in text
-    assert "constant-on-$C$" in text
-    assert "symbolic null-mode identification" in squashed
+    assert "S_C \\mathbf{1}_C = 0" in text
+    assert "constant-on-\\(C\\) null mode is not merely observed numerically" in text
+    assert "Kron-reduced" in text
+    assert "Laplacian theorem" in text
     assert "factorization" in squashed
-    assert "are still open." in squashed
+    assert "remaining proof gates are nonnegative Kron edge weights" in squashed
 
 
 def test_schur_audit_summary_records_matrix_free_receipt_flags() -> None:
@@ -40,6 +42,7 @@ def test_schur_audit_summary_records_matrix_free_receipt_flags() -> None:
     assert payload["schurComplementPsdVerified"] is True
     assert payload["schurComplementNullityOneObserved"] is True
     assert payload["schurComplementMatrixFreeAuditInstalled"] is True
+    assert payload["schurNullModeConstantOnCObserved"] is True
     assert payload["schurComplementPsdProved"] is False
     assert payload["schurNullModeIdentified"] is False
     assert payload["schurNullModeFactorizationProved"] is False
@@ -52,3 +55,5 @@ def test_schur_audit_summary_records_matrix_free_receipt_flags() -> None:
         assert row["S_C"]["evaluation_method"] == "eigsh"
         assert row["S_C"]["nullity_estimate"] == 1
         assert len(row["S_C"]["bottom_eigs"]) == 3
+        assert row["row_sum_diagnostics"]["max_abs_row_sum"] < 1.0e-12
+        assert abs(row["null_vector_diagnostics"]["corr_constant"]) > 0.999

@@ -1,6 +1,7 @@
 # NS Triad K_N Cross-Shell Schur Complement — Null-Mode Proof Target
 
-> **Status:** Proof target fixed. Numerical evidence supports the theorem shape.
+> **Status:** Proof target fixed. The constant null mode is now identified as the
+> Kron-reduction gauge mode.
 > Matrix-free `LinearOperator`/`eigsh` audits at `N=12,14` are now recorded as
 > supporting evidence. No promotion claim made.
 
@@ -25,7 +26,7 @@ $$
 **Gate 1 target:**
 
 $$
-\boxed{S_C \;\succeq\; 0 \quad \text{and} \quad \dim\ker S_C = 1,}
+\boxed{S_C \mathbf{1}_C = 0,\qquad S_C \succeq 0,\qquad \dim\ker S_C = 1,}
 $$
 
 where
@@ -82,6 +83,26 @@ is approaching a soft mode, not a proof of any asymptotic law.
 
 ## Key Structural Observations
 
+### 0. The null mode is analytically forced by row-sum zero
+
+Each of \(L_{\mathrm{neg,cross}}\) and \(L_{\mathrm{abs,cross}}\) is a graph
+Laplacian on the seam block, so both annihilate the all-ones vector. Hence
+
+$$
+M\mathbf{1} = \Bigl(L_{\mathrm{neg,cross}} - \tfrac19 L_{\mathrm{abs,cross}}\Bigr)\mathbf{1} = 0.
+$$
+
+Block-partitioning \(M\) and eliminating the \(G\)-block gives
+
+$$
+S_C \mathbf{1}_C
+= M_{CC}\mathbf{1}_C - M_{CG} M_{GG}^{-1} M_{GC}\mathbf{1}_C
+= 0.
+$$
+
+So the constant-on-\(C\) null mode is not merely observed numerically. It is the
+**Kron-reduction gauge mode** forced by \(M\mathbf{1}=0\).
+
 ### 1. Nullity one persists under the matrix-free audit
 
 The correction $\|M_{CG} M_{GG}^{-1} M_{GC}\| \approx 1.2 \times 10^{-3}$ is **3 orders of magnitude**
@@ -108,8 +129,8 @@ complement. Its shell mass is stable:
 
 The split is drifting toward 50/50 as $N \to \infty$.
 
-The new matrix-free correlation diagnostics strongly favor a **constant-on-$C$**
-interpretation over a shell-balance interpretation:
+The new matrix-free correlation diagnostics match the **Kron gauge mode**
+interpretation and rule out the earlier shell-balance hypothesis:
 
 | N | corr$(v_0,\mathbf{1}_C)$ | corr$(v_0,\text{shell balance})$ | corr$(v_0,\sqrt{\deg})$ | corr$(v_0,\deg^{-1})$ |
 |---|---|---|---|---|
@@ -132,12 +153,14 @@ seam block Gram matrix.
 
 | Question | Status |
 |---|---|
+| Is $S_C \mathbf{1}_C = 0$? | **Yes.** Follows from $M\mathbf{1}=0$ and Schur complementation. |
 | Is $S_C \succeq 0$ (PSD) for all N? | Observed at N=6,8,10,12,14. Proof open. |
-| Is $\dim\ker S_C = 1$ for all N? | Observed at N=6,8,10,12,14. Proof open. |
-| What is the null vector $v_0$? | Strong evidence for constant-on-$C$ / degree-near-constant mode. Symbolic identity open. |
+| Is $\dim\ker S_C = 1$ for all N? | Observed at N=6,8,10,12,14. Connectivity proof open. |
+| What is the null vector $v_0$? | The constant vector $\mathbf{1}_C$ up to scale/sign. |
 | Is $v_0$ a shell-balance indicator? | No. Correlation is small at N=12,14. |
-| Is $v_0$ a degree-weighted vector? | Plausible secondary correlation; exact identity open. |
-| Can $S_C = Q^T W Q$ be factored? | Open. |
+| Are Kron-reduced edge weights nonnegative? | Open; this is the sharpened phase-admissibility gate. |
+| Is the Kron-reduced graph connected? | Open; this is the sharpened connectivity gate. |
+| Can $S_C = B_{\mathrm{eff}}^T W_{\mathrm{eff}} B_{\mathrm{eff}}$ be factored? | Open explicit factorization; Kron theory predicts such a Laplacian form if the effective weights are nonnegative. |
 | Does $\lambda_{\min}(M_{CC}) \to 0$ as $N \to \infty$? | Supported by N=6,8,10,12,14 decay. Proof open. |
 
 ---
@@ -155,6 +178,7 @@ Current output per shell:
 ```
 λ_0, λ_1, λ_2   (bottom 3 eigenvalues of S_C)
 nullity estimate
+max |S_C 1_C|
 shell support of v_0
 corr(v_0, constant), corr(v_0, shell_N-1), corr(v_0, shell_N)
 corr(v_0, shell_balance), corr(v_0, sqrt_degree), corr(v_0, inv_degree)
@@ -165,13 +189,17 @@ corr(v_0, shell_balance), corr(v_0, sqrt_degree), corr(v_0, inv_degree)
 ## Receipt Flags
 
 ```
-schurComplementPsdVerified         = true   (N=6,8,10 dense eigh)
-schurComplementNullityOneObserved  = true   (N=6,8,10 dense eigh; N=12,14 matrix-free eigsh)
-schurComplementMatrixFreeAuditInstalled = true   (LinearOperator/eigsh path used at N=12,14)
+schurNullModeIsConstantProved          = true
+schurComplementPsdVerified             = true
+schurComplementNullityOneObserved      = true
+schurComplementMatrixFreeAuditInstalled = true
+schurNullModeConstantOnCObserved       = true
+kronReducedGraphIdentified             = true
 
-schurComplementPsdProved           = false
-schurNullModeIdentified            = false
-schurNullModeFactorizationProved   = false
+kronEdgeWeightsNonnegativeProved       = false
+kronReducedGraphConnectedProved        = false
+schurComplementPsdProved               = false
+schurNullModeFactorizationProved       = false
 ```
 
 ---
@@ -183,6 +211,7 @@ schurNullModeFactorizationProved   = false
 **Correct framing:**
 
 > The 3-point confirmation at N=6,8,10 fixed the proof target, and the
-> matrix-free `N=12,14` audit strengthens the evidence for a structural
-> null-mode theorem. Proof, symbolic null-mode identification, and factorization
-> are still open.
+> matrix-free `N=12,14` audit strengthens the evidence for a Kron-reduced
+> Laplacian theorem. The constant null mode is proved from row-sum zero; the
+> remaining proof gates are nonnegative Kron edge weights, reduced-graph
+> connectivity, and explicit factorization.

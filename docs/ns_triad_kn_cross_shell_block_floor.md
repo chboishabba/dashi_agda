@@ -129,14 +129,20 @@ L_{\mathrm{neg,cross}} - \frac19 L_{\mathrm{abs,cross}} \succeq 0,
 }
 \]
 
-The Schur complement conditions reduce Gate 1 to the single open target:
+The Schur complement conditions reduce Gate 1 to the Kron-reduced Laplacian target:
 \[
-\boxed{M_{CC} \succeq 0 \text{ for the seam bulk block under NS-compatible phases.}}
+\boxed{
+S_C \mathbf{1}_C = 0,\qquad
+-[S_C]_{ij} \ge 0 \ (i \neq j),\qquad
+\mathcal{G}_{\mathrm{Kron}}(C) \text{ connected.}
+}
 \]
 
-(The Schur audit confirms M_GG ⪰ 0 (rank 26/26, λ_min ~ 1e-4) and M_GC is small
-(‖M_GC‖ ≈ 4.3e-3) with M_GG full rank, so the range condition holds automatically.
-M_CC PSD is the dominant term.)
+The first clause is analytic: \(M\mathbf{1}=0\) because both
+\(L_{\mathrm{neg,cross}}\) and \(L_{\mathrm{abs,cross}}\) are graph
+Laplacians, hence \(S_C \mathbf{1}_C = 0\) by Schur complementation. The open
+work is proving that the effective off-diagonal weights are nonnegative and the
+reduced graph is connected.
 
 The leakage bound \(\varepsilon_N \le 1/20\) is a separate structural claim
 about the complement-to-block coupling.  Combined:

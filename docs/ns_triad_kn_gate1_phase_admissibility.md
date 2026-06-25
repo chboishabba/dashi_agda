@@ -30,7 +30,7 @@ M = L_{\text{neg,cross}} - \tfrac19 L_{\text{abs,cross}}
 = \begin{pmatrix} M_{GG} & M_{GC} \\ M_{CG} & M_{CC} \end{pmatrix}.
 \]
 
-**Lemma (Schur ⇒ PSD).** If \(M_{GG} \succeq 0\),
+**Lemma (Schur ⇒ PSD).** If \(M_{GG} \succ 0\),
 \(\operatorname{range}(M_{GC}) \subseteq \operatorname{range}(M_{GG})\), and
 \(S = M_{CC} - M_{CG} M_{GG}^+ M_{GC} \succeq 0\), then \(M \succeq 0\).
 
@@ -44,15 +44,15 @@ M = L_{\text{neg,cross}} - \tfrac19 L_{\text{abs,cross}}
 | 12 | 26/26 | 8.22e-05 | 4.34e-03 | 6364 | 2.70e-06 | 0 | mcc_psd |
 
 **Key findings:**
-1. M_GG ⪰ 0 at all N (full rank, all eigenvalues positive, λ_min ~ 1e-4)
-2. M_GC ≠ 0 but small (‖M_GC‖ ≈ 4.3e-3, stable across N) — the range condition is non-trivial
-3. **M_CC ⪰ 0 at all N** (λ_min > 0, nullity zero)
-4. λ_min(M_CC) shrinks with N (∝ 1/N²), consistent with c0 = 1/9 being a sharp bound
-5. Worst eigenvector of M_CC has ~45:55 support split between shells N-1 and N
+1. \(M_{GG} \succ 0\) at all audited N (full rank, λ_min ~ 1e-4)
+2. \(M_{GC} \neq 0\) but small (‖M_GC‖ ≈ 4.3e-3, stable across N)
+3. \(M_{CC} \succ 0\) at all audited N, but this is no longer the load-bearing target
+4. The Schur null mode is almost perfectly correlated with \(\mathbf{1}_C\)
+5. Since \(M\mathbf{1}=0\), the Schur complement satisfies \(S\mathbf{1}_C=0\) exactly
 
-The Schur complement S must also be PSD (M itself is PSD from earlier PSD certificate),
-but M_CC ⪰ 0 is the dominant term — ‖M_GC‖ is two orders of magnitude smaller than
-‖M_GG‖·‖M_CC‖.
+So the constant null direction is analytically forced. The open issue is not
+identifying the null mode; it is proving that \(S\) is a **valid reduced
+Laplacian**, i.e. PSD on \(\mathbf{1}_C^\perp\).
 
 ---
 
@@ -82,16 +82,20 @@ degenerate case where the F-class vanishes — not on the turbulent attractor.
 
 ---
 
-## The Single Open Gate
+## The Sharp Open Gates
 
 \[
-\boxed{M_{CC} \succeq 0 \text{ for the forced-tail seam bulk block}}
+\boxed{
+\text{(i) } -S_{ij} \ge 0 \text{ for all } i \neq j \in C
+\qquad\text{and}\qquad
+\text{(ii) the Kron-reduced graph on } C \text{ is connected.}
+}
 \]
 
-Numerically supported at N=6,8,10,12. The target is an analytic proof
-that M_CC is positive semidefinite at c0 = 1/9 for all N under NS-compatible
-phases. The Schur complement structure is secondary — M_CC ⪰ 0 is the
-dominant condition, with M_GG and M_GC being small corrections.
+Because \(M\mathbf{1}=0\), condition (i) makes \(S\) a graph Laplacian on \(C\).
+Then condition (ii) upgrades this to
+\(\ker S = \operatorname{span}\{\mathbf{1}_C\}\) and \(S \succeq 0\) on
+\(\mathbf{1}_C^\perp\).
 
 ---
 
@@ -100,9 +104,11 @@ dominant condition, with M_GG and M_GC being small corrections.
 | Level | Condition | Status |
 |-------|-----------|--------|
 | 0 | \(L_{\text{neg,cross}} - (1/9)L_{\text{abs,cross}} \succeq 0\) | OPEN — **Gate 1** |
-| 1a | \(M_{GG} \succeq 0\) | ✅ numerically supported |
+| 1a | \(M_{GG} \succ 0\) | ✅ numerically supported |
 | 1a | \(\operatorname{range}(M_{GC}) \subseteq \operatorname{range}(M_{GG})\) | ✅ M_GG full rank |
-| 1a | **\(M_{CC} \succeq 0\)** | **⬜ THE OPEN GATE** |
+| 1a | \(S_C \mathbf{1}_C = 0\) | ✅ analytic from \(M\mathbf{1}=0\) |
+| 1a | Kron effective weights \(-S_{ij} \ge 0\) | **⬜ OPEN phase-admissibility gate** |
+| 1a | Kron-reduced graph connected | **⬜ OPEN connectivity gate** |
 | 1b | Cut domination ≥ 1/9 | Demoted (downstream diagnostic) |
 | 2 | Waleffe helical | Motivation only |
 

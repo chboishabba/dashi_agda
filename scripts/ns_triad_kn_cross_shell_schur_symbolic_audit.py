@@ -25,6 +25,8 @@ from typing import Any
 
 import numpy as np
 from scipy.linalg import cho_factor, cho_solve, eigh
+from scipy.sparse import csr_matrix
+from scipy.sparse.csgraph import connected_components
 from scipy.sparse.linalg import LinearOperator, eigsh
 
 from ns_triad_frame_stability_scan import (
@@ -354,6 +356,69 @@ def _null_vector_diagnostics(
     return diag
 
 
+def _schur_row_sum_diagnostics(
+    M_CC: np.ndarray,
+    M_GC: np.ndarray,
+    M_GG_chol: tuple,
+) -> dict[str, Any]:
+    """Diagnostics for the candidate constant null mode of the Schur complement."""
+    nc = int(M_CC.shape[0])
+    if nc == 0:
+        return {
+            "n": 0,
+            "max_abs_row_sum": 0.0,
+            "l2_row_sum": 0.0,
+            "mean_row_sum": 0.0,
+        }
+    one = np.ones(nc, dtype=np.float64)
+    rhs = M_GC @ one
+    sol = cho_solve(M_GG_chol, rhs)
+    row_sum = M_CC @ one - M_GC.T @ sol
+    return {
+        "n": nc,
+        "max_abs_row_sum": float(np.max(np.abs(row_sum))),
+        "l2_row_sum": float(np.linalg.norm(row_sum)),
+        "mean_row_sum": float(np.mean(row_sum)),
+    }
+
+
+def _laplacian_structure_diagnostics(
+    S_C: np.ndarray,
+    tol: float = 1.0e-10,
+) -> dict[str, Any]:
+    """Check whether a dense Schur complement looks like a graph Laplacian."""
+    sym = np.asarray(0.5 * (S_C + S_C.T), dtype=np.float64)
+    n = int(sym.shape[0])
+    if n == 0:
+        return {
+            "dense_audit_available": True,
+            "nonpositive_offdiagonal": True,
+            "max_positive_offdiagonal": 0.0,
+            "min_offdiagonal": 0.0,
+            "effective_graph_connected": False,
+            "effective_graph_components": 0,
+        }
+
+    offdiag = sym.copy()
+    np.fill_diagonal(offdiag, 0.0)
+    max_positive_offdiag = float(np.max(offdiag))
+    min_offdiag = float(np.min(offdiag))
+    nonpositive = bool(max_positive_offdiag <= tol)
+
+    # Effective edge weights are -S_ij when the off-diagonal is Laplacian-like.
+    weights = np.where(offdiag < -tol, -offdiag, 0.0)
+    adjacency = csr_matrix(weights > 0.0)
+    n_components, _labels = connected_components(adjacency, directed=False, connection="weak")
+    return {
+        "dense_audit_available": True,
+        "nonpositive_offdiagonal": nonpositive,
+        "max_positive_offdiagonal": max_positive_offdiag,
+        "min_offdiagonal": min_offdiag,
+        "effective_graph_connected": bool(n == 0 or n_components == 1),
+        "effective_graph_components": int(n_components),
+    }
+
+
 def _audit_row(
     bundle: Any,
     snapshot: int,
@@ -468,6 +533,8 @@ def _audit_row(
     sc_null_vec: np.ndarray | None = None
     null_vector_diag: dict[str, Any] | None = None
     wsp_sc: dict[str, Any] = {"support": {}, "lambda_min": None}
+    row_sum_diag: dict[str, Any] | None = None
+    laplacian_diag: dict[str, Any] | None = None
 
     try:
         M_GG_sym = 0.5 * (M_GG + M_GG.T)
@@ -482,14 +549,17 @@ def _audit_row(
     print(f"  M_CC λ_min: {stats_cc['lambda_min']:.6e}")
 
     if sc_ok:
+        row_sum_diag = _schur_row_sum_diagnostics(M_CC, M_GC, M_GG_chol)
         naive_bound = (gc_norm ** 2) / max(stats_gg["lambda_min"], 1.0e-300)
         print(f"  ‖M_CG M_GG⁻¹ M_GC‖ = {correction_norm:.6e}  (naive bound: {naive_bound:.6e})")
+        print(f"  max |S_C 1_C| = {row_sum_diag['max_abs_row_sum']:.6e}")
 
         if nc <= dense_schur_threshold:
             # Dense eigh path — exact, used for N≤10
             print(f"  Computing S_C (dense eigh, n={nc})...", end=" ", flush=True)
             S_C_dense = M_CC - correction
             stats_sc = _block_stats("S_C", S_C_dense)
+            laplacian_diag = _laplacian_structure_diagnostics(S_C_dense)
             # Bottom eigenvector for null-mode diagnostics
             sym_sc = 0.5 * (S_C_dense + S_C_dense.T)
             _k_diag = min(5, nc - 1)
@@ -583,6 +653,12 @@ def _audit_row(
         print(f"  Null-mode corr(constant)={null_vector_diag.get('corr_constant', '—'):.4f}, "
               f"corr(balance)={null_vector_diag.get('corr_shell_balance', '—'):.4f}, "
               f"corr(sqrt_deg)={null_vector_diag.get('corr_sqrt_degree', '—'):.4f}")
+        if row_sum_diag is not None:
+            print(f"  Row-sum residual: max={row_sum_diag['max_abs_row_sum']:.6e}, "
+                  f"L2={row_sum_diag['l2_row_sum']:.6e}")
+    if laplacian_diag is not None:
+        print(f"  Dense Laplacian audit: offdiag<=0={laplacian_diag['nonpositive_offdiagonal']}, "
+              f"components={laplacian_diag['effective_graph_components']}")
 
     elapsed = time.time() - t0
     return {
@@ -602,6 +678,8 @@ def _audit_row(
         "correction_norm": correction_norm,
         "S_C_worst_eigenvector_support": wsp_sc,
         "null_vector_diagnostics": null_vector_diag,
+        "row_sum_diagnostics": row_sum_diag,
+        "laplacian_structure_diagnostics": laplacian_diag,
         "schur_complement_ok": sc_ok,
         "verdict": verdict,
         "elapsed_seconds": round(elapsed, 2),
@@ -615,8 +693,8 @@ def _analyze(results: list[dict[str, Any]]) -> str:
     lines = [
         "## Schur Audit Summary",
         "",
-        "| N | block | G | C | M_CC λ_min | S_C λ0 | S_C λ1 | S_C λ2 | nullity est | corr(balance) | Verdict |",
-        "|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---|",
+        "| N | block | G | C | M_CC λ_min | S_C λ0 | S_C λ1 | S_C λ2 | nullity est | max \\|S_C 1\\| | corr(constant) | Verdict |",
+        "|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---|",
     ]
     for r in results:
         sc = r.get("S_C") or {}
@@ -630,12 +708,18 @@ def _analyze(results: list[dict[str, Any]]) -> str:
         sc_lmin = eig_strs[0]
         sc_nullity = str(sc.get("nullity_estimate", sc.get("nullity", "—")))
         nvd = r.get("null_vector_diagnostics") or {}
-        bal = nvd.get("corr_shell_balance")
-        bal_str = f"{bal:.4f}" if bal is not None and not (isinstance(bal, float) and math.isnan(bal)) else "—"
+        corr_constant = nvd.get("corr_constant")
+        corr_constant_str = (
+            f"{corr_constant:.4f}"
+            if corr_constant is not None and not (isinstance(corr_constant, float) and math.isnan(corr_constant))
+            else "—"
+        )
+        row_sum = (r.get("row_sum_diagnostics") or {}).get("max_abs_row_sum")
+        row_sum_str = f"{row_sum:.2e}" if row_sum is not None else "—"
         lines.append(
             f"| {r['N']} | {r['block_size']} | {r['G_size']} | {r['C_size']} | "
             f"{r['M_CC']['lambda_min']:.6e} | {eig_strs[0]} | {eig_strs[1]} | {eig_strs[2]} | "
-            f"{sc_nullity} | {bal_str} | {r['verdict']} |"
+            f"{sc_nullity} | {row_sum_str} | {corr_constant_str} | {r['verdict']} |"
         )
     lines.append("")
     for r in results:
@@ -646,6 +730,18 @@ def _analyze(results: list[dict[str, Any]]) -> str:
             lines.append(
                 f"N={r['N']}: {eig_desc}, nullity_est={sc.get('nullity_estimate', sc.get('nullity'))}, "
                 f"eval={sc.get('evaluation_method', 'dense')}"
+            )
+        row_sum_diag = r.get("row_sum_diagnostics") or {}
+        if row_sum_diag:
+            lines.append(
+                f"N={r['N']}: max |S_C 1_C|={row_sum_diag['max_abs_row_sum']:.6e}, "
+                f"L2 row-sum residual={row_sum_diag['l2_row_sum']:.6e}"
+            )
+        lap_diag = r.get("laplacian_structure_diagnostics") or {}
+        if lap_diag.get("dense_audit_available"):
+            lines.append(
+                f"N={r['N']}: dense Laplacian audit offdiag<=0={lap_diag['nonpositive_offdiagonal']}, "
+                f"components={lap_diag['effective_graph_components']}"
             )
     gc_norms = [r["M_GC_norm"] for r in results]
     lines.append(f"\nM_GC norms: {', '.join(f'{v:.2e}' for v in gc_norms)}")
@@ -731,6 +827,14 @@ def main() -> None:
         "schurComplementPsdVerified": bool(psd_verified),
         "schurComplementNullityOneObserved": bool(nullity_one_observed),
         "schurComplementMatrixFreeAuditInstalled": True,
+        "schurNullModeConstantOnCObserved": bool(
+            all(
+                (r.get("null_vector_diagnostics") or {}).get("corr_constant") is not None
+                and abs((r["null_vector_diagnostics"] or {})["corr_constant"]) >= 0.999
+                for r in results
+                if r.get("null_vector_diagnostics") is not None
+            )
+        ),
         "schurComplementPsdProved": False,
         "schurNullModeIdentified": False,
         "schurNullModeFactorizationProved": False,
