@@ -478,6 +478,95 @@ def _effective_laplacian_sign_diagnostics(
     }
 
 
+def _laplacian_from_weights(weights: np.ndarray) -> np.ndarray:
+    """Build a Laplacian from a symmetric nonnegative weight matrix."""
+    sym = np.asarray(0.5 * (weights + weights.T), dtype=np.float64)
+    np.fill_diagonal(sym, 0.0)
+    diag = np.sum(sym, axis=1)
+    return np.diag(diag) - sym
+
+
+def _reduced_one_perp(sym: np.ndarray) -> np.ndarray:
+    """Restrict a symmetric matrix to 1^⊥ using an orthonormal basis."""
+    n = int(sym.shape[0])
+    if n <= 1:
+        return np.zeros((0, 0), dtype=np.float64)
+    one = np.ones((n, 1), dtype=np.float64)
+    q_one = one / np.linalg.norm(one)
+    projector = np.eye(n, dtype=np.float64) - q_one @ q_one.T
+    q, _ = np.linalg.qr(projector)
+    basis = q[:, : n - 1]
+    return basis.T @ sym @ basis
+
+
+def _signed_factorization_diagnostics(
+    S_C: np.ndarray,
+    tol: float = 1.0e-10,
+) -> dict[str, Any]:
+    """Dense diagnostics for the live signed-PSD Schur route S_C = L_good - L_bad."""
+    sym = np.asarray(0.5 * (S_C + S_C.T), dtype=np.float64)
+    n = int(sym.shape[0])
+    if n <= 1:
+        return {
+            "audit_requested": True,
+            "dense_audit_available": True,
+            "decomposition": "S_C = L_good - L_bad",
+            "L_good_trace": 0.0,
+            "L_bad_trace": 0.0,
+            "L_good_nullity_estimate": 0,
+            "L_bad_nullity_estimate": 0,
+            "L_good_lambda1": None,
+            "L_bad_lambda_max": None,
+            "good_minus_bad_lambda_min_one_perp": None,
+            "domination_ratio_sup_one_perp": None,
+            "domination_holds_strictly_observed": None,
+            "good_bad_commutator_fro": 0.0,
+        }
+
+    offdiag_good = np.maximum(-sym, 0.0)
+    offdiag_bad = np.maximum(sym, 0.0)
+    np.fill_diagonal(offdiag_good, 0.0)
+    np.fill_diagonal(offdiag_bad, 0.0)
+
+    L_good = _laplacian_from_weights(offdiag_good)
+    L_bad = _laplacian_from_weights(offdiag_bad)
+
+    evals_good = _sym_eigvals(L_good)
+    evals_bad = _sym_eigvals(L_bad)
+    reduced_good = _reduced_one_perp(L_good)
+    reduced_bad = _reduced_one_perp(L_bad)
+    reduced_sc = _reduced_one_perp(sym)
+
+    domination_ratio = None
+    domination_holds = None
+    if reduced_good.size:
+        min_good = float(np.min(_sym_eigvals(reduced_good)))
+        if min_good > tol:
+            eigvals_dom = eigh(reduced_bad, reduced_good, eigvals_only=True, driver="gvd")
+            domination_ratio = float(np.max(eigvals_dom)) if eigvals_dom.size else 0.0
+            domination_holds = bool(domination_ratio < 1.0 + 1.0e-8)
+
+    commutator = L_good @ L_bad - L_bad @ L_good
+
+    return {
+        "audit_requested": True,
+        "dense_audit_available": True,
+        "decomposition": "S_C = L_good - L_bad",
+        "L_good_trace": float(np.trace(L_good)),
+        "L_bad_trace": float(np.trace(L_bad)),
+        "L_good_nullity_estimate": int(np.sum(np.abs(evals_good) <= 1.0e-10)),
+        "L_bad_nullity_estimate": int(np.sum(np.abs(evals_bad) <= 1.0e-10)),
+        "L_good_lambda1": float(evals_good[1]) if n >= 2 else None,
+        "L_bad_lambda_max": float(evals_bad[-1]) if evals_bad.size else None,
+        "good_minus_bad_lambda_min_one_perp": (
+            float(np.min(_sym_eigvals(reduced_sc))) if reduced_sc.size else None
+        ),
+        "domination_ratio_sup_one_perp": domination_ratio,
+        "domination_holds_strictly_observed": domination_holds,
+        "good_bad_commutator_fro": float(np.linalg.norm(commutator, ord="fro")),
+    }
+
+
 def _audit_row(
     bundle: Any,
     snapshot: int,
@@ -490,6 +579,7 @@ def _audit_row(
     streaming_shell_threshold: int,
     dense_schur_threshold: int = DENSE_SCHUR_THRESHOLD,
     audit_effective_laplacian_signs: bool = False,
+    audit_signed_factorization: bool = False,
 ) -> dict[str, Any]:
     """Run the full Schur audit for one (N, K) row."""
     t0 = time.time()
@@ -595,6 +685,7 @@ def _audit_row(
     wsp_sc: dict[str, Any] = {"support": {}, "lambda_min": None}
     row_sum_diag: dict[str, Any] | None = None
     sign_audit_diag: dict[str, Any] | None = None
+    signed_factorization_diag: dict[str, Any] | None = None
 
     try:
         M_GG_sym = 0.5 * (M_GG + M_GG.T)
@@ -623,6 +714,8 @@ def _audit_row(
                 sign_audit_diag = _effective_laplacian_sign_diagnostics(
                     S_C_dense, row_sum_diag
                 )
+            if audit_signed_factorization:
+                signed_factorization_diag = _signed_factorization_diagnostics(S_C_dense)
             # Bottom eigenvector for null-mode diagnostics
             sym_sc = 0.5 * (S_C_dense + S_C_dense.T)
             _k_diag = min(5, nc - 1)
@@ -733,6 +826,19 @@ def _audit_row(
                 "dense_audit_available": False,
                 "route_verdict": "signed_psd_required",
             }
+    if audit_signed_factorization:
+        if signed_factorization_diag is not None:
+            print(
+                "  Signed-factorization audit: "
+                f"rho_sup={signed_factorization_diag['domination_ratio_sup_one_perp']}, "
+                f"lambda1_good={signed_factorization_diag['L_good_lambda1']}, "
+                f"domination={signed_factorization_diag['domination_holds_strictly_observed']}"
+            )
+        else:
+            signed_factorization_diag = {
+                "audit_requested": True,
+                "dense_audit_available": False,
+            }
 
     elapsed = time.time() - t0
     return {
@@ -754,6 +860,7 @@ def _audit_row(
         "null_vector_diagnostics": null_vector_diag,
         "row_sum_diagnostics": row_sum_diag,
         "effective_laplacian_sign_diagnostics": sign_audit_diag,
+        "signed_factorization_diagnostics": signed_factorization_diag,
         "schur_complement_ok": sc_ok,
         "verdict": verdict,
         "elapsed_seconds": round(elapsed, 2),
@@ -818,6 +925,13 @@ def _analyze(results: list[dict[str, Any]]) -> str:
                 f"negative-edge components={sign_diag['negative_edge_support_components']}, "
                 f"route={sign_diag['route_verdict']}"
             )
+        factor_diag = r.get("signed_factorization_diagnostics") or {}
+        if factor_diag.get("dense_audit_available"):
+            lines.append(
+                f"N={r['N']}: signed-factorization rho_sup={factor_diag['domination_ratio_sup_one_perp']:.6e}, "
+                f"lambda1(L_good)={factor_diag['L_good_lambda1']:.6e}, "
+                f"domination={factor_diag['domination_holds_strictly_observed']}"
+            )
     gc_norms = [r["M_GC_norm"] for r in results]
     lines.append(f"\nM_GC norms: {', '.join(f'{v:.2e}' for v in gc_norms)}")
     verdicts = {r["verdict"] for r in results}
@@ -854,6 +968,14 @@ def main() -> None:
             "or whether the signed-PSD route is still required."
         ),
     )
+    parser.add_argument(
+        "--audit-signed-factorization",
+        action="store_true",
+        help=(
+            "For dense S_C shells, decompose S_C = L_good - L_bad and report the "
+            "observed domination ratio sup_{x ⟂ 1} x^T L_bad x / x^T L_good x."
+        ),
+    )
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
@@ -879,6 +1001,7 @@ def main() -> None:
             streaming_shell_threshold=args.streaming_shell_threshold,
             dense_schur_threshold=args.dense_schur_threshold,
             audit_effective_laplacian_signs=args.audit_effective_laplacian_signs,
+            audit_signed_factorization=args.audit_signed_factorization,
         )
         results.append(result)
 
@@ -914,8 +1037,25 @@ def main() -> None:
         "ordinaryKronLaplacianIdentified": False,
         "effectiveOffdiagNonpositiveProved": False,
         "effectiveGraphConnectedProved": False,
+        "effectiveGraphConnectedObserved": bool(
+            any(
+                (r.get("effective_laplacian_sign_diagnostics") or {}).get("dense_audit_available")
+                for r in results
+            )
+            and all(
+                (r.get("effective_laplacian_sign_diagnostics") or {}).get("negative_edge_support_components") == 1
+                for r in results
+                if (r.get("effective_laplacian_sign_diagnostics") or {}).get("dense_audit_available")
+            )
+        ),
         "schurComplementPsdVerified": bool(psd_verified),
         "schurComplementNullityOneObserved": bool(nullity_one_observed),
+        "schurSignedPsdRequired": bool(
+            any(
+                (r.get("effective_laplacian_sign_diagnostics") or {}).get("route_verdict") == "signed_psd_required"
+                for r in results
+            )
+        ),
         "schurComplementMatrixFreeAuditInstalled": True,
         "schurNullModeConstantOnCObserved": bool(
             all(

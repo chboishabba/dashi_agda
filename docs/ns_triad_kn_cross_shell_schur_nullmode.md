@@ -194,6 +194,25 @@ positive offdiagonal count, max positive offdiagonal
 negative-edge support components, route verdict
 ```
 
+Dense-only signed-factorization probe:
+```bash
+python3 scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py \
+  --shells 6 8 --dense-schur-threshold 3500 \
+  --audit-effective-laplacian-signs \
+  --audit-signed-factorization
+```
+
+This records the live Gate 1 carrier in the form
+\(S_C = L_{\mathrm{good}} - L_{\mathrm{bad}}\) together with the observed
+domination ratio
+\[
+\rho_{\mathrm{obs}} =
+\sup_{x \perp \mathbf{1}_C}
+\frac{x^\top L_{\mathrm{bad}} x}{x^\top L_{\mathrm{good}} x}.
+\]
+At the audited dense shells, \(\rho_{\mathrm{obs}} < 1\) is supporting
+evidence for the signed-PSD Schur route, not a proof.
+
 ---
 
 ## Receipt Flags
@@ -209,6 +228,8 @@ kronStyleSchurReductionIdentified      = true
 ordinaryKronLaplacianIdentified        = false
 effectiveOffdiagNonpositiveProved      = false
 effectiveGraphConnectedProved          = false
+effectiveGraphConnectedObserved        = true
+schurSignedPsdRequired                 = true
 schurComplementPsdProved               = false
 schurSignedFactorizationProved         = false
 schurNullModeFactorizationProved       = false
@@ -228,3 +249,8 @@ schurNullModeFactorizationProved       = false
 > nonpositive Kron edge weights would be a sufficient shortcut, but the exact
 > remaining theorem target is \(S_C \succeq 0\) on \(\mathbf{1}_C^\perp\), via
 > either the ordinary Laplacian route or an explicit signed factorization.
+
+Do not upgrade this to a generic "balanced signed graph" theorem. The current
+\(S_C\) is a row-sum-zero Schur form and the live proof target is a direct PSD
+/ domination statement on \(\mathbf{1}_C^\perp\), not a graph-theoretic balance
+equivalence.

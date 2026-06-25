@@ -108,6 +108,18 @@ Laplacian on \(C\). Then condition (ii) upgrades this to
 \(\ker S = \operatorname{span}\{\mathbf{1}_C\}\) and \(S \succeq 0\) on
 \(\mathbf{1}_C^\perp\). If condition (i) fails, Gate 1 does not break; the
 proof route simply shifts to a signed/sum-of-squares factorization of \(S_C\).
+The dense Schur audit now records this fallback as
+\[
+S_C = L_{\mathrm{good}} - L_{\mathrm{bad}}
+\]
+with the observed domination ratio
+\[
+\rho_{\mathrm{obs}} =
+\sup_{x \perp \mathbf{1}_C}
+\frac{x^\top L_{\mathrm{bad}} x}{x^\top L_{\mathrm{good}} x}.
+\]
+The theorem target is a direct PSD / domination argument on
+\(\mathbf{1}_C^\perp\), not a generic signed-graph balance equivalence.
 
 ---
 
@@ -122,7 +134,7 @@ proof route simply shifts to a signed/sum-of-squares factorization of \(S_C\).
 | 1a | \(S_C \succeq 0\) on \(\mathbf{1}_C^\perp\) | **⬜ OPEN exact Gate 1 theorem target** |
 | 1a | Ordinary effective weights \(-S_{ij} \ge 0\) | **⬜ OPEN strong sufficient shortcut** |
 | 1a | Ordinary Kron support connected | **⬜ OPEN only if the shortcut holds** |
-| 1a | Signed factorization \(S_C = Q^T W Q,\; W \succeq 0\) | **⬜ OPEN general fallback route** |
+| 1a | Signed domination/factorization of \(S_C\) on \(\mathbf{1}_C^\perp\) | **⬜ OPEN live route** |
 | 1b | Cut domination ≥ 1/9 | Demoted (downstream diagnostic) |
 | 2 | Waleffe helical | Motivation only |
 
