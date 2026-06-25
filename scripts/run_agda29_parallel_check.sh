@@ -11,7 +11,7 @@ DASHI_CACHE_HOME="${DASHI_AGDA29_CACHE_ROOT:-${XDG_CACHE_HOME:-$HOME/.cache}/das
 DASHI_EPHEMERAL="${DASHI_AGDA29_EPHEMERAL:-0}"
 DASHI_CLEAN="${DASHI_AGDA29_CLEAN:-0}"
 STDLIB_UPDATE="${AGDA_STDLIB_UPDATE:-0}"
-AGDA_LOG_PATH="${AGDA_LOG_PATH:-/tmp/dashi-agda29-parallel-check.log}"
+AGDA_LOG_PATH="${AGDA_LOG_PATH:-/home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check.log}"
 AGDA_LOG_PREV="${AGDA_LOG_PATH}.1"
 
 if [ -z "${XDG_CACHE_HOME:-}" ]; then

@@ -2977,6 +2977,8 @@ canonicalBalabanMasterInductionIntake =
         refl
     }
 
+open import DASHI.Physics.Closure.OSAxiomAvailability using (OSAxiomAvailability)
+
 record OsterwalderSchraderReconstructionIntake : Setω where
   field
     stage :
@@ -2992,6 +2994,20 @@ record OsterwalderSchraderReconstructionIntake : Setω where
       osAxiomsShape
       ≡
       "temperedness-Euclidean-covariance-reflection-positivity-permutation-symmetry-cluster-decomposition"
+
+    osAxiomAvailability :
+      OSAxiomAvailability
+
+    osAxiomAvailabilityIsCanonical :
+      osAxiomAvailability
+      ≡
+      record
+        { os0-temperedness = true
+        ; os1-euclidean-covariance = false
+        ; os2-reflection-positivity = false
+        ; os3-permutation-symmetry = true
+        ; os4-cluster-decomposition = false
+        }
 
     reconstructionShape :
       String
@@ -3028,6 +3044,16 @@ canonicalOsterwalderSchraderReconstructionIntake =
     ; osAxiomsShape =
         "temperedness-Euclidean-covariance-reflection-positivity-permutation-symmetry-cluster-decomposition"
     ; osAxiomsShape-v =
+        refl
+    ; osAxiomAvailability =
+        record
+          { os0-temperedness = true
+          ; os1-euclidean-covariance = false
+          ; os2-reflection-positivity = false
+          ; os3-permutation-symmetry = true
+          ; os4-cluster-decomposition = false
+          }
+    ; osAxiomAvailabilityIsCanonical =
         refl
     ; reconstructionShape =
         "OS-reconstruction-yields-Wightman-QFT-positive-energy-Hilbert-space-and-gap-from-exponential-decay"

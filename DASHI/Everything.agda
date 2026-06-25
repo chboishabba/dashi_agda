@@ -1847,6 +1847,7 @@ import DASHI.Physics.Closure.DHRBraidGroupOriginRemark
 import DASHI.Physics.Closure.CarrierWeaveDefectOriginRemark
 import DASHI.Physics.Closure.EclipseProjectionDefectSarosRemark
 import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface
+import DASHI.Physics.Closure.CompleteMonotonicityScaffold
 import DASHI.Physics.Closure.FiniteCarrierSpectralGapZ7Receipt
 import DASHI.Physics.Closure.YMFeshbachSchurFiberGapBridgeReceipt
 import DASHI.Physics.Closure.FiniteCuspHeckeSpectralFrontierReceipt
