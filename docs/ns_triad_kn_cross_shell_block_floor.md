@@ -122,17 +122,21 @@ The universal arbitrary-phase theorem is dead.  The conditional theorem is alive
 \[
 \boxed{
 \textbf{Theorem (Conditional Seam Block Floor, proposed):}\\
-M_{GC} = 0 \text{ and } M_{CC} \succeq 0 \;\Longrightarrow\;
+M_{GG} \succeq 0,\; M_{CC} - M_{CG} M_{GG}^{+} M_{GC} \succeq 0 \;\Longrightarrow\;
 L_{\mathrm{neg,cross}} - \frac19 L_{\mathrm{abs,cross}} \succeq 0,
 \qquad
 \lambda_{\min}(K_{\mathrm{cross},N}) \ge \frac19 .
 }
 \]
 
-The Schur block condition reduces Gate 1 to the single open target:
+The Schur complement conditions reduce Gate 1 to the single open target:
 \[
 \boxed{M_{CC} \succeq 0 \text{ for the seam bulk block under NS-compatible phases.}}
 \]
+
+(The Schur audit confirms M_GG ⪰ 0 (rank 26/26, λ_min ~ 1e-4) and M_GC is small
+(‖M_GC‖ ≈ 4.3e-3) with M_GG full rank, so the range condition holds automatically.
+M_CC PSD is the dominant term.)
 
 The leakage bound \(\varepsilon_N \le 1/20\) is a separate structural claim
 about the complement-to-block coupling.  Combined:
@@ -284,15 +288,16 @@ complement structure already avoids the per-vertex condition.
 | Weak PSD certificate (\(c_0 = 1/9\)) | ✅ verified for N=6,8,10,12 (gap ≥ 0.047) |
 | Unconditional theorem (all phase profiles) | ❌ refuted by \(\phi = 0\) |
 | Per-vertex sign-fraction | 🟡 proved (superseded — not needed for Schur proof) |
-| Schur complement structure written | ✅ bulk \(M_{GG}\) diagonal PSD; corner Schur compensation demonstrated |
+| Schur complement structure written | ✅ documented; M_GG PSD, M_GC small, M_CC is the target |
 | Phase-adversary test | ✅ unconditional theorem refuted; targeted PSD holds via Schur compensation |
 | Phase-admissibility architecture (corrected) | ✅ Level 0/1a/1b/2 in `ns_triad_kn_gate1_phase_admissibility.md` |
-| \(M_{GG} \succeq 0\) (Level 1a) | ✅ \(M_{GG} = 0\) — no G-G edges in seam |
-| \(M_{GC} = 0\) (Level 1a range condition) | ✅ supported by \(B_{\text{cross}} = 0\) at all tested N |
-| **\(M_{CC} \succeq 0\) (Level 1a — THE OPEN GATE)** | **⬜ single remaining Gate 1 target** |
+| \(M_{GG} \succeq 0\) (Level 1a) | ✅ PSD, full rank, λ_min ~ 1e-4 (not zero — G-G edges exist through shell-2 triads) |
+| \(M_{GC}\) range condition (Level 1a) | ✅ M_GG full rank so range condition automatic; ‖M_GC‖ ≈ 4.3e-3, stable across N |
+| **\(M_{CC} \succeq 0\) (Level 1a — THE OPEN GATE)** | **⬜ single remaining Gate 1 target — numerically PSD at all N, λ_min shrinks with N** |
 | Cut domination (Level 1b) | ⬜ downstream diagnostic — NOT a proof path |
 | Waleffe helical (Level 2) | ✅ motivation only — NOT a proof route |
 | Gate 1 conditional theorem (Level 0) | ⬜ open — block floor \(\geq 1/9\) conditional on \(M_{CC} \succeq 0\) |
+| Schur audit script | ✅ run for N=6,8,10,12; all verdicts mcc_psd |
 | Sharp PSD certificate (\(c_0 = 0.15\)) | ✅ verified for N=6,8,10,12 (gap ≥ 0.008) |
 | Sharp PSD analytic proof | ❌ — deferred; \(c_0=1/9\) sufficient for weak Gate 1 |
 

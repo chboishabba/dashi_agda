@@ -15,11 +15,11 @@ open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
 -- theorem/proposition number.  Nothing here is a constructive proof
 -- internal to DASHI.
 --
--- Status: 32/32 entries populated.
+-- Status: 33/33 entries populated.
 --         clayYangMillsPromoted = false (authority/adjudication gate).
 --
 -- Dependency layers (topological, per Eriksson 2602.0096 §2):
---   Layer 0 (unconditional): P01–P09, P20, P28, P32
+--   Layer 0 (unconditional): P01–P09, P20, P28, P32, P33
 --   Layer 1 (← Layer 0):     P10–P11, P12–P15, P21, P23–P24, P29
 --   Layer 2 (← Layer 1):     P16–P19, P22, P25–P27
 --   Layer 3 (← Layers 0–2):  P30
@@ -54,6 +54,9 @@ record PostulateInventory : Set where
 
     -- Triangular mixing preventive lock (Eriksson 2602.0096 Thm 8.5+Cor 8.6, unconditional)
     p32 : Bool  -- TriangularMixingPreventiveLock: Z_{4←6} has no d=4 anisotropic sink
+
+    -- Field regularity / uniform link ellipticity (Balaban/Eriksson small-field regularity)
+    p33 : Bool  -- FieldRegularityImpliesSingleLinkPositivity: w_k(e) ≥ m_link ≥ 1
 
     -- Layer 1 — Conditional on Layer 0
     -- ─────────────────────────────────
@@ -138,12 +141,13 @@ record PostulateInventory : Set where
     p30IsTrue : p30 ≡ true
     p31IsTrue : p31 ≡ true
     p32IsTrue : p32 ≡ true
+    p33IsTrue : p33 ≡ true
 
     -- ── Sources (canonical audit string) ──
     sources : String
     sourcesIsCanonical :
       sources ≡
-      "P01-P03 (Diestel: treePathEdgesExist, graphDistMinimality, treePathBoundedByEdgeCount); P04-P05 (kappa-normalisation: kappaStrictlyPositive CMP 95 Prop 1.2, kappaNormalisedToOne DASHI A2); P06-P09 (polymer entropy: ImportedPolymerAnimalCountingBound 2602.0041 Lem 5.6, ImportedKPSummabilityBound, pZeroPositive CMP 122 eq 1.89, entropyBeatenByFullDecay beta>=beta0); P10-P11 (large-field: ImportedLargeFieldActivityBound 2602.0069 Thm 8.5, ImportedAbsorptionCondition 2602.0056 sec7); P12-P15 (DLR-LSI: ImportedDLRLSIFromPolymerDecay 2602.0052 Lem 6.3, ImportedCrossScaleBound Lem 5.7, ImportedDLRLSITheorem Thm 7.1, ImportedLatticeSpectralGap Cor 7.3); P16-P18 (RG-Cauchy: ImportedAssumptionA2FromKPCertificate 2602.0072 A2, ImportedB6InfluenceBound Thm 1.3, ImportedRGCauchySummability Cor 5.1); P19 (coupling control: ImportedCouplingControlProof 2602.0088 Prop 4.1); P20 (anisotropic classification: AnisotropicSubspaceClassificationTheorem 2602.0087 Thm 3.6); P21 (coefficient bound: AnisotropyCoeffQuadraticBound 2602.0087 Thm 5.4); P22 (insertion integrability: InsertionIntegrabilityBound 2602.0087 Thm 6.6); P23-P24 (terminal KP + assembly: TerminalKPBoundVerified 2602.0091 Thm 1.1+1.2, AssemblyMapComplete Thm 1.3); P25-P27 (fixed-eta: UniformLSIFixedLattice 2602.0089 Thm A, VolumeUniformMassGapFixedLattice Thm B, ThermodynamicLimitUnique Thm C); P28 (Ward identity: ImportedRotationalWardIdentity 2602.0092 Prop 3.2); P29 (Symanzik: ImportedSymanzikBreakingDecomposition 2602.0092 Prop 3.4); P30 (OS1: ImportedOS1EuclideanCovariance 2602.0092 Thm 4.2+Cor 4.3); P31 (Wightman: ImportedWightmanReconstructionWithMassGap 2602.0092 Thm 1.1+sec5); P32 (triangular lock: TriangularMixingPreventiveLock 2602.0096 Thm 8.5+Cor 8.6)"
+      "P01-P03 (Diestel: treePathEdgesExist, graphDistMinimality, treePathBoundedByEdgeCount); P04-P05 (kappa-normalisation: kappaStrictlyPositive CMP 95 Prop 1.2, kappaNormalisedToOne DASHI A2); P06-P09 (polymer entropy: ImportedPolymerAnimalCountingBound 2602.0041 Lem 5.6, ImportedKPSummabilityBound, pZeroPositive CMP 122 eq 1.89, entropyBeatenByFullDecay beta>=beta0); P10-P11 (large-field: ImportedLargeFieldActivityBound 2602.0069 Thm 8.5, ImportedAbsorptionCondition 2602.0056 sec7); P12-P15 (DLR-LSI: ImportedDLRLSIFromPolymerDecay 2602.0052 Lem 6.3, ImportedCrossScaleBound Lem 5.7, ImportedDLRLSITheorem Thm 7.1, ImportedLatticeSpectralGap Cor 7.3); P16-P18 (RG-Cauchy: ImportedAssumptionA2FromKPCertificate 2602.0072 A2, ImportedB6InfluenceBound Thm 1.3, ImportedRGCauchySummability Cor 5.1); P19 (coupling control: ImportedCouplingControlProof 2602.0088 Prop 4.1); P20 (anisotropic classification: AnisotropicSubspaceClassificationTheorem 2602.0087 Thm 3.6); P21 (coefficient bound: AnisotropyCoeffQuadraticBound 2602.0087 Thm 5.4); P22 (insertion integrability: InsertionIntegrabilityBound 2602.0087 Thm 6.6); P23-P24 (terminal KP + assembly: TerminalKPBoundVerified 2602.0091 Thm 1.1+1.2, AssemblyMapComplete Thm 1.3); P25-P27 (fixed-eta: UniformLSIFixedLattice 2602.0089 Thm A, VolumeUniformMassGapFixedLattice Thm B, ThermodynamicLimitUnique Thm C); P28 (Ward identity: ImportedRotationalWardIdentity 2602.0092 Prop 3.2); P29 (Symanzik: ImportedSymanzikBreakingDecomposition 2602.0092 Prop 3.4); P30 (OS1: ImportedOS1EuclideanCovariance 2602.0092 Thm 4.2+Cor 4.3); P31 (Wightman: ImportedWightmanReconstructionWithMassGap 2602.0092 Thm 1.1+sec5); P32 (triangular lock: TriangularMixingPreventiveLock 2602.0096 Thm 8.5+Cor 8.6); P33 (link ellipticity: FieldRegularityImpliesSingleLinkPositivity Balaban/Eriksson small-field regularity)"
 
     -- ── Clay promotion guard ──
     noClayPromotion : clayYangMillsPromoted ≡ false
@@ -182,6 +186,7 @@ currentPostulateInventory = record
   ; p30 = true
   ; p31 = true
   ; p32 = true
+  ; p33 = true
   ; p01IsTrue = refl
   ; p02IsTrue = refl
   ; p03IsTrue = refl
@@ -214,8 +219,9 @@ currentPostulateInventory = record
   ; p30IsTrue = refl
   ; p31IsTrue = refl
   ; p32IsTrue = refl
+  ; p33IsTrue = refl
   ; sources =
-      "P01-P03 (Diestel: treePathEdgesExist, graphDistMinimality, treePathBoundedByEdgeCount); P04-P05 (kappa-normalisation: kappaStrictlyPositive CMP 95 Prop 1.2, kappaNormalisedToOne DASHI A2); P06-P09 (polymer entropy: ImportedPolymerAnimalCountingBound 2602.0041 Lem 5.6, ImportedKPSummabilityBound, pZeroPositive CMP 122 eq 1.89, entropyBeatenByFullDecay beta>=beta0); P10-P11 (large-field: ImportedLargeFieldActivityBound 2602.0069 Thm 8.5, ImportedAbsorptionCondition 2602.0056 sec7); P12-P15 (DLR-LSI: ImportedDLRLSIFromPolymerDecay 2602.0052 Lem 6.3, ImportedCrossScaleBound Lem 5.7, ImportedDLRLSITheorem Thm 7.1, ImportedLatticeSpectralGap Cor 7.3); P16-P18 (RG-Cauchy: ImportedAssumptionA2FromKPCertificate 2602.0072 A2, ImportedB6InfluenceBound Thm 1.3, ImportedRGCauchySummability Cor 5.1); P19 (coupling control: ImportedCouplingControlProof 2602.0088 Prop 4.1); P20 (anisotropic classification: AnisotropicSubspaceClassificationTheorem 2602.0087 Thm 3.6); P21 (coefficient bound: AnisotropyCoeffQuadraticBound 2602.0087 Thm 5.4); P22 (insertion integrability: InsertionIntegrabilityBound 2602.0087 Thm 6.6); P23-P24 (terminal KP + assembly: TerminalKPBoundVerified 2602.0091 Thm 1.1+1.2, AssemblyMapComplete Thm 1.3); P25-P27 (fixed-eta: UniformLSIFixedLattice 2602.0089 Thm A, VolumeUniformMassGapFixedLattice Thm B, ThermodynamicLimitUnique Thm C); P28 (Ward identity: ImportedRotationalWardIdentity 2602.0092 Prop 3.2); P29 (Symanzik: ImportedSymanzikBreakingDecomposition 2602.0092 Prop 3.4); P30 (OS1: ImportedOS1EuclideanCovariance 2602.0092 Thm 4.2+Cor 4.3); P31 (Wightman: ImportedWightmanReconstructionWithMassGap 2602.0092 Thm 1.1+sec5); P32 (triangular lock: TriangularMixingPreventiveLock 2602.0096 Thm 8.5+Cor 8.6)"
+      "P01-P03 (Diestel: treePathEdgesExist, graphDistMinimality, treePathBoundedByEdgeCount); P04-P05 (kappa-normalisation: kappaStrictlyPositive CMP 95 Prop 1.2, kappaNormalisedToOne DASHI A2); P06-P09 (polymer entropy: ImportedPolymerAnimalCountingBound 2602.0041 Lem 5.6, ImportedKPSummabilityBound, pZeroPositive CMP 122 eq 1.89, entropyBeatenByFullDecay beta>=beta0); P10-P11 (large-field: ImportedLargeFieldActivityBound 2602.0069 Thm 8.5, ImportedAbsorptionCondition 2602.0056 sec7); P12-P15 (DLR-LSI: ImportedDLRLSIFromPolymerDecay 2602.0052 Lem 6.3, ImportedCrossScaleBound Lem 5.7, ImportedDLRLSITheorem Thm 7.1, ImportedLatticeSpectralGap Cor 7.3); P16-P18 (RG-Cauchy: ImportedAssumptionA2FromKPCertificate 2602.0072 A2, ImportedB6InfluenceBound Thm 1.3, ImportedRGCauchySummability Cor 5.1); P19 (coupling control: ImportedCouplingControlProof 2602.0088 Prop 4.1); P20 (anisotropic classification: AnisotropicSubspaceClassificationTheorem 2602.0087 Thm 3.6); P21 (coefficient bound: AnisotropyCoeffQuadraticBound 2602.0087 Thm 5.4); P22 (insertion integrability: InsertionIntegrabilityBound 2602.0087 Thm 6.6); P23-P24 (terminal KP + assembly: TerminalKPBoundVerified 2602.0091 Thm 1.1+1.2, AssemblyMapComplete Thm 1.3); P25-P27 (fixed-eta: UniformLSIFixedLattice 2602.0089 Thm A, VolumeUniformMassGapFixedLattice Thm B, ThermodynamicLimitUnique Thm C); P28 (Ward identity: ImportedRotationalWardIdentity 2602.0092 Prop 3.2); P29 (Symanzik: ImportedSymanzikBreakingDecomposition 2602.0092 Prop 3.4); P30 (OS1: ImportedOS1EuclideanCovariance 2602.0092 Thm 4.2+Cor 4.3); P31 (Wightman: ImportedWightmanReconstructionWithMassGap 2602.0092 Thm 1.1+sec5); P32 (triangular lock: TriangularMixingPreventiveLock 2602.0096 Thm 8.5+Cor 8.6); P33 (link ellipticity: FieldRegularityImpliesSingleLinkPositivity Balaban/Eriksson small-field regularity)"
   ; sourcesIsCanonical = refl
   ; noClayPromotion = refl
   }

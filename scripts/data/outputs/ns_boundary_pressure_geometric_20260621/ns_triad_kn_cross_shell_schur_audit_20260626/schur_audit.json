@@ -1,0 +1,206 @@
+{
+  "script": "scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py",
+  "contract": "ns_triad_kn_cross_shell_schur_symbolic_audit",
+  "schema_version": "1.0.0",
+  "c0": 0.1111111111111111,
+  "rows": [
+    {
+      "N": 12,
+      "K": 11,
+      "eta": 0.25,
+      "mode_count": 15624,
+      "edge_count": 5303952,
+      "block_size": 6390,
+      "G_size": 26,
+      "C_size": 6364,
+      "M_GG": {
+        "label": "M_GG",
+        "n": 26,
+        "rank": 26,
+        "nullity": 0,
+        "lambda_min": 8.224645537550874e-05,
+        "lambda_max": 0.01589059231809597,
+        "norm": 0.01589059231809597,
+        "psd_gap": 8.224645537550874e-05
+      },
+      "M_GC_norm": 0.004341704692196399,
+      "M_CC": {
+        "label": "M_CC",
+        "n": 6364,
+        "rank": null,
+        "nullity": null,
+        "nullity_estimate": 0,
+        "lambda_min": 2.698283761604873e-06,
+        "lambda_max": null,
+        "norm": null,
+        "psd_gap": 2.698283761604873e-06,
+        "bottom_eigs": [
+          2.698283761604873e-06,
+          7.797441662356534e-06,
+          7.93972740458582e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "M_CC_worst_eigenvector_support": {
+        "support": {
+          "11": 0.456976848123041,
+          "12": 0.5430231518769592
+        },
+        "lambda_min": 2.698283761604873e-06,
+        "bottom_eigs": [
+          2.698283761604873e-06,
+          7.797441662356534e-06,
+          7.93972740458582e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "S_C": {
+        "label": "S_C",
+        "n": 6364,
+        "rank": 6363,
+        "nullity": 1,
+        "nullity_estimate": 1,
+        "lambda_min": 9.655695954660212e-18,
+        "lambda_max": null,
+        "norm": null,
+        "psd_gap": 9.655695954660212e-18,
+        "bottom_eigs": [
+          9.655695954660212e-18,
+          7.79551654696158e-06,
+          7.939439333024099e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "correction_norm": 0.001187966804284841,
+      "S_C_worst_eigenvector_support": {
+        "support": {
+          "11": 0.4566310496542765,
+          "12": 0.5433689503456705
+        },
+        "lambda_min": 9.655695954660212e-18
+      },
+      "null_vector_diagnostics": {
+        "corr_constant": 0.9999999999998839,
+        "corr_shell_11": 0.6757448110450254,
+        "corr_shell_12": 0.7371356390418535,
+        "shell_mass": {
+          "11": 0.4566310496542765,
+          "12": 0.5433689503456705
+        },
+        "corr_shell_balance": -0.08673790069139146,
+        "corr_sqrt_degree": 0.9712024419732671,
+        "corr_inv_degree": 0.9545939329522921,
+        "corr_degree_weighted_balance": -0.03770578192113268
+      },
+      "schur_complement_ok": true,
+      "verdict": "schur_psd",
+      "elapsed_seconds": 274.31,
+      "c0": 0.1111111111111111
+    },
+    {
+      "N": 14,
+      "K": 13,
+      "eta": 0.25,
+      "mode_count": 24388,
+      "edge_count": 8463798,
+      "block_size": 8790,
+      "G_size": 26,
+      "C_size": 8764,
+      "M_GG": {
+        "label": "M_GG",
+        "n": 26,
+        "rank": 26,
+        "nullity": 0,
+        "lambda_min": 7.30245615354042e-05,
+        "lambda_max": 0.01673468516854099,
+        "norm": 0.01673468516854099,
+        "psd_gap": 7.30245615354042e-05
+      },
+      "M_GC_norm": 0.004340851553119233,
+      "M_CC": {
+        "label": "M_CC",
+        "n": 8764,
+        "rank": null,
+        "nullity": null,
+        "nullity_estimate": 0,
+        "lambda_min": 2.0226465773164005e-06,
+        "lambda_max": null,
+        "norm": null,
+        "psd_gap": 2.0226465773164005e-06,
+        "bottom_eigs": [
+          2.0226465773164005e-06,
+          9.821983768622686e-06,
+          9.919678520797534e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "M_CC_worst_eigenvector_support": {
+        "support": {
+          "13": 0.4637942001869604,
+          "14": 0.5362057998130396
+        },
+        "lambda_min": 2.0226465773164005e-06,
+        "bottom_eigs": [
+          2.0226465773164005e-06,
+          9.821983768622686e-06,
+          9.919678520797534e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "S_C": {
+        "label": "S_C",
+        "n": 8764,
+        "rank": 8763,
+        "nullity": 1,
+        "nullity_estimate": 1,
+        "lambda_min": -2.9726686205718873e-18,
+        "lambda_max": null,
+        "norm": null,
+        "psd_gap": -2.9726686205718873e-18,
+        "bottom_eigs": [
+          -2.9726686205718873e-18,
+          9.82103003222825e-06,
+          9.91940736873562e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "correction_norm": 0.0011270901094545974,
+      "S_C_worst_eigenvector_support": {
+        "support": {
+          "13": 0.46303057964400984,
+          "14": 0.5369694203560144
+        },
+        "lambda_min": -2.9726686205718873e-18
+      },
+      "null_vector_diagnostics": {
+        "corr_constant": -1.0000000000000946,
+        "corr_shell_13": -0.6804635035356682,
+        "corr_shell_14": -0.7327819732744919,
+        "shell_mass": {
+          "13": 0.46303057964400984,
+          "14": 0.5369694203560144
+        },
+        "corr_shell_balance": 0.07393884071200425,
+        "corr_sqrt_degree": -0.9677950318966014,
+        "corr_inv_degree": -0.9555646131245026,
+        "corr_degree_weighted_balance": 0.03142053027274526
+      },
+      "schur_complement_ok": true,
+      "verdict": "schur_psd",
+      "elapsed_seconds": 750.12,
+      "c0": 0.1111111111111111
+    }
+  ],
+  "analysis_text": "## Schur Audit Summary\n\n| N | block | G | C | M_CC \u03bb_min | S_C \u03bb0 | S_C \u03bb1 | S_C \u03bb2 | nullity est | corr(balance) | Verdict |\n|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---|\n| 12 | 6390 | 26 | 6364 | 2.698284e-06 | 9.655696e-18 | 7.795517e-06 | 7.939439e-06 | 1 | -0.0867 | schur_psd |\n| 14 | 8790 | 26 | 8764 | 2.022647e-06 | -2.972669e-18 | 9.821030e-06 | 9.919407e-06 | 1 | 0.0739 | schur_psd |\n\nN=12: \u03bb0=9.655696e-18, \u03bb1=7.795517e-06, \u03bb2=7.939439e-06, nullity_est=1, eval=eigsh\nN=14: \u03bb0=-2.972669e-18, \u03bb1=9.821030e-06, \u03bb2=9.919407e-06, nullity_est=1, eval=eigsh\n\nM_GC norms: 4.34e-03, 4.34e-03\nVerdicts: ['schur_psd']\nGate 1 target = S_C \u2ab0 0 and dim ker S_C = 1: SUPPORTED at tested N, not proved.",
+  "candidate_only": true,
+  "theorem_promoted": false,
+  "gate1_closed": false,
+  "gate1_supported_at_tested_shells": true,
+  "gate1_target": "S_C = M_CC \u2212 M_CG M_GG\u207b\u00b9 M_GC \u2ab0 0 and dim ker S_C = 1",
+  "schurComplementPsdVerified": true,
+  "schurComplementNullityOneObserved": true,
+  "schurComplementMatrixFreeAuditInstalled": true,
+  "schurComplementPsdProved": false,
+  "schurNullModeIdentified": false,
+  "schurNullModeFactorizationProved": false
+}

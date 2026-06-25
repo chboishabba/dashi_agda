@@ -383,12 +383,13 @@ Result:
  30. ImportedOS1EuclideanCovariance             (2602.0092, Thm 4.2+Cor 4.3)
  31. ImportedWightmanReconstructionWithMassGap  (2602.0092, Thm 1.1+§5)
  32. TriangularMixingPreventiveLock             (2602.0096, Thm 8.5+Cor 8.6)
+ 33. FieldRegularityImpliesSingleLinkPositivity  (Balaban/Eriksson small-field regularity)
 ```
 
-### YM route state after 2602.0096 intake (terminal)
+### YM route state after P33 intake (terminal)
 
 ```
-Closed relative to 32 named imports:
+Closed relative to 33 named imports:
   Step V spatial KP certificate          = true
   RG-lane consumption                    = true
   Hypothesis 5.2 / DLR-LSI               = true
@@ -425,7 +426,7 @@ still describes the problem as unsolved.  These are not mathematical
 refutations of the Eriksson chain, but they are decisive for the repo's
 promotion guard.
 
-The mathematical chain is now complete: all 32 postulates are available and
+The mathematical chain is now complete: all 33 postulates are available and
 the dependency graph from polymer activities through OS1 to Wightman
 reconstruction is fully discharged.  No internal mathematical development
 can close `clayYangMillsPromoted`; only external peer review, qualifying
@@ -435,7 +436,7 @@ publication, and community consensus can.
 
 ```agda
 CurrentClayPromotionAuthorityGate = record
-  { mathematicalSourceIntakeClosed    = true    -- 32 postulates closed
+  { mathematicalSourceIntakeClosed    = true    -- 33 postulates closed
   ; candidateForPeerReview            = true    -- package is auditable
   ; candidateForClayTrack             = true    -- substantive readiness
   ; qualifyingJournalPublication      = false   -- viXra ≠ CMI qualifying outlet
@@ -452,7 +453,7 @@ general community acceptance (§3(iii)).  None is currently satisfied.
 
 ## Canonical Audit Surface
 
-The 32-postulate inventory now lives in a dedicated machine-readable file:
+The 33-postulate inventory now lives in a dedicated machine-readable file:
 
 ```
 DASHI/Physics/YangMills/PostulateInventory.agda

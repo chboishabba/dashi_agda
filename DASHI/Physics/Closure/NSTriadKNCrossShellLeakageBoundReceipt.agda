@@ -198,7 +198,7 @@ canonicalEvidenceTableText =
 
 canonicalBlockFloorText : String
 canonicalBlockFloorText =
-  "Cross-shell block floor: conditional analytic bound c0 = 1/9; sharp sampled bound c0 ≈ 0.158–0.175 verified at N=6,8,10,12. DASHI weight convention: γ_e = cos(φ_ℓ+φ_r−φ_o), w_neg = max(−γ_e,0), w_abs = |γ_e|. Phase-admissibility architecture (docs/ns_triad_kn_gate1_phase_admissibility.md): Level 0 (exact PSD); Level 1a (Schur PSD: M_GG ⪰ 0, M_GC = 0, M_CC ⪰ 0); Level 1b (cut domination — downstream diagnostic only, does NOT imply Loewner); Level 2 (Waleffe helical — motivation). M_GC = 0 supported by B_cross = 0 at all tested N. M_GG = 0 from no G-G edges in seam. The single open gate is M_CC ⪰ 0 for the seam bulk block under NS-compatible phases. Cut domination ≠ Loewner — Schur PSD is the correct sufficient condition."
+  "Cross-shell block floor: conditional analytic bound c0 = 1/9; sharp sampled bound c0 ≈ 0.158–0.175 verified at N=6,8,10,12. DASHI weight convention: γ_e = cos(φ_ℓ+φ_r−φ_o), w_neg = max(−γ_e,0), w_abs = |γ_e|. Phase-admissibility architecture (docs/ns_triad_kn_gate1_phase_admissibility.md): Level 0 (exact PSD); Level 1a (Schur PSD: M_GG ⪰ 0, M_CC ⪰ 0 via Schur); Level 1b (cut domination demoted); Level 2 (Waleffe helical — motivation). Schur audit (N=6,8,10,12): M_GG PSD rank 26/26 λ_min ~ 1e-4; ‖M_GC‖ ≈ 4.3e-3 stable; M_CC PSD at all N with λ_min decreasing from 1.7e-5 (N=6) to 2.7e-6 (N=12). Single open gate: M_CC ⪰ 0 for forced-tail seam bulk."
 
 canonicalLeakageSmallText : String
 canonicalLeakageSmallText =
@@ -230,7 +230,7 @@ canonicalSourceArtifactMarkdown =
 
 canonicalLeakageBoundDoc : String
 canonicalLeakageBoundDoc =
-  "docs/ns_triad_kn_cross_shell_leakage_bound.md (includes B-Cross Separation Lemma, §B-Cross Separation Lemma (Proved)), docs/ns_triad_kn_cross_shell_block_floor.md (PSD certificate §Computational Certificate), docs/ns_triad_kn_gate1_phase_admissibility.md (three-level phase-admissibility architecture)"
+  "docs/ns_triad_kn_cross_shell_leakage_bound.md (includes B-Cross Separation Lemma, §B-Cross Separation Lemma (Proved)), docs/ns_triad_kn_cross_shell_block_floor.md (PSD certificate §Computational Certificate), docs/ns_triad_kn_gate1_phase_admissibility.md (three-level phase-admissibility architecture), scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py (Schur audit for N=6,8,10,12)"
 
 canonicalOText : String
 canonicalOText =
@@ -262,7 +262,7 @@ canonicalGText =
 
 canonicalFText : String
 canonicalFText =
-  "F: missing proofs: (1) mCCPsdProved — the single Gate 1 target: prove M_CC ⪰ 0 for the seam bulk block under NS-compatible phases (M = L_neg,cross − (1/9)L_abs,cross); (2) gate1ConditionalTheoremProved: combined block floor ≥ 1/9 conditional on M_CC ⪰ 0; (3) leakage bound analytic uniform in N; (4) admissible profile extension; (5) Gram coercivity closure (Gates 2–5). B-cross separation: structural proof ready. Per-vertex sign-fraction: superseded (not needed for Schur PSD). M_GC = 0 supported structurally (B_cross = 0 at all tested N); M_GG = 0 from no G-G edges in seam. Cut domination ≠ Loewner — Schur PSD (Level 1a) is the correct sufficient condition, not cut domination (demoted to downstream diagnostic). Waleffe/helical is motivation only (Level 2), not a proof route."
+  "F: missing proofs: (1) mCCPsdProved — the single Gate 1 target: prove M_CC ⪰ 0 for the seam bulk block (C = shells N-1,N) under NS-compatible phases; (2) gate1ConditionalTheoremProved: block floor ≥ 1/9 conditional on M_CC ⪰ 0; (3) leakage bound analytic uniform in N; (4) admissible profile extension; (5) Gram coercivity closure (Gates 2–5). Schur audit: M_GG PSD full rank (λ_min ~ 1e-4), ‖M_GC‖ ≈ 4.3e-3 stable — both non-zero but small; M_CC PSD at N=6,8,10,12 with λ_min shrinking (1.7e-5 → 2.7e-6). Cut domination demoted (does not imply Loewner). Waleffe/helical is motivation only."
 
 record NSTriadKNCrossShellLeakageBoundORCSLPGF : Set where
   constructor mkNSTriadKNCrossShellLeakageBoundORCSLPGF

@@ -153,6 +153,12 @@ import DASHI.Combinatorics.PDA_MDL.Prelude
 import DASHI.Combinatorics.Restoration
 import DASHI.Combinatorics.StrictContractionFinite
 import DASHI.Combinatorics.TriadicVideoCodecObservationQuotient
+import DASHI.Cognition.ResidualPhaseGeometry
+import DASHI.Cognition.TlureyNumerologyStateSpace
+import DASHI.Cognition.TlureyDyadicNonaryTraceReceipt
+import DASHI.Cognition.TlureyPrimorialBridge
+import DASHI.Cognition.TlureyChaosBridge
+import DASHI.Cognition.Tlurey369ChaosReceipt
 import DASHI.Computation.LESGLESWorldTransportBridge
 import DASHI.Computation.PersistentTransportMotifs
 import DASHI.Constants.Registry
@@ -227,6 +233,7 @@ import DASHI.Crypto.RSAPlusOneIdentitySection
 import DASHI.Algebra.MoonshinePlusOneAnalogue
 import DASHI.Crypto.RSASharedPrimeCollapse
 import DASHI.Crypto.RSAVulnerabilityBoundary
+import DASHI.Dynamics.LogisticBifurcationDiagnostic
 import DASHI.DCHoTT.All
 import DASHI.Papers.CoreTheoremInterfaces
 import DASHI.Papers.NavierStokes.TheoremInterface
@@ -287,6 +294,7 @@ import DASHI.Foundations.P13HexTruthActionQuotient
 import DASHI.Foundations.P13UnitGroupC12Witness
 import DASHI.Foundations.PhysicsLinearAnalysisParity
 import DASHI.Foundations.PrimeLaneUnitActionQuotient
+import DASHI.Foundations.PrimorialBaseSequences
 import DASHI.Foundations.PrincipiaVol1DashiBridge
 import DASHI.Foundations.SSPTritCarrier
 import DASHI.Foundations.SSPPrimeLaneUnitAction

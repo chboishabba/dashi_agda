@@ -17,7 +17,7 @@ open import Agda.Builtin.String using (String)
 -- community consensus exists — the CMI and Wikipedia still describe
 -- Yang–Mills/mass gap as an open problem as of June 2026.
 --
--- Mathematical source-intake is complete (32 postulates, all closed).
+-- Mathematical source-intake is complete (33 postulates, all closed).
 -- The package is auditable and ready for peer-review submission.
 -- But clayYangMillsPromoted remains false because that is an
 -- authority/adjudication gate, not a mathematical one.
@@ -49,7 +49,7 @@ record ClayPromotionAuthorityGate : Set where
     sources : String
     sourcesIsCanonical :
       sources ≡
-      "32 postulates closed through Step V KP, RG lane, DLR-LSI, OS0–OS4, OS1/O(4), Wightman reconstruction, continuum stability, triangular lock, gauge-fixing compatibility (OS route). Package auditable and ready for peer-review. CMI rules not satisfied: no qualifying journal publication, no two-year waiting period, no global acceptance. clayYangMillsPromoted = false by authority/adjudication, not mathematics."
+      "33 postulates closed through Step V KP, RG lane, DLR-LSI, OS0–OS4, OS1/O(4), Wightman reconstruction, continuum stability, triangular lock, gauge-fixing compatibility (OS route), link ellipticity. Package auditable and ready for peer-review. CMI rules not satisfied: no qualifying journal publication, no two-year waiting period, no global acceptance. clayYangMillsPromoted = false by authority/adjudication, not mathematics."
 
 currentClayPromotionAuthorityGate : ClayPromotionAuthorityGate
 currentClayPromotionAuthorityGate = record
@@ -70,6 +70,6 @@ currentClayPromotionAuthorityGate = record
   ; clayOrSABConsiderationAvailableIsFalse = refl
   ; clayYangMillsPromotedIsFalse           = refl
   ; sources =
-      "32 postulates closed through Step V KP, RG lane, DLR-LSI, OS0–OS4, OS1/O(4), Wightman reconstruction, continuum stability, triangular lock, gauge-fixing compatibility (OS route). Package auditable and ready for peer-review. CMI rules not satisfied: no qualifying journal publication, no two-year waiting period, no global acceptance. clayYangMillsPromoted = false by authority/adjudication, not mathematics."
+      "33 postulates closed through Step V KP, RG lane, DLR-LSI, OS0–OS4, OS1/O(4), Wightman reconstruction, continuum stability, triangular lock, gauge-fixing compatibility (OS route), link ellipticity. Package auditable and ready for peer-review. CMI rules not satisfied: no qualifying journal publication, no two-year waiting period, no global acceptance. clayYangMillsPromoted = false by authority/adjudication, not mathematics."
   ; sourcesIsCanonical = refl
   }
