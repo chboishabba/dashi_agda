@@ -1,7 +1,7 @@
 # NS Triad K_N Cross-Shell Schur Complement — Null-Mode Proof Target
 
-> **Status:** Proof target fixed. The constant null mode is now identified as the
-> Kron-reduction gauge mode.
+> **Status:** Proof target fixed. The constant null mode is now proved as the
+> Schur/Kron-style reduction gauge mode.
 > Matrix-free `LinearOperator`/`eigsh` audits at `N=12,14` are now recorded as
 > supporting evidence. No promotion claim made.
 
@@ -101,7 +101,7 @@ S_C \mathbf{1}_C
 $$
 
 So the constant-on-\(C\) null mode is not merely observed numerically. It is the
-**Kron-reduction gauge mode** forced by \(M\mathbf{1}=0\).
+**Schur/Kron-style gauge mode** forced by \(M\mathbf{1}=0\).
 
 ### 1. Nullity one persists under the matrix-free audit
 
@@ -129,7 +129,7 @@ complement. Its shell mass is stable:
 
 The split is drifting toward 50/50 as $N \to \infty$.
 
-The new matrix-free correlation diagnostics match the **Kron gauge mode**
+The new matrix-free correlation diagnostics match the **Schur/Kron-style gauge mode**
 interpretation and rule out the earlier shell-balance hypothesis:
 
 | N | corr$(v_0,\mathbf{1}_C)$ | corr$(v_0,\text{shell balance})$ | corr$(v_0,\sqrt{\deg})$ | corr$(v_0,\deg^{-1})$ |
@@ -158,9 +158,9 @@ seam block Gram matrix.
 | Is $\dim\ker S_C = 1$ for all N? | Observed at N=6,8,10,12,14. Connectivity proof open. |
 | What is the null vector $v_0$? | The constant vector $\mathbf{1}_C$ up to scale/sign. |
 | Is $v_0$ a shell-balance indicator? | No. Correlation is small at N=12,14. |
-| Are Kron-reduced edge weights nonnegative? | Open; this is the sharpened phase-admissibility gate. |
-| Is the Kron-reduced graph connected? | Open; this is the sharpened connectivity gate. |
-| Can $S_C = B_{\mathrm{eff}}^T W_{\mathrm{eff}} B_{\mathrm{eff}}$ be factored? | Open explicit factorization; Kron theory predicts such a Laplacian form if the effective weights are nonnegative. |
+| Are ordinary Kron-reduced edge weights nonnegative? | Open; this is a strong sufficient shortcut, not the definition of Gate 1 admissibility. |
+| Is the ordinary Kron-reduced graph connected? | Open; only relevant if the nonpositive-offdiagonal shortcut closes. |
+| Can $S_C = B_{\mathrm{eff}}^T W_{\mathrm{eff}} B_{\mathrm{eff}}$ be factored? | Open explicit factorization; this is the general signed-PSD route if ordinary Laplacian signs fail. |
 | Does $\lambda_{\min}(M_{CC}) \to 0$ as $N \to \infty$? | Supported by N=6,8,10,12,14 decay. Proof open. |
 
 ---
@@ -174,6 +174,14 @@ python3 scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py \
   --shells 12 14 --dense-schur-threshold 3500
 ```
 
+**Effective-laplacian sign audit for the dense shells `N=6,8`:**
+
+```
+python3 scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py \
+  --shells 6 8 --dense-schur-threshold 3500 \
+  --audit-effective-laplacian-signs
+```
+
 Current output per shell:
 ```
 λ_0, λ_1, λ_2   (bottom 3 eigenvalues of S_C)
@@ -182,6 +190,8 @@ max |S_C 1_C|
 shell support of v_0
 corr(v_0, constant), corr(v_0, shell_N-1), corr(v_0, shell_N)
 corr(v_0, shell_balance), corr(v_0, sqrt_degree), corr(v_0, inv_degree)
+positive offdiagonal count, max positive offdiagonal
+negative-edge support components, route verdict
 ```
 
 ---
@@ -194,11 +204,13 @@ schurComplementPsdVerified             = true
 schurComplementNullityOneObserved      = true
 schurComplementMatrixFreeAuditInstalled = true
 schurNullModeConstantOnCObserved       = true
-kronReducedGraphIdentified             = true
+kronStyleSchurReductionIdentified      = true
 
-kronEdgeWeightsNonnegativeProved       = false
-kronReducedGraphConnectedProved        = false
+ordinaryKronLaplacianIdentified        = false
+effectiveOffdiagNonpositiveProved      = false
+effectiveGraphConnectedProved          = false
 schurComplementPsdProved               = false
+schurSignedFactorizationProved         = false
 schurNullModeFactorizationProved       = false
 ```
 
@@ -211,7 +223,8 @@ schurNullModeFactorizationProved       = false
 **Correct framing:**
 
 > The 3-point confirmation at N=6,8,10 fixed the proof target, and the
-> matrix-free `N=12,14` audit strengthens the evidence for a Kron-reduced
-> Laplacian theorem. The constant null mode is proved from row-sum zero; the
-> remaining proof gates are nonnegative Kron edge weights, reduced-graph
-> connectivity, and explicit factorization.
+> matrix-free `N=12,14` audit strengthens the evidence for a Schur-reduction
+> PSD theorem. The constant null mode is proved from row-sum zero; ordinary
+> nonpositive Kron edge weights would be a sufficient shortcut, but the exact
+> remaining theorem target is \(S_C \succeq 0\) on \(\mathbf{1}_C^\perp\), via
+> either the ordinary Laplacian route or an explicit signed factorization.

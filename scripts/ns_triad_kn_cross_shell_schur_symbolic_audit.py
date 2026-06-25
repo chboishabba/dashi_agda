@@ -382,40 +382,99 @@ def _schur_row_sum_diagnostics(
     }
 
 
-def _laplacian_structure_diagnostics(
+def _component_stats(adjacency_mask: np.ndarray) -> tuple[int, int]:
+    """Connected-component count and largest-component size for a symmetric mask."""
+    n = int(adjacency_mask.shape[0])
+    if n == 0:
+        return 0, 0
+    if n == 1:
+        return 1, 1
+    adjacency = csr_matrix(adjacency_mask)
+    n_components, labels = connected_components(adjacency, directed=False, connection="weak")
+    largest = int(np.bincount(labels, minlength=n_components).max()) if n_components > 0 else 0
+    return int(n_components), largest
+
+
+def _effective_laplacian_sign_diagnostics(
     S_C: np.ndarray,
+    row_sum_diag: dict[str, Any] | None,
     tol: float = 1.0e-10,
 ) -> dict[str, Any]:
-    """Check whether a dense Schur complement looks like a graph Laplacian."""
+    """Dense diagnostics for the ordinary-Laplacian shortcut versus signed-PSD route."""
     sym = np.asarray(0.5 * (S_C + S_C.T), dtype=np.float64)
     n = int(sym.shape[0])
     if n == 0:
         return {
+            "audit_requested": True,
             "dense_audit_available": True,
-            "nonpositive_offdiagonal": True,
-            "max_positive_offdiagonal": 0.0,
-            "min_offdiagonal": 0.0,
-            "effective_graph_connected": False,
-            "effective_graph_components": 0,
+            "max_row_sum_residual": 0.0,
+            "num_positive_offdiag": 0,
+            "num_negative_offdiag": 0,
+            "max_positive_offdiag": 0.0,
+            "min_negative_offdiag": 0.0,
+            "effective_weight_min": 0.0,
+            "effective_support_num_edges": 0,
+            "effective_support_components": 0,
+            "effective_support_largest_component": 0,
+            "negative_edge_support_num_edges": 0,
+            "negative_edge_support_components": 0,
+            "negative_edge_support_largest_component": 0,
+            "algebraic_connectivity_on_C": None,
+            "ordinary_laplacian_candidate": True,
+            "ordinary_laplacian_connected": False,
+            "route_verdict": "ordinary_laplacian_confirmed",
         }
 
-    offdiag = sym.copy()
-    np.fill_diagonal(offdiag, 0.0)
-    max_positive_offdiag = float(np.max(offdiag))
-    min_offdiag = float(np.min(offdiag))
-    nonpositive = bool(max_positive_offdiag <= tol)
+    offdiag_mask = ~np.eye(n, dtype=bool)
+    offdiag_vals = sym[offdiag_mask]
+    positive_mask = offdiag_vals > tol
+    negative_mask = offdiag_vals < -tol
+    num_positive = int(np.sum(positive_mask))
+    num_negative = int(np.sum(negative_mask))
+    max_positive = float(np.max(offdiag_vals[positive_mask])) if num_positive else 0.0
+    min_negative = float(np.min(offdiag_vals[negative_mask])) if num_negative else 0.0
+    effective_weight_min = float(np.min(-offdiag_vals)) if offdiag_vals.size else 0.0
 
-    # Effective edge weights are -S_ij when the off-diagonal is Laplacian-like.
-    weights = np.where(offdiag < -tol, -offdiag, 0.0)
-    adjacency = csr_matrix(weights > 0.0)
-    n_components, _labels = connected_components(adjacency, directed=False, connection="weak")
+    abs_support = np.abs(sym) > tol
+    np.fill_diagonal(abs_support, False)
+    eff_components, eff_largest = _component_stats(abs_support)
+
+    negative_support = sym < -tol
+    np.fill_diagonal(negative_support, False)
+    neg_components, neg_largest = _component_stats(negative_support)
+
+    effective_support_num_edges = int(np.count_nonzero(np.triu(abs_support, k=1)))
+    negative_edge_support_num_edges = int(np.count_nonzero(np.triu(negative_support, k=1)))
+
+    evals = _sym_eigvals(sym)
+    algebraic_connectivity = float(evals[1]) if n >= 2 else None
+    max_row_sum_residual = float((row_sum_diag or {}).get("max_abs_row_sum", float("nan")))
+    ordinary_candidate = bool(num_positive == 0 and max_row_sum_residual <= tol)
+    ordinary_connected = bool(ordinary_candidate and neg_components == 1)
+    if ordinary_connected:
+        route_verdict = "ordinary_laplacian_confirmed"
+    else:
+        route_verdict = "signed_psd_required"
+
     return {
+        "audit_requested": True,
         "dense_audit_available": True,
-        "nonpositive_offdiagonal": nonpositive,
-        "max_positive_offdiagonal": max_positive_offdiag,
-        "min_offdiagonal": min_offdiag,
-        "effective_graph_connected": bool(n == 0 or n_components == 1),
-        "effective_graph_components": int(n_components),
+        "max_row_sum_residual": max_row_sum_residual,
+        "num_positive_offdiag": num_positive,
+        "num_negative_offdiag": num_negative,
+        "max_positive_offdiag": max_positive,
+        "min_negative_offdiag": min_negative,
+        "effective_weight_min": effective_weight_min,
+        "effective_support_num_edges": effective_support_num_edges,
+        "effective_support_components": eff_components,
+        "effective_support_largest_component": eff_largest,
+        "negative_edge_support_num_edges": negative_edge_support_num_edges,
+        "negative_edge_support_components": neg_components,
+        "negative_edge_support_largest_component": neg_largest,
+        "algebraic_connectivity_on_C": algebraic_connectivity,
+        "ordinary_laplacian_candidate": ordinary_candidate,
+        "ordinary_laplacian_connected": ordinary_connected,
+        "route_verdict": route_verdict,
     }
 
 
@@ -430,6 +489,7 @@ def _audit_row(
     profile_builder: str,
     streaming_shell_threshold: int,
     dense_schur_threshold: int = DENSE_SCHUR_THRESHOLD,
+    audit_effective_laplacian_signs: bool = False,
 ) -> dict[str, Any]:
     """Run the full Schur audit for one (N, K) row."""
     t0 = time.time()
@@ -534,7 +594,7 @@ def _audit_row(
     null_vector_diag: dict[str, Any] | None = None
     wsp_sc: dict[str, Any] = {"support": {}, "lambda_min": None}
     row_sum_diag: dict[str, Any] | None = None
-    laplacian_diag: dict[str, Any] | None = None
+    sign_audit_diag: dict[str, Any] | None = None
 
     try:
         M_GG_sym = 0.5 * (M_GG + M_GG.T)
@@ -559,7 +619,10 @@ def _audit_row(
             print(f"  Computing S_C (dense eigh, n={nc})...", end=" ", flush=True)
             S_C_dense = M_CC - correction
             stats_sc = _block_stats("S_C", S_C_dense)
-            laplacian_diag = _laplacian_structure_diagnostics(S_C_dense)
+            if audit_effective_laplacian_signs:
+                sign_audit_diag = _effective_laplacian_sign_diagnostics(
+                    S_C_dense, row_sum_diag
+                )
             # Bottom eigenvector for null-mode diagnostics
             sym_sc = 0.5 * (S_C_dense + S_C_dense.T)
             _k_diag = min(5, nc - 1)
@@ -656,9 +719,20 @@ def _audit_row(
         if row_sum_diag is not None:
             print(f"  Row-sum residual: max={row_sum_diag['max_abs_row_sum']:.6e}, "
                   f"L2={row_sum_diag['l2_row_sum']:.6e}")
-    if laplacian_diag is not None:
-        print(f"  Dense Laplacian audit: offdiag<=0={laplacian_diag['nonpositive_offdiagonal']}, "
-              f"components={laplacian_diag['effective_graph_components']}")
+    if audit_effective_laplacian_signs:
+        if sign_audit_diag is not None:
+            print(
+                "  Effective-sign audit: "
+                f"positive_offdiag={sign_audit_diag['num_positive_offdiag']}, "
+                f"neg_components={sign_audit_diag['negative_edge_support_components']}, "
+                f"route={sign_audit_diag['route_verdict']}"
+            )
+        else:
+            sign_audit_diag = {
+                "audit_requested": True,
+                "dense_audit_available": False,
+                "route_verdict": "signed_psd_required",
+            }
 
     elapsed = time.time() - t0
     return {
@@ -679,7 +753,7 @@ def _audit_row(
         "S_C_worst_eigenvector_support": wsp_sc,
         "null_vector_diagnostics": null_vector_diag,
         "row_sum_diagnostics": row_sum_diag,
-        "laplacian_structure_diagnostics": laplacian_diag,
+        "effective_laplacian_sign_diagnostics": sign_audit_diag,
         "schur_complement_ok": sc_ok,
         "verdict": verdict,
         "elapsed_seconds": round(elapsed, 2),
@@ -737,11 +811,12 @@ def _analyze(results: list[dict[str, Any]]) -> str:
                 f"N={r['N']}: max |S_C 1_C|={row_sum_diag['max_abs_row_sum']:.6e}, "
                 f"L2 row-sum residual={row_sum_diag['l2_row_sum']:.6e}"
             )
-        lap_diag = r.get("laplacian_structure_diagnostics") or {}
-        if lap_diag.get("dense_audit_available"):
+        sign_diag = r.get("effective_laplacian_sign_diagnostics") or {}
+        if sign_diag.get("dense_audit_available"):
             lines.append(
-                f"N={r['N']}: dense Laplacian audit offdiag<=0={lap_diag['nonpositive_offdiagonal']}, "
-                f"components={lap_diag['effective_graph_components']}"
+                f"N={r['N']}: sign audit positive_offdiag={sign_diag['num_positive_offdiag']}, "
+                f"negative-edge components={sign_diag['negative_edge_support_components']}, "
+                f"route={sign_diag['route_verdict']}"
             )
     gc_norms = [r["M_GC_norm"] for r in results]
     lines.append(f"\nM_GC norms: {', '.join(f'{v:.2e}' for v in gc_norms)}")
@@ -770,6 +845,15 @@ def main() -> None:
     parser.add_argument("--shells", type=int, nargs="+", default=[6, 8, 10, 12])
     parser.add_argument("--dense-schur-threshold", type=int, default=DENSE_SCHUR_THRESHOLD,
                         help="nc above which matrix-free eigsh replaces dense eigh for S_C")
+    parser.add_argument(
+        "--audit-effective-laplacian-signs",
+        action="store_true",
+        help=(
+            "For dense S_C shells, audit whether the Schur complement is an ordinary "
+            "graph Laplacian shortcut (nonpositive off-diagonals + connected negative-edge support) "
+            "or whether the signed-PSD route is still required."
+        ),
+    )
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
@@ -794,6 +878,7 @@ def main() -> None:
             profile_builder=builder,
             streaming_shell_threshold=args.streaming_shell_threshold,
             dense_schur_threshold=args.dense_schur_threshold,
+            audit_effective_laplacian_signs=args.audit_effective_laplacian_signs,
         )
         results.append(result)
 
@@ -824,6 +909,11 @@ def main() -> None:
         "gate1_closed": False,
         "gate1_supported_at_tested_shells": bool(psd_verified and nullity_one_observed),
         "gate1_target": "S_C = M_CC − M_CG M_GG⁻¹ M_GC ⪰ 0 and dim ker S_C = 1",
+        "schurNullModeIsConstantProved": True,
+        "kronStyleSchurReductionIdentified": True,
+        "ordinaryKronLaplacianIdentified": False,
+        "effectiveOffdiagNonpositiveProved": False,
+        "effectiveGraphConnectedProved": False,
         "schurComplementPsdVerified": bool(psd_verified),
         "schurComplementNullityOneObserved": bool(nullity_one_observed),
         "schurComplementMatrixFreeAuditInstalled": True,
@@ -837,6 +927,7 @@ def main() -> None:
         ),
         "schurComplementPsdProved": False,
         "schurNullModeIdentified": False,
+        "schurSignedFactorizationProved": False,
         "schurNullModeFactorizationProved": False,
     }
 

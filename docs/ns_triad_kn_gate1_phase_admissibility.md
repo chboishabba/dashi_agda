@@ -51,8 +51,9 @@ M = L_{\text{neg,cross}} - \tfrac19 L_{\text{abs,cross}}
 5. Since \(M\mathbf{1}=0\), the Schur complement satisfies \(S\mathbf{1}_C=0\) exactly
 
 So the constant null direction is analytically forced. The open issue is not
-identifying the null mode; it is proving that \(S\) is a **valid reduced
-Laplacian**, i.e. PSD on \(\mathbf{1}_C^\perp\).
+identifying the null mode; it is proving that \(S\) is PSD on
+\(\mathbf{1}_C^\perp\). Ordinary Laplacian signs would be a strong sufficient
+shortcut, not the definition of admissibility.
 
 ---
 
@@ -86,16 +87,27 @@ degenerate case where the F-class vanishes — not on the turbulent attractor.
 
 \[
 \boxed{
-\text{(i) } -S_{ij} \ge 0 \text{ for all } i \neq j \in C
-\qquad\text{and}\qquad
-\text{(ii) the Kron-reduced graph on } C \text{ is connected.}
+\text{Level 0 exact target: } S_C \succeq 0
+\quad\text{and}\quad
+\ker S_C = \operatorname{span}\{\mathbf{1}_C\}.
 }
 \]
 
-Because \(M\mathbf{1}=0\), condition (i) makes \(S\) a graph Laplacian on \(C\).
-Then condition (ii) upgrades this to
+The strongest checkable shortcut is:
+
+\[
+\boxed{
+\text{(i) } -S_{ij} \ge 0 \text{ for all } i \neq j \in C
+\qquad\text{and}\qquad
+\text{(ii) the negative-edge support graph on } C \text{ is connected.}
+}
+\]
+
+Because \(M\mathbf{1}=0\), condition (i) makes \(S\) an ordinary graph
+Laplacian on \(C\). Then condition (ii) upgrades this to
 \(\ker S = \operatorname{span}\{\mathbf{1}_C\}\) and \(S \succeq 0\) on
-\(\mathbf{1}_C^\perp\).
+\(\mathbf{1}_C^\perp\). If condition (i) fails, Gate 1 does not break; the
+proof route simply shifts to a signed/sum-of-squares factorization of \(S_C\).
 
 ---
 
@@ -107,8 +119,10 @@ Then condition (ii) upgrades this to
 | 1a | \(M_{GG} \succ 0\) | ✅ numerically supported |
 | 1a | \(\operatorname{range}(M_{GC}) \subseteq \operatorname{range}(M_{GG})\) | ✅ M_GG full rank |
 | 1a | \(S_C \mathbf{1}_C = 0\) | ✅ analytic from \(M\mathbf{1}=0\) |
-| 1a | Kron effective weights \(-S_{ij} \ge 0\) | **⬜ OPEN phase-admissibility gate** |
-| 1a | Kron-reduced graph connected | **⬜ OPEN connectivity gate** |
+| 1a | \(S_C \succeq 0\) on \(\mathbf{1}_C^\perp\) | **⬜ OPEN exact Gate 1 theorem target** |
+| 1a | Ordinary effective weights \(-S_{ij} \ge 0\) | **⬜ OPEN strong sufficient shortcut** |
+| 1a | Ordinary Kron support connected | **⬜ OPEN only if the shortcut holds** |
+| 1a | Signed factorization \(S_C = Q^T W Q,\; W \succeq 0\) | **⬜ OPEN general fallback route** |
 | 1b | Cut domination ≥ 1/9 | Demoted (downstream diagnostic) |
 | 2 | Waleffe helical | Motivation only |
 

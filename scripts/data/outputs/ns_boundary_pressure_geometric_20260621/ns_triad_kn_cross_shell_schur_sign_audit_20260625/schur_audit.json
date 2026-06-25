@@ -1,0 +1,229 @@
+{
+  "script": "scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py",
+  "contract": "ns_triad_kn_cross_shell_schur_symbolic_audit",
+  "schema_version": "1.0.0",
+  "c0": 0.1111111111111111,
+  "rows": [
+    {
+      "N": 6,
+      "K": 5,
+      "eta": 0.25,
+      "mode_count": 2196,
+      "edge_count": 638388,
+      "block_size": 1494,
+      "G_size": 26,
+      "C_size": 1468,
+      "M_GG": {
+        "label": "M_GG",
+        "n": 26,
+        "rank": 26,
+        "nullity": 0,
+        "lambda_min": 0.00012254275931118116,
+        "lambda_max": 0.016277961472466483,
+        "norm": 0.016277961472466483,
+        "psd_gap": 0.00012254275931118116
+      },
+      "M_GC_norm": 0.004362893820652623,
+      "M_CC": {
+        "label": "M_CC",
+        "n": 1468,
+        "rank": 1468,
+        "nullity": 0,
+        "lambda_min": 1.736469845953346e-05,
+        "lambda_max": 0.0314746160861069,
+        "norm": 0.0314746160861069,
+        "psd_gap": 1.736469845953346e-05
+      },
+      "M_CC_worst_eigenvector_support": {
+        "support": {
+          "5": 0.40886678833320067,
+          "6": 0.5911332116667991
+        },
+        "lambda_min": 1.736469845953566e-05,
+        "norm_sq": 1.0000000000000004
+      },
+      "S_C": {
+        "label": "S_C",
+        "n": 1468,
+        "rank": 1467,
+        "nullity": 1,
+        "lambda_min": 6.67178239486283e-18,
+        "lambda_max": 0.03144322841426005,
+        "norm": 0.03144322841426005,
+        "psd_gap": 6.67178239486283e-18
+      },
+      "correction_norm": 0.0011748077892112568,
+      "S_C_worst_eigenvector_support": {
+        "support": {
+          "5": 0.41008174386921137,
+          "6": 0.5899182561307887
+        },
+        "lambda_min": 7.594723968109664e-18,
+        "norm_sq": 1.0000000000000002
+      },
+      "null_vector_diagnostics": {
+        "corr_constant": 1.0000000000000135,
+        "corr_shell_5": 0.6403762517998316,
+        "corr_shell_6": 0.7680613622171013,
+        "shell_mass": {
+          "5": 0.41008174386920515,
+          "6": 0.5899182561307799
+        },
+        "corr_shell_balance": -0.17983651226157746,
+        "corr_sqrt_degree": 0.9839649382998682,
+        "corr_inv_degree": 0.956162580386902,
+        "corr_degree_weighted_balance": -0.08521912772255955
+      },
+      "row_sum_diagnostics": {
+        "n": 1468,
+        "max_abs_row_sum": 1.5476986012230576e-16,
+        "l2_row_sum": 3.0431782156189833e-16,
+        "mean_row_sum": 4.3355592189764185e-20
+      },
+      "effective_laplacian_sign_diagnostics": {
+        "audit_requested": true,
+        "dense_audit_available": true,
+        "max_row_sum_residual": 1.5476986012230576e-16,
+        "num_positive_offdiag": 716390,
+        "num_negative_offdiag": 1357298,
+        "max_positive_offdiag": 0.00040074860280215767,
+        "min_negative_offdiag": -0.003020800387529732,
+        "effective_weight_min": -0.00040074860280215767,
+        "effective_support_num_edges": 1036844,
+        "effective_support_components": 1,
+        "effective_support_largest_component": 1468,
+        "negative_edge_support_num_edges": 678649,
+        "negative_edge_support_components": 1,
+        "negative_edge_support_largest_component": 1468,
+        "algebraic_connectivity_on_C": 5.509655889683354e-05,
+        "ordinary_laplacian_candidate": false,
+        "ordinary_laplacian_connected": false,
+        "route_verdict": "signed_psd_required"
+      },
+      "schur_complement_ok": true,
+      "verdict": "schur_psd",
+      "elapsed_seconds": 33.18,
+      "c0": 0.1111111111111111
+    },
+    {
+      "N": 8,
+      "K": 7,
+      "eta": 0.25,
+      "mode_count": 4912,
+      "edge_count": 1543284,
+      "block_size": 2742,
+      "G_size": 26,
+      "C_size": 2716,
+      "M_GG": {
+        "label": "M_GG",
+        "n": 26,
+        "rank": 26,
+        "nullity": 0,
+        "lambda_min": 0.00018396708900680913,
+        "lambda_max": 0.01596183904702817,
+        "norm": 0.01596183904702817,
+        "psd_gap": 0.00018396708900680913
+      },
+      "M_GC_norm": 0.004348850772666622,
+      "M_CC": {
+        "label": "M_CC",
+        "n": 2716,
+        "rank": 2716,
+        "nullity": 0,
+        "lambda_min": 7.633128510585853e-06,
+        "lambda_max": 0.031903921783542566,
+        "norm": 0.031903921783542566,
+        "psd_gap": 7.633128510585853e-06
+      },
+      "M_CC_worst_eigenvector_support": {
+        "support": {
+          "7": 0.43395602850353343,
+          "8": 0.5660439714964665
+        },
+        "lambda_min": 7.6331285105845e-06,
+        "norm_sq": 1.0000000000000004
+      },
+      "S_C": {
+        "label": "S_C",
+        "n": 2716,
+        "rank": 2715,
+        "nullity": 1,
+        "lambda_min": -8.750803257202584e-18,
+        "lambda_max": 0.031886488200624986,
+        "norm": 0.031886488200624986,
+        "psd_gap": -8.750803257202584e-18
+      },
+      "correction_norm": 0.0011885319174979021,
+      "S_C_worst_eigenvector_support": {
+        "support": {
+          "7": 0.433726067746684,
+          "8": 0.5662739322533161
+        },
+        "lambda_min": -1.0545727626982877e-17,
+        "norm_sq": 0.9999999999999998
+      },
+      "null_vector_diagnostics": {
+        "corr_constant": -0.9999999999999906,
+        "corr_shell_7": -0.6585788242470915,
+        "corr_shell_8": -0.7525117489138028,
+        "shell_mass": {
+          "7": 0.43372606774668376,
+          "8": 0.5662739322533156
+        },
+        "corr_shell_balance": 0.13254786450662945,
+        "corr_sqrt_degree": -0.979251370112347,
+        "corr_inv_degree": -0.9545055803880007,
+        "corr_degree_weighted_balance": 0.060722891708135454
+      },
+      "row_sum_diagnostics": {
+        "n": 2716,
+        "max_abs_row_sum": 1.2663481374630692e-16,
+        "l2_row_sum": 2.6051376473380444e-16,
+        "mean_row_sum": -1.1724693852351047e-19
+      },
+      "effective_laplacian_sign_diagnostics": {
+        "audit_requested": true,
+        "dense_audit_available": true,
+        "max_row_sum_residual": 1.2663481374630692e-16,
+        "num_positive_offdiag": 2200624,
+        "num_negative_offdiag": 4202194,
+        "max_positive_offdiag": 0.0004015389198002736,
+        "min_negative_offdiag": -0.003022911454881567,
+        "effective_weight_min": -0.0004015389198002736,
+        "effective_support_num_edges": 3201409,
+        "effective_support_components": 1,
+        "effective_support_largest_component": 2716,
+        "negative_edge_support_num_edges": 2101097,
+        "negative_edge_support_components": 1,
+        "negative_edge_support_largest_component": 2716,
+        "algebraic_connectivity_on_C": 2.5295731626095964e-05,
+        "ordinary_laplacian_candidate": false,
+        "ordinary_laplacian_connected": false,
+        "route_verdict": "signed_psd_required"
+      },
+      "schur_complement_ok": true,
+      "verdict": "schur_psd",
+      "elapsed_seconds": 246.39,
+      "c0": 0.1111111111111111
+    }
+  ],
+  "analysis_text": "## Schur Audit Summary\n\n| N | block | G | C | M_CC \u03bb_min | S_C \u03bb0 | S_C \u03bb1 | S_C \u03bb2 | nullity est | max \\|S_C 1\\| | corr(constant) | Verdict |\n|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---|\n| 6 | 1494 | 26 | 1468 | 1.736470e-05 | \u2014 | \u2014 | \u2014 | 1 | 1.55e-16 | 1.0000 | schur_psd |\n| 8 | 2742 | 26 | 2716 | 7.633129e-06 | \u2014 | \u2014 | \u2014 | 1 | 1.27e-16 | -1.0000 | schur_psd |\n\nN=6: , nullity_est=1, eval=dense\nN=6: max |S_C 1_C|=1.547699e-16, L2 row-sum residual=3.043178e-16\nN=6: sign audit positive_offdiag=716390, negative-edge components=1, route=signed_psd_required\nN=8: , nullity_est=1, eval=dense\nN=8: max |S_C 1_C|=1.266348e-16, L2 row-sum residual=2.605138e-16\nN=8: sign audit positive_offdiag=2200624, negative-edge components=1, route=signed_psd_required\n\nM_GC norms: 4.36e-03, 4.35e-03\nVerdicts: ['schur_psd']\nGate 1 target = S_C \u2ab0 0 and dim ker S_C = 1: SUPPORTED at tested N, not proved.",
+  "candidate_only": true,
+  "theorem_promoted": false,
+  "gate1_closed": false,
+  "gate1_supported_at_tested_shells": true,
+  "gate1_target": "S_C = M_CC \u2212 M_CG M_GG\u207b\u00b9 M_GC \u2ab0 0 and dim ker S_C = 1",
+  "schurNullModeIsConstantProved": true,
+  "kronStyleSchurReductionIdentified": true,
+  "ordinaryKronLaplacianIdentified": false,
+  "effectiveOffdiagNonpositiveProved": false,
+  "effectiveGraphConnectedProved": false,
+  "schurComplementPsdVerified": true,
+  "schurComplementNullityOneObserved": true,
+  "schurComplementMatrixFreeAuditInstalled": true,
+  "schurNullModeConstantOnCObserved": true,
+  "schurComplementPsdProved": false,
+  "schurNullModeIdentified": false,
+  "schurSignedFactorizationProved": false,
+  "schurNullModeFactorizationProved": false
+}

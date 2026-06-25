@@ -129,20 +129,24 @@ L_{\mathrm{neg,cross}} - \frac19 L_{\mathrm{abs,cross}} \succeq 0,
 }
 \]
 
-The Schur complement conditions reduce Gate 1 to the Kron-reduced Laplacian target:
+The Schur complement conditions reduce Gate 1 to the exact Schur target
+\(S_C \succeq 0\) with constant null mode. A strong sufficient shortcut is the
+ordinary Kron-Laplacian route:
 \[
 \boxed{
 S_C \mathbf{1}_C = 0,\qquad
--[S_C]_{ij} \ge 0 \ (i \neq j),\qquad
-\mathcal{G}_{\mathrm{Kron}}(C) \text{ connected.}
+S_C \succeq 0,\qquad
+\ker S_C = \operatorname{span}\{\mathbf{1}_C\}.
 }
 \]
 
 The first clause is analytic: \(M\mathbf{1}=0\) because both
 \(L_{\mathrm{neg,cross}}\) and \(L_{\mathrm{abs,cross}}\) are graph
-Laplacians, hence \(S_C \mathbf{1}_C = 0\) by Schur complementation. The open
-work is proving that the effective off-diagonal weights are nonnegative and the
-reduced graph is connected.
+Laplacians, hence \(S_C \mathbf{1}_C = 0\) by Schur complementation. If one can
+also prove \(-[S_C]_{ij} \ge 0\) for \(i \neq j\) and connectivity of the
+negative-edge support on \(C\), then the exact target follows immediately from
+ordinary weighted-Laplacian theory. If not, the proof route shifts to a signed
+PSD factorization of \(S_C\).
 
 The leakage bound \(\varepsilon_N \le 1/20\) is a separate structural claim
 about the complement-to-block coupling.  Combined:
