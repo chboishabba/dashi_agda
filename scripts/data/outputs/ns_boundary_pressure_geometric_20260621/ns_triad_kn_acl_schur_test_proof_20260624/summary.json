@@ -1,0 +1,621 @@
+{
+  "adversarial_column_sum_sup_stats": {
+    "count": 4,
+    "max": 0.001779464024250605,
+    "mean": 0.001295832409306775,
+    "min": 0.0009163894999913271,
+    "relative_range": 0.6660386930135453,
+    "sample_stdev": 0.0003749833289140694
+  },
+  "adversarial_n_times_schur_bound_stats": {
+    "count": 4,
+    "max": 0.016244397035860888,
+    "mean": 0.013619111688386552,
+    "min": 0.01132067707294596,
+    "relative_range": 0.36153018460914305,
+    "sample_stdev": 0.0021264544120073573
+  },
+  "adversarial_row_count": 4,
+  "adversarial_rows": [
+    {
+      "K": 5,
+      "N": 6,
+      "N_times_schur_bound": 0.016244397035860888,
+      "candidate_only": true,
+      "column_sum_sup": 0.001779464024250605,
+      "positive_cross_edge_count": 735870,
+      "profile_id": "uniform_all_modes_geometry_sweep",
+      "profile_independent_certificate": false,
+      "profile_scope": "all selected shell modes carry equal probability mass",
+      "row_sum_sup": 0.004119224657014591,
+      "schur_bound": 0.002707399505976815,
+      "support_mode_count_for_worst_tail": 693,
+      "uniform_geometry_sweep": {
+        "K": 5,
+        "N": 6,
+        "N_times_schur_bound": 0.016244397035860888,
+        "candidate_only": true,
+        "column_sum_sup": 0.001779464024250605,
+        "positive_cross_edge_count": 735870,
+        "profile_id": "uniform_all_modes_geometry_sweep",
+        "profile_independent_certificate": false,
+        "profile_scope": "all selected shell modes carry equal probability mass",
+        "row_sum_sup": 0.004119224657014591,
+        "schur_bound": 0.002707399505976815,
+        "support_mode_count_for_worst_tail": 693,
+        "worst_core_mode": {
+          "mode_index": 168,
+          "mode_key": [
+            1,
+            0,
+            0
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "worst_tail_active_finite_k_count": 476,
+        "worst_tail_mode": {
+          "mode_index": 2092,
+          "mode_key": [
+            -1,
+            5,
+            0
+          ],
+          "shell_level": 5,
+          "shell_radius": 5.0
+        }
+      },
+      "worst_core_mode": {
+        "mode_index": 168,
+        "mode_key": [
+          1,
+          0,
+          0
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 476,
+      "worst_tail_mode": {
+        "mode_index": 2092,
+        "mode_key": [
+          -1,
+          5,
+          0
+        ],
+        "shell_level": 5,
+        "shell_radius": 5.0
+      }
+    },
+    {
+      "K": 7,
+      "N": 8,
+      "N_times_schur_bound": 0.014273330670910715,
+      "candidate_only": true,
+      "column_sum_sup": 0.001382542572444379,
+      "positive_cross_edge_count": 3638580,
+      "profile_id": "uniform_all_modes_geometry_sweep",
+      "profile_independent_certificate": false,
+      "profile_scope": "all selected shell modes carry equal probability mass",
+      "row_sum_sup": 0.002302460387360837,
+      "schur_bound": 0.0017841663338638394,
+      "support_mode_count_for_worst_tail": 2005,
+      "uniform_geometry_sweep": {
+        "K": 7,
+        "N": 8,
+        "N_times_schur_bound": 0.014273330670910715,
+        "candidate_only": true,
+        "column_sum_sup": 0.001382542572444379,
+        "positive_cross_edge_count": 3638580,
+        "profile_id": "uniform_all_modes_geometry_sweep",
+        "profile_independent_certificate": false,
+        "profile_scope": "all selected shell modes carry equal probability mass",
+        "row_sum_sup": 0.002302460387360837,
+        "schur_bound": 0.0017841663338638394,
+        "support_mode_count_for_worst_tail": 2005,
+        "worst_core_mode": {
+          "mode_index": 15,
+          "mode_key": [
+            0,
+            0,
+            -1
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "worst_tail_active_finite_k_count": 1363,
+        "worst_tail_mode": {
+          "mode_index": 3146,
+          "mode_key": [
+            -7,
+            -2,
+            2
+          ],
+          "shell_level": 7,
+          "shell_radius": 7.0
+        }
+      },
+      "worst_core_mode": {
+        "mode_index": 15,
+        "mode_key": [
+          0,
+          0,
+          -1
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 1363,
+      "worst_tail_mode": {
+        "mode_index": 3146,
+        "mode_key": [
+          -7,
+          -2,
+          2
+        ],
+        "shell_level": 7,
+        "shell_radius": 7.0
+      }
+    },
+    {
+      "K": 9,
+      "N": 10,
+      "N_times_schur_bound": 0.012638041973828649,
+      "candidate_only": true,
+      "column_sum_sup": 0.0011049335405407886,
+      "positive_cross_edge_count": 12098790,
+      "profile_id": "uniform_all_modes_geometry_sweep",
+      "profile_independent_certificate": false,
+      "profile_scope": "all selected shell modes carry equal probability mass",
+      "row_sum_sup": 0.0014455177535300703,
+      "schur_bound": 0.001263804197382865,
+      "support_mode_count_for_worst_tail": 3740,
+      "uniform_geometry_sweep": {
+        "K": 9,
+        "N": 10,
+        "N_times_schur_bound": 0.012638041973828649,
+        "candidate_only": true,
+        "column_sum_sup": 0.0011049335405407886,
+        "positive_cross_edge_count": 12098790,
+        "profile_id": "uniform_all_modes_geometry_sweep",
+        "profile_independent_certificate": false,
+        "profile_scope": "all selected shell modes carry equal probability mass",
+        "row_sum_sup": 0.0014455177535300703,
+        "schur_bound": 0.001263804197382865,
+        "support_mode_count_for_worst_tail": 3740,
+        "worst_core_mode": {
+          "mode_index": 419,
+          "mode_key": [
+            0,
+            -1,
+            0
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "worst_tail_active_finite_k_count": 2758,
+        "worst_tail_mode": {
+          "mode_index": 5730,
+          "mode_key": [
+            -9,
+            -1,
+            -2
+          ],
+          "shell_level": 9,
+          "shell_radius": 9.0
+        }
+      },
+      "worst_core_mode": {
+        "mode_index": 419,
+        "mode_key": [
+          0,
+          -1,
+          0
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 2758,
+      "worst_tail_mode": {
+        "mode_index": 5730,
+        "mode_key": [
+          -9,
+          -1,
+          -2
+        ],
+        "shell_level": 9,
+        "shell_radius": 9.0
+      }
+    },
+    {
+      "K": 11,
+      "N": 12,
+      "N_times_schur_bound": 0.01132067707294596,
+      "candidate_only": true,
+      "column_sum_sup": 0.0009163894999913271,
+      "positive_cross_edge_count": 31842188,
+      "profile_id": "uniform_all_modes_geometry_sweep",
+      "profile_independent_certificate": false,
+      "profile_scope": "all selected shell modes carry equal probability mass",
+      "row_sum_sup": 0.0009711855405184119,
+      "schur_bound": 0.00094338975607883,
+      "support_mode_count_for_worst_tail": 6625,
+      "uniform_geometry_sweep": {
+        "K": 11,
+        "N": 12,
+        "N_times_schur_bound": 0.01132067707294596,
+        "candidate_only": true,
+        "column_sum_sup": 0.0009163894999913271,
+        "positive_cross_edge_count": 31842188,
+        "profile_id": "uniform_all_modes_geometry_sweep",
+        "profile_independent_certificate": false,
+        "profile_scope": "all selected shell modes carry equal probability mass",
+        "row_sum_sup": 0.0009711855405184119,
+        "schur_bound": 0.00094338975607883,
+        "support_mode_count_for_worst_tail": 6625,
+        "worst_core_mode": {
+          "mode_index": 599,
+          "mode_key": [
+            0,
+            -1,
+            0
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "worst_tail_active_finite_k_count": 5095,
+        "worst_tail_mode": {
+          "mode_index": 688,
+          "mode_key": [
+            1,
+            2,
+            -11
+          ],
+          "shell_level": 11,
+          "shell_radius": 11.0
+        }
+      },
+      "worst_core_mode": {
+        "mode_index": 599,
+        "mode_key": [
+          0,
+          -1,
+          0
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 5095,
+      "worst_tail_mode": {
+        "mode_index": 688,
+        "mode_key": [
+          1,
+          2,
+          -11
+        ],
+        "shell_level": 11,
+        "shell_radius": 11.0
+      }
+    }
+  ],
+  "adversarial_schur_bound_stats": {
+    "count": 4,
+    "max": 0.002707399505976815,
+    "mean": 0.0016746899483255874,
+    "min": 0.00094338975607883,
+    "relative_range": 1.0533351272942806,
+    "sample_stdev": 0.0007707358347628201
+  },
+  "analysis_read": "Finite-shell Schur-test proof readout: the exact mixed-tail positive cross block has row/output absolute-sum supremum in 0.0114691..0.0116587, column/input absolute-sum supremum in 9.17093e-05..0.000340859, and therefore Schur bound ||L_FT^+||_op <= sqrt(row_sup * col_sup) in 0.00103187..0.00197721.  The sampled normalization is consistent with N * ||L_FT^+||_op staying in 0.011826..0.0127705 while N^2 * column_sum_sup stays in 0.0121631..0.0139883.  The added adversarial tail-mode sweep records uniform-sweep worst-tail column sums in 0.000916389..0.00177946 with worst-tail active finite-mode counts in 476..5095.  This remains a sampled finite-shell certificate only; uniform/profile-independent theorem promotion remains open.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "bkm_exclusion_proved": false,
+  "candidate_only": true,
+  "canonical_schur_test_statement": "||L_FT^+||_op^2 <= (sup_k sum_p |L_FT^+(k,p)|) * (sup_p sum_k |L_FT^+(k,p)|)",
+  "clay_promoted": false,
+  "column_sum_sup_stats": {
+    "count": 4,
+    "max": 0.00034085935063711564,
+    "mean": 0.00019062510080165493,
+    "min": 9.170933372028357e-05,
+    "relative_range": 1.3070157910425038,
+    "sample_stdev": 0.00010790386001819414
+  },
+  "contract": "ns_triad_kn_acl_schur_test_proof",
+  "control_card": {
+    "C": "scripts/ns_triad_kn_acl_schur_test_proof.py",
+    "F": "The remaining gap is uniform/profile-independent promotion of the sampled N^-1 block scale.",
+    "G": "Keep the result fail-closed: the finite-shell proof does not imply a uniform asymptotic theorem.",
+    "L": "Explicit positive-sector cross block -> exact row/column absolute sums -> Schur-test inequality -> sampled N^-1 operator-norm scale.",
+    "O": "Prove the sampled mixed-tail Schur-test inequality for the exact finite-shell L_FT^+ cross block.",
+    "P": "FAIL_CLOSED_NS_TRIAD_KN_ACL_SCHUR_TEST_PROOF",
+    "R": "Rebuild the forced-tail profiles at N=6,8,10,12, compute the exact positive-sector finite-to-tail block, and certify the row/column kernel-sum bound without theorem promotion.",
+    "S": "Finite-shell candidate-only proof artifact; no theorem, full-NS, BKM, or Clay promotion."
+  },
+  "elapsed_ms": 225457.353,
+  "fail_closed": true,
+  "finished_at": "2026-06-24T11:47:21.761096+00:00",
+  "fits": {
+    "adversarial_column_sum_sup_vs_N": {
+      "count": 4,
+      "exp_intercept": 0.009999632396412429,
+      "log_log_slope": -0.9582838546919872
+    },
+    "adversarial_schur_bound_vs_N": {
+      "count": 4,
+      "exp_intercept": 0.04157251287346631,
+      "log_log_slope": -1.5197405334074154
+    },
+    "column_sum_sup_vs_N": {
+      "count": 4,
+      "exp_intercept": 0.009152589084452597,
+      "log_log_slope": -1.8419624572467745
+    },
+    "schur_bound_vs_N": {
+      "count": 4,
+      "exp_intercept": 0.010041020799012793,
+      "log_log_slope": -0.9098652969034343
+    }
+  },
+  "full_ns_promoted": false,
+  "log_entries": [
+    {
+      "at": "2026-06-24T11:43:36.303764+00:00",
+      "elapsed_ms": 0.017,
+      "message": "started analytic proof run",
+      "output_dir": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_acl_schur_test_proof_20260624",
+      "shells": [
+        6,
+        8,
+        10,
+        12
+      ],
+      "tail_eta": 0.25
+    },
+    {
+      "adversarial_row_count": 4,
+      "at": "2026-06-24T11:47:21.760449+00:00",
+      "elapsed_ms": 225456.714,
+      "message": "derived sampled proof rows",
+      "row_count": 4
+    },
+    {
+      "at": "2026-06-24T11:47:21.761096+00:00",
+      "elapsed_ms": 225457.353,
+      "message": "wrote proof artifacts",
+      "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_acl_schur_test_proof_20260624/summary.json",
+      "output_md": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_acl_schur_test_proof_20260624/summary.md"
+    }
+  ],
+  "n_squared_times_column_sum_sup_stats": {
+    "count": 4,
+    "max": 0.01398832271517856,
+    "mean": 0.012907126715617848,
+    "min": 0.012163103468635831,
+    "relative_range": 0.14141173994473777,
+    "sample_stdev": 0.000859593815943388
+  },
+  "n_times_schur_bound_stats": {
+    "count": 4,
+    "max": 0.012770482924846045,
+    "mean": 0.012210549300046756,
+    "min": 0.011826038240410694,
+    "relative_range": 0.07734661735747915,
+    "sample_stdev": 0.0004514896716907435
+  },
+  "proof_scope": "finite_shell_only",
+  "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_ACL_SCHUR_TEST_PROOF",
+  "row_count": 4,
+  "row_sum_sup_stats": {
+    "count": 4,
+    "max": 0.011658669695747196,
+    "mean": 0.011559044614785905,
+    "min": 0.011469115826422354,
+    "relative_range": 0.01639874882759525,
+    "sample_stdev": 9.000944036304578e-05
+  },
+  "rows": [
+    {
+      "D": 8.62227520435967,
+      "D_q_gap": 0.004557249030978871,
+      "K": 5,
+      "N": 6,
+      "N2_q_gap": 0.019027572331753617,
+      "N_squared_times_column_sum_sup": 0.012270936622936162,
+      "N_times_schur_bound": 0.011863253913962342,
+      "column_sum_sup": 0.00034085935063711564,
+      "core_mode_count": 728,
+      "cross_edge_count": 38868,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.23831255403534013,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_20260624/shell6_K5_eta250.json",
+      "max_cross_entry_abs": 9.64132338831123e-06,
+      "profile_id": "forced_tail_K5_eta_0.250",
+      "q_gap": 0.0005285436758820449,
+      "row_sum_sup": 0.011469115826422354,
+      "schur_bound": 0.0019772089856603904,
+      "schur_bound_squared": 3.90935537297619e-06,
+      "tail_mode_count": 1468,
+      "worst_core_active_tail_count": 977,
+      "worst_core_mode": {
+        "mode_index": 168,
+        "mode_key": [
+          1,
+          0,
+          0
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 20,
+      "worst_tail_mode": {
+        "mode_index": 992,
+        "mode_key": [
+          5,
+          -2,
+          5
+        ],
+        "shell_level": 5,
+        "shell_radius": 5.0
+      }
+    },
+    {
+      "D": 15.123527245949925,
+      "D_q_gap": 0.004095172011266396,
+      "K": 7,
+      "N": 8,
+      "N2_q_gap": 0.01733001861660528,
+      "N_squared_times_column_sum_sup": 0.012163103468635831,
+      "N_times_schur_bound": 0.011826038240410694,
+      "column_sum_sup": 0.00019004849169743486,
+      "core_mode_count": 2196,
+      "cross_edge_count": 71208,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.23468265308453265,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_20260624/shell8_K7_eta250.json",
+      "max_cross_entry_abs": 5.211142452904807e-06,
+      "profile_id": "forced_tail_K7_eta_0.250",
+      "q_gap": 0.0002707815408844575,
+      "row_sum_sup": 0.011498313799951723,
+      "schur_bound": 0.0014782547800513367,
+      "schur_bound_squared": 2.1852371947446257e-06,
+      "tail_mode_count": 2716,
+      "worst_core_active_tail_count": 1810,
+      "worst_core_mode": {
+        "mode_index": 15,
+        "mode_key": [
+          0,
+          0,
+          -1
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 20,
+      "worst_tail_mode": {
+        "mode_index": 485,
+        "mode_key": [
+          1,
+          -6,
+          -7
+        ],
+        "shell_level": 7,
+        "shell_radius": 7.0
+      }
+    },
+    {
+      "D": 23.624080036798535,
+      "D_q_gap": 0.0041093953784676895,
+      "K": 9,
+      "N": 10,
+      "N2_q_gap": 0.01739494351554264,
+      "N_squared_times_column_sum_sup": 0.01398832271517856,
+      "N_times_schur_bound": 0.012770482924846045,
+      "column_sum_sup": 0.0001398832271517856,
+      "core_mode_count": 4912,
+      "cross_edge_count": 114030,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.2372186220049377,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_20260624/shell10_K9_eta250.json",
+      "max_cross_entry_abs": 3.2551662652048063e-06,
+      "profile_id": "forced_tail_K9_eta_0.250",
+      "q_gap": 0.00017394943515542638,
+      "row_sum_sup": 0.011658669695747196,
+      "schur_bound": 0.0012770482924846045,
+      "schur_bound_squared": 1.6308523413378441e-06,
+      "tail_mode_count": 4348,
+      "worst_core_active_tail_count": 2984,
+      "worst_core_mode": {
+        "mode_index": 0,
+        "mode_key": [
+          0,
+          0,
+          1
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 26,
+      "worst_tail_mode": {
+        "mode_index": 3788,
+        "mode_key": [
+          8,
+          -9,
+          9
+        ],
+        "shell_level": 9,
+        "shell_radius": 9.0
+      }
+    },
+    {
+      "D": 34.124371464487744,
+      "D_q_gap": 0.0038749044553088806,
+      "K": 11,
+      "N": 12,
+      "N2_q_gap": 0.016351546347019436,
+      "N_squared_times_column_sum_sup": 0.013206144055720834,
+      "N_times_schur_bound": 0.012382422120967941,
+      "column_sum_sup": 9.170933372028357e-05,
+      "core_mode_count": 9260,
+      "cross_edge_count": 164598,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.23398605177746845,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_shell12_20260624/shell12_K11_eta250.json",
+      "max_cross_entry_abs": 2.2239884700022058e-06,
+      "profile_id": "forced_tail_K11_eta_0.250",
+      "q_gap": 0.00011355240518763496,
+      "row_sum_sup": 0.01161007913702235,
+      "schur_bound": 0.0010318685100806618,
+      "schur_bound_squared": 1.0647526220960847e-06,
+      "tail_mode_count": 6364,
+      "worst_core_active_tail_count": 4276,
+      "worst_core_mode": {
+        "mode_index": 599,
+        "mode_key": [
+          0,
+          -1,
+          0
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 22,
+      "worst_tail_mode": {
+        "mode_index": 7260,
+        "mode_key": [
+          11,
+          -10,
+          11
+        ],
+        "shell_level": 11,
+        "shell_radius": 11.0
+      }
+    }
+  ],
+  "scaling_summary": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_fit_20260624/summary.json",
+  "schema_version": "1.0.0",
+  "schur_bound_stats": {
+    "count": 4,
+    "max": 0.0019772089856603904,
+    "mean": 0.0014410951420692484,
+    "min": 0.0010318685100806618,
+    "relative_range": 0.6559875527873388,
+    "sample_stdev": 0.00040132144106372564
+  },
+  "script_name": "scripts/ns_triad_kn_acl_schur_test_proof.py",
+  "started_at": "2026-06-24T11:43:36.303753+00:00",
+  "status": "ok",
+  "terminal_promoted": false,
+  "theorem_promoted": false,
+  "warnings": [
+    "velocity_snapshots trailing channel layout detected"
+  ]
+}

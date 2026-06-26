@@ -1,0 +1,11 @@
+/home/c/Documents/code/dashi_agda/scripts/ns_triad_kn_shell6_mixed_tail_decomposition.py:154: UserWarning: Exited at iteration 80 with accuracies 
+[7.54803665e-05 4.71002000e-04 1.21853283e-03]
+not reaching the requested tolerance 1e-07.
+Use iteration 67 instead with accuracy 
+0.00030679732568666523.
+
+  eigs, vecs = lobpcg(
+/home/c/Documents/code/dashi_agda/scripts/ns_triad_kn_shell6_mixed_tail_decomposition.py:154: UserWarning: Exited postprocessing with accuracies 
+[0.00016982 0.00057842 0.00017222]
+not reaching the requested tolerance 1e-07.
+  eigs, vecs = lobpcg(

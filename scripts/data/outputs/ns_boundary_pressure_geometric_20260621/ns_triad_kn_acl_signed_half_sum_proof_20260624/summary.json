@@ -1,0 +1,257 @@
+{
+  "analysis_read": "Fork decision: signed ACL cancellation is exact on the corrected first harmonic over the sampled same-shell transverse sets, but it does not control the positive block. Across representatives the transverse counts are 88..880, the imbalance ratios are 0..1.87e-15, and the positive-mass ratios are 0.500000..0.500000.  Therefore S_+ = S_abs/2 on this carrier, so Fork A is dead and the live route is direct positive-sector magnitude/counting control.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "bkm_exclusion_proved": false,
+  "candidate_only": true,
+  "clay_promoted": false,
+  "contract": "ns_triad_kn_acl_signed_half_sum_proof",
+  "control_card": {
+    "C": "scripts/ns_triad_kn_acl_signed_half_sum_proof.py",
+    "F": "The live route after this fork decision is direct positive-sector magnitude/counting control.",
+    "G": "Stay fail-closed: exact cancellation in the signed harmonic must not be misreported as positive-sector smallness.",
+    "L": "Same-shell transverse set -> old closure-angle diagnostic -> corrected ACL first harmonic -> positive/negative half-sum split -> fork decision.",
+    "O": "Resolve whether ACL signed cancellation controls the positive mixed-tail Schur block.",
+    "P": "FAIL_CLOSED_NS_TRIAD_KN_ACL_SIGNED_HALF_SUM_PROOF",
+    "R": "Re-evaluate the same-shell transverse set with the correct ACL first harmonic, compare it against the old closure-angle cosine, and measure the positive and negative half-sums explicitly.",
+    "S": "Candidate-only fork-resolution artifact; no theorem, full-NS, BKM, or Clay promotion."
+  },
+  "elapsed_ms": 838.77,
+  "fail_closed": true,
+  "finished_at": "2026-06-24T11:39:15.619221+00:00",
+  "fork_a_dead": true,
+  "fork_b_direct_positive_sector_only": true,
+  "full_ns_promoted": false,
+  "imbalance_ratio_stats": {
+    "count": 4,
+    "max": 1.870862096506651e-15,
+    "mean": 5.707386242111693e-16,
+    "min": 0.0,
+    "relative_range": 3.277966510663987,
+    "sample_stdev": 8.736268082887378e-16
+  },
+  "log_entries": [
+    {
+      "at": "2026-06-24T11:39:14.780480+00:00",
+      "elapsed_ms": 0.016,
+      "message": "started analytic proof run",
+      "shell": 10
+    },
+    {
+      "at": "2026-06-24T11:39:15.593793+00:00",
+      "elapsed_ms": 813.338,
+      "message": "prepared shell carrier",
+      "shell": 10,
+      "shell_mode_count": 2402,
+      "total_mode_count": 9260
+    },
+    {
+      "at": "2026-06-24T11:39:15.605563+00:00",
+      "elapsed_ms": 825.107,
+      "imbalance_ratio": 1.870862096506651e-15,
+      "message": "resolved representative",
+      "positive_mass_ratio": 0.4999999999999991,
+      "representative_k": [
+        0,
+        10,
+        0
+      ],
+      "transverse_mode_count": 880
+    },
+    {
+      "at": "2026-06-24T11:39:15.610668+00:00",
+      "elapsed_ms": 830.211,
+      "imbalance_ratio": 1.4437508944975474e-16,
+      "message": "resolved representative",
+      "positive_mass_ratio": 0.5000000000000001,
+      "representative_k": [
+        7,
+        7,
+        0
+      ],
+      "transverse_mode_count": 430
+    },
+    {
+      "at": "2026-06-24T11:39:15.612596+00:00",
+      "elapsed_ms": 832.137,
+      "imbalance_ratio": 0.0,
+      "message": "resolved representative",
+      "positive_mass_ratio": 0.5,
+      "representative_k": [
+        5,
+        8,
+        3
+      ],
+      "transverse_mode_count": 88
+    },
+    {
+      "at": "2026-06-24T11:39:15.614366+00:00",
+      "elapsed_ms": 833.907,
+      "imbalance_ratio": 2.677173108882714e-16,
+      "message": "resolved representative",
+      "positive_mass_ratio": 0.5000000000000001,
+      "representative_k": [
+        3,
+        9,
+        2
+      ],
+      "transverse_mode_count": 92
+    },
+    {
+      "at": "2026-06-24T11:39:15.619292+00:00",
+      "elapsed_ms": 838.83,
+      "message": "wrote proof artifacts",
+      "summary_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_acl_signed_half_sum_proof_20260624/summary.json",
+      "summary_md": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_acl_signed_half_sum_proof_20260624/summary.md"
+    }
+  ],
+  "positive_mass_ratio_stats": {
+    "count": 4,
+    "max": 0.5000000000000001,
+    "mean": 0.49999999999999983,
+    "min": 0.4999999999999991,
+    "relative_range": 1.9984014443252826e-15,
+    "sample_stdev": 4.839349969133127e-16
+  },
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_ACL_SIGNED_HALF_SUM_PROOF",
+  "row_count": 4,
+  "rows": [
+    {
+      "N": 10,
+      "acl_first_harmonic_half_sum": {
+        "imbalance_ratio": 1.870862096506651e-15,
+        "negative_sum": 94.9485717155283,
+        "positive_mass_ratio": 0.4999999999999991,
+        "positive_minus_negative": -3.552713678800501e-13,
+        "positive_plus_negative": 189.89714343105624,
+        "positive_sum": 94.94857171552795,
+        "projection_zero_count": 0,
+        "signed_sum": -2.42861286636753e-15
+      },
+      "closure_angle_test": {
+        "absolute_sum": 207.13507819514697,
+        "max_value": -0.19999999999999998,
+        "min_value": -0.2721655269759086,
+        "negative_count": 880,
+        "positive_count": 0,
+        "signed_sum": -207.13507819514697,
+        "signed_to_absolute_ratio": 1.0,
+        "zero_count": 0
+      },
+      "fork_a_dead": true,
+      "representative_k": [
+        0,
+        10,
+        0
+      ],
+      "transverse_mode_count": 880
+    },
+    {
+      "N": 10,
+      "acl_first_harmonic_half_sum": {
+        "imbalance_ratio": 1.4437508944975474e-16,
+        "negative_sum": 24.60752538641309,
+        "positive_mass_ratio": 0.5000000000000001,
+        "positive_minus_negative": 7.105427357601002e-15,
+        "positive_plus_negative": 49.21505077282619,
+        "positive_sum": 24.607525386413098,
+        "projection_zero_count": 0,
+        "signed_sum": 4.454769886308441e-15
+      },
+      "closure_angle_test": {
+        "absolute_sum": 100.13354111874192,
+        "max_value": -0.18348623853211007,
+        "min_value": -0.2834634685081247,
+        "negative_count": 430,
+        "positive_count": 0,
+        "signed_sum": -100.13354111874192,
+        "signed_to_absolute_ratio": 1.0,
+        "zero_count": 0
+      },
+      "fork_a_dead": true,
+      "representative_k": [
+        7,
+        7,
+        0
+      ],
+      "transverse_mode_count": 430
+    },
+    {
+      "N": 10,
+      "acl_first_harmonic_half_sum": {
+        "imbalance_ratio": 0.0,
+        "negative_sum": 9.30471802825402,
+        "positive_mass_ratio": 0.5,
+        "positive_minus_negative": 0.0,
+        "positive_plus_negative": 18.60943605650804,
+        "positive_sum": 9.30471802825402,
+        "projection_zero_count": 0,
+        "signed_sum": 4.28129753871076e-15
+      },
+      "closure_angle_test": {
+        "absolute_sum": 19.94639451373661,
+        "max_value": -0.1943079221744861,
+        "min_value": -0.2603827756762415,
+        "negative_count": 88,
+        "positive_count": 0,
+        "signed_sum": -19.94639451373661,
+        "signed_to_absolute_ratio": 1.0,
+        "zero_count": 0
+      },
+      "fork_a_dead": true,
+      "representative_k": [
+        5,
+        8,
+        3
+      ],
+      "transverse_mode_count": 88
+    },
+    {
+      "N": 10,
+      "acl_first_harmonic_half_sum": {
+        "imbalance_ratio": 2.677173108882714e-16,
+        "negative_sum": 9.952794050782867,
+        "positive_mass_ratio": 0.5000000000000001,
+        "positive_minus_negative": 5.329070518200751e-15,
+        "positive_plus_negative": 19.90558810156574,
+        "positive_sum": 9.952794050782872,
+        "projection_zero_count": 0,
+        "signed_sum": 5.967448757360216e-16
+      },
+      "closure_angle_test": {
+        "absolute_sum": 22.033088550613705,
+        "max_value": -0.21289238197633675,
+        "min_value": -0.26801008406912324,
+        "negative_count": 92,
+        "positive_count": 0,
+        "signed_sum": -22.033088550613705,
+        "signed_to_absolute_ratio": 1.0,
+        "zero_count": 0
+      },
+      "fork_a_dead": true,
+      "representative_k": [
+        3,
+        9,
+        2
+      ],
+      "transverse_mode_count": 92
+    }
+  ],
+  "schema_version": "1.0.0",
+  "script_name": "scripts/ns_triad_kn_acl_signed_half_sum_proof.py",
+  "shell": 10,
+  "started_at": "2026-06-24T11:39:14.780470+00:00",
+  "status": "ok",
+  "terminal_promoted": false,
+  "theorem_promoted": false,
+  "warnings": [
+    "velocity_snapshots trailing channel layout detected"
+  ]
+}

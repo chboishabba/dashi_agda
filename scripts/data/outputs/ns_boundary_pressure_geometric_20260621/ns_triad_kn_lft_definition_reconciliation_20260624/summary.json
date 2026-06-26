@@ -1,0 +1,735 @@
+{
+  "analysis_read": "Definition-reconciliation decision: different_object. Across the sampled shells, the exact Schur-test matrix and the bare shell-geometry proxy do not agree as the same object: forced-tail column sums span 9.17093e-05..0.000340859 for the script object versus 312.582..3461.44 for the bare proxy, while forced-tail N*Schur spans 0.011826..0.0127705 versus 4702.1..93612.8. On the adversarial-support rows the script column sums span 0.00331887..0.0100378 versus bare 312.582..3461.44. The sampled Schur witness therefore applies to the exact pair-incidence operator it reconstructs, not automatically to the separate bare shell-geometry proxy.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "bare_proxy_object": "Bare proxy object: shell-geometry positive kernel G_+(k,p) = max(cos(theta_kp),0) * |k x p| / |k|^2, evaluated on the same finite/tail mode split.",
+  "bkm_exclusion_proved": false,
+  "candidate_only": true,
+  "clay_promoted": false,
+  "contract": "ns_triad_kn_lft_definition_reconciliation",
+  "control_card": {
+    "C": "scripts/ns_triad_kn_lft_definition_reconciliation.py",
+    "F": "A negative verdict blocks theorem use of the sampled Schur object until a valid carrier is identified.",
+    "G": "Downgrade the sampled Schur witness if the compared objects are not the same matrix.",
+    "L": "same mode split -> exact sparse pair-incidence matrix -> bare shell-geometry proxy -> support overlap and ratio diagnostics -> row/column Schur comparison -> verdict.",
+    "O": "Reconcile the sampled Schur-test L_FT^+ object against a separate bare shell-geometry proxy.",
+    "P": "FAIL_CLOSED_NS_TRIAD_KN_LFT_DEFINITION_RECONCILIATION",
+    "R": "Rebuild the exact mixed-tail cross block on N=6,8,10,12 for the forced-tail profile and the adversarial worst-tail support profile, compare it entrywise and via row/column Schur summaries against G_+(k,p)=max(cos(theta_kp),0)|k x p|/|k|^2, and classify the relation.",
+    "S": "Fail-closed object-identity audit only; no theorem, full-NS, BKM, or Clay promotion."
+  },
+  "elapsed_ms": 314747.058,
+  "exact_script_object": "Exact script object: the sampled Schur-test matrix assembled from pair-incidence sums of (sqrt(pi_i*pi_j*pi_l)/3) * max(cos(phi_i+phi_j-phi_l),0).",
+  "fail_closed": true,
+  "finished_at": "2026-06-24T12:19:41.623028+00:00",
+  "fits": {
+    "forced_tail_column_sum_bare_vs_N": {
+      "count": 4,
+      "exp_intercept": 0.6316112535690094,
+      "log_log_slope": 3.4708250650094294
+    },
+    "forced_tail_column_sum_script_vs_N": {
+      "count": 4,
+      "exp_intercept": 0.009152589084452612,
+      "log_log_slope": -1.8419624572467754
+    },
+    "forced_tail_schur_bound_bare_vs_N": {
+      "count": 4,
+      "exp_intercept": 2.076287126942052,
+      "log_log_slope": 3.316509114229427
+    },
+    "forced_tail_schur_bound_script_vs_N": {
+      "count": 4,
+      "exp_intercept": 0.010041020799012819,
+      "log_log_slope": -0.9098652969034354
+    }
+  },
+  "full_ns_promoted": false,
+  "log_entries": [
+    {
+      "at": "2026-06-24T12:14:26.875992+00:00",
+      "elapsed_ms": 0.016,
+      "message": "started definition reconciliation audit",
+      "output_dir": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_lft_definition_reconciliation_20260624",
+      "proxy_batch_size": 512,
+      "shells": [
+        6,
+        8,
+        10,
+        12
+      ],
+      "tail_eta": 0.25
+    },
+    {
+      "at": "2026-06-24T12:14:27.494555+00:00",
+      "elapsed_ms": 618.591,
+      "message": "building shell carrier",
+      "shell": 6
+    },
+    {
+      "at": "2026-06-24T12:14:28.755048+00:00",
+      "bare_column_sum": 312.5818864937773,
+      "elapsed_ms": 1879.08,
+      "message": "reconciled forced-tail row",
+      "script_column_sum": 0.0003408593506371156,
+      "shell": 6,
+      "verdict": "different_object"
+    },
+    {
+      "at": "2026-06-24T12:14:31.610571+00:00",
+      "bare_column_sum": 312.5818864937773,
+      "elapsed_ms": 4734.602,
+      "message": "reconciled adversarial-support row",
+      "script_column_sum": 0.010037784415348375,
+      "shell": 6,
+      "support_mode_count": 693,
+      "verdict": "different_object"
+    },
+    {
+      "at": "2026-06-24T12:14:31.610620+00:00",
+      "elapsed_ms": 4734.645,
+      "message": "building shell carrier",
+      "shell": 8
+    },
+    {
+      "at": "2026-06-24T12:14:37.192699+00:00",
+      "bare_column_sum": 878.5739695342841,
+      "elapsed_ms": 10316.732,
+      "message": "reconciled forced-tail row",
+      "script_column_sum": 0.00019004849169743486,
+      "shell": 8,
+      "verdict": "different_object"
+    },
+    {
+      "at": "2026-06-24T12:14:52.607611+00:00",
+      "bare_column_sum": 878.5739695342841,
+      "elapsed_ms": 25731.645,
+      "message": "reconciled adversarial-support row",
+      "script_column_sum": 0.005301447746009338,
+      "shell": 8,
+      "support_mode_count": 2005,
+      "verdict": "different_object"
+    },
+    {
+      "at": "2026-06-24T12:14:52.607668+00:00",
+      "elapsed_ms": 25731.692,
+      "message": "building shell carrier",
+      "shell": 10
+    },
+    {
+      "at": "2026-06-24T12:15:11.746611+00:00",
+      "bare_column_sum": 1886.118759859565,
+      "elapsed_ms": 44870.647,
+      "message": "reconciled forced-tail row",
+      "script_column_sum": 0.00013988322715178568,
+      "shell": 10,
+      "verdict": "different_object"
+    },
+    {
+      "at": "2026-06-24T12:16:07.301061+00:00",
+      "bare_column_sum": 1886.118759859565,
+      "elapsed_ms": 100425.095,
+      "message": "reconciled adversarial-support row",
+      "script_column_sum": 0.004304723226765149,
+      "shell": 10,
+      "support_mode_count": 3740,
+      "verdict": "different_object"
+    },
+    {
+      "at": "2026-06-24T12:16:07.301121+00:00",
+      "elapsed_ms": 100425.146,
+      "message": "building shell carrier",
+      "shell": 12
+    },
+    {
+      "at": "2026-06-24T12:17:01.616350+00:00",
+      "bare_column_sum": 3461.440521164115,
+      "elapsed_ms": 154740.384,
+      "message": "reconciled forced-tail row",
+      "script_column_sum": 9.170933372028356e-05,
+      "shell": 12,
+      "verdict": "different_object"
+    },
+    {
+      "at": "2026-06-24T12:19:41.593904+00:00",
+      "bare_column_sum": 3461.440521164115,
+      "elapsed_ms": 314717.94,
+      "message": "reconciled adversarial-support row",
+      "script_column_sum": 0.003318865296003142,
+      "shell": 12,
+      "support_mode_count": 6625,
+      "verdict": "different_object"
+    },
+    {
+      "at": "2026-06-24T12:19:41.623028+00:00",
+      "elapsed_ms": 314747.058,
+      "message": "wrote definition reconciliation artifacts",
+      "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_lft_definition_reconciliation_20260624/summary.json",
+      "output_md": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_lft_definition_reconciliation_20260624/summary.md"
+    }
+  ],
+  "overall_verdict": "different_object",
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_LFT_DEFINITION_RECONCILIATION",
+  "row_count": 8,
+  "rows": [
+    {
+      "K": 5,
+      "N": 6,
+      "N_times_schur_bound_bare": 4702.102053134576,
+      "N_times_schur_bound_script": 0.011863253913962353,
+      "bare_entry_on_script_support_stats": {
+        "count": 22270,
+        "max": 4.898979485566356,
+        "mean": 0.8849397096967018,
+        "min": 0.0,
+        "relative_range": 5.535947174576897,
+        "sample_stdev": 1.1554912481452517
+      },
+      "bare_max_cross_entry_abs": 4.898979485566356,
+      "bare_positive_cross_pair_count": 520820,
+      "column_sum_bare": 312.5818864937773,
+      "column_sum_script": 0.0003408593506371156,
+      "core_mode_count": 728,
+      "entry_ratio_stats": {
+        "count": 10524,
+        "max": 80.59674761083186,
+        "mean": 0.03700317751354663,
+        "min": 1.079722999440855e-08,
+        "relative_range": 2178.103422889255,
+        "sample_stdev": 1.5749544611251955
+      },
+      "overlap_positive_pair_count": 10524,
+      "profile_id": "forced_tail",
+      "profile_retained_triad_count": 212796,
+      "profile_scope": "forced-tail profile from the sampled Schur test",
+      "row_sum_bare": 1964.7974812915802,
+      "row_sum_script": 0.011469115826422375,
+      "schur_bound_bare": 783.6836755224293,
+      "schur_bound_script": 0.001977208985660392,
+      "script_active_cross_pair_count": 22270,
+      "script_max_cross_entry_abs": 2.89224666250484e-05,
+      "support_jaccard": 0.01976093103953313,
+      "support_union_pair_count": 532566,
+      "tail_mode_count": 1468,
+      "triad_count": 1020684,
+      "verdict": "different_object",
+      "worst_script_pair": {
+        "bare_entry_abs": 0.0,
+        "core_mode": {
+          "mode_index": 0,
+          "mode_key": [
+            0,
+            0,
+            1
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "entry_ratio": null,
+        "script_entry_abs": 2.89224666250484e-05,
+        "tail_mode": {
+          "mode_index": 1401,
+          "mode_key": [
+            -5,
+            3,
+            -2
+          ],
+          "shell_level": 5,
+          "shell_radius": 5.0
+        }
+      }
+    },
+    {
+      "K": 5,
+      "N": 6,
+      "N_times_schur_bound_bare": 4702.102053134576,
+      "N_times_schur_bound_script": 0.027498277224055366,
+      "bare_entry_on_script_support_stats": {
+        "count": 22985,
+        "max": 4.1159660434202126,
+        "mean": 0.3364265805138561,
+        "min": 0.0,
+        "relative_range": 12.234366372399911,
+        "sample_stdev": 0.45758043932887976
+      },
+      "bare_max_cross_entry_abs": 4.898979485566356,
+      "bare_positive_cross_pair_count": 520820,
+      "column_sum_bare": 312.5818864937773,
+      "column_sum_script": 0.010037784415348375,
+      "core_mode_count": 728,
+      "entry_ratio_stats": {
+        "count": 11292,
+        "max": 1224.382477627678,
+        "mean": 0.40271463596316853,
+        "min": 1.5836415099431137e-08,
+        "relative_range": 3040.322770200538,
+        "sample_stdev": 19.11994470078076
+      },
+      "overlap_positive_pair_count": 11292,
+      "profile_id": "adversarial_worst_tail_support",
+      "profile_retained_triad_count": 68865,
+      "profile_scope": "equal-mass support profile on the worst tail located by the uniform geometry sweep",
+      "row_sum_bare": 1964.7974812915802,
+      "row_sum_script": 0.0020925247683110763,
+      "schur_bound_bare": 783.6836755224293,
+      "schur_bound_script": 0.004583046204009227,
+      "script_active_cross_pair_count": 22985,
+      "script_max_cross_entry_abs": 5.479742247372576e-05,
+      "support_jaccard": 0.021205116119230892,
+      "support_mode_count": 693,
+      "support_union_pair_count": 532513,
+      "tail_mode_count": 1468,
+      "triad_count": 1020684,
+      "uniform_geometry_worst_tail_column_sum": 0.001779464024250605,
+      "verdict": "different_object",
+      "worst_script_pair": {
+        "bare_entry_abs": 0.0,
+        "core_mode": {
+          "mode_index": 177,
+          "mode_key": [
+            1,
+            0,
+            -4
+          ],
+          "shell_level": 4,
+          "shell_radius": 4.0
+        },
+        "entry_ratio": null,
+        "script_entry_abs": 5.479742247372576e-05,
+        "tail_mode": {
+          "mode_index": 2092,
+          "mode_key": [
+            -1,
+            5,
+            0
+          ],
+          "shell_level": 5,
+          "shell_radius": 5.0
+        }
+      }
+    },
+    {
+      "K": 7,
+      "N": 8,
+      "N_times_schur_bound_bare": 16631.192073332575,
+      "N_times_schur_bound_script": 0.011826038240410687,
+      "bare_entry_on_script_support_stats": {
+        "count": 41144,
+        "max": 6.531972647421808,
+        "mean": 1.192531520807534,
+        "min": 0.0,
+        "relative_range": 5.4774004153773825,
+        "sample_stdev": 1.5593352706722243
+      },
+      "bare_max_cross_entry_abs": 6.531972647421808,
+      "bare_positive_cross_pair_count": 2945960,
+      "column_sum_bare": 878.5739695342841,
+      "column_sum_script": 0.00019004849169743486,
+      "core_mode_count": 2196,
+      "entry_ratio_stats": {
+        "count": 19702,
+        "max": 4.676605979228605e-05,
+        "mean": 3.6942532262587257e-06,
+        "min": 6.948340115332352e-11,
+        "relative_range": 12.659118756795708,
+        "sample_stdev": 4.57540063964838e-06
+      },
+      "overlap_positive_pair_count": 19702,
+      "profile_id": "forced_tail",
+      "profile_retained_triad_count": 514428,
+      "profile_scope": "forced-tail profile from the sampled Schur test",
+      "row_sum_bare": 4919.131729573859,
+      "row_sum_script": 0.011498313799951709,
+      "schur_bound_bare": 2078.899009166572,
+      "schur_bound_script": 0.0014782547800513358,
+      "script_active_cross_pair_count": 41144,
+      "script_max_cross_entry_abs": 1.5629403397672107e-05,
+      "support_jaccard": 0.006639477900196872,
+      "support_union_pair_count": 2967402,
+      "tail_mode_count": 2716,
+      "triad_count": 5101344,
+      "verdict": "different_object",
+      "worst_script_pair": {
+        "bare_entry_abs": 0.9913418283768998,
+        "core_mode": {
+          "mode_index": 17,
+          "mode_key": [
+            0,
+            1,
+            1
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "entry_ratio": 1.5765907329121536e-05,
+        "script_entry_abs": 1.5629403397672107e-05,
+        "tail_mode": {
+          "mode_index": 2426,
+          "mode_key": [
+            8,
+            6,
+            -4
+          ],
+          "shell_level": 8,
+          "shell_radius": 8.0
+        }
+      }
+    },
+    {
+      "K": 7,
+      "N": 8,
+      "N_times_schur_bound_bare": 16631.192073332575,
+      "N_times_schur_bound_script": 0.019489582377642208,
+      "bare_entry_on_script_support_stats": {
+        "count": 188271,
+        "max": 6.3920855017863225,
+        "mean": 0.34106515939801657,
+        "min": 0.0,
+        "relative_range": 18.741537579119537,
+        "sample_stdev": 0.49108509902546005
+      },
+      "bare_max_cross_entry_abs": 6.531972647421808,
+      "bare_positive_cross_pair_count": 2945960,
+      "column_sum_bare": 878.5739695342841,
+      "column_sum_script": 0.005301447746009338,
+      "core_mode_count": 2196,
+      "entry_ratio_stats": {
+        "count": 93548,
+        "max": 0.00045894086338429816,
+        "mean": 1.069652668662414e-05,
+        "min": 2.025703208699444e-10,
+        "relative_range": 42.90557806842817,
+        "sample_stdev": 1.655561189297337e-05
+      },
+      "overlap_positive_pair_count": 93548,
+      "profile_id": "adversarial_worst_tail_support",
+      "profile_retained_triad_count": 543552,
+      "profile_scope": "equal-mass support profile on the worst tail located by the uniform geometry sweep",
+      "row_sum_bare": 4919.131729573859,
+      "row_sum_script": 0.0011195167794637707,
+      "schur_bound_bare": 2078.899009166572,
+      "schur_bound_script": 0.002436197797205276,
+      "script_active_cross_pair_count": 188271,
+      "script_max_cross_entry_abs": 1.1138531113702925e-05,
+      "support_jaccard": 0.030765456313597964,
+      "support_mode_count": 2005,
+      "support_union_pair_count": 3040683,
+      "tail_mode_count": 2716,
+      "triad_count": 5101344,
+      "uniform_geometry_worst_tail_column_sum": 0.001382542572444379,
+      "verdict": "different_object",
+      "worst_script_pair": {
+        "bare_entry_abs": 0.0,
+        "core_mode": {
+          "mode_index": 288,
+          "mode_key": [
+            1,
+            0,
+            0
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "entry_ratio": null,
+        "script_entry_abs": 1.1138531113702925e-05,
+        "tail_mode": {
+          "mode_index": 3144,
+          "mode_key": [
+            -7,
+            -2,
+            0
+          ],
+          "shell_level": 7,
+          "shell_radius": 7.0
+        }
+      }
+    },
+    {
+      "K": 9,
+      "N": 10,
+      "N_times_schur_bound_bare": 43300.878745758346,
+      "N_times_schur_bound_script": 0.012770482924846064,
+      "bare_entry_on_script_support_stats": {
+        "count": 66103,
+        "max": 8.16496580927726,
+        "mean": 1.5227187670733093,
+        "min": 0.0,
+        "relative_range": 5.362097050245503,
+        "sample_stdev": 1.9765937944820524
+      },
+      "bare_max_cross_entry_abs": 8.16496580927726,
+      "bare_positive_cross_pair_count": 10595404,
+      "column_sum_bare": 1886.118759859565,
+      "column_sum_script": 0.00013988322715178568,
+      "core_mode_count": 4912,
+      "entry_ratio_stats": {
+        "count": 31950,
+        "max": 29.513414277206305,
+        "mean": 0.005637840668317555,
+        "min": 1.8374474488088183e-10,
+        "relative_range": 5234.87909881461,
+        "sample_stdev": 0.36584947561726555
+      },
+      "overlap_positive_pair_count": 31950,
+      "profile_id": "forced_tail",
+      "profile_retained_triad_count": 1015926,
+      "profile_scope": "forced-tail profile from the sampled Schur test",
+      "row_sum_bare": 9940.869790693727,
+      "row_sum_script": 0.011658669695747222,
+      "schur_bound_bare": 4330.087874575835,
+      "schur_bound_script": 0.0012770482924846064,
+      "script_active_cross_pair_count": 66103,
+      "script_max_cross_entry_abs": 9.76219262616925e-06,
+      "support_jaccard": 0.003005769666600405,
+      "support_union_pair_count": 10629557,
+      "tail_mode_count": 4348,
+      "triad_count": 18117660,
+      "verdict": "different_object",
+      "worst_script_pair": {
+        "bare_entry_abs": 1.9100658753958322,
+        "core_mode": {
+          "mode_index": 461,
+          "mode_key": [
+            1,
+            1,
+            0
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "entry_ratio": 5.1109193415364186e-06,
+        "script_entry_abs": 9.76219262616925e-06,
+        "tail_mode": {
+          "mode_index": 1352,
+          "mode_key": [
+            3,
+            1,
+            9
+          ],
+          "shell_level": 9,
+          "shell_radius": 9.0
+        }
+      }
+    },
+    {
+      "K": 9,
+      "N": 10,
+      "N_times_schur_bound_bare": 43300.878745758346,
+      "N_times_schur_bound_script": 0.017068750908015372,
+      "bare_entry_on_script_support_stats": {
+        "count": 508820,
+        "max": 7.735590309066197,
+        "mean": 0.3329177379987752,
+        "min": 0.0,
+        "relative_range": 23.235740923767345,
+        "sample_stdev": 0.48230030172945193
+      },
+      "bare_max_cross_entry_abs": 8.16496580927726,
+      "bare_positive_cross_pair_count": 10595404,
+      "column_sum_bare": 1886.118759859565,
+      "column_sum_script": 0.004304723226765149,
+      "core_mode_count": 4912,
+      "entry_ratio_stats": {
+        "count": 253322,
+        "max": 31.489186197685697,
+        "mean": 0.0005089877793890632,
+        "min": 2.0476458480793116e-11,
+        "relative_range": 61866.29124074769,
+        "sample_stdev": 0.1022390813548092
+      },
+      "overlap_positive_pair_count": 253322,
+      "profile_id": "adversarial_worst_tail_support",
+      "profile_retained_triad_count": 1732676,
+      "profile_scope": "equal-mass support profile on the worst tail located by the uniform geometry sweep",
+      "row_sum_bare": 9940.869790693727,
+      "row_sum_script": 0.0006767967235347885,
+      "schur_bound_bare": 4330.087874575835,
+      "schur_bound_script": 0.0017068750908015371,
+      "script_active_cross_pair_count": 508820,
+      "script_max_cross_entry_abs": 4.3720647328362125e-06,
+      "support_jaccard": 0.023345708955808467,
+      "support_mode_count": 3740,
+      "support_union_pair_count": 10850902,
+      "tail_mode_count": 4348,
+      "triad_count": 18117660,
+      "uniform_geometry_worst_tail_column_sum": 0.0011049335405407886,
+      "verdict": "different_object",
+      "worst_script_pair": {
+        "bare_entry_abs": 0.0,
+        "core_mode": {
+          "mode_index": 483,
+          "mode_key": [
+            1,
+            2,
+            1
+          ],
+          "shell_level": 2,
+          "shell_radius": 2.0
+        },
+        "entry_ratio": null,
+        "script_entry_abs": 4.3720647328362125e-06,
+        "tail_mode": {
+          "mode_index": 9230,
+          "mode_key": [
+            -1,
+            -2,
+            -9
+          ],
+          "shell_level": 9,
+          "shell_radius": 9.0
+        }
+      }
+    },
+    {
+      "K": 11,
+      "N": 12,
+      "N_times_schur_bound_bare": 93612.84161093713,
+      "N_times_schur_bound_script": 0.012382422120967927,
+      "bare_entry_on_script_support_stats": {
+        "count": 96168,
+        "max": 9.797958971132712,
+        "mean": 1.833045559327766,
+        "min": 0.0,
+        "relative_range": 5.345180277311778,
+        "sample_stdev": 2.3792493186138195
+      },
+      "bare_max_cross_entry_abs": 9.797958971132712,
+      "bare_positive_cross_pair_count": 29305856,
+      "column_sum_bare": 3461.440521164115,
+      "column_sum_script": 9.170933372028356e-05,
+      "core_mode_count": 9260,
+      "entry_ratio_stats": {
+        "count": 46751,
+        "max": 17.471766318259537,
+        "mean": 0.0017123818965798373,
+        "min": 6.962654351424375e-12,
+        "relative_range": 10203.194949181114,
+        "sample_stdev": 0.15465042614720012
+      },
+      "overlap_positive_pair_count": 46751,
+      "profile_id": "forced_tail",
+      "profile_retained_triad_count": 1767984,
+      "profile_scope": "forced-tail profile from the sampled Schur test",
+      "row_sum_bare": 17581.32051303857,
+      "row_sum_script": 0.011610079137022328,
+      "schur_bound_bare": 7801.070134244761,
+      "schur_bound_script": 0.0010318685100806607,
+      "script_active_cross_pair_count": 96168,
+      "script_max_cross_entry_abs": 6.670913119765903e-06,
+      "support_jaccard": 0.00159259292189175,
+      "support_union_pair_count": 29355273,
+      "tail_mode_count": 6364,
+      "triad_count": 51556128,
+      "verdict": "different_object",
+      "worst_script_pair": {
+        "bare_entry_abs": 0.0,
+        "core_mode": {
+          "mode_index": 625,
+          "mode_key": [
+            1,
+            0,
+            1
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "entry_ratio": null,
+        "script_entry_abs": 6.670913119765903e-06,
+        "tail_mode": {
+          "mode_index": 324,
+          "mode_key": [
+            0,
+            -12,
+            0
+          ],
+          "shell_level": 12,
+          "shell_radius": 12.0
+        }
+      }
+    },
+    {
+      "K": 11,
+      "N": 12,
+      "N_times_schur_bound_bare": 93612.84161093713,
+      "N_times_schur_bound_script": 0.014579935456481223,
+      "bare_entry_on_script_support_stats": {
+        "count": 1396265,
+        "max": 9.516128468601494,
+        "mean": 0.32984410301572487,
+        "min": 0.0,
+        "relative_range": 28.8503822915028,
+        "sample_stdev": 0.4809993900353992
+      },
+      "bare_max_cross_entry_abs": 9.797958971132712,
+      "bare_positive_cross_pair_count": 29305856,
+      "column_sum_bare": 3461.440521164115,
+      "column_sum_script": 0.003318865296003142,
+      "core_mode_count": 9260,
+      "entry_ratio_stats": {
+        "count": 696262,
+        "max": 22.024060450682015,
+        "mean": 0.00023637561432796286,
+        "min": 1.3493145851694006e-11,
+        "relative_range": 93173.99560561654,
+        "sample_stdev": 0.06138294804253624
+      },
+      "overlap_positive_pair_count": 696262,
+      "profile_id": "adversarial_worst_tail_support",
+      "profile_retained_triad_count": 5274975,
+      "profile_scope": "equal-mass support profile on the worst tail located by the uniform geometry sweep",
+      "row_sum_bare": 17581.32051303857,
+      "row_sum_script": 0.00044479416858049536,
+      "schur_bound_bare": 7801.070134244761,
+      "schur_bound_script": 0.0012149946213734352,
+      "script_active_cross_pair_count": 1396265,
+      "script_max_cross_entry_abs": 1.8542074279494864e-06,
+      "support_jaccard": 0.023204201552770077,
+      "support_mode_count": 6625,
+      "support_union_pair_count": 30005859,
+      "tail_mode_count": 6364,
+      "triad_count": 51556128,
+      "uniform_geometry_worst_tail_column_sum": 0.0009163894999913271,
+      "verdict": "different_object",
+      "worst_script_pair": {
+        "bare_entry_abs": 0.0,
+        "core_mode": {
+          "mode_index": 2499,
+          "mode_key": [
+            4,
+            0,
+            0
+          ],
+          "shell_level": 4,
+          "shell_radius": 4.0
+        },
+        "entry_ratio": null,
+        "script_entry_abs": 1.8542074279494864e-06,
+        "tail_mode": {
+          "mode_index": 12798,
+          "mode_key": [
+            -5,
+            11,
+            -1
+          ],
+          "shell_level": 11,
+          "shell_radius": 11.0
+        }
+      }
+    }
+  ],
+  "schema_version": "1.0.0",
+  "script_name": "scripts/ns_triad_kn_lft_definition_reconciliation.py",
+  "started_at": "2026-06-24T12:14:26.875981+00:00",
+  "status": "ok",
+  "terminal_promoted": false,
+  "theorem_promoted": false,
+  "warnings": [
+    "velocity_snapshots trailing channel layout detected"
+  ]
+}

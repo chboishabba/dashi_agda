@@ -94,7 +94,6 @@ iterate-from-2-held coherence zero s =
 iterate-from-2-held coherence (suc n) s
   rewrite iterate-from-2-held coherence n
     (PGFG.evolve (flowGap coherence) s)
-        | heldStable coherence
   = refl
 
 mkDynamicsStepCoherence :

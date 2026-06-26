@@ -2,6 +2,14 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-06-24 ACL Schur-test proof repair:
+  `NSTriadKNMixedTailACLOperatorNormAuditReceipt` now separates the checked
+  sampled finite-shell witness from the open profile-independent kernel-sum
+  bound, and `ns_triad_kn_acl_schur_test_proof.py` now records timing plus a
+  compact structured log.  The proof script summary artifacts were generated
+  and checked without running `DASHI/Everything.agda`; targeted Agda checks on
+  the two receipt files passed.
+
 - 2026-06-11 YM H3a/H3b manuscript and boundary integration:
   `Docs/papers/live/Paper3YangMillsClayDraft.md` now treats the continuum step
   as the exact `H3a`/`H3b` chain rather than a generic Mosco compactness

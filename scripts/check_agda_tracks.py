@@ -54,7 +54,7 @@ def _resolve_agda_binary(agda_flake: str | None) -> tuple[bool, str]:
     cmd = ["nix", "build", "--no-link", "--print-out-paths", agda_flake]
     env = os.environ.copy()
     if "XDG_CACHE_HOME" not in env:
-        cache_home = Path("/tmp") / "dashi-nix-cache"
+        cache_home = ROOT / ".cache"
         cache_home.mkdir(parents=True, exist_ok=True)
         env["XDG_CACHE_HOME"] = str(cache_home)
     try:

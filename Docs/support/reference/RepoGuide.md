@@ -47,6 +47,8 @@ Use claim-level language carefully:
   are usually evidence or inputs, not the theorem source of truth.
 - `README.md`: repo-facing entry surface and current high-level status summary.
 - `architecture.md`: canonical architecture and diagram entrypoint map.
+- `Docs/support/reference/RepoIndexPlan.md`: repo-local symbol index plan and
+  LSP-shaped discovery layer.
 
 ## Canonical Vs Status-Only Surfaces
 
@@ -199,6 +201,8 @@ Module-to-doc relation:
 
 - `architecture.md` and `Docs/support/reference/CanonicalProofSpine.md` map the main closure path
 - `Docs/support/reference/AgdaValidationTargets.md` maps code modules to validation practice
+- `Docs/support/reference/RepoIndexPlan.md` maps the discovery/index layer to
+  the Agda-grounded project graph
 - focused docs in `Docs/` usually explain one lane, gap, or consumer layer and
   should be read alongside the cited Agda modules
 

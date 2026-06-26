@@ -101,8 +101,7 @@ tailOf-Pᵣ :
   TCP.tailOf m k (TCP.Pᵣ {m} {k} x) ≡ TCP.projTail (TCP.tailOf m k x)
 tailOf-Pᵣ m k x with TCP.split m k x
 ... | (c , t)
-  rewrite TCP.Pᵣ-++ m k c t
-        | TCP.split-++ m k c (TCP.projTail t)
+  rewrite TCP.split-++ m k c (TCP.projTail t)
   = refl
 
 tailOf-Tᵣ :
