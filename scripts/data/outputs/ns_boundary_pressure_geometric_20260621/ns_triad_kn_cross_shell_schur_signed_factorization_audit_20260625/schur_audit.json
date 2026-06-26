@@ -117,7 +117,7 @@
       },
       "schur_complement_ok": true,
       "verdict": "schur_psd",
-      "elapsed_seconds": 65.67,
+      "elapsed_seconds": 67.42,
       "c0": 0.1111111111111111
     },
     {
@@ -233,7 +233,7 @@
       },
       "schur_complement_ok": true,
       "verdict": "schur_psd",
-      "elapsed_seconds": 459.5,
+      "elapsed_seconds": 457.65,
       "c0": 0.1111111111111111
     }
   ],
@@ -242,20 +242,26 @@
   "theorem_promoted": false,
   "gate1_closed": false,
   "gate1_supported_at_tested_shells": true,
-  "gate1_target": "S_C = M_CC \u2212 M_CG M_GG\u207b\u00b9 M_GC \u2ab0 0 and dim ker S_C = 1",
+  "gate1_target": "Uniform signed domination on 1_C^\u22a5: sup_x\u22a51_C (x^T L_bad x)/(x^T L_good x) \u2264 rho_* < 1",
   "schurNullModeIsConstantProved": true,
   "kronStyleSchurReductionIdentified": true,
   "ordinaryKronLaplacianIdentified": false,
+  "ordinaryKronLaplacianRoute": false,
+  "balancedSignedGraphRoute": false,
   "effectiveOffdiagNonpositiveProved": false,
   "effectiveGraphConnectedProved": false,
   "effectiveGraphConnectedObserved": true,
   "schurComplementPsdVerified": true,
   "schurComplementNullityOneObserved": true,
   "schurSignedPsdRequired": true,
+  "signedDominationProbeInstalled": true,
+  "signedDominationRatioBelowOneObserved": true,
+  "signedDominationRatioUniformlyBounded": false,
   "schurComplementMatrixFreeAuditInstalled": true,
   "schurNullModeConstantOnCObserved": true,
   "schurComplementPsdProved": false,
   "schurNullModeIdentified": false,
   "schurSignedFactorizationProved": false,
-  "schurNullModeFactorizationProved": false
+  "schurNullModeFactorizationProved": false,
+  "gate1ConditionalTheoremProved": false
 }

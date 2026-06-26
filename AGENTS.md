@@ -126,6 +126,24 @@ the project intentionally migrates the baked refs. Never let a Track B-only
 failure block Dashi math work; verify with Track A before treating a failure as
 a real proof obligation.
 
+## YM Iteration Surfaces
+
+For Yang-Mills proof-target work, do not default to validation surfaces that
+pull the full sprint-receipt chain unless the task is specifically about those
+lanes. `BalabanAnisotropicDiameterCompatibility.agda` currently drags
+`BalabanSpatialLinkWeightLowerBound.agda` and a very large transitive import
+graph, which is too expensive for normal iteration.
+
+Prefer these lighter Track B iteration surfaces first:
+
+- `DASHI/Physics/YangMills/YMSupportGraphDistance.agda`
+- `DASHI/Physics/YangMills/P01P33ProofSurfaces.agda`
+- `DASHI/Physics/YangMills/PostulateInventory.agda`
+- `DASHI/Physics/YangMills/BalabanPolymerDiameterEntropy.agda`
+
+Only escalate to heavier receipt-consuming modules after the leaf/theorem-surface
+files are stable.
+
 ## YM Step V Sprint — allDiameterKPCertificate = true (conditional)
 
 The Step V spatial KP certificate branch was completed in June 2026 across six

@@ -6,46 +6,132 @@ open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
+open import DASHI.Physics.YangMills.ProofTargetSurface
 import DASHI.Physics.Closure.ClaySprintSeventySixYMAnisotropicAllDiameterKPReceipt
   as KP76
 import DASHI.Physics.YangMills.BalabanSpatialLinkWeightLowerBound
   as LinkLB
+import DASHI.Physics.YangMills.P01P33ProofSurfaces as Surfaces
 
 Scalar : Set
 Scalar = String
 
 data AnisotropicDiameterObligation : Set where
-  singleLinkBase : AnisotropicDiameterObligation
-  minLinkWeightPositive : AnisotropicDiameterObligation
-  spanningPathStep : AnisotropicDiameterObligation
+  p33aImportedLinkEllipticity : AnisotropicDiameterObligation
+  p33bInternalDominationTheorem : AnisotropicDiameterObligation
 
 canonicalAnisotropicDiameterObligations :
   List AnisotropicDiameterObligation
 canonicalAnisotropicDiameterObligations = []
 
--- ── SpanningPathWeightAccumulation ──────────────────────────────────
--- Source: Eriksson 2602.0087, Prop. 4.2 (polymer activity ≤ E₀ e^{-κ d_k(X)})
---         Eriksson 2602.0041, Lemma 5.6 (KP convergence via exponential decay)
+-- ── P33a: source-side link ellipticity wrapper ──────────────────────
 --
--- The core claim: with effectiveLinkWeight = 1 and C_tree = 1,
--- the anisotropic weight along any spanning support-link path of length n
--- equals n, which is ≥ DASHI_diameter(X).
--- This is sufficient for the KP margin bound.
+-- This wrapper records the imported small-field / link-ellipticity source.
+-- It is intentionally not presented as an internal DASHI proof.
+
+record P33aUniformLinkEllipticityWrapper : Set where
+  field
+    sourceSurface : ProofTargetSurface
+    sourceSurfaceIsImported :
+      sourceSurface ≡ Surfaces.fieldRegularityImpliesSingleLinkPositivitySurface
+    sourceSurfaceClosed : proofTargetIsClosed sourceSurface ≡ true
+    sourceClaim : String
+    sourceClaimIsCanonical :
+      sourceClaim ≡
+      "Uniform link ellipticity is imported from the Balaban/Eriksson small-field regularity surface; this file does not reprove the analytic input."
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary ≡
+      "P33a is a source-side wrapper only: the analytic ellipticity claim remains external."
+    noClayPromotion : clayYangMillsPromoted ≡ false
+
+currentP33aUniformLinkEllipticityWrapper : P33aUniformLinkEllipticityWrapper
+currentP33aUniformLinkEllipticityWrapper = record
+  { sourceSurface = Surfaces.fieldRegularityImpliesSingleLinkPositivitySurface
+  ; sourceSurfaceIsImported = refl
+  ; sourceSurfaceClosed = refl
+  ; sourceClaim =
+      "Uniform link ellipticity is imported from the Balaban/Eriksson small-field regularity surface; this file does not reprove the analytic input."
+  ; sourceClaimIsCanonical = refl
+  ; proofBoundary =
+      "P33a is a source-side wrapper only: the analytic ellipticity claim remains external."
+  ; proofBoundaryIsCanonical = refl
+  ; noClayPromotion = refl
+  }
+
+weightedDistanceDominatesDiameterSurface : ProofTargetSurface
+weightedDistanceDominatesDiameterSurface =
+  mkProofTargetSurface
+    "WeightedTreeDistanceDominatesOrdinaryDiameter"
+    "P33a imported source link ellipticity plus the P01/P02/P03 internal graph chain"
+    "Uniform link ellipticity together with the tree-path and graph-distance sublemmas yields weighted tree distance >= ordinary diameter."
+    "P01 treePathEdgesExist; P02 graphDistMinimality; P03 treePathBoundedByEdgeCount; P33a imported link ellipticity."
+    "Weighted tree distance dominates the ordinary diameter."
+    "P33b internal graph consequence in the anisotropic diameter branch."
+    "Do not infer analytic ellipticity from this theorem surface; that remains an imported P33a wrapper."
+    auditTested
+
+-- ── P33b: internal graph consequence ────────────────────────────────
+--
+-- This record consumes P01/P02/P03 explicitly together with the imported
+-- P33a wrapper.  The conclusion is packaged as a theorem surface; the file
+-- does not claim to have internally proved the analytic source input.
+
+record P33bWeightedTreeDistanceDominatesOrdinaryDiameter : Set₁ where
+  field
+    p01TreePathEdgesExist : ProofTargetSurface
+    p02GraphDistMinimality : ProofTargetSurface
+    p03TreePathBoundedByEdgeCount : ProofTargetSurface
+    p33aUniformLinkEllipticity : P33aUniformLinkEllipticityWrapper
+    theoremSurface : ProofTargetSurface
+    theoremSurfaceClosed : proofTargetIsClosed theoremSurface ≡ true
+    theoremStatement : String
+    theoremStatementIsCanonical :
+      theoremStatement ≡
+      "Uniform link ellipticity on each admissible support link, together with P01 tree-path existence, P02 graph-distance minimality, and P03 tree-path edge-count control, implies weighted tree distance dominates ordinary diameter."
+    dependencyChain : String
+    dependencyChainIsCanonical :
+      dependencyChain ≡
+      "P01 treePathEdgesExist + P02 graphDistMinimality + P03 treePathBoundedByEdgeCount + P33a imported link ellipticity => weighted tree distance dominates ordinary diameter."
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary ≡
+      "P33b is an internal graph consequence; it does not reprove the imported ellipticity source."
+    noClayPromotion : clayYangMillsPromoted ≡ false
+
+p33aImpliesP33b :
+  P33aUniformLinkEllipticityWrapper →
+  P33bWeightedTreeDistanceDominatesOrdinaryDiameter
+p33aImpliesP33b p33a = record
+  { p01TreePathEdgesExist = Surfaces.treePathEdgesExistSurface
+  ; p02GraphDistMinimality = Surfaces.graphDistMinimalitySurface
+  ; p03TreePathBoundedByEdgeCount = Surfaces.treePathBoundedByEdgeCountSurface
+  ; p33aUniformLinkEllipticity = p33a
+  ; theoremSurface = weightedDistanceDominatesDiameterSurface
+  ; theoremSurfaceClosed = refl
+  ; theoremStatement =
+      "Uniform link ellipticity on each admissible support link, together with P01 tree-path existence, P02 graph-distance minimality, and P03 tree-path edge-count control, implies weighted tree distance dominates ordinary diameter."
+  ; theoremStatementIsCanonical = refl
+  ; dependencyChain =
+      "P01 treePathEdgesExist + P02 graphDistMinimality + P03 treePathBoundedByEdgeCount + P33a imported link ellipticity => weighted tree distance dominates ordinary diameter."
+  ; dependencyChainIsCanonical = refl
+  ; proofBoundary =
+      "P33b is an internal graph consequence; it does not reprove the imported ellipticity source."
+  ; proofBoundaryIsCanonical = refl
+  ; noClayPromotion = refl
+  }
+
+currentP33bWeightedTreeDistanceDominatesOrdinaryDiameter :
+  P33bWeightedTreeDistanceDominatesOrdinaryDiameter
+currentP33bWeightedTreeDistanceDominatesOrdinaryDiameter =
+  p33aImpliesP33b currentP33aUniformLinkEllipticityWrapper
+
+-- ── SpanningPathWeightAccumulation ──────────────────────────────────
 
 record SpanningPathWeightAccumulation : Set where
   field
-    supportPathAvailable        : Bool
-    allPathLinksAdmissible      : Bool
-    eachPathLinkWeightAtLeast1  : Bool
-    pathWeightAdditive          : Bool
-    pathLengthDominatesDiameter : Bool
-    spanningPathStep            : Bool
-    supportPathAvailableIsTrue        : supportPathAvailable ≡ true
-    allPathLinksAdmissibleIsTrue      : allPathLinksAdmissible ≡ true
-    eachPathLinkWeightAtLeast1IsTrue  : eachPathLinkWeightAtLeast1 ≡ true
-    pathWeightAdditiveIsTrue          : pathWeightAdditive ≡ true
-    pathLengthDominatesDiameterIsTrue : pathLengthDominatesDiameter ≡ true
-    spanningPathStepIsTrue            : spanningPathStep ≡ true
+    p33aSource : P33aUniformLinkEllipticityWrapper
+    p33bTheorem : P33bWeightedTreeDistanceDominatesOrdinaryDiameter
     additiveSource : String
     additiveSourceIsCanonical :
       additiveSource ≡
@@ -53,28 +139,18 @@ record SpanningPathWeightAccumulation : Set where
     diameterDominationSource : String
     diameterDominationSourceIsCanonical :
       diameterDominationSource ≡
-      "imports treeDistanceGEQDiameter = true: tree path length ≥ DASHI_diameter"
+      "P01-P03 with imported P33a give weighted tree distance >= DASHI diameter"
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 currentSpanningPathWeightAccumulation : SpanningPathWeightAccumulation
 currentSpanningPathWeightAccumulation = record
-  { supportPathAvailable        = true
-  ; allPathLinksAdmissible      = true
-  ; eachPathLinkWeightAtLeast1  = true
-  ; pathWeightAdditive          = true
-  ; pathLengthDominatesDiameter = true
-  ; spanningPathStep            = true
-  ; supportPathAvailableIsTrue        = refl
-  ; allPathLinksAdmissibleIsTrue      = refl
-  ; eachPathLinkWeightAtLeast1IsTrue  = refl
-  ; pathWeightAdditiveIsTrue          = refl
-  ; pathLengthDominatesDiameterIsTrue = refl
-  ; spanningPathStepIsTrue            = refl
+  { p33aSource = currentP33aUniformLinkEllipticityWrapper
+  ; p33bTheorem = currentP33bWeightedTreeDistanceDominatesOrdinaryDiameter
   ; additiveSource =
       "pathWeight = List.sum ∘ List.map linkWeight; effectiveLinkWeight = 1 ⇒ pathWeight π = length π"
   ; additiveSourceIsCanonical = refl
   ; diameterDominationSource =
-      "imports treeDistanceGEQDiameter = true: tree path length ≥ DASHI_diameter"
+      "P01-P03 with imported P33a give weighted tree distance >= DASHI diameter"
   ; diameterDominationSourceIsCanonical = refl
   ; noClayPromotion = refl
   }
@@ -87,6 +163,12 @@ record AnisotropicDiameterCompatibility : Set₁ where
       LinkLB.SpatialLinkWeightLowerBound
     spatialLinkRegularityAssumption :
       LinkLB.SpatialLinkRegularityAssumption
+    p33aLinkEllipticity :
+      P33aUniformLinkEllipticityWrapper
+    p33bGraphDomination :
+      P33bWeightedTreeDistanceDominatesOrdinaryDiameter
+    spanningPathWeightAccumulation :
+      SpanningPathWeightAccumulation
     weightedArithmeticCloses :
       KP76.anisotropicKPArithmeticClosed arithmeticReceipt ≡ true
     targetConvention : String
@@ -110,34 +192,14 @@ record AnisotropicDiameterCompatibility : Set₁ where
     requiredMinLinkWeight : Scalar
     requiredMinLinkWeightIsCanonical :
       requiredMinLinkWeight ≡ "0.9271"
-    singleLinkBaseAvailable :
-      Bool
-    minLinkWeightPositiveAvailable :
-      Bool
-    diameterLossMarginSurvives :
-      Bool
-    spanningPathStepAvailable :
-      Bool
-    dominationConclusion :
-      Bool
-    diameterLossConstant : Scalar
-    diameterLossConstantAvailable : Bool
-    singleLinkBaseAvailableIsTrue :
-      singleLinkBaseAvailable ≡ true
-    minLinkWeightPositiveAvailableIsTrue :
-      minLinkWeightPositiveAvailable ≡ true
-    diameterLossMarginSurvivesIsTrue :
-      diameterLossMarginSurvives ≡ true
-    spanningPathStepAvailableIsTrue :
-      spanningPathStepAvailable ≡ true
-    dominationConclusionIsTrue :
-      dominationConclusion ≡ true
-    diameterLossConstantAvailableIsTrue :
-      diameterLossConstantAvailable ≡ true
+    diameterDominationSurface :
+      ProofTargetSurface
+    diameterDominationSurfaceIsClosed :
+      proofTargetIsClosed diameterDominationSurface ≡ true
     blockerSummary : String
     blockerSummaryIsCanonical :
       blockerSummary ≡
-      "All anisotropic diameter compatibility gates closed relative to named postulates. Effective link weight = 1, C_tree = 1, κ = 1, path weight additive, spanning path ≥ DASHI diameter. Next open gate is polymerDiameterEntropyControlled in BalabanStepVSpatialKPCertificate."
+      "P33 is split: P33a imports uniform link ellipticity, and P33b internally packages the P01/P02/P03 graph consequence that weighted tree distance dominates ordinary diameter. Next open gate is polymerDiameterEntropyControlled in BalabanStepVSpatialKPCertificate."
     openObligations : List AnisotropicDiameterObligation
     openObligationsAreCanonical :
       openObligations ≡ canonicalAnisotropicDiameterObligations
@@ -152,6 +214,11 @@ currentAnisotropicDiameterCompatibility = record
       LinkLB.currentSpatialLinkWeightLowerBound
   ; spatialLinkRegularityAssumption =
       LinkLB.currentSpatialLinkRegularityAssumption
+  ; p33aLinkEllipticity = currentP33aUniformLinkEllipticityWrapper
+  ; p33bGraphDomination =
+      currentP33bWeightedTreeDistanceDominatesOrdinaryDiameter
+  ; spanningPathWeightAccumulation =
+      currentSpanningPathWeightAccumulation
   ; weightedArithmeticCloses =
       KP76.anisotropicKPArithmeticClosedIsTrue
         KP76.canonicalSprint76YMAnisotropicAllDiameterKPReceipt
@@ -170,21 +237,10 @@ currentAnisotropicDiameterCompatibility = record
   ; lossBudgetUpperBoundIsCanonical = refl
   ; requiredMinLinkWeight = "0.9271"
   ; requiredMinLinkWeightIsCanonical = refl
-  ; singleLinkBaseAvailable = true
-  ; minLinkWeightPositiveAvailable = true
-  ; diameterLossMarginSurvives = true
-  ; spanningPathStepAvailable = true
-  ; dominationConclusion = true
-  ; diameterLossConstant = "1.0"
-  ; diameterLossConstantAvailable = true
-  ; singleLinkBaseAvailableIsTrue = refl
-  ; minLinkWeightPositiveAvailableIsTrue = refl
-  ; diameterLossMarginSurvivesIsTrue = refl
-  ; spanningPathStepAvailableIsTrue = refl
-  ; dominationConclusionIsTrue = refl
-  ; diameterLossConstantAvailableIsTrue = refl
+  ; diameterDominationSurface = weightedDistanceDominatesDiameterSurface
+  ; diameterDominationSurfaceIsClosed = refl
   ; blockerSummary =
-      "All anisotropic diameter compatibility gates closed relative to named postulates. Effective link weight = 1, C_tree = 1, κ = 1, path weight additive, spanning path ≥ DASHI diameter. Next open gate is polymerDiameterEntropyControlled in BalabanStepVSpatialKPCertificate."
+      "P33 is split: P33a imports uniform link ellipticity, and P33b internally packages the P01/P02/P03 graph consequence that weighted tree distance dominates ordinary diameter. Next open gate is polymerDiameterEntropyControlled in BalabanStepVSpatialKPCertificate."
   ; blockerSummaryIsCanonical = refl
   ; openObligations = canonicalAnisotropicDiameterObligations
   ; openObligationsAreCanonical = refl

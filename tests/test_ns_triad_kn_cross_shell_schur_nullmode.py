@@ -34,11 +34,10 @@ def test_schur_nullmode_doc_uses_candidate_only_language() -> None:
     assert "supporting evidence" in text
     assert "No promotion claim made." in text
     assert "matrix-free `eigsh`" in text
-    assert "Observed at N=6,8,10,12,14. Proof open." in text
+    assert "Observed at N=6,8,10,12,14. Proof open; live route is signed domination." in text
     assert "S_C \\mathbf{1}_C = 0" in text
     assert "constant-on-\\(C\\) null mode is not merely observed numerically" in text
     assert "ordinary Kron-reduced edge weights" in text
-    assert "signed factorization" in squashed
     assert "uniform signed domination bound" in squashed
     assert "Do not upgrade this to a generic \"balanced signed graph\" theorem." in text
 

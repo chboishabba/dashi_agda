@@ -2,6 +2,7 @@ module DASHI.Physics.YangMills.YMSupportGraphDistance where
 
 open import DASHI.Core.Prelude
 open import Data.List.Base using (length)
+open import Data.Nat using (_≤_)
 
 import DASHI.Physics.Closure.YMEffectiveActionSupportInterface as Support
 
@@ -218,3 +219,131 @@ YMVertex = FiniteSupportGraph.Vertex currentFiniteSupportGraph
 
 YMEdge : Set
 YMEdge = FiniteSupportGraph.Edge currentFiniteSupportGraph
+
+-- ── P01/P02/P03 concrete theorem surfaces ───────────────────────────
+-- P01 treePathEdgesExist is the concrete tree-path witness.
+-- P02 graphDistMinimality and P03 treePathBoundedByEdgeCount expose the
+-- imported source axioms as named lemmas rather than availability flags.
+
+p01TreePathEdgesExistViaYmTreePath :
+  ∀ (u v : Support.Link) →
+  Path currentFiniteSupportGraph
+p01TreePathEdgesExistViaYmTreePath = ymTreePath
+
+p01TreePathEdgesExist :
+  ∀ (u v : Support.Link) →
+  Path currentFiniteSupportGraph
+p01TreePathEdgesExist = p01TreePathEdgesExistViaYmTreePath
+
+p02GraphDistMinimalityFromImportedFiniteGraphDistanceAxiom :
+  ∀ (u v : Support.Link) →
+  ymGraphDist u v ≤ Path.pathLength (ymTreePath u v)
+p02GraphDistMinimalityFromImportedFiniteGraphDistanceAxiom u v =
+  ImportedFiniteGraphDistanceAxiom
+    (ymTreePath u v)
+    (ImportedTreePathRealisationAxiomStart u v)
+    (ImportedTreePathRealisationAxiomFinish u v)
+    (ImportedTreePathRealisationAxiomValid u v)
+
+p02GraphDistMinimality :
+  ∀ (u v : Support.Link) →
+  ymGraphDist u v ≤ Path.pathLength (ymTreePath u v)
+p02GraphDistMinimality =
+  p02GraphDistMinimalityFromImportedFiniteGraphDistanceAxiom
+
+p03TreePathBoundedByEdgeCountFromImportedTreePathBoundedByEdgeCountAxiom :
+  ∀ (u v : Support.Link) →
+  Path.pathLength (ymTreePath u v) ≤ ymTreeEdgeCount
+p03TreePathBoundedByEdgeCountFromImportedTreePathBoundedByEdgeCountAxiom =
+  ImportedTreePathBoundedByEdgeCountAxiom
+
+p03TreePathBoundedByEdgeCount :
+  ∀ (u v : Support.Link) →
+  Path.pathLength (ymTreePath u v) ≤ ymTreeEdgeCount
+p03TreePathBoundedByEdgeCount =
+  p03TreePathBoundedByEdgeCountFromImportedTreePathBoundedByEdgeCountAxiom
+
+-- ── P01/P02/P03: concrete imported graph witnesses ─────────────────
+
+treePathEdgesExist :
+  ∀ (u v : Support.Link) →
+  Path currentFiniteSupportGraph
+treePathEdgesExist = ymTreePath
+
+treePathEdgesExistStart :
+  ∀ (u v : Support.Link) →
+  Path.start (treePathEdgesExist u v) ≡ u
+treePathEdgesExistStart = ImportedTreePathRealisationAxiomStart
+
+treePathEdgesExistFinish :
+  ∀ (u v : Support.Link) →
+  Path.finish (treePathEdgesExist u v) ≡ v
+treePathEdgesExistFinish = ImportedTreePathRealisationAxiomFinish
+
+treePathEdgesExistValid :
+  ∀ (u v : Support.Link) →
+  Path.valid (treePathEdgesExist u v) ≡ true
+treePathEdgesExistValid = ImportedTreePathRealisationAxiomValid
+
+graphDistMinimalityViaImportedFiniteGraphDistanceAxiom :
+  ∀ {u v : Support.Link} →
+  (p : Path currentFiniteSupportGraph) →
+  Path.start p ≡ u →
+  Path.finish p ≡ v →
+  Path.valid p ≡ true →
+  ymGraphDist u v ≤ Path.pathLength p
+graphDistMinimalityViaImportedFiniteGraphDistanceAxiom =
+  ImportedFiniteGraphDistanceAxiom
+
+p03TreePathBoundedByEdgeCountFromWitness :
+  ∀ (u v : Support.Link) →
+  Path.pathLength (treePathEdgesExist u v) ≤ ymTreeEdgeCount
+p03TreePathBoundedByEdgeCountFromWitness = ImportedTreePathBoundedByEdgeCountAxiom
+
+p02GraphDistMinimalityFromWitness :
+  ∀ (u v : Support.Link) →
+  ymGraphDist u v ≤ Path.pathLength (treePathEdgesExist u v)
+p02GraphDistMinimalityFromWitness u v =
+  graphDistMinimalityViaImportedFiniteGraphDistanceAxiom
+    (treePathEdgesExist u v)
+    (treePathEdgesExistStart u v)
+    (treePathEdgesExistFinish u v)
+    (treePathEdgesExistValid u v)
+
+record TreePathEdgesExistWitness (u v : Support.Link) : Set where
+  field
+    path : Path currentFiniteSupportGraph
+    startAtSource : Path.start path ≡ u
+    finishAtTarget : Path.finish path ≡ v
+    validPath : Path.valid path ≡ true
+
+treePathEdgesExistWitness :
+  ∀ (u v : Support.Link) →
+  TreePathEdgesExistWitness u v
+treePathEdgesExistWitness u v = record
+  { path = treePathEdgesExist u v
+  ; startAtSource = treePathEdgesExistStart u v
+  ; finishAtTarget = treePathEdgesExistFinish u v
+  ; validPath = treePathEdgesExistValid u v
+  }
+
+record GraphCoreP01P02P03TheoremSurface : Set₁ where
+  field
+    p01TreePathEdgesExistSurface :
+      ∀ (u v : Support.Link) →
+      Path currentFiniteSupportGraph
+    p02GraphDistMinimalitySurface :
+      ∀ (u v : Support.Link) →
+      ymGraphDist u v ≤ Path.pathLength (p01TreePathEdgesExistSurface u v)
+    p03TreePathBoundedByEdgeCountSurface :
+      ∀ (u v : Support.Link) →
+      Path.pathLength (p01TreePathEdgesExistSurface u v) ≤ ymTreeEdgeCount
+
+currentGraphCoreP01P02P03TheoremSurface :
+  GraphCoreP01P02P03TheoremSurface
+currentGraphCoreP01P02P03TheoremSurface = record
+  { p01TreePathEdgesExistSurface = p01TreePathEdgesExist
+  ; p02GraphDistMinimalitySurface = p02GraphDistMinimality
+  ; p03TreePathBoundedByEdgeCountSurface =
+      p03TreePathBoundedByEdgeCountFromImportedTreePathBoundedByEdgeCountAxiom
+  }

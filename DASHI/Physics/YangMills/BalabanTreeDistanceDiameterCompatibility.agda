@@ -6,6 +6,8 @@ open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.String using (String)
 
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
+open import DASHI.Physics.YangMills.ProofTargetSurface using (ProofTargetSurface; proofTargetIsClosed)
+import DASHI.Physics.YangMills.P01P33ProofSurfaces as Surfaces
 import DASHI.Physics.Closure.YMEffectiveActionSupportInterface as Support
 import DASHI.Physics.YangMills.YMSupportGraphDistance as YMSupportGraph
 
@@ -50,26 +52,40 @@ currentBalabanTreeDistanceSurface = record
 
 record GraphDistanceInterface : Set₁ where
   field
-    Vertex : Set
-    Edge : Set
-    supportEdge : Edge → Bool
-    treeEdge : Edge → Bool
-    graphDist : Vertex → Vertex → Nat
-    treePathLength : Vertex → Vertex → Nat
+    supportGraph : YMSupportGraph.FiniteSupportGraph
+    supportEdge :
+      YMSupportGraph.FiniteSupportGraph.Edge supportGraph → Bool
+    treeEdge :
+      YMSupportGraph.FiniteSupportGraph.Edge supportGraph → Bool
+    graphDist :
+      YMSupportGraph.FiniteSupportGraph.Vertex supportGraph →
+      YMSupportGraph.FiniteSupportGraph.Vertex supportGraph →
+      Nat
+    treePathLength :
+      YMSupportGraph.FiniteSupportGraph.Vertex supportGraph →
+      YMSupportGraph.FiniteSupportGraph.Vertex supportGraph →
+      Nat
     treeEdgeCount : Nat
-    treeEdgesSubsetSupportEdges : Bool
-    graphDistMinimalityAvailable : Bool
-    treePathBoundedByEdgeCountAvailable : Bool
+    treePathAsSupportGraphPath :
+      YMSupportGraph.TreePathAsSupportGraphPath
+    treeEdgesExistSurface : ProofTargetSurface
+    treeEdgesExistSurfaceIsClosed :
+      proofTargetIsClosed treeEdgesExistSurface ≡ true
+    graphDistMinimalitySurface : ProofTargetSurface
+    graphDistMinimalitySurfaceIsClosed :
+      proofTargetIsClosed graphDistMinimalitySurface ≡ true
+    treePathBoundedByEdgeCountSurface : ProofTargetSurface
+    treePathBoundedByEdgeCountSurfaceIsClosed :
+      proofTargetIsClosed treePathBoundedByEdgeCountSurface ≡ true
     interfaceBoundary : String
     interfaceBoundaryIsCanonical :
       interfaceBoundary ≡
-      "Typed support-graph layer imported via YMSupportGraphDistance; finite graph minimality and tree-path bounds are carried by explicit named proofs or axioms."
+      "Typed support-graph layer imported via YMSupportGraphDistance; treePathEdgesExist, graphDistMinimality, and treePathBoundedByEdgeCount are carried by explicit theorem surfaces and typed wrappers."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 currentGraphDistanceInterface : GraphDistanceInterface
 currentGraphDistanceInterface = record
-  { Vertex = YMSupportGraph.YMVertex
-  ; Edge = YMSupportGraph.YMEdge
+  { supportGraph = YMSupportGraph.currentFiniteSupportGraph
   ; supportEdge =
       YMSupportGraph.FiniteSupportGraph.supportEdge
         YMSupportGraph.currentFiniteSupportGraph
@@ -85,14 +101,17 @@ currentGraphDistanceInterface = record
   ; treeEdgeCount =
       YMSupportGraph.TreePathStructure.treeEdgeCount
         YMSupportGraph.currentTreePathStructure
-  ; treeEdgesSubsetSupportEdges =
-      YMSupportGraph.currentTreeEdgesSubsetSupportEdgesAvailable
-  ; graphDistMinimalityAvailable =
-      YMSupportGraph.currentGraphDistMinimalityAvailable
-  ; treePathBoundedByEdgeCountAvailable =
-      YMSupportGraph.currentTreePathBoundedByEdgeCountAvailable
+  ; treePathAsSupportGraphPath =
+      YMSupportGraph.currentTreePathAsSupportGraphPath
+  ; treeEdgesExistSurface = Surfaces.treePathEdgesExistSurface
+  ; treeEdgesExistSurfaceIsClosed = refl
+  ; graphDistMinimalitySurface = Surfaces.graphDistMinimalitySurface
+  ; graphDistMinimalitySurfaceIsClosed = refl
+  ; treePathBoundedByEdgeCountSurface =
+      Surfaces.treePathBoundedByEdgeCountSurface
+  ; treePathBoundedByEdgeCountSurfaceIsClosed = refl
   ; interfaceBoundary =
-      "Typed support-graph layer imported via YMSupportGraphDistance; finite graph minimality and tree-path bounds are carried by explicit named proofs or axioms."
+      "Typed support-graph layer imported via YMSupportGraphDistance; treePathEdgesExist, graphDistMinimality, and treePathBoundedByEdgeCount are carried by explicit theorem surfaces and typed wrappers."
   ; interfaceBoundaryIsCanonical = refl
   ; noClayPromotion = refl
   }
@@ -100,23 +119,30 @@ currentGraphDistanceInterface = record
 record TreeEdgesSubsetSupportEdgesTarget : Set₁ where
   field
     graphDistanceInterface : GraphDistanceInterface
+    proofSurface : ProofTargetSurface
+    proofSurfaceIsClosed : proofTargetIsClosed proofSurface ≡ true
+    treePathAsSupportGraphPath :
+      YMSupportGraph.TreePathAsSupportGraphPath
     proved : Bool
     provedIsTrue : proved ≡ true
     theoremStatement : String
     theoremStatementIsCanonical :
       theoremStatement ≡
-      "Every tree edge is also a support edge because the spanning tree is built over the shared supportLinks carrier."
+      "treePathEdgesExist is witnessed by the typed tree-path wrapper imported from YMSupportGraphDistance."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 currentTreeEdgesSubsetSupportEdgesTarget :
   TreeEdgesSubsetSupportEdgesTarget
 currentTreeEdgesSubsetSupportEdgesTarget = record
   { graphDistanceInterface = currentGraphDistanceInterface
-  ; proved = true
-  ; provedIsTrue =
-      YMSupportGraph.currentTreeEdgesSubsetSupportEdgesAvailableIsTrue
+  ; proofSurface = Surfaces.treePathEdgesExistSurface
+  ; proofSurfaceIsClosed = refl
+  ; treePathAsSupportGraphPath =
+      YMSupportGraph.currentTreePathAsSupportGraphPath
+  ; proved = proofTargetIsClosed Surfaces.treePathEdgesExistSurface
+  ; provedIsTrue = refl
   ; theoremStatement =
-      "Every tree edge is also a support edge because the spanning tree is built over the shared supportLinks carrier."
+      "treePathEdgesExist is witnessed by the typed tree-path wrapper imported from YMSupportGraphDistance."
   ; theoremStatementIsCanonical = refl
   ; noClayPromotion = refl
   }
@@ -124,23 +150,30 @@ currentTreeEdgesSubsetSupportEdgesTarget = record
 record GraphDistMinimalityTarget : Set₁ where
   field
     graphDistanceInterface : GraphDistanceInterface
+    proofSurface : ProofTargetSurface
+    proofSurfaceIsClosed : proofTargetIsClosed proofSurface ≡ true
+    graphDistanceStructure :
+      YMSupportGraph.GraphDistanceStructure
+        (GraphDistanceInterface.supportGraph graphDistanceInterface)
     proved : Bool
     provedIsTrue : proved ≡ true
     theoremStatement : String
     theoremStatementIsCanonical :
       theoremStatement ≡
-      "graphDist is the minimum support-graph path length between two vertices."
+      "graphDistMinimality is carried by the typed GraphDistanceStructure witness."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 currentGraphDistMinimalityTarget :
   GraphDistMinimalityTarget
 currentGraphDistMinimalityTarget = record
   { graphDistanceInterface = currentGraphDistanceInterface
-  ; proved = true
-  ; provedIsTrue =
-      YMSupportGraph.currentGraphDistMinimalityAvailableIsTrue
+  ; proofSurface = Surfaces.graphDistMinimalitySurface
+  ; proofSurfaceIsClosed = refl
+  ; graphDistanceStructure = YMSupportGraph.currentGraphDistanceStructure
+  ; proved = proofTargetIsClosed Surfaces.graphDistMinimalitySurface
+  ; provedIsTrue = refl
   ; theoremStatement =
-      "graphDist is the minimum support-graph path length between two vertices."
+      "graphDistMinimality is carried by the typed GraphDistanceStructure witness."
   ; theoremStatementIsCanonical = refl
   ; noClayPromotion = refl
   }
@@ -148,23 +181,30 @@ currentGraphDistMinimalityTarget = record
 record TreePathBoundedByEdgeCountTarget : Set₁ where
   field
     graphDistanceInterface : GraphDistanceInterface
+    proofSurface : ProofTargetSurface
+    proofSurfaceIsClosed : proofTargetIsClosed proofSurface ≡ true
+    treePathStructure :
+      YMSupportGraph.TreePathStructure
+        (GraphDistanceInterface.supportGraph graphDistanceInterface)
     proved : Bool
     provedIsTrue : proved ≡ true
     theoremStatement : String
     theoremStatementIsCanonical :
       theoremStatement ≡
-      "The unique tree path between two vertices has length at most treeEdgeCount."
+      "treePathBoundedByEdgeCount is carried by the typed TreePathStructure witness."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 currentTreePathBoundedByEdgeCountTarget :
   TreePathBoundedByEdgeCountTarget
 currentTreePathBoundedByEdgeCountTarget = record
   { graphDistanceInterface = currentGraphDistanceInterface
-  ; proved = true
-  ; provedIsTrue =
-      YMSupportGraph.currentTreePathBoundedByEdgeCountAvailableIsTrue
+  ; proofSurface = Surfaces.treePathBoundedByEdgeCountSurface
+  ; proofSurfaceIsClosed = refl
+  ; treePathStructure = YMSupportGraph.currentTreePathStructure
+  ; proved = proofTargetIsClosed Surfaces.treePathBoundedByEdgeCountSurface
+  ; provedIsTrue = refl
   ; theoremStatement =
-      "The unique tree path between two vertices has length at most treeEdgeCount."
+      "treePathBoundedByEdgeCount is carried by the typed TreePathStructure witness."
   ; theoremStatementIsCanonical = refl
   ; noClayPromotion = refl
   }
