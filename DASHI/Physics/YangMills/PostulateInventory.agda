@@ -32,12 +32,15 @@ import DASHI.Physics.YangMills.P01P33ProofSurfaces as Surfaces
 --   P06 entry below stays imported.
 --   The local P06a bridge is itself refined as:
 --   P06a1BoundedDegreeSupportGraphSkeleton,
+--   P06a2aBoundedDegreeRootBallGrowth,
 --   P06a2RootedConnectedSkeletonSizeShellCounting,
+--   P06a3aDiameterShellContainedInRootBall,
 --   P06a3DiameterShellSkeletonCounting.
 --   P33 likewise now has a non-canonical internal split surfaced elsewhere as
 --   P33a1SmallFieldRegularityGivesPositiveLinkWeight,
 --   P33a2DASHINormalisationRaisesLowerBoundToOne,
 --   P33a3UniformityAcrossScaleAndPolymer,
+--   P33aFullUniformLinkEllipticityFromSplit,
 --   while the canonical numbered P33 entry remains the composite source-plus-reducer surface.
 --
 -- Dependency layers (topological, per Eriksson 2602.0096 §2):
