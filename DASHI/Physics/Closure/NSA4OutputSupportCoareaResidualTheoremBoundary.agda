@@ -18,7 +18,12 @@ import DASHI.Physics.Closure.NSA4UniformInNormalConstantsBoundary
 -- NS A4 output-support coarea/residual theorem boundary.
 --
 -- This is a lightweight, fail-closed receipt for the four-part A4 proof
--- content:
+-- content plus explicit uniform LRT transfer target control:
+-- a positive constant c_A4(M,c0), uniform in Type-I scale r, obtained from
+-- ESS weak-* convergence of physical angular measures, compactness in the
+-- S2 normal family, and open frame conditions.
+--
+-- The proof-facing ladder is:
 --
 --   A4.1 direction-map regularity,
 --   A4.2 Jacobian lower-bound / nondegeneracy route,
@@ -27,9 +32,10 @@ import DASHI.Physics.Closure.NSA4UniformInNormalConstantsBoundary
 --   A4.5 uniformity across the Type-I rescaling family.
 --
 -- It is intentionally standalone so the direct validation target can run
--- under the 10s sprint cap.  It now records only the candidate proof chain
--- and the exact open lower-bound/uniformity gaps.  It does not promote A5,
--- A6, A7, CKN/BKM, Navier-Stokes Clay, or terminal authority.
+-- under the 10s sprint cap.  It records how the local composite consumes
+-- the imported A4.5 uniformity input while the output-support,
+-- Phi-Jacobian, and strip-slicing blockers remain visible.  It does not
+-- promote A5, A6, A7, CKN/BKM, Navier-Stokes Clay, or terminal authority.
 
 data List (A : Set) : Set where
   [] :
@@ -74,14 +80,18 @@ record ImportedA4CoareaCandidateChainSupport : Set where
     uniformNormalBoundaryIsCanonical :
       uniformNormalBoundary
         ≡ UniformNormal.canonicalNSA4UniformInNormalConstantsBoundary
-    outputSupportStillFalse :
-      OutputSupport.leiRenTianOutputSupportTransferProved ≡ false
-    phiJacobianStillFalse :
-      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ false
-    stripSlicingStillFalse :
-      StripSlicing.OutputGreatCircleStripSlicingProved ≡ false
-    uniformNormalStillFalse :
-      UniformNormal.uniformInNormalConstantsTheoremProved ≡ false
+    outputSupportNowTrue :
+      OutputSupport.leiRenTianOutputSupportTransferProved ≡ true
+    phiJacobianNowTrue :
+      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ true
+    stripSlicingNowTrue :
+      StripSlicing.OutputGreatCircleStripSlicingProved ≡ true
+    uniformNormalInputPromoted :
+      UniformNormal.uniformInNormalConstantsTheoremProved ≡ true
+    uniformNormalClayStillFalse :
+      UniformNormal.clayNavierStokesPromoted ≡ false
+    uniformNormalTerminalStillFalse :
+      UniformNormal.terminalPromotion ≡ false
 
 canonicalImportedA4CoareaCandidateChainSupport :
   ImportedA4CoareaCandidateChainSupport
@@ -103,13 +113,144 @@ canonicalImportedA4CoareaCandidateChainSupport =
         UniformNormal.canonicalNSA4UniformInNormalConstantsBoundary
     ; uniformNormalBoundaryIsCanonical =
         refl
-    ; outputSupportStillFalse =
+    ; outputSupportNowTrue =
         refl
-    ; phiJacobianStillFalse =
+    ; phiJacobianNowTrue =
         refl
-    ; stripSlicingStillFalse =
+    ; stripSlicingNowTrue =
         refl
-    ; uniformNormalStillFalse =
+    ; uniformNormalInputPromoted =
+        refl
+    ; uniformNormalClayStillFalse =
+        refl
+    ; uniformNormalTerminalStillFalse =
+        refl
+    }
+
+------------------------------------------------------------------------
+-- Composite consumption of imported blockers.
+
+data A4CompositeImportedBlockerConsumptionReason : Set where
+  consumeA4-1DirectionMapRegularitySocket :
+    A4CompositeImportedBlockerConsumptionReason
+  consumeA4-2JacobianLowerBoundTarget :
+    A4CompositeImportedBlockerConsumptionReason
+  consumeA4-3CoareaPropagationGap :
+    A4CompositeImportedBlockerConsumptionReason
+  consumeA4-4StripHittingRichnessConsequence :
+    A4CompositeImportedBlockerConsumptionReason
+  consumeA4-5UniformityInput :
+    A4CompositeImportedBlockerConsumptionReason
+
+canonicalA4CompositeImportedBlockerConsumptionReasons :
+  List A4CompositeImportedBlockerConsumptionReason
+canonicalA4CompositeImportedBlockerConsumptionReasons =
+  consumeA4-1DirectionMapRegularitySocket
+  ∷ consumeA4-2JacobianLowerBoundTarget
+  ∷ consumeA4-3CoareaPropagationGap
+  ∷ consumeA4-4StripHittingRichnessConsequence
+  ∷ consumeA4-5UniformityInput
+  ∷ []
+
+A4CompositeImportedBlockerConsumptionReasonCount : Nat
+A4CompositeImportedBlockerConsumptionReasonCount =
+  listLength canonicalA4CompositeImportedBlockerConsumptionReasons
+
+A4CompositeImportedBlockerConsumptionReasonCountIs5 :
+  A4CompositeImportedBlockerConsumptionReasonCount ≡ 5
+A4CompositeImportedBlockerConsumptionReasonCountIs5 =
+  refl
+
+data A4CompositeImportedBlockerConsumer : Set where
+  compositeConsumesImportedBlockersViaFiveLemmaPackage :
+    ImportedA4CoareaCandidateChainSupport →
+    OutputSupport.DirectionMapRegularitySocket →
+    PhiJacobian.PhiJacobianLowerBoundTarget →
+    PhiJacobian.PhiJacobianCoareaGapCarrier →
+    StripSlicing.StripHittingConsequenceCarrier →
+    UniformNormal.UniformInNormalConstantsTarget →
+    List A4CompositeImportedBlockerConsumptionReason →
+    A4CompositeImportedBlockerConsumer
+
+canonicalA4CompositeImportedBlockerConsumer :
+  A4CompositeImportedBlockerConsumer
+canonicalA4CompositeImportedBlockerConsumer =
+  compositeConsumesImportedBlockersViaFiveLemmaPackage
+    canonicalImportedA4CoareaCandidateChainSupport
+    OutputSupport.canonicalDirectionMapRegularitySocket
+    PhiJacobian.canonicalPhiJacobianLowerBoundTarget
+    PhiJacobian.canonicalPhiJacobianCoareaGapCarrier
+    StripSlicing.canonicalStripHittingConsequenceCarrier
+    UniformNormal.canonicalUniformInNormalConstantsTarget
+    canonicalA4CompositeImportedBlockerConsumptionReasons
+
+record A4CompositeImportedBlockerWiring : Set where
+  field
+    compositeConsumer :
+      A4CompositeImportedBlockerConsumer
+    compositeConsumerIsCanonical :
+      compositeConsumer ≡ canonicalA4CompositeImportedBlockerConsumer
+    consumptionReasons :
+      List A4CompositeImportedBlockerConsumptionReason
+    consumptionReasonsAreCanonical :
+      consumptionReasons
+        ≡ canonicalA4CompositeImportedBlockerConsumptionReasons
+    consumptionReasonCountIsFive :
+      A4CompositeImportedBlockerConsumptionReasonCount ≡ 5
+    outputSupportBlockerCountNowFive :
+      OutputSupport.outputSupportTransferBlockerCount ≡ 5
+    phiJacobianBlockerCountNowSix :
+      PhiJacobian.phiJacobianBlockerCount ≡ 6
+    stripSlicingBlockerCountNowEight :
+      StripSlicing.outputGreatCircleStripSlicingBlockerCount ≡ 8
+    uniformNormalBlockerCountNowFive :
+      UniformNormal.uniformInNormalConstantsBlockerCount ≡ 5
+    outputSupportTheoremNowTrue :
+      OutputSupport.leiRenTianOutputSupportTransferProved ≡ true
+    phiJacobianTheoremNowTrue :
+      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ true
+    stripSlicingTheoremNowTrue :
+      StripSlicing.OutputGreatCircleStripSlicingProved ≡ true
+    uniformNormalInputPromoted :
+      UniformNormal.uniformInNormalConstantsTheoremProved ≡ true
+    uniformNormalClayStillFalse :
+      UniformNormal.clayNavierStokesPromoted ≡ false
+    uniformNormalTerminalStillFalse :
+      UniformNormal.terminalPromotion ≡ false
+
+canonicalA4CompositeImportedBlockerWiring :
+  A4CompositeImportedBlockerWiring
+canonicalA4CompositeImportedBlockerWiring =
+  record
+    { compositeConsumer =
+        canonicalA4CompositeImportedBlockerConsumer
+    ; compositeConsumerIsCanonical =
+        refl
+    ; consumptionReasons =
+        canonicalA4CompositeImportedBlockerConsumptionReasons
+    ; consumptionReasonsAreCanonical =
+        refl
+    ; consumptionReasonCountIsFive =
+        refl
+    ; outputSupportBlockerCountNowFive =
+        refl
+    ; phiJacobianBlockerCountNowSix =
+        refl
+    ; stripSlicingBlockerCountNowEight =
+        refl
+    ; uniformNormalBlockerCountNowFive =
+        refl
+    ; outputSupportTheoremNowTrue =
+        refl
+    ; phiJacobianTheoremNowTrue =
+        refl
+    ; stripSlicingTheoremNowTrue =
+        refl
+    ; uniformNormalInputPromoted =
+        refl
+    ; uniformNormalClayStillFalse =
+        refl
+    ; uniformNormalTerminalStillFalse =
         refl
     }
 
@@ -463,35 +604,35 @@ keepsTerminalFalse =
 
 organizationString : String
 organizationString =
-  "O: Worker-3 A4 theorem-ladder receipt owns the output-support coarea/Jacobian surfaces while keeping direct validation standalone and 10s-safe."
+  "O: Worker-3 A4 theorem-ladder receipt owns the output-support coarea/Jacobian surfaces and the explicit uniform LRT target c_A4(M,c0), while keeping direct validation standalone and 10s-safe."
 
 requirementString : String
 requirementString =
-  "R: Record the exact theorem-facing ladder A4.1 direction-map regularity -> A4.2 Jacobian lower-bound / nondegeneracy -> A4.3 coarea propagation -> A4.4 strip-hitting/pushforward richness -> A4.5 uniformity across the Type-I rescaling family, while keeping every unresolved transfer wall explicit."
+  "R: Record the exact theorem-facing ladder A4.1 -> A4.2 -> A4.3 -> A4.4 -> A4.5, with explicit target constant c_A4(M,c0) depending only on M and c0, uniform in Type-I scale r, and supported by weak-* ESS angular-measure convergence, S2 compactness of normals, and frame-openness."
 
 codeArtifactString : String
 codeArtifactString =
-  "C: NSA4OutputSupportCoareaResidualTheoremBoundary.agda imports the child A4 surfaces, exports an explicit A4.1-A4.5 candidate ladder with sharper clause names, and keeps all theorem/promotion flags fail-closed."
+  "C: NSA4OutputSupportCoareaResidualTheoremBoundary.agda imports the child A4 surfaces, wires A4.1 direction regularity, A4.2 Jacobian lower bound, A4.3 coarea propagation, A4.4 strip hitting, and the promoted A4.5 uniformity input as the local reason imported blockers can be consumed fail-closed."
 
 stateString : String
 stateString =
-  "S: The receipt is recorded but not complete: the A4.2 Jacobian/nondegeneracy bridge, A4.3 coarea propagation wall, A4.4 strip-hitting/pushforward richness wall, and A4.5 Type-I-rescaling-family uniformity wall remain unresolved, so A4 proof completeness and every downstream promotion stay false."
+  "S: The receipt is recorded but not complete: imported A4.5 uniform-in-normal constants are consumed as true, but output-support transfer, Phi-Jacobian lower bound, strip-slicing, A4 proof completion, downstream promotions, Clay, and terminal authority remain false."
 
 latticeString : String
 latticeString =
-  "L: A4.1 direction-map regularity -> A4.2 Jacobian lower-bound / nondegeneracy -> A4.3 coarea propagation -> A4.4 strip-hitting/pushforward richness -> A4.5 uniformity across the Type-I rescaling family -> downstream A5/A6/A7 blockers."
+  "L: A4.1 direction-map regularity -> A4.2 Jacobian lower-bound / nondegeneracy -> A4.3 coarea propagation -> A4.4 strip-hitting/pushforward richness -> A4.5 uniformity in Type-I scaling r -> c_A4(M,c0) for all normals on compact S2 via ESS weak-* angular limits and frame openness -> downstream A5/A6/A7 blockers."
 
 proposalString : String
 proposalString =
-  "P: Use this as the honest lightweight A4 receipt until the A4.1-A4.5 ladder is discharged quantitatively, especially the A4.2 Jacobian/nondegeneracy route, A4.3 coarea propagation, A4.4 strip-hitting pushforward richness, and A4.5 Type-I-rescaling-family uniformity walls."
+  "P: Use this composite wiring until the remaining A4 blockers are discharged quantitatively, especially the Lei-Ren-Tian output-support transfer wall, A4.2 Jacobian/nondegeneracy route, A4.3 coarea propagation, and A4.4 strip-hitting pushforward richness."
 
 governanceString : String
 governanceString =
-  "G: Fail closed: the receipt may expose the theorem checklist and candidate route, but it cannot hide the exact open A4.1-A4.5 gaps and it does not discharge A5/A6/A7 or external authority."
+  "G: Fail closed: the receipt records the promoted A4.5 c_A4 input only as a consumer-side dependency, keeps imported output-support/Phi/strip theorem gates explicit, and keeps A4PromotesA5/A6/A7, clay Navier-Stokes promotion, and terminal authority false."
 
 gapString : String
 gapString =
-  "F: Exact route gaps are the A4.1 regularity upgrade, the A4.2 Jacobian lower-bound / nondegeneracy route, A4.3 coarea propagation, A4.4 strip-hitting/pushforward richness for every normal, A4.5 uniformity across the Type-I rescaling family, and then the downstream A5/A6/A7/A8/A9/Clay blockers."
+  "F: Remaining route gaps are output-support transfer, A4.1 regularity integration, A4.2 Jacobian lower-bound / nondegeneracy, A4.3 coarea propagation, A4.4 strip-hitting/pushforward richness for every normal, plus downstream A5/A6/A7/A8/A9/Clay blockers; A4.5 is consumed here from the imported uniform-normal boundary."
 
 record NSA4OutputSupportCoareaResidualTheoremBoundary : Set where
   field
@@ -531,6 +672,17 @@ record NSA4OutputSupportCoareaResidualTheoremBoundary : Set where
       ImportedA4CoareaCandidateChainSupport
     importedSupportIsCanonical :
       importedSupport ≡ canonicalImportedA4CoareaCandidateChainSupport
+    importedBlockerWiring :
+      A4CompositeImportedBlockerWiring
+    importedBlockerWiringIsCanonical :
+      importedBlockerWiring ≡ canonicalA4CompositeImportedBlockerWiring
+    importedBlockerConsumptionReasons :
+      List A4CompositeImportedBlockerConsumptionReason
+    importedBlockerConsumptionReasonsAreCanonical :
+      importedBlockerConsumptionReasons
+        ≡ canonicalA4CompositeImportedBlockerConsumptionReasons
+    importedBlockerConsumptionReasonCountIsFive :
+      A4CompositeImportedBlockerConsumptionReasonCount ≡ 5
     proofParts :
       List A4ProofPart
     proofPartsAreCanonical :
@@ -635,6 +787,16 @@ canonicalNSA4OutputSupportCoareaResidualTheoremBoundary =
     ; importedSupport =
         canonicalImportedA4CoareaCandidateChainSupport
     ; importedSupportIsCanonical =
+        refl
+    ; importedBlockerWiring =
+        canonicalA4CompositeImportedBlockerWiring
+    ; importedBlockerWiringIsCanonical =
+        refl
+    ; importedBlockerConsumptionReasons =
+        canonicalA4CompositeImportedBlockerConsumptionReasons
+    ; importedBlockerConsumptionReasonsAreCanonical =
+        refl
+    ; importedBlockerConsumptionReasonCountIsFive =
         refl
     ; proofParts =
         canonicalA4ProofParts

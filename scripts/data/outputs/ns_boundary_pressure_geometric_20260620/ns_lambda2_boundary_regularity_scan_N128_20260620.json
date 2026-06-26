@@ -1,0 +1,909 @@
+{
+  "C": "scripts/ns_lambda2_boundary_regularity_scan.py",
+  "F": "Sard regularity is an analytic statement; this scan is a numerical proxy only.",
+  "G": "This output is an empirical proxy only and does not promote a regularity claim.",
+  "L": "Resolve candidate N128 archives, parse scale metadata when present, compute spectral gradients, and emit deterministic per-frame rows plus aggregate diagnostics.",
+  "O": "Construct an empirical regularity proxy near the \u03bb2=0 boundary.",
+  "P": "FAIL_CLOSED_LAMBDA2_BOUNDARY_REGULARITY_SCAN",
+  "R": "Load or reconstruct \u03bb2 per frame, compute |grad \u03bb2| on a small |lambda2| band, and emit per-frame counts/fractions versus chosen thresholds plus aggregate summaries.",
+  "S": "Prefer derived \u03bb2; reconstruct from raw velocity only when derived is absent. Fail-closed on missing/corrupt inputs.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "contract": "ns_lambda2_boundary_regularity_scan",
+  "errors": [],
+  "inputs": {
+    "derived_archive": ".venv/lib/python3.14/site-packages/flavio/data/test/2009.09313_digitized.npz",
+    "domain_length_override": null,
+    "frame": null,
+    "frame_limit": 13,
+    "gradient_thresholds": [
+      0.05,
+      0.1,
+      0.5,
+      1.0
+    ],
+    "input_dir": ".",
+    "lambda2_band": 0.001,
+    "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz"
+  },
+  "route_decision": "FAIL_CLOSED_LAMBDA2_BOUNDARY_REGULARITY_SCAN",
+  "rows": [
+    {
+      "band_cell_count": 209,
+      "band_cell_fraction": 9.965896606445312e-05,
+      "band_grad_count": 209,
+      "band_grad_stats": {
+        "max": 1066.025428674248,
+        "mean": 438.45054425009056,
+        "min": 72.32060951056553
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 0,
+      "grad_lambda2_stats": {
+        "max": 1626.288153127555,
+        "mean": 425.93282803838605,
+        "min": 2.4151885599832172
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 209,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.965896606445312e-05,
+          "threshold": 0.05
+        },
+        {
+          "count": 209,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.965896606445312e-05,
+          "threshold": 0.1
+        },
+        {
+          "count": 209,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.965896606445312e-05,
+          "threshold": 0.5
+        },
+        {
+          "count": 209,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.965896606445312e-05,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 0
+      },
+      "snapshot": 0,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 201,
+      "band_cell_fraction": 9.584426879882812e-05,
+      "band_grad_count": 201,
+      "band_grad_stats": {
+        "max": 1180.6587225131495,
+        "mean": 420.512241344236,
+        "min": 48.61281523764351
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 1,
+      "grad_lambda2_stats": {
+        "max": 1558.3835629816224,
+        "mean": 416.3637602256868,
+        "min": 0.7864364045893483
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 201,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.584426879882812e-05,
+          "threshold": 0.05
+        },
+        {
+          "count": 201,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.584426879882812e-05,
+          "threshold": 0.1
+        },
+        {
+          "count": 201,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.584426879882812e-05,
+          "threshold": 0.5
+        },
+        {
+          "count": 201,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.584426879882812e-05,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 1
+      },
+      "snapshot": 1,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 189,
+      "band_cell_fraction": 9.012222290039062e-05,
+      "band_grad_count": 189,
+      "band_grad_stats": {
+        "max": 1074.417071166263,
+        "mean": 426.4280639474929,
+        "min": 35.84453666856538
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 2,
+      "grad_lambda2_stats": {
+        "max": 1558.6086272961395,
+        "mean": 407.297493244406,
+        "min": 2.4253027323385363
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 189,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.012222290039062e-05,
+          "threshold": 0.05
+        },
+        {
+          "count": 189,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.012222290039062e-05,
+          "threshold": 0.1
+        },
+        {
+          "count": 189,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.012222290039062e-05,
+          "threshold": 0.5
+        },
+        {
+          "count": 189,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.012222290039062e-05,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 2
+      },
+      "snapshot": 2,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 189,
+      "band_cell_fraction": 9.012222290039062e-05,
+      "band_grad_count": 189,
+      "band_grad_stats": {
+        "max": 1073.6854474575907,
+        "mean": 399.6237056906679,
+        "min": 34.46544609614581
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 3,
+      "grad_lambda2_stats": {
+        "max": 1512.4290214773284,
+        "mean": 398.6979802604441,
+        "min": 1.4987904518672721
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 189,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.012222290039062e-05,
+          "threshold": 0.05
+        },
+        {
+          "count": 189,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.012222290039062e-05,
+          "threshold": 0.1
+        },
+        {
+          "count": 189,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.012222290039062e-05,
+          "threshold": 0.5
+        },
+        {
+          "count": 189,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.012222290039062e-05,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 3
+      },
+      "snapshot": 3,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 220,
+      "band_cell_fraction": 0.0001049041748046875,
+      "band_grad_count": 220,
+      "band_grad_stats": {
+        "max": 865.5754923564933,
+        "mean": 379.04679748661647,
+        "min": 72.69186760788733
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 4,
+      "grad_lambda2_stats": {
+        "max": 1539.3641278434698,
+        "mean": 390.51803317159795,
+        "min": 1.8431753099811934
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 220,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.0001049041748046875,
+          "threshold": 0.05
+        },
+        {
+          "count": 220,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.0001049041748046875,
+          "threshold": 0.1
+        },
+        {
+          "count": 220,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.0001049041748046875,
+          "threshold": 0.5
+        },
+        {
+          "count": 220,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.0001049041748046875,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 4
+      },
+      "snapshot": 4,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 205,
+      "band_cell_fraction": 9.775161743164062e-05,
+      "band_grad_count": 205,
+      "band_grad_stats": {
+        "max": 748.2282300424481,
+        "mean": 379.37744504810587,
+        "min": 83.29248590204453
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 5,
+      "grad_lambda2_stats": {
+        "max": 1495.7649031921176,
+        "mean": 382.7243541758883,
+        "min": 2.9279958209876105
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 205,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.775161743164062e-05,
+          "threshold": 0.05
+        },
+        {
+          "count": 205,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.775161743164062e-05,
+          "threshold": 0.1
+        },
+        {
+          "count": 205,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.775161743164062e-05,
+          "threshold": 0.5
+        },
+        {
+          "count": 205,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.775161743164062e-05,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 5
+      },
+      "snapshot": 5,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 198,
+      "band_cell_fraction": 9.441375732421875e-05,
+      "band_grad_count": 198,
+      "band_grad_stats": {
+        "max": 1085.717009300396,
+        "mean": 398.006362742511,
+        "min": 8.892907666365888
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 6,
+      "grad_lambda2_stats": {
+        "max": 1417.6545792979891,
+        "mean": 375.27762574908485,
+        "min": 3.332459998024261
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 198,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.441375732421875e-05,
+          "threshold": 0.05
+        },
+        {
+          "count": 198,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.441375732421875e-05,
+          "threshold": 0.1
+        },
+        {
+          "count": 198,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.441375732421875e-05,
+          "threshold": 0.5
+        },
+        {
+          "count": 198,
+          "fraction_band": 1.0,
+          "fraction_domain": 9.441375732421875e-05,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 6
+      },
+      "snapshot": 6,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 214,
+      "band_cell_fraction": 0.00010204315185546875,
+      "band_grad_count": 214,
+      "band_grad_stats": {
+        "max": 712.6091786491538,
+        "mean": 363.5074729764419,
+        "min": 65.29361437349503
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 7,
+      "grad_lambda2_stats": {
+        "max": 1391.3619269302837,
+        "mean": 368.17548038406,
+        "min": 2.5442485961629973
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 214,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00010204315185546875,
+          "threshold": 0.05
+        },
+        {
+          "count": 214,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00010204315185546875,
+          "threshold": 0.1
+        },
+        {
+          "count": 214,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00010204315185546875,
+          "threshold": 0.5
+        },
+        {
+          "count": 214,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00010204315185546875,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 7
+      },
+      "snapshot": 7,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 216,
+      "band_cell_fraction": 0.000102996826171875,
+      "band_grad_count": 216,
+      "band_grad_stats": {
+        "max": 888.2942077415498,
+        "mean": 358.6091503138425,
+        "min": 27.712675809117968
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 8,
+      "grad_lambda2_stats": {
+        "max": 1376.4791294460072,
+        "mean": 361.3869422342611,
+        "min": 2.1740019024635777
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 216,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.000102996826171875,
+          "threshold": 0.05
+        },
+        {
+          "count": 216,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.000102996826171875,
+          "threshold": 0.1
+        },
+        {
+          "count": 216,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.000102996826171875,
+          "threshold": 0.5
+        },
+        {
+          "count": 216,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.000102996826171875,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 8
+      },
+      "snapshot": 8,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 234,
+      "band_cell_fraction": 0.00011157989501953125,
+      "band_grad_count": 234,
+      "band_grad_stats": {
+        "max": 841.0259460838232,
+        "mean": 363.84170560708276,
+        "min": 61.29760970538507
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 9,
+      "grad_lambda2_stats": {
+        "max": 1388.4151973359583,
+        "mean": 354.86848432119245,
+        "min": 0.9692615648142785
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 234,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00011157989501953125,
+          "threshold": 0.05
+        },
+        {
+          "count": 234,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00011157989501953125,
+          "threshold": 0.1
+        },
+        {
+          "count": 234,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00011157989501953125,
+          "threshold": 0.5
+        },
+        {
+          "count": 234,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00011157989501953125,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 9
+      },
+      "snapshot": 9,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 219,
+      "band_cell_fraction": 0.00010442733764648438,
+      "band_grad_count": 219,
+      "band_grad_stats": {
+        "max": 1012.844005298006,
+        "mean": 362.36889859749743,
+        "min": 37.79063930708189
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 10,
+      "grad_lambda2_stats": {
+        "max": 1382.76065749613,
+        "mean": 348.5882620899265,
+        "min": 2.6607496926820744
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 219,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00010442733764648438,
+          "threshold": 0.05
+        },
+        {
+          "count": 219,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00010442733764648438,
+          "threshold": 0.1
+        },
+        {
+          "count": 219,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00010442733764648438,
+          "threshold": 0.5
+        },
+        {
+          "count": 219,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00010442733764648438,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 10
+      },
+      "snapshot": 10,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 220,
+      "band_cell_fraction": 0.0001049041748046875,
+      "band_grad_count": 220,
+      "band_grad_stats": {
+        "max": 772.6902766677363,
+        "mean": 340.3986990458889,
+        "min": 52.1253633617496
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 11,
+      "grad_lambda2_stats": {
+        "max": 1343.8253193938372,
+        "mean": 342.48504764639176,
+        "min": 1.3959960674490826
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 220,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.0001049041748046875,
+          "threshold": 0.05
+        },
+        {
+          "count": 220,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.0001049041748046875,
+          "threshold": 0.1
+        },
+        {
+          "count": 220,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.0001049041748046875,
+          "threshold": 0.5
+        },
+        {
+          "count": 220,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.0001049041748046875,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 11
+      },
+      "snapshot": 11,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    },
+    {
+      "band_cell_count": 266,
+      "band_cell_fraction": 0.00012683868408203125,
+      "band_grad_count": 266,
+      "band_grad_stats": {
+        "max": 808.8125196714055,
+        "mean": 337.87010472453466,
+        "min": 63.62102757546137
+      },
+      "cell_count": 2097152,
+      "domain_length": 6.283185307179586,
+      "domain_length_source": "raw:domain_length",
+      "finite_cell_count": 2097152,
+      "frame": 12,
+      "grad_lambda2_stats": {
+        "max": 1311.659958623665,
+        "mean": 336.53890516990714,
+        "min": 2.1135149079554716
+      },
+      "grad_threshold_rows": [
+        {
+          "count": 266,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00012683868408203125,
+          "threshold": 0.05
+        },
+        {
+          "count": 266,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00012683868408203125,
+          "threshold": 0.1
+        },
+        {
+          "count": 266,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00012683868408203125,
+          "threshold": 0.5
+        },
+        {
+          "count": 266,
+          "fraction_band": 1.0,
+          "fraction_domain": 0.00012683868408203125,
+          "threshold": 1.0
+        }
+      ],
+      "lambda2_band": 0.001,
+      "lambda2_reconstructed": true,
+      "lambda2_source": "reconstructed_from_raw:ns3d_N128_seed0_gpu_pressure.npz",
+      "reconstruction_meta": {
+        "raw_domain_length": 6.283185307179586,
+        "raw_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+        "raw_snapshot": 12
+      },
+      "snapshot": 12,
+      "source_path": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "source_type": "raw_reconstruction",
+      "status": "ok"
+    }
+  ],
+  "script": "scripts/ns_lambda2_boundary_regularity_scan.py",
+  "status": "ok",
+  "summary": {
+    "all_frames_ok_or_degraded": true,
+    "band_cell_fraction_stats": {
+      "max": 0.00012683868408203125,
+      "mean": 0.00010196979229266827,
+      "min": 9.012222290039062e-05
+    },
+    "band_grad_stats": {
+      "max_of_max": 1180.6587225131495,
+      "mean_of_mean": 382.1570147519238,
+      "min_of_min": 8.892907666365888,
+      "sample_count": 13
+    },
+    "degraded_frame_count": 0,
+    "error_frame_count": 0,
+    "grad_lambda2_stats": {
+      "max_of_max": 1626.288153127555,
+      "mean_of_mean": 377.60424590086404,
+      "min_of_min": 0.7864364045893483,
+      "sample_count": 13
+    },
+    "missing_frame_count": 0,
+    "ok_frame_count": 13,
+    "processed_frame_count": 13,
+    "requested_frame_limit": 13,
+    "status_counts": {
+      "ok": 13
+    },
+    "threshold_summary": {
+      "0.05": {
+        "count_stats": {
+          "frame_count": 13,
+          "max": 266.0,
+          "mean": 213.84615384615384,
+          "min": 189.0
+        },
+        "fraction_band_stats": {
+          "frame_count": 13,
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0
+        },
+        "fraction_domain_stats": {
+          "frame_count": 13,
+          "max": 0.00012683868408203125,
+          "mean": 0.00010196979229266827,
+          "min": 9.012222290039062e-05
+        }
+      },
+      "0.1": {
+        "count_stats": {
+          "frame_count": 13,
+          "max": 266.0,
+          "mean": 213.84615384615384,
+          "min": 189.0
+        },
+        "fraction_band_stats": {
+          "frame_count": 13,
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0
+        },
+        "fraction_domain_stats": {
+          "frame_count": 13,
+          "max": 0.00012683868408203125,
+          "mean": 0.00010196979229266827,
+          "min": 9.012222290039062e-05
+        }
+      },
+      "0.5": {
+        "count_stats": {
+          "frame_count": 13,
+          "max": 266.0,
+          "mean": 213.84615384615384,
+          "min": 189.0
+        },
+        "fraction_band_stats": {
+          "frame_count": 13,
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0
+        },
+        "fraction_domain_stats": {
+          "frame_count": 13,
+          "max": 0.00012683868408203125,
+          "mean": 0.00010196979229266827,
+          "min": 9.012222290039062e-05
+        }
+      },
+      "1.0": {
+        "count_stats": {
+          "frame_count": 13,
+          "max": 266.0,
+          "mean": 213.84615384615384,
+          "min": 189.0
+        },
+        "fraction_band_stats": {
+          "frame_count": 13,
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0
+        },
+        "fraction_domain_stats": {
+          "frame_count": 13,
+          "max": 0.00012683868408203125,
+          "mean": 0.00010196979229266827,
+          "min": 9.012222290039062e-05
+        }
+      }
+    }
+  },
+  "warnings": [
+    "derived_source_load_failed:ValueError:archive has no usable frame fields"
+  ]
+}

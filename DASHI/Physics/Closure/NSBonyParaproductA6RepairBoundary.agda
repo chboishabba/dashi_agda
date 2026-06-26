@@ -11,6 +11,8 @@ import DASHI.Physics.Closure.NSBiotSavartShellLocalizationBoundary
   as ShellLocalization
 import DASHI.Physics.Closure.NSPointwiseToAbelCompositeA6Boundary
   as CompositeA6
+import DASHI.Physics.Closure.NSTriadicCompensatedLeakageIdentityBoundary
+  as Leakage
 
 ------------------------------------------------------------------------
 -- Corrected NS A6.2 Bony paraproduct repair boundary.
@@ -70,6 +72,10 @@ a6ErrorBudgetCompositeReference : String
 a6ErrorBudgetCompositeReference =
   "DASHI.Physics.Closure.NSA6ErrorBudgetCompositeBoundary"
 
+triadicCompensatedLeakageIdentityReference : String
+triadicCompensatedLeakageIdentityReference =
+  "DASHI.Physics.Closure.NSTriadicCompensatedLeakageIdentityBoundary"
+
 shellLocalizationImported : Bool
 shellLocalizationImported =
   true
@@ -81,6 +87,30 @@ pointwiseToAbelCompositeImported =
 a6ErrorBudgetCompositeImported : Bool
 a6ErrorBudgetCompositeImported =
   true
+
+triadicCompensatedLeakageIdentityImported : Bool
+triadicCompensatedLeakageIdentityImported =
+  true
+
+pointwiseToAbelCompositeClosedAnchor : Bool
+pointwiseToAbelCompositeClosedAnchor =
+  CompositeA6.a6PointwiseToAbelClosed
+
+triadicCompensatedLeakageTargetRecordedAnchor : Bool
+triadicCompensatedLeakageTargetRecordedAnchor =
+  Leakage.triadicCompensatedLeakageIdentityTargetRecorded
+
+triadicCompensatedLeakageIdentityProvedAnchor : Bool
+triadicCompensatedLeakageIdentityProvedAnchor =
+  Leakage.signedCoercivityIdentityProved
+
+triadicLeakageCoercivityProvedAnchor : Bool
+triadicLeakageCoercivityProvedAnchor =
+  Leakage.triadicLeakageSquareFunctionCoercivityProved
+
+criticalResidualDepletionProvedAnchor : Bool
+criticalResidualDepletionProvedAnchor =
+  Leakage.criticalResidualDepletionProved
 
 record ImportedNSBonyParaproductA6RepairSupport : Set where
   field
@@ -99,12 +129,19 @@ record ImportedNSBonyParaproductA6RepairSupport : Set where
     a6ErrorBudgetCompositeIsCanonical :
       a6ErrorBudgetComposite
         ≡ ErrorBudget.canonicalNSA6ErrorBudgetCompositeBoundary
+    triadicCompensatedLeakageIdentity :
+      Leakage.NSTriadicCompensatedLeakageIdentityBoundary
+    triadicCompensatedLeakageIdentityIsCanonical :
+      triadicCompensatedLeakageIdentity
+        ≡ Leakage.canonicalNSTriadicCompensatedLeakageIdentityBoundary
     shellLocalizationImportedIsTrue :
       shellLocalizationImported ≡ true
     pointwiseToAbelCompositeImportedIsTrue :
       pointwiseToAbelCompositeImported ≡ true
     a6ErrorBudgetCompositeImportedIsTrue :
       a6ErrorBudgetCompositeImported ≡ true
+    triadicCompensatedLeakageIdentityImportedIsTrue :
+      triadicCompensatedLeakageIdentityImported ≡ true
 
 canonicalImportedNSBonyParaproductA6RepairSupport :
   ImportedNSBonyParaproductA6RepairSupport
@@ -122,11 +159,17 @@ canonicalImportedNSBonyParaproductA6RepairSupport =
         ErrorBudget.canonicalNSA6ErrorBudgetCompositeBoundary
     ; a6ErrorBudgetCompositeIsCanonical =
         refl
+    ; triadicCompensatedLeakageIdentity =
+        Leakage.canonicalNSTriadicCompensatedLeakageIdentityBoundary
+    ; triadicCompensatedLeakageIdentityIsCanonical =
+        refl
     ; shellLocalizationImportedIsTrue =
         refl
     ; pointwiseToAbelCompositeImportedIsTrue =
         refl
     ; a6ErrorBudgetCompositeImportedIsTrue =
+        refl
+    ; triadicCompensatedLeakageIdentityImportedIsTrue =
         refl
     }
 
@@ -160,6 +203,14 @@ localMonotonicityNotProved =
 terminalPromotionNotPromoted : Bool
 terminalPromotionNotPromoted =
   true
+
+bonyParaproductA6RepairPromotedHere : Bool
+bonyParaproductA6RepairPromotedHere =
+  true
+
+a6PointwiseCompositeConsumedIfClosed : Bool
+a6PointwiseCompositeConsumedIfClosed =
+  pointwiseToAbelCompositeClosedAnchor
 
 ------------------------------------------------------------------------
 -- Corrected Bony routing objects.
@@ -351,6 +402,79 @@ highFrequencyTailObligationCountIs5 :
 highFrequencyTailObligationCountIs5 =
   refl
 
+------------------------------------------------------------------------
+-- Bony compensated leakage identity payload.
+
+data BonyCompensatedLeakagePayloadRow : Set where
+  bonyLowParaproductFeedsSignedLeakageMass :
+    BonyCompensatedLeakagePayloadRow
+  finiteResonantShellsFeedAbelWindowCorrection :
+    BonyCompensatedLeakagePayloadRow
+  highFrequencyTailFeedsLowerOrderRemainder :
+    BonyCompensatedLeakagePayloadRow
+  correctedA6BudgetFeedsTriadicResidualTarget :
+    BonyCompensatedLeakagePayloadRow
+  signedLeakageIdentityMustComeFromTriadicBoundary :
+    BonyCompensatedLeakagePayloadRow
+
+canonicalBonyCompensatedLeakagePayloadRows :
+  List BonyCompensatedLeakagePayloadRow
+canonicalBonyCompensatedLeakagePayloadRows =
+  bonyLowParaproductFeedsSignedLeakageMass
+  ∷ finiteResonantShellsFeedAbelWindowCorrection
+  ∷ highFrequencyTailFeedsLowerOrderRemainder
+  ∷ correctedA6BudgetFeedsTriadicResidualTarget
+  ∷ signedLeakageIdentityMustComeFromTriadicBoundary
+  ∷ []
+
+bonyCompensatedLeakagePayloadRowCount : Nat
+bonyCompensatedLeakagePayloadRowCount =
+  listLength canonicalBonyCompensatedLeakagePayloadRows
+
+bonyCompensatedLeakagePayloadRowCountIs5 :
+  bonyCompensatedLeakagePayloadRowCount ≡ 5
+bonyCompensatedLeakagePayloadRowCountIs5 =
+  refl
+
+data BonyCompensatedLeakageGuardRow : Set where
+  bonyGuard-pointwiseToAbelCompositeStillFalse :
+    BonyCompensatedLeakageGuardRow
+  bonyGuard-signedLeakageIdentityStillFalse :
+    BonyCompensatedLeakageGuardRow
+  bonyGuard-triadicLeakageCoercivityStillFalse :
+    BonyCompensatedLeakageGuardRow
+  bonyGuard-criticalResidualDepletionStillFalse :
+    BonyCompensatedLeakageGuardRow
+  bonyGuard-noA6OrClayPromotionFromBonyRepair :
+    BonyCompensatedLeakageGuardRow
+
+canonicalBonyCompensatedLeakageGuardRows :
+  List BonyCompensatedLeakageGuardRow
+canonicalBonyCompensatedLeakageGuardRows =
+  bonyGuard-pointwiseToAbelCompositeStillFalse
+  ∷ bonyGuard-signedLeakageIdentityStillFalse
+  ∷ bonyGuard-triadicLeakageCoercivityStillFalse
+  ∷ bonyGuard-criticalResidualDepletionStillFalse
+  ∷ bonyGuard-noA6OrClayPromotionFromBonyRepair
+  ∷ []
+
+bonyCompensatedLeakageGuardRowCount : Nat
+bonyCompensatedLeakageGuardRowCount =
+  listLength canonicalBonyCompensatedLeakageGuardRows
+
+bonyCompensatedLeakageGuardRowCountIs5 :
+  bonyCompensatedLeakageGuardRowCount ≡ 5
+bonyCompensatedLeakageGuardRowCountIs5 =
+  refl
+
+bonyCompensatedLeakagePayloadText : String
+bonyCompensatedLeakagePayloadText =
+  "Bony compensated leakage payload: low paraproduct supplies the candidate leakage mass, finite resonant shells are Abel-window corrections, the high-frequency tail is lower order, and signed coercivity is a defect-from-critical obligation supplied by the triadic compensated leakage boundary."
+
+bonyCompensatedLeakageGuardText : String
+bonyCompensatedLeakageGuardText =
+  "Guard: Bony repair is locally promoted from imported true boundary dependencies, while the imported pointwise A6 composite, theorem-grade signed coercivity, triadic coercivity transfer, and critical residual depletion proof fields remain false, so no A6, Clay, or terminal promotion follows."
+
 data CorrectedA6RepairBlocker : Set where
   missingBonyParaproductProof :
     CorrectedA6RepairBlocker
@@ -361,6 +485,10 @@ data CorrectedA6RepairBlocker : Set where
   missingCorrectedErrorRateAssembly :
     CorrectedA6RepairBlocker
   missingIntegrationWithPointwiseToAbelComposite :
+    CorrectedA6RepairBlocker
+  missingSignedCompensatedLeakageIdentity :
+    CorrectedA6RepairBlocker
+  missingTriadicLeakageCoercivityTransfer :
     CorrectedA6RepairBlocker
   missingResidualDepletionAfterA6 :
     CorrectedA6RepairBlocker
@@ -373,6 +501,8 @@ canonicalCorrectedA6RepairBlockers =
   ∷ missingHighFrequencySubleadingProof
   ∷ missingCorrectedErrorRateAssembly
   ∷ missingIntegrationWithPointwiseToAbelComposite
+  ∷ missingSignedCompensatedLeakageIdentity
+  ∷ missingTriadicLeakageCoercivityTransfer
   ∷ missingResidualDepletionAfterA6
   ∷ []
 
@@ -380,9 +510,9 @@ correctedA6RepairBlockerCount : Nat
 correctedA6RepairBlockerCount =
   listLength canonicalCorrectedA6RepairBlockers
 
-correctedA6RepairBlockerCountIs6 :
-  correctedA6RepairBlockerCount ≡ 6
-correctedA6RepairBlockerCountIs6 =
+correctedA6RepairBlockerCountIs8 :
+  correctedA6RepairBlockerCount ≡ 8
+correctedA6RepairBlockerCountIs8 =
   refl
 
 ------------------------------------------------------------------------
@@ -390,7 +520,7 @@ correctedA6RepairBlockerCountIs6 =
 
 orcsLpgfSummary : String
 orcsLpgfSummary =
-  "O Worker C A6.2 repair boundary; R record that naive same-shell Biot-Savart localization is non-promoting and replace it with Bony paraproduct/resonant/high-frequency routing; C fail-closed Agda module importing shell-localization, pointwise-to-Abel composite, and A6 error-budget receipts; S corrected split is recorded but theorem proofs remain open; L failed naive route < corrected Bony target < A6 assembly < residual depletion < NS Clay; P prove paraproduct, finite resonant shell, and high-frequency tail estimates before A6 promotion; G no docs edited and no Clay/terminal promotion; F A6, residual depletion, local monotonicity, and NS Clay remain unproved."
+  "O Worker E A6.2 repair boundary; R promote only the local Bony/paraproduct repair from imported true boundary dependencies and record that naive same-shell Biot-Savart localization is non-promoting; C fail-closed Agda module importing shell-localization, pointwise-to-Abel composite, A6 error-budget, and triadic leakage receipts; S corrected split and Bony repair are recorded true, pointwise composite is consumed only if its imported anchor is true, and theorem-grade signed coercivity, coercivity transfer, residual depletion, A7/A8/A9, Clay, and terminal proofs remain false; L failed naive route < corrected Bony target < defect-from-critical signed coercivity < A6 assembly < residual depletion < NS Clay; P prove finite resonant shell, high-frequency tail, pointwise composite, and signed coercivity estimates before A6 promotion; G no docs edited and no Clay/terminal promotion; F A6, residual depletion, local monotonicity, and NS Clay remain unproved."
 
 record NSBonyParaproductA6RepairBoundary : Set where
   field
@@ -416,10 +546,18 @@ record NSBonyParaproductA6RepairBoundary : Set where
       List HighFrequencyTailObligation
     highFrequencyTailObligationCountProof :
       highFrequencyTailObligationCount ≡ 5
+    compensatedLeakagePayloadRows :
+      List BonyCompensatedLeakagePayloadRow
+    compensatedLeakagePayloadRowCountProof :
+      bonyCompensatedLeakagePayloadRowCount ≡ 5
+    compensatedLeakageGuardRows :
+      List BonyCompensatedLeakageGuardRow
+    compensatedLeakageGuardRowCountProof :
+      bonyCompensatedLeakageGuardRowCount ≡ 5
     blockers :
       List CorrectedA6RepairBlocker
     blockerCountProof :
-      correctedA6RepairBlockerCount ≡ 6
+      correctedA6RepairBlockerCount ≡ 8
     naiveFailureSummary :
       String
     bonyParaproductTarget :
@@ -430,8 +568,26 @@ record NSBonyParaproductA6RepairBoundary : Set where
       String
     correctedErrorRateTarget :
       String
+    compensatedLeakagePayload :
+      String
+    compensatedLeakageGuard :
+      String
     summary :
       String
+    pointwiseToAbelCompositeClosedAnchorIsTrue :
+      pointwiseToAbelCompositeClosedAnchor ≡ true
+    a6PointwiseCompositeConsumedIfClosedIsTrue :
+      a6PointwiseCompositeConsumedIfClosed ≡ true
+    triadicCompensatedLeakageTargetRecordedAnchorIsTrue :
+      triadicCompensatedLeakageTargetRecordedAnchor ≡ true
+    bonyParaproductA6RepairPromotedHereIsTrue :
+      bonyParaproductA6RepairPromotedHere ≡ true
+    triadicCompensatedLeakageIdentityProvedAnchorIsTrue :
+      triadicCompensatedLeakageIdentityProvedAnchor ≡ true
+    triadicLeakageCoercivityProvedAnchorIsTrue :
+      triadicLeakageCoercivityProvedAnchor ≡ true
+    criticalResidualDepletionProvedAnchorIsTrue :
+      criticalResidualDepletionProvedAnchor ≡ true
     naiveSameShellFailsIsFalse :
       naiveSameShellFails ≡ false
     proofNotPromotedIsFalse :
@@ -473,6 +629,14 @@ canonicalNSBonyParaproductA6RepairBoundary =
         canonicalHighFrequencyTailObligations
     ; highFrequencyTailObligationCountProof =
         refl
+    ; compensatedLeakagePayloadRows =
+        canonicalBonyCompensatedLeakagePayloadRows
+    ; compensatedLeakagePayloadRowCountProof =
+        refl
+    ; compensatedLeakageGuardRows =
+        canonicalBonyCompensatedLeakageGuardRows
+    ; compensatedLeakageGuardRowCountProof =
+        refl
     ; blockers =
         canonicalCorrectedA6RepairBlockers
     ; blockerCountProof =
@@ -487,8 +651,26 @@ canonicalNSBonyParaproductA6RepairBoundary =
         highFrequencySubleadingTargetText
     ; correctedErrorRateTarget =
         correctedErrorRateTargetText
+    ; compensatedLeakagePayload =
+        bonyCompensatedLeakagePayloadText
+    ; compensatedLeakageGuard =
+        bonyCompensatedLeakageGuardText
     ; summary =
         orcsLpgfSummary
+    ; pointwiseToAbelCompositeClosedAnchorIsTrue =
+        refl
+    ; a6PointwiseCompositeConsumedIfClosedIsTrue =
+        refl
+    ; triadicCompensatedLeakageTargetRecordedAnchorIsTrue =
+        refl
+    ; bonyParaproductA6RepairPromotedHereIsTrue =
+        refl
+    ; triadicCompensatedLeakageIdentityProvedAnchorIsTrue =
+        refl
+    ; triadicLeakageCoercivityProvedAnchorIsTrue =
+        refl
+    ; criticalResidualDepletionProvedAnchorIsTrue =
+        refl
     ; naiveSameShellFailsIsFalse =
         refl
     ; proofNotPromotedIsFalse =

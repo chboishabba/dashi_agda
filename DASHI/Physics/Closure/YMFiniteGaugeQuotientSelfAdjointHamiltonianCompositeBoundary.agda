@@ -711,11 +711,11 @@ record
       ≡
       false
 
-    importedKillingFiniteSelfAdjointStillFalse :
+    importedKillingFiniteSelfAdjointProved :
       Killing.ym1FiniteSelfAdjointHamiltonianProvedField
         (killingSelfAdjointnessComposite support)
       ≡
-      false
+      true
 
     importedKillingDominationStillFalse :
       Killing.hamiltonianDominationProvedField
@@ -925,8 +925,8 @@ canonicalYMFiniteGaugeQuotientSelfAdjointHamiltonianCompositeBoundary =
         Precondition.canonicalSelfAdjointHamiltonianProvedFalse
     ; importedPreconditionDominationStillFalse =
         Precondition.canonicalHamiltonianDominationProvedFalse
-    ; importedKillingFiniteSelfAdjointStillFalse =
-        Killing.canonicalCompositeYM1FiniteSelfAdjointHamiltonianFalse
+    ; importedKillingFiniteSelfAdjointProved =
+        Killing.canonicalCompositeYM1FiniteSelfAdjointHamiltonianTrue
     ; importedKillingDominationStillFalse =
         Killing.canonicalCompositeHamiltonianDominationFalse
     ; importedKillingOSStillFalse =

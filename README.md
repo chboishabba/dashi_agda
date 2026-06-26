@@ -16,13 +16,450 @@ composition vector -> bounded matter/force proxy carrier -> stability observable
 receipt -> fail-closed Agda guard. This is a simulator scaffold and roadmap,
 not a claim that the repo already derives arbitrary physics, chemistry,
 biology, stellar, or clinical predictions.
+For paper publication sequencing, start with
+`Docs/papers/PublicationRoadmap.md`. It records the current three-paper core
+and satellite order while preserving the non-promotion boundary for Clay,
+unification, and externally reviewed claims.
 The first executable slice is now present as
 `scripts/run_stellar_composition_proxy_diagnostic.py` with the Agda guard
 `DASHI.Unified.StellarCompositionProxyReceipt`; it remains proxy-only and
 non-promoting.
+The current trauma/body-memory biology tranche is candidate-only and
+clinical-adjacent, not diagnostic or therapeutic authority:
+`DASHI.Biology.BodyKeepsScoreResidualBridge`,
+`DASHI.Biology.EpigeneticBodyMemoryBridge`,
+`DASHI.Biology.FunctionalConnectomeBodyMemoryBridge`,
+`DASHI.Biology.BrainDNABodyMemoryBridge`,
+`DASHI.Biology.BodyMemoryMeasurementProxyBoundary`,
+`DASHI.Biology.BodyMemoryCompiledInverseBridge`,
+`DASHI.Biology.RelationalQiBodyMemoryBridge`,
+`DASHI.Biology.RelationalChartResidualMachine`,
+`DASHI.Biology.EducationBodyMemoryBridge`,
+`DASHI.Biology.FMRIConnectomeProxyGovernance`,
+`DASHI.Biology.GenomeEpigenomeConnectomeBodyMemoryBridge`,
+`DASHI.Biology.IntersectionalLongitudinalResidualDynamics`,
+`DASHI.Biology.LongitudinalFMRIConnectomeDynamicsBridge`,
+`DASHI.Biology.NeurodivergentAtlasBodyMemoryBridge`,
+`DASHI.Biology.PopulationLongitudinalBOLDResidualBridge`,
+`DASHI.Biology.EpigeneticTemporalRegulationBridge`,
+`DASHI.Biology.DevelopmentalWindowBodyMemoryBridge`,
+`DASHI.Biology.InterventionConsentLongitudinalGovernance`,
+`DASHI.Biology.HyperfabricIntersectionalBodyMemoryBridge`,
+`DASHI.Biology.RelationalQiEducationTraumaBridge`,
+`DASHI.Biology.FormalLayerExplanationBoundary`,
+`DASHI.Biology.TraumaClinicalGovernanceBoundary`,
+`DASHI.Biology.BodyMemoryBiologyRegression`, and
+`DASHI.Biology.TraumaBodyMemoryCandidateBridge`. These modules place body-state
+fibres, epigenetic regulatory marks, fMRI/connectome proxies, BrainDNA
+representation constraints, chart-local compiled inverses, and relational
+Qi/PatternMind repair context behind hard gates. The follow-on relational and
+longitudinal tranche adds the shared chart/residual/`j+1` machine, the
+education voice/agency/equity bridge, explicit fMRI/connectome proxy
+governance, genome-epigenome-connectome-body-memory composition,
+intersectional time/place/relation/institution/axis-bundle residual dynamics,
+longitudinal fMRI/connectome proxy drift, epigenetic temporal-regulation
+proxies, developmental-window context, consent/pacing governance, the
+education/trauma/Qi/reciprocity/law-power macro unifier, the hyperfabric
+intersectional interpretive carrier, and the explanation boundary separating
+narrative guide layers from typed proof and authority surfaces. Public symptom
+is not hidden factorisation, there is no axis-free body-memory residual,
+`+1`/`j+1` safety seed is not cure or diagnosis, proxy is not hidden chart,
+association is not causation, longitudinal association is not causal closure,
+developmental window is not destiny, consent/agency seed is not treatment,
+click is not learning, survey is not voice, access is not equity, nudge is not
+care, formal typing is not proof of social/clinical truth, and no clinical,
+educational, legal, mystical, or power authority is promoted.
+The Crenshaw/intersectionality refinement in
+`DASHI.Biology.HyperfabricIntersectionalBodyMemoryBridge` treats triads as
+axis-loaded role carriers rather than neutral universals: single-axis
+projection, abstract-humanity gluing, stable-nine justice promotion, and
+neutral-triad projection are rejected while prime-product / p-adic language
+remains candidate-only and axis-preserving.
+`DASHI.Biology.NeurodivergentAtlasBodyMemoryBridge` keeps NT/ND differences as
+neuro-affirming chart-prior, compression-style, sensory-weight, social-code,
+and threshold variation rather than normal/broken classification.
+`DASHI.Biology.PopulationLongitudinalBOLDResidualBridge` keeps longitudinal
+BOLD/connectome readings at bounded neural/vascular population-proxy status:
+proxy drift is not diagnosis, mind reading, hidden-chart recovery, treatment,
+or causal closure. `DASHI.Culture.CulturalTriadOperatorBoundary` records
+secular triad operators such as `1 = subject + other + relation` under
+humility, intersectionality, and power gates; it does not promote theology,
+monoculture, enemy-coding, political authority, or legal authority.
 The broader route/lane joining plan is `Docs/support/reference/UnifiedRoutesLanePlan.md`, which
 extends the same receipt-gated architecture across physics, empirical,
 biology, runtime, arithmetic, Gate 3, NS, and YM lanes.
+The current formal-geometry intake also includes a compact candidate-only
+odd/topology tranche: `DASHI.Core.SuperPayloadReadingBoundary`,
+`DASHI.Core.OddGrassmannCoefficientGate`,
+`DASHI.Core.OddBerezinTopCoefficientBoundary`,
+`DASHI.Geometry.MobiusOrientationGate`,
+`DASHI.Geometry.KleinClosureReceipt`,
+`DASHI.Promotion.KleinHodgeDualityBoundary`,
+`DASHI.Foundations.Base369MobiusTransport`, and
+`DASHI.Foundations.Base369MobiusTransportRegression`. These modules record the
+one-generator odd coefficient-collapse law, the multi-odd ordered top-
+coefficient boundary, the Möbius/Klein orientation obstruction surfaces, the
+non-orientable Hodge repair gate, and the `k ↦ k + 3 mod 6` Base369 transport
+without promoting supergeometry, topology, or Hodge-theory authority.
+The richer typed follow-on tranche now sits directly on the SSP/Base369 spine:
+`DASHI.Foundations.SSPTritCarrier`,
+`DASHI.Foundations.FifteenSSPSurface`,
+`DASHI.Core.SuperSSPOddPayload`,
+`DASHI.Core.OddSSPCoefficientGate`,
+`DASHI.Foundations.HexTruthPolarityFactor`,
+`DASHI.Foundations.StageAtlasZeroToEleven`, and
+`DASHI.Foundations.NumberRoleBoundary`. These modules make the odd lane return
+typed 15SSP trit residual surfaces, factor `HexTruth` as `TriTruth × Polarity`,
+distinguish spiral stage from residue/revolution trace, and keep algebra,
+coordinate, phase, transport, and mnemonic readings explicitly separated.
+The next carrier tranche now extends that spine per prime and per depth:
+`DASHI.Foundations.SSPPrimeLane369Signature`,
+`DASHI.Foundations.SSPPrimeLane369Refinement`,
+`DASHI.Foundations.FifteenSSP369Forest`,
+`DASHI.Geometry.SSP369Ultrametric`,
+`DASHI.Foundations.SSPPrimeLaneSymmetryProfile`, and
+`DASHI.Core.SuperSSP369Field`. These modules record each tracked SSP prime's
+typed `mod [3,6,9]` fingerprint, recursive depth-refined `369` lane addresses,
+the 15-lane forest product, a prefix-based ultrametric surface, local prime
+symmetry chambers with both prime and unit-order stage readings, and a typed
+supervoxel field lift over the resulting carrier stack.
+The next bridge tranche now connects those carriers to live consumers:
+`DASHI.Foundations.SSPBase369Bridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369BTBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369PAdicBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369PhaseBridge`,
+`DASHI.Core.OddSSP369FieldGate`, and
+`DASHI.Foundations.SSPPrimeLane369BridgeRegression`. These modules expose
+typed quotient readouts from 15SSP into Base369, typed BT valencies, explicit
+p-adic-style depth-coordinate bridges, a unified phase/stage seam, field-level
+odd extraction, and one compact regression surface for importing the tranche.
+The next consumer-deepening tranche now threads those bridges back into one
+another:
+`DASHI.Physics.Closure.SSPPrimeLane369ResidueFactorBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369DepthPhaseBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369BTUltrametricBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369FieldPhaseBridge`,
+`DASHI.Physics.Closure.SSPPrimeLane369PAdicUltrametricBridge`,
+`DASHI.Core.OddSSP369FocusedPrimeGate`, and
+`DASHI.Foundations.SSPPrimeLane369ConsumerRegression`. These modules expose a
+typed `(TriTruth × Polarity × NonaryTruth)` residue factor per tracked prime,
+tie depth-indexed 369 addresses into the stage atlas, connect BT profiles to
+prefix ultrametric receipts, read focused field body/residue surfaces through
+Base369 while preserving the focused prime seam, connect finite p-adic bridges
+to the same ultrametric address geometry, tighten odd extraction around the
+focused prime supervoxel, and assemble one compact consumer regression surface
+for canonical p3/p7/p11 and root/depth3 examples.
+The next symmetry-action tranche now upgrades those local symmetry profiles
+into finite operators:
+`DASHI.Foundations.SSPPrimeLaneUnitAction`,
+`DASHI.Geometry.SSP369TreeAutomorphism`,
+`DASHI.Geometry.SSP369SymmetryIsometry`,
+`DASHI.Core.SuperSSP369EquivariantOddGate`,
+`DASHI.Physics.Closure.SSPPrimeLane369ActionPhaseBridge`, and
+`DASHI.Foundations.SSPPrimeLaneUnitActionRegression`. These modules record a
+typed per-prime unit-action step, its induced rotation on `369` digits and
+hex phase/polarity, tree/prefix compatibility, self-isometry receipts on the
+shared ultrametric geometry, an equivariant odd-field extraction seam on the
+focused supervoxel carrier, and one compact regression surface for canonical
+`p7`/`p11` and root/depth3 witnesses.
+The next p7 quotient-action exemplar now sharpens that symmetry lane into one
+typed golden case, but it now sits under the wider `0..11` stage-fibre atlas
+rather than acting as a parallel stage spine:
+`DASHI.Foundations.SSPPrimeLaneUnitGroup`,
+`DASHI.Foundations.P7UnitGroupC6Witness`,
+`DASHI.Foundations.P7HexTruthActionQuotient`,
+`DASHI.Geometry.P7UnitActionTreeIsometry`,
+`DASHI.Core.P7EquivariantOddFieldGate`, and
+`DASHI.Physics.Closure.P7Stage7C6HexRegression`. These modules record a
+finite `C6` quotient carrier for the p7 unit lane, explicit Stage-7 /
+Stage-6 witness rows, p7-specific HexTruth/Möbius transport receipts,
+p7-specific tree/depth self-isometry receipts, p7-specific odd-field
+equivariance receipts, and one compact regression surface tying those
+receipts together. This remains candidate-only and fail-closed: it is a
+typed p7 exemplar, not a promoted general `(\u2124/p\u2124)^×` action theorem
+or analytic BT/p-adic authority surface.
+`DASHI.Interop.PrimeLaneStage12ActionAdapter` now carries the shared adapter
+contract directly: `Stage12FibreSurface` is the global stage/carry/fibre
+grammar, prime lanes are local unit-action adapters into it, and `p7`, `p11`,
+and the full `12 -> 13` closure witness now consume that same contract through
+canonical rows. The
+follow-on interop consumers
+`DASHI.Interop.P7PrimeLaneStage12ActionBridge`,
+`DASHI.Interop.P11PrimeLaneStage12ActionBridge`,
+`DASHI.Interop.P13PrimeLaneStage12ActionBridge`,
+`DASHI.Interop.PrimeLaneStage12ActionAdapterRegistry`,
+`DASHI.Interop.PrimeLaneStage12ActionCarryBridge`,
+`DASHI.Interop.PrimeLaneStage12ActionSuccessorBridge`, and
+`DASHI.Interop.PrimeLaneStage12ActionRegression` keep that route normalized:
+`p7` remains the first clean local exemplar, but `p11` now follows the same
+Stage12 adapter story instead of sitting beside it, and `p13` now lands as
+the first full Stage12 witness row rather than remaining only a successor
+receipt.
+`DASHI.Interop.PrimeSuccessorWitness` now makes the cleaner `p - 1` / `+1`
+number-theoretic rule explicit: `p` is the new prime lane, `p - 1` is the
+witness-space that proves what `p` can act on, and `+1` is the successor move
+from witness-space into the new prime lane. The canonical worked rows are
+`p2` witnessing `1`, `p3` witnessing `2`, `p5` witnessing `4`, `p7`
+witnessing `6`, `p11` witnessing `10`, and `p13` witnessing `12`. This keeps
+`Stage12FibreSurface` as the spine. `Stage12FibreSurface is the spine` for
+this tranche, keeps `p7` as the first local exemplar,
+and marks `p13` as the natural full Stage12 witness.
+The full `0..11` successor-witness generalization is broader than the prime
+rows alone. For each stage `n`, the immediate witness is `n + 1`, and the
+factorization of that successor tells you what kind of witness has appeared.
+The repo now treats three witness kinds as first-class documentation language:
+prime successor witnesses, prime-power depth witnesses, and composite coupling witnesses.
+The next quotient-action generalization now adds a generic local surface plus a
+second concrete prime lane:
+`DASHI.Foundations.PrimeLaneUnitActionQuotient`,
+`DASHI.Foundations.P11UnitGroupC10Witness`,
+`DASHI.Foundations.P11HexTruthActionQuotient`,
+`DASHI.Geometry.P11UnitActionTreeIsometry`,
+`DASHI.Core.P11EquivariantOddFieldGate`, and
+`DASHI.Physics.Closure.P11Stage11C10Regression`. These modules record a shared
+typed quotient-action surface, a `p11 / C10` local witness with Stage-11
+
+That Stage12 path now extends one step further with
+`DASHI.Foundations.P13UnitGroupC12Witness`,
+`DASHI.Foundations.P13HexTruthActionQuotient`,
+`DASHI.Geometry.P13UnitActionTreeIsometry`,
+`DASHI.Core.P13EquivariantOddFieldGate`,
+`DASHI.Physics.Closure.P13Stage12C12Regression`, and
+`DASHI.Interop.P13PrimeLaneStage12ActionBridge`. These modules record the
+first full `12 -> 13` Stage12 witness row: `p13` consumes the shared
+adapter/carry/successor story, carries a finite `C12` local witness, keeps
+Stage-1 identity and Stage-0 unit-order placement explicit inside the
+`0..11` atlas, and remains candidate-only/fail-closed.
+identity and Stage-10 unit-order rows, p11-specific address/depth and odd-field
+consumers, and an explicit fail-closed HexTruth transport boundary where the
+p11 half-turn does not descend as cleanly as the p7 Möbius element. This
+remains candidate-only and fail-closed: the repo now has a generic surface and
+two concrete prime lanes, not a promoted all-primes `(\u2124/p\u2124)^×`
+action theorem.
+Prime successor witnesses open a new irreducible lane, as in
+`1 -> 2`, `2 -> 3`, `4 -> 5`, `6 -> 7`, `10 -> 11`, and `12 -> 13`.
+Prime-power depth witnesses deepen an existing axis rather than opening a new
+one, as in `3 -> 4 = 2^2`, `7 -> 8 = 2^3`, and `8 -> 9 = 3^2`. Composite
+coupling witnesses bind previously opened axes into one assembled carrier, as
+in `5 -> 6 = 2 * 3`, `9 -> 10 = 2 * 5`, and `11 -> 12 = 2^2 * 3`.
+This preserves the existing hierarchy: `Stage12FibreSurface` remains the general
+stage/carry/fibre grammar, while successor witnesses describe what the
+next carrier body looks like over that spine.
+Stated plainly for regression and reader clarity: Stage12FibreSurface remains the
+general stage/carry/fibre grammar for this tranche.
+The sharp repo-level reading for the current window is:
+`0 -> 1` identity witness,
+`1 -> 2` new p2 axis,
+`2 -> 3` new p3 axis,
+`3 -> 4` dyadic depth witness,
+`4 -> 5` new p5 axis,
+`5 -> 6` dyad-triad coupling witness,
+`6 -> 7` new p7 axis,
+`7 -> 8` high dyadic-depth witness,
+`8 -> 9` triadic-depth witness,
+`9 -> 10` dyad-decision coupling witness,
+`10 -> 11` new p11 axis,
+`11 -> 12` manifold composite witness,
+and `12 -> 13` the full Stage12 prime witness.
+
+The same rule now scales to `0..111` through the typed
+`canonicalStage0To111SuccessorField`. The immediate witness of stage `n`
+remains `n + 1`, but the wider window crosses two decimal carry layers:
+`0..9` is the first visible decimal cycle, `10..99` is the first carried
+layer, and `100..111` is the beginning of the second carried layer. The
+field-level summary is:
+
+- `111 = 100 + 10 + 1 = j2 + j1 + j0`
+- `111 -> 112 = 2^4 * 7`
+- `0..111` has size `112 = 2^4 * 7`
+- `0..111` therefore contains `nine full Stage12 blocks plus a four-stage overflow: 108..111`
+
+This means the whole `0..111` window is not just a longer list. It is a
+`112`-stage witness field whose size already factors as fourth-depth binary
+carry recursion coupled to the `p7` / `HexTruth` lane. The most important
+highlight seams are `99 -> 100 = 2^2 * 5^2`, `109 -> 110 = 2 * 5 * 11`,
+`110 -> 111 = 3 * 37`, and `111 -> 112 = 2^4 * 7`.
+
+The same glyph string now has an explicit base-sensitive receipt too. As
+decimal, `111_10 = 3 * 37`, so it is a coupled triadic/p37 state whose
+successor witness is `112 = 2^4 * 7`. As ternary, `111_3 = 1 + 3 + 9 = 13`,
+so `111_3 = 13` is the short-form stage witness summary, and the same visible
+glyph is the `p13` witness of Stage12. The repo now keeps
+both readings at once: `111_10` is a decimal carry state, while `111_3` is the
+prime `+1` witness of the `12`-stage atlas. This is also recorded as a finite
+3-adic prefix: `111_3` is the length-3 prefix of the all-ones expansion
+`111..._3 = -1/2` in `Q3`, without promoting the finite prefix into the full
+completion boundary.
+
+Current Agda/PhysLean physics-library parity context:
+the archived thread `Physics Library for Agda` was refreshed from ChatGPT URL
+`https://chatgpt.com/c/6a2e6b6c-f4b0-83ec-b233-126757c70248` into canonical
+archive thread `95d1157fa037ad3143960e629431b1d40439396c`. The implemented
+repo response is a six-layer, fail-closed parity surface: linear
+analysis/foundations, differential geometry, Lie/gauge theory, quantum/QFT,
+GR/PDE, and theorem-ergonomics roadmap receipts. The checked modules are
+`DASHI.Foundations.PhysicsLinearAnalysisParity`,
+`DASHI.Geometry.DifferentialGeometryParity`,
+`DASHI.Algebra.LieGaugeTheoryParity`,
+`DASHI.Algebra.Quantum.QFTParitySurface`,
+`DASHI.Physics.Closure.GRPDEParityBoundary`, and
+`DASHI.Physics.Closure.AgdaPhysicsParityRoadmapReceipt`. They name reusable
+interfaces and authority blockers; they do not claim PhysLean parity, imported
+continuum theorem authority, Clay promotion, or terminal unification.
+The current intake-strengthened versions also record the exact law-shape
+payloads required by those sockets: scalar/vector/Hilbert/operator/spectral
+and ODE shapes; manifold/chart/exterior-calculus theorem targets; Lie/gauge
+Jacobi, curvature, YM, Wilson, BRST, and gauge-fixing shapes; QFT Hilbert,
+CCR/CAR, Fock, OS, and Wightman rows; GR/PDE Koszul, curvature, Einstein,
+weak-solution, and energy-estimate rows; and the canonical finite discrete-YM
+spectral example receipt. These remain checked intake contracts, not imported
+continuum proofs.
+The proof-term-level pass now makes those rows more auditably exact: scalar
+and vector law fields use the requested names, finite bases use `foldr2` plus
+indexed lookup, DG records include the Christoffel transform and named Stokes
+orientation slot, Lie/gauge records include SU(2)/SU(3) finite-Jacobi
+authority rows plus gauge-naturality/BRST nilpotence payloads, QFT records the
+exact Hilbert/Operator/CCR/CAR/OS/Wightman field surfaces, GR/PDE records the
+Koszul/MTW/contracted-Bianchi/Einstein/SI-unit/weak-form payloads, and the
+finite discrete-YM spectral example records its exact boolean pattern. The
+continuum authority slots remain false or external.
+Current GR proof-architecture status: the checked finite-r and symbolic QQ
+surfaces now expose a sharper Christoffel/Ricci/convergence/Schwarzschild
+boundary. The selected finite-r table still records the historical odd
+`2Γ = r1` halving obstruction, while `GRSelectedNonFlatMetricInstance` now also
+has a symbolic QQ undoubled-Christoffel lift with a checked total half adapter.
+Ricci/scalar/Einstein zero-table arithmetic is factored through named finite-r
+zero/contraction helpers and downstream readiness receipts.
+`GRConcreteLeviCivita` now carries direct selected finite-r and selected
+Schwarzschild Levi-Civita/Koszul handoff projections that locally discharge the
+carrier-connection blocker without promoting continuum Schwarzschild GR.
+`ContinuumLimitTheorem` has symbolic finite derivative, inverse-metric C0,
+Christoffel-C0 extraction surfaces, a kernel-parametric constructor for the
+symbolic rational `FiniteCarrierChristoffelC0FromDerivativeLaw`, and a checked
+selected-pair identity/constant handoff that makes the only local `refl`
+connection extraction explicit. It now also records the selected zero-epsilon
+connection/Ricci error-bound bridge as a quantitative local receipt while
+leaving arbitrary connection equality false. The remaining analytic kernel is
+still the real ordered Christoffel C0 stability/extraction law, not the finite
+derivative plumbing. `SchwarzschildLimitCandidate` records the exact `r_s = 2, r = 3`
+doubled and undoubled Christoffel point tables, radial `∂_r Γ` table including
+the zero `Γ^r_tt` derivative, shell supremum receipts with tight `C_Gamma = 1`
+and conservative shell `C_Gamma <= 2`, `GammaMax = 2`, non-degenerate Shell A
+`[3,4]` constants `C_Gamma = 1`, `C'_Gamma = 26/27`, tight
+`L_Gamma = 44`, accepted conservative `L_Gamma = 48`, and tight
+`C_R = 2144/27 <= 80` with conservative extraction `640`; Shell B
+`[5/2,7/2]` remains `C_Gamma = 48/25`,
+`C'_Gamma = 992/125`, `L_Gamma = 112`, `C_R = 220`. Older Shell A
+`L_Gamma = 72` wording is historical and is not an accepted Shell A
+constant. The same tranche is tracked in five proof tiers: checked finite
+tables/receipts, machine-checked Shell A constant ledger, ordered-QQ analytic
+kernel targets, continuum PDE/GR theorem gateways, and external
+authority/governance promotion. Exact GR calculation result surfaces are
+`GRProofArchitectureNextAnalyticKernelTrancheReceipt`,
+`SymbolicRationalChristoffelC0StabilityKernel`,
+`MachineCheckedChristoffelC0ConstantReceipt`,
+`SchwarzschildShellAExactCalculationReceipt`, and
+`GRSchwarzschildFiniteRicciBianchiPerturbationReceipt`.
+The exact remaining GR variables for the next real proof tranche are the
+canonical aggregation targets, not new receipt surfaces: ordered rational
+gauge toolkit variables
+`orderedRationalGaugeD_QQZeroLawPrimitive`,
+`orderedRationalGaugeD_QQSymmetryLawPrimitive`,
+`orderedRationalGaugeD_QQTriangleLawPrimitive`,
+`orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive`,
+`orderedRationalGaugeThreeMinusNPositiveLawPrimitive`,
+`orderedRationalGaugeScale48Is48`, and
+`orderedRationalGaugeScale48NonnegativeLawPrimitive`; Shell A denominator
+variables
+`orderedRationalShellARadialMinusSchwarzschildLowerBoundIs1`,
+`orderedRationalShellAInverseMetricAbsMaxIs4`,
+`orderedRationalShellAMetricDerivativeAbsMaxIs8`,
+`orderedRationalShellAChristoffelFormulaEnvelopeIs72`, and
+`orderedRationalShellAReciprocalBoundsFeedChristoffelFormulaC0Stable`;
+Christoffel derivative-bound variables
+`orderedRationalShellA_C_GammaIs1`,
+`orderedRationalShellA_CPrime_GammaNumeratorIs26`,
+`orderedRationalShellA_CPrime_GammaDenominatorIs27`, and
+`orderedRationalShellARequestedInequalityPrimitive`; C0-stability variables
+`machineCheckedChristoffelL_GammaIs48`,
+`selectedSymbolicRationalChristoffelC0FormulaStabilityIs48`, and
+`selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound`; and
+Ricci extraction variables
+`grDiscreteRicciExtractionConnectionErrorBoundExtractionDependencyNameExact`,
+`grDiscreteRicciExtractionPointCRConstantIs48`,
+`grDiscreteRicciExtractionShellACRConstantIs80`,
+`grDiscreteRicciExtractionConservativeCRExtractionConstantIs640`, and
+`grSchwarzschildFiniteRicciPerturbationPointCRConstantIs48`.
+`GRProofArchitectureAggregationTest`
+checks the current imports and aggregates the selected Levi-Civita,
+inverse-metric C0/derivative, shell-bound, Ricci-readiness, selected-pair
+identity, zero-epsilon quantitative bridge, interval Ricci constant-routing,
+and machine-checked constant surfaces. Full contracted Bianchi promotion,
+continuum Ricci convergence, Schwarzschild vacuum/Birkhoff, W4/Candidate256,
+Clay, and terminal promotion remain false.
+The finite Base369 algebra pass adds an internal scalar/ring layer:
+`DASHI.Foundations.Base369RingShape`,
+`DASHI.Foundations.Base369Nat`,
+`DASHI.Foundations.Base369TriTruthField`,
+`DASHI.Foundations.Base369HexTruthRing`,
+`DASHI.Foundations.Base369NonaryTruthRing`,
+`DASHI.Foundations.Base369FiniteRingLaws`, and
+`DASHI.Foundations.Base369FiniteRingRegression`, with
+`DASHI.Foundations.Base369NumeralOntologyBoundary` as the role-separation
+receipt. `Base369Nat` is a DASHI-namespaced builtin-only compatibility surface
+for the tiny `%`/`NonZero` support that `Base369` needs; the repo does not
+vendor or shadow `Data.Nat.Base`. `TriTruth` is recorded as the GF(3) field
+carrier with additive and multiplicative inverse receipts; `HexTruth` and
+`NonaryTruth` are recorded as rings with typed zero-divisor witnesses, not
+fields. The ontology boundary separates algebraic carriers, 15-prime
+coordinate boundaries, and UFT traversal addresses, and marks narrative
+readings as non-promoting. This gives the linear-analysis scalar-law socket a
+local finite algebra inhabitant without promoting real/complex completeness,
+spectral theorem authority, physical calibration, or Clay claims.
+The discrete-to-transcendental bridge is now recorded as a bounded formal
+stack: `DASHI.Foundations.SurrealCompactification`,
+`DASHI.Foundations.SurrealCompactificationIntake`,
+`DASHI.Foundations.SurrealCompactificationRationalBridge`,
+`DASHI.Foundations.SurrealCompactificationOrderedQQBridge`,
+`DASHI.Foundations.SurrealCompactificationTailBoundBridge`,
+`DASHI.Metric.AgreementSurrealGaugeBridge`,
+`DASHI.Geometry.NatUltrametricCompletenessBridge`,
+`DASHI.Algebra.StageQuotientIrreversibilityBoundary`, and
+`DASHI.Physics.Closure.CRTMonsterFixedPointCompactificationBoundary`, all wired
+through `DASHI.Everything`. These surfaces separate the checked finite content
+from the extension story: finite trit towers, prefix/suffix agreement metrics,
+Nat-valued ultrametric completeness, the stage-quotient irreversibility seam,
+and the CRT/J fixed-point receipts are recorded locally. The intake layer now
+names the exact remaining math sockets: rational/surreal carrier, balanced
+ternary embedding, symbolic `3^-n` gauge, antitone proof, truncation/kappa,
+tail-bound, and external authority gates. The rational bridge adds a checked
+symbolic finite balanced-ternary approximant surface without constructing or
+promoting a QQ/No ordered carrier. The ordered-QQ and tail-bound bridges now
+name the exact ordered carrier, antitone, geometric-series-tail, and
+kappa-tail-bound law shapes while keeping rational order authority and
+analytic error proofs fail-closed. Surreal arithmetic, the
+`agreeDepth -> 3^-n` gauge as an isometry, compactification error theorems,
+Monster moonshine theorem authority, Carnot/thermodynamic promotion, and any
+terminal Clay or physics claim remain fail-closed.
+The proof-term strengthening layer adds
+`DASHI.Foundations.SurrealCompactificationQQCarrier`,
+`DASHI.Foundations.SurrealCompactificationBalancedTernaryEmbedding`, and
+`DASHI.Foundations.SurrealCompactificationProofTermIndex`, and strengthens
+`DASHI.Metric.AgreementSurrealGaugeBridge` plus
+`DASHI.Foundations.SurrealCompactificationTailBoundBridge`. It records an
+internal bounded QQ-like carrier, checked balanced-trit embedding recursion,
+symbolic `3^-n` antitone/gauge receipts, and structural kappa/truncation
+receipts while leaving external QQ/No authority, analytic interval/tail
+inequalities, and compactification promotion false.
+The first downloaded external-source custody layer is also present:
+`DASHI.Promotion.DownloadedAuthorityArtifactReceipt` binds local
+`data/authority/si_metrology_20260615/` BIPM/NIST artifacts and
+`data/authority/theorem_locators_20260615/` Moonshine/Carnot locator artifacts
+to SHA-256 digests, byte counts, and access date `2026-06-15`. It records
+raw-text ingestion rows for the exact `Delta nu Cs`, `c`, and `h` strings from
+the NIST all-constants ASCII table. This is source custody only: accepted SI
+authority tokens, NIST ASD spectral-token acceptance, Monster/Moonshine proof
+authority, Carnot theorem authority, and all promotions remain false.
 
 Current cross-lane scope-resolution boundary: `DASHI.Promotion.ObligationIndex`
 now includes a six-row `scopeResolutionSummaries` layer. The checked surfaces
@@ -66,6 +503,86 @@ exterior chain, a 20-field numeric authority payload validator, and finite-mode
 Schrodinger/Born closure. They still do not promote NS Clay, physical chemistry
 or wet-lab chemistry, broad Standard Model, Maxwell field equations, measured
 numeric values, infinite-dimensional quantum/QFT, or terminal unification.
+
+Current atomic-clock / SI-second empirical boundary:
+`DASHI.Physics.Closure.AtomicClockSISecondCalibrationBridge`,
+`DASHI.Promotion.Cs133NumericAuthorityPayloadRequest`,
+`DASHI.Physics.Closure.QuantumClockSIObservableBridge`,
+`DASHI.Physics.Closure.StoneSISecondTimeParameterBridge`, and
+`DASHI.Promotion.RydbergClockMetreBridge` record the first narrow metrology
+contact lane. They expose the SI time/frequency carrier shape, the exact
+Cs-133 integer/text request, quantum-clock phase/visibility/squeezing
+observable requirements, Gate 5 time-parameter requirements, and the
+clock-to-metre route needed before Rydberg wavenumber use. The lane remains
+fail-closed: no BIPM/NIST artifact is loaded, no authority token is locally
+constructed, no numeric payload is promoted, and W4/Candidate256, Stone,
+chemistry, spectroscopy, and terminal promotion remain false.
+The follow-up SI-second adapter tranche adds
+`DASHI.Physics.Closure.AtomicClockCandidate256DimensionAdapter`,
+`DASHI.Promotion.SIDefiningConstantsAuthorityArtifactRequest`,
+`DASHI.Promotion.PlanckHbarSIPayloadRequest`,
+`DASHI.Physics.Closure.QuantumClockProperTimeRedshiftBridge`, and
+`DASHI.Physics.Closure.AtomicClockW4ReceiptAdapterRequest`. These sharpen the
+Candidate256 dimension-vector adapter, exact Cs/c/h artifact request rows,
+derived `hbar` request, leading uniform-field atomic-clock redshift law, and
+the W4 receipt field mapping. They remain request/adaptor surfaces only: the
+constructorless Candidate256 authority token and external calibration receipt
+are still not inhabited.
+The third SI-second/metrology tranche adds
+`DASHI.Promotion.SIExactConstantParsedCarrierRequest`,
+`DASHI.Physics.Closure.AtomicClockSecondRealTimeTopologyRequest`,
+`DASHI.Physics.Closure.QuantumClockDimensionlessObservableLaw`,
+`DASHI.Promotion.SIMetreFromSecondAndCAdapter`, and
+`DASHI.Physics.Closure.W4AtomicClockCandidateReceiptChecklist`. These record
+structural parsed carriers for exact SI constants, the Real-time topology
+request needed for Stone strong continuity, local dimensionless checks for
+clock phase and redshift observables, the metre-from-second-and-`c` route for
+Rydberg use, and a W4/Candidate256 external receipt checklist. They still do
+not load artifacts, accept SHA256/access-date evidence, construct authority
+tokens, promote numeric payloads, or claim empirical clock/redshift adequacy.
+The fourth SI/metrology evidence tranche adds
+`DASHI.Promotion.SIDefiningConstantAuthorityEvidenceChecklist`,
+`DASHI.Promotion.SIExactConstantConsumerIngestionBridge`,
+`DASHI.Physics.Closure.StoneHbarDimensionlessActionBridge`,
+`DASHI.Physics.Closure.QuantumClockEmpiricalRedshiftReceiptRequest`,
+`DASHI.Promotion.RydbergSpectroscopyAuthorityPayloadRequest`, and
+`DASHI.Promotion.SIMetrologyPayloadDependencyDAG`. These normalize the exact
+artifact-evidence sockets, consumer-ingestion routing, `H * t / hbar`
+dimensionless action bridge, empirical redshift receipt request, Rydberg /
+NIST ASD spectroscopy authority request, and the strict dependency DAG. They
+remain fail-closed: no BIPM/NIST/CODATA artifact, checksum, access date,
+empirical receipt, consumer ingestion, spectroscopy token, W4 token, or
+terminal promotion is locally constructed.
+The source-locator pass adds
+`DASHI.Promotion.SIMetrologyExternalSourceLocator` and
+`DASHI.Promotion.ExternalTheoremAuthoritySourceLocator`. These rows record
+BIPM SI Brochure, NIST constants, NIST ASD, Monster/Moonshine, and
+Carnot/thermodynamic source-locator targets plus raw SI constant text where
+available. They are locator/intake rows only: SHA256, access-date evidence,
+ingestion receipts, accepted authority tokens, proof authority, and promotion
+remain false.
+
+Current NS-GW-1 nonlinear-Riesz diagnostic boundary:
+`scripts/ns_gateway1_strain_cross_derivative_diagnostic.py` implements the
+first executable probe for the proposed signed T(b) route. It computes the
+strain eigenframe at the enstrophy maximum and reports `d_e1 d_e2 lambda2` for
+periodic Taylor-Green or NPZ velocity fields; `scripts/ns_gateway1_fixture_npz.py`
+generates deterministic fixtures for that input contract. The checked Agda
+surface is `DASHI.Physics.Closure.NSGateway1StrainCrossDerivativeDiagnosticReceipt`,
+which is imported by the full-Clay gateway and blocker-chain aggregation
+receipts. The current synthetic/Taylor-Green degeneracy interpretation is
+only a diagnostic sanity check: `zero_within_tolerance`,
+`negative_supports_nonpositive_rule`, or `eigenframe_degenerate = true` does
+not count as DNS sign confirmation and cannot promote the signed T(b) /
+nonlinear Riesz route. The next required real calculation is to run the same
+JSON diagnostic on a credible periodic Taylor-Green DNS snapshot supplied as
+NPZ with validated `N`, `domain_length`, `grid_spacing`, `amplitude`, `time`,
+`snapshot_index`, and `source`, then report
+`cross_derivative_e1_e2_lambda2_at_max`, `sign_classification`,
+`sign_tolerance`, `min_local_eigenvalue_gap`, and `eigenframe_degenerate`.
+This lane is numerical evidence routing only: DNS confirmation, the nonlinear
+Riesz sign condition, residual depletion, full Clay NS, and Clay promotion
+remain false/open.
 
 Current Standard Model first-principles boundary:
 `DASHI.Promotion.ObligationIndex` now includes a nine-row
@@ -646,6 +1163,16 @@ symmetric result. `MechanismExhaustionForFullClayNS`,
 `GeneralSmoothFiniteEnergyNSRegularity`, `full_clay_ns_solved`,
 `fullClayNSSolved`, `fullNavierStokesSolutionConstructed`, and
 `clayNavierStokesPromoted` remain false.
+
+Current full-Clay NS blocker-chain intake is fail-closed: Chain A is residual
+depletion exact shapes, Chain B is microlocal/topological exact shapes, Chain C
+is general-data reduction exact shapes, and the single gateway theorem must
+consume all three before any full Clay target can move. Intended receipt names,
+if implemented, are `NSFullClayBlockerChainAggregationReceipt.agda` and
+`NSFullClayGatewayTheoremBoundaryReceipt.agda`. Scoped Hou-Luo/Sprint 158
+readiness is not a full-Clay proof; full Clay remains false/open until a
+nonlinear Riesz sign condition or `H^{1/2}` backwards uniqueness theorem is
+supplied.
 
 Current NS Sprint 159 boundary: the repo records the full-Clay jump from the
 scoped symmetric Hou-Luo theorem as an external-authority boundary, not as an
@@ -3522,6 +4049,7 @@ depends on that surface.
   `AtomicChemistryRecoveryTheorem.agda`,
   `PhysicsUnificationToCanonicalClosureAdapter.agda`
 - Repo reader metasystem: `Docs/RepoMetasystem.puml` and `Docs/RepoMetasystem.svg`
+- Tao/yinyang/Qi metasystem: `Docs/diagrams/TaoQiPolarityMetasystem.puml`
 - Public Paper 1 narrative flow: `Docs/PublicPaperNarrativeFlow.puml` and
   `Docs/PublicPaperNarrativeFlow.svg`
 - Paper 1 manuscript source: `Docs/papers/drafts/PaperDraftWorkingFolder/Paper1_Manuscript.md`
@@ -3695,12 +4223,163 @@ depends on that surface.
   output as semantic authority. The tetralemma bridge also records the
   `TriTruth -> ResidualLevel` embedding and proves that `contradiction` is not
   in the tone image.
-  `Ontology/Hecke/PNFResidualBridge.agda` adds the Hecke-side PNF fibre
-  adapter: quotient projection equality is a candidate-pool fibre, stable /
-  illegal / other defects map to `partial` / `contradiction` / `noTypedMeet`,
-  and illegal defects preserve critical pressure under residual joins.
-  `WrapperState` now includes `performativeEvidence`, which maps to
-  `scopeExceeded6` when emitted by the pipeline; `PNFEmissionReceipt` records
+	  `Ontology/Hecke/PNFResidualBridge.agda` adds the Hecke-side PNF fibre
+	  adapter: quotient projection equality is a candidate-pool fibre, stable /
+	  illegal / other defects map to `partial` / `contradiction` / `noTypedMeet`,
+	  and illegal defects preserve critical pressure under residual joins.
+	  The PNF-as-field architecture is now also checked:
+	  `DASHI/Interop/PNFSpectralFieldCore.agda` records refs, fibres, chamber
+	  projections, an explicit structural/evidence-time product base, residual
+	  edges, braid paths, support packets, and candidate refs over the existing
+	  `PredicatePNF` carrier;
+	  `DASHI/Interop/PNFSpectralFieldGraph.agda` records typed residual graph
+	  edges, structural/evidence/time/transport/contradiction edge-origin
+	  classes, signed contradiction/frustration handling, and
+	  operator-relative Laplacian/spectral-coordinate surfaces;
+	  `DASHI/Interop/PNFBraidTransportField.agda` records source/time braid
+	  transport as proposed-only candidate navigation with explicit partial
+	  transport and `noTypedMeet` strand termination;
+	  `DASHI/Interop/PNFSpectralVectorIndex.agda` records the
+	  vector-proposes/resolver-anchors/selector-admits/ITIR-commits authority
+	  chain plus operator-relative metric and vector-arithmetic-as-proposal
+	  receipts; and `DASHI/Interop/PNFSpectralFieldArchitectureReceipt.agda`
+	  aggregates the whole field stack, including the PNF-only summary pipeline
+	  and graph/DAG/tree projection split. The follow-up invariant tranche records
+	  the exact registry/span/version anchoring surface
+	  (`DASHI/Interop/PNFSpectralRegistryAnchoring.agda`), residual/fibre
+	  comparability and contradiction monotonicity
+	  (`DASHI/Interop/PNFResidualFieldInvariants.agda`), coordinate
+	  rebuildability and text-fallback non-authority
+	  (`DASHI/Interop/PNFSpectralCoordinateRebuildability.agda`),
+	  resolver/selector/ITIR package commitment
+	  (`DASHI/Interop/PNFResolverSelectorCommitment.agda`), and the
+	  signed-Laplacian-`Δ0`-first Hodge/topology boundary
+	  (`DASHI/Interop/PNFHodgeResidualTopology.agda`).
+	  The product guarantee is coexistence, not promotion: spectral proximity
+	  and receipt-anchored identity may both hold, but only spectral proximity
+	  plus exact/partial residual corroboration plus receipt/span anchoring marks
+	  a corroborated candidate. That candidate still does not collapse into
+	  truth, support, or admissibility.
+	  `DASHI/Promotion/PNFSpectralTradingSignalBoundary.agda` adds the
+	  Nashi/Mirror-style news/trading consumer boundary, and
+	  `DASHI/Promotion/PNFSpectralEmpiricalBasinValidation.agda` records
+	  field-window, basin, separator, MDL/cost, holdout, and cost-stress gates.
+	  On the trading side, a braid signature with residual corroboration is only
+	  the strongest candidate form, still gated by holdout validation.
+	  Financial advice, market prediction, production trading authority,
+	  empirical adequacy, runtime parser, ANN backend, semantic truth,
+	  support/admissibility promotion, Hodge authority, manual semantic labels,
+	  threshold fishing, and trading truth all remain explicitly fail-closed.
+	  The cross-domain interpretation boundary tranche now records the same
+	  discipline for broader analogy surfaces:
+	  `DASHI/Promotion/CrossDomainClaimPromotionBoundary.agda` blocks promotion
+	  from mathematical, structural, evidence-graph, vector, product, and
+	  spatial-practice readings into empirical, political, economic, clinical,
+	  environmental, spiritual, legal, trading, support, or admissibility
+	  authority without explicit bridge receipts;
+	  `DASHI/Interop/PNFVoidScopeBoundary.agda` separates same-fibre
+	  `NO_TYPED_MEET` from cross-domain `SCOPE_EXCEEDED`/fibre collapse;
+	  `DASHI/Algebra/StageToneInterpretationBoundary.agda` keeps
+	  `stageTone`/tetralemma rows as checked carrier facts while leaving
+	  social-development, theological, Lacanian, Hegelian, political, and
+	  economic readings non-promoting; `DASHI/Foundations/PAdicSocioeconomicBoundary.agda`
+	  records the 3-adic identity as mathematics-only; `DASHI/Physics/Closure/MonsterAnalogyPromotionBoundary.agda`
+	  consumes the checked CRT/J/196884 arithmetic chain without promoting
+	  Monster or "first genuinely new" analogy claims; and
+	  `DASHI/Promotion/PoliticalRoleAssignmentBoundary.agda` permits only
+	  opaque evidence-graph structural characterization, not live actor/conflict
+	  adjudication, dehumanizing classifier authority, violence/erasure
+	  authority, or legal/policy authority.
+	  The operator-theory role grammar is now factored through
+	  `DASHI/Interop/RoleGrammarCore.agda`: reusable `DomainLabel x
+	  FormalRole` families, role functors, generic typed terms, bridge
+	  strength, admission status, and authority classes are checked once and
+	  consumed by the downstream boundary modules.  This is a proof-surface
+	  compression/maintenance optimization only; it does not promote any
+	  domain-specific empirical, legal, clinical, cultural, spiritual,
+	  scientific, support, trading, or admissibility authority.
+	  The same reusable-core optimization now covers adjacent boundaries:
+	  `DASHI/Core/GenericReceipt.agda` centralizes repo-wide receipt metadata,
+	  fail-closed promotion bits, non-promotion list proofs, and generic
+	  adapters; `DASHI/Core/FiniteReceiptList.agda` centralizes finite
+	  list-count/canonical-list/all-false boilerplate;
+	  `DASHI/Promotion/AuthorityGateCore.agda` centralizes closed authority
+	  gates; `DASHI/Interop/VectorNonAuthorityCore.agda` centralizes
+	  vector/spectral/proximity/ranking/arithmetic proposal-only rows;
+	  `DASHI/Interop/ResidualBoundaryCore.agda` centralizes
+	  exact/partial/no-typed-meet/scope-exceeded/contradiction boundary
+	  vocabulary; `DASHI/Interop/PNFPackageCore.agda` centralizes PNF
+	  query/resolver/selector package rows; `DASHI/Interop/SpectralOperatorShapeCore.agda`
+	  centralizes signed-Laplacian/Hodge diagnostic operator shapes;
+	  `DASHI/Foundations/CarrierPromotionBoundaryCore.agda` centralizes
+	  Surreal/QQ carrier non-promotion receipts;
+	  `DASHI/Physics/Closure/ExternalAuthorityImportCore.agda` centralizes
+	  absent external theorem/token/artifact import receipts; and
+	  `DASHI/Promotion/ReceiptSummaryCore.agda` factors non-promoting
+	  receipt-summary boilerplate.  These are repo-maintenance and
+	  proof-surface compression layers, not new promotion authority.  Current
+	  consumer migrations are compatibility adapters over existing receipts:
+	  they preserve public receipt names while routing repeated list-count,
+	  external-authority, carrier non-promotion, PNF package, and
+	  spectral/Hodge diagnostic shapes through the reusable cores.
+	  The fetched `Domain x FormalRole` correction is now also checked:
+	  `DASHI/Interop/TypedTermRoleFunctor.agda` records typed terms as
+	  surface/entity plus domain plus formal role, with a domain-indexed
+	  role-family generator and multi-role water/donkey examples;
+	  `DASHI/Interop/StratifiedTypedComparisonLaw.agda` records comparison law
+	  v2: same-domain/same-role content comparison is native,
+	  different-domain/same-role comparison is role-structural, divergent
+	  predicate/argument structure is `NO_TYPED_MEET` at the current inspection
+	  level, cross-domain content identity requires bridge evidence, and
+	  implicit background chains remain partial with named residuals;
+	  `DASHI/Interop/InspectionRelativeNoTypedMeet.agda` blocks the global
+	  reading of `NO_TYPED_MEET` as eternal incommensurability;
+	  `DASHI/Interop/BackgroundDistributionBridge.agda` names explicit,
+	  causal-chain, distributional, and proof-by-omission bridge strengths
+	  without promoting empirical or policy claims;
+	  `DASHI/Interop/WikidataCandidateRoleBridge.agda` places Wikidata as a
+	  candidate entity/domain-hint layer while DASHI/PNF assigns role/fibre and
+	  ITIR commits receipts; and `DASHI/Culture/QiOperatorTheoryBoundary.agda`
+	  records the Feng-Shui/Qi operator-theory mapping as non-promoting role
+	  grammar with Sheng/Sha/Si spectral rows and a Sweetgrass reciprocity gate.
+	  The Tao follow-on stack now keeps Daodejing Book One chapter payload as
+	  candidate-only source receipts and bridges it into the existing Qi
+	  carrier/operator/meditation surfaces without promoting doctrine,
+	  philology, spirituality, clinical practice, or metaphysical authority:
+	  `DASHI/Culture/TaoChapterReadingReceipt.agda`,
+	  `DASHI/Culture/TaoOperatorGrammar.agda`,
+	  `DASHI/Culture/YinYangSymbolGeometryBoundary.agda`,
+	  `DASHI/Culture/YinYangPolarityBoundary.agda`,
+	  `DASHI/Interop/TaoYinYangAdapter.agda`,
+	  `DASHI/Interop/YinYangQiAdapter.agda`,
+	  `DASHI/Interop/PolarityPhaseFieldBridge.agda`,
+	  `DASHI/Interop/PolarityBettiSupportBoundary.agda`,
+	  `DASHI/Interop/BettiQiAdapter.agda`,
+	  `DASHI/Interop/CarryCompletionSpectralBridge.agda`,
+	  `DASHI/Interop/TaoQiReadingAdapter.agda`,
+	  `DASHI/Interop/TaoMeditationQiAdapter.agda`, and
+	  `DASHI/Promotion/TaoQiObligationIndex.agda`.
+	  The external formalism provenance is recorded directly in
+	  `canonicalTaoSourceReceipt`, with the source URL
+	  `https://pastebin.xware.online/paste/20260621_131250_taoteching_lean`
+	  preserved as candidate-only provenance rather than promoted authority.
+	  The current canonical interpretive stack is:
+	  exact carry/completion/quotient seam receipts ->
+	  Tao source receipt -> Tao operator grammar -> yin-yang symbol geometry
+	  boundary -> yin/yang polarity boundary -> Tao-to-yinyang adapter ->
+	  yinyang-to-Qi adapter -> 369/voxel/wave polarity-phase-field bridge ->
+	  Betti support boundary -> Betti-to-Qi adapter ->
+	  Qi carrier/operator/meditation surfaces, with
+	  `DASHI/Promotion/PolarityFieldObligationIndex.agda` and
+	  `DASHI/Promotion/TaoQiObligationIndex.agda` keeping every promotion path
+	  blocked.
+	  `DASHI/Interop/CarryCompletionSpectralBridge.agda` keeps the 3-adic
+	  completion identity, the moonshine `196883 + 1 = 196884` bridge, the
+	  finite stage-quotient overflow seam, and the `0..11` stage-fibre
+	  carry-depth surface on the exact/receipt side before Tao/yinyang/Qi
+	  candidate rereadings attach.
+	  `WrapperState` now includes `performativeEvidence`, which maps to
+	  `scopeExceeded6` when emitted by the pipeline; `PNFEmissionReceipt` records
   parser profile, reducer profile, source span, and emitted atom so residual
   comparison is receipt-driven rather than hand-labelled.
   `Docs/PNFCaseStudiesWatergateIran.md` records Watergate/Iran as conditional
@@ -5484,6 +6163,10 @@ Current refactor status:
 The repo now carries a local merge-prep Nix surface intended to harden an
 upstream `nix`/`zkperf` merge without overstating what it validates.
 
+- Consumer install/import instructions live in `INSTALL.md`. The intended
+  downstream route is `agda -l dashi-agda ...` after registering
+  `standard-library`, `dchott-agda`, `cubical-0.9`, and `dashi-agda` with
+  Agda.
 - `nix build .#check` is the authoritative Nix check and mirrors the current
   GitHub workflow by typechecking `DASHI/Everything.agda`.
 - `nix build .#merge-smoke` is the recursive merge-prep smoke check and walks
@@ -5495,7 +6178,13 @@ upstream `nix`/`zkperf` merge without overstating what it validates.
 - `agda-record-all` is expected to recurse over that same merge-prep target
   surface rather than only top-level files.
 - `dashi-agda.agda-lib` is now present as the local library surface used by
-  this tooling layer.
+  this tooling layer. It depends on the named local dependency libraries
+  `dchott-agda` and `cubical-0.9` instead of treating those trees only as raw
+  include paths.
+- `dchott-agda.agda-lib` is the repo-local wrapper for the flat
+  `DCHoTT-Agda/` submodule. The Nix flake pins matching `dchottSrc` and
+  `cubicalSrc` source inputs and exposes `.#dchott-agda`, `.#cubical`,
+  `.#dashi-agda`, and `.#agda-with-dashi-deps`.
 - Any tracked DA51 / zkperf JSONL examples should be read as sample witness
   outputs, not as canonical reproducibility fixtures.
 

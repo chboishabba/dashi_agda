@@ -1,0 +1,1274 @@
+{
+  "C": "One stdlib Python script writes deterministic JSON only.",
+  "F": "Missing pressure or proxy data blocks a definitive timeseries sign audit.",
+  "G": "Authority stays false and no theorem or Clay promotion is claimed.",
+  "L": "pressure frame -> spectral Laplacian -> velocity-derived source proxy -> per-frame sign ranking -> aggregate stability",
+  "O": "Audit a pressure sign and convention mismatch on one NS frame.",
+  "P": "Use the majority sign, scale spread, and sign-change count to localize the convention drift across time.",
+  "R": "Compare tr(S^2) - |omega|^2 / 4 against +Delta p and -Delta p for each selected frame.",
+  "S": "The audit is fail-closed and records comparison evidence without any theorem or promotion claim.",
+  "aggregate_counts": {
+    "minus_best_count": 0,
+    "plus_best_count": 13,
+    "selected_frame_count": 13,
+    "valid_frame_count": 13
+  },
+  "aggregate_metrics": {
+    "best_scale_stats": {
+      "max": 0.17672763906546698,
+      "mean": 0.17532485071188417,
+      "median": 0.17557951517290327,
+      "min": 0.17270948315397366,
+      "std": 0.001282085427409596
+    },
+    "best_sign_counts": {
+      "minus": 0,
+      "plus": 13
+    },
+    "best_sign_fraction": {
+      "minus": 0.0,
+      "plus": 1.0
+    },
+    "raw_correlation_stats": {
+      "max": 0.20820202264790805,
+      "mean": 0.2064701109532431,
+      "median": 0.20719874707795155,
+      "min": 0.20304155028067694,
+      "std": 0.0016907915199309515
+    },
+    "raw_rmse_stats": {
+      "max": 2.9911801055634104,
+      "mean": 2.4023137587916463,
+      "median": 2.3675083765597686,
+      "min": 1.9259812104325587,
+      "std": 0.3288841771309114
+    },
+    "scaled_correlation_stats": {
+      "max": 0.20820202264792265,
+      "mean": 0.20647011095324655,
+      "median": 0.20719874707794206,
+      "min": 0.203041550280673,
+      "std": 0.0016907915199351525
+    },
+    "scaled_rmse_stats": {
+      "max": 2.4541283494172017,
+      "mean": 1.9716405033896791,
+      "median": 1.9439840043946777,
+      "min": 1.5791067041445448,
+      "std": 0.270224464316656
+    },
+    "valid_frame_count": 13
+  },
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "changed_paths": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_pressure_poisson_sign_timeseries_N128_20260619.json"
+  ],
+  "contract": "ns_pressure_poisson_sign_timeseries_audit",
+  "domain_length": 128.0,
+  "domain_length_source": "index_units",
+  "errors": [],
+  "frame_count": 13,
+  "frame_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "frames": null,
+  "input": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_pressure_poisson_sign_timeseries_N128_20260619.json",
+  "pressure_source": "pressure_snapshots",
+  "pretty": true,
+  "requested_domain_length": null,
+  "rows": [
+    {
+      "best_scale": 0.17270948315397366,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.17270948315397366,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 3.4494982976830686,
+          "scaled_rmse": 2.4799597529452466,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20304155028067694,
+        "raw_rmse": 2.9911801055634104,
+        "scaled_correlation": 0.203041550280673,
+        "scaled_rmse": 2.4541283494172017,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20304155028067694,
+          "raw_rmse": 3.4494982976830686,
+          "scaled_correlation": null,
+          "scaled_rmse": 2.4799597529452466,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.17270948315397366,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20304155028067694,
+          "raw_rmse": 2.9911801055634104,
+          "scaled_correlation": 0.203041550280673,
+          "scaled_rmse": 2.4541283494172017,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 0,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20304155028067694,
+      "raw_rmse": 2.9911801055634104,
+      "scaled_correlation": 0.203041550280673,
+      "scaled_rmse": 2.4541283494172017,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 21.976815691981827,
+        "mean": 1.748881877391101,
+        "min": -9.506671253115703,
+        "rmse_vs_zero": 2.4799597529452466
+      },
+      "spectral_delta_p": {
+        "max": 20.495213233853782,
+        "mean": 1.7618285302889447e-19,
+        "min": -18.082979454463125,
+        "rmse_vs_zero": 2.0670989547165157
+      },
+      "spectral_negative_delta_p": {
+        "max": 18.082979454463125,
+        "mean": -1.7618285302889447e-19,
+        "min": -20.495213233853782,
+        "rmse_vs_zero": 2.0670989547165157
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.17322867623874644,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.17322867623874644,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 3.307972198105267,
+          "scaled_rmse": 2.3779510951657827,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20366023390046903,
+        "raw_rmse": 2.8672899276408743,
+        "scaled_correlation": 0.2036602339004742,
+        "scaled_rmse": 2.3530402410708686,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20366023390046903,
+          "raw_rmse": 3.307972198105267,
+          "scaled_correlation": null,
+          "scaled_rmse": 2.3779510951657827,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.17322867623874644,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20366023390046903,
+          "raw_rmse": 2.8672899276408743,
+          "scaled_correlation": 0.2036602339004742,
+          "scaled_rmse": 2.3530402410708686,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 1,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20366023390046903,
+      "raw_rmse": 2.8672899276408743,
+      "scaled_correlation": 0.2036602339004742,
+      "scaled_rmse": 2.3530402410708686,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 20.240668295875935,
+        "mean": 1.6772829565020106,
+        "min": -8.77038485242805,
+        "rmse_vs_zero": 2.3779510951657827
+      },
+      "spectral_delta_p": {
+        "max": 19.907121884025713,
+        "mean": -8.131516293641283e-19,
+        "min": -16.985888682839597,
+        "rmse_vs_zero": 1.9817579027958883
+      },
+      "spectral_negative_delta_p": {
+        "max": 16.985888682839597,
+        "mean": 8.131516293641283e-19,
+        "min": -19.907121884025713,
+        "rmse_vs_zero": 1.9817579027958883
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.17392361515740737,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.17392361515740737,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 3.177442693220063,
+          "scaled_rmse": 2.2834775965509353,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20450898433142162,
+        "raw_rmse": 2.7525174826346226,
+        "scaled_correlation": 0.20450898433141443,
+        "scaled_rmse": 2.2593599106395903,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20450898433142162,
+          "raw_rmse": 3.177442693220063,
+          "scaled_correlation": null,
+          "scaled_rmse": 2.2834775965509353,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.17392361515740737,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20450898433142162,
+          "raw_rmse": 2.7525174826346226,
+          "scaled_correlation": 0.20450898433141443,
+          "scaled_rmse": 2.2593599106395903,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 2,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20450898433142162,
+      "raw_rmse": 2.7525174826346226,
+      "scaled_correlation": 0.20450898433141443,
+      "scaled_rmse": 2.2593599106395903,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 19.25410408907807,
+        "mean": 1.6107921660273665,
+        "min": -8.03538747451401,
+        "rmse_vs_zero": 2.2834775965509353
+      },
+      "spectral_delta_p": {
+        "max": 19.24134601227271,
+        "mean": -1.8973538018496328e-19,
+        "min": -15.154851191789131,
+        "rmse_vs_zero": 1.9031493232280456
+      },
+      "spectral_negative_delta_p": {
+        "max": 15.154851191789131,
+        "mean": 1.8973538018496328e-19,
+        "min": -19.24134601227271,
+        "rmse_vs_zero": 1.9031493232280456
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.1747034697475604,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.1747034697475604,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 3.056693119792066,
+          "scaled_rmse": 2.1958046696915496,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20547510057391363,
+        "raw_rmse": 2.646067339240367,
+        "scaled_correlation": 0.20547510057392568,
+        "scaled_rmse": 2.1723909289909495,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20547510057391363,
+          "raw_rmse": 3.056693119792066,
+          "scaled_correlation": null,
+          "scaled_rmse": 2.1958046696915496,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.1747034697475604,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20547510057391363,
+          "raw_rmse": 2.646067339240367,
+          "scaled_correlation": 0.20547510057392568,
+          "scaled_rmse": 2.1723909289909495,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 3,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20547510057391363,
+      "raw_rmse": 2.646067339240367,
+      "scaled_correlation": 0.20547510057392568,
+      "scaled_rmse": 2.1723909289909495,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 19.3488405964989,
+        "mean": 1.5489060868578797,
+        "min": -7.051622331231606,
+        "rmse_vs_zero": 2.1958046696915496
+      },
+      "spectral_delta_p": {
+        "max": 17.24146727486956,
+        "mean": 1.7618285302889447e-19,
+        "min": -13.079267783739981,
+        "rmse_vs_zero": 1.8305639701332916
+      },
+      "spectral_negative_delta_p": {
+        "max": 13.079267783739981,
+        "mean": -1.7618285302889447e-19,
+        "min": -17.24146727486956,
+        "rmse_vs_zero": 1.8305639701332916
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.17546075648158369,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.17546075648158369,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 2.944376777097206,
+          "scaled_rmse": 2.1141192053276137,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20642638338178948,
+        "raw_rmse": 2.5470390586994913,
+        "scaled_correlation": 0.20642638338178237,
+        "scaled_rmse": 2.0913604453479793,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20642638338178948,
+          "raw_rmse": 2.944376777097206,
+          "scaled_correlation": null,
+          "scaled_rmse": 2.1141192053276137,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.17546075648158369,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20642638338178948,
+          "raw_rmse": 2.5470390586994913,
+          "scaled_correlation": 0.20642638338178237,
+          "scaled_rmse": 2.0913604453479793,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 4,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20642638338178948,
+      "raw_rmse": 2.5470390586994913,
+      "scaled_correlation": 0.20642638338178237,
+      "scaled_rmse": 2.0913604453479793,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 19.665042807988353,
+        "mean": 1.4910989358549867,
+        "min": -6.177201783976892,
+        "rmse_vs_zero": 2.1141192053276137
+      },
+      "spectral_delta_p": {
+        "max": 17.9733744156347,
+        "mean": -3.1848438816761693e-19,
+        "min": -12.200918536991127,
+        "rmse_vs_zero": 1.763201994012597
+      },
+      "spectral_negative_delta_p": {
+        "max": 12.200918536991127,
+        "mean": 3.1848438816761693e-19,
+        "min": -17.9733744156347,
+        "rmse_vs_zero": 1.763201994012597
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.1760950027178835,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.1760950027178835,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 2.839153515267922,
+          "scaled_rmse": 2.0375928186853485,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20724170745442033,
+        "raw_rmse": 2.4544898149490932,
+        "scaled_correlation": 0.20724170745441614,
+        "scaled_rmse": 2.0154751660378305,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20724170745442033,
+          "raw_rmse": 2.839153515267922,
+          "scaled_correlation": null,
+          "scaled_rmse": 2.0375928186853485,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.1760950027178835,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20724170745442033,
+          "raw_rmse": 2.4544898149490932,
+          "scaled_correlation": 0.20724170745441614,
+          "scaled_rmse": 2.0154751660378305,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 5,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20724170745442033,
+      "raw_rmse": 2.4544898149490932,
+      "scaled_correlation": 0.20724170745441614,
+      "scaled_rmse": 2.0154751660378305,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 19.412590404302794,
+        "mean": 1.4368586267282395,
+        "min": -6.1309058142101724,
+        "rmse_vs_zero": 2.0375928186853485
+      },
+      "spectral_delta_p": {
+        "max": 18.24632961782147,
+        "mean": -7.318364664277155e-19,
+        "min": -11.897542811557184,
+        "rmse_vs_zero": 1.700256443221261
+      },
+      "spectral_negative_delta_p": {
+        "max": 11.897542811557184,
+        "mean": 7.318364664277155e-19,
+        "min": -18.24632961782147,
+        "rmse_vs_zero": 1.700256443221261
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.17653052140388795,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.17653052140388795,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 2.739812357303039,
+          "scaled_rmse": 1.9654492971626094,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20783219296008607,
+        "raw_rmse": 2.3675083765597686,
+        "scaled_correlation": 0.20783219296010474,
+        "scaled_rmse": 1.9439840043946777,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20783219296008607,
+          "raw_rmse": 2.739812357303039,
+          "scaled_correlation": null,
+          "scaled_rmse": 1.9654492971626094,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.17653052140388795,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20783219296008607,
+          "raw_rmse": 2.3675083765597686,
+          "scaled_correlation": 0.20783219296010474,
+          "scaled_rmse": 1.9439840043946777,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 6,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20783219296008607,
+      "raw_rmse": 2.3675083765597686,
+      "scaled_correlation": 0.20783219296010474,
+      "scaled_rmse": 1.9439840043946777,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 18.634361965982894,
+        "mean": 1.3857145649158482,
+        "min": -5.8661705908425805,
+        "rmse_vs_zero": 1.9654492971626094
+      },
+      "spectral_delta_p": {
+        "max": 17.866726029438723,
+        "mean": -4.0657581468206416e-20,
+        "min": -12.208295755746922,
+        "rmse_vs_zero": 1.6409883891845662
+      },
+      "spectral_negative_delta_p": {
+        "max": 12.208295755746922,
+        "mean": 4.0657581468206416e-20,
+        "min": -17.866726029438723,
+        "rmse_vs_zero": 1.6409883891845662
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.17672763906546698,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.17672763906546698,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 2.6453578118492924,
+          "scaled_rmse": 1.897020338782312,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.2081524206325778,
+        "raw_rmse": 2.2852783242284462,
+        "scaled_correlation": 0.20815242063259992,
+        "scaled_rmse": 1.8762315097747109,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.2081524206325778,
+          "raw_rmse": 2.6453578118492924,
+          "scaled_correlation": null,
+          "scaled_rmse": 1.897020338782312,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.17672763906546698,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.2081524206325778,
+          "raw_rmse": 2.2852783242284462,
+          "scaled_correlation": 0.20815242063259992,
+          "scaled_rmse": 1.8762315097747109,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 7,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.2081524206325778,
+      "raw_rmse": 2.2852783242284462,
+      "scaled_correlation": 0.20815242063259992,
+      "scaled_rmse": 1.8762315097747109,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 17.409584252849278,
+        "mean": 1.3372551608245176,
+        "min": -5.42467907322343,
+        "rmse_vs_zero": 1.897020338782312
+      },
+      "spectral_delta_p": {
+        "max": 16.898684541295044,
+        "mean": -3.1170812458958252e-19,
+        "min": -12.17176893103886,
+        "rmse_vs_zero": 1.5847780034429013
+      },
+      "spectral_negative_delta_p": {
+        "max": 12.17176893103886,
+        "mean": 3.1170812458958252e-19,
+        "min": -16.898684541295044,
+        "rmse_vs_zero": 1.5847780034429013
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.17668644250047594,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.17668644250047594,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 2.5550454322262093,
+          "scaled_rmse": 1.831776557353243,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20820202264790805,
+        "raw_rmse": 2.2071157815104954,
+        "scaled_correlation": 0.20820202264792265,
+        "scaled_rmse": 1.8116891408470237,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20820202264790805,
+          "raw_rmse": 2.5550454322262093,
+          "scaled_correlation": null,
+          "scaled_rmse": 1.831776557353243,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.17668644250047594,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20820202264790805,
+          "raw_rmse": 2.2071157815104954,
+          "scaled_correlation": 0.20820202264792265,
+          "scaled_rmse": 1.8116891408470237,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 8,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20820202264790805,
+      "raw_rmse": 2.2071157815104954,
+      "scaled_correlation": 0.20820202264792265,
+      "scaled_rmse": 1.8116891408470237,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 16.674293340409122,
+        "mean": 1.2911353450320688,
+        "min": -5.430000378080729,
+        "rmse_vs_zero": 1.831776557353243
+      },
+      "spectral_delta_p": {
+        "max": 15.45104615504849,
+        "mean": -2.710505431213761e-19,
+        "min": -11.868777116376847,
+        "rmse_vs_zero": 1.531144428457829
+      },
+      "spectral_negative_delta_p": {
+        "max": 11.868777116376847,
+        "mean": 2.710505431213761e-19,
+        "min": -15.45104615504849,
+        "rmse_vs_zero": 1.531144428457829
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.17644185681359922,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.17644185681359922,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 2.4683638077228087,
+          "scaled_rmse": 1.7693277210155218,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20801811637412634,
+        "raw_rmse": 2.1324770625239347,
+        "scaled_correlation": 0.20801811637413647,
+        "scaled_rmse": 1.7499582774360722,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20801811637412634,
+          "raw_rmse": 2.4683638077228087,
+          "scaled_correlation": null,
+          "scaled_rmse": 1.7693277210155218,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.17644185681359922,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20801811637412634,
+          "raw_rmse": 2.1324770625239347,
+          "scaled_correlation": 0.20801811637413647,
+          "scaled_rmse": 1.7499582774360722,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 9,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20801811637412634,
+      "raw_rmse": 2.1324770625239347,
+      "scaled_correlation": 0.20801811637413647,
+      "scaled_rmse": 1.7499582774360722,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 16.31030008353637,
+        "mean": 1.247075941713295,
+        "min": -5.370939568447218,
+        "rmse_vs_zero": 1.7693277210155218
+      },
+      "spectral_delta_p": {
+        "max": 15.199182161488114,
+        "mean": -2.778268066994105e-19,
+        "min": -11.216269537382129,
+        "rmse_vs_zero": 1.4797359799569976
+      },
+      "spectral_negative_delta_p": {
+        "max": 11.216269537382129,
+        "mean": 2.778268066994105e-19,
+        "min": -15.199182161488114,
+        "rmse_vs_zero": 1.4797359799569976
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.1760513397665311,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.1760513397665311,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 2.384978218151012,
+          "scaled_rmse": 1.7093977459380623,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20766112514936563,
+        "raw_rmse": 2.060942612292498,
+        "scaled_correlation": 0.20766112514936444,
+        "scaled_rmse": 1.6907495825034442,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20766112514936563,
+          "raw_rmse": 2.384978218151012,
+          "scaled_correlation": null,
+          "scaled_rmse": 1.7093977459380623,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.1760513397665311,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20766112514936563,
+          "raw_rmse": 2.060942612292498,
+          "scaled_correlation": 0.20766112514936444,
+          "scaled_rmse": 1.6907495825034442,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 10,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20766112514936563,
+      "raw_rmse": 2.060942612292498,
+      "scaled_correlation": 0.20766112514936444,
+      "scaled_rmse": 1.6907495825034442,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 15.98034051750218,
+        "mean": 1.2048575068272644,
+        "min": -5.141921309107042,
+        "rmse_vs_zero": 1.7093977459380623
+      },
+      "spectral_delta_p": {
+        "max": 14.424182269108236,
+        "mean": 4.336808689942018e-19,
+        "min": -10.397833738762133,
+        "rmse_vs_zero": 1.4303014095954647
+      },
+      "spectral_negative_delta_p": {
+        "max": 10.397833738762133,
+        "mean": -4.336808689942018e-19,
+        "min": -14.424182269108236,
+        "rmse_vs_zero": 1.4303014095954647
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.17557951517290327,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.17557951517290327,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 2.3046652226834823,
+          "scaled_rmse": 1.6517896075785503,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20719874707795155,
+        "raw_rmse": 1.9921917680158374,
+        "scaled_correlation": 0.20719874707794206,
+        "scaled_rmse": 1.6338522834609406,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20719874707795155,
+          "raw_rmse": 2.3046652226834823,
+          "scaled_correlation": null,
+          "scaled_rmse": 1.6517896075785503,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.17557951517290327,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20719874707795155,
+          "raw_rmse": 1.9921917680158374,
+          "scaled_correlation": 0.20719874707794206,
+          "scaled_rmse": 1.6338522834609406,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 11,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20719874707795155,
+      "raw_rmse": 1.9921917680158374,
+      "scaled_correlation": 0.20719874707794206,
+      "scaled_rmse": 1.6338522834609406,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 15.316805935670706,
+        "mean": 1.1643111294853246,
+        "min": -4.757441632759308,
+        "rmse_vs_zero": 1.6517896075785503
+      },
+      "spectral_delta_p": {
+        "max": 13.189016385604196,
+        "mean": -1.4907779871675686e-19,
+        "min": -9.657344316244448,
+        "rmse_vs_zero": 1.3826590349373504
+      },
+      "spectral_negative_delta_p": {
+        "max": 9.657344316244448,
+        "mean": 1.4907779871675686e-19,
+        "min": -13.189016385604196,
+        "rmse_vs_zero": 1.3826590349373504
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    },
+    {
+      "best_scale": 0.1750847410344745,
+      "best_sign": "plus",
+      "best_sign_proxy": {
+        "best_scale": 0.1750847410344745,
+        "candidate": "+Delta p",
+        "opponent": {
+          "candidate": "-Delta p",
+          "raw_rmse": 2.22726336374424,
+          "scaled_rmse": 1.5963548478187584,
+          "sign": "minus"
+        },
+        "raw_correlation": 0.20669285762745412,
+        "raw_rmse": 1.9259812104325587,
+        "scaled_correlation": 0.206692857627449,
+        "scaled_rmse": 1.5791067041445448,
+        "sign": "plus",
+        "sign_factor": 1.0
+      },
+      "comparisons": [
+        {
+          "best_scale": 0.0,
+          "candidate": "-Delta p",
+          "raw_correlation": -0.20669285762745412,
+          "raw_rmse": 2.22726336374424,
+          "scaled_correlation": null,
+          "scaled_rmse": 1.5963548478187584,
+          "sign": "minus",
+          "sign_factor": -1.0
+        },
+        {
+          "best_scale": 0.1750847410344745,
+          "candidate": "+Delta p",
+          "raw_correlation": 0.20669285762745412,
+          "raw_rmse": 1.9259812104325587,
+          "scaled_correlation": 0.206692857627449,
+          "scaled_rmse": 1.5791067041445448,
+          "sign": "plus",
+          "sign_factor": 1.0
+        }
+      ],
+      "domain_length": 128.0,
+      "domain_length_source": "cli",
+      "frame": 12,
+      "pressure_shape": [
+        128,
+        128,
+        128
+      ],
+      "pressure_source": "pressure_snapshots",
+      "raw_correlation": 0.20669285762745412,
+      "raw_rmse": 1.9259812104325587,
+      "scaled_correlation": 0.206692857627449,
+      "scaled_rmse": 1.5791067041445448,
+      "source_proxy_available": true,
+      "source_proxy_notes": [
+        "source proxy computed spectrally from velocity"
+      ],
+      "source_proxy_source": "computed_from_velocity_snapshots",
+      "source_proxy_stats": {
+        "max": 14.386744600531005,
+        "mean": 1.125308191872342,
+        "min": -4.573266086999113,
+        "rmse_vs_zero": 1.5963548478187584
+      },
+      "spectral_delta_p": {
+        "max": 12.824962960413743,
+        "mean": -4.0657581468206416e-20,
+        "min": -9.450131380158775,
+        "rmse_vs_zero": 1.3366764967836582
+      },
+      "spectral_negative_delta_p": {
+        "max": 9.450131380158775,
+        "mean": 4.0657581468206416e-20,
+        "min": -12.824962960413743,
+        "rmse_vs_zero": 1.3366764967836582
+      },
+      "status": "ok",
+      "violation": {
+        "best_sign": "+Delta p",
+        "expected_sign": "-Delta p",
+        "kind": "sign_convention_mismatch",
+        "notes": [
+          "The best-fitting sign is +Delta p, so the source proxy aligns with the opposite convention to the canonical pressure Poisson form."
+        ],
+        "present": true
+      }
+    }
+  ],
+  "script": "scripts/ns_pressure_poisson_sign_timeseries_audit.py",
+  "selected_frame_count": 13,
+  "selected_frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "sign_stability": {
+    "all_same": true,
+    "longest_run": 13,
+    "modal_count": 13,
+    "modal_fraction": 1.0,
+    "modal_sign": "plus",
+    "sign_changes": 0
+  },
+  "source_proxy_source": "computed_from_velocity_snapshots",
+  "status": "ok",
+  "warnings": []
+}

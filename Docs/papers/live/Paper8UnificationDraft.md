@@ -1,6 +1,6 @@
 # Paper 8 Draft: Closure Grammar, Jordan-von Neumann Recovery, and Controlled Consumers
 
-Author: `[TBD]`
+Author: Johl Brown
 Date: `2026-06-09`
 Version: `draft 1`
 Status: live closure-architecture manuscript; non-promoting
@@ -16,6 +16,15 @@ ClosurePipeline
 ```
 
 with the following structure:
+
+```text
+receipt layer
+-> theorem-interface layer
+-> Cubical/DCHoTT adapter layer
+-> controlled consumer layer
+```
+
+At the mathematical core this becomes:
 
 ```text
 finite bilinear or quadratic data
@@ -74,6 +83,21 @@ space, operator consumers, or representation-theoretic consumers, one must:
 Paper 8's thesis is that this sequence is not editorial convenience. It is the
 canonical closure grammar needed to keep later consumers honest.
 
+**Formal support stack.** The manuscript reads the repository support through
+four layers. The receipt layer contains local DASHI/Agda records and generated
+manifests. The theorem-interface layer exposes only the paper-facing names that
+a reader should inspect. The Cubical/DCHoTT adapter layer records bounded
+interpretation or compatibility surfaces, including fail-closed adapter
+boundaries when the target foundation is not available. The consumer layer
+then attaches examples such as YM, NS, GR, DHR, or diagnostics only after their
+own authority and promotion boundaries have been stated.
+
+The live mathematical frontier for this paper is `UCT.1-UCT.4`: specifying the
+overlap residual PDE, verifying its ellipticity or parabolicity class,
+importing the matching Carleman/unique-continuation theorem, and deriving
+cross-term nullity. The downstream `UCT.5-UCT.8` consumers remain locked until
+that frontier is promoted.
+
 ## 2. Canonical closure grammar
 
 We write `ClosurePipeline` for the canonical route
@@ -121,10 +145,10 @@ to the same closure machine.
 > `U-1a-H` without claiming that Paper 8 proves the analytic `A1-A9` closure
 > of Paper 1.
 
-> **Proposition 3.2 (YM-lane compatibility).** The Yang-Mills lane supplies a
-> bounded quadratic consumer at linearization through the curvature norm
-> `||dA||^2`, together with the operator and positivity surfaces summarized in
-> Paper 3. Accordingly, Paper 8 may treat the YM lane as a controlled
+> **Proposition 3.2 (YM-lane compatibility).** After passing to the appropriate
+> gauge quotient, the Yang-Mills lane supplies a bounded quadratic consumer at
+> linearization through the curvature norm `||dA||^2`, together with the
+> operator and positivity surfaces summarized in Paper 3. Accordingly, Paper 8 may treat the YM lane as a controlled
 > instantiation of `U-1a-H` without claiming that Paper 8 proves the continuum
 > transfer or OS/Wightman steps. In the current corpus the load-bearing
 > continuum input is the `H3a` transfer theorem of Paper 3, with `H3b` and the
@@ -191,10 +215,9 @@ downstream consumer chain is already typed.
 
 The decisive mathematical step is the recovery of an inner product on `V/null`
 from a norm obeying the parallelogram law. This is the point at which the paper
-should cite `JordanVonNeumann1935` from the common citation ledger. Once the
-null space has been verified to be a linear subspace and quotiented out, the
-JvN polarization identity turns the quotient norm data into a genuine inner
-product.
+cites `JordanVonNeumann1935`. Once the null space has been verified to be a
+linear subspace and quotiented out, the JvN polarization identity turns the
+quotient norm data into a genuine inner product.
 
 The reason this matters for the corpus is that "completion" is otherwise too
 ambiguous. Completion of what? Completion with respect to which norm? Why is
@@ -278,6 +301,59 @@ calibration obligations are discharged.
 That separation is important for the whole corpus. It keeps Paper 8 from
 reading as if algebraic closure alone produces observational confirmation.
 
+The same boundary governs observer-quotient completion layers in later
+satellite papers. The core Paper 8 claim is only structural: observer-specific
+channels, runtime PNF checks, and multi-observer fusion may be treated as
+bounded consumer examples after their own authority boundaries are stated.
+
+### 7.1 Observer-quotient stress test
+
+The most useful consumer stress test is the observer-quotient layer. Its
+paper-facing equation is:
+
+```text
+M_{O,s,c} = L / ~_{O,s,c}
+```
+
+Here `L` is a shared latent transport manifold, `O` is an observer, `s` is an
+observer state, and `c` is a context. The quotient relation records which
+fibres are retained or collapsed by that observer in that state and context.
+This lets the repository state a positive structural claim without crossing
+into a consciousness claim:
+
+```text
+latent transport -> observer/state/context quotient -> report or behavior
+```
+
+The formal support surface is
+`DASHI.Reasoning.ObserverQuotientCompleteStatement`. It consolidates the
+state-specific observer quotient, state-shift projection defect, runtime
+qualitative-transcript PNF payload, runtime receipt/report quotient,
+multi-observer quotient fusion, and avian magnetoreception extra-fibre
+boundary.
+
+The promoted content is deliberately narrow:
+
+- perceptual or report quotient geometry can be constrained;
+- runtime transcript PNF can provide audit-bounded evidence receipts;
+- multi-observer fusion can promote a bounded partial reconstruction and a
+  typed projection defect;
+- the avian magnetoreception case can constrain perceptual quotient geometry
+  through controlled RF perturbation and behavioral receipt.
+
+The blocked content is equally explicit:
+
+- the shared latent manifold is not directly inhabited or recovered;
+- the hard-problem residual is not promoted;
+- runtime PNF output is not Agda-certified semantic truth;
+- qualia geometry and inhabited phenomenal experience are not recovered.
+
+This is why the observer-quotient material strengthens Paper 8 only as a
+governance example. It shows that DASHI can handle a seductive, high-overclaim
+domain and still fail closed. The standalone qualia/PNF exposition therefore
+belongs after the Clay-facing papers and after this architecture paper, not in
+the first-wave submissions.
+
 ## 8. Blocker table
 
 | Surface | Positive role in this paper | Blocker that remains |
@@ -289,14 +365,25 @@ reading as if algebraic closure alone produces observational confirmation.
 | JvN recovery | canonical inner-product recovery step | requires the actual parallelogram-law and null-space / quotient hypotheses |
 | DHR consumer route | legitimate post-completion illustration | controlled consumer only; not a proof of full DHR reconstruction, internal compact-group construction, or `G_DHR ~= G_SM` |
 | empirical consumers | controlled downstream interfaces | no authority, calibration, or acceptance theorem follows automatically |
+| observer-quotient consumer | constrained perceptual/report quotient geometry, audit-bounded PNF receipts, and multi-observer partial reconstruction | no latent manifold recovery, no qualia geometry, no inhabited phenomenal experience recovery |
 
-## 9. Receipt index
+## 9. Receipt and formal-support index
 
 The new receipt index is conceptual rather than archival. The paper's active
 receipts are the closure grammar, the JvN recovery step, the completion step,
 the per-lane justification surface, and the consumer sockets. Detailed archival
 or lane-specific receipt inventories belong in Papers 1, 3, and the support
 compendium.
+
+The paper-facing theorem-variable manifest is generated by
+`scripts/generate_paper_proof_manifest.py` and recorded at
+`Docs/papers/generated/core_papers_theorem_var_manifest.md`. For Paper 8 it
+indexes `DASHI/Papers/Unification/TheoremInterface.agda`, the DCHoTT adapter
+rows in `DASHI/DCHoTT/UnificationCandidate.agda`, and the Cubical
+incompatibility boundary in `DASHI/Cubical/UnificationCandidate.agda`. These
+rows support the architecture story only: DCHoTT records interpretation
+coverage, the Cubical row records why no Cubical wrapper is fabricated, and
+the terminal unification guard remains false.
 
 ## 10. What this paper does not claim
 
@@ -305,6 +392,8 @@ compendium.
 - It does not prove full DHR reconstruction or exact `G_DHR ~= G_SM`.
 - It does not prove continuum GR or sourced Einstein closure.
 - It does not prove empirical adequacy or prediction acceptance.
+- It does not solve consciousness, recover qualia geometry, or recover
+  inhabited phenomenal experience.
 - It does not prove terminal unification.
 
 ## 11. Conclusion
@@ -322,12 +411,25 @@ Jordan-von Neumann recovery, and the controlled consumer layer.
 
 ## 12. Submission-target recommendation
 
-The submission target should remain a venue sympathetic to proof architecture,
-formal methods, or mathematically disciplined conceptual synthesis rather than a
-venue that would expect the paper itself to solve a Millennium problem.
+Concrete submission targets should be chosen from venues that can evaluate
+proof architecture and formal mathematical structure without expecting the
+paper itself to solve a Millennium problem. Candidate venues are:
+
+- *Journal of Logic and Analysis*
+- *Mathematical Structures in Computer Science*
+- *Annals of Pure and Applied Logic*
+- *Foundations of Physics*
+
+The first three are better fits if the paper is framed primarily as closure
+grammar and formal architecture. *Foundations of Physics* is a better fit only
+if the controlled-consumer examples remain visible enough to justify a
+mathematical-physics readership.
 
 ## Appendix A. Claim boundary table
 
 | Proved in this paper | Assumed externally with citation | Explicitly left open |
 | --- | --- | --- |
-| Theorem 2.1 identifies the canonical closure grammar on `V/null`; Propositions 3.1-3.3 state the NS-lane, YM-lane, and global compatibility surfaces for `U-1a-H`; Section 5.3 fixes the permitted DHR bridge as `JvN -> C* completion -> Hilbert bimodules`; the blocker table and non-claims section freeze the architecture-level scope boundary. | Jordan-von Neumann inner-product recovery (`JordanVonNeumann1935`), standard completion facts, and any external DHR or GR authority cited by downstream illustrations. | Any analytic YM or NS proof narrative, full DHR reconstruction, empirical validation, exact `G_DHR ~= G_SM`, or terminal unification theorem. |
+| Theorem 2.1 identifies the canonical closure grammar on `V/null`. | Jordan-von Neumann inner-product recovery (`JordanVonNeumann1935`) and standard completion facts. | Any lane-specific proof that its raw data satisfy the quotient and parallelogram hypotheses. |
+| Propositions 3.1-3.3 state the NS-lane, YM-lane, and global compatibility surfaces for `U-1a-H`. | The analytic content of those lanes remains in Papers 1 and 3 and in their cited external inputs. | Any analytic YM or NS proof narrative inside Paper 8. |
+| Section 5.3 fixes the permitted DHR bridge as `JvN -> C* completion -> Hilbert bimodules`. | External DHR authority may be cited by downstream illustrations. | Full DHR reconstruction, internal compact-group construction, or exact `G_DHR ~= G_SM`. |
+| Sections 6-8 and the blocker table freeze the architecture-level scope boundary for GR, empirical, and prediction consumers. | Any GR or empirical authority belongs to the downstream consumer lane that invokes it. | Continuum GR, empirical validation, terminal unification, or automatic promotion from closure grammar to observational adequacy. |

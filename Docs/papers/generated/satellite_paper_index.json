@@ -1,0 +1,63 @@
+{
+  "generator": "scripts/generate_satellite_paper_index.py",
+  "row_count": 5,
+  "rows": [
+    {
+      "dependency_on_core_papers": "Depends on Paper 8 for receipt grammar and on Paper 3 only as a bounded YM consumer example.",
+      "lane": "quantum/operator",
+      "non_promotion_boundary": "Operator receipts may support formal architecture only; no physical QFT terminal claim or Clay promotion.",
+      "publishability_tier": "satellite-after-core: formal receipt candidate",
+      "support_files": [
+        "DASHI/Quantum/Stone.agda",
+        "DASHI/Quantum/SelfAdjointGenerator.agda",
+        "DASHI/Physics/RealOperatorStack.agda",
+        "Docs/papers/legacy/Paper4PhysicalHilbertSkeleton.md"
+      ]
+    },
+    {
+      "dependency_on_core_papers": "Depends on Paper 8 formal architecture becoming public before use as a satellite adapter.",
+      "lane": "GR/DCHoTT",
+      "non_promotion_boundary": "DCHoTT/GR adapters remain interpretation surfaces; no full D-space equivalence or terminal unification promotion.",
+      "publishability_tier": "satellite-after-core: architecture adapter candidate",
+      "support_files": [
+        "DASHI/Physics/GR.agda",
+        "DASHI/DCHoTT/All.agda",
+        "DASHI/DCHoTT/InterpretationAdapter.agda",
+        "Docs/papers/legacy/Paper2GRGeometryDraft.md"
+      ]
+    },
+    {
+      "dependency_on_core_papers": "Depends on Paper 8 UCT grammar and blocker vocabulary.",
+      "lane": "DHR",
+      "non_promotion_boundary": "DHR rows stay structural and fail-closed; no UCT, YM, NS, or terminal unification blockers are discharged.",
+      "publishability_tier": "satellite-after-core: structural hypothesis draft",
+      "support_files": [
+        "DASHI/Physics/Closure/DefectHierarchyParallelogramGeneralizationBoundary.agda",
+        "Docs/papers/legacy/Paper5DHRSkeleton.md"
+      ]
+    },
+    {
+      "dependency_on_core_papers": "Depends on Paper 8 to define receipt-layer consumers before any standalone exposition.",
+      "lane": "qualia/PNF",
+      "non_promotion_boundary": "Qualia/PNF is a bounded consumer example only; no consciousness solution, external biology authority, or terminal physics claim.",
+      "publishability_tier": "satellite-after-core: bounded consumer example",
+      "support_files": [
+        "DASHI/Interop/QualiaTranscriptPNFSemanticBridge.agda",
+        "DASHI/Interop/AvianCompassPNFSemanticBridge.agda",
+        "Docs/papers/drafts/Paper8QualiaTranscriptPNFSectionDraft.md"
+      ]
+    },
+    {
+      "dependency_on_core_papers": "Depends on Paper 8 support grammar; must not be mixed into first-wave Paper 1 or Paper 3 Clay-facing packets.",
+      "lane": "diagnostic Yukawa/CKM",
+      "non_promotion_boundary": "Yukawa/CKM support remains diagnostic and authority-bound; no Standard Model uniqueness or measured-parameter promotion.",
+      "publishability_tier": "satellite-after-core: diagnostic empirical lane",
+      "support_files": [
+        "DASHI/Promotion/StandardModelHiggsYukawaParameterFrontier.agda",
+        "DASHI/Physics/Closure/CKMFromYukawaEigenbasisReceipt.agda",
+        "Docs/papers/legacy/Paper6MatterYukawaCKMSkeleton.md",
+        "Docs/papers/legacy/Paper6CKMSection.md"
+      ]
+    }
+  ]
+}

@@ -212,6 +212,46 @@ data LRTSupportConsumerCarrier : Set where
     Stationarity.LRTOutputSupportTransferA4Carrier →
     LRTSupportConsumerCarrier
 
+data A4-4LowVorticityLRTPayloadCarrier : Set where
+  lowVorticityExceptionalRoutingPreservesA4-4LRTStripHittingPayload :
+    HighVorticityPacketRestrictionCarrier →
+    NullOutputCHatExclusionCarrier →
+    AbelExceptionalMassRoutingCarrier →
+    LowerOrderResidualBudgetCarrier →
+    LRTSupportConsumerCarrier →
+    A4-4LowVorticityLRTPayloadCarrier
+
+data LowVorticityA4-4RoutingClause : Set where
+  nonGreatCircleFrameConditionKeptAfterExceptionalDiscard :
+    LowVorticityA4-4RoutingClause
+  c0LowerBoundReducedOnlyToC0OverTwo :
+    LowVorticityA4-4RoutingClause
+  eta0C0DeltaFStillAdmissibleAfterLowVorticityRouting :
+    LowVorticityA4-4RoutingClause
+  stripHittingMeasureAtLeastC0OverTwoAfterRouting :
+    LowVorticityA4-4RoutingClause
+  remainingSupportCompatibleWithA4-5UniformCA4 :
+    LowVorticityA4-4RoutingClause
+
+canonicalLowVorticityA4-4RoutingClauses :
+  List LowVorticityA4-4RoutingClause
+canonicalLowVorticityA4-4RoutingClauses =
+  nonGreatCircleFrameConditionKeptAfterExceptionalDiscard
+  ∷ c0LowerBoundReducedOnlyToC0OverTwo
+  ∷ eta0C0DeltaFStillAdmissibleAfterLowVorticityRouting
+  ∷ stripHittingMeasureAtLeastC0OverTwoAfterRouting
+  ∷ remainingSupportCompatibleWithA4-5UniformCA4
+  ∷ []
+
+lowVorticityA4-4RoutingClauseCount : Nat
+lowVorticityA4-4RoutingClauseCount =
+  listLength canonicalLowVorticityA4-4RoutingClauses
+
+lowVorticityA4-4RoutingClauseCountIs5 :
+  lowVorticityA4-4RoutingClauseCount ≡ 5
+lowVorticityA4-4RoutingClauseCountIs5 =
+  refl
+
 data LowVorticityExceptionalMassRoutingTarget : Set where
   exceptionalLowAndNullOutputMassDoesNotBreakA4Support :
     HighVorticityPacketRestrictionCarrier →
@@ -267,6 +307,16 @@ canonicalLRTSupportConsumer =
     canonicalLowerOrderResidualBudget
     Coupling.canonicalNoAngularCollapseFromWhitneyCarrier
     Stationarity.canonicalA4LRTOutputSupportTransfer
+
+canonicalA4-4LowVorticityLRTPayload :
+  A4-4LowVorticityLRTPayloadCarrier
+canonicalA4-4LowVorticityLRTPayload =
+  lowVorticityExceptionalRoutingPreservesA4-4LRTStripHittingPayload
+    canonicalHighVorticityPacketRestriction
+    canonicalNullOutputCHatExclusion
+    canonicalAbelExceptionalMassRouting
+    canonicalLowerOrderResidualBudget
+    canonicalLRTSupportConsumer
 
 canonicalLowVorticityExceptionalMassRoutingTarget :
   LowVorticityExceptionalMassRoutingTarget
@@ -437,6 +487,30 @@ LRTSupportConsumerRecorded : Bool
 LRTSupportConsumerRecorded =
   true
 
+A4-4LowVorticityLRTPayloadRecorded : Bool
+A4-4LowVorticityLRTPayloadRecorded =
+  true
+
+lowVorticityNonGreatCircleFrameConditionRecorded : Bool
+lowVorticityNonGreatCircleFrameConditionRecorded =
+  true
+
+lowVorticityC0OverTwoLowerBoundRecorded : Bool
+lowVorticityC0OverTwoLowerBoundRecorded =
+  true
+
+lowVorticityEta0C0DeltaFRecorded : Bool
+lowVorticityEta0C0DeltaFRecorded =
+  true
+
+lowVorticityStripHittingC0OverTwoRecorded : Bool
+lowVorticityStripHittingC0OverTwoRecorded =
+  true
+
+lowVorticityA4-5UniformCA4CompatibilityRecorded : Bool
+lowVorticityA4-5UniformCA4CompatibilityRecorded =
+  true
+
 highLowVorticityThresholdLemmaProved : Bool
 highLowVorticityThresholdLemmaProved =
   false
@@ -540,6 +614,36 @@ keepsTerminalPromotionFalse :
 keepsTerminalPromotionFalse =
   refl
 
+recordsA4-4LowVorticityLRTPayload :
+  A4-4LowVorticityLRTPayloadRecorded ≡ true
+recordsA4-4LowVorticityLRTPayload =
+  refl
+
+recordsLowVorticityNonGreatCircleFrameCondition :
+  lowVorticityNonGreatCircleFrameConditionRecorded ≡ true
+recordsLowVorticityNonGreatCircleFrameCondition =
+  refl
+
+recordsLowVorticityC0OverTwoLowerBound :
+  lowVorticityC0OverTwoLowerBoundRecorded ≡ true
+recordsLowVorticityC0OverTwoLowerBound =
+  refl
+
+recordsLowVorticityEta0C0DeltaF :
+  lowVorticityEta0C0DeltaFRecorded ≡ true
+recordsLowVorticityEta0C0DeltaF =
+  refl
+
+recordsLowVorticityStripHittingC0OverTwo :
+  lowVorticityStripHittingC0OverTwoRecorded ≡ true
+recordsLowVorticityStripHittingC0OverTwo =
+  refl
+
+recordsLowVorticityA4-5UniformCA4Compatibility :
+  lowVorticityA4-5UniformCA4CompatibilityRecorded ≡ true
+recordsLowVorticityA4-5UniformCA4Compatibility =
+  refl
+
 ------------------------------------------------------------------------
 -- O/R/C/S/L/P/G/F.
 
@@ -549,7 +653,7 @@ organizationString =
 
 requirementString : String
 requirementString =
-  "R: Record high-vorticity packet restriction, low-vorticity exceptional set, null-output c-hat exclusion, Abel mass routing, residual budget, and LRT support consumer."
+  "R: Record high-vorticity packet restriction, low-vorticity exceptional set, null-output c-hat exclusion, Abel mass routing, residual budget, LRT support consumer, and the A4.4 payload preserving the non-great-circle frame, c0/2 lower margin, eta0(c0,deltaF), strip-hitting measure >= c0/2, and A4.5 c_A4 compatibility."
 
 codeArtifactString : String
 codeArtifactString =
@@ -557,11 +661,11 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "S: Boundary is checked and fail-closed; threshold, null-output measure, Abel exceptional budget, and residual absorption proofs remain open."
+  "S: Boundary is checked and fail-closed; A4.4/LRT routing payload is recorded, while threshold, null-output measure, Abel exceptional budget, and residual absorption proofs remain open."
 
 latticeString : String
 latticeString =
-  "L: high-vorticity restriction -> exceptional discard -> Abel budget -> residual absorption -> remaining LRT support -> A4 output coupling."
+  "L: high-vorticity restriction -> low/null-output exceptional discard -> Abel budget -> residual absorption -> non-great-circle frame and eta0(c0,deltaF) retention -> c0/2 strip-hitting support -> A4.5 c_A4 compatibility -> remaining LRT support -> A4 output coupling."
 
 proposalString : String
 proposalString =
@@ -609,6 +713,17 @@ record NSLowVorticityExceptionalMassRoutingBoundary : Set where
       LRTSupportConsumerCarrier
     lrtSupportConsumerIsCanonical :
       lrtSupportConsumer ≡ canonicalLRTSupportConsumer
+    A4-4LowVorticityLRTPayload :
+      A4-4LowVorticityLRTPayloadCarrier
+    A4-4LowVorticityLRTPayloadIsCanonical :
+      A4-4LowVorticityLRTPayload ≡ canonicalA4-4LowVorticityLRTPayload
+    lowVorticityA4-4RoutingClauses :
+      List LowVorticityA4-4RoutingClause
+    lowVorticityA4-4RoutingClausesAreCanonical :
+      lowVorticityA4-4RoutingClauses
+        ≡ canonicalLowVorticityA4-4RoutingClauses
+    lowVorticityA4-4RoutingClauseCountProof :
+      lowVorticityA4-4RoutingClauseCount ≡ 5
     target :
       LowVorticityExceptionalMassRoutingTarget
     targetIsCanonical :
@@ -655,6 +770,18 @@ record NSLowVorticityExceptionalMassRoutingBoundary : Set where
       lowerOrderResidualBudgetRecorded ≡ true
     lrtConsumerRecorded :
       LRTSupportConsumerRecorded ≡ true
+    A4-4LowVorticityLRTPayloadRecordedTrue :
+      A4-4LowVorticityLRTPayloadRecorded ≡ true
+    lowVorticityNonGreatCircleFrameConditionRecordedTrue :
+      lowVorticityNonGreatCircleFrameConditionRecorded ≡ true
+    lowVorticityC0OverTwoLowerBoundRecordedTrue :
+      lowVorticityC0OverTwoLowerBoundRecorded ≡ true
+    lowVorticityEta0C0DeltaFRecordedTrue :
+      lowVorticityEta0C0DeltaFRecorded ≡ true
+    lowVorticityStripHittingC0OverTwoRecordedTrue :
+      lowVorticityStripHittingC0OverTwoRecorded ≡ true
+    lowVorticityA4-5UniformCA4CompatibilityRecordedTrue :
+      lowVorticityA4-5UniformCA4CompatibilityRecorded ≡ true
     thresholdLemmaFalse :
       highLowVorticityThresholdLemmaProved ≡ false
     nullOutputBoundFalse :
@@ -698,6 +825,11 @@ canonicalNSLowVorticityExceptionalMassRoutingBoundary =
     refl
     canonicalLRTSupportConsumer
     refl
+    canonicalA4-4LowVorticityLRTPayload
+    refl
+    canonicalLowVorticityA4-4RoutingClauses
+    refl
+    refl
     canonicalLowVorticityExceptionalMassRoutingTarget
     refl
     canonicalLowVorticityExceptionalMassRoutingObligations
@@ -721,6 +853,12 @@ canonicalNSLowVorticityExceptionalMassRoutingBoundary =
     governanceString
     refl
     gapString
+    refl
+    refl
+    refl
+    refl
+    refl
+    refl
     refl
     refl
     refl

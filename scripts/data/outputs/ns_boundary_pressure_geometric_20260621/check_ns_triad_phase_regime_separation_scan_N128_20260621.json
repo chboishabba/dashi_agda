@@ -1,0 +1,21 @@
+{
+  "contract": "check_ns_triad_phase_regime_separation_scan",
+  "control_card": {
+    "C": "scripts/check_ns_triad_phase_regime_separation_scan.py",
+    "F": "Any malformed field, authority drift, or route-marker mismatch is a hard error.",
+    "G": "Checker remains empirical and non-promoting.",
+    "L": "Load the scan JSON, validate rows and aggregates, then emit a checker receipt.",
+    "O": "Validate phase-regime separation telemetry output.",
+    "P": "FAIL_CLOSED_NS_TRIAD_PHASE_REGIME_SEPARATION_SCAN_CHECK",
+    "R": "Check control card, authority flags, shell rows, and aggregate separation metrics.",
+    "S": "Fail-closed checker for malformed phase-regime telemetry surfaces."
+  },
+  "error_count": 0,
+  "errors": [],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_PHASE_REGIME_SEPARATION_SCAN_CHECK",
+  "schema_version": "1.0.0",
+  "script_name": "scripts/check_ns_triad_phase_regime_separation_scan.py",
+  "source_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_phase_regime_separation_scan_N128_20260621.json",
+  "status": "ok"
+}

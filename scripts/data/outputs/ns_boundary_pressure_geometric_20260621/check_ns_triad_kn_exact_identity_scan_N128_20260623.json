@@ -1,0 +1,11 @@
+{
+  "contract": "check_ns_triad_kn_exact_identity_scan",
+  "errors": [],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_EXACT_IDENTITY_SCAN_CHECK",
+  "schema_version": "1.0.0",
+  "script_name": "scripts/check_ns_triad_kn_exact_identity_scan.py",
+  "source_contract": "ns_triad_kn_exact_identity_scan",
+  "source_script_name": "scripts/ns_triad_kn_exact_identity_scan.py",
+  "status": "ok"
+}

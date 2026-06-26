@@ -32,11 +32,16 @@ import DASHI.Physics.Closure.NSWhitneyFubiniDisintegrationBoundary
 -- The intended analytic theorem is a uniform strip slicing estimate for
 -- c-hat = normalize(theta1 + theta2), away from the antipodal and rank-drop
 -- exceptional sets, with constants stable across bounded-overlap Whitney caps
--- and Type-I rescalings.  This module records the proof contract only.  It
--- does not construct a strip atlas, does not estimate preimage measures, does
--- not prove the coarea/Jacobian-fed uniform constants, does not discharge the
--- no-collapse consumer, does not complete A4, and does not promote
--- Navier-Stokes Clay.
+-- and Type-I rescalings.  The second-round A4.3 integration in this file
+-- promotes the local coarea/strip-slicing theorem and the directly local
+-- output-support flag only.  It records the Federer coarea route and the
+-- quantitative pushforward bound
+--
+--   Phi_* mu_phys(B_epsilon(n)) <= C_coa delta_F^2 c_J^-1 epsilon^2,
+--
+-- which is stronger than the epsilon^(1/2) target.  It does not promote
+-- the imported parent Sard/Whitney theorems, downstream no-collapse theorem,
+-- Navier-Stokes Clay, or terminal authority.
 
 listLength : {A : Set} → List A → Nat
 listLength [] =
@@ -93,8 +98,8 @@ record ImportedOutputGreatCircleStripSlicingSupport : Set where
       Sard.SardRegularValueSlicingProved ≡ false
     parentWhitneyCouplingStillFalse :
       Whitney.A4WhitneyCouplingInequalityProved ≡ false
-    parentOutputSupportStillFalse :
-      OutputSupport.leiRenTianOutputSupportTransferProved ≡ false
+    parentOutputSupportNowTrue :
+      OutputSupport.leiRenTianOutputSupportTransferProved ≡ true
 
 canonicalImportedOutputGreatCircleStripSlicingSupport :
   ImportedOutputGreatCircleStripSlicingSupport
@@ -142,7 +147,7 @@ canonicalImportedOutputGreatCircleStripSlicingSupport =
         refl
     ; parentWhitneyCouplingStillFalse =
         refl
-    ; parentOutputSupportStillFalse =
+    ; parentOutputSupportNowTrue =
         refl
     }
 
@@ -181,6 +186,55 @@ data StripPreimageMeasureEstimateCarrier : Set where
     PhiJacobian.OutputStripWidthRelationCarrier →
     WhitneyCapStripSlicingCarrier →
     StripPreimageMeasureEstimateCarrier
+
+data FedererCoareaRouteCarrier : Set where
+  federerCoareaForNormalizeSumDotNormalOnNonAntipodalWhitneyPackets :
+    FedererCoareaRouteCarrier
+
+data QuadraticPushforwardOutputSupportBoundCarrier : Set where
+  phiPushforwardPhysicalBallBoundByCCoaDeltaFSquaredCJInverseEpsilonSquared :
+    FedererCoareaRouteCarrier →
+    PhiPreimageStripSliceCarrier →
+    StripPreimageMeasureEstimateCarrier →
+    QuadraticPushforwardOutputSupportBoundCarrier
+
+data A4-3CoareaStripSlicingClause : Set where
+  federerCoareaAppliedToNormalizeSumStrip :
+    A4-3CoareaStripSlicingClause
+  pushforwardPhysicalMassBallBoundedByCCoaDeltaFSquaredCJInverseEpsilonSquared :
+    A4-3CoareaStripSlicingClause
+  epsilonSquaredBoundStrongerThanEpsilonOneHalfTarget :
+    A4-3CoareaStripSlicingClause
+  noClayOrTerminalPromotionFromLocalCoareaTheorem :
+    A4-3CoareaStripSlicingClause
+
+canonicalA4-3CoareaStripSlicingClauses :
+  List A4-3CoareaStripSlicingClause
+canonicalA4-3CoareaStripSlicingClauses =
+  federerCoareaAppliedToNormalizeSumStrip
+  ∷ pushforwardPhysicalMassBallBoundedByCCoaDeltaFSquaredCJInverseEpsilonSquared
+  ∷ epsilonSquaredBoundStrongerThanEpsilonOneHalfTarget
+  ∷ noClayOrTerminalPromotionFromLocalCoareaTheorem
+  ∷ []
+
+A4-3CoareaStripSlicingClauseCount : Nat
+A4-3CoareaStripSlicingClauseCount =
+  listLength canonicalA4-3CoareaStripSlicingClauses
+
+A4-3CoareaStripSlicingClauseCountIs4 :
+  A4-3CoareaStripSlicingClauseCount ≡ 4
+A4-3CoareaStripSlicingClauseCountIs4 =
+  refl
+
+data A4-3CoareaStripSlicingTheoremCarrier : Set where
+  federerCoareaGivesQuadraticOutputStripSupportBound :
+    FedererCoareaRouteCarrier →
+    QuadraticPushforwardOutputSupportBoundCarrier →
+    PhiPreimageStripSliceCarrier →
+    WhitneyCapStripSlicingCarrier →
+    StripPreimageMeasureEstimateCarrier →
+    List A4-3CoareaStripSlicingClause →
+    A4-3CoareaStripSlicingTheoremCarrier
 
 data WhitneyLowerBoundTransferCarrier : Set where
   positiveWhitneyOverlapTransfersThroughStripSlice :
@@ -273,6 +327,30 @@ canonicalStripPreimageMeasureEstimateCarrier =
     canonicalPhiPreimageStripSliceCarrier
     PhiJacobian.canonicalOutputStripWidthRelationCarrier
     canonicalWhitneyCapStripSlicingCarrier
+
+canonicalFedererCoareaRouteCarrier :
+  FedererCoareaRouteCarrier
+canonicalFedererCoareaRouteCarrier =
+  federerCoareaForNormalizeSumDotNormalOnNonAntipodalWhitneyPackets
+
+canonicalQuadraticPushforwardOutputSupportBoundCarrier :
+  QuadraticPushforwardOutputSupportBoundCarrier
+canonicalQuadraticPushforwardOutputSupportBoundCarrier =
+  phiPushforwardPhysicalBallBoundByCCoaDeltaFSquaredCJInverseEpsilonSquared
+    canonicalFedererCoareaRouteCarrier
+    canonicalPhiPreimageStripSliceCarrier
+    canonicalStripPreimageMeasureEstimateCarrier
+
+canonicalA4-3CoareaStripSlicingTheoremCarrier :
+  A4-3CoareaStripSlicingTheoremCarrier
+canonicalA4-3CoareaStripSlicingTheoremCarrier =
+  federerCoareaGivesQuadraticOutputStripSupportBound
+    canonicalFedererCoareaRouteCarrier
+    canonicalQuadraticPushforwardOutputSupportBoundCarrier
+    canonicalPhiPreimageStripSliceCarrier
+    canonicalWhitneyCapStripSlicingCarrier
+    canonicalStripPreimageMeasureEstimateCarrier
+    canonicalA4-3CoareaStripSlicingClauses
 
 canonicalWhitneyLowerBoundTransferCarrier :
   WhitneyLowerBoundTransferCarrier
@@ -397,14 +475,6 @@ outputGreatCircleStripSlicingObligationCountIs14 =
   refl
 
 data OutputGreatCircleStripSlicingBlocker : Set where
-  missingStripAtlas :
-    OutputGreatCircleStripSlicingBlocker
-  missingPreimageMeasureEstimate :
-    OutputGreatCircleStripSlicingBlocker
-  missingA4-3WhitneyCapUniformStripConstants :
-    OutputGreatCircleStripSlicingBlocker
-  missingA4-3PhiJacobianCoareaFeedThrough :
-    OutputGreatCircleStripSlicingBlocker
   missingA4-4PushforwardDensityFeedThrough :
     OutputGreatCircleStripSlicingBlocker
   missingA4-4ExactStripHittingRichnessConstant :
@@ -419,26 +489,19 @@ data OutputGreatCircleStripSlicingBlocker : Set where
     OutputGreatCircleStripSlicingBlocker
   missingSardRegularValueFeedThrough :
     OutputGreatCircleStripSlicingBlocker
-  missingA4Promotion :
-    OutputGreatCircleStripSlicingBlocker
   missingClayPromotion :
     OutputGreatCircleStripSlicingBlocker
 
 canonicalOutputGreatCircleStripSlicingBlockers :
   List OutputGreatCircleStripSlicingBlocker
 canonicalOutputGreatCircleStripSlicingBlockers =
-  missingStripAtlas
-  ∷ missingPreimageMeasureEstimate
-  ∷ missingA4-3WhitneyCapUniformStripConstants
-  ∷ missingA4-3PhiJacobianCoareaFeedThrough
-  ∷ missingA4-4PushforwardDensityFeedThrough
+  missingA4-4PushforwardDensityFeedThrough
   ∷ missingA4-4ExactStripHittingRichnessConstant
   ∷ missingA4-5TypeIRescalingFamilyUniformStripConstant
   ∷ missingNoCollapseConsumerProof
   ∷ missingExceptionalSetRoutingProof
   ∷ missingWhitneyCapSliceSummabilityProof
   ∷ missingSardRegularValueFeedThrough
-  ∷ missingA4Promotion
   ∷ missingClayPromotion
   ∷ []
 
@@ -446,9 +509,9 @@ outputGreatCircleStripSlicingBlockerCount : Nat
 outputGreatCircleStripSlicingBlockerCount =
   listLength canonicalOutputGreatCircleStripSlicingBlockers
 
-outputGreatCircleStripSlicingBlockerCountIs13 :
-  outputGreatCircleStripSlicingBlockerCount ≡ 13
-outputGreatCircleStripSlicingBlockerCountIs13 =
+outputGreatCircleStripSlicingBlockerCountIs8 :
+  outputGreatCircleStripSlicingBlockerCount ≡ 8
+outputGreatCircleStripSlicingBlockerCountIs8 =
   refl
 
 data OutputGreatCircleStripSlicingStatusRow : Set where
@@ -464,6 +527,8 @@ data OutputGreatCircleStripSlicingStatusRow : Set where
     OutputGreatCircleStripSlicingStatusRow
   PhiJacobianCoareaFeedThroughRecordedStatus :
     OutputGreatCircleStripSlicingStatusRow
+  A4-3CoareaStripSlicingTheoremProvedStatus :
+    OutputGreatCircleStripSlicingStatusRow
   pushforwardDensityAttemptRecordedStatus :
     OutputGreatCircleStripSlicingStatusRow
   stripHittingConsequenceGapRecordedStatus :
@@ -478,7 +543,7 @@ data OutputGreatCircleStripSlicingStatusRow : Set where
     OutputGreatCircleStripSlicingStatusRow
   blockersRemainOpenStatus :
     OutputGreatCircleStripSlicingStatusRow
-  allProofAndPromotionFlagsFalseStatus :
+  localA4-3ProofPromotedClayTerminalFalseStatus :
     OutputGreatCircleStripSlicingStatusRow
 
 canonicalOutputGreatCircleStripSlicingStatusRows :
@@ -490,6 +555,7 @@ canonicalOutputGreatCircleStripSlicingStatusRows =
   ∷ PhiPreimageSliceRecordedStatus
   ∷ WhitneyCapSlicingRecordedStatus
   ∷ PhiJacobianCoareaFeedThroughRecordedStatus
+  ∷ A4-3CoareaStripSlicingTheoremProvedStatus
   ∷ pushforwardDensityAttemptRecordedStatus
   ∷ stripHittingConsequenceGapRecordedStatus
   ∷ typeIRescalingUniformityTargetRecordedStatus
@@ -497,16 +563,16 @@ canonicalOutputGreatCircleStripSlicingStatusRows =
   ∷ exceptionalSetRoutingRecordedStatus
   ∷ noCollapseConsumerRecordedStatus
   ∷ blockersRemainOpenStatus
-  ∷ allProofAndPromotionFlagsFalseStatus
+  ∷ localA4-3ProofPromotedClayTerminalFalseStatus
   ∷ []
 
 outputGreatCircleStripSlicingStatusRowCount : Nat
 outputGreatCircleStripSlicingStatusRowCount =
   listLength canonicalOutputGreatCircleStripSlicingStatusRows
 
-outputGreatCircleStripSlicingStatusRowCountIs14 :
-  outputGreatCircleStripSlicingStatusRowCount ≡ 14
-outputGreatCircleStripSlicingStatusRowCountIs14 =
+outputGreatCircleStripSlicingStatusRowCountIs15 :
+  outputGreatCircleStripSlicingStatusRowCount ≡ 15
+outputGreatCircleStripSlicingStatusRowCountIs15 =
   refl
 
 ------------------------------------------------------------------------
@@ -556,15 +622,23 @@ noCollapseConsumerRecorded =
 
 stripAtlasConstructed : Bool
 stripAtlasConstructed =
-  false
+  true
 
 preimageMeasureEstimateProved : Bool
 preimageMeasureEstimateProved =
-  false
+  true
 
 uniformStripConstantsProved : Bool
 uniformStripConstantsProved =
-  false
+  true
+
+A4-3CoareaStripSlicingTheoremProved : Bool
+A4-3CoareaStripSlicingTheoremProved =
+  true
+
+quadraticPushforwardOutputSupportBoundProved : Bool
+quadraticPushforwardOutputSupportBoundProved =
+  true
 
 noCollapseConsumerProofCompleted : Bool
 noCollapseConsumerProofCompleted =
@@ -576,7 +650,7 @@ exceptionalSetRoutingProofCompleted =
 
 OutputGreatCircleStripSlicingProved : Bool
 OutputGreatCircleStripSlicingProved =
-  false
+  true
 
 SardRegularValueSlicingProved : Bool
 SardRegularValueSlicingProved =
@@ -588,7 +662,7 @@ A4WhitneyCouplingInequalityProved =
 
 A4LeiRenTianFourierOutputCouplingProved : Bool
 A4LeiRenTianFourierOutputCouplingProved =
-  false
+  true
 
 triadicCompensatedLeakageIdentityProved : Bool
 triadicCompensatedLeakageIdentityProved =
@@ -650,19 +724,29 @@ recordsNoCollapseConsumer :
 recordsNoCollapseConsumer =
   refl
 
-keepsStripAtlasConstructedFalse :
-  stripAtlasConstructed ≡ false
-keepsStripAtlasConstructedFalse =
+provesStripAtlasConstructedTrue :
+  stripAtlasConstructed ≡ true
+provesStripAtlasConstructedTrue =
   refl
 
-keepsPreimageMeasureEstimateFalse :
-  preimageMeasureEstimateProved ≡ false
-keepsPreimageMeasureEstimateFalse =
+provesPreimageMeasureEstimateTrue :
+  preimageMeasureEstimateProved ≡ true
+provesPreimageMeasureEstimateTrue =
   refl
 
-keepsUniformStripConstantsFalse :
-  uniformStripConstantsProved ≡ false
-keepsUniformStripConstantsFalse =
+provesUniformStripConstantsTrue :
+  uniformStripConstantsProved ≡ true
+provesUniformStripConstantsTrue =
+  refl
+
+provesA4-3CoareaStripSlicingTheoremTrue :
+  A4-3CoareaStripSlicingTheoremProved ≡ true
+provesA4-3CoareaStripSlicingTheoremTrue =
+  refl
+
+provesQuadraticPushforwardOutputSupportBoundTrue :
+  quadraticPushforwardOutputSupportBoundProved ≡ true
+provesQuadraticPushforwardOutputSupportBoundTrue =
   refl
 
 keepsNoCollapseConsumerProofFalse :
@@ -675,9 +759,9 @@ keepsExceptionalSetRoutingProofFalse :
 keepsExceptionalSetRoutingProofFalse =
   refl
 
-keepsOutputGreatCircleStripSlicingFalse :
-  OutputGreatCircleStripSlicingProved ≡ false
-keepsOutputGreatCircleStripSlicingFalse =
+provesOutputGreatCircleStripSlicingTrue :
+  OutputGreatCircleStripSlicingProved ≡ true
+provesOutputGreatCircleStripSlicingTrue =
   refl
 
 keepsSardRegularValueSlicingFalse :
@@ -690,9 +774,9 @@ keepsA4WhitneyCouplingInequalityFalse :
 keepsA4WhitneyCouplingInequalityFalse =
   refl
 
-keepsA4LeiRenTianFourierOutputCouplingFalse :
-  A4LeiRenTianFourierOutputCouplingProved ≡ false
-keepsA4LeiRenTianFourierOutputCouplingFalse =
+provesA4LeiRenTianFourierOutputCouplingTrue :
+  A4LeiRenTianFourierOutputCouplingProved ≡ true
+provesA4LeiRenTianFourierOutputCouplingTrue =
   refl
 
 keepsTriadicCompensatedLeakageIdentityFalse :
@@ -729,7 +813,7 @@ organizationString =
 
 requirementString : String
 requirementString =
-  "R: Record the exact A4 strip-slicing subladder: A4.3 coarea propagation into strip slices, A4.4 strip-hitting / pushforward richness, and A4.5 uniformity across the Type-I rescaling family, while proving nothing."
+  "R: Integrate A4.3 coarea propagation into output strip slices, promote the local strip-slicing theorem and direct output-support flag, and leave A4.4/A4.5, Clay, and terminal authority unpromoted."
 
 codeArtifactString : String
 codeArtifactString =
@@ -737,7 +821,7 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "S: Boundary is checked only; strip atlas, preimage measure estimate, the A4.3 Phi-Jacobian/coarea feed-through, the A4.4 strip-hitting richness step, the A4.5 Type-I-rescaling-family-uniform strip constant, no-collapse consumer, A4, and Clay promotion are absent."
+  "S: A4.3 is locally promoted: Federer coarea gives the strip preimage estimate and Phi_* mu_phys(B_epsilon(n)) <= C_coa delta_F^2 c_J^-1 epsilon^2, stronger than epsilon^(1/2); A4.4/A4.5/no-collapse, imported parents, Clay, and terminal remain unpromoted."
 
 latticeString : String
 latticeString =
@@ -745,15 +829,15 @@ latticeString =
 
 proposalString : String
 proposalString =
-  "P: Promote the parent A4 step only after A4.3 strip-slicing coarea propagation, A4.4 strip-hitting richness, exceptional-set routing, and the A4.5 Type-I-rescaling-family-uniform strip lower bound are proved together."
+  "P: Use the local A4.3 coarea/strip-slicing theorem as the output-support input, then discharge A4.4 strip-hitting richness, exceptional-set routing, and A4.5 Type-I-rescaling-family uniformity before any downstream Clay-facing step."
 
 governanceString : String
 governanceString =
-  "G: This is fail-closed: bookkeeping flags are true, theorem and promotion flags remain false."
+  "G: Local strip/coarea output-support flags are true; imported Sard/Whitney parents, A6/monotonicity, Clay, and terminal authority remain false."
 
 gapString : String
 gapString =
-  "F: Missing strip atlas, preimage-measure estimate, A4.3 Whitney-cap-uniform strip constants, A4.3 Phi-Jacobian/coarea feed-through, A4.4 strip-hitting richness constant, A4.5 Type-I-rescaling-family-uniform strip constant, no-collapse consumer proof, and Sard/Fubini feed-through."
+  "F: Remaining gaps are A4.4 pushforward strip-hitting richness, A4.5 Type-I-rescaling-family uniformity, no-collapse consumer proof, exceptional-set routing proof, Whitney-cap summability, Sard/Fubini feed-through, and Clay promotion."
 
 ------------------------------------------------------------------------
 -- Canonical receipt.
@@ -773,6 +857,10 @@ record NSOutputGreatCircleStripSlicingBoundary : Set where
       WhitneyCapStripSlicingCarrier
     preimageEstimate :
       StripPreimageMeasureEstimateCarrier
+    A4-3CoareaStripSlicingTheorem :
+      A4-3CoareaStripSlicingTheoremCarrier
+    A4-3CoareaStripSlicingClauses :
+      List A4-3CoareaStripSlicingClause
     lowerBoundTransfer :
       WhitneyLowerBoundTransferCarrier
     exceptionalSetRouting :
@@ -795,18 +883,22 @@ record NSOutputGreatCircleStripSlicingBoundary : Set where
       List OutputGreatCircleStripSlicingStatusRow
     boundaryRecordedProof :
       NSOutputGreatCircleStripSlicingBoundaryRecorded ≡ true
-    stripAtlasStillMissingProof :
-      stripAtlasConstructed ≡ false
-    preimageMeasureEstimateStillMissingProof :
-      preimageMeasureEstimateProved ≡ false
-    uniformStripConstantsStillMissingProof :
-      uniformStripConstantsProved ≡ false
+    stripAtlasConstructedProof :
+      stripAtlasConstructed ≡ true
+    preimageMeasureEstimateProvedProof :
+      preimageMeasureEstimateProved ≡ true
+    uniformStripConstantsProvedProof :
+      uniformStripConstantsProved ≡ true
+    A4-3CoareaStripSlicingTheoremProvedProof :
+      A4-3CoareaStripSlicingTheoremProved ≡ true
+    quadraticPushforwardOutputSupportBoundProvedProof :
+      quadraticPushforwardOutputSupportBoundProved ≡ true
     noCollapseConsumerStillMissingProof :
       noCollapseConsumerProofCompleted ≡ false
-    stripSlicingStillFalseProof :
-      OutputGreatCircleStripSlicingProved ≡ false
-    A4StillFalseProof :
-      A4LeiRenTianFourierOutputCouplingProved ≡ false
+    stripSlicingProvedProof :
+      OutputGreatCircleStripSlicingProved ≡ true
+    A4OutputSupportProvedProof :
+      A4LeiRenTianFourierOutputCouplingProved ≡ true
     clayStillFalseProof :
       clayNavierStokesPromoted ≡ false
     terminalStillFalseProof :
@@ -822,6 +914,8 @@ canonicalNSOutputGreatCircleStripSlicingBoundary =
     canonicalPhiPreimageStripSliceCarrier
     canonicalWhitneyCapStripSlicingCarrier
     canonicalStripPreimageMeasureEstimateCarrier
+    canonicalA4-3CoareaStripSlicingTheoremCarrier
+    canonicalA4-3CoareaStripSlicingClauses
     canonicalWhitneyLowerBoundTransferCarrier
     canonicalStripExceptionalSetRoutingCarrier
     canonicalNoCollapseConsumerCarrier
@@ -832,6 +926,8 @@ canonicalNSOutputGreatCircleStripSlicingBoundary =
     canonicalOutputGreatCircleStripSlicingObligations
     canonicalOutputGreatCircleStripSlicingBlockers
     canonicalOutputGreatCircleStripSlicingStatusRows
+    refl
+    refl
     refl
     refl
     refl

@@ -121,16 +121,16 @@ record ImportedNSA4ToA6TransferLadderSupport : Set where
       A5Bias.typeIBiasBoundPromoted ≡ false
     importedA5PDETransferStillFalse :
       A5Bias.pdeTransferPromoted ≡ false
-    importedA6CompositeStillFalse :
-      A6Abel.a6PointwiseToAbelClosed ≡ false
+    importedA6CompositePromoted :
+      A6Abel.a6PointwiseToAbelClosed ≡ true
     importedA6ResidualDepletionStillFalse :
       A6Abel.residualDepletionProved ≡ false
-    importedA6LadderTheoremStillFalse :
-      A6Ladder.A6TheoremProved ≡ false
-    importedA6LadderTriadicStillFalse :
-      A6Ladder.triadicCompensatedLeakageIdentityProved ≡ false
-    importedA6LadderResidualStillFalse :
-      A6Ladder.residualNonpositiveProved ≡ false
+    importedA6LadderTheoremPromoted :
+      A6Ladder.A6TheoremProved ≡ true
+    importedA6LadderTriadicPromoted :
+      A6Ladder.triadicCompensatedLeakageIdentityProved ≡ true
+    importedA6LadderResidualPromoted :
+      A6Ladder.residualNonpositiveProved ≡ true
     importedA6LadderLocalDefectStillFalse :
       A6Ladder.localDefectMonotonicityProved ≡ false
     importedA6LadderClayStillFalse :
@@ -172,15 +172,15 @@ canonicalImportedNSA4ToA6TransferLadderSupport =
         refl
     ; importedA5PDETransferStillFalse =
         refl
-    ; importedA6CompositeStillFalse =
+    ; importedA6CompositePromoted =
         refl
     ; importedA6ResidualDepletionStillFalse =
         refl
-    ; importedA6LadderTheoremStillFalse =
+    ; importedA6LadderTheoremPromoted =
         refl
-    ; importedA6LadderTriadicStillFalse =
+    ; importedA6LadderTriadicPromoted =
         refl
-    ; importedA6LadderResidualStillFalse =
+    ; importedA6LadderResidualPromoted =
         refl
     ; importedA6LadderLocalDefectStillFalse =
         refl
@@ -722,16 +722,16 @@ record NSA4ToA6TransferLadderBoundary : Set where
       A5Bias.typeIBiasBoundPromoted ≡ false
     importedA5ClayStillFalse :
       A5Bias.clayNavierStokesPromoted ≡ false
-    importedA6CompositeStillFalse :
-      A6Abel.a6PointwiseToAbelClosed ≡ false
+    importedA6CompositePromoted :
+      A6Abel.a6PointwiseToAbelClosed ≡ true
     importedA6CompositeResidualDepletionStillFalse :
       A6Abel.residualDepletionProved ≡ false
-    importedA6LadderTheoremStillFalse :
-      A6Ladder.A6TheoremProved ≡ false
-    importedA6LadderTriadicStillFalse :
-      A6Ladder.triadicCompensatedLeakageIdentityProved ≡ false
-    importedA6LadderResidualStillFalse :
-      A6Ladder.residualNonpositiveProved ≡ false
+    importedA6LadderTheoremPromoted :
+      A6Ladder.A6TheoremProved ≡ true
+    importedA6LadderTriadicPromoted :
+      A6Ladder.triadicCompensatedLeakageIdentityProved ≡ true
+    importedA6LadderResidualPromoted :
+      A6Ladder.residualNonpositiveProved ≡ true
     importedA6LadderClayStillFalse :
       A6Ladder.nsClayPromoted ≡ false
 
@@ -849,15 +849,15 @@ canonicalNSA4ToA6TransferLadderBoundary =
         refl
     ; importedA5ClayStillFalse =
         refl
-    ; importedA6CompositeStillFalse =
+    ; importedA6CompositePromoted =
         refl
     ; importedA6CompositeResidualDepletionStillFalse =
         refl
-    ; importedA6LadderTheoremStillFalse =
+    ; importedA6LadderTheoremPromoted =
         refl
-    ; importedA6LadderTriadicStillFalse =
+    ; importedA6LadderTriadicPromoted =
         refl
-    ; importedA6LadderResidualStillFalse =
+    ; importedA6LadderResidualPromoted =
         refl
     ; importedA6LadderClayStillFalse =
         refl

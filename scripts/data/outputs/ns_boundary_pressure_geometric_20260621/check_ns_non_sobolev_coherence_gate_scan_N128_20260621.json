@@ -1,0 +1,16 @@
+{
+  "C": "scripts/check_ns_non_sobolev_coherence_gate_scan.py",
+  "F": "Any malformed field or authority drift is a hard error.",
+  "G": "Checker remains empirical and non-promoting.",
+  "L": "Load the scan JSON, validate rows and aggregates, then emit a checker receipt.",
+  "O": "Validate non-Sobolev coherence gate telemetry output.",
+  "P": "FAIL_CLOSED_NS_NON_SOBOLEV_COHERENCE_GATE_SCAN_CHECK",
+  "R": "Check schema, authority flags, aggregate rows, and same-H^s-control telemetry fields.",
+  "S": "Fail-closed checker for malformed non-Sobolev telemetry surfaces.",
+  "contract": "check_ns_non_sobolev_coherence_gate_scan",
+  "errors": [],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_NON_SOBOLEV_COHERENCE_GATE_SCAN_CHECK",
+  "status": "ok",
+  "warnings": []
+}

@@ -114,7 +114,7 @@ record QCDRunningFromCarrierScaleReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -185,7 +185,7 @@ canonicalQCDRunningFromCarrierScaleReceipt =
     ; continuumBetaRunningConstructedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

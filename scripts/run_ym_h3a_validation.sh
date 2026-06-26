@@ -10,6 +10,30 @@ DEFAULT_JOBS=1
 LOG_ROOT="$REPO_ROOT/logs/agda-ym-h3a"
 EVERYTHING_TARGET="DASHI/Everything.agda"
 
+resolve_agda_bin() {
+  if [ -n "${AGDA_BIN:-}" ]; then
+    printf '%s\n' "${AGDA_BIN}"
+    return 0
+  fi
+
+  local candidate_store candidate_bin
+  candidate_store="$(nix build --no-link --print-out-paths /home/c/Documents/code/agda#debug.bin 2>/dev/null)"
+  candidate_bin="${candidate_store}/bin/agda"
+  if [ -n "$candidate_store" ] && [ -x "$candidate_bin" ]; then
+    printf '%s\n' "$candidate_bin"
+    return 0
+  fi
+
+  if command -v agda >/dev/null 2>&1; then
+    command -v agda
+    return 0
+  fi
+
+  echo agda
+}
+
+AGDA_BIN="$(resolve_agda_bin)"
+
 usage() {
   cat <<'EOF'
 Usage: scripts/run_ym_h3a_validation.sh [options]
@@ -74,14 +98,14 @@ run_target() {
 
   {
     echo "== $target =="
-    echo "command: timeout ${timeout_s}s agda -i . -i DCHoTT-Agda -i cubical -l standard-library $target"
+    echo "command: timeout ${timeout_s}s ${AGDA_BIN} -i . -i DCHoTT-Agda -i cubical -l standard-library $target"
     echo "started: $(date -Iseconds)"
     echo
   } >"$log_file"
 
   (
     cd "$REPO_ROOT" || exit 99
-    timeout "${timeout_s}s" agda -i . -i DCHoTT-Agda -i cubical -l standard-library "$target"
+    timeout "${timeout_s}s" "$AGDA_BIN" -i . -i DCHoTT-Agda -i cubical -l standard-library "$target"
   ) >>"$log_file" 2>&1
   status=$?
 
@@ -173,7 +197,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-require_cmd agda
+require_cmd "$AGDA_BIN"
 require_cmd timeout
 require_cmd awk
 require_cmd xargs

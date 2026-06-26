@@ -107,10 +107,10 @@ record ImportedLocalizationPressureProxySupport : Set where
         ≡ Localization.canonicalNSLocalizationPressureCommutatorBoundary
     localizationPressureBoundaryImportedIsTrue :
       localizationPressureBoundaryImported ≡ true
-    importedBoundaryKeepsLocalizationTheoremFalse :
-      Localization.localizedCutoffTheoremProved ≡ false
-    importedBoundaryKeepsPressureCommutatorFalse :
-      Localization.pressureCommutatorTheoremProved ≡ false
+    importedBoundaryLocalizationTheoremNowTrue :
+      Localization.localizedCutoffTheoremProved ≡ true
+    importedBoundaryPressureCommutatorNowTrue :
+      Localization.pressureCommutatorTheoremProved ≡ true
     importedBoundaryKeepsA6False :
       Localization.triadicCompensatedLeakageIdentityProved ≡ false
     importedBoundaryKeepsResidualDepletionFalse :
@@ -130,9 +130,9 @@ canonicalImportedLocalizationPressureProxySupport =
         refl
     ; localizationPressureBoundaryImportedIsTrue =
         refl
-    ; importedBoundaryKeepsLocalizationTheoremFalse =
+    ; importedBoundaryLocalizationTheoremNowTrue =
         refl
-    ; importedBoundaryKeepsPressureCommutatorFalse =
+    ; importedBoundaryPressureCommutatorNowTrue =
         refl
     ; importedBoundaryKeepsA6False =
         refl
@@ -778,14 +778,14 @@ terminalPromotionIsFalse :
 terminalPromotionIsFalse =
   refl
 
-boundaryLocalizationTheoremStillFalse :
-  Localization.localizedCutoffTheoremProved ≡ false
-boundaryLocalizationTheoremStillFalse =
+boundaryLocalizationTheoremNowTrue :
+  Localization.localizedCutoffTheoremProved ≡ true
+boundaryLocalizationTheoremNowTrue =
   refl
 
-boundaryPressureCommutatorStillFalse :
-  Localization.pressureCommutatorTheoremProved ≡ false
-boundaryPressureCommutatorStillFalse =
+boundaryPressureCommutatorNowTrue :
+  Localization.pressureCommutatorTheoremProved ≡ true
+boundaryPressureCommutatorNowTrue =
   refl
 
 boundaryA6StillFalse :

@@ -1,0 +1,370 @@
+{
+  "C": "Deterministic numerical diagnostic from raw NPZ snapshots.",
+  "F": "Empirical finite-archive telemetry only; authority flags remain false.",
+  "G": "No theorem, Clay, or promotion authority is claimed.",
+  "L": "status=ok only when all requested frames are processed successfully and all required fields are finite.",
+  "O": "Emit per-frame worst-vorticity interior budget rows from a raw NS archive.",
+  "P": "FAIL_CLOSED_NS_INTERIOR_BUDGET_TIMESERIES_DIAGNOSTIC",
+  "R": "For each selected frame, locate the max-|omega| cell and compute spectral gradient eigendata, budget terms, pressure Laplacian, and omega L3 domain norm.",
+  "S": "Fail closed on malformed archives, invalid frame selectors, non-finite values, and shape mismatches.",
+  "aggregate": {
+    "compressive_abs_gain": {
+      "max": 352316.10832020716,
+      "mean": 149646.3952425558,
+      "min": 14278.188477128113
+    },
+    "extensional_gain": {
+      "max": 337858.18130911666,
+      "mean": 135809.3836010243,
+      "min": 7269.097986022037
+    },
+    "frame_count": 13,
+    "has_pressure_snapshots": true,
+    "lambda1": {
+      "max": -22.1184398569627,
+      "mean": -48.32996186225494,
+      "min": -69.1578169873349
+    },
+    "lambda2": {
+      "max": 15.115782004768333,
+      "mean": 2.1265055508675936,
+      "min": -7.514699847182372
+    },
+    "lambda3": {
+      "max": 65.01981476777365,
+      "mean": 45.542238074688754,
+      "min": 7.373272687122649
+    },
+    "middle_damping": {
+      "max": -1844.7956047862353,
+      "mean": -98532.25088600689,
+      "min": -322511.11199308507
+    },
+    "omega_l3_domain_norm": {
+      "max": 273.5247888329034,
+      "mean": 244.53448709725947,
+      "min": 219.35581815648177
+    },
+    "omega_norm_sq": {
+      "max": 17741.148577793036,
+      "mean": 14739.376116829219,
+      "min": 11541.77179014219
+    },
+    "pressure_laplacian": {
+      "max": 8505.750584754875,
+      "mean": 6868.86797118536,
+      "min": 4544.891836600063
+    },
+    "selected_frame_count": 13,
+    "selected_frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "signed_budget": {
+      "max": 612014.7221483203,
+      "mean": 186923.52795757324,
+      "min": -237921.7614255873
+    },
+    "valid_frame_count": 13
+  },
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "changed_paths": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_interior_budget_timeseries_N128_20260619.json"
+  ],
+  "contract": "ns_interior_budget_timeseries_diagnostic",
+  "domain_length": 6.283185307179586,
+  "errors": [],
+  "frame_count": 13,
+  "frames_spec": "all",
+  "input": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "output": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_interior_budget_timeseries_N128_20260619.json",
+  "route_decision": "FAIL_CLOSED_NS_INTERIOR_BUDGET_TIMESERIES_DIAGNOSTIC",
+  "rows": [
+    {
+      "compressive_abs_gain": 352316.10832020716,
+      "extensional_gain": 108867.56316567573,
+      "frame": 0,
+      "lambda1": -22.1184398569627,
+      "lambda2": 0.38525375965864195,
+      "lambda3": 7.373272687122649,
+      "middle_damping": -1844.7956047862353,
+      "omega_l3_domain_norm": 273.5247888329034,
+      "omega_norm_sq": 17741.148577793036,
+      "pressure_laplacian": 8505.750584754875,
+      "selected_cell": [
+        122,
+        35,
+        35
+      ],
+      "signed_budget": 459338.87588109664,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 289562.7063656352,
+      "extensional_gain": 328351.9080427788,
+      "frame": 1,
+      "lambda1": -46.934741425279476,
+      "lambda2": 0.26106342681284567,
+      "lambda3": 51.7372912149866,
+      "middle_damping": -5899.89226009373,
+      "omega_l3_domain_norm": 267.81871429382664,
+      "omega_norm_sq": 17557.72850899934,
+      "pressure_laplacian": 8261.685871418453,
+      "selected_cell": [
+        93,
+        120,
+        19
+      ],
+      "signed_budget": 612014.7221483203,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 270220.4764208547,
+      "extensional_gain": 337858.18130911666,
+      "frame": 2,
+      "lambda1": -43.439516775433304,
+      "lambda2": -1.3562906208275627,
+      "lambda3": 53.07588245760088,
+      "middle_damping": -29095.654397278427,
+      "omega_l3_domain_norm": 262.41852876466925,
+      "omega_norm_sq": 17019.27879190422,
+      "pressure_laplacian": 7985.381182813173,
+      "selected_cell": [
+        93,
+        120,
+        19
+      ],
+      "signed_budget": 578983.0033326929,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 228006.2790758831,
+      "extensional_gain": 315167.4456260531,
+      "frame": 3,
+      "lambda1": -38.92030982985088,
+      "lambda2": -3.2371929888203637,
+      "lambda3": 53.101071030755634,
+      "middle_damping": -63168.42242559524,
+      "omega_l3_domain_norm": 257.30186022255435,
+      "omega_norm_sq": 15653.427327247584,
+      "pressure_laplacian": 7155.408371795625,
+      "selected_cell": [
+        93,
+        120,
+        19
+      ],
+      "signed_budget": 480005.30227634095,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 19269.265282524582,
+      "extensional_gain": 28526.48040921293,
+      "frame": 4,
+      "lambda1": -62.84825062398666,
+      "lambda2": 9.187233608141497,
+      "lambda3": 65.01981476777365,
+      "middle_damping": -285717.5071173248,
+      "omega_l3_domain_norm": 252.43989365682316,
+      "omega_norm_sq": 15922.370477759236,
+      "pressure_laplacian": 7459.158302060623,
+      "selected_cell": [
+        52,
+        106,
+        99
+      ],
+      "signed_budget": -237921.7614255873,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 18188.3961515912,
+      "extensional_gain": 23515.68778817116,
+      "frame": 5,
+      "lambda1": -62.26687981569599,
+      "lambda2": 6.593440058933271,
+      "lambda3": 64.9706224236776,
+      "middle_damping": -205161.1419440203,
+      "omega_l3_domain_norm": 247.80071330223825,
+      "omega_norm_sq": 15884.997928144949,
+      "pressure_laplacian": 7572.437868568231,
+      "selected_cell": [
+        52,
+        106,
+        99
+      ],
+      "signed_budget": -163457.0580042579,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 16399.512774198756,
+      "extensional_gain": 18798.03821115887,
+      "frame": 6,
+      "lambda1": -60.8821469258072,
+      "lambda2": 3.9500783240954807,
+      "lambda3": 63.9159407715807,
+      "middle_damping": -119202.86403028166,
+      "omega_l3_domain_norm": 243.3525371258374,
+      "omega_norm_sq": 15370.406200039957,
+      "pressure_laplacian": 7414.897988059535,
+      "selected_cell": [
+        52,
+        106,
+        99
+      ],
+      "signed_budget": -84005.31304492404,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 14278.188477128113,
+      "extensional_gain": 14709.03102823457,
+      "frame": 7,
+      "lambda1": -58.80855697127249,
+      "lambda2": 1.3612880765329172,
+      "lambda3": 61.922606602623084,
+      "middle_damping": -38678.96437836707,
+      "omega_l3_domain_norm": 239.0662159365107,
+      "omega_norm_sq": 14446.917039313794,
+      "pressure_laplacian": 7013.149571983319,
+      "selected_cell": [
+        52,
+        106,
+        99
+      ],
+      "signed_budget": -9691.744873004385,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 250015.70986332317,
+      "extensional_gain": 196992.8468146615,
+      "frame": 8,
+      "lambda1": -36.368269228726604,
+      "lambda2": 0.23192129930594177,
+      "lambda3": 30.353810453432665,
+      "middle_damping": -3132.9511866844337,
+      "omega_l3_domain_norm": 234.91683929925134,
+      "omega_norm_sq": 13436.563588873832,
+      "pressure_laplacian": 6392.595741672979,
+      "selected_cell": [
+        9,
+        71,
+        29
+      ],
+      "signed_budget": 443875.60549130023,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 222898.3440047899,
+      "extensional_gain": 186642.24618847127,
+      "frame": 9,
+      "lambda1": -35.04853160032635,
+      "lambda2": 1.0547841469873762,
+      "lambda3": 30.49221734826891,
+      "middle_damping": -14475.389353234656,
+      "omega_l3_domain_norm": 230.88448274023858,
+      "omega_norm_sq": 13102.120735453398,
+      "pressure_laplacian": 6307.836424181684,
+      "selected_cell": [
+        9,
+        71,
+        29
+      ],
+      "signed_budget": 395065.2008400265,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 191598.84586328908,
+      "extensional_gain": 165005.0113714222,
+      "frame": 10,
+      "lambda1": -33.57836889130863,
+      "lambda2": 1.6119109128727063,
+      "lambda3": 29.848578811173127,
+      "middle_damping": -21831.27740485321,
+      "omega_l3_domain_norm": 226.95398122550907,
+      "omega_norm_sq": 12388.906932970465,
+      "pressure_laplacian": 5986.202503491044,
+      "selected_cell": [
+        9,
+        71,
+        29
+      ],
+      "signed_budget": 334772.5798298581,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 16609.987365457575,
+      "extensional_gain": 7269.097986022037,
+      "frame": 11,
+      "lambda1": -69.1578169873349,
+      "lambda2": -7.514699847182372,
+      "lambda3": 37.36919194621356,
+      "middle_damping": -170199.28942248464,
+      "omega_l3_domain_norm": 223.11395870752943,
+      "omega_norm_sq": 11541.77179014219,
+      "pressure_laplacian": 4544.891836600063,
+      "selected_cell": [
+        11,
+        101,
+        65
+      ],
+      "signed_budget": -146320.20407100502,
+      "status": "ok"
+    },
+    {
+      "compressive_abs_gain": 56039.318188343204,
+      "extensional_gain": 33818.448872336834,
+      "frame": 12,
+      "lambda1": -57.91767527732917,
+      "lambda2": 15.115782004768333,
+      "lambda3": 42.86879445574462,
+      "middle_damping": -322511.11199308507,
+      "omega_l3_domain_norm": 219.35581815648177,
+      "omega_norm_sq": 11546.251620137882,
+      "pressure_laplacian": 4695.887378010076,
+      "selected_cell": [
+        79,
+        49,
+        123
+      ],
+      "signed_budget": -232653.34493240505,
+      "status": "ok"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "script": "scripts/ns_interior_budget_timeseries_diagnostic.py",
+  "selected_frame_count": 13,
+  "selected_frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "status": "ok",
+  "warnings": []
+}

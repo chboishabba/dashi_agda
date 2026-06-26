@@ -1,0 +1,11 @@
+{
+  "contract": "check_ns_triad_no_triple_danger_scan",
+  "errors": [],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_NO_TRIPLE_DANGER_SCAN_CHECK",
+  "schema_version": "1.0.0",
+  "script_name": "scripts/check_ns_triad_no_triple_danger_scan.py",
+  "source_contract": "ns_triad_no_triple_danger_scan",
+  "source_script_name": "scripts/ns_triad_no_triple_danger_scan.py",
+  "status": "ok"
+}

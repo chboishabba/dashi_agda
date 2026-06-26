@@ -1,0 +1,112 @@
+{
+  "aggregate": {
+    "carrier_identification_status": "fail-closed",
+    "carrier_identification_top_candidate": "k-n-exact-identity-positive-route",
+    "carrier_identification_top_support_mean": 1.131926550874902,
+    "carrier_row_count": 5,
+    "carrier_story_conclusion": "Observed floor remains real, the K_N exact-identity route is the new positive candidate, and current discrete/spectral carriers are not canonical on the active shell extraction.",
+    "continuous_coherence_capacity_candidate_only": true,
+    "continuous_coherence_capacity_independent_proof_certificate": false,
+    "continuous_coherence_capacity_source": "continuous_coherence_capacity_json",
+    "continuous_coherence_capacity_status": "fail-closed",
+    "continuous_coherence_route_explanatory_fraction_mean": 1.6175315223912248,
+    "current_primary_carrier_identified": false,
+    "cycle_family_route_explanatory_fraction_mean": 0.020165852785257742,
+    "k_n_exact_identity_candidate_only": true,
+    "k_n_exact_identity_independent_proof_certificate": false,
+    "k_n_exact_identity_route_explanatory_fraction_mean": 1.131926550874902,
+    "k_n_exact_identity_source": "k_n_exact_identity_json",
+    "k_n_exact_identity_status": "partial",
+    "observed_floor_ratio_mean": 0.42404722262486105,
+    "schur_route_explanatory_fraction_mean": 0.0,
+    "signed_discrete_route_explanatory_fraction_mean": 0.0,
+    "signed_spectral_route_explanatory_fraction_mean": 0.0
+  },
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "contract": "ns_triad_wall1_carrier_explanatory_rank_scan",
+  "control_card": {
+    "C": "scripts/ns_triad_wall1_carrier_explanatory_rank_scan.py",
+    "F": "The scan only ranks current candidates; it does not certify that any surviving carrier is correct.",
+    "G": "No theorem, full-NS, or Clay promotion is inferred from this ranking scan.",
+    "L": "Read the signed theorem-status and Wall 1 shell-bridge summaries, normalize observed-floor support against each candidate mechanism, and rank the carriers while preserving fail-closed semantics.",
+    "O": "Rank current Wall 1 candidate carriers by explanatory support on the active shell extraction.",
+    "P": "FAIL_CLOSED_NS_TRIAD_WALL1_CARRIER_EXPLANATORY_RANK_SCAN",
+    "R": "Compare cycle-family, raw signed-XOR, signed spectral, and Schur/frame surfaces against the observed Wall 1 floor and emit a fail-closed carrier-identification ranking.",
+    "S": "Candidate-only ranking telemetry; it narrows the bottleneck but does not prove a carrier theorem."
+  },
+  "errors": [],
+  "parameters": {
+    "continuous_coherence_capacity_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_continuous_coherence_capacity_scan_N128_20260623.json",
+    "k_n_exact_identity_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_exact_identity_scan_N128_20260623.json",
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_wall1_carrier_explanatory_rank_scan_N128_20260622.json",
+    "signed_theorem_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_signed_wall1_theorem_status_20260622.json",
+    "wall1_bridge_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_wall1_shell_bridge_summary_20260621.json"
+  },
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_WALL1_CARRIER_EXPLANATORY_RANK_SCAN",
+  "rows": [
+    {
+      "candidate_only": true,
+      "carrier_id": "k-n-exact-identity-positive-route",
+      "carrier_rank": 1,
+      "clay_promoted": false,
+      "empirical_non_promoting": true,
+      "full_ns_promoted": false,
+      "independent_proof_certificate": false,
+      "primary_candidate": false,
+      "proof_certificate": false,
+      "route_name": "wall1a-k-n-exact-identity-positive-route",
+      "status": "partial",
+      "support_ratio_vs_observed_floor": 1.131926550874902,
+      "support_value": 0.47999031011384063,
+      "theorem_promoted": false
+    },
+    {
+      "carrier_id": "cycle-family-local-obstruction",
+      "carrier_rank": 2,
+      "primary_candidate": false,
+      "route_name": "cycle-family-lower-bound",
+      "status": "insufficient",
+      "support_ratio_vs_observed_floor": 0.020165852785257742,
+      "support_value": 0.008551273865450364
+    },
+    {
+      "carrier_id": "raw-signed-xor",
+      "carrier_rank": 3,
+      "primary_candidate": false,
+      "route_name": "wall1a-signed-xor-gaugeability",
+      "status": "insufficient",
+      "support_ratio_vs_observed_floor": 0.0,
+      "support_value": 0.0
+    },
+    {
+      "carrier_id": "signed-spectral-proxy",
+      "carrier_rank": 4,
+      "primary_candidate": false,
+      "route_name": "signed-XY-spectral-frustration-wall-1a",
+      "status": "insufficient",
+      "support_ratio_vs_observed_floor": 0.0,
+      "support_value": 0.0
+    },
+    {
+      "carrier_id": "schur-frame-gap",
+      "carrier_rank": 5,
+      "primary_candidate": false,
+      "route_name": "schur-frame-gap-wall-1b",
+      "status": "unproved",
+      "support_ratio_vs_observed_floor": 0.0,
+      "support_value": 0.0
+    }
+  ],
+  "schema_version": "1.0.0",
+  "script_name": "scripts/ns_triad_wall1_carrier_explanatory_rank_scan.py",
+  "status": "ok",
+  "warnings": []
+}

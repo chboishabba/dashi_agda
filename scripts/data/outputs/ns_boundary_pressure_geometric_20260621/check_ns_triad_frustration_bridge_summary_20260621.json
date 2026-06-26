@@ -1,0 +1,16 @@
+{
+  "C": "scripts/check_ns_triad_frustration_bridge_summary.py",
+  "F": "Any malformed field or authority drift is a hard error.",
+  "G": "Checker remains empirical and non-promoting.",
+  "L": "Load the summary JSON, validate rows and aggregates, then emit a checker receipt.",
+  "O": "Validate the triad-frustration bridge summary output.",
+  "P": "FAIL_CLOSED_NS_TRIAD_FRUSTRATION_BRIDGE_SUMMARY_CHECK",
+  "R": "Check schema, authority flags, bridge rows, and the explicit unproved-wall marker.",
+  "S": "Fail-closed checker for malformed triad-frustration bridge summaries.",
+  "contract": "check_ns_triad_frustration_bridge_summary",
+  "errors": [],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_FRUSTRATION_BRIDGE_SUMMARY_CHECK",
+  "status": "ok",
+  "warnings": []
+}

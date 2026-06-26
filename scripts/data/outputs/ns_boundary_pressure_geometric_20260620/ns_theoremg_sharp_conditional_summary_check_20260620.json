@@ -1,0 +1,31 @@
+{
+  "contract": "check_ns_theoremg_sharp_conditional_summary",
+  "control_card": {
+    "C": "scripts/check_ns_theoremg_sharp_conditional_summary.py",
+    "F": "A valid summary must keep all support flags true and the merged frame count fixed.",
+    "G": "This checker validates bookkeeping only and does not promote a theorem.",
+    "L": "read summary json -> validate support flags and scalar thresholds -> emit deterministic JSON",
+    "O": "Owner 5 validates the sharp conditional TheoremG summary contract.",
+    "P": "FAIL_CLOSED_THEOREMG_SHARP_CONDITIONAL_SUMMARY_CHECK",
+    "R": "Require the CSV-backed summary to preserve positive H_area/H_B support, delta1 > 1, and a positive exponent margin.",
+    "S": "Fail closed on missing keys, failed support flags, non-positive delta1, or non-positive exponent gap."
+  },
+  "details": {
+    "delta1_min": 1.4303,
+    "exponent_margin": 0.601691952737188,
+    "merged_row_count": 13,
+    "status_field_ok": true,
+    "support_flags": {
+      "H_B_positive": true,
+      "H_area_direct_positive": true,
+      "H_area_isop_positive": true,
+      "H_g12_positive": true,
+      "H_g12_sharp_delta1_gt_1": true,
+      "exponent_gap_positive": true,
+      "reported_exp_gap_positive": true
+    }
+  },
+  "errors": [],
+  "input_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_theoremg_sharp_conditional_summary_20260620.json",
+  "status": "ok"
+}

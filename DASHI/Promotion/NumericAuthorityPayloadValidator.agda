@@ -213,6 +213,27 @@ missingConsumerIngestionReceiptField =
     "consumer-specific receipt proving the value was loaded under policy"
     "future value-ingestion receipt"
 
+missingDimensionVectorCarrierField : PayloadSchemaField
+missingDimensionVectorCarrierField =
+  mkAuthorityMissingField
+    "dimensionVectorCarrier"
+    "typed SI-base-dimension exponent vector for the authority row"
+    "future authority-payload shape validator"
+
+missingDimensionVectorWitnessField : PayloadSchemaField
+missingDimensionVectorWitnessField =
+  mkAuthorityMissingField
+    "dimensionVectorMatchesUnitConvention"
+    "proof that the external dimension vector matches the normalized unit convention"
+    "future authority-payload shape validator"
+
+missingUnitFactorizationReceiptField : PayloadSchemaField
+missingUnitFactorizationReceiptField =
+  mkAuthorityMissingField
+    "unitFactorizationReceipt"
+    "proof that parsed value, unit, and conversion policy factor through the authority unit convention"
+    "future authority-payload shape validator"
+
 canonicalSchemaKnownFields : List PayloadSchemaField
 canonicalSchemaKnownFields =
   schemaSymbolField
@@ -239,6 +260,13 @@ canonicalMissingAuthorityPayloadFields =
   ∷ missingParsedCarrierField
   ∷ missingCovarianceField
   ∷ missingConsumerIngestionReceiptField
+  ∷ []
+
+canonicalExternalShapePayloadFields : List PayloadSchemaField
+canonicalExternalShapePayloadFields =
+  missingDimensionVectorCarrierField
+  ∷ missingDimensionVectorWitnessField
+  ∷ missingUnitFactorizationReceiptField
   ∷ []
 
 canonicalPayloadSchemaFields : List PayloadSchemaField
@@ -285,6 +313,151 @@ record PayloadFamilyCoverage : Set₁ where
     numericValueLoadedIsFalse : numericValueLoaded ≡ false
 
 open PayloadFamilyCoverage public
+
+record SIBaseDimensionVector : Set where
+  field
+    lengthPositiveExponent : Nat
+    lengthNegativeExponent : Nat
+    massPositiveExponent : Nat
+    massNegativeExponent : Nat
+    timePositiveExponent : Nat
+    timeNegativeExponent : Nat
+    electricCurrentPositiveExponent : Nat
+    electricCurrentNegativeExponent : Nat
+    thermodynamicTemperaturePositiveExponent : Nat
+    thermodynamicTemperatureNegativeExponent : Nat
+    amountOfSubstancePositiveExponent : Nat
+    amountOfSubstanceNegativeExponent : Nat
+    luminousIntensityPositiveExponent : Nat
+    luminousIntensityNegativeExponent : Nat
+
+open SIBaseDimensionVector public
+
+dimensionlessSIBaseDimensionVector : SIBaseDimensionVector
+dimensionlessSIBaseDimensionVector = record
+  { lengthPositiveExponent = zero
+  ; lengthNegativeExponent = zero
+  ; massPositiveExponent = zero
+  ; massNegativeExponent = zero
+  ; timePositiveExponent = zero
+  ; timeNegativeExponent = zero
+  ; electricCurrentPositiveExponent = zero
+  ; electricCurrentNegativeExponent = zero
+  ; thermodynamicTemperaturePositiveExponent = zero
+  ; thermodynamicTemperatureNegativeExponent = zero
+  ; amountOfSubstancePositiveExponent = zero
+  ; amountOfSubstanceNegativeExponent = zero
+  ; luminousIntensityPositiveExponent = zero
+  ; luminousIntensityNegativeExponent = zero
+  }
+
+kgDimensionVector : SIBaseDimensionVector
+kgDimensionVector = record
+  { lengthPositiveExponent = zero
+  ; lengthNegativeExponent = zero
+  ; massPositiveExponent = suc zero
+  ; massNegativeExponent = zero
+  ; timePositiveExponent = zero
+  ; timeNegativeExponent = zero
+  ; electricCurrentPositiveExponent = zero
+  ; electricCurrentNegativeExponent = zero
+  ; thermodynamicTemperaturePositiveExponent = zero
+  ; thermodynamicTemperatureNegativeExponent = zero
+  ; amountOfSubstancePositiveExponent = zero
+  ; amountOfSubstanceNegativeExponent = zero
+  ; luminousIntensityPositiveExponent = zero
+  ; luminousIntensityNegativeExponent = zero
+  }
+
+newtonianGDimensionVector : SIBaseDimensionVector
+newtonianGDimensionVector = record
+  { lengthPositiveExponent = suc (suc (suc zero))
+  ; lengthNegativeExponent = zero
+  ; massPositiveExponent = zero
+  ; massNegativeExponent = suc zero
+  ; timePositiveExponent = zero
+  ; timeNegativeExponent = suc (suc zero)
+  ; electricCurrentPositiveExponent = zero
+  ; electricCurrentNegativeExponent = zero
+  ; thermodynamicTemperaturePositiveExponent = zero
+  ; thermodynamicTemperatureNegativeExponent = zero
+  ; amountOfSubstancePositiveExponent = zero
+  ; amountOfSubstanceNegativeExponent = zero
+  ; luminousIntensityPositiveExponent = zero
+  ; luminousIntensityNegativeExponent = zero
+  }
+
+record ExternalPayloadShapeRequirement : Set₁ where
+  field
+    shapeRequirementLabel : String
+    normalizedToken : Norm.NormalizedMeasuredAuthorityToken
+    requestedDimensionVector : SIBaseDimensionVector
+    externalShapePayloadFields : List PayloadSchemaField
+    externalShapePayloadFieldCount : Nat
+    externalShapePayloadFieldCountIs3 :
+      externalShapePayloadFieldCount ≡ 3
+    dimensionVectorCarrierPresent : Bool
+    dimensionVectorCarrierPresentIsFalse :
+      dimensionVectorCarrierPresent ≡ false
+    dimensionVectorWitnessPresent : Bool
+    dimensionVectorWitnessPresentIsFalse :
+      dimensionVectorWitnessPresent ≡ false
+    unitFactorizationReceiptPresent : Bool
+    unitFactorizationReceiptPresentIsFalse :
+      unitFactorizationReceiptPresent ≡ false
+    acceptedAuthorityTokenPresent : Bool
+    acceptedAuthorityTokenPresentIsFalse :
+      acceptedAuthorityTokenPresent ≡ false
+    numericValueLoaded : Bool
+    numericValueLoadedIsFalse :
+      numericValueLoaded ≡ false
+
+open ExternalPayloadShapeRequirement public
+
+mkExternalPayloadShapeRequirement :
+  String →
+  Norm.NormalizedMeasuredAuthorityToken →
+  SIBaseDimensionVector →
+  ExternalPayloadShapeRequirement
+mkExternalPayloadShapeRequirement label token vector = record
+  { shapeRequirementLabel = label
+  ; normalizedToken = token
+  ; requestedDimensionVector = vector
+  ; externalShapePayloadFields = canonicalExternalShapePayloadFields
+  ; externalShapePayloadFieldCount = suc (suc (suc zero))
+  ; externalShapePayloadFieldCountIs3 = refl
+  ; dimensionVectorCarrierPresent = false
+  ; dimensionVectorCarrierPresentIsFalse = refl
+  ; dimensionVectorWitnessPresent = false
+  ; dimensionVectorWitnessPresentIsFalse = refl
+  ; unitFactorizationReceiptPresent = false
+  ; unitFactorizationReceiptPresentIsFalse = refl
+  ; acceptedAuthorityTokenPresent = false
+  ; acceptedAuthorityTokenPresentIsFalse = refl
+  ; numericValueLoaded = false
+  ; numericValueLoadedIsFalse = refl
+  }
+
+canonicalExternalPayloadShapeRequirements :
+  List ExternalPayloadShapeRequirement
+canonicalExternalPayloadShapeRequirements =
+  mkExternalPayloadShapeRequirement
+    "external shape requirement for CODATA G"
+    Norm.gNormalizedToken
+    newtonianGDimensionVector
+  ∷ mkExternalPayloadShapeRequirement
+    "external shape requirement for CODATA alpha"
+    Norm.alphaNormalizedToken
+    dimensionlessSIBaseDimensionVector
+  ∷ mkExternalPayloadShapeRequirement
+    "external shape requirement for CODATA electron mass"
+    Norm.electronMassNormalizedToken
+    kgDimensionVector
+  ∷ mkExternalPayloadShapeRequirement
+    "external shape requirement for PDG strong coupling"
+    Norm.alphaSNormalizedToken
+    dimensionlessSIBaseDimensionVector
+  ∷ []
 
 codataPayloadFamilyCoverage : PayloadFamilyCoverage
 codataPayloadFamilyCoverage = record
@@ -493,7 +666,10 @@ record NumericAuthorityPayloadValidatorReceipt : Set₁ where
     schemaFields : List PayloadSchemaField
     schemaKnownFields : List PayloadSchemaField
     missingAuthorityPayloadFields : List PayloadSchemaField
+    externalShapePayloadFields : List PayloadSchemaField
     payloadFamilyCoverageRows : List PayloadFamilyCoverage
+    externalPayloadShapeRequirements :
+      List ExternalPayloadShapeRequirement
     validationStates : List PayloadValidationState
     payloadEnvelopes : List PayloadEnvelope
     codataPayloadEnvelopes : List PayloadEnvelope
@@ -508,8 +684,14 @@ record NumericAuthorityPayloadValidatorReceipt : Set₁ where
     missingAuthorityPayloadFieldCount : Nat
     missingAuthorityPayloadFieldCountIs8 :
       missingAuthorityPayloadFieldCount ≡ 8
+    externalShapePayloadFieldCount : Nat
+    externalShapePayloadFieldCountIs3 :
+      externalShapePayloadFieldCount ≡ 3
     payloadFamilyCoverageCount : Nat
     payloadFamilyCoverageCountIs3 : payloadFamilyCoverageCount ≡ 3
+    externalPayloadShapeRequirementCount : Nat
+    externalPayloadShapeRequirementCountIs4 :
+      externalPayloadShapeRequirementCount ≡ 4
     validationStateCount : Nat
     validationStateCountIs4 : validationStateCount ≡ 4
     payloadEnvelopeCount : Nat
@@ -540,6 +722,9 @@ record NumericAuthorityPayloadValidatorReceipt : Set₁ where
     allPayloadsMissingAuthorityArtifact : Bool
     allPayloadsMissingAuthorityArtifactIsTrue :
       allPayloadsMissingAuthorityArtifact ≡ true
+    allExternalShapeRequirementsMissingPayload : Bool
+    allExternalShapeRequirementsMissingPayloadIsTrue :
+      allExternalShapeRequirementsMissingPayload ≡ true
     noPayloadCarriesMeasuredNumericValue : Bool
     noPayloadCarriesMeasuredNumericValueIsTrue :
       noPayloadCarriesMeasuredNumericValue ≡ true
@@ -588,8 +773,12 @@ canonicalNumericAuthorityPayloadValidatorReceipt = record
   ; schemaKnownFields = canonicalSchemaKnownFields
   ; missingAuthorityPayloadFields =
       canonicalMissingAuthorityPayloadFields
+  ; externalShapePayloadFields =
+      canonicalExternalShapePayloadFields
   ; payloadFamilyCoverageRows =
       canonicalPayloadFamilyCoverageRows
+  ; externalPayloadShapeRequirements =
+      canonicalExternalPayloadShapeRequirements
   ; validationStates = canonicalPayloadValidationStates
   ; payloadEnvelopes = canonicalPayloadEnvelopes
   ; codataPayloadEnvelopes = canonicalCODATAPayloadEnvelopes
@@ -605,9 +794,15 @@ canonicalNumericAuthorityPayloadValidatorReceipt = record
   ; missingAuthorityPayloadFieldCount =
       listCount canonicalMissingAuthorityPayloadFields
   ; missingAuthorityPayloadFieldCountIs8 = refl
+  ; externalShapePayloadFieldCount =
+      listCount canonicalExternalShapePayloadFields
+  ; externalShapePayloadFieldCountIs3 = refl
   ; payloadFamilyCoverageCount =
       listCount canonicalPayloadFamilyCoverageRows
   ; payloadFamilyCoverageCountIs3 = refl
+  ; externalPayloadShapeRequirementCount =
+      listCount canonicalExternalPayloadShapeRequirements
+  ; externalPayloadShapeRequirementCountIs4 = refl
   ; validationStateCount =
       listCount canonicalPayloadValidationStates
   ; validationStateCountIs4 = refl
@@ -648,6 +843,8 @@ canonicalNumericAuthorityPayloadValidatorReceipt = record
         Intake.canonicalNumericAuthorityTokenIntakeReceipt
   ; allPayloadsMissingAuthorityArtifact = true
   ; allPayloadsMissingAuthorityArtifactIsTrue = refl
+  ; allExternalShapeRequirementsMissingPayload = true
+  ; allExternalShapeRequirementsMissingPayloadIsTrue = refl
   ; noPayloadCarriesMeasuredNumericValue = true
   ; noPayloadCarriesMeasuredNumericValueIsTrue = refl
   ; acceptedAuthorityTokenPresent = false

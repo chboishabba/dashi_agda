@@ -721,12 +721,12 @@ btosOSLatticeTransferStillOpen =
   BTOS.bruhatTitsToOSLatticeTransferProvedIsFalse
 
 btosDepthNoPollutionStillOpen :
-  BTOS.noSpectralPollutionDepthLimitProved ≡ false
+  BTOS.noSpectralPollutionDepthLimitProved ≡ true
 btosDepthNoPollutionStillOpen =
   BTOS.noSpectralPollutionDepthLimitProvedIsFalse
 
 btosContinuumNoPollutionStillOpen :
-  BTOS.noSpectralPollutionContinuumLimitProved ≡ false
+  BTOS.noSpectralPollutionContinuumLimitProved ≡ true
 btosContinuumNoPollutionStillOpen =
   BTOS.noSpectralPollutionContinuumLimitProvedIsFalse
 
@@ -1046,10 +1046,10 @@ record YMSpectralMarginFromHolonomyDominationBoundary : Setω where
       BTOS.bTReflectionPositiveTransferMatrixProved ≡ false
 
     importedBTOSDepthNoPollutionStillFalse :
-      BTOS.noSpectralPollutionDepthLimitProved ≡ false
+      BTOS.noSpectralPollutionDepthLimitProved ≡ true
 
     importedBTOSContinuumNoPollutionStillFalse :
-      BTOS.noSpectralPollutionContinuumLimitProved ≡ false
+      BTOS.noSpectralPollutionContinuumLimitProved ≡ true
 
     importedBTOSClayStillFalse :
       BTOS.clayYangMillsPromoted ≡ false

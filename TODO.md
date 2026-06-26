@@ -1,7 +1,1531 @@
 # FOR TODO GO TO '# TODO'
 
+Current NS Wall 1 no-triple-danger / square-wave / backward-chain note for `2026-06-23`:
+- Candidate-only no-triple-danger fork tranche is now recorded. Artifacts:
+  `DASHI/Physics/Closure/NSNoTripleDangerBoundary.agda`,
+  `DASHI/Physics/Closure/NSSpectralSharpnessForkBoundary.agda`,
+  `DASHI/Physics/Closure/NSA9SingularityContradictionRouteBoundary.agda`,
+  `scripts/ns_triad_no_triple_danger_scan.py`,
+  `scripts/check_ns_triad_no_triple_danger_scan.py`,
+  `scripts/ns_triad_square_wave_stack_scan.py`,
+  `scripts/check_ns_triad_square_wave_stack_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The route now records the
+  no-triple-danger carrier explicitly, records the spectral-sharpness /
+  square-wave stack fork as a candidate-only Wall 1a surface, and rewrites
+  the A9 singularity contradiction boundary into the backward chain
+  `BKM divergence -> triad cloud -> amplitude fork -> triple-danger
+  requirement -> contradiction target`. This remains fail-closed and
+  non-promoting: the new scans are candidate-only surfaces derived from the
+  attached adversarial CSVs, both theorem-status and shell-bridge summaries
+  stay `unproved`, and the next live analytic bottleneck is still proving
+  the no-triple-danger fork analytically on genuine Biot-Savart data.
+
+Current NS Wall 1 amplitude-weighted / energy-fork note for `2026-06-23`:
+- Candidate-only amplitude-budgeted Wall 1/2 bridge is now recorded. Artifacts:
+  `DASHI/Physics/Closure/NSAmplitudeWeightedNegativeFrameBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadEnergyBudgetedCoherenceForkBoundary.agda`,
+  `DASHI/Physics/Closure/NSPointwiseTriadCloudBoundary.agda`,
+  `scripts/ns_triad_amplitude_weighted_negative_frame_scan.py`,
+  `scripts/check_ns_triad_amplitude_weighted_negative_frame_scan.py`,
+  `scripts/ns_triad_energy_budgeted_fork_scan.py`,
+  `scripts/check_ns_triad_energy_budgeted_fork_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The route now records the
+  amplitude-weighted negative-frame object `K_N(A)`, the energy-budgeted
+  three-way fork `frame-coercive / low-band bounded / high-dissipation
+  residence-limited`, and the pointwise triad-cloud bridge that keeps
+  single-mode stretching zero while forcing BKM-active spikes to recruit a
+  coherent triad cloud. This remains fail-closed and non-promoting: the new
+  scans are candidate-only surfaces derived from local CSV telemetry, the
+  active theorem-status and shell-bridge summaries stay `unproved`, and the
+  next live analytic bottleneck is still a uniform amplitude-weighted
+  negative-frame theorem or energy-fork theorem on genuine Biot-Savart data.
+
+Current NS Wall 1 `K_N` exact-identity / negative-frame note for `2026-06-23`:
+- Candidate-only corrected positive route is now recorded. Artifacts:
+  `DASHI/Physics/Closure/NSTriadKNExactIdentityReceipt.agda`,
+  `DASHI/Physics/Closure/NSTriadBSNegativeFrameCoercivityBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadBSSpanningLemmaReceipt.agda`,
+  `DASHI/Physics/Closure/NSTriadBSFrameEquidistributionBoundary.agda`,
+  `scripts/ns_triad_kn_exact_identity_scan.py`,
+  `scripts/check_ns_triad_kn_exact_identity_scan.py`,
+  `scripts/ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The route now records the
+  positive-subspace identity `L_signed_norm = I - 2 K_N`, promotes the
+  negative-frame coercivity / spanning / frame-equidistribution stack as the
+  live Wall 1a operator candidate, and demotes the raw signed-XOR route to
+  legacy negative evidence. This remains fail-closed and non-promoting: the
+  active local extraction still shows degenerate sign telemetry
+  (`negative_sign_fraction_mean = 1.0`), the exact-identity scan is
+  empirical only, and Wall 1 remains unproved.
+
+Current odd-lane / topology intake note for `2026-06-20`:
+- Candidate-only odd/topology tranche is recorded. Artifacts:
+  `DASHI/Core/SuperPayloadReadingBoundary.agda`,
+  `DASHI/Core/OddGrassmannCoefficientGate.agda`,
+  `DASHI/Core/OddBerezinTopCoefficientBoundary.agda`,
+  `DASHI/Geometry/MobiusOrientationGate.agda`,
+  `DASHI/Geometry/KleinClosureReceipt.agda`,
+  `DASHI/Promotion/KleinHodgeDualityBoundary.agda`,
+  `DASHI/Foundations/Base369MobiusTransport.agda`, and
+  `DASHI/Foundations/Base369MobiusTransportRegression.agda`. The route now
+  records `R^{p|q}` as even carrier body plus odd nilpotent witness lanes,
+  the one-generator odd coefficient gate `∂_θ = ∫ dθ = [θ]`, the `q > 1`
+  ordered top-coefficient/sign boundary, the Möbius one-loop orientation
+  flip, the Klein non-orientable closure surface, the Hodge
+  metric-orientation obstruction with double-cover/twisted repair
+  candidates, and the Base369 hex transport `k ↦ k + 3 mod 6`. This remains
+  fail-closed and non-promoting: supergeometry, topology, and Hodge-theory
+  authority are not promoted.
+- Typed SSP/Base369 follow-on tranche is recorded. Artifacts:
+  `DASHI/Foundations/SSPTritCarrier.agda`,
+  `DASHI/Foundations/FifteenSSPSurface.agda`,
+  `DASHI/Core/SuperSSPOddPayload.agda`,
+  `DASHI/Core/OddSSPCoefficientGate.agda`,
+  `DASHI/Foundations/HexTruthPolarityFactor.agda`,
+  `DASHI/Foundations/StageAtlasZeroToEleven.agda`, and
+  `DASHI/Foundations/NumberRoleBoundary.agda`. The route now types the odd
+  residual lane over `15SSP[-1,0,1]`, records `oddCoeff = derivative =
+  Berezin integral` as a typed 15SSP surface projection, factors `HexTruth`
+  as `TriTruth × Polarity`, records the `0..11` spiral atlas with
+  residue/revolution separation, and forbids automatic promotion between
+  algebra-carrier, factor-coordinate, phase-topological, quotient-transport,
+  and narrative-mnemonic number roles.
+- Prime-lane 369/depth/ultrametric tranche is recorded. Artifacts:
+  `DASHI/Foundations/SSPPrimeLane369Signature.agda`,
+  `DASHI/Foundations/SSPPrimeLane369Refinement.agda`,
+  `DASHI/Foundations/FifteenSSP369Forest.agda`,
+  `DASHI/Geometry/SSP369Ultrametric.agda`,
+  `DASHI/Foundations/SSPPrimeLaneSymmetryProfile.agda`, and
+  `DASHI/Core/SuperSSP369Field.agda`. The route now records each tracked SSP
+  prime's typed `mod [3,6,9]` signature, a recursive depth-indexed 369 lane
+  address, the assembled 15-lane refinement forest, prefix-agreement
+  ultrametric geometry, local prime symmetry chambers with both prime-stage
+  and unit-order-stage readings, and a typed supervoxel field lift over the
+  resulting carrier stack.
+- Prime-lane bridge-consumer tranche is recorded. Artifacts:
+  `DASHI/Foundations/SSPBase369Bridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369BTBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369PAdicBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369PhaseBridge.agda`,
+  `DASHI/Core/OddSSP369FieldGate.agda`, and
+  `DASHI/Foundations/SSPPrimeLane369BridgeRegression.agda`. The route now
+  bridges the typed 15SSP carrier into Base369 quotient readouts, BT valency
+  consumers, explicit finite p-adic coordinate witnesses, unified phase/stage
+  profiles, field-level odd extraction, and a single typed regression surface
+  for importing the new stack.
+- Prime-lane bridge-consumer deepening tranche is recorded. Artifacts:
+  `DASHI/Physics/Closure/SSPPrimeLane369ResidueFactorBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369DepthPhaseBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369BTUltrametricBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369FieldPhaseBridge.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369PAdicUltrametricBridge.agda`,
+  `DASHI/Core/OddSSP369FocusedPrimeGate.agda`, and
+  `DASHI/Foundations/SSPPrimeLane369ConsumerRegression.agda`. The route now
+  records typed residue-factor consumers, depth-to-stage seams, BT-to-
+  ultrametric seams, focused field-to-phase/Base369 seams, p-adic-to-
+  ultrametric seams, focused odd-prime extraction receipts, and one compact
+  consumer regression surface tying the canonical p3/p7/p11 and root/depth3
+  examples together.
+- Prime-lane symmetry-action tranche is recorded. Artifacts:
+  `DASHI/Foundations/SSPPrimeLaneUnitAction.agda`,
+  `DASHI/Geometry/SSP369TreeAutomorphism.agda`,
+  `DASHI/Geometry/SSP369SymmetryIsometry.agda`,
+  `DASHI/Core/SuperSSP369EquivariantOddGate.agda`,
+  `DASHI/Physics/Closure/SSPPrimeLane369ActionPhaseBridge.agda`, and
+  `DASHI/Foundations/SSPPrimeLaneUnitActionRegression.agda`. The route now
+  records a finite local unit-action step per tracked prime lane, its
+  induced rotation on depth-refined `369` addresses and hex phase/polarity,
+  prefix/tree compatibility receipts, self-isometry receipts on the shared
+  ultrametric geometry, an odd-field equivariance seam on focused
+  supervoxels, and one compact regression surface. This remains fail-closed
+  and candidate-only: no full `(\u2124/p\u2124)^×` action, analytic p-adic
+  dynamics, continuum BT symmetry, or Clay authority is promoted.
+- P7 quotient-action exemplar tranche is recorded. Artifacts:
+  `DASHI/Foundations/SSPPrimeLaneUnitGroup.agda`,
+  `DASHI/Foundations/P7UnitGroupC6Witness.agda`,
+  `DASHI/Foundations/P7HexTruthActionQuotient.agda`,
+  `DASHI/Geometry/P7UnitActionTreeIsometry.agda`,
+  `DASHI/Core/P7EquivariantOddFieldGate.agda`, and
+  `DASHI/Physics/Closure/P7Stage7C6HexRegression.agda`. The route now
+  tightens the p7 lane into a typed `C6` quotient carrier with explicit
+  identity/generator/Möbius elements, Stage-7 and Stage-6 witness rows,
+  p7-specific HexTruth transport receipts, p7-specific address/depth
+  self-isometry receipts, p7-specific odd-field equivariance rows, and one
+  compact regression surface. This remains candidate-only and fail-closed:
+  general local unit-group action, analytic BT/p-adic dynamics, and Clay
+  authority are not promoted.
+- Stage12 prime-lane adapter tranche is recorded. Artifact:
+  `DASHI/Interop/PrimeLaneStage12ActionAdapter.agda`. This route makes the
+  corrected hierarchy explicit: `Stage12FibreSurface` is the global
+  stage/carry/fibre grammar, prime lanes act through typed local adapters,
+  and the p7 tranche is the first canonical `C6` / `HexTruth` local witness
+  rather than a parallel stage spine.
+- Stage12 adapter generalization tranche is recorded. Artifacts:
+  `DASHI/Interop/P7PrimeLaneStage12ActionBridge.agda`,
+  `DASHI/Interop/P11PrimeLaneStage12ActionBridge.agda`,
+  `DASHI/Interop/PrimeLaneStage12ActionAdapterRegistry.agda`,
+  `DASHI/Interop/PrimeLaneStage12ActionCarryBridge.agda`,
+  `DASHI/Interop/PrimeLaneStage12ActionSuccessorBridge.agda`, and
+  `DASHI/Interop/PrimeLaneStage12ActionRegression.agda`. The route now
+  makes `p11` consume the same Stage12 adapter story as `p7`, enumerates
+  both canonical adapter rows, and keeps the carry-depth and successor seams
+  shared under one Stage12 spine.
+- Generic quotient-action and p11 second-lane tranche is recorded. Artifacts:
+  `DASHI/Foundations/PrimeLaneUnitActionQuotient.agda`,
+  `DASHI/Foundations/P11UnitGroupC10Witness.agda`,
+  `DASHI/Foundations/P11HexTruthActionQuotient.agda`,
+  `DASHI/Geometry/P11UnitActionTreeIsometry.agda`,
+  `DASHI/Core/P11EquivariantOddFieldGate.agda`, and
+  `DASHI/Physics/Closure/P11Stage11C10Regression.agda`. The route now
+  records one shared typed quotient-action surface and a second concrete
+  `p11 / C10` lane with Stage-11 identity, Stage-10 unit-order, p11-specific
+  tree/isometry receipts, p11-specific odd-field equivariance receipts, and
+  an explicit fail-closed HexTruth boundary where the half-turn transport is
+  not group-faithful on the reduced surface. This remains candidate-only and
+  fail-closed: the general all-primes local unit-group action remains open.
+Current NS Clay action note for `2026-06-20`:
+- Wall 1 continuous coherence carrier / coherence-deficit floor tranche is
+  now recorded for `2026-06-23`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadContinuousCoherenceCarrierBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadCoherenceDeficitFloorBoundary.agda`,
+  `scripts/ns_triad_continuous_coherence_capacity_scan.py`,
+  `scripts/check_ns_triad_continuous_coherence_capacity_scan.py`,
+  `scripts/ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/check_ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`,
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/local_clay_harness_manifest.py`. The route now records the
+  positive Wall 1a carrier as continuous triadic coherence capacity rather
+  than the failed raw signed-XOR reduction, records the coherence-deficit
+  floor implication `cap_N <= kappa < 1 -> floor >= (1 - kappa) / 2` as a
+  candidate-only theorem shape, derives a fail-closed continuous-capacity
+  surface from the active floor telemetry, and threads that candidate route
+  through the carrier-ranking, signed theorem-status, shell-bridge, and
+  local harness surfaces. This remains fail-closed and non-promoting: the
+  new continuous route is only a positive candidate carrier, the capacity
+  telemetry is derived rather than independently certified, theorem/full-NS/
+  Clay promotion stay false, and the first live theorem bottleneck remains
+  proving a genuine continuous coherence bound on the active shell carrier.
+- Wall 1 signed carrier reconciliation / carrier-identification tranche is
+  now recorded for `2026-06-22`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadSignedCarrierReconciliationBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadWall1CarrierIdentificationBoundary.agda`,
+  `scripts/ns_triad_signed_carrier_reconciliation_scan.py`,
+  `scripts/check_ns_triad_signed_carrier_reconciliation_scan.py`,
+  `scripts/ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/check_ns_triad_wall1_carrier_explanatory_rank_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`. The route now
+  records the signed-carrier reconciliation boundary explicitly, records
+  corrected carrier identification as the new first Wall 1 theorem
+  bottleneck, reconciles the repo-local theorem-status CSV against the active
+  signed gaugeability/spectral extractions, ranks current carrier candidates
+  by explanatory support relative to the observed floor, and threads those
+  fail-closed statuses through the signed theorem-status and shell-bridge
+  summaries. Current telemetry is still harsh and fail-closed: the repo-local
+  signed chart agrees with the active negative extraction, the cycle-family
+  route explains only about 2 percent of the observed floor, the raw
+  signed-XOR route explains 0 percent, and the current signed-spectral route
+  explains 0 percent. This keeps Wall 1 open and sharpens the next analytic
+  lane to corrected carrier identification before any new theorem-promotion
+  attempt.
+- Quantitative cycle-defect lower-bound tranche is now recorded for
+  `2026-06-22`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadCycleDefectLowerBoundReceipt.agda`,
+  `scripts/ns_triad_cocycle_floor_scan.py`,
+  `scripts/check_ns_triad_cocycle_floor_scan.py`,
+  `scripts/ns_triad_frame_stability_scan.py`,
+  `scripts/check_ns_triad_frame_stability_scan.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`. The route now
+  records the exact cycle-defect law shape
+  `F_N(psi) >= (4 / pi^2) * Delta_n(psi)^2 / sum(n_e^2 / w_e)` as a
+  candidate-only receipt, replaces floating nullspace witnesses with integer
+  cycle witnesses on the shell carrier, and tracks normalized lower-bound
+  support against the optimized Wall 1 phase-gap surface. This remains
+  fail-closed and non-promoting: no uniform `c0 > 0` cocycle floor is
+  proved, no floor-to-frame theorem is proved, and Wall 1 remains open.
+- Wall 1 cycle-family packing / K01 geometry tranche is now recorded for
+  `2026-06-22`. Artifacts:
+  `scripts/ns_triad_cycle_packing_overlap_scan.py`,
+  `scripts/check_ns_triad_cycle_packing_overlap_scan.py`,
+  `scripts/ns_triad_k01_geometry_audit_scan.py`,
+  `scripts/check_ns_triad_k01_geometry_audit_scan.py`,
+  `DASHI/Physics/Closure/NSTriadCycleFamilyLowerBoundBoundary.agda`,
+  `DASHI/Physics/Closure/NSSchurComplementFrameGapBoundary.agda`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`. The route now
+  records the cycle-family packing/overlap surface on the active shell
+  carrier, adds a candidate-only K01 geometry audit surface around shell
+  ratio / angular mismatch / coupling concentration proxies, sharpens the
+  Wall 1 summary to join those surfaces with the existing phase/floor/Schur
+  telemetry, and tightens the Agda boundary language around the family
+  quadratic obstruction and the non-adversarial `K01 / Schur` bridge. This
+  remains fail-closed and non-promoting: no cycle-family theorem is proved,
+  no non-adversarial Schur gap is proved, and Wall 1 remains open.
+- Wall 1 signed-XOR / signed-spectrum correction tranche is now recorded for
+  `2026-06-22`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadSignedXORGaugeabilityBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadSignedSpectralFrustrationBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadSignedLaplacianIdentityReceipt.agda`,
+  `DASHI/Physics/Closure/NSTriadSignedLaplacianSpectrumAuditReceipt.agda`,
+  `scripts/ns_triad_signed_xor_gaugeability_scan.py`,
+  `scripts/check_ns_triad_signed_xor_gaugeability_scan.py`,
+  `scripts/ns_triad_signed_spectral_audit_scan.py`,
+  `scripts/check_ns_triad_signed_spectral_audit_scan.py`,
+  `scripts/ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/check_ns_triad_signed_wall1_theorem_status.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`. The route now
+  records sign-balance-vs-gaugeability as a candidate-only Wall 1a surface,
+  records the signed-Laplacian / `I - K_N` identity only as an audited
+  receipt, and stages a signed theorem-status summary plus shell-bridge
+  integration. Current telemetry is fail-closed and negative on the active
+  shell carrier: the signed mod-2 XOR surface is gaugeable
+  (`signed_xor_weighted_distance_fraction_mean = 0`), while the candidate
+  signed-Laplacian proxy is not the same operator as `I - K_N`
+  (`identity_error_op_mean ≈ 7.42e25`, `xy_floor_spectral_lower_bound_mean = 0`).
+  This sharpens the live bottleneck but does not close it: theorem promotion
+  and Clay promotion stay false, signed non-gaugeability is not proved, and
+  the signed spectral route remains unproved.
+- Wall 1 phase-regime / cocycle-floor / floor-to-frame tranche is now
+  recorded for `2026-06-22`. Artifacts:
+  `DASHI/Physics/Closure/NSPhaseRegimeSeparationBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadCocycleFrustrationFloorBoundary.agda`,
+  `DASHI/Physics/Closure/NSFloorToFrameStabilityBoundary.agda`,
+  `scripts/ns_triad_phase_regime_separation_scan.py`,
+  `scripts/check_ns_triad_phase_regime_separation_scan.py`,
+  `scripts/ns_triad_frame_stability_scan.py`,
+  `scripts/check_ns_triad_frame_stability_scan.py`,
+  `scripts/ns_triad_cocycle_floor_scan.py`,
+  `scripts/check_ns_triad_cocycle_floor_scan.py`,
+  `scripts/ns_triad_wall1_shell_bridge_summary.py`, and
+  `scripts/check_ns_triad_wall1_shell_bridge_summary.py`. The route now
+  records random-phase-vs-optimized shell telemetry as candidate-only phase
+  regime separation, an explicit cocycle-frustration floor boundary around
+  cycle-defect lower-bound targets, and the floor-to-frame stability warning
+  that a scalar floor alone does not prove `K_N < 1`. This remains
+  fail-closed and non-promoting: no uniform cocycle floor theorem is proved,
+  no floor-to-frame bridge is proved, and Wall 1 remains open.
+- Wall 1 entropy-barrier / Wall 2 residence-compression tranche is now
+  recorded for `2026-06-22`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadEntropyBarrierTheoremBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadResidenceTimeCompressionBoundary.agda`,
+  `scripts/ns_triad_cycle_obstruction_scan.py`,
+  `scripts/check_ns_triad_cycle_obstruction_scan.py`,
+  `scripts/ns_triad_low_frustration_hessian_scan.py`, and
+  `scripts/check_ns_triad_low_frustration_hessian_scan.py`. The route now
+  records the explicit Wall 1 entropy-barrier theorem boundary around
+  low-frustration basin volume / Hessian expansion / determinant lower-bound
+  dependencies, records the explicit Wall 2 residence-time compression
+  boundary around low-frustration basin residence / cosphere
+  transport-dissipation / non-Sobolev bridge requirements, and adds new raw
+  N128 telemetry for cycle-rank proxies, cocycle residues, exact-lock scores,
+  Hessian-style second-moment basin proxies, and structured-vs-random
+  low-frustration occupancy. This remains fail-closed and non-promoting: the
+  entropy-barrier theorem is not proved, residence-time exclusion is not
+  proved, and the new scans are empirical only.
+
+- Triad incidence / frustration / adversarial-reference tranche is now
+  recorded for `2026-06-21`. Artifacts:
+  `DASHI/Physics/Closure/NSTriadIncidenceCocycleReceipt.agda`,
+  `DASHI/Physics/Closure/NSTriadKernelPhaseCocycleReceipt.agda`,
+  `DASHI/Physics/Closure/NSTriadFrustrationDefectBoundary.agda`,
+  `DASHI/Physics/Closure/NSAdversarialGibbsPhaseReferenceReceipt.agda`,
+  `DASHI/Physics/Closure/NSSacasaTriadFrustrationBridgeBoundary.agda`,
+  `DASHI/Physics/Closure/NSTriadFrustrationRegression.agda`,
+  `scripts/ns_triad_incidence_cocycle_scan.py`,
+  `scripts/check_ns_triad_incidence_cocycle_scan.py`,
+  `scripts/ns_triad_frustration_defect_scan.py`,
+  `scripts/check_ns_triad_frustration_defect_scan.py`,
+  `scripts/ns_adversarial_phase_reference_scan.py`,
+  `scripts/check_ns_adversarial_phase_reference_scan.py`,
+  `scripts/ns_triad_frustration_bridge_summary.py`, and
+  `scripts/check_ns_triad_frustration_bridge_summary.py`. The route now
+  records the finite triad-incidence carrier `B`, the kernel-phase cocycle
+  target `B phi = psi`, the weighted frustration-defect boundary
+  `F_N(psi) = inf_phi ||B phi - psi||^2`, the regularized adversarial Gibbs
+  phase reference, and the fail-closed Sacasa->Kiriukhin bridge boundary
+  that keeps orbit-to-cosphere identification, realization-level
+  `|V_N| <= C_N`, and integrable `sup_N C_N` all explicitly open. The new
+  telemetry measures carrier density, cycle-rank proxies, exact-lock scores,
+  frustration residuals, coherence-loss proxies, adversarial phase gain over
+  zero reference, and a compact bridge summary over the shared raw N128
+  frames. This remains fail-closed and non-promoting: the bridge theorem is
+  not proved, the live wall stays unproved, and the new scans are empirical
+  only.
+
+- Sacasa/Kiriukhin orbit-coherence bridge tranche is now landed. Artifacts:
+  `DASHI/Physics/Closure/NSKiriukhinOrbitStretchingCarrierReceipt.agda`,
+  `DASHI/Physics/Closure/NSSacasaCosphereCoherenceCarrierReceipt.agda`,
+  `DASHI/Physics/Closure/NSSacasaKiriukhinIdentificationBoundary.agda`,
+  `DASHI/Physics/Closure/NSNonSobolevBridgeNoCircularityGate.agda`,
+  `DASHI/Physics/Closure/NSTriadPhaseLockingLiveWallReceipt.agda`,
+  `scripts/ns_orbit_phase_coherence_scan.py`,
+  `scripts/check_ns_orbit_phase_coherence_scan.py`,
+  `scripts/ns_non_sobolev_coherence_gate_scan.py`,
+  `scripts/check_ns_non_sobolev_coherence_gate_scan.py`,
+  `scripts/ns_sacasa_kiriukhin_bridge_summary.py`, and
+  `scripts/check_ns_sacasa_kiriukhin_bridge_summary.py`. The route now
+  records the Kiriukhin orbit-level stretching carrier `V_N` as model-only,
+  records the Sacasa cosphere carrier and its candidate observables
+  directionally, records the explicit no-circularity gate against
+  `H^s(s>2)`-only / expectation-only / model-only shortcuts, and isolates the
+  live wall as realization-level triadic phase-locking exclusion via a
+  genuinely non-Sobolev coherence bound. The new telemetry measures
+  resonant selected-mode orbit-phase coherence, same-amplitude phase-shuffled
+  non-Sobolev gap proxies, and a compact bridge summary over the shared raw
+  N128 frames. This remains fail-closed and non-promoting: no
+  Sacasa-Kiriukhin bridge theorem is proved, no continuation closure is
+  proved, and no Clay promotion is made.
+
+- Tube-morphology / boundary-helicity Route 1 tranche is now landed. Artifacts:
+  `DASHI/Physics/Closure/NSTubeMorphologyForcedLocalizationRouteAuditReceipt.agda`,
+  `DASHI/Physics/Closure/NSSingleTubePressureCaseExclusionReceipt.agda`,
+  `DASHI/Physics/Closure/NSBoundaryHelicityQSignBridgeReceipt.agda`,
+  `scripts/ns_tube_morphology_scan.py`,
+  `scripts/check_ns_tube_morphology_scan.py`,
+  `scripts/ns_boundary_helicity_q_scan.py`,
+  `scripts/check_ns_boundary_helicity_q_scan.py`,
+  `scripts/ns_tube_pressure_helicity_bridge_summary.py`, and
+  `scripts/check_ns_tube_pressure_helicity_bridge_summary.py`. The route now
+  records the fail-closed tube-morphology / forced-localization audit
+  surface, a straight-tube versus curved-tube non-promoting pressure gate
+  ledger, and the boundary helicity / `Q` sign bridge as an observed or
+  external route only. The new empirical telemetry classifies high-enstrophy
+  carrier voxels by local tube/sheet/blob proxies, measures boundary-band
+  helicity versus `Q` co-movement on the raw N128 archive, and joins those
+  rows back to the existing boundary pressure scan frame-by-frame. This
+  remains fail-closed and non-promoting: tube morphology is not proved,
+  helicity-to-`Q` sign control is not proved, and the new scans are
+  empirical only.
+
+- Boundary pressure-gate / Route 1 audit tranche is now landed. Artifacts:
+  `DASHI/Physics/Closure/NSBoundaryDelta1LevelSetEvolutionReceipt.agda`,
+  `DASHI/Physics/Closure/NSPressureRieszCompatibilityReceipt.agda`,
+  `DASHI/Physics/Closure/NSPressureQObservableRouteAuditReceipt.agda`,
+  `scripts/ns_boundary_pressure_gate_scan.py`,
+  `scripts/check_ns_boundary_pressure_gate_scan.py`,
+  `scripts/ns_boundary_pressure_q_bridge_summary.py`, and
+  `scripts/check_ns_boundary_pressure_q_bridge_summary.py`. The route now
+  records the fail-closed level-set `delta1` boundary evolution ledger,
+  records the torus pressure/Riesz compatibility surface
+  `-Delta p = h`, `h = ||S||_F^2 - |omega|^2/2`, `integral h = 0`, records
+  the `Q = <e2, Hess p e1>` / `I_Q` sign-gate audit as the live Route 1
+  pressure observable, and adds empirical boundary-band telemetry for
+  `P11/P22/P33/Q` plus a compact bridge to the existing `delta1` and
+  pressure-gap scans on the raw N128 archive. This remains fail-closed and
+  non-promoting: pressure-sign control is not proved, the `Q/I_Q` sign gate
+  is not closed, and the new scans are empirical only.
+
+- Case A / boundary-`delta1` geometric tranche is now landed. Artifacts:
+  `DASHI/Physics/Closure/NSDelta1BoundaryNormIdentityReceipt.agda`,
+  `DASHI/Physics/Closure/NSSZeroBoundaryGenericityReceipt.agda`,
+  `DASHI/Physics/Closure/NSDeterminantConcentrationImpossibilityReceipt.agda`,
+  `scripts/ns_case_a_transition_shell_scan.py`,
+  `scripts/check_ns_case_a_transition_shell_scan.py`,
+  `scripts/ns_boundary_delta1_uniformity_scan.py`,
+  `scripts/check_ns_boundary_delta1_uniformity_scan.py`,
+  `scripts/ns_case_a_geometric_bridge_summary.py`, and
+  `scripts/check_ns_case_a_geometric_bridge_summary.py`. The route now
+  records the exact boundary norm identity for `delta1` on `dOmega_K`,
+  records the fail-closed `S=0`/genericity surface, records the determinant
+  concentration impossibility rows for Case B / bounded-determinant
+  concentration, and adds empirical telemetry for transition-shell shrinkage,
+  boundary-gap separation, and boundary-`delta1` minima/quantiles on the raw
+  N128 archive. This remains fail-closed and non-promoting: Case A
+  geometric/co-area closure is not proved, pressure-sign control is not
+  proved, and uniform `delta1` lower bounds remain empirical only.
+
+- Pressure-correction / uniform-`delta1` reduction tranche is now landed.
+  Artifacts:
+  `DASHI/Physics/Closure/NSPressureCorrectionEigenframeScaleReceipt.agda`,
+  `DASHI/Physics/Closure/NSCompressiveZonePiDecompositionReceipt.agda`,
+  `DASHI/Physics/Closure/NSDelta1UniformGateReductionReceipt.agda`,
+  `scripts/ns_pressure_eigenframe_gap_scan.py`,
+  `scripts/check_ns_pressure_eigenframe_gap_scan.py`,
+  `scripts/ns_compressive_pi_decomposition_scan.py`,
+  `scripts/check_ns_compressive_pi_decomposition_scan.py`,
+  `scripts/ns_alignment_pressure_bridge_summary.py`, and
+  `scripts/check_ns_alignment_pressure_bridge_summary.py`. The route now
+  records the pressure-correction scale explicitly as off-diagonal
+  pressure-Hessian projections normalized by eigenvalue gaps in the strain
+  eigenframe, isolates the compressive-zone
+  `Pi_c = ∫_{Omega_K^c}(lambda1*omega1^2 + lambda2*omega2^2 + lambda3*omega3^2)`
+  decomposition, and reduces the residual L3-a alignment obstruction to the
+  live quantitative gate `delta1 >= delta0 > 0` once the alignment ODE and
+  pressure-correction scale are accepted. The new scans add empirical
+  telemetry for pressure-eigenframe proxies, compressive-versus-extensional
+  `Pi_c` balance, and their co-movement across `delta1` bins. This remains
+  fail-closed and non-promoting: pressure-correction sign control is not
+  proved, the uniform `delta1` lower bound is not proved, and the new
+  telemetry is empirical only.
+
+- Dual-dominance / exact-alignment-ODE tranche is now landed. Artifacts:
+  `DASHI/Physics/Closure/NSExtensionDominatesCompressionReceipt.agda`,
+  `DASHI/Physics/Closure/NSVorticityStretchingExactReceipt.agda`,
+  `DASHI/Physics/Closure/NSAlignmentProjectionODEReceipt.agda`,
+  `DASHI/Physics/Closure/NSEulerAlignmentGapControlReceipt.agda`,
+  `DASHI/Physics/Closure/NSResidualAlignmentObstructionHierarchyReceipt.agda`,
+  `scripts/ns_alignment_gap_bin_scan.py`, and
+  `scripts/check_ns_alignment_gap_bin_scan.py`. The route now records exact
+  extensional dominance on `Omega_K={lambda2S<0}`, exact
+  `Dt omega = S·omega` with antisymmetric cancellation, the exact
+  eigenframe-projection ODE lane with explicit rotation cancellation, the
+  conditional Euler-limit `delta1 >> ||u||_H1` gap-control route on
+  `Omega_K^c`, and the sharpened `R1/R2/R3` residual hierarchy with
+  `delta1` as the live quantitative gate. The new gap-bin scan adds empirical
+  telemetry for compressive-region alignment versus `delta1` thresholds.
+  This remains fail-closed and non-promoting: the pressure-correction sign
+  gate is not closed, the uniform `delta1` lower bound remains open, and the
+  new telemetry is empirical only.
+
+- Strain-type-I / pressure-factor / alignment-obstruction tranche is now
+  landed. Artifacts:
+  `DASHI/Physics/Closure/NSPressurePoissonIdentityCorrectionReceipt.agda`,
+  `DASHI/Physics/Closure/NSCompressionDominatesExtensionReceipt.agda`,
+  `DASHI/Physics/Closure/NSStrainTypeIOmegaKPositiveReceipt.agda`,
+  `DASHI/Physics/Closure/NSBkTrajectoryMinimumReceipt.agda`,
+  `DASHI/Physics/Closure/NSVorticityAlignmentObstructionReceipt.agda`,
+  `scripts/ns_vorticity_alignment_obstruction_scan.py`, and
+  `scripts/check_ns_vorticity_alignment_obstruction_scan.py`. The route now
+  records the corrected pressure identity factor `-Δp = tr(S^2) - |ω|^2/2`
+  and `Δp = 2 Qvel`, the algebraic compression-dominates-extension lemma on
+  `{lambda2S >= 0}`, the corrected Level-2 lane
+  `Miller + strain-type-I => |Omega_K(t)| > 0`, the `B_k = 0` second-
+  variation minimum surface, and the alignment obstruction that isolates
+  misaligned vorticity in the compressive zone as the residual sign gate.
+  This remains fail-closed and non-promoting: the new receipts are route
+  ledgers only, the quantitative `delta1` and strict `H_B` gates stay open,
+  and the new alignment scan is empirical telemetry rather than theorem
+  closure.
+
+- Sharp conditional TheoremG exponent-comparison tranche is recorded.
+  Artifacts:
+  `DASHI/Physics/Closure/NSConditionalQGronwallTheoremGReceipt.agda`,
+  `DASHI/Physics/Closure/NSTheoremGCancellationUpgradeReceipt.agda`,
+  `DASHI/Physics/Closure/NSCollapseConditionalGronwallBridgeReceipt.agda`,
+  `DASHI/Physics/Closure/NSTheoremGQ2GD1ContradictionChannelReceipt.agda`,
+  `DASHI/Physics/Closure/NSKatoHessianConfinementReceipt.agda`,
+  `scripts/ns_theoremg_sharp_conditional_summary.py`,
+  `scripts/check_ns_theoremg_sharp_conditional_summary.py`, and
+  `scripts/check_ns_theoremg_q2_gd1_contradiction_channel.py`. The route now
+  records exact `lambda2 = 0` stretching cancellation, an enstrophy-driven
+  source lane, sharp hypotheses `(H_B)`, `(H_area)`, `(H_g12++)`, and
+  contradiction by exponent mismatch between lower rate `(T*-t)^(-2)` and
+  upper rate `(T*-t)^(-2/delta1)`, requiring `delta1 > 1`. The CSV-backed
+  summary over the supplied 13 frames records
+  `H_area_direct_min = 0.696366`, `H_area_isop_lower_min = 7.6445`,
+  `H_B_rho_min = 0.231`, `H_g12_min = 1.4216`, `delta1_min = 1.4303`, and
+  exponent margin `2 - 2/delta1 = 0.601691952737188`. This remains
+  fail-closed and non-promoting: the sharp hypotheses stay open inputs,
+  contradiction discharge remains false, `collapseImpossible` remains false,
+  full NS Clay remains false, and `clayPromotion` remains false.
+
+- NS determinant-ledger correction tranche is now required and partially
+  landed. The prior `Qvel` zero-mean route only controls `Omega_Q={Qvel>0}`,
+  not the strain-defined `Omega_K={lambda2S<0}`. The corrected local theorem
+  ledger is: non-homogeneous Betchov/Newton identity
+  `∫ det(S) = -Pi/4`, determinant sign rule
+  `{lambda2S<0}={det(S)>0}` and `{lambda2S>0}={det(S)<0}`, unconditional
+  near-blow-up positive measure for `{lambda2S>0}` from BKM+Betchov, and
+  Sard-level partial closure `delta1>0` a.e. on `dOmega_K`. The remaining
+  open quantitative gates are unchanged in substance: derive `delta1>=1`
+  from PDE alone, propagate strict `H_B`, and re-derive `H_area` via a
+  determinant-side lower bound on `∫ det(S)+`, not via `Qvel`.
+
+- Broad-tube conditional regularization tranche is recorded. Artifacts:
+  `DASHI/Physics/Closure/NSBroadTubeNondegenerateGradientReceipt.agda`,
+  `DASHI/Physics/Closure/NSBroadTubeVorticityCoverageReceipt.agda`,
+  `DASHI/Physics/Closure/NSBroadTubeSerrinExponentDischargeReceipt.agda`,
+  `DASHI/Physics/Closure/NSBroadTubeConditionalRegularityTheoremReceipt.agda`,
+  `scripts/ns_broad_tube_conditional_regularization_summary.py`, and
+  `scripts/check_ns_broad_tube_conditional_regularization_summary.py`. The
+  local Clay harness manifest has discovery entries staged for the new
+  receipts and scripts; theorem promotion and Clay promotion remain false.
+  The current proof-kernel blockers remain explicit: the nondegenerate-
+  gradient receipt is conditional only, the vorticity lane is still
+  strict-carrier-insufficient and `broad_tube_required`, the Serrin exponent
+  discharge is conditional only, and the composite receipt keeps
+  `unconditionalClayNS=false` with no-promotion in force.
+
+Current NS Clay action note for `2026-06-18`:
+- Broad-tube coarea / Serrin lift / BKM bridge implementation tranche for
+  `2026-06-20` is recorded. Artifacts:
+  `DASHI/Physics/Closure/NSBroadTubeCoareaBridgeReceipt.agda`,
+  `DASHI/Physics/Closure/NSBroadTubeSerrinLiftReceipt.agda`,
+  `DASHI/Physics/Closure/NSBroadTubeBKMBridgeReceipt.agda`,
+  `DASHI/Physics/Closure/NSBroadTubeSerrinBKMCompositeReceipt.agda`,
+  `scripts/ns_broad_tube_serrin_bkm_bridge_summary.py`, and
+  `scripts/check_ns_broad_tube_serrin_bkm_bridge_summary.py`. The three
+  requested gates are implemented as checked conditional sockets:
+  broad-tube coarea requires nondegenerate `lambda2` gradient, finite tube
+  thickness, surface-layer control, and coarea measurability; Serrin lift
+  requires finite tube coverage, interpolation/exponent admissibility, and
+  velocity reconstruction; BKM bridge requires a Serrin socket, vorticity
+  time-integral control, and a continuation criterion. The composite receipt
+  constructs the conditional no-blowup socket. This is not an unconditional
+  Clay proof: theorem promotion and `clayPromotion` remain false.
+- Shahmurov two-paper claim intake / broad-tube Serrin gap tranche for
+  `2026-06-19` is recorded. Artifacts:
+  `DASHI/Physics/Closure/NSShahmurovTwoPaperClaimIntakeReceipt.agda`,
+  `DASHI/Physics/Closure/NSBroadTubeSerrinLiftGapReceipt.agda`,
+  `scripts/ns_shahmurov_claim_intake.py`,
+  `scripts/check_ns_shahmurov_claim_intake_regression.py`, and the updated
+  `scripts/ns_lambda2_carrier_route_summary.py` / local harness manifest. The
+  Shahmurov intake records arXiv `2605.01875` and `2605.01873` as an external
+  fail-closed claim surface only: peer review, Dashi route supersession, and
+  Clay promotion are all false. The manual review gates are zero-defect
+  rigidity, passive-strain visibility, endpoint strictness, finite-overlap
+  descendants, and the Part I dependency. The Dashi route remains
+  `broad_tube_required`; strict-carrier control is insufficient, and the live
+  internal obligations are broad-tube coarea, Serrin lift, and BKM bridge.
+- Pressure-convention normalization tranche for `2026-06-19` is recorded.
+  Artifacts:
+  `DASHI/Physics/Closure/NSPressurePoissonConventionNormalizationReceipt.agda`,
+  `scripts/ns_pressure_poisson_sign_timeseries_audit.py`,
+  `scripts/ns_raw_derived_tensor_convention_compare.py`,
+  `scripts/ns_interior_budget_timeseries_diagnostic.py`,
+  `scripts/ns_pressure_poisson_bypass_convention_normalized.py`, and
+  `scripts/check_ns_pressure_convention_regression.py`. The sign-timeseries
+  audit selects `+Delta p` on all 13 frames with best-scale min/mean/max
+  `0.17270948315397366 / 0.17532485071188417 /
+  0.17672763906546698`. The raw/derived convention comparison records a
+  2-of-3 `lambda2` sign mismatch, `lambda2` mean absolute delta
+  `5.934735845299193`, and `g12` mean absolute delta
+  `24.933366854361918` at the selected frame-10 cells. The interior budget
+  timeseries records signed-budget min/mean/max
+  `-237921.7614255873 / 186923.52795757324 / 612014.7221483203`. The
+  convention-normalized pressure bypass on frame-10 component 2 records 78 of
+  162 pointwise violations under the audit-selected plus convention versus
+  11 of 162 under the legacy absolute-Delta proxy, so the pressure bypass is
+  not rescued by sign selection alone. Remaining gates are convention
+  normalization, raw/derived tensor reconciliation, pressure-CZ proof,
+  interior maximum-principle proof, and Clay NS.
+- Interior pressure-mediated vorticity tranche for `2026-06-19` is recorded.
+  Artifacts:
+  `DASHI/Physics/Closure/NSInteriorVorticityMaxPrincipleReceipt.agda`,
+  `DASHI/Physics/Closure/NSPressureCZEnstrophyClosureReceipt.agda`,
+  `scripts/ns_interior_vorticity_budget_diagnostic.py`,
+  `scripts/ns_omega_l3_timeseries_diagnostic.py`,
+  `scripts/ns_pressure_poisson_sign_audit.py`, and
+  `scripts/check_ns_interior_pressure_regression.py`. The tranche records the
+  lambda2-signed vorticity transport / interior maximum-principle proof
+  obligation and the pressure-CZ / enstrophy Gronwall closure socket. It is
+  fail-closed: the interior maximum-principle proof, pressure-CZ theorem,
+  enstrophy-to-BKM bridge, and Clay NS remain unpromoted.
+  Calc 6 on the frame-10 worst-vorticity cell selects `[9,71,29]`, matching
+  the prior off-carrier maximum, and reports raw-gradient eigendata
+  `lambda1 = -33.57836889130863`, `lambda2 = 1.6119109128727063`,
+  `lambda3 = 29.848578811173127`, `omega_norm_sq =
+  12388.906932970465`, extensional gain `165005.0113714222`, middle
+  damping `-21831.27740485321`, compressive absolute gain
+  `191598.84586328908`, signed budget `334772.5798298581`, and
+  `Delta p = 5986.202503491044`. This supports a large local stretching
+  budget, not a closed damping estimate. Calc 7 records finite omega-L3
+  telemetry across all 13 frames: domain `L3` norm min/mean/max
+  `219.35581815648177 / 244.53448709725947 / 273.5247888329034`,
+  with frame-10 domain `L3 = 226.95398122550907`. The pressure-Poisson sign
+  audit prefers `+Delta p` over canonical `-Delta p` with best scale
+  `0.1760513397665311`, recording a sign/convention mismatch rather than
+  pressure-bypass proof validation.
+- Pressure-Poisson bypass / Q3 threshold / geometric concentration tranche for
+  `2026-06-19` is recorded. Artifacts:
+  `DASHI/Physics/Closure/NSPressurePoissonBypassReceipt.agda`,
+  `DASHI/Physics/Closure/NSQ3ExtensionalThresholdReceipt.agda`,
+  `DASHI/Physics/Closure/NSGeometricConcentrationCarrierReceipt.agda`,
+  `scripts/ns_boundary_pressure_poisson_bypass_diagnostic.py`,
+  `scripts/ns_boundary_geometric_concentration_diagnostic.py`, and
+  `scripts/ns_boundary_g12_bounds_diagnostic.py`, and
+  `scripts/check_ns_boundary_pressure_geometric_regression.py`.
+  The tranche records the pressure-Poisson bypass shape
+  `|omega|^2 <= 4 * (2*g12^2 + |Delta p|)`, the surviving Q3 extensional
+  stretching wall with threshold `g12 > (1 + Cnu)/(1 - C_CZ)`, and the
+  remaining geometric concentration theorem: every possible blow-up carrier
+  must approach `lambda2 = 0`.  These are fail-closed route and telemetry
+  surfaces; layer pressure/CZ/coarea, exact geometric concentration, BKM
+  closure, `KornLevelSet`, `collapseImpossible`, and full Clay NS remain
+  unpromoted.
+  Frame-10 component-2 pressure telemetry now records 162 analysis cells,
+  `rhs_proxy_sum = 579843.3057073732`, `omega_norm_sq_sum =
+  176354.0964038254`, and 11 pointwise `omega_norm_sq > rhs_proxy`
+  violations, so the bypass is not pointwise validated by this sample.  The
+  top-0.1% vorticity concentration diagnostic records only
+  `top_on_carrier_fraction = 0.0014299332697807435`; the worst vorticity cell
+  has `lambda2 = -3.0129972221683`, is off the `|lambda2| <= 1e-3`
+  carrier, and is 13.379 cells from the nearest carrier.  This is adverse
+  evidence for the naive geometric concentration conjecture at frame 10.  The
+  g12 bounds diagnostic records finite positive global `g12_min =
+  0.009662386196279904` and `g12_max = 73.80437777669184` on the same frame.
+- Biaxial cancellation / GD1 no-collapse / LayerKorn literature tranche for
+  `2026-06-19` is recorded. Artifacts:
+  `DASHI/Physics/Closure/NSBiaxialCancellationIdentityReceipt.agda`,
+  `DASHI/Physics/Closure/NSGD1MinPrincipleNoLambda3CollapseReceipt.agda`,
+  `DASHI/Physics/Closure/NSTheoremGCancellationUpgradeReceipt.agda`,
+  `DASHI/Physics/Closure/NSLayerKornLiteratureClosureReceipt.agda`,
+  `scripts/ns_boundary_theoremg_cancellation_margin.py`, and
+  `scripts/check_ns_boundary_cancellation_margin_regression.py`.
+  The new theorem shape records the exact biaxial identity
+  `<S omega,e2> = lambda2 <omega,e2>`, hence boundary cancellation on
+  `lambda2=0`, and the upgraded cancellation-margin diagnostic records
+  `mu_cancellation = delta1`.  The GD1 lane records the two-regime
+  minimum-principle route and the LayerKorn lane records the GST25 /
+  Bauer-Pauly / trace-theorem proof path.  These are fail-closed
+  proof-route surfaces: theorem applicability, exact constants, GD1 proof
+  terms, LayerCZ, and LayerKorn proof terms remain verification gates, and
+  `collapseImpossible`, `KornLevelSet`, and Clay NS remain unpromoted.
+- Conditional Theorem G / corrected Gronwall-margin tranche for
+  `2026-06-19` is complete.  Artifacts:
+  `DASHI/Physics/Closure/NSConditionalQGronwallTheoremGReceipt.agda`,
+  `DASHI/Physics/Closure/NSCollapseConditionalGronwallBridgeReceipt.agda`,
+  `scripts/ns_boundary_component_lambda3_corrected_gronwall_margin.py`,
+  `scripts/ns_boundary_timeseries_margin_summary.py`,
+  `scripts/check_ns_boundary_gronwall_margin_regression.py`,
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_N128_frame10_component2_20260619.json`,
+  and
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_summary_N128_frame10_component2_20260619.json`.
+  Result: the corrected conditional margin uses
+  `delta1 = lambda3_min = 2.0910865534885876` and records
+  `mu = 2*delta1 - 1/delta1 = 3.703952825596815`, with F123 signed
+  damping sum `-8437.74113479362`.  The lane records
+  `h_delta1 + TheoremG -> collapseImpossible_conditional` only.
+  Positive commutator measurement remains unavailable; `h_delta1`,
+  unconditional `collapseImpossible`, `KornLevelSet`, and full Clay NS
+  remain open/false.
+- Calc 11 frame-10 component-2 lambda3/F123 empirical support is complete.
+  Artifacts:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_lambda3_N128_frame10_component2_20260619.json`,
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_f123_absorption_N128_frame10_component2_20260619.json`,
+  and
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_lambda3_f123_summary_N128_frame10_component2_20260619.json`.
+  Result: on the 162-cell `|lambda2| <= 1e-3` component-2 boundary band,
+  `lambda3_min = 2.0910865534885876`,
+  `lambda3_mean = 12.992313287056529`, and
+  `lambda3_max = 31.306277536963513`, so the empirical
+  `h_delta1` support is positive on this carrier. The F123 density
+  `-2*lambda3*|<omega,e2>|^2/g12^2` has signed sum
+  `-8437.74113479362`, mean `-52.0848218197137`, and max
+  `-0.00013140575886578512`, so this sample is strictly damping on the
+  measured band. Positive commutator comparison remains unmeasured/proxy
+  unavailable; this is empirical/non-promoting and does not prove
+  `KornLevelSet`, `collapseImpossible`, `h_delta1`, or Clay NS.
+- First three calcs are complete.
+- Calc 4 frame-10 per-component `min-g12`/`rho` check is complete.  Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_N128_frame10_20260618.json`.
+  Result: min-g12 cell is not threshold-contained but is adjacent to
+  components 2 and 16531; min-rho cell is inside component 2.
+- Calc 5 frame-10 layer thickness / sharper normal-gradient proxy is
+  complete. Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_layer_thickness_N128_frame10_20260618.json`.
+  Result: component 2 has 162 boundary-layer samples and resolved transition
+  thickness mean 2.4566 cells / 0.12059 physical units; component 16531 is a
+  singleton with no `|lambda2| <= 1e-3` layer samples. This supports component
+  2 as the coherent boundary-layer carrier and rejects 16531 as a coherent
+  layer carrier at this band.
+- Calc 6 frame-10 component-2 Korn proxy ratio is complete. Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_N128_frame10_component2_20260618.json`.
+  Result: `c_empirical_proxy = 8.688873662021036`, with 162 boundary cells,
+  4798 proxy-layer cells, numerator `64981.04909224978`, and denominator
+  `7478.650469540277`. The denominator is explicitly
+  `grad_lambda2_squared_proxy`, not analytic `|nabla^2 u|^2`; no Korn theorem
+  promotion is claimed.
+- Calc 8 frame-10 component-2 true Korn denominator is complete. Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_korn_ratio_true_N128_frame10_component2_20260618.json`.
+  Result: `velocity_hessian_norm_squared` is materialized by the derived
+  tensor archive producer; the true denominator is `1306202.4598639284` and
+  `c_empirical_true = 0.04974806822750822`. The proxy/true denominator ratio
+  is `0.0057254910317037335`, so the prior proxy overstates the Korn ratio
+  for this carrier. This is empirical/non-promoting and still not a
+  `KornLevelSet` proof.
+- Calc 8 layer L2 vorticity fraction diagnostic is recorded. Artifact:
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_layer_l2_vorticity_fraction_N128_20260619.json`,
+  with summary
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_layer_l2_vorticity_fraction_summary_N128_20260619.json`
+  and regression
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_layer_l2_vorticity_fraction_regression_N128_20260619.json`.
+  Result: over 13 N128 frames the fraction of total domain
+  `sum(|omega|^2)` carried by `|lambda2| < eps` has min/mean/max
+  `0.00013966842124745355 / 0.00017065548618035617 /
+  0.00019310583413265837` for `eps = 0.001`,
+  `0.0015262680936971556 / 0.0017215705676850985 /
+  0.0019673253564923754` for `eps = 0.01`,
+  `0.015319900559077077 / 0.017090189859841835 /
+  0.019062833364576894` for `eps = 0.1`, and
+  `0.15119918559448156 / 0.16999198817491581 /
+  0.18825663224520564` for `eps = 1.0`. The strict bands
+  `eps <= 0.1` remain below 5%, the broad `eps = 1.0` tube is above 5%
+  throughout, and no band reaches 25%; the Shahmurov/SerrinFromQ2Control route remains
+  empirical and weak at strict carrier thickness. No theorem promotion,
+  carrier upgrade, or Clay promotion is claimed.
+- Weighted `|lambda2|` carrier quantile / signed-region route diagnostic is
+  recorded. Artifacts:
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_weighted_lambda2_carrier_quantile_N128_20260619.json`,
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_weighted_lambda2_carrier_quantile_regression_N128_20260619.json`,
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_lambda2_signed_region_partition_N128_20260619.json`,
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_lambda2_signed_region_partition_regression_N128_20260619.json`,
+  and
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_lambda2_carrier_route_summary_N128_20260619.json`.
+  Result: over 13 N128 frames, the mean `|lambda2|` threshold needed to
+  carry 5%, 10%, 25%, 50%, 75%, and 90% of total `sum(|omega|^2)` is
+  `0.293311984670807`, `0.5879037709216446`,
+  `1.4905889778538952`, `3.1571976803596873`,
+  `5.393640349722717`, and `7.7260941728276205`.
+  Signed-region mean fractions are `lambda2 < 0`:
+  `0.4881386329371345`, `|lambda2| <= 0.1`:
+  `0.017090189859841835`, and `lambda2 > 0`:
+  `0.5118613670628656`. The route summary is
+  `broad_tube_required`; strict-carrier `SerrinFromQ2Control` remains weak
+  empirical evidence only. No theorem promotion, carrier upgrade, or Clay
+  promotion is claimed.
+- Calc 7 temporal persistence is complete over all 13 raw N128 frames.
+  Artifact:
+  `scripts/data/outputs/ns_boundary_carrier_timeseries_N128_20260618.json`.
+  Result: carrier component `1` persists on frames 0-6, carrier component `2`
+  persists on frames 7-8 and 10-12, frame 9 selects singleton component
+  `11028`; singleton/no-layer warnings occur for components `16531` and
+  `3906`. Summary: `min_g12_min = 1.421602960869846`,
+  `rho_min_min = 0.23098019784845852`, and
+  `max_grad_lambda2_max = 549.1245325360463`.
+- Calc 9 true Korn denominator carrier-timeseries is complete. Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_true_korn_timeseries_N128_20260618.json`.
+  Result: all 13 rows are `ok` with denominator
+  `velocity_hessian_norm_squared`. The measured-layer true Korn ratio has
+  `c_empirical_true_min = 0.0026738091511738582`,
+  `c_empirical_true_mean = 0.04374066464321035`, and
+  `c_empirical_true_max = 0.052591467297035434`. The global minimum is the
+  singleton frame-9 carrier `11028`; persistent carrier components `1` and
+  `2` remain positive and sit near `0.041..0.053`. The
+  proxy/true denominator ratio remains small:
+  `denominator_proxy_to_true_ratio_mean = 0.0053820601514769605`.
+  This supports a small positive empirical Korn constant on the persistent
+  carriers only; it is still empirical/non-promoting and not a
+  `KornLevelSet` proof.
+- Calc 10 frame-10 component-2 boundary-band sweep is complete. Artifact:
+  `scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_band_sweep_N128_frame10_component2_20260618.json`.
+  Result: bands `5e-4`, `2.5e-4`, and `1e-4` all return `ok` with
+  `c_empirical_true = 0.04180143943317622..0.048108231165891815`,
+  `alpha_strain_sq = 0.49648633477014364..0.49956437854373653`, and
+  `alpha_omega_sq = 0.5004356214562633..0.5035136652298564`. This gives a
+  stable small empirical Korn ratio on the tightened bands and shows the
+  strain/antisym layer denominator split is close to half/half for this
+  component. It remains empirical/non-promoting and is not a `KornLevelSet`
+  proof.
+- Global connected-boundary Step A is replaced by a component-local
+  hypothesis.
+- No theorem promotion.
+- Closeable lemmas: `millerToH5` and corrected two-gap `GD3`.
+- Open PDE lemmas: `BoundaryHB`, `KornLevelSet`, and
+  `boundaryConcentrationStepA`.
+- Derived tensor archive producer and Calcs 1-9 are implemented for this N128
+  pressure-reconstructed archive.
+- Next empirical target is either a higher-resolution/stricter boundary-band
+  rerun around the frame-9 singleton and frame-10 component 2, or using the
+  Calc 9 timeseries to fit a conservative empirical Korn constant for
+  persistent carrier components only.
+- Real dashiCFD N128 pressure-reconstructed archive found and preflighted over
+  13 frames at `lambda2_band = 1e-3`; empirical/non-promoting summary:
+  `min-g12 >= 1.4216`, `rho_min >= 0.23098`, `Betti-0 = 16803..20630`.
+  Artifact: `scripts/data/outputs/ns_boundary_preflight_N128_frame_summary_20260618.json`.
+
+Current formal-structure/lens law note for `2026-06-17`:
+- Added the Phase 4 law-bearing socket layer:
+  `DASHI.Core.FormalStructureLawCore`,
+  `DASHI.Core.FormalLensLawCore`, and
+  `DASHI.Core.SourceProcessEvidenceLawCore`.
+- The new cores expose reusable candidate-only law surfaces for finite
+  samples, vector/product and coordinate projections, equivalence relations,
+  quotient/fiber projections, canonical encodings, residue systems, formal
+  lens carrier/structure/law/invariant/morphism sockets, and source-process
+  restricted-fiber/anomaly/witness escalation shapes.
+- Authority remains blocked: generic structure gives affordances only;
+  representation adequacy, semantic/domain authority, source compromise,
+  security authority, theorem authority, and promotion require separate
+  receipts.
+- Added `scripts/run_agda29_parallel_check.sh` as the preferred sibling-Agda
+  2.9 wrapper. It runs `-j8` by default from a temporary source-only Dashi
+  shadow tree with a writable stdlib shadow, avoiding flake churn and the
+  multiple `.agda-lib` project-root rejection.
+
+Current GR analytic-kernel aggregation note for `2026-06-15`:
+- Worker 6 added
+  `GRProofArchitectureNextAnalyticKernelTrancheReceipt` in
+  `GRProofArchitectureAggregationTest`.
+- Reconciled Shell A constants are `C_Gamma = 1`, `C'_Gamma = 26/27`,
+  `GammaMax = 2`, tight `L_Gamma = 44`, accepted conservative
+  `L_Gamma = 48`, and tight Ricci constant `C_R = 2144/27 <= 80`;
+  downstream extraction remains the conservative `640`. Older `L_Gamma = 72`
+  wording is historical and must not be treated as an accepted Shell A
+  constant.
+- Next proof work remains exactly the ordered-QQ toolkit, Shell A denominator
+  monotonicity, Christoffel first/second derivative bounds, Christoffel C0
+  perturbation estimate, and Ricci perturbation extraction. The aggregation
+  receipt only records the dependency surface; it does not promote continuum
+  Ricci convergence or external Schwarzschild authority.
+- Exact remaining GR variables for this tranche are:
+  `orderedRationalGaugeD_QQZeroLawPrimitive`,
+  `orderedRationalGaugeD_QQSymmetryLawPrimitive`,
+  `orderedRationalGaugeD_QQTriangleLawPrimitive`,
+  `orderedRationalGaugeThreeMinusNNonnegativeLawPrimitive`,
+  `orderedRationalGaugeThreeMinusNPositiveLawPrimitive`,
+  `orderedRationalGaugeScale48Is48`,
+  `orderedRationalGaugeScale48NonnegativeLawPrimitive`,
+  `orderedRationalShellARadialMinusSchwarzschildLowerBoundIs1`,
+  `orderedRationalShellAInverseMetricAbsMaxIs4`,
+  `orderedRationalShellAMetricDerivativeAbsMaxIs8`,
+  `orderedRationalShellAChristoffelFormulaEnvelopeIs72`,
+  `orderedRationalShellAReciprocalBoundsFeedChristoffelFormulaC0Stable`,
+  `orderedRationalShellA_C_GammaIs1`,
+  `orderedRationalShellA_CPrime_GammaNumeratorIs26`,
+  `orderedRationalShellA_CPrime_GammaDenominatorIs27`,
+  `orderedRationalShellARequestedInequalityPrimitive`,
+  `machineCheckedChristoffelL_GammaIs48`,
+  `selectedSymbolicRationalChristoffelC0FormulaStabilityIs48`,
+  `selectedSymbolicRationalChristoffelC0PrimitiveConnectionErrorBound`,
+  `grDiscreteRicciExtractionConnectionErrorBoundExtractionDependencyNameExact`,
+  `grDiscreteRicciExtractionPointCRConstantIs48`,
+  `grDiscreteRicciExtractionShellACRConstantIs80`,
+  `grDiscreteRicciExtractionConservativeCRExtractionConstantIs640`, and
+  `grSchwarzschildFiniteRicciPerturbationPointCRConstantIs48`.
+- Five proof tiers for this tranche: checked finite tables/receipts;
+  machine-checked Shell A constant ledger; ordered-QQ analytic kernel targets;
+  continuum PDE/GR theorem gateways; external authority/governance promotion.
+  Exact GR calculation result surfaces are
+  `DASHI.Physics.Closure.GRProofArchitectureAggregationTest.GRProofArchitectureNextAnalyticKernelTrancheReceipt`,
+  `DASHI.Physics.Closure.ContinuumLimitTheorem.SymbolicRationalChristoffelC0StabilityKernel`,
+  `DASHI.Physics.Closure.ContinuumLimitTheorem.MachineCheckedChristoffelC0ConstantReceipt`,
+  `DASHI.Physics.Closure.SchwarzschildLimitCandidate.SchwarzschildShellAExactCalculationReceipt`,
+  and
+  `DASHI.Physics.Closure.GRDiscreteRicciCandidateFromCurvature.GRSchwarzschildFiniteRicciBianchiPerturbationReceipt`.
+
+Current NS-GW-1 diagnostic note for `2026-06-16`:
+- The first numerical probe for the nonlinear Riesz sign route is implemented
+  as `scripts/ns_gateway1_strain_cross_derivative_diagnostic.py`, with
+  deterministic NPZ fixture generation in `scripts/ns_gateway1_fixture_npz.py`.
+  It computes the strain eigenframe at the enstrophy maximum and records
+  `d_e1 d_e2 lambda2` for synthetic Taylor-Green or user-supplied periodic
+  NPZ velocity fields.
+- The diagnostic is now hardened for DNS intake: NPZ metadata validation covers
+  declared `N`, `domain_length`, `grid_spacing`, finite `amplitude`, `time`,
+  `snapshot_index`, and source text. JSON output includes
+  `sign_classification`, `sign_tolerance`, `grid_spacing`, `domain_length`, and
+  validated `field_metadata`; tolerance-zero evidence is classified as
+  nonpositive evidence but remains non-promoting.
+- The checked fail-closed receipt is
+  `DASHI.Physics.Closure.NSGateway1StrainCrossDerivativeDiagnosticReceipt`,
+  imported by the full-Clay gateway and blocker-chain aggregation receipts and
+  wired through `DASHI.Everything`.
+- The receipt aggregation now explicitly records that DNS sign classification
+  is still open and that DNS evidence is required before any sign-promotion
+  route can be used.
+- Interpret the first synthetic/Taylor-Green degeneracy result narrowly:
+  tolerance-zero or nonpositive output, and especially
+  `eigenframe_degenerate = true`, is a diagnostic sanity check only. It is not
+  DNS sign confirmation and cannot inhabit the nonlinear Riesz sign condition.
+- Next actual math/evidence work is external to Agda: run the diagnostic on
+  credible Taylor-Green DNS data and only then decide whether the signed
+  T(b)/nonlinear Riesz route is viable. The required real DNS calculation is
+  a periodic NPZ snapshot with validated `N`, `domain_length`, `grid_spacing`,
+  finite `amplitude`, `time`, `snapshot_index`, and `source`, reporting
+  `cross_derivative_e1_e2_lambda2_at_max`, `sign_classification`,
+  `sign_tolerance`, `min_local_eigenvalue_gap`, and
+  `eigenframe_degenerate`. DNS sign confirmation, nonlinear Riesz sign,
+  residual depletion, full Clay NS, and Clay promotion remain false/open.
+
+Current GR analytic-kernel implementation note for `2026-06-16`:
+- The ordered-gauge, Shell A denominator, symbolic-kernel, and Schwarzschild
+  Shell A receipt layers now have additional derived projection helpers for the
+  already-recorded constants and primitive laws: threeMinusN nonnegative/
+  positive primitive laws, nonnegative scaling by 48/72/80/640, inverse-metric
+  max `4`, derivative max `8`, tight envelope `44`, accepted conservative
+  envelope `48`, legacy comparison `72`, and kernel-level Christoffel
+  stability / connection-error extraction fields.
+- This tranche strengthens auditability and downstream reuse only. It does not
+  supply the missing ordered-rational analytic proof of
+  `ChristoffelFormulaC0Stable`, does not close arbitrary continuum Ricci
+  convergence, and does not promote Schwarzschild/Birkhoff/W4/Candidate256.
+
+
+# CANONICAL MATH INTAKE CONTRACT
+
+Use this section when supplying theorem content for direct closure work. Each
+math payload should include:
+
+- `Name`
+- `Repo target`
+- `Objects`
+- `Hypotheses`
+- `Claim`
+- `Constants`
+- `Proof route`
+- `Bridge notes`
+
+The purpose is to let coding turns target the exact canonical booleans rather
+than widening more boundary receipts.
+
+Current status note for `2026-06-13`:
+- NS root enstrophy/BKM closure is recorded true.
+- YM now records actual p=7 activity supply, local KP, strict absorption,
+  uniform-volume KP, Balaban RG transfer, H3a, H3b/NSP, thermodynamic limit,
+  OS/Wightman/operator convergence, uniform mass gap, continuum uniqueness,
+  BRST physical-sector OS3, ghost graded-sign control, and continuum Gribov
+  handling at their owning theorem surfaces.
+- Gate 3 now also records a local theorem-package surface for density of the
+  carrier core, Mosco recovery, no-spectral-pollution, mass-shell bridge, and
+  PAWOTG uniform separation, while Gate 3 promotion remains false.
+- The remaining YM mathematical gap is no longer the continuum chain itself;
+  it is the final Clay-promotion/governance authority. The remaining broader
+  mathematical/promotion frontier is Gate 3 publication legitimacy plus the
+  cross-lane publication stack.
+
+Current atomic-clock/SI intake note for `2026-06-14`:
+- The first metrology contact lane is now typed but fail-closed. Intake targets
+  are the BIPM/NIST Cs-133 SI defining-constant artifact, SHA256/access-date
+  evidence, exact raw text `9 192 631 770`, zero-uncertainty convention,
+  parsed exact integer payload, and consumer ingestion into the SI-second
+  carrier. Downstream requests are the quantum-clock `Delta phi = omega0 *
+  Delta tau` observable, Stone/Schrodinger SI time parameter with derived
+  `hbar`, and the clock/light-speed route to metre before Rydberg wavenumber
+  use. No authority or numeric promotion is currently accepted.
+- The second metrology adapter pass now records the Candidate256
+  dimension-vector adapter, exact SI defining constants artifact manifest for
+  `Delta nu Cs`, `c`, and `h`, the exact Planck/derived-`hbar` request, the
+  leading uniform-field redshift contact law `Delta f / f = Delta U / c^2`,
+  and the W4 receipt field-to-source adapter. Remaining closure work is still
+  external: provide accepted artifact identity, SHA256/access-date evidence,
+  parsed carriers, covariance/independence and consumer-ingestion receipts,
+  and then the constructorless Candidate256 calibration authority token.
+- The third metrology pass now adds structural parsed carriers for `Delta nu
+  Cs`, `c`, and `h`; a Real-line topology request for SI-second Stone strong
+  continuity; dimensionless law surfaces for `omega0 * Delta tau` and `Delta U
+  / c^2`; the metre route from the SI second plus exact `c`; and a
+  W4/Candidate256 receipt checklist. Remaining closure work is unchanged:
+  actual BIPM/NIST/CODATA artifact evidence, parsed-carrier acceptance,
+  consumer-ingestion receipts, empirical redshift provenance, and the external
+  calibration authority token are still open.
+- The fourth metrology evidence pass now adds explicit typed surfaces for the
+  BIPM/NIST exact-constant evidence checklist, parsed-carrier consumer
+  ingestion, the dimensionless Stone exponent `H * t / hbar`, empirical
+  redshift receipt requests, CODATA/NIST Rydberg spectroscopy authority, and
+  the strict SI metrology dependency DAG. Remaining closure work is still
+  external: artifact identity, SHA256/access date, raw source text acceptance,
+  parsed-carrier acceptance, covariance/independence receipts, consumer
+  ingestion receipts, empirical redshift provenance, NIST ASD line evidence,
+  and the Candidate256 physical calibration authority token.
+
+Current Agda/PhysLean parity intake note for `2026-06-14`:
+- The six parity surfaces now carry proof-term-level occupant rows for the
+  supplied math payload: exact scalar/vector/Hilbert/operator/spectral field
+  names, finite-basis `foldr2` and indexed lookup obligations,
+  Christoffel/Stokes/Poincare/Bianchi proof-content rows, SU(2)/SU(3)
+  finite-Jacobi authority rows, gauge-naturality/YM/BRST rows,
+  exact Hilbert/Operator/CCR/CAR/OS/Wightman QFT rows, Koszul/MTW/Einstein/SI
+  unit/weak PDE rows, and the finite discrete-YM spectral example boolean
+  pattern. Remaining work is to supply external authority tokens or genuine
+  proof terms for the rows still marked fail-closed; no promotion follows from
+  the intake rows alone.
+- The Base369 finite algebra pass now records the local `TriTruth` GF(3)
+  field surface, `HexTruth` Z/6Z ring surface, and `NonaryTruth` Z/9Z ring
+  surface. The reusable ring shape avoids the large handwritten 700+ proof
+  expansions by concentrating finite law checks behind compact table
+  receipts. `Base369` now imports the tiny builtin-only `%`/`NonZero` support
+  from `DASHI.Foundations.Base369Nat`, not a repo-local `Data.Nat.Base`
+  shadow. `DASHI.Foundations.Base369NumeralOntologyBoundary` records the
+  separation between algebraic carriers, the 15-prime coordinate boundary, and
+  UFT traversal addresses, with narrative-only interpretations marked
+  non-promoting. Remaining external blockers are unchanged: real/complex
+  scalar completeness, Hilbert completion, spectral theorem authority,
+  OS/Wightman authority, physical calibration, and Clay promotion still
+  require external authority tokens or genuine proof terms.
+- The discrete-to-transcendental bridge pass now adds checked boundary
+  surfaces for finite trit approximants, prefix/suffix agreement gauges,
+  Nat-valued ultrametric completeness, the stage-quotient irreversibility
+  seam, and CRT/J fixed-point compactification receipts:
+  `DASHI.Foundations.SurrealCompactification`,
+  `DASHI.Foundations.SurrealCompactificationIntake`,
+  `DASHI.Foundations.SurrealCompactificationOrderedQQBridge`,
+  `DASHI.Foundations.SurrealCompactificationRationalBridge`,
+  `DASHI.Foundations.SurrealCompactificationTailBoundBridge`,
+  `DASHI.Metric.AgreementSurrealGaugeBridge`,
+  `DASHI.Geometry.NatUltrametricCompletenessBridge`,
+  `DASHI.Algebra.StageQuotientIrreversibilityBoundary`, and
+  `DASHI.Physics.Closure.CRTMonsterFixedPointCompactificationBoundary`.
+  The current strengthening adds internal tower/Vec conversion and truncation
+  receipts, an exact non-promoting `3^-agreeDepth` gauge-shape row, explicit
+  Nat-to-non-Nat completeness dependency ordering, no-section/reversal-gap
+  seam lemmas, an exact CRT/Monster closure-chain split, and the intake
+  contract for rational/surreal carrier work. The follow-up strengthening adds
+  a checked symbolic rational approximant bridge, ordered-QQ carrier and
+  antitone law-shape receipts, kappa-to-depth-9 and tail-bound receipts,
+  checked Nat Cauchy-stabilisation variables, and a rational compactification
+  row in the 196884/Monster closure chain. Remaining work is deliberately
+  external or non-promoting: a concrete ordered QQ/No arithmetic substrate, a
+  proved `agreeDepth -> 3^-n` isometry, analytic compactification error
+  theorem, Monster theorem authority, thermodynamic promotion, and any
+  terminal or Clay-facing claim.
+- The proof-term strengthening pass now adds the bounded internal
+  `SurrealCompactificationQQCarrier`, checked balanced ternary embedding
+  recursion, proof-term index, symbolic antitone/gauge receipts, and structural
+  kappa/truncation receipts. Remaining work is still the real analytic layer:
+  external QQ/No/order authority, interval inequalities, geometric tail
+  inequalities, compactification error theorem, and promoted gauge isometry.
+
+Current external authority locator note for `2026-06-14`:
+- `DASHI.Promotion.SIMetrologyExternalSourceLocator` records fail-closed
+  source-locator rows for the BIPM SI Brochure, NIST fundamental constants
+  page, and NIST ASD lines form, plus raw text rows for `Delta nu Cs`, `c`,
+  and `h`. `DASHI.Promotion.ExternalTheoremAuthoritySourceLocator` records
+  fail-closed locator rows for Monster/Moonshine and Carnot/thermodynamic
+  authority gates. The `2026-06-15` follow-up adds
+  `DASHI.Promotion.DownloadedAuthorityArtifactReceipt` with wget-downloaded
+  BIPM/NIST/NIST-ASD source artifacts, SHA-256 digests, byte counts, access
+  date, and raw-text ingestion receipts for `Delta nu Cs`, `c`, and `h`.
+  Remaining closure work is now narrower: construct or import accepted
+  authority tokens, NIST ASD spectral-token acceptance, Monster/Moonshine proof
+  authority, Carnot/thermodynamic theorem authority, and promotion tokens.
+
+Current GR proof-architecture intake note for `2026-06-15`:
+- The selected Christoffel lane now separates the finite-r obstruction from the
+  half-capable path: the canonical finite-r table still records the odd
+  `2Γ = r1` blocker, while the symbolic QQ lane inhabits
+  `GRSelectedUndoubledChristoffelLift` with a total half/undoubling adapter.
+- Ricci/Bianchi staging now has named finite-r zero-product, zero-contraction,
+  Ricci/scalar/Einstein, contracted-Bianchi zero helpers, and downstream
+  readiness receipts. This advances local finite arithmetic only; sourced
+  Einstein, full contracted-Bianchi promotion, and continuum Ricci convergence
+  remain blocked.
+- `GRConcreteLeviCivita` now has a selected finite-r Levi-Civita adapter and a
+  selected Schwarzschild Levi-Civita/Koszul handoff. Together they locally
+  expose torsion-free, metric-compatibility, and Christoffel-form law shapes
+  while keeping the remaining analytic blocker at the Christoffel C0 stability
+  kernel rather than claiming continuum Schwarzschild promotion.
+- Continuum convergence now has symbolic finite metric derivative,
+  inverse-metric C0, finite-to-continuum partial-control, Christoffel-C0
+  extraction surfaces, and a selected-pair symbolic rational handoff. The
+  finite-carrier derivative-law constructor closes all finite plumbing from a
+  supplied `SymbolicRationalChristoffelC0StabilityKernel`; the checked selected
+  primitive only gives diagonal selected-pair equality, now recast through a
+  selected zero-epsilon quantitative connection/Ricci error-bound receipt. A
+  genuine ordered rational Lipschitz/analytic Christoffel C0 estimate remains
+  the exact input before continuum Ricci convergence can promote.
+- Schwarzschild now has the exact `r_s = 2, r = 3` doubled-Christoffel point
+  table, undoubled Christoffel table, radial `∂_r Γ` table, shell supremum
+  receipts recording tight `C_Gamma = 1`, shell `5/3` text, conservative
+  `C_Gamma <= 2`, `GammaMax = 2`, formula-stability `11/9` versus repo `48`,
+  and Ricci contraction `1280/27` rounded to point-shell `48` while preserving
+  conservative `640`; it also records non-degenerate Shell A `[3,4]` constants
+  `C_Gamma = 1`, `C'_Gamma = 26/27`, tight `L_Gamma = 44`,
+  accepted conservative `L_Gamma = 48`,
+  tight `C_R = 2144/27 <= 80`, and Shell B
+  `[5/2,7/2]` constants `C_Gamma = 48/25`, `C'_Gamma = 992/125`,
+  `L_Gamma = 112`, `C_R = 220`. The Ricci route now explicitly marks `48` as
+  point-shell-only and routes interval shells through `80`/`220`. Full
+  Schwarzschild metric match, Birkhoff/vacuum proof, W4 mass source,
+  precision-gravity promotion, and Clay/terminal claims remain open.
+
+## YM Exact Intake Targets
+
+Current reconciled YM status for `2026-06-15`:
+- Internal YM math targets are not the remaining blocker for this coding
+  tranche. The live gate is external governance/Clay acceptance, with
+  `clayYangMillsPromoted` still false.
+- Exact governance refs: `DASHI.Physics.Closure.YMFinalStateReceipt`,
+  `DASHI.Physics.Closure.YMExternalAcceptancePacketNormalization`,
+  `DASHI.Physics.Closure.YMCompletionBoundaryTightening`, and
+  `DASHI.Promotion.Gate3ClayObligations` target
+  `yangMillsExternalAcceptance`. The historical intake targets below remain
+  useful as audit labels, not as current internal-math blockers.
+
+• `YM-KP-Local-Sum-p7`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt.localKPSumBelowOneProved`
+
+  Required math payload:
+
+  - exact definition of the rooted/same-prime `p=7` KP sum in repo terms;
+  - exact activity object `z(Gamma)` used in that sum;
+  - explicit hypothesis chain from single-polymer bound + lattice-animal count
+    + tuning + weak-coupling threshold + mixed-prime masking;
+  - exact conclusion `sum <= rho < 1` or the stricter repo-consumable bound.
+
+• `YM-Actual-Polymer-Activity-Supply`
+
+  Repo target:
+
+  - the actual-activity supply lane upstream of
+    `YMActualP7WilsonPolymerActivityReceipt`
+
+  Required math payload:
+
+  - exact identification of the same-prime `p=7` Wilson activity object with
+    the actual polymer activity consumed by the KP lane;
+  - precise restriction-to-same-prime rule and mixed-prime-zero rule.
+
+• `YM-Strict-Absorption-From-KP`
+
+  Repo target:
+
+  - the actual-rho / strict-absorption consumer downstream of the KP lane
+
+  Required math payload:
+
+  - explicit definition of the actual rho or margin quantity;
+  - theorem of the form `rho_actual <= rho_* < 1 => strict absorption`;
+  - constants and thresholds stated exactly.
+
+• `YM-Uniform-Volume-KP`
+
+  Repo target:
+
+  - the still-open uniform-volume / full-tightness KP lane in
+    `DASHI.Physics.Closure.YMFinalStateReceipt`
+
+  Required math payload:
+
+  - exact statement that the KP bound is uniform in volume `L`;
+  - explicit statement of which constants are independent of `L`, RG depth,
+    and coupling scale.
+
+• `YM-Balaban-RG-Induction`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt.balabanRGTransferProved`
+  - the Balaban induction cluster in
+    `DASHI.Physics.Closure.YMFinalStateReceipt`
+
+  Required math payload:
+
+  - exact scale-`k` to scale-`k+1` induction theorem;
+  - explicit handling of determinant term, fluctuation term, and polymer
+    remainder;
+  - exact downstream claim: carrier RG only or the full repo Balaban transfer.
+
+• `YM-H3a-Continuum-Intake`
+
+  Repo target:
+
+  - `balabanH3aContinuumIntakeOpen` cluster in
+    `DASHI.Physics.Closure.YMFinalStateReceipt`
+
+  Required math payload:
+
+  - theorem taking uniform RG / KP / lattice control to the actual continuum
+    YM object used downstream;
+  - explicit output object type: measure, Hamiltonian, Schwinger functions,
+    or equivalent.
+
+• `YM-H3b-Vacuum-Projector`
+
+  Repo target:
+
+  - `balabanH3bVacuumProjectionContinuityOpen`
+
+  Required math payload:
+
+  - exact projector convergence statement;
+  - exact gap persistence assumptions and mode of convergence.
+
+• `YM-No-Spectral-Pollution`
+
+  Repo target:
+
+  - `noSpectralPollutionFromH3aH3bOpen`
+
+  Required math payload:
+
+  - exact operator-theoretic statement ruling out spurious low spectrum;
+  - explicit dependence on H3a/H3b outputs.
+
+• `YM-Thermodynamic-Limit`
+
+  Repo target:
+
+  - `thermodynamicLimitFromBalabanClusterOpen`
+
+  Required math payload:
+
+  - exact topology of convergence in the infinite-volume limit;
+  - exact limiting object that later OS/Wightman steps consume.
+
+• `YM-OS-To-Wightman`
+
+  Repo target:
+
+  - `osToWightmanOpen`
+  - downstream `continuumYangMillsConstructed`,
+    `uniformMassGapConstructed`, and `continuumUniquenessConstructed`
+
+  Required math payload:
+
+  - exact OS1-OS5 statement on the true limiting object;
+  - exact reconstruction theorem conclusion.
+
+• `YM-Uniform-Mass-Gap`
+
+  Repo target:
+
+  - `uniformMassGapConstructed`
+
+  Required math payload:
+
+  - precise lower bound on the first positive spectral point;
+  - explicit scale/coupling dependence, e.g. `C_G Lambda_YM`, if that is the
+    intended theorem.
+
+• `YM-Continuum-Uniqueness`
+
+  Repo target:
+
+  - `continuumUniquenessConstructed`
+
+  Required math payload:
+
+  - exact uniqueness theorem for the vacuum / translation-invariant state;
+  - explicit route from clustering/extremality/irreducibility if that is the
+    intended proof.
+
+## NS Exact Intake Targets
+
+Current reconciled NS status for `2026-06-15`:
+- NS is scoped-paper ready only. Full Clay remains gated by real PDE theorem
+  gateways; do not promote from receipts, diagnostics, or paper readiness.
+- Current NS blocker-chain intake is exact-shape only:
+  Chain A is residual depletion, requiring a nonlinear Riesz sign condition or
+  an equivalent pressure/stretching depletion theorem; Chain B is the
+  microlocal/topological route, requiring the exact defect-mass/topological
+  leakage/pressure-commutator shapes; Chain C is general-data reduction,
+  requiring a real reduction from arbitrary smooth finite-energy data to the
+  scoped mechanism class. These are theorem inputs, not constructed proofs.
+- Intended aggregation/gateway receipt names, if implemented by Agda workers:
+  `NSFullClayBlockerChainAggregationReceipt.agda` and
+  `NSFullClayGatewayTheoremBoundaryReceipt.agda`. The single gateway theorem
+  must consume Chains A/B/C and only then target full Clay NS; until a
+  nonlinear Riesz sign condition or `H^{1/2}` backwards uniqueness theorem is
+  supplied, the full Clay gateway remains false/open.
+- Exact NS refs: `DASHI.Physics.Closure.NSFinalStateReceipt`,
+  `DASHI.Physics.Closure.NSFastestClayPathReceipt`,
+  `DASHI.Physics.Closure.NSPaper1ClayTargetReceipt`,
+  `DASHI.Physics.Closure.NSClayDistanceRevisionReceipt`, and
+  `DASHI.Promotion.Gate3ClayObligations` target
+  `navierStokesGlobalSmoothness`. `clayNavierStokesPromoted` remains false.
+
+• `NS-Enstrophy-Passage`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.NSFinalStateReceipt.enstrophyPassageClosed`
+
+  Required math payload:
+
+  - exact definition of `Z(t)` in repo terms;
+  - exact decay/integrability theorem from the scale-monotone inequality;
+  - constants explicit.
+
+• `NS-Vorticity-Control`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.NSFinalStateReceipt.vorticityControlClosed`
+
+  Required math payload:
+
+  - exact interpolation / Sobolev estimate with norms and exponents stated
+    explicitly.
+
+• `NS-LInfinity-Vorticity-Integrability`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.NSFinalStateReceipt.lInfinityVorticityControlClosed`
+
+  Required math payload:
+
+  - full inequality chain proving
+    `integral_0^infty ||omega(t)||_{L^infty} dt < infty`.
+
+• `NS-Global-Regularity-From-BKM`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.NSFinalStateReceipt.globalRegularityClosed`
+  - downstream `clayNavierStokesPromoted`
+
+  Required math payload:
+
+  - exact BKM implication in repo variable language;
+  - explicit statement of what previous NS inputs it consumes.
+
+## Gate 3 Exact Intake Targets
+
+• `Gate3-Density-Of-Carrier-Core`
+
+  Repo target:
+
+  - `gate3DensityOfCarrierCoreProved` in
+    `DASHI.Physics.Closure.Gate3NormDictionary`
+
+  Required math payload:
+
+  - exact core, exact Hilbert space, exact density mode.
+
+• `Gate3-Mosco-Recovery`
+
+  Repo target:
+
+  - the open conditions in
+    `DASHI.Physics.Closure.Gate3MoscoRecoveryPreciseReceipt`
+
+  Required math payload:
+
+  - exact Mosco conditions I and II for the chosen forms/operators;
+  - explicit recovery sequence and lower-semicontinuity statement.
+
+• `Gate3-No-Spectral-Pollution`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.Gate3NoSpectralPollutionReceipt`
+
+  Required math payload:
+
+  - exact spectral convergence theorem with no spurious spectrum.
+
+• `Gate3-Mass-Shell-Bridge`
+
+  Repo target:
+
+  - the downstream spectral/physical identification lane from Gate 3
+
+  Required math payload:
+
+  - exact theorem identifying the limiting spectrum with the physical mass
+    shell.
+
+• `Gate3-Uniform-Separation`
+
+  Repo target:
+
+  - `DASHI.Physics.Closure.Gate3PAWOTGUniformSeparationTargetReceipt`
+
+  Required math payload:
+
+  - exact theorem yielding `inf_N A_N > 0` or exact equivalent;
+  - explicit `phi` / localization / Gaussian spread / transfer hypotheses.
+
+## Cross-Lane Exact Intake Targets
+
+• `CrossLane-Final-Proof-Profile`
+
+  Repo target:
+
+  - the final aggregate proof-profile / closure-composition lane
+
+  Required math payload:
+
+  - exact dependency theorem showing the chosen NS, YM, and Gate 3 routes
+    compose consistently.
+
+• `CrossLane-Promotion-Legitimacy`
+
+  Repo target:
+
+  - final Clay / full-unification promotion bits
+
+  Required math payload:
+
+  - explicit theorem/dependency proof that promoted bits depend only on
+    canonical inhabitants, not candidates, cutsets, or authority placeholders.
+
 
 # P0 BLOCKERS
+
+• Six-lane weak-coupling polymer convergence tranche is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.YMLatticeAnimalCountingBoundReceipt`,
+    `DASHI.Physics.Closure.YMWeakCouplingRatioBoundReceipt`,
+    `DASHI.Physics.Closure.YMGeometricTailHalfBoundReceipt`,
+    `DASHI.Physics.Closure.YMPolymerWeakCouplingSumBoundReceipt`,
+    `DASHI.Physics.Closure.YMP7WeakCouplingPolymerConvergenceReceipt`,
+    and `scripts/ym_weak_coupling_polymer_sum_bound.py`;
+  - threads the weak-coupling package into
+    `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt`;
+  - records the `d=4` lattice-animal count surface `N_n <= (8e)^n`, the
+    tuned ratio surface `a = c_K / (4 g^2)` plus the corrected p=7
+    threshold `c_K >= (4/3) log(24e)`, the
+    geometric-tail `<= 1/2` surface, the grouped weighted origin-containing
+    polymer sum surface, and the bridge back into the same-prime `p=7`
+    Wilson activity lane;
+  - now closes the exact lane-local `p=7` local KP surface in
+    `DASHI.Physics.Closure.YMActualP7WilsonPolymerActivityReceipt` with
+    target `rho = 1/2`, while keeping continuum YM, mass gap, Clay YM, and
+    terminal promotion false/open;
+  - next YM action: keep pushing downstream from the now-closed p=7 local KP
+    surface into the real continuum H3a/H3b intake chain instead of widening
+    support-only weak-coupling surfaces.
+
+• Six-lane Balaban YM boundary tranche is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.YMActualPolymerActivityCandidateReceipt`,
+    `DASHI.Physics.Closure.YMPolymerActivityStrictAbsorptionBridgeReceipt`,
+    `DASHI.Physics.Closure.YMKPUniformVolumeInductionBoundaryReceipt`,
+    `DASHI.Physics.Closure.YMBalabanRGInductionCandidateReceipt`,
+    `DASHI.Physics.Closure.YMH3bVacuumProjectorNoSpectralPollutionBoundaryReceipt`,
+    and
+    `DASHI.Physics.Closure.YMThermodynamicOSWightmanOperatorBoundaryReceipt`;
+  - extends `DASHI.Physics.Closure.Paper3YMDependencyGraphReceipt` and
+    `DASHI.Physics.Closure.YMFinalStateReceipt` with those fail-closed YM/Balaban
+    surfaces;
+  - now records lane-local closure for the strict-absorption bridge, the
+    uniform-volume KP lane, and the Balaban RG transfer lane, while keeping
+    H3a/H3b continuum transfer, thermodynamic limit, OS/Wightman/operator
+    convergence, uniform mass gap, continuum uniqueness, Clay YM, and terminal
+    promotion false/open;
+  - next Balaban action: spend the next six lanes on the true H3a/H3b,
+    thermodynamic-limit, and OS/reflection-positivity gates instead of adding
+    more receipt-only Balaban packaging.
+
+• Candidate-receipt / probe-hygiene tranche is implemented.
+
+  Status:
+
+  - adds
+    `DASHI.Physics.Closure.NSCandidateCompleteEnstrophyBKMPassageReceipt` and
+    `DASHI.Physics.Closure.YML3TightnessBoundedCandidateReceipt`;
+  - extends `DASHI.Physics.Closure.NSFinalStateReceipt`,
+    `DASHI.Physics.Closure.YMFinalStateReceipt`, and
+    `DASHI.Physics.Closure.Paper0SharedMarginDependencyReceipt` with bounded
+    candidate-only surfaces;
+  - rewrites `DASHI.Physics.Probes.AllProbes` plus the four probe lane modules
+    so the aggregate compiles against fail-closed cutset contracts instead of
+    impossible promotion witnesses;
+  - keeps Clay/YM/NS/full-unification/terminal promotion flags false;
+  - next cross-lane action: either complete a coherent `CurrentProofProfile`
+    candidate-alignment receipt and thread it through the closure chain, or
+    leave the profile lane purely cutset-based until that receipt is stable.
 
 • Sprint166 projection/nonlocality leakage frontier is implemented.
 
@@ -6031,6 +7555,14 @@ This is the obstruction theorem in numerical form . The \(H^{-1/2}\) defect rati
 Phase-complete dictionaries (solid blue circles, MirrorA + MirrorB7 + sign, \(\sigma = 0.289\)) maintain \(A_N > 0\) at all cutoffs \(N \in \{8, 16, 32, 64, 128\}\) . Phase-blind dictionaries (dashed orange squares, no MirrorB7) collapse toward zero as \(N\) grows — the inert-prime nesting cross-term \(\mu = p^{-1/2} \approx 0.378\) dominates once \((N-1)\mu > 1\) . The Gershgorin bound \(A_N \geq 1 - (N-1)\mu_\text{taper}\) remains positive throughout for the tapered atoms, confirming the PAWOTG condition is operative and \(\sigma_\text{digit} = 0.289 < \sigma_\text{crit}^\text{3D} = 0.303\) is the live binding condition for the SSP embedding .
 # TODO
 
+## Calc 10 Target
+- [x] Record the Calc 10 frame-10 component-2 band-sweep outputs:
+  `c_empirical_true = 0.04180143943317622..0.048108231165891815`,
+  `alpha_strain_sq = 0.49648633477014364..0.49956437854373653`, explicit
+  carrier/frame provenance, and the true-denominator receipt.
+- [x] Keep the Calc 10 result non-promoting; do not upgrade it to
+  `KornLevelSet` proof or Clay promotion.
+
 ## Active Blocker Board
 
 NS fastest Clay path `2026-06-05`:
@@ -6860,6 +8392,49 @@ Worker 4 spectral tower tranche governance `2026-06-01`:
   ground-state, and infinite-volume gap-survival steps kept conditional.
 - [ ] Prove any claimed runtime/semantic PNF correspondence before consuming
   the finite diagonal spectral proof outside spectral severity.
+- [x] Add a checked PNF spectral-field architecture surface over the residual
+  carrier.
+  Required:
+  model PNF atoms as refs/sections over structural fibres, add residual graph
+  and signed Laplacian vocabulary, add temporal/source braid transport, and keep
+  vector search as proposal-only addressing over object refs.
+  Result:
+  `DASHI/Interop/PNFSpectralFieldCore.agda`,
+  `DASHI/Interop/PNFSpectralFieldGraph.agda`,
+  `DASHI/Interop/PNFBraidTransportField.agda`,
+  `DASHI/Interop/PNFSpectralVectorIndex.agda`, and
+  `DASHI/Interop/PNFSpectralFieldArchitectureReceipt.agda` now check as the
+  normalized architecture stack. `DASHI/Promotion/PNFSpectralTradingSignalBoundary.agda`
+  records Nashi/Mirror-style news/trading use as candidate/proposal-only, with
+  no financial advice, market prediction guarantee, production trading
+  authority, empirical adequacy, runtime parser, ANN backend, semantic truth, or
+  trading truth promoted.
+- [x] Strengthen the PNF spectral-field formalism into checked invariant
+  surfaces.
+  Result:
+  `DASHI/Interop/PNFSpectralRegistryAnchoring.agda` records canonical document,
+  evidence-span, version-hash, parser/reducer-profile, structural-payload,
+  registry-row, identity-authority, and resolver-precondition gates;
+  `DASHI/Interop/PNFResidualFieldInvariants.agda` records structural projection,
+  same-fibre comparability, bridge exceptions, severity-max join, visible
+  residual severity, and contradiction monotonicity;
+  `DASHI/Interop/PNFSpectralCoordinateRebuildability.agda` records signed
+  adjacency, absolute degree, signed-Laplacian tags, spectral coordinate rows,
+  text fallback, and rebuildability from registry payloads;
+  `DASHI/Interop/PNFResolverSelectorCommitment.agda` records resolve,
+  selector-package, query-mode, hybrid-ranking, and ITIR-commitment invariants;
+  `DASHI/Interop/PNFHodgeResidualTopology.agda` records 0/1/2-cell,
+  boundary-map, Hodge-Laplacian, and detected-feature tags with signed
+  Laplacian as the first implementable layer; and
+  `DASHI/Promotion/PNFSpectralEmpiricalBasinValidation.agda` records
+  field-window, outcome-carrier, basin, separator, MDL/cost, holdout,
+  cost-stress, search-cost, and threshold-fishing gates. These surfaces are
+  wired through `DASHI/Everything.agda` and
+  `DASHI/Promotion/ObligationIndex.agda`, whose PNF application boundary now
+  has eight rows. Runtime parsing, ANN, semantic truth, support/admissibility
+  promotion, Hodge authority, empirical adequacy, financial advice, production
+  trading, market prediction, manual semantic labels, threshold fishing, Clay,
+  and terminal promotion remain false.
 - [ ] Prove continuum/Clay promotion separately before using the spectral
   tower target as theorem closure.
 - [ ] Extend NS FRACTRAN admissibility beyond the Kolmogorov-calibrated
@@ -15599,3 +17174,42 @@ Cleanup
 - [x] Extend
   `DASHI.Physics.Closure.SiblingCodecFiningContinuousSupportReceipt` with the
   new archive surfaces and explicit non-promotion boundaries.
+
+## 2026-06-20 NS Determinant-Side Telemetry Pass
+
+- [x] Add the determinant-side target receipt
+  `DASHI.Physics.Closure.NSDeterminantAreaRouteTargetReceipt` so the old
+  `Qvel -> Omega_K` route is explicitly rejected and the corrected
+  `det(S)^+ -> |Omega_K| -> H_area` target is isolated fail-closed.
+- [x] Add the Sard boundary-regularity receipt
+  `DASHI.Physics.Closure.NSSardBoundaryRegularityReceipt` for the
+  `lambda2 = 0` carrier and the a.e. `delta1 > 0` partial closure.
+- [x] Add empirical telemetry/checker lanes for:
+  `ns_betchov_identity_scan`, `ns_det_omega_k_measure_scan`, and
+  `ns_lambda2_boundary_regularity_scan`.
+- [x] Wire the new determinant-side receipts into `DASHI/Everything.agda`.
+- [x] Wire the new determinant-side telemetry/checker scripts into
+  `scripts/local_clay_harness_manifest.py`.
+- [ ] Next analytic lane: replace the dead `Qvel` area bridge with a real
+  determinant-side lower-bound route for `∫ det(S)^+` under the corrected sign
+  decomposition.
+
+## 2026-06-22 Stage12 p13 Witness Row
+
+- [x] Extend `DASHI.Interop.PrimeSuccessorWitness` with the explicit
+  `canonicalStage12SuccessorWitness` row so the `12 -> 13` closure witness is
+  typed directly instead of being special-cased.
+- [x] Add the canonical `p13 / C12` quotient and witness surfaces:
+  `DASHI.Foundations.P13UnitGroupC12Witness`,
+  `DASHI.Foundations.P13HexTruthActionQuotient`,
+  `DASHI.Geometry.P13UnitActionTreeIsometry`,
+  `DASHI.Core.P13EquivariantOddFieldGate`, and
+  `DASHI.Physics.Closure.P13Stage12C12Regression`.
+- [x] Generalize the shared Stage12 adapter path so `p13` joins the canonical
+  adapter list, registry, carry bridge, successor bridge, and regression
+  consumers instead of remaining only a successor witness.
+- [x] Add `DASHI.Interop.P13PrimeLaneStage12ActionBridge` and wire the full
+  p13 row into `DASHI/Everything.agda`.
+- [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
+  beyond the p13 closure row without breaking the candidate-only/fail-closed
+  boundary.

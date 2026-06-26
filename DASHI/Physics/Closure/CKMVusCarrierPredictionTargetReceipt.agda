@@ -3,11 +3,14 @@ module DASHI.Physics.Closure.CKMVusCarrierPredictionTargetReceipt where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
 import DASHI.Physics.Closure.CKMCarrierDerived as CKMD
+import DASHI.Physics.Closure.BiunitaryDiagonalization3x3 as Biunitary3
+import DASHI.Physics.Closure.CKMEntryField as Field
 import DASHI.Physics.Closure.MatterRepresentationReceiptSurface as Matter
 import DASHI.Physics.Closure.YukawaDHRIntertwinerCompatibility as YDHR
 
@@ -262,6 +265,196 @@ pdgApproxVusGaussianDatum =
     pdgApproxVusSignedDatum
     Matter.zeroMixingSignedRationalDatum
 
+pdgApproxVusReducedSignedDatum :
+  Matter.MixingSignedRationalDatum
+pdgApproxVusReducedSignedDatum =
+  Matter.mixingSignedRationalDatum 9 40 true
+
+pdgApproxVusReducedGaussianDatum :
+  Matter.MixingGaussianRationalDatum
+pdgApproxVusReducedGaussianDatum =
+  Matter.mixingGaussianRationalDatum
+    pdgApproxVusReducedSignedDatum
+    Matter.zeroMixingSignedRationalDatum
+
+vusOneFifthToPdgApproxAbsoluteGapSignedDatum :
+  Matter.MixingSignedRationalDatum
+vusOneFifthToPdgApproxAbsoluteGapSignedDatum =
+  Matter.mixingSignedRationalDatum 1 40 true
+
+vusOneFifthToPdgApproxAbsoluteGapGaussianDatum :
+  Matter.MixingGaussianRationalDatum
+vusOneFifthToPdgApproxAbsoluteGapGaussianDatum =
+  Matter.mixingGaussianRationalDatum
+    vusOneFifthToPdgApproxAbsoluteGapSignedDatum
+    Matter.zeroMixingSignedRationalDatum
+
+record CKMVusOneFifthPdgApproxResidualLaw : Set where
+  field
+    cabibboLikeVus :
+      Matter.MixingGaussianRationalDatum
+
+    cabibboLikeVusIsOneFifth :
+      cabibboLikeVus
+      ≡
+      Matter.mixingGaussianRationalDatum
+        Matter.oneFifthMixingSignedRationalDatum
+        Matter.zeroMixingSignedRationalDatum
+
+    pdgApproxVus :
+      Matter.MixingGaussianRationalDatum
+
+    pdgApproxVusIsZeroPointTwoTwoFive :
+      pdgApproxVus ≡ pdgApproxVusGaussianDatum
+
+    pdgApproxVusReduced :
+      Matter.MixingGaussianRationalDatum
+
+    pdgApproxVusReducedIsNineFortieths :
+      pdgApproxVusReduced ≡ pdgApproxVusReducedGaussianDatum
+
+    pdgApproxReductionScaledNumerator :
+      Nat
+
+    pdgApproxReductionScaledNumeratorIsCanonical :
+      pdgApproxReductionScaledNumerator ≡ 225 * 40
+
+    pdgApproxReducedScaledNumerator :
+      Nat
+
+    pdgApproxReducedScaledNumeratorIsCanonical :
+      pdgApproxReducedScaledNumerator ≡ 9 * 1000
+
+    pdgApproxReductionScaledEquality :
+      pdgApproxReductionScaledNumerator
+      ≡
+      pdgApproxReducedScaledNumerator
+
+    commonDenominator :
+      Nat
+
+    commonDenominatorIsTwoHundred :
+      commonDenominator ≡ 200
+
+    cabibboLikeScaledNumerator :
+      Nat
+
+    cabibboLikeScaledNumeratorIsForty :
+      cabibboLikeScaledNumerator ≡ 1 * 40
+
+    pdgApproxScaledNumerator :
+      Nat
+
+    pdgApproxScaledNumeratorIsFortyFive :
+      pdgApproxScaledNumerator ≡ 9 * 5
+
+    absoluteGapScaledNumerator :
+      Nat
+
+    absoluteGapScaledNumeratorIsFive :
+      absoluteGapScaledNumerator ≡ 5
+
+    cabibboPlusGapReachesPdgApprox :
+      cabibboLikeScaledNumerator + absoluteGapScaledNumerator
+      ≡
+      pdgApproxScaledNumerator
+
+    absoluteGap :
+      Matter.MixingGaussianRationalDatum
+
+    absoluteGapIsOneFortieth :
+      absoluteGap ≡ vusOneFifthToPdgApproxAbsoluteGapGaussianDatum
+
+    absoluteGapReducesFromCommonDenominator :
+      absoluteGapScaledNumerator * 40
+      ≡
+      commonDenominator * 1
+
+    exactPDGMatchClaimed :
+      Bool
+
+    exactPDGMatchClaimedIsFalse :
+      exactPDGMatchClaimed ≡ false
+
+    physicalCKMPromotionConstructed :
+      Bool
+
+    physicalCKMPromotionConstructedIsFalse :
+      physicalCKMPromotionConstructed ≡ false
+
+    residualLawBoundary :
+      List String
+
+open CKMVusOneFifthPdgApproxResidualLaw public
+
+canonicalCKMVusOneFifthPdgApproxResidualLaw :
+  CKMVusOneFifthPdgApproxResidualLaw
+canonicalCKMVusOneFifthPdgApproxResidualLaw =
+  record
+    { cabibboLikeVus =
+        Matter.mixingGaussianRationalDatum
+          Matter.oneFifthMixingSignedRationalDatum
+          Matter.zeroMixingSignedRationalDatum
+    ; cabibboLikeVusIsOneFifth =
+        refl
+    ; pdgApproxVus =
+        pdgApproxVusGaussianDatum
+    ; pdgApproxVusIsZeroPointTwoTwoFive =
+        refl
+    ; pdgApproxVusReduced =
+        pdgApproxVusReducedGaussianDatum
+    ; pdgApproxVusReducedIsNineFortieths =
+        refl
+    ; pdgApproxReductionScaledNumerator =
+        9000
+    ; pdgApproxReductionScaledNumeratorIsCanonical =
+        refl
+    ; pdgApproxReducedScaledNumerator =
+        9000
+    ; pdgApproxReducedScaledNumeratorIsCanonical =
+        refl
+    ; pdgApproxReductionScaledEquality =
+        refl
+    ; commonDenominator =
+        200
+    ; commonDenominatorIsTwoHundred =
+        refl
+    ; cabibboLikeScaledNumerator =
+        40
+    ; cabibboLikeScaledNumeratorIsForty =
+        refl
+    ; pdgApproxScaledNumerator =
+        45
+    ; pdgApproxScaledNumeratorIsFortyFive =
+        refl
+    ; absoluteGapScaledNumerator =
+        5
+    ; absoluteGapScaledNumeratorIsFive =
+        refl
+    ; cabibboPlusGapReachesPdgApprox =
+        refl
+    ; absoluteGap =
+        vusOneFifthToPdgApproxAbsoluteGapGaussianDatum
+    ; absoluteGapIsOneFortieth =
+        refl
+    ; absoluteGapReducesFromCommonDenominator =
+        refl
+    ; exactPDGMatchClaimed =
+        false
+    ; exactPDGMatchClaimedIsFalse =
+        refl
+    ; physicalCKMPromotionConstructed =
+        false
+    ; physicalCKMPromotionConstructedIsFalse =
+        refl
+    ; residualLawBoundary =
+        "The PDG comparison datum 0.225 is recorded as 225/1000 and reduced by scaled equality to 9/40"
+        ∷ "The Cabibbo-like socket value 1/5 scales to 40/200, while the reduced PDG comparison value 9/40 scales to 45/200"
+        ∷ "The exact finite absolute gap is therefore 5/200, reduced by scaled equality to 1/40"
+        ∷ "This is a finite comparison law only; exact PDG match and physical CKM promotion remain false"
+        ∷ []
+    }
+
 data AcceptedExactPhysicalVusMatch : Set where
 
 acceptedExactPhysicalVusMatchImpossibleHere :
@@ -366,6 +559,47 @@ record CKMVusCarrierPredictionTargetReceipt : Setω where
     alphaCouplingAcceptedForVusIsFalse :
       alphaCouplingAcceptedForVus ≡ false
 
+    cabibboLikeTransportSocket :
+      Biunitary3.CabibboLikeDownTransportSocket
+
+    cabibboLikeTransportSocketIsCanonical :
+      cabibboLikeTransportSocket
+      ≡
+      Biunitary3.canonicalCabibboLikeDownTransportSocket
+
+    identityCarrierVusFromSocketIsZero :
+      Biunitary3.identityVusEntry cabibboLikeTransportSocket
+      ≡
+      Matter.zeroMixingGaussianRationalDatum
+
+    cabibboLikeCarrierVusFromSocketIsOneFifth :
+      Biunitary3.cabibboLikeVusEntry cabibboLikeTransportSocket
+      ≡
+      Matter.mixingGaussianRationalDatum
+        Matter.oneFifthMixingSignedRationalDatum
+        Matter.zeroMixingSignedRationalDatum
+
+    cabibboLikeTransportDistinguishesIdentity :
+      Biunitary3.distinguishesIdentityCarrier cabibboLikeTransportSocket
+      ≡
+      true
+
+    cabibboLikeTransportExactUnitarityRejected :
+      Field.exactUnitarityForConcreteWolfenstein
+        (Biunitary3.exactVVdaggerResidualReceipt cabibboLikeTransportSocket)
+      ≡
+      false
+
+    cabibboLikeTransportExactPDGMatchClaimedIsFalse :
+      Biunitary3.exactPDGMatchClaimed cabibboLikeTransportSocket
+      ≡
+      false
+
+    cabibboLikeTransportPhysicalPromotionIsFalse :
+      Biunitary3.physicalCKMPromotionConstructed cabibboLikeTransportSocket
+      ≡
+      false
+
     pdgApproxVus :
       Matter.MixingGaussianRationalDatum
 
@@ -377,6 +611,42 @@ record CKMVusCarrierPredictionTargetReceipt : Setω where
 
     pdgApproxVusLabelIsCanonical :
       pdgApproxVusLabel ≡ "PDG approximate |V_us| comparison value 0.225"
+
+    oneFifthToPdgApproxResidualLaw :
+      CKMVusOneFifthPdgApproxResidualLaw
+
+    oneFifthToPdgApproxResidualLawIsCanonical :
+      oneFifthToPdgApproxResidualLaw
+      ≡
+      canonicalCKMVusOneFifthPdgApproxResidualLaw
+
+    oneFifthToPdgApproxResidualLawSocketValue :
+      cabibboLikeVus oneFifthToPdgApproxResidualLaw
+      ≡
+      Biunitary3.cabibboLikeVusEntry cabibboLikeTransportSocket
+
+    oneFifthToPdgApproxResidualLawTargetDatum :
+      CKMVusOneFifthPdgApproxResidualLaw.pdgApproxVus
+        oneFifthToPdgApproxResidualLaw
+      ≡
+      pdgApproxVus
+
+    oneFifthToPdgApproxResidualLawGapIsOneFortieth :
+      absoluteGap oneFifthToPdgApproxResidualLaw
+      ≡
+      vusOneFifthToPdgApproxAbsoluteGapGaussianDatum
+
+    oneFifthToPdgApproxResidualLawExactPDGMatchIsFalse :
+      CKMVusOneFifthPdgApproxResidualLaw.exactPDGMatchClaimed
+        oneFifthToPdgApproxResidualLaw
+      ≡
+      false
+
+    oneFifthToPdgApproxResidualLawPhysicalPromotionIsFalse :
+      CKMVusOneFifthPdgApproxResidualLaw.physicalCKMPromotionConstructed
+        oneFifthToPdgApproxResidualLaw
+      ≡
+      false
 
     nonIdentityTargetRecorded :
       Bool
@@ -473,6 +743,22 @@ canonicalCKMVusCarrierPredictionTargetReceipt =
         false
     ; alphaCouplingAcceptedForVusIsFalse =
         refl
+    ; cabibboLikeTransportSocket =
+        Biunitary3.canonicalCabibboLikeDownTransportSocket
+    ; cabibboLikeTransportSocketIsCanonical =
+        refl
+    ; identityCarrierVusFromSocketIsZero =
+        refl
+    ; cabibboLikeCarrierVusFromSocketIsOneFifth =
+        refl
+    ; cabibboLikeTransportDistinguishesIdentity =
+        refl
+    ; cabibboLikeTransportExactUnitarityRejected =
+        refl
+    ; cabibboLikeTransportExactPDGMatchClaimedIsFalse =
+        refl
+    ; cabibboLikeTransportPhysicalPromotionIsFalse =
+        refl
     ; pdgApproxVus =
         pdgApproxVusGaussianDatum
     ; pdgApproxVusIsZeroPointTwoTwoFive =
@@ -480,6 +766,20 @@ canonicalCKMVusCarrierPredictionTargetReceipt =
     ; pdgApproxVusLabel =
         "PDG approximate |V_us| comparison value 0.225"
     ; pdgApproxVusLabelIsCanonical =
+        refl
+    ; oneFifthToPdgApproxResidualLaw =
+        canonicalCKMVusOneFifthPdgApproxResidualLaw
+    ; oneFifthToPdgApproxResidualLawIsCanonical =
+        refl
+    ; oneFifthToPdgApproxResidualLawSocketValue =
+        refl
+    ; oneFifthToPdgApproxResidualLawTargetDatum =
+        refl
+    ; oneFifthToPdgApproxResidualLawGapIsOneFortieth =
+        refl
+    ; oneFifthToPdgApproxResidualLawExactPDGMatchIsFalse =
+        refl
+    ; oneFifthToPdgApproxResidualLawPhysicalPromotionIsFalse =
         refl
     ; nonIdentityTargetRecorded =
         true
@@ -508,6 +808,9 @@ canonicalCKMVusCarrierPredictionTargetReceipt =
         ∷ "The current carrier-derived CKM matrix is still the identity matrix, so its v12 entry is zero"
         ∷ "The receipt consumes first-second off-diagonal up/down Yukawa target data from the carrier DHR Yukawa formula surface"
         ∷ "The first symbolic non-identity target is |V_us|_target(alpha,g_12)=alpha*g_12"
+        ∷ "The concrete Cabibbo-like socket distinguishes identity V_us=0 from finite carrier V_us=1/5"
+        ∷ "The Cabibbo-like socket also carries the computed nonzero V V^dagger - I residual, so exact unitarity is rejected for that approximation"
+        ∷ "The exact finite comparison against the PDG-sized datum is 1/5 versus 9/40 with absolute gap 1/40"
         ∷ "The alpha/coupling target is symbolic only; no accepted alpha value or off-diagonal coupling evaluation is supplied"
         ∷ "The PDG-sized value 0.225 is recorded as an approximate comparison target only"
         ∷ "No exact physical CKM match, non-identity physical diagonalizer, approximation-error bound, or promotion is constructed here"
@@ -551,4 +854,33 @@ ckmVusAlphaCouplingAcceptedStillFalse :
   ≡
   false
 ckmVusAlphaCouplingAcceptedStillFalse =
+  refl
+
+ckmVusCabibboLikeTransportVusIsOneFifth :
+  Biunitary3.cabibboLikeVusEntry
+    (cabibboLikeTransportSocket
+      canonicalCKMVusCarrierPredictionTargetReceipt)
+  ≡
+  Matter.mixingGaussianRationalDatum
+    Matter.oneFifthMixingSignedRationalDatum
+    Matter.zeroMixingSignedRationalDatum
+ckmVusCabibboLikeTransportVusIsOneFifth =
+  refl
+
+ckmVusCabibboLikeTransportDistinguishesIdentity :
+  Biunitary3.distinguishesIdentityCarrier
+    (cabibboLikeTransportSocket
+      canonicalCKMVusCarrierPredictionTargetReceipt)
+  ≡
+  true
+ckmVusCabibboLikeTransportDistinguishesIdentity =
+  refl
+
+ckmVusCabibboLikeTransportKeepsPhysicalPromotionFalse :
+  Biunitary3.physicalCKMPromotionConstructed
+    (cabibboLikeTransportSocket
+      canonicalCKMVusCarrierPredictionTargetReceipt)
+  ≡
+  false
+ckmVusCabibboLikeTransportKeepsPhysicalPromotionFalse =
   refl

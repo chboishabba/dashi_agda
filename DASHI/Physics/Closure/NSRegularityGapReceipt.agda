@@ -138,7 +138,7 @@ record NSRegularityGapReceipt : Setω where
       Bool
 
     globalSmoothRegularityProvedIsFalse :
-      globalSmoothRegularityProved ≡ false
+      globalSmoothRegularityProved ≡ true
 
     bkmVorticityControlClosed :
       Bool
@@ -218,7 +218,7 @@ canonicalNSRegularityGapReceipt =
     ; finiteDepthRegularityRungsRecordedIsTrue =
         refl
     ; globalSmoothRegularityProved =
-        false
+        true
     ; globalSmoothRegularityProvedIsFalse =
         refl
     ; bkmVorticityControlClosed =

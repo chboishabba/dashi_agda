@@ -1,0 +1,54 @@
+{
+  "C": "scripts/check_ns_pressure_eigenframe_gap_scan.py",
+  "F": "Any malformed field or arithmetic mismatch is treated as a hard failure.",
+  "G": "Checker is empirical and does not add theorem-level claims.",
+  "L": "Load scan JSON, validate control card + authority + per-row + aggregate invariants, and emit checker status.",
+  "O": "Validate spectral pressure-eigenframe gap scan output schema and arithmetic.",
+  "P": "FAIL_CLOSED_NS_PRESSURE_EIGENFRAME_GAP_SCAN_CHECK",
+  "R": "Validate per-frame gap-row telemetry, threshold accumulation, and aggregate consistency for pressure Hessian off-diagonal projections in the strain eigenframe.",
+  "S": "Fail-closed checker: malformed schema, arithmetic drift, or invariant failures are errors.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_pressure_eigenframe_gap_scan_N128_20260621.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/check_ns_pressure_eigenframe_gap_scan_N128_20260621.json"
+  ],
+  "contract": "check_ns_pressure_eigenframe_gap_scan",
+  "control_card": {
+    "C": "scripts/check_ns_pressure_eigenframe_gap_scan.py",
+    "F": "Any malformed field or arithmetic mismatch is treated as a hard failure.",
+    "G": "Checker is empirical and does not add theorem-level claims.",
+    "L": "Load scan JSON, validate control card + authority + per-row + aggregate invariants, and emit checker status.",
+    "O": "Validate spectral pressure-eigenframe gap scan output schema and arithmetic.",
+    "P": "FAIL_CLOSED_NS_PRESSURE_EIGENFRAME_GAP_SCAN_CHECK",
+    "R": "Validate per-frame gap-row telemetry, threshold accumulation, and aggregate consistency for pressure Hessian off-diagonal projections in the strain eigenframe.",
+    "S": "Fail-closed checker: malformed schema, arithmetic drift, or invariant failures are errors."
+  },
+  "details": {
+    "error_count": 0,
+    "row_count": 13,
+    "status_counts": {
+      "error_frames": 0,
+      "missing_frames": 0,
+      "ok_frames": 13,
+      "partial_frames": 0
+    },
+    "warn_count": 0
+  },
+  "errors": [],
+  "inputs": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/check_ns_pressure_eigenframe_gap_scan_N128_20260621.json",
+    "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_pressure_eigenframe_gap_scan_N128_20260621.json"
+  },
+  "route_decision": "FAIL_CLOSED_NS_PRESSURE_EIGENFRAME_GAP_SCAN_CHECK",
+  "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_pressure_eigenframe_gap_scan_N128_20260621.json",
+  "status": "ok",
+  "warnings": []
+}

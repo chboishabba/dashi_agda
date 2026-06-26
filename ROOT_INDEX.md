@@ -99,6 +99,13 @@ Final aggregate check:
 timeout 300s agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Everything.agda
 ```
 
+Named-library check:
+
+```sh
+nix build .#dchott-agda --no-link
+nix build .#check --no-link
+```
+
 Basic hygiene check:
 
 ```sh

@@ -1,0 +1,44 @@
+{
+  "artifact": "ns_boundary_preflight_N128_frame_summary_20260618",
+  "status": "ok",
+  "promotion_status": "empirical_non_promoting",
+  "input_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "producer": "scripts/ns_boundary_derived_tensor_archive.py",
+  "consumer": "scripts/ns_boundary_preflight_diagnostic.py",
+  "lambda2_band": 0.001,
+  "frame_count": 13,
+  "summary": {
+    "min_g12_min": 1.421602960869846,
+    "min_g12_min_frame": 10,
+    "rho_min_min": 0.23098019784845852,
+    "rho_min_min_frame": 10,
+    "betti0_min": 16803,
+    "betti0_max": 20630
+  },
+  "interpretation": {
+    "gap_collapse_observed": false,
+    "rho_degeneration_observed": false,
+    "component_fragmentation_observed": true,
+    "notes": [
+      "min_g12 on the lambda2 boundary layer stays bounded away from zero for this N128 dataset at band 1e-3.",
+      "rho_min stays positive for all 13 frames.",
+      "Betti-0 is large, so any boundary-layer argument must be componentwise rather than globally connected.",
+      "This is numerical diagnostic evidence only, not a Navier-Stokes theorem and not a Clay promotion."
+    ]
+  },
+  "rows": [
+    {"frame": 0, "status": "ok", "boundary_cells": 289, "min_g12": 3.1562165730667426, "rho_min": 0.327341769524874, "rho_mean": 400.2615077368931, "rho_max": 2065.6711220192415, "betti0": 16803},
+    {"frame": 1, "status": "ok", "boundary_cells": 330, "min_g12": 3.213076181245854, "rho_min": 2.9508983660745747, "rho_mean": 355.91407848949467, "rho_max": 1832.7998059778229, "betti0": 17176},
+    {"frame": 2, "status": "ok", "boundary_cells": 310, "min_g12": 3.8045208440241214, "rho_min": 3.958669752024614, "rho_mean": 356.0185643764224, "rho_max": 2669.831317902697, "betti0": 17781},
+    {"frame": 3, "status": "ok", "boundary_cells": 351, "min_g12": 3.8242000993233503, "rho_min": 1.159525383957878, "rho_mean": 344.2415244671296, "rho_max": 1898.5640506979164, "betti0": 18354},
+    {"frame": 4, "status": "ok", "boundary_cells": 370, "min_g12": 4.994143495554001, "rho_min": 7.631777420736643, "rho_mean": 336.71177762169606, "rho_max": 1823.1031087060455, "betti0": 18541},
+    {"frame": 5, "status": "ok", "boundary_cells": 358, "min_g12": 3.031126608043635, "rho_min": 5.966052990327998, "rho_mean": 333.8657670013664, "rho_max": 3893.207607171202, "betti0": 18950},
+    {"frame": 6, "status": "ok", "boundary_cells": 353, "min_g12": 3.2813435230543377, "rho_min": 8.058348297045619, "rho_mean": 316.31221251357084, "rho_max": 1874.0061530149767, "betti0": 19317},
+    {"frame": 7, "status": "ok", "boundary_cells": 353, "min_g12": 2.757463130585236, "rho_min": 0.8081724125420915, "rho_mean": 360.40591809718825, "rho_max": 3226.3833014974184, "betti0": 19744},
+    {"frame": 8, "status": "ok", "boundary_cells": 368, "min_g12": 3.5171653344250347, "rho_min": 1.2137678006712214, "rho_mean": 337.04602092595104, "rho_max": 3498.72017852722, "betti0": 19965},
+    {"frame": 9, "status": "ok", "boundary_cells": 389, "min_g12": 2.625865505785761, "rho_min": 0.4051023698591815, "rho_mean": 354.13342333112575, "rho_max": 2434.5767487566604, "betti0": 20224},
+    {"frame": 10, "status": "ok", "boundary_cells": 370, "min_g12": 1.421602960869846, "rho_min": 0.23098019784845852, "rho_mean": 364.94222585834535, "rho_max": 2002.547487802392, "betti0": 20380},
+    {"frame": 11, "status": "ok", "boundary_cells": 369, "min_g12": 3.977956065897337, "rho_min": 3.9580868151902386, "rho_mean": 387.1468371304478, "rho_max": 3130.5863845600193, "betti0": 20585},
+    {"frame": 12, "status": "ok", "boundary_cells": 408, "min_g12": 2.5536833191257307, "rho_min": 9.876214586906789, "rho_mean": 340.1281969086127, "rho_max": 2942.7242089542633, "betti0": 20630}
+  ]
+}

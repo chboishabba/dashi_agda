@@ -185,4 +185,3 @@ scalarOSPositivityRecorded :
   osPositivityForScalarSector canonicalOSPositivityCorrectObjectReceipt ≡ true
 scalarOSPositivityRecorded =
   refl
-

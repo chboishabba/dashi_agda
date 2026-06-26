@@ -1,0 +1,743 @@
+{
+  "C": "scripts/ns_tube_morphology_scan.py",
+  "F": "Morphology is proxied from framewise local Hessian geometry and remains telemetry rather than proof.",
+  "G": "Empirical/non-promoting only; no tube-structure theorem or Clay claim is inferred.",
+  "L": "Load raw velocity frames, reconstruct vorticity and enstrophy Hessians, threshold high-enstrophy carriers, classify local morphology, and aggregate quantile rows.",
+  "O": "Scan raw N128 high-enstrophy morphology on reconstructed local carriers.",
+  "P": "FAIL_CLOSED_NS_TUBE_MORPHOLOGY_SCAN",
+  "R": "Classify high-enstrophy voxels by simple Hessian-based local morphology proxies (tube-like, sheet-like, blob-like, ambiguous) and report framewise plus aggregate telemetry.",
+  "S": "Fail-closed empirical scan only; malformed fields or non-finite arithmetic become explicit degraded states.",
+  "aggregate": {
+    "ok_frames": 13,
+    "processed_frames": 13,
+    "quantile_rows": [
+      {
+        "ambiguous_fraction": 0.6016965067776642,
+        "blob_like_fraction": 0.24211204310004592,
+        "carrier_count": 1363154,
+        "carrier_fraction_mean": 0.05000019073486328,
+        "carrier_quantile": 0.95,
+        "carrier_threshold_mean": 2628.603406189627,
+        "sheet_like_fraction": 0.0007357936080589573,
+        "tube_axis_alignment_mean": 0.6605624009666922,
+        "tube_like_fraction": 0.15545565651423096
+      },
+      {
+        "ambiguous_fraction": 0.4636475006968999,
+        "blob_like_fraction": 0.4778055722648513,
+        "carrier_count": 272636,
+        "carrier_fraction_mean": 0.010000228881835938,
+        "carrier_quantile": 0.99,
+        "carrier_threshold_mean": 3907.188161295323,
+        "sheet_like_fraction": 4.034683607447292e-05,
+        "tube_axis_alignment_mean": 0.7258811213645368,
+        "tube_like_fraction": 0.05850658020217433
+      }
+    ],
+    "status_counts": {
+      "ok": 13
+    }
+  },
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "contract": "ns_tube_morphology_scan",
+  "control_card": {
+    "C": "scripts/ns_tube_morphology_scan.py",
+    "F": "Morphology is proxied from framewise local Hessian geometry and remains telemetry rather than proof.",
+    "G": "Empirical/non-promoting only; no tube-structure theorem or Clay claim is inferred.",
+    "L": "Load raw velocity frames, reconstruct vorticity and enstrophy Hessians, threshold high-enstrophy carriers, classify local morphology, and aggregate quantile rows.",
+    "O": "Scan raw N128 high-enstrophy morphology on reconstructed local carriers.",
+    "P": "FAIL_CLOSED_NS_TUBE_MORPHOLOGY_SCAN",
+    "R": "Classify high-enstrophy voxels by simple Hessian-based local morphology proxies (tube-like, sheet-like, blob-like, ambiguous) and report framewise plus aggregate telemetry.",
+    "S": "Fail-closed empirical scan only; malformed fields or non-finite arithmetic become explicit degraded states."
+  },
+  "frame_rows": [
+    {
+      "finite_cell_count": 2097152,
+      "frame": 0,
+      "omega_norm_sq_max": 17556.325134526996,
+      "omega_norm_sq_mean": 1234.632153190143,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.5983329836540846,
+          "blob_like_fraction": 0.2501573556619428,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 17556.325134526996,
+          "carrier_mean": 4270.52117498513,
+          "carrier_min": 3281.719651172152,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 3281.71746944026,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -6435627.076397527,
+            "lambda_h2_mean": -3864859.7942305347,
+            "lambda_h3_mean": -1058123.892850778,
+            "lambda_h_abs_max_mean": 6443619.371947386
+          },
+          "sheet_like_fraction": 0.0007057163020465773,
+          "tube_axis_alignment_mean": 0.652262847503592,
+          "tube_like_fraction": 0.15080394438192604
+        },
+        {
+          "ambiguous_fraction": 0.4512683578104139,
+          "blob_like_fraction": 0.49489795918367346,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 17556.325134526996,
+          "carrier_mean": 5875.023960063266,
+          "carrier_min": 4868.9072910925615,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 4868.891489221582,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -8616649.33734503,
+            "lambda_h2_mean": -5881047.678912711,
+            "lambda_h3_mean": -2879570.481154355,
+            "lambda_h_abs_max_mean": 8617175.220995588
+          },
+          "sheet_like_fraction": 4.768262445164982e-05,
+          "tube_axis_alignment_mean": 0.7170412210699642,
+          "tube_like_fraction": 0.053786000381460995
+        }
+      ],
+      "snapshot_index": 0,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 1,
+      "omega_norm_sq_max": 16286.45061374057,
+      "omega_norm_sq_mean": 1183.2701344493762,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.5983520570676534,
+          "blob_like_fraction": 0.24859333574929907,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 16286.45061374057,
+          "carrier_mean": 4091.4173313281376,
+          "carrier_min": 3143.052701151395,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 3143.0435636200036,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -6144157.771707854,
+            "lambda_h2_mean": -3684916.0528440545,
+            "lambda_h3_mean": -1001487.2622286378,
+            "lambda_h_abs_max_mean": 6151751.141894655
+          },
+          "sheet_like_fraction": 0.0006103492342024452,
+          "tube_axis_alignment_mean": 0.6540596565861208,
+          "tube_like_fraction": 0.1524442579488451
+        },
+        {
+          "ambiguous_fraction": 0.4486934960900248,
+          "blob_like_fraction": 0.49585161167270647,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 16286.45061374057,
+          "carrier_mean": 5627.599470445274,
+          "carrier_min": 4668.1007593744025,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 4668.063106106458,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -8224958.614886351,
+            "lambda_h2_mean": -5607865.302932884,
+            "lambda_h3_mean": -2723477.142765393,
+            "lambda_h_abs_max_mean": 8225615.467697769
+          },
+          "sheet_like_fraction": 4.768262445164982e-05,
+          "tube_axis_alignment_mean": 0.7227058795823534,
+          "tube_like_fraction": 0.05540720961281709
+        }
+      ],
+      "snapshot_index": 1,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 2,
+      "omega_norm_sq_max": 14647.521006212102,
+      "omega_norm_sq_mean": 1135.593610564593,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.5976844875927445,
+          "blob_like_fraction": 0.246514333670297,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 14647.521006212102,
+          "carrier_mean": 3926.184382451357,
+          "carrier_min": 3015.257952608691,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 3015.2564576613167,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -5881231.78033662,
+            "lambda_h2_mean": -3523199.9608717007,
+            "lambda_h3_mean": -952298.2393062215,
+            "lambda_h_abs_max_mean": 5888094.659513882
+          },
+          "sheet_like_fraction": 0.0008487669038127754,
+          "tube_axis_alignment_mean": 0.6564344787969472,
+          "tube_like_fraction": 0.1549524118331458
+        },
+        {
+          "ambiguous_fraction": 0.45241274079725347,
+          "blob_like_fraction": 0.49113103185199314,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 14647.521006212102,
+          "carrier_mean": 5400.655664407538,
+          "carrier_min": 4475.959144084025,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 4475.89230110751,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -7873197.753216837,
+            "lambda_h2_mean": -5364639.304414466,
+            "lambda_h3_mean": -2604478.1203941163,
+            "lambda_h_abs_max_mean": 7873508.569521619
+          },
+          "sheet_like_fraction": 4.768262445164982e-05,
+          "tube_axis_alignment_mean": 0.7230606000683665,
+          "tube_like_fraction": 0.05640854472630174
+        }
+      ],
+      "snapshot_index": 2,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 3,
+      "omega_norm_sq_max": 12889.361958169815,
+      "omega_norm_sq_mean": 1091.261583375519,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.602405157451029,
+          "blob_like_fraction": 0.24237540292586165,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 12889.361958169815,
+          "carrier_mean": 3773.5642945380937,
+          "carrier_min": 2898.4808431299416,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 2898.480809121606,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -5637757.0497139655,
+            "lambda_h2_mean": -3374368.259344359,
+            "lambda_h3_mean": -899974.7377233233,
+            "lambda_h_abs_max_mean": 5645099.464315659
+          },
+          "sheet_like_fraction": 0.0008010833698907094,
+          "tube_axis_alignment_mean": 0.6570689697929545,
+          "tube_like_fraction": 0.15441835625321865
+        },
+        {
+          "ambiguous_fraction": 0.45803929048254816,
+          "blob_like_fraction": 0.4844077818043105,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 12889.361958169815,
+          "carrier_mean": 5191.191630963813,
+          "carrier_min": 4294.753630005372,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 4294.743988404921,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -7549582.771238649,
+            "lambda_h2_mean": -5139750.340886893,
+            "lambda_h3_mean": -2481002.940174979,
+            "lambda_h_abs_max_mean": 7549952.400907085
+          },
+          "sheet_like_fraction": 0.0,
+          "tube_axis_alignment_mean": 0.7161582594523858,
+          "tube_like_fraction": 0.057552927713141334
+        }
+      ],
+      "snapshot_index": 3,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 4,
+      "omega_norm_sq_max": 11890.148410483014,
+      "omega_norm_sq_mean": 1049.9148651849255,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.603721222987278,
+          "blob_like_fraction": 0.24221327891052663,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 11890.148410483014,
+          "carrier_mean": 3631.673785651423,
+          "carrier_min": 2788.8442883154103,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 2788.84205620349,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -5417000.164389247,
+            "lambda_h2_mean": -3243206.505423882,
+            "lambda_h3_mean": -862139.2548926799,
+            "lambda_h_abs_max_mean": 5424142.771669421
+          },
+          "sheet_like_fraction": 0.0009441339716569075,
+          "tube_axis_alignment_mean": 0.6602294302150211,
+          "tube_like_fraction": 0.15312136413053845
+        },
+        {
+          "ambiguous_fraction": 0.4646671752813275,
+          "blob_like_fraction": 0.47792294487888615,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 11890.148410483014,
+          "carrier_mean": 4999.486207955528,
+          "carrier_min": 4139.528536021793,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 4139.485083993953,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -7266084.002934421,
+            "lambda_h2_mean": -4932856.544003096,
+            "lambda_h3_mean": -2372866.143625579,
+            "lambda_h_abs_max_mean": 7266424.800984741
+          },
+          "sheet_like_fraction": 4.768262445164982e-05,
+          "tube_axis_alignment_mean": 0.7335393115117697,
+          "tube_like_fraction": 0.05736219721533473
+        }
+      ],
+      "snapshot_index": 4,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 5,
+      "omega_norm_sq_max": 11919.869361091214,
+      "omega_norm_sq_mean": 1011.1994914210201,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.6020332258864369,
+          "blob_like_fraction": 0.2419653245341319,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 11919.869361091214,
+          "carrier_mean": 3499.341974214568,
+          "carrier_min": 2685.922968516642,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 2685.916140174542,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -5212076.586850861,
+            "lambda_h2_mean": -3120224.285213152,
+            "lambda_h3_mean": -824758.7211798643,
+            "lambda_h_abs_max_mean": 5218813.9459460685
+          },
+          "sheet_like_fraction": 0.0006961795952621641,
+          "tube_axis_alignment_mean": 0.6607245836243799,
+          "tube_like_fraction": 0.15530526998416908
+        },
+        {
+          "ambiguous_fraction": 0.4635227922944879,
+          "blob_like_fraction": 0.4750619874117871,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 11919.869361091214,
+          "carrier_mean": 4821.2144348784195,
+          "carrier_min": 3994.0629975455604,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 3994.0251076890886,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -6997190.926809506,
+            "lambda_h2_mean": -4747667.460914045,
+            "lambda_h3_mean": -2265882.042492619,
+            "lambda_h_abs_max_mean": 6997434.897302014
+          },
+          "sheet_like_fraction": 9.536524890329964e-05,
+          "tube_axis_alignment_mean": 0.7223811684513531,
+          "tube_like_fraction": 0.06131985504482167
+        }
+      ],
+      "snapshot_index": 5,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 6,
+      "omega_norm_sq_max": 11574.128041024233,
+      "omega_norm_sq_mean": 974.7848919584671,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.6019950790592993,
+          "blob_like_fraction": 0.2412596082320853,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 11574.128041024233,
+          "carrier_mean": 3374.755791253485,
+          "carrier_min": 2589.4570478073683,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 2589.4560029554705,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -5019516.7055213265,
+            "lambda_h2_mean": -3002494.2405281723,
+            "lambda_h3_mean": -787440.4284117364,
+            "lambda_h_abs_max_mean": 5026337.535486317
+          },
+          "sheet_like_fraction": 0.0006961795952621641,
+          "tube_axis_alignment_mean": 0.6604142981800407,
+          "tube_like_fraction": 0.1560491331133533
+        },
+        {
+          "ambiguous_fraction": 0.4625691398054549,
+          "blob_like_fraction": 0.47639710089643333,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 11574.128041024233,
+          "carrier_mean": 4653.236987474058,
+          "carrier_min": 3852.5463435938036,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 3852.514360001255,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -6741967.126201405,
+            "lambda_h2_mean": -4580953.176362641,
+            "lambda_h3_mean": -2182599.169828661,
+            "lambda_h_abs_max_mean": 6742195.045530873
+          },
+          "sheet_like_fraction": 0.0,
+          "tube_axis_alignment_mean": 0.7210870149978181,
+          "tube_like_fraction": 0.06103375929811177
+        }
+      ],
+      "snapshot_index": 6,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 7,
+      "omega_norm_sq_max": 11271.577146260235,
+      "omega_norm_sq_mean": 940.3756806628135,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.6025195979324419,
+          "blob_like_fraction": 0.240468061568979,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 11271.577146260235,
+          "carrier_mean": 3257.0707656190693,
+          "carrier_min": 2497.908985746834,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 2497.9045331139923,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -4840558.3525104225,
+            "lambda_h2_mean": -2892623.890393318,
+            "lambda_h3_mean": -754785.2527531004,
+            "lambda_h_abs_max_mean": 4847006.604433579
+          },
+          "sheet_like_fraction": 0.0007629365427530566,
+          "tube_axis_alignment_mean": 0.6613465098203519,
+          "tube_like_fraction": 0.15624940395582598
+        },
+        {
+          "ambiguous_fraction": 0.46571619301926376,
+          "blob_like_fraction": 0.4752050352851421,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 11271.577146260235,
+          "carrier_mean": 4494.240778255261,
+          "carrier_min": 3713.3227491410657,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 3713.3181765935333,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -6507647.854577275,
+            "lambda_h2_mean": -4418320.720847046,
+            "lambda_h3_mean": -2101281.7485366054,
+            "lambda_h_abs_max_mean": 6507866.271580324
+          },
+          "sheet_like_fraction": 4.768262445164982e-05,
+          "tube_axis_alignment_mean": 0.7307077758251314,
+          "tube_like_fraction": 0.059031089071142476
+        }
+      ],
+      "snapshot_index": 7,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 8,
+      "omega_norm_sq_max": 10787.87479461019,
+      "omega_norm_sq_mean": 907.7174399868463,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.601918785405024,
+          "blob_like_fraction": 0.2395239275973221,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 10787.87479461019,
+          "carrier_mean": 3144.909380600248,
+          "carrier_min": 2410.9332733285555,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 2410.929747810506,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -4669531.5063734,
+            "lambda_h2_mean": -2790162.6829247405,
+            "lambda_h3_mean": -724089.6311914444,
+            "lambda_h_abs_max_mean": 4676088.139607637
+          },
+          "sheet_like_fraction": 0.0006961795952621641,
+          "tube_axis_alignment_mean": 0.6633954577239544,
+          "tube_like_fraction": 0.15786110740239181
+        },
+        {
+          "ambiguous_fraction": 0.46872019835971773,
+          "blob_like_fraction": 0.4727255388136563,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 10787.87479461019,
+          "carrier_mean": 4342.3805659072195,
+          "carrier_min": 3589.413330937434,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 3589.3429308167624,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -6287988.793148013,
+            "lambda_h2_mean": -4263663.6740112975,
+            "lambda_h3_mean": -2025308.5492011847,
+            "lambda_h_abs_max_mean": 6288045.426772392
+          },
+          "sheet_like_fraction": 0.0,
+          "tube_axis_alignment_mean": 0.739064281875274,
+          "tube_like_fraction": 0.05855426282662598
+        }
+      ],
+      "snapshot_index": 8,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 9,
+      "omega_norm_sq_max": 10856.75664724626,
+      "omega_norm_sq_mean": 876.5976523426899,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.60279616242919,
+          "blob_like_fraction": 0.2393808769955559,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 10856.75664724626,
+          "carrier_mean": 3038.099574178029,
+          "carrier_min": 2329.968583506698,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 2329.967584662421,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -4506979.078525977,
+            "lambda_h2_mean": -2692186.4628076106,
+            "lambda_h3_mean": -696584.5704460468,
+            "lambda_h_abs_max_mean": 4513322.271360033
+          },
+          "sheet_like_fraction": 0.0007724732495374698,
+          "tube_axis_alignment_mean": 0.6626243948275288,
+          "tube_like_fraction": 0.1570504873257167
+        },
+        {
+          "ambiguous_fraction": 0.4732023650581728,
+          "blob_like_fraction": 0.46714667175281327,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 10856.75664724626,
+          "carrier_mean": 4195.675011417028,
+          "carrier_min": 3471.6265754958863,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 3471.5917876364038,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -6070716.475394442,
+            "lambda_h2_mean": -4115820.201067057,
+            "lambda_h3_mean": -1948361.2109022713,
+            "lambda_h_abs_max_mean": 6070917.736060336
+          },
+          "sheet_like_fraction": 0.0,
+          "tube_axis_alignment_mean": 0.7271246476054168,
+          "tube_like_fraction": 0.059650963189013924
+        }
+      ],
+      "snapshot_index": 9,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 10,
+      "omega_norm_sq_max": 10805.38410302023,
+      "omega_norm_sq_mean": 846.8431376289886,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.6036544660397871,
+          "blob_like_fraction": 0.23825554559499515,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 10805.38410302023,
+          "carrier_mean": 2936.254575999787,
+          "carrier_min": 2251.2840654641677,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 2251.2813102913124,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -4354022.779238781,
+            "lambda_h2_mean": -2599260.4439399852,
+            "lambda_h3_mean": -669731.0726654608,
+            "lambda_h_abs_max_mean": 4360054.333596029
+          },
+          "sheet_like_fraction": 0.0006866428884777509,
+          "tube_axis_alignment_mean": 0.663765747823157,
+          "tube_like_fraction": 0.15740334547673998
+        },
+        {
+          "ambiguous_fraction": 0.47258249094030136,
+          "blob_like_fraction": 0.46628838451268356,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 10805.38410302023,
+          "carrier_mean": 4054.433759937656,
+          "carrier_min": 3355.4713811637075,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 3355.456559849851,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -5863796.617842593,
+            "lambda_h2_mean": -3973234.0135757932,
+            "lambda_h3_mean": -1877022.1615788564,
+            "lambda_h_abs_max_mean": 5863857.480703675
+          },
+          "sheet_like_fraction": 4.768262445164982e-05,
+          "tube_axis_alignment_mean": 0.7252154037164541,
+          "tube_like_fraction": 0.061081441922563415
+        }
+      ],
+      "snapshot_index": 10,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 11,
+      "omega_norm_sq_max": 10494.08937862282,
+      "omega_norm_sq_mean": 818.315251388061,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.6029773598580938,
+          "blob_like_fraction": 0.23856072021209637,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 10494.08937862282,
+          "carrier_mean": 2838.3944712030866,
+          "carrier_min": 2175.5085331125306,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 2175.5026161447972,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -4207432.947350785,
+            "lambda_h2_mean": -2510851.4630540395,
+            "lambda_h3_mean": -643197.0255790409,
+            "lambda_h_abs_max_mean": 4213340.474547472
+          },
+          "sheet_like_fraction": 0.000600812527418032,
+          "tube_axis_alignment_mean": 0.6670860362152261,
+          "tube_like_fraction": 0.15786110740239181
+        },
+        {
+          "ambiguous_fraction": 0.47363150867823767,
+          "blob_like_fraction": 0.46705130650390997,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 10494.08937862282,
+          "carrier_mean": 3918.251507125068,
+          "carrier_min": 3239.989872799209,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 3239.9628958521653,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -5666121.861337674,
+            "lambda_h2_mean": -3837832.968015583,
+            "lambda_h3_mean": -1813288.8134530322,
+            "lambda_h_abs_max_mean": 5666360.020994764
+          },
+          "sheet_like_fraction": 4.768262445164982e-05,
+          "tube_axis_alignment_mean": 0.726382903536927,
+          "tube_like_fraction": 0.05926950219340073
+        }
+      ],
+      "snapshot_index": 11,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    },
+    {
+      "finite_cell_count": 2097152,
+      "frame": 12,
+      "omega_norm_sq_max": 9972.64405745978,
+      "omega_norm_sq_mean": 790.9039877666419,
+      "quantile_rows": [
+        {
+          "ambiguous_fraction": 0.6036640027465715,
+          "blob_like_fraction": 0.23818878864750426,
+          "carrier_count": 104858,
+          "carrier_fraction": 0.05000019073486328,
+          "carrier_max": 9972.64405745978,
+          "carrier_mean": 2744.1929878124893,
+          "carrier_min": 2103.5469876025118,
+          "carrier_quantile": 0.95,
+          "carrier_threshold": 2103.5459892654285,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -4066576.6307443674,
+            "lambda_h2_mean": -2426783.405146199,
+            "lambda_h3_mean": -621195.0671928736,
+            "lambda_h_abs_max_mean": 4072544.140081738
+          },
+          "sheet_like_fraction": 0.0007438631291842301,
+          "tube_axis_alignment_mean": 0.6678988014577247,
+          "tube_like_fraction": 0.15740334547673998
+        },
+        {
+          "ambiguous_fraction": 0.47239176044249476,
+          "blob_like_fraction": 0.4673850848750715,
+          "carrier_count": 20972,
+          "carrier_fraction": 0.010000228881835938,
+          "carrier_max": 9972.64405745978,
+          "carrier_mean": 3786.125571243978,
+          "carrier_min": 3130.1637622172348,
+          "carrier_quantile": 0.99,
+          "carrier_threshold": 3130.15830956572,
+          "principal_curvature_means": {
+            "lambda_h1_mean": -5472527.497513819,
+            "lambda_h2_mean": -3704377.7453899262,
+            "lambda_h3_mean": -1751035.768351684,
+            "lambda_h_abs_max_mean": 5473089.034974759
+          },
+          "sheet_like_fraction": 9.536524890329964e-05,
+          "tube_axis_alignment_mean": 0.7319861100457636,
+          "tube_like_fraction": 0.06012778943353042
+        }
+      ],
+      "snapshot_index": 12,
+      "source": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+      "status": "ok"
+    }
+  ],
+  "parameters": {
+    "axis_ratio": 0.2,
+    "carrier_quantiles": [
+      0.95,
+      0.99
+    ],
+    "neg_ratio": 0.35,
+    "zero_eps": 1e-12
+  },
+  "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz",
+  "route_decision": "FAIL_CLOSED_NS_TUBE_MORPHOLOGY_SCAN",
+  "schema_version": "1.0.0",
+  "script": "scripts/ns_tube_morphology_scan.py",
+  "status": "ok",
+  "warnings": [
+    "velocity_snapshots trailing channel layout detected"
+  ]
+}

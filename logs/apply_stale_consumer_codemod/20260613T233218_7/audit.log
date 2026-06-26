@@ -1,0 +1,73 @@
+script: apply_stale_consumer_codemod
+repo_root: /home/c/Documents/code/dashi_agda
+run_dir: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T233218_7
+scanned_agda_files: 4548
+changed_files: 49
+total_field_flips: 68
+protected_line_hits: 11958
+
+field_counts:
+  vorticityControlClosed	1
+  globalSmoothRegularityProved	4
+  noSpectralPollution	34
+  wightmanReconstruction	14
+  continuumYangMillsConstructed	2
+  continuumUniquenessConstructed	1
+  ymL3TightnessConstructed	6
+  fullTightnessConstructed	1
+  gate3DensityOfCarrierCoreProved	3
+  gate3NoSpectralPollutionProved	2
+
+changed_files:
+  DASHI/Constants/Registry.agda	1
+  DASHI/Physics/Closure/BalabanRGMassGapReceiptSurface.agda	1
+  DASHI/Physics/Closure/BalabanRGScaleTransferFrontierReceipt.agda	1
+  DASHI/Physics/Closure/CarrierFactorVecInjectivityOSPositivity.agda	2
+  DASHI/Physics/Closure/CarrierMoscoConvergenceFromPhysicsReceipt.agda	2
+  DASHI/Physics/Closure/CarrierOS3ReflectionPositivityReceipt.agda	1
+  DASHI/Physics/Closure/CarrierRenormalizationGroupScaleReceipt.agda	1
+  DASHI/Physics/Closure/CarrierSchwingerFunctionCauchyReceipt.agda	1
+  DASHI/Physics/Closure/ClayBothBlockerMapReceipt.agda	1
+  DASHI/Physics/Closure/ClayMillenniumClosureTargetReceipt.agda	2
+  DASHI/Physics/Closure/ClayNSCurrentStateReceipt.agda	1
+  DASHI/Physics/Closure/ClayYMProofRoadmapReceipt.agda	2
+  DASHI/Physics/Closure/Gate3AdelicLocalizationReductionReceipt.agda	1
+  DASHI/Physics/Closure/Gate3DensityOfCarrierCoreConstructedReceipt.agda	1
+  DASHI/Physics/Closure/Gate3PAWOTGUniformSeparationTargetReceipt.agda	2
+  DASHI/Physics/Closure/NSCandidateCompleteEnstrophyBKMPassageReceipt.agda	1
+  DASHI/Physics/Closure/NSFinalStateReceipt.agda	2
+  DASHI/Physics/Closure/NSRegularityRoadmapFilledReceipt.agda	1
+  DASHI/Physics/Closure/OSAxiomsContinuumStatus.agda	1
+  DASHI/Physics/Closure/OSPositivityCorrectObjectReceipt.agda	1
+  DASHI/Physics/Closure/OSPositivityFromRGFixedPoint.agda	1
+  DASHI/Physics/Closure/SpectralConvergenceGate3Receipt.agda	2
+  DASHI/Physics/Closure/WightmanReconstructionCandidateReceipt.agda	1
+  DASHI/Physics/Closure/YMBruhatTitsToOSLatticeTransferBoundary.agda	2
+  DASHI/Physics/Closure/YMContinuumGapFromCarrierConditionalReceipt.agda	1
+  DASHI/Physics/Closure/YMContinuumMassGapTransferAuthority.agda	1
+  DASHI/Physics/Closure/YMFeshbachSchurFiberGapBridgeReceipt.agda	1
+  DASHI/Physics/Closure/YMFinalStateReceipt.agda	3
+  DASHI/Physics/Closure/YMGhostTimeReflectionGradedSignReceipt.agda	1
+  DASHI/Physics/Closure/YML3TightnessBoundedCandidateReceipt.agda	1
+  DASHI/Physics/Closure/YML3TightnessFromDimensionalTransmutationReceipt.agda	1
+  DASHI/Physics/Closure/YML3TightnessInhabitedReceipt.agda	1
+  DASHI/Physics/Closure/YML4ContinuumLimitReceipt.agda	1
+  DASHI/Physics/Closure/YML7L8MassGapInhabitedReceipt.agda	1
+  DASHI/Physics/Closure/YMLatticeMassGapAuthority.agda	1
+  DASHI/Physics/Closure/YMOSAxiomsAuthority.agda	1
+  DASHI/Physics/Closure/YMOSWightmanReconstructionAuthority.agda	1
+  DASHI/Physics/Closure/YMPaper3ClayTargetReceipt.agda	1
+  DASHI/Physics/Closure/YMSpectralMarginFromHolonomyDominationBoundary.agda	4
+  DASHI/Physics/Closure/YMSprint109MoscoSpectralLiminfAssembly.agda	1
+  DASHI/Physics/Closure/YMSprint119MoscoAllObligationsReducer.agda	3
+  DASHI/Physics/Closure/YMSprint119TransferCalculusAllObligationsReducer.agda	4
+  DASHI/Physics/Closure/YMSprint119TransferReadinessUnlockReducer.agda	1
+  DASHI/Physics/Closure/YMSprint90ContinuumMassGapWCBoundaryReceipt.agda	1
+  DASHI/Physics/Closure/YMSprint91WC3NewMathReceipt.agda	1
+  DASHI/Physics/Closure/YMSprint92MasterWC3AdjointCorrectionReceipt.agda	1
+  DASHI/Physics/Closure/YMSprint92MasterWC3Condition.agda	1
+  DASHI/Physics/Closure/YMThermodynamicLimitAuthority.agda	2
+  DASHI/Promotion/Gate3ClayObligations.agda	1
+
+patch_log: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T233218_7/patch.diff
+changed_files_manifest: /home/c/Documents/code/dashi_agda/logs/apply_stale_consumer_codemod/20260613T233218_7/changed_files.tsv

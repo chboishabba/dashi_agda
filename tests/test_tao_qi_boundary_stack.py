@@ -1,0 +1,504 @@
+from __future__ import annotations
+
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
+def assert_any_marker(text: str, markers: tuple[str, ...]) -> None:
+    assert any(marker in text for marker in markers), markers
+
+
+def test_everything_imports_tao_qi_boundary_stack() -> None:
+    text = (REPO_ROOT / "DASHI" / "Everything.agda").read_text(encoding="utf-8")
+
+    required_imports = {
+        "import DASHI.Culture.TaoChapterReadingReceipt",
+        "import DASHI.Culture.TaoOperatorGrammar",
+        "import DASHI.Culture.YinYangPolarityBoundary",
+        "import DASHI.Culture.YinYangSymbolGeometryBoundary",
+        "import DASHI.Interop.TaoYinYangAdapter",
+        "import DASHI.Interop.YinYangQiAdapter",
+        "import DASHI.Interop.PolarityPhaseFieldBridge",
+        "import DASHI.Interop.PolarityBettiSupportBoundary",
+        "import DASHI.Interop.BettiQiAdapter",
+        "import DASHI.Interop.CarryCompletionSpectralBridge",
+        "import DASHI.Interop.PrimeLaneStage12ActionAdapter",
+        "import DASHI.Interop.PrimeSuccessorWitness",
+        "import DASHI.Interop.TaoQiReadingAdapter",
+        "import DASHI.Interop.TaoMeditationQiAdapter",
+        "import DASHI.Promotion.PolarityFieldObligationIndex",
+        "import DASHI.Promotion.TaoQiObligationIndex",
+    }
+
+    for marker in required_imports:
+        assert marker in text, marker
+
+
+def test_promotion_index_references_tao_qi_boundary_surface() -> None:
+    text = (REPO_ROOT / "DASHI" / "Promotion" / "ObligationIndex.agda").read_text(
+        encoding="utf-8"
+    )
+
+    assert "taoQiBoundaryLane" in text
+    assert "polarityFieldBoundaryLane" in text
+    assert "bettiSupportBoundaryLane" in text
+    assert (
+        "import DASHI.Promotion.PolarityFieldObligationIndex as PolarityFieldBoundary"
+        in text
+    )
+    assert "import DASHI.Promotion.TaoQiObligationIndex as TaoQiBoundary" in text
+    assert '"DASHI.Culture.YinYangSymbolGeometryBoundary"' in text
+    assert '"canonicalYinYangSymbolGeometryBoundaryReceipt"' in text
+    assert '"DASHI.Promotion.PolarityFieldObligationIndex"' in text
+    assert '"canonicalPolarityFieldObligationIndexReceipt"' in text
+    assert '"DASHI.Promotion.TaoQiObligationIndex"' in text
+    assert '"canonicalTaoQiObligationIndexReceipt"' in text
+    assert '"DASHI.Interop.PolarityBettiSupportBoundary"' in text
+    assert '"canonicalPolarityBettiSupportBoundary"' in text
+    assert "crossDomainInterpretationBoundaryCount = 27" in text
+
+
+def test_tao_qi_obligation_module_mentions_full_bridge_stack() -> None:
+    text = (REPO_ROOT / "DASHI" / "Promotion" / "TaoQiObligationIndex.agda").read_text(
+        encoding="utf-8"
+    )
+
+    assert "Tao / Qi obligation index" in text
+    assert "candidate-only payload" in text or "candidate-only" in text
+    assert "canonicalTaoSourceReceipt" in text
+    assert "canonicalTaoOperatorGrammarReceipt" in text
+    assert "canonicalYinYangPolarityBoundaryReceipt" in text
+    assert "canonicalYinYangSymbolGeometryBoundaryReceipt" in text
+    assert "canonicalTaoYinYangBridgeReceipt" in text
+    assert "canonicalYinYangQiBridgeReceipt" in text
+    assert "canonicalPolarityPhaseFieldBridge" in text
+    assert "canonicalBettiSupportBoundaryModuleName" in text
+    assert "canonicalBettiSupportBoundarySurfaceName" in text
+    assert "canonicalBettiQiAdapterModuleName" in text
+    assert "canonicalBettiQiAdapterSurfaceName" in text
+    assert "canonicalQiOperatorTheoryBoundaryReceipt" in text
+    assert "canonicalQiCarrierFieldBridgeReceipt" in text
+    assert "canonicalTaoQiBridgeReceipt" in text
+    assert "canonicalTaoMeditationQiBridgeReceipt" in text
+    assert "canonicalPolarityFieldObligationIndexReceipt" in text
+
+
+def test_recovered_boundary_geometry_and_polarity_slice_markers() -> None:
+    geometry_text = (
+        REPO_ROOT / "DASHI" / "Culture" / "YinYangSymbolGeometryBoundary.agda"
+    ).read_text(encoding="utf-8")
+    polarity_text = (
+        REPO_ROOT / "DASHI" / "Culture" / "YinYangPolarityBoundary.agda"
+    ).read_text(encoding="utf-8")
+
+    assert_any_marker(
+        geometry_text,
+        (
+            "candidateOnlyGeometryBoundary",
+            "canonicalYinYangGeometryAuthorityBits",
+            "canonicalLargeEnclosingCircleEquation",
+            "canonicalTeardropARow",
+            "canonicalYangRegionRow",
+            "canonicalUpperSCurveRow",
+            "boundaryPolicySummary",
+        ),
+    )
+    assert "31 + 0 + 1 body/boundary/seed ledger" in geometry_text
+    assert (
+        "Candidate-only Cartesian and set-theoretic geometry boundary for the yin-yang symbol, now carrying a 31 + 0 + 1 body/boundary/seed ledger alongside the S-curve boundary rows."
+        in geometry_text
+    )
+    assert_any_marker(
+        polarity_text,
+        (
+            "canonicalYinYangPolarityBoundaryRows",
+            "canonicalYinYangGeometrySupportReference",
+            "boundaryRowsAreCanonical",
+            "geometrySupportReferenceIsCanonical",
+            "boundaryRowCountMatchesCanonical",
+            "canonicalYinYangPolarityBoundaryReceipt",
+        ),
+    )
+    assert (
+        "Candidate-only yin/yang symbol geometry support surface covering enclosing-circle, inner-circle, eye-dot, teardrop, and S-curve boundary readings."
+        in polarity_text
+    )
+    assert "boundaryRowCount" in polarity_text
+    assert "geometrySupportReference" in polarity_text
+
+
+def test_recovered_31_plus_0_plus_1_phase_field_slice_markers() -> None:
+    field_bridge_text = (
+        REPO_ROOT
+        / "DASHI"
+        / "Physics"
+        / "Closure"
+        / "SSPPrimeLane369FieldPhaseBridge.agda"
+    ).read_text(encoding="utf-8")
+    phase_bridge_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "PolarityPhaseFieldBridge.agda"
+    ).read_text(encoding="utf-8")
+
+    assert_any_marker(
+        field_bridge_text,
+        (
+            "bodySurfaceBridge",
+            "residueSurfaceBridge",
+            "focusBodySurface",
+            "focusResidueSurface",
+            "canonicalRootFieldPhaseBridge",
+            "canonicalDepth3FieldPhaseBridge",
+            "canonicalRootFieldBodyReceipt",
+            "canonicalDepth3FieldResidueReceipt",
+        ),
+    )
+    assert "Base369 readouts for the focused body and residue surfaces" in field_bridge_text
+    assert_any_marker(
+        phase_bridge_text,
+        (
+            "canonicalYangPhaseCarrierRow",
+            "canonicalYinPhaseCarrierRow",
+            "canonicalBalancedPhaseCarrierRow",
+            "canonicalYangSupportGeometry",
+            "canonicalYinYangSupervoxel",
+            "canonicalYinYangWave",
+            "canonicalYinYangSuperposition",
+            "candidate-only bridge from yin/yang polarity into 369 phase rows",
+        ),
+    )
+    assert "support geometry" in phase_bridge_text
+    assert "superposition candidates" in phase_bridge_text
+    assert "blocked authority governance" in phase_bridge_text
+
+
+def test_carry_completion_bridge_and_stage12_fibre_markers() -> None:
+    carry_bridge_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "CarryCompletionSpectralBridge.agda"
+    ).read_text(encoding="utf-8")
+    stage_quotient_text = (
+        REPO_ROOT / "DASHI" / "Algebra" / "StageQuotient.agda"
+    ).read_text(encoding="utf-8")
+
+    assert_any_marker(
+        carry_bridge_text,
+        (
+            "threeAdicCompletionReceipt",
+            "moonshineCarrySeedReceipt",
+            "stageQuotientReceipt",
+            "generalizedStage12Receipt",
+            "canonicalCarryCompletionSpectralBridgeReceipt",
+            "atlas11CarryDepthIsRev2",
+        ),
+    )
+    assert "196883 + 1 = 196884" in carry_bridge_text
+    assert "q(next overflow) fails to commute with rotateTri" in carry_bridge_text
+    assert_any_marker(
+        stage_quotient_text,
+        (
+            "Stage12FibreSurface",
+            "canonicalStage12FibreSurface",
+            "atlasRowsAreCanonical",
+            "carry-depth",
+            "fibre-of-quotient",
+            "successor-non-equivariant",
+        ),
+    )
+
+
+def test_stage12_fibre_surface_carry_depth_seam_hits_irreversibility_boundary() -> None:
+    stage_quotient_text = (
+        REPO_ROOT / "DASHI" / "Algebra" / "StageQuotient.agda"
+    ).read_text(encoding="utf-8")
+    boundary_text = (
+        REPO_ROOT
+        / "DASHI"
+        / "Algebra"
+        / "StageQuotientIrreversibilityBoundary.agda"
+    ).read_text(encoding="utf-8")
+    locator_text = (
+        REPO_ROOT
+        / "DASHI"
+        / "Promotion"
+        / "ExternalTheoremAuthoritySourceLocator.agda"
+    ).read_text(encoding="utf-8")
+    downloaded_receipt_text = (
+        REPO_ROOT
+        / "DASHI"
+        / "Promotion"
+        / "DownloadedAuthorityArtifactReceipt.agda"
+    ).read_text(encoding="utf-8")
+    carry_bridge_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "CarryCompletionSpectralBridge.agda"
+    ).read_text(encoding="utf-8")
+
+    assert "carry-depth-seam" in stage_quotient_text
+    assert "canonicalStage12FibreSurface" in stage_quotient_text
+    assert "StageQuotientIrreversibilityBoundary" in boundary_text
+    assert "irreversibilityCause" in boundary_text
+    assert "nonInjectiveQuotient" in boundary_text
+    assert "stageQuotientIrreversibilityBoundaryAnchor" in locator_text
+    assert "stage12FibreSurfaceReceipt" in locator_text
+    assert "stage12FibreSurfaceReceiptIsCanonical" in locator_text
+    assert "stage12FibreSurfaceCarryDepthSeamIsCanonical" in locator_text
+    assert "stage12FibreSurfaceLocatorReference" in locator_text
+    assert "stage12FibreSurfaceCarryDepthSeamLocatorWitness" in locator_text
+    assert "Located at the StageQuotient irreversibility boundary" in locator_text
+    assert "typed provenance" in locator_text
+    assert "stage12FibreSurfaceReceipt" in downloaded_receipt_text
+    assert "stage12FibreSurfaceReceiptIsCanonical" in downloaded_receipt_text
+    assert "stage12FibreSurfaceCarryDepthSeamIsCanonical" in downloaded_receipt_text
+    assert "stage12FibreSurfaceMatchesLocatorRow" in downloaded_receipt_text
+    assert "Theorem.stage12FibreSurfaceLocatorReference" in downloaded_receipt_text
+    assert "Stage12FibreSurface preserves atlas-11 as a seam with carry-depth rev-2" in carry_bridge_text
+    assert "StageQuotient.Stage12FibreSurface.carry-depth" in carry_bridge_text
+
+
+def test_prime_lane_stage12_adapter_reclassifies_p7_as_local_exemplar() -> None:
+    adapter_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "PrimeLaneStage12ActionAdapter.agda"
+    ).read_text(encoding="utf-8")
+    readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    architecture_text = (REPO_ROOT / "architecture.md").read_text(encoding="utf-8")
+
+    assert "PrimeLaneStage12ActionAdapter" in adapter_text
+    assert "canonicalP7PrimeLaneStage12ActionAdapter" in adapter_text
+    assert "Stage12FibreSurface is now the general stage/carry/fibre grammar" in adapter_text
+    assert "unitGroupLabel" in adapter_text
+    assert "stageWindowWitness" in adapter_text
+    assert "stageWindowWitnessIsCanonical" in adapter_text
+    assert "successorField0To111" in adapter_text
+    assert "successorField0To111IsCanonical" in adapter_text
+    assert "stageIdentityPointIsAtlas7" in adapter_text
+    assert "unitOrderStagePointIsAtlas6" in adapter_text
+    assert "carryDepthSeamPointIsAtlas11" in adapter_text
+    assert "carryDepthSeam" in adapter_text
+    assert "localRegression" in adapter_text
+    assert "promotedStageSpineIsFalse" in adapter_text
+    assert "prime lanes are local unit-action adapters into it" in readme_text
+    assert "Stage12FibreSurface is the spine" in readme_text
+    assert "`P7Stage7C6HexRegression` is the first canonical local witness" in readme_text
+    assert "Stage12 And Prime-Lane Hierarchy" in architecture_text
+    assert "`P7Stage7C6HexRegression` is therefore a local regression witness over the Stage12 surface" in architecture_text
+    assert "Stage12FibreSurface is the spine" in architecture_text
+    assert "p7" in architecture_text
+    assert "p13" in architecture_text
+    assert "111 -> 112 = 2^4 * 7" in adapter_text
+
+
+def test_prime_successor_witness_surface_marks_the_full_stage12_lane() -> None:
+    witness_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "PrimeSuccessorWitness.agda"
+    ).read_text(encoding="utf-8")
+    readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    architecture_text = (REPO_ROOT / "architecture.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert_any_marker(
+        witness_text,
+        (
+            "record StageSuccessorWitness : Set where",
+            "identityWitness",
+            "primeAxisWitness",
+            "primePowerDepthWitness",
+            "compositeCouplingWitness",
+            "canonicalStage0SuccessorWitness",
+            "canonicalStage6SuccessorWitness",
+            "canonicalStage11SuccessorWitness",
+            "canonicalStageSuccessorWitnesses",
+            "record StageWindowSuccessorField : Set where",
+            "record Glyph111StageReceipt : Set where",
+            "canonicalStage0To111SuccessorField",
+            "canonicalStage99SuccessorWitness",
+            "canonicalStage109SuccessorWitness",
+            "canonicalStage110SuccessorWitness",
+            "canonicalStage111SuccessorWitness",
+            "canonicalGlyph111StageReceipt",
+            "canonicalGlyph111DecimalSuccessorWitness",
+            "canonicalGlyph111TernaryValueMatchesStage12ClosurePrime",
+            "stage12ClosurePrimeWitness",
+            "canonicalP2PrimeSuccessorWitness",
+            "canonicalP3PrimeSuccessorWitness",
+            "canonicalP5PrimeSuccessorWitness",
+            "canonicalP7PrimeSuccessorWitness",
+            "canonicalP11PrimeSuccessorWitness",
+            "canonicalP13PrimeSuccessorWitness",
+        ),
+    )
+    assert "p is the new prime lane" in witness_text
+    assert "p - 1 is the witness-space" in witness_text
+    assert "0 = unmarked ground; 1 = the first mark / identity witness." in witness_text
+    assert "3 is witnessed by 4 = 2^2" in witness_text
+    assert "5 is witnessed by 6 = 2*3" in witness_text
+    assert "7 is witnessed by 8 = 2^3" in witness_text
+    assert "8 is witnessed by 9 = 3^2" in witness_text
+    assert "9 is witnessed by 10 = 2*5" in witness_text
+    assert "11 is witnessed by 12 = 2^2*3" in witness_text
+    assert "The 0..111 inclusive window has size 112 = 2^4 * 7." in witness_text
+    assert "0..111 contains nine full Stage12 blocks plus a four-stage overflow: 108..111." in witness_text
+    assert "111 is witnessed by 112 = 2^4 * 7." in witness_text
+    assert "111 = 100 + 10 + 1 = j2 + j1 + j0" in witness_text
+    assert "99 is witnessed by 100 = 2^2 * 5^2" in witness_text
+    assert "109 is witnessed by 110 = 2 * 5 * 11" in witness_text
+    assert "110 is witnessed by 111 = 3 * 37" in witness_text
+    assert "As decimal, 111 = 3 * 37." in witness_text
+    assert "As ternary, 111_3 = 1 + 3 + 9 = 13." in witness_text
+    assert "111_3 is the p13 prime witness of Stage12 because 13 - 1 = 12." in witness_text
+    assert "111..._3 = -1/2 in Q3 is the infinite completion boundary" in witness_text
+
+    assert "Stage12FibreSurface" in readme_text
+    assert "spine" in readme_text
+    assert "p7" in readme_text
+    assert "p13" in readme_text
+    assert "local exemplar" in readme_text
+    assert "natural full Stage12 witness" in readme_text
+
+    assert "Stage12FibreSurface" in architecture_text
+    assert "spine" in architecture_text
+    assert "p7" in architecture_text
+    assert "p13" in architecture_text
+    assert "local exemplar" in architecture_text
+    assert "natural full Stage12 witness" in architecture_text
+
+
+def test_docs_cover_full_0_to_11_successor_witness_taxonomy() -> None:
+    readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    architecture_text = (REPO_ROOT / "architecture.md").read_text(
+        encoding="utf-8"
+    )
+
+    for text in (readme_text, architecture_text):
+        assert "prime successor witnesses" in text
+        assert "prime-power depth witnesses" in text
+        assert "composite coupling witnesses" in text
+        assert "The immediate witness of stage `n` is `n + 1`" in text or "the immediate witness is `n + 1`" in text
+        assert "3 -> 4 = 2^2" in text
+        assert "7 -> 8 = 2^3" in text
+        assert "8 -> 9 = 3^2" in text
+        assert "5 -> 6 = 2 * 3" in text
+        assert "9 -> 10 = 2 * 5" in text
+        assert "11 -> 12 = 2^2 * 3" in text
+        assert "12 -> 13" in text
+
+    assert "Stage12FibreSurface remains the" in readme_text
+    assert "Stage12FibreSurface is the spine" in readme_text
+    assert "Stage12FibreSurface is the spine" in architecture_text
+
+
+def test_docs_cover_0_to_111_successor_field() -> None:
+    readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    architecture_text = (REPO_ROOT / "architecture.md").read_text(
+        encoding="utf-8"
+    )
+
+    for text in (readme_text, architecture_text):
+        assert "0..111" in text
+        assert "111 = 100 + 10 + 1 = j2 + j1 + j0" in text
+        assert "111 -> 112 = 2^4 * 7" in text
+        assert "112 = 2^4 * 7" in text
+        assert "nine full Stage12 blocks plus a four-stage overflow: 108..111" in text
+        assert "99 -> 100 = 2^2 * 5^2" in text
+        assert "109 -> 110 = 2 * 5 * 11" in text
+        assert "110 -> 111 = 3 * 37" in text
+        assert "111_10 = 3 * 37" in text
+        assert "111_3 = 13" in text
+        assert "p13" in text
+        assert "111..._3 = -1/2" in text
+
+
+def test_recovered_carry_and_successor_adapter_slice_markers() -> None:
+    yin_yang_qi_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "YinYangQiAdapter.agda"
+    ).read_text(encoding="utf-8")
+    tao_yin_yang_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "TaoYinYangAdapter.agda"
+    ).read_text(encoding="utf-8")
+    tao_qi_text = (
+        REPO_ROOT / "DASHI" / "Interop" / "TaoQiReadingAdapter.agda"
+    ).read_text(encoding="utf-8")
+
+    assert_any_marker(
+        yin_yang_qi_text,
+        (
+            "seedAttention",
+            "seedThreshold",
+            "carryBreath",
+            "carryBody",
+            "carryMemory",
+            "carryResidual",
+            "boundaryThreshold",
+            "boundaryRelation",
+            "bodyMovement",
+            "bodyPosture",
+        ),
+    )
+    assert_any_marker(
+        yin_yang_qi_text,
+        (
+            "canonicalYinYangPolarityRowKinds",
+            "rowKindProfile",
+            "rowKindStatement",
+            "canonicalYinYangQiAuthorityClosure",
+            "canonicalYinYangQiBridgeReceipt",
+        ),
+    )
+    assert_any_marker(
+        tao_yin_yang_text,
+        (
+            "chapter1YinBoundaryRow",
+            "chapter2YangComplementarityRow",
+            "chapter6YinValleyRow",
+            "chapter8YinWaterRow",
+            "candidateInteropOnlyTrue",
+            "canonicalTaoYinYangAuthorityBits",
+            "canonicalTaoYinYangGovernance",
+        ),
+    )
+    assert_any_marker(
+        tao_qi_text,
+        (
+            "gateThresholdRow",
+            "valleyLandscapeRow",
+            "breathCarrierRow",
+            "stillnessMeditationRow",
+            "waterFlowRow",
+            "desireReductionRow",
+            "complementarityRow",
+            "softnessSpectralRow",
+            "canonicalTaoQiAdapterRows",
+            "qiCarrierBridgeIsCanonical",
+        ),
+    )
+    assert "boundary-gate grammar" in tao_qi_text
+    assert "candidate-only Qi carrier, role, and formal-lens grammar" in tao_qi_text
+
+
+def test_tao_source_receipt_mentions_external_lean_formalism() -> None:
+    text = (REPO_ROOT / "DASHI" / "Culture" / "TaoChapterReadingReceipt.agda").read_text(
+        encoding="utf-8"
+    )
+
+    assert "taoLeanPastebinUrl" in text
+    assert "https://pastebin.xware.online/paste/20260621_131250_taoteching_lean" in text
+    assert "canonicalTaoExternalFormalismSource" in text
+    assert "canonicalTaoSourceProvenanceSurface" in text
+
+
+def test_polarity_field_index_mentions_actual_middle_layer_modules() -> None:
+    text = (
+        REPO_ROOT / "DASHI" / "Promotion" / "PolarityFieldObligationIndex.agda"
+    ).read_text(encoding="utf-8")
+
+    assert "DASHI.Culture.YinYangPolarityBoundary" in text
+    assert "DASHI.Culture.YinYangSymbolGeometryBoundary" in text
+    assert "DASHI.Interop.TaoYinYangAdapter" in text
+    assert "DASHI.Interop.YinYangQiAdapter" in text
+    assert "DASHI.Interop.PolarityPhaseFieldBridge" in text
+    assert "DASHI.Interop.PolarityBettiSupportBoundary" in text
+    assert "DASHI.Interop.BettiQiAdapter" in text
+    assert "canonicalYinYangSymbolGeometryBoundaryReceipt" in text
+    assert "canonicalPolarityBettiSupportBoundaryReceipt" in text
+    assert "canonicalBettiQiBridgeReceipt" in text
+    assert "canonicalPolarityFieldObligationIndexReceipt" in text

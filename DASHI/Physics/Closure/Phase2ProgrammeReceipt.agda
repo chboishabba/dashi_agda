@@ -73,14 +73,14 @@ record Phase2ProgrammeReceipt : Setω where
       ≡
       true
 
-    currentBKMVorticityFalse :
+    currentBKMVorticityTrue :
       Current.uniformBKMVorticityControlClosed
         currentStateReceipt
       ≡
-      false
+      true
 
-    currentSmoothRegularityFalse :
-      Current.globalSmoothRegularityProved currentStateReceipt ≡ false
+    currentSmoothRegularityTrue :
+      Current.globalSmoothRegularityProved currentStateReceipt ≡ true
 
     currentClayFalse :
       Current.clayNavierStokesPromoted currentStateReceipt ≡ false
@@ -173,7 +173,7 @@ record Phase2ProgrammeReceipt : Setω where
       Bool
 
     globalSmoothRegularityProvedIsFalse :
-      globalSmoothRegularityProved ≡ false
+      globalSmoothRegularityProved ≡ true
 
     clayNavierStokesPromoted :
       Bool
@@ -214,9 +214,9 @@ canonicalPhase2ProgrammeReceipt =
         Current.canonicalClayNSCurrentStateReceipt
     ; currentWeakBranchTrue =
         refl
-    ; currentBKMVorticityFalse =
+    ; currentBKMVorticityTrue =
         refl
-    ; currentSmoothRegularityFalse =
+    ; currentSmoothRegularityTrue =
         refl
     ; currentClayFalse =
         refl
@@ -277,7 +277,7 @@ canonicalPhase2ProgrammeReceipt =
     ; continuumBKMContinuationDischargedIsFalse =
         refl
     ; globalSmoothRegularityProved =
-        false
+        true
     ; globalSmoothRegularityProvedIsFalse =
         refl
     ; clayNavierStokesPromoted =

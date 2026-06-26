@@ -11,3 +11,12 @@
 [submodule "cubical"]
 	path = cubical
 	url = https://github.com/agda/cubical.git
+[submodule "THE-ERIKSSON-PROGRAMME"]
+	path = THE-ERIKSSON-PROGRAMME
+	url = https://github.com/lluiseriksson/THE-ERIKSSON-PROGRAMME
+[submodule "ym-audit"]
+	path = ym-audit
+	url = https://github.com/lluiseriksson/ym-audit
+[submodule "ym-mass-gap-lean-verification"]
+	path = ym-mass-gap-lean-verification
+	url = https://github.com/lluiseriksson/ym-mass-gap-lean-verification

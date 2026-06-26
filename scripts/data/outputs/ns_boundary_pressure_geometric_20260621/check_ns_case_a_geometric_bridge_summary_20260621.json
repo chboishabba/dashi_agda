@@ -1,0 +1,30 @@
+{
+  "C": "scripts/check_ns_case_a_geometric_bridge_summary.py",
+  "F": "Only explicit empirical telemetry with stable threshold joins can pass.",
+  "G": "No theorem or Clay claims are permitted by this checker.",
+  "L": "Load the bridge summary JSON, validate source ledger and numeric consistency, and emit a checker receipt.",
+  "O": "Validate the Case A geometric bridge summary schema and consistency.",
+  "P": "FAIL_CLOSED_NS_CASE_A_GEOMETRIC_BRIDGE_SUMMARY_CHECK",
+  "R": "Verify the shared thresholds, stats surfaces, and co-movement ledger for the bridge summary.",
+  "S": "Fail-closed validation: malformed inputs or inconsistent bridge arithmetic are hard errors.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_geometric_bridge_summary_20260621.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/check_ns_case_a_geometric_bridge_summary_20260621.json"
+  ],
+  "checked_contract": "ns_case_a_geometric_bridge_summary",
+  "checked_summary_path": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_geometric_bridge_summary_20260621.json",
+  "contract": "check_ns_case_a_geometric_bridge_summary",
+  "errors": [],
+  "inputs": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/check_ns_case_a_geometric_bridge_summary_20260621.json",
+    "summary_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_geometric_bridge_summary_20260621.json"
+  },
+  "status": "ok",
+  "summary_preview": {
+    "bridge_rows_count": 4,
+    "contract": "ns_case_a_geometric_bridge_summary",
+    "route_decision": "FAIL_CLOSED_NS_CASE_A_GEOMETRIC_BRIDGE_SUMMARY",
+    "status": "ok"
+  },
+  "warnings": []
+}

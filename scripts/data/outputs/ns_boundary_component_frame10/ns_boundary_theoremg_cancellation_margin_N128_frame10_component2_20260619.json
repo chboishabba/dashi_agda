@@ -1,0 +1,80 @@
+{
+  "C": "scripts/ns_boundary_theoremg_cancellation_margin.py",
+  "F": "Empirical evidence only: all Clay/theorem promotion fields remain false.",
+  "G": "No theorem, Clay, or promotion claim is introduced by this diagnostic.",
+  "L": "Malformed input, non-finite/non-positive delta1, or any true promotion flag is an error.",
+  "O": "Upgrade corrected Gronwall margin artifacts into Theorem-G cancellation-margin form.",
+  "P": "FAIL_CLOSED_NS_BOUNDARY_CANCELLATION_MARGIN",
+  "R": "Load corrected margin output, enforce delta1>0, and set mu_cancellation = delta1.",
+  "S": "Fail-closed, preserving source authority, warnings, and damping metadata.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_theoremg_cancellation_margin_N128_frame10_component2_20260619.json"
+  ],
+  "clay_navier_stokes_promoted": false,
+  "clay_promoted": false,
+  "clay_promotion": false,
+  "collapse_impossible": false,
+  "commutator_comparison_measured": false,
+  "commutator_comparison_proxy_unavailable": true,
+  "commutator_measurement_available": false,
+  "contract": "ns_boundary_theoremg_cancellation_margin",
+  "delta1": 2.0910865534885876,
+  "delta1_source": "lambda3:lambda3_stats.min",
+  "errors": [],
+  "f123_damping_sum_abs": 8437.74113479362,
+  "f123_damping_sum_signed": -8437.74113479362,
+  "full_clay_ns_solved": false,
+  "h_delta1_promoting": false,
+  "inputs": {
+    "f123_json": "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_f123_absorption_N128_frame10_component2_20260619.json",
+    "margin_json": "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_N128_frame10_component2_20260619.json"
+  },
+  "margin_positive": true,
+  "mu_cancellation": 2.0910865534885876,
+  "proof_blocking": false,
+  "provenance": {
+    "margin_json": {
+      "contract": "ns_boundary_component_lambda3_corrected_gronwall_margin",
+      "inputs": {
+        "f123_json": "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_f123_absorption_N128_frame10_component2_20260619.json",
+        "lambda3_json": "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_lambda3_N128_frame10_component2_20260619.json"
+      },
+      "path": "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_corrected_gronwall_margin_N128_frame10_component2_20260619.json",
+      "provenance": {
+        "delta1_source": "lambda3:lambda3_stats.min",
+        "f123": {
+          "contract": "ns_boundary_f123_absorption_diagnostic",
+          "path": "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_f123_absorption_N128_frame10_component2_20260619.json",
+          "present": true,
+          "status": "ok"
+        },
+        "lambda3": {
+          "contract": "ns_boundary_component_lambda3_diagnostic",
+          "path": "scripts/data/outputs/ns_boundary_component_frame10/ns_boundary_component_lambda3_N128_frame10_component2_20260619.json",
+          "status": "ok"
+        }
+      },
+      "route_decision": "FAIL_CLOSED_NS_BOUNDARY_CORRECTED_GRONWALL_MARGIN",
+      "status": "warning"
+    }
+  },
+  "route_decision": "FAIL_CLOSED_NS_BOUNDARY_CANCELLATION_MARGIN",
+  "schema_version": "1.0.0",
+  "script": "scripts/ns_boundary_theoremg_cancellation_margin.py",
+  "source_mu": 3.703952825596815,
+  "status": "warning",
+  "theorem_promoted": false,
+  "threshold": 0.0,
+  "warnings": [
+    "no_positive_commutator_measurement"
+  ]
+}

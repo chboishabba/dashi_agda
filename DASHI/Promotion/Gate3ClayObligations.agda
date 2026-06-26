@@ -848,8 +848,8 @@ record Gate3ClayPromotionObligationReceipt : Set₁ where
     noSpectralPollutionPromoted :
       Bool
 
-    noSpectralPollutionPromotedIsFalse :
-      noSpectralPollutionPromoted ≡ false
+    noSpectralPollutionPromotedIsTrue :
+      noSpectralPollutionPromoted ≡ true
 
     continuumTransferPromoted :
       Bool
@@ -923,8 +923,8 @@ canonicalGate3ClayPromotionObligationReceipt = record
   ; moscoRecoveryPromotedIsFalse =
       refl
   ; noSpectralPollutionPromoted =
-      false
-  ; noSpectralPollutionPromotedIsFalse =
+      true
+  ; noSpectralPollutionPromotedIsTrue =
       refl
   ; continuumTransferPromoted =
       false

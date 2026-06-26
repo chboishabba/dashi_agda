@@ -8,6 +8,7 @@ open import Agda.Primitive using (Level)
 open import Data.List.Base using (List; []; _∷_)
 
 open import DASHI.Constants.Registry as Registry
+open import DASHI.Core.FiniteReceiptList using (listCount)
 
 ------------------------------------------------------------------------
 -- Systematic lane interlink and promotion map.
@@ -186,10 +187,6 @@ mkLadder stage label evidence reading =
     ; requiredEvidence = evidence
     ; promotionReading = reading
     }
-
-listCount : ∀ {a : Level} {A : Set a} → List A → Nat
-listCount [] = zero
-listCount (_ ∷ xs) = suc (listCount xs)
 
 canonicalPromotionLadder : List PromotionLadderRow
 canonicalPromotionLadder =

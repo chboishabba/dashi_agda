@@ -1,0 +1,246 @@
+{
+  "C": "scripts/ns_case_a_geometric_bridge_summary.py",
+  "F": "Only explicit empirical telemetry and internally consistent threshold joins are allowed.",
+  "G": "No theorem, Clay, or promotion claim is inferred by this bridge summary.",
+  "L": "Load two scan JSON payloads, normalize threshold rows, align common bins, and emit a compact summary.",
+  "O": "Summarize the Case A shell bridge against boundary-delta1 uniformity telemetry.",
+  "P": "FAIL_CLOSED_NS_CASE_A_GEOMETRIC_BRIDGE_SUMMARY",
+  "R": "Join shared thresholds, shell-volume shrinkage, boundary-gap separation, boundary-delta1 minima/quantiles, and simple co-movement metrics into one compact ledger.",
+  "S": "Fail-closed on missing inputs, malformed rows, or inconsistent bridge statistics.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "boundary_delta1_surface": {
+    "delta1_min_stats": {
+      "count": 4,
+      "max": 4.007478939735816,
+      "mean": 1.8858246680308737,
+      "min": 0.5329499641379039
+    },
+    "delta1_quantiles": {
+      "p05": 0.6033677954975283,
+      "p25": 0.885039120936026,
+      "p50": 1.5014348841248872,
+      "p75": 2.502220431219735,
+      "p95": 3.706427238032599
+    },
+    "threshold_count": 5
+  },
+  "bridge_rows": [
+    {
+      "boundary_delta1": {
+        "boundary_gap_separation": 0.008481344394431923,
+        "delta1_min": 0.5329499641379039,
+        "delta1_quantiles": {
+          "p05": 4.739367447696607,
+          "p25": 10.540751481347368,
+          "p50": 15.729786375440362,
+          "p75": 21.813185922749405,
+          "p95": 31.95869533090719
+        }
+      },
+      "case_a": {
+        "boundary_gap_separation": null,
+        "delta1_min": 0.5329499641379039,
+        "shell_volume_shrinkage": null
+      },
+      "co_movement": {
+        "same_direction": null,
+        "shell_vs_delta1_direction": "positive",
+        "shell_vs_gap_direction": null
+      },
+      "delta1_threshold": 0.5
+    },
+    {
+      "boundary_delta1": {
+        "boundary_gap_separation": 0.012992159333958355,
+        "delta1_min": 1.0024021732020667,
+        "delta1_quantiles": {
+          "p05": 4.790347977145125,
+          "p25": 10.559729074562465,
+          "p50": 15.740844220413626,
+          "p75": 21.822323063741198,
+          "p95": 31.964637091718853
+        }
+      },
+      "case_a": {
+        "boundary_gap_separation": null,
+        "delta1_min": 1.0024021732020667,
+        "shell_volume_shrinkage": null
+      },
+      "co_movement": {
+        "same_direction": null,
+        "shell_vs_delta1_direction": "positive",
+        "shell_vs_gap_direction": null
+      },
+      "delta1_threshold": 1.0
+    },
+    {
+      "boundary_delta1": {
+        "boundary_gap_separation": 0.02322226738039751,
+        "delta1_min": 2.0004675950477075,
+        "delta1_quantiles": {
+          "p05": 5.070782569622589,
+          "p25": 10.669956191953217,
+          "p50": 15.800388324341036,
+          "p75": 21.861841747801147,
+          "p95": 32.00192556911281
+        }
+      },
+      "case_a": {
+        "boundary_gap_separation": null,
+        "delta1_min": 2.0004675950477075,
+        "shell_volume_shrinkage": null
+      },
+      "co_movement": {
+        "same_direction": null,
+        "shell_vs_delta1_direction": "positive",
+        "shell_vs_gap_direction": null
+      },
+      "delta1_threshold": 2.0
+    },
+    {
+      "boundary_delta1": {
+        "boundary_gap_separation": 0.04637405835881783,
+        "delta1_min": 4.007478939735816,
+        "delta1_quantiles": {
+          "p05": 6.027187057068466,
+          "p25": 11.087249227927561,
+          "p50": 16.100015558093677,
+          "p75": 22.072364385934478,
+          "p95": 32.208870714231516
+        }
+      },
+      "case_a": {
+        "boundary_gap_separation": null,
+        "delta1_min": 4.007478939735816,
+        "shell_volume_shrinkage": null
+      },
+      "co_movement": {
+        "same_direction": null,
+        "shell_vs_delta1_direction": "positive",
+        "shell_vs_gap_direction": null
+      },
+      "delta1_threshold": 4.0
+    }
+  ],
+  "bridge_surface": {
+    "boundary_delta1_min_stats": {
+      "count": 4,
+      "max": 4.007478939735816,
+      "mean": 1.8858246680308737,
+      "min": 0.5329499641379039
+    },
+    "boundary_delta1_quantiles": {
+      "p05": 0.6033677954975283,
+      "p25": 0.885039120936026,
+      "p50": 1.5014348841248872,
+      "p75": 2.502220431219735,
+      "p95": 3.706427238032599
+    },
+    "boundary_gap_separation_stats": {
+      "count": 4,
+      "max": 0.04637405835881783,
+      "mean": 0.022767457366901406,
+      "min": 0.008481344394431923
+    },
+    "co_movement": {
+      "counted_pairs": 4,
+      "gap_vs_delta1_correlation": 0.9993760762135003,
+      "opposite_direction_count": 0,
+      "same_direction_count": 0,
+      "shell_vs_delta1_correlation": null,
+      "shell_vs_gap_correlation": null
+    },
+    "monotonicity": {
+      "boundary_delta1_min": "nondecreasing",
+      "boundary_gap_separation": "nondecreasing",
+      "shell_volume_shrinkage": null
+    },
+    "shared_threshold_count": 4,
+    "shared_thresholds": [
+      0.5,
+      1.0,
+      2.0,
+      4.0
+    ],
+    "shell_volume_shrinkage_stats": {
+      "count": 0,
+      "max": null,
+      "mean": null,
+      "min": null
+    },
+    "threshold_count": 4,
+    "threshold_deltas": {
+      "boundary_delta1_min": [
+        0.46945220906416285,
+        0.9980654218456408,
+        2.0070113446881086
+      ],
+      "boundary_gap_separation": [
+        0.0045108149395264325,
+        0.010230108046439155,
+        0.023151790978420322
+      ],
+      "shell_volume_shrinkage": []
+    }
+  },
+  "case_a_surface": {
+    "boundary_gap_separation_direction": "nondecreasing",
+    "boundary_gap_separation_stats": {
+      "count": 4,
+      "max": 0.04637405835881783,
+      "mean": 0.022767457366901406,
+      "min": 0.008481344394431923
+    },
+    "delta1_min_stats": {
+      "count": 4,
+      "max": 4.007478939735816,
+      "mean": 1.8858246680308737,
+      "min": 0.5329499641379039
+    },
+    "shell_volume_shrinkage_stats": {
+      "count": 0,
+      "max": null,
+      "mean": null,
+      "min": null
+    },
+    "threshold_count": 6
+  },
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_transition_shell_scan_N128_20260621.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_boundary_delta1_uniformity_scan_N128_20260621.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_geometric_bridge_summary_20260621.json"
+  ],
+  "contract": "ns_case_a_geometric_bridge_summary",
+  "errors": [],
+  "inputs": {
+    "boundary_delta1_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_boundary_delta1_uniformity_scan_N128_20260621.json",
+    "case_a_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_transition_shell_scan_N128_20260621.json",
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_geometric_bridge_summary_20260621.json"
+  },
+  "route_decision": "FAIL_CLOSED_NS_CASE_A_GEOMETRIC_BRIDGE_SUMMARY",
+  "schema_version": "1.0.0",
+  "status": "ok",
+  "status_by_source": {
+    "boundary_delta1_uniformity": {
+      "path": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_boundary_delta1_uniformity_scan_N128_20260621.json",
+      "present": true,
+      "status": "ok",
+      "threshold_count": 5
+    },
+    "case_a_transition_shell": {
+      "path": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_transition_shell_scan_N128_20260621.json",
+      "present": true,
+      "status": "ok",
+      "threshold_count": 6
+    }
+  },
+  "warnings": []
+}

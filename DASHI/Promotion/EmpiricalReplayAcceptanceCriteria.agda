@@ -9,6 +9,7 @@ open import Data.List.Base using (List; []; _∷_)
 
 import DASHI.Promotion.EmpiricalRuntimeReplayAdapter as Replay
 import DASHI.Promotion.NumericAndAuthorityObligations as Authority
+open import DASHI.Core.FiniteReceiptList using (listCount)
 
 ------------------------------------------------------------------------
 -- Empirical replay acceptance criteria.
@@ -16,10 +17,6 @@ import DASHI.Promotion.NumericAndAuthorityObligations as Authority
 -- This module sits one layer above the deterministic replay adapter.  It
 -- records which acceptance criteria are genuinely inhabited by the canonical
 -- replay report and which are still blocked by absent authority/proof tokens.
-
-listCount : ∀ {a : Level} {A : Set a} → List A → Nat
-listCount [] = zero
-listCount (_ ∷ xs) = suc (listCount xs)
 
 data AcceptanceCriterionName : Set where
   providerAuthorityTokenCriterion : AcceptanceCriterionName

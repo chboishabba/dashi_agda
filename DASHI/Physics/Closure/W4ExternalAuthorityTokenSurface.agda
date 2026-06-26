@@ -11,6 +11,7 @@ open import Data.Nat.Base using (_<_)
 
 import DASHI.Physics.Closure.W4ResponseMatrixAcceptanceCandidateReceipt as Candidate
 import DASHI.Physics.Closure.W4ZAdequacyReceipt as W4Z
+import DASHI.Physics.Closure.ExternalAuthorityImportCore as AuthorityCore
 
 ------------------------------------------------------------------------
 -- W4 external authority token surface.
@@ -121,6 +122,17 @@ data W4AnchorRole : Set where
 
 record W4ExternalAuthorityProviderRequest : Setω where
   field
+    externalAuthorityImportCore :
+      AuthorityCore.ExternalAuthorityImportReceipt
+
+    externalAuthorityImportCoreIsCanonical :
+      externalAuthorityImportCore
+      ≡
+      AuthorityCore.w4TokenExternalAuthorityImportReceipt
+
+    externalAuthorityImportCoreTokenFalse :
+      AuthorityCore.tokenPresent externalAuthorityImportCore ≡ false
+
     requestStatus :
       W4ExternalAuthorityRequestStatus
 
@@ -369,7 +381,13 @@ canonicalW4ExternalAuthorityProviderRequest :
   W4ExternalAuthorityProviderRequest
 canonicalW4ExternalAuthorityProviderRequest =
   record
-    { requestStatus =
+    { externalAuthorityImportCore =
+        AuthorityCore.w4TokenExternalAuthorityImportReceipt
+    ; externalAuthorityImportCoreIsCanonical =
+        refl
+    ; externalAuthorityImportCoreTokenFalse =
+        refl
+    ; requestStatus =
         publicSourceSelfPopulationAttemptFailClosed
     ; exactAuthorityTokenName =
         "DASHI.Physics.Closure.W4ExternalAuthorityTokenSurface.W4ExternalAuthorityToken"

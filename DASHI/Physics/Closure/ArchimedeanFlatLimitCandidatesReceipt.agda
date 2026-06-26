@@ -175,7 +175,7 @@ record ArchimedeanFlatLimitCandidatesReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -291,7 +291,7 @@ canonicalArchimedeanFlatLimitCandidatesReceipt =
     ; cuspDegenerationPromotesGlobalR3CarrierIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

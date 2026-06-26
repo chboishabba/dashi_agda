@@ -1,3 +1,19 @@
+# 2026-06-24 ACL Schur-test proof repair
+
+- Repaired the mixed-tail ACL Schur-test receipt boundary so the sampled
+  finite-shell witness and the profile-independent kernel-sum gap are tracked
+  separately on the canonical Agda surface:
+  `canonicalSampledFiniteShellSchurTestWitness`
+  and
+  `canonicalProfileIndependentSchurTestKernelSumBound`.
+- Added timing and structured log entries to
+  `scripts/ns_triad_kn_acl_schur_test_proof.py` so the analytic proof run now
+  records `started_at`, `finished_at`, `elapsed_ms`, and `log_entries`.
+- Validation completed without running `DASHI/Everything.agda`:
+  targeted Agda checks on the two receipt files passed, the proof script
+  produced the expected summary artifacts, and the receipt/test assertions
+  were checked against the generated summary JSON.
+
 # 2026-06-09 submission-packet and review-packet round
 
 - Added three new 15s-safe packet boundaries:

@@ -1,0 +1,43 @@
+{
+  "C": "scripts/check_ns_det_omega_k_measure_scan.py",
+  "F": "Only explicit status degradation is accepted as partial telemetry; missing/invalid scan fields are errors.",
+  "G": "Checker is empirical only and does not infer or promote any theorem or Clay claim.",
+  "L": "Load the scan JSON, validate control-card/authority invariants, and emit compact checker telemetry.",
+  "O": "Validate the corrected Omega_K determinant-side sign scan contract.",
+  "P": "FAIL_CLOSED_NS_DET_OMEGA_K_MEASURE_SCAN_CHECK",
+  "R": "Validate frame and aggregate sign-bucket/mismatch counts, fractions, and consistency invariants.",
+  "S": "Fail-closed checker: schema mismatch, count arithmetic mismatch, or invalid fractions mark error.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_det_omega_k_measure_scan_N128_20260620.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_det_omega_k_measure_scan_check_N128_20260620.json"
+  ],
+  "contract": "check_ns_det_omega_k_measure_scan",
+  "control_card": {
+    "C": "scripts/check_ns_det_omega_k_measure_scan.py",
+    "F": "Only explicit status degradation is accepted as partial telemetry; missing/invalid scan fields are errors.",
+    "G": "Checker is empirical only and does not infer or promote any theorem or Clay claim.",
+    "L": "Load the scan JSON, validate control-card/authority invariants, and emit compact checker telemetry.",
+    "O": "Validate the corrected Omega_K determinant-side sign scan contract.",
+    "P": "FAIL_CLOSED_NS_DET_OMEGA_K_MEASURE_SCAN_CHECK",
+    "R": "Validate frame and aggregate sign-bucket/mismatch counts, fractions, and consistency invariants.",
+    "S": "Fail-closed checker: schema mismatch, count arithmetic mismatch, or invalid fractions mark error."
+  },
+  "details": {
+    "ok_rows": 13,
+    "row_count": 13,
+    "status": "partial",
+    "status_counts": {
+      "error_frames": 0,
+      "missing_frames": 0,
+      "ok_frames": 13,
+      "partial_frames": 0
+    }
+  },
+  "errors": [],
+  "input": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_det_omega_k_measure_scan_check_N128_20260620.json",
+    "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260620/ns_det_omega_k_measure_scan_N128_20260620.json"
+  },
+  "status": "ok",
+  "warnings": []
+}

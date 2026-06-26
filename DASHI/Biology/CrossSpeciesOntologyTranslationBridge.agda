@@ -6,6 +6,11 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Unit using (⊤; tt)
 
+import DASHI.Core.AuthorityNonPromotionCore as AuthorityNA
+import DASHI.Core.AdapterCanonicalityCore as AdapterCanon
+import DASHI.Core.BridgeRequirementCore as BridgeReq
+import DASHI.Core.CandidateOnlyCore as CandidateOnly
+
 open import DASHI.Biology.AnimalexicAnimalUtteranceSurface
 
 ------------------------------------------------------------------------
@@ -278,6 +283,180 @@ record CrossSpeciesOntologyNonPromotionCertificate
 
 open CrossSpeciesOntologyNonPromotionCertificate public
 
+------------------------------------------------------------------------
+-- Reusable non-authority core adapters.
+--
+-- These adapters are additive evidence only.  They route the local
+-- candidate-only, authority-false, and bridge-false reading through the
+-- reusable cores without changing the bridge fields, constructors, booleans,
+-- or local false proofs above.
+
+record CrossSpeciesOntologyTranslationCoreAdapters
+    (bridge : CrossSpeciesOntologyTranslationBridge) : Set where
+  field
+    candidateOnlyCoreAdapter :
+      CandidateOnly.CandidateOnlyReceipt
+        CandidateOnly.canonicalBridgeCandidateOnlyRow
+
+    candidateOnlyCoreAdapterCandidateTrue :
+      CandidateOnly.candidateOnly
+        CandidateOnly.canonicalBridgeCandidateOnlyRow
+      ≡
+      true
+
+    candidateOnlyCoreAdapterPromotedFalse :
+      CandidateOnly.promoted
+        CandidateOnly.canonicalBridgeCandidateOnlyRow
+      ≡
+      false
+
+    candidateOnlyCoreAdapterNoTruthAuthority :
+      CandidateOnly.carriesTruthAuthority
+        CandidateOnly.canonicalBridgeCandidateOnlyRow
+      ≡
+      false
+
+    candidateOnlyCoreAdapterNoSupportAuthority :
+      CandidateOnly.carriesSupportAuthority
+        CandidateOnly.canonicalBridgeCandidateOnlyRow
+      ≡
+      false
+
+    candidateOnlyCoreAdapterNoAdmissibilityAuthority :
+      CandidateOnly.carriesAdmissibilityAuthority
+        CandidateOnly.canonicalBridgeCandidateOnlyRow
+      ≡
+      false
+
+    candidateOnlyAdapterCanonicality :
+      AdapterCanon.AdapterCanonicalityReceipt
+        (CandidateOnly.CandidateOnlyReceipt
+          CandidateOnly.canonicalBridgeCandidateOnlyRow)
+        CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+
+    candidateOnlyAdapterIsCanonical :
+      AdapterCanon.adapter
+        candidateOnlyAdapterCanonicality
+      ≡
+      CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+
+    candidateOnlyAdapterCanonicalityAuthorityFalse :
+      AdapterCanon.adapterPromotesAuthority
+        candidateOnlyAdapterCanonicality
+      ≡
+      false
+
+    authorityNonPromotionCoreAdapter :
+      AuthorityNA.AuthorityNonPromotionBundle
+
+    authorityNonPromotionCoreAdapterTruthFalse :
+      AuthorityNA.truthAuthorityFlag
+        authorityNonPromotionCoreAdapter
+      ≡
+      false
+
+    authorityNonPromotionCoreAdapterSupportFalse :
+      AuthorityNA.supportAuthorityFlag
+        authorityNonPromotionCoreAdapter
+      ≡
+      false
+
+    authorityNonPromotionCoreAdapterAdmissibilityFalse :
+      AuthorityNA.admissibilityAuthorityFlag
+        authorityNonPromotionCoreAdapter
+      ≡
+      false
+
+    authorityNonPromotionCoreAdapterScientificFalse :
+      AuthorityNA.scientificAuthorityFlag
+        authorityNonPromotionCoreAdapter
+      ≡
+      false
+
+    authorityNonPromotionCoreAdapterExternalFalse :
+      AuthorityNA.externalAuthorityFlag
+        authorityNonPromotionCoreAdapter
+      ≡
+      false
+
+    authorityNonPromotionCoreAdapterEmpiricalFalse :
+      AuthorityNA.empiricalAuthorityFlag
+        authorityNonPromotionCoreAdapter
+      ≡
+      false
+
+    authorityNonPromotionCoreAdapterCulturalFalse :
+      AuthorityNA.culturalAuthorityFlag
+        authorityNonPromotionCoreAdapter
+      ≡
+      false
+
+    authorityNonPromotionCoreAdapterPromotesFalse :
+      AuthorityNA.promotesAnyAuthority
+        authorityNonPromotionCoreAdapter
+      ≡
+      false
+
+    authorityNonPromotionAdapterCanonicality :
+      AdapterCanon.AdapterCanonicalityReceipt
+        AuthorityNA.AuthorityNonPromotionBundle
+        authorityNonPromotionCoreAdapter
+
+    authorityNonPromotionAdapterIsCanonical :
+      AdapterCanon.adapter
+        authorityNonPromotionAdapterCanonicality
+      ≡
+      authorityNonPromotionCoreAdapter
+
+    authorityNonPromotionAdapterCanonicalityAuthorityFalse :
+      AdapterCanon.adapterPromotesAuthority
+        authorityNonPromotionAdapterCanonicality
+      ≡
+      false
+
+    bridgeRequirementCoreAdapter :
+      BridgeReq.BridgeRequirementCoreReceipt
+
+    bridgeRequirementCoreAdapterAuthorityPromotionFalse :
+      BridgeReq.receiptAuthorityPromotion
+        bridgeRequirementCoreAdapter
+      ≡
+      false
+
+    bridgeRequirementCoreAdapterTransportMapAuthorityFalse :
+      BridgeReq.receiptTransportMapAuthority
+        bridgeRequirementCoreAdapter
+      ≡
+      false
+
+    bridgeRequirementCoreAdapterBackgroundBridgeAuthorityFalse :
+      BridgeReq.receiptBackgroundBridgeAuthority
+        bridgeRequirementCoreAdapter
+      ≡
+      false
+
+    bridgeRequirementAdapterCanonicality :
+      AdapterCanon.AdapterCanonicalityReceipt
+        BridgeReq.BridgeRequirementCoreReceipt
+        BridgeReq.canonicalBridgeRequirementCoreReceipt
+
+    bridgeRequirementAdapterIsCanonical :
+      AdapterCanon.adapter
+        bridgeRequirementAdapterCanonicality
+      ≡
+      BridgeReq.canonicalBridgeRequirementCoreReceipt
+
+    bridgeRequirementAdapterCanonicalityAuthorityFalse :
+      AdapterCanon.adapterPromotesAuthority
+        bridgeRequirementAdapterCanonicality
+      ≡
+      false
+
+    adapterReading :
+      String
+
+open CrossSpeciesOntologyTranslationCoreAdapters public
+
 canonicalTranslationLayers : List TranslationLayer
 canonicalTranslationLayers =
   animalexicObservationLayer
@@ -443,6 +622,144 @@ canonicalCrossSpeciesOntologyTranslationBridge =
     ; contextFreeTranslationClaimIsFalse = refl
     ; safeReading =
         "Animalexic/WikiSpecies translation narrows context-bound ontology classes without promoting qualia identity, species isomorphism, anthropomorphic projection, or context-free dictionaries."
+    }
+
+canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle :
+  AuthorityNA.AuthorityNonPromotionBundle
+canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle =
+  AuthorityNA.mkClosedAuthorityNonPromotionBundle
+    "cross-species ontology translation authority non-promotion bundle"
+
+canonicalCrossSpeciesOntologyTranslationCoreAdapters :
+  CrossSpeciesOntologyTranslationCoreAdapters
+    canonicalCrossSpeciesOntologyTranslationBridge
+canonicalCrossSpeciesOntologyTranslationCoreAdapters =
+  record
+    { candidateOnlyCoreAdapter =
+        CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+    ; candidateOnlyCoreAdapterCandidateTrue =
+        CandidateOnly.candidateOnlyIsTrue
+          CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+    ; candidateOnlyCoreAdapterPromotedFalse =
+        CandidateOnly.candidatePromotedIsFalse
+          CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+    ; candidateOnlyCoreAdapterNoTruthAuthority =
+        CandidateOnly.candidateNoTruthAuthority
+          CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+    ; candidateOnlyCoreAdapterNoSupportAuthority =
+        CandidateOnly.candidateNoSupportAuthority
+          CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+    ; candidateOnlyCoreAdapterNoAdmissibilityAuthority =
+        CandidateOnly.candidateNoAdmissibilityAuthority
+          CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+    ; candidateOnlyAdapterCanonicality =
+        AdapterCanon.mkCanonicalAdapterReceipt
+          "cross-species candidate-only core adapter canonicality"
+          "DASHI.Biology.CrossSpeciesOntologyTranslationBridge"
+          "CandidateOnly.canonicalBridgeCandidateOnlyReceipt"
+          AdapterCanon.receiptAdapterKind
+          CandidateOnly.canonicalBridgeCandidateOnlyReceipt
+    ; candidateOnlyAdapterIsCanonical =
+        AdapterCanon.adapterCanonical
+          (AdapterCanon.mkCanonicalAdapterReceipt
+            "cross-species candidate-only core adapter canonicality"
+            "DASHI.Biology.CrossSpeciesOntologyTranslationBridge"
+            "CandidateOnly.canonicalBridgeCandidateOnlyReceipt"
+            AdapterCanon.receiptAdapterKind
+            CandidateOnly.canonicalBridgeCandidateOnlyReceipt)
+    ; candidateOnlyAdapterCanonicalityAuthorityFalse =
+        AdapterCanon.adapterAuthorityPromotionFalse
+          (AdapterCanon.mkCanonicalAdapterReceipt
+            "cross-species candidate-only core adapter canonicality"
+            "DASHI.Biology.CrossSpeciesOntologyTranslationBridge"
+            "CandidateOnly.canonicalBridgeCandidateOnlyReceipt"
+            AdapterCanon.receiptAdapterKind
+            CandidateOnly.canonicalBridgeCandidateOnlyReceipt)
+    ; authorityNonPromotionCoreAdapter =
+        canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle
+    ; authorityNonPromotionCoreAdapterTruthFalse =
+        AuthorityNA.truthAuthorityFlagIsFalse
+          canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle
+    ; authorityNonPromotionCoreAdapterSupportFalse =
+        AuthorityNA.supportAuthorityFlagIsFalse
+          canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle
+    ; authorityNonPromotionCoreAdapterAdmissibilityFalse =
+        AuthorityNA.admissibilityAuthorityFlagIsFalse
+          canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle
+    ; authorityNonPromotionCoreAdapterScientificFalse =
+        AuthorityNA.scientificAuthorityFlagIsFalse
+          canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle
+    ; authorityNonPromotionCoreAdapterExternalFalse =
+        AuthorityNA.externalAuthorityFlagIsFalse
+          canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle
+    ; authorityNonPromotionCoreAdapterEmpiricalFalse =
+        AuthorityNA.empiricalAuthorityFlagIsFalse
+          canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle
+    ; authorityNonPromotionCoreAdapterCulturalFalse =
+        AuthorityNA.culturalAuthorityFlagIsFalse
+          canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle
+    ; authorityNonPromotionCoreAdapterPromotesFalse =
+        AuthorityNA.promotesAnyAuthorityIsFalse
+          canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle
+    ; authorityNonPromotionAdapterCanonicality =
+        AdapterCanon.mkCanonicalAdapterReceipt
+          "cross-species authority non-promotion adapter canonicality"
+          "DASHI.Biology.CrossSpeciesOntologyTranslationBridge"
+          "canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle"
+          AdapterCanon.authorityAdapterKind
+          canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle
+    ; authorityNonPromotionAdapterIsCanonical =
+        AdapterCanon.adapterCanonical
+          (AdapterCanon.mkCanonicalAdapterReceipt
+            "cross-species authority non-promotion adapter canonicality"
+            "DASHI.Biology.CrossSpeciesOntologyTranslationBridge"
+            "canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle"
+            AdapterCanon.authorityAdapterKind
+            canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle)
+    ; authorityNonPromotionAdapterCanonicalityAuthorityFalse =
+        AdapterCanon.adapterAuthorityPromotionFalse
+          (AdapterCanon.mkCanonicalAdapterReceipt
+            "cross-species authority non-promotion adapter canonicality"
+            "DASHI.Biology.CrossSpeciesOntologyTranslationBridge"
+            "canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle"
+            AdapterCanon.authorityAdapterKind
+            canonicalCrossSpeciesOntologyAuthorityNonPromotionBundle)
+    ; bridgeRequirementCoreAdapter =
+        BridgeReq.canonicalBridgeRequirementCoreReceipt
+    ; bridgeRequirementCoreAdapterAuthorityPromotionFalse =
+        BridgeReq.receiptAuthorityPromotionFalse
+          BridgeReq.canonicalBridgeRequirementCoreReceipt
+    ; bridgeRequirementCoreAdapterTransportMapAuthorityFalse =
+        BridgeReq.receiptTransportMapAuthorityFalse
+          BridgeReq.canonicalBridgeRequirementCoreReceipt
+    ; bridgeRequirementCoreAdapterBackgroundBridgeAuthorityFalse =
+        BridgeReq.receiptBackgroundBridgeAuthorityFalse
+          BridgeReq.canonicalBridgeRequirementCoreReceipt
+    ; bridgeRequirementAdapterCanonicality =
+        AdapterCanon.mkCanonicalAdapterReceipt
+          "cross-species bridge requirement adapter canonicality"
+          "DASHI.Biology.CrossSpeciesOntologyTranslationBridge"
+          "BridgeReq.canonicalBridgeRequirementCoreReceipt"
+          AdapterCanon.bridgeAdapterKind
+          BridgeReq.canonicalBridgeRequirementCoreReceipt
+    ; bridgeRequirementAdapterIsCanonical =
+        AdapterCanon.adapterCanonical
+          (AdapterCanon.mkCanonicalAdapterReceipt
+            "cross-species bridge requirement adapter canonicality"
+            "DASHI.Biology.CrossSpeciesOntologyTranslationBridge"
+            "BridgeReq.canonicalBridgeRequirementCoreReceipt"
+            AdapterCanon.bridgeAdapterKind
+            BridgeReq.canonicalBridgeRequirementCoreReceipt)
+    ; bridgeRequirementAdapterCanonicalityAuthorityFalse =
+        AdapterCanon.adapterAuthorityPromotionFalse
+          (AdapterCanon.mkCanonicalAdapterReceipt
+            "cross-species bridge requirement adapter canonicality"
+            "DASHI.Biology.CrossSpeciesOntologyTranslationBridge"
+            "BridgeReq.canonicalBridgeRequirementCoreReceipt"
+            AdapterCanon.bridgeAdapterKind
+            BridgeReq.canonicalBridgeRequirementCoreReceipt)
+    ; adapterReading =
+        "Reusable core adapters witness candidate-only translation, closed authority flags, and fail-closed bridge authority without changing local cross-species non-promotion proofs."
     }
 
 canonicalCrossSpeciesOntologyNonPromotionCertificate :

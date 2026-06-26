@@ -2,17 +2,7 @@ module Base369 where
 
 open import Agda.Builtin.Equality
 open import Agda.Builtin.Nat
-open import Data.Nat.Base using (_%_; NonZero; nonZero)
-
-instance
-  nonZero3 : NonZero 3
-  nonZero3 = nonZero
-
-  nonZero6 : NonZero 6
-  nonZero6 = nonZero
-
-  nonZero9 : NonZero 9
-  nonZero9 = nonZero
+open import DASHI.Foundations.Base369Nat using (_%_; NonZero; nonZero)
 
 ------------------------------------------------------------------------
 -- Utility: repeated rotation

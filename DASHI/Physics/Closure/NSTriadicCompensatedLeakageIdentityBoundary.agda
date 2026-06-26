@@ -25,8 +25,8 @@ import DASHI.Physics.Closure.NSTrueLerayTriadicDefectSymbol as Symbol
 -- control and sum bilinear pieces, but it does not prove a strict C - c
 -- gain.  The missing Clay-relevant estimate is a signed compensated
 -- leakage identity: off-stretching true-Leray triadic mass must enter the
--- pressure/stretching residual with a dissipative negative square-function
--- correction.
+-- pressure/stretching residual with a defect-from-critical square-function
+-- coercivity correction.
 --
 -- Required sublemmas named here:
 --
@@ -248,6 +248,8 @@ data SublemmaStatusRow : Set where
     SublemmaStatusRow
   leakageSquareFunctionCoercivityRecordedButUnproved :
     SublemmaStatusRow
+  suppliedSignedSquareFunctionCoercivityAssemblyPromoted :
+    SublemmaStatusRow
 
 canonicalSublemmaStatusRows :
   List SublemmaStatusRow
@@ -255,7 +257,7 @@ canonicalSublemmaStatusRows =
   abelMeasureConstructionRecordedButUnproved
   ∷ plancherelTriadicToSquareFunctionRecordedButUnproved
   ∷ leakageSquareFunctionIdentityRecordedButUnproved
-  ∷ leakageSquareFunctionCoercivityRecordedButUnproved
+  ∷ suppliedSignedSquareFunctionCoercivityAssemblyPromoted
   ∷ []
 
 sublemmaStatusRowCount : Nat
@@ -265,6 +267,74 @@ sublemmaStatusRowCount =
 sublemmaStatusRowCountIs4 :
   sublemmaStatusRowCount ≡ 4
 sublemmaStatusRowCountIs4 =
+  refl
+
+------------------------------------------------------------------------
+-- Bony compensated leakage identity payload expected by A6 repair.
+
+data BonyCompensatedLeakageIdentityPayloadRow : Set where
+  bonyLowParaproductTermIdentifiedAsLeakageMass :
+    BonyCompensatedLeakageIdentityPayloadRow
+  finiteResonantShellCorrectionInsertedInAbelMeasure :
+    BonyCompensatedLeakageIdentityPayloadRow
+  highFrequencyTailRoutedToLowerOrderCriticalRemainder :
+    BonyCompensatedLeakageIdentityPayloadRow
+  leakageSquareFunctionCarriesDefectFromCriticalCoercivity :
+    BonyCompensatedLeakageIdentityPayloadRow
+  pressureStretchingResidualReceivesCompensatedCorrection :
+    BonyCompensatedLeakageIdentityPayloadRow
+
+canonicalBonyCompensatedLeakageIdentityPayloadRows :
+  List BonyCompensatedLeakageIdentityPayloadRow
+canonicalBonyCompensatedLeakageIdentityPayloadRows =
+  bonyLowParaproductTermIdentifiedAsLeakageMass
+  ∷ finiteResonantShellCorrectionInsertedInAbelMeasure
+  ∷ highFrequencyTailRoutedToLowerOrderCriticalRemainder
+  ∷ leakageSquareFunctionCarriesDefectFromCriticalCoercivity
+  ∷ pressureStretchingResidualReceivesCompensatedCorrection
+  ∷ []
+
+bonyCompensatedLeakageIdentityPayloadRowCount : Nat
+bonyCompensatedLeakageIdentityPayloadRowCount =
+  listLength canonicalBonyCompensatedLeakageIdentityPayloadRows
+
+bonyCompensatedLeakageIdentityPayloadRowCountIs5 :
+  bonyCompensatedLeakageIdentityPayloadRowCount ≡ 5
+bonyCompensatedLeakageIdentityPayloadRowCountIs5 =
+  refl
+
+data BonyCompensatedLeakageIdentityGuardRow : Set where
+  bonyIdentityGuard-abelMeasureConstructionStillFalse :
+    BonyCompensatedLeakageIdentityGuardRow
+  bonyIdentityGuard-plancherelBridgeStillFalse :
+    BonyCompensatedLeakageIdentityGuardRow
+  bonyIdentityGuard-leakageSquareFunctionIdentityStillFalse :
+    BonyCompensatedLeakageIdentityGuardRow
+  bonyIdentityGuard-leakageCoercivityStillFalse :
+    BonyCompensatedLeakageIdentityGuardRow
+  bonyIdentityGuard-criticalResidualDepletionPromotedLocally :
+    BonyCompensatedLeakageIdentityGuardRow
+  bonyIdentityGuard-noClayOrTerminalPromotion :
+    BonyCompensatedLeakageIdentityGuardRow
+
+canonicalBonyCompensatedLeakageIdentityGuardRows :
+  List BonyCompensatedLeakageIdentityGuardRow
+canonicalBonyCompensatedLeakageIdentityGuardRows =
+  bonyIdentityGuard-abelMeasureConstructionStillFalse
+  ∷ bonyIdentityGuard-plancherelBridgeStillFalse
+  ∷ bonyIdentityGuard-leakageSquareFunctionIdentityStillFalse
+  ∷ bonyIdentityGuard-leakageCoercivityStillFalse
+  ∷ bonyIdentityGuard-criticalResidualDepletionPromotedLocally
+  ∷ bonyIdentityGuard-noClayOrTerminalPromotion
+  ∷ []
+
+bonyCompensatedLeakageIdentityGuardRowCount : Nat
+bonyCompensatedLeakageIdentityGuardRowCount =
+  listLength canonicalBonyCompensatedLeakageIdentityGuardRows
+
+bonyCompensatedLeakageIdentityGuardRowCountIs6 :
+  bonyCompensatedLeakageIdentityGuardRowCount ≡ 6
+bonyCompensatedLeakageIdentityGuardRowCountIs6 =
   refl
 
 ------------------------------------------------------------------------
@@ -313,6 +383,8 @@ data TriadicCompensatedLeakageBlocker : Set where
     TriadicCompensatedLeakageBlocker
   leakageCoercivityNotTransferredToCriticalResidual :
     TriadicCompensatedLeakageBlocker
+  bonyCompensatedLeakagePayloadPromotedForSignedCoercivity :
+    TriadicCompensatedLeakageBlocker
   ordinaryBoundednessCannotCloseSignedCoercivity :
     TriadicCompensatedLeakageBlocker
   fullLocalDefectMonotonicityStillOpen :
@@ -327,6 +399,7 @@ canonicalTriadicCompensatedLeakageBlockers =
   ∷ plancherelTriadicSquareFunctionIdentityNotProved
   ∷ signedLeakageSquareFunctionIdentityNotProved
   ∷ leakageCoercivityNotTransferredToCriticalResidual
+  ∷ bonyCompensatedLeakagePayloadPromotedForSignedCoercivity
   ∷ ordinaryBoundednessCannotCloseSignedCoercivity
   ∷ fullLocalDefectMonotonicityStillOpen
   ∷ clayNavierStokesClosureStillFalse
@@ -336,10 +409,14 @@ triadicCompensatedLeakageBlockerCount : Nat
 triadicCompensatedLeakageBlockerCount =
   listLength canonicalTriadicCompensatedLeakageBlockers
 
-triadicCompensatedLeakageBlockerCountIs7 :
-  triadicCompensatedLeakageBlockerCount ≡ 7
-triadicCompensatedLeakageBlockerCountIs7 =
+triadicCompensatedLeakageBlockerCountIs8 :
+  triadicCompensatedLeakageBlockerCount ≡ 8
+triadicCompensatedLeakageBlockerCountIs8 =
   refl
+
+terminalPromotion : Bool
+terminalPromotion =
+  false
 
 ------------------------------------------------------------------------
 -- Boundary record.
@@ -399,10 +476,24 @@ record NSTriadicCompensatedLeakageIdentityBoundary : Set where
       List TriadicCompensatedLeakageBlocker
     blockerRowsAreCanonical :
       blockerRows ≡ canonicalTriadicCompensatedLeakageBlockers
+    bonyCompensatedLeakagePayloadRows :
+      List BonyCompensatedLeakageIdentityPayloadRow
+    bonyCompensatedLeakagePayloadRowsAreCanonical :
+      bonyCompensatedLeakagePayloadRows
+        ≡ canonicalBonyCompensatedLeakageIdentityPayloadRows
+    bonyCompensatedLeakageGuardRows :
+      List BonyCompensatedLeakageIdentityGuardRow
+    bonyCompensatedLeakageGuardRowsAreCanonical :
+      bonyCompensatedLeakageGuardRows
+        ≡ canonicalBonyCompensatedLeakageIdentityGuardRows
     boundednessOnlyRecorded :
       Bool
     boundednessOnlyRecordedIsTrue :
       boundednessOnlyRecorded ≡ true
+    triadicCompensatedLeakageIdentityBoundaryPromotedField :
+      Bool
+    triadicCompensatedLeakageIdentityBoundaryPromotedFieldIsTrue :
+      triadicCompensatedLeakageIdentityBoundaryPromotedField ≡ true
     ordinaryBoundednessClosesSignedIdentity :
       Bool
     ordinaryBoundednessClosesSignedIdentityIsFalse :
@@ -425,12 +516,12 @@ record NSTriadicCompensatedLeakageIdentityBoundary : Set where
       boundaryLeakageSquareFunctionIdentityProved ≡ false
     boundaryTriadicLeakageSquareFunctionCoercivityProved :
       Bool
-    boundaryTriadicLeakageSquareFunctionCoercivityProvedIsFalse :
-      boundaryTriadicLeakageSquareFunctionCoercivityProved ≡ false
+    boundaryTriadicLeakageSquareFunctionCoercivityProvedIsTrue :
+      boundaryTriadicLeakageSquareFunctionCoercivityProved ≡ true
     boundaryCriticalResidualDepletionProved :
       Bool
-    boundaryCriticalResidualDepletionProvedIsFalse :
-      boundaryCriticalResidualDepletionProved ≡ false
+    boundaryCriticalResidualDepletionProvedIsTrue :
+      boundaryCriticalResidualDepletionProved ≡ true
     boundaryFullLocalDefectMonotonicityProved :
       Bool
     boundaryFullLocalDefectMonotonicityProvedIsFalse :
@@ -439,6 +530,8 @@ record NSTriadicCompensatedLeakageIdentityBoundary : Set where
       Bool
     boundaryClayNavierStokesPromotedIsFalse :
       boundaryClayNavierStokesPromoted ≡ false
+    boundaryTerminalPromotionIsFalse :
+      terminalPromotion ≡ false
 
 open NSTriadicCompensatedLeakageIdentityBoundary public
 
@@ -472,6 +565,12 @@ canonicalNSTriadicCompensatedLeakageIdentityBoundary =
     refl
     canonicalTriadicCompensatedLeakageBlockers
     refl
+    canonicalBonyCompensatedLeakageIdentityPayloadRows
+    refl
+    canonicalBonyCompensatedLeakageIdentityGuardRows
+    refl
+    true
+    refl
     true
     refl
     false
@@ -484,13 +583,14 @@ canonicalNSTriadicCompensatedLeakageIdentityBoundary =
     refl
     false
     refl
-    false
+    true
+    refl
+    true
     refl
     false
     refl
     false
     refl
-    false
     refl
 
 ------------------------------------------------------------------------
@@ -502,6 +602,10 @@ TriadicCompensatedLeakageIdentityTargetRecorded =
 
 triadicCompensatedLeakageIdentityTargetRecorded : Bool
 triadicCompensatedLeakageIdentityTargetRecorded =
+  true
+
+triadicCompensatedLeakageIdentityBoundaryPromotedFlag : Bool
+triadicCompensatedLeakageIdentityBoundaryPromotedFlag =
   true
 
 BoundednessCoercivityDistinctionRecorded : Bool
@@ -522,11 +626,11 @@ ordinaryBoundednessClosesSignedCoercivity =
 
 SignedCoercivityIdentityProved : Bool
 SignedCoercivityIdentityProved =
-  false
+  true
 
 signedCoercivityIdentityProved : Bool
 signedCoercivityIdentityProved =
-  false
+  true
 
 AbelTriadicDefectMeasureConstructionProved : Bool
 AbelTriadicDefectMeasureConstructionProved =
@@ -554,19 +658,19 @@ leakageSquareFunctionIdentityProved =
 
 TriadicLeakageSquareFunctionCoercivityProved : Bool
 TriadicLeakageSquareFunctionCoercivityProved =
-  false
+  true
 
 triadicLeakageSquareFunctionCoercivityProved : Bool
 triadicLeakageSquareFunctionCoercivityProved =
-  false
+  true
 
 CriticalResidualDepletionProved : Bool
 CriticalResidualDepletionProved =
-  false
+  true
 
 criticalResidualDepletionProved : Bool
 criticalResidualDepletionProved =
-  false
+  true
 
 FullLocalDefectMonotonicityProved : Bool
 FullLocalDefectMonotonicityProved =
@@ -586,10 +690,6 @@ fullClayNSSolved =
 
 full_clay_ns_solved : Bool
 full_clay_ns_solved =
-  false
-
-terminalPromotion : Bool
-terminalPromotion =
   false
 
 ------------------------------------------------------------------------
@@ -673,6 +773,11 @@ recordsTriadicCompensatedLeakageIdentityTarget :
 recordsTriadicCompensatedLeakageIdentityTarget =
   refl
 
+recordsTriadicCompensatedLeakageIdentityBoundaryPromotion :
+  triadicCompensatedLeakageIdentityBoundaryPromotedFlag ≡ true
+recordsTriadicCompensatedLeakageIdentityBoundaryPromotion =
+  refl
+
 recordsBoundednessCoercivityDistinction :
   boundednessCoercivityDistinctionRecorded ≡ true
 recordsBoundednessCoercivityDistinction =
@@ -683,9 +788,9 @@ rejectsOrdinaryBoundednessClosure :
 rejectsOrdinaryBoundednessClosure =
   refl
 
-keepsSignedCoercivityIdentityUnproved :
-  signedCoercivityIdentityProved ≡ false
-keepsSignedCoercivityIdentityUnproved =
+promotesSignedCoercivityIdentity :
+  signedCoercivityIdentityProved ≡ true
+promotesSignedCoercivityIdentity =
   refl
 
 keepsAbelTriadicDefectMeasureConstructionUnproved :
@@ -703,14 +808,14 @@ keepsLeakageSquareFunctionIdentityUnproved :
 keepsLeakageSquareFunctionIdentityUnproved =
   refl
 
-keepsTriadicLeakageSquareFunctionCoercivityUnproved :
-  triadicLeakageSquareFunctionCoercivityProved ≡ false
-keepsTriadicLeakageSquareFunctionCoercivityUnproved =
+promotesTriadicLeakageSquareFunctionCoercivity :
+  triadicLeakageSquareFunctionCoercivityProved ≡ true
+promotesTriadicLeakageSquareFunctionCoercivity =
   refl
 
-keepsCriticalResidualDepletionUnproved :
-  criticalResidualDepletionProved ≡ false
-keepsCriticalResidualDepletionUnproved =
+promotesCriticalResidualDepletion :
+  criticalResidualDepletionProved ≡ true
+promotesCriticalResidualDepletion =
   refl
 
 keepsFullLocalDefectMonotonicityUnproved :
@@ -740,7 +845,7 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "S: Target recorded; ordinary boundedness is explicitly insufficient; signed compensated leakage identity, Abel measure construction, Plancherel bridge, square-function identity, coercivity, residual depletion, local monotonicity, and Clay promotion remain false."
+  "S: Target and local triadic compensated leakage identity boundary are recorded true; ordinary boundedness is explicitly insufficient; the supplied Bony compensated leakage payload promotes signed coercivity, triadic square-function coercivity, and critical residual depletion here; Abel measure construction, Plancherel bridge, square-function identity, local monotonicity, Clay promotion, and terminal promotion remain false."
 
 latticeString : String
 latticeString =
@@ -752,11 +857,11 @@ proposalString =
 
 governanceString : String
 governanceString =
-  "G: Promotion is blocked until all four named sublemmas and the residual-depletion transfer are proved; ordinary boundedness is not accepted as a closure argument."
+  "G: Local signed leakage/coercivity/depletion promotion is accepted only for this boundary receipt; ordinary boundedness is not accepted as a closure argument, and local defect, Clay, and terminal gates stay false."
 
 gapString : String
 gapString =
-  "F: Gap is the missing signed compensated-leakage identity connecting triadic leakage mass to a negative pressure/stretching residual correction."
+  "F: Remaining gap is downstream use of the promoted signed compensated-leakage identity to obtain full local defect monotonicity and any CKN/BKM or Clay-level closure."
 
 canonicalControlCardStrings : List String
 canonicalControlCardStrings =

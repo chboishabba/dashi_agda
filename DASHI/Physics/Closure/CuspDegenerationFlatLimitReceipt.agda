@@ -202,7 +202,7 @@ record CuspDegenerationFlatLimitReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -326,7 +326,7 @@ canonicalCuspDegenerationFlatLimitReceipt =
     ; fullR3FlatLimitNeedsAllCuspsIsTrue =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

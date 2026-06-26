@@ -1,0 +1,1 @@
+{"contract":"check_ns_triad_kn_external_wall1_csv_ingest","error_count":0,"errors":[],"ok":true,"route_decision":"FAIL_CLOSED_NS_TRIAD_KN_EXTERNAL_WALL1_CSV_INGEST_CHECK","script_name":"scripts/check_ns_triad_kn_external_wall1_csv_ingest.py","status":"ok","warnings":[]}

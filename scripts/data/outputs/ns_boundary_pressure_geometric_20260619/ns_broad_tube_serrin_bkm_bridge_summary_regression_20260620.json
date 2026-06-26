@@ -1,0 +1,36 @@
+{
+  "C": "scripts/check_ns_broad_tube_serrin_bkm_bridge_summary.py",
+  "F": "Only a strictly explicit conditional-summary ledger can pass; omitted requirements fail validation.",
+  "G": "No route/Clay/theorem promotion is allowed through this checker.",
+  "L": "Load summary JSON, validate schema and expected gate/requirement keys, enforce non-promoting status, and emit a canonical checker receipt.",
+  "O": "Owner 5 validates broad-tube Serrin/BKM bridge summary fields.",
+  "P": "FAIL_CLOSED_NS_BROAD_TUBE_SERRIN_BKM_BRIDGE_SUMMARY",
+  "R": "Fail-closed validation that gate implementation, promotions, and external obligations are explicit and stable.",
+  "S": "A summary is accepted only if the source ledger explicitly records three conditional gates, Clay promotion false, and explicit external obligations by gate.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_serrin_bkm_bridge_summary_20260620.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_serrin_bkm_bridge_summary_regression_20260620.json"
+  ],
+  "checked_contract": "ns_broad_tube_serrin_bkm_bridge_summary",
+  "checked_summary_path": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_serrin_bkm_bridge_summary_20260620.json",
+  "contract": "check_ns_broad_tube_serrin_bkm_bridge_summary",
+  "errors": [],
+  "inputs": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_serrin_bkm_bridge_summary_regression_20260620.json",
+    "summary_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260619/ns_broad_tube_serrin_bkm_bridge_summary_20260620.json"
+  },
+  "status": "ok",
+  "summary_payload_preview": {
+    "contract": "ns_broad_tube_serrin_bkm_bridge_summary",
+    "implemented_conditionally": {
+      "bkm_bridge": true,
+      "broad_tube_coarea": true,
+      "serrin_lift": true
+    },
+    "promotion_flags": {
+      "clay_promotion": false
+    },
+    "status": "ok"
+  },
+  "warnings": []
+}

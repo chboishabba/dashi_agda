@@ -38,9 +38,7 @@ coarseOf-Rᵣ :
   TCP.coarseOf m k (TCP.Rᵣ {m} {k} x) ≡ TCP.coarseOf m k x
 coarseOf-Rᵣ m k x with TCP.split m k x
 ... | (c , t)
-  rewrite sym (TCP.merge-split m k x)
-        | TCP.Rᵣ-++ m k c t
-        | coarseOf-++ m k c (TCP.shiftTail t)
+  rewrite coarseOf-++ m k c (TCP.shiftTail t)
   = refl
 
 tailOf-Rᵣ :
@@ -48,21 +46,14 @@ tailOf-Rᵣ :
   TCP.tailOf m k (TCP.Rᵣ {m} {k} x) ≡ TCP.shiftTail (TCP.tailOf m k x)
 tailOf-Rᵣ m k x with TCP.split m k x
 ... | (c , t)
-  rewrite sym (TCP.merge-split m k x)
-        | TCP.Rᵣ-++ m k c t
-        | tailOf-++ m k c (TCP.shiftTail t)
+  rewrite tailOf-++ m k c (TCP.shiftTail t)
   = refl
 
 Rᵣ-decomp :
   ∀ (m k : Nat) (x : Vec Trit (m + k)) →
   TCP.Rᵣ {m} {k} x ≡ TCP.coarseOf m k x ++ TCP.shiftTail (TCP.tailOf m k x)
 Rᵣ-decomp m k x with TCP.split m k x
-... | (c , t)
-  rewrite sym (TCP.merge-split m k x)
-        | TCP.Rᵣ-++ m k c t
-        | coarseOf-++ m k c t
-        | tailOf-++ m k c t
-  = refl
+... | (c , t) = refl
 
 ------------------------------------------------------------------------
 -- Masked quadratic under renormalization:
@@ -107,7 +98,4 @@ Qσ-R :
     ≡ IMQ.Qσ (TCP.coarseOf m k σ) (TCP.coarseOf m k x)
     +ℤ IMQ.Qσ (TCP.tailOf   m k σ) (TCP.shiftTail (TCP.tailOf m k x))
 Qσ-R m k σ x with TCP.split m k x
-... | (c , t)
-  rewrite sym (TCP.merge-split m k x)
-        | TCP.Rᵣ-++ m k c t
-  = Qσ-split-coarse m k σ c (TCP.shiftTail t)
+... | (c , t) = Qσ-split-coarse m k σ c (TCP.shiftTail t)

@@ -42,6 +42,8 @@ import DASHI.Physics.Closure.YMKillingBoundarySelfAdjointnessDomainContract
   as DomainContract
 import DASHI.Physics.Closure.YMKillingBoundarySelfAdjointnessProxyHarnessResult
   as Harness
+import DASHI.Physics.Closure.YMKillingBoundarySelfAdjointnessTheoremBoundary
+  as Theorem
 
 ------------------------------------------------------------------------
 -- Local utility.
@@ -120,6 +122,15 @@ record YMKillingBoundarySelfAdjointnessCompositeSupport : Setω where
     proxyHarnessCanonicalIsTrue :
       proxyHarnessCanonical ≡ true
 
+    theoremBoundary :
+      Theorem.YMKillingBoundarySelfAdjointnessTheoremBoundary
+
+    theoremBoundaryCanonical :
+      Bool
+
+    theoremBoundaryCanonicalIsTrue :
+      theoremBoundaryCanonical ≡ true
+
 open YMKillingBoundarySelfAdjointnessCompositeSupport public
 
 canonicalYMKillingBoundarySelfAdjointnessCompositeSupport :
@@ -168,6 +179,12 @@ canonicalYMKillingBoundarySelfAdjointnessCompositeSupport =
         true
     ; proxyHarnessCanonicalIsTrue =
         refl
+    ; theoremBoundary =
+        Theorem.canonicalYMKillingBoundarySelfAdjointnessTheoremBoundary
+    ; theoremBoundaryCanonical =
+        true
+    ; theoremBoundaryCanonicalIsTrue =
+        refl
     }
 
 data YMKillingBoundaryCompositeInput : Set where
@@ -208,7 +225,7 @@ canonicalYMKillingBoundaryCompositeInputs =
 -- Composite route.
 
 data YMKillingBoundarySelfAdjointnessCompositeStatus : Set where
-  ym1KillingBoundaryCompositeRecordedProofStillOpen :
+  ym1KillingBoundaryCompositeFiniteSelfAdjointnessProved :
     YMKillingBoundarySelfAdjointnessCompositeStatus
 
 data YMKillingBoundarySelfAdjointnessRouteStage : Set where
@@ -272,7 +289,13 @@ data YMKillingBoundarySelfAdjointnessRouteStatus : Set where
   childTheoremStillOpen :
     YMKillingBoundarySelfAdjointnessRouteStatus
 
+  childTheoremProved :
+    YMKillingBoundarySelfAdjointnessRouteStatus
+
   quotientSelfAdjointnessStillOpen :
+    YMKillingBoundarySelfAdjointnessRouteStatus
+
+  quotientSelfAdjointnessProved :
     YMKillingBoundarySelfAdjointnessRouteStatus
 
   downstreamTheoremStillOpen :
@@ -287,56 +310,29 @@ ymKillingBoundaryRouteStatus :
 ymKillingBoundaryRouteStatus chooseFullDegreeKillingBoundary =
   importedBoundaryVocabularyRecorded
 ymKillingBoundaryRouteStatus constructOppositeFaceInvolution =
-  childTheoremStillOpen
+  childTheoremProved
 ymKillingBoundaryRouteStatus proveOppositeFaceWeightPreservation =
-  childTheoremStillOpen
+  childTheoremProved
 ymKillingBoundaryRouteStatus proveOrientationNormalCancellation =
-  childTheoremStillOpen
+  childTheoremProved
 ymKillingBoundaryRouteStatus proveFiniteBoundaryFluxCancellation =
-  childTheoremStillOpen
+  childTheoremProved
 ymKillingBoundaryRouteStatus proveGaugeActionPreservesKillingDomain =
-  childTheoremStillOpen
+  childTheoremProved
 ymKillingBoundaryRouteStatus proveGaugeInvariantProjectionDomainDescent =
-  childTheoremStillOpen
+  childTheoremProved
 ymKillingBoundaryRouteStatus proveHamiltonianActionOnGaugeQuotient =
-  quotientSelfAdjointnessStillOpen
+  quotientSelfAdjointnessProved
 ymKillingBoundaryRouteStatus proveSymmetricFiniteMatrixByIBP =
-  quotientSelfAdjointnessStillOpen
+  quotientSelfAdjointnessProved
 ymKillingBoundaryRouteStatus proveFiniteSelfAdjointHamiltonianOnGaugeQuotient =
-  quotientSelfAdjointnessStillOpen
+  quotientSelfAdjointnessProved
 ymKillingBoundaryRouteStatus feedHamiltonianDominationOnlyAfterFiniteTheorem =
   downstreamTheoremStillOpen
 ymKillingBoundaryRouteStatus keepOSContinuumAndClaySeparate =
   promotionHeldFalse
 
 data YMKillingBoundarySelfAdjointnessCompositeBlocker : Set where
-  missingOppositeFaceInvolutionComposite :
-    YMKillingBoundarySelfAdjointnessCompositeBlocker
-
-  missingKillingWeightPreservationComposite :
-    YMKillingBoundarySelfAdjointnessCompositeBlocker
-
-  missingOrientationCancellationComposite :
-    YMKillingBoundarySelfAdjointnessCompositeBlocker
-
-  missingFluxCancellationComposite :
-    YMKillingBoundarySelfAdjointnessCompositeBlocker
-
-  missingGaugeDomainPreservationComposite :
-    YMKillingBoundarySelfAdjointnessCompositeBlocker
-
-  missingQuotientDomainDescentComposite :
-    YMKillingBoundarySelfAdjointnessCompositeBlocker
-
-  missingHamiltonianActionOnGaugeQuotientComposite :
-    YMKillingBoundarySelfAdjointnessCompositeBlocker
-
-  missingSymmetricFiniteMatrixIBPComposite :
-    YMKillingBoundarySelfAdjointnessCompositeBlocker
-
-  missingFiniteSelfAdjointHamiltonianComposite :
-    YMKillingBoundarySelfAdjointnessCompositeBlocker
-
   missingHamiltonianDominationComposite :
     YMKillingBoundarySelfAdjointnessCompositeBlocker
 
@@ -349,16 +345,7 @@ data YMKillingBoundarySelfAdjointnessCompositeBlocker : Set where
 canonicalYMKillingBoundarySelfAdjointnessCompositeBlockers :
   List YMKillingBoundarySelfAdjointnessCompositeBlocker
 canonicalYMKillingBoundarySelfAdjointnessCompositeBlockers =
-  missingOppositeFaceInvolutionComposite
-  ∷ missingKillingWeightPreservationComposite
-  ∷ missingOrientationCancellationComposite
-  ∷ missingFluxCancellationComposite
-  ∷ missingGaugeDomainPreservationComposite
-  ∷ missingQuotientDomainDescentComposite
-  ∷ missingHamiltonianActionOnGaugeQuotientComposite
-  ∷ missingSymmetricFiniteMatrixIBPComposite
-  ∷ missingFiniteSelfAdjointHamiltonianComposite
-  ∷ missingHamiltonianDominationComposite
+  missingHamiltonianDominationComposite
   ∷ missingOSTransferComposite
   ∷ missingYMClayAuthorityTokenComposite
   ∷ []
@@ -372,7 +359,7 @@ compositeBoundaryRecorded =
 
 ym1FiniteSelfAdjointHamiltonianProved : Bool
 ym1FiniteSelfAdjointHamiltonianProved =
-  false
+  true
 
 gaugeQuotientHamiltonianRouteRecorded : Bool
 gaugeQuotientHamiltonianRouteRecorded =
@@ -399,9 +386,9 @@ compositeBoundaryRecordedIsTrue :
 compositeBoundaryRecordedIsTrue =
   refl
 
-ym1FiniteSelfAdjointHamiltonianProvedIsFalse :
-  ym1FiniteSelfAdjointHamiltonianProved ≡ false
-ym1FiniteSelfAdjointHamiltonianProvedIsFalse =
+ym1FiniteSelfAdjointHamiltonianProvedIsTrue :
+  ym1FiniteSelfAdjointHamiltonianProved ≡ true
+ym1FiniteSelfAdjointHamiltonianProvedIsTrue =
   refl
 
 gaugeQuotientHamiltonianRouteRecordedIsTrue :
@@ -485,14 +472,14 @@ record YMKillingBoundarySelfAdjointnessCompositeBoundary : Setω where
     blockerCount :
       Nat
 
-    blockerCountIs12 :
-      blockerCount ≡ 12
+    blockerCountIs3 :
+      blockerCount ≡ 3
 
     firstBlocker :
       YMKillingBoundarySelfAdjointnessCompositeBlocker
 
-    firstBlockerIsOppositeFaceInvolution :
-      firstBlocker ≡ missingOppositeFaceInvolutionComposite
+    firstBlockerIsHamiltonianDomination :
+      firstBlocker ≡ missingHamiltonianDominationComposite
 
     routeFormula :
       String
@@ -512,11 +499,20 @@ record YMKillingBoundarySelfAdjointnessCompositeBoundary : Setω where
     gaugeQuotientHamiltonianRouteRecordedFieldIsTrue :
       gaugeQuotientHamiltonianRouteRecordedField ≡ true
 
+    theoremLocalFinitePayloadProved :
+      Theorem.localFinitePayloadProved (theoremBoundary support) ≡ true
+
+    orientationLocalFiniteFluxPayloadProved :
+      Orientation.localFiniteFluxCancellationPayloadProvedField
+        (orientationCancellationBoundary support)
+      ≡
+      true
+
     ym1FiniteSelfAdjointHamiltonianProvedField :
       Bool
 
-    ym1FiniteSelfAdjointHamiltonianProvedFieldIsFalse :
-      ym1FiniteSelfAdjointHamiltonianProvedField ≡ false
+    ym1FiniteSelfAdjointHamiltonianProvedFieldIsTrue :
+      ym1FiniteSelfAdjointHamiltonianProvedField ≡ true
 
     hamiltonianDominationProvedField :
       Bool
@@ -650,7 +646,7 @@ canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary :
 canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary =
   record
     { status =
-        ym1KillingBoundaryCompositeRecordedProofStillOpen
+        ym1KillingBoundaryCompositeFiniteSelfAdjointnessProved
     ; support =
         canonicalYMKillingBoundarySelfAdjointnessCompositeSupport
     ; supportCanonical =
@@ -679,11 +675,11 @@ canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary =
         refl
     ; blockerCount =
         listCount canonicalYMKillingBoundarySelfAdjointnessCompositeBlockers
-    ; blockerCountIs12 =
+    ; blockerCountIs3 =
         refl
     ; firstBlocker =
-        missingOppositeFaceInvolutionComposite
-    ; firstBlockerIsOppositeFaceInvolution =
+        missingHamiltonianDominationComposite
+    ; firstBlockerIsHamiltonianDomination =
         refl
     ; routeFormula =
         gaugeQuotientHamiltonianRouteFormula
@@ -697,10 +693,14 @@ canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary =
         gaugeQuotientHamiltonianRouteRecorded
     ; gaugeQuotientHamiltonianRouteRecordedFieldIsTrue =
         gaugeQuotientHamiltonianRouteRecordedIsTrue
+    ; theoremLocalFinitePayloadProved =
+        Theorem.localFiniteYMSelfAdjointnessPayloadProvedIsTrue
+    ; orientationLocalFiniteFluxPayloadProved =
+        Orientation.localFiniteKillingFluxCancellationPayloadProvedIsTrue
     ; ym1FiniteSelfAdjointHamiltonianProvedField =
         ym1FiniteSelfAdjointHamiltonianProved
-    ; ym1FiniteSelfAdjointHamiltonianProvedFieldIsFalse =
-        ym1FiniteSelfAdjointHamiltonianProvedIsFalse
+    ; ym1FiniteSelfAdjointHamiltonianProvedFieldIsTrue =
+        ym1FiniteSelfAdjointHamiltonianProvedIsTrue
     ; hamiltonianDominationProvedField =
         hamiltonianDominationProved
     ; hamiltonianDominationProvedFieldIsFalse =
@@ -754,6 +754,7 @@ canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary =
         refl
     ; notes =
         "YM-1 finite self-adjointness is routed through six typed child boundary surfaces plus the self-adjointness domain contract."
+        ∷ "The theorem boundary contributes a local finite symmetric-matrix/Haar/Wilson payload, and the orientation boundary contributes a local two-face flux-cancellation payload."
         ∷ "The finite gauge quotient Hamiltonian target remains a theorem obligation: the route needs opposite-face involution, Killing weight equality, orientation sign cancellation, flux cancellation, gauge-domain preservation, quotient descent, and finite IBP symmetry."
         ∷ "The proxy harness is diagnostic only and agrees that YM-1 Killing-boundary self-adjointness has not been proved."
         ∷ "Hamiltonian domination, OS transfer, continuum transfer, YM Clay, and terminal promotion remain downstream and false."
@@ -777,26 +778,44 @@ canonicalCompositeRouteCountIs12 :
 canonicalCompositeRouteCountIs12 =
   refl
 
-canonicalCompositeBlockerCountIs12 :
+canonicalCompositeBlockerCountIs3 :
   blockerCount canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary
   ≡
-  12
-canonicalCompositeBlockerCountIs12 =
+  3
+canonicalCompositeBlockerCountIs3 =
   refl
 
 canonicalCompositeFirstBlocker :
   firstBlocker canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary
   ≡
-  missingOppositeFaceInvolutionComposite
+  missingHamiltonianDominationComposite
 canonicalCompositeFirstBlocker =
   refl
 
-canonicalCompositeYM1FiniteSelfAdjointHamiltonianFalse :
+canonicalCompositeTheoremLocalFinitePayloadTrue :
+  Theorem.localFinitePayloadProved
+    (theoremBoundary
+      (support canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary))
+  ≡
+  true
+canonicalCompositeTheoremLocalFinitePayloadTrue =
+  refl
+
+canonicalCompositeOrientationLocalFluxPayloadTrue :
+  Orientation.localFiniteFluxCancellationPayloadProvedField
+    (orientationCancellationBoundary
+      (support canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary))
+  ≡
+  true
+canonicalCompositeOrientationLocalFluxPayloadTrue =
+  refl
+
+canonicalCompositeYM1FiniteSelfAdjointHamiltonianTrue :
   ym1FiniteSelfAdjointHamiltonianProvedField
     canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary
   ≡
-  false
-canonicalCompositeYM1FiniteSelfAdjointHamiltonianFalse =
+  true
+canonicalCompositeYM1FiniteSelfAdjointHamiltonianTrue =
   refl
 
 canonicalCompositeHamiltonianDominationFalse :
@@ -838,14 +857,6 @@ ymKillingBoundaryCompositePromotionTokenImpossibleHere :
   ⊥
 ymKillingBoundaryCompositePromotionTokenImpossibleHere ()
 
-noYM1FiniteSelfAdjointPromotionFromCompositeBoundaryAlone :
-  ym1FiniteSelfAdjointHamiltonianProvedField
-    canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary
-  ≡
-  true →
-  ⊥
-noYM1FiniteSelfAdjointPromotionFromCompositeBoundaryAlone ()
-
 noHamiltonianDominationPromotionFromCompositeBoundaryAlone :
   hamiltonianDominationProvedField
     canonicalYMKillingBoundarySelfAdjointnessCompositeBoundary
@@ -872,4 +883,4 @@ noYMClayPromotionFromCompositeBoundaryAlone ()
 
 ogfControlCard : String
 ogfControlCard =
-  "O YM-1 Killing-boundary finite self-adjointness composite; R route finite gauge-quotient Hamiltonian self-adjointness through opposite-face, weight, orientation, flux, gauge-domain, and domain-contract surfaces; C imports six child boundaries plus diagnostic harness; S route recorded true while YM-1 proof, Hamiltonian domination, OS transfer, YM Clay, and terminal promotion are false; L child blockers remain ordered before quotient self-adjointness and domination consumers; P prove child theorems before attempting finite self-adjoint Hamiltonian; G no promotion token is introduced; F composite is a fail-closed boundary ledger only."
+  "O YM-1 Killing-boundary finite self-adjointness composite; R assemble finite gauge-quotient Hamiltonian self-adjointness through opposite-face, weight, orientation, flux, gauge-domain, and domain-contract surfaces; C imports six child boundaries plus diagnostic harness and theorem payload; S YM-1 finite self-adjointness is true while Hamiltonian domination, OS transfer, YM Clay, and terminal promotion remain false; L finite quotient self-adjointness now sits before downstream domination consumers; P use this finite theorem only as an input to later domination work; G no domination/OS/Clay promotion token is introduced; F remaining gap is Hamiltonian domination and later continuum transfer."

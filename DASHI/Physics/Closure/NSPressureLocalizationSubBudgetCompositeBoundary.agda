@@ -148,14 +148,14 @@ record ImportedNSPressureLocalizationSubBudgetSupport : Set where
       CutoffRiesz.cutoffRieszCommutatorEstimateProved ≡ false
     importedCutoffRieszKeepsLocalizationFalse :
       CutoffRiesz.localizationTheoremProved ≡ false
-    importedHarmonicTailKeepsTailBudgetFalse :
-      HarmonicTail.pressureTailBudgetClosed ≡ false
-    importedHarmonicTailKeepsLocalizationFalse :
-      HarmonicTail.localizationTheoremProved ≡ false
+    importedHarmonicTailBudgetClosed :
+      HarmonicTail.pressureTailBudgetClosed ≡ true
+    importedHarmonicTailLocalizationNowTrue :
+      HarmonicTail.localizationTheoremProved ≡ true
     importedHarmonicTailKeepsA6False :
       HarmonicTail.triadicCompensatedLeakageIdentityProved ≡ false
-    importedErrorBudgetKeepsAggregateFalse :
-      ErrorBudget.aggregateErrorBudgetProved ≡ false
+    importedErrorBudgetAggregatePromoted :
+      ErrorBudget.aggregateErrorBudgetProved ≡ true
     importedErrorBudgetKeepsResidualFalse :
       ErrorBudget.residualDepletionProved ≡ false
     importedErrorBudgetKeepsNSClayFalse :
@@ -211,13 +211,13 @@ canonicalImportedNSPressureLocalizationSubBudgetSupport =
         refl
     ; importedCutoffRieszKeepsLocalizationFalse =
         refl
-    ; importedHarmonicTailKeepsTailBudgetFalse =
+    ; importedHarmonicTailBudgetClosed =
         refl
-    ; importedHarmonicTailKeepsLocalizationFalse =
+    ; importedHarmonicTailLocalizationNowTrue =
         refl
     ; importedHarmonicTailKeepsA6False =
         refl
-    ; importedErrorBudgetKeepsAggregateFalse =
+    ; importedErrorBudgetAggregatePromoted =
         refl
     ; importedErrorBudgetKeepsResidualFalse =
         refl

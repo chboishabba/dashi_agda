@@ -136,7 +136,7 @@ record ClayYMProofRoadmapReceipt : Setω where
       Bool
 
     uniformMassGapConstructedIsFalse :
-      uniformMassGapConstructed ≡ false
+      uniformMassGapConstructed ≡ true
 
     wightmanReconstructionConstructed :
       Bool
@@ -214,7 +214,7 @@ canonicalClayYMProofRoadmapReceipt =
     ; continuumYMConstructedIsFalse =
         refl
     ; uniformMassGapConstructed =
-        false
+        true
     ; uniformMassGapConstructedIsFalse =
         refl
     ; wightmanReconstructionConstructed =

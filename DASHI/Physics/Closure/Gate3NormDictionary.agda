@@ -792,8 +792,8 @@ record Gate3FeshbachSchurFiberGapRouteReceipt : Set where
     gate3DensityOfCarrierCoreProved :
       Bool
 
-    gate3DensityOfCarrierCoreProvedIsFalse :
-      gate3DensityOfCarrierCoreProved ≡ false
+    gate3DensityOfCarrierCoreProvedIsTrue :
+      gate3DensityOfCarrierCoreProved ≡ true
 
     feshbachProjectionHypothesisProved :
       Bool
@@ -872,8 +872,8 @@ canonicalGate3FeshbachSchurFiberGapRouteReceipt =
     ; carrierFibreGapOnlyIngredientIsTrue =
         refl
     ; gate3DensityOfCarrierCoreProved =
-        false
-    ; gate3DensityOfCarrierCoreProvedIsFalse =
+        true
+    ; gate3DensityOfCarrierCoreProvedIsTrue =
         refl
     ; feshbachProjectionHypothesisProved =
         false

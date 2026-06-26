@@ -1,0 +1,26 @@
+{
+  "C": "scripts/check_ns_low_frustration_basin_scan.py",
+  "F": "The residence-time wall stays explicitly unproved; candidate-only telemetry is the only acceptable stance.",
+  "G": "Checker remains empirical and non-promoting.",
+  "L": "Load the scan JSON, validate row and aggregate surfaces, and emit a checker receipt.",
+  "O": "Validate the low-frustration basin scan contract and receipt surface.",
+  "P": "FAIL_CLOSED_NS_LOW_FRUSTRATION_BASIN_SCAN_CHECK",
+  "R": "Check control card, authority flags, row metrics, and aggregate basin summaries.",
+  "S": "Fail-closed checker: any schema drift, authority drift, or malformed metric is an error.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "contract": "check_ns_low_frustration_basin_scan",
+  "errors": [],
+  "ok": true,
+  "route_decision": "FAIL_CLOSED_NS_LOW_FRUSTRATION_BASIN_SCAN_CHECK",
+  "schema_version": "1.0.0",
+  "status": "ok",
+  "warnings": []
+}

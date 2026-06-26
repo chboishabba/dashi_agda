@@ -1,0 +1,39 @@
+{
+  "C": "scripts/check_ns_case_a_transition_shell_scan.py",
+  "F": "The checker enforces telemetry consistency only; it does not promote any mathematical statement.",
+  "G": "Checker is empirical only and does not infer any theorem or Clay claim.",
+  "L": "Load the scan JSON, validate structure and arithmetic, and emit checker telemetry only.",
+  "O": "Strictly validate the Case A transition shell scan contract.",
+  "P": "FAIL_CLOSED_NS_CASE_A_TRANSITION_SHELL_SCAN_CHECK",
+  "R": "Validate per-frame and aggregate shell telemetry, band sweeps, threshold rows, and count/fraction arithmetic.",
+  "S": "Fail-closed checker: schema mismatch, count mismatch, invalid fractions, or missing invariants produce error.",
+  "changed_files": [
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_transition_shell_scan_N128_20260621.json",
+    "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_transition_shell_scan_check_N128_20260621.json"
+  ],
+  "contract": "check_ns_case_a_transition_shell_scan",
+  "control_card": {
+    "C": "scripts/check_ns_case_a_transition_shell_scan.py",
+    "F": "The checker enforces telemetry consistency only; it does not promote any mathematical statement.",
+    "G": "Checker is empirical only and does not infer any theorem or Clay claim.",
+    "L": "Load the scan JSON, validate structure and arithmetic, and emit checker telemetry only.",
+    "O": "Strictly validate the Case A transition shell scan contract.",
+    "P": "FAIL_CLOSED_NS_CASE_A_TRANSITION_SHELL_SCAN_CHECK",
+    "R": "Validate per-frame and aggregate shell telemetry, band sweeps, threshold rows, and count/fraction arithmetic.",
+    "S": "Fail-closed checker: schema mismatch, count mismatch, invalid fractions, or missing invariants produce error."
+  },
+  "details": {
+    "errors": 0,
+    "row_count": 13,
+    "status": "ok",
+    "warnings": 0
+  },
+  "errors": [],
+  "input": {
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_transition_shell_scan_check_N128_20260621.json",
+    "scan_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_case_a_transition_shell_scan_N128_20260621.json"
+  },
+  "route_decision": "FAIL_CLOSED_NS_CASE_A_TRANSITION_SHELL_SCAN_CHECK",
+  "status": "ok",
+  "warnings": []
+}

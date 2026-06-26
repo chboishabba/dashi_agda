@@ -119,6 +119,7 @@ canonicalW4PhysicalCalibrationProviderPayloadRequest =
     ; exactMissingReceiptFields =
         "calibrationAuthority : Candidate256PhysicalCalibrationAuthorityToken"
         ∷ "physicalUnitCarrier : Set"
+        ∷ "physicalDimensionVector : structured SI-base exponent vector for the physical unit carrier"
         ∷ "natToUnitCalibrationMap : Nat -> physicalUnitCarrier"
         ∷ "calibratedQuotientScaleMap : Candidate256QuotientClass -> physicalUnitCarrier"
         ∷ "calibratedScaleMapFactorsThroughNat : calibratedQuotientScaleMap q == natToUnitCalibrationMap (candidate256SurrogateScale q)"
@@ -147,6 +148,7 @@ canonicalW4PhysicalCalibrationProviderPayloadRequest =
         "First obtain AcceptedDYLuminosityConventionAuthority for the DY luminosity/bin-integration convention"
         ∷ "Then establish W4ZAdequacy downstream of that accepted convention authority"
         ∷ "Then provide a physical unit carrier distinct from the dimensionless Nat surrogate"
+        ∷ "Provide a structured SI-base dimension vector for the physical unit carrier"
         ∷ "Provide a Nat-to-physical-unit calibration map for Candidate256 surrogate scale values"
         ∷ "Provide a calibrated quotient-class scale map into the physical unit carrier"
         ∷ "Prove the calibrated quotient scale factors through candidate256SurrogateScale"
@@ -159,6 +161,7 @@ canonicalW4PhysicalCalibrationProviderPayloadRequest =
         ∷ "Treat AcceptedDYLuminosityConventionAuthority -> W4ZAdequacy -> Candidate256PhysicalCalibrationExternalReceipt as the receipt queue"
         ∷ "Do not construct this receipt unless a legitimate external authority artifact already inhabits Candidate256PhysicalCalibrationAuthorityToken"
         ∷ "Do not satisfy the request with Nat as its own promoted physical unit carrier"
+        ∷ "Do not replace the dimension vector with prose unit labels"
         ∷ "Do not replace dimensional preservation with a label or prose unit annotation"
         ∷ "If no positive calibration receipt can be supplied, return a typed source/authority diagnostic instead of prose"
         ∷ []
@@ -179,7 +182,7 @@ canonicalW4PhysicalCalibrationProviderPayloadRequest =
         "W4 remains blocked first on AcceptedDYLuminosityConventionAuthority, then W4ZAdequacy, then Candidate256PhysicalCalibrationExternalReceipt"
         ∷ "Candidate256PhysicalCalibrationAuthorityToken is constructorless in the current repo"
         ∷ "The current Candidate256 Nat surrogate remains dimensionless and non-promoting"
-        ∷ "Scale-setting can discharge only after units, calibration, factorization, and dimensional preservation are supplied"
+        ∷ "Scale-setting can discharge only after units, dimension vectors, calibration, factorization, and dimensional preservation are supplied"
         ∷ "Spectra, bonding, wet-lab evidence, and empirical physical validation remain downstream strict-physical lanes"
         ∷ []
     ; impossibleAuthorityHere =

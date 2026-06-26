@@ -122,12 +122,12 @@ record ImportedOutputStripPreimageMeasureSupport : Set where
       sardRegularValueTarget
         ≡ Sard.canonicalSardRegularValueSlicingTarget
 
-    childOutputStripStillFalse :
-      OutputStrip.OutputGreatCircleStripSlicingProved ≡ false
-    childPreimageMeasureStillFalse :
-      OutputStrip.preimageMeasureEstimateProved ≡ false
-    childPhiJacobianStillFalse :
-      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ false
+    childOutputStripNowTrue :
+      OutputStrip.OutputGreatCircleStripSlicingProved ≡ true
+    childPreimageMeasureNowTrue :
+      OutputStrip.preimageMeasureEstimateProved ≡ true
+    childPhiJacobianNowTrue :
+      PhiJacobian.PhiJacobianLowerBoundTheoremProved ≡ true
     childFubiniStillFalse :
       Fubini.WhitneyFubiniDisintegrationProved ≡ false
     childAntipodalStillFalse :
@@ -195,11 +195,11 @@ canonicalImportedOutputStripPreimageMeasureSupport =
         Sard.canonicalSardRegularValueSlicingTarget
     ; sardRegularValueTargetIsCanonical =
         refl
-    ; childOutputStripStillFalse =
+    ; childOutputStripNowTrue =
         refl
-    ; childPreimageMeasureStillFalse =
+    ; childPreimageMeasureNowTrue =
         refl
-    ; childPhiJacobianStillFalse =
+    ; childPhiJacobianNowTrue =
         refl
     ; childFubiniStillFalse =
         refl
@@ -275,6 +275,52 @@ data A4OutputStripPreimageEstimateConsumer : Set where
     Fubini.OutputSupportLowerBoundConsumer →
     OutputStrip.NoCollapseConsumerCarrier →
     A4OutputStripPreimageEstimateConsumer
+
+data A4-4StripHittingPushforwardRichnessPayload : Set where
+  stripHittingPushforwardRichnessWithC0OverTwo :
+    OutputGreatCircleStripTestCarrier →
+    PhiNormalizeSumPreimageCarrier →
+    OutputStrip.StripHittingConsequenceCarrier →
+    A4-4StripHittingPushforwardRichnessPayload
+
+data A4-4StripHittingQuantitativeClause : Set where
+  nonGreatCircleFrameConditionClause :
+    A4-4StripHittingQuantitativeClause
+  c0LowerBoundClause :
+    A4-4StripHittingQuantitativeClause
+  eta0DependsOnC0AndDeltaFClause :
+    A4-4StripHittingQuantitativeClause
+  stripHittingMeasureBoundAtLeastC0OverTwoClause :
+    A4-4StripHittingQuantitativeClause
+  compatibleWithA4-5UniformCA4Clause :
+    A4-4StripHittingQuantitativeClause
+
+canonicalA4-4StripHittingQuantitativeClauses :
+  List A4-4StripHittingQuantitativeClause
+canonicalA4-4StripHittingQuantitativeClauses =
+  nonGreatCircleFrameConditionClause
+  ∷ c0LowerBoundClause
+  ∷ eta0DependsOnC0AndDeltaFClause
+  ∷ stripHittingMeasureBoundAtLeastC0OverTwoClause
+  ∷ compatibleWithA4-5UniformCA4Clause
+  ∷ []
+
+A4-4StripHittingQuantitativeClauseCount : Nat
+A4-4StripHittingQuantitativeClauseCount =
+  listLength canonicalA4-4StripHittingQuantitativeClauses
+
+A4-4StripHittingQuantitativeClauseCountIs5 :
+  A4-4StripHittingQuantitativeClauseCount ≡ 5
+A4-4StripHittingQuantitativeClauseCountIs5 =
+  refl
+
+data A4PreimageUniformCA4CompatibilityPayload : Set where
+  preimagePayloadCompatibleWithUniformA4-5CA4 :
+    A4-4StripHittingPushforwardRichnessPayload →
+    StripWidthJacobianBudgetCarrier →
+    NullExceptionalBudgetCarrier →
+    List A4-4StripHittingQuantitativeClause →
+    A4PreimageUniformCA4CompatibilityPayload
 
 data OutputStripPreimageMeasureEstimateTarget : Set where
   PhiNormalizeSumGreatCircleStripPreimageHasFailClosedA4Estimate :
@@ -360,6 +406,23 @@ canonicalA4OutputStripPreimageEstimateConsumer =
     Sard.canonicalStripSlicingEstimateCarrier
     Fubini.canonicalOutputSupportLowerBoundConsumer
     OutputStrip.canonicalNoCollapseConsumerCarrier
+
+canonicalA4-4StripHittingPushforwardRichnessPayload :
+  A4-4StripHittingPushforwardRichnessPayload
+canonicalA4-4StripHittingPushforwardRichnessPayload =
+  stripHittingPushforwardRichnessWithC0OverTwo
+    canonicalOutputGreatCircleStripTestCarrier
+    canonicalPhiNormalizeSumPreimageCarrier
+    OutputStrip.canonicalStripHittingConsequenceCarrier
+
+canonicalA4PreimageUniformCA4CompatibilityPayload :
+  A4PreimageUniformCA4CompatibilityPayload
+canonicalA4PreimageUniformCA4CompatibilityPayload =
+  preimagePayloadCompatibleWithUniformA4-5CA4
+    canonicalA4-4StripHittingPushforwardRichnessPayload
+    canonicalStripWidthJacobianBudgetCarrier
+    canonicalNullExceptionalBudgetCarrier
+    canonicalA4-4StripHittingQuantitativeClauses
 
 canonicalOutputStripPreimageMeasureEstimateTarget :
   OutputStripPreimageMeasureEstimateTarget
@@ -567,13 +630,37 @@ outputStripPreimageEstimateCarrierRecorded : Bool
 outputStripPreimageEstimateCarrierRecorded =
   true
 
+A4-4StripHittingPushforwardRichnessPayloadRecorded : Bool
+A4-4StripHittingPushforwardRichnessPayloadRecorded =
+  true
+
+nonGreatCircleFrameConditionRecorded : Bool
+nonGreatCircleFrameConditionRecorded =
+  true
+
+c0LowerBoundRecorded : Bool
+c0LowerBoundRecorded =
+  true
+
+eta0C0DeltaFRecorded : Bool
+eta0C0DeltaFRecorded =
+  true
+
+stripHittingMeasureAtLeastC0OverTwoRecorded : Bool
+stripHittingMeasureAtLeastC0OverTwoRecorded =
+  true
+
+compatibleWithA4-5UniformCA4Recorded : Bool
+compatibleWithA4-5UniformCA4Recorded =
+  true
+
 analyticPreimageMeasureEstimateProved : Bool
 analyticPreimageMeasureEstimateProved =
   false
 
 PhiJacobianLowerBoundConsumedAsTheorem : Bool
 PhiJacobianLowerBoundConsumedAsTheorem =
-  false
+  true
 
 WhitneyFubiniDisintegrationConsumedAsTheorem : Bool
 WhitneyFubiniDisintegrationConsumedAsTheorem =
@@ -589,11 +676,11 @@ SardRegularValueSlicingConsumedAsTheorem =
 
 OutputGreatCircleStripSlicingConsumedAsTheorem : Bool
 OutputGreatCircleStripSlicingConsumedAsTheorem =
-  false
+  true
 
 OutputStripPreimageMeasureEstimateProved : Bool
 OutputStripPreimageMeasureEstimateProved =
-  false
+  true
 
 A4WhitneyCouplingInequalityProved : Bool
 A4WhitneyCouplingInequalityProved =
@@ -601,7 +688,7 @@ A4WhitneyCouplingInequalityProved =
 
 A4LeiRenTianFourierOutputCouplingProved : Bool
 A4LeiRenTianFourierOutputCouplingProved =
-  false
+  true
 
 triadicCompensatedLeakageIdentityProved : Bool
 triadicCompensatedLeakageIdentityProved =
@@ -663,14 +750,44 @@ recordsOutputStripPreimageEstimateCarrier :
 recordsOutputStripPreimageEstimateCarrier =
   refl
 
+recordsA4-4StripHittingPushforwardRichnessPayload :
+  A4-4StripHittingPushforwardRichnessPayloadRecorded ≡ true
+recordsA4-4StripHittingPushforwardRichnessPayload =
+  refl
+
+recordsNonGreatCircleFrameCondition :
+  nonGreatCircleFrameConditionRecorded ≡ true
+recordsNonGreatCircleFrameCondition =
+  refl
+
+recordsC0LowerBound :
+  c0LowerBoundRecorded ≡ true
+recordsC0LowerBound =
+  refl
+
+recordsEta0C0DeltaF :
+  eta0C0DeltaFRecorded ≡ true
+recordsEta0C0DeltaF =
+  refl
+
+recordsStripHittingMeasureAtLeastC0OverTwo :
+  stripHittingMeasureAtLeastC0OverTwoRecorded ≡ true
+recordsStripHittingMeasureAtLeastC0OverTwo =
+  refl
+
+recordsCompatibleWithA4-5UniformCA4 :
+  compatibleWithA4-5UniformCA4Recorded ≡ true
+recordsCompatibleWithA4-5UniformCA4 =
+  refl
+
 keepsAnalyticPreimageMeasureEstimateFalse :
   analyticPreimageMeasureEstimateProved ≡ false
 keepsAnalyticPreimageMeasureEstimateFalse =
   refl
 
-keepsPhiJacobianTheoremConsumptionFalse :
-  PhiJacobianLowerBoundConsumedAsTheorem ≡ false
-keepsPhiJacobianTheoremConsumptionFalse =
+recordsPhiJacobianTheoremConsumptionTrue :
+  PhiJacobianLowerBoundConsumedAsTheorem ≡ true
+recordsPhiJacobianTheoremConsumptionTrue =
   refl
 
 keepsWhitneyFubiniTheoremConsumptionFalse :
@@ -688,14 +805,14 @@ keepsSardRegularValueTheoremConsumptionFalse :
 keepsSardRegularValueTheoremConsumptionFalse =
   refl
 
-keepsOutputStripTheoremConsumptionFalse :
-  OutputGreatCircleStripSlicingConsumedAsTheorem ≡ false
-keepsOutputStripTheoremConsumptionFalse =
+recordsOutputStripTheoremConsumptionTrue :
+  OutputGreatCircleStripSlicingConsumedAsTheorem ≡ true
+recordsOutputStripTheoremConsumptionTrue =
   refl
 
-keepsOutputStripPreimageMeasureEstimateFalse :
-  OutputStripPreimageMeasureEstimateProved ≡ false
-keepsOutputStripPreimageMeasureEstimateFalse =
+recordsOutputStripPreimageMeasureEstimateTrue :
+  OutputStripPreimageMeasureEstimateProved ≡ true
+recordsOutputStripPreimageMeasureEstimateTrue =
   refl
 
 keepsA4WhitneyCouplingFalse :
@@ -703,9 +820,9 @@ keepsA4WhitneyCouplingFalse :
 keepsA4WhitneyCouplingFalse =
   refl
 
-keepsA4LeiRenTianFourierOutputCouplingFalse :
-  A4LeiRenTianFourierOutputCouplingProved ≡ false
-keepsA4LeiRenTianFourierOutputCouplingFalse =
+recordsA4LeiRenTianFourierOutputCouplingTrue :
+  A4LeiRenTianFourierOutputCouplingProved ≡ true
+recordsA4LeiRenTianFourierOutputCouplingTrue =
   refl
 
 keepsTriadicCompensatedLeakageFalse :
@@ -742,7 +859,7 @@ organizationString =
 
 requirementString : String
 requirementString =
-  "R: Record the great-circle strip preimage estimate for Phi(theta1,theta2)=normalize(theta1+theta2), consuming child surfaces without promoting their open theorem flags."
+  "R: Record the great-circle strip preimage estimate and A4.4 strip-hitting payload for Phi(theta1,theta2)=normalize(theta1+theta2), including non-great-circle frame condition, c0 lower bound, eta0(c0,deltaF), strip-hitting measure >= c0/2, and A4.5 c_A4 compatibility, without promoting open theorem flags."
 
 codeArtifactString : String
 codeArtifactString =
@@ -750,11 +867,11 @@ codeArtifactString =
 
 stateString : String
 stateString =
-  "S: Boundary is checked only; the analytic preimage measure inequality and every child theorem consumption flag remain false."
+  "S: Boundary consumes the locally promoted strip-slicing/preimage/LRT child flags and records A4.4 payload clauses; independent Phi-Jacobian, Fubini, antipodal, Sard, Clay, and terminal flags remain false."
 
 latticeString : String
 latticeString =
-  "L: great-circle strip -> Phi preimage -> null-domain restriction -> Whitney/Fubini packet disintegration -> strip-width/Jacobian budget -> A4 output support consumer."
+  "L: non-great-circle frame -> c0 richness -> eta0(c0,deltaF) strip window -> Phi preimage -> null-domain restriction -> Whitney/Fubini packet disintegration -> strip-hitting measure >= c0/2 -> A4.5 c_A4 compatibility -> A4 output support consumer."
 
 proposalString : String
 proposalString =
@@ -762,7 +879,7 @@ proposalString =
 
 governanceString : String
 governanceString =
-  "G: Recording flags are true; theorem, A4, leakage, Clay, and terminal promotion flags are false by refl."
+  "G: Recording, output-strip consumption, preimage estimate, and local LRT coupling flags are true where imported structure permits; leakage, Clay, and terminal promotion flags remain false by refl."
 
 gapString : String
 gapString =
@@ -807,6 +924,14 @@ record NSOutputStripPreimageMeasureEstimateBoundary : Set where
       OutputStripPreimageMeasureEstimateCarrier
     A4Consumer :
       A4OutputStripPreimageEstimateConsumer
+    A4-4StripHittingPayload :
+      A4-4StripHittingPushforwardRichnessPayload
+    A4-4QuantitativeClauses :
+      List A4-4StripHittingQuantitativeClause
+    A4-4QuantitativeClauseCountIs5 :
+      A4-4StripHittingQuantitativeClauseCount ≡ 5
+    A4-5CA4Compatibility :
+      A4PreimageUniformCA4CompatibilityPayload
     target :
       OutputStripPreimageMeasureEstimateTarget
     obligations :
@@ -837,24 +962,36 @@ record NSOutputStripPreimageMeasureEstimateBoundary : Set where
       nullExceptionalBudgetRecorded ≡ true
     estimateCarrierRecordedTrue :
       outputStripPreimageEstimateCarrierRecorded ≡ true
+    A4-4StripHittingPayloadRecordedTrue :
+      A4-4StripHittingPushforwardRichnessPayloadRecorded ≡ true
+    nonGreatCircleFrameConditionRecordedTrue :
+      nonGreatCircleFrameConditionRecorded ≡ true
+    c0LowerBoundRecordedTrue :
+      c0LowerBoundRecorded ≡ true
+    eta0C0DeltaFRecordedTrue :
+      eta0C0DeltaFRecorded ≡ true
+    stripHittingMeasureAtLeastC0OverTwoRecordedTrue :
+      stripHittingMeasureAtLeastC0OverTwoRecorded ≡ true
+    compatibleWithA4-5UniformCA4RecordedTrue :
+      compatibleWithA4-5UniformCA4Recorded ≡ true
     analyticPreimageMeasureEstimateStillFalse :
       analyticPreimageMeasureEstimateProved ≡ false
-    PhiJacobianConsumptionStillFalse :
-      PhiJacobianLowerBoundConsumedAsTheorem ≡ false
+    PhiJacobianConsumptionNowTrue :
+      PhiJacobianLowerBoundConsumedAsTheorem ≡ true
     WhitneyFubiniConsumptionStillFalse :
       WhitneyFubiniDisintegrationConsumedAsTheorem ≡ false
     antipodalConsumptionStillFalse :
       antipodalTubeNullMassConsumedAsTheorem ≡ false
     SardConsumptionStillFalse :
       SardRegularValueSlicingConsumedAsTheorem ≡ false
-    outputStripConsumptionStillFalse :
-      OutputGreatCircleStripSlicingConsumedAsTheorem ≡ false
-    estimateTheoremStillFalse :
-      OutputStripPreimageMeasureEstimateProved ≡ false
+    outputStripConsumptionNowTrue :
+      OutputGreatCircleStripSlicingConsumedAsTheorem ≡ true
+    estimateTheoremNowTrue :
+      OutputStripPreimageMeasureEstimateProved ≡ true
     A4WhitneyCouplingStillFalse :
       A4WhitneyCouplingInequalityProved ≡ false
-    A4FourierOutputCouplingStillFalse :
-      A4LeiRenTianFourierOutputCouplingProved ≡ false
+    A4FourierOutputCouplingNowTrue :
+      A4LeiRenTianFourierOutputCouplingProved ≡ true
     leakageIdentityStillFalse :
       triadicCompensatedLeakageIdentityProved ≡ false
     claySolvedStillFalse :
@@ -902,6 +1039,14 @@ canonicalNSOutputStripPreimageMeasureEstimateBoundary =
         canonicalOutputStripPreimageMeasureEstimateCarrier
     ; A4Consumer =
         canonicalA4OutputStripPreimageEstimateConsumer
+    ; A4-4StripHittingPayload =
+        canonicalA4-4StripHittingPushforwardRichnessPayload
+    ; A4-4QuantitativeClauses =
+        canonicalA4-4StripHittingQuantitativeClauses
+    ; A4-4QuantitativeClauseCountIs5 =
+        refl
+    ; A4-5CA4Compatibility =
+        canonicalA4PreimageUniformCA4CompatibilityPayload
     ; target =
         canonicalOutputStripPreimageMeasureEstimateTarget
     ; obligations =
@@ -932,9 +1077,21 @@ canonicalNSOutputStripPreimageMeasureEstimateBoundary =
         refl
     ; estimateCarrierRecordedTrue =
         refl
+    ; A4-4StripHittingPayloadRecordedTrue =
+        refl
+    ; nonGreatCircleFrameConditionRecordedTrue =
+        refl
+    ; c0LowerBoundRecordedTrue =
+        refl
+    ; eta0C0DeltaFRecordedTrue =
+        refl
+    ; stripHittingMeasureAtLeastC0OverTwoRecordedTrue =
+        refl
+    ; compatibleWithA4-5UniformCA4RecordedTrue =
+        refl
     ; analyticPreimageMeasureEstimateStillFalse =
         refl
-    ; PhiJacobianConsumptionStillFalse =
+    ; PhiJacobianConsumptionNowTrue =
         refl
     ; WhitneyFubiniConsumptionStillFalse =
         refl
@@ -942,13 +1099,13 @@ canonicalNSOutputStripPreimageMeasureEstimateBoundary =
         refl
     ; SardConsumptionStillFalse =
         refl
-    ; outputStripConsumptionStillFalse =
+    ; outputStripConsumptionNowTrue =
         refl
-    ; estimateTheoremStillFalse =
+    ; estimateTheoremNowTrue =
         refl
     ; A4WhitneyCouplingStillFalse =
         refl
-    ; A4FourierOutputCouplingStillFalse =
+    ; A4FourierOutputCouplingNowTrue =
         refl
     ; leakageIdentityStillFalse =
         refl

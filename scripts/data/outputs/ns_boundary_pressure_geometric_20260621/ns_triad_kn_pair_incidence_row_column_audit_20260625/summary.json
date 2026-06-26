@@ -1,0 +1,998 @@
+{
+  "adversarial_family": {
+    "column_active_count_fit": {
+      "C": 1.0974709468499626,
+      "decay_exponent_if_y_decays": -3.403412565180396,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 476.0
+        },
+        {
+          "x": 8.0,
+          "y": 1363.0
+        },
+        {
+          "x": 10.0,
+          "y": 2758.0
+        },
+        {
+          "x": 12.0,
+          "y": 5095.0
+        }
+      ],
+      "slope": 3.403412565180396
+    },
+    "column_decomposition_rows": [
+      {
+        "N": 6,
+        "worst_column_active_count": 476.0,
+        "worst_column_mean_active_entry": 3.7383697988458086e-06
+      },
+      {
+        "N": 8,
+        "worst_column_active_count": 1363.0,
+        "worst_column_mean_active_entry": 1.0143379108175929e-06
+      },
+      {
+        "N": 10,
+        "worst_column_active_count": 2758.0,
+        "worst_column_mean_active_entry": 4.0062854986975655e-07
+      },
+      {
+        "N": 12,
+        "worst_column_active_count": 5095.0,
+        "worst_column_mean_active_entry": 1.7986054955668835e-07
+      }
+    ],
+    "column_mean_active_entry_fit": {
+      "C": 0.009111523567083116,
+      "decay_exponent_if_y_decays": 4.361696419872384,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 3.7383697988458086e-06
+        },
+        {
+          "x": 8.0,
+          "y": 1.0143379108175929e-06
+        },
+        {
+          "x": 10.0,
+          "y": 4.0062854986975655e-07
+        },
+        {
+          "x": 12.0,
+          "y": 1.7986054955668835e-07
+        }
+      ],
+      "slope": -4.361696419872384
+    },
+    "column_scaled_stats": {
+      "N2_column_sum_sup": {
+        "count": 4,
+        "max": 0.13196008799875109,
+        "mean": 0.09874921789057299,
+        "min": 0.06406070487302178,
+        "relative_range": 0.6875941356919979,
+        "sample_stdev": 0.02915236094884493
+      },
+      "N_column_sum_sup": {
+        "count": 4,
+        "max": 0.011060340579555033,
+        "mean": 0.010945783532590618,
+        "min": 0.01067678414550363,
+        "relative_range": 0.03504147810975607,
+        "sample_stdev": 0.00018147251149866402
+      }
+    },
+    "column_sum_fit": {
+      "C": 0.009999632396412429,
+      "decay_exponent_if_y_decays": 0.9582838546919872,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 0.001779464024250605
+        },
+        {
+          "x": 8.0,
+          "y": 0.001382542572444379
+        },
+        {
+          "x": 10.0,
+          "y": 0.0011049335405407886
+        },
+        {
+          "x": 12.0,
+          "y": 0.0009163894999913271
+        }
+      ],
+      "slope": -0.9582838546919872
+    },
+    "family": "uniform_geometry_adversarial",
+    "row_active_count_fit": {
+      "fit_available": false,
+      "point_count": 0
+    },
+    "row_decomposition_rows": [
+      {
+        "N": 6
+      },
+      {
+        "N": 8
+      },
+      {
+        "N": 10
+      },
+      {
+        "N": 12
+      }
+    ],
+    "row_mean_active_entry_fit": {
+      "fit_available": false,
+      "point_count": 0
+    },
+    "row_scaled_stats": {
+      "N0_row_sum_sup": {
+        "count": 4,
+        "max": 0.004119224657014591,
+        "mean": 0.0022095970846059774,
+        "min": 0.0009711855405184119,
+        "relative_range": 1.4247118347631,
+        "sample_stdev": 0.0013871771618420516
+      },
+      "N2_row_sum_sup": {
+        "count": 4,
+        "max": 0.14829208765252527,
+        "mean": 0.1450130114078193,
+        "min": 0.1398507178346513,
+        "relative_range": 0.05821112006380137,
+        "sample_stdev": 0.0037908141745879856
+      }
+    },
+    "row_sum_fit": {
+      "C": 0.1728337360915966,
+      "decay_exponent_if_y_decays": 2.0811972121228446,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 0.004119224657014591
+        },
+        {
+          "x": 8.0,
+          "y": 0.002302460387360837
+        },
+        {
+          "x": 10.0,
+          "y": 0.0014455177535300703
+        },
+        {
+          "x": 12.0,
+          "y": 0.0009711855405184119
+        }
+      ],
+      "slope": -2.0811972121228446
+    },
+    "schur_bound_fit": {
+      "C": 0.04157251287346631,
+      "decay_exponent_if_y_decays": 1.5197405334074154,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 0.002707399505976815
+        },
+        {
+          "x": 8.0,
+          "y": 0.0017841663338638394
+        },
+        {
+          "x": 10.0,
+          "y": 0.001263804197382865
+        },
+        {
+          "x": 12.0,
+          "y": 0.00094338975607883
+        }
+      ],
+      "slope": -1.5197405334074154
+    }
+  },
+  "adversarial_rows": [
+    {
+      "K": 5,
+      "N": 6,
+      "N_times_schur_bound": 0.016244397035860888,
+      "candidate_only": true,
+      "column_sum_sup": 0.001779464024250605,
+      "positive_cross_edge_count": 735870,
+      "profile_id": "uniform_all_modes_geometry_sweep",
+      "profile_independent_certificate": false,
+      "profile_scope": "all selected shell modes carry equal probability mass",
+      "row_sum_sup": 0.004119224657014591,
+      "schur_bound": 0.002707399505976815,
+      "support_mode_count_for_worst_tail": 693,
+      "uniform_geometry_sweep": {
+        "K": 5,
+        "N": 6,
+        "N_times_schur_bound": 0.016244397035860888,
+        "candidate_only": true,
+        "column_sum_sup": 0.001779464024250605,
+        "positive_cross_edge_count": 735870,
+        "profile_id": "uniform_all_modes_geometry_sweep",
+        "profile_independent_certificate": false,
+        "profile_scope": "all selected shell modes carry equal probability mass",
+        "row_sum_sup": 0.004119224657014591,
+        "schur_bound": 0.002707399505976815,
+        "support_mode_count_for_worst_tail": 693,
+        "worst_core_mode": {
+          "mode_index": 168,
+          "mode_key": [
+            1,
+            0,
+            0
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "worst_tail_active_finite_k_count": 476,
+        "worst_tail_mode": {
+          "mode_index": 2092,
+          "mode_key": [
+            -1,
+            5,
+            0
+          ],
+          "shell_level": 5,
+          "shell_radius": 5.0
+        }
+      },
+      "worst_core_mode": {
+        "mode_index": 168,
+        "mode_key": [
+          1,
+          0,
+          0
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 476,
+      "worst_tail_mode": {
+        "mode_index": 2092,
+        "mode_key": [
+          -1,
+          5,
+          0
+        ],
+        "shell_level": 5,
+        "shell_radius": 5.0
+      }
+    },
+    {
+      "K": 7,
+      "N": 8,
+      "N_times_schur_bound": 0.014273330670910715,
+      "candidate_only": true,
+      "column_sum_sup": 0.001382542572444379,
+      "positive_cross_edge_count": 3638580,
+      "profile_id": "uniform_all_modes_geometry_sweep",
+      "profile_independent_certificate": false,
+      "profile_scope": "all selected shell modes carry equal probability mass",
+      "row_sum_sup": 0.002302460387360837,
+      "schur_bound": 0.0017841663338638394,
+      "support_mode_count_for_worst_tail": 2005,
+      "uniform_geometry_sweep": {
+        "K": 7,
+        "N": 8,
+        "N_times_schur_bound": 0.014273330670910715,
+        "candidate_only": true,
+        "column_sum_sup": 0.001382542572444379,
+        "positive_cross_edge_count": 3638580,
+        "profile_id": "uniform_all_modes_geometry_sweep",
+        "profile_independent_certificate": false,
+        "profile_scope": "all selected shell modes carry equal probability mass",
+        "row_sum_sup": 0.002302460387360837,
+        "schur_bound": 0.0017841663338638394,
+        "support_mode_count_for_worst_tail": 2005,
+        "worst_core_mode": {
+          "mode_index": 15,
+          "mode_key": [
+            0,
+            0,
+            -1
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "worst_tail_active_finite_k_count": 1363,
+        "worst_tail_mode": {
+          "mode_index": 3146,
+          "mode_key": [
+            -7,
+            -2,
+            2
+          ],
+          "shell_level": 7,
+          "shell_radius": 7.0
+        }
+      },
+      "worst_core_mode": {
+        "mode_index": 15,
+        "mode_key": [
+          0,
+          0,
+          -1
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 1363,
+      "worst_tail_mode": {
+        "mode_index": 3146,
+        "mode_key": [
+          -7,
+          -2,
+          2
+        ],
+        "shell_level": 7,
+        "shell_radius": 7.0
+      }
+    },
+    {
+      "K": 9,
+      "N": 10,
+      "N_times_schur_bound": 0.012638041973828649,
+      "candidate_only": true,
+      "column_sum_sup": 0.0011049335405407886,
+      "positive_cross_edge_count": 12098790,
+      "profile_id": "uniform_all_modes_geometry_sweep",
+      "profile_independent_certificate": false,
+      "profile_scope": "all selected shell modes carry equal probability mass",
+      "row_sum_sup": 0.0014455177535300703,
+      "schur_bound": 0.001263804197382865,
+      "support_mode_count_for_worst_tail": 3740,
+      "uniform_geometry_sweep": {
+        "K": 9,
+        "N": 10,
+        "N_times_schur_bound": 0.012638041973828649,
+        "candidate_only": true,
+        "column_sum_sup": 0.0011049335405407886,
+        "positive_cross_edge_count": 12098790,
+        "profile_id": "uniform_all_modes_geometry_sweep",
+        "profile_independent_certificate": false,
+        "profile_scope": "all selected shell modes carry equal probability mass",
+        "row_sum_sup": 0.0014455177535300703,
+        "schur_bound": 0.001263804197382865,
+        "support_mode_count_for_worst_tail": 3740,
+        "worst_core_mode": {
+          "mode_index": 419,
+          "mode_key": [
+            0,
+            -1,
+            0
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "worst_tail_active_finite_k_count": 2758,
+        "worst_tail_mode": {
+          "mode_index": 5730,
+          "mode_key": [
+            -9,
+            -1,
+            -2
+          ],
+          "shell_level": 9,
+          "shell_radius": 9.0
+        }
+      },
+      "worst_core_mode": {
+        "mode_index": 419,
+        "mode_key": [
+          0,
+          -1,
+          0
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 2758,
+      "worst_tail_mode": {
+        "mode_index": 5730,
+        "mode_key": [
+          -9,
+          -1,
+          -2
+        ],
+        "shell_level": 9,
+        "shell_radius": 9.0
+      }
+    },
+    {
+      "K": 11,
+      "N": 12,
+      "N_times_schur_bound": 0.01132067707294596,
+      "candidate_only": true,
+      "column_sum_sup": 0.0009163894999913271,
+      "positive_cross_edge_count": 31842188,
+      "profile_id": "uniform_all_modes_geometry_sweep",
+      "profile_independent_certificate": false,
+      "profile_scope": "all selected shell modes carry equal probability mass",
+      "row_sum_sup": 0.0009711855405184119,
+      "schur_bound": 0.00094338975607883,
+      "support_mode_count_for_worst_tail": 6625,
+      "uniform_geometry_sweep": {
+        "K": 11,
+        "N": 12,
+        "N_times_schur_bound": 0.01132067707294596,
+        "candidate_only": true,
+        "column_sum_sup": 0.0009163894999913271,
+        "positive_cross_edge_count": 31842188,
+        "profile_id": "uniform_all_modes_geometry_sweep",
+        "profile_independent_certificate": false,
+        "profile_scope": "all selected shell modes carry equal probability mass",
+        "row_sum_sup": 0.0009711855405184119,
+        "schur_bound": 0.00094338975607883,
+        "support_mode_count_for_worst_tail": 6625,
+        "worst_core_mode": {
+          "mode_index": 599,
+          "mode_key": [
+            0,
+            -1,
+            0
+          ],
+          "shell_level": 1,
+          "shell_radius": 1.0
+        },
+        "worst_tail_active_finite_k_count": 5095,
+        "worst_tail_mode": {
+          "mode_index": 688,
+          "mode_key": [
+            1,
+            2,
+            -11
+          ],
+          "shell_level": 11,
+          "shell_radius": 11.0
+        }
+      },
+      "worst_core_mode": {
+        "mode_index": 599,
+        "mode_key": [
+          0,
+          -1,
+          0
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 5095,
+      "worst_tail_mode": {
+        "mode_index": 688,
+        "mode_key": [
+          1,
+          2,
+          -11
+        ],
+        "shell_level": 11,
+        "shell_radius": 11.0
+      }
+    }
+  ],
+  "analysis_read": "Row/column audit readout: under the checked exact-script normalization, the forced-tail family has row_sum_sup ~ N^0.022 and column_sum_sup ~ N^-1.842, while the uniform-geometry adversarial family has row_sum_sup ~ N^-2.081 and column_sum_sup ~ N^-0.958. So the current data does not support the alternate claim that the exact-script column supremum is O(1) for the canonical checked object. Instead, the forced-tail rows are carried by a nearly constant worst-row mass with active-count slope 2.143 and mean-active-entry slope -2.121, while the forced-tail columns are carried by an almost constant worst-column incidence count with slope 0.249 and a decaying mean-active-entry slope -2.091. This preserves the sampled N^-1 Schur scale but does not by itself prove a profile-independent C/N theorem.",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "bkm_exclusion_proved": false,
+  "candidate_only": true,
+  "clay_promoted": false,
+  "contract": "ns_triad_kn_pair_incidence_row_column_audit",
+  "control_card": {
+    "C": "scripts/ns_triad_kn_pair_incidence_row_column_audit.py",
+    "F": "The live gap is a profile-independent row/column theorem for the exact scripted operator under the checked normalization.",
+    "G": "Record the true normalization and any profile asymmetry explicitly rather than overclaiming a theorem.",
+    "L": "exact scripted summary -> row/column fits -> incidence decomposition -> Gate 1 verdict",
+    "O": "Audit the exact scripted pair-incidence row/column control using the canonical exact-object summary.",
+    "P": "FAIL_CLOSED_NS_TRIAD_KN_PAIR_INCIDENCE_ROW_COLUMN_AUDIT",
+    "R": "Read the exact pair-incidence proof artifact, derive the row/column power-law fits and incidence decompositions, and decide whether the current evidence supports or blocks a profile-independent C/N theorem.",
+    "S": "Fail-closed analytic audit only; no theorem, full-NS, BKM, or Clay promotion."
+  },
+  "elapsed_ms": 0.978,
+  "exact_script_constant_column_claim_validated": false,
+  "fail_closed": true,
+  "finished_at": "2026-06-25T00:45:33.067900+00:00",
+  "forced_tail_family": {
+    "column_active_count_fit": {
+      "C": 12.75806217269034,
+      "decay_exponent_if_y_decays": -0.24899254467835896,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 20.0
+        },
+        {
+          "x": 8.0,
+          "y": 20.0
+        },
+        {
+          "x": 10.0,
+          "y": 26.0
+        },
+        {
+          "x": 12.0,
+          "y": 22.0
+        }
+      ],
+      "slope": 0.24899254467835896
+    },
+    "column_decomposition_rows": [
+      {
+        "N": 6,
+        "worst_column_active_count": 20.0,
+        "worst_column_mean_active_entry": 1.704296753185578e-05
+      },
+      {
+        "N": 8,
+        "worst_column_active_count": 20.0,
+        "worst_column_mean_active_entry": 9.502424584871744e-06
+      },
+      {
+        "N": 10,
+        "worst_column_active_count": 26.0,
+        "worst_column_mean_active_entry": 5.380124121222523e-06
+      },
+      {
+        "N": 12,
+        "worst_column_active_count": 22.0,
+        "worst_column_mean_active_entry": 4.168606078194708e-06
+      }
+    ],
+    "column_mean_active_entry_fit": {
+      "C": 0.0007173964949037822,
+      "decay_exponent_if_y_decays": 2.090955001925133,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 1.704296753185578e-05
+        },
+        {
+          "x": 8.0,
+          "y": 9.502424584871744e-06
+        },
+        {
+          "x": 10.0,
+          "y": 5.380124121222523e-06
+        },
+        {
+          "x": 12.0,
+          "y": 4.168606078194708e-06
+        }
+      ],
+      "slope": -2.090955001925133
+    },
+    "column_scaled_stats": {
+      "N2_column_sum_sup": {
+        "count": 4,
+        "max": 0.01398832271517856,
+        "mean": 0.012907126715617848,
+        "min": 0.012163103468635831,
+        "relative_range": 0.14141173994473777,
+        "sample_stdev": 0.000859593815943388
+      },
+      "N_column_sum_sup": {
+        "count": 4,
+        "max": 0.0020451561038226937,
+        "mean": 0.0015162220783908578,
+        "min": 0.001100512004643403,
+        "relative_range": 0.6230248936764108,
+        "sample_stdev": 0.0003942857634515748
+      }
+    },
+    "column_sum_fit": {
+      "C": 0.009152589084452597,
+      "decay_exponent_if_y_decays": 1.8419624572467745,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 0.00034085935063711564
+        },
+        {
+          "x": 8.0,
+          "y": 0.00019004849169743486
+        },
+        {
+          "x": 10.0,
+          "y": 0.0001398832271517856
+        },
+        {
+          "x": 12.0,
+          "y": 9.170933372028357e-05
+        }
+      ],
+      "slope": -1.8419624572467745
+    },
+    "family": "forced_tail",
+    "row_active_count_fit": {
+      "C": 21.058357942203052,
+      "decay_exponent_if_y_decays": -2.143299503152076,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 977.0
+        },
+        {
+          "x": 8.0,
+          "y": 1810.0
+        },
+        {
+          "x": 10.0,
+          "y": 2984.0
+        },
+        {
+          "x": 12.0,
+          "y": 4276.0
+        }
+      ],
+      "slope": 2.143299503152076
+    },
+    "row_decomposition_rows": [
+      {
+        "N": 6,
+        "worst_row_active_count": 977.0,
+        "worst_row_mean_active_entry": 1.1739115482520321e-05
+      },
+      {
+        "N": 8,
+        "worst_row_active_count": 1810.0,
+        "worst_row_mean_active_entry": 6.352659557984377e-06
+      },
+      {
+        "N": 10,
+        "worst_row_active_count": 2984.0,
+        "worst_row_mean_active_entry": 3.907060889995709e-06
+      },
+      {
+        "N": 12,
+        "worst_row_active_count": 4276.0,
+        "worst_row_mean_active_entry": 2.715172857114675e-06
+      }
+    ],
+    "row_mean_active_entry_fit": {
+      "C": 0.0005231030657366325,
+      "decay_exponent_if_y_decays": 2.12106763971217,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 1.1739115482520321e-05
+        },
+        {
+          "x": 8.0,
+          "y": 6.352659557984377e-06
+        },
+        {
+          "x": 10.0,
+          "y": 3.907060889995709e-06
+        },
+        {
+          "x": 12.0,
+          "y": 2.715172857114675e-06
+        }
+      ],
+      "slope": -2.12106763971217
+    },
+    "row_scaled_stats": {
+      "N0_row_sum_sup": {
+        "count": 4,
+        "max": 0.011658669695747196,
+        "mean": 0.011559044614785905,
+        "min": 0.011469115826422354,
+        "relative_range": 0.01639874882759525,
+        "sample_stdev": 9.000944036304578e-05
+      },
+      "N2_row_sum_sup": {
+        "count": 4,
+        "max": 1.6718513957312184,
+        "mean": 0.9966246545635132,
+        "min": 0.41288816975120474,
+        "relative_range": 1.2632270536508006,
+        "sample_stdev": 0.5456811861184095
+      }
+    },
+    "row_sum_fit": {
+      "C": 0.011015691598945762,
+      "decay_exponent_if_y_decays": -0.022231863439906754,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 0.011469115826422354
+        },
+        {
+          "x": 8.0,
+          "y": 0.011498313799951723
+        },
+        {
+          "x": 10.0,
+          "y": 0.011658669695747196
+        },
+        {
+          "x": 12.0,
+          "y": 0.01161007913702235
+        }
+      ],
+      "slope": 0.022231863439906754
+    },
+    "schur_bound_fit": {
+      "C": 0.010041020799012793,
+      "decay_exponent_if_y_decays": 0.9098652969034343,
+      "fit_available": true,
+      "point_count": 4,
+      "points": [
+        {
+          "x": 6.0,
+          "y": 0.0019772089856603904
+        },
+        {
+          "x": 8.0,
+          "y": 0.0014782547800513367
+        },
+        {
+          "x": 10.0,
+          "y": 0.0012770482924846045
+        },
+        {
+          "x": 12.0,
+          "y": 0.0010318685100806618
+        }
+      ],
+      "slope": -0.9098652969034343
+    }
+  },
+  "forced_tail_rows": [
+    {
+      "D": 8.62227520435967,
+      "D_q_gap": 0.004557249030978871,
+      "K": 5,
+      "N": 6,
+      "N2_q_gap": 0.019027572331753617,
+      "N_squared_times_column_sum_sup": 0.012270936622936162,
+      "N_times_schur_bound": 0.011863253913962342,
+      "column_sum_sup": 0.00034085935063711564,
+      "core_mode_count": 728,
+      "cross_edge_count": 38868,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.23831255403534013,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_20260624/shell6_K5_eta250.json",
+      "max_cross_entry_abs": 9.64132338831123e-06,
+      "profile_id": "forced_tail_K5_eta_0.250",
+      "q_gap": 0.0005285436758820449,
+      "row_sum_sup": 0.011469115826422354,
+      "schur_bound": 0.0019772089856603904,
+      "schur_bound_squared": 3.90935537297619e-06,
+      "tail_mode_count": 1468,
+      "worst_core_active_tail_count": 977,
+      "worst_core_mode": {
+        "mode_index": 168,
+        "mode_key": [
+          1,
+          0,
+          0
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 20,
+      "worst_tail_mode": {
+        "mode_index": 992,
+        "mode_key": [
+          5,
+          -2,
+          5
+        ],
+        "shell_level": 5,
+        "shell_radius": 5.0
+      }
+    },
+    {
+      "D": 15.123527245949925,
+      "D_q_gap": 0.004095172011266396,
+      "K": 7,
+      "N": 8,
+      "N2_q_gap": 0.01733001861660528,
+      "N_squared_times_column_sum_sup": 0.012163103468635831,
+      "N_times_schur_bound": 0.011826038240410694,
+      "column_sum_sup": 0.00019004849169743486,
+      "core_mode_count": 2196,
+      "cross_edge_count": 71208,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.23468265308453265,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_20260624/shell8_K7_eta250.json",
+      "max_cross_entry_abs": 5.211142452904807e-06,
+      "profile_id": "forced_tail_K7_eta_0.250",
+      "q_gap": 0.0002707815408844575,
+      "row_sum_sup": 0.011498313799951723,
+      "schur_bound": 0.0014782547800513367,
+      "schur_bound_squared": 2.1852371947446257e-06,
+      "tail_mode_count": 2716,
+      "worst_core_active_tail_count": 1810,
+      "worst_core_mode": {
+        "mode_index": 15,
+        "mode_key": [
+          0,
+          0,
+          -1
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 20,
+      "worst_tail_mode": {
+        "mode_index": 485,
+        "mode_key": [
+          1,
+          -6,
+          -7
+        ],
+        "shell_level": 7,
+        "shell_radius": 7.0
+      }
+    },
+    {
+      "D": 23.624080036798535,
+      "D_q_gap": 0.0041093953784676895,
+      "K": 9,
+      "N": 10,
+      "N2_q_gap": 0.01739494351554264,
+      "N_squared_times_column_sum_sup": 0.01398832271517856,
+      "N_times_schur_bound": 0.012770482924846045,
+      "column_sum_sup": 0.0001398832271517856,
+      "core_mode_count": 4912,
+      "cross_edge_count": 114030,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.2372186220049377,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_20260624/shell10_K9_eta250.json",
+      "max_cross_entry_abs": 3.2551662652048063e-06,
+      "profile_id": "forced_tail_K9_eta_0.250",
+      "q_gap": 0.00017394943515542638,
+      "row_sum_sup": 0.011658669695747196,
+      "schur_bound": 0.0012770482924846045,
+      "schur_bound_squared": 1.6308523413378441e-06,
+      "tail_mode_count": 4348,
+      "worst_core_active_tail_count": 2984,
+      "worst_core_mode": {
+        "mode_index": 0,
+        "mode_key": [
+          0,
+          0,
+          1
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 26,
+      "worst_tail_mode": {
+        "mode_index": 3788,
+        "mode_key": [
+          8,
+          -9,
+          9
+        ],
+        "shell_level": 9,
+        "shell_radius": 9.0
+      }
+    },
+    {
+      "D": 34.124371464487744,
+      "D_q_gap": 0.0038749044553088806,
+      "K": 11,
+      "N": 12,
+      "N2_q_gap": 0.016351546347019436,
+      "N_squared_times_column_sum_sup": 0.013206144055720834,
+      "N_times_schur_bound": 0.012382422120967941,
+      "column_sum_sup": 9.170933372028357e-05,
+      "core_mode_count": 9260,
+      "cross_edge_count": 164598,
+      "cross_entry_sign": "nonpositive",
+      "cross_weight_total": 0.23398605177746845,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_shell12_20260624/shell12_K11_eta250.json",
+      "max_cross_entry_abs": 2.2239884700022058e-06,
+      "profile_id": "forced_tail_K11_eta_0.250",
+      "q_gap": 0.00011355240518763496,
+      "row_sum_sup": 0.01161007913702235,
+      "schur_bound": 0.0010318685100806618,
+      "schur_bound_squared": 1.0647526220960847e-06,
+      "tail_mode_count": 6364,
+      "worst_core_active_tail_count": 4276,
+      "worst_core_mode": {
+        "mode_index": 599,
+        "mode_key": [
+          0,
+          -1,
+          0
+        ],
+        "shell_level": 1,
+        "shell_radius": 1.0
+      },
+      "worst_tail_active_finite_k_count": 22,
+      "worst_tail_mode": {
+        "mode_index": 7260,
+        "mode_key": [
+          11,
+          -10,
+          11
+        ],
+        "shell_level": 11,
+        "shell_radius": 11.0
+      }
+    }
+  ],
+  "full_ns_promoted": false,
+  "log_entries": [
+    {
+      "at": "2026-06-25T00:45:33.066948+00:00",
+      "elapsed_ms": 0.024,
+      "input_summary": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_pair_incidence_operator_proof_20260624/summary.json",
+      "message": "started pair-incidence row/column audit"
+    },
+    {
+      "adversarial_row_count": 4,
+      "at": "2026-06-25T00:45:33.067193+00:00",
+      "elapsed_ms": 0.271,
+      "forced_tail_row_count": 4,
+      "message": "loaded exact-script rows"
+    },
+    {
+      "adversarial_column_slope": -0.9582838546919872,
+      "adversarial_row_slope": -2.0811972121228446,
+      "at": "2026-06-25T00:45:33.067359+00:00",
+      "elapsed_ms": 0.437,
+      "forced_column_slope": -1.8419624572467745,
+      "forced_row_slope": 0.022231863439906754,
+      "message": "derived family decompositions"
+    },
+    {
+      "at": "2026-06-25T00:45:33.067900+00:00",
+      "elapsed_ms": 0.978,
+      "message": "wrote row/column audit artifacts",
+      "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_pair_incidence_row_column_audit_20260625/summary.json",
+      "output_md": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_pair_incidence_row_column_audit_20260625/summary.md"
+    }
+  ],
+  "pair_incidence_status": "ok",
+  "pair_incidence_summary": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_pair_incidence_operator_proof_20260624/summary.json",
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_PAIR_INCIDENCE_ROW_COLUMN_AUDIT",
+  "schema_version": "1.0.0",
+  "script_name": "scripts/ns_triad_kn_pair_incidence_row_column_audit.py",
+  "started_at": "2026-06-25T00:45:33.066929+00:00",
+  "status": "ok",
+  "terminal_promoted": false,
+  "theorem_promoted": false,
+  "uniform_profile_independent_bound_closed": false
+}

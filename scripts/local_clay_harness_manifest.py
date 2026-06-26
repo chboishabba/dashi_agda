@@ -371,6 +371,454 @@ def build_specs() -> list[HarnessSpec]:
     ns_paper_submission_packet_out = (
         CHILD_OUT_DIR / "ns_paper_submission_packet_smoke.json"
     )
+    ns_boundary_component_lambda3_out = (
+        CHILD_OUT_DIR / "ns_boundary_component_lambda3_diagnostic_smoke.json"
+    )
+    ns_boundary_f123_absorption_out = (
+        CHILD_OUT_DIR / "ns_boundary_f123_absorption_diagnostic_smoke.json"
+    )
+    ns_boundary_corrected_gronwall_margin_out = (
+        CHILD_OUT_DIR / "ns_boundary_corrected_gronwall_margin_smoke.json"
+    )
+    ns_boundary_timeseries_margin_summary_out = (
+        CHILD_OUT_DIR / "ns_boundary_timeseries_margin_summary_smoke.json"
+    )
+    ns_boundary_gronwall_margin_regression_out = (
+        CHILD_OUT_DIR / "ns_boundary_gronwall_margin_regression_smoke.json"
+    )
+    ns_boundary_theoremg_cancellation_margin_out = (
+        CHILD_OUT_DIR / "ns_boundary_theoremg_cancellation_margin_smoke.json"
+    )
+    ns_boundary_cancellation_margin_regression_out = (
+        CHILD_OUT_DIR / "ns_boundary_cancellation_margin_regression_smoke.json"
+    )
+    ns_boundary_pressure_poisson_bypass_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_poisson_bypass_smoke.json"
+    )
+    ns_boundary_geometric_concentration_out = (
+        CHILD_OUT_DIR / "ns_boundary_geometric_concentration_smoke.json"
+    )
+    ns_boundary_pressure_geometric_regression_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_geometric_regression_smoke.json"
+    )
+    ns_boundary_g12_bounds_out = (
+        CHILD_OUT_DIR / "ns_boundary_g12_bounds_smoke.json"
+    )
+    ns_calc7_reynolds_boundary_scan_out = (
+        CHILD_OUT_DIR / "ns_calc7_reynolds_boundary_scan_smoke.json"
+    )
+    ns_betchov_identity_scan_out = (
+        CHILD_OUT_DIR / "ns_betchov_identity_scan_smoke.json"
+    )
+    ns_betchov_determinant_sign_scan_out = (
+        CHILD_OUT_DIR / "ns_betchov_determinant_sign_scan_smoke.json"
+    )
+    ns_det_omega_k_measure_scan_out = (
+        CHILD_OUT_DIR / "ns_det_omega_k_measure_scan_smoke.json"
+    )
+    ns_vorticity_alignment_obstruction_scan_out = (
+        CHILD_OUT_DIR / "ns_vorticity_alignment_obstruction_scan_smoke.json"
+    )
+    ns_alignment_gap_bin_scan_out = (
+        CHILD_OUT_DIR / "ns_alignment_gap_bin_scan_smoke.json"
+    )
+    ns_pressure_eigenframe_gap_scan_out = (
+        CHILD_OUT_DIR / "ns_pressure_eigenframe_gap_scan_smoke.json"
+    )
+    ns_boundary_pressure_gate_scan_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_gate_scan_smoke.json"
+    )
+    ns_compressive_pi_decomposition_scan_out = (
+        CHILD_OUT_DIR / "ns_compressive_pi_decomposition_scan_smoke.json"
+    )
+    ns_alignment_pressure_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_alignment_pressure_bridge_summary_smoke.json"
+    )
+    ns_boundary_pressure_q_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_q_bridge_summary_smoke.json"
+    )
+    ns_orbit_phase_coherence_scan_out = (
+        CHILD_OUT_DIR / "ns_orbit_phase_coherence_scan_smoke.json"
+    )
+    ns_non_sobolev_coherence_gate_scan_out = (
+        CHILD_OUT_DIR / "ns_non_sobolev_coherence_gate_scan_smoke.json"
+    )
+    ns_sacasa_kiriukhin_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_sacasa_kiriukhin_bridge_summary_smoke.json"
+    )
+    ns_triad_incidence_cocycle_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_incidence_cocycle_scan_smoke.json"
+    )
+    ns_triad_frustration_defect_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_frustration_defect_scan_smoke.json"
+    )
+    ns_adversarial_phase_reference_scan_out = (
+        CHILD_OUT_DIR / "ns_adversarial_phase_reference_scan_smoke.json"
+    )
+    ns_triad_frustration_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_triad_frustration_bridge_summary_smoke.json"
+    )
+    ns_triad_phase_laplacian_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_phase_laplacian_scan_smoke.json"
+    )
+    ns_low_frustration_basin_scan_out = (
+        CHILD_OUT_DIR / "ns_low_frustration_basin_scan_smoke.json"
+    )
+    ns_triad_entropy_residence_summary_out = (
+        CHILD_OUT_DIR / "ns_triad_entropy_residence_summary_smoke.json"
+    )
+    ns_triad_cycle_obstruction_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_cycle_obstruction_scan_smoke.json"
+    )
+    ns_triad_low_frustration_hessian_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_low_frustration_hessian_scan_smoke.json"
+    )
+    ns_triad_phase_regime_separation_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_phase_regime_separation_scan_smoke.json"
+    )
+    ns_triad_frame_stability_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_frame_stability_scan_smoke.json"
+    )
+    ns_triad_cocycle_floor_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_cocycle_floor_scan_smoke.json"
+    )
+    ns_triad_cycle_family_lower_bound_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_cycle_family_lower_bound_scan_smoke.json"
+    )
+    ns_triad_cycle_packing_overlap_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_cycle_packing_overlap_scan_smoke.json"
+    )
+    ns_triad_cycle_packing_overlap_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_cycle_packing_overlap_scan_check_smoke.json"
+    )
+    ns_triad_k01_geometry_audit_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_k01_geometry_audit_scan_smoke.json"
+    )
+    ns_triad_k01_geometry_audit_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_k01_geometry_audit_scan_check_smoke.json"
+    )
+    ns_triad_schur_directional_audit_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_schur_directional_audit_scan_smoke.json"
+    )
+    ns_triad_signed_carrier_reconciliation_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_carrier_reconciliation_scan_smoke.json"
+    )
+    ns_triad_signed_carrier_reconciliation_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_carrier_reconciliation_scan_check_smoke.json"
+    )
+    ns_triad_wall1_carrier_explanatory_rank_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_wall1_carrier_explanatory_rank_scan_smoke.json"
+    )
+    ns_triad_wall1_carrier_explanatory_rank_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_wall1_carrier_explanatory_rank_scan_check_smoke.json"
+    )
+    ns_triad_continuous_coherence_capacity_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_continuous_coherence_capacity_scan_smoke.json"
+    )
+    ns_triad_continuous_coherence_capacity_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_continuous_coherence_capacity_scan_check_smoke.json"
+    )
+    ns_triad_amplitude_weighted_negative_frame_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_amplitude_weighted_negative_frame_scan_smoke.json"
+    )
+    ns_triad_amplitude_weighted_negative_frame_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_amplitude_weighted_negative_frame_scan_check_smoke.json"
+    )
+    ns_triad_no_triple_danger_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_no_triple_danger_scan_smoke.json"
+    )
+    ns_triad_no_triple_danger_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_no_triple_danger_scan_check_smoke.json"
+    )
+    ns_triad_energy_budgeted_fork_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_energy_budgeted_fork_scan_smoke.json"
+    )
+    ns_triad_energy_budgeted_fork_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_energy_budgeted_fork_scan_check_smoke.json"
+    )
+    ns_triad_spectral_sharpness_square_wave_stack_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_spectral_sharpness_square_wave_stack_scan_smoke.json"
+    )
+    ns_triad_spectral_sharpness_square_wave_stack_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_spectral_sharpness_square_wave_stack_scan_check_smoke.json"
+    )
+    ns_triad_kn_exact_identity_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_kn_exact_identity_scan_smoke.json"
+    )
+    ns_triad_kn_exact_identity_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_kn_exact_identity_scan_check_smoke.json"
+    )
+    ns_triad_signed_xor_gaugeability_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_xor_gaugeability_scan_smoke.json"
+    )
+    ns_triad_signed_spectral_audit_scan_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_spectral_audit_scan_smoke.json"
+    )
+    ns_triad_signed_wall1_theorem_status_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_wall1_theorem_status_smoke.json"
+    )
+    ns_triad_wall1_shell_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_triad_wall1_shell_bridge_summary_smoke.json"
+    )
+    ns_tube_morphology_scan_out = (
+        CHILD_OUT_DIR / "ns_tube_morphology_scan_smoke.json"
+    )
+    ns_boundary_helicity_q_scan_out = (
+        CHILD_OUT_DIR / "ns_boundary_helicity_q_scan_smoke.json"
+    )
+    ns_tube_pressure_helicity_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_tube_pressure_helicity_bridge_summary_smoke.json"
+    )
+    ns_case_a_transition_shell_scan_out = (
+        CHILD_OUT_DIR / "ns_case_a_transition_shell_scan_smoke.json"
+    )
+    ns_boundary_delta1_uniformity_scan_out = (
+        CHILD_OUT_DIR / "ns_boundary_delta1_uniformity_scan_smoke.json"
+    )
+    ns_case_a_geometric_bridge_summary_out = (
+        CHILD_OUT_DIR / "ns_case_a_geometric_bridge_summary_smoke.json"
+    )
+    ns_interior_vorticity_budget_out = (
+        CHILD_OUT_DIR / "ns_interior_vorticity_budget_smoke.json"
+    )
+    ns_omega_l3_timeseries_out = (
+        CHILD_OUT_DIR / "ns_omega_l3_timeseries_smoke.json"
+    )
+    ns_layer_l2_vorticity_fraction_out = (
+        CHILD_OUT_DIR / "ns_layer_l2_vorticity_fraction_smoke.json"
+    )
+    ns_layer_l2_vorticity_fraction_summary_out = (
+        CHILD_OUT_DIR / "ns_layer_l2_vorticity_fraction_summary_smoke.json"
+    )
+    ns_layer_l2_vorticity_fraction_regression_out = (
+        CHILD_OUT_DIR / "ns_layer_l2_vorticity_fraction_regression_smoke.json"
+    )
+    ns_shahmurov_two_paper_claim_intake_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSShahmurovTwoPaperClaimIntakeReceipt.agda"
+    )
+    ns_weighted_lambda2_carrier_quantile_out = (
+        CHILD_OUT_DIR / "ns_weighted_lambda2_carrier_quantile_smoke.json"
+    )
+    ns_weighted_lambda2_carrier_quantile_regression_out = (
+        CHILD_OUT_DIR / "ns_weighted_lambda2_carrier_quantile_regression_smoke.json"
+    )
+    ns_weighted_lambda2_carrier_quantile_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSWeightedLambda2CarrierQuantileReceipt.agda"
+    )
+    ns_lambda2_signed_region_partition_out = (
+        CHILD_OUT_DIR / "ns_lambda2_signed_region_partition_smoke.json"
+    )
+    ns_lambda2_signed_region_partition_regression_out = (
+        CHILD_OUT_DIR / "ns_lambda2_signed_region_partition_regression_smoke.json"
+    )
+    ns_lambda2_carrier_route_summary_out = (
+        CHILD_OUT_DIR / "ns_lambda2_carrier_route_summary_smoke.json"
+    )
+    ns_calc7_reynolds_boundary_scan_check_out = (
+        CHILD_OUT_DIR / "ns_calc7_reynolds_boundary_scan_check_smoke.json"
+    )
+    ns_betchov_identity_scan_check_out = (
+        CHILD_OUT_DIR / "ns_betchov_identity_scan_check_smoke.json"
+    )
+    ns_betchov_determinant_sign_scan_check_out = (
+        CHILD_OUT_DIR / "ns_betchov_determinant_sign_scan_check_smoke.json"
+    )
+    ns_det_omega_k_measure_scan_check_out = (
+        CHILD_OUT_DIR / "ns_det_omega_k_measure_scan_check_smoke.json"
+    )
+    ns_vorticity_alignment_obstruction_scan_check_out = (
+        CHILD_OUT_DIR / "ns_vorticity_alignment_obstruction_scan_check_smoke.json"
+    )
+    ns_alignment_gap_bin_scan_check_out = (
+        CHILD_OUT_DIR / "ns_alignment_gap_bin_scan_check_smoke.json"
+    )
+    ns_pressure_eigenframe_gap_scan_check_out = (
+        CHILD_OUT_DIR / "ns_pressure_eigenframe_gap_scan_check_smoke.json"
+    )
+    ns_boundary_pressure_gate_scan_check_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_gate_scan_check_smoke.json"
+    )
+    ns_compressive_pi_decomposition_scan_check_out = (
+        CHILD_OUT_DIR / "ns_compressive_pi_decomposition_scan_check_smoke.json"
+    )
+    ns_alignment_pressure_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_alignment_pressure_bridge_summary_check_smoke.json"
+    )
+    ns_boundary_pressure_q_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_boundary_pressure_q_bridge_summary_check_smoke.json"
+    )
+    ns_orbit_phase_coherence_scan_check_out = (
+        CHILD_OUT_DIR / "ns_orbit_phase_coherence_scan_check_smoke.json"
+    )
+    ns_non_sobolev_coherence_gate_scan_check_out = (
+        CHILD_OUT_DIR / "ns_non_sobolev_coherence_gate_scan_check_smoke.json"
+    )
+    ns_sacasa_kiriukhin_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_sacasa_kiriukhin_bridge_summary_check_smoke.json"
+    )
+    ns_triad_incidence_cocycle_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_incidence_cocycle_scan_check_smoke.json"
+    )
+    ns_triad_frustration_defect_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_frustration_defect_scan_check_smoke.json"
+    )
+    ns_adversarial_phase_reference_scan_check_out = (
+        CHILD_OUT_DIR / "ns_adversarial_phase_reference_scan_check_smoke.json"
+    )
+    ns_triad_frustration_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_triad_frustration_bridge_summary_check_smoke.json"
+    )
+    ns_triad_phase_laplacian_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_phase_laplacian_scan_check_smoke.json"
+    )
+    ns_low_frustration_basin_scan_check_out = (
+        CHILD_OUT_DIR / "ns_low_frustration_basin_scan_check_smoke.json"
+    )
+    ns_triad_entropy_residence_summary_check_out = (
+        CHILD_OUT_DIR / "ns_triad_entropy_residence_summary_check_smoke.json"
+    )
+    ns_triad_cycle_obstruction_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_cycle_obstruction_scan_check_smoke.json"
+    )
+    ns_triad_low_frustration_hessian_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_low_frustration_hessian_scan_check_smoke.json"
+    )
+    ns_triad_phase_regime_separation_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_phase_regime_separation_scan_check_smoke.json"
+    )
+    ns_triad_frame_stability_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_frame_stability_scan_check_smoke.json"
+    )
+    ns_triad_cocycle_floor_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_cocycle_floor_scan_check_smoke.json"
+    )
+    ns_triad_cycle_family_lower_bound_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_cycle_family_lower_bound_scan_check_smoke.json"
+    )
+    ns_triad_schur_directional_audit_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_schur_directional_audit_scan_check_smoke.json"
+    )
+    ns_triad_signed_xor_gaugeability_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_xor_gaugeability_scan_check_smoke.json"
+    )
+    ns_triad_signed_spectral_audit_scan_check_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_spectral_audit_scan_check_smoke.json"
+    )
+    ns_triad_signed_wall1_theorem_status_check_out = (
+        CHILD_OUT_DIR / "ns_triad_signed_wall1_theorem_status_check_smoke.json"
+    )
+    ns_triad_wall1_shell_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_triad_wall1_shell_bridge_summary_check_smoke.json"
+    )
+    ns_tube_morphology_scan_check_out = (
+        CHILD_OUT_DIR / "ns_tube_morphology_scan_check_smoke.json"
+    )
+    ns_boundary_helicity_q_scan_check_out = (
+        CHILD_OUT_DIR / "ns_boundary_helicity_q_scan_check_smoke.json"
+    )
+    ns_tube_pressure_helicity_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_tube_pressure_helicity_bridge_summary_check_smoke.json"
+    )
+    ns_case_a_transition_shell_scan_check_out = (
+        CHILD_OUT_DIR / "ns_case_a_transition_shell_scan_check_smoke.json"
+    )
+    ns_boundary_delta1_uniformity_scan_check_out = (
+        CHILD_OUT_DIR / "ns_boundary_delta1_uniformity_scan_check_smoke.json"
+    )
+    ns_case_a_geometric_bridge_summary_check_out = (
+        CHILD_OUT_DIR / "ns_case_a_geometric_bridge_summary_check_smoke.json"
+    )
+    ns_lambda2_boundary_regularity_scan_out = (
+        CHILD_OUT_DIR / "ns_lambda2_boundary_regularity_scan_smoke.json"
+    )
+    ns_lambda2_boundary_regularity_scan_check_out = (
+        CHILD_OUT_DIR / "ns_lambda2_boundary_regularity_scan_check_smoke.json"
+    )
+    ns_broad_tube_serrin_lift_gap_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinLiftGapReceipt.agda"
+    )
+    ns_broad_tube_nondegenerate_gradient_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeNondegenerateGradientReceipt.agda"
+    )
+    ns_broad_tube_vorticity_coverage_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeVorticityCoverageReceipt.agda"
+    )
+    ns_broad_tube_serrin_exponent_discharge_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinExponentDischargeReceipt.agda"
+    )
+    ns_broad_tube_conditional_regularity_theorem_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeConditionalRegularityTheoremReceipt.agda"
+    )
+    ns_broad_tube_coarea_bridge_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeCoareaBridgeReceipt.agda"
+    )
+    ns_broad_tube_serrin_lift_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinLiftReceipt.agda"
+    )
+    ns_broad_tube_bkm_bridge_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeBKMBridgeReceipt.agda"
+    )
+    ns_broad_tube_serrin_bkm_composite_receipt = (
+        REPO_ROOT / "DASHI/Physics/Closure/NSBroadTubeSerrinBKMCompositeReceipt.agda"
+    )
+    ns_pressure_poisson_sign_audit_out = (
+        CHILD_OUT_DIR / "ns_pressure_poisson_sign_audit_smoke.json"
+    )
+    ns_broad_tube_serrin_bkm_bridge_summary = script(
+        "ns_broad_tube_serrin_bkm_bridge_summary.py"
+    )
+    check_ns_broad_tube_serrin_bkm_bridge_summary = script(
+        "check_ns_broad_tube_serrin_bkm_bridge_summary.py"
+    )
+    ns_broad_tube_conditional_regularization_summary = script(
+        "ns_broad_tube_conditional_regularization_summary.py"
+    )
+    check_ns_broad_tube_conditional_regularization_summary = script(
+        "check_ns_broad_tube_conditional_regularization_summary.py"
+    )
+    ns_theoremg_sharp_conditional_summary = script(
+        "ns_theoremg_sharp_conditional_summary.py"
+    )
+    check_ns_theoremg_sharp_conditional_summary = script(
+        "check_ns_theoremg_sharp_conditional_summary.py"
+    )
+    check_ns_theoremg_q2_gd1_contradiction_channel = script(
+        "check_ns_theoremg_q2_gd1_contradiction_channel.py"
+    )
+    check_ns_theoremg_q2_gd1_contradiction_channel_out = (
+        CHILD_OUT_DIR / "check_ns_theoremg_q2_gd1_contradiction_channel_smoke.json"
+    )
+    ns_interior_pressure_regression_out = (
+        CHILD_OUT_DIR / "ns_interior_pressure_regression_smoke.json"
+    )
+    ns_pressure_poisson_sign_timeseries_out = (
+        CHILD_OUT_DIR / "ns_pressure_poisson_sign_timeseries_smoke.json"
+    )
+    ns_interior_budget_timeseries_out = (
+        CHILD_OUT_DIR / "ns_interior_budget_timeseries_smoke.json"
+    )
+    ns_pressure_poisson_bypass_convention_normalized_out = (
+        CHILD_OUT_DIR / "ns_pressure_poisson_bypass_convention_normalized_smoke.json"
+    )
+    ns_pressure_convention_regression_out = (
+        CHILD_OUT_DIR / "ns_pressure_convention_regression_smoke.json"
+    )
+    ns_boundary_derived_smoke_candidates = tuple(
+        sorted(Path("/tmp").glob("ns_boundary_derived*.npz"))
+    )
+    ns_boundary_smoke_derived_input = (
+        ns_boundary_derived_smoke_candidates[0]
+        if ns_boundary_derived_smoke_candidates
+        else None
+    )
+    ns_raw_pressure_smoke_candidates = tuple(
+        sorted(Path("/tmp").glob("ns3d*_pressure*.npz"))
+    )
+    ns_raw_pressure_smoke_input = (
+        ns_raw_pressure_smoke_candidates[0]
+        if ns_raw_pressure_smoke_candidates
+        else None
+    )
     unification_authority_review_packet_out = (
         CHILD_OUT_DIR / "unification_authority_review_packet_smoke.json"
     )
@@ -2849,6 +3297,3811 @@ def build_specs() -> list[HarnessSpec]:
             ),
         ),
         HarnessSpec(
+            name="ns_boundary_component_lambda3_diagnostic",
+            path=script("ns_boundary_component_lambda3_diagnostic.py"),
+            args=(
+                "--input",
+                str(ns_boundary_smoke_derived_input),
+                "--lambda2-band",
+                "1e-6",
+                "--json",
+                "--output",
+                str(ns_boundary_component_lambda3_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--json",),
+            expected_json_path=ns_boundary_component_lambda3_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None and script("ns_boundary_component_lambda3_diagnostic.py").exists()
+            else (
+                "ns_boundary_component_lambda3_diagnostic harness not found"
+                if not script("ns_boundary_component_lambda3_diagnostic.py").exists()
+                else "ns_boundary_component_lambda3_diagnostic requires a discoverable derived NS boundary archive under /tmp"
+            ),
+            notes=(
+                "boundary component lambda3 diagnostics over connected boundary components",
+                "empirical/non-promoting; no lambda3 boundary theorem promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_f123_absorption_diagnostic",
+            path=script("ns_boundary_f123_absorption_diagnostic.py"),
+            args=(
+                "--input",
+                str(ns_boundary_smoke_derived_input),
+                "--json",
+                "--output",
+                str(ns_boundary_f123_absorption_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--json",),
+            expected_json_path=ns_boundary_f123_absorption_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None and script("ns_boundary_f123_absorption_diagnostic.py").exists()
+            else (
+                "ns_boundary_f123_absorption_diagnostic harness not found"
+                if not script("ns_boundary_f123_absorption_diagnostic.py").exists()
+                else "ns_boundary_f123_absorption_diagnostic requires a discoverable derived NS boundary archive under /tmp"
+            ),
+            notes=(
+                "boundary f123 absorption diagnostics for near-singular component structure",
+                "empirical/non-promoting; no absorption theorem promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_corrected_gronwall_margin",
+            path=script("ns_boundary_component_lambda3_corrected_gronwall_margin.py"),
+            args=(
+                "--lambda3-json",
+                str(ns_boundary_component_lambda3_out),
+                "--output",
+                str(ns_boundary_corrected_gronwall_margin_out),
+            )
+            + (
+                (
+                    "--f123-json",
+                    str(ns_boundary_f123_absorption_out),
+                )
+                if ns_boundary_f123_absorption_out.exists()
+                else ()
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--help",),
+            expected_json_path=ns_boundary_corrected_gronwall_margin_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None
+            and script("ns_boundary_component_lambda3_corrected_gronwall_margin.py").exists()
+            else (
+                "ns_boundary_corrected_gronwall_margin script not found"
+                if not script("ns_boundary_component_lambda3_corrected_gronwall_margin.py").exists()
+                else "ns_boundary_corrected_gronwall_margin requires derived NS boundary lambda3/f123 diagnostics under /tmp"
+            ),
+            notes=(
+                "optional corrected Gronwall margin diagnostic over boundary lambda3/F123 outputs",
+                "empirical/conditional/non-promoting; does not discharge h_delta1 or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_timeseries_margin_summary",
+            path=script("ns_boundary_timeseries_margin_summary.py"),
+            args=(
+                "--inputs",
+                str(ns_boundary_corrected_gronwall_margin_out),
+                "--output",
+                str(ns_boundary_timeseries_margin_summary_out),
+            ),
+            expected_json_path=ns_boundary_timeseries_margin_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_corrected_gronwall_margin_out.exists()
+            and script("ns_boundary_timeseries_margin_summary.py").exists()
+            else (
+                "ns_boundary_timeseries_margin_summary script not found"
+                if not script("ns_boundary_timeseries_margin_summary.py").exists()
+                else "ns_boundary_timeseries_margin_summary requires corrected-gronwall-margin artifact"
+            ),
+            notes=(
+                "optional aggregate corrected-gronwall timeseries summary from margin diagnostics",
+                "empirical/conditional/non-promoting; does not discharge h_delta1 or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_gronwall_margin_regression",
+            path=script("check_ns_boundary_gronwall_margin_regression.py"),
+            args=(
+                "--margin-json",
+                str(ns_boundary_corrected_gronwall_margin_out),
+            )
+            + (
+                (
+                    "--timeseries-json",
+                    str(ns_boundary_timeseries_margin_summary_out),
+                )
+                if ns_boundary_timeseries_margin_summary_out.exists()
+                else ()
+            )
+            if ns_boundary_timeseries_margin_summary_out.exists()
+            or ns_boundary_corrected_gronwall_margin_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_gronwall_margin_regression_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_corrected_gronwall_margin_out.exists()
+            and script("check_ns_boundary_gronwall_margin_regression.py").exists()
+            else (
+                "check_ns_boundary_gronwall_margin_regression script not found"
+                if not script("check_ns_boundary_gronwall_margin_regression.py").exists()
+                else "check_ns_boundary_gronwall_margin_regression requires corrected-gronwall margin artifact"
+            ),
+            notes=(
+                "optional regression check for corrected Gronwall margin invariants and optional timeseries summary",
+                "empirical/conditional/non-promoting; does not discharge h_delta1 or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_theoremg_cancellation_margin",
+            path=script("ns_boundary_theoremg_cancellation_margin.py"),
+            args=(
+                "--margin-json",
+                str(ns_boundary_corrected_gronwall_margin_out),
+                "--output-json",
+                str(ns_boundary_theoremg_cancellation_margin_out),
+            )
+            if ns_boundary_corrected_gronwall_margin_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_theoremg_cancellation_margin_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_corrected_gronwall_margin_out.exists()
+            and script("ns_boundary_theoremg_cancellation_margin.py").exists()
+            else (
+                "ns_boundary_theoremg_cancellation_margin script not found"
+                if not script("ns_boundary_theoremg_cancellation_margin.py").exists()
+                else "ns_boundary_theoremg_cancellation_margin requires corrected-gronwall margin artifact"
+            ),
+            notes=(
+                "optional Theorem-G cancellation-margin upgrade from corrected Gronwall margin artifact",
+                "empirical/non-promoting; records mu_cancellation=delta1 and does not prove Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_cancellation_margin_regression",
+            path=script("check_ns_boundary_cancellation_margin_regression.py"),
+            args=(
+                "--cancellation-json",
+                str(ns_boundary_theoremg_cancellation_margin_out),
+            )
+            if ns_boundary_theoremg_cancellation_margin_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_cancellation_margin_regression_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_theoremg_cancellation_margin_out.exists()
+            and script("check_ns_boundary_cancellation_margin_regression.py").exists()
+            else (
+                "check_ns_boundary_cancellation_margin_regression script not found"
+                if not script("check_ns_boundary_cancellation_margin_regression.py").exists()
+                else "check_ns_boundary_cancellation_margin_regression requires cancellation-margin artifact"
+            ),
+            notes=(
+                "optional regression check for cancellation-margin invariants",
+                "regression-only/non-promoting; no theorem or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_pressure_poisson_bypass_diagnostic",
+            path=script("ns_boundary_pressure_poisson_bypass_diagnostic.py"),
+            args=(
+                "--derived-archive",
+                str(ns_boundary_smoke_derived_input),
+                "--lambda2-band",
+                "1e-6",
+                "--output-json",
+                str(ns_boundary_pressure_poisson_bypass_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--help",),
+            expected_json_path=ns_boundary_pressure_poisson_bypass_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None
+            and script("ns_boundary_pressure_poisson_bypass_diagnostic.py").exists()
+            else (
+                "ns_boundary_pressure_poisson_bypass_diagnostic script not found"
+                if not script("ns_boundary_pressure_poisson_bypass_diagnostic.py").exists()
+                else "ns_boundary_pressure_poisson_bypass_diagnostic requires a discoverable derived NS boundary archive under /tmp"
+            ),
+            notes=(
+                "optional pressure-Poisson bypass diagnostic over boundary components",
+                "empirical/non-promoting; does not prove layer CZ, geometric concentration, or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_geometric_concentration_diagnostic",
+            path=script("ns_boundary_geometric_concentration_diagnostic.py"),
+            args=(
+                "--derived-archive",
+                str(ns_boundary_smoke_derived_input),
+                "--lambda2-band",
+                "1e-6",
+                "--output-json",
+                str(ns_boundary_geometric_concentration_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--help",),
+            expected_json_path=ns_boundary_geometric_concentration_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None
+            and script("ns_boundary_geometric_concentration_diagnostic.py").exists()
+            else (
+                "ns_boundary_geometric_concentration_diagnostic script not found"
+                if not script("ns_boundary_geometric_concentration_diagnostic.py").exists()
+                else "ns_boundary_geometric_concentration_diagnostic requires a discoverable derived NS boundary archive under /tmp"
+            ),
+            notes=(
+                "optional geometric concentration diagnostic for top-vorticity alignment with Kato carrier",
+                "empirical/non-promoting; does not prove blow-up carrier concentration or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_pressure_geometric_regression",
+            path=script("check_ns_boundary_pressure_geometric_regression.py"),
+            args=(
+                (
+                    "--pressure-json",
+                    str(ns_boundary_pressure_poisson_bypass_out),
+                )
+                if ns_boundary_pressure_poisson_bypass_out.exists()
+                else ()
+            )
+            + (
+                (
+                    "--geometric-json",
+                    str(ns_boundary_geometric_concentration_out),
+                )
+                if ns_boundary_geometric_concentration_out.exists()
+                else ()
+            )
+            if ns_boundary_pressure_poisson_bypass_out.exists()
+            or ns_boundary_geometric_concentration_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_pressure_geometric_regression_out,
+            optional=True,
+            skip_reason=None
+            if (
+                ns_boundary_pressure_poisson_bypass_out.exists()
+                or ns_boundary_geometric_concentration_out.exists()
+            )
+            and script("check_ns_boundary_pressure_geometric_regression.py").exists()
+            else (
+                "check_ns_boundary_pressure_geometric_regression script not found"
+                if not script("check_ns_boundary_pressure_geometric_regression.py").exists()
+                else "check_ns_boundary_pressure_geometric_regression requires pressure/geometric diagnostic artifacts"
+            ),
+            notes=(
+                "optional regression check for pressure-bypass and geometric-concentration diagnostic invariants",
+                "regression-only/non-promoting; no theorem or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_g12_bounds_diagnostic",
+            path=script("ns_boundary_g12_bounds_diagnostic.py"),
+            args=(
+                "--derived-archive",
+                str(ns_boundary_smoke_derived_input),
+                "--lambda2-band",
+                "1e-6",
+                "--output-json",
+                str(ns_boundary_g12_bounds_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--help",),
+            expected_json_path=ns_boundary_g12_bounds_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None
+            and script("ns_boundary_g12_bounds_diagnostic.py").exists()
+            else (
+                "ns_boundary_g12_bounds_diagnostic script not found"
+                if not script("ns_boundary_g12_bounds_diagnostic.py").exists()
+                else "ns_boundary_g12_bounds_diagnostic requires a discoverable derived NS boundary archive under /tmp"
+            ),
+            notes=(
+                "optional g12 lower/upper bound telemetry over global, boundary-carrier, and beta regions",
+                "empirical/non-promoting; does not prove GD1 upper-bound or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_interior_vorticity_budget_diagnostic",
+            path=script("ns_interior_vorticity_budget_diagnostic.py"),
+            args=(
+                "--input",
+                str(ns_raw_pressure_smoke_input),
+                "--frame",
+                "0",
+                "--output-json",
+                str(ns_interior_vorticity_budget_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else ("--help",),
+            expected_json_path=ns_interior_vorticity_budget_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and script("ns_interior_vorticity_budget_diagnostic.py").exists()
+            else (
+                "ns_interior_vorticity_budget_diagnostic script not found"
+                if not script("ns_interior_vorticity_budget_diagnostic.py").exists()
+                else "ns_interior_vorticity_budget_diagnostic requires a raw NS pressure archive under /tmp"
+            ),
+            notes=(
+                "optional Calc-6 interior pointwise vorticity budget diagnostic",
+                "empirical/non-promoting; does not prove the interior maximum principle or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_omega_l3_timeseries_diagnostic",
+            path=script("ns_omega_l3_timeseries_diagnostic.py"),
+            args=(
+                "--input",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_omega_l3_timeseries_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else ("--help",),
+            expected_json_path=ns_omega_l3_timeseries_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and script("ns_omega_l3_timeseries_diagnostic.py").exists()
+            else (
+                "ns_omega_l3_timeseries_diagnostic script not found"
+                if not script("ns_omega_l3_timeseries_diagnostic.py").exists()
+                else "ns_omega_l3_timeseries_diagnostic requires a raw NS pressure archive under /tmp"
+            ),
+            notes=(
+                "optional Calc-7 omega L3 timeseries diagnostic",
+                "empirical/non-promoting; does not prove enstrophy Gronwall closure or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_layer_l2_vorticity_fraction",
+            path=script("ns_layer_l2_vorticity_fraction_diagnostic.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--derived-archive",
+                "/tmp/ns_boundary_true_korn_timeseries_N128_20260618",
+                "--output-json",
+                str(ns_layer_l2_vorticity_fraction_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            else ("--help",),
+            expected_json_path=ns_layer_l2_vorticity_fraction_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            and script("ns_layer_l2_vorticity_fraction_diagnostic.py").exists()
+            else (
+                "ns_layer_l2_vorticity_fraction_diagnostic script not found"
+                if not script("ns_layer_l2_vorticity_fraction_diagnostic.py").exists()
+                else "ns_layer_l2_vorticity_fraction requires raw archive and derived frame directory"
+            ),
+            notes=(
+                "optional Calc-8 layer-L2 vorticity fraction diagnostic",
+                "empirical/non-promoting; does not prove SerrinFromQ2Control or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_layer_l2_vorticity_fraction_summary",
+            path=script("ns_layer_l2_vorticity_fraction_summary.py"),
+            args=(
+                str(ns_layer_l2_vorticity_fraction_out),
+                "--output",
+                str(ns_layer_l2_vorticity_fraction_summary_out),
+            )
+            if ns_layer_l2_vorticity_fraction_out.exists()
+            else ("--help",),
+            expected_json_path=ns_layer_l2_vorticity_fraction_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_layer_l2_vorticity_fraction_out.exists()
+            and script("ns_layer_l2_vorticity_fraction_summary.py").exists()
+            else (
+                "ns_layer_l2_vorticity_fraction_summary script not found"
+                if not script("ns_layer_l2_vorticity_fraction_summary.py").exists()
+                else "ns_layer_l2_vorticity_fraction_summary requires the Calc-8 diagnostic output"
+            ),
+            notes=(
+                "optional Calc-8 layer-L2 summary",
+                "heuristic Shahmurov/Serrin route telemetry only",
+                (
+                    f"Shahmurov intake receipt present: {rel(ns_shahmurov_two_paper_claim_intake_receipt)}"
+                    if ns_shahmurov_two_paper_claim_intake_receipt.exists()
+                    else f"Shahmurov intake receipt missing: {rel(ns_shahmurov_two_paper_claim_intake_receipt)}"
+                ),
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_layer_l2_vorticity_fraction_regression",
+            path=script("check_ns_layer_l2_vorticity_fraction_regression.py"),
+            args=(
+                str(ns_layer_l2_vorticity_fraction_out),
+                "--output-json",
+                str(ns_layer_l2_vorticity_fraction_regression_out),
+            )
+            if ns_layer_l2_vorticity_fraction_out.exists()
+            else ("--help",),
+            expected_json_path=ns_layer_l2_vorticity_fraction_regression_out,
+            optional=True,
+            skip_reason=None
+            if ns_layer_l2_vorticity_fraction_out.exists()
+            and script("check_ns_layer_l2_vorticity_fraction_regression.py").exists()
+            else (
+                "check_ns_layer_l2_vorticity_fraction_regression script not found"
+                if not script("check_ns_layer_l2_vorticity_fraction_regression.py").exists()
+                else "check_ns_layer_l2_vorticity_fraction_regression requires the Calc-8 diagnostic output"
+            ),
+            notes=(
+                "optional Calc-8 layer-L2 regression gate",
+                "empirical/non-promoting; validates JSON shape only",
+                (
+                    f"Shahmurov intake receipt present: {rel(ns_shahmurov_two_paper_claim_intake_receipt)}"
+                    if ns_shahmurov_two_paper_claim_intake_receipt.exists()
+                    else f"Shahmurov intake receipt missing: {rel(ns_shahmurov_two_paper_claim_intake_receipt)}"
+                ),
+            ),
+        ),
+        HarnessSpec(
+            name="ns_weighted_lambda2_carrier_quantile",
+            path=script("ns_weighted_lambda2_carrier_quantile_diagnostic.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--derived-archive",
+                "/tmp/ns_boundary_true_korn_timeseries_N128_20260618",
+                "--output-json",
+                str(ns_weighted_lambda2_carrier_quantile_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            else ("--help",),
+            expected_json_path=ns_weighted_lambda2_carrier_quantile_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            and script("ns_weighted_lambda2_carrier_quantile_diagnostic.py").exists()
+            else (
+                "ns_weighted_lambda2_carrier_quantile_diagnostic script not found"
+                if not script("ns_weighted_lambda2_carrier_quantile_diagnostic.py").exists()
+                else "ns_weighted_lambda2_carrier_quantile requires raw archive and derived frame directory"
+            ),
+            notes=(
+                "optional weighted |lambda2| carrier quantile diagnostic",
+                "empirical/non-promoting; calibrates broad-tube requirement only",
+                (
+                    f"Agda receipt present: {rel(ns_weighted_lambda2_carrier_quantile_receipt)}"
+                    if ns_weighted_lambda2_carrier_quantile_receipt.exists()
+                    else f"Agda receipt missing: {rel(ns_weighted_lambda2_carrier_quantile_receipt)}"
+                ),
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_weighted_lambda2_carrier_quantile_regression",
+            path=script("check_ns_weighted_lambda2_carrier_quantile_regression.py"),
+            args=(
+                str(ns_weighted_lambda2_carrier_quantile_out),
+                "--output-json",
+                str(ns_weighted_lambda2_carrier_quantile_regression_out),
+            )
+            if ns_weighted_lambda2_carrier_quantile_out.exists()
+            else ("--help",),
+            expected_json_path=ns_weighted_lambda2_carrier_quantile_regression_out,
+            optional=True,
+            skip_reason=None
+            if ns_weighted_lambda2_carrier_quantile_out.exists()
+            and script("check_ns_weighted_lambda2_carrier_quantile_regression.py").exists()
+            else (
+                "check_ns_weighted_lambda2_carrier_quantile_regression script not found"
+                if not script("check_ns_weighted_lambda2_carrier_quantile_regression.py").exists()
+                else "check_ns_weighted_lambda2_carrier_quantile_regression requires the quantile diagnostic output"
+            ),
+            notes=(
+                "optional weighted |lambda2| carrier quantile regression gate",
+                "validates non-promoting JSON shape and no promotion flags",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_lambda2_signed_region_partition",
+            path=script("ns_lambda2_signed_region_partition_diagnostic.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--derived-archive",
+                "/tmp/ns_boundary_true_korn_timeseries_N128_20260618",
+                "--output-json",
+                str(ns_lambda2_signed_region_partition_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            else ("--help",),
+            expected_json_path=ns_lambda2_signed_region_partition_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and Path("/tmp/ns_boundary_true_korn_timeseries_N128_20260618").exists()
+            and script("ns_lambda2_signed_region_partition_diagnostic.py").exists()
+            else (
+                "ns_lambda2_signed_region_partition_diagnostic script not found"
+                if not script("ns_lambda2_signed_region_partition_diagnostic.py").exists()
+                else "ns_lambda2_signed_region_partition requires raw archive and derived frame directory"
+            ),
+            notes=(
+                "optional lambda2 signed-region omega-L2 partition diagnostic",
+                "empirical/non-promoting; records near-zero overlap separately",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_lambda2_signed_region_partition_regression",
+            path=script("check_ns_lambda2_signed_region_partition_regression.py"),
+            args=(
+                str(ns_lambda2_signed_region_partition_out),
+                "--output-json",
+                str(ns_lambda2_signed_region_partition_regression_out),
+            )
+            if ns_lambda2_signed_region_partition_out.exists()
+            else ("--help",),
+            expected_json_path=ns_lambda2_signed_region_partition_regression_out,
+            optional=True,
+            skip_reason=None
+            if ns_lambda2_signed_region_partition_out.exists()
+            and script("check_ns_lambda2_signed_region_partition_regression.py").exists()
+            else (
+                "check_ns_lambda2_signed_region_partition_regression script not found"
+                if not script("check_ns_lambda2_signed_region_partition_regression.py").exists()
+                else "check_ns_lambda2_signed_region_partition_regression requires the signed-region output"
+            ),
+            notes=(
+                "optional lambda2 signed-region partition regression gate",
+                "validates exact partition bins while keeping aggregate regions non-promoting",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_lambda2_carrier_route_summary",
+            path=script("ns_lambda2_carrier_route_summary.py"),
+            args=(
+                str(ns_weighted_lambda2_carrier_quantile_out),
+                str(ns_lambda2_signed_region_partition_out),
+                "--output",
+                str(ns_lambda2_carrier_route_summary_out),
+            )
+            if ns_weighted_lambda2_carrier_quantile_out.exists()
+            and ns_lambda2_signed_region_partition_out.exists()
+            else ("--help",),
+            expected_json_path=ns_lambda2_carrier_route_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_weighted_lambda2_carrier_quantile_out.exists()
+            and ns_lambda2_signed_region_partition_out.exists()
+            and script("ns_lambda2_carrier_route_summary.py").exists()
+            else (
+                "ns_lambda2_carrier_route_summary script not found"
+                if not script("ns_lambda2_carrier_route_summary.py").exists()
+                else "ns_lambda2_carrier_route_summary requires quantile and signed-region outputs"
+            ),
+            notes=(
+                "optional carrier-route summary",
+                "records broad_tube_required route code without theorem promotion",
+                (
+                    f"Agda receipt present: {rel(ns_broad_tube_serrin_lift_gap_receipt)}"
+                    if ns_broad_tube_serrin_lift_gap_receipt.exists()
+                    else f"Agda receipt missing: {rel(ns_broad_tube_serrin_lift_gap_receipt)}"
+                ),
+            ),
+        ),
+        HarnessSpec(
+            name="ns_calc7_reynolds_boundary_scan",
+            path=script("ns_calc7_reynolds_boundary_scan.py"),
+            args=(
+                "--timeseries-json",
+                str(REPO_ROOT / "scripts/data/outputs/ns_boundary_carrier_timeseries_N128_20260618.json"),
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_calc7_reynolds_boundary_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--timeseries-json",
+                str(REPO_ROOT / "scripts/data/outputs/ns_boundary_carrier_timeseries_N128_20260618.json"),
+                "--output-json",
+                str(ns_calc7_reynolds_boundary_scan_out),
+            ),
+            expected_json_path=ns_calc7_reynolds_boundary_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_calc7_reynolds_boundary_scan.py").exists()
+            else "ns_calc7_reynolds_boundary_scan script not found",
+            notes=(
+                "optional Calc-7 Reynolds/delta1/Bk boundary scan",
+                "empirical/non-promoting; sharpens open delta1 and H_B gates only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_calc7_reynolds_boundary_scan",
+            path=script("check_ns_calc7_reynolds_boundary_scan.py"),
+            args=(
+                "--input-json",
+                str(ns_calc7_reynolds_boundary_scan_out),
+                "--output-json",
+                str(ns_calc7_reynolds_boundary_scan_check_out),
+            )
+            if ns_calc7_reynolds_boundary_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_calc7_reynolds_boundary_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_calc7_reynolds_boundary_scan_out.exists()
+            and script("check_ns_calc7_reynolds_boundary_scan.py").exists()
+            else (
+                "check_ns_calc7_reynolds_boundary_scan script not found"
+                if not script("check_ns_calc7_reynolds_boundary_scan.py").exists()
+                else "check_ns_calc7_reynolds_boundary_scan requires the Calc-7 Reynolds scan output"
+            ),
+            notes=(
+                "optional Calc-7 Reynolds scan regression gate",
+                "validates non-promoting telemetry and explicit degradation bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_betchov_identity_scan",
+            path=script("ns_betchov_identity_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_betchov_identity_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_betchov_identity_scan_out),
+            ),
+            expected_json_path=ns_betchov_identity_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_betchov_identity_scan.py").exists()
+            else "ns_betchov_identity_scan script not found",
+            notes=(
+                "optional Betchov identity telemetry scan",
+                "empirical/non-promoting; measures integral det(S), Pi, and residual closure on raw N128 data",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_betchov_identity_scan",
+            path=script("check_ns_betchov_identity_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_betchov_identity_scan_out),
+                "--output-json",
+                str(ns_betchov_identity_scan_check_out),
+            )
+            if ns_betchov_identity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_betchov_identity_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_betchov_identity_scan_out.exists()
+            and script("check_ns_betchov_identity_scan.py").exists()
+            else (
+                "check_ns_betchov_identity_scan script not found"
+                if not script("check_ns_betchov_identity_scan.py").exists()
+                else "check_ns_betchov_identity_scan requires the Betchov identity scan output"
+            ),
+            notes=(
+                "optional Betchov identity scan regression gate",
+                "validates non-promoting residual and aggregate bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_betchov_determinant_sign_scan",
+            path=script("ns_betchov_determinant_sign_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output",
+                str(ns_betchov_determinant_sign_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output",
+                str(ns_betchov_determinant_sign_scan_out),
+            ),
+            expected_json_path=ns_betchov_determinant_sign_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_betchov_determinant_sign_scan.py").exists()
+            else "ns_betchov_determinant_sign_scan script not found",
+            notes=(
+                "optional corrected determinant/lambda2 sign scan",
+                "empirical/non-promoting; checks the determinant gate on available N128 data",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_betchov_determinant_sign_scan",
+            path=script("check_ns_betchov_determinant_sign_scan.py"),
+            args=(
+                "--input-json",
+                str(ns_betchov_determinant_sign_scan_out),
+                "--output-json",
+                str(ns_betchov_determinant_sign_scan_check_out),
+            )
+            if ns_betchov_determinant_sign_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_betchov_determinant_sign_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_betchov_determinant_sign_scan_out.exists()
+            and script("check_ns_betchov_determinant_sign_scan.py").exists()
+            else (
+                "check_ns_betchov_determinant_sign_scan script not found"
+                if not script("check_ns_betchov_determinant_sign_scan.py").exists()
+                else "check_ns_betchov_determinant_sign_scan requires the determinant sign scan output"
+            ),
+            notes=(
+                "optional determinant sign scan regression gate",
+                "validates non-promoting determinant/lambda2 telemetry bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_det_omega_k_measure_scan",
+            path=script("ns_det_omega_k_measure_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_det_omega_k_measure_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_det_omega_k_measure_scan_out),
+            ),
+            expected_json_path=ns_det_omega_k_measure_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_det_omega_k_measure_scan.py").exists()
+            else "ns_det_omega_k_measure_scan script not found",
+            notes=(
+                "optional determinant-to-Omega_K measure scan",
+                "empirical/non-promoting; audits lambda2<0 versus det(S)>0 cell-level agreement",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_det_omega_k_measure_scan",
+            path=script("check_ns_det_omega_k_measure_scan.py"),
+            args=(
+                "--input-json",
+                str(ns_det_omega_k_measure_scan_out),
+                "--output-json",
+                str(ns_det_omega_k_measure_scan_check_out),
+            )
+            if ns_det_omega_k_measure_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_det_omega_k_measure_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_det_omega_k_measure_scan_out.exists()
+            and script("check_ns_det_omega_k_measure_scan.py").exists()
+            else (
+                "check_ns_det_omega_k_measure_scan script not found"
+                if not script("check_ns_det_omega_k_measure_scan.py").exists()
+                else "check_ns_det_omega_k_measure_scan requires the determinant/measure scan output"
+            ),
+            notes=(
+                "optional determinant/Omega_K measure scan regression gate",
+                "validates non-promoting sign-partition mismatch bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_vorticity_alignment_obstruction_scan",
+            path=script("ns_vorticity_alignment_obstruction_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_vorticity_alignment_obstruction_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_vorticity_alignment_obstruction_scan_out),
+            ),
+            expected_json_path=ns_vorticity_alignment_obstruction_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_vorticity_alignment_obstruction_scan.py").exists()
+            else "ns_vorticity_alignment_obstruction_scan script not found",
+            notes=(
+                "optional vorticity-alignment obstruction scan",
+                "empirical/non-promoting; measures compressive-versus-extensional alignment in the lambda2>=0 region",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_vorticity_alignment_obstruction_scan",
+            path=script("check_ns_vorticity_alignment_obstruction_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_vorticity_alignment_obstruction_scan_out),
+                "--output-json",
+                str(ns_vorticity_alignment_obstruction_scan_check_out),
+            )
+            if ns_vorticity_alignment_obstruction_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_vorticity_alignment_obstruction_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_vorticity_alignment_obstruction_scan_out.exists()
+            and script("check_ns_vorticity_alignment_obstruction_scan.py").exists()
+            else (
+                "check_ns_vorticity_alignment_obstruction_scan script not found"
+                if not script("check_ns_vorticity_alignment_obstruction_scan.py").exists()
+                else "check_ns_vorticity_alignment_obstruction_scan requires the alignment scan output"
+            ),
+            notes=(
+                "optional vorticity-alignment obstruction regression gate",
+                "validates non-promoting compressive-region alignment bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_alignment_gap_bin_scan",
+            path=script("ns_alignment_gap_bin_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_alignment_gap_bin_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_alignment_gap_bin_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_alignment_gap_bin_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_alignment_gap_bin_scan.py").exists()
+            else "ns_alignment_gap_bin_scan script not found",
+            notes=(
+                "optional compressive-gap alignment scan",
+                "empirical/non-promoting; bins compressive-region alignment by delta1 thresholds",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_alignment_gap_bin_scan",
+            path=script("check_ns_alignment_gap_bin_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_alignment_gap_bin_scan_out),
+                "--output-json",
+                str(ns_alignment_gap_bin_scan_check_out),
+            )
+            if ns_alignment_gap_bin_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_alignment_gap_bin_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_alignment_gap_bin_scan_out.exists()
+            and script("check_ns_alignment_gap_bin_scan.py").exists()
+            else (
+                "check_ns_alignment_gap_bin_scan script not found"
+                if not script("check_ns_alignment_gap_bin_scan.py").exists()
+                else "check_ns_alignment_gap_bin_scan requires the gap-bin scan output"
+            ),
+            notes=(
+                "optional compressive-gap alignment regression gate",
+                "validates non-promoting gap-bin alignment bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_pressure_eigenframe_gap_scan",
+            path=script("ns_pressure_eigenframe_gap_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_pressure_eigenframe_gap_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_pressure_eigenframe_gap_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_pressure_eigenframe_gap_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_pressure_eigenframe_gap_scan.py").exists()
+            else "ns_pressure_eigenframe_gap_scan script not found",
+            notes=(
+                "optional pressure-eigenframe gap scan",
+                "empirical/non-promoting; bins pressure-Hessian eigenframe proxies by delta1 on the compressive zone",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_pressure_eigenframe_gap_scan",
+            path=script("check_ns_pressure_eigenframe_gap_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_pressure_eigenframe_gap_scan_out),
+                "--output-json",
+                str(ns_pressure_eigenframe_gap_scan_check_out),
+            )
+            if ns_pressure_eigenframe_gap_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_pressure_eigenframe_gap_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_pressure_eigenframe_gap_scan_out.exists()
+            and script("check_ns_pressure_eigenframe_gap_scan.py").exists()
+            else (
+                "check_ns_pressure_eigenframe_gap_scan script not found"
+                if not script("check_ns_pressure_eigenframe_gap_scan.py").exists()
+                else "check_ns_pressure_eigenframe_gap_scan requires the pressure-eigenframe scan output"
+            ),
+            notes=(
+                "optional pressure-eigenframe gap regression gate",
+                "validates non-promoting pressure-proxy bookkeeping by delta1 threshold",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_pressure_gate_scan",
+            path=script("ns_boundary_pressure_gate_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_boundary_pressure_gate_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_boundary_pressure_gate_scan.py").exists()
+            else "ns_boundary_pressure_gate_scan script not found",
+            notes=(
+                "optional boundary pressure-gate scan",
+                "empirical/non-promoting; tracks P11/P22/P33 and Q on a narrow |lambda2| boundary band by delta1 threshold",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_pressure_gate_scan",
+            path=script("check_ns_boundary_pressure_gate_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--output-json",
+                str(ns_boundary_pressure_gate_scan_check_out),
+            )
+            if ns_boundary_pressure_gate_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_pressure_gate_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_pressure_gate_scan_out.exists()
+            and script("check_ns_boundary_pressure_gate_scan.py").exists()
+            else (
+                "check_ns_boundary_pressure_gate_scan script not found"
+                if not script("check_ns_boundary_pressure_gate_scan.py").exists()
+                else "check_ns_boundary_pressure_gate_scan requires the boundary pressure scan output"
+            ),
+            notes=(
+                "optional boundary pressure-gate regression gate",
+                "validates non-promoting boundary P11/Q threshold bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_compressive_pi_decomposition_scan",
+            path=script("ns_compressive_pi_decomposition_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_compressive_pi_decomposition_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_compressive_pi_decomposition_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_compressive_pi_decomposition_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_compressive_pi_decomposition_scan.py").exists()
+            else "ns_compressive_pi_decomposition_scan script not found",
+            notes=(
+                "optional compressive Pi decomposition scan",
+                "empirical/non-promoting; tracks lambda_i omega_i^2 contributions on the lambda2>=0 region",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_compressive_pi_decomposition_scan",
+            path=script("check_ns_compressive_pi_decomposition_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_compressive_pi_decomposition_scan_out),
+                "--output-json",
+                str(ns_compressive_pi_decomposition_scan_check_out),
+            )
+            if ns_compressive_pi_decomposition_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_compressive_pi_decomposition_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_compressive_pi_decomposition_scan_out.exists()
+            and script("check_ns_compressive_pi_decomposition_scan.py").exists()
+            else (
+                "check_ns_compressive_pi_decomposition_scan script not found"
+                if not script("check_ns_compressive_pi_decomposition_scan.py").exists()
+                else "check_ns_compressive_pi_decomposition_scan requires the Pi decomposition scan output"
+            ),
+            notes=(
+                "optional compressive Pi decomposition regression gate",
+                "validates non-promoting compressive-versus-extensional contribution accounting",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_alignment_pressure_bridge_summary",
+            path=script("ns_alignment_pressure_bridge_summary.py"),
+            args=(
+                "--alignment-gap-json",
+                str(ns_alignment_gap_bin_scan_out),
+                "--pressure-eigenframe-json",
+                str(ns_pressure_eigenframe_gap_scan_out),
+                "--compressive-pi-json",
+                str(ns_compressive_pi_decomposition_scan_out),
+                "--output-json",
+                str(ns_alignment_pressure_bridge_summary_out),
+            )
+            if ns_alignment_gap_bin_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_alignment_pressure_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_alignment_gap_bin_scan_out.exists()
+            and script("ns_alignment_pressure_bridge_summary.py").exists()
+            else (
+                "ns_alignment_pressure_bridge_summary script not found"
+                if not script("ns_alignment_pressure_bridge_summary.py").exists()
+                else "ns_alignment_pressure_bridge_summary requires the alignment gap scan output"
+            ),
+            notes=(
+                "optional alignment-pressure bridge summary",
+                "empirical/non-promoting; joins delta1 bins across alignment, pressure proxy, and Pi decomposition surfaces",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_alignment_pressure_bridge_summary",
+            path=script("check_ns_alignment_pressure_bridge_summary.py"),
+            args=(
+                "--summary-json",
+                str(ns_alignment_pressure_bridge_summary_out),
+                "--output-json",
+                str(ns_alignment_pressure_bridge_summary_check_out),
+            )
+            if ns_alignment_pressure_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_alignment_pressure_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_alignment_pressure_bridge_summary_out.exists()
+            and script("check_ns_alignment_pressure_bridge_summary.py").exists()
+            else (
+                "check_ns_alignment_pressure_bridge_summary script not found"
+                if not script("check_ns_alignment_pressure_bridge_summary.py").exists()
+                else "check_ns_alignment_pressure_bridge_summary requires the bridge summary output"
+            ),
+            notes=(
+                "optional alignment-pressure bridge regression gate",
+                "validates non-promoting cross-surface delta1-bin summary consistency",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_pressure_q_bridge_summary",
+            path=script("ns_boundary_pressure_q_bridge_summary.py"),
+            args=(
+                "--boundary-pressure-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--boundary-delta1-json",
+                str(ns_boundary_delta1_uniformity_scan_out),
+                "--pressure-gap-json",
+                str(ns_pressure_eigenframe_gap_scan_out),
+                "--output-json",
+                str(ns_boundary_pressure_q_bridge_summary_out),
+            )
+            if ns_boundary_pressure_gate_scan_out.exists()
+            and ns_boundary_delta1_uniformity_scan_out.exists()
+            and ns_pressure_eigenframe_gap_scan_out.exists()
+            else (
+                "--boundary-pressure-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--output-json",
+                str(ns_boundary_pressure_q_bridge_summary_out),
+                "--no-boundary-delta1",
+                "--no-pressure-gap",
+            )
+            if ns_boundary_pressure_gate_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_pressure_q_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_pressure_gate_scan_out.exists()
+            and script("ns_boundary_pressure_q_bridge_summary.py").exists()
+            else (
+                "ns_boundary_pressure_q_bridge_summary script not found"
+                if not script("ns_boundary_pressure_q_bridge_summary.py").exists()
+                else "ns_boundary_pressure_q_bridge_summary requires the boundary pressure scan output"
+            ),
+            notes=(
+                "optional boundary pressure/Q bridge summary",
+                "empirical/non-promoting; joins boundary P11/Q telemetry with boundary-delta1 and pressure-gap rows",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_pressure_q_bridge_summary",
+            path=script("check_ns_boundary_pressure_q_bridge_summary.py"),
+            args=(
+                "--summary-json",
+                str(ns_boundary_pressure_q_bridge_summary_out),
+                "--output-json",
+                str(ns_boundary_pressure_q_bridge_summary_check_out),
+            )
+            if ns_boundary_pressure_q_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_pressure_q_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_pressure_q_bridge_summary_out.exists()
+            and script("check_ns_boundary_pressure_q_bridge_summary.py").exists()
+            else (
+                "check_ns_boundary_pressure_q_bridge_summary script not found"
+                if not script("check_ns_boundary_pressure_q_bridge_summary.py").exists()
+                else "check_ns_boundary_pressure_q_bridge_summary requires the bridge summary output"
+            ),
+            notes=(
+                "optional boundary pressure/Q bridge regression gate",
+                "validates non-promoting cross-surface pressure-boundary bridge consistency",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_tube_morphology_scan",
+            path=script("ns_tube_morphology_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_tube_morphology_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_tube_morphology_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_tube_morphology_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_tube_morphology_scan.py").exists()
+            else "ns_tube_morphology_scan script not found",
+            notes=(
+                "optional tube-morphology scan",
+                "empirical/non-promoting; classifies high-enstrophy carrier voxels by local tube/sheet/blob proxies",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_orbit_phase_coherence_scan",
+            path=script("ns_orbit_phase_coherence_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_orbit_phase_coherence_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_orbit_phase_coherence_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_orbit_phase_coherence_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_orbit_phase_coherence_scan.py").exists()
+            else "ns_orbit_phase_coherence_scan script not found",
+            notes=(
+                "optional orbit-phase coherence scan",
+                "empirical/non-promoting; builds selected-mode resonant triad phase-coherence telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_orbit_phase_coherence_scan",
+            path=script("check_ns_orbit_phase_coherence_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_orbit_phase_coherence_scan_out),
+                "--output-json",
+                str(ns_orbit_phase_coherence_scan_check_out),
+            )
+            if ns_orbit_phase_coherence_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_orbit_phase_coherence_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_orbit_phase_coherence_scan_out.exists()
+            and script("check_ns_orbit_phase_coherence_scan.py").exists()
+            else (
+                "check_ns_orbit_phase_coherence_scan script not found"
+                if not script("check_ns_orbit_phase_coherence_scan.py").exists()
+                else "check_ns_orbit_phase_coherence_scan requires the orbit-phase scan output"
+            ),
+            notes=(
+                "optional orbit-phase coherence regression gate",
+                "validates non-promoting orbit-phase row and aggregate telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_non_sobolev_coherence_gate_scan",
+            path=script("ns_non_sobolev_coherence_gate_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_non_sobolev_coherence_gate_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_non_sobolev_coherence_gate_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_non_sobolev_coherence_gate_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_non_sobolev_coherence_gate_scan.py").exists()
+            else "ns_non_sobolev_coherence_gate_scan script not found",
+            notes=(
+                "optional non-Sobolev coherence gate scan",
+                "empirical/non-promoting; compares observed coherence to same-amplitude phase-shuffled controls",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_non_sobolev_coherence_gate_scan",
+            path=script("check_ns_non_sobolev_coherence_gate_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_non_sobolev_coherence_gate_scan_out),
+                "--output-json",
+                str(ns_non_sobolev_coherence_gate_scan_check_out),
+            )
+            if ns_non_sobolev_coherence_gate_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_non_sobolev_coherence_gate_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_non_sobolev_coherence_gate_scan_out.exists()
+            and script("check_ns_non_sobolev_coherence_gate_scan.py").exists()
+            else (
+                "check_ns_non_sobolev_coherence_gate_scan script not found"
+                if not script("check_ns_non_sobolev_coherence_gate_scan.py").exists()
+                else "check_ns_non_sobolev_coherence_gate_scan requires the non-Sobolev scan output"
+            ),
+            notes=(
+                "optional non-Sobolev coherence regression gate",
+                "validates same-H^s-control and non-promoting coherence-gap telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_sacasa_kiriukhin_bridge_summary",
+            path=script("ns_sacasa_kiriukhin_bridge_summary.py"),
+            args=(
+                "--orbit-phase-json",
+                str(ns_orbit_phase_coherence_scan_out),
+                "--non-sobolev-json",
+                str(ns_non_sobolev_coherence_gate_scan_out),
+                "--output-json",
+                str(ns_sacasa_kiriukhin_bridge_summary_out),
+            )
+            if ns_orbit_phase_coherence_scan_out.exists()
+            and ns_non_sobolev_coherence_gate_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_sacasa_kiriukhin_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_orbit_phase_coherence_scan_out.exists()
+            and ns_non_sobolev_coherence_gate_scan_out.exists()
+            and script("ns_sacasa_kiriukhin_bridge_summary.py").exists()
+            else (
+                "ns_sacasa_kiriukhin_bridge_summary script not found"
+                if not script("ns_sacasa_kiriukhin_bridge_summary.py").exists()
+                else "ns_sacasa_kiriukhin_bridge_summary requires orbit-phase and non-Sobolev outputs"
+            ),
+            notes=(
+                "optional Sacasa-Kiriukhin bridge summary",
+                "empirical/non-promoting; joins orbit-phase and non-Sobolev telemetry and keeps the live wall unproved",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_sacasa_kiriukhin_bridge_summary",
+            path=script("check_ns_sacasa_kiriukhin_bridge_summary.py"),
+            args=(
+                "--summary-json",
+                str(ns_sacasa_kiriukhin_bridge_summary_out),
+                "--output-json",
+                str(ns_sacasa_kiriukhin_bridge_summary_check_out),
+            )
+            if ns_sacasa_kiriukhin_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_sacasa_kiriukhin_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_sacasa_kiriukhin_bridge_summary_out.exists()
+            and script("check_ns_sacasa_kiriukhin_bridge_summary.py").exists()
+            else (
+                "check_ns_sacasa_kiriukhin_bridge_summary script not found"
+                if not script("check_ns_sacasa_kiriukhin_bridge_summary.py").exists()
+                else "check_ns_sacasa_kiriukhin_bridge_summary requires the bridge summary output"
+            ),
+            notes=(
+                "optional Sacasa-Kiriukhin bridge regression gate",
+                "validates non-promoting source-route, bridge-row, and live-wall bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_incidence_cocycle_scan",
+            path=script("ns_triad_incidence_cocycle_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_incidence_cocycle_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_incidence_cocycle_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_incidence_cocycle_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_incidence_cocycle_scan.py").exists()
+            else "ns_triad_incidence_cocycle_scan script not found",
+            notes=(
+                "optional triad-incidence cocycle scan",
+                "empirical/non-promoting; builds selected-mode resonant triad incidence and cycle-rank telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_incidence_cocycle_scan",
+            path=script("check_ns_triad_incidence_cocycle_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_incidence_cocycle_scan_out),
+                "--output-json",
+                str(ns_triad_incidence_cocycle_scan_check_out),
+            )
+            if ns_triad_incidence_cocycle_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_incidence_cocycle_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_incidence_cocycle_scan_out.exists()
+            and script("check_ns_triad_incidence_cocycle_scan.py").exists()
+            else (
+                "check_ns_triad_incidence_cocycle_scan script not found"
+                if not script("check_ns_triad_incidence_cocycle_scan.py").exists()
+                else "check_ns_triad_incidence_cocycle_scan requires the triad-incidence scan output"
+            ),
+            notes=(
+                "optional triad-incidence cocycle regression gate",
+                "validates non-promoting incidence-density, cycle-rank, and exact-lock proxy telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_frustration_defect_scan",
+            path=script("ns_triad_frustration_defect_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_frustration_defect_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_frustration_defect_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_frustration_defect_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_frustration_defect_scan.py").exists()
+            else "ns_triad_frustration_defect_scan script not found",
+            notes=(
+                "optional triad-frustration defect scan",
+                "empirical/non-promoting; fits low-dimensional phase fields and measures weighted phase-closure residuals",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_frustration_defect_scan",
+            path=script("check_ns_triad_frustration_defect_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_frustration_defect_scan_out),
+                "--output-json",
+                str(ns_triad_frustration_defect_scan_check_out),
+            )
+            if ns_triad_frustration_defect_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_frustration_defect_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_frustration_defect_scan_out.exists()
+            and script("check_ns_triad_frustration_defect_scan.py").exists()
+            else (
+                "check_ns_triad_frustration_defect_scan script not found"
+                if not script("check_ns_triad_frustration_defect_scan.py").exists()
+                else "check_ns_triad_frustration_defect_scan requires the frustration scan output"
+            ),
+            notes=(
+                "optional triad-frustration defect regression gate",
+                "validates non-promoting frustration residuals, coherence-loss proxies, and concentration telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_adversarial_phase_reference_scan",
+            path=script("ns_adversarial_phase_reference_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_adversarial_phase_reference_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_adversarial_phase_reference_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_adversarial_phase_reference_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_adversarial_phase_reference_scan.py").exists()
+            else "ns_adversarial_phase_reference_scan script not found",
+            notes=(
+                "optional adversarial phase-reference scan",
+                "empirical/non-promoting; compares zero phase to a restricted family of geometry-aware phase references",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_adversarial_phase_reference_scan",
+            path=script("check_ns_adversarial_phase_reference_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_adversarial_phase_reference_scan_out),
+                "--output-json",
+                str(ns_adversarial_phase_reference_scan_check_out),
+            )
+            if ns_adversarial_phase_reference_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_adversarial_phase_reference_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_adversarial_phase_reference_scan_out.exists()
+            and script("check_ns_adversarial_phase_reference_scan.py").exists()
+            else (
+                "check_ns_adversarial_phase_reference_scan script not found"
+                if not script("check_ns_adversarial_phase_reference_scan.py").exists()
+                else "check_ns_adversarial_phase_reference_scan requires the adversarial-reference scan output"
+            ),
+            notes=(
+                "optional adversarial phase-reference regression gate",
+                "validates non-promoting winning-reference and zero-phase-comparison telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_frustration_bridge_summary",
+            path=script("ns_triad_frustration_bridge_summary.py"),
+            args=(
+                "--incidence-json",
+                str(ns_triad_incidence_cocycle_scan_out),
+                "--frustration-json",
+                str(ns_triad_frustration_defect_scan_out),
+                "--adversarial-json",
+                str(ns_adversarial_phase_reference_scan_out),
+                "--output-json",
+                str(ns_triad_frustration_bridge_summary_out),
+            )
+            if ns_triad_incidence_cocycle_scan_out.exists()
+            and ns_triad_frustration_defect_scan_out.exists()
+            and ns_adversarial_phase_reference_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_frustration_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_incidence_cocycle_scan_out.exists()
+            and ns_triad_frustration_defect_scan_out.exists()
+            and ns_adversarial_phase_reference_scan_out.exists()
+            and script("ns_triad_frustration_bridge_summary.py").exists()
+            else (
+                "ns_triad_frustration_bridge_summary script not found"
+                if not script("ns_triad_frustration_bridge_summary.py").exists()
+                else "ns_triad_frustration_bridge_summary requires incidence, frustration, and adversarial outputs"
+            ),
+            notes=(
+                "optional triad-frustration bridge summary",
+                "empirical/non-promoting; joins the cocycle, frustration, and adversarial reference surfaces and keeps the live wall unproved",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_frustration_bridge_summary",
+            path=script("check_ns_triad_frustration_bridge_summary.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_frustration_bridge_summary_out),
+                "--output-json",
+                str(ns_triad_frustration_bridge_summary_check_out),
+            )
+            if ns_triad_frustration_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_frustration_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_frustration_bridge_summary_out.exists()
+            and script("check_ns_triad_frustration_bridge_summary.py").exists()
+            else (
+                "check_ns_triad_frustration_bridge_summary script not found"
+                if not script("check_ns_triad_frustration_bridge_summary.py").exists()
+                else "check_ns_triad_frustration_bridge_summary requires the bridge summary output"
+            ),
+            notes=(
+                "optional triad-frustration bridge regression gate",
+                "validates non-promoting bridge-row metrics, correlations, and the explicit unproved-wall marker",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_phase_laplacian_scan",
+            path=script("ns_triad_phase_laplacian_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_phase_laplacian_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_phase_laplacian_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_phase_laplacian_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_phase_laplacian_scan.py").exists()
+            else "ns_triad_phase_laplacian_scan script not found",
+            notes=(
+                "optional triad phase-Laplacian scan",
+                "empirical/non-promoting; measures finite-dimensional Hessian, gap, and negative-frame proxies on the selected triad carrier",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_phase_laplacian_scan",
+            path=script("check_ns_triad_phase_laplacian_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_phase_laplacian_scan_out),
+                "--output-json",
+                str(ns_triad_phase_laplacian_scan_check_out),
+            )
+            if ns_triad_phase_laplacian_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_phase_laplacian_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_phase_laplacian_scan_out.exists()
+            and script("check_ns_triad_phase_laplacian_scan.py").exists()
+            else (
+                "check_ns_triad_phase_laplacian_scan script not found"
+                if not script("check_ns_triad_phase_laplacian_scan.py").exists()
+                else "check_ns_triad_phase_laplacian_scan requires the phase-Laplacian scan output"
+            ),
+            notes=(
+                "optional triad phase-Laplacian regression gate",
+                "validates non-promoting Hessian, gap, and negative-frame telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_low_frustration_basin_scan",
+            path=script("ns_low_frustration_basin_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_low_frustration_basin_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_low_frustration_basin_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_low_frustration_basin_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_low_frustration_basin_scan.py").exists()
+            else "ns_low_frustration_basin_scan script not found",
+            notes=(
+                "optional low-frustration basin scan",
+                "empirical/non-promoting; estimates basin occupancy, rarity, and structured perturbation sensitivity around low-frustration phase states",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_low_frustration_basin_scan",
+            path=script("check_ns_low_frustration_basin_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_low_frustration_basin_scan_out),
+                "--output-json",
+                str(ns_low_frustration_basin_scan_check_out),
+            )
+            if ns_low_frustration_basin_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_low_frustration_basin_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_low_frustration_basin_scan_out.exists()
+            and script("check_ns_low_frustration_basin_scan.py").exists()
+            else (
+                "check_ns_low_frustration_basin_scan script not found"
+                if not script("check_ns_low_frustration_basin_scan.py").exists()
+                else "check_ns_low_frustration_basin_scan requires the basin scan output"
+            ),
+            notes=(
+                "optional low-frustration basin regression gate",
+                "validates non-promoting basin occupancy and rarity telemetry for the entropy wall",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_entropy_residence_summary",
+            path=script("ns_triad_entropy_residence_summary.py"),
+            args=(
+                "--phase-laplacian-json",
+                str(ns_triad_phase_laplacian_scan_out),
+                "--low-frustration-json",
+                str(ns_low_frustration_basin_scan_out),
+                "--output-json",
+                str(ns_triad_entropy_residence_summary_out),
+            )
+            if ns_triad_phase_laplacian_scan_out.exists()
+            and ns_low_frustration_basin_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_entropy_residence_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_phase_laplacian_scan_out.exists()
+            and ns_low_frustration_basin_scan_out.exists()
+            and script("ns_triad_entropy_residence_summary.py").exists()
+            else (
+                "ns_triad_entropy_residence_summary script not found"
+                if not script("ns_triad_entropy_residence_summary.py").exists()
+                else "ns_triad_entropy_residence_summary requires the phase-Laplacian and basin outputs"
+            ),
+            notes=(
+                "optional triad entropy/residence summary",
+                "empirical/non-promoting; joins the Wall 1 and Wall 2 telemetry surfaces and keeps both walls explicitly unproved",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_entropy_residence_summary",
+            path=script("check_ns_triad_entropy_residence_summary.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_entropy_residence_summary_out),
+                "--output-json",
+                str(ns_triad_entropy_residence_summary_check_out),
+            )
+            if ns_triad_entropy_residence_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_entropy_residence_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_entropy_residence_summary_out.exists()
+            and script("check_ns_triad_entropy_residence_summary.py").exists()
+            else (
+                "check_ns_triad_entropy_residence_summary script not found"
+                if not script("check_ns_triad_entropy_residence_summary.py").exists()
+                else "check_ns_triad_entropy_residence_summary requires the entropy/residence summary output"
+            ),
+            notes=(
+                "optional triad entropy/residence regression gate",
+                "validates non-promoting Wall 1 / Wall 2 bridge metrics and the explicit unproved-wall markers",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_cycle_obstruction_scan",
+            path=script("ns_triad_cycle_obstruction_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_cycle_obstruction_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_cycle_obstruction_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_cycle_obstruction_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_cycle_obstruction_scan.py").exists()
+            else "ns_triad_cycle_obstruction_scan script not found",
+            notes=(
+                "optional triad cycle-obstruction scan",
+                "empirical/non-promoting; measures cycle-rank and cocycle-residue structure on the selected resonant triad carrier",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_cycle_obstruction_scan",
+            path=script("check_ns_triad_cycle_obstruction_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_cycle_obstruction_scan_out),
+                "--output-json",
+                str(ns_triad_cycle_obstruction_scan_check_out),
+            )
+            if ns_triad_cycle_obstruction_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_cycle_obstruction_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_cycle_obstruction_scan_out.exists()
+            and script("check_ns_triad_cycle_obstruction_scan.py").exists()
+            else (
+                "check_ns_triad_cycle_obstruction_scan script not found"
+                if not script("check_ns_triad_cycle_obstruction_scan.py").exists()
+                else "check_ns_triad_cycle_obstruction_scan requires the cycle-obstruction scan output"
+            ),
+            notes=(
+                "optional triad cycle-obstruction regression gate",
+                "validates non-promoting cycle-rank, residue, and exact-lock telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_low_frustration_hessian_scan",
+            path=script("ns_triad_low_frustration_hessian_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_low_frustration_hessian_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_low_frustration_hessian_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_low_frustration_hessian_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_low_frustration_hessian_scan.py").exists()
+            else "ns_triad_low_frustration_hessian_scan script not found",
+            notes=(
+                "optional low-frustration Hessian scan",
+                "empirical/non-promoting; measures second-moment Hessian proxies around the best low-frustration references",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_low_frustration_hessian_scan",
+            path=script("check_ns_triad_low_frustration_hessian_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_low_frustration_hessian_scan_out),
+                "--output-json",
+                str(ns_triad_low_frustration_hessian_scan_check_out),
+            )
+            if ns_triad_low_frustration_hessian_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_low_frustration_hessian_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_low_frustration_hessian_scan_out.exists()
+            and script("check_ns_triad_low_frustration_hessian_scan.py").exists()
+            else (
+                "check_ns_triad_low_frustration_hessian_scan script not found"
+                if not script("check_ns_triad_low_frustration_hessian_scan.py").exists()
+                else "check_ns_triad_low_frustration_hessian_scan requires the Hessian scan output"
+            ),
+            notes=(
+                "optional low-frustration Hessian regression gate",
+                "validates non-promoting Hessian-proxy basin telemetry for the Wall 1 barrier route",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_phase_regime_separation_scan",
+            path=script("ns_triad_phase_regime_separation_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_phase_regime_separation_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_phase_regime_separation_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_phase_regime_separation_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_phase_regime_separation_scan.py").exists()
+            else "ns_triad_phase_regime_separation_scan script not found",
+            notes=(
+                "optional triad phase-regime separation scan",
+                "empirical/non-promoting; compares random-phase and optimized low-frustration shell carriers",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_phase_regime_separation_scan",
+            path=script("check_ns_triad_phase_regime_separation_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_phase_regime_separation_scan_out),
+                "--output-json",
+                str(ns_triad_phase_regime_separation_scan_check_out),
+            )
+            if ns_triad_phase_regime_separation_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_phase_regime_separation_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_phase_regime_separation_scan_out.exists()
+            and script("check_ns_triad_phase_regime_separation_scan.py").exists()
+            else (
+                "check_ns_triad_phase_regime_separation_scan script not found"
+                if not script("check_ns_triad_phase_regime_separation_scan.py").exists()
+                else "check_ns_triad_phase_regime_separation_scan requires the phase-regime scan output"
+            ),
+            notes=(
+                "optional triad phase-regime separation regression gate",
+                "validates non-promoting shellwise random-vs-optimized telemetry and epsilon-gap proxies",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_frame_stability_scan",
+            path=script("ns_triad_frame_stability_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_frame_stability_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_frame_stability_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_frame_stability_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_frame_stability_scan.py").exists()
+            else "ns_triad_frame_stability_scan script not found",
+            notes=(
+                "optional triad frame-stability scan",
+                "empirical/non-promoting; measures positive-backbone, negative-frame, and stratum-aware operator proxies",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_frame_stability_scan",
+            path=script("check_ns_triad_frame_stability_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_frame_stability_scan_out),
+                "--output-json",
+                str(ns_triad_frame_stability_scan_check_out),
+            )
+            if ns_triad_frame_stability_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_frame_stability_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_frame_stability_scan_out.exists()
+            and script("check_ns_triad_frame_stability_scan.py").exists()
+            else (
+                "check_ns_triad_frame_stability_scan script not found"
+                if not script("check_ns_triad_frame_stability_scan.py").exists()
+                else "check_ns_triad_frame_stability_scan requires the frame-stability scan output"
+            ),
+            notes=(
+                "optional triad frame-stability regression gate",
+                "validates non-promoting backbone/negative-frame and stratum-decomposition telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_cocycle_floor_scan",
+            path=script("ns_triad_cocycle_floor_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_cocycle_floor_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_cocycle_floor_scan.py").exists()
+            else "ns_triad_cocycle_floor_scan script not found",
+            notes=(
+                "optional triad cocycle-floor scan",
+                "empirical/non-promoting; estimates cycle-defect lower bounds and shellwise irreducible-floor proxies",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_cocycle_floor_scan",
+            path=script("check_ns_triad_cocycle_floor_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--output-json",
+                str(ns_triad_cocycle_floor_scan_check_out),
+            )
+            if ns_triad_cocycle_floor_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_cocycle_floor_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_cocycle_floor_scan_out.exists()
+            and script("check_ns_triad_cocycle_floor_scan.py").exists()
+            else (
+                "check_ns_triad_cocycle_floor_scan script not found"
+                if not script("check_ns_triad_cocycle_floor_scan.py").exists()
+                else "check_ns_triad_cocycle_floor_scan requires the cocycle-floor scan output"
+            ),
+            notes=(
+                "optional triad cocycle-floor regression gate",
+                "validates non-promoting cycle-defect and floor-ratio telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_cycle_family_lower_bound_scan",
+            path=script("ns_triad_cycle_family_lower_bound_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_cycle_family_lower_bound_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_cycle_family_lower_bound_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_cycle_family_lower_bound_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_cycle_family_lower_bound_scan.py").exists()
+            else "ns_triad_cycle_family_lower_bound_scan script not found",
+            notes=(
+                "optional Wall 1 cycle-family lower-bound scan",
+                "empirical/non-promoting; estimates the cycle-family quadratic obstruction d^T (C W^-1 C^T)^dagger d",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_cycle_family_lower_bound_scan",
+            path=script("check_ns_triad_cycle_family_lower_bound_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_cycle_family_lower_bound_scan_out),
+                "--output-json",
+                str(ns_triad_cycle_family_lower_bound_scan_check_out),
+            )
+            if ns_triad_cycle_family_lower_bound_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_cycle_family_lower_bound_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_cycle_family_lower_bound_scan_out.exists()
+            and script("check_ns_triad_cycle_family_lower_bound_scan.py").exists()
+            else (
+                "check_ns_triad_cycle_family_lower_bound_scan script not found"
+                if not script("check_ns_triad_cycle_family_lower_bound_scan.py").exists()
+                else "check_ns_triad_cycle_family_lower_bound_scan requires the cycle-family scan output"
+            ),
+            notes=(
+                "optional Wall 1 cycle-family regression gate",
+                "validates non-promoting family-lower-bound, effective-rank, and Gram conditioning telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_cycle_packing_overlap_scan",
+            path=script("ns_triad_cycle_packing_overlap_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_cycle_packing_overlap_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_cycle_packing_overlap_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_cycle_packing_overlap_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_cycle_packing_overlap_scan.py").exists()
+            else "ns_triad_cycle_packing_overlap_scan script not found",
+            notes=(
+                "optional Wall 1 cycle-packing overlap scan",
+                "empirical/non-promoting; measures whether cycle-family obstruction directions collapse or remain spread",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_cycle_packing_overlap_scan",
+            path=script("check_ns_triad_cycle_packing_overlap_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_cycle_packing_overlap_scan_out),
+                "--output-json",
+                str(ns_triad_cycle_packing_overlap_scan_check_out),
+            )
+            if ns_triad_cycle_packing_overlap_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_cycle_packing_overlap_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_cycle_packing_overlap_scan_out.exists()
+            and script("check_ns_triad_cycle_packing_overlap_scan.py").exists()
+            else (
+                "check_ns_triad_cycle_packing_overlap_scan script not found"
+                if not script("check_ns_triad_cycle_packing_overlap_scan.py").exists()
+                else "check_ns_triad_cycle_packing_overlap_scan requires the cycle-packing overlap scan output"
+            ),
+            notes=(
+                "optional Wall 1 cycle-packing regression gate",
+                "validates non-promoting overlap, packing concentration, and obstruction-collapse telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_k01_geometry_audit_scan",
+            path=script("ns_triad_k01_geometry_audit_scan.py"),
+            args=(
+                "--frame-stability-json",
+                str(ns_triad_frame_stability_scan_out),
+                "--schur-json",
+                str(ns_triad_schur_directional_audit_scan_out),
+                "--output-json",
+                str(ns_triad_k01_geometry_audit_scan_out),
+            )
+            if ns_triad_frame_stability_scan_out.exists()
+            and ns_triad_schur_directional_audit_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_k01_geometry_audit_scan_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_frame_stability_scan_out.exists()
+            and ns_triad_schur_directional_audit_scan_out.exists()
+            and script("ns_triad_k01_geometry_audit_scan.py").exists()
+            else (
+                "ns_triad_k01_geometry_audit_scan script not found"
+                if not script("ns_triad_k01_geometry_audit_scan.py").exists()
+                else "ns_triad_k01_geometry_audit_scan requires frame-stability and Schur directional audit outputs"
+            ),
+            notes=(
+                "optional Wall 1 K01 geometry audit",
+                "empirical/non-promoting; measures shell-ratio, angular-mismatch, and coupling-geometry proxies for the Schur target",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_k01_geometry_audit_scan",
+            path=script("check_ns_triad_k01_geometry_audit_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_k01_geometry_audit_scan_out),
+                "--output-json",
+                str(ns_triad_k01_geometry_audit_scan_check_out),
+            )
+            if ns_triad_k01_geometry_audit_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_k01_geometry_audit_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_k01_geometry_audit_scan_out.exists()
+            and script("check_ns_triad_k01_geometry_audit_scan.py").exists()
+            else (
+                "check_ns_triad_k01_geometry_audit_scan script not found"
+                if not script("check_ns_triad_k01_geometry_audit_scan.py").exists()
+                else "check_ns_triad_k01_geometry_audit_scan requires the K01 geometry audit output"
+            ),
+            notes=(
+                "optional Wall 1 K01 geometry regression gate",
+                "validates non-promoting K01-geometry and directional-coupling telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_schur_directional_audit_scan",
+            path=script("ns_triad_schur_directional_audit_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_triad_schur_directional_audit_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_triad_schur_directional_audit_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_schur_directional_audit_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_schur_directional_audit_scan.py").exists()
+            else "ns_triad_schur_directional_audit_scan script not found",
+            notes=(
+                "optional Wall 1 Schur directional audit",
+                "empirical/non-promoting; measures blockwise K00/K01/K11 and directional Schur-gap proxies",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_schur_directional_audit_scan",
+            path=script("check_ns_triad_schur_directional_audit_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_schur_directional_audit_scan_out),
+                "--output-json",
+                str(ns_triad_schur_directional_audit_scan_check_out),
+            )
+            if ns_triad_schur_directional_audit_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_schur_directional_audit_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_schur_directional_audit_scan_out.exists()
+            and script("check_ns_triad_schur_directional_audit_scan.py").exists()
+            else (
+                "check_ns_triad_schur_directional_audit_scan script not found"
+                if not script("check_ns_triad_schur_directional_audit_scan.py").exists()
+                else "check_ns_triad_schur_directional_audit_scan requires the Schur audit output"
+            ),
+            notes=(
+                "optional Wall 1 Schur-directional regression gate",
+                "validates non-promoting directional q_diag - q_coup and block-gap telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_signed_carrier_reconciliation_scan",
+            path=script("ns_triad_signed_carrier_reconciliation_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_signed_carrier_reconciliation_scan_out),
+            )
+            if script("ns_triad_signed_carrier_reconciliation_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_carrier_reconciliation_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_signed_carrier_reconciliation_scan.py").exists()
+            else "ns_triad_signed_carrier_reconciliation_scan script not found",
+            notes=(
+                "optional Wall 1 signed carrier reconciliation scan",
+                "empirical/non-promoting; reconciles theorem-status chart surfaces against the active fail-closed signed extraction",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_signed_carrier_reconciliation_scan",
+            path=script("check_ns_triad_signed_carrier_reconciliation_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_signed_carrier_reconciliation_scan_out),
+                "--output-json",
+                str(ns_triad_signed_carrier_reconciliation_scan_check_out),
+            )
+            if ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_carrier_reconciliation_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            and script("check_ns_triad_signed_carrier_reconciliation_scan.py").exists()
+            else (
+                "check_ns_triad_signed_carrier_reconciliation_scan script not found"
+                if not script("check_ns_triad_signed_carrier_reconciliation_scan.py").exists()
+                else "check_ns_triad_signed_carrier_reconciliation_scan requires the reconciliation scan output"
+            ),
+            notes=(
+                "optional Wall 1 signed carrier reconciliation regression gate",
+                "validates fail-closed reconciliation bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_wall1_carrier_explanatory_rank_scan",
+            path=script("ns_triad_wall1_carrier_explanatory_rank_scan.py"),
+            args=(
+                "--continuous-coherence-capacity-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
+                "--k-n-exact-identity-json",
+                str(ns_triad_kn_exact_identity_scan_out),
+                "--output-json",
+                str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
+            )
+            if ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
+            and script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_wall1_carrier_explanatory_rank_scan_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
+            and script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+            else (
+                "ns_triad_wall1_carrier_explanatory_rank_scan script not found"
+                if not script("ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+                else "ns_triad_wall1_carrier_explanatory_rank_scan requires the continuous-coherence-capacity and K_N exact-identity scan outputs"
+            ),
+            notes=(
+                "optional Wall 1 carrier explanatory-rank scan",
+                "empirical/non-promoting; ranks current Wall 1 carrier candidates against the observed floor",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_wall1_carrier_explanatory_rank_scan",
+            path=script("check_ns_triad_wall1_carrier_explanatory_rank_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
+                "--output-json",
+                str(ns_triad_wall1_carrier_explanatory_rank_scan_check_out),
+            )
+            if ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_wall1_carrier_explanatory_rank_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and script("check_ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+            else (
+                "check_ns_triad_wall1_carrier_explanatory_rank_scan script not found"
+                if not script("check_ns_triad_wall1_carrier_explanatory_rank_scan.py").exists()
+                else "check_ns_triad_wall1_carrier_explanatory_rank_scan requires the carrier-ranking scan output"
+            ),
+            notes=(
+                "optional Wall 1 carrier explanatory-rank regression gate",
+                "validates fail-closed candidate-carrier ranking bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_continuous_coherence_capacity_scan",
+            path=script("ns_triad_continuous_coherence_capacity_scan.py"),
+            args=(
+                "--cocycle-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--output-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
+            )
+            if ns_triad_cocycle_floor_scan_out.exists()
+            and script("ns_triad_continuous_coherence_capacity_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_continuous_coherence_capacity_scan_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_cocycle_floor_scan_out.exists()
+            and script("ns_triad_continuous_coherence_capacity_scan.py").exists()
+            else (
+                "ns_triad_continuous_coherence_capacity_scan script not found"
+                if not script("ns_triad_continuous_coherence_capacity_scan.py").exists()
+                else "ns_triad_continuous_coherence_capacity_scan requires the cocycle-floor scan output"
+            ),
+            notes=(
+                "optional Wall 1 continuous coherence-capacity scan",
+                "empirical/non-promoting; fail-closed candidate-only surface for the continuous triadic coherence carrier",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_continuous_coherence_capacity_scan",
+            path=script("check_ns_triad_continuous_coherence_capacity_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
+                "--output-json",
+                str(ns_triad_continuous_coherence_capacity_scan_check_out),
+            )
+            if ns_triad_continuous_coherence_capacity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_continuous_coherence_capacity_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and script("check_ns_triad_continuous_coherence_capacity_scan.py").exists()
+            else (
+                "check_ns_triad_continuous_coherence_capacity_scan script not found"
+                if not script("check_ns_triad_continuous_coherence_capacity_scan.py").exists()
+                else "check_ns_triad_continuous_coherence_capacity_scan requires the continuous-coherence-capacity scan output"
+            ),
+            notes=(
+                "optional Wall 1 continuous coherence-capacity regression gate",
+                "validates fail-closed candidate-only and aggregate bookkeeping for the continuous coherence surface",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_kn_exact_identity_scan",
+            path=script("ns_triad_kn_exact_identity_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_kn_exact_identity_scan_out),
+            )
+            if script("ns_triad_kn_exact_identity_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_kn_exact_identity_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_kn_exact_identity_scan.py").exists()
+            else "ns_triad_kn_exact_identity_scan script not found",
+            notes=(
+                "optional Wall 1 K_N exact-identity scan",
+                "empirical/non-promoting; fail-closed positive-subspace telemetry for L_signed_norm = I - 2 K_N and negative-frame coverage",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_amplitude_weighted_negative_frame_scan",
+            path=script("ns_triad_amplitude_weighted_negative_frame_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+            )
+            if script("ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_amplitude_weighted_negative_frame_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else "ns_triad_amplitude_weighted_negative_frame_scan script not found",
+            notes=(
+                "optional Wall 1 amplitude-weighted negative-frame scan",
+                "empirical/non-promoting; fail-closed candidate-only telemetry for the amplitude-weighted negative-frame surface",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_amplitude_weighted_negative_frame_scan",
+            path=script("check_ns_triad_amplitude_weighted_negative_frame_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+                "--output-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_check_out),
+            )
+            if ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_amplitude_weighted_negative_frame_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and script("check_ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else (
+                "check_ns_triad_amplitude_weighted_negative_frame_scan script not found"
+                if not script("check_ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+                else "check_ns_triad_amplitude_weighted_negative_frame_scan requires the amplitude-weighted negative-frame scan output"
+            ),
+            notes=(
+                "optional Wall 1 amplitude-weighted negative-frame regression gate",
+                "validates fail-closed candidate-only bookkeeping for the amplitude-weighted negative-frame surface",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_energy_budgeted_fork_scan",
+            path=script("ns_triad_energy_budgeted_fork_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
+            )
+            if script("ns_triad_energy_budgeted_fork_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_energy_budgeted_fork_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_energy_budgeted_fork_scan.py").exists()
+            else "ns_triad_energy_budgeted_fork_scan script not found",
+            notes=(
+                "optional Wall 1 energy-budgeted fork scan",
+                "empirical/non-promoting; fail-closed candidate-only telemetry for the energy-budgeted fork surface",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_energy_budgeted_fork_scan",
+            path=script("check_ns_triad_energy_budgeted_fork_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
+                "--output-json",
+                str(ns_triad_energy_budgeted_fork_scan_check_out),
+            )
+            if ns_triad_energy_budgeted_fork_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_energy_budgeted_fork_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_energy_budgeted_fork_scan_out.exists()
+            and script("check_ns_triad_energy_budgeted_fork_scan.py").exists()
+            else (
+                "check_ns_triad_energy_budgeted_fork_scan script not found"
+                if not script("check_ns_triad_energy_budgeted_fork_scan.py").exists()
+                else "check_ns_triad_energy_budgeted_fork_scan requires the energy-budgeted fork scan output"
+            ),
+            notes=(
+                "optional Wall 1 energy-budgeted fork regression gate",
+                "validates fail-closed candidate-only bookkeeping for the energy-budgeted fork surface",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_no_triple_danger_scan",
+            path=script("ns_triad_no_triple_danger_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_no_triple_danger_scan_out),
+            )
+            if script("ns_triad_no_triple_danger_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_no_triple_danger_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_no_triple_danger_scan.py").exists()
+            else "ns_triad_no_triple_danger_scan script not found",
+            notes=(
+                "optional Wall 1 no-triple-danger scan",
+                "empirical/non-promoting; checks that no adversarial amplitude row simultaneously has low frame floor, high bandwidth/BKM relevance, and low dissipation",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_no_triple_danger_scan",
+            path=script("check_ns_triad_no_triple_danger_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_no_triple_danger_scan_out),
+                "--output-json",
+                str(ns_triad_no_triple_danger_scan_check_out),
+            )
+            if ns_triad_no_triple_danger_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_no_triple_danger_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_no_triple_danger_scan_out.exists()
+            and script("check_ns_triad_no_triple_danger_scan.py").exists()
+            else (
+                "check_ns_triad_no_triple_danger_scan script not found"
+                if not script("check_ns_triad_no_triple_danger_scan.py").exists()
+                else "check_ns_triad_no_triple_danger_scan requires the no-triple-danger scan output"
+            ),
+            notes=(
+                "optional Wall 1 no-triple-danger regression gate",
+                "validates fail-closed triple-danger exclusion bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_spectral_sharpness_square_wave_stack_scan",
+            path=script("ns_triad_spectral_sharpness_square_wave_stack_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_spectral_sharpness_square_wave_stack_scan_out),
+            )
+            if script("ns_triad_spectral_sharpness_square_wave_stack_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_spectral_sharpness_square_wave_stack_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_spectral_sharpness_square_wave_stack_scan.py").exists()
+            else "ns_triad_spectral_sharpness_square_wave_stack_scan script not found",
+            notes=(
+                "optional Wall 1 spectral-sharpness square-wave stack scan",
+                "empirical/non-promoting; normalizes square-wave and harmonic-stack fork telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_spectral_sharpness_square_wave_stack_scan",
+            path=script("check_ns_triad_spectral_sharpness_square_wave_stack_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_spectral_sharpness_square_wave_stack_scan_out),
+                "--output-json",
+                str(ns_triad_spectral_sharpness_square_wave_stack_scan_check_out),
+            )
+            if ns_triad_spectral_sharpness_square_wave_stack_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_spectral_sharpness_square_wave_stack_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_spectral_sharpness_square_wave_stack_scan_out.exists()
+            and script("check_ns_triad_spectral_sharpness_square_wave_stack_scan.py").exists()
+            else (
+                "check_ns_triad_spectral_sharpness_square_wave_stack_scan script not found"
+                if not script("check_ns_triad_spectral_sharpness_square_wave_stack_scan.py").exists()
+                else "check_ns_triad_spectral_sharpness_square_wave_stack_scan requires the spectral-sharpness square-wave stack scan output"
+            ),
+            notes=(
+                "optional Wall 1 spectral-sharpness square-wave regression gate",
+                "validates fail-closed square-wave fork bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_kn_exact_identity_scan",
+            path=script("check_ns_triad_kn_exact_identity_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_kn_exact_identity_scan_out),
+                "--output-json",
+                str(ns_triad_kn_exact_identity_scan_check_out),
+            )
+            if ns_triad_kn_exact_identity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_kn_exact_identity_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_kn_exact_identity_scan_out.exists()
+            and script("check_ns_triad_kn_exact_identity_scan.py").exists()
+            else (
+                "check_ns_triad_kn_exact_identity_scan script not found"
+                if not script("check_ns_triad_kn_exact_identity_scan.py").exists()
+                else "check_ns_triad_kn_exact_identity_scan requires the K_N exact-identity scan output"
+            ),
+            notes=(
+                "optional Wall 1 K_N exact-identity regression gate",
+                "validates fail-closed candidate-only and aggregate bookkeeping for the K_N exact-identity surface",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_amplitude_weighted_negative_frame_scan",
+            path=script("ns_triad_amplitude_weighted_negative_frame_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+            )
+            if script("ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_amplitude_weighted_negative_frame_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else "ns_triad_amplitude_weighted_negative_frame_scan script not found",
+            notes=(
+                "optional Wall 1 amplitude-weighted negative-frame scan",
+                "empirical/non-promoting; summarizes K_N(A) profile telemetry across fixed amplitude profiles",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_amplitude_weighted_negative_frame_scan",
+            path=script("check_ns_triad_amplitude_weighted_negative_frame_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+                "--output-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_check_out),
+            )
+            if ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_amplitude_weighted_negative_frame_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and script("check_ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+            else (
+                "check_ns_triad_amplitude_weighted_negative_frame_scan script not found"
+                if not script("check_ns_triad_amplitude_weighted_negative_frame_scan.py").exists()
+                else "check_ns_triad_amplitude_weighted_negative_frame_scan requires the amplitude-weighted scan output"
+            ),
+            notes=(
+                "optional Wall 1 amplitude-weighted negative-frame regression gate",
+                "validates fail-closed candidate-only bookkeeping for the amplitude-weighted K_N(A) surface",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_energy_budgeted_fork_scan",
+            path=script("ns_triad_energy_budgeted_fork_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
+            )
+            if script("ns_triad_energy_budgeted_fork_scan.py").exists()
+            else ("--help",),
+            expected_json_path=ns_triad_energy_budgeted_fork_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_energy_budgeted_fork_scan.py").exists()
+            else "ns_triad_energy_budgeted_fork_scan script not found",
+            notes=(
+                "optional Wall 1 energy-budgeted fork scan",
+                "empirical/non-promoting; classifies adversarial amplitude rows into frame-coercive, low-band, or high-dissipation branches",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_energy_budgeted_fork_scan",
+            path=script("check_ns_triad_energy_budgeted_fork_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
+                "--output-json",
+                str(ns_triad_energy_budgeted_fork_scan_check_out),
+            )
+            if ns_triad_energy_budgeted_fork_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_energy_budgeted_fork_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_energy_budgeted_fork_scan_out.exists()
+            and script("check_ns_triad_energy_budgeted_fork_scan.py").exists()
+            else (
+                "check_ns_triad_energy_budgeted_fork_scan script not found"
+                if not script("check_ns_triad_energy_budgeted_fork_scan.py").exists()
+                else "check_ns_triad_energy_budgeted_fork_scan requires the energy-budgeted fork output"
+            ),
+            notes=(
+                "optional Wall 1 energy-budgeted fork regression gate",
+                "validates fail-closed candidate-only bookkeeping for the branch-classification surface",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_signed_xor_gaugeability_scan",
+            path=script("ns_triad_signed_xor_gaugeability_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_signed_xor_gaugeability_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_signed_xor_gaugeability_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_signed_xor_gaugeability_scan.py").exists()
+            else "ns_triad_signed_xor_gaugeability_scan script not found",
+            notes=(
+                "optional Wall 1 signed-XOR gaugeability audit",
+                "empirical/non-promoting; tests whether the signed mod-2 shell carrier is gaugeable or far from gaugeable",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_signed_xor_gaugeability_scan",
+            path=script("check_ns_triad_signed_xor_gaugeability_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_signed_xor_gaugeability_scan_out),
+                "--output-json",
+                str(ns_triad_signed_xor_gaugeability_scan_check_out),
+            )
+            if ns_triad_signed_xor_gaugeability_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_xor_gaugeability_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_signed_xor_gaugeability_scan_out.exists()
+            and script("check_ns_triad_signed_xor_gaugeability_scan.py").exists()
+            else (
+                "check_ns_triad_signed_xor_gaugeability_scan script not found"
+                if not script("check_ns_triad_signed_xor_gaugeability_scan.py").exists()
+                else "check_ns_triad_signed_xor_gaugeability_scan requires the signed gaugeability output"
+            ),
+            notes=(
+                "optional Wall 1 signed-XOR regression gate",
+                "validates fail-closed signed mod-2 gaugeability telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_signed_spectral_audit_scan",
+            path=script("ns_triad_signed_spectral_audit_scan.py"),
+            args=(
+                "--output-json",
+                str(ns_triad_signed_spectral_audit_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_triad_signed_spectral_audit_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_triad_signed_spectral_audit_scan.py").exists()
+            else "ns_triad_signed_spectral_audit_scan script not found",
+            notes=(
+                "optional Wall 1 signed spectral audit",
+                "empirical/non-promoting; audits candidate signed-Laplacian versus I-K identity and endpoint consistency",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_signed_spectral_audit_scan",
+            path=script("check_ns_triad_signed_spectral_audit_scan.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_signed_spectral_audit_scan_out),
+                "--output-json",
+                str(ns_triad_signed_spectral_audit_scan_check_out),
+            )
+            if ns_triad_signed_spectral_audit_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_spectral_audit_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_signed_spectral_audit_scan_out.exists()
+            and script("check_ns_triad_signed_spectral_audit_scan.py").exists()
+            else (
+                "check_ns_triad_signed_spectral_audit_scan script not found"
+                if not script("check_ns_triad_signed_spectral_audit_scan.py").exists()
+                else "check_ns_triad_signed_spectral_audit_scan requires the signed spectral audit output"
+            ),
+            notes=(
+                "optional Wall 1 signed spectral regression gate",
+                "validates fail-closed identity-error and signed-spectrum bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_signed_wall1_theorem_status",
+            path=script("ns_triad_signed_wall1_theorem_status.py"),
+            args=(
+                "--gaugeability-json",
+                str(ns_triad_signed_xor_gaugeability_scan_out),
+                "--reconciliation-json",
+                str(ns_triad_signed_carrier_reconciliation_scan_out),
+                "--carrier-ranking-json",
+                str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
+                "--k-n-exact-identity-json",
+                str(ns_triad_kn_exact_identity_scan_out),
+                "--amplitude-weighted-negative-frame-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+                "--no-triple-danger-json",
+                str(ns_triad_no_triple_danger_scan_out),
+                "--energy-budgeted-fork-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
+                "--spectral-sharpness-square-wave-stack-json",
+                str(ns_triad_spectral_sharpness_square_wave_stack_scan_out),
+                "--continuous-coherence-capacity-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
+                "--spectral-json",
+                str(ns_triad_signed_spectral_audit_scan_out),
+                "--cocycle-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--schur-json",
+                str(ns_triad_schur_directional_audit_scan_out),
+                "--output-json",
+                str(ns_triad_signed_wall1_theorem_status_out),
+            )
+            if ns_triad_signed_xor_gaugeability_scan_out.exists()
+            and ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
+            and ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and ns_triad_no_triple_danger_scan_out.exists()
+            and ns_triad_energy_budgeted_fork_scan_out.exists()
+            and ns_triad_spectral_sharpness_square_wave_stack_scan_out.exists()
+            and ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and ns_triad_signed_spectral_audit_scan_out.exists()
+            and ns_triad_cocycle_floor_scan_out.exists()
+            and ns_triad_schur_directional_audit_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_wall1_theorem_status_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_signed_xor_gaugeability_scan_out.exists()
+            and ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
+            and ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and ns_triad_no_triple_danger_scan_out.exists()
+            and ns_triad_energy_budgeted_fork_scan_out.exists()
+            and ns_triad_spectral_sharpness_square_wave_stack_scan_out.exists()
+            and ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and ns_triad_signed_spectral_audit_scan_out.exists()
+            and ns_triad_cocycle_floor_scan_out.exists()
+            and ns_triad_schur_directional_audit_scan_out.exists()
+            and script("ns_triad_signed_wall1_theorem_status.py").exists()
+            else (
+                "ns_triad_signed_wall1_theorem_status script not found"
+                if not script("ns_triad_signed_wall1_theorem_status.py").exists()
+                else "ns_triad_signed_wall1_theorem_status requires signed gaugeability, reconciliation, carrier-ranking, K_N exact-identity, amplitude-weighted negative-frame, no-triple-danger, energy-budgeted fork, spectral-sharpness square-wave stack, continuous coherence, signed spectral, cocycle, and Schur outputs"
+            ),
+            notes=(
+                "optional Wall 1 signed theorem-status summary",
+                "empirical/non-promoting; joins signed-XOR, reconciliation, carrier-ranking, K_N exact-identity, amplitude/fork/no-triple-danger/square-wave, signed-spectrum, cocycle-floor, and Schur telemetry into one fail-closed surface",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_signed_wall1_theorem_status",
+            path=script("check_ns_triad_signed_wall1_theorem_status.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_signed_wall1_theorem_status_out),
+                "--output-json",
+                str(ns_triad_signed_wall1_theorem_status_check_out),
+            )
+            if ns_triad_signed_wall1_theorem_status_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_signed_wall1_theorem_status_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_signed_wall1_theorem_status_out.exists()
+            and script("check_ns_triad_signed_wall1_theorem_status.py").exists()
+            else (
+                "check_ns_triad_signed_wall1_theorem_status script not found"
+                if not script("check_ns_triad_signed_wall1_theorem_status.py").exists()
+                else "check_ns_triad_signed_wall1_theorem_status requires the signed theorem-status output"
+            ),
+            notes=(
+                "optional Wall 1 signed theorem-status regression gate",
+                "validates fail-closed signed Wall 1 surface bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_triad_wall1_shell_bridge_summary",
+            path=script("ns_triad_wall1_shell_bridge_summary.py"),
+            args=(
+                "--phase-regime-json",
+                str(ns_triad_phase_regime_separation_scan_out),
+                "--frame-stability-json",
+                str(ns_triad_frame_stability_scan_out),
+                "--cocycle-floor-json",
+                str(ns_triad_cocycle_floor_scan_out),
+                "--schur-json",
+                str(ns_triad_schur_directional_audit_scan_out),
+                "--signed-wall1-reconciliation-json",
+                str(ns_triad_signed_carrier_reconciliation_scan_out),
+                "--signed-wall1-carrier-ranking-json",
+                str(ns_triad_wall1_carrier_explanatory_rank_scan_out),
+                "--k-n-exact-identity-json",
+                str(ns_triad_kn_exact_identity_scan_out),
+                "--amplitude-weighted-negative-frame-json",
+                str(ns_triad_amplitude_weighted_negative_frame_scan_out),
+                "--no-triple-danger-json",
+                str(ns_triad_no_triple_danger_scan_out),
+                "--energy-budgeted-fork-json",
+                str(ns_triad_energy_budgeted_fork_scan_out),
+                "--spectral-sharpness-square-wave-stack-json",
+                str(ns_triad_spectral_sharpness_square_wave_stack_scan_out),
+                "--continuous-coherence-capacity-json",
+                str(ns_triad_continuous_coherence_capacity_scan_out),
+                "--cycle-json",
+                str(ns_triad_cycle_obstruction_scan_out),
+                "--cycle-packing-json",
+                str(ns_triad_cycle_packing_overlap_scan_out),
+                "--hessian-json",
+                str(ns_triad_low_frustration_hessian_scan_out),
+                "--k01-geometry-json",
+                str(ns_triad_k01_geometry_audit_scan_out),
+                "--signed-wall1-json",
+                str(ns_triad_signed_wall1_theorem_status_out),
+                "--output-json",
+                str(ns_triad_wall1_shell_bridge_summary_out),
+            )
+            if ns_triad_phase_regime_separation_scan_out.exists()
+            and ns_triad_frame_stability_scan_out.exists()
+            and ns_triad_cocycle_floor_scan_out.exists()
+            and ns_triad_schur_directional_audit_scan_out.exists()
+            and ns_triad_cycle_obstruction_scan_out.exists()
+            and ns_triad_cycle_packing_overlap_scan_out.exists()
+            and ns_triad_low_frustration_hessian_scan_out.exists()
+            and ns_triad_k01_geometry_audit_scan_out.exists()
+            and ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
+            and ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and ns_triad_no_triple_danger_scan_out.exists()
+            and ns_triad_energy_budgeted_fork_scan_out.exists()
+            and ns_triad_spectral_sharpness_square_wave_stack_scan_out.exists()
+            and ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and ns_triad_signed_wall1_theorem_status_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_wall1_shell_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_phase_regime_separation_scan_out.exists()
+            and ns_triad_frame_stability_scan_out.exists()
+            and ns_triad_cocycle_floor_scan_out.exists()
+            and ns_triad_schur_directional_audit_scan_out.exists()
+            and ns_triad_cycle_obstruction_scan_out.exists()
+            and ns_triad_cycle_packing_overlap_scan_out.exists()
+            and ns_triad_low_frustration_hessian_scan_out.exists()
+            and ns_triad_k01_geometry_audit_scan_out.exists()
+            and ns_triad_signed_carrier_reconciliation_scan_out.exists()
+            and ns_triad_wall1_carrier_explanatory_rank_scan_out.exists()
+            and ns_triad_kn_exact_identity_scan_out.exists()
+            and ns_triad_amplitude_weighted_negative_frame_scan_out.exists()
+            and ns_triad_no_triple_danger_scan_out.exists()
+            and ns_triad_energy_budgeted_fork_scan_out.exists()
+            and ns_triad_spectral_sharpness_square_wave_stack_scan_out.exists()
+            and ns_triad_continuous_coherence_capacity_scan_out.exists()
+            and ns_triad_signed_wall1_theorem_status_out.exists()
+            and script("ns_triad_wall1_shell_bridge_summary.py").exists()
+            else (
+                "ns_triad_wall1_shell_bridge_summary script not found"
+                if not script("ns_triad_wall1_shell_bridge_summary.py").exists()
+                else "ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell telemetry outputs including signed theorem-status, signed reconciliation, signed carrier ranking, K_N exact-identity, amplitude/no-triple-danger/fork/square-wave, cycle-packing, K01 geometry, and Schur directional audit"
+            ),
+            notes=(
+                "optional Wall 1 shell bridge summary",
+                "empirical/non-promoting; joins phase-regime, frame-stability, cocycle-floor, signed theorem-status, signed reconciliation, signed carrier ranking, K_N exact-identity, amplitude/no-triple-danger/fork/square-wave, cycle-packing, K01 geometry, Schur, cycle, and Hessian telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_triad_wall1_shell_bridge_summary",
+            path=script("check_ns_triad_wall1_shell_bridge_summary.py"),
+            args=(
+                "--source-json",
+                str(ns_triad_wall1_shell_bridge_summary_out),
+                "--output-json",
+                str(ns_triad_wall1_shell_bridge_summary_check_out),
+            )
+            if ns_triad_wall1_shell_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_triad_wall1_shell_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_triad_wall1_shell_bridge_summary_out.exists()
+            and script("check_ns_triad_wall1_shell_bridge_summary.py").exists()
+            else (
+                "check_ns_triad_wall1_shell_bridge_summary script not found"
+                if not script("check_ns_triad_wall1_shell_bridge_summary.py").exists()
+                else "check_ns_triad_wall1_shell_bridge_summary requires the Wall 1 shell bridge summary output"
+            ),
+            notes=(
+                "optional Wall 1 shell bridge regression gate",
+                "validates non-promoting shell-bridge metrics and explicit unproved-wall bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_tube_morphology_scan",
+            path=script("check_ns_tube_morphology_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_tube_morphology_scan_out),
+                "--output-json",
+                str(ns_tube_morphology_scan_check_out),
+            )
+            if ns_tube_morphology_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_tube_morphology_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_tube_morphology_scan_out.exists()
+            and script("check_ns_tube_morphology_scan.py").exists()
+            else (
+                "check_ns_tube_morphology_scan script not found"
+                if not script("check_ns_tube_morphology_scan.py").exists()
+                else "check_ns_tube_morphology_scan requires the morphology scan output"
+            ),
+            notes=(
+                "optional tube-morphology regression gate",
+                "validates non-promoting local morphology threshold bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_helicity_q_scan",
+            path=script("ns_boundary_helicity_q_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_boundary_helicity_q_scan_out),
+                "--frame-limit",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_boundary_helicity_q_scan_out),
+                "--frame-limit",
+                "1",
+            ),
+            expected_json_path=ns_boundary_helicity_q_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_boundary_helicity_q_scan.py").exists()
+            else "ns_boundary_helicity_q_scan script not found",
+            notes=(
+                "optional boundary helicity/Q scan",
+                "empirical/non-promoting; tracks local helicity and Q signs on the lambda2 boundary band",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_helicity_q_scan",
+            path=script("check_ns_boundary_helicity_q_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_boundary_helicity_q_scan_out),
+                "--output-json",
+                str(ns_boundary_helicity_q_scan_check_out),
+            )
+            if ns_boundary_helicity_q_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_helicity_q_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_helicity_q_scan_out.exists()
+            and script("check_ns_boundary_helicity_q_scan.py").exists()
+            else (
+                "check_ns_boundary_helicity_q_scan script not found"
+                if not script("check_ns_boundary_helicity_q_scan.py").exists()
+                else "check_ns_boundary_helicity_q_scan requires the helicity/Q scan output"
+            ),
+            notes=(
+                "optional boundary helicity/Q regression gate",
+                "validates non-promoting boundary helicity-Q threshold bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_tube_pressure_helicity_bridge_summary",
+            path=script("ns_tube_pressure_helicity_bridge_summary.py"),
+            args=(
+                "--morphology-json",
+                str(ns_tube_morphology_scan_out),
+                "--boundary-helicity-json",
+                str(ns_boundary_helicity_q_scan_out),
+                "--boundary-pressure-json",
+                str(ns_boundary_pressure_gate_scan_out),
+                "--output-json",
+                str(ns_tube_pressure_helicity_bridge_summary_out),
+            )
+            if ns_tube_morphology_scan_out.exists()
+            and ns_boundary_helicity_q_scan_out.exists()
+            and ns_boundary_pressure_gate_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_tube_pressure_helicity_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_tube_morphology_scan_out.exists()
+            and ns_boundary_helicity_q_scan_out.exists()
+            and ns_boundary_pressure_gate_scan_out.exists()
+            and script("ns_tube_pressure_helicity_bridge_summary.py").exists()
+            else (
+                "ns_tube_pressure_helicity_bridge_summary script not found"
+                if not script("ns_tube_pressure_helicity_bridge_summary.py").exists()
+                else "ns_tube_pressure_helicity_bridge_summary requires morphology, helicity/Q, and boundary pressure outputs"
+            ),
+            notes=(
+                "optional tube-pressure-helicity bridge summary",
+                "empirical/non-promoting; joins morphology, boundary helicity/Q, and boundary pressure rows by frame",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_tube_pressure_helicity_bridge_summary",
+            path=script("check_ns_tube_pressure_helicity_bridge_summary.py"),
+            args=(
+                "--summary-json",
+                str(ns_tube_pressure_helicity_bridge_summary_out),
+                "--output-json",
+                str(ns_tube_pressure_helicity_bridge_summary_check_out),
+            )
+            if ns_tube_pressure_helicity_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_tube_pressure_helicity_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_tube_pressure_helicity_bridge_summary_out.exists()
+            and script("check_ns_tube_pressure_helicity_bridge_summary.py").exists()
+            else (
+                "check_ns_tube_pressure_helicity_bridge_summary script not found"
+                if not script("check_ns_tube_pressure_helicity_bridge_summary.py").exists()
+                else "check_ns_tube_pressure_helicity_bridge_summary requires the bridge summary output"
+            ),
+            notes=(
+                "optional tube-pressure-helicity bridge regression gate",
+                "validates non-promoting framewise morphology/helicity/pressure bridge consistency",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_case_a_transition_shell_scan",
+            path=script("ns_case_a_transition_shell_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output",
+                str(ns_case_a_transition_shell_scan_out),
+                "--max-frames",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output",
+                str(ns_case_a_transition_shell_scan_out),
+                "--max-frames",
+                "1",
+            ),
+            expected_json_path=ns_case_a_transition_shell_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_case_a_transition_shell_scan.py").exists()
+            else "ns_case_a_transition_shell_scan script not found",
+            notes=(
+                "optional Case A transition-shell scan",
+                "empirical/non-promoting; tracks compressive high-strain shell size and graph-distance separation from a lambda2 boundary proxy",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_case_a_transition_shell_scan",
+            path=script("check_ns_case_a_transition_shell_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_case_a_transition_shell_scan_out),
+                "--output-json",
+                str(ns_case_a_transition_shell_scan_check_out),
+            )
+            if ns_case_a_transition_shell_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_case_a_transition_shell_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_case_a_transition_shell_scan_out.exists()
+            and script("check_ns_case_a_transition_shell_scan.py").exists()
+            else (
+                "check_ns_case_a_transition_shell_scan script not found"
+                if not script("check_ns_case_a_transition_shell_scan.py").exists()
+                else "check_ns_case_a_transition_shell_scan requires the transition-shell scan output"
+            ),
+            notes=(
+                "optional Case A transition-shell regression gate",
+                "validates non-promoting transition-shell and boundary-gap telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_boundary_delta1_uniformity_scan",
+            path=script("ns_boundary_delta1_uniformity_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output",
+                str(ns_boundary_delta1_uniformity_scan_out),
+                "--max-frames",
+                "1",
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output",
+                str(ns_boundary_delta1_uniformity_scan_out),
+                "--max-frames",
+                "1",
+            ),
+            expected_json_path=ns_boundary_delta1_uniformity_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_boundary_delta1_uniformity_scan.py").exists()
+            else "ns_boundary_delta1_uniformity_scan script not found",
+            notes=(
+                "optional boundary-delta1 uniformity scan",
+                "empirical/non-promoting; tracks boundary-band delta1 minima, quantiles, and norm-identity residuals",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_boundary_delta1_uniformity_scan",
+            path=script("check_ns_boundary_delta1_uniformity_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_boundary_delta1_uniformity_scan_out),
+                "--output-json",
+                str(ns_boundary_delta1_uniformity_scan_check_out),
+            )
+            if ns_boundary_delta1_uniformity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_boundary_delta1_uniformity_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_delta1_uniformity_scan_out.exists()
+            and script("check_ns_boundary_delta1_uniformity_scan.py").exists()
+            else (
+                "check_ns_boundary_delta1_uniformity_scan script not found"
+                if not script("check_ns_boundary_delta1_uniformity_scan.py").exists()
+                else "check_ns_boundary_delta1_uniformity_scan requires the boundary-delta1 scan output"
+            ),
+            notes=(
+                "optional boundary-delta1 uniformity regression gate",
+                "validates non-promoting boundary lower-bound and norm-identity telemetry",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_case_a_geometric_bridge_summary",
+            path=script("ns_case_a_geometric_bridge_summary.py"),
+            args=(
+                "--case-a-json",
+                str(ns_case_a_transition_shell_scan_out),
+                "--boundary-delta1-json",
+                str(ns_boundary_delta1_uniformity_scan_out),
+                "--output-json",
+                str(ns_case_a_geometric_bridge_summary_out),
+            )
+            if ns_case_a_transition_shell_scan_out.exists()
+            and ns_boundary_delta1_uniformity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_case_a_geometric_bridge_summary_out,
+            optional=True,
+            skip_reason=None
+            if ns_case_a_transition_shell_scan_out.exists()
+            and ns_boundary_delta1_uniformity_scan_out.exists()
+            and script("ns_case_a_geometric_bridge_summary.py").exists()
+            else (
+                "ns_case_a_geometric_bridge_summary script not found"
+                if not script("ns_case_a_geometric_bridge_summary.py").exists()
+                else "ns_case_a_geometric_bridge_summary requires both Case A and boundary-delta1 scan outputs"
+            ),
+            notes=(
+                "optional Case A geometric bridge summary",
+                "empirical/non-promoting; joins transition-shell shrinkage with boundary-delta1 minima and quantiles",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_case_a_geometric_bridge_summary",
+            path=script("check_ns_case_a_geometric_bridge_summary.py"),
+            args=(
+                "--summary-json",
+                str(ns_case_a_geometric_bridge_summary_out),
+                "--output-json",
+                str(ns_case_a_geometric_bridge_summary_check_out),
+            )
+            if ns_case_a_geometric_bridge_summary_out.exists()
+            else ("--help",),
+            expected_json_path=ns_case_a_geometric_bridge_summary_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_case_a_geometric_bridge_summary_out.exists()
+            and script("check_ns_case_a_geometric_bridge_summary.py").exists()
+            else (
+                "check_ns_case_a_geometric_bridge_summary script not found"
+                if not script("check_ns_case_a_geometric_bridge_summary.py").exists()
+                else "check_ns_case_a_geometric_bridge_summary requires the Case A bridge summary output"
+            ),
+            notes=(
+                "optional Case A geometric bridge regression gate",
+                "validates non-promoting cross-surface shell and boundary-delta1 summary consistency",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_lambda2_boundary_regularity_scan",
+            path=script("ns_lambda2_boundary_regularity_scan.py"),
+            args=(
+                "--raw-archive",
+                str(ns_raw_pressure_smoke_input),
+                "--output-json",
+                str(ns_lambda2_boundary_regularity_scan_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else (
+                "--output-json",
+                str(ns_lambda2_boundary_regularity_scan_out),
+            ),
+            expected_json_path=ns_lambda2_boundary_regularity_scan_out,
+            optional=True,
+            skip_reason=None
+            if script("ns_lambda2_boundary_regularity_scan.py").exists()
+            else "ns_lambda2_boundary_regularity_scan script not found",
+            notes=(
+                "optional lambda2 boundary regularity proxy scan",
+                "empirical/non-promoting; measures |grad lambda2| on a narrow |lambda2| band",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_lambda2_boundary_regularity_scan",
+            path=script("check_ns_lambda2_boundary_regularity_scan.py"),
+            args=(
+                "--scan-json",
+                str(ns_lambda2_boundary_regularity_scan_out),
+                "--output-json",
+                str(ns_lambda2_boundary_regularity_scan_check_out),
+            )
+            if ns_lambda2_boundary_regularity_scan_out.exists()
+            else ("--help",),
+            expected_json_path=ns_lambda2_boundary_regularity_scan_check_out,
+            optional=True,
+            skip_reason=None
+            if ns_lambda2_boundary_regularity_scan_out.exists()
+            and script("check_ns_lambda2_boundary_regularity_scan.py").exists()
+            else (
+                "check_ns_lambda2_boundary_regularity_scan script not found"
+                if not script("check_ns_lambda2_boundary_regularity_scan.py").exists()
+                else "check_ns_lambda2_boundary_regularity_scan requires the lambda2 boundary scan output"
+            ),
+            notes=(
+                "optional lambda2 boundary regularity regression gate",
+                "validates non-promoting Sard-proxy threshold and aggregate bookkeeping",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_nondegenerate_gradient_receipt",
+            path=ns_broad_tube_nondegenerate_gradient_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube nondegenerate gradient receipt present: {rel(ns_broad_tube_nondegenerate_gradient_receipt)}"
+                if ns_broad_tube_nondegenerate_gradient_receipt.exists()
+                else f"Expected broad-tube nondegenerate gradient receipt missing: {rel(ns_broad_tube_nondegenerate_gradient_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional nondegenerate-gradient receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_vorticity_coverage_receipt",
+            path=ns_broad_tube_vorticity_coverage_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube vorticity coverage receipt present: {rel(ns_broad_tube_vorticity_coverage_receipt)}"
+                if ns_broad_tube_vorticity_coverage_receipt.exists()
+                else f"Expected broad-tube vorticity coverage receipt missing: {rel(ns_broad_tube_vorticity_coverage_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional vorticity-coverage receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_serrin_exponent_discharge_receipt",
+            path=ns_broad_tube_serrin_exponent_discharge_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube Serrin exponent discharge receipt present: {rel(ns_broad_tube_serrin_exponent_discharge_receipt)}"
+                if ns_broad_tube_serrin_exponent_discharge_receipt.exists()
+                else f"Expected broad-tube Serrin exponent discharge receipt missing: {rel(ns_broad_tube_serrin_exponent_discharge_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional Serrin-exponent receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_conditional_regularity_theorem_receipt",
+            path=ns_broad_tube_conditional_regularity_theorem_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube conditional regularity theorem receipt present: {rel(ns_broad_tube_conditional_regularity_theorem_receipt)}"
+                if ns_broad_tube_conditional_regularity_theorem_receipt.exists()
+                else f"Expected broad-tube conditional regularity theorem receipt missing: {rel(ns_broad_tube_conditional_regularity_theorem_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional conditional-regularity theorem receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_coarea_bridge_receipt",
+            path=ns_broad_tube_coarea_bridge_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube coarea bridge receipt present: {rel(ns_broad_tube_coarea_bridge_receipt)}"
+                if ns_broad_tube_coarea_bridge_receipt.exists()
+                else f"Expected broad-tube coarea bridge receipt missing: {rel(ns_broad_tube_coarea_bridge_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional coarea-bridge receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_serrin_lift_receipt",
+            path=ns_broad_tube_serrin_lift_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube Serrin lift receipt present: {rel(ns_broad_tube_serrin_lift_receipt)}"
+                if ns_broad_tube_serrin_lift_receipt.exists()
+                else f"Expected broad-tube Serrin lift receipt missing: {rel(ns_broad_tube_serrin_lift_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional Serrin-lift receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_bkm_bridge_receipt",
+            path=ns_broad_tube_bkm_bridge_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube BKM bridge receipt present: {rel(ns_broad_tube_bkm_bridge_receipt)}"
+                if ns_broad_tube_bkm_bridge_receipt.exists()
+                else f"Expected broad-tube BKM bridge receipt missing: {rel(ns_broad_tube_bkm_bridge_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional BKM-bridge receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_serrin_bkm_composite_receipt",
+            path=ns_broad_tube_serrin_bkm_composite_receipt,
+            optional=True,
+            skip_reason=(
+                f"Expected broad-tube Serrin BKM composite receipt present: {rel(ns_broad_tube_serrin_bkm_composite_receipt)}"
+                if ns_broad_tube_serrin_bkm_composite_receipt.exists()
+                else f"Expected broad-tube Serrin BKM composite receipt missing: {rel(ns_broad_tube_serrin_bkm_composite_receipt)}"
+            ),
+            notes=(
+                "discovery-only record for optional Serrin-BKM composite receipt",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_serrin_bkm_bridge_summary",
+            path=ns_broad_tube_serrin_bkm_bridge_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected ns_broad_tube_serrin_bkm_bridge_summary.py present: {rel(ns_broad_tube_serrin_bkm_bridge_summary)}"
+                if ns_broad_tube_serrin_bkm_bridge_summary.exists()
+                else f"Expected ns_broad_tube_serrin_bkm_bridge_summary.py missing: {rel(ns_broad_tube_serrin_bkm_bridge_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional broad-tube Serrin-BKM summary script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_broad_tube_serrin_bkm_bridge_summary",
+            path=check_ns_broad_tube_serrin_bkm_bridge_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected check_ns_broad_tube_serrin_bkm_bridge_summary.py present: {rel(check_ns_broad_tube_serrin_bkm_bridge_summary)}"
+                if check_ns_broad_tube_serrin_bkm_bridge_summary.exists()
+                else f"Expected check_ns_broad_tube_serrin_bkm_bridge_summary.py missing: {rel(check_ns_broad_tube_serrin_bkm_bridge_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional broad-tube Serrin-BKM check script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_broad_tube_conditional_regularization_summary",
+            path=ns_broad_tube_conditional_regularization_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected ns_broad_tube_conditional_regularization_summary.py present: {rel(ns_broad_tube_conditional_regularization_summary)}"
+                if ns_broad_tube_conditional_regularization_summary.exists()
+                else f"Expected ns_broad_tube_conditional_regularization_summary.py missing: {rel(ns_broad_tube_conditional_regularization_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional broad-tube conditional-regularization summary script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_broad_tube_conditional_regularization_summary",
+            path=check_ns_broad_tube_conditional_regularization_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected check_ns_broad_tube_conditional_regularization_summary.py present: {rel(check_ns_broad_tube_conditional_regularization_summary)}"
+                if check_ns_broad_tube_conditional_regularization_summary.exists()
+                else f"Expected check_ns_broad_tube_conditional_regularization_summary.py missing: {rel(check_ns_broad_tube_conditional_regularization_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional broad-tube conditional-regularization check script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_theoremg_sharp_conditional_summary",
+            path=ns_theoremg_sharp_conditional_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected ns_theoremg_sharp_conditional_summary.py present: {rel(ns_theoremg_sharp_conditional_summary)}"
+                if ns_theoremg_sharp_conditional_summary.exists()
+                else f"Expected ns_theoremg_sharp_conditional_summary.py missing: {rel(ns_theoremg_sharp_conditional_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional sharp TheoremG conditional summary script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_theoremg_sharp_conditional_summary",
+            path=check_ns_theoremg_sharp_conditional_summary,
+            optional=True,
+            skip_reason=(
+                f"Expected check_ns_theoremg_sharp_conditional_summary.py present: {rel(check_ns_theoremg_sharp_conditional_summary)}"
+                if check_ns_theoremg_sharp_conditional_summary.exists()
+                else f"Expected check_ns_theoremg_sharp_conditional_summary.py missing: {rel(check_ns_theoremg_sharp_conditional_summary)}"
+            ),
+            notes=(
+                "discovery-only record for optional sharp TheoremG conditional summary check script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_theoremg_q2_gd1_contradiction_channel",
+            path=check_ns_theoremg_q2_gd1_contradiction_channel,
+            args=(
+                "--output-json",
+                str(check_ns_theoremg_q2_gd1_contradiction_channel_out),
+            ),
+            expected_json_path=check_ns_theoremg_q2_gd1_contradiction_channel_out,
+            optional=True,
+            skip_reason=(
+                f"Expected check_ns_theoremg_q2_gd1_contradiction_channel.py present: {rel(check_ns_theoremg_q2_gd1_contradiction_channel)}"
+                if check_ns_theoremg_q2_gd1_contradiction_channel.exists()
+                else f"Expected check_ns_theoremg_q2_gd1_contradiction_channel.py missing: {rel(check_ns_theoremg_q2_gd1_contradiction_channel)}"
+            ),
+            notes=(
+                "discovery-only record for optional sharp contradiction-channel check script",
+                "non-promoting artifact presence/absence signal only",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_pressure_poisson_sign_audit",
+            path=script("ns_pressure_poisson_sign_audit.py"),
+            args=(
+                "--input",
+                str(ns_raw_pressure_smoke_input),
+                "--frame",
+                "0",
+                "--output-json",
+                str(ns_pressure_poisson_sign_audit_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else ("--help",),
+            expected_json_path=ns_pressure_poisson_sign_audit_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and script("ns_pressure_poisson_sign_audit.py").exists()
+            else (
+                "ns_pressure_poisson_sign_audit script not found"
+                if not script("ns_pressure_poisson_sign_audit.py").exists()
+                else "ns_pressure_poisson_sign_audit requires a raw NS pressure archive under /tmp"
+            ),
+            notes=(
+                "optional pressure-Poisson sign/convention audit",
+                "empirical/non-promoting; does not prove pressure-CZ closure or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_interior_pressure_regression",
+            path=script("check_ns_interior_pressure_regression.py"),
+            args=(
+                (
+                    "--interior-json",
+                    str(ns_interior_vorticity_budget_out),
+                )
+                if ns_interior_vorticity_budget_out.exists()
+                else ()
+            )
+            + (
+                (
+                    "--l3-json",
+                    str(ns_omega_l3_timeseries_out),
+                )
+                if ns_omega_l3_timeseries_out.exists()
+                else ()
+            )
+            if ns_interior_vorticity_budget_out.exists()
+            or ns_omega_l3_timeseries_out.exists()
+            else ("--help",),
+            expected_json_path=ns_interior_pressure_regression_out,
+            optional=True,
+            skip_reason=None
+            if (
+                ns_interior_vorticity_budget_out.exists()
+                or ns_omega_l3_timeseries_out.exists()
+            )
+            and script("check_ns_interior_pressure_regression.py").exists()
+            else (
+                "check_ns_interior_pressure_regression script not found"
+                if not script("check_ns_interior_pressure_regression.py").exists()
+                else "check_ns_interior_pressure_regression requires interior or L3 artifacts"
+            ),
+            notes=(
+                "optional regression check for interior budget and omega L3 diagnostics",
+                "regression-only/non-promoting; no theorem or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_pressure_poisson_sign_timeseries_audit",
+            path=script("ns_pressure_poisson_sign_timeseries_audit.py"),
+            args=(
+                "--input",
+                str(ns_raw_pressure_smoke_input),
+                "--frames",
+                "0",
+                "--output-json",
+                str(ns_pressure_poisson_sign_timeseries_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else ("--help",),
+            expected_json_path=ns_pressure_poisson_sign_timeseries_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and script("ns_pressure_poisson_sign_timeseries_audit.py").exists()
+            else (
+                "ns_pressure_poisson_sign_timeseries_audit script not found"
+                if not script("ns_pressure_poisson_sign_timeseries_audit.py").exists()
+                else "ns_pressure_poisson_sign_timeseries_audit requires a raw NS pressure archive under /tmp"
+            ),
+            notes=(
+                "optional pressure-Poisson sign timeseries audit",
+                "empirical/non-promoting; does not prove pressure convention normalization or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_interior_budget_timeseries_diagnostic",
+            path=script("ns_interior_budget_timeseries_diagnostic.py"),
+            args=(
+                "--input",
+                str(ns_raw_pressure_smoke_input),
+                "--frames",
+                "0",
+                "--output-json",
+                str(ns_interior_budget_timeseries_out),
+            )
+            if ns_raw_pressure_smoke_input is not None
+            else ("--help",),
+            expected_json_path=ns_interior_budget_timeseries_out,
+            optional=True,
+            skip_reason=None
+            if ns_raw_pressure_smoke_input is not None
+            and script("ns_interior_budget_timeseries_diagnostic.py").exists()
+            else (
+                "ns_interior_budget_timeseries_diagnostic script not found"
+                if not script("ns_interior_budget_timeseries_diagnostic.py").exists()
+                else "ns_interior_budget_timeseries_diagnostic requires a raw NS pressure archive under /tmp"
+            ),
+            notes=(
+                "optional interior budget timeseries diagnostic",
+                "empirical/non-promoting; does not prove the pressure-mediated maximum principle or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="ns_pressure_poisson_bypass_convention_normalized",
+            path=script("ns_pressure_poisson_bypass_convention_normalized.py"),
+            args=(
+                "--derived-archive",
+                str(ns_boundary_smoke_derived_input),
+                "--lambda2-band",
+                "1e-6",
+                "--convention",
+                "plus",
+                "--output-json",
+                str(ns_pressure_poisson_bypass_convention_normalized_out),
+            )
+            if ns_boundary_smoke_derived_input is not None
+            else ("--help",),
+            expected_json_path=ns_pressure_poisson_bypass_convention_normalized_out,
+            optional=True,
+            skip_reason=None
+            if ns_boundary_smoke_derived_input is not None
+            and script("ns_pressure_poisson_bypass_convention_normalized.py").exists()
+            else (
+                "ns_pressure_poisson_bypass_convention_normalized script not found"
+                if not script("ns_pressure_poisson_bypass_convention_normalized.py").exists()
+                else "ns_pressure_poisson_bypass_convention_normalized requires a discoverable derived NS archive under /tmp"
+            ),
+            notes=(
+                "optional convention-normalized pressure-bypass diagnostic",
+                "empirical/non-promoting; does not prove pressure-Poisson bypass or Clay NS",
+            ),
+        ),
+        HarnessSpec(
+            name="check_ns_pressure_convention_regression",
+            path=script("check_ns_pressure_convention_regression.py"),
+            args=(
+                (
+                    "--sign-timeseries-json",
+                    str(ns_pressure_poisson_sign_timeseries_out),
+                )
+                if ns_pressure_poisson_sign_timeseries_out.exists()
+                else ()
+            )
+            + (
+                (
+                    "--budget-timeseries-json",
+                    str(ns_interior_budget_timeseries_out),
+                )
+                if ns_interior_budget_timeseries_out.exists()
+                else ()
+            )
+            if ns_pressure_poisson_sign_timeseries_out.exists()
+            or ns_interior_budget_timeseries_out.exists()
+            else ("--help",),
+            expected_json_path=ns_pressure_convention_regression_out,
+            optional=True,
+            skip_reason=None
+            if (
+                ns_pressure_poisson_sign_timeseries_out.exists()
+                or ns_interior_budget_timeseries_out.exists()
+            )
+            and script("check_ns_pressure_convention_regression.py").exists()
+            else (
+                "check_ns_pressure_convention_regression script not found"
+                if not script("check_ns_pressure_convention_regression.py").exists()
+                else "check_ns_pressure_convention_regression requires sign or budget convention artifacts"
+            ),
+            notes=(
+                "optional regression check for pressure convention diagnostics",
+                "regression-only/non-promoting; no theorem or Clay promotion",
+            ),
+        ),
+        HarnessSpec(
             name="unification_scale_invariant_cross_term",
             path=script("unification_scale_invariant_cross_term_harness.py"),
             args=(
@@ -3139,12 +7392,13 @@ def build_manifest(results: list[HarnessResult], timeout_seconds: int) -> dict[s
     ]
     executed = [result for result in results if not result.skipped]
     skipped = [result for result in results if result.skipped]
+    by_name = {result.name: result for result in results}
     return {
         "control": {
             "O": "Local Clay diagnostic harness integration runner.",
-            "R": "Discover and smoke-run local NS/YM/unification/Gray-Scott diagnostic harnesses.",
+            "R": "Discover and smoke-run local NS/YM/unification/Gray-Scott diagnostic harnesses, including the Wall 1 candidate-only fail-closed summaries.",
             "C": "scripts/local_clay_harness_manifest.py -> outputs/local_clay_harness_manifest.json",
-            "S": "Diagnostics only; exact proof gates remain open.",
+            "S": "Diagnostics only; exact proof gates remain open while the Wall 1 candidate-only summaries stay fail-closed.",
             "L": "discover -> smoke execute -> parse summaries -> fail-closed manifest",
             "P": "Use tiny local runs and preserve promotion=false globally and per harness.",
             "G": "No Clay, YM, NS, or unification promotion from numerical diagnostics.",
@@ -3155,6 +7409,14 @@ def build_manifest(results: list[HarnessResult], timeout_seconds: int) -> dict[s
         "timeout_seconds_per_harness": timeout_seconds,
         "repo_root": str(REPO_ROOT),
         "output_path": str(DEFAULT_OUT),
+        "fail_closed_summaries": {
+            "ns_triad_signed_wall1_theorem_status": by_name["ns_triad_signed_wall1_theorem_status"].parsed_json_summary
+            if "ns_triad_signed_wall1_theorem_status" in by_name
+            else None,
+            "ns_triad_wall1_shell_bridge_summary": by_name["ns_triad_wall1_shell_bridge_summary"].parsed_json_summary
+            if "ns_triad_wall1_shell_bridge_summary" in by_name
+            else None,
+        },
         "summary": {
             "harnesses_total": len(results),
             "executed": len(executed),

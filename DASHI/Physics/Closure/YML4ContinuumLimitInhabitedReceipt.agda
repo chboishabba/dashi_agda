@@ -64,16 +64,16 @@ limitMeasureUniqueLabel =
 
 yml4ContinuumLimitInhabitedStatement : String
 yml4ContinuumLimitInhabitedStatement =
-  "YML4 continuum-limit target is recorded conditional on an L3 tightness input; the local L3 receipt still marks tightness uninhabited, so this is a dependency receipt, not a completed L4 proof."
+  "YML4 continuum-limit target is recorded conditional on an L3 tightness input; the local L3 receipt now records tightness constructed while Clay promotion remains false, so this is still a dependency receipt rather than a completed Clay proof."
 
 record YML4ContinuumLimitInhabitedReceipt : Setω where
   field
     l3Receipt :
       L3.YML3TightnessFromKRunningReceipt
 
-    l3CurrentlyUninhabited :
+    l3TightnessConstructed :
       L3.ymL3TightnessConstructed l3Receipt
-        ≡ false
+        ≡ true
 
     l3KeepsClayFalse :
       L3.clayYangMillsPromoted l3Receipt ≡ false
@@ -183,7 +183,7 @@ canonicalYML4ContinuumLimitInhabitedReceipt =
   record
     { l3Receipt =
         L3.canonicalYML3TightnessFromKRunningReceipt
-    ; l3CurrentlyUninhabited =
+    ; l3TightnessConstructed =
         refl
     ; l3KeepsClayFalse =
         refl

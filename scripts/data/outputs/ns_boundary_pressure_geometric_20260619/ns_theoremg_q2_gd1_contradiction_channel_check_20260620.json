@@ -1,0 +1,54 @@
+{
+  "clay_navier_stokes_promoted": false,
+  "collapse_impossible": false,
+  "contract": "check_ns_theoremg_q2_gd1_contradiction_channel",
+  "control_card": {
+    "C": "scripts/check_ns_theoremg_q2_gd1_contradiction_channel.py",
+    "F": "Missing imports, missing markers, or promoted gates fail validation.",
+    "G": "This checker does not infer a theorem or promotion from comments.",
+    "L": "Scan the Agda receipt text deterministically and emit a JSON check receipt.",
+    "O": "Owner 5 validates the TheoremG/Q2/GD1 contradiction-channel receipt.",
+    "P": "FAIL_CLOSED_THEOREMG_Q2_GD1_CONTRADICTION_CHANNEL",
+    "R": "Require the sharp contradiction route to be recorded while all hard analytic discharge and promotion gates remain explicitly false.",
+    "S": "A receipt passes only if the five dependency imports are present, the route-recorded field is true, the sharp hypothesis/route booleans are true, and every contradiction-discharge and Clay discharge flag remains false."
+  },
+  "details": {
+    "dependency_imports": {
+      "DASHI.Physics.Closure.NSCollapseConditionalGronwallBridgeReceipt": true,
+      "DASHI.Physics.Closure.NSConditionalQGronwallTheoremGReceipt": true,
+      "DASHI.Physics.Closure.NSGD1MinPrincipleNoLambda3CollapseReceipt": true,
+      "DASHI.Physics.Closure.NSLayerL2VorticityFractionReceipt": true,
+      "DASHI.Physics.Closure.NSTheoremGCancellationUpgradeReceipt": true
+    },
+    "false_fields": {
+      "clayNavierStokesPromoted": true,
+      "collapseImpossible": true,
+      "exponentMismatchContradictionDischarged": true,
+      "surfaceQ2DivergenceDischarged": true,
+      "theoremGExponentComparisonDischarged": true
+    },
+    "text_markers": {
+      "TheoremG exponent comparison": true,
+      "delta1 > 1": true,
+      "energy-only closure": true,
+      "exponent mismatch": true,
+      "exponent mismatch contradiction": true,
+      "fail-closed": true,
+      "surface/Q2 divergence": true
+    },
+    "true_fields": {
+      "delta1GreaterThanOneRecordedFlag": true,
+      "exponentMismatchContradictionRecordedFlag": true,
+      "hAreaRecorded": true,
+      "hBRecorded": true,
+      "hG12SharpRecorded": true,
+      "routeRecorded": true,
+      "surfaceQ2DivergenceRecordedFlag": true,
+      "theoremGExponentComparisonRecordedFlag": true
+    }
+  },
+  "errors": [],
+  "promotion_gate": false,
+  "receipt": "DASHI/Physics/Closure/NSTheoremGQ2GD1ContradictionChannelReceipt.agda",
+  "status": "ok"
+}

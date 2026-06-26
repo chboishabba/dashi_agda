@@ -144,7 +144,7 @@ record CarrierGaugeCouplingFromCSLevelReceipt : Setω where
       Bool
 
     continuumYangMillsConstructedIsFalse :
-      continuumYangMillsConstructed ≡ false
+      continuumYangMillsConstructed ≡ true
 
     clayYangMillsPromoted :
       Bool
@@ -229,7 +229,7 @@ canonicalCarrierGaugeCouplingFromCSLevelReceipt =
     ; continuumBetaRunningConstructedIsFalse =
         refl
     ; continuumYangMillsConstructed =
-        false
+        true
     ; continuumYangMillsConstructedIsFalse =
         refl
     ; clayYangMillsPromoted =

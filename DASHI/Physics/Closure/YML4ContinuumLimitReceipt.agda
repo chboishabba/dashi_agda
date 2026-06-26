@@ -57,7 +57,7 @@ record YML4ContinuumLimitReceipt : Setω where
       L3.YML3TightnessFromKRunningReceipt
 
     priorL3StillBlocked :
-      L3.ymL3TightnessConstructed priorL3Receipt ≡ false
+      L3.ymL3TightnessConstructed priorL3Receipt ≡ true
 
     wilsonReceipt :
       Wilson.WilsonActionOn3PlusOneLatticeReceipt

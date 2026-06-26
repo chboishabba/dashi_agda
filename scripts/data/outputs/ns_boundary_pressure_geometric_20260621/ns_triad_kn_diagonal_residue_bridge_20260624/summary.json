@@ -1,0 +1,104 @@
+{
+  "analysis_read": "Candidate-only diagonal-residue bridge: TailDiagonalStable says the tail block stays on the sampled 10^-2 scale, while SchurResidueScale says the positive gap is a small normalized residue with stable D*q_gap and q_gap ~ N^-2.2.",
+  "anatomy_summary": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_schur_gap_anatomy_20260624/summary.json",
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "bkm_exclusion_proved": false,
+  "bridge_rows": [
+    {
+      "K": 5,
+      "N": 6,
+      "R_tail": 0.4195752024137984,
+      "SchurResidueScale": {
+        "D_q_gap": 0.004557249030978871,
+        "N2_q_gap": 0.019027572331753617,
+        "evidence": "q_gap is positive, much smaller than q_diag, and D*q_gap is approximately stable.",
+        "missing": "analytic lower bound on the finite-tail Schur residue",
+        "q_gap": 0.0005285436758820449,
+        "q_gap_over_q_diag": 0.029523506088150755,
+        "target": "q_gap(N) >= c_gap / N^2"
+      },
+      "TailDiagonalStable": {
+        "evidence": "q_diag and q_schur stay on the sampled 10^-2 scale; the subtraction remains tiny relative to q_diag.",
+        "missing": "analytic tail-block coercivity from the Biot-Savart / triad geometry",
+        "q_diag": 0.01790246979149186,
+        "q_schur": 0.01785264607011815,
+        "q_schur_subtraction_over_q_diag": 0.0027830641220822246,
+        "target": "q_diag(N) >= c_diag > 0"
+      },
+      "bkm_tail_projection_squared_fraction": 4.850428100066944e-05,
+      "cross_l_neg_fraction": -0.09712079356934952
+    },
+    {
+      "K": 7,
+      "N": 8,
+      "R_tail": 0.4362136504350057,
+      "SchurResidueScale": {
+        "D_q_gap": 0.004095172011266396,
+        "N2_q_gap": 0.01733001861660528,
+        "evidence": "q_gap is positive, much smaller than q_diag, and D*q_gap is approximately stable.",
+        "missing": "analytic lower bound on the finite-tail Schur residue",
+        "q_gap": 0.0002707815408844575,
+        "q_gap_over_q_diag": 0.017117918680373836,
+        "target": "q_gap(N) >= c_gap / N^2"
+      },
+      "TailDiagonalStable": {
+        "evidence": "q_diag and q_schur stay on the sampled 10^-2 scale; the subtraction remains tiny relative to q_diag.",
+        "missing": "analytic tail-block coercivity from the Biot-Savart / triad geometry",
+        "q_diag": 0.015818601895504734,
+        "q_schur": 0.01576806774176072,
+        "q_schur_subtraction_over_q_diag": 0.0031946030425162586,
+        "target": "q_diag(N) >= c_diag > 0"
+      },
+      "bkm_tail_projection_squared_fraction": 5.991402692242359e-05,
+      "cross_l_neg_fraction": -0.09308101502987877
+    },
+    {
+      "K": 9,
+      "N": 10,
+      "R_tail": 0.42683055399411324,
+      "SchurResidueScale": {
+        "D_q_gap": 0.0041093953784676895,
+        "N2_q_gap": 0.01739494351554264,
+        "evidence": "q_gap is positive, much smaller than q_diag, and D*q_gap is approximately stable.",
+        "missing": "analytic lower bound on the finite-tail Schur residue",
+        "q_gap": 0.00017394943515542638,
+        "q_gap_over_q_diag": 0.010948999433374506,
+        "target": "q_gap(N) >= c_gap / N^2"
+      },
+      "TailDiagonalStable": {
+        "evidence": "q_diag and q_schur stay on the sampled 10^-2 scale; the subtraction remains tiny relative to q_diag.",
+        "missing": "analytic tail-block coercivity from the Biot-Savart / triad geometry",
+        "q_diag": 0.01588724487693345,
+        "q_schur": 0.01583854019887574,
+        "q_schur_subtraction_over_q_diag": 0.0030656465885430975,
+        "target": "q_diag(N) >= c_diag > 0"
+      },
+      "bkm_tail_projection_squared_fraction": 1.9384276900414127e-05,
+      "cross_l_neg_fraction": -0.09114360054341542
+    }
+  ],
+  "candidate_only": true,
+  "clay_promoted": false,
+  "contract": "ns_triad_kn_diagonal_residue_bridge",
+  "fail_closed": true,
+  "full_ns_promoted": false,
+  "promotion_flags": [],
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_DIAGONAL_RESIDUE_BRIDGE",
+  "row_count": 3,
+  "schema_version": "1.0.0",
+  "script_name": "scripts/ns_triad_kn_diagonal_residue_bridge.py",
+  "source_anatomy_status": "partial",
+  "source_subtraction_status": "partial",
+  "status": "partial",
+  "subtraction_summary": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_schur_subtraction_bound_20260624/summary.json",
+  "terminal_promoted": false,
+  "theorem_promoted": false
+}

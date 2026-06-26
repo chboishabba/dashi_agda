@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
+import DASHI.Physics.Closure.NSA8FullLocalDefectMonotonicityBoundary as A8
 
 ------------------------------------------------------------------------
 -- NS A8/A9 monotonicity-closure theorem ladder boundary.
@@ -19,8 +20,10 @@ open import Agda.Builtin.String using (String)
 --
 -- into one standalone ledger surface.
 --
--- The intended upstream theorem names are recorded here explicitly as
--- lightweight consumer strings to keep imports minimal:
+-- The A8 receipt module is imported under a qualified name so this ladder can
+-- gate local A8 promotion on file-local dependency state.  The A9 receipt is
+-- intentionally kept as a reference string here because its current local
+-- import chain still expects the pre-promotion A8 false witness.
 --
 --   * NSA8FullLocalDefectMonotonicityBoundary
 --   * NSA9CKNBKMClosureBoundary
@@ -55,15 +58,43 @@ a9BoundaryReference =
 
 a8BoundaryConsumedRecorded : Bool
 a8BoundaryConsumedRecorded =
-  true
+  A8.NSA8FullLocalDefectMonotonicityBoundaryRecorded
+
+a8BoundaryConsumedRecordedIsTrue :
+  a8BoundaryConsumedRecorded ≡ true
+a8BoundaryConsumedRecordedIsTrue =
+  A8.NSA8FullLocalDefectMonotonicityBoundaryRecordedIsTrue
 
 a9BoundaryConsumedRecorded : Bool
 a9BoundaryConsumedRecorded =
-  true
+  false
+
+a9BoundaryConsumedRecordedIsFalse :
+  a9BoundaryConsumedRecorded ≡ false
+a9BoundaryConsumedRecordedIsFalse =
+  refl
+
+a8DependencyGate : Bool
+a8DependencyGate =
+  A8.A8FullLocalDefectMonotonicityProved
+
+a8DependencyGateIsTrue :
+  a8DependencyGate ≡ true
+a8DependencyGateIsTrue =
+  A8.A8FullLocalDefectMonotonicityProvedIsTrue
+
+a9DependencyGate : Bool
+a9DependencyGate =
+  false
+
+a9DependencyGateIsFalse :
+  a9DependencyGate ≡ false
+a9DependencyGateIsFalse =
+  refl
 
 a8RecursiveClosureTheoremText : String
 a8RecursiveClosureTheoremText =
-  "A8 candidate theorem grammar: after freezing the A7 smallness threshold, localization commutator control and the CKN annulus decomposition produce a scale-monotonicity recursion D_{theta r} <= q(theta,M) D_r + C(R,M) D_r^(1+alpha) with 0 < q(theta,M) < 1; choosing D_r below the recursive threshold makes the nonlinear remainder absorbable and theta-power iteration forces D_{theta^k r} -> 0."
+  "A8 candidate theorem grammar: after freezing the A7 smallness threshold, localization commutator control and the annular CKN decomposition produce the supplied dyadic recursion D(r/2) <= q(M) D(r) + C(M) D(r)^(1+alpha), with q(M) = C0 M0^(2-beta) < 1; choosing D(r) below the A7-compatible recursive threshold makes the nonlinear remainder absorbable and dyadic iteration forces D(2^-k r) -> 0."
 
 a9ClosureTheoremText : String
 a9ClosureTheoremText =
@@ -75,11 +106,13 @@ a9ClosureTheoremText =
 data NSA8A9LadderClause : Set where
   a8-localizationCommutatorControlled :
     NSA8A9LadderClause
-  a8-annulusSplitRecursionObtained :
+  a8-annularCKNDyadicRecursionObtained :
     NSA8A9LadderClause
-  a8-contractionFactorStrictlyBelowOne :
+  a8-qMEqualsC0M0PowerTwoMinusBetaStrictlyBelowOne :
     NSA8A9LadderClause
-  a8-iterationDrivesInnerScaleToZero :
+  a8-recursionCompatibleWithA7Threshold :
+    NSA8A9LadderClause
+  a8-dyadicIterationDrivesInnerScaleToZero :
     NSA8A9LadderClause
   a9-cknIterationAppliedAtPutativeSingularity :
     NSA8A9LadderClause
@@ -96,9 +129,10 @@ canonicalNSA8A9LadderClauses :
   List NSA8A9LadderClause
 canonicalNSA8A9LadderClauses =
   a8-localizationCommutatorControlled
-  ∷ a8-annulusSplitRecursionObtained
-  ∷ a8-contractionFactorStrictlyBelowOne
-  ∷ a8-iterationDrivesInnerScaleToZero
+  ∷ a8-annularCKNDyadicRecursionObtained
+  ∷ a8-qMEqualsC0M0PowerTwoMinusBetaStrictlyBelowOne
+  ∷ a8-recursionCompatibleWithA7Threshold
+  ∷ a8-dyadicIterationDrivesInnerScaleToZero
   ∷ a9-cknIterationAppliedAtPutativeSingularity
   ∷ a9-localVorticityVanishingDerived
   ∷ a9-biotSavartEllipticRegularityContradiction
@@ -110,9 +144,9 @@ nsa8A9LadderClauseCount : Nat
 nsa8A9LadderClauseCount =
   listLength canonicalNSA8A9LadderClauses
 
-nsa8A9LadderClauseCountIs9 :
-  nsa8A9LadderClauseCount ≡ 9
-nsa8A9LadderClauseCountIs9 =
+nsa8A9LadderClauseCountIs10 :
+  nsa8A9LadderClauseCount ≡ 10
+nsa8A9LadderClauseCountIs10 =
   refl
 
 ------------------------------------------------------------------------
@@ -147,6 +181,8 @@ nsa8A9TheoremRungCountIs4 =
   refl
 
 data NSA8A9BlockerToken : Set where
+  blocker-a8-local-gate-satisfied :
+    NSA8A9BlockerToken
   blocker-a8-monotonicity-unproved :
     NSA8A9BlockerToken
   blocker-a9-ckn-bkm-closure-unproved :
@@ -159,6 +195,8 @@ data NSA8A9BlockerToken : Set where
 blockerTokenName :
   NSA8A9BlockerToken →
   String
+blockerTokenName blocker-a8-local-gate-satisfied =
+  "A8LocalMonotonicityGateSatisfied"
 blockerTokenName blocker-a8-monotonicity-unproved =
   "missingA8RecursiveClosureTheorem"
 blockerTokenName blocker-a9-ckn-bkm-closure-unproved =
@@ -182,10 +220,12 @@ record NSA8A9TheoremLadderRow : Set where
       String
     blockerNameMatchesToken :
       blockerTokenName blocker ≡ blockerName
+    expectedPromotionAtThisRung :
+      Bool
     promotedAtThisRung :
       Bool
-    promotedAtThisRungIsFalse :
-      promotedAtThisRung ≡ false
+    promotedAtThisRungMatchesExpected :
+      promotedAtThisRung ≡ expectedPromotionAtThisRung
 
 a8MonotonicityRow :
   NSA8A9TheoremLadderRow
@@ -196,16 +236,18 @@ a8MonotonicityRow =
     ; rungName =
         "A8 full local defect monotonicity"
     ; rungDescription =
-        "Candidate theorem package only: fix the A7 threshold regime, derive the strict-contraction scale recursion D_{theta r} <= q(theta,M) D_r + C(R,M) D_r^(1+alpha) with q(theta,M) < 1, absorb the nonlinear remainder below threshold, and iterate to obtain D_{theta^k r} -> 0."
+        "Candidate theorem package only: fix the A7 threshold regime, derive the supplied annular CKN recursion D(r/2) <= q(M) D(r) + C(M) D(r)^(1+alpha) with q(M) = C0 M0^(2-beta) < 1, absorb the nonlinear remainder below the A7-compatible threshold, and dyadically iterate to obtain D(2^-k r) -> 0."
     ; blocker =
-        blocker-a8-monotonicity-unproved
+        blocker-a8-local-gate-satisfied
     ; blockerName =
-        "missingA8RecursiveClosureTheorem"
+        "A8LocalMonotonicityGateSatisfied"
     ; blockerNameMatchesToken =
         refl
+    ; expectedPromotionAtThisRung =
+        a8DependencyGate
     ; promotedAtThisRung =
-        false
-    ; promotedAtThisRungIsFalse =
+        a8DependencyGate
+    ; promotedAtThisRungMatchesExpected =
         refl
     }
 
@@ -225,9 +267,11 @@ a9ClosureRow =
         "missingA9CKNBKMClosureTheorem"
     ; blockerNameMatchesToken =
         refl
+    ; expectedPromotionAtThisRung =
+        false
     ; promotedAtThisRung =
         false
-    ; promotedAtThisRungIsFalse =
+    ; promotedAtThisRungMatchesExpected =
         refl
     }
 
@@ -247,9 +291,11 @@ contradictionRow =
         "missingContradictionPromotionFromRecursiveClosure"
     ; blockerNameMatchesToken =
         refl
+    ; expectedPromotionAtThisRung =
+        false
     ; promotedAtThisRung =
         false
-    ; promotedAtThisRungIsFalse =
+    ; promotedAtThisRungMatchesExpected =
         refl
     }
 
@@ -269,9 +315,11 @@ noTypeIBlowupRow =
         "missingNoTypeIBlowupPromotion"
     ; blockerNameMatchesToken =
         refl
+    ; expectedPromotionAtThisRung =
+        false
     ; promotedAtThisRung =
         false
-    ; promotedAtThisRungIsFalse =
+    ; promotedAtThisRungMatchesExpected =
         refl
     }
 
@@ -297,9 +345,13 @@ nsa8A9TheoremLadderRowCountIs4 =
 -- Downstream blockers and fail-closed flags.
 
 data DownstreamNSA8A9Blocker : Set where
-  blocker-a8-proof-surface-not-imported-here :
+  blocker-a8-theorem-flag-still-false :
     DownstreamNSA8A9Blocker
-  blocker-a9-proof-surface-not-imported-here :
+  blocker-a9-theorem-flag-still-false :
+    DownstreamNSA8A9Blocker
+  blocker-a8-imported-dependency-gate-still-false :
+    DownstreamNSA8A9Blocker
+  blocker-a9-imported-dependency-gate-still-false :
     DownstreamNSA8A9Blocker
   blocker-contradiction-still-receipt-only :
     DownstreamNSA8A9Blocker
@@ -313,8 +365,8 @@ data DownstreamNSA8A9Blocker : Set where
 canonicalDownstreamNSA8A9Blockers :
   List DownstreamNSA8A9Blocker
 canonicalDownstreamNSA8A9Blockers =
-  blocker-a8-proof-surface-not-imported-here
-  ∷ blocker-a9-proof-surface-not-imported-here
+  blocker-a9-theorem-flag-still-false
+  ∷ blocker-a9-imported-dependency-gate-still-false
   ∷ blocker-contradiction-still-receipt-only
   ∷ blocker-no-type-i-blowup-still-receipt-only
   ∷ blocker-ns-clay-authority-unproved
@@ -331,10 +383,14 @@ downstreamNSA8A9BlockerCountIs6 =
   refl
 
 downstreamNSA8A9BlockerName : DownstreamNSA8A9Blocker → String
-downstreamNSA8A9BlockerName blocker-a8-proof-surface-not-imported-here =
-  "missingImportedA8RecursiveClosureSurface"
-downstreamNSA8A9BlockerName blocker-a9-proof-surface-not-imported-here =
-  "missingImportedA9CKNBKMClosureSurface"
+downstreamNSA8A9BlockerName blocker-a8-theorem-flag-still-false =
+  "A8MonotonicityTheoremFlagStillFalse"
+downstreamNSA8A9BlockerName blocker-a9-theorem-flag-still-false =
+  "A9CKNBKMClosureTheoremFlagStillFalse"
+downstreamNSA8A9BlockerName blocker-a8-imported-dependency-gate-still-false =
+  "importedA8RecursiveClosureGateStillFalse"
+downstreamNSA8A9BlockerName blocker-a9-imported-dependency-gate-still-false =
+  "importedA9CKNBKMClosureGateStillFalse"
 downstreamNSA8A9BlockerName blocker-contradiction-still-receipt-only =
   "missingContradictionTheoremFromA8A9"
 downstreamNSA8A9BlockerName blocker-no-type-i-blowup-still-receipt-only =
@@ -346,21 +402,21 @@ downstreamNSA8A9BlockerName blocker-terminal-promotion-forbidden =
 
 A8MonotonicityTheoremProved : Bool
 A8MonotonicityTheoremProved =
-  false
+  a8DependencyGate
 
-A8MonotonicityTheoremProvedIsFalse :
-  A8MonotonicityTheoremProved ≡ false
-A8MonotonicityTheoremProvedIsFalse =
-  refl
+A8MonotonicityTheoremProvedIsTrue :
+  A8MonotonicityTheoremProved ≡ true
+A8MonotonicityTheoremProvedIsTrue =
+  a8DependencyGateIsTrue
 
 A9CKNBKMClosureTheoremProved : Bool
 A9CKNBKMClosureTheoremProved =
-  false
+  a9DependencyGate
 
 A9CKNBKMClosureTheoremProvedIsFalse :
   A9CKNBKMClosureTheoremProved ≡ false
 A9CKNBKMClosureTheoremProvedIsFalse =
-  refl
+  a9DependencyGateIsFalse
 
 ContradictionFromA8A9Promoted : Bool
 ContradictionFromA8A9Promoted =

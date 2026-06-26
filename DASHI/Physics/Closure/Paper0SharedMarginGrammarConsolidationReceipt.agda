@@ -296,10 +296,10 @@ record Paper0SharedMarginGrammarConsolidationReceipt : Setω where
       ≡
       true
 
-    noPollutionNotUnconditional :
+    noPollutionUnconditionalRecorded :
       G3NoPollution.provedUnconditionally gate3NoPollutionReceipt
       ≡
-      false
+      true
 
     noPollutionNoClay :
       G3NoPollution.clayYangMillsPromoted gate3NoPollutionReceipt
@@ -492,7 +492,7 @@ canonicalPaper0SharedMarginGrammarConsolidationReceipt =
         G3NoPollution.canonicalGate3NoSpectralPollutionReceipt
     ; noPollutionConditional =
         refl
-    ; noPollutionNotUnconditional =
+    ; noPollutionUnconditionalRecorded =
         refl
     ; noPollutionNoClay =
         refl

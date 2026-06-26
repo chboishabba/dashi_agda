@@ -3,7 +3,7 @@ module DASHI.Physics.Closure.W4PhysicalCalibrationExternalReceiptObligation wher
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
@@ -22,12 +22,74 @@ import DASHI.Physics.Closure.W4SurrogateScaleSettingBoundary as Surrogate
 -- of the external receipt that would be needed later, without constructing
 -- that token and without promoting the current Nat surrogate.
 
+record Candidate256PhysicalCalibrationDimensionVector : Set where
+  field
+    lengthPositiveExponent : Nat
+    lengthNegativeExponent : Nat
+    massPositiveExponent : Nat
+    massNegativeExponent : Nat
+    timePositiveExponent : Nat
+    timeNegativeExponent : Nat
+    electricCurrentPositiveExponent : Nat
+    electricCurrentNegativeExponent : Nat
+    thermodynamicTemperaturePositiveExponent : Nat
+    thermodynamicTemperatureNegativeExponent : Nat
+    amountOfSubstancePositiveExponent : Nat
+    amountOfSubstanceNegativeExponent : Nat
+    luminousIntensityPositiveExponent : Nat
+    luminousIntensityNegativeExponent : Nat
+
+open Candidate256PhysicalCalibrationDimensionVector public
+
+candidate256UnloadedDimensionVector :
+  Candidate256PhysicalCalibrationDimensionVector
+candidate256UnloadedDimensionVector = record
+  { lengthPositiveExponent = zero
+  ; lengthNegativeExponent = zero
+  ; massPositiveExponent = zero
+  ; massNegativeExponent = zero
+  ; timePositiveExponent = zero
+  ; timeNegativeExponent = zero
+  ; electricCurrentPositiveExponent = zero
+  ; electricCurrentNegativeExponent = zero
+  ; thermodynamicTemperaturePositiveExponent = zero
+  ; thermodynamicTemperatureNegativeExponent = zero
+  ; amountOfSubstancePositiveExponent = zero
+  ; amountOfSubstanceNegativeExponent = zero
+  ; luminousIntensityPositiveExponent = zero
+  ; luminousIntensityNegativeExponent = zero
+  }
+
+record Candidate256PhysicalCalibrationFactorizationChecker
+  (physicalUnitCarrier : Set) : Set where
+  field
+    natToUnitCandidate :
+      Nat →
+      physicalUnitCarrier
+
+    quotientScaleCandidate :
+      Surrogate.Candidate256QuotientClass →
+      physicalUnitCarrier
+
+    factorsThroughCandidate256Surrogate :
+      (q : Surrogate.Candidate256QuotientClass) →
+      quotientScaleCandidate q
+      ≡
+      natToUnitCandidate (Surrogate.candidate256SurrogateScale q)
+
+    factorizationCheckerLabel : String
+
+open Candidate256PhysicalCalibrationFactorizationChecker public
+
 record Candidate256PhysicalCalibrationExternalReceipt : Setω where
   field
     calibrationAuthority :
       Gate.Candidate256PhysicalCalibrationAuthorityToken
 
     physicalUnitCarrier : Set
+
+    physicalDimensionVector :
+      Candidate256PhysicalCalibrationDimensionVector
 
     natToUnitCalibrationMap :
       Nat →
@@ -55,6 +117,7 @@ record Candidate256PhysicalCalibrationExternalReceipt : Setω where
       dimensionalPreservationLaw law
 
     physicalUnitCarrierLabel : String
+    physicalDimensionVectorLabel : String
     natToUnitCalibrationMapLabel : String
     calibratedQuotientScaleMapLabel : String
     factorizationLabel : String
@@ -117,6 +180,8 @@ data Candidate256PhysicalCalibrationExternalBlockedField : Set where
     Candidate256PhysicalCalibrationExternalBlockedField
   missingExternalPhysicalUnitCarrier :
     Candidate256PhysicalCalibrationExternalBlockedField
+  missingExternalPhysicalDimensionVector :
+    Candidate256PhysicalCalibrationExternalBlockedField
   missingExternalNatToUnitCalibrationMap :
     Candidate256PhysicalCalibrationExternalBlockedField
   missingExternalCalibratedQuotientScaleMap :
@@ -168,6 +233,7 @@ canonicalCandidate256PhysicalCalibrationExternalBlockedFields :
 canonicalCandidate256PhysicalCalibrationExternalBlockedFields =
   missingExternalCalibrationAuthorityToken
   ∷ missingExternalPhysicalUnitCarrier
+  ∷ missingExternalPhysicalDimensionVector
   ∷ missingExternalNatToUnitCalibrationMap
   ∷ missingExternalCalibratedQuotientScaleMap
   ∷ missingExternalFactorizationLaw
@@ -202,6 +268,7 @@ record Candidate256PhysicalCalibrationExternalReceiptCurrentStatus : Setω where
     requiredAuthorityArtifact : String
     authorityBoundary : String
     calibrationBoundary : String
+    dimensionVectorBoundary : String
     factorizationBoundary : String
     dimensionalBoundary : String
     downstreamPhysicalBoundary : String
@@ -250,6 +317,8 @@ canonicalCandidate256PhysicalCalibrationExternalReceiptCurrentStatus =
         "Candidate256PhysicalCalibrationAuthorityToken has no constructor in the current repo"
     ; calibrationBoundary =
         "physical unit carrier, Nat-to-unit calibration map, and calibrated quotient scale map remain external obligations"
+    ; dimensionVectorBoundary =
+        "a physical dimension vector must be supplied as structured SI-base exponents before unit calibration can be consumed"
     ; factorizationBoundary =
         "the calibrated quotient scale map must factor through candidate256SurrogateScale before it can feed the physical scale-setting lane"
     ; dimensionalBoundary =
@@ -357,7 +426,7 @@ canonicalCandidate256PhysicalCalibrationGateReceiptWiringLedger =
         refl
     ; wiringBoundary =
         "Gate receipt wiring is recorded from AcceptedDYLuminosityConventionAuthority through W4ZAdequacy to Candidate256PhysicalCalibrationExternalReceipt"
-        ∷ "The canonical blocked fields remain authority, unit carrier, Nat-to-unit map, calibrated quotient map, factorization, and dimensional preservation"
+        ∷ "The canonical blocked fields remain authority, unit carrier, dimension vector, Nat-to-unit map, calibrated quotient map, factorization, and dimensional preservation"
         ∷ "The receipt eliminator still proves Candidate256PhysicalCalibrationExternalReceipt is impossible without an external authority token"
         ∷ "No local accepted authority token or physical calibration promotion is constructed"
         ∷ []
