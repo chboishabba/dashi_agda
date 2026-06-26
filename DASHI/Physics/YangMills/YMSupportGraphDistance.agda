@@ -1,8 +1,10 @@
 module DASHI.Physics.YangMills.YMSupportGraphDistance where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
 open import Data.List.Base using (length)
 open import Data.Nat using (_≤_)
+open import Data.Nat.Properties as NatP using (≤-trans)
 
 import DASHI.Physics.Closure.YMEffectiveActionSupportInterface as Support
 
@@ -317,10 +319,10 @@ record TreePathEdgesExistWitness (u v : Support.Link) : Set where
     finishAtTarget : Path.finish path ≡ v
     validPath : Path.valid path ≡ true
 
-treePathEdgesExistWitness :
+treePathEdgesExistPathWitness :
   ∀ (u v : Support.Link) →
   TreePathEdgesExistWitness u v
-treePathEdgesExistWitness u v = record
+treePathEdgesExistPathWitness u v = record
   { path = treePathEdgesExist u v
   ; startAtSource = treePathEdgesExistStart u v
   ; finishAtTarget = treePathEdgesExistFinish u v
@@ -346,4 +348,128 @@ currentGraphCoreP01P02P03TheoremSurface = record
   ; p02GraphDistMinimalitySurface = p02GraphDistMinimality
   ; p03TreePathBoundedByEdgeCountSurface =
       p03TreePathBoundedByEdgeCountFromImportedTreePathBoundedByEdgeCountAxiom
+  }
+
+record GraphCoreP01P03WitnessBundle : Set₁ where
+  field
+    supportGraph : FiniteSupportGraph
+    graphDistanceStructure : GraphDistanceStructure supportGraph
+    treePathStructure : TreePathStructure supportGraph
+    p01Witness :
+      ∀ (u v : Support.Link) →
+      Path currentFiniteSupportGraph
+    p01WitnessStart :
+      ∀ (u v : Support.Link) →
+      Path.start (p01Witness u v) ≡ u
+    p01WitnessFinish :
+      ∀ (u v : Support.Link) →
+      Path.finish (p01Witness u v) ≡ v
+    p01WitnessValid :
+      ∀ (u v : Support.Link) →
+      Path.valid (p01Witness u v) ≡ true
+    p02DerivedFromSameWitness :
+      ∀ (u v : Support.Link) →
+      ymGraphDist u v ≤ Path.pathLength (p01Witness u v)
+    p03DerivedFromSameWitness :
+      ∀ (u v : Support.Link) →
+      Path.pathLength (p01Witness u v) ≤ ymTreeEdgeCount
+    provenance : String
+    provenanceIsCanonical :
+      provenance ≡
+      "P01-P03 are imported/derived wrappers over the same YM tree-path and graph-distance witness; this bundle introduces no extra postulates."
+
+currentGraphCoreP01P03WitnessBundle : GraphCoreP01P03WitnessBundle
+currentGraphCoreP01P03WitnessBundle = record
+  { supportGraph = currentFiniteSupportGraph
+  ; graphDistanceStructure = currentGraphDistanceStructure
+  ; treePathStructure = currentTreePathStructure
+  ; p01Witness = treePathEdgesExist
+  ; p01WitnessStart = treePathEdgesExistStart
+  ; p01WitnessFinish = treePathEdgesExistFinish
+  ; p01WitnessValid = treePathEdgesExistValid
+  ; p02DerivedFromSameWitness = p02GraphDistMinimalityFromWitness
+  ; p03DerivedFromSameWitness = p03TreePathBoundedByEdgeCountFromWitness
+  ; provenance =
+      "P01-P03 are imported/derived wrappers over the same YM tree-path and graph-distance witness; this bundle introduces no extra postulates."
+  ; provenanceIsCanonical = refl
+  }
+
+record P01P03SurfaceCoherence : Set₁ where
+  field
+    witnessBundle : GraphCoreP01P03WitnessBundle
+    p02ReusesP01Witness : Bool
+    p03ReusesP01Witness : Bool
+    noExtraPostulatesIntroduced : Bool
+    p02ReusesP01WitnessIsTrue :
+      p02ReusesP01Witness ≡ true
+    p03ReusesP01WitnessIsTrue :
+      p03ReusesP01Witness ≡ true
+    noExtraPostulatesIntroducedIsTrue :
+      noExtraPostulatesIntroduced ≡ true
+
+currentP01P03SurfaceCoherence : P01P03SurfaceCoherence
+currentP01P03SurfaceCoherence = record
+  { witnessBundle = currentGraphCoreP01P03WitnessBundle
+  ; p02ReusesP01Witness = true
+  ; p03ReusesP01Witness = true
+  ; noExtraPostulatesIntroduced = true
+  ; p02ReusesP01WitnessIsTrue = refl
+  ; p03ReusesP01WitnessIsTrue = refl
+  ; noExtraPostulatesIntroducedIsTrue = refl
+  }
+
+open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
+  ( SourceAuthorityId
+  ; diestel-graph-theory
+  ; standardWrapper
+  ; VerificationStatus
+  )
+
+record ImportedTreePathEdgesExist : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    pathExist : ∀ (u v : Support.Link) → Path currentFiniteSupportGraph
+
+record ImportedGraphDistMinimality : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    minimality : ∀ (u v : Support.Link) (p : Path currentFiniteSupportGraph) →
+      Path.start p ≡ u →
+      Path.finish p ≡ v →
+      Path.valid p ≡ true →
+      ymGraphDist u v ≤ Path.pathLength p
+
+record ImportedTreePathBoundedByEdgeCount : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    bounded : ∀ (u v : Support.Link) → Path.pathLength (ymTreePath u v) ≤ ymTreeEdgeCount
+
+treePathEdgesExistWitness : ImportedTreePathEdgesExist
+treePathEdgesExistWitness = record
+  { sourceAuthorityId = diestel-graph-theory
+  ; theoremLocator = "§1.5.1"
+  ; status = standardWrapper
+  ; pathExist = ymTreePath
+  }
+
+graphDistMinimalityWitness : ImportedGraphDistMinimality
+graphDistMinimalityWitness = record
+  { sourceAuthorityId = diestel-graph-theory
+  ; theoremLocator = "§1.5.1"
+  ; status = standardWrapper
+  ; minimality = λ u v p start finish valid → ImportedFiniteGraphDistanceAxiom p start finish valid
+  }
+
+treePathBoundedByEdgeCountWitness : ImportedTreePathBoundedByEdgeCount
+treePathBoundedByEdgeCountWitness = record
+  { sourceAuthorityId = diestel-graph-theory
+  ; theoremLocator = "§1.5.1"
+  ; status = standardWrapper
+  ; bounded = ImportedTreePathBoundedByEdgeCountAxiom
   }

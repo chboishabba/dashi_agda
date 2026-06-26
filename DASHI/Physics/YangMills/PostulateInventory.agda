@@ -12,6 +12,10 @@ import DASHI.Physics.YangMills.P01P33ProofSurfaces as Surfaces
 -- Complete inventory of all imported postulates, conventions, and source
 -- claims consumed by the DASHI YM route.  This file is the canonical audit
 -- surface for any external reviewer.
+-- The replacement-priority table lives separately in:
+--   DASHI.Physics.YangMills.P01P33ReplacementBacklog
+-- The lightweight P33 split bridge lives in:
+--   DASHI.Physics.YangMills.BalabanP33Bridge
 --
 -- Every entry is a named import relative to a specific source paper and
 -- theorem/proposition number.  Nothing here is a constructive proof

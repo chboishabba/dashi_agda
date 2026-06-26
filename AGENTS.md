@@ -469,6 +469,56 @@ CMI rules require all three conditions before consideration: qualifying
 peer-reviewed publication (§6), two-year waiting period (§3(ii)), and
 general community acceptance (§3(iii)).  None is currently satisfied.
 
+## Witness Verification Status and the Destination Statement
+
+DASHI has converted the P01–P33 Eriksson/Bałaban intake into concrete Set-level theorem records with structured mathematical content and witness slots. Many witnesses remain postulated/imported, so the route remains source-intake conditional rather than internally proved. `clayYangMillsPromoted` remains `false`.
+
+DASHI tracks the verification status of the witness inhabiting each theorem surface:
+- **`proved`**: Witness is constructed completely within DASHI (e.g. $\kappa > 0$, $\kappa = 1$, and graph/tree consequence proofs).
+- **`standardWrapper`**: Wrapper around standard axiomatic frameworks (e.g. Diestel graph theory facts).
+- **`paperImport`**: Witness is imported conditionally relative to the cited external paper's proof.
+- **`auditTested`**: Verification status is validated via analytical checks and arithmetic margin checks.
+
+The status distribution across the 33 postulates is summarized below:
+
+| ID | Postulate Surface Name | Verification Status | Witness Class / Mechanism |
+|----|------------------------|---------------------|---------------------------|
+| P01 | `treePathEdgesExist` | `standardWrapper` | Graph axiom wrapper (Diestel) |
+| P02 | `graphDistMinimality` | `standardWrapper` | Graph axiom wrapper (Diestel) |
+| P03 | `treePathBoundedByEdgeCount` | `standardWrapper` | Graph axiom wrapper (Diestel) |
+| P04 | `kappaStrictlyPositive` | `proved` | Proved via $\kappa = 1 > 0$ construction |
+| P05 | `kappaNormalisedToOne` | `proved` | Proved via $\kappa = 1$ definition |
+| P06 | `ImportedPolymerAnimalCountingBound` | `paperImport` | Postulated; Eriksson 2602.0041 Lem. 5.6 |
+| P07 | `ImportedKPSummabilityBound` | `auditTested` | Postulated; Eriksson 2602.0041 |
+| P08 | `pZeroPositive` | `paperImport` | Postulated; Balaban CMP 122 eq. 1.89 |
+| P09 | `entropyBeatenByFullDecay` | `auditTested` | Postulated; $\beta \geq \beta_0$ arithmetic |
+| P10 | `ImportedLargeFieldActivityBound` | `paperImport` | Postulated; Eriksson 2602.0069 Thm. 8.5 |
+| P11 | `ImportedAbsorptionCondition` | `paperImport` | Postulated; Eriksson 2602.0056 §7 |
+| P12 | `ImportedDLRLSIFromPolymerDecay` | `paperImport` | Postulated; Eriksson 2602.0052 Lem. 6.3 |
+| P13 | `ImportedCrossScaleBound` | `paperImport` | Postulated; Eriksson 2602.0052 Lem. 5.7 |
+| P14 | `ImportedDLRLSITheorem` | `paperImport` | Postulated; Eriksson 2602.0052 Thm. 7.1 |
+| P15 | `ImportedLatticeSpectralGap` | `paperImport` | Postulated; Eriksson 2602.0052 Cor. 7.3 |
+| P16 | `ImportedAssumptionA2FromKPCertificate` | `auditTested` | Postulated; Eriksson 2602.0072 A2 |
+| P17 | `ImportedB6InfluenceBound` | `paperImport` | Postulated; Eriksson 2602.0072 Thm. 1.3 |
+| P18 | `ImportedRGCauchySummability` | `paperImport` | Postulated; Eriksson 2602.0072 Cor. 5.1 |
+| P19 | `ImportedCouplingControlProof` | `paperImport` | Postulated; Eriksson 2602.0088 Prop. 4.1 |
+| P20 | `AnisotropicSubspaceClassificationTheorem` | `paperImport` | Postulated; Eriksson 2602.0087 Thm. 3.6 |
+| P21 | `AnisotropyCoeffQuadraticBound` | `paperImport` | Postulated; Eriksson 2602.0087 Thm. 5.4 |
+| P22 | `InsertionIntegrabilityBound` | `paperImport` | Postulated; Eriksson 2602.0087 Thm. 6.6 |
+| P23 | `TerminalKPBoundVerified` | `paperImport` | Postulated; Eriksson 2602.0091 Thm. 1.1+1.2 |
+| P24 | `AssemblyMapComplete` | `auditTested` | Postulated; Eriksson 2602.0091 Thm. 1.3 |
+| P25 | `UniformLSIFixedLattice` | `paperImport` | Postulated; Eriksson 2602.0089 Thm. A |
+| P26 | `VolumeUniformMassGapFixedLattice` | `paperImport` | Postulated; Eriksson 2602.0089 Thm. B |
+| P27 | `ThermodynamicLimitUnique` | `paperImport` | Postulated; Eriksson 2602.0089 Thm. C |
+| P28 | `ImportedRotationalWardIdentity` | `paperImport` | Postulated; Eriksson 2602.0092 Prop. 3.2 |
+| P29 | `ImportedSymanzikBreakingDecomposition` | `paperImport` | Postulated; Eriksson 2602.0092 Prop. 3.4 |
+| P30 | `ImportedOS1EuclideanCovariance` | `paperImport` | Postulated; Eriksson 2602.0092 Thm. 4.2+Cor. 4.3 |
+| P31 | `ImportedWightmanReconstructionWithMassGap` | `paperImport` | Postulated; Eriksson 2602.0092 Thm. 1.1+§5 |
+| P32 | `TriangularMixingPreventiveLock` | `paperImport` | Postulated; Eriksson 2602.0096 Thm. 8.5+Cor. 8.6 |
+| P33a | `p33aUniformLinkEllipticity` | `paperImport` | Postulated; Eriksson 2602.0056 |
+| P33b | `p33bWeightedTreeDistanceDominatesOrdinaryDiameter` | `proved` | Proved internally via graph path domination |
+| P33 | `FieldRegularityImpliesSingleLinkPositivity` | `paperImport` | Composite bridge from P33a to P33b |
+
 ## Canonical Audit Surface
 
 The 33-postulate inventory now lives in a dedicated machine-readable file:

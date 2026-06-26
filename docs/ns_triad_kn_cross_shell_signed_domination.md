@@ -32,8 +32,13 @@ Define the signed domination ratio
 
 - \(\rho_6 \approx 0.6076\)
 - \(\rho_8 \approx 0.6257\)
+- \(\rho_{10} \approx 0.6144\) via projected CPU matrix-free generalized eigensolve
+- \(\rho_{12} \approx 0.6577\) via projected CPU matrix-free generalized eigensolve
+- \(\rho_{14} \approx 0.5956\) via projected CPU matrix-free generalized eigensolve
 - \(S_C\) is PSD with nullity one at \(N=6,8,10,12,14\) in the current audits
 - \(S_C \mathbf{1}_C = 0\) is proved analytically and machine-zero numerically
+- All currently tested domination ratios remain below \(2/3\), with the present worst case at \(N=12\)
+- The current worst generalized eigenvectors are concentrated on the seam shells \(N-1\) and \(N\), carry negligible axis mass, and are led by non-axis modes such as \((-1,0,N-1)\)
 - Ordinary Laplacian reduction is dead: positive off-diagonals occur in the dense sign audit
 - The “balanced signed graph” framing is demoted: it is not the active theorem route
 
@@ -97,7 +102,7 @@ balancedSignedGraphRoute = false
 Python regression: passed
 Matrix-free audit: passed
 Dense sign/factorization audit: passed
-Focused Agda check: not yet run
+Focused Agda check: passed
 Full Everything.agda check: attempted, killed exit 137
 Promotion check: not yet run
 ```

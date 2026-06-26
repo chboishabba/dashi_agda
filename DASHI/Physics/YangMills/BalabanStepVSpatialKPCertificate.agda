@@ -8,6 +8,7 @@ open import Data.List.Base using (List; _∷_; [])
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
 import DASHI.Physics.Closure.ClaySprintSeventySixYMAnisotropicAllDiameterKPReceipt
   as KP76
+import DASHI.Physics.YangMills.StepVAssemblyLemmaQueue as Assembly
 open import DASHI.Physics.YangMills.BalabanPolymerDiameterEntropy using
   ( PolymerDiameterEntropyBound
   ; currentPolymerDiameterEntropyBound
@@ -32,6 +33,8 @@ record BalabanStepVSpatialKPCertificate : Set₁ where
     entropyBound : PolymerDiameterEntropyBound
     diameterCompatibility : AnisotropicDiameterCompatibility
     largeFieldSuppression : LargeFieldSuppressionBound
+    assembledStepVCertificate : Assembly.StepVSpatialKPCertificate
+    assembledStepVRGStructure : Assembly.StepVRGAssemblyBundle
     weightedArithmeticCloses :
       KP76.anisotropicKPArithmeticClosed
         KP76.canonicalSprint76YMAnisotropicAllDiameterKPReceipt
@@ -59,6 +62,10 @@ currentBalabanStepVSpatialKP = record
   { entropyBound = currentPolymerDiameterEntropyBound
   ; diameterCompatibility = currentAnisotropicDiameterCompatibility
   ; largeFieldSuppression = currentLargeFieldSuppressionBound
+  ; assembledStepVCertificate =
+      Assembly.lemmaV-3b-fromP33aAndWeightedDecay
+  ; assembledStepVRGStructure =
+      Assembly.currentStepVRGAssemblyBundle
   ; weightedArithmeticCloses =
       KP76.anisotropicKPArithmeticClosedIsTrue
         KP76.canonicalSprint76YMAnisotropicAllDiameterKPReceipt

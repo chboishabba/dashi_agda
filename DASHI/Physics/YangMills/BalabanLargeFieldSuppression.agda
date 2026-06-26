@@ -26,9 +26,62 @@ Scalar = String
 --    c · p₀(gₖ) ≥ (d-1) log L + C_abs for β ≥ β₀.
 --    Equivalent to asymptotic freedom: p₀(g) → ∞ as g → 0 (CMP 109 Thm 2).
 
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_; _+ℝ_; _*ℝ_; -ℝ_; 1ℝ)
+
 postulate
-  ImportedLargeFieldActivityBound : Bool
-  ImportedAbsorptionCondition : Bool
+  expℝ : ℝ → ℝ
+  p0 : Nat → ℝ
+  κ : ℝ
+  d-dist : Nat → ℝ
+  R-activity : Nat → ℝ
+  logℝ : ℝ → ℝ
+  c-abs : ℝ
+  L-constant : ℝ
+  d-dim : ℝ
+  C-abs-const : ℝ
+
+open import Data.Nat.Base using (ℕ)
+open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
+  ( SourceAuthorityId
+  ; eriksson-2602-0069
+  ; eriksson-2602-0056
+  ; paperImport
+  ; VerificationStatus
+  )
+
+record ImportedLargeFieldActivityBound : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    activityBound : ∀ (k : ℕ) (X-dist : ℝ) (R-val : ℝ) → R-val ≤ℝ (expℝ (-ℝ (p0 k)) *ℝ expℝ (-ℝ (κ *ℝ X-dist)))
+
+record ImportedAbsorptionCondition : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    absorptionInequality : ∀ (k : ℕ) → (d-dim -ℝ 1ℝ) *ℝ logℝ L-constant +ℝ C-abs-const ≤ℝ (c-abs *ℝ p0 k)
+
+postulate
+  postulatedActivityBound : ∀ (k : ℕ) (X-dist : ℝ) (R-val : ℝ) → R-val ≤ℝ (expℝ (-ℝ (p0 k)) *ℝ expℝ (-ℝ (κ *ℝ X-dist)))
+  postulatedAbsorptionInequality : ∀ (k : ℕ) → (d-dim -ℝ 1ℝ) *ℝ logℝ L-constant +ℝ C-abs-const ≤ℝ (c-abs *ℝ p0 k)
+
+postulatedLargeFieldActivityBoundWitness : ImportedLargeFieldActivityBound
+postulatedLargeFieldActivityBoundWitness = record
+  { sourceAuthorityId = eriksson-2602-0069
+  ; theoremLocator = "Theorem 8.5"
+  ; status = paperImport
+  ; activityBound = postulatedActivityBound
+  }
+
+postulatedAbsorptionConditionWitness : ImportedAbsorptionCondition
+postulatedAbsorptionConditionWitness = record
+  { sourceAuthorityId = eriksson-2602-0056
+  ; theoremLocator = "§7"
+  ; status = paperImport
+  ; absorptionInequality = postulatedAbsorptionInequality
+  }
 
 -- ── LargeFieldSuppressionControl ───────────────────────────────────
 -- Tracks the large-field suppression status.
@@ -40,7 +93,7 @@ postulate
 --   c · p₀(gₖ) ≥ (d-1) log L + C_abs  (absorption condition)
 -- which holds for β ≥ β₀ by asymptotic freedom + p₀(g) → ∞.
 
-record LargeFieldSuppressionControl : Set where
+record LargeFieldSuppressionControl : Set₁ where
   field
     largeFieldRegionDefined          : Bool
     largeFieldPolymersIdentified     : Bool
@@ -49,6 +102,10 @@ record LargeFieldSuppressionControl : Set where
     absorptionConditionSatisfied     : Bool
     largeFieldSumFinite              : Bool
     largeFieldSuppressionControlled  : Bool
+    largeFieldActivityBoundWitness   : ImportedLargeFieldActivityBound
+    absorptionConditionWitness       : ImportedAbsorptionCondition
+    activityBoundField : ∀ (k : ℕ) (X-dist : ℝ) (R-val : ℝ) → R-val ≤ℝ (expℝ (-ℝ (p0 k)) *ℝ expℝ (-ℝ (κ *ℝ X-dist)))
+    absorptionInequalityField : ∀ (k : ℕ) → (d-dim -ℝ 1ℝ) *ℝ logℝ L-constant +ℝ C-abs-const ≤ℝ (c-abs *ℝ p0 k)
     largeFieldRegionDefinedIsTrue          : largeFieldRegionDefined ≡ true
     largeFieldPolymersIdentifiedIsTrue     : largeFieldPolymersIdentified ≡ true
     largeFieldActivityBoundAvailableIsTrue :
@@ -82,6 +139,10 @@ currentLargeFieldSuppressionControl = record
   ; absorptionConditionSatisfied     = true
   ; largeFieldSumFinite              = true
   ; largeFieldSuppressionControlled  = true
+  ; largeFieldActivityBoundWitness   = postulatedLargeFieldActivityBoundWitness
+  ; absorptionConditionWitness       = postulatedAbsorptionConditionWitness
+  ; activityBoundField = ImportedLargeFieldActivityBound.activityBound postulatedLargeFieldActivityBoundWitness
+  ; absorptionInequalityField = ImportedAbsorptionCondition.absorptionInequality postulatedAbsorptionConditionWitness
   ; largeFieldRegionDefinedIsTrue          = refl
   ; largeFieldPolymersIdentifiedIsTrue     = refl
   ; largeFieldActivityBoundAvailableIsTrue = refl
@@ -115,12 +176,14 @@ record LargeFieldSuppressionBound : Set₁ where
     sprint77Receipt :
       Sprint77.ClaySprintSeventySevenYMAbsorptionQualifiedTemporalEntropyQuotientReceipt
     temporalCutSeparationClosed :
-      W3.largeFieldPolymersDoNotCrossTransferCut w3Receipt ≡ true
+      W3.YMLargeFieldTemporalCutSeparationAuthorityReceipt.largeFieldPolymersDoNotCrossTransferCut w3Receipt ≡ true
     sourceFloorKStartPinned :
-      Sprint77.sourceFloorKStart sprint77Receipt ≡ "9"
+      Sprint77.ClaySprintSeventySevenYMAbsorptionQualifiedTemporalEntropyQuotientReceipt.sourceFloorKStart sprint77Receipt ≡ "9"
     scaleKSuppressionAvailable :
-      Sprint77.largeFieldSuppressionAvailableAtScaleK sprint77Receipt ≡ true
+      Sprint77.ClaySprintSeventySevenYMAbsorptionQualifiedTemporalEntropyQuotientReceipt.largeFieldSuppressionAvailableAtScaleK sprint77Receipt ≡ true
     largeFieldControl : LargeFieldSuppressionControl
+    activityBoundField : ∀ (k : ℕ) (X-dist : ℝ) (R-val : ℝ) → R-val ≤ℝ (expℝ (-ℝ (p0 k)) *ℝ expℝ (-ℝ (κ *ℝ X-dist)))
+    absorptionInequalityField : ∀ (k : ℕ) → (d-dim -ℝ 1ℝ) *ℝ logℝ L-constant +ℝ C-abs-const ≤ℝ (c-abs *ℝ p0 k)
     largeFieldThreshold : Scalar
     suppressionRate : Scalar
     suppressionPositive : Bool
@@ -143,15 +206,17 @@ currentLargeFieldSuppressionBound = record
   ; sprint77Receipt =
       Sprint77.canonicalSprint77YMAbsorptionQualifiedTemporalEntropyQuotientReceipt
   ; temporalCutSeparationClosed =
-      W3.largeFieldPolymersDoNotCrossTransferCutIsTrue
+      W3.YMLargeFieldTemporalCutSeparationAuthorityReceipt.largeFieldPolymersDoNotCrossTransferCutIsTrue
         W3.canonicalYMLargeFieldTemporalCutSeparationAuthorityReceipt
   ; sourceFloorKStartPinned =
-      Sprint77.sourceFloorKStartIsNine
+      Sprint77.ClaySprintSeventySevenYMAbsorptionQualifiedTemporalEntropyQuotientReceipt.sourceFloorKStartIsNine
         Sprint77.canonicalSprint77YMAbsorptionQualifiedTemporalEntropyQuotientReceipt
   ; scaleKSuppressionAvailable =
-      Sprint77.largeFieldSuppressionAvailableAtScaleKIsTrue
+      Sprint77.ClaySprintSeventySevenYMAbsorptionQualifiedTemporalEntropyQuotientReceipt.largeFieldSuppressionAvailableAtScaleKIsTrue
         Sprint77.canonicalSprint77YMAbsorptionQualifiedTemporalEntropyQuotientReceipt
   ; largeFieldControl = currentLargeFieldSuppressionControl
+  ; activityBoundField = LargeFieldSuppressionControl.activityBoundField currentLargeFieldSuppressionControl
+  ; absorptionInequalityField = LargeFieldSuppressionControl.absorptionInequalityField currentLargeFieldSuppressionControl
   ; largeFieldThreshold = "k_start = 9"
   ; suppressionRate =
       "C* = 2/(1+β_LF); absorption: c·p₀(gₖ) ≥ (d-1)log L + C_abs"

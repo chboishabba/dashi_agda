@@ -25,6 +25,24 @@ SIGNED_SUMMARY = (
     / "ns_triad_kn_cross_shell_schur_signed_factorization_audit_20260625"
     / "schur_audit.json"
 )
+DOMINATION_SUMMARY_10 = (
+    REPO_ROOT
+    / "scripts"
+    / "data"
+    / "outputs"
+    / "ns_boundary_pressure_geometric_20260621"
+    / "ns_triad_kn_cross_shell_domination_ratio_audit_20260626"
+    / "schur_audit.json"
+)
+DOMINATION_SUMMARY_HI = (
+    REPO_ROOT
+    / "scripts"
+    / "data"
+    / "outputs"
+    / "ns_boundary_pressure_geometric_20260621"
+    / "ns_triad_kn_cross_shell_domination_ratio_audit_hi_20260626"
+    / "schur_audit.json"
+)
 
 
 def test_schur_nullmode_doc_uses_candidate_only_language() -> None:
@@ -48,12 +66,16 @@ def test_signed_domination_doc_records_live_gate1_target() -> None:
     assert "This is the live Gate 1 theorem surface." in text
     assert "\\rho_6 \\approx 0.6076" in text
     assert "\\rho_8 \\approx 0.6257" in text
+    assert "\\rho_{10} \\approx 0.6144" in text
+    assert "\\rho_{12} \\approx 0.6577" in text
+    assert "\\rho_{14} \\approx 0.5956" in text
+    assert "below \\(2/3\\)" in text
     assert "positive off-diagonals occur in the dense sign audit" in text
     assert "balanced signed graph" in text
     assert "single live Gate 1 proof obligation" in text
     assert "signedDominationProbeInstalled = true" in text
     assert "signedDominationRatioUniformlyBounded = false" in text
-    assert "Focused Agda check: not yet run" in text
+    assert "Focused Agda check: passed" in text
     assert "Full Everything.agda check: attempted, killed exit 137" in text
     assert "Exit `137` is an environment/resource failure, not a proof failure." in text
     assert "sup_{x \\perp \\mathbf{1}_C}" in squashed
@@ -136,3 +158,33 @@ def test_dense_signed_factorization_audit_records_domination_probe() -> None:
         assert factor_diag["L_good_nullity_estimate"] == 1
         assert factor_diag["domination_ratio_sup_one_perp"] < 1.0
         assert factor_diag["domination_holds_strictly_observed"] is True
+
+
+def test_matrix_free_domination_ratio_audits_record_10_12_14() -> None:
+    payload_10 = json.loads(DOMINATION_SUMMARY_10.read_text(encoding="utf-8"))
+    payload_hi = json.loads(DOMINATION_SUMMARY_HI.read_text(encoding="utf-8"))
+
+    rows_10 = {row["N"]: row for row in payload_10["rows"]}
+    rows_hi = {row["N"]: row for row in payload_hi["rows"]}
+
+    assert set(rows_10) == {10}
+    assert set(rows_hi) == {12, 14}
+
+    expected_upper = {10: 2.0 / 3.0, 12: 2.0 / 3.0, 14: 2.0 / 3.0}
+    all_rows = {**rows_10, **rows_hi}
+    for shell, row in all_rows.items():
+        assert row["verdict"] == "schur_psd"
+        assert row["S_C"]["nullity_estimate"] == 1
+        diag = row["domination_ratio_matrix_free_diagnostics"]
+        assert diag["status"] == "ok"
+        assert diag["domination_holds_strictly_observed"] is True
+        assert diag["domination_ratio_sup_one_perp"] < expected_upper[shell]
+        assert diag["L_good_lambda1_one_perp"] > 0.0
+        assert diag["L_bad_lambda_max_one_perp"] > 0.0
+        assert diag["worst_eigenvector_diagnostics"]["axis_concentration"] < 0.001
+        shell_mass = diag["worst_eigenvector_diagnostics"]["shell_mass"]
+        assert len(shell_mass) == 2
+        assert max(shell_mass.values()) < 0.6
+        top_modes = diag["worst_eigenvector_diagnostics"]["top_modes"]
+        assert len(top_modes) >= 5
+        assert top_modes[0]["is_axis"] is False
