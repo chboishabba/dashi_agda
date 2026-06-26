@@ -9,7 +9,7 @@ open import Data.Nat.Properties as NatP
 open import Data.Product using (_,_)
 open import Data.Vec using (Vec; []; map; _++_; _∷_)
 open import Data.Vec.Base using (reverse; _∷ʳ_; cast; init; last; initLast)
-open import Data.Vec.Properties using (map-reverse; reverse-injective; reverse-∷; reverse-++; cast-is-id; cast-sym)
+open import Data.Vec.Properties using (map-reverse; reverse-injective; reverse-∷; reverse-++-eqFree; cast-is-id; cast-sym)
 open import Ultrametric as UMetric
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos; inv)
 open import DASHI.Physics.TailCollapseProof as TCP
@@ -325,9 +325,9 @@ dNatFine-++ {m} {n} c c' t t' =
     eq : m + n ≡ n + m
     eq = NatP.+-comm m n
     rx : reverse (c ++ t) ≡ cast (sym eq) (reverse t ++ reverse c)
-    rx = sym (cast-sym eq (reverse-++ eq c t))
+    rx = sym (cast-sym eq (reverse-++-eqFree c t))
     ry : reverse (c' ++ t') ≡ cast (sym eq) (reverse t' ++ reverse c')
-    ry = sym (cast-sym eq (reverse-++ eq c' t'))
+    ry = sym (cast-sym eq (reverse-++-eqFree c' t'))
   in
   trans
     (cong₂ AM.dNat rx ry)
@@ -341,9 +341,9 @@ dNatFine-++-map≤ {m} {n} c c' t t' f =
     eq : m + n ≡ n + m
     eq = NatP.+-comm m n
     rx-cast : reverse (map f c ++ t) ≡ cast (sym eq) (reverse t ++ reverse (map f c))
-    rx-cast = sym (cast-sym eq (reverse-++ eq (map f c) t))
+    rx-cast = sym (cast-sym eq (reverse-++-eqFree (map f c) t))
     ry-cast : reverse (map f c' ++ t') ≡ cast (sym eq) (reverse t' ++ reverse (map f c'))
-    ry-cast = sym (cast-sym eq (reverse-++ eq (map f c') t'))
+    ry-cast = sym (cast-sym eq (reverse-++-eqFree (map f c') t'))
     rx-map : reverse (map f c ++ t) ≡ cast (sym eq) (reverse t ++ map f (reverse c))
     rx-map = trans rx-cast (cong (cast (sym eq)) (cong (reverse t ++_) (sym (map-reverse f c))))
     ry-map : reverse (map f c' ++ t') ≡ cast (sym eq) (reverse t' ++ map f (reverse c'))
@@ -371,9 +371,9 @@ dNatFine-++-map≤-tail {m} {n} c c' t t' f =
     eq : m + n ≡ n + m
     eq = NatP.+-comm m n
     rx-cast : reverse (c ++ map f t) ≡ cast (sym eq) (reverse (map f t) ++ reverse c)
-    rx-cast = sym (cast-sym eq (reverse-++ eq c (map f t)))
+    rx-cast = sym (cast-sym eq (reverse-++-eqFree c (map f t)))
     ry-cast : reverse (c' ++ map f t') ≡ cast (sym eq) (reverse (map f t') ++ reverse c')
-    ry-cast = sym (cast-sym eq (reverse-++ eq c' (map f t')))
+    ry-cast = sym (cast-sym eq (reverse-++-eqFree c' (map f t')))
     rx-map : reverse (c ++ map f t) ≡ cast (sym eq) (map f (reverse t) ++ reverse c)
     rx-map = trans rx-cast (cong (cast (sym eq)) (cong (_++ reverse c) (sym (map-reverse f t))))
     ry-map : reverse (c' ++ map f t') ≡ cast (sym eq) (map f (reverse t') ++ reverse c')

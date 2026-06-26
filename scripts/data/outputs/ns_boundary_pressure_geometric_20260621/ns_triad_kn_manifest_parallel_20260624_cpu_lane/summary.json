@@ -1,0 +1,252 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "branch_counts": {
+    "finite_anchor_mixed_low_frame": 2,
+    "no_low_frame": 2,
+    "tail_internal_low_frame": 2
+  },
+  "branch_counts_by_D0": {
+    "10": {
+      "finite_anchor_mixed_low_frame": 2,
+      "high_D_tail_internal_low_frame": 2,
+      "no_low_frame": 2
+    },
+    "14": {
+      "finite_anchor_mixed_low_frame": 2,
+      "high_D_tail_internal_low_frame": 1,
+      "low_D_tail_internal_obstruction": 1,
+      "no_low_frame": 2
+    },
+    "18": {
+      "finite_anchor_mixed_low_frame": 2,
+      "low_D_tail_internal_obstruction": 2,
+      "no_low_frame": 2
+    },
+    "6": {
+      "finite_anchor_mixed_low_frame": 2,
+      "high_D_tail_internal_low_frame": 2,
+      "no_low_frame": 2
+    },
+    "8": {
+      "finite_anchor_mixed_low_frame": 2,
+      "high_D_tail_internal_low_frame": 2,
+      "no_low_frame": 2
+    }
+  },
+  "c0": 0.25,
+  "candidate_only": true,
+  "clay_promoted": false,
+  "contract": "check_ns_triad_kn_manifest_summary",
+  "fail_closed": true,
+  "full_ns_promoted": false,
+  "missing_or_failed_count": 0,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_MANIFEST_SUMMARY",
+  "row_count": 6,
+  "rows": [
+    {
+      "D": 7.816073354908305,
+      "K": 4,
+      "R_cross": 4.681258471088791,
+      "R_finite": 0.200444704115735,
+      "R_full": 0.19359097694866192,
+      "R_tail": 0.453992752427247,
+      "backend": "cpu-matrix-free",
+      "branch": "finite_anchor_mixed_low_frame",
+      "branch_by_D0": {
+        "10": "finite_anchor_mixed_low_frame",
+        "14": "finite_anchor_mixed_low_frame",
+        "18": "finite_anchor_mixed_low_frame",
+        "6": "finite_anchor_mixed_low_frame",
+        "8": "finite_anchor_mixed_low_frame"
+      },
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_cpu_lane/receipts/cpu-matrix-free/cpu_matrix_free_shell_06_K_04_eta_0p250_forced_tail.json",
+      "eta": 0.25,
+      "finite_mass": 0.45809822940339545,
+      "job_id": "cpu_matrix_free_shell_06_K_04_eta_0p250_forced_tail",
+      "lambda_min": 0.19359097694866212,
+      "profile_family": "forced-tail",
+      "profile_tail_mass": 0.24999999999999997,
+      "shell": 6,
+      "status": "ok",
+      "tail_mass": 0.5419017705966046,
+      "tail_only_worst_shell": 6,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 1
+    },
+    {
+      "D": 11.905717367853292,
+      "K": 4,
+      "R_cross": 7.46973035110909,
+      "R_finite": 0.28101915763371205,
+      "R_full": 0.2698723140920447,
+      "R_tail": 0.430883356953107,
+      "backend": "cpu-matrix-free",
+      "branch": "no_low_frame",
+      "branch_by_D0": {
+        "10": "no_low_frame",
+        "14": "no_low_frame",
+        "18": "no_low_frame",
+        "6": "no_low_frame",
+        "8": "no_low_frame"
+      },
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_cpu_lane/receipts/cpu-matrix-free/cpu_matrix_free_shell_06_K_04_eta_0p400_forced_tail.json",
+      "eta": 0.4,
+      "finite_mass": 0.34457658548089953,
+      "job_id": "cpu_matrix_free_shell_06_K_04_eta_0p400_forced_tail",
+      "lambda_min": 0.26987231409204543,
+      "profile_family": "forced-tail",
+      "profile_tail_mass": 0.4,
+      "shell": 6,
+      "status": "ok",
+      "tail_mass": 0.6554234145191005,
+      "tail_only_worst_shell": 6,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 1
+    },
+    {
+      "D": 14.632146709816613,
+      "K": 4,
+      "R_cross": -2.368822284491363,
+      "R_finite": 0.3516668097988372,
+      "R_full": 0.29463459629829536,
+      "R_tail": 0.2949006336787851,
+      "backend": "cpu-matrix-free",
+      "branch": "no_low_frame",
+      "branch_by_D0": {
+        "10": "no_low_frame",
+        "14": "no_low_frame",
+        "18": "no_low_frame",
+        "6": "no_low_frame",
+        "8": "no_low_frame"
+      },
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_cpu_lane/receipts/cpu-matrix-free/cpu_matrix_free_shell_06_K_04_eta_0p500_forced_tail.json",
+      "eta": 0.5,
+      "finite_mass": 0.0003285859367719191,
+      "job_id": "cpu_matrix_free_shell_06_K_04_eta_0p500_forced_tail",
+      "lambda_min": 0.29463459629829497,
+      "profile_family": "forced-tail",
+      "profile_tail_mass": 0.5,
+      "shell": 6,
+      "status": "ok",
+      "tail_mass": 0.9996714140632281,
+      "tail_only_worst_shell": 5,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 5
+    },
+    {
+      "D": 8.62227520435967,
+      "K": 5,
+      "R_cross": 4.021691686411186,
+      "R_finite": 0.17521689929964346,
+      "R_full": 0.16722078234382698,
+      "R_tail": 0.4195752024137984,
+      "backend": "cpu-matrix-free",
+      "branch": "finite_anchor_mixed_low_frame",
+      "branch_by_D0": {
+        "10": "finite_anchor_mixed_low_frame",
+        "14": "finite_anchor_mixed_low_frame",
+        "18": "finite_anchor_mixed_low_frame",
+        "6": "finite_anchor_mixed_low_frame",
+        "8": "finite_anchor_mixed_low_frame"
+      },
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_cpu_lane/receipts/cpu-matrix-free/cpu_matrix_free_shell_06_K_05_eta_0p250_forced_tail.json",
+      "eta": 0.25,
+      "finite_mass": 0.4269061490253601,
+      "job_id": "cpu_matrix_free_shell_06_K_05_eta_0p250_forced_tail",
+      "lambda_min": 0.1672207823438274,
+      "profile_family": "forced-tail",
+      "profile_tail_mass": 0.24999999999999992,
+      "shell": 6,
+      "status": "ok",
+      "tail_mass": 0.57309385097464,
+      "tail_only_worst_shell": 6,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 1
+    },
+    {
+      "D": 13.195640326975479,
+      "K": 5,
+      "R_cross": -1.9723199653470012,
+      "R_finite": 0.40388156085569177,
+      "R_full": 0.2018093548450319,
+      "R_tail": 0.20197259220394295,
+      "backend": "cpu-matrix-free",
+      "branch": "tail_internal_low_frame",
+      "branch_by_D0": {
+        "10": "high_D_tail_internal_low_frame",
+        "14": "low_D_tail_internal_obstruction",
+        "18": "low_D_tail_internal_obstruction",
+        "6": "high_D_tail_internal_low_frame",
+        "8": "high_D_tail_internal_low_frame"
+      },
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_cpu_lane/receipts/cpu-matrix-free/cpu_matrix_free_shell_06_K_05_eta_0p400_forced_tail.json",
+      "eta": 0.4,
+      "finite_mass": 0.004836738024875121,
+      "job_id": "cpu_matrix_free_shell_06_K_05_eta_0p400_forced_tail",
+      "lambda_min": 0.20180935484503226,
+      "profile_family": "forced-tail",
+      "profile_tail_mass": 0.40000000000000013,
+      "shell": 6,
+      "status": "ok",
+      "tail_mass": 0.995163261975125,
+      "tail_only_worst_shell": 6,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 6
+    },
+    {
+      "D": 16.24455040871934,
+      "K": 5,
+      "R_cross": -3.023916875548294,
+      "R_finite": 0.4438554002988472,
+      "R_full": 0.21658465559485907,
+      "R_tail": 0.2167641610153397,
+      "backend": "cpu-matrix-free",
+      "branch": "tail_internal_low_frame",
+      "branch_by_D0": {
+        "10": "high_D_tail_internal_low_frame",
+        "14": "high_D_tail_internal_low_frame",
+        "18": "low_D_tail_internal_obstruction",
+        "6": "high_D_tail_internal_low_frame",
+        "8": "high_D_tail_internal_low_frame"
+      },
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_cpu_lane/receipts/cpu-matrix-free/cpu_matrix_free_shell_06_K_05_eta_0p500_forced_tail.json",
+      "eta": 0.5,
+      "finite_mass": 0.003078358472336418,
+      "job_id": "cpu_matrix_free_shell_06_K_05_eta_0p500_forced_tail",
+      "lambda_min": 0.21658465559485865,
+      "profile_family": "forced-tail",
+      "profile_tail_mass": 0.49999999999999983,
+      "shell": 6,
+      "status": "ok",
+      "tail_mass": 0.9969216415276637,
+      "tail_only_worst_shell": 6,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 6
+    }
+  ],
+  "schema_version": "1.0.0",
+  "script_name": "scripts/check_ns_triad_kn_manifest_summary.py",
+  "source_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_manifest_parallel_20260624_cpu_lane/run_summary.json",
+  "status": "ok",
+  "theorem_promoted": false
+}

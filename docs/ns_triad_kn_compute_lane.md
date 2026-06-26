@@ -20,14 +20,31 @@ C:
 - `scripts/ns_triad_kn_progression_artifact_audit.py`
 - `scripts/run_ns_triad_kn_eigen_tail_progression_batch.py`
 - `scripts/ns_triad_kn_batch_manifest_summary.py`
+- `scripts/ns_triad_kn_sparse_schur_scaling.py`
+- `scripts/ns_triad_kn_sparse_schur_scaling_fit.py`
+- `scripts/ns_triad_kn_external_paper_bridge_audit.py`
 - `scripts/check_ns_triad_kn_exact_identity_scan.py`
 - `scripts/check_ns_triad_kn_tail_progression_scan.py`
 - `scripts/check_ns_triad_kn_lobpcg_scan.py`
 - `scripts/check_ns_triad_kn_eigen_tail_adversary_scan.py`
+- `DASHI/Physics/Closure/NSTriadKNMixedTailSchurScalingReceipt.agda`
+- `DASHI/Physics/Closure/NSTriadKNMixedTailProofObligationMapReceipt.agda`
+- `DASHI/Physics/Closure/NSTriadKNMixedTailBKMProjectionSmallnessReceipt.agda`
+- `DASHI/Physics/Closure/NSFieldsACLExternalSchurResidueBridgeReceipt.agda`
+- `DASHI/Physics/Closure/NSTriadKNMixedTailACLSchurResidueProofPlanReceipt.agda`
+- `DASHI/Physics/Closure/NSShahmurovAxisymmetricReductionExternalReceipt.agda`
+- `docs/ns_triad_kn_shortest_path.md`
+- `docs/ns_triad_kn_acl_schur_residue_bridge.md`
+- `docs/ns_triad_kn_LFT_operator_norm_acl_proof_plan.md`
 - `TODO.md`
 
 S:
 - The lane is currently documented as candidate-only and fail-closed.
+- The external Fields ACL paper is now tracked as a candidate-only carrier for the
+  Schur-residue bridge, and the Shahmurov reduction paper is tracked as a
+  candidate-only endpoint-reduction carrier.
+- The proof-plan note now pins the next analytic target to the ACL-compatible
+  `L_FT^+` operator-norm estimate.
 - The corrected positive-subspace identity is audited on the active Wall 1 carrier as
   `L_signed_norm = I - 2 K_N`.
 - The lane is not promoted, and the repo text keeps the old signed route as legacy/non-canonical.
@@ -52,6 +69,25 @@ S:
   `triad_sample_limit_scope = receipt_samples_only`.
 - The remaining open proof items are the negative-frame coercivity, spanning, and
   Biot-Savart frame-equidistribution obligations.
+- The 2026-06-24 sparse-Schur scaling lane records top-tail forced rows
+  `N=6,8,10,12`, all candidate-only.  The fitted summary is
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_fit_20260624/summary.json`.
+  The current canonical read is:
+  `R_tail > c0` in all four rows, `q_gap > 0` in all four rows,
+  `q_gap ~= N^-2.198`, `D ~= N^1.985`, and `D*q_gap` is approximately stable
+  with mean about `4.16e-3`.  This supports the candidate lemma name
+  `MixedTailSchurGapDissipationScale`, not a theorem.
+- Corrected caution: the BKM-tail projection squared fraction is tiny across
+  the four rows and sharply smaller at `N=12`, but it is not monotone from
+  `N=6` to `N=8`.  The cross-`L_neg` fraction is remarkably stable in the
+  forced-tail family, but that stability is still finite-shell telemetry, not
+  a structural theorem.
+- `DASHI/Physics/Closure/NSTriadKNMixedTailProofObligationMapReceipt.agda`
+  records the next proof obligations as candidate-only dependencies:
+  `MixedTailSchurGapDissipationScale`, `TailSubspaceCoercivity`,
+  `BKMProjectionSmallness`, and `ResidenceTimeExclusion`.  The map records
+  input telemetry, target statement, and missing analytic/PDE bridge for each
+  row, while keeping theorem, full-NS, BKM-exclusion, and Clay promotion false.
 
 L:
 - audit -> candidate surface -> proof lemma -> validated lane -> promoted claim
@@ -79,6 +115,12 @@ F:
   finite-shell, dominant escaping top-shell, and mixed-tail broad eigenmode
   cases, and the latter needs coherence, Schur, and residence arguments rather
   than a simple tail-mass or dominant-shell readout.
+- After the N=6,8,10,12 sparse-Schur scaling receipt, the highest-priority
+  analytic target is the lower-bound shape
+  `q_gap(N) >= N^(-2-epsilon)` paired with `D(N) ~ N^2`, or equivalently a
+  residence-compatible lower bound on `D(N) * q_gap(N)`.  The open bridges are
+  uniform tail coercivity, structural BKM projection smallness, the
+  finite-dimensional-to-PDE trajectory bridge, and BKM residence assembly.
 
 Smoke commands:
 

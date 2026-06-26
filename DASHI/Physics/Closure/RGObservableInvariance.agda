@@ -179,8 +179,6 @@ record RGCoarseWitnessPackage
     rewrite mdl-schedule x ax
           | basin-schedule x ax
           | signature-schedule x ax
-          | eigen-schedule x ax
-          | motif-schedule x ax
     = refl
 
   schedule-invariant-quotient :

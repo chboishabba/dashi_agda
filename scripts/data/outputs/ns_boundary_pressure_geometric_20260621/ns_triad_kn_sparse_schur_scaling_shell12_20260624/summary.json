@@ -1,0 +1,78 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "candidate_only": true,
+  "clay_promoted": false,
+  "contract": "ns_triad_kn_sparse_schur_scaling",
+  "fail_closed": true,
+  "failure_count": 0,
+  "full_ns_promoted": false,
+  "interpretation": "Candidate-only sparse Schur scaling scan. The primary top-tail rows have min R_tail=0.4362537552367837 and min q_gap=0.00011355240518763496. These values are telemetry for TailSubspaceCoercivity and SparseSchurTailRepair; they do not promote a theorem or Clay claim.",
+  "kn_backend": "cpu-matrix-free",
+  "min_R_tail": 0.4362537552367837,
+  "min_q_gap": 0.00011355240518763496,
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_SPARSE_SCHUR_SCALING",
+  "row_count": 1,
+  "rows": [
+    {
+      "D": 34.124371464487744,
+      "K": 11,
+      "R_cross": 4.7524864193997765,
+      "R_finite": 0.16528589193378526,
+      "R_full": 0.15800923386565524,
+      "R_tail": 0.4362537552367837,
+      "bkm_tail_projection_squared_fraction": 1.293908934758488e-06,
+      "bkm_top_projection_squared_fraction": 0.00010555758068107624,
+      "cg_info": 0,
+      "cg_relative_residual": 2.0682613115289262e-09,
+      "cross_l_neg_fraction": -0.0932165271026035,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_shell12_20260624/shell12_K11_eta250.json",
+      "eigen_tail_mass": 0.8135824900300376,
+      "elapsed_seconds": 113.51295232772827,
+      "eta": 0.25,
+      "finite_mass": 0.18641750996996292,
+      "lambda_min": 0.1580092338656551,
+      "q_coup": 0.011629818954871016,
+      "q_diag": 0.014438906870686372,
+      "q_gap": 0.00011355240518763496,
+      "q_gap_kind": "sparse_positive_schur_per_tail_mass",
+      "q_schur": 0.014395521537306586,
+      "q_schur_subtraction": 4.3385333379714e-05,
+      "shell": 12,
+      "status": "ok",
+      "tail_mass": 0.813582490030037,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected",
+        "dense_schur_skipped_large_mode_count: mode_count=15624 > dense_schur_mode_limit=0"
+      ],
+      "worst_eigen_shell": 12,
+      "worst_eigen_shell_mass": 0.44271111701286336
+    }
+  ],
+  "runs": [
+    {
+      "K": 11,
+      "elapsed_seconds": 113.51295232772827,
+      "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_shell12_20260624/shell12_K11_eta250.json",
+      "output_md": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_shell12_20260624/shell12_K11_eta250.md",
+      "returncode": 0,
+      "shell": 12,
+      "status": "ok",
+      "stderr_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_shell12_20260624/shell12_K11_eta250.stderr.log",
+      "stdout_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_sparse_schur_scaling_shell12_20260624/shell12_K11_eta250.stdout.log"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "script_name": "scripts/ns_triad_kn_sparse_schur_scaling.py",
+  "status": "ok",
+  "tail_eta": 0.25,
+  "tail_offset": 1,
+  "theorem_promoted": false
+}

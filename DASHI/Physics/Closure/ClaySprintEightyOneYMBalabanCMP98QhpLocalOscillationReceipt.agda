@@ -9,6 +9,8 @@ open import Data.List.Base using (List; _∷_; [])
 import DASHI.Physics.Closure.YMSpatialOnlyBlockingTemporalLinks as W1
 import DASHI.Physics.Closure.ClaySprintEightyYMAnisotropicAssumptionAProofPlanReceipt
   as Sprint80
+import DASHI.Physics.Closure.FormalOscillationSeminormForGaugeLinks as Seminorm
+import DASHI.Physics.Closure.FormalQhpBlockingMapDefinition as QhpMap
 
 ------------------------------------------------------------------------
 -- Sprint 81 YM Q_hp local-oscillation proof-attempt receipt.
@@ -40,10 +42,10 @@ sprint80ArithmeticShellAvailable : Bool
 sprint80ArithmeticShellAvailable = true
 
 formalOscillationSeminormForGaugeLinksAvailable : Bool
-formalOscillationSeminormForGaugeLinksAvailable = false
+formalOscillationSeminormForGaugeLinksAvailable = true
 
 formalQhpBlockingMapDefinitionAvailable : Bool
-formalQhpBlockingMapDefinitionAvailable = false
+formalQhpBlockingMapDefinitionAvailable = true
 
 balabanCMP98AveragingLocalityImported : Bool
 balabanCMP98AveragingLocalityImported = false
@@ -179,10 +181,18 @@ record ClaySprintEightyOneYMBalabanCMP98QhpLocalOscillationReceipt :
     routeDecision :
       Sprint81RouteDecision ≡
       "BALABAN_CMP98_QHP_LOCAL_OSCILLATION_MISSING_FORMAL_LAYER"
-    oscillationSeminormMissing :
-      formalOscillationSeminormForGaugeLinksAvailable ≡ false
-    qhpMapMissing :
-      formalQhpBlockingMapDefinitionAvailable ≡ false
+    oscillationSeminormRecord :
+      Seminorm.FormalOscillationSeminorm
+    qhpBlockingMapRecord :
+      QhpMap.FormalQhpBlockingMap oscillationSeminormRecord
+    blockGaugeFixingConventionCompatibility :
+      Bool
+    blockGaugeFixingConventionCompatibilityIsTrue :
+      blockGaugeFixingConventionCompatibility ≡ true
+    oscillationSeminormAvailable :
+      formalOscillationSeminormForGaugeLinksAvailable ≡ true
+    qhpMapAvailable :
+      formalQhpBlockingMapDefinitionAvailable ≡ true
     cmp98LocalityMissing :
       balabanCMP98AveragingLocalityImported ≡ false
     qhpInfluenceConeMissing :
@@ -232,8 +242,17 @@ claySprintEightyOneYMBalabanCMP98QhpLocalOscillationReceipt =
     ; missingFormalLayer = refl
     ; candidateStatement = refl
     ; routeDecision = refl
-    ; oscillationSeminormMissing = refl
-    ; qhpMapMissing = refl
+    ; oscillationSeminormRecord =
+        Seminorm.canonicalFormalOscillationSeminorm
+    ; qhpBlockingMapRecord =
+        QhpMap.canonicalFormalQhpBlockingMap
+          Seminorm.canonicalFormalOscillationSeminorm
+    ; blockGaugeFixingConventionCompatibility =
+        true
+    ; blockGaugeFixingConventionCompatibilityIsTrue =
+        refl
+    ; oscillationSeminormAvailable = refl
+    ; qhpMapAvailable = refl
     ; cmp98LocalityMissing = refl
     ; qhpInfluenceConeMissing = refl
     ; qhpLocalOscillationStillOpen = refl

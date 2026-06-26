@@ -1,3 +1,17 @@
+# 2026-06-24 ACL Schur-test proof repair
+
+- Split the mixed-tail ACL receipt boundary into the checked sampled witness
+  and the still-open profile-independent bound on the canonical Agda surface.
+- Added timing and structured logging to the analytic proof runner so the run
+  now emits `started_at`, `finished_at`, `elapsed_ms`, and a compact event
+  log alongside the summary artifacts.
+- Ran the targeted Agda wrapper on
+  `NSTriadKNMixedTailACLOperatorNormAuditReceipt.agda` and
+  `NSTriadKNMixedTailACLSchurResidueProofPlanReceipt.agda` only; `Everything.agda`
+  was not run.
+- Ran the proof script and verified the generated summary artifact; the
+  receipt assertions now match the canonical constructor names.
+
 # 2026-06-04 Sprint 58 normalized packet-action inflation
 
 - Added `../dashiCFD/scripts/ns_sprint58_normalized_action_inflation_audit.py`

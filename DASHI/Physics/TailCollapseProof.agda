@@ -146,8 +146,7 @@ Pᵣ-idem :
   Pᵣ {m} {k} (Pᵣ {m} {k} x) ≡ Pᵣ {m} {k} x
 Pᵣ-idem m k x with split m k x
 ... | (c , t)
-  rewrite Pᵣ-++ m k c t
-        | Pᵣ-++ m k c (projTail t)
+  rewrite split-++ m k c (projTail t)
         | projTail-idem t
   = refl
 
@@ -232,8 +231,7 @@ split-Tᵣ :
   split m k (Tᵣ {m} {k} x) ≡ (coarseOf m k x , tailStep (tailOf m k x))
 split-Tᵣ m k x with split m k x
 ... | (c , t)
-  rewrite Rᵣ-++ m k c t
-        | Pᵣ-++ m k c (shiftTail t)
+  rewrite split-++ m k c (shiftTail t)
         | split-++ m k c (projTail (shiftTail t))
   = refl
 

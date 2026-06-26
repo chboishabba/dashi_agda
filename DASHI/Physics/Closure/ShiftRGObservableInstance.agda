@@ -325,8 +325,6 @@ shiftCoarseAltStep-commute :
   EC.Contract.step ShiftC (shiftCoarseAlt x)
 shiftCoarseAltStep-commute x
   rewrite shiftCoarseStep-commute x
-        | shiftCoarseFixed (EC.Contract.step ShiftC x)
-        | shiftCoarseFixed x
   = refl
 
 shiftConeTransportStep :

@@ -1,0 +1,245 @@
+{
+  "script": "scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py",
+  "contract": "ns_triad_kn_cross_shell_schur_symbolic_audit",
+  "schema_version": "1.0.0",
+  "c0": 0.1111111111111111,
+  "rows": [
+    {
+      "N": 12,
+      "K": 11,
+      "eta": 0.25,
+      "mode_count": 15624,
+      "edge_count": 5303952,
+      "block_size": 6390,
+      "G_size": 26,
+      "C_size": 6364,
+      "M_GG": {
+        "label": "M_GG",
+        "n": 26,
+        "rank": 26,
+        "nullity": 0,
+        "lambda_min": 8.224645537550874e-05,
+        "lambda_max": 0.01589059231809597,
+        "norm": 0.01589059231809597,
+        "psd_gap": 8.224645537550874e-05
+      },
+      "M_GC_norm": 0.004341704692196399,
+      "M_CC": {
+        "label": "M_CC",
+        "n": 6364,
+        "rank": null,
+        "nullity": null,
+        "nullity_estimate": 0,
+        "lambda_min": 2.6982837616083873e-06,
+        "lambda_max": null,
+        "norm": null,
+        "psd_gap": 2.6982837616083873e-06,
+        "bottom_eigs": [
+          2.6982837616083873e-06,
+          7.797441662353413e-06,
+          7.939727404578692e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "M_CC_worst_eigenvector_support": {
+        "support": {
+          "11": 0.4569768481230282,
+          "12": 0.5430231518769717
+        },
+        "lambda_min": 2.6982837616083873e-06,
+        "bottom_eigs": [
+          2.6982837616083873e-06,
+          7.797441662353413e-06,
+          7.939727404578692e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "S_C": {
+        "label": "S_C",
+        "n": 6364,
+        "rank": 6363,
+        "nullity": 1,
+        "nullity_estimate": 1,
+        "lambda_min": -1.2192320370561485e-17,
+        "lambda_max": null,
+        "norm": null,
+        "psd_gap": -1.2192320370561485e-17,
+        "bottom_eigs": [
+          -1.2192320370561485e-17,
+          7.795516546981343e-06,
+          7.939439333024668e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "correction_norm": 0.001187966804284841,
+      "S_C_worst_eigenvector_support": {
+        "support": {
+          "11": 0.456631049654281,
+          "12": 0.5433689503456738
+        },
+        "lambda_min": -1.2192320370561485e-17
+      },
+      "null_vector_diagnostics": {
+        "corr_constant": -0.9999999999998899,
+        "corr_shell_11": -0.675744811045028,
+        "corr_shell_12": -0.7371356390418574,
+        "shell_mass": {
+          "11": 0.456631049654281,
+          "12": 0.5433689503456738
+        },
+        "corr_shell_balance": 0.08673790069139091,
+        "corr_sqrt_degree": -0.9712024419732733,
+        "corr_inv_degree": -0.9545939329522964,
+        "corr_degree_weighted_balance": 0.03770578192113264
+      },
+      "row_sum_diagnostics": {
+        "n": 6364,
+        "max_abs_row_sum": 2.255140518769849e-16,
+        "l2_row_sum": 5.124477616783006e-16,
+        "mean_row_sum": -9.427344511315852e-20
+      },
+      "effective_laplacian_sign_diagnostics": {
+        "audit_requested": true,
+        "dense_audit_available": false,
+        "route_verdict": "signed_psd_required"
+      },
+      "signed_factorization_diagnostics": null,
+      "schur_complement_ok": true,
+      "verdict": "schur_psd",
+      "elapsed_seconds": 284.46,
+      "c0": 0.1111111111111111
+    },
+    {
+      "N": 14,
+      "K": 13,
+      "eta": 0.25,
+      "mode_count": 24388,
+      "edge_count": 8463798,
+      "block_size": 8790,
+      "G_size": 26,
+      "C_size": 8764,
+      "M_GG": {
+        "label": "M_GG",
+        "n": 26,
+        "rank": 26,
+        "nullity": 0,
+        "lambda_min": 7.30245615354042e-05,
+        "lambda_max": 0.01673468516854099,
+        "norm": 0.01673468516854099,
+        "psd_gap": 7.30245615354042e-05
+      },
+      "M_GC_norm": 0.004340851553119233,
+      "M_CC": {
+        "label": "M_CC",
+        "n": 8764,
+        "rank": null,
+        "nullity": null,
+        "nullity_estimate": 0,
+        "lambda_min": 2.022646577315198e-06,
+        "lambda_max": null,
+        "norm": null,
+        "psd_gap": 2.022646577315198e-06,
+        "bottom_eigs": [
+          2.022646577315198e-06,
+          9.82198376862472e-06,
+          9.919678520801115e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "M_CC_worst_eigenvector_support": {
+        "support": {
+          "13": 0.46379420018697187,
+          "14": 0.5362057998130281
+        },
+        "lambda_min": 2.022646577315198e-06,
+        "bottom_eigs": [
+          2.022646577315198e-06,
+          9.82198376862472e-06,
+          9.919678520801115e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "S_C": {
+        "label": "S_C",
+        "n": 8764,
+        "rank": 8763,
+        "nullity": 1,
+        "nullity_estimate": 1,
+        "lambda_min": 1.3540090448237921e-17,
+        "lambda_max": null,
+        "norm": null,
+        "psd_gap": 1.3540090448237921e-17,
+        "bottom_eigs": [
+          1.3540090448237921e-17,
+          9.82103003222834e-06,
+          9.919407368733884e-06
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "correction_norm": 0.0011270901094545974,
+      "S_C_worst_eigenvector_support": {
+        "support": {
+          "13": 0.46303057964400246,
+          "14": 0.5369694203559979
+        },
+        "lambda_min": 1.3540090448237921e-17
+      },
+      "null_vector_diagnostics": {
+        "corr_constant": 1.0000000000000564,
+        "corr_shell_13": 0.6804635035356491,
+        "corr_shell_14": 0.7327819732744577,
+        "shell_mass": {
+          "13": 0.46303057964400246,
+          "14": 0.5369694203559979
+        },
+        "corr_shell_balance": -0.07393884071199915,
+        "corr_sqrt_degree": 0.9677950318965858,
+        "corr_inv_degree": 0.9555646131244934,
+        "corr_degree_weighted_balance": -0.031420530272745495
+      },
+      "row_sum_diagnostics": {
+        "n": 8764,
+        "max_abs_row_sum": 4.386681989876351e-16,
+        "l2_row_sum": 7.19814316456902e-16,
+        "mean_row_sum": -3.0839055289246586e-20
+      },
+      "effective_laplacian_sign_diagnostics": {
+        "audit_requested": true,
+        "dense_audit_available": false,
+        "route_verdict": "signed_psd_required"
+      },
+      "signed_factorization_diagnostics": null,
+      "schur_complement_ok": true,
+      "verdict": "schur_psd",
+      "elapsed_seconds": 585.37,
+      "c0": 0.1111111111111111
+    }
+  ],
+  "analysis_text": "## Schur Audit Summary\n\n| N | block | G | C | M_CC \u03bb_min | S_C \u03bb0 | S_C \u03bb1 | S_C \u03bb2 | nullity est | max \\|S_C 1\\| | corr(constant) | Verdict |\n|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---|\n| 12 | 6390 | 26 | 6364 | 2.698284e-06 | -1.219232e-17 | 7.795517e-06 | 7.939439e-06 | 1 | 2.26e-16 | -1.0000 | schur_psd |\n| 14 | 8790 | 26 | 8764 | 2.022647e-06 | 1.354009e-17 | 9.821030e-06 | 9.919407e-06 | 1 | 4.39e-16 | 1.0000 | schur_psd |\n\nN=12: \u03bb0=-1.219232e-17, \u03bb1=7.795517e-06, \u03bb2=7.939439e-06, nullity_est=1, eval=eigsh\nN=12: max |S_C 1_C|=2.255141e-16, L2 row-sum residual=5.124478e-16\nN=14: \u03bb0=1.354009e-17, \u03bb1=9.821030e-06, \u03bb2=9.919407e-06, nullity_est=1, eval=eigsh\nN=14: max |S_C 1_C|=4.386682e-16, L2 row-sum residual=7.198143e-16\n\nM_GC norms: 4.34e-03, 4.34e-03\nVerdicts: ['schur_psd']\nGate 1 target = S_C \u2ab0 0 and dim ker S_C = 1: SUPPORTED at tested N, not proved.",
+  "candidate_only": true,
+  "theorem_promoted": false,
+  "gate1_closed": false,
+  "gate1_supported_at_tested_shells": true,
+  "gate1_target": "Uniform signed domination on 1_C^\u22a5: sup_x\u22a51_C (x^T L_bad x)/(x^T L_good x) \u2264 rho_* < 1",
+  "schurNullModeIsConstantProved": true,
+  "kronStyleSchurReductionIdentified": true,
+  "ordinaryKronLaplacianIdentified": false,
+  "ordinaryKronLaplacianRoute": false,
+  "balancedSignedGraphRoute": false,
+  "effectiveOffdiagNonpositiveProved": false,
+  "effectiveGraphConnectedProved": false,
+  "effectiveGraphConnectedObserved": false,
+  "schurComplementPsdVerified": true,
+  "schurComplementNullityOneObserved": true,
+  "schurSignedPsdRequired": true,
+  "signedDominationProbeInstalled": false,
+  "signedDominationRatioBelowOneObserved": false,
+  "signedDominationRatioUniformlyBounded": false,
+  "schurComplementMatrixFreeAuditInstalled": true,
+  "schurNullModeConstantOnCObserved": true,
+  "schurComplementPsdProved": false,
+  "schurNullModeIdentified": false,
+  "schurSignedFactorizationProved": false,
+  "schurNullModeFactorizationProved": false,
+  "gate1ConditionalTheoremProved": false
+}

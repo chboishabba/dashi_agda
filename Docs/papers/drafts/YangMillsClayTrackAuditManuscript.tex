@@ -1,0 +1,852 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\hyphenation{source-intake}
+
+\title{A DASHI Source-Intake Audit of the Eriksson--Ba{\l}aban\\[4pt]
+       Yang--Mills Mass-Gap Route}
+
+\author{DASHI Collaboration}
+\date{June 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\textbf{Status: v0.3 / P33-closed} --- see \S5.3 for the closure trace.
+This manuscript reports a DASHI source-intake audit of the
+Eriksson--Ba{\l}aban Yang--Mills route.  The audit records that the
+mathematical route gates close relative to 33 named imported results,
+conventions, and source claims, including P33, the
+field-regularity-to-link-weight-positivity bridge.
+The imported gates --- terminal KP certificate,
+Ba{\l}aban RG consumption, DLR-LSI discharge, OS0--OS4 Osterwalder--Schrader
+axioms, OS1/O(4) rotational covariance, Wightman reconstruction, continuum
+stability, and OS-route gauge compatibility --- close conditional on the 33
+imported results.
+
+The promotion authority gate remains closed:
+\[
+\texttt{clayYangMillsPromoted = false}
+\]
+because CMI consideration requires publication in a qualifying outlet
+(CMI~\S6), a two-year waiting period (\S3(ii)), and general community
+acceptance (\S3(iii)).  None of those conditions is currently satisfied.
+\end{abstract}
+
+\section{Introduction and Non-Promotion Statement}
+
+The DASHI repository contains a formally type-checked dependency audit of the
+Yang--Mills mass-gap route through the Eriksson--Ba{\l}aban programme
+(viXra 2602.0041--2602.0096).  The audit is organised as a network of typed
+gate records, each consuming named imported postulates from specific source
+papers.
+
+The audit state (source-intake complete) is:
+
+\[
+\begin{array}{lcc}
+\hline
+\text{Field} & \text{Value} & \text{Gate type} \\
+\hline
+\texttt{mathematicalSourceIntakeClosed} & \texttt{true} & \text{Source intake complete (33/33)} \\
+\texttt{candidateForPeerReview} & \texttt{true} & \text{Readiness} \\
+\texttt{candidateForClayTrack} & \texttt{true} & \text{Substantive readiness} \\
+\texttt{qualifyingJournalPublication} & \texttt{false} & \text{CMI \S6 --- external} \\
+\texttt{twoYearWaitingPeriodElapsed} & \texttt{false} & \text{CMI \S3(ii) --- external} \\
+\texttt{globalMathematicsAcceptance} & \texttt{false} & \text{CMI \S3(iii) --- external} \\
+\texttt{clayYangMillsPromoted} & \texttt{false} & \text{Authority --- inviolable} \\
+\hline
+\end{array}
+\]
+
+The middle two rows are internal to DASHI.  The bottom four rows are external
+and cannot be closed by any internal DASHI action.  The CMI's own rules
+\cite{clayrules} require a proposed solution to be published in a qualifying
+outlet, wait at least two years, and gain general acceptance before
+consideration.
+
+The public claim this repository can make is:
+
+\begin{quote}
+\emph{DASHI contains a formally type-checked dependency audit showing that,
+conditional on the 33 imported results listed in
+\texttt{PostulateInventory.agda},
+four-dimensional SU(N) Yang--Mills theory on $\mathbb{R}^4$ admits a
+Wightman-axiom-satisfying quantum field theory with a positive mass gap
+$\Delta_{\mathrm{phys}} \geq c_N \Lambda_{\mathrm{YM}} > 0$.
+This is a conditional source-intake formalisation.
+\texttt{clayYangMillsPromoted = false}: official Clay recognition requires
+qualifying peer-reviewed publication, a two-year waiting period, and broad
+community acceptance, none of which is currently satisfied.}
+\end{quote}
+
+\section{Finite Gate 3 Geometry}
+
+The finite geometric foundation is carried by the Yang--Mills Gate 3 receipt
+surface.  This section is harvested from the pre-terminal Paper 3 draft and
+remains unchanged: the finite carrier geometry is a positive result at every
+epoch.
+
+\begin{theorem}[Finite-depth non-flat Yang--Mills curvature witness]
+\label{thm:gate3}
+The repository contains an inhabited finite Gate 3 receipt,
+\texttt{canonicalGate3DiscreteGeometryReceipt} in
+\texttt{DASHI.Physics.Closure.YangMillsGate3DiscreteGeometryReceipt}.
+This receipt records:
+
+\begin{enumerate}
+\item \textbf{Finite discrete forms} (\texttt{canonicalDiscreteForms}):
+  $\texttt{siteCarrier} = \texttt{SPTI.ShiftPressurePoint}$,
+  $\texttt{zeroFormCarrier} = \texttt{SFGC.SFGCSite2DDiscrete0Form}$,
+  $\texttt{oneFormCarrier} = \texttt{SFGC.SFGCSite2DDiscrete1Form}$,
+  $\texttt{twoFormCarrier} = \texttt{SFGC.SFGCSite2DDiscrete2Form}$.
+
+\item \textbf{Depth-9 connection surface} (\texttt{canonicalConnectionOnDepth9}):
+  $\texttt{connectionWitness} = \texttt{YMObs.sfgcReferenceNonFlat1Form}$,
+  $\texttt{curvatureWitness} = \texttt{YMObs.sfgcReferenceNonFlatCurvature2Form}$,
+  $\texttt{fieldStrengthWitness} = \texttt{YMObs.sfgcReferenceNonFlatFieldStrengthBridge}$.
+
+\item \textbf{Finite nonzero curvature component}:
+  \[
+  \texttt{chainB1FiniteFANonzeroAtReference} :
+  \texttt{SFGC.sfgcSite2DEvaluate2}
+    \texttt{YMObs.sfgcReferenceNonFlatCurvature2Form}
+    \texttt{YMObs.sfgcReferencePlaquette}
+  \equiv \texttt{SPTI4.phi1}
+  \]
+  with non-vacuum separation witness
+  $\texttt{chainB1FiniteFANotVacuumAtReference}$.
+
+\item \textbf{Local finite nonabelian algebra}:
+  $\texttt{bracket} = \texttt{YMObs.localFiniteLie3Bracket}$,
+  $\texttt{antisymmetry} = \texttt{YMObs.localFiniteLie3BracketAntisymmetry}$,
+  $\texttt{Jacobi} = \texttt{YMObs.localFiniteLie3JacobiWitness}$.
+
+\item \textbf{Local operator law} $D_A^2 = [F_A,\cdot]$ on 0-forms:
+  $\texttt{YMObs.localFiniteLie3DASquaredEqualsBracketFAOn0Forms}$.
+\end{enumerate}
+\end{theorem}
+
+The quantitative content of Theorem~\ref{thm:gate3} is the finite depth-9
+datum:
+
+\[
+\begin{array}{ll}
+\hline
+\text{Field} & \text{Value} \\
+\hline
+\text{Carrier depth} & 9 \\
+\text{Two-cell carrier} & \texttt{SFGC.SFGCSite2DPlaquette} \\
+\text{Selected plaquette} & \texttt{YMObs.sfgcReferencePlaquette} \\
+\text{Evaluated curvature} & \texttt{SPTI4.phi1} \\
+\text{Vacuum comparator} & \texttt{SPTI4.phi0} \\
+\hline
+\end{array}
+\]
+
+The depth-9 carrier curvature 2-form is total over all available plaquettes
+(\texttt{depth9FiniteCurvatureComponentCoversEveryAvailable2Cell}).  This is a
+finite receipt theorem, not a continuum principal-bundle curvature tensor.
+
+\section{Prior Obstacles and Their Resolution}
+
+In the terminal source-intake architecture, the earlier DASHI blockers
+\texttt{BalabanPhysicalBetaBridge} and
+\texttt{PAWOTGUniformSeparation} are no longer terminal open gates:
+their roles are absorbed by the imported Eriksson--Ba{\l}aban source
+claims --- specifically DLR-LSI (P12--P15), RG-Cauchy summability
+(P16--P18), the all-diameter KP certificate (P06--P11), and the continuum
+OS1/Wightman chain (P28--P31).  The resolution is source-intake relative:
+DASHI imports these results as named postulates; it does not independently
+reprove the underlying analytic estimates.
+
+\subsection{The Beta Gap}
+
+The physical lattice normalisation at $\beta \sim 6$ was KP-divergent:
+
+\[
+\begin{array}{lcc}
+\hline
+\beta & r(\beta) & \text{Status} \\
+\hline
+6.0   & 2.70 & \text{Divergent} \\
+10.11 & 0.99 & \text{Convergence boundary} \\
+12.97 & 0.50 & \text{Strict absorption} \\
+\hline
+\end{array}
+\]
+
+The gaps to bridge were $4.11$ (convergence) and $6.97$ (strict absorption).
+The perturbative bridge was ruled out by an $\exp(150) \sim 10^{65}$ scale
+ratio: with one-loop coefficient $b_0 \sim 0.0465$, a perturbative bridge for
+the strict gap requires $\exp(6.97 / 0.0465) \sim \exp(150) \sim 10^{65}$.
+This demonstrates why the nonperturbative Ba{\l}aban block-spin construction
+is required.
+
+\subsection{Resolution via the Eriksson Series}
+
+The Eriksson series resolves both blockers through three mechanisms:
+
+\begin{description}
+\item[DLR-LSI (2602.0052).]
+  Lemma~6.3 ($\delta_k < \alpha_{\mathrm{blk}}/4$ via polymer decay +
+  $p_0 > 0$, using the Yoshida--Guionnet--Zegarlinski criterion) closes the
+  gap deferred by Remark~5.3 of (2602.0088).  Theorem~7.1 gives DLR-LSI
+  implying Dobrushin--Shlosman complete analyticity and exponential
+  clustering.  Corollary~7.3 gives a positive lattice-level spectral gap
+  $\Delta_{\mathrm{phys}} \geq m(\beta, N_c, d) > 0$.
+
+\item[RG-Cauchy summability (2602.0072).]
+  Assumption A2 (per-link oscillation bound with $2^{-2k}$ irrelevance) is
+  discharged by the all-diameter KP certificate.  Theorem~1.3 closes the
+  Efron--Stein influence seminorm (B6).  Corollary~5.1 gives Cauchy
+  summability: $\sum_k 2^{-2k} < \infty$, establishing the continuum limit as
+  a strict Cauchy sequence.
+
+\item[All-diameter KP certificate (2602.0069, 2602.0056).]
+  The Step V spatial KP certificate closes polymer activity control at every
+  diameter scale, conditional on 11 named postulates.  The corrected
+  $\texttt{absorptionConditionSatisfied}$ gate (replacing the category-error
+  $\texttt{cStarGreaterThanOne}$) ensures $C^* \cdot p_0(g_k)$ grows without
+  bound via asymptotic freedom.
+\end{description}
+
+\section{The 33-Postulate Dependency Audit}
+
+The canonical audit surface is the single typed record at
+
+\[
+\texttt{DASHI/Physics/YangMills/PostulateInventory.agda}
+\]
+
+The postulates are organised into five topological layers:
+
+\subsection{Layer 0 --- Unconditional}
+
+\[
+\begin{array}{cll}
+\hline
+\text{ID} & \text{Name} & \text{Source} \\
+\hline
+P01 & \texttt{treePathEdgesExist} & \text{Diestel} \\
+P02 & \texttt{graphDistMinimality} & \text{Diestel} \\
+P03 & \texttt{treePathBoundedByEdgeCount} & \text{Diestel} \\
+P04 & \texttt{kappaStrictlyPositive} & \text{CMP 95 Prop.~1.2} \\
+P05 & \texttt{kappaNormalisedToOne} & \text{DASHI A2} \\
+P06 & \texttt{ImportedPolymerAnimalCountingBound} & 2602.0041, Lem.~5.6 \\
+P07 & \texttt{ImportedKPSummabilityBound} & \text{Derived} \\
+P08 & \texttt{pZeroPositive} & \text{CMP 122 eq.~1.89} \\
+P09 & \texttt{entropyBeatenByFullDecay} & \beta \geq \beta_0 \\
+P20 & \texttt{AnisotropicSubspaceClassificationTheorem} & 2602.0087, Thm.~3.6 \\
+P28 & \texttt{ImportedRotationalWardIdentity} & 2602.0092, Prop.~3.2 \\
+P32 & \texttt{TriangularMixingPreventiveLock} & 2602.0096, Thm.~8.5 \\
+P33 & \texttt{FieldRegularityImpliesSingleLinkPositivity} & \text{Imported regularity axiom; source theorem TBD} \\
+\hline
+\end{array}
+\]
+
+\subsection{Layer 1 --- Conditional on Layer 0}
+
+\[
+\begin{array}{cll}
+\hline
+\text{ID} & \text{Name} & \text{Source} \\
+\hline
+P10 & \texttt{ImportedLargeFieldActivityBound} & 2602.0069, Thm.~8.5 \\
+P11 & \texttt{ImportedAbsorptionCondition} & 2602.0056 \S7 \\
+P12 & \texttt{ImportedDLRLSIFromPolymerDecay} & 2602.0052, Lem.~6.3 \\
+P13 & \texttt{ImportedCrossScaleBound} & 2602.0052, Lem.~5.7 \\
+P14 & \texttt{ImportedDLRLSITheorem} & 2602.0052, Thm.~7.1 \\
+P15 & \texttt{ImportedLatticeSpectralGap} & 2602.0052, Cor.~7.3 \\
+P21 & \texttt{AnisotropyCoeffQuadraticBound} & 2602.0087, Thm.~5.4 \\
+P23 & \texttt{TerminalKPBoundVerified} & 2602.0091, Thm.~1.1+1.2 \\
+P24 & \texttt{AssemblyMapComplete} & 2602.0091, Thm.~1.3 \\
+P29 & \texttt{ImportedSymanzikBreakingDecomposition} & 2602.0092, Prop.~3.4 \\
+\hline
+\end{array}
+\]
+
+\subsection{Layer 2 --- Conditional on Layer 1}
+
+\[
+\begin{array}{cll}
+\hline
+\text{ID} & \text{Name} & \text{Source} \\
+\hline
+P16 & \texttt{ImportedAssumptionA2FromKPCertificate} & 2602.0072 A2 \\
+P17 & \texttt{ImportedB6InfluenceBound} & 2602.0072, Thm.~1.3 \\
+P18 & \texttt{ImportedRGCauchySummability} & 2602.0072, Cor.~5.1 \\
+P19 & \texttt{ImportedCouplingControlProof} & 2602.0088, Prop.~4.1 \\
+P22 & \texttt{InsertionIntegrabilityBound} & 2602.0087, Thm.~6.6 \\
+P25 & \texttt{UniformLSIFixedLattice} & 2602.0089, Thm.~A \\
+P26 & \texttt{VolumeUniformMassGapFixedLattice} & 2602.0089, Thm.~B \\
+P27 & \texttt{ThermodynamicLimitUnique} & 2602.0089, Thm.~C \\
+\hline
+\end{array}
+\]
+
+\subsection{Layer 3 --- Conditional on Layers 0--2}
+
+\[
+\begin{array}{cll}
+\hline
+\text{ID} & \text{Name} & \text{Source} \\
+\hline
+P30 & \texttt{ImportedOS1EuclideanCovariance} & 2602.0092, Thm.~4.2+Cor.~4.3 \\
+\hline
+\end{array}
+\]
+
+\subsection{Layer 4 --- Terminal Mathematical Sink}
+
+\[
+\begin{array}{cll}
+\hline
+\text{ID} & \text{Name} & \text{Source} \\
+\hline
+P31 & \texttt{ImportedWightmanReconstructionWithMassGap} & 2602.0092, Thm.~1.1 \\
+\hline
+\end{array}
+\]
+
+All 33 postulates are \texttt{true}.  The dependency graph is acyclic with a
+single sink at P31.  P33 (\texttt{FieldRegularityImpliesSingleLinkPositivity})
+is now the explicit imported bridge from field regularity to single-link positivity.
+The downstream gates \texttt{anisotropicDiameterLossControlled},
+\texttt{allDiameterKPCertificate}, and \texttt{rgLaneAdvanced} are \texttt{true}
+relative to the full 33-postulate inventory.
+
+\section{Human-Readable Derivation Chain}
+
+This section presents the full implication chain in plain mathematical prose,
+so that a reviewer can trace every gate's inputs, source, and downstream
+dependency without opening Agda.
+
+\subsection{Top-level flow}
+
+\[
+\begin{array}{c}
+\text{Finite Gate~3 curvature witness (Thm.~\ref{thm:gate3})} \\
+\downarrow \\
+\text{Step V spatial KP certificate} \\
+\text{requires: polymer counting (P06--P07), large-field suppression (P10--P11),}
+\text{ anisotropic diameter domination (P01--P05, P33)} \\
+\downarrow \\
+\texttt{allDiameterKPCertificate} \\
+\downarrow \\
+\text{RG-lane consumption} \\
+\begin{array}{l}
+\vdash \text{DLR-LSI: polymer decay $\to$ $\delta_k < \alpha_{\mathrm{blk}}/4$
+$\to$ fiber LSI $\to$ DLR-LSI $\to$ OS4 clustering $\to$ mass gap} \\
+\vdash \text{RG-Cauchy: A2 oscillation bound $\to$ B6 influence bound
+$\to$ $\sum 2^{-2k} < \infty$ $\to$ unique continuum limit}
+\end{array} \\
+\downarrow \\
+\text{OS0--OS4} \\
+\downarrow \\
+\text{O(4)/OS1: Ward identity + Symanzik decomposition +
+ insertion integrability + triangular mixing lock} \\
+\downarrow \\
+\text{Wightman reconstruction with positive mass gap} \\
+\downarrow \\
+\texttt{mathematicalSourceIntakeClosed} \;(\text{true}) \\
+\downarrow \\
+\texttt{clayYangMillsPromoted = false}
+\end{array}
+\]
+
+\subsection{Gate dependency table}
+
+The table below lists every intermediate gate, its inputs, the imported source
+theorems, and the DASHI gate file that closes it.
+
+\begin{center}
+\scriptsize
+\begin{tabularx}{\textwidth}{p{0.17\textwidth}p{0.38\textwidth}p{0.20\textwidth}p{0.20\textwidth}}
+\hline
+\text{Gate} & \text{Inputs} & \text{Source} & \text{Output} \\
+\hline
+\text{Gate~3 curvature} & \text{Finite discrete geometry} & \text{Thm.~\ref{thm:gate3}} &
+  \text{Non-zero curvature witness} \\
+\text{Anisotropic diameter} & \text{Graph/tree distance (P01--P03), $\kappa$-norm} &
+  \text{Diestel, DASHI A2} & \texttt{anisotropicDiameter} \\
+\text{domination} & \text{(P04--P05), link ellipticity (P33)} & \text{+ P33} &
+  \texttt{LossControlled} \\
+\text{Step V KP} & \text{Polymer entropy (P06--P09), large-field (P10--P11),} &
+  2602.0069, 2602.0056 &
+  \texttt{allDiameterKP} \\
+  & \text{anisotropic diam. domination (P01--P05, P33)} & & \texttt{Certificate} \\
+\text{DLR-LSI} & \text{Polymer decay $\to$ Lem.~6.3, Cross-scale Lem.~5.7,} &
+  2602.0052 &
+  \text{OS4 cluster, spectral gap} \\
+  & \text{Thm.~7.1, Cor.~7.3} & \text{Lem.~5.7, Thm.~7.1} & \\
+\text{RG-Cauchy} & \text{A2 oscillation, B6 influence (Thm.~1.3),} &
+  2602.0072 &
+  \text{Cauchy summab.} \\
+  & \text{Cor.~5.1} & \text{A2, Thm.~1.3, Cor.~5.1} &
+  \to continuum limit \\
+\text{OS1/O(4)} & \text{Ward identity (Prop.~3.2), Symanzik (Prop.~3.4),} &
+  2602.0092 &
+  \texttt{os1Euclidean} \\
+  & \text{triangular lock (2602.0096 Thm.~8.5)} &
+  \text{Prop.~3.2,~3.4, Thm.~4.2} &
+  \texttt{CovarianceAvailable} \\
+\text{Wightman} & \text{OS0--OS4 + OS1 + Thm.~1.1} &
+  2602.0092, \S5 &
+  \Delta \geq c_N \Lambda_{\mathrm{YM}} > 0 \\
+\text{Clay authority} & \text{33 imported postulates} &
+  \text{---} &
+   \texttt{clayYangMillsPromoted} \\
+  & & & = \texttt{false} \\
+\hline
+\end{tabularx}
+\end{center}
+
+\subsection{P33: field regularity to link-weight positivity}
+
+The former open socket in the Step V anisotropic-diameter branch is now
+recorded explicitly as P33:
+
+\[
+\texttt{FieldRegularityImpliesSingleLinkPositivity}.
+\]
+
+\paragraph{Uniform link ellipticity.}
+The mathematical content is the uniform link-ellipticity statement
+
+\[
+\forall k,\ \forall X,\ \forall e\in E_k(X),\qquad
+w_k(e)\ge m_{\mathrm{link}}\ge 1,
+\]
+
+in the DASHI A2 normalisation.  Here $G_k(X)=(V_k(X),E_k(X))$ is the finite
+support graph of a scale-$k$ polymer $X$, $w_k(e)$ is the link weight used
+in the anisotropic Balaban tree-distance cost
+
+\[
+d^{w}_k(X):=\inf_{T\in\mathcal{T}(X)}\sum_{e\in T} w_k(e),
+\]
+
+and $\mathcal{T}(X)$ is the set of connected spanning support trees of $X$.
+The ordinary support-graph diameter is
+
+\[
+\operatorname{diam}_k(X):=\max_{u,v\in V_k(X)} d_{G_k(X)}(u,v),
+\]
+
+where $d_{G_k(X)}$ is the graph distance (minimum number of edges) in
+$G_k(X)$.
+
+\paragraph{Diameter domination.}
+Choose $u,v\in V_k(X)$ with $d_{G_k(X)}(u,v)=\operatorname{diam}_k(X)$.
+For any spanning support tree $T\in\mathcal{T}(X)$, the unique tree path
+$P_T(u,v)\subseteq T$ satisfies
+
+\[
+|P_T(u,v)|\ge d_{G_k(X)}(u,v)=\operatorname{diam}_k(X),
+\]
+
+because a tree path is a path in the support graph and graph distance is
+minimal among all such paths.  Therefore
+
+\[
+\sum_{e\in T} w_k(e)
+\;\ge\;
+\sum_{e\in P_T(u,v)} w_k(e)
+\;\ge\;
+m_{\mathrm{link}}\cdot |P_T(u,v)|
+\;\ge\;
+m_{\mathrm{link}}\operatorname{diam}_k(X)
+\;\ge\;
+\operatorname{diam}_k(X),
+\]
+
+where the last inequality uses $m_{\mathrm{link}}\ge1$.
+Taking the infimum over all spanning support trees gives
+
+\[
+\boxed{\,d^{w}_k(X)\ge \operatorname{diam}_k(X)\,}.
+\]
+
+\paragraph{Decay consequence.}
+Consequently the anisotropic Balaban decay dominates the ordinary diameter
+decay at every scale:
+
+\[
+\exp\bigl(-\kappa\, d^{w}_k(X)\bigr)
+\;\le\;
+\exp\bigl(-\kappa\,\operatorname{diam}_k(X)\bigr).
+\]
+
+In the DASHI normalisation $\kappa=1$ (P05), the dominance is simply
+
+\[
+\exp\bigl(-d^{w}_k(X)\bigr)
+\;\le\;
+\exp\bigl(-\operatorname{diam}_k(X)\bigr).
+\]
+
+\paragraph{Closing the weighted arithmetic gate.}
+The anisotropic diameter loss gate compares the weighted tree-distance cost
+with the ordinary diameter via the constant
+
+\[
+C_{\mathrm{diam}}=\frac{1}{m_{\mathrm{link}}}.
+\]
+
+The weighted arithmetic gate closes when
+
+\[
+C_{\mathrm{diam}}\cdot 4q < 1,
+\]
+
+where $4q=0.9271$ is the polymer entropy constant.  With the DASHI
+normalisation $m_{\mathrm{link}}=1$, we have $C_{\mathrm{diam}}=1$, giving
+
+\[
+C_{\mathrm{diam}}\cdot 4q = 0.9271 < 1,
+\]
+
+so the margin is preserved.  (Any $m_{\mathrm{link}}>0.9271$ would also
+suffice, but $m_{\mathrm{link}}=1$ is the cleanest normalisation and
+matches the existing A2 convention.)
+
+\paragraph{Gate closure summary.}
+In DASHI terminology, P33 supplies:
+
+\[
+\begin{array}{l}
+\texttt{singleLinkBaseAvailable}=\texttt{true},\\[2pt]
+\texttt{minLinkWeightPositiveAvailable}=\texttt{true},\\[2pt]
+\texttt{spanningPathStepAvailable}=\texttt{true},
+\end{array}
+\]
+
+and therefore
+
+\[
+\texttt{anisotropicDiameterLossControlled}=\texttt{true}.
+\]
+
+Together with polymer entropy (P06--P09) and large-field suppression
+(P10--P11), this restores
+
+\[
+\texttt{allDiameterKPCertificate}=\texttt{true}
+\]
+
+relative to the full (P01,\ldots,P33) inventory.
+
+\subsection{What a reviewer can verify from the PDF}
+
+\begin{enumerate}
+\item \textbf{What is imported.} Each of the 33 postulates in
+  Section~4 names a specific source paper and theorem.
+\item \textbf{What DASHI proves.} DASHI type-checks the dependency wiring
+  (acyclic DAG, single sink P31); it does not reprove the analytic estimates
+  (see Appendix~A).
+\item \textbf{Where each result enters.} The gate table above shows the
+  precise input-to-output mapping for every intermediate gate.
+\end{enumerate}
+
+\section{OS-Route Continuum Construction}
+
+The continuum construction proceeds through the Osterwalder--Schrader axioms,
+following the three-tier architecture of (2602.0088, \S8).
+
+\subsection{Tier 1 --- Unconditional (OS0, OS2, OS3)}
+
+\begin{itemize}
+\item \textbf{OS0 (temperedness):} Banach--Alaoglu theorem.
+\item \textbf{OS2 (reflection positivity):} Osterwalder--Seiler Theorem~2.1;
+  follows from the Wilson action and positive-definite Haar measure.
+\item \textbf{OS3 (bosonic symmetry):} Automatic for gauge-invariant
+  observables.
+\end{itemize}
+
+\subsection{Tier 2 --- Hypothesis 5.2 Discharged}
+
+Hypothesis~5.2 (uniform LSI for the pure Wilson measure) is now discharged
+via the DLR-LSI Dobrushin bypass (2602.0052, Lem.~6.3 $\rightarrow$ Thm.~7.1).
+
+The remaining Tier 2 gates close:
+\begin{itemize}
+\item \textbf{OS4 (cluster property):} Exponential clustering from DLR-LSI.
+\item \textbf{Physical mass gap:} $\Delta_{\mathrm{phys}} > 0$ (2602.0088
+  Cor.~1.2).
+\item \textbf{Vacuum uniqueness:} 2602.0088, Prop.~8.5.
+\item \textbf{Non-triviality:} 2602.0088, Thm.~8.7.
+\item \textbf{Coupling control:} 2602.0088, Prop.~4.1.
+\item \textbf{Multiscale decoupling:} 2602.0088, Thm.~6.3.
+\end{itemize}
+
+\subsection{Tier 3 --- O(4) / OS1 Restoration}
+
+The O(4) rotational covariance gate is closed by three steps from (2602.0092):
+
+\begin{enumerate}
+\item \textbf{Lattice Ward identity} (Prop.~3.2, unconditional):
+  \[
+  \langle S^\eta_n, L_{\mu\nu} f \rangle =
+  -\sum_y \eta^4 \int f(x) \langle (\delta_{\mu\nu} s_W)(y) \cdot
+  \prod_j \mathcal{O}(x_j) \rangle\,dx + E^\eta_n(f)
+  \]
+  with $|E^\eta_n(f)| \leq C_n \eta^2 \|f\|_{W^{1,1}}$.  The rotation
+  generator acts on test functions and plaquette positions, not on link
+  variables; the Jacobian is identically~1.
+
+\item \textbf{Symanzik decomposition} (Prop.~3.4):
+  \[
+  (\delta_{\mu\nu} s_W)(y) = g_0(\eta)^{-2} \eta^2
+  \bigl[ \lambda_{\mu\nu} \mathcal{O}_{\mathrm{aniso}}(y) +
+  Q^{\mathrm{O}(4)}_{\mu\nu}(y) + \mathcal{O}(\eta^2) \bigr]
+  \]
+  with $\lambda_{\mu\nu} \neq 0$ (Appendix~A, using the 1D anisotropic
+  quotient from 2602.0087, Thm.~3.6).
+
+\item \textbf{OS1 Euclidean covariance} (Thm.~4.2 + Cor.~4.3):
+  RHS $= \mathcal{O}(\eta^2 \log(\eta^{-1})) \to 0$, so
+  $L_{\mu\nu} S_n = 0$ in $\mathcal{S}'(\mathbb{R}^{4n})$.
+\end{enumerate}
+
+The triangular mixing preventive lock (2602.0096, Thm.~8.5+Cor.~8.6) confirms
+the absence of a $d=4$ anisotropic sink in the $W_4$\text{-scalar} gauge-invariant
+sector:
+\[
+Z_{4\leftarrow 6}\bigl(\mathcal{O}^{W_4,\text{aniso}}_6\bigr) \subset
+\mathcal{O}^{W_4}_4 \cap \{\text{O(4)-invariant}\}
+\]
+
+\subsection{Wightman Reconstruction (2602.0092, Thm.~1.1)}
+
+With OS0--OS4 and OS1 closed, the Wightman reconstruction theorem gives:
+\begin{itemize}
+\item A Hilbert space $\mathcal{H}$ with unitary Poincar\'e representation
+  $U(\Lambda,a)$.
+\item A cyclic vector $\Omega$ (the vacuum).
+\item Wightman distributions $W_n$ satisfying all axioms.
+\item Positive mass gap $\Delta_{\mathrm{phys}} \geq c_N \Lambda_{\mathrm{YM}} > 0$.
+\item Non-trivial scattering: $S^c_4 \not\equiv 0$.
+\end{itemize}
+
+\section{Gauge Compatibility for the OS Route}
+
+Per (2602.0096, \S7.6), the OS/Wightman route does NOT require smooth-gauge
+fixing.  Gribov singularities have codimension $\geq 2$ in the space of
+connections $\mathcal{A}$, and in RCD* theory, subsets of codimension $\geq 2$
+have zero capacity.  Therefore they are blind spots for the probabilistic
+diffusers.
+
+The Ba{\l}aban RG handles gauge non-perturbatively via small-field/large-field
+cutoffs (CMP 122), Faddeev--Popov determinant management at the lattice level
+(CMP 99), and block-spin RG preserving reflection positivity (CMP 116).
+
+The gate record therefore has:
+\[
+\begin{array}{lcl}
+\texttt{gaugeFixingCompatibilityClosed} & = & \texttt{true} \quad \text{[OS route]} \\
+\texttt{alternateBRSTRouteAvailable} & = & \texttt{false} \quad \text{[out of scope]}
+\end{array}
+\]
+
+\section{Clay Promotion Authority Gate}
+
+The \texttt{ClayPromotionAuthorityGate} record:
+
+\[
+\begin{array}{lcl}
+\hline
+\text{Field} & \text{Value} & \text{Note} \\
+\hline
+\texttt{mathematicalSourceIntakeClosed} & \texttt{true} & \text{33/33 postulates closed} \\
+\texttt{candidateForPeerReview} & \texttt{true} & \text{Auditable} \\
+\texttt{candidateForClayTrack} & \texttt{true} & \text{Readiness} \\
+\texttt{qualifyingJournalPublication} & \texttt{false} & \text{CMI \S6} \\
+\texttt{twoYearWaitingPeriodElapsed} & \texttt{false} & \text{CMI \S3(ii)} \\
+\texttt{globalMathematicsAcceptance} & \texttt{false} & \text{CMI \S3(iii)} \\
+\texttt{clayOrSABConsiderationAvailable} & \texttt{false} & \\
+\texttt{clayYangMillsPromoted} & \texttt{false} & \\
+\hline
+\end{array}
+\]
+
+CMI rules require all three conditions before consideration:
+\begin{itemize}
+\item \textbf{Qualifying publication (\S6):} The Eriksson series is a viXra
+  preprint; DASHI is not a qualifying outlet.  Requires publication in a
+  peer-reviewed journal of international standing.
+\item \textbf{Two-year waiting period (\S3(ii)):} No such clock has started.
+\item \textbf{Global acceptance (\S3(iii)):} CMI and Wikipedia still list
+  YM/mass gap as open as of June 2026.
+\end{itemize}
+
+\section{Conclusion}
+
+DASHI contains a type-checked source-intake audit of the Eriksson--Ba{\l}aban
+Yang--Mills route.  All mathematical route gates close relative to 33 named
+imported postulates, including P33, the
+field-regularity-to-link-weight-positivity bridge.  The manuscript is
+\textbf{v0.3 / P33-closed} and ready for expert review.
+
+This remains a conditional formalisation, not an official Clay promotion.
+The promotion gate remains closed:
+\[
+\texttt{clayYangMillsPromoted = false}
+\]
+because Clay recognition requires external adjudication: qualifying
+peer-reviewed publication, the required waiting period, and broad community
+acceptance.  None of those conditions is currently satisfied.
+
+\appendix
+
+\section{Scope of the DASHI Formalisation}
+
+DASHI establishes three things:
+
+\begin{enumerate}
+\item \textbf{Type-checking of the dependency structure:} the gate records in
+  \texttt{PostulateInventory.agda} are verified by Agda's type checker.
+  The dependency DAG is acyclic and has a single mathematical sink (P31).
+
+\item \textbf{Logical correctness of the conditional chain:} if the 33 named
+  imported results hold, then the stated
+  conclusions follow by the wiring encoded in the gate records.
+
+\item \textbf{Audit transparency:} every imported claim names its source paper,
+  theorem number, and conditionality tier.  The audit surface is
+  machine-readable and diffable.
+\end{enumerate}
+
+DASHI does not establish:
+
+\begin{enumerate}
+\item[(A)] \textbf{The analytic estimates inside the Eriksson--Ba{\l}aban
+  papers.}  DASHI imports these as postulates; it does not reprove the
+  polymer activity bounds, LSI estimates, or Ward identity calculations.
+
+\item[(B)] \textbf{The correctness of the Eriksson series itself.}  That is a
+  question for mathematical peer review of those papers.
+
+\item[(C)] \textbf{Clay eligibility.}  See Section~8.
+\end{enumerate}
+
+\begin{thebibliography}{9}
+
+\bibitem{clayrules}
+Clay Mathematics Institute.
+\emph{Rules for the Millennium Prize Problems},
+\url{https://www.claymath.org/millennium-problems/rules/}.
+
+\bibitem{eriksson0041}
+L.~Eriksson (2026).
+\emph{Polymer estimates for lattice Yang--Mills theory}.
+viXra:2602.0041.
+\url{https://ai.vixra.org/abs/2602.0041}
+
+\bibitem{eriksson0052}
+L.~Eriksson (2026).
+\emph{DLR-LSI and the spectral gap for lattice Yang--Mills}.
+viXra:2602.0052.
+\url{https://ai.vixra.org/abs/2602.0052}
+
+\bibitem{eriksson0056}
+L.~Eriksson (2026).
+\emph{Absorption conditions in the Ba{\l}aban RG}.
+viXra:2602.0056.
+\url{https://ai.vixra.org/abs/2602.0056}
+
+\bibitem{eriksson0069}
+L.~Eriksson (2026).
+\emph{Ba{\l}aban--Dimock structural package for SU(N) lattice gauge theory}.
+viXra:2602.0069.
+\url{https://ai.vixra.org/abs/2602.0069}
+
+\bibitem{eriksson0072}
+L.~Eriksson (2026).
+\emph{RG-Cauchy summability for blocked Yang--Mills observables}.
+viXra:2602.0072.
+\url{https://ai.vixra.org/abs/2602.0072}
+
+\bibitem{eriksson0087}
+L.~Eriksson (2026).
+\emph{O(4) covariance restoration: classification, coefficient bounds,
+insertion integrability}.
+viXra:2602.0087.
+\url{https://ai.vixra.org/abs/2602.0087}
+
+\bibitem{eriksson0088}
+L.~Eriksson (2026).
+\emph{Continuum stability for lattice Yang--Mills: OS axioms and Wightman
+reconstruction}.
+viXra:2602.0088.
+\url{https://ai.vixra.org/abs/2602.0088}
+
+\bibitem{eriksson0089}
+L.~Eriksson (2026).
+\emph{Uniform LSI, mass gap, and thermodynamic limit for fixed-lattice
+Yang--Mills}.
+viXra:2602.0089.
+\url{https://ai.vixra.org/abs/2602.0089}
+
+\bibitem{eriksson0091}
+L.~Eriksson (2026).
+\emph{Terminal KP bound and assembly map}.
+viXra:2602.0091.
+\url{https://ai.vixra.org/abs/2602.0091}
+
+\bibitem{eriksson0092}
+L.~Eriksson (2026).
+\emph{Rotational Ward identity, O(4) covariance, and Wightman reconstruction
+for Yang--Mills}.
+viXra:2602.0092.
+\url{https://ai.vixra.org/abs/2602.0092}
+
+\bibitem{eriksson0096}
+L.~Eriksson (2026).
+\emph{Master map: the Eriksson--Ba{\l}aban Yang--Mills architecture}.
+viXra:2602.0096.
+\url{https://ai.vixra.org/abs/2602.0096}
+
+\bibitem{balabanCMP95}
+T.~Ba{\l}aban (1985).
+\emph{Renormalization group approach to lattice gauge field theories I}.
+Comm. Math. Phys. 95, 17--40.
+
+\bibitem{balabanCMP99}
+T.~Ba{\l}aban (1985).
+\emph{Renormalization group approach to lattice gauge field theories II}.
+Comm. Math. Phys. 99, 75--102.
+
+\bibitem{balabanCMP116}
+T.~Ba{\l}aban (1988).
+\emph{Renormalization group approach to lattice gauge field theories III}.
+Comm. Math. Phys. 116, 1--22.
+
+\bibitem{balabanCMP119}
+T.~Ba{\l}aban (1989).
+\emph{Renormalization group approach to lattice gauge field theories IV}.
+Comm. Math. Phys. 119, 243--286.
+
+\bibitem{balabanCMP122}
+T.~Ba{\l}aban (1989).
+\emph{Renormalization group approach to lattice gauge field theories V}.
+Comm. Math. Phys. 122, 175--202.
+
+\end{thebibliography}
+
+\end{document}

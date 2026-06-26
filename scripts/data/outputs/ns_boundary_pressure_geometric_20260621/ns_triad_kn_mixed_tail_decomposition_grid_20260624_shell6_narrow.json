@@ -1,0 +1,232 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "runtime_authority": false,
+    "theorem_authority": false,
+    "truth_authority": false
+  },
+  "candidate_only": true,
+  "clay_promoted": false,
+  "contract": "ns_triad_kn_mixed_tail_decomposition_grid",
+  "d0_thresholds": [
+    6.0,
+    8.0,
+    10.0
+  ],
+  "fail_closed": true,
+  "failure_count": 0,
+  "failures": [],
+  "full_ns_promoted": false,
+  "kn_backend": "vulkan-matvec",
+  "route_decision": "FAIL_CLOSED_NS_TRIAD_KN_MIXED_TAIL_DECOMPOSITION_GRID",
+  "row_count": 6,
+  "rows": [
+    {
+      "D": 7.816073354908305,
+      "D0_flags": {
+        "10": true,
+        "6": false,
+        "8": true
+      },
+      "R_cross": 4.681180945594429,
+      "R_finite": 0.20044470209899504,
+      "R_full": 0.19359097713415485,
+      "R_tail": 0.4539938264644448,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_04_eta_0p250.json",
+      "finite_mass": 0.4581025914818439,
+      "lambda_min": 0.19359106358726955,
+      "profile_id": "forced_tail_K4_eta_0.250",
+      "profile_tail_mass": 0.24999999999999997,
+      "shell": 6,
+      "status": "ok",
+      "stderr_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_04_eta_0p250.stderr.log",
+      "stdout_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_04_eta_0p250.stdout.json",
+      "tail_cutoff": 4,
+      "tail_eta": 0.25,
+      "tail_mass": 0.5418974085181563,
+      "tail_only_worst_shell": 6,
+      "tail_touching_denominator_fraction": 0.4221840558227151,
+      "tail_touching_numerator_fraction": 0.9794201547486444,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 1
+    },
+    {
+      "D": 11.905717367853292,
+      "D0_flags": {
+        "10": false,
+        "6": false,
+        "8": false
+      },
+      "R_cross": 7.465794238557853,
+      "R_finite": 0.2810189649774698,
+      "R_full": 0.2698723971237825,
+      "R_tail": 0.43097609159904504,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_04_eta_0p400.json",
+      "finite_mass": 0.3446597293784112,
+      "lambda_min": 0.2698722860736864,
+      "profile_id": "forced_tail_K4_eta_0.400",
+      "profile_tail_mass": 0.4,
+      "shell": 6,
+      "status": "ok",
+      "stderr_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_04_eta_0p400.stderr.log",
+      "stdout_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_04_eta_0p400.stdout.json",
+      "tail_cutoff": 4,
+      "tail_eta": 0.4,
+      "tail_mass": 0.6553402706215888,
+      "tail_only_worst_shell": 6,
+      "tail_touching_denominator_fraction": 0.5983421733338455,
+      "tail_touching_numerator_fraction": 0.977958007331188,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 1
+    },
+    {
+      "D": 14.632146709816613,
+      "D0_flags": {
+        "10": false,
+        "6": false,
+        "8": false
+      },
+      "R_cross": -2.264981097259629,
+      "R_finite": 0.3496354202345476,
+      "R_full": 0.294602332677921,
+      "R_tail": 0.2948436443317498,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_04_eta_0p500.json",
+      "finite_mass": 0.0003349897514903828,
+      "lambda_min": 0.2946024728617839,
+      "profile_id": "forced_tail_K4_eta_0.500",
+      "profile_tail_mass": 0.5,
+      "shell": 6,
+      "status": "ok",
+      "stderr_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_04_eta_0p500.stderr.log",
+      "stdout_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_04_eta_0p500.stdout.json",
+      "tail_cutoff": 4,
+      "tail_eta": 0.5,
+      "tail_mass": 0.9996650102485095,
+      "tail_only_worst_shell": 5,
+      "tail_touching_denominator_fraction": 0.9983908835439672,
+      "tail_touching_numerator_fraction": 0.999562664990223,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 5
+    },
+    {
+      "D": 8.62227520435967,
+      "D0_flags": {
+        "10": true,
+        "6": false,
+        "8": false
+      },
+      "R_cross": 4.021836266072443,
+      "R_finite": 0.17521685920210164,
+      "R_full": 0.16722078077260397,
+      "R_tail": 0.41955825523707957,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_05_eta_0p250.json",
+      "finite_mass": 0.4268858196693561,
+      "lambda_min": 0.16722069580560958,
+      "profile_id": "forced_tail_K5_eta_0.250",
+      "profile_tail_mass": 0.24999999999999992,
+      "shell": 6,
+      "status": "ok",
+      "stderr_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_05_eta_0p250.stderr.log",
+      "stdout_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_05_eta_0p250.stdout.json",
+      "tail_cutoff": 5,
+      "tail_eta": 0.25,
+      "tail_mass": 0.5731141803306439,
+      "tail_only_worst_shell": 6,
+      "tail_touching_denominator_fraction": 0.3753415286129385,
+      "tail_touching_numerator_fraction": 0.9843013638804352,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 1
+    },
+    {
+      "D": 13.195640326975479,
+      "D0_flags": {
+        "10": false,
+        "6": false,
+        "8": false
+      },
+      "R_cross": -1.897707390706967,
+      "R_finite": 0.40170877086771023,
+      "R_full": 0.2018087882109966,
+      "R_tail": 0.20197038398719908,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_05_eta_0p400.json",
+      "finite_mass": 0.005181243566535843,
+      "lambda_min": 0.2018086260733987,
+      "profile_id": "forced_tail_K5_eta_0.400",
+      "profile_tail_mass": 0.40000000000000013,
+      "shell": 6,
+      "status": "ok",
+      "stderr_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_05_eta_0p400.stderr.log",
+      "stdout_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_05_eta_0p400.stdout.json",
+      "tail_cutoff": 5,
+      "tail_eta": 0.4,
+      "tail_mass": 0.9948187564334643,
+      "tail_only_worst_shell": 6,
+      "tail_touching_denominator_fraction": 0.9997822262125617,
+      "tail_touching_numerator_fraction": 0.9998274895182597,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 6
+    },
+    {
+      "D": 16.24455040871934,
+      "D0_flags": {
+        "10": false,
+        "6": false,
+        "8": false
+      },
+      "R_cross": -3.8919092680745457,
+      "R_finite": 0.45117994748892476,
+      "R_full": 0.21659886193474812,
+      "R_tail": 0.21678190322511542,
+      "detail_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_05_eta_0p500.json",
+      "finite_mass": 0.0034933287718355117,
+      "lambda_min": 0.21659877053635299,
+      "profile_id": "forced_tail_K5_eta_0.500",
+      "profile_tail_mass": 0.49999999999999983,
+      "shell": 6,
+      "status": "ok",
+      "stderr_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_05_eta_0p500.stderr.log",
+      "stdout_log": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_triad_kn_mixed_tail_decomposition_grid_20260624_shell6_narrow/shell_06_K_05_eta_0p500.stdout.json",
+      "tail_cutoff": 5,
+      "tail_eta": 0.5,
+      "tail_mass": 0.9965066712281647,
+      "tail_only_worst_shell": 6,
+      "tail_touching_denominator_fraction": 0.9998922158951036,
+      "tail_touching_numerator_fraction": 0.9998810604522271,
+      "warnings": [
+        "velocity_snapshots trailing channel layout detected"
+      ],
+      "worst_shell": 6
+    }
+  ],
+  "schema_version": "1.1.0",
+  "script_name": "scripts/ns_triad_kn_mixed_tail_decomposition_grid.py",
+  "shells": [
+    6
+  ],
+  "skip_empty_tail": true,
+  "skip_existing_ok": true,
+  "status": "ok",
+  "tail_cutoffs": [
+    4,
+    5
+  ],
+  "tail_etas": [
+    0.25,
+    0.4,
+    0.5
+  ],
+  "theorem_promoted": false
+}
