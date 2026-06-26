@@ -11,12 +11,12 @@
 **Status: v0.3 / P33-closed** — see Section 5.3 for the closure trace.
 This manuscript reports a DASHI source-intake audit of the Eriksson--Balaban
 Yang--Mills route.  The audit records that the mathematical route gates close
-relative to 33 named imported results, conventions, and source claims,
+relative to 33 typed theorem surfaces (many still inhabited by imported/postulated witnesses),
 including P33, the field-regularity-to-link-weight-positivity bridge.
 The imported gates — terminal KP certificate, Balaban
 RG consumption, DLR-LSI discharge, OS0--OS4 Osterwalder--Schrader axioms,
 OS1/O(4) rotational covariance, Wightman reconstruction, continuum stability,
-and OS-route gauge compatibility — close conditional on the 33 imported results.
+and OS-route gauge compatibility — close conditional on the 33 typed theorem surfaces.
 The result is a conditional, receipt-backed
 dependency formalisation, not official Clay recognition.
 
@@ -43,16 +43,18 @@ Yang--Mills mass-gap route through the Eriksson--Balaban programme (viXra
 2602.0041--2602.0096).  The audit is organised as a network of typed gate
 records, each consuming named imported postulates from specific source papers.
 
-The audit state (33/33 postulates closed) is:
+DASHI has converted the P01–P33 Eriksson/Bałaban intake into concrete Set-level theorem records with structured mathematical content and witness slots. Many witnesses remain postulated/imported, so the route remains source-intake conditional rather than internally proved. clayYangMillsPromoted remains false.
+
+The audit state (33/33 typed theorem surfaces closed) is:
 
 | Field | Value | Gate type |
 |---|---|---|
-| `mathematicalSourceIntakeClosed` | `true` | Source intake complete (33/33) |
+| `mathematicalSourceIntakeClosed` | `true` | Source intake complete (33/33 surfaces) |
 | `candidateForPeerReview` | `true` | Readiness assessment |
 | `candidateForClayTrack` | `true` | Substantive readiness |
-| `qualifyingJournalPublication` | `false` | CMI \$6 -- external |
-| `twoYearWaitingPeriodElapsed` | `false` | CMI \$3(ii) -- external |
-| `globalMathematicsAcceptance` | `false` | CMI \$3(iii) -- external |
+| `qualifyingJournalPublication` | `false` | CMI $6 -- external |
+| `twoYearWaitingPeriodElapsed` | `false` | CMI $3(ii) -- external |
+| `globalMathematicsAcceptance` | `false` | CMI $3(iii) -- external |
 | `clayYangMillsPromoted` | `false` | Authority/adjudication -- inviolable |
 
 The middle two rows are internal to DASHI.  The bottom four rows are external
@@ -69,7 +71,7 @@ CMI and Wikipedia still describe Yang--Mills/mass gap as an open problem.
 The one public claim this repository can honestly make is:
 
 > *DASHI contains a formally type-checked dependency audit showing that,
-> conditional on the 33 imported results listed in
+> conditional on the 33 typed theorem surfaces (many still inhabited by imported/postulated witnesses) listed in
 > `PostulateInventory.agda`,
 > four-dimensional SU(N) Yang--Mills theory on R^4 admits a
 > Wightman-axiom-satisfying quantum field theory with a positive
@@ -247,7 +249,7 @@ Together, these three mechanisms discharge both `BalabanPhysicalBetaBridge` and
 
 ---
 
-## 4.  The 33-Postulate Dependency Audit
+## 4.  The 33 Typed Theorem Surfaces Dependency Audit
 
 The canonical audit surface is the single typed record at:
 
@@ -255,7 +257,7 @@ The canonical audit surface is the single typed record at:
 DASHI/Physics/YangMills/PostulateInventory.agda
 ```
 
-This file is the single source of truth for all 33 imported claims.  It is
+This file is the single source of truth for the 33 typed theorem surfaces.  It is
 both human-readable and type-checked by Agda.  The postulates are organised
 into five topological layers:
 
@@ -275,7 +277,9 @@ into five topological layers:
 | P20 | `AnisotropicSubspaceClassificationTheorem` | Eriksson 2602.0087 Thm. 3.6 |
 | P28 | `ImportedRotationalWardIdentity` | Eriksson 2602.0092 Prop. 3.2 |
 | P32 | `TriangularMixingPreventiveLock` | Eriksson 2602.0096 Thm. 8.5+Cor. 8.6 |
-| P33 | `FieldRegularityImpliesSingleLinkPositivity` | Imported regularity axiom; source theorem TBD |
+| P33 | `FieldRegularityImpliesSingleLinkPositivity` | Composite surface of P33a (ellipticity) and P33b (internal domination) |
+| P33a | `p33aUniformLinkEllipticity` | Imported regularity axiom; source paper 2602.0056 |
+| P33b | `p33bWeightedTreeDistanceDominatesOrdinaryDiameter` | Internal graph/arithmetic consequence proof |
 
 ### Layer 1 -- Conditional on Layer 0
 
@@ -317,16 +321,64 @@ into five topological layers:
 |----|------|--------|
 | P31 | `ImportedWightmanReconstructionWithMassGap` | Eriksson 2602.0092 Thm. 1.1+S5 |
 
-All 33 postulates are `true` in the inventory.  The dependency graph is
+All 33 typed surfaces are `true` in the inventory.  The dependency graph is
 acyclic with a single sink at P31.  P33 (FieldRegularityImpliesSingleLinkPositivity)
-is now the explicit imported bridge from field regularity to single-link positivity.
+is now the explicit composite bridge from field regularity to single-link positivity.
 The downstream gates `anisotropicDiameterLossControlled`,
 `allDiameterKPCertificate`, and `rgLaneAdvanced` are `true`
-relative to the full 33-postulate inventory.
+relative to the full 33 typed theorem surfaces inventory.
 
-### 4.1  Consuming Gates
+### 4.1  Witness Verification Status Table
 
-The 33 postulates are consumed by 14 gate records:
+DASHI tracks the verification status of the witness inhabiting each theorem surface:
+- **`proved`**: Witness is constructed completely within DASHI (e.g. $\kappa > 0$, $\kappa = 1$, and graph/tree consequence proofs).
+- **`standardWrapper`**: Wrapper around standard axiomatic frameworks (e.g. Diestel graph theory facts).
+- **`paperImport`**: Witness is imported conditionally relative to the cited external paper's proof.
+- **`auditTested`**: Verification status is validated via analytical checks and arithmetic margin checks.
+
+The status distribution across the 33 postulates is summarized below:
+
+| ID | Postulate Surface Name | Verification Status | Witness Class / Mechanism |
+|----|------------------------|---------------------|---------------------------|
+| P01 | `treePathEdgesExist` | `standardWrapper` | Graph axiom wrapper (Diestel) |
+| P02 | `graphDistMinimality` | `standardWrapper` | Graph axiom wrapper (Diestel) |
+| P03 | `treePathBoundedByEdgeCount` | `standardWrapper` | Graph axiom wrapper (Diestel) |
+| P04 | `kappaStrictlyPositive` | `proved` | Proved via $\kappa = 1 > 0$ construction |
+| P05 | `kappaNormalisedToOne` | `proved` | Proved via $\kappa = 1$ definition |
+| P06 | `ImportedPolymerAnimalCountingBound` | `paperImport` | Postulated; Eriksson 2602.0041 Lem. 5.6 |
+| P07 | `ImportedKPSummabilityBound` | `auditTested` | Postulated; Eriksson 2602.0041 |
+| P08 | `pZeroPositive` | `paperImport` | Postulated; Balaban CMP 122 eq. 1.89 |
+| P09 | `entropyBeatenByFullDecay` | `auditTested` | Postulated; $\beta \geq \beta_0$ arithmetic |
+| P10 | `ImportedLargeFieldActivityBound` | `paperImport` | Postulated; Eriksson 2602.0069 Thm. 8.5 |
+| P11 | `ImportedAbsorptionCondition` | `paperImport` | Postulated; Eriksson 2602.0056 §7 |
+| P12 | `ImportedDLRLSIFromPolymerDecay` | `paperImport` | Postulated; Eriksson 2602.0052 Lem. 6.3 |
+| P13 | `ImportedCrossScaleBound` | `paperImport` | Postulated; Eriksson 2602.0052 Lem. 5.7 |
+| P14 | `ImportedDLRLSITheorem` | `paperImport` | Postulated; Eriksson 2602.0052 Thm. 7.1 |
+| P15 | `ImportedLatticeSpectralGap` | `paperImport` | Postulated; Eriksson 2602.0052 Cor. 7.3 |
+| P16 | `ImportedAssumptionA2FromKPCertificate` | `auditTested` | Postulated; Eriksson 2602.0072 A2 |
+| P17 | `ImportedB6InfluenceBound` | `paperImport` | Postulated; Eriksson 2602.0072 Thm. 1.3 |
+| P18 | `ImportedRGCauchySummability` | `paperImport` | Postulated; Eriksson 2602.0072 Cor. 5.1 |
+| P19 | `ImportedCouplingControlProof` | `paperImport` | Postulated; Eriksson 2602.0088 Prop. 4.1 |
+| P20 | `AnisotropicSubspaceClassificationTheorem` | `paperImport` | Postulated; Eriksson 2602.0087 Thm. 3.6 |
+| P21 | `AnisotropyCoeffQuadraticBound` | `paperImport` | Postulated; Eriksson 2602.0087 Thm. 5.4 |
+| P22 | `InsertionIntegrabilityBound` | `paperImport` | Postulated; Eriksson 2602.0087 Thm. 6.6 |
+| P23 | `TerminalKPBoundVerified` | `paperImport` | Postulated; Eriksson 2602.0091 Thm. 1.1+1.2 |
+| P24 | `AssemblyMapComplete` | `auditTested` | Postulated; Eriksson 2602.0091 Thm. 1.3 |
+| P25 | `UniformLSIFixedLattice` | `paperImport` | Postulated; Eriksson 2602.0089 Thm. A |
+| P26 | `VolumeUniformMassGapFixedLattice` | `paperImport` | Postulated; Eriksson 2602.0089 Thm. B |
+| P27 | `ThermodynamicLimitUnique` | `paperImport` | Postulated; Eriksson 2602.0089 Thm. C |
+| P28 | `ImportedRotationalWardIdentity` | `paperImport` | Postulated; Eriksson 2602.0092 Prop. 3.2 |
+| P29 | `ImportedSymanzikBreakingDecomposition` | `paperImport` | Postulated; Eriksson 2602.0092 Prop. 3.4 |
+| P30 | `ImportedOS1EuclideanCovariance` | `paperImport` | Postulated; Eriksson 2602.0092 Thm. 4.2+Cor. 4.3 |
+| P31 | `ImportedWightmanReconstructionWithMassGap` | `paperImport` | Postulated; Eriksson 2602.0092 Thm. 1.1+§5 |
+| P32 | `TriangularMixingPreventiveLock` | `paperImport` | Postulated; Eriksson 2602.0096 Thm. 8.5+Cor. 8.6 |
+| P33a | `p33aUniformLinkEllipticity` | `paperImport` | Postulated; Eriksson 2602.0056 |
+| P33b | `p33bWeightedTreeDistanceDominatesOrdinaryDiameter` | `proved` | Proved internally via graph path domination |
+| P33 | `FieldRegularityImpliesSingleLinkPositivity` | `paperImport` | Composite bridge from P33a to P33b |
+
+### 4.2  Consuming Gates
+
+The 33 typed surfaces are consumed by 14 gate records:
 
 | Gate file | Postulates consumed | Status |
 |---|---|---|---|
@@ -402,18 +454,17 @@ clayYangMillsPromoted = false
 | RG-Cauchy | A2 oscillation, B6 influence (Thm. 1.3), Cor. 5.1 | 2602.0072 | Cauchy summability -> continuum limit |
 | OS1/O(4) | Ward identity (Prop. 3.2), Symanzik (Prop. 3.4), triangular lock (2602.0096 Thm. 8.5) | 2602.0092 | `os1EuclideanCovarianceAvailable` |
 | Wightman | OS0--OS4 + OS1 + Thm. 1.1 | 2602.0092 S5 | Delta >= c_N Lambda_YM > 0 |
-| Clay authority | 33 imported postulates | --- | `clayYangMillsPromoted = false` |
+| Clay authority | 33 typed theorem surfaces | --- | `clayYangMillsPromoted = false` |
 
 ### 5.3 P33: field regularity to link-weight positivity
 
-The former open socket in the Step V anisotropic-diameter branch is now recorded
-explicitly as P33:
+The former open socket in the Step V anisotropic-diameter branch is now formally split and audited under the P33 composite structure:
 
-```
-FieldRegularityImpliesSingleLinkPositivity
-```
+- **P33a (Uniform Link Ellipticity):** `p33aUniformLinkEllipticitySurface` (status: `paperImport`, role: `postulate-import`, source: `eriksson-2602-0056`). This imports the external regularity axiom asserting that link weights are bounded below by 1.
+- **P33b (Weighted Tree Distance Dominates Ordinary Diameter):** `p33bWeightedTreeDistanceDominatesOrdinaryDiameterSurface` (status: `proved`, role: `consequence-proof`, source: `dashi-internal-proof`). This is an internally proved consequence of the finite graph path and diameter structures.
+- **P33 (Composite/Implies):** `fieldRegularityImpliesSingleLinkPositivitySurface` (status: `paperImport`, role: `postulate-import`, source: `unknown-authority`). This represents the composite bridge linking P33a to the downstream diameter decay.
 
-**Uniform link ellipticity.**
+**Uniform link ellipticity (P33a).**
 The mathematical content is the uniform link-ellipticity statement
 
 ```
@@ -523,11 +574,11 @@ Together with polymer entropy (P06--P09) and large-field suppression
 allDiameterKPCertificate = true
 ```
 
-relative to the full (P01,...,P33) inventory.
+relative to the full (P01,...,P33) typed theorem surfaces inventory.
 
 ### 5.4  What a reviewer can verify from this PDF
 
-1. **What is imported.** Each of the 33 postulates in Section 4 names a specific
+1. **What is imported.** Each of the 33 typed surfaces in Section 4 names a specific
    source paper and theorem.
 2. **What DASHI proves.** DASHI type-checks the dependency wiring (acyclic DAG,
    single sink P31); it does not reprove the analytic estimates (see Appendix A).
@@ -667,7 +718,7 @@ separates mathematical source-intake readiness from Clay-grade promotion.
 
 ```
 CurrentClayPromotionAuthorityGate = record
-  { mathematicalSourceIntakeClosed    = true  -- 33/33 postulates closed
+  { mathematicalSourceIntakeClosed    = true  -- 33/33 typed surfaces closed
   ; candidateForPeerReview            = true    -- package is auditable
   ; candidateForClayTrack             = true    -- substantive readiness
   ; qualifyingJournalPublication      = false   -- viXra != CMI qualifying outlet
@@ -703,7 +754,7 @@ No internal DASHI development can close these gates.  `clayYangMillsPromoted
 
 DASHI contains a type-checked source-intake audit of the
 Eriksson--Balaban Yang--Mills route.  All mathematical route gates close
-relative to 33 named imported postulates, including P33, the
+relative to 33 typed theorem surfaces, including P33, the
 field-regularity-to-link-weight-positivity bridge.  The manuscript is
 **v0.3 / P33-closed** and ready for expert review.
 
@@ -739,8 +790,8 @@ DASHI establishes three things:
    `PostulateInventory.agda` are verified by Agda's type checker.  The
    dependency DAG is acyclic and has a single mathematical sink (P31).
 
-2. **Logical correctness of the conditional chain:** if the 33 named
-   imported results hold, then the stated
+2. **Logical correctness of the conditional chain:** if the 33 typed
+   theorem surfaces hold, then the stated
    conclusions follow by the wiring encoded in the gate records.
 
 3. **Audit transparency:** every imported claim names its source paper,

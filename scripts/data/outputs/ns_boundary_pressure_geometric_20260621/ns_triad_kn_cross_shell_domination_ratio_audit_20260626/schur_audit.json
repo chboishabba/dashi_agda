@@ -1,0 +1,513 @@
+{
+  "script": "scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py",
+  "contract": "ns_triad_kn_cross_shell_schur_symbolic_audit",
+  "schema_version": "1.0.0",
+  "c0": 0.1111111111111111,
+  "rows": [
+    {
+      "N": 10,
+      "K": 9,
+      "eta": 0.25,
+      "mode_count": 9260,
+      "edge_count": 3047778,
+      "block_size": 4374,
+      "G_size": 26,
+      "C_size": 4348,
+      "M_GG": {
+        "label": "M_GG",
+        "n": 26,
+        "rank": 26,
+        "nullity": 0,
+        "lambda_min": 0.00013486684655162652,
+        "lambda_max": 0.015668114293825176,
+        "norm": 0.015668114293825176,
+        "psd_gap": 0.00013486684655162652
+      },
+      "M_GC_norm": 0.00434406223448098,
+      "M_CC": {
+        "label": "M_CC",
+        "n": 4348,
+        "rank": null,
+        "nullity": null,
+        "nullity_estimate": 0,
+        "lambda_min": 4.290626635478363e-06,
+        "lambda_max": null,
+        "norm": null,
+        "psd_gap": 4.290626635478363e-06,
+        "bottom_eigs": [
+          4.290626635478363e-06,
+          1.8885526558298313e-05,
+          1.9731686950491274e-05
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "M_CC_worst_eigenvector_support": {
+        "support": {
+          "9": 0.44776655600447923,
+          "10": 0.5522334439955208
+        },
+        "lambda_min": 4.290626635478363e-06,
+        "bottom_eigs": [
+          4.290626635478363e-06,
+          1.8885526558298313e-05,
+          1.9731686950491274e-05
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "S_C": {
+        "label": "S_C",
+        "n": 4348,
+        "rank": 4347,
+        "nullity": 1,
+        "nullity_estimate": 1,
+        "lambda_min": -3.2335869354096835e-18,
+        "lambda_max": null,
+        "norm": null,
+        "psd_gap": -3.2335869354096835e-18,
+        "bottom_eigs": [
+          -3.2335869354096835e-18,
+          1.888394236232864e-05,
+          1.973159945299417e-05
+        ],
+        "evaluation_method": "eigsh"
+      },
+      "correction_norm": 0.0012073141824628347,
+      "S_C_worst_eigenvector_support": {
+        "support": {
+          "9": 0.4475620975160818,
+          "10": 0.5524379024838773
+        },
+        "lambda_min": -3.2335869354096835e-18
+      },
+      "null_vector_diagnostics": {
+        "corr_constant": 0.9999999999999702,
+        "corr_shell_9": 0.6690008202656226,
+        "corr_shell_10": 0.7432616648824751,
+        "shell_mass": {
+          "9": 0.4475620975160818,
+          "10": 0.5524379024838773
+        },
+        "corr_shell_balance": -0.10487580496779846,
+        "corr_sqrt_degree": 0.9749997325195182,
+        "corr_inv_degree": 0.954111188851163,
+        "corr_degree_weighted_balance": -0.04672734153506658
+      },
+      "row_sum_diagnostics": {
+        "n": 4348,
+        "max_abs_row_sum": 2.3771132631744685e-16,
+        "l2_row_sum": 5.138709353427155e-16,
+        "mean_row_sum": -1.6990364224289438e-19
+      },
+      "effective_laplacian_sign_diagnostics": {
+        "audit_requested": true,
+        "dense_audit_available": false,
+        "route_verdict": "signed_psd_required"
+      },
+      "signed_factorization_diagnostics": null,
+      "domination_ratio_matrix_free_diagnostics": {
+        "audit_requested": true,
+        "dense_audit_available": false,
+        "matrix_free_requested": true,
+        "status": "ok",
+        "decomposition": "S_C = L_good - L_bad",
+        "row_chunk": 192,
+        "regularization_eps": 1e-08,
+        "L_good_lambda1_one_perp": 5.035307303742789e-05,
+        "L_good_lambda1_one_perp_regularized": 5.036307303742789e-05,
+        "L_bad_lambda_max_one_perp": 0.0050112805911643726,
+        "domination_ratio_sup_one_perp": 0.6144013021127077,
+        "domination_ratio_residual_norm": 4.2399975066016417e-07,
+        "domination_ratio_solver_residual_norm": 1.2706817766333389e-05,
+        "L_good_solver_residual_norm": 2.0079058588243403e-05,
+        "L_bad_solver_residual_norm": 8.411402024955555e-06,
+        "domination_holds_strictly_observed": true,
+        "worst_eigenvector_diagnostics": {
+          "shell_mass": {
+            "9": 0.44727443677068435,
+            "10": 0.5527255632293167
+          },
+          "constant_correlation": -4.3210656673859515e-17,
+          "degree_correlation": -0.03899636537622465,
+          "sqrt_degree_correlation": -0.009183813078808703,
+          "shell_value_correlation": -0.00037858127195360423,
+          "axis_concentration": 0.0007272170988633952,
+          "nonaxis_concentration": 0.9992727829011376,
+          "sign_pattern_mass": {
+            "+++": 0.07935822474945188,
+            "++-": 0.11115433801344149,
+            "++0": 0.0051248041474051455,
+            "+-+": 0.1731776387013358,
+            "+--": 0.10009806253734027,
+            "+-0": 0.01002517872047251,
+            "+0+": 0.002610662695771657,
+            "+0-": 0.005144808348117717,
+            "+00": 0.00010342765482773812,
+            "-++": 0.09417285013506922,
+            "-+-": 0.11107286772938552,
+            "-+0": 0.009664614373376927,
+            "--+": 0.0764899449355137,
+            "---": 0.09628897328869326,
+            "--0": 0.004368675590608024,
+            "-0+": 0.1018586196659387,
+            "-0-": 0.004443850834428108,
+            "-00": 0.0003542629880940956,
+            "0++": 0.0016341490733011185,
+            "0+-": 0.0019978943934020085,
+            "0+0": 3.597038256972809e-05,
+            "0-+": 0.005547388813211034,
+            "0--": 0.005039236154873515,
+            "0-0": 5.144368682878724e-05,
+            "00+": 8.916597695090122e-05,
+            "00-": 9.294640959214482e-05
+          },
+          "top_modes": [
+            {
+              "rank": 1,
+              "mode": [
+                -1,
+                0,
+                9
+              ],
+              "shell": 9,
+              "value": 0.3114474517067681,
+              "abs_value": 0.3114474517067681,
+              "mass": 0.09699951517463963,
+              "is_axis": false
+            },
+            {
+              "rank": 2,
+              "mode": [
+                1,
+                -7,
+                10
+              ],
+              "shell": 10,
+              "value": 0.2950289650685498,
+              "abs_value": 0.2950289650685498,
+              "mass": 0.08704209022941958,
+              "is_axis": false
+            },
+            {
+              "rank": 3,
+              "mode": [
+                -9,
+                3,
+                -9
+              ],
+              "shell": 9,
+              "value": 0.09726425039841012,
+              "abs_value": 0.09726425039841012,
+              "mass": 0.009460334405564623,
+              "is_axis": false
+            },
+            {
+              "rank": 4,
+              "mode": [
+                9,
+                -5,
+                -6
+              ],
+              "shell": 9,
+              "value": 0.08707749097950623,
+              "abs_value": 0.08707749097950623,
+              "mass": 0.007582489435285989,
+              "is_axis": false
+            },
+            {
+              "rank": 5,
+              "mode": [
+                -2,
+                -10,
+                -1
+              ],
+              "shell": 10,
+              "value": 0.08078867648806211,
+              "abs_value": 0.08078867648806211,
+              "mass": 0.006526810248692759,
+              "is_axis": false
+            },
+            {
+              "rank": 6,
+              "mode": [
+                2,
+                5,
+                -10
+              ],
+              "shell": 10,
+              "value": 0.07856655246160227,
+              "abs_value": 0.07856655246160227,
+              "mass": 0.006172703165701701,
+              "is_axis": false
+            },
+            {
+              "rank": 7,
+              "mode": [
+                4,
+                -10,
+                -1
+              ],
+              "shell": 10,
+              "value": 0.0752512324160933,
+              "abs_value": 0.0752512324160933,
+              "mass": 0.005662747980140891,
+              "is_axis": false
+            },
+            {
+              "rank": 8,
+              "mode": [
+                2,
+                -9,
+                1
+              ],
+              "shell": 9,
+              "value": 0.07247626697133522,
+              "abs_value": 0.07247626697133522,
+              "mass": 0.005252809274100256,
+              "is_axis": false
+            },
+            {
+              "rank": 9,
+              "mode": [
+                -4,
+                5,
+                -10
+              ],
+              "shell": 10,
+              "value": 0.07206678201661207,
+              "abs_value": 0.07206678201661207,
+              "mass": 0.005193621070229881,
+              "is_axis": false
+            },
+            {
+              "rank": 10,
+              "mode": [
+                -10,
+                7,
+                8
+              ],
+              "shell": 10,
+              "value": 0.07100860057725976,
+              "abs_value": 0.07100860057725976,
+              "mass": 0.005042221355940815,
+              "is_axis": false
+            },
+            {
+              "rank": 11,
+              "mode": [
+                -2,
+                5,
+                9
+              ],
+              "shell": 9,
+              "value": 0.07042832508172524,
+              "abs_value": 0.07042832508172524,
+              "mass": 0.0049601489738171686,
+              "is_axis": false
+            },
+            {
+              "rank": 12,
+              "mode": [
+                10,
+                -9,
+                -2
+              ],
+              "shell": 10,
+              "value": 0.06936901353904883,
+              "abs_value": 0.06936901353904883,
+              "mass": 0.004812060039380739,
+              "is_axis": false
+            },
+            {
+              "rank": 13,
+              "mode": [
+                -10,
+                7,
+                -6
+              ],
+              "shell": 10,
+              "value": 0.0597019885605226,
+              "abs_value": 0.0597019885605226,
+              "mass": 0.0035643274380807713,
+              "is_axis": false
+            },
+            {
+              "rank": 14,
+              "mode": [
+                -6,
+                9,
+                -7
+              ],
+              "shell": 9,
+              "value": 0.05969991426237466,
+              "abs_value": 0.05969991426237466,
+              "mass": 0.003564079762934886,
+              "is_axis": false
+            },
+            {
+              "rank": 15,
+              "mode": [
+                10,
+                -9,
+                -9
+              ],
+              "shell": 10,
+              "value": 0.05883319602749321,
+              "abs_value": 0.05883319602749321,
+              "mass": 0.003461344954809443,
+              "is_axis": false
+            },
+            {
+              "rank": 16,
+              "mode": [
+                6,
+                10,
+                -8
+              ],
+              "shell": 10,
+              "value": 0.05862995016659824,
+              "abs_value": 0.05862995016659824,
+              "mass": 0.003437471056537793,
+              "is_axis": false
+            },
+            {
+              "rank": 17,
+              "mode": [
+                5,
+                -9,
+                4
+              ],
+              "shell": 9,
+              "value": 0.05693586008991017,
+              "abs_value": 0.05693586008991017,
+              "mass": 0.0032416921641778254,
+              "is_axis": false
+            },
+            {
+              "rank": 18,
+              "mode": [
+                5,
+                -10,
+                6
+              ],
+              "shell": 10,
+              "value": 0.05413362488865146,
+              "abs_value": 0.05413362488865146,
+              "mass": 0.0029304493435852253,
+              "is_axis": false
+            },
+            {
+              "rank": 19,
+              "mode": [
+                -5,
+                4,
+                9
+              ],
+              "shell": 9,
+              "value": 0.05334065867995257,
+              "abs_value": 0.05334065867995257,
+              "mass": 0.0028452258684111996,
+              "is_axis": false
+            },
+            {
+              "rank": 20,
+              "mode": [
+                -7,
+                10,
+                -6
+              ],
+              "shell": 10,
+              "value": 0.05318427480798991,
+              "abs_value": 0.05318427480798991,
+              "mass": 0.00282856708685179,
+              "is_axis": false
+            }
+          ]
+        },
+        "source_decomposition": {
+          "rayleigh_ratio_on_extremizer": 0.6144040808827113,
+          "direct": {
+            "good_energy": 0.001181070197653961,
+            "bad_energy": 0.0006832177982475431,
+            "ratio": 0.5784734892173764
+          },
+          "mediated": {
+            "good_energy": 2.211595053133502e-05,
+            "bad_energy": 6.564311404260763e-05,
+            "ratio": 2.9681344217876178
+          },
+          "shell_pair": {
+            "10<->10": {
+              "good_energy": 0.0003011484498151401,
+              "bad_energy": 0.00012098185754024395,
+              "ratio": 0.40173495036919044
+            },
+            "9<->10": {
+              "good_energy": 0.0005800991727469311,
+              "bad_energy": 0.0003985487774490907,
+              "ratio": 0.6870355900730755
+            },
+            "9<->9": {
+              "good_energy": 0.00029699419321023484,
+              "bad_energy": 0.00020438594488782588,
+              "ratio": 0.6881816195751213
+            }
+          },
+          "axis_sector": {
+            "axis_axis": {
+              "good_energy": 1.2833087176565583e-09,
+              "bad_energy": 3.9738192035870573e-10,
+              "ratio": 0.3096541891216653
+            },
+            "axis_mixed": {
+              "good_energy": 2.737844256273024e-06,
+              "bad_energy": 4.2474094877936616e-07,
+              "ratio": 0.1551370016048897
+            },
+            "nonaxis_nonaxis": {
+              "good_energy": 0.0011755026882073153,
+              "bad_energy": 0.0007234914415464608,
+              "ratio": 0.6154740850910445
+            }
+          }
+        },
+        "sign_statistics": {
+          "num_positive_offdiag": 4043847,
+          "num_negative_offdiag": 8927533,
+          "max_positive_offdiag": 0.024176130528319004,
+          "min_negative_offdiag": -0.003026166711368851
+        }
+      },
+      "schur_complement_ok": true,
+      "verdict": "schur_psd",
+      "elapsed_seconds": 183.2,
+      "c0": 0.1111111111111111
+    }
+  ],
+  "analysis_text": "## Schur Audit Summary\n\n| N | block | G | C | M_CC \u03bb_min | S_C \u03bb0 | S_C \u03bb1 | S_C \u03bb2 | nullity est | max \\|S_C 1\\| | corr(constant) | Verdict |\n|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---|\n| 10 | 4374 | 26 | 4348 | 4.290627e-06 | -3.233587e-18 | 1.888394e-05 | 1.973160e-05 | 1 | 2.38e-16 | 1.0000 | schur_psd |\n\nN=10: \u03bb0=-3.233587e-18, \u03bb1=1.888394e-05, \u03bb2=1.973160e-05, nullity_est=1, eval=eigsh\nN=10: max |S_C 1_C|=2.377113e-16, L2 row-sum residual=5.138709e-16\nN=10: matrix-free rho_sup=6.144013e-01, lambda1(L_good)=5.035307e-05, lambda_max(L_bad)=5.011281e-03, resid=4.24e-07\n\nM_GC norms: 4.34e-03\nVerdicts: ['schur_psd']\nGate 1 target = S_C \u2ab0 0 and dim ker S_C = 1: SUPPORTED at tested N, not proved.",
+  "candidate_only": true,
+  "theorem_promoted": false,
+  "gate1_closed": false,
+  "gate1_supported_at_tested_shells": true,
+  "gate1_target": "Uniform signed domination on 1_C^\u22a5: sup_x\u22a51_C (x^T L_bad x)/(x^T L_good x) \u2264 rho_* < 1",
+  "schurNullModeIsConstantProved": true,
+  "kronStyleSchurReductionIdentified": true,
+  "ordinaryKronLaplacianIdentified": false,
+  "ordinaryKronLaplacianRoute": false,
+  "balancedSignedGraphRoute": false,
+  "effectiveOffdiagNonpositiveProved": false,
+  "effectiveGraphConnectedProved": false,
+  "effectiveGraphConnectedObserved": false,
+  "schurComplementPsdVerified": true,
+  "schurComplementNullityOneObserved": true,
+  "schurSignedPsdRequired": true,
+  "signedDominationProbeInstalled": true,
+  "signedDominationRatioBelowOneObserved": true,
+  "signedDominationRatioUniformlyBounded": false,
+  "schurComplementMatrixFreeAuditInstalled": true,
+  "schurNullModeConstantOnCObserved": true,
+  "schurComplementPsdProved": false,
+  "schurNullModeIdentified": false,
+  "schurSignedFactorizationProved": false,
+  "schurNullModeFactorizationProved": false,
+  "gate1ConditionalTheoremProved": false
+}

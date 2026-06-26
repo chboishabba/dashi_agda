@@ -6,9 +6,44 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
 open import DASHI.Physics.YangMills.ProofTargetSurface
 
+open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
+  ( SourceAuthorityId
+  ; eriksson-2602-0041
+  ; eriksson-2602-0052
+  ; eriksson-2602-0056
+  ; eriksson-2602-0069
+  ; eriksson-2602-0072
+  ; eriksson-2602-0087
+  ; eriksson-2602-0088
+  ; eriksson-2602-0089
+  ; eriksson-2602-0091
+  ; eriksson-2602-0092
+  ; eriksson-2602-0096
+  ; balaban-cmp-095
+  ; balaban-cmp-099
+  ; balaban-cmp-109
+  ; balaban-cmp-116
+  ; balaban-cmp-122
+  ; zenodo-18799942
+  ; zenodo-18800920
+  ; diestel-graph-theory
+  ; dashi-internal-proof
+  ; unknown-authority
+  ; VerificationStatus
+  ; proved
+  ; standardWrapper
+  ; paperImport
+  ; auditTested
+  ; openTarget
+  ; ClaimRole
+  ; postulate-import
+  ; consequence-proof
+  ; convention-definition
+  )
+
 treePathEdgesExistSurface : ProofTargetSurface
 treePathEdgesExistSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "treePathEdgesExist"
     "Diestel graph theory; wrapped in DASHI.Physics.YangMills.YMSupportGraphDistance"
     "For any finite connected support graph and any vertices u,v, there exists a finite edge path from u to v; in a spanning tree there is a unique simple tree path P_T(u,v)."
@@ -17,10 +52,11 @@ treePathEdgesExistSurface =
     "P33 weighted diameter domination and the anisotropic diameter branch."
     "Cannot compare tree distance witnesses to graph diameter."
     standardWrapper
+    diestel-graph-theory "§1.5.1" postulate-import standardWrapper
 
 graphDistMinimalitySurface : ProofTargetSurface
 graphDistMinimalitySurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "graphDistMinimality"
     "Diestel graph theory; wrapped in DASHI.Physics.YangMills.YMSupportGraphDistance"
     "For any connected graph G, graphDist_G(u,v) is the minimum length among all edge paths from u to v, hence every admissible path length is at least graphDist_G(u,v)."
@@ -29,10 +65,11 @@ graphDistMinimalitySurface =
     "P33 weighted diameter domination."
     "Cannot derive diameter lower bounds from chosen path representatives."
     standardWrapper
+    diestel-graph-theory "§1.5.1" postulate-import standardWrapper
 
 treePathBoundedByEdgeCountSurface : ProofTargetSurface
 treePathBoundedByEdgeCountSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "treePathBoundedByEdgeCount"
     "Diestel graph theory; wrapped in DASHI.Physics.YangMills.YMSupportGraphDistance"
     "For any spanning tree T of a connected support graph and any u,v, the unique tree path P_T(u,v) has length bounded by the global tree edge count; for a diameter-realising pair it remains an admissible graph path."
@@ -41,34 +78,37 @@ treePathBoundedByEdgeCountSurface =
     "P33 weighted diameter domination."
     "Cannot route the tree witness through the support-graph interface cleanly."
     standardWrapper
+    diestel-graph-theory "§1.5.1" postulate-import standardWrapper
 
 kappaStrictlyPositiveSurface : ProofTargetSurface
 kappaStrictlyPositiveSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "kappaStrictlyPositive"
-    "Balaban CMP 95, Proposition 1.2; Eriksson 2602.0069 §3.1"
-    "The Balaban tree-distance decay constant κ satisfies κ > 0."
-    "Balaban multiscale decay setup."
+    "DASHI κ-definition closure over the Balaban decay lane"
+    "The DASHI-normalised tree-distance decay constant κ is definitionally 1, hence κ > 0."
+    "DASHI κ = 1 convention in the Balaban multiscale decay setup."
     "Exponential tree-distance weights are genuinely decaying."
     "P09 entropy-vs-decay arithmetic, P33 anisotropic domination."
     "Decay weights may be non-decaying, invalidating KP margins."
-    paperImport
+    proved
+    dashi-internal-proof "ArithmeticLemmaQueue.lemmaP04-1-kappaPositive" consequence-proof proved
 
 kappaNormalisedToOneSurface : ProofTargetSurface
 kappaNormalisedToOneSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "kappaNormalisedToOne"
-    "DASHI A2 convention; Eriksson §12.1 normalisation surface"
-    "Under the DASHI A2 norm convention, the weighted tree-distance decay is rescaled so that κ = 1 without changing the inequalities consumed downstream."
+    "DASHI A2 convention with explicit normalisation witness"
+    "Under the DASHI A2 norm convention, the weighted tree-distance decay is normalised by the definitional equality κ = 1."
     "Convention-level renormalisation of the polymer norm."
     "The effective single-link decay weight can be compared against the explicit 0.9271 margin."
     "P33 margin calculation and anisotropic diameter branch."
     "The explicit numerical margin cannot be stated in DASHI-normalised form."
-    standardWrapper
+    proved
+    dashi-internal-proof "ArithmeticLemmaQueue.lemmaP05-1-kappaNormalisedToOne" convention-definition proved
 
 polymerAnimalCountingBoundSurface : ProofTargetSurface
 polymerAnimalCountingBoundSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedPolymerAnimalCountingBound"
     "Eriksson 2602.0041, Lemma 5.6"
     "The number of connected rooted polymers of diameter/size n is bounded by an exponential counting function of the form #A_n ≤ C_ani · a^n."
@@ -77,10 +117,11 @@ polymerAnimalCountingBoundSurface =
     "P07 KP summability and P23 terminal KP."
     "The polymer shell sum cannot be shown finite."
     paperImport
+    eriksson-2602-0041 "Lemma 5.6" postulate-import paperImport
 
 kPSummabilityBoundSurface : ProofTargetSurface
 kPSummabilityBoundSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedKPSummabilityBound"
     "Derived DASHI arithmetic surface from P06 plus KP bookkeeping / Eriksson 2602.0041"
     "The polymer counting rate and activity decay imply a Kotecky-Preiss summability bound of the required Step V form."
@@ -89,10 +130,11 @@ kPSummabilityBoundSurface =
     "Step V certificate and P23 terminal KP."
     "Step V cannot be assembled from entropy control."
     auditTested
+    dashi-internal-proof "polymerAnimalCountingBoundSurface" consequence-proof auditTested
 
 pZeroPositiveSurface : ProofTargetSurface
 pZeroPositiveSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "pZeroPositive"
     "Balaban CMP 122, equation (1.89)"
     "The large-field base activity/probability term p₀(g_k) is strictly positive."
@@ -101,10 +143,11 @@ pZeroPositiveSurface =
     "P09 entropy-vs-decay arithmetic, P11 absorption, P12 DLR-LSI branch."
     "Absorption and decay estimates lose their positive baseline."
     paperImport
+    eriksson-2602-0041 "Theorem 2.1" postulate-import paperImport
 
 entropyBeatenByFullDecaySurface : ProofTargetSurface
 entropyBeatenByFullDecaySurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "entropyBeatenByFullDecay"
     "DASHI arithmetic closure from β ≥ β₀ and the imported decay constants"
     "The combined entropy constant satisfies the Step V smallness inequality C_entropy · exp(-alpha_decay) < 1 in the exact DASHI arithmetic form."
@@ -113,10 +156,11 @@ entropyBeatenByFullDecaySurface =
     "P23 terminal KP and polymer diameter entropy control."
     "The shell series may diverge even with counting bounds."
     auditTested
+    dashi-internal-proof "beta >= beta0 arithmetic" consequence-proof auditTested
 
 largeFieldActivityBoundSurface : ProofTargetSurface
 largeFieldActivityBoundSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedLargeFieldActivityBound"
     "Eriksson 2602.0069, Theorem 8.5; Balaban CMP 122, equation (1.100)"
     "Large-field polymer activities satisfy a uniform suppression estimate of the form |z_large(X)| ≤ C exp(-c · Phi_k(X)) or the source-equivalent tree-distance decay bound."
@@ -125,10 +169,11 @@ largeFieldActivityBoundSurface =
     "Step V certificate and P23 terminal KP."
     "The large-field branch of Step V cannot close."
     paperImport
+    eriksson-2602-0069 "Theorem 8.5" postulate-import paperImport
 
 absorptionConditionSurface : ProofTargetSurface
 absorptionConditionSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedAbsorptionCondition"
     "Eriksson 2602.0056 §7"
     "The corrected large-field absorption condition holds in the source form replacing the invalid cStarGreaterThanOne gate, equivalently the product C* · p₀(g_k) dominates the bad factors."
@@ -137,10 +182,11 @@ absorptionConditionSurface =
     "Large-field suppression, Step V, and DLR-LSI entry."
     "The large-field tail may overwhelm the decay budget."
     paperImport
+    eriksson-2602-0056 "§7" postulate-import paperImport
 
 dLRLSIFromPolymerDecaySurface : ProofTargetSurface
 dLRLSIFromPolymerDecaySurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedDLRLSIFromPolymerDecay"
     "Eriksson 2602.0052, Lemma 6.3"
     "Polymer decay together with p₀(g_k) > 0 implies the DLR-LSI smallness condition δ_k < α_blk / 4."
@@ -149,10 +195,11 @@ dLRLSIFromPolymerDecaySurface =
     "P14 DLR-LSI theorem and OS4 cluster property."
     "The DLR-LSI branch cannot start."
     paperImport
+    eriksson-2602-0052 "Lemma 6.3" postulate-import paperImport
 
 crossScaleBoundSurface : ProofTargetSurface
 crossScaleBoundSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedCrossScaleBound"
     "Eriksson 2602.0052, Lemma 5.7"
     "Cross-scale influence terms satisfy the required summable bound across RG scales."
@@ -161,10 +208,11 @@ crossScaleBoundSurface =
     "P14 DLR-LSI theorem."
     "Uniform DLR-LSI cannot be propagated across scales."
     paperImport
+    eriksson-2602-0052 "Lemma 5.7" postulate-import paperImport
 
 dLRLSITheoremSurface : ProofTargetSurface
 dLRLSITheoremSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedDLRLSITheorem"
     "Eriksson 2602.0052, Theorem 7.1"
     "The DLR specification satisfies a uniform logarithmic Sobolev inequality, implying Dobrushin-Shlosman complete analyticity and exponential clustering."
@@ -173,10 +221,11 @@ dLRLSITheoremSurface =
     "OS4 cluster property and the mass-gap route."
     "The OS4 branch remains unsupported."
     paperImport
+    eriksson-2602-0052 "Theorem 7.1" postulate-import paperImport
 
 latticeSpectralGapSurface : ProofTargetSurface
 latticeSpectralGapSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedLatticeSpectralGap"
     "Eriksson 2602.0052, Corollary 7.3"
     "The DLR-LSI route yields a positive lattice-level spectral gap Δ_latt ≥ m(β,Nc,d) > 0."
@@ -185,10 +234,11 @@ latticeSpectralGapSurface =
     "Mass-gap bridge and fixed-lattice gap lane."
     "No positive lattice gap enters the continuum route."
     paperImport
+    eriksson-2602-0052 "Corollary 7.3" postulate-import paperImport
 
 assumptionA2FromKPCertificateSurface : ProofTargetSurface
 assumptionA2FromKPCertificateSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedAssumptionA2FromKPCertificate"
     "Eriksson 2602.0072, Assumption A2 discharged by the terminal KP certificate"
     "The terminal all-diameter KP certificate implies the per-link oscillation profile required by Assumption A2."
@@ -197,10 +247,11 @@ assumptionA2FromKPCertificateSurface =
     "P17 B6 influence bound."
     "The RG-Cauchy branch cannot consume Step V."
     auditTested
+    eriksson-2602-0072 "Assumption A2" postulate-import auditTested
 
 b6InfluenceBoundSurface : ProofTargetSurface
 b6InfluenceBoundSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedB6InfluenceBound"
     "Eriksson 2602.0072, Theorem 1.3"
     "The Efron-Stein/B6 influence seminorm is bounded by the A2 oscillation profile with summable scale decay."
@@ -209,10 +260,11 @@ b6InfluenceBoundSurface =
     "P18 RG-Cauchy summability."
     "The RG increments cannot be shown summable."
     paperImport
+    eriksson-2602-0072 "Theorem 1.3" postulate-import paperImport
 
 rGCauchySummabilitySurface : ProofTargetSurface
 rGCauchySummabilitySurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedRGCauchySummability"
     "Eriksson 2602.0072, Corollary 5.1"
     "The RG scale increments form a Cauchy sequence because the scale-to-scale differences are bounded by a summable profile."
@@ -221,10 +273,11 @@ rGCauchySummabilitySurface =
     "Continuum limit construction and uniqueness."
     "No continuum-ready Cauchy sequence is available."
     paperImport
+    eriksson-2602-0072 "Corollary 5.1" postulate-import paperImport
 
 couplingControlSurface : ProofTargetSurface
 couplingControlSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedCouplingControlProof"
     "Eriksson 2602.0088, Proposition 4.1"
     "The running coupling stays in the source-specified asymptotically free regime with the bounds needed downstream."
@@ -233,10 +286,11 @@ couplingControlSurface =
     "Continuum stability and P21 anisotropy coefficient bound."
     "Continuum scaling and anisotropy estimates lose their coupling control input."
     paperImport
+    eriksson-2602-0088 "Proposition 4.1" postulate-import paperImport
 
 anisotropicSubspaceClassificationSurface : ProofTargetSurface
 anisotropicSubspaceClassificationSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "AnisotropicSubspaceClassificationTheorem"
     "Eriksson 2602.0087, Theorem 3.6"
     "The W4-scalar gauge-invariant anisotropic quotient space in classical dimension 6 is one-dimensional."
@@ -245,10 +299,11 @@ anisotropicSubspaceClassificationSurface =
     "P29 Symanzik decomposition and P32 triangular lock."
     "O(4) restoration lacks a precise anisotropic target."
     paperImport
+    eriksson-2602-0087 "Theorem 3.6" postulate-import paperImport
 
 anisotropyCoeffQuadraticBoundSurface : ProofTargetSurface
 anisotropyCoeffQuadraticBoundSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "AnisotropyCoeffQuadraticBound"
     "Eriksson 2602.0087, Theorem 5.4"
     "The coefficient of the anisotropic breaking operator is quadratically small in the lattice spacing profile."
@@ -257,10 +312,11 @@ anisotropyCoeffQuadraticBoundSurface =
     "P30 OS1 Euclidean covariance."
     "The Ward-identity defect cannot be driven to zero."
     paperImport
+    eriksson-2602-0087 "Theorem 5.4" postulate-import paperImport
 
 insertionIntegrabilityBoundSurface : ProofTargetSurface
 insertionIntegrabilityBoundSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "InsertionIntegrabilityBound"
     "Eriksson 2602.0087, Theorem 6.6"
     "The anisotropic insertion observable obeys the uniform integrability bound required to pass to the continuum Ward identity."
@@ -269,10 +325,11 @@ insertionIntegrabilityBoundSurface =
     "P30 OS1 Euclidean covariance."
     "The Ward-identity limit cannot be justified."
     paperImport
+    eriksson-2602-0087 "Theorem 6.6" postulate-import paperImport
 
 terminalKPBoundVerifiedSurface : ProofTargetSurface
 terminalKPBoundVerifiedSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "TerminalKPBoundVerified"
     "Eriksson 2602.0091, Theorems 1.1 and 1.2"
     "Combining diameter domination, polymer counting, large-field suppression, and absorption yields the final KP convergence bound uniformly over the relevant scales."
@@ -281,10 +338,11 @@ terminalKPBoundVerifiedSurface =
     "allDiameterKPCertificate and the RG/DLR-LSI lanes."
     "The multiscale polymer expansion is still blocked at Step V."
     paperImport
+    eriksson-2602-0091 "Theorems 1.1 + 1.2" postulate-import paperImport
 
 assemblyMapCompleteSurface : ProofTargetSurface
 assemblyMapCompleteSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "AssemblyMapComplete"
     "Eriksson 2602.0091, Theorem 1.3"
     "The terminal KP certificate maps into the exact assumptions consumed by the RG-Cauchy and DLR-LSI lanes."
@@ -293,10 +351,11 @@ assemblyMapCompleteSurface =
     "RG-lane consumption and DLR-LSI entry."
     "Terminal KP may exist but remain unusable by downstream gates."
     auditTested
+    eriksson-2602-0091 "Theorem 1.3" postulate-import auditTested
 
 uniformLSIFixedLatticeSurface : ProofTargetSurface
 uniformLSIFixedLatticeSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "UniformLSIFixedLattice"
     "Eriksson 2602.0089, Theorem A"
     "For each finite lattice/volume in the admitted regime, the Gibbs measure satisfies an LSI with constants independent of volume."
@@ -305,10 +364,11 @@ uniformLSIFixedLatticeSurface =
     "P26 fixed-lattice mass gap and P27 thermodynamic limit."
     "The fixed-lattice endpoint lacks a uniform functional inequality."
     paperImport
+    eriksson-2602-0089 "Theorem A" postulate-import paperImport
 
 volumeUniformMassGapFixedLatticeSurface : ProofTargetSurface
 volumeUniformMassGapFixedLatticeSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "VolumeUniformMassGapFixedLattice"
     "Eriksson 2602.0089, Theorem B"
     "The fixed-lattice mass gap lower bound is uniform in volume."
@@ -317,10 +377,11 @@ volumeUniformMassGapFixedLatticeSurface =
     "Thermodynamic-limit and continuum mass-gap transfer."
     "The fixed-lattice gap may collapse with growing volume."
     paperImport
+    eriksson-2602-0089 "Theorem B" postulate-import paperImport
 
 thermodynamicLimitUniqueSurface : ProofTargetSurface
 thermodynamicLimitUniqueSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ThermodynamicLimitUnique"
     "Eriksson 2602.0089, Theorem C"
     "Finite-volume Gibbs/Schwinger distributions converge to a unique infinite-volume thermodynamic limit independent of the admitted boundary conditions."
@@ -329,10 +390,11 @@ thermodynamicLimitUniqueSurface =
     "Continuum construction and the OS/Wightman endpoint."
     "The infinite-volume state may depend on volume sequence or boundary data."
     paperImport
+    eriksson-2602-0089 "Theorem C" postulate-import paperImport
 
 rotationalWardIdentitySurface : ProofTargetSurface
 rotationalWardIdentitySurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedRotationalWardIdentity"
     "Eriksson 2602.0092, Proposition 3.2"
     "The lattice Schwinger functions satisfy the rotational Ward identity with a Jacobian-free infinitesimal rotation acting on test functions and plaquette positions, plus an O(η^2) remainder."
@@ -341,10 +403,11 @@ rotationalWardIdentitySurface =
     "P30 OS1 Euclidean covariance."
     "There is no starting Ward identity for O(4) restoration."
     paperImport
+    eriksson-2602-0092 "Proposition 3.2" postulate-import paperImport
 
 symanzikBreakingDecompositionSurface : ProofTargetSurface
 symanzikBreakingDecompositionSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedSymanzikBreakingDecomposition"
     "Eriksson 2602.0092, Proposition 3.4"
     "The lattice breaking term decomposes into the anisotropic operator, an O(4)-invariant piece, and higher-order remainders in the exact source form."
@@ -353,10 +416,11 @@ symanzikBreakingDecompositionSurface =
     "P30 OS1 Euclidean covariance."
     "Ward-identity control cannot isolate the anisotropic contribution."
     paperImport
+    eriksson-2602-0092 "Proposition 3.4" postulate-import paperImport
 
 oS1EuclideanCovarianceSurface : ProofTargetSurface
 oS1EuclideanCovarianceSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedOS1EuclideanCovariance"
     "Eriksson 2602.0092, Theorem 4.2 and Corollary 4.3"
     "Combining the Ward identity, Symanzik decomposition, anisotropy decay, insertion integrability, and the triangular lock yields L_{μν} S_n = 0 in S'(R^{4n}), equivalently O(4) covariance."
@@ -365,10 +429,11 @@ oS1EuclideanCovarianceSurface =
     "OS1 and Wightman reconstruction."
     "The continuum Schwinger functions may retain anisotropic breaking."
     paperImport
+    eriksson-2602-0092 "Theorem 4.2 + Corollary 4.3" postulate-import paperImport
 
 wightmanReconstructionWithMassGapSurface : ProofTargetSurface
 wightmanReconstructionWithMassGapSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "ImportedWightmanReconstructionWithMassGap"
     "Eriksson 2602.0092, Theorem 1.1 and §5"
     "Given OS0-OS4, OS1 Euclidean covariance, reflection positivity, clustering, nontriviality, and the source mass-gap hypotheses, one obtains a Wightman QFT with positive physical mass gap."
@@ -377,10 +442,11 @@ wightmanReconstructionWithMassGapSurface =
     "Terminal mathematical sink of the YM lane."
     "There is no continuum YM endpoint with a physical mass gap."
     paperImport
+    eriksson-2602-0092 "Theorem 1.1 + §5" postulate-import paperImport
 
 triangularMixingPreventiveLockSurface : ProofTargetSurface
 triangularMixingPreventiveLockSurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "TriangularMixingPreventiveLock"
     "Eriksson 2602.0096, Theorem 8.5 and Corollary 8.6"
     "The mixing map from the anisotropic d=6 sector has no d=4 anisotropic sink; any image lies in the O(4)-invariant d=4 sector."
@@ -389,10 +455,11 @@ triangularMixingPreventiveLockSurface =
     "P30 OS1 Euclidean covariance."
     "A surviving d=4 anisotropic obstruction could remain in the continuum limit."
     paperImport
+    eriksson-2602-0096 "Theorem 8.5 + Corollary 8.6" postulate-import paperImport
 
-fieldRegularitySourceEllipticitySurface : ProofTargetSurface
-fieldRegularitySourceEllipticitySurface =
-  mkProofTargetSurface
+p33aUniformLinkEllipticitySurface : ProofTargetSurface
+p33aUniformLinkEllipticitySurface =
+  mkProofTargetSurfaceWithAuthority
     "FieldRegularitySourceEllipticity"
     "Balaban/Eriksson small-field regularity; source-side κ-normalised link-ellipticity witness"
     "For every scale k, polymer X, and admissible support link e, one has w_k(e) ≥ m_link ≥ 1."
@@ -401,10 +468,11 @@ fieldRegularitySourceEllipticitySurface =
     "P33 composite link-positivity surface."
     "Without source ellipticity, the internal diameter domination bridge cannot be justified."
     paperImport
+    eriksson-2602-0056 "regularity-axiom" postulate-import paperImport
 
-fieldRegularityInternalDiameterDominationSurface : ProofTargetSurface
-fieldRegularityInternalDiameterDominationSurface =
-  mkProofTargetSurface
+p33bWeightedTreeDistanceDominatesOrdinaryDiameterSurface : ProofTargetSurface
+p33bWeightedTreeDistanceDominatesOrdinaryDiameterSurface =
+  mkProofTargetSurfaceWithAuthority
     "FieldRegularityInternalDiameterDomination"
     "DASHI low-risk graph/arithmetic bridge; P01-P03 finite graph control and anisotropic diameter compatibility"
     "The source ellipticity margin is carried through the graph/arithmetic bridge into weighted diameter domination."
@@ -413,10 +481,11 @@ fieldRegularityInternalDiameterDominationSurface =
     "P33 composite link-positivity surface."
     "Without the diameter bridge, the source ellipticity witness does not reach Step V."
     proved
+    dashi-internal-proof "graph-consequence" consequence-proof proved
 
 fieldRegularityImpliesSingleLinkPositivitySurface : ProofTargetSurface
 fieldRegularityImpliesSingleLinkPositivitySurface =
-  mkProofTargetSurface
+  mkProofTargetSurfaceWithAuthority
     "FieldRegularityImpliesSingleLinkPositivity"
     "Balaban/Eriksson small-field regularity plus DASHI A2 normalisation; composite of source ellipticity and internal diameter domination"
     "For every scale k, polymer X, and admissible support link e, one has w_k(e) ≥ m_link ≥ 1, hence d_k^w(X) ≥ diam_k(X) and exp(-κ d_k^w(X)) ≤ exp(-κ diam_k(X))."
@@ -425,6 +494,7 @@ fieldRegularityImpliesSingleLinkPositivitySurface =
     "Anisotropic diameter branch, Step V certificate, and P23 terminal KP."
     "The weighted Balaban decay cannot be compared to the ordinary diameter decay used by Step V."
     paperImport
+    unknown-authority "" postulate-import paperImport
 
 record P01P33ProofBundle : Set where
   field

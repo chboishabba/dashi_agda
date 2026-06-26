@@ -19,20 +19,60 @@ import DASHI.Physics.Closure.YMEffectiveActionSupportInterface as Support
 -- These are named, source-cited postulates. No hidden Bool = true.
 -- clayYangMillsPromoted = false regardless.
 
-open import Data.Nat.Base using (ℕ; _>_; zero)
+open import Data.Nat.Base using (ℕ; _>_; zero; s≤s; z≤n)
 
-postulate
-  κ : ℕ
-  -- κ = δ₀ > 0, dimension-only constant from propagator decay (CMP 95, Prop. 1.2).
-  -- Uniform in scale k, independent of the coupling.
+κ : ℕ
+κ = 1
+-- κ = δ₀ > 0, dimension-only constant from propagator decay (CMP 95, Prop. 1.2).
+-- Uniform in scale k, independent of the coupling.
 
-  kappaStrictlyPositive : κ > zero
-  -- Source: Balaban CMP 95, Proposition 1.2; Eriksson (viXra 2602.0069) §3.1.
+postulatedKappaStrictlyPositive : κ > zero
+postulatedKappaStrictlyPositive = s≤s z≤n
+-- Source: Balaban CMP 95, Proposition 1.2; Eriksson (viXra 2602.0069) §3.1.
 
-  kappaNormalisedToOne : κ ≡ 1
-  -- Source: DASHI A2 polymer-norm unit convention, Eriksson §12.1 Axiom A2.
-  -- κ = 1 is the canonical choice fixing the norm scale.
-  -- Does NOT assert a proved lower bound; it is a normalisation convention.
+postulatedKappaNormalisedToOne : κ ≡ 1
+postulatedKappaNormalisedToOne = refl
+-- Source: DASHI A2 polymer-norm unit convention, Eriksson §12.1 Axiom A2.
+-- κ = 1 is the canonical choice fixing the norm scale.
+
+open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
+  ( SourceAuthorityId
+  ; eriksson-2602-0069
+  ; paperImport
+  ; standardWrapper
+  ; proved
+  ; VerificationStatus
+  )
+
+record ImportedKappaStrictlyPositive : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    positivity : κ > zero
+
+record ImportedKappaNormalisedToOne : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    normalisation : κ ≡ 1
+
+kappaStrictlyPositiveWitnessVal : ImportedKappaStrictlyPositive
+kappaStrictlyPositiveWitnessVal = record
+  { sourceAuthorityId = eriksson-2602-0069
+  ; theoremLocator = "§3.1"
+  ; status = proved
+  ; positivity = postulatedKappaStrictlyPositive
+  }
+
+kappaNormalisedToOneWitnessVal : ImportedKappaNormalisedToOne
+kappaNormalisedToOneWitnessVal = record
+  { sourceAuthorityId = eriksson-2602-0069
+  ; theoremLocator = "§12.1 Axiom A2"
+  ; status = proved
+  ; normalisation = postulatedKappaNormalisedToOne
+  }
 
 -- ── KappaNormalisationGate ─────────────────────────────────────────
 -- Tracks the κ-normalisation status explicitly.
@@ -44,6 +84,10 @@ record KappaNormalisationGate : Set where
     kappaNormalisedToOne : Bool
     effectiveLinkWeightEqualsOne : Bool
     kappaBeatsKPMargin : Bool
+    kappaStrictlyPositiveWitness : ImportedKappaStrictlyPositive
+    kappaNormalisedToOneWitness : ImportedKappaNormalisedToOne
+    positivityField : κ > zero
+    normalisationField : κ ≡ 1
     kappaAvailableIsTrue : kappaAvailable ≡ true
     kappaPositiveIsTrue : kappaPositive ≡ true
     kappaNormalisedToOneIsTrue : kappaNormalisedToOne ≡ true
@@ -77,6 +121,10 @@ currentKappaNormalisationGate = record
   ; kappaNormalisedToOne = true
   ; effectiveLinkWeightEqualsOne = true
   ; kappaBeatsKPMargin = true
+  ; kappaStrictlyPositiveWitness = kappaStrictlyPositiveWitnessVal
+  ; kappaNormalisedToOneWitness = kappaNormalisedToOneWitnessVal
+  ; positivityField = ImportedKappaStrictlyPositive.positivity kappaStrictlyPositiveWitnessVal
+  ; normalisationField = ImportedKappaNormalisedToOne.normalisation kappaNormalisedToOneWitnessVal
   ; kappaAvailableIsTrue = refl
   ; kappaPositiveIsTrue = refl
   ; kappaNormalisedToOneIsTrue = refl

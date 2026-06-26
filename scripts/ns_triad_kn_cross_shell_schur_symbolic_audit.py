@@ -20,6 +20,7 @@ import argparse
 import json
 import math
 import time
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -27,13 +28,19 @@ import numpy as np
 from scipy.linalg import cho_factor, cho_solve, eigh
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import connected_components
-from scipy.sparse.linalg import LinearOperator, eigsh
+from scipy.sparse.linalg import LinearOperator, eigsh, lobpcg
 
 from ns_triad_frame_stability_scan import (
     DEFAULT_RAW_ARCHIVE,
     DEFAULT_ZERO_EPS,
     _frame_indices,
+    _frame_velocity,
     _load_raw_bundle,
+    _scalar_vorticity_spectrum,
+)
+from ns_triad_constrained_adversarial_fork_optimizer import (
+    _cube_modes,
+    _shell_levels,
 )
 from ns_triad_kn_cross_shell_block_decomposition import (
     _build_profile_for_row,
@@ -53,6 +60,39 @@ C0 = 1.0 / 9.0
 
 # C-block size above which we skip dense eigensolves and use `eigsh`.
 DENSE_SCHUR_THRESHOLD = 3500
+DEFAULT_DOMINATION_CHUNK_SIZE = 192
+DEFAULT_DOMINATION_EPS = 1.0e-8
+
+
+@dataclass(frozen=True)
+class _ChunkedSignedLaplacian:
+    kind: str
+    degree: np.ndarray
+    row_chunk: int
+
+
+def _project_mean_zero(x: np.ndarray) -> np.ndarray:
+    vec = np.asarray(x, dtype=np.float64)
+    return vec - float(np.mean(vec))
+
+
+def _lift_one_perp_coords(y: np.ndarray) -> np.ndarray:
+    values = np.asarray(y, dtype=np.float64)
+    if values.ndim == 1:
+        return np.concatenate([values, np.asarray([-float(np.sum(values))], dtype=np.float64)])
+    if values.ndim == 2:
+        tail = -np.sum(values, axis=0, keepdims=True)
+        return np.vstack([values, tail])
+    raise ValueError(f"expected vector or matrix reduced coordinate input, got ndim={values.ndim}")
+
+
+def _compress_one_perp_dual(z: np.ndarray) -> np.ndarray:
+    values = np.asarray(z, dtype=np.float64)
+    if values.ndim == 1:
+        return values[:-1] - values[-1]
+    if values.ndim == 2:
+        return values[:-1, :] - values[-1:, :]
+    raise ValueError(f"expected vector or matrix full-space input, got ndim={values.ndim}")
 
 
 def _build_block_matrices_dense(
@@ -134,6 +174,19 @@ def _build_block_matrices_dense(
         "n_edges_boundary": nbp,
     }
     return M, Ln, La, info
+
+
+def _c_block_mode_keys(
+    bundle: Any,
+    snapshot: int,
+    n: int,
+    c_indices: np.ndarray,
+    zero_eps: float,
+) -> list[tuple[int, int, int]]:
+    u, v, w = _frame_velocity(bundle, snapshot)
+    spectrum = _scalar_vorticity_spectrum(u, v, w, bundle.domain_length)
+    shell_modes = _cube_modes(spectrum, shell_n=int(n), zero_eps=float(zero_eps))
+    return [tuple(int(v) for v in shell_modes[int(index)].key) for index in c_indices]
 
 
 def _extract_blocks(
@@ -567,6 +620,484 @@ def _signed_factorization_diagnostics(
     }
 
 
+def _shell_pair_label(shell_i: int, shell_j: int) -> str:
+    lo, hi = sorted((int(shell_i), int(shell_j)))
+    return f"{lo}<->{hi}"
+
+
+def _is_axis_mode(key: tuple[int, int, int]) -> bool:
+    return sum(int(v == 0) for v in key) >= 2
+
+
+def _sign_pattern(key: tuple[int, int, int]) -> str:
+    def _sgn(v: int) -> str:
+        if v > 0:
+            return "+"
+        if v < 0:
+            return "-"
+        return "0"
+    return "".join(_sgn(int(v)) for v in key)
+
+
+def _build_chunked_signed_laplacian_state(
+    M_CC: np.ndarray,
+    correction: np.ndarray,
+    *,
+    row_chunk: int = DEFAULT_DOMINATION_CHUNK_SIZE,
+) -> dict[str, Any]:
+    n = int(M_CC.shape[0])
+    degree_good = np.zeros(n, dtype=np.float64)
+    degree_bad = np.zeros(n, dtype=np.float64)
+    sign_stats = {
+        "num_positive_offdiag": 0,
+        "num_negative_offdiag": 0,
+        "max_positive_offdiag": 0.0,
+        "min_negative_offdiag": 0.0,
+    }
+    for start in range(0, n, row_chunk):
+        stop = min(start + row_chunk, n)
+        total_chunk = np.asarray(M_CC[start:stop, :] - correction[start:stop, :], dtype=np.float64)
+        diag_rows = np.arange(stop - start, dtype=np.int64)
+        diag_cols = np.arange(start, stop, dtype=np.int64) - start
+
+        offdiag_vals = total_chunk.copy()
+        offdiag_vals[diag_rows, diag_cols] = 0.0
+        positive_mask = offdiag_vals > 1.0e-10
+        negative_mask = offdiag_vals < -1.0e-10
+        sign_stats["num_positive_offdiag"] += int(np.sum(positive_mask))
+        sign_stats["num_negative_offdiag"] += int(np.sum(negative_mask))
+        if np.any(positive_mask):
+            sign_stats["max_positive_offdiag"] = max(
+                float(sign_stats["max_positive_offdiag"]),
+                float(np.max(offdiag_vals[positive_mask])),
+            )
+        if np.any(negative_mask):
+            min_negative = float(np.min(offdiag_vals[negative_mask]))
+            if sign_stats["min_negative_offdiag"] == 0.0:
+                sign_stats["min_negative_offdiag"] = min_negative
+            else:
+                sign_stats["min_negative_offdiag"] = min(
+                    float(sign_stats["min_negative_offdiag"]),
+                    min_negative,
+                )
+
+        good_weights = np.maximum(-total_chunk, 0.0)
+        bad_weights = np.maximum(total_chunk, 0.0)
+        good_weights[diag_rows, diag_cols] = 0.0
+        bad_weights[diag_rows, diag_cols] = 0.0
+        degree_good[start:stop] = np.sum(good_weights, axis=1)
+        degree_bad[start:stop] = np.sum(bad_weights, axis=1)
+
+    return {
+        "degree_good": degree_good,
+        "degree_bad": degree_bad,
+        "row_chunk": int(row_chunk),
+        "sign_stats": sign_stats,
+    }
+
+
+def _signed_laplacian_apply(
+    x: np.ndarray,
+    *,
+    M_CC: np.ndarray,
+    correction: np.ndarray,
+    state: _ChunkedSignedLaplacian,
+) -> np.ndarray:
+    values = np.asarray(x, dtype=np.float64)
+    if values.ndim == 1:
+        vec = _project_mean_zero(values)
+        n = int(len(vec))
+        out = np.zeros(n, dtype=np.float64)
+        for start in range(0, n, state.row_chunk):
+            stop = min(start + state.row_chunk, n)
+            total_chunk = np.asarray(M_CC[start:stop, :] - correction[start:stop, :], dtype=np.float64)
+            weights = (
+                np.maximum(-total_chunk, 0.0)
+                if state.kind == "good"
+                else np.maximum(total_chunk, 0.0)
+            )
+            diag_rows = np.arange(stop - start, dtype=np.int64)
+            diag_cols = np.arange(start, stop, dtype=np.int64) - start
+            weights[diag_rows, diag_cols] = 0.0
+            out[start:stop] = state.degree[start:stop] * vec[start:stop] - weights @ vec
+        return _project_mean_zero(out)
+
+    if values.ndim == 2:
+        centered = values - np.mean(values, axis=0, keepdims=True)
+        n, ncols = centered.shape
+        out = np.zeros((n, ncols), dtype=np.float64)
+        for start in range(0, n, state.row_chunk):
+            stop = min(start + state.row_chunk, n)
+            total_chunk = np.asarray(M_CC[start:stop, :] - correction[start:stop, :], dtype=np.float64)
+            weights = (
+                np.maximum(-total_chunk, 0.0)
+                if state.kind == "good"
+                else np.maximum(total_chunk, 0.0)
+            )
+            diag_rows = np.arange(stop - start, dtype=np.int64)
+            diag_cols = np.arange(start, stop, dtype=np.int64) - start
+            weights[diag_rows, diag_cols] = 0.0
+            out[start:stop, :] = state.degree[start:stop, None] * centered[start:stop, :] - weights @ centered
+        return out - np.mean(out, axis=0, keepdims=True)
+
+    raise ValueError(f"expected vector or matrix input, got ndim={values.ndim}")
+
+
+def _solve_projected_extremal_mode(
+    operator: LinearOperator,
+    *,
+    largest: bool,
+    n: int,
+    seed: int,
+    constraints: np.ndarray | None = None,
+    b_operator: LinearOperator | None = None,
+    tol: float = 1.0e-8,
+    maxiter: int = 120,
+    center_guess: bool = False,
+) -> tuple[float, np.ndarray, float]:
+    rng = np.random.default_rng(int(seed))
+    guess = rng.standard_normal((n, 1))
+    if constraints is not None:
+        for col in range(int(constraints.shape[1])):
+            basis = np.asarray(constraints[:, col], dtype=np.float64)
+            denom = float(basis @ basis)
+            if denom > 0.0:
+                guess -= basis[:, None] * ((basis @ guess[:, 0]) / denom)
+    if center_guess:
+        guess[:, 0] = _project_mean_zero(guess[:, 0])
+    norm = float(np.linalg.norm(guess[:, 0]))
+    if norm <= 1.0e-14:
+        guess[:, 0] = np.linspace(-1.0, 1.0, n, dtype=np.float64)
+        if center_guess:
+            guess[:, 0] = _project_mean_zero(guess[:, 0])
+        norm = float(np.linalg.norm(guess[:, 0]))
+    guess[:, 0] /= max(norm, 1.0e-300)
+
+    eigvals, eigvecs, residuals = lobpcg(
+        operator,
+        guess,
+        B=b_operator,
+        Y=constraints,
+        tol=float(tol),
+        maxiter=int(maxiter),
+        largest=bool(largest),
+        retResidualNormsHistory=True,
+    )
+    value = float(np.asarray(eigvals, dtype=np.float64)[0])
+    vec = np.asarray(eigvecs[:, 0], dtype=np.float64)
+    if center_guess:
+        vec = _project_mean_zero(vec)
+    vec /= max(float(np.linalg.norm(vec)), 1.0e-300)
+    residual_history = np.asarray(residuals, dtype=np.float64).reshape(-1)
+    residual_norm = float(residual_history[-1]) if residual_history.size else float("nan")
+    return value, vec, residual_norm
+
+
+def _vector_support_diagnostics(
+    vec: np.ndarray,
+    *,
+    shell_levels: np.ndarray,
+    mode_keys: list[tuple[int, int, int]],
+    degree_good: np.ndarray,
+    degree_bad: np.ndarray,
+    top_k: int = 20,
+) -> dict[str, Any]:
+    values = np.asarray(vec, dtype=np.float64)
+    norm = float(np.linalg.norm(values))
+    if norm <= 1.0e-14:
+        return {"error": "zero_vector"}
+    unit = values / norm
+    mass = unit * unit
+    shell_mass = {
+        str(shell): float(np.sum(mass[shell_levels == float(shell)]))
+        for shell in sorted({int(v) for v in shell_levels})
+    }
+    axis_mask = np.asarray([_is_axis_mode(key) for key in mode_keys], dtype=bool)
+    sign_mass: dict[str, float] = {}
+    for idx, key in enumerate(mode_keys):
+        label = _sign_pattern(key)
+        sign_mass[label] = sign_mass.get(label, 0.0) + float(mass[idx])
+    abs_order = np.argsort(-np.abs(unit))
+    top_modes = [
+        {
+            "rank": int(rank + 1),
+            "mode": [int(v) for v in mode_keys[int(index)]],
+            "shell": int(shell_levels[int(index)]),
+            "value": float(unit[int(index)]),
+            "abs_value": float(abs(unit[int(index)])),
+            "mass": float(mass[int(index)]),
+            "is_axis": bool(axis_mask[int(index)]),
+        }
+        for rank, index in enumerate(abs_order[:top_k])
+    ]
+    one = np.ones(len(unit), dtype=np.float64)
+    shell_values = np.asarray(shell_levels, dtype=np.float64)
+    degree_total = np.asarray(degree_good + degree_bad, dtype=np.float64)
+
+    def _corr(reference: np.ndarray) -> float | None:
+        ref = np.asarray(reference, dtype=np.float64)
+        denom = float(np.linalg.norm(ref) * np.linalg.norm(unit))
+        if denom <= 1.0e-14:
+            return None
+        return float(unit @ ref / denom)
+
+    return {
+        "shell_mass": shell_mass,
+        "constant_correlation": _corr(one),
+        "degree_correlation": _corr(degree_total),
+        "sqrt_degree_correlation": _corr(np.sqrt(np.clip(degree_total, 0.0, None))),
+        "shell_value_correlation": _corr(shell_values),
+        "axis_concentration": float(np.sum(mass[axis_mask])) if axis_mask.size else 0.0,
+        "nonaxis_concentration": float(np.sum(mass[~axis_mask])) if axis_mask.size else 0.0,
+        "sign_pattern_mass": {key: float(value) for key, value in sorted(sign_mass.items())},
+        "top_modes": top_modes,
+    }
+
+
+def _rayleigh_source_breakdown(
+    vec: np.ndarray,
+    *,
+    M_CC: np.ndarray,
+    correction: np.ndarray,
+    shell_levels: np.ndarray,
+    mode_keys: list[tuple[int, int, int]],
+    row_chunk: int,
+) -> dict[str, Any]:
+    unit = np.asarray(vec, dtype=np.float64)
+    unit = _project_mean_zero(unit)
+    unit /= max(float(np.linalg.norm(unit)), 1.0e-300)
+    n = int(len(unit))
+    shell_int = np.asarray(shell_levels, dtype=np.int64)
+    axis_mask = np.asarray([_is_axis_mode(key) for key in mode_keys], dtype=bool)
+
+    total_good = 0.0
+    total_bad = 0.0
+    direct_good = 0.0
+    direct_bad = 0.0
+    mediated_good = 0.0
+    mediated_bad = 0.0
+    shell_pair_good: dict[str, float] = {}
+    shell_pair_bad: dict[str, float] = {}
+    sector_good = {"axis_axis": 0.0, "axis_mixed": 0.0, "nonaxis_nonaxis": 0.0}
+    sector_bad = {"axis_axis": 0.0, "axis_mixed": 0.0, "nonaxis_nonaxis": 0.0}
+
+    for start in range(0, n, row_chunk):
+        stop = min(start + row_chunk, n)
+        rows = np.arange(start, stop, dtype=np.int64)
+        diff2 = (unit[start:stop, None] - unit[None, :]) ** 2
+
+        total_chunk = np.asarray(M_CC[start:stop, :] - correction[start:stop, :], dtype=np.float64)
+        direct_chunk = np.asarray(M_CC[start:stop, :], dtype=np.float64)
+        mediated_chunk = np.asarray(-correction[start:stop, :], dtype=np.float64)
+
+        diag_rows = np.arange(stop - start, dtype=np.int64)
+        diag_cols = rows - start
+        for chunk in (total_chunk, direct_chunk, mediated_chunk):
+            chunk[diag_rows, diag_cols] = 0.0
+
+        total_good_w = np.maximum(-total_chunk, 0.0)
+        total_bad_w = np.maximum(total_chunk, 0.0)
+        direct_good_w = np.maximum(-direct_chunk, 0.0)
+        direct_bad_w = np.maximum(direct_chunk, 0.0)
+        mediated_good_w = np.maximum(-mediated_chunk, 0.0)
+        mediated_bad_w = np.maximum(mediated_chunk, 0.0)
+
+        total_good += 0.5 * float(np.sum(total_good_w * diff2))
+        total_bad += 0.5 * float(np.sum(total_bad_w * diff2))
+        direct_good += 0.5 * float(np.sum(direct_good_w * diff2))
+        direct_bad += 0.5 * float(np.sum(direct_bad_w * diff2))
+        mediated_good += 0.5 * float(np.sum(mediated_good_w * diff2))
+        mediated_bad += 0.5 * float(np.sum(mediated_bad_w * diff2))
+
+        row_shells = shell_int[start:stop]
+        for shell_a in sorted({int(v) for v in row_shells}):
+            mask_a = row_shells == shell_a
+            for shell_b in sorted({int(v) for v in shell_int}):
+                label = _shell_pair_label(shell_a, shell_b)
+                pair_mask = mask_a[:, None] & (shell_int[None, :] == shell_b)
+                shell_pair_good[label] = shell_pair_good.get(label, 0.0) + 0.5 * float(
+                    np.sum(total_good_w * diff2 * pair_mask)
+                )
+                shell_pair_bad[label] = shell_pair_bad.get(label, 0.0) + 0.5 * float(
+                    np.sum(total_bad_w * diff2 * pair_mask)
+                )
+
+        row_axis = axis_mask[start:stop]
+        aa = row_axis[:, None] & axis_mask[None, :]
+        nn = (~row_axis)[:, None] & (~axis_mask[None, :])
+        am = ~(aa | nn)
+        for label, mask in (("axis_axis", aa), ("axis_mixed", am), ("nonaxis_nonaxis", nn)):
+            sector_good[label] += 0.5 * float(np.sum(total_good_w * diff2 * mask))
+            sector_bad[label] += 0.5 * float(np.sum(total_bad_w * diff2 * mask))
+
+    total_ratio = float(total_bad / total_good) if total_good > 1.0e-14 else None
+    shell_pair_ratio = {
+        key: (
+            float(shell_pair_bad[key] / shell_pair_good[key])
+            if shell_pair_good.get(key, 0.0) > 1.0e-14
+            else None
+        )
+        for key in sorted(set(shell_pair_good) | set(shell_pair_bad))
+    }
+    sector_ratio = {
+        key: (float(sector_bad[key] / sector_good[key]) if sector_good[key] > 1.0e-14 else None)
+        for key in sector_good
+    }
+    return {
+        "rayleigh_ratio_on_extremizer": total_ratio,
+        "direct": {
+            "good_energy": float(direct_good),
+            "bad_energy": float(direct_bad),
+            "ratio": float(direct_bad / direct_good) if direct_good > 1.0e-14 else None,
+        },
+        "mediated": {
+            "good_energy": float(mediated_good),
+            "bad_energy": float(mediated_bad),
+            "ratio": float(mediated_bad / mediated_good) if mediated_good > 1.0e-14 else None,
+        },
+        "shell_pair": {
+            key: {
+                "good_energy": float(shell_pair_good.get(key, 0.0)),
+                "bad_energy": float(shell_pair_bad.get(key, 0.0)),
+                "ratio": shell_pair_ratio.get(key),
+            }
+            for key in sorted(shell_pair_ratio)
+        },
+        "axis_sector": {
+            key: {
+                "good_energy": float(sector_good[key]),
+                "bad_energy": float(sector_bad[key]),
+                "ratio": sector_ratio[key],
+            }
+            for key in sector_good
+        },
+    }
+
+
+def _domination_ratio_matrix_free_diagnostics(
+    M_CC: np.ndarray,
+    correction: np.ndarray,
+    *,
+    shell_levels: np.ndarray,
+    mode_keys: list[tuple[int, int, int]],
+    row_chunk: int = DEFAULT_DOMINATION_CHUNK_SIZE,
+    eps: float = DEFAULT_DOMINATION_EPS,
+    tol: float = 1.0e-8,
+    maxiter: int = 200,
+) -> dict[str, Any]:
+    n = int(M_CC.shape[0])
+    if n <= 1:
+        return {
+            "audit_requested": True,
+            "dense_audit_available": False,
+            "matrix_free_requested": True,
+            "status": "trivial",
+        }
+
+    setup = _build_chunked_signed_laplacian_state(M_CC, correction, row_chunk=row_chunk)
+    good_state = _ChunkedSignedLaplacian("good", np.asarray(setup["degree_good"], dtype=np.float64), int(row_chunk))
+    bad_state = _ChunkedSignedLaplacian("bad", np.asarray(setup["degree_bad"], dtype=np.float64), int(row_chunk))
+    reduced_n = n - 1
+
+    def _good_mv(x: np.ndarray) -> np.ndarray:
+        return _signed_laplacian_apply(x, M_CC=M_CC, correction=correction, state=good_state)
+
+    def _bad_mv(x: np.ndarray) -> np.ndarray:
+        return _signed_laplacian_apply(x, M_CC=M_CC, correction=correction, state=bad_state)
+
+    def _good_eps_mv(x: np.ndarray) -> np.ndarray:
+        vec = _project_mean_zero(np.asarray(x, dtype=np.float64))
+        return _good_mv(vec) + float(eps) * vec
+
+    def _reduced_from_full(full_mv):
+        def apply(y: np.ndarray) -> np.ndarray:
+            return _compress_one_perp_dual(full_mv(_lift_one_perp_coords(y)))
+        return apply
+
+    def _gram_mv(y: np.ndarray) -> np.ndarray:
+        vals = np.asarray(y, dtype=np.float64)
+        if vals.ndim == 1:
+            return vals + np.sum(vals) * np.ones_like(vals)
+        return vals + np.sum(vals, axis=0, keepdims=True)
+
+    good_red_op = LinearOperator((reduced_n, reduced_n), matvec=_reduced_from_full(_good_mv), dtype=np.float64)
+    bad_red_op = LinearOperator((reduced_n, reduced_n), matvec=_reduced_from_full(_bad_mv), dtype=np.float64)
+    good_eps_red_op = LinearOperator((reduced_n, reduced_n), matvec=_reduced_from_full(_good_eps_mv), dtype=np.float64)
+    gram_op = LinearOperator((reduced_n, reduced_n), matvec=_gram_mv, dtype=np.float64)
+
+    rho_value, rho_coords, rho_resid = _solve_projected_extremal_mode(
+        bad_red_op,
+        largest=True,
+        n=reduced_n,
+        seed=1729,
+        constraints=None,
+        b_operator=good_eps_red_op,
+        tol=tol,
+        maxiter=maxiter,
+    )
+    lambda1_good, _vec_good, good_resid = _solve_projected_extremal_mode(
+        good_red_op,
+        largest=False,
+        n=reduced_n,
+        seed=1730,
+        constraints=None,
+        b_operator=gram_op,
+        tol=tol,
+        maxiter=maxiter,
+    )
+    lambda_max_bad, _vec_bad, bad_resid = _solve_projected_extremal_mode(
+        bad_red_op,
+        largest=True,
+        n=reduced_n,
+        seed=1731,
+        constraints=None,
+        b_operator=gram_op,
+        tol=tol,
+        maxiter=maxiter,
+    )
+    rho_vec = _project_mean_zero(_lift_one_perp_coords(rho_coords))
+
+    rho_residual = _project_mean_zero(_bad_mv(rho_vec) - rho_value * _good_eps_mv(rho_vec))
+    rho_residual_norm = float(np.linalg.norm(rho_residual))
+    vector_diag = _vector_support_diagnostics(
+        rho_vec,
+        shell_levels=shell_levels,
+        mode_keys=mode_keys,
+        degree_good=np.asarray(setup["degree_good"], dtype=np.float64),
+        degree_bad=np.asarray(setup["degree_bad"], dtype=np.float64),
+    )
+    source_diag = _rayleigh_source_breakdown(
+        rho_vec,
+        M_CC=M_CC,
+        correction=correction,
+        shell_levels=shell_levels,
+        mode_keys=mode_keys,
+        row_chunk=int(row_chunk),
+    )
+
+    return {
+        "audit_requested": True,
+        "dense_audit_available": False,
+        "matrix_free_requested": True,
+        "status": "ok",
+        "decomposition": "S_C = L_good - L_bad",
+        "row_chunk": int(row_chunk),
+        "regularization_eps": float(eps),
+        "L_good_lambda1_one_perp": float(lambda1_good - eps),
+        "L_good_lambda1_one_perp_regularized": float(lambda1_good),
+        "L_bad_lambda_max_one_perp": float(lambda_max_bad),
+        "domination_ratio_sup_one_perp": float(rho_value),
+        "domination_ratio_residual_norm": rho_residual_norm,
+        "domination_ratio_solver_residual_norm": float(rho_resid),
+        "L_good_solver_residual_norm": float(good_resid),
+        "L_bad_solver_residual_norm": float(bad_resid),
+        "domination_holds_strictly_observed": bool(rho_value < 1.0 + 1.0e-8),
+        "worst_eigenvector_diagnostics": vector_diag,
+        "source_decomposition": source_diag,
+        "sign_statistics": setup["sign_stats"],
+    }
+
+
 def _audit_row(
     bundle: Any,
     snapshot: int,
@@ -580,6 +1111,11 @@ def _audit_row(
     dense_schur_threshold: int = DENSE_SCHUR_THRESHOLD,
     audit_effective_laplacian_signs: bool = False,
     audit_signed_factorization: bool = False,
+    audit_domination_ratio_matrix_free: bool = False,
+    domination_row_chunk: int = DEFAULT_DOMINATION_CHUNK_SIZE,
+    domination_eps: float = DEFAULT_DOMINATION_EPS,
+    domination_tol: float = 1.0e-8,
+    domination_maxiter: int = 200,
 ) -> dict[str, Any]:
     """Run the full Schur audit for one (N, K) row."""
     t0 = time.time()
@@ -669,6 +1205,7 @@ def _audit_row(
     print(f"  ‖M_GC‖ = {gc_norm:.6e}")
 
     c_shell_levels = shell_levels[c_indices]
+    c_mode_keys = _c_block_mode_keys(bundle, snapshot, n, c_indices, zero_eps)
     M_GG = blocks["M_GG"]
     M_GC = blocks["M_GC"]
     M_CC = blocks["M_CC"]
@@ -686,6 +1223,7 @@ def _audit_row(
     row_sum_diag: dict[str, Any] | None = None
     sign_audit_diag: dict[str, Any] | None = None
     signed_factorization_diag: dict[str, Any] | None = None
+    domination_ratio_diag: dict[str, Any] | None = None
 
     try:
         M_GG_sym = 0.5 * (M_GG + M_GG.T)
@@ -727,6 +1265,24 @@ def _audit_row(
                 sc_null_vec = None
             wsp_sc = _worst_eigenvector_support(S_C_dense, c_shell_levels)
             print("done.")
+            if audit_domination_ratio_matrix_free:
+                print(
+                    "  Computing domination ratio "
+                    f"(projected generalized eig, n={nc})...",
+                    end=" ",
+                    flush=True,
+                )
+                domination_ratio_diag = _domination_ratio_matrix_free_diagnostics(
+                    M_CC,
+                    correction,
+                    shell_levels=c_shell_levels,
+                    mode_keys=c_mode_keys,
+                    row_chunk=domination_row_chunk,
+                    eps=domination_eps,
+                    tol=domination_tol,
+                    maxiter=domination_maxiter,
+                )
+                print("done.")
         else:
             # Matrix-free eigsh path — avoids materialising S_C for large nc
             print(f"  Computing S_C bottom eigenvalues (matrix-free eigsh, n={nc})...",
@@ -761,6 +1317,24 @@ def _audit_row(
                 wsp_sc = {"support": _shell_mass, "lambda_min": _lmin}
                 print("done.")
                 print(f"  S_C bottom eigs: {[f'{v:.6e}' for v in _mf_eigs]}")
+                if audit_domination_ratio_matrix_free:
+                    print(
+                        "  Computing domination ratio "
+                        f"(matrix-free generalized eig, n={nc})...",
+                        end=" ",
+                        flush=True,
+                    )
+                    domination_ratio_diag = _domination_ratio_matrix_free_diagnostics(
+                        M_CC,
+                        correction,
+                        shell_levels=c_shell_levels,
+                        mode_keys=c_mode_keys,
+                        row_chunk=domination_row_chunk,
+                        eps=domination_eps,
+                        tol=domination_tol,
+                        maxiter=domination_maxiter,
+                    )
+                    print("done.")
             except Exception as _exc:
                 print(f"eigsh failed: {_exc}")
                 sc_ok = False
@@ -839,6 +1413,21 @@ def _audit_row(
                 "audit_requested": True,
                 "dense_audit_available": False,
             }
+    if audit_domination_ratio_matrix_free:
+        if domination_ratio_diag is not None:
+            print(
+                "  Matrix-free domination audit: "
+                f"rho_sup={domination_ratio_diag['domination_ratio_sup_one_perp']}, "
+                f"lambda1_good={domination_ratio_diag['L_good_lambda1_one_perp']}, "
+                f"lambda_max_bad={domination_ratio_diag['L_bad_lambda_max_one_perp']}"
+            )
+        else:
+            domination_ratio_diag = {
+                "audit_requested": True,
+                "dense_audit_available": False,
+                "matrix_free_requested": True,
+                "status": "unavailable",
+            }
 
     elapsed = time.time() - t0
     return {
@@ -861,6 +1450,7 @@ def _audit_row(
         "row_sum_diagnostics": row_sum_diag,
         "effective_laplacian_sign_diagnostics": sign_audit_diag,
         "signed_factorization_diagnostics": signed_factorization_diag,
+        "domination_ratio_matrix_free_diagnostics": domination_ratio_diag,
         "schur_complement_ok": sc_ok,
         "verdict": verdict,
         "elapsed_seconds": round(elapsed, 2),
@@ -932,6 +1522,14 @@ def _analyze(results: list[dict[str, Any]]) -> str:
                 f"lambda1(L_good)={factor_diag['L_good_lambda1']:.6e}, "
                 f"domination={factor_diag['domination_holds_strictly_observed']}"
             )
+        mf_diag = r.get("domination_ratio_matrix_free_diagnostics") or {}
+        if mf_diag.get("status") == "ok":
+            lines.append(
+                f"N={r['N']}: matrix-free rho_sup={mf_diag['domination_ratio_sup_one_perp']:.6e}, "
+                f"lambda1(L_good)={mf_diag['L_good_lambda1_one_perp']:.6e}, "
+                f"lambda_max(L_bad)={mf_diag['L_bad_lambda_max_one_perp']:.6e}, "
+                f"resid={mf_diag['domination_ratio_residual_norm']:.2e}"
+            )
     gc_norms = [r["M_GC_norm"] for r in results]
     lines.append(f"\nM_GC norms: {', '.join(f'{v:.2e}' for v in gc_norms)}")
     verdicts = {r["verdict"] for r in results}
@@ -976,6 +1574,38 @@ def main() -> None:
             "observed domination ratio sup_{x ⟂ 1} x^T L_bad x / x^T L_good x."
         ),
     )
+    parser.add_argument(
+        "--audit-domination-ratio-matrix-free",
+        action="store_true",
+        help=(
+            "Compute the projected generalized domination ratio on 1_C^⊥ using "
+            "CPU matrix-free chunked Laplacian matvecs derived from the Schur block."
+        ),
+    )
+    parser.add_argument(
+        "--domination-row-chunk",
+        type=int,
+        default=DEFAULT_DOMINATION_CHUNK_SIZE,
+        help="Row chunk size for the CPU matrix-free domination-ratio matvecs.",
+    )
+    parser.add_argument(
+        "--domination-eps",
+        type=float,
+        default=DEFAULT_DOMINATION_EPS,
+        help="Regularization epsilon added to L_good on 1_C^⊥ inside the generalized solver.",
+    )
+    parser.add_argument(
+        "--domination-tol",
+        type=float,
+        default=1.0e-8,
+        help="LOBPCG tolerance for the domination-ratio projected generalized eigensolve.",
+    )
+    parser.add_argument(
+        "--domination-maxiter",
+        type=int,
+        default=200,
+        help="LOBPCG max iterations for the domination-ratio projected generalized eigensolve.",
+    )
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
@@ -1002,6 +1632,11 @@ def main() -> None:
             dense_schur_threshold=args.dense_schur_threshold,
             audit_effective_laplacian_signs=args.audit_effective_laplacian_signs,
             audit_signed_factorization=args.audit_signed_factorization,
+            audit_domination_ratio_matrix_free=args.audit_domination_ratio_matrix_free,
+            domination_row_chunk=args.domination_row_chunk,
+            domination_eps=args.domination_eps,
+            domination_tol=args.domination_tol,
+            domination_maxiter=args.domination_maxiter,
         )
         results.append(result)
 
@@ -1027,6 +1662,15 @@ def main() -> None:
         (r["signed_factorization_diagnostics"] or {}).get("domination_holds_strictly_observed") is True
         for r in dense_domination_rows
     )
+    matrix_free_domination_rows = [
+        r for r in results
+        if (r.get("domination_ratio_matrix_free_diagnostics") or {}).get("status") == "ok"
+    ]
+    if matrix_free_domination_rows:
+        domination_ratio_below_one_observed = domination_ratio_below_one_observed or all(
+            (r["domination_ratio_matrix_free_diagnostics"] or {}).get("domination_holds_strictly_observed") is True
+            for r in matrix_free_domination_rows
+        )
 
     payload = {
         "script": SCRIPT_NAME,
@@ -1070,7 +1714,11 @@ def main() -> None:
             )
         ),
         "signedDominationProbeInstalled": bool(
-            any(r.get("signed_factorization_diagnostics") is not None for r in results)
+            any(
+                r.get("signed_factorization_diagnostics") is not None
+                or r.get("domination_ratio_matrix_free_diagnostics") is not None
+                for r in results
+            )
         ),
         "signedDominationRatioBelowOneObserved": domination_ratio_below_one_observed,
         "signedDominationRatioUniformlyBounded": False,

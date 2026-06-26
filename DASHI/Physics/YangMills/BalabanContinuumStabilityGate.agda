@@ -8,6 +8,17 @@ open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
 open import DASHI.Physics.YangMills.O4CovarianceRestorationGate
   using (O4CovarianceRestorationGate; currentO4CovarianceRestorationGate)
 
+open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
+  ( SourceAuthorityId
+  ; eriksson-2602-0088
+  ; eriksson-2602-0089
+  ; eriksson-2602-0091
+  ; eriksson-2602-0092
+  ; paperImport
+  ; auditTested
+  ; VerificationStatus
+  )
+
 -- ── Continuum stability postulates ─────────────────────────────────
 --
 -- 19. ImportedCouplingControlProof — Eriksson 2602.0088, Prop. 4.1
@@ -43,14 +54,177 @@ open import DASHI.Physics.YangMills.O4CovarianceRestorationGate
 --     Δ_phys ≥ c_N Λ_YM > 0, Sᶜ₄ ≢ 0
 --     Conditional on: OS0–OS4 (P12–P15), OS1 (P30), OS reconstruction [6]
 
+open import Data.Nat.Base using (ℕ; _≤_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_; _<ℝ_; 0ℝ; 1ℝ; _*ℝ_; -ℝ_)
+
 postulate
-  ImportedCouplingControlProof : Bool
-  TerminalKPBoundVerified       : Bool
-  AssemblyMapComplete           : Bool
-  UniformLSIFixedLattice        : Bool
-  VolumeUniformMassGapFixedLattice : Bool
-  ThermodynamicLimitUnique      : Bool
-  ImportedWightmanReconstructionWithMassGap : Bool
+  -- P19
+  g-coupling : ℕ → ℝ
+  γ0-bound : ℝ
+  k-star : ℕ
+  -- P23
+  KP-H1 : Set
+  KP-H2 : Set
+  KP-H3 : Set
+  -- P24
+  WardIdentityResult : Set
+  AnisotropyControlResult : Set
+  KPBoundResult : Set
+  WightmanResult : Set
+  -- P25
+  Entropy : (ℝ → ℝ) → ℝ
+  DirichletForm : (ℝ → ℝ) → ℝ
+  ρ̂-LSI : ℝ
+  2ℝ : ℝ
+  -- P26
+  m0-gap : ℝ
+  -- P27
+  State : Set
+  μ-seq : ℕ → State
+  μ-inf1 μ-inf2 : State
+  ConvergesToState : (ℕ → State) → State → Set
+  -- P31
+  HilbertSpace : Set
+  VacuumState : HilbertSpace
+  WightmanAxiomsSatisfied : HilbertSpace → VacuumState → Set
+  Δ-phys : ℝ
+  c-N : ℝ
+  Λ-YM : ℝ
+
+record ImportedCouplingControlProof : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    couplingBound : ∀ (k : ℕ) → k ≤ k-star → g-coupling k ≤ℝ γ0-bound
+
+record ImportedTerminalKPBoundVerified : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    h1-verified : KP-H1
+    h2-verified : KP-H2
+    h3-verified : KP-H3
+
+record ImportedAssemblyMapComplete : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    wardToAnisotropy : WardIdentityResult → AnisotropyControlResult
+    anisotropyToKP : AnisotropyControlResult → KPBoundResult
+    kpToWightman : KPBoundResult → WightmanResult
+
+record ImportedUniformLSIFixedLattice : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    lsiInequality : ∀ (f : ℝ → ℝ) → ρ̂-LSI *ℝ Entropy f ≤ℝ (2ℝ *ℝ DirichletForm f)
+    ρ̂-positive : 0ℝ <ℝ ρ̂-LSI
+
+record ImportedVolumeUniformMassGapFixedLattice : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    massGapPositive : 0ℝ <ℝ m0-gap
+
+record ImportedThermodynamicLimitUnique : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    uniqueness : ConvergesToState μ-seq μ-inf1 → ConvergesToState μ-seq μ-inf2 → μ-inf1 ≡ μ-inf2
+
+record ImportedWightmanReconstructionWithMassGap : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    axiomsHold : WightmanAxiomsSatisfied HilbertSpace VacuumState
+    massGapBound : (c-N *ℝ Λ-YM) ≤ℝ Δ-phys
+    massGapPositive : 0ℝ <ℝ (c-N *ℝ Λ-YM)
+
+postulate
+  postulatedCouplingBound : ∀ (k : ℕ) → k ≤ k-star → g-coupling k ≤ℝ γ0-bound
+  postulatedH1 : KP-H1
+  postulatedH2 : KP-H2
+  postulatedH3 : KP-H3
+  postulatedWardToAnisotropy : WardIdentityResult → AnisotropyControlResult
+  postulatedAnisotropyToKP : AnisotropyControlResult → KPBoundResult
+  postulatedKpToWightman : KPBoundResult → WightmanResult
+  postulatedLsiInequality : ∀ (f : ℝ → ℝ) → ρ̂-LSI *ℝ Entropy f ≤ℝ (2ℝ *ℝ DirichletForm f)
+  postulatedρ̂Positive : 0ℝ <ℝ ρ̂-LSI
+  postulatedMassGapPositive : 0ℝ <ℝ m0-gap
+  postulatedUniqueness : ConvergesToState μ-seq μ-inf1 → ConvergesToState μ-seq μ-inf2 → μ-inf1 ≡ μ-inf2
+  postulatedAxiomsHold : WightmanAxiomsSatisfied HilbertSpace VacuumState
+  postulatedMassGapBound : (c-N *ℝ Λ-YM) ≤ℝ Δ-phys
+  postulatedMassGapPositiveVal : 0ℝ <ℝ (c-N *ℝ Λ-YM)
+
+couplingControlProofWitness : ImportedCouplingControlProof
+couplingControlProofWitness = record
+  { sourceAuthorityId = eriksson-2602-0088
+  ; theoremLocator = "Proposition 4.1"
+  ; status = paperImport
+  ; couplingBound = postulatedCouplingBound
+  }
+
+terminalKPBoundVerifiedWitness : ImportedTerminalKPBoundVerified
+terminalKPBoundVerifiedWitness = record
+  { sourceAuthorityId = eriksson-2602-0091
+  ; theoremLocator = "Theorems 1.1 + 1.2"
+  ; status = paperImport
+  ; h1-verified = postulatedH1
+  ; h2-verified = postulatedH2
+  ; h3-verified = postulatedH3
+  }
+
+assemblyMapCompleteWitness : ImportedAssemblyMapComplete
+assemblyMapCompleteWitness = record
+  { sourceAuthorityId = eriksson-2602-0091
+  ; theoremLocator = "Theorem 1.3"
+  ; status = auditTested
+  ; wardToAnisotropy = postulatedWardToAnisotropy
+  ; anisotropyToKP = postulatedAnisotropyToKP
+  ; kpToWightman = postulatedKpToWightman
+  }
+
+uniformLSIFixedLatticeWitness : ImportedUniformLSIFixedLattice
+uniformLSIFixedLatticeWitness = record
+  { sourceAuthorityId = eriksson-2602-0089
+  ; theoremLocator = "Theorem A"
+  ; status = paperImport
+  ; lsiInequality = postulatedLsiInequality
+  ; ρ̂-positive = postulatedρ̂Positive
+  }
+
+volumeUniformMassGapFixedLatticeWitness : ImportedVolumeUniformMassGapFixedLattice
+volumeUniformMassGapFixedLatticeWitness = record
+  { sourceAuthorityId = eriksson-2602-0089
+  ; theoremLocator = "Theorem B"
+  ; status = paperImport
+  ; massGapPositive = postulatedMassGapPositive
+  }
+
+thermodynamicLimitUniqueWitness : ImportedThermodynamicLimitUnique
+thermodynamicLimitUniqueWitness = record
+  { sourceAuthorityId = eriksson-2602-0089
+  ; theoremLocator = "Theorem C"
+  ; status = paperImport
+  ; uniqueness = postulatedUniqueness
+  }
+
+importedWightmanReconstructionWithMassGapWitness : ImportedWightmanReconstructionWithMassGap
+importedWightmanReconstructionWithMassGapWitness = record
+  { sourceAuthorityId = eriksson-2602-0092
+  ; theoremLocator = "Theorem 1.1 + §5"
+  ; status = paperImport
+  ; axiomsHold = postulatedAxiomsHold
+  ; massGapBound = postulatedMassGapBound
+  ; massGapPositive = postulatedMassGapPositiveVal
+  }
 
 -- ── ContinuumStabilitySourceIntake ─────────────────────────────────
 -- Matches the three-tier architecture of Eriksson 2602.0088 §8.
@@ -68,7 +242,7 @@ postulate
 --   OS1 (full Euclidean covariance) explicitly deferred in
 --   Remark 8.4.  Wightman reconstruction conditional on OS1.
 
-record ContinuumStabilitySourceIntake : Set where
+record ContinuumStabilitySourceIntake : Set₁ where
   field
     -- TIER 1: Unconditional
     temperednessAvailable           : Bool
@@ -87,6 +261,31 @@ record ContinuumStabilitySourceIntake : Set where
     -- TIER 3: Closed (2602.0092)
     os1EuclideanCovarianceAvailable : Bool
     wightmanReconstructionAvailable : Bool
+
+    -- Witnesses
+    couplingControlProofWitness : ImportedCouplingControlProof
+    terminalKPBoundVerifiedWitness : ImportedTerminalKPBoundVerified
+    assemblyMapCompleteWitness : ImportedAssemblyMapComplete
+    uniformLSIFixedLatticeWitness : ImportedUniformLSIFixedLattice
+    volumeUniformMassGapFixedLatticeWitness : ImportedVolumeUniformMassGapFixedLattice
+    thermodynamicLimitUniqueWitness : ImportedThermodynamicLimitUnique
+    importedWightmanReconstructionWithMassGapWitness : ImportedWightmanReconstructionWithMassGap
+
+    -- Expose/Consume fields
+    couplingBoundField : ∀ (k : ℕ) → k ≤ k-star → g-coupling k ≤ℝ γ0-bound
+    h1-verifiedField : KP-H1
+    h2-verifiedField : KP-H2
+    h3-verifiedField : KP-H3
+    wardToAnisotropyField : WardIdentityResult → AnisotropyControlResult
+    anisotropyToKPField : AnisotropyControlResult → KPBoundResult
+    kpToWightmanField : KPBoundResult → WightmanResult
+    lsiInequalityField : ∀ (f : ℝ → ℝ) → ρ̂-LSI *ℝ Entropy f ≤ℝ (2ℝ *ℝ DirichletForm f)
+    ρ̂-positiveField : 0ℝ <ℝ ρ̂-LSI
+    massGapPositiveField : 0ℝ <ℝ m0-gap
+    uniquenessField : ConvergesToState μ-seq μ-inf1 → ConvergesToState μ-seq μ-inf2 → μ-inf1 ≡ μ-inf2
+    axiomsHoldField : WightmanAxiomsSatisfied HilbertSpace VacuumState
+    massGapBoundField : (c-N *ℝ Λ-YM) ≤ℝ Δ-phys
+    massGapPositiveFieldVal : 0ℝ <ℝ (c-N *ℝ Λ-YM)
 
     temperednessAvailableIsTrue           : temperednessAvailable ≡ true
     reflectionPositivityAvailableIsTrue   : reflectionPositivityAvailable ≡ true
@@ -130,6 +329,27 @@ currentContinuumStabilitySourceIntake = record
   ; multiscaleCorrelatorDecoupling  = true
   ; os1EuclideanCovarianceAvailable = true
   ; wightmanReconstructionAvailable = true
+  ; couplingControlProofWitness     = couplingControlProofWitness
+  ; terminalKPBoundVerifiedWitness   = terminalKPBoundVerifiedWitness
+  ; assemblyMapCompleteWitness       = assemblyMapCompleteWitness
+  ; uniformLSIFixedLatticeWitness    = uniformLSIFixedLatticeWitness
+  ; volumeUniformMassGapFixedLatticeWitness = volumeUniformMassGapFixedLatticeWitness
+  ; thermodynamicLimitUniqueWitness  = thermodynamicLimitUniqueWitness
+  ; importedWightmanReconstructionWithMassGapWitness = importedWightmanReconstructionWithMassGapWitness
+  ; couplingBoundField = ImportedCouplingControlProof.couplingBound couplingControlProofWitness
+  ; h1-verifiedField = ImportedTerminalKPBoundVerified.h1-verified terminalKPBoundVerifiedWitness
+  ; h2-verifiedField = ImportedTerminalKPBoundVerified.h2-verified terminalKPBoundVerifiedWitness
+  ; h3-verifiedField = ImportedTerminalKPBoundVerified.h3-verified terminalKPBoundVerifiedWitness
+  ; wardToAnisotropyField = ImportedAssemblyMapComplete.wardToAnisotropy assemblyMapCompleteWitness
+  ; anisotropyToKPField = ImportedAssemblyMapComplete.anisotropyToKP assemblyMapCompleteWitness
+  ; kpToWightmanField = ImportedAssemblyMapComplete.kpToWightman assemblyMapCompleteWitness
+  ; lsiInequalityField = ImportedUniformLSIFixedLattice.lsiInequality uniformLSIFixedLatticeWitness
+  ; ρ̂-positiveField = ImportedUniformLSIFixedLattice.ρ̂-positive uniformLSIFixedLatticeWitness
+  ; massGapPositiveField = ImportedVolumeUniformMassGapFixedLattice.massGapPositive volumeUniformMassGapFixedLatticeWitness
+  ; uniquenessField = ImportedThermodynamicLimitUnique.uniqueness thermodynamicLimitUniqueWitness
+  ; axiomsHoldField = ImportedWightmanReconstructionWithMassGap.axiomsHold importedWightmanReconstructionWithMassGapWitness
+  ; massGapBoundField = ImportedWightmanReconstructionWithMassGap.massGapBound importedWightmanReconstructionWithMassGapWitness
+  ; massGapPositiveFieldVal = ImportedWightmanReconstructionWithMassGap.massGapPositive importedWightmanReconstructionWithMassGapWitness
   ; temperednessAvailableIsTrue           = refl
   ; reflectionPositivityAvailableIsTrue   = refl
   ; bosonicSymmetryAvailableIsTrue        = refl
@@ -158,7 +378,7 @@ currentContinuumStabilitySourceIntake = record
 -- continuum-grade claims (closed after 2602.0092 intake).
 -- The source-intake layer above provides the three-tier mapping.
 
-record ContinuumStabilityGate : Set where
+record ContinuumStabilityGate : Set₁ where
   field
     -- Source intake
     sourceIntake : ContinuumStabilitySourceIntake

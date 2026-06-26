@@ -50,19 +50,177 @@ open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
 --     Consequence: a²×a⁻² → O(1) attack is structurally blocked
 --     Conditional on: P20 (anisotropic classification, 2602.0087 Thm 3.6)
 
+open import Data.Nat.Base using (ℕ)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_; _<ℝ_; 0ℝ; 1ℝ; _*ℝ_; -ℝ_; _+ℝ_; absℝ)
+
 postulate
-  AnisotropicSubspaceClassificationTheorem : Bool
-  AnisotropyCoeffQuadraticBound            : Bool
-  InsertionIntegrabilityBound              : Bool
-  ImportedRotationalWardIdentity           : Bool
-  ImportedSymanzikBreakingDecomposition    : Bool
-  ImportedOS1EuclideanCovariance           : Bool
-  TriangularMixingPreventiveLock           : Bool
+  -- P20
+  O6os : Set
+  KerProjAniso : Set
+  SpanOAniso : Set
+  O6aniso : Set
+  dim : Set → ℕ
+  _⊕_ : Set → Set → Set
+  -- P21
+  c6aniso : ℕ → ℝ
+  C-aniso : ℝ
+  a-step : ℕ → ℝ
+  -- P22
+  I-insertion : ℝ → (ℝ → ℝ) → ℝ
+  C-f : (ℝ → ℝ) → ℝ
+  -- P28
+  E-error : ℝ → ℕ → (ℝ → ℝ) → ℝ
+  C-n : ℕ → ℝ
+  normW11 : (ℝ → ℝ) → ℝ
+  -- P29
+  δsW : ℕ → ℕ → ℝ → ℝ
+  g0-inv : ℝ → ℝ
+  λ-coeff : ℕ → ℕ → ℝ
+  Oaniso : ℝ → ℝ
+  Q-O4 : ℕ → ℕ → ℝ → ℝ
+  remainderSymanzik : ℝ → ℝ
+  -- P30
+  L-rot-operator : ℕ → ℕ → (ℕ → ℝ) → (ℕ → ℝ)
+  SchwingerLimit : ℕ → ℝ
+  zeroObservable : ℕ → ℝ
+  -- P32
+  Z-mixing : Set → Set
+  O6-aniso-W4 : Set
+  O4-W4-O4inv : Set
+  _⊂_ : Set → Set → Set
+
+open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
+  ( SourceAuthorityId
+  ; eriksson-2602-0087
+  ; eriksson-2602-0092
+  ; eriksson-2602-0096
+  ; paperImport
+  ; VerificationStatus
+  )
+
+record ImportedAnisotropicSubspaceClassificationTheorem : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    subspaceDecomposition : O6os ≡ (KerProjAniso ⊕ SpanOAniso)
+    dimensionIsOne : dim O6aniso ≡ 1
+
+record ImportedAnisotropyCoeffQuadraticBound : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    coefficientBound : ∀ (k : ℕ) → absℝ (c6aniso k) ≤ℝ (C-aniso *ℝ (a-step k *ℝ a-step k))
+
+record ImportedInsertionIntegrabilityBound : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    insertionBound : ∀ (η : ℝ) (f : ℝ → ℝ) → I-insertion η f ≤ℝ C-f f
+
+record ImportedRotationalWardIdentity : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    errorBound : ∀ (η : ℝ) (n : ℕ) (f : ℝ → ℝ) → absℝ (E-error η n f) ≤ℝ (C-n n *ℝ (η *ℝ η) *ℝ normW11 f)
+
+record ImportedSymanzikBreakingDecomposition : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    decomposition : ∀ (μ ν : ℕ) (η : ℝ) (y : ℝ) →
+      δsW μ ν y ≡ (g0-inv η *ℝ g0-inv η) *ℝ (η *ℝ η) *ℝ (λ-coeff μ ν *ℝ Oaniso y +ℝ Q-O4 μ ν y +ℝ remainderSymanzik η)
+
+record ImportedOS1EuclideanCovariance : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    covariantLimit : ∀ (μ ν : ℕ) → L-rot-operator μ ν SchwingerLimit ≡ zeroObservable
+
+record ImportedTriangularMixingPreventiveLock : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    preventiveLock : Z-mixing O6-aniso-W4 ⊂ O4-W4-O4inv
+
+postulate
+  postulatedSubspaceDecomposition : O6os ≡ (KerProjAniso ⊕ SpanOAniso)
+  postulatedDimensionIsOne : dim O6aniso ≡ 1
+  postulatedCoefficientBound : ∀ (k : ℕ) → absℝ (c6aniso k) ≤ℝ (C-aniso *ℝ (a-step k *ℝ a-step k))
+  postulatedInsertionBound : ∀ (η : ℝ) (f : ℝ → ℝ) → I-insertion η f ≤ℝ C-f f
+  postulatedErrorBound : ∀ (η : ℝ) (n : ℕ) (f : ℝ → ℝ) → absℝ (E-error η n f) ≤ℝ (C-n n *ℝ (η *ℝ η) *ℝ normW11 f)
+  postulatedDecomposition : ∀ (μ ν : ℕ) (η : ℝ) (y : ℝ) →
+    δsW μ ν y ≡ (g0-inv η *ℝ g0-inv η) *ℝ (η *ℝ η) *ℝ (λ-coeff μ ν *ℝ Oaniso y +ℝ Q-O4 μ ν y +ℝ remainderSymanzik η)
+  postulatedCovariantLimit : ∀ (μ ν : ℕ) → L-rot-operator μ ν SchwingerLimit ≡ zeroObservable
+  postulatedPreventiveLock : Z-mixing O6-aniso-W4 ⊂ O4-W4-O4inv
+
+anisotropicSubspaceClassificationTheoremWitness : ImportedAnisotropicSubspaceClassificationTheorem
+anisotropicSubspaceClassificationTheoremWitness = record
+  { sourceAuthorityId = eriksson-2602-0087
+  ; theoremLocator = "Theorem 3.6"
+  ; status = paperImport
+  ; subspaceDecomposition = postulatedSubspaceDecomposition
+  ; dimensionIsOne = postulatedDimensionIsOne
+  }
+
+anisotropyCoeffQuadraticBoundWitness : ImportedAnisotropyCoeffQuadraticBound
+anisotropyCoeffQuadraticBoundWitness = record
+  { sourceAuthorityId = eriksson-2602-0087
+  ; theoremLocator = "Theorem 5.4"
+  ; status = paperImport
+  ; coefficientBound = postulatedCoefficientBound
+  }
+
+insertionIntegrabilityBoundWitness : ImportedInsertionIntegrabilityBound
+insertionIntegrabilityBoundWitness = record
+  { sourceAuthorityId = eriksson-2602-0087
+  ; theoremLocator = "Theorem 6.6"
+  ; status = paperImport
+  ; insertionBound = postulatedInsertionBound
+  }
+
+importedRotationalWardIdentityWitness : ImportedRotationalWardIdentity
+importedRotationalWardIdentityWitness = record
+  { sourceAuthorityId = eriksson-2602-0092
+  ; theoremLocator = "Proposition 3.2"
+  ; status = paperImport
+  ; errorBound = postulatedErrorBound
+  }
+
+importedSymanzikBreakingDecompositionWitness : ImportedSymanzikBreakingDecomposition
+importedSymanzikBreakingDecompositionWitness = record
+  { sourceAuthorityId = eriksson-2602-0092
+  ; theoremLocator = "Proposition 3.4"
+  ; status = paperImport
+  ; decomposition = postulatedDecomposition
+  }
+
+importedOS1EuclideanCovarianceWitness : ImportedOS1EuclideanCovariance
+importedOS1EuclideanCovarianceWitness = record
+  { sourceAuthorityId = eriksson-2602-0092
+  ; theoremLocator = "Theorem 4.2 + Corollary 4.3"
+  ; status = paperImport
+  ; covariantLimit = postulatedCovariantLimit
+  }
+
+triangularMixingPreventiveLockWitness : ImportedTriangularMixingPreventiveLock
+triangularMixingPreventiveLockWitness = record
+  { sourceAuthorityId = eriksson-2602-0096
+  ; theoremLocator = "Theorem 8.5 + Corollary 8.6"
+  ; status = paperImport
+  ; preventiveLock = postulatedPreventiveLock
+  }
 
 -- ── O4CovarianceRestorationGate ─────────────────────────────────────
 -- Every boolean is now true after 2602.0092 intake.
 
-record O4CovarianceRestorationGate : Set where
+record O4CovarianceRestorationGate : Set₁ where
   field
     -- UNCONDITIONAL
     hypercubicCovarianceAvailable        : Bool
@@ -79,6 +237,26 @@ record O4CovarianceRestorationGate : Set where
 
     -- CLOSED (2602.0096 §8.5–8.6)
     triangularLockVerified               : Bool
+
+    -- Witnesses
+    anisotropicSubspaceClassificationTheoremWitness : ImportedAnisotropicSubspaceClassificationTheorem
+    anisotropyCoeffQuadraticBoundWitness            : ImportedAnisotropyCoeffQuadraticBound
+    insertionIntegrabilityBoundWitness              : ImportedInsertionIntegrabilityBound
+    importedRotationalWardIdentityWitness           : ImportedRotationalWardIdentity
+    importedSymanzikBreakingDecompositionWitness    : ImportedSymanzikBreakingDecomposition
+    importedOS1EuclideanCovarianceWitness           : ImportedOS1EuclideanCovariance
+    triangularMixingPreventiveLockWitness           : ImportedTriangularMixingPreventiveLock
+
+    -- Expose/Consume fields
+    subspaceDecompositionField : O6os ≡ (KerProjAniso ⊕ SpanOAniso)
+    dimensionIsOneField : dim O6aniso ≡ 1
+    coefficientBoundField : ∀ (k : ℕ) → absℝ (c6aniso k) ≤ℝ (C-aniso *ℝ (a-step k *ℝ a-step k))
+    insertionBoundField : ∀ (η : ℝ) (f : ℝ → ℝ) → I-insertion η f ≤ℝ C-f f
+    errorBoundField : ∀ (η : ℝ) (n : ℕ) (f : ℝ → ℝ) → absℝ (E-error η n f) ≤ℝ (C-n n *ℝ (η *ℝ η) *ℝ normW11 f)
+    decompositionField : ∀ (μ ν : ℕ) (η : ℝ) (y : ℝ) →
+      δsW μ ν y ≡ (g0-inv η *ℝ g0-inv η) *ℝ (η *ℝ η) *ℝ (λ-coeff μ ν *ℝ Oaniso y +ℝ Q-O4 μ ν y +ℝ remainderSymanzik η)
+    covariantLimitField : ∀ (μ ν : ℕ) → L-rot-operator μ ν SchwingerLimit ≡ zeroObservable
+    preventiveLockField : Z-mixing O6-aniso-W4 ⊂ O4-W4-O4inv
 
     -- Aggregate
     os1EuclideanCovarianceAvailable      : Bool
@@ -111,6 +289,21 @@ currentO4CovarianceRestorationGate = record
   ; rotationalWardIdentitiesAvailable    = true
   ; continuumSchwingerO4Covariant        = true
   ; triangularLockVerified               = true
+  ; anisotropicSubspaceClassificationTheoremWitness = anisotropicSubspaceClassificationTheoremWitness
+  ; anisotropyCoeffQuadraticBoundWitness            = anisotropyCoeffQuadraticBoundWitness
+  ; insertionIntegrabilityBoundWitness              = insertionIntegrabilityBoundWitness
+  ; importedRotationalWardIdentityWitness           = importedRotationalWardIdentityWitness
+  ; importedSymanzikBreakingDecompositionWitness    = importedSymanzikBreakingDecompositionWitness
+  ; importedOS1EuclideanCovarianceWitness           = importedOS1EuclideanCovarianceWitness
+  ; triangularMixingPreventiveLockWitness           = triangularMixingPreventiveLockWitness
+  ; subspaceDecompositionField = ImportedAnisotropicSubspaceClassificationTheorem.subspaceDecomposition anisotropicSubspaceClassificationTheoremWitness
+  ; dimensionIsOneField = ImportedAnisotropicSubspaceClassificationTheorem.dimensionIsOne anisotropicSubspaceClassificationTheoremWitness
+  ; coefficientBoundField = ImportedAnisotropyCoeffQuadraticBound.coefficientBound anisotropyCoeffQuadraticBoundWitness
+  ; insertionBoundField = ImportedInsertionIntegrabilityBound.insertionBound insertionIntegrabilityBoundWitness
+  ; errorBoundField = ImportedRotationalWardIdentity.errorBound importedRotationalWardIdentityWitness
+  ; decompositionField = ImportedSymanzikBreakingDecomposition.decomposition importedSymanzikBreakingDecompositionWitness
+  ; covariantLimitField = ImportedOS1EuclideanCovariance.covariantLimit importedOS1EuclideanCovarianceWitness
+  ; preventiveLockField = ImportedTriangularMixingPreventiveLock.preventiveLock triangularMixingPreventiveLockWitness
   ; os1EuclideanCovarianceAvailable      = true
   ; hypercubicCovarianceAvailableIsTrue        = refl
   ; isotropicBareActionAvailableIsTrue         = refl
