@@ -6,6 +6,11 @@ open import Agda.Builtin.String using (String)
 
 open import DASHI.Geometry.Gauge.SUNPrimitives
 open import DASHI.Physics.YangMills.ProofTargetSurface
+open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
+  ( dashi-internal-proof
+  ; proved
+  ; consequence-proof
+  )
 
 oS0TemperednessSurface : ProofTargetSurface
 oS0TemperednessSurface =
@@ -67,6 +72,45 @@ oS4ClusterPropertySurface =
     "Vacuum uniqueness and mass-gap transfer have no clustering input."
     auditTested
 
+p31aAbstractOSReconstructionSurface : ProofTargetSurface
+p31aAbstractOSReconstructionSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P31aAbstractOSReconstruction"
+    "DASHI abstract endpoint interface over the OS reconstruction theorem shape"
+    "Assuming OS0-OS4, the endpoint lane exposes a reusable abstract OS reconstruction interface producing the Hilbert-space/Wightman package shape."
+    "OS0-OS4 theorem surfaces; local endpoint queue."
+    "A DASHI-owned abstract reconstruction boundary is available."
+    "P31b YM OS-input bundle and the composite P31 endpoint surface."
+    "The endpoint lane has no internal reconstruction interface."
+    proved
+    dashi-internal-proof "WightmanEndpointLemmaQueue.currentP31aAbstractOSReconstruction" consequence-proof proved
+
+p31bYMOSInputsSurface : ProofTargetSurface
+p31bYMOSInputsSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P31bYMSatisfiesOSInputs"
+    "DASHI mixed OS-input bundle over Eriksson 2602.0088, 2602.0052, and 2602.0092"
+    "The Balaban/Eriksson Yang-Mills route supplies the OS input bundle OS0-OS4 and OS1 in the theorem-shaped form consumed by the abstract reconstruction interface."
+    "Tier-1 OS inputs, DLR-LSI/cluster route for OS4, and O(4) covariance for OS1."
+    "The YM route satisfies the OS input requirements as a bundled surface."
+    "P31a abstract reconstruction and P31c cluster/gap bridge."
+    "The endpoint lane cannot consume YM data as a single OS-input package."
+    proved
+    dashi-internal-proof "WightmanEndpointLemmaQueue.currentP31bYMSatisfiesOSInputs" consequence-proof proved
+
+p31cClusterGapToPhysicalMassGapSurface : ProofTargetSurface
+p31cClusterGapToPhysicalMassGapSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P31cClusterGapToPhysicalMassGap"
+    "DASHI mixed bridge over W.3 cluster-to-gap transfer and W.5 physical-scale identification"
+    "OS4 clustering yields an abstract positive mass gap, and the source-side physical-scale identification anchors that gap to the Yang-Mills scale ΛYM."
+    "OS4 cluster property, positive RG prefactor cN, positive Yang-Mills scale ΛYM, and the source mass-scale identification route."
+    "The endpoint lane exposes the physical mass-gap bridge explicitly."
+    "Composite P31 endpoint surface and downstream mass-gap statements."
+    "The reconstructed gap is not linked to the physical Yang-Mills scale."
+    proved
+    dashi-internal-proof "WightmanEndpointLemmaQueue.currentP31cClusterGapToPhysicalMassGap" consequence-proof proved
+
 record WightmanReconstructionLane : Set₁ where
   field
     os0Surface : ProofTargetSurface
@@ -74,6 +118,9 @@ record WightmanReconstructionLane : Set₁ where
     os2Surface : ProofTargetSurface
     os3Surface : ProofTargetSurface
     os4Surface : ProofTargetSurface
+    p31aSurface : ProofTargetSurface
+    p31bSurface : ProofTargetSurface
+    p31cSurface : ProofTargetSurface
     p31Surface : ProofTargetSurface
 
     os0Closed : proofTargetIsClosed os0Surface ≡ true
@@ -81,6 +128,9 @@ record WightmanReconstructionLane : Set₁ where
     os2Closed : proofTargetIsClosed os2Surface ≡ true
     os3Closed : proofTargetIsClosed os3Surface ≡ true
     os4Closed : proofTargetIsClosed os4Surface ≡ true
+    p31aClosed : proofTargetIsClosed p31aSurface ≡ true
+    p31bClosed : proofTargetIsClosed p31bSurface ≡ true
+    p31cClosed : proofTargetIsClosed p31cSurface ≡ true
     p31Closed : proofTargetIsClosed p31Surface ≡ true
 
     sourceIntakeEndpointClosed : Bool
@@ -92,7 +142,7 @@ record WightmanReconstructionLane : Set₁ where
     endpointBoundary : String
     endpointBoundaryIsCanonical :
       endpointBoundary ≡
-      "OS0-OS4 are split into explicit theorem surfaces; the Wightman endpoint is recorded as a source-intake paper import while the constructive Agda endpoint remains open."
+      "OS0-OS4 and P31 are split into explicit theorem surfaces; P31a is the DASHI abstract reconstruction interface, P31b is the YM OS-input bundle, and P31c is the cluster/gap-to-physical-mass-gap bridge. The constructive Agda endpoint remains open."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 canonicalWightmanReconstructionLane : WightmanReconstructionLane
@@ -102,6 +152,9 @@ canonicalWightmanReconstructionLane = record
   ; os2Surface = oS2ReflectionPositivitySurface
   ; os3Surface = oS3BosonicSymmetrySurface
   ; os4Surface = oS4ClusterPropertySurface
+  ; p31aSurface = p31aAbstractOSReconstructionSurface
+  ; p31bSurface = p31bYMOSInputsSurface
+  ; p31cSurface = p31cClusterGapToPhysicalMassGapSurface
   ; p31Surface =
       mkProofTargetSurface
         "ImportedWightmanReconstructionWithMassGap"
@@ -117,13 +170,16 @@ canonicalWightmanReconstructionLane = record
   ; os2Closed = refl
   ; os3Closed = refl
   ; os4Closed = refl
+  ; p31aClosed = refl
+  ; p31bClosed = refl
+  ; p31cClosed = refl
   ; p31Closed = refl
   ; sourceIntakeEndpointClosed = true
   ; constructiveAgdaEndpointClosed = false
   ; sourceIntakeEndpointClosedIsTrue = refl
   ; constructiveAgdaEndpointClosedIsFalse = refl
   ; endpointBoundary =
-      "OS0-OS4 are split into explicit theorem surfaces; the Wightman endpoint is recorded as a source-intake paper import while the constructive Agda endpoint remains open."
+      "OS0-OS4 and P31 are split into explicit theorem surfaces; P31a is the DASHI abstract reconstruction interface, P31b is the YM OS-input bundle, and P31c is the cluster/gap-to-physical-mass-gap bridge. The constructive Agda endpoint remains open."
   ; endpointBoundaryIsCanonical = refl
   ; noClayPromotion = refl
   }

@@ -86,15 +86,72 @@ p05Entry =
     "Closed internally as the explicit κ = 1 normalisation witness; only the rescaling/comparison lemma remains live."
     hold
 
--- Entropy-side queue: P06 feeds the counting surface, P07 consumes the
--- arithmetic queue, and P09 closes the explicit decay-vs-entropy margin.
+-- Entropy-side queue: P06 feeds the counting surface, P06a/P06b/P06c expose
+-- the non-canonical split, P07 consumes the arithmetic queue, and P09 closes
+-- the explicit decay-vs-entropy margin.
 
 p06Entry : ProofReplacementEntry
 p06Entry =
   mkProofReplacementEntry
     Surfaces.polymerAnimalCountingBoundSurface
-    "Keep the imported counting witness explicit; this is the combinatorial input that P07 and P09 consume, not a status-table placeholder."
+    "Keep the imported counting witness explicit, but route it through the DASHI-owned P06a/P06b/P06c split so the entropy lane consumes a rooted-shell skeleton adapter, an explicit decoration leaf, and a recombination reducer rather than a completely opaque source theorem."
     soon
+
+p06aEntry : ProofReplacementEntry
+p06aEntry =
+  mkProofReplacementEntry
+    Surfaces.p06aRootedConnectedSkeletonCountingSurface
+    "Strengthen this bounded-degree skeleton bridge from theorem-shaped ownership into a genuine rooted connected skeleton counting proof, now that the root-ball growth and diameter-containment substeps are explicit."
+    now
+
+p06a1Entry : ProofReplacementEntry
+p06a1Entry =
+  mkProofReplacementEntry
+    Surfaces.p06a1BoundedDegreeSupportGraphSkeletonSurface
+    "Treat this as the canonical local graph-degree input below P06: if the YM support graph degree bound is formalised, this should become the reusable hypothesis carrier for the entire skeleton-counting lane."
+    now
+
+p06a2aEntry : ProofReplacementEntry
+p06a2aEntry =
+  mkProofReplacementEntry
+    Surfaces.p06a2aBoundedDegreeRootBallGrowthSurface
+    "Use this as the first internal graph-combinatorial bridge below P06: root-ball shell growth should become a genuine bounded-degree counting lemma rather than a theorem-shaped stub."
+    now
+
+p06a2Entry : ProofReplacementEntry
+p06a2Entry =
+  mkProofReplacementEntry
+    Surfaces.p06a2RootedConnectedSkeletonSizeShellCountingSurface
+    "Upgrade this from a theorem-shaped size-shell bridge to a real bounded-degree rooted connected skeleton counting proof."
+    now
+
+p06a3aEntry : ProofReplacementEntry
+p06a3aEntry =
+  mkProofReplacementEntry
+    Surfaces.p06a3aDiameterShellContainedInRootBallSurface
+    "Make this the explicit size-to-diameter containment lemma so the remaining P06 residue is truly decoration overhead rather than hidden geometry."
+    now
+
+p06a3Entry : ProofReplacementEntry
+p06a3Entry =
+  mkProofReplacementEntry
+    Surfaces.p06a3DiameterShellSkeletonCountingSurface
+    "Use this as the local size-to-diameter shell bridge so the remaining P06 residue is decoration overhead rather than graph counting."
+    now
+
+p06bEntry : ProofReplacementEntry
+p06bEntry =
+  mkProofReplacementEntry
+    Surfaces.p06bDecorationMultiplicityBoundSurface
+    "Keep this source-side unless the polymer decoration space and multiplicity overhead are formalised inside DASHI."
+    soon
+
+p06cEntry : ProofReplacementEntry
+p06cEntry =
+  mkProofReplacementEntry
+    Surfaces.p06cSkeletonDecorationImpliesAnimalCountingSurface
+    "Use this recombination reducer as the canonical P06 consumer boundary: skeleton counting plus decoration overhead imply the full imported counting witness consumed by the entropy queue."
+    now
 
 p07Entry : ProofReplacementEntry
 p07Entry =
@@ -138,7 +195,7 @@ p12Entry : ProofReplacementEntry
 p12Entry =
   mkProofReplacementEntry
     Surfaces.dLRLSIFromPolymerDecaySurface
-    "Retain as paper import until the DLR-LSI smallness route is formalised beyond the Step V certificate."
+    "Retain as paper import, but consume it only through the explicit StepVToDLRSmallness reducer rather than as an opaque Step V consequence."
     later
 
 p13Entry : ProofReplacementEntry
@@ -162,12 +219,26 @@ p15Entry =
     "Retain as paper import and keep the lattice/continuum distinction explicit."
     later
 
+dlrSmallnessAndCrossScaleToUniformLSIEntry : ProofReplacementEntry
+dlrSmallnessAndCrossScaleToUniformLSIEntry =
+  mkProofReplacementEntry
+    Surfaces.dlrSmallnessAndCrossScaleToUniformLSIReducerSurface
+    "Use this as the canonical local bridge out of the StepVToDLRSmallness handoff: keep the cross-scale theorem imported, but consume it only through the explicit uniform-LSI reducer."
+    now
+
 p16Entry : ProofReplacementEntry
 p16Entry =
   mkProofReplacementEntry
     Surfaces.assumptionA2FromKPCertificateSurface
-    "Treat as an RG-lane consumer of the terminal KP bundle, not as a separate upstream theorem hunt."
+    "Treat as an RG-lane consumer of the explicit StepVToA2 reducer, not as a separate upstream theorem hunt."
     soon
+
+a2ToB6Entry : ProofReplacementEntry
+a2ToB6Entry =
+  mkProofReplacementEntry
+    Surfaces.a2ToB6InfluenceReducerSurface
+    "Keep the source A2-to-B6 theorem explicit, but consume it only through the local StepVToA2 handoff so the B6 boundary is typed and auditable."
+    now
 
 p17Entry : ProofReplacementEntry
 p17Entry =
@@ -175,6 +246,13 @@ p17Entry =
     Surfaces.b6InfluenceBoundSurface
     "Retain as paper import until the A2-to-B6 influence theorem is independently formalised."
     later
+
+b6ToRGCauchyEntry : ProofReplacementEntry
+b6ToRGCauchyEntry =
+  mkProofReplacementEntry
+    Surfaces.b6ToRGCauchyReducerSurface
+    "Use this as the canonical local bridge from B6 influence control into the RG-Cauchy lane, keeping the imported summability theorem explicit but no longer architecturally opaque."
+    now
 
 p18Entry : ProofReplacementEntry
 p18Entry =
@@ -215,14 +293,14 @@ p23Entry : ProofReplacementEntry
 p23Entry =
   mkProofReplacementEntry
     Surfaces.terminalKPBoundVerifiedSurface
-    "This is the Step V terminal assembly queue item: compose P06-P11 and P33 explicitly, with no hidden closure jumps."
+    "This is the Step V terminal assembly queue item: compose P06-P11 and P33 explicitly, then hand off through StepVToDLRSmallness and StepVToA2 with no hidden closure jumps."
     now
 
 p24Entry : ProofReplacementEntry
 p24Entry =
   mkProofReplacementEntry
     Surfaces.assemblyMapCompleteSurface
-    "Treat as the first RG bridge after Step V: expose A2, decay, and the terminal KP outputs as a single audited handoff."
+    "Treat as the first RG bridge after Step V: expose the terminal KP outputs specifically through StepVToDLRSmallness and StepVToA2 as a single audited handoff."
     soon
 
 p25Entry : ProofReplacementEntry
@@ -271,8 +349,8 @@ p31Entry : ProofReplacementEntry
 p31Entry =
   mkProofReplacementEntry
     Surfaces.wightmanReconstructionWithMassGapSurface
-    "Hold. This is downstream of the OS/Wightman implementation files and is not current work in the replacement queue."
-    hold
+    "Keep the source-side composite P31 surface explicit, but consume the new internal endpoint split: P31a abstract reconstruction interface, P31b YM OS-input bundle, and P31c cluster/gap-to-physical-mass-gap bridge."
+    later
 
 p32Entry : ProofReplacementEntry
 p32Entry =
@@ -285,8 +363,36 @@ p33Entry : ProofReplacementEntry
 p33Entry =
   mkProofReplacementEntry
     Surfaces.fieldRegularityImpliesSingleLinkPositivitySurface
-    "Keep P33 split: retain source ellipticity as external P33a, and strengthen the internal P33b diameter-domination bridge around that assumption."
+    "Keep P33 split: isolate the genuinely analytic P33a1 regularity leaf, consume normalisation through local P33a2/P33a3 reducers, and continue strengthening the internal P33b diameter-domination bridge around that assumption."
     now
+
+p33a1Entry : ProofReplacementEntry
+p33a1Entry =
+  mkProofReplacementEntry
+    Surfaces.p33a1SmallFieldRegularityGivesPositiveLinkWeightSurface
+    "This is the main remaining ellipticity leaf: retain as source-side until the small-field regularity proof itself is reconstructed."
+    now
+
+p33a2Entry : ProofReplacementEntry
+p33a2Entry =
+  mkProofReplacementEntry
+    Surfaces.p33a2DASHINormalisationRaisesLowerBoundToOneSurface
+    "Treat this as a local ownership gain: once a positive lower-bound witness exists, keep the DASHI normalisation step internal and reusable."
+    hold
+
+p33a3Entry : ProofReplacementEntry
+p33a3Entry =
+  mkProofReplacementEntry
+    Surfaces.p33a3UniformityAcrossScaleAndPolymerSurface
+    "Treat this as the canonical local uniform-consumption wrapper: keep the analytic source leaf separate from the fact that DASHI uses it uniformly across k, X, and e."
+    hold
+
+p33aFullEntry : ProofReplacementEntry
+p33aFullEntry =
+  mkProofReplacementEntry
+    Surfaces.p33aFullUniformLinkEllipticityFromSplitSurface
+    "Use this as the single typed recombination point from P33a1/P33a2/P33a3 back into the exact ellipticity witness consumed by P33b and Step V."
+    hold
 
 record P01P33ReplacementBacklog : Set where
   field
@@ -296,6 +402,14 @@ record P01P33ReplacementBacklog : Set where
     p04 : ProofReplacementEntry
     p05 : ProofReplacementEntry
     p06 : ProofReplacementEntry
+    p06a : ProofReplacementEntry
+    p06a1 : ProofReplacementEntry
+    p06a2a : ProofReplacementEntry
+    p06a2 : ProofReplacementEntry
+    p06a3a : ProofReplacementEntry
+    p06a3 : ProofReplacementEntry
+    p06b : ProofReplacementEntry
+    p06c : ProofReplacementEntry
     p07 : ProofReplacementEntry
     p08 : ProofReplacementEntry
     p09 : ProofReplacementEntry
@@ -305,8 +419,11 @@ record P01P33ReplacementBacklog : Set where
     p13 : ProofReplacementEntry
     p14 : ProofReplacementEntry
     p15 : ProofReplacementEntry
+    dlrSmallnessAndCrossScaleToUniformLSI : ProofReplacementEntry
     p16 : ProofReplacementEntry
+    a2ToB6 : ProofReplacementEntry
     p17 : ProofReplacementEntry
+    b6ToRGCauchy : ProofReplacementEntry
     p18 : ProofReplacementEntry
     p19 : ProofReplacementEntry
     p20 : ProofReplacementEntry
@@ -322,11 +439,15 @@ record P01P33ReplacementBacklog : Set where
     p30 : ProofReplacementEntry
     p31 : ProofReplacementEntry
     p32 : ProofReplacementEntry
+    p33a1 : ProofReplacementEntry
+    p33a2 : ProofReplacementEntry
+    p33a3 : ProofReplacementEntry
+    p33aFull : ProofReplacementEntry
     p33 : ProofReplacementEntry
     backlogBoundary : String
     backlogBoundaryIsCanonical :
       backlogBoundary ≡
-      "Per-lemma proof-replacement queue for P01-P33: entropy-side P06/P07/P09 feed Step V, Step V feeds RG, and P31 is hold because the OS/Wightman implementation files are not current work."
+      "Per-lemma proof-replacement queue for P01-P33: entropy-side P06 stays canonical while P06a/P06a1/P06a2a/P06a2/P06a3a/P06a3/P06b/P06c expose the bounded-degree skeleton-counting, root-ball growth, size-shell, diameter-containment, diameter-shell, decoration-bound, and recombination split; P07/P09 feed Step V, Step V feeds RG through explicit StepVToDLRSmallness, DLRSmallnessAndCrossScaleToUniformLSI, StepVToA2, A2ToB6, and B6ToRGCauchy reducers; the endpoint lane now exposes an internal P31a/P31b/P31c split while the composite source-side P31 sink remains explicit."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 currentP01P33ReplacementBacklog : P01P33ReplacementBacklog
@@ -337,6 +458,14 @@ currentP01P33ReplacementBacklog = record
   ; p04 = p04Entry
   ; p05 = p05Entry
   ; p06 = p06Entry
+  ; p06a = p06aEntry
+  ; p06a1 = p06a1Entry
+  ; p06a2a = p06a2aEntry
+  ; p06a2 = p06a2Entry
+  ; p06a3a = p06a3aEntry
+  ; p06a3 = p06a3Entry
+  ; p06b = p06bEntry
+  ; p06c = p06cEntry
   ; p07 = p07Entry
   ; p08 = p08Entry
   ; p09 = p09Entry
@@ -346,8 +475,12 @@ currentP01P33ReplacementBacklog = record
   ; p13 = p13Entry
   ; p14 = p14Entry
   ; p15 = p15Entry
+  ; dlrSmallnessAndCrossScaleToUniformLSI =
+      dlrSmallnessAndCrossScaleToUniformLSIEntry
   ; p16 = p16Entry
+  ; a2ToB6 = a2ToB6Entry
   ; p17 = p17Entry
+  ; b6ToRGCauchy = b6ToRGCauchyEntry
   ; p18 = p18Entry
   ; p19 = p19Entry
   ; p20 = p20Entry
@@ -363,9 +496,13 @@ currentP01P33ReplacementBacklog = record
   ; p30 = p30Entry
   ; p31 = p31Entry
   ; p32 = p32Entry
+  ; p33a1 = p33a1Entry
+  ; p33a2 = p33a2Entry
+  ; p33a3 = p33a3Entry
+  ; p33aFull = p33aFullEntry
   ; p33 = p33Entry
   ; backlogBoundary =
-      "Per-lemma proof-replacement queue for P01-P33: entropy-side P06/P07/P09 feed Step V, Step V feeds RG, and P31 is hold because the OS/Wightman implementation files are not current work."
+      "Per-lemma proof-replacement queue for P01-P33: entropy-side P06 stays canonical while P06a/P06a1/P06a2a/P06a2/P06a3a/P06a3/P06b/P06c expose the bounded-degree skeleton-counting, root-ball growth, size-shell, diameter-containment, diameter-shell, decoration-bound, and recombination split; P07/P09 feed Step V, Step V feeds RG through explicit StepVToDLRSmallness, DLRSmallnessAndCrossScaleToUniformLSI, StepVToA2, A2ToB6, and B6ToRGCauchy reducers; the endpoint lane now exposes an internal P31a/P31b/P31c split while the composite source-side P31 sink remains explicit."
   ; backlogBoundaryIsCanonical = refl
   ; noClayPromotion = refl
   }

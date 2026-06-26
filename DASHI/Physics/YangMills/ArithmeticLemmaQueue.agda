@@ -227,6 +227,72 @@ lemmaP07-3-fromBound =
 --   0 ≤ B by activityDecayRateNonneg;
 --   A * B < 1 by animalCountingBoundHolds. QED.
 
+record EntropyMarginFromDiameterConstant : Set where
+  field
+    strictNatMargin :
+      9271 < 10000
+    fourQIsCanonical : String
+    fourQIsCanonicalOK :
+      fourQIsCanonical ≡ "4q = 0.9271 = 9271/10000"
+    fourQNonnegative : 0ℝ ≤ℝ fourQ-ℝ
+    fourQStrictlySubunit : fourQ-ℝ <ℝ 1ℝ
+    marginTheorem :
+      ∀ (cDiam : ℝ) →
+      0ℝ ≤ℝ cDiam →
+      cDiam ≤ℝ 1ℝ →
+      (cDiam *ℝ fourQ-ℝ) <ℝ 1ℝ
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary
+        ≡ "P09 reducer: 9271 < 10000 is constructed internally, fourQ is fixed as 9271/10000, and the full margin chain closes for every nonnegative C_diam <= 1."
+
+currentEntropyMarginFromDiameterConstant :
+  EntropyMarginFromDiameterConstant
+currentEntropyMarginFromDiameterConstant = record
+  { strictNatMargin =
+      lemmaP09-1-nineThousandTwoHundredSeventyOneIsLessThanTenThousand
+  ; fourQIsCanonical = fourQ-value-canonical
+  ; fourQIsCanonicalOK = fourQ-value-canonicalOK
+  ; fourQNonnegative = fourQ-ge-0
+  ; fourQStrictlySubunit = fourQ-lt-1
+  ; marginTheorem = lemmaP09-4-generalMarginFromBounds
+  ; proofBoundary =
+      "P09 reducer: 9271 < 10000 is constructed internally, fourQ is fixed as 9271/10000, and the full margin chain closes for every nonnegative C_diam <= 1."
+  ; proofBoundaryIsCanonical = refl
+  }
+
+record KPSummabilityReducerFromAnimalDecayAndMargin : Set where
+  field
+    reducer :
+      ∀ (A B : ℝ) →
+      0ℝ ≤ℝ A →
+      0ℝ ≤ℝ B →
+      (A *ℝ B) <ℝ 1ℝ →
+      Summable (λ n → powℝ A n *ℝ powℝ B n)
+    animalRateNonnegative : 0ℝ ≤ℝ animalCountRate
+    activityRateNonnegative : 0ℝ ≤ℝ activityDecayRate
+    entropyMargin :
+      animalCountRate *ℝ activityDecayRate <ℝ 1ℝ
+    instantiatedReducer :
+      Summable (λ n → powℝ animalCountRate n *ℝ powℝ activityDecayRate n)
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary
+        ≡ "P07 reducer: animal counting plus activity decay plus the AB < 1 entropy margin reduce compositionally to KP summability."
+
+currentKPSummabilityReducerFromAnimalDecayAndMargin :
+  KPSummabilityReducerFromAnimalDecayAndMargin
+currentKPSummabilityReducerFromAnimalDecayAndMargin = record
+  { reducer = lemmaP07-2-entropyDecaySeriesConverges
+  ; animalRateNonnegative = animalCountRateNonneg
+  ; activityRateNonnegative = activityDecayRateNonneg
+  ; entropyMargin = animalCountingBoundHolds
+  ; instantiatedReducer = lemmaP07-3-fromBound
+  ; proofBoundary =
+      "P07 reducer: animal counting plus activity decay plus the AB < 1 entropy margin reduce compositionally to KP summability."
+  ; proofBoundaryIsCanonical = refl
+  }
+
 -- ── Assembly record ─────────────────────────────────────────────────
 --
 -- Bundles all Sprint 3–4 results into a single typed record.
@@ -248,9 +314,15 @@ record ArithmeticLemmaQueueBundle : Set where
       cDiam ≤ℝ 1ℝ →
       (cDiam *ℝ fourQ-ℝ) <ℝ 1ℝ
 
+    p09Reducer :
+      EntropyMarginFromDiameterConstant
+
     -- Sprint 4 P07.3: KP summability
     kpSummable :
       Summable (λ n → powℝ animalCountRate n *ℝ powℝ activityDecayRate n)
+
+    p07Reducer :
+      KPSummabilityReducerFromAnimalDecayAndMargin
 
     -- Boundary documentation
     proofBoundary : String
@@ -267,7 +339,9 @@ currentArithmeticLemmaQueueBundle = record
   ; kappaNormalised = lemmaP05-1-kappaNormalisedToOne
   ; fourQIsLtOne    = fourQ-lt-1
   ; marginClosed    = lemmaP09-4-generalMarginFromBounds
+  ; p09Reducer      = currentEntropyMarginFromDiameterConstant
   ; kpSummable      = lemmaP07-3-fromBound
+  ; p07Reducer      = currentKPSummabilityReducerFromAnimalDecayAndMargin
   ; proofBoundary   =
       "Sprint 3: κ > 0 and κ = 1 are theorem-bearing witnesses. Sprint 4: 9271 < 10000 is proved by a finite offset lemma, margin arithmetic is composed, and the remaining geometric-series / entropy-decay steps stay as named real-analysis postulates. KP summability reduces compositionally through P07.2 and P07.1."
   ; proofBoundaryIsCanonical = refl

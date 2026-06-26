@@ -26,15 +26,18 @@ module DASHI.Physics.YangMills.StepVAssemblyLemmaQueue where
 open import Agda.Builtin.Bool   using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Data.Nat.Base       using (ℕ)
+open import Data.List.Base      using (List; length)
+open import Data.Nat.Base       using (ℕ; _≤_; _*_)
 
 open import DASHI.Geometry.Gauge.SUNPrimitives
   using (clayYangMillsPromoted)
 open import DASHI.Foundations.RealAnalysisAxioms
-  using (ℝ; _≤ℝ_; _<ℝ_; 0ℝ; 1ℝ; _*ℝ_; -ℝ_)
+  using (ℝ; _≤ℝ_; _<ℝ_; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; -ℝ_)
 
 import DASHI.Physics.YangMills.ArithmeticLemmaQueue as ArithmeticQueue
 import DASHI.Physics.YangMills.BalabanAnisotropicDiameterCompatibility as ADC
+import DASHI.Physics.YangMills.BalabanLargeFieldSuppression as LargeField
+import DASHI.Physics.YangMills.BalabanPolymerDiameterEntropy as Entropy
 
 -- ── Step V abstract real-analysis helpers ────────────────────────────
 --
@@ -127,10 +130,22 @@ stepVKPSummability =
   ArithmeticQueue.ArithmeticLemmaQueueBundle.kpSummable
     stepVArithmeticQueue
 
+stepVP07Reducer :
+  ArithmeticQueue.KPSummabilityReducerFromAnimalDecayAndMargin
+stepVP07Reducer =
+  ArithmeticQueue.ArithmeticLemmaQueueBundle.p07Reducer
+    stepVArithmeticQueue
+
 stepVMarginClosure :
   ArithmeticQueue.ArithmeticLemmaQueueBundle.marginClosed stepVArithmeticQueue
 stepVMarginClosure =
   ArithmeticQueue.ArithmeticLemmaQueueBundle.marginClosed
+    stepVArithmeticQueue
+
+stepVP09Reducer :
+  ArithmeticQueue.EntropyMarginFromDiameterConstant
+stepVP09Reducer =
+  ArithmeticQueue.ArithmeticLemmaQueueBundle.p09Reducer
     stepVArithmeticQueue
 
 postulate
@@ -150,6 +165,74 @@ postulate
     : (∀ (k : ℕ) (X : ADC.Polymer)
        → zAniso k X ≤ℝ (stepVConstant *ℝ expℝ-SV (-ℝ ADC.diam-ordinary k X)))
     → StepVSpatialKPCertificate
+
+  stepVAnalyticAssembler
+    : (∀ (Polymer : Set)
+         (diameter : Polymer → ℕ)
+         (root : Polymer)
+         (n : ℕ)
+         (polymers : List Polymer) →
+       length polymers ≤ (n * n))
+    → (∀ (k : ℕ) (X-dist : ℝ) (R-val : ℝ)
+       → R-val ≤ℝ
+          (LargeField.expℝ (-ℝ (LargeField.p0 k))
+           *ℝ LargeField.expℝ (-ℝ (LargeField.κ *ℝ X-dist))))
+    → (∀ (k : ℕ)
+       → (LargeField.d-dim -ℝ 1ℝ) *ℝ LargeField.logℝ LargeField.L-constant
+         +ℝ LargeField.C-abs-const
+         ≤ℝ (LargeField.c-abs *ℝ LargeField.p0 k))
+    → (∀ (k : ℕ) (X : ADC.Polymer)
+       → zAniso k X ≤ℝ
+          (stepVConstant *ℝ expℝ-SV (-ℝ ADC.diam-ordinary k X)))
+    → ArithmeticQueue.Summable
+        (λ n →
+          ArithmeticQueue.powℝ ArithmeticQueue.animalCountRate n
+          *ℝ
+          ArithmeticQueue.powℝ ArithmeticQueue.activityDecayRate n)
+    → (∀ (cDiam : ℝ)
+       → 0ℝ ≤ℝ cDiam
+       → cDiam ≤ℝ 1ℝ
+       → (cDiam *ℝ ArithmeticQueue.fourQ-ℝ) <ℝ 1ℝ)
+    → StepVSpatialKPCertificate
+
+record StepVSourceAnalyticInputs : Set₁ where
+  field
+    p06AnimalCounting : Entropy.ImportedPolymerAnimalCountingBound
+    p10LargeFieldActivity : LargeField.ImportedLargeFieldActivityBound
+    p11AbsorptionCondition : LargeField.ImportedAbsorptionCondition
+    p33aUniformLinkEllipticity : ADC.P33aUniformLinkEllipticityWrapper
+
+record StepVInternalReducers : Set₁ where
+  field
+    p33bDiameterDomination :
+      ADC.P33bWeightedTreeDistanceDominatesOrdinaryDiameter
+    p07KPSummabilityReducer :
+      ArithmeticQueue.KPSummabilityReducerFromAnimalDecayAndMargin
+    p09EntropyMarginReducer :
+      ArithmeticQueue.EntropyMarginFromDiameterConstant
+
+StepVMarginFromP33bAndArithmetic
+  : Entropy.ImportedPolymerAnimalCountingBound
+  → LargeField.ImportedLargeFieldActivityBound
+  → LargeField.ImportedAbsorptionCondition
+  → ADC.P33aUniformLinkEllipticityWrapper
+  → ADC.P33bWeightedTreeDistanceDominatesOrdinaryDiameter
+  → ArithmeticQueue.KPSummabilityReducerFromAnimalDecayAndMargin
+  → ArithmeticQueue.EntropyMarginFromDiameterConstant
+  → StepVSpatialKPCertificate
+StepVMarginFromP33bAndArithmetic p06 p10 p11 p33a p33b p07 p09 =
+  stepVAnalyticAssembler
+    (Entropy.ImportedPolymerAnimalCountingBound.countingBound p06)
+    (LargeField.ImportedLargeFieldActivityBound.activityBound p10)
+    (LargeField.ImportedAbsorptionCondition.absorptionInequality p11)
+    (λ k X →
+      lemmaV-1-P33bGivesAdmissibleDiameterDecay k X
+        (ADC.P33bWeightedTreeDistanceDominatesOrdinaryDiameter.weightedDistanceDominatesDiameterProof
+           p33b
+           (ADC.P33aUniformLinkEllipticityWrapper.linkRegularityWitness p33a)
+           k X))
+    (ArithmeticQueue.KPSummabilityReducerFromAnimalDecayAndMargin.instantiatedReducer p07)
+    (ArithmeticQueue.EntropyMarginFromDiameterConstant.marginTheorem p09)
 
 -- ── Lemma V.3a: Step V from any ordinary-diameter decay bound ────────
 --
@@ -174,15 +257,22 @@ lemmaV-3a-stepVFromOrdinaryDecayBound ordinaryDecay =
 --   → Lemma V.2 (KP certificate assembler)
 --
 -- This is the canonical path to Step V from the source inputs.
+-- The named mixed theorem `StepVMarginFromP33bAndArithmetic` is the
+-- DASHI-owned reducer:
+--   P06 + P10 + P11 + P33a  (analytic/source-side)
+--   + P33b + P07 + P09      (internal graph/arithmetic reducers)
+--   → StepVSpatialKPCertificate
 
 lemmaV-3b-fromP33aAndWeightedDecay : StepVSpatialKPCertificate
 lemmaV-3b-fromP33aAndWeightedDecay =
-  lemmaV-3a-stepVFromOrdinaryDecayBound
-    (λ k X →
-      lemmaV-1-P33bGivesAdmissibleDiameterDecay k X
-        (diameterDominationFromEllipticity k X
-          (uniformLinkEllipticityHolds k X)
-          mLinkGeOne))
+  StepVMarginFromP33bAndArithmetic
+    Entropy.polymerAnimalCountingBoundWitness
+    LargeField.postulatedLargeFieldActivityBoundWitness
+    LargeField.postulatedAbsorptionConditionWitness
+    ADC.currentP33aUniformLinkEllipticityWrapper
+    ADC.currentP33bWeightedTreeDistanceDominatesOrdinaryDiameter
+    stepVP07Reducer
+    stepVP09Reducer
 
 -- ── Sprint 7: DLR-LSI / RG-Cauchy decomposition ─────────────────────
 --
@@ -225,6 +315,92 @@ postulate
   RGCauchySummability-SV : Set
   -- Cross-scale influence summability type.
   CrossScaleInfluenceSummable-SV : Set
+
+record StepVPolymerDecayCertificate : Set where
+  field
+    stepVCertificate :
+      StepVSpatialKPCertificate
+    ordinaryDiameterDecay :
+      ∀ (k : ℕ) (X : ADC.Polymer)
+      → zAniso k X ≤ℝ
+          (stepVConstant *ℝ expℝ-SV (-ℝ ADC.diam-ordinary k X))
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary
+        ≡ "Step V polymer-decay certificate: the mixed Step V reducer exposes ordinary-diameter decay as the consumable interface for RG/DLR handoff."
+
+record StepVToDLRSmallness : Set where
+  field
+    polymerDecayCertificate : StepVPolymerDecayCertificate
+    deltaSmallness :
+      ∀ (k : ℕ) → δ-SV k <ℝ αblk-SV
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary
+        ≡ "StepVToDLRSmallness: StepVSpatialKPCertificate is first re-expressed as a polymer-decay certificate, then consumed by the DLR smallness inequality δ_k < α_blk."
+
+record StepVToA2 : Set where
+  field
+    stepVCertificate :
+      StepVSpatialKPCertificate
+    assumptionA2Witness :
+      AssumptionA2-SV
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary
+        ≡ "StepVToA2: the Step V spatial KP certificate is exposed as the exact oscillation/A2 input consumed by the RG-Cauchy lane."
+
+record A2ToB6Influence : Set where
+  field
+    a2Witness : StepVToA2
+    b6InfluenceWitness : B6InfluenceBound-SV
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary
+        ≡ "A2ToB6Influence: the Step V supplied A2 oscillation witness is consumed as the exact input to the B6 influence-bound theorem."
+
+record B6ToRGCauchy : Set where
+  field
+    a2ToB6Witness : A2ToB6Influence
+    rgCauchyWitness : RGCauchySummability-SV
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary
+        ≡ "B6ToRGCauchy: once the B6 influence profile is exposed, the RG-Cauchy lane consumes it as the exact summable increment witness."
+
+record DLRSmallnessAndCrossScaleToUniformLSI : Set where
+  field
+    deltaSmallnessWitness : StepVToDLRSmallness
+    crossScaleWitness : CrossScaleInfluenceSummable-SV
+    uniformLSIWitness : 0ℝ <ℝ LSI-ρ
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary
+        ≡ "DLRSmallnessAndCrossScaleToUniformLSI: the Step V supplied DLR smallness witness and the cross-scale summability witness are consumed together as the exact inputs to the uniform LSI bridge."
+
+lemmaRG-1a-stepVYieldsPolymerDecayCertificate
+  : StepVSpatialKPCertificate
+  → StepVPolymerDecayCertificate
+lemmaRG-1a-stepVYieldsPolymerDecayCertificate stepV = record
+  { stepVCertificate = stepV
+  ; ordinaryDiameterDecay =
+      λ k X →
+        lemmaV-1-P33bGivesAdmissibleDiameterDecay k X
+          (diameterDominationFromEllipticity
+             k X
+             (uniformLinkEllipticityHolds k X)
+             mLinkGeOne)
+  ; proofBoundary =
+      "Step V polymer-decay certificate: the mixed Step V reducer exposes ordinary-diameter decay as the consumable interface for RG/DLR handoff."
+  ; proofBoundaryIsCanonical = refl
+  }
+
+lemmaRG-1b-polymerDecayCertificateImpliesDLRSmallness
+  : StepVPolymerDecayCertificate
+  → ∀ (k : ℕ) → δ-SV k <ℝ αblk-SV
+lemmaRG-1b-polymerDecayCertificateImpliesDLRSmallness polymerDecay =
+  lemmaRG-1-polymerDecayImpliesDLRSmallness
+    (StepVPolymerDecayCertificate.stepVCertificate polymerDecay)
 
 -- ── RG.1: Polymer decay implies DLR smallness ────────────────────────
 --
@@ -284,6 +460,31 @@ postulate
     : StepVSpatialKPCertificate
     → AssumptionA2-SV
 
+stepVToDLRSmallness
+  : StepVSpatialKPCertificate
+  → StepVToDLRSmallness
+stepVToDLRSmallness stepV = record
+  { polymerDecayCertificate =
+      lemmaRG-1a-stepVYieldsPolymerDecayCertificate stepV
+  ; deltaSmallness =
+      lemmaRG-1b-polymerDecayCertificateImpliesDLRSmallness
+        (lemmaRG-1a-stepVYieldsPolymerDecayCertificate stepV)
+  ; proofBoundary =
+      "StepVToDLRSmallness: StepVSpatialKPCertificate is first re-expressed as a polymer-decay certificate, then consumed by the DLR smallness inequality δ_k < α_blk."
+  ; proofBoundaryIsCanonical = refl
+  }
+
+stepVToA2
+  : StepVSpatialKPCertificate
+  → StepVToA2
+stepVToA2 stepV = record
+  { stepVCertificate = stepV
+  ; assumptionA2Witness = lemmaRG-6-A2FromKPCertificate stepV
+  ; proofBoundary =
+      "StepVToA2: the Step V spatial KP certificate is exposed as the exact oscillation/A2 input consumed by the RG-Cauchy lane."
+  ; proofBoundaryIsCanonical = refl
+  }
+
 -- ── RG.7: A2 implies the B6 influence seminorm bound ─────────────────
 --
 -- The B6 Efron-Stein influence bound follows from A2.
@@ -303,6 +504,46 @@ postulate
     : B6InfluenceBound-SV
     → RGCauchySummability-SV
 
+a2ToB6Influence
+  : StepVSpatialKPCertificate
+  → A2ToB6Influence
+a2ToB6Influence stepV = record
+  { a2Witness = stepVToA2 stepV
+  ; b6InfluenceWitness =
+      lemmaRG-7-A2ImpliesB6InfluenceBound
+        (StepVToA2.assumptionA2Witness (stepVToA2 stepV))
+  ; proofBoundary =
+      "A2ToB6Influence: the Step V supplied A2 oscillation witness is consumed as the exact input to the B6 influence-bound theorem."
+  ; proofBoundaryIsCanonical = refl
+  }
+
+b6ToRGCauchy
+  : StepVSpatialKPCertificate
+  → B6ToRGCauchy
+b6ToRGCauchy stepV = record
+  { a2ToB6Witness = a2ToB6Influence stepV
+  ; rgCauchyWitness =
+      lemmaRG-8-B6ImpliesRGCauchy
+        (A2ToB6Influence.b6InfluenceWitness (a2ToB6Influence stepV))
+  ; proofBoundary =
+      "B6ToRGCauchy: once the B6 influence profile is exposed, the RG-Cauchy lane consumes it as the exact summable increment witness."
+  ; proofBoundaryIsCanonical = refl
+  }
+
+dlrSmallnessAndCrossScaleToUniformLSI
+  : StepVSpatialKPCertificate
+  → DLRSmallnessAndCrossScaleToUniformLSI
+dlrSmallnessAndCrossScaleToUniformLSI stepV = record
+  { deltaSmallnessWitness = stepVToDLRSmallness stepV
+  ; crossScaleWitness = lemmaRG-2-crossScaleInfluenceSummable stepV
+  ; uniformLSIWitness =
+      lemmaRG-3-DLRSmallnessImpliesLSI
+        (StepVToDLRSmallness.deltaSmallness (stepVToDLRSmallness stepV))
+  ; proofBoundary =
+      "DLRSmallnessAndCrossScaleToUniformLSI: the Step V supplied DLR smallness witness and the cross-scale summability witness are consumed together as the exact inputs to the uniform LSI bridge."
+  ; proofBoundaryIsCanonical = refl
+  }
+
 -- ── RG-lane composed branches ────────────────────────────────────────
 --
 -- Both RG branches are composed from the postulated lemmas above.
@@ -314,17 +555,16 @@ lemmaRG-DLRLSIBranch
   → HasExponentialClustering-SV
 lemmaRG-DLRLSIBranch stepV =
   lemmaRG-4-uniformLSIImpliesExpClustering
-    (lemmaRG-3-DLRSmallnessImpliesLSI
-      (lemmaRG-1-polymerDecayImpliesDLRSmallness stepV))
+    (DLRSmallnessAndCrossScaleToUniformLSI.uniformLSIWitness
+      (dlrSmallnessAndCrossScaleToUniformLSI stepV))
 
 -- RG-Cauchy branch: Step V → RG-Cauchy summability (RG.6 → RG.7 → RG.8)
 lemmaRG-CauchyBranch
   : StepVSpatialKPCertificate
   → RGCauchySummability-SV
 lemmaRG-CauchyBranch stepV =
-  lemmaRG-8-B6ImpliesRGCauchy
-    (lemmaRG-7-A2ImpliesB6InfluenceBound
-      (lemmaRG-6-A2FromKPCertificate stepV))
+  B6ToRGCauchy.rgCauchyWitness
+    (b6ToRGCauchy stepV)
 
 -- Full DLR branch also yields the lattice spectral gap
 lemmaRG-DLRLatticeGap
@@ -332,8 +572,8 @@ lemmaRG-DLRLatticeGap
   → 0ℝ <ℝ Δ-latt
 lemmaRG-DLRLatticeGap stepV =
   lemmaRG-5-LSIImpliesLatticeSpectralGap
-    (lemmaRG-3-DLRSmallnessImpliesLSI
-      (lemmaRG-1-polymerDecayImpliesDLRSmallness stepV))
+    (DLRSmallnessAndCrossScaleToUniformLSI.uniformLSIWitness
+      (dlrSmallnessAndCrossScaleToUniformLSI stepV))
 
 -- ── Step V + RG assembly bundle ──────────────────────────────────────
 --
@@ -360,7 +600,7 @@ record StepVRGAssemblyBundle : Set where
     proofStructure   : String
     proofStructureIsCanonical
       : proofStructure
-        ≡ "Sprint 5: Step V assembled from P33b (diameter domination) + P06/P10/P11 (external analytic). Sprint 7: RG DLR-LSI branch (RG.1-RG.5) and RG-Cauchy branch (RG.6-RG.8) composed from Step V certificate. Internal composition lemmas are proved; analytic/external inputs remain postulated."
+        ≡ "Sprint 5: Step V assembled by StepVMarginFromP33bAndArithmetic, consuming P06/P10/P11/P33a as source inputs and P33b/P07/P09 as DASHI-owned reducers. Sprint 7: RG DLR-LSI branch factors through StepVToDLRSmallness and RG-Cauchy branch factors through StepVToA2 before the imported analytic lane continues. Internal composition lemmas are proved; analytic/external inputs remain postulated."
     -- Invariant guard: Clay promotion is not claimed here.
     noClayPromotion  : clayYangMillsPromoted ≡ false
 
@@ -375,7 +615,29 @@ currentStepVRGAssemblyBundle = record
   ; spectralGap =
       lemmaRG-DLRLatticeGap lemmaV-3b-fromP33aAndWeightedDecay
   ; proofStructure =
-      "Sprint 5: Step V assembled from P33b (diameter domination) + P06/P10/P11 (external analytic). Sprint 7: RG DLR-LSI branch (RG.1-RG.5) and RG-Cauchy branch (RG.6-RG.8) composed from Step V certificate. Internal composition lemmas are proved; analytic/external inputs remain postulated."
+      "Sprint 5: Step V assembled by StepVMarginFromP33bAndArithmetic, consuming P06/P10/P11/P33a as source inputs and P33b/P07/P09 as DASHI-owned reducers. Sprint 7: RG DLR-LSI branch factors through StepVToDLRSmallness and RG-Cauchy branch factors through StepVToA2 before the imported analytic lane continues. Internal composition lemmas are proved; analytic/external inputs remain postulated."
   ; proofStructureIsCanonical = refl
   ; noClayPromotion = refl
   }
+
+currentStepVToDLRSmallness : StepVToDLRSmallness
+currentStepVToDLRSmallness =
+  stepVToDLRSmallness lemmaV-3b-fromP33aAndWeightedDecay
+
+currentStepVToA2 : StepVToA2
+currentStepVToA2 =
+  stepVToA2 lemmaV-3b-fromP33aAndWeightedDecay
+
+currentA2ToB6Influence : A2ToB6Influence
+currentA2ToB6Influence =
+  a2ToB6Influence lemmaV-3b-fromP33aAndWeightedDecay
+
+currentB6ToRGCauchy : B6ToRGCauchy
+currentB6ToRGCauchy =
+  b6ToRGCauchy lemmaV-3b-fromP33aAndWeightedDecay
+
+currentDLRSmallnessAndCrossScaleToUniformLSI :
+  DLRSmallnessAndCrossScaleToUniformLSI
+currentDLRSmallnessAndCrossScaleToUniformLSI =
+  dlrSmallnessAndCrossScaleToUniformLSI
+    lemmaV-3b-fromP33aAndWeightedDecay

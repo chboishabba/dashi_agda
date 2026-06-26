@@ -43,6 +43,24 @@ DOMINATION_SUMMARY_HI = (
     / "ns_triad_kn_cross_shell_domination_ratio_audit_hi_20260626"
     / "schur_audit.json"
 )
+DOMINATION_SUMMARY_16 = (
+    REPO_ROOT
+    / "scripts"
+    / "data"
+    / "outputs"
+    / "ns_boundary_pressure_geometric_20260621"
+    / "ns_triad_kn_cross_shell_domination_ratio_audit_n16_20260626"
+    / "schur_audit.json"
+)
+DOMINATION_SECTOR_SUMMARY_12 = (
+    REPO_ROOT
+    / "scripts"
+    / "data"
+    / "outputs"
+    / "ns_boundary_pressure_geometric_20260621"
+    / "ns_triad_kn_cross_shell_domination_ratio_sector_audit_n12_20260626"
+    / "schur_audit.json"
+)
 
 
 def test_schur_nullmode_doc_uses_candidate_only_language() -> None:
@@ -69,7 +87,10 @@ def test_signed_domination_doc_records_live_gate1_target() -> None:
     assert "\\rho_{10} \\approx 0.6144" in text
     assert "\\rho_{12} \\approx 0.6577" in text
     assert "\\rho_{14} \\approx 0.5956" in text
+    assert "\\rho_{16} \\approx 0.5812" in text
     assert "below \\(2/3\\)" in text
+    assert "The focused \\(N=12\\) symmetry audit" in text
+    assert "86\\%" in text
     assert "positive off-diagonals occur in the dense sign audit" in text
     assert "balanced signed graph" in text
     assert "single live Gate 1 proof obligation" in text
@@ -160,18 +181,21 @@ def test_dense_signed_factorization_audit_records_domination_probe() -> None:
         assert factor_diag["domination_holds_strictly_observed"] is True
 
 
-def test_matrix_free_domination_ratio_audits_record_10_12_14() -> None:
+def test_matrix_free_domination_ratio_audits_record_10_12_14_16() -> None:
     payload_10 = json.loads(DOMINATION_SUMMARY_10.read_text(encoding="utf-8"))
     payload_hi = json.loads(DOMINATION_SUMMARY_HI.read_text(encoding="utf-8"))
+    payload_16 = json.loads(DOMINATION_SUMMARY_16.read_text(encoding="utf-8"))
 
     rows_10 = {row["N"]: row for row in payload_10["rows"]}
     rows_hi = {row["N"]: row for row in payload_hi["rows"]}
+    rows_16 = {row["N"]: row for row in payload_16["rows"]}
 
     assert set(rows_10) == {10}
     assert set(rows_hi) == {12, 14}
+    assert set(rows_16) == {16}
 
-    expected_upper = {10: 2.0 / 3.0, 12: 2.0 / 3.0, 14: 2.0 / 3.0}
-    all_rows = {**rows_10, **rows_hi}
+    expected_upper = {10: 2.0 / 3.0, 12: 2.0 / 3.0, 14: 2.0 / 3.0, 16: 2.0 / 3.0}
+    all_rows = {**rows_10, **rows_hi, **rows_16}
     for shell, row in all_rows.items():
         assert row["verdict"] == "schur_psd"
         assert row["S_C"]["nullity_estimate"] == 1
@@ -188,3 +212,36 @@ def test_matrix_free_domination_ratio_audits_record_10_12_14() -> None:
         top_modes = diag["worst_eigenvector_diagnostics"]["top_modes"]
         assert len(top_modes) >= 5
         assert top_modes[0]["is_axis"] is False
+
+
+def test_n12_sector_audit_records_nonaxis_zero_free_resonance() -> None:
+    payload = json.loads(DOMINATION_SECTOR_SUMMARY_12.read_text(encoding="utf-8"))
+    rows = {row["N"]: row for row in payload["rows"]}
+    assert set(rows) == {12}
+    row = rows[12]
+    diag = row["domination_ratio_matrix_free_diagnostics"]
+    assert diag["status"] == "ok"
+    assert diag["domination_ratio_sup_one_perp"] < 2.0 / 3.0
+
+    sector = diag["symmetry_sector_diagnostics"]
+    assert sector is not None
+    assert sector["axis_class_mass"]["nonaxis"] > 0.999
+    assert sector["zero_coordinate_class_mass"]["0-zero"] > 0.86
+    assert sector["zero_coordinate_class_mass"]["1-zero"] < 0.14
+
+    orbit_mass = sector["coordinate_permutation_orbit_mass"]
+    top_orbits = list(orbit_mass)[:2]
+    assert top_orbits == ["(1,7,12)", "(0,1,11)"]
+
+    shell_ratio = sector["shell_class_component_ratio"]
+    assert shell_ratio["shell-11"]["ratio"] < 0.58
+    assert shell_ratio["shell-12"]["ratio"] < 0.58
+
+    axis_ratio = sector["axis_class_component_ratio"]
+    assert axis_ratio["nonaxis"]["ratio"] > 0.65
+    assert axis_ratio["axis"]["ratio"] < 0.2
+
+    source = diag["source_decomposition"]
+    assert source["shell_pair"]["11<->12"]["ratio"] > 0.7
+    assert source["shell_pair"]["11<->11"]["ratio"] < 2.0 / 3.0
+    assert source["shell_pair"]["12<->12"]["ratio"] < 2.0 / 3.0

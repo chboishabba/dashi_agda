@@ -26,6 +26,19 @@ import DASHI.Physics.YangMills.P01P33ProofSurfaces as Surfaces
 -- Provenance split after the low-risk graph/arithmetic pass:
 --   internal wrapper/proved: P01-P03, P07, P09, P33
 --   paper-import remains on the direct source citations outside that lane.
+--   P06 also has a non-canonical internal split surfaced elsewhere as
+--   P06aRootedConnectedSkeletonCounting, P06bPolymerDecorationMultiplicityBound,
+--   and P06cSkeletonDecorationImpliesAnimalCounting; the canonical numbered
+--   P06 entry below stays imported.
+--   The local P06a bridge is itself refined as:
+--   P06a1BoundedDegreeSupportGraphSkeleton,
+--   P06a2RootedConnectedSkeletonSizeShellCounting,
+--   P06a3DiameterShellSkeletonCounting.
+--   P33 likewise now has a non-canonical internal split surfaced elsewhere as
+--   P33a1SmallFieldRegularityGivesPositiveLinkWeight,
+--   P33a2DASHINormalisationRaisesLowerBoundToOne,
+--   P33a3UniformityAcrossScaleAndPolymer,
+--   while the canonical numbered P33 entry remains the composite source-plus-reducer surface.
 --
 -- Dependency layers (topological, per Eriksson 2602.0096 §2):
 --   Layer 0 (unconditional): P01–P09, P20, P28, P32, P33
@@ -33,6 +46,10 @@ import DASHI.Physics.YangMills.P01P33ProofSurfaces as Surfaces
 --   Layer 2 (← Layer 1):     P16–P19, P22, P25–P27
 --   Layer 3 (← Layers 0–2):  P30
 --   Layer 4 (← Layer 3):     P31
+--     Internally split in the endpoint lane as:
+--       P31a abstract OS reconstruction interface
+--       P31b YM satisfies OS inputs
+--       P31c cluster/gap to physical mass gap
 --   Authority layer (external, not mathematical): qualifyingJournalPublication,
 --     twoYearWaitingPeriodElapsed, globalMathematicsAcceptance
 
@@ -51,7 +68,19 @@ record PostulateInventory : Set where
     p05 : ProofTargetSurface
 
     -- Polymer entropy / counting (Eriksson 2602.0041 Lem. 5.6; CMP 122 eq. 1.89)
-    -- P07/P09 are now internal arithmetic closures; P06/P08 remain paper imports.
+    -- P07/P09 are internal reducers now consumed by StepVMarginFromP33bAndArithmetic.
+    -- P06 remains a paper import in the canonical 33-item inventory. The
+    -- proof-surface/backlog lanes expose a non-canonical internal split:
+    --   P06aRootedConnectedSkeletonCounting
+    --   P06a1BoundedDegreeSupportGraphSkeleton
+    --   P06a2aBoundedDegreeRootBallGrowth
+    --   P06a2RootedConnectedSkeletonSizeShellCounting
+    --   P06a3aDiameterShellContainedInRootBall
+    --   P06a3DiameterShellSkeletonCounting
+    --   P06bPolymerDecorationMultiplicityBound
+    --   P06cSkeletonDecorationImpliesAnimalCounting
+    --   P06AnimalCountingReducer
+    -- P08 remains a paper import.
     p06 : ProofTargetSurface
     p07 : ProofTargetSurface
     p08 : ProofTargetSurface
@@ -68,6 +97,12 @@ record PostulateInventory : Set where
 
     -- Field regularity / uniform link ellipticity.
     -- Composite surface: source ellipticity + internal diameter domination.
+    -- Local split below the canonical surface:
+    --   P33a1SmallFieldRegularityGivesPositiveLinkWeight
+    --   P33a2DASHINormalisationRaisesLowerBoundToOne
+    --   P33a3UniformityAcrossScaleAndPolymer
+    --   P33aFullUniformLinkEllipticityFromSplit
+    --   P33bWeightedTreeDistanceDominatesOrdinaryDiameter
     p33 : ProofTargetSurface
 
     -- Layer 1 — Conditional on Layer 0
@@ -77,6 +112,9 @@ record PostulateInventory : Set where
     p11 : ProofTargetSurface
 
     -- DLR-LSI branch (Eriksson 2602.0052 Lem. 6.3, Lem. 5.7, Thm 7.1, Cor 7.3)
+    -- Local RG handoff also exposes non-canonical internal reducers:
+    --   StepVToDLRSmallness
+    --   DLRSmallnessAndCrossScaleToUniformLSI
     p12 : ProofTargetSurface
     p13 : ProofTargetSurface
     p14 : ProofTargetSurface
@@ -95,6 +133,10 @@ record PostulateInventory : Set where
     -- Layer 2 — Conditional on Layer 1
     -- ─────────────────────────────────
     -- RG-Cauchy branch (Eriksson 2602.0072 A2, Thm 1.3, Cor 5.1)
+    -- Local RG handoff also exposes non-canonical internal reducers:
+    --   StepVToA2
+    --   A2ToB6Influence
+    --   B6ToRGCauchy
     p16 : ProofTargetSurface
     p17 : ProofTargetSurface
     p18 : ProofTargetSurface
@@ -117,7 +159,10 @@ record PostulateInventory : Set where
 
     -- Layer 4 — Terminal mathematical sink
     -- ────────────────────────────────────
-    -- Wightman axioms + mass gap (Eriksson 2602.0092 Thm 1.1+§5)
+    -- Wightman axioms + mass gap (Eriksson 2602.0092 Thm 1.1+§5).
+    -- The local endpoint lane now exposes an internal P31a/P31b/P31c split,
+    -- but the canonical 33-item inventory keeps P31 as the single source-side
+    -- terminal sink.
     p31 : ProofTargetSurface
 
     -- ── Equality proofs (all true) ──
