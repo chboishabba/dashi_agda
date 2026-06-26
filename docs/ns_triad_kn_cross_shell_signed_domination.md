@@ -35,10 +35,13 @@ Define the signed domination ratio
 - \(\rho_{10} \approx 0.6144\) via projected CPU matrix-free generalized eigensolve
 - \(\rho_{12} \approx 0.6577\) via projected CPU matrix-free generalized eigensolve
 - \(\rho_{14} \approx 0.5956\) via projected CPU matrix-free generalized eigensolve
-- \(S_C\) is PSD with nullity one at \(N=6,8,10,12,14\) in the current audits
+- \(\rho_{16} \approx 0.5812\) via projected CPU matrix-free generalized eigensolve
+- \(S_C\) is PSD with nullity one at \(N=6,8,10,12,14,16\) in the current audits
 - \(S_C \mathbf{1}_C = 0\) is proved analytically and machine-zero numerically
 - All currently tested domination ratios remain below \(2/3\), with the present worst case at \(N=12\)
-- The current worst generalized eigenvectors are concentrated on the seam shells \(N-1\) and \(N\), carry negligible axis mass, and are led by non-axis modes such as \((-1,0,N-1)\)
+- The current worst generalized eigenvectors are concentrated on the seam shells \(N-1\) and \(N\), carry negligible axis mass, and are led by non-axis modes such as \((-1,0,N-1)\); \(N=16\) follows the same pattern
+- The focused \(N=12\) symmetry audit reproduces a tight ratio below \(2/3\) and shows the extremizer is overwhelmingly non-axis, with about \(86\%\) of its mass on the `0-zero` coordinate-permutation sector and leading orbit classes \((1,7,12)\) and \((0,1,11)\)
+- In that same \(N=12\) audit, the shell-only restricted components sit near \(0.575\), while the mixed seam block \(11 \leftrightarrow 12\) still rises to about \(0.702\); this supports a full mixed-shell cancellation theorem rather than per-source or per-shell domination
 - Ordinary Laplacian reduction is dead: positive off-diagonals occur in the dense sign audit
 - The “balanced signed graph” framing is demoted: it is not the active theorem route
 

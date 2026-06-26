@@ -119,18 +119,135 @@ polymerAnimalCountingBoundSurface =
     paperImport
     eriksson-2602-0041 "Lemma 5.6" postulate-import paperImport
 
+p06AnimalCountingReducerSurface : ProofTargetSurface
+p06AnimalCountingReducerSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06AnimalCountingReducer"
+    "DASHI rooted-shell adapter for the imported polymer animal counting witness"
+    "The P06 counting theorem is consumed through an explicit rooted-polymer shell interface, separating the DASHI-owned combinatorial adapter from the still-imported source counting estimate."
+    "ImportedPolymerAnimalCountingBound together with the local rooted-shell encoding."
+    "The entropy lane no longer consumes P06 as a completely opaque theorem sink."
+    "P07 KP summability and the Step V entropy queue."
+    "The counting input remains architecturally opaque inside Step V."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06AnimalCountingReducer" consequence-proof proved
+
+p06aRootedConnectedSkeletonCountingSurface : ProofTargetSurface
+p06aRootedConnectedSkeletonCountingSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06aRootedConnectedSkeletonCounting"
+    "DASHI bounded-degree support-graph bridge for rooted connected polymer skeleton counting"
+    "The P06 counting theorem is split first at the support-graph level: bounded-degree rooted connected polymer skeletons are exposed through bounded-degree input, root-ball growth, size-shell counting, diameter-shell containment, and diameter-shell reduction."
+    "Local rooted-shell encoding of connected support-graph skeletons together with an explicit bounded-degree parameter."
+    "The graph skeleton side of the counting problem is no longer opaque and no longer jumps directly from interface to full diameter shell."
+    "P06c recombination and the Step V entropy queue."
+    "There is no local skeleton-level handle on the P06 counting theorem."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06aRootedConnectedSkeletonCounting" consequence-proof proved
+
+p06a1BoundedDegreeSupportGraphSkeletonSurface : ProofTargetSurface
+p06a1BoundedDegreeSupportGraphSkeletonSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06a1BoundedDegreeSupportGraphSkeleton"
+    "DASHI bounded-degree support-graph skeleton input below the local P06 split"
+    "The graph-skeleton side of P06 is exposed as a rooted support-graph shell family together with an explicit bounded-degree parameter."
+    "Local rooted-shell encoding of support-graph skeletons."
+    "The bounded-degree graph input needed by skeleton counting is explicit."
+    "P06a2 size-shell counting and P06a3 diameter-shell reduction."
+    "Skeleton counting would still hide its graph-degree hypothesis."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06a1BoundedDegreeSupportGraphSkeleton" consequence-proof proved
+
+p06a2aBoundedDegreeRootBallGrowthSurface : ProofTargetSurface
+p06a2aBoundedDegreeRootBallGrowthSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06a2aBoundedDegreeRootBallGrowth"
+    "DASHI root-ball shell growth bridge below the local P06 skeleton split"
+    "Before any polymer-specific counting refinement, the rooted bounded-degree shell family is exposed as a root-ball growth bound over diameter shells."
+    "P06a1 bounded-degree support-graph skeleton input and the rooted shell interface."
+    "The first purely graph-combinatorial growth bound below P06 is explicit."
+    "P06a2 size-shell counting and P06a3 diameter-shell reduction."
+    "The local P06 split would still jump directly from bounded degree to size-shell counting."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06a2aBoundedDegreeRootBallGrowth" consequence-proof proved
+
+p06a2RootedConnectedSkeletonSizeShellCountingSurface : ProofTargetSurface
+p06a2RootedConnectedSkeletonSizeShellCountingSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06a2RootedConnectedSkeletonSizeShellCounting"
+    "DASHI size-shell counting bridge over bounded-degree rooted connected skeletons"
+    "Bounded-degree rooted connected skeletons are first counted in size-indexed shells before any polymer-specific decoration overhead is considered."
+    "P06a1 bounded-degree support-graph skeleton input and P06a2a root-ball growth."
+    "A local size-shell counting bridge now exists below P06."
+    "P06a3 diameter-shell reduction and P06c recombination."
+    "Diameter-shell counting would still have no internal size-shell source."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06a2RootedConnectedSkeletonSizeShellCounting" consequence-proof proved
+
+p06a3aDiameterShellContainedInRootBallSurface : ProofTargetSurface
+p06a3aDiameterShellContainedInRootBallSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06a3aDiameterShellContainedInRootBall"
+    "DASHI diameter-shell containment bridge below the local P06 skeleton split"
+    "Diameter-indexed rooted connected skeleton shells are first reduced to a bounded root-ball containment statement before the final diameter-shell count is consumed."
+    "P06a2 size-shell counting bridge."
+    "The size-to-diameter transition under P06 is explicit."
+    "P06a3 diameter-shell counting and P06c recombination."
+    "The local P06 split would still hide the root-ball containment step."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06a3aDiameterShellContainedInRootBall" consequence-proof proved
+
+p06a3DiameterShellSkeletonCountingSurface : ProofTargetSurface
+p06a3DiameterShellSkeletonCountingSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06a3DiameterShellSkeletonCounting"
+    "DASHI diameter-shell reduction over bounded-degree rooted connected skeletons"
+    "Diameter-indexed rooted connected skeleton shells are reduced to the bounded-degree size-shell counting bridge before the explicit decoration leaf is applied."
+    "P06a2 size-shell counting bridge and P06a3a diameter-shell containment."
+    "The diameter-shell side of the graph skeleton count is explicit."
+    "P06c recombination and the Step V entropy queue."
+    "The local P06 split would still jump from size shells to full polymer counting."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06a3DiameterShellSkeletonCounting" consequence-proof proved
+
+p06bDecorationMultiplicityBoundSurface : ProofTargetSurface
+p06bDecorationMultiplicityBoundSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06bPolymerDecorationMultiplicityBound"
+    "Eriksson 2602.0041 decoration/multiplicity side-condition kept explicit below the local P06 split"
+    "Any polymer-specific decoration or multiplicity overhead beyond the rooted connected support-graph skeleton is bounded in the source-side theorem shape consumed by the P06 recombination step."
+    "Rooted connected skeleton shell fixed; source-side polymer decorations not yet formalised internally."
+    "Decoration overhead is isolated as the only non-skeleton leaf in the local P06 split."
+    "P06c recombination and the entropy queue."
+    "The graph skeleton split would still hide polymer-specific multiplicity overhead."
+    paperImport
+    eriksson-2602-0041 "P06b decoration/multiplicity side-condition" postulate-import paperImport
+
+p06cSkeletonDecorationImpliesAnimalCountingSurface : ProofTargetSurface
+p06cSkeletonDecorationImpliesAnimalCountingSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06cSkeletonDecorationImpliesAnimalCounting"
+    "DASHI recombination reducer over local P06a shells and explicit P06b decoration overhead"
+    "The full imported P06 counting theorem is consumed via a split interface: rooted connected skeleton shells plus an explicit decoration-multiplicity leaf."
+    "P06a rooted skeleton interface, P06b decoration bound, and the imported full counting witness."
+    "The entropy lane consumes P06 through a skeleton-plus-decoration reducer rather than a monolithic counting import."
+    "P06AnimalCountingReducer, P07 KP summability, and the Step V entropy queue."
+    "The new P06 split would not yet reach the existing entropy reducer."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06cSkeletonDecorationImpliesAnimalCounting" consequence-proof proved
+
 kPSummabilityBoundSurface : ProofTargetSurface
 kPSummabilityBoundSurface =
   mkProofTargetSurfaceWithAuthority
     "ImportedKPSummabilityBound"
-    "Derived DASHI arithmetic surface from P06 plus KP bookkeeping / Eriksson 2602.0041"
-    "The polymer counting rate and activity decay imply a Kotecky-Preiss summability bound of the required Step V form."
-    "P06 counting bound; Dashi arithmetic constants; Step V weighted decay profile."
+    "DASHI conditional reducer consumed by StepVMarginFromP33bAndArithmetic"
+    "Animal counting plus activity decay plus the entropy margin AB < 1 imply the Kotecky-Preiss summability bound needed in Step V."
+    "P06 counting bound; nonnegative counting/activity rates; entropy margin AB < 1."
     "The local polymer shell sum is uniformly finite."
     "Step V certificate and P23 terminal KP."
     "Step V cannot be assembled from entropy control."
-    auditTested
-    dashi-internal-proof "polymerAnimalCountingBoundSurface" consequence-proof auditTested
+    proved
+    dashi-internal-proof "StepVAssemblyLemmaQueue.StepVMarginFromP33bAndArithmetic" consequence-proof proved
 
 pZeroPositiveSurface : ProofTargetSurface
 pZeroPositiveSurface =
@@ -149,14 +266,14 @@ entropyBeatenByFullDecaySurface : ProofTargetSurface
 entropyBeatenByFullDecaySurface =
   mkProofTargetSurfaceWithAuthority
     "entropyBeatenByFullDecay"
-    "DASHI arithmetic closure from β ≥ β₀ and the imported decay constants"
-    "The combined entropy constant satisfies the Step V smallness inequality C_entropy · exp(-alpha_decay) < 1 in the exact DASHI arithmetic form."
-    "P04 κ > 0, P05 κ = 1 convention, P08 p₀(g_k) > 0, explicit Step V constants."
+    "DASHI arithmetic closure consumed by StepVMarginFromP33bAndArithmetic"
+    "The full Step V margin chain closes internally: 4q = 9271/10000 < 1 and every nonnegative C_diam <= 1 satisfies C_diam * 4q < 1."
+    "P04 κ > 0, P05 κ = 1 convention, explicit fourQ arithmetic, and the diameter constant bound C_diam <= 1."
     "Polymer entropy is dominated by full decay."
     "P23 terminal KP and polymer diameter entropy control."
     "The shell series may diverge even with counting bounds."
-    auditTested
-    dashi-internal-proof "beta >= beta0 arithmetic" consequence-proof auditTested
+    proved
+    dashi-internal-proof "StepVAssemblyLemmaQueue.StepVMarginFromP33bAndArithmetic" consequence-proof proved
 
 largeFieldActivityBoundSurface : ProofTargetSurface
 largeFieldActivityBoundSurface =
@@ -190,12 +307,38 @@ dLRLSIFromPolymerDecaySurface =
     "ImportedDLRLSIFromPolymerDecay"
     "Eriksson 2602.0052, Lemma 6.3"
     "Polymer decay together with p₀(g_k) > 0 implies the DLR-LSI smallness condition δ_k < α_blk / 4."
-    "Step V terminal decay input and positive base activity."
+    "StepVToDLRSmallness, positive base activity, and the source DLR comparison constants."
     "The DLR-LSI hypothesis is available."
     "P14 DLR-LSI theorem and OS4 cluster property."
     "The DLR-LSI branch cannot start."
     paperImport
     eriksson-2602-0052 "Lemma 6.3" postulate-import paperImport
+
+stepVToDLRSmallnessReducerSurface : ProofTargetSurface
+stepVToDLRSmallnessReducerSurface =
+  mkProofTargetSurfaceWithAuthority
+    "StepVToDLRSmallness"
+    "DASHI mixed reducer factoring Step V through an explicit polymer-decay certificate before the DLR smallness inequality"
+    "The Step V spatial KP certificate is re-expressed as a polymer-decay certificate and then consumed by the δ_k < α_blk DLR-smallness interface."
+    "StepVMarginFromP33bAndArithmetic and the imported DLR smallness inequality shape."
+    "The Step V output is exposed in the exact form consumed by the DLR-LSI lane."
+    "RG/DLR-LSI handoff below P12."
+    "The DLR-LSI branch remains opaque at the Step V boundary."
+    proved
+    dashi-internal-proof "StepVAssemblyLemmaQueue.currentStepVToDLRSmallness" consequence-proof proved
+
+dlrSmallnessAndCrossScaleToUniformLSIReducerSurface : ProofTargetSurface
+dlrSmallnessAndCrossScaleToUniformLSIReducerSurface =
+  mkProofTargetSurfaceWithAuthority
+    "DLRSmallnessAndCrossScaleToUniformLSI"
+    "DASHI mixed reducer joining the local DLR-smallness handoff with explicit cross-scale summability before the imported uniform LSI theorem"
+    "The Step V supplied DLR-smallness witness and the cross-scale summability witness are consumed together as the exact bridge into the uniform LSI lane."
+    "StepVToDLRSmallness together with the imported cross-scale influence summability shape."
+    "The DLR-LSI lane is no longer opaque between Step V and the uniform LSI theorem."
+    "RG/DLR-LSI handoff below P13-P14."
+    "The DLR lane would still jump directly from Step V to a paper theorem."
+    proved
+    dashi-internal-proof "StepVAssemblyLemmaQueue.currentDLRSmallnessAndCrossScaleToUniformLSI" consequence-proof proved
 
 crossScaleBoundSurface : ProofTargetSurface
 crossScaleBoundSurface =
@@ -242,12 +385,38 @@ assumptionA2FromKPCertificateSurface =
     "ImportedAssumptionA2FromKPCertificate"
     "Eriksson 2602.0072, Assumption A2 discharged by the terminal KP certificate"
     "The terminal all-diameter KP certificate implies the per-link oscillation profile required by Assumption A2."
-    "P23 terminal KP certificate and its diameter-decay hypotheses."
+    "StepVToA2 together with the terminal KP diameter-decay hypotheses."
     "RG irrelevance/oscillation control enters the Cauchy lane."
     "P17 B6 influence bound."
     "The RG-Cauchy branch cannot consume Step V."
     auditTested
     eriksson-2602-0072 "Assumption A2" postulate-import auditTested
+
+stepVToA2ReducerSurface : ProofTargetSurface
+stepVToA2ReducerSurface =
+  mkProofTargetSurfaceWithAuthority
+    "StepVToA2"
+    "DASHI mixed reducer exposing the Step V spatial KP certificate as the exact A2 input for the RG-Cauchy lane"
+    "The Step V spatial KP certificate is consumed as the per-link oscillation/A2 witness used by the RG-Cauchy branch."
+    "StepVMarginFromP33bAndArithmetic and the imported A2 theorem shape."
+    "The Step V output is exposed in the exact form consumed by the A2/B6 route."
+    "RG-Cauchy handoff below P16."
+    "The RG-Cauchy branch remains opaque at the Step V boundary."
+    proved
+    dashi-internal-proof "StepVAssemblyLemmaQueue.currentStepVToA2" consequence-proof proved
+
+a2ToB6InfluenceReducerSurface : ProofTargetSurface
+a2ToB6InfluenceReducerSurface =
+  mkProofTargetSurfaceWithAuthority
+    "A2ToB6Influence"
+    "DASHI mixed reducer consuming the local Step V to A2 handoff before the imported B6 theorem"
+    "The A2 oscillation witness supplied by Step V is consumed in the exact form required by the B6 influence-bound theorem."
+    "StepVToA2 and the imported A2-to-B6 theorem shape."
+    "The RG-Cauchy lane has an explicit A2 to B6 boundary."
+    "RG-Cauchy handoff below P17."
+    "The B6 theorem would still be consumed through an opaque A2 jump."
+    proved
+    dashi-internal-proof "StepVAssemblyLemmaQueue.currentA2ToB6Influence" consequence-proof proved
 
 b6InfluenceBoundSurface : ProofTargetSurface
 b6InfluenceBoundSurface =
@@ -255,7 +424,7 @@ b6InfluenceBoundSurface =
     "ImportedB6InfluenceBound"
     "Eriksson 2602.0072, Theorem 1.3"
     "The Efron-Stein/B6 influence seminorm is bounded by the A2 oscillation profile with summable scale decay."
-    "P16 A2 oscillation control."
+    "P16 A2 oscillation control, locally exposed through StepVToA2."
     "Blocked observable influences decay at the required rate."
     "P18 RG-Cauchy summability."
     "The RG increments cannot be shown summable."
@@ -268,12 +437,25 @@ rGCauchySummabilitySurface =
     "ImportedRGCauchySummability"
     "Eriksson 2602.0072, Corollary 5.1"
     "The RG scale increments form a Cauchy sequence because the scale-to-scale differences are bounded by a summable profile."
-    "P17 B6 influence control and summable scale decay."
+    "P17 B6 influence control, the StepVToA2 handoff, and summable scale decay."
     "Continuum Schwinger data converges along the RG lane."
     "Continuum limit construction and uniqueness."
     "No continuum-ready Cauchy sequence is available."
     paperImport
     eriksson-2602-0072 "Corollary 5.1" postulate-import paperImport
+
+b6ToRGCauchyReducerSurface : ProofTargetSurface
+b6ToRGCauchyReducerSurface =
+  mkProofTargetSurfaceWithAuthority
+    "B6ToRGCauchy"
+    "DASHI mixed reducer consuming the explicit B6 profile before the imported RG-Cauchy conclusion"
+    "Once the B6 influence profile is exposed, the RG-Cauchy lane consumes it as the exact summable-increment witness."
+    "A2ToB6Influence and the imported B6-to-Cauchy theorem shape."
+    "The RG-Cauchy lane no longer jumps directly from A2 to the final Cauchy statement."
+    "RG-Cauchy handoff below P18."
+    "The continuum convergence lane would still hide the B6 consumption boundary."
+    proved
+    dashi-internal-proof "StepVAssemblyLemmaQueue.currentB6ToRGCauchy" consequence-proof proved
 
 couplingControlSurface : ProofTargetSurface
 couplingControlSurface =
@@ -335,7 +517,7 @@ terminalKPBoundVerifiedSurface =
     "Combining diameter domination, polymer counting, large-field suppression, and absorption yields the final KP convergence bound uniformly over the relevant scales."
     "P06-P11 and P33."
     "The terminal Step V KP bound is available."
-    "allDiameterKPCertificate and the RG/DLR-LSI lanes."
+    "allDiameterKPCertificate plus the explicit StepVToDLRSmallness and StepVToA2 handoff reducers."
     "The multiscale polymer expansion is still blocked at Step V."
     paperImport
     eriksson-2602-0091 "Theorems 1.1 + 1.2" postulate-import paperImport
@@ -346,8 +528,8 @@ assemblyMapCompleteSurface =
     "AssemblyMapComplete"
     "Eriksson 2602.0091, Theorem 1.3"
     "The terminal KP certificate maps into the exact assumptions consumed by the RG-Cauchy and DLR-LSI lanes."
-    "P23 terminal KP together with the source dependency graph."
-    "Step V output is wired to A2, polymer decay, and downstream lane inputs."
+    "P23 terminal KP together with the source dependency graph and the local StepVToDLRSmallness / StepVToA2 reducers."
+    "Step V output is wired to A2, polymer decay, and downstream lane inputs through explicit mixed reducers."
     "RG-lane consumption and DLR-LSI entry."
     "Terminal KP may exist but remain unusable by downstream gates."
     auditTested
@@ -431,6 +613,45 @@ oS1EuclideanCovarianceSurface =
     paperImport
     eriksson-2602-0092 "Theorem 4.2 + Corollary 4.3" postulate-import paperImport
 
+wightmanAbstractReconstructionReducerSurface : ProofTargetSurface
+wightmanAbstractReconstructionReducerSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P31aAbstractReconstructionReducer"
+    "DASHI-owned Wightman reconstruction reducer/interface over the local endpoint queue"
+    "Assuming OS0-OS4, DASHI exposes a reusable abstract reconstruction interface that packages the Wightman endpoint route without claiming an internal constructive proof of the full endpoint."
+    "OS0-OS4 source-intake surfaces and the endpoint queue structure."
+    "The route has an internal reducer/interface boundary."
+    "P31b YM OS-input bundle and P31c physical mass-gap bridge."
+    "The OS dataflow cannot be assembled into a single proof-target interface."
+    proved
+    dashi-internal-proof "WightmanEndpointLemmaQueue.lemmaW-1-OSReconstruction / currentWightmanEndpointBundle" consequence-proof proved
+
+ymSatisfiesOSInputsSurface : ProofTargetSurface
+ymSatisfiesOSInputsSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P31bYMSatisfiesOSInputs"
+    "DASHI mixed OS-input bundle over Eriksson 2602.0088, 2602.0052, and 2602.0092"
+    "The Yang-Mills route supplies OS0-OS4 and OS1 in the bundled theorem shape consumed by the abstract reconstruction interface."
+    "Tier-1 OS inputs, the DLR-LSI/cluster route for OS4, and O(4) covariance for OS1."
+    "The YM route satisfies the endpoint OS-input requirements."
+    "P31a abstract reconstruction interface and P31c physical mass-gap bridge."
+    "The endpoint lane cannot consume the Yang-Mills route as a single OS-input bundle."
+    proved
+    dashi-internal-proof "WightmanEndpointLemmaQueue.currentP31bYMSatisfiesOSInputs" consequence-proof proved
+
+clusterGapToPhysicalMassGapSurface : ProofTargetSurface
+clusterGapToPhysicalMassGapSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P31cClusterGapToPhysicalMassGap"
+    "DASHI mixed bridge over W.3 cluster-to-gap transfer and W.5 physical-scale identification"
+    "OS4 clustering yields an abstract positive mass gap, and the source-side physical-scale identification anchors that gap to the Yang-Mills scale ΛYM."
+    "OS4 cluster property, positive cN, positive ΛYM, and the source mass-scale identification route."
+    "The physical mass-gap bridge is exposed explicitly."
+    "Composite P31 endpoint surface."
+    "The reconstructed gap remains unanchored to the physical Yang-Mills scale."
+    proved
+    dashi-internal-proof "WightmanEndpointLemmaQueue.currentP31cClusterGapToPhysicalMassGap" consequence-proof proved
+
 wightmanReconstructionWithMassGapSurface : ProofTargetSurface
 wightmanReconstructionWithMassGapSurface =
   mkProofTargetSurfaceWithAuthority
@@ -470,6 +691,58 @@ p33aUniformLinkEllipticitySurface =
     paperImport
     eriksson-2602-0056 "regularity-axiom" postulate-import paperImport
 
+p33a1SmallFieldRegularityGivesPositiveLinkWeightSurface : ProofTargetSurface
+p33a1SmallFieldRegularityGivesPositiveLinkWeightSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P33a1SmallFieldRegularityGivesPositiveLinkWeight"
+    "Source-side analytic ellipticity leaf isolated below the local P33 split"
+    "Small-field regularity gives the positive lower-bounded support-link weight statement for every admissible edge."
+    "Balaban/Eriksson small-field regularity for admissible support links."
+    "The genuinely analytic part of P33a is isolated as a single leaf."
+    "P33a2 DASHI normalisation, P33a3 uniformity consumption, and P33b."
+    "The P33a split would still hide the analytic ellipticity core."
+    paperImport
+    eriksson-2602-0056 "regularity-axiom" postulate-import paperImport
+
+p33a2DASHINormalisationRaisesLowerBoundToOneSurface : ProofTargetSurface
+p33a2DASHINormalisationRaisesLowerBoundToOneSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P33a2DASHINormalisationRaisesLowerBoundToOne"
+    "DASHI normalisation reducer over the imported positive link lower bound"
+    "Once a strictly positive support-link lower bound exists, DASHI consumes it in the normalised convention where the minimum admissible link weight is at least one."
+    "P33a1 positive lower-bounded link weight witness."
+    "The normalisation part of P33a is no longer opaque."
+    "P33b weighted diameter domination and Step V arithmetic."
+    "The local P33 chain would still mix source ellipticity with internal rescaling."
+    proved
+    dashi-internal-proof "BalabanAnisotropicDiameterCompatibility.currentP33a2DASHINormalisationRaisesLowerBoundToOne" consequence-proof proved
+
+p33a3UniformityAcrossScaleAndPolymerSurface : ProofTargetSurface
+p33a3UniformityAcrossScaleAndPolymerSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P33a3UniformityAcrossScaleAndPolymer"
+    "DASHI explicit uniform-consumption wrapper over the imported positive link lower bound"
+    "The support-link lower bound is consumed uniformly across scale, polymer, and admissible edge rather than as a local one-off estimate."
+    "P33a1 positive lower-bounded link weight witness."
+    "The uniformity consumption part of P33a is explicit."
+    "P33b weighted diameter domination."
+    "The P33 lane would still hide where uniformity enters."
+    proved
+    dashi-internal-proof "BalabanAnisotropicDiameterCompatibility.currentP33a3UniformityAcrossScaleAndPolymer" consequence-proof proved
+
+p33aFullUniformLinkEllipticityFromSplitSurface : ProofTargetSurface
+p33aFullUniformLinkEllipticityFromSplitSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P33aFullUniformLinkEllipticityFromSplit"
+    "DASHI recombination reducer over the split P33a lane"
+    "The split P33a1/P33a2/P33a3 lane is recombined into the exact uniform-link-ellipticity witness consumed by the internal P33b diameter-domination theorem."
+    "P33a1 analytic regularity leaf plus local P33a2 normalisation and P33a3 uniformity consumption."
+    "The internal P33 chain no longer jumps from split leaves back to an opaque wrapper."
+    "P33b weighted diameter domination and Step V assembly."
+    "The P33 split would still lack a single typed recombination point."
+    proved
+    dashi-internal-proof "BalabanAnisotropicDiameterCompatibility.currentP33aFullUniformLinkEllipticityFromSplit" consequence-proof proved
+
 p33bWeightedTreeDistanceDominatesOrdinaryDiameterSurface : ProofTargetSurface
 p33bWeightedTreeDistanceDominatesOrdinaryDiameterSurface =
   mkProofTargetSurfaceWithAuthority
@@ -504,17 +777,31 @@ record P01P33ProofBundle : Set where
     p04 : ProofTargetSurface
     p05 : ProofTargetSurface
     p06 : ProofTargetSurface
+    p06a : ProofTargetSurface
+    p06a1 : ProofTargetSurface
+    p06a2a : ProofTargetSurface
+    p06a2 : ProofTargetSurface
+    p06a3a : ProofTargetSurface
+    p06a3 : ProofTargetSurface
+    p06b : ProofTargetSurface
+    p06c : ProofTargetSurface
+    p06Reducer : ProofTargetSurface
     p07 : ProofTargetSurface
     p08 : ProofTargetSurface
     p09 : ProofTargetSurface
     p10 : ProofTargetSurface
     p11 : ProofTargetSurface
+    stepVToDLRSmallness : ProofTargetSurface
     p12 : ProofTargetSurface
     p13 : ProofTargetSurface
     p14 : ProofTargetSurface
     p15 : ProofTargetSurface
+    dlrSmallnessAndCrossScaleToUniformLSI : ProofTargetSurface
+    stepVToA2 : ProofTargetSurface
     p16 : ProofTargetSurface
+    a2ToB6 : ProofTargetSurface
     p17 : ProofTargetSurface
+    b6ToRGCauchy : ProofTargetSurface
     p18 : ProofTargetSurface
     p19 : ProofTargetSurface
     p20 : ProofTargetSurface
@@ -528,8 +815,14 @@ record P01P33ProofBundle : Set where
     p28 : ProofTargetSurface
     p29 : ProofTargetSurface
     p30 : ProofTargetSurface
-    p31 : ProofTargetSurface
+    p31a : ProofTargetSurface
+    p31b : ProofTargetSurface
+    p31c : ProofTargetSurface
     p32 : ProofTargetSurface
+    p33a1 : ProofTargetSurface
+    p33a2 : ProofTargetSurface
+    p33a3 : ProofTargetSurface
+    p33aFull : ProofTargetSurface
     p33 : ProofTargetSurface
     noClayPromotion : clayYangMillsPromoted ≡ false
 
@@ -541,17 +834,32 @@ currentP01P33ProofBundle = record
   ; p04 = kappaStrictlyPositiveSurface
   ; p05 = kappaNormalisedToOneSurface
   ; p06 = polymerAnimalCountingBoundSurface
+  ; p06a = p06aRootedConnectedSkeletonCountingSurface
+  ; p06a1 = p06a1BoundedDegreeSupportGraphSkeletonSurface
+  ; p06a2a = p06a2aBoundedDegreeRootBallGrowthSurface
+  ; p06a2 = p06a2RootedConnectedSkeletonSizeShellCountingSurface
+  ; p06a3a = p06a3aDiameterShellContainedInRootBallSurface
+  ; p06a3 = p06a3DiameterShellSkeletonCountingSurface
+  ; p06b = p06bDecorationMultiplicityBoundSurface
+  ; p06c = p06cSkeletonDecorationImpliesAnimalCountingSurface
+  ; p06Reducer = p06AnimalCountingReducerSurface
   ; p07 = kPSummabilityBoundSurface
   ; p08 = pZeroPositiveSurface
   ; p09 = entropyBeatenByFullDecaySurface
   ; p10 = largeFieldActivityBoundSurface
   ; p11 = absorptionConditionSurface
+  ; stepVToDLRSmallness = stepVToDLRSmallnessReducerSurface
   ; p12 = dLRLSIFromPolymerDecaySurface
   ; p13 = crossScaleBoundSurface
   ; p14 = dLRLSITheoremSurface
   ; p15 = latticeSpectralGapSurface
+  ; dlrSmallnessAndCrossScaleToUniformLSI =
+      dlrSmallnessAndCrossScaleToUniformLSIReducerSurface
+  ; stepVToA2 = stepVToA2ReducerSurface
   ; p16 = assumptionA2FromKPCertificateSurface
+  ; a2ToB6 = a2ToB6InfluenceReducerSurface
   ; p17 = b6InfluenceBoundSurface
+  ; b6ToRGCauchy = b6ToRGCauchyReducerSurface
   ; p18 = rGCauchySummabilitySurface
   ; p19 = couplingControlSurface
   ; p20 = anisotropicSubspaceClassificationSurface
@@ -565,8 +873,14 @@ currentP01P33ProofBundle = record
   ; p28 = rotationalWardIdentitySurface
   ; p29 = symanzikBreakingDecompositionSurface
   ; p30 = oS1EuclideanCovarianceSurface
-  ; p31 = wightmanReconstructionWithMassGapSurface
+  ; p31a = wightmanAbstractReconstructionReducerSurface
+  ; p31b = ymSatisfiesOSInputsSurface
+  ; p31c = clusterGapToPhysicalMassGapSurface
   ; p32 = triangularMixingPreventiveLockSurface
+  ; p33a1 = p33a1SmallFieldRegularityGivesPositiveLinkWeightSurface
+  ; p33a2 = p33a2DASHINormalisationRaisesLowerBoundToOneSurface
+  ; p33a3 = p33a3UniformityAcrossScaleAndPolymerSurface
+  ; p33aFull = p33aFullUniformLinkEllipticityFromSplitSurface
   ; p33 = fieldRegularityImpliesSingleLinkPositivitySurface
   ; noClayPromotion = refl
   }

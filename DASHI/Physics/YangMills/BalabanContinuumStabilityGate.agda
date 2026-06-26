@@ -53,6 +53,10 @@ open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
 --     (H, U(Λ,a), Ω) satisfying all Wightman axioms
 --     Δ_phys ≥ c_N Λ_YM > 0, Sᶜ₄ ≢ 0
 --     Conditional on: OS0–OS4 (P12–P15), OS1 (P30), OS reconstruction [6]
+--     Local endpoint split:
+--       P31a abstract OS reconstruction interface
+--       P31b YM satisfies OS inputs
+--       P31c cluster/gap to physical mass gap
 
 open import Data.Nat.Base using (ℕ; _≤_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_; _<ℝ_; 0ℝ; 1ℝ; _*ℝ_; -ℝ_)
@@ -241,6 +245,8 @@ importedWightmanReconstructionWithMassGapWitness = record
 -- Tier 3 — Conditional on O(4) restoration:
 --   OS1 (full Euclidean covariance) explicitly deferred in
 --   Remark 8.4.  Wightman reconstruction conditional on OS1.
+--   In the local endpoint lane this is now decomposed as P31a/P31b/P31c,
+--   while the source-intake gate here still keeps the composite P31 witness.
 
 record ContinuumStabilitySourceIntake : Set₁ where
   field

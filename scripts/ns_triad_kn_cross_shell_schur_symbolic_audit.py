@@ -639,6 +639,27 @@ def _sign_pattern(key: tuple[int, int, int]) -> str:
     return "".join(_sgn(int(v)) for v in key)
 
 
+def _zero_coordinate_class(key: tuple[int, int, int]) -> str:
+    return f"{sum(int(v == 0) for v in key)}-zero"
+
+
+def _sign_flip_parity(key: tuple[int, int, int]) -> str:
+    negative_count = sum(int(v < 0) for v in key)
+    return "odd-neg" if (negative_count % 2) else "even-neg"
+
+
+def _coord_permutation_orbit(key: tuple[int, int, int]) -> str:
+    orbit = tuple(sorted(abs(int(v)) for v in key))
+    return "(" + ",".join(str(v) for v in orbit) + ")"
+
+
+def _candidate_orbit_labels(n: int) -> list[str]:
+    labels = [f"(0,1,{int(n - 1)})"]
+    if n >= 5:
+        labels.append(f"(1,{int(n - 5)},{int(n)})")
+    return labels
+
+
 def _build_chunked_signed_laplacian_state(
     M_CC: np.ndarray,
     correction: np.ndarray,
@@ -854,6 +875,229 @@ def _vector_support_diagnostics(
     }
 
 
+def _restricted_rayleigh_ratio(
+    vec: np.ndarray,
+    *,
+    mask: np.ndarray,
+    M_CC: np.ndarray,
+    correction: np.ndarray,
+    good_state: _ChunkedSignedLaplacian,
+    bad_state: _ChunkedSignedLaplacian,
+) -> dict[str, Any]:
+    unit = np.asarray(vec, dtype=np.float64)
+    unit /= max(float(np.linalg.norm(unit)), 1.0e-300)
+    mask_arr = np.asarray(mask, dtype=bool)
+    component = np.where(mask_arr, unit, 0.0)
+    component = _project_mean_zero(component)
+    norm = float(np.linalg.norm(component))
+    if norm <= 1.0e-14:
+        return {"mass": 0.0, "good_energy": 0.0, "bad_energy": 0.0, "ratio": None}
+    component /= norm
+    good_energy = float(
+        component @ _signed_laplacian_apply(component, M_CC=M_CC, correction=correction, state=good_state)
+    )
+    bad_energy = float(
+        component @ _signed_laplacian_apply(component, M_CC=M_CC, correction=correction, state=bad_state)
+    )
+    return {
+        "mass": float(np.sum(unit[mask_arr] ** 2)),
+        "good_energy": good_energy,
+        "bad_energy": bad_energy,
+        "ratio": float(bad_energy / good_energy) if good_energy > 1.0e-14 else None,
+    }
+
+
+def _symmetry_sector_diagnostics(
+    vec: np.ndarray,
+    *,
+    shell_levels: np.ndarray,
+    mode_keys: list[tuple[int, int, int]],
+    M_CC: np.ndarray,
+    correction: np.ndarray,
+    good_state: _ChunkedSignedLaplacian,
+    bad_state: _ChunkedSignedLaplacian,
+    top_k: int = 12,
+) -> dict[str, Any]:
+    values = np.asarray(vec, dtype=np.float64)
+    norm = float(np.linalg.norm(values))
+    if norm <= 1.0e-14:
+        return {"error": "zero_vector"}
+    unit = values / norm
+    mass = unit * unit
+    axis_mask = np.asarray([_is_axis_mode(key) for key in mode_keys], dtype=bool)
+    orbit_labels = [_coord_permutation_orbit(key) for key in mode_keys]
+    zero_labels = [_zero_coordinate_class(key) for key in mode_keys]
+    parity_labels = [_sign_flip_parity(key) for key in mode_keys]
+    shell_labels = [f"shell-{int(shell)}" for shell in shell_levels]
+    axis_labels = ["axis" if axis_mask[idx] else "nonaxis" for idx in range(len(mode_keys))]
+
+    def _mass_by_label(labels: list[str]) -> dict[str, float]:
+        out: dict[str, float] = {}
+        for idx, label in enumerate(labels):
+            out[label] = out.get(label, 0.0) + float(mass[idx])
+        return dict(sorted(out.items(), key=lambda item: (-item[1], item[0])))
+
+    def _component_ratios(labels: list[str], mass_by_label: dict[str, float]) -> dict[str, Any]:
+        out: dict[str, Any] = {}
+        for label, _label_mass in list(mass_by_label.items())[:top_k]:
+            out[label] = _restricted_rayleigh_ratio(
+                unit,
+                mask=np.asarray([entry == label for entry in labels], dtype=bool),
+                M_CC=M_CC,
+                correction=correction,
+                good_state=good_state,
+                bad_state=bad_state,
+            )
+        return out
+
+    orbit_mass = _mass_by_label(orbit_labels)
+    zero_mass = _mass_by_label(zero_labels)
+    parity_mass = _mass_by_label(parity_labels)
+    shell_mass = _mass_by_label(shell_labels)
+    axis_mass = _mass_by_label(axis_labels)
+
+    top_mode_sector_labels = []
+    for rank, index in enumerate(np.argsort(-np.abs(unit))[:top_k]):
+        idx = int(index)
+        top_mode_sector_labels.append(
+            {
+                "rank": int(rank + 1),
+                "mode": [int(v) for v in mode_keys[idx]],
+                "orbit": orbit_labels[idx],
+                "zero_class": zero_labels[idx],
+                "sign_flip_parity": parity_labels[idx],
+                "shell": int(shell_levels[idx]),
+                "is_axis": bool(axis_mask[idx]),
+                "mass": float(mass[idx]),
+            }
+        )
+
+    return {
+        "coordinate_permutation_orbit_mass": orbit_mass,
+        "zero_coordinate_class_mass": zero_mass,
+        "sign_flip_parity_mass": parity_mass,
+        "shell_class_mass": shell_mass,
+        "axis_class_mass": axis_mass,
+        "coordinate_permutation_orbit_component_ratio": _component_ratios(orbit_labels, orbit_mass),
+        "zero_coordinate_class_component_ratio": _component_ratios(zero_labels, zero_mass),
+        "sign_flip_parity_component_ratio": _component_ratios(parity_labels, parity_mass),
+        "shell_class_component_ratio": _component_ratios(shell_labels, shell_mass),
+        "axis_class_component_ratio": _component_ratios(axis_labels, axis_mass),
+        "top_mode_sector_labels": top_mode_sector_labels,
+    }
+
+
+def _extremizer_angular_frame_diagnostics(
+    vec: np.ndarray,
+    *,
+    mode_keys: list[tuple[int, int, int]],
+    top_k: int = 20,
+    target_tol: float = 0.075,
+) -> dict[str, Any]:
+    values = np.asarray(vec, dtype=np.float64)
+    norm = float(np.linalg.norm(values))
+    if norm <= 1.0e-14:
+        return {"error": "zero_vector"}
+    unit = values / norm
+    mass = unit * unit
+    top_indices = np.argsort(-np.abs(unit))[: min(top_k, len(unit))]
+
+    wavevectors: list[np.ndarray] = []
+    weights: list[float] = []
+    top_modes: list[dict[str, Any]] = []
+    for rank, index in enumerate(top_indices):
+        idx = int(index)
+        key = tuple(int(v) for v in mode_keys[idx])
+        kvec = np.asarray(key, dtype=np.float64)
+        knorm = float(np.linalg.norm(kvec))
+        if knorm <= 1.0e-14:
+            continue
+        wavevectors.append(kvec / knorm)
+        weights.append(float(mass[idx]))
+        top_modes.append(
+            {
+                "rank": int(rank + 1),
+                "mode": [int(v) for v in key],
+                "mass": float(mass[idx]),
+                "value": float(unit[idx]),
+                "abs_value": float(abs(unit[idx])),
+                "orbit": _coord_permutation_orbit(key),
+            }
+        )
+
+    if not wavevectors:
+        return {"error": "no_nonzero_wavevectors"}
+
+    V = np.asarray(wavevectors, dtype=np.float64)
+    w = np.asarray(weights, dtype=np.float64)
+    dots = V @ V.T
+    frame_op = np.zeros((3, 3), dtype=np.float64)
+    for idx in range(len(V)):
+        frame_op += w[idx] * np.outer(V[idx], V[idx])
+    frame_eigs = np.linalg.eigvalsh(frame_op)
+    op_norm = float(np.max(frame_eigs))
+    trace = float(np.trace(frame_op))
+
+    pairwise: list[dict[str, Any]] = []
+    target_mass = {"-1/2": 0.0, "0": 0.0, "+1/2": 0.0}
+    histogram = {
+        "[-1.00,-0.75)": 0.0,
+        "[-0.75,-0.25)": 0.0,
+        "[-0.25,0.25)": 0.0,
+        "[0.25,0.75)": 0.0,
+        "[0.75,1.00]": 0.0,
+    }
+    total_pair_mass = 0.0
+    for i in range(len(V)):
+        for j in range(i + 1, len(V)):
+            dot = float(dots[i, j])
+            pair_mass = float(w[i] * w[j])
+            total_pair_mass += pair_mass
+            pairwise.append(
+                {
+                    "left_rank": int(i + 1),
+                    "right_rank": int(j + 1),
+                    "left_mode": top_modes[i]["mode"],
+                    "right_mode": top_modes[j]["mode"],
+                    "dot": dot,
+                    "pair_mass": pair_mass,
+                }
+            )
+            if dot < -0.75:
+                histogram["[-1.00,-0.75)"] += pair_mass
+            elif dot < -0.25:
+                histogram["[-0.75,-0.25)"] += pair_mass
+            elif dot < 0.25:
+                histogram["[-0.25,0.25)"] += pair_mass
+            elif dot < 0.75:
+                histogram["[0.25,0.75)"] += pair_mass
+            else:
+                histogram["[0.75,1.00]"] += pair_mass
+            if abs(dot + 0.5) <= target_tol:
+                target_mass["-1/2"] += pair_mass
+            if abs(dot) <= target_tol:
+                target_mass["0"] += pair_mass
+            if abs(dot - 0.5) <= target_tol:
+                target_mass["+1/2"] += pair_mass
+
+    if total_pair_mass > 1.0e-14:
+        histogram = {key: float(value / total_pair_mass) for key, value in histogram.items()}
+        target_mass = {key: float(value / total_pair_mass) for key, value in target_mass.items()}
+
+    pairwise.sort(key=lambda item: (-item["pair_mass"], abs(item["dot"] + 0.5)))
+    return {
+        "top_modes": top_modes,
+        "pairwise_dot_histogram_mass": histogram,
+        "pairwise_dot_target_mass": target_mass,
+        "top_pairwise_dots": pairwise[: min(20, len(pairwise))],
+        "frame_operator_eigenvalues": [float(v) for v in frame_eigs],
+        "frame_trace": trace,
+        "frame_operator_norm": op_norm,
+        "frame_trace_over_operator_norm": float(trace / op_norm) if op_norm > 1.0e-14 else None,
+        "top_mode_mass_total": float(np.sum(w)),
+    }
+
+
 def _rayleigh_source_breakdown(
     vec: np.ndarray,
     *,
@@ -984,6 +1228,8 @@ def _domination_ratio_matrix_free_diagnostics(
     eps: float = DEFAULT_DOMINATION_EPS,
     tol: float = 1.0e-8,
     maxiter: int = 200,
+    audit_symmetry_sectors: bool = False,
+    audit_angular_frame: bool = False,
 ) -> dict[str, Any]:
     n = int(M_CC.shape[0])
     if n <= 1:
@@ -1074,6 +1320,23 @@ def _domination_ratio_matrix_free_diagnostics(
         mode_keys=mode_keys,
         row_chunk=int(row_chunk),
     )
+    sector_diag = None
+    if audit_symmetry_sectors:
+        sector_diag = _symmetry_sector_diagnostics(
+            rho_vec,
+            shell_levels=shell_levels,
+            mode_keys=mode_keys,
+            M_CC=M_CC,
+            correction=correction,
+            good_state=good_state,
+            bad_state=bad_state,
+        )
+    angular_frame_diag = None
+    if audit_angular_frame:
+        angular_frame_diag = _extremizer_angular_frame_diagnostics(
+            rho_vec,
+            mode_keys=mode_keys,
+        )
 
     return {
         "audit_requested": True,
@@ -1093,6 +1356,8 @@ def _domination_ratio_matrix_free_diagnostics(
         "L_bad_solver_residual_norm": float(bad_resid),
         "domination_holds_strictly_observed": bool(rho_value < 1.0 + 1.0e-8),
         "worst_eigenvector_diagnostics": vector_diag,
+        "symmetry_sector_diagnostics": sector_diag,
+        "extremizer_angular_frame_diagnostics": angular_frame_diag,
         "source_decomposition": source_diag,
         "sign_statistics": setup["sign_stats"],
     }
@@ -1116,6 +1381,8 @@ def _audit_row(
     domination_eps: float = DEFAULT_DOMINATION_EPS,
     domination_tol: float = 1.0e-8,
     domination_maxiter: int = 200,
+    audit_domination_symmetry_sectors: bool = False,
+    audit_extremizer_angular_frame: bool = False,
 ) -> dict[str, Any]:
     """Run the full Schur audit for one (N, K) row."""
     t0 = time.time()
@@ -1281,6 +1548,8 @@ def _audit_row(
                     eps=domination_eps,
                     tol=domination_tol,
                     maxiter=domination_maxiter,
+                    audit_symmetry_sectors=audit_domination_symmetry_sectors,
+                    audit_angular_frame=audit_extremizer_angular_frame,
                 )
                 print("done.")
         else:
@@ -1333,6 +1602,8 @@ def _audit_row(
                         eps=domination_eps,
                         tol=domination_tol,
                         maxiter=domination_maxiter,
+                        audit_symmetry_sectors=audit_domination_symmetry_sectors,
+                        audit_angular_frame=audit_extremizer_angular_frame,
                     )
                     print("done.")
             except Exception as _exc:
@@ -1606,6 +1877,24 @@ def main() -> None:
         default=200,
         help="LOBPCG max iterations for the domination-ratio projected generalized eigensolve.",
     )
+    parser.add_argument(
+        "--audit-domination-symmetry-sectors",
+        action="store_true",
+        help=(
+            "Augment the matrix-free domination audit with symmetry-sector anatomy "
+            "for the observed extremizer: coordinate-permutation orbit, zero-count, "
+            "sign-parity, shell class, and axis/non-axis restricted Rayleigh quotients."
+        ),
+    )
+    parser.add_argument(
+        "--audit-extremizer-angular-frame",
+        action="store_true",
+        help=(
+            "Augment the matrix-free domination audit with top-mode angular/frame "
+            "diagnostics for the observed extremizer: pairwise normalized wavevector "
+            "dot products, mass near -1/2, 0, +1/2, and weighted frame spectra."
+        ),
+    )
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
@@ -1637,6 +1926,8 @@ def main() -> None:
             domination_eps=args.domination_eps,
             domination_tol=args.domination_tol,
             domination_maxiter=args.domination_maxiter,
+            audit_domination_symmetry_sectors=args.audit_domination_symmetry_sectors,
+            audit_extremizer_angular_frame=args.audit_extremizer_angular_frame,
         )
         results.append(result)
 

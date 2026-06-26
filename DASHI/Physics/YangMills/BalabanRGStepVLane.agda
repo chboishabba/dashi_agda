@@ -9,11 +9,15 @@ open import DASHI.Physics.YangMills.BalabanStepVSpatialKPCertificate using
   ( BalabanStepVSpatialKPCertificate
   ; currentBalabanStepVSpatialKP
   )
+import DASHI.Physics.YangMills.StepVAssemblyLemmaQueue as Assembly
 
 -- ── RG lane postulates (consuming allDiameterKPCertificate) ─────────
 --
 -- allDiameterKPCertificate = true enters the RG lane through two
--- parallel branches sourced from Eriksson 2602.0052 and 2602.0072.
+-- explicit mixed reducers sourced from DASHI's Step V queue:
+--   StepVToDLRSmallness
+--   StepVToA2
+-- before the imported analytic lanes from Eriksson 2602.0052 and 2602.0072.
 --
 -- DLR-LSI branch (2602.0052):
 --   Lem. 6.3: δₖ < αblk/4 from polymer decay + pZeroPositive
@@ -222,6 +226,12 @@ record BalabanRGLaneState : Set₁ where
     assumptionA2FromKPCertificateWitness : ImportedAssumptionA2FromKPCertificate
     b6InfluenceBoundWitness : ImportedB6InfluenceBound
     rgCauchySummabilityWitness : ImportedRGCauchySummability
+    stepVToDLRSmallness : Assembly.StepVToDLRSmallness
+    stepVToA2 : Assembly.StepVToA2
+    a2ToB6Influence : Assembly.A2ToB6Influence
+    b6ToRGCauchy : Assembly.B6ToRGCauchy
+    dlrSmallnessAndCrossScaleToUniformLSI :
+      Assembly.DLRSmallnessAndCrossScaleToUniformLSI
 
     -- Expose/Consume fields
     dlrLsiFromPolymerDecayField : ∀ (k : ℕ) → δ k *ℝ 4ℝ <ℝ αblk
@@ -251,7 +261,7 @@ record BalabanRGLaneState : Set₁ where
     dlrLsiDeltaSource : String
     dlrLsiDeltaSourceIsCanonical :
       dlrLsiDeltaSource ≡
-      "δₖ < αblk/4: Eriksson 2602.0052 Lem. 6.3 (polymer decay + pZeroPositive → Yoshida-GZ α₀ > 0)"
+      "δₖ < αblk/4: routed locally through StepVToDLRSmallness, then consumed by Eriksson 2602.0052 Lem. 6.3 (polymer decay + pZeroPositive → Yoshida-GZ α₀ > 0)"
     dlrLsiTheoremSource : String
     dlrLsiTheoremSourceIsCanonical :
       dlrLsiTheoremSource ≡
@@ -259,7 +269,7 @@ record BalabanRGLaneState : Set₁ where
     rgCauchyOscillationSource : String
     rgCauchyOscillationSourceIsCanonical :
       rgCauchyOscillationSource ≡
-      "osc_e(K_k(X)) ≤ C_osc·2^{-2k}·|X|_k^p·e^{-κ|X|_k}: 2602.0072 A2 (from allDiameterKPCertificate)"
+      "osc_e(K_k(X)) ≤ C_osc·2^{-2k}·|X|_k^p·e^{-κ|X|_k}: routed locally through StepVToA2, then consumed by 2602.0072 A2"
     rgCauchyB6Source : String
     rgCauchyB6SourceIsCanonical :
       rgCauchyB6Source ≡
@@ -284,6 +294,12 @@ currentBalabanRGLaneState = record
   ; assumptionA2FromKPCertificateWitness = postulatedAssumptionA2FromKPCertificateWitness
   ; b6InfluenceBoundWitness          = postulatedB6InfluenceBoundWitness
   ; rgCauchySummabilityWitness      = postulatedRgCauchySummabilityWitness
+  ; stepVToDLRSmallness             = Assembly.currentStepVToDLRSmallness
+  ; stepVToA2                       = Assembly.currentStepVToA2
+  ; a2ToB6Influence                 = Assembly.currentA2ToB6Influence
+  ; b6ToRGCauchy                    = Assembly.currentB6ToRGCauchy
+  ; dlrSmallnessAndCrossScaleToUniformLSI =
+      Assembly.currentDLRSmallnessAndCrossScaleToUniformLSI
   ; dlrLsiFromPolymerDecayField = ImportedDLRLSIFromPolymerDecay.dlrLsiFromPolymerDecayInequality postulatedDlrLSIFromPolymerDecayWitness
   ; crossScaleBoundField = ImportedCrossScaleBound.crossScaleBoundSummable postulatedCrossScaleBoundWitness
   ; dlrLsiImplication1Field = ImportedDLRLSITheorem.dlrLsiImplication1 postulatedDlrLSITheoremWitness
@@ -305,13 +321,13 @@ currentBalabanRGLaneState = record
   ; rgCauchySummableIsTrue            = refl
   ; rgLaneAdvancedIsTrue              = refl
   ; dlrLsiDeltaSource =
-      "δₖ < αblk/4: Eriksson 2602.0052 Lem. 6.3 (polymer decay + pZeroPositive → Yoshida-GZ α₀ > 0)"
+      "δₖ < αblk/4: routed locally through StepVToDLRSmallness, then consumed by Eriksson 2602.0052 Lem. 6.3 (polymer decay + pZeroPositive → Yoshida-GZ α₀ > 0)"
   ; dlrLsiDeltaSourceIsCanonical = refl
   ; dlrLsiTheoremSource =
       "DLR-LSI + DS complete analyticity → exponential clustering → ∆_phys ≥ m > 0: 2602.0052 Thm. 7.1, Cor. 7.3"
   ; dlrLsiTheoremSourceIsCanonical = refl
   ; rgCauchyOscillationSource =
-      "osc_e(K_k(X)) ≤ C_osc·2^{-2k}·|X|_k^p·e^{-κ|X|_k}: 2602.0072 A2 (from allDiameterKPCertificate)"
+      "osc_e(K_k(X)) ≤ C_osc·2^{-2k}·|X|_k^p·e^{-κ|X|_k}: routed locally through StepVToA2, then consumed by 2602.0072 A2"
   ; rgCauchyOscillationSourceIsCanonical = refl
   ; rgCauchyB6Source =
       "σ_{νk,t}(V^irr_k) ≤ C_B6 (|Λ¹ₖ|·2^{-4k} = const): 2602.0072 Thm. 1.3 + Cor. 5.1"

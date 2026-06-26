@@ -136,6 +136,65 @@ postulate
   NonTrivial : Set
   -- ^ Non-triviality: connected 4-point function S^c_4 ≢ 0.
 
+-- P31 split: keep the endpoint honest about what is imported and what
+-- is only assembled internally from earlier queue items.
+
+record P31aAbstractOSReconstruction : Set where
+  field
+    osReconstruction :
+      OS0_Temperedness →
+      OS1EuclideanCovariance →
+      OS2_ReflectionPositivity →
+      OS3_BosonicSymmetry →
+      OS4_ClusterProperty →
+      HilbertSpaceConstruction
+    provenanceTag : String
+    provenanceTagIsCanonical :
+      provenanceTag ≡
+        "P31a is the DASHI-owned abstract reconstruction interface: it exposes \
+        \the OS reconstruction theorem shape and consumes YM OS inputs without \
+        \claiming a constructive endpoint proof."
+    noClayPromotion : clayYangMillsPromoted ≡ false
+
+record P31bYMSatisfiesOSInputs : Set where
+  field
+    os0 : OS0_Temperedness
+    os1 : OS1EuclideanCovariance
+    os2 : OS2_ReflectionPositivity
+    os3 : OS3_BosonicSymmetry
+    os4 : OS4_ClusterProperty
+    reconstructFromYMInputs :
+      P31aAbstractOSReconstruction →
+      HilbertSpaceConstruction
+    provenanceTag : String
+    provenanceTagIsCanonical :
+      provenanceTag ≡
+        "P31b packages the YM-side OS inputs: the Balaban/Eriksson route \
+        \supplies OS0-OS4, and DASHI assembles them into a single endpoint \
+        \input bundle."
+    noClayPromotion : clayYangMillsPromoted ≡ false
+
+record P31cClusterGapToPhysicalMassGap : Set where
+  field
+    clusterWitness : OS4_ClusterProperty
+    clusterToMassGap : 0ℝ <ℝ MassGap
+    physicalMassScaleId :
+      0ℝ <ℝ cN →
+      0ℝ <ℝ ΛYM →
+      MassGap ≡ cN *ℝ ΛYM
+    physicalMassScaleFromGap :
+      0ℝ <ℝ MassGap →
+      0ℝ <ℝ cN →
+      0ℝ <ℝ ΛYM →
+      MassGap ≡ cN *ℝ ΛYM
+    provenanceTag : String
+    provenanceTagIsCanonical :
+      provenanceTag ≡
+        "P31c records the cluster/gap bridge to the physical mass gap: OS4 \
+        \clustering yields an abstract positive mass gap, and the source-side \
+        \physical-scale identification anchors that gap to ΛYM."
+    noClayPromotion : clayYangMillsPromoted ≡ false
+
 -- W.0  OS0 temperedness
 --   Source: Requires uniform Schwinger-function distribution bounds.
 postulate
@@ -200,6 +259,60 @@ postulate
     0ℝ <ℝ ΛYM →
     MassGap ≡ cN *ℝ ΛYM
 
+currentP31aAbstractOSReconstruction : P31aAbstractOSReconstruction
+currentP31aAbstractOSReconstruction = record
+  { osReconstruction = lemmaW-1-OSReconstruction
+  ; provenanceTag =
+      "P31a is the DASHI-owned abstract reconstruction interface: it exposes \
+      \the OS reconstruction theorem shape and consumes YM OS inputs without \
+      \claiming a constructive endpoint proof."
+  ; provenanceTagIsCanonical = refl
+  ; noClayPromotion = refl
+  }
+
+currentP31bYMSatisfiesOSInputs : P31bYMSatisfiesOSInputs
+currentP31bYMSatisfiesOSInputs = record
+  { os0 = lemmaOS0-temperedness
+  ; os1 = lemmaO4-7-OS1Covariance
+  ; os2 = lemmaOS2-reflectionPositivity
+  ; os3 = lemmaOS3-bosonicSymmetry
+  ; os4 = lemmaOS4-clusterProperty
+  ; reconstructFromYMInputs = λ p31a →
+      P31aAbstractOSReconstruction.osReconstruction p31a
+        lemmaOS0-temperedness
+        lemmaO4-7-OS1Covariance
+        lemmaOS2-reflectionPositivity
+        lemmaOS3-bosonicSymmetry
+        lemmaOS4-clusterProperty
+  ; provenanceTag =
+      "P31b packages the YM-side OS inputs: the Balaban/Eriksson route \
+      \supplies OS0-OS4, and DASHI assembles them into a single endpoint \
+      \input bundle."
+  ; provenanceTagIsCanonical = refl
+  ; noClayPromotion = refl
+  }
+
+currentP31cClusterGapToPhysicalMassGap : P31cClusterGapToPhysicalMassGap
+currentP31cClusterGapToPhysicalMassGap = record
+  { clusterWitness = P31bYMSatisfiesOSInputs.os4 currentP31bYMSatisfiesOSInputs
+  ; clusterToMassGap =
+      lemmaW-3-clusterToMassGap
+        (P31bYMSatisfiesOSInputs.os4 currentP31bYMSatisfiesOSInputs)
+  ; physicalMassScaleId = λ cN-positive ΛYM-positive →
+      lemmaW-5-physicalMassScaleId
+        (lemmaW-3-clusterToMassGap
+          (P31bYMSatisfiesOSInputs.os4 currentP31bYMSatisfiesOSInputs))
+        cN-positive
+        ΛYM-positive
+  ; physicalMassScaleFromGap = lemmaW-5-physicalMassScaleId
+  ; provenanceTag =
+      "P31c records the cluster/gap bridge to the physical mass gap: OS4 \
+      \clustering yields an abstract positive mass gap, and the source-side \
+      \physical-scale identification anchors that gap to ΛYM."
+  ; provenanceTagIsCanonical = refl
+  ; noClayPromotion = refl
+  }
+
 ------------------------------------------------------------------------
 -- Wightman endpoint assembly
 ------------------------------------------------------------------------
@@ -208,15 +321,15 @@ postulate
 private
   _hilbert : HilbertSpaceConstruction
   _hilbert =
-    lemmaW-1-OSReconstruction
-      lemmaOS0-temperedness
-      lemmaO4-7-OS1Covariance
-      lemmaOS2-reflectionPositivity
-      lemmaOS3-bosonicSymmetry
-      lemmaOS4-clusterProperty
+    P31bYMSatisfiesOSInputs.reconstructFromYMInputs
+      currentP31bYMSatisfiesOSInputs
+      currentP31aAbstractOSReconstruction
 
 record WightmanEndpointBundle : Set where
   field
+    p31a     : P31aAbstractOSReconstruction
+    p31b     : P31bYMSatisfiesOSInputs
+    p31c     : P31cClusterGapToPhysicalMassGap
     os0      : OS0_Temperedness
     os1      : OS1EuclideanCovariance
     os2      : OS2_ReflectionPositivity
@@ -229,16 +342,18 @@ record WightmanEndpointBundle : Set where
     proofStatus : String
     proofStatusIsCanonical :
       proofStatus ≡
-        "All OS axioms and Wightman endpoint lemmas are postulated \
-        \(external analytic inputs). The logical structure is assembled: \
-        \OS0-OS4 → Hilbert space → spectral condition + mass gap. \
-        \This is the correct proof architecture; internal discharge of \
-        \OS/Wightman requires quantum field theory beyond current DASHI scope."
+        "P31 is split explicitly: P31a is the DASHI-owned abstract \
+        \reconstruction interface, P31b packages the YM OS inputs, and P31c \
+        \packages the cluster/gap-to-physical-mass-gap bridge. The leaf OS and \
+        \mass-scale witnesses remain external analytic inputs."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 currentWightmanEndpointBundle : WightmanEndpointBundle
 currentWightmanEndpointBundle = record
-  { os0     = lemmaOS0-temperedness
+  { p31a    = currentP31aAbstractOSReconstruction
+  ; p31b    = currentP31bYMSatisfiesOSInputs
+  ; p31c    = currentP31cClusterGapToPhysicalMassGap
+  ; os0     = lemmaOS0-temperedness
   ; os1     = lemmaO4-7-OS1Covariance
   ; os2     = lemmaOS2-reflectionPositivity
   ; os3     = lemmaOS3-bosonicSymmetry
@@ -250,11 +365,10 @@ currentWightmanEndpointBundle = record
       lemmaW-3-clusterToMassGap lemmaOS4-clusterProperty
   ; nonTriv = lemmaW-4-nontriviality
   ; proofStatus =
-      "All OS axioms and Wightman endpoint lemmas are postulated \
-      \(external analytic inputs). The logical structure is assembled: \
-      \OS0-OS4 → Hilbert space → spectral condition + mass gap. \
-      \This is the correct proof architecture; internal discharge of \
-      \OS/Wightman requires quantum field theory beyond current DASHI scope."
+      "P31 is split explicitly: P31a is the DASHI-owned abstract \
+      \reconstruction interface, P31b packages the YM OS inputs, and P31c \
+      \packages the cluster/gap-to-physical-mass-gap bridge. The leaf OS and \
+      \mass-scale witnesses remain external analytic inputs."
   ; proofStatusIsCanonical = refl
   ; noClayPromotion        = refl
   }

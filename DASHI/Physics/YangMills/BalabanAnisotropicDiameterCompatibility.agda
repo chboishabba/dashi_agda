@@ -69,6 +69,120 @@ fieldRegularityImpliesSingleLinkPositivityWitness = record
   ; diameterDomination = postulatedDiameterDomination
   }
 
+record P33a1SmallFieldRegularityGivesPositiveLinkWeight : Set where
+  field
+    sourceWitness : ImportedFieldRegularityImpliesSingleLinkPositivity
+    theoremBoundary : String
+    theoremBoundaryIsCanonical :
+      theoremBoundary ≡
+      "P33a1: the only genuinely analytic leaf is the small-field regularity statement that each admissible support edge has positive lower-bounded weight."
+    positiveLinkWeight :
+      ∀ (k : ℕ) (X : Polymer) (e : Edge) →
+      isEdgeOf e k X → m-link ≤ℝ w-weight k e
+
+record P33a2DASHINormalisationRaisesLowerBoundToOne : Set where
+  field
+    inputWitness : P33a1SmallFieldRegularityGivesPositiveLinkWeight
+    theoremBoundary : String
+    theoremBoundaryIsCanonical :
+      theoremBoundary ≡
+      "P33a2: once a strictly positive link lower bound exists, DASHI's normalisation lane consumes that witness in the rescaled convention where the minimum admissible link weight is at least one."
+    minimumLinkEllipticity : 1ℝ ≤ℝ m-link
+
+record P33a3UniformityAcrossScaleAndPolymer : Set where
+  field
+    inputWitness : P33a1SmallFieldRegularityGivesPositiveLinkWeight
+    theoremBoundary : String
+    theoremBoundaryIsCanonical :
+      theoremBoundary ≡
+      "P33a3: the link lower bound is consumed uniformly across scale, polymer, and admissible edge rather than as a one-off local estimate."
+    uniformLinkEllipticity :
+      ∀ (k : ℕ) (X : Polymer) (e : Edge) →
+      isEdgeOf e k X → m-link ≤ℝ w-weight k e
+
+record P33aSplitEllipticityBundle : Set where
+  field
+    p33a1Regularity : P33a1SmallFieldRegularityGivesPositiveLinkWeight
+    p33a2Normalisation : P33a2DASHINormalisationRaisesLowerBoundToOne
+    p33a3Uniformity : P33a3UniformityAcrossScaleAndPolymer
+    theoremBoundary : String
+    theoremBoundaryIsCanonical :
+      theoremBoundary ≡
+      "P33a is split into an analytic regularity leaf plus DASHI-owned normalisation and explicit uniform-consumption wrappers before the internal P33b graph consequence is applied."
+
+record P33aFullUniformLinkEllipticityFromSplit : Set where
+  field
+    splitBundle : P33aSplitEllipticityBundle
+    theoremBoundary : String
+    theoremBoundaryIsCanonical :
+      theoremBoundary ≡
+      "P33a-full: the split P33a1/P33a2/P33a3 lane is recombined into the exact uniform-link-ellipticity witness consumed by the internal P33b diameter-domination theorem."
+    uniformLinkEllipticity :
+      ∀ (k : ℕ) (X : Polymer) (e : Edge) →
+      isEdgeOf e k X → m-link ≤ℝ w-weight k e
+    minimumLinkEllipticity : 1ℝ ≤ℝ m-link
+
+currentP33a1SmallFieldRegularityGivesPositiveLinkWeight :
+  P33a1SmallFieldRegularityGivesPositiveLinkWeight
+currentP33a1SmallFieldRegularityGivesPositiveLinkWeight = record
+  { sourceWitness = fieldRegularityImpliesSingleLinkPositivityWitness
+  ; theoremBoundary =
+      "P33a1: the only genuinely analytic leaf is the small-field regularity statement that each admissible support edge has positive lower-bounded weight."
+  ; theoremBoundaryIsCanonical = refl
+  ; positiveLinkWeight =
+      ImportedFieldRegularityImpliesSingleLinkPositivity.linkEllipticity
+        fieldRegularityImpliesSingleLinkPositivityWitness
+  }
+
+currentP33a2DASHINormalisationRaisesLowerBoundToOne :
+  P33a2DASHINormalisationRaisesLowerBoundToOne
+currentP33a2DASHINormalisationRaisesLowerBoundToOne = record
+  { inputWitness = currentP33a1SmallFieldRegularityGivesPositiveLinkWeight
+  ; theoremBoundary =
+      "P33a2: once a strictly positive link lower bound exists, DASHI's normalisation lane consumes that witness in the rescaled convention where the minimum admissible link weight is at least one."
+  ; theoremBoundaryIsCanonical = refl
+  ; minimumLinkEllipticity =
+      ImportedFieldRegularityImpliesSingleLinkPositivity.linkEllipticityMin
+        fieldRegularityImpliesSingleLinkPositivityWitness
+  }
+
+currentP33a3UniformityAcrossScaleAndPolymer :
+  P33a3UniformityAcrossScaleAndPolymer
+currentP33a3UniformityAcrossScaleAndPolymer = record
+  { inputWitness = currentP33a1SmallFieldRegularityGivesPositiveLinkWeight
+  ; theoremBoundary =
+      "P33a3: the link lower bound is consumed uniformly across scale, polymer, and admissible edge rather than as a one-off local estimate."
+  ; theoremBoundaryIsCanonical = refl
+  ; uniformLinkEllipticity =
+      ImportedFieldRegularityImpliesSingleLinkPositivity.linkEllipticity
+        fieldRegularityImpliesSingleLinkPositivityWitness
+  }
+
+currentP33aSplitEllipticityBundle : P33aSplitEllipticityBundle
+currentP33aSplitEllipticityBundle = record
+  { p33a1Regularity = currentP33a1SmallFieldRegularityGivesPositiveLinkWeight
+  ; p33a2Normalisation = currentP33a2DASHINormalisationRaisesLowerBoundToOne
+  ; p33a3Uniformity = currentP33a3UniformityAcrossScaleAndPolymer
+  ; theoremBoundary =
+      "P33a is split into an analytic regularity leaf plus DASHI-owned normalisation and explicit uniform-consumption wrappers before the internal P33b graph consequence is applied."
+  ; theoremBoundaryIsCanonical = refl
+  }
+
+currentP33aFullUniformLinkEllipticityFromSplit :
+  P33aFullUniformLinkEllipticityFromSplit
+currentP33aFullUniformLinkEllipticityFromSplit = record
+  { splitBundle = currentP33aSplitEllipticityBundle
+  ; theoremBoundary =
+      "P33a-full: the split P33a1/P33a2/P33a3 lane is recombined into the exact uniform-link-ellipticity witness consumed by the internal P33b diameter-domination theorem."
+  ; theoremBoundaryIsCanonical = refl
+  ; uniformLinkEllipticity =
+      P33a3UniformityAcrossScaleAndPolymer.uniformLinkEllipticity
+        currentP33a3UniformityAcrossScaleAndPolymer
+  ; minimumLinkEllipticity =
+      P33a2DASHINormalisationRaisesLowerBoundToOne.minimumLinkEllipticity
+        currentP33a2DASHINormalisationRaisesLowerBoundToOne
+  }
+
 -- ── P33a: source-side link ellipticity wrapper ──────────────────────
 --
 -- This wrapper records the imported small-field / link-ellipticity source.
@@ -108,11 +222,11 @@ currentP33aUniformLinkEllipticityWrapper = record
   ; proofBoundaryIsCanonical = refl
   ; linkRegularityWitness = fieldRegularityImpliesSingleLinkPositivityWitness
   ; uniformLinkEllipticity =
-      ImportedFieldRegularityImpliesSingleLinkPositivity.linkEllipticity
-        fieldRegularityImpliesSingleLinkPositivityWitness
+      P33aFullUniformLinkEllipticityFromSplit.uniformLinkEllipticity
+        currentP33aFullUniformLinkEllipticityFromSplit
   ; minimumLinkEllipticity =
-      ImportedFieldRegularityImpliesSingleLinkPositivity.linkEllipticityMin
-        fieldRegularityImpliesSingleLinkPositivityWitness
+      P33aFullUniformLinkEllipticityFromSplit.minimumLinkEllipticity
+        currentP33aFullUniformLinkEllipticityFromSplit
   ; noClayPromotion = refl
   }
 
