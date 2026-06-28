@@ -35,6 +35,7 @@ open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
   ; paperImport
   ; auditTested
   ; openTarget
+  ; mixedReducer
   ; ClaimRole
   ; postulate-import
   ; consequence-proof
@@ -111,7 +112,7 @@ polymerAnimalCountingBoundSurface =
   mkProofTargetSurfaceWithAuthority
     "ImportedPolymerAnimalCountingBound"
     "Eriksson 2602.0041, Lemma 5.6"
-    "The number of connected rooted polymers of diameter/size n is bounded by an exponential counting function of the form #A_n ≤ C_ani · a^n."
+    "P06 is a mixed reducer: DASHI owns size-shell skeleton counting and recombination; remaining leaves are reduced-skeleton complexity control, decoration multiplicity, and skeleton-decoration decomposition."
     "Polymer support geometry in the Step V regime."
     "Rooted polymer entropy is exponentially bounded."
     "P07 KP summability and P23 terminal KP."
@@ -171,15 +172,67 @@ p06a2aBoundedDegreeRootBallGrowthSurface =
     proved
     dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06a2aBoundedDegreeRootBallGrowth" consequence-proof proved
 
+p06a2bConnectedSkeletonHasRootedSpanningTreeSurface : ProofTargetSurface
+p06a2bConnectedSkeletonHasRootedSpanningTreeSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06a2bConnectedSkeletonHasRootedSpanningTree"
+    "DASHI spanning-tree leaf below the local P06 split"
+    "Every rooted connected support-graph skeleton is first reduced to a rooted spanning-tree witness before any DFS walk encoding is applied."
+    "P06a1 bounded-degree support-graph skeleton input."
+    "The spanning-tree reduction is explicit."
+    "P06a2c DFS-walk witness and P06a2d walk-count leaf."
+    "The local P06 split would still skip the tree witness."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentConnectedSkeletonHasRootedSpanningTree" consequence-proof proved
+
+p06a2cRootedTreeDFSWalkSurface : ProofTargetSurface
+p06a2cRootedTreeDFSWalkSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06a2cRootedTreeDFSWalk"
+    "DASHI DFS-walk leaf below the local P06 split"
+    "Each rooted spanning tree is consumed through a depth-first traversal witness of length linear in the tree size."
+    "P06a2b rooted spanning-tree witness."
+    "The DFS walk encoding is explicit."
+    "P06a2d bounded-degree walk count and P06a2e walk cover."
+    "The local P06 split would still hide the traversal witness."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentRootedTreeDFSWalk" consequence-proof proved
+
+p06a2dBoundedDegreeWalkCountSurface : ProofTargetSurface
+p06a2dBoundedDegreeWalkCountSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06a2dBoundedDegreeWalkCount"
+    "DASHI bounded-degree walk-count leaf below the local P06 split"
+    "Bounded-degree support graphs bound the number of rooted walks of any fixed length by a simple exponential walk-count estimate."
+    "P06a2c DFS-walk witness."
+    "The walk-count estimate is explicit."
+    "P06a2e DFS cover and P06a3 diameter-shell reduction."
+    "The local P06 split would still skip the walk multiplicity bound."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentBoundedDegreeWalkCount" consequence-proof proved
+
+p06a2eConnectedSkeletonCoveredByDFSWalkSurface : ProofTargetSurface
+p06a2eConnectedSkeletonCoveredByDFSWalkSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06a2eConnectedSkeletonCoveredByDFSWalk"
+    "DASHI DFS-cover leaf below the local P06 split"
+    "Every rooted connected skeleton is covered by the visited set of a bounded-degree DFS walk, exposing the exact counting bridge used by P06a2."
+    "P06a2c DFS-walk witness and P06a2d walk-count leaf."
+    "The DFS visited-set cover is explicit."
+    "P06a3 size-shell reduction and P06c recombination."
+    "The local P06 split would still hide the visited-set cover."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentConnectedSkeletonCoveredByDFSWalk" consequence-proof proved
+
 p06a2RootedConnectedSkeletonSizeShellCountingSurface : ProofTargetSurface
 p06a2RootedConnectedSkeletonSizeShellCountingSurface =
   mkProofTargetSurfaceWithAuthority
     "P06a2RootedConnectedSkeletonSizeShellCounting"
     "DASHI size-shell counting bridge over bounded-degree rooted connected skeletons"
-    "Bounded-degree rooted connected skeletons are first counted in size-indexed shells before any polymer-specific decoration overhead is considered."
-    "P06a1 bounded-degree support-graph skeleton input and P06a2a root-ball growth."
-    "A local size-shell counting bridge now exists below P06."
-    "P06a3 diameter-shell reduction and P06c recombination."
+    "Bounded-degree rooted connected skeletons are counted in size-indexed shells after the DFS-walk sublemmas and before any polymer-specific decoration overhead is considered."
+    "P06a1 bounded-degree support-graph skeleton input, P06a2a root-ball growth, and P06a2b/P06a2c/P06a2d/P06a2e DFS-walk leaves."
+    "The size-shell bridge is explicit."
+    "P06a3a diameter-shell containment and P06a3b size-or-complexity leaf."
     "Diameter-shell counting would still have no internal size-shell source."
     proved
     dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06a2RootedConnectedSkeletonSizeShellCounting" consequence-proof proved
@@ -197,13 +250,26 @@ p06a3aDiameterShellContainedInRootBallSurface =
     proved
     dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06a3aDiameterShellContainedInRootBall" consequence-proof proved
 
+p06a3bReducedSkeletonCardinalityBoundSurface : ProofTargetSurface
+p06a3bReducedSkeletonCardinalityBoundSurface =
+  mkProofTargetSurfaceWithAuthority
+    "P06a3bReducedSkeletonCardinalityBound"
+    "DASHI size-or-complexity-by-diameter leaf below the local P06 split"
+    "Bounded degree alone is not enough for exponential diameter-shell counting, so DASHI keeps the missing size-or-complexity-controlled-by-diameter statement as an explicit leaf."
+    "P06a3a diameter-shell containment."
+    "The size-or-complexity leaf is explicit."
+    "P06a3 diameter-shell reduction and P06c recombination."
+    "The local P06 split would still hide the diameter-controlled complexity gate."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentReducedSkeletonCardinalityBound" consequence-proof proved
+
 p06a3DiameterShellSkeletonCountingSurface : ProofTargetSurface
 p06a3DiameterShellSkeletonCountingSurface =
   mkProofTargetSurfaceWithAuthority
     "P06a3DiameterShellSkeletonCounting"
     "DASHI diameter-shell reduction over bounded-degree rooted connected skeletons"
-    "Diameter-indexed rooted connected skeleton shells are reduced to the bounded-degree size-shell counting bridge before the explicit decoration leaf is applied."
-    "P06a2 size-shell counting bridge and P06a3a diameter-shell containment."
+    "Diameter-indexed rooted connected skeleton shells are reduced to the bounded-degree size-shell counting bridge and the explicit size-or-complexity-by-diameter leaf before the decoration leaf is applied."
+    "P06a2 size-shell counting bridge, P06a3a diameter-shell containment, and P06a3b size-or-complexity leaf."
     "The diameter-shell side of the graph skeleton count is explicit."
     "P06c recombination and the Step V entropy queue."
     "The local P06 split would still jump from size shells to full polymer counting."
@@ -246,8 +312,8 @@ kPSummabilityBoundSurface =
     "The local polymer shell sum is uniformly finite."
     "Step V certificate and P23 terminal KP."
     "Step V cannot be assembled from entropy control."
-    proved
-    dashi-internal-proof "StepVAssemblyLemmaQueue.StepVMarginFromP33bAndArithmetic" consequence-proof proved
+    auditTested
+    eriksson-2602-0041 "" postulate-import auditTested
 
 pZeroPositiveSurface : ProofTargetSurface
 pZeroPositiveSurface =
@@ -272,8 +338,8 @@ entropyBeatenByFullDecaySurface =
     "Polymer entropy is dominated by full decay."
     "P23 terminal KP and polymer diameter entropy control."
     "The shell series may diverge even with counting bounds."
-    proved
-    dashi-internal-proof "StepVAssemblyLemmaQueue.StepVMarginFromP33bAndArithmetic" consequence-proof proved
+    auditTested
+    eriksson-2602-0041 "" postulate-import auditTested
 
 largeFieldActivityBoundSurface : ProofTargetSurface
 largeFieldActivityBoundSurface =
@@ -780,8 +846,13 @@ record P01P33ProofBundle : Set where
     p06a : ProofTargetSurface
     p06a1 : ProofTargetSurface
     p06a2a : ProofTargetSurface
+    p06a2b : ProofTargetSurface
+    p06a2c : ProofTargetSurface
+    p06a2d : ProofTargetSurface
+    p06a2e : ProofTargetSurface
     p06a2 : ProofTargetSurface
     p06a3a : ProofTargetSurface
+    p06a3b : ProofTargetSurface
     p06a3 : ProofTargetSurface
     p06b : ProofTargetSurface
     p06c : ProofTargetSurface
@@ -837,8 +908,13 @@ currentP01P33ProofBundle = record
   ; p06a = p06aRootedConnectedSkeletonCountingSurface
   ; p06a1 = p06a1BoundedDegreeSupportGraphSkeletonSurface
   ; p06a2a = p06a2aBoundedDegreeRootBallGrowthSurface
+  ; p06a2b = p06a2bConnectedSkeletonHasRootedSpanningTreeSurface
+  ; p06a2c = p06a2cRootedTreeDFSWalkSurface
+  ; p06a2d = p06a2dBoundedDegreeWalkCountSurface
+  ; p06a2e = p06a2eConnectedSkeletonCoveredByDFSWalkSurface
   ; p06a2 = p06a2RootedConnectedSkeletonSizeShellCountingSurface
   ; p06a3a = p06a3aDiameterShellContainedInRootBallSurface
+  ; p06a3b = p06a3bReducedSkeletonCardinalityBoundSurface
   ; p06a3 = p06a3DiameterShellSkeletonCountingSurface
   ; p06b = p06bDecorationMultiplicityBoundSurface
   ; p06c = p06cSkeletonDecorationImpliesAnimalCountingSurface

@@ -75,6 +75,14 @@ data NSTriadKNCrossShellLeakageBoundSampledEvidence : Set where
     NSTriadKNCrossShellLeakageBoundSampledEvidence
   leakageBoundBelowOneTwentiethSampled :
     NSTriadKNCrossShellLeakageBoundSampledEvidence
+  qHelicalLiftAuditInstalled :
+    NSTriadKNCrossShellLeakageBoundSampledEvidence
+  qHelicalBasisRelevantObserved :
+    NSTriadKNCrossShellLeakageBoundSampledEvidence
+  qHelicalCouplingBoundObservedN12 :
+    NSTriadKNCrossShellLeakageBoundSampledEvidence
+  qHelicalDPlusEDecompositionObservedN12 :
+    NSTriadKNCrossShellLeakageBoundSampledEvidence
 
 canonicalNSTriadKNCrossShellLeakageBoundSampledEvidence :
   List NSTriadKNCrossShellLeakageBoundSampledEvidence
@@ -88,15 +96,19 @@ canonicalNSTriadKNCrossShellLeakageBoundSampledEvidence =
   ∷ deltaCollapseObservedAtN12
   ∷ weakBlockFloorPsdVerified
   ∷ leakageBoundBelowOneTwentiethSampled
+  ∷ qHelicalLiftAuditInstalled
+  ∷ qHelicalBasisRelevantObserved
+  ∷ qHelicalCouplingBoundObservedN12
+  ∷ qHelicalDPlusEDecompositionObservedN12
   ∷ []
 
 nSTriadKNCrossShellLeakageBoundSampledEvidenceCount : Nat
 nSTriadKNCrossShellLeakageBoundSampledEvidenceCount =
   listLength canonicalNSTriadKNCrossShellLeakageBoundSampledEvidence
 
-nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs9 :
-  nSTriadKNCrossShellLeakageBoundSampledEvidenceCount ≡ 9
-nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs9 = refl
+nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs13 :
+  nSTriadKNCrossShellLeakageBoundSampledEvidenceCount ≡ 13
+nSTriadKNCrossShellLeakageBoundSampledEvidenceCountIs13 = refl
 
 data NSTriadKNCrossShellLeakageBoundOpenObligation : Set where
   crossShellBlockFloorProved :
@@ -113,6 +125,10 @@ data NSTriadKNCrossShellLeakageBoundOpenObligation : Set where
     NSTriadKNCrossShellLeakageBoundOpenObligation
   mCCPsdProved :
     NSTriadKNCrossShellLeakageBoundOpenObligation
+  qHelicalCouplingUniformlyBounded :
+    NSTriadKNCrossShellLeakageBoundOpenObligation
+  qHelicalBlockFloorUniformlyProved :
+    NSTriadKNCrossShellLeakageBoundOpenObligation
   gate1ConditionalTheoremProved :
     NSTriadKNCrossShellLeakageBoundOpenObligation
 
@@ -126,6 +142,8 @@ canonicalNSTriadKNCrossShellLeakageBoundOpenObligations =
   ∷ normalizedToResidueTransferProved
   ∷ deltaCollapseProved
   ∷ mCCPsdProved
+  ∷ qHelicalCouplingUniformlyBounded
+  ∷ qHelicalBlockFloorUniformlyProved
   ∷ gate1ConditionalTheoremProved
   ∷ []
 
@@ -133,9 +151,9 @@ nSTriadKNCrossShellLeakageBoundOpenObligationCount : Nat
 nSTriadKNCrossShellLeakageBoundOpenObligationCount =
   listLength canonicalNSTriadKNCrossShellLeakageBoundOpenObligations
 
-nSTriadKNCrossShellLeakageBoundOpenObligationCountIs8 :
-  nSTriadKNCrossShellLeakageBoundOpenObligationCount ≡ 8
-nSTriadKNCrossShellLeakageBoundOpenObligationCountIs8 = refl
+nSTriadKNCrossShellLeakageBoundOpenObligationCountIs10 :
+  nSTriadKNCrossShellLeakageBoundOpenObligationCount ≡ 10
+nSTriadKNCrossShellLeakageBoundOpenObligationCountIs10 = refl
 
 data NSTriadKNCrossShellLeakageBoundStructuralResult : Set where
   bCrossZeroStructuralProof :
@@ -212,6 +230,10 @@ canonicalDeltaSmallAtN12Text : String
 canonicalDeltaSmallAtN12Text =
   "Δ_N = 2.2e-5 at N=12 (0.014% of block λ), but trend is not monotone (N=6,8,10 sit at 2.8-4.4%)."
 
+canonicalQHelicalCouplingText : String
+canonicalQHelicalCouplingText =
+  "Helical coupling route: candidate Q_N = D_N + E_N decomposition is viable at N=12 only. Telemetry: lambda_min(D_12|1_C^perp) approx 4.375958e-6, lambda_min(Q_12|1_C^perp) approx 4.320716e-6, ||E_12||op approx 1.083606e-2, and ||D_12^-1/2 E_12 D_12^-1/2|| approx 0.595611 < 1. Uniform-in-N coupling and block-floor proofs remain open."
+
 canonicalAllRowsLeakageSmallText : String
 canonicalAllRowsLeakageSmallText =
   "All four sampled shell rows (N=6,8,10,12) return verdict = leakage_small."
@@ -262,7 +284,7 @@ canonicalGText =
 
 canonicalFText : String
 canonicalFText =
-  "F: missing proofs: (1) dominationRatioUniformlyBoundedProved — prove rho_N <= 2/3 uniformly in N on 1_C^perp; (2) schurSignedFactorizationProved — prove the signed decomposition S_C = L_good − L_bad with the required coercive good form; (3) schurComplementPsdProved and gate1ConditionalTheoremProved — derive block floor >= 1/9 from signed domination; (4) leakage bound analytic uniform in N; (5) admissible profile extension; (6) Gram coercivity closure (Gates 2–5). Schur audit: M_GG PSD full rank (λ_min ~ 1e-4), ‖M_GC‖ ≈ 4.3e-3 stable, S_C 1_C = 0 analytically and at machine precision numerically, nullity one observed, constant-on-C gauge mode observed. Ordinary Kron-Laplacian, balanced signed-graph, cut-domination, and per-source routes are not the live proof path."
+  "F: missing proofs: (1) dominationRatioUniformlyBoundedProved — prove rho_N <= 2/3 uniformly in N on 1_C^perp; (2) schurSignedFactorizationProved — prove the signed decomposition S_C = L_good − L_bad with the required coercive good form; (3) helical coupling route — prove Q_N = D_N + E_N with D_N block floor and ||D_N^-1/2 E_N D_N^-1/2|| <= kappa_* < 1 uniformly, not just at N=12; (4) schurComplementPsdProved and gate1ConditionalTheoremProved — derive block floor >= 1/9 from signed domination or helical coupling; (5) leakage bound analytic uniform in N; (6) admissible profile extension; (7) Gram coercivity closure (Gates 2–5). Schur audit: M_GG PSD full rank (λ_min ~ 1e-4), ‖M_GC‖ ≈ 4.3e-3 stable, S_C 1_C = 0 analytically and at machine precision numerically, nullity one observed, constant-on-C gauge mode observed. Ordinary Kron-Laplacian, balanced signed-graph, cut-domination, and per-source routes are not the live proof path."
 
 record NSTriadKNCrossShellLeakageBoundORCSLPGF : Set where
   constructor mkNSTriadKNCrossShellLeakageBoundORCSLPGF

@@ -1,5 +1,7 @@
 module DASHI.Core.ContactHamiltonian where
 
+open import Agda.Builtin.Bool using (Bool)
+
 ------------------------------------------------------------------------
 -- Generic residual-energy surface.
 --
@@ -16,5 +18,6 @@ record ContactHamiltonian : Set₁ where
     Hamiltonian      : Residual → Energy
     Pressure         : Energy → Set
     AuthorityPenalty : Energy → Set
+    hamiltonianNeverMeansPromotion : Bool
 
 open ContactHamiltonian public

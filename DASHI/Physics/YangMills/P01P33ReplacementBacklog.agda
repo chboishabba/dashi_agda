@@ -88,20 +88,22 @@ p05Entry =
 
 -- Entropy-side queue: P06 feeds the counting surface, P06a/P06b/P06c expose
 -- the non-canonical split, P07 consumes the arithmetic queue, and P09 closes
--- the explicit decay-vs-entropy margin.
+-- the explicit decay-vs-entropy margin.  The P06a2 lane now names the DFS-walk
+-- sublemmas explicitly, and P06a3 carries the explicit
+-- size-or-complexity-controlled-by-diameter leaf.
 
 p06Entry : ProofReplacementEntry
 p06Entry =
   mkProofReplacementEntry
     Surfaces.polymerAnimalCountingBoundSurface
-    "Keep the imported counting witness explicit, but route it through the DASHI-owned P06a/P06b/P06c split so the entropy lane consumes a rooted-shell skeleton adapter, an explicit decoration leaf, and a recombination reducer rather than a completely opaque source theorem."
+    "Keep the imported counting witness explicit, but route it through the DASHI-owned P06a/P06b/P06c split so the entropy lane consumes a rooted-shell skeleton adapter, explicit DFS-walk sublemmas under P06a2, an explicit size-or-complexity-controlled-by-diameter leaf under P06a3, and a recombination reducer rather than a completely opaque source theorem."
     soon
 
 p06aEntry : ProofReplacementEntry
 p06aEntry =
   mkProofReplacementEntry
     Surfaces.p06aRootedConnectedSkeletonCountingSurface
-    "Strengthen this bounded-degree skeleton bridge from theorem-shaped ownership into a genuine rooted connected skeleton counting proof, now that the root-ball growth and diameter-containment substeps are explicit."
+    "Strengthen this bounded-degree skeleton bridge from theorem-shaped ownership into a genuine rooted connected skeleton counting proof, now that the root-ball growth, DFS-walk, and diameter-containment substeps are explicit."
     now
 
 p06a1Entry : ProofReplacementEntry
@@ -122,7 +124,7 @@ p06a2Entry : ProofReplacementEntry
 p06a2Entry =
   mkProofReplacementEntry
     Surfaces.p06a2RootedConnectedSkeletonSizeShellCountingSurface
-    "Upgrade this from a theorem-shaped size-shell bridge to a real bounded-degree rooted connected skeleton counting proof."
+    "Upgrade this from a theorem-shaped size-shell bridge to a real bounded-degree rooted connected skeleton counting proof, with the DFS-walk sublemmas under P06a2 kept explicit."
     now
 
 p06a3aEntry : ProofReplacementEntry
@@ -136,7 +138,7 @@ p06a3Entry : ProofReplacementEntry
 p06a3Entry =
   mkProofReplacementEntry
     Surfaces.p06a3DiameterShellSkeletonCountingSurface
-    "Use this as the local size-to-diameter shell bridge so the remaining P06 residue is decoration overhead rather than graph counting."
+    "Use this as the local size-to-diameter shell bridge so the remaining P06 residue is the explicit size-or-complexity-controlled-by-diameter leaf rather than hidden graph counting."
     now
 
 p06bEntry : ProofReplacementEntry
@@ -448,6 +450,7 @@ record P01P33ReplacementBacklog : Set where
     backlogBoundaryIsCanonical :
       backlogBoundary ≡
       "Per-lemma proof-replacement queue for P01-P33: entropy-side P06 stays canonical while P06a/P06a1/P06a2a/P06a2/P06a3a/P06a3/P06b/P06c expose the bounded-degree skeleton-counting, root-ball growth, size-shell, diameter-containment, diameter-shell, decoration-bound, and recombination split; P07/P09 feed Step V, Step V feeds RG through explicit StepVToDLRSmallness, DLRSmallnessAndCrossScaleToUniformLSI, StepVToA2, A2ToB6, and B6ToRGCauchy reducers; the endpoint lane now exposes an internal P31a/P31b/P31c split while the composite source-side P31 sink remains explicit."
+      "Per-lemma proof-replacement queue for P01-P33: entropy-side P06 stays canonical while P06a/P06a1/P06a2a/P06a2/P06a3a/P06a3/P06b/P06c expose the bounded-degree skeleton-counting, root-ball growth, DFS-walk sublemmas, size-shell, diameter-containment, explicit size-or-complexity-controlled-by-diameter leaf, decoration-bound, and recombination split; P07/P09 feed Step V, Step V feeds RG through explicit StepVToDLRSmallness, DLRSmallnessAndCrossScaleToUniformLSI, StepVToA2, A2ToB6, and B6ToRGCauchy reducers; the endpoint lane now exposes an internal P31a/P31b/P31c split while the composite source-side P31 sink remains explicit."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 currentP01P33ReplacementBacklog : P01P33ReplacementBacklog

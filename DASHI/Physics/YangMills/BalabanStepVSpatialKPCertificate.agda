@@ -33,6 +33,8 @@ record BalabanStepVSpatialKPCertificate : Set₁ where
     entropyBound : PolymerDiameterEntropyBound
     diameterCompatibility : AnisotropicDiameterCompatibility
     largeFieldSuppression : LargeFieldSuppressionBound
+    stepVSourceAnalyticInputs : Assembly.StepVSourceAnalyticInputs
+    stepVInternalReducers : Assembly.StepVInternalReducers
     assembledStepVCertificate : Assembly.StepVSpatialKPCertificate
     assembledStepVRGStructure : Assembly.StepVRGAssemblyBundle
     weightedArithmeticCloses :
@@ -62,8 +64,12 @@ currentBalabanStepVSpatialKP = record
   { entropyBound = currentPolymerDiameterEntropyBound
   ; diameterCompatibility = currentAnisotropicDiameterCompatibility
   ; largeFieldSuppression = currentLargeFieldSuppressionBound
+  ; stepVSourceAnalyticInputs = Assembly.currentStepVSourceAnalyticInputs
+  ; stepVInternalReducers = Assembly.currentStepVInternalReducers
   ; assembledStepVCertificate =
-      Assembly.lemmaV-3b-fromP33aAndWeightedDecay
+      Assembly.StepVFromDischargePackages
+        Assembly.currentStepVSourceAnalyticInputs
+        Assembly.currentStepVInternalReducers
   ; assembledStepVRGStructure =
       Assembly.currentStepVRGAssemblyBundle
   ; weightedArithmeticCloses =

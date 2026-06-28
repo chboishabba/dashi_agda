@@ -157,6 +157,60 @@ def dense_laplacians_from_matvec(profile: MatrixFreeKNProfile) -> tuple[np.ndarr
     return 0.5 * (l_abs + l_abs.T), 0.5 * (l_neg + l_neg.T)
 
 
+def profile_from_weight_matrices(
+    weights_abs: np.ndarray,
+    weights_neg: np.ndarray,
+    *,
+    shell_levels: np.ndarray | None = None,
+    profile_id: str = "weight-matrix-profile",
+    zero_eps: float = 0.0,
+) -> MatrixFreeKNProfile:
+    """Build an incidence profile from symmetric off-diagonal weight matrices.
+
+    This is the adapter surface for dense checkpoint-derived Laplacians such as
+    Schur sign splits.  Each undirected edge is recorded once from the strict
+    upper triangle; matvec semantics then match the pair-Laplacian executor.
+    """
+
+    abs_mat = np.asarray(weights_abs, dtype=np.float64)
+    neg_mat = np.asarray(weights_neg, dtype=np.float64)
+    if abs_mat.ndim != 2 or neg_mat.ndim != 2 or abs_mat.shape != neg_mat.shape:
+        raise ValueError("weights_abs and weights_neg must be same-shape matrices")
+    if abs_mat.shape[0] != abs_mat.shape[1]:
+        raise ValueError("weight matrices must be square")
+
+    mode_count = int(abs_mat.shape[0])
+    abs_sym = 0.5 * (abs_mat + abs_mat.T)
+    neg_sym = 0.5 * (neg_mat + neg_mat.T)
+    np.fill_diagonal(abs_sym, 0.0)
+    np.fill_diagonal(neg_sym, 0.0)
+    active = np.triu(
+        (np.abs(abs_sym) > float(zero_eps)) | (np.abs(neg_sym) > float(zero_eps)),
+        k=1,
+    )
+    left, right = np.nonzero(active)
+    if left.size == 0:
+        edge_left = np.zeros(0, dtype=np.int64)
+        edge_right = np.zeros(0, dtype=np.int64)
+        edge_abs = np.zeros(0, dtype=np.float64)
+        edge_neg = np.zeros(0, dtype=np.float64)
+    else:
+        edge_left = np.asarray(left, dtype=np.int64)
+        edge_right = np.asarray(right, dtype=np.int64)
+        edge_abs = np.asarray(abs_sym[edge_left, edge_right], dtype=np.float64)
+        edge_neg = np.asarray(neg_sym[edge_left, edge_right], dtype=np.float64)
+
+    return MatrixFreeKNProfile(
+        mode_count=mode_count,
+        edge_left=edge_left,
+        edge_right=edge_right,
+        weights_abs=edge_abs,
+        weights_neg=edge_neg,
+        shell_levels=None if shell_levels is None else np.asarray(shell_levels, dtype=np.float64),
+        profile_id=str(profile_id),
+    )
+
+
 def _positive_subspace(matrix: np.ndarray, tol: float) -> tuple[np.ndarray, np.ndarray]:
     evals, evecs = np.linalg.eigh(0.5 * (matrix + matrix.T))
     mask = np.asarray(evals > float(tol), dtype=bool)
@@ -213,4 +267,3 @@ def dense_parity_adapter(profile: MatrixFreeKNProfile, zero_eps: float = 1.0e-12
         "worst_eigenvector_shell_mass_fraction": shell_mass_fraction,
         "warnings": [],
     }
-
