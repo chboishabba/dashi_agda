@@ -79,7 +79,7 @@ record ImportedDLRLSIFromPolymerDecay : Set where
     sourceAuthorityId : SourceAuthorityId
     theoremLocator : String
     status : VerificationStatus
-    dlrLsiFromPolymerDecayInequality : ∀ (k : ℕ) → δ k *ℝ 4ℝ <ℝ αblk
+    dlrLsiFromPolymerDecayInequality : ∀ (k : ℕ) → (δ k *ℝ 4ℝ) <ℝ αblk
 
 record ImportedCrossScaleBound : Set where
   field
@@ -109,14 +109,14 @@ record ImportedAssumptionA2FromKPCertificate : Set where
     sourceAuthorityId : SourceAuthorityId
     theoremLocator : String
     status : VerificationStatus
-    oscillationBound : ∀ (k : ℕ) (X-dist : ℝ) → osc k ≤ℝ (C-osc *ℝ twoPowNeg2 k *ℝ X-dist)
+    oscillationBound : ∀ (k : ℕ) (X-dist : ℝ) → osc k ≤ℝ ((C-osc *ℝ twoPowNeg2 k) *ℝ X-dist)
 
 record ImportedB6InfluenceBound : Set where
   field
     sourceAuthorityId : SourceAuthorityId
     theoremLocator : String
     status : VerificationStatus
-    influenceBound : ∀ (k : ℕ) → σ-influence k ≤ℝ (C-B6 *ℝ Λ1 k *ℝ twoPowNeg4 k)
+    influenceBound : ∀ (k : ℕ) → σ-influence k ≤ℝ ((C-B6 *ℝ Λ1 k) *ℝ twoPowNeg4 k)
 
 record ImportedRGCauchySummability : Set where
   field
@@ -126,14 +126,14 @@ record ImportedRGCauchySummability : Set where
     cauchyConvergence : IsSummable δ-RG → IsCauchySeq observables
 
 postulate
-  postulatedDlrLsiFromPolymerDecayInequality : ∀ (k : ℕ) → δ k *ℝ 4ℝ <ℝ αblk
+  postulatedDlrLsiFromPolymerDecayInequality : ∀ (k : ℕ) → (δ k *ℝ 4ℝ) <ℝ αblk
   postulatedCrossScaleBoundSummable : IsSummable crossScaleD
   postulatedDlrLsiImplication1 : HasDLRLSI → HasDSCompleteAnalyticity
   postulatedDlrLsiImplication2 : HasDSCompleteAnalyticity → HasExponentialClustering
   postulatedGapBound : (m-gap β Nc d-dim) ≤ℝ Δphys
   postulatedGapPositive : 0ℝ <ℝ (m-gap β Nc d-dim)
-  postulatedOscillationBound : ∀ (k : ℕ) (X-dist : ℝ) → osc k ≤ℝ (C-osc *ℝ twoPowNeg2 k *ℝ X-dist)
-  postulatedInfluenceBound : ∀ (k : ℕ) → σ-influence k ≤ℝ (C-B6 *ℝ Λ1 k *ℝ twoPowNeg4 k)
+  postulatedOscillationBound : ∀ (k : ℕ) (X-dist : ℝ) → osc k ≤ℝ ((C-osc *ℝ twoPowNeg2 k) *ℝ X-dist)
+  postulatedInfluenceBound : ∀ (k : ℕ) → σ-influence k ≤ℝ ((C-B6 *ℝ Λ1 k) *ℝ twoPowNeg4 k)
   postulatedCauchyConvergence : IsSummable δ-RG → IsCauchySeq observables
 
 postulatedDlrLSIFromPolymerDecayWitness : ImportedDLRLSIFromPolymerDecay
@@ -234,14 +234,14 @@ record BalabanRGLaneState : Set₁ where
       Assembly.DLRSmallnessAndCrossScaleToUniformLSI
 
     -- Expose/Consume fields
-    dlrLsiFromPolymerDecayField : ∀ (k : ℕ) → δ k *ℝ 4ℝ <ℝ αblk
+    dlrLsiFromPolymerDecayField : ∀ (k : ℕ) → (δ k *ℝ 4ℝ) <ℝ αblk
     crossScaleBoundField : IsSummable crossScaleD
     dlrLsiImplication1Field : HasDLRLSI → HasDSCompleteAnalyticity
     dlrLsiImplication2Field : HasDSCompleteAnalyticity → HasExponentialClustering
     gapBoundField : (m-gap β Nc d-dim) ≤ℝ Δphys
     gapPositiveField : 0ℝ <ℝ (m-gap β Nc d-dim)
-    oscillationBoundField : ∀ (k : ℕ) (X-dist : ℝ) → osc k ≤ℝ (C-osc *ℝ twoPowNeg2 k *ℝ X-dist)
-    influenceBoundField : ∀ (k : ℕ) → σ-influence k ≤ℝ (C-B6 *ℝ Λ1 k *ℝ twoPowNeg4 k)
+    oscillationBoundField : ∀ (k : ℕ) (X-dist : ℝ) → osc k ≤ℝ ((C-osc *ℝ twoPowNeg2 k) *ℝ X-dist)
+    influenceBoundField : ∀ (k : ℕ) → σ-influence k ≤ℝ ((C-B6 *ℝ Λ1 k) *ℝ twoPowNeg4 k)
     cauchyConvergenceField : IsSummable δ-RG → IsCauchySeq observables
 
     -- Assembly

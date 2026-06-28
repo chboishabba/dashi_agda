@@ -48,6 +48,7 @@ lensKernelGivesComparisonSurface {S} {A} lens =
     (λ observable → observable)
     (λ left right → left ≡ right)
     (λ left right → left ≡ right)
+    true
 
 ------------------------------------------------------------------------
 -- FingerprintProjectionCore -> FibreRestrictionCore

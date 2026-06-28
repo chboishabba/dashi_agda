@@ -21,7 +21,7 @@ module DASHI.Physics.YangMills.ArithmeticLemmaQueue where
 open import Agda.Builtin.Bool   using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Data.Nat.Base       using (ℕ; _+_; _≤_; _<_; zero; suc; s≤s; z≤n)
+open import Data.Nat.Base       using (ℕ; _+_; _≤_; _<_; _>_; zero; suc; s≤s; z≤n)
 
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
 open import DASHI.Foundations.RealAnalysisAxioms
@@ -207,7 +207,7 @@ postulate
   activityDecayRateNonneg : 0ℝ ≤ℝ activityDecayRate
 
   -- The KP convergence hypothesis A * B < 1.
-  animalCountingBoundHolds : animalCountRate *ℝ activityDecayRate <ℝ 1ℝ
+  animalCountingBoundHolds : (animalCountRate *ℝ activityDecayRate) <ℝ 1ℝ
   -- Source: Eriksson 2602.0041 Lemma 5.6 + Theorem 2.1.
 
 -- lemmaP07-3-fromBound: assemble P07.3 from P07.2 and the three postulates.
@@ -272,7 +272,7 @@ record KPSummabilityReducerFromAnimalDecayAndMargin : Set where
     animalRateNonnegative : 0ℝ ≤ℝ animalCountRate
     activityRateNonnegative : 0ℝ ≤ℝ activityDecayRate
     entropyMargin :
-      animalCountRate *ℝ activityDecayRate <ℝ 1ℝ
+      (animalCountRate *ℝ activityDecayRate) <ℝ 1ℝ
     instantiatedReducer :
       Summable (λ n → powℝ animalCountRate n *ℝ powℝ activityDecayRate n)
     proofBoundary : String

@@ -23,9 +23,11 @@ import DASHI.Physics.YangMills.P01P33ProofSurfaces as Surfaces
 --
 -- Status: 33/33 entries populated.
 --         clayYangMillsPromoted = false (authority/adjudication gate).
--- Provenance split after the low-risk graph/arithmetic pass:
---   internal wrapper/proved: P01-P03, P07, P09, P33
---   paper-import remains on the direct source citations outside that lane.
+-- Provenance split:
+--   proved: P04, P05, P33b
+--   standard-wrapper: P01-P03
+--   audit-tested: P07, P09, P16, P24
+--   paper-import: P06, P08, P10-P15, P17-P23, P25-P32, P33a, P33
 --   P06 also has a non-canonical internal split surfaced elsewhere as
 --   P06aRootedConnectedSkeletonCounting, P06bPolymerDecorationMultiplicityBound,
 --   and P06cSkeletonDecorationImpliesAnimalCounting; the canonical numbered
@@ -34,8 +36,14 @@ import DASHI.Physics.YangMills.P01P33ProofSurfaces as Surfaces
 --   P06a1BoundedDegreeSupportGraphSkeleton,
 --   P06a2aBoundedDegreeRootBallGrowth,
 --   P06a2RootedConnectedSkeletonSizeShellCounting,
+--   P06a2b rooted spanning-tree witness before DFS encoding,
+--   P06a2c depth-first traversal witness,
+--   P06a2d bounded-degree rooted-walk count,
+--   P06a2e DFS-walk coverage of the rooted skeleton,
 --   P06a3aDiameterShellContainedInRootBall,
 --   P06a3DiameterShellSkeletonCounting.
+--   The P06a3 leaf is the explicit size-or-complexity-controlled-by-diameter
+--   statement surfaced as P06a3b.
 --   P33 likewise now has a non-canonical internal split surfaced elsewhere as
 --   P33a1SmallFieldRegularityGivesPositiveLinkWeight,
 --   P33a2DASHINormalisationRaisesLowerBoundToOne,
@@ -78,8 +86,13 @@ record PostulateInventory : Set where
     --   P06a1BoundedDegreeSupportGraphSkeleton
     --   P06a2aBoundedDegreeRootBallGrowth
     --   P06a2RootedConnectedSkeletonSizeShellCounting
+    --   P06a2b rooted spanning-tree witness before DFS encoding
+    --   P06a2c depth-first traversal witness
+    --   P06a2d bounded-degree rooted-walk count
+    --   P06a2e DFS-walk coverage of the rooted skeleton
     --   P06a3aDiameterShellContainedInRootBall
     --   P06a3DiameterShellSkeletonCounting
+    --   P06a3b size-or-complexity-controlled-by-diameter leaf
     --   P06bPolymerDecorationMultiplicityBound
     --   P06cSkeletonDecorationImpliesAnimalCounting
     --   P06AnimalCountingReducer

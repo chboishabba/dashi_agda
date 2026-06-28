@@ -169,6 +169,7 @@ ResidualPhaseContactHamiltonian =
     traceHamiltonian
     tracePressureWitness
     traceAuthorityPenaltyWitness
+    true
 
 ------------------------------------------------------------------------
 -- Theorem surfaces for the cognition-specific instantiation

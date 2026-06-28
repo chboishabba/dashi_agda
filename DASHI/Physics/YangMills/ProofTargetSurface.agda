@@ -35,6 +35,8 @@ open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
   ; paperImport
   ; auditTested
   ; openTarget
+  ; mixedReducer
+  ; provedConditionalReducer
   ; ClaimRole
   ; postulate-import
   ; consequence-proof
@@ -50,6 +52,8 @@ proofStatusLabel standardWrapper = "standard-wrapper"
 proofStatusLabel paperImport = "paper-import"
 proofStatusLabel auditTested = "audit-tested"
 proofStatusLabel openTarget = "open"
+proofStatusLabel mixedReducer = "mixed-reducer"
+proofStatusLabel provedConditionalReducer = "proved-conditional-reducer"
 
 surfaceClosed : ProofStatus → Bool
 surfaceClosed openTarget = false

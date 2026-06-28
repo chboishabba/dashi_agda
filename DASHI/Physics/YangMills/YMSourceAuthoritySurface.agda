@@ -35,6 +35,8 @@ data VerificationStatus : Set where
   paperImport : VerificationStatus
   auditTested : VerificationStatus
   openTarget : VerificationStatus
+  mixedReducer : VerificationStatus
+  provedConditionalReducer : VerificationStatus
 
 data ClaimRole : Set where
   postulate-import : ClaimRole

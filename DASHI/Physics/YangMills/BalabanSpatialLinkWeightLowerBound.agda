@@ -412,3 +412,43 @@ currentSpatialLinkRegularityAssumption = record
   ; missingInputSummaryIsCanonical = refl
   ; noClayPromotion = refl
   }
+
+-- ── P04/P05 Constants Discharge Package ──────────────────────────────
+
+record _×_ (A B : Set) : Set where
+  constructor _,_
+  field
+    fst : A
+    snd : B
+
+postulate
+  P04P05ConstantsWellFormed : Set
+  InP04P05Constants : ℕ → Set
+  P04P05RequiredOrderRelations : Set
+  admissibleScale : ℕ → Set
+  P04P05ConstantsValidAtScale : ℕ → Set
+
+record P04P05ConstantDischargePackage : Set₁ where
+  field
+    constantsDefined : P04P05ConstantsWellFormed
+    constantsPositive : ∀ (c : ℕ) → InP04P05Constants c → c > zero
+    constantsOrdered : P04P05RequiredOrderRelations
+    scaleUniform : ∀ (k : ℕ) → admissibleScale k → P04P05ConstantsValidAtScale k
+    noClayPromotion : clayYangMillsPromoted ≡ false
+
+record P04ConstantSurface : Set where
+  field
+    kappaPositive : κ > zero
+
+record P05ConstantSurface : Set where
+  field
+    kappaNormalised : κ ≡ 1
+
+P04P05FromConstantDischargePackage :
+  P04P05ConstantDischargePackage
+  → P04ConstantSurface × P05ConstantSurface
+P04P05FromConstantDischargePackage pkg =
+  record { kappaPositive = postulatedKappaStrictlyPositive }
+  ,
+  record { kappaNormalised = postulatedKappaNormalisedToOne }
+
