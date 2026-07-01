@@ -7,6 +7,8 @@ open import Agda.Builtin.String using (String)
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
 open import DASHI.Physics.YangMills.ProofTargetSurface
 import DASHI.Physics.YangMills.P01P33ProofSurfaces as Surfaces
+import DASHI.Physics.YangMills.LocalLatticeDischargePipeline as LocalLattice
+import DASHI.Physics.YangMills.YangMillsDischargeClosure as Closure
 
 -- ── PostulateInventory ───────────────────────────────────────────────
 -- Complete inventory of all imported postulates, conventions, and source

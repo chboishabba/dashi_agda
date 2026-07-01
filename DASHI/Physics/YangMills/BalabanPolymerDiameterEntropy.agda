@@ -494,6 +494,64 @@ record P06ModelLeafDischargePackage : Set₁ where
       BalabanPolymerDecompositionAdapter graphAdapter
     linearRangeSum : LinearRangeExponentialSum
 
+record OwnedP06a3DiameterShellCountingWitness : Set₁ where
+  field
+    payload : BalabanP06MixedReducerPayload
+    diameterShellBound :
+      Σ Nat
+        (λ C-diam →
+          ∀ (r : GraphCombinatorics.Graph.Vertex
+                 (BalabanGraphAdapter.supportGraph
+                   (BalabanP06MixedReducerPayload.graphAdapter payload)))
+            (n : Nat) →
+          GraphCombinatorics.countReducedSkeletonsWithDiam
+            (BalabanGraphAdapter.supportGraph
+              (BalabanP06MixedReducerPayload.graphAdapter payload)) r n ≤
+          C-diam ^ n)
+
+record OwnedP06bDecorationMultiplicityWitness : Set₁ where
+  field
+    payload : BalabanP06bDecorationPayload
+    decorationBound :
+      Σ Nat
+        (λ C-decDiam →
+          ∀ (r : GraphCombinatorics.Graph.Vertex
+                 (BalabanGraphAdapter.supportGraph
+                   (BalabanP06bDecorationPayload.graphAdapter payload)))
+            (X : List
+              (GraphCombinatorics.Graph.Vertex
+                (BalabanGraphAdapter.supportGraph
+                  (BalabanP06bDecorationPayload.graphAdapter payload))))
+            (rrs : GraphCombinatorics.RootedReducedSkeleton
+                     (BalabanGraphAdapter.supportGraph
+                       (BalabanP06bDecorationPayload.graphAdapter payload))
+                     r X)
+            (n : Nat) →
+          GraphCombinatorics.diam_G
+            {BalabanGraphAdapter.supportGraph
+              (BalabanP06bDecorationPayload.graphAdapter payload)} X ≡ n →
+          GraphCombinatorics.DecorationMultiplicity.countDecorations
+            (BalabanDecorationMultiplicityAdapter.decorationMultiplicity
+              (BalabanP06bDecorationPayload.decorationMultiplicityAdapter
+                payload))
+            X ≤
+          C-decDiam ^ n)
+
+record OwnedP06AnimalCountingWitness : Set₁ where
+  field
+    payload : BalabanP06MixedReducerPayload
+    animalCountingBound :
+      Σ Nat
+        (λ C-poly →
+          ∀ (r : GraphCombinatorics.Graph.Vertex
+                 (BalabanGraphAdapter.supportGraph
+                   (BalabanP06MixedReducerPayload.graphAdapter payload)))
+            (n : Nat) →
+          GraphCombinatorics.countPolymersWithDiam
+            (BalabanGraphAdapter.supportGraph
+              (BalabanP06MixedReducerPayload.graphAdapter payload)) r n ≤
+          C-poly ^ n)
+
 P06FromModelLeafDischargePackage :
   P06ModelLeafDischargePackage →
   BalabanP06MixedReducerPayload
@@ -654,6 +712,79 @@ currentBalabanP06bDecorationPayload = record
       currentBalabanDecorationMultiplicityAdapter
   }
 
+currentBalabanP06a3DiameterShellCountingBound :
+  Σ Nat
+    (λ C-diam →
+      ∀ (r : GraphCombinatorics.Graph.Vertex
+             (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))
+        (n : Nat) →
+      GraphCombinatorics.countReducedSkeletonsWithDiam
+        (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter) r n ≤
+      C-diam ^ n)
+currentBalabanP06a3DiameterShellCountingBound =
+  BalabanCountingBoundReplacement
+    currentBalabanGraphAdapter
+    currentBalabanReducedSkeletonComplexityAdapter
+    GraphCombinatorics.LinearRangeExponentialSum
+
+currentOwnedP06a3DiameterShellCountingWitness :
+  OwnedP06a3DiameterShellCountingWitness
+currentOwnedP06a3DiameterShellCountingWitness = record
+  { payload = currentBalabanP06MixedReducerPayload
+  ; diameterShellBound = currentBalabanP06a3DiameterShellCountingBound
+  }
+
+currentBalabanP06bDecorationMultiplicityByDiameter :
+  Σ Nat
+    (λ C-decDiam →
+      ∀ (r : GraphCombinatorics.Graph.Vertex
+             (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))
+        (X : List
+          (GraphCombinatorics.Graph.Vertex
+            (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)))
+        (rrs : GraphCombinatorics.RootedReducedSkeleton
+                 (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
+                 r X)
+        (n : Nat) →
+      GraphCombinatorics.diam_G
+        {BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter} X ≡ n →
+      GraphCombinatorics.DecorationMultiplicity.countDecorations
+        (BalabanDecorationMultiplicityAdapter.decorationMultiplicity
+          currentBalabanDecorationMultiplicityAdapter)
+        X ≤
+      C-decDiam ^ n)
+currentBalabanP06bDecorationMultiplicityByDiameter =
+  BalabanDecorationMultiplicityByDiameter
+    currentBalabanGraphAdapter
+    currentBalabanReducedSkeletonComplexityAdapter
+    currentBalabanDecorationMultiplicityAdapter
+
+currentOwnedP06bDecorationMultiplicityWitness :
+  OwnedP06bDecorationMultiplicityWitness
+currentOwnedP06bDecorationMultiplicityWitness = record
+  { payload = currentBalabanP06bDecorationPayload
+  ; decorationBound = currentBalabanP06bDecorationMultiplicityByDiameter
+  }
+
+currentBalabanP06AnimalCountingBoundFromAdapters :
+  Σ Nat
+    (λ C-poly →
+      ∀ (r : GraphCombinatorics.Graph.Vertex
+             (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))
+        (n : Nat) →
+      GraphCombinatorics.countPolymersWithDiam
+        (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter) r n ≤
+      C-poly ^ n)
+currentBalabanP06AnimalCountingBoundFromAdapters =
+  BalabanP06AnimalCountingFromAdapters currentBalabanP06MixedReducerPayload
+
+currentOwnedP06AnimalCountingWitness :
+  OwnedP06AnimalCountingWitness
+currentOwnedP06AnimalCountingWitness = record
+  { payload = currentBalabanP06MixedReducerPayload
+  ; animalCountingBound = currentBalabanP06AnimalCountingBoundFromAdapters
+  }
+
 polymerAnimalCountingBoundWitness : ImportedPolymerAnimalCountingBound
 polymerAnimalCountingBoundWitness = record
   { sourceAuthorityId = eriksson-2602-0041
@@ -675,9 +806,10 @@ kpSummabilityBoundWitness = record
 p06bDecorationMultiplicityBoundWitness :
   ImportedP06bPolymerDecorationMultiplicityBound
 p06bDecorationMultiplicityBoundWitness = record
-  { sourceAuthorityId = eriksson-2602-0041
-  ; theoremLocator = "P06b decoration/multiplicity side-condition"
-  ; status = paperImport
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "BalabanPolymerDiameterEntropy.currentBalabanP06bDecorationMultiplicityByDiameter"
+  ; status = proved
   ; decorationReducerPayload = currentBalabanP06bDecorationPayload
   }
 
@@ -1106,4 +1238,3 @@ P07P09FromP06P10AndMargin :
   → P09EntropyMarginDischargePackage
   → P07KPSummabilityReducer × P09EntropyMargin
 P07P09FromP06P10AndMargin p6 p10 margin = postulatedP07P09FromP06P10AndMargin p6 p10 margin
-

@@ -1,0 +1,27 @@
+{
+  "script": "scripts/ns_triad_kn_vulkan_schur_parity_smoke.py",
+  "checkpoint": "/mnt/truenas/gem-net/tmp_dashi/ns_schur_n6.core.npz",
+  "backend": "vulkan-scout",
+  "status": "ok",
+  "restricted_sector": {
+    "sector_dimension": 1468,
+    "gpu_backend_status": "ok",
+    "gpu_domination_scout_installed": true,
+    "gpu_domination_scout_matches_cpu": true,
+    "gpu_cpu_parity_observed": true,
+    "gpu_kn_authority": false,
+    "gpu_backend_name": "vulkan-scout"
+  },
+  "helical_certificate": {
+    "status": "ok",
+    "gpuSchurMatvecInstalled": true,
+    "gpuCpuParityObserved": false,
+    "gpuHelicalCouplingScout": false,
+    "gpuKnAuthority": false,
+    "gpuBackendStatus": "ok",
+    "gpuBackendName": "vulkan-scout",
+    "relative_bound_below_one_observed": true,
+    "relative_bound_kappa": 0.5606087105345958,
+    "perturbation_lower_bound": 6.692497791942662e-06
+  }
+}

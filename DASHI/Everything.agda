@@ -1267,6 +1267,9 @@ import DASHI.Physics.YangMills.O4RestorationLane
 import DASHI.Physics.YangMills.YMMassGapRoute
 import DASHI.Physics.YangMills.SUNLargeNReceipt
 import DASHI.Physics.YangMills.DischargePackageInventory
+import DASHI.Physics.YangMills.LocalLatticeDischargePipeline
+import DASHI.Physics.YangMills.YangMillsDischargeClosure
+import DASHI.Physics.YangMills.AnalyticTheoremKernels
 import DASHI.Physics.YM.BiunitaryDiagonalization
 import DASHI.Physics.Closure.LilaE8RootEnumerationNoDuplicatesSurface
 import DASHI.Physics.Closure.NonLimitedPaperBundleClaimGovernance
