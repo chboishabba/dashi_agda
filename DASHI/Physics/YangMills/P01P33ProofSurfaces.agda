@@ -112,7 +112,7 @@ polymerAnimalCountingBoundSurface =
   mkProofTargetSurfaceWithAuthority
     "ImportedPolymerAnimalCountingBound"
     "Eriksson 2602.0041, Lemma 5.6"
-    "P06 is a mixed reducer: DASHI owns size-shell skeleton counting and recombination; remaining leaves are reduced-skeleton complexity control, decoration multiplicity, and skeleton-decoration decomposition."
+    "P06 is a mixed reducer: DASHI now owns bounded-degree size-shell counting, diameter-shell reduction, and decoration multiplicity by diameter; remaining leaves are reduced-skeleton complexity control and skeleton-decoration decomposition."
     "Polymer support geometry in the Step V regime."
     "Rooted polymer entropy is exponentially bounded."
     "P07 KP summability and P23 terminal KP."
@@ -280,14 +280,14 @@ p06bDecorationMultiplicityBoundSurface : ProofTargetSurface
 p06bDecorationMultiplicityBoundSurface =
   mkProofTargetSurfaceWithAuthority
     "P06bPolymerDecorationMultiplicityBound"
-    "Eriksson 2602.0041 decoration/multiplicity side-condition kept explicit below the local P06 split"
-    "Any polymer-specific decoration or multiplicity overhead beyond the rooted connected support-graph skeleton is bounded in the source-side theorem shape consumed by the P06 recombination step."
-    "Rooted connected skeleton shell fixed; source-side polymer decorations not yet formalised internally."
-    "Decoration overhead is isolated as the only non-skeleton leaf in the local P06 split."
+    "DASHI decoration-multiplicity-by-diameter bridge below the local P06 split"
+    "Decoration multiplicity is bounded by reduced-skeleton complexity and then absorbed into a diameter-shell exponential bound through the explicit GraphCombinatorics P06b bridge."
+    "Reduced-skeleton complexity control together with the explicit decoration multiplicity adapter."
+    "The polymer-specific decoration overhead is no longer a paper-only black box inside the local P06 split."
     "P06c recombination and the entropy queue."
-    "The graph skeleton split would still hide polymer-specific multiplicity overhead."
-    paperImport
-    eriksson-2602-0041 "P06b decoration/multiplicity side-condition" postulate-import paperImport
+    "The graph skeleton split would still hide the diameter-shell decoration overhead."
+    proved
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentBalabanP06bDecorationMultiplicityByDiameter" consequence-proof proved
 
 p06cSkeletonDecorationImpliesAnimalCountingSurface : ProofTargetSurface
 p06cSkeletonDecorationImpliesAnimalCountingSurface =

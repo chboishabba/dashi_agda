@@ -21,6 +21,7 @@ import json
 import importlib.util
 import math
 import time
+import zipfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -90,6 +91,17 @@ class _RestrictedBackend:
     name: str
     good_mv: Any
     bad_mv: Any
+    info: dict[str, Any]
+    close: Any = lambda: None
+
+
+@dataclass(frozen=True)
+class _HelicalScalarBackend:
+    name: str
+    good_mv: Any
+    bad_mv: Any
+    good_mm: Any
+    bad_mm: Any
     info: dict[str, Any]
     close: Any = lambda: None
 
@@ -240,6 +252,42 @@ def _load_schur_checkpoint(base_path: Path) -> dict[str, Any]:
     return payload
 
 
+def _checkpoint_integrity_probe(base_path: Path) -> dict[str, Any]:
+    core_path, matrices_path = _checkpoint_paths(base_path)
+    info: dict[str, Any] = {
+        "base_path": str(base_path),
+        "core_path": str(core_path),
+        "matrices_path": str(matrices_path),
+        "core_exists": core_path.exists(),
+        "matrices_exists": matrices_path.exists(),
+        "core_zipfile": False,
+        "matrices_zipfile": False,
+        "core_testzip": None,
+        "matrices_testzip": None,
+        "status": "ok",
+    }
+    try:
+        if not core_path.exists():
+            raise FileNotFoundError(f"missing checkpoint core file: {core_path}")
+        if not matrices_path.exists():
+            raise FileNotFoundError(f"missing checkpoint matrices file: {matrices_path}")
+        info["core_zipfile"] = bool(zipfile.is_zipfile(core_path))
+        info["matrices_zipfile"] = bool(zipfile.is_zipfile(matrices_path))
+        if not info["core_zipfile"]:
+            raise zipfile.BadZipFile(f"core checkpoint is not a zip archive: {core_path}")
+        if not info["matrices_zipfile"]:
+            raise zipfile.BadZipFile(f"matrix checkpoint is not a zip archive: {matrices_path}")
+        with zipfile.ZipFile(core_path) as zf:
+            info["core_testzip"] = zf.testzip()
+        with zipfile.ZipFile(matrices_path) as zf:
+            info["matrices_testzip"] = zf.testzip()
+    except Exception as exc:  # noqa: BLE001
+        info["status"] = "checkpoint_unreadable"
+        info["error_type"] = type(exc).__name__
+        info["error"] = str(exc)
+    return info
+
+
 def _project_mean_zero(x: np.ndarray) -> np.ndarray:
     vec = np.asarray(x, dtype=np.float64)
     return vec - float(np.mean(vec))
@@ -261,6 +309,56 @@ def _compress_one_perp_dual(z: np.ndarray) -> np.ndarray:
         return values[:-1] - values[-1]
     if values.ndim == 2:
         return values[:-1, :] - values[-1:, :]
+    raise ValueError(f"expected vector or matrix full-space input, got ndim={values.ndim}")
+
+
+def _lift_helical_one_perp_coords(y: np.ndarray) -> np.ndarray:
+    values = np.asarray(y, dtype=np.float64)
+    if values.ndim == 1:
+        if len(values) % 2 != 0:
+            raise ValueError("helical reduced coordinates must have even length")
+        half = len(values) // 2
+        return np.concatenate(
+            [
+                _lift_one_perp_coords(values[:half]),
+                _lift_one_perp_coords(values[half:]),
+            ]
+        )
+    if values.ndim == 2:
+        if values.shape[0] % 2 != 0:
+            raise ValueError("helical reduced coordinates must have even row count")
+        half = values.shape[0] // 2
+        return np.vstack(
+            [
+                _lift_one_perp_coords(values[:half, :]),
+                _lift_one_perp_coords(values[half:, :]),
+            ]
+        )
+    raise ValueError(f"expected vector or matrix reduced coordinate input, got ndim={values.ndim}")
+
+
+def _compress_helical_one_perp_dual(z: np.ndarray) -> np.ndarray:
+    values = np.asarray(z, dtype=np.float64)
+    if values.ndim == 1:
+        if len(values) % 2 != 0:
+            raise ValueError("helical full coordinates must have even length")
+        half = len(values) // 2
+        return np.concatenate(
+            [
+                _compress_one_perp_dual(values[:half]),
+                _compress_one_perp_dual(values[half:]),
+            ]
+        )
+    if values.ndim == 2:
+        if values.shape[0] % 2 != 0:
+            raise ValueError("helical full coordinates must have even row count")
+        half = values.shape[0] // 2
+        return np.vstack(
+            [
+                _compress_one_perp_dual(values[:half, :]),
+                _compress_one_perp_dual(values[half:, :]),
+            ]
+        )
     raise ValueError(f"expected vector or matrix full-space input, got ndim={values.ndim}")
 
 
@@ -1120,6 +1218,53 @@ def _signed_laplacian_apply(
     raise ValueError(f"expected vector or matrix input, got ndim={values.ndim}")
 
 
+def _signed_laplacian_apply_raw(
+    x: np.ndarray,
+    *,
+    M_CC: np.ndarray,
+    correction: np.ndarray,
+    state: _ChunkedSignedLaplacian,
+) -> np.ndarray:
+    values = np.asarray(x, dtype=np.float64)
+    if values.ndim == 1:
+        vec = np.asarray(values, dtype=np.float64)
+        n = int(len(vec))
+        out = np.zeros(n, dtype=np.float64)
+        for start in range(0, n, state.row_chunk):
+            stop = min(start + state.row_chunk, n)
+            total_chunk = np.asarray(M_CC[start:stop, :] - correction[start:stop, :], dtype=np.float64)
+            weights = (
+                np.maximum(-total_chunk, 0.0)
+                if state.kind == "good"
+                else np.maximum(total_chunk, 0.0)
+            )
+            diag_rows = np.arange(stop - start, dtype=np.int64)
+            diag_cols = np.arange(start, stop, dtype=np.int64) - start
+            weights[diag_rows, diag_cols] = 0.0
+            out[start:stop] = state.degree[start:stop] * vec[start:stop] - weights @ vec
+        return out
+
+    if values.ndim == 2:
+        centered = np.asarray(values, dtype=np.float64)
+        n, ncols = centered.shape
+        out = np.zeros((n, ncols), dtype=np.float64)
+        for start in range(0, n, state.row_chunk):
+            stop = min(start + state.row_chunk, n)
+            total_chunk = np.asarray(M_CC[start:stop, :] - correction[start:stop, :], dtype=np.float64)
+            weights = (
+                np.maximum(-total_chunk, 0.0)
+                if state.kind == "good"
+                else np.maximum(total_chunk, 0.0)
+            )
+            diag_rows = np.arange(stop - start, dtype=np.int64)
+            diag_cols = np.arange(start, stop, dtype=np.int64) - start
+            weights[diag_rows, diag_cols] = 0.0
+            out[start:stop, :] = state.degree[start:stop, None] * centered[start:stop, :] - weights @ centered
+        return out
+
+    raise ValueError(f"expected vector or matrix input, got ndim={values.ndim}")
+
+
 def _torch_gpu_available() -> bool:
     if importlib.util.find_spec("torch") is None:
         return False
@@ -1363,6 +1508,360 @@ def _make_restricted_backend(
     )
 
 
+def _apply_real_operator_to_complex(op: Any, values: np.ndarray) -> np.ndarray:
+    array = np.asarray(values)
+    real_part = op(np.asarray(np.real(array), dtype=np.float64))
+    imag_part = op(np.asarray(np.imag(array), dtype=np.float64))
+    return np.asarray(real_part, dtype=np.float64) + 1j * np.asarray(imag_part, dtype=np.float64)
+
+
+def _make_helical_scalar_backend(
+    *,
+    M_CC: np.ndarray,
+    correction: np.ndarray,
+    row_chunk: int,
+    backend: str,
+    gpu_checks: int,
+    parity_tol: float,
+) -> _HelicalScalarBackend:
+    setup = _build_chunked_signed_laplacian_state(M_CC, correction, row_chunk=row_chunk)
+    good_state = _ChunkedSignedLaplacian("good", np.asarray(setup["degree_good"], dtype=np.float64), int(row_chunk))
+    bad_state = _ChunkedSignedLaplacian("bad", np.asarray(setup["degree_bad"], dtype=np.float64), int(row_chunk))
+
+    def cpu_good_mv(x: np.ndarray) -> np.ndarray:
+        return _signed_laplacian_apply_raw(x, M_CC=M_CC, correction=correction, state=good_state)
+
+    def cpu_bad_mv(x: np.ndarray) -> np.ndarray:
+        return _signed_laplacian_apply_raw(x, M_CC=M_CC, correction=correction, state=bad_state)
+
+    info: dict[str, Any] = {
+        "gpu_backend_status": "not_requested",
+        "gpu_backend_name": None,
+        "gpu_kn_authority": False,
+        "gpu_schur_matvec_installed": False,
+        "gpu_cpu_parity_observed": False,
+        "gpu_helical_coupling_scout": False,
+        "gpu_vulkan_icd": None,
+        "gpu_device_name": None,
+        "gpu_icd_probe_errors": [],
+        "gpu_matvec_max_abs_error_good": None,
+        "gpu_matvec_max_abs_error_bad": None,
+        "gpu_matvec_rel_l2_error_good": None,
+        "gpu_matvec_rel_l2_error_bad": None,
+        "gpu_matvec_rayleigh_error_good": None,
+        "gpu_matvec_rayleigh_error_bad": None,
+    }
+    if backend != "vulkan-scout":
+        return _HelicalScalarBackend(
+            name=backend,
+            good_mv=cpu_good_mv,
+            bad_mv=cpu_bad_mv,
+            good_mm=cpu_good_mv,
+            bad_mm=cpu_bad_mv,
+            info=info,
+        )
+
+    info["gpu_backend_name"] = "vulkan-scout"
+    if create_vulkan_triad_laplacian_executor is None or not has_vulkan_triad_laplacian():
+        info["gpu_backend_status"] = "vulkan_triad_laplacian_unavailable"
+        return _HelicalScalarBackend(
+            name="cpu-fallback",
+            good_mv=cpu_good_mv,
+            bad_mv=cpu_bad_mv,
+            good_mm=cpu_good_mv,
+            bad_mm=cpu_bad_mv,
+            info=info,
+        )
+
+    total = np.asarray(M_CC - correction, dtype=np.float64)
+    weights_good = np.maximum(-total, 0.0)
+    weights_bad = np.maximum(total, 0.0)
+    np.fill_diagonal(weights_good, 0.0)
+    np.fill_diagonal(weights_bad, 0.0)
+    profile = profile_from_weight_matrices(
+        weights_good,
+        weights_bad,
+        profile_id="schur-helical-certificate",
+    )
+    try:
+        executor, probe_info = create_vulkan_triad_laplacian_executor(profile)
+        info["gpu_backend_status"] = "ok"
+        info["gpu_schur_matvec_installed"] = True
+        info["gpu_vulkan_icd"] = probe_info.get("vulkan_icd")
+        info["gpu_icd_probe_errors"] = probe_info.get("icd_probe_errors", [])
+        try:
+            import vulkan as vk  # type: ignore
+
+            props = vk.vkGetPhysicalDeviceProperties(executor.handles.physical_device)
+            info["gpu_device_name"] = str(getattr(props, "deviceName", None))
+        except Exception:  # pragma: no cover - device metadata optional
+            info["gpu_device_name"] = None
+
+        rng = np.random.default_rng(24680)
+        good_abs_errors: list[float] = []
+        bad_abs_errors: list[float] = []
+        good_rel_l2_errors: list[float] = []
+        bad_rel_l2_errors: list[float] = []
+        good_rayleigh_errors: list[float] = []
+        bad_rayleigh_errors: list[float] = []
+        for _ in range(max(int(gpu_checks), 0)):
+            probe = rng.standard_normal(M_CC.shape[0])
+            probe /= max(float(np.linalg.norm(probe)), 1.0e-300)
+            cpu_good = cpu_good_mv(probe)
+            cpu_bad = cpu_bad_mv(probe)
+            gpu_good = np.asarray(executor.matvec_abs(probe), dtype=np.float64)
+            gpu_bad = np.asarray(executor.matvec_neg(probe), dtype=np.float64)
+            good_abs_errors.append(float(np.max(np.abs(gpu_good - cpu_good))))
+            bad_abs_errors.append(float(np.max(np.abs(gpu_bad - cpu_bad))))
+            good_rel_l2_errors.append(
+                float(np.linalg.norm(gpu_good - cpu_good) / max(np.linalg.norm(cpu_good), 1.0e-300))
+            )
+            bad_rel_l2_errors.append(
+                float(np.linalg.norm(gpu_bad - cpu_bad) / max(np.linalg.norm(cpu_bad), 1.0e-300))
+            )
+            good_rayleigh_errors.append(float(abs(probe @ (gpu_good - cpu_good))))
+            bad_rayleigh_errors.append(float(abs(probe @ (gpu_bad - cpu_bad))))
+        info["gpu_matvec_max_abs_error_good"] = max(good_abs_errors) if good_abs_errors else None
+        info["gpu_matvec_max_abs_error_bad"] = max(bad_abs_errors) if bad_abs_errors else None
+        info["gpu_matvec_rel_l2_error_good"] = max(good_rel_l2_errors) if good_rel_l2_errors else None
+        info["gpu_matvec_rel_l2_error_bad"] = max(bad_rel_l2_errors) if bad_rel_l2_errors else None
+        info["gpu_matvec_rayleigh_error_good"] = max(good_rayleigh_errors) if good_rayleigh_errors else None
+        info["gpu_matvec_rayleigh_error_bad"] = max(bad_rayleigh_errors) if bad_rayleigh_errors else None
+        info["gpu_cpu_parity_observed"] = bool(
+            info["gpu_matvec_max_abs_error_good"] is not None
+            and info["gpu_matvec_max_abs_error_bad"] is not None
+            and info["gpu_matvec_max_abs_error_good"] <= float(parity_tol)
+            and info["gpu_matvec_max_abs_error_bad"] <= float(parity_tol)
+        )
+        info["gpu_helical_coupling_scout"] = bool(info["gpu_cpu_parity_observed"])
+        if not info["gpu_cpu_parity_observed"]:
+            executor.close()
+            return _HelicalScalarBackend(
+                name="cpu-fallback",
+                good_mv=cpu_good_mv,
+                bad_mv=cpu_bad_mv,
+                good_mm=cpu_good_mv,
+                bad_mm=cpu_bad_mv,
+                info=info,
+            )
+
+        def gpu_good_apply(x: np.ndarray) -> np.ndarray:
+            values = np.asarray(x, dtype=np.float64)
+            if values.ndim == 1:
+                return np.asarray(executor.matvec_abs(values), dtype=np.float64)
+            return np.asarray(executor.matmat_abs(values), dtype=np.float64)
+
+        def gpu_bad_apply(x: np.ndarray) -> np.ndarray:
+            values = np.asarray(x, dtype=np.float64)
+            if values.ndim == 1:
+                return np.asarray(executor.matvec_neg(values), dtype=np.float64)
+            return np.asarray(executor.matmat_neg(values), dtype=np.float64)
+
+        return _HelicalScalarBackend(
+            name="vulkan-scout",
+            good_mv=gpu_good_apply,
+            bad_mv=gpu_bad_apply,
+            good_mm=gpu_good_apply,
+            bad_mm=gpu_bad_apply,
+            info=info,
+            close=executor.close,
+        )
+    except Exception as exc:  # noqa: BLE001
+        info["gpu_backend_status"] = f"parity_probe_failed:{type(exc).__name__}"
+        info["gpu_backend_error"] = str(exc)
+        return _HelicalScalarBackend(
+            name="cpu-fallback",
+            good_mv=cpu_good_mv,
+            bad_mv=cpu_bad_mv,
+            good_mm=cpu_good_mv,
+            bad_mm=cpu_bad_mv,
+            info=info,
+        )
+
+
+def _helical_channel_block_apply(
+    scalar_mv: Any,
+    left_frame: np.ndarray,
+    right_frame: np.ndarray,
+    x: np.ndarray,
+) -> np.ndarray:
+    values = np.asarray(x, dtype=np.float64)
+    if values.ndim == 1:
+        out = np.zeros_like(values, dtype=np.float64)
+        for comp in range(left_frame.shape[1]):
+            lifted = right_frame[:, comp] * values
+            applied = _apply_real_operator_to_complex(scalar_mv, lifted)
+            out += np.real(np.conj(left_frame[:, comp]) * applied)
+        return out
+    if values.ndim == 2:
+        out = np.zeros_like(values, dtype=np.float64)
+        for comp in range(left_frame.shape[1]):
+            lifted = right_frame[:, comp][:, None] * values
+            applied = _apply_real_operator_to_complex(scalar_mv, lifted)
+            out += np.real(np.conj(left_frame[:, comp])[:, None] * applied)
+        return out
+    raise ValueError(f"expected vector or matrix input, got ndim={values.ndim}")
+
+
+def _helical_full_operator_apply(
+    x: np.ndarray,
+    *,
+    h_plus: np.ndarray,
+    h_minus: np.ndarray,
+    scalar_good_mv: Any,
+    scalar_bad_mv: Any,
+    component: str,
+) -> np.ndarray:
+    values = np.asarray(x, dtype=np.float64)
+    if values.ndim not in (1, 2):
+        raise ValueError(f"expected vector or matrix input, got ndim={values.ndim}")
+    n = h_plus.shape[0]
+    plus = values[:n] if values.ndim == 1 else values[:n, :]
+    minus = values[n:] if values.ndim == 1 else values[n:, :]
+    scalar_q_mv = lambda arg: 2.0 * scalar_good_mv(arg) - 3.0 * scalar_bad_mv(arg)
+    block_pp = _helical_channel_block_apply(scalar_q_mv, h_plus, h_plus, plus)
+    block_pm = _helical_channel_block_apply(scalar_q_mv, h_plus, h_minus, minus)
+    block_mp = _helical_channel_block_apply(scalar_q_mv, h_minus, h_plus, plus)
+    block_mm = _helical_channel_block_apply(scalar_q_mv, h_minus, h_minus, minus)
+    if component == "Q":
+        out_plus = block_pp + block_pm
+        out_minus = block_mp + block_mm
+    elif component == "D":
+        out_plus = block_pp
+        out_minus = block_mm
+    elif component == "E":
+        zeros_plus = np.zeros_like(block_pp, dtype=np.float64)
+        zeros_minus = np.zeros_like(block_mm, dtype=np.float64)
+        out_plus = zeros_plus + block_pm
+        out_minus = block_mp + zeros_minus
+    else:
+        raise ValueError(f"unknown helical operator component: {component}")
+    return np.concatenate([out_plus, out_minus], axis=0)
+
+
+def _helical_gram_apply(y: np.ndarray) -> np.ndarray:
+    vals = np.asarray(y, dtype=np.float64)
+    if vals.ndim == 1:
+        if len(vals) % 2 != 0:
+            raise ValueError("helical reduced coordinates must have even length")
+        half = len(vals) // 2
+        return np.concatenate(
+            [
+                vals[:half] + np.sum(vals[:half]) * np.ones(half, dtype=np.float64),
+                vals[half:] + np.sum(vals[half:]) * np.ones(half, dtype=np.float64),
+            ]
+        )
+    if vals.ndim == 2:
+        if vals.shape[0] % 2 != 0:
+            raise ValueError("helical reduced coordinates must have even row count")
+        half = vals.shape[0] // 2
+        return np.vstack(
+            [
+                vals[:half, :] + np.sum(vals[:half, :], axis=0, keepdims=True),
+                vals[half:, :] + np.sum(vals[half:, :], axis=0, keepdims=True),
+            ]
+        )
+    raise ValueError(f"expected vector or matrix input, got ndim={vals.ndim}")
+
+
+def _helical_block_frobenius_metrics(
+    *,
+    M_CC: np.ndarray,
+    correction: np.ndarray,
+    mode_keys: list[tuple[int, int, int]],
+    row_chunk: int,
+) -> dict[str, Any]:
+    total = np.asarray(M_CC - correction, dtype=np.float64)
+    q_scalar = np.asarray(_signed_split_from_schur(total)[2], dtype=np.float64)
+    h_plus, h_minus = _canonical_helical_frames(mode_keys)
+    block_sq = {"++": 0.0, "+-": 0.0, "-+": 0.0, "--": 0.0}
+    total_sq = 0.0
+    for start in range(0, q_scalar.shape[0], int(row_chunk)):
+        stop = min(start + int(row_chunk), q_scalar.shape[0])
+        q_chunk = np.asarray(q_scalar[start:stop, :], dtype=np.float64)
+        g_pp = np.real(h_plus[start:stop, :].conj() @ h_plus.T)
+        g_pm = np.real(h_plus[start:stop, :].conj() @ h_minus.T)
+        g_mp = np.real(h_minus[start:stop, :].conj() @ h_plus.T)
+        g_mm = np.real(h_minus[start:stop, :].conj() @ h_minus.T)
+        local_pp = q_chunk * g_pp
+        local_pm = q_chunk * g_pm
+        local_mp = q_chunk * g_mp
+        local_mm = q_chunk * g_mm
+        block_sq["++"] += float(np.sum(local_pp * local_pp))
+        block_sq["+-"] += float(np.sum(local_pm * local_pm))
+        block_sq["-+"] += float(np.sum(local_mp * local_mp))
+        block_sq["--"] += float(np.sum(local_mm * local_mm))
+        total_sq += float(
+            np.sum(local_pp * local_pp)
+            + np.sum(local_pm * local_pm)
+            + np.sum(local_mp * local_mp)
+            + np.sum(local_mm * local_mm)
+        )
+    total_fro = math.sqrt(max(total_sq, 0.0))
+    off_fro = math.sqrt(max(block_sq["+-"] + block_sq["-+"], 0.0))
+    dominant_sector_pair = max(
+        (("+ -", block_sq["+-"]), ("- +", block_sq["-+"])),
+        key=lambda item: item[1],
+    )[0]
+    return {
+        "off_block_frobenius_ratio": float(off_fro / total_fro) if total_fro > 1.0e-14 else None,
+        "dominant_E_sector_pair_by_frobenius": dominant_sector_pair,
+    }
+
+
+def _solve_projected_extremal_mode_with_meta(
+    operator: LinearOperator,
+    *,
+    largest: bool,
+    n: int,
+    seed: int,
+    constraints: np.ndarray | None = None,
+    b_operator: LinearOperator | None = None,
+    tol: float = 1.0e-8,
+    maxiter: int = 120,
+    center_guess: bool = False,
+) -> tuple[float, np.ndarray, float, int]:
+    rng = np.random.default_rng(int(seed))
+    guess = rng.standard_normal((n, 1))
+    if constraints is not None:
+        for col in range(int(constraints.shape[1])):
+            basis = np.asarray(constraints[:, col], dtype=np.float64)
+            denom = float(basis @ basis)
+            if denom > 0.0:
+                guess -= basis[:, None] * ((basis @ guess[:, 0]) / denom)
+    if center_guess:
+        guess[:, 0] = _project_mean_zero(guess[:, 0])
+    norm = float(np.linalg.norm(guess[:, 0]))
+    if norm <= 1.0e-14:
+        guess[:, 0] = np.linspace(-1.0, 1.0, n, dtype=np.float64)
+        if center_guess:
+            guess[:, 0] = _project_mean_zero(guess[:, 0])
+        norm = float(np.linalg.norm(guess[:, 0]))
+    guess[:, 0] /= max(norm, 1.0e-300)
+
+    raw = lobpcg(
+        operator,
+        guess,
+        B=b_operator,
+        Y=constraints,
+        tol=float(tol),
+        maxiter=int(maxiter),
+        largest=bool(largest),
+        retResidualNormsHistory=True,
+    )
+    if len(raw) == 3:
+        eigvals, eigvecs, residuals = raw
+    else:
+        eigvals, eigvecs = raw
+        residuals = []
+    value = float(np.asarray(eigvals, dtype=np.float64)[0])
+    vec = np.asarray(eigvecs[:, 0], dtype=np.float64)
+    if center_guess:
+        vec = _project_mean_zero(vec)
+    vec /= max(float(np.linalg.norm(vec)), 1.0e-300)
+    residual_history = np.asarray(residuals, dtype=np.float64).reshape(-1)
+    residual_norm = float(residual_history[-1]) if residual_history.size else float("nan")
+    return value, vec, residual_norm, int(residual_history.size)
 def _solve_projected_extremal_mode(
     operator: LinearOperator,
     *,
@@ -2926,45 +3425,18 @@ def _q_helical_lift_diagnostics(
     }
 
 
-def _q_helical_coupling_certificate_diagnostics(
+def _q_helical_coupling_certificate_diagnostics_dense(
     *,
     M_CC: np.ndarray,
     correction: np.ndarray,
     mode_keys: list[tuple[int, int, int]],
-    max_dense_dim: int,
     matvec_backend: str = "cpu",
     gpu_checks: int = 2,
+    q_helical_row_chunk: int = DEFAULT_DOMINATION_CHUNK_SIZE,
+    q_helical_parity_tol: float = 5.0e-5,
     tol: float = 1.0e-10,
 ) -> dict[str, Any]:
-    """Exact dense candidate certificate for Q = D + E in helical channels.
-
-    This is intentionally guarded: the lifted operator is 2n by 2n, so large
-    shells must use checkpointed or future matrix-free/GPU overlays rather than
-    blind dense allocation.
-    """
     n = int(M_CC.shape[0])
-    if n <= 1:
-        return {
-            "audit_requested": True,
-            "status": "trivial",
-            "candidate_certificate_only": True,
-            "gpu_kn_authority": False,
-        }
-    if n > int(max_dense_dim):
-        return {
-            "audit_requested": True,
-            "status": "skipped_oom_guard",
-            "candidate_certificate_only": True,
-            "gpu_kn_authority": False,
-            "C_dimension": n,
-            "lifted_dimension": 2 * n,
-            "max_dense_dim": int(max_dense_dim),
-            "recommended_path": (
-                "write one shell-scoped Schur checkpoint, then rerun this overlay "
-                "with a larger explicit guard or a future matrix-free/GPU parity path"
-            ),
-        }
-
     S_C = np.asarray(M_CC - correction, dtype=np.float64)
     _, _, q_scalar = _signed_split_from_schur(S_C)
     q_scalar = np.asarray(0.5 * (q_scalar + q_scalar.T), dtype=np.float64)
@@ -2988,61 +3460,16 @@ def _q_helical_coupling_certificate_diagnostics(
     E = np.asarray(0.5 * (E + E.T), dtype=np.float64)
     Q = np.asarray(0.5 * (Q + Q.T), dtype=np.float64)
 
-    gpu_schur_matvec_installed = False
-    gpu_cpu_parity_observed = False
-    gpu_helical_coupling_scout = False
-    gpu_backend_status = "not_requested"
-    gpu_backend_name = None
-    gpu_vulkan_icd = None
-    gpu_icd_probe_errors: list[dict[str, Any]] = []
-    gpu_matvec_max_abs_error_good = None
-    gpu_matvec_max_abs_error_bad = None
-
-    if matvec_backend == "vulkan-scout":
-        gpu_schur_matvec_installed = bool(
-            create_vulkan_triad_laplacian_executor is not None and has_vulkan_triad_laplacian()
-        )
-        if gpu_schur_matvec_installed:
-            try:
-                total = np.asarray(M_CC - correction, dtype=np.float64)
-                weights_good = np.maximum(-total, 0.0)
-                weights_bad = np.maximum(total, 0.0)
-                np.fill_diagonal(weights_good, 0.0)
-                np.fill_diagonal(weights_bad, 0.0)
-                profile = profile_from_weight_matrices(
-                    weights_good,
-                    weights_bad,
-                    profile_id="schur-helical-certificate",
-                )
-                executor, probe_info = create_vulkan_triad_laplacian_executor(profile)
-                gpu_backend_name = "vulkan-scout"
-                gpu_backend_status = "ok"
-                gpu_vulkan_icd = probe_info.get("vulkan_icd")
-                gpu_icd_probe_errors = probe_info.get("icd_probe_errors", [])
-
-                rng = np.random.default_rng(24680)
-                good_errors: list[float] = []
-                bad_errors: list[float] = []
-                for _ in range(max(int(gpu_checks), 0)):
-                    probe = rng.standard_normal(n)
-                    probe /= max(float(np.linalg.norm(probe)), 1.0e-300)
-                    good_errors.append(float(np.max(np.abs(executor.matvec_abs(probe) - weights_good @ probe))))
-                    bad_errors.append(float(np.max(np.abs(executor.matvec_neg(probe) - weights_bad @ probe))))
-                gpu_matvec_max_abs_error_good = max(good_errors) if good_errors else None
-                gpu_matvec_max_abs_error_bad = max(bad_errors) if bad_errors else None
-                gpu_cpu_parity_observed = bool(
-                    gpu_matvec_max_abs_error_good is not None
-                    and gpu_matvec_max_abs_error_bad is not None
-                    and gpu_matvec_max_abs_error_good <= 5.0e-5
-                    and gpu_matvec_max_abs_error_bad <= 5.0e-5
-                )
-                gpu_helical_coupling_scout = gpu_cpu_parity_observed
-                executor.close()
-            except Exception as exc:  # noqa: BLE001
-                gpu_backend_status = f"parity_probe_failed:{type(exc).__name__}"
-        else:
-            gpu_backend_name = "vulkan-scout"
-            gpu_backend_status = "vulkan_triad_laplacian_unavailable"
+    backend = _make_helical_scalar_backend(
+        M_CC=M_CC,
+        correction=correction,
+        row_chunk=q_helical_row_chunk,
+        backend=matvec_backend,
+        gpu_checks=gpu_checks,
+        parity_tol=q_helical_parity_tol,
+    )
+    backend_info = dict(backend.info)
+    backend.close()
 
     basis = _one_perp_basis(n)
     P = np.block(
@@ -3092,6 +3519,7 @@ def _q_helical_coupling_certificate_diagnostics(
         "audit_requested": True,
         "status": "ok",
         "candidate_certificate_only": True,
+        "evaluation_method": "dense",
         "gpu_kn_authority": False,
         "C_dimension": n,
         "lifted_dimension": 2 * n,
@@ -3100,29 +3528,338 @@ def _q_helical_coupling_certificate_diagnostics(
         "Q_lambda_min_one_perp": float(q_evals[0]) if q_evals.size else None,
         "E_operator_norm_one_perp": float(np.max(np.abs(e_evals))) if e_evals.size else None,
         "relative_bound_kappa": relative_kappa,
-        "relative_bound_below_one_observed": (
-            bool(relative_kappa < 1.0) if relative_kappa is not None else False
-        ),
+        "relative_bound_below_one_observed": bool(relative_kappa < 1.0) if relative_kappa is not None else False,
         "perturbation_lower_bound": perturbation_bound,
         "actual_to_bound_ratio": actual_bound_ratio,
-        "off_block_frobenius_ratio": (
-            float(off_fro / total_fro) if total_fro > 1.0e-14 else None
-        ),
+        "off_block_frobenius_ratio": float(off_fro / total_fro) if total_fro > 1.0e-14 else None,
         "dominant_E_sector_pair_by_frobenius": dominant_sector_pair,
-        "gpuSchurMatvecInstalled": gpu_schur_matvec_installed,
-        "gpuCpuParityObserved": gpu_cpu_parity_observed,
-        "gpuHelicalCouplingScout": gpu_helical_coupling_scout,
+        "solver_tol": float(tol),
+        "solver_maxiter": None,
+        "D_residual_norm": None,
+        "Q_residual_norm": None,
+        "kappa_residual_norm_pos": None,
+        "kappa_residual_norm_neg": None,
+        "gpuSchurMatvecInstalled": bool(backend_info.get("gpu_schur_matvec_installed")),
+        "gpuCpuParityObserved": bool(backend_info.get("gpu_cpu_parity_observed")),
+        "gpuHelicalCouplingScout": bool(backend_info.get("gpu_helical_coupling_scout")),
         "gpuKnAuthority": False,
-        "gpuBackendStatus": gpu_backend_status,
-        "gpuBackendName": gpu_backend_name,
-        "gpuVulkanIcd": gpu_vulkan_icd,
-        "gpuIcdProbeErrors": gpu_icd_probe_errors,
-        "gpuMatvecMaxAbsErrorGood": gpu_matvec_max_abs_error_good,
-        "gpuMatvecMaxAbsErrorBad": gpu_matvec_max_abs_error_bad,
+        "gpuBackendStatus": backend_info.get("gpu_backend_status"),
+        "gpuBackendName": backend_info.get("gpu_backend_name"),
+        "gpuVulkanIcd": backend_info.get("gpu_vulkan_icd"),
+        "gpuDeviceName": backend_info.get("gpu_device_name"),
+        "gpuIcdProbeErrors": backend_info.get("gpu_icd_probe_errors"),
+        "gpuMatvecMaxAbsErrorGood": backend_info.get("gpu_matvec_max_abs_error_good"),
+        "gpuMatvecMaxAbsErrorBad": backend_info.get("gpu_matvec_max_abs_error_bad"),
+        "gpuMatvecRelativeL2ErrorGood": backend_info.get("gpu_matvec_rel_l2_error_good"),
+        "gpuMatvecRelativeL2ErrorBad": backend_info.get("gpu_matvec_rel_l2_error_bad"),
+        "gpuMatvecRayleighErrorGood": backend_info.get("gpu_matvec_rayleigh_error_good"),
+        "gpuMatvecRayleighErrorBad": backend_info.get("gpu_matvec_rayleigh_error_bad"),
+        "qHelicalCouplingDenseOverlayOOMAtN14": False,
+        "qHelicalCouplingMatrixFreeRequired": False,
         "helical_coupling_uniformly_bounded": False,
         "helical_block_floor_uniformly_proved": False,
         "gate1_conditional_theorem_proved": False,
     }
+
+
+def _q_helical_coupling_certificate_diagnostics_matrix_free(
+    *,
+    M_CC: np.ndarray,
+    correction: np.ndarray,
+    mode_keys: list[tuple[int, int, int]],
+    matvec_backend: str = "cpu",
+    gpu_checks: int = 2,
+    q_helical_row_chunk: int = DEFAULT_DOMINATION_CHUNK_SIZE,
+    q_helical_tol: float = 1.0e-8,
+    q_helical_maxiter: int = 200,
+    q_helical_parity_tol: float = 5.0e-5,
+) -> dict[str, Any]:
+    n = int(M_CC.shape[0])
+    if n <= 1:
+        return {
+            "audit_requested": True,
+            "status": "trivial",
+            "candidate_certificate_only": True,
+            "evaluation_method": "matrix-free",
+            "gpu_kn_authority": False,
+        }
+
+    h_plus, h_minus = _canonical_helical_frames(mode_keys)
+    backend = _make_helical_scalar_backend(
+        M_CC=M_CC,
+        correction=correction,
+        row_chunk=q_helical_row_chunk,
+        backend=matvec_backend,
+        gpu_checks=gpu_checks,
+        parity_tol=q_helical_parity_tol,
+    )
+    reduced_n = 2 * (n - 1)
+    try:
+        def q_full_mv(x: np.ndarray) -> np.ndarray:
+            return _helical_full_operator_apply(
+                x,
+                h_plus=h_plus,
+                h_minus=h_minus,
+                scalar_good_mv=backend.good_mm,
+                scalar_bad_mv=backend.bad_mm,
+                component="Q",
+            )
+
+        def d_full_mv(x: np.ndarray) -> np.ndarray:
+            return _helical_full_operator_apply(
+                x,
+                h_plus=h_plus,
+                h_minus=h_minus,
+                scalar_good_mv=backend.good_mm,
+                scalar_bad_mv=backend.bad_mm,
+                component="D",
+            )
+
+        def e_full_mv(x: np.ndarray) -> np.ndarray:
+            return _helical_full_operator_apply(
+                x,
+                h_plus=h_plus,
+                h_minus=h_minus,
+                scalar_good_mv=backend.good_mm,
+                scalar_bad_mv=backend.bad_mm,
+                component="E",
+            )
+
+        def reduced(full_mv):
+            def apply(y: np.ndarray) -> np.ndarray:
+                return _compress_helical_one_perp_dual(full_mv(_lift_helical_one_perp_coords(y)))
+            return apply
+
+        d_red_op = LinearOperator((reduced_n, reduced_n), matvec=reduced(d_full_mv), dtype=np.float64)
+        q_red_op = LinearOperator((reduced_n, reduced_n), matvec=reduced(q_full_mv), dtype=np.float64)
+        e_red_op = LinearOperator((reduced_n, reduced_n), matvec=reduced(e_full_mv), dtype=np.float64)
+        minus_e_red_op = LinearOperator((reduced_n, reduced_n), matvec=lambda y: -e_red_op.matvec(y), dtype=np.float64)
+        gram_op = LinearOperator((reduced_n, reduced_n), matvec=_helical_gram_apply, dtype=np.float64)
+
+        lambda_min_d, d_coords, d_resid, d_iters = _solve_projected_extremal_mode_with_meta(
+            d_red_op,
+            largest=False,
+            n=reduced_n,
+            seed=4101,
+            constraints=None,
+            b_operator=gram_op,
+            tol=q_helical_tol,
+            maxiter=q_helical_maxiter,
+        )
+        d_vec = _lift_helical_one_perp_coords(d_coords)
+        d_residual_norm = float(np.linalg.norm(d_full_mv(d_vec) - lambda_min_d * d_vec))
+
+        lambda_min_q, q_coords, q_resid, q_iters = _solve_projected_extremal_mode_with_meta(
+            q_red_op,
+            largest=False,
+            n=reduced_n,
+            seed=4102,
+            constraints=None,
+            b_operator=gram_op,
+            tol=q_helical_tol,
+            maxiter=q_helical_maxiter,
+        )
+        q_vec = _lift_helical_one_perp_coords(q_coords)
+        q_residual_norm = float(np.linalg.norm(q_full_mv(q_vec) - lambda_min_q * q_vec))
+
+        e_pos, e_pos_coords, e_pos_resid, e_pos_iters = _solve_projected_extremal_mode_with_meta(
+            e_red_op,
+            largest=True,
+            n=reduced_n,
+            seed=4103,
+            constraints=None,
+            b_operator=gram_op,
+            tol=q_helical_tol,
+            maxiter=q_helical_maxiter,
+        )
+        e_neg_flip, e_neg_coords, e_neg_resid, e_neg_iters = _solve_projected_extremal_mode_with_meta(
+            minus_e_red_op,
+            largest=True,
+            n=reduced_n,
+            seed=4104,
+            constraints=None,
+            b_operator=gram_op,
+            tol=q_helical_tol,
+            maxiter=q_helical_maxiter,
+        )
+        e_operator_norm = float(max(abs(e_pos), abs(-e_neg_flip)))
+
+        if lambda_min_d <= max(float(q_helical_tol), 0.0):
+            relative_kappa = None
+            perturbation_bound = None
+            actual_bound_ratio = None
+            kappa_pos_residual_norm = None
+            kappa_neg_residual_norm = None
+        else:
+            d_eps_mv = lambda x: d_full_mv(x) + float(q_helical_tol) * np.asarray(x, dtype=np.float64)
+            d_eps_red_op = LinearOperator((reduced_n, reduced_n), matvec=reduced(d_eps_mv), dtype=np.float64)
+            kappa_pos, kappa_pos_coords, kappa_pos_resid, kappa_pos_iters = _solve_projected_extremal_mode_with_meta(
+                e_red_op,
+                largest=True,
+                n=reduced_n,
+                seed=4105,
+                constraints=None,
+                b_operator=d_eps_red_op,
+                tol=q_helical_tol,
+                maxiter=q_helical_maxiter,
+            )
+            kappa_neg_flip, kappa_neg_coords, kappa_neg_resid, kappa_neg_iters = _solve_projected_extremal_mode_with_meta(
+                minus_e_red_op,
+                largest=True,
+                n=reduced_n,
+                seed=4106,
+                constraints=None,
+                b_operator=d_eps_red_op,
+                tol=q_helical_tol,
+                maxiter=q_helical_maxiter,
+            )
+            relative_kappa = float(max(abs(kappa_pos), abs(-kappa_neg_flip)))
+            perturbation_bound = float((1.0 - relative_kappa) * lambda_min_d)
+            actual_bound_ratio = (
+                float(lambda_min_q / perturbation_bound)
+                if abs(perturbation_bound) > 1.0e-300
+                else None
+            )
+            kappa_pos_vec = _lift_helical_one_perp_coords(kappa_pos_coords)
+            kappa_neg_vec = _lift_helical_one_perp_coords(kappa_neg_coords)
+            kappa_pos_residual_norm = float(np.linalg.norm(e_full_mv(kappa_pos_vec) - kappa_pos * d_eps_mv(kappa_pos_vec)))
+            kappa_neg_residual_norm = float(
+                np.linalg.norm((-e_full_mv(kappa_neg_vec)) - kappa_neg_flip * d_eps_mv(kappa_neg_vec))
+            )
+
+        fro_metrics = _helical_block_frobenius_metrics(
+            M_CC=M_CC,
+            correction=correction,
+            mode_keys=mode_keys,
+            row_chunk=q_helical_row_chunk,
+        )
+        return {
+            "audit_requested": True,
+            "status": "ok",
+            "candidate_certificate_only": True,
+            "evaluation_method": "matrix-free",
+            "gpu_kn_authority": False,
+            "C_dimension": n,
+            "lifted_dimension": 2 * n,
+            "Q_decomposition": "Q_N = D_N + E_N; D_N is helical channel block diagonal",
+            "D_lambda_min_one_perp": float(lambda_min_d),
+            "Q_lambda_min_one_perp": float(lambda_min_q),
+            "E_operator_norm_one_perp": e_operator_norm,
+            "relative_bound_kappa": relative_kappa,
+            "relative_bound_below_one_observed": bool(relative_kappa < 1.0) if relative_kappa is not None else False,
+            "perturbation_lower_bound": perturbation_bound,
+            "actual_to_bound_ratio": actual_bound_ratio,
+            "off_block_frobenius_ratio": fro_metrics["off_block_frobenius_ratio"],
+            "dominant_E_sector_pair_by_frobenius": fro_metrics["dominant_E_sector_pair_by_frobenius"],
+            "solver_tol": float(q_helical_tol),
+            "solver_maxiter": int(q_helical_maxiter),
+            "D_residual_norm": d_residual_norm,
+            "Q_residual_norm": q_residual_norm,
+            "E_residual_norm_pos": float(e_pos_resid),
+            "E_residual_norm_neg": float(e_neg_resid),
+            "kappa_residual_norm_pos": kappa_pos_residual_norm if lambda_min_d > max(float(q_helical_tol), 0.0) else None,
+            "kappa_residual_norm_neg": kappa_neg_residual_norm if lambda_min_d > max(float(q_helical_tol), 0.0) else None,
+            "D_iterations": d_iters,
+            "Q_iterations": q_iters,
+            "E_iterations_pos": e_pos_iters,
+            "E_iterations_neg": e_neg_iters,
+            "gpuSchurMatvecInstalled": bool(backend.info.get("gpu_schur_matvec_installed")),
+            "gpuCpuParityObserved": bool(backend.info.get("gpu_cpu_parity_observed")),
+            "gpuHelicalCouplingScout": bool(backend.info.get("gpu_helical_coupling_scout")),
+            "gpuKnAuthority": False,
+            "gpuBackendStatus": backend.info.get("gpu_backend_status"),
+            "gpuBackendName": backend.info.get("gpu_backend_name"),
+            "gpuVulkanIcd": backend.info.get("gpu_vulkan_icd"),
+            "gpuDeviceName": backend.info.get("gpu_device_name"),
+            "gpuIcdProbeErrors": backend.info.get("gpu_icd_probe_errors"),
+            "gpuMatvecMaxAbsErrorGood": backend.info.get("gpu_matvec_max_abs_error_good"),
+            "gpuMatvecMaxAbsErrorBad": backend.info.get("gpu_matvec_max_abs_error_bad"),
+            "gpuMatvecRelativeL2ErrorGood": backend.info.get("gpu_matvec_rel_l2_error_good"),
+            "gpuMatvecRelativeL2ErrorBad": backend.info.get("gpu_matvec_rel_l2_error_bad"),
+            "gpuMatvecRayleighErrorGood": backend.info.get("gpu_matvec_rayleigh_error_good"),
+            "gpuMatvecRayleighErrorBad": backend.info.get("gpu_matvec_rayleigh_error_bad"),
+            "qHelicalCouplingDenseOverlayOOMAtN14": bool(n >= 14),
+            "qHelicalCouplingMatrixFreeRequired": True,
+            "helical_coupling_uniformly_bounded": False,
+            "helical_block_floor_uniformly_proved": False,
+            "gate1_conditional_theorem_proved": False,
+        }
+    finally:
+        backend.close()
+
+
+def _q_helical_coupling_certificate_diagnostics(
+    *,
+    M_CC: np.ndarray,
+    correction: np.ndarray,
+    mode_keys: list[tuple[int, int, int]],
+    max_dense_dim: int,
+    matvec_backend: str = "cpu",
+    gpu_checks: int = 2,
+    q_helical_certificate_mode: str = "auto",
+    q_helical_row_chunk: int = DEFAULT_DOMINATION_CHUNK_SIZE,
+    q_helical_tol: float = 1.0e-8,
+    q_helical_maxiter: int = 200,
+    q_helical_parity_tol: float = 5.0e-5,
+    tol: float = 1.0e-10,
+) -> dict[str, Any]:
+    """Candidate certificate for Q = D + E in helical channels.
+
+    The dense path is preserved as a small-shell oracle. Larger shells use the
+    reduced-coordinate matrix-free solve instead of materializing the lifted
+    helical blocks.
+    """
+    n = int(M_CC.shape[0])
+    if n <= 1:
+        return {
+            "audit_requested": True,
+            "status": "trivial",
+            "candidate_certificate_only": True,
+            "gpu_kn_authority": False,
+        }
+    mode = str(q_helical_certificate_mode)
+    if mode not in {"auto", "dense", "matrix-free"}:
+        raise ValueError(f"unknown q_helical_certificate_mode: {mode}")
+    use_dense = mode == "dense" or (mode == "auto" and n <= int(max_dense_dim))
+    if mode == "dense" and n > int(max_dense_dim):
+        return {
+            "audit_requested": True,
+            "status": "skipped_oom_guard",
+            "candidate_certificate_only": True,
+            "evaluation_method": "dense",
+            "gpu_kn_authority": False,
+            "C_dimension": n,
+            "lifted_dimension": 2 * n,
+            "max_dense_dim": int(max_dense_dim),
+            "qHelicalCouplingDenseOverlayOOMAtN14": bool(n >= 14),
+            "qHelicalCouplingMatrixFreeRequired": True,
+            "recommended_path": (
+                "switch to --q-helical-certificate-mode matrix-free or auto; "
+                "the dense lifted overlay is expected to OOM at this seam size"
+            ),
+        }
+    if use_dense:
+        return _q_helical_coupling_certificate_diagnostics_dense(
+            M_CC=M_CC,
+            correction=correction,
+            mode_keys=mode_keys,
+            matvec_backend=matvec_backend,
+            gpu_checks=gpu_checks,
+            q_helical_row_chunk=q_helical_row_chunk,
+            q_helical_parity_tol=q_helical_parity_tol,
+            tol=tol,
+        )
+    return _q_helical_coupling_certificate_diagnostics_matrix_free(
+        M_CC=M_CC,
+        correction=correction,
+        mode_keys=mode_keys,
+        matvec_backend=matvec_backend,
+        gpu_checks=gpu_checks,
+        q_helical_row_chunk=q_helical_row_chunk,
+        q_helical_tol=q_helical_tol,
+        q_helical_maxiter=q_helical_maxiter,
+        q_helical_parity_tol=q_helical_parity_tol,
+    )
 
 
 def _audit_row_from_checkpoint(
@@ -3132,10 +3869,31 @@ def _audit_row_from_checkpoint(
     audit_q_helical_coupling_certificate: bool = False,
     helical_coupling_max_dense_dim: int = 2048,
     q_helical_matvec_backend: str = "cpu",
+    q_helical_certificate_mode: str = "auto",
+    q_helical_row_chunk: int = DEFAULT_DOMINATION_CHUNK_SIZE,
+    q_helical_tol: float = 1.0e-8,
+    q_helical_maxiter: int = 200,
+    q_helical_parity_tol: float = 5.0e-5,
     gpu_matvec_checks: int = 2,
     domination_row_chunk: int = DEFAULT_DOMINATION_CHUNK_SIZE,
     domination_tol: float = 1.0e-8,
 ) -> dict[str, Any]:
+    checkpoint_probe = _checkpoint_integrity_probe(checkpoint_path)
+    if checkpoint_probe.get("status") != "ok":
+        return {
+            "N": -1,
+            "K": None,
+            "block_size": None,
+            "G_size": None,
+            "C_size": None,
+            "M_CC": {"lambda_min": None},
+            "M_GC_norm": None,
+            "S_C": None,
+            "verdict": "checkpoint_unreadable",
+            "candidate_only": True,
+            "checkpoint_overlay_used": True,
+            "checkpoint_integrity": checkpoint_probe,
+        }
     cached = _load_schur_checkpoint(checkpoint_path)
     result = dict(cached["result"])
     n = int(cached["N"])
@@ -3179,6 +3937,11 @@ def _audit_row_from_checkpoint(
                 max_dense_dim=helical_coupling_max_dense_dim,
                 matvec_backend=q_helical_matvec_backend,
                 gpu_checks=gpu_matvec_checks,
+                q_helical_certificate_mode=q_helical_certificate_mode,
+                q_helical_row_chunk=q_helical_row_chunk,
+                q_helical_tol=q_helical_tol,
+                q_helical_maxiter=q_helical_maxiter,
+                q_helical_parity_tol=q_helical_parity_tol,
                 tol=domination_tol,
             )
         )
@@ -3195,6 +3958,7 @@ def _audit_row_from_checkpoint(
 
     result["checkpoint_overlay_used"] = True
     result["checkpoint_schema_version"] = cached["schema_version"]
+    result["checkpoint_integrity"] = checkpoint_probe
     return result
 
 
@@ -3226,6 +3990,11 @@ def _audit_row(
     audit_q_helical_coupling_certificate: bool = False,
     helical_coupling_max_dense_dim: int = 2048,
     q_helical_matvec_backend: str = "cpu",
+    q_helical_certificate_mode: str = "auto",
+    q_helical_row_chunk: int = DEFAULT_DOMINATION_CHUNK_SIZE,
+    q_helical_tol: float = 1.0e-8,
+    q_helical_maxiter: int = 200,
+    q_helical_parity_tol: float = 5.0e-5,
     domination_restricted_nonaxis_only: bool = True,
     domination_restricted_orbit_labels: list[str] | None = None,
     domination_restricted_matvec_backend: str = "cpu",
@@ -3802,6 +4571,11 @@ def _audit_row(
                 max_dense_dim=helical_coupling_max_dense_dim,
                 matvec_backend=q_helical_matvec_backend,
                 gpu_checks=gpu_matvec_checks,
+                q_helical_certificate_mode=q_helical_certificate_mode,
+                q_helical_row_chunk=q_helical_row_chunk,
+                q_helical_tol=q_helical_tol,
+                q_helical_maxiter=q_helical_maxiter,
+                q_helical_parity_tol=q_helical_parity_tol,
                 tol=domination_tol,
             )
             print(f"{q_helical_coupling_diag.get('status')}.")
@@ -3864,6 +4638,9 @@ def _analyze(results: list[dict[str, Any]]) -> str:
         "|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---|",
     ]
     for r in results:
+        if r.get("verdict") == "checkpoint_unreadable":
+            lines.append(f"| {r.get('N', '—')} | — | — | — | — | — | — | — | — | — | — | checkpoint_unreadable |")
+            continue
         sc = r.get("S_C") or {}
         bottom_eigs = sc.get("bottom_eigs") or []
         eig_strs = []
@@ -3890,6 +4667,13 @@ def _analyze(results: list[dict[str, Any]]) -> str:
         )
     lines.append("")
     for r in results:
+        if r.get("verdict") == "checkpoint_unreadable":
+            probe = r.get("checkpoint_integrity") or {}
+            lines.append(
+                f"N={r.get('N', '—')}: checkpoint unreadable, "
+                f"status={probe.get('status')}, error={probe.get('error_type')}"
+            )
+            continue
         sc = r.get("S_C")
         if sc and sc['lambda_min'] is not None:
             bottom_eigs = sc.get("bottom_eigs") or []
@@ -3981,8 +4765,17 @@ def _analyze(results: list[dict[str, Any]]) -> str:
                 f"basis_relevant={helical_diag['waleffe_helical_basis_relevant_observed']}, "
                 f"blockdiag={helical_diag['q_helical_block_diagonalization_observed']}"
             )
-    gc_norms = [r["M_GC_norm"] for r in results]
-    lines.append(f"\nM_GC norms: {', '.join(f'{v:.2e}' for v in gc_norms)}")
+        helical_coupling = r.get("Q_helical_coupling_certificate_diagnostics") or {}
+        if helical_coupling.get("status") == "ok":
+            lines.append(
+                f"N={r['N']}: helical coupling kappa={helical_coupling['relative_bound_kappa']:.6e}, "
+                f"bound={helical_coupling['perturbation_lower_bound']:.6e}, "
+                f"eval={helical_coupling.get('evaluation_method')}"
+            )
+    gc_norms = [r["M_GC_norm"] for r in results if r.get("M_GC_norm") is not None]
+    lines.append(
+        f"\nM_GC norms: {', '.join(f'{v:.2e}' for v in gc_norms) if gc_norms else '—'}"
+    )
     verdicts = {r["verdict"] for r in results}
     lines.append(f"Verdicts: {sorted(verdicts)}")
     psd_observed = all(r.get("S_C") and (r["S_C"].get("lambda_min") is not None)
@@ -4146,6 +4939,39 @@ def main() -> None:
         ),
     )
     parser.add_argument(
+        "--q-helical-certificate-mode",
+        choices=("auto", "dense", "matrix-free"),
+        default="auto",
+        help=(
+            "Helical certificate execution mode. 'auto' keeps dense as a small-shell oracle "
+            "and switches larger shells to the matrix-free reduced-coordinate certificate."
+        ),
+    )
+    parser.add_argument(
+        "--q-helical-row-chunk",
+        type=int,
+        default=DEFAULT_DOMINATION_CHUNK_SIZE,
+        help="Row chunk size for CPU helical scalar matvecs and Frobenius chunk scans.",
+    )
+    parser.add_argument(
+        "--q-helical-tol",
+        type=float,
+        default=1.0e-8,
+        help="LOBPCG tolerance for the matrix-free helical D/Q/kappa certificate.",
+    )
+    parser.add_argument(
+        "--q-helical-maxiter",
+        type=int,
+        default=200,
+        help="LOBPCG max iterations for the matrix-free helical D/Q/kappa certificate.",
+    )
+    parser.add_argument(
+        "--q-helical-parity-tol",
+        type=float,
+        default=5.0e-5,
+        help="GPU scout max-abs parity tolerance before helical matvecs fall back to CPU authority.",
+    )
+    parser.add_argument(
         "--domination-restricted-orbit-label",
         action="append",
         default=None,
@@ -4258,6 +5084,11 @@ def main() -> None:
                 audit_q_helical_coupling_certificate=args.audit_q_helical_coupling_certificate,
                 helical_coupling_max_dense_dim=args.helical_coupling_max_dense_dim,
                 q_helical_matvec_backend=args.q_helical_matvec_backend,
+                q_helical_certificate_mode=args.q_helical_certificate_mode,
+                q_helical_row_chunk=args.q_helical_row_chunk,
+                q_helical_tol=args.q_helical_tol,
+                q_helical_maxiter=args.q_helical_maxiter,
+                q_helical_parity_tol=args.q_helical_parity_tol,
                 domination_row_chunk=args.domination_row_chunk,
                 domination_tol=args.domination_tol,
             )
@@ -4307,6 +5138,11 @@ def main() -> None:
                 audit_q_helical_coupling_certificate=args.audit_q_helical_coupling_certificate,
                 helical_coupling_max_dense_dim=args.helical_coupling_max_dense_dim,
                 q_helical_matvec_backend=args.q_helical_matvec_backend,
+                q_helical_certificate_mode=args.q_helical_certificate_mode,
+                q_helical_row_chunk=args.q_helical_row_chunk,
+                q_helical_tol=args.q_helical_tol,
+                q_helical_maxiter=args.q_helical_maxiter,
+                q_helical_parity_tol=args.q_helical_parity_tol,
                 domination_restricted_nonaxis_only=not args.domination_restricted_allow_axis,
                 domination_restricted_orbit_labels=args.domination_restricted_orbit_label,
                 domination_restricted_matvec_backend=args.domination_restricted_matvec_backend,
@@ -4327,18 +5163,19 @@ def main() -> None:
             results.append(result)
 
     summary_text = _analyze(results)
-    psd_verified = all(
-        r["schur_complement_ok"]
+    readable_results = [r for r in results if r.get("verdict") != "checkpoint_unreadable"]
+    psd_verified = bool(readable_results) and all(
+        r.get("schur_complement_ok") is True
         and (r.get("S_C") is not None)
         and (r["S_C"].get("lambda_min") is not None)
         and (r["S_C"]["lambda_min"] >= -1.0e-8)
-        for r in results
+        for r in readable_results
     )
-    nullity_one_observed = all(
-        r["schur_complement_ok"]
+    nullity_one_observed = bool(readable_results) and all(
+        r.get("schur_complement_ok") is True
         and (r.get("S_C") is not None)
         and (r["S_C"].get("nullity_estimate", r["S_C"].get("nullity")) == 1)
-        for r in results
+        for r in readable_results
     )
     dense_domination_rows = [
         r for r in results
@@ -4515,8 +5352,27 @@ def main() -> None:
         ),
         "qHelicalMatvecBackend": (
             q_helical_coupling_rows[0]["Q_helical_coupling_certificate_diagnostics"].get("gpuBackendName")
+            or q_helical_coupling_rows[0]["Q_helical_coupling_certificate_diagnostics"].get("evaluation_method")
             if q_helical_coupling_rows
             else None
+        ),
+        "qHelicalCouplingDenseOverlayOOMAtN14": bool(
+            any(
+                (r.get("Q_helical_coupling_certificate_diagnostics") or {}).get(
+                    "qHelicalCouplingDenseOverlayOOMAtN14"
+                )
+                is True
+                for r in results
+            )
+        ),
+        "qHelicalCouplingMatrixFreeRequired": bool(
+            any(
+                (r.get("Q_helical_coupling_certificate_diagnostics") or {}).get(
+                    "qHelicalCouplingMatrixFreeRequired"
+                )
+                is True
+                for r in results
+            )
         ),
         "qHelicalCouplingUniformlyBounded": False,
         "qHelicalBlockFloorUniformlyProved": False,

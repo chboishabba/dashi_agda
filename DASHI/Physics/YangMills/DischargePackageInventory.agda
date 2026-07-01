@@ -4,6 +4,8 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
+import DASHI.Physics.YangMills.LocalLatticeDischargePipeline as LocalLattice
+import DASHI.Physics.YangMills.YangMillsDischargeClosure as Closure
 
 -- ── DischargeStatus ──────────────────────────────────────────────────
 -- Requisite status vocabulary for honest audit of proof status:
@@ -124,11 +126,11 @@ fromNatRow = record
 
 natPowerDecayMonotoneRow : DischargePackageRow
 natPowerDecayMonotoneRow = record
-  { packageName         = "NatPowerDecayMonotone"
+  { packageName         = "natPowerDecayMonotone"
   ; status              = standardArithmeticAdapter
   ; sourceLeaves        = []
-  ; constructedReducers = "BalabanLargeFieldSuppression decay by diameter reduction"
-  ; downstreamConsumer  = "P10LargeFieldSuppressionPackage"
+  ; constructedReducers = "Numeric monotonicity proof"
+  ; downstreamConsumer  = "BalabanLargeFieldSuppression"
   ; promotesClay        = false
   }
 
@@ -139,6 +141,46 @@ p10AnalyticLeavesRow = record
   ; sourceLeaves        = "LargeFieldCoercivityLeaf" ∷ "LargeFieldActivitySuppressionLeaf" ∷ []
   ; constructedReducers = "P10FromAnalyticLeavesAndArithmetic, LargeFieldDecayByComplexityFromCoercivity, LargeFieldDecayByDiameterFromComplexity"
   ; downstreamConsumer  = "P10LargeFieldSuppressionPackage / StepVFromDischargePackages"
+  ; promotesClay        = false
+  }
+
+localLatticeAnalyticDischargePackageRow : DischargePackageRow
+localLatticeAnalyticDischargePackageRow = record
+  { packageName         = "LocalLatticeAnalyticDischargePackage"
+  ; status              = conditionalPackage
+  ; sourceLeaves        = "P06 counting, P10 large-field suppression, P33 small-field ellipticity, P07/P09 KP summability margin, P08/P11 positivity and absorption" ∷ []
+  ; constructedReducers = "OwnedLocalLatticeLemmaStack exposes the local lattice chain into LocalLatticeAnalyticDischargePackage, then LocalLatticeStepVFromAnalyticDischarge and YangMillsEndpointFromLocalLatticeAndTransferPackages consume it."
+  ; downstreamConsumer  = "StepVSpatialKPCertificate / YangMillsQuantumFieldTheory × PhysicalMassGap"
+  ; promotesClay        = false
+  }
+
+downstreamAnalyticTransferPackageRow : DischargePackageRow
+downstreamAnalyticTransferPackageRow = record
+  { packageName         = "DownstreamAnalyticTransferPackage"
+  ; status              = conditionalPackage
+  ; sourceLeaves        = "RG transfer, fixed-lattice gap, thermodynamic, continuum, OS/Wightman endpoint" ∷ []
+  ; constructedReducers = "DownstreamEndpointFromTransferPackage"
+  ; downstreamConsumer  = "YangMillsFullDischargePackage"
+  ; promotesClay        = false
+  }
+
+yangMillsFullDischargePackageRow : DischargePackageRow
+yangMillsFullDischargePackageRow = record
+  { packageName         = "YangMillsFullDischargePackage"
+  ; status              = conditionalPipeline
+  ; sourceLeaves        = "LocalLatticeAnalyticDischargePackage, DownstreamAnalyticTransferPackage" ∷ []
+  ; constructedReducers = "YangMillsEndpointFromFullDischargePackage"
+  ; downstreamConsumer  = "YangMillsQuantumFieldTheory × PhysicalMassGap"
+  ; promotesClay        = false
+  }
+
+p01P33CoverageLedgerRow : DischargePackageRow
+p01P33CoverageLedgerRow = record
+  { packageName         = "P01P33CoverageLedger"
+  ; status              = provedInternalReducer
+  ; sourceLeaves        = []
+  ; constructedReducers = "AllPTheoremCoverageRowsNoClayPromotion"
+  ; downstreamConsumer  = "Self-contained metadata audit ledger"
   ; promotesClay        = false
   }
 
@@ -156,7 +198,11 @@ dischargePackageInventory =
   conditionalYangMillsPipelineRow ∷
   fromNatRow ∷
   natPowerDecayMonotoneRow ∷
-  p10AnalyticLeavesRow ∷ []
+  p10AnalyticLeavesRow ∷
+  localLatticeAnalyticDischargePackageRow ∷
+  downstreamAnalyticTransferPackageRow ∷
+  yangMillsFullDischargePackageRow ∷
+  p01P33CoverageLedgerRow ∷ []
 
 -- ── List Membership ──────────────────────────────────────────────────
 
@@ -195,7 +241,11 @@ ProvedInternalReducerHasNoSourceLeaves .conditionalYangMillsPipelineRow (there (
 ProvedInternalReducerHasNoSourceLeaves .fromNatRow (there (there (there (there (there (there (there (there here)))))))) ()
 ProvedInternalReducerHasNoSourceLeaves .natPowerDecayMonotoneRow (there (there (there (there (there (there (there (there (there here))))))))) ()
 ProvedInternalReducerHasNoSourceLeaves .p10AnalyticLeavesRow (there (there (there (there (there (there (there (there (there (there here)))))))))) ()
-ProvedInternalReducerHasNoSourceLeaves row (there (there (there (there (there (there (there (there (there (there (there ()))))))))))) _
+ProvedInternalReducerHasNoSourceLeaves .localLatticeAnalyticDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there here))))))))))) ()
+ProvedInternalReducerHasNoSourceLeaves .downstreamAnalyticTransferPackageRow (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))) ()
+ProvedInternalReducerHasNoSourceLeaves .yangMillsFullDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there (there (there here))))))))))))) ()
+ProvedInternalReducerHasNoSourceLeaves .p01P33CoverageLedgerRow (there (there (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))))) refl = refl
+ProvedInternalReducerHasNoSourceLeaves row (there (there (there (there (there (there (there (there (there (there (there (there (there (there (there ())))))))))))))) _
 
 ConditionalPackageDoesNotPromoteClay :
   (row : DischargePackageRow) →
@@ -213,7 +263,11 @@ ConditionalPackageDoesNotPromoteClay .conditionalYangMillsPipelineRow (there (th
 ConditionalPackageDoesNotPromoteClay .fromNatRow (there (there (there (there (there (there (there (there here)))))))) ()
 ConditionalPackageDoesNotPromoteClay .natPowerDecayMonotoneRow (there (there (there (there (there (there (there (there (there here))))))))) ()
 ConditionalPackageDoesNotPromoteClay .p10AnalyticLeavesRow (there (there (there (there (there (there (there (there (there (there here)))))))))) refl = refl
-ConditionalPackageDoesNotPromoteClay row (there (there (there (there (there (there (there (there (there (there (there ()))))))))))) _
+ConditionalPackageDoesNotPromoteClay .localLatticeAnalyticDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there here))))))))))) refl = refl
+ConditionalPackageDoesNotPromoteClay .downstreamAnalyticTransferPackageRow (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))) refl = refl
+ConditionalPackageDoesNotPromoteClay .yangMillsFullDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there (there (there here))))))))))))) ()
+ConditionalPackageDoesNotPromoteClay .p01P33CoverageLedgerRow (there (there (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))))) ()
+ConditionalPackageDoesNotPromoteClay row (there (there (there (there (there (there (there (there (there (there (there (there (there (there (there ())))))))))))))) _
 
 MixedReducerDoesNotPromoteClay :
   (row : DischargePackageRow) →
@@ -231,7 +285,11 @@ MixedReducerDoesNotPromoteClay .conditionalYangMillsPipelineRow (there (there (t
 MixedReducerDoesNotPromoteClay .fromNatRow (there (there (there (there (there (there (there (there here)))))))) ()
 MixedReducerDoesNotPromoteClay .natPowerDecayMonotoneRow (there (there (there (there (there (there (there (there (there here))))))))) ()
 MixedReducerDoesNotPromoteClay .p10AnalyticLeavesRow (there (there (there (there (there (there (there (there (there (there here)))))))))) ()
-MixedReducerDoesNotPromoteClay row (there (there (there (there (there (there (there (there (there (there (there ()))))))))))) _
+MixedReducerDoesNotPromoteClay .localLatticeAnalyticDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there here))))))))))) ()
+MixedReducerDoesNotPromoteClay .downstreamAnalyticTransferPackageRow (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))) ()
+MixedReducerDoesNotPromoteClay .yangMillsFullDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there (there (there here))))))))))))) ()
+MixedReducerDoesNotPromoteClay .p01P33CoverageLedgerRow (there (there (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))))) ()
+MixedReducerDoesNotPromoteClay row (there (there (there (there (there (there (there (there (there (there (there (there (there (there (there ())))))))))))))) _
 
 ConditionalPipelineDoesNotDischargePackages :
   (row : DischargePackageRow) →
@@ -250,7 +308,11 @@ ConditionalPipelineDoesNotDischargePackages .conditionalYangMillsPipelineRow (th
 ConditionalPipelineDoesNotDischargePackages .fromNatRow (there (there (there (there (there (there (there (there here)))))))) () _
 ConditionalPipelineDoesNotDischargePackages .natPowerDecayMonotoneRow (there (there (there (there (there (there (there (there (there here))))))))) () _
 ConditionalPipelineDoesNotDischargePackages .p10AnalyticLeavesRow (there (there (there (there (there (there (there (there (there (there here)))))))))) () _
-ConditionalPipelineDoesNotDischargePackages row (there (there (there (there (there (there (there (there (there (there (there ()))))))))))) _ _
+ConditionalPipelineDoesNotDischargePackages .localLatticeAnalyticDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there here))))))))))) () _
+ConditionalPipelineDoesNotDischargePackages .downstreamAnalyticTransferPackageRow (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))) () _
+ConditionalPipelineDoesNotDischargePackages .yangMillsFullDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there (there (there here))))))))))))) refl _ = refl
+ConditionalPipelineDoesNotDischargePackages .p01P33CoverageLedgerRow (there (there (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))))) () _
+ConditionalPipelineDoesNotDischargePackages row (there (there (there (there (there (there (there (there (there (there (there (there (there (there (there ())))))))))))))) _ _
 
 AllDischargeRowsNoClayPromotion :
   (row : DischargePackageRow) →
@@ -267,7 +329,11 @@ AllDischargeRowsNoClayPromotion .conditionalYangMillsPipelineRow (there (there (
 AllDischargeRowsNoClayPromotion .fromNatRow (there (there (there (there (there (there (there (there here)))))))) = refl
 AllDischargeRowsNoClayPromotion .natPowerDecayMonotoneRow (there (there (there (there (there (there (there (there (there here))))))))) = refl
 AllDischargeRowsNoClayPromotion .p10AnalyticLeavesRow (there (there (there (there (there (there (there (there (there (there here)))))))))) = refl
-AllDischargeRowsNoClayPromotion row (there (there (there (there (there (there (there (there (there (there (there ())))))))))))
+AllDischargeRowsNoClayPromotion .localLatticeAnalyticDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there here))))))))))) = refl
+AllDischargeRowsNoClayPromotion .downstreamAnalyticTransferPackageRow (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))) = refl
+AllDischargeRowsNoClayPromotion .yangMillsFullDischargePackageRow (there (there (there (there (there (there (there (there (there (there (there (there (there here))))))))))))) = refl
+AllDischargeRowsNoClayPromotion .p01P33CoverageLedgerRow (there (there (there (there (there (there (there (there (there (there (there (there (there (there here)))))))))))))) = refl
+AllDischargeRowsNoClayPromotion row (there (there (there (there (there (there (there (there (there (there (there (there (there (there (there ()))))))))))))))
 
 -- ── Leaf Sorting Buckets ─────────────────────────────────────────────
 
@@ -302,3 +368,35 @@ P10AnalyticLeavesVisible = refl
 P10AnalyticLeavesDoNotPromoteClay :
   DischargePackageRow.promotesClay p10AnalyticLeavesRow ≡ false
 P10AnalyticLeavesDoNotPromoteClay = refl
+
+LocalLatticeAnalyticLeavesAreConditional :
+  DischargePackageRow.status localLatticeAnalyticDischargePackageRow ≡ conditionalPackage
+LocalLatticeAnalyticLeavesAreConditional = refl
+
+LocalLatticeAnalyticLeavesDoNotPromoteClay :
+  DischargePackageRow.promotesClay localLatticeAnalyticDischargePackageRow ≡ false
+LocalLatticeAnalyticLeavesDoNotPromoteClay = refl
+
+DownstreamAnalyticTransferPackageIsConditional :
+  DischargePackageRow.status downstreamAnalyticTransferPackageRow ≡ conditionalPackage
+DownstreamAnalyticTransferPackageIsConditional = refl
+
+DownstreamAnalyticTransferPackageDoesNotPromoteClay :
+  DischargePackageRow.promotesClay downstreamAnalyticTransferPackageRow ≡ false
+DownstreamAnalyticTransferPackageDoesNotPromoteClay = refl
+
+YangMillsFullDischargePackageIsConditionalPipeline :
+  DischargePackageRow.status yangMillsFullDischargePackageRow ≡ conditionalPipeline
+YangMillsFullDischargePackageIsConditionalPipeline = refl
+
+YangMillsFullDischargePackageDoesNotPromoteClay :
+  DischargePackageRow.promotesClay yangMillsFullDischargePackageRow ≡ false
+YangMillsFullDischargePackageDoesNotPromoteClay = refl
+
+P01P33CoverageLedgerIsProved :
+  DischargePackageRow.status p01P33CoverageLedgerRow ≡ provedInternalReducer
+P01P33CoverageLedgerIsProved = refl
+
+P01P33CoverageLedgerDoesNotPromoteClay :
+  DischargePackageRow.promotesClay p01P33CoverageLedgerRow ≡ false
+P01P33CoverageLedgerDoesNotPromoteClay = refl

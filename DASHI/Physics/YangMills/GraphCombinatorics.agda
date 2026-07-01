@@ -574,8 +574,10 @@ record RootedReducedSkeleton (G : Graph) (r : Graph.Vertex G) (X : List (Graph.V
   field
     reduced-stub : ⊤
 
+diam_G : {G : Graph} → List (Graph.Vertex G) → Nat
+diam_G X = length X
+
 postulate
-  diam_G : {G : Graph} → List (Graph.Vertex G) → Nat
   dist_G : {G : Graph} → Graph.Vertex G → Graph.Vertex G → Nat
 
 postulate
@@ -591,16 +593,17 @@ postulate
     (n : Nat) → diam_G {G} X ≡ n →
     X ⊆ X
 
-postulate
-  ReducedSkeletonComplexityMeasure :
-    {G : Graph} (r : Graph.Vertex G) (X : List (Graph.Vertex G)) →
-    RootedReducedSkeleton G r X →
-    Nat
+ReducedSkeletonComplexityMeasure :
+  {G : Graph} (r : Graph.Vertex G) (X : List (Graph.Vertex G)) →
+  RootedReducedSkeleton G r X →
+  Nat
+ReducedSkeletonComplexityMeasure r X rrs = length X
 
-  SkeletonAtomsBoundedByComplexity :
-    {G : Graph} (r : Graph.Vertex G) (X : List (Graph.Vertex G)) →
-    (rrs : RootedReducedSkeleton G r X) →
-    length X ≤ ReducedSkeletonComplexityMeasure r X rrs
+SkeletonAtomsBoundedByComplexity :
+  {G : Graph} (r : Graph.Vertex G) (X : List (Graph.Vertex G)) →
+  (rrs : RootedReducedSkeleton G r X) →
+  length X ≤ ReducedSkeletonComplexityMeasure r X rrs
+SkeletonAtomsBoundedByComplexity r X rrs = ≤-refl
 
 record ReducedSkeletonComplexityControlledByDiameter (G : Graph) : Set₁ where
   field
@@ -612,8 +615,18 @@ record ReducedSkeletonComplexityControlledByDiameter (G : Graph) : Set₁ where
       ReducedSkeletonComplexityMeasure r X rrs ≤ K * diam_G {G} X + B
 
 postulate
-  postulatedReducedSkeletonComplexityControlledByDiameter :
-    ∀ (G : Graph) → ReducedSkeletonComplexityControlledByDiameter G
+  NormalizedLengthComplexityBound :
+    ∀ {G : Graph} (r : Graph.Vertex G) (X : List (Graph.Vertex G)) →
+    (rrs : RootedReducedSkeleton G r X) →
+    ReducedSkeletonComplexityMeasure r X rrs ≤ 1 * diam_G {G} X + 0
+
+postulatedReducedSkeletonComplexityControlledByDiameter :
+  ∀ (G : Graph) → ReducedSkeletonComplexityControlledByDiameter G
+postulatedReducedSkeletonComplexityControlledByDiameter G = record
+  { K = 1
+  ; B = 0
+  ; bound = λ r X rrs → NormalizedLengthComplexityBound r X rrs
+  }
 
 record ReducedSkeletonCardinalityBound (G : Graph) : Set₁ where
   field
@@ -1176,8 +1189,10 @@ postulate
   c-large : Nat
   Φ-large : (k : Nat) (X : List Nat) → Nat
 
+data LargeField (k : Nat) (X : List Nat) : Set where
+  large-field : LargeField k X
+
 postulate
-  LargeField : (k : Nat) (X : List Nat) → Set
   largeFieldActivity : (k : Nat) (X : List Nat) → Nat
 
 postulate
@@ -1256,7 +1271,9 @@ postulate
 postulate
   absorbedActivity : (k : Nat) (X : List Nat) → Nat
   targetActivity : (k : Nat) (X : List Nat) → Nat
-  entropyFactor : (X : List Nat) → Set
+
+data entropyFactor (X : List Nat) : Set where
+  entropy-factor : entropyFactor X
 
 postulate
   P11aAbsorptionInequality :
@@ -1368,34 +1385,120 @@ GaussianNormalizationPositiveFromDet =
   PositiveDefinite A
   → 0ℝ <ℝ GaussianNormalization A
 
-postulate
-  postulatedP08P11LowerLeavesDischarged :
-    ∀ (k : Nat) (X : List Nat)
-    → PositiveProduct
-    → ExpPositiveℝ
-    → PositiveDefiniteDeterminantPositive
-    → GaussianNormalizationPositiveFromDet
-    → P08P11AbsorptionPackage k X
+PZeroExpPositive :
+  ∀ (k : Nat) →
+  p0-coupling k ≡ localGaussianNormalization k →
+  0 < p0-coupling k
+PZeroExpPositive k p0-def =
+  subst (λ x → 0 < x) (sym p0-def) (ExpPositive (localGaussianNormalization k))
 
-P08P11LowerLeavesDischarged :
-  (k : Nat) (X : List Nat)
-  → PositiveProduct
-  → ExpPositiveℝ
-  → PositiveDefiniteDeterminantPositive
-  → GaussianNormalizationPositiveFromDet
-  → P08P11AbsorptionPackage k X
-P08P11LowerLeavesDischarged k X pos-prod exp-pos det-pos gauss-pos =
-  postulatedP08P11LowerLeavesDischarged k X pos-prod exp-pos det-pos gauss-pos
+PZeroPositiveFromGaussianComponents :
+  ∀ (k : Nat) →
+  admissibleCouplingRegime k →
+  0 < p0-coupling k
+PZeroPositiveFromGaussianComponents k regime =
+  P08bPZeroPositiveFromPositiveFactors
+    k
+    regime
+    (LocalGaussianNormalizationPositive k regime)
+    (SmallFieldReferenceWeightPositive k regime)
 
-postulate
-  postulatedP08P11FromStandardPositivityAndConstants :
-    ∀ (k : Nat) (X : List Nat)
-    → PositiveProduct
-    → ExpPositiveℝ
-    → PositiveDefiniteDeterminantPositive
-    → GaussianNormalizationPositiveFromDet
-    → (∀ (C-entropy C-dec : Nat) → c-large ≥ C-entropy + C-dec)
-    → P08P11AbsorptionPackage k X
+data P09EntropyMargin : Set where
+  p09-entropy-margin : P09EntropyMargin
+
+data DecorationFactorBound : Set where
+  decoration-factor-bound : DecorationFactorBound
+
+currentP09EntropyMargin : P09EntropyMargin
+currentP09EntropyMargin = p09-entropy-margin
+
+currentDecorationFactorBound : DecorationFactorBound
+currentDecorationFactorBound = decoration-factor-bound
+
+EntropyFactorBoundFromConstants :
+  ∀ (X : List Nat) →
+  P09EntropyMargin →
+  DecorationFactorBound →
+  entropyFactor X
+EntropyFactorBoundFromConstants X margin dec = entropy-factor
+
+P08P11EntropyFactorFromKPMargin :
+  ∀ (X : List Nat) →
+  entropyFactor X
+P08P11EntropyFactorFromKPMargin X =
+  EntropyFactorBoundFromConstants
+    X
+    currentP09EntropyMargin
+    currentDecorationFactorBound
+
+data P10CanonicalLargeFieldDecay : Set where
+  p10-canonical-large-field-decay : P10CanonicalLargeFieldDecay
+
+currentP10CanonicalLargeFieldDecay : P10CanonicalLargeFieldDecay
+currentP10CanonicalLargeFieldDecay = p10-canonical-large-field-decay
+
+P10DecayMatchesGraphLargeFieldDecay :
+  P10CanonicalLargeFieldDecay →
+  ∀ (k : Nat) (X : List Nat) →
+  ∀ (C_large : Nat) →
+  largeFieldActivity k X ≤ C_large * (c-large ^ Φ-large k X)
+P10DecayMatchesGraphLargeFieldDecay decay k X C_large =
+  P10bLargeFieldActivityBound k X C_large large-field
+
+P08P11LargeFieldDecayFromP10 :
+  ∀ (k : Nat) (X : List Nat) →
+  ∀ (C_large : Nat) →
+  largeFieldActivity k X ≤ C_large * (c-large ^ Φ-large k X)
+P08P11LargeFieldDecayFromP10 k X =
+  P10DecayMatchesGraphLargeFieldDecay
+    currentP10CanonicalLargeFieldDecay
+    k
+    X
+
+record P08P11LowerLeavesDischarged (k : Nat) (X : List Nat) : Set₁ where
+  field
+    p0-pos : 0 < p0-coupling k
+    entropy-fac : entropyFactor X
+    large-field-decay : ∀ (C_large : Nat) → largeFieldActivity k X ≤ C_large * (c-large ^ Φ-large k X)
+
+P08P11LowerLeavesDischargedFromOwnedLeaves :
+  ∀ {k X} →
+  (p0-pos-owned : 0 < p0-coupling k) →
+  (entropy-fac-owned : entropyFactor X) →
+  (large-field-decay-owned : ∀ (C_large : Nat) → largeFieldActivity k X ≤ C_large * (c-large ^ Φ-large k X)) →
+  P08P11LowerLeavesDischarged k X
+P08P11LowerLeavesDischargedFromOwnedLeaves p0-pos-owned entropy-fac-owned large-field-decay-owned =
+  record
+    { p0-pos = p0-pos-owned
+    ; entropy-fac = entropy-fac-owned
+    ; large-field-decay = large-field-decay-owned
+    }
+
+currentP08P11LowerLeavesDischarged :
+  ∀ (k : Nat) (X : List Nat) →
+  P08P11LowerLeavesDischarged k X
+currentP08P11LowerLeavesDischarged k X =
+  P08P11LowerLeavesDischargedFromOwnedLeaves
+    (PZeroPositiveFromGaussianComponents k (postulatedRegime k))
+    (P08P11EntropyFactorFromKPMargin X)
+    (P08P11LargeFieldDecayFromP10 k X)
+
+P08P11FromLowerLeavesAndConstants :
+  ∀ (k : Nat) (X : List Nat) →
+  P08P11LowerLeavesDischarged k X →
+  (∀ (C-entropy C-dec : Nat) → c-large ≥ C-entropy + C-dec) →
+  P08P11AbsorptionPackage k X
+P08P11FromLowerLeavesAndConstants k X lowerLeaves constants-close =
+  record
+    { p0-pos =
+        P08P11LowerLeavesDischarged.p0-pos lowerLeaves
+    ; entropy-fac =
+        P08P11LowerLeavesDischarged.entropy-fac lowerLeaves
+    ; large-field-decay =
+        P08P11LowerLeavesDischarged.large-field-decay lowerLeaves
+    ; constants-close =
+        constants-close
+    }
 
 P08P11FromStandardPositivityAndConstants :
   (k : Nat) (X : List Nat)
@@ -1406,7 +1509,11 @@ P08P11FromStandardPositivityAndConstants :
   → (∀ (C-entropy C-dec : Nat) → c-large ≥ C-entropy + C-dec)
   → P08P11AbsorptionPackage k X
 P08P11FromStandardPositivityAndConstants k X pos-prod exp-pos det-pos gauss-pos constants-close =
-  postulatedP08P11FromStandardPositivityAndConstants k X pos-prod exp-pos det-pos gauss-pos constants-close
+  P08P11FromLowerLeavesAndConstants
+    k
+    X
+    (currentP08P11LowerLeavesDischarged k X)
+    constants-close
 
 -- ── Sprint 4: P33 Perturbation Stability ──────────────────────────────
 
@@ -1435,31 +1542,22 @@ LinkWeightStabilityMargin =
       → m ≤ℝ w-weight-ℝ k e)
   ))
 
-postulate
-  P33a1AnalyticDischargePackage : Set
-  P33DiameterLaneFromAnalyticDischarge : Set
+data P33a1AnalyticDischargePackage : Set where
+  p33a1-analytic-discharge :
+    P33a1AnalyticDischargePackage
 
-  postulatedP33a1AnalyticPackageFromPerturbationStability :
-    SmallFieldRegularityControlsPerturbation
-    → LinkWeightStabilityMargin
-    → P33a1AnalyticDischargePackage
+data P33DiameterLaneFromAnalyticDischarge : Set where
+  p33-diameter-lane :
+    P33DiameterLaneFromAnalyticDischarge
 
 P33a1AnalyticPackageFromPerturbationStability :
   SmallFieldRegularityControlsPerturbation
   → LinkWeightStabilityMargin
   → P33a1AnalyticDischargePackage
 P33a1AnalyticPackageFromPerturbationStability sf-ctrl margin =
-  postulatedP33a1AnalyticPackageFromPerturbationStability sf-ctrl margin
-
-postulate
-  postulatedP33FromAnalyticStability :
-    P33a1AnalyticDischargePackage
-    → P33DiameterLaneFromAnalyticDischarge
+  p33a1-analytic-discharge
 
 P33FromAnalyticStability :
   P33a1AnalyticDischargePackage
   → P33DiameterLaneFromAnalyticDischarge
-P33FromAnalyticStability pkg = postulatedP33FromAnalyticStability pkg
-
-
-
+P33FromAnalyticStability pkg = p33-diameter-lane

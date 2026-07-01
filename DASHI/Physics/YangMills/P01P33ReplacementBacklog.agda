@@ -96,7 +96,7 @@ p06Entry : ProofReplacementEntry
 p06Entry =
   mkProofReplacementEntry
     Surfaces.polymerAnimalCountingBoundSurface
-    "Keep the imported counting witness explicit, but route it through the DASHI-owned P06a/P06b/P06c split so the entropy lane consumes a rooted-shell skeleton adapter, explicit DFS-walk sublemmas under P06a2, an explicit size-or-complexity-controlled-by-diameter leaf under P06a3, and a recombination reducer rather than a completely opaque source theorem."
+    "Next local-lattice ownership target: replace the opaque counting witness with the explicit skeleton-plus-decoration chain encode/decode -> injectivity -> complexity by diameter -> decoration multiplicity -> bounded-degree skeleton animal counting -> P06ModelLeafDischargePackage."
     soon
 
 p06aEntry : ProofReplacementEntry
@@ -183,14 +183,14 @@ p10Entry : ProofReplacementEntry
 p10Entry =
   mkProofReplacementEntry
     Surfaces.largeFieldActivityBoundSurface
-    "Keep as a paper import while the Step V large-field branch is pinned to its downstream consumers and constants."
+    "Promote this into the canonical local-lattice decay theorem: block-tail lower bound -> Gaussian tail suppression -> support-product localisation -> product suppression -> Phi-large coercive in diameter -> P10LargeFieldSuppressionPackage."
     soon
 
 p11Entry : ProofReplacementEntry
 p11Entry =
   mkProofReplacementEntry
     Surfaces.absorptionConditionSurface
-    "Keep as a paper import while the corrected absorption wrapper remains the large-field gate for the Step V queue."
+    "Keep tied to the local-lattice route: once P08 positivity lemmas are explicit, close P11 only through the constants-close absorption package consumed by LocalLatticeAnalyticDischargePackage."
     soon
 
 p12Entry : ProofReplacementEntry
@@ -365,14 +365,14 @@ p33Entry : ProofReplacementEntry
 p33Entry =
   mkProofReplacementEntry
     Surfaces.fieldRegularityImpliesSingleLinkPositivitySurface
-    "Keep P33 split: isolate the genuinely analytic P33a1 regularity leaf, consume normalisation through local P33a2/P33a3 reducers, and continue strengthening the internal P33b diameter-domination bridge around that assumption."
+    "Keep P33 split, but make the metric-perturbation route canonical: local metric decomposition -> perturbation control -> positive background floor -> perturbation margin -> metric-to-link comparison -> diameter comparison -> P33a1AnalyticDischargePackage."
     now
 
 p33a1Entry : ProofReplacementEntry
 p33a1Entry =
   mkProofReplacementEntry
     Surfaces.p33a1SmallFieldRegularityGivesPositiveLinkWeightSurface
-    "This is the main remaining ellipticity leaf: retain as source-side until the small-field regularity proof itself is reconstructed."
+    "Highest-value current analytic leaf: reconstruct the small-field ellipticity lane through perturbation control and positive-link comparison before touching endpoint lemmas."
     now
 
 p33a2Entry : ProofReplacementEntry

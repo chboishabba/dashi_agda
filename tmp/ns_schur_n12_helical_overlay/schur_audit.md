@@ -1,0 +1,22 @@
+# NS Triad K_N Cross-Shell Schur Symbolic Audit
+
+- candidate only: `True`
+- theorem promoted: `False`
+- gate1 closed: `False`
+- gate1 supported at tested shells: `True`
+
+## Schur Audit Summary
+
+| N | block | G | C | M_CC λ_min | S_C λ0 | S_C λ1 | S_C λ2 | nullity est | max \|S_C 1\| | corr(constant) | Verdict |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---|
+| 12 | 6390 | 26 | 6364 | 2.044918e-06 | 6.171327e-18 | 7.995154e-06 | 8.315004e-06 | 1 | 2.27e-16 | 1.0000 | schur_psd |
+
+N=12: λ0=6.171327e-18, λ1=7.995154e-06, λ2=8.315004e-06, nullity_est=1, eval=eigsh
+N=12: max |S_C 1_C|=2.272488e-16, L2 row-sum residual=5.653588e-16
+N=12: matrix-free rho_sup=6.589782e-01, lambda1(L_good)=3.779648e-05, lambda_max(L_bad)=5.074208e-03, resid=1.65e-05
+N=12: row-pairing max(3bad/2good)=1.614071e+00, lambda_min(Q|1^⊥)=1.110534e-04, Q positive_offdiag=2719000, Q Gershgorin lower=-1.714205e-01
+N=12: Q helical-lift offdiag/total=1.414503e-01, basis_relevant=True, blockdiag=False
+
+M_GC norms: 3.33e-03
+Verdicts: ['schur_psd']
+Gate 1 target = S_C ⪰ 0 and dim ker S_C = 1: SUPPORTED at tested N, not proved.
