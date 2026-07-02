@@ -1,0 +1,484 @@
+{
+  "script": "scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py",
+  "contract": "ns_triad_kn_cross_shell_schur_symbolic_audit",
+  "schema_version": "1.0.0",
+  "c0": 0.1111111111111111,
+  "rows": [
+    {
+      "N": 6,
+      "K": 5,
+      "eta": 0.25,
+      "mode_count": 2196,
+      "edge_count": 638388,
+      "block_size": 1494,
+      "G_size": 26,
+      "C_size": 1468,
+      "M_GG": {
+        "label": "M_GG",
+        "n": 26,
+        "rank": 26,
+        "nullity": 0,
+        "lambda_min": 0.00012254296855950265,
+        "lambda_max": 0.011475266833675071,
+        "norm": 0.011475266833675071,
+        "psd_gap": 0.00012254296855950265
+      },
+      "M_GC_norm": 0.003356301162601495,
+      "M_CC": {
+        "label": "M_CC",
+        "n": 1468,
+        "rank": 1468,
+        "nullity": 0,
+        "lambda_min": 1.4524126784686589e-05,
+        "lambda_max": 0.032968617211800236,
+        "norm": 0.032968617211800236,
+        "psd_gap": 1.4524126784686589e-05
+      },
+      "M_CC_worst_eigenvector_support": {
+        "support": {
+          "5": 0.4091384539772074,
+          "6": 0.5908615460227928
+        },
+        "lambda_min": 1.4524126784689779e-05,
+        "norm_sq": 1.0
+      },
+      "S_C": {
+        "label": "S_C",
+        "n": 1468,
+        "rank": 1467,
+        "nullity": 1,
+        "lambda_min": 1.951563910473908e-18,
+        "lambda_max": 0.03296218680785447,
+        "norm": 0.03296218680785447,
+        "psd_gap": 1.951563910473908e-18
+      },
+      "correction_norm": 0.0009808998176981073,
+      "S_C_worst_eigenvector_support": {
+        "support": {
+          "5": 0.4100817438692095,
+          "6": 0.5899182561307907
+        },
+        "lambda_min": 1.285024798763534e-18,
+        "norm_sq": 1.0000000000000004
+      },
+      "null_vector_diagnostics": {
+        "corr_constant": 1.0,
+        "corr_shell_5": 0.6403762517998376,
+        "corr_shell_6": 0.7680613622171025,
+        "shell_mass": {
+          "5": 0.41008174386920904,
+          "6": 0.5899182561307906
+        },
+        "corr_shell_balance": -0.179836512261581,
+        "corr_sqrt_degree": 0.9839649382998789,
+        "corr_inv_degree": 0.9561625803869106,
+        "corr_degree_weighted_balance": -0.0852191277225635
+      },
+      "row_sum_diagnostics": {
+        "n": 1468,
+        "max_abs_row_sum": 1.3070057189312756e-16,
+        "l2_row_sum": 2.6811549519647333e-16,
+        "mean_row_sum": -6.279875873288521e-20
+      },
+      "effective_laplacian_sign_diagnostics": null,
+      "signed_factorization_diagnostics": null,
+      "gate2a_schur_sign_split_comparison_diagnostics": {
+        "audit_requested": true,
+        "status": "ok",
+        "c_dim": 1468,
+        "g_dim": 26,
+        "comparison_target": "Compare Schur(L_neg), Schur(L_abs) to seam sign split L_bad, L_good on 1_C^perp.",
+        "schur_linearity_identity_observed": false,
+        "schur_linearity_defect": {
+          "operator_norm": 0.0004618590022567454,
+          "fro_norm": 0.0004618923706443975,
+          "max_abs": 0.00010506827295955756,
+          "relative_operator_norm": 0.014011193063650727,
+          "relative_fro_norm": 0.004691801561305398,
+          "exact_observed": false
+        },
+        "schur_neg_vs_L_bad": {
+          "operator_norm": 0.03923132585264056,
+          "fro_norm": 0.11623017206126221,
+          "max_abs": 0.03210810496715436,
+          "relative_operator_norm": 7.880154906457752,
+          "relative_fro_norm": 8.95344537104562,
+          "exact_observed": false
+        },
+        "schur_abs_vs_L_good": {
+          "operator_norm": 0.06202597728724798,
+          "fro_norm": 0.16929104070876302,
+          "max_abs": 0.059044624440047065,
+          "relative_operator_norm": 1.7731860815569096,
+          "relative_fro_norm": 1.5594886908867989,
+          "exact_observed": false
+        },
+        "schur_neg_vs_L_bad_bounds_one_perp": {
+          "status": "ok",
+          "dimension": 1467,
+          "denominator_lambda_min_one_perp": 1.1463300450625274e-05,
+          "lower_bound": 1.820853586194647,
+          "upper_bound": 41.102175529486885,
+          "comparable": true
+        },
+        "schur_abs_vs_L_good_bounds_one_perp": {
+          "status": "ok",
+          "dimension": 1467,
+          "denominator_lambda_min_one_perp": 0.00011821330787657768,
+          "lower_bound": 1.4070235196125327,
+          "upper_bound": 6.982731803794235,
+          "comparable": true
+        },
+        "common_comparison_map_constructed": false,
+        "exact_restriction_identity_observed": false,
+        "two_sided_bounds_observed": true
+      },
+      "domination_ratio_matrix_free_diagnostics": null,
+      "domination_ratio_restricted_sector_diagnostics": null,
+      "domination_halo_growth_diagnostics": null,
+      "domination_coarse_quotient_diagnostics": null,
+      "domination_row_pairing_diagnostics": null,
+      "Q_helical_lift_diagnostics": null,
+      "Q_helical_coupling_certificate_diagnostics": null,
+      "schur_complement_ok": true,
+      "verdict": "schur_psd",
+      "elapsed_seconds": 33.68,
+      "c0": 0.1111111111111111
+    },
+    {
+      "N": 8,
+      "K": 7,
+      "eta": 0.25,
+      "mode_count": 4912,
+      "edge_count": 1543284,
+      "block_size": 2742,
+      "G_size": 26,
+      "C_size": 2716,
+      "M_GG": {
+        "label": "M_GG",
+        "n": 26,
+        "rank": 26,
+        "nullity": 0,
+        "lambda_min": 0.0001850152708959748,
+        "lambda_max": 0.011176792750552387,
+        "norm": 0.011176792750552387,
+        "psd_gap": 0.0001850152708959748
+      },
+      "M_GC_norm": 0.0033382663610096877,
+      "M_CC": {
+        "label": "M_CC",
+        "n": 2716,
+        "rank": 2716,
+        "nullity": 0,
+        "lambda_min": 6.117025751234189e-06,
+        "lambda_max": 0.0335723472549609,
+        "norm": 0.0335723472549609,
+        "psd_gap": 6.117025751234189e-06
+      },
+      "M_CC_worst_eigenvector_support": {
+        "support": {
+          "7": 0.43478312390758467,
+          "8": 0.5652168760924154
+        },
+        "lambda_min": 6.1170257512343604e-06,
+        "norm_sq": 1.0000000000000004
+      },
+      "S_C": {
+        "label": "S_C",
+        "n": 2716,
+        "rank": 2715,
+        "nullity": 1,
+        "lambda_min": -3.3955433273056765e-19,
+        "lambda_max": 0.03356919959338034,
+        "norm": 0.03356919959338034,
+        "psd_gap": -3.3955433273056765e-19
+      },
+      "correction_norm": 0.0009972806544036878,
+      "S_C_worst_eigenvector_support": {
+        "support": {
+          "7": 0.4337260677466877,
+          "8": 0.5662739322533125
+        },
+        "lambda_min": -5.363773738760997e-19,
+        "norm_sq": 1.0000000000000004
+      },
+      "null_vector_diagnostics": {
+        "corr_constant": 1.0,
+        "corr_shell_7": 0.6585788242470962,
+        "corr_shell_8": 0.7525117489138041,
+        "shell_mass": {
+          "7": 0.43372606774668754,
+          "8": 0.5662739322533124
+        },
+        "corr_shell_balance": -0.1325478645066261,
+        "corr_sqrt_degree": 0.9792513701123431,
+        "corr_inv_degree": 0.9545055803880086,
+        "corr_degree_weighted_balance": -0.06072289170812856
+      },
+      "row_sum_diagnostics": {
+        "n": 2716,
+        "max_abs_row_sum": 1.1644331332494318e-16,
+        "l2_row_sum": 2.317873406158035e-16,
+        "mean_row_sum": -2.364062482702533e-19
+      },
+      "effective_laplacian_sign_diagnostics": null,
+      "signed_factorization_diagnostics": null,
+      "gate2a_schur_sign_split_comparison_diagnostics": {
+        "audit_requested": true,
+        "status": "ok",
+        "c_dim": 2716,
+        "g_dim": 26,
+        "comparison_target": "Compare Schur(L_neg), Schur(L_abs) to seam sign split L_bad, L_good on 1_C^perp.",
+        "schur_linearity_identity_observed": false,
+        "schur_linearity_defect": {
+          "operator_norm": 0.0004749937045522698,
+          "fro_norm": 0.0004750033327782609,
+          "max_abs": 0.00011114062018396931,
+          "relative_operator_norm": 0.014149234210113154,
+          "relative_fro_norm": 0.004816101975993451,
+          "exact_observed": false
+        },
+        "schur_neg_vs_L_bad": {
+          "operator_norm": 0.039988824658924005,
+          "fro_norm": 0.11627876917008287,
+          "max_abs": 0.03340856199810731,
+          "relative_operator_norm": 7.910093985980846,
+          "relative_fro_norm": 8.913275830789239,
+          "exact_observed": false
+        },
+        "schur_abs_vs_L_good": {
+          "operator_norm": 0.06261978564489233,
+          "fro_norm": 0.16781845759376973,
+          "max_abs": 0.059729965756418875,
+          "relative_operator_norm": 1.759130128697233,
+          "relative_fro_norm": 1.5444283320641699,
+          "exact_observed": false
+        },
+        "schur_neg_vs_L_bad_bounds_one_perp": {
+          "status": "ok",
+          "dimension": 2715,
+          "denominator_lambda_min_one_perp": 8.516259102795159e-06,
+          "lower_bound": 1.826363931103284,
+          "upper_bound": 41.467689451596165,
+          "comparable": true
+        },
+        "schur_abs_vs_L_good_bounds_one_perp": {
+          "status": "ok",
+          "dimension": 2715,
+          "denominator_lambda_min_one_perp": 4.3608499189082736e-05,
+          "lower_bound": 1.4325100700331053,
+          "upper_bound": 7.025017502333561,
+          "comparable": true
+        },
+        "common_comparison_map_constructed": false,
+        "exact_restriction_identity_observed": false,
+        "two_sided_bounds_observed": true
+      },
+      "domination_ratio_matrix_free_diagnostics": null,
+      "domination_ratio_restricted_sector_diagnostics": null,
+      "domination_halo_growth_diagnostics": null,
+      "domination_coarse_quotient_diagnostics": null,
+      "domination_row_pairing_diagnostics": null,
+      "Q_helical_lift_diagnostics": null,
+      "Q_helical_coupling_certificate_diagnostics": null,
+      "schur_complement_ok": true,
+      "verdict": "schur_psd",
+      "elapsed_seconds": 261.35,
+      "c0": 0.1111111111111111
+    },
+    {
+      "N": 10,
+      "K": 9,
+      "eta": 0.25,
+      "mode_count": 9260,
+      "edge_count": 3047778,
+      "block_size": 4374,
+      "G_size": 26,
+      "C_size": 4348,
+      "M_GG": {
+        "label": "M_GG",
+        "n": 26,
+        "rank": 26,
+        "nullity": 0,
+        "lambda_min": 0.00013063931238785736,
+        "lambda_max": 0.010880151303336978,
+        "norm": 0.010880151303336978,
+        "psd_gap": 0.00013063931238785736
+      },
+      "M_GC_norm": 0.003332046505763479,
+      "M_CC": {
+        "label": "M_CC",
+        "n": 4348,
+        "rank": 4348,
+        "nullity": 0,
+        "lambda_min": 3.334350906463531e-06,
+        "lambda_max": 0.0333429019073041,
+        "norm": 0.0333429019073041,
+        "psd_gap": 3.334350906463531e-06
+      },
+      "M_CC_worst_eigenvector_support": {
+        "support": {
+          "9": 0.4484373869884748,
+          "10": 0.551562613011525
+        },
+        "lambda_min": 3.3343509064631947e-06,
+        "norm_sq": 1.0000000000000002
+      },
+      "S_C": {
+        "label": "S_C",
+        "n": 4348,
+        "rank": 4347,
+        "nullity": 1,
+        "lambda_min": -1.3648996448772949e-18,
+        "lambda_max": 0.033339615173349345,
+        "norm": 0.033339615173349345,
+        "psd_gap": -1.3648996448772949e-18
+      },
+      "correction_norm": 0.0010212436280953633,
+      "S_C_worst_eigenvector_support": {
+        "support": {
+          "9": 0.4475620975160989,
+          "10": 0.5524379024839012
+        },
+        "lambda_min": -1.7109951978956193e-20,
+        "norm_sq": 0.9999999999999999
+      },
+      "null_vector_diagnostics": {
+        "corr_constant": -1.0000000000000007,
+        "corr_shell_9": -0.6690008202656398,
+        "corr_shell_10": -0.7432616648824968,
+        "shell_mass": {
+          "9": 0.4475620975160988,
+          "10": 0.5524379024839008
+        },
+        "corr_shell_balance": 0.10487580496780159,
+        "corr_sqrt_degree": -0.9749997325195381,
+        "corr_inv_degree": -0.9541111888511726,
+        "corr_degree_weighted_balance": 0.04672734153506812
+      },
+      "row_sum_diagnostics": {
+        "n": 4348,
+        "max_abs_row_sum": 2.786941684373989e-16,
+        "l2_row_sum": 5.267292652723199e-16,
+        "mean_row_sum": -1.7113894650236291e-19
+      },
+      "effective_laplacian_sign_diagnostics": null,
+      "signed_factorization_diagnostics": null,
+      "gate2a_schur_sign_split_comparison_diagnostics": {
+        "audit_requested": true,
+        "status": "ok",
+        "c_dim": 4348,
+        "g_dim": 26,
+        "comparison_target": "Compare Schur(L_neg), Schur(L_abs) to seam sign split L_bad, L_good on 1_C^perp.",
+        "schur_linearity_identity_observed": false,
+        "schur_linearity_defect": {
+          "operator_norm": 0.0004897191403626615,
+          "fro_norm": 0.0004897216304228719,
+          "max_abs": 0.00011674066658291099,
+          "relative_operator_norm": 0.014688692924462825,
+          "relative_fro_norm": 0.0049964174510925925,
+          "exact_observed": false
+        },
+        "schur_neg_vs_L_bad": {
+          "operator_norm": 0.03962565765142137,
+          "fro_norm": 0.11551357577311161,
+          "max_abs": 0.03238704833145312,
+          "relative_operator_norm": 7.786989245694494,
+          "relative_fro_norm": 8.813639506172912,
+          "exact_observed": false
+        },
+        "schur_abs_vs_L_good": {
+          "operator_norm": 0.06270781894297292,
+          "fro_norm": 0.16788889879960017,
+          "max_abs": 0.059806085111403284,
+          "relative_operator_norm": 1.775721203847242,
+          "relative_fro_norm": 1.5520241172699976,
+          "exact_observed": false
+        },
+        "schur_neg_vs_L_bad_bounds_one_perp": {
+          "status": "ok",
+          "dimension": 4347,
+          "denominator_lambda_min_one_perp": 4.065272243078424e-06,
+          "lower_bound": 1.8721912809683285,
+          "upper_bound": 47.796134886563024,
+          "comparable": true
+        },
+        "schur_abs_vs_L_good_bounds_one_perp": {
+          "status": "ok",
+          "dimension": 4347,
+          "denominator_lambda_min_one_perp": 3.3045730749915216e-05,
+          "lower_bound": 1.434611654326139,
+          "upper_bound": 6.878846021189454,
+          "comparable": true
+        },
+        "common_comparison_map_constructed": false,
+        "exact_restriction_identity_observed": false,
+        "two_sided_bounds_observed": true
+      },
+      "domination_ratio_matrix_free_diagnostics": null,
+      "domination_ratio_restricted_sector_diagnostics": null,
+      "domination_halo_growth_diagnostics": null,
+      "domination_coarse_quotient_diagnostics": null,
+      "domination_row_pairing_diagnostics": null,
+      "Q_helical_lift_diagnostics": null,
+      "Q_helical_coupling_certificate_diagnostics": null,
+      "schur_complement_ok": true,
+      "verdict": "schur_psd",
+      "elapsed_seconds": 490.77,
+      "c0": 0.1111111111111111
+    }
+  ],
+  "analysis_text": "## Schur Audit Summary\n\n| N | block | G | C | M_CC \u03bb_min | S_C \u03bb0 | S_C \u03bb1 | S_C \u03bb2 | nullity est | max \\|S_C 1\\| | corr(constant) | Verdict |\n|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---|\n| 6 | 1494 | 26 | 1468 | 1.452413e-05 | \u2014 | \u2014 | \u2014 | 1 | 1.31e-16 | 1.0000 | schur_psd |\n| 8 | 2742 | 26 | 2716 | 6.117026e-06 | \u2014 | \u2014 | \u2014 | 1 | 1.16e-16 | 1.0000 | schur_psd |\n| 10 | 4374 | 26 | 4348 | 3.334351e-06 | \u2014 | \u2014 | \u2014 | 1 | 2.79e-16 | -1.0000 | schur_psd |\n\nN=6: , nullity_est=1, eval=dense\nN=6: max |S_C 1_C|=1.307006e-16, L2 row-sum residual=2.681155e-16\nN=6: Gate2A exact_identity=False, linearity_exact=False, abs_bounds=[1.407024e+00, 6.982732e+00], neg_bounds=[1.820854e+00, 4.110218e+01]\nN=8: , nullity_est=1, eval=dense\nN=8: max |S_C 1_C|=1.164433e-16, L2 row-sum residual=2.317873e-16\nN=8: Gate2A exact_identity=False, linearity_exact=False, abs_bounds=[1.432510e+00, 7.025018e+00], neg_bounds=[1.826364e+00, 4.146769e+01]\nN=10: , nullity_est=1, eval=dense\nN=10: max |S_C 1_C|=2.786942e-16, L2 row-sum residual=5.267293e-16\nN=10: Gate2A exact_identity=False, linearity_exact=False, abs_bounds=[1.434612e+00, 6.878846e+00], neg_bounds=[1.872191e+00, 4.779613e+01]\n\nM_GC norms: 3.36e-03, 3.34e-03, 3.33e-03\nVerdicts: ['schur_psd']\nGate 1 target = S_C \u2ab0 0 and dim ker S_C = 1: SUPPORTED at tested N, not proved.",
+  "candidate_only": true,
+  "theorem_promoted": false,
+  "gate1_closed": false,
+  "gate1_supported_at_tested_shells": true,
+  "gate1_target": "Uniform signed domination on 1_C^\u22a5: sup_x\u22a51_C (x^T L_bad x)/(x^T L_good x) \u2264 rho_* < 1",
+  "schurNullModeIsConstantProved": true,
+  "kronStyleSchurReductionIdentified": true,
+  "ordinaryKronLaplacianIdentified": false,
+  "ordinaryKronLaplacianRoute": false,
+  "balancedSignedGraphRoute": false,
+  "effectiveOffdiagNonpositiveProved": false,
+  "effectiveGraphConnectedProved": false,
+  "effectiveGraphConnectedObserved": false,
+  "schurComplementPsdVerified": true,
+  "schurComplementNullityOneObserved": true,
+  "schurSignedPsdRequired": false,
+  "signedDominationProbeInstalled": true,
+  "signedDominationRatioBelowOneObserved": false,
+  "signedDominationRatioUniformlyBounded": false,
+  "gate2aSchurSignSplitComparisonAuditInstalled": true,
+  "gate2aExactRestrictionIdentityObserved": false,
+  "gate2aObservedTwoSidedQuadraticFormBounds": true,
+  "restrictedSectorDominationAuditInstalled": false,
+  "haloGrowthDominationAuditInstalled": false,
+  "coarseQuotientDominationAuditInstalled": false,
+  "rowPairingDominationAuditInstalled": false,
+  "qHelicalLiftAuditInstalled": false,
+  "qHelicalCouplingCertificateAuditInstalled": false,
+  "gpuDominationScoutInstalled": false,
+  "gpuDominationScoutMatchesCpu": false,
+  "gpuSchurMatvecInstalled": false,
+  "gpuCpuParityObserved": false,
+  "gpuHelicalCouplingScout": false,
+  "gpuKnAuthority": false,
+  "waleffeHelicalBasisRelevantObserved": false,
+  "qHelicalBlockDiagonalizationObserved": false,
+  "qHelicalCouplingBoundObserved": false,
+  "qHelicalMatvecBackend": null,
+  "qHelicalCouplingDenseOverlayOOMAtN14": false,
+  "qHelicalCouplingMatrixFreeRequired": false,
+  "qHelicalCouplingUniformlyBounded": false,
+  "qHelicalBlockFloorUniformlyProved": false,
+  "qHelicalSectorPsdProved": false,
+  "qEqualsWaleffeTriadOperatorProved": false,
+  "qGlobalPsdProved": false,
+  "schurComplementMatrixFreeAuditInstalled": true,
+  "schurNullModeConstantOnCObserved": true,
+  "schurComplementPsdProved": false,
+  "schurNullModeIdentified": false,
+  "schurSignedFactorizationProved": false,
+  "schurNullModeFactorizationProved": false,
+  "gate1ConditionalTheoremProved": false
+}

@@ -1,0 +1,92 @@
+{
+  "N": 8,
+  "K": 7,
+  "eta": 0.25,
+  "mode_count": 4912,
+  "edge_count": 1543284,
+  "block_size": 2742,
+  "G_size": 26,
+  "C_size": 2716,
+  "M_GG": {
+    "label": "M_GG",
+    "n": 26,
+    "rank": 26,
+    "nullity": 0,
+    "lambda_min": 0.00018396708900680913,
+    "lambda_max": 0.01596183904702817,
+    "norm": 0.01596183904702817,
+    "psd_gap": 0.00018396708900680913
+  },
+  "M_GC_norm": 0.004348850772666622,
+  "M_CC": {
+    "label": "M_CC",
+    "n": 2716,
+    "rank": 2716,
+    "nullity": 0,
+    "lambda_min": 7.633128510585853e-06,
+    "lambda_max": 0.031903921783542566,
+    "norm": 0.031903921783542566,
+    "psd_gap": 7.633128510585853e-06
+  },
+  "M_CC_worst_eigenvector_support": {
+    "support": {
+      "7": 0.43395602850353343,
+      "8": 0.5660439714964665
+    },
+    "lambda_min": 7.6331285105845e-06,
+    "norm_sq": 1.0000000000000004
+  },
+  "S_C": {
+    "label": "S_C",
+    "n": 2716,
+    "rank": 2715,
+    "nullity": 1,
+    "lambda_min": -8.750803257202584e-18,
+    "lambda_max": 0.031886488200624986,
+    "norm": 0.031886488200624986,
+    "psd_gap": -8.750803257202584e-18
+  },
+  "correction_norm": 0.0011885319174979021,
+  "S_C_worst_eigenvector_support": {
+    "support": {
+      "7": 0.433726067746684,
+      "8": 0.5662739322533161
+    },
+    "lambda_min": -1.0545727626982877e-17,
+    "norm_sq": 0.9999999999999998
+  },
+  "null_vector_diagnostics": {
+    "corr_constant": -0.9999999999999906,
+    "corr_shell_7": -0.6585788242470915,
+    "corr_shell_8": -0.7525117489138028,
+    "shell_mass": {
+      "7": 0.43372606774668376,
+      "8": 0.5662739322533156
+    },
+    "corr_shell_balance": 0.13254786450662945,
+    "corr_sqrt_degree": -0.979251370112347,
+    "corr_inv_degree": -0.9545055803880007,
+    "corr_degree_weighted_balance": 0.060722891708135454
+  },
+  "row_sum_diagnostics": {
+    "n": 2716,
+    "max_abs_row_sum": 1.2663481374630692e-16,
+    "l2_row_sum": 2.6051376473380444e-16,
+    "mean_row_sum": -1.1724693852351047e-19
+  },
+  "effective_laplacian_sign_diagnostics": null,
+  "signed_factorization_diagnostics": null,
+  "gate2a_schur_sign_split_comparison_diagnostics": null,
+  "domination_ratio_matrix_free_diagnostics": null,
+  "domination_ratio_restricted_sector_diagnostics": null,
+  "domination_halo_growth_diagnostics": null,
+  "domination_coarse_quotient_diagnostics": null,
+  "domination_row_pairing_diagnostics": null,
+  "Q_helical_lift_diagnostics": null,
+  "Q_helical_coupling_certificate_diagnostics": null,
+  "schur_complement_ok": true,
+  "verdict": "schur_psd",
+  "c0": 0.1111111111111111,
+  "candidate_only": true,
+  "theorem_promoted": false
+}

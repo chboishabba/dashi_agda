@@ -6,6 +6,46 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Gate 1 / Gate 2-A documentation and roadmap sync for `2026-07-02`:
+  updated `README.md`, `COMPACTIFIED_CONTEXT.md`, `TODO.md`, and
+  `docs/ns_triad_kn_gate2_seam_to_leakage_transfer.md` so the repo-level state
+  now matches the implemented NS audit lane. The current written state is:
+  Gate 1 finite-shell helical coupling evidence is repeated through
+  `N = 16`; the dense OOM boundary at `N = 14` was crossed by the matrix-free
+  helical certificate path; Gate 1 is now a uniform helical relative-bound
+  theorem target rather than a shell-search problem; Gate 2 is the explicit
+  seam-to-leakage transport theorem for the exact normalized Gram operator
+  `K_N(A)`; and the first Gate 2-A comparison audit between `Schur(L_abs)` /
+  `Schur(L_neg)` and seam `L_good` / `L_bad` is installed but remains
+  fail-closed. No promotion changed: Gate 1 uniformity is still open, Gate 2
+  transport is still open, GPU/Vulkan remains scout-only, and no NS/Clay
+  authority surface moved.
+
+- NS Gate 2-A comparison result sync for `2026-07-02`:
+  updated `docs/ns_triad_kn_gate2a_normalized_carrier_agreement.md`,
+  `COMPACTIFIED_CONTEXT.md`, and `TODO.md` after the first dense comparison run
+  on `N = 6, 8, 10`. The new result is sharp: exact restriction identity was
+  not observed, and Schur linearity was not observed, so the naive equality
+  route is dead on tested dense shells. But two-sided quadratic-form
+  comparability was observed on all three shells, so Gate 2-A remains live as a
+  comparison-constant theorem. The current written roadmap now reflects that
+  shift explicitly: stop treating exact identity as the default next proof
+  route, formalize the comparison constants instead, and then carry them into a
+  transport-margin ledger for `K_N(A)`.
+
+- NS Gate 2 coarse-transport failure and sharper-ansatz sync for `2026-07-02`:
+  updated `docs/ns_triad_kn_gate2a_normalized_carrier_agreement.md`,
+  `docs/ns_triad_kn_gate2_seam_to_leakage_transfer.md`,
+  `COMPACTIFIED_CONTEXT.md`, and `TODO.md`, and extended
+  `scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py` with an
+  extremizer-aware Gate 2-A transport ledger. The first coarse margin ledger on
+  `N = 6, 8, 10` now records a negative result: combining seam `rho_N` with
+  the worst-case quotient `C_neg^+ / c_abs^-` gives upper bounds around
+  `17.7`, `17.7`, and `20.5`, so the blunt constant route cannot close Gate 2.
+  The repo now records the sharper next step explicitly: pursue an
+  extremizer-aware or quotient-aware transport theorem rather than the coarse
+  worst-case quotient.
+
 - NS Wall 1 no-triple-danger / square-wave / backward-chain tranche for
   `2026-06-23`: adds `DASHI.Physics.Closure.NSNoTripleDangerBoundary`,
   `DASHI.Physics.Closure.NSSpectralSharpnessForkBoundary`,

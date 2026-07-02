@@ -9,7 +9,7 @@ open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.List.Base using (length)
 open import Data.Nat.Base public using (_≤_; z≤n; s≤s)
 
-open import DASHI.Core.Prelude using (_×_; _≥_)
+open import DASHI.Core.Prelude using (_×_; _≥_; fst; snd)
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ
   ; _≤ℝ_
@@ -26,6 +26,7 @@ open import DASHI.Physics.YangMills.ClayPromotionAuthorityGate as ClayAuthority 
 import DASHI.Physics.YangMills.BalabanLargeFieldSuppression as LargeField
 import DASHI.Physics.YangMills.BalabanPolymerDiameterEntropy as Entropy
 import DASHI.Physics.YangMills.BalabanAnisotropicDiameterCompatibility as AnisotropicDiameter
+import DASHI.Physics.YangMills.ArithmeticLemmaQueue as ArithmeticQueue
 import DASHI.Physics.YangMills.GraphCombinatorics as GraphCombinatorics
 import DASHI.Physics.YangMills.LocalLatticeDischargePipeline as LocalLattice
 import DASHI.Physics.YangMills.StepVAssemblyLemmaQueue as Assembly
@@ -61,10 +62,12 @@ open import DASHI.Physics.YangMills.P33BalabanMetricFaithfulnessBridge as P33Fai
   ; P33BalabanSourceAnchor
   ; P33BalabanMetricFaithfulnessBridge
   ; P33BalabanMetricFaithfulnessReceipt
+  ; P33BalabanSourceMetricTheorem
   ; SourceBackedMetricFaithfulnessCandidate
   ; sourceBackedMetricFaithfulnessCandidate
   ; P33PerturbationStabilityKernel
   ; P33BalabanMetricDischarge
+  ; P33BalabanSourceReconstructionKernel
   )
 
 -- Canonical inventory of constructive kernel surfaces that must replace
@@ -72,11 +75,19 @@ open import DASHI.Physics.YangMills.P33BalabanMetricFaithfulnessBridge as P33Fai
 -- repo-local analytic proof terms.
 
 postulate
-  _^_ : ℝ → ℕ → ℝ
   _^ℝ_ : ℝ → ℝ → ℝ
   fromNat : ℕ → ℝ
   ≤ℝ-refl : ∀ {x : ℝ} → x ≤ℝ x
   ≤ℝ-trans : ∀ {a b c : ℝ} → a ≤ℝ b → b ≤ℝ c → a ≤ℝ c
+
+_^_ : ℝ → ℕ → ℝ
+a ^ n = a Entropy.^ℝ (ArithmeticQueue.powℝ Entropy.decayBase n)
+
+sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+subst : ∀ {A : Set} (P : A → Set) {x y : A} → x ≡ y → P x → P y
+subst P refl px = px
 
 -- Shared model-side placeholders used by the kernel interfaces.
 Block : Set
@@ -100,17 +111,31 @@ countBadBlocks : ℕ → Polymer → ℕ
 countBadBlocks k X = length (P10SupportBlocks X)
 
 postulate
-  decayBase : ℝ
   c-large : ℝ
   c-block : ℝ
   c-block≤c-large : c-block ≤ℝ c-large
-  countPolymersByDiameter : ℕ → ℝ
-  activity : Polymer → ℝ
-  shellContribution : ℕ → ℝ
-  shellConstant : ℝ
-  C-act : ℝ
-  C-ent : ℝ
   p₀ : ℝ
+
+decayBase : ℝ
+decayBase = Entropy.decayBase
+
+countPolymersByDiameter : ℕ → ℝ
+countPolymersByDiameter = Entropy.countPolymersByDiameter
+
+activity : Polymer → ℝ
+activity = Entropy.activity
+
+shellContribution : ℕ → ℝ
+shellContribution = Entropy.shellContribution
+
+shellConstant : ℝ
+shellConstant = Entropy.shellConstant
+
+C-act : ℝ
+C-act = Entropy.C-act
+
+C-ent : ℝ
+C-ent = Entropy.C-ent
 
 blockPenalty : ℕ → Block → ℝ
 blockPenalty k b = c-large
@@ -867,40 +892,81 @@ P33AbstractBackgroundMetric = AnisotropicDiameter.backgroundMetric
 
 P33AbstractPerturbation : ℕ → Polymer → Edge → ℝ
 P33AbstractPerturbation = AnisotropicDiameter.metricPerturbation
+postulate
+  ImportedBalabanLocalMetric : ℕ → Polymer → Edge → ℝ
+  ImportedBalabanBackgroundMetric : ℕ → Edge → ℝ
+  ImportedBalabanMetricPerturbation : ℕ → Polymer → Edge → ℝ
+  ImportedBalabanSupEdgePerturbation : ℕ → Polymer → ℝ
+  ImportedBalabanSmallFieldRegularity : ℕ → Polymer → Set
+  ImportedBalabanLinkWeight : ℕ → Edge → ℝ
 
-ImportedBalabanLocalMetric : ℕ → Polymer → Edge → ℝ
-ImportedBalabanLocalMetric = P33AbstractLocalMetric
+  ImportedBalabanMetricDecomposition :
+    ∀ k X e →
+    ImportedBalabanLocalMetric k X e
+      ≡ ImportedBalabanBackgroundMetric k e +ℝ ImportedBalabanMetricPerturbation k X e
 
-ImportedBalabanBackgroundMetric : ℕ → Edge → ℝ
-ImportedBalabanBackgroundMetric = P33AbstractBackgroundMetric
+  ImportedBalabanSmallFieldControlsMetricPerturbation :
+    ∀ k X →
+    ImportedBalabanSmallFieldRegularity k X →
+    ImportedBalabanSupEdgePerturbation k X ≤ℝ ε-real-const
 
-ImportedBalabanMetricPerturbation : ℕ → Polymer → Edge → ℝ
-ImportedBalabanMetricPerturbation = P33AbstractPerturbation
+  ImportedBalabanBackgroundMetricUniformPositive :
+    ∀ k e →
+    GraphCombinatorics.admissibleScale k →
+    m-background ≤ℝ ImportedBalabanBackgroundMetric k e
 
-ImportedBalabanSmallFieldRegularity : ℕ → Polymer → Set
-ImportedBalabanSmallFieldRegularity = SmallFieldRegularity
+  ImportedBalabanPerturbationBelowMargin :
+    ε-real-const <ℝ m-background
 
-ImportedBalabanLinkWeight : ℕ → Edge → ℝ
-ImportedBalabanLinkWeight = w-weight
+  ImportedBalabanLinkWeightMetricComparison :
+    ∀ k X e →
+    isEdgeOf e k X →
+    ImportedBalabanLocalMetric k X e ≤ℝ ImportedBalabanLinkWeight k e
 
-currentP33SmallFieldControlsPerturbation :
-  ∀ k X →
-  SmallFieldRegularity k X →
-  supEdgePerturbation k X ≤ℝ ε-real-const
-currentP33SmallFieldControlsPerturbation =
-  AnisotropicDiameter.currentP33SmallFieldControlsMetricPerturbation
+  currentP33AgreesOnLocalMetric :
+    ∀ k X e →
+    P33AbstractLocalMetric k X e ≡ ImportedBalabanLocalMetric k X e
 
-currentP33PerturbationBelowMargin :
-  ε-real-const <ℝ m-background
-currentP33PerturbationBelowMargin =
-  AnisotropicDiameter.currentP33PerturbationMargin
+  currentP33AgreesOnBackgroundMetric :
+    ∀ k e →
+    P33AbstractBackgroundMetric k e ≡ ImportedBalabanBackgroundMetric k e
 
-currentP33MetricBelowLinkWeight :
-  ∀ k X e →
-  isEdgeOf e k X →
-  P33AbstractLocalMetric k X e ≤ℝ w-weight k e
-currentP33MetricBelowLinkWeight =
-  AnisotropicDiameter.currentP33LinkWeightMetricComparison
+  currentP33AgreesOnPerturbation :
+    ∀ k X e →
+    P33AbstractPerturbation k X e ≡ ImportedBalabanMetricPerturbation k X e
+
+  currentP33AgreesOnSmallFieldRegularity :
+    ∀ k X →
+    P10Faithful._↔_
+      (SmallFieldRegularity k X)
+      (ImportedBalabanSmallFieldRegularity k X)
+
+  currentP33AgreesOnLinkWeight :
+    ∀ k e →
+    w-weight k e ≡ ImportedBalabanLinkWeight k e
+
+  currentP33AbstractMetricDecompositionFromSource :
+    ∀ k X e →
+    P33AbstractLocalMetric k X e
+      ≡ P33AbstractBackgroundMetric k e +ℝ P33AbstractPerturbation k X e
+
+  currentP33SmallFieldControlsPerturbation :
+    ∀ k X →
+    SmallFieldRegularity k X →
+    supEdgePerturbation k X ≤ℝ ε-real-const
+
+  currentP33AbstractBackgroundMetricUniformPositive :
+    ∀ k e →
+    GraphCombinatorics.admissibleScale k →
+    m-background ≤ℝ P33AbstractBackgroundMetric k e
+
+  currentP33PerturbationBelowMargin :
+    ε-real-const <ℝ m-background
+
+  currentP33MetricBelowLinkWeight :
+    ∀ k X e →
+    isEdgeOf e k X →
+    P33AbstractLocalMetric k X e ≤ℝ w-weight k e
 
 currentP33AbstractKernel : P33SmallFieldEllipticityKernel
 currentP33AbstractKernel = record
@@ -908,11 +974,11 @@ currentP33AbstractKernel = record
   ; backgroundMetric = P33AbstractBackgroundMetric
   ; perturbation = P33AbstractPerturbation
   ; metricDecomposition =
-      AnisotropicDiameter.currentP33LocalMetricDecomposition
+      currentP33AbstractMetricDecompositionFromSource
   ; smallFieldControlsPerturbation =
       currentP33SmallFieldControlsPerturbation
   ; backgroundMetricUniformlyPositive =
-      AnisotropicDiameter.currentP33BackgroundMetricUniformPositive
+      currentP33AbstractBackgroundMetricUniformPositive
   ; perturbationBelowMargin =
       currentP33PerturbationBelowMargin
   ; linkWeightComparableToMetric =
@@ -968,54 +1034,32 @@ currentP33BalabanMetricObjectAdapter = record
       ImportedBalabanLinkWeight
   }
 
-currentP33AgreesOnLocalMetric :
-  ∀ k X e →
-  P33AbstractLocalMetric k X e ≡
-  P33Faithful.P33BalabanMetricObjectAdapter.BalabanLocalMetric
-    currentP33BalabanMetricObjectAdapter
-    k
-    X
-    e
-currentP33AgreesOnLocalMetric k X e = refl
-
-currentP33AgreesOnBackgroundMetric :
-  ∀ k e →
-  P33AbstractBackgroundMetric k e ≡
-  P33Faithful.P33BalabanMetricObjectAdapter.BalabanBackgroundMetric
-    currentP33BalabanMetricObjectAdapter
-    k
-    e
-currentP33AgreesOnBackgroundMetric k e = refl
-
-currentP33AgreesOnPerturbation :
-  ∀ k X e →
-  P33AbstractPerturbation k X e ≡
-  P33Faithful.P33BalabanMetricObjectAdapter.BalabanMetricPerturbation
-    currentP33BalabanMetricObjectAdapter
-    k
-    X
-    e
-currentP33AgreesOnPerturbation k X e = refl
-
-currentP33AgreesOnSmallFieldRegularity :
-  ∀ k X →
-  P10Faithful._↔_
-    (SmallFieldRegularity k X)
-    (P33Faithful.P33BalabanMetricObjectAdapter.BalabanSmallFieldRegularity
-      currentP33BalabanMetricObjectAdapter
-      k
-      X)
-currentP33AgreesOnSmallFieldRegularity k X =
-  P10Faithful.iff (λ sf → sf) (λ sf → sf)
-
-currentP33AgreesOnLinkWeight :
-  ∀ k e →
-  w-weight k e ≡
-  P33Faithful.P33BalabanMetricObjectAdapter.BalabanLinkWeight
-    currentP33BalabanMetricObjectAdapter
-    k
-    e
-currentP33AgreesOnLinkWeight k e = refl
+currentP33BalabanSourceMetricTheorem :
+  P33BalabanSourceMetricTheorem
+    Polymer
+    Edge
+    ImportedBalabanSmallFieldRegularity
+    ImportedBalabanLocalMetric
+    ImportedBalabanBackgroundMetric
+    ImportedBalabanMetricPerturbation
+    ImportedBalabanSupEdgePerturbation
+    GraphCombinatorics.admissibleScale
+    ImportedBalabanLinkWeight
+    isEdgeOf
+    ε-real-const
+    m-background
+currentP33BalabanSourceMetricTheorem = record
+  { metricDecomposition =
+      ImportedBalabanMetricDecomposition
+  ; smallFieldControlsPerturbation =
+      ImportedBalabanSmallFieldControlsMetricPerturbation
+  ; backgroundMetricUniformlyPositive =
+      ImportedBalabanBackgroundMetricUniformPositive
+  ; perturbationBelowMargin =
+      ImportedBalabanPerturbationBelowMargin
+  ; linkWeightComparableToMetric =
+      ImportedBalabanLinkWeightMetricComparison
+  }
 
 currentP33BalabanMetricFaithfulnessBridge :
   P33BalabanMetricFaithfulnessBridge
@@ -1045,9 +1089,9 @@ currentP33BalabanSourceAnchor :
 currentP33BalabanSourceAnchor = record
   { sourceName = "Eriksson/Balaban P33 small-field ellipticity lane"
   ; theoremSpan = "small-field perturbation control and link-weight positivity"
-  ; objectDefinitionsSpan = "local metric, background metric, perturbation, regularity, link weight"
-  ; normalizationConvention = "DASHI normalized P33 metric model with explicit Balaban-faithfulness receipt"
-  ; parserReceipt = "P33 abstract-vs-faithful split"
+  ; objectDefinitionsSpan = "imported Balaban local metric, background metric, perturbation, support supremum, regularity, and link weight objects"
+  ; normalizationConvention = "source-backed Balaban anisotropic metric objects with an explicit agreement bridge into the normalized DASHI abstract model"
+  ; parserReceipt = "P33 source objects are imported distinctly; agreement with the DASHI abstract model is asserted through named faithfulness lemmas rather than definitional equality"
   ; noClayPromotion = refl
   }
 
@@ -1113,6 +1157,32 @@ currentP33BalabanMetricDischarge = record
       currentP33BalabanMetricFaithfulnessReceipt
   ; perturbationKernel =
       currentP33PerturbationStabilityKernel
+  ; noClayPromotion = refl
+  }
+
+currentP33BalabanSourceReconstructionKernel :
+  P33BalabanSourceReconstructionKernel
+    Polymer
+    Edge
+    SmallFieldRegularity
+    isEdgeOf
+    P33AbstractLocalMetric
+    P33AbstractBackgroundMetric
+    P33AbstractPerturbation
+    supEdgePerturbation
+    admissibleScale
+    w-weight
+    ε-real-const
+    m-background
+currentP33BalabanSourceReconstructionKernel = record
+  { sourceAnchor =
+      currentP33BalabanSourceAnchor
+  ; sourceMetricTheorem =
+      currentP33BalabanSourceMetricTheorem
+  ; faithfulnessReceipt =
+      currentP33BalabanMetricFaithfulnessReceipt
+  ; metricDischarge =
+      currentP33BalabanMetricDischarge
   ; noClayPromotion = refl
   }
 
@@ -1273,22 +1343,174 @@ record P07P09KPMarginKernel : Set₁ where
     geometricShellSummability :
       Summable shellContribution
 
-postulate
-  P07KPSummabilityReducerFromKernel :
-    P07P09KPMarginKernel →
-    Entropy.P07KPSummabilityReducer
+P07P09KernelEntropyExponentTransport :
+  ∀ n →
+  C-ent ^ n
+    ≤ℝ
+  (Entropy.entropyConst
+    Entropy.^ℝ
+    (ArithmeticQueue.powℝ Entropy.decayBase n))
+P07P09KernelEntropyExponentTransport n = ≤ℝ-refl
 
-  P09EntropyMarginFromKernel :
-    P07P09KPMarginKernel →
-    Entropy.P09EntropyMargin
+P07P09KernelActivityAgreesWithP10Source :
+  ∀ X →
+  Entropy.activity X ≡ LargeField.sourceLargeFieldActivity 0 X
+P07P09KernelActivityAgreesWithP10Source X = refl
 
-  P09EntropyMarginDischargePackageFromKernel :
-    P07P09KPMarginKernel →
-    Entropy.P09EntropyMarginDischargePackage
+P07P09KernelActivityLargeFieldBridge :
+  ∀ X →
+  LargeField.LargeFieldPolymer 0 X
+P07P09KernelActivityLargeFieldBridge X =
+  LargeField.P10CurrentP07ActivityLargeFieldWitness X
 
-  P07P09FromKernel :
-    P07P09KPMarginKernel →
-    Entropy.P07KPSummabilityReducer × Entropy.P09EntropyMargin
+P07P09KernelCanonicalEnvelopeTransport :
+  ∀ X →
+  LargeField.P10CanonicalDiameterEnvelope
+    LargeField.currentP10AdmissibleConstants
+    X
+    ≤ℝ
+  (Entropy.C-act *ℝ (Entropy.decayBase Entropy.^ℝ Entropy.diamPoly X))
+P07P09KernelCanonicalEnvelopeTransport X =
+  LargeField.P10CurrentCanonicalEnvelopeToP07Convention X
+
+P07P09KernelCountingBasePositive :
+  0ℝ <ℝ C-ent
+P07P09KernelCountingBasePositive = Entropy.C-ent-positive
+
+P07P09KernelEntropyBoundTransport :
+  P07P09KPMarginKernel →
+  ∀ n →
+  countPolymersByDiameter n ≤ℝ C-ent ^ n →
+  Entropy.countPolymersByDiameter n ≤ℝ
+    (Entropy.entropyConst
+      Entropy.^ℝ
+      (ArithmeticQueue.powℝ Entropy.decayBase n))
+P07P09KernelEntropyBoundTransport kernel n countBound =
+  ≤ℝ-trans
+    countBound
+    (P07P09KernelEntropyExponentTransport n)
+
+P07P09KernelActivityDecayBridge :
+  P07P09KPMarginKernel →
+  ∀ X →
+  Entropy.activity X ≤ℝ
+    (Entropy.C-act *ℝ (Entropy.decayBase Entropy.^ℝ Entropy.diamPoly X))
+P07P09KernelActivityDecayBridge kernel X =
+  subst
+    (λ t →
+      t ≤ℝ
+        (Entropy.C-act *ℝ (Entropy.decayBase Entropy.^ℝ Entropy.diamPoly X)))
+    (sym (P07P09KernelActivityAgreesWithP10Source X))
+    (≤ℝ-trans
+      (LargeField.P10SourceCanonicalDiameterDecay
+        0
+        X
+        (P07P09KernelActivityLargeFieldBridge X))
+      (P07P09KernelCanonicalEnvelopeTransport X))
+
+P07P09KernelEntropyConstAgreesWithCountingBase :
+  Entropy.entropyConst ≡ Entropy.C-ent
+P07P09KernelEntropyConstAgreesWithCountingBase = refl
+
+P07P09KernelEntropyConstantPositive :
+  0ℝ <ℝ Entropy.entropyConst
+P07P09KernelEntropyConstantPositive =
+  subst
+    (λ t → 0ℝ <ℝ t)
+    (sym P07P09KernelEntropyConstAgreesWithCountingBase)
+    P07P09KernelCountingBasePositive
+
+P07P09KernelDecayDominatesEntropyBridge :
+  P07P09KPMarginKernel →
+  (Entropy.C-ent *ℝ Entropy.decayBase) <ℝ 1ℝ
+P07P09KernelDecayDominatesEntropyBridge kernel =
+  P07P09KPMarginKernel.explicitRatio kernel
+
+P07P09KernelEntropyBoundByDiameterBridge :
+  P07P09KPMarginKernel →
+  ∀ n →
+  Entropy.countPolymersByDiameter n ≤ℝ
+    (Entropy.entropyConst
+      Entropy.^ℝ
+      (ArithmeticQueue.powℝ Entropy.decayBase n))
+P07P09KernelEntropyBoundByDiameterBridge kernel n =
+  P07P09KernelEntropyBoundTransport
+    kernel
+    n
+    (P07P09KPMarginKernel.polymerShellCounting kernel n)
+
+P07P09KernelMarginAgainstDecayBridge :
+  P07P09KPMarginKernel →
+  (Entropy.entropyConst *ℝ Entropy.decayBase) <ℝ 1ℝ
+P07P09KernelMarginAgainstDecayBridge kernel =
+  subst
+    (λ t → (t *ℝ Entropy.decayBase) <ℝ 1ℝ)
+    (sym P07P09KernelEntropyConstAgreesWithCountingBase)
+    (P07P09KernelDecayDominatesEntropyBridge kernel)
+
+P07P09KernelGeometricSeriesSummable :
+  P07P09KPMarginKernel →
+  Entropy.SummableByGeometricRatio (Entropy.C-ent *ℝ Entropy.decayBase)
+P07P09KernelGeometricSeriesSummable kernel =
+  P07P09KPMarginKernel.geometricShellSummability kernel
+
+P07P09KernelKPCriterionBridge :
+  P07P09KPMarginKernel →
+  Entropy.KoteckyPreissCriterion
+P07P09KernelKPCriterionBridge kernel =
+  Entropy.KPCriterionFromShellSummability
+    (P07P09KPMarginKernel.geometricShellSummability kernel)
+
+P07KPSummabilityDischargePackageFromKernel :
+  P07P09KPMarginKernel →
+  Entropy.P07KPSummabilityDischargePackage
+P07KPSummabilityDischargePackageFromKernel kernel = record
+  { activityDecay =
+      P07P09KernelActivityDecayBridge kernel
+  ; entropyBound =
+      P07P09KernelEntropyBoundByDiameterBridge kernel
+  ; decayDominatesEntropy =
+      P07P09KernelDecayDominatesEntropyBridge kernel
+  ; geometricSeriesSummable =
+      P07P09KernelGeometricSeriesSummable kernel
+  ; kpCriterion =
+      P07P09KernelKPCriterionBridge kernel
+  }
+
+P09EntropyMarginDischargePackageFromKernel :
+  P07P09KPMarginKernel →
+  Entropy.P09EntropyMarginDischargePackage
+P09EntropyMarginDischargePackageFromKernel kernel = record
+  { entropyConstant =
+      Entropy.entropyConst
+  ; entropyConstantPositive =
+      P07P09KernelEntropyConstantPositive
+  ; entropyBoundByDiameter =
+      P07P09KernelEntropyBoundByDiameterBridge kernel
+  ; marginAgainstDecay =
+      P07P09KernelMarginAgainstDecayBridge kernel
+  }
+
+P09EntropyMarginFromKernel :
+  P07P09KPMarginKernel →
+  Entropy.P09EntropyMargin
+P09EntropyMarginFromKernel kernel =
+  Entropy.P09FromEntropyMarginPackage
+    (P09EntropyMarginDischargePackageFromKernel kernel)
+
+P07KPSummabilityReducerFromKernel :
+  P07P09KPMarginKernel →
+  Entropy.P07KPSummabilityReducer
+P07KPSummabilityReducerFromKernel kernel =
+  Entropy.P07FromKPSummabilityPackage
+    (P07KPSummabilityDischargePackageFromKernel kernel)
+
+P07P09FromKernel :
+  P07P09KPMarginKernel →
+  Entropy.P07KPSummabilityReducer × Entropy.P09EntropyMargin
+P07P09FromKernel kernel =
+  P07KPSummabilityReducerFromKernel kernel
+  , P09EntropyMarginFromKernel kernel
 
 -- Kernel 5 — P08/P11 real-analysis positivity/absorption kernel
 record P08P11PositivityAbsorptionKernel : Set₁ where
@@ -1400,6 +1622,9 @@ StepVToRGDischargePackageFromKernel kernel =
 -- Kernel 7 — fixed-lattice mass-gap kernel
 record FixedLatticeMassGapTheoremKernel : Set₁ where
   field
+    uniformLSI :
+      Assembly.UniformLSI
+
     uniformLSIImpliesSpectralGap :
       Assembly.UniformLSI →
       Assembly.LatticeSpectralGap
@@ -1412,15 +1637,30 @@ record FixedLatticeMassGapTheoremKernel : Set₁ where
       Assembly.ExponentialClustering →
       Assembly.FixedLatticeMassGap
 
+    finiteVolumeUniformity :
+      Assembly.UniformAcrossFiniteVolumes
+
     finiteVolumeUniformityPreservesGap :
       Assembly.UniformAcrossFiniteVolumes →
       Assembly.FixedLatticeMassGap →
       Assembly.UniformFixedLatticeMassGap
 
-postulate
-  FixedLatticeGapDischargePackageFromKernel :
-    FixedLatticeMassGapTheoremKernel →
-    Assembly.FixedLatticeGapDischargePackage
+FixedLatticeGapDischargePackageFromKernel :
+  FixedLatticeMassGapTheoremKernel →
+  Assembly.FixedLatticeGapDischargePackage
+FixedLatticeGapDischargePackageFromKernel kernel = record
+  { uniformLSI =
+      FixedLatticeMassGapTheoremKernel.uniformLSI kernel
+  ; lsiToSpectralGap =
+      FixedLatticeMassGapTheoremKernel.uniformLSIImpliesSpectralGap kernel
+  ; spectralGapToClustering =
+      FixedLatticeMassGapTheoremKernel.spectralGapImpliesClustering kernel
+  ; clusteringToMassGap =
+      FixedLatticeMassGapTheoremKernel.clusteringImpliesMassGap kernel
+  ; finiteVolumeUniformity =
+      FixedLatticeMassGapTheoremKernel.finiteVolumeUniformity kernel
+  ; noClayPromotion = refl
+  }
 
 -- Kernel 8 — thermodynamic-limit kernel
 record ThermodynamicLimitTheoremKernel : Set₁ where

@@ -125,6 +125,44 @@ record P33BalabanMetricFaithfulnessReceipt
     noClayPromotion :
       clayYangMillsPromoted ≡ false
 
+record P33BalabanSourceMetricTheorem
+  (Polymer Edge : Set)
+  (BalabanSmallFieldRegularity : ℕ → Polymer → Set)
+  (BalabanLocalMetric : ℕ → Polymer → Edge → ℝ)
+  (BalabanBackgroundMetric : ℕ → Edge → ℝ)
+  (BalabanMetricPerturbation : ℕ → Polymer → Edge → ℝ)
+  (BalabanSupEdgePerturbation : ℕ → Polymer → ℝ)
+  (BalabanAdmissibleScale : ℕ → Set)
+  (BalabanLinkWeight : ℕ → Edge → ℝ)
+  (BalabanIsEdgeOf : Edge → ℕ → Polymer → Set)
+  (ε-real-const : ℝ)
+  (m-background : ℝ)
+  : Set₁ where
+  field
+    metricDecomposition :
+      ∀ k X e →
+      BalabanLocalMetric k X e
+        ≡ BalabanBackgroundMetric k e
+        +ℝ BalabanMetricPerturbation k X e
+
+    smallFieldControlsPerturbation :
+      ∀ k X →
+      BalabanSmallFieldRegularity k X →
+      BalabanSupEdgePerturbation k X ≤ℝ ε-real-const
+
+    backgroundMetricUniformlyPositive :
+      ∀ k e →
+      BalabanAdmissibleScale k →
+      m-background ≤ℝ BalabanBackgroundMetric k e
+
+    perturbationBelowMargin :
+      ε-real-const <ℝ m-background
+
+    linkWeightComparableToMetric :
+      ∀ k X e →
+      BalabanIsEdgeOf e k X →
+      BalabanLocalMetric k X e ≤ℝ BalabanLinkWeight k e
+
 record P33PerturbationStabilityKernel
   (Polymer Edge : Set)
   (SmallFieldRegularity : ℕ → Polymer → Set)
@@ -189,6 +227,66 @@ record P33BalabanMetricDischarge
 
     perturbationKernel :
       P33PerturbationStabilityKernel
+        Polymer
+        Edge
+        SmallFieldRegularity
+        isEdgeOf
+        localMetric
+        backgroundMetric
+        perturbation
+        supEdgePerturbation
+        ε-real-const
+        m-background
+        admissibleScale
+        linkWeight
+
+    noClayPromotion :
+      clayYangMillsPromoted ≡ false
+
+record P33BalabanSourceReconstructionKernel
+  (Polymer Edge : Set)
+  (SmallFieldRegularity : ℕ → Polymer → Set)
+  (isEdgeOf : Edge → ℕ → Polymer → Set)
+  (localMetric : ℕ → Polymer → Edge → ℝ)
+  (backgroundMetric : ℕ → Edge → ℝ)
+  (perturbation : ℕ → Polymer → Edge → ℝ)
+  (supEdgePerturbation : ℕ → Polymer → ℝ)
+  (admissibleScale : ℕ → Set)
+  (linkWeight : ℕ → Edge → ℝ)
+  (ε-real-const : ℝ)
+  (m-background : ℝ)
+  : Set₁ where
+  field
+    sourceAnchor :
+      P33BalabanSourceAnchor
+
+    sourceMetricTheorem :
+      P33BalabanSourceMetricTheorem
+        Polymer
+        Edge
+        SmallFieldRegularity
+        localMetric
+        backgroundMetric
+        perturbation
+        supEdgePerturbation
+        admissibleScale
+        linkWeight
+        isEdgeOf
+        ε-real-const
+        m-background
+
+    faithfulnessReceipt :
+      P33BalabanMetricFaithfulnessReceipt
+        Polymer
+        Edge
+        SmallFieldRegularity
+        localMetric
+        backgroundMetric
+        perturbation
+        linkWeight
+
+    metricDischarge :
+      P33BalabanMetricDischarge
         Polymer
         Edge
         SmallFieldRegularity

@@ -1,5 +1,40 @@
 # FOR TODO GO TO '# TODO'
 
+Current NS Gate 1 / Gate 2 roadmap note for `2026-07-02`:
+- Gate 1 finite-shell scouting is no longer the bottleneck. The live helical
+  coupling certificate now repeats on `N = 6, 8, 10, 12, 14, 16` with
+  `kappa_N` observed in the band `0.5448 .. 0.6004`, and the matrix-free
+  helical certificate path has already crossed the old dense OOM boundary at
+  `N = 14`. The next Gate 1 work is therefore analytic: prove a uniform
+  helical block floor for `D_N` and a uniform relative coupling bound
+  `||D_N^(-1/2) E_N D_N^(-1/2)|| <= kappa_* < 1`.
+- Gate 2 is now explicit as seam-to-leakage transport for the exact normalized
+  Gram object `K_N(A) = L_abs(A)^(-1/2) L_neg(A) L_abs(A)^(-1/2)`. The next
+  live comparison lemma is no longer implicit: compare `Schur(L_abs)` and
+  `Schur(L_neg)` to seam `L_good` and `L_bad` on `1_C^perp`, then ledger the
+  transport constants needed to preserve the strict `< 1` margin.
+- The repo now has an installed dense audit for that first Gate 2-A lemma in
+  `scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py` via
+  `--audit-gate2a-schur-sign-split-comparison`. That audit has now been run on
+  `N = 6, 8, 10`. Immediate conclusion: exact restriction identities failed,
+  and Schur linearity also failed, but observed two-sided quadratic-form bounds
+  held on all three shells. Immediate next action: stop pursuing exact
+  identity as the primary Gate 2-A route and instead formalize the stable
+  comparison-constant route, especially the relatively stable
+  `Schur(L_abs)` / `L_good` band and the looser `Schur(L_neg)` / `L_bad`
+  comparison.
+- After that, build the transport-margin ledger explicitly:
+  combine Gate 1's `kappa_* < 1` with the Gate 2-A comparison constants and
+  decide whether the induced leakage margin for `K_N(A)` still lands strictly
+  below `1`. That first coarse ledger has now been run on `N = 6, 8, 10`, and
+  it fails badly: the naive bound from `(C_neg^+ / c_abs^-) rho_N` lands around
+  `17.7`, `17.7`, and `20.5`. So the next work item is not “improve the same
+  coarse inequality slightly”; it is “replace the coarse route with a sharper
+  extremizer-aware or quotient-aware transport ansatz”.
+- GPU/Vulkan remains engineering-only for this lane. `../dashiCORE` is still
+  reusable as substrate, but GPU results remain non-authoritative until
+  CPU/GPU parity is demonstrated for the actual Schur/helical operators.
+
 Current NS Wall 1 no-triple-danger / square-wave / backward-chain note for `2026-06-23`:
 - Candidate-only no-triple-danger fork tranche is now recorded. Artifacts:
   `DASHI/Physics/Closure/NSNoTripleDangerBoundary.agda`,

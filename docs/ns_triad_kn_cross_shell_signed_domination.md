@@ -83,7 +83,8 @@ A direct row-pairing audit at `N=12` rules out the simplest rowwise proof bridge
 
 Waleffe helical decomposition is now the best candidate representation lens for the live `Q` theorem, but it remains fail-closed. The current DASHI operator still comes from the phase-based Schur sign split `γ_e = cos(φ_l + φ_r - φ_o)`, not from an explicit helical Waleffe coefficient, so `Q_N` is not yet identified with a helical triad operator. The safe next audit is therefore: build a candidate canonical helical-channel lift of the current phase-based `Q_N`, measure off-block leakage in that lifted basis, and only then decide whether a genuine helical block proof route is live.
 
-The first `N=12` helical coupling certificate is materially better than an opaque global PSD observation, but it is still only a finite-shell certificate. In the candidate lifted basis, write
+The helical coupling route is now a repeated finite-shell pattern, not an `N=12`
+accident. In the candidate lifted basis, write
 
 \[
 Q_N = D_N + E_N
@@ -91,18 +92,48 @@ Q_N = D_N + E_N
 
 where \(D_N\) is the helical block-diagonal part and \(E_N\) is the off-block coupling. The current `N=12` telemetry reports
 
-- \(\lambda_{\min}(D_{12}\mid \mathbf{1}_C^\perp) \approx 4.375958\times 10^{-6}\)
-- \(\lambda_{\min}(Q_{12}\mid \mathbf{1}_C^\perp) \approx 4.320716\times 10^{-6}\)
-- \(\|E_{12}\|_{\mathrm{op}} \approx 1.083606\times 10^{-2}\)
+The current finite-shell table is:
+
+| \(N\) | \(\lambda_{\min}(D_N \mid \mathbf{1}_C^\perp)\) | \(\lambda_{\min}(Q_N \mid \mathbf{1}_C^\perp)\) | \(\kappa_N = \|D_N^{-1/2}E_ND_N^{-1/2}\|\) | \((1-\kappa_N)\lambda_{\min}(D_N)\) | actual / bound |
+|---:|---:|---:|---:|---:|---:|
+| 8  | \(8.651443\times 10^{-6}\) | \(8.090995\times 10^{-6}\) | \(0.544753\) | \(3.938541\times 10^{-6}\) | \(2.0543\) |
+| 10 | \(1.171517\times 10^{-5}\) | \(1.103319\times 10^{-5}\) | \(0.578461\) | \(4.938398\times 10^{-6}\) | \(2.2342\) |
+| 12 | \(4.375957\times 10^{-6}\) | \(4.320716\times 10^{-6}\) | \(0.595779\) | \(1.768853\times 10^{-6}\) | \(2.4427\) |
+| 14 | \(2.259808\times 10^{-5}\) | \(4.049777\times 10^{-5}\) | \(0.594815\) | \(9.156400\times 10^{-6}\) | \(4.4229\) |
+| 16 | \(5.930028\times 10^{-6}\) | \(9.402117\times 10^{-6}\) | \(0.600349\) | \(2.369944\times 10^{-6}\) | \(3.9672\) |
+
+The earliest small-shell helical scout also already landed below one:
+
+- \(\kappa_6 \approx 0.560609 < 1\)
+
+For receipt continuity, the original first live `N=12` coupling read remains:
+
 - \(\|D_{12}^{-1/2} E_{12} D_{12}^{-1/2}\| \approx 0.595611 < 1\)
+
+So the observed band is now
+
+\[
+\kappa_N \in [0.5448, 0.6004]
+\quad \text{for } N = 6, 8, 10, 12, 14, 16.
+\]
+
+At `N=16`, for example, the matrix-free overlay reports
+
+- \(\lambda_{\min}(D_{16}\mid \mathbf{1}_C^\perp) \approx 5.930028\times 10^{-6}\)
+- \(\lambda_{\min}(Q_{16}\mid \mathbf{1}_C^\perp) \approx 9.402117\times 10^{-6}\)
+- \(\|D_{16}^{-1/2} E_{16} D_{16}^{-1/2}\| \approx 0.600349 < 1\)
+- perturbation lower bound \((1-\kappa_{16})\lambda_{\min}(D_{16}) \approx 2.369944\times 10^{-6}\)
 
 Thus, if the relative-bound computation is correct,
 
 \[
-Q_{12} \succeq (1 - 0.595611)D_{12}
+Q_N \succeq (1 - \kappa_N)D_N
 \]
 
-on the tested mean-zero seam surface. This is a useful structural certificate, not a uniform theorem. The conservative perturbation lower bound is about \(1.77\times 10^{-6}\), below the observed \(4.32\times 10^{-6}\), so the bound is lossy but non-vacuous.
+on the tested mean-zero seam surface for every audited shell `N = 6, 8, 10, 12, 14, 16`. This is now a repeated structural certificate, but it is still not a uniform theorem.
+
+The earlier finite-audit expansion point `N = 6, 8, 10, 14, 16` is now
+subsumed by the completed `N = 6, 8, 10, 12, 14, 16` table.
 
 The new proof target is:
 
@@ -112,7 +143,19 @@ D_N \succeq c_D(N)I,\qquad
 \|D_N^{-1/2}E_ND_N^{-1/2}\|\le \kappa_* < 1
 \]
 
-uniformly in \(N\). Gate 1 therefore reduces to two obligations: a helical block floor and a helical coupling bound. The decisive finite audit is the same report for `N = 6, 8, 10, 14, 16`: \(\lambda_{\min}(D_N)\), \(\lambda_{\min}(Q_N)\), \(\kappa_N\), \((1-\kappa_N)\lambda_{\min}(D_N)\), actual/bound ratio, off-block Frobenius ratio, and the dominant sector-pair of \(E_N\).
+uniformly in \(N\). Gate 1 therefore reduces to two obligations: a helical block floor and a helical coupling bound. Numerically, the finite-shell question has now been answered as far as it reasonably needs to be: the live theorem target is no longer “does the helical route ever work?” but “why does \(\kappa_N\) stay stably near \(0.55\text{–}0.60\) instead of drifting toward \(1\)?”
+
+This still closes only Gate 1. The next live theorem is the seam-to-leakage
+transport step: prove that this seam-local signed/helical certificate controls
+the exact normalized leakage operator
+
+\[
+K_N(A) = L_{\mathrm{abs}}(A)^{-1/2} L_{\mathrm{neg}}(A) L_{\mathrm{abs}}(A)^{-1/2}
+\]
+
+used by the downstream cross-shell leakage and Gram-coercivity lane. That
+Gate 2 surface is tracked explicitly in
+[docs/ns_triad_kn_gate2_seam_to_leakage_transfer.md](ns_triad_kn_gate2_seam_to_leakage_transfer.md).
 
 Because the existing CPU runner can OOM while materializing dense Schur/Q objects, the recommended compute path is now checkpoint-first and overlay-only: produce one shell-scoped `.core.npz`/`.matrices.npz` checkpoint at a time, then run helical overlays from the checkpoint. GPU/Vulkan reuse from `../dashiCORE` is a performance scout only until CPU parity is recorded; it must not become proof authority.
 
@@ -140,7 +183,7 @@ schurComplementPsdVerified = true
 qHelicalLiftAuditInstalled = true
 qHelicalBasisRelevantObserved = true
 qHelicalBlockDiagonalizationObserved = false
-qHelicalCouplingBoundObserved = true   -- N=12, kappa approx 0.5956
+qHelicalCouplingBoundObserved = true   -- N=6,8,10,12,14,16 with kappa in 0.5448..0.6004
 
 signedDominationRatioUniformlyBounded = false
 qHelicalCouplingUniformlyBounded = false
