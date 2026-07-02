@@ -174,10 +174,13 @@ postulate
 
   stepVAnalyticAssembler
     : Entropy.ImportedPolymerAnimalCountingBound
-    → (∀ (k : ℕ) (X-dist : ℝ) (R-val : ℝ)
-       → R-val ≤ℝ
-          (LargeField.expℝ (-ℝ (LargeField.p0 k))
-           *ℝ LargeField.expℝ (-ℝ (LargeField.κ *ℝ X-dist))))
+    → (∀ (k : ℕ) (X : LargeField.SourcePolymer)
+       → LargeField.LargeFieldPolymer k X
+       → LargeField.sourceLargeFieldActivity k X
+          ≤ℝ
+          LargeField.P10CanonicalDiameterEnvelope
+            LargeField.currentP10AdmissibleConstants
+            X)
     → (∀ (k : ℕ)
        → (((_-ℝ_ LargeField.d-dim 1ℝ) *ℝ LargeField.logℝ LargeField.L-constant)
           +ℝ LargeField.C-abs-const)
@@ -209,7 +212,14 @@ record StepVSourceAnalyticInputs : Set₁ where
     p06MixedReducerPayloadMatches :
       p06MixedReducerPayload ≡
       stepVP06MixedReducerPayload p06AnimalCounting
-    p10LargeFieldActivity : LargeField.ImportedLargeFieldActivityBound
+    p10LargeFieldActivity :
+      ∀ (k : ℕ) (X : LargeField.SourcePolymer)
+      → LargeField.LargeFieldPolymer k X
+      → LargeField.sourceLargeFieldActivity k X
+         ≤ℝ
+         LargeField.P10CanonicalDiameterEnvelope
+           LargeField.currentP10AdmissibleConstants
+           X
     p11AbsorptionCondition : LargeField.ImportedAbsorptionCondition
     p33aUniformLinkEllipticity : ADC.P33aUniformLinkEllipticityWrapper
 
@@ -224,7 +234,13 @@ record StepVInternalReducers : Set₁ where
 
 StepVMarginFromP33bAndArithmetic
   : Entropy.ImportedPolymerAnimalCountingBound
-  → LargeField.ImportedLargeFieldActivityBound
+  → (∀ (k : ℕ) (X : LargeField.SourcePolymer)
+     → LargeField.LargeFieldPolymer k X
+     → LargeField.sourceLargeFieldActivity k X
+        ≤ℝ
+        LargeField.P10CanonicalDiameterEnvelope
+          LargeField.currentP10AdmissibleConstants
+          X)
   → LargeField.ImportedAbsorptionCondition
   → ADC.P33aUniformLinkEllipticityWrapper
   → ADC.P33bWeightedTreeDistanceDominatesOrdinaryDiameter
@@ -234,7 +250,7 @@ StepVMarginFromP33bAndArithmetic
 StepVMarginFromP33bAndArithmetic p06 p10 p11 p33a p33b p07 p09 =
   stepVAnalyticAssembler
     p06
-    (LargeField.ImportedLargeFieldActivityBound.activityBound p10)
+    p10
     (LargeField.ImportedAbsorptionCondition.absorptionInequality p11)
     (λ k X →
       lemmaV-1-P33bGivesAdmissibleDiameterDecay k X
@@ -264,7 +280,8 @@ currentStepVSourceAnalyticInputs = record
   { p06AnimalCounting = Entropy.polymerAnimalCountingBoundWitness
   ; p06MixedReducerPayload = Entropy.ImportedPolymerAnimalCountingBound.mixedReducerPayload Entropy.polymerAnimalCountingBoundWitness
   ; p06MixedReducerPayloadMatches = refl
-  ; p10LargeFieldActivity = LargeField.postulatedLargeFieldActivityBoundWitness
+  ; p10LargeFieldActivity =
+      LargeField.P10CurrentCanonicalLargeFieldDecayFromOwnedKernels
   ; p11AbsorptionCondition = LargeField.postulatedAbsorptionConditionWitness
   ; p33aUniformLinkEllipticity = ADC.currentP33aUniformLinkEllipticityWrapper
   }
@@ -279,7 +296,13 @@ currentStepVInternalReducers = record
 StepVAnalyticLeavesToStepV :
   Entropy.ImportedPolymerAnimalCountingBound →
   Entropy.ImportedPZeroPositive →
-  LargeField.ImportedLargeFieldActivityBound →
+  (∀ (k : ℕ) (X : LargeField.SourcePolymer)
+   → LargeField.LargeFieldPolymer k X
+   → LargeField.sourceLargeFieldActivity k X
+      ≤ℝ
+      LargeField.P10CanonicalDiameterEnvelope
+        LargeField.currentP10AdmissibleConstants
+        X) →
   LargeField.ImportedAbsorptionCondition →
   ADC.P33aUniformLinkEllipticityWrapper →
   ADC.P33bWeightedTreeDistanceDominatesOrdinaryDiameter →
@@ -1239,6 +1262,5 @@ YangMillsEndpointFromContinuum :
   → OSWightmanEndpointPackage
   → YangMillsQuantumFieldTheory × PhysicalMassGap
 YangMillsEndpointFromContinuum contGap pkg = postulatedYangMillsEndpointFromContinuum contGap pkg
-
 
 

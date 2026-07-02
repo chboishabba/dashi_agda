@@ -2,7 +2,7 @@ module DASHI.Physics.YangMills.P01P33ReplacementBacklog where
 
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; [])
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
@@ -449,7 +449,6 @@ record P01P33ReplacementBacklog : Set where
     backlogBoundary : String
     backlogBoundaryIsCanonical :
       backlogBoundary ≡
-      "Per-lemma proof-replacement queue for P01-P33: entropy-side P06 stays canonical while P06a/P06a1/P06a2a/P06a2/P06a3a/P06a3/P06b/P06c expose the bounded-degree skeleton-counting, root-ball growth, size-shell, diameter-containment, diameter-shell, decoration-bound, and recombination split; P07/P09 feed Step V, Step V feeds RG through explicit StepVToDLRSmallness, DLRSmallnessAndCrossScaleToUniformLSI, StepVToA2, A2ToB6, and B6ToRGCauchy reducers; the endpoint lane now exposes an internal P31a/P31b/P31c split while the composite source-side P31 sink remains explicit."
       "Per-lemma proof-replacement queue for P01-P33: entropy-side P06 stays canonical while P06a/P06a1/P06a2a/P06a2/P06a3a/P06a3/P06b/P06c expose the bounded-degree skeleton-counting, root-ball growth, DFS-walk sublemmas, size-shell, diameter-containment, explicit size-or-complexity-controlled-by-diameter leaf, decoration-bound, and recombination split; P07/P09 feed Step V, Step V feeds RG through explicit StepVToDLRSmallness, DLRSmallnessAndCrossScaleToUniformLSI, StepVToA2, A2ToB6, and B6ToRGCauchy reducers; the endpoint lane now exposes an internal P31a/P31b/P31c split while the composite source-side P31 sink remains explicit."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
@@ -505,7 +504,147 @@ currentP01P33ReplacementBacklog = record
   ; p33aFull = p33aFullEntry
   ; p33 = p33Entry
   ; backlogBoundary =
-      "Per-lemma proof-replacement queue for P01-P33: entropy-side P06 stays canonical while P06a/P06a1/P06a2a/P06a2/P06a3a/P06a3/P06b/P06c expose the bounded-degree skeleton-counting, root-ball growth, size-shell, diameter-containment, diameter-shell, decoration-bound, and recombination split; P07/P09 feed Step V, Step V feeds RG through explicit StepVToDLRSmallness, DLRSmallnessAndCrossScaleToUniformLSI, StepVToA2, A2ToB6, and B6ToRGCauchy reducers; the endpoint lane now exposes an internal P31a/P31b/P31c split while the composite source-side P31 sink remains explicit."
+      "Per-lemma proof-replacement queue for P01-P33: entropy-side P06 stays canonical while P06a/P06a1/P06a2a/P06a2/P06a3a/P06a3/P06b/P06c expose the bounded-degree skeleton-counting, root-ball growth, DFS-walk sublemmas, size-shell, diameter-containment, explicit size-or-complexity-controlled-by-diameter leaf, decoration-bound, and recombination split; P07/P09 feed Step V, Step V feeds RG through explicit StepVToDLRSmallness, DLRSmallnessAndCrossScaleToUniformLSI, StepVToA2, A2ToB6, and B6ToRGCauchy reducers; the endpoint lane now exposes an internal P31a/P31b/P31c split while the composite source-side P31 sink remains explicit."
   ; backlogBoundaryIsCanonical = refl
   ; noClayPromotion = refl
   }
+
+record ActiveYMSprintFrontierEntry : Set where
+  field
+    entry : ProofReplacementEntry
+    sprintLane : String
+    rationale : String
+
+activeYMSprintFrontierBoundary : String
+activeYMSprintFrontierBoundary =
+  "Top active YM frontier: prioritize P33a1/P33 analytic ownership, then the P06 bounded-degree skeleton-counting chain, then Step V assembly and explicit RG transfer reducers. Keep endpoint O(4)/Wightman source imports later and preserve no-clay-promotion."
+
+p33a1FrontierEntry : ActiveYMSprintFrontierEntry
+p33a1FrontierEntry = record
+  { entry = p33a1Entry
+  ; sprintLane = "Sprint A - P33 analytic ownership"
+  ; rationale =
+      "Highest-value current analytic leaf: make the small-field ellipticity route explicit before widening to the rest of the Step V lane."
+  }
+
+p33FrontierEntry : ActiveYMSprintFrontierEntry
+p33FrontierEntry = record
+  { entry = p33Entry
+  ; sprintLane = "Sprint A - P33 analytic ownership"
+  ; rationale =
+      "Keep the P33 split canonical so the composite witness consumes the local metric/perturbation route rather than an opaque source jump."
+  }
+
+p06a1FrontierEntry : ActiveYMSprintFrontierEntry
+p06a1FrontierEntry = record
+  { entry = p06a1Entry
+  ; sprintLane = "Sprint B - P06 entropy/counting ownership"
+  ; rationale =
+      "Bounded-degree support-graph structure is the reusable local input for the whole P06 skeleton-counting chain."
+  }
+
+p06a2aFrontierEntry : ActiveYMSprintFrontierEntry
+p06a2aFrontierEntry = record
+  { entry = p06a2aEntry
+  ; sprintLane = "Sprint B - P06 entropy/counting ownership"
+  ; rationale =
+      "Root-ball growth is the first graph-combinatorial bridge below P06 and unblocks the remaining shell-counting leaves."
+  }
+
+p06a2FrontierEntry : ActiveYMSprintFrontierEntry
+p06a2FrontierEntry = record
+  { entry = p06a2Entry
+  ; sprintLane = "Sprint B - P06 entropy/counting ownership"
+  ; rationale =
+      "This is the main rooted connected skeleton size-shell counting surface and should stop being a theorem-shaped stub."
+  }
+
+p06a3aFrontierEntry : ActiveYMSprintFrontierEntry
+p06a3aFrontierEntry = record
+  { entry = p06a3aEntry
+  ; sprintLane = "Sprint B - P06 entropy/counting ownership"
+  ; rationale =
+      "Diameter-shell containment isolates the geometry needed before the final size-or-complexity leaf."
+  }
+
+p06a3FrontierEntry : ActiveYMSprintFrontierEntry
+p06a3FrontierEntry = record
+  { entry = p06a3Entry
+  ; sprintLane = "Sprint B - P06 entropy/counting ownership"
+  ; rationale =
+      "This diameter-shell reduction is the last local graph-counting bridge before the residual source-side counting overhead."
+  }
+
+p06cFrontierEntry : ActiveYMSprintFrontierEntry
+p06cFrontierEntry = record
+  { entry = p06cEntry
+  ; sprintLane = "Sprint B - P06 entropy/counting ownership"
+  ; rationale =
+      "Use recombination as the typed consumer boundary so P06 no longer flows into Step V as a black box."
+  }
+
+p07FrontierEntry : ActiveYMSprintFrontierEntry
+p07FrontierEntry = record
+  { entry = p07Entry
+  ; sprintLane = "Sprint C - Step V assembly"
+  ; rationale =
+      "KP summability should be owned as an arithmetic queue item once the P06 and P33 local leaves are explicit."
+  }
+
+p09FrontierEntry : ActiveYMSprintFrontierEntry
+p09FrontierEntry = record
+  { entry = p09Entry
+  ; sprintLane = "Sprint C - Step V assembly"
+  ; rationale =
+      "The decay-vs-entropy margin is the explicit arithmetic closure needed before terminal Step V assembly."
+  }
+
+p23FrontierEntry : ActiveYMSprintFrontierEntry
+p23FrontierEntry = record
+  { entry = p23Entry
+  ; sprintLane = "Sprint C - Step V assembly"
+  ; rationale =
+      "This is the terminal Step V assembly surface and the right place to expose the composed local lattice ownership."
+  }
+
+dlrSmallnessFrontierEntry : ActiveYMSprintFrontierEntry
+dlrSmallnessFrontierEntry = record
+  { entry = dlrSmallnessAndCrossScaleToUniformLSIEntry
+  ; sprintLane = "Sprint D - RG handoff cleanup"
+  ; rationale =
+      "The DLR smallness handoff should be the canonical typed bridge from Step V into the fixed-lattice LSI lane."
+  }
+
+a2ToB6FrontierEntry : ActiveYMSprintFrontierEntry
+a2ToB6FrontierEntry = record
+  { entry = a2ToB6Entry
+  ; sprintLane = "Sprint D - RG handoff cleanup"
+  ; rationale =
+      "Keep the RG influence transfer explicit so the A2-to-B6 theorem is consumed through a visible local reducer."
+  }
+
+b6ToRGCauchyFrontierEntry : ActiveYMSprintFrontierEntry
+b6ToRGCauchyFrontierEntry = record
+  { entry = b6ToRGCauchyEntry
+  ; sprintLane = "Sprint D - RG handoff cleanup"
+  ; rationale =
+      "This is the canonical typed bridge from B6 influence control into the RG-Cauchy lane."
+  }
+
+activeYMSprintFrontier : List ActiveYMSprintFrontierEntry
+activeYMSprintFrontier =
+  p33a1FrontierEntry ∷
+  p33FrontierEntry ∷
+  p06a1FrontierEntry ∷
+  p06a2aFrontierEntry ∷
+  p06a2FrontierEntry ∷
+  p06a3aFrontierEntry ∷
+  p06a3FrontierEntry ∷
+  p06cFrontierEntry ∷
+  p07FrontierEntry ∷
+  p09FrontierEntry ∷
+  p23FrontierEntry ∷
+  dlrSmallnessFrontierEntry ∷
+  a2ToB6FrontierEntry ∷
+  b6ToRGCauchyFrontierEntry ∷
+  []

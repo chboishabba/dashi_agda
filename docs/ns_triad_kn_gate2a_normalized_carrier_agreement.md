@@ -271,6 +271,35 @@ closes at all, it is likely to close through a quotient-aware,
 extremizer-aware, or otherwise structured comparison, not through the raw
 `C_neg^+ / c_abs^-` ledger.
 
+## Extremizer-aware transport target
+
+The theorem target is now sharper than “transport all of `1_C^perp` uniformly.”
+The observed stable directional ratio suggests the correct live statement is a
+near-extremizer transport theorem.
+
+Define the Gate 1 near-extremizer family
+
+`E_N(eps) = { x in 1_C^perp : (x^T L_bad x) / (x^T L_good x) >= rho_N - eps }`.
+
+The live Gate 2-A target is then:
+
+`sup_(x in E_N(eps)) <J_N x, L_neg J_N x> / <J_N x, L_abs J_N x> <= theta_* < 1`.
+
+Current observed directional ratios on the seam extremizer are approximately:
+
+- `N=6`: `0.168199`
+- `N=8`: `0.168419`
+- `N=10`: `0.167817`
+
+So the current safe interpretation is:
+
+- the directional ratio is stably subcritical on tested shells,
+- it numerically clusters near `1/6`,
+- a conservative proof target such as `theta_* <= 1/4` would already be enough.
+
+This does **not** prove Gate 2-A. It only says that the correct theorem surface
+is now extremizer-aware transport rather than global operator domination.
+
 ## Safe interpretation
 
 This new audit does not prove Gate 2-A by itself.
@@ -368,6 +397,11 @@ gate2aConditionalLemmaProved = false
 gate2aExactRestrictionIdentityObserved = false
 gate2aTwoSidedQuadraticFormBoundsProved = false
 gate2aTwoSidedQuadraticFormBoundsObserved = true
+gate2aExtremizerAwareTransportObservedShells = [6 , 8 , 10]
+gate2aDirectionalRatioStableObserved = true
+gate2aDirectionalRatioApproxOneSixthObserved = true
+gate2aCoarseTransportClosesObserved = false
+gate2aExtremizerAwareTransportProved = false
 ```
 
 ## Next lemma
@@ -378,5 +412,7 @@ The next proof attempt should now target the second statement directly:
 2. then a sharper transport-margin ledger, stronger than the coarse
    `C_neg^+ / c_abs^-` route, showing those constants preserve the strict
    `< 1` Gate 1 margin.
+3. ideally: prove the transport on the Gate 1 near-extremizer family
+   `E_N(eps)` rather than by global worst-case operator comparison.
 
 Until those are proved, Gate 2 remains open at its first comparison step.

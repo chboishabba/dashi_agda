@@ -30,7 +30,9 @@ Current NS Gate 1 / Gate 2 roadmap note for `2026-07-02`:
   it fails badly: the naive bound from `(C_neg^+ / c_abs^-) rho_N` lands around
   `17.7`, `17.7`, and `20.5`. So the next work item is not “improve the same
   coarse inequality slightly”; it is “replace the coarse route with a sharper
-  extremizer-aware or quotient-aware transport ansatz”.
+  extremizer-aware or quotient-aware transport ansatz”. The leading observed
+  directional ratio is now stable near `0.168` (`~1/6`) on `N = 6, 8, 10`, so
+  a conservative next theorem target such as `theta_* <= 1/4` is now sensible.
 - GPU/Vulkan remains engineering-only for this lane. `../dashiCORE` is still
   reusable as substrate, but GPU results remain non-authoritative until
   CPU/GPU parity is demonstrated for the actual Schur/helical operators.

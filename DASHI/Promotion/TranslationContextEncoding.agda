@@ -18,6 +18,7 @@ A × B = Σ A λ _ → B
 _≢_ : {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
 
+import DASHI.Core.ProjectionGrammar as PG
 import DASHI.Promotion.ProteinEncoding as PE
 open import Ontology.DNA.Supervoxel4Adic using (Base; A; C; G; T) public
 
@@ -196,22 +197,22 @@ canonicalAllowedOperations = PE.canonicalAllowedOperations
 --
 -- The codon has not changed. The context carrier has.
 
-record MolecularContext : Set₁ where
+record MolecularContext : Set where
   field
     -- The genetic-code table is the core of the context
-    geneticCodeTable  : Codon → ProteinSymbol
+    geneticCodeTable   : Codon → ProteinSymbol
 
-    -- The molecular machinery that implements translation
-    ribosomeComponent : Set
+    -- The molecular machinery that implements translation (abstract)
+    ribosomeComponent   : ⊤
 
-    -- The pool of tRNA molecules, each with an anticodon and aminoacyl load
-    trnaPoolDescriptor : Set
+    -- The pool of tRNA molecules, each with an anticodon and aminoacyl load (abstract)
+    trnaPoolDescriptor  : ⊤
 
-    -- Release factors that recognise stop codons
-    releaseFactorSet   : Set
+    -- Release factors that recognise stop codons (abstract)
+    releaseFactorSet    : ⊤
 
-    -- Any additional contextual parameters
-    additionalContext  : Set
+    -- Any additional contextual parameters (abstract)
+    additionalContext   : ⊤
 
 open MolecularContext public
 
@@ -238,11 +239,11 @@ seqFromCodonsMolec ctx (c ∷ cs) with τMolec ctx c
 
 canonicalMolecularContext : MolecularContext
 canonicalMolecularContext = record
-  { geneticCodeTable  = τCanonical
-  ; ribosomeComponent = ⊤
-  ; trnaPoolDescriptor = ⊤
-  ; releaseFactorSet   = ⊤
-  ; additionalContext  = ⊤
+  { geneticCodeTable   = τCanonical
+  ; ribosomeComponent  = tt
+  ; trnaPoolDescriptor = tt
+  ; releaseFactorSet   = tt
+  ; additionalContext  = tt
   }
 
 -- Under the canonical context, τ reduces to the standard map
@@ -266,11 +267,11 @@ canonicalMolecularContext = record
 
 mitochondrialMolecularContext : MolecularContext
 mitochondrialMolecularContext = record
-  { geneticCodeTable  = τMito
-  ; ribosomeComponent = ⊤
-  ; trnaPoolDescriptor = ⊤
-  ; releaseFactorSet   = ⊤
-  ; additionalContext  = ⊤
+  { geneticCodeTable   = τMito
+  ; ribosomeComponent  = tt
+  ; trnaPoolDescriptor = tt
+  ; releaseFactorSet   = tt
+  ; additionalContext  = tt
   }
 
 -- Proof that the mitochondrial code differs from canonical
@@ -293,11 +294,11 @@ mitochondrialMolecularContext = record
 
 ciliateMolecularContext : MolecularContext
 ciliateMolecularContext = record
-  { geneticCodeTable  = τCiliate
-  ; ribosomeComponent = ⊤
-  ; trnaPoolDescriptor = ⊤
-  ; releaseFactorSet   = ⊤
-  ; additionalContext  = ⊤
+  { geneticCodeTable   = τCiliate
+  ; ribosomeComponent  = tt
+  ; trnaPoolDescriptor = tt
+  ; releaseFactorSet   = tt
+  ; additionalContext  = tt
   }
 
 ------------------------------------------------------------------------
@@ -436,11 +437,11 @@ open SyntheticContext public
 
 amberSuppressionMolecularContext : MolecularContext
 amberSuppressionMolecularContext = record
-  { geneticCodeTable  = τAmberSuppression
-  ; ribosomeComponent = ⊤
-  ; trnaPoolDescriptor = ⊤
-  ; releaseFactorSet   = ⊤
-  ; additionalContext  = ⊤
+  { geneticCodeTable   = τAmberSuppression
+  ; ribosomeComponent  = tt
+  ; trnaPoolDescriptor = tt
+  ; releaseFactorSet   = tt
+  ; additionalContext  = tt
   }
 
 ------------------------------------------------------------------------
@@ -621,3 +622,46 @@ canonicalTranslationContextNonPromotionCertificate = record
   ; certificateReading        =
       "The canonical translation context encoding is non-promoting: the context-dependent translation formalism records canonical, mitochondrial, ciliate, and synthetic contexts as explicit authority surfaces without promoting folding, disease, therapeutic, clinical, or cell-fate closure."
   }
+
+-----------------------------------------------------------------------
+-- 13. Molecular translation as a ProjectionGrammar
+-----------------------------------------------------------------------
+
+-- MolecularContext is the grammar that generates the admissible
+-- translation morphisms.  Unlike TranslationContext (which is
+-- just the Codon→ProteinSymbol table), MolecularContext includes
+-- the full molecular machinery: ribosome, tRNA pool, release
+-- factors, and the genetic-code table they collectively determine.
+--
+--   Grammar   = MolecularContext
+--   HomSpace  = List Codon → List AminoAcid  (all possible translation maps)
+--   Carrier   = List Codon
+--   Observable = List AminoAcid
+--
+-- The grammar generates the space; changing the molecular context
+-- transports the projection to a different Hom-space.
+
+molecularTranslationGrammar : PG.ProjectionGrammar
+molecularTranslationGrammar = record
+  { Carrier             = List Codon
+  ; Observable          = List AminoAcid
+  ; Grammar             = MolecularContext
+  ; HomSpace            = λ _ → List Codon → List AminoAcid
+  ; apply               = λ h → h
+  ; forbiddenPromotions =
+      "contextFreeTranslation" ∷
+      "geneticCodePromotedWithoutContext" ∷
+      "ribosomeOmitedFromGrammar" ∷ []
+  ; allowedOperations   =
+      "molecularContextDependentProjection" ∷
+      "grammarTransport" ∷
+      "tRNACompatibilityCheck" ∷
+      "residualMeasurement" ∷ []
+  ; encodingReading     =
+      "Molecular ProjectionGrammar: MolecularContext (ribosome, tRNAs, release factors, code table) generates the admissible Codon→AminoAcid projection space. Canonical, mitochondrial, and ciliate grammars each determine distinct Hom-spaces."
+  }
+
+-- The canonical morphism in HomSpace(canonicalMolecularContext)
+canonicalMolecularTranslationMorphism :
+  PG.HomSpace molecularTranslationGrammar canonicalMolecularContext
+canonicalMolecularTranslationMorphism = seqFromCodonsMolec canonicalMolecularContext
