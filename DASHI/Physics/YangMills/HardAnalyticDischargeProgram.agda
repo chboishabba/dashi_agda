@@ -117,6 +117,7 @@ open Kernels using
   ; ContinuumLimitPackageFromKernel
   ; OSWightmanEndpointPackageFromKernel
   ; P33a1AnalyticDischargePackageFromKernel
+  ; P33GraphCombinatoricsDischargePackageFromKernel
   ; YangMillsEndpointFromHardAnalyticFacts
   )
 
@@ -206,6 +207,36 @@ record HardAnalyticSprintPlan : Set₁ where
     sprint16-stepV-downstream-internalisation :
       Bool
 
+    sprint17-P10-imported-endpoint-replacement :
+      Bool
+
+    sprint18-P10-source-tail-theorem-reconstruction :
+      Bool
+
+    sprint19-P10-source-localisation-theorem-reconstruction :
+      Bool
+
+    sprint20-P10-source-coercivity-theorem-reconstruction :
+      Bool
+
+    sprint21-P10-canonical-decay-source-alignment :
+      Bool
+
+    sprint22-P06-residual-counting-proof-completion :
+      Bool
+
+    sprint23-P06-endpoint-depostulation :
+      Bool
+
+    sprint24-P33-balaban-metric-reconstruction :
+      Bool
+
+    sprint25-stepV-local-lattice-handoff-depostulation :
+      Bool
+
+    sprint26-stepV-rg-and-downstream-depostulation :
+      Bool
+
     currentFocus :
       String
 
@@ -230,8 +261,18 @@ currentHardAnalyticSprintPlan = record
   ; sprint14-P06-endpoint-unblocking = true
   ; sprint15-P33-source-reconstruction = true
   ; sprint16-stepV-downstream-internalisation = true
+  ; sprint17-P10-imported-endpoint-replacement = false
+  ; sprint18-P10-source-tail-theorem-reconstruction = false
+  ; sprint19-P10-source-localisation-theorem-reconstruction = false
+  ; sprint20-P10-source-coercivity-theorem-reconstruction = false
+  ; sprint21-P10-canonical-decay-source-alignment = false
+  ; sprint22-P06-residual-counting-proof-completion = false
+  ; sprint23-P06-endpoint-depostulation = false
+  ; sprint24-P33-balaban-metric-reconstruction = false
+  ; sprint25-stepV-local-lattice-handoff-depostulation = false
+  ; sprint26-stepV-rg-and-downstream-depostulation = false
   ; currentFocus =
-      "Sprint 16 complete: the Step V downstream handoff is now routed through explicit semantic kernels and sprint witnesses. Remaining work is mathematical internalisation beyond the sprint ledger."
+      "Remaining critical path reordered: Sprint 17 replaces the imported P10 endpoint witnesses; Sprints 18-20 replace the normalized P10 source tail/localisation/coercivity model with actual source theorem content; Sprint 21 realigns canonical decay to the source theorem; Sprints 22-23 finish residual P06 counting and endpoint de-postulation; Sprint 24 reconstructs true P33 Balaban metric content; Sprints 25-26 de-postulate the Step V local-lattice and downstream RG/continuum handoffs."
   ; noClayPromotion = refl
   }
 
@@ -1205,9 +1246,8 @@ P33FaithfulnessSprintWitnessFromProgram program = record
       P33a1AnalyticDischargePackageFromKernel
         (P33KernelFromProgram program)
   ; graphDischargePackage =
-      P33GraphCombinatoricsPackageFromAnisotropicPackage
-        (P33a1AnalyticDischargePackageFromKernel
-          (P33KernelFromProgram program))
+      P33GraphCombinatoricsDischargePackageFromKernel
+        (P33KernelFromProgram program)
   }
 
 record OwnedP33SourceReconstructionSprintWitness
@@ -1314,11 +1354,6 @@ HardAnalyticFactsFromSubkernelProgram program = record
   ; osWightman = OSWightmanKernelFromProgram program
   }
 
-postulate
-  P33GraphCombinatoricsPackageFromAnisotropicPackage :
-    AnisotropicDiameter.P33a1AnalyticDischargePackage →
-    GraphCombinatorics.P33a1AnalyticDischargePackage
-
 LocalLatticeAnalyticDischargePackageFromSubkernelProgram :
   HardAnalyticSubkernelProgram →
   LocalLattice.LocalLatticeAnalyticDischargePackage
@@ -1330,9 +1365,8 @@ LocalLatticeAnalyticDischargePackageFromSubkernelProgram program = record
       P10AnalyticLeavesFromLargeFieldKernel
         (P10KernelFromProgram program)
   ; p33PerturbationStability =
-      P33GraphCombinatoricsPackageFromAnisotropicPackage
-        (P33a1AnalyticDischargePackageFromKernel
-          (P33KernelFromProgram program))
+      P33GraphCombinatoricsDischargePackageFromKernel
+        (P33KernelFromProgram program)
   ; entropyDecayMargin =
       P09EntropyMarginDischargePackageFromKernel
         (P07P09KernelFromProgram program)

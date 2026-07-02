@@ -734,8 +734,8 @@ record ImportedKPSummabilityBound : Set where
     status : VerificationStatus
     reducer : ArithmeticQueue.KPSummabilityReducerFromAnimalDecayAndMargin
 
-postulate
-  p0 : ℕ → ℝ
+p0 : ℕ → ℝ
+p0 = LargeField.p0
 
 record ImportedPZeroPositive : Set where
   field
@@ -781,8 +781,8 @@ postulate
   kpSum : ℕ → ℝ
   kpBoundFormula : ℕ → ℝ
 
-postulate
-  postulatedPositivity : ∀ (k : ℕ) → 0ℝ <ℝ p0 k
+postulatedPositivity : ∀ (k : ℕ) → 0ℝ <ℝ p0 k
+postulatedPositivity = LargeField.current-p₀-positive
 
 currentBalabanP06MixedReducerPayload : BalabanP06MixedReducerPayload
 currentBalabanP06MixedReducerPayload = record
@@ -967,9 +967,10 @@ p06bDecorationMultiplicityBoundWitness = record
 
 pZeroPositiveWitness : ImportedPZeroPositive
 pZeroPositiveWitness = record
-  { sourceAuthorityId = eriksson-2602-0041
-  ; theoremLocator = "Theorem 2.1"
-  ; status = paperImport
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "BalabanPolymerDiameterEntropy.p0/BalabanLargeFieldSuppression.current-p₀-positive"
+  ; status = proved
   ; positivity = postulatedPositivity
   }
 

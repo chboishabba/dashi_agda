@@ -5569,6 +5569,12 @@ def main() -> None:
         r for r in gate2a_rows
         if ((r.get("gate2a_schur_sign_split_comparison_diagnostics") or {}).get("transport_margin_diagnostics") or {}).get("status") == "ok"
     ]
+    gate2a_directional_ratios = [
+        (((r.get("gate2a_schur_sign_split_comparison_diagnostics") or {}).get("transport_margin_diagnostics") or {}).get("directional_transported_ratio"))
+        for r in gate2a_transport_rows
+    ]
+    gate2a_directional_ratios = [float(v) for v in gate2a_directional_ratios if v is not None]
+    gate2a_observed_shells = [int(r["N"]) for r in gate2a_transport_rows]
     domination_ratio_below_one_observed = bool(dense_domination_rows) and all(
         (r["signed_factorization_diagnostics"] or {}).get("domination_holds_strictly_observed") is True
         for r in dense_domination_rows
@@ -5693,6 +5699,27 @@ def main() -> None:
                 (((r["gate2a_schur_sign_split_comparison_diagnostics"] or {}).get(
                     "transport_margin_diagnostics"
                 ) or {}).get("transport_margin_positive_observed") is True)
+                for r in gate2a_transport_rows
+            )
+        ),
+        "gate2aExtremizerAwareTransportObservedShells": gate2a_observed_shells,
+        "gate2aDirectionalRatioStableObserved": bool(
+            len(gate2a_directional_ratios) >= 2
+            and (max(gate2a_directional_ratios) - min(gate2a_directional_ratios) <= 0.01)
+        ),
+        "gate2aDirectionalRatioApproxOneSixthObserved": bool(
+            gate2a_directional_ratios
+            and all(abs(v - (1.0 / 6.0)) <= 0.02 for v in gate2a_directional_ratios)
+        ),
+        "gate2aCoarseTransportClosesObserved": bool(
+            gate2a_transport_rows
+            and all(
+                (((r["gate2a_schur_sign_split_comparison_diagnostics"] or {}).get(
+                    "transport_margin_diagnostics"
+                ) or {}).get("coarse_transported_upper_bound") is not None)
+                and (((r["gate2a_schur_sign_split_comparison_diagnostics"] or {}).get(
+                    "transport_margin_diagnostics"
+                ) or {}).get("coarse_transported_upper_bound") < 1.0)
                 for r in gate2a_transport_rows
             )
         ),

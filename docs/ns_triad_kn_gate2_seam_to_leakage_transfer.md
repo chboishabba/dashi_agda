@@ -162,6 +162,12 @@ but
 
 `structured margin preservation route still open`.
 
+The strongest current structured candidate is an extremizer-aware transport on
+the Gate 1 near-extremizer family rather than a global worst-case operator
+bound. Numerically, the directional transported ratio is observed near `0.168`
+on `N = 6, 8, 10`, which is far below `1` and dramatically smaller than the
+coarse worst-case transport ledger.
+
 ### G2-D. No missing outside-seam pollution
 
 Show that modes or interactions omitted from the seam certificate do not
@@ -233,4 +239,5 @@ The immediate order is now:
 3. move those constants into the transport-margin ledger;
 4. reject the coarse worst-case quotient route if it loses the margin;
 5. replace it with a sharper extremizer-aware or quotient-aware transport;
-6. only then attempt a full Gate 2 transfer theorem for `K_N(A)`.
+6. formulate the transport directly on the Gate 1 near-extremizer family;
+7. only then attempt a full Gate 2 transfer theorem for `K_N(A)`.

@@ -37,7 +37,10 @@
   is ruled out as the primary proof path. The live next ansatz is a sharper
   transport ledger, likely extremizer-aware or quotient-aware, using the
   observed seam `rho_N` direction rather than only worst-case comparison
-  constants.
+  constants. The observed directional transported ratio is now the important
+  new quantity: it stays stably near `0.168` (roughly `1/6`) on
+  `N = 6, 8, 10`, with about two orders of magnitude improvement over the
+  coarse ledger.
   This remains fail-closed and non-promoting: Gate 1 uniformity is unproved,
   Gate 2 transport is unproved, GPU/Vulkan remains scout-only, and no NS/Clay
   promotion surface changes.

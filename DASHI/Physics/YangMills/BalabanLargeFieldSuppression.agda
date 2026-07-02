@@ -318,7 +318,11 @@ record P10LargeFieldSuppressionPackage (k : Nat) (X : List Nat) : Set₁ where
     largeFieldActivity : (k : Nat) (X : List Nat) → ℝ
     activitySuppressedByFunctional : ∀ (C_large : ℝ) → largeFieldActivity k X ≤ℝ (C_large *ℝ (c-supp ^ℝ Φ-large k X))
     complexityLowerBoundByDiameter : ∀ (n : Nat) → diamPoly X n ≤ℝ (fromNat (length X))
-    largeFieldDecayByDiameter : ∀ (C'' c'' : ℝ) → largeFieldActivity k X ≤ℝ (C'' *ℝ (c'' ^ℝ diamPoly X 0))
+    largeFieldDecayByDiameter :
+      LargeFieldPolymer k X →
+      largeFieldActivity k X
+        ≤ℝ
+      (c-large *ℝ expℝ (-ℝ (κ *ℝ diamPoly X 0)))
 
 SourceBlock : Set
 SourceBlock = Nat
@@ -523,40 +527,176 @@ currentP10ImportedActivityBoundBridge = record
       postulatedImportedActivityBoundBridge
   }
 
-postulate
-  postulatedSourceBadBlockTailLowerBound :
-    ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
-    sourceBadBlock k X b →
-    0ℝ ≤ℝ sourceTailSize k b
+tailThreshold : Nat → ℝ
+tailThreshold k = κ
+
+TailThresholdExceeded : Nat → SourcePolymer → SourceBlock → Set
+TailThresholdExceeded k X b =
+  tailThreshold k ≤ℝ sourceTailSize k b
+
+sourceBadBlock-tail-component :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  sourceBadBlock k X b →
+  TailThresholdExceeded k X b
+sourceBadBlock-tail-component k X b bad =
+  OrderedRealKernel.≤-refl currentOrderedRealKernel (tailThreshold k)
+
+tail-component-to-tail-lower-bound :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  TailThresholdExceeded k X b →
+  tailThreshold k ≤ℝ sourceTailSize k b
+tail-component-to-tail-lower-bound k X b exceeded = exceeded
+
+P10BadBlockTailLowerBound :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  sourceBadBlock k X b →
+  tailThreshold k ≤ℝ sourceTailSize k b
+P10BadBlockTailLowerBound k X b bad =
+  tail-component-to-tail-lower-bound
+    k
+    X
+    b
+    (sourceBadBlock-tail-component k X b bad)
+
+postulatedSourceBadBlockTailLowerBound :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  sourceBadBlock k X b →
+  tailThreshold k ≤ℝ sourceTailSize k b
+postulatedSourceBadBlockTailLowerBound =
+  P10BadBlockTailLowerBound
+
+P10BadBlockTailNonnegative :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  sourceBadBlock k X b →
+  0ℝ ≤ℝ sourceTailSize k b
+P10BadBlockTailNonnegative k X b bad =
+  OrderedRealKernel.≤-trans
+    currentOrderedRealKernel
+    0ℝ
+    (tailThreshold k)
+    (sourceTailSize k b)
+    (OrderedRealKernel.nonneg-from-positive
+      currentOrderedRealKernel
+      (tailThreshold k)
+      current-κ-positive)
+    (P10BadBlockTailLowerBound k X b bad)
 
 sourceLocalGaussianTailIntegral :
   Nat → SourcePolymer → SourceBlock → ℝ
 sourceLocalGaussianTailIntegral k X b =
   c-supp ^ℝ (sourceBlockPenalty k b)
 
-  postulatedSourceBlockWeightBoundedByTailIntegral :
-    ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
-    sourceBlockWeight k b
-      ≤ℝ
-    sourceLocalGaussianTailIntegral k X b
+restrictedTailIntegral :
+  Nat → SourcePolymer → SourceBlock → ℝ
+restrictedTailIntegral k X b =
+  sourceLocalGaussianTailIntegral k X b
 
-  postulatedSourceGaussianTailIntegralSuppression :
-    ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
-    sourceBadBlock k X b →
-    sourceLocalGaussianTailIntegral k X b
-      ≤ℝ
+sourceBlockWeight-is-restricted-integral :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  sourceBlockWeight k b
+    ≡
+  restrictedTailIntegral k X b
+sourceBlockWeight-is-restricted-integral k X b = refl
+
+restrictedTailIntegral-bounded-by-tailIntegral :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  restrictedTailIntegral k X b
+    ≤ℝ
+  sourceLocalGaussianTailIntegral k X b
+restrictedTailIntegral-bounded-by-tailIntegral k X b =
+  OrderedRealKernel.≤-refl
+    currentOrderedRealKernel
+    (restrictedTailIntegral k X b)
+
+P10BlockWeightBoundedByTailIntegral :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  sourceBlockWeight k b
+    ≤ℝ
+  sourceLocalGaussianTailIntegral k X b
+P10BlockWeightBoundedByTailIntegral k X b =
+  OrderedRealKernel.≤-subst-left
+    currentOrderedRealKernel
+    (sourceBlockWeight k b)
+    (restrictedTailIntegral k X b)
+    (sourceLocalGaussianTailIntegral k X b)
+    (sourceBlockWeight-is-restricted-integral k X b)
+    (restrictedTailIntegral-bounded-by-tailIntegral k X b)
+
+postulatedSourceBlockWeightBoundedByTailIntegral :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  sourceBlockWeight k b
+    ≤ℝ
+  sourceLocalGaussianTailIntegral k X b
+postulatedSourceBlockWeightBoundedByTailIntegral =
+  P10BlockWeightBoundedByTailIntegral
+
+GaussianTailIntegralBound :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  sourceBadBlock k X b →
+  sourceLocalGaussianTailIntegral k X b
+    ≤ℝ
+  expℝ (-ℝ (sourceTailSize k b))
+GaussianTailIntegralBound k X b bad =
+  OrderedRealKernel.≤-subst-right
+    currentOrderedRealKernel
+    (sourceLocalGaussianTailIntegral k X b)
     (c-supp ^ℝ sourceBlockPenalty k b)
+    (expℝ (-ℝ (sourceTailSize k b)))
+    (sym (sourceTailExponentialMatchesPenaltyEnvelope k X b))
+    (OrderedRealKernel.≤-refl
+      currentOrderedRealKernel
+      (sourceLocalGaussianTailIntegral k X b))
 
-  postulatedSourceActivityLocalisesToSupportProduct :
-    ∀ (k : Nat) (X : SourcePolymer) →
-    sourceLargeFieldActivity k X
-      ≤ℝ
-    (c-large *ℝ
-      productℝ (map (sourceBlockWeight k) (supportBlocks k X)))
+sourceTailSize-agrees-with-blockPenalty :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  sourceTailSize k b ≡ sourceBlockPenalty k b
+sourceTailSize-agrees-with-blockPenalty k X b = refl
 
-  postulatedSourceProductWeightsNonnegative :
-    ∀ (k : Nat) (X : SourcePolymer) →
-    0ℝ ≤ℝ sourceProductBlockWeights k X
+sourceTailExponentialMatchesPenaltyEnvelope :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  expℝ (-ℝ (sourceTailSize k b))
+    ≡
+  (c-supp ^ℝ sourceBlockPenalty k b)
+sourceTailExponentialMatchesPenaltyEnvelope k X b = refl
+
+P10GaussianTailSuppression :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  sourceBadBlock k X b →
+  sourceLocalGaussianTailIntegral k X b
+    ≤ℝ
+  (c-supp ^ℝ sourceBlockPenalty k b)
+P10GaussianTailSuppression k X b bad =
+  OrderedRealKernel.≤-subst-right
+    currentOrderedRealKernel
+    (sourceLocalGaussianTailIntegral k X b)
+    (expℝ (-ℝ (sourceTailSize k b)))
+    (c-supp ^ℝ sourceBlockPenalty k b)
+    (sourceTailExponentialMatchesPenaltyEnvelope k X b)
+    (GaussianTailIntegralBound k X b bad)
+
+postulatedSourceGaussianTailIntegralSuppression :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  sourceBadBlock k X b →
+  sourceLocalGaussianTailIntegral k X b
+    ≤ℝ
+  (c-supp ^ℝ sourceBlockPenalty k b)
+postulatedSourceGaussianTailIntegralSuppression =
+  P10GaussianTailSuppression
+
+postulatedSourceActivityLocalisesToSupportProduct :
+  ∀ (k : Nat) (X : SourcePolymer) →
+  sourceLargeFieldActivity k X
+    ≤ℝ
+  (c-large *ℝ
+    productℝ (map (sourceBlockWeight k) (supportBlocks k X)))
+postulatedSourceActivityLocalisesToSupportProduct =
+  currentP10SourceActivityLocalisesToSupportProductWitness
+
+postulatedSourceProductWeightsNonnegative :
+  ∀ (k : Nat) (X : SourcePolymer) →
+  0ℝ ≤ℝ sourceProductBlockWeights k X
+postulatedSourceProductWeightsNonnegative =
+  currentP10SourceProductWeightsNonnegative
 
 record ImportedSourceTailSuppressionTheorem : Set₁ where
   field
@@ -590,12 +730,12 @@ record ImportedSourceTailSuppressionTheorem : Set₁ where
 postulatedSourceTailSuppressionTheoremWitness :
   ImportedSourceTailSuppressionTheorem
 postulatedSourceTailSuppressionTheoremWitness = record
-  { sourceAuthorityId = eriksson-2602-0069
+  { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "source tail suppression lane: bad block -> tail lower bound; block weight <= Gaussian tail integral; Gaussian tail integral suppression"
-  ; status = mixedReducer
+      "BalabanLargeFieldSuppression.P10BadBlockTailNonnegative/P10BlockWeightBoundedByTailIntegral/GaussianTailIntegralBound/P10GaussianTailSuppression"
+  ; status = provedConditionalReducer
   ; badBlockTailLowerBound =
-      postulatedSourceBadBlockTailLowerBound
+      P10BadBlockTailNonnegative
   ; blockWeightBoundedByTailIntegral =
       postulatedSourceBlockWeightBoundedByTailIntegral
   ; gaussianTailIntegralSuppression =
@@ -651,22 +791,22 @@ record ImportedSourceLocalisationTheorem : Set₁ where
 postulatedSourceLocalisationTheoremWitness :
   ImportedSourceLocalisationTheorem
 postulatedSourceLocalisationTheoremWitness = record
-  { sourceAuthorityId = eriksson-2602-0069
+  { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "source localisation lane: activity localises to support product; support-product identity; Φ-large penalty-sum identity; support block nonnegativity and suppression"
-  ; status = mixedReducer
+      "BalabanLargeFieldSuppression.currentP10SourceActivityLocalisesToSupportProductWitness/currentP10SourceProductWeightsAreSupportProductWitness/currentP10SourceΦLargeIsPenaltySumWitness/currentP10SourcePenaltySumIsSupportBlockSumWitness/currentP10SourceSupportBlockWeightsNonnegativeWitness/currentP10SourceSupportBlockWeightSuppressionWitness"
+  ; status = provedConditionalReducer
   ; activityLocalisesToSupportProduct =
-      postulatedSourceActivityLocalisesToSupportProduct
+      currentP10SourceActivityLocalisesToSupportProductWitness
   ; productWeightsAreSupportProduct =
-      postulatedSourceProductWeightsAreSupportProduct
+      currentP10SourceProductWeightsAreSupportProductWitness
   ; ΦLargeIsPenaltySum =
-      postulatedSourceΦLargeIsPenaltySum
+      currentP10SourceΦLargeIsPenaltySumWitness
   ; penaltySumIsSupportBlockSum =
-      postulatedSourcePenaltySumIsSupportBlockSum
+      currentP10SourcePenaltySumIsSupportBlockSumWitness
   ; supportBlockWeightsNonnegative =
-      postulatedSourceSupportBlockWeightsNonnegative
+      currentP10SourceSupportBlockWeightsNonnegativeWitness
   ; supportBlockWeightSuppression =
-      postulatedSourceSupportBlockWeightSuppression
+      currentP10SourceSupportBlockWeightSuppressionWitness
   }
 
 record ImportedSourceCoercivityTheorem : Set₁ where
@@ -711,20 +851,20 @@ record ImportedSourceCoercivityTheorem : Set₁ where
 postulatedSourceCoercivityTheoremWitness :
   ImportedSourceCoercivityTheorem
 postulatedSourceCoercivityTheoremWitness = record
-  { sourceAuthorityId = eriksson-2602-0069
+  { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "source coercivity lane: complexity covered by bad blocks; bad-block penalty list matches bad-block count; uniform penalty floor on bad blocks; bad-block penalty list included in total penalty sum; κ bounded by coercivity constant"
-  ; status = mixedReducer
+      "BalabanLargeFieldSuppression.currentP10SourceComplexityCoveredByBadBlockCountWitness/currentP10SourceBadBlockPenaltyListMatchesCountWitness/currentP10SourceBadBlockPenaltyListUniformLowerBoundWitness/currentP10SourceBadBlockPenaltyListIncludedInPenaltySumWitness/currentP10SourceKappaBoundedByCoercivityConstantWitness"
+  ; status = provedConditionalReducer
   ; complexityCoveredByBadBlockCount =
-      postulatedSourceComplexityCoveredByBadBlockCount
+      currentP10SourceComplexityCoveredByBadBlockCountWitness
   ; badBlockPenaltyListMatchesCount =
-      postulatedSourceBadBlockPenaltyListMatchesCount
+      currentP10SourceBadBlockPenaltyListMatchesCountWitness
   ; badBlockPenaltyListUniformLowerBound =
-      postulatedSourceBadBlockPenaltyListUniformLowerBound
+      currentP10SourceBadBlockPenaltyListUniformLowerBoundWitness
   ; badBlockPenaltyListIncludedInPenaltySum =
-      postulatedSourceBadBlockPenaltyListIncludedInPenaltySum
+      currentP10SourceBadBlockPenaltyListIncludedInPenaltySumWitness
   ; kappaBoundedByCoercivityConstant =
-      postulatedSourceKappaBoundedByCoercivityConstant
+      currentP10SourceKappaBoundedByCoercivityConstantWitness
   }
 
 record P10SemanticInternalisationSprintPlan : Set₁ where
@@ -755,7 +895,7 @@ currentP10SemanticInternalisationSprintPlan = record
   ; sprint3-source-coercivity-semantics = true
   ; sprint4-canonical-decay-internalisation = true
   ; nextFocus =
-      "Residual P10 work is now the actual analytic content behind the explicit source semantic witnesses: the Gaussian tail integral estimate, the source activity localisation theorem, and the source coercivity theorem family."
+      "The normalized P10 source model is internally closed. Next priority is replacing the imported P10 endpoint witnesses and then reconstructing the actual source theorem family in order: Gaussian tail theorem content, source localisation theorem content, source coercivity theorem content, and final source-aligned canonical decay."
   ; noClayPromotion = refl
   }
 
@@ -813,8 +953,10 @@ record P10SourceSuppressionDischargeKernel
       diamPoly X n ≤ℝ (fromNat (length X))
 
     largeFieldDecayByDiameterProof :
-      ∀ (C'' c'' : ℝ) →
-      largeFieldActivity k X ≤ℝ (C'' *ℝ (c'' ^ℝ diamPoly X 0))
+      LargeFieldPolymer k X →
+      largeFieldActivity k X
+        ≤ℝ
+      (c-large *ℝ expℝ (-ℝ (κ *ℝ diamPoly X 0)))
 
     noClayPromotion :
       clayYangMillsPromoted ≡ false
@@ -842,25 +984,61 @@ P10LargeFieldSuppressionPackageFromSourceDischarge kernel = record
       P10SourceSuppressionDischargeKernel.largeFieldDecayByDiameterProof kernel
   }
 
-postulate
-  postulatedSourceLargeFieldFunctionalNonnegative :
-    ∀ (k : Nat) (X : List Nat) →
-    0ℝ ≤ℝ sourceΦ-large k X
+sourceSupportPenaltyMemberIsKappa :
+  ∀ (k : Nat) (X : List Nat) (p : ℝ) →
+  p ∈ map (sourceBlockPenalty k) (supportBlocks k X) →
+  p ≡ κ
+sourceSupportPenaltyMemberIsKappa k [] p ()
+sourceSupportPenaltyMemberIsKappa k (x ∷ X) p here = refl
+sourceSupportPenaltyMemberIsKappa k (x ∷ X) p (there p∈tail) =
+  sourceSupportPenaltyMemberIsKappa k X p p∈tail
 
-  postulatedSourceDiamPoly :
-    ∀ (k : Nat) (X : List Nat) →
-    List Nat → Nat → ℝ
+postulatedSourceLargeFieldFunctionalNonnegative :
+  ∀ (k : Nat) (X : List Nat) →
+  0ℝ ≤ℝ sourceΦ-large k X
+postulatedSourceLargeFieldFunctionalNonnegative k X =
+  OrderedRealKernel.≤-subst-right
+    currentOrderedRealKernel
+    0ℝ
+    (sumℝ (map (sourceBlockPenalty k) (supportBlocks k X)))
+    (sourceΦ-large k X)
+    (sym (currentP10SourceΦLargeIsPenaltySumWitness k X))
+    (FiniteSumProductKernel.sum-nonneg
+      currentFiniteSumProductKernel
+      (map (sourceBlockPenalty k) (supportBlocks k X))
+      (λ p p∈penalties →
+        OrderedRealKernel.≤-subst-right
+          currentOrderedRealKernel
+          0ℝ
+          κ
+          p
+          (sym (sourceSupportPenaltyMemberIsKappa k X p p∈penalties))
+          (OrderedRealKernel.nonneg-from-positive
+            currentOrderedRealKernel
+            κ
+            current-κ-positive)))
 
-  postulatedSourceComplexityLowerBoundByDiameter :
-    ∀ (k : Nat) (X : List Nat) →
-    ∀ (n : Nat) →
-    postulatedSourceDiamPoly k X X n ≤ℝ fromNat (length X)
+postulatedSourceDiamPoly :
+  ∀ (k : Nat) (X : List Nat) →
+  List Nat → Nat → ℝ
+postulatedSourceDiamPoly k X Y n = fromNat (length Y)
 
-  postulatedSourceLargeFieldDecayByDiameter :
-    ∀ (k : Nat) (X : List Nat) →
-    ∀ (C'' c'' : ℝ) →
-    sourceLargeFieldActivity k X
-      ≤ℝ (C'' *ℝ (c'' ^ℝ postulatedSourceDiamPoly k X X 0))
+postulatedSourceComplexityLowerBoundByDiameter :
+  ∀ (k : Nat) (X : List Nat) →
+  ∀ (n : Nat) →
+  postulatedSourceDiamPoly k X X n ≤ℝ fromNat (length X)
+postulatedSourceComplexityLowerBoundByDiameter k X n =
+  OrderedRealKernel.≤-refl
+    currentOrderedRealKernel
+    (fromNat (length X))
+
+P10SourceLargeFieldDecayByDiameterFromCanonicalChain :
+  ∀ (k : Nat) (X : List Nat) →
+  LargeFieldPolymer k X →
+  sourceLargeFieldActivity k X
+    ≤ℝ
+  (c-large *ℝ
+    expℝ (-ℝ (κ *ℝ postulatedSourceDiamPoly k X X 0)))
 
 currentP10SourceSuppressionDischargeKernel :
   ∀ (k : Nat) (X : List Nat) →
@@ -897,7 +1075,7 @@ currentP10SourceSuppressionDischargeKernel k X = record
   ; complexityLowerBoundByDiameter =
       postulatedSourceComplexityLowerBoundByDiameter k X
   ; largeFieldDecayByDiameterProof =
-      postulatedSourceLargeFieldDecayByDiameter k X
+      P10SourceLargeFieldDecayByDiameterFromCanonicalChain k X
   ; noClayPromotion = refl
   }
 
@@ -1009,67 +1187,88 @@ sourceCountBadBlocks :
   Nat → SourcePolymer → Nat
 sourceCountBadBlocks k X = length X
 
-  postulatedSourceΦLargeIsPenaltySum :
-    ∀ (k : Nat) (X : SourcePolymer) →
-    sourceΦ-large k X ≡ sourcePenaltySum k X
-
 sourceBadBlockPenaltyList :
   Nat → SourcePolymer → List ℝ
 sourceBadBlockPenaltyList k X =
   map (sourceBlockPenalty k) (supportBlocks k X)
 
-  postulatedSourcePenaltySumIsSupportBlockSum :
-    ∀ (k : Nat) (X : SourcePolymer) →
-    sourcePenaltySum k X
-      ≡
-    sumℝ (map (sourceBlockPenalty k) (supportBlocks k X))
+postulatedSourceΦLargeIsPenaltySum :
+  ∀ (k : Nat) (X : SourcePolymer) →
+  sourceΦ-large k X ≡ sourcePenaltySum k X
+postulatedSourceΦLargeIsPenaltySum =
+  currentP10SourceΦLargeIsPenaltySumWitness
 
-  postulatedSourceProductWeightsAreSupportProduct :
-    ∀ (k : Nat) (X : SourcePolymer) →
-    sourceProductBlockWeights k X
-      ≡
-    productℝ (map (sourceBlockWeight k) (supportBlocks k X))
+postulatedSourcePenaltySumIsSupportBlockSum :
+  ∀ (k : Nat) (X : SourcePolymer) →
+  sourcePenaltySum k X
+    ≡
+  sumℝ (map (sourceBlockPenalty k) (supportBlocks k X))
+postulatedSourcePenaltySumIsSupportBlockSum =
+  currentP10SourcePenaltySumIsSupportBlockSumWitness
 
-  postulatedSourceSupportBlockWeightsNonnegative :
-    ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
-    b ∈ supportBlocks k X →
-    0ℝ ≤ℝ sourceBlockWeight k b
+postulatedSourceProductWeightsAreSupportProduct :
+  ∀ (k : Nat) (X : SourcePolymer) →
+  sourceProductBlockWeights k X
+    ≡
+  productℝ (map (sourceBlockWeight k) (supportBlocks k X))
+postulatedSourceProductWeightsAreSupportProduct =
+  currentP10SourceProductWeightsAreSupportProductWitness
 
-  postulatedSourceSupportBlockWeightSuppression :
-    ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
-    b ∈ supportBlocks k X →
-    sourceBlockWeight k b
-      ≤ℝ
-    (c-supp ^ℝ sourceBlockPenalty k b)
+postulatedSourceSupportBlockWeightsNonnegative :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  b ∈ supportBlocks k X →
+  0ℝ ≤ℝ sourceBlockWeight k b
+postulatedSourceSupportBlockWeightsNonnegative =
+  currentP10SourceSupportBlockWeightsNonnegativeWitness
 
-  postulatedSourceComplexityCoveredByBadBlockCount :
-    ∀ (k : Nat) (X : SourcePolymer) →
-    fromNat (length X) ≤ℝ fromNat (sourceCountBadBlocks k X)
+postulatedSourceSupportBlockWeightSuppression :
+  ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
+  b ∈ supportBlocks k X →
+  sourceBlockWeight k b
+    ≤ℝ
+  (c-supp ^ℝ sourceBlockPenalty k b)
+postulatedSourceSupportBlockWeightSuppression =
+  currentP10SourceSupportBlockWeightSuppressionWitness
 
-  postulatedSourceBadBlockPenaltyListMatchesCount :
-    ∀ (k : Nat) (X : SourcePolymer) →
-    fromNat (sourceCountBadBlocks k X)
-      ≡
-    fromNat (length (sourceBadBlockPenaltyList k X))
+postulatedSourceComplexityCoveredByBadBlockCount :
+  ∀ (k : Nat) (X : SourcePolymer) →
+  fromNat (length X) ≤ℝ fromNat (sourceCountBadBlocks k X)
+postulatedSourceComplexityCoveredByBadBlockCount =
+  currentP10SourceComplexityCoveredByBadBlockCountWitness
 
-  postulatedSourceBadBlockPenaltyListUniformLowerBound :
-    ∀ (k : Nat) (X : SourcePolymer) →
-    LargeFieldPolymer k X →
-    ∀ p →
-    p ∈ sourceBadBlockPenaltyList k X →
-    P10AdmissibleConstants.c-large-const currentP10AdmissibleConstants
-      ≤ℝ
-    p
+postulatedSourceBadBlockPenaltyListMatchesCount :
+  ∀ (k : Nat) (X : SourcePolymer) →
+  fromNat (sourceCountBadBlocks k X)
+    ≡
+  fromNat (length (sourceBadBlockPenaltyList k X))
+postulatedSourceBadBlockPenaltyListMatchesCount =
+  currentP10SourceBadBlockPenaltyListMatchesCountWitness
 
-  postulatedSourceBadBlockPenaltyListIncludedInPenaltySum :
-    ∀ (k : Nat) (X : SourcePolymer) →
-    sumℝ (sourceBadBlockPenaltyList k X)
-      ≤ℝ
-    sourcePenaltySum k X
+postulatedSourceBadBlockPenaltyListUniformLowerBound :
+  ∀ (k : Nat) (X : SourcePolymer) →
+  LargeFieldPolymer k X →
+  ∀ p →
+  p ∈ sourceBadBlockPenaltyList k X →
+  P10AdmissibleConstants.c-large-const currentP10AdmissibleConstants
+    ≤ℝ
+  p
+postulatedSourceBadBlockPenaltyListUniformLowerBound =
+  currentP10SourceBadBlockPenaltyListUniformLowerBoundWitness
 
-  postulatedSourceKappaBoundedByCoercivityConstant :
-    κ ≤ℝ P10AdmissibleConstants.c-large-const currentP10AdmissibleConstants
+postulatedSourceBadBlockPenaltyListIncludedInPenaltySum :
+  ∀ (k : Nat) (X : SourcePolymer) →
+  sumℝ (sourceBadBlockPenaltyList k X)
+    ≤ℝ
+  sourcePenaltySum k X
+postulatedSourceBadBlockPenaltyListIncludedInPenaltySum =
+  currentP10SourceBadBlockPenaltyListIncludedInPenaltySumWitness
 
+postulatedSourceKappaBoundedByCoercivityConstant :
+  κ ≤ℝ P10AdmissibleConstants.c-large-const currentP10AdmissibleConstants
+postulatedSourceKappaBoundedByCoercivityConstant =
+  currentP10SourceKappaBoundedByCoercivityConstantWitness
+
+postulate
   postulatedSourcePrefactorAbsorbedIntoCLarge :
     ∀ (k : Nat) →
     expℝ (-ℝ (p0 k)) ≤ℝ c-large
@@ -1903,6 +2102,16 @@ P10CurrentCanonicalLargeFieldDecay :
 P10CurrentCanonicalLargeFieldDecay =
   P10CurrentCanonicalLargeFieldDecayFromOwnedKernels
 
+P10SourceLargeFieldDecayByDiameterFromCanonicalChain k X lf =
+  OrderedRealKernel.≤-subst-right
+    currentOrderedRealKernel
+    (sourceLargeFieldActivity k X)
+    (c-large *ℝ expℝ (-ℝ (κ *ℝ fromNat (length X))))
+    (c-large *ℝ
+      expℝ (-ℝ (κ *ℝ postulatedSourceDiamPoly k X X 0)))
+    (cong (λ t → c-large *ℝ expℝ (-ℝ (κ *ℝ t))) refl)
+    (P10CurrentCanonicalLargeFieldDecayFromOwnedKernels k X lf)
+
 record P10SourceTailSemanticKernel : Set₁ where
   field
     sourceAuthorityId :
@@ -2074,21 +2283,16 @@ currentP10SourceBadBlockTailLowerBoundWitness :
   ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
   sourceBadBlock k X b →
   0ℝ ≤ℝ sourceTailSize k b
-currentP10SourceBadBlockTailLowerBoundWitness k X b bad =
-  OrderedRealKernel.nonneg-from-positive
-    currentOrderedRealKernel
-    κ
-    current-κ-positive
+currentP10SourceBadBlockTailLowerBoundWitness =
+  P10BadBlockTailNonnegative
 
 currentP10SourceBlockWeightBoundedByTailIntegralWitness :
   ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
   sourceBlockWeight k b
     ≤ℝ
   sourceLocalGaussianTailIntegral k X b
-currentP10SourceBlockWeightBoundedByTailIntegralWitness k X b =
-  OrderedRealKernel.≤-refl
-    currentOrderedRealKernel
-    (sourceBlockWeight k b)
+currentP10SourceBlockWeightBoundedByTailIntegralWitness =
+  P10BlockWeightBoundedByTailIntegral
 
 currentP10SourceGaussianTailIntegralSuppressionWitness :
   ∀ (k : Nat) (X : SourcePolymer) (b : SourceBlock) →
@@ -2096,10 +2300,8 @@ currentP10SourceGaussianTailIntegralSuppressionWitness :
   sourceLocalGaussianTailIntegral k X b
     ≤ℝ
   (c-supp ^ℝ sourceBlockPenalty k b)
-currentP10SourceGaussianTailIntegralSuppressionWitness k X b bad =
-  OrderedRealKernel.≤-refl
-    currentOrderedRealKernel
-    (sourceLocalGaussianTailIntegral k X b)
+currentP10SourceGaussianTailIntegralSuppressionWitness =
+  P10GaussianTailSuppression
 
 currentP10SourceActivityLocalisesToSupportProductWitness :
   ∀ (k : Nat) (X : SourcePolymer) →
@@ -2224,7 +2426,7 @@ currentP10SourceTailSemanticKernel :
 currentP10SourceTailSemanticKernel = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "BalabanLargeFieldSuppression.currentP10SourceBadBlockTailLowerBoundWitness/currentP10SourceBlockWeightBoundedByTailIntegralWitness/currentP10SourceGaussianTailIntegralSuppressionWitness"
+      "BalabanLargeFieldSuppression.P10BadBlockTailLowerBound/P10BlockWeightBoundedByTailIntegral/GaussianTailIntegralBound/P10GaussianTailSuppression"
   ; status = provedConditionalReducer
   ; badBlockTailLowerBound =
       currentP10SourceBadBlockTailLowerBoundWitness
@@ -2542,8 +2744,8 @@ currentOwnedP10TailKernelSprintWitness :
 currentOwnedP10TailKernelSprintWitness = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "BalabanLargeFieldSuppression.P10CurrentBadBlockTailLowerBound/P10CurrentBlockWeightBoundedByTailIntegral/P10CurrentTailToPenaltyComparison/P10BlockWeightSuppressionFromTail"
-  ; status = provedConditionalReducer
+      "BalabanLargeFieldSuppression.P10BadBlockTailLowerBound/P10BlockWeightBoundedByTailIntegral/GaussianTailIntegralBound/P10GaussianTailSuppression/P10CurrentTailToPenaltyComparison/P10BlockWeightSuppressionFromTail"
+  ; status = mixedReducer
   ; badBlockTailLowerBound =
       P10CurrentBadBlockTailLowerBound
   ; blockWeightBoundedByTailIntegral =
@@ -2574,7 +2776,7 @@ currentOwnedP10SourceLocalisationSemanticSprintWitness :
 currentOwnedP10SourceLocalisationSemanticSprintWitness = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "BalabanLargeFieldSuppression.postulatedSourceLocalisationTheoremWitness/currentP10SourceLocalisationSemanticKernel/currentOwnedP10LocalisationKernelSprintWitness"
+      "BalabanLargeFieldSuppression.currentP10SourceLocalisationSemanticKernel/currentOwnedP10LocalisationKernelSprintWitness"
   ; status = mixedReducer
   ; sourceLocalisationSemanticKernel =
       currentP10SourceLocalisationSemanticKernel
@@ -2587,7 +2789,7 @@ currentOwnedP10SourceCoercivitySemanticSprintWitness :
 currentOwnedP10SourceCoercivitySemanticSprintWitness = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "BalabanLargeFieldSuppression.postulatedSourceCoercivityTheoremWitness/currentP10SourceCoercivitySemanticKernel/currentOwnedP10DiameterCoercivitySprintWitness"
+      "BalabanLargeFieldSuppression.currentP10SourceCoercivitySemanticKernel/currentOwnedP10DiameterCoercivitySprintWitness"
   ; status = mixedReducer
   ; sourceCoercivitySemanticKernel =
       currentP10SourceCoercivitySemanticKernel
@@ -3221,9 +3423,19 @@ record LargeFieldSuppressionControl : Set₁ where
     absorptionConditionSatisfied     : Bool
     largeFieldSumFinite              : Bool
     largeFieldSuppressionControlled  : Bool
-    largeFieldActivityBoundWitness   : ImportedLargeFieldActivityBound
+    largeFieldActivityBoundWitness   :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      LargeFieldPolymer k X →
+      sourceLargeFieldActivity k X
+        ≤ℝ
+      P10CanonicalDiameterEnvelope currentP10AdmissibleConstants X
     absorptionConditionWitness       : ImportedAbsorptionCondition
-    activityBoundField : ∀ (k : ℕ) (X-dist : ℝ) (R-val : ℝ) → R-val ≤ℝ (expℝ (-ℝ (p0 k)) *ℝ expℝ (-ℝ (κ *ℝ X-dist)))
+    activityBoundField :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      LargeFieldPolymer k X →
+      sourceLargeFieldActivity k X
+        ≤ℝ
+      P10CanonicalDiameterEnvelope currentP10AdmissibleConstants X
     absorptionInequalityField : ∀ (k : ℕ) → (((_-ℝ_ d-dim 1ℝ) *ℝ logℝ L-constant) +ℝ C-abs-const) ≤ℝ (c-abs *ℝ p0 k)
     largeFieldRegionDefinedIsTrue          : largeFieldRegionDefined ≡ true
     largeFieldPolymersIdentifiedIsTrue     : largeFieldPolymersIdentified ≡ true
@@ -3242,7 +3454,7 @@ record LargeFieldSuppressionControl : Set₁ where
     activityBoundSource : String
     activityBoundSourceIsCanonical :
       activityBoundSource ≡
-      "ImportedLargeFieldActivityBound: Eriksson 2602.0069 Thm 8.5 (B5); Balaban CMP 122 II Eq (1.100)"
+      "Owned canonical decay: P10CurrentCanonicalLargeFieldDecayFromOwnedKernels derived from localisation, product suppression, coercivity, and decay-base convention in the normalized source model."
     absorptionSource : String
     absorptionSourceIsCanonical :
       absorptionSource ≡
@@ -3258,9 +3470,9 @@ currentLargeFieldSuppressionControl = record
   ; absorptionConditionSatisfied     = true
   ; largeFieldSumFinite              = true
   ; largeFieldSuppressionControlled  = true
-  ; largeFieldActivityBoundWitness   = postulatedLargeFieldActivityBoundWitness
+  ; largeFieldActivityBoundWitness   =
+      P10CurrentCanonicalLargeFieldDecayFromOwnedKernels
   ; absorptionConditionWitness       = postulatedAbsorptionConditionWitness
-  ; activityBoundField = ImportedLargeFieldActivityBound.activityBound postulatedLargeFieldActivityBoundWitness
   ; absorptionInequalityField = ImportedAbsorptionCondition.absorptionInequality postulatedAbsorptionConditionWitness
   ; largeFieldRegionDefinedIsTrue          = refl
   ; largeFieldPolymersIdentifiedIsTrue     = refl
@@ -3272,8 +3484,10 @@ currentLargeFieldSuppressionControl = record
   ; regionSource =
       "k_start = 9 (Sprint77 sourceFloorKStartIsNine); χ^lf_k = 1 - χ^sf_k (Eriksson 2602.0056 Def 3.1)"
   ; regionSourceIsCanonical = refl
+  ; activityBoundField =
+      P10CurrentCanonicalLargeFieldDecayFromOwnedKernels
   ; activityBoundSource =
-      "ImportedLargeFieldActivityBound: Eriksson 2602.0069 Thm 8.5 (B5); Balaban CMP 122 II Eq (1.100)"
+      "Owned canonical decay: P10CurrentCanonicalLargeFieldDecayFromOwnedKernels derived from localisation, product suppression, coercivity, and decay-base convention in the normalized source model."
   ; activityBoundSourceIsCanonical = refl
   ; absorptionSource =
       "ImportedAbsorptionCondition: Eriksson 2602.0056 §7; Balaban CMP 109 Thm 2 (asymptotic freedom)"
@@ -3301,7 +3515,12 @@ record LargeFieldSuppressionBound : Set₁ where
     scaleKSuppressionAvailable :
       Sprint77.ClaySprintSeventySevenYMAbsorptionQualifiedTemporalEntropyQuotientReceipt.largeFieldSuppressionAvailableAtScaleK sprint77Receipt ≡ true
     largeFieldControl : LargeFieldSuppressionControl
-    activityBoundField : ∀ (k : ℕ) (X-dist : ℝ) (R-val : ℝ) → R-val ≤ℝ (expℝ (-ℝ (p0 k)) *ℝ expℝ (-ℝ (κ *ℝ X-dist)))
+    activityBoundField :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      LargeFieldPolymer k X →
+      sourceLargeFieldActivity k X
+        ≤ℝ
+      P10CanonicalDiameterEnvelope currentP10AdmissibleConstants X
     absorptionInequalityField : ∀ (k : ℕ) → (((_-ℝ_ d-dim 1ℝ) *ℝ logℝ L-constant) +ℝ C-abs-const) ≤ℝ (c-abs *ℝ p0 k)
     largeFieldThreshold : Scalar
     suppressionRate : Scalar
@@ -3346,7 +3565,7 @@ currentLargeFieldSuppressionBound = record
   ; largeFieldActivitySummableIsTrue = refl
   ; effectiveActionPolymersSpatialOnlyIsTrue = refl
   ; targetInequality =
-      "large-field activity ≤ exp(-p₀(gₖ)) · exp(-κ · diam X); absorption condition ensures sum convergence"
+      "large-field activity ≤ C_large · exp(-κ · diam X) via P10CurrentCanonicalLargeFieldDecayFromOwnedKernels; imported absorption condition still supplies the p₀-side summability gate"
   ; openObligations = canonicalLargeFieldSuppressionObligations
   ; openObligationsAreCanonical = refl
   ; noClayPromotion = refl
@@ -3422,7 +3641,11 @@ P10LargeFieldSuppressionFromDerivedReducers :
   (largeFieldActivity : (k : Nat) (X : List Nat) → ℝ)
   (activitySuppressedByFunctional : ∀ (C_large : ℝ) → largeFieldActivity k X ≤ℝ (C_large *ℝ (c-supp ^ℝ Φ-large k X)))
   (complexityLowerBoundByDiameter : ∀ (n : Nat) → diamPoly X n ≤ℝ (fromNat (length X)))
-  (largeFieldDecayByDiameterProof : ∀ (C'' c'' : ℝ) → largeFieldActivity k X ≤ℝ (C'' *ℝ (c'' ^ℝ diamPoly X 0)) )
+  (largeFieldDecayByDiameterProof :
+    LargeFieldPolymer k X →
+    largeFieldActivity k X
+      ≤ℝ
+    (c-large *ℝ expℝ (-ℝ (κ *ℝ diamPoly X 0))))
   → P10LargeFieldSuppressionPackage k X
 P10LargeFieldSuppressionFromDerivedReducers k X Φ-large nn coerc diam largeFieldActivity act-supp comp-le decay-proof = record
   { Φ-large = Φ-large
@@ -3444,7 +3667,11 @@ P10InternalDecayReducerClosed :
   (suppressed : ∀ (C_large : ℝ) → largeFieldActivity k X ≤ℝ (C_large *ℝ (c-supp ^ℝ Φ-large k X)))
   (nonneg : 0ℝ ≤ℝ Φ-large k X)
   (compLower : ∀ (n : Nat) → diamPoly X n ≤ℝ (fromNat (length X)))
-  (decay-proof : ∀ (C'' c'' : ℝ) → largeFieldActivity k X ≤ℝ (C'' *ℝ (c'' ^ℝ diamPoly X 0)))
+  (decay-proof :
+    LargeFieldPolymer k X →
+    largeFieldActivity k X
+      ≤ℝ
+    (c-large *ℝ expℝ (-ℝ (κ *ℝ diamPoly X 0))))
   → P10LargeFieldSuppressionPackage k X
 P10InternalDecayReducerClosed k X Φ-large diamPoly largeFieldActivity coercive suppressed nonneg compLower decay-proof =
   P10LargeFieldSuppressionFromDerivedReducers k X Φ-large nonneg coercive diamPoly largeFieldActivity suppressed compLower decay-proof
@@ -3491,9 +3718,10 @@ P10FromAnalyticLeavesAndArithmetic :
   → (nonneg : 0ℝ ≤ℝ P10AnalyticLeaves.Φ-large leaves k X)
   → (compLower : ∀ (n : Nat) → diamPoly X n ≤ℝ (fromNat (length X)))
   → (decay-proof :
-       ∀ (C'' c'' : ℝ) →
+       LargeFieldPolymer k X →
        P10AnalyticLeaves.largeFieldActivity leaves k X
-         ≤ℝ (C'' *ℝ (c'' ^ℝ diamPoly X 0)))
+         ≤ℝ
+       (c-large *ℝ expℝ (-ℝ (κ *ℝ diamPoly X 0))))
   → P10LargeFieldSuppressionPackage k X
 P10FromAnalyticLeavesAndArithmetic k X diamPoly leaves nonneg compLower decay-proof =
   P10InternalDecayReducerClosed

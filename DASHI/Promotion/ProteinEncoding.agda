@@ -21,6 +21,8 @@ _*_ : Nat → Nat → Nat
 zero  * n = zero
 suc m * n = n + (m * n)
 
+import DASHI.Core.ContextIndexedEncoding as CIE
+import DASHI.Core.ProjectionGrammar as PG
 import DASHI.Promotion.BiologyFiniteScopeClarification as BFC
 import Ontology.DNA.Supervoxel4Adic as DNA
 
@@ -602,3 +604,87 @@ canonicalProteinEncodingNonPromotionCertificate = record
   ; certificateReading =
       "The canonical protein encoding is non-promoting: no folding, disease, therapeutic, clinical, or cell-fate closure claim is admitted. Candidate projection, residual measurement, benchmark comparison, and assay-scoped calibration are allowed."
   }
+
+------------------------------------------------------------------------
+-- 15. Protein encoding as a ContextIndexedEncoding
+------------------------------------------------------------------------
+
+-- The protein encoding is an instance of the general context-indexed
+-- encoding abstraction:
+--
+--   π : Carrier × Context → Observable
+--
+-- where
+--   Carrier   = List Codon   (Genome)
+--   Context   = TranslationContext
+--   Observable = List AminoAcid  (ProteinSequence)
+--
+-- Transport is the identity on observables (the protein sequence is
+-- determined by the carrier and context at projection time; changing
+-- the context requires re-projection from the carrier).
+
+ProteinContextIndexedEncoding : CIE.ContextIndexedEncoding
+  (List Codon) TranslationContext (List AminoAcid)
+ProteinContextIndexedEncoding = record
+  { π                      = λ g ctx → seqFromCodons ctx g
+  ; transport              = λ _ _ ps → ps
+  ; residual               = λ ctx ctx' g → ⊤
+  ; contextDependent       = true
+  ; contextDependentIsTrue = refl
+  ; promotionGateCarrier   = ⊤
+  ; promotionGateClosed    = λ _ → false
+  ; encodingGuards         =
+      "noContextIndependentPromotion"
+      ∷ "noCrossContextShortcut"
+      ∷ "authorityRequiresContextClosure"
+      ∷ []
+  ; forbiddenPromotions    =
+      "contextFreeProjection"
+      ∷ "carrierPromotedWithoutContext"
+      ∷ "observableDetachedFromContext"
+      ∷ []
+  ; allowedOperations      =
+      "contextDependentProjection"
+      ∷ "contextTransport"
+      ∷ "residualMeasurement"
+      ∷ "contextScopedCalibration"
+      ∷ []
+  ; encodingReading        =
+      "Protein encoding as context-indexed projection: π : Genome × TranslationContext → ProteinSequence. Changing context requires re-projection from the carrier."
+  }
+
+-----------------------------------------------------------------------
+-- 16. Protein encoding as a ProjectionGrammar
+-----------------------------------------------------------------------
+
+-- TranslationContext is the grammar that generates the admissible
+-- space of translation morphisms from genomic codons to protein
+-- sequences.  Different contexts (canonical, mitochondrial, ciliate)
+-- are different grammar instances, each generating their own
+-- Hom-space of translation functions.
+
+proteinProjectionGrammar : PG.ProjectionGrammar
+proteinProjectionGrammar = record
+  { Carrier             = List Codon
+  ; Observable          = List AminoAcid
+  ; Grammar             = TranslationContext
+  ; HomSpace            = λ _ → List Codon → List AminoAcid
+  ; apply               = λ h → h
+  ; forbiddenPromotions =
+      "contextFreeProjection" ∷
+      "carrierPromotedWithoutGrammar" ∷
+      "observableDetachedFromGrammar" ∷ []
+  ; allowedOperations   =
+      "grammarGeneratedTranslation" ∷
+      "grammarTransport" ∷
+      "residualMeasurement" ∷
+      "contextScopedCalibration" ∷ []
+  ; encodingReading     =
+      "Protein ProjectionGrammar: TranslationContext generates the admissible space of Codon→AminoAcid projections. Canonical, mitochondrial, ciliate, and synthetic grammars each determine distinct Hom-spaces."
+  }
+
+-- For any translation context γ, seqFromCodons γ is the canonical
+-- morphism in HomSpace(γ) — the translation function determined
+-- by the grammar.
+canonicalTranslationMorphism : (γ : TranslationContext) → PG.HomSpace proteinProjectionGrammar γ
+canonicalTranslationMorphism γ = seqFromCodons γ

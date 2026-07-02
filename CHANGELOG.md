@@ -44,7 +44,9 @@ monitor surface.
   `17.7`, `17.7`, and `20.5`, so the blunt constant route cannot close Gate 2.
   The repo now records the sharper next step explicitly: pursue an
   extremizer-aware or quotient-aware transport theorem rather than the coarse
-  worst-case quotient.
+  worst-case quotient. The extremizer-aware directional ratio is also now
+  recorded as the live positive signal: it stays stably near `0.168`
+  (roughly `1/6`) on `N = 6, 8, 10`.
 
 - NS Wall 1 no-triple-danger / square-wave / backward-chain tranche for
   `2026-06-23`: adds `DASHI.Physics.Closure.NSNoTripleDangerBoundary`,

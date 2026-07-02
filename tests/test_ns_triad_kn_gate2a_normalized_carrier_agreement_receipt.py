@@ -31,6 +31,11 @@ def test_gate2a_doc_exists() -> None:
     assert "gate2aSchurSignSplitComparisonAuditInstalled = true" in text
     assert "Schur(L_abs)" in text
     assert "Schur(L_neg)" in text
+    assert "0.168199" in text
+    assert "gate2aDirectionalRatioStableObserved = true" in text
+    assert "gate2aDirectionalRatioApproxOneSixthObserved = true" in text
+    assert "gate2aCoarseTransportClosesObserved = false" in text
+    assert "gate2aExtremizerAwareTransportProved = false" in text
     assert "normalizedGramToHelicalSchurAgreementProved = false" in text
     assert "gate2aCommonComparisonMapConstructed = false" in text
     assert "gate2aExactRestrictionIdentityObserved = false" in text
@@ -49,10 +54,14 @@ def test_gate2a_receipt_exists() -> None:
     assert "gate2aOperatorSpecificSchurLiftsConstructed ≡ true" in text
     assert "gate2aOperatorSpecificSchurLiftIdentitiesRecorded ≡ true" in text
     assert "gate2aSchurSignSplitComparisonAuditInstalled ≡ true" in text
+    assert "gate2aDirectionalRatioStableObserved ≡ true" in text
+    assert "gate2aDirectionalRatioApproxOneSixthObserved ≡ true" in text
+    assert "gate2aCoarseTransportClosesObserved ≡ false" in text
     assert "normalizedGramToHelicalSchurAgreementProved ≡ false" in text
     assert "gate2aCommonComparisonMapConstructed ≡ false" in text
     assert "schurSeamCarrierEmbedsIntoGramCarrier ≡ false" in text
     assert "gramSeamQuadraticFormMatchProved ≡ false" in text
     assert "gate2aExactRestrictionIdentityObserved ≡ false" in text
     assert "gate2aTwoSidedQuadraticFormBoundsProved ≡ false" in text
+    assert "gate2aExtremizerAwareTransportProved ≡ false" in text
     assert "gate2aConditionalLemmaProved ≡ false" in text

@@ -44,6 +44,10 @@ canonicalComparisonAuditText : String
 canonicalComparisonAuditText =
   "Installed dense Gate 2-A comparison audit: compare Schur(L_abs) with L_good and Schur(L_neg) with L_bad on 1_C^perp, recording exact-identity defects and observed two-sided quadratic-form bounds."
 
+canonicalExtremizerTransportText : String
+canonicalExtremizerTransportText =
+  "Observed extremizer-aware Gate 2-A transport on shells 6, 8, 10: directional transported ratio stays stably near 1/6 while the coarse worst-case transport route fails."
+
 record NSTriadKNGate2ANormalizedCarrierAgreementReceipt : Setω where
   constructor mkNSTriadKNGate2ANormalizedCarrierAgreementReceipt
   field
@@ -83,6 +87,10 @@ record NSTriadKNGate2ANormalizedCarrierAgreementReceipt : Setω where
     comparisonAuditTextIsCanonical :
       comparisonAuditText ≡ canonicalComparisonAuditText
 
+    extremizerTransportText : String
+    extremizerTransportTextIsCanonical :
+      extremizerTransportText ≡ canonicalExtremizerTransportText
+
     gate2aCarrierSpacesIdentified : Bool
     gate2aCarrierSpacesIdentifiedIsTrue :
       gate2aCarrierSpacesIdentified ≡ true
@@ -107,6 +115,18 @@ record NSTriadKNGate2ANormalizedCarrierAgreementReceipt : Setω where
     gate2aSchurSignSplitComparisonAuditInstalledIsTrue :
       gate2aSchurSignSplitComparisonAuditInstalled ≡ true
 
+    gate2aDirectionalRatioStableObserved : Bool
+    gate2aDirectionalRatioStableObservedIsTrue :
+      gate2aDirectionalRatioStableObserved ≡ true
+
+    gate2aDirectionalRatioApproxOneSixthObserved : Bool
+    gate2aDirectionalRatioApproxOneSixthObservedIsTrue :
+      gate2aDirectionalRatioApproxOneSixthObserved ≡ true
+
+    gate2aCoarseTransportClosesObserved : Bool
+    gate2aCoarseTransportClosesObservedIsFalse :
+      gate2aCoarseTransportClosesObserved ≡ false
+
     normalizedGramToHelicalSchurAgreementProved : Bool
     normalizedGramToHelicalSchurAgreementProvedIsFalse :
       normalizedGramToHelicalSchurAgreementProved ≡ false
@@ -130,6 +150,10 @@ record NSTriadKNGate2ANormalizedCarrierAgreementReceipt : Setω where
     gate2aTwoSidedQuadraticFormBoundsProved : Bool
     gate2aTwoSidedQuadraticFormBoundsProvedIsFalse :
       gate2aTwoSidedQuadraticFormBoundsProved ≡ false
+
+    gate2aExtremizerAwareTransportProved : Bool
+    gate2aExtremizerAwareTransportProvedIsFalse :
+      gate2aExtremizerAwareTransportProved ≡ false
 
     gate2aConditionalLemmaProved : Bool
     gate2aConditionalLemmaProvedIsFalse :
@@ -171,7 +195,7 @@ canonicalNSTriadKNGate2ANormalizedCarrierAgreementReceipt =
     refl
     canonicalComparisonAuditText
     refl
-    true
+    canonicalExtremizerTransportText
     refl
     true
     refl
@@ -182,6 +206,16 @@ canonicalNSTriadKNGate2ANormalizedCarrierAgreementReceipt =
     true
     refl
     true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    false
+    refl
+    false
     refl
     false
     refl
