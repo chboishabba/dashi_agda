@@ -33,6 +33,12 @@ open import DASHI.Geometry.Gauge.SUNPrimitives
   using (clayYangMillsPromoted)
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; _≤ℝ_; _<ℝ_; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; -ℝ_; _-ℝ_)
+open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
+  ( SourceAuthorityId
+  ; VerificationStatus
+  ; dashi-internal-proof
+  ; mixedReducer
+  )
 
 open import DASHI.Core.Prelude using (_×_)
 import DASHI.Physics.YangMills.ArithmeticLemmaQueue as ArithmeticQueue
@@ -951,17 +957,62 @@ P12P19RGTransferFromStepV :
   → (DLRSmallness → CrossScaleBound → UniformLSI)
   → P12P19RGTransferPackage
 P12P19RGTransferFromStepV implDLR implA2 implB6 implCauchy implLSI =
-  postulatedP12P19RGTransferFromStepV implDLR implA2 implB6 implCauchy implLSI
+  StepVDownstreamTransferSemanticKernel.rgTransferFromStepV
+    currentStepVDownstreamTransferSemanticKernel
+    implDLR implA2 implB6 implCauchy implLSI
 
 postulate
   postulatedStepVToRGDischargePackageFromP12P19 :
     P12P19RGTransferPackage
     → StepVToRGDischargePackage
 
+record StepVDownstreamTransferSemanticKernel : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    rgTransferFromStepV :
+      (StepVSpatialKPCertificate → DLRSmallness)
+      → (StepVSpatialKPCertificate → AssumptionA2)
+      → (AssumptionA2 → B6InfluenceBound)
+      → (B6InfluenceBound → RGCauchySummability)
+      → (DLRSmallness → CrossScaleBound → UniformLSI)
+      → P12P19RGTransferPackage
+
+    stepVToRGDischargeFromP12P19 :
+      P12P19RGTransferPackage
+      → StepVToRGDischargePackage
+
+    noClayPromotion :
+      clayYangMillsPromoted ≡ false
+
+currentStepVDownstreamTransferSemanticKernel :
+  StepVDownstreamTransferSemanticKernel
+currentStepVDownstreamTransferSemanticKernel = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "StepVAssemblyLemmaQueue.{postulatedP12P19RGTransferFromStepV,postulatedStepVToRGDischargePackageFromP12P19}"
+  ; status = mixedReducer
+  ; rgTransferFromStepV =
+      postulatedP12P19RGTransferFromStepV
+  ; stepVToRGDischargeFromP12P19 =
+      postulatedStepVToRGDischargePackageFromP12P19
+  ; noClayPromotion = refl
+  }
+
 StepVToRGDischargePackageFromP12P19 :
   P12P19RGTransferPackage
   → StepVToRGDischargePackage
-StepVToRGDischargePackageFromP12P19 pkg = postulatedStepVToRGDischargePackageFromP12P19 pkg
+StepVToRGDischargePackageFromP12P19 pkg =
+  StepVDownstreamTransferSemanticKernel.stepVToRGDischargeFromP12P19
+    currentStepVDownstreamTransferSemanticKernel
+    pkg
 
 -- ── Sprint 6: Fixed Lattice gap P21/P23/P24/P25/P26 ───────────────────
 
@@ -1188,7 +1239,6 @@ YangMillsEndpointFromContinuum :
   → OSWightmanEndpointPackage
   → YangMillsQuantumFieldTheory × PhysicalMassGap
 YangMillsEndpointFromContinuum contGap pkg = postulatedYangMillsEndpointFromContinuum contGap pkg
-
 
 
 

@@ -19,6 +19,12 @@ open import DASHI.Foundations.RealAnalysisAxioms using
   ; _*ℝ_
   )
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
+open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
+  ( SourceAuthorityId
+  ; VerificationStatus
+  ; dashi-internal-proof
+  ; mixedReducer
+  )
 
 import DASHI.Physics.YangMills.AnalyticTheoremKernels as Kernels
 import DASHI.Physics.YangMills.BalabanAnisotropicDiameterCompatibility as AnisotropicDiameter
@@ -26,6 +32,10 @@ import DASHI.Physics.YangMills.BalabanLargeFieldSuppression as LargeField
 import DASHI.Physics.YangMills.BalabanPolymerDiameterEntropy as Entropy
 import DASHI.Physics.YangMills.GraphCombinatorics as GraphCombinatorics
 import DASHI.Physics.YangMills.LocalLatticeDischargePipeline as LocalLattice
+open import DASHI.Physics.YangMills.P33BalabanMetricFaithfulnessBridge as P33Faithful using
+  ( P33BalabanMetricFaithfulnessReceipt
+  ; P33BalabanMetricDischarge
+  )
 import DASHI.Physics.YangMills.StepVAssemblyLemmaQueue as Assembly
 
 open Kernels using
@@ -145,6 +155,85 @@ GaussianNormalizationPositiveFromDet =
   ∀ A →
   PositiveDefinite A →
   0ℝ <ℝ GaussianNormalization A
+
+record HardAnalyticSprintPlan : Set₁ where
+  field
+    sprint1-P10-tail-kernel :
+      Bool
+
+    sprint2-P10-localisation-kernel :
+      Bool
+
+    sprint3-P10-diameter-coercivity :
+      Bool
+
+    sprint4-P10-canonical-assembly :
+      Bool
+
+    sprint5-P06-residual-counting :
+      Bool
+
+    sprint6-P07P09-semantic-closure :
+      Bool
+
+    sprint7-P33-faithfulness :
+      Bool
+
+    sprint8-stepV-local-lattice-closeout :
+      Bool
+
+    sprint9-P10-source-tail-semantics :
+      Bool
+
+    sprint10-P10-source-localisation-semantics :
+      Bool
+
+    sprint11-P10-source-coercivity-semantics :
+      Bool
+
+    sprint12-P10-canonical-decay-internalisation :
+      Bool
+
+    sprint13-P06-skeleton-decomposition :
+      Bool
+
+    sprint14-P06-endpoint-unblocking :
+      Bool
+
+    sprint15-P33-source-reconstruction :
+      Bool
+
+    sprint16-stepV-downstream-internalisation :
+      Bool
+
+    currentFocus :
+      String
+
+    noClayPromotion :
+      clayYangMillsPromoted ≡ false
+
+currentHardAnalyticSprintPlan : HardAnalyticSprintPlan
+currentHardAnalyticSprintPlan = record
+  { sprint1-P10-tail-kernel = true
+  ; sprint2-P10-localisation-kernel = true
+  ; sprint3-P10-diameter-coercivity = true
+  ; sprint4-P10-canonical-assembly = true
+  ; sprint5-P06-residual-counting = true
+  ; sprint6-P07P09-semantic-closure = true
+  ; sprint7-P33-faithfulness = true
+  ; sprint8-stepV-local-lattice-closeout = true
+  ; sprint9-P10-source-tail-semantics = true
+  ; sprint10-P10-source-localisation-semantics = true
+  ; sprint11-P10-source-coercivity-semantics = true
+  ; sprint12-P10-canonical-decay-internalisation = true
+  ; sprint13-P06-skeleton-decomposition = true
+  ; sprint14-P06-endpoint-unblocking = true
+  ; sprint15-P33-source-reconstruction = true
+  ; sprint16-stepV-downstream-internalisation = true
+  ; currentFocus =
+      "Sprint 16 complete: the Step V downstream handoff is now routed through explicit semantic kernels and sprint witnesses. Remaining work is mathematical internalisation beyond the sprint ledger."
+  ; noClayPromotion = refl
+  }
 
 record P06EncodingSubkernel : Set₁ where
   field
@@ -518,6 +607,9 @@ RGKernelFromSubkernels dlr influence lsi = record
 
 record FixedLatticeGapSubkernel : Set₁ where
   field
+    uniformLSI :
+      Assembly.UniformLSI
+
     lsiToSpectralGap :
       Assembly.UniformLSI →
       Assembly.LatticeSpectralGap
@@ -542,12 +634,16 @@ FixedLatticeKernelFromSubkernel :
   FixedLatticeGapSubkernel →
   FixedLatticeMassGapTheoremKernel
 FixedLatticeKernelFromSubkernel fixed = record
-  { uniformLSIImpliesSpectralGap =
+  { uniformLSI =
+      FixedLatticeGapSubkernel.uniformLSI fixed
+  ; uniformLSIImpliesSpectralGap =
       FixedLatticeGapSubkernel.lsiToSpectralGap fixed
   ; spectralGapImpliesClustering =
       FixedLatticeGapSubkernel.spectralGapToClustering fixed
   ; clusteringImpliesMassGap =
       FixedLatticeGapSubkernel.clusteringToMassGap fixed
+  ; finiteVolumeUniformity =
+      FixedLatticeGapSubkernel.finiteVolumeUniformity fixed
   ; finiteVolumeUniformityPreservesGap =
       FixedLatticeGapSubkernel.uniformityPreservesGap fixed
   }
@@ -738,6 +834,90 @@ P06KernelFromProgram program =
     (HardAnalyticSubkernelProgram.p06Encoding program)
     (HardAnalyticSubkernelProgram.p06Counting program)
 
+record OwnedP06SourceSkeletonDecompositionSprintWitness
+  (program : HardAnalyticSubkernelProgram) : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    sourceSkeletonDecompositionSemanticKernel :
+      Entropy.P06SourceSkeletonDecompositionSemanticKernel
+
+    skeletonDecompositionSemanticWitness :
+      Entropy.OwnedP06SourceSkeletonDecompositionSprintWitness
+
+    residualCountingWitness :
+      Entropy.OwnedP06ResidualCountingSprintWitness
+
+    decorationMultiplicityWitness :
+      Entropy.OwnedP06bDecorationMultiplicityWitness
+
+    animalCountingWitness :
+      Entropy.OwnedP06AnimalCountingWitness
+
+P06SourceSkeletonDecompositionSprintWitnessFromProgram :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedP06SourceSkeletonDecompositionSprintWitness program
+P06SourceSkeletonDecompositionSprintWitnessFromProgram program = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "BalabanPolymerDiameterEntropy.currentP06SourceSkeletonDecompositionSemanticKernel/currentOwnedP06SourceSkeletonDecompositionSprintWitness"
+  ; status = mixedReducer
+  ; sourceSkeletonDecompositionSemanticKernel =
+      Entropy.currentP06SourceSkeletonDecompositionSemanticKernel
+  ; skeletonDecompositionSemanticWitness =
+      Entropy.currentOwnedP06SourceSkeletonDecompositionSprintWitness
+  ; residualCountingWitness =
+      Entropy.currentOwnedP06ResidualCountingSprintWitness
+  ; decorationMultiplicityWitness =
+      Entropy.currentOwnedP06bDecorationMultiplicityWitness
+  ; animalCountingWitness =
+      Entropy.currentOwnedP06AnimalCountingWitness
+  }
+
+record OwnedP06EndpointUnblockingSprintWitness
+  (program : HardAnalyticSubkernelProgram) : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    endpointSemanticKernel :
+      Entropy.P06EndpointUnblockingSemanticKernel
+
+    endpointSemanticWitness :
+      Entropy.OwnedP06EndpointUnblockingSprintWitness
+
+    skeletonDecompositionWitness :
+      Entropy.OwnedP06SourceSkeletonDecompositionSprintWitness
+
+P06EndpointUnblockingSprintWitnessFromProgram :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedP06EndpointUnblockingSprintWitness program
+P06EndpointUnblockingSprintWitnessFromProgram program = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "BalabanPolymerDiameterEntropy.currentP06EndpointUnblockingSemanticKernel/currentOwnedP06EndpointUnblockingSprintWitness"
+  ; status = mixedReducer
+  ; endpointSemanticKernel =
+      Entropy.currentP06EndpointUnblockingSemanticKernel
+  ; endpointSemanticWitness =
+      Entropy.currentOwnedP06EndpointUnblockingSprintWitness
+  ; skeletonDecompositionWitness =
+      Entropy.currentOwnedP06SourceSkeletonDecompositionSprintWitness
+  }
+
 P10KernelFromProgram :
   HardAnalyticSubkernelProgram →
   P10LargeFieldTheoremKernel
@@ -761,6 +941,318 @@ P07P09KernelFromProgram :
 P07P09KernelFromProgram program =
   P07P09KernelFromSubkernel
     (HardAnalyticSubkernelProgram.p07p09Shell program)
+
+record OwnedP07P09SemanticClosureSprintWitness
+  (program : HardAnalyticSubkernelProgram) : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    kernel :
+      P07P09KPMarginKernel
+
+    kpDischargePackage :
+      Entropy.P07KPSummabilityDischargePackage
+
+    entropyMarginDischargePackage :
+      Entropy.P09EntropyMarginDischargePackage
+
+    kpReducerBoundary :
+      Entropy.P07KPSummabilityReducer
+
+    entropyMarginBoundary :
+      Entropy.P09EntropyMargin
+
+P07P09SemanticClosureSprintWitnessFromProgram :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedP07P09SemanticClosureSprintWitness program
+P07P09SemanticClosureSprintWitnessFromProgram program = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "HardAnalyticDischargeProgram.P07P09KernelFromProgram/AnalyticTheoremKernels.P07KPSummabilityDischargePackageFromKernel/AnalyticTheoremKernels.P09EntropyMarginDischargePackageFromKernel"
+  ; status = mixedReducer
+  ; kernel =
+      P07P09KernelFromProgram program
+  ; kpDischargePackage =
+      Kernels.P07KPSummabilityDischargePackageFromKernel
+        (P07P09KernelFromProgram program)
+  ; entropyMarginDischargePackage =
+      P09EntropyMarginDischargePackageFromKernel
+        (P07P09KernelFromProgram program)
+  ; kpReducerBoundary =
+      Kernels.P07KPSummabilityReducerFromKernel
+        (P07P09KernelFromProgram program)
+  ; entropyMarginBoundary =
+      Kernels.P09EntropyMarginFromKernel
+        (P07P09KernelFromProgram program)
+  }
+
+record OwnedP10SourceTailSemanticSprintWitness
+  (program : HardAnalyticSubkernelProgram) : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    sourceTailSemanticKernel :
+      LargeField.P10SourceTailSemanticKernel
+
+    tailSemanticWitness :
+      LargeField.OwnedP10SourceTailSemanticSprintWitness
+
+    tailKernelWitness :
+      LargeField.OwnedP10TailKernelSprintWitness
+
+P10SourceTailSemanticSprintWitnessFromProgram :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedP10SourceTailSemanticSprintWitness program
+P10SourceTailSemanticSprintWitnessFromProgram program = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10SourceTailSemanticKernel/currentOwnedP10SourceTailSemanticSprintWitness/currentOwnedP10TailKernelSprintWitness"
+  ; status = mixedReducer
+  ; sourceTailSemanticKernel =
+      LargeField.currentP10SourceTailSemanticKernel
+  ; tailSemanticWitness =
+      LargeField.currentOwnedP10SourceTailSemanticSprintWitness
+  ; tailKernelWitness =
+      LargeField.currentOwnedP10TailKernelSprintWitness
+  }
+
+record OwnedP10SourceLocalisationSemanticSprintWitness
+  (program : HardAnalyticSubkernelProgram) : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    sourceLocalisationSemanticKernel :
+      LargeField.P10SourceLocalisationSemanticKernel
+
+    localisationSemanticWitness :
+      LargeField.OwnedP10SourceLocalisationSemanticSprintWitness
+
+    localisationKernelWitness :
+      LargeField.OwnedP10LocalisationKernelSprintWitness
+
+P10SourceLocalisationSemanticSprintWitnessFromProgram :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedP10SourceLocalisationSemanticSprintWitness program
+P10SourceLocalisationSemanticSprintWitnessFromProgram program = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10SourceLocalisationSemanticKernel/currentOwnedP10SourceLocalisationSemanticSprintWitness/currentOwnedP10LocalisationKernelSprintWitness"
+  ; status = mixedReducer
+  ; sourceLocalisationSemanticKernel =
+      LargeField.currentP10SourceLocalisationSemanticKernel
+  ; localisationSemanticWitness =
+      LargeField.currentOwnedP10SourceLocalisationSemanticSprintWitness
+  ; localisationKernelWitness =
+      LargeField.currentOwnedP10LocalisationKernelSprintWitness
+  }
+
+record OwnedP10SourceCoercivitySemanticSprintWitness
+  (program : HardAnalyticSubkernelProgram) : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    sourceCoercivitySemanticKernel :
+      LargeField.P10SourceCoercivitySemanticKernel
+
+    coercivitySemanticWitness :
+      LargeField.OwnedP10SourceCoercivitySemanticSprintWitness
+
+    coercivityKernelWitness :
+      LargeField.OwnedP10DiameterCoercivitySprintWitness
+
+P10SourceCoercivitySemanticSprintWitnessFromProgram :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedP10SourceCoercivitySemanticSprintWitness program
+P10SourceCoercivitySemanticSprintWitnessFromProgram program = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10SourceCoercivitySemanticKernel/currentOwnedP10SourceCoercivitySemanticSprintWitness/currentOwnedP10DiameterCoercivitySprintWitness"
+  ; status = mixedReducer
+  ; sourceCoercivitySemanticKernel =
+      LargeField.currentP10SourceCoercivitySemanticKernel
+  ; coercivitySemanticWitness =
+      LargeField.currentOwnedP10SourceCoercivitySemanticSprintWitness
+  ; coercivityKernelWitness =
+      LargeField.currentOwnedP10DiameterCoercivitySprintWitness
+  }
+
+record OwnedP10SourceCanonicalDecaySemanticSprintWitness
+  (program : HardAnalyticSubkernelProgram) : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    sourceCanonicalDecaySemanticKernel :
+      LargeField.P10SourceCanonicalDecaySemanticKernel
+
+    canonicalDecaySemanticWitness :
+      LargeField.OwnedP10SourceCanonicalDecaySemanticSprintWitness
+
+    canonicalAssemblyWitness :
+      LargeField.OwnedP10CanonicalAssemblySprintWitness
+
+P10SourceCanonicalDecaySemanticSprintWitnessFromProgram :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedP10SourceCanonicalDecaySemanticSprintWitness program
+P10SourceCanonicalDecaySemanticSprintWitnessFromProgram program = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10SourceCanonicalDecaySemanticKernel/currentOwnedP10SourceCanonicalDecaySemanticSprintWitness/currentOwnedP10CanonicalAssemblySprintWitness"
+  ; status = provedConditionalReducer
+  ; sourceCanonicalDecaySemanticKernel =
+      LargeField.currentP10SourceCanonicalDecaySemanticKernel
+  ; canonicalDecaySemanticWitness =
+      LargeField.currentOwnedP10SourceCanonicalDecaySemanticSprintWitness
+  ; canonicalAssemblyWitness =
+      LargeField.currentOwnedP10CanonicalAssemblySprintWitness
+  }
+
+record OwnedP33FaithfulnessSprintWitness
+  (program : HardAnalyticSubkernelProgram) : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    abstractKernel :
+      P33SmallFieldEllipticityKernel
+
+    faithfulnessReceipt :
+      P33BalabanMetricFaithfulnessReceipt
+        Polymer
+        Edge
+        SmallFieldRegularity
+        Kernels.P33AbstractLocalMetric
+        Kernels.P33AbstractBackgroundMetric
+        Kernels.P33AbstractPerturbation
+        w-weight
+
+    metricDischarge :
+      P33BalabanMetricDischarge
+        Polymer
+        Edge
+        SmallFieldRegularity
+        isEdgeOf
+        Kernels.P33AbstractLocalMetric
+        Kernels.P33AbstractBackgroundMetric
+        Kernels.P33AbstractPerturbation
+        supEdgePerturbation
+        ε-real-const
+        m-background
+        admissibleScale
+        w-weight
+
+    anisotropicDischargePackage :
+      AnisotropicDiameter.P33a1AnalyticDischargePackage
+
+    graphDischargePackage :
+      GraphCombinatorics.P33a1AnalyticDischargePackage
+
+P33FaithfulnessSprintWitnessFromProgram :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedP33FaithfulnessSprintWitness program
+P33FaithfulnessSprintWitnessFromProgram program = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "AnalyticTheoremKernels.currentP33BalabanMetricFaithfulnessReceipt/AnalyticTheoremKernels.currentP33BalabanMetricDischarge/AnalyticTheoremKernels.P33BalabanAnalyticDischargeFromNormalizedModelAndFaithfulness"
+  ; status = mixedReducer
+  ; abstractKernel =
+      P33KernelFromProgram program
+  ; faithfulnessReceipt =
+      Kernels.currentP33BalabanMetricFaithfulnessReceipt
+  ; metricDischarge =
+      Kernels.currentP33BalabanMetricDischarge
+  ; anisotropicDischargePackage =
+      P33a1AnalyticDischargePackageFromKernel
+        (P33KernelFromProgram program)
+  ; graphDischargePackage =
+      P33GraphCombinatoricsPackageFromAnisotropicPackage
+        (P33a1AnalyticDischargePackageFromKernel
+          (P33KernelFromProgram program))
+  }
+
+record OwnedP33SourceReconstructionSprintWitness
+  (program : HardAnalyticSubkernelProgram) : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    sourceReconstructionKernel :
+      P33Faithful.P33BalabanSourceReconstructionKernel
+        Polymer
+        Edge
+        SmallFieldRegularity
+        isEdgeOf
+        Kernels.P33AbstractLocalMetric
+        Kernels.P33AbstractBackgroundMetric
+        Kernels.P33AbstractPerturbation
+        supEdgePerturbation
+        admissibleScale
+        w-weight
+        ε-real-const
+        m-background
+
+    faithfulnessWitness :
+      OwnedP33FaithfulnessSprintWitness program
+
+P33SourceReconstructionSprintWitnessFromProgram :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedP33SourceReconstructionSprintWitness program
+P33SourceReconstructionSprintWitnessFromProgram program = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "AnalyticTheoremKernels.currentP33BalabanSourceReconstructionKernel/HardAnalyticDischargeProgram.P33FaithfulnessSprintWitnessFromProgram"
+  ; status = mixedReducer
+  ; sourceReconstructionKernel =
+      Kernels.currentP33BalabanSourceReconstructionKernel
+  ; faithfulnessWitness =
+      P33FaithfulnessSprintWitnessFromProgram program
+  }
 
 P08P11KernelFromProgram :
   HardAnalyticSubkernelProgram →
@@ -855,6 +1347,113 @@ LocalLatticeAnalyticDischargePackageFromSubkernelProgram program = record
         (HardAnalyticSubkernelProgram.p10DecayArithmetic program)
   ; noClayPromotion =
       HardAnalyticSubkernelProgram.noClayPromotion program
+  }
+
+record OwnedStepVLocalLatticeCloseoutSprintWitness
+  (program : HardAnalyticSubkernelProgram) : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    localLatticePackage :
+      LocalLattice.LocalLatticeAnalyticDischargePackage
+
+    stepVCertificate :
+      Assembly.StepVSpatialKPCertificate
+
+    rgTransferPackage :
+      Assembly.P12P19RGTransferPackage
+
+    fixedLatticePackage :
+      Assembly.FixedLatticeGapDischargePackage
+
+    thermodynamicPackage :
+      Assembly.ThermodynamicLimitPackage
+
+    continuumPackage :
+      Assembly.ContinuumLimitPackage
+
+    osWightmanPackage :
+      Assembly.OSWightmanEndpointPackage
+
+OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedStepVLocalLatticeCloseoutSprintWitness program
+OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram program = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "HardAnalyticDischargeProgram.LocalLatticeAnalyticDischargePackageFromSubkernelProgram/LocalLatticeDischargePipeline.LocalLatticeStepVFromAnalyticDischarge/AnalyticTheoremKernels.{P12P19RGTransferPackageFromKernel,FixedLatticeGapDischargePackageFromKernel,ThermodynamicLimitPackageFromKernel,ContinuumLimitPackageFromKernel,OSWightmanEndpointPackageFromKernel}"
+  ; status = mixedReducer
+  ; localLatticePackage =
+      LocalLatticeAnalyticDischargePackageFromSubkernelProgram program
+  ; stepVCertificate =
+      LocalLattice.LocalLatticeStepVFromAnalyticDischarge
+        (LocalLatticeAnalyticDischargePackageFromSubkernelProgram program)
+  ; rgTransferPackage =
+      P12P19RGTransferPackageFromKernel
+        (RGKernelFromProgram program)
+  ; fixedLatticePackage =
+      FixedLatticeGapDischargePackageFromKernel
+        (FixedLatticeKernelFromProgram program)
+  ; thermodynamicPackage =
+      ThermodynamicLimitPackageFromKernel
+        (ThermodynamicKernelFromProgram program)
+  ; continuumPackage =
+      ContinuumLimitPackageFromKernel
+        (ContinuumKernelFromProgram program)
+  ; osWightmanPackage =
+      OSWightmanEndpointPackageFromKernel
+        (OSWightmanKernelFromProgram program)
+  }
+
+record OwnedStepVDownstreamInternalisationSprintWitness
+  (program : HardAnalyticSubkernelProgram) : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    localDownstreamKernel :
+      LocalLattice.StepVDownstreamInternalisationKernel
+
+    assemblyDownstreamKernel :
+      Assembly.StepVDownstreamTransferSemanticKernel
+
+    localLatticeWitness :
+      OwnedStepVLocalLatticeCloseoutSprintWitness program
+
+    stepVToRGDischarge :
+      Assembly.StepVToRGDischargePackage
+
+OwnedStepVDownstreamInternalisationSprintWitnessFromProgram :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedStepVDownstreamInternalisationSprintWitness program
+OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "LocalLatticeDischargePipeline.currentStepVDownstreamInternalisationKernel/StepVAssemblyLemmaQueue.currentStepVDownstreamTransferSemanticKernel/HardAnalyticDischargeProgram.OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram"
+  ; status = mixedReducer
+  ; localDownstreamKernel =
+      LocalLattice.currentStepVDownstreamInternalisationKernel
+  ; assemblyDownstreamKernel =
+      Assembly.currentStepVDownstreamTransferSemanticKernel
+  ; localLatticeWitness =
+      OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram program
+  ; stepVToRGDischarge =
+      Assembly.StepVToRGDischargePackageFromP12P19
+        (P12P19RGTransferPackageFromKernel
+          (RGKernelFromProgram program))
   }
 
 YangMillsEndpointFromSubkernelProgram :

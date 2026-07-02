@@ -1,0 +1,142 @@
+{
+  "N": 8,
+  "K": 7,
+  "eta": 0.25,
+  "mode_count": 4912,
+  "edge_count": 1543284,
+  "block_size": 2742,
+  "G_size": 26,
+  "C_size": 2716,
+  "M_GG": {
+    "label": "M_GG",
+    "n": 26,
+    "rank": 26,
+    "nullity": 0,
+    "lambda_min": 0.0001850152708959748,
+    "lambda_max": 0.011176792750552387,
+    "norm": 0.011176792750552387,
+    "psd_gap": 0.0001850152708959748
+  },
+  "M_GC_norm": 0.0033382663610096877,
+  "M_CC": {
+    "label": "M_CC",
+    "n": 2716,
+    "rank": 2716,
+    "nullity": 0,
+    "lambda_min": 6.117025751234189e-06,
+    "lambda_max": 0.0335723472549609,
+    "norm": 0.0335723472549609,
+    "psd_gap": 6.117025751234189e-06
+  },
+  "M_CC_worst_eigenvector_support": {
+    "support": {
+      "7": 0.43478312390758467,
+      "8": 0.5652168760924154
+    },
+    "lambda_min": 6.1170257512343604e-06,
+    "norm_sq": 1.0000000000000004
+  },
+  "S_C": {
+    "label": "S_C",
+    "n": 2716,
+    "rank": 2715,
+    "nullity": 1,
+    "lambda_min": -3.3955433273056765e-19,
+    "lambda_max": 0.03356919959338034,
+    "norm": 0.03356919959338034,
+    "psd_gap": -3.3955433273056765e-19
+  },
+  "correction_norm": 0.0009972806544036878,
+  "S_C_worst_eigenvector_support": {
+    "support": {
+      "7": 0.4337260677466877,
+      "8": 0.5662739322533125
+    },
+    "lambda_min": -5.363773738760997e-19,
+    "norm_sq": 1.0000000000000004
+  },
+  "null_vector_diagnostics": {
+    "corr_constant": 1.0,
+    "corr_shell_7": 0.6585788242470962,
+    "corr_shell_8": 0.7525117489138041,
+    "shell_mass": {
+      "7": 0.43372606774668754,
+      "8": 0.5662739322533124
+    },
+    "corr_shell_balance": -0.1325478645066261,
+    "corr_sqrt_degree": 0.9792513701123431,
+    "corr_inv_degree": 0.9545055803880086,
+    "corr_degree_weighted_balance": -0.06072289170812856
+  },
+  "row_sum_diagnostics": {
+    "n": 2716,
+    "max_abs_row_sum": 1.1644331332494318e-16,
+    "l2_row_sum": 2.317873406158035e-16,
+    "mean_row_sum": -2.364062482702533e-19
+  },
+  "effective_laplacian_sign_diagnostics": null,
+  "signed_factorization_diagnostics": null,
+  "gate2a_schur_sign_split_comparison_diagnostics": {
+    "audit_requested": true,
+    "status": "ok",
+    "c_dim": 2716,
+    "g_dim": 26,
+    "comparison_target": "Compare Schur(L_neg), Schur(L_abs) to seam sign split L_bad, L_good on 1_C^perp.",
+    "schur_linearity_identity_observed": false,
+    "schur_linearity_defect": {
+      "operator_norm": 0.0004749937045522698,
+      "fro_norm": 0.0004750033327782609,
+      "max_abs": 0.00011114062018396931,
+      "relative_operator_norm": 0.014149234210113154,
+      "relative_fro_norm": 0.004816101975993451,
+      "exact_observed": false
+    },
+    "schur_neg_vs_L_bad": {
+      "operator_norm": 0.039988824658924005,
+      "fro_norm": 0.11627876917008287,
+      "max_abs": 0.03340856199810731,
+      "relative_operator_norm": 7.910093985980846,
+      "relative_fro_norm": 8.913275830789239,
+      "exact_observed": false
+    },
+    "schur_abs_vs_L_good": {
+      "operator_norm": 0.06261978564489233,
+      "fro_norm": 0.16781845759376973,
+      "max_abs": 0.059729965756418875,
+      "relative_operator_norm": 1.759130128697233,
+      "relative_fro_norm": 1.5444283320641699,
+      "exact_observed": false
+    },
+    "schur_neg_vs_L_bad_bounds_one_perp": {
+      "status": "ok",
+      "dimension": 2715,
+      "denominator_lambda_min_one_perp": 8.516259102795159e-06,
+      "lower_bound": 1.826363931103284,
+      "upper_bound": 41.467689451596165,
+      "comparable": true
+    },
+    "schur_abs_vs_L_good_bounds_one_perp": {
+      "status": "ok",
+      "dimension": 2715,
+      "denominator_lambda_min_one_perp": 4.3608499189082736e-05,
+      "lower_bound": 1.4325100700331053,
+      "upper_bound": 7.025017502333561,
+      "comparable": true
+    },
+    "common_comparison_map_constructed": false,
+    "exact_restriction_identity_observed": false,
+    "two_sided_bounds_observed": true
+  },
+  "domination_ratio_matrix_free_diagnostics": null,
+  "domination_ratio_restricted_sector_diagnostics": null,
+  "domination_halo_growth_diagnostics": null,
+  "domination_coarse_quotient_diagnostics": null,
+  "domination_row_pairing_diagnostics": null,
+  "Q_helical_lift_diagnostics": null,
+  "Q_helical_coupling_certificate_diagnostics": null,
+  "schur_complement_ok": true,
+  "verdict": "schur_psd",
+  "c0": 0.1111111111111111,
+  "candidate_only": true,
+  "theorem_promoted": false
+}

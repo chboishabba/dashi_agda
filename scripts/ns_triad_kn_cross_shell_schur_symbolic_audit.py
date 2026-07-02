@@ -27,7 +27,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
-from scipy.linalg import cho_factor, cho_solve, eigh
+from scipy.linalg import cho_factor, cho_solve, eigh, solve
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import connected_components
 from scipy.sparse.linalg import LinearOperator, eigsh, lobpcg
@@ -483,6 +483,67 @@ def _extract_blocks(
     return {"M_GG": M_GG, "M_GC": M_GC, "M_CC": M_CC}
 
 
+def _schur_complement_from_blocks(
+    A_GG: np.ndarray,
+    A_GC: np.ndarray,
+    A_CC: np.ndarray,
+) -> np.ndarray:
+    """Return the Schur complement on the C block."""
+
+    if A_GG.shape[0] == 0:
+        return np.asarray(A_CC, dtype=np.float64)
+    solved = solve(np.asarray(A_GG, dtype=np.float64), np.asarray(A_GC, dtype=np.float64))
+    return np.asarray(A_CC - A_GC.T @ solved, dtype=np.float64)
+
+
+def _schur_lift_operator(
+    A_GG: np.ndarray,
+    A_GC: np.ndarray,
+) -> np.ndarray:
+    """Return the harmonic extension map x_C -> (x_G, x_C) for a block operator."""
+
+    nc = int(A_GC.shape[1])
+    if A_GG.shape[0] == 0:
+        return np.eye(nc, dtype=np.float64)
+    harmonic = -solve(np.asarray(A_GG, dtype=np.float64), np.asarray(A_GC, dtype=np.float64))
+    return np.vstack([harmonic, np.eye(nc, dtype=np.float64)])
+
+
+def _schur_lift_identity_diagnostics(
+    A_block: np.ndarray,
+    ng: int,
+    *,
+    tol: float = 1.0e-10,
+) -> dict[str, Any]:
+    """Diagnose the exact Schur-lift identity x^T S x = (Jx)^T A (Jx)."""
+
+    n = int(A_block.shape[0])
+    if ng < 0 or ng > n:
+        raise ValueError(f"invalid G size ng={ng} for block dimension n={n}")
+    c_indices = np.arange(ng, n, dtype=np.int64)
+    g_indices = np.arange(ng, dtype=np.int64)
+    blocks = _extract_blocks(np.asarray(A_block, dtype=np.float64), g_indices, c_indices)
+    schur = _schur_complement_from_blocks(blocks["M_GG"], blocks["M_GC"], blocks["M_CC"])
+    lift = _schur_lift_operator(blocks["M_GG"], blocks["M_GC"])
+    pulled_back = np.asarray(lift.T @ A_block @ lift, dtype=np.float64)
+    defect = 0.5 * ((pulled_back - schur) + (pulled_back - schur).T)
+    defect_norm = float(np.linalg.norm(defect, ord=2)) if defect.size else 0.0
+    defect_max_abs = float(np.max(np.abs(defect))) if defect.size else 0.0
+    return {
+        "status": "ok",
+        "g_dim": int(ng),
+        "c_dim": int(n - ng),
+        "lift_shape": [int(v) for v in lift.shape],
+        "schur_shape": [int(v) for v in schur.shape],
+        "identity_holds": bool(defect_max_abs <= float(tol)),
+        "defect_operator_norm": defect_norm,
+        "defect_max_abs": defect_max_abs,
+        "tolerance": float(tol),
+        "schur_trace": float(np.trace(schur)) if schur.size else 0.0,
+        "pulled_back_trace": float(np.trace(pulled_back)) if pulled_back.size else 0.0,
+    }
+
+
 def _sym_eigvals(mat: np.ndarray) -> np.ndarray:
     """Symmetric eigenvalues only."""
     sym = 0.5 * (mat + mat.T)
@@ -895,6 +956,243 @@ def _signed_factorization_diagnostics(
         "domination_ratio_sup_one_perp": domination_ratio,
         "domination_holds_strictly_observed": domination_holds,
         "good_bad_commutator_fro": float(np.linalg.norm(commutator, ord="fro")),
+    }
+
+
+def _projected_quadratic_form_comparison(
+    numerator: np.ndarray,
+    denominator: np.ndarray,
+    *,
+    tol: float = 1.0e-10,
+) -> dict[str, Any]:
+    """Compare two symmetric forms on 1^⊥ via generalized eigenvalue bounds.
+
+    Returns observed constants c, C such that
+
+        c * denominator <= numerator <= C * denominator
+
+    on 1^⊥ whenever the denominator is coercive there.
+    """
+
+    num_red = _reduced_one_perp(np.asarray(numerator, dtype=np.float64))
+    den_red = _reduced_one_perp(np.asarray(denominator, dtype=np.float64))
+    if den_red.size == 0:
+        return {
+            "status": "trivial",
+            "dimension": int(num_red.shape[0]),
+            "comparable": False,
+        }
+
+    den_eigs = _sym_eigvals(den_red)
+    den_lambda_min = float(np.min(den_eigs)) if den_eigs.size else None
+    if den_lambda_min is None or den_lambda_min <= float(tol):
+        return {
+            "status": "denominator_not_coercive",
+            "dimension": int(den_red.shape[0]),
+            "denominator_lambda_min_one_perp": den_lambda_min,
+            "comparable": False,
+        }
+
+    eigs = np.asarray(eigh(num_red, den_red, eigvals_only=True, driver="gvd"), dtype=np.float64)
+    return {
+        "status": "ok",
+        "dimension": int(den_red.shape[0]),
+        "denominator_lambda_min_one_perp": den_lambda_min,
+        "lower_bound": float(np.min(eigs)) if eigs.size else 0.0,
+        "upper_bound": float(np.max(eigs)) if eigs.size else 0.0,
+        "comparable": True,
+    }
+
+
+def _gate2a_transport_margin_diagnostics(
+    *,
+    schur_neg: np.ndarray,
+    schur_abs: np.ndarray,
+    L_bad: np.ndarray,
+    L_good: np.ndarray,
+    seam_extremizer: np.ndarray,
+    seam_rho: float,
+    coarse_abs_lower: float | None,
+    coarse_neg_upper: float | None,
+    tol: float = 1.0e-12,
+) -> dict[str, Any]:
+    """Extremizer-aware Gate 2 transport ledger on the observed seam rho vector."""
+
+    x = _project_mean_zero(np.asarray(seam_extremizer, dtype=np.float64))
+    x_norm = float(np.linalg.norm(x))
+    if x_norm <= tol:
+        return {
+            "status": "degenerate_extremizer",
+            "transport_margin_positive_observed": False,
+        }
+    x /= x_norm
+
+    def _quad(mat: np.ndarray) -> float:
+        sym = np.asarray(0.5 * (mat + mat.T), dtype=np.float64)
+        return float(x @ (sym @ x))
+
+    q_good = _quad(L_good)
+    q_bad = _quad(L_bad)
+    q_abs = _quad(schur_abs)
+    q_neg = _quad(schur_neg)
+
+    if q_good <= tol or q_bad <= tol or q_abs <= tol:
+        return {
+            "status": "nonpositive_directional_denominator",
+            "q_good": q_good,
+            "q_bad": q_bad,
+            "q_abs": q_abs,
+            "q_neg": q_neg,
+            "transport_margin_positive_observed": False,
+        }
+
+    abs_directional = q_abs / q_good
+    neg_directional = q_neg / q_bad
+    directional_factor = neg_directional / abs_directional
+    transported_directional_ratio = q_neg / q_abs
+
+    coarse_factor = None
+    coarse_transported = None
+    if coarse_abs_lower is not None and coarse_abs_lower > tol and coarse_neg_upper is not None:
+        coarse_factor = float(coarse_neg_upper / coarse_abs_lower)
+        coarse_transported = float(coarse_factor * seam_rho)
+
+    return {
+        "status": "ok",
+        "q_good_on_seam_extremizer": q_good,
+        "q_bad_on_seam_extremizer": q_bad,
+        "q_schur_abs_on_seam_extremizer": q_abs,
+        "q_schur_neg_on_seam_extremizer": q_neg,
+        "seam_rho_observed": float(seam_rho),
+        "schur_abs_to_L_good_directional_ratio": float(abs_directional),
+        "schur_neg_to_L_bad_directional_ratio": float(neg_directional),
+        "directional_transport_factor": float(directional_factor),
+        "directional_transported_ratio": float(transported_directional_ratio),
+        "coarse_transport_factor": coarse_factor,
+        "coarse_transported_upper_bound": coarse_transported,
+        "directional_improvement_over_coarse": (
+            float(coarse_transported / transported_directional_ratio)
+            if coarse_transported is not None and transported_directional_ratio > tol
+            else None
+        ),
+        "transport_margin_positive_observed": bool(transported_directional_ratio < 1.0),
+    }
+
+
+def _gate2a_schur_sign_split_comparison_diagnostics(
+    *,
+    S_C: np.ndarray,
+    Ln_block: np.ndarray,
+    La_block: np.ndarray,
+    ng: int,
+    c0: float = C0,
+    seam_extremizer: np.ndarray | None = None,
+    seam_rho: float | None = None,
+    tol: float = 1.0e-10,
+) -> dict[str, Any]:
+    """Compare Schur(L_neg), Schur(L_abs) against seam L_bad, L_good.
+
+    This is the next Gate 2-A comparison surface:
+
+      Schur(L_abs) ?~ L_good
+      Schur(L_neg) ?~ L_bad
+
+    on 1_C^⊥, together with the linearity-defect audit for
+
+      Schur(L_neg - c0 L_abs) ?= Schur(L_neg) - c0 Schur(L_abs).
+    """
+
+    sym_sc = np.asarray(0.5 * (S_C + S_C.T), dtype=np.float64)
+    n = int(sym_sc.shape[0])
+    if n <= 1:
+        return {
+            "audit_requested": True,
+            "status": "trivial",
+            "c_dim": n,
+        }
+
+    total_dim = int(Ln_block.shape[0])
+    if Ln_block.shape != La_block.shape or total_dim != int(La_block.shape[0]):
+        raise ValueError("Ln_block and La_block must have matching square shapes")
+    if ng < 0 or ng > total_dim:
+        raise ValueError(f"invalid G size ng={ng} for total block dimension {total_dim}")
+
+    c_indices = np.arange(ng, total_dim, dtype=np.int64)
+    g_indices = np.arange(ng, dtype=np.int64)
+
+    ln_blocks = _extract_blocks(np.asarray(Ln_block, dtype=np.float64), g_indices, c_indices)
+    la_blocks = _extract_blocks(np.asarray(La_block, dtype=np.float64), g_indices, c_indices)
+
+    schur_neg = _schur_complement_from_blocks(
+        ln_blocks["M_GG"], ln_blocks["M_GC"], ln_blocks["M_CC"]
+    )
+    schur_abs = _schur_complement_from_blocks(
+        la_blocks["M_GG"], la_blocks["M_GC"], la_blocks["M_CC"]
+    )
+    schur_mix_linear = np.asarray(schur_neg - float(c0) * schur_abs, dtype=np.float64)
+
+    L_good, L_bad, _Q = _signed_split_from_schur(sym_sc)
+
+    def _matrix_defect(a: np.ndarray, b: np.ndarray) -> dict[str, Any]:
+        defect = np.asarray(a - b, dtype=np.float64)
+        base = max(float(np.linalg.norm(b, ord=2)), 1.0e-300)
+        fro_base = max(float(np.linalg.norm(b, ord="fro")), 1.0e-300)
+        max_abs = float(np.max(np.abs(defect))) if defect.size else 0.0
+        return {
+            "operator_norm": float(np.linalg.norm(defect, ord=2)) if defect.size else 0.0,
+            "fro_norm": float(np.linalg.norm(defect, ord="fro")) if defect.size else 0.0,
+            "max_abs": max_abs,
+            "relative_operator_norm": (
+                float(np.linalg.norm(defect, ord=2)) / base if defect.size else 0.0
+            ),
+            "relative_fro_norm": (
+                float(np.linalg.norm(defect, ord="fro")) / fro_base if defect.size else 0.0
+            ),
+            "exact_observed": bool(max_abs <= float(tol)),
+        }
+
+    schur_neg_vs_bad = _matrix_defect(schur_neg, L_bad)
+    schur_abs_vs_good = _matrix_defect(schur_abs, L_good)
+    schur_linearity_defect = _matrix_defect(sym_sc, schur_mix_linear)
+
+    neg_bounds = _projected_quadratic_form_comparison(schur_neg, L_bad, tol=tol)
+    abs_bounds = _projected_quadratic_form_comparison(schur_abs, L_good, tol=tol)
+    transport_margin_diag = None
+    if seam_extremizer is not None and seam_rho is not None:
+        transport_margin_diag = _gate2a_transport_margin_diagnostics(
+            schur_neg=schur_neg,
+            schur_abs=schur_abs,
+            L_bad=L_bad,
+            L_good=L_good,
+            seam_extremizer=seam_extremizer,
+            seam_rho=float(seam_rho),
+            coarse_abs_lower=abs_bounds.get("lower_bound") if abs_bounds.get("status") == "ok" else None,
+            coarse_neg_upper=neg_bounds.get("upper_bound") if neg_bounds.get("status") == "ok" else None,
+            tol=tol,
+        )
+
+    return {
+        "audit_requested": True,
+        "status": "ok",
+        "c_dim": n,
+        "g_dim": int(ng),
+        "comparison_target": (
+            "Compare Schur(L_neg), Schur(L_abs) to seam sign split L_bad, L_good on 1_C^perp."
+        ),
+        "schur_linearity_identity_observed": bool(schur_linearity_defect["exact_observed"]),
+        "schur_linearity_defect": schur_linearity_defect,
+        "schur_neg_vs_L_bad": schur_neg_vs_bad,
+        "schur_abs_vs_L_good": schur_abs_vs_good,
+        "schur_neg_vs_L_bad_bounds_one_perp": neg_bounds,
+        "schur_abs_vs_L_good_bounds_one_perp": abs_bounds,
+        "transport_margin_diagnostics": transport_margin_diag,
+        "common_comparison_map_constructed": False,
+        "exact_restriction_identity_observed": bool(
+            schur_neg_vs_bad["exact_observed"] and schur_abs_vs_good["exact_observed"]
+        ),
+        "two_sided_bounds_observed": bool(
+            neg_bounds.get("status") == "ok" and abs_bounds.get("status") == "ok"
+        ),
     }
 
 
@@ -3975,6 +4273,7 @@ def _audit_row(
     dense_schur_threshold: int = DENSE_SCHUR_THRESHOLD,
     audit_effective_laplacian_signs: bool = False,
     audit_signed_factorization: bool = False,
+    audit_gate2a_schur_sign_split_comparison: bool = False,
     audit_domination_ratio_matrix_free: bool = False,
     domination_row_chunk: int = DEFAULT_DOMINATION_CHUNK_SIZE,
     domination_eps: float = DEFAULT_DOMINATION_EPS,
@@ -4114,6 +4413,7 @@ def _audit_row(
     row_sum_diag: dict[str, Any] | None = None
     sign_audit_diag: dict[str, Any] | None = None
     signed_factorization_diag: dict[str, Any] | None = None
+    gate2a_comparison_diag: dict[str, Any] | None = None
     domination_ratio_diag: dict[str, Any] | None = None
     domination_restricted_diag: dict[str, Any] | None = None
     domination_halo_diag: dict[str, Any] | None = None
@@ -4182,6 +4482,32 @@ def _audit_row(
                     audit_angular_frame=audit_extremizer_angular_frame,
                 )
                 print("done.")
+            if audit_gate2a_schur_sign_split_comparison:
+                gate2a_comparison_diag = _gate2a_schur_sign_split_comparison_diagnostics(
+                    S_C=S_C_dense,
+                    Ln_block=Ln_block[perm][:, perm],
+                    La_block=La_block[perm][:, perm],
+                    ng=ng,
+                    c0=C0,
+                    seam_extremizer=(
+                        np.asarray((domination_ratio_diag or {}).get("_rho_vec_full", []), dtype=np.float64)
+                        if domination_ratio_diag is not None and (domination_ratio_diag or {}).get("_rho_vec_full") is not None
+                        else None
+                    ),
+                    seam_rho=(
+                        float((domination_ratio_diag or {}).get("domination_ratio_sup_one_perp"))
+                        if domination_ratio_diag is not None and (domination_ratio_diag or {}).get("domination_ratio_sup_one_perp") is not None
+                        else None
+                    ),
+                )
+            if audit_gate2a_schur_sign_split_comparison and gate2a_comparison_diag is None:
+                gate2a_comparison_diag = _gate2a_schur_sign_split_comparison_diagnostics(
+                    S_C=S_C_dense,
+                    Ln_block=Ln_block[perm][:, perm],
+                    La_block=La_block[perm][:, perm],
+                    ng=ng,
+                    c0=C0,
+                )
         else:
             # Matrix-free eigsh path — avoids materialising S_C for large nc
             print(f"  Computing S_C bottom eigenvalues (matrix-free eigsh, n={nc})...",
@@ -4313,6 +4639,29 @@ def _audit_row(
             signed_factorization_diag = {
                 "audit_requested": True,
                 "dense_audit_available": False,
+            }
+    if audit_gate2a_schur_sign_split_comparison:
+        if gate2a_comparison_diag is not None:
+            abs_bounds = gate2a_comparison_diag.get("schur_abs_vs_L_good_bounds_one_perp") or {}
+            neg_bounds = gate2a_comparison_diag.get("schur_neg_vs_L_bad_bounds_one_perp") or {}
+            transport_diag = gate2a_comparison_diag.get("transport_margin_diagnostics") or {}
+            print(
+                "  Gate 2-A comparison audit: "
+                f"linearity_exact={gate2a_comparison_diag['schur_linearity_identity_observed']}, "
+                f"abs_bounds=[{abs_bounds.get('lower_bound')}, {abs_bounds.get('upper_bound')}], "
+                f"neg_bounds=[{neg_bounds.get('lower_bound')}, {neg_bounds.get('upper_bound')}]"
+            )
+            if transport_diag.get("status") == "ok":
+                print(
+                    "  Gate 2-A transport ledger: "
+                    f"directional_ratio={transport_diag.get('directional_transported_ratio')}, "
+                    f"coarse_upper={transport_diag.get('coarse_transported_upper_bound')}, "
+                    f"improvement={transport_diag.get('directional_improvement_over_coarse')}"
+                )
+        else:
+            gate2a_comparison_diag = {
+                "audit_requested": True,
+                "status": "unavailable",
             }
     if audit_domination_ratio_matrix_free:
         if domination_ratio_diag is not None:
@@ -4495,6 +4844,7 @@ def _audit_row(
         "row_sum_diagnostics": row_sum_diag,
         "effective_laplacian_sign_diagnostics": sign_audit_diag,
         "signed_factorization_diagnostics": signed_factorization_diag,
+        "gate2a_schur_sign_split_comparison_diagnostics": gate2a_comparison_diag,
         "domination_ratio_matrix_free_diagnostics": domination_ratio_diag,
         "domination_ratio_restricted_sector_diagnostics": domination_restricted_diag,
         "domination_halo_growth_diagnostics": domination_halo_diag,
@@ -4614,6 +4964,7 @@ def _audit_row(
         "row_sum_diagnostics": row_sum_diag,
         "effective_laplacian_sign_diagnostics": sign_audit_diag,
         "signed_factorization_diagnostics": signed_factorization_diag,
+        "gate2a_schur_sign_split_comparison_diagnostics": gate2a_comparison_diag,
         "domination_ratio_matrix_free_diagnostics": domination_ratio_diag,
         "domination_ratio_restricted_sector_diagnostics": domination_restricted_diag,
         "domination_halo_growth_diagnostics": domination_halo_diag,
@@ -4702,6 +5053,24 @@ def _analyze(results: list[dict[str, Any]]) -> str:
                 f"lambda1(L_good)={factor_diag['L_good_lambda1']:.6e}, "
                 f"domination={factor_diag['domination_holds_strictly_observed']}"
             )
+        gate2a_diag = r.get("gate2a_schur_sign_split_comparison_diagnostics") or {}
+        if gate2a_diag.get("status") == "ok":
+            abs_bounds = gate2a_diag.get("schur_abs_vs_L_good_bounds_one_perp") or {}
+            neg_bounds = gate2a_diag.get("schur_neg_vs_L_bad_bounds_one_perp") or {}
+            lines.append(
+                f"N={r['N']}: Gate2A exact_identity={gate2a_diag['exact_restriction_identity_observed']}, "
+                f"linearity_exact={gate2a_diag['schur_linearity_identity_observed']}, "
+                f"abs_bounds=[{abs_bounds.get('lower_bound'):.6e}, {abs_bounds.get('upper_bound'):.6e}], "
+                f"neg_bounds=[{neg_bounds.get('lower_bound'):.6e}, {neg_bounds.get('upper_bound'):.6e}]"
+            )
+            transport_diag = gate2a_diag.get("transport_margin_diagnostics") or {}
+            if transport_diag.get("status") == "ok":
+                lines.append(
+                    f"N={r['N']}: Gate2A transport directional={transport_diag.get('directional_transported_ratio'):.6e}, "
+                    f"coarse_upper={transport_diag.get('coarse_transported_upper_bound'):.6e}, "
+                    f"improvement={transport_diag.get('directional_improvement_over_coarse'):.6e}, "
+                    f"margin_positive={transport_diag.get('transport_margin_positive_observed')}"
+                )
         mf_diag = r.get("domination_ratio_matrix_free_diagnostics") or {}
         if mf_diag.get("status") == "ok":
             lines.append(
@@ -4816,6 +5185,15 @@ def main() -> None:
         help=(
             "For dense S_C shells, decompose S_C = L_good - L_bad and report the "
             "observed domination ratio sup_{x ⟂ 1} x^T L_bad x / x^T L_good x."
+        ),
+    )
+    parser.add_argument(
+        "--audit-gate2a-schur-sign-split-comparison",
+        action="store_true",
+        help=(
+            "For dense shells, compare Schur(L_abs) and Schur(L_neg) against the seam "
+            "sign split L_good and L_bad, including exact-identity defects and observed "
+            "two-sided quadratic-form bounds on 1_C^perp."
         ),
     )
     parser.add_argument(
@@ -5066,6 +5444,7 @@ def main() -> None:
             for flag in (
                 args.audit_effective_laplacian_signs,
                 args.audit_signed_factorization,
+                args.audit_gate2a_schur_sign_split_comparison,
                 args.audit_domination_restricted_sector,
                 args.audit_domination_halo_growth,
                 args.audit_domination_coarse_quotient,
@@ -5123,6 +5502,7 @@ def main() -> None:
                 dense_schur_threshold=args.dense_schur_threshold,
                 audit_effective_laplacian_signs=args.audit_effective_laplacian_signs,
                 audit_signed_factorization=args.audit_signed_factorization,
+                audit_gate2a_schur_sign_split_comparison=args.audit_gate2a_schur_sign_split_comparison,
                 audit_domination_ratio_matrix_free=effective_full_domination,
                 domination_row_chunk=args.domination_row_chunk,
                 domination_eps=args.domination_eps,
@@ -5180,6 +5560,14 @@ def main() -> None:
     dense_domination_rows = [
         r for r in results
         if (r.get("signed_factorization_diagnostics") or {}).get("dense_audit_available")
+    ]
+    gate2a_rows = [
+        r for r in results
+        if (r.get("gate2a_schur_sign_split_comparison_diagnostics") or {}).get("status") == "ok"
+    ]
+    gate2a_transport_rows = [
+        r for r in gate2a_rows
+        if ((r.get("gate2a_schur_sign_split_comparison_diagnostics") or {}).get("transport_margin_diagnostics") or {}).get("status") == "ok"
     ]
     domination_ratio_below_one_observed = bool(dense_domination_rows) and all(
         (r["signed_factorization_diagnostics"] or {}).get("domination_holds_strictly_observed") is True
@@ -5271,12 +5659,43 @@ def main() -> None:
         "signedDominationProbeInstalled": bool(
             any(
                 r.get("signed_factorization_diagnostics") is not None
+                or r.get("gate2a_schur_sign_split_comparison_diagnostics") is not None
                 or r.get("domination_ratio_matrix_free_diagnostics") is not None
                 for r in results
             )
         ),
         "signedDominationRatioBelowOneObserved": domination_ratio_below_one_observed,
         "signedDominationRatioUniformlyBounded": False,
+        "gate2aSchurSignSplitComparisonAuditInstalled": bool(gate2a_rows),
+        "gate2aExactRestrictionIdentityObserved": bool(
+            gate2a_rows
+            and all(
+                (r["gate2a_schur_sign_split_comparison_diagnostics"] or {}).get(
+                    "exact_restriction_identity_observed"
+                )
+                is True
+                for r in gate2a_rows
+            )
+        ),
+        "gate2aObservedTwoSidedQuadraticFormBounds": bool(
+            gate2a_rows
+            and all(
+                (r["gate2a_schur_sign_split_comparison_diagnostics"] or {}).get(
+                    "two_sided_bounds_observed"
+                )
+                is True
+                for r in gate2a_rows
+            )
+        ),
+        "gate2aTransportMarginPositiveObserved": bool(
+            gate2a_transport_rows
+            and all(
+                (((r["gate2a_schur_sign_split_comparison_diagnostics"] or {}).get(
+                    "transport_margin_diagnostics"
+                ) or {}).get("transport_margin_positive_observed") is True)
+                for r in gate2a_transport_rows
+            )
+        ),
         "restrictedSectorDominationAuditInstalled": bool(restricted_rows),
         "haloGrowthDominationAuditInstalled": bool(halo_rows),
         "coarseQuotientDominationAuditInstalled": bool(quotient_rows),

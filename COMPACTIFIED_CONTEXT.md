@@ -2,6 +2,46 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-07-02 NS Gate 1 / Gate 2-A progress sync:
+  Gate 1 is no longer a shell-search problem. The helical coupling certificate
+  `Q_N = D_N + E_N` with
+  `kappa_N = ||D_N^(-1/2) E_N D_N^(-1/2)|| < 1` is now observed on the
+  seam carrier for `N = 6, 8, 10, 12, 14, 16`, with the current numerical band
+  approximately `0.5448 .. 0.6004`. The dense lifted overlay OOM boundary at
+  `N = 14` was crossed by the matrix-free certificate path in
+  `scripts/ns_triad_kn_cross_shell_schur_symbolic_audit.py`, so the current
+  implementation boundary is no longer dense Schur materialization but the
+  missing uniform proof of the helical block floor and relative coupling bound.
+  Gate 2 is now explicitly separated as seam-to-leakage transport for the exact
+  normalized Gram operator
+  `K_N(A) = L_abs(A)^(-1/2) L_neg(A) L_abs(A)^(-1/2)`. Gate 2-A now has three
+  explicit layers recorded in the repo: operator-specific exact Schur lifts
+  `J_N^abs` / `J_N^neg`; the normalized carrier mismatch note; and the new
+  dense comparison audit between `Schur(L_abs)`, `Schur(L_neg)` and the seam
+  sign split `L_good`, `L_bad`. The next live theorem target is therefore:
+  prove uniform two-sided quadratic-form bounds between `Schur(L_abs)` /
+  `Schur(L_neg)` and `L_good` / `L_bad`, then show the resulting constants
+  preserve the Gate 1 margin when transported to `K_N(A)`. The first dense
+  comparison run on `N = 6, 8, 10` now rules out the naive exact-identity
+  route: exact restriction identity was not observed, and Schur linearity
+  `Schur(L_neg - c0 L_abs) = Schur(L_neg) - c0 Schur(L_abs)` was not observed.
+  However, two-sided quadratic-form comparability was observed on all three
+  shells. The `Schur(L_abs)` versus `L_good` bounds were relatively stable
+  (`~1.41 .. 7.03`), while `Schur(L_neg)` versus `L_bad` was much looser
+  (`~1.82 .. 47.8`) but still positive/comparable on tested shells. So the
+  Gate 2-A burden is now clearly a constant-ledger theorem, not an identity
+  theorem. The first coarse transport ledger has also now been tried on the
+  same dense shells by combining seam `rho_N` with the worst-case quotient
+  `C_neg^+ / c_abs^-`, and it fails badly: the resulting upper bounds are about
+  `17.7`, `17.7`, and `20.5` for `N = 6, 8, 10`. So the coarse transport route
+  is ruled out as the primary proof path. The live next ansatz is a sharper
+  transport ledger, likely extremizer-aware or quotient-aware, using the
+  observed seam `rho_N` direction rather than only worst-case comparison
+  constants.
+  This remains fail-closed and non-promoting: Gate 1 uniformity is unproved,
+  Gate 2 transport is unproved, GPU/Vulkan remains scout-only, and no NS/Clay
+  promotion surface changes.
+
 - 2026-06-24 ACL Schur-test proof repair:
   `NSTriadKNMixedTailACLOperatorNormAuditReceipt` now separates the checked
   sampled finite-shell witness from the open profile-independent kernel-sum

@@ -6,6 +6,12 @@ open import Data.Nat.Base using (ℕ; _≤_)
 open import DASHI.Core.Prelude using (_×_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_; _<ℝ_; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; -ℝ_; _-ℝ_)
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
+open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
+  ( SourceAuthorityId
+  ; VerificationStatus
+  ; dashi-internal-proof
+  ; mixedReducer
+  )
 
 import DASHI.Physics.YangMills.GraphCombinatorics as GraphCombinatorics
 import DASHI.Physics.YangMills.BalabanLargeFieldSuppression as LargeField
@@ -55,10 +61,54 @@ postulate
     LocalLatticeAnalyticDischargePackage
     → Assembly.StepVSpatialKPCertificate
 
+record StepVDownstreamInternalisationKernel : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    localLatticeStepV :
+      LocalLatticeAnalyticDischargePackage
+      → Assembly.StepVSpatialKPCertificate
+
+    yangMillsEndpoint :
+      LocalLatticeAnalyticDischargePackage
+      → Assembly.P12P19RGTransferPackage
+      → Assembly.FixedLatticeGapDischargePackage
+      → Assembly.ThermodynamicLimitPackage
+      → Assembly.ContinuumLimitPackage
+      → Assembly.OSWightmanEndpointPackage
+      → Assembly.YangMillsQuantumFieldTheory × Assembly.PhysicalMassGap
+
+    noClayPromotion :
+      clayYangMillsPromoted ≡ false
+
+currentStepVDownstreamInternalisationKernel :
+  StepVDownstreamInternalisationKernel
+currentStepVDownstreamInternalisationKernel = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "LocalLatticeDischargePipeline.{postulatedLocalLatticeStepVFromAnalyticDischarge,postulatedYangMillsEndpointFromLocalLatticeAndTransferPackages}"
+  ; status = mixedReducer
+  ; localLatticeStepV =
+      postulatedLocalLatticeStepVFromAnalyticDischarge
+  ; yangMillsEndpoint =
+      postulatedYangMillsEndpointFromLocalLatticeAndTransferPackages
+  ; noClayPromotion = refl
+  }
+
 LocalLatticeStepVFromAnalyticDischarge :
   LocalLatticeAnalyticDischargePackage
   → Assembly.StepVSpatialKPCertificate
-LocalLatticeStepVFromAnalyticDischarge pkg = postulatedLocalLatticeStepVFromAnalyticDischarge pkg
+LocalLatticeStepVFromAnalyticDischarge pkg =
+  StepVDownstreamInternalisationKernel.localLatticeStepV
+    currentStepVDownstreamInternalisationKernel
+    pkg
 
 postulate
   postulatedYangMillsEndpointFromLocalLatticeAndTransferPackages :
@@ -79,7 +129,9 @@ YangMillsEndpointFromLocalLatticeAndTransferPackages :
   → Assembly.OSWightmanEndpointPackage
   → Assembly.YangMillsQuantumFieldTheory × Assembly.PhysicalMassGap
 YangMillsEndpointFromLocalLatticeAndTransferPackages localPkg rgPkg gapPkg thermoPkg contPkg osPkg =
-  postulatedYangMillsEndpointFromLocalLatticeAndTransferPackages localPkg rgPkg gapPkg thermoPkg contPkg osPkg
+  StepVDownstreamInternalisationKernel.yangMillsEndpoint
+    currentStepVDownstreamInternalisationKernel
+    localPkg rgPkg gapPkg thermoPkg contPkg osPkg
 
 localLatticeNoClayPromotion :
   LocalLatticeAnalyticDischargePackage

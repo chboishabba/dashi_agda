@@ -24,6 +24,18 @@ The first executable slice is now present as
 `scripts/run_stellar_composition_proxy_diagnostic.py` with the Agda guard
 `DASHI.Unified.StellarCompositionProxyReceipt`; it remains proxy-only and
 non-promoting.
+For the current NS proof-audit lane, the live route is now:
+Gate 1 uniform helical Schur domination, then Gate 2 seam-to-leakage
+transport. The strongest current status surface is
+`docs/ns_triad_kn_cross_shell_signed_domination.md`, which records repeated
+finite-shell helical coupling evidence through `N = 16`; the first transport
+lemma is tracked in
+`docs/ns_triad_kn_gate2a_normalized_carrier_agreement.md`, and the exact
+seam-to-leakage roadmap is tracked in
+`docs/ns_triad_kn_gate2_seam_to_leakage_transfer.md`. These remain
+fail-closed/non-promoting: Gate 1 is not yet uniform in `N`, Gate 2 transport
+to the exact normalized Gram operator `K_N(A)` is not yet proved, and GPU
+surfaces remain scout-only.
 The current trauma/body-memory biology tranche is candidate-only and
 clinical-adjacent, not diagnostic or therapeutic authority:
 `DASHI.Biology.BodyKeepsScoreResidualBridge`,
