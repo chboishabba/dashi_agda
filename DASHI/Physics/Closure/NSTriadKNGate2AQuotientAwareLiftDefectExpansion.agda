@@ -275,28 +275,28 @@ record NSTriadKNGate2AQuotientAwareLiftDefectExpansion : Setω where
       principalCrossQuadraticSplitRecorded ≡ true
 
     principalTermBounded : Bool
-    principalTermBoundedIsTrue :
-      principalTermBounded ≡ true
+    principalTermBoundedIsFalse :
+      principalTermBounded ≡ false
 
     crossDefectBounded : Bool
-    crossDefectBoundedIsTrue :
-      crossDefectBounded ≡ true
+    crossDefectBoundedIsFalse :
+      crossDefectBounded ≡ false
 
     pureDefectBounded : Bool
-    pureDefectBoundedIsTrue :
-      pureDefectBounded ≡ true
+    pureDefectBoundedIsFalse :
+      pureDefectBounded ≡ false
 
     defectBudgetSubcritical : Bool
-    defectBudgetSubcriticalIsTrue :
-      defectBudgetSubcritical ≡ true
+    defectBudgetSubcriticalIsFalse :
+      defectBudgetSubcritical ≡ false
 
     defectTermsUniformlyBounded : Bool
-    defectTermsUniformlyBoundedIsTrue :
-      defectTermsUniformlyBounded ≡ true
+    defectTermsUniformlyBoundedIsFalse :
+      defectTermsUniformlyBounded ≡ false
 
     quotientAwareTransportProved : Bool
-    quotientAwareTransportProvedIsTrue :
-      quotientAwareTransportProved ≡ true
+    quotientAwareTransportProvedIsFalse :
+      quotientAwareTransportProved ≡ false
 
     fullNSPromoted : Bool
     fullNSPromotedIsFalse :
@@ -360,17 +360,17 @@ canonicalNSTriadKNGate2AQuotientAwareLiftDefectExpansion =
     refl
     true
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
     false
     refl

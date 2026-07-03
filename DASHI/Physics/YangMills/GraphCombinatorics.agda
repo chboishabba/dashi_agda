@@ -614,11 +614,11 @@ record ReducedSkeletonComplexityControlledByDiameter (G : Graph) : Set₁ where
       (rrs : RootedReducedSkeleton G r X) →
       ReducedSkeletonComplexityMeasure r X rrs ≤ K * diam_G {G} X + B
 
-postulate
-  NormalizedLengthComplexityBound :
-    ∀ {G : Graph} (r : Graph.Vertex G) (X : List (Graph.Vertex G)) →
-    (rrs : RootedReducedSkeleton G r X) →
-    ReducedSkeletonComplexityMeasure r X rrs ≤ 1 * diam_G {G} X + 0
+NormalizedLengthComplexityBound :
+  ∀ {G : Graph} (r : Graph.Vertex G) (X : List (Graph.Vertex G)) →
+  (rrs : RootedReducedSkeleton G r X) →
+  ReducedSkeletonComplexityMeasure r X rrs ≤ 1 * diam_G {G} X + 0
+NormalizedLengthComplexityBound r X rrs = ≤-refl
 
 postulatedReducedSkeletonComplexityControlledByDiameter :
   ∀ (G : Graph) → ReducedSkeletonComplexityControlledByDiameter G

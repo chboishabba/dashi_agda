@@ -6,6 +6,12 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
+open import DASHI.Physics.Closure.NSTriadKNGate2ASampledComparisonEnvelope
+  using ( NSTriadKNGate2ASampledComparisonEnvelope
+        ; canonicalNSTriadKNGate2ASampledComparisonEnvelope
+        )
+import DASHI.Physics.Closure.NSTriadKNGate2ASampledComparisonEnvelope
+  as Envelope
 open import DASHI.Physics.Closure.NSTriadKNGate2AConeRestrictedDefectBudget using
   ( NSTriadKNGate2AConeRestrictedDefectBudget
   ; canonicalNSTriadKNGate2AConeRestrictedDefectBudget
@@ -118,6 +124,31 @@ canonicalDefectBudgetConsumptionText : String
 canonicalDefectBudgetConsumptionText =
   "EP3 now consumes the quotient-aware defect expansion directly: principal reference transport supplies the leading directional term, while the cross-defect and pure-defect corrections must fit inside a subcritical eta_defect budget on E_N(epsilon)."
 
+toEnvelopeShell : NSTriadKNGate2AEP3SampledShell → Envelope.SampledShell
+toEnvelopeShell shell6DirectionalLedger = Envelope.shell6
+toEnvelopeShell shell8DirectionalLedger = Envelope.shell8
+toEnvelopeShell shell10DirectionalLedger = Envelope.shell10
+
+ep3SampledCoarseEnvelopeRejected :
+  (s : NSTriadKNGate2AEP3SampledShell) →
+  Envelope.coarseEnvelopeRouteCloses (toEnvelopeShell s) ≡ false
+ep3SampledCoarseEnvelopeRejected shell6DirectionalLedger =
+  Envelope.sampledCoarseEnvelopeRouteRejected Envelope.shell6
+ep3SampledCoarseEnvelopeRejected shell8DirectionalLedger =
+  Envelope.sampledCoarseEnvelopeRouteRejected Envelope.shell8
+ep3SampledCoarseEnvelopeRejected shell10DirectionalLedger =
+  Envelope.sampledCoarseEnvelopeRouteRejected Envelope.shell10
+
+ep3SampledDirectionalBelowQuarter :
+  (s : NSTriadKNGate2AEP3SampledShell) →
+  Envelope.directionalRouteBelowQuarter (toEnvelopeShell s) ≡ true
+ep3SampledDirectionalBelowQuarter shell6DirectionalLedger =
+  Envelope.sampledDirectionalRouteBelowQuarter Envelope.shell6
+ep3SampledDirectionalBelowQuarter shell8DirectionalLedger =
+  Envelope.sampledDirectionalRouteBelowQuarter Envelope.shell8
+ep3SampledDirectionalBelowQuarter shell10DirectionalLedger =
+  Envelope.sampledDirectionalRouteBelowQuarter Envelope.shell10
+
 record NSTriadKNGate2AEP3DirectionalTransportBudget : Setω where
   constructor mkNSTriadKNGate2AEP3DirectionalTransportBudget
   field
@@ -163,6 +194,12 @@ record NSTriadKNGate2AEP3DirectionalTransportBudget : Setω where
       quotientAwareDefectExpansion
         ≡ canonicalNSTriadKNGate2AQuotientAwareLiftDefectExpansion
 
+    sampledComparisonEnvelope :
+      NSTriadKNGate2ASampledComparisonEnvelope
+    sampledComparisonEnvelopeIsCanonical :
+      sampledComparisonEnvelope
+        ≡ canonicalNSTriadKNGate2ASampledComparisonEnvelope
+
     coneRestrictedDefectBudget :
       NSTriadKNGate2AConeRestrictedDefectBudget
     coneRestrictedDefectBudgetIsCanonical :
@@ -180,6 +217,14 @@ record NSTriadKNGate2AEP3DirectionalTransportBudget : Setω where
     sampledShellCount : Nat
     sampledShellCountIs3 :
       sampledShellCount ≡ 3
+
+    sampledCoarseEnvelopeRejectedProof :
+      (s : NSTriadKNGate2AEP3SampledShell) →
+      Envelope.coarseEnvelopeRouteCloses (toEnvelopeShell s) ≡ false
+
+    sampledDirectionalBelowQuarterProof :
+      (s : NSTriadKNGate2AEP3SampledShell) →
+      Envelope.directionalRouteBelowQuarter (toEnvelopeShell s) ≡ true
 
     ep3CoarseWorstCaseRouteRejected : Bool
     ep3CoarseWorstCaseRouteRejectedIsTrue :
@@ -206,20 +251,20 @@ record NSTriadKNGate2AEP3DirectionalTransportBudget : Setω where
       ep3QuotientAwareTransportAnsatzInstalled ≡ true
 
     ep3PrincipalTermBudgeted : Bool
-    ep3PrincipalTermBudgetedIsTrue :
-      ep3PrincipalTermBudgeted ≡ true
+    ep3PrincipalTermBudgetedIsFalse :
+      ep3PrincipalTermBudgeted ≡ false
 
     ep3CrossDefectBudgeted : Bool
-    ep3CrossDefectBudgetedIsTrue :
-      ep3CrossDefectBudgeted ≡ true
+    ep3CrossDefectBudgetedIsFalse :
+      ep3CrossDefectBudgeted ≡ false
 
     ep3PureDefectBudgeted : Bool
-    ep3PureDefectBudgetedIsTrue :
-      ep3PureDefectBudgeted ≡ true
+    ep3PureDefectBudgetedIsFalse :
+      ep3PureDefectBudgeted ≡ false
 
     ep3DefectBudgetSubcritical : Bool
-    ep3DefectBudgetSubcriticalIsTrue :
-      ep3DefectBudgetSubcritical ≡ true
+    ep3DefectBudgetSubcriticalIsFalse :
+      ep3DefectBudgetSubcritical ≡ false
 
     ep3DirectionalBudgetProved : Bool
     ep3DirectionalBudgetProvedIsFalse :
@@ -259,6 +304,8 @@ canonicalNSTriadKNGate2AEP3DirectionalTransportBudget =
     refl
     canonicalNSTriadKNGate2AQuotientAwareLiftDefectExpansion
     refl
+    canonicalNSTriadKNGate2ASampledComparisonEnvelope
+    refl
     canonicalNSTriadKNGate2AConeRestrictedDefectBudget
     refl
     canonicalDefectBudgetConsumptionText
@@ -267,6 +314,8 @@ canonicalNSTriadKNGate2AEP3DirectionalTransportBudget =
     refl
     3
     refl
+    ep3SampledCoarseEnvelopeRejected
+    ep3SampledDirectionalBelowQuarter
     true
     refl
     true
@@ -279,13 +328,13 @@ canonicalNSTriadKNGate2AEP3DirectionalTransportBudget =
     refl
     true
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
     false
     refl

@@ -129,16 +129,16 @@ record NSTriadKNGate2AConeWidthDefectScaling : Setω where
       crossDefectLinearInConeWidthStated ≡ true
 
     crossDefectLinearInConeWidthProved : Bool
-    crossDefectLinearInConeWidthProvedIsTrue :
-      crossDefectLinearInConeWidthProved ≡ true
+    crossDefectLinearInConeWidthProvedIsFalse :
+      crossDefectLinearInConeWidthProved ≡ false
 
     pureDefectQuadraticInConeWidthStated : Bool
     pureDefectQuadraticInConeWidthStatedIsTrue :
       pureDefectQuadraticInConeWidthStated ≡ true
 
     pureDefectQuadraticInConeWidthProved : Bool
-    pureDefectQuadraticInConeWidthProvedIsTrue :
-      pureDefectQuadraticInConeWidthProved ≡ true
+    pureDefectQuadraticInConeWidthProvedIsFalse :
+      pureDefectQuadraticInConeWidthProved ≡ false
 
     scalingPromoted : Bool
     scalingPromotedIsFalse :
@@ -176,11 +176,11 @@ canonicalNSTriadKNGate2AConeWidthDefectScaling =
     refl
     true
     refl
-    true
+    false
     refl
     true
     refl
-    true
+    false
     refl
     false
     refl

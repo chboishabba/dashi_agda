@@ -43,8 +43,10 @@ canonicalProofConsumptionText : String
 canonicalProofConsumptionText =
   "Concrete proof wiring: consume the combined cone defect estimate, the "
   ++ "linear-plus-quadratic cone-width envelope, and the quarter-margin "
-  ++ "lemma on the common twelfths carrier; the resulting NS seam budget "
-  ++ "closes with principal = 2/12, defect = 1/12, total = 3/12."
+  ++ "lemma on the common twelfths carrier; this installs the abstract "
+  ++ "budget shape only, while the actual NS seam budget remains open "
+  ++ "until the cone-width and quarter-margin witnesses are constructed "
+  ++ "on the true carrier."
 
 record NSTriadKNGate2AConeRestrictedDefectBudget : Setω where
   constructor mkNSTriadKNGate2AConeRestrictedDefectBudget
@@ -102,66 +104,66 @@ record NSTriadKNGate2AConeRestrictedDefectBudget : Setω where
       crossLedgerStated ≡ true
 
     crossLedgerProved : Bool
-    crossLedgerProvedIsTrue :
-      crossLedgerProved ≡ true
+    crossLedgerProvedIsFalse :
+      crossLedgerProved ≡ false
 
     pureLedgerStated : Bool
     pureLedgerStatedIsTrue :
       pureLedgerStated ≡ true
 
     pureLedgerProved : Bool
-    pureLedgerProvedIsTrue :
-      pureLedgerProved ≡ true
+    pureLedgerProvedIsFalse :
+      pureLedgerProved ≡ false
 
     combinedDefectBudgetStated : Bool
     combinedDefectBudgetStatedIsTrue :
       combinedDefectBudgetStated ≡ true
 
     combinedDefectBudgetProved : Bool
-    combinedDefectBudgetProvedIsTrue :
-      combinedDefectBudgetProved ≡ true
+    combinedDefectBudgetProvedIsFalse :
+      combinedDefectBudgetProved ≡ false
 
     principalTermBounded : Bool
-    principalTermBoundedIsTrue :
-      principalTermBounded ≡ true
+    principalTermBoundedIsFalse :
+      principalTermBounded ≡ false
 
     crossDefectBounded : Bool
-    crossDefectBoundedIsTrue :
-      crossDefectBounded ≡ true
+    crossDefectBoundedIsFalse :
+      crossDefectBounded ≡ false
 
     pureDefectBounded : Bool
-    pureDefectBoundedIsTrue :
-      pureDefectBounded ≡ true
+    pureDefectBoundedIsFalse :
+      pureDefectBounded ≡ false
 
     defectBudgetSubcritical : Bool
-    defectBudgetSubcriticalIsTrue :
-      defectBudgetSubcritical ≡ true
+    defectBudgetSubcriticalIsFalse :
+      defectBudgetSubcritical ≡ false
 
     -- EP3 directional budget booleans (consumer of this budget)
 
     ep3PrincipalTermBudgeted : Bool
-    ep3PrincipalTermBudgetedIsTrue :
-      ep3PrincipalTermBudgeted ≡ true
+    ep3PrincipalTermBudgetedIsFalse :
+      ep3PrincipalTermBudgeted ≡ false
 
     ep3CrossDefectBudgeted : Bool
-    ep3CrossDefectBudgetedIsTrue :
-      ep3CrossDefectBudgeted ≡ true
+    ep3CrossDefectBudgetedIsFalse :
+      ep3CrossDefectBudgeted ≡ false
 
     ep3PureDefectBudgeted : Bool
-    ep3PureDefectBudgetedIsTrue :
-      ep3PureDefectBudgeted ≡ true
+    ep3PureDefectBudgetedIsFalse :
+      ep3PureDefectBudgeted ≡ false
 
     ep3DefectBudgetSubcritical : Bool
-    ep3DefectBudgetSubcriticalIsTrue :
-      ep3DefectBudgetSubcritical ≡ true
+    ep3DefectBudgetSubcriticalIsFalse :
+      ep3DefectBudgetSubcritical ≡ false
 
     ep3DirectionalBudgetProved : Bool
-    ep3DirectionalBudgetProvedIsTrue :
-      ep3DirectionalBudgetProved ≡ true
+    ep3DirectionalBudgetProvedIsFalse :
+      ep3DirectionalBudgetProved ≡ false
 
     ep3MarginClosingProved : Bool
-    ep3MarginClosingProvedIsTrue :
-      ep3MarginClosingProved ≡ true
+    ep3MarginClosingProvedIsFalse :
+      ep3MarginClosingProved ≡ false
 
     ep3Promoted : Bool
     ep3PromotedIsFalse :
@@ -205,25 +207,25 @@ canonicalNSTriadKNGate2AConeRestrictedDefectBudget =
     refl
     true
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
     true
     refl

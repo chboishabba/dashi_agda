@@ -6,7 +6,7 @@ open import Agda.Builtin.Sigma using (Σ; _,_; fst; snd)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; length)
-open import Data.Nat.Base using (ℕ; _≤_; _*_; _+_; _^_; z≤n)
+open import Data.Nat.Base using (ℕ; _≤_; _*_; _+_; _^_; zero; suc; s≤s; z≤n)
 open import DASHI.Core.Prelude using (_×_)
 
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
@@ -29,6 +29,16 @@ import DASHI.Physics.YangMills.BalabanLargeFieldSuppression as LargeField
 
 Scalar : Set
 Scalar = String
+
+Nat≤-refl : ∀ {n : ℕ} → n ≤ n
+Nat≤-refl {zero} = z≤n
+Nat≤-refl {suc n} = s≤s Nat≤-refl
+
+currentP06ShellRoot :
+  Set
+currentP06ShellRoot =
+  GraphCombinatorics.Graph.Vertex
+    (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
 
 -- ── Entropy-side theorem queue ───────────────────────────────────────
 --
@@ -53,20 +63,33 @@ kPSummabilityBoundSurface = Surfaces.kPSummabilityBoundSurface
 
 record RootedPolymerShellCountingInterface : Set₁ where
   field
-    Polymer : Set
-    diameter : Polymer → ℕ
-    root : Polymer
-    shellAt : ℕ → List Polymer
+    Root : Set
+    shellGrowthConstant : ℕ
+    shellCountAt : Root → ℕ → ℕ
     shellCountBound :
-      ∀ (n : ℕ) →
-      length (shellAt n) ≤ (n * n)
+      ∀ (root : Root) (n : ℕ) →
+      shellCountAt root n ≤ shellGrowthConstant ^ n
     interfaceBoundary : String
     interfaceBoundaryIsCanonical :
       interfaceBoundary ≡
-      "P06 reducer: an imported rooted-polymer counting witness is re-expressed as a DASHI shell-counting interface over diameter-indexed rooted polymer shells."
+      "P06 reducer: DASHI owns the diameter-indexed rooted polymer shell envelope; the remaining external boundary is only the source animal-counting witness consumed through that envelope."
+
+record RootedSkeletonSizeShellCountingInterface : Set₁ where
+  field
+    Root : Set
+    sizeShellGrowthConstant : ℕ
+    sizeShellCountAt : Root → ℕ → ℕ
+    sizeShellCountBound :
+      ∀ (root : Root) (n : ℕ) →
+      sizeShellCountAt root n ≤ sizeShellGrowthConstant ^ n
+    interfaceBoundary : String
+    interfaceBoundaryIsCanonical :
+      interfaceBoundary ≡
+      "P06a2 reducer: the rooted connected skeleton size-shell count is exposed directly as a root-indexed exponential shell-count envelope."
 
 record P06a1BoundedDegreeSupportGraphSkeleton : Set₁ where
   field
+    sizeShellInterface : RootedSkeletonSizeShellCountingInterface
     rootedShellInterface : RootedPolymerShellCountingInterface
     maxDegreeBound : ℕ
     theoremBoundary : String
@@ -78,13 +101,18 @@ record P06a2aBoundedDegreeRootBallGrowth : Set₁ where
   field
     boundedDegreeSkeleton : P06a1BoundedDegreeSupportGraphSkeleton
     rootBallShellBound :
-      ∀ (n : ℕ) →
-      length
-        (RootedPolymerShellCountingInterface.shellAt
-          (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
+      ∀ (root : RootedSkeletonSizeShellCountingInterface.Root
+                   (P06a1BoundedDegreeSupportGraphSkeleton.sizeShellInterface
+                     boundedDegreeSkeleton))
+        (n : ℕ) →
+      RootedSkeletonSizeShellCountingInterface.sizeShellCountAt
+          (P06a1BoundedDegreeSupportGraphSkeleton.sizeShellInterface
             boundedDegreeSkeleton)
-          n)
-      ≤ (n * n)
+          root
+          n
+      ≤ RootedSkeletonSizeShellCountingInterface.sizeShellGrowthConstant
+          (P06a1BoundedDegreeSupportGraphSkeleton.sizeShellInterface
+            boundedDegreeSkeleton) ^ n
     theoremBoundary : String
     theoremBoundaryIsCanonical :
       theoremBoundary ≡
@@ -129,19 +157,21 @@ record P06a2fDFSWalkSizeShellCountingBridge : Set₁ where
     dfsWalkWitness : RootedTreeDFSWalk
     walkCountWitness : BoundedDegreeWalkCount
     sizeShellBridgeBound :
-      ∀ (n : ℕ) →
-      length
-        (RootedPolymerShellCountingInterface.shellAt
-          (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
+      ∀ (root : RootedSkeletonSizeShellCountingInterface.Root
+                   (P06a1BoundedDegreeSupportGraphSkeleton.sizeShellInterface
+                     (ConnectedSkeletonHasRootedSpanningTree.boundedDegreeSkeleton
+                       rootedSpanningTreeWitness)))
+        (n : ℕ) →
+      RootedSkeletonSizeShellCountingInterface.sizeShellCountAt
+          (P06a1BoundedDegreeSupportGraphSkeleton.sizeShellInterface
             (ConnectedSkeletonHasRootedSpanningTree.boundedDegreeSkeleton
               rootedSpanningTreeWitness))
-          n)
-      ≤ ((P06a1BoundedDegreeSupportGraphSkeleton.maxDegreeBound
+          root
+          n
+      ≤ RootedSkeletonSizeShellCountingInterface.sizeShellGrowthConstant
+          (P06a1BoundedDegreeSupportGraphSkeleton.sizeShellInterface
             (ConnectedSkeletonHasRootedSpanningTree.boundedDegreeSkeleton
-              rootedSpanningTreeWitness) * n)
-          * (P06a1BoundedDegreeSupportGraphSkeleton.maxDegreeBound
-            (ConnectedSkeletonHasRootedSpanningTree.boundedDegreeSkeleton
-              rootedSpanningTreeWitness) * n))
+              rootedSpanningTreeWitness)) ^ n
     theoremBoundary : String
     theoremBoundaryIsCanonical :
       theoremBoundary ≡
@@ -157,16 +187,18 @@ record P06a2RootedConnectedSkeletonSizeShellCounting : Set₁ where
     walkCountWitness : BoundedDegreeWalkCount
     walkCoverWitness : ConnectedSkeletonCoveredByDFSWalk
     sizeShellBound :
-      ∀ (n : ℕ) →
-      length
-        (RootedPolymerShellCountingInterface.shellAt
-          (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
+      ∀ (root : RootedSkeletonSizeShellCountingInterface.Root
+                   (P06a1BoundedDegreeSupportGraphSkeleton.sizeShellInterface
+                     boundedDegreeSkeleton))
+        (n : ℕ) →
+      RootedSkeletonSizeShellCountingInterface.sizeShellCountAt
+          (P06a1BoundedDegreeSupportGraphSkeleton.sizeShellInterface
             boundedDegreeSkeleton)
-          n)
-      ≤ ((P06a1BoundedDegreeSupportGraphSkeleton.maxDegreeBound
-            boundedDegreeSkeleton * n)
-          * (P06a1BoundedDegreeSupportGraphSkeleton.maxDegreeBound
-            boundedDegreeSkeleton * n))
+          root
+          n
+      ≤ RootedSkeletonSizeShellCountingInterface.sizeShellGrowthConstant
+          (P06a1BoundedDegreeSupportGraphSkeleton.sizeShellInterface
+            boundedDegreeSkeleton) ^ n
     theoremBoundary : String
     theoremBoundaryIsCanonical :
       theoremBoundary ≡
@@ -176,19 +208,21 @@ record P06a3aDiameterShellContainedInRootBall : Set₁ where
   field
     sizeShellCounting : P06a2RootedConnectedSkeletonSizeShellCounting
     diameterShellContained :
-      ∀ (n : ℕ) →
-      length
-        (RootedPolymerShellCountingInterface.shellAt
+      ∀ (root : RootedPolymerShellCountingInterface.Root
+                   (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
+                     (P06a2RootedConnectedSkeletonSizeShellCounting.boundedDegreeSkeleton
+                       sizeShellCounting)))
+        (n : ℕ) →
+      RootedPolymerShellCountingInterface.shellCountAt
           (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
             (P06a2RootedConnectedSkeletonSizeShellCounting.boundedDegreeSkeleton
               sizeShellCounting))
-          n)
-      ≤ ((P06a1BoundedDegreeSupportGraphSkeleton.maxDegreeBound
+          root
+          n
+      ≤ RootedPolymerShellCountingInterface.shellGrowthConstant
+          (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
             (P06a2RootedConnectedSkeletonSizeShellCounting.boundedDegreeSkeleton
-              sizeShellCounting) * n)
-          * (P06a1BoundedDegreeSupportGraphSkeleton.maxDegreeBound
-            (P06a2RootedConnectedSkeletonSizeShellCounting.boundedDegreeSkeleton
-              sizeShellCounting) * n))
+              sizeShellCounting)) ^ n
     theoremBoundary : String
     theoremBoundaryIsCanonical :
       theoremBoundary ≡
@@ -197,21 +231,27 @@ record P06a3aDiameterShellContainedInRootBall : Set₁ where
 record ReducedSkeletonCardinalityBound : Set₁ where
   field
     boundedDegreeSkeleton : P06a1BoundedDegreeSupportGraphSkeleton
-    sizeOrComplexityControlledByDiameter :
-      ∀ (n : ℕ) →
-      length
-        (RootedPolymerShellCountingInterface.shellAt
-          (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
-            boundedDegreeSkeleton)
-          n)
-      ≤ ((P06a1BoundedDegreeSupportGraphSkeleton.maxDegreeBound
-            boundedDegreeSkeleton * n)
-          * (P06a1BoundedDegreeSupportGraphSkeleton.maxDegreeBound
-            boundedDegreeSkeleton * n))
+    K : ℕ
+    B : ℕ
+    reducedSkeletonDiameterBound :
+      ∀ (root : RootedPolymerShellCountingInterface.Root
+                   (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
+                     boundedDegreeSkeleton))
+        (X : List
+          (RootedPolymerShellCountingInterface.Root
+            (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
+              boundedDegreeSkeleton)))
+        (rrs : GraphCombinatorics.RootedReducedSkeleton
+                 (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
+                 root X)
+        (n : ℕ) →
+      GraphCombinatorics.diam_G
+        {BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter} X ≡ n →
+      length X ≤ K * n + B
     theoremBoundary : String
     theoremBoundaryIsCanonical :
       theoremBoundary ≡
-      "P06a3b: bounded degree alone is not enough for exponential diameter-shell counting, so DASHI keeps the missing size-or-complexity-controlled-by-diameter statement as an explicit leaf."
+      "P06a3b: bounded degree alone is not enough for exponential diameter-shell counting, so DASHI exposes the missing reduced-skeleton cardinality theorem explicitly as a linear size-or-complexity-by-diameter bound."
 
 record P06a3DiameterShellSkeletonCounting : Set₁ where
   field
@@ -219,19 +259,21 @@ record P06a3DiameterShellSkeletonCounting : Set₁ where
     diameterShellContainment : P06a3aDiameterShellContainedInRootBall
     reducedSkeletonCardinality : ReducedSkeletonCardinalityBound
     diameterShellBound :
-      ∀ (n : ℕ) →
-      length
-        (RootedPolymerShellCountingInterface.shellAt
+      ∀ (root : RootedPolymerShellCountingInterface.Root
+                   (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
+                     (P06a2RootedConnectedSkeletonSizeShellCounting.boundedDegreeSkeleton
+                       sizeShellCounting)))
+        (n : ℕ) →
+      RootedPolymerShellCountingInterface.shellCountAt
           (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
             (P06a2RootedConnectedSkeletonSizeShellCounting.boundedDegreeSkeleton
               sizeShellCounting))
-          n)
-      ≤ ((P06a1BoundedDegreeSupportGraphSkeleton.maxDegreeBound
+          root
+          n
+      ≤ RootedPolymerShellCountingInterface.shellGrowthConstant
+          (P06a1BoundedDegreeSupportGraphSkeleton.rootedShellInterface
             (P06a2RootedConnectedSkeletonSizeShellCounting.boundedDegreeSkeleton
-              sizeShellCounting) * n)
-          * (P06a1BoundedDegreeSupportGraphSkeleton.maxDegreeBound
-            (P06a2RootedConnectedSkeletonSizeShellCounting.boundedDegreeSkeleton
-              sizeShellCounting) * n))
+              sizeShellCounting)) ^ n
     theoremBoundary : String
     theoremBoundaryIsCanonical :
       theoremBoundary ≡
@@ -645,20 +687,33 @@ record OwnedP06SourceSkeletonDecompositionSprintWitness : Set₁ where
     animalCountingWitness :
       OwnedP06AnimalCountingWitness
 
-P06ResidualCountingSprintWitnessFromModelLeaf :
-  P06ModelLeafDischargePackage →
+P06bDecorationPayloadFromMixedReducerPayload :
+  BalabanP06MixedReducerPayload →
+  BalabanP06bDecorationPayload
+P06bDecorationPayloadFromMixedReducerPayload payload = record
+  { graphAdapter =
+      BalabanP06MixedReducerPayload.graphAdapter payload
+  ; reducedSkeletonComplexityAdapter =
+      BalabanP06MixedReducerPayload.reducedSkeletonComplexityAdapter
+        payload
+  ; decorationMultiplicityAdapter =
+      BalabanP06MixedReducerPayload.decorationMultiplicityAdapter payload
+  }
+
+P06ResidualCountingSprintWitnessFromPayload :
+  BalabanP06MixedReducerPayload →
   OwnedP06ResidualCountingSprintWitness
-P06ResidualCountingSprintWitnessFromModelLeaf pkg =
-  let payload = P06FromModelLeafDischargePackage pkg
-      graphAdapter =
-        P06ModelLeafDischargePackage.graphAdapter pkg
+P06ResidualCountingSprintWitnessFromPayload payload =
+  let graphAdapter =
+        BalabanP06MixedReducerPayload.graphAdapter payload
       complexityAdapter =
-        P06ModelLeafDischargePackage.reducedSkeletonComplexityAdapter pkg
+        BalabanP06MixedReducerPayload.reducedSkeletonComplexityAdapter
+          payload
   in record
        { payload = payload
        ; sourceAuthorityId = dashi-internal-proof
        ; theoremLocator =
-           "BalabanPolymerDiameterEntropy.P06ResidualCountingSprintWitnessFromModelLeaf/BalabanP06a3bFromComplexity/BalabanCountingBoundReplacement"
+           "BalabanPolymerDiameterEntropy.P06ResidualCountingSprintWitnessFromPayload/BalabanP06a3bFromComplexity/BalabanCountingBoundReplacement"
        ; status = mixedReducer
        ; reducedSkeletonCardinality =
            BalabanP06a3bFromComplexity graphAdapter complexityAdapter
@@ -666,25 +721,23 @@ P06ResidualCountingSprintWitnessFromModelLeaf pkg =
            BalabanCountingBoundReplacement
              graphAdapter
              complexityAdapter
-             (P06ModelLeafDischargePackage.linearRangeSum pkg)
+             (BalabanP06MixedReducerPayload.linearRangeSum payload)
        }
 
-P06bDecorationMultiplicityWitnessFromModelLeaf :
-  P06ModelLeafDischargePackage →
+P06bDecorationMultiplicityWitnessFromPayload :
+  BalabanP06MixedReducerPayload →
   OwnedP06bDecorationMultiplicityWitness
-P06bDecorationMultiplicityWitnessFromModelLeaf pkg =
+P06bDecorationMultiplicityWitnessFromPayload payload =
   let graphAdapter =
-        P06ModelLeafDischargePackage.graphAdapter pkg
+        BalabanP06MixedReducerPayload.graphAdapter payload
       complexityAdapter =
-        P06ModelLeafDischargePackage.reducedSkeletonComplexityAdapter pkg
+        BalabanP06MixedReducerPayload.reducedSkeletonComplexityAdapter
+          payload
       decorationAdapter =
-        P06ModelLeafDischargePackage.decorationMultiplicityAdapter pkg
+        BalabanP06MixedReducerPayload.decorationMultiplicityAdapter
+          payload
   in record
-       { payload = record
-           { graphAdapter = graphAdapter
-           ; reducedSkeletonComplexityAdapter = complexityAdapter
-           ; decorationMultiplicityAdapter = decorationAdapter
-           }
+       { payload = P06bDecorationPayloadFromMixedReducerPayload payload
        ; decorationBound =
            BalabanDecorationMultiplicityByDiameter
              graphAdapter
@@ -692,31 +745,30 @@ P06bDecorationMultiplicityWitnessFromModelLeaf pkg =
              decorationAdapter
        }
 
-P06AnimalCountingWitnessFromModelLeaf :
-  P06ModelLeafDischargePackage →
+P06AnimalCountingWitnessFromPayload :
+  BalabanP06MixedReducerPayload →
   OwnedP06AnimalCountingWitness
-P06AnimalCountingWitnessFromModelLeaf pkg = record
-  { payload = P06FromModelLeafDischargePackage pkg
+P06AnimalCountingWitnessFromPayload payload = record
+  { payload = payload
   ; animalCountingBound =
-      BalabanP06AnimalCountingFromAdapters
-        (P06FromModelLeafDischargePackage pkg)
+      BalabanP06AnimalCountingFromAdapters payload
   }
 
-P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf :
-  P06ModelLeafDischargePackage →
+P06SourceSkeletonDecompositionSemanticKernelFromPayload :
+  BalabanP06MixedReducerPayload →
   P06SourceSkeletonDecompositionSemanticKernel
-P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf pkg =
+P06SourceSkeletonDecompositionSemanticKernelFromPayload payload =
   let residual =
-        P06ResidualCountingSprintWitnessFromModelLeaf pkg
+        P06ResidualCountingSprintWitnessFromPayload payload
       decoration =
-        P06bDecorationMultiplicityWitnessFromModelLeaf pkg
+        P06bDecorationMultiplicityWitnessFromPayload payload
       animal =
-        P06AnimalCountingWitnessFromModelLeaf pkg
+        P06AnimalCountingWitnessFromPayload payload
   in record
-       { payload = P06FromModelLeafDischargePackage pkg
+       { payload = payload
        ; sourceAuthorityId = dashi-internal-proof
        ; theoremLocator =
-           "BalabanPolymerDiameterEntropy.P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf/P06ResidualCountingSprintWitnessFromModelLeaf/P06bDecorationMultiplicityWitnessFromModelLeaf/P06AnimalCountingWitnessFromModelLeaf"
+           "BalabanPolymerDiameterEntropy.P06SourceSkeletonDecompositionSemanticKernelFromPayload/P06ResidualCountingSprintWitnessFromPayload/P06bDecorationMultiplicityWitnessFromPayload/P06AnimalCountingWitnessFromPayload"
        ; status = mixedReducer
        ; reducedSkeletonCardinality =
            OwnedP06ResidualCountingSprintWitness.reducedSkeletonCardinality
@@ -732,27 +784,62 @@ P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf pkg =
              animal
        }
 
-OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf :
-  P06ModelLeafDischargePackage →
+OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload :
+  BalabanP06MixedReducerPayload →
   OwnedP06SourceSkeletonDecompositionSprintWitness
-OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf pkg =
+OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload payload =
   let residual =
-        P06ResidualCountingSprintWitnessFromModelLeaf pkg
+        P06ResidualCountingSprintWitnessFromPayload payload
       decoration =
-        P06bDecorationMultiplicityWitnessFromModelLeaf pkg
+        P06bDecorationMultiplicityWitnessFromPayload payload
       animal =
-        P06AnimalCountingWitnessFromModelLeaf pkg
+        P06AnimalCountingWitnessFromPayload payload
   in record
        { sourceAuthorityId = dashi-internal-proof
        ; theoremLocator =
-           "BalabanPolymerDiameterEntropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf/P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf"
+           "BalabanPolymerDiameterEntropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload/P06SourceSkeletonDecompositionSemanticKernelFromPayload"
        ; status = mixedReducer
        ; sourceSkeletonDecompositionSemanticKernel =
-           P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf pkg
+           P06SourceSkeletonDecompositionSemanticKernelFromPayload payload
        ; residualCountingWitness = residual
        ; decorationMultiplicityWitness = decoration
        ; animalCountingWitness = animal
        }
+
+P06ResidualCountingSprintWitnessFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  OwnedP06ResidualCountingSprintWitness
+P06ResidualCountingSprintWitnessFromModelLeaf pkg =
+  P06ResidualCountingSprintWitnessFromPayload
+    (P06FromModelLeafDischargePackage pkg)
+
+P06bDecorationMultiplicityWitnessFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  OwnedP06bDecorationMultiplicityWitness
+P06bDecorationMultiplicityWitnessFromModelLeaf pkg =
+  P06bDecorationMultiplicityWitnessFromPayload
+    (P06FromModelLeafDischargePackage pkg)
+
+P06AnimalCountingWitnessFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  OwnedP06AnimalCountingWitness
+P06AnimalCountingWitnessFromModelLeaf pkg = record
+  P06AnimalCountingWitnessFromPayload
+    (P06FromModelLeafDischargePackage pkg)
+
+P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  P06SourceSkeletonDecompositionSemanticKernel
+P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf pkg =
+  P06SourceSkeletonDecompositionSemanticKernelFromPayload
+    (P06FromModelLeafDischargePackage pkg)
+
+OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  OwnedP06SourceSkeletonDecompositionSprintWitness
+OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf pkg =
+  OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload
+    (P06FromModelLeafDischargePackage pkg)
 
 P06FromModelLeafDischargePackage :
   P06ModelLeafDischargePackage →
@@ -864,23 +951,25 @@ record P06cSkeletonDecorationImpliesAnimalCounting : Set₁ where
   field
     p06aSkeletonCounting : P06aRootedConnectedSkeletonCounting
     p06bDecorationBound : ImportedP06bPolymerDecorationMultiplicityBound
+    sourceDecompositionKernel : P06SourceSkeletonDecompositionSemanticKernel
     sourceWitness : ImportedPolymerAnimalCountingBound
     theoremBoundary : String
     theoremBoundaryIsCanonical :
       theoremBoundary ≡
-      "P06c: DASHI recombines rooted support-graph skeleton shells with the owned decoration-multiplicity leaf so the full polymer animal-counting bound is assembled through a split skeleton-plus-decoration interface."
+      "P06c: DASHI recombines rooted support-graph skeleton shells with the owned decoration-multiplicity leaf through the owned mixed-reducer kernel; the remaining external boundary is the source animal-counting witness naming that kernel as its authority surface."
 
 record P06AnimalCountingReducer : Set₁ where
   field
     p06aSkeletonCounting : P06aRootedConnectedSkeletonCounting
     p06bDecorationBound : ImportedP06bPolymerDecorationMultiplicityBound
     p06cRecombination : P06cSkeletonDecorationImpliesAnimalCounting
+    sourceDecompositionKernel : P06SourceSkeletonDecompositionSemanticKernel
     sourceWitness : ImportedPolymerAnimalCountingBound
     rootedShellInterface : RootedPolymerShellCountingInterface
     proofBoundary : String
     proofBoundaryIsCanonical :
       proofBoundary ≡
-      "P06AnimalCountingReducer: DASHI owns the rooted-shell adapter, the decoration multiplicity bridge, and the mixed skeleton-plus-decoration recombination that yields the current polymer animal-counting bound."
+      "P06AnimalCountingReducer: DASHI owns the rooted-shell adapter, the decoration multiplicity bridge, and the skeleton-plus-decoration recombination through the owned mixed-reducer kernel; the only remaining external boundary is the source animal-counting witness fed into that reducer."
 
 postulate
   expℝ : ℝ → ℝ
@@ -914,6 +1003,58 @@ currentBalabanP06bDecorationPayload = record
       currentBalabanDecorationMultiplicityAdapter
   }
 
+currentBalabanP06a3bReducedSkeletonCardinalityBound :
+  GraphCombinatorics.ReducedSkeletonCardinalityBound
+    (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
+currentBalabanP06a3bReducedSkeletonCardinalityBound =
+  BalabanP06a3bFromComplexity
+    currentBalabanGraphAdapter
+    currentBalabanReducedSkeletonComplexityAdapter
+
+currentBalabanP06a3bComplexityToCardinalityKernel :
+  ∀ (r : GraphCombinatorics.Graph.Vertex
+         (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))
+    (X : List
+      (GraphCombinatorics.Graph.Vertex
+        (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))) →
+    (rrs : GraphCombinatorics.RootedReducedSkeleton
+             (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
+             r X) →
+  length X ≤
+    GraphCombinatorics.ReducedSkeletonCardinalityBound.K
+      currentBalabanP06a3bReducedSkeletonCardinalityBound
+      * GraphCombinatorics.diam_G
+          {BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter} X
+      + GraphCombinatorics.ReducedSkeletonCardinalityBound.B
+          currentBalabanP06a3bReducedSkeletonCardinalityBound
+currentBalabanP06a3bComplexityToCardinalityKernel r X rrs =
+  GraphCombinatorics.ReducedSkeletonCardinalityBound.bound
+    currentBalabanP06a3bReducedSkeletonCardinalityBound
+    r X rrs
+
+currentBalabanP06a3aDiameterToLinearSizeKernel :
+  ∀ (r : GraphCombinatorics.Graph.Vertex
+         (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))
+    (X : List
+      (GraphCombinatorics.Graph.Vertex
+        (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))) →
+    (rrs : GraphCombinatorics.RootedReducedSkeleton
+             (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
+             r X) →
+    (n : Nat) →
+  GraphCombinatorics.diam_G
+    {BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter} X ≡ n →
+  length X ≤
+    GraphCombinatorics.ReducedSkeletonCardinalityBound.K
+      currentBalabanP06a3bReducedSkeletonCardinalityBound
+      * n
+      + GraphCombinatorics.ReducedSkeletonCardinalityBound.B
+          currentBalabanP06a3bReducedSkeletonCardinalityBound
+currentBalabanP06a3aDiameterToLinearSizeKernel r X rrs n diam-eq =
+  GraphCombinatorics.DiameterShellCoveredByLinearSizeShells
+    currentBalabanP06a3bReducedSkeletonCardinalityBound
+    r X rrs n diam-eq
+
 currentBalabanP06a3DiameterShellCountingBound :
   Σ Nat
     (λ C-diam →
@@ -929,13 +1070,25 @@ currentBalabanP06a3DiameterShellCountingBound =
     currentBalabanReducedSkeletonComplexityAdapter
     GraphCombinatorics.LinearRangeExponentialSum
 
+currentBalabanP06a3ShellSummationKernel :
+  ∀ (r : GraphCombinatorics.Graph.Vertex
+         (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))
+    (n : Nat) →
+  GraphCombinatorics.countReducedSkeletonsWithDiam
+    (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter) r n ≤
+  fst currentBalabanP06a3DiameterShellCountingBound ^ n
+currentBalabanP06a3ShellSummationKernel =
+  snd currentBalabanP06a3DiameterShellCountingBound
+
+currentBalabanP06ResidualCountingKernelTheoremLocator : String
+currentBalabanP06ResidualCountingKernelTheoremLocator =
+  "BalabanPolymerDiameterEntropy.currentBalabanP06a3bReducedSkeletonCardinalityBound/currentBalabanP06a3DiameterShellCountingBound"
+
 currentOwnedP06a3DiameterShellCountingWitness :
   OwnedP06a3DiameterShellCountingWitness
 currentOwnedP06a3DiameterShellCountingWitness = record
   { payload = currentBalabanP06MixedReducerPayload
-  ; diameterShellBound =
-      OwnedP06ResidualCountingSprintWitness.diameterShellBound
-        currentOwnedP06ResidualCountingSprintWitness
+  ; diameterShellBound = currentBalabanP06a3DiameterShellCountingBound
   }
 
 currentOwnedP06ResidualCountingSprintWitness :
@@ -943,15 +1096,24 @@ currentOwnedP06ResidualCountingSprintWitness :
 currentOwnedP06ResidualCountingSprintWitness = record
   { payload = currentBalabanP06MixedReducerPayload
   ; sourceAuthorityId = dashi-internal-proof
-  ; theoremLocator =
-      "BalabanPolymerDiameterEntropy.BalabanP06a3bFromComplexity/BalabanCountingBoundReplacement"
+  ; theoremLocator = currentBalabanP06ResidualCountingKernelTheoremLocator
   ; status = mixedReducer
   ; reducedSkeletonCardinality =
-      BalabanP06a3bFromComplexity
-        currentBalabanGraphAdapter
-        currentBalabanReducedSkeletonComplexityAdapter
+      currentBalabanP06a3bReducedSkeletonCardinalityBound
   ; diameterShellBound = currentBalabanP06a3DiameterShellCountingBound
   }
+
+currentOwnedP06ResidualUsesConstructiveP06a3b :
+  OwnedP06ResidualCountingSprintWitness.reducedSkeletonCardinality
+    currentOwnedP06ResidualCountingSprintWitness
+    ≡ currentBalabanP06a3bReducedSkeletonCardinalityBound
+currentOwnedP06ResidualUsesConstructiveP06a3b = refl
+
+currentOwnedP06ResidualUsesConstructiveP06a3 :
+  OwnedP06ResidualCountingSprintWitness.diameterShellBound
+    currentOwnedP06ResidualCountingSprintWitness
+    ≡ currentBalabanP06a3DiameterShellCountingBound
+currentOwnedP06ResidualUsesConstructiveP06a3 = refl
 
 currentBalabanP06bDecorationMultiplicityByDiameter :
   Σ Nat
@@ -1010,7 +1172,7 @@ currentP06SourceSkeletonDecompositionSemanticKernel = record
   { payload = currentBalabanP06MixedReducerPayload
   ; sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "BalabanPolymerDiameterEntropy.currentOwnedP06ResidualCountingSprintWitness/currentOwnedP06bDecorationMultiplicityWitness/currentOwnedP06AnimalCountingWitness"
+      "BalabanPolymerDiameterEntropy.currentBalabanP06a3bReducedSkeletonCardinalityBound/currentBalabanP06a3DiameterShellCountingBound/currentOwnedP06bDecorationMultiplicityWitness/currentOwnedP06AnimalCountingWitness"
   ; status = mixedReducer
   ; reducedSkeletonCardinality =
       OwnedP06ResidualCountingSprintWitness.reducedSkeletonCardinality
@@ -1078,6 +1240,7 @@ OwnedP06EndpointUnblockingSprintWitnessFromSourceWitness witness = record
         (OwnedP06SourceSkeletonDecompositionSprintWitness.sourceSkeletonDecompositionSemanticKernel
           witness)
   ; skeletonDecompositionWitness = witness
+  ; p06Reducer = currentP06AnimalCountingReducer
   ; pZeroWitness =
       P06EndpointUnblockingSemanticKernel.pZeroWitness
         (P06EndpointUnblockingSemanticKernelFromSourceKernel
@@ -1102,6 +1265,13 @@ polymerAnimalCountingBoundWitness = record
       P06SourceSkeletonDecompositionSemanticKernel.payload
         currentP06SourceSkeletonDecompositionSemanticKernel
   }
+
+currentP06WitnessUsesOwnedSourceKernelPayload :
+  ImportedPolymerAnimalCountingBound.mixedReducerPayload
+    polymerAnimalCountingBoundWitness
+    ≡ P06SourceSkeletonDecompositionSemanticKernel.payload
+        currentP06SourceSkeletonDecompositionSemanticKernel
+currentP06WitnessUsesOwnedSourceKernelPayload = refl
 
 kpSummabilityBoundWitness : ImportedKPSummabilityBound
 kpSummabilityBoundWitness = record
@@ -1141,36 +1311,104 @@ entropyBeatenByFullDecayWitness = record
   ; reducer = ArithmeticQueue.currentEntropyMarginFromDiameterConstant
   }
 
-data StubRootedPolymer : Set where
-  stubRootedPolymer : StubRootedPolymer
+currentP06BoundedDegreeConstant : ℕ
+currentP06BoundedDegreeConstant =
+  BalabanGraphAdapter.degreeBound currentBalabanGraphAdapter
 
-boundedDegreeSkeletonConstant : ℕ
-boundedDegreeSkeletonConstant = 1
+currentBalabanP06a2SizeShellCountingBound :
+  Σ Nat
+    (λ C-size →
+      ∀ (r : GraphCombinatorics.Graph.Vertex
+             (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))
+        (m : Nat) →
+      GraphCombinatorics.countSkeletons
+        (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter) r m ≤
+      C-size ^ m)
+currentBalabanP06a2SizeShellCountingBound =
+  BalabanP06a2FromGraphCombinatorics currentBalabanGraphAdapter
+
+currentP06SizeShellGrowthConstant : ℕ
+currentP06SizeShellGrowthConstant =
+  fst currentBalabanP06a2SizeShellCountingBound
+
+canonicalRootedSkeletonSizeShellCountingInterface :
+  RootedSkeletonSizeShellCountingInterface
+canonicalRootedSkeletonSizeShellCountingInterface = record
+  { Root = currentP06ShellRoot
+  ; sizeShellGrowthConstant = currentP06SizeShellGrowthConstant
+  ; sizeShellCountAt =
+      GraphCombinatorics.countSkeletons
+        (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
+  ; sizeShellCountBound =
+      snd currentBalabanP06a2SizeShellCountingBound
+  ; interfaceBoundary =
+      "P06a2 reducer: the rooted connected skeleton size-shell count is exposed directly as a root-indexed exponential shell-count envelope."
+  ; interfaceBoundaryIsCanonical = refl
+  }
+
+currentP06SizeShellInterfaceUsesOwnedSizeConstant :
+  RootedSkeletonSizeShellCountingInterface.sizeShellGrowthConstant
+    canonicalRootedSkeletonSizeShellCountingInterface
+    ≡ fst currentBalabanP06a2SizeShellCountingBound
+currentP06SizeShellInterfaceUsesOwnedSizeConstant = refl
+
+currentP06SizeShellInterfaceUsesOwnedSizeShellCount :
+  RootedSkeletonSizeShellCountingInterface.sizeShellCountAt
+    canonicalRootedSkeletonSizeShellCountingInterface
+    ≡ GraphCombinatorics.countSkeletons
+        (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
+currentP06SizeShellInterfaceUsesOwnedSizeShellCount = refl
+
+currentP06ShellGrowthConstant : ℕ
+currentP06ShellGrowthConstant =
+  fst currentBalabanP06a3DiameterShellCountingBound
 
 canonicalRootedPolymerShellCountingInterface :
   RootedPolymerShellCountingInterface
 canonicalRootedPolymerShellCountingInterface = record
-  { Polymer = StubRootedPolymer
-  ; diameter = λ _ → 0
-  ; root = stubRootedPolymer
-  ; shellAt = λ _ → []
-  ; shellCountBound = λ n → z≤n
+  { Root = currentP06ShellRoot
+  ; shellGrowthConstant = currentP06ShellGrowthConstant
+  ; shellCountAt =
+      GraphCombinatorics.countReducedSkeletonsWithDiam
+        (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
+  ; shellCountBound =
+      snd currentBalabanP06a3DiameterShellCountingBound
   ; interfaceBoundary =
-      "P06 reducer: an imported rooted-polymer counting witness is re-expressed as a DASHI shell-counting interface over diameter-indexed rooted polymer shells."
+      "P06 reducer: DASHI owns the diameter-indexed rooted polymer shell envelope; the remaining external boundary is only the source animal-counting witness consumed through that envelope."
   ; interfaceBoundaryIsCanonical = refl
   }
+
+currentP06ShellInterfaceUsesOwnedDiameterConstant :
+  RootedPolymerShellCountingInterface.shellGrowthConstant
+    canonicalRootedPolymerShellCountingInterface
+    ≡ fst currentBalabanP06a3DiameterShellCountingBound
+currentP06ShellInterfaceUsesOwnedDiameterConstant = refl
+
+currentP06ShellInterfaceUsesOwnedDiameterShellCount :
+  RootedPolymerShellCountingInterface.shellCountAt
+    canonicalRootedPolymerShellCountingInterface
+    ≡ GraphCombinatorics.countReducedSkeletonsWithDiam
+        (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
+currentP06ShellInterfaceUsesOwnedDiameterShellCount = refl
 
 currentP06aRootedConnectedSkeletonCounting :
   P06aRootedConnectedSkeletonCounting
 currentP06a1BoundedDegreeSupportGraphSkeleton :
   P06a1BoundedDegreeSupportGraphSkeleton
 currentP06a1BoundedDegreeSupportGraphSkeleton = record
-  { rootedShellInterface = canonicalRootedPolymerShellCountingInterface
-  ; maxDegreeBound = boundedDegreeSkeletonConstant
+  { sizeShellInterface = canonicalRootedSkeletonSizeShellCountingInterface
+  ; rootedShellInterface = canonicalRootedPolymerShellCountingInterface
+  ; maxDegreeBound = currentP06BoundedDegreeConstant
   ; theoremBoundary =
       "P06a1: DASHI isolates the graph-skeleton side of P06 as a rooted support-graph shell family together with an explicit bounded-degree parameter."
   ; theoremBoundaryIsCanonical = refl
   }
+
+currentP06a1UsesOwnedBoundedDegree :
+  P06a1BoundedDegreeSupportGraphSkeleton.maxDegreeBound
+    currentP06a1BoundedDegreeSupportGraphSkeleton
+    ≡ BalabanGraphAdapter.degreeBound currentBalabanGraphAdapter
+currentP06a1UsesOwnedBoundedDegree = refl
 
 currentP06a2RootedConnectedSkeletonSizeShellCounting :
   P06a2RootedConnectedSkeletonSizeShellCounting
@@ -1205,11 +1443,24 @@ currentP06a2fDFSWalkSizeShellCountingBridge = record
   { rootedSpanningTreeWitness = currentConnectedSkeletonHasRootedSpanningTree
   ; dfsWalkWitness = currentRootedTreeDFSWalk
   ; walkCountWitness = currentBoundedDegreeWalkCount
-  ; sizeShellBridgeBound = λ n → z≤n
+  ; sizeShellBridgeBound =
+      λ root n →
+        RootedSkeletonSizeShellCountingInterface.sizeShellCountBound
+          canonicalRootedSkeletonSizeShellCountingInterface
+          root n
   ; theoremBoundary =
       "P06a2f: the DFS-walk size-shell counting bridge is kept explicit between the rooted spanning-tree witness and the bounded-degree shell bound."
   ; theoremBoundaryIsCanonical = refl
   }
+
+currentP06a2fUsesOwnedDiameterShellBound :
+  P06a2fDFSWalkSizeShellCountingBridge.sizeShellBridgeBound
+    currentP06a2fDFSWalkSizeShellCountingBridge
+    ≡ (λ root n →
+        RootedSkeletonSizeShellCountingInterface.sizeShellCountBound
+          canonicalRootedSkeletonSizeShellCountingInterface
+          root n)
+currentP06a2fUsesOwnedDiameterShellBound = refl
 
 currentConnectedSkeletonCoveredByDFSWalk :
   ConnectedSkeletonCoveredByDFSWalk
@@ -1226,12 +1477,19 @@ currentP06a2aBoundedDegreeRootBallGrowth :
 currentP06a2aBoundedDegreeRootBallGrowth = record
   { boundedDegreeSkeleton = currentP06a1BoundedDegreeSupportGraphSkeleton
   ; rootBallShellBound =
-      RootedPolymerShellCountingInterface.shellCountBound
-        canonicalRootedPolymerShellCountingInterface
+      RootedSkeletonSizeShellCountingInterface.sizeShellCountBound
+        canonicalRootedSkeletonSizeShellCountingInterface
   ; theoremBoundary =
       "P06a2a: before any polymer-specific counting refinement, DASHI exposes the rooted bounded-degree shell family as a root-ball growth bound over diameter shells."
   ; theoremBoundaryIsCanonical = refl
   }
+
+currentP06a2aUsesOwnedDiameterShellBound :
+  P06a2aBoundedDegreeRootBallGrowth.rootBallShellBound
+    currentP06a2aBoundedDegreeRootBallGrowth
+    ≡ RootedSkeletonSizeShellCountingInterface.sizeShellCountBound
+        canonicalRootedSkeletonSizeShellCountingInterface
+currentP06a2aUsesOwnedDiameterShellBound = refl
 
 currentP06a2RootedConnectedSkeletonSizeShellCounting = record
   { boundedDegreeSkeleton = currentP06a1BoundedDegreeSupportGraphSkeleton
@@ -1241,11 +1499,24 @@ currentP06a2RootedConnectedSkeletonSizeShellCounting = record
   ; dfsWalkSizeShellBridge = currentP06a2fDFSWalkSizeShellCountingBridge
   ; walkCountWitness = currentBoundedDegreeWalkCount
   ; walkCoverWitness = currentConnectedSkeletonCoveredByDFSWalk
-  ; sizeShellBound = λ n → z≤n
+  ; sizeShellBound =
+      λ root n →
+        RootedSkeletonSizeShellCountingInterface.sizeShellCountBound
+          canonicalRootedSkeletonSizeShellCountingInterface
+          root n
   ; theoremBoundary =
       "P06a2: bounded-degree rooted connected skeletons are counted first in size-indexed shells before any polymer-specific decoration overhead is considered."
   ; theoremBoundaryIsCanonical = refl
   }
+
+currentP06a2UsesOwnedDiameterShellBound :
+  P06a2RootedConnectedSkeletonSizeShellCounting.sizeShellBound
+    currentP06a2RootedConnectedSkeletonSizeShellCounting
+    ≡ (λ root n →
+        RootedSkeletonSizeShellCountingInterface.sizeShellCountBound
+          canonicalRootedSkeletonSizeShellCountingInterface
+          root n)
+currentP06a2UsesOwnedDiameterShellBound = refl
 
 currentP06a3DiameterShellSkeletonCounting :
   P06a3DiameterShellSkeletonCounting
@@ -1253,31 +1524,128 @@ currentReducedSkeletonCardinalityBound :
   ReducedSkeletonCardinalityBound
 currentReducedSkeletonCardinalityBound = record
   { boundedDegreeSkeleton = currentP06a1BoundedDegreeSupportGraphSkeleton
-  ; sizeOrComplexityControlledByDiameter = λ n → z≤n
+  ; K =
+      GraphCombinatorics.ReducedSkeletonCardinalityBound.K
+        currentBalabanP06a3bReducedSkeletonCardinalityBound
+  ; B =
+      GraphCombinatorics.ReducedSkeletonCardinalityBound.B
+        currentBalabanP06a3bReducedSkeletonCardinalityBound
+  ; reducedSkeletonDiameterBound =
+      currentBalabanP06a3aDiameterToLinearSizeKernel
   ; theoremBoundary =
-      "P06a3b: bounded degree alone is not enough for exponential diameter-shell counting, so DASHI keeps the missing size-or-complexity-controlled-by-diameter statement as an explicit leaf."
+      "P06a3b: bounded degree alone is not enough for exponential diameter-shell counting, so DASHI exposes the missing reduced-skeleton cardinality theorem explicitly as a linear size-or-complexity-by-diameter bound."
   ; theoremBoundaryIsCanonical = refl
   }
+
+currentP06a3bUsesOwnedLinearDiameterConstant :
+  ReducedSkeletonCardinalityBound.K
+    currentReducedSkeletonCardinalityBound
+    ≡ GraphCombinatorics.ReducedSkeletonCardinalityBound.K
+        currentBalabanP06a3bReducedSkeletonCardinalityBound
+currentP06a3bUsesOwnedLinearDiameterConstant = refl
+
+currentP06a3bUsesOwnedLinearDiameterOffset :
+  ReducedSkeletonCardinalityBound.B
+    currentReducedSkeletonCardinalityBound
+    ≡ GraphCombinatorics.ReducedSkeletonCardinalityBound.B
+        currentBalabanP06a3bReducedSkeletonCardinalityBound
+currentP06a3bUsesOwnedLinearDiameterOffset = refl
+
+currentP06a3bExportsOwnedComplexityToCardinalityKernel :
+  ∀ (r : GraphCombinatorics.Graph.Vertex
+         (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))
+    (X : List
+      (GraphCombinatorics.Graph.Vertex
+        (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))) →
+    (rrs : GraphCombinatorics.RootedReducedSkeleton
+             (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
+             r X) →
+  length X ≤
+    GraphCombinatorics.ReducedSkeletonCardinalityBound.K
+      currentBalabanP06a3bReducedSkeletonCardinalityBound
+      * GraphCombinatorics.diam_G
+          {BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter} X
+      + GraphCombinatorics.ReducedSkeletonCardinalityBound.B
+          currentBalabanP06a3bReducedSkeletonCardinalityBound
+currentP06a3bExportsOwnedComplexityToCardinalityKernel =
+  currentBalabanP06a3bComplexityToCardinalityKernel
 
 currentP06a3aDiameterShellContainedInRootBall :
   P06a3aDiameterShellContainedInRootBall
 currentP06a3aDiameterShellContainedInRootBall = record
   { sizeShellCounting = currentP06a2RootedConnectedSkeletonSizeShellCounting
-  ; diameterShellContained = λ n → z≤n
+  ; diameterShellContained =
+      λ root n →
+        RootedPolymerShellCountingInterface.shellCountBound
+          canonicalRootedPolymerShellCountingInterface
+          root n
   ; theoremBoundary =
       "P06a3a: diameter-indexed rooted connected skeleton shells are first reduced to a bounded root-ball containment statement before the final diameter-shell count is consumed."
   ; theoremBoundaryIsCanonical = refl
   }
 
+currentP06a3aUsesOwnedDiameterShellBound :
+  P06a3aDiameterShellContainedInRootBall.diameterShellContained
+    currentP06a3aDiameterShellContainedInRootBall
+    ≡ (λ root n →
+        RootedPolymerShellCountingInterface.shellCountBound
+          canonicalRootedPolymerShellCountingInterface
+          root n)
+currentP06a3aUsesOwnedDiameterShellBound = refl
+
+currentP06a3aExportsOwnedDiameterToLinearSizeKernel :
+  ∀ (r : GraphCombinatorics.Graph.Vertex
+         (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))
+    (X : List
+      (GraphCombinatorics.Graph.Vertex
+        (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))) →
+    (rrs : GraphCombinatorics.RootedReducedSkeleton
+             (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter)
+             r X) →
+    (n : Nat) →
+  GraphCombinatorics.diam_G
+    {BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter} X ≡ n →
+  length X ≤
+    GraphCombinatorics.ReducedSkeletonCardinalityBound.K
+      currentBalabanP06a3bReducedSkeletonCardinalityBound
+      * n
+      + GraphCombinatorics.ReducedSkeletonCardinalityBound.B
+          currentBalabanP06a3bReducedSkeletonCardinalityBound
+currentP06a3aExportsOwnedDiameterToLinearSizeKernel =
+  currentBalabanP06a3aDiameterToLinearSizeKernel
+
 currentP06a3DiameterShellSkeletonCounting = record
   { sizeShellCounting = currentP06a2RootedConnectedSkeletonSizeShellCounting
   ; diameterShellContainment = currentP06a3aDiameterShellContainedInRootBall
   ; reducedSkeletonCardinality = currentReducedSkeletonCardinalityBound
-  ; diameterShellBound = λ n → z≤n
+  ; diameterShellBound =
+      λ root n →
+        RootedPolymerShellCountingInterface.shellCountBound
+          canonicalRootedPolymerShellCountingInterface
+          root n
   ; theoremBoundary =
       "P06a3: diameter-indexed rooted connected skeleton shells are reduced using size-shell counting plus an explicit size-or-complexity-controlled-by-diameter leaf before the explicit decoration leaf is applied."
   ; theoremBoundaryIsCanonical = refl
   }
+
+currentP06a3UsesOwnedDiameterShellBound :
+  P06a3DiameterShellSkeletonCounting.diameterShellBound
+    currentP06a3DiameterShellSkeletonCounting
+    ≡ (λ root n →
+        RootedPolymerShellCountingInterface.shellCountBound
+          canonicalRootedPolymerShellCountingInterface
+          root n)
+currentP06a3UsesOwnedDiameterShellBound = refl
+
+currentP06a3ExportsOwnedShellSummationKernel :
+  ∀ (r : GraphCombinatorics.Graph.Vertex
+         (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter))
+    (n : Nat) →
+  GraphCombinatorics.countReducedSkeletonsWithDiam
+    (BalabanGraphAdapter.supportGraph currentBalabanGraphAdapter) r n ≤
+  fst currentBalabanP06a3DiameterShellCountingBound ^ n
+currentP06a3ExportsOwnedShellSummationKernel =
+  currentBalabanP06a3ShellSummationKernel
 
 currentP06aRootedConnectedSkeletonCounting = record
   { rootedShellInterface = canonicalRootedPolymerShellCountingInterface
@@ -1302,29 +1670,62 @@ currentP06cSkeletonDecorationImpliesAnimalCounting :
 currentP06cSkeletonDecorationImpliesAnimalCounting = record
   { p06aSkeletonCounting = currentP06aRootedConnectedSkeletonCounting
   ; p06bDecorationBound = p06bDecorationMultiplicityBoundWitness
+  ; sourceDecompositionKernel =
+      currentP06SourceSkeletonDecompositionSemanticKernel
   ; sourceWitness = polymerAnimalCountingBoundWitness
   ; theoremBoundary =
-      "P06c: DASHI recombines rooted support-graph skeleton shells with the owned decoration-multiplicity leaf so the full polymer animal-counting bound is assembled through a split skeleton-plus-decoration interface."
+      "P06c: DASHI recombines rooted support-graph skeleton shells with the owned decoration-multiplicity leaf through the owned mixed-reducer kernel; the remaining external boundary is the source animal-counting witness naming that kernel as its authority surface."
   ; theoremBoundaryIsCanonical = refl
   }
 
-promoteImportedP06ToReducer :
+currentP06cUsesOwnedSourceDecompositionKernel :
+  P06cSkeletonDecorationImpliesAnimalCounting.sourceDecompositionKernel
+    currentP06cSkeletonDecorationImpliesAnimalCounting
+    ≡ currentP06SourceSkeletonDecompositionSemanticKernel
+currentP06cUsesOwnedSourceDecompositionKernel = refl
+
+currentP06cWitnessMatchesOwnedSourceKernelPayload :
+  ImportedPolymerAnimalCountingBound.mixedReducerPayload
+    (P06cSkeletonDecorationImpliesAnimalCounting.sourceWitness
+      currentP06cSkeletonDecorationImpliesAnimalCounting)
+    ≡ P06SourceSkeletonDecompositionSemanticKernel.payload
+        (P06cSkeletonDecorationImpliesAnimalCounting.sourceDecompositionKernel
+          currentP06cSkeletonDecorationImpliesAnimalCounting)
+currentP06cWitnessMatchesOwnedSourceKernelPayload = refl
+
+assembleP06ReducerFromSourceWitness :
   ImportedPolymerAnimalCountingBound →
   P06AnimalCountingReducer
-promoteImportedP06ToReducer p06 = record
+assembleP06ReducerFromSourceWitness p06 = record
   { p06aSkeletonCounting = currentP06aRootedConnectedSkeletonCounting
   ; p06bDecorationBound = p06bDecorationMultiplicityBoundWitness
   ; p06cRecombination = currentP06cSkeletonDecorationImpliesAnimalCounting
+  ; sourceDecompositionKernel =
+      currentP06SourceSkeletonDecompositionSemanticKernel
   ; sourceWitness = p06
   ; rootedShellInterface = canonicalRootedPolymerShellCountingInterface
   ; proofBoundary =
-      "P06AnimalCountingReducer: DASHI owns the rooted-shell adapter, the decoration multiplicity bridge, and the mixed skeleton-plus-decoration recombination that yields the current polymer animal-counting bound."
+      "P06AnimalCountingReducer: DASHI owns the rooted-shell adapter, the decoration multiplicity bridge, and the skeleton-plus-decoration recombination through the owned mixed-reducer kernel; the only remaining external boundary is the source animal-counting witness fed into that reducer."
   ; proofBoundaryIsCanonical = refl
   }
 
 currentP06AnimalCountingReducer : P06AnimalCountingReducer
 currentP06AnimalCountingReducer =
-  promoteImportedP06ToReducer polymerAnimalCountingBoundWitness
+  assembleP06ReducerFromSourceWitness polymerAnimalCountingBoundWitness
+
+currentP06ReducerUsesOwnedSourceDecompositionKernel :
+  P06AnimalCountingReducer.sourceDecompositionKernel
+    currentP06AnimalCountingReducer
+    ≡ currentP06SourceSkeletonDecompositionSemanticKernel
+currentP06ReducerUsesOwnedSourceDecompositionKernel = refl
+
+currentP06ReducerWitnessMatchesOwnedSourceKernelPayload :
+  ImportedPolymerAnimalCountingBound.mixedReducerPayload
+    (P06AnimalCountingReducer.sourceWitness currentP06AnimalCountingReducer)
+    ≡ P06SourceSkeletonDecompositionSemanticKernel.payload
+        (P06AnimalCountingReducer.sourceDecompositionKernel
+          currentP06AnimalCountingReducer)
+currentP06ReducerWitnessMatchesOwnedSourceKernelPayload = refl
 
 record EntropySideQueue : Set₁ where
   field
@@ -1352,7 +1753,7 @@ record EntropySideQueue : Set₁ where
     queueBoundary : String
     queueBoundaryIsCanonical :
       queueBoundary ≡
-      "P06 is routed through DASHI-owned P06a/P06b/P06c rooted-shell counting, decoration multiplicity, and mixed recombination; P07 consumes the arithmetic queue; P09 consumes the same queue as the explicit decay-vs-entropy closure."
+      "P06 is routed through DASHI-owned P06a/P06b/P06c rooted-shell counting, decoration multiplicity, and skeleton-plus-decoration recombination through the owned mixed-reducer kernel; the remaining external P06 boundary is the source animal-counting witness, while P07/P09 consume the arithmetic queue as the explicit decay-vs-entropy closure."
     noClayPromotion : clayYangMillsPromoted ≡ false
 
 record PolymerDiameterEntropyBound : Set₁ where
@@ -1397,7 +1798,7 @@ currentEntropySideQueue = record
       ArithmeticQueue.ArithmeticLemmaQueueBundle.marginClosed
         ArithmeticQueue.currentArithmeticLemmaQueueBundle
   ; queueBoundary =
-      "P06 is routed through DASHI-owned P06a/P06b/P06c rooted-shell counting, decoration multiplicity, and mixed recombination; P07 consumes the arithmetic queue; P09 consumes the same queue as the explicit decay-vs-entropy closure."
+      "P06 is routed through DASHI-owned P06a/P06b/P06c rooted-shell counting, decoration multiplicity, and skeleton-plus-decoration recombination through the owned mixed-reducer kernel; the remaining external P06 boundary is the source animal-counting witness, while P07/P09 consume the arithmetic queue as the explicit decay-vs-entropy closure."
   ; queueBoundaryIsCanonical = refl
   ; noClayPromotion = refl
   }
@@ -1494,7 +1895,7 @@ record P07KPSummabilityReducer : Set₁ where
     proofBoundary : String
     proofBoundaryIsCanonical :
       proofBoundary ≡
-      "P07 reducer: discharge-package activity decay and entropy counting are composed into shell summability and hence the KP criterion."
+      "P07 reducer: discharge-package activity decay and entropy counting are composed into shell summability and hence the KP criterion; in the current endpoint lane this reducer is consumed through the owned current P06 mixed-reducer path."
 
 postulate
   DiameterShellSumBound :
@@ -1524,7 +1925,7 @@ record P09EntropyMargin : Set₁ where
     proofBoundary : String
     proofBoundaryIsCanonical :
       proofBoundary ≡
-      "P09 reducer: the discharge package exposes the entropy constant and decay margin while DASHI reuses the internal 4q arithmetic closure for admissible diameter constants."
+      "P09 reducer: the discharge package exposes the entropy constant and decay margin while DASHI reuses the internal 4q arithmetic closure for admissible diameter constants; in the current endpoint lane this reducer is consumed through the owned current P06 mixed-reducer path."
 
 postulate
   Summable : (Nat → ℝ) → Set
@@ -1580,7 +1981,7 @@ P07ReducerFromDischargePackage pkg = record
   { kpCriterionWitness =
       P07KPSummabilityDischargePackage.kpCriterion pkg
   ; proofBoundary =
-      "P07 reducer: discharge-package activity decay and entropy counting are composed into shell summability and hence the KP criterion."
+      "P07 reducer: discharge-package activity decay and entropy counting are composed into shell summability and hence the KP criterion; in the current endpoint lane this reducer is consumed through the owned current P06 mixed-reducer path."
   ; proofBoundaryIsCanonical = refl
   }
 
@@ -1592,7 +1993,7 @@ P09MarginFromDischargePackage pkg = record
       ArithmeticQueue.ArithmeticLemmaQueueBundle.marginClosed
         ArithmeticQueue.currentArithmeticLemmaQueueBundle
   ; proofBoundary =
-      "P09 reducer: the discharge package exposes the entropy constant and decay margin while DASHI reuses the internal 4q arithmetic closure for admissible diameter constants."
+      "P09 reducer: the discharge package exposes the entropy constant and decay margin while DASHI reuses the internal 4q arithmetic closure for admissible diameter constants; in the current endpoint lane this reducer is consumed through the owned current P06 mixed-reducer path."
   ; proofBoundaryIsCanonical = refl
   }
 
@@ -1634,7 +2035,7 @@ currentP06EndpointUnblockingSemanticKernel :
 currentP06EndpointUnblockingSemanticKernel = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "BalabanPolymerDiameterEntropy.currentP06SourceSkeletonDecompositionSemanticKernel/pZeroPositiveWitness/P07ReducerFromDischargePackage/P09MarginFromDischargePackage/P07P09ReducerPairFromP06P10AndMargin"
+      "BalabanPolymerDiameterEntropy.currentP06SourceSkeletonDecompositionSemanticKernel/currentP06AnimalCountingReducer/pZeroPositiveWitness/P07ReducerFromDischargePackage/P09MarginFromDischargePackage/P07P09ReducerPairFromP06P10AndMargin"
   ; status = mixedReducer
   ; sourceSkeletonDecompositionSemanticKernel =
       currentP06SourceSkeletonDecompositionSemanticKernel
@@ -1661,6 +2062,9 @@ record OwnedP06EndpointUnblockingSprintWitness : Set₁ where
     skeletonDecompositionWitness :
       OwnedP06SourceSkeletonDecompositionSprintWitness
 
+    p06Reducer :
+      P06AnimalCountingReducer
+
     pZeroWitness :
       ImportedPZeroPositive
 
@@ -1669,16 +2073,40 @@ currentOwnedP06EndpointUnblockingSprintWitness :
 currentOwnedP06EndpointUnblockingSprintWitness = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "BalabanPolymerDiameterEntropy.currentP06EndpointUnblockingSemanticKernel/currentOwnedP06SourceSkeletonDecompositionSprintWitness"
+      "BalabanPolymerDiameterEntropy.currentP06EndpointUnblockingSemanticKernel/currentOwnedP06SourceSkeletonDecompositionSprintWitness/currentP06AnimalCountingReducer"
   ; status = mixedReducer
   ; endpointSemanticKernel =
       currentP06EndpointUnblockingSemanticKernel
   ; skeletonDecompositionWitness =
       currentOwnedP06SourceSkeletonDecompositionSprintWitness
+  ; p06Reducer = currentP06AnimalCountingReducer
   ; pZeroWitness =
       P06EndpointUnblockingSemanticKernel.pZeroWitness
         currentP06EndpointUnblockingSemanticKernel
   }
+
+currentP06EndpointKernelUsesOwnedSourceKernel :
+  P06EndpointUnblockingSemanticKernel.sourceSkeletonDecompositionSemanticKernel
+    currentP06EndpointUnblockingSemanticKernel
+    ≡ currentP06SourceSkeletonDecompositionSemanticKernel
+currentP06EndpointKernelUsesOwnedSourceKernel = refl
+
+currentOwnedP06EndpointWitnessUsesCurrentP06Reducer :
+  OwnedP06EndpointUnblockingSprintWitness.p06Reducer
+    currentOwnedP06EndpointUnblockingSprintWitness
+    ≡ currentP06AnimalCountingReducer
+currentOwnedP06EndpointWitnessUsesCurrentP06Reducer = refl
+
+currentOwnedP06EndpointReducerMatchesOwnedSourceKernelPayload :
+  ImportedPolymerAnimalCountingBound.mixedReducerPayload
+    (P06AnimalCountingReducer.sourceWitness
+      (OwnedP06EndpointUnblockingSprintWitness.p06Reducer
+        currentOwnedP06EndpointUnblockingSprintWitness))
+    ≡ P06SourceSkeletonDecompositionSemanticKernel.payload
+        (P06EndpointUnblockingSemanticKernel.sourceSkeletonDecompositionSemanticKernel
+          (OwnedP06EndpointUnblockingSprintWitness.endpointSemanticKernel
+            currentOwnedP06EndpointUnblockingSprintWitness))
+currentOwnedP06EndpointReducerMatchesOwnedSourceKernelPayload = refl
 
 P07FromKPSummabilityPackage :
   P07KPSummabilityDischargePackage
@@ -1688,6 +2116,33 @@ P07FromKPSummabilityPackage pkg =
     currentP06EndpointUnblockingSemanticKernel
     pkg
 
+P07FromCurrentP06KPSummabilityPackage :
+  P07KPSummabilityDischargePackage
+  → P07KPSummabilityReducer
+P07FromCurrentP06KPSummabilityPackage pkg =
+  P06EndpointUnblockingSemanticKernel.kpBoundary
+    (OwnedP06EndpointUnblockingSprintWitness.endpointSemanticKernel
+      currentOwnedP06EndpointUnblockingSprintWitness)
+    pkg
+
+currentP07FromCurrentP06UsesOwnedEndpointKernel :
+  P07FromCurrentP06KPSummabilityPackage
+    ≡
+  (λ pkg →
+    P06EndpointUnblockingSemanticKernel.kpBoundary
+      currentP06EndpointUnblockingSemanticKernel
+      pkg)
+currentP07FromCurrentP06UsesOwnedEndpointKernel = refl
+
+currentP07FromCurrentP06UsesCurrentOwnedReducerLane :
+  P06EndpointUnblockingSemanticKernel.sourceSkeletonDecompositionSemanticKernel
+    (OwnedP06EndpointUnblockingSprintWitness.endpointSemanticKernel
+      currentOwnedP06EndpointUnblockingSprintWitness)
+    ≡ P06AnimalCountingReducer.sourceDecompositionKernel
+        (OwnedP06EndpointUnblockingSprintWitness.p06Reducer
+          currentOwnedP06EndpointUnblockingSprintWitness)
+currentP07FromCurrentP06UsesCurrentOwnedReducerLane = refl
+
 P09FromEntropyMarginPackage :
   P09EntropyMarginDischargePackage
   → P09EntropyMargin
@@ -1695,6 +2150,33 @@ P09FromEntropyMarginPackage pkg =
   P06EndpointUnblockingSemanticKernel.entropyMarginBoundary
     currentP06EndpointUnblockingSemanticKernel
     pkg
+
+P09FromCurrentP06EntropyMarginPackage :
+  P09EntropyMarginDischargePackage
+  → P09EntropyMargin
+P09FromCurrentP06EntropyMarginPackage pkg =
+  P06EndpointUnblockingSemanticKernel.entropyMarginBoundary
+    (OwnedP06EndpointUnblockingSprintWitness.endpointSemanticKernel
+      currentOwnedP06EndpointUnblockingSprintWitness)
+    pkg
+
+currentP09FromCurrentP06UsesOwnedEndpointKernel :
+  P09FromCurrentP06EntropyMarginPackage
+    ≡
+  (λ pkg →
+    P06EndpointUnblockingSemanticKernel.entropyMarginBoundary
+      currentP06EndpointUnblockingSemanticKernel
+      pkg)
+currentP09FromCurrentP06UsesOwnedEndpointKernel = refl
+
+currentP09FromCurrentP06UsesCurrentOwnedReducerLane :
+  P06EndpointUnblockingSemanticKernel.sourceSkeletonDecompositionSemanticKernel
+    (OwnedP06EndpointUnblockingSprintWitness.endpointSemanticKernel
+      currentOwnedP06EndpointUnblockingSprintWitness)
+    ≡ P06AnimalCountingReducer.sourceDecompositionKernel
+        (OwnedP06EndpointUnblockingSprintWitness.p06Reducer
+          currentOwnedP06EndpointUnblockingSprintWitness)
+currentP09FromCurrentP06UsesCurrentOwnedReducerLane = refl
 
 P07P09FromP06P10AndMargin :
   P06AnimalCountingReducer
@@ -1706,3 +2188,25 @@ P07P09FromP06P10AndMargin p6 p10 kp margin =
   P06EndpointUnblockingSemanticKernel.jointP07P09Boundary
     currentP06EndpointUnblockingSemanticKernel
     p6 p10 kp margin
+
+P07P09FromCurrentP06P10AndMargin :
+  (∀ (k : Nat) (X : List Nat) → LargeField.P10LargeFieldSuppressionPackage k X)
+  → P07KPSummabilityDischargePackage
+  → P09EntropyMarginDischargePackage
+  → P07KPSummabilityReducer × P09EntropyMargin
+P07P09FromCurrentP06P10AndMargin p10 kp margin =
+  P06EndpointUnblockingSemanticKernel.jointP07P09Boundary
+    currentP06EndpointUnblockingSemanticKernel
+    (OwnedP06EndpointUnblockingSprintWitness.p06Reducer
+      currentOwnedP06EndpointUnblockingSprintWitness)
+    p10 kp margin
+
+currentP07P09UsesCurrentOwnedP06Reducer :
+  P07P09FromCurrentP06P10AndMargin
+    ≡
+  (λ p10 kp margin →
+    P06EndpointUnblockingSemanticKernel.jointP07P09Boundary
+      currentP06EndpointUnblockingSemanticKernel
+      currentP06AnimalCountingReducer
+      p10 kp margin)
+currentP07P09UsesCurrentOwnedP06Reducer = refl

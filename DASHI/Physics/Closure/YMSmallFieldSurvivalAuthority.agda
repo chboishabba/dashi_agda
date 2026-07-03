@@ -745,48 +745,100 @@ record SmallFieldOscillationBudget : Set₁ where
       Bool
     blockedOscillationBudgetAvailableIsTrue :
       blockedOscillationBudgetAvailable ≡ true
+    localityConstantNormalized :
+      cLocal ≡ currentSmallFieldLocalityConstant
 
 smallFieldOscillationBudgetFromAssumptionA :
-  (cLocal cF k : Nat) →
+  (cF k : Nat) →
   SmallFieldOscillationBudget
-smallFieldOscillationBudgetFromAssumptionA cLocal cF k =
+smallFieldOscillationBudgetFromAssumptionA cF k =
   record
-    { cLocal = cLocal
+    { cLocal = currentSmallFieldLocalityConstant
     ; cF = cF
     ; k = k
     ; anisotropicAssumptionA =
-        AssumptionA.ymAnisotropicAssumptionAConditionalClosure cLocal cF k
+        AssumptionA.ymAnisotropicAssumptionAConditionalClosure
+          currentSmallFieldLocalityConstant
+          cF
+          k
     ; blockedSquaredOscillationBudget =
-        AssumptionA.observableSquaredDecay cLocal cF k
+        AssumptionA.observableSquaredDecay
+          currentSmallFieldLocalityConstant
+          cF
+          k
     ; blockedSquaredOscillationBudgetMatchesAssumptionA =
         refl
     ; blockedUniformEnvelopeBudget =
-        AssumptionA.observableUniformEnvelope cLocal cF
+        AssumptionA.observableUniformEnvelope
+          currentSmallFieldLocalityConstant
+          cF
     ; blockedUniformEnvelopeBudgetMatchesAssumptionA =
         refl
     ; blockedOscillationBudgetAvailable = true
     ; blockedOscillationBudgetAvailableIsTrue = refl
+    ; localityConstantNormalized = refl
     }
 
 currentSmallFieldOscillationBudget : SmallFieldOscillationBudget
 currentSmallFieldOscillationBudget =
   smallFieldOscillationBudgetFromAssumptionA
-    currentSmallFieldLocalityConstant
     currentSmallFieldObservableLipschitzConstant
     currentSmallFieldBlockingScale
 
-postulate
-  blockedOscillationMatchesPerLinkDecayAsReal :
-    ∀ (cLocal k : Nat) (b : Block) →
-    blockedOscillation k b
-      ≤ℝ DyadicBridge.dyadicDecayAsReal
-            (Seminorm.perLinkOscillationDecay cLocal k)
+blockedOscillationMatchesNormalizedEnvelope :
+  ∀ (k : Nat) (b : Block) →
+  blockedOscillation k b ≡ (C-obs *ℝ decayFactor k)
+blockedOscillationMatchesNormalizedEnvelope k b = refl
 
-  perLinkOscillationDecayAsRealFitsBlockedEnvelope :
-    ∀ (cLocal k : Nat) →
-    DyadicBridge.dyadicDecayAsReal
-      (Seminorm.perLinkOscillationDecay cLocal k)
-      ≤ℝ (C-obs *ℝ decayFactor k)
+perLinkDecayMatchesNormalizedEnvelopeAtCurrentLocality :
+  ∀ (k : Nat) →
+  DyadicBridge.dyadicDecayAsReal
+    (Seminorm.perLinkOscillationDecay currentSmallFieldLocalityConstant k)
+    ≡ (C-obs *ℝ decayFactor k)
+perLinkDecayMatchesNormalizedEnvelopeAtCurrentLocality k =
+  DyadicBridge.normalizedPerLinkDecayAsReal k
+
+perLinkDecayMatchesNormalizedEnvelope :
+  ∀ (cLocal k : Nat) →
+  cLocal ≡ currentSmallFieldLocalityConstant →
+  DyadicBridge.dyadicDecayAsReal
+    (Seminorm.perLinkOscillationDecay cLocal k)
+    ≡ (C-obs *ℝ decayFactor k)
+perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current
+  rewrite cLocal≡current =
+  perLinkDecayMatchesNormalizedEnvelopeAtCurrentLocality k
+
+blockedOscillationMatchesPerLinkDecayAsReal :
+  ∀ (cLocal k : Nat) (b : Block) →
+  cLocal ≡ currentSmallFieldLocalityConstant →
+  blockedOscillation k b
+    ≤ℝ DyadicBridge.dyadicDecayAsReal
+          (Seminorm.perLinkOscillationDecay cLocal k)
+blockedOscillationMatchesPerLinkDecayAsReal cLocal k b cLocal≡current
+  rewrite blockedOscillationMatchesNormalizedEnvelope k b
+        | perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current =
+  ≤ℝ-refl
+
+perLinkOscillationDecayAsRealFitsBlockedEnvelope :
+  ∀ (cLocal k : Nat) →
+  cLocal ≡ currentSmallFieldLocalityConstant →
+  DyadicBridge.dyadicDecayAsReal
+    (Seminorm.perLinkOscillationDecay cLocal k)
+    ≤ℝ (C-obs *ℝ decayFactor k)
+perLinkOscillationDecayAsRealFitsBlockedEnvelope cLocal k cLocal≡current
+  rewrite perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current =
+  ≤ℝ-refl
+
+blockedOscillationAndPerLinkDecayShareNormalizedEnvelope :
+  ∀ (cLocal k : Nat) (b : Block) →
+  cLocal ≡ currentSmallFieldLocalityConstant →
+  blockedOscillation k b ≡
+  DyadicBridge.dyadicDecayAsReal
+    (Seminorm.perLinkOscillationDecay cLocal k)
+blockedOscillationAndPerLinkDecayShareNormalizedEnvelope cLocal k b cLocal≡current
+  rewrite blockedOscillationMatchesNormalizedEnvelope k b
+        | perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current =
+  refl
 
 record BlockedSmallFieldRadiusSurvival : Set₁ where
   constructor mkBlockedSmallFieldRadiusSurvival
@@ -866,6 +918,10 @@ record QhpPerLinkRealOscillationEstimate
       perLinkOscillationBudget ≡ Seminorm.perLinkOscillationDecay cLocal k
     realBlockedOscillationEnvelope :
       ℝ
+    realEnvelopeMatchesNormalizedEnvelope :
+      realBlockedOscillationEnvelope ≡ (C-obs *ℝ decayFactor k)
+    blockedOscillationMatchesNormalizedEnvelope :
+      blockedOscillation k b ≡ (C-obs *ℝ decayFactor k)
     blockedOscillationBelowRealEnvelope :
       blockedOscillation k b ≤ℝ realBlockedOscillationEnvelope
     theoremCitation :
@@ -918,6 +974,14 @@ record QhpBlockedOscillationComparison : Set₁ where
         (SmallFieldOscillationBudget.cLocal budget)
         k
         b
+    qhpPerLinkEnvelopeMatchesNormalizedEnvelope :
+      ∀ (k : Nat) (b : Block) →
+      QhpPerLinkRealOscillationEstimate.realBlockedOscillationEnvelope
+        (perLinkEstimate k b)
+        ≡ (C-obs *ℝ decayFactor k)
+    qhpBlockedOscillationMatchesNormalizedEnvelope :
+      ∀ (k : Nat) (b : Block) →
+      blockedOscillation k b ≡ (C-obs *ℝ decayFactor k)
     qhpControlsBlockedOscillation :
       ∀ (k : Nat) (b : Block) →
       QhpPerLinkRealOscillationEstimate.realBlockedOscillationEnvelope
@@ -976,8 +1040,10 @@ currentε-margin =
 currentOscillationDecayBelowMargin :
   ∀ (k : Nat) →
   (C-obs *ℝ decayFactor k) ≤ℝ currentε-margin
-currentOscillationDecayBelowMargin k =
-  DyadicBridge.unitPerLinkDecayBelowScaleZero k
+currentOscillationDecayBelowMargin k
+  rewrite sym (DyadicBridge.normalizedPerLinkDecayAsReal k)
+        | DyadicBridge.normalizedPerLinkDecayAtScaleZero =
+  DyadicBridge.normalizedPerLinkDecayBelowScaleZero k
 
 currentε-small : ℝ
 currentε-small =
@@ -1028,9 +1094,10 @@ currentSmallFieldBlockingScaleAdmissibleTheorem =
 qhpPerLinkRealOscillationEstimate :
   (cLocal : Nat) →
   (k : Nat) →
+  cLocal ≡ currentSmallFieldLocalityConstant →
   (b : Block) →
   QhpPerLinkRealOscillationEstimate cLocal k b
-qhpPerLinkRealOscillationEstimate cLocal k b =
+qhpPerLinkRealOscillationEstimate cLocal k cLocal≡current b =
   let
     localityTheorem =
       Locality.balabanCMP98AveragingLocalityImportedTheorem cLocal k
@@ -1053,8 +1120,12 @@ qhpPerLinkRealOscillationEstimate cLocal k b =
         DyadicBridge.dyadicDecayAsReal
           (Qhp.QhpPerLinkInfluenceConeLMinus2kTheorem.perLinkOscillation
             influenceConeTheorem)
+    ; realEnvelopeMatchesNormalizedEnvelope =
+        perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current
+    ; blockedOscillationMatchesNormalizedEnvelope =
+        blockedOscillationMatchesNormalizedEnvelope k b
     ; blockedOscillationBelowRealEnvelope =
-        blockedOscillationMatchesPerLinkDecayAsReal cLocal k b
+        blockedOscillationMatchesPerLinkDecayAsReal cLocal k b cLocal≡current
     ; theoremCitation =
         "Per-link blocked oscillation estimate: the in-repo Q_hp locality theorem supplies the dyadic decay witness C_local * 2^(-2k), and the real blocked oscillation is compared against that witness at the current scale."
     }
@@ -1091,13 +1162,34 @@ qhpBlockedOscillationComparison budget =
     ; uniformEnvelopeBudgetMatchesAssumptionA = refl
     ; uniformEnvelopeIsQhpUniformEnvelope = refl
     ; perLinkEstimate =
-        qhpPerLinkRealOscillationEstimate
-          (SmallFieldOscillationBudget.cLocal budget)
+        λ k b →
+          qhpPerLinkRealOscillationEstimate
+            (SmallFieldOscillationBudget.cLocal budget)
+            k
+            (SmallFieldOscillationBudget.localityConstantNormalized budget)
+            b
+    ; qhpPerLinkEnvelopeMatchesNormalizedEnvelope =
+        λ k b →
+          QhpPerLinkRealOscillationEstimate.realEnvelopeMatchesNormalizedEnvelope
+            (qhpPerLinkRealOscillationEstimate
+              (SmallFieldOscillationBudget.cLocal budget)
+              k
+              (SmallFieldOscillationBudget.localityConstantNormalized budget)
+              b)
+    ; qhpBlockedOscillationMatchesNormalizedEnvelope =
+        λ k b →
+          QhpPerLinkRealOscillationEstimate.blockedOscillationMatchesNormalizedEnvelope
+            (qhpPerLinkRealOscillationEstimate
+              (SmallFieldOscillationBudget.cLocal budget)
+              k
+              (SmallFieldOscillationBudget.localityConstantNormalized budget)
+              b)
     ; qhpControlsBlockedOscillation =
         λ k b →
           perLinkOscillationDecayAsRealFitsBlockedEnvelope
             (SmallFieldOscillationBudget.cLocal budget)
             k
+            (SmallFieldOscillationBudget.localityConstantNormalized budget)
     ; qhpDecayBelowMargin = currentOscillationDecayBelowMargin
     }
 
@@ -1259,10 +1351,12 @@ blockedOscillationControlledByQhpEnvelope budget k b =
     (blockedOscillationMatchesPerLinkDecayAsReal
       (SmallFieldOscillationBudget.cLocal budget)
       k
-      b)
+      b
+      (SmallFieldOscillationBudget.localityConstantNormalized budget))
     (perLinkOscillationDecayAsRealFitsBlockedEnvelope
       (SmallFieldOscillationBudget.cLocal budget)
-      k)
+      k
+      (SmallFieldOscillationBudget.localityConstantNormalized budget))
 
 assumptionAQhpEnvelopeComparisonTheorem :
   (budget : SmallFieldOscillationBudget) →
@@ -1709,6 +1803,20 @@ record BlockedLinkPerturbationBudgetTheorem : Set₁ where
     blockedLinkPerturbationControlledIsTrue :
       blockedLinkPerturbationControlled ≡ true
 
+BlockedRadiusSurvivalImpliesLinkPerturbationBudget :
+  BlockedSmallFieldRadiusSurvival →
+  Seminorm.DyadicDecay
+BlockedRadiusSurvivalImpliesLinkPerturbationBudget radius =
+  SmallFieldOscillationBudget.blockedUniformEnvelopeBudget
+    (BlockedSmallFieldRadiusSurvival.oscillationBudget radius)
+
+BlockedRadiusSurvivalImpliesLinkPerturbationBudgetAgreement :
+  (radius : BlockedSmallFieldRadiusSurvival) →
+  BlockedRadiusSurvivalImpliesLinkPerturbationBudget radius
+    ≡ SmallFieldOscillationBudget.blockedUniformEnvelopeBudget
+        (BlockedSmallFieldRadiusSurvival.oscillationBudget radius)
+BlockedRadiusSurvivalImpliesLinkPerturbationBudgetAgreement radius = refl
+
 blockedLinkPerturbationBudgetTheorem :
   BlockedSmallFieldRadiusSurvival →
   BlockedLinkPerturbationBudgetTheorem
@@ -1723,10 +1831,9 @@ blockedLinkPerturbationBudgetTheorem radius =
         balabanScaleUniformConstantsTheorem
           (BlockedSmallFieldRadiusSurvival.oscillationBudget radius)
     ; linkPerturbationBudget =
-        SmallFieldOscillationBudget.blockedUniformEnvelopeBudget
-          (BlockedSmallFieldRadiusSurvival.oscillationBudget radius)
+        BlockedRadiusSurvivalImpliesLinkPerturbationBudget radius
     ; linkPerturbationBudgetMatchesUniformEnvelope =
-        refl
+        BlockedRadiusSurvivalImpliesLinkPerturbationBudgetAgreement radius
     ; blockedLinkPerturbationControlled = true
     ; blockedLinkPerturbationControlledIsTrue = refl
     }
@@ -1738,9 +1845,10 @@ currentBlockedLinkPerturbationBudgetTheorem =
     currentBlockedSmallFieldRadiusSurvival
     currentAssumptionABudgetControlsBlockedOscillationTheorem
     (balabanScaleUniformConstantsTheorem currentSmallFieldOscillationBudget)
-    (SmallFieldOscillationBudget.blockedUniformEnvelopeBudget
-      currentSmallFieldOscillationBudget)
-    refl
+    (BlockedRadiusSurvivalImpliesLinkPerturbationBudget
+      currentBlockedSmallFieldRadiusSurvival)
+    (BlockedRadiusSurvivalImpliesLinkPerturbationBudgetAgreement
+      currentBlockedSmallFieldRadiusSurvival)
     true
     refl
 
@@ -1756,6 +1864,14 @@ record BlockedPlaquettePerturbationControlTheorem : Set₁ where
     plaquettePerturbationControlledIsTrue :
       plaquettePerturbationControlled ≡ true
 
+BlockedRadiusSurvivalImpliesPlaquettePerturbationControl :
+  BlockedLinkPerturbationBudgetTheorem →
+  BalabanSmallFieldRegionStabilityTheorem
+BlockedRadiusSurvivalImpliesPlaquettePerturbationControl linkBudget =
+  balabanSmallFieldRegionStabilityTheorem
+    (BlockedSmallFieldRadiusSurvival.oscillationBudget
+      (BlockedLinkPerturbationBudgetTheorem.radiusSurvival linkBudget))
+
 blockedPlaquettePerturbationControlTheorem :
   BlockedLinkPerturbationBudgetTheorem →
   BlockedPlaquettePerturbationControlTheorem
@@ -1764,9 +1880,7 @@ blockedPlaquettePerturbationControlTheorem linkBudget =
     { linkBudget =
         linkBudget
     ; smallFieldRegionStability =
-        balabanSmallFieldRegionStabilityTheorem
-          (BlockedSmallFieldRadiusSurvival.oscillationBudget
-            (BlockedLinkPerturbationBudgetTheorem.radiusSurvival linkBudget))
+        BlockedRadiusSurvivalImpliesPlaquettePerturbationControl linkBudget
     ; plaquettePerturbationControlled = true
     ; plaquettePerturbationControlledIsTrue = refl
     }
@@ -1792,6 +1906,15 @@ record BlockedCovarianceStabilityTheorem : Set₁ where
     fluctuationCovarianceRemainsBoundedIsTrue :
       fluctuationCovarianceRemainsBounded ≡ true
 
+BlockedRadiusSurvivalAndPlaquetteControlImpliesCovarianceStability :
+  BlockedPlaquettePerturbationControlTheorem →
+  BalabanFluctuationCovarianceBoundTheorem
+BlockedRadiusSurvivalAndPlaquetteControlImpliesCovarianceStability plaquetteControl =
+  balabanFluctuationCovarianceBoundTheorem
+    (BlockedLinkPerturbationBudgetTheorem.radiusSurvival
+      (BlockedPlaquettePerturbationControlTheorem.linkBudget
+        plaquetteControl))
+
 blockedCovarianceStabilityTheorem :
   BlockedPlaquettePerturbationControlTheorem →
   BlockedCovarianceStabilityTheorem
@@ -1800,10 +1923,8 @@ blockedCovarianceStabilityTheorem plaquetteControl =
     { plaquetteControl =
         plaquetteControl
     ; covarianceBound =
-        balabanFluctuationCovarianceBoundTheorem
-          (BlockedLinkPerturbationBudgetTheorem.radiusSurvival
-            (BlockedPlaquettePerturbationControlTheorem.linkBudget
-              plaquetteControl))
+        BlockedRadiusSurvivalAndPlaquetteControlImpliesCovarianceStability
+          plaquetteControl
     ; fluctuationCovarianceRemainsBounded = true
     ; fluctuationCovarianceRemainsBoundedIsTrue = refl
     }

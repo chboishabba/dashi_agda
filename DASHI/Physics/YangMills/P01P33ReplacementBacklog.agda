@@ -96,7 +96,7 @@ p06Entry : ProofReplacementEntry
 p06Entry =
   mkProofReplacementEntry
     Surfaces.polymerAnimalCountingBoundSurface
-    "Next local-lattice ownership target: replace the opaque counting witness with the explicit skeleton-plus-decoration chain encode/decode -> injectivity -> complexity by diameter -> decoration multiplicity -> bounded-degree skeleton animal counting -> P06ModelLeafDischargePackage."
+    "Next local-lattice ownership target: collapse the remaining explicit size-or-complexity-by-diameter leaf and source animal-counting witness boundary into the already-exposed skeleton-plus-decoration chain encode/decode -> injectivity -> complexity by diameter -> decoration multiplicity -> bounded-degree skeleton animal counting -> P06ModelLeafDischargePackage."
     soon
 
 p06aEntry : ProofReplacementEntry

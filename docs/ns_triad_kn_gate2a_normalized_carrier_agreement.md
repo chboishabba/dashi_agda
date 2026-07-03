@@ -389,11 +389,13 @@ gate2aOperatorSpecificSchurLiftsConstructed = true
 gate2aOperatorSpecificSchurLiftIdentitiesRecorded = true
 gate2aSchurSignSplitComparisonAuditInstalled = true
 
-normalizedGramToHelicalSchurAgreementProved = true
+normalizedGramToHelicalSchurAgreementProved = false
 gate2aCommonComparisonMapConstructed = true
 schurSeamCarrierEmbedsIntoGramCarrier = true
 gramSeamQuadraticFormMatchProved = true
-gate2aConditionalLemmaProved = true
+gate2aSeamLocalExtremizerAwareTransportModelClosed = true
+gate2aSeamLocalConditionalLemmaCarried = true
+gate2aConditionalLemmaProved = false
 gate2aExactRestrictionIdentityObserved = false
 gate2aTwoSidedQuadraticFormBoundsProved = true
 gate2aTwoSidedQuadraticFormBoundsObserved = true
@@ -401,13 +403,14 @@ gate2aExtremizerAwareTransportObservedShells = [6 , 8 , 10]
 gate2aDirectionalRatioStableObserved = true
 gate2aDirectionalRatioApproxOneSixthObserved = true
 gate2aCoarseTransportClosesObserved = false
-gate2aExtremizerAwareTransportProved = true
+gate2aExtremizerAwareTransportProved = false
 ```
 
 ## Current closure
 
-The normalized-carrier agreement surface now feeds the completed seam-local
-transport chain: the common comparison map, seam embedding, two-sided form
-bounds, and extremizer-aware transport theorem are all marked proved on the
-shared seam carrier. Exact restriction identity remains unasserted; the repo
-closes Gate 2 through comparison and transfer rather than literal identity.
+The normalized-carrier agreement surface now feeds only the seam-local
+transport chain: the common comparison map, seam embedding, and two-sided form
+bounds remain recorded, while exact normalized-carrier agreement and the
+extremizer-aware transport theorem remain analytically open. Exact restriction
+identity remains unasserted; the repo no longer treats seam-local transport as
+an exact Gate 2 proof.

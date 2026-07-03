@@ -143,20 +143,20 @@ record NSTriadKNGate2ANormalizedCarrierAgreementReceipt : Setω where
       gate2aCoarseTransportClosesObserved ≡ false
 
     normalizedGramToHelicalSchurAgreementProved : Bool
-    normalizedGramToHelicalSchurAgreementProvedIsTrue :
-      normalizedGramToHelicalSchurAgreementProved ≡ true
+    normalizedGramToHelicalSchurAgreementProvedIsFalse :
+      normalizedGramToHelicalSchurAgreementProved ≡ false
 
     gate2aCommonComparisonMapConstructed : Bool
-    gate2aCommonComparisonMapConstructedIsTrue :
-      gate2aCommonComparisonMapConstructed ≡ true
+    gate2aCommonComparisonMapConstructedIsFalse :
+      gate2aCommonComparisonMapConstructed ≡ false
 
     schurSeamCarrierEmbedsIntoGramCarrier : Bool
-    schurSeamCarrierEmbedsIntoGramCarrierIsTrue :
-      schurSeamCarrierEmbedsIntoGramCarrier ≡ true
+    schurSeamCarrierEmbedsIntoGramCarrierIsFalse :
+      schurSeamCarrierEmbedsIntoGramCarrier ≡ false
 
     gramSeamQuadraticFormMatchProved : Bool
-    gramSeamQuadraticFormMatchProvedIsTrue :
-      gramSeamQuadraticFormMatchProved ≡ true
+    gramSeamQuadraticFormMatchProvedIsFalse :
+      gramSeamQuadraticFormMatchProved ≡ false
 
     gate2aExactRestrictionIdentityObserved : Bool
     gate2aExactRestrictionIdentityObservedIsFalse :
@@ -167,8 +167,8 @@ record NSTriadKNGate2ANormalizedCarrierAgreementReceipt : Setω where
       gate2aSchurLinearityObserved ≡ false
 
     gate2aTwoSidedQuadraticFormBoundsProved : Bool
-    gate2aTwoSidedQuadraticFormBoundsProvedIsTrue :
-      gate2aTwoSidedQuadraticFormBoundsProved ≡ true
+    gate2aTwoSidedQuadraticFormBoundsProvedIsFalse :
+      gate2aTwoSidedQuadraticFormBoundsProved ≡ false
 
     gate2aExtremizerAwareTransportTheoremStated : Bool
     gate2aExtremizerAwareTransportTheoremStatedIsTrue :
@@ -206,13 +206,21 @@ record NSTriadKNGate2ANormalizedCarrierAgreementReceipt : Setω where
     gate2aDirectionalMarginClosingStatedIsTrue :
       gate2aDirectionalMarginClosingStated ≡ true
 
+    gate2aSeamLocalExtremizerAwareTransportModelClosed : Bool
+    gate2aSeamLocalExtremizerAwareTransportModelClosedIsTrue :
+      gate2aSeamLocalExtremizerAwareTransportModelClosed ≡ true
+
+    gate2aSeamLocalConditionalLemmaCarried : Bool
+    gate2aSeamLocalConditionalLemmaCarriedIsTrue :
+      gate2aSeamLocalConditionalLemmaCarried ≡ true
+
     gate2aExtremizerAwareTransportProved : Bool
-    gate2aExtremizerAwareTransportProvedIsTrue :
-      gate2aExtremizerAwareTransportProved ≡ true
+    gate2aExtremizerAwareTransportProvedIsFalse :
+      gate2aExtremizerAwareTransportProved ≡ false
 
     gate2aConditionalLemmaProved : Bool
-    gate2aConditionalLemmaProvedIsTrue :
-      gate2aConditionalLemmaProved ≡ true
+    gate2aConditionalLemmaProvedIsFalse :
+      gate2aConditionalLemmaProved ≡ false
 
     theoremPromoted : Bool
     theoremPromotedIsFalse :
@@ -272,6 +280,32 @@ canonicalNSTriadKNGate2ANormalizedCarrierAgreementReceipt =
     refl
     true
     refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    false
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
     true
     refl
     true
@@ -284,25 +318,7 @@ canonicalNSTriadKNGate2ANormalizedCarrierAgreementReceipt =
     refl
     false
     refl
-    true
-    refl
     false
-    refl
-    false
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
     refl
     false
     refl

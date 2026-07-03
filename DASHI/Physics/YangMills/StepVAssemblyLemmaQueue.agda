@@ -139,7 +139,7 @@ stepVP07Reducer =
         Entropy.KPCriterionFromEntropyDominance
           Entropy.entropyDecayDominatesEntropy
     ; proofBoundary =
-        "P07 reducer: current Step V defaults use the DASHI-owned entropy KP summability witness."
+        "P07 reducer: current Step V defaults use the DASHI-owned entropy KP summability witness through the owned current P06 endpoint kernel and current P06 mixed-reducer path."
     ; proofBoundaryIsCanonical = refl
     }
 
@@ -158,7 +158,7 @@ stepVP09Reducer =
   record
     { marginTheorem = stepVMarginClosure
     ; proofBoundary =
-        "P09 reducer: current Step V defaults retain the internal 4q margin-closure theorem as the consumable entropy-margin interface."
+        "P09 reducer: current Step V defaults retain the internal 4q margin-closure theorem as the consumable entropy-margin interface through the owned current P06 endpoint kernel and current P06 mixed-reducer path."
     ; proofBoundaryIsCanonical = refl
     }
 
@@ -285,12 +285,35 @@ currentStepVSourceAnalyticInputs = record
   ; p33aUniformLinkEllipticity = ADC.currentP33aUniformLinkEllipticityWrapper
   }
 
+currentStepVSourceInputsMatchOwnedP06EndpointKernelPayload :
+  StepVSourceAnalyticInputs.p06MixedReducerPayload
+    currentStepVSourceAnalyticInputs
+    ≡ Entropy.P06SourceSkeletonDecompositionSemanticKernel.payload
+        (Entropy.P06EndpointUnblockingSemanticKernel.sourceSkeletonDecompositionSemanticKernel
+          (Entropy.OwnedP06EndpointUnblockingSprintWitness.endpointSemanticKernel
+            Entropy.currentOwnedP06EndpointUnblockingSprintWitness))
+currentStepVSourceInputsMatchOwnedP06EndpointKernelPayload = refl
+
 currentStepVInternalReducers : StepVInternalReducers
 currentStepVInternalReducers = record
   { p33bDiameterDomination = ADC.currentP33bWeightedTreeDistanceDominatesOrdinaryDiameter
   ; p07KPSummabilityReducer = stepVP07Reducer
   ; p09EntropyMarginReducer = stepVP09Reducer
   }
+
+currentStepVReducersUseOwnedCurrentEntropyLane :
+  (Entropy.P07KPSummabilityReducer.proofBoundary
+    (StepVInternalReducers.p07KPSummabilityReducer currentStepVInternalReducers))
+    ≡
+  "P07 reducer: current Step V defaults use the DASHI-owned entropy KP summability witness through the owned current P06 endpoint kernel and current P06 mixed-reducer path."
+currentStepVReducersUseOwnedCurrentEntropyLane = refl
+
+currentStepVMarginUsesOwnedCurrentEntropyLane :
+  (Entropy.P09EntropyMargin.proofBoundary
+    (StepVInternalReducers.p09EntropyMarginReducer currentStepVInternalReducers))
+    ≡
+  "P09 reducer: current Step V defaults retain the internal 4q margin-closure theorem as the consumable entropy-margin interface through the owned current P06 endpoint kernel and current P06 mixed-reducer path."
+currentStepVMarginUsesOwnedCurrentEntropyLane = refl
 
 StepVAnalyticLeavesToStepV :
   Entropy.ImportedPolymerAnimalCountingBound →
@@ -670,7 +693,7 @@ record StepVRGAssemblyBundle : Set where
     proofStructure   : String
     proofStructureIsCanonical
       : proofStructure
-        ≡ "Sprint 5: Step V assembled by StepVMarginFromP33bAndArithmetic, consuming P06/P10/P11/P33a as source inputs and P33b/P07/P09 as DASHI-owned reducers. Sprint 7: RG DLR-LSI branch factors through StepVToDLRSmallness and RG-Cauchy branch factors through StepVToA2 before the imported analytic lane continues. Internal composition lemmas are proved; analytic/external inputs remain postulated."
+        ≡ "Sprint 5: Step V assembled by StepVMarginFromP33bAndArithmetic, consuming P06/P10/P11/P33a as source-side analytic inputs and P33b/P07/P09 as DASHI-owned reducers. The P06 entropy lane now factors through the owned current P06 endpoint kernel and current P06 mixed-reducer path, while the P10 source lane factors through owned tail/localisation/coercivity/canonical-decay witnesses. Sprint 7: RG DLR-LSI branch factors through StepVToDLRSmallness and RG-Cauchy branch factors through StepVToA2 before the remaining external analytic authority lane continues."
     -- Invariant guard: Clay promotion is not claimed here.
     noClayPromotion  : clayYangMillsPromoted ≡ false
 
@@ -685,7 +708,7 @@ currentStepVRGAssemblyBundle = record
   ; spectralGap =
       lemmaRG-DLRLatticeGap lemmaV-3b-fromP33aAndWeightedDecay
   ; proofStructure =
-      "Sprint 5: Step V assembled by StepVMarginFromP33bAndArithmetic, consuming P06/P10/P11/P33a as source inputs and P33b/P07/P09 as DASHI-owned reducers. Sprint 7: RG DLR-LSI branch factors through StepVToDLRSmallness and RG-Cauchy branch factors through StepVToA2 before the imported analytic lane continues. Internal composition lemmas are proved; analytic/external inputs remain postulated."
+      "Sprint 5: Step V assembled by StepVMarginFromP33bAndArithmetic, consuming P06/P10/P11/P33a as source-side analytic inputs and P33b/P07/P09 as DASHI-owned reducers. The P06 entropy lane now factors through the owned current P06 endpoint kernel and current P06 mixed-reducer path, while the P10 source lane factors through owned tail/localisation/coercivity/canonical-decay witnesses. Sprint 7: RG DLR-LSI branch factors through StepVToDLRSmallness and RG-Cauchy branch factors through StepVToA2 before the remaining external analytic authority lane continues."
   ; proofStructureIsCanonical = refl
   ; noClayPromotion = refl
   }

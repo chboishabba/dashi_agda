@@ -110,6 +110,7 @@ open Kernels using
   ; HardAnalyticFactsTheoremKernel
   ; P10AnalyticLeavesFromLargeFieldKernel
   ; P06ModelLeafDischargePackageFromKernel
+  ; P06MixedReducerPayloadFromKernel
   ; P09EntropyMarginDischargePackageFromKernel
   ; P08P11AbsorptionPackageFromKernel
   ; P12P19RGTransferPackageFromKernel
@@ -267,18 +268,18 @@ currentHardAnalyticSprintPlan = record
   ; sprint14-P06-endpoint-unblocking = true
   ; sprint15-P33-source-reconstruction = true
   ; sprint16-stepV-downstream-internalisation = true
-  ; sprint17-P10-imported-endpoint-replacement = false
-  ; sprint18-P10-source-tail-theorem-reconstruction = false
-  ; sprint19-P10-source-localisation-theorem-reconstruction = false
-  ; sprint20-P10-source-coercivity-theorem-reconstruction = false
-  ; sprint21-P10-canonical-decay-source-alignment = false
+  ; sprint17-P10-imported-endpoint-replacement = true
+  ; sprint18-P10-source-tail-theorem-reconstruction = true
+  ; sprint19-P10-source-localisation-theorem-reconstruction = true
+  ; sprint20-P10-source-coercivity-theorem-reconstruction = true
+  ; sprint21-P10-canonical-decay-source-alignment = true
   ; sprint22-P06-residual-counting-proof-completion = false
-  ; sprint23-P06-endpoint-depostulation = false
+  ; sprint23-P06-endpoint-depostulation = true
   ; sprint24-P33-balaban-metric-reconstruction = false
   ; sprint25-stepV-local-lattice-handoff-depostulation = false
   ; sprint26-stepV-rg-and-downstream-depostulation = false
   ; currentFocus =
-      "Remaining critical path reordered: Sprint 17 replaces the imported P10 endpoint witnesses; Sprints 18-20 replace the normalized P10 source tail/localisation/coercivity model with actual source theorem content; Sprint 21 realigns canonical decay to the source theorem; Sprints 22-23 finish residual P06 counting and endpoint de-postulation; Sprint 24 reconstructs true P33 Balaban metric content; Sprints 25-26 de-postulate the Step V local-lattice and downstream RG/continuum handoffs."
+      "P10 source-side cleanup is complete through owned tail, localisation, coercivity, and canonical decay theorem surfaces; Sprint 23 P06 endpoint depostulation is now routed through the owned current P06 payload and source witness family, and the remaining critical path is Sprint 22 residual P06 counting proof completion, Sprint 24 true P33 Balaban metric reconstruction, and Sprints 25-26 Step V local-lattice and downstream RG/continuum handoff depostulation."
   ; noClayPromotion = refl
   }
 
@@ -923,31 +924,31 @@ P06SourceSkeletonDecompositionSprintWitnessFromProgram :
 P06SourceSkeletonDecompositionSprintWitnessFromProgram program = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "HardAnalyticDischargeProgram.P06KernelFromProgram/BalabanPolymerDiameterEntropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf"
+      "HardAnalyticDischargeProgram.P06KernelFromProgram/AnalyticTheoremKernels.P06MixedReducerPayloadFromKernel/BalabanPolymerDiameterEntropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload"
   ; status = mixedReducer
   ; sourceSkeletonDecompositionSemanticKernel =
       Entropy.OwnedP06SourceSkeletonDecompositionSprintWitness.sourceSkeletonDecompositionSemanticKernel
-        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf
-          (P06ModelLeafDischargePackageFromKernel
+        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload
+          (P06MixedReducerPayloadFromKernel
             (P06KernelFromProgram program)))
   ; skeletonDecompositionSemanticWitness =
-      Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf
-        (P06ModelLeafDischargePackageFromKernel
+      Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload
+        (P06MixedReducerPayloadFromKernel
           (P06KernelFromProgram program))
   ; residualCountingWitness =
       Entropy.OwnedP06SourceSkeletonDecompositionSprintWitness.residualCountingWitness
-        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf
-          (P06ModelLeafDischargePackageFromKernel
+        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload
+          (P06MixedReducerPayloadFromKernel
             (P06KernelFromProgram program)))
   ; decorationMultiplicityWitness =
       Entropy.OwnedP06SourceSkeletonDecompositionSprintWitness.decorationMultiplicityWitness
-        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf
-          (P06ModelLeafDischargePackageFromKernel
+        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload
+          (P06MixedReducerPayloadFromKernel
             (P06KernelFromProgram program)))
   ; animalCountingWitness =
       Entropy.OwnedP06SourceSkeletonDecompositionSprintWitness.animalCountingWitness
-        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf
-          (P06ModelLeafDischargePackageFromKernel
+        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload
+          (P06MixedReducerPayloadFromKernel
             (P06KernelFromProgram program)))
   }
 
@@ -978,22 +979,23 @@ P06EndpointUnblockingSprintWitnessFromProgram :
 P06EndpointUnblockingSprintWitnessFromProgram program = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "HardAnalyticDischargeProgram.P06KernelFromProgram/BalabanPolymerDiameterEntropy.OwnedP06EndpointUnblockingSprintWitnessFromModelLeaf"
+      "HardAnalyticDischargeProgram.P06KernelFromProgram/AnalyticTheoremKernels.P06MixedReducerPayloadFromKernel/BalabanPolymerDiameterEntropy.OwnedP06EndpointUnblockingSprintWitnessFromSourceWitness"
   ; status = mixedReducer
   ; endpointSemanticKernel =
       Entropy.OwnedP06EndpointUnblockingSprintWitness.endpointSemanticKernel
-        (Entropy.OwnedP06EndpointUnblockingSprintWitnessFromModelLeaf
-          (P06ModelLeafDischargePackageFromKernel
-            (P06KernelFromProgram program)))
+        (Entropy.OwnedP06EndpointUnblockingSprintWitnessFromSourceWitness
+          (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload
+            (P06MixedReducerPayloadFromKernel
+              (P06KernelFromProgram program))))
   ; endpointSemanticWitness =
-      Entropy.OwnedP06EndpointUnblockingSprintWitnessFromModelLeaf
-        (P06ModelLeafDischargePackageFromKernel
-          (P06KernelFromProgram program))
-  ; skeletonDecompositionWitness =
-      Entropy.OwnedP06EndpointUnblockingSprintWitness.skeletonDecompositionWitness
-        (Entropy.OwnedP06EndpointUnblockingSprintWitnessFromModelLeaf
-          (P06ModelLeafDischargePackageFromKernel
+      Entropy.OwnedP06EndpointUnblockingSprintWitnessFromSourceWitness
+        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload
+          (P06MixedReducerPayloadFromKernel
             (P06KernelFromProgram program)))
+  ; skeletonDecompositionWitness =
+      Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload
+        (P06MixedReducerPayloadFromKernel
+          (P06KernelFromProgram program))
   }
 
 P10KernelFromProgram :

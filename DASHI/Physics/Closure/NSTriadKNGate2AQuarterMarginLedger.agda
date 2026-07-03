@@ -92,8 +92,8 @@ record NSTriadKNGate2AQuarterMarginLedger : Setω where
       quarterMarginCompatibilityStated ≡ true
 
     quarterMarginCompatibilityProved : Bool
-    quarterMarginCompatibilityProvedIsTrue :
-      quarterMarginCompatibilityProved ≡ true
+    quarterMarginCompatibilityProvedIsFalse :
+      quarterMarginCompatibilityProved ≡ false
 
     marginLedgerPromoted : Bool
     marginLedgerPromotedIsFalse :
@@ -120,7 +120,7 @@ canonicalNSTriadKNGate2AQuarterMarginLedger =
     refl
     true
     refl
-    true
+    false
     refl
     false
     refl

@@ -112,7 +112,7 @@ polymerAnimalCountingBoundSurface =
   mkProofTargetSurfaceWithAuthority
     "ImportedPolymerAnimalCountingBound"
     "Eriksson 2602.0041, Lemma 5.6"
-    "P06 is a mixed reducer: DASHI now owns bounded-degree size-shell counting, diameter-shell reduction, and decoration multiplicity by diameter; remaining leaves are reduced-skeleton complexity control and skeleton-decoration decomposition."
+    "P06 now flows through a DASHI-owned rooted-shell counting split, explicit decoration multiplicity by diameter, and skeleton-plus-decoration recombination; the public external boundary remains the source animal-counting witness, while the size-or-complexity-by-diameter leaf is isolated explicitly inside P06a3."
     "Polymer support geometry in the Step V regime."
     "Rooted polymer entropy is exponentially bounded."
     "P07 KP summability and P23 terminal KP."
@@ -125,8 +125,8 @@ p06AnimalCountingReducerSurface =
   mkProofTargetSurfaceWithAuthority
     "P06AnimalCountingReducer"
     "DASHI rooted-shell adapter for the imported polymer animal counting witness"
-    "The P06 counting theorem is consumed through an explicit rooted-polymer shell interface, separating the DASHI-owned combinatorial adapter from the still-imported source counting estimate."
-    "ImportedPolymerAnimalCountingBound together with the local rooted-shell encoding."
+    "The P06 counting theorem is consumed through an explicit rooted-polymer shell interface and the owned mixed-reducer kernel, separating the DASHI-owned combinatorial factorization from the remaining source animal-counting witness."
+    "ImportedPolymerAnimalCountingBound together with the local rooted-shell encoding and the owned mixed-reducer kernel."
     "The entropy lane no longer consumes P06 as a completely opaque theorem sink."
     "P07 KP summability and the Step V entropy queue."
     "The counting input remains architecturally opaque inside Step V."
@@ -255,7 +255,7 @@ p06a3bReducedSkeletonCardinalityBoundSurface =
   mkProofTargetSurfaceWithAuthority
     "P06a3bReducedSkeletonCardinalityBound"
     "DASHI size-or-complexity-by-diameter leaf below the local P06 split"
-    "Bounded degree alone is not enough for exponential diameter-shell counting, so DASHI keeps the missing size-or-complexity-controlled-by-diameter statement as an explicit leaf."
+    "Bounded degree alone is not enough for exponential diameter-shell counting, so DASHI exposes the missing reduced-skeleton cardinality theorem explicitly as a linear size-or-complexity-by-diameter bound."
     "P06a3a diameter-shell containment."
     "The size-or-complexity leaf is explicit."
     "P06a3 diameter-shell reduction and P06c recombination."
@@ -294,9 +294,9 @@ p06cSkeletonDecorationImpliesAnimalCountingSurface =
   mkProofTargetSurfaceWithAuthority
     "P06cSkeletonDecorationImpliesAnimalCounting"
     "DASHI recombination reducer over local P06a shells and explicit P06b decoration overhead"
-    "The full imported P06 counting theorem is consumed via a split interface: rooted connected skeleton shells plus an explicit decoration-multiplicity leaf."
-    "P06a rooted skeleton interface, P06b decoration bound, and the imported full counting witness."
-    "The entropy lane consumes P06 through a skeleton-plus-decoration reducer rather than a monolithic counting import."
+    "The full P06 counting theorem is consumed via a split interface: rooted connected skeleton shells plus an explicit decoration-multiplicity leaf, threaded through the owned mixed-reducer kernel."
+    "P06a rooted skeleton interface, P06b decoration bound, the owned mixed-reducer kernel, and the imported full counting witness."
+    "The entropy lane consumes P06 through a skeleton-plus-decoration reducer whose internal mixed-reducer factorization is explicit rather than hidden behind a monolithic counting import."
     "P06AnimalCountingReducer, P07 KP summability, and the Step V entropy queue."
     "The new P06 split would not yet reach the existing entropy reducer."
     proved
@@ -307,7 +307,7 @@ kPSummabilityBoundSurface =
   mkProofTargetSurfaceWithAuthority
     "ImportedKPSummabilityBound"
     "DASHI conditional reducer consumed by StepVMarginFromP33bAndArithmetic"
-    "Animal counting plus activity decay plus the entropy margin AB < 1 imply the Kotecky-Preiss summability bound needed in Step V."
+    "Animal counting plus activity decay plus the entropy margin AB < 1 imply the Kotecky-Preiss summability bound needed in Step V; in the current entropy lane this handoff is routed through the owned P06 endpoint kernel and current P06 mixed-reducer path."
     "P06 counting bound; nonnegative counting/activity rates; entropy margin AB < 1."
     "The local polymer shell sum is uniformly finite."
     "Step V certificate and P23 terminal KP."
@@ -333,7 +333,7 @@ entropyBeatenByFullDecaySurface =
   mkProofTargetSurfaceWithAuthority
     "entropyBeatenByFullDecay"
     "DASHI arithmetic closure consumed by StepVMarginFromP33bAndArithmetic"
-    "The full Step V margin chain closes internally: 4q = 9271/10000 < 1 and every nonnegative C_diam <= 1 satisfies C_diam * 4q < 1."
+    "The full Step V margin chain closes internally: 4q = 9271/10000 < 1 and every nonnegative C_diam <= 1 satisfies C_diam * 4q < 1; in the current entropy lane this handoff is routed through the owned P06 endpoint kernel and current P06 mixed-reducer path."
     "P04 κ > 0, P05 κ = 1 convention, explicit fourQ arithmetic, and the diameter constant bound C_diam <= 1."
     "Polymer entropy is dominated by full decay."
     "P23 terminal KP and polymer diameter entropy control."

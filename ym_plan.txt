@@ -1,0 +1,499 @@
+  YM Plan
+  Goal: get the repo to a state where the canonical YM route is mathematically complete and publication-grade, with clayYangMillsPromoted = false only for the external authority reasons in DASHI/Physics/YangMills/ClayPromotionAuthorityGate.agda, not
+  because of remaining internal mathematical gaps.
+
+  There are three distinct notions of “complete” in this repo:
+
+  1. source-intake complete
+  2. repo-internal mathematical route complete
+  3. Clay-authority complete
+
+  The repo already claims (1) in DASHI/Physics/YangMills/PostulateInventory.agda. The implementation work is to make (2) true on one canonical route. (3) is external and stays false until publication, waiting period, and community acceptance.
+
+  Canonical Route
+  The route that should be treated as authoritative is:
+
+  1. P01–P33 theorem surfaces in DASHI/Physics/YangMills/P01P33ProofSurfaces.agda
+  2. Step V assembly in DASHI/Physics/YangMills/BalabanStepVSpatialKPCertificate.agda and DASHI/Physics/YangMills/StepVAssemblyLemmaQueue.agda
+  3. RG lane in DASHI/Physics/YangMills/BalabanRGStepVLane.agda and DASHI/Physics/YangMills/BalabanRGLane.agda
+  4. OS / O(4) / Wightman endpoint in DASHI/Physics/YangMills/OSAxiomBundle.agda, DASHI/Physics/YangMills/O4CovarianceRestorationGate.agda, DASHI/Physics/YangMills/WightmanReconstructionLane.agda
+  5. Route summary in DASHI/Physics/YangMills/YMMassGapRoute.agda
+  6. External authority gate in DASHI/Physics/YangMills/ClayPromotionAuthorityGate.agda
+
+  Alternate lanes are not on the first winning path:
+
+  - DASHI/Physics/YangMills/LogSobolevLane.agda
+  - DASHI/Physics/YangMills/WittenLaplacianLane.agda
+  - DASHI/Physics/YangMills/QITMassGapLane.agda
+
+  They can remain false without blocking the main route.
+
+  Priority Order
+  The repo already encodes the right critical ordering in DASHI/Physics/YangMills/HardAnalyticDischargeProgram.agda:
+
+  1. P10 endpoint replacement and source-theorem reconstruction
+  2. P06 residual counting proof completion and endpoint depostulation
+  3. P33 Balaban metric reconstruction
+  4. Step V local-lattice handoff depostulation
+  5. Step V downstream RG / continuum / endpoint depostulation
+  6. Final O(4) / OS / Wightman constructive closeout
+  7. Clay-track publication package
+
+  That is the shortest high-alpha order. Anything else adds revisions.
+
+  Stage 1
+  Route coherence and canonicalization.
+
+  Purpose: eliminate contradictions where legacy carrier modules still hardcode false while modern source-intake gates say the route is closed.
+
+  Modules:
+
+  - DASHI/Physics/YangMills/YMMassGapTarget.agda
+  - DASHI/Physics/YangMills/LatticeYangMills.agda
+  - DASHI/Physics/YangMills/O4RestorationLane.agda
+  - DASHI/Physics/YangMills/MassGapSpectralStatement.agda
+  - DASHI/Physics/YangMills/BalabanRGLane.agda
+  - DASHI/Physics/YangMills/YMMassGapRoute.agda
+
+  Required status sources:
+
+  - currentPostulateInventory
+  - canonicalOSAxiomBundle
+  - currentO4CovarianceRestorationGate
+  - currentContinuumStabilityGate
+  - canonicalWightmanReconstructionLane
+  - currentClayPromotionAuthorityGate
+
+  Concrete fields that must become coherent:
+
+  - YMMassGapTarget.quantumMeasureExists
+  - YMMassGapTarget.osAxiomsSatisfied
+  - YMMassGapTarget.wightmanReconstructed
+  - YMMassGapTarget.spectralGapProved
+  - LatticeYangMills.latticeGapExists
+  - O4RestorationLane.latticeSchwingersExist
+  - O4RestorationLane.continuumSchwingersCandidated
+  - O4RestorationLane.o4InvarianceRestored
+  - O4RestorationLane.restorationErrorVanishes
+  - MassGapSpectralStatement.hamiltonianAvailable
+  - MassGapSpectralStatement.vacuumEigenvalueZero
+  - MassGapSpectralStatement.vacuumMultiplicityOne
+  - MassGapSpectralStatement.spectralGapPositive
+  - BalabanRGLane.fullBalabanCertificate
+
+  This stage is bookkeeping, not new math.
+
+  Stage 2
+  P10 large-field theorem internalization.
+
+  Core files:
+
+  - DASHI/Physics/YangMills/BalabanLargeFieldSuppression.agda
+  - DASHI/Physics/YangMills/P10BalabanFaithfulnessBridge.agda
+
+  Current state:
+
+  - normalized source model is largely assembled
+  - remaining blocker is replacing source/import-faithfulness placeholders with true source-theorem content
+
+  Exact objects that define the P10 route:
+
+  - currentP10AdmissibleConstants
+  - currentP10SourceObjectAdapter
+  - currentP10SourceObjects
+  - currentP10ImportedActivityBoundBridge
+  - currentP10SourceAnalyticEstimatePackage
+  - currentP10SourceAnalyticLeaves
+  - currentP10AnalyticEstimateKernel
+  - currentLargeFieldSuppressionControl
+  - currentLargeFieldSuppressionBound
+
+  Exact theorem kernels / lemmas to own:
+
+  - P10BadBlockTailLowerBound
+  - P10BadBlockTailNonnegative
+  - P10BlockWeightBoundedByTailIntegral
+  - P10GaussianTailSuppression
+  - currentP10SourceActivityLocalisesToSupportProductWitness
+  - currentP10SourceProductWeightsAreSupportProductWitness
+  - currentP10SourceΦLargeIsPenaltySumWitness
+  - currentP10SourcePenaltySumIsSupportBlockSumWitness
+  - currentP10SourceSupportBlockWeightsNonnegativeWitness
+  - currentP10SourceSupportBlockWeightSuppressionWitness
+  - currentP10SourceComplexityCoveredByBadBlockCountWitness
+  - currentP10SourceBadBlockPenaltyListMatchesCountWitness
+  - currentP10SourceBadBlockPenaltyListUniformLowerBoundWitness
+  - currentP10SourceBadBlockPenaltyListIncludedInPenaltySumWitness
+  - currentP10SourceKappaBoundedByCoercivityConstantWitness
+  - P10CurrentActivitySuppressedByFunctional
+  - P10CurrentSourceDiameterCoercivity
+  - P10SourceCanonicalDiameterDecay
+  - P10CurrentCanonicalLargeFieldDecayFromOwnedKernels
+
+  Hard dependency shape:
+
+  1. tail lower bound
+  2. Gaussian tail suppression
+  3. support-product localization
+  4. product suppression
+  5. penalty/coercivity by complexity or diameter
+  6. canonical diameter-decay theorem
+  7. repackage as P10AnalyticLeaves
+
+  Success criterion:
+
+  - P10AnalyticLeaves remains the public reducer boundary
+  - no Clay-critical P10 content depends on imported endpoint witnesses
+  - P10 is source-faithful and internally owned
+
+  Stage 3
+  P06 polymer counting proof completion.
+
+  Core files:
+
+  - DASHI/Physics/YangMills/BalabanPolymerDiameterEntropy.agda
+  - DASHI/Physics/YangMills/HardAnalyticDischargeProgram.agda
+
+  Current state:
+
+  - the P06 route is structurally split correctly into skeleton counting + decoration multiplicity + recombination
+  - the missing hard leaf is still the explicit size/complexity-by-diameter counting content
+
+  Canonical split already exposed:
+
+  - P06a1BoundedDegreeSupportGraphSkeleton
+  - P06a2aBoundedDegreeRootBallGrowth
+  - P06a2RootedConnectedSkeletonSizeShellCounting
+  - ConnectedSkeletonHasRootedSpanningTree
+  - RootedTreeDFSWalk
+  - BoundedDegreeWalkCount
+  - ConnectedSkeletonCoveredByDFSWalk
+  - P06a2fDFSWalkSizeShellCountingBridge
+  - P06a3aDiameterShellContainedInRootBall
+  - P06a3DiameterShellSkeletonCounting
+  - P06cSkeletonDecorationImpliesAnimalCounting
+
+  Exact live witnesses/vars:
+
+  - currentP06a1BoundedDegreeSupportGraphSkeleton
+  - currentP06a2aBoundedDegreeRootBallGrowth
+  - currentP06a2RootedConnectedSkeletonSizeShellCounting
+  - currentConnectedSkeletonHasRootedSpanningTree
+  - currentRootedTreeDFSWalk
+  - currentBoundedDegreeWalkCount
+  - currentConnectedSkeletonCoveredByDFSWalk
+  - currentP06a2fDFSWalkSizeShellCountingBridge
+  - currentP06a3aDiameterShellContainedInRootBall
+  - currentReducedSkeletonCardinalityBound
+  - currentP06a3DiameterShellSkeletonCounting
+  - currentP06aRootedConnectedSkeletonCounting
+  - currentP06cSkeletonDecorationImpliesAnimalCounting
+  - currentP06AnimalCountingReducer
+  - currentEntropySideQueue
+  - currentPolymerDiameterEntropyBound
+  - currentP06EndpointUnblockingSemanticKernel
+  - currentOwnedP06SourceSkeletonDecompositionSprintWitness
+  - currentOwnedP06EndpointUnblockingSprintWitness
+
+  Exact subkernel fields in HardAnalyticDischargeProgram that must stop being abstract scaffolding:
+
+  - P06EncodingSubkernel.reducedSkeleton
+  - P06EncodingSubkernel.decoration
+  - P06EncodingSubkernel.encode
+  - P06EncodingSubkernel.decode
+  - P06EncodingSubkernel.encodeDecodeSound
+  - P06EncodingSubkernel.skeletonSound
+  - P06EncodingSubkernel.decorationSound
+  - P06CountingSubkernel.skeletonDiameterControlled
+  - P06CountingSubkernel.reducedComplexityControlledByDiameter
+  - P06CountingSubkernel.decorationMultiplicityByComplexity
+  - P06CountingSubkernel.polymerCountingFromEncoding
+
+  Hard mathematical leaf:
+
+  - the repo itself points at currentReducedSkeletonCardinalityBound as the remaining explicit size-or-complexity-controlled-by-diameter leaf
+
+  Success criterion:
+
+  - currentP06AnimalCountingReducer is fully supported by owned combinatorics
+  - P07/P09 consume a genuine P06 theorem, not an imported surrogate plus recombination story
+
+  Stage 4
+  P33 source-faithful metric reconstruction and radius lane closeout.
+
+  Core files:
+
+  - DASHI/Physics/YangMills/P33BalabanMetricFaithfulnessBridge.agda
+  - DASHI/Physics/YangMills/BalabanAnisotropicDiameterCompatibility.agda
+  - DASHI/Physics/Closure/RealDyadicDecayBridge.agda
+  - DASHI/Physics/Closure/YMSmallFieldSurvivalAuthority.agda
+
+  This stage has two subproblems.
+
+  First subproblem: P33 Balaban metric faithfulness.
+  Live variables and witness chain:
+
+  - metricPerturbation
+  - localMetric
+  - currentP33LocalMetricDecomposition
+  - currentP33SmallFieldControlsMetricPerturbation
+  - currentP33BackgroundMetricUniformPositive
+  - currentP33PerturbationMargin
+  - currentP33LinkWeightMetricComparison
+  - currentP33EdgePerturbationBoundedBySup
+  - currentP33BackgroundFloorPositive
+  - currentP33PositiveLinkWeightFromMetric
+  - currentSmallFieldToMetricLane
+  - currentMetricToPositiveLinkLane
+  - currentSmallFieldRegularityLeaf
+  - currentP33a1SmallFieldRegularityGivesPositiveLinkWeight
+  - currentP33a2DASHINormalisationRaisesLowerBoundToOne
+  - currentP33a3UniformityAcrossScaleAndPolymer
+  - currentP33aSplitEllipticityBundle
+  - currentP33aFullUniformLinkEllipticityFromSplit
+  - currentP33aUniformLinkEllipticityWrapper
+  - currentP33bWeightedTreeDistanceDominatesOrdinaryDiameter
+  - currentSpanningPathWeightAccumulation
+  - currentAnisotropicDiameterCompatibility
+
+  Exact abstract/bridge objects that must be made source-faithful:
+
+  - P33PerturbationStabilityKernel
+  - P33BalabanFaithfulnessReceipt
+  - P33BalabanMetricDischarge
+  - P33a1AnalyticDischargePackage
+  - P33DiameterLaneFromAnalyticDischarge
+
+  The only genuinely analytic P33 leaf, by the repo’s own wording, is:
+
+  - P33a1SmallFieldRegularityGivesPositiveLinkWeight
+
+  Second subproblem: dyadic-real radius lane.
+  Live bridge obligations in DASHI/Physics/Closure/RealDyadicDecayBridge.agda:
+
+  - currentDyadicRealSemantics
+  - natAsReal
+  - dyadicPow2NegAsReal
+  - dyadicPow2NegZeroIsOne
+  - dyadicPow2NegMonotone
+  - perLinkOscillationDecayAsReal
+  - dyadicPow2NegNonIncreasing
+  - dyadicDecayBelowUnit
+  - unitPerLinkDecayBelowScaleZero
+
+  Live faithfulness leaves in DASHI/Physics/Closure/YMSmallFieldSurvivalAuthority.agda:
+
+  - blockedOscillationMatchesPerLinkDecayAsReal
+  - perLinkOscillationDecayAsRealFitsBlockedEnvelope
+
+  These feed:
+
+  - currentOscillationDecayBelowMargin
+  - currentBlockedSmallFieldRadiusSurvival
+  - blockedLinkPerturbationBudgetTheorem
+  - blockedPlaquettePerturbationControlTheorem
+  - blockedCovarianceStabilityTheorem
+  - SmallFieldBoundsSurviveAnisotropicBlockingTheorem
+
+  Success criterion:
+
+  - the P33 metric route becomes source-faithful
+  - the radius-survival lane is internally justified enough to flip the small-field authority boundary from imported/conditional to owned on the canonical route
+
+  Stage 5
+  Step V local-lattice handoff depostulation.
+
+  Core files:
+
+  - DASHI/Physics/YangMills/StepVAssemblyLemmaQueue.agda
+  - DASHI/Physics/YangMills/LocalLatticeDischargePipeline.agda
+
+  Current architecture is already correct. The work is to remove remaining “semantic kernel only” packaging.
+
+  Exact boundary terms:
+
+  - StepVSourceAnalyticInputs
+  - StepVInternalReducers
+  - currentStepVSourceAnalyticInputs
+  - currentStepVInternalReducers
+  - StepVFromDischargePackages
+  - currentStepVSourceAnalyticInputs
+  - currentStepVRGAssemblyBundle
+  - LocalLatticeStepVSourceInputs
+  - LocalLatticeStepVInternalReducers
+  - LocalLatticeStepVFromAnalyticDischarge
+
+  Exact transfer reducers that must remain as the canonical API:
+
+  - currentStepVToDLRSmallness
+  - currentStepVToA2
+  - currentA2ToB6Influence
+  - currentB6ToRGCauchy
+  - currentDLRSmallnessAndCrossScaleToUniformLSI
+
+  Success criterion:
+
+  - Step V is assembled from owned P06/P10/P33 plus arithmetic, with no hidden imported shortcut between local-lattice analytic content and RG handoff reducers
+
+  Stage 6
+  Downstream RG / fixed-lattice / continuum / endpoint depostulation.
+
+  Core files:
+
+  - DASHI/Physics/YangMills/StepVAssemblyLemmaQueue.agda
+  - DASHI/Physics/YangMills/YangMillsDischargeClosure.agda
+  - DASHI/Physics/YangMills/HardAnalyticDischargeProgram.agda
+
+  Exact package shells:
+
+  - P12P19RGTransferPackage
+  - StepVToRGDischargePackage
+  - currentStepVDownstreamTransferSemanticKernel
+  - FixedLatticeGapDischargePackage
+  - ThermodynamicLimitPackage
+  - ContinuumLimitPackage
+  - OSWightmanEndpointPackage
+  - DownstreamAnalyticTransferPackage
+  - YangMillsFullDischargePackage
+
+  Exact package constructors / kernels:
+
+  - P12P19RGTransferFromStepV
+  - StepVToRGDischargePackageFromP12P19
+  - FixedLatticeGapDischargePackageFromKernel
+  - ThermodynamicLimitPackageFromKernel
+  - ContinuumLimitPackageFromKernel
+  - OSWightmanEndpointPackageFromKernel
+  - YangMillsEndpointFromLocalLatticeAndTransferPackages
+  - DownstreamEndpointFromTransferPackage
+  - YangMillsEndpointFromFullDischargePackage
+
+  Exact live semantic arrows:
+
+  - StepVSpatialKPImpliesDLRSmallness
+  - StepVSpatialKPImpliesA2
+  - A2ImpliesB6Influence
+  - B6InfluenceImpliesRGCauchy
+  - RGCauchyImpliesConvergence
+  - DLRSmallnessImpliesClusterExpansionStable
+  - DLRSmallnessAndCrossScaleToUniformLSIReducer
+  - UniformLSIImpliesSpectralGap
+  - SpectralGapImpliesExponentialClustering
+  - ExponentialClusteringImpliesFixedLatticeMassGap
+
+  This stage is where the repo stops being “a collection of theorem surfaces and reducer ledgers” and becomes a single owned theorem pipeline.
+
+  Stage 7
+  O(4), OS, and Wightman endpoint closeout.
+
+  Core files:
+
+  - DASHI/Physics/YangMills/WightmanEndpointLemmaQueue.agda
+  - DASHI/Physics/YangMills/WightmanReconstructionLane.agda
+  - DASHI/Physics/YangMills/OSAxiomBundle.agda
+  - DASHI/Physics/YangMills/O4CovarianceRestorationGate.agda
+  - DASHI/Physics/YangMills/BalabanContinuumStabilityGate.agda
+
+  There are two layers here.
+
+  O(4) queue:
+
+  - lemmaO4-1-anisotropicQuotientOneDimensional
+  - lemmaO4-2-anisotropyCoeffBound
+  - lemmaO4-3-insertionIntegrability
+  - lemmaO4-4-rotationalWardIdentity
+  - lemmaO4-5-symanzikBreakingDecomposition
+  - lemmaO4-6-triangularMixingLock
+  - lemmaO4-7-OS1FromComponents
+  - lemmaO4-7-OS1Covariance
+
+  OS / Wightman queue:
+
+  - lemmaOS0-temperedness
+  - lemmaOS2-reflectionPositivity
+  - lemmaOS3-bosonicSymmetry
+  - lemmaOS4-clusterProperty
+  - lemmaW-1-OSReconstruction
+  - lemmaW-2-spectralCondition
+  - lemmaW-3-clusterToMassGap
+  - lemmaW-4-nontriviality
+  - lemmaW-5-physicalMassScaleId
+
+  Split endpoint records already present:
+
+  - P31aAbstractOSReconstruction
+  - P31bYMSatisfiesOSInputs
+  - P31cClusterGapToPhysicalMassGap
+
+  Canonical lane booleans that should end true on the publication-grade route:
+
+  - OSAxiomBundle.osComplete
+  - DirectProofScaffoldStatus.completeMonotonicityScaffoldClosed
+  - DirectProofScaffoldStatus.directClusterDecayProofClosed
+  - WightmanReconstructionLane.constructiveAgdaEndpointClosed
+  - O4CovarianceRestorationGate.os1EuclideanCovarianceAvailable
+  - ContinuumStabilityGate.continuumStabilityClosed
+  - MassGapSpectralStatement.hamiltonianAvailable
+  - MassGapSpectralStatement.vacuumEigenvalueZero
+  - MassGapSpectralStatement.vacuumMultiplicityOne
+  - MassGapSpectralStatement.spectralGapPositive
+
+  Important default:
+
+  - lemmaW-1-OSReconstruction can remain an explicit wrapper around the standard OS theorem if clearly isolated as standard background. The YM-specific content around it cannot remain imported.
+
+  Stage 8
+  Publication-grade audit and Clay-track packaging.
+
+  Core files:
+
+  - DASHI/Physics/YangMills/PostulateInventory.agda
+  - DASHI/Physics/YangMills/P01P33ReplacementBacklog.agda
+  - DASHI/Physics/YangMills/YangMillsDischargeClosure.agda
+  - DASHI/Physics/YangMills/ClayPromotionAuthorityGate.agda
+
+  Required end-state:
+
+  - one canonical route is coherent
+  - every YM-specific theorem on that route is repo-owned, or else explicitly classified as standard background mathematics
+  - all remaining false values on the canonical route are external authority gates only
+
+  External, non-code conditions remain:
+
+  - qualifyingJournalPublication = true
+  - twoYearWaitingPeriodElapsed = true
+  - globalMathematicsAcceptance = true
+  - clayOrSABConsiderationAvailable = true
+
+  Until then:
+
+  - clayYangMillsPromoted = false must remain
+
+  Shortest Critical Path
+  If the goal is fewest revisions:
+
+  1. route coherence
+  2. P10
+  3. P06
+  4. P33 + radius lane
+  5. Step V local-lattice depostulation
+  6. downstream RG/fixed-lattice/continuum depostulation
+  7. O(4)/OS/Wightman closeout
+  8. publication package
+
+  That is the highest-alpha ordering already implied by:
+
+  - currentHardAnalyticSprintPlan.currentFocus
+  - currentP01P33ReplacementBacklog
+  - activeYMSprintFrontierBoundary
+
+  Acceptance Criteria
+  The YM path is “repo-internally complete” when all of the following are true:
+
+  - DASHI/Physics/YangMills/YMMassGapRoute.agda has no stale false placeholders on the canonical route
+  - P10, P06, P33 are owned mathematical lanes, not mixed endpoint imports
+  - Step V to endpoint is one theorem pipeline
+  - O(4), OS, and Wightman endpoint are constructively closed or reduced to explicit standard wrappers only
+  - DASHI/Physics/YangMills/ClayPromotionAuthorityGate.agda is the only remaining reason clayYangMillsPromoted is false
+
+  If you want, I can next turn rewrite this into a tighter “execution docket” grouped by revision, each with exact target lemmas and “done means” lines only.
