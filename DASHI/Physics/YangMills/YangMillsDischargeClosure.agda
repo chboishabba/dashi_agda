@@ -40,16 +40,22 @@ record YangMillsFullDischargePackage : Set₁ where
     downstreamTransfer : DownstreamAnalyticTransferPackage
     noClayPromotion : clayYangMillsPromoted ≡ false
 
-postulate
-  postulatedYangMillsEndpointFromFullDischargePackage :
-    YangMillsFullDischargePackage
-    → Assembly.YangMillsQuantumFieldTheory × Assembly.PhysicalMassGap
-
 YangMillsEndpointFromFullDischargePackage :
   YangMillsFullDischargePackage
   → Assembly.YangMillsQuantumFieldTheory × Assembly.PhysicalMassGap
 YangMillsEndpointFromFullDischargePackage pkg =
-  postulatedYangMillsEndpointFromFullDischargePackage pkg
+  LocalLattice.YangMillsEndpointFromLocalLatticeAndTransferPackages
+    (YangMillsFullDischargePackage.localLattice pkg)
+    (DownstreamAnalyticTransferPackage.rgTransfer
+      (YangMillsFullDischargePackage.downstreamTransfer pkg))
+    (DownstreamAnalyticTransferPackage.fixedLatticeGap
+      (YangMillsFullDischargePackage.downstreamTransfer pkg))
+    (DownstreamAnalyticTransferPackage.thermodynamicLimit
+      (YangMillsFullDischargePackage.downstreamTransfer pkg))
+    (DownstreamAnalyticTransferPackage.continuumLimit
+      (YangMillsFullDischargePackage.downstreamTransfer pkg))
+    (DownstreamAnalyticTransferPackage.osWightmanEndpoint
+      (YangMillsFullDischargePackage.downstreamTransfer pkg))
 
 -- ── P01–P33 Coverage Ledger ──────────────────────────────────────────
 

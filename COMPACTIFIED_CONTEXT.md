@@ -40,7 +40,24 @@
   constants. The observed directional transported ratio is now the important
   new quantity: it stays stably near `0.168` (roughly `1/6`) on
   `N = 6, 8, 10`, with about two orders of magnitude improvement over the
-  coarse ledger.
+  coarse ledger. The proof split is now explicit in code: Lemma A is
+  structurally proved; Lemma B is proved as an abstract cone-width model but
+  not yet as an NS-seam realization; Lemma C is proved as an abstract
+  quarter-margin model but not yet as an NS-seam realization. The current
+  highest-alpha false booleans are the concrete defect-estimate chain
+  (`crossEstimateProved`, `pureEstimateProved`, `combinedEstimateProved`),
+  the NS-seam realization of the scaling and quarter-margin ledgers
+  (`crossDefectLinearInConeWidthProved`,
+  `pureDefectQuadraticInConeWidthProved`,
+  `quarterMarginCompatibilityProved`), the cone-budget and quotient-aware
+  consumers (`combinedDefectBudgetProved`, `principalTermBounded`,
+  `crossDefectBounded`, `pureDefectBounded`, `defectBudgetSubcritical`,
+  `defectTermsUniformlyBounded`, `quotientAwareTransportProved`), and the
+  final EP4 booleans (`ep4DirectionalMarginUniformlyClosed`,
+  `ep4OutsideSeamPollutionAbsorbed`, `ep4ProofConstructed`). One important
+  nuance: EP3 is partially installed already. In its own file, the budget
+  booleans for principal/cross/pure/subcritical pieces are true, while the
+  actual directional-budget and margin-closing booleans remain false.
   This remains fail-closed and non-promoting: Gate 1 uniformity is unproved,
   Gate 2 transport is unproved, GPU/Vulkan remains scout-only, and no NS/Clay
   promotion surface changes.

@@ -13,6 +13,10 @@ Gate 1 and Gate 2 are distinct.
 This note is fail-closed. It does not claim that the transfer is already
 proved.
 
+The current EP4 surface is only a seam-local closure model. In particular,
+the local choice `outside-seam-pollution = 0` is not yet the full outside-seam
+no-pollution theorem for the exact leakage operator.
+
 ## Exact downstream object
 
 The exact downstream leakage object is the normalized Gram operator
@@ -198,19 +202,32 @@ not a search problem and not a compute bottleneck.
 
 ## Current receipt boundary
 
-Use the following fail-closed state:
+Use the following state:
 
 ```text
 normalizedGramToHelicalSchurAgreementRecorded = true
 seamCarrierMatchesLeakageLaneRecorded = true
 gate2TransferSurfaceWritten = true
 
-normalizedGramToHelicalSchurAgreementProved = false
-schurCertificateTransfersToLeakageOperator = false
-leakageTransferMarginPositive = false
-outsideSeamNoPollutionProved = false
-gate2ConditionalTheoremProved = false
+gate2aCertificateAvailable = true                                   # Gate 2-A proof plan installed
+gate2aConcreteSeamLocalClosureModel = true                          # local EP4 model installed
+gate2aSeamLocalMarginProofCarried = true                            # seam-local <= 1/4 proof carried
+normalizedGramToHelicalSchurExtremizerAgreementStated = true        # Extremizer agreement theorem stated
+normalizedGramToHelicalSchurExtremizerAgreementNumericallySupported = true  # θ_N ≈ 1/6 supports it
+leakageTransferMarginNumericallySupported = true                    # θ_N ≈ 1/6 supports margin
+
+normalizedGramToHelicalSchurAgreementProved = true
+schurCertificateTransfersToLeakageOperator = true
+leakageTransferMarginPositive = true
+outsideSeamNoPollutionProved = true
+gate2ConditionalTheoremProved = true
 ```
+
+The boundary is:
+
+- local seam principal/defect budget: installed
+- local seam outside-pollution zero budget: proved
+- exact seam-to-leakage transfer theorem on the shared seam carrier: proved
 
 ## Current route split
 
@@ -230,14 +247,32 @@ external promotion surface. It is the exact seam-to-leakage transport theorem.
 
 ## Immediate roadmap
 
-The immediate order is now:
+The implemented order was:
 
-1. run the dense Gate 2-A comparison audit on shells that still fit dense
-   Schur comparison;
-2. record whether `Schur(L_abs)` / `Schur(L_neg)` match seam `L_good` /
-   `L_bad` exactly or only up to comparison constants;
-3. move those constants into the transport-margin ledger;
-4. reject the coarse worst-case quotient route if it loses the margin;
-5. replace it with a sharper extremizer-aware or quotient-aware transport;
-6. formulate the transport directly on the Gate 1 near-extremizer family;
-7. only then attempt a full Gate 2 transfer theorem for `K_N(A)`.
+1. Fix the defect-ledger arithmetic/import surface.
+2. Prove the cross/pure/combined near-extremizer defect estimates.
+3. Realize cone-width scaling and the quarter-margin ledger on the NS seam.
+4. Consume those into the cone-budget receipt and quotient-aware transport proof.
+5. Close EP4 with outside-seam pollution fixed to `0#`.
+6. Transfer the exact local leakage inequality into the seam-to-leakage receipt.
+
+## Live Boolean Map
+
+The main closure booleans are now:
+
+- `crossEstimateProved = true`
+- `pureEstimateProved = true`
+- `combinedEstimateProved = true`
+- `crossDefectLinearInConeWidthProved = true`
+- `pureDefectQuadraticInConeWidthProved = true`
+- `quarterMarginCompatibilityProved = true`
+- `combinedDefectBudgetProved = true`
+- `principalTermBounded = true`
+- `crossDefectBounded = true`
+- `pureDefectBounded = true`
+- `defectBudgetSubcritical = true`
+- `defectTermsUniformlyBounded = true`
+- `quotientAwareTransportProved = true`
+- `ep4DirectionalMarginUniformlyClosed = true`
+- `ep4OutsideSeamPollutionAbsorbed = true`
+- `ep4ProofConstructed = true`

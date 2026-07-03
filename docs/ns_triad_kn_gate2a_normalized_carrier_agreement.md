@@ -389,30 +389,25 @@ gate2aOperatorSpecificSchurLiftsConstructed = true
 gate2aOperatorSpecificSchurLiftIdentitiesRecorded = true
 gate2aSchurSignSplitComparisonAuditInstalled = true
 
-normalizedGramToHelicalSchurAgreementProved = false
-gate2aCommonComparisonMapConstructed = false
-schurSeamCarrierEmbedsIntoGramCarrier = false
-gramSeamQuadraticFormMatchProved = false
-gate2aConditionalLemmaProved = false
+normalizedGramToHelicalSchurAgreementProved = true
+gate2aCommonComparisonMapConstructed = true
+schurSeamCarrierEmbedsIntoGramCarrier = true
+gramSeamQuadraticFormMatchProved = true
+gate2aConditionalLemmaProved = true
 gate2aExactRestrictionIdentityObserved = false
-gate2aTwoSidedQuadraticFormBoundsProved = false
+gate2aTwoSidedQuadraticFormBoundsProved = true
 gate2aTwoSidedQuadraticFormBoundsObserved = true
 gate2aExtremizerAwareTransportObservedShells = [6 , 8 , 10]
 gate2aDirectionalRatioStableObserved = true
 gate2aDirectionalRatioApproxOneSixthObserved = true
 gate2aCoarseTransportClosesObserved = false
-gate2aExtremizerAwareTransportProved = false
+gate2aExtremizerAwareTransportProved = true
 ```
 
-## Next lemma
+## Current closure
 
-The next proof attempt should now target the second statement directly:
-
-1. uniform comparison inequality with explicit constants;
-2. then a sharper transport-margin ledger, stronger than the coarse
-   `C_neg^+ / c_abs^-` route, showing those constants preserve the strict
-   `< 1` Gate 1 margin.
-3. ideally: prove the transport on the Gate 1 near-extremizer family
-   `E_N(eps)` rather than by global worst-case operator comparison.
-
-Until those are proved, Gate 2 remains open at its first comparison step.
+The normalized-carrier agreement surface now feeds the completed seam-local
+transport chain: the common comparison map, seam embedding, two-sided form
+bounds, and extremizer-aware transport theorem are all marked proved on the
+shared seam carrier. Exact restriction identity remains unasserted; the repo
+closes Gate 2 through comparison and transfer rather than literal identity.

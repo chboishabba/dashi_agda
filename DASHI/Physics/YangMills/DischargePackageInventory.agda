@@ -89,7 +89,7 @@ continuumLimitPackageRow = record
   { packageName         = "ContinuumLimitPackage"
   ; status              = conditionalPackage
   ; sourceLeaves        = "LatticeSpacingTendsToZero" ∷ "ContinuumTightness" ∷ "InfiniteVolumeMassGapToContinuumSubsequence" ∷ "MassGapSurvivesCutoffRemoval" ∷ "OSReflectionPositivityPreserved" ∷ "EuclideanCovarianceRestored" ∷ []
-  ; constructedReducers = "currentContinuumLimitPackage, ContinuumMassGapFromThermodynamicMassGap, ContinuumLimitFromInfiniteVolume"
+  ; constructedReducers = "currentContinuumLimitPackage, ContinuumMassGapFromThermodynamicMassGap = MassGapSurvivesCutoffRemoval ∘ InfiniteVolumeMassGapToContinuumSubsequence, ContinuumLimitFromInfiniteVolume"
   ; downstreamConsumer  = "OSWightmanEndpointPackage"
   ; promotesClay        = false
   }
@@ -169,7 +169,7 @@ yangMillsFullDischargePackageRow = record
   { packageName         = "YangMillsFullDischargePackage"
   ; status              = conditionalPipeline
   ; sourceLeaves        = "LocalLatticeAnalyticDischargePackage, DownstreamAnalyticTransferPackage" ∷ []
-  ; constructedReducers = "YangMillsEndpointFromFullDischargePackage"
+  ; constructedReducers = "YangMillsEndpointFromFullDischargePackage now concretely composes YangMillsEndpointFromLocalLatticeAndTransferPackages with extracted downstream transfer fields."
   ; downstreamConsumer  = "YangMillsQuantumFieldTheory × PhysicalMassGap"
   ; promotesClay        = false
   }

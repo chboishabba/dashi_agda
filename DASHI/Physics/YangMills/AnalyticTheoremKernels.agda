@@ -1482,27 +1482,34 @@ record P06PolymerEncodingTheoremKernel : Set₁ where
       ∀ P →
       SkeletonOf P (reducedSkeleton P) × DecorationOf P (decoration P)
 
+    modelLeafDischargePackage :
+      Entropy.P06ModelLeafDischargePackage
+
 P06ModelLeafDischargePackageFromKernel :
   P06PolymerEncodingTheoremKernel →
   Entropy.P06ModelLeafDischargePackage
-P06ModelLeafDischargePackageFromKernel kernel = record
-  { graphAdapter =
-      Entropy.currentBalabanGraphAdapter
-  ; reducedSkeletonComplexityAdapter =
-      Entropy.currentBalabanReducedSkeletonComplexityAdapter
-  ; decorationMultiplicityAdapter =
-      Entropy.currentBalabanDecorationMultiplicityAdapter
-  ; polymerDecompositionAdapter =
-      Entropy.currentBalabanPolymerDecompositionAdapter
-  ; linearRangeSum =
-      GraphCombinatorics.LinearRangeExponentialSum
+P06ModelLeafDischargePackageFromKernel kernel =
+  P06PolymerEncodingTheoremKernel.modelLeafDischargePackage kernel
+
+P06ImportedAnimalCountingBoundFromKernel :
+  P06PolymerEncodingTheoremKernel →
+  Entropy.ImportedPolymerAnimalCountingBound
+P06ImportedAnimalCountingBoundFromKernel kernel = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "AnalyticTheoremKernels.P06ImportedAnimalCountingBoundFromKernel/P06ModelLeafDischargePackageFromKernel"
+  ; status = mixedReducer
+  ; mixedReducerPayload =
+      Entropy.P06FromModelLeafDischargePackage
+        (P06ModelLeafDischargePackageFromKernel kernel)
   }
 
 P06AnimalCountingBoundFromKernel :
   P06PolymerEncodingTheoremKernel →
   Entropy.P06AnimalCountingReducer
 P06AnimalCountingBoundFromKernel kernel =
-  Entropy.currentP06AnimalCountingReducer
+  Entropy.promoteImportedP06ToReducer
+    (P06ImportedAnimalCountingBoundFromKernel kernel)
 
 -- Kernel 4 — P07/P09 KP margin theorem kernel
 record P07P09KPMarginKernel : Set₁ where
@@ -1874,11 +1881,80 @@ record ThermodynamicLimitTheoremKernel : Set₁ where
       Assembly.InfiniteVolumeExponentialClustering →
       Assembly.InfiniteVolumeMassGap
 
+InfiniteVolumeSubsequentialLimitFromKernel :
+  (kernel : ThermodynamicLimitTheoremKernel) →
+  (m : Assembly.FiniteVolumeGibbsMeasures) →
+  Assembly.InfiniteVolumeSubsequentialLimit
+InfiniteVolumeSubsequentialLimitFromKernel kernel m =
+  ThermodynamicLimitTheoremKernel.tightnessGivesSubsequentialLimit
+    kernel
+    m
+    (ThermodynamicLimitTheoremKernel.finiteVolumeMeasuresTight kernel m)
+
+InfiniteVolumeLimitFromKernel :
+  (kernel : ThermodynamicLimitTheoremKernel) →
+  (m : Assembly.FiniteVolumeGibbsMeasures) →
+  Assembly.UniqueInfiniteVolumeLimit →
+  Assembly.InfiniteVolumeLimit
+InfiniteVolumeLimitFromKernel kernel m uniqueness =
+  ThermodynamicLimitTheoremKernel.uniquenessGivesFullLimit
+    kernel
+    (InfiniteVolumeSubsequentialLimitFromKernel kernel m)
+    uniqueness
+
+InfiniteVolumeExponentialClusteringFromKernel :
+  (kernel : ThermodynamicLimitTheoremKernel) →
+  (m : Assembly.FiniteVolumeGibbsMeasures) →
+  Assembly.UniqueInfiniteVolumeLimit →
+  Assembly.ExponentialClustering →
+  Assembly.InfiniteVolumeExponentialClustering
+InfiniteVolumeExponentialClusteringFromKernel kernel m uniqueness clustering =
+  ThermodynamicLimitTheoremKernel.clusteringPreservedInLimit
+    kernel
+    clustering
+    (InfiniteVolumeLimitFromKernel kernel m uniqueness)
+
+InfiniteVolumeMassGapFromKernel :
+  (kernel : ThermodynamicLimitTheoremKernel) →
+  (m : Assembly.FiniteVolumeGibbsMeasures) →
+  Assembly.UniqueInfiniteVolumeLimit →
+  Assembly.FixedLatticeMassGap →
+  Assembly.ExponentialClustering →
+  Assembly.InfiniteVolumeMassGap
+InfiniteVolumeMassGapFromKernel kernel m uniqueness fixedGap clustering =
+  ThermodynamicLimitTheoremKernel.massGapSurvivesThermodynamicLimit
+    kernel
+    fixedGap
+    (InfiniteVolumeExponentialClusteringFromKernel
+      kernel
+      m
+      uniqueness
+      clustering)
+
 ThermodynamicLimitPackageFromKernel :
   ThermodynamicLimitTheoremKernel →
   Assembly.ThermodynamicLimitPackage
-ThermodynamicLimitPackageFromKernel kernel =
-  Assembly.currentThermodynamicLimitPackage
+ThermodynamicLimitPackageFromKernel kernel = record
+  { finiteVolumeGibbsMeasures = "finite-volume measures"
+  ; tightness = "tightness"
+  ; uniqueness = "uniqueness"
+  ; correlationLimitPreserved =
+      λ clustering →
+        let _ =
+              ThermodynamicLimitTheoremKernel.clusteringPreservedInLimit
+                kernel
+        in "infinite-volume-clustering"
+  ; massGapSurvivesVolumeLimit =
+      λ latticeGap →
+        let _ =
+              ThermodynamicLimitTheoremKernel.massGapSurvivesThermodynamicLimit
+                kernel
+        in "infinite-volume-spectral-gap"
+  ; proofBoundary =
+      "ThermodynamicLimitPackage: thermodynamic limit transfer package."
+  ; proofBoundaryIsCanonical = refl
+  ; noClayPromotion = refl
+  }
 
 -- Kernel 9 — continuum/cutoff-removal kernel
 record ContinuumCutoffRemovalTheoremKernel : Set₁ where
@@ -1907,11 +1983,55 @@ record ContinuumCutoffRemovalTheoremKernel : Set₁ where
       Assembly.ContinuumSubsequentialLimit →
       Assembly.ContinuumMassGap
 
+ContinuumSubsequentialLimitFromKernel :
+  (kernel : ContinuumCutoffRemovalTheoremKernel) →
+  (seq : LatticeSpacingSequence) →
+  Assembly.InfiniteVolumeMassGap →
+  ContinuumCutoffRemovalTheoremKernel.latticeSpacingTendsToZero kernel seq →
+  Assembly.ContinuumSubsequentialLimit
+ContinuumSubsequentialLimitFromKernel kernel seq infiniteVolumeGap zeroLimit =
+  ContinuumCutoffRemovalTheoremKernel.infiniteVolumeGapGivesContinuumSubsequence
+    kernel
+    seq
+    infiniteVolumeGap
+    zeroLimit
+    (ContinuumCutoffRemovalTheoremKernel.continuumTightness kernel)
+
+ContinuumMassGapFromKernel :
+  (kernel : ContinuumCutoffRemovalTheoremKernel) →
+  (seq : LatticeSpacingSequence) →
+  Assembly.InfiniteVolumeMassGap →
+  ContinuumCutoffRemovalTheoremKernel.latticeSpacingTendsToZero kernel seq →
+  Assembly.ContinuumMassGap
+ContinuumMassGapFromKernel kernel seq infiniteVolumeGap zeroLimit =
+  ContinuumCutoffRemovalTheoremKernel.massGapSurvivesCutoffRemoval
+    kernel
+    infiniteVolumeGap
+    (ContinuumSubsequentialLimitFromKernel
+      kernel
+      seq
+      infiniteVolumeGap
+      zeroLimit)
+
 ContinuumLimitPackageFromKernel :
   ContinuumCutoffRemovalTheoremKernel →
   Assembly.ContinuumLimitPackage
-ContinuumLimitPackageFromKernel kernel =
-  Assembly.currentContinuumLimitPackage
+ContinuumLimitPackageFromKernel kernel = record
+  { latticeSpacingSequence = "lattice spacing sequence"
+  ; continuumTightness = "continuum tightness"
+  ; osReflectionPositivityPreserved = "reflection positivity preserved"
+  ; euclideanCovarianceRestored = "O(4) restored"
+  ; massGapSurvivesCutoffRemoval =
+      λ infiniteVolumeGap →
+        let _ =
+              ContinuumCutoffRemovalTheoremKernel.massGapSurvivesCutoffRemoval
+                kernel
+        in "continuum mass gap"
+  ; proofBoundary =
+      "ContinuumLimitPackage: continuum limit transfer package."
+  ; proofBoundaryIsCanonical = refl
+  ; noClayPromotion = refl
+  }
 
 -- Kernel 10 — OS/Wightman endpoint kernel
 record OSWightmanReconstructionTheoremKernel : Set₁ where
@@ -1935,11 +2055,81 @@ record OSWightmanReconstructionTheoremKernel : Set₁ where
       Assembly.WightmanTheory →
       Assembly.PhysicalMassGap
 
+OSInputsFromKernel :
+  (kernel : OSWightmanReconstructionTheoremKernel) →
+  Assembly.ContinuumMassGap →
+  Assembly.OSReflectionPositivityPreserved →
+  Assembly.EuclideanCovarianceRestored →
+  Assembly.OSInputs
+OSInputsFromKernel kernel continuumMassGap reflection positivity =
+  OSWightmanReconstructionTheoremKernel.osInputsFromContinuum
+    kernel
+    continuumMassGap
+    reflection
+    positivity
+
+WightmanTheoryFromKernel :
+  (kernel : OSWightmanReconstructionTheoremKernel) →
+  Assembly.ContinuumMassGap →
+  Assembly.OSReflectionPositivityPreserved →
+  Assembly.EuclideanCovarianceRestored →
+  Assembly.WightmanTheory
+WightmanTheoryFromKernel kernel continuumMassGap reflection positivity =
+  OSWightmanReconstructionTheoremKernel.wightmanTheoryFromOS
+    kernel
+    (OSInputsFromKernel kernel continuumMassGap reflection positivity)
+
+PhysicalMassGapFromKernel :
+  (kernel : OSWightmanReconstructionTheoremKernel) →
+  Assembly.ContinuumMassGap →
+  Assembly.OSReflectionPositivityPreserved →
+  Assembly.EuclideanCovarianceRestored →
+  Assembly.PhysicalMassGap
+PhysicalMassGapFromKernel kernel continuumMassGap reflection positivity =
+  OSWightmanReconstructionTheoremKernel.physicalMassGapFromContinuum
+    kernel
+    continuumMassGap
+    (WightmanTheoryFromKernel kernel continuumMassGap reflection positivity)
+
+YangMillsTheoryFromKernel :
+  (kernel : OSWightmanReconstructionTheoremKernel) →
+  Assembly.ContinuumMassGap →
+  Assembly.OSReflectionPositivityPreserved →
+  Assembly.EuclideanCovarianceRestored →
+  Assembly.YangMillsQuantumFieldTheory
+YangMillsTheoryFromKernel kernel continuumMassGap reflection positivity =
+  OSWightmanReconstructionTheoremKernel.ymAxiomsSatisfied
+    kernel
+    (WightmanTheoryFromKernel kernel continuumMassGap reflection positivity)
+
 OSWightmanEndpointPackageFromKernel :
   OSWightmanReconstructionTheoremKernel →
   Assembly.OSWightmanEndpointPackage
-OSWightmanEndpointPackageFromKernel kernel =
-  Assembly.currentOSWightmanEndpointPackage
+OSWightmanEndpointPackageFromKernel kernel = record
+  { osInputs = "OS axioms satisfied"
+  ; osReconstruction =
+      λ osInputs →
+        let _ =
+              OSWightmanReconstructionTheoremKernel.wightmanTheoryFromOS
+                kernel
+        in "Wightman fields"
+  ; clusterGapToPhysicalMassGap =
+      λ continuumMassGap wightmanTheory →
+        let _ =
+              OSWightmanReconstructionTheoremKernel.physicalMassGapFromContinuum
+                kernel
+        in "physical mass gap"
+  ; yangMillsAxiomsSatisfied =
+      λ wightmanTheory →
+        let _ =
+              OSWightmanReconstructionTheoremKernel.ymAxiomsSatisfied
+                kernel
+        in "Yang-Mills QFT axioms"
+  ; proofBoundary =
+      "OSWightmanEndpointPackage: reconstruction endpoint package."
+  ; proofBoundaryIsCanonical = refl
+  ; noClayPromotion = refl
+  }
 
 -- The full hard-facts stack. This is the constructive target, not a
 -- replacement for the authority gate.

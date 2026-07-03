@@ -65,6 +65,36 @@ postulate
   c-supp : ℝ
   fromNat : Nat → ℝ
 
+postulate
+  RealB5Polymer : Set
+  RealB5Block   : Set
+
+  RealB5LargeFieldPolymer :
+    Nat → RealB5Polymer → Set
+
+  realB5LargeFieldActivity :
+    Nat → RealB5Polymer → ℝ
+
+  realB5Diameter :
+    RealB5Polymer → Nat
+
+  toRealB5Polymer :
+    List Nat → RealB5Polymer  -- SourcePolymer (alias defined at line ~330)
+
+  -- B5 analytic kernel types
+  RealB5BadBlock : Nat → RealB5Polymer → RealB5Block → Set
+  b5TailThreshold : Nat → ℝ
+  realB5TailSize : Nat → RealB5Polymer → RealB5Block → ℝ
+  realB5TailIntegral : Nat → RealB5Polymer → RealB5Block → ℝ
+  realB5BlockWeight : Nat → RealB5Polymer → RealB5Block → ℝ
+  realB5SupportProduct : Nat → RealB5Polymer → ℝ
+  realB5ΦLarge : Nat → RealB5Polymer → ℝ
+
+  -- B5 kernel constants
+  c-tail : ℝ
+  C-loc : ℝ
+  decayBase : ℝ
+
 _^ℝ_ : ℝ → ℝ → ℝ
 _ ^ℝ exponent = expℝ (-ℝ exponent)
 
@@ -1268,10 +1298,205 @@ postulatedSourceKappaBoundedByCoercivityConstant :
 postulatedSourceKappaBoundedByCoercivityConstant =
   currentP10SourceKappaBoundedByCoercivityConstantWitness
 
+-- Fenced admissible-constants bridge (documentation only).
+-- This record and function do NOT prove B5 large-field suppression.
+-- They only document that if the P11 absorption condition is assumed
+-- and the admissible constants are chosen compatibly, then the
+-- prefactor inequality exp(-p0(k)) ≤ c-large follows.
+--
+-- Intended dependency chain (requires /ℝ when available):
+--   absorptionInequality : (d-dim-1)*log(L) + C-abs ≤ c-abs * p0(k)
+--   → p0(k) ≥ ((d-dim-1)*log(L) + C-abs) / c-abs
+--   → exp(-p0(k)) ≤ exp(-((d-dim-1)*log(L) + C-abs) / c-abs)
+--   → if c-large ≥ exp(-((d-dim-1)*log(L) + C-abs) / c-abs)
+--   → exp(-p0(k)) ≤ c-large
+--
+-- The /ℝ operator is not yet available in this module, so the record
+-- records the conclusion directly; the intermediate division must be
+-- reconstructed when an /ℝ operator is added.
+
+record P10AdmissiblePrefactorConstants : Set where
+  field
+    cLargeDominatesAbsorptionEnvelope :
+      ∀ (k : Nat) →
+      expℝ (-ℝ (p0 k)) ≤ℝ c-large
+
+sourcePrefactorBridgeFromAbsorptionCondition :
+  ImportedAbsorptionCondition →
+  P10AdmissiblePrefactorConstants →
+  ∀ (k : Nat) →
+  expℝ (-ℝ (p0 k)) ≤ℝ c-large
+sourcePrefactorBridgeFromAbsorptionCondition _ admissible k =
+  P10AdmissiblePrefactorConstants.cLargeDominatesAbsorptionEnvelope admissible k
+
 postulate
   postulatedSourcePrefactorAbsorbedIntoCLarge :
     ∀ (k : Nat) →
     expℝ (-ℝ (p0 k)) ≤ℝ c-large
+
+-- ── P10 actual B5 source theorem boundary ──────────────────────────────
+-- This section defines the hard boundary between the DASHI normalized
+-- source model and the actual B5/Balaban-Eriksson large-field activity
+-- decay theorem (Eriksson 2602.0069 Thm 8.5).  It does NOT identify the
+-- normalized source model with the B5 activity.  The bridge requires:
+--   1. an imported B5 diameter-decay theorem;
+--   2. an agreement theorem between B5 objects and DASHI source objects.
+--
+-- The B5 theorem is split into three analytic kernels:
+--   TailKernel        — bad-block tail suppression (Gaussian tail bound)
+--   LocalisationKernel — activity localises to support product
+--   CoercivityKernel  — Φ-large is coercive in polymer diameter
+-- plus a postulate that these three kernels together imply the full
+-- diameter-decay theorem.
+
+record P10ActualB5TailKernel : Set₁ where
+  field
+    b5BadBlockTailLowerBound :
+      ∀ (k : Nat) (X : RealB5Polymer) (b : RealB5Block) →
+      RealB5BadBlock k X b →
+      b5TailThreshold k ≤ℝ realB5TailSize k X b
+
+    b5BlockWeightBoundedByTailIntegral :
+      ∀ (k : Nat) (X : RealB5Polymer) (b : RealB5Block) →
+      realB5BlockWeight k X b ≤ℝ realB5TailIntegral k X b
+
+    b5GaussianTailSuppression :
+      ∀ (k : Nat) (X : RealB5Polymer) (b : RealB5Block) →
+      RealB5BadBlock k X b →
+      realB5TailIntegral k X b
+        ≤ℝ expℝ (-ℝ (c-tail *ℝ realB5TailSize k X b))
+
+record P10ActualB5LocalisationKernel : Set₁ where
+  field
+    b5ActivityLocalisesToSupportProduct :
+      ∀ (k : Nat) (X : RealB5Polymer) →
+      realB5LargeFieldActivity k X
+        ≤ℝ C-loc *ℝ realB5SupportProduct k X
+
+    b5SupportProductSuppressed :
+      ∀ (k : Nat) (X : RealB5Polymer) →
+      realB5SupportProduct k X
+        ≤ℝ decayBase ^ℝ realB5ΦLarge k X
+
+record P10ActualB5CoercivityKernel : Set₁ where
+  field
+    b5ΦLargeCoerciveInDiameter :
+      ∀ (k : Nat) (X : RealB5Polymer) →
+      RealB5LargeFieldPolymer k X →
+      κ *ℝ fromNat (realB5Diameter X)
+        ≤ℝ realB5ΦLarge k X
+
+postulate
+  P10ActualB5LargeFieldSourceTheoremFromKernels :
+    P10ActualB5TailKernel →
+    P10ActualB5LocalisationKernel →
+    P10ActualB5CoercivityKernel →
+    P10ActualB5LargeFieldSourceTheorem
+
+record P10ActualB5LargeFieldSourceTheorem : Set₁ where
+  field
+    b5ActivityDecayByDiameter :
+      ∀ (k : Nat) (X : RealB5Polymer) →
+      RealB5LargeFieldPolymer k X →
+      realB5LargeFieldActivity k X
+        ≤ℝ
+      c-large *ℝ expℝ (-ℝ (κ *ℝ fromNat (realB5Diameter X)))
+
+record P10B5DashiSourceAgreement : Set₁ where
+  field
+    b5LargeFieldPredicateAgreement :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      LargeFieldPolymer k X →
+      RealB5LargeFieldPolymer k (toRealB5Polymer X)
+
+    sourceActivityAgreesWithB5 :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      sourceLargeFieldActivity k X
+        ≡
+      realB5LargeFieldActivity k (toRealB5Polymer X)
+
+    sourceDiameterAgreesWithB5 :
+      ∀ (X : SourcePolymer) →
+      fromNat (length X)
+        ≡
+      fromNat (realB5Diameter (toRealB5Polymer X))
+
+exp-cong : ∀ {x y : ℝ} → x ≡ y → expℝ x ≡ expℝ y
+exp-cong refl = refl
+
+*ℝ-cong : ∀ {a b c d : ℝ} → a ≡ b → c ≡ d → a *ℝ c ≡ b *ℝ d
+*ℝ-cong refl refl = refl
+
+P10CanonicalEnvelopeDiameterTransport :
+  (X : SourcePolymer) →
+  fromNat (length X) ≡ fromNat (realB5Diameter (toRealB5Polymer X)) →
+  (c-large *ℝ expℝ (-ℝ (κ *ℝ fromNat (realB5Diameter (toRealB5Polymer X)))))
+    ≡
+  (c-large *ℝ expℝ (-ℝ (κ *ℝ fromNat (length X))))
+P10CanonicalEnvelopeDiameterTransport X diamEq =
+  *ℝ-cong refl
+    (exp-cong
+      (cong (λ t → -ℝ (κ *ℝ t))
+        (sym diamEq)))
+
+record P10CanonicalLargeFieldDecayTheorem : Set₁ where
+  field
+    canonicalLargeFieldDecay :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      LargeFieldPolymer k X →
+      sourceLargeFieldActivity k X
+        ≤ℝ
+      c-large *ℝ expℝ (-ℝ (κ *ℝ fromNat (length X)))
+
+P10CanonicalLargeFieldDecayFromActualB5 :
+  P10ActualB5LargeFieldSourceTheorem →
+  P10B5DashiSourceAgreement →
+  ∀ (k : Nat) (X : SourcePolymer) →
+  LargeFieldPolymer k X →
+  sourceLargeFieldActivity k X
+    ≤ℝ
+  c-large *ℝ expℝ (-ℝ (κ *ℝ fromNat (length X)))
+P10CanonicalLargeFieldDecayFromActualB5 b5 agree k X lf =
+  OrderedRealKernel.≤-subst-left
+    currentOrderedRealKernel
+    (realB5LargeFieldActivity k (toRealB5Polymer X))
+    (sourceLargeFieldActivity k X)
+    (c-large *ℝ expℝ (-ℝ (κ *ℝ fromNat (length X))))
+    (sym (P10B5DashiSourceAgreement.sourceActivityAgreesWithB5 agree k X))
+    (OrderedRealKernel.≤-subst-right
+      currentOrderedRealKernel
+      (realB5LargeFieldActivity k (toRealB5Polymer X))
+      (c-large *ℝ expℝ (-ℝ (κ *ℝ fromNat (realB5Diameter (toRealB5Polymer X)))))
+      (c-large *ℝ expℝ (-ℝ (κ *ℝ fromNat (length X))))
+      (P10CanonicalEnvelopeDiameterTransport X
+        (P10B5DashiSourceAgreement.sourceDiameterAgreesWithB5 agree X))
+      (P10ActualB5LargeFieldSourceTheorem.b5ActivityDecayByDiameter
+        b5 k (toRealB5Polymer X)
+        (P10B5DashiSourceAgreement.b5LargeFieldPredicateAgreement
+          agree k X lf)))
+
+P10CanonicalLargeFieldDecayTheoremFromActualB5 :
+  P10ActualB5LargeFieldSourceTheorem →
+  P10B5DashiSourceAgreement →
+  P10CanonicalLargeFieldDecayTheorem
+P10CanonicalLargeFieldDecayTheoremFromActualB5 b5 agree = record
+  { canonicalLargeFieldDecay =
+      P10CanonicalLargeFieldDecayFromActualB5 b5 agree
+  }
+
+postulate
+  importedP10ActualB5LargeFieldSourceTheorem :
+    P10ActualB5LargeFieldSourceTheorem
+
+  importedP10B5DashiSourceAgreement :
+    P10B5DashiSourceAgreement
+
+currentP10CanonicalLargeFieldDecayTheoremFromB5 :
+  P10CanonicalLargeFieldDecayTheorem
+currentP10CanonicalLargeFieldDecayTheoremFromB5 =
+  P10CanonicalLargeFieldDecayTheoremFromActualB5
+    importedP10ActualB5LargeFieldSourceTheorem
+    importedP10B5DashiSourceAgreement
 
 P10ProductSuppressionFromSupportBlockEstimate :
   (orderedKernel : OrderedRealKernel) →

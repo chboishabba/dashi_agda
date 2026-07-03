@@ -15,6 +15,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using
   ; _<ℝ_
   ; 0ℝ
   ; 1ℝ
+  ; absℝ
   ; _+ℝ_
   ; _*ℝ_
   )
@@ -116,6 +117,10 @@ open Kernels using
   ; ThermodynamicLimitPackageFromKernel
   ; ContinuumLimitPackageFromKernel
   ; OSWightmanEndpointPackageFromKernel
+  ; InfiniteVolumeMassGapFromKernel
+  ; ContinuumMassGapFromKernel
+  ; YangMillsTheoryFromKernel
+  ; PhysicalMassGapFromKernel
   ; P33a1AnalyticDischargePackageFromKernel
   ; P33GraphCombinatoricsDischargePackageFromKernel
   ; YangMillsEndpointFromHardAnalyticFacts
@@ -141,6 +146,7 @@ PositiveProduct =
 postulate
   PositiveFiniteProduct : Set
   LatticeSpacingTendsToZero : LatticeSpacingSequence → Set
+  canonicalFiniteVolumeGibbsMeasure : Assembly.FiniteVolumeGibbsMeasures
 
 ExpPositiveℝ : Set
 ExpPositiveℝ = ∀ x → 0ℝ <ℝ expℝ x
@@ -346,6 +352,8 @@ P06KernelFromSubkernels encoding counting = record
       λ P →
       P06EncodingSubkernel.skeletonSound encoding P
       , P06EncodingSubkernel.decorationSound encoding P
+  ; modelLeafDischargePackage =
+      P06CountingSubkernel.polymerCountingFromEncoding counting encoding
   }
 
 record P10LargeFieldGeometrySubkernel : Set₁ where
@@ -442,6 +450,11 @@ record P33MetricPerturbationSubkernel : Set₁ where
       SmallFieldRegularity k X →
       supEdgePerturbation k X ≤ℝ ε-real-const
 
+    pointwiseAbsPerturbationBound :
+      ∀ k X e →
+      isEdgeOf e k X →
+      absℝ (perturbation k X e) ≤ℝ supEdgePerturbation k X
+
     backgroundMetricPositive :
       ∀ k e →
       admissibleScale k →
@@ -482,6 +495,8 @@ P33KernelFromSubkernels metric stability = record
       P33MetricPerturbationSubkernel.metricDecomposition metric
   ; smallFieldControlsPerturbation =
       P33MetricPerturbationSubkernel.smallFieldControlsPerturbation metric
+  ; pointwiseAbsPerturbationBound =
+      P33MetricPerturbationSubkernel.pointwiseAbsPerturbationBound metric
   ; backgroundMetricUniformlyPositive =
       P33MetricPerturbationSubkernel.backgroundMetricPositive metric
   ; perturbationBelowMargin =
@@ -908,18 +923,32 @@ P06SourceSkeletonDecompositionSprintWitnessFromProgram :
 P06SourceSkeletonDecompositionSprintWitnessFromProgram program = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "BalabanPolymerDiameterEntropy.currentP06SourceSkeletonDecompositionSemanticKernel/currentOwnedP06SourceSkeletonDecompositionSprintWitness"
+      "HardAnalyticDischargeProgram.P06KernelFromProgram/BalabanPolymerDiameterEntropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf"
   ; status = mixedReducer
   ; sourceSkeletonDecompositionSemanticKernel =
-      Entropy.currentP06SourceSkeletonDecompositionSemanticKernel
+      Entropy.OwnedP06SourceSkeletonDecompositionSprintWitness.sourceSkeletonDecompositionSemanticKernel
+        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf
+          (P06ModelLeafDischargePackageFromKernel
+            (P06KernelFromProgram program)))
   ; skeletonDecompositionSemanticWitness =
-      Entropy.currentOwnedP06SourceSkeletonDecompositionSprintWitness
+      Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf
+        (P06ModelLeafDischargePackageFromKernel
+          (P06KernelFromProgram program))
   ; residualCountingWitness =
-      Entropy.currentOwnedP06ResidualCountingSprintWitness
+      Entropy.OwnedP06SourceSkeletonDecompositionSprintWitness.residualCountingWitness
+        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf
+          (P06ModelLeafDischargePackageFromKernel
+            (P06KernelFromProgram program)))
   ; decorationMultiplicityWitness =
-      Entropy.currentOwnedP06bDecorationMultiplicityWitness
+      Entropy.OwnedP06SourceSkeletonDecompositionSprintWitness.decorationMultiplicityWitness
+        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf
+          (P06ModelLeafDischargePackageFromKernel
+            (P06KernelFromProgram program)))
   ; animalCountingWitness =
-      Entropy.currentOwnedP06AnimalCountingWitness
+      Entropy.OwnedP06SourceSkeletonDecompositionSprintWitness.animalCountingWitness
+        (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf
+          (P06ModelLeafDischargePackageFromKernel
+            (P06KernelFromProgram program)))
   }
 
 record OwnedP06EndpointUnblockingSprintWitness
@@ -949,14 +978,22 @@ P06EndpointUnblockingSprintWitnessFromProgram :
 P06EndpointUnblockingSprintWitnessFromProgram program = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "BalabanPolymerDiameterEntropy.currentP06EndpointUnblockingSemanticKernel/currentOwnedP06EndpointUnblockingSprintWitness"
+      "HardAnalyticDischargeProgram.P06KernelFromProgram/BalabanPolymerDiameterEntropy.OwnedP06EndpointUnblockingSprintWitnessFromModelLeaf"
   ; status = mixedReducer
   ; endpointSemanticKernel =
-      Entropy.currentP06EndpointUnblockingSemanticKernel
+      Entropy.OwnedP06EndpointUnblockingSprintWitness.endpointSemanticKernel
+        (Entropy.OwnedP06EndpointUnblockingSprintWitnessFromModelLeaf
+          (P06ModelLeafDischargePackageFromKernel
+            (P06KernelFromProgram program)))
   ; endpointSemanticWitness =
-      Entropy.currentOwnedP06EndpointUnblockingSprintWitness
+      Entropy.OwnedP06EndpointUnblockingSprintWitnessFromModelLeaf
+        (P06ModelLeafDischargePackageFromKernel
+          (P06KernelFromProgram program))
   ; skeletonDecompositionWitness =
-      Entropy.currentOwnedP06SourceSkeletonDecompositionSprintWitness
+      Entropy.OwnedP06EndpointUnblockingSprintWitness.skeletonDecompositionWitness
+        (Entropy.OwnedP06EndpointUnblockingSprintWitnessFromModelLeaf
+          (P06ModelLeafDischargePackageFromKernel
+            (P06KernelFromProgram program)))
   }
 
 P10KernelFromProgram :
@@ -1494,8 +1531,71 @@ YangMillsEndpointFromSubkernelProgram :
   HardAnalyticSubkernelProgram →
   Assembly.YangMillsQuantumFieldTheory × Assembly.PhysicalMassGap
 YangMillsEndpointFromSubkernelProgram program =
-  YangMillsEndpointFromHardAnalyticFacts
-    (HardAnalyticFactsFromSubkernelProgram program)
+  let fixedKernel =
+        FixedLatticeKernelFromProgram program
+
+      thermoKernel =
+        ThermodynamicKernelFromProgram program
+
+      continuumKernel =
+        ContinuumKernelFromProgram program
+
+      osKernel =
+        OSWightmanKernelFromProgram program
+
+      latticeSpectralGap =
+        FixedLatticeMassGapTheoremKernel.uniformLSIImpliesSpectralGap
+          fixedKernel
+          (FixedLatticeMassGapTheoremKernel.uniformLSI fixedKernel)
+
+      exponentialClustering =
+        FixedLatticeMassGapTheoremKernel.spectralGapImpliesClustering
+          fixedKernel
+          latticeSpectralGap
+
+      fixedLatticeMassGap =
+        FixedLatticeMassGapTheoremKernel.clusteringImpliesMassGap
+          fixedKernel
+          exponentialClustering
+
+      infiniteVolumeMassGap =
+        InfiniteVolumeMassGapFromKernel
+          thermoKernel
+          canonicalFiniteVolumeGibbsMeasure
+          (ThermodynamicLimitSubkernel.uniqueness
+            (HardAnalyticSubkernelProgram.thermodynamic program))
+          fixedLatticeMassGap
+          exponentialClustering
+
+      latticeSpacing =
+        ContinuumCutoffRemovalSubkernel.latticeSpacing
+          (HardAnalyticSubkernelProgram.continuum program)
+
+      continuumMassGap =
+        ContinuumMassGapFromKernel
+          continuumKernel
+          latticeSpacing
+          infiniteVolumeMassGap
+          (ContinuumCutoffRemovalSubkernel.spacingTendsToZero
+            (HardAnalyticSubkernelProgram.continuum program))
+
+      reflectionPositivity =
+        ContinuumCutoffRemovalTheoremKernel.osReflectionPositivityPreserved
+          continuumKernel
+
+      euclideanCovariance =
+        ContinuumCutoffRemovalTheoremKernel.euclideanCovarianceRestored
+          continuumKernel
+  in YangMillsTheoryFromKernel
+       osKernel
+       continuumMassGap
+       reflectionPositivity
+       euclideanCovariance
+   , PhysicalMassGapFromKernel
+       osKernel
+       continuumMassGap
+       reflectionPositivity
+       euclideanCovariance
 
 data KernelFieldClass : Set where
   definitionUnfolding : KernelFieldClass

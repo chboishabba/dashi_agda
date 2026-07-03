@@ -2510,9 +2510,10 @@ and
 `outputs/ym_sprint79_effective_action_support/ym_sprint79_effective_action_spatial_a1_summary.json`.
 Current route decision is `ANISOTROPIC_KP_ROUTE_BLOCKED` because the residual
 effective-action A1 graph is not yet proved spatial-only on the blocked
-lattice. The UV route decision is
-`ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED` until the half-plane
-squared-oscillation bound is proved.
+lattice. The UV Assumption-A lane is now proved in repo through the native
+`Q_hp` locality and squared-oscillation closure. The next UV blocker is the
+fixed-finite-volume blocked observable continuum-limit consequence, which
+still sits on the Eriksson 2602.0077 theorem surface.
 
 Entropy convention: fine-lattice spatial counting gives `eta_sp=6` and
 `6q=1.390691368515764>1`, so the favorable blocked `eta=4` line is valid only
