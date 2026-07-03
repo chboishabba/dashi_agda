@@ -171,7 +171,7 @@ data Sprint79YMGuardrail : Set where
     Sprint79YMGuardrail
   PolymerA1IsNotEriksson26020077AssumptionA :
     Sprint79YMGuardrail
-  AnisotropicAssumptionAOpenFailClosed :
+  AnisotropicAssumptionAClosedInRepo :
     Sprint79YMGuardrail
   FixedFiniteVolumeBlockedLimitIsNotClay :
     Sprint79YMGuardrail
@@ -188,7 +188,7 @@ canonicalSprint79YMGuardrails =
   ∷ EightQBlocksGenericRoute
   ∷ NoMassGapPromotionFromArithmetic
   ∷ PolymerA1IsNotEriksson26020077AssumptionA
-  ∷ AnisotropicAssumptionAOpenFailClosed
+  ∷ AnisotropicAssumptionAClosedInRepo
   ∷ FixedFiniteVolumeBlockedLimitIsNotClay
   ∷ []
 
@@ -224,7 +224,7 @@ data Sprint79YMRouteDecision : Set where
     Sprint79YMRouteDecision
   KP_GRAPH_IS_BLOCKED_L2_ETA4_CONFIRMED :
     Sprint79YMRouteDecision
-  ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED :
+  ANISOTROPIC_ASSUMPTION_A_PROVED_IN_REPO :
     Sprint79YMRouteDecision
 
 data Sprint79YMPromotion : Set where
@@ -240,7 +240,7 @@ sprint79YMCurrentToCompleteStatement =
 
 sprint79YMCurrentToCompleteBoundary : String
 sprint79YMCurrentToCompleteBoundary =
-  "This receipt is a roadmap and worker-assignment surface only. It records the current UV route decision ANISOTROPIC_ASSUMPTION_A_OPEN_FAIL_CLOSED and the current KP route decision ANISOTROPIC_KP_ROUTE_BLOCKED. It keeps AnisotropicAssumptionA, SquaredOscillationSummabilityForHalfPlaneBlocking, EffectiveActionPolymersSpatialOnlyForA1, PolymerDefinedOnBlockedLattice, KPEntropyAtBlockedScaleL2, TemporalEntropyQuotientHalvesGeneric4DCount, AllDiameterWeightedKP, small-field survival, lattice mass gap, continuum transfer, OS/Wightman reconstruction, and Clay/YM promotion false/open."
+  "This receipt is a roadmap and worker-assignment surface only. It records that the UV Assumption-A lane is now proved in repo, while the current live KP route decision remains ANISOTROPIC_KP_ROUTE_BLOCKED. The next open YM hinges are EffectiveActionPolymersSpatialOnlyForA1, PolymerDefinedOnBlockedLattice, KPEntropyAtBlockedScaleL2, TemporalEntropyQuotientHalvesGeneric4DCount, AllDiameterWeightedKP, small-field survival, lattice mass gap, continuum transfer, OS/Wightman reconstruction, and Clay/YM promotion."
 
 record ClaySprintSeventyNineYMCurrentToCompleteRoadmapReceipt :
   Set₁ where

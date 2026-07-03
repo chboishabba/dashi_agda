@@ -33,6 +33,37 @@ Current NS Gate 1 / Gate 2 roadmap note for `2026-07-02`:
   extremizer-aware or quotient-aware transport ansatz”. The leading observed
   directional ratio is now stable near `0.168` (`~1/6`) on `N = 6, 8, 10`, so
   a conservative next theorem target such as `theta_* <= 1/4` is now sensible.
+- The repo now has the right abstract/concrete split for the defect budget
+  chain. Current state:
+  `etaCrossPureAdditiveLedgerProved = true`,
+  `crossDefectLinearInAbstractModelProved = true`,
+  `pureDefectQuadraticInAbstractModelProved = true`,
+  `quarterMarginAbstractModelProved = true`,
+  while the NS-seam realization booleans remain false. The highest-alpha next
+  proof path is therefore concrete and local:
+  1. fix the `_++_` import blocker in
+     `DASHI/Physics/Closure/NSTriadKNGate2ADefectConstantLedger.agda`;
+  2. inhabit `crossEstimateProved`, `pureEstimateProved`,
+     `combinedEstimateProved` in
+     `DASHI/Physics/Closure/NSTriadKNGate2ANearExtremizerDefectEstimates.agda`;
+  3. inhabit `crossDefectLinearInConeWidthProved` and
+     `pureDefectQuadraticInConeWidthProved` in
+     `DASHI/Physics/Closure/NSTriadKNGate2AConeWidthDefectScaling.agda`;
+  4. inhabit `quarterMarginCompatibilityProved` in
+     `DASHI/Physics/Closure/NSTriadKNGate2AQuarterMarginLedger.agda`;
+  5. then close the consumer surfaces
+     `NSTriadKNGate2AConeRestrictedDefectBudget.agda`,
+     `NSTriadKNGate2AQuotientAwareLiftDefectExpansion.agda`, and
+     `NSTriadKNGate2AEP4MarginClosing.agda`.
+- EP3 needs a precise reading. In
+  `DASHI/Physics/Closure/NSTriadKNGate2AEP3DirectionalTransportBudget.agda`,
+  the budget placeholders
+  `ep3PrincipalTermBudgeted`, `ep3CrossDefectBudgeted`,
+  `ep3PureDefectBudgeted`, and `ep3DefectBudgetSubcritical` are already true.
+  The still-open EP3 booleans are `ep3DirectionalBudgetProved` and
+  `ep3MarginClosingProved`. So the main local blockers now sit in the
+  cone-budget consumer, quotient-aware transport, and EP4 files rather than
+  inside EP3's preliminary budget decomposition.
 - GPU/Vulkan remains engineering-only for this lane. `../dashiCORE` is still
   reusable as substrate, but GPU results remain non-authoritative until
   CPU/GPU parity is demonstrated for the actual Schur/helical operators.

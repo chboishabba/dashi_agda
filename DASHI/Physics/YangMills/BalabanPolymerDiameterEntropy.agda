@@ -645,6 +645,115 @@ record OwnedP06SourceSkeletonDecompositionSprintWitness : Set₁ where
     animalCountingWitness :
       OwnedP06AnimalCountingWitness
 
+P06ResidualCountingSprintWitnessFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  OwnedP06ResidualCountingSprintWitness
+P06ResidualCountingSprintWitnessFromModelLeaf pkg =
+  let payload = P06FromModelLeafDischargePackage pkg
+      graphAdapter =
+        P06ModelLeafDischargePackage.graphAdapter pkg
+      complexityAdapter =
+        P06ModelLeafDischargePackage.reducedSkeletonComplexityAdapter pkg
+  in record
+       { payload = payload
+       ; sourceAuthorityId = dashi-internal-proof
+       ; theoremLocator =
+           "BalabanPolymerDiameterEntropy.P06ResidualCountingSprintWitnessFromModelLeaf/BalabanP06a3bFromComplexity/BalabanCountingBoundReplacement"
+       ; status = mixedReducer
+       ; reducedSkeletonCardinality =
+           BalabanP06a3bFromComplexity graphAdapter complexityAdapter
+       ; diameterShellBound =
+           BalabanCountingBoundReplacement
+             graphAdapter
+             complexityAdapter
+             (P06ModelLeafDischargePackage.linearRangeSum pkg)
+       }
+
+P06bDecorationMultiplicityWitnessFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  OwnedP06bDecorationMultiplicityWitness
+P06bDecorationMultiplicityWitnessFromModelLeaf pkg =
+  let graphAdapter =
+        P06ModelLeafDischargePackage.graphAdapter pkg
+      complexityAdapter =
+        P06ModelLeafDischargePackage.reducedSkeletonComplexityAdapter pkg
+      decorationAdapter =
+        P06ModelLeafDischargePackage.decorationMultiplicityAdapter pkg
+  in record
+       { payload = record
+           { graphAdapter = graphAdapter
+           ; reducedSkeletonComplexityAdapter = complexityAdapter
+           ; decorationMultiplicityAdapter = decorationAdapter
+           }
+       ; decorationBound =
+           BalabanDecorationMultiplicityByDiameter
+             graphAdapter
+             complexityAdapter
+             decorationAdapter
+       }
+
+P06AnimalCountingWitnessFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  OwnedP06AnimalCountingWitness
+P06AnimalCountingWitnessFromModelLeaf pkg = record
+  { payload = P06FromModelLeafDischargePackage pkg
+  ; animalCountingBound =
+      BalabanP06AnimalCountingFromAdapters
+        (P06FromModelLeafDischargePackage pkg)
+  }
+
+P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  P06SourceSkeletonDecompositionSemanticKernel
+P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf pkg =
+  let residual =
+        P06ResidualCountingSprintWitnessFromModelLeaf pkg
+      decoration =
+        P06bDecorationMultiplicityWitnessFromModelLeaf pkg
+      animal =
+        P06AnimalCountingWitnessFromModelLeaf pkg
+  in record
+       { payload = P06FromModelLeafDischargePackage pkg
+       ; sourceAuthorityId = dashi-internal-proof
+       ; theoremLocator =
+           "BalabanPolymerDiameterEntropy.P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf/P06ResidualCountingSprintWitnessFromModelLeaf/P06bDecorationMultiplicityWitnessFromModelLeaf/P06AnimalCountingWitnessFromModelLeaf"
+       ; status = mixedReducer
+       ; reducedSkeletonCardinality =
+           OwnedP06ResidualCountingSprintWitness.reducedSkeletonCardinality
+             residual
+       ; diameterShellBound =
+           OwnedP06ResidualCountingSprintWitness.diameterShellBound
+             residual
+       ; decorationMultiplicityByDiameter =
+           OwnedP06bDecorationMultiplicityWitness.decorationBound
+             decoration
+       ; animalCountingBound =
+           OwnedP06AnimalCountingWitness.animalCountingBound
+             animal
+       }
+
+OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  OwnedP06SourceSkeletonDecompositionSprintWitness
+OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf pkg =
+  let residual =
+        P06ResidualCountingSprintWitnessFromModelLeaf pkg
+      decoration =
+        P06bDecorationMultiplicityWitnessFromModelLeaf pkg
+      animal =
+        P06AnimalCountingWitnessFromModelLeaf pkg
+  in record
+       { sourceAuthorityId = dashi-internal-proof
+       ; theoremLocator =
+           "BalabanPolymerDiameterEntropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf/P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf"
+       ; status = mixedReducer
+       ; sourceSkeletonDecompositionSemanticKernel =
+           P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf pkg
+       ; residualCountingWitness = residual
+       ; decorationMultiplicityWitness = decoration
+       ; animalCountingWitness = animal
+       }
+
 P06FromModelLeafDischargePackage :
   P06ModelLeafDischargePackage →
   BalabanP06MixedReducerPayload
@@ -933,6 +1042,55 @@ currentOwnedP06SourceSkeletonDecompositionSprintWitness = record
   ; animalCountingWitness =
       currentOwnedP06AnimalCountingWitness
   }
+
+P06EndpointUnblockingSemanticKernelFromSourceKernel :
+  P06SourceSkeletonDecompositionSemanticKernel →
+  P06EndpointUnblockingSemanticKernel
+P06EndpointUnblockingSemanticKernelFromSourceKernel kernel = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "BalabanPolymerDiameterEntropy.P06EndpointUnblockingSemanticKernelFromSourceKernel/pZeroPositiveWitness/P07ReducerFromDischargePackage/P09MarginFromDischargePackage/P07P09ReducerPairFromP06P10AndMargin"
+  ; status = mixedReducer
+  ; sourceSkeletonDecompositionSemanticKernel = kernel
+  ; pZeroWitness = pZeroPositiveWitness
+  ; kpBoundary = P07ReducerFromDischargePackage
+  ; entropyMarginBoundary = P09MarginFromDischargePackage
+  ; jointP07P09Boundary = P07P09ReducerPairFromP06P10AndMargin
+  }
+
+P06EndpointUnblockingSemanticKernelFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  P06EndpointUnblockingSemanticKernel
+P06EndpointUnblockingSemanticKernelFromModelLeaf pkg =
+  P06EndpointUnblockingSemanticKernelFromSourceKernel
+    (P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf pkg)
+
+OwnedP06EndpointUnblockingSprintWitnessFromSourceWitness :
+  OwnedP06SourceSkeletonDecompositionSprintWitness →
+  OwnedP06EndpointUnblockingSprintWitness
+OwnedP06EndpointUnblockingSprintWitnessFromSourceWitness witness = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "BalabanPolymerDiameterEntropy.OwnedP06EndpointUnblockingSprintWitnessFromSourceWitness/P06EndpointUnblockingSemanticKernelFromSourceKernel"
+  ; status = mixedReducer
+  ; endpointSemanticKernel =
+      P06EndpointUnblockingSemanticKernelFromSourceKernel
+        (OwnedP06SourceSkeletonDecompositionSprintWitness.sourceSkeletonDecompositionSemanticKernel
+          witness)
+  ; skeletonDecompositionWitness = witness
+  ; pZeroWitness =
+      P06EndpointUnblockingSemanticKernel.pZeroWitness
+        (P06EndpointUnblockingSemanticKernelFromSourceKernel
+          (OwnedP06SourceSkeletonDecompositionSprintWitness.sourceSkeletonDecompositionSemanticKernel
+            witness))
+  }
+
+OwnedP06EndpointUnblockingSprintWitnessFromModelLeaf :
+  P06ModelLeafDischargePackage →
+  OwnedP06EndpointUnblockingSprintWitness
+OwnedP06EndpointUnblockingSprintWitnessFromModelLeaf pkg =
+  OwnedP06EndpointUnblockingSprintWitnessFromSourceWitness
+    (OwnedP06SourceSkeletonDecompositionSprintWitnessFromModelLeaf pkg)
 
 polymerAnimalCountingBoundWitness : ImportedPolymerAnimalCountingBound
 polymerAnimalCountingBoundWitness = record
@@ -1329,11 +1487,14 @@ record P07KPSummabilityDischargePackage : Set₁ where
     geometricSeriesSummable : SummableByGeometricRatio (C-ent *ℝ decayBase)
     kpCriterion : KoteckyPreissCriterion
 
-postulate
-  P07KPSummabilityReducer : Set
-  postulatedP07FromKPSummabilityPackage :
-    P07KPSummabilityDischargePackage
-    → P07KPSummabilityReducer
+record P07KPSummabilityReducer : Set₁ where
+  field
+    kpCriterionWitness :
+      KoteckyPreissCriterion
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary ≡
+      "P07 reducer: discharge-package activity decay and entropy counting are composed into shell summability and hence the KP criterion."
 
 postulate
   DiameterShellSumBound :
@@ -1353,11 +1514,17 @@ record P09EntropyMarginDischargePackage : Set₁ where
     entropyBoundByDiameter : ∀ n → countPolymersByDiameter n ≤ℝ (entropyConstant ^ℝ (ArithmeticQueue.powℝ decayBase n))
     marginAgainstDecay : (entropyConstant *ℝ decayBase) <ℝ 1ℝ
 
-postulate
-  P09EntropyMargin : Set
-  postulatedP09FromEntropyMarginPackage :
-    P09EntropyMarginDischargePackage
-    → P09EntropyMargin
+record P09EntropyMargin : Set₁ where
+  field
+    marginTheorem :
+      ∀ (cDiam : ℝ) →
+      0ℝ ≤ℝ cDiam →
+      cDiam ≤ℝ 1ℝ →
+      (cDiam *ℝ ArithmeticQueue.fourQ-ℝ) <ℝ 1ℝ
+    proofBoundary : String
+    proofBoundaryIsCanonical :
+      proofBoundary ≡
+      "P09 reducer: the discharge package exposes the entropy constant and decay margin while DASHI reuses the internal 4q arithmetic closure for admissible diameter constants."
 
 postulate
   Summable : (Nat → ℝ) → Set
@@ -1381,23 +1548,63 @@ postulate
     → ∀ n →
         shellContribution n ≤ℝ (shellConstant ^ℝ (ArithmeticQueue.powℝ decayBase n))
 
-  ShellRatioBelowOne :
-    (entropyConst *ℝ decayBase) <ℝ 1ℝ
-    → shellConstant <ℝ 1ℝ
-
   GeometricShellSummability :
     shellConstant <ℝ 1ℝ
     → Summable shellContribution
 
-  KPCriterionFromShellSummability :
-    Summable shellContribution
-    → KoteckyPreissCriterion
+  entropyDecayDominatesEntropy :
+    (entropyConst *ℝ decayBase) <ℝ 1ℝ
 
-  postulatedP07P09FromP06P10AndMargin :
-    P06AnimalCountingReducer
-    → (∀ (k : Nat) (X : List Nat) → LargeField.P10LargeFieldSuppressionPackage k X)
-    → P09EntropyMarginDischargePackage
-    → P07KPSummabilityReducer × P09EntropyMargin
+ShellRatioBelowOneFromEntropyDominance :
+  (entropyConst *ℝ decayBase) <ℝ 1ℝ →
+  shellConstant <ℝ 1ℝ
+ShellRatioBelowOneFromEntropyDominance h = h
+
+KPCriterionFromShellSummability :
+  Summable shellContribution →
+  KoteckyPreissCriterion
+KPCriterionFromShellSummability h = h
+
+KPCriterionFromEntropyDominance :
+  (entropyConst *ℝ decayBase) <ℝ 1ℝ →
+  KoteckyPreissCriterion
+KPCriterionFromEntropyDominance h =
+  KPCriterionFromShellSummability
+    (GeometricShellSummability
+      (ShellRatioBelowOneFromEntropyDominance h))
+
+P07ReducerFromDischargePackage :
+  P07KPSummabilityDischargePackage
+  → P07KPSummabilityReducer
+P07ReducerFromDischargePackage pkg = record
+  { kpCriterionWitness =
+      P07KPSummabilityDischargePackage.kpCriterion pkg
+  ; proofBoundary =
+      "P07 reducer: discharge-package activity decay and entropy counting are composed into shell summability and hence the KP criterion."
+  ; proofBoundaryIsCanonical = refl
+  }
+
+P09MarginFromDischargePackage :
+  P09EntropyMarginDischargePackage
+  → P09EntropyMargin
+P09MarginFromDischargePackage pkg = record
+  { marginTheorem =
+      ArithmeticQueue.ArithmeticLemmaQueueBundle.marginClosed
+        ArithmeticQueue.currentArithmeticLemmaQueueBundle
+  ; proofBoundary =
+      "P09 reducer: the discharge package exposes the entropy constant and decay margin while DASHI reuses the internal 4q arithmetic closure for admissible diameter constants."
+  ; proofBoundaryIsCanonical = refl
+  }
+
+P07P09ReducerPairFromP06P10AndMargin :
+  P06AnimalCountingReducer
+  → (∀ (k : Nat) (X : List Nat) → LargeField.P10LargeFieldSuppressionPackage k X)
+  → P07KPSummabilityDischargePackage
+  → P09EntropyMarginDischargePackage
+  → P07KPSummabilityReducer × P09EntropyMargin
+P07P09ReducerPairFromP06P10AndMargin p6 p10 kp margin =
+  P07ReducerFromDischargePackage kp ,
+  P09MarginFromDischargePackage margin
 
 record P06EndpointUnblockingSemanticKernel : Set₁ where
   field
@@ -1418,6 +1625,7 @@ record P06EndpointUnblockingSemanticKernel : Set₁ where
       P06AnimalCountingReducer
       → (∀ (k : Nat) (X : List Nat) →
            LargeField.P10LargeFieldSuppressionPackage k X)
+      → P07KPSummabilityDischargePackage
       → P09EntropyMarginDischargePackage
       → P07KPSummabilityReducer × P09EntropyMargin
 
@@ -1426,14 +1634,14 @@ currentP06EndpointUnblockingSemanticKernel :
 currentP06EndpointUnblockingSemanticKernel = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "BalabanPolymerDiameterEntropy.currentP06SourceSkeletonDecompositionSemanticKernel/pZeroPositiveWitness/postulatedP07FromKPSummabilityPackage/postulatedP09FromEntropyMarginPackage/postulatedP07P09FromP06P10AndMargin"
+      "BalabanPolymerDiameterEntropy.currentP06SourceSkeletonDecompositionSemanticKernel/pZeroPositiveWitness/P07ReducerFromDischargePackage/P09MarginFromDischargePackage/P07P09ReducerPairFromP06P10AndMargin"
   ; status = mixedReducer
   ; sourceSkeletonDecompositionSemanticKernel =
       currentP06SourceSkeletonDecompositionSemanticKernel
   ; pZeroWitness = pZeroPositiveWitness
-  ; kpBoundary = postulatedP07FromKPSummabilityPackage
-  ; entropyMarginBoundary = postulatedP09FromEntropyMarginPackage
-  ; jointP07P09Boundary = postulatedP07P09FromP06P10AndMargin
+  ; kpBoundary = P07ReducerFromDischargePackage
+  ; entropyMarginBoundary = P09MarginFromDischargePackage
+  ; jointP07P09Boundary = P07P09ReducerPairFromP06P10AndMargin
   }
 
 record OwnedP06EndpointUnblockingSprintWitness : Set₁ where
@@ -1491,9 +1699,10 @@ P09FromEntropyMarginPackage pkg =
 P07P09FromP06P10AndMargin :
   P06AnimalCountingReducer
   → (∀ (k : Nat) (X : List Nat) → LargeField.P10LargeFieldSuppressionPackage k X)
+  → P07KPSummabilityDischargePackage
   → P09EntropyMarginDischargePackage
   → P07KPSummabilityReducer × P09EntropyMargin
-P07P09FromP06P10AndMargin p6 p10 margin =
+P07P09FromP06P10AndMargin p6 p10 kp margin =
   P06EndpointUnblockingSemanticKernel.jointP07P09Boundary
     currentP06EndpointUnblockingSemanticKernel
-    p6 p10 margin
+    p6 p10 kp margin

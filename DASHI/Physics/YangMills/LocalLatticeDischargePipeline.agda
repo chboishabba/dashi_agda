@@ -14,6 +14,7 @@ open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
   )
 
 import DASHI.Physics.YangMills.GraphCombinatorics as GraphCombinatorics
+import DASHI.Physics.YangMills.BalabanAnisotropicDiameterCompatibility as Anisotropic
 import DASHI.Physics.YangMills.BalabanLargeFieldSuppression as LargeField
 import DASHI.Physics.YangMills.BalabanPolymerDiameterEntropy as Entropy
 import DASHI.Physics.YangMills.StepVAssemblyLemmaQueue as Assembly
@@ -56,10 +57,86 @@ record LocalLatticeAnalyticDischargePackage : Set₁ where
     complexityDiameter : ComplexityLowerBoundByDiameterForDecayType
     noClayPromotion : clayYangMillsPromoted ≡ false
 
-postulate
-  postulatedLocalLatticeStepVFromAnalyticDischarge :
-    LocalLatticeAnalyticDischargePackage
-    → Assembly.StepVSpatialKPCertificate
+LocalLatticeP06CountingWitness :
+  LocalLatticeAnalyticDischargePackage →
+  Entropy.ImportedPolymerAnimalCountingBound
+LocalLatticeP06CountingWitness pkg = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "LocalLatticeDischargePipeline.LocalLatticeP06CountingWitness/BalabanPolymerDiameterEntropy.P06FromModelLeafDischargePackage"
+  ; status = mixedReducer
+  ; mixedReducerPayload =
+      Entropy.P06FromModelLeafDischargePackage
+        (LocalLatticeAnalyticDischargePackage.p06ModelLeaves pkg)
+  }
+
+LocalLatticeP33DiameterLane :
+  (pkg : LocalLatticeAnalyticDischargePackage) →
+  Anisotropic.P33DiameterLaneFromAnalyticDischarge
+    (LocalLatticeAnalyticDischargePackage.p33PerturbationStability pkg)
+LocalLatticeP33DiameterLane pkg =
+  Anisotropic.buildP33DiameterLaneFromAnalyticDischarge
+    (LocalLatticeAnalyticDischargePackage.p33PerturbationStability pkg)
+
+LocalLatticeStepVSourceInputs :
+  LocalLatticeAnalyticDischargePackage →
+  Assembly.StepVSourceAnalyticInputs
+LocalLatticeStepVSourceInputs pkg = record
+  { p06AnimalCounting =
+      LocalLatticeP06CountingWitness pkg
+  ; p06MixedReducerPayload =
+      Entropy.P06FromModelLeafDischargePackage
+        (LocalLatticeAnalyticDischargePackage.p06ModelLeaves pkg)
+  ; p06MixedReducerPayloadMatches = refl
+  ; p10LargeFieldActivity =
+      LargeField.P10CurrentCanonicalLargeFieldDecayFromOwnedKernels
+  ; p11AbsorptionCondition =
+      LargeField.postulatedAbsorptionConditionWitness
+  ; p33aUniformLinkEllipticity =
+      Anisotropic.P33DiameterLaneFromAnalyticDischarge.p33aWrapper
+        (LocalLatticeP33DiameterLane pkg)
+  }
+
+LocalLatticeStepVInternalReducers :
+  LocalLatticeAnalyticDischargePackage →
+  Assembly.StepVInternalReducers
+LocalLatticeStepVInternalReducers pkg = record
+  { p33bDiameterDomination =
+      Anisotropic.P33DiameterLaneFromAnalyticDischarge.p33bTheorem
+        (LocalLatticeP33DiameterLane pkg)
+  ; p07KPSummabilityReducer =
+      Assembly.stepVP07Reducer
+  ; p09EntropyMarginReducer =
+      Assembly.stepVP09Reducer
+  }
+
+LocalLatticeStepVFromAnalyticDischarge :
+  LocalLatticeAnalyticDischargePackage
+  → Assembly.StepVSpatialKPCertificate
+LocalLatticeStepVFromAnalyticDischarge pkg =
+  Assembly.StepVFromDischargePackages
+    (LocalLatticeStepVSourceInputs pkg)
+    (LocalLatticeStepVInternalReducers pkg)
+
+LocalLatticeStepVToRGDischarge :
+  Assembly.P12P19RGTransferPackage →
+  Assembly.StepVToRGDischargePackage
+LocalLatticeStepVToRGDischarge =
+  Assembly.StepVToRGDischargePackageFromP12P19
+
+LocalLatticeFixedLatticeMassGapPackage :
+  Assembly.FixedLatticeGapDischargePackage →
+  Assembly.FixedLatticeMassGapPackage
+LocalLatticeFixedLatticeMassGapPackage gapPkg = record
+  { spectralGap =
+      Assembly.FixedLatticeGapDischargePackage.lsiToSpectralGap gapPkg
+        (Assembly.FixedLatticeGapDischargePackage.uniformLSI gapPkg)
+  ; proofBoundary =
+      "FixedLatticeMassGapPackage: packages the positive spectral gap verified on a fixed lattice."
+  ; proofBoundaryIsCanonical = refl
+  ; noClayPromotion =
+      Assembly.FixedLatticeGapDischargePackage.noClayPromotion gapPkg
+  }
 
 record StepVDownstreamInternalisationKernel : Set₁ where
   field
@@ -93,32 +170,14 @@ currentStepVDownstreamInternalisationKernel :
 currentStepVDownstreamInternalisationKernel = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "LocalLatticeDischargePipeline.{postulatedLocalLatticeStepVFromAnalyticDischarge,postulatedYangMillsEndpointFromLocalLatticeAndTransferPackages}"
+      "LocalLatticeDischargePipeline.{LocalLatticeStepVSourceInputs,LocalLatticeStepVInternalReducers,LocalLatticeStepVFromAnalyticDischarge,YangMillsEndpointFromLocalLatticeAndTransferPackages}"
   ; status = mixedReducer
   ; localLatticeStepV =
-      postulatedLocalLatticeStepVFromAnalyticDischarge
+      LocalLatticeStepVFromAnalyticDischarge
   ; yangMillsEndpoint =
-      postulatedYangMillsEndpointFromLocalLatticeAndTransferPackages
+      YangMillsEndpointFromLocalLatticeAndTransferPackages
   ; noClayPromotion = refl
   }
-
-LocalLatticeStepVFromAnalyticDischarge :
-  LocalLatticeAnalyticDischargePackage
-  → Assembly.StepVSpatialKPCertificate
-LocalLatticeStepVFromAnalyticDischarge pkg =
-  StepVDownstreamInternalisationKernel.localLatticeStepV
-    currentStepVDownstreamInternalisationKernel
-    pkg
-
-postulate
-  postulatedYangMillsEndpointFromLocalLatticeAndTransferPackages :
-    LocalLatticeAnalyticDischargePackage
-    → Assembly.P12P19RGTransferPackage
-    → Assembly.FixedLatticeGapDischargePackage
-    → Assembly.ThermodynamicLimitPackage
-    → Assembly.ContinuumLimitPackage
-    → Assembly.OSWightmanEndpointPackage
-    → Assembly.YangMillsQuantumFieldTheory × Assembly.PhysicalMassGap
 
 YangMillsEndpointFromLocalLatticeAndTransferPackages :
   LocalLatticeAnalyticDischargePackage
@@ -129,9 +188,14 @@ YangMillsEndpointFromLocalLatticeAndTransferPackages :
   → Assembly.OSWightmanEndpointPackage
   → Assembly.YangMillsQuantumFieldTheory × Assembly.PhysicalMassGap
 YangMillsEndpointFromLocalLatticeAndTransferPackages localPkg rgPkg gapPkg thermoPkg contPkg osPkg =
-  StepVDownstreamInternalisationKernel.yangMillsEndpoint
-    currentStepVDownstreamInternalisationKernel
-    localPkg rgPkg gapPkg thermoPkg contPkg osPkg
+  Assembly.ConditionalYangMillsPipelineFromDischargePackages
+    (LocalLatticeStepVSourceInputs localPkg)
+    (LocalLatticeStepVInternalReducers localPkg)
+    (LocalLatticeStepVToRGDischarge rgPkg)
+    (LocalLatticeFixedLatticeMassGapPackage gapPkg)
+    thermoPkg
+    contPkg
+    osPkg
 
 localLatticeNoClayPromotion :
   LocalLatticeAnalyticDischargePackage

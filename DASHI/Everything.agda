@@ -1891,6 +1891,9 @@ import DASHI.Physics.Closure.BalabanRGMassGapReceiptSurface
 import DASHI.Physics.Closure.CompleteMonotonicityScaffold
 import DASHI.Physics.Closure.FormalOscillationSeminormForGaugeLinks
 import DASHI.Physics.Closure.FormalQhpBlockingMapDefinition
+import DASHI.Physics.Closure.BalabanCMP98AveragingLocalityImported
+import DASHI.Physics.Closure.YMAnisotropicAssumptionAConditionalClosure
+import DASHI.Physics.Closure.YMFixedFiniteVolumeBlockedObservableContinuumLimitConditional
 import DASHI.Physics.Closure.OSAxiomAvailability
 import DASHI.Physics.Closure.AnisotropicPartitionOfUnity
 import DASHI.Physics.Closure.YMAnisotropicPartitionOfUnityInstance

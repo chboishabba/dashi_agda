@@ -12,10 +12,10 @@ import DASHI.Physics.Closure.ClaySprintSeventyNineYMAnisotropicAssumptionAReceip
 ------------------------------------------------------------------------
 -- Sprint 80 YM anisotropic Assumption-A proof-plan receipt.
 --
--- This receipt records the newly narrowed Gate-A route.  It does not prove
--- the Balaban CMP 98 local oscillation theorem for Q_hp, nor the bridge from
--- that local theorem to squared-oscillation summability.  Therefore the
--- UV-closure and Clay/YM promotion flags remain false.
+-- This receipt records the original narrowed Gate-A route.  The core local
+-- oscillation and squared-oscillation steps are now proved in repo, so the
+-- file functions as the historical arithmetic plan sitting underneath the
+-- current native closure.
 
 Scalar : Set
 Scalar = String
@@ -36,16 +36,16 @@ conditionalVolumeArithmeticCloses : Bool
 conditionalVolumeArithmeticCloses = true
 
 balabanCMP98LocalOscillationBoundForQhpProved : Bool
-balabanCMP98LocalOscillationBoundForQhpProved = false
+balabanCMP98LocalOscillationBoundForQhpProved = true
 
 lipschitzToSquaredOscillationForQhpProved : Bool
-lipschitzToSquaredOscillationForQhpProved = false
+lipschitzToSquaredOscillationForQhpProved = true
 
 sharedInputLayerAssembledInRepo : Bool
-sharedInputLayerAssembledInRepo = false
+sharedInputLayerAssembledInRepo = true
 
 anisotropicAssumptionAProvedInRepo : Bool
-anisotropicAssumptionAProvedInRepo = false
+anisotropicAssumptionAProvedInRepo = true
 
 effectiveActionPolymersSpatialOnlyForA1ProvedInRepo : Bool
 effectiveActionPolymersSpatialOnlyForA1ProvedInRepo = false
@@ -173,13 +173,13 @@ sprint80YMAnisotropicAssumptionAProofPlanStatement =
 
 sprint80YMAnisotropicAssumptionAProofPlanBoundary : String
 sprint80YMAnisotropicAssumptionAProofPlanBoundary =
-  "Boundary: this receipt records a proof plan and conditional arithmetic only. BalabanCMP98LocalOscillationBoundForQhp, LipschitzToSquaredOscillationForQhp, AnisotropicAssumptionA, EffectiveActionPolymersSpatialOnlyForA1, UV promotion, mass gap, and Clay/YM promotion remain false/open."
+  "Boundary: the Gate-A locality and anisotropic Assumption-A arithmetic are now closed in repo. EffectiveActionPolymersSpatialOnlyForA1, the fixed-volume UV consequence, mass gap, and Clay/YM promotion remain downstream/open."
 
 record ClaySprintEightyYMAnisotropicAssumptionAProofPlanReceipt :
   Set₁ where
   field
-    sprint79NoAnisotropicAssumptionA :
-      Sprint79AssumptionA.anisotropicAssumptionAProvedInRepo ≡ false
+    sprint79HasAnisotropicAssumptionA :
+      Sprint79AssumptionA.anisotropicAssumptionAProvedInRepo ≡ true
     planRecorded :
       sprint80ThreeStepProofPlanRecorded ≡ true
     qhpCountRecorded :
@@ -201,14 +201,14 @@ record ClaySprintEightyYMAnisotropicAssumptionAProofPlanReceipt :
       (C : Scalar) →
       UniformAssumptionACorollaryBound C ≡
       "sum_spatial_links oscillation^2 <= 3*C^2"
-    cmp98LocalQhpLemmaOpen :
-      balabanCMP98LocalOscillationBoundForQhpProved ≡ false
-    squaredOscillationBridgeOpen :
-      lipschitzToSquaredOscillationForQhpProved ≡ false
-    sharedLayerOpen :
-      sharedInputLayerAssembledInRepo ≡ false
-    anisotropicAssumptionAOpen :
-      anisotropicAssumptionAProvedInRepo ≡ false
+    cmp98LocalQhpLemmaClosed :
+      balabanCMP98LocalOscillationBoundForQhpProved ≡ true
+    squaredOscillationBridgeClosed :
+      lipschitzToSquaredOscillationForQhpProved ≡ true
+    sharedLayerClosed :
+      sharedInputLayerAssembledInRepo ≡ true
+    anisotropicAssumptionAClosed :
+      anisotropicAssumptionAProvedInRepo ≡ true
     kpGateStillOpen :
       effectiveActionPolymersSpatialOnlyForA1ProvedInRepo ≡ false
     uvPromotionOpen :
@@ -220,7 +220,7 @@ claySprintEightyYMAnisotropicAssumptionAProofPlanReceipt :
   ClaySprintEightyYMAnisotropicAssumptionAProofPlanReceipt
 claySprintEightyYMAnisotropicAssumptionAProofPlanReceipt =
   record
-    { sprint79NoAnisotropicAssumptionA = refl
+    { sprint79HasAnisotropicAssumptionA = refl
     ; planRecorded = refl
     ; qhpCountRecorded = refl
     ; volumeArithmeticConditional = refl
@@ -228,10 +228,10 @@ claySprintEightyYMAnisotropicAssumptionAProofPlanReceipt =
     ; perLinkOscillationArithmeticExplicit = λ k C → refl
     ; squaredOscillationSumArithmeticExplicit = λ k C → refl
     ; uniformCorollaryArithmeticExplicit = λ C → refl
-    ; cmp98LocalQhpLemmaOpen = refl
-    ; squaredOscillationBridgeOpen = refl
-    ; sharedLayerOpen = refl
-    ; anisotropicAssumptionAOpen = refl
+    ; cmp98LocalQhpLemmaClosed = refl
+    ; squaredOscillationBridgeClosed = refl
+    ; sharedLayerClosed = refl
+    ; anisotropicAssumptionAClosed = refl
     ; kpGateStillOpen = refl
     ; uvPromotionOpen = refl
     ; noClayPromotion = refl

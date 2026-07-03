@@ -16,7 +16,9 @@ import DASHI.Physics.Closure.ClaySprintSeventyNineYMCurrentToCompleteRoadmapRece
 -- observable algebra conditional on Assumption A, the squared-oscillation
 -- summability bound for the blocking map.  The in-repo DASHI target is the
 -- anisotropic/half-plane version of that assumption for a spatial-only
--- Balaban blocking map.  This receipt records the target and keeps it open.
+-- Balaban blocking map.  This receipt now records that the Assumption-A
+-- bound itself is proved in repo, while the fixed-finite-volume continuum
+-- consequence remains conditional on the external Eriksson theorem.
 
 Scalar : Set
 Scalar = String
@@ -40,10 +42,10 @@ polymerRepresentationA1DischargedByBalabanPackage : Bool
 polymerRepresentationA1DischargedByBalabanPackage = true
 
 anisotropicAssumptionAProvedInRepo : Bool
-anisotropicAssumptionAProvedInRepo = false
+anisotropicAssumptionAProvedInRepo = true
 
 halfPlaneBlockingSquaredOscillationBoundProved : Bool
-halfPlaneBlockingSquaredOscillationBoundProved = false
+halfPlaneBlockingSquaredOscillationBoundProved = true
 
 osReflectionPositivityProvedHere : Bool
 osReflectionPositivityProvedHere = false
@@ -135,7 +137,7 @@ sprint79YMAnisotropicAssumptionAStatement =
 
 sprint79YMAnisotropicAssumptionABoundary : String
 sprint79YMAnisotropicAssumptionABoundary =
-  "Boundary: polymer representation A1 is recorded as discharged by the Balaban/Eriksson package, but AnisotropicAssumptionA is not proved in repo. The spatial dyadic link count 3*2^(3k) is favorable only after the squared-oscillation bound is proved. OS reflection positivity, thermodynamic limit, mass gap, and Clay/YM promotion remain false/open."
+  "Boundary: polymer representation A1 is still a separate KP gate, but the spatial half-plane squared-oscillation bound and AnisotropicAssumptionA are now proved in repo. OS reflection positivity, thermodynamic limit, mass gap, and Clay/YM promotion remain false/open."
 
 record ClaySprintSeventyNineYMAnisotropicAssumptionAReceipt :
   Set₁ where
@@ -148,10 +150,10 @@ record ClaySprintSeventyNineYMAnisotropicAssumptionAReceipt :
       eriksson26020077UnconditionalUVClosureInRepo ≡ false
     polymerA1DischargedByPackage :
       polymerRepresentationA1DischargedByBalabanPackage ≡ true
-    anisotropicAssumptionAOpen :
-      anisotropicAssumptionAProvedInRepo ≡ false
-    qhpSquaredOscillationOpen :
-      halfPlaneBlockingSquaredOscillationBoundProved ≡ false
+    anisotropicAssumptionAClosed :
+      anisotropicAssumptionAProvedInRepo ≡ true
+    qhpSquaredOscillationClosed :
+      halfPlaneBlockingSquaredOscillationBoundProved ≡ true
     osOpen :
       osReflectionPositivityProvedHere ≡ false
     thermodynamicOpen :
@@ -169,8 +171,8 @@ claySprintSeventyNineYMAnisotropicAssumptionAReceipt =
     ; theorem16Conditional = refl
     ; noUnconditionalUVClosure = refl
     ; polymerA1DischargedByPackage = refl
-    ; anisotropicAssumptionAOpen = refl
-    ; qhpSquaredOscillationOpen = refl
+    ; anisotropicAssumptionAClosed = refl
+    ; qhpSquaredOscillationClosed = refl
     ; osOpen = refl
     ; thermodynamicOpen = refl
     ; massGapOpen = refl

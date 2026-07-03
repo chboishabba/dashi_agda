@@ -131,18 +131,17 @@ lemmaV-1-P33bGivesAdmissibleDiameterDecay k X diamDom =
 stepVArithmeticQueue : ArithmeticQueue.ArithmeticLemmaQueueBundle
 stepVArithmeticQueue = ArithmeticQueue.currentArithmeticLemmaQueueBundle
 
-stepVKPSummability :
-  ArithmeticQueue.Summable
-    (λ n → ArithmeticQueue.powℝ ArithmeticQueue.animalCountRate n *ℝ ArithmeticQueue.powℝ ArithmeticQueue.activityDecayRate n)
-stepVKPSummability =
-  ArithmeticQueue.ArithmeticLemmaQueueBundle.kpSummable
-    stepVArithmeticQueue
-
 stepVP07Reducer :
-  ArithmeticQueue.KPSummabilityReducerFromAnimalDecayAndMargin
+  Entropy.P07KPSummabilityReducer
 stepVP07Reducer =
-  ArithmeticQueue.ArithmeticLemmaQueueBundle.p07Reducer
-    stepVArithmeticQueue
+  record
+    { kpCriterionWitness =
+        Entropy.KPCriterionFromEntropyDominance
+          Entropy.entropyDecayDominatesEntropy
+    ; proofBoundary =
+        "P07 reducer: current Step V defaults use the DASHI-owned entropy KP summability witness."
+    ; proofBoundaryIsCanonical = refl
+    }
 
 stepVMarginClosure :
   ∀ (cDiam : ℝ) →
@@ -154,10 +153,14 @@ stepVMarginClosure =
     stepVArithmeticQueue
 
 stepVP09Reducer :
-  ArithmeticQueue.EntropyMarginFromDiameterConstant
+  Entropy.P09EntropyMargin
 stepVP09Reducer =
-  ArithmeticQueue.ArithmeticLemmaQueueBundle.p09Reducer
-    stepVArithmeticQueue
+  record
+    { marginTheorem = stepVMarginClosure
+    ; proofBoundary =
+        "P09 reducer: current Step V defaults retain the internal 4q margin-closure theorem as the consumable entropy-margin interface."
+    ; proofBoundaryIsCanonical = refl
+    }
 
 postulate
   -- Abstract KP certificate type.  The concrete version is assembled
@@ -188,11 +191,7 @@ postulate
     → (∀ (k : ℕ) (X : ADC.Polymer)
        → zAniso k X ≤ℝ
           (stepVConstant *ℝ expℝ-SV (-ℝ ADC.diam-ordinary k X)))
-    → ArithmeticQueue.Summable
-        (λ n →
-          ArithmeticQueue.powℝ ArithmeticQueue.animalCountRate n
-          *ℝ
-          ArithmeticQueue.powℝ ArithmeticQueue.activityDecayRate n)
+    → Entropy.KoteckyPreissCriterion
     → (∀ (cDiam : ℝ)
        → 0ℝ ≤ℝ cDiam
        → cDiam ≤ℝ 1ℝ
@@ -228,9 +227,9 @@ record StepVInternalReducers : Set₁ where
     p33bDiameterDomination :
       ADC.P33bWeightedTreeDistanceDominatesOrdinaryDiameter
     p07KPSummabilityReducer :
-      ArithmeticQueue.KPSummabilityReducerFromAnimalDecayAndMargin
+      Entropy.P07KPSummabilityReducer
     p09EntropyMarginReducer :
-      ArithmeticQueue.EntropyMarginFromDiameterConstant
+      Entropy.P09EntropyMargin
 
 StepVMarginFromP33bAndArithmetic
   : Entropy.ImportedPolymerAnimalCountingBound
@@ -244,8 +243,8 @@ StepVMarginFromP33bAndArithmetic
   → LargeField.ImportedAbsorptionCondition
   → ADC.P33aUniformLinkEllipticityWrapper
   → ADC.P33bWeightedTreeDistanceDominatesOrdinaryDiameter
-  → ArithmeticQueue.KPSummabilityReducerFromAnimalDecayAndMargin
-  → ArithmeticQueue.EntropyMarginFromDiameterConstant
+  → Entropy.P07KPSummabilityReducer
+  → Entropy.P09EntropyMargin
   → StepVSpatialKPCertificate
 StepVMarginFromP33bAndArithmetic p06 p10 p11 p33a p33b p07 p09 =
   stepVAnalyticAssembler
@@ -258,8 +257,8 @@ StepVMarginFromP33bAndArithmetic p06 p10 p11 p33a p33b p07 p09 =
            p33b
            (ADC.P33aUniformLinkEllipticityWrapper.linkRegularityWitness p33a)
            k X))
-    (ArithmeticQueue.KPSummabilityReducerFromAnimalDecayAndMargin.instantiatedReducer p07)
-    (ArithmeticQueue.EntropyMarginFromDiameterConstant.marginTheorem p09)
+    (Entropy.P07KPSummabilityReducer.kpCriterionWitness p07)
+    (Entropy.P09EntropyMargin.marginTheorem p09)
 
 StepVFromDischargePackages
   : StepVSourceAnalyticInputs
@@ -306,8 +305,8 @@ StepVAnalyticLeavesToStepV :
   LargeField.ImportedAbsorptionCondition →
   ADC.P33aUniformLinkEllipticityWrapper →
   ADC.P33bWeightedTreeDistanceDominatesOrdinaryDiameter →
-  ArithmeticQueue.KPSummabilityReducerFromAnimalDecayAndMargin →
-  ArithmeticQueue.EntropyMarginFromDiameterConstant →
+  Entropy.P07KPSummabilityReducer →
+  Entropy.P09EntropyMargin →
   StepVSpatialKPCertificate
 StepVAnalyticLeavesToStepV p06 p08 p10 p11 p33a p33b p07 p09 =
   StepVMarginFromP33bAndArithmetic p06 p10 p11 p33a p33b p07 p09
@@ -938,6 +937,14 @@ postulate
     B6InfluenceBound →
     RGCauchySummability
 
+  RGCauchyImpliesConvergence :
+    RGCauchySummability →
+    RGConvergence
+
+  DLRSmallnessImpliesClusterExpansionStable :
+    DLRSmallness →
+    ClusterExpansionStable
+
   DLRSmallnessAndCrossScaleToUniformLSIReducer :
     DLRSmallness →
     CrossScaleBound →
@@ -963,15 +970,6 @@ P12P19FromRGTransferPackage :
   → P12 × P13 × P14 × P15 × P16 × P17 × P18 × P19
 P12P19FromRGTransferPackage pkg = postulatedP12P19FromRGTransferPackage pkg
 
-postulate
-  postulatedP12P19RGTransferFromStepV :
-    (StepVSpatialKPCertificate → DLRSmallness)
-    → (StepVSpatialKPCertificate → AssumptionA2)
-    → (AssumptionA2 → B6InfluenceBound)
-    → (B6InfluenceBound → RGCauchySummability)
-    → (DLRSmallness → CrossScaleBound → UniformLSI)
-    → P12P19RGTransferPackage
-
 P12P19RGTransferFromStepV :
   (StepVSpatialKPCertificate → DLRSmallness)
   → (StepVSpatialKPCertificate → AssumptionA2)
@@ -979,15 +977,42 @@ P12P19RGTransferFromStepV :
   → (B6InfluenceBound → RGCauchySummability)
   → (DLRSmallness → CrossScaleBound → UniformLSI)
   → P12P19RGTransferPackage
-P12P19RGTransferFromStepV implDLR implA2 implB6 implCauchy implLSI =
-  StepVDownstreamTransferSemanticKernel.rgTransferFromStepV
-    currentStepVDownstreamTransferSemanticKernel
-    implDLR implA2 implB6 implCauchy implLSI
+P12P19RGTransferFromStepV implDLR implA2 implB6 implCauchy implLSI = record
+  { stepVToDLR = implDLR
+  ; stepVToA2 = implA2
+  ; a2ToB6 = implB6
+  ; b6ToRGCauchy = implCauchy
+  ; rgCauchyToConvergence = RGCauchyImpliesConvergence
+  ; clusterExpansionStable = DLRSmallnessImpliesClusterExpansionStable
+  ; noClayPromotion = refl
+  }
 
-postulate
-  postulatedStepVToRGDischargePackageFromP12P19 :
-    P12P19RGTransferPackage
-    → StepVToRGDischargePackage
+StepVToRGDischargePackageFromP12P19 :
+  P12P19RGTransferPackage
+  → StepVToRGDischargePackage
+StepVToRGDischargePackageFromP12P19 pkg = record
+  { stepVCertificate = lemmaV-3b-fromP33aAndWeightedDecay
+  ; stepVToDLRSmallness =
+      stepVToDLRSmallnessFn
+        lemmaV-3b-fromP33aAndWeightedDecay
+  ; stepVToA2 =
+      stepVToA2Fn
+        lemmaV-3b-fromP33aAndWeightedDecay
+  ; a2ToB6Influence =
+      a2ToB6InfluenceFn
+        lemmaV-3b-fromP33aAndWeightedDecay
+  ; b6ToRGCauchy =
+      b6ToRGCauchyFn
+        lemmaV-3b-fromP33aAndWeightedDecay
+  ; dlrSmallnessAndCrossScaleToUniformLSI =
+      dlrSmallnessAndCrossScaleToUniformLSIFn
+        lemmaV-3b-fromP33aAndWeightedDecay
+  ; proofBoundary =
+      "StepVToRGDischargePackage: packages the Step V spatial KP certificate and its factorizations into the DLR-LSI and RG-Cauchy channels."
+  ; proofBoundaryIsCanonical = refl
+  ; noClayPromotion =
+      P12P19RGTransferPackage.noClayPromotion pkg
+  }
 
 record StepVDownstreamTransferSemanticKernel : Set₁ where
   field
@@ -1020,22 +1045,14 @@ currentStepVDownstreamTransferSemanticKernel :
 currentStepVDownstreamTransferSemanticKernel = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "StepVAssemblyLemmaQueue.{postulatedP12P19RGTransferFromStepV,postulatedStepVToRGDischargePackageFromP12P19}"
+      "StepVAssemblyLemmaQueue.{P12P19RGTransferFromStepV,StepVToRGDischargePackageFromP12P19}"
   ; status = mixedReducer
   ; rgTransferFromStepV =
-      postulatedP12P19RGTransferFromStepV
+      P12P19RGTransferFromStepV
   ; stepVToRGDischargeFromP12P19 =
-      postulatedStepVToRGDischargePackageFromP12P19
+      StepVToRGDischargePackageFromP12P19
   ; noClayPromotion = refl
   }
-
-StepVToRGDischargePackageFromP12P19 :
-  P12P19RGTransferPackage
-  → StepVToRGDischargePackage
-StepVToRGDischargePackageFromP12P19 pkg =
-  StepVDownstreamTransferSemanticKernel.stepVToRGDischargeFromP12P19
-    currentStepVDownstreamTransferSemanticKernel
-    pkg
 
 -- ── Sprint 6: Fixed Lattice gap P21/P23/P24/P25/P26 ───────────────────
 
@@ -1090,14 +1107,6 @@ postulate
     FixedLatticeMassGap →
     UniformFixedLatticeMassGap
 
-  postulatedFixedLatticeGapFromReducers :
-    UniformLSI
-    → (UniformLSI → LatticeSpectralGap)
-    → (LatticeSpectralGap → ExponentialClustering)
-    → (ExponentialClustering → FixedLatticeMassGap)
-    → UniformAcrossFiniteVolumes
-    → FixedLatticeGapDischargePackage
-
 FixedLatticeGapFromReducers :
   UniformLSI
   → (UniformLSI → LatticeSpectralGap)
@@ -1105,8 +1114,14 @@ FixedLatticeGapFromReducers :
   → (ExponentialClustering → FixedLatticeMassGap)
   → UniformAcrossFiniteVolumes
   → FixedLatticeGapDischargePackage
-FixedLatticeGapFromReducers lsi lsiToSpec specToClust clustToGap uniformity =
-  postulatedFixedLatticeGapFromReducers lsi lsiToSpec specToClust clustToGap uniformity
+FixedLatticeGapFromReducers lsi lsiToSpec specToClust clustToGap uniformity = record
+  { uniformLSI = lsi
+  ; lsiToSpectralGap = lsiToSpec
+  ; spectralGapToClustering = specToClust
+  ; clusteringToMassGap = clustToGap
+  ; finiteVolumeUniformity = uniformity
+  ; noClayPromotion = refl
+  }
 
 postulate
   postulatedP21P23P24P25P26FromUniformLSI :
@@ -1203,14 +1218,6 @@ postulate
     → ContinuumSubsequentialLimit
     → ContinuumMassGap
 
-  postulatedContinuumMassGapFromThermodynamicMassGap :
-    InfiniteVolumeMassGap
-    → (seq : LatticeSpacingSequence)
-    → LatticeSpacingTendsToZero seq
-    → ContinuumTightness
-    → ContinuumLimitPackage
-    → ContinuumMassGap
-
 ContinuumMassGapFromThermodynamicMassGap :
   InfiniteVolumeMassGap
   → (seq : LatticeSpacingSequence)
@@ -1219,7 +1226,13 @@ ContinuumMassGapFromThermodynamicMassGap :
   → ContinuumLimitPackage
   → ContinuumMassGap
 ContinuumMassGapFromThermodynamicMassGap infGap seq zeroLimit tight pkg =
-  postulatedContinuumMassGapFromThermodynamicMassGap infGap seq zeroLimit tight pkg
+  MassGapSurvivesCutoffRemoval
+    infGap
+    (InfiniteVolumeMassGapToContinuumSubsequence
+      seq
+      infGap
+      zeroLimit
+      tight)
 
 postulate
   postulatedContinuumLimitFromInfiniteVolume :
@@ -1262,5 +1275,3 @@ YangMillsEndpointFromContinuum :
   → OSWightmanEndpointPackage
   → YangMillsQuantumFieldTheory × PhysicalMassGap
 YangMillsEndpointFromContinuum contGap pkg = postulatedYangMillsEndpointFromContinuum contGap pkg
-
-

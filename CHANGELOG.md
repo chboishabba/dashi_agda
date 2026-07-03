@@ -6,6 +6,21 @@ monitor surface.
 
 ## Current Tranche Closure Snapshot
 
+- NS Gate 2-A boolean-map and quarter-margin doc sync for `2026-07-02`:
+  updated `docs/ns_triad_kn_gate2a_near_extremizer_transport_target.md`,
+  `docs/ns_triad_kn_gate2_seam_to_leakage_transfer.md`, `TODO.md`, and
+  `COMPACTIFIED_CONTEXT.md` so the docs now match the live Agda surfaces.
+  The written state now explicitly records the abstract/concrete split for
+  Lemmas A/B/C, identifies the highest-alpha false booleans in the defect
+  chain, and corrects the implementation order: first the concrete
+  near-extremizer defect estimates, then the NS-seam realization of cone-width
+  scaling and quarter-margin compatibility, then the cone-budget and
+  quotient-aware transport consumers, and only then EP4 and the full
+  seam-to-leakage transfer receipt. The docs also now record that EP3 is
+  partially installed already: its budget decomposition booleans are true in
+  `NSTriadKNGate2AEP3DirectionalTransportBudget.agda`, while the actual
+  directional-budget and margin-closing booleans remain false.
+
 - NS Gate 1 / Gate 2-A documentation and roadmap sync for `2026-07-02`:
   updated `README.md`, `COMPACTIFIED_CONTEXT.md`, `TODO.md`, and
   `docs/ns_triad_kn_gate2_seam_to_leakage_transfer.md` so the repo-level state
