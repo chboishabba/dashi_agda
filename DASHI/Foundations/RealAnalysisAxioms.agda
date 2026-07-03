@@ -6,6 +6,10 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; _∷_; _++_; [])
 open import Data.Nat.Base using (ℕ; suc) renaming (_+_ to _+ℕ_; _≤_ to _≤ℕ_)
 
+infixl 20 _+ℝ_ _-ℝ_
+infixl 30 _*ℝ_
+infix  15 _≤ℝ_ _<ℝ_
+
 ------------------------------------------------------------------------
 -- Minimal real-analysis authority surface.
 --
@@ -53,7 +57,7 @@ postulate
     ∀ {a b c d : ℝ} →
     a ≤ℝ b →
     c ≤ℝ d →
-    a +ℝ c ≤ℝ b +ℝ d
+    (a +ℝ c) ≤ℝ (b +ℝ d)
 
 cong :
   {A B : Set} →

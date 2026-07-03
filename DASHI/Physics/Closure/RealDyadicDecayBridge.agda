@@ -28,6 +28,16 @@ postulate
   DyadicRealSemantics :
     Set₁
 
+dyadicDecayAsRealWith :
+  (Nat → ℝ) →
+  (Nat → ℝ) →
+  Seminorm.DyadicDecay →
+  ℝ
+dyadicDecayAsRealWith natAsReal dyadicPow2NegAsReal decay =
+  natAsReal (Seminorm.DyadicDecay.coefficient decay)
+    *ℝ
+  dyadicPow2NegAsReal (Seminorm.DyadicDecay.exponent decay)
+
 record DyadicRealSemanticsSocket : Set₁ where
   field
     natAsReal :
@@ -41,6 +51,13 @@ record DyadicRealSemanticsSocket : Set₁ where
     dyadicPow2NegZeroIsOne :
       dyadicPow2NegAsReal 0 ≡ 1ℝ
 
+    natAsRealOneIsOne :
+      natAsReal 1 ≡ 1ℝ
+
+    realMulLeftUnit :
+      ∀ (x : ℝ) →
+      1ℝ *ℝ x ≡ x
+
     dyadicPow2NegMonotone :
       ∀ {m n : Nat} →
       m ≤ n →
@@ -48,7 +65,8 @@ record DyadicRealSemanticsSocket : Set₁ where
 
     perLinkOscillationDecayAsReal :
       ∀ (cLocal k : Nat) →
-      dyadicDecayAsReal (Seminorm.perLinkOscillationDecay cLocal k)
+      dyadicDecayAsRealWith natAsReal dyadicPow2NegAsReal
+        (Seminorm.perLinkOscillationDecay cLocal k)
         ≤ℝ (natAsReal cLocal *ℝ dyadicPow2NegAsReal (Seminorm.double k))
 
 open DyadicRealSemanticsSocket public
@@ -65,15 +83,24 @@ dyadicPow2NegAsReal =
   DyadicRealSemanticsSocket.dyadicPow2NegAsReal currentDyadicRealSemantics
 
 dyadicDecayAsReal : Seminorm.DyadicDecay → ℝ
-dyadicDecayAsReal decay =
-  natAsReal (Seminorm.DyadicDecay.coefficient decay)
-    *ℝ
-  dyadicPow2NegAsReal (Seminorm.DyadicDecay.exponent decay)
+dyadicDecayAsReal =
+  dyadicDecayAsRealWith natAsReal dyadicPow2NegAsReal
 
 dyadicPow2NegZeroIsOne :
   dyadicPow2NegAsReal 0 ≡ 1ℝ
 dyadicPow2NegZeroIsOne =
   DyadicRealSemanticsSocket.dyadicPow2NegZeroIsOne currentDyadicRealSemantics
+
+natAsRealOneIsOne :
+  natAsReal 1 ≡ 1ℝ
+natAsRealOneIsOne =
+  DyadicRealSemanticsSocket.natAsRealOneIsOne currentDyadicRealSemantics
+
+realMulLeftUnit :
+  ∀ (x : ℝ) →
+  1ℝ *ℝ x ≡ x
+realMulLeftUnit =
+  DyadicRealSemanticsSocket.realMulLeftUnit currentDyadicRealSemantics
 
 dyadicPow2NegMonotone :
   ∀ {m n : Nat} →
@@ -101,14 +128,23 @@ dyadicDecayAtZeroIsUnit :
   dyadicDecayAsReal (Seminorm.perLinkOscillationDecay 1 0)
     ≡
   (natAsReal 1 *ℝ 1ℝ)
-dyadicDecayAtZeroIsUnit = refl
+dyadicDecayAtZeroIsUnit rewrite dyadicPow2NegZeroIsOne = refl
+
+normalizedPerLinkDecayAtScaleZero :
+  dyadicDecayAsReal (Seminorm.perLinkOscillationDecay 1 0)
+    ≡
+  (1ℝ *ℝ dyadicPow2NegAsReal (Seminorm.double 0))
+normalizedPerLinkDecayAtScaleZero rewrite natAsRealOneIsOne = refl
 
 dyadicDecayBelowUnit :
   ∀ (k : Nat) →
   (1ℝ *ℝ dyadicPow2NegAsReal (Seminorm.double k))
     ≤ℝ
   (1ℝ *ℝ 1ℝ)
-dyadicDecayBelowUnit k =
+dyadicDecayBelowUnit k
+  rewrite realMulLeftUnit (dyadicPow2NegAsReal (Seminorm.double k))
+        | realMulLeftUnit 1ℝ
+        | dyadicPow2NegZeroIsOne =
   dyadicPow2NegNonIncreasing k
 
 unitPerLinkDecayBelowScaleZero :
@@ -116,5 +152,24 @@ unitPerLinkDecayBelowScaleZero :
   (1ℝ *ℝ dyadicPow2NegAsReal (Seminorm.double k))
     ≤ℝ
   (1ℝ *ℝ dyadicPow2NegAsReal (Seminorm.double 0))
-unitPerLinkDecayBelowScaleZero k =
-  dyadicDecayBelowUnit k
+unitPerLinkDecayBelowScaleZero k
+  rewrite realMulLeftUnit (dyadicPow2NegAsReal (Seminorm.double k))
+        | realMulLeftUnit (dyadicPow2NegAsReal (Seminorm.double 0)) =
+  dyadicPow2NegNonIncreasing k
+
+normalizedPerLinkDecayAsReal :
+  ∀ (k : Nat) →
+  dyadicDecayAsReal (Seminorm.perLinkOscillationDecay 1 k)
+    ≡
+  (1ℝ *ℝ dyadicPow2NegAsReal (Seminorm.double k))
+normalizedPerLinkDecayAsReal k rewrite natAsRealOneIsOne = refl
+
+normalizedPerLinkDecayBelowScaleZero :
+  ∀ (k : Nat) →
+  dyadicDecayAsReal (Seminorm.perLinkOscillationDecay 1 k)
+    ≤ℝ
+  dyadicDecayAsReal (Seminorm.perLinkOscillationDecay 1 0)
+normalizedPerLinkDecayBelowScaleZero k
+  rewrite normalizedPerLinkDecayAsReal k
+        | normalizedPerLinkDecayAtScaleZero =
+  unitPerLinkDecayBelowScaleZero k

@@ -144,8 +144,10 @@ gate2aExtremizerAwareTransportNumericallySupported = true
 gate2aExtremizerAwareTransportConditional = true
 gate2aConcreteSeamLocalClosureModel = true
 gate2aSeamLocalMarginProofCarried = true
-gate2aExtremizerAwareTransportProved = true
-gate2aConditionalLemmaProved = true
+gate2aSeamLocalExtremizerAwareTransportModelClosed = true
+gate2aSeamLocalConditionalLemmaCarried = true
+gate2aExtremizerAwareTransportProved = false
+gate2aConditionalLemmaProved = false
 ```
 
 ## Implementation Order
@@ -168,6 +170,6 @@ Gate 1 extremizer direction is transported with a stable subcritical
 ratio near 1/6.  Therefore the proof should track the extremizer cone,
 not a global operator norm.
 
-Gate 2-A is now locally closed on the shared seam carrier. The remaining
-nonlocal work is downstream promotion and any broader exact-operator
-consumption outside this seam-local budget surface.
+Gate 2-A is locally closed only as a seam-local model on the shared budget
+carrier. The remaining nonlocal work is the exact `K_N(A)` operator transfer
+and the analytic outside-seam absorption theorem.

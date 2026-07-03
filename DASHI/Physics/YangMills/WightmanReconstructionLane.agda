@@ -9,6 +9,8 @@ open import DASHI.Physics.YangMills.ProofTargetSurface
 open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
   ( dashi-internal-proof
   ; proved
+  ; paperImport
+  ; auditTested
   ; consequence-proof
   )
 

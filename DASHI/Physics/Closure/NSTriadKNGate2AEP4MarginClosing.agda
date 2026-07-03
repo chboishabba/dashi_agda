@@ -116,8 +116,9 @@ canonicalGapText : String
 canonicalGapText =
   "Closed on the seam-local carrier: the directional transport budget is "
   ++ "consumed exactly, outside-seam pollution is fixed to 0#, and the "
-  ++ "final leakage bound is carried by proof term. Full NS and Clay "
-  ++ "promotion remain fail-closed."
+  ++ "final leakage bound is carried by proof term. The exact outside-seam "
+  ++ "absorption theorem and exact operator-level transfer remain open; "
+  ++ "full NS and Clay promotion stay fail-closed."
 
 canonicalOutsideSeamBudgetText : String
 canonicalOutsideSeamBudgetText =
@@ -240,16 +241,16 @@ record NSTriadKNGate2AEP4MarginClosing : Setω where
       gate2aSeamLocalMarginProofCarried ≡ true
 
     ep4DirectionalMarginUniformlyClosed : Bool
-    ep4DirectionalMarginUniformlyClosedIsTrue :
-      ep4DirectionalMarginUniformlyClosed ≡ true
+    ep4DirectionalMarginUniformlyClosedIsFalse :
+      ep4DirectionalMarginUniformlyClosed ≡ false
 
     ep4OutsideSeamPollutionAbsorbed : Bool
-    ep4OutsideSeamPollutionAbsorbedIsTrue :
-      ep4OutsideSeamPollutionAbsorbed ≡ true
+    ep4OutsideSeamPollutionAbsorbedIsFalse :
+      ep4OutsideSeamPollutionAbsorbed ≡ false
 
     ep4ProofConstructed : Bool
-    ep4ProofConstructedIsTrue :
-      ep4ProofConstructed ≡ true
+    ep4ProofConstructedIsFalse :
+      ep4ProofConstructed ≡ false
 
     ep4Promoted : Bool
     ep4PromotedIsFalse :
@@ -303,11 +304,11 @@ canonicalNSTriadKNGate2AEP4MarginClosing =
     refl
     true
     refl
-    true
+    false
     refl
-    true
+    false
     refl
-    true
+    false
     refl
     false
     refl

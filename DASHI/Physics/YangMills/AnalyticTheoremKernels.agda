@@ -1491,17 +1491,22 @@ P06ModelLeafDischargePackageFromKernel :
 P06ModelLeafDischargePackageFromKernel kernel =
   P06PolymerEncodingTheoremKernel.modelLeafDischargePackage kernel
 
+P06MixedReducerPayloadFromKernel :
+  P06PolymerEncodingTheoremKernel →
+  Entropy.BalabanP06MixedReducerPayload
+P06MixedReducerPayloadFromKernel kernel =
+  Entropy.P06FromModelLeafDischargePackage
+    (P06ModelLeafDischargePackageFromKernel kernel)
+
 P06ImportedAnimalCountingBoundFromKernel :
   P06PolymerEncodingTheoremKernel →
   Entropy.ImportedPolymerAnimalCountingBound
 P06ImportedAnimalCountingBoundFromKernel kernel = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "AnalyticTheoremKernels.P06ImportedAnimalCountingBoundFromKernel/P06ModelLeafDischargePackageFromKernel"
+      "AnalyticTheoremKernels.P06ImportedAnimalCountingBoundFromKernel/P06MixedReducerPayloadFromKernel"
   ; status = mixedReducer
-  ; mixedReducerPayload =
-      Entropy.P06FromModelLeafDischargePackage
-        (P06ModelLeafDischargePackageFromKernel kernel)
+  ; mixedReducerPayload = P06MixedReducerPayloadFromKernel kernel
   }
 
 P06AnimalCountingBoundFromKernel :

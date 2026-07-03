@@ -26,7 +26,7 @@ Nat = ℕ
 ExplicitEntropyDecayMargin : Set₁
 ExplicitEntropyDecayMargin = Entropy.P09EntropyMarginDischargePackage
 
--- Synonym for P10 large-field analytic leaves
+-- Synonym for the owned P10 large-field analytic leaf package
 P10AnalyticLeaves : Set₁
 P10AnalyticLeaves = LargeField.P10AnalyticLeaves
 
@@ -96,6 +96,15 @@ LocalLatticeStepVSourceInputs pkg = record
       Anisotropic.P33DiameterLaneFromAnalyticDischarge.p33aWrapper
         (LocalLatticeP33DiameterLane pkg)
   }
+
+LocalLatticeStepVSourceInputsMatchOwnedP06EndpointKernelPayload :
+  ∀ pkg →
+  Assembly.StepVSourceAnalyticInputs.p06MixedReducerPayload
+    (LocalLatticeStepVSourceInputs pkg)
+    ≡ Entropy.P06SourceSkeletonDecompositionSemanticKernel.payload
+        (Entropy.P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf
+          (LocalLatticeAnalyticDischargePackage.p06ModelLeaves pkg))
+LocalLatticeStepVSourceInputsMatchOwnedP06EndpointKernelPayload pkg = refl
 
 LocalLatticeStepVInternalReducers :
   LocalLatticeAnalyticDischargePackage →
@@ -170,7 +179,7 @@ currentStepVDownstreamInternalisationKernel :
 currentStepVDownstreamInternalisationKernel = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "LocalLatticeDischargePipeline.{LocalLatticeStepVSourceInputs,LocalLatticeStepVInternalReducers,LocalLatticeStepVFromAnalyticDischarge,YangMillsEndpointFromLocalLatticeAndTransferPackages}"
+      "LocalLatticeDischargePipeline.{LocalLatticeStepVSourceInputs,LocalLatticeStepVInternalReducers,LocalLatticeStepVFromAnalyticDischarge,YangMillsEndpointFromLocalLatticeAndTransferPackages}; P06 enters through the owned current P06 endpoint kernel and current P06 mixed-reducer path, P10 enters through LargeField.P10CurrentCanonicalLargeFieldDecayFromOwnedKernels, while P11 and downstream transfer/endpoint packages retain the remaining external authority boundary."
   ; status = mixedReducer
   ; localLatticeStepV =
       LocalLatticeStepVFromAnalyticDischarge

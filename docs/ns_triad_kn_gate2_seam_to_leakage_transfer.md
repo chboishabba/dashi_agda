@@ -216,18 +216,22 @@ normalizedGramToHelicalSchurExtremizerAgreementStated = true        # Extremizer
 normalizedGramToHelicalSchurExtremizerAgreementNumericallySupported = true  # θ_N ≈ 1/6 supports it
 leakageTransferMarginNumericallySupported = true                    # θ_N ≈ 1/6 supports margin
 
-normalizedGramToHelicalSchurAgreementProved = true
-schurCertificateTransfersToLeakageOperator = true
-leakageTransferMarginPositive = true
-outsideSeamNoPollutionProved = true
-gate2ConditionalTheoremProved = true
+normalizedGramToHelicalSchurAgreementProved = false
+schurCertificateTransfersToLeakageOperator = false
+leakageTransferMarginPositive = false
+outsideSeamNoPollutionProved = false
+gate2ConditionalTheoremProved = false
+
+gate2ExactKNAOperatorTransferProved = false
+outsideSeamNoPollutionAnalyticallyProved = false
+gate2ExactTransferConditionalTheoremProved = false
 ```
 
 The boundary is:
 
 - local seam principal/defect budget: installed
-- local seam outside-pollution zero budget: proved
-- exact seam-to-leakage transfer theorem on the shared seam carrier: proved
+- local seam outside-pollution zero budget: carried on the seam-local model
+- exact seam-to-leakage transfer theorem on the true `K_N(A)` carrier: open
 
 ## Current route split
 

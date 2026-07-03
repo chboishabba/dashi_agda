@@ -240,6 +240,11 @@ postulate
     P06BoundedDegreeSkeletonAnimalCounting →
     Entropy.P06ModelLeafDischargePackage
 
+-- Owned P10 local stack.
+-- These abstract local theorem shapes are intended to mirror the now-owned
+-- source-side chain in BalabanLargeFieldSuppression: tail control →
+-- localisation/product suppression → coercivity in diameter →
+-- canonical large-field decay.
 P10CanonicalLargeFieldDecay : Set
 P10CanonicalLargeFieldDecay =
   ∀ k X →
@@ -476,6 +481,9 @@ LocalLatticeAnalyticDischargeFromOwnedLemmas :
   LocalLattice.NatPowerDecayMonotoneType →
   LocalLattice.ComplexityLowerBoundByDiameterForDecayType →
   LocalLattice.LocalLatticeAnalyticDischargePackage
+-- The P10 input here is already the owned canonical large-field package from
+-- BalabanLargeFieldSuppression; the remaining external authority boundary in
+-- the local lattice package sits in P06/P11 and downstream RG/endpoint data.
 LocalLatticeAnalyticDischargeFromOwnedLemmas
   p06
   p10

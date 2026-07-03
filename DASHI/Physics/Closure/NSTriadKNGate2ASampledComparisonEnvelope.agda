@@ -6,6 +6,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.Nat using (_*_)
 open import Data.Nat.Properties as NatP using (_≤?_)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 
@@ -98,6 +99,18 @@ record ScaledRatio : Set where
 
 open ScaledRatio public
 
+mulRatio : ScaledRatio → ScaledRatio → ScaledRatio
+mulRatio r s =
+  mkScaledRatio
+    (numerator r * numerator s)
+    (denominator r * denominator s)
+
+divRatio : ScaledRatio → ScaledRatio → ScaledRatio
+divRatio r s =
+  mkScaledRatio
+    (numerator r * denominator s)
+    (denominator r * numerator s)
+
 record ComparisonEnvelope : Set where
   constructor mkComparisonEnvelope
   field
@@ -176,6 +189,28 @@ rhoN shell6 = mkScaledRatio 60816 100000
 rhoN shell8 = mkScaledRatio 61283 100000
 rhoN shell10 = mkScaledRatio 61508 100000
 
+absLower : SampledShell → ScaledRatio
+absLower s =
+  lower (absEnvelope s)
+
+negUpper : SampledShell → ScaledRatio
+negUpper s =
+  upper (negEnvelope s)
+
+exactCoarseUpper : SampledShell → ScaledRatio
+exactCoarseUpper shell6 =
+  mkScaledRatio 249953760000 14070000000
+exactCoarseUpper shell8 =
+  mkScaledRatio 254140601000 14330000000
+exactCoarseUpper shell10 =
+  mkScaledRatio 294008240000 14350000000
+
+exactCoarseUpperMatchesEnvelopeFormula :
+  (s : SampledShell) → exactCoarseUpper s ≡ shellwiseCoarseTransport s
+exactCoarseUpperMatchesEnvelopeFormula shell6 = refl
+exactCoarseUpperMatchesEnvelopeFormula shell8 = refl
+exactCoarseUpperMatchesEnvelopeFormula shell10 = refl
+
 coarseUpper : SampledShell → ScaledRatio
 coarseUpper shell6 = mkScaledRatio 17766 1000
 coarseUpper shell8 = mkScaledRatio 17740 1000
@@ -185,6 +220,20 @@ directionalTheta : SampledShell → ScaledRatio
 directionalTheta shell6 = mkScaledRatio 1681546 10000000
 directionalTheta shell8 = mkScaledRatio 1677930 10000000
 directionalTheta shell10 = mkScaledRatio 1678154 10000000
+
+directionalTransportFactor : SampledShell → ScaledRatio
+directionalTransportFactor s =
+  divRatio (directionalTheta s) (rhoN s)
+
+directionalProductUpper : SampledShell → ScaledRatio
+directionalProductUpper s =
+  mulRatio (directionalTransportFactor s) (rhoN s)
+
+directionalProductMatchesTheta :
+  (s : SampledShell) → directionalProductUpper s ≡ directionalTheta s
+directionalProductMatchesTheta shell6 = refl
+directionalProductMatchesTheta shell8 = refl
+directionalProductMatchesTheta shell10 = refl
 
 quarterTarget : ScaledRatio
 quarterTarget =
@@ -214,6 +263,28 @@ cNegPlus : ScaledRatio
 cNegPlus =
   mkScaledRatio 4780 100
 
+coarseEnvelopeQuotient : ScaledRatio
+coarseEnvelopeQuotient =
+  divRatio cNegPlus cAbsMinus
+
+coarseEnvelopeTransport : SampledShell → ScaledRatio
+coarseEnvelopeTransport s =
+  mulRatio coarseEnvelopeQuotient (rhoN s)
+
+shellwiseCoarseTransport : SampledShell → ScaledRatio
+shellwiseCoarseTransport s =
+  mulRatio (divRatio (negUpper s) (absLower s)) (rhoN s)
+
+shellwiseCoarseFactor : SampledShell → ScaledRatio
+shellwiseCoarseFactor s =
+  divRatio (negUpper s) (absLower s)
+
+shellwiseCoarseFactorReconstructsTransport :
+  (s : SampledShell) → mulRatio (shellwiseCoarseFactor s) (rhoN s) ≡ shellwiseCoarseTransport s
+shellwiseCoarseFactorReconstructsTransport shell6 = refl
+shellwiseCoarseFactorReconstructsTransport shell8 = refl
+shellwiseCoarseFactorReconstructsTransport shell10 = refl
+
 -- Decide whether a scaled ratio is at most 1 by cross-multiplication.
 ratioAtMostOne : ScaledRatio → Bool
 ratioAtMostOne r with numerator r NatP.≤? denominator r
@@ -224,6 +295,11 @@ ratioStrictlyAboveOne : ScaledRatio → Bool
 ratioStrictlyAboveOne r with ratioAtMostOne r
 ... | true = false
 ... | false = true
+
+ratioAtMost : ScaledRatio → ScaledRatio → Bool
+ratioAtMost r s with ((numerator r * denominator s) NatP.≤? (numerator s * denominator r))
+... | yes _ = true
+... | no _ = false
 
 ratioAtMostQuarter : ScaledRatio → Bool
 ratioAtMostQuarter r with ((four * numerator r) NatP.≤? denominator r)
@@ -242,9 +318,37 @@ coarseRouteRejectedBool : SampledShell → Bool
 coarseRouteRejectedBool s =
   ratioStrictlyAboveOne (coarseUpper s)
 
+coarseEnvelopeRouteCloses : SampledShell → Bool
+coarseEnvelopeRouteCloses s =
+  ratioAtMostOne (exactCoarseUpper s)
+
+coarseEnvelopeRouteRejectedBool : SampledShell → Bool
+coarseEnvelopeRouteRejectedBool s =
+  ratioStrictlyAboveOne (exactCoarseUpper s)
+
+shellwiseCoarseRouteCloses : SampledShell → Bool
+shellwiseCoarseRouteCloses s =
+  ratioAtMostOne (shellwiseCoarseTransport s)
+
+shellwiseCoarseRouteRejectedBool : SampledShell → Bool
+shellwiseCoarseRouteRejectedBool s =
+  ratioStrictlyAboveOne (shellwiseCoarseTransport s)
+
 directionalRouteBelowQuarter : SampledShell → Bool
 directionalRouteBelowQuarter s =
   ratioAtMostQuarter (directionalTheta s)
+
+directionalProductRouteBelowQuarter : SampledShell → Bool
+directionalProductRouteBelowQuarter s =
+  ratioAtMostQuarter (directionalProductUpper s)
+
+directionalBeatsShellwiseCoarse : SampledShell → Bool
+directionalBeatsShellwiseCoarse s =
+  ratioAtMost (directionalProductUpper s) (shellwiseCoarseTransport s)
+
+directionalFactorBeatsShellwiseCoarseFactor : SampledShell → Bool
+directionalFactorBeatsShellwiseCoarseFactor s =
+  ratioAtMost (directionalTransportFactor s) (shellwiseCoarseFactor s)
 
 shell6CoarseRouteRejected :
   coarseRouteCloses shell6 ≡ false
@@ -258,6 +362,48 @@ shell10CoarseRouteRejected :
   coarseRouteCloses shell10 ≡ false
 shell10CoarseRouteRejected = refl
 
+shell6CoarseEnvelopeRouteRejected :
+  coarseEnvelopeRouteCloses shell6 ≡ false
+shell6CoarseEnvelopeRouteRejected = refl
+
+shell8CoarseEnvelopeRouteRejected :
+  coarseEnvelopeRouteCloses shell8 ≡ false
+shell8CoarseEnvelopeRouteRejected = refl
+
+shell10CoarseEnvelopeRouteRejected :
+  coarseEnvelopeRouteCloses shell10 ≡ false
+shell10CoarseEnvelopeRouteRejected = refl
+
+shell6ShellwiseCoarseRouteRejected :
+  shellwiseCoarseRouteCloses shell6 ≡ false
+shell6ShellwiseCoarseRouteRejected = refl
+
+shell8ShellwiseCoarseRouteRejected :
+  shellwiseCoarseRouteCloses shell8 ≡ false
+shell8ShellwiseCoarseRouteRejected = refl
+
+shell10ShellwiseCoarseRouteRejected :
+  shellwiseCoarseRouteCloses shell10 ≡ false
+shell10ShellwiseCoarseRouteRejected = refl
+
+sampledCoarseEnvelopeRouteRejected :
+  (s : SampledShell) → coarseEnvelopeRouteCloses s ≡ false
+sampledCoarseEnvelopeRouteRejected shell6 =
+  shell6CoarseEnvelopeRouteRejected
+sampledCoarseEnvelopeRouteRejected shell8 =
+  shell8CoarseEnvelopeRouteRejected
+sampledCoarseEnvelopeRouteRejected shell10 =
+  shell10CoarseEnvelopeRouteRejected
+
+sampledShellwiseCoarseRouteRejected :
+  (s : SampledShell) → shellwiseCoarseRouteCloses s ≡ false
+sampledShellwiseCoarseRouteRejected shell6 =
+  shell6ShellwiseCoarseRouteRejected
+sampledShellwiseCoarseRouteRejected shell8 =
+  shell8ShellwiseCoarseRouteRejected
+sampledShellwiseCoarseRouteRejected shell10 =
+  shell10ShellwiseCoarseRouteRejected
+
 shell6DirectionalBelowQuarter :
   directionalRouteBelowQuarter shell6 ≡ true
 shell6DirectionalBelowQuarter = refl
@@ -269,6 +415,79 @@ shell8DirectionalBelowQuarter = refl
 shell10DirectionalBelowQuarter :
   directionalRouteBelowQuarter shell10 ≡ true
 shell10DirectionalBelowQuarter = refl
+
+shell6DirectionalProductBelowQuarter :
+  directionalProductRouteBelowQuarter shell6 ≡ true
+shell6DirectionalProductBelowQuarter = refl
+
+shell8DirectionalProductBelowQuarter :
+  directionalProductRouteBelowQuarter shell8 ≡ true
+shell8DirectionalProductBelowQuarter = refl
+
+shell10DirectionalProductBelowQuarter :
+  directionalProductRouteBelowQuarter shell10 ≡ true
+shell10DirectionalProductBelowQuarter = refl
+
+shell6DirectionalBeatsShellwiseCoarse :
+  directionalBeatsShellwiseCoarse shell6 ≡ true
+shell6DirectionalBeatsShellwiseCoarse = refl
+
+shell8DirectionalBeatsShellwiseCoarse :
+  directionalBeatsShellwiseCoarse shell8 ≡ true
+shell8DirectionalBeatsShellwiseCoarse = refl
+
+shell10DirectionalBeatsShellwiseCoarse :
+  directionalBeatsShellwiseCoarse shell10 ≡ true
+shell10DirectionalBeatsShellwiseCoarse = refl
+
+shell6DirectionalFactorBeatsShellwiseCoarseFactor :
+  directionalFactorBeatsShellwiseCoarseFactor shell6 ≡ true
+shell6DirectionalFactorBeatsShellwiseCoarseFactor = refl
+
+shell8DirectionalFactorBeatsShellwiseCoarseFactor :
+  directionalFactorBeatsShellwiseCoarseFactor shell8 ≡ true
+shell8DirectionalFactorBeatsShellwiseCoarseFactor = refl
+
+shell10DirectionalFactorBeatsShellwiseCoarseFactor :
+  directionalFactorBeatsShellwiseCoarseFactor shell10 ≡ true
+shell10DirectionalFactorBeatsShellwiseCoarseFactor = refl
+
+sampledDirectionalRouteBelowQuarter :
+  (s : SampledShell) → directionalRouteBelowQuarter s ≡ true
+sampledDirectionalRouteBelowQuarter shell6 =
+  shell6DirectionalBelowQuarter
+sampledDirectionalRouteBelowQuarter shell8 =
+  shell8DirectionalBelowQuarter
+sampledDirectionalRouteBelowQuarter shell10 =
+  shell10DirectionalBelowQuarter
+
+sampledDirectionalProductRouteBelowQuarter :
+  (s : SampledShell) → directionalProductRouteBelowQuarter s ≡ true
+sampledDirectionalProductRouteBelowQuarter shell6 =
+  shell6DirectionalProductBelowQuarter
+sampledDirectionalProductRouteBelowQuarter shell8 =
+  shell8DirectionalProductBelowQuarter
+sampledDirectionalProductRouteBelowQuarter shell10 =
+  shell10DirectionalProductBelowQuarter
+
+sampledDirectionalBeatsShellwiseCoarse :
+  (s : SampledShell) → directionalBeatsShellwiseCoarse s ≡ true
+sampledDirectionalBeatsShellwiseCoarse shell6 =
+  shell6DirectionalBeatsShellwiseCoarse
+sampledDirectionalBeatsShellwiseCoarse shell8 =
+  shell8DirectionalBeatsShellwiseCoarse
+sampledDirectionalBeatsShellwiseCoarse shell10 =
+  shell10DirectionalBeatsShellwiseCoarse
+
+sampledDirectionalFactorBeatsShellwiseCoarseFactor :
+  (s : SampledShell) →
+  directionalFactorBeatsShellwiseCoarseFactor s ≡ true
+sampledDirectionalFactorBeatsShellwiseCoarseFactor shell6 =
+  shell6DirectionalFactorBeatsShellwiseCoarseFactor
+sampledDirectionalFactorBeatsShellwiseCoarseFactor shell8 =
+  shell8DirectionalFactorBeatsShellwiseCoarseFactor
+sampledDirectionalFactorBeatsShellwiseCoarseFactor shell10 =
+  shell10DirectionalFactorBeatsShellwiseCoarseFactor
 
 record SampledComparisonRow : Set where
   constructor mkSampledComparisonRow
@@ -376,13 +595,25 @@ record NSTriadKNGate2ASampledComparisonEnvelope : Setω where
     sampledCNegPlusIsCanonical :
       sampledCNegPlus ≡ cNegPlus
 
+    sampledCoarseEnvelopeQuotient : ScaledRatio
+    sampledCoarseEnvelopeQuotientIsCanonical :
+      sampledCoarseEnvelopeQuotient ≡ coarseEnvelopeQuotient
+
     conservativeSampledEnvelopeConstantsRecorded : Bool
     conservativeSampledEnvelopeConstantsRecordedIsTrue :
       conservativeSampledEnvelopeConstantsRecorded ≡ true
 
+    exactCoarseEnvelopeObstructionComputed : Bool
+    exactCoarseEnvelopeObstructionComputedIsTrue :
+      exactCoarseEnvelopeObstructionComputed ≡ true
+
     coarseRouteRejectedOnAllSampledShells : Bool
     coarseRouteRejectedOnAllSampledShellsIsTrue :
       coarseRouteRejectedOnAllSampledShells ≡ true
+
+    coarseEnvelopeRouteRejectedOnAllSampledShells : Bool
+    coarseEnvelopeRouteRejectedOnAllSampledShellsIsTrue :
+      coarseEnvelopeRouteRejectedOnAllSampledShells ≡ true
 
     directionalRouteBelowQuarterOnAllSampledShells : Bool
     directionalRouteBelowQuarterOnAllSampledShellsIsTrue :
@@ -429,6 +660,12 @@ canonicalNSTriadKNGate2ASampledComparisonEnvelope =
     cNegMinus
     refl
     cNegPlus
+    refl
+    coarseEnvelopeQuotient
+    refl
+    true
+    refl
+    true
     refl
     true
     refl
