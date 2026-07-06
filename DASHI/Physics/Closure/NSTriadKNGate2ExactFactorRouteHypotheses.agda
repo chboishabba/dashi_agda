@@ -44,24 +44,44 @@ record NSTriadKNGate2ExactFactorRouteHypotheses : Setω where
         ≡ ExactKNAFactorRouteModel.factorTransportModel factorRouteModel
 
     directionalTransportIdentityWitness :
-      DirectionalFactorTransportModel.directionalTransportIdentity
+      DirectionalFactorTransportModel.transported-ratio
         factorTransportModel
+      ≡
+      (DirectionalFactorTransportModel._*_
+        factorTransportModel
+        (DirectionalFactorTransportModel.directional-factor
+          factorTransportModel)
+        (DirectionalFactorTransportModel.seam-rayleigh-ratio
+          factorTransportModel))
 
     coarseTransportIdentityWitness :
-      DirectionalFactorTransportModel.coarseTransportIdentity
+      DirectionalFactorTransportModel.coarse-transport
         factorTransportModel
+      ≡
+      (DirectionalFactorTransportModel._*_
+        factorTransportModel
+        (DirectionalFactorTransportModel.coarse-factor
+          factorTransportModel)
+        (DirectionalFactorTransportModel.seam-rayleigh-ratio
+          factorTransportModel))
 
     directionalFactor≤CoarseFactorWitness :
-      DirectionalFactorTransportModel.directionalFactor≤CoarseFactor
+      DirectionalFactorTransportModel._≤_
         factorTransportModel
+        (DirectionalFactorTransportModel.directional-factor
+          factorTransportModel)
+        (DirectionalFactorTransportModel.coarse-factor
+          factorTransportModel)
 
     exactRestrictionIdentityWitness :
-      ExactKNAFactorRouteModel.exactRestrictionIdentity
-        factorRouteModel
+      ExactKNAFactorRouteModel.exact-kna-ratio factorRouteModel
+      ≡
+      ExactKNAFactorRouteModel.transported-ratio factorRouteModel
 
     coarseTransportQuarterWitness :
-      ExactKNAFactorRouteModel.coarseTransport≤quarter
-        factorRouteModel
+      ExactKNAFactorRouteModel._≤_ factorRouteModel
+        (ExactKNAFactorRouteModel.coarse-transport factorRouteModel)
+        (ExactKNAFactorRouteModel.quarter-threshold factorRouteModel)
 
     exactKNAFactorRouteBound :
       ExactKNAFactorRouteModel._≤_ factorRouteModel

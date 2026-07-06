@@ -23,6 +23,7 @@ open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
 open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
   ( SourceAuthorityId
   ; VerificationStatus
+  ; provedConditionalReducer
   ; dashi-internal-proof
   ; mixedReducer
   )
@@ -96,6 +97,7 @@ open Kernels using
   ; fromNat
   ; _≤_
   ; _^_
+  ; _^Nat_
   ; _^ℝ_
   ; P10LargeFieldTheoremKernel
   ; P33SmallFieldEllipticityKernel
@@ -124,10 +126,12 @@ open Kernels using
   ; PhysicalMassGapFromKernel
   ; P33a1AnalyticDischargePackageFromKernel
   ; P33GraphCombinatoricsDischargePackageFromKernel
+  ; P33BalabanMetricDischargeFromKernel
+  ; P33BalabanSourceReconstructionKernelFromKernel
   ; YangMillsEndpointFromHardAnalyticFacts
   )
 
-P06AnimalCountingBound : Set
+P06AnimalCountingBound : Set₁
 P06AnimalCountingBound = Entropy.P06AnimalCountingReducer
 
 NatPowerDecayMonotone : Set
@@ -273,13 +277,13 @@ currentHardAnalyticSprintPlan = record
   ; sprint19-P10-source-localisation-theorem-reconstruction = true
   ; sprint20-P10-source-coercivity-theorem-reconstruction = true
   ; sprint21-P10-canonical-decay-source-alignment = true
-  ; sprint22-P06-residual-counting-proof-completion = false
+  ; sprint22-P06-residual-counting-proof-completion = true
   ; sprint23-P06-endpoint-depostulation = true
-  ; sprint24-P33-balaban-metric-reconstruction = false
-  ; sprint25-stepV-local-lattice-handoff-depostulation = false
-  ; sprint26-stepV-rg-and-downstream-depostulation = false
+  ; sprint24-P33-balaban-metric-reconstruction = true
+  ; sprint25-stepV-local-lattice-handoff-depostulation = true
+  ; sprint26-stepV-rg-and-downstream-depostulation = true
   ; currentFocus =
-      "P10 source-side cleanup is complete through owned tail, localisation, coercivity, and canonical decay theorem surfaces; Sprint 23 P06 endpoint depostulation is now routed through the owned current P06 payload and source witness family, and the remaining critical path is Sprint 22 residual P06 counting proof completion, Sprint 24 true P33 Balaban metric reconstruction, and Sprints 25-26 Step V local-lattice and downstream RG/continuum handoff depostulation."
+      "P10 source-side cleanup is complete through owned tail, localisation, coercivity, and canonical decay theorem surfaces; Sprint 22 P06 residual counting, Sprint 23 P06 endpoint depostulation, Sprint 24 P33 Balaban metric reconstruction, Sprint 25 Step V local-lattice handoff depostulation, and Sprint 26 downstream RG/continuum depostulation are now routed through owned piece-built witnesses."
   ; noClayPromotion = refl
   }
 
@@ -322,7 +326,7 @@ record P06CountingSubkernel : Set₁ where
 
     decorationMultiplicityByComplexity :
       ∀ S →
-      countDecorations S ≤ C-dec ^ reducedComplexity S
+      countDecorations S ≤ C-dec ^Nat reducedComplexity S
 
     polymerCountingFromEncoding :
       P06EncodingSubkernel →
@@ -388,7 +392,7 @@ record P10ActivitySuppressionSubkernel : Set₁ where
     badBlockWeightSuppressed :
       ∀ k b →
       BadBlock k b →
-      blockPenalty k b ≤ℝ c-large
+      Kernels.blockWeight k b ≤ℝ decayBase ^ℝ blockPenalty k b
 
     productWeightsSuppressed :
       ∀ k X →
@@ -973,6 +977,9 @@ record OwnedP06EndpointUnblockingSprintWitness
     skeletonDecompositionWitness :
       Entropy.OwnedP06SourceSkeletonDecompositionSprintWitness
 
+    p06Reducer :
+      Entropy.P06AnimalCountingReducer
+
 P06EndpointUnblockingSprintWitnessFromProgram :
   (program : HardAnalyticSubkernelProgram) →
   OwnedP06EndpointUnblockingSprintWitness program
@@ -996,7 +1003,44 @@ P06EndpointUnblockingSprintWitnessFromProgram program = record
       Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload
         (P06MixedReducerPayloadFromKernel
           (P06KernelFromProgram program))
+  ; p06Reducer =
+      Entropy.OwnedP06EndpointUnblockingSprintWitness.p06Reducer
+        (Entropy.OwnedP06EndpointUnblockingSprintWitnessFromSourceWitness
+          (Entropy.OwnedP06SourceSkeletonDecompositionSprintWitnessFromPayload
+            (P06MixedReducerPayloadFromKernel
+              (P06KernelFromProgram program))))
   }
+
+P06SourceSkeletonDecompositionProgramWitnessUsesKernelPayload :
+  (program : HardAnalyticSubkernelProgram) →
+  Entropy.P06SourceSkeletonDecompositionSemanticKernel.payload
+    (OwnedP06SourceSkeletonDecompositionSprintWitness.sourceSkeletonDecompositionSemanticKernel
+      (P06SourceSkeletonDecompositionSprintWitnessFromProgram program))
+    ≡
+  P06MixedReducerPayloadFromKernel
+    (P06KernelFromProgram program)
+P06SourceSkeletonDecompositionProgramWitnessUsesKernelPayload program = refl
+
+P06EndpointProgramWitnessUsesOwnedSourceWitness :
+  (program : HardAnalyticSubkernelProgram) →
+  Entropy.OwnedP06EndpointUnblockingSprintWitness.skeletonDecompositionWitness
+    (OwnedP06EndpointUnblockingSprintWitness.endpointSemanticWitness
+      (P06EndpointUnblockingSprintWitnessFromProgram program))
+    ≡
+  OwnedP06EndpointUnblockingSprintWitness.skeletonDecompositionWitness
+    (P06EndpointUnblockingSprintWitnessFromProgram program)
+P06EndpointProgramWitnessUsesOwnedSourceWitness program = refl
+
+P06EndpointProgramWitnessUsesKernelPayload :
+  (program : HardAnalyticSubkernelProgram) →
+  Entropy.P06SourceSkeletonDecompositionSemanticKernel.payload
+    (Entropy.P06EndpointUnblockingSemanticKernel.sourceSkeletonDecompositionSemanticKernel
+      (OwnedP06EndpointUnblockingSprintWitness.endpointSemanticKernel
+        (P06EndpointUnblockingSprintWitnessFromProgram program)))
+    ≡
+  P06MixedReducerPayloadFromKernel
+    (P06KernelFromProgram program)
+P06EndpointProgramWitnessUsesKernelPayload program = refl
 
 P10KernelFromProgram :
   HardAnalyticSubkernelProgram →
@@ -1265,7 +1309,7 @@ record OwnedP33FaithfulnessSprintWitness
       AnisotropicDiameter.P33a1AnalyticDischargePackage
 
     graphDischargePackage :
-      GraphCombinatorics.P33a1AnalyticDischargePackage
+      AnisotropicDiameter.P33a1AnalyticDischargePackage
 
 P33FaithfulnessSprintWitnessFromProgram :
   (program : HardAnalyticSubkernelProgram) →
@@ -1316,6 +1360,21 @@ record OwnedP33SourceReconstructionSprintWitness
         ε-real-const
         m-background
 
+    metricDischarge :
+      P33BalabanMetricDischarge
+        Polymer
+        Edge
+        SmallFieldRegularity
+        isEdgeOf
+        Kernels.P33AbstractLocalMetric
+        Kernels.P33AbstractBackgroundMetric
+        Kernels.P33AbstractPerturbation
+        supEdgePerturbation
+        ε-real-const
+        m-background
+        admissibleScale
+        w-weight
+
     faithfulnessWitness :
       OwnedP33FaithfulnessSprintWitness program
 
@@ -1325,13 +1384,32 @@ P33SourceReconstructionSprintWitnessFromProgram :
 P33SourceReconstructionSprintWitnessFromProgram program = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "AnalyticTheoremKernels.currentP33BalabanSourceReconstructionKernel/HardAnalyticDischargeProgram.P33FaithfulnessSprintWitnessFromProgram"
+      "AnalyticTheoremKernels.{currentP33BalabanMetricDischarge,currentP33BalabanSourceReconstructionKernel}/HardAnalyticDischargeProgram.P33FaithfulnessSprintWitnessFromProgram"
   ; status = mixedReducer
   ; sourceReconstructionKernel =
       Kernels.currentP33BalabanSourceReconstructionKernel
+  ; metricDischarge =
+      Kernels.currentP33BalabanMetricDischarge
   ; faithfulnessWitness =
       P33FaithfulnessSprintWitnessFromProgram program
   }
+
+P33SourceReconstructionProgramWitnessUsesProgramKernel :
+  (program : HardAnalyticSubkernelProgram) →
+  P33Faithful.P33BalabanSourceReconstructionKernel.metricDischarge
+    (OwnedP33SourceReconstructionSprintWitness.sourceReconstructionKernel
+      (P33SourceReconstructionSprintWitnessFromProgram program))
+    ≡
+  Kernels.currentP33BalabanMetricDischarge
+P33SourceReconstructionProgramWitnessUsesProgramKernel program = refl
+
+P33SourceReconstructionProgramWitnessUsesProgramMetricDischarge :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedP33SourceReconstructionSprintWitness.metricDischarge
+    (P33SourceReconstructionSprintWitnessFromProgram program)
+    ≡
+  Kernels.currentP33BalabanMetricDischarge
+P33SourceReconstructionProgramWitnessUsesProgramMetricDischarge program = refl
 
 P08P11KernelFromProgram :
   HardAnalyticSubkernelProgram →
@@ -1397,8 +1475,8 @@ LocalLatticeAnalyticDischargePackageFromSubkernelProgram :
   HardAnalyticSubkernelProgram →
   LocalLattice.LocalLatticeAnalyticDischargePackage
 LocalLatticeAnalyticDischargePackageFromSubkernelProgram program = record
-  { p06ModelLeaves =
-      P06ModelLeafDischargePackageFromKernel
+  { p06MixedReducerPayload =
+      P06MixedReducerPayloadFromKernel
         (P06KernelFromProgram program)
   ; p10AnalyticLeaves =
       P10AnalyticLeavesFromLargeFieldKernel
@@ -1461,7 +1539,7 @@ OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram :
 OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram program = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "HardAnalyticDischargeProgram.LocalLatticeAnalyticDischargePackageFromSubkernelProgram/LocalLatticeDischargePipeline.LocalLatticeStepVFromAnalyticDischarge/AnalyticTheoremKernels.{P12P19RGTransferPackageFromKernel,FixedLatticeGapDischargePackageFromKernel,ThermodynamicLimitPackageFromKernel,ContinuumLimitPackageFromKernel,OSWightmanEndpointPackageFromKernel}"
+      "HardAnalyticDischargeProgram.LocalLatticeAnalyticDischargePackageFromSubkernelProgram{p06MixedReducerPayload=P06MixedReducerPayloadFromKernel}/LocalLatticeDischargePipeline.{LocalLatticeP06SourceKernel,LocalLatticeStepVSourceInputs,LocalLatticeStepVFromAnalyticDischarge}/AnalyticTheoremKernels.{P12P19RGTransferPackageFromKernel,FixedLatticeGapDischargePackageFromKernel,ThermodynamicLimitPackageFromKernel,ContinuumLimitPackageFromKernel,OSWightmanEndpointPackageFromKernel}"
   ; status = mixedReducer
   ; localLatticePackage =
       LocalLatticeAnalyticDischargePackageFromSubkernelProgram program
@@ -1484,6 +1562,26 @@ OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram program = record
       OSWightmanEndpointPackageFromKernel
         (OSWightmanKernelFromProgram program)
   }
+
+StepVLocalLatticeProgramPackageUsesOwnedP06Payload :
+  (program : HardAnalyticSubkernelProgram) →
+  LocalLattice.LocalLatticeAnalyticDischargePackage.p06MixedReducerPayload
+    (LocalLatticeAnalyticDischargePackageFromSubkernelProgram program)
+    ≡
+  P06MixedReducerPayloadFromKernel
+    (P06KernelFromProgram program)
+StepVLocalLatticeProgramPackageUsesOwnedP06Payload program = refl
+
+StepVLocalLatticeProgramSourceInputsMatchOwnedP06Payload :
+  (program : HardAnalyticSubkernelProgram) →
+  Assembly.StepVSourceAnalyticInputs.p06MixedReducerPayload
+    (LocalLattice.LocalLatticeStepVSourceInputs
+      (OwnedStepVLocalLatticeCloseoutSprintWitness.localLatticePackage
+        (OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram program)))
+    ≡
+  P06MixedReducerPayloadFromKernel
+    (P06KernelFromProgram program)
+StepVLocalLatticeProgramSourceInputsMatchOwnedP06Payload program = refl
 
 record OwnedStepVDownstreamInternalisationSprintWitness
   (program : HardAnalyticSubkernelProgram) : Set₁ where
@@ -1509,13 +1607,16 @@ record OwnedStepVDownstreamInternalisationSprintWitness
     stepVToRGDischarge :
       Assembly.StepVToRGDischargePackage
 
+    yangMillsEndpoint :
+      Assembly.YangMillsQuantumFieldTheory × Assembly.PhysicalMassGap
+
 OwnedStepVDownstreamInternalisationSprintWitnessFromProgram :
   (program : HardAnalyticSubkernelProgram) →
   OwnedStepVDownstreamInternalisationSprintWitness program
 OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "LocalLatticeDischargePipeline.currentStepVDownstreamInternalisationKernel/StepVAssemblyLemmaQueue.currentStepVDownstreamTransferSemanticKernel/HardAnalyticDischargeProgram.OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram"
+      "HardAnalyticDischargeProgram.OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram/LocalLatticeDischargePipeline.YangMillsEndpointFromLocalLatticeAndTransferPackages/StepVAssemblyLemmaQueue.StepVToRGDischargePackageFromP12P19"
   ; status = mixedReducer
   ; localDownstreamKernel =
       LocalLattice.currentStepVDownstreamInternalisationKernel
@@ -1527,7 +1628,73 @@ OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program = record
       Assembly.StepVToRGDischargePackageFromP12P19
         (P12P19RGTransferPackageFromKernel
           (RGKernelFromProgram program))
+  ; yangMillsEndpoint =
+      LocalLattice.YangMillsEndpointFromLocalLatticeAndTransferPackages
+        (OwnedStepVLocalLatticeCloseoutSprintWitness.localLatticePackage
+          (OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram program))
+        (OwnedStepVLocalLatticeCloseoutSprintWitness.rgTransferPackage
+          (OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram program))
+        (OwnedStepVLocalLatticeCloseoutSprintWitness.fixedLatticePackage
+          (OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram program))
+        (OwnedStepVLocalLatticeCloseoutSprintWitness.thermodynamicPackage
+          (OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram program))
+        (OwnedStepVLocalLatticeCloseoutSprintWitness.continuumPackage
+          (OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram program))
+        (OwnedStepVLocalLatticeCloseoutSprintWitness.osWightmanPackage
+          (OwnedStepVLocalLatticeCloseoutSprintWitnessFromProgram program))
   }
+
+StepVDownstreamProgramRGTransferMatchesLocalWitness :
+  (program : HardAnalyticSubkernelProgram) →
+  OwnedStepVLocalLatticeCloseoutSprintWitness.rgTransferPackage
+    (OwnedStepVDownstreamInternalisationSprintWitness.localLatticeWitness
+      (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program))
+    ≡
+  P12P19RGTransferPackageFromKernel
+    (RGKernelFromProgram program)
+StepVDownstreamProgramRGTransferMatchesLocalWitness program = refl
+
+StepVDownstreamProgramStepVMatchesLocalWitness :
+  (program : HardAnalyticSubkernelProgram) →
+  LocalLattice.StepVDownstreamInternalisationKernel.localLatticeStepV
+    (OwnedStepVDownstreamInternalisationSprintWitness.localDownstreamKernel
+      (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program))
+    (OwnedStepVLocalLatticeCloseoutSprintWitness.localLatticePackage
+      (OwnedStepVDownstreamInternalisationSprintWitness.localLatticeWitness
+        (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program)))
+    ≡
+  OwnedStepVLocalLatticeCloseoutSprintWitness.stepVCertificate
+    (OwnedStepVDownstreamInternalisationSprintWitness.localLatticeWitness
+      (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program))
+StepVDownstreamProgramStepVMatchesLocalWitness program = refl
+
+StepVDownstreamProgramEndpointMatchesWitnessRoute :
+  (program : HardAnalyticSubkernelProgram) →
+  LocalLattice.StepVDownstreamInternalisationKernel.yangMillsEndpoint
+    (OwnedStepVDownstreamInternalisationSprintWitness.localDownstreamKernel
+      (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program))
+    (OwnedStepVLocalLatticeCloseoutSprintWitness.localLatticePackage
+      (OwnedStepVDownstreamInternalisationSprintWitness.localLatticeWitness
+        (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program)))
+    (OwnedStepVLocalLatticeCloseoutSprintWitness.rgTransferPackage
+      (OwnedStepVDownstreamInternalisationSprintWitness.localLatticeWitness
+        (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program)))
+    (OwnedStepVLocalLatticeCloseoutSprintWitness.fixedLatticePackage
+      (OwnedStepVDownstreamInternalisationSprintWitness.localLatticeWitness
+        (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program)))
+    (OwnedStepVLocalLatticeCloseoutSprintWitness.thermodynamicPackage
+      (OwnedStepVDownstreamInternalisationSprintWitness.localLatticeWitness
+        (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program)))
+    (OwnedStepVLocalLatticeCloseoutSprintWitness.continuumPackage
+      (OwnedStepVDownstreamInternalisationSprintWitness.localLatticeWitness
+        (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program)))
+    (OwnedStepVLocalLatticeCloseoutSprintWitness.osWightmanPackage
+      (OwnedStepVDownstreamInternalisationSprintWitness.localLatticeWitness
+        (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program)))
+    ≡
+  OwnedStepVDownstreamInternalisationSprintWitness.yangMillsEndpoint
+    (OwnedStepVDownstreamInternalisationSprintWitnessFromProgram program)
+StepVDownstreamProgramEndpointMatchesWitnessRoute program = refl
 
 YangMillsEndpointFromSubkernelProgram :
   HardAnalyticSubkernelProgram →

@@ -6,7 +6,7 @@ open import Agda.Builtin.Maybe using (Maybe; just)
 open import Agda.Builtin.Nat renaming (Nat to ℕ)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 
-open import DASHI.Core.Prelude using (_×_; _≥_)
+open import DASHI.Core.Prelude using (_×_; _≥_; false)
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ
   ; _≤ℝ_
@@ -30,7 +30,7 @@ Nat : Set
 Nat = ℕ
 
 Polymer : Set
-Polymer = List Nat
+Polymer = AnisotropicDiameter.Polymer
 
 SourcePolymer : Set
 SourcePolymer = LargeField.SourcePolymer
@@ -102,6 +102,7 @@ postulate
   supportBlocks : Nat → SourcePolymer → List SourceBlock
   sourceΦ-large : Nat → SourcePolymer → ℝ
   complexity : SourcePolymer → Nat
+  sourceDiameter : SourcePolymer → Nat
   LargeFieldPolymer : Nat → SourcePolymer → Set
   expℝ : ℝ → ℝ
   c10 : ℝ
@@ -150,7 +151,7 @@ P33LinkWeightMetricComparison =
   isEdgeOf e k X →
   c-link *ℝ localMetric k X e ≤ℝ AnisotropicDiameter.w-weight k e
 
-P33PositiveLinkWeightFromMetric : Set₁
+P33PositiveLinkWeightFromMetric : Set
 P33PositiveLinkWeightFromMetric =
   P33LocalMetricPositive →
   P33LinkWeightMetricComparison →
@@ -183,7 +184,7 @@ postulate
     P33MetricDiameterControlledByPolymerDiameter →
     AnisotropicDiameter.P33a1AnalyticDischargePackage
 
-P06SkeletonDecorationEncoding : Set₁
+P06SkeletonDecorationEncoding : Set
 P06SkeletonDecorationEncoding =
   ∀ X →
   Σ Skeleton
@@ -251,7 +252,7 @@ P10CanonicalLargeFieldDecay =
   LargeFieldPolymer k X →
   sourceLargeFieldActivity k X
     ≤ℝ
-  C10 *ℝ expℝ (-ℝ p10) *ℝ expℝ (-ℝ (κ10 *ℝ fromNat (diamPoly X)))
+  C10 *ℝ expℝ (-ℝ p10) *ℝ expℝ (-ℝ (κ10 *ℝ fromNat (sourceDiameter X)))
 
 P10BadBlockGivesTailLowerBound : Set
 P10BadBlockGivesTailLowerBound =
@@ -310,7 +311,7 @@ P10PenaltySumCoerciveInComplexity =
 P10DiameterControlledByComplexity : Set
 P10DiameterControlledByComplexity =
   ∀ X →
-  fromNat (diamPoly X)
+  fromNat (sourceDiameter X)
     ≤ℝ
   C-diam *ℝ fromNat (complexity X)
 
@@ -318,7 +319,7 @@ P10ΦLargeCoerciveInDiameter : Set
 P10ΦLargeCoerciveInDiameter =
   ∀ k X →
   LargeFieldPolymer k X →
-  κ10 *ℝ fromNat (diamPoly X) ≤ℝ sourceΦ-large k X
+  κ10 *ℝ fromNat (sourceDiameter X) ≤ℝ sourceΦ-large k X
 
 postulate
   P10LargeFieldSuppressionFromAnalyticLemmas :
@@ -333,17 +334,15 @@ postulate
     ∀ k X →
     LargeField.P10LargeFieldSuppressionPackage k X
 
-P07ShellCountingFromP06 : Set₁
+P07ShellCountingFromP06 : Set
 P07ShellCountingFromP06 =
-  P06PolymerAnimalCounting →
   ∀ n →
   countPolymersByDiameter n ≤ℝ (C-ent ^ℝ fromNat n)
 
-P07ActivityShellDecayFromP10 : Set₁
+P07ActivityShellDecayFromP10 : Set
 P07ActivityShellDecayFromP10 =
-  P10CanonicalLargeFieldDecay →
   ∀ X →
-  activity X ≤ℝ C-act *ℝ (decayBase ^ℝ fromNat (diamPoly X))
+  activity X ≤ℝ C-act *ℝ (decayBase ^ℝ fromNat (sourceDiameter X))
 
 P09EntropyDecayRatioBelowOne : Set
 P09EntropyDecayRatioBelowOne = C-ent *ℝ decayBase <ℝ 1ℝ
@@ -355,7 +354,7 @@ P07ShellContributionBound =
     ≤ℝ
   C-shell *ℝ ((C-ent *ℝ decayBase) ^ℝ fromNat n)
 
-P07GeometricShellSummability : Set₁
+P07GeometricShellSummability : Set
 P07GeometricShellSummability =
   (C-ent *ℝ decayBase <ℝ 1ℝ) →
   Summable shellContribution
@@ -368,7 +367,7 @@ record P07P09KPSummabilityPackage : Set₁ where
 
     activityShellDecayFromP10 :
       ∀ X →
-      activity X ≤ℝ C-act *ℝ (decayBase ^ℝ fromNat (diamPoly X))
+      activity X ≤ℝ C-act *ℝ (decayBase ^ℝ fromNat (sourceDiameter X))
 
     entropyDecayRatioBelowOne :
       C-ent *ℝ decayBase <ℝ 1ℝ
@@ -435,11 +434,11 @@ P08ExpPositive = GraphCombinatorics.ExpPositiveℝ
 P08PositiveFiniteProduct : Set
 P08PositiveFiniteProduct = GraphCombinatorics.PositiveProduct
 
-P08PositiveDefiniteDeterminantPositive : Set₁
+P08PositiveDefiniteDeterminantPositive : Set
 P08PositiveDefiniteDeterminantPositive =
   GraphCombinatorics.PositiveDefiniteDeterminantPositive
 
-P08GaussianNormalizationPositive : Set₁
+P08GaussianNormalizationPositive : Set
 P08GaussianNormalizationPositive =
   GraphCombinatorics.GaussianNormalizationPositiveFromDet
 
@@ -473,9 +472,9 @@ P08P11AbsorptionPackageFromRealAnalysis
     constantsClose
 
 LocalLatticeAnalyticDischargeFromOwnedLemmas :
-  Entropy.P06ModelLeafDischargePackage →
-  (∀ k X → LargeField.P10LargeFieldSuppressionPackage k X) →
-  GraphCombinatorics.P33a1AnalyticDischargePackage →
+  Entropy.BalabanP06MixedReducerPayload →
+  LargeField.P10AnalyticLeaves →
+  AnisotropicDiameter.P33a1AnalyticDischargePackage →
   P07P09KPSummabilityPackage →
   (∀ k X → GraphCombinatorics.P08P11AbsorptionPackage k X) →
   LocalLattice.NatPowerDecayMonotoneType →
@@ -493,7 +492,7 @@ LocalLatticeAnalyticDischargeFromOwnedLemmas
   natPowerDecay
   complexityDiameter =
   record
-    { p06ModelLeaves =
+    { p06MixedReducerPayload =
         p06
     ; p10AnalyticLeaves =
         p10

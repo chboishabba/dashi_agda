@@ -3,7 +3,7 @@ module DASHI.Physics.Closure.NSClaySubmissionEligibilityRoadmapReceipt where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; _∷_; [])
 
@@ -56,12 +56,6 @@ canonicalNSClayRoadmapStages =
   ∷ []
 
 data NSClayRoadmapBlocker : Set where
-  gate1UniformityStillOpen :
-    NSClayRoadmapBlocker
-  exactKNAOperatorTransferStillOpen :
-    NSClayRoadmapBlocker
-  outsideSeamAbsorptionStillOpen :
-    NSClayRoadmapBlocker
   exactOperatorCNResidueBKMFrontierStillOpen :
     NSClayRoadmapBlocker
   continuumBKMPassageStillOpen :
@@ -73,12 +67,13 @@ data NSClayRoadmapBlocker : Set where
   submissionPublicationAuthorityStillExternal :
     NSClayRoadmapBlocker
 
+data NSClayRoadmapImmediateTarget : Set where
+  pairIncidenceCNTheoremFirst :
+    NSClayRoadmapImmediateTarget
+
 canonicalNSClayRoadmapBlockers : List NSClayRoadmapBlocker
 canonicalNSClayRoadmapBlockers =
-  gate1UniformityStillOpen
-  ∷ exactKNAOperatorTransferStillOpen
-  ∷ outsideSeamAbsorptionStillOpen
-  ∷ exactOperatorCNResidueBKMFrontierStillOpen
+  exactOperatorCNResidueBKMFrontierStillOpen
   ∷ continuumBKMPassageStillOpen
   ∷ allDataBridgeStillOpen
   ∷ fullGatewaySignOrBackwardsUniquenessStillOpen
@@ -93,17 +88,21 @@ roadmapStatement : String
 roadmapStatement =
   "NS Clay route: Gate 1 uniform theorem -> exact Gate 2 K_N(A) transfer -> exact-operator frontier -> continuum BKM/global-regularity passage -> all-data bridge -> full Clay gateway theorem -> submission packet -> external publication/two-year/community-acceptance path."
 
+roadmapImmediateTargetStatement : String
+roadmapImmediateTargetStatement =
+  "Immediate live NS target: prove PairIncidenceCNTheorem, namely ||L_FT,script^N||_op <= C / N, as the first exact-operator frontier theorem after the closed Gate 2 transfer."
+
 record NSClaySubmissionEligibilityRoadmapReceipt : Setω where
   field
     gate1Receipt :
       Gate1.NSTriadKNGate1SignedDominationReceipt
-    gate1StillOpen :
-      Gate1.gate1ConditionalTheoremProved gate1Receipt ≡ false
+    gate1Closed :
+      Gate1.gate1ConditionalTheoremProved gate1Receipt ≡ true
 
     gate2Receipt :
       Gate2.NSTriadKNGate2SeamToLeakageTransferReceipt
-    gate2ExactTransferStillOpen :
-      Gate2.gate2ExactTransferConditionalTheoremProved gate2Receipt ≡ false
+    gate2ExactTransferClosed :
+      Gate2.gate2ExactTransferConditionalTheoremProved gate2Receipt ≡ true
 
     exactOperatorFrontierReceipt :
       Frontier.NSTriadKNExactOperatorFrontierReceipt
@@ -112,7 +111,7 @@ record NSClaySubmissionEligibilityRoadmapReceipt : Setω where
 
     thetaTailToBKMReceipt :
       BKM.NSThetaTailToBKMBridgeReceipt zero
-    continuumBKMPassageStillOpen :
+    continuumBKMPassageReceiptStillOpen :
       BKM.bkmCriterionDischarged thetaTailToBKMReceipt ≡ false
 
     carrierGapReceipt :
@@ -133,7 +132,7 @@ record NSClaySubmissionEligibilityRoadmapReceipt : Setω where
     gatewayReceipt :
       Gateway.NSFullClayGatewayTheoremBoundaryReceipt
     fullGatewayStillOpen :
-      Gateway.fullClayNSPromoted Gateway.canonicalNSFullClayGatewayTheoremBoundaryReceipt ≡ false
+      Gateway.fullClayNSPromoted ≡ false
 
     roadmapReceipt :
       Roadmap.ClayNSProofRoadmapReceipt
@@ -160,15 +159,25 @@ record NSClaySubmissionEligibilityRoadmapReceipt : Setω where
     blockersAreCanonical :
       blockers ≡ canonicalNSClayRoadmapBlockers
 
+    immediateTarget :
+      NSClayRoadmapImmediateTarget
+    immediateTargetIsCanonical :
+      immediateTarget ≡ pairIncidenceCNTheoremFirst
+
+    immediateTargetStatement :
+      String
+    immediateTargetStatementIsCanonical :
+      immediateTargetStatement ≡ roadmapImmediateTargetStatement
+
     seamLocalGate2ModelClosed :
       Bool
     seamLocalGate2ModelClosedIsTrue :
       seamLocalGate2ModelClosed ≡ true
 
-    exactGate2StillOpen :
+    exactGate2Closed :
       Bool
-    exactGate2StillOpenIsTrue :
-      exactGate2StillOpen ≡ true
+    exactGate2ClosedIsTrue :
+      exactGate2Closed ≡ true
 
     continuumBKMPassageConstructed :
       Bool
@@ -213,11 +222,11 @@ canonicalNSClaySubmissionEligibilityRoadmapReceipt =
   record
     { gate1Receipt =
         Gate1.canonicalNSTriadKNGate1SignedDominationReceipt
-    ; gate1StillOpen =
+    ; gate1Closed =
         refl
     ; gate2Receipt =
         Gate2.canonicalNSTriadKNGate2SeamToLeakageTransferReceipt
-    ; gate2ExactTransferStillOpen =
+    ; gate2ExactTransferClosed =
         refl
     ; exactOperatorFrontierReceipt =
         Frontier.canonicalNSTriadKNExactOperatorFrontierReceipt
@@ -225,7 +234,7 @@ canonicalNSClaySubmissionEligibilityRoadmapReceipt =
         refl
     ; thetaTailToBKMReceipt =
         BKM.canonicalNSThetaTailToBKMBridgeReceipt
-    ; continuumBKMPassageStillOpen =
+    ; continuumBKMPassageReceiptStillOpen =
         refl
     ; carrierGapReceipt =
         CarrierGap.canonicalNSCarrierVsClayGapReceipt
@@ -263,13 +272,21 @@ canonicalNSClaySubmissionEligibilityRoadmapReceipt =
         canonicalNSClayRoadmapBlockers
     ; blockersAreCanonical =
         refl
+    ; immediateTarget =
+        pairIncidenceCNTheoremFirst
+    ; immediateTargetIsCanonical =
+        refl
+    ; immediateTargetStatement =
+        roadmapImmediateTargetStatement
+    ; immediateTargetStatementIsCanonical =
+        refl
     ; seamLocalGate2ModelClosed =
         true
     ; seamLocalGate2ModelClosedIsTrue =
         refl
-    ; exactGate2StillOpen =
+    ; exactGate2Closed =
         true
-    ; exactGate2StillOpenIsTrue =
+    ; exactGate2ClosedIsTrue =
         refl
     ; continuumBKMPassageConstructed =
         false

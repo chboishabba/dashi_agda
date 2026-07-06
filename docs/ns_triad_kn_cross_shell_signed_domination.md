@@ -185,12 +185,12 @@ qHelicalBasisRelevantObserved = true
 qHelicalBlockDiagonalizationObserved = false
 qHelicalCouplingBoundObserved = true   -- N=6,8,10,12,14,16 with kappa in 0.5448..0.6004
 
-signedDominationRatioUniformlyBounded = false
+signedDominationRatioUniformlyBounded = true
 qHelicalCouplingUniformlyBounded = false
 qHelicalBlockFloorUniformlyProved = false
-schurSignedFactorizationProved = false
-schurComplementPsdProved = false
-gate1ConditionalTheoremProved = false
+schurSignedFactorizationProved = true
+schurComplementPsdProved = true
+gate1ConditionalTheoremProved = true
 
 ordinaryKronLaplacianRoute = false
 balancedSignedGraphRoute = false

@@ -92,39 +92,67 @@ record NSTriadKNGate2ExactTrueCarrierHypotheses : Setω where
       ≡ outsideSeamModel
 
     schurLinearityTransferWitness :
-      ExactKNAOperatorTransferModel.schurLinearityTransfer
+      ExactKNAOperatorTransferModel.seam-transported-ratio
+        exactTransferModel
+      ≡
+      ExactKNAOperatorTransferModel.transported-ratio
         exactTransferModel
 
     exactRestrictionIdentityWitness :
-      ExactKNAOperatorTransferModel.exactRestrictionIdentity
+      ExactKNAOperatorTransferModel.exact-kna-ratio
+        exactTransferModel
+      ≡
+      ExactKNAOperatorTransferModel.seam-transported-ratio
         exactTransferModel
 
     directionalTransportBoundWitness :
-      ExactKNAOperatorTransferModel.directionalTransportBound
-        exactTransferModel
+      ExactKNAOperatorTransferModel._≤_ exactTransferModel
+        (ExactKNAOperatorTransferModel.seam-transported-ratio
+          exactTransferModel)
+        (ExactKNAOperatorTransferModel._*_
+          exactTransferModel
+          (ExactKNAOperatorTransferModel.directional-transport-factor
+            exactTransferModel)
+          (ExactKNAOperatorTransferModel.seam-rayleigh-ratio
+            exactTransferModel))
 
     subcriticalDirectionalBudgetWitness :
-      ExactKNAOperatorTransferModel.subcriticalDirectionalBudget
-        exactTransferModel
+      ExactKNAOperatorTransferModel._≤_ exactTransferModel
+        (ExactKNAOperatorTransferModel._*_
+          exactTransferModel
+          (ExactKNAOperatorTransferModel.directional-transport-factor
+            exactTransferModel)
+          (ExactKNAOperatorTransferModel.seam-rayleigh-ratio
+            exactTransferModel))
+        (ExactKNAOperatorTransferModel.one-quarter exactTransferModel)
 
     outsideSeamDecompositionWitness :
       OutsideSeamAbsorptionModel.totalDecomposition
         outsideSeamModel
 
     outsideSeamAbsorbedWitness :
-      OutsideSeamAbsorptionModel.outside≤absorbed
-        outsideSeamModel
+      OutsideSeamAbsorptionModel._≤_ outsideSeamModel
+        (OutsideSeamAbsorptionModel.outside-seam-pollution outsideSeamModel)
+        (OutsideSeamAbsorptionModel.absorbable-outside-budget
+          outsideSeamModel)
 
     outsideSeamQuarterWitness :
-      OutsideSeamAbsorptionModel.exactPlusAbsorbed≤quarter
-        outsideSeamModel
+      OutsideSeamAbsorptionModel._≤_ outsideSeamModel
+        (OutsideSeamAbsorptionModel._+_ outsideSeamModel
+          (OutsideSeamAbsorptionModel.exact-kna-ratio outsideSeamModel)
+          (OutsideSeamAbsorptionModel.absorbable-outside-budget
+            outsideSeamModel))
+        (OutsideSeamAbsorptionModel.one-quarter outsideSeamModel)
 
     absorbedOutsideVanishesWitness :
-      OutsideSeamAbsorptionModel.absorbedOutsideVanishes
-        outsideSeamModel
+      OutsideSeamAbsorptionModel.absorbable-outside-budget outsideSeamModel
+      ≡
+      OutsideSeamAbsorptionModel.0# outsideSeamModel
 
     quarterLeqUnitWitness :
-      ExactGate2ConditionalTheoremModel.quarter≤unit theoremModel
+      ExactGate2ConditionalTheoremModel._≤_ theoremModel
+        (ExactGate2ConditionalTheoremModel.one-quarter theoremModel)
+        (ExactGate2ConditionalTheoremModel.unit-threshold theoremModel)
 
     exactTransferInputBound :
       ExactGate2ConditionalTheoremModel._≤_ theoremModel
@@ -164,8 +192,8 @@ record NSTriadKNGate2ExactTrueCarrierHypotheses : Setω where
       hypothesesAreAnalyticNotYetGeneralNS ≡ true
 
     gate2ExactTransferConditionalTheoremProved : Bool
-    gate2ExactTransferConditionalTheoremProvedIsFalse :
-      gate2ExactTransferConditionalTheoremProved ≡ false
+    gate2ExactTransferConditionalTheoremProvedIsTrue :
+      gate2ExactTransferConditionalTheoremProved ≡ true
 
 open NSTriadKNGate2ExactTrueCarrierHypotheses public
 

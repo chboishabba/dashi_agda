@@ -551,35 +551,6 @@ record P33aFullUniformLinkEllipticityFromSplit : Set₁ where
       isEdgeOf e k X → m-link ≤ℝ w-weight k e
     minimumLinkEllipticity : 1ℝ ≤ℝ m-link
 
-currentP33a1SmallFieldRegularityGivesPositiveLinkWeight :
-  P33a1SmallFieldRegularityGivesPositiveLinkWeight
-currentP33a1SmallFieldRegularityGivesPositiveLinkWeight =
-  P33DiameterLaneFromAnalyticDischarge.p33a1
-    currentP33DiameterLaneFromAnalyticDischarge
-
-currentP33a2DASHINormalisationRaisesLowerBoundToOne :
-  P33a2DASHINormalisationRaisesLowerBoundToOne
-currentP33a2DASHINormalisationRaisesLowerBoundToOne =
-  P33DiameterLaneFromAnalyticDischarge.p33a2
-    currentP33DiameterLaneFromAnalyticDischarge
-
-currentP33a3UniformityAcrossScaleAndPolymer :
-  P33a3UniformityAcrossScaleAndPolymer
-currentP33a3UniformityAcrossScaleAndPolymer =
-  P33DiameterLaneFromAnalyticDischarge.p33a3
-    currentP33DiameterLaneFromAnalyticDischarge
-
-currentP33aSplitEllipticityBundle : P33aSplitEllipticityBundle
-currentP33aSplitEllipticityBundle =
-  P33DiameterLaneFromAnalyticDischarge.p33aSplit
-    currentP33DiameterLaneFromAnalyticDischarge
-
-currentP33aFullUniformLinkEllipticityFromSplit :
-  P33aFullUniformLinkEllipticityFromSplit
-currentP33aFullUniformLinkEllipticityFromSplit =
-  P33DiameterLaneFromAnalyticDischarge.p33aFull
-    currentP33DiameterLaneFromAnalyticDischarge
-
 -- ── P33a: source-side link ellipticity wrapper ──────────────────────
 --
 -- This wrapper records the imported small-field / link-ellipticity source.
@@ -605,11 +576,6 @@ record P33aUniformLinkEllipticityWrapper : Set₁ where
       isEdgeOf e k X → m-link ≤ℝ w-weight k e
     minimumLinkEllipticity : 1ℝ ≤ℝ m-link
     noClayPromotion : clayYangMillsPromoted ≡ false
-
-currentP33aUniformLinkEllipticityWrapper : P33aUniformLinkEllipticityWrapper
-currentP33aUniformLinkEllipticityWrapper =
-  P33DiameterLaneFromAnalyticDischarge.p33aWrapper
-    currentP33DiameterLaneFromAnalyticDischarge
 
 weightedDistanceDominatesDiameterSurface : ProofTargetSurface
 weightedDistanceDominatesDiameterSurface =
@@ -757,6 +723,40 @@ currentP33DiameterLaneFromAnalyticDischarge :
 currentP33DiameterLaneFromAnalyticDischarge =
   buildP33DiameterLaneFromAnalyticDischarge
     currentP33a1AnalyticDischargePackage
+
+currentP33a1SmallFieldRegularityGivesPositiveLinkWeight :
+  P33a1SmallFieldRegularityGivesPositiveLinkWeight
+currentP33a1SmallFieldRegularityGivesPositiveLinkWeight =
+  P33DiameterLaneFromAnalyticDischarge.p33a1
+    currentP33DiameterLaneFromAnalyticDischarge
+
+currentP33a2DASHINormalisationRaisesLowerBoundToOne :
+  P33a2DASHINormalisationRaisesLowerBoundToOne
+currentP33a2DASHINormalisationRaisesLowerBoundToOne =
+  P33DiameterLaneFromAnalyticDischarge.p33a2
+    currentP33DiameterLaneFromAnalyticDischarge
+
+currentP33a3UniformityAcrossScaleAndPolymer :
+  P33a3UniformityAcrossScaleAndPolymer
+currentP33a3UniformityAcrossScaleAndPolymer =
+  P33DiameterLaneFromAnalyticDischarge.p33a3
+    currentP33DiameterLaneFromAnalyticDischarge
+
+currentP33aSplitEllipticityBundle : P33aSplitEllipticityBundle
+currentP33aSplitEllipticityBundle =
+  P33DiameterLaneFromAnalyticDischarge.p33aSplit
+    currentP33DiameterLaneFromAnalyticDischarge
+
+currentP33aFullUniformLinkEllipticityFromSplit :
+  P33aFullUniformLinkEllipticityFromSplit
+currentP33aFullUniformLinkEllipticityFromSplit =
+  P33DiameterLaneFromAnalyticDischarge.p33aFull
+    currentP33DiameterLaneFromAnalyticDischarge
+
+currentP33aUniformLinkEllipticityWrapper : P33aUniformLinkEllipticityWrapper
+currentP33aUniformLinkEllipticityWrapper =
+  P33DiameterLaneFromAnalyticDischarge.p33aWrapper
+    currentP33DiameterLaneFromAnalyticDischarge
 
 currentP33bWeightedTreeDistanceDominatesOrdinaryDiameter :
   P33bWeightedTreeDistanceDominatesOrdinaryDiameter

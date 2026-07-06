@@ -2,7 +2,7 @@ module DASHI.Physics.Closure.NearExtremizerDefectEstimateBase where
 
 open import Level using (zero)
 open import DASHI.Physics.Closure.DefectBudgetBase
-  using (DefectBudget; lemma-a)
+  using (DefectBudget)
 
 ----------------------------------------------------------------------
 -- Abstract near-extremizer defect estimate model.
@@ -62,6 +62,6 @@ record NearExtremizerDefectEstimateModel : Set₁ where
         (η-cross + η-pure)
         η-defect
         split≤η-sum
-        (lemma-a defectBudget))
+        (DefectBudget.lemma-a defectBudget))
 
 open NearExtremizerDefectEstimateModel public

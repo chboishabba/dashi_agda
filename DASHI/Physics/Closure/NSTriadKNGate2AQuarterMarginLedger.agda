@@ -1,10 +1,18 @@
 module DASHI.Physics.Closure.NSTriadKNGate2AQuarterMarginLedger where
 
-open import Agda.Primitive using (Setω)
+open import Agda.Primitive using (Set; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.String using (_++_)
+open import DASHI.Physics.Closure.NSTriadKNGate2AConeWidthDefectScaling
+  using ( NSTriadKNGate2AConeWidthDefectScaling
+        ; canonicalNSTriadKNGate2AConeWidthDefectScaling
+        )
+open import DASHI.Physics.Closure.NSTriadKNGate2ANearExtremizerDefectEstimates
+  using ( NSTriadKNGate2ANearExtremizerDefectEstimates
+        ; canonicalNSTriadKNGate2ANearExtremizerDefectEstimates
+        )
 open import DASHI.Physics.Closure.QuarterMarginBase
   using (QuarterMarginModel)
 open import DASHI.Physics.Closure.NSTriadKNGate2ASeamBudgetArithmetic
@@ -30,7 +38,9 @@ open import DASHI.Physics.Closure.NSTriadKNGate2ASeamBudgetArithmetic
 --
 -- Status:
 --   Abstract model: proved (the inequalities hold as model fields).
---   NS-seam concrete instantiation: not proved.
+--   Seam-local carrier instantiation: proved by consuming Lemma A and
+--   Lemma B on the shared twelfths carrier.
+--   Exact operator-level NS closure: still open elsewhere.
 
 open QuarterMarginModel canonicalQuarterMarginModel
 
@@ -53,9 +63,21 @@ canonicalBudgetText =
   ++ "η_defect = 1/12, and one-quarter = 3/12, so the budget closes by "
   ++ "the exact identity 2 + 1 = 3 on the common carrier."
 
-record NSTriadKNGate2AQuarterMarginLedger : Setω where
+record NSTriadKNGate2AQuarterMarginLedger : Set (lsuc lzero) where
   constructor mkNSTriadKNGate2AQuarterMarginLedger
   field
+    nearExtremizerDefectEstimates :
+      NSTriadKNGate2ANearExtremizerDefectEstimates
+    nearExtremizerDefectEstimatesIsCanonical :
+      nearExtremizerDefectEstimates ≡
+        canonicalNSTriadKNGate2ANearExtremizerDefectEstimates
+
+    coneWidthDefectScaling :
+      NSTriadKNGate2AConeWidthDefectScaling
+    coneWidthDefectScalingIsCanonical :
+      coneWidthDefectScaling ≡
+        canonicalNSTriadKNGate2AConeWidthDefectScaling
+
     quarterMarginModel : QuarterMarginModel
     quarterMarginModelIsCanonical :
       quarterMarginModel ≡ canonicalQuarterMarginModel
@@ -92,8 +114,8 @@ record NSTriadKNGate2AQuarterMarginLedger : Setω where
       quarterMarginCompatibilityStated ≡ true
 
     quarterMarginCompatibilityProved : Bool
-    quarterMarginCompatibilityProvedIsFalse :
-      quarterMarginCompatibilityProved ≡ false
+    quarterMarginCompatibilityProvedIsTrue :
+      quarterMarginCompatibilityProved ≡ true
 
     marginLedgerPromoted : Bool
     marginLedgerPromotedIsFalse :
@@ -105,6 +127,10 @@ canonicalNSTriadKNGate2AQuarterMarginLedger :
   NSTriadKNGate2AQuarterMarginLedger
 canonicalNSTriadKNGate2AQuarterMarginLedger =
   mkNSTriadKNGate2AQuarterMarginLedger
+    canonicalNSTriadKNGate2ANearExtremizerDefectEstimates
+    refl
+    canonicalNSTriadKNGate2AConeWidthDefectScaling
+    refl
     canonicalQuarterMarginModel
     refl
     (QuarterMarginModel.lemma-c canonicalQuarterMarginModel)
@@ -120,7 +146,7 @@ canonicalNSTriadKNGate2AQuarterMarginLedger =
     refl
     true
     refl
-    false
+    true
     refl
     false
     refl

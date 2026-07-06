@@ -30,7 +30,7 @@ canonicalResidenceReceiptPath =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "Route audit status: the exact-script row/column theorem remains open, the q_gap(N) >= c_gap / N^2 transfer remains candidate-only, structural BKM projection smallness remains open, and the residence-time exclusion step remains open. This lane is still pre-theorem."
+  "Route audit status: the exact-script weighted Schur product theorem remains open, the q_gap(N) >= c_gap / N^2 transfer remains candidate-only, structural BKM projection smallness remains open, and the residence-time exclusion step remains open. This lane is still pre-theorem."
 
 record NSTriadKNExactOperatorRouteAuditReceipt : Setω where
   constructor mkNSTriadKNExactOperatorRouteAuditReceipt
@@ -74,6 +74,10 @@ record NSTriadKNExactOperatorRouteAuditReceipt : Setω where
     readoutText : String
     readoutTextIsCanonical :
       readoutText ≡ canonicalReadoutText
+
+    weightedSchurProductRouteStated : Bool
+    weightedSchurProductRouteStatedIsTrue :
+      weightedSchurProductRouteStated ≡ true
 
     uniformProfileIndependentBoundClosed : Bool
     uniformProfileIndependentBoundClosedIsFalse :
@@ -132,6 +136,8 @@ canonicalNSTriadKNExactOperatorRouteAuditReceipt =
     false
     refl
     canonicalReadoutText
+    refl
+    true
     refl
     false
     refl

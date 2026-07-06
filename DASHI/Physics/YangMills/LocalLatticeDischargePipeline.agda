@@ -1,9 +1,10 @@
 module DASHI.Physics.YangMills.LocalLatticeDischargePipeline where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List)
 open import Data.Nat.Base using (ℕ; _≤_)
-open import DASHI.Core.Prelude using (_×_)
+open import DASHI.Core.Prelude using (_×_; false)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _≤ℝ_; _<ℝ_; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; -ℝ_; _-ℝ_)
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
 open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
@@ -48,14 +49,21 @@ ComplexityLowerBoundByDiameterForDecayType =
 
 record LocalLatticeAnalyticDischargePackage : Set₁ where
   field
-    p06ModelLeaves : Entropy.P06ModelLeafDischargePackage
+    p06MixedReducerPayload : Entropy.BalabanP06MixedReducerPayload
     p10AnalyticLeaves : P10AnalyticLeaves
-    p33PerturbationStability : GraphCombinatorics.P33a1AnalyticDischargePackage
+    p33PerturbationStability : Anisotropic.P33a1AnalyticDischargePackage
     entropyDecayMargin : ExplicitEntropyDecayMargin
     p08p11Positivity : P08P11AbsorptionPackageType
     natPowerDecay : NatPowerDecayMonotoneType
     complexityDiameter : ComplexityLowerBoundByDiameterForDecayType
     noClayPromotion : clayYangMillsPromoted ≡ false
+
+LocalLatticeP06SourceKernel :
+  LocalLatticeAnalyticDischargePackage →
+  Entropy.P06SourceSkeletonDecompositionSemanticKernel
+LocalLatticeP06SourceKernel pkg =
+  Entropy.P06SourceSkeletonDecompositionSemanticKernelFromPayload
+    (LocalLatticeAnalyticDischargePackage.p06MixedReducerPayload pkg)
 
 LocalLatticeP06CountingWitness :
   LocalLatticeAnalyticDischargePackage →
@@ -63,11 +71,11 @@ LocalLatticeP06CountingWitness :
 LocalLatticeP06CountingWitness pkg = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "LocalLatticeDischargePipeline.LocalLatticeP06CountingWitness/BalabanPolymerDiameterEntropy.P06FromModelLeafDischargePackage"
+      "LocalLatticeDischargePipeline.LocalLatticeP06CountingWitness/LocalLatticeDischargePipeline.LocalLatticeP06SourceKernel"
   ; status = mixedReducer
   ; mixedReducerPayload =
-      Entropy.P06FromModelLeafDischargePackage
-        (LocalLatticeAnalyticDischargePackage.p06ModelLeaves pkg)
+      Entropy.P06SourceSkeletonDecompositionSemanticKernel.payload
+        (LocalLatticeP06SourceKernel pkg)
   }
 
 LocalLatticeP33DiameterLane :
@@ -85,8 +93,7 @@ LocalLatticeStepVSourceInputs pkg = record
   { p06AnimalCounting =
       LocalLatticeP06CountingWitness pkg
   ; p06MixedReducerPayload =
-      Entropy.P06FromModelLeafDischargePackage
-        (LocalLatticeAnalyticDischargePackage.p06ModelLeaves pkg)
+      LocalLatticeAnalyticDischargePackage.p06MixedReducerPayload pkg
   ; p06MixedReducerPayloadMatches = refl
   ; p10LargeFieldActivity =
       LargeField.P10CurrentCanonicalLargeFieldDecayFromOwnedKernels
@@ -102,8 +109,7 @@ LocalLatticeStepVSourceInputsMatchOwnedP06EndpointKernelPayload :
   Assembly.StepVSourceAnalyticInputs.p06MixedReducerPayload
     (LocalLatticeStepVSourceInputs pkg)
     ≡ Entropy.P06SourceSkeletonDecompositionSemanticKernel.payload
-        (Entropy.P06SourceSkeletonDecompositionSemanticKernelFromModelLeaf
-          (LocalLatticeAnalyticDischargePackage.p06ModelLeaves pkg))
+        (LocalLatticeP06SourceKernel pkg)
 LocalLatticeStepVSourceInputsMatchOwnedP06EndpointKernelPayload pkg = refl
 
 LocalLatticeStepVInternalReducers :
@@ -174,20 +180,6 @@ record StepVDownstreamInternalisationKernel : Set₁ where
     noClayPromotion :
       clayYangMillsPromoted ≡ false
 
-currentStepVDownstreamInternalisationKernel :
-  StepVDownstreamInternalisationKernel
-currentStepVDownstreamInternalisationKernel = record
-  { sourceAuthorityId = dashi-internal-proof
-  ; theoremLocator =
-      "LocalLatticeDischargePipeline.{LocalLatticeStepVSourceInputs,LocalLatticeStepVInternalReducers,LocalLatticeStepVFromAnalyticDischarge,YangMillsEndpointFromLocalLatticeAndTransferPackages}; P06 enters through the owned current P06 endpoint kernel and current P06 mixed-reducer path, P10 enters through LargeField.P10CurrentCanonicalLargeFieldDecayFromOwnedKernels, while P11 and downstream transfer/endpoint packages retain the remaining external authority boundary."
-  ; status = mixedReducer
-  ; localLatticeStepV =
-      LocalLatticeStepVFromAnalyticDischarge
-  ; yangMillsEndpoint =
-      YangMillsEndpointFromLocalLatticeAndTransferPackages
-  ; noClayPromotion = refl
-  }
-
 YangMillsEndpointFromLocalLatticeAndTransferPackages :
   LocalLatticeAnalyticDischargePackage
   → Assembly.P12P19RGTransferPackage
@@ -205,6 +197,20 @@ YangMillsEndpointFromLocalLatticeAndTransferPackages localPkg rgPkg gapPkg therm
     thermoPkg
     contPkg
     osPkg
+
+currentStepVDownstreamInternalisationKernel :
+  StepVDownstreamInternalisationKernel
+currentStepVDownstreamInternalisationKernel = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "LocalLatticeDischargePipeline.{LocalLatticeStepVSourceInputs,LocalLatticeStepVInternalReducers,LocalLatticeStepVFromAnalyticDischarge,YangMillsEndpointFromLocalLatticeAndTransferPackages}; P06 enters through the owned current P06 endpoint kernel and current P06 mixed-reducer path, P10 enters through LargeField.P10CurrentCanonicalLargeFieldDecayFromOwnedKernels, while P11 and downstream transfer/endpoint packages retain the remaining external authority boundary."
+  ; status = mixedReducer
+  ; localLatticeStepV =
+      LocalLatticeStepVFromAnalyticDischarge
+  ; yangMillsEndpoint =
+      YangMillsEndpointFromLocalLatticeAndTransferPackages
+  ; noClayPromotion = refl
+  }
 
 localLatticeNoClayPromotion :
   LocalLatticeAnalyticDischargePackage

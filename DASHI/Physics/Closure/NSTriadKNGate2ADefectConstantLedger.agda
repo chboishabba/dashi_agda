@@ -1,12 +1,12 @@
 module DASHI.Physics.Closure.NSTriadKNGate2ADefectConstantLedger where
 
-open import Agda.Primitive using (Setω; Set)
+open import Agda.Primitive using (Set; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.String using (_++_)
 open import DASHI.Physics.Closure.DefectBudgetBase
-  using (DefectBudget; lemma-a)
+  using (DefectBudget)
 open import DASHI.Physics.Closure.NSTriadKNGate2ASeamBudgetArithmetic
   using (canonicalGate2ADefectBudget)
 
@@ -51,14 +51,19 @@ canonicalScopeText =
   "Inequality holds pointwise for x ∈ 𝒮_N(ε).  The sup over the cone "
   ++ "preserves the additive bound."
 
-record NSTriadKNGate2ADefectConstantLedger : Setω where
+record NSTriadKNGate2ADefectConstantLedger : Set (lsuc lzero) where
   constructor mkNSTriadKNGate2ADefectConstantLedger
   field
     defectBudget : DefectBudget
     defectBudgetIsCanonical :
       defectBudget ≡ canonicalGate2ADefectBudget
 
-    lemmaAProof : lemma-a defectBudget
+    lemmaAProof :
+      DefectBudget._≤_ defectBudget
+        (DefectBudget._+_ defectBudget
+          (DefectBudget.η-cross defectBudget)
+          (DefectBudget.η-pure defectBudget))
+        (DefectBudget.η-defect defectBudget)
 
     ledgerText : String
     ledgerTextIsCanonical :
@@ -102,7 +107,7 @@ canonicalNSTriadKNGate2ADefectConstantLedger =
   mkNSTriadKNGate2ADefectConstantLedger
     canonicalGate2ADefectBudget
     refl
-    (lemma-a canonicalGate2ADefectBudget)
+    (DefectBudget.lemma-a canonicalGate2ADefectBudget)
     canonicalLedgerText
     refl
     canonicalLedgerTargetText
@@ -119,4 +124,5 @@ canonicalNSTriadKNGate2ADefectConstantLedger =
 ledgerKeepsPromotionFalse :
   (r : NSTriadKNGate2ADefectConstantLedger) →
   NSTriadKNGate2ADefectConstantLedger.ledgerPromoted r ≡ false
-ledgerKeepsPromotionFalse _ = refl
+ledgerKeepsPromotionFalse r =
+  NSTriadKNGate2ADefectConstantLedger.ledgerPromotedIsFalse r

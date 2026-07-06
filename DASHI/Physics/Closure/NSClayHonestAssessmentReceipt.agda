@@ -3,78 +3,103 @@ module DASHI.Physics.Closure.NSClayHonestAssessmentReceipt where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (List; _∷_; [])
 
+import DASHI.Physics.Closure.NSTriadKNGate1SignedDominationReceipt as Gate1
+import DASHI.Physics.Closure.NSTriadKNGate2SeamToLeakageTransferReceipt as Gate2
+import DASHI.Physics.Closure.NSTriadKNExactOperatorFrontierReceipt as Frontier
+import DASHI.Physics.Closure.NSThetaTailToBKMBridgeReceipt as BKM
+import DASHI.Physics.Closure.NSCarrierToAllDataReceipt as AllData
+import DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt as Gateway
+
 ------------------------------------------------------------------------
--- Honest assessment of the conditional Navier-Stokes Clay chain.
+-- Honest assessment of the current Navier-Stokes route to Clay posture.
 --
--- The first four carrier steps are recorded as inhabited by the current
--- tranche state.  Density is closed only conditionally on transporting a
--- uniform large-data contraction estimate through the approximation family.
--- The effective remaining gap is therefore the large-data contraction in
--- H^{11/8}; without it the all-smooth-data Clay promotion remains false.
+-- Gate 1 and the exact Gate 2 transfer are now closed.  The route is still
+-- blocked by four mathematical stages before any submission or external Clay
+-- authority layer matters:
+--
+--   1. exact-operator frontier to BKM residence bridge
+--   2. continuum BKM / global-regularity passage
+--   3. carrier-to-all-data bridge
+--   4. full Clay gateway theorem
+--
+-- This receipt keeps that assessment explicit and fail-closed.  No theorem,
+-- full-NS, or Clay promotion is made here.
 
-data NSClayConditionalStep : Set where
-  step1AdjacentOnlyProjection :
-    NSClayConditionalStep
+data NSClayRouteStep : Set where
+  step1Gate1UniformSeamTheorem :
+    NSClayRouteStep
 
-  step2FlowPreservationSummability :
-    NSClayConditionalStep
+  step2Gate2ExactOperatorTransfer :
+    NSClayRouteStep
 
-  step3SubcriticalDissipationDominance :
-    NSClayConditionalStep
+  step3ExactOperatorFrontierToBKMResidenceBridge :
+    NSClayRouteStep
 
-  step4CarrierStructuredRegularity :
-    NSClayConditionalStep
+  step4ContinuumBKMPassage :
+    NSClayRouteStep
 
-  step5LargeDataContractionH11Over8 :
-    NSClayConditionalStep
+  step5CarrierToAllDataBridge :
+    NSClayRouteStep
 
-  step6AllSmoothDataClayExtension :
-    NSClayConditionalStep
+  step6FullClayGatewayTheorem :
+    NSClayRouteStep
 
-canonicalNSClayConditionalChain :
-  List NSClayConditionalStep
-canonicalNSClayConditionalChain =
-  step1AdjacentOnlyProjection
-  ∷ step2FlowPreservationSummability
-  ∷ step3SubcriticalDissipationDominance
-  ∷ step4CarrierStructuredRegularity
-  ∷ step5LargeDataContractionH11Over8
-  ∷ step6AllSmoothDataClayExtension
+canonicalNSClayRoute :
+  List NSClayRouteStep
+canonicalNSClayRoute =
+  step1Gate1UniformSeamTheorem
+  ∷ step2Gate2ExactOperatorTransfer
+  ∷ step3ExactOperatorFrontierToBKMResidenceBridge
+  ∷ step4ContinuumBKMPassage
+  ∷ step5CarrierToAllDataBridge
+  ∷ step6FullClayGatewayTheorem
   ∷ []
 
-canonicalNSClayInhabitedSteps :
-  List NSClayConditionalStep
-canonicalNSClayInhabitedSteps =
-  step1AdjacentOnlyProjection
-  ∷ step2FlowPreservationSummability
-  ∷ step3SubcriticalDissipationDominance
-  ∷ step4CarrierStructuredRegularity
+canonicalNSClayClosedSteps :
+  List NSClayRouteStep
+canonicalNSClayClosedSteps =
+  step1Gate1UniformSeamTheorem
+  ∷ step2Gate2ExactOperatorTransfer
   ∷ []
 
-canonicalNSClayMissingSteps :
-  List NSClayConditionalStep
-canonicalNSClayMissingSteps =
-  step5LargeDataContractionH11Over8
-  ∷ step6AllSmoothDataClayExtension
+canonicalNSClayOpenSteps :
+  List NSClayRouteStep
+canonicalNSClayOpenSteps =
+  step3ExactOperatorFrontierToBKMResidenceBridge
+  ∷ step4ContinuumBKMPassage
+  ∷ step5CarrierToAllDataBridge
+  ∷ step6FullClayGatewayTheorem
   ∷ []
 
 data NSClayEffectiveGap : Set where
-  largeDataContractionInH11Over8 :
+  exactOperatorFrontierGap :
+    NSClayEffectiveGap
+
+  continuumBKMPassageGap :
+    NSClayEffectiveGap
+
+  carrierToAllDataGap :
+    NSClayEffectiveGap
+
+  fullClayGatewayGap :
     NSClayEffectiveGap
 
 canonicalNSClayEffectiveGaps :
   List NSClayEffectiveGap
 canonicalNSClayEffectiveGaps =
-  largeDataContractionInH11Over8
+  exactOperatorFrontierGap
+  ∷ continuumBKMPassageGap
+  ∷ carrierToAllDataGap
+  ∷ fullClayGatewayGap
   ∷ []
 
 data NSClayHonestAssessmentStatus : Set where
-  fourStepsInhabitedTwoMissingOneEffectiveGap :
+  twoStagesClosedFourStagesOpen :
     NSClayHonestAssessmentStatus
 
 data NSClayHonestAssessmentPromotion : Set where
@@ -86,132 +111,105 @@ nsClayHonestAssessmentPromotionImpossibleHere ()
 
 nsClayHonestAssessmentStatement : String
 nsClayHonestAssessmentStatement =
-  "Conditional NS Clay chain: steps 1-4 are inhabited; steps 5-6 are missing.  Density extension is conditional on a large-data contraction estimate.  Effectively one gap remains: large-data contraction in H^{11/8}.  No Clay Navier-Stokes promotion is made."
+  "Current NS Clay posture: Gate 1 and exact Gate 2 are closed, but four mathematical stages remain open: the exact-operator frontier, the continuum BKM/global-regularity passage, the carrier-to-all-data bridge, and the full Clay gateway theorem. No Clay Navier-Stokes promotion is made."
 
 record NSClayHonestAssessmentReceipt : Setω where
   field
+    gate1Receipt :
+      Gate1.NSTriadKNGate1SignedDominationReceipt
+
+    gate1Closed :
+      Gate1.gate1ConditionalTheoremProved gate1Receipt ≡ true
+
+    gate2Receipt :
+      Gate2.NSTriadKNGate2SeamToLeakageTransferReceipt
+
+    gate2Closed :
+      Gate2.gate2ExactTransferConditionalTheoremProved gate2Receipt ≡ true
+
+    frontierReceipt :
+      Frontier.NSTriadKNExactOperatorFrontierReceipt
+
+    exactOperatorFrontierStillOpen :
+      Frontier.bkmResidenceBridgeClosed frontierReceipt ≡ false
+
+    thetaTailToBKMReceipt :
+      BKM.NSThetaTailToBKMBridgeReceipt zero
+
+    continuumBKMPassageStillOpen :
+      BKM.bkmCriterionDischarged thetaTailToBKMReceipt ≡ false
+
+    allDataReceipt :
+      AllData.NSCarrierToAllDataReceipt
+
+    carrierToAllDataStillOpen :
+      AllData.clayNavierStokesPromoted allDataReceipt ≡ false
+
+    gatewayReceipt :
+      Gateway.NSFullClayGatewayTheoremBoundaryReceipt
+
+    fullClayGatewayStillOpen :
+      Gateway.fullClayNSPromoted ≡ false
+
     status :
       NSClayHonestAssessmentStatus
 
-    conditionalChain :
-      List NSClayConditionalStep
+    statusIsCanonical :
+      status ≡ twoStagesClosedFourStagesOpen
 
-    conditionalChainIsCanonical :
-      conditionalChain ≡ canonicalNSClayConditionalChain
+    route :
+      List NSClayRouteStep
 
-    inhabitedSteps :
-      List NSClayConditionalStep
+    routeIsCanonical :
+      route ≡ canonicalNSClayRoute
 
-    inhabitedStepsAreCanonical :
-      inhabitedSteps ≡ canonicalNSClayInhabitedSteps
+    closedSteps :
+      List NSClayRouteStep
 
-    missingSteps :
-      List NSClayConditionalStep
+    closedStepsAreCanonical :
+      closedSteps ≡ canonicalNSClayClosedSteps
 
-    missingStepsAreCanonical :
-      missingSteps ≡ canonicalNSClayMissingSteps
+    openSteps :
+      List NSClayRouteStep
 
-    step1Inhabited :
+    openStepsAreCanonical :
+      openSteps ≡ canonicalNSClayOpenSteps
+
+    gate1StageClosed :
       Bool
 
-    step1InhabitedIsTrue :
-      step1Inhabited ≡ true
+    gate1StageClosedIsTrue :
+      gate1StageClosed ≡ true
 
-    step1AdjacentOnlyProjectionRecorded :
+    gate2StageClosed :
       Bool
 
-    step1AdjacentOnlyProjectionRecordedIsTrue :
-      step1AdjacentOnlyProjectionRecorded ≡ true
+    gate2StageClosedIsTrue :
+      gate2StageClosed ≡ true
 
-    step2Inhabited :
+    exactOperatorFrontierClosed :
       Bool
 
-    step2InhabitedIsTrue :
-      step2Inhabited ≡ true
+    exactOperatorFrontierClosedIsFalse :
+      exactOperatorFrontierClosed ≡ false
 
-    step2FlowPreservationSummabilityRecorded :
+    continuumBKMPassageClosed :
       Bool
 
-    step2FlowPreservationSummabilityRecordedIsTrue :
-      step2FlowPreservationSummabilityRecorded ≡ true
+    continuumBKMPassageClosedIsFalse :
+      continuumBKMPassageClosed ≡ false
 
-    step3Inhabited :
+    carrierToAllDataBridgeClosed :
       Bool
 
-    step3InhabitedIsTrue :
-      step3Inhabited ≡ true
+    carrierToAllDataBridgeClosedIsFalse :
+      carrierToAllDataBridgeClosed ≡ false
 
-    step3DissipationDominanceAtH11Over8Recorded :
+    fullClayGatewayTheoremClosed :
       Bool
 
-    step3DissipationDominanceAtH11Over8RecordedIsTrue :
-      step3DissipationDominanceAtH11Over8Recorded ≡ true
-
-    step4Inhabited :
-      Bool
-
-    step4InhabitedIsTrue :
-      step4Inhabited ≡ true
-
-    step4UniformGronwallBoundRecorded :
-      Bool
-
-    step4UniformGronwallBoundRecordedIsTrue :
-      step4UniformGronwallBoundRecorded ≡ true
-
-    densityApproximationRecorded :
-      Bool
-
-    densityApproximationRecordedIsTrue :
-      densityApproximationRecorded ≡ true
-
-    step5LargeDataContractionH11Over8Constructed :
-      Bool
-
-    step5LargeDataContractionH11Over8ConstructedIsFalse :
-      step5LargeDataContractionH11Over8Constructed ≡ false
-
-    step5Missing :
-      Bool
-
-    step5MissingIsTrue :
-      step5Missing ≡ true
-
-    step6AllSmoothDataClayExtensionConstructed :
-      Bool
-
-    step6AllSmoothDataClayExtensionConstructedIsFalse :
-      step6AllSmoothDataClayExtensionConstructed ≡ false
-
-    step6Missing :
-      Bool
-
-    step6MissingIsTrue :
-      step6Missing ≡ true
-
-    h11Over8Numerator :
-      Nat
-
-    h11Over8NumeratorIs11 :
-      h11Over8Numerator ≡ 11
-
-    h11Over8Denominator :
-      Nat
-
-    h11Over8DenominatorIs8 :
-      h11Over8Denominator ≡ 8
-
-    densityExtensionConditionalOnContraction :
-      Bool
-
-    densityExtensionConditionalOnContractionIsTrue :
-      densityExtensionConditionalOnContraction ≡ true
-
-    densityExtensionUnconditional :
-      Bool
-
-    densityExtensionUnconditionalIsFalse :
-      densityExtensionUnconditional ≡ false
+    fullClayGatewayTheoremClosedIsFalse :
+      fullClayGatewayTheoremClosed ≡ false
 
     effectiveGaps :
       List NSClayEffectiveGap
@@ -219,17 +217,17 @@ record NSClayHonestAssessmentReceipt : Setω where
     effectiveGapsAreCanonical :
       effectiveGaps ≡ canonicalNSClayEffectiveGaps
 
-    effectivelyOneGap :
+    fourEffectiveGapsRemain :
       Bool
 
-    effectivelyOneGapIsTrue :
-      effectivelyOneGap ≡ true
+    fourEffectiveGapsRemainIsTrue :
+      fourEffectiveGapsRemain ≡ true
 
-    onlyEffectiveGapIsLargeDataContractionH11Over8 :
+    oneGapOnlyClaimed :
       Bool
 
-    onlyEffectiveGapIsLargeDataContractionH11Over8IsTrue :
-      onlyEffectiveGapIsLargeDataContractionH11Over8 ≡ true
+    oneGapOnlyClaimedIsFalse :
+      oneGapOnlyClaimed ≡ false
 
     globalSmoothRegularityPromoted :
       Bool
@@ -270,99 +268,81 @@ canonicalNSClayHonestAssessmentReceipt :
   NSClayHonestAssessmentReceipt
 canonicalNSClayHonestAssessmentReceipt =
   record
-    { status =
-        fourStepsInhabitedTwoMissingOneEffectiveGap
-    ; conditionalChain =
-        canonicalNSClayConditionalChain
-    ; conditionalChainIsCanonical =
+    { gate1Receipt =
+        Gate1.canonicalNSTriadKNGate1SignedDominationReceipt
+    ; gate1Closed =
         refl
-    ; inhabitedSteps =
-        canonicalNSClayInhabitedSteps
-    ; inhabitedStepsAreCanonical =
+    ; gate2Receipt =
+        Gate2.canonicalNSTriadKNGate2SeamToLeakageTransferReceipt
+    ; gate2Closed =
         refl
-    ; missingSteps =
-        canonicalNSClayMissingSteps
-    ; missingStepsAreCanonical =
+    ; frontierReceipt =
+        Frontier.canonicalNSTriadKNExactOperatorFrontierReceipt
+    ; exactOperatorFrontierStillOpen =
         refl
-    ; step1Inhabited =
+    ; thetaTailToBKMReceipt =
+        BKM.canonicalNSThetaTailToBKMBridgeReceipt
+    ; continuumBKMPassageStillOpen =
+        refl
+    ; allDataReceipt =
+        AllData.canonicalNSCarrierToAllDataReceipt
+    ; carrierToAllDataStillOpen =
+        refl
+    ; gatewayReceipt =
+        Gateway.canonicalNSFullClayGatewayTheoremBoundaryReceipt
+    ; fullClayGatewayStillOpen =
+        refl
+    ; status =
+        twoStagesClosedFourStagesOpen
+    ; statusIsCanonical =
+        refl
+    ; route =
+        canonicalNSClayRoute
+    ; routeIsCanonical =
+        refl
+    ; closedSteps =
+        canonicalNSClayClosedSteps
+    ; closedStepsAreCanonical =
+        refl
+    ; openSteps =
+        canonicalNSClayOpenSteps
+    ; openStepsAreCanonical =
+        refl
+    ; gate1StageClosed =
         true
-    ; step1InhabitedIsTrue =
+    ; gate1StageClosedIsTrue =
         refl
-    ; step1AdjacentOnlyProjectionRecorded =
+    ; gate2StageClosed =
         true
-    ; step1AdjacentOnlyProjectionRecordedIsTrue =
+    ; gate2StageClosedIsTrue =
         refl
-    ; step2Inhabited =
-        true
-    ; step2InhabitedIsTrue =
-        refl
-    ; step2FlowPreservationSummabilityRecorded =
-        true
-    ; step2FlowPreservationSummabilityRecordedIsTrue =
-        refl
-    ; step3Inhabited =
-        true
-    ; step3InhabitedIsTrue =
-        refl
-    ; step3DissipationDominanceAtH11Over8Recorded =
-        true
-    ; step3DissipationDominanceAtH11Over8RecordedIsTrue =
-        refl
-    ; step4Inhabited =
-        true
-    ; step4InhabitedIsTrue =
-        refl
-    ; step4UniformGronwallBoundRecorded =
-        true
-    ; step4UniformGronwallBoundRecordedIsTrue =
-        refl
-    ; densityApproximationRecorded =
-        true
-    ; densityApproximationRecordedIsTrue =
-        refl
-    ; step5LargeDataContractionH11Over8Constructed =
+    ; exactOperatorFrontierClosed =
         false
-    ; step5LargeDataContractionH11Over8ConstructedIsFalse =
+    ; exactOperatorFrontierClosedIsFalse =
         refl
-    ; step5Missing =
-        true
-    ; step5MissingIsTrue =
-        refl
-    ; step6AllSmoothDataClayExtensionConstructed =
+    ; continuumBKMPassageClosed =
         false
-    ; step6AllSmoothDataClayExtensionConstructedIsFalse =
+    ; continuumBKMPassageClosedIsFalse =
         refl
-    ; step6Missing =
-        true
-    ; step6MissingIsTrue =
-        refl
-    ; h11Over8Numerator =
-        11
-    ; h11Over8NumeratorIs11 =
-        refl
-    ; h11Over8Denominator =
-        8
-    ; h11Over8DenominatorIs8 =
-        refl
-    ; densityExtensionConditionalOnContraction =
-        true
-    ; densityExtensionConditionalOnContractionIsTrue =
-        refl
-    ; densityExtensionUnconditional =
+    ; carrierToAllDataBridgeClosed =
         false
-    ; densityExtensionUnconditionalIsFalse =
+    ; carrierToAllDataBridgeClosedIsFalse =
+        refl
+    ; fullClayGatewayTheoremClosed =
+        false
+    ; fullClayGatewayTheoremClosedIsFalse =
         refl
     ; effectiveGaps =
         canonicalNSClayEffectiveGaps
     ; effectiveGapsAreCanonical =
         refl
-    ; effectivelyOneGap =
+    ; fourEffectiveGapsRemain =
         true
-    ; effectivelyOneGapIsTrue =
+    ; fourEffectiveGapsRemainIsTrue =
         refl
-    ; onlyEffectiveGapIsLargeDataContractionH11Over8 =
-        true
-    ; onlyEffectiveGapIsLargeDataContractionH11Over8IsTrue =
+    ; oneGapOnlyClaimed =
+        false
+    ; oneGapOnlyClaimedIsFalse =
         refl
     ; globalSmoothRegularityPromoted =
         false
@@ -385,46 +365,42 @@ canonicalNSClayHonestAssessmentReceipt =
     ; promotionFlagsAreEmpty =
         refl
     ; receiptBoundary =
-        "Step 1 adjacent-only projection is inhabited"
-        ∷ "Step 2 flow-preservation summability is inhabited"
-        ∷ "Step 3 subcritical dissipation dominance is inhabited"
-        ∷ "Step 4 carrier-structured regularity is inhabited"
-        ∷ "Step 5 large-data contraction in H^{11/8} is missing"
-        ∷ "Step 6 all-smooth-data Clay extension is missing"
-        ∷ "Density extension is conditional on the contraction estimate"
-        ∷ "Effectively one gap remains: large-data contraction in H^{11/8}"
+        "Gate 1 uniform seam theorem is closed"
+        ∷ "Exact Gate 2 transfer on the true leakage operator is closed"
+        ∷ "Exact-operator frontier to BKM residence bridge remains open"
+        ∷ "Continuum BKM / global-regularity passage remains open"
+        ∷ "Carrier-to-all-data bridge remains open"
+        ∷ "Full Clay gateway theorem remains open"
         ∷ "No global regularity, Clay Navier-Stokes, or terminal Clay promotion is made"
         ∷ []
     }
 
-nsClayHonestSteps1To4Inhabited :
-  inhabitedSteps canonicalNSClayHonestAssessmentReceipt
+nsClayHonestClosedStagesAreGate1AndGate2 :
+  closedSteps canonicalNSClayHonestAssessmentReceipt
   ≡
-  canonicalNSClayInhabitedSteps
-nsClayHonestSteps1To4Inhabited =
+  canonicalNSClayClosedSteps
+nsClayHonestClosedStagesAreGate1AndGate2 =
   refl
 
-nsClayHonestSteps5To6Missing :
-  missingSteps canonicalNSClayHonestAssessmentReceipt
+nsClayHonestOpenStagesAreFrontierThroughGateway :
+  openSteps canonicalNSClayHonestAssessmentReceipt
   ≡
-  canonicalNSClayMissingSteps
-nsClayHonestSteps5To6Missing =
+  canonicalNSClayOpenSteps
+nsClayHonestOpenStagesAreFrontierThroughGateway =
   refl
 
-nsClayHonestDensityConditional :
-  densityExtensionConditionalOnContraction
-    canonicalNSClayHonestAssessmentReceipt
+nsClayHonestFourEffectiveGapsRemain :
+  fourEffectiveGapsRemain canonicalNSClayHonestAssessmentReceipt
   ≡
   true
-nsClayHonestDensityConditional =
+nsClayHonestFourEffectiveGapsRemain =
   refl
 
-nsClayHonestOnlyGapLargeDataContractionH11Over8 :
-  onlyEffectiveGapIsLargeDataContractionH11Over8
-    canonicalNSClayHonestAssessmentReceipt
+nsClayHonestDoesNotClaimSingleGap :
+  oneGapOnlyClaimed canonicalNSClayHonestAssessmentReceipt
   ≡
-  true
-nsClayHonestOnlyGapLargeDataContractionH11Over8 =
+  false
+nsClayHonestDoesNotClaimSingleGap =
   refl
 
 nsClayHonestNoClayPromotion :

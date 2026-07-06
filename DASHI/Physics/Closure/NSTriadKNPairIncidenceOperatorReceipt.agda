@@ -5,6 +5,11 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+import DASHI.Physics.Closure.NSTriadKNPairIncidenceKernelFormulaReceipt as KernelFormula
+import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecompositionReceipt as ProfileDecomposition
+import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileBounds as ProfileBounds
+import DASHI.Physics.Closure.NSTriadKNForcedTailWeightedProductBoundReceipt as ForcedTail
+
 ------------------------------------------------------------------------
 -- Fail-closed receipt for the exact scripted pair-incidence operator.
 --
@@ -46,11 +51,15 @@ canonicalOperatorFormula =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "Live-object status: exact scripted pair-incidence operator only. The sampled Schur witness matches this exact scripted object on the recorded N=6,8,10,12 rows, while the reconciliation verdict remains different_object against the bare shell-geometry proxy. The uniform theorem target ||L_FT,script^N||_op <= C / N remains open, and theorem/full-NS/BKM/Clay promotion remain false."
+  "Live-object status: exact scripted pair-incidence operator only. The sampled Schur witness matches this exact scripted object on the recorded N=6,8,10,12 rows, while the reconciliation verdict remains different_object against the bare shell-geometry proxy. The repeated-pair kernel formula is fixed, the structural four-profile decomposition is closed, and forced-tail, adversarial, and transition are now closed locally. The remaining live theorem route is residual, then the full cross-profile Schur matrix R_N^p(w_N) * C_N^q(w_N) <= C_{p,q} / N^2, then the global weighted Schur product bound R_N(w_N) * C_N(w_N) <= C^2 / N^2 implying ||L_FT,script^N||_op <= C / N. The downstream q_gap step additionally requires a residue-scale compatibility theorem; it does not follow from C / N alone. Weighted Schur, operator, q_gap, residue-scale, theorem/full-NS/BKM, and Clay promotion remain open."
 
 canonicalTheoremTarget : String
 canonicalTheoremTarget =
   "||L_FT,script^N||_op <= C / N"
+
+canonicalWeightedSchurTarget : String
+canonicalWeightedSchurTarget =
+  "choose positive weights w_N so that R_N(w_N) * C_N(w_N) <= C^2 / N^2, hence ||L_FT,script^N||_op <= C / N"
 
 record NSTriadKNPairIncidenceOperatorReceipt : Setω where
   constructor mkNSTriadKNPairIncidenceOperatorReceipt
@@ -70,6 +79,32 @@ record NSTriadKNPairIncidenceOperatorReceipt : Setω where
     artifactMarkdown : String
     artifactMarkdownIsCanonical :
       artifactMarkdown ≡ canonicalArtifactMarkdown
+
+    kernelFormulaReceiptName : String
+    kernelFormulaReceiptNameIsCanonical :
+      kernelFormulaReceiptName ≡ "NSTriadKNPairIncidenceKernelFormulaReceipt"
+
+    kernelFormulaReadoutText : String
+    kernelFormulaReadoutTextIsCanonical :
+      kernelFormulaReadoutText ≡ KernelFormula.canonicalReadoutText
+
+    profileDecompositionReceiptName : String
+    profileDecompositionReceiptNameIsCanonical :
+      profileDecompositionReceiptName ≡
+        "NSTriadKNPairIncidenceProfileDecompositionReceipt"
+
+    profileDecompositionReadoutText : String
+    profileDecompositionReadoutTextIsCanonical :
+      profileDecompositionReadoutText ≡
+        ProfileDecomposition.canonicalReadoutText
+
+    profileBoundsReadoutText : String
+    profileBoundsReadoutTextIsCanonical :
+      profileBoundsReadoutText ≡ ProfileBounds.canonicalReadoutText
+
+    forcedTailWitnessReadoutText : String
+    forcedTailWitnessReadoutTextIsCanonical :
+      forcedTailWitnessReadoutText ≡ ForcedTail.canonicalReadoutText
 
     reconciliationArtifactJSON : String
     reconciliationArtifactJSONIsCanonical :
@@ -98,6 +133,38 @@ record NSTriadKNPairIncidenceOperatorReceipt : Setω where
     theoremTarget : String
     theoremTargetIsCanonical :
       theoremTarget ≡ canonicalTheoremTarget
+
+    weightedSchurTarget : String
+    weightedSchurTargetIsCanonical :
+      weightedSchurTarget ≡ canonicalWeightedSchurTarget
+
+    weightedSchurProductRouteStated : Bool
+    weightedSchurProductRouteStatedIsTrue :
+      weightedSchurProductRouteStated ≡ true
+
+    pairIncidenceKernelFormulaDerived : Bool
+    pairIncidenceKernelFormulaDerivedIsTrue :
+      pairIncidenceKernelFormulaDerived ≡ true
+
+    profileDecompositionSurfaceImplemented : Bool
+    profileDecompositionSurfaceImplementedIsTrue :
+      profileDecompositionSurfaceImplemented ≡ true
+
+    profileBoundsSurfaceImplemented : Bool
+    profileBoundsSurfaceImplementedIsTrue :
+      profileBoundsSurfaceImplemented ≡ true
+
+    sampledForcedTailWitnessInstalled : Bool
+    sampledForcedTailWitnessInstalledIsTrue :
+      sampledForcedTailWitnessInstalled ≡ true
+
+    forcedTailAsymmetryCompatibleObserved : Bool
+    forcedTailAsymmetryCompatibleObservedIsTrue :
+      forcedTailAsymmetryCompatibleObserved ≡ true
+
+    adversarialAsymmetryCompatibleObserved : Bool
+    adversarialAsymmetryCompatibleObservedIsTrue :
+      adversarialAsymmetryCompatibleObserved ≡ true
 
     sampledSchurWitnessMatchesObject : Bool
     sampledSchurWitnessMatchesObjectIsTrue :
@@ -149,6 +216,18 @@ canonicalNSTriadKNPairIncidenceOperatorReceipt =
     refl
     canonicalArtifactMarkdown
     refl
+    "NSTriadKNPairIncidenceKernelFormulaReceipt"
+    refl
+    KernelFormula.canonicalReadoutText
+    refl
+    "NSTriadKNPairIncidenceProfileDecompositionReceipt"
+    refl
+    ProfileDecomposition.canonicalReadoutText
+    refl
+    ProfileBounds.canonicalReadoutText
+    refl
+    ForcedTail.canonicalReadoutText
+    refl
     canonicalReconciliationArtifactJSON
     refl
     canonicalSampledSchurArtifactJSON
@@ -162,6 +241,22 @@ canonicalNSTriadKNPairIncidenceOperatorReceipt =
     canonicalReadoutText
     refl
     canonicalTheoremTarget
+    refl
+    canonicalWeightedSchurTarget
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
     refl
     true
     refl

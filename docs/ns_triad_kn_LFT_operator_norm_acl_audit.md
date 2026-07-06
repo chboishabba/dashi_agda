@@ -42,7 +42,10 @@ Audit checklist:
 
 4. Schur-test route
 
-   - Identify summable row/column bounds for `L_FT^+`.
+   - Identify a profile-uniform weighted Schur test for `L_FT^+`.
+   - The target is not separate `1/N` decay of both unweighted row and column
+     suprema. The target is a weighted product bound
+     `R_N(w) * C_N(w) <= C^2 / N^2`.
    - Check whether a standard Schur test is enough, or whether a Hilbert–
      Schmidt bound is the only honest route.
    - Record the exact Schur-test kernel-sum bound as a fail-closed socket in
@@ -103,8 +106,8 @@ Addendum, fork resolution:
 
 Open gaps that remain after the audit:
 
-- the direct positive-sector row/column bound, since both the direct ACL kernel
-  match and the signed rescue failed;
+- the direct positive-sector weighted Schur product theorem, since both the
+  direct ACL kernel match and the signed rescue failed;
 - the uniform/profile-independent operator-norm lifting step;
 - the residue-to-gap normalization step;
 - the profile-scope question.

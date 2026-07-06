@@ -38,7 +38,13 @@ Live route:
 
 Next gate:
 
-- Prove profile-independent row and column bounds for the positive-sector block,
-  with target scale
-  `sup_p sum_k |L_FT^+(k,p)| + sup_k sum_p |L_FT^+(k,p)| <= C * N^(-1/2)` at the
-  counting layer, yielding `|L_FT^+|_op <= C / N` after Schur.
+- Prove a profile-uniform weighted Schur product bound for the positive-sector
+  block:
+  `R_N(w) * C_N(w) <= C^2 / N^2`, where
+  `R_N(w) = sup_i w_i^(-1) sum_j |L_FT^+(i,j)| w_j` and
+  `C_N(w) = sup_j w_j^(-1) sum_i |L_FT^+(i,j)| w_i`.
+- Then conclude `|L_FT^+|_op <= C / N` by weighted Schur.
+- The sampled asymmetry is compatible with this target:
+  forced-tail has `row ~ N^0`, `column ~ N^-2`, while adversarial geometry has
+  `row ~ N^-2`, `column ~ N^-1`; the live theorem is the Schur product bound,
+  not separate `1/N` decay on both sides.

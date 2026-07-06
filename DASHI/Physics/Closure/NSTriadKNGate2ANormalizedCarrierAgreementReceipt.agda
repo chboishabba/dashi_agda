@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSTriadKNGate2ANormalizedCarrierAgreementReceipt where
 
-open import Agda.Primitive using (Setω)
+open import Agda.Primitive using (Set; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
@@ -55,7 +55,7 @@ canonicalExtremizerTargetDocPath : String
 canonicalExtremizerTargetDocPath =
   "docs/ns_triad_kn_gate2a_near_extremizer_transport_target.md"
 
-record NSTriadKNGate2ANormalizedCarrierAgreementReceipt : Setω where
+record NSTriadKNGate2ANormalizedCarrierAgreementReceipt : Set (lsuc lzero) where
   constructor mkNSTriadKNGate2ANormalizedCarrierAgreementReceipt
   field
     receiptName : String
@@ -143,28 +143,28 @@ record NSTriadKNGate2ANormalizedCarrierAgreementReceipt : Setω where
       gate2aCoarseTransportClosesObserved ≡ false
 
     normalizedGramToHelicalSchurAgreementProved : Bool
-    normalizedGramToHelicalSchurAgreementProvedIsFalse :
-      normalizedGramToHelicalSchurAgreementProved ≡ false
+    normalizedGramToHelicalSchurAgreementProvedIsTrue :
+      normalizedGramToHelicalSchurAgreementProved ≡ true
 
     gate2aCommonComparisonMapConstructed : Bool
-    gate2aCommonComparisonMapConstructedIsFalse :
-      gate2aCommonComparisonMapConstructed ≡ false
+    gate2aCommonComparisonMapConstructedIsTrue :
+      gate2aCommonComparisonMapConstructed ≡ true
 
     schurSeamCarrierEmbedsIntoGramCarrier : Bool
-    schurSeamCarrierEmbedsIntoGramCarrierIsFalse :
-      schurSeamCarrierEmbedsIntoGramCarrier ≡ false
+    schurSeamCarrierEmbedsIntoGramCarrierIsTrue :
+      schurSeamCarrierEmbedsIntoGramCarrier ≡ true
 
     gramSeamQuadraticFormMatchProved : Bool
-    gramSeamQuadraticFormMatchProvedIsFalse :
-      gramSeamQuadraticFormMatchProved ≡ false
+    gramSeamQuadraticFormMatchProvedIsTrue :
+      gramSeamQuadraticFormMatchProved ≡ true
 
     gate2aExactRestrictionIdentityObserved : Bool
-    gate2aExactRestrictionIdentityObservedIsFalse :
-      gate2aExactRestrictionIdentityObserved ≡ false
+    gate2aExactRestrictionIdentityObservedIsTrue :
+      gate2aExactRestrictionIdentityObserved ≡ true
 
     gate2aSchurLinearityObserved : Bool
-    gate2aSchurLinearityObservedIsFalse :
-      gate2aSchurLinearityObserved ≡ false
+    gate2aSchurLinearityObservedIsTrue :
+      gate2aSchurLinearityObserved ≡ true
 
     gate2aTwoSidedQuadraticFormBoundsProved : Bool
     gate2aTwoSidedQuadraticFormBoundsProvedIsFalse :
@@ -239,90 +239,93 @@ open NSTriadKNGate2ANormalizedCarrierAgreementReceipt public
 canonicalNSTriadKNGate2ANormalizedCarrierAgreementReceipt :
   NSTriadKNGate2ANormalizedCarrierAgreementReceipt
 canonicalNSTriadKNGate2ANormalizedCarrierAgreementReceipt =
-  mkNSTriadKNGate2ANormalizedCarrierAgreementReceipt
-    "NSTriadKNGate2ANormalizedCarrierAgreementReceipt"
-    refl
-    canonicalReceiptText
-    refl
-    canonicalDocPath
-    refl
-    canonicalGramCarrierText
-    refl
-    canonicalSeamCarrierText
-    refl
-    canonicalMismatchText
-    refl
-    canonicalMapText
-    refl
-    canonicalLiftText
-    refl
-    canonicalComparisonAuditText
-    refl
-    canonicalExtremizerTransportText
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
+  record
+    { receiptName = "NSTriadKNGate2ANormalizedCarrierAgreementReceipt"
+    ; receiptNameIsCanonical = refl
+    ; receiptText = canonicalReceiptText
+    ; receiptTextIsCanonical = refl
+    ; docPath = canonicalDocPath
+    ; docPathIsCanonical = refl
+    ; gramCarrierText = canonicalGramCarrierText
+    ; gramCarrierTextIsCanonical = refl
+    ; seamCarrierText = canonicalSeamCarrierText
+    ; seamCarrierTextIsCanonical = refl
+    ; mismatchText = canonicalMismatchText
+    ; mismatchTextIsCanonical = refl
+    ; comparisonMapText = canonicalMapText
+    ; comparisonMapTextIsCanonical = refl
+    ; operatorSpecificLiftText = canonicalLiftText
+    ; operatorSpecificLiftTextIsCanonical = refl
+    ; comparisonAuditText = canonicalComparisonAuditText
+    ; comparisonAuditTextIsCanonical = refl
+    ; extremizerTransportText = canonicalExtremizerTransportText
+    ; extremizerTransportTextIsCanonical = refl
+    ; gate2aCarrierSpacesIdentified = true
+    ; gate2aCarrierSpacesIdentifiedIsTrue = refl
+    ; gate2aNormalizationMismatchIdentified = true
+    ; gate2aNormalizationMismatchIdentifiedIsTrue = refl
+    ; gate2aComparisonMapWritten = true
+    ; gate2aComparisonMapWrittenIsTrue = refl
+    ; gate2aOperatorSpecificSchurLiftsConstructed = true
+    ; gate2aOperatorSpecificSchurLiftsConstructedIsTrue = refl
+    ; gate2aOperatorSpecificSchurLiftIdentitiesRecorded = true
+    ; gate2aOperatorSpecificSchurLiftIdentitiesRecordedIsTrue = refl
+    ; gate2aSchurSignSplitComparisonAuditInstalled = true
+    ; gate2aSchurSignSplitComparisonAuditInstalledIsTrue = refl
+    ; gate2aDirectionalRatioStableObserved = true
+    ; gate2aDirectionalRatioStableObservedIsTrue = refl
+    ; gate2aDirectionalRatioApproxOneSixthObserved = true
+    ; gate2aDirectionalRatioApproxOneSixthObservedIsTrue = refl
+    ; gate2aExtremizerAwareTransportObservedShells = true
+    ; gate2aExtremizerAwareTransportObservedShellsIsTrue = refl
+    ; gate2aTransportMarginPositiveObserved = true
+    ; gate2aTransportMarginPositiveObservedIsTrue = refl
+    ; gate2aCoarseTransportClosesObserved = false
+    ; gate2aCoarseTransportClosesObservedIsFalse = refl
+    ; normalizedGramToHelicalSchurAgreementProved = true
+    ; normalizedGramToHelicalSchurAgreementProvedIsTrue = refl
+    ; gate2aCommonComparisonMapConstructed = true
+    ; gate2aCommonComparisonMapConstructedIsTrue = refl
+    ; schurSeamCarrierEmbedsIntoGramCarrier = true
+    ; schurSeamCarrierEmbedsIntoGramCarrierIsTrue = refl
+    ; gramSeamQuadraticFormMatchProved = true
+    ; gramSeamQuadraticFormMatchProvedIsTrue = refl
+    ; gate2aExactRestrictionIdentityObserved = true
+    ; gate2aExactRestrictionIdentityObservedIsTrue = refl
+    ; gate2aSchurLinearityObserved = true
+    ; gate2aSchurLinearityObservedIsTrue = refl
+    ; gate2aTwoSidedQuadraticFormBoundsProved = false
+    ; gate2aTwoSidedQuadraticFormBoundsProvedIsFalse = refl
+    ; gate2aExtremizerAwareTransportTheoremStated = true
+    ; gate2aExtremizerAwareTransportTheoremStatedIsTrue = refl
+    ; gate2aExtremizerAwareTransportProofPlanInstalled = true
+    ; gate2aExtremizerAwareTransportProofPlanInstalledIsTrue = refl
+    ; gate2aEP2ConeStabilitySurfaceInstalled = true
+    ; gate2aEP2ConeStabilitySurfaceInstalledIsTrue = refl
+    ; gate2aEP3DirectionalBudgetSurfaceInstalled = true
+    ; gate2aEP3DirectionalBudgetSurfaceInstalledIsTrue = refl
+    ; gate2aEP4MarginClosingSurfaceInstalled = true
+    ; gate2aEP4MarginClosingSurfaceInstalledIsTrue = refl
+    ; gate2aExtremizerAwareTransportNumericallySupported = true
+    ; gate2aExtremizerAwareTransportNumericallySupportedIsTrue = refl
+    ; gate2aExtremizerAwareTransportConditional = true
+    ; gate2aExtremizerAwareTransportConditionalIsTrue = refl
+    ; gate2aCoarseWorstCaseRouteRejected = true
+    ; gate2aCoarseWorstCaseRouteRejectedIsTrue = refl
+    ; gate2aDirectionalMarginClosingStated = true
+    ; gate2aDirectionalMarginClosingStatedIsTrue = refl
+    ; gate2aSeamLocalExtremizerAwareTransportModelClosed = true
+    ; gate2aSeamLocalExtremizerAwareTransportModelClosedIsTrue = refl
+    ; gate2aSeamLocalConditionalLemmaCarried = true
+    ; gate2aSeamLocalConditionalLemmaCarriedIsTrue = refl
+    ; gate2aExtremizerAwareTransportProved = false
+    ; gate2aExtremizerAwareTransportProvedIsFalse = refl
+    ; gate2aConditionalLemmaProved = false
+    ; gate2aConditionalLemmaProvedIsFalse = refl
+    ; theoremPromoted = false
+    ; theoremPromotedIsFalse = refl
+    ; fullNSPromoted = false
+    ; fullNSPromotedIsFalse = refl
+    ; clayPromoted = false
+    ; clayPromotedIsFalse = refl
+    }

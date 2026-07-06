@@ -14,6 +14,9 @@ open import DASHI.Physics.Closure.NSTriadKNGate2ASampledComparisonEnvelope
         ; mulRatio
         ; directionalTransportFactor
         ; directionalProductUpper
+        ; directionalProductRouteBelowQuarter
+        ; directionalBeatsShellwiseCoarse
+        ; directionalFactorBeatsShellwiseCoarseFactor
         ; shellwiseCoarseFactor
         ; shellwiseCoarseTransport
         ; shellwiseCoarseRouteCloses
@@ -90,15 +93,15 @@ record NSTriadKNGate2SampledFactorRouteWitnessPackage : Setω where
 
     directionalFactorBeatsCoarseFactor :
       (s : SampledShell) →
-      sampledDirectionalFactorBeatsShellwiseCoarseFactor s ≡ true
+      directionalFactorBeatsShellwiseCoarseFactor s ≡ true
 
     directionalTransportBeatsCoarse :
       (s : SampledShell) →
-      sampledDirectionalBeatsShellwiseCoarse s ≡ true
+      directionalBeatsShellwiseCoarse s ≡ true
 
     directionalTransportSubquarter :
       (s : SampledShell) →
-      sampledDirectionalProductRouteBelowQuarter s ≡ true
+      directionalProductRouteBelowQuarter s ≡ true
 
     shellwiseCoarseRouteRejected :
       (s : SampledShell) →

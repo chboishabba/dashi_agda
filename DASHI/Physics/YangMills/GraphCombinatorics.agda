@@ -1,6 +1,7 @@
 module DASHI.Physics.YangMills.GraphCombinatorics where
 
 open import DASHI.Core.Prelude
+open import Data.Nat.Properties as NatP using (*-identityˡ; +-identityʳ; ≤-reflexive)
 open import Relation.Binary.PropositionalEquality using (subst)
 open import Data.List using (length; _++_)
 open import Agda.Builtin.String using (String)
@@ -618,7 +619,10 @@ NormalizedLengthComplexityBound :
   ∀ {G : Graph} (r : Graph.Vertex G) (X : List (Graph.Vertex G)) →
   (rrs : RootedReducedSkeleton G r X) →
   ReducedSkeletonComplexityMeasure r X rrs ≤ 1 * diam_G {G} X + 0
-NormalizedLengthComplexityBound r X rrs = ≤-refl
+NormalizedLengthComplexityBound {G} r X rrs
+  rewrite NatP.*-identityˡ (diam_G {G} X)
+        | NatP.+-identityʳ (diam_G {G} X)
+  = ≤-refl
 
 postulatedReducedSkeletonComplexityControlledByDiameter :
   ∀ (G : Graph) → ReducedSkeletonComplexityControlledByDiameter G

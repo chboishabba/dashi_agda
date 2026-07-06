@@ -83,5 +83,5 @@ canonicalOutsideSeamTrueCarrierHypotheses =
     refl
     true
     refl
-    false
+    true
     refl

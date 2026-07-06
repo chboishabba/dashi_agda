@@ -30,7 +30,18 @@ canonical exact-script column supremum is `O(1)`. In the current object,
 
 This is still not a profile-independent theorem. The two sampled families scale
 differently, so the live obstruction is not “missing telemetry”; it is the lack
-of a profile-uniform row/column argument for the exact scripted operator.
+of a profile-uniform weighted Schur product theorem for the exact scripted
+operator.
+
+The observed asymmetry is compatible with that route:
+
+- forced-tail: `row_sum_sup ~ N^0`, `column_sum_sup ~ N^-2`, so the product is
+  still `~ N^-2`
+- adversarial geometry: `row_sum_sup ~ N^-2`, `column_sum_sup ~ N^-1`, so the
+  product is `~ N^-3`
+
+So the correct live theorem is weaker than demanding both row and column decay
+like `1/N` separately.
 
 Theorem authority, full-NS promotion, BKM exclusion, and Clay promotion remain
 false.

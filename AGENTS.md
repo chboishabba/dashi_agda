@@ -536,7 +536,65 @@ The file also documents the five-layer dependency DAG.
 Any external reviewer should start with this file.  It replaces the prose
 postulate inventory that was previously embedded in this document.
 
+## Navier–Stokes conditional-chain status
+
+NS is tracked as a conditional formal proof spine, not a solved theorem.
+See `ns_plan.txt` (3057 lines) for the full mathematical roadmap.
+
+### Current conditional chain
+
+```
+forced-tail row bound   (R^FT ≤ A)
+adversarial column bound (C^adv ≤ B/N)
+transition row/column bounds  (open — see Blocker 1)
+residual profile bounds (open)
+  ↓
+profile cross-product matrix (structurally wired; 16 entries postulated)
+  ↓
+global weighted Schur product bound (structurally wired; conditional)
+  ↓
+PairIncidence C/N operator bound (structurally wired; conditional)
+  +
+ResidueScaleCompatibility (postulated — see Blocker 2)
+  ↓
+q_gap ≥ c/N² (conditional)
+  ↓
+Schur residue / BKM residence bridge (conditional)
+```
+
+### Do not promote
+
+Do not claim Clay NS solved. Do not promote BKM/Clay receipts unless the
+following analytic blockers are discharged.
+
+### Blocker 1 — forced-tail restricted-row refinements
+
+Prove:
+```
+R_N^{FT→adv} ≤ A N^{-1}
+R_N^{FT→trans} ≤ A N^{-1}
+```
+from concrete incidence count, magnitude, weight-orientation, or
+profile-incompatibility geometry.  Four named gain routes are defined in
+`NSTriadKNProfileCrossForcedTailRefinement.agda`; inhabiting any one
+discharges the restricted row.
+
+### Blocker 2 — ResidueScaleCompatibility
+
+Replace the postulate `canonicalCompatibility : ResidueScaleCompatibility` in
+`NSTriadKNPairIncidenceProfileBounds.agda` with a constructive proof explaining
+the `N⁻¹ → N⁻²` conversion via quadratic spectral relation, residue-scaled norm
+conversion, weak/strong interpolation, or square-of-operator formula.
+
+### Current gate authority
+
+Current global Schur / BKM gates are conditional on those blockers.
+Receipt booleans are not theorem authority unless dependency-derived from
+inhabited analytic proofs.  Twenty-four receipt files still carry
+`bkmExclusionProved ≡ false`; that is the safe default until Blocker 1 and
+Blocker 2 are discharged.
+
 ### Do not touch (unless explicitly asked)
 
 - `clayYangMillsPromoted` — stays false (authority/adjudication gate)
-- NS — not in scope
+- `clayNavierStokesPromoted` — stays false (authority/adjudication gate)

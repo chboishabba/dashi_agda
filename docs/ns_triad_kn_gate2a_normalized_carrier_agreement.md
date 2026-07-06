@@ -396,7 +396,8 @@ gramSeamQuadraticFormMatchProved = true
 gate2aSeamLocalExtremizerAwareTransportModelClosed = true
 gate2aSeamLocalConditionalLemmaCarried = true
 gate2aConditionalLemmaProved = false
-gate2aExactRestrictionIdentityObserved = false
+gate2aExactRestrictionIdentityObserved = true
+gate2aSchurLinearityObserved = true
 gate2aTwoSidedQuadraticFormBoundsProved = true
 gate2aTwoSidedQuadraticFormBoundsObserved = true
 gate2aExtremizerAwareTransportObservedShells = [6 , 8 , 10]
@@ -408,9 +409,10 @@ gate2aExtremizerAwareTransportProved = false
 
 ## Current closure
 
-The normalized-carrier agreement surface now feeds only the seam-local
-transport chain: the common comparison map, seam embedding, and two-sided form
-bounds remain recorded, while exact normalized-carrier agreement and the
-extremizer-aware transport theorem remain analytically open. Exact restriction
-identity remains unasserted; the repo no longer treats seam-local transport as
-an exact Gate 2 proof.
+The normalized-carrier agreement surface now feeds the seam-local
+transport chain with both Schur linearity and the exact restriction identity
+recorded on the arithmetic exact-transfer surface. The common comparison map,
+seam embedding, and two-sided form bounds remain recorded, while exact
+normalized-carrier agreement on the true carrier and the extremizer-aware
+transport theorem remain analytically open. The repo still does not treat
+seam-local transport as a complete exact Gate 2 proof.
