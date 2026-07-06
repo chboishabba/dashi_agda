@@ -1,0 +1,4052 @@
+Yes. Here is the full remaining mathematical package, organized as a **closure DAG**. The point is to stop chasing local booleans and discharge the exact analytic assumptions in the order that can actually lead to Clay-grade closure.
+
+# Global remaining theorem DAG
+
+Current conditional spine is:
+
+```text
+FT→adv depth separation
+FT→trans depth separation
+  ↓
+forced-tail restricted row N⁻¹ refinements
+  ↓
+16-entry cross-product matrix
+  ↓
+global weighted Schur
+  ↓
+PairIncidence C/N
+  ↓
+ResidueScaleCompatibility
+  ↓
+q_gap ≥ c/N²
+  ↓
+Schur residue scale
+  ↓
+BKM residence / projection smallness
+  ↓
+BKM finite integral
+  ↓
+regularity gateway
+```
+
+The remaining work is therefore:
+
+[
+\boxed{
+\text{A. Blocker 1: forced-tail cross depth geometry}
+}
+]
+
+[
+\boxed{
+\text{B. Blocker 2: residue/gap scaling compatibility}
+}
+]
+
+[
+\boxed{
+\text{C. Stage 4: convert residue scale into BKM control}
+}
+]
+
+Everything else is receipt/theorem-surface plumbing.
+
+---
+
+# A. Blocker 1 — forced-tail cross geometry
+
+You have already reduced (FT\to adv) to:
+
+```agda
+ftAdvDepthSeparationLinear :
+  FTToAdversarialIncidence N i j ->
+  entryDepth i + N ≤ entryDepth j
+```
+
+and (FT\to trans) still sits behind:
+
+```agda
+canonicalFTTransDepthGeometry
+```
+
+The full math needed here is:
+
+[
+FT\to adv(N,i,j)
+\Rightarrow
+d(j)-d(i)\ge \ell(N),
+]
+
+[
+FT\to trans(N,i,j)
+\Rightarrow
+d(j)-d(i)\ge \ell(N),
+]
+
+where (\ell(N)) only needs to satisfy:
+
+[
+N+1\le 2^{\ell(N)}.
+]
+
+You currently chose:
+
+[
+\ell(N)=N.
+]
+
+That is sufficient but possibly too strong. The optimal fallback is:
+
+[
+\ell(N)=\lceil \log_2(N+1)\rceil.
+]
+
+## A1. Required definitions
+
+Define or expose:
+
+```agda
+entryDepth : Entry -> Nat
+entryDepthBound : entryDepth k ≤ maxDepth
+weightOf k = pow2 (maxDepth ∸ entryDepth k)
+```
+
+Already mostly present, but the missing piece is connecting `entryDepth` to profile membership.
+
+You need profile geometry predicates:
+
+```agda
+ForcedTailSource N i
+AdversarialTarget N j
+TransitionTarget N j
+FTToAdversarialIncidence N i j
+FTToTransitionIncidence N i j
+```
+
+with bridge lemmas:
+
+```agda
+ftAdvSource :
+  FTToAdversarialIncidence N i j ->
+  ForcedTailSource N i
+
+ftAdvTarget :
+  FTToAdversarialIncidence N i j ->
+  AdversarialTarget N j
+
+ftTransSource :
+  FTToTransitionIncidence N i j ->
+  ForcedTailSource N i
+
+ftTransTarget :
+  FTToTransitionIncidence N i j ->
+  TransitionTarget N j
+```
+
+## A2. Source/target depth bounds
+
+Prove depth estimates from the profile definitions:
+
+```agda
+forcedTailSourceDepthUpper :
+  ForcedTailSource N i ->
+  entryDepth i ≤ forcedTailSourceDepthCap N
+
+adversarialTargetDepthLower :
+  AdversarialTarget N j ->
+  forcedTailSourceDepthCap N + logDepthRequired N ≤ entryDepth j
+
+transitionTargetDepthLower :
+  TransitionTarget N j ->
+  forcedTailSourceDepthCap N + logDepthRequired N ≤ entryDepth j
+```
+
+Then derive:
+
+```agda
+ftAdvDepthSeparation :
+  FTToAdversarialIncidence N i j ->
+  entryDepth i + logDepthRequired N ≤ entryDepth j
+
+ftTransDepthSeparation :
+  FTToTransitionIncidence N i j ->
+  entryDepth i + logDepthRequired N ≤ entryDepth j
+```
+
+For your current linear version:
+
+```agda
+logDepthRequired N = N
+```
+
+the goal is exactly:
+
+```agda
+entryDepth i + N ≤ entryDepth j
+```
+
+## A3. If linear separation fails
+
+If (d(j)-d(i)\ge N) is false, switch to:
+
+[
+\ell(N)=\lceil\log_2(N+1)\rceil.
+]
+
+Then prove:
+
+```agda
+pow2CeilLogEnough :
+  suc N ≤ pow2 (ceilLog2 (suc N))
+```
+
+and use:
+
+```agda
+ftAdvDepthSeparationLog :
+  FTToAdversarialIncidence N i j ->
+  entryDepth i + ceilLog2 (suc N) ≤ entryDepth j
+
+ftTransDepthSeparationLog :
+  FTToTransitionIncidence N i j ->
+  entryDepth i + ceilLog2 (suc N) ≤ entryDepth j
+```
+
+That is strictly weaker and exactly sufficient.
+
+## A4. Weight separation already proved
+
+Once depth separation exists, the already-proved arithmetic gives:
+
+[
+2^{d(j)-d(i)}w_j\le w_i.
+]
+
+With:
+
+[
+N+1\le 2^{d(j)-d(i)},
+]
+
+you get:
+
+[
+(N+1)w_j\le w_i.
+]
+
+Agda targets:
+
+```agda
+ftAdvWeightSeparation :
+  FTToAdversarialIncidence N i j ->
+  suc N * weightOf j ≤ weightOf i
+
+ftTransWeightSeparation :
+  FTToTransitionIncidence N i j ->
+  suc N * weightOf j ≤ weightOf i
+```
+
+Then:
+
+```agda
+forcedTailToAdversarialRestrictedRowN1FromWeight
+forcedTailToTransitionRestrictedRowN1FromWeight
+```
+
+become genuinely inhabited.
+
+## A5. Cross terms closed by Blocker 1
+
+Once A is proved:
+
+[
+R_N^{FT\to adv}\le A N^{-1},
+]
+
+[
+R_N^{FT\to trans}\le A N^{-1}.
+]
+
+Then:
+
+[
+R_N^{FT\to adv} C_N^{adv}
+\le
+A B N^{-2},
+]
+
+[
+R_N^{FT\to trans} C_N^{trans}
+\le
+A B N^{-2}.
+]
+
+Residual cross terms follow by domination.
+
+So Blocker 1 closes the entire analytic cross-product matrix, assuming the other profile row/column exponents remain valid.
+
+---
+
+# B. Profile cross-product matrix — final analytic form
+
+After Blocker 1, the matrix should no longer contain primitive cross postulates. It should be derived from:
+
+## B1. Exponent-sum entries
+
+For 10 entries:
+
+[
+\alpha_p+\beta_q\ge2.
+]
+
+The profile exponent table is:
+
+```text
+profile        row decay α     column decay β
+
+forced-tail    0               2
+adversarial    2               1
+transition     1               1
+residual       dominated       dominated
+```
+
+Exponent-sum theorem:
+
+```agda
+crossProductFromExponentSum :
+  2 ≤ rowDecay p + columnDecay q ->
+  CrossProductBound p q
+```
+
+## B2. Forced-tail special off-diagonal entries
+
+The only irreducible special entries are:
+
+```agda
+forcedTail_adversarial_cross
+forcedTail_transition_cross
+```
+
+from Blocker 1.
+
+## B3. Residual domination entries
+
+Residual should be derived from:
+
+[
+K^{res}\le
+\lambda K^{FT}+\mu K^{adv}+\nu K^{trans}.
+]
+
+Then for any profile (q):
+
+[
+R^{res}C^q
+\le
+\lambda R^{FT}C^q
++
+\mu R^{adv}C^q
++
+\nu R^{trans}C^q.
+]
+
+And for any profile (p):
+
+[
+R^pC^{res}
+\le
+\lambda R^pC^{FT}
++
+\mu R^pC^{adv}
++
+\nu R^pC^{trans}.
+]
+
+And:
+
+[
+R^{res}C^{res}
+\le
+\sum_{p,q\in{FT,adv,trans}}
+a_pa_qR^pC^q.
+]
+
+Agda targets:
+
+```agda
+residualCrossLeftFromDomination :
+  CrossProductBound FT q ->
+  CrossProductBound adv q ->
+  CrossProductBound trans q ->
+  CrossProductBound res q
+
+residualCrossRightFromDomination :
+  CrossProductBound p FT ->
+  CrossProductBound p adv ->
+  CrossProductBound p trans ->
+  CrossProductBound p res
+
+residualResidualCrossFromDomination :
+  all parent cross bounds ->
+  CrossProductBound res res
+```
+
+After this, the full matrix is analytically closed.
+
+---
+
+# C. Global weighted Schur theorem
+
+Once all 16 cross terms are real:
+
+[
+R_N C_N
+\le
+\left(\sum_pR_N^p\right)
+\left(\sum_qC_N^q\right)
+========================
+
+\sum_{p,q}R_N^pC_N^q
+\le
+\sum_{p,q}C_{pq}N^{-2}.
+]
+
+So:
+
+[
+R_NC_N\le C^2N^{-2}.
+]
+
+Agda targets:
+
+```agda
+profileCrossMatrixAnalytic :
+  ProfileCrossProductMatrix
+
+globalWeightedSchurFromCrossMatrix :
+  ProfileCrossProductMatrix ->
+  WeightedSchurProductBound
+
+weightedSchurProductBoundClosed :
+  IsTrue weightedSchurProductBoundClosed
+```
+
+This is already structurally present. What remains is replacing Blocker 1 assumptions with actual proofs.
+
+---
+
+# D. PairIncidence (C/N) operator theorem
+
+Weighted Schur gives:
+
+[
+|K_N|_{\ell^2(w)\to\ell^2(w)}
+\le
+\sqrt{R_NC_N}
+\le
+C/N.
+]
+
+Then transfer to the intended unweighted/operator surface requires one of:
+
+1. the weighted and unweighted norms are uniformly equivalent, or
+2. the operator theorem is explicitly in the weighted norm, or
+3. there is a bounded conjugation map (T_w) such that:
+
+[
+K_N^{weighted}=T_wK_NT_w^{-1}.
+]
+
+Required lemmas:
+
+```agda
+weightedSchurOperatorBound :
+  WeightedSchurProductBound ->
+  WeightedOperatorCNBound
+
+weightNormEquivalence :
+  WeightedOperatorCNBound ->
+  UnweightedOperatorCNBound
+```
+
+or avoid the second by making the target theorem explicitly weighted.
+
+Then:
+
+```agda
+pairIncidenceCNTheoremClosed :
+  PairIncidenceCNTheorem
+```
+
+Current closure is structurally wired. For Clay-grade proof, make sure this is not silently switching norms.
+
+---
+
+# E. Blocker 2 — ResidueScaleCompatibility
+
+This is the biggest remaining analytic bridge after Blocker 1.
+
+You need to justify:
+
+[
+|L_N|*{\mathrm{op}}\le C/N
+\Rightarrow
+q*{\mathrm{gap}}(N)\ge c/N^2.
+]
+
+This does **not** follow formally from (C/N). You need an additional structural relation.
+
+There are four viable routes.
+
+## E1. Quadratic spectral route
+
+If the gap is defined as a quadratic energy of the operator residue:
+
+[
+q_{\mathrm{gap}}(N)
+\sim
+|L_N|_{\mathrm{op}}^2,
+]
+
+then:
+
+[
+|L_N|\le C/N
+\Rightarrow
+q_{\mathrm{gap}}(N)\lesssim C^2/N^2.
+]
+
+But note direction: for a **lower** gap bound, you need a coercive relation:
+
+[
+q_{\mathrm{gap}}(N)\ge c|L_N|^2
+]
+
+or:
+
+[
+q_{\mathrm{gap}}(N)\ge c/N^2
+]
+
+from a spectral minimum. Be careful: an upper bound on operator norm usually gives an **upper** bound, not a lower gap.
+
+Required theorem:
+
+```agda
+gapCoercivityQuadratic :
+  PairIncidenceCNTheorem ->
+  qGapLowerN2
+```
+
+Only valid if the definition of `q_gap` has the right coercive sign.
+
+## E2. Residue-scaled carrier route
+
+If (L_N) acts on a weak/residue norm:
+
+[
+|\langle L_Nx,x\rangle|
+\le
+C N^{-1}|x|_{weak}^2
+]
+
+and:
+
+[
+|x|*{weak}^2\le N^{-1}|x|*{strong}^2,
+]
+
+then:
+
+[
+|\langle L_Nx,x\rangle|
+\le
+CN^{-2}|x|_{strong}^2.
+]
+
+Required lemmas:
+
+```agda
+operatorCNWeakNorm :
+  PairIncidenceCNTheorem ->
+  |⟨L_N x , x⟩| ≤ C / N * weakNorm x ^ 2
+
+residueWeakStrongScale :
+  weakNorm x ^ 2 ≤ C / N * strongNorm x ^ 2
+
+operatorCNToQuadraticResidueN2 :
+  |⟨L_N x , x⟩| ≤ C / N² * strongNorm x ^ 2
+```
+
+This is probably the most plausible DASHI route.
+
+## E3. Schur residue-square route
+
+If the residue contribution is quadratic in the Schur bound:
+
+[
+\mathrm{Res}*N
+\lesssim
+\left(|L_N|*{\mathrm{op}}\right)^2,
+]
+
+then:
+
+[
+\mathrm{Res}_N\lesssim N^{-2}.
+]
+
+Required theorem:
+
+```agda
+schurResidueQuadratic :
+  PairIncidenceCNTheorem ->
+  SchurResidueScaleBound
+```
+
+Then (q_{\mathrm{gap}}) may be downstream of residue rather than upstream.
+
+## E4. Gap base minus perturbation route
+
+If:
+
+[
+q_N=q_N^{base}-\mathrm{err}_N,
+]
+
+with:
+
+[
+q_N^{base}\ge aN^{-2},
+]
+
+and:
+
+[
+\mathrm{err}_N\le bN^{-2},
+\quad b<a,
+]
+
+then:
+
+[
+q_N\ge(a-b)N^{-2}.
+]
+
+Required lemmas:
+
+```agda
+baseGapN2 :
+  qBase N ≥ a / N²
+
+operatorErrorN2 :
+  PairIncidenceCNTheorem ->
+  ResidueScaleCompatibility ->
+  error N ≤ b / N²
+
+gapPerturbationAbsorption :
+  b < a ->
+  qGap N ≥ (a-b) / N²
+```
+
+This is the most theorem-prover-friendly if the base gap exists.
+
+## E5. What `ResidueScaleCompatibility` should contain
+
+Replace the opaque postulate with a record:
+
+```agda
+record ResidueScaleCompatibility : Set₁ where
+  field
+    weakNorm : Carrier N -> Set
+    strongNorm : Carrier N -> Set
+
+    operatorWeakCN :
+      PairIncidenceCNTheorem ->
+      OperatorWeakBound N
+
+    weakStrongN1 :
+      weakNorm² x ≤ C / N * strongNorm² x
+
+    baseGapN2 :
+      BaseGap N ≥ a / N²
+
+    perturbationAbsorption :
+      OperatorWeakBound N ->
+      weakStrongN1 ->
+      qGap N ≥ c / N²
+```
+
+Then:
+
+```agda
+qGapTransferClosed :
+  PairIncidenceCNTheorem ->
+  ResidueScaleCompatibility ->
+  QGapN2
+```
+
+This is the exact Blocker 2 replacement.
+
+---
+
+# F. Schur residue scale
+
+Once:
+
+[
+q_{\mathrm{gap}}(N)\ge c/N^2,
+]
+
+you need a usable residue estimate.
+
+Possible target:
+
+[
+\mathrm{SchurRes}_N(t)
+\le
+C N^2 \mathrm{Diss}_N(t)
+]
+
+or, if the scale is dyadic:
+
+[
+\mathrm{SchurRes}_N(t)
+\le
+C 2^{-2N}\mathrm{Diss}_N(t).
+]
+
+Be careful with indexing. If (N) is a shell count and physical frequency is (2^N), then (N^{-2}) alone is not summable over shells.
+
+Required lemmas:
+
+```agda
+qGapControlsResidue :
+  qGap N ≥ c / N² ->
+  ResidueBound N
+
+residueScaleSummability :
+  Σ_N ResidueBound N < ∞
+```
+
+If only (N^{-2}) appears, summability over (N) is okay:
+
+[
+\sum_N N^{-2}<\infty.
+]
+
+If additional (2^N) BKM factors appear, (N^{-2}) will not be enough. Then you need residence-time or stronger frequency decay.
+
+---
+
+# G. BKM residence bridge
+
+BKM requires:
+
+[
+\int_0^T|\omega(t)|_\infty,dt<\infty.
+]
+
+A shell version usually looks like:
+
+[
+|\omega(t)|_\infty
+\lesssim
+\sum_N A_N(t)
+]
+
+with dangerous terms controlled by residence or residue.
+
+You need one of:
+
+## G1. Direct summable projection smallness
+
+[
+\sum_N\int_0^T A_N(t),dt<\infty.
+]
+
+Required theorem:
+
+```agda
+schurResidueToSummableBKMProjection :
+  SchurResidueScale ->
+  Σ_N ∫ A_N(t) dt < ∞
+```
+
+## G2. Residence-time exclusion
+
+For dangerous shell sets:
+
+[
+E_N(\lambda)={t:A_N(t)\ge\lambda_N},
+]
+
+prove:
+
+[
+|E_N(\lambda)|\le C\lambda_N^{-1}N^{-2}.
+]
+
+Then choose (\lambda_N) so:
+
+[
+\sum_N\lambda_N|E_N|<\infty.
+]
+
+Required lemmas:
+
+```agda
+dangerousShellResidenceBound :
+  SchurResidueScale ->
+  Measure {t : Danger_N(t) ≥ λ_N} ≤ C * λ_N⁻¹ * N⁻²
+
+residenceSummability :
+  Σ_N λ_N * Measure E_N < ∞
+
+bkmIntegralFinite :
+  ∫₀ᵀ ||ω(t)||∞ dt < ∞
+```
+
+## G3. BKM closure
+
+Then invoke BKM continuation:
+
+```agda
+bkmFiniteIntegral :
+  ∫₀ᵀ ||ω(t)||∞ dt < ∞
+
+bkmContinuation :
+  bkmFiniteIntegral ->
+  SmoothContinuationPast T
+```
+
+This is the actual PDE step.
+
+---
+
+# H. Final Clay regularity gateway
+
+Even after BKM for the modeled carrier, you need carrier-to-NS coverage:
+
+```agda
+allSmoothNSDataEnterCarrier :
+  SmoothDivergenceFreeInitialData ->
+  CarrierInitialData
+
+carrierEvolutionMatchesNS :
+  CarrierSolution ->
+  NavierStokesSolution
+
+bkmContinuationForCarrier :
+  CarrierBKMFinite ->
+  CarrierSmoothContinuation
+
+clayNSRegularity :
+  allSmoothNSDataEnterCarrier ->
+  carrierEvolutionMatchesNS ->
+  bkmContinuationForCarrier ->
+  GlobalSmoothNS
+```
+
+If the carrier is restricted, this becomes a conditional regularity theorem, not Clay.
+
+So final Clay needs:
+
+[
+\boxed{
+\text{no hidden symmetry, profile, smallness, or discretization restriction.}
+}
+]
+
+---
+
+# Complete remaining lemma checklist
+
+## Blocker 1: FT cross refinements
+
+```agda
+-- FT→adv
+ftAdvProfileSourceBridge
+ftAdvProfileTargetBridge
+ftAdvDepthSeparationLinear
+-- or ftAdvLogDepthSeparation
+
+canonicalFTAdvDepthGeometry
+ftAdvWeightSeparation
+forcedTailToAdversarialRestrictedRowN1
+forcedTailAdversarialCrossProductN2
+
+-- FT→trans
+ftTransProfileSourceBridge
+ftTransProfileTargetBridge
+ftTransDepthSeparationLinear
+-- or ftTransLogDepthSeparation
+
+canonicalFTTransDepthGeometry
+ftTransWeightSeparation
+forcedTailToTransitionRestrictedRowN1
+forcedTailTransitionCrossProductN2
+```
+
+## Cross matrix
+
+```agda
+tenExponentSumCrossEntries
+forcedTailAdversarialCrossProductN2
+forcedTailTransitionCrossProductN2
+residualCrossFromDomination
+profileCrossProductMatrixAnalytic
+```
+
+## Weighted Schur / operator
+
+```agda
+globalWeightedSchurFromCrossMatrix
+weightedSchurOperatorBound
+weightNormEquivalence or weighted-target theorem
+pairIncidenceCNTheorem
+```
+
+## Gap transfer
+
+```agda
+ResidueScaleCompatibility record
+operatorWeakCN
+weakStrongN1
+baseGapN2
+operatorErrorN2
+gapPerturbationAbsorption
+qGapN2
+```
+
+## Residue
+
+```agda
+qGapControlsSchurResidue
+schurResidueScaleBound
+residueScaleSummability
+```
+
+## BKM
+
+```agda
+schurResidueToBKMProjectionSmallness
+dangerousShellResidenceBound
+residenceSummability
+bkmIntegralFinite
+bkmContinuation
+```
+
+## Clay coverage
+
+```agda
+allSmoothNSDataEnterCarrier
+carrierEvolutionMatchesNS
+noSymmetryRestriction
+noSmallnessRestriction
+globalSmoothNSRegularity
+```
+
+---
+
+# Priority order from here
+
+Do this exact order:
+
+```text
+1. Prove ftAdvDepthSeparationLinear.
+   If false, replace with ceilLog2 depth requirement.
+
+2. Prove canonicalFTAdvDepthGeometry.
+
+3. Prove ftTransDepthSeparationLinear or log variant.
+
+4. Prove canonicalFTTransDepthGeometry.
+
+5. Remove Layer 2 assumptions from cross matrix.
+
+6. Audit weighted/unweighted operator norm transfer.
+
+7. Replace ResidueScaleCompatibility postulate with a structured record.
+
+8. Prove the N⁻¹ → N⁻² gap conversion.
+
+9. Prove Schur residue summability.
+
+10. Prove BKM residence/projection smallness.
+
+11. Prove carrier coverage for all smooth NS data.
+```
+
+The immediate Clay-relevant theorem is still:
+
+[
+\boxed{
+FTToAdversarialIncidence(N,i,j)
+\Rightarrow
+entryDepth(i)+N\le entryDepth(j)
+}
+]
+
+or its log-depth replacement.
+
+That is the next hard mathematical fact to prove.
+
+
+Yes. At this point the repo does **not** need more receipt work. It needs the remaining analytic ladder for:
+
+[
+\boxed{
+\text{transition} ;\to; \text{residual} ;\to; \text{profile-wise Schur} ;\to; \text{operator } C/N ;\to; q_{\mathrm{gap}};\to; \text{BKM/residence}.
+}
+]
+
+I’ll write this as the complete mathematical route, with theorem targets and the estimates each one must prove.
+
+---
+
+# 0. Current Stage 3 state
+
+Closed:
+
+[
+\boxed{
+K_N = K_N^{FT}+K_N^{adv}+K_N^{trans}+K_N^{res}
+}
+]
+
+[
+\boxed{
+R_N^{FT}C_N^{FT}\le C_{FT}^2N^{-2}
+}
+]
+
+[
+\boxed{
+R_N^{adv}C_N^{adv}\le C_{adv}^2N^{-2}
+}
+]
+
+Open:
+
+[
+\boxed{
+R_N^{trans}C_N^{trans}\le C_{trans}^2N^{-2}
+}
+]
+
+[
+\boxed{
+R_N^{res}C_N^{res}\le C_{res}^2N^{-2}
+}
+]
+
+Then:
+
+[
+\boxed{
+R_NC_N\le C^2N^{-2}
+}
+]
+
+and therefore:
+
+[
+\boxed{
+|L^N_{FT,\mathrm{script}}|_{\mathrm{op}}\le C/N.
+}
+]
+
+---
+
+# 1. Transition profile: full theorem shape
+
+Transition should be proved using an exponent-sum theorem, not hardcoding one guessed balance.
+
+Define transition row/column exponents:
+
+[
+R_N^{trans}\le A_{trans}N^{-\alpha},
+]
+
+[
+C_N^{trans}\le B_{trans}N^{-\beta},
+]
+
+with the closure condition:
+
+[
+\boxed{
+\alpha+\beta\ge2.
+}
+]
+
+Then:
+
+[
+R_N^{trans}C_N^{trans}
+\le
+A_{trans}B_{trans}N^{-(\alpha+\beta)}
+\le
+A_{trans}B_{trans}N^{-2}.
+]
+
+So the transition product theorem should be:
+
+```agda
+transitionWeightedProductFromExponents :
+  transitionRowAlphaBound ->
+  transitionColumnBetaBound ->
+  transitionExponentSumAtLeastTwo ->
+  transitionWeightedProductBound
+```
+
+Mathematically:
+
+[
+\boxed{
+\left(R_N^{trans}\le A N^{-\alpha}\right)
+\wedge
+\left(C_N^{trans}\le B N^{-\beta}\right)
+\wedge
+(\alpha+\beta\ge2)
+\Rightarrow
+R_N^{trans}C_N^{trans}\le ABN^{-2}.
+}
+]
+
+## Transition class table
+
+You need a finite class split:
+
+[
+\mathcal I_N^{trans}
+====================
+
+\coprod_{c\in\mathcal C_{trans}}
+\mathcal I_{N,c}^{trans}.
+]
+
+For each class (c), prove four numbers:
+
+[
+a_c^{row},\quad b_c^{row},\quad a_c^{col},\quad b_c^{col}.
+]
+
+where:
+
+[
+#\mathcal I^{trans,row}_{N,c}(i)\lesssim N^{a_c^{row}},
+]
+
+[
+m_N(\tau)\lesssim N^{-b_c^{row}}
+]
+
+for row summation, and:
+
+[
+#\mathcal I^{trans,col}_{N,c}(j)\lesssim N^{a_c^{col}},
+]
+
+[
+m_N(\tau)\lesssim N^{-b_c^{col}}
+]
+
+for column summation.
+
+Then:
+
+[
+R_{N,c}^{trans}\lesssim N^{a_c^{row}-b_c^{row}},
+]
+
+[
+C_{N,c}^{trans}\lesssim N^{a_c^{col}-b_c^{col}}.
+]
+
+Define:
+
+[
+\alpha_c=b_c^{row}-a_c^{row},
+]
+
+[
+\beta_c=b_c^{col}-a_c^{col}.
+]
+
+The class closes if:
+
+[
+\boxed{
+\alpha_c+\beta_c\ge2.
+}
+]
+
+Equivalently:
+
+[
+\boxed{
+(b_c^{row}+b_c^{col})-(a_c^{row}+a_c^{col})\ge2.
+}
+]
+
+That is the core transition arithmetic theorem.
+
+## Transition primitive lemmas
+
+You need:
+
+```agda
+transitionClassification :
+  TransitionIncidence -> TransitionClass
+```
+
+```agda
+transitionRowIncidenceCountBound :
+  # row incidences in class c <= N ^ rowCountExp c
+```
+
+```agda
+transitionColumnIncidenceCountBound :
+  # column incidences in class c <= N ^ columnCountExp c
+```
+
+```agda
+transitionMagnitudeEnvelopeBound :
+  m_N τ <= N ^ (- magnitudeExp c)
+```
+
+Then:
+
+```agda
+transitionRowClassAlphaBound :
+  rowCountExp c + (- magnitudeExp c) <= - rowAlpha c
+```
+
+```agda
+transitionColumnClassBetaBound :
+  columnCountExp c + (- magnitudeExp c) <= - columnBeta c
+```
+
+and:
+
+```agda
+transitionClassExponentSum :
+  rowAlpha c + columnBeta c >= 2
+```
+
+Then aggregate over finitely many classes:
+
+[
+R_N^{trans}
+\le
+\sum_c A_cN^{-\alpha_c}
+\le
+A_{trans}N^{-\alpha}
+]
+
+where:
+
+[
+\alpha=\min_c\alpha_c.
+]
+
+Similarly:
+
+[
+C_N^{trans}
+\le
+B_{trans}N^{-\beta}.
+]
+
+But the better theorem is classwise product:
+
+[
+R_{N,c}^{trans}C_{N,c}^{trans}\le C_c^2N^{-2},
+]
+
+then sum constants over (c).
+
+---
+
+# 2. Transition magnitude theorem
+
+The magnitude side still comes from the same exact triad formula:
+
+[
+m_N(\tau)
+=========
+
+\frac{\sqrt{\pi_i\pi_j\pi_l}}{3}
+\max(\cos(\phi_i+\phi_j-\phi_l),0).
+]
+
+Always use:
+
+[
+0\le\max(\cos(\theta),0)\le1.
+]
+
+So:
+
+[
+m_N(\tau)
+\le
+\frac{\sqrt{\pi_i\pi_j\pi_l}}{3}.
+]
+
+Thus, for class (c), it is enough to prove:
+
+[
+\boxed{
+\pi_i\pi_j\pi_l
+\le
+9N^{-2b_c}.
+}
+]
+
+Then:
+
+[
+m_N(\tau)\le N^{-b_c}.
+]
+
+So the transition analytic heart is:
+
+```agda
+transitionPiProductScaleBound :
+  τ ∈ TransitionClass c ->
+  π_i π_j π_l <= 9 * N ^ (-2 * magnitudeExp c)
+```
+
+Then:
+
+```agda
+transitionMagnitudeEnvelopeBound :
+  m_N τ <= N ^ (- magnitudeExp c)
+```
+
+The entire transition theorem reduces to:
+
+[
+\boxed{
+\text{class count exponents}+
+\text{pi-product magnitude exponents}
+\Rightarrow
+\alpha+\beta\ge2.
+}
+]
+
+---
+
+# 3. Recommended transition exponent choices
+
+Unless the telemetry says otherwise, use the balanced theorem:
+
+[
+\boxed{
+R_N^{trans}\le A_{trans}N^{-1},
+\qquad
+C_N^{trans}\le B_{trans}N^{-1}.
+}
+]
+
+That gives:
+
+[
+R_N^{trans}C_N^{trans}\le A_{trans}B_{trans}N^{-2}.
+]
+
+So start with:
+
+```agda
+transitionRowN1Bound
+transitionColumnN1Bound
+transitionWeightedProductFromRowColumn
+```
+
+Class closure condition becomes:
+
+[
+b_c-a_c^{row}\ge1,
+]
+
+[
+b_c-a_c^{col}\ge1.
+]
+
+Equivalently:
+
+[
+b_c\ge a_c^{row}+1,
+\qquad
+b_c\ge a_c^{col}+1.
+]
+
+A useful transition table would be:
+
+| class               | row count | column count |   magnitude | row product | column product |
+| ------------------- | --------: | -----------: | ----------: | ----------: | -------------: |
+| thin-transition     |    (O(1)) |       (O(N)) | (O(N^{-2})) | (O(N^{-2})) |    (O(N^{-1})) |
+| balanced-transition |    (O(N)) |       (O(N)) | (O(N^{-2})) | (O(N^{-1})) |    (O(N^{-1})) |
+| thick-transition    |    (O(N)) |     (O(N^2)) | (O(N^{-3})) | (O(N^{-2})) |    (O(N^{-1})) |
+| angular-transition  |  (O(N^2)) |       (O(N)) | (O(N^{-3})) | (O(N^{-1})) |    (O(N^{-2})) |
+
+All close because each has:
+
+[
+\text{row exponent}+\text{column exponent}\le-2.
+]
+
+In Agda, represent this as Nat-scaled exponents:
+
+```agda
+transitionRowDecayExp : TransitionClass -> ℕ
+transitionColumnDecayExp : TransitionClass -> ℕ
+transitionClassExponentSumAtLeastTwo :
+  2 <= transitionRowDecayExp c + transitionColumnDecayExp c
+```
+
+Then the product theorem is purely arithmetic.
+
+---
+
+# 4. Residual profile: two possible routes
+
+Residual should not be treated like another large profile unless necessary. There are two better possibilities.
+
+## Route A — residual domination
+
+Best case:
+
+[
+\boxed{
+K_N^{res}\le \lambda_{res}K_N^{FT}
++
+\mu_{res}K_N^{adv}
++
+\nu_{res}K_N^{trans}
+}
+]
+
+with constants independent of (N).
+
+Then:
+
+[
+R_N^{res}\le
+\lambda R_N^{FT}+\mu R_N^{adv}+\nu R_N^{trans},
+]
+
+[
+C_N^{res}\le
+\lambda C_N^{FT}+\mu C_N^{adv}+\nu C_N^{trans}.
+]
+
+If each parent profile has weighted Schur (N^{-1}), then residual inherits it.
+
+The theorem shape:
+
+```agda
+residualDominatedByClosedProfiles :
+  K_res <= λ K_forcedTail + μ K_adversarial + ν K_transition
+```
+
+then:
+
+```agda
+residualWeightedProductFromDomination :
+  forcedTailWeightedProductBound ->
+  adversarialWeightedProductBound ->
+  transitionWeightedProductBound ->
+  residualWeightedProductBound
+```
+
+This is the cleanest if residual is genuinely “leftover but controlled by nearby classes.”
+
+## Route B — residual smallness
+
+If residual is a true remainder/error term, prove directly:
+
+[
+R_N^{res}\le A_{res}N^{-1},
+\qquad
+C_N^{res}\le B_{res}N^{-1}.
+]
+
+or stronger:
+
+[
+R_N^{res}\le A_{res},
+\qquad
+C_N^{res}\le B_{res}N^{-2}.
+]
+
+The theorem shape mirrors transition:
+
+```agda
+residualRowAlphaBound
+residualColumnBetaBound
+residualExponentSumAtLeastTwo
+residualWeightedProductFromExponents
+```
+
+## Residual should fail closed until one of these exists
+
+Do not set:
+
+```agda
+residualWeightedProductBoundClosed = true
+```
+
+until either:
+
+```agda
+residualDominatedByClosedProfiles
+```
+
+or:
+
+```agda
+residualRowColumnProductBound
+```
+
+exists.
+
+---
+
+# 5. Profile-wise combination theorem
+
+Once all four profile bounds exist:
+
+[
+R_N^{p}C_N^{p}\le C_p^2N^{-2}
+]
+
+for:
+
+[
+p\in{FT,adv,trans,res}.
+]
+
+You need to combine:
+
+[
+K_N=\sum_pK_N^p.
+]
+
+For nonnegative kernels:
+
+[
+R_N
+===
+
+\sup_i \sum_j K_N(i,j)\frac{w_j}{w_i}
+\le
+\sum_p R_N^p.
+]
+
+Similarly:
+
+[
+C_N\le\sum_p C_N^p.
+]
+
+But from product bounds alone you do **not** automatically get separate row and column bounds. So the clean profile-wise theorem should store row and column witnesses, not only products.
+
+For each profile (p), carry:
+
+[
+R_N^p\le A_pN^{-\alpha_p},
+]
+
+[
+C_N^p\le B_pN^{-\beta_p},
+]
+
+[
+\alpha_p+\beta_p\ge2.
+]
+
+Then:
+
+[
+R_N\le \sum_p A_pN^{-\alpha_p},
+]
+
+[
+C_N\le \sum_p B_pN^{-\beta_p}.
+]
+
+However, if some profiles are forced-tail-like:
+
+[
+R_N^{FT}\le A_{FT},\quad C_N^{FT}\le B_{FT}N^{-2},
+]
+
+and adversarial-like:
+
+[
+R_N^{adv}\le A_{adv}N^{-2},\quad C_N^{adv}\le B_{adv}N^{-1},
+]
+
+then total row may be (O(1)), total column may be (O(N^{-1})), which gives only:
+
+[
+R_NC_N\lesssim N^{-1}.
+]
+
+So for the **global Schur product** you need more than profile product bounds unless the weights/profiles are arranged so that the row-heavy and column-heavy profiles do not stack badly.
+
+There are three possible solutions.
+
+## Combination Solution 1 — common orientation
+
+Prove all profiles satisfy:
+
+[
+R_N^p\le A_p,
+\qquad
+C_N^p\le B_pN^{-2}.
+]
+
+Then:
+
+[
+R_N\le A,
+\qquad
+C_N\le BN^{-2},
+]
+
+so:
+
+[
+R_NC_N\le ABN^{-2}.
+]
+
+This is simple but may be too strong.
+
+## Combination Solution 2 — split Schur vector weights by profile
+
+Use profile-specific weights (w^p), then prove compatibility:
+
+[
+w^p\sim w
+]
+
+uniformly. If each profile closes in its best orientation under a compatible weight, then combine via equivalent weighted norms.
+
+The theorem shape:
+
+```agda
+profileWeightCompatibility :
+  ∀ p -> EquivalentWeights wProfile[p] wGlobal
+```
+
+Then:
+
+```agda
+profileWiseWeightedSchurCombination :
+  ∀ p -> WeightedProductBound p wProfile[p] ->
+  profileWeightCompatibility ->
+  GlobalWeightedSchurProductBound wGlobal
+```
+
+## Combination Solution 3 — row/column vector product, not scalar product
+
+Let:
+
+[
+r_p=R_N^p,\qquad c_p=C_N^p.
+]
+
+Then:
+
+[
+R_NC_N
+\le
+\left(\sum_pr_p\right)
+\left(\sum_pc_p\right).
+]
+
+Expanding:
+
+# [
+
+\sum_{p,q}r_pc_q.
+]
+
+Profile product bounds only control (r_pc_p), not cross terms (r_pc_q).
+
+So you need cross-profile compatibility:
+
+[
+\boxed{
+r_pc_q\le C_{pq}N^{-2}
+\quad\forall p,q.
+}
+]
+
+This is the most honest general theorem.
+
+The global combination target becomes:
+
+```agda
+profileCrossProductBounds :
+  ∀ p q -> RowBound p * ColumnBound q <= C[p,q] / N²
+```
+
+Then:
+
+[
+R_NC_N
+\le
+\sum_{p,q}C_{pq}N^{-2}
+======================
+
+CN^{-2}.
+]
+
+This is probably the right DASHI theorem.
+
+It means Stage 3 does not merely need four diagonal profile products. It needs either:
+
+```text
+all profiles aligned in same row/column orientation
+```
+
+or:
+
+```text
+cross-profile product matrix closes.
+```
+
+This is important.
+
+---
+
+# 6. Global weighted Schur product theorem
+
+The actual global theorem should be stated as:
+
+[
+\boxed{
+R_N(w_N)C_N(w_N)\le C^2N^{-2}.
+}
+]
+
+where:
+
+[
+R_N(w_N)=\sup_i\frac1{w_i}\sum_jK_N(i,j)w_j,
+]
+
+[
+C_N(w_N)=\sup_j\frac1{w_j}\sum_iK_N(i,j)w_i.
+]
+
+With profile decomposition:
+
+[
+K_N=\sum_{p\in P}K_N^p.
+]
+
+You can prove:
+
+[
+R_N\le\sum_pR_N^p,
+\qquad
+C_N\le\sum_pC_N^p.
+]
+
+Then either prove common orientation or cross-matrix closure.
+
+The strongest general form:
+
+[
+\boxed{
+\forall p,q,\quad R_N^pC_N^q\le C_{pq}N^{-2}.
+}
+]
+
+Then:
+
+[
+R_NC_N
+\le
+\sum_{p,q}R_N^pC_N^q
+\le
+\sum_{p,q}C_{pq}N^{-2}
+======================
+
+C^2N^{-2}.
+]
+
+This should become:
+
+```agda
+profileCrossSchurMatrixBound
+globalWeightedSchurProductFromProfileMatrix
+weightedSchurProductBoundClosed
+```
+
+This avoids the false inference:
+
+[
+R_pC_p\le N^{-2};\forall p
+\not\Rightarrow
+(\sum R_p)(\sum C_p)\le N^{-2}.
+]
+
+That is the key mathematical caveat.
+
+---
+
+# 7. Operator bound from weighted Schur
+
+Once:
+
+[
+R_N(w_N)C_N(w_N)\le C^2N^{-2},
+]
+
+the weighted Schur test gives:
+
+[
+\boxed{
+|K_N|_{\ell^2\to\ell^2}\le \sqrt{R_NC_N}\le C/N.
+}
+]
+
+Since:
+
+[
+K_N=-L^N_{FT,\mathrm{script}}
+]
+
+up to sign/nonnegative-kernel convention:
+
+[
+\boxed{
+|L^N_{FT,\mathrm{script}}|_{\mathrm{op}}\le C/N.
+}
+]
+
+The theorem shape:
+
+```agda
+weightedSchurImpliesOperatorCN :
+  weightedSchurProductBound ->
+  pairIncidenceOperatorCNBound
+```
+
+Then:
+
+```agda
+pairIncidenceCNTheoremClosed = true
+```
+
+Only after global Schur, not after individual profile closures.
+
+---
+
+# 8. (q_{\mathrm{gap}}) transfer
+
+The intended transfer is:
+
+[
+|L_N|*{\mathrm{op}}\le C/N
+\Rightarrow
+q*{\mathrm{gap}}(N)\ge c_{\mathrm{gap}}/N^2.
+]
+
+This requires a coercivity/residue relation of the form:
+
+[
+q_N(x)
+\ge
+q_N^{main}(x)-\langle L_Nx,x\rangle.
+]
+
+If:
+
+[
+q_N^{main}(x)\ge aN^{-2}|x|^2
+]
+
+and:
+
+[
+|\langle L_Nx,x\rangle|
+\le
+|L_N|_{\mathrm{op}}|x|^2
+\le
+CN^{-1}|x|^2,
+]
+
+that is **not enough**, because (N^{-1}) is larger than (N^{-2}).
+
+So the transfer cannot be the naive subtraction above unless the operator acts on a scaled/residual subspace where the (C/N) term converts to (C'/N^2).
+
+The transfer must include one of:
+
+## Option A — extra smallness on the relevant subspace
+
+[
+|L_N|*{\mathcal R_N}|*{\mathrm{op}}\le C/N^2.
+]
+
+## Option B — interpolation with residue scale
+
+[
+|\langle L_Nx,x\rangle|
+\le
+\frac{C}{N}|x|_{\mathrm{weak}}^2
+]
+
+and:
+
+[
+|x|*{\mathrm{weak}}^2\le \frac{1}{N}|x|*{\mathrm{strong}}^2.
+]
+
+Then:
+
+[
+|\langle L_Nx,x\rangle|
+\le
+CN^{-2}|x|_{\mathrm{strong}}^2.
+]
+
+## Option C — gap formula uses square of operator norm
+
+If:
+
+[
+q_{\mathrm{gap}}\sim |L_N|_{\mathrm{op}}^2,
+]
+
+then:
+
+[
+|L_N|\le C/N
+\Rightarrow
+q_{\mathrm{gap}}\ge c/N^2.
+]
+
+But this needs an exact spectral relation.
+
+So the (q_{\mathrm{gap}}) theorem must not be handwaved. Its real statement should be:
+
+```agda
+operatorCNToQGapN2Transfer :
+  pairIncidenceOperatorCNBound ->
+  residueScaleCompatibility ->
+  qGapN2Bound
+```
+
+The missing additional lemma is:
+
+```agda
+residueScaleCompatibility
+```
+
+or:
+
+```agda
+operatorCNActsQuadraticallyOnGapCarrier
+```
+
+Mathematical target:
+
+[
+\boxed{
+|L_N|*{\mathrm{op}}\le C/N
+\quad+\quad
+\text{residue/gap scaling compatibility}
+\Rightarrow
+q*{\mathrm{gap}}(N)\ge c/N^2.
+}
+]
+
+---
+
+# 9. Schur residue scale
+
+Before BKM, you need to connect:
+
+[
+q_{\mathrm{gap}}(N)\ge cN^{-2}
+]
+
+to a residue estimate.
+
+Likely target:
+
+[
+\boxed{
+\mathrm{Res}_N(t)\lesssim N^{-2}\mathcal E_N(t)
+}
+]
+
+or:
+
+[
+\boxed{
+\sum_N q_{\mathrm{gap}}(N),\mathcal R_N(t)
+\le
+C\mathcal D(t).
+}
+]
+
+The required theorem should express:
+
+```agda
+qGapN2ControlsSchurResidue :
+  qGapN2Bound ->
+  SchurResidueScaleBound
+```
+
+Mathematically, something like:
+
+[
+\mathcal R_N
+\le
+Cq_{\mathrm{gap}}(N)^{-1}\mathcal D_N.
+]
+
+Since:
+
+[
+q_{\mathrm{gap}}(N)^{-1}\lesssim N^2,
+]
+
+you must make sure the dissipation side has matching (N^{-2}) or (2^{2N})-type scale. Otherwise the inequality points the wrong way.
+
+This is another major audit point.
+
+---
+
+# 10. BKM projection smallness
+
+The final PDE goal is not just an operator bound. It must enter BKM:
+
+[
+\int_0^T|\omega(t)|_\infty,dt<\infty.
+]
+
+Your Stage 4 theorem likely needs:
+
+[
+|\omega_N(t)|_\infty
+\le
+A_N(t)+B_N(t)
+]
+
+where the Schur/residue machinery controls the dangerous term.
+
+A plausible target is:
+
+[
+\sum_N 2^N|\Delta_N\omega(t)|_\infty
+]
+
+or a shell version of BKM.
+
+The bridge must prove one of:
+
+## Route A — summable shell residue
+
+[
+\sum_N \int_0^T \mathrm{Danger}_N(t),dt<\infty.
+]
+
+## Route B — residence-time exclusion
+
+For dangerous shell (N), the time spent in that shell satisfies:
+
+[
+|{t:\mathrm{Danger}_N(t)\ge \lambda_N}|
+\le
+C\lambda_N^{-1}N^{-2}
+]
+
+or some summable variant.
+
+Then:
+
+[
+\sum_N \lambda_N |{t:\mathrm{Danger}_N(t)\ge\lambda_N}|<\infty.
+]
+
+## Route C — logarithmic BKM summability
+
+If the gap gives:
+
+[
+q_{\mathrm{gap}}(N)\gtrsim N^{-2},
+]
+
+then you may only get logarithmic or polynomial-in-(N) losses. You need summability from another source, such as:
+
+[
+2^{-cN}
+]
+
+or finite residence.
+
+So Stage 4 cannot rely on (N^{-2}) alone unless the shell indexing makes (N) exponential in physical frequency.
+
+This must be explicit.
+
+The Stage 4 theorem shape should be:
+
+```agda
+schurResidueScaleToBKMProjectionSmallness :
+  SchurResidueScaleBound ->
+  ResidenceTimeExclusion ->
+  BKMProjectionSmallness
+```
+
+or:
+
+```agda
+qGapAndResidenceExcludeBKMBlowup :
+  qGapN2Bound ->
+  ResidenceTimeExclusion ->
+  BKMFinite
+```
+
+---
+
+# 11. Full remaining theorem chain
+
+The complete route from here is:
+
+```text
+Transition classification
+  ↓
+Transition row/column exponent bounds
+  ↓
+Transition weighted product bound
+  ↓
+Residual domination or residual row/column bounds
+  ↓
+Residual weighted product bound
+  ↓
+Profile cross-product matrix OR common-orientation theorem
+  ↓
+Global weighted Schur product
+  ↓
+PairIncidenceCNTheorem: ||L_N|| ≤ C/N
+  ↓
+Residue/gap scaling compatibility
+  ↓
+q_gap(N) ≥ c/N²
+  ↓
+Schur residue scale
+  ↓
+Residence-time exclusion / BKM projection smallness
+  ↓
+BKM finite integral
+  ↓
+conditional regularity gateway
+```
+
+---
+
+# 12. Exact next mathematical deliverables
+
+In order:
+
+## Deliverable 1 — transition exponent table
+
+```agda
+TransitionClass : Set
+
+transitionRowCountExp : TransitionClass -> ℕ
+transitionColumnCountExp : TransitionClass -> ℕ
+transitionMagnitudeExp : TransitionClass -> ℕ
+
+transitionRowDecayExp c =
+  transitionMagnitudeExp c - transitionRowCountExp c
+
+transitionColumnDecayExp c =
+  transitionMagnitudeExp c - transitionColumnCountExp c
+
+transitionClassExponentSumAtLeastTwo :
+  2 <= transitionRowDecayExp c + transitionColumnDecayExp c
+```
+
+## Deliverable 2 — transition row/column bounds
+
+```agda
+transitionRowAlphaBoundAvailable = true
+transitionColumnBetaBoundAvailable = true
+```
+
+with actual theorem fields, not raw booleans.
+
+## Deliverable 3 — transition product bridge
+
+```agda
+transitionWeightedProductFromRowColumnAvailable = true
+transitionWeightedProductBoundClosed = true
+```
+
+## Deliverable 4 — residual route decision
+
+Choose one:
+
+```agda
+residualDominatedByClosedProfiles
+```
+
+or:
+
+```agda
+residualRowAlphaBound
+residualColumnBetaBound
+residualWeightedProductFromRowColumn
+```
+
+## Deliverable 5 — profile cross-product matrix
+
+This is the crucial global theorem:
+
+```agda
+profileCrossProductBound :
+  (p q : Profile) ->
+  profileRowBound p * profileColumnBound q <= C p q / N²
+```
+
+Then:
+
+```agda
+globalWeightedSchurProductFromProfileMatrix
+```
+
+---
+
+# 13. Critical warning
+
+Do **not** assume:
+
+[
+R_pC_p\le N^{-2}
+\quad\forall p
+]
+
+implies:
+
+[
+\left(\sum_pR_p\right)\left(\sum_pC_p\right)\le N^{-2}.
+]
+
+It does not.
+
+You need either:
+
+[
+R_pC_q\le C_{pq}N^{-2}\quad\forall p,q,
+]
+
+or a common row/column orientation for all profiles.
+
+This is the next major mathematical honesty point.
+
+---
+
+# 14. Clean summary
+
+[
+\boxed{
+\text{Forced-tail and adversarial are closed.}
+}
+]
+
+[
+\boxed{
+\text{Transition needs an exponent-sum row/column theorem.}
+}
+]
+
+[
+\boxed{
+\text{Residual should close either by domination or by its own exponent-sum theorem.}
+}
+]
+
+[
+\boxed{
+\text{Global Schur needs cross-profile row/column products, not just diagonal profile products.}
+}
+]
+
+[
+\boxed{
+\text{Operator }C/N\text{ follows from global weighted Schur.}
+}
+]
+
+[
+\boxed{
+q_{\mathrm{gap}}\ge c/N^2\text{ requires an additional residue/gap scaling transfer, not just }C/N\text{ by itself.}
+}
+]
+
+That is the full remaining math path.
+
+
+Yes. The actual required math is now the **forced-tail incidence counting theorem plus magnitude envelope theorem**.
+
+The five open objects reduce to this package:
+
+[
+\boxed{
+\text{encode incidences } \tau
+;\Rightarrow;
+\text{count parameters}
+;\Rightarrow;
+\text{bound weights}
+;\Rightarrow;
+N^2 M_{FT}(N,c)\mu_{FT}(N,c)\le B_{FT,c}.
+}
+]
+
+Below is the concrete theorem content the agents need to supply.
+
+Concise remaining math:
+
+- Encode each class-filtered forced-tail incidence into explicit head/tail parameters with bounded fiber constant `κ_FT(c)`.
+- Bound parameter count by `head-count × max-tail-count`, then control that product by `M_FT(N,c)`.
+- Factor each incidence weight through normalization, coefficient, and projection envelopes.
+- Bound those three envelope factors classwise and collapse them into `μ_FT(N,c)`.
+- Prove the arithmetic target `N² * M_FT(N,c) * μ_FT(N,c) ≤ B_FT,c`, then let the existing lift chain propagate to the column and Schur bounds.
+
+---
+
+# 0. Choose the actual class formulas
+
+Before any proof can close, the agents must instantiate three formulas.
+
+For each shell (N) and forced-tail column class (c):
+
+[
+M_{FT}(N,c)
+===========
+
+\texttt{forcedTailClassMultiplicityBoundFormula } N,c
+]
+
+[
+\mu_{FT}(N,c)
+=============
+
+\texttt{forcedTailClassMagnitudeBoundFormula } N,c
+]
+
+[
+B_{FT,c}
+========
+
+\texttt{forcedTailColumnClassProductN2Constant } c.
+]
+
+They must be chosen so that:
+
+[
+\boxed{
+N^2,M_{FT}(N,c),\mu_{FT}(N,c)
+\le
+B_{FT,c}.
+}
+]
+
+That is the central design constraint.
+
+A viable pattern is:
+
+[
+M_{FT}(N,c)\lesssim N^{a_c},
+\qquad
+\mu_{FT}(N,c)\lesssim N^{-2-a_c}.
+]
+
+Then:
+
+[
+N^2M_{FT}(N,c)\mu_{FT}(N,c)
+\lesssim
+N^2N^{a_c}N^{-2-a_c}
+====================
+
+O(1).
+]
+
+So the class formulas need matched exponents.
+
+Examples of admissible class pairs:
+
+```text
+count ~ 1       magnitude ~ N^-2
+count ~ N       magnitude ~ N^-3
+count ~ N^2     magnitude ~ N^-4
+```
+
+The actual class split should pick whichever pair matches the forced-tail geometry.
+
+---
+
+# 1. Discharge `forcedTailClassIncidenceEncodingFiberBound`
+
+## Required theorem
+
+For class-filtered incidences:
+
+[
+\tau\in \mathcal I^{FT}_{N,c}(j),
+]
+
+define an encoding:
+
+[
+\operatorname{enc}*{N,c,j}(\tau)
+\in
+\mathcal A*{N,c}(j).
+]
+
+Then prove:
+
+[
+\boxed{
+#{\tau\in\mathcal I^{FT}*{N,c}(j):
+\operatorname{enc}*{N,c,j}(\tau)=a}
+\le
+\kappa_{FT}(c).
+}
+]
+
+Agda-side target:
+
+```agda
+forcedTailClassIncidenceEncodingFiberBound
+```
+
+## What the encoding must contain
+
+A forced-tail incidence (\tau) should be determined, up to bounded ambiguity, by:
+
+```text
+head data:
+  the active endpoint / anchor shell
+  the repeated-pair identity
+  the column role
+
+tail data:
+  forced-tail displacement
+  admissible partner shell
+  orientation/sign/branch residue
+```
+
+So define:
+
+[
+\operatorname{enc}(\tau)
+========================
+
+(\operatorname{head}(\tau),\operatorname{tail}(\tau)).
+]
+
+The proof must show:
+
+```text
+same head + same tail ⇒ only O(1) possible incidences
+```
+
+Usually the fiber constant is:
+
+[
+\kappa_{FT}(c)=1,2,4,8
+]
+
+depending on sign/orientation degeneracy.
+
+The precise theorem is:
+
+[
+\forall a,\quad
+|\operatorname{enc}^{-1}(a)|
+\le
+\kappa_{FT}(c).
+]
+
+If the encoding is injective, set:
+
+[
+\kappa_{FT}(c)=1.
+]
+
+---
+
+# 2. Discharge `forcedTailClassParameterCountBound`
+
+This has two pieces now: head count and tail count.
+
+## Required theorem
+
+[
+\boxed{
+|\mathcal A_{N,c}(j)|
+\le
+M_{FT}(N,c).
+}
+]
+
+Agda-side target:
+
+```agda
+forcedTailClassParameterCountBound
+```
+
+## Head/tail factorization
+
+You now have:
+
+```agda
+ForcedTailClassParameterHead
+ForcedTailClassParameterTail
+forcedTailClassParameterHeadCount
+forcedTailClassParameterTailCount
+forcedTailClassParameterTailCountMax
+forcedTailClassParameterHeadBoundFormula
+forcedTailClassParameterTailBoundFormula
+forcedTailClassParameterHeadCountBound
+forcedTailClassParameterTailCountMaxBound
+forcedTailClassParameterCountFactorization
+forcedTailHeadTailProductControlsMultiplicityFormula
+```
+
+The required proof is:
+
+[
+|\mathcal A_{N,c}(j)|
+\le
+H_{FT}(N,c),T_{FT}(N,c),
+]
+
+where:
+
+[
+H_{FT}(N,c)
+===========
+
+\text{head-count},
+]
+
+[
+T_{FT}(N,c)
+===========
+
+\text{max tail-count}.
+]
+
+Then prove:
+
+[
+H_{FT}(N,c)T_{FT}(N,c)
+\le
+M_{FT}(N,c).
+]
+
+So the exact sublemmas are:
+
+```agda
+forcedTailClassParameterTailCountBound
+forcedTailClassParameterCountFactorization
+forcedTailClassParameterHeadCountBound
+forcedTailClassParameterTailCountMaxBound
+forcedTailHeadTailProductControlsMultiplicityFormula
+```
+
+Mathematically:
+
+[
+|\mathcal A_{N,c}(j)|
+\le
+|\mathrm{Head}*{N,c}(j)|
+\cdot
+\sup_h|\mathrm{Tail}*{N,c}(j,h)|
+\le
+M_{FT}(N,c).
+]
+
+## What must be counted
+
+For each class (c), the agents must count:
+
+```text
+how many head choices are possible for a fixed column j;
+how many tail choices are possible once the head is fixed.
+```
+
+A useful target table should look like:
+
+```text
+class c      head count       tail count       M_FT(N,c)
+tailEnd      O(1)             O(1)             O(1)
+nearTail     O(1)             O(N^a)           O(N^a)
+transition   O(N^b)           O(N^a)           O(N^(a+b))
+degenerate   finite           finite           constant
+```
+
+The exponents must match the magnitude side.
+
+---
+
+# 3. Discharge `forcedTailMagnitudeKernelUpperBound`
+
+## Required theorem
+
+For each forced-tail incidence (\tau):
+
+[
+\boxed{
+m_N(\tau)
+\le
+\operatorname{Env}_{FT}(N,\tau).
+}
+]
+
+Agda-side target:
+
+```agda
+forcedTailMagnitudeKernelUpperBound
+```
+
+## What must be unpacked
+
+The forced-tail kernel weight must be bounded by an explicit expression. It should have the form:
+
+[
+m_N(\tau)
+\le
+\text{normalization}(N,\tau)
+\cdot
+\text{coefficient}(N,\tau)
+\cdot
+\text{projection weight}(N,\tau).
+]
+
+So define:
+
+[
+\operatorname{Env}_{FT}(N,\tau)
+===============================
+
+A_{\rm norm}(N,\tau)
+A_{\rm coeff}(N,\tau)
+A_{\rm proj}(N,\tau).
+]
+
+The proof must show each exact kernel factor is bounded by the envelope factor.
+
+Typical required inequalities:
+
+[
+|h(k,p,q)|\le C_h,\operatorname{scale}_{h}(N,\tau),
+]
+
+[
+\text{normalizer}^{-1}
+\le
+C_{\rm norm},\operatorname{scale}_{\rm norm}(N,\tau),
+]
+
+[
+\text{projection weight}
+\le
+C_{\rm proj},\operatorname{scale}_{\rm proj}(N,\tau).
+]
+
+Then:
+
+[
+m_N(\tau)
+\le
+C_hC_{\rm norm}C_{\rm proj}
+\operatorname{scale}*{h}
+\operatorname{scale}*{\rm norm}
+\operatorname{scale}_{\rm proj}.
+]
+
+That product is your `forcedTailMagnitudeEnvelope`.
+
+The surface now explicitly carries the factorized envelope route:
+
+```agda
+forcedTailMagnitudeNormalizationFactor
+forcedTailMagnitudeCoefficientFactor
+forcedTailMagnitudeProjectionFactor
+forcedTailMagnitudeEnvelopeFactorization
+forcedTailClassNormalizationBoundFormula
+forcedTailClassCoefficientBoundFormula
+forcedTailClassProjectionBoundFormula
+forcedTailMagnitudeNormalizationClassBound
+forcedTailMagnitudeCoefficientClassBound
+forcedTailMagnitudeProjectionClassBound
+forcedTailClassEnvelopeProductControlsMagnitudeFormula
+```
+
+---
+
+# 4. Discharge `forcedTailMagnitudeEnvelopeClassBound`
+
+## Required theorem
+
+For every incidence (\tau) in class (c):
+
+[
+\boxed{
+\operatorname{Env}*{FT}(N,\tau)
+\le
+\mu*{FT}(N,c).
+}
+]
+
+Agda-side target:
+
+```agda
+forcedTailMagnitudeEnvelopeClassBound
+```
+
+## What the class split must guarantee
+
+The class (c) must encode the scale information needed to bound the envelope.
+
+For example, for every (\tau\in\mathcal I^{FT}_{N,c}(j)), prove class hypotheses like:
+
+[
+\operatorname{tailLength}(\tau)\sim N,
+]
+
+[
+\operatorname{separation}(\tau)\ge c_0N,
+]
+
+[
+\operatorname{denominator}(\tau)\ge c_1N^\gamma,
+]
+
+[
+\operatorname{projectionWeight}(\tau)\le C N^{-\delta}.
+]
+
+Then combine those to show:
+
+[
+\operatorname{Env}_{FT}(N,\tau)
+\le
+C_cN^{-b_c}.
+]
+
+Set:
+
+[
+\mu_{FT}(N,c)=C_cN^{-b_c}.
+]
+
+The exponent must satisfy:
+
+[
+b_c\ge 2+a_c
+]
+
+where (M_{FT}(N,c)\sim N^{a_c}).
+
+---
+
+# 5. Discharge `forcedTailClassProductFormulaN2Bound`
+
+## Required theorem
+
+For every shell (N) and class (c):
+
+[
+\boxed{
+N^2M_{FT}(N,c)\mu_{FT}(N,c)
+\le
+B_{FT,c}.
+}
+]
+
+Agda-side target:
+
+```agda
+forcedTailClassProductFormulaN2Bound
+```
+
+This is pure arithmetic once (M_{FT}) and (\mu_{FT}) are explicit.
+
+## Required arithmetic
+
+If:
+
+[
+M_{FT}(N,c)\le A_cN^{a_c},
+]
+
+and:
+
+[
+\mu_{FT}(N,c)\le D_cN^{-2-a_c},
+]
+
+then:
+
+[
+N^2M_{FT}(N,c)\mu_{FT}(N,c)
+\le
+A_cD_c.
+]
+
+So choose:
+
+[
+B_{FT,c}=A_cD_c.
+]
+
+In division-free Agda form, if bounds are encoded as natural/rational scales:
+
+[
+N^2\cdot M_{FT}(N,c)\cdot \mu_{FT}(N,c)
+\le
+B_{FT,c}.
+]
+
+If `Bound` cannot express negative powers directly, encode (\mu) as a scaled bound:
+
+[
+M_{FT}(N,c)\cdot \muNumerator_{FT}(N,c)
+\le
+B_{FT,c}
+]
+
+with denominator (N^{2+a_c}), or keep all bounds in a rational/scaled-bound record.
+
+---
+
+# Combined discharge path
+
+Once the five primitive estimates exist, the rest is mechanical.
+
+## Multiplicity theorem
+
+From fiber and parameter count:
+
+[
+|\mathcal I^{FT}*{N,c}(j)|
+\le
+\kappa*{FT}(c)|\mathcal A_{N,c}(j)|
+\le
+\kappa_{FT}(c)M_{FT}(N,c).
+]
+
+If (\kappa) is already absorbed into (M_{FT}), this gives:
+
+```agda
+forcedTailColumnClassMultiplicityLemma
+```
+
+## Magnitude theorem
+
+From kernel upper bound and class envelope:
+
+[
+m_N(\tau)
+\le
+\operatorname{Env}*{FT}(N,\tau)
+\le
+\mu*{FT}(N,c).
+]
+
+This gives:
+
+```agda
+forcedTailColumnClassMagnitudeLemma
+```
+
+## Product theorem
+
+[
+|\mathcal I^{FT}*{N,c}(j)|\cdot
+\sup*\tau m_N(\tau)
+\le
+M_{FT}(N,c)\mu_{FT}(N,c)
+\le
+\frac{B_{FT,c}}{N^2}.
+]
+
+This gives:
+
+```agda
+forcedTailColumnClassProductLemma
+```
+
+## Column bound
+
+[
+\frac1{w_j}\sum_iK_N^{FT}(i,j)w_i
+\le
+\frac{B_{FT}}{N^2}.
+]
+
+This gives:
+
+```agda
+forcedTailColumnN2BoundProved = true
+```
+
+## Forced-tail Schur product
+
+With row bound:
+
+[
+R_N^{FT}(w_N)\le A_{FT},
+]
+
+and column bound:
+
+[
+C_N^{FT}(w_N)\le \frac{B_{FT}}{N^2},
+]
+
+derive:
+
+[
+R_N^{FT}C_N^{FT}
+\le
+\frac{A_{FT}B_{FT}}{N^2}.
+]
+
+Then:
+
+```agda
+forcedTailSchurProductDerived = true
+forcedTailWeightedProductBoundClosed = true
+```
+
+---
+
+# Minimal exact instructions to agents
+
+Give them this:
+
+```text
+Do not add more global receipts.
+
+Work in:
+  DASHI/Physics/Closure/NSTriadKNForcedTailCountingMagnitudeTheorem.agda
+
+Pick explicit class formulas:
+  M_FT(N,c)
+  μ_FT(N,c)
+  B_FT,c
+
+Then prove, in order:
+
+1. forcedTailClassIncidenceEncodingFiberBound
+   Each encoded forced-tail class parameter has ≤ κ_FT(c) incidences.
+
+2. forcedTailClassParameterCountBound
+   Parameter count ≤ head-count × max-tail-count ≤ M_FT(N,c).
+
+3. forcedTailMagnitudeKernelUpperBound
+   Exact kernel magnitude ≤ forced-tail envelope.
+
+4. forcedTailMagnitudeEnvelopeClassBound
+   Envelope ≤ μ_FT(N,c) for class c.
+
+5. forcedTailClassProductFormulaN2Bound
+   N² M_FT(N,c) μ_FT(N,c) ≤ B_FT,c.
+```
+
+Then let the already-installed composed theorems propagate the closure.
+
+# The central mathematical requirement
+
+Everything reduces to this single classwise design equation:
+
+[
+\boxed{
+\text{count exponent}+\text{magnitude exponent}\le -2.
+}
+]
+
+More explicitly, for every class (c):
+
+[
+M_{FT}(N,c)=O(N^{a_c}),
+]
+
+[
+\mu_{FT}(N,c)=O(N^{-b_c}),
+]
+
+with:
+
+[
+\boxed{
+b_c-a_c\ge 2.
+}
+]
+
+Equivalently:
+
+[
+M_{FT}(N,c)\mu_{FT}(N,c)=O(N^{-2}).
+]
+
+That is the math the repo now requires.
+
+
+Yes. Here is the **exact mathematical content** the agents need, stated as theorem targets rather than fake proof completions.
+
+The current repo state already supports the seam-local Gate 2-A/Gate 2 chain, with the extremizer-aware directional ledger stable around (\theta_N\approx 1/6) on (N=6,8,10). The remaining work starts where that local seam model must become an actual NS operator theorem. 
+
+## Concise remaining math
+
+- Forced-tail profile closed locally via the dependency-honest closure bridge.
+  The installed theorem surface at
+  `DASHI/Physics/Closure/NSTriadKNForcedTailCountingMagnitudeTheorem.agda`
+  remains the explanatory proof surface for the forced-tail route, with
+  separate row-uniform and column-N^-2 theorem slots, explicit class-filtered
+  incidence encoding/count bounds, explicit magnitude-envelope bounds, a
+  head/tail factorization of the class parameter family so the parameter count
+  can be attacked as `head-count * max-tail-count`, a composed
+  encoded-multiplicity theorem
+  `count <= kappa_FT(class(j)) * M_FT(N,class(j))`, a composed
+  envelope-magnitude theorem `m_N(tau) <= mu_FT(N,class(j))` on
+  class-filtered incidences, an `N^2 * M_FT * mu_FT` classwise product target,
+  and the lift chain
+  `classwise target => per-column profile target => shellwise N^-2 target`.
+- Prove the adversarial weighted-product bound
+  `R_N^adv(w_N) * C_N^adv(w_N) <= C_adv^2 / N^2`.
+- Prove the transition weighted-product bound
+  `R_N^trans(w_N) * C_N^trans(w_N) <= C_trans^2 / N^2`.
+- Prove the residual weighted-product bound
+  `R_N^res(w_N) * C_N^res(w_N) <= C_res^2 / N^2`.
+- Combine the four profile bounds into the global weighted Schur product theorem
+  `R_N(w_N) * C_N(w_N) <= C^2 / N^2`.
+- Deduce the exact operator theorem
+  `||L_FT,script^N||_op <= C / N`.
+- Prove the scaling-explicit transfer
+  `||L_FT,script^N||_op <= C/N => q_gap(N) >= c_gap / N^2`.
+- Only after that, advance to Stage 4:
+  structural BKM projection smallness and residence-time exclusion.
+
+# Stage 3 — Exact-operator frontier
+
+The seam-local Gate 2 closure is no longer the live Stage 3 wall. The first
+genuinely nonlocal theorem after Gate 2 is a profile-uniform weighted
+Schur-product theorem for the exact scripted pair-incidence operator.
+
+### Current installed state
+
+- The repeated-pair kernel formula is closed:
+  `K^N(k,p) := -L_FT,script^N(k,p) = sum_{tau : {k,p} in P(tau)} m_N(tau) >= 0`.
+- The structural four-profile decomposition is closed at the classifier/partition level:
+  `K_N = K_N^FT + K_N^adv + K_N^trans + K_N^res`.
+- The forced-tail route now has a sampled exact-script witness at `N=6,8,10,12`
+  using the unweighted Schur test `w_N = 1`, with nearly constant rows,
+  `N^2 * column_sum_sup` stable, and `N * Schur bound` stable.
+- The forced-tail profile is now closed locally via a dependency-honest
+  closure bridge.
+- The adversarial profile is now closed locally via a dependency-honest
+  row/column/product bridge.
+- What remains open is the transition and residual profile closure work, then
+  the profile-wise weighted Schur product theorem.
+
+## Theorem 3.1 — Pair-incidence kernel formula
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSTriadKNPairIncidenceKernelFormula.agda
+```
+
+**Status**
+
+This step is now analytically fixed from the repeated-edge Laplacian
+definition.
+
+**Closed theorem**
+
+Write the exact scripted positive-sector kernel as a repeated-pair incidence sum
+over retained resonant triads:
+
+[
+\boxed{
+L^N_{FT,\mathrm{script}}(i,j)
+ =
+-\sum_{\tau\in\mathcal T_N(i,j)}
+m_N(\tau).
+}
+]
+
+The proof is direct: each Laplacian term `m_N(tau) b_e b_e^T` contributes
+`-m_N(tau)` to the off-diagonal entry indexed by its unordered edge and `0`
+elsewhere, so the finite-to-tail block entry is exactly the negative repeated
+pair-incidence sum. Equivalently,
+
+[
+\boxed{
+K^N_{ij} := -L^N_{FT,\mathrm{script}}(i,j)
+=
+\sum_{\tau\in\mathcal T_N(i,j)} m_N(\tau)
+\ge 0.
+}
+]
+
+So the kernel-formula step is no longer the live obstruction. The structural
+profile decomposition is now also closed at the classifier/partition level.
+The next open highest-alpha work begins at the weighted Schur product
+estimates.
+
+## Theorem 3.2 — Profile decomposition
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSTriadKNPairIncidenceProfileDecomposition.agda
+```
+
+**Status**
+
+This step is now closed at the structural classifier/partition level.
+The receipt-level theorem is that once each repeated-pair incidence atom
+carries an assigned profile key, its multiplicity is exactly the sum of the
+four profile fibers, with exactly one nonzero fiber.
+
+**Closed theorem**
+
+Split the pair-incidence kernel into the live geometric regimes:
+
+```text
+forced-tail profile
+adversarial geometry profile
+transition profile
+residual profile
+```
+
+and prove that the full kernel is the bounded union of these profile
+contributions. This is now recorded as the exact partition identity
+
+`multiplicity = forcedTailPiece + adversarialPiece + transitionPiece + residualPiece`
+
+for each classified repeated-pair incidence atom.
+
+## Theorem 3.3 — Weighted Schur product bound
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSTriadKNWeightedSchurProductBound.agda
+```
+
+**Required theorem**
+
+Choose positive weights `w_N` and prove
+
+[
+R_N(w)
+======
+
+\sup_i
+\frac1{w_i}
+\sum_j |K^N_{ij}|w_j,
+]
+
+[
+C_N(w)
+======
+
+\sup_j
+\frac1{w_j}
+\sum_i |K^N_{ij}|w_i,
+]
+
+with the product estimate
+
+[
+\boxed{
+R_N(w_N)C_N(w_N)\le \frac{C^2}{N^2}.
+}
+]
+
+Then Schur gives
+
+[
+\boxed{
+|K^N|_{2\to2}\le \sqrt{R_N(w_N)C_N(w_N)}\le \frac{C}{N}.
+}
+]
+
+This is the correct theorem surface. The route does **not** require proving
+separate `R_N \lesssim 1/N` and `C_N \lesssim 1/N` bounds.
+
+## Theorem 3.4 — Profile-wise product estimates
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSTriadKNPairIncidenceProfileBounds.agda
+```
+
+**Required theorem**
+
+Prove profile-uniform weighted product bounds such as
+
+[
+\boxed{
+R_N^{FT}(w_N)C_N^{FT}(w_N)\le \frac{C_{FT}^2}{N^2},
+}
+]
+
+[
+\boxed{
+R_N^{adv}(w_N)C_N^{adv}(w_N)\le \frac{C_{adv}^2}{N^2},
+}
+]
+
+[
+\boxed{
+R_N^{trans}(w_N)C_N^{trans}(w_N)\le \frac{C_{trans}^2}{N^2},
+}
+]
+
+[
+\boxed{
+R_N^{res}(w_N)C_N^{res}(w_N)\le \frac{C_{res}^2}{N^2},
+}
+]
+
+with constants independent of `N`, then sum those profile constants into one
+uniform `C`.
+
+The sampled asymmetries are evidence for this route, not contradictions:
+
+```text
+forced-tail: row ~ N^0, column ~ N^-2, product ~ N^-2
+adversarial: row ~ N^-2, column ~ N^-1, product ~ N^-3
+
+### Forced-tail first live lemmas
+
+- `forcedTailClassIncidenceEncodingFiberBound`
+  The class-filtered raw incidence family maps into an explicit parameter
+  family with bounded fibers.
+- `forcedTailClassParameterCountBound`
+  The parameter family cardinality is bounded by the explicit multiplicity
+  formula `M_FT(N,c)`.
+- `forcedTailClassParameterCountFactorization`
+  Sharper count route: parameter count is bounded by
+  `head-count * max-tail-count`.
+- `forcedTailClassEncodingCountBoundTheorem`
+  First composed multiplicity theorem:
+  `class-count <= kappa_FT(c) * M_FT(N,c)`.
+- `forcedTailMagnitudeKernelUpperBound`
+  Each forced-tail kernel weight is bounded by an explicit envelope.
+- `forcedTailMagnitudeEnvelopeClassBound`
+  The envelope is bounded classwise by `mu_FT(N,c)`.
+- `forcedTailColumnClassIncidenceMagnitudeTheorem`
+  First composed magnitude theorem:
+  `m_N(tau) <= mu_FT(N,c)` on class-filtered incidences.
+- `forcedTailClassProductFormulaN2Bound`
+  Core arithmetic target:
+  `N^2 * M_FT(N,c) * mu_FT(N,c) <= B_FT,c`.
+- `forcedTailColumnSumByMultiplicityMagnitude`
+  Weighted column sum bounded by multiplicity profile times magnitude profile.
+```
+
+**Current forced-tail status**
+
+The forced-tail route now has a dependency-honest local closure bridge, with
+the earlier sampled exact-script witness on `N=6,8,10,12` retained as evidence
+history using the unweighted Schur test `w_N = 1`.  The checked artifact records:
+
+```text
+row_sum_sup in 0.0114691..0.0116587
+N^2 * column_sum_sup in 0.0121631..0.0139883
+N * Schur bound in 0.0118260..0.0127705
+```
+
+and fit readout:
+
+```text
+row slope ~ 0.0222
+column slope ~ -1.842
+Schur slope ~ -0.9099
+```
+
+This supports the intended forced-tail scale `row ~ N^0`, `column ~ N^-2`,
+`product ~ N^-2`.  The local closure/readout authority is now the
+dependency-honest bridge built from the concrete proof objects, while the
+theorem-facing explanatory surface remains explicit in
+`DASHI/Physics/Closure/NSTriadKNForcedTailCountingMagnitudeTheorem.agda`:
+prove a row bound `R_N^FT(w_N) <= A_FT`, a column bound
+`C_N^FT(w_N) <= B_FT / N^2`, then derive the forced-tail product bound.
+The highest-alpha subroute is now explicit there as well:
+prove a forced-tail column multiplicity bound and a forced-tail column
+magnitude bound whose product is `<= B_FT / N^2`, then promote that to the
+full forced-tail column theorem.
+That surface now also carries a forced-tail column-class split:
+`tail-end`, `near-tail`, `transition-facing`, and `degenerate/small-N`.
+The multiplicity side is now sharpened further to:
+`multiplicity profile <= raw forced-tail incidence count <= classwise multiplicity bound`.
+That count route is now refined one step further to:
+`raw forced-tail incidence count <= class-filtered raw count for class(j) <= classwise multiplicity bound`.
+The current theorem surface sharpens that once more to:
+`class-filtered raw count for class(j) <= explicit classwise formula M_FT(N,class(j)) <= broader classwise multiplicity bound`.
+That count route now also carries the explicit combinatorial package:
+encode the class-filtered incidence family into a parameter family with bounded
+fibers, then bound the parameter count by `M_FT(N,class(j))`.
+The magnitude side is now split the same way:
+`column magnitude profile for j <= explicit classwise formula mu_FT(N,class(j)) <= broader classwise magnitude bound`.
+The magnitude side now also carries an explicit envelope route:
+`m_N(tau) <= magnitude envelope <= mu_FT(N,class(j))`.
+The classwise product target is now explicit at the formula layer:
+`M_FT(N,class(j)) * mu_FT(N,class(j)) <= classwise formula product target <= broader classwise product target`.
+The arithmetic target is now also exposed in the `N^2`-scaled form:
+`N^2 * M_FT(N,class(j)) * mu_FT(N,class(j)) <= B_FT,class(j)`.
+It now also carries the explicit recombination chain from
+classwise multiplicity/magnitude/product targets to the per-column profile
+target and then to the shellwise `N^-2` column target.
+That route is now closed locally at the forced-tail layer, and the adversarial
+row/column/product bridge is also now closed locally. The next mathematical
+proof attacks for Stage 3 are therefore the remaining open profiles:
+transition and residual, followed by their combination into the global
+weighted Schur product bound.
+
+## Theorem 3.5 — Exact scripted `C/N` operator theorem
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSTriadKNPairIncidenceOperatorReceipt.agda
+```
+
+**Required theorem**
+
+Close the exact scripted operator target
+
+[
+\boxed{
+\|L^N_{FT,\mathrm{script}}\|_{\mathrm{op}} \le \frac{C}{N}.
+}
+]
+
+only after the kernel formula, profile decomposition, and weighted Schur
+product estimates are proved.
+
+## Theorem 3.6 — q_gap transfer
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSTriadKNQGapTransfer.agda
+```
+
+**Required theorem**
+
+Include the missing scaling constants in the transfer
+
+[
+\boxed{
+\|L^N_{FT,\mathrm{script}}\|_{\mathrm{op}}
+\le
+\frac{C}{N}
+\Longrightarrow
+q_{\rm gap}(N)\ge \frac{c_{\rm gap}}{N^2}.
+}
+]
+
+Only after that can the exact-operator frontier honestly advance to
+`SchurResidueScale` and the BKM/residence bridge.
+
+---
+
+# Stage 4 — Continuum/BKM passage
+
+Once Stage 3 proves the exact operator leakage bound, the next content is the PDE continuation bridge.
+
+## Theorem 4.1 — Shell leakage implies cascade contraction
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSLeakageToCascadeContraction.agda
+```
+
+**Required theorem**
+
+Let (E_N(t)) be the shell energy/enstrophy quantity controlled by the Gate 2 leakage operator. Prove a uniform recurrence of the form:
+
+[
+\boxed{
+E_{N+1}(t)
+\le
+q,E_N(t)
++
+r_N(t)
+}
+]
+
+with
+
+[
+0<q<1
+]
+
+and
+
+[
+\sum_N r_N(t)<\infty
+]
+
+uniformly on finite time intervals.
+
+A usable target is:
+
+[
+\boxed{
+\sum_{N\ge N_0} E_N(t) < \infty
+}
+]
+
+with constants independent of truncation.
+
+## Theorem 4.2 — Cascade contraction implies vorticity tail control
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSCascadeToVorticityTail.agda
+```
+
+**Required theorem**
+
+From the shell contraction, prove a tail estimate strong enough to control vorticity:
+
+[
+\boxed{
+|\omega_{\ge N}(t)|_{L^\infty}
+\le
+C,\Phi(N)
+}
+]
+
+with
+
+[
+\sum_N \Phi(N)<\infty
+]
+
+or a comparable integrable tail.
+
+The key output must be:
+
+[
+\boxed{
+\int_0^T
+|\omega(t)|_{L^\infty}
+,dt
+<
+\infty.
+}
+]
+
+That is the BKM-compatible quantity.
+
+## Theorem 4.3 — BKM continuation bridge
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSContinuumBKMPassage.agda
+```
+
+**Required theorem**
+
+For a smooth 3D incompressible Navier–Stokes solution (u),
+
+[
+\partial_t u+(u\cdot\nabla)u+\nabla p=\nu\Delta u,
+\qquad
+\nabla\cdot u=0,
+]
+
+if
+
+[
+\int_0^T
+|\omega(t)|_{L^\infty}
+,dt
+<
+\infty,
+]
+
+then the solution extends smoothly past (T).
+
+The repo does not need to reprove BKM from scratch if it imports it as an authority theorem, but it must prove that the DASHI shell/cascade estimate actually supplies the BKM hypothesis.
+
+So the required bridge is:
+
+[
+\boxed{
+\text{Gate 3 cascade estimate}
+\Longrightarrow
+\int_0^T|\omega(t)|_\infty dt<\infty.
+}
+]
+
+---
+
+# Stage 5 — Carrier-to-all-data bridge
+
+This is where the proof must stop being “for carrier-structured data.”
+
+## Theorem 5.1 — Density of admissible carriers
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSCarrierDensityAllSmoothData.agda
+```
+
+**Required theorem**
+
+For every smooth divergence-free initial datum (u_0),
+
+[
+u_0\in C^\infty,\qquad \nabla\cdot u_0=0,
+]
+
+there exists a sequence of admissible DASHI carrier data (u_0^{(m)}) such that:
+
+[
+\boxed{
+u_0^{(m)}\to u_0
+}
+]
+
+in a norm strong enough for local well-posedness and continuation, for example:
+
+[
+H^s,\qquad s>\frac52.
+]
+
+## Theorem 5.2 — Uniform estimates independent of carrier depth
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSUniformCarrierEstimate.agda
+```
+
+**Required theorem**
+
+For the approximating carrier solutions (u^{(m)}(t)), prove a uniform bound:
+
+[
+\boxed{
+\sup_m
+\sup_{t\in[0,T]}
+|u^{(m)}(t)|_{H^s}
+<
+\infty
+}
+]
+
+or a BKM-equivalent uniform bound:
+
+[
+\boxed{
+\sup_m
+\int_0^T
+|\omega^{(m)}(t)|_\infty
+,dt
+<
+\infty.
+}
+]
+
+Without uniformity in (m), the carrier proof does not pass to arbitrary smooth data.
+
+## Theorem 5.3 — Compactness/pass-to-limit theorem
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSCarrierLimitPassage.agda
+```
+
+**Required theorem**
+
+Show that a subsequence (u^{(m_j)}) converges to a genuine Navier–Stokes solution (u) with initial data (u_0), and that the regularity estimate survives the limit.
+
+Target:
+
+[
+\boxed{
+u^{(m_j)}\to u
+}
+]
+
+and
+
+[
+\boxed{
+u\text{ is smooth on }[0,T].
+}
+]
+
+This is where Aubin–Lions / compactness / stability estimates would enter.
+
+---
+
+# Stage 6 — Full Clay gateway theorem
+
+This is the final theorem that packages everything.
+
+## Theorem 6.1 — Arbitrary smooth data global regularity
+
+**Needed file/surface**
+
+```text
+DASHI/Physics/Closure/NSFullClayGatewayTheorem.agda
+```
+
+**Required theorem**
+
+For every smooth divergence-free initial datum (u_0) on the Clay domain,
+
+[
+\boxed{
+\exists!,u(t)\text{ smooth for all }t\ge0
+}
+]
+
+solving 3D incompressible Navier–Stokes.
+
+A canonical statement:
+
+[
+\boxed{
+u_0\in C^\infty,\ \nabla\cdot u_0=0
+\Longrightarrow
+u\in C^\infty([0,\infty)\times\Omega).
+}
+]
+
+## The required dependency chain
+
+This theorem may only flip true after:
+
+```text
+Exact K_N(A) operator transfer
+  ↓
+Outside-seam absorption
+  ↓
+Leakage/cascade contraction
+  ↓
+BKM/vorticity continuation
+  ↓
+Carrier-density/all-data passage
+  ↓
+Full smooth global regularity
+```
+
+---
+
+# The exact content agents need first
+
+The **first theorem they should try to prove** is not Stage 6. It is this:
+
+```text
+ExactKNAOperatorTransfer:
+  The Gate 2-A seam-local transported ratio equals or uniformly controls
+  the actual normalized leakage operator K_N(A) on the lifted near-extremizer cone.
+```
+
+Formal target:
+
+[
+\boxed{
+\forall x\in\mathcal E_N(\varepsilon),\qquad
+\langle J_Nx,L_{\rm neg}(A)J_Nx\rangle
+\le
+\theta_*
+\langle J_Nx,L_{\rm abs}(A)J_Nx\rangle
+}
+]
+
+with
+
+[
+\theta_*<1
+]
+
+and with (J_N,L_{\rm neg}(A),L_{\rm abs}(A)) being the **actual operator-level objects**, not seam-local replacements.
+
+The companion theorem is:
+
+[
+\boxed{
+\langle J_Nx,L_{\rm neg}^{\rm outside}J_Nx\rangle
+\le
+\eta_{\rm out}
+\langle J_Nx,L_{\rm abs}(A)J_Nx\rangle
+}
+]
+
+with
+
+[
+\theta_*+\eta_{\rm out}<1.
+]
+
+# Why not insert it?
+
+Because that would require proving identities/inequalities about the actual NS leakage operator. The current seam-local arithmetic witness proves:
+
+[
+\frac16+\frac1{12}=\frac14<1
+]
+
+inside the chosen model. It does **not** prove:
+
+[
+K_N(A)
+]
+
+for the full PDE has no outside-seam contribution or that its outside-seam contribution is absorbed.
+
+So the honest instruction to the agents is:
+
+```text
+Do not flip Clay or full-NS promotion flags.
+
+Next theorem:
+  exact K_N(A) transfer + outside-seam absorption.
+
+Only after that:
+  cascade contraction → BKM → all-data passage → Clay gateway.
+```
+
+That is the content they need.
+
+
+Yes. That agent response is honest, and it identifies the real next mathematical wall.
+
+The live blocker is now:
+
+[
+\boxed{
+\texttt{PairIncidenceCNTheorem}:
+\qquad
+|L^{N}*{FT,\mathrm{script}}|*{\mathrm{op}}
+\le
+\frac{C}{N}.
+}
+]
+
+That is not bookkeeping. It is a new profile-uniform operator estimate.
+
+## Important refinement
+
+The agent says the missing theorem needs “row and column sums both decay.” That is stronger than necessary.
+
+For a Schur test, the actual target can be:
+
+[
+\boxed{
+R_N C_N \le \frac{C^2}{N^2}
+}
+]
+
+where
+
+[
+R_N=\sup_i\sum_j |K^N_{ij}|,
+\qquad
+C_N=\sup_j\sum_i |K^N_{ij}|.
+]
+
+Then:
+
+[
+|K^N|_{\mathrm{op}}
+\le
+\sqrt{R_NC_N}
+\le
+\frac{C}{N}.
+]
+
+So the sampled regimes are not automatically incompatible:
+
+```text id="gr7h04"
+forced-tail:
+  row ~ N^0, column ~ N^-2
+  sqrt(row * column) ~ N^-1
+
+adversarial geometry:
+  row ~ N^-2, column ~ N^-1
+  sqrt(row * column) ~ N^-3/2
+```
+
+The real theorem should not demand both row and column decay as (1/N). It should demand a **profile-uniform Schur product bound**.
+
+## Exact next theorem to state
+
+Create or sharpen:
+
+```text id="57sd2u"
+DASHI/Physics/Closure/NSTriadKNPairIncidenceCNTheorem.agda
+```
+
+Target statement:
+
+[
+\boxed{
+\exists C>0,\ \forall N\ge N_0,\qquad
+|L^N_{FT,\mathrm{script}}|_{\mathrm{op}}
+\le
+\frac{C}{N}.
+}
+]
+
+Proof should factor through:
+
+[
+\boxed{
+\sup_i \sum_j |K^N_{ij}|,w_j/w_i
+\le A_N
+}
+]
+
+and
+
+[
+\boxed{
+\sup_j \sum_i |K^N_{ij}|,w_i/w_j
+\le B_N
+}
+]
+
+with:
+
+[
+\boxed{
+A_NB_N\le \frac{C^2}{N^2}.
+}
+]
+
+That weighted version is probably the right theorem. The unweighted row/column telemetry is useful evidence, but the real proof may need a weight (w) adapted to shell profile, forced-tail direction, or degree.
+
+## Exact lemmas agents need
+
+### Lemma 1 — pair-incidence kernel formula
+
+File target:
+
+```text id="rh5m9u"
+DASHI/Physics/Closure/NSTriadKNPairIncidenceKernelFormula.agda
+```
+
+Prove that (L^N_{FT,\mathrm{script}}) has an explicit nonnegative repeated-pair incidence kernel:
+
+[
+L^N_{FT,\mathrm{script}}(i,j)
+=============================
+
+\sum_{\tau\in\mathcal T_N(i,j)}
+m_N(\tau).
+]
+
+Needed because the counting theorem needs a concrete kernel, not an opaque matrix.
+
+---
+
+### Lemma 2 — profile decomposition
+
+File target:
+
+```text id="fli4bx"
+DASHI/Physics/Closure/NSTriadKNPairIncidenceProfileDecomposition.agda
+```
+
+Split pair incidences into regimes:
+
+```text id="r9v5aw"
+forced-tail profile
+adversarial geometry profile
+transition profile
+residual profile
+```
+
+Then prove the kernel sum is the disjoint or bounded union of these regimes.
+
+---
+
+### Lemma 3 — weighted Schur product theorem
+
+File target:
+
+```text id="u2euw8"
+DASHI/Physics/Closure/NSTriadKNWeightedSchurProductBound.agda
+```
+
+Statement:
+
+[
+R_N(w)
+======
+
+\sup_i \frac1{w_i}\sum_j |K^N_{ij}|w_j
+]
+
+[
+C_N(w)
+======
+
+\sup_j \frac1{w_j}\sum_i |K^N_{ij}|w_i
+]
+
+and:
+
+[
+R_N(w)C_N(w)\le \frac{C^2}{N^2}.
+]
+
+Then:
+
+[
+|K^N|_{2\to2}\le\frac{C}{N}.
+]
+
+This is the highest-alpha lemma because it can absorb asymmetric row/column behavior.
+
+---
+
+### Lemma 4 — profile-wise estimates
+
+File target:
+
+```text id="71k6i4"
+DASHI/Physics/Closure/NSTriadKNPairIncidenceProfileBounds.agda
+```
+
+Required inequalities:
+
+[
+R_N^{FT}C_N^{FT}\le \frac{C_{FT}^2}{N^2},
+]
+
+[
+R_N^{adv}C_N^{adv}\le \frac{C_{adv}^2}{N^2},
+]
+
+[
+R_N^{trans}C_N^{trans}\le \frac{C_{trans}^2}{N^2},
+]
+
+with constants independent of (N).
+
+This is the actual counting/magnitude theorem.
+
+---
+
+### Lemma 5 — (C/N) operator theorem
+
+File target:
+
+```text id="upakq0"
+DASHI/Physics/Closure/NSTriadKNPairIncidenceOperatorReceipt.agda
+```
+
+Flip only after Lemmas 1–4:
+
+```agda id="orn1xv"
+pairIncidenceKernelFormulaProved = true
+pairIncidenceProfileDecompositionProved = true
+weightedSchurProductBoundProved = true
+pairIncidenceCNTheoremProved = true
+```
+
+Until then, keep them false.
+
+---
+
+### Lemma 6 — (q_{\rm gap}(N)) transfer
+
+File target:
+
+```text id="lsq4rz"
+DASHI/Physics/Closure/NSTriadKNQGapTransfer.agda
+```
+
+Needed theorem:
+
+[
+|L^N_{FT,\mathrm{script}}|*{\rm op}
+\le
+\frac{C}{N}
+\Longrightarrow
+q*{\rm gap}(N)
+\ge
+\frac{c_{\rm gap}}{N^2}.
+]
+
+This must include the missing scaling constants. The agent should not just assert it.
+
+## What not to do
+
+Do **not** flip:
+
+```agda id="g4qq9j"
+pairIncidenceCNTheoremProved = true
+qGapTransferProved = true
+exactOperatorFrontierClosed = true
+clayPromoted = true
+```
+
+from sampled telemetry.
+
+The uploaded Gate 2-A/Gate 2 evidence is strong for the seam-local extremizer route, including (\theta_N\approx 1/6) on (N=6,8,10), but that is not the same as this profile-uniform (L_{FT,\mathrm{script}}^N) operator theorem. 
+
+## Best instruction to the agents
+
+Tell them:
+
+```text id="czr1o2"
+Do not try to prove both row and column sums decay separately.
+
+Prove a profile-uniform weighted Schur product bound:
+
+  R_N(w) C_N(w) ≤ C²/N².
+
+Use the sampled regimes as clues:
+  forced-tail asymmetry can still close because row ~ N⁰ and column ~ N⁻².
+  adversarial geometry can still close because row ~ N⁻² and column ~ N⁻¹.
+
+The next theorem is the weighted pair-incidence counting/magnitude theorem.
+```
+
+## One-line state
+
+[
+\boxed{
+\text{The next Clay-relevant bottleneck is } |L^N_{FT,\mathrm{script}}|_{\rm op}\le C/N,\text{ best attacked by a weighted Schur product bound, not by requiring both row and column sums decay separately.}
+}
+]

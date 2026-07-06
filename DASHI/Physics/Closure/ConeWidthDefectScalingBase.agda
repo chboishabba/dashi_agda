@@ -38,10 +38,10 @@ record ConeWidthDefectScalingModel : Set₁ where
     ε α β : N
     η-cross η-pure : N
 
-    cross≤αε : η-cross ≤ α * ε
-    pure≤βε² : η-pure ≤ β * (ε * ε)
+    cross≤αε : η-cross ≤ (α * ε)
+    pure≤βε² : η-pure ≤ (β * (ε * ε))
 
-    *-mono : ∀ a b c d → a ≤ b → c ≤ d → a * c ≤ b * d
+    *-mono : ∀ a b c d → a ≤ b → c ≤ d → (a * c) ≤ (b * d)
 
   total≤αε+βε² : (η-cross + η-pure) ≤ ((α * ε) + (β * (ε * ε)))
   total≤αε+βε² =

@@ -1,6 +1,6 @@
 module DASHI.Physics.YangMills.P10LargeFieldFiniteCertificate where
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat renaming (Nat to ℕ)
@@ -18,7 +18,7 @@ data InjectsInto {A : Set} : List A → List A → Set where
     InjectsInto xs ys →
     InjectsInto (x ∷ xs) (x ∷ ys)
   inject-drop :
-    ∀ {x y xs ys} →
+    ∀ {y xs ys} →
     InjectsInto xs ys →
     InjectsInto xs (y ∷ ys)
 
@@ -36,6 +36,9 @@ InjectsInto-refl (x ∷ xs) = inject-keep (InjectsInto-refl xs)
 
 ≤-rewrite-right : ∀ {a b c} → a ≤ b → b ≡ c → a ≤ c
 ≤-rewrite-right a≤b refl = a≤b
+
+sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
 
 InjectionLengthBound :
   ∀ {A : Set} →
@@ -142,4 +145,4 @@ BadBlocksCoverComplexityFromFiniteCertificate cert k X lf =
            witnesses
            (P10LargeFieldFiniteCertificate.badBlocksOf cert k X)
            injection))
-       badCountEq
+       (sym badCountEq)

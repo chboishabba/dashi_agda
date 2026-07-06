@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSTriadKNPairIncidenceRowColumnAuditReceipt where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
@@ -22,7 +22,7 @@ canonicalArtifactMarkdown =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "Row/column audit status: under the checked exact-script normalization, the forced-tail family has row_sum_sup approximately constant and column_sum_sup approximately N^-2, while the uniform-geometry adversarial family has row_sum_sup approximately N^-2 and column_sum_sup approximately N^-1. The sampled N^-1 Schur scale survives, but a profile-independent theorem is not closed."
+  "Row/column audit status: under the checked exact-script normalization, the forced-tail family has row_sum_sup approximately constant and column_sum_sup approximately N^-2, while the uniform-geometry adversarial family has row_sum_sup approximately N^-2 and column_sum_sup approximately N^-1. Those asymmetries are compatible with a weighted Schur product route R_N(w_N) * C_N(w_N) <= C^2 / N^2, but that theorem is not yet proved."
 
 record NSTriadKNPairIncidenceRowColumnAuditReceipt : Setω where
   constructor mkNSTriadKNPairIncidenceRowColumnAuditReceipt
@@ -46,6 +46,18 @@ record NSTriadKNPairIncidenceRowColumnAuditReceipt : Setω where
     readoutText : String
     readoutTextIsCanonical :
       readoutText ≡ canonicalReadoutText
+
+    weightedSchurProductRouteStated : Bool
+    weightedSchurProductRouteStatedIsTrue :
+      weightedSchurProductRouteStated ≡ true
+
+    forcedTailAsymmetryCompatibleObserved : Bool
+    forcedTailAsymmetryCompatibleObservedIsTrue :
+      forcedTailAsymmetryCompatibleObserved ≡ true
+
+    adversarialAsymmetryCompatibleObserved : Bool
+    adversarialAsymmetryCompatibleObservedIsTrue :
+      adversarialAsymmetryCompatibleObserved ≡ true
 
     exactScriptConstantColumnClaimValidated : Bool
     exactScriptConstantColumnClaimValidatedIsFalse :
@@ -86,6 +98,12 @@ canonicalNSTriadKNPairIncidenceRowColumnAuditReceipt =
     canonicalArtifactMarkdown
     refl
     canonicalReadoutText
+    refl
+    true
+    refl
+    true
+    refl
+    true
     refl
     false
     refl

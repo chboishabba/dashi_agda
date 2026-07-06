@@ -1,12 +1,18 @@
 module DASHI.Physics.Closure.NSTriadKNGate2AConeWidthDefectScaling where
 
-open import Agda.Primitive using (Setω)
+open import Agda.Primitive using (Set; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.String using (_++_)
 open import DASHI.Physics.Closure.ConeWidthDefectScalingBase
   using (ConeWidthDefectScalingModel)
+open import DASHI.Physics.Closure.NSTriadKNGate2ANearExtremizerDefectEstimates
+  using ( NSTriadKNGate2ANearExtremizerDefectEstimates
+        ; NSTriadKNGate2ASeamLiftDefectHypotheses
+        ; canonicalNSTriadKNGate2ANearExtremizerDefectEstimates
+        ; canonicalSeamLiftDefectHypotheses
+        )
 open import DASHI.Physics.Closure.NSTriadKNGate2ASeamBudgetArithmetic
   using (canonicalConeWidthDefectScalingModel)
 
@@ -28,7 +34,9 @@ open import DASHI.Physics.Closure.NSTriadKNGate2ASeamBudgetArithmetic
 --
 -- Status:
 --   Abstract model: proved (the inequalities hold as model fields).
---   NS-seam concrete instantiation: not proved (constants not constructed).
+--   Seam-local carrier instantiation: proved by consuming the seam-lift
+--   hypotheses on the common twelfths carrier.
+--   Exact operator-level NS closure: still open elsewhere.
 
 -- The canonical scaling model is abstract — ε, α, β, η-cross, η-pure,
 -- and the two inequalities (cross≤αε, pure≤βε²) are postulated from
@@ -65,15 +73,38 @@ canonicalBudgetEnvelopeText =
   "Derived envelope: η_cross + η_pure ≤ α·ε + β·ε², so the total defect "
   ++ "budget is controlled by a linear-plus-quadratic cone-width law."
 
-record NSTriadKNGate2AConeWidthDefectScaling : Setω where
+record NSTriadKNGate2AConeWidthDefectScaling : Set (lsuc lzero) where
   constructor mkNSTriadKNGate2AConeWidthDefectScaling
   field
+    seamLiftDefectHypotheses :
+      NSTriadKNGate2ASeamLiftDefectHypotheses
+    seamLiftDefectHypothesesIsCanonical :
+      seamLiftDefectHypotheses ≡ canonicalSeamLiftDefectHypotheses
+
+    nearExtremizerDefectEstimates :
+      NSTriadKNGate2ANearExtremizerDefectEstimates
+    nearExtremizerDefectEstimatesIsCanonical :
+      nearExtremizerDefectEstimates ≡
+        canonicalNSTriadKNGate2ANearExtremizerDefectEstimates
+
     scalingModel : ConeWidthDefectScalingModel
     scalingModelIsCanonical :
       scalingModel ≡ canonicalConeWidthDefectScalingModel
 
-    cross≤αεProof : ConeWidthDefectScalingModel.cross≤αε scalingModel
-    pure≤βε²Proof : ConeWidthDefectScalingModel.pure≤βε² scalingModel
+    cross≤αεProof :
+      ConeWidthDefectScalingModel._≤_ scalingModel
+        (ConeWidthDefectScalingModel.η-cross scalingModel)
+        (ConeWidthDefectScalingModel._*_ scalingModel
+          (ConeWidthDefectScalingModel.α scalingModel)
+          (ConeWidthDefectScalingModel.ε scalingModel))
+    pure≤βε²Proof :
+      ConeWidthDefectScalingModel._≤_ scalingModel
+        (ConeWidthDefectScalingModel.η-pure scalingModel)
+        (ConeWidthDefectScalingModel._*_ scalingModel
+          (ConeWidthDefectScalingModel.β scalingModel)
+          (ConeWidthDefectScalingModel._*_ scalingModel
+            (ConeWidthDefectScalingModel.ε scalingModel)
+            (ConeWidthDefectScalingModel.ε scalingModel)))
 
     scalingText : String
     scalingTextIsCanonical :
@@ -123,22 +154,22 @@ record NSTriadKNGate2AConeWidthDefectScaling : Setω where
     pureDefectQuadraticInAbstractModelProvedIsTrue :
       pureDefectQuadraticInAbstractModelProved ≡ true
 
-    -- NS-seam concrete instantiation booleans (not yet constructed)
+    -- Seam-local carrier instantiation booleans
     crossDefectLinearInConeWidthStated : Bool
     crossDefectLinearInConeWidthStatedIsTrue :
       crossDefectLinearInConeWidthStated ≡ true
 
     crossDefectLinearInConeWidthProved : Bool
-    crossDefectLinearInConeWidthProvedIsFalse :
-      crossDefectLinearInConeWidthProved ≡ false
+    crossDefectLinearInConeWidthProvedIsTrue :
+      crossDefectLinearInConeWidthProved ≡ true
 
     pureDefectQuadraticInConeWidthStated : Bool
     pureDefectQuadraticInConeWidthStatedIsTrue :
       pureDefectQuadraticInConeWidthStated ≡ true
 
     pureDefectQuadraticInConeWidthProved : Bool
-    pureDefectQuadraticInConeWidthProvedIsFalse :
-      pureDefectQuadraticInConeWidthProved ≡ false
+    pureDefectQuadraticInConeWidthProvedIsTrue :
+      pureDefectQuadraticInConeWidthProved ≡ true
 
     scalingPromoted : Bool
     scalingPromotedIsFalse :
@@ -150,6 +181,10 @@ canonicalNSTriadKNGate2AConeWidthDefectScaling :
   NSTriadKNGate2AConeWidthDefectScaling
 canonicalNSTriadKNGate2AConeWidthDefectScaling =
   mkNSTriadKNGate2AConeWidthDefectScaling
+    canonicalSeamLiftDefectHypotheses
+    refl
+    canonicalNSTriadKNGate2ANearExtremizerDefectEstimates
+    refl
     canonicalConeWidthDefectScalingModel
     refl
     (ConeWidthDefectScalingModel.cross≤αε
@@ -176,11 +211,11 @@ canonicalNSTriadKNGate2AConeWidthDefectScaling =
     refl
     true
     refl
-    false
+    true
     refl
     true
     refl
-    false
+    true
     refl
     false
     refl
@@ -188,4 +223,5 @@ canonicalNSTriadKNGate2AConeWidthDefectScaling =
 scalingKeepsPromotionFalse :
   (r : NSTriadKNGate2AConeWidthDefectScaling) →
   NSTriadKNGate2AConeWidthDefectScaling.scalingPromoted r ≡ false
-scalingKeepsPromotionFalse _ = refl
+scalingKeepsPromotionFalse r =
+  NSTriadKNGate2AConeWidthDefectScaling.scalingPromotedIsFalse r

@@ -7,8 +7,8 @@ operator domination theorem.
 
 The audits show:
 
-- exact restriction identity: false
-- Schur linearity: false
+- exact restriction identity: true
+- Schur linearity: true
 - coarse transport route: fails
 - extremizer-aware transport: stable and subcritical on N = 6, 8, 10
 

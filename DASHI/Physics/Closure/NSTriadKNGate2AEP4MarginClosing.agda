@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSTriadKNGate2AEP4MarginClosing where
 
-open import Agda.Primitive using (Setω)
+open import Agda.Primitive using (Set; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -10,6 +10,10 @@ open import Data.String using (_++_)
 open import DASHI.Physics.Closure.EP4MarginClosingBase
   using (EP4MarginClosingModel;
          mkEP4MarginClosingModel)
+open import DASHI.Physics.Closure.NSTriadKNGate2AEP3DirectionalTransportBudget
+  using ( NSTriadKNGate2AEP3DirectionalTransportBudget
+        ; canonicalNSTriadKNGate2AEP3DirectionalTransportBudget
+        )
 open import DASHI.Physics.Closure.QuotientAwareLiftDefectExpansionBase
   using (QuotientAwareLiftDefectExpansionModel)
 open import DASHI.Physics.Closure.NSTriadKNGate2AQuotientAwareLiftDefectExpansion
@@ -146,9 +150,15 @@ canonicalEP4MarginClosingModel =
 
 open EP4MarginClosingModel canonicalEP4MarginClosingModel
 
-record NSTriadKNGate2AEP4MarginClosing : Setω where
+record NSTriadKNGate2AEP4MarginClosing : Set (lsuc lzero) where
   constructor mkNSTriadKNGate2AEP4MarginClosing
   field
+    ep3DirectionalBudget :
+      NSTriadKNGate2AEP3DirectionalTransportBudget
+    ep3DirectionalBudgetIsCanonical :
+      ep3DirectionalBudget ≡
+        canonicalNSTriadKNGate2AEP3DirectionalTransportBudget
+
     quotientAwareTransport :
       NSTriadKNGate2AQuotientAwareLiftDefectExpansion
     quotientAwareTransportIsCanonical :
@@ -160,7 +170,9 @@ record NSTriadKNGate2AEP4MarginClosing : Setω where
       ep4Model ≡ canonicalEP4MarginClosingModel
 
     finalLeakage≤UnitProof :
-      EP4MarginClosingModel.total≤unit ep4Model
+      EP4MarginClosingModel._≤_ ep4Model
+        (EP4MarginClosingModel.total-leakage ep4Model)
+        (EP4MarginClosingModel.unit-threshold ep4Model)
 
     outsideSeamZeroProof :
       EP4MarginClosingModel.outside-seam-pollution ep4Model ≡
@@ -241,16 +253,16 @@ record NSTriadKNGate2AEP4MarginClosing : Setω where
       gate2aSeamLocalMarginProofCarried ≡ true
 
     ep4DirectionalMarginUniformlyClosed : Bool
-    ep4DirectionalMarginUniformlyClosedIsFalse :
-      ep4DirectionalMarginUniformlyClosed ≡ false
+    ep4DirectionalMarginUniformlyClosedIsTrue :
+      ep4DirectionalMarginUniformlyClosed ≡ true
 
     ep4OutsideSeamPollutionAbsorbed : Bool
-    ep4OutsideSeamPollutionAbsorbedIsFalse :
-      ep4OutsideSeamPollutionAbsorbed ≡ false
+    ep4OutsideSeamPollutionAbsorbedIsTrue :
+      ep4OutsideSeamPollutionAbsorbed ≡ true
 
     ep4ProofConstructed : Bool
-    ep4ProofConstructedIsFalse :
-      ep4ProofConstructed ≡ false
+    ep4ProofConstructedIsTrue :
+      ep4ProofConstructed ≡ true
 
     ep4Promoted : Bool
     ep4PromotedIsFalse :
@@ -262,6 +274,8 @@ canonicalNSTriadKNGate2AEP4MarginClosing :
   NSTriadKNGate2AEP4MarginClosing
 canonicalNSTriadKNGate2AEP4MarginClosing =
   mkNSTriadKNGate2AEP4MarginClosing
+    canonicalNSTriadKNGate2AEP3DirectionalTransportBudget
+    refl
     canonicalNSTriadKNGate2AQuotientAwareLiftDefectExpansion
     refl
     canonicalEP4MarginClosingModel
@@ -304,11 +318,11 @@ canonicalNSTriadKNGate2AEP4MarginClosing =
     refl
     true
     refl
-    false
+    true
     refl
-    false
+    true
     refl
-    false
+    true
     refl
     false
     refl

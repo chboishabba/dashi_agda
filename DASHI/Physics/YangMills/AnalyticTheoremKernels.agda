@@ -7,9 +7,9 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Maybe using (Maybe; just)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.List.Base using (length)
-open import Data.Nat.Base public using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base public using (_≤_; z≤n; s≤s) renaming (_^_ to _^Nat_)
 
-open import DASHI.Core.Prelude using (_×_; _≥_; fst; snd)
+open import DASHI.Core.Prelude using (_×_; _≥_; fst; snd; proj₂)
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ
   ; _≤ℝ_
@@ -22,6 +22,10 @@ open import DASHI.Foundations.RealAnalysisAxioms using
   ; _*ℝ_
   )
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
+open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
+  ( dashi-internal-proof
+  ; mixedReducer
+  )
 
 open import DASHI.Physics.YangMills.ClayPromotionAuthorityGate as ClayAuthority using
   ( ClayPromotionAuthorityGate )
@@ -33,7 +37,7 @@ import DASHI.Physics.YangMills.GraphCombinatorics as GraphCombinatorics
 import DASHI.Physics.YangMills.LocalLatticeDischargePipeline as LocalLattice
 import DASHI.Physics.YangMills.StepVAssemblyLemmaQueue as Assembly
 
-open import DASHI.Physics.YangMills.BalabanAnisotropicDiameterCompatibility using
+open import DASHI.Physics.YangMills.BalabanAnisotropicDiameterCompatibility public using
   ( Polymer
   ; Edge
   ; SmallFieldRegularity
@@ -62,6 +66,8 @@ open import DASHI.Physics.YangMills.P10BalabanFaithfulnessBridge as P10Faithful 
 open import DASHI.Physics.YangMills.P33BalabanMetricFaithfulnessBridge as P33Faithful using
   ( P33BalabanMetricObjectAdapter
   ; P33BalabanSourceAnchor
+  ; P33ActualBalabanMetricSourceTheorem
+  ; P33BalabanDashiMetricAgreement
   ; P33BalabanMetricFaithfulnessBridge
   ; P33BalabanMetricFaithfulnessReceipt
   ; P33BalabanSourceMetricTheorem
@@ -70,8 +76,11 @@ open import DASHI.Physics.YangMills.P33BalabanMetricFaithfulnessBridge as P33Fai
   ; P33PerturbationStabilityKernel
   ; P33BalabanMetricDischarge
   ; P33BalabanSourceReconstructionKernel
+  ; P33ActualBalabanMetricSourceTheoremFromPerturbationKernel
+  ; P33BalabanDashiMetricAgreementFromFaithfulnessBridge
   ; P33BalabanSourceMetricTheoremFromPerturbationKernel
   ; P33BalabanSourceReconstructionKernelFromPieces
+  ; P33BalabanSourceReconstructionKernelFromActualBalaban
   ; P33LocalMetricPositiveFromKernel
   ; P33LinkWeightCarriesUniformFloorFromKernel
   ; P33LinkWeightPositiveFromKernel
@@ -81,8 +90,9 @@ open import DASHI.Physics.YangMills.P33BalabanMetricFaithfulnessBridge as P33Fai
 -- source-intake closure when DASHI moves from route representation to
 -- repo-local analytic proof terms.
 
+open import DASHI.Physics.YangMills.P10BalabanFaithfulnessBridge public using (_^ℝ_)
+
 postulate
-  _^ℝ_ : ℝ → ℝ → ℝ
   fromNat : ℕ → ℝ
   ≤ℝ-refl : ∀ {x : ℝ} → x ≤ℝ x
   ≤ℝ-trans : ∀ {a b c : ℝ} → a ≤ℝ b → b ≤ℝ c → a ≤ℝ c
@@ -130,7 +140,7 @@ countPolymersByDiameter : ℕ → ℝ
 countPolymersByDiameter = Entropy.countPolymersByDiameter
 
 activity : Polymer → ℝ
-activity = Entropy.activity
+activity X = Entropy.activity (P10SupportBlocks X)
 
 shellContribution : ℕ → ℝ
 shellContribution = Entropy.shellContribution
@@ -226,8 +236,10 @@ postulate
   C-dec : ℕ
   countDecorations : Skeleton → ℕ
 
+Summable : (ℕ → ℝ) → Set
+Summable = Entropy.Summable
+
 postulate
-  Summable : (ℕ → ℝ) → Set
   Matrix : Set
   PositiveDefinite : Matrix → Set
   det : Matrix → ℝ
@@ -511,7 +523,6 @@ P10BadBlockWeightSuppressionFromTail :
   BadBlock k b →
   blockWeight k b ≤ℝ decayBase ^ℝ blockPenalty k b
 P10BadBlockWeightSuppressionFromTail tail-lower gaussian decay-compare k b bad
-  rewrite refl
   =
     decay-compare
       k
@@ -564,8 +575,8 @@ currentP10ActivityFactorisationKernel = record
       ProductWeightsSuppressedByPenaltySum
   }
 
-currentP10LargeFieldKernel : P10LargeFieldTheoremKernel
-currentP10LargeFieldKernel =
+currentP10LargeFieldKernelVal : P10LargeFieldTheoremKernel
+currentP10LargeFieldKernelVal =
   P10LargeFieldKernelFromSubkernels
     currentP10LargeFieldGeometryKernel
     currentP10ActivityFactorisationKernel
@@ -583,7 +594,7 @@ record P10AbstractLargeFieldModel : Set₁ where
 
 currentP10AbstractLargeFieldModel : P10AbstractLargeFieldModel
 currentP10AbstractLargeFieldModel = record
-  { currentP10LargeFieldKernel = currentP10LargeFieldKernel
+  { currentP10LargeFieldKernel = currentP10LargeFieldKernelVal
   ; internallyConstructed = true
   ; noClayPromotion = refl
   }
@@ -949,7 +960,7 @@ postulate
 
   currentP33AgreesOnSmallFieldRegularity :
     ∀ k X →
-    P10Faithful._↔_
+    P33Faithful._↔_
       (SmallFieldRegularity k X)
       (ImportedBalabanSmallFieldRegularity k X)
 
@@ -1143,6 +1154,40 @@ currentP33BalabanMetricFaithfulnessReceipt = record
   ; noClayPromotion = refl
   }
 
+currentP33BalabanDashiMetricAgreement :
+  P33BalabanDashiMetricAgreement
+    Polymer
+    Edge
+    SmallFieldRegularity
+    P33AbstractLocalMetric
+    P33AbstractBackgroundMetric
+    P33AbstractPerturbation
+    w-weight
+    AnisotropicDiameter.diam-ordinary
+    AnisotropicDiameter.d-weighted
+    (P33BalabanMetricObjectAdapter.BalabanSmallFieldRegularity
+      (P33BalabanMetricFaithfulnessBridge.objectAdapter
+        currentP33BalabanMetricFaithfulnessBridge))
+    (P33BalabanMetricObjectAdapter.BalabanLocalMetric
+      (P33BalabanMetricFaithfulnessBridge.objectAdapter
+        currentP33BalabanMetricFaithfulnessBridge))
+    (P33BalabanMetricObjectAdapter.BalabanBackgroundMetric
+      (P33BalabanMetricFaithfulnessBridge.objectAdapter
+        currentP33BalabanMetricFaithfulnessBridge))
+    (P33BalabanMetricObjectAdapter.BalabanMetricPerturbation
+      (P33BalabanMetricFaithfulnessBridge.objectAdapter
+        currentP33BalabanMetricFaithfulnessBridge))
+    (P33BalabanMetricObjectAdapter.BalabanLinkWeight
+      (P33BalabanMetricFaithfulnessBridge.objectAdapter
+        currentP33BalabanMetricFaithfulnessBridge))
+    AnisotropicDiameter.diam-ordinary
+    AnisotropicDiameter.d-weighted
+currentP33BalabanDashiMetricAgreement =
+  P33BalabanDashiMetricAgreementFromFaithfulnessBridge
+    currentP33BalabanMetricFaithfulnessBridge
+    (λ k X → refl)
+    (λ k X → refl)
+
 currentP33PerturbationStabilityKernel :
   P33PerturbationStabilityKernel
     Polymer
@@ -1169,6 +1214,29 @@ currentP33PerturbationStabilityKernel = record
   ; linkWeightComparableToMetric =
       currentP33MetricBelowLinkWeight
   }
+
+currentP33ActualBalabanMetricSourceTheorem :
+  P33ActualBalabanMetricSourceTheorem
+    Polymer
+    Edge
+    SmallFieldRegularity
+    P33AbstractLocalMetric
+    P33AbstractBackgroundMetric
+    P33AbstractPerturbation
+    supEdgePerturbation
+    admissibleScale
+    w-weight
+    isEdgeOf
+    AnisotropicDiameter.diam-ordinary
+    AnisotropicDiameter.d-weighted
+    ε-real-const
+    m-background
+currentP33ActualBalabanMetricSourceTheorem =
+  P33ActualBalabanMetricSourceTheoremFromPerturbationKernel
+    currentP33BalabanSourceAnchor
+    currentP33PerturbationStabilityKernel
+    (AnisotropicDiameter.P33bWeightedTreeDistanceDominatesOrdinaryDiameter.weightedDiameterDomination
+      AnisotropicDiameter.currentP33bWeightedTreeDistanceDominatesOrdinaryDiameter)
 
 currentP33LocalMetricPositiveFromBridge :
   ∀ k X e →
@@ -1265,45 +1333,6 @@ currentP33BalabanMetricDischarge = record
   ; noClayPromotion = refl
   }
 
-currentP33BalabanSourceReconstructionKernel :
-  P33BalabanSourceReconstructionKernel
-    Polymer
-    Edge
-    SmallFieldRegularity
-    isEdgeOf
-    P33AbstractLocalMetric
-    P33AbstractBackgroundMetric
-    P33AbstractPerturbation
-    supEdgePerturbation
-    admissibleScale
-    w-weight
-    ε-real-const
-    m-background
-currentP33BalabanSourceReconstructionKernel =
-  P33BalabanSourceReconstructionKernelFromPieces
-    currentP33BalabanSourceAnchor
-    currentP33BalabanSourceMetricTheorem
-    currentP33BalabanMetricDischarge
-
-currentP33SourceAnalyticDischargePackage :
-  AnisotropicDiameter.P33a1AnalyticDischargePackage
-currentP33SourceAnalyticDischargePackage = record
-  { graphAdapter =
-      AnisotropicDiameter.currentBalabanP33a1GraphAdapter
-  ; laneA =
-      AnisotropicDiameter.currentSmallFieldToMetricLane
-  ; laneB =
-      currentP33BridgeMetricToPositiveLinkLane
-  }
-
-SmallFieldRegularityControlsPerturbationFromKernel :
-  P33SmallFieldEllipticityKernel →
-  (∀ k X →
-   SmallFieldRegularity k X →
-   AnisotropicDiameter.MetricPerturbationBound k X AnisotropicDiameter.ε-const)
-SmallFieldRegularityControlsPerturbationFromKernel kernel =
-  P33SmallFieldEllipticityKernel.smallFieldControlsPerturbation kernel
-
 P33PerturbationKernelFromEllipticityKernel :
   (kernel : P33SmallFieldEllipticityKernel) →
   P33PerturbationStabilityKernel
@@ -1331,6 +1360,128 @@ P33PerturbationKernelFromEllipticityKernel kernel = record
   ; linkWeightComparableToMetric =
       P33SmallFieldEllipticityKernel.linkWeightComparableToMetric kernel
   }
+
+P33BalabanMetricDischargeFromKernel :
+  P33PerturbationStabilityKernel
+    Polymer
+    Edge
+    SmallFieldRegularity
+    isEdgeOf
+    P33AbstractLocalMetric
+    P33AbstractBackgroundMetric
+    P33AbstractPerturbation
+    supEdgePerturbation
+    ε-real-const
+    m-background
+    admissibleScale
+    w-weight →
+  P33BalabanMetricFaithfulnessReceipt
+    Polymer
+    Edge
+    SmallFieldRegularity
+    P33AbstractLocalMetric
+    P33AbstractBackgroundMetric
+    P33AbstractPerturbation
+    w-weight →
+  P33BalabanMetricDischarge
+    Polymer
+    Edge
+    SmallFieldRegularity
+    isEdgeOf
+    P33AbstractLocalMetric
+    P33AbstractBackgroundMetric
+    P33AbstractPerturbation
+    supEdgePerturbation
+    ε-real-const
+    m-background
+    admissibleScale
+    w-weight
+P33BalabanMetricDischargeFromKernel kernel receipt = record
+  { faithfulnessReceipt = receipt
+  ; perturbationKernel = kernel
+  ; noClayPromotion = refl
+  }
+
+P33BalabanSourceReconstructionKernelFromKernel :
+  P33PerturbationStabilityKernel
+    Polymer
+    Edge
+    SmallFieldRegularity
+    isEdgeOf
+    P33AbstractLocalMetric
+    P33AbstractBackgroundMetric
+    P33AbstractPerturbation
+    supEdgePerturbation
+    ε-real-const
+    m-background
+    admissibleScale
+    w-weight →
+  P33BalabanMetricFaithfulnessReceipt
+    Polymer
+    Edge
+    SmallFieldRegularity
+    P33AbstractLocalMetric
+    P33AbstractBackgroundMetric
+    P33AbstractPerturbation
+    w-weight →
+  P33BalabanSourceReconstructionKernel
+    Polymer
+    Edge
+    SmallFieldRegularity
+    isEdgeOf
+    P33AbstractLocalMetric
+    P33AbstractBackgroundMetric
+    P33AbstractPerturbation
+    supEdgePerturbation
+    admissibleScale
+    w-weight
+    ε-real-const
+    m-background
+P33BalabanSourceReconstructionKernelFromKernel kernel receipt =
+  P33BalabanSourceReconstructionKernelFromPieces
+    (P33BalabanMetricFaithfulnessReceipt.anchor receipt)
+    (P33BalabanSourceMetricTheoremFromPerturbationKernel kernel)
+    (P33BalabanMetricDischargeFromKernel kernel receipt)
+
+currentP33BalabanSourceReconstructionKernel :
+  P33BalabanSourceReconstructionKernel
+    Polymer
+    Edge
+    SmallFieldRegularity
+    isEdgeOf
+    P33AbstractLocalMetric
+    P33AbstractBackgroundMetric
+    P33AbstractPerturbation
+    supEdgePerturbation
+    admissibleScale
+    w-weight
+    ε-real-const
+    m-background
+currentP33BalabanSourceReconstructionKernel =
+  P33BalabanSourceReconstructionKernelFromActualBalaban
+    currentP33ActualBalabanMetricSourceTheorem
+    currentP33BalabanMetricDischarge
+
+currentP33SourceAnalyticDischargePackage :
+  AnisotropicDiameter.P33a1AnalyticDischargePackage
+currentP33SourceAnalyticDischargePackage = record
+  { graphAdapter =
+      AnisotropicDiameter.currentBalabanP33a1GraphAdapter
+  ; laneA =
+      AnisotropicDiameter.currentSmallFieldToMetricLane
+  ; laneB =
+      currentP33BridgeMetricToPositiveLinkLane
+  }
+
+SmallFieldRegularityControlsPerturbationFromKernel :
+  P33SmallFieldEllipticityKernel →
+  (∀ k X →
+   SmallFieldRegularity k X →
+   AnisotropicDiameter.MetricPerturbationBound k X AnisotropicDiameter.ε-const)
+SmallFieldRegularityControlsPerturbationFromKernel kernel =
+  P33SmallFieldEllipticityKernel.smallFieldControlsPerturbation kernel
+
+
 
 P33LinkFloorPositiveFromKernel :
   P33SmallFieldEllipticityKernel →
@@ -1388,9 +1539,14 @@ LinkWeightStabilityMarginFromKernel :
   P33SmallFieldEllipticityKernel →
   AnisotropicDiameter.LinkWeightStabilityMargin
 LinkWeightStabilityMarginFromKernel kernel =
-  AnisotropicDiameter.BalabanUniformSmallFieldConstantsFromAdapters
-    (P33SmallFieldToMetricLaneFromKernel kernel)
-    (P33MetricToPositiveLinkLaneFromKernel kernel)
+  AnisotropicDiameter.ε0-const , AnisotropicDiameter.m-link ,
+  AnisotropicDiameter.currentP33BackgroundFloorPositive ,
+  AnisotropicDiameter.currentP33LinkFloorPositive ,
+  (λ k X ε metric-bound ε≤ε0 e edge →
+     proj₂
+       (AnisotropicDiameter.BalabanMetricToPositiveLinkLane.perturbationPreservesWeights
+         (P33MetricToPositiveLinkLaneFromKernel kernel)
+         k X ε metric-bound ε≤ε0 e edge))
 
 P33a1AnalyticDischargePackageFromKernel :
   P33SmallFieldEllipticityKernel →
@@ -1476,7 +1632,7 @@ record P06PolymerEncodingTheoremKernel : Set₁ where
 
     decorationMultiplicityByComplexity :
       ∀ S →
-      countDecorations S ≤ C-dec ^ reducedComplexity S
+      countDecorations S ≤ C-dec ^Nat reducedComplexity S
 
     polymerDecompositionExhaustive :
       ∀ P →
@@ -1513,7 +1669,7 @@ P06AnimalCountingBoundFromKernel :
   P06PolymerEncodingTheoremKernel →
   Entropy.P06AnimalCountingReducer
 P06AnimalCountingBoundFromKernel kernel =
-  Entropy.promoteImportedP06ToReducer
+  Entropy.assembleP06ReducerFromSourceWitness
     (P06ImportedAnimalCountingBoundFromKernel kernel)
 
 -- Kernel 4 — P07/P09 KP margin theorem kernel
@@ -2172,11 +2328,9 @@ record HardAnalyticFactsTheoremKernel : Set₁ where
 
 P33GraphCombinatoricsDischargePackageFromKernel :
   P33SmallFieldEllipticityKernel →
-  GraphCombinatorics.P33a1AnalyticDischargePackage
-P33GraphCombinatoricsDischargePackageFromKernel kernel =
-  GraphCombinatorics.P33a1AnalyticPackageFromPerturbationStability
-    (SmallFieldRegularityControlsPerturbationFromKernel kernel)
-    (LinkWeightStabilityMarginFromKernel kernel)
+  AnisotropicDiameter.P33a1AnalyticDischargePackage
+P33GraphCombinatoricsDischargePackageFromKernel =
+  P33a1AnalyticDischargePackageFromKernel
 
 postulate
   NatPowerDecayFromHardAnalyticFacts :
@@ -2191,8 +2345,8 @@ LocalLatticeAnalyticDischargePackageFromHardAnalyticFacts :
   HardAnalyticFactsTheoremKernel →
   LocalLattice.LocalLatticeAnalyticDischargePackage
 LocalLatticeAnalyticDischargePackageFromHardAnalyticFacts kernel = record
-  { p06ModelLeaves =
-      P06ModelLeafDischargePackageFromKernel
+  { p06MixedReducerPayload =
+      P06MixedReducerPayloadFromKernel
         (HardAnalyticFactsTheoremKernel.p06 kernel)
   ; p10AnalyticLeaves =
       P10AnalyticLeavesFromLargeFieldKernel

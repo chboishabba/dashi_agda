@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSTriadKNGate2ANearExtremizerDefectEstimates where
 
-open import Agda.Primitive using (Setω)
+open import Agda.Primitive using (Set; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
@@ -114,7 +114,7 @@ canonicalCombinedMechanismText =
 -- directly, but factors them through explicit one-power and two-power
 -- envelopes for the lift defect.
 
-record NSTriadKNGate2ASeamLiftDefectHypotheses : Setω where
+record NSTriadKNGate2ASeamLiftDefectHypotheses : Set (lsuc lzero) where
   constructor mkNSTriadKNGate2ASeamLiftDefectHypotheses
   field
     defectBudget : DefectBudget
@@ -175,22 +175,31 @@ mkNearExtremizerDefectEstimateModelFromSeamLiftHypotheses h =
 
 mkCrossEstimateFromSeamLiftHypotheses :
   (h : NSTriadKNGate2ASeamLiftDefectHypotheses) →
-  NearExtremizerDefectEstimateModel.cross≤η-cross
-    (mkNearExtremizerDefectEstimateModelFromSeamLiftHypotheses h)
+  NSTriadKNGate2ASeamLiftDefectHypotheses._≤_ h
+    (NearExtremizerDefectEstimateModel.cross-term
+      (mkNearExtremizerDefectEstimateModelFromSeamLiftHypotheses h))
+    (NearExtremizerDefectEstimateModel.η-cross
+      (mkNearExtremizerDefectEstimateModelFromSeamLiftHypotheses h))
 mkCrossEstimateFromSeamLiftHypotheses =
   cross≤η-crossWitness
 
 mkPureEstimateFromSeamLiftHypotheses :
   (h : NSTriadKNGate2ASeamLiftDefectHypotheses) →
-  NearExtremizerDefectEstimateModel.pure≤η-pure
-    (mkNearExtremizerDefectEstimateModelFromSeamLiftHypotheses h)
+  NSTriadKNGate2ASeamLiftDefectHypotheses._≤_ h
+    (NearExtremizerDefectEstimateModel.pure-term
+      (mkNearExtremizerDefectEstimateModelFromSeamLiftHypotheses h))
+    (NearExtremizerDefectEstimateModel.η-pure
+      (mkNearExtremizerDefectEstimateModelFromSeamLiftHypotheses h))
 mkPureEstimateFromSeamLiftHypotheses =
   pure≤η-pureWitness
 
 mkCombinedEstimateFromSeamLiftHypotheses :
   (h : NSTriadKNGate2ASeamLiftDefectHypotheses) →
-  NearExtremizerDefectEstimateModel.combined≤η-defect
-    (mkNearExtremizerDefectEstimateModelFromSeamLiftHypotheses h)
+  NSTriadKNGate2ASeamLiftDefectHypotheses._≤_ h
+    (NearExtremizerDefectEstimateModel.combined-term
+      (mkNearExtremizerDefectEstimateModelFromSeamLiftHypotheses h))
+    (NearExtremizerDefectEstimateModel.η-defect
+      (mkNearExtremizerDefectEstimateModelFromSeamLiftHypotheses h))
 mkCombinedEstimateFromSeamLiftHypotheses h =
   NearExtremizerDefectEstimateModel.combined≤η-defect
     (mkNearExtremizerDefectEstimateModelFromSeamLiftHypotheses h)
@@ -202,7 +211,7 @@ mkCombinedEstimateFromSeamLiftHypotheses h =
 -- cone-uniform inequalities, and keeps the actual NS-seam realization
 -- fail-closed until an inhabitant on the true carrier is constructed.
 
-record NSTriadKNGate2ANearExtremizerDefectEstimates : Setω where
+record NSTriadKNGate2ANearExtremizerDefectEstimates : Set (lsuc lzero) where
   constructor mkNSTriadKNGate2ANearExtremizerDefectEstimates
   field
     seamLiftDefectHypotheses :
@@ -215,16 +224,19 @@ record NSTriadKNGate2ANearExtremizerDefectEstimates : Setω where
             seamLiftDefectHypotheses
 
     crossEstimate :
-      NearExtremizerDefectEstimateModel.cross≤η-cross
-        defectEstimateModel
+      NearExtremizerDefectEstimateModel._≤_ defectEstimateModel
+        (NearExtremizerDefectEstimateModel.cross-term defectEstimateModel)
+        (NearExtremizerDefectEstimateModel.η-cross defectEstimateModel)
 
     pureEstimate :
-      NearExtremizerDefectEstimateModel.pure≤η-pure
-        defectEstimateModel
+      NearExtremizerDefectEstimateModel._≤_ defectEstimateModel
+        (NearExtremizerDefectEstimateModel.pure-term defectEstimateModel)
+        (NearExtremizerDefectEstimateModel.η-pure defectEstimateModel)
 
     combinedEstimate :
-      NearExtremizerDefectEstimateModel.combined≤η-defect
-        defectEstimateModel
+      NearExtremizerDefectEstimateModel._≤_ defectEstimateModel
+        (NearExtremizerDefectEstimateModel.combined-term defectEstimateModel)
+        (NearExtremizerDefectEstimateModel.η-defect defectEstimateModel)
 
     statuses : List DefectEstimateStatus
     statusesAreCanonical :

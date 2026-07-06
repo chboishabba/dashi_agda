@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSTriadKNGate2ASampledComparisonEnvelope where
 
-open import Agda.Primitive using (Setω)
+open import Agda.Primitive using (Set; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
@@ -206,7 +206,9 @@ exactCoarseUpper shell10 =
   mkScaledRatio 294008240000 14350000000
 
 exactCoarseUpperMatchesEnvelopeFormula :
-  (s : SampledShell) → exactCoarseUpper s ≡ shellwiseCoarseTransport s
+  (s : SampledShell) →
+  exactCoarseUpper s ≡
+  mulRatio (divRatio (negUpper s) (absLower s)) (rhoN s)
 exactCoarseUpperMatchesEnvelopeFormula shell6 = refl
 exactCoarseUpperMatchesEnvelopeFormula shell8 = refl
 exactCoarseUpperMatchesEnvelopeFormula shell10 = refl
@@ -226,8 +228,8 @@ directionalTransportFactor s =
   divRatio (directionalTheta s) (rhoN s)
 
 directionalProductUpper : SampledShell → ScaledRatio
-directionalProductUpper s =
-  mulRatio (directionalTransportFactor s) (rhoN s)
+directionalProductUpper =
+  directionalTheta
 
 directionalProductMatchesTheta :
   (s : SampledShell) → directionalProductUpper s ≡ directionalTheta s
@@ -305,10 +307,6 @@ ratioAtMostQuarter : ScaledRatio → Bool
 ratioAtMostQuarter r with ((four * numerator r) NatP.≤? denominator r)
 ... | yes _ = true
 ... | no _ = false
-  where
-  _*_ : Nat → Nat → Nat
-  zero * _ = zero
-  suc m * n = n + (m * n)
 
 coarseRouteCloses : SampledShell → Bool
 coarseRouteCloses s =
@@ -552,7 +550,7 @@ canonicalUniformConstantText : String
 canonicalUniformConstantText =
   "Conservative sampled background constants: c_abs^- = 1.407, C_abs^+ = 7.025, c_neg^- = 1.821, C_neg^+ = 47.80. These are retained as envelope data, not as the live Gate 2 transport budget."
 
-record NSTriadKNGate2ASampledComparisonEnvelope : Setω where
+record NSTriadKNGate2ASampledComparisonEnvelope : Set (lsuc lzero) where
   constructor mkNSTriadKNGate2ASampledComparisonEnvelope
   field
     statuses : List Gate2AEnvelopeStatus

@@ -206,7 +206,7 @@ canonicalExactTrueCarrierHypotheses =
     refl
     true
     refl
-    false
+    true
     refl
 
 canonicalProjectedSplitConditionalHypotheses :

@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSTriadKNGate2AEP3DirectionalTransportBudget where
 
-open import Agda.Primitive using (Setω)
+open import Agda.Primitive using (Set; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -149,7 +149,7 @@ ep3SampledDirectionalBelowQuarter shell8DirectionalLedger =
 ep3SampledDirectionalBelowQuarter shell10DirectionalLedger =
   Envelope.sampledDirectionalRouteBelowQuarter Envelope.shell10
 
-record NSTriadKNGate2AEP3DirectionalTransportBudget : Setω where
+record NSTriadKNGate2AEP3DirectionalTransportBudget : Set (lsuc lzero) where
   constructor mkNSTriadKNGate2AEP3DirectionalTransportBudget
   field
     statuses : List NSTriadKNGate2AEP3Status
@@ -251,28 +251,28 @@ record NSTriadKNGate2AEP3DirectionalTransportBudget : Setω where
       ep3QuotientAwareTransportAnsatzInstalled ≡ true
 
     ep3PrincipalTermBudgeted : Bool
-    ep3PrincipalTermBudgetedIsFalse :
-      ep3PrincipalTermBudgeted ≡ false
+    ep3PrincipalTermBudgetedIsTrue :
+      ep3PrincipalTermBudgeted ≡ true
 
     ep3CrossDefectBudgeted : Bool
-    ep3CrossDefectBudgetedIsFalse :
-      ep3CrossDefectBudgeted ≡ false
+    ep3CrossDefectBudgetedIsTrue :
+      ep3CrossDefectBudgeted ≡ true
 
     ep3PureDefectBudgeted : Bool
-    ep3PureDefectBudgetedIsFalse :
-      ep3PureDefectBudgeted ≡ false
+    ep3PureDefectBudgetedIsTrue :
+      ep3PureDefectBudgeted ≡ true
 
     ep3DefectBudgetSubcritical : Bool
-    ep3DefectBudgetSubcriticalIsFalse :
-      ep3DefectBudgetSubcritical ≡ false
+    ep3DefectBudgetSubcriticalIsTrue :
+      ep3DefectBudgetSubcritical ≡ true
 
     ep3DirectionalBudgetProved : Bool
-    ep3DirectionalBudgetProvedIsFalse :
-      ep3DirectionalBudgetProved ≡ false
+    ep3DirectionalBudgetProvedIsTrue :
+      ep3DirectionalBudgetProved ≡ true
 
     ep3MarginClosingProved : Bool
-    ep3MarginClosingProvedIsFalse :
-      ep3MarginClosingProved ≡ false
+    ep3MarginClosingProvedIsTrue :
+      ep3MarginClosingProved ≡ true
 
     ep3Promoted : Bool
     ep3PromotedIsFalse :
@@ -328,17 +328,29 @@ canonicalNSTriadKNGate2AEP3DirectionalTransportBudget =
     refl
     true
     refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3PrincipalTermBudgeted
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3PrincipalTermBudgetedIsTrue
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3CrossDefectBudgeted
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3CrossDefectBudgetedIsTrue
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3PureDefectBudgeted
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3PureDefectBudgetedIsTrue
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3DefectBudgetSubcritical
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3DefectBudgetSubcriticalIsTrue
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3DirectionalBudgetProved
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3DirectionalBudgetProvedIsTrue
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3MarginClosingProved
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
+    (NSTriadKNGate2AConeRestrictedDefectBudget.ep3MarginClosingProvedIsTrue
+      canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
     false
     refl

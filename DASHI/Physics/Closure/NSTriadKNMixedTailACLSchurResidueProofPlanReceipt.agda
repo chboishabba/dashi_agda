@@ -133,7 +133,7 @@ canonicalReceiptText =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "The sampled finite-shell Schur-test witness certifies the exact N=6,8,10,12 kernel-sum inequality and sampled N^-1 block scale, but the direct Fields ACL kernel match now fails for the current positive-sector L_FT^+ and the corrected signed half-sum test leaves S_+ = S_abs/2; the remaining gap is therefore a direct positive-sector magnitude/counting theorem plus a uniform/profile-independent operator-norm theorem."
+  "The sampled finite-shell Schur-test witness certifies the exact N=6,8,10,12 kernel-sum inequality and sampled N^-1 block scale, but the direct Fields ACL kernel match now fails for the current positive-sector L_FT^+ and the corrected signed half-sum test leaves S_+ = S_abs/2; the remaining gap is therefore a direct positive-sector magnitude/counting theorem plus a profile-uniform weighted Schur product theorem."
 
 canonicalSourceFieldsReceiptText : String
 canonicalSourceFieldsReceiptText =
@@ -149,7 +149,7 @@ canonicalSourceBridgeReadoutText =
 
 canonicalProofPlanText : String
 canonicalProofPlanText =
-  "Abandon the dead signed ACL lane, then promote the sampled finite-shell Schur-test witness to a direct positive-sector |L_FT^+|_op <= C / N theorem, then transfer that bound to q_gap(N) >= c / N^2 under the current normalization, and only then combine with D(N) ~ N^2."
+  "Abandon the dead signed ACL lane, then prove a direct positive-sector magnitude/counting theorem and a weighted Schur product bound R_N(w) * C_N(w) <= C^2 / N^2, deduce |L_FT^+|_op <= C / N, transfer that bound to q_gap(N) >= c / N^2 under the current normalization, and only then combine with D(N) ~ N^2."
 
 canonicalBoundaryText : String
 canonicalBoundaryText =
@@ -177,7 +177,7 @@ canonicalLText =
 
 canonicalPText : String
 canonicalPText =
-  "P: prove the direct positive-sector theorem next, because both ACL-based routes are dead and everything downstream depends on that gate."
+  "P: prove the direct positive-sector magnitude/counting theorem next and close it by a weighted Schur product bound, because both ACL-based routes are dead and everything downstream depends on that gate."
 
 canonicalGText : String
 canonicalGText =

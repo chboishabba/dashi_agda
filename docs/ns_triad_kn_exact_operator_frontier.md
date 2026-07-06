@@ -25,16 +25,20 @@ BKM-exclusion, and Clay promotion remain false.
 
 ## Resumed Path
 
-1. Exact scripted operator bound:
-   prove profile-independent row/column control for the exact scripted
-   pair-incidence cross block.
-2. Schur residue transfer:
+1. Kernel formula:
+   the exact cross-block entry is now fixed as a repeated-pair incidence sum
+   over retained positive-sector triad weights.
+2. Exact scripted operator bound:
+   prove a profile-uniform weighted Schur product bound
+   `R_N(w_N) * C_N(w_N) <= C^2 / N^2` for the exact scripted pair-incidence
+   cross block, then deduce `||L_FT,script^N||_op <= C / N`.
+3. Schur residue transfer:
    use that bound to discharge `SchurResidueScale`, i.e.
    `q_gap(N) >= c_gap / N^2`.
-3. BKM projection step:
+4. BKM projection step:
    replace the sampled tiny BKM-tail projection with a structural
    orthogonality/projection estimate.
-4. Residence bridge:
+5. Residence bridge:
    combine the projection estimate with the trajectory-level residence-time
    control needed for the BKM contradiction/exclusion route.
 
@@ -43,4 +47,4 @@ BKM-exclusion, and Clay promotion remain false.
 This note resumes the live route without claiming the missing theorem. The
 exact-object gate is upstream of both `SchurResidueScale` and the
 BKM/residence bridge, so those downstream steps stay open until the
-profile-independent `C/N` estimate is actually proved.
+weighted-Schur `C/N` estimate is actually proved.

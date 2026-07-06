@@ -12,7 +12,8 @@ DASHI_EPHEMERAL="${DASHI_AGDA29_EPHEMERAL:-0}"
 DASHI_CLEAN="${DASHI_AGDA29_CLEAN:-0}"
 STDLIB_UPDATE="${AGDA_STDLIB_UPDATE:-0}"
 AGDA_LOG_PATH="${AGDA_LOG_PATH:-/home/c/.gemini/antigravity/scratch/dashi-agda29-parallel-check.log}"
-AGDA_LOG_PREV="${AGDA_LOG_PATH}.1"
+AGDA_LOG_KEEP_COUNT="${AGDA_LOG_KEEP_COUNT:-10}"
+AGDA_LOG_BASE_PATH="$AGDA_LOG_PATH"
 
 if [ -z "${XDG_CACHE_HOME:-}" ]; then
   export XDG_CACHE_HOME="$REPO_ROOT/.cache"
@@ -24,6 +25,65 @@ if [ "$#" -eq 0 ]; then
 else
   TARGETS=("$@")
 fi
+
+log_target_slug() {
+  local slug="$1"
+  slug="${slug//\//__}"
+  slug="${slug// /_}"
+  slug="${slug//[^A-Za-z0-9._-]/_}"
+  printf '%s\n' "$slug"
+}
+
+build_log_path() {
+  local base_path="$1"
+  local target_slug="$2"
+  local timestamp="$3"
+  local log_dir log_file log_stem log_ext
+
+  log_dir="$(dirname "$base_path")"
+  log_file="$(basename "$base_path")"
+
+  if [[ "$log_file" == *.* ]]; then
+    log_stem="${log_file%.*}"
+    log_ext=".${log_file##*.}"
+  else
+    log_stem="$log_file"
+    log_ext=""
+  fi
+
+  printf '%s/%s-%s-%s%s\n' \
+    "$log_dir" \
+    "$log_stem" \
+    "$timestamp" \
+    "$target_slug" \
+    "$log_ext"
+}
+
+prune_old_logs() {
+  local base_path="$1"
+  local keep_count="$2"
+  local log_dir log_file log_stem log_ext pattern
+
+  log_dir="$(dirname "$base_path")"
+  log_file="$(basename "$base_path")"
+
+  if [[ "$log_file" == *.* ]]; then
+    log_stem="${log_file%.*}"
+    log_ext=".${log_file##*.}"
+  else
+    log_stem="$log_file"
+    log_ext=""
+  fi
+
+  pattern="$log_dir/$log_stem-*${log_ext}"
+
+  mapfile -t existing_logs < <(find "$log_dir" -maxdepth 1 -type f -name "$(basename "$pattern")" -printf '%T@ %p\n' | sort -n | awk '{ $1=""; sub(/^ /, ""); print }')
+
+  while [ "${#existing_logs[@]}" -gt "$keep_count" ]; do
+    rm -f "${existing_logs[0]}"
+    existing_logs=("${existing_logs[@]:1}")
+  done
+}
 
 AGDA_BIN="${AGDA_BIN:-$(nix build --no-link --print-out-paths "$AGDA_FLAKE")/bin/agda}"
 if [ "$DASHI_EPHEMERAL" = "1" ]; then
@@ -107,14 +167,17 @@ fi
 chmod -R u+w "$STDLIB_WORK"
 
 cd "$DASHI_WORK"
-if [ -f "$AGDA_LOG_PATH" ]; then
-  mv -f "$AGDA_LOG_PATH" "$AGDA_LOG_PREV"
+mkdir -p "$(dirname "$AGDA_LOG_PATH")"
+if [ "${#TARGETS[@]}" -eq 1 ]; then
+  LOG_TARGET_SLUG="$(log_target_slug "${TARGETS[0]}")"
+else
+  LOG_TARGET_SLUG="$(log_target_slug "${TARGETS[0]}")-plus-$(( ${#TARGETS[@]} - 1 ))"
 fi
+LOG_TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
+AGDA_LOG_PATH="$(build_log_path "$AGDA_LOG_BASE_PATH" "$LOG_TARGET_SLUG" "$LOG_TIMESTAMP")"
 : >"$AGDA_LOG_PATH"
+prune_old_logs "$AGDA_LOG_BASE_PATH" "$AGDA_LOG_KEEP_COUNT"
 echo "Logging Agda output to: $AGDA_LOG_PATH"
-if [ -f "$AGDA_LOG_PREV" ]; then
-  echo "Previous log rotated to: $AGDA_LOG_PREV"
-fi
 
 AGDA_RUN=("$AGDA_BIN" \
   --no-libraries --no-default-libraries \

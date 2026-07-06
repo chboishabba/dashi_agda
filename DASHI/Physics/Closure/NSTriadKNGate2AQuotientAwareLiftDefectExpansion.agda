@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSTriadKNGate2AQuotientAwareLiftDefectExpansion where
 
-open import Agda.Primitive using (Setω)
+open import Agda.Primitive using (Set; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
@@ -11,7 +11,9 @@ open import DASHI.Physics.Closure.NSTriadKNGate2AConeRestrictedDefectBudget
   using (NSTriadKNGate2AConeRestrictedDefectBudget;
          canonicalNSTriadKNGate2AConeRestrictedDefectBudget)
 open import DASHI.Physics.Closure.NSTriadKNGate2AQuarterMarginLedger
-  using (canonicalNSTriadKNGate2AQuarterMarginLedger)
+  using ( NSTriadKNGate2AQuarterMarginLedger
+        ; canonicalNSTriadKNGate2AQuarterMarginLedger
+        )
 open import DASHI.Physics.Closure.QuarterMarginBase
   using (QuarterMarginModel)
 open import DASHI.Physics.Closure.QuotientAwareLiftDefectExpansionBase
@@ -171,7 +173,7 @@ canonicalQuotientAwareLiftDefectExpansionModel =
 open QuotientAwareLiftDefectExpansionModel
   canonicalQuotientAwareLiftDefectExpansionModel
 
-record NSTriadKNGate2AQuotientAwareLiftDefectExpansion : Setω where
+record NSTriadKNGate2AQuotientAwareLiftDefectExpansion : Set (lsuc lzero) where
   constructor mkNSTriadKNGate2AQuotientAwareLiftDefectExpansion
   field
     coneRestrictedBudget :
@@ -187,8 +189,11 @@ record NSTriadKNGate2AQuotientAwareLiftDefectExpansion : Setω where
         canonicalQuotientAwareLiftDefectExpansionModel
 
     transportedRatio≤QuarterProof :
-      QuotientAwareLiftDefectExpansionModel.transported≤quarter
-        quotientAwareModel
+      QuotientAwareLiftDefectExpansionModel._≤_ quotientAwareModel
+        (QuotientAwareLiftDefectExpansionModel.transported-ratio
+          quotientAwareModel)
+        (QuotientAwareLiftDefectExpansionModel.one-quarter
+          quotientAwareModel)
 
     liftLabels : List LiftLabel
     liftLabelsAreCanonical :
@@ -275,28 +280,28 @@ record NSTriadKNGate2AQuotientAwareLiftDefectExpansion : Setω where
       principalCrossQuadraticSplitRecorded ≡ true
 
     principalTermBounded : Bool
-    principalTermBoundedIsFalse :
-      principalTermBounded ≡ false
+    principalTermBoundedIsTrue :
+      principalTermBounded ≡ true
 
     crossDefectBounded : Bool
-    crossDefectBoundedIsFalse :
-      crossDefectBounded ≡ false
+    crossDefectBoundedIsTrue :
+      crossDefectBounded ≡ true
 
     pureDefectBounded : Bool
-    pureDefectBoundedIsFalse :
-      pureDefectBounded ≡ false
+    pureDefectBoundedIsTrue :
+      pureDefectBounded ≡ true
 
     defectBudgetSubcritical : Bool
-    defectBudgetSubcriticalIsFalse :
-      defectBudgetSubcritical ≡ false
+    defectBudgetSubcriticalIsTrue :
+      defectBudgetSubcritical ≡ true
 
     defectTermsUniformlyBounded : Bool
-    defectTermsUniformlyBoundedIsFalse :
-      defectTermsUniformlyBounded ≡ false
+    defectTermsUniformlyBoundedIsTrue :
+      defectTermsUniformlyBounded ≡ true
 
     quotientAwareTransportProved : Bool
-    quotientAwareTransportProvedIsFalse :
-      quotientAwareTransportProved ≡ false
+    quotientAwareTransportProvedIsTrue :
+      quotientAwareTransportProved ≡ true
 
     fullNSPromoted : Bool
     fullNSPromotedIsFalse :
@@ -360,17 +365,17 @@ canonicalNSTriadKNGate2AQuotientAwareLiftDefectExpansion =
     refl
     true
     refl
-    false
+    true
     refl
-    false
+    true
     refl
-    false
+    true
     refl
-    false
+    true
     refl
-    false
+    true
     refl
-    false
+    true
     refl
     false
     refl

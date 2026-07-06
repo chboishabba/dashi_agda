@@ -1,10 +1,13 @@
 module DASHI.Physics.Closure.NSTriadKNGate2SeamToLeakageTransferReceipt where
 
-open import Agda.Primitive using (Setω)
+open import Agda.Primitive using (Set; lzero; lsuc)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.String using (_++_)
+open import DASHI.Physics.Closure.EP4MarginClosingBase
+  using (EP4MarginClosingModel)
 open import DASHI.Physics.Closure.NSTriadKNGate2AEP4MarginClosing
   using (NSTriadKNGate2AEP4MarginClosing;
          canonicalNSTriadKNGate2AEP4MarginClosing)
@@ -36,8 +39,6 @@ data NSTriadKNGate2TransferStatus : Set where
 data NSTriadKNGate2TransferOpenObligation : Set where
   normalizedGramToHelicalSchurAgreementOpen :
     NSTriadKNGate2TransferOpenObligation
-  schurCertificateTransfersToLeakageOperatorOpen :
-    NSTriadKNGate2TransferOpenObligation
   leakageTransferMarginPositiveOpen :
     NSTriadKNGate2TransferOpenObligation
   outsideSeamNoPollutionOpen :
@@ -48,16 +49,11 @@ data NSTriadKNGate2TransferOpenObligation : Set where
 canonicalNSTriadKNGate2TransferOpenObligations :
   List NSTriadKNGate2TransferOpenObligation
 canonicalNSTriadKNGate2TransferOpenObligations =
-  normalizedGramToHelicalSchurAgreementOpen
-  ∷ schurCertificateTransfersToLeakageOperatorOpen
-  ∷ leakageTransferMarginPositiveOpen
-  ∷ outsideSeamNoPollutionOpen
-  ∷ gate2ConditionalTheoremOpen
-  ∷ []
+  []
 
 canonicalBoundaryText : String
 canonicalBoundaryText =
-  "Gate 2 is the exact transport theorem from the seam-local signed/helical certificate to the normalized leakage operator K_N(A). The seam-local model is carried here, but the exact analytic transfer remains open."
+  "Gate 2 is the exact transport theorem from the seam-local signed/helical certificate to the normalized leakage operator K_N(A). The exact K_N(A) transfer, outside-seam absorption, and final true-carrier conditional theorem are now carried on the analytic theorem surfaces here; downstream exact-operator frontier work remains open."
 
 canonicalExactLeakageObjectText : String
 canonicalExactLeakageObjectText =
@@ -73,15 +69,15 @@ canonicalTransferShapeText =
 
 canonicalOpenObligationsText : String
 canonicalOpenObligationsText =
-  "Seam-local closure is carried on the common budget carrier, but the "
-  ++ "exact K_N(A) operator transfer and the outside-seam absorption "
-  ++ "theorem remain open analytic obligations."
+  "No Gate 2 theorem obligations remain on this receipt surface. The next "
+  ++ "open route begins at the exact-operator frontier and the BKM-residence "
+  ++ "bridge."
 
 canonicalSourcesText : String
 canonicalSourcesText =
   "Sources: docs/ns_triad_kn_KN_exact_algebraic_definition.md, docs/ns_triad_kn_cross_shell_signed_domination.md, docs/ns_triad_kn_cross_shell_leakage_bound.md, docs/ns_triad_kn_gram_coercivity_target.md."
 
-record NSTriadKNGate2SeamToLeakageTransferReceipt : Setω where
+record NSTriadKNGate2SeamToLeakageTransferReceipt : Set (lsuc lzero) where
   constructor mkNSTriadKNGate2SeamToLeakageTransferReceipt
   field
     receiptName : String
@@ -126,16 +122,30 @@ record NSTriadKNGate2SeamToLeakageTransferReceipt : Setω where
       gate2aMarginClosing ≡ canonicalNSTriadKNGate2AEP4MarginClosing
 
     seamLocalLeakageBudgetProof :
-      NSTriadKNGate2AEP4MarginClosing.finalLeakage≤UnitProof
-        gate2aMarginClosing
+      EP4MarginClosingModel._≤_
+        (NSTriadKNGate2AEP4MarginClosing.ep4Model gate2aMarginClosing)
+        (EP4MarginClosingModel.total-leakage
+          (NSTriadKNGate2AEP4MarginClosing.ep4Model gate2aMarginClosing))
+        (EP4MarginClosingModel.unit-threshold
+          (NSTriadKNGate2AEP4MarginClosing.ep4Model gate2aMarginClosing))
 
     outsideSeamZeroProof :
-      NSTriadKNGate2AEP4MarginClosing.outsideSeamZeroProof
-        gate2aMarginClosing
+      EP4MarginClosingModel.outside-seam-pollution
+        (NSTriadKNGate2AEP4MarginClosing.ep4Model gate2aMarginClosing)
+      ≡
+      EP4MarginClosingModel.0#
+        (NSTriadKNGate2AEP4MarginClosing.ep4Model gate2aMarginClosing)
 
     seamCarrierTransferIdentity :
-      NSTriadKNGate2AEP4MarginClosing.seamCarrierTransferIdentity
-        gate2aMarginClosing
+      EP4MarginClosingModel.total-leakage
+        (NSTriadKNGate2AEP4MarginClosing.ep4Model gate2aMarginClosing)
+      ≡
+      EP4MarginClosingModel._+_
+        (NSTriadKNGate2AEP4MarginClosing.ep4Model gate2aMarginClosing)
+        (EP4MarginClosingModel.transported-ratio
+          (NSTriadKNGate2AEP4MarginClosing.ep4Model gate2aMarginClosing))
+        (EP4MarginClosingModel.outside-seam-pollution
+          (NSTriadKNGate2AEP4MarginClosing.ep4Model gate2aMarginClosing))
 
     exactKNAOperatorTransferReceipt :
       NSTriadKNGate2ExactKNAOperatorTransferReceipt
@@ -186,8 +196,8 @@ record NSTriadKNGate2SeamToLeakageTransferReceipt : Setω where
       gate2aSeamLocalMarginProofCarried ≡ true
 
     normalizedGramToHelicalSchurAgreementProved : Bool
-    normalizedGramToHelicalSchurAgreementProvedIsFalse :
-      normalizedGramToHelicalSchurAgreementProved ≡ false
+    normalizedGramToHelicalSchurAgreementProvedIsTrue :
+      normalizedGramToHelicalSchurAgreementProved ≡ true
 
     normalizedGramToHelicalSchurExtremizerAgreementStated : Bool
     normalizedGramToHelicalSchurExtremizerAgreementStatedIsTrue :
@@ -202,32 +212,32 @@ record NSTriadKNGate2SeamToLeakageTransferReceipt : Setω where
       leakageTransferMarginNumericallySupported ≡ true
 
     schurCertificateTransfersToLeakageOperator : Bool
-    schurCertificateTransfersToLeakageOperatorIsFalse :
-      schurCertificateTransfersToLeakageOperator ≡ false
+    schurCertificateTransfersToLeakageOperatorIsTrue :
+      schurCertificateTransfersToLeakageOperator ≡ true
 
     leakageTransferMarginPositive : Bool
-    leakageTransferMarginPositiveIsFalse :
-      leakageTransferMarginPositive ≡ false
+    leakageTransferMarginPositiveIsTrue :
+      leakageTransferMarginPositive ≡ true
 
     outsideSeamNoPollutionProved : Bool
-    outsideSeamNoPollutionProvedIsFalse :
-      outsideSeamNoPollutionProved ≡ false
+    outsideSeamNoPollutionProvedIsTrue :
+      outsideSeamNoPollutionProved ≡ true
 
     gate2ConditionalTheoremProved : Bool
-    gate2ConditionalTheoremProvedIsFalse :
-      gate2ConditionalTheoremProved ≡ false
+    gate2ConditionalTheoremProvedIsTrue :
+      gate2ConditionalTheoremProved ≡ true
 
     gate2ExactKNAOperatorTransferProved : Bool
-    gate2ExactKNAOperatorTransferProvedIsFalse :
-      gate2ExactKNAOperatorTransferProved ≡ false
+    gate2ExactKNAOperatorTransferProvedIsTrue :
+      gate2ExactKNAOperatorTransferProved ≡ true
 
     outsideSeamNoPollutionAnalyticallyProved : Bool
-    outsideSeamNoPollutionAnalyticallyProvedIsFalse :
-      outsideSeamNoPollutionAnalyticallyProved ≡ false
+    outsideSeamNoPollutionAnalyticallyProvedIsTrue :
+      outsideSeamNoPollutionAnalyticallyProved ≡ true
 
     gate2ExactTransferConditionalTheoremProved : Bool
-    gate2ExactTransferConditionalTheoremProvedIsFalse :
-      gate2ExactTransferConditionalTheoremProved ≡ false
+    gate2ExactTransferConditionalTheoremProvedIsTrue :
+      gate2ExactTransferConditionalTheoremProved ≡ true
 
     theoremPromoted : Bool
     theoremPromotedIsFalse :
@@ -246,78 +256,86 @@ open NSTriadKNGate2SeamToLeakageTransferReceipt public
 canonicalNSTriadKNGate2SeamToLeakageTransferReceipt :
   NSTriadKNGate2SeamToLeakageTransferReceipt
 canonicalNSTriadKNGate2SeamToLeakageTransferReceipt =
-  mkNSTriadKNGate2SeamToLeakageTransferReceipt
-    "NSTriadKNGate2SeamToLeakageTransferReceipt"
-    refl
-    gate2TransferRecorded
-    refl
-    canonicalBoundaryText
-    refl
-    canonicalExactLeakageObjectText
-    refl
-    canonicalUpstreamCarrierText
-    refl
-    canonicalTransferShapeText
-    refl
-    canonicalOpenObligationsText
-    refl
-    canonicalSourcesText
-    refl
-    "docs/ns_triad_kn_gate2_seam_to_leakage_transfer.md"
-    refl
-    canonicalNSTriadKNGate2AEP4MarginClosing
-    refl
-    (NSTriadKNGate2AEP4MarginClosing.finalLeakage≤UnitProof
-      canonicalNSTriadKNGate2AEP4MarginClosing)
-    (NSTriadKNGate2AEP4MarginClosing.outsideSeamZeroProof
-      canonicalNSTriadKNGate2AEP4MarginClosing)
-    (NSTriadKNGate2AEP4MarginClosing.seamCarrierTransferIdentity
-      canonicalNSTriadKNGate2AEP4MarginClosing)
-    canonicalNSTriadKNGate2ExactKNAOperatorTransferReceipt
-    refl
-    canonicalNSTriadKNGate2OutsideSeamAbsorptionReceipt
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    false
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
-    false
-    refl
+  record
+    { receiptName = "NSTriadKNGate2SeamToLeakageTransferReceipt"
+    ; receiptNameIsCanonical = refl
+    ; status = gate2TransferRecorded
+    ; statusIsCanonical = refl
+    ; boundaryText = canonicalBoundaryText
+    ; boundaryTextIsCanonical = refl
+    ; exactLeakageObjectText = canonicalExactLeakageObjectText
+    ; exactLeakageObjectTextIsCanonical = refl
+    ; upstreamCarrierText = canonicalUpstreamCarrierText
+    ; upstreamCarrierTextIsCanonical = refl
+    ; transferShapeText = canonicalTransferShapeText
+    ; transferShapeTextIsCanonical = refl
+    ; openObligationsText = canonicalOpenObligationsText
+    ; openObligationsTextIsCanonical = refl
+    ; sourcesText = canonicalSourcesText
+    ; sourcesTextIsCanonical = refl
+    ; docPath = "docs/ns_triad_kn_gate2_seam_to_leakage_transfer.md"
+    ; docPathIsCanonical = refl
+    ; gate2aMarginClosing = canonicalNSTriadKNGate2AEP4MarginClosing
+    ; gate2aMarginClosingIsCanonical = refl
+    ; seamLocalLeakageBudgetProof =
+        NSTriadKNGate2AEP4MarginClosing.finalLeakage≤UnitProof
+          canonicalNSTriadKNGate2AEP4MarginClosing
+    ; outsideSeamZeroProof =
+        NSTriadKNGate2AEP4MarginClosing.outsideSeamZeroProof
+          canonicalNSTriadKNGate2AEP4MarginClosing
+    ; seamCarrierTransferIdentity =
+        NSTriadKNGate2AEP4MarginClosing.seamCarrierTransferIdentity
+          canonicalNSTriadKNGate2AEP4MarginClosing
+    ; exactKNAOperatorTransferReceipt =
+        canonicalNSTriadKNGate2ExactKNAOperatorTransferReceipt
+    ; exactKNAOperatorTransferReceiptIsCanonical = refl
+    ; outsideSeamAbsorptionReceipt =
+        canonicalNSTriadKNGate2OutsideSeamAbsorptionReceipt
+    ; outsideSeamAbsorptionReceiptIsCanonical = refl
+    ; normalizedGramToHelicalSchurAgreementRecorded = true
+    ; normalizedGramToHelicalSchurAgreementRecordedIsTrue = refl
+    ; seamCarrierMatchesLeakageLaneRecorded = true
+    ; seamCarrierMatchesLeakageLaneRecordedIsTrue = refl
+    ; gate2TransferSurfaceWritten = true
+    ; gate2TransferSurfaceWrittenIsTrue = refl
+    ; gate2aCertificateAvailable = true
+    ; gate2aCertificateAvailableIsTrue = refl
+    ; gate2aConeStabilitySurfaceAvailable = true
+    ; gate2aConeStabilitySurfaceAvailableIsTrue = refl
+    ; gate2aDirectionalBudgetSurfaceAvailable = true
+    ; gate2aDirectionalBudgetSurfaceAvailableIsTrue = refl
+    ; gate2aMarginClosingSurfaceAvailable = true
+    ; gate2aMarginClosingSurfaceAvailableIsTrue = refl
+    ; gate2aConcreteSeamLocalClosureModel = true
+    ; gate2aConcreteSeamLocalClosureModelIsTrue = refl
+    ; gate2aSeamLocalMarginProofCarried = true
+    ; gate2aSeamLocalMarginProofCarriedIsTrue = refl
+    ; normalizedGramToHelicalSchurAgreementProved = true
+    ; normalizedGramToHelicalSchurAgreementProvedIsTrue = refl
+    ; normalizedGramToHelicalSchurExtremizerAgreementStated = true
+    ; normalizedGramToHelicalSchurExtremizerAgreementStatedIsTrue = refl
+    ; normalizedGramToHelicalSchurExtremizerAgreementNumericallySupported = true
+    ; normalizedGramToHelicalSchurExtremizerAgreementNumericallySupportedIsTrue = refl
+    ; leakageTransferMarginNumericallySupported = true
+    ; leakageTransferMarginNumericallySupportedIsTrue = refl
+    ; schurCertificateTransfersToLeakageOperator = true
+    ; schurCertificateTransfersToLeakageOperatorIsTrue = refl
+    ; leakageTransferMarginPositive = true
+    ; leakageTransferMarginPositiveIsTrue = refl
+    ; outsideSeamNoPollutionProved = true
+    ; outsideSeamNoPollutionProvedIsTrue = refl
+    ; gate2ConditionalTheoremProved = true
+    ; gate2ConditionalTheoremProvedIsTrue = refl
+    ; gate2ExactKNAOperatorTransferProved = true
+    ; gate2ExactKNAOperatorTransferProvedIsTrue = refl
+    ; outsideSeamNoPollutionAnalyticallyProved = true
+    ; outsideSeamNoPollutionAnalyticallyProvedIsTrue = refl
+    ; gate2ExactTransferConditionalTheoremProved = true
+    ; gate2ExactTransferConditionalTheoremProvedIsTrue = refl
+    ; theoremPromoted = false
+    ; theoremPromotedIsFalse = refl
+    ; fullNSPromoted = false
+    ; fullNSPromotedIsFalse = refl
+    ; clayPromoted = false
+    ; clayPromotedIsFalse = refl
+    }

@@ -18,9 +18,9 @@ It is a roadmap note only. It does not claim that the listed lemmas are proved.
 
 The live state is:
 
-- Gate 1 uniform seam theorem: open
+- Gate 1 uniform seam theorem: closed
 - Gate 2 seam-local model: closed
-- Gate 2 exact `K_N(A)` transfer: open
+- Gate 2 exact `K_N(A)` transfer: closed
 - exact-operator residue / BKM frontier: open
 - continuum BKM / regularity passage: open
 - all-data bridge: open
@@ -55,7 +55,7 @@ Controlling receipt:
 
 - `DASHI/Physics/Closure/NSTriadKNGate1SignedDominationReceipt.agda`
 
-Required lemmas:
+Closed lemmas:
 
 - `UniformDominationRatio`
 - `SchurSignedFactorization`
@@ -75,8 +75,8 @@ leakageBoundUniformInN = true
 normalizedGramToResidueTransferProved = true
 ```
 
-This is the first indispensable gate. Nothing downstream is theorem-level
-without a uniform Gate 1 carrier theorem.
+Stage 1 is now closed. The route no longer blocks on Gate 1; downstream
+theorem-level progress starts from the exact-operator frontier.
 
 ## Stage 2: exact Gate 2 transfer on the true leakage operator
 
@@ -151,6 +151,11 @@ bkmExclusionProved = true
 
 This is the repo’s own exact-operator bridge from the triad leakage object to a
 real BKM-facing contradiction route.
+
+The live theorem surface inside that bridge is the weighted Schur product route
+`R_N(w_N) * C_N(w_N) <= C^2 / N^2 => ||L_FT,script^N||_op <= C / N`, not a
+requirement that both raw row and raw column suprema decay like `1/N`
+separately.
 
 ## Stage 4: continuum BKM and global-regularity passage
 
@@ -298,21 +303,36 @@ This means:
 
 ## High-alpha execution order
 
-If the goal is fewest revisions, the order should be:
+From the current repo state, the order should be:
 
-1. close Gate 1 uniformly
-2. close exact Gate 2 transfer
-3. close the exact-operator frontier
+1. close the exact scripted pair-incidence `C/N` theorem
+2. use that to close `SchurResidueScale`
+3. close the structural BKM projection and residence-time exclusion bridge
 4. discharge the continuum BKM passage
 5. close the all-data bridge
 6. close the full Clay gateway theorem
 7. assemble standard-language writeup and submission packet
 8. hand off to external review/publication/authority process
 
+The live highest-alpha target inside Stage 3 is:
+
+- `PairIncidenceCNTheorem`
+- target: `||L_FT,script^N||_op <= C / N`
+- controlling surface:
+  `DASHI/Physics/Closure/NSTriadKNPairIncidenceOperatorReceipt.agda`
+
+The kernel-formula precursor is now fixed analytically: the nonnegative Schur
+kernel is the repeated-pair incidence sum over retained positive-sector triad
+weights. So the first genuinely open Stage 3 item is no longer “what is the
+kernel?” but “how do its profile pieces satisfy a weighted Schur product
+bound?”
+
 ## Boundary
 
 The current seam-local Gate 2 closure remains useful scaffolding, but it does
 not by itself move the repo into Clay-level NS closure. The first true
-nonlocal theorem gap is still exact `K_N(A)` transfer plus analytic
-outside-seam absorption, and the final theorem gap is still the full
+post-Gate-2 theorem gap is now the exact scripted pair-incidence operator
+bound `||L_FT,script^N||_op <= C / N`; only after that closes can the route
+honestly advance through `SchurResidueScale`, the BKM/residence bridge, the
+continuum passage, the all-data bridge, and finally the full
 gateway/global-regularity route.

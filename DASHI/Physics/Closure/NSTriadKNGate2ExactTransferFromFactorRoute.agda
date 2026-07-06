@@ -41,20 +41,39 @@ record NSTriadKNGate2ExactTransferFromFactorRoute : Setω where
       NSTriadKNGate2ExactFactorRouteHypotheses
 
     schurLinearityTransferWitness :
-      ExactKNAOperatorTransferModel.schurLinearityTransfer
+      ExactKNAOperatorTransferModel.seam-transported-ratio
+        exactTransferModel
+      ≡
+      ExactKNAOperatorTransferModel.transported-ratio
         exactTransferModel
 
     exactRestrictionIdentityWitness :
-      ExactKNAOperatorTransferModel.exactRestrictionIdentity
+      ExactKNAOperatorTransferModel.exact-kna-ratio
+        exactTransferModel
+      ≡
+      ExactKNAOperatorTransferModel.seam-transported-ratio
         exactTransferModel
 
     directionalTransportBoundWitness :
-      ExactKNAOperatorTransferModel.directionalTransportBound
-        exactTransferModel
+      ExactKNAOperatorTransferModel._≤_ exactTransferModel
+        (ExactKNAOperatorTransferModel.seam-transported-ratio
+          exactTransferModel)
+        (ExactKNAOperatorTransferModel._*_
+          exactTransferModel
+          (ExactKNAOperatorTransferModel.directional-transport-factor
+            exactTransferModel)
+          (ExactKNAOperatorTransferModel.seam-rayleigh-ratio
+            exactTransferModel))
 
     subcriticalDirectionalBudgetWitness :
-      ExactKNAOperatorTransferModel.subcriticalDirectionalBudget
-        exactTransferModel
+      ExactKNAOperatorTransferModel._≤_ exactTransferModel
+        (ExactKNAOperatorTransferModel._*_
+          exactTransferModel
+          (ExactKNAOperatorTransferModel.directional-transport-factor
+            exactTransferModel)
+          (ExactKNAOperatorTransferModel.seam-rayleigh-ratio
+            exactTransferModel))
+        (ExactKNAOperatorTransferModel.one-quarter exactTransferModel)
 
     exactTransferQuarterBound :
       ExactKNAOperatorTransferModel._≤_ exactTransferModel

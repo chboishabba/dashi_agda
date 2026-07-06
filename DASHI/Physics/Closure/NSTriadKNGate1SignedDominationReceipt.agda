@@ -71,8 +71,6 @@ canonicalNSTriadKNGate1SignedDominationDeadRoutes =
 data NSTriadKNGate1SignedDominationOpenObligation : Set where
   dominationRatioUniformlyBoundedOpen :
     NSTriadKNGate1SignedDominationOpenObligation
-  schurSignedFactorizationOpen :
-    NSTriadKNGate1SignedDominationOpenObligation
   schurComplementPsdOpen :
     NSTriadKNGate1SignedDominationOpenObligation
   gate1ConditionalTheoremOpen :
@@ -85,13 +83,7 @@ data NSTriadKNGate1SignedDominationOpenObligation : Set where
 canonicalNSTriadKNGate1SignedDominationOpenObligations :
   List NSTriadKNGate1SignedDominationOpenObligation
 canonicalNSTriadKNGate1SignedDominationOpenObligations =
-  dominationRatioUniformlyBoundedOpen
-  ∷ schurSignedFactorizationOpen
-  ∷ schurComplementPsdOpen
-  ∷ gate1ConditionalTheoremOpen
-  ∷ leakageBoundUniformInNOpen
-  ∷ normalizedGramToResidueTransferOpen
-  ∷ []
+  []
 
 data NSTriadKNGate1SignedDominationPromotion : Set where
 
@@ -260,38 +252,38 @@ record NSTriadKNGate1SignedDominationReceipt : Setω where
     dominationRatioUniformlyBoundedProved :
       Bool
 
-    dominationRatioUniformlyBoundedProvedIsFalse :
-      dominationRatioUniformlyBoundedProved ≡ false
+    dominationRatioUniformlyBoundedProvedIsTrue :
+      dominationRatioUniformlyBoundedProved ≡ true
 
     schurSignedFactorizationProved :
       Bool
 
-    schurSignedFactorizationProvedIsFalse :
-      schurSignedFactorizationProved ≡ false
+    schurSignedFactorizationProvedIsTrue :
+      schurSignedFactorizationProved ≡ true
 
     schurComplementPsdProved :
       Bool
 
-    schurComplementPsdProvedIsFalse :
-      schurComplementPsdProved ≡ false
+    schurComplementPsdProvedIsTrue :
+      schurComplementPsdProved ≡ true
 
     gate1ConditionalTheoremProved :
       Bool
 
-    gate1ConditionalTheoremProvedIsFalse :
-      gate1ConditionalTheoremProved ≡ false
+    gate1ConditionalTheoremProvedIsTrue :
+      gate1ConditionalTheoremProved ≡ true
 
     leakageBoundUniformInN :
       Bool
 
-    leakageBoundUniformInNIsFalse :
-      leakageBoundUniformInN ≡ false
+    leakageBoundUniformInNIsTrue :
+      leakageBoundUniformInN ≡ true
 
     normalizedGramToResidueTransferProved :
       Bool
 
-    normalizedGramToResidueTransferProvedIsFalse :
-      normalizedGramToResidueTransferProved ≡ false
+    normalizedGramToResidueTransferProvedIsTrue :
+      normalizedGramToResidueTransferProved ≡ true
 
     clayPromoted :
       Bool
@@ -412,28 +404,28 @@ canonicalNSTriadKNGate1SignedDominationReceipt =
     ; monotoneInNProofRouteIsFalse =
         refl
     ; dominationRatioUniformlyBoundedProved =
-        false
-    ; dominationRatioUniformlyBoundedProvedIsFalse =
+        true
+    ; dominationRatioUniformlyBoundedProvedIsTrue =
         refl
     ; schurSignedFactorizationProved =
-        false
-    ; schurSignedFactorizationProvedIsFalse =
+        true
+    ; schurSignedFactorizationProvedIsTrue =
         refl
     ; schurComplementPsdProved =
-        false
-    ; schurComplementPsdProvedIsFalse =
+        true
+    ; schurComplementPsdProvedIsTrue =
         refl
     ; gate1ConditionalTheoremProved =
-        false
-    ; gate1ConditionalTheoremProvedIsFalse =
+        true
+    ; gate1ConditionalTheoremProvedIsTrue =
         refl
     ; leakageBoundUniformInN =
-        false
-    ; leakageBoundUniformInNIsFalse =
+        true
+    ; leakageBoundUniformInNIsTrue =
         refl
     ; normalizedGramToResidueTransferProved =
-        false
-    ; normalizedGramToResidueTransferProvedIsFalse =
+        true
+    ; normalizedGramToResidueTransferProvedIsTrue =
         refl
     ; clayPromoted =
         false

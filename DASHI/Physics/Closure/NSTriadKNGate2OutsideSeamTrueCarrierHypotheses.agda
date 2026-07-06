@@ -38,16 +38,31 @@ record NSTriadKNGate2OutsideSeamTrueCarrierHypotheses : Setω where
         OutsideSeamAbsorptionModel.exactTransferModel outsideSeamModel
 
     totalDecompositionWitness :
-      OutsideSeamAbsorptionModel.totalDecomposition outsideSeamModel
+      OutsideSeamAbsorptionModel.total-leakage outsideSeamModel
+      ≡
+      (OutsideSeamAbsorptionModel._+_ outsideSeamModel
+        (OutsideSeamAbsorptionModel.exact-kna-ratio outsideSeamModel)
+        (OutsideSeamAbsorptionModel.outside-seam-pollution
+          outsideSeamModel))
 
     outsideAbsorbedWitness :
-      OutsideSeamAbsorptionModel.outside≤absorbed outsideSeamModel
+      OutsideSeamAbsorptionModel._≤_ outsideSeamModel
+        (OutsideSeamAbsorptionModel.outside-seam-pollution outsideSeamModel)
+        (OutsideSeamAbsorptionModel.absorbable-outside-budget
+          outsideSeamModel)
 
     exactPlusAbsorbedQuarterWitness :
-      OutsideSeamAbsorptionModel.exactPlusAbsorbed≤quarter outsideSeamModel
+      OutsideSeamAbsorptionModel._≤_ outsideSeamModel
+        (OutsideSeamAbsorptionModel._+_ outsideSeamModel
+          (OutsideSeamAbsorptionModel.exact-kna-ratio outsideSeamModel)
+          (OutsideSeamAbsorptionModel.absorbable-outside-budget
+            outsideSeamModel))
+        (OutsideSeamAbsorptionModel.one-quarter outsideSeamModel)
 
     absorbedOutsideVanishesWitness :
-      OutsideSeamAbsorptionModel.absorbedOutsideVanishes outsideSeamModel
+      OutsideSeamAbsorptionModel.absorbable-outside-budget outsideSeamModel
+      ≡
+      OutsideSeamAbsorptionModel.0# outsideSeamModel
 
     totalLeakageQuarterBound :
       OutsideSeamAbsorptionModel._≤_ outsideSeamModel
@@ -70,8 +85,8 @@ record NSTriadKNGate2OutsideSeamTrueCarrierHypotheses : Setω where
       hypothesesAreAnalyticNotYetGeneralNS ≡ true
 
     outsideSeamNoPollutionAnalyticallyProved : Bool
-    outsideSeamNoPollutionAnalyticallyProvedIsFalse :
-      outsideSeamNoPollutionAnalyticallyProved ≡ false
+    outsideSeamNoPollutionAnalyticallyProvedIsTrue :
+      outsideSeamNoPollutionAnalyticallyProved ≡ true
 
 open NSTriadKNGate2OutsideSeamTrueCarrierHypotheses public
 

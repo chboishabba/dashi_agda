@@ -139,7 +139,7 @@ stepVP07Reducer =
         Entropy.KPCriterionFromEntropyDominance
           Entropy.entropyDecayDominatesEntropy
     ; proofBoundary =
-        "P07 reducer: current Step V defaults use the DASHI-owned entropy KP summability witness through the owned current P06 endpoint kernel and current P06 mixed-reducer path."
+        "P07 reducer: discharge-package activity decay and entropy counting are composed into shell summability and hence the KP criterion; in the current endpoint lane this reducer is consumed through the owned current P06 mixed-reducer path."
     ; proofBoundaryIsCanonical = refl
     }
 
@@ -158,7 +158,7 @@ stepVP09Reducer =
   record
     { marginTheorem = stepVMarginClosure
     ; proofBoundary =
-        "P09 reducer: current Step V defaults retain the internal 4q margin-closure theorem as the consumable entropy-margin interface through the owned current P06 endpoint kernel and current P06 mixed-reducer path."
+        "P09 reducer: the discharge package exposes the entropy constant and decay margin while DASHI reuses the internal 4q arithmetic closure for admissible diameter constants; in the current endpoint lane this reducer is consumed through the owned current P06 mixed-reducer path."
     ; proofBoundaryIsCanonical = refl
     }
 
@@ -305,14 +305,14 @@ currentStepVReducersUseOwnedCurrentEntropyLane :
   (Entropy.P07KPSummabilityReducer.proofBoundary
     (StepVInternalReducers.p07KPSummabilityReducer currentStepVInternalReducers))
     ≡
-  "P07 reducer: current Step V defaults use the DASHI-owned entropy KP summability witness through the owned current P06 endpoint kernel and current P06 mixed-reducer path."
+  "P07 reducer: discharge-package activity decay and entropy counting are composed into shell summability and hence the KP criterion; in the current endpoint lane this reducer is consumed through the owned current P06 mixed-reducer path."
 currentStepVReducersUseOwnedCurrentEntropyLane = refl
 
 currentStepVMarginUsesOwnedCurrentEntropyLane :
   (Entropy.P09EntropyMargin.proofBoundary
     (StepVInternalReducers.p09EntropyMarginReducer currentStepVInternalReducers))
     ≡
-  "P09 reducer: current Step V defaults retain the internal 4q margin-closure theorem as the consumable entropy-margin interface through the owned current P06 endpoint kernel and current P06 mixed-reducer path."
+  "P09 reducer: the discharge package exposes the entropy constant and decay margin while DASHI reuses the internal 4q arithmetic closure for admissible diameter constants; in the current endpoint lane this reducer is consumed through the owned current P06 mixed-reducer path."
 currentStepVMarginUsesOwnedCurrentEntropyLane = refl
 
 StepVAnalyticLeavesToStepV :
@@ -1079,8 +1079,10 @@ currentStepVDownstreamTransferSemanticKernel = record
 
 -- ── Sprint 6: Fixed Lattice gap P21/P23/P24/P25/P26 ───────────────────
 
+LatticeSpectralGap : Set
+LatticeSpectralGap = 0ℝ <ℝ Δ-latt
+
 postulate
-  LatticeSpectralGap : Set
   ExponentialClustering : Set
   FixedLatticeMassGap : Set
   UniformAcrossFiniteVolumes : Set

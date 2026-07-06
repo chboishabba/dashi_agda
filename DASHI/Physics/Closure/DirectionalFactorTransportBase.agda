@@ -50,7 +50,7 @@ record DirectionalFactorTransportModel : Set₁ where
       directional-factor ≤ coarse-factor
 
     *-mono :
-      ∀ a b c d → a ≤ b → c ≤ d → a * c ≤ b * d
+      ∀ a b c d → a ≤ b → c ≤ d → (a * c) ≤ (b * d)
 
   transported≤coarse :
     transported-ratio ≤ coarse-transport

@@ -60,6 +60,6 @@ record QuotientAwareLiftDefectExpansionModel : Set₁ where
         (θ-principal + η-defect)
         one-quarter
         principalPlusDefect≤budget
-        (lemma-c quarterMarginModel))
+        lemma-c)
 
 open QuotientAwareLiftDefectExpansionModel public

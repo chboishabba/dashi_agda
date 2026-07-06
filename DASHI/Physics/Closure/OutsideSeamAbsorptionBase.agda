@@ -77,7 +77,7 @@ record OutsideSeamAbsorptionModel : Set₁ where
   exactPlusZero≤quarter =
     subst
       (λ t → (exact-kna-ratio + t) ≤ one-quarter)
-      (sym absorbedOutsideVanishes)
+      absorbedOutsideVanishes
       exactPlusAbsorbed≤quarter
 
   outside≤zero :
@@ -85,7 +85,7 @@ record OutsideSeamAbsorptionModel : Set₁ where
   outside≤zero =
     subst
       (λ t → outside-seam-pollution ≤ t)
-      (sym absorbedOutsideVanishes)
+      absorbedOutsideVanishes
       outside≤absorbed
 
   totalDecompositionWithZeroBudget :
