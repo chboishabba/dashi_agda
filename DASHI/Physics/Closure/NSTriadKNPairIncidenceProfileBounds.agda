@@ -20,6 +20,8 @@ import DASHI.Physics.Closure.NSTriadKNPairIncidenceCNTheorem as CNTheorem
 import DASHI.Physics.Closure.NSTriadKNQGapTransfer as QGap
 import DASHI.Physics.Closure.NSTriadKNBKMResidenceBridge as BKMBridge
 import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
+import DASHI.Physics.Closure.NSTriadKNWeakOperatorErrorModel as WeakError
+import DASHI.Physics.Closure.NSTriadKNWeakQuadraticFormControl as WeakQuadratic
 
 
 
@@ -83,7 +85,7 @@ canonicalForcedTailRouteNote =
 
 canonicalReadoutText : String
 canonicalReadoutText =
-  "Profile-bounds status: the structural four-profile decomposition, the full 16-entry profile cross-product matrix, the global weighted Schur product theorem, and the PairIncidence C/N operator route are now closed on the active chain. The next honest theorem is no longer a profile-product estimate. It is the Blocker 2 residue/gap scaling bridge: construct ResidueScaleCompatibility so the operator C/N theorem yields q_gap(N) >= c / N^2 through an explicit weak/strong norm scaling and base-gap-minus-error absorption argument. The forced-tail sampled witness remains historical evidence only; theorem authority for the active chain now comes from the depth-bearing profile route plus the still-open residue/gap compatibility layer."
+  "Profile-bounds status: the structural four-profile decomposition, the full 16-entry profile cross-product matrix, the global weighted Schur product theorem, and the PairIncidence C/N operator route are now closed on the active chain. Blocker 2A open: current unit-shell witness is trivial/model-only; actual Stage 3 pair-incidence operator is not yet exposed. The next honest theorem is no longer a profile-product estimate. It is the Blocker 2 residue/gap scaling bridge: construct ResidueScaleCompatibility so the operator C/N theorem yields q_gap(N) >= c / N^2 through an explicit weak/strong norm scaling and base-gap-minus-error absorption argument. The forced-tail sampled witness remains historical evidence only; theorem authority for the active chain now comes from the depth-bearing profile route plus the still-open residue/gap compatibility layer."
 
 record NSTriadKNPairIncidenceProfileBounds : Setω where
   constructor mkNSTriadKNPairIncidenceProfileBounds
@@ -224,11 +226,9 @@ compatibilityShellIndex : Nat
 compatibilityShellIndex = suc zero
 
 postulate
-  canonicalWeakError :
-    ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex → Nat
-  canonicalWeakErrorConstant : Nat
   canonicalBaseGapN2 : Set
   canonicalOperatorErrorN2 : Set
+  canonicalErrorIdentifiedWithOperatorStrongError : Set
   canonicalGapMarginPositive : Set
   canonicalGapPerturbationAbsorption : Set
   canonicalQGapTransferWitness : Set
@@ -243,16 +243,96 @@ canonicalResidueNormModel :
 canonicalResidueNormModel =
   ResidueNorm.nWeightedResidueNormModel
 
+------------------------------------------------------------------------
+-- Blocker 2A currently has two layers:
+--   1. model-only plumbing used to keep the weak-quadratic-form lane typed;
+--   2. the actual Stage 3 operator witness, still missing and fail-closed.
+
+modelOperatorWitness :
+  CNTheorem.PairIncidenceOperatorWitness canonicalResidueNormModel compatibilityShellIndex
+modelOperatorWitness =
+  CNTheorem.modelUnitShellPairIncidenceOperatorWitness canonicalResidueNormModel
+
+actualOperatorWitnessTarget : Set₁
+actualOperatorWitnessTarget =
+  CNTheorem.ActualUnitShellPairIncidenceOperatorWitnessTarget
+    canonicalResidueNormModel
+
+actualOperatorWitnessClosed : Bool
+actualOperatorWitnessClosed =
+  CNTheorem.actualUnitShellPairIncidenceOperatorWitnessClosed
+
+actualOperatorWitnessClosedIsFalse :
+  actualOperatorWitnessClosed ≡ false
+actualOperatorWitnessClosedIsFalse =
+  CNTheorem.actualUnitShellPairIncidenceOperatorWitnessClosedIsFalse
+
+canonicalWeakQuadraticFormControlTarget :
+  WeakQuadratic.WeakQuadraticFormControlTarget
+canonicalWeakQuadraticFormControlTarget =
+  WeakQuadratic.mkUnitShellWeakQuadraticFormControlTargetFromWitness
+    canonicalResidueNormModel
+    modelOperatorWitness
+    (CNTheorem.PairIncidenceOperatorWitness.absQuadraticForm modelOperatorWitness)
+    (λ _ → refl)
+
+canonicalActualWeakQuadraticForm :
+  ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex → Nat
+canonicalActualWeakQuadraticForm =
+  WeakQuadratic.WeakQuadraticFormControlTarget.actualWeakQuadraticForm
+    canonicalWeakQuadraticFormControlTarget
+
+canonicalAbsPairIncidenceQuadraticForm :
+  ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex → Nat
+canonicalAbsPairIncidenceQuadraticForm =
+  WeakQuadratic.WeakQuadraticFormControlTarget.AbsPairIncidenceQuadraticForm
+    canonicalWeakQuadraticFormControlTarget
+
+canonicalWeakQuadraticFormConstant : Nat
+canonicalWeakQuadraticFormConstant =
+  WeakQuadratic.WeakQuadraticFormControlTarget.weakQuadraticFormConstant
+    canonicalWeakQuadraticFormControlTarget
+
+postulate
+  realActualWeakQuadraticForm :
+    ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex → Nat
+
+  actualPairIncidenceQuadraticFormBoundedByWitness :
+    (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
+    realActualWeakQuadraticForm x
+      ≤
+      WeakQuadratic.WeakQuadraticFormControlTarget.AbsPairIncidenceQuadraticForm
+        canonicalWeakQuadraticFormControlTarget
+        x
+
+actualQuadraticFormBoundedByWitnessClosed : Bool
+actualQuadraticFormBoundedByWitnessClosed = false
+
+actualQuadraticFormBoundedByWitnessClosedIsFalse :
+  actualQuadraticFormBoundedByWitnessClosed ≡ false
+actualQuadraticFormBoundedByWitnessClosedIsFalse = refl
+
+canonicalWeakOperatorErrorModelTarget :
+  WeakError.WeakOperatorErrorModelTarget
+canonicalWeakOperatorErrorModelTarget =
+  WeakQuadratic.toWeakOperatorErrorModelTarget
+    canonicalWeakQuadraticFormControlTarget
+
+canonicalWeakOperatorErrorModel :
+  WeakError.WeakOperatorErrorModel
+    (ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex)
+canonicalWeakOperatorErrorModel =
+  WeakError.toWeakOperatorErrorModel
+    canonicalWeakOperatorErrorModelTarget
+
+canonicalOperatorNormControlsWeakQuadraticForm : Set
+canonicalOperatorNormControlsWeakQuadraticForm =
+  WeakQuadratic.operatorNormControlsWeakQuadraticForm
+    canonicalWeakQuadraticFormControlTarget
+
 canonicalOperatorWeakCN : Set
 canonicalOperatorWeakCN =
-  (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
-  compatibilityShellIndex * canonicalWeakError x
-    ≤
-    canonicalWeakErrorConstant *
-      ResidueNorm.weakNormSquared
-        canonicalResidueNormModel
-        compatibilityShellIndex
-        x
+  canonicalOperatorNormControlsWeakQuadraticForm
 
 canonicalOperatorCNToStrongErrorN2 : Set
 canonicalOperatorCNToStrongErrorN2 =
@@ -263,8 +343,8 @@ canonicalOperatorCNToStrongErrorN2 =
         canonicalResidueNormModel
         compatibilityShellIndex
         x)
-    canonicalWeakError
-    canonicalWeakErrorConstant
+    canonicalActualWeakQuadraticForm
+    canonicalWeakQuadraticFormConstant
 
 canonicalOperatorCNWeakStrongComposeN2 :
   canonicalOperatorWeakCN →
@@ -282,8 +362,8 @@ canonicalOperatorCNWeakStrongComposeN2 operatorWeakCNProof =
         canonicalResidueNormModel
         compatibilityShellIndex
         x)
-    canonicalWeakError
-    canonicalWeakErrorConstant
+    canonicalActualWeakQuadraticForm
+    canonicalWeakQuadraticFormConstant
     operatorWeakCNProof
     (λ x →
       ResidueNorm.strongDominatesWeakByN
@@ -312,8 +392,16 @@ canonicalBaseGapMinusErrorAbsorptionTarget :
   QGap.BaseGapMinusErrorAbsorptionTarget
 canonicalBaseGapMinusErrorAbsorptionTarget =
   QGap.mkBaseGapMinusErrorAbsorptionTarget
+    (QGap.mkGapQuadraticFormsTarget
+      ResidueNorm.ResidueEnergyCarrier
+      compatibilityShellIndex
+      (λ _ → 0)
+      (λ _ → 0)
+      (λ _ → 0)
+      Nat)
     canonicalBaseGapN2
     canonicalOperatorErrorN2
+    canonicalErrorIdentifiedWithOperatorStrongError
     canonicalGapMarginPositive
     canonicalGapPerturbationAbsorption
     false

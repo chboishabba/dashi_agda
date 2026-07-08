@@ -1,3 +1,958 @@
+Below is the **remaining Clay-grade mathematical package** from the current repo frontier. I’ll write it as a theorem ladder with exact missing lemmas, what each must prove, and what would count as real closure versus another surface.
+
+The key point is:
+
+[
+\boxed{
+\text{Stage 3 is closed through } C/N \text{ only after Blocker 1 and weighted-Schur assumptions.}
+}
+]
+
+The next live mathematical frontier is:
+
+[
+\boxed{
+\text{Blocker 2A: actual weak quadratic form control.}
+}
+]
+
+Everything after that depends on it.
+
+---
+
+# 0. Current frontier
+
+The active chain currently reaches:
+
+[
+R_N(w_N)C_N(w_N)\le C^2N^{-2}
+]
+
+and structurally:
+
+[
+|L_N|_{\mathrm{op}}\le C/N.
+]
+
+But the next theorem needs an **actual quadratic form**:
+
+[
+Q_N^{weak}(x)
+=============
+
+|\langle L_Nx,x\rangle|_{weak}.
+]
+
+The repo currently names this missing bridge as:
+
+```agda
+actualWeakQuadraticFormIsPairIncidenceForm
+operatorNormControlsWeakQuadraticForm
+```
+
+Those are the first theorems to inhabit.
+
+---
+
+# 1. Blocker 2A — actual weak quadratic form
+
+## 1.1 Define the actual pair-incidence quadratic form
+
+You need a concrete object:
+
+[
+B_N(x,y)=\langle L_Nx,y\rangle_{weak}.
+]
+
+Then:
+
+[
+Q_N^{weak}(x)=|B_N(x,x)|.
+]
+
+In theorem-surface form:
+
+```agda
+PairIncidenceBilinearForm :
+  (N : Nat) -> Carrier N -> Carrier N -> Nat
+```
+
+or if signs/absolute values are not modeled yet:
+
+```agda
+AbsPairIncidenceQuadraticForm :
+  (N : Nat) -> Carrier N -> Nat
+```
+
+The target should be:
+
+```agda
+actualWeakQuadraticFormIsPairIncidenceForm :
+  actualWeakQuadraticForm N x
+  ≡ AbsPairIncidenceQuadraticForm N x
+```
+
+or, safer:
+
+```agda
+actualWeakQuadraticFormBoundedByPairIncidenceForm :
+  actualWeakQuadraticForm N x
+  ≤ AbsPairIncidenceQuadraticForm N x
+```
+
+The equality version is cleaner if `actualWeakQuadraticForm` is intended to be exactly the pair-incidence form.
+
+---
+
+## 1.2 Prove operator norm controls the quadratic form
+
+This is the standard Hilbert-space inequality:
+
+[
+|\langle L_Nx,x\rangle|
+\le
+|L_Nx|,|x|
+\le
+|L_N|_{\mathrm{op}}|x|^2.
+]
+
+So the missing theorem is:
+
+```agda
+operatorNormControlsWeakQuadraticForm :
+  pairIncidenceCNTheoremClosed ->
+  (N : Nat) ->
+  (x : Carrier N) ->
+  N * actualWeakQuadraticForm N x
+    ≤ weakQuadraticFormConstant * weakNormSquared N x
+```
+
+Mathematically:
+
+[
+|L_N|_{\mathrm{op}}\le C/N
+]
+
+implies:
+
+[
+Q_N^{weak}(x)
+\le
+\frac{C}{N}|x|_{weak}^2.
+]
+
+Nat-scaled:
+
+[
+NQ_N^{weak}(x)
+\le
+C|x|_{weak}^2.
+]
+
+This requires the intermediate lemma:
+
+```agda
+operatorNormQuadraticFormBound :
+  AbsPairIncidenceQuadraticForm N x
+    ≤ operatorNorm N * weakNormSquared N x
+```
+
+and then:
+
+```agda
+pairIncidenceCNOperatorNormBound :
+  pairIncidenceCNTheoremClosed ->
+  N * operatorNorm N ≤ C
+```
+
+Then compose:
+
+[
+Q_N^{weak}(x)
+\le
+|L_N|*{\mathrm{op}}|x|*{weak}^2
+]
+
+and:
+
+[
+N|L_N|_{\mathrm{op}}\le C.
+]
+
+---
+
+## 1.3 Norm-regime requirement
+
+You must decide whether this is happening in the weighted norm or unweighted norm.
+
+If the current Stage 3 theorem gives:
+
+[
+|L_N|_{\ell^2(w)\to\ell^2(w)}\le C/N,
+]
+
+then the quadratic form must also be weighted:
+
+[
+|\langle L_Nx,x\rangle_w|
+\le
+|L_N|_{w\to w}|x|_w^2.
+]
+
+Then no weighted/unweighted transfer is needed.
+
+If the weak quadratic form is unweighted, you need:
+
+```agda
+weightedToWeakNormTransfer :
+  WeightedOperatorCNBound ->
+  WeakOperatorCNBound
+```
+
+with uniform constants.
+
+So choose one:
+
+### Preferred route
+
+Keep Blocker 2 entirely in the weighted norm.
+
+Then:
+
+```agda
+weakNormSquared = weightedNormSquared
+```
+
+and `PairIncidence C/N` directly controls the weak quadratic form.
+
+### Harder route
+
+If weak norm is unweighted, prove:
+
+[
+|x|*{weighted}^2\sim |x|*{weak}^2
+]
+
+uniformly, and:
+
+[
+|L_N|*{weak\to weak}\le C|L_N|*{weighted\to weighted}.
+]
+
+Do not silently switch regimes.
+
+---
+
+# 2. Blocker 2B — weak-to-strong (N^{-2}) composition
+
+This lane is mostly done.
+
+You already proved the arithmetic theorem:
+
+```agda
+operatorCNWeakStrongComposeN2
+```
+
+The mathematical content is:
+
+[
+N\cdot Q_N^{weak}(x)
+\le
+C|x|_{weak}^2
+]
+
+and:
+
+[
+N|x|*{weak}^2
+\le
+|x|*{strong}^2
+]
+
+imply:
+
+[
+N^2Q_N^{weak}(x)
+\le
+C|x|_{strong}^2.
+]
+
+That gives the strong (N^{-2}) error estimate.
+
+The resulting theorem should be:
+
+```agda
+operatorErrorN2FromWeakStrong :
+  operatorNormControlsWeakQuadraticForm ->
+  strongDominatesWeakByN ->
+  operatorStrongErrorN2Target
+```
+
+Mathematically:
+
+[
+Q_N^{weak}(x)
+\le
+\frac{C}{N^2}|x|_{strong}^2.
+]
+
+Nat-scaled:
+
+[
+N^2Q_N^{weak}(x)
+\le
+C|x|_{strong}^2.
+]
+
+This should be dependency-derived from the two inputs, not postulated.
+
+---
+
+# 3. Blocker 2C — base-gap minus error absorption
+
+Now define the actual gap quadratic form.
+
+You need three objects:
+
+[
+q_N^{base}(x),
+\qquad
+err_N(x),
+\qquad
+q_N^{gap}(x).
+]
+
+The intended relation should be:
+
+[
+q_N^{gap}(x)
+============
+
+q_N^{base}(x)-err_N(x)
+]
+
+or at least:
+
+[
+q_N^{gap}(x)\ge q_N^{base}(x)-err_N(x).
+]
+
+Because Nat has no subtraction-friendly order by default, use scaled inequalities.
+
+---
+
+## 3.1 Base gap lower bound
+
+Required theorem:
+
+```agda
+baseGapN2 :
+  (N : Nat) ->
+  (x : Carrier N) ->
+  A * strongNormSquared N x
+    ≤ N * N * qBase N x
+```
+
+Mathematically:
+
+[
+q_N^{base}(x)
+\ge
+\frac{A}{N^2}|x|_{strong}^2.
+]
+
+Here (A>0) is a fixed constant.
+
+---
+
+## 3.2 Operator error upper bound
+
+From Blocker 2B:
+
+```agda
+operatorErrorN2 :
+  (N : Nat) ->
+  (x : Carrier N) ->
+  N * N * qError N x
+    ≤ B * strongNormSquared N x
+```
+
+Mathematically:
+
+[
+err_N(x)
+\le
+\frac{B}{N^2}|x|_{strong}^2.
+]
+
+This should be obtained by identifying:
+
+[
+qError_N(x)
+===========
+
+actualWeakQuadraticForm_N(x)
+]
+
+or proving:
+
+[
+qError_N(x)\le actualWeakQuadraticForm_N(x).
+]
+
+So you need:
+
+```agda
+operatorErrorBoundedByStrongError :
+  qError N x ≤ actualWeakQuadraticForm N x
+```
+
+or equality.
+
+---
+
+## 3.3 Positive margin
+
+You need:
+
+[
+A>B.
+]
+
+In Nat form:
+
+```agda
+gapMarginPositive :
+  B < A
+```
+
+or if constants are represented with separate witnesses:
+
+```agda
+gapMargin :
+  Σ[ cGap ∈ Nat ] (B + suc cGap ≤ A)
+```
+
+This is better because it gives the actual lower-gap constant:
+
+[
+c_{\mathrm{gap}}=A-B.
+]
+
+---
+
+## 3.4 Perturbation absorption
+
+The theorem is:
+
+[
+q_N^{gap}(x)
+\ge
+q_N^{base}(x)-q_N^{error}(x),
+]
+
+plus:
+
+[
+N^2q_N^{base}(x)\ge A|x|_{strong}^2,
+]
+
+[
+N^2q_N^{error}(x)\le B|x|_{strong}^2,
+]
+
+[
+A>B,
+]
+
+therefore:
+
+[
+N^2q_N^{gap}(x)
+\ge
+(A-B)|x|_{strong}^2.
+]
+
+Agda target:
+
+```agda
+gapPerturbationAbsorption :
+  baseGapN2 ->
+  operatorErrorN2 ->
+  gapMarginPositive ->
+  (N : Nat) ->
+  (x : Carrier N) ->
+  cGap * strongNormSquared N x
+    ≤ N * N * qGap N x
+```
+
+This is the theorem that truly gives:
+
+[
+q_{\mathrm{gap}}(N)\ge c/N^2.
+]
+
+---
+
+# 4. Blocker 2D — close `ResidueScaleCompatibility`
+
+Once the above are inhabited, construct:
+
+```agda
+canonicalCompatibility : ResidueScaleCompatibility
+```
+
+not from placeholders, but from:
+
+```text
+WeakStrongNormScaling:
+  - ResidueNormModel
+  - strongDominatesWeakByN
+  - actualWeakQuadraticForm control
+  - operatorCNWeakStrongComposeN2
+
+BaseGapMinusErrorAbsorption:
+  - baseGapN2
+  - operatorErrorN2
+  - gapMarginPositive
+  - gapPerturbationAbsorption
+```
+
+Then:
+
+```agda
+qGapTransferClosed = true
+```
+
+becomes theorem-derived.
+
+Mathematical endpoint:
+
+[
+\boxed{
+q_{\mathrm{gap}}(N)\ge c_{\mathrm{gap}}N^{-2}.
+}
+]
+
+---
+
+# 5. Stage 4A — (q_{\mathrm{gap}}) to Schur residue scale
+
+Once:
+
+[
+q_{\mathrm{gap}}(N)\ge cN^{-2},
+]
+
+you need to show it controls the residue term used in the BKM route.
+
+The missing theorem is:
+
+```agda
+qGapN2ControlsSchurResidue
+```
+
+Mathematically, one possible shape is:
+
+[
+\mathrm{SchurRes}*N(x)
+\le
+C q*{\mathrm{gap}}(N)^{-1}\mathcal D_N(x).
+]
+
+Given:
+
+[
+q_{\mathrm{gap}}(N)^{-1}\le C'N^2,
+]
+
+you get:
+
+[
+\mathrm{SchurRes}_N(x)
+\le
+C''N^2\mathcal D_N(x).
+]
+
+This is only useful if the dissipation has matching shell scaling.
+
+So the actual theorem must state the full scaled form, not only “q-gap controls residue.”
+
+Recommended Nat-scaled form:
+
+```agda
+qGapN2ControlsSchurResidue :
+  qGapTransferClosed ->
+  (N : Nat) ->
+  (x : Carrier N) ->
+  SchurResidue N x ≤ residueConstant * N * N * Dissipation N x
+```
+
+or, if the residue is meant to be small:
+
+```agda
+N * N * SchurResidue N x ≤ C * Dissipation N x
+```
+
+The direction matters. Audit carefully.
+
+---
+
+# 6. Stage 4B — residue summability
+
+To reach BKM, you need a summable estimate over shells.
+
+If the shell index is (N) and the bound gives (N^{-2}), then:
+
+[
+\sum_N N^{-2}<\infty.
+]
+
+But if physical frequency is dyadic, BKM often involves factors like (2^N). Then (N^{-2}) alone is not enough.
+
+You need one of:
+
+## Route A — direct summable residue
+
+[
+\sum_N\int_0^T \mathrm{SchurRes}_N(t),dt<\infty.
+]
+
+Agda target:
+
+```agda
+schurResidueSummable :
+  SchurResidueScale ->
+  SummableOverShellsIntegratedResidue
+```
+
+## Route B — residence-time exclusion
+
+For dangerous shell sets:
+
+[
+E_N(\lambda)={t: Danger_N(t)\ge \lambda_N},
+]
+
+prove:
+
+[
+|E_N(\lambda)|
+\le
+C\lambda_N^{-1}N^{-2}.
+]
+
+Then choose thresholds (\lambda_N) so:
+
+[
+\sum_N\lambda_N|E_N|<\infty.
+]
+
+Agda targets:
+
+```agda
+ResidenceTimeExclusion :
+  Set
+
+dangerousShellResidenceBound :
+  SchurResidueScale ->
+  ResidenceTimeExclusion
+
+residenceSummability :
+  ResidenceTimeExclusion ->
+  SummableBKMProjection
+```
+
+---
+
+# 7. Stage 4C — BKM projection smallness
+
+BKM requires:
+
+[
+\int_0^T |\omega(t)|_{\infty},dt<\infty.
+]
+
+So you need a shell projection theorem:
+
+[
+|\omega(t)|_{\infty}
+\le
+\sum_N Danger_N(t)
++
+\text{controlled low modes}.
+]
+
+The missing theorem should be:
+
+```agda
+BKMProjectionSmallness :
+  Set
+```
+
+with concrete content:
+
+[
+\int_0^T \sum_N Danger_N(t),dt<\infty.
+]
+
+Then:
+
+```agda
+schurResidueScaleToBKMProjectionSmallness :
+  SchurResidueScale ->
+  ResidenceTimeExclusion ->
+  BKMProjectionSmallness
+```
+
+and:
+
+```agda
+qGapAndResidenceExcludeBKMBlowup :
+  qGapTransferClosed ->
+  ResidenceTimeExclusion ->
+  BKMProjectionSmallness
+```
+
+---
+
+# 8. Stage 4D — BKM finite integral and continuation
+
+You then need the classical continuation theorem.
+
+The target is:
+
+```agda
+bkmIntegralFinite :
+  ∫₀ᵀ ||ω(t)||∞ dt < ∞
+```
+
+and:
+
+```agda
+bkmContinuation :
+  bkmIntegralFinite ->
+  SmoothContinuationPast T
+```
+
+Mathematically:
+
+[
+\int_0^T|\omega(t)|_\infty dt<\infty
+\Rightarrow
+\text{no blow-up at }T.
+]
+
+This is standard Beale–Kato–Majda, but in DASHI it must be a theorem surface or imported/encoded lemma, not just receipt prose.
+
+---
+
+# 9. Final Clay coverage layer
+
+Even after BKM continuation for the triad carrier, Clay requires **all smooth divergence-free initial data on (\mathbb R^3) or (\mathbb T^3)**, depending on the formulation.
+
+So you need:
+
+```agda
+allSmoothNSDataEnterCarrier :
+  SmoothDivergenceFreeInitialData ->
+  TriadCarrierInitialData
+```
+
+```agda
+carrierEvolutionMatchesNS :
+  TriadCarrierSolution ->
+  NavierStokesSolution
+```
+
+```agda
+bkmContinuationForCarrier :
+  CarrierBKMFinite ->
+  CarrierSmoothContinuation
+```
+
+```agda
+globalSmoothNSRegularity :
+  SmoothDivergenceFreeInitialData ->
+  GlobalSmoothSolution
+```
+
+The critical exclusions to audit:
+
+```text
+no symmetry restriction
+no smallness assumption
+no finite-dimensional truncation assumption
+no sampled N-only assumption
+no special profile support assumption
+no conditional carrier restriction
+continuum passage complete
+pressure term included
+forcing/domain handled according to Clay statement
+```
+
+Until this layer is real:
+
+[
+\boxed{
+\text{you may have a strong conditional regularity theorem, but not Clay NS.}
+}
+]
+
+---
+
+# 10. Immediate implementation order
+
+From the current repo frontier, do exactly this:
+
+## Step 1 — weak quadratic form object
+
+In `NSTriadKNWeakQuadraticFormControl.agda`, define or import:
+
+```agda
+AbsPairIncidenceQuadraticForm :
+  (N : Nat) -> Carrier N -> Nat
+```
+
+Then prove or expose:
+
+```agda
+actualWeakQuadraticFormIsPairIncidenceForm :
+  actualWeakQuadraticForm N x ≡ AbsPairIncidenceQuadraticForm N x
+```
+
+## Step 2 — operator norm controls quadratic form
+
+Prove:
+
+```agda
+operatorNormControlsWeakQuadraticForm :
+  pairIncidenceCNTheoremClosed ->
+  (N : Nat) ->
+  (x : Carrier N) ->
+  N * actualWeakQuadraticForm N x
+    ≤ weakQuadraticFormConstant * weakNormSquared N x
+```
+
+This is the next actual theorem.
+
+## Step 3 — strong (N^{-2}) error
+
+Use already-proved:
+
+```agda
+operatorCNWeakStrongComposeN2
+```
+
+to get:
+
+```agda
+operatorErrorN2
+```
+
+## Step 4 — base-gap absorption
+
+Prove:
+
+```agda
+baseGapN2
+gapMarginPositive
+gapPerturbationAbsorption
+```
+
+## Step 5 — close q-gap transfer
+
+Construct:
+
+```agda
+canonicalCompatibility : ResidueScaleCompatibility
+```
+
+from real components.
+
+## Step 6 — Stage 4
+
+Add real theorem modules for:
+
+```text
+qGapN2ControlsSchurResidue
+ResidenceTimeExclusion
+BKMProjectionSmallness
+bkmIntegralFinite
+bkmContinuation
+carrier-to-full-NS coverage
+```
+
+---
+
+# 11. Full missing theorem list, final form
+
+Here is the complete list, in dependency order:
+
+```text
+1. AbsPairIncidenceQuadraticForm
+2. actualWeakQuadraticFormIsPairIncidenceForm
+3. operatorNormQuadraticFormBound
+4. pairIncidenceCNToWeakQuadraticCN
+5. operatorNormControlsWeakQuadraticForm
+6. operatorErrorN2 from operatorCNWeakStrongComposeN2
+7. qBase / qError / qGap definitions
+8. baseGapN2
+9. errorIdentifiedWithOperatorStrongError
+10. gapMarginPositive
+11. gapPerturbationAbsorption
+12. ResidueScaleCompatibility inhabited
+13. qGapTransferClosed
+14. qGapN2ControlsSchurResidue
+15. SchurResidueScaleClosed
+16. ResidenceTimeExclusion
+17. BKMProjectionSmallness
+18. schurResidueScaleToBKMProjectionSmallness
+19. qGapAndResidenceExcludeBKMBlowup
+20. bkmIntegralFinite
+21. bkmContinuation
+22. allSmoothNSDataEnterCarrier
+23. carrierEvolutionMatchesNS
+24. bkmContinuationForCarrier
+25. globalSmoothNSRegularity
+```
+
+---
+
+# 12. Bottom line
+
+The immediate theorem to prove is:
+
+[
+\boxed{
+N\cdot actualWeakQuadraticForm_N(x)
+\le
+C\cdot weakNormSquared_N(x).
+}
+]
+
+But this must be proved through:
+
+[
+actualWeakQuadraticForm_N(x)
+============================
+
+|\langle L_Nx,x\rangle|_{weak}
+]
+
+and:
+
+[
+|\langle L_Nx,x\rangle|*{weak}
+\le
+|L_N|*{\mathrm{op}}|x|_{weak}^2.
+]
+
+Then PairIncidence (C/N) supplies the (N^{-1}).
+
+That is the next Clay-relevant proof. Everything downstream depends on it.
+
+
 Yes. Here is the full remaining mathematical package, organized as a **closure DAG**. The point is to stop chasing local booleans and discharge the exact analytic assumptions in the order that can actually lead to Clay-grade closure.
 
 # Global remaining theorem DAG

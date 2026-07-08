@@ -166,14 +166,30 @@ record BaseGapMinusErrorAbsorption : Set₁ where
   field
     baseGapN2 : Set
     operatorErrorN2 : Set
+    errorIdentifiedWithOperatorStrongError : Set
+    gapMarginPositive : Set
     gapPerturbationAbsorption : Set
 
     -- This lane is the second actual Blocker 2 theorem target.
     perturbationAbsorptionClosed : Bool
 
+record GapQuadraticFormsTarget : Set₁ where
+  constructor mkGapQuadraticFormsTarget
+  field
+    Carrier : Nat → Set
+    shellIndex : Nat
+
+    qBase : Carrier shellIndex → Nat
+    qError : Carrier shellIndex → Nat
+    qGap : Carrier shellIndex → Nat
+
+    gapDecompositionWitness : Set
+
 record BaseGapMinusErrorAbsorptionTarget : Set₁ where
   constructor mkBaseGapMinusErrorAbsorptionTarget
   field
+    gapQuadraticForms : GapQuadraticFormsTarget
+
     -- Placeholder theorem surface for the second live Blocker 2 estimate:
     --
     --   q_N = q_N^base - err_N
@@ -184,6 +200,7 @@ record BaseGapMinusErrorAbsorptionTarget : Set₁ where
     -- so q_N ≥ (a - b) / N².
     baseGapN2 : Set
     operatorErrorN2 : Set
+    errorIdentifiedWithOperatorStrongError : Set
     gapMarginPositive : Set
     gapPerturbationAbsorption : Set
 
@@ -219,6 +236,8 @@ toBaseGapMinusErrorAbsorption target =
   mkBaseGapMinusErrorAbsorption
     (BaseGapMinusErrorAbsorptionTarget.baseGapN2 target)
     (BaseGapMinusErrorAbsorptionTarget.operatorErrorN2 target)
+    (BaseGapMinusErrorAbsorptionTarget.errorIdentifiedWithOperatorStrongError target)
+    (BaseGapMinusErrorAbsorptionTarget.gapMarginPositive target)
     (BaseGapMinusErrorAbsorptionTarget.gapPerturbationAbsorption target)
     (BaseGapMinusErrorAbsorptionTarget.targetClosed target)
 
@@ -284,6 +303,13 @@ operatorErrorN2 compat =
   BaseGapMinusErrorAbsorption.operatorErrorN2
     (baseGapAbsorption compat)
 
+errorIdentifiedWithOperatorStrongError :
+  (compat : ResidueScaleCompatibility) →
+  Set
+errorIdentifiedWithOperatorStrongError compat =
+  BaseGapMinusErrorAbsorption.errorIdentifiedWithOperatorStrongError
+    (baseGapAbsorption compat)
+
 gapMarginPositive :
   (target : BaseGapMinusErrorAbsorptionTarget) →
   Set
@@ -296,6 +322,12 @@ gapPerturbationAbsorption :
 gapPerturbationAbsorption compat =
   BaseGapMinusErrorAbsorption.gapPerturbationAbsorption
     (baseGapAbsorption compat)
+
+operatorErrorN2FromWeakStrong :
+  (compat : ResidueScaleCompatibility) →
+  Set
+operatorErrorN2FromWeakStrong compat =
+  operatorCNToStrongErrorN2 compat
 
 qGapTransferClosed : ResidueScaleCompatibility → Bool
 qGapTransferClosed compat
