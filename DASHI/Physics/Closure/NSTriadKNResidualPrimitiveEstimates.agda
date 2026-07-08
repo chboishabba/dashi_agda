@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSTriadKNResidualPrimitiveEstimates where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Data.Nat using (ℕ)
 
 ------------------------------------------------------------------------

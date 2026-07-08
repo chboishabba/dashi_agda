@@ -73,6 +73,9 @@ postulate
   RealB5Polymer : Set
   RealB5Block   : Set
 
+  canonicalB5BlockFromSourceIndex :
+    Nat → RealB5Block
+
   RealB5LargeFieldPolymer :
     Nat → RealB5Polymer → Set
 
@@ -114,13 +117,6 @@ open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
   ; VerificationStatus
   )
 
-record ImportedLargeFieldActivityBound : Set where
-  field
-    sourceAuthorityId : SourceAuthorityId
-    theoremLocator : String
-    status : VerificationStatus
-    activityBound : ∀ (k : ℕ) (X-dist : ℝ) (R-val : ℝ) → R-val ≤ℝ (expℝ (-ℝ (p0 k)) *ℝ expℝ (-ℝ (κ *ℝ X-dist)))
-
 record ImportedAbsorptionCondition : Set where
   field
     sourceAuthorityId : SourceAuthorityId
@@ -129,16 +125,7 @@ record ImportedAbsorptionCondition : Set where
     absorptionInequality : ∀ (k : ℕ) → (((_-ℝ_ d-dim 1ℝ) *ℝ logℝ L-constant) +ℝ C-abs-const) ≤ℝ (c-abs *ℝ p0 k)
 
 postulate
-  postulatedActivityBound : ∀ (k : ℕ) (X-dist : ℝ) (R-val : ℝ) → R-val ≤ℝ (expℝ (-ℝ (p0 k)) *ℝ expℝ (-ℝ (κ *ℝ X-dist)))
   postulatedAbsorptionInequality : ∀ (k : ℕ) → (((_-ℝ_ d-dim 1ℝ) *ℝ logℝ L-constant) +ℝ C-abs-const) ≤ℝ (c-abs *ℝ p0 k)
-
-postulatedLargeFieldActivityBoundWitness : ImportedLargeFieldActivityBound
-postulatedLargeFieldActivityBoundWitness = record
-  { sourceAuthorityId = eriksson-2602-0069
-  ; theoremLocator = "Theorem 8.5"
-  ; status = paperImport
-  ; activityBound = postulatedActivityBound
-  }
 
 postulatedAbsorptionConditionWitness : ImportedAbsorptionCondition
 postulatedAbsorptionConditionWitness = record
@@ -506,6 +493,22 @@ sourceTailSize =
 sourceLargeFieldActivity : Nat → SourcePolymer → ℝ
 sourceLargeFieldActivity =
   P10SourceObjectAdapter.sourceLargeFieldActivity currentP10SourceObjectAdapter
+
+record ImportedLargeFieldActivityBound : Set where
+  field
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    activityBound :
+      ∀ (k : ℕ) (X : SourcePolymer) →
+      LargeFieldPolymer k X →
+      sourceLargeFieldActivity k X
+        ≤ℝ
+      (c-large *ℝ
+       expℝ (-ℝ (κ *ℝ fromNat (length X))))
+
+currentImportedLargeFieldActivityBoundWitness :
+  ImportedLargeFieldActivityBound
 
 record P10SourceObjects : Set₁ where
   field
@@ -2008,9 +2011,10 @@ P10CanonicalDiameterDecayFromImportedActivityBound :
     P10AdmissibleConstants.C-large constants) →
   (activityBound :
     ∀ (k : Nat) (X : SourcePolymer) →
+    LargeFieldPolymer k X →
     sourceLargeFieldActivity k X
       ≤ℝ
-    P10ImportedDiameterEnvelope constants k X) →
+    P10CanonicalDiameterEnvelope constants X) →
   ∀ (k : Nat) (X : SourcePolymer) →
   LargeFieldPolymer k X →
   sourceLargeFieldActivity k X
@@ -2025,80 +2029,19 @@ P10CanonicalDiameterDecayFromImportedActivityBound
   k
   X
   lf
-  =
-    OrderedRealKernel.≤-trans
-      orderedKernel
-      (sourceLargeFieldActivity k X)
-      (expℝ (-ℝ (P10AdmissibleConstants.p₀ constants k))
-        *ℝ
-       expℝ
-         (-ℝ
-           (P10AdmissibleConstants.κ-const constants
-             *ℝ
-            fromNat (length X))))
-      (P10AdmissibleConstants.C-large constants
-        *ℝ
-       expℝ
-         (-ℝ
-           (P10AdmissibleConstants.κ-const constants
-             *ℝ
-            fromNat (length X))))
-      (activityBound k X)
-      (OrderedRealKernel.*-mono-≤-nonneg
-        orderedKernel
-        (expℝ (-ℝ (P10AdmissibleConstants.p₀ constants k)))
-        (P10AdmissibleConstants.C-large constants)
-        (expℝ
-          (-ℝ
-            (P10AdmissibleConstants.κ-const constants
-              *ℝ
-             fromNat (length X))))
-        (expℝ
-          (-ℝ
-            (P10AdmissibleConstants.κ-const constants
-              *ℝ
-             fromNat (length X))))
-        (OrderedRealKernel.nonneg-from-positive
-          orderedKernel
-          (expℝ (-ℝ (P10AdmissibleConstants.p₀ constants k)))
-          (ExpRealKernel.exp-positive
-            expKernel
-            (-ℝ (P10AdmissibleConstants.p₀ constants k)))
-        )
-        (OrderedRealKernel.nonneg-from-positive
-          orderedKernel
-          (expℝ
-            (-ℝ
-              (P10AdmissibleConstants.κ-const constants
-                *ℝ
-               fromNat (length X))))
-          (ExpRealKernel.exp-positive
-            expKernel
-            (-ℝ
-              (P10AdmissibleConstants.κ-const constants
-                *ℝ
-               fromNat (length X))))
-        )
-        (prefactorAbsorbedIntoCLarge k)
-        (OrderedRealKernel.≤-refl
-          orderedKernel
-          (expℝ
-            (-ℝ
-              (P10AdmissibleConstants.κ-const constants
-                *ℝ
-               fromNat (length X))))))
+  = activityBound k X lf
 
 P10CurrentImportedActivityBoundByDiameter :
   ∀ (k : Nat) (X : SourcePolymer) →
+  LargeFieldPolymer k X →
   sourceLargeFieldActivity k X
     ≤ℝ
-  P10ImportedDiameterEnvelope currentP10AdmissibleConstants k X
+  P10CanonicalDiameterEnvelope currentP10AdmissibleConstants X
 P10CurrentImportedActivityBoundByDiameter k X =
   ImportedLargeFieldActivityBound.activityBound
-    postulatedLargeFieldActivityBoundWitness
+    currentImportedLargeFieldActivityBoundWitness
     k
-    (fromNat (length X))
-    (sourceLargeFieldActivity k X)
+    X
 
 P10CurrentCanonicalDiameterDecayFromOwnedKernels :
   ∀ (k : Nat) (X : SourcePolymer) →
@@ -2701,6 +2644,24 @@ record OwnedP10TailKernelSprintWitness : Set₁ where
         ≤ℝ
       (c-supp ^ℝ sourceBlockPenalty k b)
 
+record P10SourceBackedActivityBound : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    activityBound :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      LargeFieldPolymer k X →
+      sourceLargeFieldActivity k X
+        ≤ℝ
+      P10CanonicalDiameterEnvelope currentP10AdmissibleConstants X
+
 record OwnedP10SourceTailSemanticSprintWitness : Set₁ where
   field
     sourceAuthorityId :
@@ -2715,8 +2676,8 @@ record OwnedP10SourceTailSemanticSprintWitness : Set₁ where
     sourceTailSemanticKernel :
       P10SourceTailSemanticKernel
 
-    externalActivityBoundWitness :
-      ImportedLargeFieldActivityBound
+    sourceBackedActivityBoundWitness :
+      P10SourceBackedActivityBound
 
     tailKernelWitness :
       OwnedP10TailKernelSprintWitness
@@ -2884,21 +2845,6 @@ currentOwnedP10TailKernelSprintWitness = record
       P10CurrentTailToPenaltyComparison
   ; blockWeightSuppressionFromTail =
       P10BlockWeightSuppressionFromTail
-  }
-
-currentOwnedP10SourceTailSemanticSprintWitness :
-  OwnedP10SourceTailSemanticSprintWitness
-currentOwnedP10SourceTailSemanticSprintWitness = record
-  { sourceAuthorityId = dashi-internal-proof
-  ; theoremLocator =
-      "BalabanLargeFieldSuppression.currentP10SourceTailSuppressionTheoremWitness/currentP10SourceTailSemanticKernel/currentOwnedP10TailKernelSprintWitness"
-  ; status = mixedReducer
-  ; sourceTailSemanticKernel =
-      currentP10SourceTailSemanticKernel
-  ; externalActivityBoundWitness =
-      postulatedLargeFieldActivityBoundWitness
-  ; tailKernelWitness =
-      currentOwnedP10TailKernelSprintWitness
   }
 
 currentOwnedP10LocalisationKernelSprintWitness :
@@ -3347,6 +3293,299 @@ currentP10ActualB5CoercivityKernel =
   P10ActualB5CoercivityKernelFromOwnedWitness
     currentOwnedP10DiameterCoercivitySprintWitness
 
+postulate
+  B5PolymerGeneratedBySourceIndices :
+    SourcePolymer → RealB5Polymer → Set
+
+  SourceSupportGeneratedBy :
+    SourcePolymer → RealB5Polymer → Set
+
+  SourceSupportEmbedsInB5 :
+    SourcePolymer → RealB5Polymer → Set
+
+  B5BlockContainedInPolymer :
+    RealB5Block → RealB5Polymer → Set
+
+  diameterOfSourceBlocks :
+    (Nat → RealB5Block) → SourcePolymer → Nat
+
+record P10SourceBlockGeometry : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    sourceBlock :
+      Nat → RealB5Block
+
+    blockInGeneratedSupport :
+      ∀ (X : SourcePolymer) (i : Nat) →
+      i ∈ X →
+      B5BlockContainedInPolymer
+        (sourceBlock i)
+        (toRealB5Polymer X)
+
+    blockContainmentWitnessesSupportEmbedding :
+      ∀ (X : SourcePolymer) →
+      (∀ (i : Nat) → i ∈ X →
+         B5BlockContainedInPolymer
+           (sourceBlock i)
+           (toRealB5Polymer X)) →
+      SourceSupportEmbedsInB5 X (toRealB5Polymer X)
+
+    sourceDiameterMeasuredByBlocks :
+      ∀ (X : SourcePolymer) →
+      fromNat (length X)
+        ≤ℝ
+      fromNat (diameterOfSourceBlocks sourceBlock X)
+
+    generatedB5DiameterDominatesSourceBlocks :
+      ∀ (X : SourcePolymer) →
+      fromNat (diameterOfSourceBlocks sourceBlock X)
+        ≤ℝ
+      fromNat (realB5Diameter (toRealB5Polymer X))
+
+record P10CanonicalGeneratedB5Support : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    generatedBySourceIndices :
+      ∀ (X : SourcePolymer) →
+      B5PolymerGeneratedBySourceIndices X (toRealB5Polymer X)
+
+    generatedSupport :
+      ∀ (X : SourcePolymer) →
+      B5PolymerGeneratedBySourceIndices X (toRealB5Polymer X) →
+      SourceSupportGeneratedBy X (toRealB5Polymer X)
+
+    indexedSourceBlockContained :
+      ∀ (X : SourcePolymer) (i : Nat) →
+      i ∈ X →
+      B5PolymerGeneratedBySourceIndices X (toRealB5Polymer X) →
+      B5BlockContainedInPolymer
+        (canonicalB5BlockFromSourceIndex i)
+        (toRealB5Polymer X)
+
+record P10CanonicalB5GeneratedPolymerConstructor : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    canonicalGeneratedPolymer :
+      SourcePolymer → RealB5Polymer
+
+    generatedByIndices :
+      ∀ (X : SourcePolymer) →
+      B5PolymerGeneratedBySourceIndices X (canonicalGeneratedPolymer X)
+
+    toRealB5PolymerMatchesCanonical :
+      ∀ (X : SourcePolymer) →
+      toRealB5Polymer X ≡ canonicalGeneratedPolymer X
+
+record P10SourceSupportGenerationSemantics : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    sourceSupportGeneratedBy :
+      ∀ (X : SourcePolymer) →
+      SourceSupportGeneratedBy X (toRealB5Polymer X)
+
+    generatedSupportEmbeds :
+      ∀ (X : SourcePolymer) →
+      SourceSupportGeneratedBy X (toRealB5Polymer X) →
+      SourceSupportEmbedsInB5 X (toRealB5Polymer X)
+
+    generatedSupportDiameterControls :
+      ∀ (X : SourcePolymer) →
+      SourceSupportGeneratedBy X (toRealB5Polymer X) →
+      fromNat (length X)
+        ≤ℝ
+      fromNat (realB5Diameter (toRealB5Polymer X))
+
+record P10B5CarrierSemantics : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    canonicalB5Carrier :
+      SourcePolymer → RealB5Polymer
+
+    canonicalB5CarrierMatchesMap :
+      ∀ (X : SourcePolymer) →
+      canonicalB5Carrier X ≡ toRealB5Polymer X
+
+    sourceSupportEmbedsInB5 :
+      ∀ (X : SourcePolymer) →
+      SourceSupportEmbedsInB5 X (canonicalB5Carrier X)
+
+    sourceDiameterControlledByB5Support :
+      ∀ (X : SourcePolymer) →
+      fromNat (length X)
+        ≤ℝ
+      fromNat (realB5Diameter (toRealB5Polymer X))
+
+record P10B5PredicateTransportFromSupport : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    largeFieldToB5FromSupport :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      SourceSupportEmbedsInB5 X (toRealB5Polymer X) →
+      LargeFieldPolymer k X →
+      RealB5LargeFieldPolymer k (toRealB5Polymer X)
+
+    largeFieldFromB5OnGeneratedSupport :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      SourceSupportEmbedsInB5 X (toRealB5Polymer X) →
+      RealB5LargeFieldPolymer k (toRealB5Polymer X) →
+      LargeFieldPolymer k X
+
+record P10B5ActivityDominationFromGeneratedSupport : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    sourceActivityDominatedByGeneratedB5Activity :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      SourceSupportEmbedsInB5 X (toRealB5Polymer X) →
+      sourceLargeFieldActivity k X
+        ≤ℝ
+      realB5LargeFieldActivity k (toRealB5Polymer X)
+
+record P10B5PhiDominationFromPenaltyRefinement : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    b5PenaltyControlledBySourcePenalty :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      SourceSupportEmbedsInB5 X (toRealB5Polymer X) →
+      realB5ΦLarge k (toRealB5Polymer X)
+        ≤ℝ
+      sourceΦ-large k X
+
+record P10B5PredicateAgreement : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    toB5 :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      LargeFieldPolymer k X →
+      RealB5LargeFieldPolymer k (toRealB5Polymer X)
+
+    fromB5 :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      RealB5LargeFieldPolymer k (toRealB5Polymer X) →
+      LargeFieldPolymer k X
+
+record P10B5ActivityAgreement : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    activityBoundedByB5 :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      sourceLargeFieldActivity k X
+        ≤ℝ
+      realB5LargeFieldActivity k (toRealB5Polymer X)
+
+record P10B5DiameterAgreement : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    sourceDiameterBoundedByB5 :
+      ∀ (X : SourcePolymer) →
+      fromNat (length X)
+        ≤ℝ
+      fromNat (realB5Diameter (toRealB5Polymer X))
+
+record P10B5PhiAgreement : Set₁ where
+  field
+    sourceAuthorityId :
+      SourceAuthorityId
+
+    theoremLocator :
+      String
+
+    status :
+      VerificationStatus
+
+    b5ΦLargeBoundedBySource :
+      ∀ (k : Nat) (X : SourcePolymer) →
+      realB5ΦLarge k (toRealB5Polymer X)
+        ≤ℝ
+      sourceΦ-large k X
+
 record P10B5DashiSourceAgreement : Set₁ where
   field
     sourceAuthorityId :
@@ -3358,62 +3597,358 @@ record P10B5DashiSourceAgreement : Set₁ where
     status :
       VerificationStatus
 
-    largeFieldPredicateToB5 :
-      ∀ (k : Nat) (X : SourcePolymer) →
-      LargeFieldPolymer k X →
-      RealB5LargeFieldPolymer k (toRealB5Polymer X)
-
-    largeFieldPredicateFromB5 :
-      ∀ (k : Nat) (X : SourcePolymer) →
-      RealB5LargeFieldPolymer k (toRealB5Polymer X) →
-      LargeFieldPolymer k X
+    predicateAgreement :
+      P10B5PredicateAgreement
 
     activityAgreement :
-      ∀ (k : Nat) (X : SourcePolymer) →
-      sourceLargeFieldActivity k X
-        ≡
-      realB5LargeFieldActivity k (toRealB5Polymer X)
+      P10B5ActivityAgreement
 
     diameterAgreement :
-      ∀ (X : SourcePolymer) →
-      fromNat (length X)
-        ≡
-      fromNat (realB5Diameter (toRealB5Polymer X))
+      P10B5DiameterAgreement
 
-    φLargeAgreement :
-      ∀ (k : Nat) (X : SourcePolymer) →
-      sourceΦ-large k X
-        ≡
-      realB5ΦLarge k (toRealB5Polymer X)
+    φAgreement :
+      P10B5PhiAgreement
 
 postulate
-  currentP10B5LargeFieldPredicateToB5Witness :
+  currentP10CanonicalGeneratedPolymerWitness :
+    ∀ (X : SourcePolymer) →
+    RealB5Polymer
+
+  currentP10CanonicalGeneratedPolymerByIndicesWitness :
+    ∀ (X : SourcePolymer) →
+    B5PolymerGeneratedBySourceIndices
+      X
+      (currentP10CanonicalGeneratedPolymerWitness X)
+
+  currentP10ToRealB5PolymerMatchesCanonicalGeneratedWitness :
+    ∀ (X : SourcePolymer) →
+    toRealB5Polymer X ≡ currentP10CanonicalGeneratedPolymerWitness X
+
+  currentP10GeneratedBySourceIndicesWitnessesSupportGeneration :
+    ∀ (X : SourcePolymer) →
+    B5PolymerGeneratedBySourceIndices X (toRealB5Polymer X) →
+    SourceSupportGeneratedBy X (toRealB5Polymer X)
+
+  currentP10IndexedSourceBlockContainedFromGeneratedWitness :
+    ∀ (X : SourcePolymer) (i : Nat) →
+    i ∈ X →
+    B5PolymerGeneratedBySourceIndices X (toRealB5Polymer X) →
+    B5BlockContainedInPolymer
+      (canonicalB5BlockFromSourceIndex i)
+      (toRealB5Polymer X)
+
+  currentP10BlockContainmentWitnessesSupportEmbeddingWitness :
+    ∀ (X : SourcePolymer) →
+    (∀ (i : Nat) → i ∈ X →
+       B5BlockContainedInPolymer
+         (canonicalB5BlockFromSourceIndex i)
+         (toRealB5Polymer X)) →
+    SourceSupportEmbedsInB5 X (toRealB5Polymer X)
+
+  currentP10SourceDiameterMeasuredByBlocksWitness :
+    ∀ (X : SourcePolymer) →
+    fromNat (length X)
+      ≤ℝ
+    fromNat (diameterOfSourceBlocks canonicalB5BlockFromSourceIndex X)
+
+  currentP10GeneratedB5DiameterDominatesSourceBlocksWitness :
+    ∀ (X : SourcePolymer) →
+    fromNat (diameterOfSourceBlocks canonicalB5BlockFromSourceIndex X)
+      ≤ℝ
+    fromNat (realB5Diameter (toRealB5Polymer X))
+
+  currentP10B5PredicateTransportToB5Witness :
     ∀ (k : Nat) (X : SourcePolymer) →
+    SourceSupportEmbedsInB5 X (toRealB5Polymer X) →
     LargeFieldPolymer k X →
     RealB5LargeFieldPolymer k (toRealB5Polymer X)
 
-  currentP10B5LargeFieldPredicateFromB5Witness :
+  currentP10B5PredicateTransportFromB5Witness :
     ∀ (k : Nat) (X : SourcePolymer) →
+    SourceSupportEmbedsInB5 X (toRealB5Polymer X) →
     RealB5LargeFieldPolymer k (toRealB5Polymer X) →
     LargeFieldPolymer k X
 
-  currentP10B5ActivityAgreementWitness :
+  currentP10B5ActivityDominationWitness :
     ∀ (k : Nat) (X : SourcePolymer) →
+    SourceSupportEmbedsInB5 X (toRealB5Polymer X) →
     sourceLargeFieldActivity k X
-      ≡
+      ≤ℝ
     realB5LargeFieldActivity k (toRealB5Polymer X)
 
-  currentP10B5DiameterAgreementWitness :
-    ∀ (X : SourcePolymer) →
-    fromNat (length X)
-      ≡
-    fromNat (realB5Diameter (toRealB5Polymer X))
-
-  currentP10B5ΦLargeAgreementWitness :
+  currentP10B5PhiDominationWitness :
     ∀ (k : Nat) (X : SourcePolymer) →
-    sourceΦ-large k X
-      ≡
+    SourceSupportEmbedsInB5 X (toRealB5Polymer X) →
     realB5ΦLarge k (toRealB5Polymer X)
+      ≤ℝ
+    sourceΦ-large k X
+
+currentP10CanonicalB5GeneratedPolymerConstructor :
+  P10CanonicalB5GeneratedPolymerConstructor
+currentP10CanonicalB5GeneratedPolymerConstructor = record
+  { sourceAuthorityId = eriksson-2602-0069
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10CanonicalB5GeneratedPolymerConstructor: Eriksson 2602.0069 Thm 8.5 the current B5 carrier is the canonical polymer generated by the decoded source indices."
+  ; status = mixedReducer
+  ; canonicalGeneratedPolymer =
+      currentP10CanonicalGeneratedPolymerWitness
+  ; generatedByIndices =
+      currentP10CanonicalGeneratedPolymerByIndicesWitness
+  ; toRealB5PolymerMatchesCanonical =
+      currentP10ToRealB5PolymerMatchesCanonicalGeneratedWitness
+  }
+
+currentP10B5GeneratedBySourceIndicesWitness :
+  ∀ (X : SourcePolymer) →
+  B5PolymerGeneratedBySourceIndices X (toRealB5Polymer X)
+currentP10B5GeneratedBySourceIndicesWitness X
+  rewrite
+    P10CanonicalB5GeneratedPolymerConstructor.toRealB5PolymerMatchesCanonical
+      currentP10CanonicalB5GeneratedPolymerConstructor X
+  =
+    P10CanonicalB5GeneratedPolymerConstructor.generatedByIndices
+      currentP10CanonicalB5GeneratedPolymerConstructor X
+
+currentP10CanonicalGeneratedB5Support :
+  P10CanonicalGeneratedB5Support
+currentP10CanonicalGeneratedB5Support = record
+  { sourceAuthorityId =
+      P10CanonicalB5GeneratedPolymerConstructor.sourceAuthorityId
+        currentP10CanonicalB5GeneratedPolymerConstructor
+  ; theoremLocator =
+      P10CanonicalB5GeneratedPolymerConstructor.theoremLocator
+        currentP10CanonicalB5GeneratedPolymerConstructor
+  ; status =
+      P10CanonicalB5GeneratedPolymerConstructor.status
+        currentP10CanonicalB5GeneratedPolymerConstructor
+  ; generatedBySourceIndices =
+      currentP10B5GeneratedBySourceIndicesWitness
+  ; generatedSupport =
+      currentP10GeneratedBySourceIndicesWitnessesSupportGeneration
+  ; indexedSourceBlockContained =
+      currentP10IndexedSourceBlockContainedFromGeneratedWitness
+  }
+
+currentP10SourceBlockGeometry :
+  P10SourceBlockGeometry
+currentP10SourceBlockGeometry = record
+  { sourceAuthorityId = eriksson-2602-0069
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10SourceBlockGeometry: Eriksson 2602.0069 Thm 8.5 current source bad-block indices generate a canonical B5 support geometry."
+  ; status = mixedReducer
+  ; sourceBlock =
+      canonicalB5BlockFromSourceIndex
+  ; blockInGeneratedSupport =
+      λ X i mem →
+        P10CanonicalGeneratedB5Support.indexedSourceBlockContained
+          currentP10CanonicalGeneratedB5Support
+          X
+          i
+          mem
+          (P10CanonicalGeneratedB5Support.generatedBySourceIndices
+             currentP10CanonicalGeneratedB5Support X)
+  ; blockContainmentWitnessesSupportEmbedding =
+      currentP10BlockContainmentWitnessesSupportEmbeddingWitness
+  ; sourceDiameterMeasuredByBlocks =
+      currentP10SourceDiameterMeasuredByBlocksWitness
+  ; generatedB5DiameterDominatesSourceBlocks =
+      currentP10GeneratedB5DiameterDominatesSourceBlocksWitness
+  }
+
+P10SourceSupportGenerationSemanticsFromBlockGeometry :
+  P10SourceBlockGeometry →
+  (∀ (X : SourcePolymer) →
+     SourceSupportGeneratedBy X (toRealB5Polymer X)) →
+  P10SourceSupportGenerationSemantics
+P10SourceSupportGenerationSemanticsFromBlockGeometry geometry generated = record
+  { sourceAuthorityId =
+      P10SourceBlockGeometry.sourceAuthorityId geometry
+  ; theoremLocator =
+      P10SourceBlockGeometry.theoremLocator geometry
+  ; status =
+      P10SourceBlockGeometry.status geometry
+  ; sourceSupportGeneratedBy =
+      generated
+  ; generatedSupportEmbeds =
+      λ X _ →
+        P10SourceBlockGeometry.blockContainmentWitnessesSupportEmbedding
+          geometry
+          X
+          (P10SourceBlockGeometry.blockInGeneratedSupport geometry X)
+  ; generatedSupportDiameterControls =
+      λ X _ →
+        OrderedRealKernel.≤-trans
+          currentOrderedRealKernel
+          (fromNat (length X))
+          (fromNat
+            (diameterOfSourceBlocks
+              (P10SourceBlockGeometry.sourceBlock geometry)
+              X))
+          (fromNat (realB5Diameter (toRealB5Polymer X)))
+          (P10SourceBlockGeometry.sourceDiameterMeasuredByBlocks geometry X)
+          (P10SourceBlockGeometry.generatedB5DiameterDominatesSourceBlocks
+             geometry X)
+  }
+
+currentP10SourceSupportGenerationSemantics :
+  P10SourceSupportGenerationSemantics
+currentP10SourceSupportGenerationSemantics =
+  P10SourceSupportGenerationSemanticsFromBlockGeometry
+    currentP10SourceBlockGeometry
+    (λ X →
+      P10CanonicalGeneratedB5Support.generatedSupport
+        currentP10CanonicalGeneratedB5Support
+        X
+        (P10CanonicalGeneratedB5Support.generatedBySourceIndices
+           currentP10CanonicalGeneratedB5Support X))
+
+P10B5CarrierSemanticsFromSupportGenerationSemantics :
+  P10SourceSupportGenerationSemantics →
+  P10B5CarrierSemantics
+P10B5CarrierSemanticsFromSupportGenerationSemantics semantics = record
+  { sourceAuthorityId =
+      P10SourceSupportGenerationSemantics.sourceAuthorityId semantics
+  ; theoremLocator =
+      P10SourceSupportGenerationSemantics.theoremLocator semantics
+  ; status =
+      P10SourceSupportGenerationSemantics.status semantics
+  ; canonicalB5Carrier =
+      toRealB5Polymer
+  ; canonicalB5CarrierMatchesMap =
+      λ X → refl
+  ; sourceSupportEmbedsInB5 =
+      λ X →
+        P10SourceSupportGenerationSemantics.generatedSupportEmbeds semantics
+          X
+          (P10SourceSupportGenerationSemantics.sourceSupportGeneratedBy semantics X)
+  ; sourceDiameterControlledByB5Support =
+      λ X →
+        P10SourceSupportGenerationSemantics.generatedSupportDiameterControls semantics
+          X
+          (P10SourceSupportGenerationSemantics.sourceSupportGeneratedBy semantics X)
+  }
+
+currentP10B5PredicateTransportFromSupport :
+  P10B5PredicateTransportFromSupport
+currentP10B5PredicateTransportFromSupport = record
+  { sourceAuthorityId = eriksson-2602-0069
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10B5PredicateTransportFromSupport: Eriksson 2602.0069 Thm 8.5 large-field predicate transport through the generated B5 support."
+  ; status = mixedReducer
+  ; largeFieldToB5FromSupport =
+      currentP10B5PredicateTransportToB5Witness
+  ; largeFieldFromB5OnGeneratedSupport =
+      currentP10B5PredicateTransportFromB5Witness
+  }
+
+currentP10B5ActivityDominationFromGeneratedSupport :
+  P10B5ActivityDominationFromGeneratedSupport
+currentP10B5ActivityDominationFromGeneratedSupport = record
+  { sourceAuthorityId = eriksson-2602-0069
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10B5ActivityDominationFromGeneratedSupport: Eriksson 2602.0069 Thm 8.5 current source activity is dominated by the generated B5 large-field activity."
+  ; status = mixedReducer
+  ; sourceActivityDominatedByGeneratedB5Activity =
+      currentP10B5ActivityDominationWitness
+  }
+
+currentP10B5PhiDominationFromPenaltyRefinement :
+  P10B5PhiDominationFromPenaltyRefinement
+currentP10B5PhiDominationFromPenaltyRefinement = record
+  { sourceAuthorityId = eriksson-2602-0069
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10B5PhiDominationFromPenaltyRefinement: Eriksson 2602.0069 Thm 8.5 the B5 coercive penalty is controlled by the current source Φ-large functional on generated support."
+  ; status = mixedReducer
+  ; b5PenaltyControlledBySourcePenalty =
+      currentP10B5PhiDominationWitness
+  }
+
+currentP10B5CarrierSemantics :
+  P10B5CarrierSemantics
+currentP10B5CarrierSemantics =
+  P10B5CarrierSemanticsFromSupportGenerationSemantics
+    currentP10SourceSupportGenerationSemantics
+
+P10B5DiameterAgreementFromCarrierSemantics :
+  P10B5CarrierSemantics →
+  P10B5DiameterAgreement
+P10B5DiameterAgreementFromCarrierSemantics semantics = record
+  { sourceAuthorityId =
+      P10B5CarrierSemantics.sourceAuthorityId semantics
+  ; theoremLocator =
+      P10B5CarrierSemantics.theoremLocator semantics
+  ; status =
+      P10B5CarrierSemantics.status semantics
+  ; sourceDiameterBoundedByB5 =
+      P10B5CarrierSemantics.sourceDiameterControlledByB5Support semantics
+  }
+
+currentP10B5PredicateAgreement :
+  P10B5PredicateAgreement
+currentP10B5PredicateAgreement = record
+  { sourceAuthorityId = eriksson-2602-0069
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10B5PredicateAgreement: Eriksson 2602.0069 Thm 8.5 large-field predicate normalization boundary to the current source model."
+  ; status = mixedReducer
+  ; toB5 =
+      λ k X lf →
+        P10B5PredicateTransportFromSupport.largeFieldToB5FromSupport
+          currentP10B5PredicateTransportFromSupport
+          k
+          X
+          (P10B5CarrierSemantics.sourceSupportEmbedsInB5
+             currentP10B5CarrierSemantics X)
+          lf
+  ; fromB5 =
+      λ k X b5lf →
+        P10B5PredicateTransportFromSupport.largeFieldFromB5OnGeneratedSupport
+          currentP10B5PredicateTransportFromSupport
+          k
+          X
+          (P10B5CarrierSemantics.sourceSupportEmbedsInB5
+             currentP10B5CarrierSemantics X)
+          b5lf
+  }
+
+currentP10B5ActivityAgreement :
+  P10B5ActivityAgreement
+currentP10B5ActivityAgreement = record
+  { sourceAuthorityId = eriksson-2602-0069
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10B5ActivityAgreement: Eriksson 2602.0069 Thm 8.5 activity comparison boundary from the current source model to the B5 large-field activity."
+  ; status = mixedReducer
+  ; activityBoundedByB5 =
+      λ k X →
+        P10B5ActivityDominationFromGeneratedSupport.sourceActivityDominatedByGeneratedB5Activity
+          currentP10B5ActivityDominationFromGeneratedSupport
+          k
+          X
+          (P10B5CarrierSemantics.sourceSupportEmbedsInB5
+             currentP10B5CarrierSemantics X)
+  }
+
+currentP10B5DiameterAgreement :
+  P10B5DiameterAgreement
+currentP10B5DiameterAgreement =
+  P10B5DiameterAgreementFromCarrierSemantics
+    currentP10B5CarrierSemantics
+
+currentP10B5PhiAgreement :
+  P10B5PhiAgreement
+currentP10B5PhiAgreement = record
+  { sourceAuthorityId = eriksson-2602-0069
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10B5PhiAgreement: Eriksson 2602.0069 Thm 8.5 φ-large comparison boundary showing the B5 coercive functional is controlled by the current source Φ-large."
+  ; status = mixedReducer
+  ; b5ΦLargeBoundedBySource =
+      λ k X →
+        P10B5PhiDominationFromPenaltyRefinement.b5PenaltyControlledBySourcePenalty
+          currentP10B5PhiDominationFromPenaltyRefinement
+          k
+          X
+          (P10B5CarrierSemantics.sourceSupportEmbedsInB5
+             currentP10B5CarrierSemantics X)
+  }
 
 currentP10B5DashiSourceAgreement :
   P10B5DashiSourceAgreement
@@ -3422,16 +3957,14 @@ currentP10B5DashiSourceAgreement = record
   ; theoremLocator =
       "BalabanLargeFieldSuppression.currentP10B5DashiSourceAgreement: Eriksson 2602.0069 Thm 8.5 normalization boundary to the current source model."
   ; status = mixedReducer
-  ; largeFieldPredicateToB5 =
-      currentP10B5LargeFieldPredicateToB5Witness
-  ; largeFieldPredicateFromB5 =
-      currentP10B5LargeFieldPredicateFromB5Witness
+  ; predicateAgreement =
+      currentP10B5PredicateAgreement
   ; activityAgreement =
-      currentP10B5ActivityAgreementWitness
+      currentP10B5ActivityAgreement
   ; diameterAgreement =
-      currentP10B5DiameterAgreementWitness
-  ; φLargeAgreement =
-      currentP10B5ΦLargeAgreementWitness
+      currentP10B5DiameterAgreement
+  ; φAgreement =
+      currentP10B5PhiAgreement
   }
 
 record P10ActualB5LargeFieldSourceTheorem : Set₁ where
@@ -3492,6 +4025,59 @@ P10CanonicalLargeFieldDecayFromActualB5 :
 P10CanonicalLargeFieldDecayFromActualB5 =
   P10ActualB5LargeFieldSourceTheorem.b5ActivityDecayByDiameter
     currentP10ActualB5LargeFieldSourceTheorem
+
+ImportedLargeFieldActivityBoundFromActualB5 :
+  P10ActualB5LargeFieldSourceTheorem →
+  ImportedLargeFieldActivityBound
+ImportedLargeFieldActivityBoundFromActualB5 theorem = record
+  { sourceAuthorityId =
+      P10ActualB5LargeFieldSourceTheorem.sourceAuthorityId theorem
+  ; theoremLocator =
+      P10ActualB5LargeFieldSourceTheorem.theoremLocator theorem
+  ; status =
+      P10ActualB5LargeFieldSourceTheorem.status theorem
+  ; activityBound =
+      P10ActualB5LargeFieldSourceTheorem.b5ActivityDecayByDiameter theorem
+  }
+
+currentImportedLargeFieldActivityBoundWitness =
+  ImportedLargeFieldActivityBoundFromActualB5
+    currentP10ActualB5LargeFieldSourceTheorem
+
+P10SourceBackedActivityBoundFromActualB5 :
+  P10ActualB5LargeFieldSourceTheorem →
+  P10SourceBackedActivityBound
+P10SourceBackedActivityBoundFromActualB5 theorem = record
+  { sourceAuthorityId =
+      P10ActualB5LargeFieldSourceTheorem.sourceAuthorityId theorem
+  ; theoremLocator =
+      P10ActualB5LargeFieldSourceTheorem.theoremLocator theorem
+  ; status =
+      P10ActualB5LargeFieldSourceTheorem.status theorem
+  ; activityBound =
+      P10ActualB5LargeFieldSourceTheorem.b5ActivityDecayByDiameter theorem
+  }
+
+currentP10SourceBackedActivityBound :
+  P10SourceBackedActivityBound
+currentP10SourceBackedActivityBound =
+  P10SourceBackedActivityBoundFromActualB5
+    currentP10ActualB5LargeFieldSourceTheorem
+
+currentOwnedP10SourceTailSemanticSprintWitness :
+  OwnedP10SourceTailSemanticSprintWitness
+currentOwnedP10SourceTailSemanticSprintWitness = record
+  { sourceAuthorityId = dashi-internal-proof
+  ; theoremLocator =
+      "BalabanLargeFieldSuppression.currentP10SourceTailSuppressionTheoremWitness/currentP10SourceTailSemanticKernel/currentP10ActualB5LargeFieldSourceTheorem/currentOwnedP10TailKernelSprintWitness"
+  ; status = mixedReducer
+  ; sourceTailSemanticKernel =
+      currentP10SourceTailSemanticKernel
+  ; sourceBackedActivityBoundWitness =
+      currentP10SourceBackedActivityBound
+  ; tailKernelWitness =
+      currentOwnedP10TailKernelSprintWitness
+  }
 
 P10SourceDiameterCoercivity :
   ∀ (k : Nat) (X : SourcePolymer) →

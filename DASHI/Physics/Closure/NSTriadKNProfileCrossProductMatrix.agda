@@ -1,12 +1,19 @@
 module DASHI.Physics.Closure.NSTriadKNProfileCrossProductMatrix where
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc) renaming (_*_ to _*ℕ_)
+open import Data.Nat using () renaming (_≤_ to _≤ℕ_)
 
 open import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecomposition
   using ( PairIncidenceProfile
         ; NSTriadKNPairIncidenceProfileDecompositionModel
         ; Shell
+        ; actualUnitShellPairIncidenceKernelDataClosed
+        ; actualUnitShellPairIncidenceKernelDataClosedIsFalse
         )
+import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
 
 ------------------------------------------------------------------------
 -- Cross-profile Schur matrix surface.
@@ -63,10 +70,81 @@ profileCrossSchurMatrixBound m =
   profileCrossProductBound m
 
 ------------------------------------------------------------------------
--- Proof-derived cross-product matrix gate definitions.
+-- Upstream kernel/index/operator realization surface.
+--
+-- The profile cross-product matrix currently closes only at the level of
+-- abstract row/column/cross bounds. Weighted Schur cannot export an actual
+-- operator witness until the underlying kernel/index data is made concrete.
 
-open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; refl)
+record ProfileCrossMatrixKernelData
+    (residueNormModel : ResidueNorm.ResidueNormModel)
+    (shellIndex : Nat) : Set₁ where
+  constructor mkProfileCrossMatrixKernelData
+  field
+    Index : Set
+
+    kernel : Index -> Index -> Nat
+
+    coefficient :
+      ResidueNorm.Carrier residueNormModel shellIndex → Index → Nat
+
+    weightedSchurOperator :
+      ResidueNorm.Carrier residueNormModel shellIndex →
+      ResidueNorm.Carrier residueNormModel shellIndex
+
+    absWeakPairing :
+      ResidueNorm.Carrier residueNormModel shellIndex →
+      ResidueNorm.Carrier residueNormModel shellIndex →
+      Nat
+
+    absQuadraticForm :
+      ResidueNorm.Carrier residueNormModel shellIndex → Nat
+
+    weakQuadraticFormConstant : Nat
+
+    operatorRealizesKernel : Set
+
+    absQuadraticFormDef :
+      (x : ResidueNorm.Carrier residueNormModel shellIndex) →
+      absQuadraticForm x
+        ≡
+        absWeakPairing (weightedSchurOperator x) x
+
+    profileCrossMatrixControlsQuadratic :
+      (x : ResidueNorm.Carrier residueNormModel shellIndex) →
+      absQuadraticForm x
+        ≤ℕ
+        weakQuadraticFormConstant
+          *ℕ ResidueNorm.weakNormSquared residueNormModel shellIndex x
+
+    kernelRealizesProfileCrossProductMatrix : Set
+
+open ProfileCrossMatrixKernelData public
+
+UnitShellProfileCrossMatrixKernelDataTarget :
+  (residueNormModel : ResidueNorm.ResidueNormModel) → Set₁
+UnitShellProfileCrossMatrixKernelDataTarget residueNormModel =
+  ProfileCrossMatrixKernelData residueNormModel (suc zero)
+
+profileCrossMatrixKernelDataClosed : Bool
+profileCrossMatrixKernelDataClosed =
+  actualUnitShellPairIncidenceKernelDataClosed
+
+profileCrossMatrixKernelDataClosedIsFalse :
+  profileCrossMatrixKernelDataClosed ≡ false
+profileCrossMatrixKernelDataClosedIsFalse =
+  actualUnitShellPairIncidenceKernelDataClosedIsFalse
+
+actualUnitShellProfileCrossMatrixKernelDataClosed : Bool
+actualUnitShellProfileCrossMatrixKernelDataClosed =
+  profileCrossMatrixKernelDataClosed
+
+actualUnitShellProfileCrossMatrixKernelDataClosedIsFalse :
+  actualUnitShellProfileCrossMatrixKernelDataClosed ≡ false
+actualUnitShellProfileCrossMatrixKernelDataClosedIsFalse = refl
+
+------------------------------------------------------------------------
+-- Proof-derived cross-product matrix gate definitions.
 
 open import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecomposition
   using ( forcedTailProfile

@@ -14,6 +14,9 @@ open import DASHI.Foundations.RealAnalysisAxioms using
 
 import DASHI.Physics.Closure.FormalOscillationSeminormForGaugeLinks as Seminorm
 
+subst : ∀ {A : Set} (P : A → Set) {x y : A} → x ≡ y → P x → P y
+subst P refl px = px
+
 ------------------------------------------------------------------------
 -- Symbolic dyadic-decay to real-valued bridge.
 --
@@ -68,8 +71,6 @@ record DyadicRealSemanticsSocket : Set₁ where
       dyadicDecayAsRealWith natAsReal dyadicPow2NegAsReal
         (Seminorm.perLinkOscillationDecay cLocal k)
         ≤ℝ (natAsReal cLocal *ℝ dyadicPow2NegAsReal (Seminorm.double k))
-
-open DyadicRealSemanticsSocket public
 
 postulate
   currentDyadicRealSemantics :
@@ -143,9 +144,11 @@ dyadicDecayBelowUnit :
   (1ℝ *ℝ 1ℝ)
 dyadicDecayBelowUnit k
   rewrite realMulLeftUnit (dyadicPow2NegAsReal (Seminorm.double k))
-        | realMulLeftUnit 1ℝ
-        | dyadicPow2NegZeroIsOne =
-  dyadicPow2NegNonIncreasing k
+        | realMulLeftUnit 1ℝ =
+  subst
+    (λ rhs → dyadicPow2NegAsReal (Seminorm.double k) ≤ℝ rhs)
+    dyadicPow2NegZeroIsOne
+    (dyadicPow2NegNonIncreasing k)
 
 unitPerLinkDecayBelowScaleZero :
   ∀ (k : Nat) →

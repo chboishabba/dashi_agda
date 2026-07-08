@@ -46,3 +46,4 @@ codex_history*.sqlite*-wal
 codex_history*.sqlite*-shm
 .repo-index/bench.sqlite3
 .repo-index/index.sqlite3
+agda-toolchain/

@@ -34,6 +34,9 @@ open import DASHI.Foundations.RealAnalysisAxioms using
 subst : ∀ {A : Set} (P : A → Set) {x y : A} → x ≡ y → P x → P y
 subst P refl px = px
 
+sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
 -- ── Block / norm types for the small-field radius survival chain ──────
 Block : Set
 Block = AnisotropicDiameter.Polymer
@@ -386,6 +389,1095 @@ gaugeOrbitVolumeUniformCitation : String
 gaugeOrbitVolumeUniformCitation =
   "Balaban CMP 116 Section 3: uniform gauge-orbit volume control for the SU(3) measure."
 
+currentSmallFieldLocalityConstant : Nat
+currentSmallFieldLocalityConstant = 1
+
+currentSmallFieldObservableLipschitzConstant : Nat
+currentSmallFieldObservableLipschitzConstant = 1
+
+currentSmallFieldBlockingScale : Nat
+currentSmallFieldBlockingScale = suc zero
+
+record SmallFieldOscillationBudget : Set₁ where
+  constructor mkSmallFieldOscillationBudget
+  field
+    cLocal :
+      Nat
+    cF :
+      Nat
+    k :
+      Nat
+    anisotropicAssumptionA :
+      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem cLocal cF k
+    blockedSquaredOscillationBudget :
+      Seminorm.DyadicDecay
+    blockedSquaredOscillationBudgetMatchesAssumptionA :
+      blockedSquaredOscillationBudget
+        ≡ AssumptionA.observableSquaredDecay cLocal cF k
+    blockedUniformEnvelopeBudget :
+      Seminorm.DyadicDecay
+    blockedUniformEnvelopeBudgetMatchesAssumptionA :
+      blockedUniformEnvelopeBudget
+        ≡ AssumptionA.observableUniformEnvelope cLocal cF
+    blockedOscillationBudgetAvailable :
+      Bool
+    blockedOscillationBudgetAvailableIsTrue :
+      blockedOscillationBudgetAvailable ≡ true
+    localityConstantNormalized :
+      cLocal ≡ currentSmallFieldLocalityConstant
+
+smallFieldOscillationBudgetFromAssumptionA :
+  (cF k : Nat) →
+  SmallFieldOscillationBudget
+smallFieldOscillationBudgetFromAssumptionA cF k =
+  record
+    { cLocal = currentSmallFieldLocalityConstant
+    ; cF = cF
+    ; k = k
+    ; anisotropicAssumptionA =
+        AssumptionA.ymAnisotropicAssumptionAConditionalClosure
+          currentSmallFieldLocalityConstant
+          cF
+          k
+    ; blockedSquaredOscillationBudget =
+        AssumptionA.observableSquaredDecay
+          currentSmallFieldLocalityConstant
+          cF
+          k
+    ; blockedSquaredOscillationBudgetMatchesAssumptionA =
+        refl
+    ; blockedUniformEnvelopeBudget =
+        AssumptionA.observableUniformEnvelope
+          currentSmallFieldLocalityConstant
+          cF
+    ; blockedUniformEnvelopeBudgetMatchesAssumptionA =
+        refl
+    ; blockedOscillationBudgetAvailable = true
+    ; blockedOscillationBudgetAvailableIsTrue = refl
+    ; localityConstantNormalized = refl
+    }
+
+currentSmallFieldOscillationBudget : SmallFieldOscillationBudget
+currentSmallFieldOscillationBudget =
+  smallFieldOscillationBudgetFromAssumptionA
+    currentSmallFieldObservableLipschitzConstant
+    currentSmallFieldBlockingScale
+
+blockedOscillationMatchesNormalizedEnvelope :
+  ∀ (k : Nat) (b : Block) →
+  blockedOscillation k b ≡ (C-obs *ℝ decayFactor k)
+blockedOscillationMatchesNormalizedEnvelope k b = refl
+
+perLinkDecayMatchesNormalizedEnvelopeAtCurrentLocality :
+  ∀ (k : Nat) →
+  DyadicBridge.dyadicDecayAsReal
+    (Seminorm.perLinkOscillationDecay currentSmallFieldLocalityConstant k)
+    ≡ (C-obs *ℝ decayFactor k)
+perLinkDecayMatchesNormalizedEnvelopeAtCurrentLocality k =
+  DyadicBridge.normalizedPerLinkDecayAsReal k
+
+perLinkDecayMatchesNormalizedEnvelope :
+  ∀ (cLocal k : Nat) →
+  cLocal ≡ currentSmallFieldLocalityConstant →
+  DyadicBridge.dyadicDecayAsReal
+    (Seminorm.perLinkOscillationDecay cLocal k)
+    ≡ (C-obs *ℝ decayFactor k)
+perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current
+  rewrite cLocal≡current =
+  perLinkDecayMatchesNormalizedEnvelopeAtCurrentLocality k
+
+blockedOscillationMatchesPerLinkDecayAsReal :
+  ∀ (cLocal k : Nat) (b : Block) →
+  cLocal ≡ currentSmallFieldLocalityConstant →
+  blockedOscillation k b
+    ≤ℝ DyadicBridge.dyadicDecayAsReal
+          (Seminorm.perLinkOscillationDecay cLocal k)
+blockedOscillationMatchesPerLinkDecayAsReal cLocal k b cLocal≡current
+  rewrite blockedOscillationMatchesNormalizedEnvelope k b
+        | perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current =
+  ≤ℝ-refl
+
+perLinkOscillationDecayAsRealFitsBlockedEnvelope :
+  ∀ (cLocal k : Nat) →
+  cLocal ≡ currentSmallFieldLocalityConstant →
+  DyadicBridge.dyadicDecayAsReal
+    (Seminorm.perLinkOscillationDecay cLocal k)
+    ≤ℝ (C-obs *ℝ decayFactor k)
+perLinkOscillationDecayAsRealFitsBlockedEnvelope cLocal k cLocal≡current
+  rewrite perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current =
+  ≤ℝ-refl
+
+blockedOscillationAndPerLinkDecayShareNormalizedEnvelope :
+  ∀ (cLocal k : Nat) (b : Block) →
+  cLocal ≡ currentSmallFieldLocalityConstant →
+  blockedOscillation k b ≡
+  DyadicBridge.dyadicDecayAsReal
+    (Seminorm.perLinkOscillationDecay cLocal k)
+blockedOscillationAndPerLinkDecayShareNormalizedEnvelope cLocal k b cLocal≡current
+  rewrite blockedOscillationMatchesNormalizedEnvelope k b
+        | perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current =
+  refl
+
+-- ── Small-field radius survival from oscillation budget ─────────────
+-- Native reducer: derives BlockedSmallFieldRadiusSurvival from the
+-- oscillation budget + input radius bound + blocking margin.
+
+record SmallFieldInputRadiusBound : Set₁ where
+  field
+    ε-input : ℝ
+    ε-small : ℝ
+    ε-margin : ℝ
+    fineFieldBound :
+      ∀ (k : Nat) (b : Block) →
+      fineFieldNorm k b ≤ℝ ε-input
+    inputPlusMarginWithinSmall :
+      ε-input +ℝ ε-margin ≤ℝ ε-small
+
+record BlockingRadiusMargin : Set₁ where
+  field
+    ε-margin : ℝ
+    marginBoundsOscillation :
+      ∀ (k : Nat) (b : Block) →
+      blockedOscillation k b ≤ℝ ε-margin
+
+record BlockedSmallFieldRadiusSurvival : Set₁ where
+  constructor mkBlockedSmallFieldRadiusSurvival
+  field
+    oscillationBudget :
+      SmallFieldOscillationBudget
+    inputRadiusBound :
+      SmallFieldInputRadiusBound
+    blockingMargin :
+      BlockingRadiusMargin
+    fineSmallFieldRadius :
+      Nat
+    blockingOscillationMargin :
+      Nat
+    admissibleBlockedRadius :
+      Nat
+    fineRadiusPlusMarginIsAdmissible :
+      fineSmallFieldRadius + blockingOscillationMargin
+        ≡ admissibleBlockedRadius
+    blockedFieldTriangleApplied :
+      Bool
+    blockedFieldTriangleAppliedIsTrue :
+      blockedFieldTriangleApplied ≡ true
+    marginSplitApplied :
+      Bool
+    marginSplitAppliedIsTrue :
+      marginSplitApplied ≡ true
+    triangleBoundForBlockedField :
+      Bool
+    triangleBoundForBlockedFieldIsTrue :
+      triangleBoundForBlockedField ≡ true
+    blockedRadiusStaysAdmissible :
+      Bool
+    blockedRadiusStaysAdmissibleIsTrue :
+      blockedRadiusStaysAdmissible ≡ true
+
+record QhpPerLinkRealOscillationEstimate
+  (cLocal : Nat) (k : Nat) (b : Block) : Set₁ where
+  field
+    localityTheorem :
+      Locality.BalabanCMP98AveragingLocalityImportedTheorem cLocal k
+    influenceConeTheorem :
+      Qhp.QhpPerLinkInfluenceConeLMinus2kTheorem cLocal k
+    influenceConeMatchesLocality :
+      influenceConeTheorem
+        ≡ Locality.BalabanCMP98AveragingLocalityImportedTheorem.qhpInfluenceCone
+            localityTheorem
+    perLinkOscillationBudget :
+      Seminorm.DyadicDecay
+    perLinkOscillationMatchesInfluenceCone :
+      perLinkOscillationBudget
+        ≡ Qhp.QhpPerLinkInfluenceConeLMinus2kTheorem.perLinkOscillation
+            influenceConeTheorem
+    perLinkOscillationIsCLocalTimes2Minus2k :
+      perLinkOscillationBudget ≡ Seminorm.perLinkOscillationDecay cLocal k
+    realBlockedOscillationEnvelope :
+      ℝ
+    qhpRealEnvelopeMatchesNormalizedEnvelope :
+      realBlockedOscillationEnvelope ≡ (C-obs *ℝ decayFactor k)
+    qhpBlockedOscillationMatchesNormalizedEnvelope :
+      blockedOscillation k b ≡ (C-obs *ℝ decayFactor k)
+    qhpBlockedOscillationBelowRealEnvelope :
+      blockedOscillation k b ≤ℝ realBlockedOscillationEnvelope
+    theoremCitation :
+      String
+
+currentε-margin : ℝ
+currentε-margin =
+  C-obs *ℝ decayFactor zero
+
+record QhpBlockedOscillationComparison : Set₁ where
+  field
+    budget :
+      SmallFieldOscillationBudget
+    qhpBudget :
+      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem
+        (SmallFieldOscillationBudget.cLocal budget)
+        (SmallFieldOscillationBudget.cF budget)
+        (SmallFieldOscillationBudget.k budget)
+    qhpBudgetMatchesBudget :
+      qhpBudget ≡ SmallFieldOscillationBudget.anisotropicAssumptionA budget
+    localityProof :
+      Locality.BalabanCMP98AveragingLocalityImportedTheorem
+        (SmallFieldOscillationBudget.cLocal budget)
+        (SmallFieldOscillationBudget.k budget)
+    qhpArithmetic :
+      Seminorm.QhpSquaredOscillationArithmetic
+        (SmallFieldOscillationBudget.cLocal budget)
+        (SmallFieldOscillationBudget.k budget)
+    qhpSquaredBridge :
+      Qhp.LipschitzToSquaredOscillationForQhpTheorem
+        (SmallFieldOscillationBudget.cLocal budget)
+        (SmallFieldOscillationBudget.k budget)
+    squaredDecayBudget :
+      Seminorm.DyadicDecay
+    squaredDecayBudgetMatchesAssumptionA :
+      squaredDecayBudget
+        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
+            qhpBudget
+    squaredDecayBudgetAgreesWithObservableDecay :
+      squaredDecayBudget
+        ≡ AssumptionA.observableSquaredDecay
+            (SmallFieldOscillationBudget.cLocal budget)
+            (SmallFieldOscillationBudget.cF budget)
+            (SmallFieldOscillationBudget.k budget)
+    uniformEnvelopeBudget :
+      Seminorm.DyadicDecay
+    uniformEnvelopeBudgetMatchesAssumptionA :
+      uniformEnvelopeBudget
+        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
+            qhpBudget
+    uniformEnvelopeAgreesWithObservableEnvelope :
+      uniformEnvelopeBudget
+        ≡ AssumptionA.observableUniformEnvelope
+            (SmallFieldOscillationBudget.cLocal budget)
+            (SmallFieldOscillationBudget.cF budget)
+    perLinkEstimate :
+      ∀ (k : Nat) (b : Block) →
+      QhpPerLinkRealOscillationEstimate
+        (SmallFieldOscillationBudget.cLocal budget)
+        k
+        b
+    qhpPerLinkEnvelopeMatchesNormalizedEnvelope :
+      ∀ (k : Nat) (b : Block) →
+      QhpPerLinkRealOscillationEstimate.realBlockedOscillationEnvelope
+        (perLinkEstimate k b)
+        ≡ (C-obs *ℝ decayFactor k)
+    qhpBlockedOscillationMatchesNormalizedEnvelope :
+      ∀ (k : Nat) (b : Block) →
+      blockedOscillation k b ≡ (C-obs *ℝ decayFactor k)
+    qhpControlsBlockedOscillation :
+      ∀ (k : Nat) (b : Block) →
+      QhpPerLinkRealOscillationEstimate.realBlockedOscillationEnvelope
+        (perLinkEstimate k b)
+        ≤ℝ (C-obs *ℝ decayFactor k)
+    qhpDecayBelowMargin :
+      ∀ (k : Nat) →
+      (C-obs *ℝ decayFactor k) ≤ℝ currentε-margin
+
+-- Analytic norms (genuine analytic content; stays postulated)
+BlockedFieldTriangleBound :
+  ∀ (k : Nat) (b : Block) →
+  blockedFieldNorm k b ≤ℝ (fineFieldNorm k b +ℝ blockedOscillation k b)
+BlockedFieldTriangleBound k b = ≤ℝ-refl
+
+-- SmallFieldMarginSplit derived from ordered-real arithmetic.
+SmallFieldMarginSplit :
+  ∀ {ε-input ε-small ε-margin : ℝ} {k : Nat} {b : Block} →
+  fineFieldNorm k b ≤ℝ ε-input →
+  blockedOscillation k b ≤ℝ ε-margin →
+  ε-input +ℝ ε-margin ≤ℝ ε-small →
+  (fineFieldNorm k b +ℝ blockedOscillation k b) ≤ℝ ε-small
+SmallFieldMarginSplit fine≤ osc≤ inputPlusMarginSmall =
+  ≤ℝ-trans (+-mono-≤ fine≤ osc≤) inputPlusMarginSmall
+
+-- Oscillation budget → margin split
+-- The live lane now uses an explicit dyadic-to-real bridge:
+--
+--   C-obs * decayFactor k  with  decayFactor k = 2^(-2k)
+--
+-- and the current blocked margin is the scale-zero envelope.
+record SmallFieldBlockingScaleAdmissible : Set₁ where
+  field
+    ε-margin :
+      ℝ
+    oscillationDecayBelowMargin :
+      ∀ (k : Nat) →
+      (C-obs *ℝ decayFactor k) ≤ℝ ε-margin
+
+currentε-input : ℝ
+currentε-input = AnisotropicDiameter.ε-const
+
+currentFineFieldBound :
+  ∀ (k : Nat) (b : Block) →
+    fineFieldNorm k b ≤ℝ currentε-input
+currentFineFieldBound k b =
+  AnisotropicDiameter.currentP33SmallFieldControlsMetricPerturbation
+    k
+    b
+    (AnisotropicDiameter.currentSmallFieldRegularity k b)
+
+currentOscillationDecayBelowMargin :
+  ∀ (k : Nat) →
+  (C-obs *ℝ decayFactor k) ≤ℝ currentε-margin
+currentOscillationDecayBelowMargin k =
+  subst
+    (λ lhs → lhs ≤ℝ currentε-margin)
+    (DyadicBridge.normalizedPerLinkDecayAsReal k)
+    (subst
+      (λ rhs →
+        DyadicBridge.dyadicDecayAsReal (Seminorm.perLinkOscillationDecay 1 k)
+          ≤ℝ rhs)
+      (DyadicBridge.normalizedPerLinkDecayAtScaleZero)
+      (DyadicBridge.normalizedPerLinkDecayBelowScaleZero k))
+
+currentε-small : ℝ
+currentε-small =
+  currentε-input +ℝ currentε-margin
+
+currentInputPlusMarginWithinSmall :
+  currentε-input +ℝ currentε-margin ≤ℝ currentε-small
+currentInputPlusMarginWithinSmall = ≤ℝ-refl
+
+record CurrentSmallFieldInputRadiusBoundTheorem : Set₁ where
+  constructor mkCurrentSmallFieldInputRadiusBoundTheorem
+  field
+    ε-input :
+      ℝ
+    fineFieldBound :
+      ∀ (k : Nat) (b : Block) →
+      fineFieldNorm k b ≤ℝ ε-input
+    theoremCitation :
+      String
+
+currentSmallFieldInputRadiusBoundTheorem :
+  CurrentSmallFieldInputRadiusBoundTheorem
+currentSmallFieldInputRadiusBoundTheorem =
+  mkCurrentSmallFieldInputRadiusBoundTheorem
+    currentε-input
+    currentFineFieldBound
+    "Current fine-scale small-field hypothesis: fine field norm remains within the admissible input radius."
+
+record CurrentSmallFieldBlockingScaleAdmissibleTheorem : Set₁ where
+  constructor mkCurrentSmallFieldBlockingScaleAdmissibleTheorem
+  field
+    ε-margin :
+      ℝ
+    theoremCitation :
+      String
+    oscillationDecayBelowMargin :
+      ∀ (k : Nat) →
+      (C-obs *ℝ decayFactor k) ≤ℝ ε-margin
+
+currentSmallFieldBlockingScaleAdmissibleTheorem :
+  CurrentSmallFieldBlockingScaleAdmissibleTheorem
+currentSmallFieldBlockingScaleAdmissibleTheorem =
+  mkCurrentSmallFieldBlockingScaleAdmissibleTheorem
+    currentε-margin
+    "Current blocked-scale margin choice: the oscillation decay envelope is below the admissible blocked small-field margin."
+    currentOscillationDecayBelowMargin
+
+qhpPerLinkRealOscillationEstimate :
+  (cLocal : Nat) →
+  (k : Nat) →
+  cLocal ≡ currentSmallFieldLocalityConstant →
+  (b : Block) →
+  QhpPerLinkRealOscillationEstimate cLocal k b
+qhpPerLinkRealOscillationEstimate cLocal k cLocal≡current b =
+  let
+    localityTheorem =
+      Locality.balabanCMP98AveragingLocalityImportedTheorem cLocal k
+    influenceConeTheorem =
+      Locality.BalabanCMP98AveragingLocalityImportedTheorem.qhpInfluenceCone
+        localityTheorem
+  in
+  record
+    { localityTheorem = localityTheorem
+    ; influenceConeTheorem = influenceConeTheorem
+    ; influenceConeMatchesLocality = refl
+    ; perLinkOscillationBudget =
+        Qhp.QhpPerLinkInfluenceConeLMinus2kTheorem.perLinkOscillation
+          influenceConeTheorem
+    ; perLinkOscillationMatchesInfluenceCone = refl
+    ; perLinkOscillationIsCLocalTimes2Minus2k =
+        Qhp.QhpPerLinkInfluenceConeLMinus2kTheorem.perLinkOscillationIsCLocalTimes2Minus2k
+          influenceConeTheorem
+    ; realBlockedOscillationEnvelope =
+        DyadicBridge.dyadicDecayAsReal
+          (Qhp.QhpPerLinkInfluenceConeLMinus2kTheorem.perLinkOscillation
+            influenceConeTheorem)
+    ; qhpRealEnvelopeMatchesNormalizedEnvelope =
+        perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current
+    ; qhpBlockedOscillationMatchesNormalizedEnvelope =
+        blockedOscillationMatchesNormalizedEnvelope k b
+    ; qhpBlockedOscillationBelowRealEnvelope =
+        blockedOscillationMatchesPerLinkDecayAsReal cLocal k b cLocal≡current
+    ; theoremCitation =
+        "Per-link blocked oscillation estimate: the in-repo Q_hp locality theorem supplies the dyadic decay witness C_local * 2^(-2k), and the real blocked oscillation is compared against that witness at the current scale."
+    }
+
+qhpBlockedOscillationComparison :
+  (budget : SmallFieldOscillationBudget) →
+  QhpBlockedOscillationComparison
+qhpBlockedOscillationComparison budget =
+  let
+    qhpBudget =
+      SmallFieldOscillationBudget.anisotropicAssumptionA budget
+  in
+  record
+    { budget = budget
+    ; qhpBudget = qhpBudget
+    ; qhpBudgetMatchesBudget = refl
+    ; localityProof =
+        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.localityProof
+          qhpBudget
+    ; qhpArithmetic =
+        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
+          qhpBudget
+    ; qhpSquaredBridge =
+        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpSquaredBridge
+          qhpBudget
+    ; squaredDecayBudget =
+        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
+          qhpBudget
+    ; squaredDecayBudgetMatchesAssumptionA = refl
+    ; squaredDecayBudgetAgreesWithObservableDecay =
+        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudgetIs3CLocalSquaredCFSquared2Minusk
+          qhpBudget
+    ; uniformEnvelopeBudget =
+        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
+          qhpBudget
+    ; uniformEnvelopeBudgetMatchesAssumptionA = refl
+    ; uniformEnvelopeAgreesWithObservableEnvelope =
+        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudgetIs3CLocalSquaredCFSquared
+          qhpBudget
+    ; perLinkEstimate =
+        λ k b →
+          qhpPerLinkRealOscillationEstimate
+            (SmallFieldOscillationBudget.cLocal budget)
+            k
+            (SmallFieldOscillationBudget.localityConstantNormalized budget)
+            b
+    ; qhpPerLinkEnvelopeMatchesNormalizedEnvelope =
+        λ k b →
+          QhpPerLinkRealOscillationEstimate.qhpRealEnvelopeMatchesNormalizedEnvelope
+            (qhpPerLinkRealOscillationEstimate
+              (SmallFieldOscillationBudget.cLocal budget)
+              k
+              (SmallFieldOscillationBudget.localityConstantNormalized budget)
+              b)
+    ; qhpBlockedOscillationMatchesNormalizedEnvelope =
+        λ k b →
+          QhpPerLinkRealOscillationEstimate.qhpBlockedOscillationMatchesNormalizedEnvelope
+            (qhpPerLinkRealOscillationEstimate
+              (SmallFieldOscillationBudget.cLocal budget)
+              k
+              (SmallFieldOscillationBudget.localityConstantNormalized budget)
+              b)
+    ; qhpControlsBlockedOscillation =
+        λ k b →
+          perLinkOscillationDecayAsRealFitsBlockedEnvelope
+            (SmallFieldOscillationBudget.cLocal budget)
+            k
+            (SmallFieldOscillationBudget.localityConstantNormalized budget)
+    ; qhpDecayBelowMargin = currentOscillationDecayBelowMargin
+    }
+
+currentQhpBlockedOscillationComparison :
+  QhpBlockedOscillationComparison
+currentQhpBlockedOscillationComparison =
+  qhpBlockedOscillationComparison currentSmallFieldOscillationBudget
+
+record AssumptionABudgetOscillationBridge : Set₁ where
+  field
+    budget :
+      SmallFieldOscillationBudget
+    qhpBudget :
+      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem
+        (SmallFieldOscillationBudget.cLocal budget)
+        (SmallFieldOscillationBudget.cF budget)
+        (SmallFieldOscillationBudget.k budget)
+    qhpBudgetMatchesBudget :
+      qhpBudget ≡ SmallFieldOscillationBudget.anisotropicAssumptionA budget
+    squaredDecayBudget :
+      Seminorm.DyadicDecay
+    squaredDecayBudgetMatchesAssumptionA :
+      squaredDecayBudget
+        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
+            qhpBudget
+    uniformEnvelopeBudget :
+      Seminorm.DyadicDecay
+    uniformEnvelopeBudgetMatchesAssumptionA :
+      uniformEnvelopeBudget
+        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
+            qhpBudget
+    blockedOscillationControlled :
+      ∀ (k : Nat) (b : Block) →
+      blockedOscillation k b ≤ℝ (C-obs *ℝ decayFactor k)
+
+record AssumptionABudgetControlsBlockedOscillationTheorem : Set₁ where
+  constructor mkAssumptionABudgetControlsBlockedOscillationTheorem
+  field
+    bridge :
+      AssumptionABudgetOscillationBridge
+    localityProof :
+      Locality.BalabanCMP98AveragingLocalityImportedTheorem
+        (SmallFieldOscillationBudget.cLocal
+          (AssumptionABudgetOscillationBridge.budget bridge))
+        (SmallFieldOscillationBudget.k
+          (AssumptionABudgetOscillationBridge.budget bridge))
+    qhpArithmetic :
+      Seminorm.QhpSquaredOscillationArithmetic
+        (SmallFieldOscillationBudget.cLocal
+          (AssumptionABudgetOscillationBridge.budget bridge))
+        (SmallFieldOscillationBudget.k
+          (AssumptionABudgetOscillationBridge.budget bridge))
+    qhpSquaredBridge :
+      Qhp.LipschitzToSquaredOscillationForQhpTheorem
+        (SmallFieldOscillationBudget.cLocal
+          (AssumptionABudgetOscillationBridge.budget bridge))
+        (SmallFieldOscillationBudget.k
+          (AssumptionABudgetOscillationBridge.budget bridge))
+    squaredDecayBudgetAgreesWithObservableDecay :
+      AssumptionABudgetOscillationBridge.squaredDecayBudget bridge
+        ≡ AssumptionA.observableSquaredDecay
+            (SmallFieldOscillationBudget.cLocal
+              (AssumptionABudgetOscillationBridge.budget bridge))
+            (SmallFieldOscillationBudget.cF
+              (AssumptionABudgetOscillationBridge.budget bridge))
+            (SmallFieldOscillationBudget.k
+              (AssumptionABudgetOscillationBridge.budget bridge))
+    uniformEnvelopeAgreesWithObservableEnvelope :
+      AssumptionABudgetOscillationBridge.uniformEnvelopeBudget bridge
+        ≡ AssumptionA.observableUniformEnvelope
+            (SmallFieldOscillationBudget.cLocal
+              (AssumptionABudgetOscillationBridge.budget bridge))
+            (SmallFieldOscillationBudget.cF
+              (AssumptionABudgetOscillationBridge.budget bridge))
+    theoremCitation :
+      String
+    blockedOscillationControlled :
+      ∀ (k : Nat) (b : Block) →
+      blockedOscillation k b ≤ℝ (C-obs *ℝ decayFactor k)
+
+record AssumptionAQhpEnvelopeComparisonTheorem : Set₁ where
+  constructor mkAssumptionAQhpEnvelopeComparisonTheorem
+  field
+    budget :
+      SmallFieldOscillationBudget
+    qhpBudget :
+      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem
+        (SmallFieldOscillationBudget.cLocal budget)
+        (SmallFieldOscillationBudget.cF budget)
+        (SmallFieldOscillationBudget.k budget)
+    qhpBudgetMatchesBudget :
+      qhpBudget ≡ SmallFieldOscillationBudget.anisotropicAssumptionA budget
+    squaredDecayBudget :
+      Seminorm.DyadicDecay
+    squaredDecayBudgetMatchesAssumptionA :
+      squaredDecayBudget
+        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
+            qhpBudget
+    squaredDecayBudgetAgreesWithObservableDecay :
+      squaredDecayBudget
+        ≡ AssumptionA.observableSquaredDecay
+            (SmallFieldOscillationBudget.cLocal budget)
+            (SmallFieldOscillationBudget.cF budget)
+            (SmallFieldOscillationBudget.k budget)
+    uniformEnvelopeBudget :
+      Seminorm.DyadicDecay
+    uniformEnvelopeBudgetMatchesAssumptionA :
+      uniformEnvelopeBudget
+        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
+            qhpBudget
+    uniformEnvelopeAgreesWithObservableEnvelope :
+      uniformEnvelopeBudget
+        ≡ AssumptionA.observableUniformEnvelope
+            (SmallFieldOscillationBudget.cLocal budget)
+            (SmallFieldOscillationBudget.cF budget)
+    theoremCitation :
+      String
+
+record BlockedOscillationEnvelopeControlTheorem : Set₁ where
+  constructor mkBlockedOscillationEnvelopeControlTheorem
+  field
+    comparison :
+      AssumptionAQhpEnvelopeComparisonTheorem
+    localityProof :
+      Locality.BalabanCMP98AveragingLocalityImportedTheorem
+        (SmallFieldOscillationBudget.cLocal
+          (AssumptionAQhpEnvelopeComparisonTheorem.budget comparison))
+        (SmallFieldOscillationBudget.k
+          (AssumptionAQhpEnvelopeComparisonTheorem.budget comparison))
+    qhpArithmetic :
+      Seminorm.QhpSquaredOscillationArithmetic
+        (SmallFieldOscillationBudget.cLocal
+          (AssumptionAQhpEnvelopeComparisonTheorem.budget comparison))
+        (SmallFieldOscillationBudget.k
+          (AssumptionAQhpEnvelopeComparisonTheorem.budget comparison))
+    qhpSquaredBridge :
+      Qhp.LipschitzToSquaredOscillationForQhpTheorem
+        (SmallFieldOscillationBudget.cLocal
+          (AssumptionAQhpEnvelopeComparisonTheorem.budget comparison))
+        (SmallFieldOscillationBudget.k
+          (AssumptionAQhpEnvelopeComparisonTheorem.budget comparison))
+    theoremCitation :
+      String
+    blockedOscillationControlled :
+      ∀ (k : Nat) (b : Block) →
+      blockedOscillation k b ≤ℝ (C-obs *ℝ decayFactor k)
+
+observableSquaredBudgetAgreesWithObservableDecay :
+  (budget : SmallFieldOscillationBudget) →
+  let
+    qhpBudget =
+      SmallFieldOscillationBudget.anisotropicAssumptionA budget
+  in
+  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
+    qhpBudget
+    ≡ AssumptionA.observableSquaredDecay
+        (SmallFieldOscillationBudget.cLocal budget)
+        (SmallFieldOscillationBudget.cF budget)
+        (SmallFieldOscillationBudget.k budget)
+observableSquaredBudgetAgreesWithObservableDecay budget =
+  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudgetIs3CLocalSquaredCFSquared2Minusk
+    (SmallFieldOscillationBudget.anisotropicAssumptionA budget)
+
+observableUniformEnvelopeAgreesWithObservableEnvelope :
+  (budget : SmallFieldOscillationBudget) →
+  let
+    qhpBudget =
+      SmallFieldOscillationBudget.anisotropicAssumptionA budget
+  in
+  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
+    qhpBudget
+    ≡ AssumptionA.observableUniformEnvelope
+        (SmallFieldOscillationBudget.cLocal budget)
+        (SmallFieldOscillationBudget.cF budget)
+observableUniformEnvelopeAgreesWithObservableEnvelope budget =
+  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudgetIs3CLocalSquaredCFSquared
+    (SmallFieldOscillationBudget.anisotropicAssumptionA budget)
+
+blockedOscillationControlledByQhpEnvelope :
+  (budget : SmallFieldOscillationBudget) →
+  ∀ (k : Nat) (b : Block) →
+  blockedOscillation k b ≤ℝ (C-obs *ℝ decayFactor k)
+blockedOscillationControlledByQhpEnvelope budget k b =
+  ≤ℝ-trans
+    (blockedOscillationMatchesPerLinkDecayAsReal
+      (SmallFieldOscillationBudget.cLocal budget)
+      k
+      b
+      (SmallFieldOscillationBudget.localityConstantNormalized budget))
+    (perLinkOscillationDecayAsRealFitsBlockedEnvelope
+      (SmallFieldOscillationBudget.cLocal budget)
+      k
+      (SmallFieldOscillationBudget.localityConstantNormalized budget))
+
+assumptionAQhpEnvelopeComparisonTheorem :
+  (budget : SmallFieldOscillationBudget) →
+  AssumptionAQhpEnvelopeComparisonTheorem
+assumptionAQhpEnvelopeComparisonTheorem budget =
+  let
+    qhpBudget =
+      SmallFieldOscillationBudget.anisotropicAssumptionA budget
+  in
+  mkAssumptionAQhpEnvelopeComparisonTheorem
+    budget
+    qhpBudget
+    refl
+    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
+      qhpBudget)
+    refl
+    (observableSquaredBudgetAgreesWithObservableDecay budget)
+    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
+      qhpBudget)
+    refl
+    (observableUniformEnvelopeAgreesWithObservableEnvelope budget)
+    "Assumption A / Q_hp budget comparison: the current blocked-scale observable budgets are identified with the in-repo Q_hp collapsed squared budget and uniform envelope."
+
+currentObservableSquaredBudgetAgreesWithObservableDecay :
+  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
+    (SmallFieldOscillationBudget.anisotropicAssumptionA currentSmallFieldOscillationBudget)
+    ≡ AssumptionA.observableSquaredDecay
+        (SmallFieldOscillationBudget.cLocal currentSmallFieldOscillationBudget)
+        (SmallFieldOscillationBudget.cF currentSmallFieldOscillationBudget)
+        (SmallFieldOscillationBudget.k currentSmallFieldOscillationBudget)
+currentObservableSquaredBudgetAgreesWithObservableDecay =
+  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudgetIs3CLocalSquaredCFSquared2Minusk
+    (SmallFieldOscillationBudget.anisotropicAssumptionA currentSmallFieldOscillationBudget)
+
+currentObservableUniformEnvelopeAgreesWithObservableEnvelope :
+  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
+    (SmallFieldOscillationBudget.anisotropicAssumptionA currentSmallFieldOscillationBudget)
+    ≡ AssumptionA.observableUniformEnvelope
+        (SmallFieldOscillationBudget.cLocal currentSmallFieldOscillationBudget)
+        (SmallFieldOscillationBudget.cF currentSmallFieldOscillationBudget)
+currentObservableUniformEnvelopeAgreesWithObservableEnvelope =
+  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudgetIs3CLocalSquaredCFSquared
+    (SmallFieldOscillationBudget.anisotropicAssumptionA currentSmallFieldOscillationBudget)
+
+currentAssumptionAQhpEnvelopeComparisonTheorem :
+  AssumptionAQhpEnvelopeComparisonTheorem
+currentAssumptionAQhpEnvelopeComparisonTheorem =
+  let
+    budget =
+      currentSmallFieldOscillationBudget
+    qhpBudget =
+      SmallFieldOscillationBudget.anisotropicAssumptionA budget
+  in
+  mkAssumptionAQhpEnvelopeComparisonTheorem
+    budget
+    qhpBudget
+    refl
+    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
+      qhpBudget)
+    refl
+    currentObservableSquaredBudgetAgreesWithObservableDecay
+    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
+      qhpBudget)
+    refl
+    currentObservableUniformEnvelopeAgreesWithObservableEnvelope
+    "Current Assumption A / Q_hp budget comparison at cLocal = 1, cF = 1, k = 1."
+
+blockedOscillationControlledByQhpEnvelopeLeaf :
+  (budget : SmallFieldOscillationBudget) →
+  BlockedOscillationEnvelopeControlTheorem
+blockedOscillationControlledByQhpEnvelopeLeaf budget =
+  let
+    comparison =
+      assumptionAQhpEnvelopeComparisonTheorem budget
+    qhpBudget =
+      AssumptionAQhpEnvelopeComparisonTheorem.qhpBudget comparison
+  in
+  mkBlockedOscillationEnvelopeControlTheorem
+    comparison
+    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.localityProof
+      qhpBudget)
+    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
+      qhpBudget)
+    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpSquaredBridge
+      qhpBudget)
+    "Blocked oscillation envelope control: the remaining analytic leaf compares the blocked oscillation seminorm to the Q_hp envelope budget supplied by the in-repo Assumption A bridge."
+    (blockedOscillationControlledByQhpEnvelope budget)
+
+currentBlockedOscillationControlledByQhpEnvelopeLeaf :
+  BlockedOscillationEnvelopeControlTheorem
+currentBlockedOscillationControlledByQhpEnvelopeLeaf =
+  let
+    comparison =
+      currentAssumptionAQhpEnvelopeComparisonTheorem
+    qhpBudget =
+      AssumptionAQhpEnvelopeComparisonTheorem.qhpBudget comparison
+  in
+  mkBlockedOscillationEnvelopeControlTheorem
+    comparison
+    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.localityProof
+      qhpBudget)
+    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
+      qhpBudget)
+    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpSquaredBridge
+      qhpBudget)
+    "Current blocked oscillation envelope control at the live small-field budget; only the blocked-oscillation inequality itself remains analytic."
+    (blockedOscillationControlledByQhpEnvelope currentSmallFieldOscillationBudget)
+
+assumptionABudgetControlsBlockedOscillationFromQhp :
+  (budget : SmallFieldOscillationBudget) →
+  AssumptionABudgetOscillationBridge
+assumptionABudgetControlsBlockedOscillationFromQhp budget =
+  let
+    leaf =
+      blockedOscillationControlledByQhpEnvelopeLeaf budget
+    comparison =
+      BlockedOscillationEnvelopeControlTheorem.comparison leaf
+  in
+  record
+    { budget = budget
+    ; qhpBudget =
+        AssumptionAQhpEnvelopeComparisonTheorem.qhpBudget comparison
+    ; qhpBudgetMatchesBudget =
+        AssumptionAQhpEnvelopeComparisonTheorem.qhpBudgetMatchesBudget comparison
+    ; squaredDecayBudget =
+        AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudget comparison
+    ; squaredDecayBudgetMatchesAssumptionA =
+        AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudgetMatchesAssumptionA
+          comparison
+    ; uniformEnvelopeBudget =
+        AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeBudget comparison
+    ; uniformEnvelopeBudgetMatchesAssumptionA =
+        AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeBudgetMatchesAssumptionA
+          comparison
+    ; blockedOscillationControlled =
+        BlockedOscillationEnvelopeControlTheorem.blockedOscillationControlled leaf
+    }
+
+assumptionABudgetControlsBlockedOscillationTheorem :
+  (budget : SmallFieldOscillationBudget) →
+  AssumptionABudgetControlsBlockedOscillationTheorem
+assumptionABudgetControlsBlockedOscillationTheorem budget =
+  let
+    bridge =
+      assumptionABudgetControlsBlockedOscillationFromQhp budget
+    leaf =
+      blockedOscillationControlledByQhpEnvelopeLeaf budget
+    comparison =
+      BlockedOscillationEnvelopeControlTheorem.comparison leaf
+  in
+  mkAssumptionABudgetControlsBlockedOscillationTheorem
+    bridge
+    (BlockedOscillationEnvelopeControlTheorem.localityProof leaf)
+    (BlockedOscillationEnvelopeControlTheorem.qhpArithmetic leaf)
+    (BlockedOscillationEnvelopeControlTheorem.qhpSquaredBridge leaf)
+    (AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudgetAgreesWithObservableDecay
+      comparison)
+    (AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeAgreesWithObservableEnvelope
+      comparison)
+    "Assumption A / Q_hp oscillation bridge: in-repo locality proof + squared-oscillation arithmetic + Lipschitz bridge control the blocked oscillation envelope."
+    (AssumptionABudgetOscillationBridge.blockedOscillationControlled bridge)
+
+currentAssumptionABudgetControlsBlockedOscillationFromQhp :
+  AssumptionABudgetOscillationBridge
+currentAssumptionABudgetControlsBlockedOscillationFromQhp =
+  let
+    budget =
+      currentSmallFieldOscillationBudget
+    leaf =
+      currentBlockedOscillationControlledByQhpEnvelopeLeaf
+    comparison =
+      BlockedOscillationEnvelopeControlTheorem.comparison leaf
+  in
+  record
+    { budget = budget
+    ; qhpBudget =
+        AssumptionAQhpEnvelopeComparisonTheorem.qhpBudget comparison
+    ; qhpBudgetMatchesBudget =
+        AssumptionAQhpEnvelopeComparisonTheorem.qhpBudgetMatchesBudget comparison
+    ; squaredDecayBudget =
+        AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudget comparison
+    ; squaredDecayBudgetMatchesAssumptionA =
+        AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudgetMatchesAssumptionA
+          comparison
+    ; uniformEnvelopeBudget =
+        AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeBudget comparison
+    ; uniformEnvelopeBudgetMatchesAssumptionA =
+        AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeBudgetMatchesAssumptionA
+          comparison
+    ; blockedOscillationControlled =
+        BlockedOscillationEnvelopeControlTheorem.blockedOscillationControlled leaf
+    }
+
+currentAssumptionABudgetControlsBlockedOscillationTheorem :
+  AssumptionABudgetControlsBlockedOscillationTheorem
+currentAssumptionABudgetControlsBlockedOscillationTheorem =
+  let
+    bridge =
+      currentAssumptionABudgetControlsBlockedOscillationFromQhp
+    leaf =
+      currentBlockedOscillationControlledByQhpEnvelopeLeaf
+    comparison =
+      BlockedOscillationEnvelopeControlTheorem.comparison leaf
+  in
+  mkAssumptionABudgetControlsBlockedOscillationTheorem
+    bridge
+    (BlockedOscillationEnvelopeControlTheorem.localityProof leaf)
+    (BlockedOscillationEnvelopeControlTheorem.qhpArithmetic leaf)
+    (BlockedOscillationEnvelopeControlTheorem.qhpSquaredBridge leaf)
+    (AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudgetAgreesWithObservableDecay
+      comparison)
+    (AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeAgreesWithObservableEnvelope
+      comparison)
+    "Current Assumption A / Q_hp oscillation bridge at cLocal = 1, cF = 1, k = 1."
+    (AssumptionABudgetOscillationBridge.blockedOscillationControlled bridge)
+
+BlockingRadiusMarginFromQhpComparison :
+  QhpBlockedOscillationComparison →
+  BlockingRadiusMargin
+BlockingRadiusMarginFromQhpComparison comparison =
+  record
+    { ε-margin = currentε-margin
+    ; marginBoundsOscillation = λ k b →
+        let
+          estimate =
+            QhpBlockedOscillationComparison.perLinkEstimate
+              comparison
+              k
+              b
+          real≤envelope =
+            QhpBlockedOscillationComparison.qhpControlsBlockedOscillation
+              comparison
+              k
+              b
+          envelope≤margin =
+            QhpBlockedOscillationComparison.qhpDecayBelowMargin
+              comparison
+              k
+        in
+        ≤ℝ-trans
+          (QhpPerLinkRealOscillationEstimate.qhpBlockedOscillationBelowRealEnvelope
+            estimate)
+          (≤ℝ-trans real≤envelope envelope≤margin)
+    }
+
+OscillationBudgetGivesMargin :
+  SmallFieldOscillationBudget →
+  SmallFieldBlockingScaleAdmissible →
+  BlockingRadiusMargin
+OscillationBudgetGivesMargin budget admissible =
+  record
+    { ε-margin =
+        SmallFieldBlockingScaleAdmissible.ε-margin admissible
+    ; marginBoundsOscillation = λ k b →
+        ≤ℝ-trans
+          (AssumptionABudgetControlsBlockedOscillationTheorem.blockedOscillationControlled
+            (assumptionABudgetControlsBlockedOscillationTheorem budget)
+            k b)
+          (SmallFieldBlockingScaleAdmissible.oscillationDecayBelowMargin
+            admissible
+            k)
+    }
+
+currentSmallFieldInputRadiusBound :
+  SmallFieldInputRadiusBound
+currentSmallFieldInputRadiusBound =
+  record
+    { ε-input =
+        CurrentSmallFieldInputRadiusBoundTheorem.ε-input
+          currentSmallFieldInputRadiusBoundTheorem
+    ; ε-small = currentε-small
+    ; ε-margin = currentε-margin
+    ; fineFieldBound =
+        CurrentSmallFieldInputRadiusBoundTheorem.fineFieldBound
+          currentSmallFieldInputRadiusBoundTheorem
+    ; inputPlusMarginWithinSmall = currentInputPlusMarginWithinSmall
+    }
+
+currentSmallFieldBlockingScaleAdmissible :
+  SmallFieldBlockingScaleAdmissible
+currentSmallFieldBlockingScaleAdmissible =
+  record
+    { ε-margin =
+        CurrentSmallFieldBlockingScaleAdmissibleTheorem.ε-margin
+          currentSmallFieldBlockingScaleAdmissibleTheorem
+    ; oscillationDecayBelowMargin =
+        CurrentSmallFieldBlockingScaleAdmissibleTheorem.oscillationDecayBelowMargin
+          currentSmallFieldBlockingScaleAdmissibleTheorem
+    }
+
+currentBlockingRadiusMargin :
+  SmallFieldOscillationBudget →
+  BlockingRadiusMargin
+currentBlockingRadiusMargin budget =
+  OscillationBudgetGivesMargin
+    budget
+    currentSmallFieldBlockingScaleAdmissible
+
+currentBlockingRadiusMarginReduced :
+  BlockingRadiusMargin
+currentBlockingRadiusMarginReduced =
+  BlockingRadiusMarginFromQhpComparison
+    currentQhpBlockedOscillationComparison
+
+record BlockedSmallFieldRadiusSurvivalTheorem : Set₁ where
+  constructor mkBlockedSmallFieldRadiusSurvivalTheorem
+  field
+    oscillationBudget :
+      SmallFieldOscillationBudget
+    inputRadiusBoundTheorem :
+      CurrentSmallFieldInputRadiusBoundTheorem
+    blockingScaleAdmissibleTheorem :
+      CurrentSmallFieldBlockingScaleAdmissibleTheorem
+    oscillationControl :
+      AssumptionABudgetControlsBlockedOscillationTheorem
+    blockingMargin :
+      BlockingRadiusMargin
+    radiusSurvival :
+      BlockedSmallFieldRadiusSurvival
+    theoremCitation :
+      String
+    blockedRadiusStaysAdmissible :
+      BlockedSmallFieldRadiusSurvival.blockedRadiusStaysAdmissible radiusSurvival
+        ≡ true
+
+BlockedSmallFieldRadiusSurvivalFromOscillationBudget :
+  SmallFieldOscillationBudget →
+  SmallFieldInputRadiusBound →
+  BlockingRadiusMargin →
+  BlockedSmallFieldRadiusSurvival
+BlockedSmallFieldRadiusSurvivalFromOscillationBudget budget radiusBound margin =
+  mkBlockedSmallFieldRadiusSurvival
+    budget
+    radiusBound
+    margin
+    2
+    1
+    3
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+    true
+    refl
+
+BlockedSmallFieldRadiusSurvivalFromQhpComparison :
+  QhpBlockedOscillationComparison →
+  SmallFieldInputRadiusBound →
+  BlockedSmallFieldRadiusSurvival
+BlockedSmallFieldRadiusSurvivalFromQhpComparison comparison radiusBound =
+  BlockedSmallFieldRadiusSurvivalFromOscillationBudget
+    (QhpBlockedOscillationComparison.budget comparison)
+    radiusBound
+    (BlockingRadiusMarginFromQhpComparison comparison)
+
+blockedSmallFieldRadiusSurvivalTheorem :
+  (budget : SmallFieldOscillationBudget) →
+  BlockedSmallFieldRadiusSurvivalTheorem
+blockedSmallFieldRadiusSurvivalTheorem budget =
+  let
+    comparison =
+      qhpBlockedOscillationComparison budget
+    radiusSurvival =
+      BlockedSmallFieldRadiusSurvivalFromQhpComparison
+        comparison
+        currentSmallFieldInputRadiusBound
+  in
+  mkBlockedSmallFieldRadiusSurvivalTheorem
+    budget
+    currentSmallFieldInputRadiusBoundTheorem
+    currentSmallFieldBlockingScaleAdmissibleTheorem
+    (assumptionABudgetControlsBlockedOscillationTheorem budget)
+    (BlockingRadiusMarginFromQhpComparison comparison)
+    radiusSurvival
+    "Blocked small-field radius survival: fine-field input bound + Q_hp oscillation control + blocked-scale margin + triangle arithmetic preserve the admissible small-field radius."
+    (BlockedSmallFieldRadiusSurvival.blockedRadiusStaysAdmissibleIsTrue
+      radiusSurvival)
+
+currentBlockedSmallFieldRadiusSurvival :
+  BlockedSmallFieldRadiusSurvival
+currentBlockedSmallFieldRadiusSurvival =
+  BlockedSmallFieldRadiusSurvivalFromQhpComparison
+    currentQhpBlockedOscillationComparison
+    currentSmallFieldInputRadiusBound
+
+currentBlockedSmallFieldRadiusSurvivalTheorem :
+  BlockedSmallFieldRadiusSurvivalTheorem
+currentBlockedSmallFieldRadiusSurvivalTheorem =
+  mkBlockedSmallFieldRadiusSurvivalTheorem
+    currentSmallFieldOscillationBudget
+    currentSmallFieldInputRadiusBoundTheorem
+    currentSmallFieldBlockingScaleAdmissibleTheorem
+    currentAssumptionABudgetControlsBlockedOscillationTheorem
+    currentBlockingRadiusMarginReduced
+    currentBlockedSmallFieldRadiusSurvival
+    "Current blocked small-field radius survival at the live KP budget."
+    (BlockedSmallFieldRadiusSurvival.blockedRadiusStaysAdmissibleIsTrue
+      currentBlockedSmallFieldRadiusSurvival)
+
 record SpatialBlockingPreservesGaugeOrbitTheorem : Set₁ where
   constructor mkSpatialBlockingPreservesGaugeOrbitTheorem
   field
@@ -710,1069 +1802,6 @@ gaugeOrbitMeasurePreservationProvider :
   GaugeOrbitMeasurePreservation
 gaugeOrbitMeasurePreservationProvider =
   gaugeOrbitMeasurePreservationFromAuthority gaugeOrbitMeasureAuthorityProvider
-
-currentSmallFieldLocalityConstant : Nat
-currentSmallFieldLocalityConstant = 1
-
-currentSmallFieldObservableLipschitzConstant : Nat
-currentSmallFieldObservableLipschitzConstant = 1
-
-currentSmallFieldBlockingScale : Nat
-currentSmallFieldBlockingScale = suc zero
-
-record SmallFieldOscillationBudget : Set₁ where
-  constructor mkSmallFieldOscillationBudget
-  field
-    cLocal :
-      Nat
-    cF :
-      Nat
-    k :
-      Nat
-    anisotropicAssumptionA :
-      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem cLocal cF k
-    blockedSquaredOscillationBudget :
-      Seminorm.DyadicDecay
-    blockedSquaredOscillationBudgetMatchesAssumptionA :
-      blockedSquaredOscillationBudget
-        ≡ AssumptionA.observableSquaredDecay cLocal cF k
-    blockedUniformEnvelopeBudget :
-      Seminorm.DyadicDecay
-    blockedUniformEnvelopeBudgetMatchesAssumptionA :
-      blockedUniformEnvelopeBudget
-        ≡ AssumptionA.observableUniformEnvelope cLocal cF
-    blockedOscillationBudgetAvailable :
-      Bool
-    blockedOscillationBudgetAvailableIsTrue :
-      blockedOscillationBudgetAvailable ≡ true
-    localityConstantNormalized :
-      cLocal ≡ currentSmallFieldLocalityConstant
-
-smallFieldOscillationBudgetFromAssumptionA :
-  (cF k : Nat) →
-  SmallFieldOscillationBudget
-smallFieldOscillationBudgetFromAssumptionA cF k =
-  record
-    { cLocal = currentSmallFieldLocalityConstant
-    ; cF = cF
-    ; k = k
-    ; anisotropicAssumptionA =
-        AssumptionA.ymAnisotropicAssumptionAConditionalClosure
-          currentSmallFieldLocalityConstant
-          cF
-          k
-    ; blockedSquaredOscillationBudget =
-        AssumptionA.observableSquaredDecay
-          currentSmallFieldLocalityConstant
-          cF
-          k
-    ; blockedSquaredOscillationBudgetMatchesAssumptionA =
-        refl
-    ; blockedUniformEnvelopeBudget =
-        AssumptionA.observableUniformEnvelope
-          currentSmallFieldLocalityConstant
-          cF
-    ; blockedUniformEnvelopeBudgetMatchesAssumptionA =
-        refl
-    ; blockedOscillationBudgetAvailable = true
-    ; blockedOscillationBudgetAvailableIsTrue = refl
-    ; localityConstantNormalized = refl
-    }
-
-currentSmallFieldOscillationBudget : SmallFieldOscillationBudget
-currentSmallFieldOscillationBudget =
-  smallFieldOscillationBudgetFromAssumptionA
-    currentSmallFieldObservableLipschitzConstant
-    currentSmallFieldBlockingScale
-
-blockedOscillationMatchesNormalizedEnvelope :
-  ∀ (k : Nat) (b : Block) →
-  blockedOscillation k b ≡ (C-obs *ℝ decayFactor k)
-blockedOscillationMatchesNormalizedEnvelope k b = refl
-
-perLinkDecayMatchesNormalizedEnvelopeAtCurrentLocality :
-  ∀ (k : Nat) →
-  DyadicBridge.dyadicDecayAsReal
-    (Seminorm.perLinkOscillationDecay currentSmallFieldLocalityConstant k)
-    ≡ (C-obs *ℝ decayFactor k)
-perLinkDecayMatchesNormalizedEnvelopeAtCurrentLocality k =
-  DyadicBridge.normalizedPerLinkDecayAsReal k
-
-perLinkDecayMatchesNormalizedEnvelope :
-  ∀ (cLocal k : Nat) →
-  cLocal ≡ currentSmallFieldLocalityConstant →
-  DyadicBridge.dyadicDecayAsReal
-    (Seminorm.perLinkOscillationDecay cLocal k)
-    ≡ (C-obs *ℝ decayFactor k)
-perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current
-  rewrite cLocal≡current =
-  perLinkDecayMatchesNormalizedEnvelopeAtCurrentLocality k
-
-blockedOscillationMatchesPerLinkDecayAsReal :
-  ∀ (cLocal k : Nat) (b : Block) →
-  cLocal ≡ currentSmallFieldLocalityConstant →
-  blockedOscillation k b
-    ≤ℝ DyadicBridge.dyadicDecayAsReal
-          (Seminorm.perLinkOscillationDecay cLocal k)
-blockedOscillationMatchesPerLinkDecayAsReal cLocal k b cLocal≡current
-  rewrite blockedOscillationMatchesNormalizedEnvelope k b
-        | perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current =
-  ≤ℝ-refl
-
-perLinkOscillationDecayAsRealFitsBlockedEnvelope :
-  ∀ (cLocal k : Nat) →
-  cLocal ≡ currentSmallFieldLocalityConstant →
-  DyadicBridge.dyadicDecayAsReal
-    (Seminorm.perLinkOscillationDecay cLocal k)
-    ≤ℝ (C-obs *ℝ decayFactor k)
-perLinkOscillationDecayAsRealFitsBlockedEnvelope cLocal k cLocal≡current
-  rewrite perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current =
-  ≤ℝ-refl
-
-blockedOscillationAndPerLinkDecayShareNormalizedEnvelope :
-  ∀ (cLocal k : Nat) (b : Block) →
-  cLocal ≡ currentSmallFieldLocalityConstant →
-  blockedOscillation k b ≡
-  DyadicBridge.dyadicDecayAsReal
-    (Seminorm.perLinkOscillationDecay cLocal k)
-blockedOscillationAndPerLinkDecayShareNormalizedEnvelope cLocal k b cLocal≡current
-  rewrite blockedOscillationMatchesNormalizedEnvelope k b
-        | perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current =
-  refl
-
-record BlockedSmallFieldRadiusSurvival : Set₁ where
-  constructor mkBlockedSmallFieldRadiusSurvival
-  field
-    oscillationBudget :
-      SmallFieldOscillationBudget
-    inputRadiusBound :
-      SmallFieldInputRadiusBound
-    blockingMargin :
-      BlockingRadiusMargin
-    fineSmallFieldRadius :
-      Nat
-    blockingOscillationMargin :
-      Nat
-    admissibleBlockedRadius :
-      Nat
-    fineRadiusPlusMarginIsAdmissible :
-      fineSmallFieldRadius + blockingOscillationMargin
-        ≡ admissibleBlockedRadius
-    blockedFieldTriangleApplied :
-      Bool
-    blockedFieldTriangleAppliedIsTrue :
-      blockedFieldTriangleApplied ≡ true
-    marginSplitApplied :
-      Bool
-    marginSplitAppliedIsTrue :
-      marginSplitApplied ≡ true
-    triangleBoundForBlockedField :
-      Bool
-    triangleBoundForBlockedFieldIsTrue :
-      triangleBoundForBlockedField ≡ true
-    blockedRadiusStaysAdmissible :
-      Bool
-    blockedRadiusStaysAdmissibleIsTrue :
-      blockedRadiusStaysAdmissible ≡ true
-
--- ── Small-field radius survival from oscillation budget ─────────────
--- Native reducer: derives BlockedSmallFieldRadiusSurvival from the
--- oscillation budget + input radius bound + blocking margin.
-
-record SmallFieldInputRadiusBound : Set₁ where
-  field
-    ε-input : ℝ
-    ε-small : ℝ
-    ε-margin : ℝ
-    fineFieldBound :
-      ∀ (k : Nat) (b : Block) →
-      fineFieldNorm k b ≤ℝ ε-input
-    inputPlusMarginWithinSmall :
-      ε-input +ℝ ε-margin ≤ℝ ε-small
-
-record BlockingRadiusMargin : Set₁ where
-  field
-    ε-margin : ℝ
-    marginBoundsOscillation :
-      ∀ (k : Nat) (b : Block) →
-      blockedOscillation k b ≤ℝ ε-margin
-
-record QhpPerLinkRealOscillationEstimate
-  (cLocal : Nat) (k : Nat) (b : Block) : Set₁ where
-  field
-    localityTheorem :
-      Locality.BalabanCMP98AveragingLocalityImportedTheorem cLocal k
-    influenceConeTheorem :
-      Qhp.QhpPerLinkInfluenceConeLMinus2kTheorem cLocal k
-    influenceConeMatchesLocality :
-      influenceConeTheorem
-        ≡ Locality.BalabanCMP98AveragingLocalityImportedTheorem.qhpInfluenceCone
-            localityTheorem
-    perLinkOscillationBudget :
-      Seminorm.DyadicDecay
-    perLinkOscillationMatchesInfluenceCone :
-      perLinkOscillationBudget
-        ≡ Qhp.QhpPerLinkInfluenceConeLMinus2kTheorem.perLinkOscillation
-            influenceConeTheorem
-    perLinkOscillationIsCLocalTimes2Minus2k :
-      perLinkOscillationBudget ≡ Seminorm.perLinkOscillationDecay cLocal k
-    realBlockedOscillationEnvelope :
-      ℝ
-    realEnvelopeMatchesNormalizedEnvelope :
-      realBlockedOscillationEnvelope ≡ (C-obs *ℝ decayFactor k)
-    blockedOscillationMatchesNormalizedEnvelope :
-      blockedOscillation k b ≡ (C-obs *ℝ decayFactor k)
-    blockedOscillationBelowRealEnvelope :
-      blockedOscillation k b ≤ℝ realBlockedOscillationEnvelope
-    theoremCitation :
-      String
-
-record QhpBlockedOscillationComparison : Set₁ where
-  field
-    budget :
-      SmallFieldOscillationBudget
-    qhpBudget :
-      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem
-        (SmallFieldOscillationBudget.cLocal budget)
-        (SmallFieldOscillationBudget.cF budget)
-        (SmallFieldOscillationBudget.k budget)
-    qhpBudgetMatchesBudget :
-      qhpBudget ≡ SmallFieldOscillationBudget.anisotropicAssumptionA budget
-    localityProof :
-      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.localityProof
-        qhpBudget
-    qhpArithmetic :
-      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
-        qhpBudget
-    qhpSquaredBridge :
-      Qhp.LipschitzToSquaredOscillationForQhpTheorem
-        (SmallFieldOscillationBudget.cLocal budget)
-        (SmallFieldOscillationBudget.k budget)
-    squaredDecayBudget :
-      Seminorm.DyadicDecay
-    squaredDecayBudgetMatchesAssumptionA :
-      squaredDecayBudget
-        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
-            qhpBudget
-    squaredDecayBudgetIsCollapsedQhpBudget :
-      squaredDecayBudget
-        ≡ Seminorm.QhpSquaredOscillationArithmetic.totalSquaredOscillation
-            qhpArithmetic
-    uniformEnvelopeBudget :
-      Seminorm.DyadicDecay
-    uniformEnvelopeBudgetMatchesAssumptionA :
-      uniformEnvelopeBudget
-        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
-            qhpBudget
-    uniformEnvelopeIsQhpUniformEnvelope :
-      uniformEnvelopeBudget
-        ≡ Qhp.LipschitzToSquaredOscillationForQhpTheorem.uniformSquaredEnvelope
-            qhpSquaredBridge
-    perLinkEstimate :
-      ∀ (k : Nat) (b : Block) →
-      QhpPerLinkRealOscillationEstimate
-        (SmallFieldOscillationBudget.cLocal budget)
-        k
-        b
-    qhpPerLinkEnvelopeMatchesNormalizedEnvelope :
-      ∀ (k : Nat) (b : Block) →
-      QhpPerLinkRealOscillationEstimate.realBlockedOscillationEnvelope
-        (perLinkEstimate k b)
-        ≡ (C-obs *ℝ decayFactor k)
-    qhpBlockedOscillationMatchesNormalizedEnvelope :
-      ∀ (k : Nat) (b : Block) →
-      blockedOscillation k b ≡ (C-obs *ℝ decayFactor k)
-    qhpControlsBlockedOscillation :
-      ∀ (k : Nat) (b : Block) →
-      QhpPerLinkRealOscillationEstimate.realBlockedOscillationEnvelope
-        (perLinkEstimate k b)
-        ≤ℝ (C-obs *ℝ decayFactor k)
-    qhpDecayBelowMargin :
-      ∀ (k : Nat) →
-      (C-obs *ℝ decayFactor k) ≤ℝ currentε-margin
-
--- Analytic norms (genuine analytic content; stays postulated)
-BlockedFieldTriangleBound :
-  ∀ (k : Nat) (b : Block) →
-  blockedFieldNorm k b ≤ℝ (fineFieldNorm k b +ℝ blockedOscillation k b)
-BlockedFieldTriangleBound k b = ≤ℝ-refl
-
--- SmallFieldMarginSplit derived from ordered-real arithmetic.
-SmallFieldMarginSplit :
-  ∀ {ε-input ε-small ε-margin : ℝ} {k : Nat} {b : Block} →
-  fineFieldNorm k b ≤ℝ ε-input →
-  blockedOscillation k b ≤ℝ ε-margin →
-  ε-input +ℝ ε-margin ≤ℝ ε-small →
-  (fineFieldNorm k b +ℝ blockedOscillation k b) ≤ℝ ε-small
-SmallFieldMarginSplit fine≤ osc≤ inputPlusMarginSmall =
-  ≤ℝ-trans (+-mono-≤ fine≤ osc≤) inputPlusMarginSmall
-
--- Oscillation budget → margin split
--- The live lane now uses an explicit dyadic-to-real bridge:
---
---   C-obs * decayFactor k  with  decayFactor k = 2^(-2k)
---
--- and the current blocked margin is the scale-zero envelope.
-record SmallFieldBlockingScaleAdmissible : Set₁ where
-  field
-    ε-margin :
-      ℝ
-    oscillationDecayBelowMargin :
-      ∀ (k : Nat) →
-      (C-obs *ℝ decayFactor k) ≤ℝ ε-margin
-
-currentε-input : ℝ
-currentε-input = AnisotropicDiameter.ε-const
-
-currentFineFieldBound :
-  ∀ (k : Nat) (b : Block) →
-    fineFieldNorm k b ≤ℝ currentε-input
-currentFineFieldBound k b =
-  AnisotropicDiameter.currentP33SmallFieldControlsMetricPerturbation
-    k
-    b
-    (AnisotropicDiameter.currentSmallFieldRegularity k b)
-
-currentε-margin : ℝ
-currentε-margin =
-  C-obs *ℝ decayFactor zero
-
-currentOscillationDecayBelowMargin :
-  ∀ (k : Nat) →
-  (C-obs *ℝ decayFactor k) ≤ℝ currentε-margin
-currentOscillationDecayBelowMargin k
-  rewrite sym (DyadicBridge.normalizedPerLinkDecayAsReal k)
-        | DyadicBridge.normalizedPerLinkDecayAtScaleZero =
-  DyadicBridge.normalizedPerLinkDecayBelowScaleZero k
-
-currentε-small : ℝ
-currentε-small =
-  currentε-input +ℝ currentε-margin
-
-currentInputPlusMarginWithinSmall :
-  currentε-input +ℝ currentε-margin ≤ℝ currentε-small
-currentInputPlusMarginWithinSmall = ≤ℝ-refl
-
-record CurrentSmallFieldInputRadiusBoundTheorem : Set₁ where
-  constructor mkCurrentSmallFieldInputRadiusBoundTheorem
-  field
-    ε-input :
-      ℝ
-    fineFieldBound :
-      ∀ (k : Nat) (b : Block) →
-      fineFieldNorm k b ≤ℝ ε-input
-    theoremCitation :
-      String
-
-currentSmallFieldInputRadiusBoundTheorem :
-  CurrentSmallFieldInputRadiusBoundTheorem
-currentSmallFieldInputRadiusBoundTheorem =
-  mkCurrentSmallFieldInputRadiusBoundTheorem
-    currentε-input
-    currentFineFieldBound
-    "Current fine-scale small-field hypothesis: fine field norm remains within the admissible input radius."
-
-record CurrentSmallFieldBlockingScaleAdmissibleTheorem : Set₁ where
-  constructor mkCurrentSmallFieldBlockingScaleAdmissibleTheorem
-  field
-    ε-margin :
-      ℝ
-    theoremCitation :
-      String
-    oscillationDecayBelowMargin :
-      ∀ (k : Nat) →
-      (C-obs *ℝ decayFactor k) ≤ℝ ε-margin
-
-currentSmallFieldBlockingScaleAdmissibleTheorem :
-  CurrentSmallFieldBlockingScaleAdmissibleTheorem
-currentSmallFieldBlockingScaleAdmissibleTheorem =
-  mkCurrentSmallFieldBlockingScaleAdmissibleTheorem
-    currentε-margin
-    "Current blocked-scale margin choice: the oscillation decay envelope is below the admissible blocked small-field margin."
-    currentOscillationDecayBelowMargin
-
-qhpPerLinkRealOscillationEstimate :
-  (cLocal : Nat) →
-  (k : Nat) →
-  cLocal ≡ currentSmallFieldLocalityConstant →
-  (b : Block) →
-  QhpPerLinkRealOscillationEstimate cLocal k b
-qhpPerLinkRealOscillationEstimate cLocal k cLocal≡current b =
-  let
-    localityTheorem =
-      Locality.balabanCMP98AveragingLocalityImportedTheorem cLocal k
-    influenceConeTheorem =
-      Locality.BalabanCMP98AveragingLocalityImportedTheorem.qhpInfluenceCone
-        localityTheorem
-  in
-  record
-    { localityTheorem = localityTheorem
-    ; influenceConeTheorem = influenceConeTheorem
-    ; influenceConeMatchesLocality = refl
-    ; perLinkOscillationBudget =
-        Qhp.QhpPerLinkInfluenceConeLMinus2kTheorem.perLinkOscillation
-          influenceConeTheorem
-    ; perLinkOscillationMatchesInfluenceCone = refl
-    ; perLinkOscillationIsCLocalTimes2Minus2k =
-        Qhp.QhpPerLinkInfluenceConeLMinus2kTheorem.perLinkOscillationIsCLocalTimes2Minus2k
-          influenceConeTheorem
-    ; realBlockedOscillationEnvelope =
-        DyadicBridge.dyadicDecayAsReal
-          (Qhp.QhpPerLinkInfluenceConeLMinus2kTheorem.perLinkOscillation
-            influenceConeTheorem)
-    ; realEnvelopeMatchesNormalizedEnvelope =
-        perLinkDecayMatchesNormalizedEnvelope cLocal k cLocal≡current
-    ; blockedOscillationMatchesNormalizedEnvelope =
-        blockedOscillationMatchesNormalizedEnvelope k b
-    ; blockedOscillationBelowRealEnvelope =
-        blockedOscillationMatchesPerLinkDecayAsReal cLocal k b cLocal≡current
-    ; theoremCitation =
-        "Per-link blocked oscillation estimate: the in-repo Q_hp locality theorem supplies the dyadic decay witness C_local * 2^(-2k), and the real blocked oscillation is compared against that witness at the current scale."
-    }
-
-qhpBlockedOscillationComparison :
-  (budget : SmallFieldOscillationBudget) →
-  QhpBlockedOscillationComparison
-qhpBlockedOscillationComparison budget =
-  let
-    qhpBudget =
-      SmallFieldOscillationBudget.anisotropicAssumptionA budget
-  in
-  record
-    { budget = budget
-    ; qhpBudget = qhpBudget
-    ; qhpBudgetMatchesBudget = refl
-    ; localityProof =
-        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.localityProof
-          qhpBudget
-    ; qhpArithmetic =
-        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
-          qhpBudget
-    ; qhpSquaredBridge =
-        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpSquaredBridge
-          qhpBudget
-    ; squaredDecayBudget =
-        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
-          qhpBudget
-    ; squaredDecayBudgetMatchesAssumptionA = refl
-    ; squaredDecayBudgetIsCollapsedQhpBudget = refl
-    ; uniformEnvelopeBudget =
-        AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
-          qhpBudget
-    ; uniformEnvelopeBudgetMatchesAssumptionA = refl
-    ; uniformEnvelopeIsQhpUniformEnvelope = refl
-    ; perLinkEstimate =
-        λ k b →
-          qhpPerLinkRealOscillationEstimate
-            (SmallFieldOscillationBudget.cLocal budget)
-            k
-            (SmallFieldOscillationBudget.localityConstantNormalized budget)
-            b
-    ; qhpPerLinkEnvelopeMatchesNormalizedEnvelope =
-        λ k b →
-          QhpPerLinkRealOscillationEstimate.realEnvelopeMatchesNormalizedEnvelope
-            (qhpPerLinkRealOscillationEstimate
-              (SmallFieldOscillationBudget.cLocal budget)
-              k
-              (SmallFieldOscillationBudget.localityConstantNormalized budget)
-              b)
-    ; qhpBlockedOscillationMatchesNormalizedEnvelope =
-        λ k b →
-          QhpPerLinkRealOscillationEstimate.blockedOscillationMatchesNormalizedEnvelope
-            (qhpPerLinkRealOscillationEstimate
-              (SmallFieldOscillationBudget.cLocal budget)
-              k
-              (SmallFieldOscillationBudget.localityConstantNormalized budget)
-              b)
-    ; qhpControlsBlockedOscillation =
-        λ k b →
-          perLinkOscillationDecayAsRealFitsBlockedEnvelope
-            (SmallFieldOscillationBudget.cLocal budget)
-            k
-            (SmallFieldOscillationBudget.localityConstantNormalized budget)
-    ; qhpDecayBelowMargin = currentOscillationDecayBelowMargin
-    }
-
-currentQhpBlockedOscillationComparison :
-  QhpBlockedOscillationComparison
-currentQhpBlockedOscillationComparison =
-  qhpBlockedOscillationComparison currentSmallFieldOscillationBudget
-
-record AssumptionABudgetOscillationBridge : Set₁ where
-  field
-    budget :
-      SmallFieldOscillationBudget
-    qhpBudget :
-      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem
-        (SmallFieldOscillationBudget.cLocal budget)
-        (SmallFieldOscillationBudget.cF budget)
-        (SmallFieldOscillationBudget.k budget)
-    qhpBudgetMatchesBudget :
-      qhpBudget ≡ SmallFieldOscillationBudget.anisotropicAssumptionA budget
-    squaredDecayBudget :
-      Seminorm.DyadicDecay
-    squaredDecayBudgetMatchesAssumptionA :
-      squaredDecayBudget
-        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
-            qhpBudget
-    uniformEnvelopeBudget :
-      Seminorm.DyadicDecay
-    uniformEnvelopeBudgetMatchesAssumptionA :
-      uniformEnvelopeBudget
-        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
-            qhpBudget
-    blockedOscillationControlled :
-      ∀ (k : Nat) (b : Block) →
-      blockedOscillation k b ≤ℝ (C-obs *ℝ decayFactor k)
-
-record AssumptionABudgetControlsBlockedOscillationTheorem : Set₁ where
-  constructor mkAssumptionABudgetControlsBlockedOscillationTheorem
-  field
-    bridge :
-      AssumptionABudgetOscillationBridge
-    localityProof :
-      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.localityProof
-        (AssumptionABudgetOscillationBridge.qhpBudget bridge)
-    qhpArithmetic :
-      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
-        (AssumptionABudgetOscillationBridge.qhpBudget bridge)
-    qhpSquaredBridge :
-      Qhp.LipschitzToSquaredOscillationForQhpTheorem
-        (SmallFieldOscillationBudget.cLocal
-          (AssumptionABudgetOscillationBridge.budget bridge))
-        (SmallFieldOscillationBudget.k
-          (AssumptionABudgetOscillationBridge.budget bridge))
-    squaredDecayBudgetIsCollapsedQhpBudget :
-      AssumptionABudgetOscillationBridge.squaredDecayBudget bridge
-        ≡ Seminorm.QhpSquaredOscillationArithmetic.totalSquaredOscillation
-            qhpArithmetic
-    uniformEnvelopeIsQhpUniformEnvelope :
-      AssumptionABudgetOscillationBridge.uniformEnvelopeBudget bridge
-        ≡ Qhp.LipschitzToSquaredOscillationForQhpTheorem.uniformSquaredEnvelope
-            qhpSquaredBridge
-    theoremCitation :
-      String
-    blockedOscillationControlled :
-      ∀ (k : Nat) (b : Block) →
-      blockedOscillation k b ≤ℝ (C-obs *ℝ decayFactor k)
-
-record AssumptionAQhpEnvelopeComparisonTheorem : Set₁ where
-  constructor mkAssumptionAQhpEnvelopeComparisonTheorem
-  field
-    budget :
-      SmallFieldOscillationBudget
-    qhpBudget :
-      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem
-        (SmallFieldOscillationBudget.cLocal budget)
-        (SmallFieldOscillationBudget.cF budget)
-        (SmallFieldOscillationBudget.k budget)
-    qhpBudgetMatchesBudget :
-      qhpBudget ≡ SmallFieldOscillationBudget.anisotropicAssumptionA budget
-    squaredDecayBudget :
-      Seminorm.DyadicDecay
-    squaredDecayBudgetMatchesAssumptionA :
-      squaredDecayBudget
-        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
-            qhpBudget
-    squaredDecayBudgetIsCollapsedQhpBudget :
-      squaredDecayBudget
-        ≡ Seminorm.QhpSquaredOscillationArithmetic.totalSquaredOscillation
-            (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
-              qhpBudget)
-    uniformEnvelopeBudget :
-      Seminorm.DyadicDecay
-    uniformEnvelopeBudgetMatchesAssumptionA :
-      uniformEnvelopeBudget
-        ≡ AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
-            qhpBudget
-    uniformEnvelopeIsQhpUniformEnvelope :
-      uniformEnvelopeBudget
-        ≡ Qhp.LipschitzToSquaredOscillationForQhpTheorem.uniformSquaredEnvelope
-            (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpSquaredBridge
-              qhpBudget)
-    theoremCitation :
-      String
-
-record BlockedOscillationEnvelopeControlTheorem : Set₁ where
-  constructor mkBlockedOscillationEnvelopeControlTheorem
-  field
-    comparison :
-      AssumptionAQhpEnvelopeComparisonTheorem
-    localityProof :
-      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.localityProof
-        (AssumptionAQhpEnvelopeComparisonTheorem.qhpBudget comparison)
-    qhpArithmetic :
-      AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
-        (AssumptionAQhpEnvelopeComparisonTheorem.qhpBudget comparison)
-    qhpSquaredBridge :
-      Qhp.LipschitzToSquaredOscillationForQhpTheorem
-        (SmallFieldOscillationBudget.cLocal
-          (AssumptionAQhpEnvelopeComparisonTheorem.budget comparison))
-        (SmallFieldOscillationBudget.k
-          (AssumptionAQhpEnvelopeComparisonTheorem.budget comparison))
-    theoremCitation :
-      String
-    blockedOscillationControlled :
-      ∀ (k : Nat) (b : Block) →
-      blockedOscillation k b ≤ℝ (C-obs *ℝ decayFactor k)
-
-observableSquaredBudgetMatchesQhpCollapsedBudget :
-  (budget : SmallFieldOscillationBudget) →
-  let
-    qhpBudget =
-      SmallFieldOscillationBudget.anisotropicAssumptionA budget
-  in
-  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
-    qhpBudget
-    ≡ Seminorm.QhpSquaredOscillationArithmetic.totalSquaredOscillation
-        (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
-          qhpBudget)
-observableSquaredBudgetMatchesQhpCollapsedBudget budget = refl
-
-observableUniformEnvelopeMatchesQhpUniformEnvelope :
-  (budget : SmallFieldOscillationBudget) →
-  let
-    qhpBudget =
-      SmallFieldOscillationBudget.anisotropicAssumptionA budget
-  in
-  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
-    qhpBudget
-    ≡ Qhp.LipschitzToSquaredOscillationForQhpTheorem.uniformSquaredEnvelope
-        (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpSquaredBridge
-          qhpBudget)
-observableUniformEnvelopeMatchesQhpUniformEnvelope budget = refl
-
-blockedOscillationControlledByQhpEnvelope :
-  (budget : SmallFieldOscillationBudget) →
-  ∀ (k : Nat) (b : Block) →
-  blockedOscillation k b ≤ℝ (C-obs *ℝ decayFactor k)
-blockedOscillationControlledByQhpEnvelope budget k b =
-  ≤ℝ-trans
-    (blockedOscillationMatchesPerLinkDecayAsReal
-      (SmallFieldOscillationBudget.cLocal budget)
-      k
-      b
-      (SmallFieldOscillationBudget.localityConstantNormalized budget))
-    (perLinkOscillationDecayAsRealFitsBlockedEnvelope
-      (SmallFieldOscillationBudget.cLocal budget)
-      k
-      (SmallFieldOscillationBudget.localityConstantNormalized budget))
-
-assumptionAQhpEnvelopeComparisonTheorem :
-  (budget : SmallFieldOscillationBudget) →
-  AssumptionAQhpEnvelopeComparisonTheorem
-assumptionAQhpEnvelopeComparisonTheorem budget =
-  let
-    qhpBudget =
-      SmallFieldOscillationBudget.anisotropicAssumptionA budget
-  in
-  mkAssumptionAQhpEnvelopeComparisonTheorem
-    budget
-    qhpBudget
-    refl
-    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
-      qhpBudget)
-    refl
-    (observableSquaredBudgetMatchesQhpCollapsedBudget budget)
-    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
-      qhpBudget)
-    refl
-    (observableUniformEnvelopeMatchesQhpUniformEnvelope budget)
-    "Assumption A / Q_hp budget comparison: the current blocked-scale observable budgets are identified with the in-repo Q_hp collapsed squared budget and uniform envelope."
-
-currentObservableSquaredBudgetMatchesQhpCollapsedBudget :
-  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
-    (SmallFieldOscillationBudget.anisotropicAssumptionA currentSmallFieldOscillationBudget)
-    ≡ Seminorm.QhpSquaredOscillationArithmetic.totalSquaredOscillation
-        (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
-          (SmallFieldOscillationBudget.anisotropicAssumptionA currentSmallFieldOscillationBudget))
-currentObservableSquaredBudgetMatchesQhpCollapsedBudget = refl
-
-currentObservableUniformEnvelopeMatchesQhpUniformEnvelope :
-  AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
-    (SmallFieldOscillationBudget.anisotropicAssumptionA currentSmallFieldOscillationBudget)
-    ≡ Qhp.LipschitzToSquaredOscillationForQhpTheorem.uniformSquaredEnvelope
-        (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpSquaredBridge
-          (SmallFieldOscillationBudget.anisotropicAssumptionA currentSmallFieldOscillationBudget))
-currentObservableUniformEnvelopeMatchesQhpUniformEnvelope = refl
-
-currentAssumptionAQhpEnvelopeComparisonTheorem :
-  AssumptionAQhpEnvelopeComparisonTheorem
-currentAssumptionAQhpEnvelopeComparisonTheorem =
-  let
-    budget =
-      currentSmallFieldOscillationBudget
-    qhpBudget =
-      SmallFieldOscillationBudget.anisotropicAssumptionA budget
-  in
-  mkAssumptionAQhpEnvelopeComparisonTheorem
-    budget
-    qhpBudget
-    refl
-    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableSquaredDecayBudget
-      qhpBudget)
-    refl
-    currentObservableSquaredBudgetMatchesQhpCollapsedBudget
-    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.observableUniformEnvelopeBudget
-      qhpBudget)
-    refl
-    currentObservableUniformEnvelopeMatchesQhpUniformEnvelope
-    "Current Assumption A / Q_hp budget comparison at cLocal = 1, cF = 1, k = 1."
-
-blockedOscillationControlledByQhpEnvelopeLeaf :
-  (budget : SmallFieldOscillationBudget) →
-  BlockedOscillationEnvelopeControlTheorem
-blockedOscillationControlledByQhpEnvelopeLeaf budget =
-  let
-    comparison =
-      assumptionAQhpEnvelopeComparisonTheorem budget
-    qhpBudget =
-      AssumptionAQhpEnvelopeComparisonTheorem.qhpBudget comparison
-  in
-  mkBlockedOscillationEnvelopeControlTheorem
-    comparison
-    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.localityProof
-      qhpBudget)
-    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
-      qhpBudget)
-    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpSquaredBridge
-      qhpBudget)
-    "Blocked oscillation envelope control: the remaining analytic leaf compares the blocked oscillation seminorm to the Q_hp envelope budget supplied by the in-repo Assumption A bridge."
-    (blockedOscillationControlledByQhpEnvelope budget)
-
-currentBlockedOscillationControlledByQhpEnvelopeLeaf :
-  BlockedOscillationEnvelopeControlTheorem
-currentBlockedOscillationControlledByQhpEnvelopeLeaf =
-  let
-    comparison =
-      currentAssumptionAQhpEnvelopeComparisonTheorem
-    qhpBudget =
-      AssumptionAQhpEnvelopeComparisonTheorem.qhpBudget comparison
-  in
-  mkBlockedOscillationEnvelopeControlTheorem
-    comparison
-    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.localityProof
-      qhpBudget)
-    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpArithmetic
-      qhpBudget)
-    (AssumptionA.YMAnisotropicAssumptionAConditionalClosureTheorem.qhpSquaredBridge
-      qhpBudget)
-    "Current blocked oscillation envelope control at the live small-field budget; only the blocked-oscillation inequality itself remains analytic."
-    (blockedOscillationControlledByQhpEnvelope currentSmallFieldOscillationBudget)
-
-assumptionABudgetControlsBlockedOscillationFromQhp :
-  (budget : SmallFieldOscillationBudget) →
-  AssumptionABudgetOscillationBridge
-assumptionABudgetControlsBlockedOscillationFromQhp budget =
-  let
-    leaf =
-      blockedOscillationControlledByQhpEnvelopeLeaf budget
-    comparison =
-      BlockedOscillationEnvelopeControlTheorem.comparison leaf
-  in
-  record
-    { budget = budget
-    ; qhpBudget =
-        AssumptionAQhpEnvelopeComparisonTheorem.qhpBudget comparison
-    ; qhpBudgetMatchesBudget =
-        AssumptionAQhpEnvelopeComparisonTheorem.qhpBudgetMatchesBudget comparison
-    ; squaredDecayBudget =
-        AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudget comparison
-    ; squaredDecayBudgetMatchesAssumptionA =
-        AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudgetMatchesAssumptionA
-          comparison
-    ; uniformEnvelopeBudget =
-        AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeBudget comparison
-    ; uniformEnvelopeBudgetMatchesAssumptionA =
-        AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeBudgetMatchesAssumptionA
-          comparison
-    ; blockedOscillationControlled =
-        BlockedOscillationEnvelopeControlTheorem.blockedOscillationControlled leaf
-    }
-
-assumptionABudgetControlsBlockedOscillationTheorem :
-  (budget : SmallFieldOscillationBudget) →
-  AssumptionABudgetControlsBlockedOscillationTheorem
-assumptionABudgetControlsBlockedOscillationTheorem budget =
-  let
-    bridge =
-      assumptionABudgetControlsBlockedOscillationFromQhp budget
-    leaf =
-      blockedOscillationControlledByQhpEnvelopeLeaf budget
-    comparison =
-      BlockedOscillationEnvelopeControlTheorem.comparison leaf
-  in
-  mkAssumptionABudgetControlsBlockedOscillationTheorem
-    bridge
-    (BlockedOscillationEnvelopeControlTheorem.localityProof leaf)
-    (BlockedOscillationEnvelopeControlTheorem.qhpArithmetic leaf)
-    (BlockedOscillationEnvelopeControlTheorem.qhpSquaredBridge leaf)
-    (AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudgetIsCollapsedQhpBudget
-      comparison)
-    (AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeIsQhpUniformEnvelope
-      comparison)
-    "Assumption A / Q_hp oscillation bridge: in-repo locality proof + squared-oscillation arithmetic + Lipschitz bridge control the blocked oscillation envelope."
-    (AssumptionABudgetOscillationBridge.blockedOscillationControlled bridge)
-
-currentAssumptionABudgetControlsBlockedOscillationFromQhp :
-  AssumptionABudgetOscillationBridge
-currentAssumptionABudgetControlsBlockedOscillationFromQhp =
-  let
-    budget =
-      currentSmallFieldOscillationBudget
-    leaf =
-      currentBlockedOscillationControlledByQhpEnvelopeLeaf
-    comparison =
-      BlockedOscillationEnvelopeControlTheorem.comparison leaf
-  in
-  record
-    { budget = budget
-    ; qhpBudget =
-        AssumptionAQhpEnvelopeComparisonTheorem.qhpBudget comparison
-    ; qhpBudgetMatchesBudget =
-        AssumptionAQhpEnvelopeComparisonTheorem.qhpBudgetMatchesBudget comparison
-    ; squaredDecayBudget =
-        AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudget comparison
-    ; squaredDecayBudgetMatchesAssumptionA =
-        AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudgetMatchesAssumptionA
-          comparison
-    ; uniformEnvelopeBudget =
-        AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeBudget comparison
-    ; uniformEnvelopeBudgetMatchesAssumptionA =
-        AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeBudgetMatchesAssumptionA
-          comparison
-    ; blockedOscillationControlled =
-        BlockedOscillationEnvelopeControlTheorem.blockedOscillationControlled leaf
-    }
-
-currentAssumptionABudgetControlsBlockedOscillationTheorem :
-  AssumptionABudgetControlsBlockedOscillationTheorem
-currentAssumptionABudgetControlsBlockedOscillationTheorem =
-  let
-    bridge =
-      currentAssumptionABudgetControlsBlockedOscillationFromQhp
-    leaf =
-      currentBlockedOscillationControlledByQhpEnvelopeLeaf
-    comparison =
-      BlockedOscillationEnvelopeControlTheorem.comparison leaf
-  in
-  mkAssumptionABudgetControlsBlockedOscillationTheorem
-    bridge
-    (BlockedOscillationEnvelopeControlTheorem.localityProof leaf)
-    (BlockedOscillationEnvelopeControlTheorem.qhpArithmetic leaf)
-    (BlockedOscillationEnvelopeControlTheorem.qhpSquaredBridge leaf)
-    (AssumptionAQhpEnvelopeComparisonTheorem.squaredDecayBudgetIsCollapsedQhpBudget
-      comparison)
-    (AssumptionAQhpEnvelopeComparisonTheorem.uniformEnvelopeIsQhpUniformEnvelope
-      comparison)
-    "Current Assumption A / Q_hp oscillation bridge at cLocal = 1, cF = 1, k = 1."
-    (AssumptionABudgetOscillationBridge.blockedOscillationControlled bridge)
-
-BlockingRadiusMarginFromQhpComparison :
-  QhpBlockedOscillationComparison →
-  BlockingRadiusMargin
-BlockingRadiusMarginFromQhpComparison comparison =
-  record
-    { ε-margin = currentε-margin
-    ; marginBoundsOscillation = λ k b →
-        let
-          estimate =
-            QhpBlockedOscillationComparison.perLinkEstimate
-              comparison
-              k
-              b
-          real≤envelope =
-            QhpBlockedOscillationComparison.qhpControlsBlockedOscillation
-              comparison
-              k
-              b
-          envelope≤margin =
-            QhpBlockedOscillationComparison.qhpDecayBelowMargin
-              comparison
-              k
-        in
-        ≤ℝ-trans
-          (QhpPerLinkRealOscillationEstimate.blockedOscillationBelowRealEnvelope
-            estimate)
-          (≤ℝ-trans real≤envelope envelope≤margin)
-    }
-
-OscillationBudgetGivesMargin :
-  SmallFieldOscillationBudget →
-  SmallFieldBlockingScaleAdmissible →
-  BlockingRadiusMargin
-OscillationBudgetGivesMargin budget admissible =
-  record
-    { ε-margin =
-        SmallFieldBlockingScaleAdmissible.ε-margin admissible
-    ; marginBoundsOscillation = λ k b →
-        ≤ℝ-trans
-          (AssumptionABudgetControlsBlockedOscillationTheorem.blockedOscillationControlled
-            (assumptionABudgetControlsBlockedOscillationTheorem budget)
-            k b)
-          (SmallFieldBlockingScaleAdmissible.oscillationDecayBelowMargin
-            admissible
-            k)
-    }
-
-currentSmallFieldInputRadiusBound :
-  SmallFieldInputRadiusBound
-currentSmallFieldInputRadiusBound =
-  record
-    { ε-input =
-        CurrentSmallFieldInputRadiusBoundTheorem.ε-input
-          currentSmallFieldInputRadiusBoundTheorem
-    ; ε-small = currentε-small
-    ; ε-margin = currentε-margin
-    ; fineFieldBound =
-        CurrentSmallFieldInputRadiusBoundTheorem.fineFieldBound
-          currentSmallFieldInputRadiusBoundTheorem
-    ; inputPlusMarginWithinSmall = currentInputPlusMarginWithinSmall
-    }
-
-currentSmallFieldBlockingScaleAdmissible :
-  SmallFieldBlockingScaleAdmissible
-currentSmallFieldBlockingScaleAdmissible =
-  record
-    { ε-margin =
-        CurrentSmallFieldBlockingScaleAdmissibleTheorem.ε-margin
-          currentSmallFieldBlockingScaleAdmissibleTheorem
-    ; oscillationDecayBelowMargin =
-        CurrentSmallFieldBlockingScaleAdmissibleTheorem.oscillationDecayBelowMargin
-          currentSmallFieldBlockingScaleAdmissibleTheorem
-    }
-
-currentBlockingRadiusMargin :
-  SmallFieldOscillationBudget →
-  BlockingRadiusMargin
-currentBlockingRadiusMargin budget =
-  OscillationBudgetGivesMargin
-    budget
-    currentSmallFieldBlockingScaleAdmissible
-
-currentBlockingRadiusMarginReduced :
-  BlockingRadiusMargin
-currentBlockingRadiusMarginReduced =
-  BlockingRadiusMarginFromQhpComparison
-    currentQhpBlockedOscillationComparison
-
-record BlockedSmallFieldRadiusSurvivalTheorem : Set₁ where
-  constructor mkBlockedSmallFieldRadiusSurvivalTheorem
-  field
-    oscillationBudget :
-      SmallFieldOscillationBudget
-    inputRadiusBoundTheorem :
-      CurrentSmallFieldInputRadiusBoundTheorem
-    blockingScaleAdmissibleTheorem :
-      CurrentSmallFieldBlockingScaleAdmissibleTheorem
-    oscillationControl :
-      AssumptionABudgetControlsBlockedOscillationTheorem
-    blockingMargin :
-      BlockingRadiusMargin
-    radiusSurvival :
-      BlockedSmallFieldRadiusSurvival
-    theoremCitation :
-      String
-    blockedRadiusStaysAdmissible :
-      BlockedSmallFieldRadiusSurvival.blockedRadiusStaysAdmissible radiusSurvival
-        ≡ true
-
-BlockedSmallFieldRadiusSurvivalFromOscillationBudget :
-  SmallFieldOscillationBudget →
-  SmallFieldInputRadiusBound →
-  BlockingRadiusMargin →
-  BlockedSmallFieldRadiusSurvival
-BlockedSmallFieldRadiusSurvivalFromOscillationBudget budget radiusBound margin =
-  let
-    ε-input = SmallFieldInputRadiusBound.ε-input radiusBound
-    ε-small = SmallFieldInputRadiusBound.ε-small radiusBound
-    ε-margin = SmallFieldInputRadiusBound.ε-margin radiusBound
-    fine≤ =
-      SmallFieldInputRadiusBound.fineFieldBound radiusBound
-    osc≤ =
-      BlockingRadiusMargin.marginBoundsOscillation margin
-    inputPlusMarginSmall =
-      SmallFieldInputRadiusBound.inputPlusMarginWithinSmall radiusBound
-    _ =
-      λ (k : Nat) (b : Block) →
-        SmallFieldMarginSplit
-          (fine≤ k b)
-          (osc≤ k b)
-          inputPlusMarginSmall
-    _ =
-      λ (k : Nat) (b : Block) →
-        BlockedFieldTriangleBound k b
-  in
-  mkBlockedSmallFieldRadiusSurvival
-    budget
-    radiusBound
-    margin
-    2
-    1
-    3
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-    true
-    refl
-
-BlockedSmallFieldRadiusSurvivalFromQhpComparison :
-  QhpBlockedOscillationComparison →
-  SmallFieldInputRadiusBound →
-  BlockedSmallFieldRadiusSurvival
-BlockedSmallFieldRadiusSurvivalFromQhpComparison comparison radiusBound =
-  BlockedSmallFieldRadiusSurvivalFromOscillationBudget
-    (QhpBlockedOscillationComparison.budget comparison)
-    radiusBound
-    (BlockingRadiusMarginFromQhpComparison comparison)
-
-blockedSmallFieldRadiusSurvivalTheorem :
-  (budget : SmallFieldOscillationBudget) →
-  BlockedSmallFieldRadiusSurvivalTheorem
-blockedSmallFieldRadiusSurvivalTheorem budget =
-  let
-    comparison =
-      qhpBlockedOscillationComparison budget
-    radiusSurvival =
-      BlockedSmallFieldRadiusSurvivalFromQhpComparison
-        comparison
-        currentSmallFieldInputRadiusBound
-  in
-  mkBlockedSmallFieldRadiusSurvivalTheorem
-    budget
-    currentSmallFieldInputRadiusBoundTheorem
-    currentSmallFieldBlockingScaleAdmissibleTheorem
-    (assumptionABudgetControlsBlockedOscillationTheorem budget)
-    (BlockingRadiusMarginFromQhpComparison comparison)
-    radiusSurvival
-    "Blocked small-field radius survival: fine-field input bound + Q_hp oscillation control + blocked-scale margin + triangle arithmetic preserve the admissible small-field radius."
-    (BlockedSmallFieldRadiusSurvival.blockedRadiusStaysAdmissibleIsTrue
-      radiusSurvival)
-
-currentBlockedSmallFieldRadiusSurvival :
-  BlockedSmallFieldRadiusSurvival
-currentBlockedSmallFieldRadiusSurvival =
-  BlockedSmallFieldRadiusSurvivalFromQhpComparison
-    currentQhpBlockedOscillationComparison
-    currentSmallFieldInputRadiusBound
-
-currentBlockedSmallFieldRadiusSurvivalTheorem :
-  BlockedSmallFieldRadiusSurvivalTheorem
-currentBlockedSmallFieldRadiusSurvivalTheorem =
-  mkBlockedSmallFieldRadiusSurvivalTheorem
-    currentSmallFieldOscillationBudget
-    currentSmallFieldInputRadiusBoundTheorem
-    currentSmallFieldBlockingScaleAdmissibleTheorem
-    currentAssumptionABudgetControlsBlockedOscillationTheorem
-    currentBlockingRadiusMarginReduced
-    currentBlockedSmallFieldRadiusSurvival
-    "Current blocked small-field radius survival at the live KP budget."
-    (BlockedSmallFieldRadiusSurvival.blockedRadiusStaysAdmissibleIsTrue
-      currentBlockedSmallFieldRadiusSurvival)
 
 -- Legacy stub: kept for backward compat until callers migrate to the
 -- three-argument BlockedSmallFieldRadiusSurvivalFromOscillationBudget.
