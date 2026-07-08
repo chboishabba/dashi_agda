@@ -224,18 +224,18 @@ weightedSchurMatrixOperatorDataClosed : Bool
 weightedSchurMatrixOperatorDataClosed =
   CrossMatrix.actualUnitShellProfileCrossMatrixKernelDataClosed
 
-weightedSchurMatrixOperatorDataClosedIsFalse :
-  weightedSchurMatrixOperatorDataClosed ≡ false
-weightedSchurMatrixOperatorDataClosedIsFalse =
-  CrossMatrix.actualUnitShellProfileCrossMatrixKernelDataClosedIsFalse
+weightedSchurMatrixOperatorDataClosedIsTrue :
+  weightedSchurMatrixOperatorDataClosed ≡ true
+weightedSchurMatrixOperatorDataClosedIsTrue =
+  CrossMatrix.actualUnitShellProfileCrossMatrixKernelDataClosedIsTrue
 
 actualUnitShellWeightedSchurMatrixOperatorDataClosed : Bool
 actualUnitShellWeightedSchurMatrixOperatorDataClosed =
   weightedSchurMatrixOperatorDataClosed
 
-actualUnitShellWeightedSchurMatrixOperatorDataClosedIsFalse :
-  actualUnitShellWeightedSchurMatrixOperatorDataClosed ≡ false
-actualUnitShellWeightedSchurMatrixOperatorDataClosedIsFalse = refl
+actualUnitShellWeightedSchurMatrixOperatorDataClosedIsTrue :
+  actualUnitShellWeightedSchurMatrixOperatorDataClosed ≡ true
+actualUnitShellWeightedSchurMatrixOperatorDataClosedIsTrue = refl
 
 ------------------------------------------------------------------------
 -- Proof-derived gate definitions.

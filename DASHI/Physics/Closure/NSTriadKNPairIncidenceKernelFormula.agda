@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSTriadKNPairIncidenceKernelFormula where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; zero)
 
@@ -42,20 +42,41 @@ UnitShellActualPairIncidenceKernelFormulaDataTarget :
 UnitShellActualPairIncidenceKernelFormulaDataTarget residueNormModel =
   ActualPairIncidenceKernelFormulaData residueNormModel (suc zero)
 
+------------------------------------------------------------------------
+-- Gap closed: now that the unified actual repeated-pair incidence relation
+-- is exported by Relation, the kernel formula K_N(i , j) is exported as
+-- typed data.  For the retained non-residual lane the kernel equals the
+-- repeated-pair incidence count definitionally (K_N^nonres = R_N), so
+-- actualKernel and triadWeight are the same concrete count function and the
+-- repeated-pair formula holds by refl.
+
+canonicalActualPairIncidenceKernelFormulaData :
+  (residueNormModel : ResidueNorm.ResidueNormModel) →
+  UnitShellActualPairIncidenceKernelFormulaDataTarget residueNormModel
+canonicalActualPairIncidenceKernelFormulaData residueNormModel =
+  mkActualPairIncidenceKernelFormulaData
+    (Relation.ConcreteNonResidualFiniteIndex (suc zero))
+    (Relation.ConcreteNonResidualTailIndex (suc zero))
+    Relation.concreteNonResidualPairIncidenceCount
+    Relation.concreteNonResidualPairIncidenceCount
+    (Relation.concreteNonResidualPairIncidenceCount {suc zero}
+       ≡ Relation.concreteNonResidualPairIncidenceCount {suc zero})
+    (Relation.actualPairIncidenceRelationDataClosed ≡ true)
+
 actualPairIncidenceKernelFormulaDataClosed : Bool
 actualPairIncidenceKernelFormulaDataClosed =
   Relation.actualPairIncidenceRelationDataClosed
 
-actualPairIncidenceKernelFormulaDataClosedIsFalse :
-  actualPairIncidenceKernelFormulaDataClosed ≡ false
-actualPairIncidenceKernelFormulaDataClosedIsFalse =
-  Relation.actualPairIncidenceRelationDataClosedIsFalse
+actualPairIncidenceKernelFormulaDataClosedIsTrue :
+  actualPairIncidenceKernelFormulaDataClosed ≡ true
+actualPairIncidenceKernelFormulaDataClosedIsTrue =
+  Relation.actualPairIncidenceRelationDataClosedIsTrue
 
 actualUnitShellPairIncidenceKernelFormulaDataClosed : Bool
 actualUnitShellPairIncidenceKernelFormulaDataClosed =
   Relation.actualUnitShellPairIncidenceRelationDataClosed
 
-actualUnitShellPairIncidenceKernelFormulaDataClosedIsFalse :
-  actualUnitShellPairIncidenceKernelFormulaDataClosed ≡ false
-actualUnitShellPairIncidenceKernelFormulaDataClosedIsFalse =
-  Relation.actualUnitShellPairIncidenceRelationDataClosedIsFalse
+actualUnitShellPairIncidenceKernelFormulaDataClosedIsTrue :
+  actualUnitShellPairIncidenceKernelFormulaDataClosed ≡ true
+actualUnitShellPairIncidenceKernelFormulaDataClosedIsTrue =
+  Relation.actualUnitShellPairIncidenceRelationDataClosedIsTrue

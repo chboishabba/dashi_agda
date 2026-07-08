@@ -11,7 +11,7 @@ open import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecomposition
         ; NSTriadKNPairIncidenceProfileDecompositionModel
         ; Shell
         ; actualUnitShellPairIncidenceKernelDataClosed
-        ; actualUnitShellPairIncidenceKernelDataClosedIsFalse
+        ; actualUnitShellPairIncidenceKernelDataClosedIsTrue
         )
 import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
 
@@ -130,18 +130,18 @@ profileCrossMatrixKernelDataClosed : Bool
 profileCrossMatrixKernelDataClosed =
   actualUnitShellPairIncidenceKernelDataClosed
 
-profileCrossMatrixKernelDataClosedIsFalse :
-  profileCrossMatrixKernelDataClosed ≡ false
-profileCrossMatrixKernelDataClosedIsFalse =
-  actualUnitShellPairIncidenceKernelDataClosedIsFalse
+profileCrossMatrixKernelDataClosedIsTrue :
+  profileCrossMatrixKernelDataClosed ≡ true
+profileCrossMatrixKernelDataClosedIsTrue =
+  actualUnitShellPairIncidenceKernelDataClosedIsTrue
 
 actualUnitShellProfileCrossMatrixKernelDataClosed : Bool
 actualUnitShellProfileCrossMatrixKernelDataClosed =
   profileCrossMatrixKernelDataClosed
 
-actualUnitShellProfileCrossMatrixKernelDataClosedIsFalse :
-  actualUnitShellProfileCrossMatrixKernelDataClosed ≡ false
-actualUnitShellProfileCrossMatrixKernelDataClosedIsFalse = refl
+actualUnitShellProfileCrossMatrixKernelDataClosedIsTrue :
+  actualUnitShellProfileCrossMatrixKernelDataClosed ≡ true
+actualUnitShellProfileCrossMatrixKernelDataClosedIsTrue = refl
 
 ------------------------------------------------------------------------
 -- Proof-derived cross-product matrix gate definitions.
