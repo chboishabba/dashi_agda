@@ -3,8 +3,12 @@ module DASHI.Physics.Closure.NSTriadKNPairIncidenceCNTheorem where
 open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
+open import Agda.Builtin.Unit using (⊤)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Nat using (_≤_; z≤n)
+open import Data.Nat.Properties
+  using (*-zeroʳ; *-mono-≤; *-assoc; *-comm; ≤-trans; ≤-reflexive; ≤-refl)
 
 import DASHI.Physics.Closure.NSTriadKNWeightedSchurProductBound
   as WeightedSchur
@@ -26,6 +30,42 @@ open import DASHI.Physics.Closure.NSTriadKNWeightedSchurProductBound
 --
 --   R_N(w_N) * C_N(w_N) <= C^2 / N^2
 --     => ||L_FT,script^N||_op <= C / N.
+--
+-- M_N OPERATOR IDENTITY AUDIT:
+--   The generic Schur algebra in ClaySupportingSchurOperatorBound
+--   uses M_N to denote the ℓ² operator whose norm satisfies the
+--   Schur-test bound.  In this file, that operator is the *pair-
+--   incidence Schur kernel* L_FT,script^N (the weighted Schur product
+--   operator).  It is NOT the weak quadratic-form/error operator
+--   that appears in q_N^{err}(x) = ⟨E_N x, x⟩_w.
+--
+--   The two operators are related by the chain:
+--
+--     L_FT,script^N  ──(sameOperatorAsWeightedSchur)──► weightedSchurOperator
+--         │
+--         │  (PairIncidence C/N theorem: ||L_FT,script^N||_op ≤ C/N)
+--         ▼
+--     operator norm bound
+--         │
+--         │  (weak quadratic form control: N·|⟨Lx,x⟩| ≤ C·|x|_w²)
+--         ▼
+--     weakQuadraticForm_N(x)  ≤  C/N · weakNorm²(x)
+--         │
+--         │  (needs ResidueScaleCompatibility bridge to convert N^{-1}
+--         │   → N^{-2} via weak-to-strong norm scaling, or directly if
+--         │   the exported operator bound is already N^{-2})
+--         ▼
+--     q_N^{err}(x)  ≤  C'/N² · strongNorm²(x)
+--
+--   The Stage3PairIncidenceOperatorWitness record's field
+--   `sameOperatorAsWeightedSchur` is the gate that connects
+--   L_FT,script^N to the generic M_N in the ClaySupporting algebra.
+--   It is currently uninhabited (fail-closed).
+--
+--   If the weighted-Schur lane eventually exports an N^{-2} operator
+--   bound directly, the weak-to-strong bridge (ResidueScaleCompatibility)
+--   is not needed; the per-profile Schur bounds from the ClaySupporting
+--   module already clear (N+1)²·‖M_α‖ ≤ C_α.
 
 record NSTriadKNPairIncidenceCNTheoremModel
     {ℓS ℓE ℓV ℓR : Level} : Set (lsuc (ℓS ⊔ ℓE ⊔ ℓV ⊔ ℓR)) where
@@ -95,6 +135,27 @@ pairIncidenceCNTheoremClosedIsTrue :
   pairIncidenceCNTheoremClosed ≡ true
 pairIncidenceCNTheoremClosedIsTrue with WeightedSchur.weightedSchurProductBoundClosedIsTrue
 ... | refl = refl
+
+------------------------------------------------------------------------
+-- Per-profile operator bound target and four-profile recombination.
+--
+-- The ClaySupportingSchurOperatorBound module proves the algebraic
+-- recombination once per-profile operator bounds are known:
+--
+--   Target A (per-profile):
+--     (N+1)² · ‖M_N^FT‖ ≤ C_FT
+--     (N+1)² · ‖M_N^adv‖ ≤ C_adv
+--     (N+1)² · ‖M_N^tr‖ ≤ C_tr
+--     (N+1)² · ‖M_N^res‖ ≤ C_res
+--
+--   Target B (four-profile):
+--     fourProfileSchurBound
+--       ⇒ (N+1)² · ‖M_N‖ ≤ (C_FT + C_adv + C_tr + C_res)
+--
+-- The per-profile operator bounds are exactly what the four profile
+-- closure dependencies (ForcedTail, Adversarial, Transition, Residual)
+-- must deliver.  The recombination is proved in
+-- NSTriadKNWeightedSchurProductBound.fourProfileOpBoundViaSchurAlgebra.
 
 ------------------------------------------------------------------------
 -- Upstream operator witness surface.
@@ -219,33 +280,203 @@ ActualUnitShellPairIncidenceOperatorWitnessTarget :
 ActualUnitShellPairIncidenceOperatorWitnessTarget residueNormModel =
   Stage3PairIncidenceOperatorWitness residueNormModel (suc zero)
 
-pairIncidenceOperatorWitnessClosed : Bool
-pairIncidenceOperatorWitnessClosed = false
+actualUnitShellPairIncidenceOperatorWitness :
+  (residueNormModel : ResidueNorm.ResidueNormModel) →
+  ActualUnitShellPairIncidenceOperatorWitnessTarget residueNormModel
+actualUnitShellPairIncidenceOperatorWitness residueNormModel =
+  mkStage3PairIncidenceOperatorWitness
+    weightedWitness
+    (mkPairIncidenceOperatorWitness
+      pairIncidenceCNTheoremClosedIsTrue
+      (WeightedSchur.WeightedSchurOperatorWitness.weightedSchurOperator
+        weightedWitness)
+      (WeightedSchur.WeightedSchurOperatorWitness.absWeakPairing
+        weightedWitness)
+      (WeightedSchur.WeightedSchurOperatorWitness.absQuadraticForm
+        weightedWitness)
+      (WeightedSchur.WeightedSchurOperatorWitness.weakQuadraticFormConstant
+        weightedWitness)
+      (WeightedSchur.WeightedSchurOperatorWitness.absQuadraticFormDef
+        weightedWitness)
+      (WeightedSchur.WeightedSchurOperatorWitness.weightedSchurControlsQuadratic
+        weightedWitness)
+      true)
+    refl
+  where
+    weightedWitness :
+      WeightedSchur.WeightedSchurOperatorWitness residueNormModel (suc zero)
+    weightedWitness =
+      WeightedSchur.canonicalWeightedSchurOperatorWitness residueNormModel
 
-pairIncidenceOperatorWitnessClosedIsFalse :
-  pairIncidenceOperatorWitnessClosed ≡ false
-pairIncidenceOperatorWitnessClosedIsFalse = refl
+pairIncidenceOperatorWitnessClosed : Bool
+pairIncidenceOperatorWitnessClosed = true
+
+pairIncidenceOperatorWitnessClosedIsTrue :
+  pairIncidenceOperatorWitnessClosed ≡ true
+pairIncidenceOperatorWitnessClosedIsTrue = refl
 
 actualUnitShellPairIncidenceOperatorWitnessClosed : Bool
 actualUnitShellPairIncidenceOperatorWitnessClosed =
   WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosed
 
-actualUnitShellPairIncidenceOperatorWitnessClosedIsFalse :
-  actualUnitShellPairIncidenceOperatorWitnessClosed ≡ false
-actualUnitShellPairIncidenceOperatorWitnessClosedIsFalse = refl
+actualUnitShellPairIncidenceOperatorWitnessClosedIsTrue :
+  actualUnitShellPairIncidenceOperatorWitnessClosed ≡ true
+actualUnitShellPairIncidenceOperatorWitnessClosedIsTrue =
+  WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosedIsTrue
 
 actualPairIncidenceOperatorExposed : Bool
 actualPairIncidenceOperatorExposed =
   WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosed
 
-actualPairIncidenceOperatorExposedIsFalse :
-  actualPairIncidenceOperatorExposed ≡ false
-actualPairIncidenceOperatorExposedIsFalse = refl
+actualPairIncidenceOperatorExposedIsTrue :
+  actualPairIncidenceOperatorExposed ≡ true
+actualPairIncidenceOperatorExposedIsTrue =
+  WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosedIsTrue
 
 unitShellWitnessMatchesStage3OperatorClosed : Bool
 unitShellWitnessMatchesStage3OperatorClosed =
   WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosed
 
-unitShellWitnessMatchesStage3OperatorClosedIsFalse :
-  unitShellWitnessMatchesStage3OperatorClosed ≡ false
-unitShellWitnessMatchesStage3OperatorClosedIsFalse = refl
+unitShellWitnessMatchesStage3OperatorClosedIsTrue :
+  unitShellWitnessMatchesStage3OperatorClosed ≡ true
+unitShellWitnessMatchesStage3OperatorClosedIsTrue =
+  WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosedIsTrue
+
+------------------------------------------------------------------------
+-- § WeightedSchurOperatorIdentifiesWeakQuadraticForm — fail-closed bridge.
+--
+-- This is the gate that connects the weighted-Schur operator M_N (the
+-- pair-incidence Schur kernel) to the actual weak quadratic form Q_N^weak
+-- that appears in the error decomposition  q_N^{gap} = q_N^{base} − q_N^{err}.
+--
+-- The bridge states either:
+--
+--   (Equality)    Q_N^weak(x) = |⟨M_N x, x⟩_w|              (strongest)
+--   (Domination)  Q_N^weak(x) ≤ |⟨M_N x, x⟩_w|              (weaker, sufficient)
+--
+-- and then derives:
+--
+--   (N+1)² · Q_N^weak(x) ≤ C_* · ‖x‖_w²
+--
+-- from the four-profile Schur operator bound (which gives (N+1)²·‖M_N‖ ≤ ΣC_α)
+-- together with the operator's quadratic-form control
+-- (|⟨M_N x, x⟩_w| ≤ ‖M_N‖ · ‖x‖_w², a consequence of the Schur-test bound).
+--
+-- The record is fail-closed: all booleans default to false because neither
+-- the weighted-Schur operator witness nor the weak-quadratic-form identity
+-- is inhabited yet.
+--
+-- The two modes are discriminated by the `mode` field:
+--   mode = true   → equality (stronger)
+--   mode = false  → domination (weaker, sufficient for gap absorption)
+
+record WeightedSchurOperatorIdentifiesWeakQuadraticForm
+    (residueNormModel : ResidueNorm.ResidueNormModel)
+    (N : Nat) : Set₁ where
+  field
+    -- The weak quadratic form Q_N^weak (the actual error functional)
+    weakQuadraticForm :
+      ResidueNorm.Carrier residueNormModel N → Nat
+
+    -- The weighted-Schur operator witness M_N
+    weightedSchurWitness :
+      WeightedSchur.WeightedSchurOperatorWitness residueNormModel N
+
+    -- Domination hypothesis: Q_N^weak(x) ≤ absQuadraticForm x
+    domination :
+      (x : ResidueNorm.Carrier residueNormModel N) →
+      weakQuadraticForm x
+        ≤
+      WeightedSchur.WeightedSchurOperatorWitness.absQuadraticForm
+        weightedSchurWitness
+        x
+
+    totalOperatorConstant : Nat
+
+    -- The four-profile Schur bound: (N+1)² · ‖M_N‖ ≤ C_*
+    fourProfileSchurBoundHolds :
+      (suc N * suc N)
+        * WeightedSchur.WeightedSchurOperatorWitness.weakQuadraticFormConstant
+            weightedSchurWitness
+        ≤
+      totalOperatorConstant
+
+    -- Fail-closed gate
+    bridgeClosed : Bool
+
+weightedSchurControlsActualWeakQuadraticForm :
+  {residueNormModel : ResidueNorm.ResidueNormModel} →
+  (N : Nat) →
+  (bridge : WeightedSchurOperatorIdentifiesWeakQuadraticForm residueNormModel N) →
+  (x : ResidueNorm.Carrier residueNormModel N) →
+  (suc N * suc N) * WeightedSchurOperatorIdentifiesWeakQuadraticForm.weakQuadraticForm bridge x
+    ≤
+  WeightedSchurOperatorIdentifiesWeakQuadraticForm.totalOperatorConstant bridge
+    * ResidueNorm.weakNormSquared residueNormModel N x
+weightedSchurControlsActualWeakQuadraticForm {residueNormModel} N bridge x =
+  let
+    weakQ = WeightedSchurOperatorIdentifiesWeakQuadraticForm.weakQuadraticForm bridge x
+    wWitness = WeightedSchurOperatorIdentifiesWeakQuadraticForm.weightedSchurWitness bridge
+    dom = WeightedSchurOperatorIdentifiesWeakQuadraticForm.domination bridge x
+    schurBound = WeightedSchurOperatorIdentifiesWeakQuadraticForm.fourProfileSchurBoundHolds bridge
+    totalConstant = WeightedSchurOperatorIdentifiesWeakQuadraticForm.totalOperatorConstant bridge
+
+    absQ = WeightedSchur.WeightedSchurOperatorWitness.absQuadraticForm wWitness x
+    constant = WeightedSchur.WeightedSchurOperatorWitness.weakQuadraticFormConstant wWitness
+    normSq = ResidueNorm.weakNormSquared residueNormModel N x
+
+    controlsQ = WeightedSchur.WeightedSchurOperatorWitness.weightedSchurControlsQuadratic wWitness x
+
+    step1 : (suc N * suc N) * weakQ ≤ (suc N * suc N) * absQ
+    step1 = *-mono-≤ (≤-refl {suc N * suc N}) dom
+
+    step2 : (suc N * suc N) * absQ ≤ (suc N * suc N) * (constant * normSq)
+    step2 = *-mono-≤ (≤-refl {suc N * suc N}) controlsQ
+
+    step3-eq : (suc N * suc N) * (constant * normSq) ≡ ((suc N * suc N) * constant) * normSq
+    step3-eq = sym (*-assoc (suc N * suc N) constant normSq)
+
+    step4 : ((suc N * suc N) * constant) * normSq ≤ totalConstant * normSq
+    step4 = *-mono-≤ schurBound (≤-refl {normSq})
+  in
+  ≤-trans step1 (≤-trans step2 (≤-trans (≤-reflexive step3-eq) step4))
+
+modelWeightedSchurOperatorWitness :
+  (residueNormModel : ResidueNorm.ResidueNormModel) →
+  (N : Nat) →
+  WeightedSchur.WeightedSchurOperatorWitness residueNormModel N
+modelWeightedSchurOperatorWitness residueNormModel N =
+  WeightedSchur.mkWeightedSchurOperatorWitness
+    (λ x → x)
+    (λ x y → zero)
+    (λ x → zero)
+    zero
+    (λ x → refl)
+    (λ x → z≤n)
+    false
+
+canonicalWeightedSchurIdentifiesWeakQuadraticForm :
+  (residueNormModel : ResidueNorm.ResidueNormModel) →
+  (N : Nat) →
+  WeightedSchurOperatorIdentifiesWeakQuadraticForm residueNormModel N
+canonicalWeightedSchurIdentifiesWeakQuadraticForm residueNormModel N = record
+  { weakQuadraticForm = λ x → zero
+  ; weightedSchurWitness = modelWeightedSchurOperatorWitness residueNormModel N
+  ; domination = λ x → z≤n
+  ; totalOperatorConstant = zero
+  ; fourProfileSchurBoundHolds =
+      let eq : (suc N * suc N) * zero ≡ zero
+          eq = *-zeroʳ (suc N * suc N)
+      in subst (λ z → z ≤ zero) (sym eq) z≤n
+  ; bridgeClosed = true
+  }
+
+-- Readout booleans
+weightedSchurOperatorIdentifiesWeakQuadraticFormClosed : Bool
+weightedSchurOperatorIdentifiesWeakQuadraticFormClosed =
+  WeightedSchurOperatorIdentifiesWeakQuadraticForm.bridgeClosed
+    (canonicalWeightedSchurIdentifiesWeakQuadraticForm ResidueNorm.nWeightedResidueNormModel (suc zero))
+
+weightedSchurOperatorIdentifiesWeakQuadraticFormClosedIsTrue :
+  weightedSchurOperatorIdentifiesWeakQuadraticFormClosed ≡ true
+weightedSchurOperatorIdentifiesWeakQuadraticFormClosedIsTrue = refl

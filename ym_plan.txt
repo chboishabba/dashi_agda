@@ -157,7 +157,10 @@
   Current state:
 
   - the P06 route is structurally split correctly into skeleton counting + decoration multiplicity + recombination
-  - the missing hard leaf is still the explicit size/complexity-by-diameter counting content
+  - everything after `ActualSkeletonEncodingData` is essentially wired
+  - the live blocker is local finite graph combinatorics, not downstream YM
+  - the first missing theorem is still `P06a3a`: rooted connected size-`n`
+    skeletons lie inside the radius-`(n ∸ 1)` root ball
 
   Canonical split already exposed:
 
@@ -195,6 +198,74 @@
   - currentOwnedP06SourceSkeletonDecompositionSprintWitness
   - currentOwnedP06EndpointUnblockingSprintWitness
 
+  Already wired on the active repo-local chain:
+
+  - `VertexLabeling -> vertexOrder -> vertexOrderIsTotalOrder`
+  - rooted spanning-tree extraction for connected skeletons
+  - DFS walk cover of rooted connected skeletons
+  - reverse containment of the DFS walk range into the skeleton
+  - canonical vertex-list equality from `NoDuplicates + Sorted + SameVertexSet`
+  - `CanonicalDFSMap -> ActualSkeletonEncodingData`
+  - `ActualSkeletonEncodingData -> countSkeletons ≤ (Δ²)^n`
+
+  Exact live theorem frontier, in dependency order:
+
+  1. path-inside-skeleton construction
+
+     - `connectedGivesPathInSkeleton`
+     - if `Connected G X` is still abstract, either project this from the
+       existing connectedness witness or strengthen the connectedness carrier
+       so these internal paths are explicit
+
+  2. simple-path reduction and length bound
+
+     - `pathSimplify`
+     - `simplePathInsideSkeletonLengthBound`
+     - hard combinatorial content:
+       simple path inside an `n`-vertex set has at most `n` vertices, hence at
+       most `n ∸ 1` edges
+
+  3. ball membership from bounded path length
+
+     - `pathBoundGivesBallMembership`
+     - `connectedSkeletonContainedInBall`
+     - exact target theorem:
+       `RootedConnectedSkeleton G r X -> length X ≡ n -> X ⊆ ball G r (n ∸ 1)`
+
+  4. finite ball enumeration
+
+     - `FiniteBallEnumeration`
+     - concrete finite sorted duplicate-free carrier for `ball G r (n ∸ 1)`
+
+  5. subset enumeration over the finite ball
+
+     - `chooseN`
+     - `chooseNSound`
+     - `chooseNComplete`
+
+  6. canonical skeleton enumeration from the finite ball
+
+     - `canonicalSkeletonEnumerationFromBall`
+     - remove the remaining bridge postulates
+       `bridgeSkeletonIndex` and `bridgeSkeletonIndexOf`
+
+  7. bounded neighbour enumeration / concrete walk enumeration
+
+     - `BoundedNeighbourEnumeration`
+     - constructive replacement for the abstract `WalkEnumeration` layer
+
+  8. final P06 encoding depostulation
+
+     - `encode`
+     - `decode`
+     - `decenc`
+     - `skeletonVertices`
+     - `walkRange`
+     - `skeletonVerticesSize`
+     - `skeletonWitness`
+     - `walkRangeOfEncode`
+     - `skeletonCountBound`
+
   Exact subkernel fields in HardAnalyticDischargeProgram that must stop being abstract scaffolding:
 
   - P06EncodingSubkernel.reducedSkeleton
@@ -209,9 +280,13 @@
   - P06CountingSubkernel.decorationMultiplicityByComplexity
   - P06CountingSubkernel.polymerCountingFromEncoding
 
-  Hard mathematical leaf:
+  Corrected local blocker statement:
 
-  - the repo itself points at currentReducedSkeletonCardinalityBound as the remaining explicit size-or-complexity-controlled-by-diameter leaf
+  - `P06a3aDiameterShellContainedInRootBall` is not closed
+  - what exists now is an exposed root-ball containment interface, not a
+    theorem-backed containment proof
+  - `currentReducedSkeletonCardinalityBound` only becomes mathematically owned
+    after the path/ball/enumeration spine is inhabited
 
   Success criterion:
 

@@ -131,7 +131,7 @@ p06a3aEntry : ProofReplacementEntry
 p06a3aEntry =
   mkProofReplacementEntry
     Surfaces.p06a3aDiameterShellContainedInRootBallSurface
-    "Make this the explicit size-to-diameter containment lemma so the remaining P06 residue is truly decoration overhead rather than hidden geometry."
+    "Make this the actual root-ball containment theorem for P06: rooted connected size-n skeletons must lie inside the radius-(n ∸ 1) ball, via internal paths and the simple-path length bound."
     now
 
 p06a3Entry : ProofReplacementEntry
@@ -564,7 +564,7 @@ p06a3aFrontierEntry = record
   { entry = p06a3aEntry
   ; sprintLane = "Sprint B - P06 entropy/counting ownership"
   ; rationale =
-      "Diameter-shell containment isolates the geometry needed before the final size-or-complexity leaf."
+      "This is the first still-live theorem surface on the P06 chain: once root-ball containment is proved, finite-ball subset enumeration can construct canonical skeleton enumeration."
   }
 
 p06a3FrontierEntry : ActiveYMSprintFrontierEntry

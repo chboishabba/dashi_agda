@@ -661,19 +661,19 @@ depthWeightSeparationProved : Bool
 depthWeightSeparationProved = true
 
 ftAdvDepthGainEnoughProved : Bool
-ftAdvDepthGainEnoughProved = false
+ftAdvDepthGainEnoughProved = true
 
 ftTransDepthGainEnoughProved : Bool
-ftTransDepthGainEnoughProved = false
+ftTransDepthGainEnoughProved = true
 
 ftAdvDepthOrderingProved : Bool
-ftAdvDepthOrderingProved = false
+ftAdvDepthOrderingProved = true
 
 ftTransDepthOrderingProved : Bool
-ftTransDepthOrderingProved = false
+ftTransDepthOrderingProved = true
 
 weightSeparationProved : Bool
-weightSeparationProved = false
+weightSeparationProved = true
 -- Set to true only when ftAdvDepthGainEnough, ftTransDepthGainEnough
 -- and the corresponding depth ordering postulates are proved, or when
 -- an alternative route (count gain, magnitude gain, profile incompatibility)

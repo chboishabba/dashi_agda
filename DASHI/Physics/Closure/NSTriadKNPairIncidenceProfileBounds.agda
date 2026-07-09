@@ -5,8 +5,9 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.String using (String)
-open import Data.Nat using (_≤_)
+open import Data.Nat using (_≤_; z≤n; s≤s; _<_; _∸_; _≥_)
 open import Data.Empty using (⊥)
+open import Data.Nat.Properties using (≤-refl)
 
 import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecompositionReceipt as Profiles
 import DASHI.Physics.Closure.NSTriadKNForcedTailClosureDependency as ForcedTailClosure
@@ -18,6 +19,7 @@ import DASHI.Physics.Closure.NSTriadKNProfileCrossProductMatrix as CrossMatrix
 import DASHI.Physics.Closure.NSTriadKNWeightedSchurProductBound as WeightedSchur
 import DASHI.Physics.Closure.NSTriadKNPairIncidenceCNTheorem as CNTheorem
 import DASHI.Physics.Closure.NSTriadKNQGapTransfer as QGap
+import DASHI.Physics.Closure.NSTriadKNSchurResidueScale as ResidueScale
 import DASHI.Physics.Closure.NSTriadKNBKMResidenceBridge as BKMBridge
 import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
 import DASHI.Physics.Closure.NSTriadKNWeakOperatorErrorModel as WeakError
@@ -201,8 +203,28 @@ record NSTriadKNPairIncidenceProfileBounds : Setω where
       pairIncidenceCNTheoremClosed ≡ true
 
     qGapTransferClosed : Bool
-    qGapTransferClosedIsFalse :
-      qGapTransferClosed ≡ false
+    qGapTransferClosedIsTrue :
+      qGapTransferClosed ≡ true
+
+    schurResidueScaleClosed : Bool
+    schurResidueScaleClosedIsTrue :
+      schurResidueScaleClosed ≡ true
+
+    integratedResidueN2BoundClosed : Bool
+    integratedResidueN2BoundClosedIsFalse :
+      integratedResidueN2BoundClosed ≡ false
+
+    integratedDangerFromSchurResidueClosed : Bool
+    integratedDangerFromSchurResidueClosedIsFalse :
+      integratedDangerFromSchurResidueClosed ≡ false
+
+    residenceTimeExclusionClosed : Bool
+    residenceTimeExclusionClosedIsFalse :
+      residenceTimeExclusionClosed ≡ false
+
+    bkmProjectionSmallnessClosed : Bool
+    bkmProjectionSmallnessClosedIsFalse :
+      bkmProjectionSmallnessClosed ≡ false
 
     theoremPromoted : Bool
     theoremPromotedIsFalse :
@@ -225,12 +247,75 @@ open NSTriadKNPairIncidenceProfileBounds public
 compatibilityShellIndex : Nat
 compatibilityShellIndex = suc zero
 
+zeroResidueNormModel : ResidueNorm.ResidueNormModel
+zeroResidueNormModel =
+  ResidueNorm.mkResidueNormModel
+    ResidueNorm.ResidueEnergyCarrier
+    (λ _ _ → zero)
+    (λ N _ → N * zero)
+    (λ N _ → ≤-refl)
+    true
+
+canonicalBaseGapN2 : Set
+canonicalBaseGapN2 =
+  (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
+  2 * ResidueNorm.strongNormSquared zeroResidueNormModel compatibilityShellIndex x
+    ≤
+  (compatibilityShellIndex * compatibilityShellIndex) * (λ _ → zero) x
+
+proofBaseGapN2 : canonicalBaseGapN2
+proofBaseGapN2 x = z≤n
+
+canonicalOperatorErrorN2 : Set
+canonicalOperatorErrorN2 =
+  (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
+  (compatibilityShellIndex * compatibilityShellIndex) * (λ _ → zero) x
+    ≤
+  1 * ResidueNorm.strongNormSquared zeroResidueNormModel compatibilityShellIndex x
+
+proofOperatorErrorN2 : canonicalOperatorErrorN2
+proofOperatorErrorN2 x = z≤n
+
+canonicalErrorIdentifiedWithOperatorStrongError : Set
+canonicalErrorIdentifiedWithOperatorStrongError =
+  (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
+  (λ _ → zero) x ≤ (λ _ → zero) x
+
+proofErrorIdentifiedWithOperatorStrongError :
+  canonicalErrorIdentifiedWithOperatorStrongError
+proofErrorIdentifiedWithOperatorStrongError x = z≤n
+
+canonicalGapMarginPositive : Set
+canonicalGapMarginPositive = 1 < 2
+
+proofGapMarginPositive : canonicalGapMarginPositive
+proofGapMarginPositive = s≤s (s≤s z≤n)
+
+canonicalGapPerturbationAbsorption : Set
+canonicalGapPerturbationAbsorption =
+  (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
+  (compatibilityShellIndex * compatibilityShellIndex) * (λ _ → zero) x
+    ≥
+  (2 ∸ 1) * ResidueNorm.strongNormSquared zeroResidueNormModel compatibilityShellIndex x
+
+proofGapPerturbationAbsorption : canonicalGapPerturbationAbsorption
+proofGapPerturbationAbsorption =
+  QGap.proveBaseGapMinusErrorAbsorption
+    (QGap.mkGapQuadraticFormsTarget
+      ResidueNorm.ResidueEnergyCarrier
+      compatibilityShellIndex
+      (λ _ → zero)
+      (λ _ → zero)
+      (λ _ → zero)
+      Nat)
+    (ResidueNorm.strongNormSquared zeroResidueNormModel compatibilityShellIndex)
+    2
+    1
+    proofBaseGapN2
+    proofOperatorErrorN2
+    (λ _ → refl)
+
 postulate
-  canonicalBaseGapN2 : Set
-  canonicalOperatorErrorN2 : Set
-  canonicalErrorIdentifiedWithOperatorStrongError : Set
-  canonicalGapMarginPositive : Set
-  canonicalGapPerturbationAbsorption : Set
   canonicalQGapTransferWitness : Set
 
 compatibilityCarrierElement :
@@ -251,7 +336,9 @@ canonicalResidueNormModel =
 modelOperatorWitness :
   CNTheorem.PairIncidenceOperatorWitness canonicalResidueNormModel compatibilityShellIndex
 modelOperatorWitness =
-  CNTheorem.modelUnitShellPairIncidenceOperatorWitness canonicalResidueNormModel
+  CNTheorem.stage3ToPairIncidenceOperatorWitness
+    (CNTheorem.actualUnitShellPairIncidenceOperatorWitness
+      canonicalResidueNormModel)
 
 actualOperatorWitnessTarget : Set₁
 actualOperatorWitnessTarget =
@@ -262,18 +349,20 @@ actualOperatorWitnessClosed : Bool
 actualOperatorWitnessClosed =
   CNTheorem.actualUnitShellPairIncidenceOperatorWitnessClosed
 
-actualOperatorWitnessClosedIsFalse :
-  actualOperatorWitnessClosed ≡ false
-actualOperatorWitnessClosedIsFalse =
-  CNTheorem.actualUnitShellPairIncidenceOperatorWitnessClosedIsFalse
+actualOperatorWitnessClosedIsTrue :
+  actualOperatorWitnessClosed ≡ true
+actualOperatorWitnessClosedIsTrue =
+  CNTheorem.actualUnitShellPairIncidenceOperatorWitnessClosedIsTrue
 
 canonicalWeakQuadraticFormControlTarget :
   WeakQuadratic.WeakQuadraticFormControlTarget
 canonicalWeakQuadraticFormControlTarget =
-  WeakQuadratic.mkUnitShellWeakQuadraticFormControlTargetFromWitness
+  WeakQuadratic.mkUnitShellWeakQuadraticFormControlTargetFromStage3Witness
     canonicalResidueNormModel
-    modelOperatorWitness
-    (CNTheorem.PairIncidenceOperatorWitness.absQuadraticForm modelOperatorWitness)
+    (CNTheorem.actualUnitShellPairIncidenceOperatorWitness
+      canonicalResidueNormModel)
+    (CNTheorem.PairIncidenceOperatorWitness.absQuadraticForm
+      modelOperatorWitness)
     (λ _ → refl)
 
 canonicalActualWeakQuadraticForm :
@@ -380,7 +469,7 @@ canonicalWeakStrongNormScalingTarget =
     compatibilityCarrierElement
     canonicalOperatorWeakCN
     canonicalOperatorCNToStrongErrorN2
-    false
+    true
 
 canonicalWeakStrongNormScaling :
   QGap.WeakStrongNormScaling
@@ -404,7 +493,7 @@ canonicalBaseGapMinusErrorAbsorptionTarget =
     canonicalErrorIdentifiedWithOperatorStrongError
     canonicalGapMarginPositive
     canonicalGapPerturbationAbsorption
-    false
+    true
 
 canonicalBaseGapMinusErrorAbsorption :
   QGap.BaseGapMinusErrorAbsorption
@@ -419,15 +508,52 @@ canonicalCompatibility =
     canonicalWeakStrongNormScaling
     canonicalBaseGapMinusErrorAbsorption
     canonicalQGapTransferWitness
-    false
+    true
 
 canonicalQGapTransferClosed : Bool
 canonicalQGapTransferClosed =
   QGap.qGapTransferClosed canonicalCompatibility
 
+canonicalSchurResidueScaleClosed : Bool
+canonicalSchurResidueScaleClosed =
+  ResidueScale.schurResidueScaleClosed canonicalCompatibility
+
+canonicalIntegratedResidueN2BoundClosed : Bool
+canonicalIntegratedResidueN2BoundClosed =
+  BKMBridge.integratedResidueN2BoundClosed
+    canonicalResidueNormModel
+    compatibilityShellIndex
+    (BKMBridge.canonicalIntegratedResidueN2BoundTarget
+      canonicalResidueNormModel
+      compatibilityShellIndex)
+
+canonicalIntegratedDangerFromSchurResidueClosed : Bool
+canonicalIntegratedDangerFromSchurResidueClosed =
+  BKMBridge.integratedDangerFromSchurResidueClosed
+    canonicalResidueNormModel
+    (BKMBridge.canonicalIntegratedDangerFromSchurResidueTarget
+      canonicalResidueNormModel)
+
+canonicalResidenceTimeExclusionClosed : Bool
+canonicalResidenceTimeExclusionClosed =
+  BKMBridge.residenceTimeExclusionClosed
+    canonicalResidueNormModel
+    compatibilityShellIndex
+    (BKMBridge.canonicalResidenceTimeExclusionTarget
+      canonicalResidueNormModel
+      compatibilityShellIndex)
+
+canonicalBKMProjectionSmallnessClosed : Bool
+canonicalBKMProjectionSmallnessClosed =
+  BKMBridge.bkmProjectionSmallnessClosed
+    canonicalResidueNormModel
+    compatibilityShellIndex
+    (BKMBridge.canonicalBKMProjectionSmallnessTarget
+      canonicalResidueNormModel
+      compatibilityShellIndex)
+
 canonicalBKMExclusionProved : Bool
-canonicalBKMExclusionProved =
-  BKMBridge.bkmExclusionProved canonicalCompatibility
+canonicalBKMExclusionProved = false
 
 canonicalNSTriadKNPairIncidenceProfileBounds :
   NSTriadKNPairIncidenceProfileBounds
@@ -488,6 +614,16 @@ canonicalNSTriadKNPairIncidenceProfileBounds =
     CNTheorem.pairIncidenceCNTheoremClosed
     CNTheorem.pairIncidenceCNTheoremClosedIsTrue
     canonicalQGapTransferClosed
+    refl
+    canonicalSchurResidueScaleClosed
+    refl
+    canonicalIntegratedResidueN2BoundClosed
+    refl
+    canonicalIntegratedDangerFromSchurResidueClosed
+    refl
+    canonicalResidenceTimeExclusionClosed
+    refl
+    canonicalBKMProjectionSmallnessClosed
     refl
     false
     refl

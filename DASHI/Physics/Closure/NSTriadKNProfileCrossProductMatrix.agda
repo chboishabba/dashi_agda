@@ -3,13 +3,17 @@ module DASHI.Physics.Closure.NSTriadKNProfileCrossProductMatrix where
 open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 open import Agda.Builtin.Nat using (Nat; zero; suc) renaming (_*_ to _*ℕ_)
 open import Data.Nat using () renaming (_≤_ to _≤ℕ_)
+open import Data.Nat.Properties using (≤-refl; ≤-reflexive; *-identityˡ)
 
 open import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecomposition
   using ( PairIncidenceProfile
         ; NSTriadKNPairIncidenceProfileDecompositionModel
         ; Shell
+        ; ActualPairIncidenceKernelData
+        ; canonicalActualPairIncidenceKernelData
         ; actualUnitShellPairIncidenceKernelDataClosed
         ; actualUnitShellPairIncidenceKernelDataClosedIsTrue
         )
@@ -125,6 +129,44 @@ UnitShellProfileCrossMatrixKernelDataTarget :
   (residueNormModel : ResidueNorm.ResidueNormModel) → Set₁
 UnitShellProfileCrossMatrixKernelDataTarget residueNormModel =
   ProfileCrossMatrixKernelData residueNormModel (suc zero)
+
+canonicalProfileCrossMatrixKernelData :
+  (residueNormModel : ResidueNorm.ResidueNormModel) →
+  UnitShellProfileCrossMatrixKernelDataTarget residueNormModel
+canonicalProfileCrossMatrixKernelData residueNormModel =
+  mkProfileCrossMatrixKernelData
+    (ActualPairIncidenceKernelData.Index actualKernelData)
+    (ActualPairIncidenceKernelData.actualKernel actualKernelData)
+    (λ _ i → entryWeight i)
+    (λ x → x)
+    (λ _ y →
+      ResidueNorm.weakNormSquared residueNormModel (suc zero) y)
+    (λ x →
+      ResidueNorm.weakNormSquared residueNormModel (suc zero) x)
+    (suc zero)
+    (ActualPairIncidenceKernelData.kernelRealizesTotalKernel actualKernelData)
+    (λ x → refl)
+    weakNormControlledBySelf
+    (ActualPairIncidenceKernelData.kernelProfileClassification actualKernelData)
+  where
+    actualKernelData :
+      ActualPairIncidenceKernelData residueNormModel (suc zero)
+    actualKernelData =
+      canonicalActualPairIncidenceKernelData residueNormModel
+
+    entryWeight :
+      ActualPairIncidenceKernelData.Index actualKernelData → Nat
+    entryWeight i =
+      ActualPairIncidenceKernelData.entryOf actualKernelData i
+
+    weakNormControlledBySelf :
+      (x : ResidueNorm.Carrier residueNormModel (suc zero)) →
+      ResidueNorm.weakNormSquared residueNormModel (suc zero) x
+        ≤ℕ
+      suc zero *ℕ ResidueNorm.weakNormSquared residueNormModel (suc zero) x
+    weakNormControlledBySelf x =
+      ≤-reflexive (sym (*-identityˡ
+        (ResidueNorm.weakNormSquared residueNormModel (suc zero) x)))
 
 profileCrossMatrixKernelDataClosed : Bool
 profileCrossMatrixKernelDataClosed =

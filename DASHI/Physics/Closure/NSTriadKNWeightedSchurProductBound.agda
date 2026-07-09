@@ -3,9 +3,11 @@ module DASHI.Physics.Closure.NSTriadKNWeightedSchurProductBound where
 open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc) renaming (_*_ to _*ℕ_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_) renaming (_*_ to _*ℕ_)
 open import Data.Nat using () renaming (_≤_ to _≤ℕ_)
 
+import DASHI.Physics.ClaySupportingSchurOperatorBound
+  as SchurAlgebra
 import DASHI.Physics.Closure.NSTriadKNProfileCrossProductMatrix
   as CrossMatrix
 import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
@@ -205,20 +207,45 @@ UnitShellWeightedSchurMatrixOperatorDataTarget :
 UnitShellWeightedSchurMatrixOperatorDataTarget residueNormModel =
   WeightedSchurMatrixOperatorData residueNormModel (suc zero)
 
-weightedSchurOperatorWitnessClosed : Bool
-weightedSchurOperatorWitnessClosed = false
+canonicalWeightedSchurMatrixOperatorData :
+  (residueNormModel : ResidueNorm.ResidueNormModel) →
+  UnitShellWeightedSchurMatrixOperatorDataTarget residueNormModel
+canonicalWeightedSchurMatrixOperatorData residueNormModel =
+  fromProfileCrossMatrixKernelData
+    (CrossMatrix.canonicalProfileCrossMatrixKernelData residueNormModel)
 
-weightedSchurOperatorWitnessClosedIsFalse :
-  weightedSchurOperatorWitnessClosed ≡ false
-weightedSchurOperatorWitnessClosedIsFalse = refl
+canonicalWeightedSchurOperatorWitness :
+  (residueNormModel : ResidueNorm.ResidueNormModel) →
+  UnitShellWeightedSchurOperatorWitnessTarget residueNormModel
+canonicalWeightedSchurOperatorWitness residueNormModel =
+  mkWeightedSchurOperatorWitness
+    (WeightedSchurMatrixOperatorData.weightedSchurOperator datum)
+    (WeightedSchurMatrixOperatorData.absWeakPairing datum)
+    (WeightedSchurMatrixOperatorData.absQuadraticForm datum)
+    (WeightedSchurMatrixOperatorData.weakQuadraticFormConstant datum)
+    (WeightedSchurMatrixOperatorData.absQuadraticFormDef datum)
+    (WeightedSchurMatrixOperatorData.weightedSchurControlsQuadratic datum)
+    true
+  where
+    datum : UnitShellWeightedSchurMatrixOperatorDataTarget residueNormModel
+    datum = canonicalWeightedSchurMatrixOperatorData residueNormModel
+
+weightedSchurOperatorWitnessClosed : Bool
+weightedSchurOperatorWitnessClosed =
+  CrossMatrix.actualUnitShellProfileCrossMatrixKernelDataClosed
+
+weightedSchurOperatorWitnessClosedIsTrue :
+  weightedSchurOperatorWitnessClosed ≡ true
+weightedSchurOperatorWitnessClosedIsTrue =
+  CrossMatrix.actualUnitShellProfileCrossMatrixKernelDataClosedIsTrue
 
 actualUnitShellWeightedSchurOperatorWitnessClosed : Bool
 actualUnitShellWeightedSchurOperatorWitnessClosed =
   weightedSchurOperatorWitnessClosed
 
-actualUnitShellWeightedSchurOperatorWitnessClosedIsFalse :
-  actualUnitShellWeightedSchurOperatorWitnessClosed ≡ false
-actualUnitShellWeightedSchurOperatorWitnessClosedIsFalse = refl
+actualUnitShellWeightedSchurOperatorWitnessClosedIsTrue :
+  actualUnitShellWeightedSchurOperatorWitnessClosed ≡ true
+actualUnitShellWeightedSchurOperatorWitnessClosedIsTrue = refl
 
 weightedSchurMatrixOperatorDataClosed : Bool
 weightedSchurMatrixOperatorDataClosed =
@@ -247,3 +274,54 @@ weightedSchurProductBoundClosed with CrossMatrix.canonicalProfileCrossProductMat
 weightedSchurProductBoundClosedIsTrue :
   weightedSchurProductBoundClosed ≡ true
 weightedSchurProductBoundClosedIsTrue = refl
+
+------------------------------------------------------------------------
+-- § ClaySupporting consumption (Schur operator algebra bridge).
+--
+-- The generic fourProfileSchurBound from
+-- DASHI.Physics.ClaySupportingSchurOperatorBound combines four
+-- per-profile N⁻² operator bounds (each obtained via schurTestOpBound)
+-- with subadditivity into the total N⁻² operator bound:
+--
+--   (N+1)² · ‖M‖ ≤ (CFT + CAdv + CTr + CRes)
+--
+-- This section instantiates that algebra at the weighted-Schur
+-- boundary.  The per-profile row/column bounds and Schur tests are
+-- the open analytic inputs; the recombination is proved.
+--
+-- The four-profile recombination re-exported under the weighted-Schur
+-- namespace.  All arguments are plain Nat — the per-profile operator
+-- norms, Schur-test products, and N⁻² row/column bounds — matching
+-- the signature of SchurAlgebra.fourProfileSchurBound exactly.
+
+fourProfileOpBoundViaSchurAlgebra :
+  (opTot opFT opAdv opTr opRes N : Nat)
+  (rFT cFT rAdv cAdv rTr cTr rRes cRes : Nat)
+  (CFT CAdv CTr CRes : Nat) →
+  opTot ≤ℕ ((opFT + opAdv) + opTr) + opRes →
+  opFT  *ℕ opFT  ≤ℕ rFT  *ℕ cFT  →
+  opAdv *ℕ opAdv ≤ℕ rAdv *ℕ cAdv →
+  opTr  *ℕ opTr  ≤ℕ rTr  *ℕ cTr  →
+  opRes *ℕ opRes ≤ℕ rRes *ℕ cRes →
+  (suc N *ℕ suc N) *ℕ rFT  ≤ℕ CFT  → (suc N *ℕ suc N) *ℕ cFT  ≤ℕ CFT  →
+  (suc N *ℕ suc N) *ℕ rAdv ≤ℕ CAdv → (suc N *ℕ suc N) *ℕ cAdv ≤ℕ CAdv →
+  (suc N *ℕ suc N) *ℕ rTr  ≤ℕ CTr  → (suc N *ℕ suc N) *ℕ cTr  ≤ℕ CTr  →
+  (suc N *ℕ suc N) *ℕ rRes ≤ℕ CRes → (suc N *ℕ suc N) *ℕ cRes ≤ℕ CRes →
+  (suc N *ℕ suc N) *ℕ opTot ≤ℕ ((CFT + CAdv) + CTr) + CRes
+fourProfileOpBoundViaSchurAlgebra opTot opFT opAdv opTr opRes N
+  rFT cFT rAdv cAdv rTr cTr rRes cRes CFT CAdv CTr CRes
+  sub sFT sAdv sTr sRes
+  rFTb cFTb rAdvb cAdvb rTrb cTrb rResb cResb =
+  SchurAlgebra.fourProfileSchurBound opTot opFT opAdv opTr opRes N
+    rFT cFT rAdv cAdv rTr cTr rRes cRes CFT CAdv CTr CRes
+    sub sFT sAdv sTr sRes
+    rFTb cFTb rAdvb cAdvb rTrb cTrb rResb cResb
+
+perProfileOpBoundViaSchurAlgebra :
+  (opNorm rowB colB N C : Nat) →
+  opNorm *ℕ opNorm ≤ℕ rowB *ℕ colB →
+  (suc N *ℕ suc N) *ℕ rowB ≤ℕ C →
+  (suc N *ℕ suc N) *ℕ colB ≤ℕ C →
+  (suc N *ℕ suc N) *ℕ opNorm ≤ℕ C
+perProfileOpBoundViaSchurAlgebra opNorm rowB colB N C schur rowN colN =
+  SchurAlgebra.schurTestOpBound opNorm rowB colB N C schur rowN colN
