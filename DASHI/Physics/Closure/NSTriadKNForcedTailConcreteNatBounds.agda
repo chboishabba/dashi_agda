@@ -46,10 +46,15 @@ open import Data.Nat
   using ( ℕ; _≤_; _*_; _+_; zero; suc; z≤n; s≤s )
 open import Data.Nat.Properties
   using ( ≤-refl; ≤-trans; ≤-reflexive; m≤m+n; *-assoc; *-identityʳ )
+open import Data.List.Base using (List)
 open import Relation.Binary.PropositionalEquality
   using ( _≡_; refl; sym; trans; cong )
 open import Agda.Builtin.Bool using (Bool; true; false)
 
+open import DASHI.Physics.ClaySupportingForcedTailRowColumnBounds
+  using (forcedTailRowBound; forcedTailColBound; rowGain)
+open import DASHI.Physics.ClaySupportingResidualDomination
+  using (rowSum)
 open import DASHI.Physics.Closure.NSTriadKNForcedTailPrimitiveEstimates
   using ( ForcedTailClass
         ; tailEnd; nearTail; transition; degenerate
@@ -373,3 +378,43 @@ currentForcedTailConcreteNatBoundsStatus = mkForcedTailConcreteNatBoundsStatus
 --   proving A (encoding fiber bound) as the first real combinatorial
 --   theorem.  B1 and B2 follow by class enumeration.  C and D are
 --   analytic weight bounds.
+
+------------------------------------------------------------------------
+-- § 8.  ClaySupporting consumption (NS profile-algebra bridge).
+--
+-- The generic forcedTailRowBound/forcedTailColBound from
+-- DASHI.Physics.ClaySupportingForcedTailRowColumnBounds combine a
+-- per-entry depth-separation gain (N+1)·M ≤ G with a per-row
+-- multiplicity gain (N+1)·ΣG ≤ C into the N⁻² row/column bound
+-- (N+1)²·ΣM ≤ C.  This section instantiates that algebra for the
+-- forced-tail profile: the multiplicity function M_α is the forced-tail
+-- kernel weight, the depth-separation bound is the kernel-envelope
+-- input, and the multiplicity bound is the head×tail count bound.
+--
+-- The two real analytic inputs — per-entry depth-separation gain and
+-- per-row multiplicity gain — are the same hypotheses taken by
+-- forcedTailRowBound itself; the algebraic composition is proved
+-- unconditionally once they are supplied.
+
+-- The forced-tail N⁻² row bound via the ClaySupporting algebra.
+-- Given a concrete column-index list js, the per-entry depth-separation
+-- gain (∀ j → (N+1)·M(j) ≤ G(j)), and the per-row multiplicity gain
+-- ((N+1)·Σ_j G(j) ≤ C), the conclusion (N+1)²·Σ_j M(j) ≤ C follows.
+-- This is exactly forcedTailRowBound from ClaySupportingForcedTailRowColumnBounds,
+-- re-exported under the forced-tail profile namespace.
+forcedTailRowBoundViaClayAlgebra :
+  {J : Set} (js : List J) (M G : J → ℕ) (N C : ℕ) →
+  (∀ j → suc N * M j ≤ G j) →           -- depth-separation gain (per entry)
+  suc N * (rowSum js G) ≤ C →           -- multiplicity gain (per row)
+  (suc N * suc N) * (rowSum js M) ≤ C
+forcedTailRowBoundViaClayAlgebra js M G N C sep mult =
+  forcedTailRowBound js M G N C sep mult
+
+-- Column analogue (same algebra, over the row-index list is).
+forcedTailColBoundViaClayAlgebra :
+  {I : Set} (is : List I) (M G : I → ℕ) (N C : ℕ) →
+  (∀ i → suc N * M i ≤ G i) →           -- depth-separation gain (per entry)
+  suc N * (rowSum is G) ≤ C →           -- multiplicity gain (per column)
+  (suc N * suc N) * (rowSum is M) ≤ C
+forcedTailColBoundViaClayAlgebra is M G N C sep mult =
+  forcedTailColBound is M G N C sep mult

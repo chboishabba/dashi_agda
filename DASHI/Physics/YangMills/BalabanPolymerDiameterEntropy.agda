@@ -7,7 +7,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.String using (String)
 open import Data.List.Base using (List; []; length)
 open import Data.Nat.Base using (ℕ; _≤_; _*_; _+_; _^_; zero; suc; s≤s; z≤n)
-open import DASHI.Core.Prelude using (_×_)
+open import DASHI.Core.Prelude using (_×_; proj₁; proj₂)
 
 open import DASHI.Geometry.Gauge.SUNPrimitives using (clayYangMillsPromoted)
 open import DASHI.Foundations.RealAnalysisAxioms
@@ -150,6 +150,14 @@ record P06a2aBoundedDegreeRootBallGrowth : Set₁ where
 record ConnectedSkeletonHasRootedSpanningTree : Set₁ where
   field
     boundedDegreeSkeleton : P06a1BoundedDegreeSupportGraphSkeleton
+    rootedSpanningTree :
+      {G : GraphCombinatorics.Graph} {r : GraphCombinatorics.Graph.Vertex G} {X : List (GraphCombinatorics.Graph.Vertex G)} →
+      GraphCombinatorics.RootedConnectedSkeleton G r X →
+      Σ (GraphCombinatorics.SpanningTree G X) (λ st →
+        Σ (GraphCombinatorics.Graph.Vertex (GraphCombinatorics.SpanningTree.T st)) (λ rT →
+          (GraphCombinatorics.SpanningTree.embed st rT ≡ r) × GraphCombinatorics.RootedTree (GraphCombinatorics.SpanningTree.T st) rT
+        )
+      )
     theoremBoundary : String
     theoremBoundaryIsCanonical :
       theoremBoundary ≡
@@ -175,6 +183,10 @@ record ConnectedSkeletonCoveredByDFSWalk : Set₁ where
   field
     dfsWalkWitness : RootedTreeDFSWalk
     walkCountWitness : BoundedDegreeWalkCount
+    coversSkeleton :
+      {G : GraphCombinatorics.Graph} {r : GraphCombinatorics.Graph.Vertex G} {X : List (GraphCombinatorics.Graph.Vertex G)} →
+      GraphCombinatorics.RootedConnectedSkeleton G r X →
+      GraphCombinatorics.DFSCover G r X (length X)
     theoremBoundary : String
     theoremBoundaryIsCanonical :
       theoremBoundary ≡
@@ -255,7 +267,7 @@ record P06a3aDiameterShellContainedInRootBall : Set₁ where
     theoremBoundary : String
     theoremBoundaryIsCanonical :
       theoremBoundary ≡
-      "P06a3a: diameter-indexed rooted connected skeleton shells are first reduced to a bounded root-ball containment statement before the final diameter-shell count is consumed."
+      "P06a3a: diameter-indexed rooted connected skeleton shells are routed through the root-ball containment interface before the final diameter-shell count is consumed; the actual graph-theoretic ball-containment proof remains open."
 
 record ReducedSkeletonCardinalityBound : Set₁ where
   field
@@ -324,7 +336,7 @@ record P06aRootedConnectedSkeletonCounting : Set₁ where
     theoremBoundary : String
     theoremBoundaryIsCanonical :
       theoremBoundary ≡
-      "P06a: DASHI owns the rooted connected skeleton-counting bridge over bounded-degree support-graph shells, split into bounded-degree input, root-ball growth, DFS-walk size-shell counting, diameter-shell containment, and an explicit size-or-complexity-by-diameter leaf before the final diameter-shell reduction."
+      "P06a: DASHI owns the rooted connected skeleton-counting bridge over bounded-degree support-graph shells, split into bounded-degree input, root-ball growth, DFS-walk size-shell counting, the open root-ball containment interface, and an explicit size-or-complexity-by-diameter leaf before the final diameter-shell reduction."
 
 record BalabanReducedSkeletonComplexityAdapter
   (graphAdapter : BalabanGraphAdapter) : Set₁ where
@@ -1526,6 +1538,7 @@ currentConnectedSkeletonHasRootedSpanningTree :
   ConnectedSkeletonHasRootedSpanningTree
 currentConnectedSkeletonHasRootedSpanningTree = record
   { boundedDegreeSkeleton = currentP06a1BoundedDegreeSupportGraphSkeleton
+  ; rootedSpanningTree = GraphCombinatorics.P06a2bConnectedSkeletonHasRootedSpanningTree
   ; theoremBoundary =
       "P06a2b: every rooted connected support-graph skeleton is first reduced to a rooted spanning-tree witness before any DFS walk encoding is applied."
   ; theoremBoundaryIsCanonical = refl
@@ -1577,6 +1590,7 @@ currentConnectedSkeletonCoveredByDFSWalk :
 currentConnectedSkeletonCoveredByDFSWalk = record
   { dfsWalkWitness = currentRootedTreeDFSWalk
   ; walkCountWitness = currentBoundedDegreeWalkCount
+  ; coversSkeleton = λ {G} {r} {X} skel → GraphCombinatorics.P06a2eConnectedSkeletonCoveredByDFSWalk (length X) skel refl
   ; theoremBoundary =
       "P06a2e: every rooted connected skeleton is covered by the visited set of a bounded-degree DFS walk, exposing the exact counting bridge used by P06a2."
   ; theoremBoundaryIsCanonical = refl
@@ -1691,7 +1705,7 @@ currentP06a3aDiameterShellContainedInRootBall = record
           canonicalRootedPolymerShellCountingInterface
           root n
   ; theoremBoundary =
-      "P06a3a: diameter-indexed rooted connected skeleton shells are first reduced to a bounded root-ball containment statement before the final diameter-shell count is consumed."
+      "P06a3a: diameter-indexed rooted connected skeleton shells are routed through the root-ball containment interface before the final diameter-shell count is consumed; the actual graph-theoretic ball-containment proof remains open."
   ; theoremBoundaryIsCanonical = refl
   }
 
@@ -1772,7 +1786,7 @@ currentP06aRootedConnectedSkeletonCounting = record
   ; reducedSkeletonCardinality = currentReducedSkeletonCardinalityBound
   ; diameterShellCounting = currentP06a3DiameterShellSkeletonCounting
   ; theoremBoundary =
-      "P06a: DASHI owns the rooted connected skeleton-counting bridge over bounded-degree support-graph shells, split into bounded-degree input, root-ball growth, DFS-walk size-shell counting, diameter-shell containment, and an explicit size-or-complexity-by-diameter leaf before the final diameter-shell reduction."
+      "P06a: DASHI owns the rooted connected skeleton-counting bridge over bounded-degree support-graph shells, split into bounded-degree input, root-ball growth, DFS-walk size-shell counting, the open root-ball containment interface, and an explicit size-or-complexity-by-diameter leaf before the final diameter-shell reduction."
   ; theoremBoundaryIsCanonical = refl
   }
 

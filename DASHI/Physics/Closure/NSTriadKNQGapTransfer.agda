@@ -1,11 +1,11 @@
 module DASHI.Physics.Closure.NSTriadKNQGapTransfer where
 
 open import Agda.Primitive using (Level; lsuc; _⊔_)
-open import Agda.Builtin.Nat using (Nat; _*_)
-open import Data.Nat using (_≤_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Data.Nat using (_≤_; _<_; _∸_; _≥_)
 open import Data.Nat.Properties as NatP
-  using (≤-refl; ≤-trans; *-monoʳ-≤; *-assoc; *-comm)
-open import Relation.Binary.PropositionalEquality using (sym)
+  using (≤-refl; ≤-trans; ≤-reflexive; *-mono-≤; *-monoʳ-≤; *-assoc; *-comm; *-distribˡ-∸; *-distribʳ-∸; ∸-monoˡ-≤; ∸-monoʳ-≤)
+open import Relation.Binary.PropositionalEquality using (sym; cong)
 
 import DASHI.Physics.Closure.NSTriadKNPairIncidenceCNTheorem as OperatorCN
 import DASHI.Physics.Closure.NSTriadKNWeightedSchurProductBound as WeightedSchur
@@ -344,3 +344,52 @@ qGapTransferClosedIsTrue :
 qGapTransferClosedIsTrue compat routeClosed
   rewrite OperatorCN.pairIncidenceCNTheoremClosedIsTrue
         | routeClosed = refl
+
+proveBaseGapMinusErrorAbsorption :
+  (gapQuadraticForms : GapQuadraticFormsTarget) →
+  (strongNormSquared : GapQuadraticFormsTarget.Carrier gapQuadraticForms (GapQuadraticFormsTarget.shellIndex gapQuadraticForms) → Nat) →
+  (A C-err : Nat) →
+  (baseGapN2 : (x : GapQuadraticFormsTarget.Carrier gapQuadraticForms (GapQuadraticFormsTarget.shellIndex gapQuadraticForms)) →
+    A * strongNormSquared x ≤ (GapQuadraticFormsTarget.shellIndex gapQuadraticForms * GapQuadraticFormsTarget.shellIndex gapQuadraticForms) * GapQuadraticFormsTarget.qBase gapQuadraticForms x) →
+  (operatorErrorN2 : (x : GapQuadraticFormsTarget.Carrier gapQuadraticForms (GapQuadraticFormsTarget.shellIndex gapQuadraticForms)) →
+    (GapQuadraticFormsTarget.shellIndex gapQuadraticForms * GapQuadraticFormsTarget.shellIndex gapQuadraticForms) * GapQuadraticFormsTarget.qError gapQuadraticForms x ≤ C-err * strongNormSquared x) →
+  (gapDecomposition : (x : GapQuadraticFormsTarget.Carrier gapQuadraticForms (GapQuadraticFormsTarget.shellIndex gapQuadraticForms)) →
+    GapQuadraticFormsTarget.qGap gapQuadraticForms x ≡ GapQuadraticFormsTarget.qBase gapQuadraticForms x ∸ GapQuadraticFormsTarget.qError gapQuadraticForms x) →
+  (x : GapQuadraticFormsTarget.Carrier gapQuadraticForms (GapQuadraticFormsTarget.shellIndex gapQuadraticForms)) →
+  (GapQuadraticFormsTarget.shellIndex gapQuadraticForms * GapQuadraticFormsTarget.shellIndex gapQuadraticForms) * GapQuadraticFormsTarget.qGap gapQuadraticForms x
+    ≥
+  (A ∸ C-err) * strongNormSquared x
+proveBaseGapMinusErrorAbsorption gapQuadraticForms strongNormSquared A C-err baseGapN2 operatorErrorN2 gapDecomposition x =
+  let
+    N = GapQuadraticFormsTarget.shellIndex gapQuadraticForms
+    N2 = N * N
+    qBase = GapQuadraticFormsTarget.qBase gapQuadraticForms x
+    qError = GapQuadraticFormsTarget.qError gapQuadraticForms x
+    qGap = GapQuadraticFormsTarget.qGap gapQuadraticForms x
+    normSq = strongNormSquared x
+
+    -- 1. (A ∸ C-err) * normSq ≡ A * normSq ∸ C-err * normSq
+    eq1 : (A ∸ C-err) * normSq ≡ A * normSq ∸ C-err * normSq
+    eq1 = *-distribʳ-∸ normSq A C-err
+
+    -- 2. A * normSq ∸ C-err * normSq ≤ N2 * qBase ∸ C-err * normSq
+    step2 : A * normSq ∸ C-err * normSq ≤ N2 * qBase ∸ C-err * normSq
+    step2 = ∸-monoˡ-≤ (C-err * normSq) (baseGapN2 x)
+
+    -- 3. N2 * qBase ∸ C-err * normSq ≤ N2 * qBase ∸ N2 * qError
+    step3 : N2 * qBase ∸ C-err * normSq ≤ N2 * qBase ∸ N2 * qError
+    step3 = ∸-monoʳ-≤ (N2 * qBase) (operatorErrorN2 x)
+
+    -- 4. N2 * qBase ∸ N2 * qError ≡ N2 * (qBase ∸ qError)
+    eq4 : N2 * qBase ∸ N2 * qError ≡ N2 * (qBase ∸ qError)
+    eq4 = sym (*-distribˡ-∸ N2 qBase qError)
+
+    -- 5. N2 * (qBase ∸ qError) ≡ N2 * qGap
+    eq5 : N2 * (qBase ∸ qError) ≡ N2 * qGap
+    eq5 = cong (λ z → N2 * z) (sym (gapDecomposition x))
+  in
+  ≤-trans (≤-reflexive eq1)
+    (≤-trans step2
+      (≤-trans step3
+        (≤-trans (≤-reflexive eq4)
+          (≤-reflexive eq5))))
