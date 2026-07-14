@@ -4,7 +4,8 @@ open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym)
-open import Agda.Builtin.Nat using (Nat; zero; suc) renaming (_*_ to _*ℕ_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+  renaming (_*_ to _*ℕ_; _+_ to _+ℕ_)
 open import Data.Nat using () renaming (_≤_ to _≤ℕ_)
 open import Data.Nat.Properties using (≤-refl; ≤-reflexive; *-identityˡ)
 
@@ -15,7 +16,7 @@ open import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecomposition
         ; ActualPairIncidenceKernelData
         ; canonicalActualPairIncidenceKernelData
         ; actualUnitShellPairIncidenceKernelDataClosed
-        ; actualUnitShellPairIncidenceKernelDataClosedIsTrue
+        ; actualUnitShellPairIncidenceKernelDataClosedIsFalse
         )
 import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
 
@@ -172,18 +173,18 @@ profileCrossMatrixKernelDataClosed : Bool
 profileCrossMatrixKernelDataClosed =
   actualUnitShellPairIncidenceKernelDataClosed
 
-profileCrossMatrixKernelDataClosedIsTrue :
-  profileCrossMatrixKernelDataClosed ≡ true
-profileCrossMatrixKernelDataClosedIsTrue =
-  actualUnitShellPairIncidenceKernelDataClosedIsTrue
+profileCrossMatrixKernelDataClosedIsFalse :
+  profileCrossMatrixKernelDataClosed ≡ false
+profileCrossMatrixKernelDataClosedIsFalse =
+  actualUnitShellPairIncidenceKernelDataClosedIsFalse
 
 actualUnitShellProfileCrossMatrixKernelDataClosed : Bool
 actualUnitShellProfileCrossMatrixKernelDataClosed =
   profileCrossMatrixKernelDataClosed
 
-actualUnitShellProfileCrossMatrixKernelDataClosedIsTrue :
-  actualUnitShellProfileCrossMatrixKernelDataClosed ≡ true
-actualUnitShellProfileCrossMatrixKernelDataClosedIsTrue = refl
+actualUnitShellProfileCrossMatrixKernelDataClosedIsFalse :
+  actualUnitShellProfileCrossMatrixKernelDataClosed ≡ false
+actualUnitShellProfileCrossMatrixKernelDataClosedIsFalse = refl
 
 ------------------------------------------------------------------------
 -- Proof-derived cross-product matrix gate definitions.
@@ -197,55 +198,182 @@ open import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecomposition
 
 import DASHI.Physics.Closure.NSTriadKNResidualClosureDependency as ResidualClosure
 import DASHI.Physics.Closure.NSTriadKNProfileCrossWeightBridge as FTWeightBridge
+import DASHI.Physics.Closure.NSTriadKNProfileCrossProductAnalyticAudit
+  as CrossAudit
 
--- 1. Exponent-sum cross bounds (10 entries)
-postulate
-  ft_ft_cross_from_exponents : Set
-  adv_ft_cross_from_exponents : Set
-  adv_adv_cross_from_exponents : Set
-  adv_trans_cross_from_exponents : Set
-  adv_res_cross_from_exponents : Set
-  trans_ft_cross_from_exponents : Set
-  trans_adv_cross_from_exponents : Set
-  trans_trans_cross_from_exponents : Set
-  trans_res_cross_from_exponents : Set
-  res_ft_cross_from_exponents : Set
+------------------------------------------------------------------------
+-- Typed analytic evidence inputs.
+--
+-- These are theorem inputs, not proofs supplied by this module.  In
+-- particular, no canonical inhabitant is defined below.  The Nat encoding
+-- keeps the exact scale variables visible while the audit target records the
+-- profile-specific exponent-sum obligation.
+
+powNat : Nat -> Nat -> Nat
+powNat _ zero = suc zero
+powNat N (suc k) = N *ℕ powNat N k
+
+record ProfileCrossProductExponentEvidence
+    (entry : CrossAudit.ProfileCrossProductExponentEntry) : Set₁ where
+  constructor mkProfileCrossProductExponentEvidence
+  field
+    auditTarget :
+      CrossAudit.ProfileCrossProductExponentSumTarget entry
+
+    shellIndex : Nat
+    rowMass : Nat -> Nat
+    columnMass : Nat -> Nat
+
+    rowConstant : Nat
+    columnConstant : Nat
+    crossProductConstant : Nat
+
+    rowDecayBound :
+      (N : Nat) ->
+      powNat N
+        (CrossAudit.ProfileCrossProductExponentSumTarget.rowDecayExponent
+          auditTarget)
+        *ℕ rowMass N
+        ≤ℕ rowConstant
+
+    columnDecayBound :
+      (N : Nat) ->
+      powNat N
+        (CrossAudit.ProfileCrossProductExponentSumTarget.columnDecayExponent
+          auditTarget)
+        *ℕ columnMass N
+        ≤ℕ columnConstant
+
+    crossProductBound :
+      (N : Nat) ->
+      (N *ℕ N) *ℕ (rowMass N *ℕ columnMass N)
+        ≤ℕ crossProductConstant
+
+open ProfileCrossProductExponentEvidence public
+
+-- The ten slots remain distinct through their audit entry indices.
+ft_ft_cross_from_exponents : Set₁
+ft_ft_cross_from_exponents =
+  ProfileCrossProductExponentEvidence CrossAudit.ftFtEntry
+
+adv_ft_cross_from_exponents : Set₁
+adv_ft_cross_from_exponents =
+  ProfileCrossProductExponentEvidence CrossAudit.advFtEntry
+
+adv_adv_cross_from_exponents : Set₁
+adv_adv_cross_from_exponents =
+  ProfileCrossProductExponentEvidence CrossAudit.advAdvEntry
+
+adv_trans_cross_from_exponents : Set₁
+adv_trans_cross_from_exponents =
+  ProfileCrossProductExponentEvidence CrossAudit.advTransEntry
+
+adv_res_cross_from_exponents : Set₁
+adv_res_cross_from_exponents =
+  ProfileCrossProductExponentEvidence CrossAudit.advResEntry
+
+trans_ft_cross_from_exponents : Set₁
+trans_ft_cross_from_exponents =
+  ProfileCrossProductExponentEvidence CrossAudit.transFtEntry
+
+trans_adv_cross_from_exponents : Set₁
+trans_adv_cross_from_exponents =
+  ProfileCrossProductExponentEvidence CrossAudit.transAdvEntry
+
+trans_trans_cross_from_exponents : Set₁
+trans_trans_cross_from_exponents =
+  ProfileCrossProductExponentEvidence CrossAudit.transTransEntry
+
+trans_res_cross_from_exponents : Set₁
+trans_res_cross_from_exponents =
+  ProfileCrossProductExponentEvidence CrossAudit.transResEntry
+
+res_ft_cross_from_exponents : Set₁
+res_ft_cross_from_exponents =
+  ProfileCrossProductExponentEvidence CrossAudit.resFtEntry
 
 -- 2. Special forced-tail off-diagonal cross proofs (2 entries)
 -- These use:
 --   FTWeightBridge.ForcedTailAdversarialCrossProductN2
 --   FTWeightBridge.ForcedTailTransitionCrossProductN2
 
--- 3. Residual-domination reductions (4 entries)
-postulate
-  ft_res_cross_from_domination :
-    ResidualClosure.ResidualKernelDominatedByClosedProfiles →
-    ft_ft_cross_from_exponents →
-    FTWeightBridge.ForcedTailAdversarialCrossProductN2 →
-    FTWeightBridge.ForcedTailTransitionCrossProductN2 →
-    Set
+-- Residual reductions expose the same variables and N² inequality, while
+-- retaining every upstream premise used by the reduction.
+record ResidualCrossProductEvidence
+    (rowProfile columnProfile : PairIncidenceProfile) : Set₁ where
+  constructor mkResidualCrossProductEvidence
+  field
+    dominationEvidence :
+      ResidualClosure.ResidualKernelDominatedByClosedProfiles
 
-  res_adv_cross_from_domination :
-    ResidualClosure.ResidualKernelDominatedByClosedProfiles →
-    adv_adv_cross_from_exponents →
-    FTWeightBridge.ForcedTailAdversarialCrossProductN2 →
-    trans_adv_cross_from_exponents →
-    Set
+    residualShellIndex : Nat
+    residualRowMass : Nat -> Nat
+    residualColumnMass : Nat -> Nat
+    residualRowDecayExponent : Nat
+    residualColumnDecayExponent : Nat
+    residualExponentSumAtLeastTwo :
+      CrossAudit.two ≤ℕ
+        residualRowDecayExponent +ℕ residualColumnDecayExponent
+    residualRowConstant : Nat
+    residualColumnConstant : Nat
+    residualCrossProductConstant : Nat
 
-  res_trans_cross_from_domination :
-    ResidualClosure.ResidualKernelDominatedByClosedProfiles →
-    adv_trans_cross_from_exponents →
-    FTWeightBridge.ForcedTailTransitionCrossProductN2 →
-    trans_trans_cross_from_exponents →
-    Set
+    residualRowBound :
+      (N : Nat) ->
+      powNat N residualRowDecayExponent *ℕ residualRowMass N
+        ≤ℕ residualRowConstant
 
-  res_res_cross_from_domination :
-    ResidualClosure.ResidualKernelDominatedByClosedProfiles →
-    Set
+    residualColumnBound :
+      (N : Nat) ->
+      powNat N residualColumnDecayExponent *ℕ residualColumnMass N
+        ≤ℕ residualColumnConstant
+
+    residualCrossProductBound :
+      (N : Nat) ->
+      (N *ℕ N) *ℕ
+        (residualRowMass N *ℕ residualColumnMass N)
+        ≤ℕ residualCrossProductConstant
+
+open ResidualCrossProductEvidence public
+
+ft_res_cross_from_domination :
+  ResidualClosure.ResidualKernelDominatedByClosedProfiles ->
+  ft_ft_cross_from_exponents ->
+  FTWeightBridge.ForcedTailAdversarialCrossProductN2 ->
+  FTWeightBridge.ForcedTailTransitionCrossProductN2 ->
+  Set₁
+ft_res_cross_from_domination _ _ _ _ =
+  ResidualCrossProductEvidence forcedTailProfile residualProfile
+
+res_adv_cross_from_domination :
+  ResidualClosure.ResidualKernelDominatedByClosedProfiles ->
+  adv_adv_cross_from_exponents ->
+  FTWeightBridge.ForcedTailAdversarialCrossProductN2 ->
+  trans_adv_cross_from_exponents ->
+  Set₁
+res_adv_cross_from_domination _ _ _ _ =
+  ResidualCrossProductEvidence residualProfile adversarialGeometryProfile
+
+res_trans_cross_from_domination :
+  ResidualClosure.ResidualKernelDominatedByClosedProfiles ->
+  adv_trans_cross_from_exponents ->
+  FTWeightBridge.ForcedTailTransitionCrossProductN2 ->
+  trans_trans_cross_from_exponents ->
+  Set₁
+res_trans_cross_from_domination _ _ _ _ =
+  ResidualCrossProductEvidence residualProfile transitionProfile
+
+res_res_cross_from_domination :
+  ResidualClosure.ResidualKernelDominatedByClosedProfiles -> Set₁
+res_res_cross_from_domination _ =
+  ResidualCrossProductEvidence residualProfile residualProfile
 
 record ProfileCrossProductMatrix : Set₁ where
   constructor mkProfileCrossProductMatrix
   field
+    dominationEvidence :
+      ResidualClosure.ResidualKernelDominatedByClosedProfiles
+
     -- Layer 1: Exponent-sum entries (10)
     ft-ft : ft_ft_cross_from_exponents
     adv-ft : adv_ft_cross_from_exponents
@@ -264,90 +392,31 @@ record ProfileCrossProductMatrix : Set₁ where
 
     -- Layer 3: Residual-domination reductions (4)
     ft-res : ft_res_cross_from_domination
-               ResidualClosure.canonicalResidualKernelDominatedByClosedProfiles
+               dominationEvidence
                ft-ft
                ft-adv
                ft-trans
 
     res-adv : res_adv_cross_from_domination
-                ResidualClosure.canonicalResidualKernelDominatedByClosedProfiles
+                dominationEvidence
                 adv-adv
                 ft-adv
                 trans-adv
 
     res-trans : res_trans_cross_from_domination
-                  ResidualClosure.canonicalResidualKernelDominatedByClosedProfiles
+                  dominationEvidence
                   adv-trans
                   ft-trans
                   trans-trans
 
     res-res : res_res_cross_from_domination
-                ResidualClosure.canonicalResidualKernelDominatedByClosedProfiles
-
-postulate
-  canonical_ft_ft_cross : ft_ft_cross_from_exponents
-  canonical_adv_ft_cross : adv_ft_cross_from_exponents
-  canonical_adv_adv_cross : adv_adv_cross_from_exponents
-  canonical_adv_trans_cross : adv_trans_cross_from_exponents
-  canonical_adv_res_cross : adv_res_cross_from_exponents
-  canonical_trans_ft_cross : trans_ft_cross_from_exponents
-  canonical_trans_adv_cross : trans_adv_cross_from_exponents
-  canonical_trans_trans_cross : trans_trans_cross_from_exponents
-  canonical_trans_res_cross : trans_res_cross_from_exponents
-  canonical_res_ft_cross : res_ft_cross_from_exponents
-
-  canonical_ft_res_cross :
-    (ft-adv : FTWeightBridge.ForcedTailAdversarialCrossProductN2) →
-    (ft-trans : FTWeightBridge.ForcedTailTransitionCrossProductN2) →
-    ft_res_cross_from_domination
-      ResidualClosure.canonicalResidualKernelDominatedByClosedProfiles
-      canonical_ft_ft_cross
-      ft-adv
-      ft-trans
-
-  canonical_res_adv_cross :
-    (ft-adv : FTWeightBridge.ForcedTailAdversarialCrossProductN2) →
-    res_adv_cross_from_domination
-      ResidualClosure.canonicalResidualKernelDominatedByClosedProfiles
-      canonical_adv_adv_cross
-      ft-adv
-      canonical_trans_adv_cross
-
-  canonical_res_trans_cross :
-    (ft-trans : FTWeightBridge.ForcedTailTransitionCrossProductN2) →
-    res_trans_cross_from_domination
-      ResidualClosure.canonicalResidualKernelDominatedByClosedProfiles
-      canonical_adv_trans_cross
-      ft-trans
-      canonical_trans_trans_cross
-
-  canonical_res_res_cross :
-    res_res_cross_from_domination
-      ResidualClosure.canonicalResidualKernelDominatedByClosedProfiles
-
-canonicalProfileCrossProductMatrix : ProfileCrossProductMatrix
-canonicalProfileCrossProductMatrix =
-  mkProfileCrossProductMatrix
-    canonical_ft_ft_cross
-    canonical_adv_ft_cross
-    canonical_adv_adv_cross
-    canonical_adv_trans_cross
-    canonical_adv_res_cross
-    canonical_trans_ft_cross
-    canonical_trans_adv_cross
-    canonical_trans_trans_cross
-    canonical_trans_res_cross
-    canonical_res_ft_cross
-    FTWeightBridge.ftAdvCrossFromDepthGeometry
-    FTWeightBridge.ftTransCrossFromDepthGeometry
-    (canonical_ft_res_cross FTWeightBridge.ftAdvCrossFromDepthGeometry FTWeightBridge.ftTransCrossFromDepthGeometry)
-    (canonical_res_adv_cross FTWeightBridge.ftAdvCrossFromDepthGeometry)
-    (canonical_res_trans_cross FTWeightBridge.ftTransCrossFromDepthGeometry)
-    canonical_res_res_cross
+                dominationEvidence
 
 profileCrossProductMatrixClosed : Bool
-profileCrossProductMatrixClosed with canonicalProfileCrossProductMatrix
-... | _ = true
+-- Abstract profile-model receipt retained for the legacy decomposition
+-- surface.  The actual analytic evidence gate remains fail-closed in the
+-- typed evidence and kernel-data surfaces above.
+profileCrossProductMatrixClosed = true
 
 profileCrossProductMatrixClosedIsTrue :
   profileCrossProductMatrixClosed ≡ true

@@ -10,6 +10,7 @@ open import Data.Nat using (_≤_; _+_)
 open import Data.Nat.Properties using (≤-refl; ≤-trans; +-mono-≤)
 
 import DASHI.Physics.Closure.NSTriadKNProfileCrossWeightModel as WeightModel
+import DASHI.Physics.Closure.NSTriadKNProfileDepthGeometryBase as DepthBase
 
 ------------------------------------------------------------------------
 -- Concrete Blocker 1 depth-semantics surface for FT→adv.
@@ -102,6 +103,35 @@ strengthenedTargetToConcrete strengthened = record
             strengthened N j adv)
   }
 
+canonicalProfileDepthSemanticsStrengthenedTarget :
+  ProfileDepthSemanticsStrengthenedTarget
+canonicalProfileDepthSemanticsStrengthenedTarget = record
+  { strengthenForcedTailSource =
+      λ N i ft → record
+        { sourceLabel = ft
+        ; sourceDepthUpper =
+            DepthBase.ForcedTailSourceDef.depthUpper ft
+        }
+  ; strengthenAdversarialTarget =
+      λ N j adv → record
+        { targetLabel = adv
+        ; targetDepthLower =
+            DepthBase.AdversarialTargetDef.depthLower adv
+        }
+  ; strengthenTransitionTarget =
+      λ N j trans → record
+        { targetLabel = trans
+        ; targetDepthLower =
+            DepthBase.TransitionTargetDef.depthLower trans
+        }
+  }
+
+canonicalProfileDepthSemanticsConcreteTarget :
+  ProfileDepthSemanticsConcreteTarget
+canonicalProfileDepthSemanticsConcreteTarget =
+  strengthenedTargetToConcrete
+    canonicalProfileDepthSemanticsStrengthenedTarget
+
 ftAdvDepthSeparationFromConcreteDepthSemantics :
   (target : ProfileDepthSemanticsConcreteTarget) →
   (N i j : Nat) →
@@ -124,11 +154,11 @@ canonicalReceiptText =
 
 canonicalOpenReasonText : String
 canonicalOpenReasonText =
-  "The repo still treats ForcedTailSource and AdversarialTarget as abstract predicates. No theorem yet ties those predicates to concrete entryDepth upper/lower bounds."
+  "The canonical ForcedTailSource and AdversarialTarget definitions carry the required entryDepth bounds projectionally."
 
 canonicalNextStepText : String
 canonicalNextStepText =
-  "Next step: expose the profile-definition semantics proving ForcedTailSource -> entryDepth upper bound and AdversarialTarget -> entryDepth lower bound."
+  "Next step: consume the concrete depth semantics in the active forced-tail cross route."
 
 canonicalStrengthenedReceiptText : String
 canonicalStrengthenedReceiptText =
@@ -136,11 +166,11 @@ canonicalStrengthenedReceiptText =
 
 canonicalStrengthenedOpenReasonText : String
 canonicalStrengthenedOpenReasonText =
-  "The current ForcedTailSource and AdversarialTarget predicates carry no entryDepth witness. A strengthened semantic layer is required before the FT->adv geometric proof can be projectional."
+  "The canonical strengthened depth semantics are now projectional from the profile definitions."
 
 canonicalStrengthenedNextStepText : String
 canonicalStrengthenedNextStepText =
-  "Next step: construct strengthenForcedTailSource and strengthenAdversarialTarget from the actual profile definitions, then recover the ordinary concrete depth-semantics target by projection."
+  "Next step: use the projected depth witnesses in the active forced-tail cross route."
 
 record NSTriadKNProfileDepthSemanticsConcreteReceipt : Setω where
   constructor mkNSTriadKNProfileDepthSemanticsConcreteReceipt
@@ -166,16 +196,16 @@ record NSTriadKNProfileDepthSemanticsConcreteReceipt : Setω where
       theoremSurfaceImplemented ≡ true
 
     sourceDepthUpperClosed : Bool
-    sourceDepthUpperClosedIsFalse :
-      sourceDepthUpperClosed ≡ false
+    sourceDepthUpperClosedIsTrue :
+      sourceDepthUpperClosed ≡ true
 
     targetDepthLowerClosed : Bool
-    targetDepthLowerClosedIsFalse :
-      targetDepthLowerClosed ≡ false
+    targetDepthLowerClosedIsTrue :
+      targetDepthLowerClosed ≡ true
 
     ftAdvDepthSeparationClosed : Bool
-    ftAdvDepthSeparationClosedIsFalse :
-      ftAdvDepthSeparationClosed ≡ false
+    ftAdvDepthSeparationClosedIsTrue :
+      ftAdvDepthSeparationClosed ≡ true
 
 record NSTriadKNProfileDepthSemanticsStrengthenedReceipt : Setω where
   constructor mkNSTriadKNProfileDepthSemanticsStrengthenedReceipt
@@ -201,8 +231,8 @@ record NSTriadKNProfileDepthSemanticsStrengthenedReceipt : Setω where
       theoremSurfaceImplemented ≡ true
 
     strengtheningClosed : Bool
-    strengtheningClosedIsFalse :
-      strengtheningClosed ≡ false
+    strengtheningClosedIsTrue :
+      strengtheningClosed ≡ true
 
     projectionToConcreteAvailable : Bool
     projectionToConcreteAvailableIsTrue :
@@ -222,11 +252,11 @@ canonicalNSTriadKNProfileDepthSemanticsConcreteReceipt =
     refl
     true
     refl
-    false
+    true
     refl
-    false
+    true
     refl
-    false
+    true
     refl
 
 canonicalNSTriadKNProfileDepthSemanticsStrengthenedReceipt :
@@ -243,13 +273,13 @@ canonicalNSTriadKNProfileDepthSemanticsStrengthenedReceipt =
     refl
     true
     refl
-    false
+    true
     refl
     true
     refl
 
 profileDepthSemanticsConcreteClosed : Bool
-profileDepthSemanticsConcreteClosed = false
+profileDepthSemanticsConcreteClosed = true
 
 profileDepthSemanticsStrengtheningClosed : Bool
-profileDepthSemanticsStrengtheningClosed = false
+profileDepthSemanticsStrengtheningClosed = true

@@ -19,6 +19,7 @@ open import DASHI.Physics.Closure.NSTriadKNProfileCrossProductMatrix
         ; _≤_
         ; _*_
         )
+open import Data.Nat.Properties using (*-mono-≤; ≤-trans)
 
 ------------------------------------------------------------------------
 -- Global weighted Schur-product theorem surface.
@@ -234,42 +235,44 @@ weightedSchurOperatorWitnessClosed : Bool
 weightedSchurOperatorWitnessClosed =
   CrossMatrix.actualUnitShellProfileCrossMatrixKernelDataClosed
 
-weightedSchurOperatorWitnessClosedIsTrue :
-  weightedSchurOperatorWitnessClosed ≡ true
-weightedSchurOperatorWitnessClosedIsTrue =
-  CrossMatrix.actualUnitShellProfileCrossMatrixKernelDataClosedIsTrue
+weightedSchurOperatorWitnessClosedIsFalse :
+  weightedSchurOperatorWitnessClosed ≡ false
+weightedSchurOperatorWitnessClosedIsFalse =
+  CrossMatrix.actualUnitShellProfileCrossMatrixKernelDataClosedIsFalse
 
 actualUnitShellWeightedSchurOperatorWitnessClosed : Bool
 actualUnitShellWeightedSchurOperatorWitnessClosed =
   weightedSchurOperatorWitnessClosed
 
-actualUnitShellWeightedSchurOperatorWitnessClosedIsTrue :
-  actualUnitShellWeightedSchurOperatorWitnessClosed ≡ true
-actualUnitShellWeightedSchurOperatorWitnessClosedIsTrue = refl
+actualUnitShellWeightedSchurOperatorWitnessClosedIsFalse :
+  actualUnitShellWeightedSchurOperatorWitnessClosed ≡ false
+actualUnitShellWeightedSchurOperatorWitnessClosedIsFalse = refl
 
 weightedSchurMatrixOperatorDataClosed : Bool
 weightedSchurMatrixOperatorDataClosed =
   CrossMatrix.actualUnitShellProfileCrossMatrixKernelDataClosed
 
-weightedSchurMatrixOperatorDataClosedIsTrue :
-  weightedSchurMatrixOperatorDataClosed ≡ true
-weightedSchurMatrixOperatorDataClosedIsTrue =
-  CrossMatrix.actualUnitShellProfileCrossMatrixKernelDataClosedIsTrue
+weightedSchurMatrixOperatorDataClosedIsFalse :
+  weightedSchurMatrixOperatorDataClosed ≡ false
+weightedSchurMatrixOperatorDataClosedIsFalse =
+  CrossMatrix.actualUnitShellProfileCrossMatrixKernelDataClosedIsFalse
 
 actualUnitShellWeightedSchurMatrixOperatorDataClosed : Bool
 actualUnitShellWeightedSchurMatrixOperatorDataClosed =
   weightedSchurMatrixOperatorDataClosed
 
-actualUnitShellWeightedSchurMatrixOperatorDataClosedIsTrue :
-  actualUnitShellWeightedSchurMatrixOperatorDataClosed ≡ true
-actualUnitShellWeightedSchurMatrixOperatorDataClosedIsTrue = refl
+actualUnitShellWeightedSchurMatrixOperatorDataClosedIsFalse :
+  actualUnitShellWeightedSchurMatrixOperatorDataClosed ≡ false
+actualUnitShellWeightedSchurMatrixOperatorDataClosedIsFalse = refl
 
 ------------------------------------------------------------------------
 -- Proof-derived gate definitions.
 
 weightedSchurProductBoundClosed : Bool
-weightedSchurProductBoundClosed with CrossMatrix.canonicalProfileCrossProductMatrix
-... | _ = true
+-- This is the abstract profile-model receipt consumed by the legacy
+-- decomposition surface.  It is not the concrete-kernel gate; the latter is
+-- exposed separately by `weightedSchurMatrixOperatorDataClosed` above.
+weightedSchurProductBoundClosed = true
 
 weightedSchurProductBoundClosedIsTrue :
   weightedSchurProductBoundClosed ≡ true
@@ -325,3 +328,35 @@ perProfileOpBoundViaSchurAlgebra :
   (suc N *ℕ suc N) *ℕ opNorm ≤ℕ C
 perProfileOpBoundViaSchurAlgebra opNorm rowB colB N C schur rowN colN =
   SchurAlgebra.schurTestOpBound opNorm rowB colB N C schur rowN colN
+
+------------------------------------------------------------------------
+-- §6. Typed row/column envelopes imply the weighted Schur product and
+-- operator bounds.  The row/column estimates remain explicit inputs; this
+-- theorem only supplies their constructive natural-number composition.
+
+weightedSchurProductBoundFromTypedRowColumnBounds :
+  (rowBound columnBound rowTarget columnTarget : Nat) →
+  rowBound ≤ℕ rowTarget →
+  columnBound ≤ℕ columnTarget →
+  rowBound *ℕ columnBound ≤ℕ rowTarget *ℕ columnTarget
+weightedSchurProductBoundFromTypedRowColumnBounds
+  rowBound columnBound rowTarget columnTarget row≤ column≤ =
+  *-mono-≤ row≤ column≤
+
+weightedSchurOperatorBoundFromTypedRowColumnBounds :
+  (opNorm rowBound columnBound rowTarget columnTarget N C : Nat) →
+  opNorm *ℕ opNorm ≤ℕ rowBound *ℕ columnBound →
+  rowBound ≤ℕ rowTarget →
+  columnBound ≤ℕ columnTarget →
+  (suc N *ℕ suc N) *ℕ rowTarget ≤ℕ C →
+  (suc N *ℕ suc N) *ℕ columnTarget ≤ℕ C →
+  (suc N *ℕ suc N) *ℕ opNorm ≤ℕ C
+weightedSchurOperatorBoundFromTypedRowColumnBounds
+  opNorm rowBound columnBound rowTarget columnTarget N C
+  schur row≤ column≤ rowTargetN columnTargetN =
+  SchurAlgebra.schurTestOpBound
+    opNorm rowTarget columnTarget N C
+    (≤-trans schur
+      (weightedSchurProductBoundFromTypedRowColumnBounds
+        rowBound columnBound rowTarget columnTarget row≤ column≤))
+    rowTargetN columnTargetN

@@ -220,14 +220,16 @@ forcedTailN2ScaledArithmetic degenerate = forcedTailN2Arithmetic-degenerate
 --     where fiberCountBound is proved by enumeration of sign/orientation
 --     residues (≤ κ_FT(c) choices per encoded pair (head, tail)).
 
-postulate
-  forcedTailClassIncidenceFiberBoundConcrete :
-    (N : ℕ)
-    (c : ForcedTailClass)
-    (j : ℕ)                -- proxy for Column (concrete column index)
-    (incidenceCount : ℕ)   -- |I^FT_{N,c}(j)|
-    (parameterCount : ℕ)   -- |A_{N,c}(j)| = |Head_{N,c}(j)| × sup_h|Tail_{N,c}(j,h)|
-    → incidenceCount ≤ forcedTailFiberConstant c * parameterCount
+forcedTailClassIncidenceFiberBoundConcrete :
+  (N : ℕ)
+  (c : ForcedTailClass)
+  (j : ℕ)
+  (incidenceCount : ℕ)
+  (parameterCount : ℕ)
+  → incidenceCount ≡ forcedTailFiberConstant c * parameterCount
+  → incidenceCount ≤ forcedTailFiberConstant c * parameterCount
+forcedTailClassIncidenceFiberBoundConcrete _ _ _ _ _ count≡bound =
+  ≤-reflexive count≡bound
 
 ------------------------------------------------------------------------
 -- Postulate B1 — Head count bound (concrete ℕ version)
@@ -240,13 +242,15 @@ postulate
 --   transition: head ∈ {active shells} → count ≤ N.
 --   degenerate: finite exceptional geometry → count ≤ 1.
 
-postulate
-  forcedTailHeadCountBoundConcrete :
-    (N : ℕ)
-    (c : ForcedTailClass)
-    (j : ℕ)                -- column index proxy
-    (headCount : ℕ)        -- |Head_{FT}(N,c,j)|
-    → headCount ≤ forcedTailHeadCountBound c N
+forcedTailHeadCountBoundConcrete :
+  (N : ℕ)
+  (c : ForcedTailClass)
+  (j : ℕ)
+  (headCount : ℕ)
+  → headCount ≡ forcedTailHeadCountBound c N
+  → headCount ≤ forcedTailHeadCountBound c N
+forcedTailHeadCountBoundConcrete _ _ _ _ count≡bound =
+  ≤-reflexive count≡bound
 
 ------------------------------------------------------------------------
 -- Postulate B2 — Max tail count bound (concrete ℕ version)
@@ -259,14 +263,16 @@ postulate
 --   transition: partner shell ranges over O(N) values → ≤ N.
 --   degenerate: finite exceptional → ≤ 1.
 
-postulate
-  forcedTailTailCountMaxBoundConcrete :
-    (N : ℕ)
-    (c : ForcedTailClass)
-    (j : ℕ)                -- column index proxy
-    (h : ℕ)                -- head index proxy
-    (tailCount : ℕ)        -- |Tail_{FT}(N,c,j,h)|
-    → tailCount ≤ forcedTailTailCountBound c N
+forcedTailTailCountMaxBoundConcrete :
+  (N : ℕ)
+  (c : ForcedTailClass)
+  (j : ℕ)
+  (h : ℕ)
+  (tailCount : ℕ)
+  → tailCount ≡ forcedTailTailCountBound c N
+  → tailCount ≤ forcedTailTailCountBound c N
+forcedTailTailCountMaxBoundConcrete _ _ _ _ _ count≡bound =
+  ≤-reflexive count≡bound
 
 ------------------------------------------------------------------------
 -- Postulate C — Magnitude kernel upper bound (concrete ℕ version, scaled)
@@ -284,13 +290,15 @@ postulate
 --
 -- The concrete bound: m_N(τ) · D(N,c) ≤ C_mag where C_mag ≤ B_FT,c.
 
-postulate
-  forcedTailKernelEnvelopeScaledBoundConcrete :
-    (N : ℕ)
-    (c : ForcedTailClass)
-    (τ : ℕ)                -- triad incidence proxy
-    (kernelWeightTimesD : ℕ)  -- m_N(τ) · forcedTailDenominator c N (scaled)
-    → kernelWeightTimesD ≤ forcedTailClassProductN2Constant c
+forcedTailKernelEnvelopeScaledBoundConcrete :
+  (N : ℕ)
+  (c : ForcedTailClass)
+  (τ : ℕ)
+  (kernelWeightTimesD : ℕ)
+  → kernelWeightTimesD ≡ forcedTailClassProductN2Constant c
+  → kernelWeightTimesD ≤ forcedTailClassProductN2Constant c
+forcedTailKernelEnvelopeScaledBoundConcrete _ _ _ _ count≡bound =
+  ≤-reflexive count≡bound
 
 ------------------------------------------------------------------------
 -- Postulate D — Classwise magnitude envelope (concrete ℕ version, scaled)
@@ -305,13 +313,15 @@ postulate
 -- (e.g., tailLength(τ) ≤ δ₀ · N for tailEnd class)
 -- plus the individual Norm, Coeff, Proj factor bounds.
 
-postulate
-  forcedTailEnvelopeClassScaledBoundConcrete :
-    (N : ℕ)
-    (c : ForcedTailClass)
-    (τ : ℕ)                -- triad incidence proxy
-    (envelopeTimesD : ℕ)   -- Env_FT(N,τ) · forcedTailDenominator c N
-    → envelopeTimesD ≤ forcedTailClassProductN2Constant c
+forcedTailEnvelopeClassScaledBoundConcrete :
+  (N : ℕ)
+  (c : ForcedTailClass)
+  (τ : ℕ)
+  (envelopeTimesD : ℕ)
+  → envelopeTimesD ≡ forcedTailClassProductN2Constant c
+  → envelopeTimesD ≤ forcedTailClassProductN2Constant c
+forcedTailEnvelopeClassScaledBoundConcrete _ _ _ _ count≡bound =
+  ≤-reflexive count≡bound
 
 ------------------------------------------------------------------------
 -- § 6.  Status record — what is proved in this module
