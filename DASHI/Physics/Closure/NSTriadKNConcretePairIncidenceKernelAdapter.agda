@@ -300,7 +300,7 @@ canonicalConcreteBipartiteKernelAdapter residueNormModel =
     ((f : Relation.ConcreteNonResidualFiniteIndex (suc zero)) ->
        (t : Relation.ConcreteNonResidualTailIndex (suc zero)) ->
        concretePairProfile f t ≡ concretePairProfile f t)
-    (Relation.actualPairIncidenceRelationDataClosed ≡ true)
+    (Relation.concreteNonResidualPairIncidenceRelationDataClosed ≡ true)
 
 canonicalConcreteKernelCountAgreement :
   (residueNormModel : ResidueNorm.ResidueNormModel) ->

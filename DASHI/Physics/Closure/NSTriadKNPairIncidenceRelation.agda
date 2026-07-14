@@ -594,14 +594,13 @@ UnitShellActualPairIncidenceRelationDataTarget residueNormModel =
   ActualPairIncidenceRelationData residueNormModel (suc zero)
 
 ------------------------------------------------------------------------
--- Gap closed: the actual pair-incidence relation is now constructed from
--- (1) the retained-sector counting soundness object and (2) the residual
--- contribution domination object, exactly the two ingredients the honest
--- gap note above required.  Nothing here is postulated: the union index/
--- tail types, the source/target maps, the retained-sector predicate and the
--- repeated-pair incidence count are all the already-verified concrete
--- non-residual objects, and the residual lane is carried as a domination
--- witness rather than as a fourth primitive family.
+-- Diagnostic count relation.
+--
+-- This construction closes only the encoded non-residual counting surface:
+-- its fibers are the tagged diagonal proxy families and its entries are Nat
+-- counts.  It does *not* identify those counts with the weighted physical
+-- retained-triad kernel.  That identification is owned by
+-- ActualPairIncidenceKernelFormulaTarget and remains fail-closed there.
 
 canonicalResidualIncidenceRelationGap :
   (residueNormModel : ResidueNorm.ResidueNormModel) →
@@ -625,17 +624,24 @@ canonicalActualPairIncidenceRelationData residueNormModel =
     concreteNonResidualPairIncidenceCount
     (ResidualClosure.residualKernelDominatedByClosedProfiles ≡ true)
 
-actualPairIncidenceRelationDataClosed : Bool
-actualPairIncidenceRelationDataClosed = true
+------------------------------------------------------------------------
+-- Physical status.
+--
+-- A value of true here would require the exact retained-triad fiber/kernel
+-- identity, including the physical triad weights.  The concrete constructor
+-- above intentionally supplies neither, so it must not advance this gate.
 
-actualPairIncidenceRelationDataClosedIsTrue :
-  actualPairIncidenceRelationDataClosed ≡ true
-actualPairIncidenceRelationDataClosedIsTrue = refl
+actualPairIncidenceRelationDataClosed : Bool
+actualPairIncidenceRelationDataClosed = false
+
+actualPairIncidenceRelationDataClosedIsFalse :
+  actualPairIncidenceRelationDataClosed ≡ false
+actualPairIncidenceRelationDataClosedIsFalse = refl
 
 actualUnitShellPairIncidenceRelationDataClosed : Bool
 actualUnitShellPairIncidenceRelationDataClosed =
   actualPairIncidenceRelationDataClosed
 
-actualUnitShellPairIncidenceRelationDataClosedIsTrue :
-  actualUnitShellPairIncidenceRelationDataClosed ≡ true
-actualUnitShellPairIncidenceRelationDataClosedIsTrue = refl
+actualUnitShellPairIncidenceRelationDataClosedIsFalse :
+  actualUnitShellPairIncidenceRelationDataClosed ≡ false
+actualUnitShellPairIncidenceRelationDataClosedIsFalse = refl

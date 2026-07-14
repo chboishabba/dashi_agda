@@ -2110,6 +2110,17 @@ noDupSubsetLength≤ {xs = x ∷ xs} {ys = ys}
       (removeMember-length-suc x∈ys)
       (s≤s ih)
 
+sameVertexSetNoDuplicatesLength :
+  {A : Set} {xs ys : List A} →
+  NoDuplicates xs →
+  NoDuplicates ys →
+  SameVertexSet xs ys →
+  length xs ≡ length ys
+sameVertexSetNoDuplicatesLength noDup-xs noDup-ys (xs⊆ys , ys⊆xs) =
+  ≤-antisym
+    (noDupSubsetLength≤ noDup-xs xs⊆ys)
+    (noDupSubsetLength≤ noDup-ys ys⊆xs)
+
 data Sorted {A : Set} (_≤_ : A → A → Set) : List A → Set where
   sorted-nil    : Sorted _≤_ []
   sorted-single : ∀ {x} → Sorted _≤_ (x ∷ [])
