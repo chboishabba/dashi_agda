@@ -4,6 +4,128 @@ This changelog is append-only. Older mentions of `false` are historical wave
 records unless the entry explicitly states it is describing the current live
 monitor surface.
 
+## 2026-07-13 — P06 duplicate-free valid-walk enumeration
+
+- Added and focused-checked `P06GeneratedWalkUniqueness.agda`.  Under the
+  canonical neighbour adapter it proves extension-block `NoDuplicates`,
+  recursive block disjointness, and
+  `generatedWalkVertexListsNoDuplicates` without postulates or proof-heavy
+  `WalkObject` equality.
+- Added `GeneratedWalkVertexListSemantics`, packaging generated valid-walk
+  lists, extensional completeness, duplicate-freedom, and the single
+  `countWalks ≡ length` bridge.
+- Added focused-checked additive `P06ConcreteEnumerationEndpoint.agda` and
+  `P06SkeletonEnumerationSurface.agda`.  The former makes DFS membership an
+  explicit field of a membership-indexed map; neither module touches the
+  legacy total-index API.
+- Added focused-checked `P06ConcreteSkeletonWitness.agda`, which proves all
+  individual-candidate chooseN facts and packages the remaining skeleton list
+  obligations (`complete`, vertex-list uniqueness, and count agreement)
+  without pretending they are derivable from an arbitrary list.
+- Added focused-checked `P06DFSValidWalkSurface.agda`.  It packages the
+  minimal per-skeleton `WalkObject` plus equality to `dfsWalkRange`, derives
+  generated-list membership and soundness, and adapts map witnesses to the
+  membership-indexed endpoint.  It deliberately does not infer path validity
+  from `DFSCover` coverage alone.
+- `Everything.agda` was not run.  The remaining P06 mathematical blocker is
+  now the genuine DFS-valid-walk membership witness; the legacy total-index
+  record remains compatibility-only.
+
+## 2026-07-13 — Corrected P06 walk status
+
+- Corrected the P06 record: recursive walk completeness has landed through
+  `walkObjectsCompleteByVertices`, and successor-membership inversion has
+  landed through `walkObjectsSucMemberByVertices` and
+  `walkObjectExtendMemberByVertices` in
+  `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
+- `CountWalksSemantics` remains blocked by the total `walkIndex` /
+  `walkIndexOf` API in `CanonicalWalkObjectList`, whose current contract still
+  requires indexing arbitrary `List (Graph.Vertex G)` values. The recursive
+  package supplies extensional completeness and uniqueness, not that total
+  index/inverse pair.
+- Exact next targets in
+  `DASHI/Physics/YangMills/GraphCombinatorics.agda` are: settle the total-index
+  boundary; add `walkOfFinFromGeneratedLookup`; add
+  `walkIndexFromGeneratedLookup` and `walkIndexOfFromGeneratedLookup`; then
+  add `canonicalWalkObjectListFromRecursiveEnumeration` to package the
+  `CanonicalWalkObjectList` / `CountWalksSemantics` bridge. The downstream
+  consumer is `DASHI/Physics/YangMills/P06EncodingWitness.agda`, at
+  `actualSkeletonEncodingDataFromSemantics`.
+- Added `CanonicalBoundedNeighbourEnumeration` plus the concrete
+  `generatedWalkVertexLists` and `generatedWalkVertexListComplete` surfaces.
+  These isolate canonical neighbour uniqueness and valid-walk vertex-list
+  coverage without claiming that arbitrary vertex lists are valid walks.
+- Added `MembershipIndexedCanonicalWalkObjectList`, its list-to-`Fin`
+  constructor, and `generatedWalksToMembershipIndexedCanonicalWalkObjectList`.
+  The corrected membership-indexed bridge is constructive from the explicit
+  count equality; the legacy total-index record remains compatibility-only.
+- Added and focused-checked `snocList-injective`, its prefix/last projections,
+  and `append-singleton-injective`, the exact list cancellation lemmas needed
+  by the successor generated-walk uniqueness proof.
+- Added focused-checked `P06WalkListAlgebra.agda` and
+  `P06CanonicalNeighbourEnumeration.agda`; the latter canonically refines
+  raw bounded neighbours with transported coverage, `NoDuplicates`, sortedness,
+  and a proven length bound. Added the corrected additive
+  `CountWalksMembershipSemantics` bridge and carried it through the P06 walk
+  adapter without promoting the legacy total-index route.
+- `DASHI/Everything.agda` was explicitly not run for this tranche. No Agda
+  files or promotion gates were changed by this documentation correction.
+
+## 2026-07-10 — P06 recursive walk semantic surface
+
+- Added `SameWalkVertices` and `GeneratedExplicitWalkEnumeration` so the
+  recursive walk-list equality is packaged as typed data, with a direct bridge
+  to `CountWalksFromNeighbourCodes`; no `Everything.agda` check or Clay gate
+  changed.
+- Added `RecursiveWalkEnumeration` as the single package target for recursive
+  completeness, vertex-sequence uniqueness, generated-list identity, and count
+  agreement, plus its count bridge.
+- Added `ConcreteWalkCountAgreement` and a witness-based constructor, keeping
+  the abstract count equality explicit while normalizing the structural walk
+  obligations into `RecursiveWalkEnumeration`.
+- Added typed `WalkObject` values and the recursive
+  `walkObjectsFromNeighbourCodes` construction in
+  `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
+- Retained neighbour-membership proofs during extension, so generated paths
+  are root-starting and length-indexed without adding new postulates.
+- Localized the remaining walk-count obligation in
+  `CountWalksFromNeighbourCodes.countAgrees`; no Clay authority or promotion
+  gate changed.
+- Removed the legacy skeleton-index adapter from the active canonical DFS to
+  `ActualSkeletonEncodingData` route; its postulates remain compatibility-only.
+- Added a dependent, membership-preserving candidate filter:
+  `canonicalSkeletonCandidatesFromBall` constructs typed candidates from
+  `chooseN` when `Connected` is decidable; the witness-list branch remains
+  available otherwise.
+- Added `ConcreteCountSkeletonsSemantics` and a checked bridge to the existing
+  `CountSkeletonsSemantics`, fixing the concrete candidate list and exposing
+  its completeness, uniqueness, and cardinality obligations explicitly.
+- Added stable named projections for the three remaining skeleton obligations:
+  candidate completeness, vertex-list uniqueness, and concrete count
+  agreement.
+- Added `p06ConcreteSemanticCountWitness`, making the normalized concrete
+  skeleton semantics the direct P06 entrypoint while retaining compatibility
+  with the generic semantic record.
+- Added `walkEndpoint-cong-by-vertices` and the constructive
+  `walkObjectsCompleteByVertices` induction.  Recursive walk completeness now
+  splits positive walks with `splitWalkLast`, transports the final edge to the
+  generated prefix representative, and closes membership with
+  `walkObjectExtendContains` plus `concatMap-complete`; validation remained
+  focused and did not run `Everything.agda`.
+- Normalized the active `RecursiveWalkEnumeration` and
+  `ExplicitWalkEnumeration` surfaces to `completeByVertices`, and added
+  `recursiveWalkEnumerationFromConcreteAgreement`.  The recursive package is
+  now constructible from extensional completeness plus the sole explicit
+  `countWalks` length agreement.
+- Added `mapListWithMembership-elem` and
+  `walkObjectExtendMemberByVertices`, providing the successor-generator
+  membership inversion and canonical appended-vertex equation required for
+  the remaining walk uniqueness/indexing work.
+- Added `walkObjectsSucMemberByVertices` as the exact successor-membership
+  inversion surface and `generatedWalksUniqueByVertices` as the recursive
+  extensional uniqueness theorem; focused validation remained limited to the
+  affected modules and did not run `Everything.agda`.
+
 ## Current Tranche Closure Snapshot
 
 - NS Gate 2-A boolean-map and quarter-margin doc sync for `2026-07-02`:
@@ -12733,3 +12855,28 @@ monitor surface.
   new telemetry lanes into `scripts/local_clay_harness_manifest.py`.
 - Kept all theorem/Clay promotion gates closed; the determinant-side `H_area`
   route and the quantitative `delta1 >= 1` gate remain open.
+2026-07-10
+
+- Added `mapListWithMembership-complete` and `walkObjectExtendContains` to
+  expose the concrete neighbour-extension step needed by the recursive P06
+  walk induction.  Focused GraphCombinatorics checking passes; no
+  `Everything.agda` check was run.
+- Added `splitConsecutiveLastVertices`, the prefix/suffix vertex equation
+  required by the forthcoming `splitWalkLast` construction.
+- Added `splitPathLast` and `splitWalkLast`; positive-length walk objects now
+  decompose into a length-predecessor prefix, final edge, and appended vertex
+  sequence.  This is the structural input for the recursive walk induction.
+- Added the explicit `ExplicitSkeletonCandidateEnumeration` witness-list
+  surface for P06 skeleton semantics and a direct P06 semantic-count
+  entrypoint.  The dependent Dec-filter remains available only for
+  compatibility.
+- Added the matching `ExplicitWalkEnumeration` surface and constructors from
+  supplied finite skeleton/walk witnesses.
+- Walk soundness is now derived automatically from the recursive
+  `WalkObject` invariant; no unsafe coercion between arbitrary and generated
+  lists is introduced.
+- Generalized the explicit walk enumeration to arbitrary bounded degree `Δ`.
+- Added the generated-list membership soundness theorem for recursive walk
+  objects; only completeness, uniqueness, and count agreement remain there.
+- Added a type-correct explicit-to-generated walk count bridge requiring the
+  corresponding list equality witness.

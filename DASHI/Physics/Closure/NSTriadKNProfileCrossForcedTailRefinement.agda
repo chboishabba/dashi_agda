@@ -2,8 +2,8 @@ module DASHI.Physics.Closure.NSTriadKNProfileCrossForcedTailRefinement where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc; _*_)
-open import Data.Nat using (_≤_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Data.Nat using (_≤_; _∸_)
 
 import DASHI.Physics.Closure.NSTriadKNAdversarialColumnClosureDependency as AdversarialColumn
 import DASHI.Physics.Closure.NSTriadKNTransitionClosureDependency as TransitionClosure
@@ -38,6 +38,14 @@ AdversarialTarget = DepthBase.AdversarialTarget
 
 TransitionTarget : Nat → Nat → Set
 TransitionTarget = DepthBase.TransitionTarget
+
+pow2 : Nat → Nat
+pow2 zero = suc zero
+pow2 (suc n) = suc (suc zero) * pow2 n
+
+weightOf : Nat → Nat
+weightOf k =
+  pow2 (DepthBase.maxDepth ∸ DepthBase.entryDepth k)
 
 record FTToAdversarialIncidence (N i j : Nat) : Set₁ where
   field
@@ -114,9 +122,6 @@ FTToTransitionIncidenceCarriesClassifier =
 -- fine = light) and the shell separation between FT rows and
 -- adv/trans columns is at least one scale.
 -----------------------------------------------------------------------
-
-postulate
-  weightOf : Nat → Nat
 
 -----------------------------------------------------------------------
 -- Forced-tail restricted row refinement.

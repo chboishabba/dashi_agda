@@ -3,11 +3,12 @@ module DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileBounds where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_)
 open import Agda.Builtin.String using (String)
 open import Data.Nat using (_≤_; z≤n; s≤s; _<_; _∸_; _≥_)
+open import Data.Product using (_×_; _,_)
 open import Data.Empty using (⊥)
-open import Data.Nat.Properties using (≤-refl)
+open import Data.Nat.Properties using (≤-refl; <⇒≤; *-identityˡ)
 
 import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecompositionReceipt as Profiles
 import DASHI.Physics.Closure.NSTriadKNForcedTailClosureDependency as ForcedTailClosure
@@ -16,14 +17,23 @@ import DASHI.Physics.Closure.NSTriadKNAdversarialClosureDependency as Adversaria
 import DASHI.Physics.Closure.NSTriadKNTransitionClosureDependency as TransitionClosure
 import DASHI.Physics.Closure.NSTriadKNResidualClosureDependency as ResidualClosure
 import DASHI.Physics.Closure.NSTriadKNProfileCrossProductMatrix as CrossMatrix
+import DASHI.Physics.Closure.NSTriadKNProfileCrossProductAnalyticAudit as CrossAudit
 import DASHI.Physics.Closure.NSTriadKNWeightedSchurProductBound as WeightedSchur
 import DASHI.Physics.Closure.NSTriadKNPairIncidenceCNTheorem as CNTheorem
 import DASHI.Physics.Closure.NSTriadKNQGapTransfer as QGap
+import DASHI.Physics.Closure.NSTriadKNGramBaseGapBridge as GramBase
+import DASHI.Physics.Closure.NSTriadKNGramRayleighBaseForm as GramRayleigh
+import DASHI.Physics.Closure.NSTriadKNGramRayleighBaseFormBridge as GramRayleighBridge
+import DASHI.Physics.Closure.NSTriadKNExactGramBaseFormBridge as ExactGramBridge
+import DASHI.Physics.Closure.NSTriadKNExactQNBaseForm as ExactQBase
+import DASHI.Physics.Closure.NSTriadKNRayleighCoercivityStage3MarginBridge as MarginBridge
 import DASHI.Physics.Closure.NSTriadKNSchurResidueScale as ResidueScale
 import DASHI.Physics.Closure.NSTriadKNBKMResidenceBridge as BKMBridge
 import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
+import DASHI.Physics.Closure.NSTriadKNShellScaleHeadroom as ScaleHeadroom
 import DASHI.Physics.Closure.NSTriadKNWeakOperatorErrorModel as WeakError
 import DASHI.Physics.Closure.NSTriadKNWeakQuadraticFormControl as WeakQuadratic
+import DASHI.Physics.Closure.NSTriadKNScaledOperatorErrorAudit as ScaledErrorAudit
 
 
 
@@ -203,12 +213,12 @@ record NSTriadKNPairIncidenceProfileBounds : Setω where
       pairIncidenceCNTheoremClosed ≡ true
 
     qGapTransferClosed : Bool
-    qGapTransferClosedIsTrue :
-      qGapTransferClosed ≡ true
+    qGapTransferClosedIsFalse :
+      qGapTransferClosed ≡ false
 
     schurResidueScaleClosed : Bool
-    schurResidueScaleClosedIsTrue :
-      schurResidueScaleClosed ≡ true
+    schurResidueScaleClosedIsFalse :
+      schurResidueScaleClosed ≡ false
 
     integratedResidueN2BoundClosed : Bool
     integratedResidueN2BoundClosedIsFalse :
@@ -247,81 +257,58 @@ open NSTriadKNPairIncidenceProfileBounds public
 compatibilityShellIndex : Nat
 compatibilityShellIndex = suc zero
 
-zeroResidueNormModel : ResidueNorm.ResidueNormModel
-zeroResidueNormModel =
-  ResidueNorm.mkResidueNormModel
-    ResidueNorm.ResidueEnergyCarrier
-    (λ _ _ → zero)
-    (λ N _ → N * zero)
-    (λ N _ → ≤-refl)
-    true
-
-canonicalBaseGapN2 : Set
-canonicalBaseGapN2 =
-  (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
-  2 * ResidueNorm.strongNormSquared zeroResidueNormModel compatibilityShellIndex x
-    ≤
-  (compatibilityShellIndex * compatibilityShellIndex) * (λ _ → zero) x
-
-proofBaseGapN2 : canonicalBaseGapN2
-proofBaseGapN2 x = z≤n
-
-canonicalOperatorErrorN2 : Set
-canonicalOperatorErrorN2 =
-  (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
-  (compatibilityShellIndex * compatibilityShellIndex) * (λ _ → zero) x
-    ≤
-  1 * ResidueNorm.strongNormSquared zeroResidueNormModel compatibilityShellIndex x
-
-proofOperatorErrorN2 : canonicalOperatorErrorN2
-proofOperatorErrorN2 x = z≤n
-
-canonicalErrorIdentifiedWithOperatorStrongError : Set
-canonicalErrorIdentifiedWithOperatorStrongError =
-  (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
-  (λ _ → zero) x ≤ (λ _ → zero) x
-
-proofErrorIdentifiedWithOperatorStrongError :
-  canonicalErrorIdentifiedWithOperatorStrongError
-proofErrorIdentifiedWithOperatorStrongError x = z≤n
-
-canonicalGapMarginPositive : Set
-canonicalGapMarginPositive = 1 < 2
-
-proofGapMarginPositive : canonicalGapMarginPositive
-proofGapMarginPositive = s≤s (s≤s z≤n)
-
-canonicalGapPerturbationAbsorption : Set
-canonicalGapPerturbationAbsorption =
-  (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
-  (compatibilityShellIndex * compatibilityShellIndex) * (λ _ → zero) x
-    ≥
-  (2 ∸ 1) * ResidueNorm.strongNormSquared zeroResidueNormModel compatibilityShellIndex x
-
-proofGapPerturbationAbsorption : canonicalGapPerturbationAbsorption
-proofGapPerturbationAbsorption =
-  QGap.proveBaseGapMinusErrorAbsorption
-    (QGap.mkGapQuadraticFormsTarget
-      ResidueNorm.ResidueEnergyCarrier
-      compatibilityShellIndex
-      (λ _ → zero)
-      (λ _ → zero)
-      (λ _ → zero)
-      Nat)
-    (ResidueNorm.strongNormSquared zeroResidueNormModel compatibilityShellIndex)
-    2
-    1
-    proofBaseGapN2
-    proofOperatorErrorN2
-    (λ _ → refl)
-
-postulate
-  canonicalQGapTransferWitness : Set
-
 compatibilityCarrierElement :
   ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex
 compatibilityCarrierElement =
   ResidueNorm.mkResidueEnergyCarrier 0
+
+canonicalShellScaleHeadroom :
+  ScaleHeadroom.ShellScaleHeadroom compatibilityShellIndex
+canonicalShellScaleHeadroom =
+  ScaleHeadroom.headroomFromSucN
+    compatibilityShellIndex
+    (s≤s (s≤s z≤n))
+
+canonicalCompatibilityScale :
+  ScaleHeadroom.CompatibilityScale compatibilityShellIndex
+canonicalCompatibilityScale =
+  ScaleHeadroom.compatibilityScaleFromHeadroom canonicalShellScaleHeadroom
+
+canonicalScaledOperatorErrorMarginClosed : Bool
+canonicalScaledOperatorErrorMarginClosed =
+  ScaledErrorAudit.canonicalScaledOperatorErrorMarginClosed
+
+canonicalScaledOperatorErrorMarginClosedIsFalse :
+  canonicalScaledOperatorErrorMarginClosed ≡ false
+canonicalScaledOperatorErrorMarginClosedIsFalse =
+  ScaledErrorAudit.canonicalScaledOperatorErrorMarginClosedIsFalse
+
+canonicalSharperScaledOperatorErrorBridgeClosed : Bool
+canonicalSharperScaledOperatorErrorBridgeClosed =
+  ScaledErrorAudit.canonicalSharperScaledOperatorErrorBridgeClosed
+
+canonicalSharperScaledOperatorErrorBridgeClosedIsFalse :
+  canonicalSharperScaledOperatorErrorBridgeClosed ≡ false
+canonicalSharperScaledOperatorErrorBridgeClosedIsFalse =
+  ScaledErrorAudit.canonicalSharperScaledOperatorErrorBridgeClosedIsFalse
+
+canonicalStage3StrictKernelDefectClosed : Bool
+canonicalStage3StrictKernelDefectClosed =
+  ScaledErrorAudit.canonicalStage3StrictKernelDefectClosed
+
+canonicalStage3StrictKernelDefectClosedIsFalse :
+  canonicalStage3StrictKernelDefectClosed ≡ false
+canonicalStage3StrictKernelDefectClosedIsFalse =
+  ScaledErrorAudit.canonicalStage3StrictKernelDefectClosedIsFalse
+
+canonicalProfileCrossProductAnalyticClosed : Bool
+canonicalProfileCrossProductAnalyticClosed =
+  CrossAudit.canonicalProfileCrossProductAnalyticClosed
+
+canonicalProfileCrossProductAnalyticClosedIsFalse :
+  canonicalProfileCrossProductAnalyticClosed ≡ false
+canonicalProfileCrossProductAnalyticClosedIsFalse =
+  CrossAudit.canonicalProfileCrossProductAnalyticClosedIsFalse
 
 canonicalResidueNormModel :
   ResidueNorm.ResidueNormModel
@@ -349,10 +336,10 @@ actualOperatorWitnessClosed : Bool
 actualOperatorWitnessClosed =
   CNTheorem.actualUnitShellPairIncidenceOperatorWitnessClosed
 
-actualOperatorWitnessClosedIsTrue :
-  actualOperatorWitnessClosed ≡ true
-actualOperatorWitnessClosedIsTrue =
-  CNTheorem.actualUnitShellPairIncidenceOperatorWitnessClosedIsTrue
+actualOperatorWitnessClosedIsFalse :
+  actualOperatorWitnessClosed ≡ false
+actualOperatorWitnessClosedIsFalse =
+  CNTheorem.actualUnitShellPairIncidenceOperatorWitnessClosedIsFalse
 
 canonicalWeakQuadraticFormControlTarget :
   WeakQuadratic.WeakQuadraticFormControlTarget
@@ -371,6 +358,12 @@ canonicalActualWeakQuadraticForm =
   WeakQuadratic.WeakQuadraticFormControlTarget.actualWeakQuadraticForm
     canonicalWeakQuadraticFormControlTarget
 
+canonicalActualWeakQuadraticFormAtUnitEnergy :
+  canonicalActualWeakQuadraticForm
+    (ResidueNorm.mkResidueEnergyCarrier (suc zero))
+    ≡ suc zero
+canonicalActualWeakQuadraticFormAtUnitEnergy = refl
+
 canonicalAbsPairIncidenceQuadraticForm :
   ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex → Nat
 canonicalAbsPairIncidenceQuadraticForm =
@@ -381,6 +374,10 @@ canonicalWeakQuadraticFormConstant : Nat
 canonicalWeakQuadraticFormConstant =
   WeakQuadratic.WeakQuadraticFormControlTarget.weakQuadraticFormConstant
     canonicalWeakQuadraticFormControlTarget
+
+canonicalWeakQuadraticFormConstantIsOne :
+  canonicalWeakQuadraticFormConstant ≡ suc zero
+canonicalWeakQuadraticFormConstantIsOne = refl
 
 postulate
   realActualWeakQuadraticForm :
@@ -419,12 +416,30 @@ canonicalOperatorNormControlsWeakQuadraticForm =
   WeakQuadratic.operatorNormControlsWeakQuadraticForm
     canonicalWeakQuadraticFormControlTarget
 
+canonicalOperatorNormControlsWeakQuadraticFormProof :
+  canonicalOperatorNormControlsWeakQuadraticForm
+canonicalOperatorNormControlsWeakQuadraticFormProof =
+  WeakQuadratic.WeakQuadraticFormControlTarget.pairIncidenceCNToWeakQuadraticCN
+    canonicalWeakQuadraticFormControlTarget
+
 canonicalOperatorWeakCN : Set
 canonicalOperatorWeakCN =
   canonicalOperatorNormControlsWeakQuadraticForm
 
 canonicalOperatorCNToStrongErrorN2 : Set
 canonicalOperatorCNToStrongErrorN2 =
+  QGap.operatorStrongErrorN2Target
+    (ScaleHeadroom.CompatibilityScale.scaleSq canonicalCompatibilityScale)
+    (λ x →
+      ResidueNorm.strongNormSquared
+        canonicalResidueNormModel
+        compatibilityShellIndex
+        x)
+    canonicalActualWeakQuadraticForm
+    canonicalWeakQuadraticFormConstant
+
+canonicalOperatorCNWeakStrongComposeN2Raw :
+  canonicalOperatorWeakCN →
   QGap.operatorStrongErrorN2Target
     compatibilityShellIndex
     (λ x →
@@ -434,11 +449,7 @@ canonicalOperatorCNToStrongErrorN2 =
         x)
     canonicalActualWeakQuadraticForm
     canonicalWeakQuadraticFormConstant
-
-canonicalOperatorCNWeakStrongComposeN2 :
-  canonicalOperatorWeakCN →
-  canonicalOperatorCNToStrongErrorN2
-canonicalOperatorCNWeakStrongComposeN2 operatorWeakCNProof =
+canonicalOperatorCNWeakStrongComposeN2Raw operatorWeakCNProof =
   QGap.operatorCNWeakStrongComposeN2
     compatibilityShellIndex
     (λ x →
@@ -460,6 +471,10 @@ canonicalOperatorCNWeakStrongComposeN2 operatorWeakCNProof =
         compatibilityShellIndex
         x)
 
+postulate
+  canonicalOperatorCNToStrongErrorN2Proof :
+    canonicalOperatorCNToStrongErrorN2
+
 canonicalWeakStrongNormScalingTarget :
   QGap.WeakStrongNormScalingTarget
 canonicalWeakStrongNormScalingTarget =
@@ -477,46 +492,312 @@ canonicalWeakStrongNormScaling :
 canonicalWeakStrongNormScaling =
   QGap.toWeakStrongNormScaling canonicalWeakStrongNormScalingTarget
 
-canonicalBaseGapMinusErrorAbsorptionTarget :
-  QGap.BaseGapMinusErrorAbsorptionTarget
-canonicalBaseGapMinusErrorAbsorptionTarget =
-  QGap.mkBaseGapMinusErrorAbsorptionTarget
-    (QGap.mkGapQuadraticFormsTarget
-      ResidueNorm.ResidueEnergyCarrier
+canonicalStrongNormSquared :
+  ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex → Nat
+canonicalStrongNormSquared =
+  λ x →
+    ResidueNorm.strongNormSquared
+      canonicalResidueNormModel
       compatibilityShellIndex
-      (λ _ → 0)
-      (λ _ → 0)
-      (λ _ → 0)
-      Nat)
-    canonicalBaseGapN2
-    canonicalOperatorErrorN2
-    canonicalErrorIdentifiedWithOperatorStrongError
-    canonicalGapMarginPositive
-    canonicalGapPerturbationAbsorption
-    true
+      x
 
-canonicalBaseGapMinusErrorAbsorption :
+canonicalStrongNormSquaredAtUnitEnergy :
+  canonicalStrongNormSquared
+    (ResidueNorm.mkResidueEnergyCarrier (suc zero))
+    ≡ suc zero
+canonicalStrongNormSquaredAtUnitEnergy = refl
+
+canonicalStage3UnitEnergySaturated : Bool
+canonicalStage3UnitEnergySaturated = true
+
+canonicalStage3UnitEnergySaturatedIsTrue :
+  canonicalStage3UnitEnergySaturated ≡ true
+canonicalStage3UnitEnergySaturatedIsTrue = refl
+
+canonicalStage3ErrorSaturationSource : String
+canonicalStage3ErrorSaturationSource =
+  "C_err = 4 is forced upstream by the coarse unit-shell quadratic-form witness: qError = strongNormSquared = residueEnergy at unit energy."
+
+canonicalExactKNAPositiveSubspaceCarrierTarget :
+  ExactGramBridge.ExactKNAPositiveSubspaceCarrierTarget
+    (ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex)
+canonicalExactKNAPositiveSubspaceCarrierTarget =
+  ExactGramBridge.canonicalExactKNAPositiveSubspaceCarrierTarget
+
+canonicalBaseQuadraticForm :
+  ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex → Nat
+canonicalBaseQuadraticForm =
+  ExactQBase.exactKNAQBase
+
+canonicalBaseQuadraticFormIsResidueEnergy :
+  (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
+  canonicalBaseQuadraticForm x ≡ ResidueNorm.residueEnergy x
+canonicalBaseQuadraticFormIsResidueEnergy x = refl
+
+canonicalStrongNormSquaredIsResidueEnergy :
+  (x : ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex) →
+  canonicalStrongNormSquared x ≡ ResidueNorm.residueEnergy x
+canonicalStrongNormSquaredIsResidueEnergy x =
+  *-identityˡ (ResidueNorm.residueEnergy x)
+
+canonicalExactKNABaseQuadraticFormIdentificationTarget :
+  ExactGramBridge.ExactKNABaseQuadraticFormIdentificationTarget
+    (ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex)
+canonicalExactKNABaseQuadraticFormIdentificationTarget =
+  ExactQBase.canonicalExactKNABaseQuadraticFormIdentificationTarget
+
+------------------------------------------------------------------------
+-- Blocker 2C: Rayleigh margin core uses an explicit compatibility scale.
+--
+--   compatibilityShellIndex = suc zero (= 1).
+--   canonicalStrongNormSquared x = 1 * residueEnergy x  (nWeightedResidueNormModel)
+--   canonicalBaseQuadraticForm  x = residueEnergy x     (exactKNAQBase)
+--   canonicalWeakQuadraticFormConstant = 1              (stage3ErrorConstant)
+--
+-- The baseGapN2Target now requires:
+--
+--   baseGapConstant * strongNormSquared x
+--     ≤ scaleSq * baseQuadraticForm x
+--
+-- Substituting shellIndex = 1, strongNorm = residueEnergy, qBase = residueEnergy:
+--
+--   baseGapConstant * residueEnergy x  ≤  residueEnergy x
+--
+-- To satisfy stage3ErrorBelowBaseGap we need baseGapConstant ≥ 2
+-- (since stage3ErrorConstant = 1 < baseGapConstant).
+-- But for any nonzero residueEnergy x, 2*E ≤ E is false.
+--
+-- The canonical compatibility scale is successor-scaled, so scaleSq = 4
+-- while the operator witness remains typed at shellIndex = 1.
+--
+-- The ShellScaleHeadroom module (NSTriadKNShellScaleHeadroom) provides the
+-- reusable abstraction: if scaleSq ≥ 2 then 2*E ≤ scaleSq*E.  At N=1, the
+-- successor constructor headroomFromSucN gives scaleSq = 4:
+--
+--   canonicalShellScaleHeadroom =
+--     ScaleHeadroom.headroomFromSucN 0 (s≤s (s≤s z≤n))  -- 2 ≤ 4
+--   rayleighMarginFromScaleHeadroom canonicalShellScaleHeadroom x
+--     : 2 * residueEnergy x ≤ 4 * residueEnergy x
+--
+-- The shared scale is consumed by the NegativeFrameRayleighMarginCore,
+-- GapQuadraticFormsTarget, operatorErrorN2Target, and absorption target.
+--
+-- The scaled operator-error identification remains conditional: the existing
+-- unit-shell weak/strong witness proves the raw-scale route, not the new
+-- scaleSq route.  The q-gap and BKM gates therefore remain fail-closed.
+
+canonicalNegativeFrameRayleighMarginCoreTarget : Setω
+canonicalNegativeFrameRayleighMarginCoreTarget =
+  MarginBridge.NegativeFrameRayleighMarginCore
+    (ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex)
+    compatibilityShellIndex
+    canonicalStrongNormSquared
+    canonicalBaseQuadraticForm
+    canonicalWeakQuadraticFormConstant
+
+conditionalNegativeFrameRayleighMarginTarget :
+  canonicalNegativeFrameRayleighMarginCoreTarget →
+  MarginBridge.NegativeFrameRayleighMarginTarget
+    (ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex)
+    compatibilityShellIndex
+    canonicalStrongNormSquared
+    canonicalBaseQuadraticForm
+    canonicalWeakQuadraticFormConstant
+conditionalNegativeFrameRayleighMarginTarget core =
+  MarginBridge.toNegativeFrameRayleighMarginTarget
+    core
+
+canonicalExactKNAQuadraticCarrierTarget :
+  ExactGramBridge.ExactKNAQuadraticCarrierTarget
+    (ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex)
+canonicalExactKNAQuadraticCarrierTarget =
+  ExactGramBridge.mkExactKNAQuadraticCarrierTarget
+    canonicalExactKNAPositiveSubspaceCarrierTarget
+    canonicalExactKNABaseQuadraticFormIdentificationTarget
+
+canonicalExactKNAObjectDefinitionTarget :
+  ExactGramBridge.ExactKNAObjectDefinitionTarget
+    (ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex)
+canonicalExactKNAObjectDefinitionTarget =
+  ExactGramBridge.toExactKNAObjectDefinitionTarget
+    canonicalExactKNAQuadraticCarrierTarget
+
+canonicalExactGramBaseFormIdentification :
+  GramRayleighBridge.ExactGramBaseFormIdentification
+    (ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex)
+canonicalExactGramBaseFormIdentification =
+  ExactGramBridge.toExactGramBaseFormIdentification
+    canonicalExactKNAObjectDefinitionTarget
+
+conditionalRayleighCoercivityBeatsStage3Error :
+  canonicalNegativeFrameRayleighMarginCoreTarget →
+  GramRayleighBridge.RayleighCoercivityBeatsStage3Error
+    (ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex)
+    compatibilityShellIndex
+    canonicalStrongNormSquared
+    (GramRayleighBridge.ExactGramBaseFormIdentification.baseQuadraticForm
+      canonicalExactGramBaseFormIdentification)
+    canonicalWeakQuadraticFormConstant
+conditionalRayleighCoercivityBeatsStage3Error core =
+  MarginBridge.toRayleighCoercivityBeatsStage3Error
+    (conditionalNegativeFrameRayleighMarginTarget core)
+
+conditionalGramRayleighBaseFormTarget :
+  canonicalNegativeFrameRayleighMarginCoreTarget →
+  GramRayleigh.GramRayleighBaseFormTarget
+    (ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex)
+    compatibilityShellIndex
+    canonicalStrongNormSquared
+    canonicalWeakQuadraticFormConstant
+conditionalGramRayleighBaseFormTarget core =
+  GramRayleighBridge.toGramRayleighBaseFormTarget
+    canonicalExactGramBaseFormIdentification
+    (conditionalRayleighCoercivityBeatsStage3Error core)
+
+canonicalGapQuadraticForms :
+  QGap.GapQuadraticFormsTarget
+canonicalGapQuadraticForms =
+  QGap.mkGapQuadraticFormsTarget
+    ResidueNorm.ResidueEnergyCarrier
+    compatibilityShellIndex
+    canonicalCompatibilityScale
+    canonicalBaseQuadraticForm
+    canonicalActualWeakQuadraticForm
+    (λ x → canonicalBaseQuadraticForm x ∸ canonicalActualWeakQuadraticForm x)
+    (λ _ → refl)
+
+canonicalOperatorStrongError :
+  ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex → Nat
+canonicalOperatorStrongError =
+  canonicalActualWeakQuadraticForm
+
+postulate
+  conditionalGramBaseFormCoercivityTarget :
+    canonicalNegativeFrameRayleighMarginCoreTarget →
+    GramBase.GramBaseFormCoercivityTarget
+      canonicalGapQuadraticForms
+      canonicalStrongNormSquared
+
+postulate
+  conditionalBaseGapTheorem :
+    canonicalNegativeFrameRayleighMarginCoreTarget →
+    QGap.BaseGapN2Theorem
+      canonicalGapQuadraticForms
+      canonicalStrongNormSquared
+
+canonicalErrorDominatedByStage3 :
+  QGap.operatorErrorIdentifiedWithOperatorStrongErrorTarget
+    canonicalGapQuadraticForms
+    canonicalOperatorStrongError
+canonicalErrorDominatedByStage3 _ = ≤-refl
+
+canonicalOperatorErrorIdentification :
+  QGap.OperatorErrorIdentification
+    canonicalGapQuadraticForms
+    canonicalOperatorStrongError
+    canonicalStrongNormSquared
+canonicalOperatorErrorIdentification =
+  QGap.operatorErrorIdentificationFromStrongOperatorError
+    canonicalWeakQuadraticFormConstant
+    canonicalOperatorCNToStrongErrorN2Proof
+    canonicalErrorDominatedByStage3
+
+postulate
+  canonicalOperatorErrorConstantMatchesStage3 :
+    QGap.OperatorErrorIdentification.errorConstant
+      canonicalOperatorErrorIdentification
+    ≡
+    canonicalWeakQuadraticFormConstant
+
+postulate
+  conditionalStage3ErrorBelowBaseGap :
+    (core : canonicalNegativeFrameRayleighMarginCoreTarget) →
+    QGap.OperatorErrorIdentification.errorConstant
+      canonicalOperatorErrorIdentification
+      <
+    QGap.BaseGapN2Theorem.baseGapConstant (conditionalBaseGapTheorem core)
+
+postulate
+  conditionalGapMarginPositive :
+    (core : canonicalNegativeFrameRayleighMarginCoreTarget) →
+    zero <
+    (QGap.BaseGapN2Theorem.baseGapConstant (conditionalBaseGapTheorem core)
+      ∸ QGap.OperatorErrorIdentification.errorConstant
+        canonicalOperatorErrorIdentification)
+
+conditionalGapMargin :
+  canonicalNegativeFrameRayleighMarginCoreTarget →
+  QGap.GapMargin
+conditionalGapMargin core =
+  QGap.gapMarginFromTheoremsAndLeq
+    (conditionalBaseGapTheorem core)
+    canonicalOperatorErrorIdentification
+    (conditionalGapMarginPositive core)
+    (<⇒≤ (conditionalStage3ErrorBelowBaseGap core))
+
+conditionalGapPerturbationAbsorption :
+  canonicalNegativeFrameRayleighMarginCoreTarget →
+  Set
+conditionalGapPerturbationAbsorption core =
+  QGap.gapPerturbationAbsorptionTarget
+    canonicalGapQuadraticForms
+    canonicalStrongNormSquared
+    (conditionalBaseGapTheorem core)
+    canonicalOperatorStrongError
+    canonicalOperatorErrorIdentification
+
+conditionalGapPerturbationAbsorptionProof :
+  (core : canonicalNegativeFrameRayleighMarginCoreTarget) →
+  conditionalGapPerturbationAbsorption core
+conditionalGapPerturbationAbsorptionProof core =
+  QGap.gapAbsorptionFromMargin
+    (conditionalBaseGapTheorem core)
+    canonicalOperatorErrorIdentification
+    (conditionalGapMargin core)
+
+conditionalBaseGapMinusErrorAbsorptionTarget :
+  canonicalNegativeFrameRayleighMarginCoreTarget →
+  QGap.BaseGapMinusErrorAbsorptionTarget
+conditionalBaseGapMinusErrorAbsorptionTarget core =
+  QGap.mkBaseGapMinusErrorAbsorptionTarget
+    canonicalGapQuadraticForms
+    canonicalStrongNormSquared
+    canonicalOperatorStrongError
+    (conditionalBaseGapTheorem core)
+    canonicalOperatorErrorIdentification
+    (conditionalGapMargin core)
+    (conditionalGapPerturbationAbsorption core)
+    false
+
+conditionalBaseGapMinusErrorAbsorption :
+  canonicalNegativeFrameRayleighMarginCoreTarget →
   QGap.BaseGapMinusErrorAbsorption
-canonicalBaseGapMinusErrorAbsorption =
+conditionalBaseGapMinusErrorAbsorption core =
   QGap.toBaseGapMinusErrorAbsorption
-    canonicalBaseGapMinusErrorAbsorptionTarget
+    (conditionalBaseGapMinusErrorAbsorptionTarget core)
 
-canonicalCompatibility : QGap.ResidueScaleCompatibility
-canonicalCompatibility =
+conditionalQGapTransferWitness :
+  canonicalNegativeFrameRayleighMarginCoreTarget → Set
+conditionalQGapTransferWitness core =
+  canonicalOperatorCNToStrongErrorN2 × conditionalGapPerturbationAbsorption core
+
+conditionalCompatibility :
+  canonicalNegativeFrameRayleighMarginCoreTarget →
+  QGap.ResidueScaleCompatibility
+conditionalCompatibility core =
   QGap.mkResidueScaleCompatibility
     (ResidueNorm.ResidueEnergyCarrier compatibilityShellIndex)
+    canonicalCompatibilityScale
     canonicalWeakStrongNormScaling
-    canonicalBaseGapMinusErrorAbsorption
-    canonicalQGapTransferWitness
-    true
+    (conditionalBaseGapMinusErrorAbsorption core)
+    (conditionalQGapTransferWitness core)
+    false
 
 canonicalQGapTransferClosed : Bool
-canonicalQGapTransferClosed =
-  QGap.qGapTransferClosed canonicalCompatibility
+canonicalQGapTransferClosed = false
 
 canonicalSchurResidueScaleClosed : Bool
-canonicalSchurResidueScaleClosed =
-  ResidueScale.schurResidueScaleClosed canonicalCompatibility
+canonicalSchurResidueScaleClosed = false
 
 canonicalIntegratedResidueN2BoundClosed : Bool
 canonicalIntegratedResidueN2BoundClosed =

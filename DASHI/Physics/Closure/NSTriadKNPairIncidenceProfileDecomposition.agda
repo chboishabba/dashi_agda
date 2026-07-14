@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecomposition where
 
 open import Agda.Primitive using (Level; lzero; lsuc; _⊔_)
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; zero) renaming (_+_ to _+N_)
 open import Data.Nat.Properties using (+-identityʳ)
@@ -268,16 +268,16 @@ actualPairIncidenceKernelDataClosed : Bool
 actualPairIncidenceKernelDataClosed =
   KernelFormula.actualPairIncidenceKernelFormulaDataClosed
 
-actualPairIncidenceKernelDataClosedIsTrue :
-  actualPairIncidenceKernelDataClosed ≡ true
-actualPairIncidenceKernelDataClosedIsTrue =
-  KernelFormula.actualPairIncidenceKernelFormulaDataClosedIsTrue
+actualPairIncidenceKernelDataClosedIsFalse :
+  actualPairIncidenceKernelDataClosed ≡ false
+actualPairIncidenceKernelDataClosedIsFalse =
+  KernelFormula.actualPairIncidenceKernelFormulaDataClosedIsFalse
 
 actualUnitShellPairIncidenceKernelDataClosed : Bool
 actualUnitShellPairIncidenceKernelDataClosed =
   KernelFormula.actualUnitShellPairIncidenceKernelFormulaDataClosed
 
-actualUnitShellPairIncidenceKernelDataClosedIsTrue :
-  actualUnitShellPairIncidenceKernelDataClosed ≡ true
-actualUnitShellPairIncidenceKernelDataClosedIsTrue =
-  KernelFormula.actualUnitShellPairIncidenceKernelFormulaDataClosedIsTrue
+actualUnitShellPairIncidenceKernelDataClosedIsFalse :
+  actualUnitShellPairIncidenceKernelDataClosed ≡ false
+actualUnitShellPairIncidenceKernelDataClosedIsFalse =
+  KernelFormula.actualUnitShellPairIncidenceKernelFormulaDataClosedIsFalse

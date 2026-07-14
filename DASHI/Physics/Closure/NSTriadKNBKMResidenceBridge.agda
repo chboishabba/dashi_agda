@@ -299,6 +299,72 @@ proveResidenceTimeExclusionFromIntegratedResidue
     integratedDanger integratedResidue
     dangerBound dangerDominatedByResidue integratedResidueN2Bound
 
+------------------------------------------------------------------------
+-- Explicit integrated-residue input for downstream bridges.
+--
+-- This record is deliberately only an input surface.  It does not assert
+-- that any Navier--Stokes trajectory supplies these fields.
+------------------------------------------------------------------------
+
+record IntegratedResidueBoundEvidence
+    (residueNormModel : ResidueNorm.ResidueNormModel)
+    (N : Nat) : Set₁ where
+  constructor mkIntegratedResidueBoundEvidence
+  field
+    dangerFunctional : ResidueNorm.Carrier residueNormModel N → Nat
+    threshold : Nat
+    residenceTimeMeasure : Nat
+    integratedDanger : Nat
+    integratedResidue : Nat
+    boundConstant : Nat
+
+    markovDangerBound :
+      threshold * residenceTimeMeasure ≤ integratedDanger
+
+    dangerDominatedByResidue :
+      integratedDanger ≤ integratedResidue
+
+    integratedResidueN2Bound :
+      (N * N) * integratedResidue ≤ boundConstant
+
+open IntegratedResidueBoundEvidence public
+
+integratedResidueBoundToResidenceTimeExclusion :
+  {residueNormModel : ResidueNorm.ResidueNormModel} →
+  (N : Nat) →
+  (evidence : IntegratedResidueBoundEvidence residueNormModel N) →
+  ResidenceTimeExclusionTarget residueNormModel N
+integratedResidueBoundToResidenceTimeExclusion N evidence =
+  record
+  { dangerFunctional = dangerFunctional evidence
+  ; threshold = threshold evidence
+  ; residenceTimeMeasure = λ _ → residenceTimeMeasure evidence
+  ; residenceBoundConstant = boundConstant evidence
+  ; residenceBound =
+      proveResidenceTimeExclusionFromIntegratedResidue
+        N
+        (threshold evidence)
+        (residenceTimeMeasure evidence)
+        (integratedDanger evidence)
+        (integratedResidue evidence)
+        (boundConstant evidence)
+        (markovDangerBound evidence)
+        (dangerDominatedByResidue evidence)
+        (integratedResidueN2Bound evidence)
+  ; targetClosed = false
+  }
+
+integratedResidueBoundToResidenceTimeExclusionBound :
+  {residueNormModel : ResidueNorm.ResidueNormModel} →
+  (N : Nat) →
+  (evidence : IntegratedResidueBoundEvidence residueNormModel N) →
+  residenceTimeMeasure evidence
+    * (threshold evidence * (N * N))
+      ≤ boundConstant evidence
+integratedResidueBoundToResidenceTimeExclusionBound N evidence =
+  ResidenceTimeExclusionTarget.residenceBound
+    (integratedResidueBoundToResidenceTimeExclusion N evidence)
+
 proveProjectionTermN2BoundFromResidence :
   (residenceMeasure : Nat) →
   (threshold : Nat) →
@@ -373,6 +439,58 @@ bkmProjectionSmallnessClosed :
   BKMProjectionSmallnessTarget residueNormModel N → Bool
 bkmProjectionSmallnessClosed residueNormModel N target =
   BKMProjectionSmallnessTarget.targetClosed target
+
+------------------------------------------------------------------------
+-- BKM projection package from explicit residue evidence.
+--
+-- `vorticitySumBound` is intentionally supplied by the caller: the
+-- integrated-residue estimate alone is not silently treated as a PDE
+-- projection theorem.
+------------------------------------------------------------------------
+
+integratedResidueBoundToBKMProjectionSmallness :
+  {residueNormModel : ResidueNorm.ResidueNormModel} →
+  (N : Nat) →
+  (evidence : IntegratedResidueBoundEvidence residueNormModel N) →
+  (shellProjection : ResidueNorm.Carrier residueNormModel N → Nat) →
+  (shellCoefficient : Nat) →
+  (vorticitySum : ResidueNorm.Carrier residueNormModel N → Nat) →
+  (vorticityIntegral : Nat) →
+  ((x : ResidueNorm.Carrier residueNormModel N) →
+    vorticitySum x ≤ shellCoefficient * shellProjection x) →
+  BKMProjectionSmallnessTarget residueNormModel N
+integratedResidueBoundToBKMProjectionSmallness
+  N evidence shellProjection shellCoefficient vorticitySum
+  vorticityIntegral vorticitySumBound =
+  record
+  { residenceTimeInputClosed = false
+  ; shellProjection = shellProjection
+  ; shellCoefficient = shellCoefficient
+  ; vorticitySum = vorticitySum
+  ; vorticityIntegral = vorticityIntegral
+  ; vorticitySumBound = vorticitySumBound
+  ; targetClosed = false
+  }
+
+integratedResidueBoundToBKMProjectionSmallnessBound :
+  {residueNormModel : ResidueNorm.ResidueNormModel} →
+  (N : Nat) →
+  (evidence : IntegratedResidueBoundEvidence residueNormModel N) →
+  (shellProjection : ResidueNorm.Carrier residueNormModel N → Nat) →
+  (shellCoefficient : Nat) →
+  (vorticitySum : ResidueNorm.Carrier residueNormModel N → Nat) →
+  (vorticityIntegral : Nat) →
+  ((x : ResidueNorm.Carrier residueNormModel N) →
+    vorticitySum x ≤ shellCoefficient * shellProjection x) →
+  (x : ResidueNorm.Carrier residueNormModel N) →
+  vorticitySum x ≤ shellCoefficient * shellProjection x
+integratedResidueBoundToBKMProjectionSmallnessBound
+  N evidence shellProjection shellCoefficient vorticitySum
+  vorticityIntegral vorticitySumBound =
+  BKMProjectionSmallnessTarget.vorticitySumBound
+    (integratedResidueBoundToBKMProjectionSmallness
+      N evidence shellProjection shellCoefficient vorticitySum
+      vorticityIntegral vorticitySumBound)
 
 ------------------------------------------------------------------------
 -- Proof-derived gate definitions.

@@ -12,6 +12,8 @@ open import Data.Nat.Properties
 
 import DASHI.Physics.Closure.NSTriadKNWeightedSchurProductBound
   as WeightedSchur
+import DASHI.Physics.Closure.NSTriadKNBipartiteWeightedSchurWitness
+  as BipartiteSchur
 import DASHI.Physics.Closure.NSTriadKNProfileCrossProductMatrix
   as CrossMatrix
 import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
@@ -309,38 +311,38 @@ actualUnitShellPairIncidenceOperatorWitness residueNormModel =
       WeightedSchur.canonicalWeightedSchurOperatorWitness residueNormModel
 
 pairIncidenceOperatorWitnessClosed : Bool
-pairIncidenceOperatorWitnessClosed = true
+pairIncidenceOperatorWitnessClosed = false
 
-pairIncidenceOperatorWitnessClosedIsTrue :
-  pairIncidenceOperatorWitnessClosed ≡ true
-pairIncidenceOperatorWitnessClosedIsTrue = refl
+pairIncidenceOperatorWitnessClosedIsFalse :
+  pairIncidenceOperatorWitnessClosed ≡ false
+pairIncidenceOperatorWitnessClosedIsFalse = refl
 
 actualUnitShellPairIncidenceOperatorWitnessClosed : Bool
 actualUnitShellPairIncidenceOperatorWitnessClosed =
   WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosed
 
-actualUnitShellPairIncidenceOperatorWitnessClosedIsTrue :
-  actualUnitShellPairIncidenceOperatorWitnessClosed ≡ true
-actualUnitShellPairIncidenceOperatorWitnessClosedIsTrue =
-  WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosedIsTrue
+actualUnitShellPairIncidenceOperatorWitnessClosedIsFalse :
+  actualUnitShellPairIncidenceOperatorWitnessClosed ≡ false
+actualUnitShellPairIncidenceOperatorWitnessClosedIsFalse =
+  WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosedIsFalse
 
 actualPairIncidenceOperatorExposed : Bool
 actualPairIncidenceOperatorExposed =
   WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosed
 
-actualPairIncidenceOperatorExposedIsTrue :
-  actualPairIncidenceOperatorExposed ≡ true
-actualPairIncidenceOperatorExposedIsTrue =
-  WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosedIsTrue
+actualPairIncidenceOperatorExposedIsFalse :
+  actualPairIncidenceOperatorExposed ≡ false
+actualPairIncidenceOperatorExposedIsFalse =
+  WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosedIsFalse
 
 unitShellWitnessMatchesStage3OperatorClosed : Bool
 unitShellWitnessMatchesStage3OperatorClosed =
   WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosed
 
-unitShellWitnessMatchesStage3OperatorClosedIsTrue :
-  unitShellWitnessMatchesStage3OperatorClosed ≡ true
-unitShellWitnessMatchesStage3OperatorClosedIsTrue =
-  WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosedIsTrue
+unitShellWitnessMatchesStage3OperatorClosedIsFalse :
+  unitShellWitnessMatchesStage3OperatorClosed ≡ false
+unitShellWitnessMatchesStage3OperatorClosedIsFalse =
+  WeightedSchur.actualUnitShellWeightedSchurOperatorWitnessClosedIsFalse
 
 ------------------------------------------------------------------------
 -- § WeightedSchurOperatorIdentifiesWeakQuadraticForm — fail-closed bridge.
@@ -480,3 +482,106 @@ weightedSchurOperatorIdentifiesWeakQuadraticFormClosed =
 weightedSchurOperatorIdentifiesWeakQuadraticFormClosedIsTrue :
   weightedSchurOperatorIdentifiesWeakQuadraticFormClosed ≡ true
 weightedSchurOperatorIdentifiesWeakQuadraticFormClosedIsTrue = refl
+
+------------------------------------------------------------------------
+-- § RectangularBipartiteStage3Handoff — typed conditional boundary.
+--
+-- This alias is deliberately narrower than the former placeholder record:
+-- it exposes the generic Stage-3 consumer only after the caller supplies the
+-- carrier embeddings, qError/operator agreement laws, and operator estimate.
+-- The bridge derives the scaled qError bound from the Nat handoff, but does
+-- not close the consumer or any q-gap receipt.
+
+Stage3WeakQuadraticConsumer :
+  {residueNormModel : ResidueNorm.ResidueNormModel} ->
+  {shellIndex : Nat} ->
+  (target : BipartiteSchur.BipartiteWeightedSchurBoundTarget
+    residueNormModel shellIndex) ->
+  (operatorNorm scaledConstant : Nat) -> Set₁
+Stage3WeakQuadraticConsumer =
+  BipartiteSchur.BipartiteWeightedSchurNatStage3WeakQuadraticConsumer
+
+RectangularBipartiteStage3Handoff :
+  {residueNormModel : ResidueNorm.ResidueNormModel} ->
+  {shellIndex : Nat} ->
+  (target : BipartiteSchur.BipartiteWeightedSchurBoundTarget
+    residueNormModel shellIndex) ->
+  (operatorNorm scaledConstant : Nat) -> Set₁
+RectangularBipartiteStage3Handoff = Stage3WeakQuadraticConsumer
+
+stage3WeakQuadraticConsumerFromBipartiteNatOperatorWitness :
+  {residueNormModel : ResidueNorm.ResidueNormModel} ->
+  {shellIndex : Nat} ->
+  (target : BipartiteSchur.BipartiteWeightedSchurBoundTarget
+    residueNormModel shellIndex) ->
+  (operatorNorm scaledConstant : Nat) ->
+  (witness :
+    BipartiteSchur.BipartiteWeightedSchurNatOperatorWitness
+      target operatorNorm scaledConstant) ->
+  (sourceEmbedding :
+    ResidueNorm.Carrier residueNormModel shellIndex ->
+    BipartiteSchur.BipartiteSchurSourceCarrier target) ->
+  (targetEmbedding :
+    ResidueNorm.Carrier residueNormModel shellIndex ->
+    BipartiteSchur.BipartiteSchurTargetCarrier target) ->
+  (stage3OperatorQuadraticForm :
+    ResidueNorm.Carrier residueNormModel shellIndex -> Nat) ->
+  (qError :
+    ResidueNorm.Carrier residueNormModel shellIndex -> Nat) ->
+  ((x : ResidueNorm.Carrier residueNormModel shellIndex) ->
+    qError x ≡ stage3OperatorQuadraticForm x) ->
+  ((x : ResidueNorm.Carrier residueNormModel shellIndex) ->
+    stage3OperatorQuadraticForm x ≡
+    BipartiteSchur.BipartiteWeightedSchurNatOperatorWitness.bipartiteQuadraticForm
+      witness
+      (sourceEmbedding x)
+      (targetEmbedding x)) ->
+  ((x : ResidueNorm.Carrier residueNormModel shellIndex) ->
+    stage3OperatorQuadraticForm x ≤
+    operatorNorm *
+      ResidueNorm.weakNormSquared residueNormModel shellIndex x) ->
+  Stage3WeakQuadraticConsumer target operatorNorm scaledConstant
+stage3WeakQuadraticConsumerFromBipartiteNatOperatorWitness =
+  BipartiteSchur.bipartiteWeightedSchurNatOperatorWitnessToStage3WeakQuadraticConsumer
+
+rectangularBipartiteStage3HandoffFromNatOperatorWitness :
+  {residueNormModel : ResidueNorm.ResidueNormModel} ->
+  {shellIndex : Nat} ->
+  (target : BipartiteSchur.BipartiteWeightedSchurBoundTarget
+    residueNormModel shellIndex) ->
+  (operatorNorm scaledConstant : Nat) ->
+  (witness :
+    BipartiteSchur.BipartiteWeightedSchurNatOperatorWitness
+      target operatorNorm scaledConstant) ->
+  (sourceEmbedding :
+    ResidueNorm.Carrier residueNormModel shellIndex ->
+    BipartiteSchur.BipartiteSchurSourceCarrier target) ->
+  (targetEmbedding :
+    ResidueNorm.Carrier residueNormModel shellIndex ->
+    BipartiteSchur.BipartiteSchurTargetCarrier target) ->
+  (stage3OperatorQuadraticForm :
+    ResidueNorm.Carrier residueNormModel shellIndex -> Nat) ->
+  (qError :
+    ResidueNorm.Carrier residueNormModel shellIndex -> Nat) ->
+  ((x : ResidueNorm.Carrier residueNormModel shellIndex) ->
+    qError x ≡ stage3OperatorQuadraticForm x) ->
+  ((x : ResidueNorm.Carrier residueNormModel shellIndex) ->
+    stage3OperatorQuadraticForm x ≡
+    BipartiteSchur.BipartiteWeightedSchurNatOperatorWitness.bipartiteQuadraticForm
+      witness
+      (sourceEmbedding x)
+      (targetEmbedding x)) ->
+  ((x : ResidueNorm.Carrier residueNormModel shellIndex) ->
+    stage3OperatorQuadraticForm x ≤
+    operatorNorm *
+      ResidueNorm.weakNormSquared residueNormModel shellIndex x) ->
+  RectangularBipartiteStage3Handoff target operatorNorm scaledConstant
+rectangularBipartiteStage3HandoffFromNatOperatorWitness =
+  stage3WeakQuadraticConsumerFromBipartiteNatOperatorWitness
+
+rectangularBipartiteStage3HandoffClosed : Bool
+rectangularBipartiteStage3HandoffClosed = false
+
+rectangularBipartiteStage3HandoffClosedIsFalse :
+  rectangularBipartiteStage3HandoffClosed ≡ false
+rectangularBipartiteStage3HandoffClosedIsFalse = refl

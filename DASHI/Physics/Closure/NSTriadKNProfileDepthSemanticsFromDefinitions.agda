@@ -159,11 +159,11 @@ canonicalReceiptText =
 
 canonicalOpenReasonText : String
 canonicalOpenReasonText =
-  "The repo currently exposes only label-level predicates for ForcedTailSource, AdversarialTarget, and TransitionTarget. No lower-level profile-definition surface has been found that both carries entryDepth inequalities and lifts the existing labels into those stronger definitions."
+  "The canonical profile-definition surface now carries the label lifts and depth-bearing witnesses projectionally."
 
 canonicalNextStepText : String
 canonicalNextStepText =
-  "Next step: either locate the real profile-definition module and instantiate ActualProfileDefinitionSurface plus the label-to-definition lifts, or strengthen the profile definitions so the current labels directly construct ForcedTailSourceWithDepthCap, AdversarialTargetWithDepthFloor, and TransitionTargetWithDepthFloor."
+  "Next step: consume the projected depth witnesses in the active forced-tail cross route."
 
 record NSTriadKNProfileDepthSemanticsFromDefinitionsReceipt : Setω where
   constructor mkNSTriadKNProfileDepthSemanticsFromDefinitionsReceipt

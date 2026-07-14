@@ -2,6 +2,7 @@ module DASHI.Physics.Closure.NSTriadKNPairIncidenceRelation where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Agda.Builtin.Nat using (Nat; suc; zero)
 open import Data.Empty using (⊥)
 open import Data.Unit using (⊤)
@@ -271,6 +272,120 @@ record RetainedSectorCountSoundness
       actualRetainedIncidenceCount ≡ repeatedPairIncidenceCount
 
 open RetainedSectorCountSoundness public
+
+------------------------------------------------------------------------
+-- Generic physical retained-sector formula boundary.
+--
+-- This record has no canonical inhabitant.  A caller must supply both the
+-- physical retained-sector count and the explicit formula it is claimed to
+-- satisfy.  The bridges below only transport those supplied equalities; they
+-- do not assign a physical count or identify one with the proxy by default.
+
+record PhysicalRetainedSectorCountFormula
+    (FiniteIndex : Set)
+    (TailIndex : Set) : Set₁ where
+  constructor mkPhysicalRetainedSectorCountFormula
+  field
+    physicalRetainedSectorCount : FiniteIndex → TailIndex → Nat
+
+    explicitCountFormula : FiniteIndex → TailIndex → Nat
+
+    physicalCountMatchesExplicitFormula :
+      physicalRetainedSectorCount ≡ explicitCountFormula
+
+open PhysicalRetainedSectorCountFormula public
+
+physicalRetainedSectorCountFormulaAgreement :
+  {FiniteIndex : Set} ->
+  {TailIndex : Set} ->
+  (formula : PhysicalRetainedSectorCountFormula FiniteIndex TailIndex) ->
+  PhysicalRetainedSectorCountFormula.physicalRetainedSectorCount formula
+    ≡
+  PhysicalRetainedSectorCountFormula.explicitCountFormula formula
+physicalRetainedSectorCountFormulaAgreement formula =
+  PhysicalRetainedSectorCountFormula.physicalCountMatchesExplicitFormula
+    formula
+
+------------------------------------------------------------------------
+-- Conditional bridge to the existing soundness target.
+--
+-- The second equality is an explicit physical-to-relation count obligation.
+-- In particular, this bridge cannot be instantiated from the proxy count
+-- unless a caller separately supplies that equality for the physical formula.
+
+physicalRetainedSectorCountFormulaToSoundness :
+  {residueNormModel : ResidueNorm.ResidueNormModel} ->
+  {shellIndex : Nat} ->
+  (formula :
+    PhysicalRetainedSectorCountFormula
+      (ConcreteNonResidualFiniteIndex shellIndex)
+      (ConcreteNonResidualTailIndex shellIndex)) ->
+  (relationCount :
+    ConcreteNonResidualFiniteIndex shellIndex ->
+    ConcreteNonResidualTailIndex shellIndex -> Nat) ->
+  PhysicalRetainedSectorCountFormula.explicitCountFormula formula
+    ≡ relationCount ->
+  RetainedSectorCountSoundness residueNormModel shellIndex
+physicalRetainedSectorCountFormulaToSoundness formula
+  relationCount
+  physicalFormulaAgreesWithRelation =
+  mkRetainedSectorCountSoundness
+    (PhysicalRetainedSectorCountFormula.physicalRetainedSectorCount formula)
+    relationCount
+    (trans
+      (PhysicalRetainedSectorCountFormula.physicalCountMatchesExplicitFormula
+        formula)
+      physicalFormulaAgreesWithRelation)
+
+------------------------------------------------------------------------
+-- Conditional bridge from a physical formula with its own index types to
+-- the repeated-pair count carried by an explicit relation-data object.
+--
+-- The projections and the formula-to-relation equality are inputs.  Thus the
+-- result is an agreement theorem for the supplied physical count, not a
+-- fabricated enumeration or a proxy promotion.
+
+physicalRetainedSectorCountFormulaToRelationCountAgreement :
+  {residueNormModel : ResidueNorm.ResidueNormModel} ->
+  {shellIndex : Nat} ->
+  {FiniteIndex : Set} ->
+  {TailIndex : Set} ->
+  (relationData : ActualPairIncidenceRelationData
+    residueNormModel shellIndex) ->
+  (formula : PhysicalRetainedSectorCountFormula FiniteIndex TailIndex) ->
+  (sourceProjection :
+    FiniteIndex ->
+    ActualPairIncidenceRelationData.FiniteIndex relationData) ->
+  (targetProjection :
+    TailIndex ->
+    ActualPairIncidenceRelationData.TailIndex relationData) ->
+  PhysicalRetainedSectorCountFormula.explicitCountFormula formula
+    ≡
+  (λ f t →
+    ActualPairIncidenceRelationData.repeatedPairIncidenceCount
+      relationData
+      (sourceProjection f)
+      (targetProjection t)) ->
+  (f : FiniteIndex) ->
+  (t : TailIndex) ->
+  PhysicalRetainedSectorCountFormula.physicalRetainedSectorCount
+    formula f t
+    ≡
+  ActualPairIncidenceRelationData.repeatedPairIncidenceCount
+    relationData
+    (sourceProjection f)
+    (targetProjection t)
+physicalRetainedSectorCountFormulaToRelationCountAgreement
+  relationData formula sourceProjection targetProjection
+  physicalFormulaAgreesWithRelation f t =
+  trans
+    (cong (λ count → count f t)
+      (PhysicalRetainedSectorCountFormula.physicalCountMatchesExplicitFormula
+        formula))
+    (trans
+      (cong (λ count → count f t)
+        physicalFormulaAgreesWithRelation)
+      refl)
 
 forcedTailPairIncidenceCount :
   ForcedTailClass -> ForcedTailClass -> Nat

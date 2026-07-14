@@ -1,10 +1,16 @@
 module DASHI.Physics.Closure.NSTriadKNAdversarialColumnConcreteBounds where
 
 open import Agda.Builtin.Bool using (Bool)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Nat using (_≤_; _*_)
-open import Data.Nat.Properties using (≤-refl)
+open import Data.Nat using (_≤_; _*_; s≤s; z≤n)
+open import Data.Nat.Properties using
+  ( ≤-refl
+  ; ≤-reflexive
+  ; ≤-trans
+  ; *-identityˡ
+  )
+open import Relation.Binary.PropositionalEquality using (sym)
 
 open import DASHI.Physics.Closure.NSTriadKNAdversarialPrimitiveEstimates
   using ( AdversarialClass
@@ -57,12 +63,6 @@ postulate
   adversarialColumnScaledFunctional :
     Nat -> Nat
 
-  adversarialColumnIncidenceCountBound :
-    (N : Nat) ->
-    (c : AdversarialClass) ->
-    (columnCount : Nat) ->
-    columnCount ≤ adversarialColumnCountBound c N
-
   adversarialColumnMagnitudeEnvelopeBound :
     {c : AdversarialClass} ->
     (N : Nat) ->
@@ -74,18 +74,45 @@ postulate
     (N : Nat) ->
     adversarialColumnScaledFunctional N ≤ adversarialColumnScaledTarget N
 
+adversarialColumnIncidenceCountBound :
+  (N : Nat) ->
+  (c : AdversarialClass) ->
+  (columnCount : Nat) ->
+  columnCount ≡ adversarialColumnCountBound c N ->
+  columnCount ≤ adversarialColumnCountBound c N
+adversarialColumnIncidenceCountBound _ _ _ count≡bound =
+  ≤-reflexive count≡bound
+
 ------------------------------------------------------------------------
 -- Classwise column count × magnitude arithmetic.
 --
 -- This is the formula-level part of the column proof. It makes the
 -- exponent bookkeeping concrete before the final column functional is wired.
 
-postulate
-  adversarialColumnCountMagnitudeProductN1 :
-    (c : AdversarialClass) ->
-    (N : Nat) ->
-    adversarialColumnCountBound c N
-      ≤ adversarialColumnProductN1Constant c * adversarialColumnDenominator c N
+one≤suc : (N : Nat) -> 1 ≤ suc N
+one≤suc _ = s≤s z≤n
+
+n≤suc : (N : Nat) -> N ≤ suc N
+n≤suc zero = z≤n
+n≤suc (suc N) = s≤s (n≤suc N)
+
+adversarialColumnCountMagnitudeProductN1 :
+  (c : AdversarialClass) ->
+  (N : Nat) ->
+  adversarialColumnCountBound c N
+    ≤ adversarialColumnProductN1Constant c * adversarialColumnDenominator c N
+adversarialColumnCountMagnitudeProductN1 sparseAdmissible N =
+  ≤-trans
+    (n≤suc N)
+    (≤-reflexive (sym (*-identityˡ (adversarialColumnDenominator sparseAdmissible N))))
+adversarialColumnCountMagnitudeProductN1 angularDegenerate N =
+  ≤-trans
+    (n≤suc N)
+    (≤-reflexive (sym (*-identityˡ (adversarialColumnDenominator angularDegenerate N))))
+adversarialColumnCountMagnitudeProductN1 boundarySmallShell N =
+  ≤-trans
+    (one≤suc N)
+    (≤-reflexive (sym (*-identityˡ (adversarialColumnDenominator boundarySmallShell N))))
 
 record NSTriadKNAdversarialColumnConcreteBounds : Set where
   constructor mkNSTriadKNAdversarialColumnConcreteBounds
@@ -94,6 +121,7 @@ record NSTriadKNAdversarialColumnConcreteBounds : Set where
       (N : Nat) ->
       (c : AdversarialClass) ->
       (columnCount : Nat) ->
+      columnCount ≡ adversarialColumnCountBound c N ->
       columnCount ≤ adversarialColumnCountBound c N
 
     columnMagnitudeEnvelopeBoundWitness :

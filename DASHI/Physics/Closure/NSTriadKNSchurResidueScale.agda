@@ -4,7 +4,8 @@ open import Agda.Primitive using (Level; lsuc; _⊔_)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Data.Nat using (_≤_; z≤n)
-open import Data.Nat.Properties using (≤-refl; ≤-trans; *-mono-≤)
+open import Data.Nat.Properties using (≤-refl; ≤-reflexive; ≤-trans; *-mono-≤; *-assoc; *-comm)
+open import Relation.Binary.PropositionalEquality using (_≡_; sym; cong; trans)
 import DASHI.Physics.Closure.NSTriadKNResidueNormModel as ResidueNorm
 
 import DASHI.Physics.Closure.NSTriadKNQGapTransfer as QGap
@@ -105,6 +106,79 @@ proveSchurResidueScale {residueNormModel} N qError schurResidueFunctional C-err 
     step2 = operatorErrorN2 x
   in
   ≤-trans step1 step2
+
+------------------------------------------------------------------------
+-- Generic q-gap N² to Schur-residue bridge.
+--
+-- A q-gap lower bound does not by itself identify the PDE residue.  The
+-- residue comparison is therefore an explicit supplied premise.  This
+-- theorem only adds the common N² scale on both sides and preserves the
+-- conditional status of the route.
+
+record QGapN2SchurResidueControl
+    {residueNormModel : ResidueNorm.ResidueNormModel}
+    {N : Nat}
+    (qGapN2Control :
+      QGap.QGapN2Control N (ResidueNorm.Carrier residueNormModel N)) : Set₁ where
+  constructor mkQGapN2SchurResidueControl
+  field
+    schurResidueFunctional :
+      ResidueNorm.Carrier residueNormModel N → Nat
+    residueConstant : Nat
+    residueControlledByQGap :
+      (x : ResidueNorm.Carrier residueNormModel N) →
+      schurResidueFunctional x
+        ≤
+      residueConstant * QGap.QGapN2Control.qGap qGapN2Control x
+    qGapN2ControlsSchurResidue :
+      (x : ResidueNorm.Carrier residueNormModel N) →
+      (N * N) * schurResidueFunctional x
+        ≤
+      residueConstant
+        * ((N * N) * QGap.QGapN2Control.qGap qGapN2Control x)
+
+qGapN2ControlsSchurResidueFromWitness :
+  {residueNormModel : ResidueNorm.ResidueNormModel} →
+  {N : Nat} →
+  (qGapN2Control :
+    QGap.QGapN2Control N (ResidueNorm.Carrier residueNormModel N)) →
+  (schurResidueFunctional :
+    ResidueNorm.Carrier residueNormModel N → Nat) →
+  (residueConstant : Nat) →
+  ((x : ResidueNorm.Carrier residueNormModel N) →
+    schurResidueFunctional x
+      ≤
+    residueConstant * QGap.QGapN2Control.qGap qGapN2Control x) →
+  QGapN2SchurResidueControl
+    {residueNormModel = residueNormModel}
+    qGapN2Control
+qGapN2ControlsSchurResidueFromWitness
+  {residueNormModel = residueNormModel} {N = N}
+  qGapN2Control schurResidueFunctional residueConstant residueControlledByQGap =
+  mkQGapN2SchurResidueControl
+    schurResidueFunctional
+    residueConstant
+    residueControlledByQGap
+    (λ x →
+      ≤-trans
+        (*-mono-≤ (≤-refl {N * N}) (residueControlledByQGap x))
+        (≤-reflexive
+          (qGapScaleProductReassociation
+            N
+            residueConstant
+            (QGap.QGapN2Control.qGap qGapN2Control x))))
+  where
+    qGapScaleProductReassociation :
+      (N residueConstant qGap : Nat) →
+      (N * N) * (residueConstant * qGap)
+        ≡
+      residueConstant * ((N * N) * qGap)
+    qGapScaleProductReassociation N residueConstant qGap =
+      trans
+        (sym (*-assoc (N * N) residueConstant qGap))
+        (trans
+          (cong (λ z → z * qGap) (*-comm (N * N) residueConstant))
+          (*-assoc residueConstant (N * N) qGap))
 
 canonicalSchurResidueScaleTarget :
   (residueNormModel : ResidueNorm.ResidueNormModel) →

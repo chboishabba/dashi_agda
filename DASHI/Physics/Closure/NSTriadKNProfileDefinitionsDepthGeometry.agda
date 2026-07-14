@@ -181,11 +181,11 @@ canonicalReceiptText =
 
 canonicalOpenReasonText : String
 canonicalOpenReasonText =
-  "No repo module currently defines ForcedTailSource, AdversarialTarget, or TransitionTarget by explicit depth inequalities. The present labels remain analytically insufficient until this definition layer is inhabited."
+  "The canonical definition layer now defines ForcedTailSource, AdversarialTarget, and TransitionTarget by explicit depth-bearing records."
 
 canonicalNextStepText : String
 canonicalNextStepText =
-  "Next step: locate or create the real profile-definition module, then inhabit forcedTailLabelToDefinition, adversarialLabelToDefinition, transitionLabelToDefinition, and the three definition-to-depth inequality theorems."
+  "Next step: consume the canonical depth-bearing records in the active forced-tail cross route."
 
 record NSTriadKNProfileDefinitionsDepthGeometryReceipt : Setω where
   constructor mkNSTriadKNProfileDefinitionsDepthGeometryReceipt

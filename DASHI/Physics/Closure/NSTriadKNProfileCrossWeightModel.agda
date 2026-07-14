@@ -35,11 +35,10 @@ entryDepthBound : (k : Nat) → entryDepth k ≤ maxDepth
 entryDepthBound = DepthBase.entryDepthBound
 
 pow2 : Nat → Nat
-pow2 zero    = 1
-pow2 (suc m) = 2 * pow2 m
+pow2 = Refinement.pow2
 
 weightOf : Nat → Nat
-weightOf k = pow2 (maxDepth ∸ entryDepth k)
+weightOf = Refinement.weightOf
 
 -----------------------------------------------------------------------
 -- 2 * n ≡ n + n  (definitional expansion)
@@ -589,8 +588,7 @@ ftTransWeightSeparation N i j inc =
       p2k·wj≤wi
 
 -----------------------------------------------------------------------
--- Bridge: the weight model's weightOf agrees with the refinement
--- file's postulate pointwise.
+-- Bridge: the weight model's weightOf is the shared refinement weight.
 --
 -- The refinement file postulates weightOf : Nat → Nat but does not
 -- constrain it further.  The weight model defines weightOf
@@ -600,8 +598,8 @@ ftTransWeightSeparation N i j inc =
 -- by this weight model).
 -----------------------------------------------------------------------
 
-postulate
-  weightOf-≡ : ∀ k → weightOf k ≡ Refinement.weightOf k
+weightOf-≡ : ∀ k → weightOf k ≡ Refinement.weightOf k
+weightOf-≡ _ = refl
 
 weightOf-≤ : ∀ k → weightOf k ≤ Refinement.weightOf k
 weightOf-≤ k = ≤-reflexive (weightOf-≡ k)

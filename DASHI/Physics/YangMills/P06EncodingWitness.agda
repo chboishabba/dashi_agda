@@ -25,7 +25,7 @@ module DASHI.Physics.YangMills.P06EncodingWitness where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Base using (ℕ; _*_; _+_; _≤_; _∸_; z≤n; s≤s; zero; suc)
-open import Data.List.Base using (List)
+open import Data.List.Base using (List; length)
 open import Data.Fin.Base using (Fin)
 open import Data.Product using (Σ; _,_; proj₁; proj₂; _×_)
 open import Agda.Builtin.Unit using (⊤; tt)
@@ -36,12 +36,72 @@ open import DASHI.Physics.ClaySupportingElementaryLemmas using (pow)
 open import DASHI.Physics.YangMills.GraphCombinatorics as GC
   using ( Graph; BoundedDegree; countNeighbors
         ; countSkeletons; countWalks
+        ; BoundedNeighbourEnumeration; ConcreteWalkCountAgreement
+        ; walkObjectsFromNeighbourCodes
+        ; FiniteBallEnumeration
+        ; ExplicitSkeletonCandidateEnumeration
+        ; CountSkeletonsSemantics; ConcreteCountSkeletonsSemantics
+        ; CountWalksSemantics
+        ; CountWalksMembershipSemantics
+        ; generatedWalksToMembershipIndexedCanonicalWalkObjectList
+        ; ActualSkeletonEncodingData
+        ; actualSkeletonEncodingDataFromSemantics
+        ; actualSkeletonCountBound
+        ; concreteCountSkeletonsSemanticsToCountSkeletonsSemantics
         ; RootedConnectedSkeleton; SpanningTree; RootedReducedSkeleton
         ; TreeDFSWalk; RootedTree; Tree
         ; P06a2bConnectedSkeletonHasRootedSpanningTree
         ; P06a2eConnectedSkeletonCoveredByDFSWalk
         ; ActualReducedSkeletonToCanonicalCarrier
         )
+
+------------------------------------------------------------------------
+-- Compatibility-only concrete walk-count adapter.
+--
+-- `ConcreteWalkCountAgreement` is exactly the count equality needed by
+-- the generated-walk surface.  It is not yet a `CountWalksSemantics`:
+-- the latter also needs a Fin-indexed `walkOfFin`/`walkIndex` pair and
+-- its inverse law.  Keep that membership-to-indexing conversion visible
+-- here rather than silently treating the two surfaces as interchangeable.
+-- This record is deliberately non-promoting and does not construct a
+-- `CountWalksSemantics` witness.
+record P06ConcreteWalkCountAgreementAdapter
+  (G : Graph) (Δ : ℕ)
+  (BNE : GC.BoundedNeighbourEnumeration G Δ)
+  (r : GC.Graph.Vertex G) (L : ℕ) : Set₁ where
+  field
+    concreteAgreement : GC.ConcreteWalkCountAgreement G Δ BNE r L
+
+    -- The corrected finite semantic surface is constructively available
+    -- from the same explicit count equality.  It is separate from the
+    -- legacy total-index surface below, which remains open for migration.
+    membershipIndexedSemantics :
+      CountWalksMembershipSemantics G r L
+
+    countAgrees :
+      countWalks G r L
+        ≡ length (GC.walkObjectsFromNeighbourCodes BNE r L)
+
+    -- Open bridge: list membership in the generated walk list has not
+    -- been converted into the Fin indexing required by CountWalksSemantics.
+    membershipIndexingBlocker : Bool
+    membershipIndexingBlockerIsActive : membershipIndexingBlocker ≡ true
+
+p06ConcreteWalkCountAgreementAdapter :
+  {G : Graph} {Δ : ℕ}
+  {BNE : GC.BoundedNeighbourEnumeration G Δ}
+  {r : GC.Graph.Vertex G} {L : ℕ} →
+  GC.ConcreteWalkCountAgreement G Δ BNE r L →
+  P06ConcreteWalkCountAgreementAdapter G Δ BNE r L
+p06ConcreteWalkCountAgreementAdapter agreement = record
+  { concreteAgreement = agreement
+  ; membershipIndexedSemantics =
+      GC.generatedWalksToMembershipIndexedCanonicalWalkObjectList
+        _ agreement
+  ; countAgrees = GC.ConcreteWalkCountAgreement.countAgrees agreement
+  ; membershipIndexingBlocker = true
+  ; membershipIndexingBlockerIsActive = refl
+  }
 
 ------------------------------------------------------------------------
 -- §1.  Postulated dfsEncoding.
@@ -172,6 +232,107 @@ postulate
     (G : Graph) (Δ : ℕ) (bd : BoundedDegree G Δ)
     (r : GC.Graph.Vertex G) (n : ℕ) →
     countSkeletons G r n ≤ pow (Δ * Δ) n
+
+------------------------------------------------------------------------
+-- §5.  Active semantic P06 surface.
+--
+-- The old carrier above is retained as a compatibility surface for files
+-- which have not yet migrated.  New P06 work must use this record instead:
+-- its only open inputs are the two semantic meanings of the abstract count
+-- functions.  Everything from the canonical enumerations through the DFS
+-- injection and the (Δ²)^n estimate is derived in GraphCombinatorics.
+------------------------------------------------------------------------
+
+record P06SemanticCountWitness
+  (G : Graph) (Δ : ℕ) (r : GC.Graph.Vertex G) (n : ℕ)
+  (FBE : FiniteBallEnumeration G r (n ∸ 1)) : Set₁ where
+  field
+    skeletonSemantics : CountSkeletonsSemantics G r n FBE
+    walkSemantics : CountWalksSemantics G r (n + n)
+
+    encodingData : ActualSkeletonEncodingData G r n
+    encodingData≡ :
+      encodingData ≡
+      actualSkeletonEncodingDataFromSemantics skeletonSemantics walkSemantics
+
+    p06SkeletonCountBound :
+      countSkeletons G r n ≤ pow (Δ * Δ) n
+
+-- The constructor is the single active P06 dependency boundary.  The
+-- equality field above makes the derivation explicit in the record rather
+-- than silently duplicating the construction.
+p06SemanticCountWitness :
+  {G : Graph} {Δ : ℕ} {r : GC.Graph.Vertex G} {n : ℕ}
+  {FBE : FiniteBallEnumeration G r (n ∸ 1)} →
+  BoundedDegree G Δ →
+  CountSkeletonsSemantics G r n FBE →
+  CountWalksSemantics G r (n + n) →
+  P06SemanticCountWitness G Δ r n FBE
+p06SemanticCountWitness {G} {Δ} {r} {n} {FBE} bd skelSem walkSem =
+  let encData = actualSkeletonEncodingDataFromSemantics skelSem walkSem
+  in record
+    { skeletonSemantics = skelSem
+    ; walkSemantics = walkSem
+    ; encodingData = encData
+    ; encodingData≡ = refl
+    ; p06SkeletonCountBound = actualSkeletonCountBound bd encData
+    }
+
+-- Named projections for downstream P06 reducers.  These replace the old
+-- encode/decode/decenc/count-bound postulate bundle on the active route.
+countSemanticsToP06EncodingData :
+  {G : Graph} {Δ : ℕ} {r : GC.Graph.Vertex G} {n : ℕ}
+  {FBE : FiniteBallEnumeration G r (n ∸ 1)} →
+  BoundedDegree G Δ →
+  CountSkeletonsSemantics G r n FBE →
+  CountWalksSemantics G r (n + n) →
+  ActualSkeletonEncodingData G r n
+countSemanticsToP06EncodingData bd skelSem walkSem =
+  P06SemanticCountWitness.encodingData
+    (p06SemanticCountWitness bd skelSem walkSem)
+
+countSemanticsToP06SkeletonCountBound :
+  {G : Graph} {Δ : ℕ} {r : GC.Graph.Vertex G} {n : ℕ}
+  {FBE : FiniteBallEnumeration G r (n ∸ 1)} →
+  BoundedDegree G Δ →
+  CountSkeletonsSemantics G r n FBE →
+  CountWalksSemantics G r (n + n) →
+  countSkeletons G r n ≤ pow (Δ * Δ) n
+countSemanticsToP06SkeletonCountBound bd skelSem walkSem =
+  P06SemanticCountWitness.p06SkeletonCountBound
+    (p06SemanticCountWitness bd skelSem walkSem)
+
+-- Concrete entrypoint for the active P06 route.  The old generic
+-- `CountSkeletonsSemantics` remains available to compatibility consumers,
+-- but new callers can supply the normalized concrete candidate semantics
+-- directly.
+p06ConcreteSemanticCountWitness :
+  {G : Graph} {Δ : ℕ} {r : GC.Graph.Vertex G} {n : ℕ}
+  {FBE : FiniteBallEnumeration G r (n ∸ 1)} →
+  BoundedDegree G Δ →
+  ConcreteCountSkeletonsSemantics G r n FBE →
+  CountWalksSemantics G r (n + n) →
+  P06SemanticCountWitness G Δ r n FBE
+p06ConcreteSemanticCountWitness bd concreteSkelSem walkSem =
+  p06SemanticCountWitness
+    bd
+    (concreteCountSkeletonsSemanticsToCountSkeletonsSemantics concreteSkelSem)
+    walkSem
+
+-- Explicit witness-list entrypoint.  This is the preferred construction when
+-- Connected is not exposed through a stable decidability instance.
+p06ExplicitCandidateSemanticCountWitness :
+  {G : Graph} {Δ : ℕ} {r : GC.Graph.Vertex G} {n : ℕ}
+  {FBE : FiniteBallEnumeration G r (n ∸ 1)} →
+  BoundedDegree G Δ →
+  ExplicitSkeletonCandidateEnumeration G r n FBE →
+  CountWalksSemantics G r (n + n) →
+  P06SemanticCountWitness G Δ r n FBE
+p06ExplicitCandidateSemanticCountWitness bd enum walkSem =
+  p06SemanticCountWitness
+    bd
+    (GC.explicitSkeletonCandidateEnumerationToCountSkeletonsSemantics enum)
+    walkSem
 
 ------------------------------------------------------------------------
 -- §4.  Partial inhabitant.

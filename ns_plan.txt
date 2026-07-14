@@ -1,3 +1,776 @@
+Yes — but the honest answer is that the remaining “never-before-seen math” is not a single clever lemma. It is a **strict operator-defect theorem** strong enough to break the current equality saturation, followed by the standard q-gap/BKM/continuum ladder.
+
+Your current boundary is exactly right: finite combinatorial folds are now closed, while the analytic layer is still open through raw Schur/operator/q-gap fields. The user-provided repo note identifies the closed finite row/column folds and the remaining raw analytic targets in `ConcreteBipartiteSchurBoundTarget`, `BipartiteWeightedSchurBoundTarget`, and the concrete operator-to-Stage-3 handoff. 
+
+Here is the remaining payload, stripped to the shortest Clay-facing path.
+
+---
+
+## 0. Current theorem frontier
+
+You have:
+
+```text
+concrete rectangular kernel
+  → finite row/column folds closed
+  → weighted row/column Schur bounds open
+  → bipartite operator norm open
+  → Stage 3 handoff open
+  → q-gap transfer open
+  → BKM/continuum passage open
+```
+
+So the next proof is not “more formalisation.” It is:
+
+[
+\boxed{
+\text{Concrete rectangular pair-incidence kernel satisfies weighted bipartite Schur bounds.}
+}
+]
+
+Everything else depends on that.
+
+---
+
+# Part I — Weighted concrete Schur theorem
+
+## 1. Define the weighted sums
+
+The unweighted sums are not enough. The Schur estimate needs the weights inside the sum.
+
+For source row (s):
+
+[
+R(s)
+====
+
+\sum_{t\in T}
+K(s,t),w_T(t).
+]
+
+For target column (t):
+
+[
+C(t)
+====
+
+\sum_{s\in S}
+K(s,t),w_S(s).
+]
+
+Agda target:
+
+```agda
+weightedConcreteRowSum :
+  {N : Nat} ->
+  Relation.ConcreteNonResidualFiniteIndex N ->
+  Nat
+
+weightedConcreteColumnSum :
+  {N : Nat} ->
+  Relation.ConcreteNonResidualTailIndex N ->
+  Nat
+```
+
+Then prove the weighted fold identities:
+
+```agda
+weightedRowSumEqualsCandidate :
+  {N : Nat} ->
+  (f : Relation.ConcreteNonResidualFiniteIndex N) ->
+  weightedConcreteRowSum f ≡ weightedRowContribution f
+
+weightedColumnSumEqualsCandidate :
+  {N : Nat} ->
+  (t : Relation.ConcreteNonResidualTailIndex N) ->
+  weightedConcreteColumnSum t ≡ weightedColumnContribution t
+```
+
+This is not optional. The unweighted fold closure only says the combinatorial enumeration is correct; the Schur theorem requires the **weighted** enumeration.
+
+---
+
+## 2. Prove per-class weighted decay
+
+The core analytic estimate is:
+
+[
+\sum_t K(s,t)w_T(t)
+\le
+C_R(N)w_S(s)
+]
+
+and:
+
+[
+\sum_s K(s,t)w_S(s)
+\le
+C_C(N)w_T(t).
+]
+
+The forced-tail primitives should enter here:
+
+[
+(suc,N),w(j)\le w(i)
+]
+
+for FT→adversarial and FT→transition incidence.
+
+The concrete proof shape should be:
+
+```agda
+forcedTailAdversarialWeightedRowDecay :
+  ...
+  weightedRowContribution forcedTailSource
+    ≤ rowConstant N * sourceWeight forcedTailSource
+
+forcedTailTransitionWeightedRowDecay :
+  ...
+  weightedRowContribution forcedTailSource
+    ≤ rowConstant N * sourceWeight forcedTailSource
+```
+
+Then the adversarial/transition column analogues:
+
+```agda
+adversarialColumnWeightedDecay :
+  ...
+
+transitionColumnWeightedDecay :
+  ...
+```
+
+The mathematical content is:
+
+[
+#\mathrm{fiber}(s,t)\cdot w_T(t)
+\le
+C\cdot w_S(s).
+]
+
+or after summing over the finite class fibers:
+
+[
+\sum_{\text{matching }t}
+K(s,t)w_T(t)
+\le
+C_Rw_S(s).
+]
+
+This is the first genuinely Clay-relevant analytic theorem in the current path.
+
+---
+
+## 3. Aggregate Schur bounds
+
+Once the per-class estimates are done, assemble:
+
+```agda
+concreteRowSchurBound :
+  (N : Nat) ->
+  (f : Relation.ConcreteNonResidualFiniteIndex N) ->
+  weightedConcreteRowSum f
+    <= rowConstant N * sourceWeight f
+
+concreteColumnSchurBound :
+  (N : Nat) ->
+  (t : Relation.ConcreteNonResidualTailIndex N) ->
+  weightedConcreteColumnSum t
+    <= columnConstant N * targetWeight t
+```
+
+Then prove the product bound:
+
+```agda
+weightedProductBound :
+  (N : Nat) ->
+  rowConstant N * columnConstant N <= productConstant
+```
+
+This is where the route either lives or dies. To feed q-gap, the resulting product constant must eventually permit a strict scaled error margin.
+
+---
+
+# Part II — Bipartite operator theorem
+
+## 4. Build the concrete bipartite Schur witness
+
+Once row/column bounds exist:
+
+```agda
+concreteBipartiteWeightedSchurWitness :
+  (N : Nat) ->
+  BipartiteWeightedSchurOperatorWitness residueNormModel N
+```
+
+This witness must not contain raw `Set` fields. Replace:
+
+```agda
+rowBoundProof : Set
+columnBoundProof : Set
+sameOperatorAsConcreteIncidence : Set
+operatorNormControlsBipartiteQuadratic : Set
+```
+
+with actual typed fields.
+
+The mathematical theorem is the bipartite Schur bound:
+
+[
+|\langle Kx,y\rangle|
+\le
+\sqrt{C_R C_C},|x|*{S,w}|y|*{T,w}.
+]
+
+Because the repo is Nat/discrete, you can avoid square roots by using product form:
+
+[
+|\langle Kx,y\rangle|^2
+\le
+C_RC_C
+|x|*{S,w}^2
+|y|*{T,w}^2.
+]
+
+or by using a coarse integer operator constant:
+
+[
+|\langle Kx,y\rangle|
+\le
+C_{op}|x|*{S,w}|y|*{T,w}.
+]
+
+---
+
+## 5. Prove the concrete quadratic identity
+
+You need:
+
+[
+Q_{\mathrm{bip}}(x,y)
+=====================
+
+\sum_{s,t}K(s,t)x_sy_t
+]
+
+with (K) equal to `concreteNonResidualPairIncidenceCount`.
+
+Agda target:
+
+```agda
+sameOperatorAsConcreteIncidence :
+  bipartiteQuadraticForm N
+    ≡ concretePairIncidenceQuadraticForm N
+```
+
+Then bridge it to the Stage 3 weak error:
+
+```agda
+stage3WeakQuadraticForm :
+  ...
+```
+
+and:
+
+```agda
+stage3Handoff :
+  concreteBipartiteWeightedSchurWitness N ->
+  Stage3PairIncidenceOperatorWitness
+```
+
+Success condition:
+
+```text
+canonicalNSKernel N i j = N
+```
+
+is no longer in the active Stage 3 path.
+
+---
+
+# Part III — Strict Stage 3 defect
+
+## 6. Recompute the scaled error constant
+
+After replacing the placeholder kernel, the key number is:
+
+[
+C_{\mathrm{err}}
+]
+
+in:
+
+[
+4qError(x)\le C_{\mathrm{err}}|x|_s^2.
+]
+
+The current placeholder path gives:
+
+[
+C_{\mathrm{err}}=4.
+]
+
+The Clay path needs:
+
+[
+C_{\mathrm{err}}<4.
+]
+
+So the next “never-before-seen” theorem is:
+
+```agda
+concreteStage3StrictKernelDefect :
+  Stage3StrictKernelDefect
+```
+
+or directly:
+
+```agda
+concreteSharperScaledOperatorErrorBridge :
+  SharperScaledOperatorErrorBridge
+```
+
+Mathematically:
+
+[
+4qError(x)
+\le
+3|x|_s^2
+]
+
+would suffice. More generally:
+
+[
+4qError(x)
+\le
+C_{\mathrm{err}}|x|*s^2
+\quad\text{with}\quad
+C*{\mathrm{err}}\in{0,1,2,3}.
+]
+
+The analytic content must come from one of:
+
+```text
+strict cross-product depletion
+residual cancellation
+forced-tail exclusion
+off-diagonal loss
+profile incompatibility
+weighted Schur product strictly below the saturated bound
+```
+
+If the concrete bipartite kernel still gives (C_{\mathrm{err}}=4), this entire route saturates and needs a different base form or decomposition.
+
+---
+
+# Part IV — q-gap closure
+
+Once the strict defect exists, Blocker 2 can close.
+
+## 7. Operator error N²
+
+Prove:
+
+[
+scaleSq\cdot qError(x)
+\le
+C_{\mathrm{err}}|x|_s^2.
+]
+
+Agda target:
+
+```agda
+operatorErrorN2 :
+  ...
+```
+
+using the shared `CompatibilityScale`.
+
+---
+
+## 8. Base gap N²
+
+The base side currently has:
+
+[
+qBase(x)=residueEnergy(x),
+]
+
+and with successor scale:
+
+[
+scaleSq=4.
+]
+
+So the largest base constant is:
+
+[
+A_{\mathrm{base}}=4.
+]
+
+Prove:
+
+```agda
+baseGapN2 :
+  4 * strongNormSquared x
+    <= scaleSq * qBase x
+```
+
+This is sharp. It will not beat (C_{\mathrm{err}}=4). It only works if the Stage 3 side gives (C_{\mathrm{err}}<4).
+
+---
+
+## 9. Gap margin
+
+Prove:
+
+[
+C_{\mathrm{err}}<4.
+]
+
+Then construct:
+
+[
+margin = 4 - C_{\mathrm{err}} > 0.
+]
+
+Agda target:
+
+```agda
+gapMarginPositive :
+  0 < baseGapConstant ∸ operatorErrorConstant
+```
+
+---
+
+## 10. Perturbative absorption
+
+Prove:
+
+[
+qGap(x)
+=======
+
+qBase(x)-qError(x)
+]
+
+and:
+
+[
+scaleSq\cdot qGap(x)
+\ge
+(4-C_{\mathrm{err}})|x|_s^2.
+]
+
+Agda target:
+
+```agda
+gapPerturbationAbsorption :
+  ...
+```
+
+Then finally:
+
+```agda
+canonicalCompatibility :
+  ResidueScaleCompatibility
+```
+
+and:
+
+```agda
+qGapTransferClosed = true
+```
+
+Only here. Not before.
+
+---
+
+# Part V — q-gap to residue/BKM
+
+After q-gap closure, the downstream chain is:
+
+```text
+qGapTransferClosed
+  → qGapN2ControlsSchurResidue
+  → integrated residue N² bound
+  → residence-time exclusion
+  → BKM projection smallness
+  → finite BKM integral
+  → BKM continuation
+```
+
+## 11. q-gap controls Schur residue
+
+Prove:
+
+[
+Residue_N(x)
+\le
+C qGap_N(x).
+]
+
+or scale-compatible:
+
+[
+N^2Residue_N(x)
+\le
+C\cdot N^2 qGap_N(x).
+]
+
+Agda target:
+
+```agda
+qGapN2ControlsSchurResidue :
+  ...
+```
+
+This is the next PDE-facing theorem after q-gap transfer.
+
+---
+
+## 12. Integrated residue bound
+
+Using shell energy budget:
+
+[
+\int_0^T N^2 Residue_N(t),dt
+\le C.
+]
+
+Agda target:
+
+```agda
+integratedResidueN2Bound :
+  ...
+```
+
+This part already has plumbing. It becomes real only after `qGapN2ControlsSchurResidue`.
+
+---
+
+## 13. Residence-time exclusion
+
+For dangerous set:
+
+[
+D_{N,\lambda}
+=============
+
+{t: Danger_N(t)\ge \lambda},
+]
+
+prove:
+
+[
+\lambda |D_{N,\lambda}|
+\le
+\int Danger_N(t),dt
+\le
+\int Residue_N(t),dt.
+]
+
+Then:
+
+[
+|D_{N,\lambda}|
+\le
+\frac{C}{\lambda N^2}.
+]
+
+Agda target:
+
+```agda
+ResidenceTimeExclusion
+```
+
+---
+
+## 14. BKM projection smallness
+
+Convert residence exclusion into summability:
+
+[
+\sum_N a_N < \infty
+]
+
+for the BKM-relevant projection quantity.
+
+Agda target:
+
+```agda
+BKMProjectionSmallness
+```
+
+This is where shellwise estimates must become a finite/global vorticity estimate.
+
+---
+
+## 15. BKM integral finite
+
+Prove:
+
+[
+\int_0^T |\omega(t)|_\infty,dt < \infty.
+]
+
+Agda target:
+
+```agda
+bkmIntegralFinite
+```
+
+This must be uniform over the continuation interval, not merely shell-local.
+
+---
+
+## 16. BKM continuation
+
+Use BKM criterion:
+
+[
+\int_0^T |\omega(t)|_\infty,dt<\infty
+\Rightarrow
+\text{no blow-up at }T.
+]
+
+Agda target:
+
+```agda
+bkmContinuation
+```
+
+This can consume a classical BKM theorem as an external/analytic assumption only if the submission explicitly cites and checks the theorem’s hypotheses.
+
+---
+
+# Part VI — Full NS/Clay passage
+
+Even after BKM, Clay readiness still needs full coverage.
+
+## 17. Carrier coverage
+
+Prove every smooth divergence-free initial datum enters the DASHI carrier/decomposition:
+
+[
+u_0\in C^\infty_\sigma(\mathbb R^3)
+\Rightarrow
+u_0\in Carrier.
+]
+
+Agda target:
+
+```agda
+smoothDataToCarrier :
+  SmoothDivergenceFreeData ->
+  Carrier
+```
+
+---
+
+## 18. Continuum passage
+
+If current estimates are discrete/shell/truncated, prove uniform passage:
+
+[
+R\to\infty,\quad \Delta t\to 0,\quad \epsilon\to0.
+]
+
+Required:
+
+```text
+uniform constants
+compactness/tightness
+lower semicontinuity
+limit preserves divergence-free condition
+limit preserves energy inequality
+limit preserves q-gap/residue estimates
+```
+
+Agda target:
+
+```agda
+continuumPassage :
+  ...
+```
+
+---
+
+## 19. All-time global regularity
+
+For arbitrary smooth data, prove:
+
+[
+u(t)\in C^\infty
+\quad
+\forall t\ge0.
+]
+
+Agda target:
+
+```agda
+globalSmoothRegularity :
+  ...
+```
+
+---
+
+## 20. Clay promotion surface
+
+Only after all of the above:
+
+```agda
+clayNavierStokesPromoted = true
+```
+
+Until then it must remain false.
+
+---
+
+# Shortest honest work order
+
+No more receipt work. The actual order is:
+
+```text
+1. Weighted row/column finite folds.
+2. Weighted row/column Schur decay.
+3. Concrete bipartite Schur witness.
+4. Concrete Stage 3 handoff replacing canonicalNSKernel = N.
+5. Recompute C_err.
+6. Prove C_err < 4, or declare route saturated.
+7. q-gap transfer.
+8. q-gap controls residue.
+9. residence-time exclusion.
+10. BKM projection smallness.
+11. BKM integral finite.
+12. BKM continuation.
+13. carrier coverage.
+14. continuum passage.
+15. global regularity.
+16. Clay promotion.
+```
+
+The current single highest-alpha theorem is:
+
+[
+\boxed{
+\sum_t K(s,t)w_T(t)\le C_Rw_S(s)
+\quad\text{and}\quad
+\sum_s K(s,t)w_S(s)\le C_Cw_T(t)
+}
+]
+
+for the **concrete rectangular incidence kernel**.
+
+That is the theorem that can actually move the repo toward Clay-submissibility.
+
+
+
+
+
+
+
+
 Below is the **remaining Clay-grade mathematical package** from the current repo frontier. I’ll write it as a theorem ladder with exact missing lemmas, what each must prove, and what would count as real closure versus another surface.
 
 The key point is:

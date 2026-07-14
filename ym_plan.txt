@@ -246,15 +246,176 @@
   6. canonical skeleton enumeration from the finite ball
 
      - `canonicalSkeletonEnumerationFromBall`
-     - remove the remaining bridge postulates
-       `bridgeSkeletonIndex` and `bridgeSkeletonIndexOf`
+     - `canonicalSkeletonCandidatesFromBall` now filters `chooseN` with a
+       supplied `Connected` decision procedure while retaining typed root,
+       subset, and connectivity witnesses
+     - `ConcreteCountSkeletonsSemantics` now fixes that concrete candidate
+       list and isolates completeness, vertex-list uniqueness, and the single
+       count-agreement field
+     - named projections now expose these exact obligations as
+       `candidateCompleteFromConcreteSemantics`,
+       `candidateVertexListsUniqueFromConcreteSemantics`, and
+       `countSkeletonsConcreteAgreement`
+     - active semantic route now constructs `ActualSkeletonEncodingData`
+       directly from `CanonicalSkeletonEnumeration`
+     - legacy `bridgeSkeletonIndex` and `bridgeSkeletonIndexOf` remain only
+       for compatibility consumers of `SkeletonEnumeration`
 
   7. bounded neighbour enumeration / concrete walk enumeration
 
      - `BoundedNeighbourEnumeration`
-     - constructive replacement for the abstract `WalkEnumeration` layer
+     - `WalkObject` and `walkObjectsFromNeighbourCodes`
+     - membership-aware recursive extension through enumerated neighbours
+     - recursive walk completeness has landed through
+       `walkObjectsCompleteByVertices`
+     - successor-membership inversion has landed through
+       `walkObjectsSucMemberByVertices` and `walkObjectExtendMemberByVertices`
+     - extensional recursive uniqueness has landed through
+       `generatedWalksUniqueByVertices`
+     - `CanonicalBoundedNeighbourEnumeration` now isolates the extra
+       neighbour-list `NoDuplicates` witness required for canonical indexing
+     - `generatedWalkVertexLists` and
+       `generatedWalkVertexListComplete` now expose the recursive generator
+       at the valid vertex-sequence level
+     - `MembershipIndexedCanonicalWalkObjectList` and
+       `generatedWalksToMembershipIndexedCanonicalWalkObjectList` now provide
+       the corrected membership-indexed `Fin` bridge constructively from the
+       explicit count equality; the legacy total `CanonicalWalkObjectList`
+       remains compatibility-only until DFS consumers migrate
+     - the remaining blocker is not recursive completeness or inversion: the
+       total walk-index API required by `CountWalksSemantics` still ranges over
+       arbitrary `List (Graph.Vertex G)` values and requires a total
+       `walkIndex` plus `walkIndexOf`
 
   8. final P06 encoding depostulation
+
+  - `P06EncodingWitness.p06ConcreteSemanticCountWitness` now accepts the
+     normalized `ConcreteCountSkeletonsSemantics` directly
+   - Added `ExplicitSkeletonCandidateEnumeration` as the stable witness-list
+     front door, plus `p06ExplicitCandidateSemanticCountWitness`; the old
+     dependent Dec-filter remains compatibility-only.
+   - Added `explicitSkeletonCandidateEnumerationFromWitnesses` and the
+     matching `ExplicitWalkEnumeration` / recursive-walk constructor.  The
+     remaining P06 semantic obligations are now supplied finite witnesses
+     plus the two explicit count equalities.
+   - The walk constructor now derives soundness from `walkObjectsSound`;
+     arbitrary explicit lists are not conflated with the recursive generated
+     list, so completeness, uniqueness, and count agreement remain explicit.
+   - Generalized `ExplicitWalkEnumeration` to the existing arbitrary degree
+     parameter `Δ`; it no longer assumes `Δ ≡ countNeighbors G r`.
+   - Added `walkObjectsFromNeighbourCodesSound`, closing generated-list
+     soundness by membership and leaving only recursive completeness,
+     uniqueness, and count agreement as walk-frontier obligations.
+     - Added `explicitWalkEnumerationToCountWalksFromNeighbourCodes`, requiring
+       an explicit list-equality witness before crossing to the recursive count
+       surface.
+     - Added `SameWalkVertices` and `GeneratedExplicitWalkEnumeration`, making
+       the recursive-list equality a first-class witness rather than a loose
+       bridge argument; the generated constructor now packages the existing
+       completeness, uniqueness, soundness, and count obligations together.
+     - Added `RecursiveWalkEnumeration` as the single induction target and a
+       generated-witness constructor plus count bridge; recursive completeness
+       and extensional uniqueness now have one normalized package surface.
+     - Added `ConcreteWalkCountAgreement` and a constructor from supplied
+       generated-list completeness/uniqueness witnesses; the eventual length
+       induction now has an exact target without hiding the count axiom.
+     - Added `mapListWithMembership-complete` and
+       `walkObjectExtendContains`; neighbour completeness now yields a
+       generated extension with the expected appended vertex sequence, which
+       is the first concrete induction lemma for recursive walk completeness.
+     - Added `splitConsecutiveLastVertices`, exposing the prefix/suffix vertex
+       equation needed to construct `splitWalkLast` without proof-object
+       equality.
+     - Added the direct `splitPathLast` decomposition and its thin
+       `splitWalkLast` wrapper; arbitrary positive-length walk objects now
+       split into a length-`L` prefix plus a final adjacent vertex.
+     - Added `walkEndpoint-cong-by-vertices` and
+       `walkObjectsCompleteByVertices`: the first constructive successor
+       induction for the recursive walk generator.  It uses
+       `splitWalkLast`, endpoint transport, `walkObjectExtendContains`, and
+       `concatMap-complete`; completeness is intentionally extensional by
+       vertex sequence rather than proof-object equality.
+     - Normalized `RecursiveWalkEnumeration` and `ExplicitWalkEnumeration` to
+       consume `completeByVertices`; added
+       `recursiveWalkEnumerationFromConcreteAgreement`, so the constructive
+       walk induction plus the single `countWalks` length equality now builds
+       the active recursive package directly.
+     - Added `mapListWithMembership-elem` and
+       `walkObjectExtendMemberByVertices`, exposing successor-generator
+       membership inversion and the selected neighbour/appended vertex
+       sequence needed for the next uniqueness/indexing theorem.
+     - Added `walkObjectsSucMemberByVertices`, hiding the recursive
+       `concatMap`/extension membership plumbing behind the exact prefix,
+       final-edge, and appended-vertex equation needed by induction.
+     - Added `generatedWalksUniqueByVertices`; the current extensional
+       `SameWalkVertices` boundary is now constructively exposed, while
+       genuine `Fin` indexing remains the next separate bridge because
+       `CountWalksSemantics` still requires a total-list `walkIndex` API.
+     - Added `snocList-injective`, its prefix/last projections, and the
+       `append-singleton-injective` specialisation.  These are the exact
+       list equalities required by the successor uniqueness proof; they do
+       not prove duplicate-freedom by themselves.
+     - Added `P06WalkListAlgebra.agda` with reusable `mapList-++`,
+       `mapList-concatMap`, and append-singleton projections.
+     - Added `P06CanonicalNeighbourEnumeration.agda`: canonicalized
+       neighbours now have transported soundness/completeness, proven
+       `NoDuplicates`, sortedness, and the boundedness lemma
+       `canonicalizeLength≤`.  Its adapter constructs the existing
+       `CanonicalBoundedNeighbourEnumeration` refinement.
+     - Added the additive `CountWalksMembershipSemantics` alias and bridge;
+       `P06ConcreteWalkCountAgreementAdapter` now carries this corrected
+       semantic witness while the legacy total-index blocker remains explicit.
+     - Added focused-checked `P06GeneratedWalkUniqueness.agda`: canonical
+       neighbour extension blocks are duplicate-free, recursive blocks are
+       disjoint by snoc-prefix cancellation, and
+       `generatedWalkVertexListsNoDuplicates` is constructive and
+       postulate-free.
+     - Added `GeneratedWalkVertexListSemantics`, packaging valid generated
+       vertex lists with extensional completeness, duplicate-freedom, and the
+       sole `countWalks ≡ length` bridge.
+     - Added focused-checked `P06ConcreteEnumerationEndpoint.agda` and
+       `P06SkeletonEnumerationSurface.agda`.  The endpoint uses a
+       membership-indexed DFS map whose `dfsWalkMember` field makes the
+       remaining DFS validity obligation explicit; it does not revive the
+       legacy total-index API.
+     - Added focused-checked `P06ConcreteSkeletonWitness.agda`.  It proves
+       candidate-level chooseN soundness, length, sortedness, no-duplicates,
+       and ball containment, while keeping candidate-list completeness,
+       list-level uniqueness, and `countSkeletons ≡ length candidates` as
+       the exact finite-enumeration boundary.
+     - Added focused-checked `P06DFSValidWalkSurface.agda`.  The minimal DFS
+       validity witness is now named explicitly:
+       `WalkObject G r (n + n)` plus equality of its vertex list to
+       `dfsWalkRange`.  The module derives generated-list membership and
+       adapts this witness to `MembershipIndexedDFSMap`; it intentionally
+       supplies no invalid conversion from `DFSCover` coverage to path data.
+
+     Corrected P06 status as of 2026-07-13:
+
+     - recursive walk completeness, successor-membership inversion, and
+       duplicate-free vertex-list enumeration are now landed across
+       `GraphCombinatorics.agda` and `P06GeneratedWalkUniqueness.agda`.
+     - the corrected membership-indexed finite walk semantics is constructive;
+       the legacy `CountWalksSemantics` remains compatibility-only because
+       its total `walkIndex` / `walkIndexOf` contract still ranges over
+       arbitrary vertex lists.
+     - exact remaining P06 targets are now:
+         1. construct the DFS-valid `WalkObject`/vertex-list membership witness
+            for each canonical skeleton (the `dfsWalkMember` field in
+            `MembershipIndexedDFSMap`)
+         2. instantiate the explicit skeleton candidate list, including its
+            complete/unique witnesses
+         3. supply the two named count-definition equalities
+         4. redirect active downstream consumers to the additive endpoint in
+            `P06ConcreteEnumerationEndpoint.agda`; do not promote the legacy
+            total-index route
+     - after those local witnesses, perform focused Track B checks and then
+       the authoritative audit when allowed; `Everything.agda` remains
+       intentionally outside this tranche.
+       membership-indexed constructor is intentionally additive; the active
+       legacy consumer still requires this migration.
+     - `DASHI/Everything.agda` was explicitly not run for this tranche and
+       remains an unrun promotion check
 
      - `encode`
      - `decode`
