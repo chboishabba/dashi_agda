@@ -1,12 +1,12 @@
 module DASHI.Physics.YangMills.P06ActiveConsumerMigration where
 
 ------------------------------------------------------------------------
--- Additive active-consumer projection for P06.
+-- P06 consumer projections.
 --
--- The endpoint is accepted as the exact remaining P06 input.  This keeps
--- the migration compiling while the dependent equality between a concrete
--- canonical skeleton enumeration and a DFS witness is still open.  No
--- legacy total `CountWalksSemantics` record is imported or constructed.
+-- `P06ActiveConsumer` below is retained as the legacy exact-(n + n)
+-- compatibility surface.  `P06OwnedActiveConsumer` is the preferred route:
+-- it constructs the exact Euler-DFS injection internally and exposes only
+-- finite count semantics, undirected adjacency, and a positive degree bound.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -30,10 +30,18 @@ open import DASHI.Physics.YangMills.P06ConcreteEnumerationEndpoint as Endpoint
 
 open import DASHI.Physics.YangMills.P06DFSValidWalkSurface as DFS
   using ( DFSValidWalkMapWitness )
+open import DASHI.Physics.YangMills.P06ConstructiveSpanningTreeDFS
+  using ( UndirectedGraphStructure )
+open import DASHI.Physics.YangMills.P06ConcreteEnumerationEndpoint
+  using ( CanonicalBoundedNeighbourEnumerationWithDegree )
+open import DASHI.Physics.YangMills.P06ExactEnumerationEndpoint as Exact
+  using ( P06ConcreteCountSemantics
+        ; P06ConcreteEnumerationTheoremOwned
+        )
 
 ------------------------------------------------------------------------
--- The live additive consumer: all downstream projections consume this
--- endpoint and therefore stay on the membership-indexed walk surface.
+-- Legacy exact-(n + n) compatibility consumer.  New consumers should use
+-- `P06OwnedActiveConsumer` below.
 ------------------------------------------------------------------------
 
 record P06ActiveConsumer
@@ -43,9 +51,7 @@ record P06ActiveConsumer
     endpoint : P06ConcreteEnumerationEndpoint {Δ = Δ} {n = n} FBE
 
 ------------------------------------------------------------------------
--- Exact DFS input boundary for a future endpoint constructor.  CE is kept
--- explicit: forcing it to be definitionally equal to the endpoint's
--- derived canonical enumeration is the remaining dependent bridge.
+-- Legacy exact-(n + n) DFS-input boundary.
 ------------------------------------------------------------------------
 
 record P06ActiveDFSInput
@@ -113,3 +119,40 @@ activeEncodingDataIsEndpointData :
     ≡ activeEncodingData consumer
 activeEncodingDataIsEndpointData
   {G = G} {Δ = Δ} {r = r} {n = n} {FBE = FBE} consumer = refl
+
+------------------------------------------------------------------------
+-- Exact-length owned consumer.  This is the preferred new surface: unlike
+-- P06ActiveConsumer, it neither carries a legacy n+n DFS map nor exposes
+-- any traversal implementation witness.
+------------------------------------------------------------------------
+
+record P06OwnedActiveConsumer
+  {G : Graph} {Δ : ℕ} {r : Graph.Vertex G} {n : ℕ}
+  (FBE : FiniteBallEnumeration G r (n ∸ 1)) : Set₁ where
+  field
+    undirected : UndirectedGraphStructure G
+    positiveΔ : 1 ≤ Δ
+    neighbourEnumeration :
+      CanonicalBoundedNeighbourEnumerationWithDegree G Δ
+    skeletonEnumeration :
+      GC.ExplicitSkeletonCandidateEnumeration G r n FBE
+    countSemantics :
+      P06ConcreteCountSemantics
+        FBE neighbourEnumeration skeletonEnumeration
+
+open P06OwnedActiveConsumer public
+
+ownedActiveSkeletonCountBound :
+  {G : Graph} {Δ : ℕ} {r : Graph.Vertex G} {n : ℕ}
+  {FBE : FiniteBallEnumeration G r (n ∸ 1)}
+  (consumer : P06OwnedActiveConsumer {Δ = Δ} {n = n} FBE) →
+  countSkeletons G r n ≤ pow (Δ * Δ) n
+ownedActiveSkeletonCountBound
+  {G = G} {Δ = Δ} {r = r} {n = n} {FBE = FBE} consumer =
+  P06ConcreteEnumerationTheoremOwned
+    FBE
+    (undirected consumer)
+    (positiveΔ consumer)
+    (neighbourEnumeration consumer)
+    (skeletonEnumeration consumer)
+    (countSemantics consumer)
