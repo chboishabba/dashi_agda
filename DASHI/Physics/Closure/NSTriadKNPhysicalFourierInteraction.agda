@@ -58,29 +58,34 @@ physicalNSFourierTrilinearTerm {C = C} I u τ =
             (Fourier.dotModeCoefficient C (Lattice.left τ) (u (Lattice.right τ))))
           (u (Lattice.left τ)))))
 
-physicalInteractionCoefficient :
+-- This is the two-input helper only.  It represents the sum of the two
+-- ordered convolution terms and is therefore correct on a non-diagonal
+-- input-swap orbit, but would double the singleton orbit `(p , p)`.
+-- The canonical physical coefficient for a cutoff carrier is defined in
+-- `NSTriadKNFiniteConvolutionReconstruction` on `UnorderedInputOrbit`.
+offDiagonalSymmetrizedInteraction :
   {S : Scalar.ExactOrderedScalar} → {C : Fourier.ComplexFourierInterface S} →
   ExactNSFourierInteractionStructure S C →
   (Lattice.LatticeMode3 → Fourier.FourierVector C) →
   Lattice.LatticeTriad → Scalar.Scalar S
-physicalInteractionCoefficient {S = S} I u τ =
+offDiagonalSymmetrizedInteraction {S = S} I u τ =
   Scalar.neg S (realPart I (physicalNSFourierTrilinearTerm I u τ))
 
-physicalInteractionCoefficientFormula :
+offDiagonalSymmetrizedInteractionFormula :
   {S : Scalar.ExactOrderedScalar} → {C : Fourier.ComplexFourierInterface S} →
   (I : ExactNSFourierInteractionStructure S C) →
   (u : Lattice.LatticeMode3 → Fourier.FourierVector C) →
   (τ : Lattice.LatticeTriad) →
-  physicalInteractionCoefficient I u τ ≡
+  offDiagonalSymmetrizedInteraction I u τ ≡
   Scalar.neg S (realPart I (physicalNSFourierTrilinearTerm I u τ))
-physicalInteractionCoefficientFormula I u τ = refl
+offDiagonalSymmetrizedInteractionFormula I u τ = refl
 
-physicalInteractionLawFromFourierConvection :
+offDiagonalSymmetrizedInteractionLawFromFourierConvection :
   {S : Scalar.ExactOrderedScalar} → {C : Fourier.ComplexFourierInterface S} →
   ExactNSFourierInteractionStructure S C →
   {N : Nat} → Fourier.PhysicalTriadInteractionLaw S C N
-physicalInteractionLawFromFourierConvection I =
-  record { coherenceFormula = physicalInteractionCoefficient I }
+offDiagonalSymmetrizedInteractionLawFromFourierConvection I =
+  record { coherenceFormula = offDiagonalSymmetrizedInteraction I }
 
 -- This is the PDE-identification theorem still required for the physical
 -- route.  The existing local Python harness receives triads/coherences as

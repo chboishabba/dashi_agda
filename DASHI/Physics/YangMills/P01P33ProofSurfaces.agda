@@ -36,6 +36,7 @@ open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
   ; auditTested
   ; openTarget
   ; mixedReducer
+  ; provedConditionalReducer
   ; ClaimRole
   ; postulate-import
   ; consequence-proof
@@ -130,8 +131,8 @@ p06AnimalCountingReducerSurface =
     "The entropy lane no longer consumes P06 as a completely opaque theorem sink."
     "P07 KP summability and the Step V entropy queue."
     "The counting input remains architecturally opaque inside Step V."
-    proved
-    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06AnimalCountingReducer" consequence-proof proved
+    provedConditionalReducer
+    dashi-internal-proof "BalabanPolymerDiameterEntropy.currentP06AnimalCountingReducer (conditional on imported Balaban model leaves)" consequence-proof provedConditionalReducer
 
 p06aRootedConnectedSkeletonCountingSurface : ProofTargetSurface
 p06aRootedConnectedSkeletonCountingSurface =
