@@ -149,6 +149,16 @@ orbitIncidenceMNegNonnegative :
 orbitIncidenceMNegNonnegative I R law u r =
   OrbitInteraction.cutoffOrbitNegativeCoefficientNonnegative I R law u (orbit r)
 
+orbitIncidenceMAbsNonnegative :
+  {S : Scalar.ExactOrderedScalar} → {C : Fourier.ComplexFourierInterface S} →
+  {N : Nat} → {interaction : Fourier.PhysicalTriadInteractionLaw S C N} →
+  (I : Interaction.ExactNSFourierInteractionStructure S C) → (R : Nat) →
+  (law : OrbitInteraction.PhysicalCutoffOrbitInteractionLaw I N R) →
+  (u : Fourier.AdmissibleFourierShellData S C N interaction) →
+  (r : OrbitPairIncidence) → Scalar.Nonnegative S (orbitIncidenceMAbs I R law u r)
+orbitIncidenceMAbsNonnegative I R law u r =
+  OrbitInteraction.cutoffOrbitAbsoluteCoefficientNonnegative I R law u (orbit r)
+
 orbitIncidenceMNegLeMAbs :
   {S : Scalar.ExactOrderedScalar} → {C : Fourier.ComplexFourierInterface S} →
   {N : Nat} → {interaction : Fourier.PhysicalTriadInteractionLaw S C N} →

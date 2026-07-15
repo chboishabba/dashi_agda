@@ -231,7 +231,8 @@ orderedConvectionTerm {S = S} {C = C} I u τ =
   Scalar.neg S
     (Interaction.realPart I
       (Interaction.complexInner I
-        (Fourier.conjugateVector C (u (Lattice.out τ)))
+        (Fourier.conjugateVector C
+          (u (Lattice.modeNeg (Lattice.out τ))))
         (Interaction.lerayProject I (convolutionOutput τ)
           (Interaction.scaleFourierVector I
             (Interaction.complexMultiply I (Interaction.imaginaryUnit I)
@@ -338,7 +339,7 @@ orderedPairSymmetrisation :
 orderedPairSymmetrisation {S = S} {C = C} I A u
   (Lattice.mkLatticeTriad p q r) =
   negativeRealInnerLerayAdd I A
-    (Fourier.conjugateVector C (u r))
+    (Fourier.conjugateVector C (u (Lattice.modeNeg r)))
     (Lattice.modeNeg r)
     (Interaction.scaleFourierVector I
       (Interaction.complexMultiply I (Interaction.imaginaryUnit I)
