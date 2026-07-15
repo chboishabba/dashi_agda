@@ -19,6 +19,7 @@ open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
   ; dashi-internal-proof
   ; paperImport
   ; proved
+  ; provedConditionalReducer
   ; VerificationStatus
   ; mixedReducer
   )
@@ -1381,8 +1382,8 @@ polymerAnimalCountingBoundWitness : ImportedPolymerAnimalCountingBound
 polymerAnimalCountingBoundWitness = record
   { sourceAuthorityId = dashi-internal-proof
   ; theoremLocator =
-      "BalabanPolymerDiameterEntropy.currentP06SourceSkeletonDecompositionSemanticKernel"
-  ; status = proved
+      "BalabanPolymerDiameterEntropy.currentP06SourceSkeletonDecompositionSemanticKernel (conditional on current Balaban model leaves)"
+  ; status = provedConditionalReducer
   ; mixedReducerPayload =
       P06SourceSkeletonDecompositionSemanticKernel.payload
         currentP06SourceSkeletonDecompositionSemanticKernel

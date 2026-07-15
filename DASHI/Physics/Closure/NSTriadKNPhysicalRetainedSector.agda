@@ -3,11 +3,15 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalRetainedSector where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Bool.Base using (_∧_)
+open import Data.Bool.Base using (T; _∧_)
 open import Data.Integer.Base as ℤ using (ℤ; +_)
 open import Data.List.Base using (List; cartesianProductWith; filterᵇ)
 open import Data.List.Membership.Propositional using (_∈_)
+open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
+import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
 open import Data.Product using (_×_; _,_)
+open import Function.Base using (_∘_)
+open import Relation.Nullary.Decidable.Core using (T?)
 
 import DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads as Lattice
 
@@ -23,6 +27,12 @@ cutoffModes : Nat → List Lattice.LatticeMode3
 cutoffModes R =
   filterᵇ Lattice.nonzeroMode?
     (Data.List.Base.map (Lattice.decodeCubeCode R) (Lattice.cubeCodes R))
+
+cutoffModesUnique : (R : Nat) → Unique (cutoffModes R)
+cutoffModesUnique R =
+  UniqueP.filter⁺ (T? ∘ Lattice.nonzeroMode?)
+    (UniqueP.map⁺ (Lattice.decodeCubeCodeInjective R)
+      (Lattice.cubeCodesUnique R))
 
 -- Membership in `cutoffModes R` is the computational cutoff predicate.  It
 -- is deliberately list-based here: a coordinate inequality formulation must

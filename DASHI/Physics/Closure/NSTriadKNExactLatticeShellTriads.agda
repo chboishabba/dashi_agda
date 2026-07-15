@@ -3,15 +3,21 @@ module DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
-open import Data.Bool.Base using (_∧_; not)
+open import Data.Bool.Base using (T; _∧_; not)
 open import Data.Fin.Base as Fin using (Fin; toℕ)
+import Data.Fin.Properties as FinP
 open import Data.Integer.Base as ℤ using
-  (ℤ; +_)
+  (ℤ; +_; -_)
+import Data.Integer.Properties as ℤP
 open import Data.List.Base using
   (List; []; _∷_; allFin; cartesianProductWith; filterᵇ)
 open import Data.List.Membership.Propositional using (_∈_)
 open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
+import Data.List.Relation.Unary.Unique.Propositional.Properties as UniqueP
 open import Data.Product using (_×_; _,_)
+open import Function.Base using (_∘_)
+open import Relation.Nullary.Decidable.Core using (T?)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 ------------------------------------------------------------------------
 -- Exact finite Fourier carriers.
@@ -64,6 +70,35 @@ coordinateCodeBound N = suc (N + N)
 decodeCoordinate : (N : Nat) → Fin (coordinateCodeBound N) → ℤ
 decodeCoordinate N i = Fin.toℕ i ℤ.⊖ N
 
+-- Subtracting the fixed cutoff radius is injective on coordinate codes.  The
+-- proof restores the same integer radius on both sides and then uses the
+-- ordinary injectivity of `Fin.toℕ`.
+decodeCoordinateInjective :
+  (N : Nat) → {i j : Fin (coordinateCodeBound N)} →
+  decodeCoordinate N i ≡ decodeCoordinate N j → i ≡ j
+decodeCoordinateInjective N {i} {j} decodedEqual =
+  FinP.toℕ-injective integerCodeEqual
+  where
+  restoreCoordinate :
+    (m : Nat) → + m ≡ (m ℤ.⊖ N) ℤ.+ (+ N)
+  restoreCoordinate m =
+    sym
+      (trans
+        (cong (λ z → z ℤ.+ (+ N)) (sym (ℤP.m-n≡m⊖n m N)))
+        (trans
+          (ℤP.+-assoc (+ m) (- (+ N)) (+ N))
+          (trans
+            (cong (λ z → (+ m) ℤ.+ z) (ℤP.+-inverseˡ (+ N)))
+            (ℤP.+-identityʳ (+ m)))))
+
+  integerCodeEqual : Fin.toℕ i ≡ Fin.toℕ j
+  integerCodeEqual = ℤP.+-injective
+    (trans
+      (restoreCoordinate (Fin.toℕ i))
+      (trans
+        (cong (λ z → z ℤ.+ (+ N)) decodedEqual)
+        (sym (restoreCoordinate (Fin.toℕ j)))))
+
 CubeCode : Nat → Set
 CubeCode N =
   Fin (coordinateCodeBound N) ×
@@ -84,10 +119,38 @@ cubeCodes N =
       (allFin (coordinateCodeBound N))
       (allFin (coordinateCodeBound N)))
 
+pairConstructorInjective :
+  {A B : Set} → {a b : A} → {x y : B} →
+  (a , x) ≡ (b , y) → (a ≡ b) × (x ≡ y)
+pairConstructorInjective refl = refl , refl
+
+cubeCodesUnique : (N : Nat) → Unique (cubeCodes N)
+cubeCodesUnique N =
+  UniqueP.cartesianProductWith⁺ _,_ pairConstructorInjective
+    (UniqueP.allFin⁺ (coordinateCodeBound N))
+    (UniqueP.cartesianProductWith⁺ _,_ pairConstructorInjective
+      (UniqueP.allFin⁺ (coordinateCodeBound N))
+      (UniqueP.allFin⁺ (coordinateCodeBound N)))
+
+decodeCubeCodeInjective :
+  (N : Nat) → {x y : CubeCode N} →
+  decodeCubeCode N x ≡ decodeCubeCode N y → x ≡ y
+decodeCubeCodeInjective N {i , j , k} {i′ , j′ , k′} decodedEqual =
+  cong₂ _,_
+    (decodeCoordinateInjective N (cong k₁ decodedEqual))
+    (cong₂ _,_
+      (decodeCoordinateInjective N (cong k₂ decodedEqual))
+      (decodeCoordinateInjective N (cong k₃ decodedEqual)))
+
 exactShellModes : (N : Nat) → List LatticeMode3
 exactShellModes N =
   filterᵇ (inExactShell? N)
     (Data.List.Base.map (decodeCubeCode N) (cubeCodes N))
+
+exactShellModesUnique : (N : Nat) → Unique (exactShellModes N)
+exactShellModesUnique N =
+  UniqueP.filter⁺ (T? ∘ inExactShell? N)
+    (UniqueP.map⁺ (decodeCubeCodeInjective N) (cubeCodesUnique N))
 
 record LatticeTriad : Set where
   constructor mkLatticeTriad
