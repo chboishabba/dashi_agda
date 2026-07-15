@@ -2,13 +2,19 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCutoffOrbitModeSupport where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Fin.Base using (Fin)
+open import Data.Fin.Base using (Fin; zero; suc)
 open import Data.List.Base using (List; []; _∷_; length; lookup; deduplicate; map)
 open import Data.List.Membership.Propositional using (_∈_)
-open import Data.List.Membership.Propositional.Properties using (∈-deduplicate⁺)
+open import Data.List.Membership.Propositional.Properties using (∈-deduplicate⁺; ∈-lookup)
 open import Data.List.Relation.Unary.Any using (here; there; index)
 open import Data.List.Relation.Unary.Any.Properties using (lookup-index)
+import Data.List.Relation.Unary.All as All
+import Data.List.Relation.Unary.AllPairs.Core as AllPairs
+open import Data.List.Relation.Unary.Unique.Propositional using (Unique)
+open import Data.List.Relation.Unary.Unique.DecPropositional.Properties as UniqueDec
 open import Data.Product using (Σ; _,_)
+open import Relation.Nullary.Negation using (contradiction)
+open import Relation.Binary.PropositionalEquality using (sym; cong)
 
 import DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads as Lattice
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffModeSupport as LegacySupport
@@ -32,6 +38,27 @@ normalizedOrbitEndpointSupport :
   List Orbit.OrbitPairIncidence → List Lattice.LatticeMode3
 normalizedOrbitEndpointSupport rs =
   deduplicate LegacySupport.latticeModeDecEq (orbitEndpointSupport rs)
+
+normalizedOrbitEndpointSupportUnique :
+  (rs : List Orbit.OrbitPairIncidence) →
+  Unique (normalizedOrbitEndpointSupport rs)
+normalizedOrbitEndpointSupportUnique rs =
+  UniqueDec.deduplicate-! LegacySupport.latticeModeDecEq _
+
+-- A duplicate-free finite list has injective coordinate lookup.  This is
+-- stated locally because the physical carrier uses `Fin (length xs)` rather
+-- than a vector conversion.
+lookupUniqueInjective :
+  {A : Set} → (xs : List A) → Unique xs →
+  (i j : Fin (length xs)) → lookup xs i ≡ lookup xs j → i ≡ j
+lookupUniqueInjective [] unique () () eq
+lookupUniqueInjective (x ∷ xs) (AllPairs._∷_ x≉xs xsUnique) zero zero eq = refl
+lookupUniqueInjective (x ∷ xs) (AllPairs._∷_ x≉xs xsUnique) zero (suc j) eq =
+  contradiction eq (All.lookup x≉xs (∈-lookup j))
+lookupUniqueInjective (x ∷ xs) (AllPairs._∷_ x≉xs xsUnique) (suc i) zero eq =
+  contradiction (sym eq) (All.lookup x≉xs (∈-lookup i))
+lookupUniqueInjective (x ∷ xs) (AllPairs._∷_ x≉xs xsUnique) (suc i) (suc j) eq =
+  cong suc (lookupUniqueInjective xs xsUnique i j eq)
 
 orbitSourceAppears :
   (r : Orbit.OrbitPairIncidence) → (rs : List Orbit.OrbitPairIncidence) →
@@ -62,6 +89,17 @@ orbitCoordinateMode :
 orbitCoordinateMode N R i =
   lookup (normalizedOrbitEndpointSupport
     (Orbit.physicalCutoffOrbitPairIncidences N R)) i
+
+orbitCoordinateModeInjective :
+  (N R : Nat) →
+  (i j : physicalCutoffOrbitModeCoordinate N R) →
+  orbitCoordinateMode N R i ≡ orbitCoordinateMode N R j → i ≡ j
+orbitCoordinateModeInjective N R i j =
+  lookupUniqueInjective
+    (normalizedOrbitEndpointSupport
+      (Orbit.physicalCutoffOrbitPairIncidences N R))
+    (normalizedOrbitEndpointSupportUnique
+      (Orbit.physicalCutoffOrbitPairIncidences N R)) i j
 
 orbitSourceCoordinate :
   (N R : Nat) → OrbitPhysicalCutoffIncidence N R →

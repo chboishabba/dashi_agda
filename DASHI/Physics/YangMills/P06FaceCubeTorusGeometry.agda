@@ -12,7 +12,7 @@ module DASHI.Physics.YangMills.P06FaceCubeTorusGeometry where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using
   (_≢_; sym; cong; trans; subst)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.Fin.Base using (Fin; toℕ)
@@ -24,12 +24,17 @@ open import Data.Nat.DivMod using
 open import Data.Nat.Properties using
   (+-suc; +-assoc; +-identityʳ; n<1+n; n≤1+n; ≤-trans;
    m≤n⇒m<n∨m≡n)
-open import Data.Product.Base using (_×_)
+open import Data.Product.Base using (_×_; proj₁; proj₂)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Data.List.Base using (List; []; _∷_; length; map)
 open import Relation.Nullary using (Dec; yes; no)
 open import DASHI.Physics.YangMills.GraphCombinatorics
-  using (Graph; Connected; NonEmpty; NoDuplicates)
+  using
+  ( Graph; Connected; NonEmpty; NoDuplicates; _∈_; here; there
+  ; memberDec
+  ; canonicalize; canonicalizeSound; canonicalizeComplete; canonicalizeNoDup
+  ; noDupSubsetLength≤; BoundedNeighbourEnumeration
+  ; CanonicalBoundedNeighbourEnumeration )
 open import DASHI.Physics.YangMills.P06ConstructiveSpanningTreeDFS
   using (UndirectedGraphStructure)
 
@@ -331,6 +336,36 @@ faceNeighbourCandidatesLength :
   length (faceNeighbourCandidates x) ≡ faceCubeDegreeBound
 faceNeighbourCandidatesLength x = refl
 
+mapMemberElim :
+  ∀ {A B : Set} (f : A → B) (xs : List A) {y : B} →
+  y ∈ map f xs →
+  Σ A (λ a → (a ∈ xs) × (y ≡ f a))
+mapMemberElim f [] ()
+mapMemberElim f (a ∷ as) here = a , here , refl
+mapMemberElim f (a ∷ as) (there y∈) with mapMemberElim f as y∈
+... | b , b∈ , y≡fb = b , there b∈ , y≡fb
+
+forwardCandidateMember :
+  ∀ {N : Nat} {{_ : NonZero N}} →
+  (x : Cube4 N) (axis : Axis4) →
+  shiftForward axis x ∈ faceNeighbourCandidates x
+forwardCandidateMember x axis₀ = here
+forwardCandidateMember x axis₁ = there (there here)
+forwardCandidateMember x axis₂ = there (there (there (there here)))
+forwardCandidateMember x axis₃ =
+  there (there (there (there (there (there here)))))
+
+backwardCandidateMember :
+  ∀ {N : Nat} {{_ : NonZero N}} →
+  (x : Cube4 N) (axis : Axis4) →
+  shiftBackward axis x ∈ faceNeighbourCandidates x
+backwardCandidateMember x axis₀ = there here
+backwardCandidateMember x axis₁ = there (there (there here))
+backwardCandidateMember x axis₂ =
+  there (there (there (there (there here))))
+backwardCandidateMember x axis₃ =
+  there (there (there (there (there (there (there here))))))
+
 ------------------------------------------------------------------------
 -- Face adjacency.  A pair is adjacent precisely when two *distinct*
 -- periodic M-cubes differ by one positive face move in one coordinate.
@@ -379,6 +414,45 @@ backwardFaceMoveAdjacent x axis x≢backward =
   x≢backward , axis , inj₂
     (sym (shiftForwardBackward axis x))
 
+faceNeighbourCandidatesSound :
+  ∀ {N : Nat} {{_ : NonZero N}} {x y : Cube4 N} →
+  y ∈ faceNeighbourCandidates x →
+  x ≢ y →
+  FaceCubeAdj x y
+faceNeighbourCandidatesSound {x = x} {y = y} y∈candidates x≢y
+  with mapMemberElim (faceMoveTarget x) allFaceMoves y∈candidates
+... | (axis , forward) , move∈ , y≡target =
+  subst (FaceCubeAdj x) (sym y≡target)
+    (forwardFaceMoveAdjacent x axis
+      (λ x≡target → x≢y (trans x≡target (sym y≡target))))
+... | (axis , backward) , move∈ , y≡target =
+  subst (FaceCubeAdj x) (sym y≡target)
+    (backwardFaceMoveAdjacent x axis
+      (λ x≡target → x≢y (trans x≡target (sym y≡target))))
+
+faceNeighbourCandidatesComplete :
+  ∀ {N : Nat} {{_ : NonZero N}} {x y : Cube4 N} →
+  FaceCubeAdj x y →
+  y ∈ faceNeighbourCandidates x
+faceNeighbourCandidatesComplete {x = x}
+  (x≢y , axis , inj₁ y≡forward) =
+  subst
+    (λ z → z ∈ faceNeighbourCandidates x)
+    (sym y≡forward)
+    (forwardCandidateMember x axis)
+faceNeighbourCandidatesComplete {x = x}
+  (x≢y , axis , inj₂ x≡forward-y) =
+  subst
+    (λ z → z ∈ faceNeighbourCandidates x)
+    backward-x≡y
+    (backwardCandidateMember x axis)
+  where
+    backward-x≡y : shiftBackward axis x ≡ _
+    backward-x≡y =
+      trans
+        (cong (shiftBackward axis) x≡forward-y)
+        (shiftBackwardForward axis _)
+
 faceCubeGraph : ∀ {N : Nat} → {{_ : NonZero N}} → Graph
 faceCubeGraph {N} = record
   { Vertex = Cube4 N
@@ -391,6 +465,144 @@ faceCubeUndirected :
   UndirectedGraphStructure (faceCubeGraph {N})
 faceCubeUndirected = record
   { adjSym = faceCubeAdjSymmetric }
+
+-- The raw move list is intentionally tagged and always has eight entries.
+-- The actual simple graph neighbour list first removes periodic self-moves
+-- (the N = 1 case) and is then canonicalised, which also removes the two
+-- orientation collisions present on an N = 2 torus.
+filterNonSelf :
+  ∀ {N : Nat} → Cube4 N → List (Cube4 N) → List (Cube4 N)
+filterNonSelf x [] = []
+filterNonSelf x (y ∷ ys) with cube4Eq? x y
+... | yes _ = filterNonSelf x ys
+... | no  _ = y ∷ filterNonSelf x ys
+
+filterNonSelfSound :
+  ∀ {N : Nat} {x y : Cube4 N} {xs : List (Cube4 N)} →
+  y ∈ filterNonSelf x xs →
+  (y ∈ xs) × (x ≢ y)
+filterNonSelfSound {xs = []} ()
+filterNonSelfSound {x = x} {xs = z ∷ zs} y∈filtered
+  with cube4Eq? x z
+... | yes x≡z =
+  there (proj₁ (filterNonSelfSound {x = x} {xs = zs} y∈filtered)) ,
+  proj₂ (filterNonSelfSound {x = x} {xs = zs} y∈filtered)
+... | no x≢z with y∈filtered
+... | here = here , x≢z
+... | there y∈tail =
+  there (proj₁ (filterNonSelfSound {x = x} {xs = zs} y∈tail)) ,
+  proj₂ (filterNonSelfSound {x = x} {xs = zs} y∈tail)
+
+filterNonSelfComplete :
+  ∀ {N : Nat} {x y : Cube4 N} (xs : List (Cube4 N)) →
+  y ∈ xs → x ≢ y →
+  y ∈ filterNonSelf x xs
+filterNonSelfComplete [] () x≢y
+filterNonSelfComplete {x = x} {y = y} (z ∷ zs) here x≢y
+  with cube4Eq? x z
+... | yes x≡z = ⊥-elim (x≢y x≡z)
+... | no  x≢z = here
+filterNonSelfComplete {x = x} {y = y} (z ∷ zs) (there y∈zs) x≢y
+  with cube4Eq? x z
+... | yes _ = filterNonSelfComplete zs y∈zs x≢y
+... | no  _ = there (filterNonSelfComplete zs y∈zs x≢y)
+
+filterNonSelfLength≤ :
+  ∀ {N : Nat} (x : Cube4 N) (xs : List (Cube4 N)) →
+  length (filterNonSelf x xs) ≤ length xs
+filterNonSelfLength≤ x [] = z≤n
+filterNonSelfLength≤ x (y ∷ ys) with cube4Eq? x y
+... | yes _ =
+  ≤-trans
+    (filterNonSelfLength≤ x ys)
+    (n≤1+n (length ys))
+... | no _ = s≤s (filterNonSelfLength≤ x ys)
+
+faceNeighbours :
+  ∀ {N : Nat} {{_ : NonZero N}} →
+  Cube4 N → List (Cube4 N)
+faceNeighbours {N} x =
+  canonicalize {G = faceCubeGraph {N}}
+    (filterNonSelf x (faceNeighbourCandidates x))
+
+faceNeighboursSound :
+  ∀ {N : Nat} {{_ : NonZero N}} {x y : Cube4 N} →
+  y ∈ faceNeighbours x → FaceCubeAdj x y
+faceNeighboursSound {x = x} y∈neighbours =
+  let filtered =
+        canonicalizeSound {G = faceCubeGraph}
+          y∈neighbours
+      raw-and-ne = filterNonSelfSound filtered
+  in
+    faceNeighbourCandidatesSound
+      (proj₁ raw-and-ne)
+      (proj₂ raw-and-ne)
+
+faceNeighboursComplete :
+  ∀ {N : Nat} {{_ : NonZero N}} {x y : Cube4 N} →
+  FaceCubeAdj x y → y ∈ faceNeighbours x
+faceNeighboursComplete {x = x} {y = y} x-adj-y =
+  canonicalizeComplete {G = faceCubeGraph}
+    (filterNonSelfComplete
+      (faceNeighbourCandidates x)
+      (faceNeighbourCandidatesComplete x-adj-y)
+      (proj₁ x-adj-y))
+
+faceNeighboursNoDuplicates :
+  ∀ {N : Nat} {{_ : NonZero N}} (x : Cube4 N) →
+  NoDuplicates (faceNeighbours x)
+faceNeighboursNoDuplicates {N} x =
+  canonicalizeNoDup {G = faceCubeGraph {N}}
+    (filterNonSelf x (faceNeighbourCandidates x))
+
+-- Decidable adjacency is derived from the canonical finite neighbour list,
+-- rather than by duplicating the periodic coordinate case analysis.
+faceCubeAdj? :
+  ∀ {N : Nat} {{_ : NonZero N}} (x y : Cube4 N) →
+  Dec (FaceCubeAdj x y)
+faceCubeAdj? x y with memberDec cube4Eq? y (faceNeighbours x)
+... | yes y∈ = yes (faceNeighboursSound y∈)
+... | no y∉ = no (λ x-adj-y → y∉ (faceNeighboursComplete x-adj-y))
+
+faceNeighboursLength≤8 :
+  ∀ {N : Nat} {{_ : NonZero N}} (x : Cube4 N) →
+  length (faceNeighbours x) ≤ faceCubeDegreeBound
+faceNeighboursLength≤8 {N} x =
+  subst
+    (λ B →
+      length
+        (canonicalize {G = faceCubeGraph {N}} filtered)
+        ≤ B)
+    (faceNeighbourCandidatesLength x)
+    (≤-trans
+      (noDupSubsetLength≤ {xs = canonicalize {G = faceCubeGraph {N}} filtered}
+        {ys = filtered}
+        (canonicalizeNoDup {G = faceCubeGraph {N}} filtered)
+        (λ y∈neighbours →
+          canonicalizeSound {G = faceCubeGraph {N}} y∈neighbours))
+      (filterNonSelfLength≤ x (faceNeighbourCandidates x)))
+  where
+    filtered : List (Cube4 N)
+    filtered = filterNonSelf x (faceNeighbourCandidates x)
+
+faceCubeBoundedNeighbourEnumeration :
+  ∀ {N : Nat} {{_ : NonZero N}} →
+  BoundedNeighbourEnumeration (faceCubeGraph {N}) faceCubeDegreeBound
+faceCubeBoundedNeighbourEnumeration {N} = record
+  { neighbours = faceNeighbours
+  ; neighbourSound = faceNeighboursSound
+  ; neighbourComplete = faceNeighboursComplete
+  ; neighbourBound = faceNeighboursLength≤8
+  }
+
+faceCubeCanonicalBoundedNeighbourEnumeration :
+  ∀ {N : Nat} {{_ : NonZero N}} →
+  CanonicalBoundedNeighbourEnumeration
+    (faceCubeGraph {N}) faceCubeDegreeBound
+faceCubeCanonicalBoundedNeighbourEnumeration {N} = record
+  { bounded = faceCubeBoundedNeighbourEnumeration {N}
+  ; neighboursNoDuplicates = faceNeighboursNoDuplicates
+  }
 
 ------------------------------------------------------------------------
 -- A base Bałaban polymer for the counting lane is a finite nonempty,

@@ -81,6 +81,78 @@ filterMapListWithMembership (x ∷ xs) f
 ... | no _ =
   filterMapListWithMembership xs (λ z z∈ → f z (there z∈))
 
+-- A positive decision is retained by the dependent filter.  This is the
+-- membership bridge used by concrete finite enumerations: it preserves the
+-- exact proof object returned by the Dec branch rather than merely proving
+-- existential membership after erasing dependencies.
+filterMapListWithMembership-yes :
+  {A : Set} {B : A → Set} →
+  (xs : List A) →
+  (f : (x : A) → x ∈ xs → Dec (B x)) →
+  {x : A} (x∈ : x ∈ xs) {bx : B x} →
+  f x x∈ ≡ yes bx →
+  (x , bx) ∈ filterMapListWithMembership xs f
+filterMapListWithMembership-yes [] f () eq
+filterMapListWithMembership-yes (x ∷ xs) f here eq
+  with f x here | eq
+... | yes bx | refl = here
+... | no ¬bx | ()
+filterMapListWithMembership-yes (x ∷ xs) f (there x∈) eq
+  with f x here
+... | yes bx =
+  there
+    (filterMapListWithMembership-yes
+      xs
+      (λ z z∈ → f z (there z∈))
+      x∈
+      eq)
+... | no ¬bx =
+  filterMapListWithMembership-yes
+    xs
+    (λ z z∈ → f z (there z∈))
+    x∈
+    eq
+
+-- Every retained dependent-filter entry remembers the source element and the
+-- exact positive decision that retained it.  This is the provenance lemma
+-- needed when a later projection erases the proof-carrying filter payload.
+filterMapListWithMembership-elem :
+  {A : Set} {B : A → Set} →
+  (xs : List A) →
+  (f : (x : A) → x ∈ xs → Dec (B x)) →
+  ∀ {p : Σ A B} → p ∈ filterMapListWithMembership xs f →
+  Σ A λ x →
+  Σ (x ∈ xs) λ x∈ →
+  Σ (B x) λ bx →
+    p ≡ (x , bx)
+filterMapListWithMembership-elem [] f ()
+filterMapListWithMembership-elem (x ∷ xs) f p∈
+  with f x here
+... | no ¬bx =
+  let tail =
+        filterMapListWithMembership-elem
+          xs
+          (λ z z∈ → f z (there z∈))
+          p∈
+      y = proj₁ tail
+      y∈ = proj₁ (proj₂ tail)
+      by = proj₁ (proj₂ (proj₂ tail))
+      pairEq = proj₂ (proj₂ (proj₂ tail))
+  in y , there y∈ , by , pairEq
+... | yes bx with p∈
+... | here = x , here , bx , refl
+... | there p∈ =
+  let tail =
+        filterMapListWithMembership-elem
+          xs
+          (λ z z∈ → f z (there z∈))
+          p∈
+      y = proj₁ tail
+      y∈ = proj₁ (proj₂ tail)
+      by = proj₁ (proj₂ (proj₂ tail))
+      pairEq = proj₂ (proj₂ (proj₂ tail))
+  in y , there y∈ , by , pairEq
+
 _⊆_ : {A : Set} → List A → List A → Set
 X ⊆ Y = ∀ {x} → x ∈ X → x ∈ Y
 
@@ -2055,6 +2127,72 @@ x ∉ xs = ¬ (x ∈ xs)
 data NoDuplicates {A : Set} : List A → Set where
   noDup-nil  : NoDuplicates []
   noDup-cons : ∀ {x xs} → x ∉ xs → NoDuplicates xs → NoDuplicates (x ∷ xs)
+
+-- A dependent filter may retain different proof payloads for a source
+-- element, so record equality is the wrong uniqueness notion downstream.
+-- This theorem instead transports no-duplicates from a source projection.
+filterMapListWithMembership-projection-noDup :
+  {A : Set} {B : A → Set} {C : Set} →
+  (xs : List A) →
+  (f : (x : A) → x ∈ xs → Dec (B x)) →
+  (out : Σ A B → C) →
+  (source : A → C) →
+  ((x : A) → (x∈ : x ∈ xs) → (bx : B x) →
+    out (x , bx) ≡ source x) →
+  NoDuplicates (mapList source xs) →
+  NoDuplicates (mapList out (filterMapListWithMembership xs f))
+filterMapListWithMembership-projection-noDup [] f out source preserves nd =
+  noDup-nil
+filterMapListWithMembership-projection-noDup (x ∷ xs) f out source preserves
+  (noDup-cons sourcex∉tail nd-tail)
+  with f x here
+... | yes bx =
+  noDup-cons head∉tail tailNoDup
+  where
+    tailF = λ z z∈ → f z (there z∈)
+
+    tailNoDup :
+      NoDuplicates
+        (mapList out (filterMapListWithMembership xs tailF))
+    tailNoDup =
+      filterMapListWithMembership-projection-noDup
+        xs tailF out source
+        (λ z z∈ bz → preserves z (there z∈) bz)
+        nd-tail
+
+    head∉tail :
+      out (x , bx) ∉
+      mapList out (filterMapListWithMembership xs tailF)
+    head∉tail head∈tail =
+      let pairMember = map-elem out (filterMapListWithMembership xs tailF) head∈tail
+          p = proj₁ pairMember
+          outEq = proj₁ (proj₂ pairMember)
+          p∈ = proj₂ (proj₂ pairMember)
+          provenance =
+            filterMapListWithMembership-elem xs tailF p∈
+          y = proj₁ provenance
+          y∈ = proj₁ (proj₂ provenance)
+          by = proj₁ (proj₂ (proj₂ provenance))
+          pairEq = proj₂ (proj₂ (proj₂ provenance))
+          headSource : out (x , bx) ≡ source x
+          headSource = preserves x here bx
+          pairSource : out p ≡ source y
+          pairSource =
+            trans
+              (cong out pairEq)
+              (preserves y (there y∈) by)
+          sourceEq : source x ≡ source y
+          sourceEq = trans (sym headSource) (trans outEq pairSource)
+      in sourcex∉tail
+           (subst (λ z → z ∈ mapList source xs) (sym sourceEq)
+             (in-map source y∈))
+... | no ¬bx =
+  filterMapListWithMembership-projection-noDup
+    xs
+    (λ z z∈ → f z (there z∈))
+    out source
+    (λ z z∈ bz → preserves z (there z∈) bz)
+    nd-tail
 
 removeMember :
   {A : Set} {x : A} {xs : List A} →

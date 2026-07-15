@@ -147,6 +147,21 @@ cutoffOrbitNegativeCoefficientNonnegative {S = S} I R law u o =
     (Scalar.maxNegativeNonnegative S
       (orbitInteraction law (Fourier.coefficient u) o))
 
+cutoffOrbitAbsoluteCoefficientNonnegative :
+  {S : Scalar.ExactOrderedScalar} → {C : Fourier.ComplexFourierInterface S} →
+  {N : Nat} → {interaction : Fourier.PhysicalTriadInteractionLaw S C N} →
+  (I : Interaction.ExactNSFourierInteractionStructure S C) →
+  (R : Nat) →
+  (law : PhysicalCutoffOrbitInteractionLaw I N R) →
+  (u : Fourier.AdmissibleFourierShellData S C N interaction) →
+  (o : Reconstruction.UnorderedInputOrbit) →
+  Scalar.Nonnegative S (cutoffOrbitAbsoluteCoefficient I R law u o)
+cutoffOrbitAbsoluteCoefficientNonnegative {S = S} I R law u o =
+  Scalar.multiplicationPreservesNonnegative S
+    (Fourier.amplitudeFactorNonnegative u (Reconstruction.representative o))
+    (Scalar.zeroLeAbs S
+      (orbitInteraction law (Fourier.coefficient u) o))
+
 cutoffOrbitNegativeCoefficientLeAbsolute :
   {S : Scalar.ExactOrderedScalar} → {C : Fourier.ComplexFourierInterface S} →
   {N : Nat} → {interaction : Fourier.PhysicalTriadInteractionLaw S C N} →

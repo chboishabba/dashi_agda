@@ -17,12 +17,14 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalRetainedSector as Sector
 -- ordered convolution terms.  The leading minus is the energy-transfer
 -- convention from the periodic Navier--Stokes equation.
 --
---   - Re < conjugate(u_out), P_{-out} i [
+--   - Re < conjugate(u_{-out}), P_{-out} i [
 --          (right . u_left) u_right + (left . u_right) u_left ] >.
 --
--- paired with conjugate(u_out), then take its real part.  This fixes a
--- convention; a later equivalence theorem may relate it to a symmetrised
--- convention, but must not silently replace it by sampled ``coherence``.
+-- paired with the coefficient at the actual convolution output `-out`, then
+-- take its real part.  This is the Fourier modal-energy pairing.  For real
+-- fields, `u_{-out} = conjugate u_out`, so the test vector is `u_out` after
+-- the outer conjugation.  The earlier `conjugate(u_out)` pairing is a
+-- labelled-triad diagnostic, not the modal energy transfer.
 ------------------------------------------------------------------------
 
 record ExactNSFourierInteractionStructure
@@ -46,7 +48,7 @@ physicalNSFourierTrilinearTerm :
   Lattice.LatticeTriad → Fourier.Complex C
 physicalNSFourierTrilinearTerm {C = C} I u τ =
   complexInner I
-    (Fourier.conjugateVector C (u (Lattice.out τ)))
+    (Fourier.conjugateVector C (u (Lattice.modeNeg (Lattice.out τ))) )
     (lerayProject I (Lattice.modeNeg (Lattice.out τ))
       (addFourierVector I
         (scaleFourierVector I
