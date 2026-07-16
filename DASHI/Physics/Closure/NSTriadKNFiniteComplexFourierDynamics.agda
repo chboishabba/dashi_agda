@@ -3,12 +3,13 @@ module DASHI.Physics.Closure.NSTriadKNFiniteComplexFourierDynamics where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Integer.Base using (ℤ)
+open import Data.Integer.Base using (ℤ; +_)
 open import Data.List.Base using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 open import Relation.Nullary.Decidable using (yes; no)
 
 import DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads as Lattice
+import DASHI.Physics.Closure.NSTriadKNExactLatticeTriadZeroSum as ZeroSum
 import DASHI.Physics.Closure.NSTriadKNExactOrderedScalar as Scalar
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffInnerProduct as Algebra
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffModeSupport as Support
@@ -59,12 +60,23 @@ record FiniteComplexFourierAuthority
     realPartNeg :
       (a : Complex) → realPart (-ᶜ a) ≡
       Scalar.neg (Algebra.orderedScalar K) (realPart a)
+    realPartConjugate :
+      (a : Complex) → realPart (conjugate a) ≡ realPart a
     realPartZero : realPart zeroComplex ≡ Scalar.zero (Algebra.orderedScalar K)
     innerAddRight :
       (x y z : Vec3C) → innerC x (y +ᵥ z) ≡
       innerC x y +ᶜ innerC x z
+    innerScaleRight :
+      (x y : Vec3C) → (a : Complex) →
+      innerC x (scaleComplex a y) ≡ a *ᶜ innerC x y
     innerConjugateSymmetry :
       (x y : Vec3C) → conjugate (innerC x y) ≡ innerC y x
+    -- For the standard coordinate Hermitian form, conjugating the first
+    -- argument exposes the underlying symmetric complex-bilinear dot.
+    -- This is the precise pairing law needed for the modal triad reversal.
+    innerConjugateLeftSymmetric :
+      (x y : Vec3C) →
+      innerC (conjugateVector x) y ≡ innerC (conjugateVector y) x
     innerZeroRight :
       (x : Vec3C) → innerC x zeroVector ≡ zeroComplex
     normSqIsDiagonalInner :
@@ -106,6 +118,266 @@ record FiniteComplexFourierAuthority
 open FiniteComplexFourierAuthority public
 
 ------------------------------------------------------------------------
+-- Local complex wave-dot algebra used by triad cancellation.
+--
+-- This is intentionally narrower than a concrete C^3 implementation.  It
+-- isolates exactly the additive facts from which zero-sum geometry and one
+-- divergence constraint imply a wave-dot reversal.  In particular, it does
+-- not contain any modal-transfer or conservation assertion.
+------------------------------------------------------------------------
+
+record FiniteTriadWaveDotAlgebra
+    (K : Algebra.ExactOrderedCommutativeRing)
+    (A : FiniteComplexFourierAuthority K) : Set₁ where
+  field
+    complexAddAssociative :
+      (a b c : Complex A) → _+ᶜ_ A (_+ᶜ_ A a b) c ≡
+      _+ᶜ_ A a (_+ᶜ_ A b c)
+    complexAddCommutative :
+      (a b : Complex A) → _+ᶜ_ A a b ≡ _+ᶜ_ A b a
+    complexAddZeroLeft :
+      (a : Complex A) → _+ᶜ_ A (zeroComplex A) a ≡ a
+    complexAddInverseLeft :
+      (a : Complex A) → _+ᶜ_ A
+        (FiniteComplexFourierAuthority.-ᶜ_ A a) a ≡ zeroComplex A
+    complexAddLeftCancel :
+      (a b c : Complex A) → _+ᶜ_ A a b ≡ _+ᶜ_ A a c → b ≡ c
+
+    waveDotTriadSum :
+      (τ : Lattice.LatticeTriad) → (v : Vec3C A) →
+      waveDot A (Lattice.triadSum τ) v ≡
+      _+ᶜ_ A
+        (_+ᶜ_ A (waveDot A (Lattice.left τ) v)
+          (waveDot A (Lattice.right τ) v))
+        (waveDot A (Lattice.out τ) v)
+    waveDotZeroMode :
+      (v : Vec3C A) →
+      waveDot A (Lattice.mkLatticeMode3 (+ 0) (+ 0) (+ 0)) v ≡
+      zeroComplex A
+
+open FiniteTriadWaveDotAlgebra public
+
+record FiniteComplexProductNegationAlgebra
+    (K : Algebra.ExactOrderedCommutativeRing)
+    (A : FiniteComplexFourierAuthority K) : Set₁ where
+  field
+    complexMulNegRight :
+      (a b : Complex A) →
+      _*ᶜ_ A a (FiniteComplexFourierAuthority.-ᶜ_ A b) ≡
+      FiniteComplexFourierAuthority.-ᶜ_ A (_*ᶜ_ A a b)
+    complexNegMulLeft :
+      (a b : Complex A) →
+      _*ᶜ_ A (FiniteComplexFourierAuthority.-ᶜ_ A a) b ≡
+      FiniteComplexFourierAuthority.-ᶜ_ A (_*ᶜ_ A a b)
+    complexNegInvolutive :
+      (a : Complex A) →
+      FiniteComplexFourierAuthority.-ᶜ_ A
+        (FiniteComplexFourierAuthority.-ᶜ_ A a) ≡ a
+
+open FiniteComplexProductNegationAlgebra public
+
+complexAddSwapFront :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (a b c : Complex A) →
+  _+ᶜ_ A a (_+ᶜ_ A b c) ≡ _+ᶜ_ A b (_+ᶜ_ A a c)
+complexAddSwapFront K A W a b c =
+  trans
+    (sym (complexAddAssociative W a b c))
+    (trans
+      (cong (λ x → _+ᶜ_ A x c) (complexAddCommutative W a b))
+      (complexAddAssociative W b a c))
+
+complexAddMoveEndToFront :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (a b c : Complex A) →
+  _+ᶜ_ A a (_+ᶜ_ A b c) ≡ _+ᶜ_ A c (_+ᶜ_ A a b)
+complexAddMoveEndToFront K A W a b c =
+  trans
+    (cong (λ x → _+ᶜ_ A a x) (complexAddCommutative W b c))
+    (trans
+      (sym (complexAddAssociative W a c b))
+      (trans
+        (cong (λ x → _+ᶜ_ A x b) (complexAddCommutative W a c))
+        (complexAddAssociative W c a b)))
+
+-- The literal six-term normal form is regrouped into its q/r/p cancellation
+-- pairs.  This is purely commutative-group bookkeeping; it contains no
+-- Fourier, reality, or divergence information.
+complexAddSixPairShuffle :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (a b c d e f : Complex A) →
+  _+ᶜ_ A
+    (_+ᶜ_ A (_+ᶜ_ A a b) (_+ᶜ_ A c d))
+    (_+ᶜ_ A e f) ≡
+  _+ᶜ_ A
+    (_+ᶜ_ A (_+ᶜ_ A a f) (_+ᶜ_ A b c))
+    (_+ᶜ_ A d e)
+complexAddSixPairShuffle K A W a b c d e f =
+  trans
+    (complexAddAssociative W (_+ᶜ_ A a b) (_+ᶜ_ A c d) (_+ᶜ_ A e f))
+    (trans
+      (complexAddAssociative W a b
+        (_+ᶜ_ A (_+ᶜ_ A c d) (_+ᶜ_ A e f)))
+      (trans
+        (cong (λ x → _+ᶜ_ A a (_+ᶜ_ A b x))
+          (complexAddAssociative W c d (_+ᶜ_ A e f)))
+        (trans
+          (cong (λ x → _+ᶜ_ A a (_+ᶜ_ A b (_+ᶜ_ A c x)))
+            (complexAddMoveEndToFront K A W d e f))
+          (trans
+            (cong (λ x → _+ᶜ_ A a (_+ᶜ_ A b x))
+              (complexAddSwapFront K A W c f (_+ᶜ_ A d e)))
+            (trans
+              (cong (λ x → _+ᶜ_ A a x)
+                (complexAddSwapFront K A W b f
+                  (_+ᶜ_ A c (_+ᶜ_ A d e))))
+              (sym
+                (trans
+                  (complexAddAssociative W (_+ᶜ_ A a f)
+                    (_+ᶜ_ A b c) (_+ᶜ_ A d e))
+                  (trans
+                    (complexAddAssociative W a f
+                      (_+ᶜ_ A (_+ᶜ_ A b c) (_+ᶜ_ A d e)))
+                    (cong (λ x → _+ᶜ_ A a (_+ᶜ_ A f x))
+                      (complexAddAssociative W b c (_+ᶜ_ A d e)))))))))))
+
+-- A reusable complex-ring normalization.  It is the exact algebra behind a
+-- pair of modal occurrences once their wave-dot coefficients are opposite
+-- and their negative-mode pairings have been identified.
+negatedScaledPairZero :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (P : FiniteComplexProductNegationAlgebra K A) →
+  (i a b h₁ h₂ : Complex A) →
+  b ≡ FiniteComplexFourierAuthority.-ᶜ_ A a →
+  h₂ ≡ h₁ →
+  _+ᶜ_ A
+    (FiniteComplexFourierAuthority.-ᶜ_ A (_*ᶜ_ A (_*ᶜ_ A i a) h₁))
+    (FiniteComplexFourierAuthority.-ᶜ_ A (_*ᶜ_ A (_*ᶜ_ A i b) h₂)) ≡
+  zeroComplex A
+negatedScaledPairZero K A W P i a b h₁ h₂ bNeg pairing =
+  trans
+    (cong₂ (_+ᶜ_ A) refl secondToFirst)
+    (complexAddInverseLeft W (_*ᶜ_ A (_*ᶜ_ A i a) h₁))
+  where
+  secondToFirst :
+    FiniteComplexFourierAuthority.-ᶜ_ A (_*ᶜ_ A (_*ᶜ_ A i b) h₂) ≡
+    _*ᶜ_ A (_*ᶜ_ A i a) h₁
+  secondToFirst =
+    trans
+      (cong (FiniteComplexFourierAuthority.-ᶜ_ A)
+        (cong (λ x → _*ᶜ_ A (_*ᶜ_ A i x) h₂) bNeg))
+      (trans
+        (cong (FiniteComplexFourierAuthority.-ᶜ_ A)
+          (cong (λ x → _*ᶜ_ A x h₂) (complexMulNegRight P i a)))
+        (trans
+          (cong (FiniteComplexFourierAuthority.-ᶜ_ A)
+            (complexNegMulLeft P (_*ᶜ_ A i a) h₂))
+          (trans
+            (complexNegInvolutive P (_*ᶜ_ A (_*ᶜ_ A i a) h₂))
+            (cong (λ x → _*ᶜ_ A (_*ᶜ_ A i a) x) pairing))))
+
+rightDotLeftEqNegOutDotLeft :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Lattice.zeroSum? τ ≡ true →
+  waveDot A (Lattice.left τ) (u (Lattice.left τ)) ≡ zeroComplex A →
+  waveDot A (Lattice.right τ) (u (Lattice.left τ)) ≡
+  FiniteComplexFourierAuthority.-ᶜ_ A
+    (waveDot A (Lattice.out τ) (u (Lattice.left τ)))
+rightDotLeftEqNegOutDotLeft K A W u τ zeroSum leftDF =
+  complexAddLeftCancel W r q (FiniteComplexFourierAuthority.-ᶜ_ A r)
+    (trans
+      (trans (sym (complexAddCommutative W q r)) qPlusRZero)
+      (sym
+        (trans (complexAddCommutative W r
+          (FiniteComplexFourierAuthority.-ᶜ_ A r))
+          (complexAddInverseLeft W r))))
+  where
+  v = u (Lattice.left τ)
+  p = waveDot A (Lattice.left τ) v
+  q = waveDot A (Lattice.right τ) v
+  r = waveDot A (Lattice.out τ) v
+  totalZero : _+ᶜ_ A (_+ᶜ_ A p q) r ≡ zeroComplex A
+  totalZero =
+    trans
+      (sym (waveDotTriadSum W τ v))
+      (trans
+        (cong (λ k → waveDot A k v)
+          (ZeroSum.triadSumIsZeroMode τ zeroSum))
+        (waveDotZeroMode W v))
+  qPlusRZero : _+ᶜ_ A q r ≡ zeroComplex A
+  qPlusRZero =
+    trans
+      (sym
+        (cong (λ x → _+ᶜ_ A x r)
+          (complexAddZeroLeft W q)))
+      (trans
+        (cong (λ x → _+ᶜ_ A (_+ᶜ_ A x q) r) (sym leftDF))
+        totalZero)
+
+outDotRightEqNegLeftDotRight :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Lattice.zeroSum? τ ≡ true →
+  waveDot A (Lattice.right τ) (u (Lattice.right τ)) ≡ zeroComplex A →
+  waveDot A (Lattice.out τ) (u (Lattice.right τ)) ≡
+  FiniteComplexFourierAuthority.-ᶜ_ A
+    (waveDot A (Lattice.left τ) (u (Lattice.right τ)))
+outDotRightEqNegLeftDotRight K A W u
+  (Lattice.mkLatticeTriad p q r) zeroSum rightDF =
+  rightDotLeftEqNegOutDotLeft K A W u
+    (Lattice.mkLatticeTriad q r p)
+    (ZeroSum.zeroSumCycle (Lattice.mkLatticeTriad p q r) zeroSum)
+    rightDF
+
+leftDotRightEqNegOutDotRight :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Lattice.zeroSum? τ ≡ true →
+  waveDot A (Lattice.right τ) (u (Lattice.right τ)) ≡ zeroComplex A →
+  waveDot A (Lattice.left τ) (u (Lattice.right τ)) ≡
+  FiniteComplexFourierAuthority.-ᶜ_ A
+    (waveDot A (Lattice.out τ) (u (Lattice.right τ)))
+leftDotRightEqNegOutDotRight K A W u
+  (Lattice.mkLatticeTriad p q r) zeroSum rightDF =
+  rightDotLeftEqNegOutDotLeft K A W u
+    (Lattice.mkLatticeTriad q p r)
+    (ZeroSum.zeroSumSwap (Lattice.mkLatticeTriad p q r) zeroSum)
+    rightDF
+
+leftDotOutEqNegRightDotOut :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Lattice.zeroSum? τ ≡ true →
+  waveDot A (Lattice.out τ) (u (Lattice.out τ)) ≡ zeroComplex A →
+  waveDot A (Lattice.left τ) (u (Lattice.out τ)) ≡
+  FiniteComplexFourierAuthority.-ᶜ_ A
+    (waveDot A (Lattice.right τ) (u (Lattice.out τ)))
+leftDotOutEqNegRightDotOut K A W u
+  (Lattice.mkLatticeTriad p q r) zeroSum outDF =
+  rightDotLeftEqNegOutDotLeft K A W u
+    (Lattice.mkLatticeTriad r p q)
+    (ZeroSum.zeroSumCycle (Lattice.mkLatticeTriad q r p)
+      (ZeroSum.zeroSumCycle (Lattice.mkLatticeTriad p q r) zeroSum))
+    outDF
+
+------------------------------------------------------------------------
 -- Leray removal against a divergence-free energy test vector.
 --
 -- This is a concrete finite-dimensional identity.  It does not assert the
@@ -118,37 +390,41 @@ lerayDropsAgainstDivergenceFreeOutput :
   (A : FiniteComplexFourierAuthority K) →
   (k : Lattice.LatticeMode3) →
   (output v : Vec3C A) →
-  waveDot A k (conjugateVector A output) ≡ zeroComplex A →
+  waveDot A k output ≡ zeroComplex A →
   realPart A
-    (innerC A (conjugateVector A output) (leray A k v)) ≡
-  realPart A (innerC A (conjugateVector A output) v)
+    (innerC A output (leray A k v)) ≡
+  realPart A (innerC A output v)
 lerayDropsAgainstDivergenceFreeOutput K A k output v outputDF =
   cong (realPart A)
     (trans
-      (leraySelfAdjoint A k (conjugateVector A output) v)
+      (leraySelfAdjoint A k output v)
       (cong (λ x → innerC A x v)
-        (lerayFixesDivergenceFree A k (conjugateVector A output) outputDF)))
+        (lerayFixesDivergenceFree A k output outputDF)))
 
 lerayDropsAgainstPhysicalOutput :
   (K : Algebra.ExactOrderedCommutativeRing) →
   (A : FiniteComplexFourierAuthority K) →
   (k : Lattice.LatticeMode3) →
   (output v : Vec3C A) →
-  waveDot A k output ≡ zeroComplex A →
+  waveDot A (Lattice.modeNeg k) output ≡ zeroComplex A →
   realPart A
-    (innerC A (conjugateVector A output)
+    (innerC A output
       (leray A (Lattice.modeNeg k) v)) ≡
-  realPart A (innerC A (conjugateVector A output) v)
+  realPart A (innerC A output v)
 lerayDropsAgainstPhysicalOutput K A k output v outputDF =
   lerayDropsAgainstDivergenceFreeOutput K A (Lattice.modeNeg k) output v
-    (conjugateVectorDivergenceFreeAtNegatedMode A k output outputDF)
+    outputDF
 
 ------------------------------------------------------------------------
 -- Concrete labelled modal transfers.
 --
 -- For `τ = (p , q , r)` with p + q + r = 0, its ordered interaction has
--- convolution output `-r` and is paired with `conjugate u_{-r}`.  This is
--- the actual modal-energy pairing for the Fourier equation at output `-r`.
+-- convolution output `-r` and is paired with `u_{-r}`.  `innerC` is
+-- Hermitian (see `innerConjugateSymmetry`), so it supplies the outer
+-- conjugation in the energy pairing itself.  Pre-conjugating this first
+-- argument would therefore double-count conjugation and describe a different
+-- trilinear form.  This is the actual modal-energy pairing for the Fourier
+-- equation at output `-r`.
 -- Cycling τ gives the corresponding contributions labelled by p and q.
 -- Input swaps are combined only off the diagonal, exactly as in the
 -- cutoff-convolution reconstruction; p = q retains its singleton occurrence.
@@ -171,8 +447,28 @@ orderedModalComplexTerm :
   (A : FiniteComplexFourierAuthority K) →
   (Lattice.LatticeMode3 → Vec3C A) → Lattice.LatticeTriad → Complex A
 orderedModalComplexTerm K A u τ =
-  innerC A (conjugateVector A (u (Lattice.modeNeg (Lattice.out τ))))
+  innerC A (u (Lattice.modeNeg (Lattice.out τ)))
     (orderedModalInteraction K A u τ)
+
+-- This is the scalar trilinear form underlying each modal occurrence.  It
+-- follows solely from right-linearity of the Hermitian pairing; no reality,
+-- incompressibility, or triad cancellation has been used yet.
+orderedModalComplexTermExpansion :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  orderedModalComplexTerm K A u τ ≡
+  _*ᶜ_ A
+    (_*ᶜ_ A (complexI A)
+      (waveDot A (Lattice.right τ) (u (Lattice.left τ))))
+    (innerC A (u (Lattice.modeNeg (Lattice.out τ)))
+      (u (Lattice.right τ)))
+orderedModalComplexTermExpansion K A u τ =
+  innerScaleRight A
+    (u (Lattice.modeNeg (Lattice.out τ)))
+    (u (Lattice.right τ))
+    (_*ᶜ_ A (complexI A)
+      (waveDot A (Lattice.right τ) (u (Lattice.left τ))))
 
 -- The missing swapped occurrence of a diagonal input orbit carries the same
 -- self-input factor.  Incompressibility makes that factor zero, so restoring
@@ -231,6 +527,24 @@ record FiniteFourierNSState
 
 open FiniteFourierNSState public
 
+-- Reality turns the coordinate-bilinear symmetry above into the exact mode
+-- pairing reversal used by all three six-term pairs.  No triad geometry or
+-- divergence constraint is involved in this lemma.
+negativeModePairingSymmetric :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) →
+  (a b : Lattice.LatticeMode3) →
+  innerC A (coefficient u (Lattice.modeNeg a)) (coefficient u b) ≡
+  innerC A (coefficient u (Lattice.modeNeg b)) (coefficient u a)
+negativeModePairingSymmetric K A M u a b =
+  trans
+    (cong (λ x → innerC A x (coefficient u b)) (reality u a))
+    (trans
+      (innerConjugateLeftSymmetric A (coefficient u a) (coefficient u b))
+      (sym
+        (cong (λ x → innerC A x (coefficient u a)) (reality u b))))
+
 orderedModalTransfer :
   (K : Algebra.ExactOrderedCommutativeRing) →
   (A : FiniteComplexFourierAuthority K) →
@@ -239,7 +553,7 @@ orderedModalTransfer :
 orderedModalTransfer K A u τ =
   Scalar.neg S
     (realPart A
-      (innerC A (conjugateVector A (u (Lattice.modeNeg (Lattice.out τ))))
+      (innerC A (u (Lattice.modeNeg (Lattice.out τ)))
         (leray A (Lattice.modeNeg (Lattice.out τ))
           (orderedModalInteraction K A u τ))))
   where
@@ -265,10 +579,7 @@ orderedModalTransferWithoutLeray K A M u τ =
     (lerayDropsAgainstDivergenceFreeOutput K A (Lattice.modeNeg (Lattice.out τ))
       (coefficient u (Lattice.modeNeg (Lattice.out τ)))
       (orderedModalInteraction K A (coefficient u) τ)
-      (conjugateVectorPreservesDivergenceFree A
-        (Lattice.modeNeg (Lattice.out τ))
-        (coefficient u (Lattice.modeNeg (Lattice.out τ)))
-        (divergenceFree u (Lattice.modeNeg (Lattice.out τ)))))
+      (divergenceFree u (Lattice.modeNeg (Lattice.out τ))))
 
 canonicalModalTransfer :
   (K : Algebra.ExactOrderedCommutativeRing) →
@@ -340,8 +651,7 @@ orderedModalTransferNoLerayZeroFromDiagonal K A M u τ left≡right =
     (Algebra.negZero K)
   where
   S = Algebra.orderedScalar K
-  test = conjugateVector A
-    (coefficient u (Lattice.modeNeg (Lattice.out τ)))
+  test = coefficient u (Lattice.modeNeg (Lattice.out τ))
 
 canonicalModalTransferNoLerayEqualsUniform :
   (K : Algebra.ExactOrderedCommutativeRing) →
@@ -584,13 +894,17 @@ threeTransferSumRealNormalForm K A M u τ =
       (modalTransferSumNoLerayEqualsUniform K A M u τ)
       (sym (realPartSixTermComplexNormalForm K A (coefficient u) τ)))
 
--- This is the exact remaining local Fourier calculation, decomposed into
--- atomic facts rather than hidden behind a triad-conservation field.  The
--- six equations identify the real parts of the concrete complex occurrences
--- with the six scalar atoms used by `FiniteTriadCancellationAlgebra`; the
--- relation record contains only zero-sum-wavevector and incompressibility
--- consequences.  A future concrete C³/Leray implementation must prove these
--- local facts from bilinearity and reality, not assume their final sum.
+-- Diagnostic real-factor bridge.
+--
+-- This surface is retained because it is useful for a real-valued reduction,
+-- but it is *not* the canonical Hermitian Fourier route: in general
+-- `Re (a * b)` does not factor as `Re a * Re b`.  Consequently a concrete
+-- C³ implementation should not attempt to inhabit this record merely from
+-- bilinearity, reality, and incompressibility.  The authoritative next bridge
+-- must keep the wave-dot and mode-pair factors complex through the six-term
+-- cancellation, and apply `realPart` only at the end.  Keeping this record
+-- explicitly diagnostic prevents that invalid factorisation from silently
+-- becoming the physical conservation proof.
 record SixTermRealPartAtomBridge
     (K : Algebra.ExactOrderedCommutativeRing)
     (A : FiniteComplexFourierAuthority K) (M : Nat)
@@ -707,6 +1021,585 @@ physicalModalTriadTransferConservationFromAtoms K A M u atoms = record
         (sixTermComplexNormalFormRealPartZero K A M u τ (atoms τ zeroSum))
   }
 
+-- The preceding constructor is intentionally diagnostic-only for the reason
+-- documented above.  It must not be used as evidence that the concrete
+-- Hermitian Fourier transfer conserves energy.  The live physical theorem is
+-- the forthcoming complex multilinear bridge followed by `realPart`.
+realFactorAtomBridgePhysicalClosed : Bool
+realFactorAtomBridgePhysicalClosed = false
+
+------------------------------------------------------------------------
+-- Complex multilinear cancellation.
+--
+-- The physical Hermitian route keeps every wave-dot and mode-pair factor in
+-- `Complex`.  For a zero-sum triad the six occurrences have three natural
+-- pairs: occurrences 1+6 have the `u_q` wave-dot factor, 2+3 the `u_r`
+-- factor, and 4+5 the `u_p` factor.  Each pair vanishes after using the
+-- zero-sum wavevector relation together with the corresponding divergence
+-- constraint.  This record deliberately exposes those *local* factorizations
+-- and the purely additive regrouping.  It does not contain a conservation
+-- field or a final six-term-zero field.
+--
+-- A concrete C^3/Leray authority must derive these fields from complex
+-- bilinearity, Hermitian/reality transport, p + q + r = 0, and
+-- k . u_k = 0.  Keeping that construction separate is fail-closed: the
+-- theorem below is a genuine complex cancellation once this local algebra is
+-- inhabited, but the current abstract Fourier authority has no concrete C^3
+-- implementation yet.
+------------------------------------------------------------------------
+
+record SixTermComplexFactorization
+    (K : Algebra.ExactOrderedCommutativeRing)
+    (A : FiniteComplexFourierAuthority K) (M : Nat)
+    (u : FiniteFourierNSState K A M) (τ : Lattice.LatticeTriad) : Set₁ where
+  field
+    complexAddZeroLeft :
+      (z : Complex A) → _+ᶜ_ A (zeroComplex A) z ≡ z
+    complexAddZeroRight :
+      (z : Complex A) → _+ᶜ_ A z (zeroComplex A) ≡ z
+
+    -- The displayed grouping is just additive reassociation/permutation of
+    -- the literal six-term normal form.  Naming it separately keeps the
+    -- three local Fourier cancellations below readable.
+    groupedByWaveDotFactor :
+      sixTermComplexNormalForm K A (coefficient u) τ ≡
+      _+ᶜ_ A
+        (_+ᶜ_ A
+          (_+ᶜ_ A
+            (FiniteComplexFourierAuthority.-ᶜ_ A
+              (orderedModalComplexTerm K A (coefficient u)
+                (Lattice.triadCycle τ)))
+            (FiniteComplexFourierAuthority.-ᶜ_ A
+              (orderedModalComplexTerm K A (coefficient u)
+                (Lattice.triadSwap τ))))
+          (_+ᶜ_ A
+            (FiniteComplexFourierAuthority.-ᶜ_ A
+              (orderedModalComplexTerm K A (coefficient u)
+                (Lattice.triadSwap (Lattice.triadCycle τ))))
+            (FiniteComplexFourierAuthority.-ᶜ_ A
+              (orderedModalComplexTerm K A (coefficient u)
+                (triadCycleTwice τ)))) )
+        (_+ᶜ_ A
+          (FiniteComplexFourierAuthority.-ᶜ_ A
+            (orderedModalComplexTerm K A (coefficient u)
+              (Lattice.triadSwap (triadCycleTwice τ))))
+          (FiniteComplexFourierAuthority.-ᶜ_ A
+            (orderedModalComplexTerm K A (coefficient u) τ)) )
+
+    -- The three equations are the local complex cancellations.  Their
+    -- intended derivations respectively use
+    -- (r + p) . u_q = - q . u_q = 0,
+    -- (q + p) . u_r = - r . u_r = 0, and
+    -- (r + q) . u_p = - p . u_p = 0.
+    qFactorPairZero :
+      _+ᶜ_ A
+        (FiniteComplexFourierAuthority.-ᶜ_ A
+          (orderedModalComplexTerm K A (coefficient u)
+            (Lattice.triadCycle τ)))
+        (FiniteComplexFourierAuthority.-ᶜ_ A
+          (orderedModalComplexTerm K A (coefficient u)
+            (Lattice.triadSwap τ))) ≡ zeroComplex A
+    rFactorPairZero :
+      _+ᶜ_ A
+        (FiniteComplexFourierAuthority.-ᶜ_ A
+          (orderedModalComplexTerm K A (coefficient u)
+            (Lattice.triadSwap (Lattice.triadCycle τ))))
+        (FiniteComplexFourierAuthority.-ᶜ_ A
+          (orderedModalComplexTerm K A (coefficient u)
+            (triadCycleTwice τ))) ≡ zeroComplex A
+    pFactorPairZero :
+      _+ᶜ_ A
+        (FiniteComplexFourierAuthority.-ᶜ_ A
+          (orderedModalComplexTerm K A (coefficient u)
+            (Lattice.triadSwap (triadCycleTwice τ))))
+        (FiniteComplexFourierAuthority.-ᶜ_ A
+          (orderedModalComplexTerm K A (coefficient u) τ)) ≡ zeroComplex A
+
+open SixTermComplexFactorization public
+
+sixTermComplexNormalFormZeroFromFactorization :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) → (τ : Lattice.LatticeTriad) →
+  SixTermComplexFactorization K A M u τ →
+  sixTermComplexNormalForm K A (coefficient u) τ ≡ zeroComplex A
+sixTermComplexNormalFormZeroFromFactorization K A M u τ F =
+  trans
+    (groupedByWaveDotFactor F)
+    (trans
+      (cong₂ (_+ᶜ_ A)
+        (cong₂ (_+ᶜ_ A)
+          (qFactorPairZero F)
+          (rFactorPairZero F))
+        (pFactorPairZero F))
+      (trans
+        (cong (λ x → _+ᶜ_ A x (zeroComplex A))
+          (complexAddZeroLeft F (zeroComplex A)))
+        (complexAddZeroLeft F (zeroComplex A))))
+
+sixTermComplexNormalFormRealPartZeroFromFactorization :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) → (τ : Lattice.LatticeTriad) →
+  SixTermComplexFactorization K A M u τ →
+  realPart A (sixTermComplexNormalForm K A (coefficient u) τ) ≡
+  Scalar.zero (Algebra.orderedScalar K)
+sixTermComplexNormalFormRealPartZeroFromFactorization K A M u τ F =
+  trans
+    (cong (realPart A)
+      (sixTermComplexNormalFormZeroFromFactorization K A M u τ F))
+    (realPartZero A)
+
+-- This is the canonical physical constructor once the concrete complex C^3
+-- factorization above is supplied.  Unlike the diagnostic real-factor route,
+-- it never factors a real part of a complex product.
+physicalModalTriadTransferConservationFromComplexFactorization :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) →
+  ((τ : Lattice.LatticeTriad) → Lattice.zeroSum? τ ≡ true →
+    SixTermComplexFactorization K A M u τ) →
+  PhysicalModalTriadTransferConservation K A M u
+physicalModalTriadTransferConservationFromComplexFactorization K A M u factors =
+  record
+    { conserves = λ τ zeroSum →
+        trans
+          (threeTransferSumRealNormalForm K A M u τ)
+          (sixTermComplexNormalFormRealPartZeroFromFactorization K A M u τ
+            (factors τ zeroSum))
+    }
+
+complexSixTermFactorizationPhysicalClosed : Bool
+complexSixTermFactorizationPhysicalClosed = false
+
+------------------------------------------------------------------------
+-- Hermitian-safe six-term cancellation fallback.
+--
+-- A Hermitian energy calculation need not make the three local complex
+-- pairs literal additive inverses.  The natural relation can instead be
+-- `B-reverse = - conjugate B-forward`, which is enough only after applying
+-- `realPart`.  This is therefore a convention-generic fallback interface.
+-- The *current* corrected Fourier convention targets literal complex pair
+-- cancellation, so `SixTermComplexFactorization` remains the canonical
+-- physical route.  That stronger fact still has to be derived symbolically
+-- from the local C^3 laws before it can close the physical gate.
+--
+-- The three pair expressions are ordered by their common wave-dot factor:
+-- q, r, and p respectively.  The first field is deliberately an equality
+-- only after `realPart`; it is where additive reassociation and the
+-- Hermitian reversal are allowed to do their work without asserting that the
+-- six-term complex sum itself is zero.
+------------------------------------------------------------------------
+
+qHermitianPair :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Complex A
+qHermitianPair K A u τ = _+ᶜ_ A
+  (FiniteComplexFourierAuthority.-ᶜ_ A
+    (orderedModalComplexTerm K A u (Lattice.triadCycle τ)))
+  (FiniteComplexFourierAuthority.-ᶜ_ A
+    (orderedModalComplexTerm K A u (Lattice.triadSwap τ)))
+
+qHermitianForward :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Complex A
+qHermitianForward K A u τ = FiniteComplexFourierAuthority.-ᶜ_ A
+  (orderedModalComplexTerm K A u (Lattice.triadCycle τ))
+
+qHermitianReverse :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Complex A
+qHermitianReverse K A u τ = FiniteComplexFourierAuthority.-ᶜ_ A
+  (orderedModalComplexTerm K A u (Lattice.triadSwap τ))
+
+rHermitianPair :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Complex A
+rHermitianPair K A u τ = _+ᶜ_ A
+  (FiniteComplexFourierAuthority.-ᶜ_ A
+    (orderedModalComplexTerm K A u
+      (Lattice.triadSwap (Lattice.triadCycle τ))))
+  (FiniteComplexFourierAuthority.-ᶜ_ A
+    (orderedModalComplexTerm K A u (triadCycleTwice τ)))
+
+rHermitianForward :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Complex A
+rHermitianForward K A u τ = FiniteComplexFourierAuthority.-ᶜ_ A
+  (orderedModalComplexTerm K A u
+    (Lattice.triadSwap (Lattice.triadCycle τ)))
+
+rHermitianReverse :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Complex A
+rHermitianReverse K A u τ = FiniteComplexFourierAuthority.-ᶜ_ A
+  (orderedModalComplexTerm K A u (triadCycleTwice τ))
+
+pHermitianPair :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Complex A
+pHermitianPair K A u τ = _+ᶜ_ A
+  (FiniteComplexFourierAuthority.-ᶜ_ A
+    (orderedModalComplexTerm K A u
+      (Lattice.triadSwap (triadCycleTwice τ))))
+  (FiniteComplexFourierAuthority.-ᶜ_ A
+    (orderedModalComplexTerm K A u τ))
+
+pHermitianForward :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Complex A
+pHermitianForward K A u τ = FiniteComplexFourierAuthority.-ᶜ_ A
+  (orderedModalComplexTerm K A u
+    (Lattice.triadSwap (triadCycleTwice τ)))
+
+pHermitianReverse :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (u : Lattice.LatticeMode3 → Vec3C A) → (τ : Lattice.LatticeTriad) →
+  Complex A
+pHermitianReverse K A u τ = FiniteComplexFourierAuthority.-ᶜ_ A
+  (orderedModalComplexTerm K A u τ)
+
+qHermitianPairZeroFromLocalAlgebra :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (P : FiniteComplexProductNegationAlgebra K A) →
+  (τ : Lattice.LatticeTriad) → Lattice.zeroSum? τ ≡ true →
+  qHermitianPair K A (coefficient u) τ ≡ zeroComplex A
+qHermitianPairZeroFromLocalAlgebra K A M u W P
+  (Lattice.mkLatticeTriad p q r) zeroSum =
+  trans expandedPair
+    (negatedScaledPairZero K A W P
+      (complexI A)
+      (waveDot A r (coefficient u q))
+      (waveDot A p (coefficient u q))
+      (innerC A (coefficient u (Lattice.modeNeg p)) (coefficient u r))
+      (innerC A (coefficient u (Lattice.modeNeg r)) (coefficient u p))
+      (leftDotRightEqNegOutDotRight K A W (coefficient u)
+        (Lattice.mkLatticeTriad p q r) zeroSum (divergenceFree u q))
+      (negativeModePairingSymmetric K A M u r p))
+  where
+  expandedPair :
+    qHermitianPair K A (coefficient u) (Lattice.mkLatticeTriad p q r) ≡
+    _+ᶜ_ A
+      (FiniteComplexFourierAuthority.-ᶜ_ A
+        (_*ᶜ_ A
+          (_*ᶜ_ A (complexI A) (waveDot A r (coefficient u q)))
+          (innerC A (coefficient u (Lattice.modeNeg p)) (coefficient u r))))
+      (FiniteComplexFourierAuthority.-ᶜ_ A
+        (_*ᶜ_ A
+          (_*ᶜ_ A (complexI A) (waveDot A p (coefficient u q)))
+          (innerC A (coefficient u (Lattice.modeNeg r)) (coefficient u p))) )
+  expandedPair =
+    cong₂ (_+ᶜ_ A)
+      (cong (FiniteComplexFourierAuthority.-ᶜ_ A)
+        (orderedModalComplexTermExpansion K A (coefficient u)
+          (Lattice.mkLatticeTriad q r p)))
+      (cong (FiniteComplexFourierAuthority.-ᶜ_ A)
+        (orderedModalComplexTermExpansion K A (coefficient u)
+          (Lattice.mkLatticeTriad q p r)))
+
+rHermitianPairZeroFromLocalAlgebra :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (P : FiniteComplexProductNegationAlgebra K A) →
+  (τ : Lattice.LatticeTriad) → Lattice.zeroSum? τ ≡ true →
+  rHermitianPair K A (coefficient u) τ ≡ zeroComplex A
+rHermitianPairZeroFromLocalAlgebra K A M u W P
+  (Lattice.mkLatticeTriad p q r) zeroSum =
+  trans expandedPair
+    (negatedScaledPairZero K A W P
+      (complexI A)
+      (waveDot A q (coefficient u r))
+      (waveDot A p (coefficient u r))
+      (innerC A (coefficient u (Lattice.modeNeg p)) (coefficient u q))
+      (innerC A (coefficient u (Lattice.modeNeg q)) (coefficient u p))
+      (leftDotOutEqNegRightDotOut K A W (coefficient u)
+        (Lattice.mkLatticeTriad p q r) zeroSum (divergenceFree u r))
+      (sym (negativeModePairingSymmetric K A M u p q)))
+  where
+  expandedPair :
+    rHermitianPair K A (coefficient u) (Lattice.mkLatticeTriad p q r) ≡
+    _+ᶜ_ A
+      (FiniteComplexFourierAuthority.-ᶜ_ A
+        (_*ᶜ_ A
+          (_*ᶜ_ A (complexI A) (waveDot A q (coefficient u r)))
+          (innerC A (coefficient u (Lattice.modeNeg p)) (coefficient u q))))
+      (FiniteComplexFourierAuthority.-ᶜ_ A
+        (_*ᶜ_ A
+          (_*ᶜ_ A (complexI A) (waveDot A p (coefficient u r)))
+          (innerC A (coefficient u (Lattice.modeNeg q)) (coefficient u p))) )
+  expandedPair =
+    cong₂ (_+ᶜ_ A)
+      (cong (FiniteComplexFourierAuthority.-ᶜ_ A)
+        (orderedModalComplexTermExpansion K A (coefficient u)
+          (Lattice.mkLatticeTriad r q p)))
+      (cong (FiniteComplexFourierAuthority.-ᶜ_ A)
+        (orderedModalComplexTermExpansion K A (coefficient u)
+          (Lattice.mkLatticeTriad r p q)))
+
+pHermitianPairZeroFromLocalAlgebra :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (P : FiniteComplexProductNegationAlgebra K A) →
+  (τ : Lattice.LatticeTriad) → Lattice.zeroSum? τ ≡ true →
+  pHermitianPair K A (coefficient u) τ ≡ zeroComplex A
+pHermitianPairZeroFromLocalAlgebra K A M u W P
+  (Lattice.mkLatticeTriad p q r) zeroSum =
+  trans expandedPair
+    (negatedScaledPairZero K A W P
+      (complexI A)
+      (waveDot A r (coefficient u p))
+      (waveDot A q (coefficient u p))
+      (innerC A (coefficient u (Lattice.modeNeg q)) (coefficient u r))
+      (innerC A (coefficient u (Lattice.modeNeg r)) (coefficient u q))
+      (rightDotLeftEqNegOutDotLeft K A W (coefficient u)
+        (Lattice.mkLatticeTriad p q r) zeroSum (divergenceFree u p))
+      (sym (negativeModePairingSymmetric K A M u q r)))
+  where
+  expandedPair :
+    pHermitianPair K A (coefficient u) (Lattice.mkLatticeTriad p q r) ≡
+    _+ᶜ_ A
+      (FiniteComplexFourierAuthority.-ᶜ_ A
+        (_*ᶜ_ A
+          (_*ᶜ_ A (complexI A) (waveDot A r (coefficient u p)))
+          (innerC A (coefficient u (Lattice.modeNeg q)) (coefficient u r))))
+      (FiniteComplexFourierAuthority.-ᶜ_ A
+        (_*ᶜ_ A
+          (_*ᶜ_ A (complexI A) (waveDot A q (coefficient u p)))
+          (innerC A (coefficient u (Lattice.modeNeg r)) (coefficient u q))) )
+  expandedPair =
+    cong₂ (_+ᶜ_ A)
+      (cong (FiniteComplexFourierAuthority.-ᶜ_ A)
+        (orderedModalComplexTermExpansion K A (coefficient u)
+          (Lattice.mkLatticeTriad p r q)))
+      (cong (FiniteComplexFourierAuthority.-ᶜ_ A)
+        (orderedModalComplexTermExpansion K A (coefficient u)
+          (Lattice.mkLatticeTriad p q r)))
+
+-- All nontrivial Fourier content of the strong complex factorization has now
+-- been reduced to the three pair-zero lemmas above.  The remaining `grouped`
+-- argument is a pure six-summand reassociation/permutation under the additive
+-- laws in `W`; it is kept explicit until that generic shuffle is packaged.
+physicalSixTermComplexFactorizationFromLocalAlgebra :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (P : FiniteComplexProductNegationAlgebra K A) →
+  (τ : Lattice.LatticeTriad) → Lattice.zeroSum? τ ≡ true →
+  SixTermComplexFactorization K A M u τ
+physicalSixTermComplexFactorizationFromLocalAlgebra
+  K A M u W P τ zeroSum =
+  record
+    { complexAddZeroLeft = complexAddZeroLeft W
+    ; complexAddZeroRight = λ z →
+        trans (complexAddCommutative W z (zeroComplex A))
+          (complexAddZeroLeft W z)
+    ; groupedByWaveDotFactor = complexAddSixPairShuffle K A W
+        (qHermitianForward K A (coefficient u) τ)
+        (rHermitianForward K A (coefficient u) τ)
+        (rHermitianReverse K A (coefficient u) τ)
+        (pHermitianForward K A (coefficient u) τ)
+        (pHermitianReverse K A (coefficient u) τ)
+        (qHermitianReverse K A (coefficient u) τ)
+    ; qFactorPairZero = qHermitianPairZeroFromLocalAlgebra K A M u W P τ zeroSum
+    ; rFactorPairZero = rHermitianPairZeroFromLocalAlgebra K A M u W P τ zeroSum
+    ; pFactorPairZero = pHermitianPairZeroFromLocalAlgebra K A M u W P τ zeroSum
+    }
+
+-- The exact finite Fourier triad-conservation theorem, conditional only on
+-- the explicit C3/additive authorities.  There is no caller-supplied
+-- conservation witness, no real-part factorisation, and no leftover
+-- six-term regrouping premise.
+physicalModalTriadTransferConservationFromLocalAlgebra :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (P : FiniteComplexProductNegationAlgebra K A) →
+  PhysicalModalTriadTransferConservation K A M u
+physicalModalTriadTransferConservationFromLocalAlgebra K A M u W P =
+  physicalModalTriadTransferConservationFromComplexFactorization K A M u
+    (λ τ zeroSum →
+      physicalSixTermComplexFactorizationFromLocalAlgebra
+        K A M u W P τ zeroSum)
+
+-- The exact scalar consequence used for a Hermitian reversal.  This is the
+-- only place where the real ordered-ring authority enters the cancellation
+-- route: `Re (B - conjugate B) = 0`.  It avoids the invalid stronger claim
+-- that `B - conjugate B` is always the zero complex scalar.
+negativeConjugatePairRealPartZero :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) →
+  (forward reverse : Complex A) →
+  reverse ≡ FiniteComplexFourierAuthority.-ᶜ_ A
+    (conjugate A forward) →
+  realPart A (_+ᶜ_ A forward reverse) ≡
+  Scalar.zero (Algebra.orderedScalar K)
+negativeConjugatePairRealPartZero K A forward reverse reverseLaw =
+  trans
+    (realPartAdd A forward reverse)
+    (trans
+      (cong (λ x → Scalar._+_ S (realPart A forward) x)
+        (trans
+          (cong (realPart A) reverseLaw)
+          (trans
+            (realPartNeg A (conjugate A forward))
+            (cong (Scalar.neg S) (realPartConjugate A forward)))))
+      (trans
+        (Algebra.addCommutative K (realPart A forward)
+          (Scalar.neg S (realPart A forward)))
+        (Algebra.addInverseLeft K (realPart A forward))))
+  where
+  S = Algebra.orderedScalar K
+
+record SixTermHermitianRealPartFactorization
+    (K : Algebra.ExactOrderedCommutativeRing)
+    (A : FiniteComplexFourierAuthority K) (M : Nat)
+    (u : FiniteFourierNSState K A M) (τ : Lattice.LatticeTriad) : Set₁ where
+  field
+    -- The equality is stated at the energy-relevant real level.  A concrete
+    -- proof should derive it by wave-dot linearity, reality transport, and
+    -- Hermitian symmetry; it is not a conservation axiom.
+    realPartGroupedByHermitianPairs :
+      realPart A (sixTermComplexNormalForm K A (coefficient u) τ) ≡
+      Scalar._+_ (Algebra.orderedScalar K)
+        (Scalar._+_ (Algebra.orderedScalar K)
+          (realPart A (qHermitianPair K A (coefficient u) τ))
+          (realPart A (rHermitianPair K A (coefficient u) τ)))
+        (realPart A (pHermitianPair K A (coefficient u) τ))
+
+    -- These are the three genuine local Fourier obligations.  They are
+    -- intentionally stated as negative-conjugate relations, not as complex
+    -- zero identities and not as pre-cancelled real parts.
+    qPairReverseIsNegativeConjugate :
+      qHermitianReverse K A (coefficient u) τ ≡
+      FiniteComplexFourierAuthority.-ᶜ_ A
+        (conjugate A (qHermitianForward K A (coefficient u) τ))
+    rPairReverseIsNegativeConjugate :
+      rHermitianReverse K A (coefficient u) τ ≡
+      FiniteComplexFourierAuthority.-ᶜ_ A
+        (conjugate A (rHermitianForward K A (coefficient u) τ))
+    pPairReverseIsNegativeConjugate :
+      pHermitianReverse K A (coefficient u) τ ≡
+      FiniteComplexFourierAuthority.-ᶜ_ A
+        (conjugate A (pHermitianForward K A (coefficient u) τ))
+
+open SixTermHermitianRealPartFactorization public
+
+-- The concrete Fourier proof will supply the four local rewrites below:
+-- additive regrouping at the real-part level and one negative-conjugate law
+-- for each pair.  Packaging them here prevents later consumers from
+-- accidentally replacing those laws by a bare conservation assumption.
+physicalSixTermHermitianFactorization :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) → (τ : Lattice.LatticeTriad) →
+  realPart A (sixTermComplexNormalForm K A (coefficient u) τ) ≡
+  Scalar._+_ (Algebra.orderedScalar K)
+    (Scalar._+_ (Algebra.orderedScalar K)
+      (realPart A (qHermitianPair K A (coefficient u) τ))
+      (realPart A (rHermitianPair K A (coefficient u) τ)))
+    (realPart A (pHermitianPair K A (coefficient u) τ)) →
+  qHermitianReverse K A (coefficient u) τ ≡
+  FiniteComplexFourierAuthority.-ᶜ_ A
+    (conjugate A (qHermitianForward K A (coefficient u) τ)) →
+  rHermitianReverse K A (coefficient u) τ ≡
+  FiniteComplexFourierAuthority.-ᶜ_ A
+    (conjugate A (rHermitianForward K A (coefficient u) τ)) →
+  pHermitianReverse K A (coefficient u) τ ≡
+  FiniteComplexFourierAuthority.-ᶜ_ A
+    (conjugate A (pHermitianForward K A (coefficient u) τ)) →
+  SixTermHermitianRealPartFactorization K A M u τ
+physicalSixTermHermitianFactorization K A M u τ grouped qSkew rSkew pSkew =
+  record
+    { realPartGroupedByHermitianPairs = grouped
+    ; qPairReverseIsNegativeConjugate = qSkew
+    ; rPairReverseIsNegativeConjugate = rSkew
+    ; pPairReverseIsNegativeConjugate = pSkew
+    }
+
+sixTermComplexNormalFormRealPartZeroFromHermitianPairs :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) → (τ : Lattice.LatticeTriad) →
+  SixTermHermitianRealPartFactorization K A M u τ →
+  realPart A (sixTermComplexNormalForm K A (coefficient u) τ) ≡
+  Scalar.zero (Algebra.orderedScalar K)
+sixTermComplexNormalFormRealPartZeroFromHermitianPairs K A M u τ H =
+  trans
+    (realPartGroupedByHermitianPairs H)
+    (trans
+      (cong₂ (Scalar._+_ S)
+        (cong₂ (Scalar._+_ S)
+          (negativeConjugatePairRealPartZero K A
+            (qHermitianForward K A (coefficient u) τ)
+            (qHermitianReverse K A (coefficient u) τ)
+            (qPairReverseIsNegativeConjugate H))
+          (negativeConjugatePairRealPartZero K A
+            (rHermitianForward K A (coefficient u) τ)
+            (rHermitianReverse K A (coefficient u) τ)
+            (rPairReverseIsNegativeConjugate H)))
+        (negativeConjugatePairRealPartZero K A
+          (pHermitianForward K A (coefficient u) τ)
+          (pHermitianReverse K A (coefficient u) τ)
+          (pPairReverseIsNegativeConjugate H)))
+      (trans
+        (cong (λ x → Scalar._+_ S x (Scalar.zero S))
+          (Algebra.addZeroLeft K (Scalar.zero S)))
+        (Algebra.addZeroLeft K (Scalar.zero S))))
+  where
+  S = Algebra.orderedScalar K
+
+-- This fallback constructor is appropriate only for a convention where the
+-- three local pairs are provably negative-conjugate but not literal negatives.
+-- It is not the canonical constructor for the present Fourier definitions;
+-- see `physicalModalTriadTransferConservationFromComplexFactorization`.
+physicalModalTriadTransferConservationFromHermitianPairs :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) →
+  ((τ : Lattice.LatticeTriad) → Lattice.zeroSum? τ ≡ true →
+    SixTermHermitianRealPartFactorization K A M u τ) →
+  PhysicalModalTriadTransferConservation K A M u
+physicalModalTriadTransferConservationFromHermitianPairs K A M u pairs =
+  record
+    { conserves = λ τ zeroSum →
+        trans
+          (threeTransferSumRealNormalForm K A M u τ)
+          (sixTermComplexNormalFormRealPartZeroFromHermitianPairs K A M u τ
+            (pairs τ zeroSum))
+    }
+
+-- A concrete C^3 implementation still has to derive the real-part grouping
+-- and the three negative-conjugate pair laws.  Until then, this is a
+-- fail-closed physical theorem surface rather than an inhabited NS theorem.
+hermitianPairCancellationPhysicalClosed : Bool
+hermitianPairCancellationPhysicalClosed = false
+
 modalTriadTransferFromPhysicalConservation :
   (K : Algebra.ExactOrderedCommutativeRing) →
   (A : FiniteComplexFourierAuthority K) → (M : Nat) →
@@ -722,6 +1615,23 @@ modalTriadTransferFromPhysicalConservation K A M u C τ zeroSum = record
   }
   where
   triple = physicalModalTransferTriple K A (coefficient u) τ
+
+-- The locally derived cancellation theorem now supplies the physical energy
+-- lane on its proper dependent carrier.  This is intentionally *not* a
+-- total `TriadTransferField`: a non-zero-sum labelled triple has no Fourier
+-- modal-transfer semantics in this construction.
+physicalZeroSumTriadTransferFieldFromLocalAlgebra :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  (A : FiniteComplexFourierAuthority K) → (M : Nat) →
+  (u : FiniteFourierNSState K A M) →
+  (W : FiniteTriadWaveDotAlgebra K A) →
+  (P : FiniteComplexProductNegationAlgebra K A) →
+  Energy.ZeroSumTriadTransferField (Algebra.orderedScalar K)
+physicalZeroSumTriadTransferFieldFromLocalAlgebra K A M u W P σ =
+  modalTriadTransferFromPhysicalConservation K A M u C
+    (Energy.triad σ) (Energy.zeroSum σ)
+  where
+  C = physicalModalTriadTransferConservationFromLocalAlgebra K A M u W P
 
 formalWeightedEnergyDerivative :
   (K : Algebra.ExactOrderedCommutativeRing) →

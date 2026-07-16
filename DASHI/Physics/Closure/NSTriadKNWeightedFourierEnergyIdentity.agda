@@ -1,6 +1,6 @@
 module DASHI.Physics.Closure.NSTriadKNWeightedFourierEnergyIdentity where
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Primitive using (Set)
@@ -10,6 +10,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNExactAlgebraicRetainedTriadFiber as Exact
 import DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads as Lattice
+import DASHI.Physics.Closure.NSTriadKNExactLatticeTriadZeroSum as ZeroSum
 import DASHI.Physics.Closure.NSTriadKNExactOrderedScalar as Scalar
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffInnerProduct as Algebra
 import DASHI.Physics.Closure.NSTriadKNExactRingSolverBridge as RingBridge
@@ -69,34 +70,105 @@ TriadTransferField :
   (S : Scalar.ExactOrderedScalar) → Set
 TriadTransferField S = (τ : Lattice.LatticeTriad) → ModalTriadTransfer S τ
 
+weightedModalTriadContribution :
+  (S : Scalar.ExactOrderedScalar) → (M : Nat) →
+  AdmissibleFourierMultiplier S M →
+  (τ : Lattice.LatticeTriad) → ModalTriadTransfer S τ → Scalar.Scalar S
+weightedModalTriadContribution S M z τ transfer =
+  Scalar._+_ S
+    (Scalar._*_ S (weight z (Lattice.left τ)) (transferLeft transfer))
+    (Scalar._+_ S
+      (Scalar._*_ S (weight z (Lattice.right τ)) (transferRight transfer))
+      (Scalar._*_ S (weight z (Lattice.out τ)) (transferOut transfer)))
+
+-- The physical Fourier construction is defined only on labelled triples
+-- satisfying the exact zero-sum predicate.  Keeping that witness in the
+-- carrier prevents a later energy fold from manufacturing transfer data for
+-- arbitrary, non-geometric triples merely to satisfy `TriadTransferField`.
+record ZeroSumTriad : Set where
+  constructor mkZeroSumTriad
+  field
+    triad : Lattice.LatticeTriad
+    zeroSum : Lattice.zeroSum? triad ≡ true
+
+open ZeroSumTriad public
+
+ZeroSumTriadTransferField :
+  (S : Scalar.ExactOrderedScalar) → Set
+ZeroSumTriadTransferField S =
+  (σ : ZeroSumTriad) → ModalTriadTransfer S (triad σ)
+
+weightedZeroSumTriadContribution :
+  (S : Scalar.ExactOrderedScalar) → (M : Nat) →
+  AdmissibleFourierMultiplier S M → ZeroSumTriadTransferField S →
+  (σ : ZeroSumTriad) → Scalar.Scalar S
+weightedZeroSumTriadContribution S M z T σ =
+  weightedModalTriadContribution S M z τ transfer
+  where
+  τ = triad σ
+  transfer = T σ
+
+weightedZeroSumTriadDifferenceForm :
+  (S : Scalar.ExactOrderedScalar) → (M : Nat) →
+  AdmissibleFourierMultiplier S M → ZeroSumTriadTransferField S →
+  (σ : ZeroSumTriad) → Scalar.Scalar S
+weightedZeroSumTriadDifferenceForm S M z T σ =
+  Scalar.third S
+    (Scalar._+_ S
+      (Scalar._*_ S
+        (sub S (weight z (Lattice.left τ)) (weight z (Lattice.right τ)))
+        (sub S (transferLeft transfer) (transferRight transfer)))
+      (Scalar._+_ S
+        (Scalar._*_ S
+          (sub S (weight z (Lattice.left τ)) (weight z (Lattice.out τ)))
+          (sub S (transferLeft transfer) (transferOut transfer)))
+        (Scalar._*_ S
+          (sub S (weight z (Lattice.right τ)) (weight z (Lattice.out τ)))
+          (sub S (transferRight transfer) (transferOut transfer)))))
+  where
+  τ = triad σ
+  transfer = T σ
+
+weightedZeroSumTriadContributions :
+  (S : Scalar.ExactOrderedScalar) → (M : Nat) →
+  AdmissibleFourierMultiplier S M → ZeroSumTriadTransferField S →
+  List ZeroSumTriad → List (Scalar.Scalar S)
+weightedZeroSumTriadContributions S M z T [] = []
+weightedZeroSumTriadContributions S M z T (σ ∷ σs) =
+  weightedZeroSumTriadContribution S M z T σ ∷
+  weightedZeroSumTriadContributions S M z T σs
+
 weightedTriadContribution :
   (S : Scalar.ExactOrderedScalar) → (M : Nat) →
   AdmissibleFourierMultiplier S M → TriadTransferField S →
   (τ : Lattice.LatticeTriad) → Scalar.Scalar S
 weightedTriadContribution S M z T τ =
-  Scalar._+_ S
-    (Scalar._*_ S (weight z (Lattice.left τ)) (transferLeft (T τ)))
+  weightedModalTriadContribution S M z τ (T τ)
+
+weightedModalTriadDifferenceForm :
+  (S : Scalar.ExactOrderedScalar) → (M : Nat) →
+  AdmissibleFourierMultiplier S M →
+  (τ : Lattice.LatticeTriad) → ModalTriadTransfer S τ → Scalar.Scalar S
+weightedModalTriadDifferenceForm S M z τ transfer =
+  Scalar.third S
     (Scalar._+_ S
-      (Scalar._*_ S (weight z (Lattice.right τ)) (transferRight (T τ)))
-      (Scalar._*_ S (weight z (Lattice.out τ)) (transferOut (T τ))))
+      (Scalar._*_ S
+        (sub S (weight z (Lattice.left τ)) (weight z (Lattice.right τ)))
+        (sub S (transferLeft transfer) (transferRight transfer)))
+      (Scalar._+_ S
+        (Scalar._*_ S
+          (sub S (weight z (Lattice.left τ)) (weight z (Lattice.out τ)))
+          (sub S (transferLeft transfer) (transferOut transfer)))
+        (Scalar._*_ S
+          (sub S (weight z (Lattice.right τ)) (weight z (Lattice.out τ)))
+          (sub S (transferRight transfer) (transferOut transfer)))))
 
 weightedTriadDifferenceForm :
   (S : Scalar.ExactOrderedScalar) → (M : Nat) →
   AdmissibleFourierMultiplier S M → TriadTransferField S →
   (τ : Lattice.LatticeTriad) → Scalar.Scalar S
 weightedTriadDifferenceForm S M z T τ =
-  Scalar.third S
-    (Scalar._+_ S
-      (Scalar._*_ S
-        (sub S (weight z (Lattice.left τ)) (weight z (Lattice.right τ)))
-        (sub S (transferLeft (T τ)) (transferRight (T τ))))
-      (Scalar._+_ S
-        (Scalar._*_ S
-          (sub S (weight z (Lattice.left τ)) (weight z (Lattice.out τ)))
-          (sub S (transferLeft (T τ)) (transferOut (T τ))))
-        (Scalar._*_ S
-          (sub S (weight z (Lattice.right τ)) (weight z (Lattice.out τ)))
-          (sub S (transferRight (T τ)) (transferOut (T τ))))))
+  weightedModalTriadDifferenceForm S M z τ (T τ)
 
 weightedTriadContributions :
   (S : Scalar.ExactOrderedScalar) → (M : Nat) →
@@ -242,10 +314,23 @@ record WeightedTriadDifferenceIdentity
     weightedTriadContributionDifferenceForm :
       (M : Nat) →
       (z : AdmissibleFourierMultiplier (Algebra.orderedScalar K) M) →
-      (T : TriadTransferField (Algebra.orderedScalar K)) →
       (τ : Lattice.LatticeTriad) →
-      weightedTriadContribution (Algebra.orderedScalar K) M z T τ ≡
-      weightedTriadDifferenceForm (Algebra.orderedScalar K) M z T τ
+      (transfer : ModalTriadTransfer (Algebra.orderedScalar K) τ) →
+      weightedModalTriadContribution (Algebra.orderedScalar K) M z τ transfer ≡
+      weightedModalTriadDifferenceForm (Algebra.orderedScalar K) M z τ transfer
+
+weightedZeroSumTriadDifferenceFromIdentity :
+  (K : Algebra.ExactOrderedCommutativeRing) →
+  WeightedTriadDifferenceIdentity K →
+  (M : Nat) →
+  (z : AdmissibleFourierMultiplier (Algebra.orderedScalar K) M) →
+  (T : ZeroSumTriadTransferField (Algebra.orderedScalar K)) →
+  (σ : ZeroSumTriad) →
+  weightedZeroSumTriadContribution (Algebra.orderedScalar K) M z T σ ≡
+  weightedZeroSumTriadDifferenceForm (Algebra.orderedScalar K) M z T σ
+weightedZeroSumTriadDifferenceFromIdentity K I M z T σ =
+  WeightedTriadDifferenceIdentity.weightedTriadContributionDifferenceForm
+    I M z (triad σ) (T σ)
 
 -- This is the exact PDE input still needed to turn the finite definitions
 -- above into an energy identity.  It is deliberately not inhabited by the

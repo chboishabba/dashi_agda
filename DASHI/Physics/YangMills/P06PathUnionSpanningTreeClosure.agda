@@ -34,6 +34,9 @@ open import DASHI.Physics.YangMills.GraphCombinatorics as GC
         ; nonempty
         ; mapList
         ; map-elem
+        ; noDup-nil
+        ; noDup-cons
+        ; ++-noDup
         ; last
         ; vertices
         ; pathVerticesAsCons
@@ -1336,6 +1339,67 @@ parentVertexUnique
       (trans (sym childEq) child≡))
 ... | inj₂ here | inj₂ here = refl
 
+-- The child projection of an insertion history is duplicate-free.  This is
+-- stronger than parent uniqueness: it says that an insertion step can never
+-- introduce a vertex which was already introduced by an earlier step.  The
+-- result is intentionally about proof-free vertices, so it is safe to reuse
+-- when later comparing source-edge encodings.
+
+mapList-append :
+  {A B : Set} (f : A → B) (xs ys : List A) →
+  mapList f (xs ++ ys) ≡ mapList f xs ++ mapList f ys
+mapList-append f [] ys = refl
+mapList-append f (x ∷ xs) ys =
+  cong (λ zs → f x ∷ zs) (mapList-append f xs ys)
+
+insertionChildrenNoDuplicates :
+  {G : GC.Graph} {X : List (GC.Graph.Vertex G)}
+  {r : GC.Graph.Vertex G}
+  {included : List (GC.Graph.Vertex G)}
+  {links : List (ParentLink {G = G} X)} →
+  ParentLinksDescribeInsertionOrder r included links →
+  NoDuplicates (mapList ParentLink.child links)
+insertionChildrenNoDuplicates root-only = noDup-nil
+insertionChildrenNoDuplicates
+  (append-child {included = included} {links = links} {child = child}
+    history parent∈ child∉ link parent≡ child≡) =
+  subst NoDuplicates (sym mapAppend)
+    (++-noDup oldChildren (ParentLink.child link ∷ []) oldNoDup
+      (noDup-cons (λ ()) noDup-nil) oldDisjoint)
+  where
+  oldChildren = mapList ParentLink.child links
+
+  oldNoDup : NoDuplicates oldChildren
+  oldNoDup = insertionChildrenNoDuplicates history
+
+  mapAppend :
+    mapList ParentLink.child (links ++ link ∷ []) ≡
+    oldChildren ++ ParentLink.child link ∷ []
+  mapAppend = mapList-append ParentLink.child links (link ∷ [])
+
+  oldDisjoint : ∀ {z} → z ∈ oldChildren → z ∉ (ParentLink.child link ∷ [])
+  oldDisjoint {z} z∈old z∈new =
+    let z≡child = memberSingletonCases z∈new
+        source = map-elem ParentLink.child links z∈old
+        oldLink = proj₁ source
+        childEq = proj₁ (proj₂ source)
+        oldLink∈ = proj₂ (proj₂ source)
+        oldChildIn : ParentLink.child oldLink ∈ included
+        oldChildIn = historyLinkChildInIncluded history oldLink∈
+        zEqLinkChild : z ≡ ParentLink.child link
+        zEqLinkChild = memberSingletonCases z∈new
+        zEqOldChild : z ≡ ParentLink.child oldLink
+        zEqOldChild = childEq
+        childEqOldChild : child ≡ ParentLink.child oldLink
+        childEqOldChild =
+          trans (sym child≡) (trans (sym zEqLinkChild) zEqOldChild)
+        childIn : child ∈ included
+        childIn = subst
+          (λ w → w ∈ included)
+          (sym childEqOldChild)
+          oldChildIn
+    in child∉ childIn
+
 ------------------------------------------------------------------------
 -- Child lists are obtained by filtering the already-certified link list.
 -- No decidable adjacency is required: only decidable equality of vertices.
@@ -1459,6 +1523,47 @@ memberBeforeAppendSingle (z ∷ xs) here =
   before-head (memberAttachmentInAppend xs [])
 memberBeforeAppendSingle (z ∷ xs) (there x∈) =
   before-tail (memberBeforeAppendSingle xs x∈)
+
+appearsBeforeLeftMember :
+  {A : Set} {x y : A} {xs : List A} →
+  AppearsBefore x y xs → x ∈ xs
+appearsBeforeLeftMember (before-head y∈) = here
+appearsBeforeLeftMember (before-tail earlier) =
+  there (appearsBeforeLeftMember earlier)
+
+appearsBeforeRightMember :
+  {A : Set} {x y : A} {xs : List A} →
+  AppearsBefore x y xs → y ∈ xs
+appearsBeforeRightMember (before-head y∈) = there y∈
+appearsBeforeRightMember (before-tail earlier) =
+  there (appearsBeforeRightMember earlier)
+
+appearsBeforeEndsAtHeadRequiresTail :
+  {A : Set} {x y : A} {xs : List A} →
+  AppearsBefore y x (x ∷ xs) → x ∈ xs
+appearsBeforeEndsAtHeadRequiresTail (before-head x∈) = x∈
+appearsBeforeEndsAtHeadRequiresTail (before-tail earlier) =
+  appearsBeforeRightMember earlier
+
+-- Strict insertion order cannot run in both directions inside a
+-- duplicate-free carrier.  This is the orientation-cycle exclusion used by
+-- the cube-edge collapse: two links cannot select the same geometric edge
+-- with opposite parent/child orientations.
+appearsBeforeAsymmetric :
+  {A : Set} {x y : A} {xs : List A} →
+  NoDuplicates xs →
+  AppearsBefore x y xs →
+  AppearsBefore y x xs → ⊥
+appearsBeforeAsymmetric noDup-nil () _
+appearsBeforeAsymmetric
+  (noDup-cons x∉xs noDup-xs) (before-head y∈) reverse =
+  x∉xs (appearsBeforeEndsAtHeadRequiresTail reverse)
+appearsBeforeAsymmetric
+  (noDup-cons z∉xs noDup-xs) (before-tail earlier) (before-head x∈) =
+  z∉xs (appearsBeforeRightMember earlier)
+appearsBeforeAsymmetric
+  (noDup-cons z∉xs noDup-xs) (before-tail earlier) (before-tail reverse) =
+  appearsBeforeAsymmetric noDup-xs earlier reverse
 
 historyParentBeforeChild :
   {G : GC.Graph} {X : List (GC.Graph.Vertex G)}
@@ -2211,6 +2316,127 @@ insertionHistoryToTreeRange {G = G} {X = X} {r = r}
 -- extensional range theorem reusable while ensuring this stronger result is
 -- obtained only from the actual leaf-insertion construction.
 ------------------------------------------------------------------------
+
+{-
+-- Structural edge preservation for fresh-leaf insertion.  This is expressed
+-- in the proof-relevant tree-edge relation from the DFS module, rather than
+-- as equality of dependent child records.
+
+childOccursFromMember :
+  {G : GC.Graph} {u : GC.Graph.Vertex G}
+  {child : RootedTreeChild G u} {children : List (RootedTreeChild G u)} →
+  child ∈₁ children → CDFS.ChildOccurs child children
+childOccursFromMember here₁ = CDFS.child-here
+childOccursFromMember (there₁ child∈) =
+  CDFS.child-there (childOccursFromMember child∈)
+
+mutual
+
+  insertFreshLeafIntroducesTreeEdge :
+    {G : GC.Graph} {u parent fresh : GC.Graph.Vertex G} →
+    (T : RootedTreeNode G u) →
+    (parent∈ : TreeContains T parent) →
+    (fwd : GC.Graph.Adj G parent fresh) →
+    (back : GC.Graph.Adj G fresh parent) →
+    CDFS.TreeEdgeOccurs
+      {tree = insertFreshLeafUnder T parent∈ fwd back}
+      parent fresh
+  insertFreshLeafIntroducesTreeEdge (CDFS.leaf u) at-leaf fwd back =
+    CDFS.direct-tree-edge CDFS.child-here
+  insertFreshLeafIntroducesTreeEdge (CDFS.branch u children) at-branch fwd back =
+    CDFS.direct-tree-edge CDFS.child-here
+  insertFreshLeafIntroducesTreeEdge (CDFS.branch u children)
+    (in-child {entry = entry} entry∈ parent∈) fwd back =
+    insertFreshLeafInForestIntroducesTreeEdge
+      children entry∈ parent∈ fwd back
+
+  insertFreshLeafInForestIntroducesTreeEdge :
+    {G : GC.Graph} {u parent fresh : GC.Graph.Vertex G} →
+    (children : List (RootedTreeChild G u)) →
+    {entry : RootedTreeChild G u} →
+    (entry∈ : entry ∈₁ children) →
+    (parent∈ : TreeContains (subtree entry) parent) →
+    (fwd : GC.Graph.Adj G parent fresh) →
+    (back : GC.Graph.Adj G fresh parent) →
+    CDFS.TreeEdgeOccurs
+      {tree = CDFS.branch u
+        (insertFreshLeafInForest children entry∈ parent∈ fwd back)}
+      parent fresh
+  insertFreshLeafInForestIntroducesTreeEdge (entry ∷ children) here₁
+    parent∈ fwd back =
+    CDFS.below-tree-edge CDFS.child-here
+      (insertFreshLeafIntroducesTreeEdge
+        (subtree entry) parent∈ fwd back)
+  insertFreshLeafInForestIntroducesTreeEdge (head ∷ children) (there₁ entry∈)
+    parent∈ fwd back =
+    CDFS.below-tree-edge CDFS.child-there
+      (insertFreshLeafInForestIntroducesTreeEdge
+        children entry∈ parent∈ fwd back)
+
+  insertFreshLeafPreservesTreeEdge :
+    {G : GC.Graph} {u parent fresh p q : GC.Graph.Vertex G} →
+    (T : RootedTreeNode G u) →
+    (parent∈ : TreeContains T parent) →
+    (fwd : GC.Graph.Adj G parent fresh) →
+    (back : GC.Graph.Adj G fresh parent) →
+    CDFS.TreeEdgeOccurs {tree = T} p q →
+    CDFS.TreeEdgeOccurs
+      {tree = insertFreshLeafUnder T parent∈ fwd back} p q
+  insertFreshLeafPreservesTreeEdge (CDFS.leaf u) at-leaf fwd back ()
+  insertFreshLeafPreservesTreeEdge (CDFS.branch u children) at-branch fwd back
+    (CDFS.direct-tree-edge child∈) =
+    CDFS.direct-tree-edge (CDFS.child-there child∈)
+  insertFreshLeafPreservesTreeEdge (CDFS.branch u children) at-branch fwd back
+    (CDFS.below-tree-edge child∈ edge∈) =
+    CDFS.below-tree-edge (CDFS.child-there child∈) edge∈
+  insertFreshLeafPreservesTreeEdge (CDFS.branch u children)
+    (in-child {entry = entry} entry∈ parent∈) fwd back edge∈ =
+    insertFreshLeafInForestPreservesTreeEdge
+      children entry∈ parent∈ fwd back edge∈
+
+  insertFreshLeafInForestPreservesTreeEdge :
+    {G : GC.Graph} {u parent fresh p q : GC.Graph.Vertex G} →
+    (children : List (RootedTreeChild G u)) →
+    {entry : RootedTreeChild G u} →
+    (entry∈ : entry ∈₁ children) →
+    (parent∈ : TreeContains (subtree entry) parent) →
+    (fwd : GC.Graph.Adj G parent fresh) →
+    (back : GC.Graph.Adj G fresh parent) →
+    CDFS.TreeEdgeOccurs {tree = CDFS.branch u children} p q →
+    CDFS.TreeEdgeOccurs
+      {tree = CDFS.branch u
+        (insertFreshLeafInForest children entry∈ parent∈ fwd back)} p q
+  insertFreshLeafInForestPreservesTreeEdge [] () parent∈ fwd back edge∈
+  insertFreshLeafInForestPreservesTreeEdge (entry ∷ children) here₁ parent∈ fwd back
+    (CDFS.direct-tree-edge CDFS.child-here) =
+    CDFS.direct-tree-edge CDFS.child-here
+  insertFreshLeafInForestPreservesTreeEdge (entry ∷ children) here₁ parent∈ fwd back
+    (CDFS.direct-tree-edge (CDFS.child-there child∈)) =
+    CDFS.direct-tree-edge (CDFS.child-there child∈)
+  insertFreshLeafInForestPreservesTreeEdge (entry ∷ children) here₁ parent∈ fwd back
+    (CDFS.below-tree-edge CDFS.child-here edge∈) =
+    CDFS.below-tree-edge CDFS.child-here
+      (insertFreshLeafPreservesTreeEdge
+        (subtree entry) parent∈ fwd back edge∈)
+  insertFreshLeafInForestPreservesTreeEdge (entry ∷ children) here₁ parent∈ fwd back
+    (CDFS.below-tree-edge (CDFS.child-there child∈) edge∈) =
+    CDFS.below-tree-edge (CDFS.child-there child∈) edge∈
+  insertFreshLeafInForestPreservesTreeEdge (head ∷ children) (there₁ entry∈)
+    parent∈ fwd back (CDFS.direct-tree-edge CDFS.child-here) =
+    CDFS.direct-tree-edge CDFS.child-here
+  insertFreshLeafInForestPreservesTreeEdge (head ∷ children) (there₁ entry∈)
+    parent∈ fwd back (CDFS.direct-tree-edge (CDFS.child-there child∈)) =
+    insertFreshLeafInForestPreservesTreeEdge children entry∈ parent∈ fwd back
+      (CDFS.direct-tree-edge child∈)
+  insertFreshLeafInForestPreservesTreeEdge (head ∷ children) (there₁ entry∈)
+    parent∈ fwd back (CDFS.below-tree-edge CDFS.child-here edge∈) =
+    CDFS.below-tree-edge CDFS.child-here edge∈
+  insertFreshLeafInForestPreservesTreeEdge (head ∷ children) (there₁ entry∈)
+    parent∈ fwd back (CDFS.below-tree-edge (CDFS.child-there child∈) edge∈) =
+    insertFreshLeafInForestPreservesTreeEdge children entry∈ parent∈ fwd back
+      (CDFS.below-tree-edge child∈ edge∈)
+-}
+
 
 record TreeRealisesInsertionHistory
   {G : GC.Graph}

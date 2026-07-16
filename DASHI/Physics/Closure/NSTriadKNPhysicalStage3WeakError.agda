@@ -14,11 +14,19 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalRetainedSector as PhysicalSector
 import DASHI.Physics.Closure.NSTriadKNStage3NegativeTransferContrast as Contrast
 
 ------------------------------------------------------------------------
--- Physical Stage-3 weak error.
+-- Physical Stage-3 negative-transfer Gram surrogate.
 --
--- This is the canonical object for the physical Fourier/Gram lane.  It is
--- intentionally distinct from the legacy Nat-valued diagnostic
--- `actualWeakQuadraticForm`: no identification with that model is claimed.
+-- This is the canonical auxiliary object for the physical Fourier/Gram lane.
+-- It is intentionally distinct from the legacy Nat-valued diagnostic
+-- `actualWeakQuadraticForm`, and it is also not yet identified with the full
+-- weighted Fourier NS error.  A full error bound must include a separately
+-- controlled transfer-flux remainder: a positive orbit interaction has
+-- m^- = 0 while its weighted modal-transfer contrast can be nonzero.
+-- Moreover, the present m^abs is the absolute transfer into one distinguished
+-- output mode; it need not control the full three-mode transfer variation.
+-- Thus neither current Gram coefficient can be used as a Young parameter for
+-- the full weighted-energy term without a new modal-transfer/dissipation
+-- estimate.
 --
 -- The concrete pair-incidence instance has one edge for each oriented pair
 -- slot of a retained triad, with coefficient m^-_tau(u) / 3 and vector
@@ -136,7 +144,9 @@ canonicalPhysicalStage3WeakQuadraticControlFromFourierData
 --
 -- This surface makes the missing bridge precise: it is an energy estimate
 -- derived from the finite Fourier Navier--Stokes equations, not a theorem
--- inherited from the Nat-valued diagnostic pair-incidence witness.
+-- inherited from the Nat-valued diagnostic pair-incidence witness.  The
+-- eventual bridge must be flux-inclusive rather than asserting that the
+-- full weak error is bounded by the negative Gram surrogate alone.
 ------------------------------------------------------------------------
 
 record PhysicalStage3EnergyEstimate
@@ -170,9 +180,11 @@ record PhysicalStage3EnergyEstimate
 open PhysicalStage3EnergyEstimate public
 
 -- No Fourier NS energy/error derivation has yet inhabited this record.
--- In particular, this guard must remain false until the exact finite-triad
--- convection reconstruction yields `energyInequality` and the adverse
--- transfer comparison above.
+-- In particular, this diagnostic negative-transfer Gram form is not the
+-- controller of the physical weighted Fourier error: that error is linear in
+-- multiplier contrasts.  The canonical physical bridge now lives in
+-- `NSTriadKNPhysicalEdgeTransferOperator` plus a coercive weighted Young
+-- estimate and a strictly absorbable transfer-flux remainder.
 physicalStage3EnergyEstimateClosed : Bool
 physicalStage3EnergyEstimateClosed = false
 
