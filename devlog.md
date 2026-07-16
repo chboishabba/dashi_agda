@@ -1,5 +1,22 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Locked the purely finite depletion-barrier algebra in
+  `NSTriadKNDepletionBarrier.agda`.  Given an exact good/bad flux split, a
+  local good-edge hierarchy bound, and a bad-edge sparsity bound, the finite
+  aggregate hierarchy is now constructed by equality transport and additive
+  monotonicity.  The module intentionally leaves the two nonclassical NS
+  inputs visible and keeps the strict dynamical barrier fail-closed.
+- Added and ran `scripts/ns_triad_edge_depletion_audit.py` against the existing
+  N128 archive.  It first projects the sampled Fourier field onto the discrete
+  Leray carrier, then samples canonical zero-sum triads and measures modal
+  transfer variation against a declared mean pairwise helical-mismatch defect.
+  Conservation is numerically exact on meaningful triads (`4.2e-14` relative),
+  but the candidate has near-zero/slightly negative correlation with both
+  normalized edge flux (`-0.036`) and transfer variation (`-0.009`).  Its
+  `eta=0.25` bad set carries `81.0%` of sampled flux.  Thus it is rejected as
+  the immediate `badEdgeSparsity` mechanism; old alignment/helicity scans are
+  retained only as independent, non-equivalent telemetry.
+
 - Corrected the physical Stage-3 control architecture: the weighted Fourier
   error is an exact bilinear edge-transfer form, not a positive quadratic
   `Lneg` form.  Added `NSTriadKNPhysicalEdgeTransferOperator`,
