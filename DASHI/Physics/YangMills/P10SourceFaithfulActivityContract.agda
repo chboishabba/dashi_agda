@@ -13,8 +13,11 @@ module DASHI.Physics.YangMills.P10SourceFaithfulActivityContract where
 -- a replacement theorem for the older length-based P10 envelope.
 
 open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.String using (String)
 open import Data.Nat.Base renaming (ℕ to Nat)
+open import Data.Empty using (⊥)
+open import Data.Product using (_×_; ∃)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ
@@ -242,28 +245,147 @@ record CMP122ComponentwiseLargeFieldSuppression : Set₁ where
 
 open CMP122ComponentwiseLargeFieldSuppression public
 
--- A future weighted-fibre theorem must be stated over this exact carrier.
--- Keeping this boundary separate makes it impossible to discharge the real
--- P10 norm merely by using the legacy `length X` envelope.
-record P10WeightedRelativeDomainEntropy
-  (contract : P10SourceFaithfulActivityContract) : Set₁ where
-  open P10SourceFaithfulActivityContract contract
+-- P10/P11 replacement carrier ------------------------------------------------
+--
+-- This is deliberately a geometry-and-analytic-data carrier, rather than a
+-- Boolean receipt.  It captures the corrected route through CMP 122 relative
+-- domains: every block is owned once, halo coverage converts large components
+-- to weighted relative volume, and the fibre/KP quantities are supplied as
+-- theorem obligations over that exact carrier.
+--
+-- The existing public P10 API has only `List Nat` supports and a diameter
+-- envelope.  It cannot inhabit this record until the source-domain carrier and
+-- its component operation have actually been extracted.
+record P10P11WeightedRelativeDomainCarrier : Set₁ where
   field
-    Root : Set
+    Block : Set
+    Polymer : Set
+    Component : Set
 
-    rootedAt :
-      Root → Domain → Set
+    -- Ωⱼ and Rⱼ = Ωⱼ \ Ωⱼ₊₁ are represented extensionally.  The equalities
+    -- below make terminal-scale ownership proof-relevant rather than a
+    -- convention hidden in a serializer.
+    inOmega : Nat → Block → Set
+    inRelativeDomain : Nat → Block → Set
+    terminalOwner : Block → Nat
 
-    -- The actual shell sum, its finite enumeration, and its scale/volume
-    -- uniform constants belong here once CMP 119/122 relative domains are
-    -- extracted.  No witness is supplied in this module.
-    weightedShellBoundSource :
-      String
+    nestedDomains :
+      ∀ j B → inOmega (Nat.suc j) B → inOmega j B
 
-    weightedShellBoundStatus :
-      VerificationStatus
+    relativeDomainElimination :
+      ∀ j B → inRelativeDomain j B →
+      inOmega j B × (inOmega (Nat.suc j) B → ⊥)
 
-open P10WeightedRelativeDomainEntropy public
+    relativeDomainIntroduction :
+      ∀ j B → inOmega j B → (inOmega (Nat.suc j) B → ⊥) →
+      inRelativeDomain j B
+
+    ownerInRelativeDomain :
+      ∀ B → inRelativeDomain (terminalOwner B) B
+
+    ownerUnique :
+      ∀ B j → inRelativeDomain j B → j ≡ terminalOwner B
+
+    -- Mⱼ(U), Yⱼ, and the scale-j halo relation.  `componentMeetsLargeField`
+    -- prevents an empty or detached halo from satisfying the volume bound.
+    largeBlock : Nat → Block → Set
+    polymerBlock : Polymer → Nat → Block → Set
+    componentBlock : Polymer → Nat → Component → Block → Set
+    haloContains : Nat → Block → Block → Set
+
+    polymerUsesOnlyOwnedBlocks :
+      ∀ Y j B → polymerBlock Y j B → inRelativeDomain j B
+
+    haloCoverage :
+      ∀ Y j B → polymerBlock Y j B →
+      ∃ λ M → largeBlock j M × haloContains j M B
+
+    componentMeetsLargeField :
+      ∀ Y j C →
+      (∃ λ B → componentBlock Y j C B) →
+      ∃ λ M → largeBlock j M ×
+        (∃ λ B → componentBlock Y j C B × haloContains j M B)
+
+    -- These are the directly consumed finite weighted quantities.  A concrete
+    -- instantiation must prove `haloCompression`; it may not replace it with a
+    -- diameter comparison.
+    weightedVolume : Polymer → ℝ
+    weightedLargeBlockMass : Polymer → ℝ
+    haloCapacity : ℝ
+    haloCompression :
+      ∀ Y →
+      weightedVolume Y ≤ℝ haloCapacity *ℝ weightedLargeBlockMass Y
+
+    -- The P10 score is gauge invariant at this interface.  The threshold and
+    -- score lower bound are precisely the data from which the p₀ gain must be
+    -- derived by a later ordered-exponential lemma.
+    gaugeConfiguration : Set
+    score : Nat → gaugeConfiguration → Block → ℝ
+    scoreGaugeInvariant : Set
+    threshold : Nat → ℝ
+    weightedScore : gaugeConfiguration → Polymer → ℝ
+    largeBlockMeetsThreshold :
+      ∀ U j B → largeBlock j B → threshold j ≤ℝ score j U B
+    thresholdScoreLowerBound :
+      ∀ U Y → Set
+
+    -- The five numerical quantities requested by the corrected route are not
+    -- free labels: each is a function on this carrier, with a theorem field
+    -- giving its source-side derivation.  `largeFieldDensityGain` is kept
+    -- primitive here because RealAnalysisAxioms has no division or exponential
+    -- monotonicity laws from which b·p₀²/ν can be formed internally yet.
+    coreVolumeDecay : Nat → ℝ
+    scoreDecay : Nat → ℝ
+    localisationLoss : Nat → ℝ
+    attachmentAnchorBound : Nat → ℝ
+    largeFieldDensityGain : Nat → ℝ
+
+    coreVolumeDecayDerived : ∀ k → Set
+    scoreDecayDerived : ∀ k → Set
+    localisationLossDerived : ∀ k → Set
+    attachmentAnchorBoundDerived : ∀ k → Set
+    largeFieldDensityGainDerived : ∀ k → Set
+
+    componentActivity : Nat → gaugeConfiguration → Polymer → ℝ
+    componentActivityBound :
+      ∀ k U Y → Set
+
+    weightedPolymerSuppression :
+      ∀ k U Y → Set
+
+    fibreResummationBound :
+      ∀ k Y → Set
+
+    strictKPMargin :
+      ∀ k → Set
+
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+
+open P10P11WeightedRelativeDomainCarrier public
+
+-- A fully inhabited instance is the theorem-critical replacement for the old
+-- string-only shell-bound surface.  The implication fields below are where the
+-- missing ordered-exponential and finite-enumeration proofs must land.
+record P10P11WeightedRelativeDomainClosure
+  (carrier : P10P11WeightedRelativeDomainCarrier) : Set₁ where
+  open P10P11WeightedRelativeDomainCarrier carrier
+  field
+    componentwiseToWeightedSuppression :
+      ∀ k U Y →
+      componentActivityBound k U Y →
+      weightedPolymerSuppression k U Y
+
+    weightedSuppressionToFibreBound :
+      ∀ k Y →
+      fibreResummationBound k Y
+
+    fibreBoundToStrictKP :
+      ∀ k →
+      strictKPMargin k
+
+open P10P11WeightedRelativeDomainClosure public
 
 -- This is an audit gate, not a mathematical assertion: the current public
 -- P10 activity API is length-based and therefore cannot yet inhabit the
@@ -284,5 +406,5 @@ currentP10SourceFaithfulSource = eriksson-2602-0069
 currentP10SourceFaithfulStatus : VerificationStatus
 currentP10SourceFaithfulStatus = paperImport
 
-currentP10WeightedRelativeDomainEntropyAvailable : Bool
-currentP10WeightedRelativeDomainEntropyAvailable = false
+currentP10P11WeightedRelativeDomainClosureAvailable : Bool
+currentP10P11WeightedRelativeDomainClosureAvailable = false

@@ -1,0 +1,69 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "theorem_authority": false
+  },
+  "contract": "ns_triad_edge_depletion_audit",
+  "decision": "candidate-only calibration; no hierarchy or sparsity theorem inferred",
+  "definition": {
+    "defect": "mean_pairwise(1 - |<omega_a,omega_b>|/(|omega_a||omega_b|))",
+    "normalised_flux": "edge_transfer_variation / modal_viscous_density",
+    "warning": "This is one explicit helical-mismatch candidate, not the theorem-level delta_e or X_e."
+  },
+  "inputs": {
+    "cutoff": 6,
+    "discrete_leray_projected": true,
+    "frame": 0,
+    "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz"
+  },
+  "sample": {
+    "good_edge_required_x_quantiles": {
+      "max": 1.6667452397494902e-09,
+      "p50": 3.293955696623012e-13,
+      "p90": 4.258454697774329e-12,
+      "p99": 4.647740263598813e-11
+    },
+    "max_modal_conservation_error": 3.970466940254533e-23,
+    "max_modal_transfer_scale": 7.306551561729089e-08,
+    "max_relative_modal_conservation_error_on_meaningful_triads": 4.1588173739272317e-14,
+    "meaningful_transfer_scale_floor": 7.30655156172909e-16,
+    "mismatch_flux_pearson": -0.03564167598410365,
+    "mismatch_transfer_sq_pearson": -0.008732584246773846,
+    "threshold_rows": [
+      {
+        "bad_count": 5852,
+        "bad_flux_fraction": 0.9821089070397724,
+        "bad_fraction": 0.9753333333333334,
+        "eta": 0.1,
+        "good_flux_fraction": 0.01789109296022759
+      },
+      {
+        "bad_count": 4968,
+        "bad_flux_fraction": 0.8101944861219207,
+        "bad_fraction": 0.828,
+        "eta": 0.25,
+        "good_flux_fraction": 0.18980551387807937
+      },
+      {
+        "bad_count": 2200,
+        "bad_flux_fraction": 0.3304171305296192,
+        "bad_fraction": 0.36666666666666664,
+        "eta": 0.5,
+        "good_flux_fraction": 0.6695828694703808
+      },
+      {
+        "bad_count": 43,
+        "bad_flux_fraction": 0.0014406963615029315,
+        "bad_fraction": 0.007166666666666667,
+        "eta": 0.75,
+        "good_flux_fraction": 0.998559303638497
+      }
+    ],
+    "total_normalised_flux": 1.040128471149847e-09,
+    "triad_count": 6000
+  },
+  "status": "ok"
+}

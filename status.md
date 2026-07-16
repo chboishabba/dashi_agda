@@ -1,5 +1,20 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Added `NSTriadKNDepletionBarrier`.  Its theorem
+  `depletionBarrierImpliesFluxHierarchy` is the mechanically proved finite
+  recombination: an exact good/bad split plus `goodEdgeHierarchy` and
+  `badEdgeSparsity` entails the aggregate flux hierarchy bound.  Those two
+  named NS inputs remain explicit; no depletion or Clay gate was promoted.
+- Added `scripts/ns_triad_edge_depletion_audit.py`, the first diagnostic keyed
+  to the Fourier edge-transfer quotient rather than physical-space strain
+  telemetry.  After discrete Leray projection, a 6,000-triad N128 sample has
+  modal conservation residual below `4.2e-14` relative on meaningful triads.
+  The tested mean pairwise helical-mismatch defect is not a viable immediate
+  controller: its flux correlation is `-0.036`, and at `eta=0.25` its bad set
+  contains `82.8%` of triads and `81.0%` of sampled normalized flux.  This
+  rejects that specific candidate as evidence for `badEdgeSparsity`; it says
+  nothing about a different incompressibility-exact defect.
+
 - Replaced the invalid one-sided physical controller claim with the canonical
   bilinear edge-transfer surface: `physicalWeightedError` is exactly the sum
   of `third * <B z, T(u)>` over zero-sum triads.  The former `Lneg`/`Labs`
