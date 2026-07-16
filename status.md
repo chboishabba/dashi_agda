@@ -1,5 +1,20 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Generalized `scripts/ns_phase_locked_packet_search.py` from a single
+  donor-star to an explicit N32 `j=2` three-target cyclic feedback graph:
+  lower donor pairs feed `r_i`, while shared `s_i` outlet modes feed the next
+  target.  The graph has nine checked zero-sum triads, 15 free helical phases,
+  reality partners, and every coordinate lies inside the componentwise
+  2/3-dealiased carrier.  Its default normalization now fixes total finite
+  `H^(1/2)` packet mass (with `urms` retained as an explicit alternate).
+  The endpoint score is now multi-window:
+  `min_m X_j((m+1)T)/X_j(mT)` and its mean log counterpart.  It records exact
+  heat continuation, dominance/tightness, direct designed-network correlation,
+  support leakage, and signed nonlinear replenishment over viscous loss.
+  A short CPU/GPU smoke agrees on the two-window ratios to the displayed
+  precision.  This makes a genuine shared-mode relocking adversary testable;
+  it is not yet an endpoint-optimized recurrence result or a packet theorem.
+
 - Recalibrated the N32 packet-residence audit against the exact heat
   semigroup of the observed initial shell spectrum and a reconstructed
   2/3-dealiased pseudospectral shell balance.  The earlier random trajectory's

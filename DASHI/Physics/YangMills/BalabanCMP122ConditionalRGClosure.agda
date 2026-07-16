@@ -11,6 +11,7 @@ module DASHI.Physics.YangMills.BalabanCMP122ConditionalRGClosure where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.String using (String)
+open import Agda.Primitive using (Level)
 open import Data.Nat.Base using (ℕ; _≤_)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_)
@@ -39,9 +40,23 @@ open import DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget using
   ; InverseSquareThresholdControlsCoupling
   ; BalabanBetaPrefixBound
   ; BalabanBareCouplingSchedule
+  ; RenormalisedBalabanBareCouplingSchedule
   ; couplingTrajectoryBoundedByGamma
   ; scheduleTrajectoryBoundedByGamma
   )
+
+sym :
+  {A : Set} → {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+cong :
+  {a b : Level} → {A : Set a} → {B : Set b} →
+  (f : A → B) → {x y : A} → x ≡ y → f x ≡ f y
+cong f refl = refl
+
+transEq :
+  {A : Set} → {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+transEq refl yz = yz
 
 -- A CMP 122 witness may use only a finite initial segment of a cutoff
 -- trajectory, but it must not use more scales than have actually been
@@ -73,6 +88,13 @@ record BalabanCMP122ConditionalTheorem : Set₁ where
       (bounded : CouplingTrajectoryBoundedBy γ step) →
       CouplingBoundCoversSection2 section2Package bounded →
       UniformBalabanRGClosure
+    conclusionUsesSection2Package :
+      (step : BalabanInverseSquareCouplingStep) →
+      (bounded : CouplingTrajectoryBoundedBy γ step) →
+      (coverage : CouplingBoundCoversSection2 section2Package bounded) →
+      UniformBalabanRGClosure.section2
+        (conclusion step bounded coverage)
+        ≡ section2Package
     sourceAuthorityId : SourceAuthorityId
     theoremLocator : String
     status : VerificationStatus
@@ -119,6 +141,55 @@ relabelCouplingTrajectoryBound :
   CouplingTrajectoryBoundedBy γ₂ step
 relabelCouplingTrajectoryBound refl bounded = bounded
 
+replaceRightNat≤ :
+  {m n p : ℕ} →
+  n ≡ p →
+  m ≤ n →
+  m ≤ p
+replaceRightNat≤ refl m≤n = m≤n
+
+replaceLeftNat≤ :
+  {m n p : ℕ} →
+  m ≡ n →
+  n ≤ p →
+  m ≤ p
+replaceLeftNat≤ refl n≤p = n≤p
+
+scheduledBoundTerminalScale :
+  (arith : InverseSquareBudgetArithmetic) →
+  (order : InverseSquareBudgetOrderBridge) →
+  (schedule : BalabanBareCouplingSchedule) →
+  {γ′ : ℝ} →
+  (γ≡ : BalabanBareCouplingSchedule.γ schedule ≡ γ′) →
+  ∀ K →
+  CouplingTrajectoryBoundedBy.terminalScale
+    (relabelCouplingTrajectoryBound
+      {γ₁ = BalabanBareCouplingSchedule.γ schedule}
+      {γ₂ = γ′}
+      {step = BalabanBareCouplingSchedule.trajectory schedule K}
+      γ≡
+      (scheduleTrajectoryBoundedByGamma arith order schedule K))
+    ≡ K
+scheduledBoundTerminalScale arith order schedule refl K = refl
+
+conditionalClosureTerminalWithinBound :
+  (theorem : BalabanCMP122ConditionalTheorem) →
+  (step : BalabanInverseSquareCouplingStep) →
+  (bounded : CouplingTrajectoryBoundedBy (γ theorem) step) →
+  (coverage : CouplingBoundCoversSection2 (section2Package theorem) bounded) →
+  UniformBalabanRGClosure.terminalScale
+    (balabanConditionalUniformRG theorem step bounded coverage)
+    ≤ CouplingTrajectoryBoundedBy.terminalScale bounded
+conditionalClosureTerminalWithinBound theorem step bounded coverage =
+  replaceLeftNat≤
+    (transEq
+      (UniformBalabanRGClosure.terminalScaleAgrees
+        (balabanConditionalUniformRG theorem step bounded coverage))
+      (cong
+        BalabanSection2InductivePackage.terminalScale
+        (conclusionUsesSection2Package theorem step bounded coverage)))
+    (coversSourceTerminal coverage)
+
 -- The schedule version is the finite-cutoff theorem intended for the later
 -- continuum construction.  The equality pins the schedule to the particular
 -- small interval used by the published CMP 122 theorem.
@@ -127,7 +198,7 @@ finiteCutoffScheduledBalabanRG :
   (arith : InverseSquareBudgetArithmetic) →
   (order : InverseSquareBudgetOrderBridge) →
   (schedule : BalabanBareCouplingSchedule) →
-  γ schedule ≡ γ theorem →
+  BalabanBareCouplingSchedule.γ schedule ≡ γ theorem →
   ∀ K →
   BalabanSection2InductivePackage.terminalScale (section2Package theorem) ≤ K →
   UniformBalabanRGClosureAt K
@@ -138,9 +209,47 @@ finiteCutoffScheduledBalabanRG theorem arith order schedule γ≡ K sourceTermin
           (BalabanBareCouplingSchedule.trajectory schedule K)
           (relabelCouplingTrajectoryBound γ≡
             (scheduleTrajectoryBoundedByGamma arith order schedule K))
-          (record { coversSourceTerminal = sourceTerminal≤K })
-    ; sourceTerminalWithinCutoff = sourceTerminal≤K
+          (record
+            { coversSourceTerminal =
+                replaceRightNat≤
+                  (sym (scheduledBoundTerminalScale arith order schedule γ≡ K))
+                  sourceTerminal≤K
+            })
+    ; sourceTerminalWithinCutoff =
+        replaceRightNat≤
+          (scheduledBoundTerminalScale arith order schedule γ≡ K)
+          (conditionalClosureTerminalWithinBound theorem
+            (BalabanBareCouplingSchedule.trajectory schedule K)
+            (relabelCouplingTrajectoryBound γ≡
+              (scheduleTrajectoryBoundedByGamma arith order schedule K))
+            (record
+              { coversSourceTerminal =
+                  replaceRightNat≤
+                    (sym (scheduledBoundTerminalScale arith order schedule γ≡ K))
+                    sourceTerminal≤K
+              }))
     }
+
+-- The renormalised wrapper contributes the nonvanishing terminal window used
+-- by the later continuum lane; the CMP 122 implication itself only consumes
+-- its underlying finite-cutoff schedule.  Naming this composition prevents a
+-- bare schedule with a trivially vanishing physical coupling from becoming the
+-- public endpoint of the RG route.
+ownedFiniteCutoffBalabanRG :
+  (theorem : BalabanCMP122ConditionalTheorem) →
+  (arith : InverseSquareBudgetArithmetic) →
+  (order : InverseSquareBudgetOrderBridge) →
+  (renormalised : RenormalisedBalabanBareCouplingSchedule) →
+  BalabanBareCouplingSchedule.γ
+    (RenormalisedBalabanBareCouplingSchedule.schedule renormalised)
+    ≡ γ theorem →
+  ∀ K →
+  BalabanSection2InductivePackage.terminalScale (section2Package theorem) ≤ K →
+  UniformBalabanRGClosureAt K
+ownedFiniteCutoffBalabanRG theorem arith order renormalised γ≡ K sourceTerminal≤K =
+  finiteCutoffScheduledBalabanRG theorem arith order
+    (RenormalisedBalabanBareCouplingSchedule.schedule renormalised)
+    γ≡ K sourceTerminal≤K
 
 record BalabanCMP122ConditionalRGClosure : Set₁ where
   field
