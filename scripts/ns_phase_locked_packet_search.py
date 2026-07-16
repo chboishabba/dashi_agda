@@ -20,10 +20,12 @@ Navier--Stokes theorem.
 from __future__ import annotations
 
 import argparse
+import ast
 import copy
 import importlib.util
 import json
 import math
+import itertools
 import sys
 import time
 from pathlib import Path
@@ -51,6 +53,8 @@ DEFAULT_OUTPUT = Path(
     "ns_phase_locked_packet_search_N32_20260716.json"
 )
 
+ROLE_TRANSFER_ROLES = ("target", "donor", "outlet", "feedback")
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -64,10 +68,23 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--topology", choices=("cyclic-feedback", "donor-star"),
                         default="cyclic-feedback")
     parser.add_argument("--phase-samples", type=int, default=256)
+    parser.add_argument("--phase-sample-index", type=int, default=None,
+                        help=("evaluate exactly this deterministic sample from the --seed phase stream; "
+                              "useful for externally staged endpoint screens"))
     parser.add_argument("--seed", type=int, default=20260716)
     parser.add_argument("--target-amplitude", type=float, default=3.0)
     parser.add_argument("--donor-amplitude", type=float, default=1.0)
     parser.add_argument("--feedback-amplitude", type=float, default=1.0)
+    parser.add_argument("--outlet-amplitude", type=float, default=None,
+                        help="raw upper-outlet-side amplitude; defaults to --feedback-amplitude")
+    parser.add_argument("--role-shares", default=None,
+                        help="critical-mass shares target,donor,outlet,feedback; four positive comma-separated numbers")
+    parser.add_argument("--target-dominance-min", type=float, default=0.0,
+                        help="reject sampled candidates below this initial target-packet dominance")
+    parser.add_argument("--local-tightness-min", type=float, default=0.0,
+                        help="reject sampled candidates below this initial local packet tightness")
+    parser.add_argument("--role-share-min", type=float, default=0.0,
+                        help="reject sampled candidates if any active role falls below this realised critical-mass share")
     parser.add_argument("--normalization", choices=("critical", "urms"), default="critical",
                         help="fix total finite H^(1/2) packet mass or physical-space urms")
     parser.add_argument("--critical-mass", type=float, default=1.0,
@@ -80,6 +97,10 @@ def parse_args() -> argparse.Namespace:
                         help="short viscous-window factor for endpoint preselection; zero disables it")
     parser.add_argument("--moving-packet-radius", type=int, default=1,
                         help="half-width L of the dynamically centred critical packet")
+    parser.add_argument("--helicity-static-audit", action="store_true",
+                        help="enumerate the reduced pure-mode-helicity factor tables; no CFD evolution")
+    parser.add_argument("--helicity-static-case", type=int, default=None,
+                        help="use this rank from the 64-case static audit, with each private block's top envelope choice")
     parser.add_argument("--backend", choices=("none", "cpu", "gpu"), default="none")
     parser.add_argument("--fft-backend", default="vkfft-vulkan")
     parser.add_argument("--save-every", type=int, default=100)
@@ -153,6 +174,7 @@ def network_spec(args: argparse.Namespace) -> dict[str, Any]:
         {"a": (0, -10, -6), "s": (0, 6, 6), "b": (0, -6, -10)},
         {"a": (-6, 0, -10), "s": (6, 0, 6), "b": (-10, 0, -6)},
     ]
+    outlet_amplitude = args.feedback_amplitude if args.outlet_amplitude is None else args.outlet_amplitude
     entries: list[dict[str, Any]] = [
         {"mode": target, "amplitude": args.target_amplitude, "helicity": 1,
          "fixed_phase": 0.0, "role": f"target-{index}"}
@@ -165,7 +187,7 @@ def network_spec(args: argparse.Namespace) -> dict[str, Any]:
                             "helicity": 1 if local == 0 else -1,
                             "role": f"donor-{index}-{local}"})
         entries.extend((
-            {"mode": link["a"], "amplitude": args.feedback_amplitude, "helicity": -1,
+            {"mode": link["a"], "amplitude": outlet_amplitude, "helicity": -1,
              "role": f"outlet-side-{index}"},
             {"mode": link["s"], "amplitude": args.feedback_amplitude, "helicity": 1,
              "role": f"shared-outlet-{index}"},
@@ -270,6 +292,310 @@ def phase_graph_geometry(network: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def signed_phase_constraint_geometry(network: dict[str, Any]) -> dict[str, Any]:
+    """Audit whether this graph can impose a static phase-holonomy constraint.
+
+    A selected helical channel has phase ``-phi_out + phi_left + phi_right
+    + beta``.  In reality-reduced coordinates, with the first labelled triad
+    mode used as output, ``phi(-p)=-phi(p)`` makes the coefficient row
+    ``phi(p)+phi(q)+phi(r)``.  A topology-only holonomy requires a nontrivial
+    left kernel of this row matrix.  Exact channel offsets beta are deliberately
+    outside this structural audit.
+    """
+    modes = sorted({tuple(mode) for triad in network["triads"] for mode in triad["modes"]})
+    mode_columns = {mode: index for index, mode in enumerate(modes)}
+    rows = np.zeros((len(network["triads"]), len(modes)), dtype=np.int64)
+    degrees = {mode: 0 for mode in modes}
+    for triad_index, triad in enumerate(network["triads"]):
+        for mode in triad["modes"]:
+            mode = tuple(mode)
+            rows[triad_index, mode_columns[mode]] += 1
+            degrees[mode] += 1
+
+    private_by_triad = [
+        [tuple(mode) for mode in triad["modes"] if degrees[tuple(mode)] == 1]
+        for triad in network["triads"]
+    ]
+    # A distinct private mode in every row supplies a diagonal nonzero minor.
+    # This is an exact full-row-rank certificate for the present topology.
+    private_elimination = all(private_by_triad)
+    rank = len(network["triads"]) if private_elimination else int(
+        np.linalg.matrix_rank(rows.astype(np.float64))
+    )
+    left_kernel_dimension = len(network["triads"]) - rank
+    backbone = [mode for mode in modes if degrees[mode] > 1]
+    leaves = [mode for mode in modes if degrees[mode] == 1]
+    return {
+        "coordinate_convention": (
+            "reality-reduced phases: canonical labelled channel row is "
+            "phi(p)+phi(q)+phi(r) after phi(-p)=-phi(p)"
+        ),
+        "mode_order": [list(mode) for mode in modes],
+        "signed_phase_constraint_matrix": rows.tolist(),
+        "constraint_count": len(network["triads"]),
+        "mode_count": len(modes),
+        "constraint_rank": rank,
+        "left_kernel_dimension": left_kernel_dimension,
+        "private_modes_by_triad": [[list(mode) for mode in row] for row in private_by_triad],
+        "private_column_elimination_certificate": private_elimination,
+        "shared_backbone_modes": [list(mode) for mode in backbone],
+        "private_leaf_modes": [list(mode) for mode in leaves],
+        "static_holonomy_conclusion": (
+            "no topology-forced phase holonomy: every constraint has a private "
+            "phase variable, so the rows are independent"
+            if left_kernel_dimension == 0 else
+            "a topology-level left kernel exists; select physical channels and "
+            "their beta offsets before interpreting it as holonomy"
+        ),
+        "warning": (
+            "This does not rule out dynamical relocking. It only rules out a "
+            "static phase-frustration theorem from this graph alone."
+        ),
+    }
+
+
+def helicity_factorisation_geometry(network: dict[str, Any]) -> dict[str, Any]:
+    """Expose the pure-helicity search reduction implied by graph sharing."""
+    degrees: dict[tuple[int, int, int], int] = {}
+    for triad in network["triads"]:
+        for mode in triad["modes"]:
+            mode = tuple(mode)
+            degrees[mode] = degrees.get(mode, 0) + 1
+    backbone = sorted(mode for mode, degree in degrees.items() if degree > 1)
+    blocks: list[dict[str, Any]] = []
+    for triad_index, triad in enumerate(network["triads"]):
+        leaves = [tuple(mode) for mode in triad["modes"] if degrees[tuple(mode)] == 1]
+        blocks.append({
+            "triad": triad_index,
+            "kind": triad["kind"],
+            "private_leaf_modes": [list(mode) for mode in leaves],
+            "conditional_sign_choices": 2 ** len(leaves),
+        })
+    return {
+        "pure_mode_helicity_model": "one sign per represented mode; reality fixes the negative partner",
+        "backbone_modes": [list(mode) for mode in backbone],
+        "backbone_assignment_count": 2 ** len(backbone),
+        "full_assignment_count": 2 ** len(degrees),
+        "local_leaf_blocks": blocks,
+        "elimination_note": (
+            "For each backbone assignment retain local Pareto alternatives over "
+            "coupling magnitude, channel phase, desired-leg transfer sign, and "
+            "helicity metadata; do not eliminate a leaf solely by magnitude."
+        ),
+        "global_helicity_flip": "not quotiented until endpoint-objective invariance is verified",
+    }
+
+
+def pure_helical_channel_coefficient(
+    left: tuple[int, int, int], right: tuple[int, int, int], output_mode: tuple[int, int, int],
+    left_sign: int, right_sign: int, output_sign: int,
+) -> complex:
+    """Geometric coefficient for one reality-compatible pure-helicity channel.
+
+    ``output_mode`` is the represented positive/labelled mode.  The Fourier
+    energy test mode is its negative, whose vector is the conjugate of the
+    represented helical vector under the construction used by this script.
+    Amplitude and modal phase factors are intentionally excluded.
+    """
+    left_vector = helical_basis(left)[0 if left_sign > 0 else 1]
+    right_vector = helical_basis(right)[0 if right_sign > 0 else 1]
+    output_vector = np.conjugate(helical_basis(output_mode)[0 if output_sign > 0 else 1])
+    out = -np.asarray(output_mode, dtype=np.float64)
+    left_k = np.asarray(left, dtype=np.float64)
+    right_k = np.asarray(right, dtype=np.float64)
+    nonlinear = 1j * (
+        np.dot(right_k, left_vector) * right_vector
+        + np.dot(left_k, right_vector) * left_vector
+    )
+    projected = nonlinear - out * np.dot(out, nonlinear) / np.dot(out, out)
+    return complex(np.vdot(output_vector, projected))
+
+
+def helicity_static_factor_audit(network: dict[str, Any]) -> dict[str, Any]:
+    """Enumerate the 64 shared-mode sign cases and their local leaf factors.
+
+    This is deliberately an envelope/compatibility audit.  It does not assert
+    that independently optimal local channel phases are dynamically reachable.
+    """
+    entry_by_mode = {tuple(entry["mode"]): entry for entry in network["entries"]}
+    degrees: dict[tuple[int, int, int], int] = {}
+    for triad in network["triads"]:
+        for mode in triad["modes"]:
+            mode = tuple(mode)
+            degrees[mode] = degrees.get(mode, 0) + 1
+    backbone = sorted(mode for mode, degree in degrees.items() if degree > 1)
+    default_signs = {mode: int(entry["helicity"]) for mode, entry in entry_by_mode.items()}
+    desired = {"lower-donor": "feed-target", "upper-outlet": "avoid-target-loss", "feedback": "feed-next-target"}
+    cases: list[dict[str, Any]] = []
+    for backbone_values in itertools.product((-1, 1), repeat=len(backbone)):
+        signs = dict(zip(backbone, backbone_values, strict=True))
+        factors: list[dict[str, Any]] = []
+        best_envelope = 0.0
+        for triad_index, triad in enumerate(network["triads"]):
+            left, right, output = (tuple(mode) for mode in triad["modes"])
+            leaves = [mode for mode in (left, right, output) if degrees[mode] == 1]
+            choices: list[dict[str, Any]] = []
+            for leaf_values in itertools.product((-1, 1), repeat=len(leaves)):
+                trial = signs | dict(zip(leaves, leaf_values, strict=True))
+                coefficient = pure_helical_channel_coefficient(
+                    left, right, output, trial[left], trial[right], trial[output]
+                )
+                amplitude_product = float(np.prod([entry_by_mode[mode]["amplitude"] for mode in (left, right, output)]))
+                envelope = amplitude_product * abs(coefficient)
+                choices.append({
+                    "leaf_signs": {str(mode): trial[mode] for mode in leaves},
+                    "helicity_triple": [trial[left], trial[right], trial[output]],
+                    "coupling_magnitude": float(abs(coefficient)),
+                    "coupling_phase": wrap_phase(float(np.angle(coefficient))),
+                    "amplitude_weighted_envelope": envelope,
+                })
+            choices.sort(key=lambda row: float(row["amplitude_weighted_envelope"]), reverse=True)
+            best_envelope += float(choices[0]["amplitude_weighted_envelope"])
+            factors.append({
+                "triad": triad_index,
+                "kind": triad["kind"],
+                "desired_transfer_role": desired[triad["kind"]],
+                "local_leaf_modes": [list(mode) for mode in leaves],
+                "choices": choices,
+            })
+        cases.append({
+            "backbone_signs": {str(mode): signs[mode] for mode in backbone},
+            "independently_maximized_envelope_sum": best_envelope,
+            "local_factors": factors,
+        })
+    cases.sort(key=lambda row: float(row["independently_maximized_envelope_sum"]), reverse=True)
+    return {
+        "status": "static_geometric_factor_audit_only",
+        "backbone_mode_count": len(backbone),
+        "backbone_assignment_count": len(cases),
+        "default_mode_signs": {str(mode): sign for mode, sign in default_signs.items()},
+        "cases_ranked_by_independently_maximized_envelope_sum": cases,
+        "warning": (
+            "The ranking is an upper-envelope screen, not a phase optimization or "
+            "an endpoint prediction. Local choices retain coupling phase because "
+            "maximal magnitude alone can destroy network compatibility."
+        ),
+    }
+
+
+def role_name(entry: dict[str, Any]) -> str:
+    """Four physical allocation roles used by the endpoint search."""
+    role = str(entry["role"])
+    if role.startswith("target"):
+        return "target"
+    if role.startswith("donor"):
+        return "donor"
+    if role.startswith("outlet-side") or role.startswith("shared-outlet"):
+        return "outlet"
+    if role.startswith("feedback"):
+        return "feedback"
+    raise ValueError(f"unrecognised allocation role: {role!r}")
+
+
+def role_by_reality_mode(network: dict[str, Any]) -> dict[tuple[int, int, int], str]:
+    """Label both members of every designed reality pair by its allocation role."""
+    labels: dict[tuple[int, int, int], str] = {}
+    for entry in network["entries"]:
+        role = role_name(entry)
+        for mode in (tuple(entry["mode"]), negate(tuple(entry["mode"]))):
+            previous = labels.get(mode)
+            if previous is not None and previous != role:
+                raise RuntimeError(f"designed mode {mode!r} belongs to incompatible roles")
+            labels[mode] = role
+    return labels
+
+
+def parse_role_shares(text: str | None) -> dict[str, float] | None:
+    if text is None:
+        return None
+    values = [float(value.strip()) for value in text.split(",")]
+    names = ("target", "donor", "outlet", "feedback")
+    if len(values) != len(names) or any(value <= 0.0 for value in values):
+        raise ValueError("--role-shares requires four positive values: target,donor,outlet,feedback")
+    total = float(sum(values))
+    return {name: value / total for name, value in zip(names, values, strict=True)}
+
+
+def dyadic_weight(mode: tuple[int, int, int]) -> float:
+    magnitude = float(np.linalg.norm(np.asarray(mode, dtype=np.float64)))
+    if magnitude <= 0.0:
+        raise ValueError("the finite network must not contain the zero mode")
+    return float(2 ** int(math.floor(math.log2(magnitude))))
+
+
+def apply_role_mass_shares(network: dict[str, Any], requested: dict[str, float] | None) -> dict[str, Any]:
+    """Rescale entries so the raw finite dyadic mass has the requested role shares.
+
+    The final carrier is still normalized with ``normalise_critical_mass``.
+    This construction uses the same dyadic shell weight as the packet ledger,
+    rather than a handwritten conjugate-pair factor; realised shares are also
+    emitted later as a check on the finite FFT convention.
+    """
+    if requested is None:
+        return {"requested": None, "applied": False}
+    by_role = {name: 0.0 for name in requested}
+    for entry in network["entries"]:
+        by_role[role_name(entry)] += dyadic_weight(tuple(entry["mode"])) * float(entry["amplitude"]) ** 2
+    if any(value <= 0.0 for value in by_role.values()):
+        raise ValueError("each requested allocation role must have nonzero raw support")
+    for entry in network["entries"]:
+        role = role_name(entry)
+        entry["amplitude"] *= math.sqrt(requested[role] / by_role[role])
+    return {
+        "requested": requested,
+        "applied": True,
+        "pre_normalisation_role_weights": by_role,
+        "construction": "role weights use the packet ledger's dyadic shell factor; final shares are recomputed from the finite carrier",
+    }
+
+
+def static_helicity_case_assignment(
+    network: dict[str, Any], audit: dict[str, Any], rank: int,
+) -> dict[str, Any]:
+    """Apply one ranked backbone case and its local envelope-maximising leaves.
+
+    This is only a deterministic seed constructor.  It deliberately does not
+    collapse the audit's stored local Pareto alternatives into a theorem about
+    phase compatibility or endpoint recurrence.
+    """
+    cases = audit["cases_ranked_by_independently_maximized_envelope_sum"]
+    if rank < 0 or rank >= len(cases):
+        raise ValueError(f"--helicity-static-case must be in [0, {len(cases) - 1}]")
+    case = cases[rank]
+    signs = {tuple(ast.literal_eval(mode)): int(sign) for mode, sign in case["backbone_signs"].items()}
+    selected_factors: list[dict[str, Any]] = []
+    for factor in case["local_factors"]:
+        choice = factor["choices"][0]
+        for mode, sign in choice["leaf_signs"].items():
+            parsed = tuple(ast.literal_eval(mode))
+            previous = signs.get(parsed)
+            if previous is not None and previous != int(sign):
+                raise RuntimeError("a purported private leaf received incompatible static signs")
+            signs[parsed] = int(sign)
+        selected_factors.append({
+            "triad": factor["triad"],
+            "kind": factor["kind"],
+            "desired_transfer_role": factor["desired_transfer_role"],
+            "selected_leaf_choice": choice,
+        })
+    for entry in network["entries"]:
+        mode = tuple(entry["mode"])
+        if mode not in signs:
+            raise RuntimeError(f"static helicity construction omitted mode {mode!r}")
+        entry["helicity"] = signs[mode]
+    return {
+        "rank": rank,
+        "backbone_signs": case["backbone_signs"],
+        "full_mode_signs": {str(mode): sign for mode, sign in sorted(signs.items())},
+        "independently_maximized_envelope_sum": case["independently_maximized_envelope_sum"],
+        "selected_local_envelope_choices": selected_factors,
+        "warning": (
+            "private leaves use each factor's largest-envelope alternative only; "
+            "this is a reproducible seed, not a joint phase/share optimisation"
+        ),
+    }
+
+
 def wrap_phase(angle: float) -> float:
     return float((angle + math.pi) % (2.0 * math.pi) - math.pi)
 
@@ -320,6 +646,180 @@ def static_modal_transfer(
     )
     projected = nonlinear - out_k * np.dot(out_k, nonlinear) / np.dot(out_k, out_k)
     return -float(np.real(np.vdot(out_vector, projected)))
+
+
+def designed_role_transfer_rate(field_hat: np.ndarray, network: dict[str, Any]) -> dict[str, Any]:
+    """Conservative role-to-role ledger for the nine *designed* triads.
+
+    A triad fixes only its three modal energy changes, not a unique pairwise
+    donor allocation.  For each triad we therefore distribute a negative modal
+    change to positive modal changes proportionally to the latter.  This gives
+    an exact conservative transport ledger at the modal-transfer level while
+    making the convention explicit.  It intentionally excludes all triads
+    generated outside the designed network; support leakage and the full
+    shell transfer remain separate telemetry.
+    """
+    roles = ROLE_TRANSFER_ROLES
+    labels = role_by_reality_mode(network)
+    matrix = {source: {target: 0.0 for target in roles} for source in roles}
+    modal_net = {role: 0.0 for role in roles}
+    triad_rows: list[dict[str, Any]] = []
+    max_conservation_residual = 0.0
+    for triad_index, triad in enumerate(network["triads"]):
+        p, q, r = (tuple(mode) for mode in triad["modes"])
+        modes = (p, q, r)
+        # For p + q + r = 0, energy in the labelled p mode is tested at -p.
+        transfers = np.asarray((
+            static_modal_transfer(field_hat, negate(p), q, r),
+            static_modal_transfer(field_hat, negate(q), r, p),
+            static_modal_transfer(field_hat, negate(r), p, q),
+        ), dtype=np.float64)
+        triad_roles = tuple(labels[mode] for mode in modes)
+        residual = float(np.sum(transfers))
+        max_conservation_residual = max(max_conservation_residual, abs(residual))
+        for role, transfer in zip(triad_roles, transfers, strict=True):
+            modal_net[role] += float(transfer)
+        gains = [(index, float(value)) for index, value in enumerate(transfers) if value > 0.0]
+        losses = [(index, float(-value)) for index, value in enumerate(transfers) if value < 0.0]
+        gain_total = float(sum(value for _, value in gains))
+        loss_total = float(sum(value for _, value in losses))
+        # Numerical residuals are retained rather than silently normalised.
+        if gain_total > 0.0 and loss_total > 0.0:
+            for donor_index, loss in losses:
+                for receiver_index, gain in gains:
+                    matrix[triad_roles[donor_index]][triad_roles[receiver_index]] += loss * gain / gain_total
+        triad_rows.append({
+            "triad": triad_index,
+            "kind": triad["kind"],
+            "modes": [list(mode) for mode in modes],
+            "roles": list(triad_roles),
+            "modal_transfers": [float(value) for value in transfers],
+            "conservation_residual": residual,
+            "positive_transfer": gain_total,
+            "negative_transfer": loss_total,
+        })
+    return {
+        "contract": (
+            "designed-triad-only conservative donor-to-receiver allocation; "
+            "losses are distributed to positive modal gains in proportion to gain"
+        ),
+        "roles": list(roles),
+        "rate_matrix": matrix,
+        "modal_net_rate_by_role": modal_net,
+        "triad_rows": triad_rows,
+        "max_triad_conservation_residual": max_conservation_residual,
+    }
+
+
+def integrated_role_transfer_ledger(history: list[dict[str, Any]]) -> dict[str, Any]:
+    """Integrate gross designed-triad throughput over saved solver states.
+
+    ``rate_matrix`` is nonnegative by construction: each instantaneous modal
+    loss is allocated to the triad's positive modal gains.  Its integral is
+    therefore a gross directed throughput, rather than a signed net role
+    balance.  The latter remains available separately as ``modal_net``.
+    """
+    roles = ROLE_TRANSFER_ROLES
+    if len(history) < 2:
+        return {"status": "insufficient_checkpoints", "roles": list(roles)}
+    times = np.asarray([row["time"] for row in history], dtype=np.float64)
+    matrix = {source: {target: 0.0 for target in roles} for source in roles}
+    modal_net = {role: 0.0 for role in roles}
+    for source in roles:
+        for target in roles:
+            values = np.asarray([
+                row["designed_role_transfer_ledger"]["rate_matrix"][source][target]
+                for row in history
+            ], dtype=np.float64)
+            matrix[source][target] = float(np.trapezoid(values, times))
+    for role in roles:
+        values = np.asarray([
+            row["designed_role_transfer_ledger"]["modal_net_rate_by_role"][role]
+            for row in history
+        ], dtype=np.float64)
+        modal_net[role] = float(np.trapezoid(values, times))
+    designed_target_rate = np.asarray([
+        row["designed_role_transfer_ledger"]["modal_net_rate_by_role"]["target"]
+        for row in history
+    ], dtype=np.float64)
+    full_target_rate = np.asarray([row["target_nonlinear_rate"] for row in history], dtype=np.float64)
+    designed_target_absolute_activity = float(np.trapezoid(np.abs(designed_target_rate), times))
+    full_target_absolute_activity = float(np.trapezoid(np.abs(full_target_rate), times))
+    target_to_outlet = matrix["target"]["outlet"]
+    outlet_to_feedback = matrix["outlet"]["feedback"]
+    feedback_to_target = matrix["feedback"]["target"]
+    intended_stages = (target_to_outlet, outlet_to_feedback, feedback_to_target)
+    intended_max = max(intended_stages)
+    intended_min = min(intended_stages)
+    loop_ratio = feedback_to_target / target_to_outlet if target_to_outlet > 1.0e-30 else math.nan
+    closure_fraction = (
+        feedback_to_target / (feedback_to_target + target_to_outlet)
+        if feedback_to_target + target_to_outlet > 1.0e-30 else math.nan
+    )
+    return {
+        "contract": (
+            "time integral of nonnegative designed-triad-only donor-to-receiver "
+            "throughput; not a full convolution source attribution"
+        ),
+        "roles": list(roles),
+        "integrated_matrix": matrix,
+        "integrated_modal_net_by_role": modal_net,
+        "feedback_to_target_over_target_to_outlet": loop_ratio,
+        "feedback_loop_closure_fraction": closure_fraction,
+        "intended_loop_balance": intended_min / intended_max if intended_max > 1.0e-30 else math.nan,
+        "integrated_feedback_to_target": feedback_to_target,
+        "integrated_target_to_outlet": target_to_outlet,
+        "integrated_outlet_to_feedback": outlet_to_feedback,
+        "intended_loop_stages": {
+            "target_to_outlet": target_to_outlet,
+            "outlet_to_feedback": outlet_to_feedback,
+            "feedback_to_target": feedback_to_target,
+        },
+        "target_dynamics_capture": {
+            "contract": (
+                "absolute target-shell nonlinear activity captured by the nine designed triads; "
+                "this is separate from the internally conservative designed-triad residual"
+            ),
+            "designed_target_absolute_activity": designed_target_absolute_activity,
+            "full_target_absolute_activity": full_target_absolute_activity,
+            "designed_over_full_absolute_activity": (
+                designed_target_absolute_activity / full_target_absolute_activity
+                if full_target_absolute_activity > 1.0e-30 else math.nan
+            ),
+        },
+        "max_checkpoint_conservation_residual": max(
+            float(row["designed_role_transfer_ledger"]["max_triad_conservation_residual"])
+            for row in history
+        ),
+    }
+
+
+def role_transfer_checkpoint_telemetry(
+    history: list[dict[str, Any]], window_steps: int,
+) -> list[dict[str, Any]]:
+    """Prefix ledgers at each complete viscous-window checkpoint.
+
+    Designed-triad conservation is expected to remain at roundoff even when
+    the PDE populates unplanned modes.  The capture statistic, not that
+    residual, detects when the intended graph stops describing the full
+    target-shell nonlinear dynamics.
+    """
+    checkpoints: list[dict[str, Any]] = []
+    for index, row in enumerate(history):
+        # Quarter-window prefixes expose whether an apparent endpoint loop
+        # closure was sustained or merely a transient burst.  ``window_steps``
+        # is chosen by ceiling, so use an exact integer divisibility test and
+        # omit fractional points only if the time grid cannot represent them.
+        if index == 0 or (4 * int(row["step"])) % window_steps != 0:
+            continue
+        prefix = history[:index + 1]
+        ledger = integrated_role_transfer_ledger(prefix)
+        checkpoints.append({
+            "step": int(row["step"]),
+            "time": float(row["time"]),
+            "designed_role_transfer": ledger,
+        })
+    return checkpoints
 
 
 def helical_channel_phase_audit(field_hat: np.ndarray, network: dict[str, Any]) -> dict[str, Any]:
@@ -437,7 +937,27 @@ def raw_to_field_hat(raw_hat: np.ndarray, wave: np.ndarray, norm_sq: np.ndarray)
     return leray_project(np.moveaxis(raw_hat / float(n ** 3), -1, 0), wave, norm_sq)
 
 
-def static_metrics(args: argparse.Namespace, raw_hat: np.ndarray, wave: np.ndarray, norm: np.ndarray, norm_sq: np.ndarray) -> dict[str, float]:
+def realised_role_mass_shares(field_hat: np.ndarray, network: dict[str, Any]) -> dict[str, float]:
+    """Recover role shares from the actual reality-paired finite carrier."""
+    role_mass = {name: 0.0 for name in ("target", "donor", "outlet", "feedback")}
+    for entry in network["entries"]:
+        mode = tuple(entry["mode"])
+        weight = dyadic_weight(mode)
+        positive = field_hat[(slice(None),) + mode_index(mode, field_hat.shape[1])]
+        negative = field_hat[(slice(None),) + mode_index(negate(mode), field_hat.shape[1])]
+        role_mass[role_name(entry)] += weight * float(
+            np.vdot(positive, positive).real + np.vdot(negative, negative).real
+        )
+    total = float(sum(role_mass.values()))
+    if total <= 1.0e-30:
+        raise ValueError("candidate has zero realised role mass")
+    return {role: value / total for role, value in role_mass.items()}
+
+
+def static_metrics(
+    args: argparse.Namespace, raw_hat: np.ndarray, wave: np.ndarray, norm: np.ndarray,
+    norm_sq: np.ndarray, network: dict[str, Any],
+) -> dict[str, Any]:
     field_hat = raw_to_field_hat(raw_hat, wave, norm_sq)
     dealias = component_dealias_mask(wave, args.n)
     nonlinear_hat = reconstructed_nonlinear_rhs(field_hat, wave, norm_sq, dealias)
@@ -457,6 +977,7 @@ def static_metrics(args: argparse.Namespace, raw_hat: np.ndarray, wave: np.ndarr
         "target_nonlinear_rate": target_nonlinear,
         "target_viscous_rate": 2.0 * args.nu * target_dissipation,
         "initial_replenishment_ratio": target_nonlinear / (2.0 * args.nu * target_dissipation) if target_dissipation > 1.0e-30 else math.nan,
+        "realised_role_critical_shares": realised_role_mass_shares(field_hat, network),
     }
 
 
@@ -582,7 +1103,12 @@ def evolve_candidate(
     ) for window in range(args.windows + 1)]
     heat_packets = [float(ledger[args.target_shell]) for ledger in heat_ledgers]
     heat_moving = [moving_packet_from_packets(ledger, args.moving_packet_radius) for ledger in heat_ledgers]
-    history: list[dict[str, float]] = []
+    history: list[dict[str, Any]] = []
+    quarter_checkpoint_steps = {
+        numerator * window_steps // 4
+        for numerator in range(1, 4 * args.windows + 1)
+        if (numerator * window_steps) % 4 == 0
+    }
 
     def record(step: int, current_raw: np.ndarray) -> None:
         current_field = raw_to_field_hat(current_raw, wave, norm_sq)
@@ -592,9 +1118,11 @@ def evolve_candidate(
         nonlinear = reconstructed_nonlinear_rhs(current_field, wave, norm_sq, component_dealias_mask(wave, args.n))
         dissipation = shell_dissipation(current_field, norm_sq, norm, args.target_shell)[args.target_shell]
         nonlinear_rate = shell_nonlinear_rate(current_field, nonlinear, norm, args.target_shell)[args.target_shell]
+        role_ledger = designed_role_transfer_rate(current_field, network)
         history.append({"step": step, "time": step * args.dt, **shape,
                         "target_dissipation": float(dissipation),
-                        "target_nonlinear_rate": float(nonlinear_rate)})
+                        "target_nonlinear_rate": float(nonlinear_rate),
+                        "designed_role_transfer_ledger": role_ledger})
 
     if args.backend == "gpu":
         from vulkan_truth3d_backend import VulkanTruth3DBackend
@@ -602,7 +1130,8 @@ def evolve_candidate(
         try:
             backend.set_initial_u_hat(raw_hat)
             for step in range(steps + 1):
-                if step % args.save_every == 0 or step % window_steps == 0 or step == steps:
+                if (step % args.save_every == 0 or step % window_steps == 0
+                        or step in quarter_checkpoint_steps or step == steps):
                     record(step, np.asarray(backend.read_u_hat(), dtype=np.complex128))
                 if step < steps:
                     backend.step()
@@ -611,7 +1140,8 @@ def evolve_candidate(
     else:
         current_raw = raw_hat.copy()
         for step in range(steps + 1):
-            if step % args.save_every == 0 or step % window_steps == 0 or step == steps:
+            if (step % args.save_every == 0 or step % window_steps == 0
+                    or step in quarter_checkpoint_steps or step == steps):
                 record(step, current_raw)
             if step < steps:
                 current_raw = module.rk2_step(current_raw, kx, ky, kz, k2, mask, args.dt, args.nu)
@@ -628,6 +1158,8 @@ def evolve_candidate(
     viscous_loss = float(2.0 * args.nu * np.trapezoid(dissipations, times))
     nonlinear_positive = float(np.trapezoid(np.maximum(nonlinear_rates, 0.0), times))
     nonlinear_negative = float(-np.trapezoid(np.minimum(nonlinear_rates, 0.0), times))
+    role_transfer = integrated_role_transfer_ledger(history)
+    role_transfer_checkpoints = role_transfer_checkpoint_telemetry(history, window_steps)
     final_packet = float(window_rows[-1]["target_packet"])
     final_moving_packet = float(window_rows[-1]["moving_packet"])
     final_dominant_shell = int(window_rows[-1]["dominant_shell"])
@@ -662,6 +1194,8 @@ def evolve_candidate(
         "mean_log_window_recurrence": log_score,
         "nonlinear_positive_over_viscous_loss": nonlinear_positive / viscous_loss if viscous_loss > 1.0e-30 else math.nan,
         "nonlinear_negative_over_viscous_loss": nonlinear_negative / viscous_loss if viscous_loss > 1.0e-30 else math.nan,
+        "designed_role_transfer": role_transfer,
+        "designed_role_transfer_checkpoints": role_transfer_checkpoints,
         "window_checkpoints": window_rows,
         "history": history,
     }
@@ -676,23 +1210,71 @@ def main() -> None:
         raise ValueError("critical-mass and target-urms must be positive")
     if args.moving_packet_radius < 0 or args.endpoint_prefilter_candidates < 0:
         raise ValueError("moving-packet-radius and endpoint-prefilter-candidates must be nonnegative")
+    if args.phase_sample_index is not None and args.phase_sample_index < 0:
+        raise ValueError("phase-sample-index must be nonnegative when supplied")
+    if not (0.0 <= args.target_dominance_min <= 1.0 and 0.0 <= args.local_tightness_min <= 1.0
+            and 0.0 <= args.role_share_min <= 0.25):
+        raise ValueError("dominance/tightness minima must lie in [0,1] and role-share-min in [0,0.25]")
     network = network_spec(args)
     validate_network(args, network)
+    requested_role_shares = parse_role_shares(args.role_shares)
+    # The static envelope uses amplitude-weighted coupling factors.  Apply the
+    # requested allocation before ranking helicity cases so each allocation
+    # regime receives its own honest static seed ordering.
+    role_allocation = apply_role_mass_shares(network, requested_role_shares)
     phase_geometry = phase_graph_geometry(network)
+    signed_phase_geometry = signed_phase_constraint_geometry(network)
+    helicity_geometry = helicity_factorisation_geometry(network)
+    needs_helicity_audit = args.helicity_static_audit or args.helicity_static_case is not None
+    helicity_static_audit = helicity_static_factor_audit(network) if needs_helicity_audit else {
+        "status": "not_requested",
+        "how_to_run": "pass --helicity-static-audit for the 64-backbone-case factor-table screen",
+    }
+    selected_helicity_seed = (
+        static_helicity_case_assignment(network, helicity_static_audit, args.helicity_static_case)
+        if args.helicity_static_case is not None else {"status": "default_entry_helicities"}
+    )
     variable_dimension = sum("fixed_phase" not in entry for entry in network["entries"])
     wave, norm = frequency_grid(args.n)
     norm_sq = norm * norm
     rng = np.random.default_rng(args.seed)
     candidates: list[dict[str, Any]] = []
-    for sample in range(args.phase_samples):
+    # A staged external screen needs to evaluate an exact phase point rather
+    # than repeatedly letting the static-inflow sort choose a different one.
+    # Preserve the ordinary RNG stream, so index i is identical to sample i in
+    # an unrestricted run with the same seed.
+    sample_indices = range(args.phase_samples)
+    if args.phase_sample_index is not None:
+        if args.phase_sample_index >= args.phase_samples:
+            raise ValueError("phase-sample-index must be smaller than --phase-samples")
+        sample_indices = range(args.phase_sample_index + 1)
+    for sample in sample_indices:
         phases = rng.uniform(-math.pi, math.pi, size=variable_dimension)
+        if args.phase_sample_index is not None and sample != args.phase_sample_index:
+            continue
         raw_hat = build_candidate(args, network, phases)
-        metrics = static_metrics(args, raw_hat, wave, norm, norm_sq)
-        candidates.append({"sample": sample, "phases": [float(value) for value in phases], **metrics})
+        metrics = static_metrics(args, raw_hat, wave, norm, norm_sq, network)
+        # Role allocations are normalised by finite floating-point carrier
+        # sums.  A requested exact floor can therefore round to, e.g.,
+        # ``0.04999999999999999`` rather than ``0.05``.  The tolerance only
+        # accepts machine-level representation error; it is not a relaxation
+        # of the declared packet-admissibility contract.
+        admissibility_tolerance = 1.0e-12
+        admissible = (
+            float(metrics["target_packet_dominance"]) >= args.target_dominance_min - admissibility_tolerance
+            and float(metrics["target_packet_local_tightness"]) >= args.local_tightness_min - admissibility_tolerance
+            and min(metrics["realised_role_critical_shares"].values())
+            >= args.role_share_min - admissibility_tolerance
+        )
+        candidates.append({"sample": sample, "phases": [float(value) for value in phases],
+                           "initial_admissible": admissible, **metrics})
     # Positive nonlinear inflow into the target shell is only the cheapest
     # first filter.  An optional short evolved prefilter then ranks those
     # seeds by the actual moving-packet endpoint objective before any full
     # viscous-window run.  Neither stage is global endpoint optimisation.
+    candidates = [candidate for candidate in candidates if bool(candidate["initial_admissible"])]
+    if not candidates:
+        raise ValueError("no phase samples satisfy the declared target/tightness/role-share admissibility constraints")
     candidates.sort(key=lambda row: float(row["target_nonlinear_rate"]), reverse=True)
     selected = candidates[:args.top_candidates]
     prefilter_rows: list[dict[str, Any]] = []
@@ -755,13 +1337,22 @@ def main() -> None:
             "constraints": "reality symmetric, divergence free helical modes, componentwise 2/3 dealiased N32 support, fixed amplitudes and declared global normalization",
             "translation_phase_gauge": "fixed phases of (4,0,0), (0,4,0), (0,0,4) remove the three translation gauges for the cyclic graph",
             "phase_graph_geometry": phase_geometry,
+            "signed_phase_constraint_geometry": signed_phase_geometry,
+            "helicity_factorisation_geometry": helicity_geometry,
+            "helicity_static_factor_audit": helicity_static_audit,
+            "selected_helicity_seed": selected_helicity_seed,
+            "role_mass_allocation": role_allocation,
         },
         "objective": {
             "static_prefilter": "maximize initial nonlinear target-shell inflow only to seed an endpoint search",
             "endpoint": "maximize min_m P_L((m+1)T) / P_L(mT), where P_L follows the dominant shell and T = c * 2^(-2j) / nu",
             "secondary_endpoint": "maximize mean log moving-packet recurrence",
             "translation_quotient": "checkpoint correlation is maximised over discrete torus translations; lattice rotations are not quotiented",
-            "warning": "this version samples phase candidates and evolves only a staged prefiltered subset; it is not global endpoint optimization",
+            "warning": (
+                "this version samples phase candidates and evolves only a staged prefiltered subset; "
+                "it is not global endpoint optimization.  A selected static helicity case is an envelope seed, "
+                "not a joint leaf-choice or mixed-polarization search."
+            ),
         },
         "inputs": vars(args) | {"cfd_root": str(args.cfd_root), "output_json": str(args.output_json)},
         "static_candidates_ranked": candidates,

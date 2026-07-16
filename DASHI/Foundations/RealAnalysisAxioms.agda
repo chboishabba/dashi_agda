@@ -59,6 +59,42 @@ postulate
     c ≤ℝ d →
     (a +ℝ c) ≤ℝ (b +ℝ d)
 
+  -- Minimal absolute-value laws used to turn a finite source expansion into
+  -- a majorant.  These are standard ordered-real facts; keeping them here
+  -- lets downstream finite-sum proofs construct their triangle step rather
+  -- than carry it as an opaque physics-specific premise.
+  absZero :
+    absℝ 0ℝ ≡ 0ℝ
+
+  absAddSubadditive :
+    ∀ a b →
+    absℝ (a +ℝ b) ≤ℝ absℝ a +ℝ absℝ b
+
+  -- Finite decoupling sums use only the additive-group fragment of ℝ.
+  -- Exposing it explicitly permits source walk cancellations to be proved by
+  -- list induction rather than imported as a pre-summed equality.
+  +-identityˡ :
+    ∀ a →
+    0ℝ +ℝ a ≡ a
+
+  +-identityʳ :
+    ∀ a →
+    a +ℝ 0ℝ ≡ a
+
+  +-assoc :
+    ∀ a b c →
+    (a +ℝ b) +ℝ c ≡ a +ℝ (b +ℝ c)
+
+  subSelf :
+    ∀ a →
+    a -ℝ a ≡ 0ℝ
+
+  subAddDistributes :
+    ∀ a b c d →
+    (a +ℝ b) -ℝ (c +ℝ d)
+      ≡
+    (a -ℝ c) +ℝ (b -ℝ d)
+
 cong :
   {A B : Set} →
   {x y : A} →

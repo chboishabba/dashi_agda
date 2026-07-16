@@ -1,6 +1,89 @@
 # Compactified Context
 
+## Current Quarter-Window Execution
+
+- The six coarse allocation rank-0/phase-0 quarter-window screen is complete:
+  no survivor.  Donor-heavy is comparatively best (`R_move=.28526`) but still
+  leaks `.97823` of designed support with only `.01440` target capture.  The
+  next narrow search is sign-diverse pure-helicity backbones inside donor-heavy
+  (static ranks `1` and `11` after the already-tested rank `0`), before any
+  mixed-polarization relaxation.
+
+- One balanced pure-helicity/allocation N32 `j=2` quarter-window GPU sentinel
+  is running from the new staged manifest.  It is empirical only and has not
+  produced a receipt yet.  Execution is deliberately capped while an unrelated
+  Agda job uses several CPU cores.
+- The staged manifest now verifies each scheduled rank/phase against the
+  exact task admissibility contract using a cheap `backend=none` replay.  This
+  fixed an outlet-suppressed false rejection caused by finite-carrier share
+  roundoff (`0.04999999999999999` versus the exact requested `.05` floor);
+  the search permits only `1e-12` representation slack.  A six-allocation
+  planning regression passes.  This is execution hygiene, not a physics or
+  NS/BKM/Clay claim.
+- The first balanced exact quarter-window receipt is a narrow seed-level
+  null: `R_move=.19076`, `G_move=.36148`, designed-loop closure `1.25e-4`,
+  target capture `.01298`, and support leakage `.97577`.  This says the
+  nine-triad graph is dynamically irrelevant for this seed after early
+  leakage; it is not a theorem or a topology verdict.  An admissible
+  outlet-suppressed allocation contrast is running.
+- Outlet suppression did not improve the selected rank-0/phase-0 seed:
+  `R_move=.16571` (below balanced `.19076`), capture `.00960`, leakage
+  `.97450`.  The next running contrast is feedback-heavy allocation.  These
+  remain two seed-level results, not a family or topology verdict.
+
 ## Current Tranche Closure Snapshot
+
+- 2026-07-16 NS staged-screen planner: `scripts/ns_phase_locked_packet_staged_screen.py`
+  now creates a durable, non-executing quarter-window manifest over six
+  role-share regimes, allocation-specific static pure-helicity factor audits,
+  sign-diverse backbone ranks, and deterministic phase-stream indices.  The
+  underlying search accepts `--phase-sample-index`, verified to reproduce the
+  corresponding unrestricted seeded sample exactly.  This prevents accidental
+  massive GPU launches while making the next empirical screen reproducible;
+  it is candidate-only and changed no NS/BKM/Clay gate.
+
+- 2026-07-16 NS staged-screen collector:
+  `scripts/ns_phase_locked_packet_screen_collect.py` reads any completed
+  subset of planned endpoint files, ranks actual moving-packet survival, and
+  preserves a small loop/capture/loss telemetry frontier plus best rows by
+  allocation and helicity seed.  It was smoke-tested on an existing CPU
+  result.  It does not execute CFD or automatically promote candidates.
+
+- 2026-07-16 NS role-ledger refinement: the finite cyclic-feedback script now
+  distinguishes three quantities that must not be conflated: (i) an exactly
+  conservative nine-designed-triad gross directed throughput convention;
+  (ii) loop telemetry `T→O`, `O→F`, `F→T`, bounded closure fraction and
+  balance; and (iii) absolute designed-versus-full target-shell nonlinear
+  activity capture.  Quarter-window prefix ledgers are emitted.  A CPU smoke
+  validates designed-triad residual at <= `4.34e-19`; residual is not a
+  support-leakage diagnostic.  Static helicity envelope ordering is now
+  allocation-aware because role mass shares are applied before the factor
+  audit.  These are empirical search instruments only; no NS/BKM/Clay gate
+  changed.
+
+- 2026-07-16 NS cyclic graph structural correction: the N32 three-target
+  feedback graph's signed, reality-reduced channel-phase matrix has rank 9
+  with zero left kernel, certified by a private mode in every triad.  Its
+  ordinary one-dimensional bipartite graph cycle therefore does not create a
+  static phase-holonomy obstruction.  The script now emits this certificate
+  and an optional pure-helicity static factor audit: 6 shared backbone modes
+  give 64 coupled sign cases; the 18-mode full pure-helicity space is 2^18 but
+  reduces to local donor-pair/side-leaf blocks once backbone signs are fixed.
+  This is an empirical search-space reduction only.  The phase-only
+  fixed-amplitude realization remains retired after its .25T/full-window null;
+  next high-alpha test is helicity plus constrained amplitude allocation, or a
+  redesigned graph with a genuine signed phase left kernel if the aim is a
+  phase-frustration mechanism.  No NS/BKM/Clay gate moved.
+
+- 2026-07-16 NS pure-helicity/role-allocation search surface: the packet
+  script can now select a reproducible ranked pure-helicity static seed from
+  the 64 shared-backbone cases, then allocate fixed critical mass explicitly
+  across target/donor/outlet/feedback roles.  It recomputes realised shares
+  on the actual reality-paired dyadic carrier and enforces declared target
+  dominance, local tightness, and role-share floors before CFD ranking.  The
+  local leaf choices are still independently envelope-maximising, hence this
+  is a dynamic-relocking search input—not a static compatibility theorem or a
+  mixed-polarization sweep.  No NS/BKM/Clay gate moved.
 
 - 2026-07-16 NS cyclic-feedback adversarial packet search: the N32 `j=2`
   graph now fixes the three coordinate target phases as a translation gauge,
@@ -7560,6 +7643,18 @@ Cleanup state:
   Gate 3, Gate 4, Gate 5, Gate 6, and Gate 7/8 modules, all six status JSON
   files validated, and `git diff --check` passed.  `terminalClaimPromoted`
   remains false.
+- 2026-07-16 NS empirical sidecar: the cyclic-feedback packet search now
+  carries a designed-network role-transfer ledger.  At saved finite-Galerkin
+  states it decomposes the nine designed triads into modal transfers and uses
+  a declared conservative proportional loss-to-gain convention to integrate
+  a four-role (`target`, `donor`, `outlet`, `feedback`) matrix.  The key
+  telemetry is feedback-to-target divided by target-to-outlet; it is explicitly
+  not an attribution of the full convolution, whose unplanned interactions
+  remain tracked by support leakage and packet balance.  CPU smoke: modal
+  triad conservation residual below `4.34e-19`.  The next work is a staged
+  pure-helicity/role-allocation endpoint screen, still candidate-only and
+  non-promoting.
+
 - 2026-05-20 robust Perplexity context refresh for Paper 7:
   resolved Perplexity thread
   `online_thread_id = 8daefbbb-e5e4-4c27-92c2-9cf7e9de0aa3` from the local

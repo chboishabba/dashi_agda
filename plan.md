@@ -86,11 +86,45 @@ All canonical chain steps have now executed and Lemma A/B elimination is lodged 
 
 - The finite-Galerkin cyclic-feedback packet search is an empirical
   falsification lane only.  Its next milestone is staged endpoint selection
-  and moving-packet recurrence at the correct `j=2` viscous time, followed by
-  an N32-to-N64 scale copy only if an adversarial family survives.
+  and moving-packet recurrence at the correct `j=2` viscous time.  The first
+  dynamic enlargement is a pure-helicity seed plus constrained four-role
+  critical-mass allocation (target/donor/outlet/feedback), with phases
+  re-sampled after each sign/share choice.  A mixed-polarization backbone
+  comes only after the pure family is exhausted; an N32-to-N64 scale copy is
+  justified only if an adversarial family survives.
 - No result from this sidecar is a closure-spine dependency or a Navier--Stokes
   promotion condition.  It may only motivate a later theorem surface after a
   stable, adversarially tested inequality has been identified.
+- The current concrete screen is a staged pure-helicity/allocation family:
+  six coarse four-role critical-mass allocations, static 64-backbone factor
+  classification, evolved quarter-window survival, then half/full-window
+  promotion of diverse survivors.  Endpoint runs must emit the designed
+  triad-only conservative role-transfer ledger, including intended-loop gross
+  throughputs and target-shell capture, alongside support leakage.
+  This is a diagnostic allocation convention, not a full-convolution source
+  attribution or a Navier--Stokes estimate.
+- The role-transfer telemetry now reports gross directed designed-network
+  throughputs, not a signed net-ratio proxy: `T→O`, `O→F`, `F→T`, their
+  bounded loop-closure fraction and three-stage balance, plus a distinct
+  designed-versus-full target-shell activity capture ratio.  Quarter-window
+  prefixes are diagnostic checkpoints.  They do not turn the nine-triad
+  allocation convention into a full-convolution attribution or an NS bound.
+- `scripts/ns_phase_locked_packet_staged_screen.py` now turns that protocol
+  into an explicit, non-executing quarter-window task manifest.  It runs only
+  cheap allocation-specific static audits, selects sign-diverse backbone ranks
+  inside a high-envelope pool, and pins one deterministic phase-stream index
+  per planned CFD task.  It deliberately does not launch the potentially
+  days-long GPU batch or claim its static schedule predicts endpoint survival.
+- `scripts/ns_phase_locked_packet_screen_collect.py` collects any completed
+  subset of those tasks.  It ranks actual moving-packet survival first while
+  retaining a small telemetry Pareto frontier and the best row per allocation
+  and helicity seed.  This supports deliberate half-window promotion rather
+  than automatic selection from static envelope scores.
+- The next execution step is a bounded, serial-or-two-at-most quarter-window
+  tranche.  Every manifest task must first pass the exact no-CFD admissibility
+  surface (same helicity rank, phase stream, dominance, tightness, and role
+  floors) so an allocation schedule cannot confuse a rejected setup with an
+  endpoint failure.
 
 ## Next Skill
 `autonomous-orchestrator` to manage the post-checklist closure runway in

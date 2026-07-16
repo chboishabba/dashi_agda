@@ -191,10 +191,12 @@ the marked distance or the tree length into collar decay, leaving a summable
 weakened tree weight.  For far positions ordinary spatial decay controls the
 polynomial coordinate tail.  This yields the beta-tail certificate with any
 chosen far rate strictly below half the spatial rate.
-The Agda surface `BalabanLocalisedPolarisationDomainComparison` records exactly
-the marked CMP 99 step; `BalabanVacuumPolarisationDomainTail` records the
-single remaining owned implication after CMP 116 summability.  No opaque
-resummation placeholder remains.
+The canonical Agda theorem surface is now
+`BalabanMarkedPolarisationResummation.betaDomainTail`; the older
+`BalabanVacuumPolarisationDomainTail` name is only a fail-closed compatibility
+boundary.  The theorem is constructed from a near marked-resummation bound and
+a far spatial-moment bound.  The near bound remains the single owned analytic
+input; it is not represented as a final-tail field.
 
 ### Literal marked-comparison entry point
 
@@ -212,3 +214,104 @@ in (4.3), with one marked CMP 99 domain-difference factor and all unchanged
 factors controlled by the CMP 109 tree bounds.  The resummed `X`-sum is the
 CMP 116 input.  This is the exact point where a new analytic inequality, rather
 than another source wrapper, is required.
+
+### Differentiated activity: no generic Cauchy detour
+
+CMP 109 has already taken the two external variations before the relevant
+localization/resummation step.  Equation (4.35) is explicitly the `n = 2`
+case, and (4.37) defines
+
+```text
+Pi_{mu nu}(x,y) = sum_{X in D_j} E^(2)_{mu nu}(X;x,y).
+```
+
+Section 5 then derives exponential kernel decay directly from (4.37), in
+(5.10), with a positive `delta_1` determined by the earlier localization
+constants.  CMP 116 Lemma 3, (2.38), likewise gives a resummed activity bound
+with a still-positive localization exponent after its decay split.
+
+Consequently the next proof must bound the **already differentiated** marked
+objects `E^(2)_Omega - E^(2)_Omega'`.  It must not introduce an unsourced
+`|X|^2` derivative multiplicity or a generic Cauchy-radius loss.  Such an
+argument is relevant only if the literal source estimate for `E^(2)` turns out
+to be insufficient.  The active target is instead the marked analogue of the
+existing CMP 109/CMP 116 differentiated resummation:
+
+```text
+sum_{X containing 0,x}
+  |E^(2)_Omega(X;0,x) - E^(2)_Omega'(X;0,x)|
+<= C exp(-delta_x |x|) exp(-delta_R R)       for |x| <= R/2.
+```
+
+The source-specific work is the factorwise CMP 99 replacement and the
+marked-distance/large-localization charge.  Once that inequality is proved,
+the canonical Agda theorem combines it with the elementary far moment bound
+to construct the beta-domain tail.
+
+### Decay-splitting source analogue
+
+CMP 116 (1.31)--(1.32) supplies the exact form of the required bookkeeping
+pattern.  Literally, its linear-size functions satisfy
+
+```text
+d_j(X) >= (L^j eta)^(-1) d_k(X_0),
+```
+
+and it converts the relevant pair of exponentials into
+
+```text
+exp (-(1 - delta) kappa d_k(Y) - delta kappa d_j(X)),
+```
+
+retaining a strictly positive residual `d_j(X)` exponent for the subsequent
+`X`-sum.  The domain-tail proof needs the marked analogue
+
+```text
+delta_mark * markedDistance(X; 0, x)
+  + kappa * treeLength(X)
+  >= delta_collar * collarRadius
+     + kappa' * treeLength(X),
+```
+
+for near `x`, with `kappa' > 0`.  It is now represented directly by
+`markedDistanceOrLargeLocalisation` in the Agda comparison record.  CMP 116
+shows the decay-splitting mechanism exists in the localized expansion, but
+does **not** by itself identify its `X_0`/`Y` geometry with the marked CMP 99
+domain discrepancy.  The missing owned lemma is precisely that identification:
+an anchor/discrepancy localization map proving that a marked walk which does
+not pay discrepancy distance necessarily forces a localization domain of the
+required tree length.
+
+### CMP 109 coefficient-collar dichotomy
+
+CMP 109 already gives the raw geometric alternative needed for that map.  In
+(3.5), for a coefficient cube `D`, it separates localization domains into
+
+```text
+X intersects the complement of D^2,    or    X is contained in D^2.
+```
+
+The discussion immediately following (3.5) states that the first class is
+controlled in one of two ways: if it is separated from `D`, the derivative of
+`H_j` pays exponential propagator decay; if it meets `D` while reaching outside
+`D^2`, then `X` is large in the fine scale and the activity bound
+`exp (-kappa d_j(X))` pays instead.  Equation (3.17) keeps both the activity
+weight and the localized derivative factor, and the text explicitly says the
+same bounds survive the later localization procedure.
+
+For the domain-tail theorem, `D^2` must be chosen inside the common collar of
+the two domain sequences.  The missing map is therefore no longer vague:
+translate this CMP 109 `X outside D^2` dichotomy into the CMP 99 marked
+random-walk discrepancy distance, then use the large-`X` alternative to supply
+the residual tree-length charge in `markedDistanceOrLargeLocalisation`.
+
+Connectedness supplies only the large-`X` branch.  Once all quantities have
+been converted to the same block scale, a connected `X` joining an anchor cube
+to a cube outside the chosen coefficient collar has
+`d_j(X) >= c * collarRadius - C`; the constants absorb block diameters,
+enlargements and the source metric.  This is enough to split
+`exp (-kappa d_j(X))` into collar decay and a weaker summable tree weight.
+It does **not** imply that `X` lying inside the collar gives equal terms: CMP
+99 cancellation is for individual random-walk localizations lying in the
+common region.  A nominally interior activity can still contain a surviving
+walk, which must be charged by the marked CMP 99 distance factor.
