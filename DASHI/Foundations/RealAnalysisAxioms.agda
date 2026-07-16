@@ -70,6 +70,72 @@ postulate
     ∀ a b →
     absℝ (a +ℝ b) ≤ℝ absℝ a +ℝ absℝ b
 
+  -- Ordered-ring fragment used by the concrete complex-pair L¹ norm.  These
+  -- remain part of the same real-analysis authority boundary as ℝ itself;
+  -- downstream complex arithmetic proves its own estimates from them.
+  absSubadditive :
+    ∀ a b →
+    absℝ (a -ℝ b) ≤ℝ absℝ a +ℝ absℝ b
+
+  absMul :
+    ∀ a b →
+    absℝ (a *ℝ b) ≡ absℝ a *ℝ absℝ b
+
+  mulMonotoneNonnegative :
+    ∀ {a b c d} →
+    0ℝ ≤ℝ a →
+    a ≤ℝ b →
+    0ℝ ≤ℝ c →
+    c ≤ℝ d →
+    a *ℝ c ≤ℝ b *ℝ d
+
+  +-comm :
+    ∀ a b →
+    a +ℝ b ≡ b +ℝ a
+
+  *-comm :
+    ∀ a b →
+    a *ℝ b ≡ b *ℝ a
+
+  *-assoc :
+    ∀ a b c →
+    (a *ℝ b) *ℝ c ≡ a *ℝ (b *ℝ c)
+
+  *-distribˡ-+ :
+    ∀ a b c →
+    a *ℝ (b +ℝ c) ≡ (a *ℝ b) +ℝ (a *ℝ c)
+
+  *-distribʳ-+ :
+    ∀ a b c →
+    (a +ℝ b) *ℝ c ≡ (a *ℝ c) +ℝ (b *ℝ c)
+
+  mulOneʳ :
+    ∀ a →
+    a *ℝ 1ℝ ≡ a
+
+  mulZeroʳ :
+    ∀ a →
+    a *ℝ 0ℝ ≡ 0ℝ
+
+  mulZeroˡ :
+    ∀ a →
+    0ℝ *ℝ a ≡ 0ℝ
+
+  oneNonnegative :
+    0ℝ ≤ℝ 1ℝ
+
+  subMulDistributes :
+    ∀ a b c →
+    (a -ℝ b) *ℝ c ≡ (a *ℝ c) -ℝ (b *ℝ c)
+
+  mulSubDistributes :
+    ∀ a b c →
+    a *ℝ (b -ℝ c) ≡ (a *ℝ b) -ℝ (a *ℝ c)
+
+  subAddCancelMiddle :
+    ∀ a b c →
+    (a -ℝ b) +ℝ (b -ℝ c) ≡ a -ℝ c
+
   -- Finite decoupling sums use only the additive-group fragment of ℝ.
   -- Exposing it explicitly permits source walk cancellations to be proved by
   -- list induction rather than imported as a pre-summed equality.
