@@ -1,5 +1,34 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Added `scripts/ns_critical_packet_phase_residence_audit.py` to test the
+  next non-static candidate directly on the finite Fourier carrier.  It uses
+  the scale-invariant dyadic packet
+  `X_j = 2^j * sum_{2^j <= |k| < 2^(j+1)} |u_hat(k)|^2`, requires a dominant
+  locally tight packet, and compares it with the nearest saved state at its
+  actual viscous time `c * 2^(-2j) / nu`.  It also records finite-difference
+  helical amplitude/phase telemetry, explicitly not an exact phase ODE.
+
+- The available N128 unforced archive is **not temporally resolved for this
+  test**: its snapshots span only `0.12`, while its dominant `j=5` packet has
+  nominal viscous time about `0.98` at `nu=0.001`; no dominant-tight packet
+  has a saved endpoint within the declared timing tolerance.  The generated
+  artifact therefore makes no recurrence or leakage claim.  This is a useful
+  negative calibration: do not use this short decaying trajectory as evidence
+  for the proposed critical-packet barrier.  A longer/higher-cadence targeted
+  Galerkin or DNS trajectory is required before formalizing that conjecture.
+  See `ns_critical_packet_phase_residence_audit_N128_20260716.json`.
+
+- Generated one purpose-built, shell-local N32 Galerkin trajectory to make the
+  recurrence audit genuinely time-resolved: random Leray-projected data in
+  `5 <= |k| <= 10`, `nu=.001`, 16,000 steps, and snapshots every `.1`.  On
+  the four fully recorded dominant-and-tight `j=3` windows, the packet ratio
+  after `2^(-6)/nu = 15.625` is `0.0530`–`0.0642` (largest observed ratio
+  `0.0642`).  This is positive calibration for viscous leakage in one smooth,
+  unforced, randomly phased finite family; it is **not** a uniform kappa, an
+  adversarial relocking search, or evidence for a critical-packet theorem.
+  The audit now rejects truncated end-of-record windows explicitly.  Artifact:
+  `ns_critical_packet_phase_residence_audit_N32_critical_packet_seed17_20260716.json`.
+
 - Replaced the rejected geometric helical-mismatch diagnostic with an exact
   helical phase-saturation audit in
   `scripts/ns_triad_edge_depletion_audit.py`.  Every modal transfer is now
