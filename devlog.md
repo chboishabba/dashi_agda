@@ -15,6 +15,21 @@
   one-dimensional feedback-cycle basis; helical coupling holonomy is kept
   explicitly uncomputed pending exact complex-channel coefficient extraction.
 
+- The first bounded GPU staged-endpoint smoke completed: `8` static samples,
+  `4` candidates at short evolved prefilter time, and one critical-mass
+  endpoint at `T=1.25`.  It gives fixed `R=.8959`, fixed heat-compensated
+  `.9325`, moving `R=.9104`, and moving heat-compensated `1.0292`, with zero
+  dominant-shell displacement.  Treat this as protocol validation only, not
+  endpoint optimization or a viscous-window packet statement.
+
+- The long N32 GPU cyclic-feedback calibration completed after 62,500 steps
+  (`T=62.5`).  The statically selected `urms=1` seed 55 has fixed packet
+  `R=2.736e-4` and heat-compensated `G=2.022e-3`; positive/negative nonlinear
+  transfer relative to viscous loss is `.107` / `4.85`.  It strongly rejects
+  this static-inflow seed as a recurrence witness, while remaining
+  non-decisive for the updated critical-normalized, moving-packet, staged
+  endpoint search.
+
 - Replaced the one-target donor-star-only experiment surface with a selectable
   graph surface in `ns_phase_locked_packet_search.py`.  The new default is a
   closed three-target N32 `j=2` cycle: each target has a lower donor triad,

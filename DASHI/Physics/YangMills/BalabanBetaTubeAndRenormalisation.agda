@@ -1,6 +1,9 @@
 module DASHI.Physics.YangMills.BalabanBetaTubeAndRenormalisation where
 
--- The one remaining finite-cutoff RG theorem, in its strongest useful form.
+-- One optional sufficient producer for the remaining finite-cutoff RG
+-- theorem.  CMP 109 Theorem 2 itself only requires the tuned trajectory;
+-- contraction is one possible way to construct it, not the canonical
+-- theorem boundary.
 -- A tube is a family of trajectories generated from varying initial
 -- inverse-square coordinates.  The fixed-point fields encode the actual
 -- shooting argument; they do not permit an unrelated beta sequence to be
@@ -51,7 +54,8 @@ record BalabanBetaTubeEstimate (K : ℕ) (γ : ℝ) : Set₁ where
     observationWithinCutoff : observationScale ≤ K
     renormalisedInverseSquare : ℝ
 
-    -- T_K(u) = u_R + sum_{j <= m_K} beta_{K,j}(g_{K,j-1}(u)).
+    -- T_K(u) = u_R + sum of the path-dependent source beta corrections
+    -- along the generated trajectory from u.
     renormalisationMap : TubePoint → TubePoint
     mapHasSourceFormula :
       ∀ u →

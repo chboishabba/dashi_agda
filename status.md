@@ -18,6 +18,27 @@
   holonomy as uncomputed: that requires the exact complex channel coefficients,
   not topology alone.
 
+- A bounded GPU staged-endpoint smoke run completed under the upgraded
+  protocol: eight critical-mass-normalized phase samples, four short evolved
+  prefilter candidates, then one selected endpoint at `T=1.25 = .02 * 62.5`.
+  Its fixed-shell ratio was `.8959` versus exact heat `.9608` (a
+  heat-compensated `.9325`); its radius-one moving-packet ratio was `.9104`
+  and heat-compensated `.1.0292`, with no dominant-shell displacement.  This
+  short interval is useful only to validate the new selection/telemetry and
+  to show that fixed-packet and moving-packet readings differ; it is far too
+  short to test parabolic nonrecurrence.
+
+- The full old-protocol N32 cyclic-feedback calibration is complete.  It used
+  the `urms=1` normalization and evolved only the best of 64 *static initial
+  inflow* seeds (sample 55), for the correct full `j=2` window `T=62.5`.
+  Its fixed target packet has `R=2.736e-4`, versus a heat-compensated
+  `G=2.022e-3`; positive nonlinear target input is only `.107` of integrated
+  viscous loss while negative transfer is `4.85` times that loss.  The seed
+  therefore fails dramatically as a fixed-packet recurrence witness.  Since
+  it predates critical normalization, moving-packet telemetry, and endpoint
+  preselection, it does not decide the cyclic topology or a dynamic-packet
+  theorem.
+
 - Generalized `scripts/ns_phase_locked_packet_search.py` from a single
   donor-star to an explicit N32 `j=2` three-target cyclic feedback graph:
   lower donor pairs feed `r_i`, while shared `s_i` outlet modes feed the next

@@ -1,8 +1,9 @@
 module DASHI.Physics.YangMills.BalabanRenormalisedCouplingExistence where
 
 -- Assembly surface for the one substantive finite-cutoff RG theorem.  A
--- successful inhabitant must supply the generated beta dynamics, its one-
--- sided prefix budget, and a nonvanishing observation-scale window together.
+-- successful inhabitant must supply the generated history-dependent beta
+-- dynamics, its one-sided prefix budget, and a nonvanishing observation-scale
+-- window together.
 -- It cannot close the CMP 122 premise merely by choosing a rapidly vanishing
 -- bare coupling independently of the beta calculation.
 
@@ -48,7 +49,10 @@ record BalabanRenormalisedCouplingConstruction : Set₁ where
 
     -- The following observation-scale fields are the output of the tuning
     -- argument (continuity plus endpoint bracketing in the intended proof).
-    -- They prevent a schedule from becoming physically vacuous.
+    -- They prevent a schedule from becoming physically vacuous.  CMP 109
+    -- Theorem 2 is the specialised case observationScale K = K with terminal
+    -- coupling equality; this generic surface deliberately also admits a
+    -- direct shooting or monotonicity construction at another physical scale.
     renormalisedCouplingLower : ℝ
     renormalisedCouplingUpper : ℝ
     lowerPositive : 0ℝ <ℝ renormalisedCouplingLower
