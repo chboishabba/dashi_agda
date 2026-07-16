@@ -20,6 +20,7 @@ Navier--Stokes theorem.
 from __future__ import annotations
 
 import argparse
+import copy
 import importlib.util
 import json
 import math
@@ -73,6 +74,12 @@ def parse_args() -> argparse.Namespace:
                         help="sum_j X_j imposed when --normalization critical")
     parser.add_argument("--target-urms", type=float, default=1.0)
     parser.add_argument("--top-candidates", type=int, default=1)
+    parser.add_argument("--endpoint-prefilter-candidates", type=int, default=0,
+                        help="number of static seeds to rank by a short evolved moving-packet objective")
+    parser.add_argument("--endpoint-prefilter-window-c", type=float, default=0.0,
+                        help="short viscous-window factor for endpoint preselection; zero disables it")
+    parser.add_argument("--moving-packet-radius", type=int, default=1,
+                        help="half-width L of the dynamically centred critical packet")
     parser.add_argument("--backend", choices=("none", "cpu", "gpu"), default="none")
     parser.add_argument("--fft-backend", default="vkfft-vulkan")
     parser.add_argument("--save-every", type=int, default=100)
@@ -190,6 +197,79 @@ def validate_network(args: argparse.Namespace, network: dict[str, Any]) -> None:
             raise ValueError(f"invalid zero-sum network triad: {triad!r}")
 
 
+def phase_graph_geometry(network: dict[str, Any]) -> dict[str, Any]:
+    """Finite triad/mode incidence geometry of the designed feedback graph.
+
+    This is deliberately only the combinatorial phase graph.  The physical
+    channel offsets ``beta_e`` and their holonomies must be extracted from the
+    exact helical interaction coefficients; a graph cycle alone is not a
+    helical-frustration certificate.
+    """
+    modes = sorted({tuple(mode) for triad in network["triads"] for mode in triad["modes"]})
+    mode_columns = {mode: index for index, mode in enumerate(modes)}
+    incidence = np.zeros((len(network["triads"]), len(modes)), dtype=np.int64)
+    nodes = [f"mode:{mode}" for mode in modes] + [f"triad:{index}" for index in range(len(network["triads"]))]
+    parent = {node: node for node in nodes}
+
+    def find(node: str) -> str:
+        while parent[node] != node:
+            parent[node] = parent[parent[node]]
+            node = parent[node]
+        return node
+
+    tree_adjacency: dict[str, list[str]] = {node: [] for node in nodes}
+    cycles: list[list[str]] = []
+
+    def tree_path(start: str, goal: str) -> list[str]:
+        frontier = [start]
+        predecessor: dict[str, str | None] = {start: None}
+        for node in frontier:
+            if node == goal:
+                break
+            for neighbor in tree_adjacency[node]:
+                if neighbor not in predecessor:
+                    predecessor[neighbor] = node
+                    frontier.append(neighbor)
+        path = [goal]
+        while path[-1] != start:
+            previous = predecessor.get(path[-1])
+            if previous is None:
+                raise RuntimeError("cycle edge did not have a spanning-tree path")
+            path.append(previous)
+        return list(reversed(path))
+
+    edge_count = 0
+    for triad_index, triad in enumerate(network["triads"]):
+        triad_node = f"triad:{triad_index}"
+        for mode in triad["modes"]:
+            mode = tuple(mode)
+            incidence[triad_index, mode_columns[mode]] = 1
+            mode_node = f"mode:{mode}"
+            edge_count += 1
+            left, right = find(triad_node), find(mode_node)
+            if left != right:
+                parent[left] = right
+                tree_adjacency[triad_node].append(mode_node)
+                tree_adjacency[mode_node].append(triad_node)
+            else:
+                cycles.append(tree_path(triad_node, mode_node) + [triad_node])
+    component_count = len({find(node) for node in nodes})
+    return {
+        "mode_order": [list(mode) for mode in modes],
+        "triad_mode_incidence_matrix": incidence.tolist(),
+        "triad_mode_incidence_rank": int(np.linalg.matrix_rank(incidence.astype(np.float64))),
+        "bipartite_vertex_count": len(nodes),
+        "bipartite_edge_count": edge_count,
+        "bipartite_component_count": component_count,
+        "cycle_space_dimension": edge_count - len(nodes) + component_count,
+        "cycle_basis": cycles,
+        "helical_coupling_holonomy": {
+            "status": "not_yet_computed",
+            "reason": "requires exact complex helical-channel coefficients, not only triad/mode topology",
+        },
+    }
+
+
 def add_reality_symmetric_helical_mode(
     raw_hat: np.ndarray, mode: tuple[int, int, int], amplitude: float, phase: float, helicity: int,
 ) -> None:
@@ -219,6 +299,11 @@ def normalise_critical_mass(raw_hat: np.ndarray, critical_mass: float) -> np.nda
     return raw_hat * math.sqrt(critical_mass / observed_mass)
 
 
+def packet_max_shell(norm: np.ndarray) -> int:
+    """Include every nonzero lattice mode in the finite carrier packet ledger."""
+    return int(math.ceil(math.log2(float(np.max(norm)) + 1.0)))
+
+
 def build_candidate(args: argparse.Namespace, network: dict[str, Any], phases: np.ndarray) -> np.ndarray:
     variable_entries = [entry for entry in network["entries"] if "fixed_phase" not in entry]
     if len(phases) != len(variable_entries):
@@ -243,9 +328,9 @@ def static_metrics(args: argparse.Namespace, raw_hat: np.ndarray, wave: np.ndarr
     field_hat = raw_to_field_hat(raw_hat, wave, norm_sq)
     dealias = component_dealias_mask(wave, args.n)
     nonlinear_hat = reconstructed_nonlinear_rhs(field_hat, wave, norm_sq, dealias)
-    packets = dyadic_shell_packets(field_hat, norm, args.target_shell)
-    dissipations = shell_dissipation(field_hat, norm_sq, norm, args.target_shell)
-    nonlinear_rates = shell_nonlinear_rate(field_hat, nonlinear_hat, norm, args.target_shell)
+    packets = dyadic_shell_packets(field_hat, norm, packet_max_shell(norm))
+    dissipations = shell_dissipation(field_hat, norm_sq, norm, packet_max_shell(norm))
+    nonlinear_rates = shell_nonlinear_rate(field_hat, nonlinear_hat, norm, packet_max_shell(norm))
     target_packet = float(packets[args.target_shell])
     target_dissipation = float(dissipations[args.target_shell])
     target_nonlinear = float(nonlinear_rates[args.target_shell])
@@ -268,18 +353,25 @@ def packet_shape_metrics(
     norm: np.ndarray,
     network: dict[str, Any],
     reference_network_vector: np.ndarray | None,
-) -> dict[str, float]:
+) -> dict[str, Any]:
     """Packet and designed-network telemetry at one exact solver checkpoint.
 
-    ``network_correlation_direct`` does not quotient translations or lattice
-    rotations.  It is a conservative first recurrence score; a symmetry-
-    reduced relative-periodic-orbit search would be a later, stronger audit.
+    The three target phases are fixed at the three independent modes
+    ``(4,0,0)``, ``(0,4,0)``, ``(0,0,4)``.  That removes the three translation
+    phase gauges from the phase search.  The checkpoint telemetry additionally
+    reports the full-field correlation maximised over discrete translations.
+    It does not quotient lattice rotations; those are intentionally left for a
+    later relative-periodic-orbit search.
     """
-    packets = dyadic_shell_packets(field_hat, norm, args.target_shell)
+    packets = dyadic_shell_packets(field_hat, norm, packet_max_shell(norm))
     target = float(packets[args.target_shell])
     lower = max(0, args.target_shell - 1)
     upper = min(len(packets), args.target_shell + 2)
     total = float(np.sum(packets))
+    dominant_shell = int(np.argmax(packets))
+    moving_lower = max(0, dominant_shell - args.moving_packet_radius)
+    moving_upper = min(len(packets), dominant_shell + args.moving_packet_radius + 1)
+    moving_packet = float(np.sum(packets[moving_lower:moving_upper]))
     coordinates: list[np.ndarray] = []
     support_energy = 0.0
     all_energy = float(np.sum(np.abs(field_hat) ** 2))
@@ -300,11 +392,45 @@ def packet_shape_metrics(
         "target_packet": target,
         "target_packet_dominance": target / float(np.max(packets)) if np.max(packets) > 0.0 else math.nan,
         "target_packet_local_tightness": float(np.sum(packets[lower:upper])) / total if total > 0.0 else math.nan,
+        "shell_packets": [float(value) for value in packets],
+        "dominant_shell": dominant_shell,
+        "moving_packet": moving_packet,
+        "moving_packet_fraction": moving_packet / total if total > 0.0 else math.nan,
         "designed_network_energy_fraction": support_energy / all_energy if all_energy > 1.0e-30 else math.nan,
         "support_leakage_fraction": 1.0 - support_energy / all_energy if all_energy > 1.0e-30 else math.nan,
         "network_correlation_direct": correlation,
         "_network_vector": vector,
     }
+
+
+def translation_max_correlation(reference: np.ndarray, current: np.ndarray) -> float:
+    """Correlation modulo the discrete torus translations of the full field.
+
+    For a translation ``x0``, Fourier coefficients gain ``exp(i k . x0)``.
+    The inverse FFT of the cross spectrum evaluates every discrete translation
+    simultaneously, so this is exact on the finite N^3 Galerkin carrier.
+    """
+    reference_norm = float(np.linalg.norm(reference))
+    current_norm = float(np.linalg.norm(current))
+    if reference_norm <= 1.0e-30 or current_norm <= 1.0e-30:
+        return math.nan
+    cross_spectrum = np.sum(np.conjugate(reference) * current, axis=0)
+    correlations = np.fft.ifftn(cross_spectrum) * float(reference.shape[1] ** 3)
+    return float(np.max(np.abs(correlations)) / (reference_norm * current_norm))
+
+
+def moving_packet_from_packets(packets: np.ndarray, radius: int) -> tuple[int, float]:
+    centre = int(np.argmax(packets))
+    return centre, float(np.sum(packets[max(0, centre - radius):min(len(packets), centre + radius + 1)]))
+
+
+def heat_packet_ledger(
+    initial_field: np.ndarray, norm_sq: np.ndarray, norm: np.ndarray, nu: float, delta_t: float,
+) -> np.ndarray:
+    return np.asarray([
+        heat_continued_packet(initial_field, norm_sq, norm, shell, nu, delta_t)
+        for shell in range(packet_max_shell(norm) + 1)
+    ], dtype=np.float64)
 
 
 def load_cfd_module(args: argparse.Namespace) -> Any:
@@ -337,15 +463,19 @@ def evolve_candidate(
     initial_shape = packet_shape_metrics(args, initial_field, norm, network, None)
     reference_network_vector = initial_shape.pop("_network_vector")
     initial_packet = float(initial_shape["target_packet"])
-    heat_packets = [heat_continued_packet(
-        initial_field, norm_sq, norm, args.target_shell, args.nu, window * actual_window_time
+    initial_moving_packet = float(initial_shape["moving_packet"])
+    heat_ledgers = [heat_packet_ledger(
+        initial_field, norm_sq, norm, args.nu, window * actual_window_time
     ) for window in range(args.windows + 1)]
+    heat_packets = [float(ledger[args.target_shell]) for ledger in heat_ledgers]
+    heat_moving = [moving_packet_from_packets(ledger, args.moving_packet_radius) for ledger in heat_ledgers]
     history: list[dict[str, float]] = []
 
     def record(step: int, current_raw: np.ndarray) -> None:
         current_field = raw_to_field_hat(current_raw, wave, norm_sq)
         shape = packet_shape_metrics(args, current_field, norm, network, reference_network_vector)
         shape.pop("_network_vector")
+        shape["translation_max_correlation_full_field"] = translation_max_correlation(initial_field, current_field)
         nonlinear = reconstructed_nonlinear_rhs(current_field, wave, norm_sq, component_dealias_mask(wave, args.n))
         dissipation = shell_dissipation(current_field, norm_sq, norm, args.target_shell)[args.target_shell]
         nonlinear_rate = shell_nonlinear_rate(current_field, nonlinear, norm, args.target_shell)[args.target_shell]
@@ -375,7 +505,10 @@ def evolve_candidate(
     window_rows = [row for row in history if int(row["step"]) % window_steps == 0]
     ratios = [float(window_rows[index + 1]["target_packet"] / window_rows[index]["target_packet"])
               for index in range(len(window_rows) - 1)]
-    log_score = float(np.mean(np.log(ratios))) if ratios and all(value > 0.0 for value in ratios) else math.nan
+    moving_ratios = [float(window_rows[index + 1]["moving_packet"] / window_rows[index]["moving_packet"])
+                     for index in range(len(window_rows) - 1)]
+    log_score = (float(np.mean(np.log(moving_ratios)))
+                 if moving_ratios and all(value > 0.0 for value in moving_ratios) else math.nan)
     times = np.asarray([row["time"] for row in history], dtype=np.float64)
     nonlinear_rates = np.asarray([row["target_nonlinear_rate"] for row in history], dtype=np.float64)
     dissipations = np.asarray([row["target_dissipation"] for row in history], dtype=np.float64)
@@ -383,6 +516,9 @@ def evolve_candidate(
     nonlinear_positive = float(np.trapezoid(np.maximum(nonlinear_rates, 0.0), times))
     nonlinear_negative = float(-np.trapezoid(np.minimum(nonlinear_rates, 0.0), times))
     final_packet = float(window_rows[-1]["target_packet"])
+    final_moving_packet = float(window_rows[-1]["moving_packet"])
+    final_dominant_shell = int(window_rows[-1]["dominant_shell"])
+    heat_final_centre, heat_final_moving = heat_moving[-1]
     return {
         "steps": steps,
         "nominal_window_time": nominal_window_time,
@@ -391,10 +527,24 @@ def evolve_candidate(
         "actual_time": actual_time,
         "initial_packet": initial_packet,
         "heat_only_packets_exact_spectrum": heat_packets,
+        "heat_only_shell_packets_exact_spectrum": [[float(value) for value in ledger] for ledger in heat_ledgers],
+        "heat_only_moving_packet_centres": [int(centre) for centre, _ in heat_moving],
+        "heat_only_moving_packets_exact_spectrum": [float(value) for _, value in heat_moving],
         "final_packet": final_packet,
         "endpoint_recurrence_ratio": final_packet / initial_packet,
         "endpoint_heat_compensated_ratio": final_packet / heat_packets[-1] if heat_packets[-1] > 1.0e-30 else math.nan,
         "window_recurrence_ratios": ratios,
+        "initial_moving_packet": initial_moving_packet,
+        "final_moving_packet": final_moving_packet,
+        "moving_packet_recurrence_ratio": final_moving_packet / initial_moving_packet,
+        "moving_packet_heat_compensated_ratio": (final_moving_packet / heat_final_moving
+                                                   if heat_final_moving > 1.0e-30 else math.nan),
+        "moving_window_recurrence_ratios": moving_ratios,
+        "min_moving_window_recurrence_ratio": min(moving_ratios) if moving_ratios else math.nan,
+        "initial_dominant_shell": int(window_rows[0]["dominant_shell"]),
+        "final_dominant_shell": final_dominant_shell,
+        "moving_packet_scale_displacement": final_dominant_shell - int(window_rows[0]["dominant_shell"]),
+        "heat_final_dominant_shell": int(heat_final_centre),
         "min_window_recurrence_ratio": min(ratios) if ratios else math.nan,
         "mean_log_window_recurrence": log_score,
         "nonlinear_positive_over_viscous_loss": nonlinear_positive / viscous_loss if viscous_loss > 1.0e-30 else math.nan,
@@ -411,8 +561,11 @@ def main() -> None:
         raise ValueError("n >= 24, positive nu/dt/windows/candidates, and phase-samples > 0 are required")
     if args.critical_mass <= 0.0 or args.target_urms <= 0.0:
         raise ValueError("critical-mass and target-urms must be positive")
+    if args.moving_packet_radius < 0 or args.endpoint_prefilter_candidates < 0:
+        raise ValueError("moving-packet-radius and endpoint-prefilter-candidates must be nonnegative")
     network = network_spec(args)
     validate_network(args, network)
+    phase_geometry = phase_graph_geometry(network)
     variable_dimension = sum("fixed_phase" not in entry for entry in network["entries"])
     wave, norm = frequency_grid(args.n)
     norm_sq = norm * norm
@@ -423,11 +576,37 @@ def main() -> None:
         raw_hat = build_candidate(args, network, phases)
         metrics = static_metrics(args, raw_hat, wave, norm, norm_sq)
         candidates.append({"sample": sample, "phases": [float(value) for value in phases], **metrics})
-    # Positive nonlinear inflow into the target shell is the inexpensive
-    # phase-only prefilter.  Endpoint recurrence remains authoritative when
-    # an evolution backend is requested.
+    # Positive nonlinear inflow into the target shell is only the cheapest
+    # first filter.  An optional short evolved prefilter then ranks those
+    # seeds by the actual moving-packet endpoint objective before any full
+    # viscous-window run.  Neither stage is global endpoint optimisation.
     candidates.sort(key=lambda row: float(row["target_nonlinear_rate"]), reverse=True)
     selected = candidates[:args.top_candidates]
+    prefilter_rows: list[dict[str, Any]] = []
+    if args.backend != "none" and args.endpoint_prefilter_candidates > 0:
+        if args.endpoint_prefilter_window_c <= 0.0:
+            raise ValueError("--endpoint-prefilter-window-c must be positive when endpoint prefiltering is enabled")
+        prefilter_args = copy.copy(args)
+        prefilter_args.window_c = args.endpoint_prefilter_window_c
+        prefilter_args.windows = 1
+        for rank, candidate in enumerate(candidates[:args.endpoint_prefilter_candidates]):
+            started = time.perf_counter()
+            endpoint = evolve_candidate(
+                prefilter_args, network, build_candidate(args, network, np.asarray(candidate["phases"])),
+                wave, norm, norm_sq,
+            )
+            prefilter_rows.append({
+                "rank_by_initial_inflow": rank,
+                "sample": candidate["sample"],
+                "phases": candidate["phases"],
+                "endpoint_prefilter": endpoint,
+                "elapsed_seconds": time.perf_counter() - started,
+            })
+        prefilter_rows.sort(
+            key=lambda row: float(row["endpoint_prefilter"]["moving_packet_recurrence_ratio"]), reverse=True
+        )
+        selected_samples = {int(row["sample"]) for row in prefilter_rows[:args.top_candidates]}
+        selected = [candidate for candidate in candidates if int(candidate["sample"]) in selected_samples]
     endpoint_rows: list[dict[str, Any]] = []
     if args.backend != "none":
         for rank, candidate in enumerate(selected):
@@ -442,7 +621,9 @@ def main() -> None:
                 ),
                 "elapsed_seconds": time.perf_counter() - started,
             })
-        endpoint_rows.sort(key=lambda row: float(row["endpoint"]["min_window_recurrence_ratio"]), reverse=True)
+        endpoint_rows.sort(
+            key=lambda row: float(row["endpoint"]["min_moving_window_recurrence_ratio"]), reverse=True
+        )
     payload = {
         "contract": "ns_phase_locked_packet_adversarial_search",
         "authority": authority(),
@@ -450,15 +631,19 @@ def main() -> None:
         "topology": network | {
             "phase_dimension": variable_dimension,
             "constraints": "reality symmetric, divergence free helical modes, componentwise 2/3 dealiased N32 support, fixed amplitudes and declared global normalization",
+            "translation_phase_gauge": "fixed phases of (4,0,0), (0,4,0), (0,0,4) remove the three translation gauges for the cyclic graph",
+            "phase_graph_geometry": phase_geometry,
         },
         "objective": {
             "static_prefilter": "maximize initial nonlinear target-shell inflow only to seed an endpoint search",
-            "endpoint": "maximize min_m X_j((m+1)T) / X_j(mT), T = c * 2^(-2j) / nu",
-            "secondary_endpoint": "maximize mean log window recurrence",
-            "warning": "this version samples phase candidates and evolves only the prefiltered subset; it is not global endpoint optimization",
+            "endpoint": "maximize min_m P_L((m+1)T) / P_L(mT), where P_L follows the dominant shell and T = c * 2^(-2j) / nu",
+            "secondary_endpoint": "maximize mean log moving-packet recurrence",
+            "translation_quotient": "checkpoint correlation is maximised over discrete torus translations; lattice rotations are not quotiented",
+            "warning": "this version samples phase candidates and evolves only a staged prefiltered subset; it is not global endpoint optimization",
         },
         "inputs": vars(args) | {"cfd_root": str(args.cfd_root), "output_json": str(args.output_json)},
         "static_candidates_ranked": candidates,
+        "endpoint_prefilter_evolutions": prefilter_rows,
         "endpoint_evolutions": endpoint_rows,
         "decision": "candidate-only adversarial search; any apparent recurrence is a finite numerical lead requiring independent reproduction, not a Navier--Stokes theorem.",
     }

@@ -2,6 +2,19 @@
 
 ## Current Tranche Closure Snapshot
 
+- 2026-07-16 NS cyclic-feedback adversarial packet search: the N32 `j=2`
+  graph now fixes the three coordinate target phases as a translation gauge,
+  uses the correct full viscous window `T=2^(-4)/nu=62.5` at `nu=.001`, and
+  measures a moving all-shell packet `P_L` plus exact heat ledger, scale
+  displacement, and translation-quotiented correlation.  A staged short
+  evolved endpoint prefilter is implemented.  Static/CPU smoke checks pass.
+  The currently live GPU run predates these changes and is only a one-window,
+  static-inflow-seeded fixed-packet calibration; it cannot answer the actual
+  endpoint-optimization or moving-packet question.  No NS/BKM/Clay gate moved.
+  The script also emits the rank-9 triad/mode incidence and its one-dimensional
+  feedback cycle; exact helical channel holonomy is intentionally marked
+  uncomputed rather than inferred from topology.
+
 - 2026-07-02 NS Gate 1 / Gate 2-A progress sync:
   Gate 1 is no longer a shell-search problem. The helical coupling certificate
   `Q_N = D_N + E_N` with
