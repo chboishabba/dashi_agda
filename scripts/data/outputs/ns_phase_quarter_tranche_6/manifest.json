@@ -1,0 +1,575 @@
+{
+  "allocation_families": [
+    {
+      "name": "balanced",
+      "role_shares": {
+        "donor": 0.25,
+        "feedback": 0.2,
+        "outlet": 0.25,
+        "target": 0.3
+      },
+      "selected_backbone_cases": [
+        {
+          "backbone_signs": {
+            "(0, 0, 4)": -1,
+            "(0, 4, 0)": -1,
+            "(0, 6, 6)": 1,
+            "(4, 0, 0)": -1,
+            "(6, 0, 6)": 1,
+            "(6, 6, 0)": 1
+          },
+          "independently_maximized_envelope_sum": 0.03557997913456043,
+          "rank": 0
+        }
+      ],
+      "selected_backbone_ranks": [
+        0
+      ],
+      "skipped_infeasible_backbone_ranks": [],
+      "static_audit_contract": "The ranking is an upper-envelope screen, not a phase optimization or an endpoint prediction. Local choices retain coupling phase because maximal magnitude alone can destroy network compatibility."
+    },
+    {
+      "name": "donor-heavy",
+      "role_shares": {
+        "donor": 0.4,
+        "feedback": 0.2,
+        "outlet": 0.15,
+        "target": 0.25
+      },
+      "selected_backbone_cases": [
+        {
+          "backbone_signs": {
+            "(0, 0, 4)": -1,
+            "(0, 4, 0)": -1,
+            "(0, 6, 6)": 1,
+            "(4, 0, 0)": -1,
+            "(6, 0, 6)": 1,
+            "(6, 6, 0)": 1
+          },
+          "independently_maximized_envelope_sum": 0.03244267700556227,
+          "rank": 0
+        }
+      ],
+      "selected_backbone_ranks": [
+        0
+      ],
+      "skipped_infeasible_backbone_ranks": [],
+      "static_audit_contract": "The ranking is an upper-envelope screen, not a phase optimization or an endpoint prediction. Local choices retain coupling phase because maximal magnitude alone can destroy network compatibility."
+    },
+    {
+      "name": "feedback-heavy",
+      "role_shares": {
+        "donor": 0.2,
+        "feedback": 0.4,
+        "outlet": 0.15,
+        "target": 0.25
+      },
+      "selected_backbone_cases": [
+        {
+          "backbone_signs": {
+            "(0, 0, 4)": -1,
+            "(0, 4, 0)": -1,
+            "(0, 6, 6)": 1,
+            "(4, 0, 0)": -1,
+            "(6, 0, 6)": 1,
+            "(6, 6, 0)": 1
+          },
+          "independently_maximized_envelope_sum": 0.0261510005872147,
+          "rank": 0
+        }
+      ],
+      "selected_backbone_ranks": [
+        0
+      ],
+      "skipped_infeasible_backbone_ranks": [],
+      "static_audit_contract": "The ranking is an upper-envelope screen, not a phase optimization or an endpoint prediction. Local choices retain coupling phase because maximal magnitude alone can destroy network compatibility."
+    },
+    {
+      "name": "target-heavy",
+      "role_shares": {
+        "donor": 0.2,
+        "feedback": 0.15,
+        "outlet": 0.15,
+        "target": 0.5
+      },
+      "selected_backbone_cases": [
+        {
+          "backbone_signs": {
+            "(0, 0, 4)": -1,
+            "(0, 4, 0)": -1,
+            "(0, 6, 6)": 1,
+            "(4, 0, 0)": -1,
+            "(6, 0, 6)": 1,
+            "(6, 6, 0)": 1
+          },
+          "independently_maximized_envelope_sum": 0.03167321976147281,
+          "rank": 0
+        }
+      ],
+      "selected_backbone_ranks": [
+        0
+      ],
+      "skipped_infeasible_backbone_ranks": [],
+      "static_audit_contract": "The ranking is an upper-envelope screen, not a phase optimization or an endpoint prediction. Local choices retain coupling phase because maximal magnitude alone can destroy network compatibility."
+    },
+    {
+      "name": "outlet-suppressed",
+      "role_shares": {
+        "donor": 0.3,
+        "feedback": 0.3,
+        "outlet": 0.05,
+        "target": 0.35
+      },
+      "selected_backbone_cases": [
+        {
+          "backbone_signs": {
+            "(0, 0, 4)": -1,
+            "(0, 4, 0)": -1,
+            "(0, 6, 6)": 1,
+            "(4, 0, 0)": -1,
+            "(6, 0, 6)": 1,
+            "(6, 6, 0)": 1
+          },
+          "independently_maximized_envelope_sum": 0.024825685493830487,
+          "rank": 0
+        }
+      ],
+      "selected_backbone_ranks": [
+        0
+      ],
+      "skipped_infeasible_backbone_ranks": [],
+      "static_audit_contract": "The ranking is an upper-envelope screen, not a phase optimization or an endpoint prediction. Local choices retain coupling phase because maximal magnitude alone can destroy network compatibility."
+    },
+    {
+      "name": "outlet-enabled",
+      "role_shares": {
+        "donor": 0.2,
+        "feedback": 0.2,
+        "outlet": 0.35,
+        "target": 0.25
+      },
+      "selected_backbone_cases": [
+        {
+          "backbone_signs": {
+            "(0, 0, 4)": -1,
+            "(0, 4, 0)": -1,
+            "(0, 6, 6)": 1,
+            "(4, 0, 0)": -1,
+            "(6, 0, 6)": 1,
+            "(6, 6, 0)": 1
+          },
+          "independently_maximized_envelope_sum": 0.03670850214913298,
+          "rank": 0
+        }
+      ],
+      "selected_backbone_ranks": [
+        0
+      ],
+      "skipped_infeasible_backbone_ranks": [],
+      "static_audit_contract": "The ranking is an upper-envelope screen, not a phase optimization or an endpoint prediction. Local choices retain coupling phase because maximal magnitude alone can destroy network compatibility."
+    }
+  ],
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "theorem_authority": false
+  },
+  "contract": "ns_phase_locked_packet_staged_screen_plan",
+  "decision": "candidate-only experimental task plan; execution is intentionally external and explicit",
+  "next_selection_protocol": [
+    "Run only a bounded subset of quarter-window tasks, respecting available CPU/GPU capacity.",
+    "Rank endpoint files by moving-packet survival while preserving allocation and helicity diversity.",
+    "Use gross designed-loop throughput and full-target capture as diagnostics, not a replacement score.",
+    "Promote only selected survivors to half/full windows after inspecting the generated results."
+  ],
+  "quarter_window": {
+    "endpoint_metric": "moving_packet_recurrence_ratio is primary; designed role ledger and target capture are explanatory telemetry",
+    "nominal_time": 15.625,
+    "window_c": 0.25
+  },
+  "scope": "allocation-aware static pure-helicity seeds followed by single exact phase-stream quarter-window endpoint tasks; no global optimisation, recurrence theorem, or NS estimate",
+  "selection_rule": {
+    "backbone_count": 1,
+    "rule": "rank-0 envelope seed plus greedy maximum Hamming separation inside the allocation-specific top static pool",
+    "static_pool": 32,
+    "warning": "static sign diversity is a scheduling heuristic, not a physical equivalence or endpoint predictor"
+  },
+  "status": "planned_not_executed",
+  "task_count": 6,
+  "tasks": [
+    {
+      "allocation": "balanced",
+      "command": [
+        "/usr/bin/python3",
+        "scripts/ns_phase_locked_packet_search.py",
+        "--backend",
+        "gpu",
+        "--fft-backend",
+        "vkfft-vulkan",
+        "--n",
+        "32",
+        "--nu",
+        "0.001",
+        "--dt",
+        "0.001",
+        "--target-shell",
+        "2",
+        "--window-c",
+        "0.25",
+        "--windows",
+        "1",
+        "--normalization",
+        "critical",
+        "--critical-mass",
+        "1.0",
+        "--role-shares",
+        "0.3,0.25,0.25,0.2",
+        "--target-dominance-min",
+        "0.1",
+        "--local-tightness-min",
+        "0.2",
+        "--role-share-min",
+        "0.05",
+        "--moving-packet-radius",
+        "1",
+        "--helicity-static-case",
+        "0",
+        "--phase-samples",
+        "1",
+        "--phase-sample-index",
+        "0",
+        "--seed",
+        "20260716",
+        "--top-candidates",
+        "1",
+        "--save-every",
+        "250",
+        "--output-json",
+        "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_balanced_rank00_phase000.json"
+      ],
+      "helicity_static_rank": 0,
+      "output_json": "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_balanced_rank00_phase000.json",
+      "phase_sample_index": 0,
+      "role_shares": {
+        "donor": 0.25,
+        "feedback": 0.2,
+        "outlet": 0.25,
+        "target": 0.3
+      },
+      "shell_command": "/usr/bin/python3 scripts/ns_phase_locked_packet_search.py --backend gpu --fft-backend vkfft-vulkan --n 32 --nu 0.001 --dt 0.001 --target-shell 2 --window-c 0.25 --windows 1 --normalization critical --critical-mass 1.0 --role-shares 0.3,0.25,0.25,0.2 --target-dominance-min 0.1 --local-tightness-min 0.2 --role-share-min 0.05 --moving-packet-radius 1 --helicity-static-case 0 --phase-samples 1 --phase-sample-index 0 --seed 20260716 --top-candidates 1 --save-every 250 --output-json scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_balanced_rank00_phase000.json",
+      "stage": "quarter-window"
+    },
+    {
+      "allocation": "donor-heavy",
+      "command": [
+        "/usr/bin/python3",
+        "scripts/ns_phase_locked_packet_search.py",
+        "--backend",
+        "gpu",
+        "--fft-backend",
+        "vkfft-vulkan",
+        "--n",
+        "32",
+        "--nu",
+        "0.001",
+        "--dt",
+        "0.001",
+        "--target-shell",
+        "2",
+        "--window-c",
+        "0.25",
+        "--windows",
+        "1",
+        "--normalization",
+        "critical",
+        "--critical-mass",
+        "1.0",
+        "--role-shares",
+        "0.25,0.4,0.15,0.2",
+        "--target-dominance-min",
+        "0.1",
+        "--local-tightness-min",
+        "0.2",
+        "--role-share-min",
+        "0.05",
+        "--moving-packet-radius",
+        "1",
+        "--helicity-static-case",
+        "0",
+        "--phase-samples",
+        "1",
+        "--phase-sample-index",
+        "0",
+        "--seed",
+        "20260716",
+        "--top-candidates",
+        "1",
+        "--save-every",
+        "250",
+        "--output-json",
+        "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_donor-heavy_rank00_phase000.json"
+      ],
+      "helicity_static_rank": 0,
+      "output_json": "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_donor-heavy_rank00_phase000.json",
+      "phase_sample_index": 0,
+      "role_shares": {
+        "donor": 0.4,
+        "feedback": 0.2,
+        "outlet": 0.15,
+        "target": 0.25
+      },
+      "shell_command": "/usr/bin/python3 scripts/ns_phase_locked_packet_search.py --backend gpu --fft-backend vkfft-vulkan --n 32 --nu 0.001 --dt 0.001 --target-shell 2 --window-c 0.25 --windows 1 --normalization critical --critical-mass 1.0 --role-shares 0.25,0.4,0.15,0.2 --target-dominance-min 0.1 --local-tightness-min 0.2 --role-share-min 0.05 --moving-packet-radius 1 --helicity-static-case 0 --phase-samples 1 --phase-sample-index 0 --seed 20260716 --top-candidates 1 --save-every 250 --output-json scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_donor-heavy_rank00_phase000.json",
+      "stage": "quarter-window"
+    },
+    {
+      "allocation": "feedback-heavy",
+      "command": [
+        "/usr/bin/python3",
+        "scripts/ns_phase_locked_packet_search.py",
+        "--backend",
+        "gpu",
+        "--fft-backend",
+        "vkfft-vulkan",
+        "--n",
+        "32",
+        "--nu",
+        "0.001",
+        "--dt",
+        "0.001",
+        "--target-shell",
+        "2",
+        "--window-c",
+        "0.25",
+        "--windows",
+        "1",
+        "--normalization",
+        "critical",
+        "--critical-mass",
+        "1.0",
+        "--role-shares",
+        "0.25,0.2,0.15,0.4",
+        "--target-dominance-min",
+        "0.1",
+        "--local-tightness-min",
+        "0.2",
+        "--role-share-min",
+        "0.05",
+        "--moving-packet-radius",
+        "1",
+        "--helicity-static-case",
+        "0",
+        "--phase-samples",
+        "1",
+        "--phase-sample-index",
+        "0",
+        "--seed",
+        "20260716",
+        "--top-candidates",
+        "1",
+        "--save-every",
+        "250",
+        "--output-json",
+        "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_feedback-heavy_rank00_phase000.json"
+      ],
+      "helicity_static_rank": 0,
+      "output_json": "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_feedback-heavy_rank00_phase000.json",
+      "phase_sample_index": 0,
+      "role_shares": {
+        "donor": 0.2,
+        "feedback": 0.4,
+        "outlet": 0.15,
+        "target": 0.25
+      },
+      "shell_command": "/usr/bin/python3 scripts/ns_phase_locked_packet_search.py --backend gpu --fft-backend vkfft-vulkan --n 32 --nu 0.001 --dt 0.001 --target-shell 2 --window-c 0.25 --windows 1 --normalization critical --critical-mass 1.0 --role-shares 0.25,0.2,0.15,0.4 --target-dominance-min 0.1 --local-tightness-min 0.2 --role-share-min 0.05 --moving-packet-radius 1 --helicity-static-case 0 --phase-samples 1 --phase-sample-index 0 --seed 20260716 --top-candidates 1 --save-every 250 --output-json scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_feedback-heavy_rank00_phase000.json",
+      "stage": "quarter-window"
+    },
+    {
+      "allocation": "target-heavy",
+      "command": [
+        "/usr/bin/python3",
+        "scripts/ns_phase_locked_packet_search.py",
+        "--backend",
+        "gpu",
+        "--fft-backend",
+        "vkfft-vulkan",
+        "--n",
+        "32",
+        "--nu",
+        "0.001",
+        "--dt",
+        "0.001",
+        "--target-shell",
+        "2",
+        "--window-c",
+        "0.25",
+        "--windows",
+        "1",
+        "--normalization",
+        "critical",
+        "--critical-mass",
+        "1.0",
+        "--role-shares",
+        "0.5,0.2,0.15,0.15",
+        "--target-dominance-min",
+        "0.1",
+        "--local-tightness-min",
+        "0.2",
+        "--role-share-min",
+        "0.05",
+        "--moving-packet-radius",
+        "1",
+        "--helicity-static-case",
+        "0",
+        "--phase-samples",
+        "1",
+        "--phase-sample-index",
+        "0",
+        "--seed",
+        "20260716",
+        "--top-candidates",
+        "1",
+        "--save-every",
+        "250",
+        "--output-json",
+        "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_target-heavy_rank00_phase000.json"
+      ],
+      "helicity_static_rank": 0,
+      "output_json": "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_target-heavy_rank00_phase000.json",
+      "phase_sample_index": 0,
+      "role_shares": {
+        "donor": 0.2,
+        "feedback": 0.15,
+        "outlet": 0.15,
+        "target": 0.5
+      },
+      "shell_command": "/usr/bin/python3 scripts/ns_phase_locked_packet_search.py --backend gpu --fft-backend vkfft-vulkan --n 32 --nu 0.001 --dt 0.001 --target-shell 2 --window-c 0.25 --windows 1 --normalization critical --critical-mass 1.0 --role-shares 0.5,0.2,0.15,0.15 --target-dominance-min 0.1 --local-tightness-min 0.2 --role-share-min 0.05 --moving-packet-radius 1 --helicity-static-case 0 --phase-samples 1 --phase-sample-index 0 --seed 20260716 --top-candidates 1 --save-every 250 --output-json scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_target-heavy_rank00_phase000.json",
+      "stage": "quarter-window"
+    },
+    {
+      "allocation": "outlet-suppressed",
+      "command": [
+        "/usr/bin/python3",
+        "scripts/ns_phase_locked_packet_search.py",
+        "--backend",
+        "gpu",
+        "--fft-backend",
+        "vkfft-vulkan",
+        "--n",
+        "32",
+        "--nu",
+        "0.001",
+        "--dt",
+        "0.001",
+        "--target-shell",
+        "2",
+        "--window-c",
+        "0.25",
+        "--windows",
+        "1",
+        "--normalization",
+        "critical",
+        "--critical-mass",
+        "1.0",
+        "--role-shares",
+        "0.35,0.3,0.05,0.3",
+        "--target-dominance-min",
+        "0.1",
+        "--local-tightness-min",
+        "0.2",
+        "--role-share-min",
+        "0.05",
+        "--moving-packet-radius",
+        "1",
+        "--helicity-static-case",
+        "0",
+        "--phase-samples",
+        "1",
+        "--phase-sample-index",
+        "0",
+        "--seed",
+        "20260716",
+        "--top-candidates",
+        "1",
+        "--save-every",
+        "250",
+        "--output-json",
+        "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_outlet-suppressed_rank00_phase000.json"
+      ],
+      "helicity_static_rank": 0,
+      "output_json": "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_outlet-suppressed_rank00_phase000.json",
+      "phase_sample_index": 0,
+      "role_shares": {
+        "donor": 0.3,
+        "feedback": 0.3,
+        "outlet": 0.05,
+        "target": 0.35
+      },
+      "shell_command": "/usr/bin/python3 scripts/ns_phase_locked_packet_search.py --backend gpu --fft-backend vkfft-vulkan --n 32 --nu 0.001 --dt 0.001 --target-shell 2 --window-c 0.25 --windows 1 --normalization critical --critical-mass 1.0 --role-shares 0.35,0.3,0.05,0.3 --target-dominance-min 0.1 --local-tightness-min 0.2 --role-share-min 0.05 --moving-packet-radius 1 --helicity-static-case 0 --phase-samples 1 --phase-sample-index 0 --seed 20260716 --top-candidates 1 --save-every 250 --output-json scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_outlet-suppressed_rank00_phase000.json",
+      "stage": "quarter-window"
+    },
+    {
+      "allocation": "outlet-enabled",
+      "command": [
+        "/usr/bin/python3",
+        "scripts/ns_phase_locked_packet_search.py",
+        "--backend",
+        "gpu",
+        "--fft-backend",
+        "vkfft-vulkan",
+        "--n",
+        "32",
+        "--nu",
+        "0.001",
+        "--dt",
+        "0.001",
+        "--target-shell",
+        "2",
+        "--window-c",
+        "0.25",
+        "--windows",
+        "1",
+        "--normalization",
+        "critical",
+        "--critical-mass",
+        "1.0",
+        "--role-shares",
+        "0.25,0.2,0.35,0.2",
+        "--target-dominance-min",
+        "0.1",
+        "--local-tightness-min",
+        "0.2",
+        "--role-share-min",
+        "0.05",
+        "--moving-packet-radius",
+        "1",
+        "--helicity-static-case",
+        "0",
+        "--phase-samples",
+        "1",
+        "--phase-sample-index",
+        "0",
+        "--seed",
+        "20260716",
+        "--top-candidates",
+        "1",
+        "--save-every",
+        "250",
+        "--output-json",
+        "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_outlet-enabled_rank00_phase000.json"
+      ],
+      "helicity_static_rank": 0,
+      "output_json": "scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_outlet-enabled_rank00_phase000.json",
+      "phase_sample_index": 0,
+      "role_shares": {
+        "donor": 0.2,
+        "feedback": 0.2,
+        "outlet": 0.35,
+        "target": 0.25
+      },
+      "shell_command": "/usr/bin/python3 scripts/ns_phase_locked_packet_search.py --backend gpu --fft-backend vkfft-vulkan --n 32 --nu 0.001 --dt 0.001 --target-shell 2 --window-c 0.25 --windows 1 --normalization critical --critical-mass 1.0 --role-shares 0.25,0.2,0.35,0.2 --target-dominance-min 0.1 --local-tightness-min 0.2 --role-share-min 0.05 --moving-packet-radius 1 --helicity-static-case 0 --phase-samples 1 --phase-sample-index 0 --seed 20260716 --top-candidates 1 --save-every 250 --output-json scripts/data/outputs/ns_phase_quarter_tranche_6/quarter_outlet-enabled_rank00_phase000.json",
+      "stage": "quarter-window"
+    }
+  ]
+}

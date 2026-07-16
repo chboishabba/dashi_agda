@@ -1,5 +1,64 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Completed the six rank-0/phase-0 allocation contrasts.  No candidate
+  survives the quarter window; donor-heavy is best at `R_move=.285262` but has
+  `.978228` support leakage and `.014399` designed target capture.  Generated
+  a sign-diverse three-backbone donor-heavy follow-up (`ranks 0, 1, 11`) and
+  launched rank `1` as the first new helicity discriminator.
+
+- Added `ns_phase_locked_packet_staged_screen.py`: a deliberately
+  non-executing planner for the next bounded pure-helicity/allocation screen.
+  It first runs six cheap allocation-aware static factor audits, preserves
+  greedily sign-diverse backbone ranks from a high-envelope pool, then emits
+  one reproducible quarter-window command per `(allocation, backbone rank,
+  phase-stream index)`.  The manifest is a scheduler input, not a CFD result
+  or a static endpoint prediction.  The core search gained
+  `--phase-sample-index`; sample-index reproduction against the ordinary RNG
+  stream, planner smoke, `py_compile`, and `git diff --check` pass.
+
+- Added `ns_phase_locked_packet_screen_collect.py` so partial quarter-window
+  batches can be inspected without collapsing onto one static family.  It
+  ranks completed endpoint files by moving-packet survival, preserves a small
+  diagnostic frontier over loop/capture/loss telemetry, and reports best rows
+  by allocation and helicity seed.  A smoke collection of the CPU telemetry
+  output passed.  This is scheduling instrumentation only.
+
+- Upgraded the N32 cyclic-feedback role ledger from a raw feedback/outlet
+  quotient to gross directed designed-triad throughput.  It now emits the
+  intended `target→outlet→feedback→target` stages, a bounded closure fraction,
+  a three-stage balance, and a separate absolute target-shell capture ratio
+  against the full nonlinear carrier.  Exact designed-triad conservation is
+  expected to persist at roundoff regardless of unplanned-mode population, so
+  it is explicitly not used as a leakage metric.  Quarter-window prefix
+  ledgers were added and a CPU smoke observed residual <= `4.34e-19` at all
+  four checkpoints.  No physical recurrence or theorem claim follows.
+
+- Moved role-share allocation ahead of the amplitude-weighted static helicity
+  audit.  This makes the 64-case envelope seed rank allocation-aware, without
+  claiming phase compatibility, a joint leaf optimum, or dynamic relevance.
+
+- Added the signed reality-reduced phase-constraint audit to the N32 cyclic
+  packet search.  Its nine rows have an exact private-column full-rank
+  certificate, hence left-kernel dimension zero: the graph's one ordinary
+  bipartite cycle is not a static helical phase holonomy.  Added the matching
+  pure-mode-helicity factorization and optional 64-backbone static geometric
+  factor-table audit.  It enumerates 1,536 local channel factors in `.65s`
+  (three donor blocks with four leaf choices and six side blocks with two),
+  retaining coupling phase alongside magnitude.  This only prepares a
+  helicity/amplitude dynamic screen; no CFD run, theorem, or NS gate changed.
+
+- Extended `ns_phase_locked_packet_search.py` with a cheap but reproducible
+  bridge from the 64-case static pure-helicity audit to future CFD screens:
+  a ranked backbone case plus its local envelope-maximising private leaves can
+  be selected explicitly, while four role shares are imposed through the same
+  dyadic finite-carrier mass that the endpoint ledger measures.  A static
+  smoke check verified the requested `(.30,.25,.25,.20)` shares are recovered
+  from the actual reality-paired carrier to floating precision.  This is an
+  experimental seed constructor only; it does not claim that the locally
+  selected leaf phases are jointly compatible or dynamically recurrent.  The
+  integration path also passed a deliberately negligible `0.0001*T` CPU
+  evolution smoke check (`R_move=0.999601...`), which validates wiring only.
+
 - Upgraded the cyclic feedback packet search to prevent a false leakage
   reading from a shell-truncated score.  It now records all finite-carrier
   dyadic packets, a dominant-shell moving packet `P_L`, its exact heat ledger,
@@ -44,6 +103,13 @@
   `-1` and translation-quotiented correlation `.093`.  The short prefilter
   therefore detects transient nonlinear replenishment, not recurrence;
   future endpoint selection must survive a materially longer horizon.
+
+- The `.25*T` prefilter is decisive for the current phase-only realization:
+  its four survivors have moving recurrence `.1123`–`.1140` and
+  heat-compensated `.2729`–`.2772`; selected sample 4 finishes the full window
+  at moving `R=1.47e-3`, `G=1.34e-2`, with downward shell shift.  Retire
+  further phase-only full-window searches for this fixed-amplitude/helicity
+  graph; the next adversary must vary helicity/amplitude or topology.
 
 - Replaced the one-target donor-star-only experiment surface with a selectable
   graph surface in `ns_phase_locked_packet_search.py`.  The new default is a
@@ -5082,6 +5148,24 @@
   `no overclaiming, no fake closures` was absent, so no external manuscript
   prose edit was required.
 
+- 2026-07-16: Extended the finite-Galerkin cyclic-feedback search with a
+  designed-triad role-transfer ledger.  Each saved field now yields a
+  conservative `{target, donor, outlet, feedback}` donor-to-receiver matrix
+  from its nine designed zero-sum triads, using proportional allocation of
+  each triad's modal losses to its modal gains.  Endpoint output integrates
+  this matrix and exposes `feedback -> target / target -> outlet`, while
+  preserving a separate support-leakage reading for all unplanned triads.
+  A CPU short-window smoke produced a maximum modal-triad conservation
+  residual of `4.34e-19`.  This is instrumentation for the upcoming
+  helicity/allocation sweep, not a source-attribution theorem, recurrence
+  witness, or Navier--Stokes promotion.
+
+- 2026-07-16: Validated a second static pure-helicity/allocation point before
+  scheduling costly endpoint work: backbone rank `2`, donor-heavy requested
+  role shares `.25,.40,.15,.20`.  The actual reality-paired dyadic carrier
+  realizes those four shares to roundoff.  This is a constraint-wiring check;
+  no evolved survival or feedback conclusion follows.
+
 - 2026-05-28: Worker A5 integrated the latest Manager A Gate 6 finite
   hexagon/statistics receipts at the aggregate/status boundary.  The Gate 6
   aggregate imports already include the finite local-endomorphism category and
@@ -5219,3 +5303,24 @@
   Math Mysticism Breakdown` supplies 369/supervoxel/anisotropy/twist grammar.
   Personal/no-title execution and hygiene traces are recorded as reviewed but
   not consumed as evidence.
+# 2026-07-16 NS quarter-window manifest contract repair
+
+- Started one balanced N32 `j=2`, `0.25T` GPU sentinel from the staged
+  pure-helicity/role-allocation manifest.  Kept execution capped while an
+  unrelated Agda check is active; no incomplete receipt is interpreted.
+- Fixed the manifest/search admissibility mismatch exposed by the first
+  outlet-suppressed launch attempt.  The staged planner now replays the exact
+  no-CFD task contract for each selected helicity rank and schedules only
+  admissible phase streams.  Search-side equality-at-a-role-floor comparisons
+  now allow only `1e-12` floating representation slack.  `py_compile`, exact
+  outlet-floor replay, and six-allocation manifest regression passed.
+- Balanced quarter-window result: `R_move=.1907635`, heat-compensated
+  `G_move=.3614812`, negative/positive target transfer over viscous loss
+  `1.19223/.02017`, designed-loop closure `1.25e-4`, designed target activity
+  capture `.01298`, support leakage `.97577`.  It is a null for one static
+  rank/phase seed only.  Launched the admissible outlet-suppressed contrast
+  after the scheduler repair.
+- Outlet-suppressed result: `R_move=.165708`, `G_move=.353406`, target capture
+  `.009602`, support leakage `.974496`; it underperforms the balanced seed.
+  Started the feedback-heavy quarter-window contrast to test whether return
+  channel mass, rather than outlet mass, is the limiting feature.

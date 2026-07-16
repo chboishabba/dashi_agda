@@ -1,4 +1,111 @@
+# 2026-07-16 NS quarter-window execution guard
+
+- Began the first bounded GPU quarter-window sentinel from the staged
+  pure-helicity/allocation manifest: balanced allocation, allocation-specific
+  static rank `0`, deterministic phase stream `0`.  It is intentionally only
+  one live CFD task while an unrelated parallel Agda check occupies several
+  CPU cores; no endpoint result is available yet.
+- Repaired a manifest correctness defect before launching the contrasting
+  outlet-suppressed task.  The planner had ranked static helicity envelopes
+  without replaying the exact dominance/tightness/role-floor contract of the
+  scheduled command.  It now performs a cheap exact `backend=none` replay per
+  selected rank and emits only phase streams that are admissible.  The search
+  also treats `0.04999999999999999` as the declared `0.05` role floor within
+  a `1e-12` representation tolerance.  A six-allocation manifest regression
+  passes; this is scheduler hygiene, not an NS result.
+- The completed balanced sentinel is an early null for its one selected seed:
+  at the exact quarter window it has moving-packet retention `.19076`,
+  heat-compensated retention `.36148`, negative/positive target transfer over
+  viscous loss `1.192/.0202`, designed-loop closure `1.25e-4`, and only
+  `.01298` designed-versus-full target activity capture.  Its `~.976` support
+  leakage means the nine-triad graph rapidly ceases to capture full target
+  dynamics.  This rejects only that seed; it does not retire the allocation,
+  pure-helicity family, topology, or any NS mechanism.  The admissible
+  outlet-suppressed contrast is now running.
+- The outlet-suppressed contrast completed with no improvement: `R_move=.16571`
+  versus the balanced `.19076`, heat-compensated `.35341`, capture `.00960`,
+  and support leakage `.97450`.  Lowering initial outlet mass is therefore not
+  a credible explanation for the balanced seed's rapid loss in this tested
+  rank/phase pair.  The next serial contrast is feedback-heavy allocation.
+
+- Completed the six-regime coarse allocation screen at one static rank and
+  phase stream per regime.  None is a quarter-window survivor.  Donor-heavy
+  is the empirical lead (`R_move=.28526`, positive/negative target transfer
+  over viscous `.3909/.8332`), but still has `.97823` support leakage and only
+  `.01440` target capture.  The other five allocations lie in
+  `R_move=.14893..191`.  The next bounded discriminator is sign-diverse
+  backbone helicity within donor-heavy, beginning with rank `1`.
+
 # 2026-07-16 finite Fourier triad-cancellation seam
+
+- Refined the cyclic-feedback role ledger into the correct diagnostic split.
+  Its integrated matrix is a nonnegative gross directed throughput convention,
+  so it now reports `T→O`, `O→F`, `F→T`, a bounded loop-closure fraction, and
+  an intended-loop balance rather than relying only on a signed ratio.  It
+  separately measures the absolute target-shell nonlinear activity captured
+  by the nine designed triads against the full target-shell nonlinear activity.
+  The designed-triad conservation residual remains an implementation receipt,
+  not a support-leakage measurement; quarter-window prefix ledgers make both
+  quantities available throughout an endpoint window.  A CPU smoke at four
+  exact quarter checkpoints retained residual at most `4.34e-19`.  This
+  validates telemetry only; its small capture on that short smoke is neither
+  a topology verdict nor a recurrence claim.
+
+- Corrected the static helicity seed ordering so requested role mass shares
+  are applied before the amplitude-weighted factor audit.  Thus each coarse
+  allocation regime receives an honest allocation-specific envelope ranking.
+  The ranking remains only a cheap phase-unoptimized seed, and no NS/BKM/Clay
+  gate changed.
+
+- Audited the current three-target cyclic graph at the *signed,
+  reality-reduced phase-constraint* level rather than mistaking its ordinary
+  bipartite graph cycle for physical holonomy.  The nine channel constraints
+  have rank nine and zero left kernel: every triad retains at least one private
+  mode, furnishing a diagonal nonzero minor.  Thus this topology cannot yield
+  a static phase-frustration theorem from graph sharing alone, although it can
+  still test dynamical relocking.  The script now emits this exact certificate
+  and a pure-mode-helicity factorization: six shared backbone modes give 64
+  coupled sign assignments, while the full 18-mode pure-helicity space has
+  262,144 assignments and separates into local donor-pair/four-choice and
+  side-leaf/two-choice blocks.  An optional static factor audit evaluates the
+  resulting 1,536 local geometric channel factors in under one second; it is
+  an envelope screen only, not phase optimization, CFD evolution, or a
+  Waleffe-class/holonomy theorem.  The next high-alpha evolution screen must
+  vary those mode helicities and admissible amplitude shares; it should not
+  spend further full windows on the already-rejected phase-only realization.
+
+- Added a reproducible pure-helicity/role-mass candidate surface to
+  `scripts/ns_phase_locked_packet_search.py`.  `--helicity-static-case` picks
+  one of the 64 backbone factor-table cases and records its full mode signs;
+  `--role-shares target,donor,outlet,feedback` rescales the actual
+  reality-paired dyadic carrier before the common critical normalization.
+  Realised shares are recomputed from that carrier, and target-dominance,
+  local-tightness, and minimum-role-share floors are explicit admission
+  constraints.  The selected private-leaf choices remain only an
+  independently-maximal-envelope seed, not joint phase optimization, mixed
+  polarization, a recurrence result, or an NS theorem.  `py_compile`,
+  static-carrier allocation, and a one-step-equivalent CPU evolution smoke
+  test passed; no full-window GPU result has been generated from this enlarged
+  family.
+
+- Added a designed-network role-transfer ledger to the evolved packet search.
+  At every saved solver state the nine intended triads are decomposed into
+  their three modal transfers; each triad's negative modal changes are
+  allocated to positive modal changes proportionally, yielding a conservative
+  donor-to-receiver matrix on `{target, donor, outlet, feedback}`.  Its time
+  integral now reports `feedback -> target`, `target -> outlet`, and their
+  ratio, with a retained per-triad conservation residual.  This deliberately
+  excludes unplanned convolution triads, whose effect remains visible through
+  full packet telemetry and support leakage.  A CPU evolution smoke check had
+  maximum triad residual `4.34e-19`; it validates the ledger wiring, not
+  feedback efficiency or recurrence.
+
+- A second static allocation check used helicity rank `2` with donor-heavy
+  requested shares `.25,.40,.15,.20`; the realised finite-carrier shares were
+  `.25,.40,.15,.20` to floating roundoff.  This confirms that the coarse
+  simplex configurations are actual hard initial-state constraints rather
+  than penalty terms.  No quarter-window or full-window result is inferred
+  from this static check.
 
 - Strengthened the cyclic-feedback adversarial packet search before
   interpreting its one-window calibration.  The `j=2` viscous window is now
@@ -60,6 +167,14 @@
   screen selects transient replenishment rather than parabolic recurrence.
   It rejects this sampled critical-normalized family under that short
   selector, not the cyclic graph or a uniform theorem.
+
+- The longer `.25*T` survival selector confirms the phase-only negative
+  calibration: all four survivors have `R_move=.1123`–`.1140` and
+  heat-compensated `G_move=.2729`–`.2772`.  Its selected sample 4 still ends
+  at `R_fixed=1.13e-3`, `R_move=1.47e-3`, and `G_move=1.34e-2`, with a one
+  shell downward shift.  This retires further phase-only full-window searches
+  for this fixed-amplitude/helicity realization as low-alpha; it is not an
+  exhaustive topology, amplitude, helicity, or scale verdict.
 
 - Generalized `scripts/ns_phase_locked_packet_search.py` from a single
   donor-star to an explicit N32 `j=2` three-target cyclic feedback graph:
@@ -8028,6 +8143,22 @@ Completed the six-worker geometric split tranche. Added QFT receipts for conduct
   token.
 
 # Status
+
+## 2026-07-16 — NS staged screen planner (empirical, non-promoting)
+
+- Added `scripts/ns_phase_locked_packet_staged_screen.py`, which materializes
+  the six role-allocation families, allocation-aware static pure-helicity
+  audits, sign-diverse backbone seeds, and deterministic phase indices as a
+  JSON quarter-window task manifest.  It does not execute CFD tasks.
+- Added `--phase-sample-index` to the packet search so each manifest task
+  evaluates the same phase point it names.  A regression check confirms that
+  indexed sample 2 reproduces sample 2 of the ordinary seeded phase stream.
+- Python compilation, a 24-task planning smoke, and `git diff --check` pass.
+  No recurrence conclusion, NS theorem, BKM receipt, or Clay gate changed.
+- Added a partial-results collector for completed endpoint files.  Its smoke
+  test consumed an existing CPU telemetry payload and recovered one ranked
+  endpoint row; it does not execute CFD or perform automatic survivor
+  promotion.
 
 These are chronological ledger notes. Mentions of `false` below are historical
 unless a line explicitly says it describes the live monitor surface.
