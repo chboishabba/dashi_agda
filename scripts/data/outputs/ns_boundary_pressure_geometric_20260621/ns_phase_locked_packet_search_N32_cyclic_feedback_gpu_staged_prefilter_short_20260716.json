@@ -1,0 +1,2157 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "theorem_authority": false
+  },
+  "contract": "ns_phase_locked_packet_adversarial_search",
+  "decision": "candidate-only adversarial search; any apparent recurrence is a finite numerical lead requiring independent reproduction, not a Navier--Stokes theorem.",
+  "endpoint_evolutions": [
+    {
+      "elapsed_seconds": 41.54025688604452,
+      "endpoint": {
+        "actual_time": 1.25,
+        "actual_window_time": 1.25,
+        "endpoint_heat_compensated_ratio": 0.9324506215439229,
+        "endpoint_recurrence_ratio": 0.8958887097104209,
+        "final_dominant_shell": 2,
+        "final_moving_packet": 0.9103547968695163,
+        "final_packet": 0.5039373992121117,
+        "heat_final_dominant_shell": 2,
+        "heat_only_moving_packet_centres": [
+          2,
+          2
+        ],
+        "heat_only_moving_packets_exact_spectrum": [
+          0.9999999999999999,
+          0.8845190291711108
+        ],
+        "heat_only_packets_exact_spectrum": [
+          0.5624999999999999,
+          0.5404440595231818
+        ],
+        "heat_only_shell_packets_exact_spectrum": [
+          [
+            0.0,
+            0.0625,
+            0.5624999999999999,
+            0.375,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.06172361253086759,
+            0.5404440595231818,
+            0.2823513571170615,
+            0.0,
+            0.0
+          ]
+        ],
+        "history": [
+          {
+            "designed_network_energy_fraction": 1.0,
+            "dominant_shell": 2,
+            "moving_packet": 0.9999999785928326,
+            "moving_packet_fraction": 1.0,
+            "network_correlation_direct": 1.0000000000000007,
+            "shell_packets": [
+              0.0,
+              0.06249999957254823,
+              0.5624999798082397,
+              0.37499999921204463,
+              0.0,
+              0.0
+            ],
+            "step": 0,
+            "support_leakage_fraction": 0.0,
+            "target_dissipation": 8.999999676931836,
+            "target_nonlinear_rate": 0.016015447919962227,
+            "target_packet": 0.5624999798082397,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 1.0,
+            "time": 0.0,
+            "translation_max_correlation_full_field": 1.0000000000000002
+          },
+          {
+            "designed_network_energy_fraction": 0.9314276408324468,
+            "dominant_shell": 2,
+            "moving_packet": 0.9779113355708138,
+            "moving_packet_fraction": 0.9997513527788984,
+            "network_correlation_direct": 0.9938417469118036,
+            "shell_packets": [
+              2.0531350774931074e-09,
+              0.06029681193510389,
+              0.5603390399243551,
+              0.3572754837113548,
+              0.00024321335777457404,
+              0.0
+            ],
+            "step": 250,
+            "support_leakage_fraction": 0.06857235916755322,
+            "target_dissipation": 9.072356969863096,
+            "target_nonlinear_rate": 0.00414409395883744,
+            "target_packet": 0.5603390399243551,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9997513527788984,
+            "time": 0.25,
+            "translation_max_correlation_full_field": 0.9591616287564148
+          },
+          {
+            "designed_network_energy_fraction": 0.8252387582536619,
+            "dominant_shell": 2,
+            "moving_packet": 0.9533286596051911,
+            "moving_packet_fraction": 0.9928894234704154,
+            "network_correlation_direct": 0.9616671878869549,
+            "shell_packets": [
+              3.001377760622249e-08,
+              0.05858679859833333,
+              0.5558940429702196,
+              0.3388478180366381,
+              0.006827232148282299,
+              0.0
+            ],
+            "step": 500,
+            "support_leakage_fraction": 0.17476124174633811,
+            "target_dissipation": 9.35508125379861,
+            "target_nonlinear_rate": -0.0037126514396869648,
+            "target_packet": 0.5558940429702196,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9928894234704154,
+            "time": 0.5,
+            "translation_max_correlation_full_field": 0.8736039853667878
+          },
+          {
+            "designed_network_energy_fraction": 0.7488376646044752,
+            "dominant_shell": 2,
+            "moving_packet": 0.9259760377156672,
+            "moving_packet_fraction": 0.9771932207583925,
+            "network_correlation_direct": 0.9234201205715533,
+            "shell_packets": [
+              1.4507730706173422e-07,
+              0.05736160097465953,
+              0.5476393131722687,
+              0.3209751235687391,
+              0.021611272835323818,
+              0.0
+            ],
+            "step": 750,
+            "support_leakage_fraction": 0.2511623353955248,
+            "target_dissipation": 9.77324828808909,
+            "target_nonlinear_rate": -0.028180854236733947,
+            "target_packet": 0.5476393131722687,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9771932207583925,
+            "time": 0.75,
+            "translation_max_correlation_full_field": 0.7990853586634966
+          },
+          {
+            "designed_network_energy_fraction": 0.6820458846667321,
+            "dominant_shell": 2,
+            "moving_packet": 0.9122511047638013,
+            "moving_packet_fraction": 0.9771401051445174,
+            "network_correlation_direct": 0.9069192795594294,
+            "shell_packets": [
+              4.61312275474479e-07,
+              0.056616947160117545,
+              0.5305902724199529,
+              0.32504388518373084,
+              0.021341375162253404,
+              0.0
+            ],
+            "step": 1000,
+            "support_leakage_fraction": 0.3179541153332679,
+            "target_dissipation": 10.032263453531877,
+            "target_nonlinear_rate": -0.06912621169812735,
+            "target_packet": 0.5305902724199529,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9771401051445174,
+            "time": 1.0,
+            "translation_max_correlation_full_field": 0.7489889849449788
+          },
+          {
+            "designed_network_energy_fraction": 0.6159527578145144,
+            "dominant_shell": 2,
+            "moving_packet": 0.9103547968695163,
+            "moving_packet_fraction": 0.9873474567911661,
+            "network_correlation_direct": 0.8981441890409977,
+            "shell_packets": [
+              1.1705390976759883e-06,
+              0.05632371878339905,
+              0.5039373992121117,
+              0.3500936788740056,
+              0.011664736253425755,
+              0.0
+            ],
+            "step": 1250,
+            "support_leakage_fraction": 0.3840472421854856,
+            "target_dissipation": 10.015603629594093,
+            "target_nonlinear_rate": -0.10074700563949428,
+            "target_packet": 0.5039373992121117,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9873474567911661,
+            "time": 1.25,
+            "translation_max_correlation_full_field": 0.7048874305954587
+          }
+        ],
+        "initial_dominant_shell": 2,
+        "initial_moving_packet": 0.9999999999999999,
+        "initial_packet": 0.5624999999999999,
+        "mean_log_window_recurrence": -0.09392084738033332,
+        "min_moving_window_recurrence_ratio": 0.9103548163576342,
+        "min_window_recurrence_ratio": 0.8958887418696575,
+        "moving_packet_heat_compensated_ratio": 1.0292088319712198,
+        "moving_packet_recurrence_ratio": 0.9103547968695164,
+        "moving_packet_scale_displacement": 0,
+        "moving_window_recurrence_ratios": [
+          0.9103548163576342
+        ],
+        "nominal_window_time": 1.25,
+        "nonlinear_negative_over_viscous_loss": 1.5855764212087136,
+        "nonlinear_positive_over_viscous_loss": 0.12726881654391456,
+        "steps": 1250,
+        "window_checkpoints": [
+          {
+            "designed_network_energy_fraction": 1.0,
+            "dominant_shell": 2,
+            "moving_packet": 0.9999999785928326,
+            "moving_packet_fraction": 1.0,
+            "network_correlation_direct": 1.0000000000000007,
+            "shell_packets": [
+              0.0,
+              0.06249999957254823,
+              0.5624999798082397,
+              0.37499999921204463,
+              0.0,
+              0.0
+            ],
+            "step": 0,
+            "support_leakage_fraction": 0.0,
+            "target_dissipation": 8.999999676931836,
+            "target_nonlinear_rate": 0.016015447919962227,
+            "target_packet": 0.5624999798082397,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 1.0,
+            "time": 0.0,
+            "translation_max_correlation_full_field": 1.0000000000000002
+          },
+          {
+            "designed_network_energy_fraction": 0.6159527578145144,
+            "dominant_shell": 2,
+            "moving_packet": 0.9103547968695163,
+            "moving_packet_fraction": 0.9873474567911661,
+            "network_correlation_direct": 0.8981441890409977,
+            "shell_packets": [
+              1.1705390976759883e-06,
+              0.05632371878339905,
+              0.5039373992121117,
+              0.3500936788740056,
+              0.011664736253425755,
+              0.0
+            ],
+            "step": 1250,
+            "support_leakage_fraction": 0.3840472421854856,
+            "target_dissipation": 10.015603629594093,
+            "target_nonlinear_rate": -0.10074700563949428,
+            "target_packet": 0.5039373992121117,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9873474567911661,
+            "time": 1.25,
+            "translation_max_correlation_full_field": 0.7048874305954587
+          }
+        ],
+        "window_recurrence_ratios": [
+          0.8958887418696575
+        ],
+        "windows": 1
+      },
+      "phases": [
+        -1.36245498677662,
+        -0.5265166964246246,
+        1.6569302976789553,
+        1.1286357397306759,
+        -1.7868792988909221,
+        -2.7943225170881028,
+        -0.42170705879130654,
+        -2.3000805030007934,
+        2.3773660762350106,
+        2.9163719409486593,
+        0.797099622635808,
+        2.6665481514680627,
+        2.427182005385787,
+        3.0141709305936324,
+        -0.34947664631500075
+      ],
+      "rank_by_initial_inflow": 0,
+      "sample": 6,
+      "static": {
+        "initial_replenishment_ratio": 0.8897471258663312,
+        "target_nonlinear_rate": 0.016015448265593958,
+        "target_packet": 0.5624999999999999,
+        "target_packet_dominance": 1.0,
+        "target_packet_local_tightness": 1.0,
+        "target_viscous_rate": 0.017999999999999995
+      }
+    }
+  ],
+  "endpoint_prefilter_evolutions": [
+    {
+      "elapsed_seconds": 22.595667192945257,
+      "endpoint_prefilter": {
+        "actual_time": 0.625,
+        "actual_window_time": 0.625,
+        "endpoint_heat_compensated_ratio": 1.0021689242268068,
+        "endpoint_recurrence_ratio": 0.9823246499563741,
+        "final_dominant_shell": 2,
+        "final_moving_packet": 0.9390168918430056,
+        "final_packet": 0.5525576156004604,
+        "heat_final_dominant_shell": 2,
+        "heat_only_moving_packet_centres": [
+          2,
+          2
+        ],
+        "heat_only_moving_packets_exact_spectrum": [
+          0.9999999999999999,
+          0.9386299492070114
+        ],
+        "heat_only_packets_exact_spectrum": [
+          0.5624999999999999,
+          0.5513617537350497
+        ],
+        "heat_only_shell_packets_exact_spectrum": [
+          [
+            0.0,
+            0.0625,
+            0.5624999999999999,
+            0.375,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.06211059316396217,
+            0.5513617537350497,
+            0.32515760230799945,
+            0.0,
+            0.0
+          ]
+        ],
+        "history": [
+          {
+            "designed_network_energy_fraction": 1.0,
+            "dominant_shell": 2,
+            "moving_packet": 0.9999999785928326,
+            "moving_packet_fraction": 1.0,
+            "network_correlation_direct": 1.0000000000000007,
+            "shell_packets": [
+              0.0,
+              0.06249999957254823,
+              0.5624999798082397,
+              0.37499999921204463,
+              0.0,
+              0.0
+            ],
+            "step": 0,
+            "support_leakage_fraction": 0.0,
+            "target_dissipation": 8.999999676931836,
+            "target_nonlinear_rate": 0.016015447919962227,
+            "target_packet": 0.5624999798082397,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 1.0,
+            "time": 0.0,
+            "translation_max_correlation_full_field": 1.0000000000000002
+          },
+          {
+            "designed_network_energy_fraction": 0.9314276408324468,
+            "dominant_shell": 2,
+            "moving_packet": 0.9779113355708138,
+            "moving_packet_fraction": 0.9997513527788984,
+            "network_correlation_direct": 0.9938417469118036,
+            "shell_packets": [
+              2.0531350774931074e-09,
+              0.06029681193510389,
+              0.5603390399243551,
+              0.3572754837113548,
+              0.00024321335777457404,
+              0.0
+            ],
+            "step": 250,
+            "support_leakage_fraction": 0.06857235916755322,
+            "target_dissipation": 9.072356969863096,
+            "target_nonlinear_rate": 0.00414409395883744,
+            "target_packet": 0.5603390399243551,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9997513527788984,
+            "time": 0.25,
+            "translation_max_correlation_full_field": 0.9591616287564148
+          },
+          {
+            "designed_network_energy_fraction": 0.8252387582536619,
+            "dominant_shell": 2,
+            "moving_packet": 0.9533286596051911,
+            "moving_packet_fraction": 0.9928894234704154,
+            "network_correlation_direct": 0.9616671878869549,
+            "shell_packets": [
+              3.001377760622249e-08,
+              0.05858679859833333,
+              0.5558940429702196,
+              0.3388478180366381,
+              0.006827232148282299,
+              0.0
+            ],
+            "step": 500,
+            "support_leakage_fraction": 0.17476124174633811,
+            "target_dissipation": 9.35508125379861,
+            "target_nonlinear_rate": -0.0037126514396869648,
+            "target_packet": 0.5558940429702196,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9928894234704154,
+            "time": 0.5,
+            "translation_max_correlation_full_field": 0.8736039853667878
+          },
+          {
+            "designed_network_energy_fraction": 0.7844302931090121,
+            "dominant_shell": 2,
+            "moving_packet": 0.9390168918430056,
+            "moving_packet_fraction": 0.9847114246648779,
+            "network_correlation_direct": 0.940438569023114,
+            "shell_packets": [
+              7.112901783608154e-08,
+              0.057914431734504945,
+              0.5525576156004604,
+              0.32854484450804033,
+              0.014579053406659964,
+              0.0
+            ],
+            "step": 625,
+            "support_leakage_fraction": 0.21556970689098787,
+            "target_dissipation": 9.564389837774346,
+            "target_nonlinear_rate": -0.012831332947168747,
+            "target_packet": 0.5525576156004604,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9847114246648779,
+            "time": 0.625,
+            "translation_max_correlation_full_field": 0.8329282852119076
+          }
+        ],
+        "initial_dominant_shell": 2,
+        "initial_moving_packet": 0.9999999999999999,
+        "initial_packet": 0.5624999999999999,
+        "mean_log_window_recurrence": -0.06292178934533037,
+        "min_moving_window_recurrence_ratio": 0.9390169119446978,
+        "min_window_recurrence_ratio": 0.9823246852183554,
+        "moving_packet_heat_compensated_ratio": 1.0004122419451043,
+        "moving_packet_recurrence_ratio": 0.9390168918430057,
+        "moving_packet_scale_displacement": 0,
+        "moving_window_recurrence_ratios": [
+          0.9390169119446978
+        ],
+        "nominal_window_time": 0.625,
+        "nonlinear_negative_over_viscous_loss": 0.1303825727174878,
+        "nonlinear_positive_over_viscous_loss": 0.2644025691464383,
+        "steps": 625,
+        "window_checkpoints": [
+          {
+            "designed_network_energy_fraction": 1.0,
+            "dominant_shell": 2,
+            "moving_packet": 0.9999999785928326,
+            "moving_packet_fraction": 1.0,
+            "network_correlation_direct": 1.0000000000000007,
+            "shell_packets": [
+              0.0,
+              0.06249999957254823,
+              0.5624999798082397,
+              0.37499999921204463,
+              0.0,
+              0.0
+            ],
+            "step": 0,
+            "support_leakage_fraction": 0.0,
+            "target_dissipation": 8.999999676931836,
+            "target_nonlinear_rate": 0.016015447919962227,
+            "target_packet": 0.5624999798082397,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 1.0,
+            "time": 0.0,
+            "translation_max_correlation_full_field": 1.0000000000000002
+          },
+          {
+            "designed_network_energy_fraction": 0.7844302931090121,
+            "dominant_shell": 2,
+            "moving_packet": 0.9390168918430056,
+            "moving_packet_fraction": 0.9847114246648779,
+            "network_correlation_direct": 0.940438569023114,
+            "shell_packets": [
+              7.112901783608154e-08,
+              0.057914431734504945,
+              0.5525576156004604,
+              0.32854484450804033,
+              0.014579053406659964,
+              0.0
+            ],
+            "step": 625,
+            "support_leakage_fraction": 0.21556970689098787,
+            "target_dissipation": 9.564389837774346,
+            "target_nonlinear_rate": -0.012831332947168747,
+            "target_packet": 0.5525576156004604,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9847114246648779,
+            "time": 0.625,
+            "translation_max_correlation_full_field": 0.8329282852119076
+          }
+        ],
+        "window_recurrence_ratios": [
+          0.9823246852183554
+        ],
+        "windows": 1
+      },
+      "phases": [
+        -1.36245498677662,
+        -0.5265166964246246,
+        1.6569302976789553,
+        1.1286357397306759,
+        -1.7868792988909221,
+        -2.7943225170881028,
+        -0.42170705879130654,
+        -2.3000805030007934,
+        2.3773660762350106,
+        2.9163719409486593,
+        0.797099622635808,
+        2.6665481514680627,
+        2.427182005385787,
+        3.0141709305936324,
+        -0.34947664631500075
+      ],
+      "rank_by_initial_inflow": 0,
+      "sample": 6
+    },
+    {
+      "elapsed_seconds": 20.716731084976345,
+      "endpoint_prefilter": {
+        "actual_time": 0.625,
+        "actual_window_time": 0.625,
+        "endpoint_heat_compensated_ratio": 0.9832762871054553,
+        "endpoint_recurrence_ratio": 0.9638061121147595,
+        "final_dominant_shell": 2,
+        "final_moving_packet": 0.937091751219967,
+        "final_packet": 0.5421409380645521,
+        "heat_final_dominant_shell": 2,
+        "heat_only_moving_packet_centres": [
+          2,
+          2
+        ],
+        "heat_only_moving_packets_exact_spectrum": [
+          0.9999999999999999,
+          0.9386299492070114
+        ],
+        "heat_only_packets_exact_spectrum": [
+          0.5624999999999999,
+          0.5513617537350497
+        ],
+        "heat_only_shell_packets_exact_spectrum": [
+          [
+            0.0,
+            0.0625,
+            0.5624999999999999,
+            0.375,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.06211059316396217,
+            0.5513617537350497,
+            0.32515760230799945,
+            0.0,
+            0.0
+          ]
+        ],
+        "history": [
+          {
+            "designed_network_energy_fraction": 0.9999999999999999,
+            "dominant_shell": 2,
+            "moving_packet": 0.999999977987053,
+            "moving_packet_fraction": 1.0,
+            "network_correlation_direct": 0.9999999999999994,
+            "shell_packets": [
+              0.0,
+              0.06249999950553192,
+              0.5624999798082397,
+              0.37499999867328127,
+              0.0,
+              0.0
+            ],
+            "step": 0,
+            "support_leakage_fraction": 1.1102230246251565e-16,
+            "target_dissipation": 8.999999676931836,
+            "target_nonlinear_rate": -0.0011035597353317018,
+            "target_packet": 0.5624999798082397,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 1.0,
+            "time": 0.0,
+            "translation_max_correlation_full_field": 1.0
+          },
+          {
+            "designed_network_energy_fraction": 0.9306648500997483,
+            "dominant_shell": 2,
+            "moving_packet": 0.9767830113514621,
+            "moving_packet_fraction": 0.9997519170162741,
+            "network_correlation_direct": 0.993376047307565,
+            "shell_packets": [
+              4.9779524830672064e-09,
+              0.062119421374326717,
+              0.5559930851830069,
+              0.35867050479412843,
+              0.00024237839714719357,
+              0.0
+            ],
+            "step": 250,
+            "support_leakage_fraction": 0.06933514990025169,
+            "target_dissipation": 9.001259238480534,
+            "target_nonlinear_rate": -0.013534767784567987,
+            "target_packet": 0.5559930851830069,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9997519170162741,
+            "time": 0.25,
+            "translation_max_correlation_full_field": 0.958319531664093
+          },
+          {
+            "designed_network_energy_fraction": 0.8240058113981283,
+            "dominant_shell": 2,
+            "moving_packet": 0.951517433773663,
+            "moving_packet_fraction": 0.993122144183275,
+            "network_correlation_direct": 0.9600112189241377,
+            "shell_packets": [
+              7.879549798528629e-08,
+              0.062101252849499564,
+              0.5473157266823481,
+              0.34210045424181545,
+              0.006589644084941215,
+              0.0
+            ],
+            "step": 500,
+            "support_leakage_fraction": 0.17599418860187166,
+            "target_dissipation": 9.210559267576446,
+            "target_nonlinear_rate": -0.019730834739340293,
+            "target_packet": 0.5473157266823481,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.993122144183275,
+            "time": 0.5,
+            "translation_max_correlation_full_field": 0.8714479360517812
+          },
+          {
+            "designed_network_energy_fraction": 0.7829653740174665,
+            "dominant_shell": 2,
+            "moving_packet": 0.937091751219967,
+            "moving_packet_fraction": 0.9856162094966164,
+            "network_correlation_direct": 0.9383471843639659,
+            "shell_packets": [
+              1.9000781505531682e-07,
+              0.06222105749948663,
+              0.5421409380645521,
+              0.3327297556559283,
+              0.013675448949950068,
+              0.0
+            ],
+            "step": 625,
+            "support_leakage_fraction": 0.21703462598253354,
+            "target_dissipation": 9.38893924593301,
+            "target_nonlinear_rate": -0.026768670137918782,
+            "target_packet": 0.5421409380645521,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9856162094966164,
+            "time": 0.625,
+            "translation_max_correlation_full_field": 0.8302996087259664
+          }
+        ],
+        "initial_dominant_shell": 2,
+        "initial_moving_packet": 0.9999999999999999,
+        "initial_packet": 0.5624999999999999,
+        "mean_log_window_recurrence": -0.06497405933256942,
+        "min_moving_window_recurrence_ratio": 0.9370917718481185,
+        "min_window_recurrence_ratio": 0.9638061467119907,
+        "moving_packet_heat_compensated_ratio": 0.998361230655016,
+        "moving_packet_recurrence_ratio": 0.9370917512199671,
+        "moving_packet_scale_displacement": 0,
+        "moving_window_recurrence_ratios": [
+          0.9370917718481185
+        ],
+        "nominal_window_time": 0.625,
+        "nonlinear_negative_over_viscous_loss": 0.781688236873249,
+        "nonlinear_positive_over_viscous_loss": 0.0,
+        "steps": 625,
+        "window_checkpoints": [
+          {
+            "designed_network_energy_fraction": 0.9999999999999999,
+            "dominant_shell": 2,
+            "moving_packet": 0.999999977987053,
+            "moving_packet_fraction": 1.0,
+            "network_correlation_direct": 0.9999999999999994,
+            "shell_packets": [
+              0.0,
+              0.06249999950553192,
+              0.5624999798082397,
+              0.37499999867328127,
+              0.0,
+              0.0
+            ],
+            "step": 0,
+            "support_leakage_fraction": 1.1102230246251565e-16,
+            "target_dissipation": 8.999999676931836,
+            "target_nonlinear_rate": -0.0011035597353317018,
+            "target_packet": 0.5624999798082397,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 1.0,
+            "time": 0.0,
+            "translation_max_correlation_full_field": 1.0
+          },
+          {
+            "designed_network_energy_fraction": 0.7829653740174665,
+            "dominant_shell": 2,
+            "moving_packet": 0.937091751219967,
+            "moving_packet_fraction": 0.9856162094966164,
+            "network_correlation_direct": 0.9383471843639659,
+            "shell_packets": [
+              1.9000781505531682e-07,
+              0.06222105749948663,
+              0.5421409380645521,
+              0.3327297556559283,
+              0.013675448949950068,
+              0.0
+            ],
+            "step": 625,
+            "support_leakage_fraction": 0.21703462598253354,
+            "target_dissipation": 9.38893924593301,
+            "target_nonlinear_rate": -0.026768670137918782,
+            "target_packet": 0.5421409380645521,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9856162094966164,
+            "time": 0.625,
+            "translation_max_correlation_full_field": 0.8302996087259664
+          }
+        ],
+        "window_recurrence_ratios": [
+          0.9638061467119907
+        ],
+        "windows": 1
+      },
+      "phases": [
+        2.0209616900360166,
+        1.8411871046718629,
+        0.4546931647279777,
+        0.3650338305081897,
+        -1.53991479350023,
+        -2.3824023890326407,
+        3.041646466871895,
+        2.096900897432108,
+        2.9741599324096084,
+        0.8880231921718647,
+        -2.9516430991305294,
+        -1.2940471509016156,
+        -1.0814440235625158,
+        0.953287417876516,
+        -1.118817581897214
+      ],
+      "rank_by_initial_inflow": 2,
+      "sample": 3
+    },
+    {
+      "elapsed_seconds": 20.618636255152524,
+      "endpoint_prefilter": {
+        "actual_time": 0.625,
+        "actual_window_time": 0.625,
+        "endpoint_heat_compensated_ratio": 0.979383051159522,
+        "endpoint_recurrence_ratio": 0.9599899674056854,
+        "final_dominant_shell": 2,
+        "final_moving_packet": 0.9325961962131848,
+        "final_packet": 0.539994356665698,
+        "heat_final_dominant_shell": 2,
+        "heat_only_moving_packet_centres": [
+          2,
+          2
+        ],
+        "heat_only_moving_packets_exact_spectrum": [
+          0.9999999999999998,
+          0.9386299492070113
+        ],
+        "heat_only_packets_exact_spectrum": [
+          0.5624999999999999,
+          0.5513617537350497
+        ],
+        "heat_only_shell_packets_exact_spectrum": [
+          [
+            0.0,
+            0.06249999999999999,
+            0.5624999999999999,
+            0.37499999999999994,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.06211059316396217,
+            0.5513617537350497,
+            0.3251576023079994,
+            0.0,
+            0.0
+          ]
+        ],
+        "history": [
+          {
+            "designed_network_energy_fraction": 1.0000000000000002,
+            "dominant_shell": 2,
+            "moving_packet": 0.9999999750292696,
+            "moving_packet_fraction": 1.0,
+            "network_correlation_direct": 1.0000000000000009,
+            "shell_packets": [
+              0.0,
+              0.06250000062493416,
+              0.5624999798082397,
+              0.37499999459609573,
+              0.0,
+              0.0
+            ],
+            "step": 0,
+            "support_leakage_fraction": -2.220446049250313e-16,
+            "target_dissipation": 8.999999676931836,
+            "target_nonlinear_rate": -0.003115337724484854,
+            "target_packet": 0.5624999798082397,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 1.0,
+            "time": 0.0,
+            "translation_max_correlation_full_field": 1.0
+          },
+          {
+            "designed_network_energy_fraction": 0.9262224210249423,
+            "dominant_shell": 2,
+            "moving_packet": 0.9748061647924735,
+            "moving_packet_fraction": 0.9997178595960323,
+            "network_correlation_direct": 0.9910244559810159,
+            "shell_packets": [
+              3.135578103179921e-09,
+              0.0630199639524632,
+              0.5552403461074762,
+              0.3565458547325341,
+              0.0002751066891436392,
+              0.0
+            ],
+            "step": 250,
+            "support_leakage_fraction": 0.07377757897505766,
+            "target_dissipation": 8.992687786041387,
+            "target_nonlinear_rate": -0.017055085719468063,
+            "target_packet": 0.5552403461074762,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9997178595960323,
+            "time": 0.25,
+            "translation_max_correlation_full_field": 0.9537663957396771
+          },
+          {
+            "designed_network_energy_fraction": 0.819016026194952,
+            "dominant_shell": 2,
+            "moving_packet": 0.9476974908166698,
+            "moving_packet_fraction": 0.992681045845739,
+            "network_correlation_direct": 0.9507735449849765,
+            "shell_packets": [
+              4.795752031754913e-08,
+              0.06378745467759381,
+              0.5456731933827308,
+              0.33823684275634514,
+              0.0069872462155904334,
+              0.0
+            ],
+            "step": 500,
+            "support_leakage_fraction": 0.18098397380504805,
+            "target_dissipation": 9.214810576511049,
+            "target_nonlinear_rate": -0.023534394078069655,
+            "target_packet": 0.5456731933827308,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.992681045845739,
+            "time": 0.5,
+            "translation_max_correlation_full_field": 0.8604453443551553
+          },
+          {
+            "designed_network_energy_fraction": 0.7792183070390822,
+            "dominant_shell": 2,
+            "moving_packet": 0.9325961962131848,
+            "moving_packet_fraction": 0.9851146640239414,
+            "network_correlation_direct": 0.9277483900792332,
+            "shell_packets": [
+              1.1217869408190143e-07,
+              0.06424600314282995,
+              0.539994356665698,
+              0.32835583640465693,
+              0.01409165623933255,
+              0.0
+            ],
+            "step": 625,
+            "support_leakage_fraction": 0.22078169296091776,
+            "target_dissipation": 9.408549084450781,
+            "target_nonlinear_rate": -0.030942769570992727,
+            "target_packet": 0.539994356665698,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9851146640239414,
+            "time": 0.625,
+            "translation_max_correlation_full_field": 0.8189545178156711
+          }
+        ],
+        "initial_dominant_shell": 2,
+        "initial_moving_packet": 0.9999999999999998,
+        "initial_packet": 0.5624999999999999,
+        "mean_log_window_recurrence": -0.06978294833606266,
+        "min_moving_window_recurrence_ratio": 0.9325962195007935,
+        "min_window_recurrence_ratio": 0.9599900018659305,
+        "moving_packet_heat_compensated_ratio": 0.9935717446487575,
+        "moving_packet_recurrence_ratio": 0.932596196213185,
+        "moving_packet_scale_displacement": 0,
+        "moving_window_recurrence_ratios": [
+          0.9325962195007935
+        ],
+        "nominal_window_time": 0.625,
+        "nonlinear_negative_over_viscous_loss": 0.9667642031107103,
+        "nonlinear_positive_over_viscous_loss": 0.0,
+        "steps": 625,
+        "window_checkpoints": [
+          {
+            "designed_network_energy_fraction": 1.0000000000000002,
+            "dominant_shell": 2,
+            "moving_packet": 0.9999999750292696,
+            "moving_packet_fraction": 1.0,
+            "network_correlation_direct": 1.0000000000000009,
+            "shell_packets": [
+              0.0,
+              0.06250000062493416,
+              0.5624999798082397,
+              0.37499999459609573,
+              0.0,
+              0.0
+            ],
+            "step": 0,
+            "support_leakage_fraction": -2.220446049250313e-16,
+            "target_dissipation": 8.999999676931836,
+            "target_nonlinear_rate": -0.003115337724484854,
+            "target_packet": 0.5624999798082397,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 1.0,
+            "time": 0.0,
+            "translation_max_correlation_full_field": 1.0
+          },
+          {
+            "designed_network_energy_fraction": 0.7792183070390822,
+            "dominant_shell": 2,
+            "moving_packet": 0.9325961962131848,
+            "moving_packet_fraction": 0.9851146640239414,
+            "network_correlation_direct": 0.9277483900792332,
+            "shell_packets": [
+              1.1217869408190143e-07,
+              0.06424600314282995,
+              0.539994356665698,
+              0.32835583640465693,
+              0.01409165623933255,
+              0.0
+            ],
+            "step": 625,
+            "support_leakage_fraction": 0.22078169296091776,
+            "target_dissipation": 9.408549084450781,
+            "target_nonlinear_rate": -0.030942769570992727,
+            "target_packet": 0.539994356665698,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9851146640239414,
+            "time": 0.625,
+            "translation_max_correlation_full_field": 0.8189545178156711
+          }
+        ],
+        "window_recurrence_ratios": [
+          0.9599900018659305
+        ],
+        "windows": 1
+      },
+      "phases": [
+        -2.7043374429630105,
+        2.014587766951675,
+        -0.5436764822889901,
+        1.233218199713173,
+        -0.3268348472059732,
+        1.9014237536243304,
+        2.460020713715811,
+        2.0562038044918722,
+        -3.136654687957121,
+        -1.36463937575287,
+        -0.03143589199957875,
+        1.5077232067682074,
+        -2.3459254813273,
+        2.187109674436238,
+        -0.6627450420566623
+      ],
+      "rank_by_initial_inflow": 3,
+      "sample": 0
+    },
+    {
+      "elapsed_seconds": 21.87090242211707,
+      "endpoint_prefilter": {
+        "actual_time": 0.625,
+        "actual_window_time": 0.625,
+        "endpoint_heat_compensated_ratio": 0.9913865479070253,
+        "endpoint_recurrence_ratio": 0.9717557789926301,
+        "final_dominant_shell": 2,
+        "final_moving_packet": 0.9323579205505798,
+        "final_packet": 0.5466126256833543,
+        "heat_final_dominant_shell": 2,
+        "heat_only_moving_packet_centres": [
+          2,
+          2
+        ],
+        "heat_only_moving_packets_exact_spectrum": [
+          0.9999999999999999,
+          0.9386299492070114
+        ],
+        "heat_only_packets_exact_spectrum": [
+          0.5624999999999999,
+          0.5513617537350497
+        ],
+        "heat_only_shell_packets_exact_spectrum": [
+          [
+            0.0,
+            0.062499999999999986,
+            0.5624999999999999,
+            0.375,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.062110593163962155,
+            0.5513617537350497,
+            0.32515760230799945,
+            0.0,
+            0.0
+          ]
+        ],
+        "history": [
+          {
+            "designed_network_energy_fraction": 1.0,
+            "dominant_shell": 2,
+            "moving_packet": 0.9999999847457723,
+            "moving_packet_fraction": 1.0,
+            "network_correlation_direct": 1.0000000000000002,
+            "shell_packets": [
+              0.0,
+              0.06249999978945475,
+              0.5624999798082397,
+              0.3750000051480779,
+              0.0,
+              0.0
+            ],
+            "step": 0,
+            "support_leakage_fraction": 0.0,
+            "target_dissipation": 8.999999676931836,
+            "target_nonlinear_rate": 0.007179454317908701,
+            "target_packet": 0.5624999798082397,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 1.0,
+            "time": 0.0,
+            "translation_max_correlation_full_field": 1.0
+          },
+          {
+            "designed_network_energy_fraction": 0.9250402035046509,
+            "dominant_shell": 2,
+            "moving_packet": 0.9764313292976095,
+            "moving_packet_fraction": 0.9995905116357695,
+            "network_correlation_direct": 0.9904593716062257,
+            "shell_packets": [
+              4.60152203222114e-09,
+              0.06165491515221716,
+              0.5575970032336678,
+              0.3571794109117246,
+              0.0003999964620767099,
+              0.0
+            ],
+            "step": 250,
+            "support_leakage_fraction": 0.07495979649534912,
+            "target_dissipation": 9.03467791587156,
+            "target_nonlinear_rate": -0.007544625006622445,
+            "target_packet": 0.5575970032336678,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9995905116357695,
+            "time": 0.25,
+            "translation_max_correlation_full_field": 0.9526140216914312
+          },
+          {
+            "designed_network_energy_fraction": 0.8189830055600581,
+            "dominant_shell": 2,
+            "moving_packet": 0.9487371517795699,
+            "moving_packet_fraction": 0.989657405805524,
+            "network_correlation_direct": 0.9486527840540631,
+            "shell_packets": [
+              7.077466732660667e-08,
+              0.061167508435314946,
+              0.5507662983748973,
+              0.3368033449693576,
+              0.00991487888419192,
+              0.0
+            ],
+            "step": 500,
+            "support_leakage_fraction": 0.1810169944399419,
+            "target_dissipation": 9.328386854938985,
+            "target_nonlinear_rate": -0.010988704094599212,
+            "target_packet": 0.5507662983748973,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.989657405805524,
+            "time": 0.5,
+            "translation_max_correlation_full_field": 0.8585087592633805
+          },
+          {
+            "designed_network_energy_fraction": 0.7805315740696969,
+            "dominant_shell": 2,
+            "moving_packet": 0.9323579205505798,
+            "moving_packet_fraction": 0.9794588046581756,
+            "network_correlation_direct": 0.9259712260829698,
+            "shell_packets": [
+              1.6983454872741134e-07,
+              0.06106845091890712,
+              0.5466126256833543,
+              0.3246768439483183,
+              0.01955322647313002,
+              0.0
+            ],
+            "step": 625,
+            "support_leakage_fraction": 0.21946842593030313,
+            "target_dissipation": 9.562780009362642,
+            "target_nonlinear_rate": -0.01895160943148383,
+            "target_packet": 0.5466126256833543,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9794588046581756,
+            "time": 0.625,
+            "translation_max_correlation_full_field": 0.818074262323677
+          }
+        ],
+        "initial_dominant_shell": 2,
+        "initial_moving_packet": 0.9999999999999999,
+        "initial_packet": 0.5624999999999999,
+        "mean_log_window_recurrence": -0.07003848783934132,
+        "min_moving_window_recurrence_ratio": 0.9323579347729799,
+        "min_window_recurrence_ratio": 0.9717558138752262,
+        "moving_packet_heat_compensated_ratio": 0.9933178899078061,
+        "moving_packet_recurrence_ratio": 0.9323579205505799,
+        "moving_packet_scale_displacement": 0,
+        "moving_window_recurrence_ratios": [
+          0.9323579347729799
+        ],
+        "nominal_window_time": 0.625,
+        "nonlinear_negative_over_viscous_loss": 0.4476999667711484,
+        "nonlinear_positive_over_viscous_loss": 0.0783042481461061,
+        "steps": 625,
+        "window_checkpoints": [
+          {
+            "designed_network_energy_fraction": 1.0,
+            "dominant_shell": 2,
+            "moving_packet": 0.9999999847457723,
+            "moving_packet_fraction": 1.0,
+            "network_correlation_direct": 1.0000000000000002,
+            "shell_packets": [
+              0.0,
+              0.06249999978945475,
+              0.5624999798082397,
+              0.3750000051480779,
+              0.0,
+              0.0
+            ],
+            "step": 0,
+            "support_leakage_fraction": 0.0,
+            "target_dissipation": 8.999999676931836,
+            "target_nonlinear_rate": 0.007179454317908701,
+            "target_packet": 0.5624999798082397,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 1.0,
+            "time": 0.0,
+            "translation_max_correlation_full_field": 1.0
+          },
+          {
+            "designed_network_energy_fraction": 0.7805315740696969,
+            "dominant_shell": 2,
+            "moving_packet": 0.9323579205505798,
+            "moving_packet_fraction": 0.9794588046581756,
+            "network_correlation_direct": 0.9259712260829698,
+            "shell_packets": [
+              1.6983454872741134e-07,
+              0.06106845091890712,
+              0.5466126256833543,
+              0.3246768439483183,
+              0.01955322647313002,
+              0.0
+            ],
+            "step": 625,
+            "support_leakage_fraction": 0.21946842593030313,
+            "target_dissipation": 9.562780009362642,
+            "target_nonlinear_rate": -0.01895160943148383,
+            "target_packet": 0.5466126256833543,
+            "target_packet_dominance": 1.0,
+            "target_packet_local_tightness": 0.9794588046581756,
+            "time": 0.625,
+            "translation_max_correlation_full_field": 0.818074262323677
+          }
+        ],
+        "window_recurrence_ratios": [
+          0.9717558138752262
+        ],
+        "windows": 1
+      },
+      "phases": [
+        -0.5601762612550325,
+        0.14662358814954324,
+        2.3660940722959083,
+        0.5737384350642825,
+        -2.054889232683308,
+        2.6171494060048985,
+        0.3443670137510586,
+        1.0034129756904226,
+        -0.2314926406800235,
+        -1.4998848816556212,
+        1.4880555775416955,
+        2.322852620815045,
+        2.9603086825228253,
+        -0.7252248941326114,
+        1.0415004193080373
+      ],
+      "rank_by_initial_inflow": 1,
+      "sample": 4
+    }
+  ],
+  "inputs": {
+    "backend": "gpu",
+    "cfd_root": "/home/c/Documents/code/dashiCFD",
+    "critical_mass": 1.0,
+    "donor_amplitude": 1.0,
+    "dt": 0.001,
+    "endpoint_prefilter_candidates": 4,
+    "endpoint_prefilter_window_c": 0.01,
+    "feedback_amplitude": 1.0,
+    "fft_backend": "vkfft-vulkan",
+    "moving_packet_radius": 1,
+    "n": 32,
+    "normalization": "critical",
+    "nu": 0.001,
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_phase_locked_packet_search_N32_cyclic_feedback_gpu_staged_prefilter_short_20260716.json",
+    "phase_samples": 8,
+    "save_every": 250,
+    "seed": 20260716,
+    "target_amplitude": 3.0,
+    "target_shell": 2,
+    "target_urms": 1.0,
+    "top_candidates": 1,
+    "topology": "cyclic-feedback",
+    "window_c": 0.02,
+    "windows": 1
+  },
+  "objective": {
+    "endpoint": "maximize min_m P_L((m+1)T) / P_L(mT), where P_L follows the dominant shell and T = c * 2^(-2j) / nu",
+    "secondary_endpoint": "maximize mean log moving-packet recurrence",
+    "static_prefilter": "maximize initial nonlinear target-shell inflow only to seed an endpoint search",
+    "translation_quotient": "checkpoint correlation is maximised over discrete torus translations; lattice rotations are not quotiented",
+    "warning": "this version samples phase candidates and evolves only a staged prefiltered subset; it is not global endpoint optimization"
+  },
+  "static_candidates_ranked": [
+    {
+      "initial_replenishment_ratio": 0.8897471258663312,
+      "phases": [
+        -1.36245498677662,
+        -0.5265166964246246,
+        1.6569302976789553,
+        1.1286357397306759,
+        -1.7868792988909221,
+        -2.7943225170881028,
+        -0.42170705879130654,
+        -2.3000805030007934,
+        2.3773660762350106,
+        2.9163719409486593,
+        0.797099622635808,
+        2.6665481514680627,
+        2.427182005385787,
+        3.0141709305936324,
+        -0.34947664631500075
+      ],
+      "sample": 6,
+      "target_nonlinear_rate": 0.016015448265593958,
+      "target_packet": 0.5624999999999999,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.017999999999999995
+    },
+    {
+      "initial_replenishment_ratio": 0.39885859385903594,
+      "phases": [
+        -0.5601762612550325,
+        0.14662358814954324,
+        2.3660940722959083,
+        0.5737384350642825,
+        -2.054889232683308,
+        2.6171494060048985,
+        0.3443670137510586,
+        1.0034129756904226,
+        -0.2314926406800235,
+        -1.4998848816556212,
+        1.4880555775416955,
+        2.322852620815045,
+        2.9603086825228253,
+        -0.7252248941326114,
+        1.0415004193080373
+      ],
+      "sample": 4,
+      "target_nonlinear_rate": 0.007179454689462645,
+      "target_packet": 0.5624999999999999,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.017999999999999995
+    },
+    {
+      "initial_replenishment_ratio": -0.061308862104109685,
+      "phases": [
+        2.0209616900360166,
+        1.8411871046718629,
+        0.4546931647279777,
+        0.3650338305081897,
+        -1.53991479350023,
+        -2.3824023890326407,
+        3.041646466871895,
+        2.096900897432108,
+        2.9741599324096084,
+        0.8880231921718647,
+        -2.9516430991305294,
+        -1.2940471509016156,
+        -1.0814440235625158,
+        0.953287417876516,
+        -1.118817581897214
+      ],
+      "sample": 3,
+      "target_nonlinear_rate": -0.001103559517873974,
+      "target_packet": 0.5624999999999999,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.017999999999999995
+    },
+    {
+      "initial_replenishment_ratio": -0.17307434639917435,
+      "phases": [
+        -2.7043374429630105,
+        2.014587766951675,
+        -0.5436764822889901,
+        1.233218199713173,
+        -0.3268348472059732,
+        1.9014237536243304,
+        2.460020713715811,
+        2.0562038044918722,
+        -3.136654687957121,
+        -1.36463937575287,
+        -0.03143589199957875,
+        1.5077232067682074,
+        -2.3459254813273,
+        2.187109674436238,
+        -0.6627450420566623
+      ],
+      "sample": 0,
+      "target_nonlinear_rate": -0.0031153382351851375,
+      "target_packet": 0.5624999999999999,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.017999999999999995
+    },
+    {
+      "initial_replenishment_ratio": -0.3461130882724513,
+      "phases": [
+        1.559306649888116,
+        -2.760511845346034,
+        -0.6665926658123502,
+        2.7730875067236562,
+        0.9884494554438232,
+        -1.4295529058093932,
+        1.9564282552410308,
+        -1.9485522329174763,
+        -1.276395958349222,
+        -1.5398272233864232,
+        -0.9769006758528911,
+        -1.0281197451046213,
+        1.4578947793212071,
+        0.19493719870928716,
+        -2.2462534347359706
+      ],
+      "sample": 7,
+      "target_nonlinear_rate": -0.006230035588904122,
+      "target_packet": 0.5624999999999999,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.017999999999999995
+    },
+    {
+      "initial_replenishment_ratio": -0.44465554929988504,
+      "phases": [
+        1.9546650337904428,
+        -2.519242000145794,
+        -0.16555191706394234,
+        0.9220296386263307,
+        2.4550862901768458,
+        1.192058149654648,
+        -0.5804882686338191,
+        2.1886860884695665,
+        -0.05593453225017164,
+        0.5272612712287867,
+        0.5686698025315287,
+        2.069055213533465,
+        2.4587923446098845,
+        -2.378730166432946,
+        2.8097407088749238
+      ],
+      "sample": 2,
+      "target_nonlinear_rate": -0.008003799887397928,
+      "target_packet": 0.5624999999999999,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.017999999999999995
+    },
+    {
+      "initial_replenishment_ratio": -0.8063289600120698,
+      "phases": [
+        2.7923344486207116,
+        -1.9802055084356418,
+        1.3148403682091612,
+        -0.6491175753419225,
+        0.9805093920445538,
+        1.7201215496301758,
+        0.3015908343812561,
+        -0.5141012387479895,
+        2.264952862465668,
+        -2.2221568686179687,
+        -1.8372620788621004,
+        1.0985452803530409,
+        -2.2462022152956185,
+        -1.547080025301559,
+        0.09094957824056538
+      ],
+      "sample": 5,
+      "target_nonlinear_rate": -0.014513921280217253,
+      "target_packet": 0.5624999999999999,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.017999999999999995
+    },
+    {
+      "initial_replenishment_ratio": -1.3493091468691332,
+      "phases": [
+        -3.0974363008652563,
+        2.7071616447279885,
+        -2.733572138756284,
+        1.9285368559794387,
+        -2.53648823139462,
+        -2.710772059006469,
+        2.467117623317592,
+        -0.464588484384334,
+        -0.002744439540607324,
+        -0.32351688902900033,
+        -0.5747229880231055,
+        -0.13169248216756202,
+        -1.8539973629723214,
+        2.3805107180191483,
+        -0.6602466712560711
+      ],
+      "sample": 1,
+      "target_nonlinear_rate": -0.024287564643644392,
+      "target_packet": 0.5624999999999999,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.017999999999999995
+    }
+  ],
+  "status": "ok",
+  "topology": {
+    "constraints": "reality symmetric, divergence free helical modes, componentwise 2/3 dealiased N32 support, fixed amplitudes and declared global normalization",
+    "entries": [
+      {
+        "amplitude": 3.0,
+        "fixed_phase": 0.0,
+        "helicity": 1,
+        "mode": [
+          4,
+          0,
+          0
+        ],
+        "role": "target-0"
+      },
+      {
+        "amplitude": 3.0,
+        "fixed_phase": 0.0,
+        "helicity": 1,
+        "mode": [
+          0,
+          4,
+          0
+        ],
+        "role": "target-1"
+      },
+      {
+        "amplitude": 3.0,
+        "fixed_phase": 0.0,
+        "helicity": 1,
+        "mode": [
+          0,
+          0,
+          4
+        ],
+        "role": "target-2"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": 1,
+        "mode": [
+          -2,
+          1,
+          0
+        ],
+        "role": "donor-0-0"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": -1,
+        "mode": [
+          -2,
+          -1,
+          0
+        ],
+        "role": "donor-0-1"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": -1,
+        "mode": [
+          -10,
+          -6,
+          0
+        ],
+        "role": "outlet-side-0"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": 1,
+        "mode": [
+          6,
+          6,
+          0
+        ],
+        "role": "shared-outlet-0"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": -1,
+        "mode": [
+          -6,
+          -10,
+          0
+        ],
+        "role": "feedback-0"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": 1,
+        "mode": [
+          1,
+          -2,
+          0
+        ],
+        "role": "donor-1-0"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": -1,
+        "mode": [
+          -1,
+          -2,
+          0
+        ],
+        "role": "donor-1-1"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": -1,
+        "mode": [
+          0,
+          -10,
+          -6
+        ],
+        "role": "outlet-side-1"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": 1,
+        "mode": [
+          0,
+          6,
+          6
+        ],
+        "role": "shared-outlet-1"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": -1,
+        "mode": [
+          0,
+          -6,
+          -10
+        ],
+        "role": "feedback-1"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": 1,
+        "mode": [
+          1,
+          0,
+          -2
+        ],
+        "role": "donor-2-0"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": -1,
+        "mode": [
+          -1,
+          0,
+          -2
+        ],
+        "role": "donor-2-1"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": -1,
+        "mode": [
+          -6,
+          0,
+          -10
+        ],
+        "role": "outlet-side-2"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": 1,
+        "mode": [
+          6,
+          0,
+          6
+        ],
+        "role": "shared-outlet-2"
+      },
+      {
+        "amplitude": 1.0,
+        "helicity": -1,
+        "mode": [
+          -10,
+          0,
+          -6
+        ],
+        "role": "feedback-2"
+      }
+    ],
+    "kind": "three-target cyclic outlet-feedback graph",
+    "phase_dimension": 15,
+    "phase_graph_geometry": {
+      "bipartite_component_count": 1,
+      "bipartite_edge_count": 27,
+      "bipartite_vertex_count": 27,
+      "cycle_basis": [
+        [
+          "triad:8",
+          "mode:(6, 0, 6)",
+          "triad:7",
+          "mode:(0, 0, 4)",
+          "triad:5",
+          "mode:(0, 6, 6)",
+          "triad:4",
+          "mode:(0, 4, 0)",
+          "triad:2",
+          "mode:(6, 6, 0)",
+          "triad:1",
+          "mode:(4, 0, 0)",
+          "triad:8"
+        ]
+      ],
+      "cycle_space_dimension": 1,
+      "helical_coupling_holonomy": {
+        "reason": "requires exact complex helical-channel coefficients, not only triad/mode topology",
+        "status": "not_yet_computed"
+      },
+      "mode_order": [
+        [
+          -10,
+          -6,
+          0
+        ],
+        [
+          -10,
+          0,
+          -6
+        ],
+        [
+          -6,
+          -10,
+          0
+        ],
+        [
+          -6,
+          0,
+          -10
+        ],
+        [
+          -2,
+          -1,
+          0
+        ],
+        [
+          -2,
+          1,
+          0
+        ],
+        [
+          -1,
+          -2,
+          0
+        ],
+        [
+          -1,
+          0,
+          -2
+        ],
+        [
+          0,
+          -10,
+          -6
+        ],
+        [
+          0,
+          -6,
+          -10
+        ],
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          6,
+          6
+        ],
+        [
+          1,
+          -2,
+          0
+        ],
+        [
+          1,
+          0,
+          -2
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          6
+        ],
+        [
+          6,
+          6,
+          0
+        ]
+      ],
+      "triad_mode_incidence_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ]
+      ],
+      "triad_mode_incidence_rank": 9
+    },
+    "targets": [
+      [
+        4,
+        0,
+        0
+      ],
+      [
+        0,
+        4,
+        0
+      ],
+      [
+        0,
+        0,
+        4
+      ]
+    ],
+    "translation_phase_gauge": "fixed phases of (4,0,0), (0,4,0), (0,0,4) remove the three translation gauges for the cyclic graph",
+    "triads": [
+      {
+        "kind": "lower-donor",
+        "modes": [
+          [
+            -2,
+            1,
+            0
+          ],
+          [
+            -2,
+            -1,
+            0
+          ],
+          [
+            4,
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "kind": "upper-outlet",
+        "modes": [
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            -10,
+            -6,
+            0
+          ],
+          [
+            6,
+            6,
+            0
+          ]
+        ]
+      },
+      {
+        "kind": "feedback",
+        "modes": [
+          [
+            6,
+            6,
+            0
+          ],
+          [
+            -6,
+            -10,
+            0
+          ],
+          [
+            0,
+            4,
+            0
+          ]
+        ]
+      },
+      {
+        "kind": "lower-donor",
+        "modes": [
+          [
+            1,
+            -2,
+            0
+          ],
+          [
+            -1,
+            -2,
+            0
+          ],
+          [
+            0,
+            4,
+            0
+          ]
+        ]
+      },
+      {
+        "kind": "upper-outlet",
+        "modes": [
+          [
+            0,
+            4,
+            0
+          ],
+          [
+            0,
+            -10,
+            -6
+          ],
+          [
+            0,
+            6,
+            6
+          ]
+        ]
+      },
+      {
+        "kind": "feedback",
+        "modes": [
+          [
+            0,
+            6,
+            6
+          ],
+          [
+            0,
+            -6,
+            -10
+          ],
+          [
+            0,
+            0,
+            4
+          ]
+        ]
+      },
+      {
+        "kind": "lower-donor",
+        "modes": [
+          [
+            1,
+            0,
+            -2
+          ],
+          [
+            -1,
+            0,
+            -2
+          ],
+          [
+            0,
+            0,
+            4
+          ]
+        ]
+      },
+      {
+        "kind": "upper-outlet",
+        "modes": [
+          [
+            0,
+            0,
+            4
+          ],
+          [
+            -6,
+            0,
+            -10
+          ],
+          [
+            6,
+            0,
+            6
+          ]
+        ]
+      },
+      {
+        "kind": "feedback",
+        "modes": [
+          [
+            6,
+            0,
+            6
+          ],
+          [
+            -10,
+            0,
+            -6
+          ],
+          [
+            4,
+            0,
+            0
+          ]
+        ]
+      }
+    ]
+  }
+}
