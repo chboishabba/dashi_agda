@@ -1,5 +1,37 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Replaced the initial geometric helical-mismatch candidate with the exact
+  helical phase-saturation diagnostic.  The script decomposes each modal
+  transfer into eight deterministic Waleffe-frame channel terms, represents
+  each edge transfer difference by the corresponding concatenated 16-term
+  carrier, and reports
+  `delta_sat = |Delta T| / sum(|channel terms|)` together with the exact local
+  hierarchy identity.  The N128 frames 0/6, cutoff-6, 12,000-triad audit
+  reconstructs the physical transfer below `6.7e-23` and the local identity
+  below `4.9e-27`.
+
+- The candidate fails the intended **instantaneous** sparsity calibration:
+  high-saturation edges above `.75`, `.90`, `.95`, and `.99` carry `46.7%`,
+  `18.4%`, `6.3%`, and `2.4%` of normalized sampled flux.  The audit is kept
+  as falsification evidence only.  It does not establish a temporal-residence
+  estimate and no `goodEdgeHierarchy`, `badEdgeSparsity`, NS, BKM, q-gap, or
+  Clay gate changed.
+
+- The full 13-snapshot series also provides no evidence for the simple
+  temporal-residence variant: the `.90` bad-flux share stays in
+  `[18.8%, 19.9%]` across every frame (aggregate `19.3%`; `.95` aggregate
+  `6.4%`; `.99` aggregate `2.2%`).  These are snapshot-weighted samples, not
+  an integral in time, but they are sufficient negative calibration to avoid
+  adding a formal phase-saturation `badEdgeSparsity` target without a
+  materially different dynamical quantity.
+
+- Tightened the extended-flux and depletion-barrier contracts after review:
+  zero denominators are now branch-correct, the hierarchy and strict barrier
+  are exact inequalities rather than opaque `Set` placeholders, and the
+  conditional strict-absorption algebra is proved.  This does not supply the
+  local hierarchy, bad-edge sparsity, an ordered-field instance, or an energy
+  integration theorem.
+
 - Locked the purely finite depletion-barrier algebra in
   `NSTriadKNDepletionBarrier.agda`.  Given an exact good/bad flux split, a
   local good-edge hierarchy bound, and a bad-edge sparsity bound, the finite

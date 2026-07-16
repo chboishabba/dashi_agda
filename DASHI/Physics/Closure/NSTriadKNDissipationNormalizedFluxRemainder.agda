@@ -3,8 +3,8 @@ module DASHI.Physics.Closure.NSTriadKNDissipationNormalizedFluxRemainder where
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Empty using (⊥)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Sum.Base using (_⊎_)
 
 import DASHI.Physics.Closure.NSTriadKNExactOrderedScalar as Scalar
 import DASHI.Physics.Closure.NSTriadKNLocalViscousEdgeAllocation as Allocation
@@ -23,6 +23,17 @@ data ExtendedFlux (S : Scalar.ExactOrderedScalar) : Set where
   finite : Scalar.Scalar S → ExtendedFlux S
   infinity : ExtendedFlux S
 
+infix 4 _≤∞_
+data _≤∞_ {S : Scalar.ExactOrderedScalar} :
+  ExtendedFlux S → ExtendedFlux S → Set where
+  finite≤finite :
+    {a b : Scalar.Scalar S} → Scalar._≤_ S a b → finite a ≤∞ finite b
+  finite≤infinity : {a : Scalar.Scalar S} → finite a ≤∞ infinity
+  infinity≤infinity : infinity ≤∞ infinity
+
+_≢_ : {A : Set} → A → A → Set
+x ≢ y = x ≡ y → ⊥
+
 record DissipationNormalisedFluxAuthority
     (S : Scalar.ExactOrderedScalar) : Set₁ where
   field
@@ -31,12 +42,22 @@ record DissipationNormalisedFluxAuthority
     divideByPositive : Scalar.Scalar S → Scalar.Scalar S → Scalar.Scalar S
     normalisedQuotient : Scalar.Scalar S → Scalar.Scalar S → ExtendedFlux S
 
-    -- Exact extended-zero convention:
-    -- numerator / 0 = 0 only if numerator = 0; otherwise it is infinity.
-    zeroDenominatorConvention :
+    -- Exact extended-zero convention.  The branch is determined by the
+    -- numerator; an arbitrary finite/infinite choice is not admissible.
+    zeroOverZero :
+      normalisedQuotient (Scalar.zero S) (Scalar.zero S) ≡
+      finite (Scalar.zero S)
+
+    nonzeroOverZero :
       (numerator : Scalar.Scalar S) →
-      normalisedQuotient numerator (Scalar.zero S) ≡ finite (Scalar.zero S)
-      ⊎ normalisedQuotient numerator (Scalar.zero S) ≡ infinity
+      numerator ≢ Scalar.zero S →
+      normalisedQuotient numerator (Scalar.zero S) ≡ infinity
+
+    -- A finite quotient is genuinely finite.  This is the order fact later
+    -- needed to force a zero numerator on any zero-density edge carrying a
+    -- finite local hierarchy bound.
+    infinityNotLeFinite :
+      (a : Scalar.Scalar S) → (infinity {S = S} ≤∞ finite a) → ⊥
 
 open DissipationNormalisedFluxAuthority public
 
@@ -68,11 +89,12 @@ record DissipationNormalisedYoungControl
     epsilon : Scalar.Scalar S
     fluxRemainder : ExtendedFlux S
 
-    -- This is the exact desired Young split.  It remains an explicit theorem
-    -- obligation until the repository has a concrete ordered field,
-    -- positivity of epsilon and each local density, and an extended-order
-    -- calculus.  No false finite quotient is introduced at zero density.
-    localYoungSplit : Set
+    -- This is an explicitly typed conditional Young conclusion.  The two
+    -- finite budgets are supplied by the future ordered-field/Cauchy proof;
+    -- no arbitrary regularisation at d = 0 is hidden here.
+    viscousBudget : Scalar.Scalar S
+    dualFluxBudget : ExtendedFlux S
+    localYoungSplit : fluxRemainder ≤∞ dualFluxBudget
 
 open DissipationNormalisedYoungControl public
 

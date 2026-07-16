@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSTriadKNDepletionBarrier where
 
 open import Agda.Builtin.Bool using (Bool; false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Physics.Closure.NSTriadKNExactOrderedScalar as Scalar
 
@@ -19,6 +19,13 @@ import DASHI.Physics.Closure.NSTriadKNExactOrderedScalar as Scalar
 
 record BarrierAdditiveOrderAuthority (S : Scalar.ExactOrderedScalar) : Set₁ where
   field
+    leRefl :
+      (a : Scalar.Scalar S) → Scalar._≤_ S a a
+
+    leTrans :
+      {a b c : Scalar.Scalar S} →
+      Scalar._≤_ S a b → Scalar._≤_ S b c → Scalar._≤_ S a c
+
     addMonotone :
       {a b c d : Scalar.Scalar S} →
       Scalar._≤_ S a b → Scalar._≤_ S c d →
@@ -73,11 +80,36 @@ record StrictDepletionBarrierTarget
     dissipation : Scalar.Scalar S
     strictMargin : Scalar.Scalar S
 
-    -- Intended conclusion after a concrete threshold/profile proof:
-    -- hierarchyContribution + badContribution + strictMargin <= dissipation.
-    strictBarrier : Set
+    -- Exact conclusion after a concrete threshold/profile proof.  This is a
+    -- conditional hypothesis, not a manufactured strict margin.
+    strictBarrier :
+      Scalar._≤_ S
+        (Scalar._+_ S
+          (Scalar._+_ S hierarchyContribution badContribution)
+          strictMargin)
+        dissipation
 
 open StrictDepletionBarrierTarget public
+
+-- Once a physical good/bad estimate has the same two contributions as an
+-- explicit strict threshold witness, the strict absorption step is purely
+-- finite ordered algebra.
+strictDepletionBarrierImpliesAbsorption :
+  (S : Scalar.ExactOrderedScalar) →
+  (O : BarrierAdditiveOrderAuthority S) →
+  (P : DepletionBarrierPremises S) →
+  (T : StrictDepletionBarrierTarget S) →
+  goodHierarchyBound P ≡ hierarchyContribution T →
+  badSparsityBound P ≡ badContribution T →
+  Scalar._≤_ S
+    (Scalar._+_ S (totalFlux P) (strictMargin T))
+    (dissipation T)
+strictDepletionBarrierImpliesAbsorption S O P T refl refl =
+  leTrans O
+    (addMonotone O
+      (depletionBarrierImpliesFluxHierarchy S O P)
+      (leRefl O (strictMargin T)))
+    (strictBarrier T)
 
 depletionBarrierClosed : Bool
 depletionBarrierClosed = false

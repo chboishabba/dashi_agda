@@ -1,0 +1,280 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "theorem_authority": false
+  },
+  "contract": "ns_triad_edge_depletion_audit",
+  "decision": "candidate-only phase-saturation calibration; no hierarchy, bad-edge sparsity, temporal residence, or NS theorem inferred",
+  "definition": {
+    "channel_carrier": "eight helical terms per modal transfer; each edge is the concatenated 16-term difference carrier",
+    "defect": "delta_sat(e) = |Delta T_e| / A_e, where A_e is the sum of absolute exact helical-channel terms",
+    "local_identity": "edge_flux = delta_sat^2 * x_env * modal_dissipation, x_env = A_e^2/modal_dissipation^2",
+    "warning": "The identity does not establish a controllable global X or phase-saturation sparsity theorem."
+  },
+  "inputs": {
+    "canonical_triad_count_per_frame": 3000,
+    "cutoff": 6,
+    "discrete_leray_projected": true,
+    "frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz"
+  },
+  "sample": {
+    "edge_count": 117000,
+    "legacy_mismatch_flux_pearson": -0.01583350742439617,
+    "max_helical_reconstruction_error": 6.617444900424221e-23,
+    "max_local_identity_error": 4.8467614016778965e-27,
+    "max_modal_conservation_error": 6.617444900424221e-23,
+    "max_modal_transfer_scale": 7.387016503732194e-08,
+    "max_relative_modal_conservation_error_on_meaningful_triads": 1.7939772257604485e-13,
+    "meaningful_transfer_scale_floor": 7.387016503732194e-16,
+    "saturation_flux_pearson": 0.3818900992726175,
+    "saturation_x_env_pearson": 0.04787322970526292,
+    "snapshot_weighted_bad_flux_residence": [
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9982139736426348,
+          "0.25": 0.9733200643175639,
+          "0.5": 0.8079909824313923,
+          "0.75": 0.4908201792089056,
+          "0.9": 0.1959791828302547,
+          "0.95": 0.07406973522093988,
+          "0.99": 0.027097442235144032
+        },
+        "frame": 0,
+        "total_edge_flux": 1.7216823539347498e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9982265221342623,
+          "0.25": 0.973447529232177,
+          "0.5": 0.8067833985173015,
+          "0.75": 0.4871932107214862,
+          "0.9": 0.19596698966972478,
+          "0.95": 0.06950867193491671,
+          "0.99": 0.026387587595617348
+        },
+        "frame": 1,
+        "total_edge_flux": 1.7224130745705212e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9982550503971194,
+          "0.25": 0.9736555779822696,
+          "0.5": 0.8074964920317211,
+          "0.75": 0.48500930866830105,
+          "0.9": 0.1927502688508096,
+          "0.95": 0.07260632032566308,
+          "0.99": 0.021836064181388715
+        },
+        "frame": 2,
+        "total_edge_flux": 1.7208126405578377e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9981937964627002,
+          "0.25": 0.9740294066237498,
+          "0.5": 0.8068805132943447,
+          "0.75": 0.482122974571477,
+          "0.9": 0.1990826325036433,
+          "0.95": 0.07418771152712349,
+          "0.99": 0.02427631590707592
+        },
+        "frame": 3,
+        "total_edge_flux": 1.7167491014275185e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9982066991346432,
+          "0.25": 0.9738664960561538,
+          "0.5": 0.8056555915937632,
+          "0.75": 0.48459970513198564,
+          "0.9": 0.19021797368759874,
+          "0.95": 0.07131362019430902,
+          "0.99": 0.02321536842669943
+        },
+        "frame": 4,
+        "total_edge_flux": 1.7103133571209635e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9981925501086159,
+          "0.25": 0.9734590870425414,
+          "0.5": 0.8037562424100761,
+          "0.75": 0.4801196242793328,
+          "0.9": 0.1902442975428181,
+          "0.95": 0.06232682941142544,
+          "0.99": 0.025502419756063578
+        },
+        "frame": 5,
+        "total_edge_flux": 1.7018043179677476e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.998346647496499,
+          "0.25": 0.9735509483968084,
+          "0.5": 0.8046330080286481,
+          "0.75": 0.4812888675694171,
+          "0.9": 0.1897653591688402,
+          "0.95": 0.06261254550134522,
+          "0.99": 0.02378469757022659
+        },
+        "frame": 6,
+        "total_edge_flux": 1.6916808165787392e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9983324124793765,
+          "0.25": 0.9731074332677994,
+          "0.5": 0.8050677160552449,
+          "0.75": 0.4793202539676549,
+          "0.9": 0.19495032957006608,
+          "0.95": 0.060641840733765044,
+          "0.99": 0.021249612431722662
+        },
+        "frame": 7,
+        "total_edge_flux": 1.680483155451369e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9983038948120787,
+          "0.25": 0.9739233305305567,
+          "0.5": 0.8052809398819999,
+          "0.75": 0.4780947362660787,
+          "0.9": 0.19456650905279918,
+          "0.95": 0.06061274945179664,
+          "0.99": 0.020353381796863548
+        },
+        "frame": 8,
+        "total_edge_flux": 1.6687395566578116e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9982809551988957,
+          "0.25": 0.9730887653579535,
+          "0.5": 0.8046144377806607,
+          "0.75": 0.4784318201207083,
+          "0.9": 0.1942904905755207,
+          "0.95": 0.05840325447662883,
+          "0.99": 0.018951252284911235
+        },
+        "frame": 9,
+        "total_edge_flux": 1.6568807515780054e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9981639987440821,
+          "0.25": 0.9730195340547553,
+          "0.5": 0.8052234106694601,
+          "0.75": 0.4831702277169972,
+          "0.9": 0.1949937972806247,
+          "0.95": 0.05948051327654006,
+          "0.99": 0.017910570773758686
+        },
+        "frame": 10,
+        "total_edge_flux": 1.6451819073725025e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9981373779266054,
+          "0.25": 0.9737851657103389,
+          "0.5": 0.8068828237634609,
+          "0.75": 0.48552989081398135,
+          "0.9": 0.1904620778454161,
+          "0.95": 0.053463446931070226,
+          "0.99": 0.01777848732099898
+        },
+        "frame": 11,
+        "total_edge_flux": 1.6337454302656168e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9981273288693993,
+          "0.25": 0.9737379293501234,
+          "0.5": 0.8054719327900083,
+          "0.75": 0.48361573418821235,
+          "0.9": 0.1876137109206157,
+          "0.95": 0.05059484681022132,
+          "0.99": 0.017978884304155167
+        },
+        "frame": 12,
+        "total_edge_flux": 1.6225224821449755e-09
+      }
+    ],
+    "threshold_rows": [
+      {
+        "bad_count": 100215,
+        "bad_edge_fraction": 0.8565384615384616,
+        "bad_flux_fraction": 0.9982297472867965,
+        "eta": 0.1,
+        "good_flux_fraction": 0.0017702527132032536
+      },
+      {
+        "bad_count": 76299,
+        "bad_edge_fraction": 0.6521282051282051,
+        "bad_flux_fraction": 0.9735386715244249,
+        "eta": 0.25,
+        "good_flux_fraction": 0.026461328475574898
+      },
+      {
+        "bad_count": 41898,
+        "bad_edge_fraction": 0.3581025641025641,
+        "bad_flux_fraction": 0.805835085984638,
+        "eta": 0.5,
+        "good_flux_fraction": 0.19416491401536187
+      },
+      {
+        "bad_count": 16533,
+        "bad_edge_fraction": 0.1413076923076923,
+        "bad_flux_fraction": 0.4830480425274333,
+        "eta": 0.75,
+        "good_flux_fraction": 0.5169519574725665
+      },
+      {
+        "bad_count": 4996,
+        "bad_edge_fraction": 0.042700854700854704,
+        "bad_flux_fraction": 0.19317159197755956,
+        "eta": 0.9,
+        "good_flux_fraction": 0.8068284080224403
+      },
+      {
+        "bad_count": 2087,
+        "bad_edge_fraction": 0.017837606837606837,
+        "bad_flux_fraction": 0.06397580286942148,
+        "eta": 0.95,
+        "good_flux_fraction": 0.9360241971305784
+      },
+      {
+        "bad_count": 810,
+        "bad_edge_fraction": 0.006923076923076923,
+        "bad_flux_fraction": 0.022082589056850364,
+        "eta": 0.99,
+        "good_flux_fraction": 0.9779174109431493
+      }
+    ],
+    "total_normalised_edge_flux": 2.1893008945628362e-08,
+    "x_env_quantiles": {
+      "max": 3.396082319132253e-08,
+      "p50": 1.496953772145967e-09,
+      "p90": 5.510226766947619e-09,
+      "p99": 1.19155744914796e-08
+    }
+  },
+  "status": "ok"
+}
