@@ -104,6 +104,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--backend", choices=("none", "cpu", "gpu"), default="none")
     parser.add_argument("--fft-backend", default="vkfft-vulkan")
     parser.add_argument("--save-every", type=int, default=100)
+    parser.add_argument("--interaction-closure-output-modes", type=int, default=0,
+                        help=("at quarter checkpoints, exactly enumerate unordered convolution inputs for "
+                              "this many dominant target-shell output modes; zero disables the audit"))
+    parser.add_argument("--interaction-closure-retain", type=int, default=512,
+                        help="largest interaction rows retained per closure snapshot")
     parser.add_argument("--cfd-root", type=Path, default=DEFAULT_CFD_ROOT)
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT)
     return parser.parse_args()
@@ -711,6 +716,248 @@ def designed_role_transfer_rate(field_hat: np.ndarray, network: dict[str, Any]) 
     }
 
 
+def canonical_pair(
+    left: tuple[int, int, int], right: tuple[int, int, int],
+) -> tuple[tuple[int, int, int], tuple[int, int, int]]:
+    return (left, right) if left <= right else (right, left)
+
+
+def designed_target_interaction_keys(network: dict[str, Any], target_shell: int) -> set[tuple[Any, ...]]:
+    """Canonical output/input-orbit keys represented by the designed triads."""
+    lower, upper = float(2 ** target_shell), float(2 ** (target_shell + 1))
+    keys: set[tuple[Any, ...]] = set()
+    for triad in network["triads"]:
+        modes = [tuple(mode) for mode in triad["modes"]]
+        for index, labelled_output in enumerate(modes):
+            output = negate(labelled_output)
+            output_norm = math.sqrt(sum(value * value for value in output))
+            if not (lower <= output_norm < upper):
+                continue
+            inputs = [modes[position] for position in range(3) if position != index]
+            left, right = canonical_pair(inputs[0], inputs[1])
+            keys.add((output, left, right))
+    return keys
+
+
+def interaction_closure_snapshot(
+    args: argparse.Namespace,
+    field_hat: np.ndarray,
+    nonlinear_hat: np.ndarray,
+    wave: np.ndarray,
+    norm: np.ndarray,
+    network: dict[str, Any],
+) -> dict[str, Any]:
+    """Exact unordered-pair closure on dominant target-shell output modes.
+
+    Output modes are selected by their absolute *net* modal energy transfer.
+    The returned ``analysed_output_modal_activity_capture`` states how much of
+    the full target shell's absolute modal activity that carrier represents.
+    Every unordered input pair for those outputs is then enumerated exactly;
+    top-M and entropy statements apply only to that declared carrier.
+    """
+    n = field_hat.shape[1]
+    lower, upper = float(2 ** args.target_shell), float(2 ** (args.target_shell + 1))
+    shell_mask = (norm >= lower) & (norm < upper)
+    modal_rate = 2.0 * (2 ** args.target_shell) * np.real(
+        np.sum(np.conjugate(field_hat) * nonlinear_hat, axis=0)
+    )
+    shell_flat = np.flatnonzero(shell_mask.ravel())
+    shell_activity = np.abs(modal_rate.ravel()[shell_flat])
+    order = np.argsort(shell_activity)[::-1]
+    ordered_shell_activity = shell_activity[order]
+    cumulative_shell_activity = np.cumsum(ordered_shell_activity)
+    count = min(args.interaction_closure_output_modes, len(order))
+    selected_flat = shell_flat[order[:count]]
+    full_modal_activity = float(np.sum(shell_activity))
+    selected_modal_activity = float(np.sum(np.abs(modal_rate.ravel()[selected_flat])))
+
+    def minimal_output_count(fraction: float) -> int:
+        if full_modal_activity <= 1.0e-30:
+            return 0
+        return int(np.searchsorted(
+            cumulative_shell_activity, fraction * full_modal_activity, side="left"
+        ) + 1)
+
+    grid_flat = np.arange(n ** 3, dtype=np.int64)
+    p_zyx = np.column_stack(np.unravel_index(grid_flat, (n, n, n)))
+    field_flat = field_hat.reshape(3, -1)
+    wave_flat = wave.reshape(3, -1)
+    designed_keys = designed_target_interaction_keys(network, args.target_shell)
+    contribution_blocks: list[np.ndarray] = []
+    key_blocks: list[tuple[int, np.ndarray, np.ndarray]] = []
+    direct_sum = 0.0
+
+    for output_flat in selected_flat:
+        output_zyx = np.asarray(np.unravel_index(int(output_flat), (n, n, n)), dtype=np.int64)
+        q_zyx = (output_zyx[None, :] - p_zyx) % n
+        q_flat = np.ravel_multi_index(q_zyx.T, (n, n, n))
+        unique = grid_flat <= q_flat
+        p_index = grid_flat[unique]
+        q_index = q_flat[unique]
+        up = field_flat[:, p_index]
+        uq = field_flat[:, q_index]
+        kp = wave_flat[:, p_index]
+        kq = wave_flat[:, q_index]
+        ordered_pq = -1j * np.sum(kq * up, axis=0)[None, :] * uq
+        ordered_qp = -1j * np.sum(kp * uq, axis=0)[None, :] * up
+        pair_term = ordered_pq + ordered_qp
+        diagonal = p_index == q_index
+        pair_term[:, diagonal] = ordered_pq[:, diagonal]
+
+        output_wave = wave_flat[:, int(output_flat)]
+        output_norm_sq = float(np.dot(output_wave, output_wave))
+        if output_norm_sq > 0.0:
+            pair_term -= output_wave[:, None] * (
+                np.sum(output_wave[:, None] * pair_term, axis=0) / output_norm_sq
+            )[None, :]
+        output_value = field_flat[:, int(output_flat)]
+        contributions = 2.0 * (2 ** args.target_shell) * np.real(
+            np.sum(np.conjugate(output_value)[:, None] * pair_term, axis=0)
+        )
+        contribution_blocks.append(np.asarray(contributions, dtype=np.float64))
+        key_blocks.append((int(output_flat), p_index, q_index))
+        direct_sum += float(modal_rate.ravel()[int(output_flat)])
+
+    if contribution_blocks:
+        contributions = np.concatenate(contribution_blocks)
+        absolute = np.abs(contributions)
+    else:
+        contributions = np.empty(0, dtype=np.float64)
+        absolute = np.empty(0, dtype=np.float64)
+    total_absolute = float(np.sum(absolute))
+    total_signed = float(np.sum(contributions))
+    ranked_indices = np.argsort(absolute)[::-1]
+    descending = absolute[ranked_indices]
+    cumulative = np.cumsum(descending)
+
+    def minimal_count(fraction: float) -> int:
+        if total_absolute <= 1.0e-30:
+            return 0
+        return int(np.searchsorted(cumulative, fraction * total_absolute, side="left") + 1)
+
+    power_counts: list[int] = []
+    power = 1
+    while power <= absolute.size:
+        power_counts.append(power)
+        power *= 2
+    capture_counts = sorted({
+        count for count in (
+            *power_counts,
+            min(args.interaction_closure_retain, int(absolute.size)),
+            minimal_count(0.50), minimal_count(0.90), minimal_count(0.99),
+            int(absolute.size),
+        )
+        if 0 < count <= absolute.size
+    })
+    capture_curve = [
+        {
+            "interaction_count": int(count),
+            "absolute_activity_capture": (
+                float(cumulative[count - 1]) / total_absolute if total_absolute > 1.0e-30 else math.nan
+            ),
+        }
+        for count in capture_counts
+    ]
+
+    positive = absolute[absolute > 0.0]
+    if total_absolute > 0.0 and positive.size:
+        probabilities = positive / total_absolute
+        entropy = float(-np.sum(probabilities * np.log(probabilities)))
+        inverse_participation_effective_support = float(1.0 / np.sum(probabilities ** 2))
+    else:
+        entropy = 0.0
+        inverse_participation_effective_support = 0.0
+
+    retain = min(args.interaction_closure_retain, absolute.size)
+    retained_indices = ranked_indices[:retain]
+    block_offsets = np.cumsum([0] + [len(block) for block in contribution_blocks])
+    retained_rows: list[dict[str, Any]] = []
+    selected_output_modes = {
+        tuple(int(round(value)) for value in wave_flat[:, int(output_flat)])
+        for output_flat in selected_flat
+    }
+    designed_absolute = float(sum(
+        abs(2.0 * (2 ** args.target_shell) * static_modal_transfer(field_hat, output, left, right))
+        for output, left, right in designed_keys
+        if output in selected_output_modes
+    ))
+    def interaction_key(global_index: int) -> tuple[Any, ...]:
+        block_index = int(np.searchsorted(block_offsets, int(global_index), side="right") - 1)
+        local_index = int(global_index - block_offsets[block_index])
+        output_flat, p_index, q_index = key_blocks[block_index]
+        output_mode = tuple(int(round(value)) for value in wave_flat[:, output_flat])
+        p_mode = tuple(int(round(value)) for value in wave_flat[:, int(p_index[local_index])])
+        q_mode = tuple(int(round(value)) for value in wave_flat[:, int(q_index[local_index])])
+        left, right = canonical_pair(p_mode, q_mode)
+        return output_mode, left, right
+
+    for global_index in retained_indices:
+        output_mode, left, right = interaction_key(int(global_index))
+        retained_rows.append({
+            "output": list(output_mode),
+            "inputs": [list(left), list(right)],
+            "signed_transfer": float(contributions[int(global_index)]),
+            "absolute_transfer": float(absolute[int(global_index)]),
+            "designed_graph_interaction": (output_mode, left, right) in designed_keys,
+        })
+    return {
+        "contract": (
+            "exact unordered convolution-pair enumeration on the declared dominant target-output carrier; "
+            "output-carrier capture is reported separately and no full-shell closure is inferred"
+        ),
+        "target_shell_output_mode_count": int(len(shell_flat)),
+        "analysed_output_mode_count": int(count),
+        "analysed_output_modal_activity_capture": (
+            selected_modal_activity / full_modal_activity if full_modal_activity > 1.0e-30 else math.nan
+        ),
+        "output_modal_activity_m50": minimal_output_count(0.50),
+        "output_modal_activity_m90": minimal_output_count(0.90),
+        "output_modal_activity_m99": minimal_output_count(0.99),
+        "interaction_count": int(absolute.size),
+        "absolute_interaction_activity": total_absolute,
+        "signed_interaction_sum": total_signed,
+        "direct_selected_modal_transfer_sum": direct_sum,
+        "signed_reconstruction_error": abs(total_signed - direct_sum),
+        "designed_interaction_absolute_capture": (
+            designed_absolute / total_absolute if total_absolute > 1.0e-30 else math.nan
+        ),
+        "m50": minimal_count(0.50),
+        "m90": minimal_count(0.90),
+        "m99": minimal_count(0.99),
+        "top_m_absolute_activity_capture_curve": capture_curve,
+        "shannon_entropy": entropy,
+        "effective_interaction_support": float(math.exp(entropy)),
+        "inverse_participation_effective_support": inverse_participation_effective_support,
+        "shannon_support_fraction": (
+            float(math.exp(entropy)) / positive.size if positive.size else 0.0
+        ),
+        "inverse_participation_support_fraction": (
+            inverse_participation_effective_support / positive.size if positive.size else 0.0
+        ),
+        "nonzero_interaction_count": int(positive.size),
+        "retained_interaction_count": len(retained_rows),
+        "retained_absolute_activity_capture": (
+            float(np.sum(absolute[retained_indices])) / total_absolute if total_absolute > 1.0e-30 else math.nan
+        ),
+        "largest_interactions": retained_rows,
+        # Private in-memory support sets are removed before JSON serialization.
+        # They let the evolution receipt distinguish a persistent dominant core
+        # from a sparse core that wanders between checkpoints.
+        "_dominant_key_sets": {
+            name: (
+                {interaction_key(int(index)) for index in ranked_indices[:dominant_count]}
+                if dominant_count <= 50_000 else None
+            )
+            for name, dominant_count in (
+                ("top50", minimal_count(0.50)),
+                ("top90", minimal_count(0.90)),
+                ("top_retained", retain),
+            )
+        },
+        "_selected_output_mode_set": selected_output_modes,
+    }
+
+
 def integrated_role_transfer_ledger(history: list[dict[str, Any]]) -> dict[str, Any]:
     """Integrate gross designed-triad throughput over saved solver states.
 
@@ -1104,11 +1351,15 @@ def evolve_candidate(
     heat_packets = [float(ledger[args.target_shell]) for ledger in heat_ledgers]
     heat_moving = [moving_packet_from_packets(ledger, args.moving_packet_radius) for ledger in heat_ledgers]
     history: list[dict[str, Any]] = []
+    # A viscous window need not contain a number of solver steps divisible by
+    # four (the production N32/j=2 window has 15,625).  Nearest-step quarter
+    # checkpoints preserve the intended physical times without silently
+    # dropping all interior receipts.
     quarter_checkpoint_steps = {
-        numerator * window_steps // 4
+        int(round(numerator * window_steps / 4.0))
         for numerator in range(1, 4 * args.windows + 1)
-        if (numerator * window_steps) % 4 == 0
     }
+    closure_checkpoint_steps = {0, steps, *quarter_checkpoint_steps}
 
     def record(step: int, current_raw: np.ndarray) -> None:
         current_field = raw_to_field_hat(current_raw, wave, norm_sq)
@@ -1119,10 +1370,15 @@ def evolve_candidate(
         dissipation = shell_dissipation(current_field, norm_sq, norm, args.target_shell)[args.target_shell]
         nonlinear_rate = shell_nonlinear_rate(current_field, nonlinear, norm, args.target_shell)[args.target_shell]
         role_ledger = designed_role_transfer_rate(current_field, network)
-        history.append({"step": step, "time": step * args.dt, **shape,
-                        "target_dissipation": float(dissipation),
-                        "target_nonlinear_rate": float(nonlinear_rate),
-                        "designed_role_transfer_ledger": role_ledger})
+        row = {"step": step, "time": step * args.dt, **shape,
+               "target_dissipation": float(dissipation),
+               "target_nonlinear_rate": float(nonlinear_rate),
+               "designed_role_transfer_ledger": role_ledger}
+        if args.interaction_closure_output_modes > 0 and step in closure_checkpoint_steps:
+            row["interaction_closure_snapshot"] = interaction_closure_snapshot(
+                args, current_field, nonlinear, wave, norm, network
+            )
+        history.append(row)
 
     if args.backend == "gpu":
         from vulkan_truth3d_backend import VulkanTruth3DBackend
@@ -1160,6 +1416,49 @@ def evolve_candidate(
     nonlinear_negative = float(-np.trapezoid(np.minimum(nonlinear_rates, 0.0), times))
     role_transfer = integrated_role_transfer_ledger(history)
     role_transfer_checkpoints = role_transfer_checkpoint_telemetry(history, window_steps)
+    closure_rows = [row for row in history if "interaction_closure_snapshot" in row]
+
+    def jaccard(left: set[tuple[Any, ...]] | None,
+                right: set[tuple[Any, ...]] | None) -> float | None:
+        if left is None or right is None:
+            return None
+        union = left | right
+        return float(len(left & right) / len(union)) if union else 1.0
+
+    initial_supports = (
+        closure_rows[0]["interaction_closure_snapshot"]["_dominant_key_sets"]
+        if closure_rows else {}
+    )
+    initial_output_modes = (
+        closure_rows[0]["interaction_closure_snapshot"]["_selected_output_mode_set"]
+        if closure_rows else set()
+    )
+    previous_supports: dict[str, set[tuple[Any, ...]] | None] | None = None
+    previous_output_modes: set[tuple[int, int, int]] | None = None
+    for row in closure_rows:
+        snapshot = row["interaction_closure_snapshot"]
+        supports = snapshot.pop("_dominant_key_sets")
+        output_modes = snapshot.pop("_selected_output_mode_set")
+        snapshot["dominant_set_overlap"] = {
+            name: {
+                "available": supports[name] is not None,
+                "to_initial": jaccard(supports[name], initial_supports.get(name)),
+                "to_previous": (
+                    jaccard(supports[name], previous_supports.get(name))
+                    if previous_supports is not None else 1.0
+                ),
+            }
+            for name in ("top50", "top90", "top_retained")
+        }
+        snapshot["selected_output_mode_overlap"] = {
+            "to_initial": jaccard(output_modes, initial_output_modes),
+            "to_previous": (
+                jaccard(output_modes, previous_output_modes)
+                if previous_output_modes is not None else 1.0
+            ),
+        }
+        previous_supports = supports
+        previous_output_modes = output_modes
     final_packet = float(window_rows[-1]["target_packet"])
     final_moving_packet = float(window_rows[-1]["moving_packet"])
     final_dominant_shell = int(window_rows[-1]["dominant_shell"])
@@ -1196,6 +1495,10 @@ def evolve_candidate(
         "nonlinear_negative_over_viscous_loss": nonlinear_negative / viscous_loss if viscous_loss > 1.0e-30 else math.nan,
         "designed_role_transfer": role_transfer,
         "designed_role_transfer_checkpoints": role_transfer_checkpoints,
+        "interaction_closure_snapshots": [
+            {"step": int(row["step"]), "time": float(row["time"]), **row["interaction_closure_snapshot"]}
+            for row in history if "interaction_closure_snapshot" in row
+        ],
         "window_checkpoints": window_rows,
         "history": history,
     }
@@ -1206,6 +1509,8 @@ def main() -> None:
     if (args.n < 24 or args.nu <= 0.0 or args.dt <= 0.0 or args.phase_samples <= 0
             or args.windows <= 0 or args.top_candidates <= 0):
         raise ValueError("n >= 24, positive nu/dt/windows/candidates, and phase-samples > 0 are required")
+    if args.interaction_closure_output_modes < 0 or args.interaction_closure_retain <= 0:
+        raise ValueError("interaction closure output modes must be nonnegative and retain must be positive")
     if args.critical_mass <= 0.0 or args.target_urms <= 0.0:
         raise ValueError("critical-mass and target-urms must be positive")
     if args.moving_packet_radius < 0 or args.endpoint_prefilter_candidates < 0:

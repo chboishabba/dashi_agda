@@ -1,5 +1,45 @@
 # Compactified Context
 
+## Current Interaction-Closure Pivot
+
+- The first production closure replay is complete.  Its 32 selected outputs
+  cover only `.125755` of endpoint target-shell absolute modal activity, so a
+  full-shell regime is not yet classified.  On that selected carrier the
+  endpoint is broad: `M50/M90/M99=7825/27260/41257`, `exp(H)=28716.7`, and
+  the top 512 carry only `.08720`; their Jaccard overlap with the initial top
+  512 is zero.  This is selected-carrier proliferation evidence only.
+- Closure instrumentation now records nearest-step quarter checkpoints even
+  when the window has `15625` steps, exact Shannon and IPR effective support,
+  normalized support fractions, expanded capture curves, and dominant-set
+  overlap.  `ns_interaction_closure_report.py` compares truncated rank models
+  but never extrapolates an uncertified tail into a theorem.  A 256-output
+  256-output replay of the same phase completed with endpoint output capture
+  `.571846`, `M90=211662`, `M99=322303`, `exp(H)=221772.8`, IPR support
+  `143060.3`, top-1024 capture `.034997`, and adjacent retained-core Jaccard
+  around `.01--.019`.  This is effectively dense and strongly switching on
+  the selected carrier.  A 1024-output replay is running to cross `.9` output
+  capture before assigning a provisional full-shell regime.  No NS/Clay gate
+  changed.
+- The bounded sparse-loop tuning tranche is closed.  On donor-heavy backbone
+  rank `1`, four phase streams yield `R_move=.2747..3099`; the best phase has
+  only `.00562` designed target capture and `.96957` support leakage.  Since
+  `max R_move < .4` and capture stays `<.1`, further phase tuning of the
+  nine-triad graph is retired.  An exact 32-output interaction-closure replay
+  of the best phase is running.
+- The empirical priority has moved from tuning the nine designed triads to
+  measuring the full nonlinear interaction closure.  The packet search now
+  has an opt-in exact unordered convolution-pair audit on a declared set of
+  dominant target output modes.  It emits output-carrier capture, signed
+  reconstruction error, designed-interaction absolute capture, top-M capture,
+  `M50/M90/M99`, Shannon entropy/effective support, and retained dominant
+  interactions.  N32 smokes reconstruct below `4e-18`; a 32-output endpoint
+  probe captures `.9687` of full target modal activity with `M50/M90/M99 =
+  5/16/93`.  This is candidate-only instrumentation, not an NS estimate.
+- The bounded donor-heavy phase tranche continues independently.  Mixed
+  polarization of the sparse nine-triad graph is lower priority until closure
+  measurements decide whether the actual interaction core is sparse,
+  structured-broad, or dense.
+
 ## Current Quarter-Window Execution
 
 - The six coarse allocation rank-0/phase-0 quarter-window screen is complete:

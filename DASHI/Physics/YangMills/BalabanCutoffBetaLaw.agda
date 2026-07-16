@@ -143,22 +143,22 @@ record BalabanVacuumPolarisationCoefficient
     infiniteVolumeMoment : ℕ → ℝ
     volumeUniformity : BetaVolumeUniformity finiteMoment
 
-    -- This is the momentum-side normalization of CMP 109 I, (5.42): the
-    -- off-diagonal second derivative of Pi at zero, including the source's
-    -- sign convention.  Naming the already-normalised scalar avoids silently
-    -- switching Fourier or bond-orientation conventions in a later evaluator.
-    offDiagonalSecondMomentumDerivative : ℕ → ℝ
-    momentEqualsSecondMomentumDerivative :
+    -- This is the momentum-side normalization of CMP 109 I, (5.42): minus
+    -- the off-diagonal second derivative of Pi at zero.  Keeping the minus
+    -- sign in the field name prevents a later evaluator from silently using
+    -- the opposite Fourier or bond-orientation convention.
+    negativeOffDiagonalSecondMomentumDerivative : ℕ → ℝ
+    momentEqualsNegativeSecondMomentumDerivative :
       ∀ k →
       infiniteVolumeMoment k
-        ≡ offDiagonalSecondMomentumDerivative k
+        ≡ negativeOffDiagonalSecondMomentumDerivative k
 
     -- This is (5.42), with the source's scale index aligned so that the
     -- recurrence correction at `suc k` is beta_{k+1}.
     betaFromVacuumPolarisation :
       ∀ k → k < K →
       betaCorrection step (suc k)
-        ≡ offDiagonalSecondMomentumDerivative k
+        ≡ negativeOffDiagonalSecondMomentumDerivative k
 
     sourceAuthorityId : SourceAuthorityId
     theoremLocator : String

@@ -1,3 +1,59 @@
+# 2026-07-17 NS interaction-closure pivot
+
+- The exact 32-output replay completed.  At the endpoint those outputs cover
+  only `.125755` of full target-shell absolute modal activity, so no full-shell
+  closure regime is assigned.  Inside that declared carrier the interaction
+  distribution has broadened from `M50/M90/M99 = 4/11/18` and
+  `exp(H)=11.79` at `t=0` to `7825/27260/41257` and `exp(H)=28716.7` at the
+  quarter-window endpoint.  The leading 512 interactions carry only `.08720`
+  of endpoint activity and have zero retained-set overlap with the initial
+  top 512.  This is strong selected-carrier proliferation evidence, not an NS
+  theorem or a full-shell density classification.
+- Repaired closure checkpoint scheduling for viscous windows whose step count
+  is not divisible by four (`15625` in the production run).  Added exact
+  inverse-participation effective support, normalized effective-support
+  fractions, logarithmically extended exact capture curves, and in-memory
+  `J50/J90` or retained-top-set overlap receipts.  Added
+  `scripts/ns_interaction_closure_report.py`; its rank fits are explicitly
+  descriptive and truncated, and it withholds full-shell classification below
+  `.9` output-modal capture.  Python compile, CPU quarter-checkpoint smokes,
+  JSON serialization, and `git diff --check` pass.
+- The 256-output replay completed with all five quarter checkpoints.  Endpoint
+  output-modal capture rises to `.571846`, still below the `.9` full-shell
+  classification threshold.  On this much wider carrier the endpoint has
+  `M50/M90/M99 = 59778/211662/322303`, Shannon effective support `221772.8`,
+  and IPR effective support `143060.3`; the top 1024 interactions carry only
+  `.034997`.  Checkpoint-to-checkpoint top-1024 Jaccard overlap stays around
+  `.01--.019`, with zero overlap against the initial core.  Every interior
+  checkpoint is similarly broad.  This retires a persistent or wandering
+  sparse empirical closure graph for the selected carrier and identifies an
+  effectively dense, rapidly switching interaction field there.  A final
+  1024-output replay is running to exceed `.9` output capture before assigning
+  the same classification provisionally to the full target shell.
+- Closed the bounded donor-heavy pure-helicity phase tranche.  Four phase
+  streams on the best sign-diverse backbone give `R_move=.2747..3099`; the
+  best phase (`3`) still has only `.00562` designed target capture and `.96957`
+  support leakage.  Together with the three-backbone plateau near `.29`, this
+  satisfies the declared sparse-loop stopping rule (`max R_move < .4` and
+  capture `< .1`).  Further phase tuning of the nine-triad graph is stopped.
+  The best phase is now being rerun with 32-output exact interaction-closure
+  telemetry and 512 retained dominant interactions.
+- Added an opt-in full-convolution interaction-closure audit to the finite
+  packet search.  At quarter checkpoints it selects a declared number of
+  dominant target-shell output modes, reports their share of full absolute
+  modal activity, and exactly enumerates every canonical unordered input pair
+  for those outputs.  Receipts include signed reconstruction error, designed
+  interaction absolute capture, top-M capture curve, `M50/M90/M99`, Shannon
+  entropy, effective support, and retained dominant interaction rows.  Claims
+  are explicitly limited to the selected output carrier.
+- N32 CPU smokes reconstruct the selected modal transfer below `4e-18`.  With
+  32 outputs, the seven-step endpoint carrier captures `.96873` of full target
+  modal activity; `M50/M90/M99 = 5/16/93`, effective support is `19.16`, and
+  256 retained rows capture `.99985` of enumerated absolute activity.  This
+  validates the instrument only.  The already-running donor-heavy phase-2 CFD
+  run predates the instrumentation and remains part of the bounded phase
+  tranche.
+
 # 2026-07-16 NS quarter-window execution guard
 
 - Began the first bounded GPU quarter-window sentinel from the staged

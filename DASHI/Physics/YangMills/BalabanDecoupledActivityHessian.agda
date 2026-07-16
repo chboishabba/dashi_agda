@@ -7,6 +7,8 @@ module DASHI.Physics.YangMills.BalabanDecoupledActivityHessian where
 -- the source-specific analytic theorem still to be constructed.
 
 open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Membership.Propositional using (_∈_)
+open import Data.List.Relation.Unary.Any using (here; there)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
@@ -19,12 +21,13 @@ open import DASHI.Foundations.ComplexAxiomatic using (ℂ)
 open import DASHI.Foundations.FinitePolydiscCauchyAxioms
 
 ------------------------------------------------------------------------
--- Finite factor replacement algebra
+-- Finite scalar-majorant replacement algebra
 --
--- This is the literal one-factor telescope used after CMP 116 expands a
--- decoupled generalized-walk boundary integrand into finitely many factors.
--- It is proved by list induction; no pre-summed integrand comparison is an
--- input here.
+-- CMP 116 (1.23) is an analytic local activity evaluated on nonlinear
+-- substituted backgrounds; it is not literally a product of real scalars.
+-- The lemmas below are therefore used only after a native operator or
+-- multilinear comparison has produced scalar replacement majorants.  They do
+-- not claim to be the source-level factor telescope.
 
 productℝ :
   {A : Set} →
@@ -155,11 +158,14 @@ factorProductDomainTelescope f g (x ∷ xs)
 sumℝ-mono :
   (qs : List ℝ) →
   (m n : ℝ → ℝ) →
-  (∀ q → m q ≤ℝ n q) →
+  (∀ q → q ∈ qs → m q ≤ℝ n q) →
   sumℝ m qs ≤ℝ sumℝ n qs
 sumℝ-mono [] m n pointwise = ≤ℝ-refl
 sumℝ-mono (q ∷ qs) m n pointwise =
-  +-mono-≤ (pointwise q) (sumℝ-mono qs m n pointwise)
+  +-mono-≤
+    (pointwise q (here refl))
+    (sumℝ-mono qs m n
+      (λ r r∈qs → pointwise r (there r∈qs)))
 
 absFiniteSum≤sumAbs :
   (qs : List ℝ) →
@@ -184,6 +190,7 @@ finiteReplacementSumBound :
   (majorant : ℝ → ℝ) →
   (replacementBound :
     ∀ q →
+    q ∈ replacementTerms f g xs →
     absℝ q ≤ℝ majorant q) →
   absℝ (productℝ f xs -ℝ productℝ g xs)
     ≤ℝ
@@ -283,11 +290,13 @@ pointwiseMarkedBoundaryLiftsToCoefficient :
   (Y : Component D) →
   (u v : FieldVariation D) →
   (M : ℝ) →
-  (∀ s →
+  (∀ (s : BoundaryAssignment (cauchy D) (componentIndices D Y)) →
     normValue (cauchy D)
       (FinitePolydiscCauchyAxioms._-Value_ (cauchy D)
-        (evaluate (cauchy D) (asFunction D Ω Y u v) s)
-        (evaluate (cauchy D) (asFunction D Ω′ Y u v) s))
+        (evaluate (cauchy D) (asFunction D Ω Y u v)
+          (boundaryAssignment (cauchy D) s))
+        (evaluate (cauchy D) (asFunction D Ω′ Y u v)
+          (boundaryAssignment (cauchy D) s)))
       ≤ℝ M) →
   normValue (cauchy D)
     (FinitePolydiscCauchyAxioms._-Value_ (cauchy D)
@@ -302,3 +311,92 @@ pointwiseMarkedBoundaryLiftsToCoefficient D Ω Ω′ Y u v M pointwise =
       (asFunction D Ω′ Y u v)
       M
       pointwise)
+
+------------------------------------------------------------------------
+-- Source-shaped short route: marked substituted background + Hessian stability
+--
+-- CMP 116 (1.13)--(1.21) constructs the nonlinear substituted background
+-- Hₖ(s(Y₀),B′) by contractive analytic equations.  The local activity E is the
+-- same analytic function on both domain sequences; domain dependence enters
+-- through that substituted background.  Consequently the shortest comparison
+-- does not require expanding E itself into a speculative scalar product:
+-- control the substituted-background difference, then use the Cauchy-derived
+-- Lipschitz bound for D²E.
+
+markedBoundaryFromSubstitutionStability :
+  (D : DecoupledActivityHessianData) →
+  (Ω Ω′ : DomainSequence D) →
+  (Y : Component D) →
+  (u v : FieldVariation D) →
+  (lipschitz markedInput : ℝ) →
+  (substitutionDistance :
+    BoundaryAssignment (cauchy D) (componentIndices D Y) → ℝ) →
+  0ℝ ≤ℝ lipschitz →
+  (∀ s → 0ℝ ≤ℝ substitutionDistance s) →
+  0ℝ ≤ℝ markedInput →
+  (∀ s →
+    normValue (cauchy D)
+      (FinitePolydiscCauchyAxioms._-Value_ (cauchy D)
+        (evaluate (cauchy D) (asFunction D Ω Y u v)
+          (boundaryAssignment (cauchy D) s))
+        (evaluate (cauchy D) (asFunction D Ω′ Y u v)
+          (boundaryAssignment (cauchy D) s)))
+      ≤ℝ
+    lipschitz *ℝ substitutionDistance s) →
+  (∀ s → substitutionDistance s ≤ℝ markedInput) →
+  ∀ s →
+  normValue (cauchy D)
+    (FinitePolydiscCauchyAxioms._-Value_ (cauchy D)
+      (evaluate (cauchy D) (asFunction D Ω Y u v)
+        (boundaryAssignment (cauchy D) s))
+      (evaluate (cauchy D) (asFunction D Ω′ Y u v)
+        (boundaryAssignment (cauchy D) s)))
+    ≤ℝ
+  lipschitz *ℝ markedInput
+markedBoundaryFromSubstitutionStability
+  D Ω Ω′ Y u v lipschitz markedInput substitutionDistance
+  lipschitz≥0 distance≥0 markedInput≥0 hessianStable substitutionMarked s =
+  ≤ℝ-trans
+    (hessianStable s)
+    (mulMonotoneNonnegative
+      {a = lipschitz} {b = lipschitz}
+      {c = substitutionDistance s} {d = markedInput}
+      lipschitz≥0 ≤ℝ-refl
+      (distance≥0 s) (substitutionMarked s))
+
+markedSubstitutionStabilityLiftsToCoefficient :
+  (D : DecoupledActivityHessianData) →
+  (Ω Ω′ : DomainSequence D) →
+  (Y : Component D) →
+  (u v : FieldVariation D) →
+  (lipschitz markedInput : ℝ) →
+  (substitutionDistance :
+    BoundaryAssignment (cauchy D) (componentIndices D Y) → ℝ) →
+  0ℝ ≤ℝ lipschitz →
+  (∀ s → 0ℝ ≤ℝ substitutionDistance s) →
+  0ℝ ≤ℝ markedInput →
+  (∀ s →
+    normValue (cauchy D)
+      (FinitePolydiscCauchyAxioms._-Value_ (cauchy D)
+        (evaluate (cauchy D) (asFunction D Ω Y u v)
+          (boundaryAssignment (cauchy D) s))
+        (evaluate (cauchy D) (asFunction D Ω′ Y u v)
+          (boundaryAssignment (cauchy D) s)))
+      ≤ℝ
+    lipschitz *ℝ substitutionDistance s) →
+  (∀ s → substitutionDistance s ≤ℝ markedInput) →
+  normValue (cauchy D)
+    (FinitePolydiscCauchyAxioms._-Value_ (cauchy D)
+      (decoupledHessianCoefficient D Ω Y u v)
+      (decoupledHessianCoefficient D Ω′ Y u v))
+    ≤ℝ
+  lipschitz *ℝ markedInput
+markedSubstitutionStabilityLiftsToCoefficient
+  D Ω Ω′ Y u v lipschitz markedInput substitutionDistance
+  lipschitz≥0 distance≥0 markedInput≥0 hessianStable substitutionMarked =
+  pointwiseMarkedBoundaryLiftsToCoefficient
+    D Ω Ω′ Y u v (lipschitz *ℝ markedInput)
+    (markedBoundaryFromSubstitutionStability
+      D Ω Ω′ Y u v lipschitz markedInput substitutionDistance
+      lipschitz≥0 distance≥0 markedInput≥0
+      hessianStable substitutionMarked)
