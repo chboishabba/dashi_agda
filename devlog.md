@@ -1,5 +1,29 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Implemented and ran `scripts/ns_critical_packet_phase_residence_audit.py`.
+  The script measures the scale-invariant dyadic `H^(1/2)` packet `X_j`,
+  dominance/tail-tightness, actual-viscosity parabolic target windows, and a
+  deterministic finite-difference helical phase sample.  The N128 archive is
+  too short to resolve any eligible packet at its `c * 2^(-2j) / nu` window:
+  the dominant `j=5` packet requires roughly `0.98` time units at `nu=.001`,
+  while the saved series ends at `.12`.  This is a measurement-resolution
+  result only—no critical-packet recurrence, leakage, NS, BKM, or Clay claim
+  changed.  Artifact:
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260621/`
+  `ns_critical_packet_phase_residence_audit_N128_20260716.json`.
+
+- Created a targeted N32 unforced finite-Galerkin run from the existing GPU
+  generator (`seed=17`, support `5 <= |k| <= 10`, `nu=.001`, 16,000 steps,
+  0.1 snapshot cadence) because the existing N128 record could not reach a
+  viscous shell window.  After fixing the audit to require that the full
+  target window lies inside the record, the four eligible dominant-tight
+  `j=3` observations have recurrence ratios `.0642`, `.0621`, `.0577`, and
+  `.0530` at target time `15.625`.  This is only a resolved positive
+  calibration on one decaying random family; it does not test the adversarial
+  phase-locked networks needed by the proposed universal barrier.  Artifact:
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260621/`
+  `ns_critical_packet_phase_residence_audit_N32_critical_packet_seed17_20260716.json`.
+
 - Replaced the initial geometric helical-mismatch candidate with the exact
   helical phase-saturation diagnostic.  The script decomposes each modal
   transfer into eight deterministic Waleffe-frame channel terms, represents

@@ -1,0 +1,1989 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "theorem_authority": false
+  },
+  "contract": "ns_phase_locked_packet_adversarial_search",
+  "decision": "candidate-only adversarial search; any apparent recurrence is a finite numerical lead requiring independent reproduction, not a Navier--Stokes theorem.",
+  "endpoint_evolutions": [],
+  "inputs": {
+    "backend": "none",
+    "cfd_root": "/home/c/Documents/code/dashiCFD",
+    "donor_amplitude": 1.0,
+    "dt": 0.001,
+    "fft_backend": "vkfft-vulkan",
+    "n": 32,
+    "nu": 0.001,
+    "output_json": "scripts/data/outputs/ns_boundary_pressure_geometric_20260621/ns_phase_locked_packet_search_N32_static_20260716.json",
+    "phase_samples": 128,
+    "save_every": 100,
+    "seed": 20260716,
+    "target_amplitude": 3.0,
+    "target_shell": 3,
+    "target_urms": 1.0,
+    "top_candidates": 1,
+    "window_c": 1.0
+  },
+  "objective": {
+    "endpoint": "maximize X_j(T) / X_j(0) at T = c * 2^(-2j) / nu",
+    "static_prefilter": "maximize initial nonlinear target-shell inflow",
+    "warning": "static inflow is not a substitute for endpoint recurrence; endpoint rows are present only when --backend is not none"
+  },
+  "static_candidates_ranked": [
+    {
+      "initial_replenishment_ratio": 8.116273148186293,
+      "phases": [
+        -2.978622976129096,
+        -2.289850870658544,
+        -2.413951198441637,
+        -1.493739119968598
+      ],
+      "sample": 63,
+      "target_nonlinear_rate": 4.399974901981464,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": 5.4440885336472045,
+      "phases": [
+        -0.9121984870857687,
+        -1.3953055052493284,
+        -2.478569769704513,
+        -2.254926942332542
+      ],
+      "sample": 65,
+      "target_nonlinear_rate": 2.9513364662407424,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": 4.26534008659519,
+      "phases": [
+        2.52186723386565,
+        -2.5635936077315717,
+        2.584066682843365,
+        -2.799566544882423
+      ],
+      "sample": 41,
+      "target_nonlinear_rate": 2.3123161316506624,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": 4.201190562475262,
+      "phases": [
+        -0.3173806969819779,
+        -1.8910619622639877,
+        -1.5865240244926955,
+        -2.7217015702729777
+      ],
+      "sample": 34,
+      "target_nonlinear_rate": 2.2775395425748237,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": 3.7807561618114573,
+      "phases": [
+        0.14023542539263323,
+        -2.888006194104487,
+        -2.5503161580649767,
+        -1.2377463471137282
+      ],
+      "sample": 42,
+      "target_nonlinear_rate": 2.0496146345443753,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": 3.4748864546470504,
+      "phases": [
+        2.7071616447279885,
+        -2.733572138756284,
+        1.9285368559794387,
+        -2.53648823139462
+      ],
+      "sample": 4,
+      "target_nonlinear_rate": 1.8837972685898356,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": 2.526597335592726,
+      "phases": [
+        -1.1053737513544784,
+        0.6975840690350772,
+        -3.0228947895143086,
+        -2.0884980297614337
+      ],
+      "sample": 77,
+      "target_nonlinear_rate": 1.3697130026366213,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": 2.4816684673689617,
+      "phases": [
+        2.292892614690956,
+        -2.0143108266076344,
+        1.3610357363731929,
+        -2.8103033423534973
+      ],
+      "sample": 53,
+      "target_nonlinear_rate": 1.3453562703101385,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": 2.4079854802776355,
+      "phases": [
+        -1.9485522329174763,
+        -1.276395958349222,
+        -1.5398272233864232,
+        -0.9769006758528911
+      ],
+      "sample": 28,
+      "target_nonlinear_rate": 1.305411422719923,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": 2.024753990239802,
+      "phases": [
+        1.8648043614886287,
+        0.7020711509034658,
+        -2.321121330757977,
+        -1.720369498307096
+      ],
+      "sample": 84,
+      "target_nonlinear_rate": 1.0976548690617658,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": 1.9589608735853532,
+      "phases": [
+        2.825588152572819,
+        0.6707696200170212,
+        -2.602936525020752,
+        -0.651404796475795
+      ],
+      "sample": 44,
+      "target_nonlinear_rate": 1.0619872594683888,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": 1.9021314774840812,
+      "phases": [
+        2.5629353206643097,
+        -2.3334716480402053,
+        1.8648698535683144,
+        -1.7024168500052537
+      ],
+      "sample": 117,
+      "target_nonlinear_rate": 1.0311790409701937,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": 1.6671574482369997,
+      "phases": [
+        -2.2221568686179687,
+        -1.8372620788621004,
+        1.0985452803530409,
+        -2.2462022152956185
+      ],
+      "sample": 21,
+      "target_nonlinear_rate": 0.9037954731148348,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": 1.6036122407643933,
+      "phases": [
+        -2.5772468224126683,
+        -0.8529721964194783,
+        2.5779410502469524,
+        -1.8049653987088068
+      ],
+      "sample": 114,
+      "target_nonlinear_rate": 0.8693464947579203,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": 1.5927980754586128,
+      "phases": [
+        2.3115643732863997,
+        -0.6559759970755286,
+        -2.7345602094740844,
+        0.2759676554582855
+      ],
+      "sample": 100,
+      "target_nonlinear_rate": 0.8634839449074457,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": 1.34972164960016,
+      "phases": [
+        1.6569302976789553,
+        1.1286357397306759,
+        -1.7868792988909221,
+        -2.7943225170881028
+      ],
+      "sample": 23,
+      "target_nonlinear_rate": 0.7317079248655924,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": 1.2587796774589881,
+      "phases": [
+        -0.13019797639739172,
+        0.04277243000828923,
+        -2.867803767663708,
+        -1.2625595838200667
+      ],
+      "sample": 104,
+      "target_nonlinear_rate": 0.6824066769095316,
+      "target_packet": 4.23529411764706,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588237
+    },
+    {
+      "initial_replenishment_ratio": 1.2259729789342249,
+      "phases": [
+        3.014659944044464,
+        2.6063752236239113,
+        -1.3731769323624978,
+        -2.1844863233913703
+      ],
+      "sample": 127,
+      "target_nonlinear_rate": 0.6646215866975187,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": 1.0885292922806615,
+      "phases": [
+        2.3805107180191483,
+        -0.6602466712560711,
+        1.9546650337904428,
+        -2.519242000145794
+      ],
+      "sample": 7,
+      "target_nonlinear_rate": 0.5901109386857987,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": 1.063067886861081,
+      "phases": [
+        2.601691879117036,
+        -1.8811832283399341,
+        -2.0372438061559053,
+        2.033968098166363
+      ],
+      "sample": 55,
+      "target_nonlinear_rate": 0.5763078614889247,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": 0.9247993558800602,
+      "phases": [
+        -0.2648774411244341,
+        -2.4306386071999886,
+        -1.0557104820435033,
+        -1.3071730292121004
+      ],
+      "sample": 74,
+      "target_nonlinear_rate": 0.5013500508112139,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": 0.7627310504055951,
+      "phases": [
+        -0.12424059752024208,
+        -2.532142837320283,
+        2.4704698059243553,
+        -2.514947360289474
+      ],
+      "sample": 43,
+      "target_nonlinear_rate": 0.413489962384586,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": 0.6674325410779772,
+      "phases": [
+        2.33405768619435,
+        -2.4634510369906146,
+        -1.9573372677891523,
+        1.3649431468036566
+      ],
+      "sample": 87,
+      "target_nonlinear_rate": 0.3618269587396845,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": 0.10526830335362754,
+      "phases": [
+        -2.2117384224109062,
+        -1.8658042072413301,
+        0.7874445308594069,
+        -1.325154949491988
+      ],
+      "sample": 107,
+      "target_nonlinear_rate": 0.05706780492394303,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -0.31403370383622875,
+      "phases": [
+        -2.8036845380173796,
+        -0.14490504286180084,
+        0.8819819647522049,
+        -1.8329105032504853
+      ],
+      "sample": 120,
+      "target_nonlinear_rate": -0.17024321262086373,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -0.46502108043133206,
+      "phases": [
+        0.6887891779193867,
+        0.6669243485172878,
+        -1.961264793228933,
+        -1.5863350892921477
+      ],
+      "sample": 66,
+      "target_nonlinear_rate": -0.2520961339561856,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -0.6382805909341175,
+      "phases": [
+        0.3650338305081897,
+        -1.53991479350023,
+        -2.3824023890326407,
+        3.041646466871895
+      ],
+      "sample": 12,
+      "target_nonlinear_rate": -0.34602317212051914,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -0.8255734819629409,
+      "phases": [
+        -2.3459254813273,
+        2.187109674436238,
+        -0.6627450420566623,
+        -3.0974363008652563
+      ],
+      "sample": 3,
+      "target_nonlinear_rate": -0.44755795351590966,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -0.9251116614162929,
+      "phases": [
+        -1.5778982012984555,
+        2.412271778340634,
+        -2.0571897740248932,
+        -1.6042388500736253
+      ],
+      "sample": 118,
+      "target_nonlinear_rate": -0.5015193571536796,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -1.1569581287787585,
+      "phases": [
+        1.2210318875764656,
+        0.4764388963014401,
+        2.942791162679855,
+        -2.9038803274264087
+      ],
+      "sample": 54,
+      "target_nonlinear_rate": -0.6272074185191198,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -1.343172365935824,
+      "phases": [
+        2.0378722989836717,
+        0.09888087342645635,
+        0.37485831289590443,
+        -2.091485122971947
+      ],
+      "sample": 102,
+      "target_nonlinear_rate": -0.7281574426155617,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -1.346406677941083,
+      "phases": [
+        2.723191216465609,
+        -1.9903775600442164,
+        0.3420031204172984,
+        -0.053719464686246
+      ],
+      "sample": 67,
+      "target_nonlinear_rate": -0.7299108202297069,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -1.8315577984877816,
+      "phases": [
+        -0.32351688902900033,
+        -0.5747229880231055,
+        -0.13169248216756202,
+        -1.8539973629723214
+      ],
+      "sample": 6,
+      "target_nonlinear_rate": -0.9929198041684351,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -2.0295470756906324,
+      "phases": [
+        -2.8600193261210514,
+        0.528121423908785,
+        -1.0209057811662392,
+        -0.215707778989235
+      ],
+      "sample": 112,
+      "target_nonlinear_rate": -1.1002532852685218,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -2.103276893555986,
+      "phases": [
+        -1.547080025301559,
+        0.09094957824056538,
+        -1.36245498677662,
+        -0.5265166964246246
+      ],
+      "sample": 22,
+      "target_nonlinear_rate": -1.140223520647763,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -2.164500474659333,
+      "phases": [
+        2.238909255245905,
+        -1.4451404139695074,
+        -0.0989784431985008,
+        -0.019674615473356027
+      ],
+      "sample": 47,
+      "target_nonlinear_rate": -1.1734139043800245,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -2.357607511405445,
+      "phases": [
+        2.1004222520956963,
+        -3.0953893181201417,
+        -0.4389081463913178,
+        0.4969229627846472
+      ],
+      "sample": 85,
+      "target_nonlinear_rate": -1.2781006367713283,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -2.4524769551829046,
+      "phases": [
+        -3.024778253716245,
+        0.4995641364379284,
+        -1.6761525367776138,
+        2.36578293837493
+      ],
+      "sample": 109,
+      "target_nonlinear_rate": -1.3295310364097441,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -2.632231495186166,
+      "phases": [
+        2.3454709989956033,
+        1.1924498812077617,
+        -0.9974338736078661,
+        -0.8599560925692136
+      ],
+      "sample": 76,
+      "target_nonlinear_rate": -1.4269791446844533,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -2.634260158106553,
+      "phases": [
+        2.1016092237724058,
+        -0.008171464247586968,
+        1.7589453674073043,
+        -1.4219159293099695
+      ],
+      "sample": 101,
+      "target_nonlinear_rate": -1.4280789186535292,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -2.638257612437716,
+      "phases": [
+        -0.6800086791102635,
+        -1.9447848922837172,
+        -1.6582712872013112,
+        1.4087968120333763
+      ],
+      "sample": 124,
+      "target_nonlinear_rate": -1.4302460091897642,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -2.646374583524555,
+      "phases": [
+        -0.34947664631500075,
+        1.559306649888116,
+        -2.760511845346034,
+        -0.6665926658123502
+      ],
+      "sample": 26,
+      "target_nonlinear_rate": -1.4346463624566055,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -2.729897942973848,
+      "phases": [
+        -0.2773699934893017,
+        0.09210574958359574,
+        -2.8206835627974503,
+        0.5002546566479134
+      ],
+      "sample": 106,
+      "target_nonlinear_rate": -1.4799258495557046,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -2.7749625824879036,
+      "phases": [
+        -3.136654687957121,
+        -1.36463937575287,
+        -0.03143589199957875,
+        1.5077232067682074
+      ],
+      "sample": 2,
+      "target_nonlinear_rate": -1.5043561858946184,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -2.801525151375455,
+      "phases": [
+        -2.441546084517367,
+        -2.208535192697685,
+        1.000437367478134,
+        0.1793526179589109
+      ],
+      "sample": 89,
+      "target_nonlinear_rate": -1.5187562232397762,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -2.8836102064482083,
+      "phases": [
+        -1.2940471509016156,
+        -1.0814440235625158,
+        0.953287417876516,
+        -1.118817581897214
+      ],
+      "sample": 14,
+      "target_nonlinear_rate": -1.5632559801545112,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -3.167399559687994,
+      "phases": [
+        -0.3138790941936298,
+        1.174257103492975,
+        2.878079504373386,
+        -3.07610968551828
+      ],
+      "sample": 36,
+      "target_nonlinear_rate": -1.7171031965932084,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -3.2524632543387173,
+      "phases": [
+        -1.974115832991219,
+        2.9772591633720324,
+        -1.3221461663974896,
+        -0.9212850754821047
+      ],
+      "sample": 126,
+      "target_nonlinear_rate": -1.7632177265873896,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -3.43251863246815,
+      "phases": [
+        2.243290124648338,
+        1.3606268231913363,
+        -2.79446514068068,
+        2.036208697578399
+      ],
+      "sample": 96,
+      "target_nonlinear_rate": -1.8608289245192042,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -3.473091570010993,
+      "phases": [
+        1.1939579432748761,
+        -1.6519169754557828,
+        0.6893266541674086,
+        -0.5573575534084614
+      ],
+      "sample": 111,
+      "target_nonlinear_rate": -1.8828242299541949,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -3.5173070486836084,
+      "phases": [
+        2.096900897432108,
+        2.9741599324096084,
+        0.8880231921718647,
+        -2.9516430991305294
+      ],
+      "sample": 13,
+      "target_nonlinear_rate": -1.906794221215772,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -3.541860541865845,
+      "phases": [
+        0.4152376393444914,
+        -2.241029948740462,
+        1.960169226451601,
+        -0.6112618293649721
+      ],
+      "sample": 31,
+      "target_nonlinear_rate": -1.920105103166801,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -3.6044277378284284,
+      "phases": [
+        -2.2736362190507196,
+        2.729073589542126,
+        -0.7935168556978272,
+        -1.096237030175908
+      ],
+      "sample": 46,
+      "target_nonlinear_rate": -1.9540238842251059,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -3.9736921762891195,
+      "phases": [
+        -2.6735205296524507,
+        -1.2754334734071457,
+        0.09498703439832612,
+        1.6052505901565297
+      ],
+      "sample": 57,
+      "target_nonlinear_rate": -2.1542086527459126,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -4.11212094337602,
+      "phases": [
+        2.513604421059772,
+        3.1363276970775456,
+        -1.5130870625396489,
+        0.14210834287907748
+      ],
+      "sample": 105,
+      "target_nonlinear_rate": -2.229253330244317,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -4.1373449889491285,
+      "phases": [
+        -0.9155395413220115,
+        0.40534576446393755,
+        -2.6340546771597784,
+        2.152724234926981
+      ],
+      "sample": 80,
+      "target_nonlinear_rate": -2.242927730479716,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -4.167760386165895,
+      "phases": [
+        -2.7129741522431248,
+        1.0661011851784723,
+        2.7542361001924256,
+        -0.4989771784459469
+      ],
+      "sample": 38,
+      "target_nonlinear_rate": -2.259416454053228,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -4.186979155028555,
+      "phases": [
+        -2.0134639308868696,
+        1.4856130278178687,
+        -1.5008263379687419,
+        -0.11795182046676622
+      ],
+      "sample": 91,
+      "target_nonlinear_rate": -2.2698352878084216,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -4.191943939498855,
+      "phases": [
+        -2.5924727747563745,
+        2.2752697464593474,
+        0.7332568892576434,
+        -1.6787727743138734
+      ],
+      "sample": 45,
+      "target_nonlinear_rate": -2.2725267850836146,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -4.305675068759064,
+      "phases": [
+        -0.5902245415772569,
+        1.330290707643445,
+        0.15528821117472136,
+        -2.7759936898834034
+      ],
+      "sample": 70,
+      "target_nonlinear_rate": -2.3341824372755013,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -4.414514938171891,
+      "phases": [
+        -0.22492522064223275,
+        0.9782542907969027,
+        2.328453687883206,
+        -2.343143735342
+      ],
+      "sample": 33,
+      "target_nonlinear_rate": -2.3931864511877734,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -4.4227891412640465,
+      "phases": [
+        2.9603086825228253,
+        -0.7252248941326114,
+        1.0415004193080373,
+        2.7923344486207116
+      ],
+      "sample": 18,
+      "target_nonlinear_rate": -2.39767204269938,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -4.445540508965116,
+      "phases": [
+        0.7117157774928629,
+        -2.675802282010645,
+        2.920423439895349,
+        0.66581728783795
+      ],
+      "sample": 119,
+      "target_nonlinear_rate": -2.4100059606248525,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -4.550577123953205,
+      "phases": [
+        2.7730875067236562,
+        0.9884494554438232,
+        -1.4295529058093932,
+        1.9564282552410308
+      ],
+      "sample": 27,
+      "target_nonlinear_rate": -2.4669481631972188,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -4.560190561439025,
+      "phases": [
+        -1.9587725070550555,
+        2.3057284073867077,
+        -2.9295753991490843,
+        1.877014959284053
+      ],
+      "sample": 50,
+      "target_nonlinear_rate": -2.47215977730718,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -4.619301841623595,
+      "phases": [
+        2.025132159891573,
+        0.10636394715234765,
+        -0.5395307737602959,
+        0.12830695369760914
+      ],
+      "sample": 121,
+      "target_nonlinear_rate": -2.504205045435474,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -4.658711759798683,
+      "phases": [
+        -1.0281197451046213,
+        1.4578947793212071,
+        0.19493719870928716,
+        -2.2462534347359706
+      ],
+      "sample": 29,
+      "target_nonlinear_rate": -2.5255698575473335,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -4.683771896314545,
+      "phases": [
+        0.6471118424271047,
+        0.35744608753526474,
+        1.8959495516095926,
+        -1.7001239799667438
+      ],
+      "sample": 30,
+      "target_nonlinear_rate": -2.5391553997902845,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -4.716662210379341,
+      "phases": [
+        1.5589784133825768,
+        2.81697068406352,
+        0.8572145505449527,
+        -2.631114315137913
+      ],
+      "sample": 48,
+      "target_nonlinear_rate": -2.5569858194621173,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -4.772646588747081,
+      "phases": [
+        0.3182726282522066,
+        0.9785592219941002,
+        -0.22355152115529853,
+        -1.7055678789157998
+      ],
+      "sample": 81,
+      "target_nonlinear_rate": -2.5873359389348884,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -4.9220120330192865,
+      "phases": [
+        0.33043213465282806,
+        2.5001776956964967,
+        -2.226230828528359,
+        -0.28673982787940044
+      ],
+      "sample": 82,
+      "target_nonlinear_rate": -2.668309582135631,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -4.961490892176524,
+      "phases": [
+        -1.217240381764137,
+        -0.8625725491839158,
+        0.1751774096654133,
+        -0.09681169995512873
+      ],
+      "sample": 110,
+      "target_nonlinear_rate": -2.6897117683705205,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -4.964078805196166,
+      "phases": [
+        -1.6600711505352836,
+        2.5967888321413914,
+        1.692504433976386,
+        -2.280358633894432
+      ],
+      "sample": 92,
+      "target_nonlinear_rate": -2.691114721687522,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -5.124457160552863,
+      "phases": [
+        -2.9803360730253914,
+        2.682058327897746,
+        0.6025830831780881,
+        -0.8828799777175225
+      ],
+      "sample": 51,
+      "target_nonlinear_rate": -2.778058658332657,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -5.134347778473331,
+      "phases": [
+        -0.2874657224467385,
+        -2.2888888781143417,
+        -0.502775316514632,
+        1.1550333906204404
+      ],
+      "sample": 103,
+      "target_nonlinear_rate": -2.783420536847659,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -5.180561438062645,
+      "phases": [
+        0.5686698025315287,
+        2.069055213533465,
+        2.4587923446098845,
+        -2.378730166432946
+      ],
+      "sample": 10,
+      "target_nonlinear_rate": -2.8084737772461965,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -5.186061081643382,
+      "phases": [
+        -2.2284174394809897,
+        1.7418731342724962,
+        2.8040608703022407,
+        -0.7613022240484395
+      ],
+      "sample": 79,
+      "target_nonlinear_rate": -2.811455231083848,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -5.247091852232284,
+      "phases": [
+        0.9022829761410032,
+        0.42022413623013977,
+        -1.7525377295678866,
+        2.751868724245993
+      ],
+      "sample": 108,
+      "target_nonlinear_rate": -2.8445410888336893,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -5.271112024687866,
+      "phases": [
+        1.2879501837229412,
+        -3.044394537252449,
+        0.15044933518206394,
+        0.8762657870953534
+      ],
+      "sample": 94,
+      "target_nonlinear_rate": -2.857562848207258,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -5.32525392093166,
+      "phases": [
+        -0.524250099630807,
+        -1.2491113103254627,
+        2.2398772495405908,
+        -0.02803171913062741
+      ],
+      "sample": 37,
+      "target_nonlinear_rate": -2.8869141256062463,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -5.504573579319886,
+      "phases": [
+        -0.42170705879130654,
+        -2.3000805030007934,
+        2.3773660762350106,
+        2.9163719409486593
+      ],
+      "sample": 24,
+      "target_nonlinear_rate": -2.984126476883063,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -5.5519007682660675,
+      "phases": [
+        -0.14055739472298923,
+        -3.0037752220387066,
+        0.3892778246323707,
+        0.2831757977839269
+      ],
+      "sample": 98,
+      "target_nonlinear_rate": -3.0097833811964754,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -5.581658816619003,
+      "phases": [
+        -2.9970928029450596,
+        2.5857638182314346,
+        -0.9076183208237509,
+        0.5461628319866327
+      ],
+      "sample": 99,
+      "target_nonlinear_rate": -3.0259157443506313,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -5.777039777419464,
+      "phases": [
+        -0.46195535270365173,
+        2.407067769330812,
+        -0.7936047901119867,
+        -1.2460413837936035
+      ],
+      "sample": 58,
+      "target_nonlinear_rate": -3.1318352110998697,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -5.786166930169747,
+      "phases": [
+        0.6713503614031127,
+        -1.8601194841835225,
+        -0.20610826481740752,
+        2.2664637803932512
+      ],
+      "sample": 115,
+      "target_nonlinear_rate": -3.1367832016731985,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -5.91448622090704,
+      "phases": [
+        0.1999262275141933,
+        -0.09403221264171657,
+        -1.2065681989300565,
+        2.792415955159173
+      ],
+      "sample": 123,
+      "target_nonlinear_rate": -3.2063473536399583,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -6.034734470672187,
+      "phases": [
+        -2.710772059006469,
+        2.467117623317592,
+        -0.464588484384334,
+        -0.002744439540607324
+      ],
+      "sample": 5,
+      "target_nonlinear_rate": -3.2715360518655814,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -6.036527252616723,
+      "phases": [
+        -2.634999842549563,
+        2.1865003666858485,
+        -1.1847633979349093,
+        2.6484097003941116
+      ],
+      "sample": 88,
+      "target_nonlinear_rate": -3.2725079505950423,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -6.216593896424995,
+      "phases": [
+        2.6577940816388015,
+        -0.43673457022134876,
+        1.5061639058618104,
+        1.5264691006799387
+      ],
+      "sample": 73,
+      "target_nonlinear_rate": -3.3701252558501626,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -6.228413389638186,
+      "phases": [
+        -3.1407464960852214,
+        3.06478196659873,
+        2.098090453432998,
+        -0.11614923256916754
+      ],
+      "sample": 122,
+      "target_nonlinear_rate": -3.3765328117003253,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -6.323148206726193,
+      "phases": [
+        3.0063763653146314,
+        2.7483440881916055,
+        2.7396857995799886,
+        0.21661309204868884
+      ],
+      "sample": 64,
+      "target_nonlinear_rate": -3.4278902278346237,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -6.328973007716782,
+      "phases": [
+        -0.08817371029867038,
+        -2.051487217619109,
+        0.027946384122098156,
+        2.269368612434964
+      ],
+      "sample": 83,
+      "target_nonlinear_rate": -3.431047955242226,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -6.382172190415588,
+      "phases": [
+        -0.6082263499479925,
+        2.2031920427904854,
+        -2.7490159355392105,
+        1.2456185346276412
+      ],
+      "sample": 125,
+      "target_nonlinear_rate": -3.4598881709923566,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -6.710945958244246,
+      "phases": [
+        1.0982574082310164,
+        0.0714427880437345,
+        -0.8413951202180634,
+        0.9693827545103799
+      ],
+      "sample": 49,
+      "target_nonlinear_rate": -3.638122232422293,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -6.735631269745802,
+      "phases": [
+        -1.408631911018356,
+        -0.30617544456710455,
+        2.391419377134131,
+        0.49790371116493537
+      ],
+      "sample": 86,
+      "target_nonlinear_rate": -3.6515045754104305,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -6.760863228495893,
+      "phases": [
+        -0.017001161708579904,
+        0.44678450074167264,
+        0.16867519786717988,
+        -0.7247820743473392
+      ],
+      "sample": 72,
+      "target_nonlinear_rate": -3.6651832655187135,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -6.789063994860364,
+      "phases": [
+        -2.5721335064796063,
+        1.1591323348290876,
+        -0.3953224002764655,
+        2.7606811262170368
+      ],
+      "sample": 75,
+      "target_nonlinear_rate": -3.6804713986254765,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -6.820742812560177,
+      "phases": [
+        -0.7567682035275354,
+        1.40214659406596,
+        -2.1293069008619083,
+        1.5214798801657228
+      ],
+      "sample": 113,
+      "target_nonlinear_rate": -3.697645044738504,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -6.862723922794051,
+      "phases": [
+        2.04499250397029,
+        0.18446813482204716,
+        2.2189167289262928,
+        0.5077699762301502
+      ],
+      "sample": 60,
+      "target_nonlinear_rate": -3.7204037454394108,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -7.110197847639238,
+      "phases": [
+        -1.5532505481650007,
+        1.3069858960359628,
+        -1.4744836598114697,
+        2.0060025379673254
+      ],
+      "sample": 40,
+      "target_nonlinear_rate": -3.8545637272848943,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -7.156734121401991,
+      "phases": [
+        -0.8194255968819171,
+        0.006539035880494648,
+        0.6939716559641198,
+        -0.2866821434841813
+      ],
+      "sample": 116,
+      "target_nonlinear_rate": -3.8797918625200443,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -7.204039282397543,
+      "phases": [
+        1.7201215496301758,
+        0.3015908343812561,
+        -0.5141012387479895,
+        2.264952862465668
+      ],
+      "sample": 20,
+      "target_nonlinear_rate": -3.9054368250926923,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -7.282966984421829,
+      "phases": [
+        -2.7214385136029913,
+        0.4411573013243708,
+        0.37061193942460413,
+        1.880863626198921
+      ],
+      "sample": 62,
+      "target_nonlinear_rate": -3.948224925201858,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -7.498425604622056,
+      "phases": [
+        0.9208240079102943,
+        1.9423248180762078,
+        2.5484652999256223,
+        -0.9031330226377641
+      ],
+      "sample": 32,
+      "target_nonlinear_rate": -4.065028845423345,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -7.604081080748309,
+      "phases": [
+        1.4210589483185974,
+        -0.24212607891606153,
+        2.5356437904937508,
+        2.1701064474798537
+      ],
+      "sample": 69,
+      "target_nonlinear_rate": -4.122306543539788,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -7.631214833648528,
+      "phases": [
+        -2.7043374429630105,
+        2.014587766951675,
+        -0.5436764822889901,
+        1.233218199713173
+      ],
+      "sample": 0,
+      "target_nonlinear_rate": -4.137016229817932,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -7.706183006640343,
+      "phases": [
+        -0.2314926406800235,
+        -1.4998848816556212,
+        1.4880555775416955,
+        2.322852620815045
+      ],
+      "sample": 17,
+      "target_nonlinear_rate": -4.177657799364551,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -7.872447197795823,
+      "phases": [
+        -1.9802055084356418,
+        1.3148403682091612,
+        -0.6491175753419225,
+        0.9805093920445538
+      ],
+      "sample": 19,
+      "target_nonlinear_rate": -4.267792551463899,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -7.884293698931916,
+      "phases": [
+        0.9746201629945856,
+        -0.8012666214190194,
+        1.163921010246387,
+        0.8766221314098166
+      ],
+      "sample": 93,
+      "target_nonlinear_rate": -4.274214748785678,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -7.972771848791775,
+      "phases": [
+        -2.8239176184472883,
+        0.7948064614379162,
+        0.914082251762597,
+        1.2146727091058258
+      ],
+      "sample": 59,
+      "target_nonlinear_rate": -4.322180315203824,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -8.02868840450725,
+      "phases": [
+        2.389123640487999,
+        2.7805987693126415,
+        2.8987101350244684,
+        0.7192772059935497
+      ],
+      "sample": 68,
+      "target_nonlinear_rate": -4.352493666819931,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -8.138862398874775,
+      "phases": [
+        -1.6487248704596065,
+        0.02130148385898112,
+        1.637614613001146,
+        2.7916484760394527
+      ],
+      "sample": 61,
+      "target_nonlinear_rate": -4.412220933413524,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -8.287128564564453,
+      "phases": [
+        2.8097407088749238,
+        2.0209616900360166,
+        1.8411871046718629,
+        0.4546931647279777
+      ],
+      "sample": 11,
+      "target_nonlinear_rate": -4.492598638295646,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -8.30170731606034,
+      "phases": [
+        -0.9714821503541744,
+        0.2190971559404451,
+        2.9954754177667544,
+        1.9398779918878049
+      ],
+      "sample": 71,
+      "target_nonlinear_rate": -4.500502036753651,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -8.566352392384072,
+      "phases": [
+        -1.302677299555849,
+        -0.061867736438435905,
+        1.4171463211758324,
+        2.8137618363387986
+      ],
+      "sample": 35,
+      "target_nonlinear_rate": -4.643970802835978,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -8.572859298158116,
+      "phases": [
+        -0.02424342075281416,
+        1.726521365363432,
+        -0.6629227418304371,
+        -0.06960958756065194
+      ],
+      "sample": 95,
+      "target_nonlinear_rate": -4.647498311283836,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -8.690652485954397,
+      "phases": [
+        -0.5601762612550325,
+        0.14662358814954324,
+        2.3660940722959083,
+        0.5737384350642825
+      ],
+      "sample": 15,
+      "target_nonlinear_rate": -4.711356077091514,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -8.855393230331323,
+      "phases": [
+        1.3467662463310646,
+        1.429675291018678,
+        3.0230896105317244,
+        2.875144621175319
+      ],
+      "sample": 39,
+      "target_nonlinear_rate": -4.800664941807852,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -9.11910532367802,
+      "phases": [
+        -2.4577419198629853,
+        2.539087234455888,
+        1.1210318278325007,
+        0.3367153266538718
+      ],
+      "sample": 90,
+      "target_nonlinear_rate": -4.9436279213539205,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -9.351917946547902,
+      "phases": [
+        1.480304593837725,
+        1.382427677429348,
+        3.050851463494782,
+        1.417703888408611
+      ],
+      "sample": 56,
+      "target_nonlinear_rate": -5.069839752669734,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -10.296788302263689,
+      "phases": [
+        -2.054889232683308,
+        2.6171494060048985,
+        0.3443670137510586,
+        1.0034129756904226
+      ],
+      "sample": 16,
+      "target_nonlinear_rate": -5.5820706466860095,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -10.372332099599518,
+      "phases": [
+        0.6879490558485526,
+        0.6327844211416762,
+        1.085403475377781,
+        0.5861607280761207
+      ],
+      "sample": 52,
+      "target_nonlinear_rate": -5.623024272347598,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -10.870228050062142,
+      "phases": [
+        -0.16555191706394234,
+        0.9220296386263307,
+        2.4550862901768458,
+        1.192058149654648
+      ],
+      "sample": 8,
+      "target_nonlinear_rate": -5.8929424534925126,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -11.004383956460464,
+      "phases": [
+        -0.5804882686338191,
+        2.1886860884695665,
+        -0.05593453225017164,
+        0.5272612712287867
+      ],
+      "sample": 9,
+      "target_nonlinear_rate": -5.965670737808212,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -11.022786737369454,
+      "phases": [
+        0.797099622635808,
+        2.6665481514680627,
+        2.427182005385787,
+        3.0141709305936324
+      ],
+      "sample": 25,
+      "target_nonlinear_rate": -5.9756472100939355,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -11.325182339425412,
+      "phases": [
+        -1.136041961588262,
+        1.3703425132149585,
+        0.24522082605852402,
+        1.7112209718869584
+      ],
+      "sample": 97,
+      "target_nonlinear_rate": -6.139581202361447,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    },
+    {
+      "initial_replenishment_ratio": -12.144237764530594,
+      "phases": [
+        -0.3268348472059732,
+        1.9014237536243304,
+        2.460020713715811,
+        2.0562038044918722
+      ],
+      "sample": 1,
+      "target_nonlinear_rate": -6.5836056022302305,
+      "target_packet": 4.235294117647057,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588234
+    },
+    {
+      "initial_replenishment_ratio": -13.128205565519064,
+      "phases": [
+        -0.027025484573158565,
+        2.81432561920995,
+        1.6575347936895888,
+        1.246875648196573
+      ],
+      "sample": 78,
+      "target_nonlinear_rate": -7.117031911283748,
+      "target_packet": 4.235294117647059,
+      "target_packet_dominance": 1.0,
+      "target_packet_local_tightness": 1.0,
+      "target_viscous_rate": 0.5421176470588236
+    }
+  ],
+  "status": "ok",
+  "topology": {
+    "constraints": "reality symmetric, divergence free helical modes, componentwise 2/3 dealiased N32 support, fixed amplitudes and target urms",
+    "donor_modes": [
+      [
+        4,
+        3,
+        0
+      ],
+      [
+        4,
+        0,
+        3
+      ],
+      [
+        4,
+        3,
+        3
+      ],
+      [
+        4,
+        2,
+        4
+      ]
+    ],
+    "kind": "shared-target adjacent-shell donor star",
+    "target_mode": [
+      -8,
+      0,
+      0
+    ]
+  }
+}

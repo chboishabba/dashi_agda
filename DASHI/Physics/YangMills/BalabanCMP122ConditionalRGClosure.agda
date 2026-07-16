@@ -11,7 +11,7 @@ module DASHI.Physics.YangMills.BalabanCMP122ConditionalRGClosure where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.String using (String)
-open import Data.Nat.Base using (ℕ)
+open import Data.Nat.Base using (ℕ; _≤_)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_)
 
@@ -24,38 +24,139 @@ open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
   ; balaban-cmp-122
   ; paperImport
   )
+open import DASHI.Physics.YangMills.BalabanSection2InductivePackage using
+  ( BalabanSection2InductivePackage
+  ; UniformBalabanRGClosure
+  )
+open import DASHI.Physics.YangMills.BalabanEffectiveCouplingTrajectory using
+  ( BalabanInverseSquareCouplingStep
+  ; CouplingTrajectoryBoundedBy
+  )
+open import DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget using
+  ( InverseSquareBudgetArithmetic
+  ; InverseSquareBudgetOrderBridge
+  ; InverseSquareThresholdControlsCoupling
+  ; BalabanBetaPrefixBound
+  ; BalabanBareCouplingSchedule
+  ; couplingTrajectoryBoundedByGamma
+  ; scheduleTrajectoryBoundedByGamma
+  )
 
--- Sect. 2 [Balaban III] is referred to by CMP 122 II rather than reproduced
--- in its Theorem 1 statement.  Keep its representation and its three bound
--- families opaque until that earlier section is separately extracted.
-record CMP122Section2InductivePackage : Set₁ where
+-- CMP 122 II Theorem 1 as an imported implication, in the exact direction
+-- used by the paper: a verified small-coupling trajectory yields the Sect. 2
+-- [III] package at every scale.  This is the canonical source boundary.
+record BalabanCMP122ConditionalTheorem : Set₁ where
   field
-    EffectiveDensityRepresentation : ℕ → Set
-    SmallFieldInductiveBounds : ℕ → Set
-    LargeFieldRBounds : ℕ → Set
-    ROperationExpansionConverges : ℕ → Set
-    uniformInScaleAndVolume : Set
+    γ : ℝ
+    γ-positive : 0ℝ <ℝ γ
+    section2Package : BalabanSection2InductivePackage
+    conclusion :
+      (step : BalabanInverseSquareCouplingStep) →
+      CouplingTrajectoryBoundedBy γ step →
+      UniformBalabanRGClosure
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    noClayPromotion : clayYangMillsPromoted ≡ false
 
-open CMP122Section2InductivePackage public
+open BalabanCMP122ConditionalTheorem public
+
+balabanConditionalUniformRG :
+  (theorem : BalabanCMP122ConditionalTheorem) →
+  (step : BalabanInverseSquareCouplingStep) →
+  CouplingTrajectoryBoundedBy (γ theorem) step →
+  UniformBalabanRGClosure
+balabanConditionalUniformRG theorem step trajectory =
+  conclusion theorem step trajectory
+
+-- Finite-cutoff composition.  This is the entire mechanical bridge from a
+-- cumulative β-budget to the published CMP 122 implication.  The hard input
+-- remains `BalabanBetaPrefixBound`; no β estimate is imported or asserted
+-- here.  The Section-2 package's terminal scale is source-owned, while `K`
+-- is the cutoff through which the coupling premise was certified.
+finiteCutoffUniformBalabanRG :
+  (theorem : BalabanCMP122ConditionalTheorem) →
+  (arith : InverseSquareBudgetArithmetic) →
+  (order : InverseSquareBudgetOrderBridge) →
+  {K : ℕ} →
+  {step : BalabanInverseSquareCouplingStep} →
+  (threshold : InverseSquareThresholdControlsCoupling K (γ theorem) step) →
+  (budget : BalabanBetaPrefixBound K step threshold) →
+  UniformBalabanRGClosure
+finiteCutoffUniformBalabanRG theorem arith order {step = step} threshold budget =
+  balabanConditionalUniformRG theorem step
+    (couplingTrajectoryBoundedByGamma arith order threshold budget)
+
+relabelCouplingTrajectoryBound :
+  {γ₁ γ₂ : ℝ} →
+  {step : BalabanInverseSquareCouplingStep} →
+  γ₁ ≡ γ₂ →
+  CouplingTrajectoryBoundedBy γ₁ step →
+  CouplingTrajectoryBoundedBy γ₂ step
+relabelCouplingTrajectoryBound refl bounded = bounded
+
+-- The schedule version is the finite-cutoff theorem intended for the later
+-- continuum construction.  The equality pins the schedule to the particular
+-- small interval used by the published CMP 122 theorem.
+finiteCutoffScheduledBalabanRG :
+  (theorem : BalabanCMP122ConditionalTheorem) →
+  (arith : InverseSquareBudgetArithmetic) →
+  (order : InverseSquareBudgetOrderBridge) →
+  (schedule : BalabanBareCouplingSchedule) →
+  γ schedule ≡ γ theorem →
+  ∀ K → UniformBalabanRGClosure
+finiteCutoffScheduledBalabanRG theorem arith order schedule γ≡ K =
+  balabanConditionalUniformRG theorem (BalabanBareCouplingSchedule.trajectory schedule K)
+    (relabelCouplingTrajectoryBound γ≡
+      (scheduleTrajectoryBoundedByGamma arith order schedule K))
 
 record BalabanCMP122ConditionalRGClosure : Set₁ where
   field
     γ : ℝ
     γ-positive : 0ℝ <ℝ γ
 
+    terminalScale : ℕ
     effectiveCoupling : ℕ → ℝ
     couplingRemainsSmall :
-      ∀ k → (0ℝ <ℝ effectiveCoupling k) × (effectiveCoupling k ≤ℝ γ)
+      ∀ k → k ≤ terminalScale →
+      (0ℝ <ℝ effectiveCoupling k) × (effectiveCoupling k ≤ℝ γ)
 
-    section2Package : CMP122Section2InductivePackage
+    section2Package : BalabanSection2InductivePackage
     effectiveDensityRepresentation :
-      ∀ k → EffectiveDensityRepresentation section2Package k
+      ∀ k → k ≤ BalabanSection2InductivePackage.terminalScale section2Package →
+      BalabanSection2InductivePackage.EffectiveDensity section2Package k
     smallFieldBounds :
-      ∀ k → SmallFieldInductiveBounds section2Package k
+      ∀ k →
+      (k≤sourceTerminal :
+        k ≤ BalabanSection2InductivePackage.terminalScale section2Package) →
+      BalabanSection2InductivePackage.smallFieldEstimate
+        section2Package k k≤sourceTerminal
     largeFieldRBounds :
-      ∀ k → LargeFieldRBounds section2Package k
+      ∀ k →
+      (k≤sourceTerminal :
+        k ≤ BalabanSection2InductivePackage.terminalScale section2Package) →
+      BalabanSection2InductivePackage.largeFieldREstimate
+        section2Package k k≤sourceTerminal
+    localisationSummability :
+      ∀ k →
+      (k≤sourceTerminal :
+        k ≤ BalabanSection2InductivePackage.terminalScale section2Package) →
+      BalabanSection2InductivePackage.localisationSummability
+        section2Package k k≤sourceTerminal
     polymerExpansionConverges :
-      ∀ k → ROperationExpansionConverges section2Package k
+      ∀ k →
+      (k≤sourceTerminal :
+        k ≤ BalabanSection2InductivePackage.terminalScale section2Package) →
+      BalabanSection2InductivePackage.rOperationConvergence
+        section2Package k k≤sourceTerminal
+    nextScaleClosure :
+      ∀ k →
+      (k≤sourceTerminal :
+        k ≤ BalabanSection2InductivePackage.terminalScale section2Package) →
+      BalabanSection2InductivePackage.nextScaleClosure
+        section2Package k k≤sourceTerminal
+    scaleVolumeUniformity :
+      BalabanSection2InductivePackage.uniformInVolume section2Package
 
     sourceAuthorityId : SourceAuthorityId
     theoremLocator : String
@@ -64,11 +165,41 @@ record BalabanCMP122ConditionalRGClosure : Set₁ where
 
 open BalabanCMP122ConditionalRGClosure public
 
+-- The source-native result of unpacking a specialised CMP 122 theorem
+-- witness.  This is the
+-- canonical RG consumer: it carries the literal Sect. 2 package and does not
+-- mention the legacy P06/P10/P11/P33 assembly interfaces.
+specialisedCMP122ClosureToUniformRG :
+  BalabanCMP122ConditionalRGClosure →
+  UniformBalabanRGClosure
+specialisedCMP122ClosureToUniformRG cmp122 = record
+  { section2 = section2Package cmp122
+  ; terminalScale = BalabanSection2InductivePackage.terminalScale (section2Package cmp122)
+  ; terminalScaleAgrees = refl
+  ; allScalesEffectiveDensityForm = effectiveDensityRepresentation cmp122
+  ; allScalesSmallFieldEstimate = smallFieldBounds cmp122
+  ; allScalesLargeFieldREstimate = largeFieldRBounds cmp122
+  ; allScalesLocalisationSummability =
+      localisationSummability cmp122
+  ; allScalesROperationConvergence = polymerExpansionConverges cmp122
+  ; allScalesNextStepClosure =
+      nextScaleClosure cmp122
+  ; uniformInVolume =
+      scaleVolumeUniformity cmp122
+  ; sourceAuthorityId = balaban-cmp-122
+  ; theoremLocator = "CMP 122 II Theorem 1 (pp. 355--356), concluding p. 391; CMP 119 Sect. 2 (pp. 254--263)"
+  ; status = paperImport
+  ; noClayPromotion = refl
+  }
+
 -- The premise and conclusion have been transcribed, but no source witness is
 -- installed here: it must be reviewed against Sect. 2 [III] before it can be
 -- used as a paper import in a promoted route.
 currentBalabanCMP122ConditionalRGClosureAvailable : Set
 currentBalabanCMP122ConditionalRGClosureAvailable = ⊥
+
+currentBalabanCMP122ConditionalTheoremAvailable : Set
+currentBalabanCMP122ConditionalTheoremAvailable = ⊥
 
 -- This metadata records the exact intended source citation without asserting
 -- that the unextracted Sect. 2 package has already been instantiated.
