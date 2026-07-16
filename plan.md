@@ -84,6 +84,23 @@ All canonical chain steps have now executed and Lemma A/B elimination is lodged 
 
 ## NS Experimental Sidecar (2026-07-16, non-canonical)
 
+- The current highest-alpha pivot is interaction-closure measurement, prompted
+  by `~97--98%` support leakage and only `~1--3%` designed target-activity
+  capture in the coarse packet screen.  Future diagnostic runs should enable
+  exact unordered convolution enumeration on a declared dominant target-output
+  carrier, inspect top-M activity capture and entropy, then decide whether the
+  observed closure is sparse, broad-but-structured, or effectively dense.
+  Mixed polarization of the original nine-triad graph is deferred until that
+  closure diagnosis says the graph remains dynamically relevant.
+  The first 32-output production replay is now complete and proves only a
+  selected-carrier statement: endpoint output-modal capture is `.125755`,
+  while that carrier has `M90=27260`, `M99=41257`, and `exp(H)=28716.7`.
+  The 256-output replay now shows an effectively dense and strongly switching
+  selected carrier (`.571846` output capture, `M90=211662`, `exp(H)=221772.8`,
+  adjacent top-1024 Jaccard near `.01`).  The next and final widening milestone
+  is a 1024-output replay; use its exact output `M50/M90/M99` receipt and assign
+  a provisional full-shell regime only if output capture reaches `.9`.
+
 - The finite-Galerkin cyclic-feedback packet search is an empirical
   falsification lane only.  Its next milestone is staged endpoint selection
   and moving-packet recurrence at the correct `j=2` viscous time.  The first

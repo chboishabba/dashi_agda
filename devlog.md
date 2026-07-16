@@ -1,3 +1,44 @@
+# 2026-07-17 NS target interaction-closure instrumentation
+
+- Collected the completed 32-output closure replay.  Its endpoint output
+  carrier captures `.1257548` of full target-shell absolute modal activity;
+  consequently the report withholds a full-shell verdict.  Within the selected
+  carrier, `M90` grows from `11` to `27260`, `M99` from `18` to `41257`, and
+  Shannon effective support from `11.79` to `28716.7`; the top 512 endpoint
+  interactions carry `.087197` and share no keys with the initial top 512.
+- Fixed a production-only checkpoint bug: `15625 % 4 != 0` previously removed
+  all interior quarter snapshots.  Nearest-step quarter scheduling now emits
+  five snapshots.  Added exact IPR/Renyi-2 effective support, support fractions,
+  full logarithmic capture curves, bounded-memory dominant-set Jaccard
+  telemetry, and `ns_interaction_closure_report.py` with explicitly truncated
+  power/exponential/stretched-exponential comparisons.  CPU smokes validate
+  reconstruction, overlap calculation, quarter scheduling, JSON output, and
+  Python syntax.  Started a wider 256-output production replay.
+- Collected the 256-output replay.  It covers `.571846` of endpoint target
+  modal activity and has `M90=211662`, `M99=322303`, `exp(H)=221772.8`,
+  IPR support `143060.3`, and only `.034997` activity in its top 1024.
+  Retained-core overlap between adjacent checkpoints is `.0109--.0189` after
+  the initial transition.  The selected carrier is therefore effectively
+  dense and strongly switching, not a sparse closure graph.  Since output
+  capture remains below `.9`, launched a 1024-output confirmation rather than
+  promoting this to a full-shell empirical classification.
+- Finished donor-heavy rank-1 phase streams `0..3`.  Phase `3` leads at
+  `R_move=.309918`, but capture is only `.00562` and support leakage `.96957`;
+  no sampled phase crosses the `.4` continuation threshold.  Retired further
+  tuning of this fixed sparse loop and launched an instrumented replay of the
+  best phase with 32 dominant target outputs and 512 retained interactions.
+- Implemented opt-in dominant-output full-convolution decomposition in
+  `ns_phase_locked_packet_search.py`.  For each selected target output it
+  combines ordered input swaps into one canonical orbit, reconstructs the
+  selected modal energy transfer, and emits top-M capture, M-thresholds,
+  entropy/effective support, designed-graph absolute capture, and dominant
+  retained interactions.  The receipt reports output-carrier capture and does
+  not promote selected-output results to a full-shell claim.
+- `py_compile`, `git diff --check`, 8-output and 32-output CPU closure smokes
+  pass.  Reconstruction errors are `<4e-18`; the 32-output smoke costs about
+  one second at the current seven-step probe and captures `.9687` of endpoint
+  target modal activity.
+
 # 2026-07-16 finite Fourier triad-cancellation seam
 
 - Completed the six rank-0/phase-0 allocation contrasts.  No candidate

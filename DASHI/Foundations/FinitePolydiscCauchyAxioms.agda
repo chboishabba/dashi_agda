@@ -20,6 +20,14 @@ record FinitePolydiscCauchyAxioms : Set₁ where
     Assignment : Set
     assignmentAt : Assignment → Index → ℂ
 
+    -- The coefficient estimate consumes only the selected product contour.
+    -- Keeping this carrier separate prevents downstream proofs from silently
+    -- strengthening a boundary supremum to the entire polydisc.
+    BoundaryAssignment : List Index → Set
+    boundaryAssignment :
+      ∀ {indices} →
+      BoundaryAssignment indices → Assignment
+
     Function : List Index → Set
     evaluate :
       ∀ {indices} →
@@ -60,8 +68,12 @@ record FinitePolydiscCauchyAxioms : Set₁ where
       ∀ {indices : List Index}
       (F G : Function indices)
       (M : ℝ) →
-      (∀ s →
-        normValue (evaluate F s -Value evaluate G s) ≤ℝ M) →
+      (∀ (s : BoundaryAssignment indices) →
+        normValue
+          (evaluate F (boundaryAssignment s)
+            -Value
+           evaluate G (boundaryAssignment s))
+          ≤ℝ M) →
       BoundaryDifferenceBound F G M
 
     coefficientBound :

@@ -1,0 +1,858 @@
+{
+  "authority": {
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "theorem_authority": false
+  },
+  "classification": {
+    "endpoint_m90_fraction": 0.5591521129811566,
+    "endpoint_output_modal_activity_capture": 0.5718457280793726,
+    "endpoint_shannon_support_fraction": 0.5858620705642215,
+    "interpretation": "The selected carrier is broad, but a wider output carrier is required before assigning a full target-shell closure regime.",
+    "output_carrier_sufficient_for_full_shell_classification": false,
+    "regime": "full_shell_classification_withheld",
+    "selected_carrier_regime": "effectively_dense_selected_output_carrier",
+    "temporal_overlap_authority": "retained_top_set",
+    "temporal_overlap_value": 0.014866204162537165,
+    "temporal_support_regime": "strong_dominant_set_switching"
+  },
+  "contract": "ns_interaction_closure_nonpromoting_report",
+  "endpoint": {
+    "moving_packet_heat_compensated_ratio": 0.4079760607057314,
+    "moving_packet_recurrence_ratio": 0.30991794489673363,
+    "moving_packet_scale_displacement": 2
+  },
+  "retained_set_overlap": [
+    {
+      "from_step": 0,
+      "retained_top_set_jaccard": 0.0,
+      "to_step": 3906,
+      "warning": "overlap is for the retained top set, not J50/J90 unless those sets fit inside retention"
+    },
+    {
+      "from_step": 3906,
+      "retained_top_set_jaccard": 0.01890547263681592,
+      "to_step": 7812,
+      "warning": "overlap is for the retained top set, not J50/J90 unless those sets fit inside retention"
+    },
+    {
+      "from_step": 7812,
+      "retained_top_set_jaccard": 0.01085883514313919,
+      "to_step": 11719,
+      "warning": "overlap is for the retained top set, not J50/J90 unless those sets fit inside retention"
+    },
+    {
+      "from_step": 11719,
+      "retained_top_set_jaccard": 0.014866204162537165,
+      "to_step": 15625,
+      "warning": "overlap is for the retained top set, not J50/J90 unless those sets fit inside retention"
+    }
+  ],
+  "snapshots": [
+    {
+      "analysed_output_mode_count": 256,
+      "designed_graph_capture": 0.5,
+      "dominant_set_overlap": {
+        "top50": {
+          "available": true,
+          "to_initial": 1.0,
+          "to_previous": 1.0
+        },
+        "top90": {
+          "available": true,
+          "to_initial": 1.0,
+          "to_previous": 1.0
+        },
+        "top_retained": {
+          "available": true,
+          "to_initial": 1.0,
+          "to_previous": 1.0
+        }
+      },
+      "eligible_interaction_count": 18,
+      "eligible_interaction_count_authority": "exact_nonzero_count",
+      "inverse_participation_effective_support": 9.465949589757297,
+      "inverse_participation_support_fraction": 0.5258860883198498,
+      "m50": 4,
+      "m90": 11,
+      "m99": 18,
+      "output_modal_activity_capture": 1.0,
+      "output_modal_activity_m50": null,
+      "output_modal_activity_m90": null,
+      "output_modal_activity_m99": null,
+      "rank_fit": {
+        "best_stretched_exponential": {
+          "beta": 0.74,
+          "intercept": -3.5325911210808303,
+          "r_squared": 0.9478633140577012,
+          "rmse_log_weight": 0.22984169694357995,
+          "slope": -0.43877099826057064
+        },
+        "exponential": {
+          "intercept": -3.9878253009263163,
+          "r_squared": 0.9394364326003928,
+          "rmse_log_weight": 0.2477210047514646,
+          "slope": -0.18805295826352644
+        },
+        "local_power_bands": [
+          {
+            "intercept": -3.35915857361159,
+            "local_power_exponent_alpha": 1.1944642167787771,
+            "r_squared": 0.8550391467177898,
+            "rank_max": 18,
+            "rank_min": 1,
+            "rmse_log_weight": 0.3832502765076139,
+            "slope": -1.1944642167787771
+          }
+        ],
+        "power_law": {
+          "alpha": 1.1944642167787771,
+          "intercept": -3.35915857361159,
+          "r_squared": 0.8550391467177898,
+          "rmse_log_weight": 0.3832502765076139,
+          "slope": -1.1944642167787771
+        },
+        "retained_weight_count": 18,
+        "status": "descriptive_truncated_fit_only",
+        "warning": "fits use only retained leading interactions; they neither certify the omitted tail nor justify extrapolated M90/M99 values"
+      },
+      "retained_capture": 1.0,
+      "retained_count": 1024,
+      "retained_geometric_structure": {
+        "retained_full_activity_capture": 1.0,
+        "scale_locality_activity_fractions": {
+          "local_ratio_lt_2": 0.9999999999999999,
+          "moderate_ratio_2_to_4": 0.0,
+          "nonlocal_ratio_ge_4": 0.0
+        },
+        "shell_pair_activity_fractions": [
+          {
+            "fraction": 0.7492004064965188,
+            "input_shell_pair": [
+              1,
+              1
+            ]
+          },
+          {
+            "fraction": 0.2507995935034812,
+            "input_shell_pair": [
+              3,
+              3
+            ]
+          },
+          {
+            "fraction": 0.0,
+            "input_shell_pair": [
+              2,
+              3
+            ]
+          },
+          {
+            "fraction": 0.0,
+            "input_shell_pair": [
+              3,
+              4
+            ]
+          },
+          {
+            "fraction": 0.0,
+            "input_shell_pair": [
+              1,
+              3
+            ]
+          },
+          {
+            "fraction": 0.0,
+            "input_shell_pair": [
+              4,
+              4
+            ]
+          },
+          {
+            "fraction": 0.0,
+            "input_shell_pair": [
+              1,
+              2
+            ]
+          },
+          {
+            "fraction": 0.0,
+            "input_shell_pair": [
+              2,
+              2
+            ]
+          }
+        ],
+        "status": "retained_rows_only",
+        "weighted_mean_input_angle_radians": 1.4211995656136855
+      },
+      "shannon_effective_support": 11.79275202245546,
+      "shannon_entropy": 2.4674851073666515,
+      "shannon_support_fraction": 0.6551528901364144,
+      "signed_reconstruction_error": 5.204170427930421e-18,
+      "step": 0,
+      "target_shell_output_mode_count": 1852,
+      "time": 0.0
+    },
+    {
+      "analysed_output_mode_count": 256,
+      "designed_graph_capture": 3.5465992734378216e-05,
+      "dominant_set_overlap": {
+        "top50": {
+          "available": true,
+          "to_initial": 4.7078762770114404e-05,
+          "to_previous": 4.7078762770114404e-05
+        },
+        "top90": {
+          "available": false,
+          "to_initial": null,
+          "to_previous": null
+        },
+        "top_retained": {
+          "available": true,
+          "to_initial": 0.0,
+          "to_previous": 0.0
+        }
+      },
+      "eligible_interaction_count": 394198,
+      "eligible_interaction_count_authority": "exact_nonzero_count",
+      "inverse_participation_effective_support": 79894.1603911786,
+      "inverse_participation_support_fraction": 0.2026752048239174,
+      "m50": 42480,
+      "m90": 201340,
+      "m99": 327872,
+      "output_modal_activity_capture": 0.6022667202724653,
+      "output_modal_activity_m50": null,
+      "output_modal_activity_m90": null,
+      "output_modal_activity_m99": null,
+      "rank_fit": {
+        "best_stretched_exponential": {
+          "beta": 0.28,
+          "intercept": -7.739483211553054,
+          "r_squared": 0.9978847971888868,
+          "rmse_log_weight": 0.013570581077808926,
+          "slope": -0.24249271315760473
+        },
+        "exponential": {
+          "intercept": -8.57417098501017,
+          "r_squared": 0.9004938155863313,
+          "rmse_log_weight": 0.09307809225140347,
+          "slope": -0.0009472261461685693
+        },
+        "local_power_bands": [
+          {
+            "intercept": -7.832441837181144,
+            "local_power_exponent_alpha": 0.1650213961366356,
+            "r_squared": 0.8815129452407909,
+            "rank_max": 32,
+            "rank_min": 1,
+            "rmse_log_weight": 0.05096434633588453,
+            "slope": -0.1650213961366356
+          },
+          {
+            "intercept": -7.711765042257822,
+            "local_power_exponent_alpha": 0.1957205083153384,
+            "r_squared": 0.9778217533980941,
+            "rank_max": 128,
+            "rank_min": 33,
+            "rmse_log_weight": 0.011170664369736794,
+            "slope": -0.1957205083153384
+          },
+          {
+            "intercept": -7.023714932736929,
+            "local_power_exponent_alpha": 0.3365964283126207,
+            "r_squared": 0.9952550967571049,
+            "rank_max": 512,
+            "rank_min": 129,
+            "rmse_log_weight": 0.008859111663329216,
+            "slope": -0.3365964283126207
+          }
+        ],
+        "power_law": {
+          "alpha": 0.29325647893272644,
+          "intercept": -7.3189261275691635,
+          "r_squared": 0.958802495592537,
+          "rmse_log_weight": 0.059890493407224,
+          "slope": -0.29325647893272644
+        },
+        "retained_weight_count": 1024,
+        "status": "descriptive_truncated_fit_only",
+        "warning": "fits use only retained leading interactions; they neither certify the omitted tail nor justify extrapolated M90/M99 values"
+      },
+      "retained_capture": 0.06759566558511551,
+      "retained_count": 1024,
+      "retained_geometric_structure": {
+        "retained_full_activity_capture": 0.06759566558511551,
+        "scale_locality_activity_fractions": {
+          "local_ratio_lt_2": 0.3709841749868162,
+          "moderate_ratio_2_to_4": 0.6095427098927091,
+          "nonlocal_ratio_ge_4": 0.01947311512047432
+        },
+        "shell_pair_activity_fractions": [
+          {
+            "fraction": 0.7474612562492859,
+            "input_shell_pair": [
+              1,
+              2
+            ]
+          },
+          {
+            "fraction": 0.1843166114485194,
+            "input_shell_pair": [
+              1,
+              1
+            ]
+          },
+          {
+            "fraction": 0.04215981657629642,
+            "input_shell_pair": [
+              1,
+              3
+            ]
+          },
+          {
+            "fraction": 0.012403706361906424,
+            "input_shell_pair": [
+              0,
+              2
+            ]
+          },
+          {
+            "fraction": 0.010585698126685293,
+            "input_shell_pair": [
+              2,
+              2
+            ]
+          },
+          {
+            "fraction": 0.0015908751506733651,
+            "input_shell_pair": [
+              0,
+              1
+            ]
+          },
+          {
+            "fraction": 0.001482036086631947,
+            "input_shell_pair": [
+              2,
+              3
+            ]
+          }
+        ],
+        "status": "retained_rows_only",
+        "weighted_mean_input_angle_radians": 1.7914444751338512
+      },
+      "shannon_effective_support": 177850.19542807393,
+      "shannon_entropy": 12.088696876212511,
+      "shannon_support_fraction": 0.45116970514328825,
+      "signed_reconstruction_error": 4.345482307321902e-16,
+      "step": 3906,
+      "target_shell_output_mode_count": 1852,
+      "time": 3.906
+    },
+    {
+      "analysed_output_mode_count": 256,
+      "designed_graph_capture": 0.0,
+      "dominant_set_overlap": {
+        "top50": {
+          "available": false,
+          "to_initial": null,
+          "to_previous": null
+        },
+        "top90": {
+          "available": false,
+          "to_initial": null,
+          "to_previous": null
+        },
+        "top_retained": {
+          "available": true,
+          "to_initial": 0.0,
+          "to_previous": 0.01890547263681592
+        }
+      },
+      "eligible_interaction_count": 379569,
+      "eligible_interaction_count_authority": "exact_nonzero_count",
+      "inverse_participation_effective_support": 144087.5152972348,
+      "inverse_participation_support_fraction": 0.37960822748231493,
+      "m50": 60172,
+      "m90": 213753,
+      "m99": 324002,
+      "output_modal_activity_capture": 0.5842403116917474,
+      "output_modal_activity_m50": null,
+      "output_modal_activity_m90": null,
+      "output_modal_activity_m99": null,
+      "rank_fit": {
+        "best_stretched_exponential": {
+          "beta": 0.2,
+          "intercept": -8.98015974863595,
+          "r_squared": 0.9943653533887135,
+          "rmse_log_weight": 0.019142749996361532,
+          "slope": -0.4536098186216032
+        },
+        "exponential": {
+          "intercept": -10.090955253525278,
+          "r_squared": 0.8265558125865807,
+          "rmse_log_weight": 0.10620644221495243,
+          "slope": -0.0007843284190791757
+        },
+        "local_power_bands": [
+          {
+            "intercept": -9.37876990918812,
+            "local_power_exponent_alpha": 0.12705315321274077,
+            "r_squared": 0.8448242110279272,
+            "rank_max": 32,
+            "rank_min": 1,
+            "rmse_log_weight": 0.0458690081849621,
+            "slope": -0.12705315321274077
+          },
+          {
+            "intercept": -9.158396983668483,
+            "local_power_exponent_alpha": 0.20673779687167296,
+            "r_squared": 0.9878707237773767,
+            "rank_max": 128,
+            "rank_min": 33,
+            "rmse_log_weight": 0.008681528217478581,
+            "slope": -0.20673779687167296
+          },
+          {
+            "intercept": -8.695329662287945,
+            "local_power_exponent_alpha": 0.3021955954324279,
+            "r_squared": 0.9950500699751246,
+            "rank_max": 512,
+            "rank_min": 129,
+            "rmse_log_weight": 0.008124551384706266,
+            "slope": -0.3021955954324279
+          }
+        ],
+        "power_law": {
+          "alpha": 0.25677651898121506,
+          "intercept": -8.968761371627206,
+          "r_squared": 0.9841185994875618,
+          "rmse_log_weight": 0.03213774384773204,
+          "slope": -0.25677651898121506
+        },
+        "retained_weight_count": 1024,
+        "status": "descriptive_truncated_fit_only",
+        "warning": "fits use only retained leading interactions; they neither certify the omitted tail nor justify extrapolated M90/M99 values"
+      },
+      "retained_capture": 0.03523471492526915,
+      "retained_count": 1024,
+      "retained_geometric_structure": {
+        "retained_full_activity_capture": 0.03523471492526915,
+        "scale_locality_activity_fractions": {
+          "local_ratio_lt_2": 0.16736884786190095,
+          "moderate_ratio_2_to_4": 0.6510133629479795,
+          "nonlocal_ratio_ge_4": 0.18161778919011926
+        },
+        "shell_pair_activity_fractions": [
+          {
+            "fraction": 0.5694900742171726,
+            "input_shell_pair": [
+              1,
+              2
+            ]
+          },
+          {
+            "fraction": 0.16638880054847993,
+            "input_shell_pair": [
+              1,
+              3
+            ]
+          },
+          {
+            "fraction": 0.133294034730674,
+            "input_shell_pair": [
+              0,
+              2
+            ]
+          },
+          {
+            "fraction": 0.03684680323877103,
+            "input_shell_pair": [
+              2,
+              3
+            ]
+          },
+          {
+            "fraction": 0.03251762666652396,
+            "input_shell_pair": [
+              2,
+              2
+            ]
+          },
+          {
+            "fraction": 0.03116072363161596,
+            "input_shell_pair": [
+              1,
+              1
+            ]
+          },
+          {
+            "fraction": 0.012616884862237547,
+            "input_shell_pair": [
+              3,
+              3
+            ]
+          },
+          {
+            "fraction": 0.012507916769145038,
+            "input_shell_pair": [
+              0,
+              3
+            ]
+          },
+          {
+            "fraction": 0.0051771353353797026,
+            "input_shell_pair": [
+              0,
+              1
+            ]
+          }
+        ],
+        "status": "retained_rows_only",
+        "weighted_mean_input_angle_radians": 1.9029752778898053
+      },
+      "shannon_effective_support": 222929.69539717693,
+      "shannon_entropy": 12.314611733457847,
+      "shannon_support_fraction": 0.5873232413531583,
+      "signed_reconstruction_error": 1.1449174941446927e-15,
+      "step": 7812,
+      "target_shell_output_mode_count": 1852,
+      "time": 7.812
+    },
+    {
+      "analysed_output_mode_count": 256,
+      "designed_graph_capture": 2.296929947684895e-06,
+      "dominant_set_overlap": {
+        "top50": {
+          "available": false,
+          "to_initial": null,
+          "to_previous": null
+        },
+        "top90": {
+          "available": false,
+          "to_initial": null,
+          "to_previous": null
+        },
+        "top_retained": {
+          "available": true,
+          "to_initial": 0.0,
+          "to_previous": 0.01085883514313919
+        }
+      },
+      "eligible_interaction_count": 379337,
+      "eligible_interaction_count_authority": "exact_nonzero_count",
+      "inverse_participation_effective_support": 156263.35391474713,
+      "inverse_participation_support_fraction": 0.4119380759449965,
+      "m50": 62512,
+      "m90": 215743,
+      "m99": 324424,
+      "output_modal_activity_capture": 0.5911114884597031,
+      "output_modal_activity_m50": null,
+      "output_modal_activity_m90": null,
+      "output_modal_activity_m99": null,
+      "rank_fit": {
+        "best_stretched_exponential": {
+          "beta": 0.2,
+          "intercept": -10.188920190067877,
+          "r_squared": 0.9964386959086124,
+          "rmse_log_weight": 0.014422587960209106,
+          "slope": -0.4303307973395069
+        },
+        "exponential": {
+          "intercept": -11.240106406060226,
+          "r_squared": 0.8396290812473095,
+          "rmse_log_weight": 0.09678353389118703,
+          "slope": -0.0007491577499702028
+        },
+        "local_power_bands": [
+          {
+            "intercept": -10.595155006365733,
+            "local_power_exponent_alpha": 0.1153530207176995,
+            "r_squared": 0.799139015678362,
+            "rank_max": 32,
+            "rank_min": 1,
+            "rmse_log_weight": 0.048715895950408226,
+            "slope": -0.1153530207176995
+          },
+          {
+            "intercept": -10.242850138494875,
+            "local_power_exponent_alpha": 0.2230852217640621,
+            "r_squared": 0.9753303054334739,
+            "rank_max": 128,
+            "rank_min": 33,
+            "rmse_log_weight": 0.013445771916808347,
+            "slope": -0.2230852217640621
+          },
+          {
+            "intercept": -9.954729214135758,
+            "local_power_exponent_alpha": 0.27960192424682323,
+            "r_squared": 0.9960187848798069,
+            "rank_max": 512,
+            "rank_min": 129,
+            "rmse_log_weight": 0.00673827002900368,
+            "slope": -0.27960192424682323
+          }
+        ],
+        "power_law": {
+          "alpha": 0.24302160054575697,
+          "intercept": -10.181533365529127,
+          "r_squared": 0.9815020635600678,
+          "rmse_log_weight": 0.03287004573911646,
+          "slope": -0.24302160054575697
+        },
+        "retained_weight_count": 1024,
+        "status": "descriptive_truncated_fit_only",
+        "warning": "fits use only retained leading interactions; they neither certify the omitted tail nor justify extrapolated M90/M99 values"
+      },
+      "retained_capture": 0.030131784496929923,
+      "retained_count": 1024,
+      "retained_geometric_structure": {
+        "retained_full_activity_capture": 0.030131784496929923,
+        "scale_locality_activity_fractions": {
+          "local_ratio_lt_2": 0.23015563739795322,
+          "moderate_ratio_2_to_4": 0.4399141711035357,
+          "nonlocal_ratio_ge_4": 0.3299301914985115
+        },
+        "shell_pair_activity_fractions": [
+          {
+            "fraction": 0.33743459067047915,
+            "input_shell_pair": [
+              1,
+              2
+            ]
+          },
+          {
+            "fraction": 0.2753867778444697,
+            "input_shell_pair": [
+              0,
+              2
+            ]
+          },
+          {
+            "fraction": 0.12527964602419958,
+            "input_shell_pair": [
+              2,
+              3
+            ]
+          },
+          {
+            "fraction": 0.12481717159116507,
+            "input_shell_pair": [
+              1,
+              3
+            ]
+          },
+          {
+            "fraction": 0.06380833294437158,
+            "input_shell_pair": [
+              2,
+              2
+            ]
+          },
+          {
+            "fraction": 0.04005852330579594,
+            "input_shell_pair": [
+              3,
+              3
+            ]
+          },
+          {
+            "fraction": 0.024013767509105468,
+            "input_shell_pair": [
+              0,
+              3
+            ]
+          },
+          {
+            "fraction": 0.006873204591433325,
+            "input_shell_pair": [
+              1,
+              1
+            ]
+          },
+          {
+            "fraction": 0.00232798551897988,
+            "input_shell_pair": [
+              0,
+              1
+            ]
+          }
+        ],
+        "status": "retained_rows_only",
+        "weighted_mean_input_angle_radians": 1.9713915923904688
+      },
+      "shannon_effective_support": 229321.5853460533,
+      "shannon_entropy": 12.342880600246518,
+      "shannon_support_fraction": 0.604532606484612,
+      "signed_reconstruction_error": 8.907805049140904e-16,
+      "step": 11719,
+      "target_shell_output_mode_count": 1852,
+      "time": 11.719
+    },
+    {
+      "analysed_output_mode_count": 256,
+      "designed_graph_capture": 0.0,
+      "dominant_set_overlap": {
+        "top50": {
+          "available": false,
+          "to_initial": null,
+          "to_previous": null
+        },
+        "top90": {
+          "available": false,
+          "to_initial": null,
+          "to_previous": null
+        },
+        "top_retained": {
+          "available": true,
+          "to_initial": 0.0,
+          "to_previous": 0.014866204162537165
+        }
+      },
+      "eligible_interaction_count": 378541,
+      "eligible_interaction_count_authority": "exact_nonzero_count",
+      "inverse_participation_effective_support": 143060.30889635,
+      "inverse_participation_support_fraction": 0.377925532231251,
+      "m50": 59778,
+      "m90": 211662,
+      "m99": 322303,
+      "output_modal_activity_capture": 0.5718457280793726,
+      "output_modal_activity_m50": null,
+      "output_modal_activity_m90": null,
+      "output_modal_activity_m99": null,
+      "rank_fit": {
+        "best_stretched_exponential": {
+          "beta": 0.2,
+          "intercept": -10.604467827429994,
+          "r_squared": 0.9921387328973353,
+          "rmse_log_weight": 0.027914155649898242,
+          "slope": -0.5593747914781088
+        },
+        "exponential": {
+          "intercept": -11.976226552933811,
+          "r_squared": 0.8181729802146889,
+          "rmse_log_weight": 0.13424787802162755,
+          "slope": -0.0009633667647875309
+        },
+        "local_power_bands": [
+          {
+            "intercept": -10.827018308863003,
+            "local_power_exponent_alpha": 0.26583782755923047,
+            "r_squared": 0.9302441014858245,
+            "rank_max": 32,
+            "rank_min": 1,
+            "rmse_log_weight": 0.061321657007686325,
+            "slope": -0.26583782755923047
+          },
+          {
+            "intercept": -10.72175567452222,
+            "local_power_exponent_alpha": 0.27823133896698865,
+            "r_squared": 0.9928308215610161,
+            "rank_max": 128,
+            "rank_min": 33,
+            "rmse_log_weight": 0.008960082880012652,
+            "slope": -0.27823133896698865
+          },
+          {
+            "intercept": -10.29206739362282,
+            "local_power_exponent_alpha": 0.3660265415612768,
+            "r_squared": 0.9939775257282869,
+            "rank_max": 512,
+            "rank_min": 129,
+            "rmse_log_weight": 0.010860403718912054,
+            "slope": -0.3660265415612768
+          }
+        ],
+        "power_law": {
+          "alpha": 0.3178544346741223,
+          "intercept": -10.583246353425732,
+          "r_squared": 0.9894159528101842,
+          "rmse_log_weight": 0.032389489518859636,
+          "slope": -0.3178544346741223
+        },
+        "retained_weight_count": 1024,
+        "status": "descriptive_truncated_fit_only",
+        "warning": "fits use only retained leading interactions; they neither certify the omitted tail nor justify extrapolated M90/M99 values"
+      },
+      "retained_capture": 0.03499696329113258,
+      "retained_count": 1024,
+      "retained_geometric_structure": {
+        "retained_full_activity_capture": 0.03499696329113258,
+        "scale_locality_activity_fractions": {
+          "local_ratio_lt_2": 0.21857767569142592,
+          "moderate_ratio_2_to_4": 0.34696852468181977,
+          "nonlocal_ratio_ge_4": 0.43445379962675423
+        },
+        "shell_pair_activity_fractions": [
+          {
+            "fraction": 0.38550670970694495,
+            "input_shell_pair": [
+              0,
+              2
+            ]
+          },
+          {
+            "fraction": 0.2709650788213338,
+            "input_shell_pair": [
+              1,
+              2
+            ]
+          },
+          {
+            "fraction": 0.09565937709494517,
+            "input_shell_pair": [
+              2,
+              3
+            ]
+          },
+          {
+            "fraction": 0.08938189849976479,
+            "input_shell_pair": [
+              1,
+              3
+            ]
+          },
+          {
+            "fraction": 0.08308674660921858,
+            "input_shell_pair": [
+              2,
+              2
+            ]
+          },
+          {
+            "fraction": 0.04786719015613319,
+            "input_shell_pair": [
+              0,
+              3
+            ]
+          },
+          {
+            "fraction": 0.01851691760467672,
+            "input_shell_pair": [
+              3,
+              3
+            ]
+          },
+          {
+            "fraction": 0.0090160815069828,
+            "input_shell_pair": [
+              1,
+              1
+            ]
+          }
+        ],
+        "status": "retained_rows_only",
+        "weighted_mean_input_angle_radians": 1.8856250320464465
+      },
+      "shannon_effective_support": 221772.81405345094,
+      "shannon_entropy": 12.309408776744341,
+      "shannon_support_fraction": 0.5858620705642215,
+      "signed_reconstruction_error": 5.041540102057596e-16,
+      "step": 15625,
+      "target_shell_output_mode_count": 1852,
+      "time": 15.625
+    }
+  ],
+  "source_receipt": "scripts/data/outputs/ns_interaction_closure_production/quarter_donor-heavy_rank01_phase003_closure256.json"
+}
