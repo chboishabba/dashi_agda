@@ -1,5 +1,22 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Corrected the critical-packet interpretation by adding an exact
+  mode-by-mode heat baseline and a saved-snapshot 2/3-dealiased shell-balance
+  reconstruction to `ns_critical_packet_phase_residence_audit.py`.  The
+  previously observed N32 decay is compatible with, and in these windows
+  faster than, its own heat continuation; it cannot be cited as nonlinear
+  phase/network leakage.
+
+- Added `ns_phase_locked_packet_search.py` and completed one adversarial GPU
+  endpoint run.  The N32 target `(-8,0,0)` receives from four shared donor
+  pairs; phase sampling found a state with initial replenishment ratio `8.12`.
+  The finite-Galerkin endpoint after exactly 15,625 steps (`T=15.625`) is
+  nevertheless `R=.0703` and `G=.519` relative to the exact heat baseline.
+  This is a falsification result for the tested donor-star topology, not for
+  phase-network recurrence generally.  The next worthwhile adversary is a
+  multi-target adjacent-shell ladder/shared-mode relocking network, evaluated
+  by endpoint recurrence rather than initial flux alone.
+
 - Implemented and ran `scripts/ns_critical_packet_phase_residence_audit.py`.
   The script measures the scale-invariant dyadic `H^(1/2)` packet `X_j`,
   dominance/tail-tightness, actual-viscosity parabolic target windows, and a

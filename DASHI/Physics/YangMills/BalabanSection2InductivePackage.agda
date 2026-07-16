@@ -132,3 +132,13 @@ record UniformBalabanRGClosure : Set₁ where
     theoremLocator : String
     status : VerificationStatus
     noClayPromotion : clayYangMillsPromoted ≡ false
+
+-- Cutoff-indexed presentation of the same closure.  The source package can
+-- terminate before the ultraviolet cutoff, but never after it.
+record UniformBalabanRGClosureAt (cutoff : ℕ) : Set₁ where
+  field
+    closure : UniformBalabanRGClosure
+    sourceTerminalWithinCutoff :
+      UniformBalabanRGClosure.terminalScale closure ≤ cutoff
+
+open UniformBalabanRGClosureAt public
