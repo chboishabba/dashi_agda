@@ -2221,6 +2221,27 @@ removeMemberKeepsOther (there x∈xs) here y≢x = here
 removeMemberKeepsOther (there x∈xs) (there y∈xs) y≢x =
   there (removeMemberKeepsOther x∈xs y∈xs y≢x)
 
+removeMemberSubset :
+  {A : Set} {x : A} {xs : List A} →
+  (x∈xs : x ∈ xs) → removeMember x∈xs ⊆ xs
+removeMemberSubset here y∈ = there y∈
+removeMemberSubset (there x∈xs) here = here
+removeMemberSubset (there x∈xs) (there y∈removed) =
+  there (removeMemberSubset x∈xs y∈removed)
+
+removeMemberNoDuplicates :
+  {A : Set} {x : A} {xs : List A} →
+  (x∈xs : x ∈ xs) →
+  NoDuplicates xs → NoDuplicates (removeMember x∈xs)
+removeMemberNoDuplicates here (noDup-cons x∉xs noDup-xs) = noDup-xs
+removeMemberNoDuplicates {x = x} (there x∈xs)
+  (noDup-cons {x = y} {xs = ys} y∉ys noDup-ys) =
+  noDup-cons y∉removed (removeMemberNoDuplicates x∈xs noDup-ys)
+  where
+  y∉removed : y ∉ removeMember x∈xs
+  y∉removed y∈removed =
+    y∉ys (removeMemberSubset x∈xs y∈removed)
+
 noDupSubsetLength≤ :
   {A : Set} {xs ys : List A} →
   NoDuplicates xs →
@@ -2258,6 +2279,57 @@ sameVertexSetNoDuplicatesLength noDup-xs noDup-ys (xs⊆ys , ys⊆xs) =
   ≤-antisym
     (noDupSubsetLength≤ noDup-xs xs⊆ys)
     (noDupSubsetLength≤ noDup-ys ys⊆xs)
+
+-- Finite extensionality in the direction needed by the cube-edge collapse:
+-- a duplicate-free sublist with the same length contains every member of its
+-- duplicate-free target.  Decidable equality is explicit because recovering
+-- the reverse membership statement must decide whether a target element is
+-- the removed head.
+noDupSubsetEqualLengthSameVertexSet :
+  {A : Set} →
+  ((u v : A) → Dec (u ≡ v)) →
+  {xs ys : List A} →
+  NoDuplicates xs → NoDuplicates ys →
+  xs ⊆ ys → length xs ≡ length ys →
+  SameVertexSet xs ys
+noDupSubsetEqualLengthSameVertexSet eq? {[]} {[]} noDup-nil noDup-nil
+  xs⊆ys lengthEq = xs⊆ys , (λ ())
+noDupSubsetEqualLengthSameVertexSet eq? {[]} {y ∷ ys} noDup-nil noDup-ys
+  xs⊆ys ()
+noDupSubsetEqualLengthSameVertexSet eq? {x ∷ xs} {[]} noDup-xs noDup-nil
+  xs⊆ys ()
+noDupSubsetEqualLengthSameVertexSet eq? {x ∷ xs} {ys = y ∷ ys}
+  (noDup-cons x∉xs noDup-xs) noDup-y∷ys xs⊆ys lengthEq =
+  xs⊆ys , ys⊆x∷xs
+  where
+  x∈ys : x ∈ (y ∷ ys)
+  x∈ys = xs⊆ys here
+
+  xs⊆removed : xs ⊆ removeMember x∈ys
+  xs⊆removed {z} z∈xs =
+    removeMemberKeepsOther x∈ys (xs⊆ys (there z∈xs))
+      (λ z≡x → x∉xs
+        (subst (λ w → w ∈ xs) z≡x z∈xs))
+
+  removedNoDup : NoDuplicates (removeMember x∈ys)
+  removedNoDup = removeMemberNoDuplicates x∈ys noDup-y∷ys
+
+  xsLength≡removedLength : length xs ≡ length (removeMember x∈ys)
+  xsLength≡removedLength =
+    trans (suc-injective lengthEq)
+      (sym (suc-injective (removeMember-length-suc x∈ys)))
+
+  recursive : SameVertexSet xs (removeMember x∈ys)
+  recursive = noDupSubsetEqualLengthSameVertexSet eq?
+    noDup-xs removedNoDup xs⊆removed xsLength≡removedLength
+
+  ys⊆x∷xs : (y ∷ ys) ⊆ (x ∷ xs)
+  ys⊆x∷xs {z} z∈ys with eq? z x
+  ... | yes z≡x =
+    subst (λ w → w ∈ (x ∷ xs)) (sym z≡x) here
+  ... | no z≢x =
+    there (proj₂ recursive
+      (removeMemberKeepsOther x∈ys z∈ys z≢x))
 
 data Sorted {A : Set} (_≤_ : A → A → Set) : List A → Set where
   sorted-nil    : Sorted _≤_ []
@@ -5259,6 +5331,40 @@ mapList-noDup-injective f inj (x ∷ xs) (noDup-cons x∉xs nd) =
           x≡x′ = inj fx≡fx′
       in x∉xs (subst (λ z → z ∈ xs) (sym x≡x′) x′∈xs))
     (mapList-noDup-injective f inj xs nd)
+
+-- A proof-carrying source element need not be recoverable from its mapped
+-- value by record equality.  This projection form is the useful finite-list
+-- alternative: if equal `f` outputs force equality of an already
+-- duplicate-free proof-free projection `g`, then `mapList f xs` is itself
+-- duplicate-free.
+mapList-noDup-by-projection :
+  {A B C : Set} (f : A → B) (g : A → C) (xs : List A) →
+  (∀ {u v} → u ∈ xs → v ∈ xs → f u ≡ f v → g u ≡ g v) →
+  NoDuplicates (mapList g xs) →
+  NoDuplicates (mapList f xs)
+mapList-noDup-by-projection f g [] preserves noDup-nil = noDup-nil
+mapList-noDup-by-projection f g (x ∷ xs) preserves
+  (noDup-cons gx∉tail nd-tail) =
+  noDup-cons fx∉tail tailNoDup
+  where
+  tailPreserves :
+    ∀ {u v} → u ∈ xs → v ∈ xs → f u ≡ f v → g u ≡ g v
+  tailPreserves u∈ v∈ eq = preserves (there u∈) (there v∈) eq
+
+  tailNoDup : NoDuplicates (mapList f xs)
+  tailNoDup =
+    mapList-noDup-by-projection f g xs tailPreserves nd-tail
+
+  fx∉tail : f x ∉ mapList f xs
+  fx∉tail fx∈tail =
+    let source = map-elem f xs fx∈tail
+        y = proj₁ source
+        fx≡fy = proj₁ (proj₂ source)
+        y∈ = proj₂ (proj₂ source)
+        gx≡gy = preserves here (there y∈) fx≡fy
+    in gx∉tail
+         (subst (λ z → z ∈ mapList g xs) (sym gx≡gy)
+           (in-map g y∈))
 
 ++-noDup :
   {A : Set} (xs ys : List A) →

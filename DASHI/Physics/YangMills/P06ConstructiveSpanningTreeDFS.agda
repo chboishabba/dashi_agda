@@ -124,6 +124,124 @@ mutual
     (dfsTourTail (subtree child) ++
       (u ∷ dfsExcursions u children))
 
+------------------------------------------------------------------------
+-- Proof-relevant tour steps and structural tree edges.  These are kept
+-- independent of any application-specific edge-code representation: the
+-- path-union reifier can record that an insertion link is a tree edge, and
+-- this module then certifies that the closed DFS tour actually traverses it.
+------------------------------------------------------------------------
+
+data TourStepOccurs
+  {A : Set} (x y : A) : List A → Set where
+  step-here : ∀ {xs} → TourStepOccurs x y (x ∷ y ∷ xs)
+  step-there : ∀ {z xs} → TourStepOccurs x y xs →
+    TourStepOccurs x y (z ∷ xs)
+
+stepOccursPrepend :
+  {A : Set} {x y : A} →
+  (prefix xs : List A) →
+  TourStepOccurs x y xs → TourStepOccurs x y (prefix ++ xs)
+stepOccursPrepend [] xs occurrence = occurrence
+stepOccursPrepend (z ∷ prefix) xs occurrence =
+  step-there (stepOccursPrepend prefix xs occurrence)
+
+stepOccursAppendLeft :
+  {A : Set} {x y : A} →
+  (xs ys : List A) →
+  TourStepOccurs x y xs → TourStepOccurs x y (xs ++ ys)
+stepOccursAppendLeft (z ∷ z′ ∷ xs) ys step-here = step-here
+stepOccursAppendLeft (z ∷ []) ys (step-there ())
+stepOccursAppendLeft [] ys ()
+stepOccursAppendLeft (z ∷ xs) ys (step-there occurrence) =
+  step-there (stepOccursAppendLeft xs ys occurrence)
+
+stepOccursTransport :
+  {A : Set} {x y : A} {xs ys : List A} →
+  xs ≡ ys → TourStepOccurs x y xs → TourStepOccurs x y ys
+stepOccursTransport refl occurrence = occurrence
+
+dfsTourWithSuffix :
+  {G : Graph} {u : Graph.Vertex G} →
+  (tree : RootedTreeNode G u) →
+  (suffix : List (Graph.Vertex G)) →
+  dfsTour tree ++ suffix ≡ u ∷ (dfsTourTail tree ++ suffix)
+dfsTourWithSuffix (leaf u) suffix = refl
+dfsTourWithSuffix (branch u children) suffix = refl
+
+-- A proof-free edge relation for a rooted tree node.  The constructor
+-- records only parent/child vertices and a position in the child forest;
+-- it never compares the recursive proof fields carried by `RootedTreeChild`.
+mutual
+
+  data TreeEdgeOccurs
+    {G : Graph} {u : Graph.Vertex G} :
+    {tree : RootedTreeNode G u} →
+    Graph.Vertex G → Graph.Vertex G → Set₁ where
+    direct-tree-edge : ∀ {children : List (RootedTreeChild G u)}
+      {child : RootedTreeChild G u} →
+      ChildOccurs child children →
+      TreeEdgeOccurs {tree = branch u children} u (root child)
+    below-tree-edge : ∀ {children : List (RootedTreeChild G u)}
+      {child : RootedTreeChild G u} {p q : Graph.Vertex G} →
+      ChildOccurs child children →
+      TreeEdgeOccurs {tree = subtree child} p q →
+      TreeEdgeOccurs {tree = branch u children} p q
+
+  data ChildOccurs
+    {G : Graph} {u : Graph.Vertex G}
+    (child : RootedTreeChild G u) :
+    List (RootedTreeChild G u) → Set₁ where
+    child-here : ∀ {children} → ChildOccurs child (child ∷ children)
+    child-there : ∀ {entry children} → ChildOccurs child children →
+      ChildOccurs child (entry ∷ children)
+
+mutual
+
+  dfsTourDirectChildStep :
+    {G : Graph} {u : Graph.Vertex G}
+    (children : List (RootedTreeChild G u)) →
+    {child : RootedTreeChild G u} →
+    ChildOccurs child children →
+    TourStepOccurs u (root child) (dfsTour (branch u children))
+  dfsTourDirectChildStep {u = u} (child ∷ children) child-here = step-here
+  dfsTourDirectChildStep {u = u} (entry ∷ children) (child-there child∈) =
+    stepOccursPrepend
+      (u ∷ root entry ∷ dfsTourTail (subtree entry))
+      (u ∷ dfsExcursions u children)
+      (dfsTourDirectChildStep children child∈)
+
+  dfsTourSubtreeStep :
+    {G : Graph} {u : Graph.Vertex G}
+    (children : List (RootedTreeChild G u)) →
+    {child : RootedTreeChild G u} {p q : Graph.Vertex G} →
+    ChildOccurs child children →
+    TourStepOccurs p q (dfsTour (subtree child)) →
+    TourStepOccurs p q (dfsTour (branch u children))
+  dfsTourSubtreeStep {u = u} (child ∷ children) child-here occurrence =
+    stepOccursTransport
+      (cong (u ∷_)
+        (dfsTourWithSuffix (subtree child)
+          (u ∷ dfsExcursions u children)))
+      (stepOccursAppendLeft
+        (u ∷ dfsTour (subtree child))
+        (u ∷ dfsExcursions u children)
+        (step-there occurrence))
+  dfsTourSubtreeStep {u = u} (entry ∷ children) (child-there child∈) occurrence =
+    stepOccursPrepend
+      (u ∷ root entry ∷ dfsTourTail (subtree entry))
+      (u ∷ dfsExcursions u children)
+      (dfsTourSubtreeStep children child∈ occurrence)
+
+  dfsTourTreeEdgeStep :
+    {G : Graph} {u p q : Graph.Vertex G} →
+    {tree : RootedTreeNode G u} →
+    TreeEdgeOccurs {tree = tree} p q →
+    TourStepOccurs p q (dfsTour tree)
+  dfsTourTreeEdgeStep (direct-tree-edge {children = children} child∈) =
+    dfsTourDirectChildStep children child∈
+  dfsTourTreeEdgeStep (below-tree-edge {children = children} child∈ edge∈) =
+    dfsTourSubtreeStep children child∈ (dfsTourTreeEdgeStep edge∈)
+
 record DFSTourInvariant
   {G : Graph} {u : Graph.Vertex G}
   (tree : RootedTreeNode G u) : Set₁ where

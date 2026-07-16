@@ -12,7 +12,7 @@ module DASHI.Physics.YangMills.BalabanCubeEdgeTreeCodes where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
-open import Data.Empty using (⊥)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Data.List.Base using (List; []; _∷_; length)
 open import Data.Product.Base using (Σ; _×_; _,_; proj₁; proj₂)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
@@ -65,6 +65,10 @@ edgeCount T = length (edges T)
 reverseGridEdge : ∀ {N} → CubeGridEdgeCode N → CubeGridEdgeCode N
 reverseGridEdge (gridEdge u v) = gridEdge v u
 
+reverseGridEdge-involutive : ∀ {N} (edge : CubeGridEdgeCode N) →
+  reverseGridEdge (reverseGridEdge edge) ≡ edge
+reverseGridEdge-involutive (gridEdge u v) = refl
+
 -- `vertexOrder` is the repository's fixed finite-code order.  The relation
 -- is total, so every geometric edge has one deterministic orientation.
 normaliseGridEdge : ∀ {N} {{_ : NonZero N}} →
@@ -75,6 +79,34 @@ normaliseGridEdge {N} edge
          (from edge) (to edge)
 ... | inj₁ _ = edge
 ... | inj₂ _ = reverseGridEdge edge
+
+-- A loopless grid edge has a unique orientation selected by the total vertex
+-- order.  Consequently normalisation forgets the presentation direction.
+normaliseGridEdge-reverse : ∀ {N} {{_ : NonZero N}}
+  (edge : CubeGridEdgeCode N) →
+  GridEdgeAdmissible edge →
+  normaliseGridEdge edge ≡ normaliseGridEdge (reverseGridEdge edge)
+normaliseGridEdge-reverse {N} edge admissible
+  with TotalOrder.ord-total
+         (vertexOrderIsTotalOrder {G = faceCubeGraph {N}})
+         (from edge) (to edge)
+     | TotalOrder.ord-total
+         (vertexOrderIsTotalOrder {G = faceCubeGraph {N}})
+         (to edge) (from edge)
+... | inj₁ from≤to | inj₁ to≤from =
+  ⊥-elim
+    (proj₁ admissible
+      (TotalOrder.ord-antisym
+        (vertexOrderIsTotalOrder {G = faceCubeGraph {N}})
+        from≤to to≤from))
+... | inj₁ from≤to | inj₂ from≤to′ = refl
+... | inj₂ to≤from | inj₁ to≤from′ = refl
+... | inj₂ to≤from | inj₂ from≤to =
+  ⊥-elim
+    (proj₁ admissible
+      (TotalOrder.ord-antisym
+        (vertexOrderIsTotalOrder {G = faceCubeGraph {N}})
+        from≤to to≤from))
 
 -- Canonicalising edge lists needs the same generic finite-list machinery as
 -- vertices.  Its adjacency is irrelevant: `canonicalize` uses only the
@@ -207,6 +239,17 @@ cubeGridEdgeCodeEq? (gridEdge from₁ to₁) (gridEdge from₂ to₂)
 ... | yes refl with cube4Eq? to₁ to₂
 ... | no to≢ = no (λ { refl → to≢ refl })
 ... | yes refl = yes refl
+
+-- Equality of proof-free edge codes exposes equality of both directed
+-- endpoints.  The orientation analysis in the canonical DFS bridge uses
+-- this instead of comparing any adjacency certificates.
+gridEdgeCodeEqEndpoints : ∀ {N} {e₁ e₂ : CubeGridEdgeCode N} →
+  e₁ ≡ e₂ → from e₁ ≡ from e₂ × to e₁ ≡ to e₂
+gridEdgeCodeEqEndpoints refl = refl , refl
+
+gridEdgeCodeExt : ∀ {N} {e₁ e₂ : CubeGridEdgeCode N} →
+  from e₁ ≡ from e₂ → to e₁ ≡ to e₂ → e₁ ≡ e₂
+gridEdgeCodeExt {e₁ = gridEdge u v} {e₂ = gridEdge .u .v} refl refl = refl
 
 cubeEdgeTreeCodeEq? : ∀ {N} →
   (left right : CubeEdgeTreeCode N) → Dec (left ≡ right)

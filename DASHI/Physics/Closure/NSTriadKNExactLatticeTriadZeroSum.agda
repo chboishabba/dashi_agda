@@ -5,7 +5,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (zero; suc)
 open import Data.Bool.Base using (_∧_)
 open import Data.Integer.Base using (ℤ; +_; -[1+_])
+open import Data.Integer.Properties as ℤP using (+-assoc; +-comm)
 open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads as Lattice
 
@@ -67,3 +69,42 @@ triadSumIsZeroMode :
 triadSumIsZeroMode τ h with triadZeroSumCoordinates τ h
 ... | firstZero , secondZero , thirdZero
   rewrite firstZero | secondZero | thirdZero = refl
+
+-- Cyclic relabelling preserves the exact Boolean zero-sum predicate.  The
+-- Fourier cancellation route uses this to apply one wave-dot reversal lemma
+-- in each output orientation, rather than maintaining three independent
+-- geometric assumptions.
+zeroSumCycleInvariant :
+  (τ : Lattice.LatticeTriad) →
+  Lattice.zeroSum? (Lattice.triadCycle τ) ≡ Lattice.zeroSum? τ
+zeroSumCycleInvariant (Lattice.mkLatticeTriad p q r)
+  rewrite ℤP.+-assoc (Lattice.k₁ q) (Lattice.k₁ r) (Lattice.k₁ p)
+        | ℤP.+-assoc (Lattice.k₂ q) (Lattice.k₂ r) (Lattice.k₂ p)
+        | ℤP.+-assoc (Lattice.k₃ q) (Lattice.k₃ r) (Lattice.k₃ p)
+        | ℤP.+-comm (Lattice.k₁ r) (Lattice.k₁ p)
+        | ℤP.+-comm (Lattice.k₂ r) (Lattice.k₂ p)
+        | ℤP.+-comm (Lattice.k₃ r) (Lattice.k₃ p)
+        | sym (ℤP.+-assoc (Lattice.k₁ q) (Lattice.k₁ p) (Lattice.k₁ r))
+        | sym (ℤP.+-assoc (Lattice.k₂ q) (Lattice.k₂ p) (Lattice.k₂ r))
+        | sym (ℤP.+-assoc (Lattice.k₃ q) (Lattice.k₃ p) (Lattice.k₃ r))
+        | ℤP.+-comm (Lattice.k₁ q) (Lattice.k₁ p)
+        | ℤP.+-comm (Lattice.k₂ q) (Lattice.k₂ p)
+        | ℤP.+-comm (Lattice.k₃ q) (Lattice.k₃ p) = refl
+
+zeroSumCycle :
+  (τ : Lattice.LatticeTriad) → Lattice.zeroSum? τ ≡ true →
+  Lattice.zeroSum? (Lattice.triadCycle τ) ≡ true
+zeroSumCycle τ zeroSum rewrite zeroSumCycleInvariant τ = zeroSum
+
+zeroSumSwapInvariant :
+  (τ : Lattice.LatticeTriad) →
+  Lattice.zeroSum? (Lattice.triadSwap τ) ≡ Lattice.zeroSum? τ
+zeroSumSwapInvariant (Lattice.mkLatticeTriad p q r)
+  rewrite ℤP.+-comm (Lattice.k₁ q) (Lattice.k₁ p)
+        | ℤP.+-comm (Lattice.k₂ q) (Lattice.k₂ p)
+        | ℤP.+-comm (Lattice.k₃ q) (Lattice.k₃ p) = refl
+
+zeroSumSwap :
+  (τ : Lattice.LatticeTriad) → Lattice.zeroSum? τ ≡ true →
+  Lattice.zeroSum? (Lattice.triadSwap τ) ≡ true
+zeroSumSwap τ zeroSum rewrite zeroSumSwapInvariant τ = zeroSum

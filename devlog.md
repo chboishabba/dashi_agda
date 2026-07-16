@@ -1,3 +1,62 @@
+# 2026-07-16 finite Fourier triad-cancellation seam
+
+- Corrected the physical Stage-3 control architecture: the weighted Fourier
+  error is an exact bilinear edge-transfer form, not a positive quadratic
+  `Lneg` form.  Added `NSTriadKNPhysicalEdgeTransferOperator`,
+  `NSTriadKNWeightedEdgeYoungControl`, and
+  `NSTriadKNTransferFluxAbsorption`.  The latter records the real analytic
+  gate `FluxRem_W ≤ θ D_base + LowerOrder` with strict `θ < 1`; it remains
+  fail-closed until a coercive Fourier/viscous estimate is proved.
+- Extended the deterministic triad diagnostic with the amplitude-homogeneity
+  check: fixed `W` gives flux/dissipation ratio growing as `λ^4`.  Thus a
+  simple global absorption into quadratic viscosity is impossible; future work
+  must name the normalisation or higher energy that supplies the missing four
+  powers.
+
+- Implemented the next scaling-consistent finite interfaces:
+  `NSTriadKNLocalViscousEdgeAllocation`,
+  `NSTriadKNDissipationNormalizedFluxRemainder`, and
+  `NSTriadKNFluxHierarchyEstimate`.  The allocation surface deliberately
+  requires degree-normalised edge shares and a bounded-overlap witness: a
+  uniform `1/3` three-slot share is only an intra-triad convention and cannot
+  be cutoff-uniform when a mode has many incident triads.  The flux quotient
+  is extended-valued at zero local dissipation, so a future proof must show
+  numerator vanishing or accept infinity rather than hide the issue with a
+  regularising constant.  The quartic hierarchy bound is recorded as the live
+  open analytic theorem; no NS, BKM, q-gap, or Clay receipt was promoted.
+
+- Audited the physical Stage-3 bridge after the Gram construction.  The
+  required statement is flux-inclusive:
+  `|Q_NS| ≤ c * <z,LNeg z> + FluxRem`; the current repository has no local
+  Cauchy/Young theorem usable for the symbolic scalar authority.
+- Recorded the zero-negative-weight obstruction: a strictly positive Young
+  parameter cannot be controlled by `m^-_tau` on all triads because that
+  coefficient vanishes outside the adverse sector while weighted transfer
+  differences need not.  Flux control is therefore independent, not a
+  bookkeeping consequence of the Gram order.
+- Added a deterministic finite Fourier regression diagnostic
+  `scripts/ns_triad_negative_gram_flux_obstruction.py`; it exhibits the
+  zero-negative-weight/nonzero-weighted-error case and guards against a
+  future negative-Gram-only claim.
+- Extended that diagnostic to the one-output absolute coefficient.  Its
+  transfer-variation/absolute-weight ratio becomes large on a fixed finite
+  sample, so `mAbs` from one distinguished output also cannot be assumed to
+  absorb the full three-output Young remainder.
+
+- Added cycle/swap zero-sum transport for exact lattice triads.
+- Built the finite complex wave-dot reversal, negative-mode pairing, literal
+  pair-zero, six-summand regrouping, and modal-triad conservation constructor
+  used by the corrected Hermitian modal energy convention.
+- The focused Track B checks passed for the exact zero-sum and finite complex
+  Fourier modules. The physical conservation gate remains false; no promotion
+  was changed.
+- Added the dependent `ZeroSumTriad` transfer carrier and the orbit-free
+  weighted contribution/difference-form folds.  The concrete local
+  conservation constructor now supplies this carrier directly; no default
+  transfer is assigned to non-zero-sum triples.  The existing conditional
+  multiplier-difference identity has a direct zero-sum-carrier adapter; its
+  exact `third` normalisation and the finite dynamics identity remain open.
+
 # 2026-06-24 ACL Schur-test proof repair
 
 - Split the mixed-tail ACL receipt boundary into the checked sampled witness

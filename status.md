@@ -1,3 +1,75 @@
+# 2026-07-16 finite Fourier triad-cancellation seam
+
+- Replaced the invalid one-sided physical controller claim with the canonical
+  bilinear edge-transfer surface: `physicalWeightedError` is exactly the sum
+  of `third * <B z, T(u)>` over zero-sum triads.  The former `Lneg`/`Labs`
+  pair remains diagnostic only; it cannot dominate this linear functional
+  uniformly under `z ↦ ε z`.
+- Added explicit weighted-edge Young and transfer-flux absorption targets.
+  They require an independently positive coercive edge weight and an actual
+  strict viscous/base-dissipation bound.  No concrete authority or absorption
+  witness has been supplied, so `transferFluxAbsorptionClosed = false`.
+- A fixed-weight scaling audit now rules out the simplest proposed absorption:
+  for state-independent `W`, the dual transfer flux is degree six in Fourier
+  amplitude while viscous dissipation is degree two.  Any viable controller
+  must expose state-dependent/coercivity normalisation or an additional energy
+  hierarchy; this is now a prior gate to profile Schur/q-gap work.
+
+- Added the dissipation-normalised replacement surfaces:
+  `NSTriadKNLocalViscousEdgeAllocation`,
+  `NSTriadKNDissipationNormalizedFluxRemainder`, and
+  `NSTriadKNFluxHierarchyEstimate`.  The local allocation now makes a
+  necessary combinatorial point explicit: a uniform three-slot weight has
+  cutoff-growing overlap, so any valid viscous split must use degree-normalised
+  incidence shares (or a proved equivalent partition of unity).  The quotient
+  uses an explicit extended zero-denominator convention; no theorem-level
+  delta regularisation is introduced.  The intended quartic estimate
+  `FluxRem <= C/(epsilon*nu) * X * D_z + TailRem` remains false/open until a
+  transfer-difference estimate and a dynamical control mechanism for `X` are
+  proved.
+
+- The next physical bridge is now fixed as a flux-inclusive estimate, not an
+  identification of the weighted Fourier error with the negative Gram form:
+  `|Q_NS| ≤ c * <z,LNeg z> + FluxRem`.  The current scalar authority has no
+  reusable Cauchy/Young theorem or concrete ordered-field instance, so this
+  remains a genuine analytic obligation rather than a missing API adapter.
+- There is a decisive non-singularity constraint on any proposed Young split:
+  `m^-_tau` can vanish on non-adverse triads, while the linear weighted-transfer
+  contrast need not.  Hence no uniformly strictly-positive Young parameter can
+  be bounded above by a multiple of `m^-_tau`; the transfer-flux term must be
+  defined and controlled independently, or the present negative-only Gram
+  weight cannot close the PDE bridge.
+- `scripts/ns_triad_negative_gram_flux_obstruction.py` now gives a
+  deterministic finite Fourier diagnostic for that obstruction: on
+  `(1,0,0) + (0,1,0) + (-1,-1,0) = 0`, the selected transfer is positive
+  (`m^- = 0`) while a nonconstant weighted transfer is nonzero.  It rules out
+  the negative-Gram-only candidate, not the required flux-inclusive bridge.
+- The same diagnostic also finds a near-zero distinguished-output transfer
+  with order-one three-mode transfer variation.  Therefore the current
+  `mAbs = amplitudeFactor * |one-output orbit transfer|` is not, by itself,
+  a viable uniform Young weight for the full weighted-energy term.  The
+  physical bridge needs a new modal-transfer/dissipation coefficient or a
+  genuinely independent flux estimate before it can feed Stage 3.
+
+- Strengthened `NSTriadKNExactLatticeTriadZeroSum` with exact cycle and swap
+  invariance of the Boolean zero-sum predicate.
+- In `NSTriadKNFiniteComplexFourierDynamics`, derived all three wave-dot
+  reversal identities from zero-sum geometry, additive wave-dot linearity, and
+  divergence-free coefficients; derived negative-mode pairing symmetry from
+  reality and the coordinate Hermitian form; and assembled the three literal
+  complex pair-zero lemmas.
+- The generic six-summand regrouping is now proved and the physical
+  modal-triad conservation constructor is derived from the explicit local
+  authorities.  The lane remains fail-closed on a concrete exact C3 authority;
+  no NS/Clay promotion state changed.
+- Migrated the weighted-energy transfer surface to `ZeroSumTriad`: physical
+  modal-transfer data and weighted contribution folds now retain the exact
+  `zeroSum? τ ≡ true` witness, rather than totalizing Fourier semantics over
+  arbitrary labelled triples.  The existing multiplier-difference authority
+  now applies directly to this carrier via a per-triad adapter.  The concrete
+  `1/3` normalization and finite weighted-energy dynamics identity remain
+  open.
+
 # 2026-06-24 ACL Schur-test proof repair
 
 - Repaired the mixed-tail ACL Schur-test receipt boundary so the sampled
