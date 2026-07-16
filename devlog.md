@@ -30,6 +30,21 @@
   non-decisive for the updated critical-normalized, moving-packet, staged
   endpoint search.
 
+- Exact channel replay of rejected sample 55 reconstructs each modal transfer
+  below `3.7e-18`, while modal channel saturation ranges `.020`–`.996`; this
+  rules out treating the bare one-cycle graph as a single phase-holonomy
+  explanation.  Launched the first full updated candidate run: 32
+  critical-mass phase samples, 8 GPU moving-packet prefilters at `.05*T`, and
+  a final full `T=62.5` selected endpoint.
+
+- The first critical-normalized staged full endpoint completed.  Sample 6 won
+  the `.05*T` moving-packet prefilter (`R_move=.8268`, `G_move=1.0936`) but
+  collapses at the actual `T=62.5`: fixed `R=8.47e-4`, moving
+  `R=1.06e-3`, moving heat-compensated `G=9.66e-3`, with dominant-shell shift
+  `-1` and translation-quotiented correlation `.093`.  The short prefilter
+  therefore detects transient nonlinear replenishment, not recurrence;
+  future endpoint selection must survive a materially longer horizon.
+
 - Replaced the one-target donor-star-only experiment surface with a selectable
   graph surface in `ns_phase_locked_packet_search.py`.  The new default is a
   closed three-target N32 `j=2` cycle: each target has a lower donor triad,

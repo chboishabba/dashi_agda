@@ -39,6 +39,28 @@
   preselection, it does not decide the cyclic topology or a dynamic-packet
   theorem.
 
+- Replayed the rejected sample 55 through the new exact complex helical
+  channel extractor.  Modal-transfer reconstruction error is below
+  `3.7e-18`, but channel saturation is heterogeneous across the graph
+  (`.020` to `.996` over its triad modal transfers).  Thus the seed is not
+  meaningfully classified by a single graph-level zero/nonzero holonomy; a
+  future holonomy statistic must select and weight exact channel constraints.
+  Launched the first relevant full candidate run: 32 critical-mass-normalized
+  phase samples, 8 candidates selected by an evolved moving-packet prefilter
+  at `.05*T`, then one full moving-packet endpoint at `T=62.5`.
+
+- That first relevant run completed and is a stronger sampled-family null
+  result.  The best short-prefilter candidate (sample 6) had
+  `R_move=.8268` and heat-compensated `G_move=1.0936` over `.05*T`, but at
+  the full window has `R_fixed=8.47e-4`, `R_move=1.06e-3`, and
+  `G_move=9.66e-3`; its dominant packet moves down one shell rather than
+  forward-cascading.  Positive nonlinear input is `.053` of integrated
+  viscous loss, negative input is `2.74` times that loss, and
+  translation-quotiented correlation is `.093`.  Thus a `.05*T` survival
+  screen selects transient replenishment rather than parabolic recurrence.
+  It rejects this sampled critical-normalized family under that short
+  selector, not the cyclic graph or a uniform theorem.
+
 - Generalized `scripts/ns_phase_locked_packet_search.py` from a single
   donor-star to an explicit N32 `j=2` three-target cyclic feedback graph:
   lower donor pairs feed `r_i`, while shared `s_i` outlet modes feed the next

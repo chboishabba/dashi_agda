@@ -270,6 +270,119 @@ def phase_graph_geometry(network: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def wrap_phase(angle: float) -> float:
+    return float((angle + math.pi) % (2.0 * math.pi) - math.pi)
+
+
+def helical_scalar(field_hat: np.ndarray, mode: tuple[int, int, int], sign: int) -> complex:
+    basis = helical_basis(mode)[0 if sign > 0 else 1]
+    return complex(np.vdot(basis, field_hat[(slice(None),) + mode_index(mode, field_hat.shape[1])]))
+
+
+def channel_complex_contribution(
+    field_hat: np.ndarray,
+    out: tuple[int, int, int], left: tuple[int, int, int], right: tuple[int, int, int],
+    out_sign: int, left_sign: int, right_sign: int,
+) -> tuple[complex, complex, complex, complex]:
+    """One exact complex helical term before taking its real energy part."""
+    out_basis = helical_basis(out)[0 if out_sign > 0 else 1]
+    left_basis = helical_basis(left)[0 if left_sign > 0 else 1]
+    right_basis = helical_basis(right)[0 if right_sign > 0 else 1]
+    out_scalar = helical_scalar(field_hat, out, out_sign)
+    left_scalar = helical_scalar(field_hat, left, left_sign)
+    right_scalar = helical_scalar(field_hat, right, right_sign)
+    out_vector = out_scalar * out_basis
+    left_vector = left_scalar * left_basis
+    right_vector = right_scalar * right_basis
+    out_k = np.asarray(out, dtype=np.float64)
+    left_k = np.asarray(left, dtype=np.float64)
+    right_k = np.asarray(right, dtype=np.float64)
+    nonlinear = 1j * (
+        np.dot(right_k, left_vector) * right_vector
+        + np.dot(left_k, right_vector) * left_vector
+    )
+    projected = nonlinear - out_k * np.dot(out_k, nonlinear) / np.dot(out_k, out_k)
+    return complex(np.vdot(out_vector, projected)), out_scalar, left_scalar, right_scalar
+
+
+def static_modal_transfer(
+    field_hat: np.ndarray, out: tuple[int, int, int], left: tuple[int, int, int], right: tuple[int, int, int],
+) -> float:
+    out_k = np.asarray(out, dtype=np.float64)
+    left_k = np.asarray(left, dtype=np.float64)
+    right_k = np.asarray(right, dtype=np.float64)
+    left_vector = field_hat[(slice(None),) + mode_index(left, field_hat.shape[1])]
+    right_vector = field_hat[(slice(None),) + mode_index(right, field_hat.shape[1])]
+    out_vector = field_hat[(slice(None),) + mode_index(out, field_hat.shape[1])]
+    nonlinear = 1j * (
+        np.dot(right_k, left_vector) * right_vector
+        + np.dot(left_k, right_vector) * left_vector
+    )
+    projected = nonlinear - out_k * np.dot(out_k, nonlinear) / np.dot(out_k, out_k)
+    return -float(np.real(np.vdot(out_vector, projected)))
+
+
+def helical_channel_phase_audit(field_hat: np.ndarray, network: dict[str, Any]) -> dict[str, Any]:
+    """Expose the actual channel hypergraph behind any future holonomy claim.
+
+    A row is ``-phi_out + phi_left + phi_right + beta``.  The coefficient
+    phase ``beta`` is recovered from the exact complex channel contribution,
+    after removing the three actual helical-amplitude phases.  This records
+    the physical input needed for a weighted channel-cycle holonomy theorem;
+    it does not select a preferred phase branch or claim a holonomy bound.
+    """
+    rows: list[dict[str, Any]] = []
+    modal_checks: list[dict[str, float]] = []
+    for triad_index, triad in enumerate(network["triads"]):
+        p, q, r = (tuple(mode) for mode in triad["modes"])
+        modal_specs = (("p", negate(p), q, r), ("q", negate(q), r, p), ("r", negate(r), p, q))
+        for output_label, out, left, right in modal_specs:
+            channel_sum = 0.0
+            channel_envelope = 0.0
+            for out_sign in (-1, 1):
+                for left_sign in (-1, 1):
+                    for right_sign in (-1, 1):
+                        value, out_scalar, left_scalar, right_scalar = channel_complex_contribution(
+                            field_hat, out, left, right, out_sign, left_sign, right_sign
+                        )
+                        channel_sum += -float(np.real(value))
+                        channel_envelope += abs(value)
+                        amplitude_product = abs(out_scalar * left_scalar * right_scalar)
+                        if amplitude_product <= 1.0e-30:
+                            continue
+                        beta = wrap_phase(
+                            float(np.angle(value))
+                            - (-float(np.angle(out_scalar)) + float(np.angle(left_scalar)) + float(np.angle(right_scalar)))
+                        )
+                        rows.append({
+                            "triad": triad_index,
+                            "output": output_label,
+                            "modes": [list(out), list(left), list(right)],
+                            "helicities": [out_sign, left_sign, right_sign],
+                            "phase_incidence": [-1, 1, 1],
+                            "geometric_coefficient_phase_beta": beta,
+                            "complex_term_phase": float(np.angle(value)),
+                            "complex_term_magnitude": float(abs(value)),
+                            "real_energy_term": -float(np.real(value)),
+                        })
+            direct = static_modal_transfer(field_hat, out, left, right)
+            modal_checks.append({
+                "triad": float(triad_index),
+                "channel_sum": channel_sum,
+                "direct_transfer": direct,
+                "reconstruction_error": abs(channel_sum - direct),
+                "channel_phase_saturation": abs(channel_sum) / channel_envelope if channel_envelope > 1.0e-30 else 0.0,
+            })
+    return {
+        "active_channel_count": len(rows),
+        "max_modal_reconstruction_error": float(max((row["reconstruction_error"] for row in modal_checks), default=0.0)),
+        "modal_checks": modal_checks,
+        "active_channels": rows,
+        "holonomy_status": "channel_rows_extracted_but_weighted_cycle_holonomy_not_yet_selected",
+        "warning": "A graph cycle alone does not determine an NS phase holonomy; any next holonomy audit must choose a channel weighting and a phase-preference branch.",
+    }
+
+
 def add_reality_symmetric_helical_mode(
     raw_hat: np.ndarray, mode: tuple[int, int, int], amplitude: float, phase: float, helicity: int,
 ) -> None:
@@ -607,6 +720,15 @@ def main() -> None:
         )
         selected_samples = {int(row["sample"]) for row in prefilter_rows[:args.top_candidates]}
         selected = [candidate for candidate in candidates if int(candidate["sample"]) in selected_samples]
+    selected_phase_channel_audits = [
+        {
+            "sample": candidate["sample"],
+            "phase_audit": helical_channel_phase_audit(
+                raw_to_field_hat(build_candidate(args, network, np.asarray(candidate["phases"])), wave, norm_sq), network
+            ),
+        }
+        for candidate in selected
+    ]
     endpoint_rows: list[dict[str, Any]] = []
     if args.backend != "none":
         for rank, candidate in enumerate(selected):
@@ -644,6 +766,7 @@ def main() -> None:
         "inputs": vars(args) | {"cfd_root": str(args.cfd_root), "output_json": str(args.output_json)},
         "static_candidates_ranked": candidates,
         "endpoint_prefilter_evolutions": prefilter_rows,
+        "selected_phase_channel_audits": selected_phase_channel_audits,
         "endpoint_evolutions": endpoint_rows,
         "decision": "candidate-only adversarial search; any apparent recurrence is a finite numerical lead requiring independent reproduction, not a Navier--Stokes theorem.",
     }
