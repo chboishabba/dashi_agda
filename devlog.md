@@ -1,5 +1,18 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Replaced the one-target donor-star-only experiment surface with a selectable
+  graph surface in `ns_phase_locked_packet_search.py`.  The new default is a
+  closed three-target N32 `j=2` cycle: each target has a lower donor triad,
+  an upper-band outlet triad, and a feedback triad into the next target.  All
+  nine triads are checked zero-sum and all modes are checked against the 2/3
+  carrier.  It defaults to a fixed total finite `H^(1/2)` packet mass rather
+  than leaving amplitude scaling implicit.  The run now evaluates every complete viscous window, direct
+  designed-network correlation (not yet quotienting translations/rotations),
+  support leakage, and separate positive/negative nonlinear shell transfer.
+  A 14-step CPU/GPU smoke passed.  A full multi-window GPU run is deliberately
+  deferred until endpoint-oriented candidate selection replaces the present
+  inexpensive initial-inflow prefilter.
+
 - Corrected the critical-packet interpretation by adding an exact
   mode-by-mode heat baseline and a saved-snapshot 2/3-dealiased shell-balance
   reconstruction to `ns_critical_packet_phase_residence_audit.py`.  The
