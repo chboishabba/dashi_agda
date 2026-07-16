@@ -27,6 +27,7 @@ open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
 open import DASHI.Physics.YangMills.BalabanSection2InductivePackage using
   ( BalabanSection2InductivePackage
   ; UniformBalabanRGClosure
+  ; UniformBalabanRGClosureAt
   )
 open import DASHI.Physics.YangMills.BalabanEffectiveCouplingTrajectory using
   ( BalabanInverseSquareCouplingStep
@@ -42,6 +43,23 @@ open import DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget using
   ; scheduleTrajectoryBoundedByGamma
   )
 
+-- A CMP 122 witness may use only a finite initial segment of a cutoff
+-- trajectory, but it must not use more scales than have actually been
+-- certified small.  Keeping this relation explicit prevents a short
+-- trajectory from being silently used to justify a longer Sect. 2 package.
+record CouplingBoundCoversSection2
+    (pkg : BalabanSection2InductivePackage)
+    {γ : ℝ}
+    {step : BalabanInverseSquareCouplingStep}
+    (bounded : CouplingTrajectoryBoundedBy γ step) : Set where
+  field
+    coversSourceTerminal :
+      BalabanSection2InductivePackage.terminalScale pkg
+        ≤
+      CouplingTrajectoryBoundedBy.terminalScale bounded
+
+open CouplingBoundCoversSection2 public
+
 -- CMP 122 II Theorem 1 as an imported implication, in the exact direction
 -- used by the paper: a verified small-coupling trajectory yields the Sect. 2
 -- [III] package at every scale.  This is the canonical source boundary.
@@ -52,7 +70,8 @@ record BalabanCMP122ConditionalTheorem : Set₁ where
     section2Package : BalabanSection2InductivePackage
     conclusion :
       (step : BalabanInverseSquareCouplingStep) →
-      CouplingTrajectoryBoundedBy γ step →
+      (bounded : CouplingTrajectoryBoundedBy γ step) →
+      CouplingBoundCoversSection2 section2Package bounded →
       UniformBalabanRGClosure
     sourceAuthorityId : SourceAuthorityId
     theoremLocator : String
@@ -64,10 +83,11 @@ open BalabanCMP122ConditionalTheorem public
 balabanConditionalUniformRG :
   (theorem : BalabanCMP122ConditionalTheorem) →
   (step : BalabanInverseSquareCouplingStep) →
-  CouplingTrajectoryBoundedBy (γ theorem) step →
+  (bounded : CouplingTrajectoryBoundedBy (γ theorem) step) →
+  CouplingBoundCoversSection2 (section2Package theorem) bounded →
   UniformBalabanRGClosure
-balabanConditionalUniformRG theorem step trajectory =
-  conclusion theorem step trajectory
+balabanConditionalUniformRG theorem step bounded coverage =
+  conclusion theorem step bounded coverage
 
 -- Finite-cutoff composition.  This is the entire mechanical bridge from a
 -- cumulative β-budget to the published CMP 122 implication.  The hard input
@@ -82,10 +102,14 @@ finiteCutoffUniformBalabanRG :
   {step : BalabanInverseSquareCouplingStep} →
   (threshold : InverseSquareThresholdControlsCoupling K (γ theorem) step) →
   (budget : BalabanBetaPrefixBound K step threshold) →
+  CouplingBoundCoversSection2
+    (section2Package theorem)
+    (couplingTrajectoryBoundedByGamma arith order threshold budget) →
   UniformBalabanRGClosure
-finiteCutoffUniformBalabanRG theorem arith order {step = step} threshold budget =
+finiteCutoffUniformBalabanRG theorem arith order {step = step} threshold budget coverage =
   balabanConditionalUniformRG theorem step
     (couplingTrajectoryBoundedByGamma arith order threshold budget)
+    coverage
 
 relabelCouplingTrajectoryBound :
   {γ₁ γ₂ : ℝ} →
@@ -104,11 +128,19 @@ finiteCutoffScheduledBalabanRG :
   (order : InverseSquareBudgetOrderBridge) →
   (schedule : BalabanBareCouplingSchedule) →
   γ schedule ≡ γ theorem →
-  ∀ K → UniformBalabanRGClosure
-finiteCutoffScheduledBalabanRG theorem arith order schedule γ≡ K =
-  balabanConditionalUniformRG theorem (BalabanBareCouplingSchedule.trajectory schedule K)
-    (relabelCouplingTrajectoryBound γ≡
-      (scheduleTrajectoryBoundedByGamma arith order schedule K))
+  ∀ K →
+  BalabanSection2InductivePackage.terminalScale (section2Package theorem) ≤ K →
+  UniformBalabanRGClosureAt K
+finiteCutoffScheduledBalabanRG theorem arith order schedule γ≡ K sourceTerminal≤K =
+  record
+    { closure =
+        balabanConditionalUniformRG theorem
+          (BalabanBareCouplingSchedule.trajectory schedule K)
+          (relabelCouplingTrajectoryBound γ≡
+            (scheduleTrajectoryBoundedByGamma arith order schedule K))
+          (record { coversSourceTerminal = sourceTerminal≤K })
+    ; sourceTerminalWithinCutoff = sourceTerminal≤K
+    }
 
 record BalabanCMP122ConditionalRGClosure : Set₁ where
   field

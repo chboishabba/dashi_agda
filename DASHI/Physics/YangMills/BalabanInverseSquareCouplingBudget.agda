@@ -217,6 +217,40 @@ record BalabanBareCouplingSchedule : Set₁ where
 
 open BalabanBareCouplingSchedule public
 
+-- A small bare coupling alone can make the finite-cutoff premise vacuous.
+-- This wrapper records the minimum renormalisation guard needed by the RG
+-- lane: a positive, cutoff-uniform physical coupling window at the source's
+-- chosen observation scale.  It deliberately does not claim nontriviality.
+record RenormalisedBalabanBareCouplingSchedule : Set₁ where
+  field
+    schedule : BalabanBareCouplingSchedule
+
+    renormalisedCouplingLower : ℝ
+    renormalisedCouplingUpper : ℝ
+    lowerPositive : 0ℝ <ℝ renormalisedCouplingLower
+
+    -- A source construction may renormalise at a fixed physical scale rather
+    -- than literally at the ultraviolet cutoff.  The observation scale is
+    -- therefore explicit and must lie within the finite trajectory.
+    observationScale : ℕ → ℕ
+    observationWithinCutoff :
+      ∀ K → observationScale K ≤ K
+
+    terminalCouplingWindow :
+      ∀ K →
+      renormalisedCouplingLower ≤ℝ
+        coupling (trajectory schedule K) (observationScale K)
+      ×
+      coupling (trajectory schedule K) (observationScale K)
+        ≤ℝ renormalisedCouplingUpper
+
+    sourceAuthorityId : SourceAuthorityId
+    theoremLocator : String
+    status : VerificationStatus
+    noClayPromotion : clayYangMillsPromoted ≡ false
+
+open RenormalisedBalabanBareCouplingSchedule public
+
 scheduleTrajectoryBoundedByGamma :
   (arith : InverseSquareBudgetArithmetic) →
   (order : InverseSquareBudgetOrderBridge) →

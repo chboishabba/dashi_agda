@@ -1,5 +1,29 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Recalibrated the N32 packet-residence audit against the exact heat
+  semigroup of the observed initial shell spectrum and a reconstructed
+  2/3-dealiased pseudospectral shell balance.  The earlier random trajectory's
+  `j=3` packet ratios `.0537`–`.0648` are heat-like or smaller: its exact
+  heat ratios are `.0590`–`.0839`, so the compensated values are `.772`–
+  `.910`; nonlinear inflow is only `.391`–`.483` of integrated viscous loss.
+  Thus that run is a resolved viscous-decay calibration, not nonlinear
+  leakage evidence.  Artifact:
+  `ns_critical_packet_phase_residence_audit_N32_critical_packet_seed17_`
+  `heat_balance_20260716.json`.
+
+- Added `scripts/ns_phase_locked_packet_search.py`, a deliberately
+  adversarial N32 shared-target helical donor-star search.  It fixes reality,
+  divergence freedom, 2/3 support, target-packet dominance/tightness, and
+  optimizes phases for initial target-shell inflow before measuring the
+  endpoint objective with the dashiCFD finite-Galerkin solver.  The best of
+  128 phase samples starts with nonlinear target inflow `8.12` times its
+  viscous loss, yet after the exact `15.625` window ends at
+  `X_3(T)/X_3(0)=.0703`, versus a heat-only `.1353`; its heat-compensated
+  ratio is `.519`.  This rejects this particular simple phase-locked donor
+  star as a recurrence witness.  It neither bounds more general shared-mode
+  networks nor establishes a packet theorem.  Artifact:
+  `ns_phase_locked_packet_search_N32_gpu_endpoint_20260716.json`.
+
 - Added `scripts/ns_critical_packet_phase_residence_audit.py` to test the
   next non-static candidate directly on the finite Fourier carrier.  It uses
   the scale-invariant dyadic packet
