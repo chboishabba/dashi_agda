@@ -1,5 +1,46 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Replaced the rejected geometric helical-mismatch diagnostic with an exact
+  helical phase-saturation audit in
+  `scripts/ns_triad_edge_depletion_audit.py`.  Every modal transfer is now
+  reconstructed from eight helical channel terms, and every physical edge
+  difference is represented on their concatenated 16-term carrier.  Thus
+  `delta_sat = |Delta T| / A` gives the tautological local identity
+  `F_e = delta_sat^2 * (A_e^2 / d_e^2) * d_e`, with reconstruction and local
+  identity residuals below `6.7e-23` and `4.9e-27` in the N128 audit.
+
+- The first two-frame N128 falsification run (frames 0 and 6, cutoff 6,
+  6,000 canonical triads each) does not support **static** phase-saturation
+  bad-edge sparsity: at thresholds `eta = .75, .90, .95, .99`, the high-
+  saturation edge set carries respectively `46.7%, 18.4%, 6.3%, 2.4%` of
+  sampled normalized flux.  This rejects the immediate pointwise
+  `badEdgeSparsity` use of this exact defect.  It does not test a time-weighted
+  residence theorem, a different state-dependent cancellation defect, or any
+  global NS claim.  The artifact is
+  `scripts/data/outputs/ns_boundary_pressure_geometric_20260621/`
+  `ns_triad_edge_phase_saturation_audit_N128_20260716.json`.
+
+- The full 13-snapshot N128 series (3,000 canonical triads per frame; 117,000
+  edge observations) confirms the negative calibration.  `delta_sat > .90`
+  carries `19.3%` of normalized edge flux in aggregate and `18.8%`–`19.9%`
+  in every snapshot (`.95`: aggregate `6.4%`, range `5.1%`–`7.4%`; `.99`:
+  aggregate `2.2%`, range `1.8%`–`2.7%`).  This is not a time-integrated
+  residence counterexample—no snapshot-time quadrature is asserted—but it
+  removes any empirical reason to formalize simple phase-saturation residence
+  as the next NS mechanism.  See
+  `ns_triad_edge_phase_saturation_audit_N128_all_frames_20260716.json`.
+
+- Tightened the dissipation-normalised/depletion interfaces after review.
+  `ExtendedFlux` now has an explicit finite/infinite order; zero-density
+  quotients distinguish `0 / 0 = 0` from `nonzero / 0 = infinity`; and the
+  hierarchy target is the typed finite inequality
+  `FluxRem ≤∞ finite ((C / (epsilon * nu)) * X * D + Tail)`.  The strict
+  barrier is likewise a typed inequality, and
+  `strictDepletionBarrierImpliesAbsorption` is now a proved finite-order
+  consequence of it.  The physical good-edge hierarchy, bad-edge sparsity,
+  concrete division/order authority, and time-integration theorem remain
+  deliberately uninhabited.
+
 - Added `NSTriadKNDepletionBarrier`.  Its theorem
   `depletionBarrierImpliesFluxHierarchy` is the mechanically proved finite
   recombination: an exact good/bad split plus `goodEdgeHierarchy` and

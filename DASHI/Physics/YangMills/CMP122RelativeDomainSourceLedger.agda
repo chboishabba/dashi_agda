@@ -117,6 +117,40 @@ currentCMP122RelativeExtractionState = record
   ; weightedFibreBoundProved = false
   }
 
+-- Decisive halo-route audit.  CMP 122 II p. 381 says that the fundamental
+-- large-field factors yield a small exponential *for each component* of the
+-- covered large-field region; (1.92) likewise retains a product over the
+-- component-indexed factors.  The inspected passage does not state an
+-- additive penalty for every marked block, nor a density theorem converting a
+-- component penalty into a volume penalty.  Therefore the halo-animal route
+-- is not yet source-instantiable; the relative-tree weighted-fibre route
+-- remains the fail-closed default.
+data CMP122SuppressionMultiplicity : Set where
+  per-resulting-large-field-component : CMP122SuppressionMultiplicity
+  per-marked-block : CMP122SuppressionMultiplicity
+  global-per-operation : CMP122SuppressionMultiplicity
+  not-yet-extracted : CMP122SuppressionMultiplicity
+
+record CMP122HaloRouteDecision : Set where
+  field
+    fundamentalPenaltyMultiplicity : CMP122SuppressionMultiplicity
+    multiplicityLocator : String
+    perMarkedBlockReserveExtracted : Bool
+    markedBlockDensityInComponentsExtracted : Bool
+    haloAnimalRouteSourceReady : Bool
+    relativeTreeWeightedFibreStillRequired : Bool
+
+currentCMP122HaloRouteDecision : CMP122HaloRouteDecision
+currentCMP122HaloRouteDecision = record
+  { fundamentalPenaltyMultiplicity = per-resulting-large-field-component
+  ; multiplicityLocator =
+      "CMP 122 II p. 381, immediately before (1.76); component product retained in (1.92), pp. 388--389"
+  ; perMarkedBlockReserveExtracted = false
+  ; markedBlockDensityInComponentsExtracted = false
+  ; haloAnimalRouteSourceReady = false
+  ; relativeTreeWeightedFibreStillRequired = true
+  }
+
 -- Source-ledger rows.  `true` means the cited passage explicitly exposes the
 -- requested datum; `false` means further extraction is required before a
 -- concrete definition may be made in DASHI.

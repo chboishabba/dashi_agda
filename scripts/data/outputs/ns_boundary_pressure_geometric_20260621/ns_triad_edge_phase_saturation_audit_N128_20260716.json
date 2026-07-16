@@ -1,0 +1,126 @@
+{
+  "authority": {
+    "candidate_only": true,
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "promoted": false,
+    "theorem_authority": false
+  },
+  "contract": "ns_triad_edge_depletion_audit",
+  "decision": "candidate-only phase-saturation calibration; no hierarchy, bad-edge sparsity, temporal residence, or NS theorem inferred",
+  "definition": {
+    "channel_carrier": "eight helical terms per modal transfer; each edge is the concatenated 16-term difference carrier",
+    "defect": "delta_sat(e) = |Delta T_e| / A_e, where A_e is the sum of absolute exact helical-channel terms",
+    "local_identity": "edge_flux = delta_sat^2 * x_env * modal_dissipation, x_env = A_e^2/modal_dissipation^2",
+    "warning": "The identity does not establish a controllable global X or phase-saturation sparsity theorem."
+  },
+  "inputs": {
+    "canonical_triad_count_per_frame": 6000,
+    "cutoff": 6,
+    "discrete_leray_projected": true,
+    "frames": [
+      0,
+      6
+    ],
+    "raw_archive": "/home/c/Documents/code/dashiCFD/outputs/sprint65_pressure_reconstruction_N128_seed0_gpu/ns3d_N128_seed0_gpu_pressure.npz"
+  },
+  "sample": {
+    "edge_count": 36000,
+    "legacy_mismatch_flux_pearson": -0.028741507643680993,
+    "max_helical_reconstruction_error": 6.617444900424221e-23,
+    "max_local_identity_error": 4.8467614016778965e-27,
+    "max_modal_conservation_error": 6.617444900424221e-23,
+    "max_modal_transfer_scale": 7.306551561729085e-08,
+    "max_relative_modal_conservation_error_on_meaningful_triads": 1.1041533650724087e-13,
+    "meaningful_transfer_scale_floor": 7.306551561729086e-16,
+    "saturation_flux_pearson": 0.3910608655651353,
+    "saturation_x_env_pearson": 0.031348704427616225,
+    "snapshot_weighted_bad_flux_residence": [
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9981216291908956,
+          "0.25": 0.970845853334643,
+          "0.5": 0.8007052315607824,
+          "0.75": 0.4662503822743865,
+          "0.9": 0.18411167830555378,
+          "0.95": 0.06672643142517044,
+          "0.99": 0.025247143550308545
+        },
+        "frame": 0,
+        "total_edge_flux": 3.120385413449538e-09
+      },
+      {
+        "bad_flux_fractions": {
+          "0.1": 0.9981338994244809,
+          "0.25": 0.9706803815126798,
+          "0.5": 0.7945753831210645,
+          "0.75": 0.466890163684918,
+          "0.9": 0.18371154073245288,
+          "0.95": 0.05938053161782482,
+          "0.99": 0.022346903903362785
+        },
+        "frame": 6,
+        "total_edge_flux": 3.065736625906729e-09
+      }
+    ],
+    "threshold_rows": [
+      {
+        "bad_count": 30782,
+        "bad_edge_fraction": 0.8550555555555556,
+        "bad_flux_fraction": 0.9981277101094859,
+        "eta": 0.1,
+        "good_flux_fraction": 0.0018722898905140972
+      },
+      {
+        "bad_count": 23155,
+        "bad_edge_fraction": 0.6431944444444444,
+        "bad_flux_fraction": 0.9707638483205291,
+        "eta": 0.25,
+        "good_flux_fraction": 0.029236151679470933
+      },
+      {
+        "bad_count": 12605,
+        "bad_edge_fraction": 0.3501388888888889,
+        "bad_flux_fraction": 0.7976673831715424,
+        "eta": 0.5,
+        "good_flux_fraction": 0.2023326168284576
+      },
+      {
+        "bad_count": 4940,
+        "bad_edge_fraction": 0.13722222222222222,
+        "bad_flux_fraction": 0.466567447034888,
+        "eta": 0.75,
+        "good_flux_fraction": 0.5334325529651122
+      },
+      {
+        "bad_count": 1467,
+        "bad_edge_fraction": 0.04075,
+        "bad_flux_fraction": 0.18391337694559798,
+        "eta": 0.9,
+        "good_flux_fraction": 0.8160866230544019
+      },
+      {
+        "bad_count": 607,
+        "bad_edge_fraction": 0.01686111111111111,
+        "bad_flux_fraction": 0.06308592870855023,
+        "eta": 0.95,
+        "good_flux_fraction": 0.9369140712914498
+      },
+      {
+        "bad_count": 239,
+        "bad_edge_fraction": 0.006638888888888889,
+        "bad_flux_fraction": 0.02380983422259382,
+        "eta": 0.99,
+        "good_flux_fraction": 0.9761901657774064
+      }
+    ],
+    "total_normalised_edge_flux": 6.186122039356267e-09,
+    "x_env_quantiles": {
+      "max": 3.502872916806739e-08,
+      "p50": 1.6681194747863867e-09,
+      "p90": 5.748840465254339e-09,
+      "p99": 1.267985283605593e-08
+    }
+  },
+  "status": "ok"
+}

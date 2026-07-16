@@ -1,6 +1,7 @@
 module DASHI.Physics.Closure.NSTriadKNFluxHierarchyEstimate where
 
 open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List)
 
@@ -21,6 +22,7 @@ import DASHI.Physics.Closure.NSTriadKNWeightedFourierEnergyIdentity as Energy
 
 record FluxHierarchyEstimate
     (S : Scalar.ExactOrderedScalar)
+    (A : Flux.DissipationNormalisedFluxAuthority S)
     (M : Nat) (z : Energy.AdmissibleFourierMultiplier S M)
     (triads : List Energy.ZeroSumTriad)
     (allocation : Allocation.LocalViscousEdgeAllocation S M z triads) : Set₁ where
@@ -32,12 +34,25 @@ record FluxHierarchyEstimate
     hierarchyConstant : Scalar.Scalar S
     fluxRemainder : Flux.ExtendedFlux S
 
-    -- Intended finite-cutoff theorem:
+    -- The scalar coefficient is exactly C/(epsilon * viscosity), represented
+    -- through the explicit division authority rather than an untyped comment.
+    hierarchyCoefficient : Scalar.Scalar S
+    hierarchyCoefficientFormula :
+      hierarchyCoefficient ≡
+      Flux.divideByPositive A hierarchyConstant
+        (Scalar._*_ S epsilon viscosity)
+    hierarchyTerm : Scalar.Scalar S
+    hierarchyTermFormula :
+      hierarchyTerm ≡
+      Scalar._*_ S hierarchyCoefficient
+        (Scalar._*_ S hierarchyEnergy (Allocation.totalDissipation allocation))
+
+    -- Intended finite-cutoff theorem, now with its exact order shape:
     -- FluxRem_epsilon <= C/(epsilon*nu) X D_z + TailRem.
-    -- The concrete inequality is withheld until an extended nonnegative
-    -- scalar/order authority and a physical estimate for transfer differences
-    -- are available.
-    hierarchyBound : Set
+    -- Constructing this witness remains the open local-hierarchy theorem.
+    hierarchyBound :
+      fluxRemainder Flux.≤∞
+      Flux.finite (Scalar._+_ S hierarchyTerm tailRemainder)
 
 open FluxHierarchyEstimate public
 

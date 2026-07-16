@@ -14,6 +14,7 @@ module DASHI.Physics.YangMills.P10SourceFaithfulActivityContract where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.List using (List)
 open import Agda.Builtin.String using (String)
 open import Data.Nat.Base renaming (ℕ to Nat)
 open import Data.Empty using (⊥)
@@ -22,6 +23,7 @@ open import Data.Product using (_×_; ∃)
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ
   ; _≤ℝ_
+  ; _+ℝ_
   ; _*ℝ_
   ; -ℝ_
   )
@@ -286,48 +288,76 @@ record P10P11WeightedRelativeDomainCarrier : Set₁ where
     ownerUnique :
       ∀ B j → inRelativeDomain j B → j ≡ terminalOwner B
 
-    -- Mⱼ(U), Yⱼ, and the scale-j halo relation.  `componentMeetsLargeField`
-    -- prevents an empty or detached halo from satisfying the volume bound.
-    largeBlock : Nat → Block → Set
+    -- Mⱼ(U), Yⱼ, and the scale-j halo relation.  Large-field membership is
+    -- configuration-dependent: a block cannot be declared large uniformly
+    -- over all gauge configurations merely because a score is available.
+    gaugeConfiguration : Set
+    largeBlock : gaugeConfiguration → Nat → Block → Set
     polymerBlock : Polymer → Nat → Block → Set
     componentBlock : Polymer → Nat → Component → Block → Set
     haloContains : Nat → Block → Block → Set
+
+    -- This is the finite connected-component carrier used by the source
+    -- phrase "components".  `componentBlock` alone is not enough: these
+    -- fields rule out an arbitrary unrelated relation being called a
+    -- component decomposition.
+    components : Polymer → Nat → List Component
+    coversPolymer :
+      ∀ Y j B → polymerBlock Y j B →
+      ∃ λ C → C ∈ components Y j × componentBlock Y j C B
+    uniqueComponent :
+      ∀ Y j C D B → C ∈ components Y j → D ∈ components Y j →
+      componentBlock Y j C B → componentBlock Y j D B → C ≡ D
+    componentConnected :
+      ∀ Y j C → C ∈ components Y j → Set
+    componentMaximal :
+      ∀ Y j C → C ∈ components Y j → Set
 
     polymerUsesOnlyOwnedBlocks :
       ∀ Y j B → polymerBlock Y j B → inRelativeDomain j B
 
     haloCoverage :
-      ∀ Y j B → polymerBlock Y j B →
-      ∃ λ M → largeBlock j M × haloContains j M B
+      ∀ U Y j B → polymerBlock Y j B →
+      ∃ λ M → largeBlock U j M × haloContains j M B
 
-    componentMeetsLargeField :
-      ∀ Y j C →
-      (∃ λ B → componentBlock Y j C B) →
-      ∃ λ M → largeBlock j M ×
-        (∃ λ B → componentBlock Y j C B × haloContains j M B)
+    -- Literal component contact is deliberately stronger than mere halo
+    -- proximity.  If CMP 122 supplies only a path-contact alternative, that
+    -- alternative must replace this field in a source-specific instance.
+    componentContainsLargeBlock :
+      ∀ U Y j C → C ∈ components Y j →
+      ∃ λ M → componentBlock Y j C M × largeBlock U j M
 
     -- These are the directly consumed finite weighted quantities.  A concrete
     -- instantiation must prove `haloCompression`; it may not replace it with a
     -- diameter comparison.
     weightedVolume : Polymer → ℝ
-    weightedLargeBlockMass : Polymer → ℝ
-    haloCapacity : ℝ
+    weightedLargeBlockMass : gaugeConfiguration → Polymer → ℝ
+    haloCapacity : Nat → ℝ
+
+    -- A source model must say which scale supplies the weighted mass of a
+    -- polymer rather than smuggling a scale choice into an implementation.
+    terminalOwnerBlockScale : Polymer → Nat
+
     haloCompression :
-      ∀ Y →
-      weightedVolume Y ≤ℝ haloCapacity *ℝ weightedLargeBlockMass Y
+      ∀ U Y →
+      weightedVolume Y ≤ℝ
+        haloCapacity (terminalOwnerBlockScale Y) *ℝ
+        weightedLargeBlockMass U Y
 
     -- The P10 score is gauge invariant at this interface.  The threshold and
     -- score lower bound are precisely the data from which the p₀ gain must be
     -- derived by a later ordered-exponential lemma.
-    gaugeConfiguration : Set
     score : Nat → gaugeConfiguration → Block → ℝ
     scoreGaugeInvariant : Set
     threshold : Nat → ℝ
     weightedScore : gaugeConfiguration → Polymer → ℝ
     largeBlockMeetsThreshold :
-      ∀ U j B → largeBlock j B → threshold j ≤ℝ score j U B
+      ∀ U j B → largeBlock U j B → threshold j ≤ℝ score j U B
     thresholdScoreLowerBound :
-      ∀ U Y → Set
+      ∀ U Y →
+      (threshold (terminalOwnerBlockScale Y) *ℝ
+       threshold (terminalOwnerBlockScale Y)) *ℝ
+      weightedLargeBlockMass U Y ≤ℝ weightedScore U Y
 
     -- The five numerical quantities requested by the corrected route are not
     -- free labels: each is a function on this carrier, with a theorem field
@@ -340,18 +370,40 @@ record P10P11WeightedRelativeDomainCarrier : Set₁ where
     attachmentAnchorBound : Nat → ℝ
     largeFieldDensityGain : Nat → ℝ
 
-    coreVolumeDecayDerived : ∀ k → Set
-    scoreDecayDerived : ∀ k → Set
-    localisationLossDerived : ∀ k → Set
-    attachmentAnchorBoundDerived : ∀ k → Set
-    largeFieldDensityGainDerived : ∀ k → Set
+    jacobianLoss : Nat → ℝ
+    localisationOperatorLoss : Nat → ℝ
+    interpolationLoss : Nat → ℝ
+    rescalingLoss : Nat → ℝ
+    netVolumeDecay : Nat → ℝ
+
+    localisationLossDecomposition : ∀ k →
+      localisationLoss k ≡
+        jacobianLoss k +ℝ localisationOperatorLoss k +ℝ
+        interpolationLoss k +ℝ rescalingLoss k
+
+    -- This division-free comparison is the intended content of the informal
+    -- gain b·η²/ν.  It avoids adding division/logarithm infrastructure merely
+    -- to state the P10/P11 source boundary.
+    densityGainCertified : ∀ k →
+      haloCapacity k *ℝ largeFieldDensityGain k ≤ℝ
+      scoreDecay k *ℝ
+      (threshold k *ℝ threshold k)
+
+    netDecayBalancesLoss : ∀ k →
+      netVolumeDecay k +ℝ localisationLoss k ≡
+      coreVolumeDecay k +ℝ largeFieldDensityGain k
 
     componentActivity : Nat → gaugeConfiguration → Polymer → ℝ
     componentActivityBound :
-      ∀ k U Y → Set
+      ∀ k U Y →
+      componentActivity k U Y ≤ℝ
+        (expℝ (-ℝ (coreVolumeDecay k *ℝ weightedVolume Y)) *ℝ
+         expℝ (-ℝ (scoreDecay k *ℝ weightedScore U Y)))
 
     weightedPolymerSuppression :
-      ∀ k U Y → Set
+      ∀ k U Y →
+      componentActivity k U Y ≤ℝ
+        expℝ (-ℝ (netVolumeDecay k *ℝ weightedVolume Y))
 
     fibreResummationBound :
       ∀ k Y → Set
@@ -378,11 +430,13 @@ record P10P11WeightedRelativeDomainClosure
       weightedPolymerSuppression k U Y
 
     weightedSuppressionToFibreBound :
-      ∀ k Y →
-      fibreResummationBound k Y
+      ∀ k →
+      (∀ U Y → weightedPolymerSuppression k U Y) →
+      ∀ Y → fibreResummationBound k Y
 
     fibreBoundToStrictKP :
       ∀ k →
+      (∀ Y → fibreResummationBound k Y) →
       strictKPMargin k
 
 open P10P11WeightedRelativeDomainClosure public
