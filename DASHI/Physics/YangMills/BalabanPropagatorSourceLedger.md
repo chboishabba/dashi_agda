@@ -1,8 +1,9 @@
 # Balaban propagator packet: coefficient-extraction ledger
 
-Status: all six prerequisite papers are locally available; literal operator
-extraction is in progress. This is a research ledger, not a theorem import and
-not evidence that the deferred CMP 109 Theorem 2 has been proved.
+Status: all six prerequisite papers are locally available and the targeted
+operator extraction below is complete enough to begin the owned beta estimate.
+This is a research ledger, not a theorem import and not evidence that the
+deferred CMP 109 Theorem 2 has been proved.
 
 ## Local primary sources verified
 
@@ -64,6 +65,26 @@ Literal anchors checked in the local text extraction:
   the analytic extension of `U_k(V)` and records derivative decay estimates
   for the regular background chart.
 
+The remaining source facts needed for the first owned bridge are now also
+literal rather than inferred:
+
+- CMP 109 (4.35)--(4.37) replaces the local kernel by its free-boundary form,
+  extends the admissible localization-domain sum, and defines
+  `Pi_{mu nu}(x,y) = sum_{X in D_j} E^(2)_{mu nu}(X;x,y)`.  The beta tail must
+  therefore control a resummed localization family, not merely finitely many
+  diagram templates.
+- CMP 109 (5.8)--(5.10) records translation symmetry, Ward identities and
+  exponential position-space decay of `Pi`; (5.37)--(5.38) identifies the
+  transverse coefficient and its third-derivative remainder.
+- CMP 99 background-field Theorem 3.14 and (3.154) are the operator-level
+  marked-difference input: random walks localizing in the common domain cancel
+  and every survivor gains distance-to-discrepancy decay.
+- CMP 116 supplies the separate resummation input: (1.26) bounds the
+  localization-domain tree-length sum, (1.29) bounds the sum of terms with a
+  fixed localization domain, and Lemma 3/(2.38) gives the exponentially small
+  resummed activity.  These estimates must be applied after, not instead of,
+  the CMP 99 marked comparison.
+
 The normalization audit is mandatory: CMP 109 first displays `g_k^-2` terms
 in the raw fluctuation integral, then rescales the fluctuation field before
 introducing its Gaussian covariance. Background-propagator positivity must not
@@ -104,11 +125,11 @@ Yang--Mills operators, its contraction/Green-kernel proof layout is a candidate
 for formalizing the background-minimizer sublemma without inventing an operator
 normalization.
 
-## Next source extraction deliverable
+## Closed extraction boundary and next owned theorem
 
-The prerequisite packet is complete. Fill the following table with literal
-definitions/equation numbers before implementing a numerical coefficient
-evaluator.
+The prerequisite packet and the following literal anchors are now sufficient;
+do not expand the ledger into a full reconstruction of all six papers before
+attempting the beta estimate.
 
 | Symbol | Definition source | Domain/codomain | Required uniform estimate |
 | --- | --- | --- | --- |
@@ -153,4 +174,41 @@ and
 The coupling law admits either direct finite-volume uniform beta bounds or a
 reference-coefficient tail.  The domain-tail target is the source-faithful
 inequality obtained by carrying CMP 99 (3.154) through CMP 109's weighted
-polarization moment; it remains an unavailable owned theorem.
+polarization moment; it remains an unavailable owned theorem.  Its required
+intermediate estimate is
+
+```text
+|E^(2)_Omega(X;x,y) - E^(2)_Omega'(X;x,y)|
+  <= C exp(-delta_x |x-y|) exp(-kappa d(X))
+       exp(-delta_0 discrepancyDistance(Omega,Omega';x,y)).
+```
+
+The resummation must retain the marked and tree-length costs jointly; it must
+not take an infimum of the marked discrepancy distance over `X`, since a large
+`X` can reach the discrepancy region while being suppressed by its tree length.
+For near positions the required geometric charging inequality transfers either
+the marked distance or the tree length into collar decay, leaving a summable
+weakened tree weight.  For far positions ordinary spatial decay controls the
+polynomial coordinate tail.  This yields the beta-tail certificate with any
+chosen far rate strictly below half the spatial rate.
+The Agda surface `BalabanLocalisedPolarisationDomainComparison` records exactly
+the marked CMP 99 step; `BalabanVacuumPolarisationDomainTail` records the
+single remaining owned implication after CMP 116 summability.  No opaque
+resummation placeholder remains.
+
+### Literal marked-comparison entry point
+
+CMP 109 (4.2)--(4.5) gives the factorwise starting point for the remaining
+owned estimate.  Equation (4.3) expresses the derivatives entering
+`E^(n)(X)` through derivatives of the background map `H_j`; the text following
+it identifies those derivatives as sums of perturbative tree expressions with
+exponential tree-length decay.  It also states that localizing one input outside
+`X` supplies an additional factor controlled by its distance from `X`, yielding
+(4.5).  For `n = 2`, (4.35) replaces the relevant `E^(2)(X)` expression by its
+free-boundary form; (4.37) then resums it to the polarization tensor.
+
+Thus the remaining proof is a finite telescoping replacement over the factors
+in (4.3), with one marked CMP 99 domain-difference factor and all unchanged
+factors controlled by the CMP 109 tree bounds.  The resummed `X`-sum is the
+CMP 116 input.  This is the exact point where a new analytic inequality, rather
+than another source wrapper, is required.
