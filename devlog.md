@@ -1,5 +1,20 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Upgraded the cyclic feedback packet search to prevent a false leakage
+  reading from a shell-truncated score.  It now records all finite-carrier
+  dyadic packets, a dominant-shell moving packet `P_L`, its exact heat ledger,
+  moving recurrence and scale displacement, and a full-field discrete-
+  translation-quotiented correlation.  The three target phases are a declared
+  translation gauge fixing, not three wasted phase-search coordinates.
+  Added optional staged endpoint preselection (`--endpoint-prefilter-*`) so
+  future costly runs can rank static seeds by a short actual moving-packet
+  evolution.  `py_compile`, static, CPU-evolution, and staged-prefilter smoke
+  checks passed.  The live GPU calibration was launched before this upgrade;
+  it must be labelled a fixed-packet/static-prefilter result if it completes.
+  The cyclic graph has an emitted rank-9 triad/mode incidence matrix and a
+  one-dimensional feedback-cycle basis; helical coupling holonomy is kept
+  explicitly uncomputed pending exact complex-channel coefficient extraction.
+
 - Replaced the one-target donor-star-only experiment surface with a selectable
   graph surface in `ns_phase_locked_packet_search.py`.  The new default is a
   closed three-target N32 `j=2` cycle: each target has a lower donor triad,

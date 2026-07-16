@@ -82,6 +82,16 @@ All canonical chain steps have now executed and Lemma A/B elimination is lodged 
 - Which currently exported theorem bundles still import
   `QuadraticFormEmergence` transitively and need rerouting first?
 
+## NS Experimental Sidecar (2026-07-16, non-canonical)
+
+- The finite-Galerkin cyclic-feedback packet search is an empirical
+  falsification lane only.  Its next milestone is staged endpoint selection
+  and moving-packet recurrence at the correct `j=2` viscous time, followed by
+  an N32-to-N64 scale copy only if an adversarial family survives.
+- No result from this sidecar is a closure-spine dependency or a Navier--Stokes
+  promotion condition.  It may only motivate a later theorem surface after a
+  stable, adversarially tested inequality has been identified.
+
 ## Next Skill
 `autonomous-orchestrator` to manage the post-checklist closure runway in
 parallel, then integrate the landed worker slices back into the canonical

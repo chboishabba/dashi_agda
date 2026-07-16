@@ -1,5 +1,23 @@
 # 2026-07-16 finite Fourier triad-cancellation seam
 
+- Strengthened the cyclic-feedback adversarial packet search before
+  interpreting its one-window calibration.  The `j=2` viscous window is now
+  explicit as `T = 2^(-4) / nu = 62.5` for `nu=.001`; the graph fixes the
+  phases of three coordinate-independent target modes, thereby removing the
+  three translation phase gauges.  Checkpoints now retain the full dyadic
+  packet ledger rather than truncating at the target shell, and report the
+  moving packet `P_L` centred on the current dominant shell, its exact
+  mode-by-mode heat continuation, scale displacement, and full-field
+  correlation maximised over discrete translations.  A staged short evolved
+  moving-packet prefilter is available before a costly full endpoint run.
+  Static, short CPU, and staged-prefilter smoke checks pass.  The pending GPU
+  run predates these telemetry/selection upgrades, so it remains only a
+  static-seed, fixed-packet one-window calibration.
+  The graph now also exports its mode--triad incidence matrix and explicit
+  one-dimensional bipartite cycle basis.  It correctly marks helical coupling
+  holonomy as uncomputed: that requires the exact complex channel coefficients,
+  not topology alone.
+
 - Generalized `scripts/ns_phase_locked_packet_search.py` from a single
   donor-star to an explicit N32 `j=2` three-target cyclic feedback graph:
   lower donor pairs feed `r_i`, while shared `s_i` outlet modes feed the next
