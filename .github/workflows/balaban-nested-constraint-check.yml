@@ -6,6 +6,7 @@ on:
       - codex/balaban-nested-constraint-minimum
       - codex/balaban-literal-lattice-operators
       - codex/balaban-literal-lattice-operators-clean
+      - codex/balaban-su2-quaternion-carrier
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/Balaban*.agda'
@@ -62,6 +63,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanPlaquetteCovariantDerivative.agda
               DASHI/Physics/YangMills/BalabanFiniteAdjointQuadraticForms.agda
               DASHI/Physics/YangMills/BalabanPenaltyMismatchQuadraticForm.agda
+              DASHI/Physics/YangMills/BalabanSU2QuaternionCarrier.agda
               DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
               DASHI/Physics/YangMills/BalabanConstrainedGaussianCarrierAlgebra.agda
               DASHI/Physics/YangMills/BalabanFiniteConstraintChain.agda
