@@ -10,7 +10,8 @@ on:
       - 'DASHI/Physics/YangMills/Balaban*Interval*.agda'
       - 'DASHI/Physics/YangMills/Balaban*CumulativeBlock*.agda'
       - 'DASHI/Physics/YangMills/Balaban*EnvelopeHessian.agda'
-      - 'DASHI/Physics/YangMills/BalabanBlockDeterminantProduct.agda'
+      - 'DASHI/Physics/YangMills/BalabanBlockDeterminant*.agda'
+      - 'DASHI/Physics/YangMills/BalabanVacuumSubtractionAlgebra.agda'
       - '.github/workflows/balaban-nested-constraint-check.yml'
 
 permissions:
@@ -30,7 +31,7 @@ jobs:
       - name: Check focused Yang-Mills modules
         shell: bash
         run: |
-          set -euo pipefail
+          set +e
           nix develop .# --command bash -lc '
             set -euo pipefail
             agda --version
@@ -55,6 +56,8 @@ jobs:
               DASHI/Physics/YangMills/BalabanCumulativeBlockCorrection.agda
               DASHI/Physics/YangMills/BalabanCumulativeBlockCorrectionComposition.agda
               DASHI/Physics/YangMills/BalabanBlockDeterminantProduct.agda
+              DASHI/Physics/YangMills/BalabanBlockDeterminantLogAdditivity.agda
+              DASHI/Physics/YangMills/BalabanVacuumSubtractionAlgebra.agda
               DASHI/Physics/YangMills/BalabanConstrainedKKTLinearisation.agda
               DASHI/Physics/YangMills/BalabanConstrainedEnvelopeHessian.agda
             )
@@ -62,4 +65,7 @@ jobs:
               echo "Checking: $target"
               agda -i . -l standard-library "$target"
             done
-          '
+          ' > agda-focused-check.log 2>&1
+          status=$?
+          tail -n 300 agda-focused-check.log
+          exit "$status"
