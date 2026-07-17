@@ -2,17 +2,11 @@ module DASHI.Physics.YangMills.BalabanSU2ReducedAdjointDeterminantProduct where
 
 ------------------------------------------------------------------------
 -- Determinant product law in the reduced su(2) adjoint algebra.
---
--- The concrete 3 x 3 determinant from
--- `BalabanSU2AdjointMatrixDeterminant` is multiplicative under the exact
--- reduced composition law.  This is the first literal determinant-product
--- theorem in the source-operator lane; it is finite algebra and contains no
--- logarithm, positivity, or beta estimate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.List.Base using ([]; _∷_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 
 import Tactic.RingSolver as Solver
 
@@ -90,6 +84,6 @@ reducedAdjointMatrixDeterminantMultiplicative Y left right =
       (composeReducedAdjoint Y left right))
     (trans
       (reducedAdjointDeterminantMultiplicative Y left right)
-      (DASHI.Foundations.RealAnalysisAxioms.cong₂ _*R_
+      (cong₂ _*R_
         (sym (reducedAdjointMatrixDeterminantValue Y left))
         (sym (reducedAdjointMatrixDeterminantValue Y right))))
