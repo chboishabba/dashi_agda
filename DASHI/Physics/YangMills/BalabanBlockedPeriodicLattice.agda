@@ -78,7 +78,9 @@ splitFinePoint {M = M} {L = L} (cube4 f₀ f₁ f₂ f₃) =
 splitFinePointFinePoint :
   ∀ {M L : Nat}
   (blocked : BlockedCube4 M L) →
-  splitFinePoint (finePoint blocked) ≡ blocked
+  splitFinePoint {M = M} {L = L}
+    (finePoint {M = M} {L = L} blocked)
+  ≡ blocked
 splitFinePointFinePoint {M = M} {L = L}
   (blockedCube4
     (cube4 c₀ c₁ c₂ c₃)
@@ -98,7 +100,9 @@ splitFinePointFinePoint {M = M} {L = L}
 finePointSplitFinePoint :
   ∀ {M L : Nat}
   (fine : Cube4 (M * L)) →
-  finePoint (splitFinePoint fine) ≡ fine
+  finePoint {M = M} {L = L}
+    (splitFinePoint {M = M} {L = L} fine)
+  ≡ fine
 finePointSplitFinePoint {M = M} {L = L} (cube4 f₀ f₁ f₂ f₃) =
   cube4Ext
     (combine-remQuot {n = M} L f₀)
@@ -123,7 +127,7 @@ offsetOfFine {M = M} {L = L} fine =
 finePointFromCoarseAndOffset :
   ∀ {M L : Nat}
   (fine : Cube4 (M * L)) →
-  finePoint
+  finePoint {M = M} {L = L}
     (blockedCube4
       (coarseOfFine {M = M} {L = L} fine)
       (offsetOfFine {M = M} {L = L} fine))
