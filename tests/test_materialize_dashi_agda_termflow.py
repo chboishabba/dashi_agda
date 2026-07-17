@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
-MODULE = importlib.import_module("materialize_dashi_agda_termflow")
+MODULE = importlib.import_module("dashi_visualize_agda")
 
 
 def write_fixture(tmp_path: Path) -> Path:
