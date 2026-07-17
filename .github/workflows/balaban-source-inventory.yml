@@ -1,0 +1,72 @@
+name: Balaban source inventory
+
+on:
+  push:
+    branches:
+      - codex/balaban-nested-constraint-minimum
+  pull_request:
+    paths:
+      - '.github/workflows/balaban-source-inventory.yml'
+      - 'DASHI/Physics/YangMills/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: balaban-source-inventory-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Inventory Yang-Mills operator sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          out=balaban-source-inventory.txt
+          {
+            echo '# Yang-Mills Agda files'
+            git ls-files 'DASHI/Physics/YangMills/*.agda' | sort
+            echo
+            echo '# Everything imports'
+            grep -n 'DASHI.Physics.YangMills' DASHI/Everything.agda || true
+            echo
+            echo '# Tracked PDF sources'
+            git ls-files '*.pdf' | sort || true
+            echo
+            echo '# Candidate literal operator definitions'
+            grep -RInE \
+              'DeltaHat|Delta\^|3\.156|3\.155|CMP 99|CMP99|Q G|Q-bar|Qbar|coarseSchur|conditionalCovariance|covariance|determinant|constraintCurvature|constrainedLagrangian|augmented.*operator|gauge.*operator' \
+              DASHI/Physics/YangMills \
+              --include='*.agda' --include='*.md' || true
+            echo
+            echo '# Candidate source-ledger references elsewhere'
+            grep -RInE \
+              '3\.156|3\.155|CMP 99|CMP99|Q-bar|DeltaHat|constraint-curvature|constrained-Lagrangian' \
+              DASHI \
+              --include='*.agda' --include='*.md' || true
+          } > "$out"
+          tar -czf balaban-source-tree.tar.gz \
+            DASHI/Physics/YangMills \
+            DASHI/Everything.agda \
+            flake.nix flake.lock \
+            scripts/run_agda29_parallel_check.sh
+          wc -l "$out"
+          tail -n 120 "$out"
+
+      - name: Upload inventory
+        uses: actions/upload-artifact@v4
+        with:
+          name: balaban-source-inventory
+          path: |
+            balaban-source-inventory.txt
+            balaban-source-tree.tar.gz
+          if-no-files-found: error
+          retention-days: 7
