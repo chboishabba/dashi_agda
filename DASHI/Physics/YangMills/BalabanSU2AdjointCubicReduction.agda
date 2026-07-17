@@ -19,6 +19,7 @@ module DASHI.Physics.YangMills.BalabanSU2AdjointCubicReduction where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Nat using (suc)
 open import Data.List.Base using ([]; _∷_)
 
 import Tactic.RingSolver as Solver
