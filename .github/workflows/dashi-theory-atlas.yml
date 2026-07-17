@@ -6,24 +6,30 @@ on:
       - "DASHI/**/*.agda"
       - "config/dashi-*-atlas.json"
       - "config/dashi-*-lane-hyperfabric.json"
+      - "config/dashi-*-termflow.json"
       - "scripts/materialize_dashi_theory_atlas.py"
       - "scripts/materialize_dashi_hyperfabric.py"
       - "scripts/materialize_dashi_lane_hyperfabric.py"
+      - "scripts/materialize_dashi_agda_termflow.py"
       - "tests/test_materialize_dashi_theory_atlas.py"
       - "tests/test_materialize_dashi_hyperfabric.py"
       - "tests/test_materialize_dashi_lane_hyperfabric.py"
+      - "tests/test_materialize_dashi_agda_termflow.py"
   push:
     branches: [master]
     paths:
       - "DASHI/**/*.agda"
       - "config/dashi-*-atlas.json"
       - "config/dashi-*-lane-hyperfabric.json"
+      - "config/dashi-*-termflow.json"
       - "scripts/materialize_dashi_theory_atlas.py"
       - "scripts/materialize_dashi_hyperfabric.py"
       - "scripts/materialize_dashi_lane_hyperfabric.py"
+      - "scripts/materialize_dashi_agda_termflow.py"
       - "tests/test_materialize_dashi_theory_atlas.py"
       - "tests/test_materialize_dashi_hyperfabric.py"
       - "tests/test_materialize_dashi_lane_hyperfabric.py"
+      - "tests/test_materialize_dashi_agda_termflow.py"
 
 jobs:
   validate-atlas:
@@ -83,3 +89,34 @@ jobs:
             artifacts/dashi-yang-mills-lane-hyperfabric.svg
             artifacts/dashi-navier-stokes-lane-hyperfabric.json
             artifacts/dashi-navier-stokes-lane-hyperfabric.svg
+
+  validate-termflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependency
+        run: python -m pip install pytest
+      - name: Compile generic term-flow generator
+        run: python -m py_compile scripts/materialize_dashi_agda_termflow.py
+      - name: Run generic term-flow regression tests
+        run: python -m pytest -q tests/test_materialize_dashi_agda_termflow.py
+      - name: Validate Yang-Mills term flow
+        run: python scripts/materialize_dashi_agda_termflow.py --config config/dashi-yang-mills-termflow.json --check
+      - name: Validate Navier-Stokes term flow
+        run: python scripts/materialize_dashi_agda_termflow.py --config config/dashi-navier-stokes-termflow.json --check
+      - name: Materialise Yang-Mills term-flow hyperfabric
+        run: python scripts/materialize_dashi_agda_termflow.py --config config/dashi-yang-mills-termflow.json
+      - name: Materialise Navier-Stokes term-flow hyperfabric
+        run: python scripts/materialize_dashi_agda_termflow.py --config config/dashi-navier-stokes-termflow.json
+      - name: Upload term-flow visual artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashi-agda-termflow-hyperfabrics
+          path: |
+            artifacts/dashi-yang-mills-termflow.json
+            artifacts/dashi-yang-mills-termflow.svg
+            artifacts/dashi-navier-stokes-termflow.json
+            artifacts/dashi-navier-stokes-termflow.svg
