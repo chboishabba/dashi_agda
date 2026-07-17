@@ -24,6 +24,7 @@ postulate
     IsCommutativeRing _≡_ _+ℝ_ _*ℝ_ -ℝ_ 0ℝ 1ℝ
 
 realCommutativeRing : CommutativeRing 0ℓ 0ℓ
+{-# INLINE realCommutativeRing #-}
 realCommutativeRing = record
   { Carrier = ℝ
   ; _≈_ = _≡_
@@ -36,10 +37,12 @@ realCommutativeRing = record
   }
 
 realSolverRing : ACR.AlmostCommutativeRing 0ℓ 0ℓ
+{-# INLINE realSolverRing #-}
 realSolverRing =
   ACR.fromCommutativeRing realCommutativeRing (λ _ → nothing)
 
 solverRawRing : RawRing 0ℓ 0ℓ
+{-# INLINE solverRawRing #-}
 solverRawRing = ACR.AlmostCommutativeRing.rawRing realSolverRing
 
 module R = RawRing solverRawRing
