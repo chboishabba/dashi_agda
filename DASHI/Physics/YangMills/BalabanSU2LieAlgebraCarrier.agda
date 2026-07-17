@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using ([]; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import Tactic.RingSolver as Solver
 
@@ -127,8 +127,6 @@ su2Adjoint :
   SU2Quaternion → SU2LieAlgebra → SU2LieAlgebra
 su2Adjoint u X = lieFromQuaternion (adjointQuaternion u X)
 
--- Conjugating a pure-imaginary quaternion has zero real component.  The
--- statement is polynomial and does not use the unit-norm proof.
 adjointQuaternionPureImaginary :
   ∀ u X → q0 (adjointQuaternion u X) ≡ zeroR
 adjointQuaternionPureImaginary
@@ -142,7 +140,7 @@ lieQuaternionAdjoint :
   ∀ u X → lieQuaternion (su2Adjoint u X) ≡ adjointQuaternion u X
 lieQuaternionAdjoint u X =
   DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier.quaternionExt
-    (adjointQuaternionPureImaginary u X)
+    (sym (adjointQuaternionPureImaginary u X))
     refl refl refl
 
 su2AdjointUnit :
