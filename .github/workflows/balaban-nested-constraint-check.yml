@@ -1,0 +1,65 @@
+name: Balaban nested constraint Agda check
+
+on:
+  push:
+    branches:
+      - codex/balaban-nested-constraint-minimum
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/Balaban*Constraint*.agda'
+      - 'DASHI/Physics/YangMills/Balaban*Interval*.agda'
+      - 'DASHI/Physics/YangMills/Balaban*CumulativeBlock*.agda'
+      - 'DASHI/Physics/YangMills/Balaban*EnvelopeHessian.agda'
+      - 'DASHI/Physics/YangMills/BalabanBlockDeterminantProduct.agda'
+      - '.github/workflows/balaban-nested-constraint-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check focused Yang-Mills modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          nix develop .# --command bash -lc '
+            set -euo pipefail
+            agda --version
+            targets=(
+              DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
+              DASHI/Physics/YangMills/BalabanFiniteConstraintChain.agda
+              DASHI/Physics/YangMills/BalabanFiniteConstraintCovariance.agda
+              DASHI/Physics/YangMills/BalabanIntervalConstraintChain.agda
+              DASHI/Physics/YangMills/BalabanIntervalConstraintCovariance.agda
+              DASHI/Physics/YangMills/BalabanIntervalConstraintComposition.agda
+              DASHI/Physics/YangMills/BalabanIntervalAdjointComposition.agda
+              DASHI/Physics/YangMills/BalabanIntervalCompositionAlgebra.agda
+              DASHI/Physics/YangMills/BalabanIntervalDeterminantAlgebra.agda
+              DASHI/Physics/YangMills/BalabanBilateralIntervalBounds.agda
+              DASHI/Physics/YangMills/BalabanInverseSquareIntervalIdentity.agda
+              DASHI/Physics/YangMills/BalabanDeterminantToInverseSquareInterval.agda
+              DASHI/Physics/YangMills/BalabanIntervalToPrefixBridge.agda
+              DASHI/Physics/YangMills/BalabanDeterminantIntervalToPrefix.agda
+              DASHI/Physics/YangMills/BalabanDeterminantIntervalToCMP122.agda
+              DASHI/Physics/YangMills/BalabanLinearIntervalEnclosure.agda
+              DASHI/Physics/YangMills/BalabanLinearInverseSquareEnclosure.agda
+              DASHI/Physics/YangMills/BalabanCumulativeBlockCorrection.agda
+              DASHI/Physics/YangMills/BalabanCumulativeBlockCorrectionComposition.agda
+              DASHI/Physics/YangMills/BalabanBlockDeterminantProduct.agda
+              DASHI/Physics/YangMills/BalabanConstrainedKKTLinearisation.agda
+              DASHI/Physics/YangMills/BalabanConstrainedEnvelopeHessian.agda
+            )
+            for target in "${targets[@]}"; do
+              echo "Checking: $target"
+              agda -i . -l standard-library "$target"
+            done
+          '
