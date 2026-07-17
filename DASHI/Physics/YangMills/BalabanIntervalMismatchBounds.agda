@@ -15,6 +15,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using
   ; _+ℝ_
   ; _-ℝ_
   ; _≤ℝ_
+  ; ≤ℝ-refl
   ; +-mono-≤
   )
 open import DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra using
@@ -28,8 +29,6 @@ intervalSumMonotone :
   ∀ k n →
   intervalSum left k n ≤ℝ intervalSum right k n
 intervalSumMonotone left right pointwise k zero = ≤ℝ-refl
-  where
-    open import DASHI.Foundations.RealAnalysisAxioms using (≤ℝ-refl)
 intervalSumMonotone left right pointwise k (suc n) =
   +-mono-≤
     (intervalSumMonotone left right pointwise k n)
