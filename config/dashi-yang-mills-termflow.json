@@ -1,0 +1,14 @@
+{
+  "schema": "dashi-agda-termflow-v1",
+  "title": "DASHI Yang–Mills Term-Flow Hyperfabric",
+  "slug": "dashi-yang-mills-termflow",
+  "scan_root": "DASHI",
+  "roots": [
+    "DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge.endpointDeterminantToBetaPrefix",
+    "DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget.scheduleTrajectoryBoundedByGamma"
+  ],
+  "max_declarations": 34,
+  "max_term_nodes_per_declaration": 44,
+  "output_json": "artifacts/dashi-yang-mills-termflow.json",
+  "output_svg": "artifacts/dashi-yang-mills-termflow.svg"
+}
