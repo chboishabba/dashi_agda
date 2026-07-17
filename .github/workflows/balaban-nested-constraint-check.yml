@@ -6,12 +6,7 @@ on:
       - codex/balaban-nested-constraint-minimum
   pull_request:
     paths:
-      - 'DASHI/Physics/YangMills/Balaban*Constraint*.agda'
-      - 'DASHI/Physics/YangMills/Balaban*Interval*.agda'
-      - 'DASHI/Physics/YangMills/Balaban*CumulativeBlock*.agda'
-      - 'DASHI/Physics/YangMills/Balaban*EnvelopeHessian.agda'
-      - 'DASHI/Physics/YangMills/BalabanBlockDeterminant*.agda'
-      - 'DASHI/Physics/YangMills/BalabanVacuumSubtractionAlgebra.agda'
+      - 'DASHI/Physics/YangMills/Balaban*.agda'
       - '.github/workflows/balaban-nested-constraint-check.yml'
 
 permissions:
@@ -29,6 +24,7 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check focused Yang-Mills modules
+        id: focused
         shell: bash
         run: |
           set +e
@@ -55,9 +51,17 @@ jobs:
               DASHI/Physics/YangMills/BalabanLinearInverseSquareEnclosure.agda
               DASHI/Physics/YangMills/BalabanCumulativeBlockCorrection.agda
               DASHI/Physics/YangMills/BalabanCumulativeBlockCorrectionComposition.agda
+              DASHI/Physics/YangMills/BalabanCumulativeDeterminantInterval.agda
+              DASHI/Physics/YangMills/BalabanCumulativeDeterminantToInverseSquare.agda
+              DASHI/Physics/YangMills/BalabanCumulativeDeterminantToPrefix.agda
+              DASHI/Physics/YangMills/BalabanCumulativeDeterminantToCMP122.agda
               DASHI/Physics/YangMills/BalabanBlockDeterminantProduct.agda
               DASHI/Physics/YangMills/BalabanBlockDeterminantLogAdditivity.agda
               DASHI/Physics/YangMills/BalabanVacuumSubtractionAlgebra.agda
+              DASHI/Physics/YangMills/BalabanVacuumSubtractedBlockDeterminant.agda
+              DASHI/Physics/YangMills/BalabanProjectionIntervalLinearity.agda
+              DASHI/Physics/YangMills/BalabanProjectedEndpointDifference.agda
+              DASHI/Physics/YangMills/BalabanProjectedBlockCorrection.agda
               DASHI/Physics/YangMills/BalabanConstrainedKKTLinearisation.agda
               DASHI/Physics/YangMills/BalabanConstrainedEnvelopeHessian.agda
             )
@@ -67,5 +71,18 @@ jobs:
             done
           ' > agda-focused-check.log 2>&1
           status=$?
-          tail -n 300 agda-focused-check.log
-          exit "$status"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 80 agda-focused-check.log
+          exit 0
+
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: balaban-focused-agda-log
+          path: agda-focused-check.log
+          if-no-files-found: error
+
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
