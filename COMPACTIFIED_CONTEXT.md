@@ -40,8 +40,11 @@
   restarts from fresh admissible profile trials. The bounded `.25T` chain is
   complete: common-reference moving/frozen ratios are `.10985340/.11234973`.
   Thus this state has a resolved short burst but delayed collapse, not
-  recurrence. Next: perturb the profile locally while re-matching positive
-  signed chi, before any full-window or theorem-facing inference.
+  recurrence. A state-anchored 42-candidate local perturbation manifest now
+  spans phase, coherence, angular, radial, and helicity deformations; every
+  candidate is re-normalised to finite critical mass and must retain positive
+  signed chi within tolerance plus target dominance before `.05T -> .10T ->
+  .25T` promotion. This remains empirical and non-promoting.
   preserved as a compressed raw Fourier receipt (`seed=20260718`, replay attempt 0).
   Its moving packet changes centre from shell 2 to shell 3, so the audit was
   upgraded with frozen-initial-window telemetry and the promotion gate uses the

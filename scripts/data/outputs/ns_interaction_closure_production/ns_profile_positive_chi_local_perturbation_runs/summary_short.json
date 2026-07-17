@@ -1,0 +1,172 @@
+{
+  "authority": {
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "theorem_authority": false
+  },
+  "contract": "sequential_local_perturbation_stage_receipt_nonpromoting",
+  "failed": 0,
+  "manifest": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_manifest.json",
+  "requested_ids": [
+    "phasemr0mem0.0400",
+    "phasemr0mep0.0400",
+    "phasemr1mem0.0400",
+    "phasemr1mep0.0400",
+    "coherencemr0mem0.0400",
+    "coherencemr0mep0.0400",
+    "angularmr0mem0.0400",
+    "angularmr0mep0.0400",
+    "radialmr0mem0.0400",
+    "radialmr0mep0.0400",
+    "helicitymr0mem0.0400",
+    "helicitymr0mep0.0400"
+  ],
+  "rows": [
+    {
+      "chi_signed": 0.16125422340235546,
+      "frozen_integrated_nonlinear_input": 0.38298986771088206,
+      "frozen_packet_recurrence_ratio": 1.0437172556300938,
+      "id": "phasemr0mem0.0400",
+      "moving_packet_recurrence_ratio": 1.0115429948441397,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr0mem0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr0mem0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr0mem0.0400_short.stdout"
+    },
+    {
+      "chi_signed": 0.16839070247632712,
+      "frozen_integrated_nonlinear_input": 0.3828587915147351,
+      "frozen_packet_recurrence_ratio": 1.0453889208810203,
+      "id": "phasemr0mep0.0400",
+      "moving_packet_recurrence_ratio": 1.0136843094756178,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr0mep0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr0mep0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr0mep0.0400_short.stdout"
+    },
+    {
+      "chi_signed": 0.145808519695665,
+      "frozen_integrated_nonlinear_input": 0.38038469273399844,
+      "frozen_packet_recurrence_ratio": 1.0452751146043333,
+      "id": "phasemr1mem0.0400",
+      "moving_packet_recurrence_ratio": 1.0135847669687155,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr1mem0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr1mem0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr1mem0.0400_short.stdout"
+    },
+    {
+      "chi_signed": 0.18949668419527158,
+      "frozen_integrated_nonlinear_input": 0.38456880244368,
+      "frozen_packet_recurrence_ratio": 1.0453984326040309,
+      "id": "phasemr1mep0.0400",
+      "moving_packet_recurrence_ratio": 1.014059267392728,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr1mep0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr1mep0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/phasemr1mep0.0400_short.stdout"
+    },
+    {
+      "chi_signed": 0.15821057356874893,
+      "frozen_integrated_nonlinear_input": 0.38263171803261414,
+      "frozen_packet_recurrence_ratio": 1.044957519749108,
+      "id": "coherencemr0mem0.0400",
+      "moving_packet_recurrence_ratio": 1.0135707423551297,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/coherencemr0mem0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/coherencemr0mem0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/coherencemr0mem0.0400_short.stdout"
+    },
+    {
+      "chi_signed": 0.16921604356274922,
+      "frozen_integrated_nonlinear_input": 0.38450862016506204,
+      "frozen_packet_recurrence_ratio": 1.0463561204899956,
+      "id": "coherencemr0mep0.0400",
+      "moving_packet_recurrence_ratio": 1.0156072951313808,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/coherencemr0mep0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/coherencemr0mep0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/coherencemr0mep0.0400_short.stdout"
+    },
+    {
+      "chi_signed": 0.16930698364577101,
+      "frozen_integrated_nonlinear_input": 0.38411632719943567,
+      "frozen_packet_recurrence_ratio": 1.046360335904486,
+      "id": "angularmr0mem0.0400",
+      "moving_packet_recurrence_ratio": 1.0148459927295164,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/angularmr0mem0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/angularmr0mem0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/angularmr0mem0.0400_short.stdout"
+    },
+    {
+      "chi_signed": 0.16102456346098065,
+      "frozen_integrated_nonlinear_input": 0.3816924027435263,
+      "frozen_packet_recurrence_ratio": 1.0442553662814003,
+      "id": "angularmr0mep0.0400",
+      "moving_packet_recurrence_ratio": 1.01157490334636,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/angularmr0mep0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/angularmr0mep0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/angularmr0mep0.0400_short.stdout"
+    },
+    {
+      "chi_signed": 0.16094818919563725,
+      "frozen_integrated_nonlinear_input": 0.38918068488422686,
+      "frozen_packet_recurrence_ratio": 1.0523228225720083,
+      "id": "radialmr0mem0.0400",
+      "moving_packet_recurrence_ratio": 1.019202639077757,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/radialmr0mem0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/radialmr0mem0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/radialmr0mem0.0400_short.stdout"
+    },
+    {
+      "chi_signed": 0.16937360356307188,
+      "frozen_integrated_nonlinear_input": 0.37684710963728063,
+      "frozen_packet_recurrence_ratio": 1.0383702920347786,
+      "id": "radialmr0mep0.0400",
+      "moving_packet_recurrence_ratio": 1.0072553796055888,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/radialmr0mep0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/radialmr0mep0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/radialmr0mep0.0400_short.stdout"
+    },
+    {
+      "chi_signed": 0.1771033308164077,
+      "frozen_integrated_nonlinear_input": 0.37991417656423626,
+      "frozen_packet_recurrence_ratio": 1.044055774739306,
+      "id": "helicitymr0mem0.0400",
+      "moving_packet_recurrence_ratio": 1.0115810981065307,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/helicitymr0mem0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/helicitymr0mem0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/helicitymr0mem0.0400_short.stdout"
+    },
+    {
+      "chi_signed": 0.1552514966214633,
+      "frozen_integrated_nonlinear_input": 0.3822576892581343,
+      "frozen_packet_recurrence_ratio": 1.0441949165338773,
+      "id": "helicitymr0mep0.0400",
+      "moving_packet_recurrence_ratio": 1.0125626737769418,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/helicitymr0mep0.0400_short.json",
+      "returncode": 0,
+      "stage": "short",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/helicitymr0mep0.0400_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/helicitymr0mep0.0400_short.stdout"
+    }
+  ],
+  "stage": "short",
+  "successful": 12
+}
