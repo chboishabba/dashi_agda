@@ -20,6 +20,22 @@
   A one-step N16 CPU smoke passed.  No production profile window has been run
   yet; the next action is a bounded chi-matched profile census, not a new
   literal scale copy.
+- First production quotient-profile result: the N32 `j=2` angular-cap
+  profile (`A_ang=.889`, chi mismatch `.000385`) completed one full parabolic
+  window (`T=62.5`, 62,500 GPU steps).  It has
+  `R_move=.00148286`, heat-compensated `G_move=.0272952`, no net final scale
+  displacement, and coarse interaction Hellinger-squared turnover `.944684`.
+  This is a strong loss/turnover observation for one chi-matched anisotropic
+  profile.  It is not a profile-uniform contraction theorem and is not
+  comparable to the earlier nine-triad quarter-window score without matching
+  duration and profile family.
+- Second production quotient-profile result: the chi-matched fully
+  phase-coherent/spatially localized profile (`spatial IPR fraction=.06164`)
+  also completed `T=62.5`.  It gives `R_move=.00104664`, heat-compensated
+  `G_move=.0201230`, no final scale displacement and coarse Hellinger-squared
+  turnover `.916276`.  Thus spatial coherence did not rescue the packet in
+  this pair of matched finite profiles; this remains a two-point empirical
+  observation, not a uniform conclusion.
 
 - **Decision: Sparse Finite-Network Retired**: The sparse finite-network mechanism is retired for the tested finite packet. The 1024-output replay provisionally classifies its target shell as effectively dense with strong dominant-set switching, so the nine-triad core does not control this trajectory. Future tuning of that hand-designed graph is retired; this is not a universal finite-network impossibility theorem.
 - **New Critical Path**:

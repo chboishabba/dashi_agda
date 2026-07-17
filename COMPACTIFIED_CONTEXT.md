@@ -14,6 +14,13 @@
   moving-packet/heat/displacement and coarse-Hellinger-turnover telemetry; a
   one-step N16 CPU smoke passed.  A bounded chi-matched production census is
   the next experiment.
+- First production census point completed: N32 `j=2` angular cap
+  (`A_ang=.889`, matched chi `.15884`) over full `T=62.5` gives
+  `R_move=.00148286`, `G_move=.0272952`, and coarse Hellinger-squared turnover
+  `.944684`.  It is one strong-loss/turnover datum, not a uniform theorem.
+- Spatial coherence is the second completed point: IPR fraction `.06164`,
+  `R_move=.00104664`, `G_move=.0201230`, Hellinger-squared `.916276`.  It did
+  not create recurrence in the tested finite slice.
 
 - The first production closure replay is complete.  Its 32 selected outputs
   cover only `.125755` of endpoint target-shell absolute modal activity, so a

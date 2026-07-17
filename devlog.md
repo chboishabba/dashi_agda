@@ -5418,3 +5418,12 @@
   The bins now include state-dependent plus/mixed/minus helical labels in
   addition to shell offsets, input-angle and locality.  One-step N16 CPU smoke
   passed; no production duration was run from this implementation step.
+
+- Ran the first production profile trajectory: N32 `j=2`, angular width `.35`,
+  critical mass `1`, matched absolute chi `.15884`, GPU, full `T=62.5`
+  parabolic window.  It decayed to `R_move=.00148286` versus heat-compensated
+  `.0272952`; the estimated coarse interaction measure changed substantially
+  (`Hellinger^2=.944684`).  This is a single candidate-only profile receipt.
+- Ran the spatial-coherence contrast at matched chi.  Despite physical-space
+  localization (IPR fraction `.06164`), it gave `R_move=.00104664`,
+  `G_move=.0201230`, and `Hellinger^2=.916276` over the same full window.

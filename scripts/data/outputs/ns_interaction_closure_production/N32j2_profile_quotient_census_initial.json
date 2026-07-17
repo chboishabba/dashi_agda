@@ -1,0 +1,114 @@
+{
+  "authority": {
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "theorem_authority": false
+  },
+  "comparable_tight_chi_matched_count": 5,
+  "contract": "ns_normalized_profile_census_nonpromoting_report",
+  "incomparable_or_broad_profile_receipts": [
+    "/tmp/ns-profile-census/radial-broad.json"
+  ],
+  "missing": [],
+  "receipt_count": 6,
+  "rejected_wrong_contract": [
+    "/tmp/ns-profile-census/report.json"
+  ],
+  "rows": [
+    {
+      "angular_concentration": 0.888966047896061,
+      "chi_absolute": 0.15883961914640907,
+      "chi_matched": true,
+      "chi_mismatch": 0.0003854953464090538,
+      "chi_target": 0.1584541238,
+      "critical_mass": 1.0,
+      "evolution_available": false,
+      "radial_log_width": 0.29089919572041667,
+      "receipt": "/tmp/ns-profile-census/angular-cap.json",
+      "spatial_entropy_fraction": 0.6985763060116507,
+      "spatial_ipr_fraction": 0.5443604707730149,
+      "target_packet_dominance": 1.0
+    },
+    {
+      "angular_concentration": 0.47202967217810965,
+      "chi_absolute": 0.15092606208194811,
+      "chi_matched": true,
+      "chi_mismatch": 0.007528061718051898,
+      "chi_target": 0.1584541238,
+      "critical_mass": 1.0,
+      "evolution_available": false,
+      "radial_log_width": 0.29403548364447063,
+      "receipt": "/tmp/ns-profile-census/coherent.json",
+      "spatial_entropy_fraction": 0.3040268704516747,
+      "spatial_ipr_fraction": 0.0616375034548292,
+      "target_packet_dominance": 1.0
+    },
+    {
+      "angular_concentration": 0.4720296721781096,
+      "chi_absolute": 0.1501670118407641,
+      "chi_matched": true,
+      "chi_mismatch": 0.008287111959235927,
+      "chi_target": 0.1584541238,
+      "critical_mass": 1.0,
+      "evolution_available": false,
+      "radial_log_width": 0.29403548364447063,
+      "receipt": "/tmp/ns-profile-census/helical-plus.json",
+      "spatial_entropy_fraction": 0.7379757845049412,
+      "spatial_ipr_fraction": 0.5951034308290671,
+      "target_packet_dominance": 1.0
+    },
+    {
+      "angular_concentration": 0.45743927436095466,
+      "chi_absolute": 0.14872374988384107,
+      "chi_matched": true,
+      "chi_mismatch": 0.009730373916158941,
+      "chi_target": 0.1584541238,
+      "critical_mass": 0.9999999999999999,
+      "evolution_available": false,
+      "radial_log_width": 0.3860850323980359,
+      "receipt": "/tmp/ns-profile-census/radial-broad.json",
+      "spatial_entropy_fraction": 0.7393668348997763,
+      "spatial_ipr_fraction": 0.5949057691235923,
+      "target_packet_dominance": 0.33717381128948204
+    },
+    {
+      "actual_window_time": 62.5,
+      "angular_concentration": 0.888966047896061,
+      "chi_absolute": 0.15883961914640907,
+      "chi_matched": true,
+      "chi_mismatch": 0.0003854953464090538,
+      "chi_target": 0.1584541238,
+      "coarse_interaction_hellinger_squared": 0.9446844203680616,
+      "critical_mass": 1.0,
+      "evolution_available": true,
+      "moving_packet_heat_compensated_ratio": 0.02729519805918038,
+      "moving_packet_recurrence_ratio": 0.0014828605927988696,
+      "moving_packet_scale_displacement": 0,
+      "radial_log_width": 0.29089919572041667,
+      "receipt": "scripts/data/outputs/ns_interaction_closure_production/N32j2_profile_angular_cap_chi_matched.json",
+      "spatial_entropy_fraction": 0.6985763060116507,
+      "spatial_ipr_fraction": 0.5443604707730149,
+      "target_packet_dominance": 1.0
+    },
+    {
+      "actual_window_time": 62.5,
+      "angular_concentration": 0.47202967217810965,
+      "chi_absolute": 0.15092606208194811,
+      "chi_matched": true,
+      "chi_mismatch": 0.007528061718051898,
+      "chi_target": 0.1584541238,
+      "coarse_interaction_hellinger_squared": 0.916276271134195,
+      "critical_mass": 1.0,
+      "evolution_available": true,
+      "moving_packet_heat_compensated_ratio": 0.020122958130490854,
+      "moving_packet_recurrence_ratio": 0.0010466386579111185,
+      "moving_packet_scale_displacement": 0,
+      "radial_log_width": 0.29403548364447063,
+      "receipt": "scripts/data/outputs/ns_interaction_closure_production/N32j2_profile_spatial_coherent_chi_matched.json",
+      "spatial_entropy_fraction": 0.3040268704516747,
+      "spatial_ipr_fraction": 0.0616375034548292,
+      "target_packet_dominance": 1.0
+    }
+  ],
+  "warning": "This is an atlas of finite empirical receipts. Comparable means only that the declared chi slice matched and target-shell dominance was at least .8; it does not establish quotient completeness or profile-uniform constants."
+}
