@@ -14,6 +14,8 @@ on:
       - 'DASHI/Physics/YangMills/BalabanSU2LiteralOperatorInstances.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2LieBracket.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2AdjointPolynomialCalculus.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2AdjointCubicReduction.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2ReducedAdjointCalculus.agda'
       - '.github/workflows/balaban-su2-probe-check.yml'
 
 permissions:
@@ -51,6 +53,8 @@ jobs:
               DASHI/Physics/YangMills/BalabanSU2LiteralOperatorInstances.agda
               DASHI/Physics/YangMills/BalabanSU2LieBracket.agda
               DASHI/Physics/YangMills/BalabanSU2AdjointPolynomialCalculus.agda
+              DASHI/Physics/YangMills/BalabanSU2AdjointCubicReduction.agda
+              DASHI/Physics/YangMills/BalabanSU2ReducedAdjointCalculus.agda
             )
             for target in "${targets[@]}"; do
               echo "Checking: $target"
