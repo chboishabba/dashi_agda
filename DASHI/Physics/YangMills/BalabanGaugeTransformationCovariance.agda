@@ -59,7 +59,7 @@ GaugeFunction4 N group =
   Cube4 N → Carrier group
 
 gaugeTransformBond :
-  ∀ {N : Nat}
+  ∀ {N : Nat} {{_ : NonZero N}}
   (group : GroupStructure) →
   GaugeFunction4 N group →
   DirectedGaugeField4 N group →
@@ -190,7 +190,7 @@ pathTransportGaugeCovariant :
       (inverse group (gauge y)))
 pathTransportGaugeCovariant group gauge U {x = x} empty =
   emptyPathGaugeCovariant group gauge x
-pathTransportGaugeCovariant group gauge U (b ▷ p) =
+pathTransportGaugeCovariant group gauge U {y = y} (b ▷ p) =
   trans
     (cong
       (multiply group (gaugeTransformBond group gauge U b))
@@ -201,4 +201,4 @@ pathTransportGaugeCovariant group gauge U (b ▷ p) =
       (U b)
       (gauge (target b))
       (directedPathTransport group U p)
-      _)
+      (gauge y))
