@@ -2,34 +2,23 @@ module DASHI.Physics.YangMills.BalabanSU2ReducedAdjointGaugeCovariance where
 
 ------------------------------------------------------------------------
 -- Gauge covariance of the concrete adjoint functional calculus.
---
--- Quaternion conjugation is a Lie-algebra automorphism, hence
---
---   Ad_u [Y,X] = [Ad_u Y, Ad_u X]
---
--- and every reduced polynomial in ad_Y transforms by conjugation.  The cubic
--- coefficient and the concrete 3 x 3 determinant are therefore gauge
--- invariant.  These are exact finite identities, not background estimates.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using ([]; _∷_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import Tactic.RingSolver as Solver
 
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
-  ( Quaternion
-  ; quat
+  ( quat
   ; _*R_
   ; -R_
   ; realSolverRing
-  ; SU2Quaternion
   ; su2q
   )
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
-  ( SU2LieAlgebra
-  ; su2Lie
+  ( su2Lie
   ; su2LieExt
   ; su2Adjoint
   )
@@ -42,8 +31,7 @@ open import DASHI.Physics.YangMills.BalabanSU2AdjointCubicReduction using
   ; adCubicCoefficient
   )
 open import DASHI.Physics.YangMills.BalabanSU2ReducedAdjointCalculus using
-  ( ReducedAdjointOperator
-  ; reducedAd
+  ( reducedAd
   ; applyReducedAdjoint
   )
 open import DASHI.Physics.YangMills.BalabanSU2AdjointMatrixDeterminant using
@@ -135,5 +123,4 @@ reducedAdjointMatrixDeterminantGaugeInvariant
     (trans
       (reducedAdjointDeterminantGaugeInvariant
         u Y (reducedAd a b c))
-      (DASHI.Relation.Binary.PropositionalEquality.sym
-        (reducedAdjointDeterminant Y a b c)))
+      (sym (reducedAdjointDeterminant Y a b c)))
