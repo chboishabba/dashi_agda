@@ -113,9 +113,9 @@ Minimises :
   (Point → Set) →
   Point →
   Set
-Minimises _≼_ objective feasible x =
+Minimises {Point} _≼_ objective feasible x =
   feasible x ×
-  ((y : _) → feasible y → objective x ≼ objective y)
+  ((y : Point) → feasible y → objective x ≼ objective y)
 
 sequentialMinimumToDirect :
   {Fine Middle Coarse Value : Set} →
@@ -165,7 +165,7 @@ sequentialMinimumEqualsDirectMinimum _≼_ objective Q₁ Q₂ z x =
 -- Pointwise equality is the appropriate source-neutral operator equality here;
 -- it avoids importing function extensionality.
 _≈_ : {A B : Set} → (A → B) → (A → B) → Set
-f ≈ g = (x : _) → f x ≡ g x
+_≈_ {A} f g = (x : A) → f x ≡ g x
 
 constrainedCovariance :
   {Fine Coarse : Set} →
