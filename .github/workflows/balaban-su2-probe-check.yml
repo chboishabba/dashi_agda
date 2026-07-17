@@ -8,17 +8,12 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanRealRingSolverProbe.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2QuaternionCarrier.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2LieAlgebraCarrier.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2AdjointInnerProduct.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2LiteralOperatorInstances.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2LieBracket.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2AdjointPolynomialCalculus.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2AdjointCubicReduction.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2ReducedAdjointCalculus.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2AdjointMatrixDeterminant.agda'
-      - 'DASHI/Physics/YangMills/BalabanSU2ReducedAdjointDeterminantProduct.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2*.agda'
       - '.github/workflows/balaban-su2-probe-check.yml'
+
+concurrency:
+  group: balaban-su2-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -62,6 +57,9 @@ jobs:
               DASHI/Physics/YangMills/BalabanSU2ReducedAdjointCalculus.agda
               DASHI/Physics/YangMills/BalabanSU2AdjointMatrixDeterminant.agda
               DASHI/Physics/YangMills/BalabanSU2ReducedAdjointDeterminantProduct.agda
+              DASHI/Physics/YangMills/BalabanSU2ReducedAdjointAdjugate.agda
+              DASHI/Physics/YangMills/BalabanSU2AdjointRotationDeterminant.agda
+              DASHI/Physics/YangMills/BalabanSU2ReducedAdjointGaugeCovariance.agda
             )
             for target in "${targets[@]}"; do
               echo "Checking: $target"
@@ -72,7 +70,7 @@ jobs:
           ) > su2-carrier-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 160 su2-carrier-check.log
+          tail -n 180 su2-carrier-check.log
           exit 0
       - name: Upload SU2 check log
         if: always()
