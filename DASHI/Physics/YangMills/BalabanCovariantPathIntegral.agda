@@ -122,7 +122,7 @@ covariantPathIntegral group linear U A (b ▷ p) =
       (covariantPathIntegral group linear U A p))
 
 gaugeTransformedAction :
-  ∀ {N : Nat}
+  ∀ {N : Nat} {{_ : NonZero N}}
   (group : GroupStructure) →
   (linear : AdjointLinearModule group) →
   (gauge : GaugeFunction4 N group) →
