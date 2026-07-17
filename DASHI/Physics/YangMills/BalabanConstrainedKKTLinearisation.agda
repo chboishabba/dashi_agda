@@ -13,17 +13,23 @@ module DASHI.Physics.YangMills.BalabanConstrainedKKTLinearisation where
 --   db = L^{-1} Q* (Q L^{-1} Q*)^{-1} dc,
 --   dλ = (Q L^{-1} Q*)^{-1} dc,
 --
--- and proves both equations.  The constraint-curvature term is not omitted: it
--- belongs to the source-provided operator L.
+-- proves both equations, and proves uniqueness when the supplied inverses are
+-- two-sided on their carriers.  The constraint-curvature term is not omitted:
+-- it belongs to the source-provided operator L.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 open import DASHI.Physics.YangMills.BalabanNestedConstraintMinimum using
   ( _∘_
   ; _≈_
   ; constrainedCovariance
+  ; cong
+  ; trans
   )
+
+sym : {A : Set} → {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
 
 identity : {A : Set} → A → A
 identity x = x
@@ -120,6 +126,99 @@ constrainedKKTLinearisationSolution
   ,
   backgroundDerivativeSatisfiesConstraint
     Q inverseL Q* coarseSchur coarseRightInverse
+
+-- Any solution of the KKT equations has the stated multiplier derivative when
+-- L^{-1} and the coarse Schur operator are left inverses as well.
+linearisedKKTMultiplierUnique :
+  {Fine Coarse : Set} →
+  (L inverseL : Fine → Fine) →
+  (Q : Fine → Coarse) →
+  (Q* : Coarse → Fine) →
+  (coarseSchur : Coarse → Coarse) →
+  (fineLeftInverse : inverseL ∘ L ≈ identity) →
+  (coarseLeftInverse :
+    coarseSchur ∘ constrainedCovariance Q inverseL Q*
+      ≈ identity) →
+  (db : Coarse → Fine) →
+  (dλ : Coarse → Coarse) →
+  LinearisedKKTSystem L Q Q* db dλ →
+  dλ ≈ multiplierDerivative coarseSchur
+linearisedKKTMultiplierUnique
+  L inverseL Q Q* coarseSchur
+  fineLeftInverse coarseLeftInverse db dλ system dc =
+  let
+    stationarity = proj₁ system dc
+    constraint = proj₂ system dc
+    dbRepresentation = trans
+      (sym (fineLeftInverse (db dc)))
+      (cong inverseL stationarity)
+    covarianceEquation = trans
+      (sym (cong Q dbRepresentation))
+      constraint
+  in
+    trans
+      (sym (coarseLeftInverse (dλ dc)))
+      (cong coarseSchur covarianceEquation)
+
+-- The fine/background derivative is unique as well.
+linearisedKKTBackgroundUnique :
+  {Fine Coarse : Set} →
+  (L inverseL : Fine → Fine) →
+  (Q : Fine → Coarse) →
+  (Q* : Coarse → Fine) →
+  (coarseSchur : Coarse → Coarse) →
+  (fineLeftInverse : inverseL ∘ L ≈ identity) →
+  (coarseLeftInverse :
+    coarseSchur ∘ constrainedCovariance Q inverseL Q*
+      ≈ identity) →
+  (db : Coarse → Fine) →
+  (dλ : Coarse → Coarse) →
+  LinearisedKKTSystem L Q Q* db dλ →
+  db ≈ constrainedBackgroundDerivative inverseL Q* coarseSchur
+linearisedKKTBackgroundUnique
+  L inverseL Q Q* coarseSchur
+  fineLeftInverse coarseLeftInverse db dλ system dc =
+  let
+    stationarity = proj₁ system dc
+    dbRepresentation = trans
+      (sym (fineLeftInverse (db dc)))
+      (cong inverseL stationarity)
+    multiplierEquality = linearisedKKTMultiplierUnique
+      L inverseL Q Q* coarseSchur
+      fineLeftInverse coarseLeftInverse
+      db dλ system dc
+    p2 = cong
+      (λ multiplier → inverseL (Q* multiplier))
+      multiplierEquality
+  in
+    trans dbRepresentation p2
+
+linearisedKKTSolutionUnique :
+  {Fine Coarse : Set} →
+  (L inverseL : Fine → Fine) →
+  (Q : Fine → Coarse) →
+  (Q* : Coarse → Fine) →
+  (coarseSchur : Coarse → Coarse) →
+  (fineLeftInverse : inverseL ∘ L ≈ identity) →
+  (coarseLeftInverse :
+    coarseSchur ∘ constrainedCovariance Q inverseL Q*
+      ≈ identity) →
+  (db : Coarse → Fine) →
+  (dλ : Coarse → Coarse) →
+  LinearisedKKTSystem L Q Q* db dλ →
+  (db ≈ constrainedBackgroundDerivative inverseL Q* coarseSchur)
+  ×
+  (dλ ≈ multiplierDerivative coarseSchur)
+linearisedKKTSolutionUnique
+  L inverseL Q Q* coarseSchur
+  fineLeftInverse coarseLeftInverse db dλ system =
+  linearisedKKTBackgroundUnique
+    L inverseL Q Q* coarseSchur
+    fineLeftInverse coarseLeftInverse db dλ system
+  ,
+  linearisedKKTMultiplierUnique
+    L inverseL Q Q* coarseSchur
+    fineLeftInverse coarseLeftInverse db dλ system
 
 -- Specialisation where the coarse operator is constructed by the supplied
 -- inverse implementation.
