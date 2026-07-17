@@ -76,12 +76,13 @@ jobs:
               DASHI/Physics/YangMills/BalabanConstrainedKKTLinearisation.agda
               DASHI/Physics/YangMills/BalabanConstrainedEnvelopeHessian.agda
             )
+            cd /tmp
             for target in "${targets[@]}"; do
               echo "Checking: $target"
               "$AGDA_BIN" \
                 --no-libraries --no-default-libraries \
-                -i . -i "$STDLIB_INCLUDE" \
-                "$target"
+                -i "$GITHUB_WORKSPACE" -i "$STDLIB_INCLUDE" \
+                "$GITHUB_WORKSPACE/$target"
             done
           } > agda-focused-check.log 2>&1
           status=$?
