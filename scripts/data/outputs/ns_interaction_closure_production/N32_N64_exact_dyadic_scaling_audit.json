@@ -1,0 +1,30 @@
+{
+  "authority": {
+    "clay_authority": false,
+    "finite_static_audit_only": true,
+    "theorem_authority": false
+  },
+  "contract": "ns_fixed_torus_dyadic_scaling_covariance_audit",
+  "decision": "literal dyadic copies are scaling-conjugate diagnostics; quotient them out and test non-self-similar profile geometry instead",
+  "expected": {
+    "critical_mass_factor": 8.0,
+    "nonlinear_rate_factor": 32.0,
+    "packet_factor": 8.0,
+    "viscous_rate_factor": 32.0
+  },
+  "finite_static_scaling_audit_passes": true,
+  "observed": {
+    "nonlinear_rate_factor": 32.00000000000008,
+    "packet_factor": 8.0,
+    "replenishment_ratio_base": 0.4442432374812693,
+    "replenishment_ratio_scaled": 0.44424323748127037,
+    "viscous_rate_factor": 32.0
+  },
+  "relative_errors": {
+    "nonlinear_rate": 2.4424906541753444e-15,
+    "packet": 0.0,
+    "replenishment_ratio": 2.3741765420534255e-15,
+    "viscous_rate": 0.0
+  },
+  "scale": 2
+}

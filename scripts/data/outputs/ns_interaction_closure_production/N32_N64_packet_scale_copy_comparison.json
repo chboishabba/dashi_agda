@@ -1,0 +1,63 @@
+{
+  "authority": {
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "theorem_authority": false
+  },
+  "contract": "ns_packet_dyadic_scale_copy_nonpromoting_comparison",
+  "decision": "retention strengthens, but the declared fixed shell-critical mass does not preserve nonlinear-to-viscous strength; repair the dynamical scaling convention before using this pair to support or reject a scale-uniform packet contraction",
+  "rows": [
+    {
+      "actual_time": 15.625,
+      "declared_critical_mass": 1.0,
+      "designed_target_activity_capture": 0.00562085206085428,
+      "dt": 0.001,
+      "fixed_heat_compensated": 0.23686808096726306,
+      "fixed_packet_recurrence": 0.14366775341393953,
+      "initial_nonlinear_to_viscous_ratio": 0.4442433361761566,
+      "initial_target_dissipation": 3.9999998564141492,
+      "initial_target_nonlinear_rate": 0.003553946561835138,
+      "intended_loop_balance": 0.024629430118554296,
+      "moving_heat_compensated": 0.4079760607057314,
+      "moving_packet_recurrence": 0.30991794489673363,
+      "n": 32,
+      "negative_transfer_over_viscous": 0.8367730832404089,
+      "positive_transfer_over_viscous": 0.45350250555582156,
+      "receipt": "scripts/data/outputs/ns_interaction_closure_production/quarter_donor-heavy_rank01_phase003_closure1024.json",
+      "scale_displacement": 2,
+      "target_shell": 2
+    },
+    {
+      "actual_time": 3.90625,
+      "declared_critical_mass": 1.0,
+      "designed_target_activity_capture": 0.004717580439988314,
+      "dt": 0.00025,
+      "fixed_heat_compensated": 1.1899564900280044,
+      "fixed_packet_recurrence": 0.7217450949260152,
+      "initial_nonlinear_to_viscous_ratio": 0.15706370187307034,
+      "initial_target_dissipation": 16.00000116453657,
+      "initial_target_nonlinear_rate": 0.0050260388257511,
+      "intended_loop_balance": 0.006776214326256535,
+      "moving_heat_compensated": 0.7609178864779576,
+      "moving_packet_recurrence": 0.5780292775131984,
+      "n": 64,
+      "negative_transfer_over_viscous": 0.027447453096592817,
+      "positive_transfer_over_viscous": 0.6587692324973643,
+      "receipt": "scripts/data/outputs/ns_interaction_closure_production/quarter_N64j3_donor-heavy_rank01_phase003_scale-copy.json",
+      "scale_displacement": 2,
+      "target_shell": 3
+    }
+  ],
+  "transitions": [
+    {
+      "fixed_recurrence_ratio_of_ratios": 5.023709759325763,
+      "from_n": 32,
+      "initial_nonlinear_to_viscous_ratio_of_ratios": 0.35355330982565286,
+      "moving_heat_compensated_change": 0.35294182577222616,
+      "moving_recurrence_ratio_of_ratios": 1.8651042543077039,
+      "net_transfer_balance_change": 1.0145923570853588,
+      "to_n": 64
+    }
+  ],
+  "warning": "two finite periodic carriers do not establish an asymptotic scaling law; the declared critical-mass normalization is a shell-packet convention, not by itself a continuum Navier--Stokes scaling theorem"
+}

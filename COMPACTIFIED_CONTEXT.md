@@ -2,6 +2,19 @@
 
 ## Current Interaction-Closure Pivot
 
+- `scripts/ns_normalized_profile_quotient_audit.py` is now the first
+  non-self-similar profile receipt.  It creates static finite Fourier profiles
+  with angular width, radial width, helicity bias and phase/spatial coherence,
+  fixes finite critical mass exactly, and treats chi matching as an explicit
+  rejection slice because a single scalar cannot set both invariants at fixed
+  carrier scale.  Its shell-offset/angle/locality stratified estimator passed
+  an N16 exact check with `0.953%` relative error at 256 samples per stratum.
+  It is candidate-only.  It now has state-dependent plus/mixed/minus
+  helicity-sector bins and optional imported finite-Galerkin evolution with
+  moving-packet/heat/displacement and coarse-Hellinger-turnover telemetry; a
+  one-step N16 CPU smoke passed.  A bounded chi-matched production census is
+  the next experiment.
+
 - The first production closure replay is complete.  Its 32 selected outputs
   cover only `.125755` of endpoint target-shell absolute modal activity, so a
   full-shell regime is not yet classified.  On that selected carrier the
@@ -13,19 +26,35 @@
   normalized support fractions, expanded capture curves, and dominant-set
   overlap.  `ns_interaction_closure_report.py` compares truncated rank models
   but never extrapolates an uncertified tail into a theorem.  A 256-output
-  256-output replay of the same phase completed with endpoint output capture
+  replay of the same phase completed with endpoint output capture
   `.571846`, `M90=211662`, `M99=322303`, `exp(H)=221772.8`, IPR support
   `143060.3`, top-1024 capture `.034997`, and adjacent retained-core Jaccard
   around `.01--.019`.  This is effectively dense and strongly switching on
-  the selected carrier.  A 1024-output replay is running to cross `.9` output
-  capture before assigning a provisional full-shell regime.  No NS/Clay gate
-  changed.
+  the selected carrier.
+- The 1024-output confirmation captures all target-shell modal activity and
+  fixes the finite-run classification: endpoint interaction
+  `M50/M90/M99=204292/742606/1143874`, Shannon support `770516`, IPR support
+  `484952`, top-2048 capture `.02475`, and adjacent top-set Jaccard only
+  `.045--.081`.  The observed closure is provisionally full-shell effectively
+  dense and strongly switching for this N32 trajectory.  Sparse graph tuning
+  and mixed polarization of the nine-triad graph are retired.  The next
+  mathematical target is a scale-stable aggregate delocalization/turnover
+  theorem, not a finite interaction graph.  No NS/Clay gate changed.
+- The cyclic network now supports the exact `(N64,j3)` dyadic scale copy.
+  Static validation preserves role shares and dealiased support.  The N64
+  mass-1 trajectory has `R_move=.578029` versus N32 `.309918`, but its initial
+  nonlinear-to-viscous ratio is only `.353553` of N32, so it is not a
+  dynamically similar critical copy.  N64 mass `8` restores exact finite
+  scaling (`packet x8`, nonlinear and viscous rates `x32`, invariant ratio to
+  `2.5e-15`).  Literal scale copies are now quotiented out; no naive N128 run
+  is planned.  Next work varies non-self-similar profile geometry at fixed
+  dynamical strength and estimates the coarse interaction measure.
 - The bounded sparse-loop tuning tranche is closed.  On donor-heavy backbone
   rank `1`, four phase streams yield `R_move=.2747..3099`; the best phase has
   only `.00562` designed target capture and `.96957` support leakage.  Since
   `max R_move < .4` and capture stays `<.1`, further phase tuning of the
-  nine-triad graph is retired.  An exact 32-output interaction-closure replay
-  of the best phase is running.
+  nine-triad graph is retired.  Its completed 32/256/1024-output replay ladder
+  is summarized above.
 - The empirical priority has moved from tuning the nine designed triads to
   measuring the full nonlinear interaction closure.  The packet search now
   has an opt-in exact unordered convolution-pair audit on a declared set of

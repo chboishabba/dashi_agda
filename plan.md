@@ -82,66 +82,17 @@ All canonical chain steps have now executed and Lemma A/B elimination is lodged 
 - Which currently exported theorem bundles still import
   `QuadraticFormEmergence` transitively and need rerouting first?
 
-## NS Experimental Sidecar (2026-07-16, non-canonical)
+## NS Experimental Sidecar (2026-07-17, non-canonical)
 
-- The current highest-alpha pivot is interaction-closure measurement, prompted
-  by `~97--98%` support leakage and only `~1--3%` designed target-activity
-  capture in the coarse packet screen.  Future diagnostic runs should enable
-  exact unordered convolution enumeration on a declared dominant target-output
-  carrier, inspect top-M activity capture and entropy, then decide whether the
-  observed closure is sparse, broad-but-structured, or effectively dense.
-  Mixed polarization of the original nine-triad graph is deferred until that
-  closure diagnosis says the graph remains dynamically relevant.
-  The first 32-output production replay is now complete and proves only a
-  selected-carrier statement: endpoint output-modal capture is `.125755`,
-  while that carrier has `M90=27260`, `M99=41257`, and `exp(H)=28716.7`.
-  The 256-output replay now shows an effectively dense and strongly switching
-  selected carrier (`.571846` output capture, `M90=211662`, `exp(H)=221772.8`,
-  adjacent top-1024 Jaccard near `.01`).  The next and final widening milestone
-  is a 1024-output replay; use its exact output `M50/M90/M99` receipt and assign
-  a provisional full-shell regime only if output capture reaches `.9`.
-
-- The finite-Galerkin cyclic-feedback packet search is an empirical
-  falsification lane only.  Its next milestone is staged endpoint selection
-  and moving-packet recurrence at the correct `j=2` viscous time.  The first
-  dynamic enlargement is a pure-helicity seed plus constrained four-role
-  critical-mass allocation (target/donor/outlet/feedback), with phases
-  re-sampled after each sign/share choice.  A mixed-polarization backbone
-  comes only after the pure family is exhausted; an N32-to-N64 scale copy is
-  justified only if an adversarial family survives.
-- No result from this sidecar is a closure-spine dependency or a Navier--Stokes
-  promotion condition.  It may only motivate a later theorem surface after a
-  stable, adversarially tested inequality has been identified.
-- The current concrete screen is a staged pure-helicity/allocation family:
-  six coarse four-role critical-mass allocations, static 64-backbone factor
-  classification, evolved quarter-window survival, then half/full-window
-  promotion of diverse survivors.  Endpoint runs must emit the designed
-  triad-only conservative role-transfer ledger, including intended-loop gross
-  throughputs and target-shell capture, alongside support leakage.
-  This is a diagnostic allocation convention, not a full-convolution source
-  attribution or a Navier--Stokes estimate.
-- The role-transfer telemetry now reports gross directed designed-network
-  throughputs, not a signed net-ratio proxy: `T→O`, `O→F`, `F→T`, their
-  bounded loop-closure fraction and three-stage balance, plus a distinct
-  designed-versus-full target-shell activity capture ratio.  Quarter-window
-  prefixes are diagnostic checkpoints.  They do not turn the nine-triad
-  allocation convention into a full-convolution attribution or an NS bound.
-- `scripts/ns_phase_locked_packet_staged_screen.py` now turns that protocol
-  into an explicit, non-executing quarter-window task manifest.  It runs only
-  cheap allocation-specific static audits, selects sign-diverse backbone ranks
-  inside a high-envelope pool, and pins one deterministic phase-stream index
-  per planned CFD task.  It deliberately does not launch the potentially
-  days-long GPU batch or claim its static schedule predicts endpoint survival.
-- `scripts/ns_phase_locked_packet_screen_collect.py` collects any completed
-  subset of those tasks.  It ranks actual moving-packet survival first while
-  retaining a small telemetry Pareto frontier and the best row per allocation
-  and helicity seed.  This supports deliberate half-window promotion rather
-  than automatic selection from static envelope scores.
-- The next execution step is a bounded, serial-or-two-at-most quarter-window
-  tranche.  Every manifest task must first pass the exact no-CFD admissibility
-  surface (same helicity rank, phase stream, dominance, tightness, and role
-  floors) so an allocation schedule cannot confuse a rejected setup with an
-  endpoint failure.
+- **Branch-Closing Result (Finite Sparse-Network Retired)**: The 1024-output replay completed with 100% modal activity capture and classified the target shell as effectively dense (`M90 = 742,606`, `M90 / N_nonzero ~ 0.549`, Shannon fraction `~0.57`, IPR fraction `~0.36`, and `C(2048) = 0.0247` with near-total turnover). This retires the sparse finite-network mechanism for the tested critical packet. Future work will not perform phase tuning, pure-helicity completion, mixed-polarization, or search for hand-designed networks.
+- **Scaling Audit Closed**: The `(N32,j2,mass=1) -> (N64,j3,mass=8)` map has exact finite static factors `packet=8`, `nonlinear rate=32`, `viscous rate=32`, and invariant replenishment ratio.  Literal dyadic copies are scaling-conjugate diagnostics, so an N128 copy cannot discover a new theorem.
+- **Next High-Alpha Experiment**:
+  - Work on the quotient by translation, dyadic scaling, and amplitude.
+  - Generate non-self-similar profile deformations at fixed nonlinear-to-viscous strength: angular concentration, shell-width, helicity mixture, and spatial localization. **In progress:** `scripts/ns_normalized_profile_quotient_audit.py` constructs the static shape axes, fixes finite critical mass exactly, and makes chi matching an explicit rejection-slice condition rather than a hidden rescaling.
+  - For each profile, evaluate the coarse pushforward interaction measure $\pi_\#\mu_t$ using shell offsets, input angle, helicity sector, and locality ratio; use stratified estimation with uncertainty when exact enumeration is too large. **Started:** the profile audit has a finite-stratum shell-offset/angle/locality/helicity estimator plus an exact small-carrier validation surface and finite-Galerkin endpoint turnover telemetry. A bounded chi-matched production census remains pending.
+  - Search for a profile-uniform parabolic-window alternative: recurrence, coarse support broadening/turnover, or strict dissipative loss.
+  - Only after that alternative survives adversarial profile variation should it become a theorem-facing rigidity conjecture.
+- No result from this sidecar is a closure-spine dependency or a Navier--Stokes promotion condition. It may only motivate a later theorem surface after a stable, adversarially tested inequality has been identified.
 
 ## Next Skill
 `autonomous-orchestrator` to manage the post-checklist closure runway in

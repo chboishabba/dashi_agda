@@ -22,6 +22,35 @@
   dense and strongly switching, not a sparse closure graph.  Since output
   capture remains below `.9`, launched a 1024-output confirmation rather than
   promoting this to a full-shell empirical classification.
+- Collected the 1024-output confirmation.  It captures all target-shell modal
+  activity; exact output `M90=583` and `M99=805`.  The full audited carrier has
+  interaction `M50/M90/M99=204292/742606/1143874`, Shannon effective support
+  `770516`, IPR support `484952`, and only `.02475` activity in its top 2048.
+  Adjacent top-2048 overlap remains `.045--.081` after the initial transition,
+  with zero endpoint overlap against the initial set.  This provisionally
+  classifies the finite N32 target shell as effectively dense and strongly
+  switching, retires sparse graph and mixed-polarization tuning on the
+  nine-triad model, and moves theorem discovery to scale-stable aggregate
+  delocalization/turnover.  No NS/BKM/Clay gate changed.
+- Generalized the cyclic packet constructor from the canonical `(N32,j2)`
+  carrier to its exact dyadic `(N64,j3)` scale copy.  Backend-none receipts
+  verify doubled targets, zero-sum triads, dealiased support, admissibility,
+  and role-share preservation.  Started the dynamically matched N64 run with
+  `dt=.00025` and the same dimensionless quarter-window.  Closure is disabled:
+  the follow-up must estimate the coarse pushforward interaction measure with
+  uncertainty rather than enumerate the billion-scale channel carrier.
+- Collected the fixed-shell-mass N64 trajectory: `R_move=.578029`, fixed
+  retention `.721745`, and moving heat compensation `.760918`, versus N32
+  `.309918/.143668/.407976`.  The transfer balance flips toward replenishment,
+  while designed-graph capture falls to `.004718`; the full convolution is
+  authoritative.  The comparison is not scale-covariant, however: initial
+  nonlinear-to-viscous ratio drops from `.444243` to `.157064`.
+- Added `ns_packet_scale_copy_compare.py` and
+  `ns_dyadic_scaling_covariance_audit.py`.  The latter verifies that N64 mass
+  `8` restores the exact fixed-torus NS exponents: packet factor `8`, nonlinear
+  and viscous factors `32`, invariant replenishment ratio, relative errors at
+  or below `2.5e-15`.  Retired naive N128 scale copies; future adversaries must
+  vary normalized profile shape on the scaling quotient.
 - Finished donor-heavy rank-1 phase streams `0..3`.  Phase `3` leads at
   `R_move=.309918`, but capture is only `.00562` and support leakage `.96957`;
   no sampled phase crosses the `.4` continuation threshold.  Retired further
@@ -5365,3 +5394,27 @@
   `.009602`, support leakage `.974496`; it underperforms the balanced seed.
   Started the feedback-heavy quarter-window contrast to test whether return
   channel mass, rather than outlet mass, is the limiting feature.
+# 2026-07-17 — quotient profile audit and coarse estimator started
+
+- Implemented `scripts/ns_normalized_profile_quotient_audit.py` as the first
+  empirical object that moves transversely to the exact translation/amplitude/
+  dyadic-NS-scaling orbit.  It creates deterministic profile families with
+  angular, radial, helicity and phase-coherence coordinates, exact finite
+  critical-mass normalization, and explicit chi-slice matching across phase
+  trials.
+- Added a finite-stratum uniform sampler for unsigned canonical pair activity.
+  The strata are `(input shell offset left, input shell offset right, angle
+  bin, locality bin)`.  It reports the Horvitz--Thompson-equivalent total,
+  within-stratum sampling variance, and a clearly non-certified nominal
+  interval.  An N16 exact enumeration check gave relative error `0.00953` at
+  256 samples per stratum.
+- Pending: use these static profiles as initial states in the imported finite
+  Galerkin solver; add helicity-sector coarse pushforward, time turnover, and
+  a chi-matched profile census.  No theorem, BKM, or Clay status changed.
+
+- Extended the audit with optional finite-Galerkin evolution, recording
+  moving-packet survival, heat compensation, scale displacement, and a coarse
+  interaction-measure Hellinger turnover between initial and endpoint states.
+  The bins now include state-dependent plus/mixed/minus helical labels in
+  addition to shell offsets, input-angle and locality.  One-step N16 CPU smoke
+  passed; no production duration was run from this implementation step.

@@ -1,5 +1,41 @@
 # 2026-07-17 NS interaction-closure pivot
 
+- Added `scripts/ns_normalized_profile_quotient_audit.py`, the first
+  non-self-similar profile-side receipt after the scale-copy audit.  It
+  generates reality-symmetric Leray Fourier fields whose independent shape
+  axes are angular width, radial log-width, helicity bias, and phase/spatial
+  coherence; it fixes finite dyadic critical mass exactly and records chi as
+  a matched-or-rejected coordinate.  It does not claim that one scalar can
+  impose both mass and chi at fixed carrier scale.  Its coarse interaction
+  receipt stratifies canonical input pairs by shell offsets, input angle and
+  locality, reports population/sample counts and Monte-Carlo uncertainty, and
+  has an opt-in exact small-carrier validation.  N16 / four-output smoke:
+  critical mass `1.0000000000000002`, and the stratified estimate differs by
+  `0.953%` from exact selected-carrier absolute activity.  This is an
+  estimator validation only; no profile-uniform law has been fitted.
+- The profile audit now also has an opt-in imported finite-Galerkin evolution
+  receipt.  It records moving-packet recurrence, exact-spectrum heat
+  compensation, dominant-shell displacement, and Hellinger turnover of the
+  coarse shell/angle/locality/helicity pushforward between start and endpoint.
+  A one-step N16 CPU smoke passed.  No production profile window has been run
+  yet; the next action is a bounded chi-matched profile census, not a new
+  literal scale copy.
+
+- **Decision: Sparse Finite-Network Retired**: The sparse finite-network mechanism is retired for the tested finite packet. The 1024-output replay provisionally classifies its target shell as effectively dense with strong dominant-set switching, so the nine-triad core does not control this trajectory. Future tuning of that hand-designed graph is retired; this is not a universal finite-network impossibility theorem.
+- **New Critical Path**:
+  `quotient exact NS scaling -> non-self-similar normalized profile families -> coarse full-interaction measure -> scale-breaking profile rigidity conjecture`.
+  Literal dyadic copies are dynamically conjugate and cannot reveal the missing rigidity theorem.
+- Implemented the exact cyclic-network dyadic scale-copy constructor for
+  `(N32,j2) -> (N64,j3)`.  Static receipts preserve the requested critical
+  role shares and double every physical wavevector while remaining inside the
+  dealiased carrier.  The fixed-shell-mass N64 trajectory completed with
+  `R_move=.57803` versus N32 `.30992`, but it does not preserve dynamical
+  similarity: initial nonlinear-to-viscous ratio falls from `.44424` to
+  `.15706` (factor `.353553`).  Raising N64 critical mass from `1` to `8`
+  restores the exact fixed-torus NS scaling: packet mass scales by `8`, both
+  nonlinear and viscous rates by `32`, and the replenishment ratio agrees to
+  `2.4e-15`.  Therefore no naive N128 copy is scheduled.  The next family must
+  vary profile shape after quotienting translation, scaling, and amplitude.
 - The exact 32-output replay completed.  At the endpoint those outputs cover
   only `.125755` of full target-shell absolute modal activity, so no full-shell
   closure regime is assigned.  Inside that declared carrier the interaction
@@ -18,6 +54,23 @@
   descriptive and truncated, and it withholds full-shell classification below
   `.9` output-modal capture.  Python compile, CPU quarter-checkpoint smokes,
   JSON serialization, and `git diff --check` pass.
+- The 1024-output replay completed with all five quarter checkpoints and
+  `output_modal_activity_capture = 1.0` (1024 of 1852 target-shell modes
+  capture 100% of modal activity), exceeding the `.9` full-shell classification
+  threshold.  The report classifies the full target shell as
+  **effectively dense with strong dominant-set switching**.  At the endpoint:
+  `M50/M90/M99 = 204292/742606/1143874` out of `1352440` nonzero interactions
+  in a `16778112`-element canonical space; Shannon effective support `770516`
+  (`.569` fraction); IPR effective support `484952` (`.358` fraction); the
+  retained top 2048 interactions carry only `.0247` of endpoint activity.
+  Retained-set Jaccard overlap to initial is `0.0` (complete turnover); to
+  the previous checkpoint is `.081`.  Stretched-exponential `beta = 0.2` and
+  power-law `alpha = 0.31` at endpoint.  Every interior checkpoint (Q1–Q3)
+  shows the same broad, rapidly switching regime with retained-to-initial
+  overlap below `.001`.  The geometric structure at the endpoint is dominated
+  by shell-pair `(0,2)` at `.466` with `.503` nonlocal ratio.  This closes
+  the interaction-closure regime question for the donor-heavy rank-01 phase-003
+  carrier on the nine-triad three-target cyclic graph at N32 `j=2`.
 - The 256-output replay completed with all five quarter checkpoints.  Endpoint
   output-modal capture rises to `.571846`, still below the `.9` full-shell
   classification threshold.  On this much wider carrier the endpoint has
@@ -27,9 +80,7 @@
   `.01--.019`, with zero overlap against the initial core.  Every interior
   checkpoint is similarly broad.  This retires a persistent or wandering
   sparse empirical closure graph for the selected carrier and identifies an
-  effectively dense, rapidly switching interaction field there.  A final
-  1024-output replay is running to exceed `.9` output capture before assigning
-  the same classification provisionally to the full target shell.
+  effectively dense, rapidly switching interaction field there.
 - Closed the bounded donor-heavy pure-helicity phase tranche.  Four phase
   streams on the best sign-diverse backbone give `R_move=.2747..3099`; the
   best phase (`3`) still has only `.00562` designed target capture and `.96957`
