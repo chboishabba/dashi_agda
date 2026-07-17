@@ -10,6 +10,7 @@ open import Data.Nat.Base using (ℕ)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ
+  ; _+ℝ_
   ; _-ℝ_
   ; cong
   ; trans
