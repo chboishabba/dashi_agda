@@ -51,6 +51,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanPeriodicGaugeTransport.agda
               DASHI/Physics/YangMills/BalabanGaugeTransformationCovariance.agda
               DASHI/Physics/YangMills/BalabanPeriodicPlaquetteHolonomy.agda
+              DASHI/Physics/YangMills/BalabanLatticeAdjointCovariantDerivative.agda
               DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
               DASHI/Physics/YangMills/BalabanConstrainedGaussianCarrierAlgebra.agda
               DASHI/Physics/YangMills/BalabanFiniteConstraintChain.agda
