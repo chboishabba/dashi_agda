@@ -1,0 +1,38 @@
+name: DASHI theory atlas
+
+on:
+  pull_request:
+    paths:
+      - "DASHI/**/*.agda"
+      - "config/dashi-*-atlas.json"
+      - "scripts/materialize_dashi_theory_atlas.py"
+      - "tests/test_materialize_dashi_theory_atlas.py"
+  push:
+    branches: [master]
+    paths:
+      - "DASHI/**/*.agda"
+      - "config/dashi-*-atlas.json"
+      - "scripts/materialize_dashi_theory_atlas.py"
+      - "tests/test_materialize_dashi_theory_atlas.py"
+
+jobs:
+  validate-atlas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate selected declarations and graph
+        run: python scripts/materialize_dashi_theory_atlas.py --check
+      - name: Run atlas regression tests
+        run: python -m unittest discover -s tests -p 'test_materialize_dashi_theory_atlas.py'
+      - name: Materialise JSON and SVG
+        run: python scripts/materialize_dashi_theory_atlas.py --generated-at "1970-01-01T00:00:00+00:00"
+      - name: Upload generated atlas
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashi-yang-mills-critical-path-atlas
+          path: |
+            artifacts/dashi-yang-mills-critical-path.json
+            artifacts/dashi-yang-mills-critical-path.svg
