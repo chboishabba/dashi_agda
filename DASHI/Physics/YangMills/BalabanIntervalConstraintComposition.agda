@@ -17,8 +17,16 @@ open import DASHI.Physics.YangMills.BalabanNestedConstraintMinimum using
   )
 open import DASHI.Physics.YangMills.BalabanIntervalConstraintChain using
   ( intervalConstraint )
-open import DASHI.Physics.YangMills.BalabanIntervalCompositionAlgebra using
-  ( natAddAssoc )
+
+-- This proof is kept in the same module as `transport`, so all dependent uses
+-- reduce against one canonical equality witness rather than extensionally
+-- equal but definitionally distinct `cong` implementations.
+natAddAssocTransport :
+  ∀ a b c →
+  (a + b) + c ≡ a + (b + c)
+natAddAssocTransport zero b c = refl
+natAddAssocTransport (suc a) b c =
+  cong suc (natAddAssocTransport a b c)
 
 transport :
   (Space : ℕ → Set) →
@@ -43,14 +51,14 @@ intervalConstraintAppend :
   (Q : (i : ℕ) → Space i → Space (suc i)) →
   ∀ k n m →
   (x : Space k) →
-  transport Space (natAddAssoc m n k)
+  transport Space (natAddAssocTransport m n k)
     (intervalConstraint Space Q k (m + n) x)
   ≡ intervalConstraint Space Q (n + k) m
       (intervalConstraint Space Q k n x)
 intervalConstraintAppend Space Q k n zero x = refl
 intervalConstraintAppend Space Q k n (suc m) x =
   let
-    indexEquality = natAddAssoc m n k
+    indexEquality = natAddAssocTransport m n k
     prefix = intervalConstraint Space Q k (m + n) x
     p1 = transportStep Space Q indexEquality prefix
     p2 = cong
