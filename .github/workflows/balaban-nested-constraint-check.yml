@@ -48,6 +48,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanPeriodicLatticeBonds.agda
               DASHI/Physics/YangMills/BalabanPeriodicLatticePaths.agda
               DASHI/Physics/YangMills/BalabanPeriodicLatticeEnumeration.agda
+              DASHI/Physics/YangMills/BalabanBlockedPeriodicLattice.agda
               DASHI/Physics/YangMills/BalabanPeriodicGaugeTransport.agda
               DASHI/Physics/YangMills/BalabanGaugeTransformationCovariance.agda
               DASHI/Physics/YangMills/BalabanPeriodicPlaquetteHolonomy.agda
