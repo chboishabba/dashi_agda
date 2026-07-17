@@ -8,13 +8,14 @@ module DASHI.Physics.YangMills.BalabanIntervalToPrefixBridge where
 open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Data.Nat.Base using (ℕ; zero; suc; _≤_)
+open import Data.Nat.Base using (ℕ; zero; suc; _≤_; _+_)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ
   ; _+ℝ_
   ; _≤ℝ_
   ; cong
+  ; trans
   )
 open import DASHI.Geometry.Gauge.SUNPrimitives using
   ( clayYangMillsPromoted )
@@ -36,6 +37,10 @@ open import DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget using
 open import DASHI.Physics.YangMills.BalabanIntervalDeterminantAlgebra using
   ( intervalSum )
 
+natAddZeroRight : ∀ k → k + zero ≡ k
+natAddZeroRight zero = refl
+natAddZeroRight (suc k) = cong suc (natAddZeroRight k)
+
 intervalZeroStartEqualsPrefix :
   (step : BalabanInverseSquareCouplingStep) →
   ∀ k →
@@ -43,9 +48,19 @@ intervalZeroStartEqualsPrefix :
     ≡ betaPrefixSum step k
 intervalZeroStartEqualsPrefix step zero = refl
 intervalZeroStartEqualsPrefix step (suc k) =
-  cong
-    (λ prefix → prefix +ℝ betaCorrection step (suc k))
-    (intervalZeroStartEqualsPrefix step k)
+  let
+    sourceIndex = k + zero
+    ih = intervalZeroStartEqualsPrefix step k
+    p1 = cong
+      (λ prefix →
+        prefix +ℝ betaCorrection step (suc sourceIndex))
+      ih
+    p2 = cong
+      (λ index →
+        betaPrefixSum step k +ℝ betaCorrection step (suc index))
+      (natAddZeroRight k)
+  in
+    trans p1 p2
 
 replaceLeft :
   ∀ {a b c : ℝ} →
