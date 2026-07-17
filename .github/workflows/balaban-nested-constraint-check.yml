@@ -15,7 +15,7 @@ permissions:
 jobs:
   focused-agda:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
 
@@ -28,9 +28,17 @@ jobs:
         shell: bash
         run: |
           set +e
-          nix shell .#agda-with-dashi-deps --command bash -lc '
+          {
             set -euo pipefail
-            agda --version
+            AGDA_BIN="$(nix build --no-link --print-out-paths nixpkgs#agda)/bin/agda"
+            STDLIB_OUT="$(nix build --no-link --print-out-paths nixpkgs#agdaPackages.standard-library)"
+            STDLIB_FILE="$(find "$STDLIB_OUT" -type f -path '*/Data/Product.agda' -print -quit)"
+            if [ -z "$STDLIB_FILE" ]; then
+              echo "Unable to locate Data/Product.agda under $STDLIB_OUT" >&2
+              exit 2
+            fi
+            STDLIB_INCLUDE="${STDLIB_FILE%/Data/Product.agda}"
+            "$AGDA_BIN" --version
             targets=(
               DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
               DASHI/Physics/YangMills/BalabanFiniteConstraintChain.agda
@@ -70,12 +78,15 @@ jobs:
             )
             for target in "${targets[@]}"; do
               echo "Checking: $target"
-              agda -i . -l standard-library "$target"
+              "$AGDA_BIN" \
+                --no-libraries --no-default-libraries \
+                -i . -i "$STDLIB_INCLUDE" \
+                "$target"
             done
-          ' > agda-focused-check.log 2>&1
+          } > agda-focused-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 80 agda-focused-check.log
+          tail -n 100 agda-focused-check.log
           exit 0
 
       - name: Upload focused Agda log
