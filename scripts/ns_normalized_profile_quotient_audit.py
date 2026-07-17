@@ -68,6 +68,8 @@ def parse_args() -> argparse.Namespace:
                         help="absolute is calibration-only; positive/negative preserve signed nonlinear direction")
     parser.add_argument("--chi-attempts", type=int, default=8)
     parser.add_argument("--chi-tolerance", type=float, default=0.05)
+    parser.add_argument("--require-chi-tolerance", action="store_true",
+                        help="reject a candidate unless --chi-target is met within --chi-tolerance")
     parser.add_argument("--target-dominance-min", type=float, default=0.8,
                         help="reject a profile trial unless its target shell is this fraction of the largest packet")
     parser.add_argument("--output-modes", type=int, default=16,
@@ -96,6 +98,13 @@ def parse_args() -> argparse.Namespace:
                         help="write the exact selected raw Fourier state and selection metadata as a compressed NPZ receipt")
     parser.add_argument("--state-input", type=Path, default=None,
                         help="load an exact compressed raw Fourier state saved by --save-selected-state; bypass profile regeneration")
+    parser.add_argument("--state-perturbation", choices=("none", "phase", "coherence", "angular", "radial", "helicity"),
+                        default="none",
+                        help="deterministic transverse perturbation of --state-input before critical renormalisation")
+    parser.add_argument("--perturb-epsilon", type=float, default=0.0,
+                        help="signed local perturbation magnitude; zero preserves the saved state exactly")
+    parser.add_argument("--perturb-seed", type=int, default=20260719,
+                        help="deterministic tangent-realisation seed for --state-perturbation")
     parser.add_argument("--continuation-state", action="store_true",
                         help="treat --state-input as a finite-Galerkin restart: preserve its exact state but skip fresh-profile signed-chi and target-dominance gates")
     parser.add_argument("--save-final-state", type=Path, default=None,
@@ -183,6 +192,82 @@ def profile_raw_hat(args: argparse.Namespace, seed: int) -> np.ndarray:
         raw[mode_index(mode, n)] = coefficient
         raw[mode_index(negate(mode), n)] = np.conjugate(coefficient)
     return normalise_critical_mass(raw, args.critical_mass)
+
+
+def perturb_saved_state(args: argparse.Namespace, raw_hat: np.ndarray) -> np.ndarray:
+    """Apply one state-anchored, reality-preserving local profile deformation.
+
+    The directions are finite-dimensional diagnostics, not tangent vectors to a
+    continuum quotient.  They deliberately begin from the exact saved state,
+    then restore the declared finite critical mass.  Translation, amplitude,
+    and literal dyadic scale copies are not used as perturbation directions.
+    """
+    if args.state_perturbation == "none" or args.perturb_epsilon == 0.0:
+        return raw_hat.copy()
+    n = raw_hat.shape[0]
+    rng = np.random.default_rng(args.perturb_seed)
+    result = raw_hat.copy()
+    axis = np.asarray(args.angular_axis, dtype=np.float64)
+    axis_norm = float(np.linalg.norm(axis))
+    if axis_norm <= 1.0e-30:
+        raise ValueError("angular axis must be nonzero")
+    axis /= axis_norm
+    centre = float(2 ** args.target_shell)
+    # Centre real amplitude directions in the finite critical-mass metric so
+    # the final normalisation is a small correction rather than the direction.
+    weights: list[float] = []
+    direction_values: list[float] = []
+    representatives: list[tuple[tuple[int, int, int], np.ndarray]] = []
+    for mode in signed_modes(n):
+        if mode == (0, 0, 0) or mode <= negate(mode):
+            continue
+        vector = np.asarray(mode, dtype=np.float64)
+        radius = float(np.linalg.norm(vector))
+        if radius <= 0.0:
+            continue
+        coefficient = result[mode_index(mode, n)]
+        strength = float(np.sum(np.abs(coefficient) ** 2))
+        if strength <= 1.0e-30:
+            continue
+        representatives.append((mode, coefficient.copy()))
+        weights.append((2.0 ** math.floor(math.log2(max(radius, 1.0)))) * strength)
+        if args.state_perturbation == "angular":
+            direction_values.append(float(np.dot(vector / radius, axis)))
+        elif args.state_perturbation == "radial":
+            direction_values.append(math.log(radius / centre))
+        else:
+            direction_values.append(0.0)
+    weight_array = np.asarray(weights, dtype=np.float64)
+    value_array = np.asarray(direction_values, dtype=np.float64)
+    if weight_array.size == 0:
+        raise ValueError("saved state has no nonzero positive-mode representatives")
+    if args.state_perturbation in ("angular", "radial"):
+        value_array -= float(np.dot(weight_array, value_array) / np.sum(weight_array))
+    for ordinal, ((mode, coefficient), direction) in enumerate(zip(representatives, value_array)):
+        index = mode_index(mode, n)
+        minus_index = mode_index(negate(mode), n)
+        if args.state_perturbation == "phase":
+            # Random modal phase is explicitly not an affine translation gauge.
+            phase = float(rng.normal())
+            updated = coefficient * np.exp(1j * args.perturb_epsilon * phase)
+        elif args.state_perturbation == "coherence":
+            # Move each modal phase a signed fraction towards a common
+            # origin-centred convention.  This is distinct from random phase
+            # noise and keeps the state anchored to the exact survivor.
+            reference_phase = float(np.angle(np.sum(coefficient)))
+            updated = coefficient * np.exp(-1j * args.perturb_epsilon * reference_phase)
+        elif args.state_perturbation in ("angular", "radial"):
+            updated = coefficient * math.exp(args.perturb_epsilon * float(direction))
+        else:  # helicity
+            h_plus, h_minus = helical_basis(mode)
+            a_plus = np.vdot(h_plus, coefficient)
+            a_minus = np.vdot(h_minus, coefficient)
+            angle = args.perturb_epsilon * float(rng.choice((-1.0, 1.0)))
+            cosine, sine = math.cos(angle), math.sin(angle)
+            updated = (cosine * a_plus - sine * a_minus) * h_plus + (sine * a_plus + cosine * a_minus) * h_minus
+        result[index] = updated
+        result[minus_index] = np.conjugate(updated)
+    return normalise_critical_mass(result, args.critical_mass)
 
 
 def raw_to_field_hat(raw_hat: np.ndarray, wave: np.ndarray, norm_sq: np.ndarray) -> np.ndarray:
@@ -576,6 +661,10 @@ def main() -> None:
     if (args.n < 12 or args.nu <= 0.0 or args.critical_mass <= 0.0 or args.chi_attempts <= 0
             or args.dt <= 0.0 or args.window_c <= 0.0 or args.moving_packet_radius < 0):
         raise ValueError("n >= 12, nonnegative packet radius, and positive nu/mass/attempts/dt/window-c are required")
+    if args.require_chi_tolerance and args.chi_target is None:
+        raise ValueError("--require-chi-tolerance requires --chi-target")
+    if args.state_perturbation != "none" and args.state_input is None:
+        raise ValueError("--state-perturbation requires --state-input")
     if not (0.0 < args.angular_width <= math.pi and args.radial_log_width > 0.0
             and -1.0 <= args.helicity_bias <= 1.0 and 0.0 <= args.spatial_coherence <= 1.0):
         raise ValueError("invalid profile-shape coordinate range")
@@ -592,6 +681,7 @@ def main() -> None:
             attempt = int(state.get("selected_attempt", 0))
         if raw.shape != (args.n, args.n, args.n, 3):
             raise ValueError(f"state shape {raw.shape} does not match N={args.n}")
+        raw = perturb_saved_state(args, raw)
         field = raw_to_field_hat(raw, wave, norm_sq)
         nonlinear, metrics = static_metrics(args, field, wave, norm, norm_sq)
         signed = float(metrics["chi_signed"])
@@ -601,6 +691,8 @@ def main() -> None:
             raise RuntimeError("loaded state does not meet the requested signed-chi convention")
         matched_chi = abs(signed) if args.chi_sign == "absolute" else (signed if args.chi_sign == "positive" else -signed)
         mismatch = abs(matched_chi - args.chi_target) if args.chi_target is not None else 0.0
+        if args.require_chi_tolerance and mismatch > args.chi_tolerance:
+            raise RuntimeError("loaded/perturbed state misses the requested signed-chi tolerance")
         metrics["chi_matching_value"] = matched_chi
         metrics["chi_matching_convention"] = args.chi_sign
         if (not args.continuation_state
@@ -619,6 +711,8 @@ def main() -> None:
                 continue
             matched_chi = abs(signed) if args.chi_sign == "absolute" else (signed if args.chi_sign == "positive" else -signed)
             mismatch = abs(matched_chi - args.chi_target) if args.chi_target is not None else 0.0
+            if args.require_chi_tolerance and mismatch > args.chi_tolerance:
+                continue
             metrics["chi_matching_value"] = matched_chi
             metrics["chi_matching_convention"] = args.chi_sign
             if metrics["target_packet_dominance"] < args.target_dominance_min:
@@ -679,7 +773,11 @@ def main() -> None:
             "helicity_bias": args.helicity_bias, "spatial_coherence": args.spatial_coherence,
             "angular_axis": list(args.angular_axis), "seed": args.seed,
             "state_input": str(args.state_input) if args.state_input is not None else None,
+            "state_perturbation": args.state_perturbation,
+            "perturb_epsilon": args.perturb_epsilon,
+            "perturb_seed": args.perturb_seed,
             "chi_target": args.chi_target, "chi_sign": args.chi_sign, "chi_attempts": args.chi_attempts,
+            "chi_tolerance": args.chi_tolerance, "require_chi_tolerance": args.require_chi_tolerance,
             "target_dominance_min": args.target_dominance_min,
             "selection_objective": args.selection_objective,
             "require_positive_short_input": args.require_positive_short_input,
@@ -695,6 +793,11 @@ def main() -> None:
             "short_survival_screen": survival_scores if survival_scores else None,
             "selection_status": selection_status,
             "warning": "critical mass and chi cannot both be imposed by a single scalar rescaling at fixed carrier scale; chi is matched by profile/phase selection",
+            "perturbation_contract": (
+                "state-anchored finite local deformation followed by exact finite critical-mass normalisation; "
+                "admissibility is checked after perturbation"
+                if args.state_perturbation != "none" else None
+            ),
         },
         "shape_metrics": shape,
         "static_packet_metrics": static,

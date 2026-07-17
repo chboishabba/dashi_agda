@@ -34,6 +34,17 @@
   viscous loss.  The next empirical gate is robustness under nearby admissible
   positive-signed-chi profile perturbations, not another continuation segment.
 
+- Built a state-anchored local-residence perturbation gate around the exact
+  delayed-collapse survivor. `ns_normalized_profile_quotient_audit.py` now
+  supports deterministic reality-preserving `phase`, `coherence`, `angular`,
+  `radial`, and `helicity` deformations of a saved raw Fourier state, restores
+  exact finite critical mass, and can enforce a signed-chi tolerance after the
+  perturbation. The new non-executing
+  `ns_normalized_profile_local_perturbation_manifest.py` emits 42 candidates:
+  six signed magnitudes in each deterministic direction and two tangent
+  realisations for random phase/helicity directions. It is an empirical
+  screening surface only; no profile-uniform loss law or NS gate changed.
+
 - Built the positive-signed-chi adversarial search gate.  The profile audit
   now filters signed chi and target dominance, can select by short endpoint
   survival while requiring positive integrated nonlinear input, and can impose
