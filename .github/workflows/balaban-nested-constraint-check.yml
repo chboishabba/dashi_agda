@@ -58,6 +58,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanCanonicalBlockPathSamples.agda
               DASHI/Physics/YangMills/BalabanBlockedLinearAverageMainTerm.agda
               DASHI/Physics/YangMills/BalabanPlaquetteCovariantDerivative.agda
+              DASHI/Physics/YangMills/BalabanFiniteAdjointQuadraticForms.agda
               DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
               DASHI/Physics/YangMills/BalabanConstrainedGaussianCarrierAlgebra.agda
               DASHI/Physics/YangMills/BalabanFiniteConstraintChain.agda
