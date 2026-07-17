@@ -17,7 +17,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Nat.Base using (NonZero)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using
   ( Cube4
@@ -173,10 +173,11 @@ axisDivergenceContributionGaugeCovariant
           (A (positiveBond x axis))))
       (transportIncomingGaugeCovariant
         group linear gauge U A x axis))
-    (actionSubtract (additive linear)
-      (gauge x)
-      (A (positiveBond x axis))
-      (transportIncoming group linear U A x axis))
+    (sym
+      (actionSubtract (additive linear)
+        (gauge x)
+        (A (positiveBond x axis))
+        (transportIncoming group linear U A x axis)))
 
 sumAxisContributions :
   ∀ {N : Nat} {{_ : NonZero N}}
@@ -231,10 +232,11 @@ sumAxisContributionsGaugeCovariant
               (sumAxisContributions group linear U A x axes)))
         (axisDivergenceContributionGaugeCovariant
           group linear gauge U A x axis))
-      (actionAdd linear
-        (gauge x)
-        (axisDivergenceContribution group linear U A x axis)
-        (sumAxisContributions group linear U A x axes)))
+      (sym
+        (actionAdd linear
+          (gauge x)
+          (axisDivergenceContribution group linear U A x axis)
+          (sumAxisContributions group linear U A x axes))))
 
 covariantDivergence :
   ∀ {N : Nat} {{_ : NonZero N}}
