@@ -740,7 +740,7 @@ to
 D Q-bar_j,  D^2 Q-bar_j,  D Delta_j,  D^2 Delta_j.
 ```
 
-### Candidate interscale Schur-complement telescope
+### Rejected adjacent Schur-complement telescope
 
 The coordinate-free formula has a further exact simplification **if** the
 next source quadratic operator is the constrained minimum of the current one,
@@ -775,16 +775,26 @@ physicalCoarseHessian_j = S_j - a I.
 ```
 
 Thus `S_j` is the augmented coarse quadratic form induced by `DeltaHat_j`.
-It does **not by itself** prove the source
-identification
+This is also a normalization warning.  At the next integration the positive
+ambient representative is naturally obtained by adding the *next constraint*
+penalty,
+
+```text
+DeltaHat_(j+1) = physicalCoarseHessian_j + a Q_(j+1)* Q_(j+1),
+```
+
+not by adding `a I`.  Consequently `S_j` is not automatically the same
+operator as the next augmented Gaussian operator.  It does **not by itself**
+prove the source identification
 
 ```text
 S_j(U_j) = DeltaHat_(j+1)(U_(j+1))
 ```
 
-with the background lift, scale normalization, gauge carrier, and modified
-quadratic terms of CMP 109.  If that identification is established,
-substitution into (*) yields
+with the background lift, gauge carrier, and modified quadratic terms of CMP
+109.  The source augmentation convention below shows that this identification
+is not the next-Gaussian identity, so the following endpoint formula is a
+rejected candidate rather than a usable consequence:
 
 ```text
 log Z_j(B)
@@ -795,12 +805,15 @@ log Z_j(B)
 
 Thus the combined local `log det S` and constrained
 `C_kerQ^* Delta_j C_kerQ` terms **do** form the one-scale constrained
-determinant (**).  What remains conjectural is only the interscale equality
-which turns its Schur complement into `DeltaHat_(j+1)`.  This is the preferred
-critical-path route.  If (****) is confirmed, neither `D S` nor `D C_kerQ`
-needs to be evaluated separately; the endpoint determinant still carries the
-background dependence of `Delta` and the source background map.
-The Gaussian polarization is simply
+determinant (**).  The attempted adjacent telescope, however, has an
+additional penalty-normalization seam: it must compare `S_j` with the
+correct next constrained determinant, not simply rename `S_j` as
+`DeltaHat_(j+1)`.  The preferred critical path is therefore a cumulative
+block-determinant factorization of the nested constraints; it must retain the
+penalty factors explicitly.  Neither `D S` nor `D C_kerQ` needs to be
+evaluated separately only after that cumulative identity has been derived.
+Accordingly the following adjacent-shell polarization formula is **not**
+available from the one-step determinant identity:
 
 ```text
 D^2 log Z_j
@@ -811,7 +824,8 @@ D^2 log Z_j
 where the two background variations are related by Bałaban's exact
 fine/coarse background map.
 
-Across several Gaussian RG steps these determinants telescope:
+Nor do the displayed determinants telescope across several Gaussian steps
+without a separate cumulative block-determinant factorization:
 
 ```text
 sum_(j=0)^(K-1) log Z_j
@@ -825,7 +839,7 @@ one-loop determinant.  Dashen--Gross is therefore potentially useful at the
 level of this **combined** determinant, rather than as a replacement for one
 of Bałaban's coordinate terms.
 
-This shortcut now has one load-bearing source check:
+The rejected shortcut would have required the following false identification:
 
 1. the augmented `DeltaHat_(j+1)` occurring in the next normalization must be
    exactly the Schur complement `S_j` of `DeltaHat_j` and `Q-bar_j` used in
@@ -905,45 +919,44 @@ whether the scaled/background-pulled operator denoted `Delta^(j+1)` in CMP 109
 is definitionally this constrained-envelope Hessian with the same augmentation
 and determinant convention.
 
-The remaining match has strong source support and should be tested in this
-weaker, sufficient form.  CMP 95 (1.16)--(1.17) identifies a composition of
-Gaussian RG transformations with the single iterated constraint `Q_k`, while
-(1.64)--(1.65) identifies the resulting coarse quadratic action with the
-constrained minimum.  CMP 98 (127), (134) gives the corresponding composition
-of the nonlinear averaging maps and their linear parts.  Therefore the
-polarization calculation does not require literal matrix equality in one fixed
-basis.  It is enough to prove
+CMP 95 (1.16)--(1.17) identifies a composition of Gaussian RG transformations
+with the single iterated constraint `Q_k`, while (1.64)--(1.65) identifies the
+resulting coarse quadratic action with the constrained minimum.  CMP 98
+(127), (134) gives the corresponding composition of the nonlinear averaging
+maps and their linear parts.  These facts support a **cumulative**
+block-determinant calculation.  They do not make it enough to prove
 
 ```text
 S_j(U_j)
   = R_j^* DeltaHat_(j+1)(U_(j+1)) R_j
 ```
 
-for a background-independent scale/basis isomorphism `R_j`.  Then
-`log det(R_j^* R_j)` is independent of the background and disappears from
-`log Z^(j)(U) - log Z^(j)(1)` and hence from the beta projection.  This removes
-harmless lattice-rescaling determinants from the load-bearing identity.
+for a background-independent scale/basis isomorphism `R_j`: the `a I` versus
+`a Q_(j+1)^*Q_(j+1)` mismatch remains even when `R_j = I`.
 
-If check 1 holds, the shortest leading-coefficient proof is no longer the
-termwise differentiation of CMP 98 (124).  It is:
+The shortest leading-coefficient route is therefore:
 
 ```text
-Schur-complement identity
-  -> telescoped endpoint background determinant difference
+simultaneous nested-constraint determinant
+  -> sequential block-determinant factorization with explicit penalties
+  -> endpoint background determinant difference plus explicit correction
   -> Ward/transverse projection
   -> cumulative linear upper/lower enclosure.
 ```
 
-More explicitly, linearity of the polarization projection gives
+Only after this factorization and a bound on its explicit correction can
+linearity of the polarization projection give
 
 ```text
 sum_(j=k+1)^K betaZ_j
   = betaProjection(
-      1/2 Tr log DeltaHat_K - 1/2 Tr log DeltaHat_k),
+      1/2 Tr log endpointHat_K - 1/2 Tr log endpointHat_k)
+    + betaProjection(J_(k:K)),
 ```
 
-with the endpoint backgrounds compared in the source scaling convention.
-The desired target is therefore directly
+where `J_(k:K)` is the exact cumulative penalty/block-factor correction.  The
+desired target is therefore a linear enclosure of the endpoint term **plus**
+that explicit correction:
 
 ```text
 betaZLower (K-k)
@@ -960,19 +973,188 @@ background-field quantity and to bound the finite endpoint errors uniformly.
 The explicit `S/C/Q` derivative worksheet remains a fallback and an audit of
 the coordinate cancellation, not the preferred critical path.
 
+### Cumulative block-determinant theorem to instantiate
+
+The finite-dimensional algebra needed next is exact.  Let `A` be the positive
+gauge-fixed Hessian on a fine carrier and let `mathcalQ` collect all
+linearized nested constraints whose values are retained during a multi-step
+elimination.  The simultaneous constrained Gaussian has determinant factor
+
+```text
+det(A)^(-1/2) det(mathcalQ A^-1 mathcalQ*)^(-1/2).
+```
+
+Order the retained constraint coordinates by scale.  Block Gaussian
+elimination (equivalently a block-Cholesky factorization) gives
+
+```text
+det(mathcalQ A^-1 mathcalQ*)
+  = product_r det(Gamma_(r | < r)),
+```
+
+where `Gamma_(r | < r)` is the conditional covariance of the `r`-th
+constraint coordinate after the preceding ones have been eliminated.  This
+identity is the correct algebraic replacement for an adjacent equality of
+operators.  To use it here, construct `mathcalQ` from the derivatives of the
+composed Bałaban averages, then identify every conditional covariance with
+the actual sequential shell calculation, including its `a`-penalty and
+gauge-coordinate determinant.  The difference between this literal product
+and the desired endpoint determinant is, by definition, `J_(k:m)` above.
+
+This target is smaller than a new perturbative coefficient calculation: it is
+a finite-dimensional determinant comparison with source-defined operators.
+It either restores an exact endpoint factorization or isolates a concrete
+Gaussian correction that must be estimated alongside the interaction
+remainder.
+
 ### Interscale identification: the immediate next calculation
 
 The one-scale constrained-Gaussian identity is confirmed by CMP 109 (1.4).
 The immediate next calculation is narrower: prove the operator/background
-identification
+identification.  A source check sharpens its literal meaning.  CMP 109
+(2.10)--(2.11) identifies the shell quadratic form with the operator
+`A^(k)` of CMP 99 (3.156), namely the coarse quadratic form containing both
+the augmented Schur complement and the constraint-curvature contribution:
 
 ```text
-(Q-bar_j DeltaHat_j^-1 Q-bar_j^*)^-1
-  = R_j^* DeltaHat_(j+1) R_j,
+A^(k) = (Q G_1 Q*)^-1 - a I - 2 <H_1 D~^(2)(B), J> .
 ```
 
-with `R_j` background independent, or identify its exact correction `K_j`.
-Equivalently, prove the shell identity
+Thus the relevant object is not a bare Hessian of the Wilson action.  It is
+the Hessian of the **constrained Lagrangian** for the preceding minimization.
+This is exactly the Hessian which occurs in the second-derivative formula for
+a nested constrained minimum.
+
+Write `F_j` for the classical action after the first `j` background
+minimizations, and write `q_j` for the next nonlinear averaging map.  CMP 98
+(127), (134) gives the composition of these maps, while the variational
+construction used in CMP 109 (2.2)--(2.8) gives, on the regular tube,
+
+```text
+F_(j+1)(c) = min { F_j(b) : q_j(b) = c }.
+```
+
+At its minimizing pair let
+
+```text
+L_j = D^2 F_j - <lambda_j, D^2 q_j>
+```
+
+be the constrained-Lagrangian Hessian.  Finite-dimensional differentiation
+of the stationarity and constraint equations gives the exact algebraic lemma
+
+```text
+D^2 F_(j+1) = (D q_j L_j^-1 D q_j*)^-1.                 (nested-minimum)
+```
+
+For auditability, this is not an appeal to a formal Schur-complement slogan.
+With the multiplier convention
+
+```text
+D F_j(b) - D q_j(b)* lambda = 0,       q_j(b) = c,
+```
+
+differentiate at the minimizing pair.  The two linearized equations are
+
+```text
+L_j db = D q_j* dlambda,                D q_j db = dc.
+```
+
+They give
+
+```text
+db = L_j^-1 D q_j* (D q_j L_j^-1 D q_j*)^-1 dc,
+dlambda = (D q_j L_j^-1 D q_j*)^-1 dc.
+```
+
+The envelope identity `D F_(j+1) = lambda` then gives
+`(nested-minimum)`.  Thus the sole analytic/source work in this algebraic
+step is identifying the literal operator `L_j`; no determinant manipulation
+can repair a missing constraint-curvature term.
+
+The `D^2 q_j` term is essential: it is the source role played by the
+`D~^(2)`/constraint-curvature term in CMP 99 (3.127)--(3.129) and (3.156).
+If `DeltaHat_j` is the positive augmented representative of `L_j`, the
+literal consequence is
+
+```text
+D^2 F_(j+1) = (Q-bar_j DeltaHat_j^-1 Q-bar_j*)^-1 - a I.
+```
+
+The remaining source identifications are:
+
+1. `DeltaHat_j` is the positive augmented representative of `L_j` on the
+   exact gauge-fixed carrier used by the Gaussian;
+2. the physical part of `D^2 F_(j+1)` is the next source operator, with the
+   `- a I` convention restored exactly once;
+3. the positive representative used in the next Gaussian is formed by the
+   next-constraint penalty `a Q_(j+1)* Q_(j+1)`.
+
+The third item rules out the unqualified adjacent telescope.  In the natural
+source convention,
+
+```text
+DeltaHat_(j+1)
+  = (Q-bar_j DeltaHat_j^-1 Q-bar_j*)^-1 - a I
+    + a Q_(j+1)* Q_(j+1),
+```
+
+so `(Q-bar_j DeltaHat_j^-1 Q-bar_j*)^-1` is generally not the next augmented
+Gaussian operator.  No background-independent conjugation can remove this
+`a I` versus `a Q_(j+1)*Q_(j+1)` mismatch.  The originally proposed pairwise
+identity is therefore not the current theorem target.
+
+The minimization composition itself is not an extra conjecture.  Let `M_j`
+denote the `j`-scale averaging constraint on a fine configuration, and let
+`q_j` be its next one-step factor.  CMP 98 proves the nonlinear composition
+of the averaging operations in (90)--(92), and CMP 102 defines `U_j` as the
+unique minimum of the Wilson action with the combined constraints.  Hence
+`M_(j+1) = q_j o M_j` gives directly
+
+```text
+min { A(U) : M_(j+1)(U) = c }
+  = min { min { A(U) : M_j(U) = b } : q_j(b) = c }.
+```
+
+This is just equality of the two constrained sets, followed by the source
+uniqueness of the regular minimum.  It supplies the `F_(j+1) = min F_j`
+premise above.  CMP 102 §G additionally supplies the analyticity of the
+minimal background needed to differentiate the identity on the regular tube.
+
+Accordingly, the remaining literal audit is this four-line carrier
+table:
+
+```text
+source object                    role in nested-minimum formula
+--------------------------------------------------------------------------
+CMP 109 A^(j), CMP 99 (3.156)    physical D^2 F_j, including curvature
+A^(j) + a Q_j* Q_j               positive representative for current integral
+(Q_j Lhat_j^-1 Q_j*)^-1 - a I    physical D^2 F_(j+1)
+D^2 F_(j+1)+a Q_(j+1)*Q_(j+1)    positive representative for next integral
+```
+
+The comparison must be made on the gauge-fixed tangent carriers used in
+CMP 109 (1.4).  There is a useful normalization correction here.  CMP 109
+explicitly says of this construction that there are *no scaling
+transformations*; the displayed `B = g_k B'` change in (2.10)--(2.12) is a
+coupling normalization, not a lattice rescaling.  Moreover `Q_j` maps the
+fine fluctuation variables at `T^(j)` directly to variables on `T^(j+1)`.
+Consequently its Schur complement already acts on the same coarse tangent
+carrier as the next step, but the penalty mismatch above remains on that
+carrier.  Start with `R_j = I`; a nontrivial `R_j` is warranted only if the
+source's gauge-coordinate convention introduces a separately defined
+background-independent identification.
+
+The correct immediate target is consequently a **cumulative block
+determinant identity**.  Form the finite Gaussian with all nested linearized
+constraints imposed at once, calculate its determinant once, and then
+calculate it by sequential constraint elimination.  Equality by finite
+dimensional Fubini/change of variables forces an exact factorization of the
+shell determinants and every `a`-penalty factor.  This produces either a
+genuine endpoint formula or an explicit cumulative correction; it does not
+assume a false adjacent identification.
+
+The desired shell identity is therefore conditional on that factorization:
 
 ```text
 GammaZ_j(B) - GammaZ_j(0)
@@ -989,8 +1171,9 @@ GammaZ_j
     + J_j,
 ```
 
-where `J_j` now measures failure of the **interscale operator identification**,
-not an omitted factor in the constrained Gaussian (1.4).  The nonlinear
+where `J_j` now includes the exact penalty/block-factor correction from the
+cumulative determinant calculation, not an omitted factor in the constrained
+Gaussian (1.4).  The nonlinear
 constraint Jacobian, Haar-density ratio, and higher interaction terms remain in
 `betaInt` and must be bounded cumulatively there.  The Gaussian telescope is
 valid if `J_j = 0`, or if the residual satisfies
@@ -1012,8 +1195,9 @@ sum_(j=k+1)^m betaZ_j
 
 ```text
 one-scale constrained determinant identity:       closed from CMP 109 (1.4)
-interscale Schur-complement identification:        open (immediate target)
-endpoint determinant linear enclosure:             downstream
+adjacent augmented Schur-complement telescope:    falsified by a-penalty mismatch
+cumulative block-determinant factorization:        open (immediate target)
+endpoint determinant / correction linear enclosure: downstream
 cumulative interaction remainder:                  downstream
 trajectory tuning and CMP 122 composition:         already architected
 ```

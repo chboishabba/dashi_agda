@@ -144,9 +144,10 @@ def donor_star_modes() -> tuple[tuple[int, int, int], list[tuple[int, int, int]]
 def network_spec(args: argparse.Namespace) -> dict[str, Any]:
     """Return an explicit finite graph in physical wavevector coordinates.
 
-    The feedback graph is placed at ``N=32, j=2``.  Its targets have size
-    four; the shared outlet/feedback modes have size above eight, while every
-    coordinate remains in the componentwise 2/3-dealiased carrier.
+    The feedback graph has a canonical ``N=32, j=2`` seed and an exact dyadic
+    scale copy ``N=64, j=3``.  All physical wavevectors are multiplied by
+    ``2 ** (target_shell - 2)``; amplitudes are subsequently renormalised by
+    the same finite critical-mass ledger used by the endpoint audit.
     """
     if args.topology == "donor-star":
         target, donors = donor_star_modes()
@@ -167,18 +168,25 @@ def network_spec(args: argparse.Namespace) -> dict[str, Any]:
         return {"kind": "shared-target adjacent-shell donor star", "targets": [target],
                 "entries": entries, "triads": triads}
 
-    targets = [(4, 0, 0), (0, 4, 0), (0, 0, 4)]
-    donors = [
+    if args.target_shell < 2:
+        raise ValueError("cyclic-feedback scale copies require target-shell >= 2")
+    scale = 2 ** (args.target_shell - 2)
+
+    def scaled(mode: tuple[int, int, int]) -> tuple[int, int, int]:
+        return tuple(scale * value for value in mode)
+
+    targets = [scaled(mode) for mode in ((4, 0, 0), (0, 4, 0), (0, 0, 4))]
+    donors = [[scaled(mode) for mode in pair] for pair in (
         [(-2, 1, 0), (-2, -1, 0)],
         [(1, -2, 0), (-1, -2, 0)],
         [(1, 0, -2), (-1, 0, -2)],
-    ]
+    )]
     # r_i + a_i + s_i = 0 and s_i + b_i + r_(i+1) = 0, cyclically.
-    feedback = [
+    feedback = [{name: scaled(mode) for name, mode in link.items()} for link in (
         {"a": (-10, -6, 0), "s": (6, 6, 0), "b": (-6, -10, 0)},
         {"a": (0, -10, -6), "s": (0, 6, 6), "b": (0, -6, -10)},
         {"a": (-6, 0, -10), "s": (6, 0, 6), "b": (-10, 0, -6)},
-    ]
+    )]
     outlet_amplitude = args.feedback_amplitude if args.outlet_amplitude is None else args.outlet_amplitude
     entries: list[dict[str, Any]] = [
         {"mode": target, "amplitude": args.target_amplitude, "helicity": 1,
@@ -205,15 +213,20 @@ def network_spec(args: argparse.Namespace) -> dict[str, Any]:
             {"kind": "feedback", "modes": [link["s"], link["b"], targets[(index + 1) % len(targets)]]},
         ))
     return {"kind": "three-target cyclic outlet-feedback graph", "targets": targets,
-            "entries": entries, "triads": triads}
+            "dyadic_scale_copy": scale, "entries": entries, "triads": triads}
 
 
 def validate_network(args: argparse.Namespace, network: dict[str, Any]) -> None:
-    if args.n != 32:
-        raise ValueError("the explicit experimental networks are currently calibrated only for N32")
-    expected_shell = 3 if args.topology == "donor-star" else 2
-    if args.target_shell != expected_shell:
-        raise ValueError(f"{args.topology} requires --target-shell {expected_shell}")
+    if args.topology == "donor-star":
+        if args.n != 32 or args.target_shell != 3:
+            raise ValueError("donor-star remains calibrated only for N32 and target-shell 3")
+    else:
+        expected_n = 2 ** (args.target_shell + 3)
+        if args.n != expected_n or args.n not in (32, 64):
+            raise ValueError(
+                "cyclic-feedback currently permits only exact scale copies "
+                "(N32,j2) and (N64,j3)"
+            )
     cutoff = args.n / 3.0
     for entry in network["entries"]:
         if max(abs(value) for value in entry["mode"]) > cutoff:
@@ -1639,8 +1652,14 @@ def main() -> None:
         "status": "ok",
         "topology": network | {
             "phase_dimension": variable_dimension,
-            "constraints": "reality symmetric, divergence free helical modes, componentwise 2/3 dealiased N32 support, fixed amplitudes and declared global normalization",
-            "translation_phase_gauge": "fixed phases of (4,0,0), (0,4,0), (0,0,4) remove the three translation gauges for the cyclic graph",
+            "constraints": (
+                "reality symmetric, divergence free helical modes, componentwise 2/3 dealiased "
+                f"N{args.n} support, fixed role amplitudes and declared global normalization"
+            ),
+            "translation_phase_gauge": (
+                f"fixed phases of {network['targets']} remove the three translation gauges "
+                "for the cyclic graph"
+            ),
             "phase_graph_geometry": phase_geometry,
             "signed_phase_constraint_geometry": signed_phase_geometry,
             "helicity_factorisation_geometry": helicity_geometry,

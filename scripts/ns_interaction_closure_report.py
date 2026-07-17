@@ -216,8 +216,12 @@ def classify(summaries: list[dict[str, Any]]) -> dict[str, Any]:
         temporal_regime = "partial_dominant_set_switching"
     else:
         temporal_regime = "persistent_dominant_set"
+    full_shell_regime = (
+        "provisional_full_shell_" + local_regime.removesuffix("_selected_output_carrier")
+        if output_capture >= 0.90 else "full_shell_classification_withheld"
+    )
     return {
-        "regime": local_regime if output_capture >= 0.90 else "full_shell_classification_withheld",
+        "regime": full_shell_regime,
         "selected_carrier_regime": local_regime,
         "output_carrier_sufficient_for_full_shell_classification": output_capture >= 0.90,
         "endpoint_output_modal_activity_capture": output_capture,

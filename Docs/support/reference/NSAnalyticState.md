@@ -137,3 +137,34 @@ live new mathematics remains concentrated in the coupled `A1/A3` bootstrap and
 the `A4` uniform output-support transfer.
 
 Forbidden claim: unconditional regularity or Clay promotion.
+
+## Navier-Stokes Multi-Scale Order Framework
+
+The finite sparse-network program's retirement (N32 1024-output effectively dense and switching result) motivates a multi-scale description of order in a Navier-Stokes state. These three aspects are compatible rather than contradictory:
+
+### 1. Microscopic Delocalization
+$$N_{\mathrm{eff}}(\mu_t) \gg 1$$
+The dynamically relevant quantity (energy, enstrophy, triadic weight) is distributed over microscopic states. No single mode or channel carries the bulk of the activity. For microscopic weights $p_i$, $N_{\mathrm{eff}} = (\sum_i p_i^2)^{-1} \gg 1$ reflects a large active degree-of-freedom population (turbulent intuition), ruling out low-dimensional fixed-graph control.
+
+### 2. Temporal Turnover
+$$d(\mu_t, \mu_{t+s}) \ge \delta$$
+The microscopic distribution at $t+s$ is different from $t$. The active carriers change (eddies are repopulated, folded, or dissipated) even when the coarse dynamical regime remains statistically stable (the "waterfall" analogy).
+
+### 3. Coarse Geometric Concentration
+Let $\pi: X_{\mathrm{micro}} \to G$ project to coarse variables (shells, interaction angles, helicity, locality ratios), and let $\nu_t = \pi_\# \mu_t$ be the pushforward. Coarse concentration means $\nu_t(A) \ge 1 - \varepsilon$ for a small region $A \subseteq G$. The microscopic events vary, but the geometric class remains statistically stable.
+
+### Regularity and Vortex Stretching Depletion
+Microscopic delocalization and temporal turnover alone do not protect against blow-up. Regularity hinges on whether the coarse pushforward concentrates on a **dynamically depleting sector** $A \subseteq G_{\mathrm{depleting}}$:
+$$\omega(x) \parallel \omega(y) \implies \omega \cdot S \omega \ll |S||\omega|^2$$
+Even with high microscopic complexity, the persistent geometry instantiates cancellation.
+
+### Compact DASHI-Style Predicates
+Let $\mu_t \in \mathcal{P}(X_{\mathrm{micro}})$ and $\pi: X_{\mathrm{micro}} \to G$:
+- $\mathrm{MicroDelocalized}(t) := N_{\mathrm{eff}}(\mu_t) \gg 1$
+- $\mathrm{Turnover}(t, s) := d_X(\mu_t, \mu_{t+s}) \ge \delta$
+- $\mathrm{CoarseConcentrated}(t, A) := (\pi_\# \mu_t)(A) \ge 1 - \varepsilon$
+- $\mathrm{PersistentDepletion} := A \subseteq G_{\mathrm{depleting}}$
+
+The regularity obligation is to show:
+$$\mathrm{MicroDelocalized} \wedge \mathrm{Turnover} \wedge \mathrm{CoarseConcentrated} \implies \text{statistically persistent nonlinear depletion}$$
+The active modes/triads do not persist; the geometry they instantiate persists.
