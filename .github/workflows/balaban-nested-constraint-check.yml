@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - codex/balaban-nested-constraint-minimum
+      - codex/balaban-literal-lattice-operators
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/Balaban*.agda'
@@ -44,6 +45,9 @@ jobs:
             chmod -R u+w "$CHECK_ROOT/standard-library"
             "$AGDA_BIN" --version
             targets=(
+              DASHI/Physics/YangMills/BalabanPeriodicLatticeBonds.agda
+              DASHI/Physics/YangMills/BalabanPeriodicLatticePaths.agda
+              DASHI/Physics/YangMills/BalabanPeriodicGaugeTransport.agda
               DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
               DASHI/Physics/YangMills/BalabanConstrainedGaussianCarrierAlgebra.agda
               DASHI/Physics/YangMills/BalabanFiniteConstraintChain.agda
