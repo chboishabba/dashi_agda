@@ -53,6 +53,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanPeriodicPlaquetteHolonomy.agda
               DASHI/Physics/YangMills/BalabanLatticeAdjointCovariantDerivative.agda
               DASHI/Physics/YangMills/BalabanCovariantPathIntegral.agda
+              DASHI/Physics/YangMills/BalabanLinearBlockPathAverage.agda
               DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
               DASHI/Physics/YangMills/BalabanConstrainedGaussianCarrierAlgebra.agda
               DASHI/Physics/YangMills/BalabanFiniteConstraintChain.agda
