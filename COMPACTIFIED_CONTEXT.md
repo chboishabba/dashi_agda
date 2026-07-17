@@ -32,6 +32,20 @@
   requested output-modal coverage.  The next production work is a staged,
   positive-signed-chi quotient search rather than another named full-window
   profile run.
+- The first selected positive-signed-chi short-window state has now been
+  preserved as a compressed raw Fourier receipt (`seed=20260718`, replay attempt 0).
+  Its moving packet changes centre from shell 2 to shell 3, so the audit was
+  upgraded with frozen-initial-window telemetry and the promotion gate uses the
+  frozen nonlinear integral.  The same finite state gives `R_move=1.01323364`
+  and `R_frozen=1.04534448` over `.05T`, with frozen nonlinear integral
+  `.50992680` and frozen viscous loss `.51619484`.  This is a validated
+  short-time survivor awaiting timestep convergence and `.25T` promotion, not
+  a full-parabolic-window recurrence result.
+- Timestep convergence is now complete: `R_frozen` is
+  `1.04534448/.1.04534501/.1.04534455` at `dt=.001/.0005/.00025`, and the
+  finest run has heat-only frozen recurrence `.79799308` with nonlinear
+  amplification `1.30996693`.  The state has been promoted to `.25T` using
+  the exact saved raw Fourier coefficients.
 - `scripts/ns_normalized_profile_staged_manifest.py` emits a deterministic
   64-point joint Latin-hypercube design over angular/radial/helicity/coherence
   coordinates, staged as static positive-chi gate -> short endpoint survival

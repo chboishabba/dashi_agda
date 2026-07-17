@@ -53,6 +53,24 @@
   short-survival selection.  The next production run must use this positive-
   signed-chi staged selector; no further manually selected full-window atlas
   run is scheduled first.
+- **Frozen-window survivor audit:** the selected positive-signed-chi phase
+  realization (`seed=20260718`, replay attempt `0`) now has an exact compressed
+  initial-state receipt and was rerun with a frozen-initial-packet telemetry
+  surface.  Over `0.05T`, the moving packet grows by `1.323%`, while the
+  frozen initial shell window grows by `4.534%`: `R_move=1.01323364` and
+  `R_frozen=1.04534448`.  The frozen nonlinear integral is positive
+  (`.50992680`) against frozen viscous loss (`.51619484`).  The dominant shell
+  changes from 2 to 3, so moving-window rates remain migration telemetry only;
+  the frozen observable is now the promotion authority.  This is one finite
+  short-window survivor, not a parabolic-window recurrence claim.  Required
+  next receipts are timestep convergence, then `0.25T` survival using the
+  saved state.
+- **Timestep convergence closed for the short survivor:** the exact same saved
+  state gives frozen-packet ratios `1.04534448`, `1.04534501`, and
+  `1.04534455` at `dt=.001`, `.0005`, and `.00025`, respectively.  The
+  finest receipt has heat-only frozen recurrence `.79799308` and nonlinear
+  heat-compensation `1.30996693`.  This closes the numerical validation of
+  the `.05T` finite survivor; it does not yet establish retention at `.25T`.
 - Added `scripts/ns_normalized_profile_staged_manifest.py` and its initial
   64-row Latin-hypercube manifest.  It covers angular width, radial width,
   helicity bias and spatial coherence jointly, with a static signed-chi gate,

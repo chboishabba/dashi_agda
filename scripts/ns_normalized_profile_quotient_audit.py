@@ -83,13 +83,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dt", type=float, default=1.0e-3)
     parser.add_argument("--window-c", type=float, default=1.0,
                         help="multiple of 2**(-2*target_shell)/nu when --evolve")
+    parser.add_argument("--checkpoint-fractions", default="0,0.25,0.5,0.75,1",
+                        help="comma-separated fractions of the evolved window to retain in the receipt")
     parser.add_argument("--moving-packet-radius", type=int, default=1)
     parser.add_argument("--cfd-root", type=Path, default=DEFAULT_CFD_ROOT)
     parser.add_argument("--fft-backend", default="vkfft-vulkan")
     parser.add_argument("--selection-objective", choices=("chi-match", "short-survival"), default="chi-match",
                         help="short-survival evolves admissible phase trials over --window-c and chooses maximum moving survival")
     parser.add_argument("--require-positive-short-input", action="store_true",
-                        help="with short-survival, reject trials whose saved moving-packet nonlinear integral is nonpositive")
+                        help="with short-survival, reject trials whose frozen-initial-packet nonlinear integral is nonpositive")
+    parser.add_argument("--save-selected-state", type=Path, default=None,
+                        help="write the exact selected raw Fourier state and selection metadata as a compressed NPZ receipt")
+    parser.add_argument("--state-input", type=Path, default=None,
+                        help="load an exact compressed raw Fourier state saved by --save-selected-state; bypass profile regeneration")
+    parser.add_argument("--save-final-state", type=Path, default=None,
+                        help="write the exact final raw Fourier state after --evolve as a compressed NPZ checkpoint")
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT)
     return parser.parse_args()
 
@@ -244,7 +252,8 @@ def load_cfd_module(args: argparse.Namespace) -> Any:
 
 def packet_telemetry(args: argparse.Namespace, field_hat: np.ndarray, wave: np.ndarray,
                      norm: np.ndarray, norm_sq: np.ndarray, time: float,
-                     initial_field: np.ndarray) -> dict[str, Any]:
+                     initial_field: np.ndarray, frozen_centre: int,
+                     previous_centre: int | None = None) -> dict[str, Any]:
     max_shell = int(math.ceil(math.log2(float(np.max(norm)) + 1.0)))
     packets = dyadic_shell_packets(field_hat, norm, max_shell)
     centre = int(np.argmax(packets))
@@ -258,14 +267,24 @@ def packet_telemetry(args: argparse.Namespace, field_hat: np.ndarray, wave: np.n
     nonlinear_shell_rates = shell_nonlinear_rate(field_hat, nonlinear, norm, max_shell)
     moving_lower = max(0, centre - args.moving_packet_radius)
     moving_upper = min(len(packets), centre + args.moving_packet_radius + 1)
+    frozen_lower = max(0, frozen_centre - args.moving_packet_radius)
+    frozen_upper = min(len(packets), frozen_centre + args.moving_packet_radius + 1)
+    previous_lower = max(0, (previous_centre if previous_centre is not None else centre) - args.moving_packet_radius)
+    previous_upper = min(len(packets), (previous_centre if previous_centre is not None else centre) + args.moving_packet_radius + 1)
     return {
         "time": time,
         "shell_packets": [float(value) for value in packets],
         "dominant_shell": centre,
         "moving_packet": moving,
+        "frozen_initial_packet": float(np.sum(packets[frozen_lower:frozen_upper])),
         "moving_packet_nonlinear_rate": float(np.sum(nonlinear_shell_rates[moving_lower:moving_upper])),
         "moving_packet_viscous_rate": float(2.0 * args.nu * np.sum(dissipations[moving_lower:moving_upper])),
+        "frozen_initial_packet_nonlinear_rate": float(np.sum(nonlinear_shell_rates[frozen_lower:frozen_upper])),
+        "frozen_initial_packet_viscous_rate": float(2.0 * args.nu * np.sum(dissipations[frozen_lower:frozen_upper])),
+        "moving_packet_if_previous_centre": float(np.sum(packets[previous_lower:previous_upper])),
+        "checkpoint_recentering_jump": float(np.sum(packets[moving_lower:moving_upper]) - np.sum(packets[previous_lower:previous_upper])),
         "heat_moving_packet_exact_spectrum": heat_moving,
+        "heat_frozen_initial_packet_exact_spectrum": float(np.sum(heat_packets[frozen_lower:frozen_upper])),
         "static_packet_metrics": static,
         "_nonlinear": nonlinear,
     }
@@ -296,13 +315,22 @@ def evolve_profile(args: argparse.Namespace, raw: np.ndarray, wave: np.ndarray,
     steps = int(math.ceil(nominal_time / args.dt))
     actual_time = steps * args.dt
     initial = raw_to_field_hat(raw, wave, norm_sq)
-    checkpoints = {0, steps, *(int(round(numerator * steps / 4.0)) for numerator in range(1, 4))}
+    initial_packets = dyadic_shell_packets(initial, norm, int(math.ceil(math.log2(float(np.max(norm)) + 1.0))))
+    frozen_centre = int(np.argmax(initial_packets))
+    checkpoint_fractions = sorted({float(item) for item in args.checkpoint_fractions.split(",")})
+    if not checkpoint_fractions or checkpoint_fractions[0] < 0.0 or checkpoint_fractions[-1] > 1.0:
+        raise ValueError("checkpoint fractions must lie in [0, 1]")
+    checkpoints = {int(round(fraction * steps)) for fraction in checkpoint_fractions}
+    checkpoints.update({0, steps})
     history: list[dict[str, Any]] = []
     coarse_at: dict[int, dict[str, Any]] = {}
+    final_raw: np.ndarray | None = None
 
     def record(step: int, current_raw: np.ndarray) -> None:
         field = raw_to_field_hat(current_raw, wave, norm_sq)
-        row = packet_telemetry(args, field, wave, norm, norm_sq, step * args.dt, initial)
+        previous_centre = int(history[-1]["dominant_shell"]) if history else None
+        row = packet_telemetry(args, field, wave, norm, norm_sq, step * args.dt, initial,
+                               frozen_centre, previous_centre)
         nonlinear = row.pop("_nonlinear")
         if step in {0, steps}:
             coarse_at[step] = stratified_interaction_estimate(
@@ -318,7 +346,10 @@ def evolve_profile(args: argparse.Namespace, raw: np.ndarray, wave: np.ndarray,
             backend.set_initial_u_hat(raw)
             for step in range(steps + 1):
                 if step in checkpoints:
-                    record(step, np.asarray(backend.read_u_hat(), dtype=np.complex128))
+                    observed = np.asarray(backend.read_u_hat(), dtype=np.complex128)
+                    record(step, observed)
+                    if step == steps:
+                        final_raw = observed.copy()
                 if step < steps:
                     backend.step()
         finally:
@@ -330,36 +361,64 @@ def evolve_profile(args: argparse.Namespace, raw: np.ndarray, wave: np.ndarray,
         for step in range(steps + 1):
             if step in checkpoints:
                 record(step, current)
+                if step == steps:
+                    final_raw = current.copy()
             if step < steps:
                 current = module.rk2_step(current, kx, ky, kz, k2, mask, args.dt, args.nu)
     initial_row, endpoint = history[0], history[-1]
+    if final_raw is None:
+        raise RuntimeError("finite-Galerkin evolution did not retain its final state")
     initial_coarse, endpoint_coarse = coarse_at[0], coarse_at[steps]
     times = np.asarray([row["time"] for row in history], dtype=np.float64)
     target_nonlinear = np.asarray([row["static_packet_metrics"]["target_nonlinear_rate"] for row in history], dtype=np.float64)
     target_viscous = np.asarray([row["static_packet_metrics"]["target_viscous_rate"] for row in history], dtype=np.float64)
     moving_nonlinear = np.asarray([row["moving_packet_nonlinear_rate"] for row in history], dtype=np.float64)
     moving_viscous = np.asarray([row["moving_packet_viscous_rate"] for row in history], dtype=np.float64)
+    frozen_nonlinear = np.asarray([row["frozen_initial_packet_nonlinear_rate"] for row in history], dtype=np.float64)
+    frozen_viscous = np.asarray([row["frozen_initial_packet_viscous_rate"] for row in history], dtype=np.float64)
+    recentering_jumps = np.asarray([row["checkpoint_recentering_jump"] for row in history], dtype=np.float64)
     return {
         "contract": "finite-Galerkin normalized-profile parabolic-window receipt; no profile-uniform inference",
         "nominal_window_time": nominal_time,
         "actual_window_time": actual_time,
         "steps": steps,
+        "checkpoint_fractions_requested": checkpoint_fractions,
         "backend": args.backend,
         "moving_packet_recurrence_ratio": endpoint["moving_packet"] / initial_row["moving_packet"],
         "moving_packet_heat_compensated_ratio": endpoint["moving_packet"] / endpoint["heat_moving_packet_exact_spectrum"],
         "moving_packet_scale_displacement": endpoint["dominant_shell"] - initial_row["dominant_shell"],
+        "frozen_initial_packet_shell": frozen_centre,
+        "frozen_initial_packet_recurrence_ratio": endpoint["frozen_initial_packet"] / initial_row["frozen_initial_packet"],
+        "frozen_initial_packet_heat_compensated_ratio": (
+            endpoint["frozen_initial_packet"] / endpoint["heat_frozen_initial_packet_exact_spectrum"]
+        ),
+        "frozen_initial_packet_heat_recurrence_ratio": (
+            endpoint["heat_frozen_initial_packet_exact_spectrum"] / initial_row["frozen_initial_packet"]
+        ),
         "integrated_target_nonlinear_input": float(np.trapezoid(target_nonlinear, times)),
         "integrated_target_positive_nonlinear_input": float(np.trapezoid(np.maximum(target_nonlinear, 0.0), times)),
         "integrated_target_viscous_loss": float(np.trapezoid(target_viscous, times)),
         "integrated_moving_packet_nonlinear_input": float(np.trapezoid(moving_nonlinear, times)),
         "integrated_moving_packet_positive_nonlinear_input": float(np.trapezoid(np.maximum(moving_nonlinear, 0.0), times)),
         "integrated_moving_packet_viscous_loss": float(np.trapezoid(moving_viscous, times)),
+        "integrated_frozen_initial_packet_nonlinear_input": float(np.trapezoid(frozen_nonlinear, times)),
+        "integrated_frozen_initial_packet_positive_nonlinear_input": float(np.trapezoid(np.maximum(frozen_nonlinear, 0.0), times)),
+        "integrated_frozen_initial_packet_viscous_loss": float(np.trapezoid(frozen_viscous, times)),
+        "packet_centre_changes_at_checkpoints": int(sum(
+            row["dominant_shell"] != initial_row["dominant_shell"] for row in history[1:]
+        )),
+        "checkpoint_recentering_jump_sum": float(np.sum(recentering_jumps[1:])),
+        "switching_warning": (
+            "moving-packet rates are evaluated in a re-centred window. Frozen-initial-packet rates are the promotion authority; "
+            "checkpoint_recentering_jump_sum is diagnostic only and is not an exact all-step switching balance."
+        ),
         "coarse_interaction_hellinger_squared_initial_to_endpoint": hellinger_squared(
             coarse_distribution(initial_coarse), coarse_distribution(endpoint_coarse)
         ),
         "checkpoints": history,
         "coarse_interaction_initial": initial_coarse,
         "coarse_interaction_endpoint": endpoint_coarse,
+        "_final_raw": final_raw,
     }
 
 
@@ -525,22 +584,41 @@ def main() -> None:
     wave, norm = frequency_grid(args.n)
     norm_sq = norm ** 2
     candidates: list[tuple[float, int, np.ndarray, np.ndarray, dict[str, float], np.ndarray]] = []
-    for attempt in range(args.chi_attempts):
-        raw = profile_raw_hat(args, args.seed + attempt)
+    if args.state_input is not None:
+        with np.load(args.state_input) as state:
+            raw = np.asarray(state["raw_hat"], dtype=np.complex128)
+            attempt = int(state.get("selected_attempt", 0))
+        if raw.shape != (args.n, args.n, args.n, 3):
+            raise ValueError(f"state shape {raw.shape} does not match N={args.n}")
         field = raw_to_field_hat(raw, wave, norm_sq)
         nonlinear, metrics = static_metrics(args, field, wave, norm, norm_sq)
         signed = float(metrics["chi_signed"])
-        if args.chi_sign == "positive" and signed <= 0.0:
-            continue
-        if args.chi_sign == "negative" and signed >= 0.0:
-            continue
+        if (args.chi_sign == "positive" and signed <= 0.0) or (args.chi_sign == "negative" and signed >= 0.0):
+            raise RuntimeError("loaded state does not meet the requested signed-chi convention")
         matched_chi = abs(signed) if args.chi_sign == "absolute" else (signed if args.chi_sign == "positive" else -signed)
         mismatch = abs(matched_chi - args.chi_target) if args.chi_target is not None else 0.0
         metrics["chi_matching_value"] = matched_chi
         metrics["chi_matching_convention"] = args.chi_sign
         if metrics["target_packet_dominance"] < args.target_dominance_min:
-            continue
+            raise RuntimeError("loaded state does not meet target-dominance admissibility")
         candidates.append((mismatch, attempt, raw, field, metrics, nonlinear))
+    else:
+        for attempt in range(args.chi_attempts):
+            raw = profile_raw_hat(args, args.seed + attempt)
+            field = raw_to_field_hat(raw, wave, norm_sq)
+            nonlinear, metrics = static_metrics(args, field, wave, norm, norm_sq)
+            signed = float(metrics["chi_signed"])
+            if args.chi_sign == "positive" and signed <= 0.0:
+                continue
+            if args.chi_sign == "negative" and signed >= 0.0:
+                continue
+            matched_chi = abs(signed) if args.chi_sign == "absolute" else (signed if args.chi_sign == "positive" else -signed)
+            mismatch = abs(matched_chi - args.chi_target) if args.chi_target is not None else 0.0
+            metrics["chi_matching_value"] = matched_chi
+            metrics["chi_matching_convention"] = args.chi_sign
+            if metrics["target_packet_dominance"] < args.target_dominance_min:
+                continue
+            candidates.append((mismatch, attempt, raw, field, metrics, nonlinear))
     if not candidates:
         raise RuntimeError("no phase trial met the signed-chi and target-dominance admissibility slice")
     selected_evolution: dict[str, Any] | None = None
@@ -557,26 +635,27 @@ def main() -> None:
                 flush=True,
             )
             evolution = evolve_profile(args, candidate[2], wave, norm, norm_sq)
-            integrated_input = float(evolution["integrated_moving_packet_nonlinear_input"])
+            integrated_input = float(evolution["integrated_frozen_initial_packet_nonlinear_input"])
             score = float(evolution["moving_packet_recurrence_ratio"])
             survival_scores.append({
                 "attempt": candidate[1], "chi_mismatch": candidate[0], "moving_packet_recurrence_ratio": score,
-                "integrated_moving_packet_nonlinear_input": integrated_input,
-                "accepted_positive_short_input": integrated_input > 0.0,
+                "integrated_frozen_initial_packet_nonlinear_input": integrated_input,
+                "integrated_moving_packet_nonlinear_input": float(evolution["integrated_moving_packet_nonlinear_input"]),
+                "accepted_positive_frozen_initial_packet_input": integrated_input > 0.0,
             })
             if not args.require_positive_short_input or integrated_input > 0.0:
                 survivors.append((score, -candidate[0], candidate, evolution))
             trial_records.append((score, -candidate[0], candidate, evolution))
             print(
                 f"short-survival trial {ordinal}/{len(candidates)} Rmove={score:.8g} "
-                f"integrated_input={integrated_input:.8g}",
+                f"frozen_integrated_input={integrated_input:.8g}",
                 file=sys.stderr,
                 flush=True,
             )
         if not survivors:
             # Keep the best rejected trajectory as a receipt: failure of a
             # promotion gate is data, not grounds for deleting the screen.
-            selection_status = "no_trial_met_positive_moving_packet_input_gate"
+            selection_status = "no_trial_met_positive_frozen_initial_packet_input_gate"
             selected_trial = max(trial_records, key=lambda row: (row[0], row[1]))
             _, _, selected, selected_evolution = selected_trial
         else:
@@ -594,6 +673,7 @@ def main() -> None:
             "angular_width": args.angular_width, "radial_log_width": args.radial_log_width,
             "helicity_bias": args.helicity_bias, "spatial_coherence": args.spatial_coherence,
             "angular_axis": list(args.angular_axis), "seed": args.seed,
+            "state_input": str(args.state_input) if args.state_input is not None else None,
             "chi_target": args.chi_target, "chi_sign": args.chi_sign, "chi_attempts": args.chi_attempts,
             "target_dominance_min": args.target_dominance_min,
             "selection_objective": args.selection_objective,
@@ -616,7 +696,41 @@ def main() -> None:
         "stratified_interaction_measure": estimate,
     }
     if args.evolve:
-        payload["finite_galerkin_evolution"] = selected_evolution or evolve_profile(args, raw, wave, norm, norm_sq)
+        evolution_payload = selected_evolution or evolve_profile(args, raw, wave, norm, norm_sq)
+        final_raw = np.asarray(evolution_payload.pop("_final_raw"), dtype=np.complex128)
+        payload["finite_galerkin_evolution"] = evolution_payload
+    if args.save_selected_state is not None:
+        args.save_selected_state.parent.mkdir(parents=True, exist_ok=True)
+        np.savez_compressed(
+            args.save_selected_state,
+            raw_hat=raw,
+            selected_attempt=np.asarray(attempt, dtype=np.int64),
+            seed=np.asarray(args.seed + attempt, dtype=np.int64),
+            critical_mass=np.asarray(args.critical_mass, dtype=np.float64),
+            chi_signed=np.asarray(static["chi_signed"], dtype=np.float64),
+        )
+        payload["selected_state_receipt"] = {
+            "path": str(args.save_selected_state),
+            "format": "npz-compressed raw FFT coefficients; preserves the exact selected finite state",
+            "attempt": attempt,
+            "effective_seed": args.seed + attempt,
+        }
+    if args.save_final_state is not None:
+        if not args.evolve:
+            raise ValueError("--save-final-state requires --evolve")
+        args.save_final_state.parent.mkdir(parents=True, exist_ok=True)
+        np.savez_compressed(
+            args.save_final_state,
+            raw_hat=final_raw,
+            segment_window_c=np.asarray(args.window_c, dtype=np.float64),
+            dt=np.asarray(args.dt, dtype=np.float64),
+            nu=np.asarray(args.nu, dtype=np.float64),
+        )
+        payload["final_state_receipt"] = {
+            "path": str(args.save_final_state),
+            "format": "npz-compressed raw FFT coefficients after the declared finite-Galerkin segment",
+            "segment_window_c": args.window_c,
+        }
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
     print(json.dumps(payload, indent=2, sort_keys=True))
