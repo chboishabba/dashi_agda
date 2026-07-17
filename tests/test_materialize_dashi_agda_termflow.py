@@ -1,16 +1,15 @@
 from __future__ import annotations
 
-import importlib.util
+import importlib
 import json
+import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / "scripts" / "materialize_dashi_agda_termflow.py"
-SPEC = importlib.util.spec_from_file_location("dashi_termflow", SCRIPT)
-assert SPEC and SPEC.loader
-MODULE = importlib.util.module_from_spec(SPEC)
-SPEC.loader.exec_module(MODULE)
+SCRIPTS = ROOT / "scripts"
+sys.path.insert(0, str(SCRIPTS))
+MODULE = importlib.import_module("materialize_dashi_agda_termflow")
 
 
 def write_fixture(tmp_path: Path) -> Path:
