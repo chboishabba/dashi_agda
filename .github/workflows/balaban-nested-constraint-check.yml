@@ -76,6 +76,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanProjectedEndpointDifference.agda
               DASHI/Physics/YangMills/BalabanProjectedBlockCorrection.agda
               DASHI/Physics/YangMills/BalabanProjectedBlockBetaIdentity.agda
+              DASHI/Physics/YangMills/BalabanProjectedBlockToCMP122.agda
               DASHI/Physics/YangMills/BalabanEndpointBasisChangeCancellation.agda
               DASHI/Physics/YangMills/BalabanConstrainedKKTLinearisation.agda
               DASHI/Physics/YangMills/BalabanConstrainedEnvelopeHessian.agda
