@@ -39,29 +39,46 @@ jobs:
         run: python scripts/materialize_dashi_theory_atlas.py --check
       - name: Validate source-backed 369 hyperfabric extraction
         run: python scripts/materialize_dashi_hyperfabric.py --check
-      - name: Validate Yang-Mills proof-lane hyperfabric
-        run: python scripts/materialize_dashi_lane_hyperfabric.py --config config/dashi-yang-mills-lane-hyperfabric.json --check
-      - name: Validate Navier-Stokes proof-lane hyperfabric
-        run: python scripts/materialize_dashi_lane_hyperfabric.py --config config/dashi-navier-stokes-lane-hyperfabric.json --check
-      - name: Run visualization regression tests
-        run: python -m pytest -q tests/test_materialize_dashi_theory_atlas.py tests/test_materialize_dashi_hyperfabric.py tests/test_materialize_dashi_lane_hyperfabric.py
+      - name: Run atlas and 369 regression tests
+        run: python -m pytest -q tests/test_materialize_dashi_theory_atlas.py tests/test_materialize_dashi_hyperfabric.py
       - name: Materialise theorem atlas
         run: python scripts/materialize_dashi_theory_atlas.py --generated-at "1970-01-01T00:00:00+00:00"
       - name: Materialise 369 supervoxel hyperfabric
         run: python scripts/materialize_dashi_hyperfabric.py
-      - name: Materialise Yang-Mills proof-lane hyperfabric
-        run: python scripts/materialize_dashi_lane_hyperfabric.py --config config/dashi-yang-mills-lane-hyperfabric.json
-      - name: Materialise Navier-Stokes proof-lane hyperfabric
-        run: python scripts/materialize_dashi_lane_hyperfabric.py --config config/dashi-navier-stokes-lane-hyperfabric.json
-      - name: Upload generated visual artifacts
+      - name: Upload atlas and 369 artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: dashi-generated-visuals
+          name: dashi-atlas-and-369-visuals
           path: |
             artifacts/dashi-yang-mills-critical-path.json
             artifacts/dashi-yang-mills-critical-path.svg
             artifacts/dashi-369-supervoxel-hyperfabric.json
             artifacts/dashi-369-supervoxel-hyperfabric.svg
+
+  validate-proof-lanes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test dependency
+        run: python -m pip install pytest
+      - name: Validate Yang-Mills proof-lane hyperfabric
+        run: python scripts/materialize_dashi_lane_hyperfabric.py --config config/dashi-yang-mills-lane-hyperfabric.json --check
+      - name: Validate Navier-Stokes proof-lane hyperfabric
+        run: python scripts/materialize_dashi_lane_hyperfabric.py --config config/dashi-navier-stokes-lane-hyperfabric.json --check
+      - name: Run proof-lane regression tests
+        run: python -m pytest -q tests/test_materialize_dashi_lane_hyperfabric.py
+      - name: Materialise Yang-Mills proof-lane hyperfabric
+        run: python scripts/materialize_dashi_lane_hyperfabric.py --config config/dashi-yang-mills-lane-hyperfabric.json
+      - name: Materialise Navier-Stokes proof-lane hyperfabric
+        run: python scripts/materialize_dashi_lane_hyperfabric.py --config config/dashi-navier-stokes-lane-hyperfabric.json
+      - name: Upload proof-lane visual artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashi-proof-lane-hyperfabrics
+          path: |
             artifacts/dashi-yang-mills-lane-hyperfabric.json
             artifacts/dashi-yang-mills-lane-hyperfabric.svg
             artifacts/dashi-navier-stokes-lane-hyperfabric.json
