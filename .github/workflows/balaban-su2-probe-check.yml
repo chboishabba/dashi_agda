@@ -16,6 +16,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanSU2AdjointPolynomialCalculus.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2AdjointCubicReduction.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2ReducedAdjointCalculus.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2AdjointMatrixDeterminant.agda'
       - '.github/workflows/balaban-su2-probe-check.yml'
 
 permissions:
@@ -55,6 +56,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanSU2AdjointPolynomialCalculus.agda
               DASHI/Physics/YangMills/BalabanSU2AdjointCubicReduction.agda
               DASHI/Physics/YangMills/BalabanSU2ReducedAdjointCalculus.agda
+              DASHI/Physics/YangMills/BalabanSU2AdjointMatrixDeterminant.agda
             )
             for target in "${targets[@]}"; do
               echo "Checking: $target"
