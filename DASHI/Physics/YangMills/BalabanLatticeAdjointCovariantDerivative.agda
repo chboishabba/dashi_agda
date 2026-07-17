@@ -21,6 +21,7 @@ module DASHI.Physics.YangMills.BalabanLatticeAdjointCovariantDerivative where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Nat.Base using (NonZero)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4)
@@ -92,7 +93,7 @@ transformPointField group adj gauge phi x =
   action adj (gauge x) (phi x)
 
 covariantDerivative :
-  ∀ {N : Nat}
+  ∀ {N : Nat} {{_ : NonZero N}}
   (group : GroupStructure) →
   (adj : AdjointAdditiveModule group) →
   DirectedGaugeField4 N group →
@@ -118,7 +119,7 @@ inverseActionCancels group adj g X =
       (actionUnit adj X))
 
 gaugeTransformedTransport :
-  ∀ {N : Nat}
+  ∀ {N : Nat} {{_ : NonZero N}}
   (group : GroupStructure) →
   (adj : AdjointAdditiveModule group) →
   (gauge : GaugeFunction4 N group) →
@@ -153,7 +154,7 @@ gaugeTransformedTransport group adj gauge U phi b =
             (phi (target b))))))
 
 covariantDerivativeGaugeCovariant :
-  ∀ {N : Nat}
+  ∀ {N : Nat} {{_ : NonZero N}}
   (group : GroupStructure) →
   (adj : AdjointAdditiveModule group) →
   (gauge : GaugeFunction4 N group) →
