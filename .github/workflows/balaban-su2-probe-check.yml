@@ -26,27 +26,30 @@ permissions:
 jobs:
   su2-agda:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check concrete SU2 carrier lane
+      - name: Check concrete SU2 carrier lane with Agda 2.9
         id: check
         shell: bash
         run: |
           set +e
           (
             set -euo pipefail
-            AGDA_BIN="$(nix build --no-link --print-out-paths nixpkgs#agda)/bin/agda"
-            STDLIB_OUT="$(nix build --no-link --print-out-paths nixpkgs#agdaPackages.standard-library)"
-            STDLIB_FILE="$(find "$STDLIB_OUT" -type f -path '*/Data/Product.agda' -print -quit)"
-            STDLIB_INCLUDE="${STDLIB_FILE%/Data/Product.agda}"
+            AGDA_REF=6a5169a469d506ee848ad99ef574c3df8e329a02
+            AGDA_BIN="$(nix build --no-link --print-out-paths \
+              "github:agda/agda/$AGDA_REF#debug.bin")/bin/agda"
+            STDLIB_ROOT="$(mktemp -d)"
+            git clone --depth=1 --branch experimental \
+              https://github.com/agda/agda-stdlib.git "$STDLIB_ROOT"
+            STDLIB_INCLUDE="$STDLIB_ROOT/src"
             CHECK_ROOT="$(mktemp -d)"
             cp -a "$GITHUB_WORKSPACE/DASHI" "$CHECK_ROOT/DASHI"
-            cp -a "$STDLIB_INCLUDE" "$CHECK_ROOT/standard-library"
-            chmod -R u+w "$CHECK_ROOT/standard-library"
+            "$AGDA_BIN" --version
+            printf 'agda-stdlib %s\n' "$(git -C "$STDLIB_ROOT" rev-parse HEAD)"
             targets=(
               DASHI/Physics/YangMills/BalabanRealRingSolverProbe.agda
               DASHI/Physics/YangMills/BalabanSU2QuaternionCarrier.agda
@@ -62,14 +65,14 @@ jobs:
             )
             for target in "${targets[@]}"; do
               echo "Checking: $target"
-              "$AGDA_BIN" --no-libraries --no-default-libraries \
-                -i "$CHECK_ROOT" -i "$CHECK_ROOT/standard-library" \
+              "$AGDA_BIN" --no-libraries --no-default-libraries -j0 \
+                -i "$CHECK_ROOT" -i "$STDLIB_INCLUDE" \
                 "$CHECK_ROOT/$target"
             done
           ) > su2-carrier-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 120 su2-carrier-check.log
+          tail -n 160 su2-carrier-check.log
           exit 0
       - name: Upload SU2 check log
         if: always()
