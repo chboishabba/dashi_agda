@@ -91,35 +91,25 @@ determinantBoundsToInverseSquareInterval
   endpointLowerBound correctionLowerBound interactionLowerBound
   endpointUpperBound correctionUpperBound interactionUpperBound
   k n =
-  inverseSquareIntervalEnclosure
-    arith
-    step
-    (λ i length →
-      (endpointLower i length +ℝ correctionLower i length)
-        +ℝ interactionLower i length)
-    (λ i length →
-      (endpointUpper i length +ℝ correctionUpper i length)
-        +ℝ interactionUpper i length)
-    (λ i length →
-      proj₁
-        (betaIntervalBilateralBound
-          (betaCorrection step)
-          gaussian correction interaction endpoint
-          totalBeta shellDecomposition
-          endpointLower correctionLower interactionLower
-          endpointUpper correctionUpper interactionUpper
-          endpointLowerBound correctionLowerBound interactionLowerBound
-          endpointUpperBound correctionUpperBound interactionUpperBound
-          i length))
-    (λ i length →
-      proj₂
-        (betaIntervalBilateralBound
-          (betaCorrection step)
-          gaussian correction interaction endpoint
-          totalBeta shellDecomposition
-          endpointLower correctionLower interactionLower
-          endpointUpper correctionUpper interactionUpper
-          endpointLowerBound correctionLowerBound interactionLowerBound
-          endpointUpperBound correctionUpperBound interactionUpperBound
-          i length))
-    k n
+  let
+    bounds = betaIntervalBilateralBound
+      (betaCorrection step)
+      gaussian correction interaction endpoint
+      totalBeta shellDecomposition
+      endpointLower correctionLower interactionLower
+      endpointUpper correctionUpper interactionUpper
+      endpointLowerBound correctionLowerBound interactionLowerBound
+      endpointUpperBound correctionUpperBound interactionUpperBound
+  in
+    inverseSquareIntervalEnclosure
+      arith
+      step
+      (λ i length →
+        (endpointLower i length +ℝ correctionLower i length)
+          +ℝ interactionLower i length)
+      (λ i length →
+        (endpointUpper i length +ℝ correctionUpper i length)
+          +ℝ interactionUpper i length)
+      (λ i length → proj₁ (bounds i length))
+      (λ i length → proj₂ (bounds i length))
+      k n
