@@ -73,9 +73,11 @@ infixl 20 _+q_
 
 zeroQ : Quaternion
 zeroQ = quat 0ℝ 0ℝ 0ℝ 0ℝ
+{-# INLINE zeroQ #-}
 
 oneQ : Quaternion
 oneQ = quat 1ℝ 0ℝ 0ℝ 0ℝ
+{-# INLINE oneQ #-}
 
 _+q_ : Quaternion → Quaternion → Quaternion
 quat a0 a1 a2 a3 +q quat b0 b1 b2 b3 =
@@ -84,14 +86,17 @@ quat a0 a1 a2 a3 +q quat b0 b1 b2 b3 =
     (a1 +ℝ b1)
     (a2 +ℝ b2)
     (a3 +ℝ b3)
+{-# INLINE _+q_ #-}
 
 negQ : Quaternion → Quaternion
 negQ (quat a0 a1 a2 a3) =
   quat (-ℝ a0) (-ℝ a1) (-ℝ a2) (-ℝ a3)
+{-# INLINE negQ #-}
 
 conjugateQ : Quaternion → Quaternion
 conjugateQ (quat a0 a1 a2 a3) =
   quat a0 (-ℝ a1) (-ℝ a2) (-ℝ a3)
+{-# INLINE conjugateQ #-}
 
 _*q_ : Quaternion → Quaternion → Quaternion
 quat a0 a1 a2 a3 *q quat b0 b1 b2 b3 =
@@ -108,12 +113,14 @@ quat a0 a1 a2 a3 *q quat b0 b1 b2 b3 =
     (((a0 *ℝ b3) +ℝ (a1 *ℝ b2))
       +ℝ (-ℝ (a2 *ℝ b1))
       +ℝ (a3 *ℝ b0))
+{-# INLINE _*q_ #-}
 
 normSquaredQ : Quaternion → ℝ
 normSquaredQ (quat a0 a1 a2 a3) =
   (((a0 *ℝ a0) +ℝ (a1 *ℝ a1))
     +ℝ (a2 *ℝ a2)
     +ℝ (a3 *ℝ a3))
+{-# INLINE normSquaredQ #-}
 
 scaleRealQ : ℝ → Quaternion → Quaternion
 scaleRealQ scalar (quat a0 a1 a2 a3) =
@@ -122,6 +129,7 @@ scaleRealQ scalar (quat a0 a1 a2 a3) =
     (scalar *ℝ a1)
     (scalar *ℝ a2)
     (scalar *ℝ a3)
+{-# INLINE scaleRealQ #-}
 
 quaternionExt :
   ∀ {a b : Quaternion} →
@@ -228,7 +236,12 @@ quaternionMultiplyConjugateLeft (quat a0 a1 a2 a3) =
 
 scaleOneQ :
   scaleRealQ 1ℝ oneQ ≡ oneQ
-scaleOneQ = quaternionOneLeft oneQ
+scaleOneQ =
+  quaternionExt
+    (Solver.solve [] realSolverRing)
+    (Solver.solve [] realSolverRing)
+    (Solver.solve [] realSolverRing)
+    (Solver.solve [] realSolverRing)
 
 ------------------------------------------------------------------------
 -- Unit quaternions and the literal gauge-group instance
@@ -250,7 +263,7 @@ su2QuaternionExt {su2q a aUnit} {su2q .a bUnit} refl = refl
 
 su2Identity : SU2Quaternion
 su2Identity = su2q oneQ
-  (Solver.solve ([] {A = ℝ}) realSolverRing)
+  (Solver.solve [] realSolverRing)
 
 su2Multiply : SU2Quaternion → SU2Quaternion → SU2Quaternion
 su2Multiply (su2q a aUnit) (su2q b bUnit) =
