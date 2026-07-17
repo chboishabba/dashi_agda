@@ -1,73 +1,51 @@
 module DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier where
 
 ------------------------------------------------------------------------
--- Concrete su(2) Lie-algebra carrier from pure-imaginary quaternions.
+-- Concrete su(2) carrier and adjoint action.
 --
--- SU(2) is represented by unit quaternions in
--- `BalabanSU2QuaternionCarrier`.  Its Lie algebra is the three-dimensional
--- real vector space of pure-imaginary quaternions.  The adjoint action is
--- quaternion conjugation
+-- The group SU(2) is the unit-quaternion carrier from
+-- `BalabanSU2QuaternionCarrier`.  Its Lie algebra is represented by the
+-- three imaginary quaternion coordinates.  The action
 --
---   Ad_u X = u X u^{-1}.
+--   Ad_u X = u X conjugate(u)
 --
--- This module constructs the additive/vector-space operations, proves that
--- conjugation preserves the pure-imaginary subspace, proves the group-action
--- laws, and packages the result as the adjoint module consumed by the literal
--- lattice operators.
---
--- No analytic estimate, exponential-map theorem, or source-specific RG claim
--- is introduced here.
+-- is defined literally and all additive/group-action laws below are reduced
+-- to polynomial identities over the same commutative-ring socket already used
+-- by the quaternion carrier.  No additional postulate or analytic theorem is
+-- introduced here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Primitive using (lzero)
-open import Data.Product.Base using (_,_)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Data.List.Base using ([]; _∷_)
+open import Relation.Binary.PropositionalEquality using (cong)
 
-open import DASHI.Core.RealAnalysisAxioms using
-  ( ℝ
-  ; 0ℝ
-  ; 1ℝ
-  ; _+ℝ_
-  ; _-ℝ_
-  ; _*ℝ_
-  ; -ℝ_
-  )
-open import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport using
-  ( GroupStructure )
+import Tactic.RingSolver as Solver
+
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanLatticeAdjointCovariantDerivative using
   ( AdjointAdditiveModule )
 open import DASHI.Physics.YangMills.BalabanCovariantPathIntegral using
   ( AdjointLinearModule )
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ( Quaternion
-  ; quaternion
-  ; realPart
-  ; iPart
-  ; jPart
-  ; kPart
-  ; quaternionExt
-  ; quaternionAdd
-  ; quaternionNegate
-  ; quaternionSubtract
-  ; quaternionMultiply
-  ; quaternionConjugate
-  ; quaternionScale
-  ; quaternionOne
-  ; quaternionZero
-  ; quaternionMultiplyAssoc
-  ; quaternionOneLeft
-  ; quaternionOneRight
-  ; quaternionConjugateMultiply
-  ; quaternionConjugateInvolutive
-  ; quaternionScaleAdd
-  ; quaternionScaleMultiply
-  ; quaternionScaleOne
+  ; quat
+  ; q0
+  ; q1
+  ; q2
+  ; q3
+  ; _+R_
+  ; _*R_
+  ; -R_
+  ; zeroR
+  ; realSolverRing
+  ; _+q_
+  ; conjugateQ
+  ; _*q_
   ; SU2Quaternion
-  ; quaternionValue
-  ; su2Unit
+  ; su2q
+  ; quaternion
+  ; su2Identity
   ; su2Multiply
-  ; su2Inverse
   ; su2QuaternionGroup
   )
 
@@ -80,239 +58,192 @@ record SU2LieAlgebra : Set where
 
 open SU2LieAlgebra public
 
+su2LieExt :
+  ∀ {X Y : SU2LieAlgebra} →
+  xComponent X ≡ xComponent Y →
+  yComponent X ≡ yComponent Y →
+  zComponent X ≡ zComponent Y →
+  X ≡ Y
+su2LieExt {su2Lie x y z} {su2Lie .x .y .z} refl refl refl = refl
+
 lieQuaternion : SU2LieAlgebra → Quaternion
-lieQuaternion (su2Lie x y z) = quaternion 0ℝ x y z
+lieQuaternion (su2Lie x y z) = quat zeroR x y z
 
 lieFromQuaternion : Quaternion → SU2LieAlgebra
-lieFromQuaternion q =
-  su2Lie (iPart q) (jPart q) (kPart q)
+lieFromQuaternion q = su2Lie (q1 q) (q2 q) (q3 q)
 
 lieFromQuaternionLieQuaternion :
-  ∀ X →
-  lieFromQuaternion (lieQuaternion X) ≡ X
+  ∀ X → lieFromQuaternion (lieQuaternion X) ≡ X
 lieFromQuaternionLieQuaternion (su2Lie x y z) = refl
 
-lieQuaternionLieFromPureImaginary :
-  ∀ q →
-  realPart q ≡ 0ℝ →
-  lieQuaternion (lieFromQuaternion q) ≡ q
-lieQuaternionLieFromPureImaginary
-  (quaternion r x y z) r-zero =
-  quaternionExt r-zero refl refl refl
-
 lieZero : SU2LieAlgebra
-lieZero = su2Lie 0ℝ 0ℝ 0ℝ
+lieZero = su2Lie zeroR zeroR zeroR
 
 lieAdd : SU2LieAlgebra → SU2LieAlgebra → SU2LieAlgebra
 lieAdd (su2Lie x₁ y₁ z₁) (su2Lie x₂ y₂ z₂) =
-  su2Lie (x₁ +ℝ x₂) (y₁ +ℝ y₂) (z₁ +ℝ z₂)
+  su2Lie (x₁ +R x₂) (y₁ +R y₂) (z₁ +R z₂)
 
 lieNegate : SU2LieAlgebra → SU2LieAlgebra
-lieNegate (su2Lie x y z) = su2Lie (-ℝ x) (-ℝ y) (-ℝ z)
+lieNegate (su2Lie x y z) = su2Lie (-R x) (-R y) (-R z)
 
 lieSubtract : SU2LieAlgebra → SU2LieAlgebra → SU2LieAlgebra
 lieSubtract X Y = lieAdd X (lieNegate Y)
 
 lieScale : ℝ → SU2LieAlgebra → SU2LieAlgebra
 lieScale scalar (su2Lie x y z) =
-  su2Lie (scalar *ℝ x) (scalar *ℝ y) (scalar *ℝ z)
+  su2Lie (scalar *R x) (scalar *R y) (scalar *R z)
 
-lieQuaternionAdd :
-  ∀ X Y →
-  lieQuaternion (lieAdd X Y)
-  ≡ quaternionAdd (lieQuaternion X) (lieQuaternion Y)
-lieQuaternionAdd (su2Lie x₁ y₁ z₁) (su2Lie x₂ y₂ z₂) = refl
+lieAddAssociative :
+  ∀ X Y Z → lieAdd (lieAdd X Y) Z ≡ lieAdd X (lieAdd Y Z)
+lieAddAssociative
+  (su2Lie x₁ y₁ z₁)
+  (su2Lie x₂ y₂ z₂)
+  (su2Lie x₃ y₃ z₃) =
+  su2LieExt
+    (Solver.solve (x₁ ∷ x₂ ∷ x₃ ∷ []) realSolverRing)
+    (Solver.solve (y₁ ∷ y₂ ∷ y₃ ∷ []) realSolverRing)
+    (Solver.solve (z₁ ∷ z₂ ∷ z₃ ∷ []) realSolverRing)
 
-lieQuaternionNegate :
-  ∀ X →
-  lieQuaternion (lieNegate X)
-  ≡ quaternionNegate (lieQuaternion X)
-lieQuaternionNegate (su2Lie x y z) = refl
-
-lieQuaternionSubtract :
-  ∀ X Y →
-  lieQuaternion (lieSubtract X Y)
-  ≡ quaternionSubtract (lieQuaternion X) (lieQuaternion Y)
-lieQuaternionSubtract X Y =
-  trans
-    (lieQuaternionAdd X (lieNegate Y))
-    (cong (quaternionAdd (lieQuaternion X))
-      (lieQuaternionNegate Y))
-
-lieQuaternionScale :
-  ∀ scalar X →
-  lieQuaternion (lieScale scalar X)
-  ≡ quaternionScale scalar (lieQuaternion X)
-lieQuaternionScale scalar (su2Lie x y z) = refl
-
-postulate
-  realAddAssoc :
-    ∀ a b c →
-    (a +ℝ b) +ℝ c ≡ a +ℝ (b +ℝ c)
-
-  realZeroLeft :
-    ∀ a →
-    0ℝ +ℝ a ≡ a
-
-  realZeroRight :
-    ∀ a →
-    a +ℝ 0ℝ ≡ a
-
-  realNegateSubtract :
-    ∀ a b →
-    a +ℝ (-ℝ b) ≡ a -ℝ b
-
-lieAddAssoc :
-  ∀ X Y Z →
-  lieAdd (lieAdd X Y) Z ≡ lieAdd X (lieAdd Y Z)
-lieAddAssoc (su2Lie x₁ y₁ z₁) (su2Lie x₂ y₂ z₂) (su2Lie x₃ y₃ z₃) =
-  cong₂ (λ x yz → su2Lie x (Data.Product.Base.proj₁ yz) (Data.Product.Base.proj₂ yz))
-    (realAddAssoc x₁ x₂ x₃)
-    (cong₂ _,_
-      (realAddAssoc y₁ y₂ y₃)
-      (realAddAssoc z₁ z₂ z₃))
-
-lieZeroLeft :
-  ∀ X → lieAdd lieZero X ≡ X
+lieZeroLeft : ∀ X → lieAdd lieZero X ≡ X
 lieZeroLeft (su2Lie x y z) =
-  cong₂ (λ x yz → su2Lie x (Data.Product.Base.proj₁ yz) (Data.Product.Base.proj₂ yz))
-    (realZeroLeft x)
-    (cong₂ _,_ (realZeroLeft y) (realZeroLeft z))
+  su2LieExt
+    (Solver.solve (x ∷ []) realSolverRing)
+    (Solver.solve (y ∷ []) realSolverRing)
+    (Solver.solve (z ∷ []) realSolverRing)
 
-lieZeroRight :
-  ∀ X → lieAdd X lieZero ≡ X
+lieZeroRight : ∀ X → lieAdd X lieZero ≡ X
 lieZeroRight (su2Lie x y z) =
-  cong₂ (λ x yz → su2Lie x (Data.Product.Base.proj₁ yz) (Data.Product.Base.proj₂ yz))
-    (realZeroRight x)
-    (cong₂ _,_ (realZeroRight y) (realZeroRight z))
-
--- Quaternion conjugation by a unit quaternion preserves pure imaginary
--- quaternions.  For a pure-imaginary X, conjugate X = -X.  Conjugating the
--- entire product and using u^{-1}=conjugate u gives the same negation law for
--- u X u^{-1}; hence its real part is zero.
-postulate
-  conjugationPreservesPureImaginary :
-    ∀ (u : SU2Quaternion) (X : SU2LieAlgebra) →
-    realPart
-      (quaternionMultiply
-        (quaternionMultiply (quaternionValue u) (lieQuaternion X))
-        (quaternionValue (su2Inverse u)))
-    ≡ 0ℝ
+  su2LieExt
+    (Solver.solve (x ∷ []) realSolverRing)
+    (Solver.solve (y ∷ []) realSolverRing)
+    (Solver.solve (z ∷ []) realSolverRing)
 
 adjointQuaternion :
   SU2Quaternion → SU2LieAlgebra → Quaternion
 adjointQuaternion u X =
-  quaternionMultiply
-    (quaternionMultiply (quaternionValue u) (lieQuaternion X))
-    (quaternionValue (su2Inverse u))
+  (quaternion u *q lieQuaternion X) *q conjugateQ (quaternion u)
 
 su2Adjoint :
   SU2Quaternion → SU2LieAlgebra → SU2LieAlgebra
 su2Adjoint u X = lieFromQuaternion (adjointQuaternion u X)
 
-su2AdjointQuaternion :
-  ∀ u X →
-  lieQuaternion (su2Adjoint u X) ≡ adjointQuaternion u X
-su2AdjointQuaternion u X =
-  lieQuaternionLieFromPureImaginary
-    (adjointQuaternion u X)
-    (conjugationPreservesPureImaginary u X)
+-- Conjugating a pure-imaginary quaternion has zero real component.  The
+-- statement is polynomial and does not use the unit-norm proof.
+adjointQuaternionPureImaginary :
+  ∀ u X → q0 (adjointQuaternion u X) ≡ zeroR
+adjointQuaternionPureImaginary
+  (su2q (quat a₀ a₁ a₂ a₃) a-unit)
+  (su2Lie x y z) =
+  Solver.solve
+    (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ x ∷ y ∷ z ∷ [])
+    realSolverRing
 
-postulate
-  adjointPreservesSubtractQuaternion :
-    ∀ u X Y →
-    adjointQuaternion u (lieSubtract X Y)
-    ≡ quaternionSubtract
-        (adjointQuaternion u X)
-        (adjointQuaternion u Y)
-
-  adjointPreservesAddQuaternion :
-    ∀ u X Y →
-    adjointQuaternion u (lieAdd X Y)
-    ≡ quaternionAdd
-        (adjointQuaternion u X)
-        (adjointQuaternion u Y)
-
-  adjointPreservesZeroQuaternion :
-    ∀ u →
-    adjointQuaternion u lieZero ≡ quaternionZero
-
-  adjointPreservesScaleQuaternion :
-    ∀ u scalar X →
-    adjointQuaternion u (lieScale scalar X)
-    ≡ quaternionScale scalar (adjointQuaternion u X)
-
-  adjointUnitQuaternion :
-    ∀ X →
-    adjointQuaternion su2Unit X ≡ lieQuaternion X
-
-  adjointMultiplyQuaternion :
-    ∀ u v X →
-    adjointQuaternion (su2Multiply u v) X
-    ≡ adjointQuaternion u (su2Adjoint v X)
+lieQuaternionAdjoint :
+  ∀ u X → lieQuaternion (su2Adjoint u X) ≡ adjointQuaternion u X
+lieQuaternionAdjoint u X =
+  DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier.quaternionExt
+    (adjointQuaternionPureImaginary u X)
+    refl refl refl
 
 su2AdjointUnit :
-  ∀ X → su2Adjoint su2Unit X ≡ X
-su2AdjointUnit X =
-  trans
-    (cong lieFromQuaternion (adjointUnitQuaternion X))
-    (lieFromQuaternionLieQuaternion X)
+  ∀ X → su2Adjoint su2Identity X ≡ X
+su2AdjointUnit (su2Lie x y z) =
+  su2LieExt
+    (Solver.solve (x ∷ y ∷ z ∷ []) realSolverRing)
+    (Solver.solve (x ∷ y ∷ z ∷ []) realSolverRing)
+    (Solver.solve (x ∷ y ∷ z ∷ []) realSolverRing)
 
 su2AdjointMultiply :
   ∀ u v X →
   su2Adjoint (su2Multiply u v) X
-  ≡ su2Adjoint u (su2Adjoint v X)
-su2AdjointMultiply u v X =
-  cong lieFromQuaternion (adjointMultiplyQuaternion u v X)
-
-su2AdjointSubtract :
-  ∀ u X Y →
-  su2Adjoint u (lieSubtract X Y)
-  ≡ lieSubtract (su2Adjoint u X) (su2Adjoint u Y)
-su2AdjointSubtract u X Y =
-  cong lieFromQuaternion
-    (trans
-      (adjointPreservesSubtractQuaternion u X Y)
-      (sym
-        (trans
-          (lieQuaternionSubtract (su2Adjoint u X) (su2Adjoint u Y))
-          (cong₂ quaternionSubtract
-            (su2AdjointQuaternion u X)
-            (su2AdjointQuaternion u Y)))))
+    ≡ su2Adjoint u (su2Adjoint v X)
+su2AdjointMultiply
+  (su2q (quat a₀ a₁ a₂ a₃) a-unit)
+  (su2q (quat b₀ b₁ b₂ b₃) b-unit)
+  (su2Lie x y z) =
+  su2LieExt
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷
+       x ∷ y ∷ z ∷ [])
+      realSolverRing)
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷
+       x ∷ y ∷ z ∷ [])
+      realSolverRing)
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷
+       x ∷ y ∷ z ∷ [])
+      realSolverRing)
 
 su2AdjointAdd :
   ∀ u X Y →
   su2Adjoint u (lieAdd X Y)
-  ≡ lieAdd (su2Adjoint u X) (su2Adjoint u Y)
-su2AdjointAdd u X Y =
-  cong lieFromQuaternion
-    (trans
-      (adjointPreservesAddQuaternion u X Y)
-      (sym
-        (trans
-          (lieQuaternionAdd (su2Adjoint u X) (su2Adjoint u Y))
-          (cong₂ quaternionAdd
-            (su2AdjointQuaternion u X)
-            (su2AdjointQuaternion u Y)))))
+    ≡ lieAdd (su2Adjoint u X) (su2Adjoint u Y)
+su2AdjointAdd
+  (su2q (quat a₀ a₁ a₂ a₃) a-unit)
+  (su2Lie x₁ y₁ z₁)
+  (su2Lie x₂ y₂ z₂) =
+  su2LieExt
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ x₁ ∷ y₁ ∷ z₁ ∷
+       x₂ ∷ y₂ ∷ z₂ ∷ [])
+      realSolverRing)
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ x₁ ∷ y₁ ∷ z₁ ∷
+       x₂ ∷ y₂ ∷ z₂ ∷ [])
+      realSolverRing)
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ x₁ ∷ y₁ ∷ z₁ ∷
+       x₂ ∷ y₂ ∷ z₂ ∷ [])
+      realSolverRing)
 
-su2AdjointZero :
-  ∀ u → su2Adjoint u lieZero ≡ lieZero
-su2AdjointZero u =
-  cong lieFromQuaternion (adjointPreservesZeroQuaternion u)
+su2AdjointSubtract :
+  ∀ u X Y →
+  su2Adjoint u (lieSubtract X Y)
+    ≡ lieSubtract (su2Adjoint u X) (su2Adjoint u Y)
+su2AdjointSubtract
+  (su2q (quat a₀ a₁ a₂ a₃) a-unit)
+  (su2Lie x₁ y₁ z₁)
+  (su2Lie x₂ y₂ z₂) =
+  su2LieExt
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ x₁ ∷ y₁ ∷ z₁ ∷
+       x₂ ∷ y₂ ∷ z₂ ∷ [])
+      realSolverRing)
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ x₁ ∷ y₁ ∷ z₁ ∷
+       x₂ ∷ y₂ ∷ z₂ ∷ [])
+      realSolverRing)
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ x₁ ∷ y₁ ∷ z₁ ∷
+       x₂ ∷ y₂ ∷ z₂ ∷ [])
+      realSolverRing)
+
+su2AdjointZero : ∀ u → su2Adjoint u lieZero ≡ lieZero
+su2AdjointZero (su2q (quat a₀ a₁ a₂ a₃) a-unit) =
+  su2LieExt
+    (Solver.solve (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ []) realSolverRing)
+    (Solver.solve (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ []) realSolverRing)
+    (Solver.solve (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ []) realSolverRing)
 
 su2AdjointScale :
   ∀ u scalar X →
   su2Adjoint u (lieScale scalar X)
-  ≡ lieScale scalar (su2Adjoint u X)
-su2AdjointScale u scalar X =
-  cong lieFromQuaternion
-    (trans
-      (adjointPreservesScaleQuaternion u scalar X)
-      (sym
-        (trans
-          (lieQuaternionScale scalar (su2Adjoint u X))
-          (cong (quaternionScale scalar)
-            (su2AdjointQuaternion u X)))))
+    ≡ lieScale scalar (su2Adjoint u X)
+su2AdjointScale
+  (su2q (quat a₀ a₁ a₂ a₃) a-unit)
+  scalar
+  (su2Lie x y z) =
+  su2LieExt
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ scalar ∷ x ∷ y ∷ z ∷ [])
+      realSolverRing)
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ scalar ∷ x ∷ y ∷ z ∷ [])
+      realSolverRing)
+    (Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ scalar ∷ x ∷ y ∷ z ∷ [])
+      realSolverRing)
 
 su2AdjointAdditiveModule :
   AdjointAdditiveModule su2QuaternionGroup
@@ -331,7 +262,7 @@ su2AdjointLinearModule = record
   { additive = su2AdjointAdditiveModule
   ; zeroVector = lieZero
   ; addVector = lieAdd
-  ; addAssociative = lieAddAssoc
+  ; addAssociative = lieAddAssociative
   ; zeroLeft = lieZeroLeft
   ; zeroRight = lieZeroRight
   ; actionZero = su2AdjointZero
