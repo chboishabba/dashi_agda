@@ -62,68 +62,71 @@ splitFinePoint :
   ∀ {M L : Nat} →
   Cube4 (M * L) →
   BlockedCube4 M L
-splitFinePoint {L = L} (cube4 f₀ f₁ f₂ f₃) =
+splitFinePoint {M = M} {L = L} (cube4 f₀ f₁ f₂ f₃) =
   blockedCube4
     (cube4
-      (proj₁ (remQuot L f₀))
-      (proj₁ (remQuot L f₁))
-      (proj₁ (remQuot L f₂))
-      (proj₁ (remQuot L f₃)))
+      (proj₁ (remQuot {m = M} L f₀))
+      (proj₁ (remQuot {m = M} L f₁))
+      (proj₁ (remQuot {m = M} L f₂))
+      (proj₁ (remQuot {m = M} L f₃)))
     (cube4
-      (proj₂ (remQuot L f₀))
-      (proj₂ (remQuot L f₁))
-      (proj₂ (remQuot L f₂))
-      (proj₂ (remQuot L f₃)))
+      (proj₂ (remQuot {m = M} L f₀))
+      (proj₂ (remQuot {m = M} L f₁))
+      (proj₂ (remQuot {m = M} L f₂))
+      (proj₂ (remQuot {m = M} L f₃)))
 
 splitFinePointFinePoint :
   ∀ {M L : Nat}
   (blocked : BlockedCube4 M L) →
   splitFinePoint (finePoint blocked) ≡ blocked
-splitFinePointFinePoint {L = L}
+splitFinePointFinePoint {M = M} {L = L}
   (blockedCube4
     (cube4 c₀ c₁ c₂ c₃)
     (cube4 o₀ o₁ o₂ o₃)) =
   cong₂ blockedCube4
     (cube4Ext
-      (cong proj₁ (remQuot-combine c₀ o₀))
-      (cong proj₁ (remQuot-combine c₁ o₁))
-      (cong proj₁ (remQuot-combine c₂ o₂))
-      (cong proj₁ (remQuot-combine c₃ o₃)))
+      (cong proj₁ (remQuot-combine {n = M} {k = L} c₀ o₀))
+      (cong proj₁ (remQuot-combine {n = M} {k = L} c₁ o₁))
+      (cong proj₁ (remQuot-combine {n = M} {k = L} c₂ o₂))
+      (cong proj₁ (remQuot-combine {n = M} {k = L} c₃ o₃)))
     (cube4Ext
-      (cong proj₂ (remQuot-combine c₀ o₀))
-      (cong proj₂ (remQuot-combine c₁ o₁))
-      (cong proj₂ (remQuot-combine c₂ o₂))
-      (cong proj₂ (remQuot-combine c₃ o₃)))
+      (cong proj₂ (remQuot-combine {n = M} {k = L} c₀ o₀))
+      (cong proj₂ (remQuot-combine {n = M} {k = L} c₁ o₁))
+      (cong proj₂ (remQuot-combine {n = M} {k = L} c₂ o₂))
+      (cong proj₂ (remQuot-combine {n = M} {k = L} c₃ o₃)))
 
 finePointSplitFinePoint :
   ∀ {M L : Nat}
   (fine : Cube4 (M * L)) →
   finePoint (splitFinePoint fine) ≡ fine
-finePointSplitFinePoint {L = L} (cube4 f₀ f₁ f₂ f₃) =
+finePointSplitFinePoint {M = M} {L = L} (cube4 f₀ f₁ f₂ f₃) =
   cube4Ext
-    (combine-remQuot L f₀)
-    (combine-remQuot L f₁)
-    (combine-remQuot L f₂)
-    (combine-remQuot L f₃)
+    (combine-remQuot {n = M} L f₀)
+    (combine-remQuot {n = M} L f₁)
+    (combine-remQuot {n = M} L f₂)
+    (combine-remQuot {n = M} L f₃)
 
 coarseOfFine :
   ∀ {M L : Nat} →
   Cube4 (M * L) →
   Cube4 M
-coarseOfFine fine = coarseCube (splitFinePoint fine)
+coarseOfFine {M = M} {L = L} fine =
+  coarseCube (splitFinePoint {M = M} {L = L} fine)
 
 offsetOfFine :
   ∀ {M L : Nat} →
   Cube4 (M * L) →
   Cube4 L
-offsetOfFine fine = blockOffset (splitFinePoint fine)
+offsetOfFine {M = M} {L = L} fine =
+  blockOffset (splitFinePoint {M = M} {L = L} fine)
 
 finePointFromCoarseAndOffset :
   ∀ {M L : Nat}
   (fine : Cube4 (M * L)) →
   finePoint
     (blockedCube4
-      (coarseOfFine fine)
-      (offsetOfFine fine))
+      (coarseOfFine {M = M} {L = L} fine)
+      (offsetOfFine {M = M} {L = L} fine))
   ≡ fine
-finePointFromCoarseAndOffset = finePointSplitFinePoint
+finePointFromCoarseAndOffset {M = M} {L = L} fine =
+  finePointSplitFinePoint {M = M} {L = L} fine
