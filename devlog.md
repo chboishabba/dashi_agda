@@ -1,5 +1,23 @@
 # 2026-07-17 NS target interaction-closure instrumentation
 
+- Repaired the normalized-profile promotion surface after identifying that the
+  moving packet re-centres from shell 2 to shell 3.  The audit now records a
+  frozen-initial packet, its nonlinear/viscous integrals, checkpoint centre
+  changes, and diagnostic re-centering jumps; the positive-input gate now uses
+  the frozen packet.  It also writes a compressed selected-state NPZ receipt.
+  The exact selected positive-chi profile (effective seed `20260718`, replay
+  attempt `0`) survives the corrected audit:
+  `R_frozen=.1.04534448`, `R_move=1.01323364`, frozen nonlinear integral
+  `.50992680`, frozen viscous loss `.51619484`, with three checkpoint centre
+  changes.  This validates short-time frozen-window growth for one finite
+  state but does not establish a full-window counterexample or a theorem.
+- The same saved state passes three-level timestep comparison: frozen packet
+  `R=.1.04534448/.1.04534501/.1.04534455` at `.001/.0005/.00025`.  At the
+  finest step heat alone gives `.79799308`, hence nonlinear amplification is
+  `1.30996693`.  The short-window survivor is numerically resolved and has
+  been promoted to a `.25T` exact-state run; no longer-window claim is made
+  until that receipt lands.
+
 - Built the positive-signed-chi adversarial search gate.  The profile audit
   now filters signed chi and target dominance, can select by short endpoint
   survival while requiring positive integrated nonlinear input, and can impose

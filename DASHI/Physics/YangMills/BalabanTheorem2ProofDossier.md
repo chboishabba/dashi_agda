@@ -282,7 +282,7 @@ The prerequisite formulas are now located, rather than merely bibliographic:
 | --- | --- | --- |
 | linearized averaging coefficient `S(V,b_0(c))` | CMP 98, equation (124) and Proposition 3 | local constraint-Jacobian Hessian |
 | background quadratic operator | CMP 99, equations (3.10), (3.118)--(3.120), and (3.156) | constrained Gaussian Hessian |
-| constrained covariance | CMP 99, equations (3.183)--(3.187) | trace-log resolvent and decay |
+| constrained-coordinate covariance | CMP 99, equations (3.156)--(3.159) | exact carrier `B = C Btilde`, the coordinate covariance `(C* A^(k) C)^-1`, and the full constrained covariance `C (C* A^(k) C)^-1 C*` |
 | free multiscale Fourier symbols | CMP 95, equations (1.29)--(1.65), especially (1.60)--(1.63) | identity-background momentum evaluator |
 | determinant localization | CMP 102 (1985), 255--275, equations (61)--(63) | local plus trace-log decomposition |
 
