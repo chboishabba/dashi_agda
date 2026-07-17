@@ -1,0 +1,110 @@
+name: Balaban nested constraint Agda check
+
+on:
+  push:
+    branches:
+      - codex/balaban-nested-constraint-minimum
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/Balaban*.agda'
+      - '.github/workflows/balaban-nested-constraint-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check focused Yang-Mills modules
+        id: focused
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            AGDA_BIN="$(nix build --no-link --print-out-paths nixpkgs#agda)/bin/agda"
+            STDLIB_OUT="$(nix build --no-link --print-out-paths nixpkgs#agdaPackages.standard-library)"
+            STDLIB_FILE="$(find "$STDLIB_OUT" -type f -path '*/Data/Product.agda' -print -quit)"
+            if [ -z "$STDLIB_FILE" ]; then
+              echo "Unable to locate Data/Product.agda under $STDLIB_OUT" >&2
+              exit 2
+            fi
+            STDLIB_INCLUDE="${STDLIB_FILE%/Data/Product.agda}"
+            CHECK_ROOT="$(mktemp -d)"
+            cp -a "$GITHUB_WORKSPACE/DASHI" "$CHECK_ROOT/DASHI"
+            cp -a "$STDLIB_INCLUDE" "$CHECK_ROOT/standard-library"
+            chmod -R u+w "$CHECK_ROOT/standard-library"
+            "$AGDA_BIN" --version
+            targets=(
+              DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
+              DASHI/Physics/YangMills/BalabanConstrainedGaussianCarrierAlgebra.agda
+              DASHI/Physics/YangMills/BalabanFiniteConstraintChain.agda
+              DASHI/Physics/YangMills/BalabanFiniteConstraintCovariance.agda
+              DASHI/Physics/YangMills/BalabanIntervalConstraintChain.agda
+              DASHI/Physics/YangMills/BalabanIntervalConstraintCovariance.agda
+              DASHI/Physics/YangMills/BalabanIntervalConstraintComposition.agda
+              DASHI/Physics/YangMills/BalabanIntervalAdjointComposition.agda
+              DASHI/Physics/YangMills/BalabanIntervalCompositionAlgebra.agda
+              DASHI/Physics/YangMills/BalabanIntervalDeterminantAlgebra.agda
+              DASHI/Physics/YangMills/BalabanBilateralIntervalBounds.agda
+              DASHI/Physics/YangMills/BalabanIntervalMismatchBounds.agda
+              DASHI/Physics/YangMills/BalabanInverseSquareIntervalIdentity.agda
+              DASHI/Physics/YangMills/BalabanDeterminantToInverseSquareInterval.agda
+              DASHI/Physics/YangMills/BalabanIntervalToPrefixBridge.agda
+              DASHI/Physics/YangMills/BalabanDeterminantIntervalToPrefix.agda
+              DASHI/Physics/YangMills/BalabanDeterminantIntervalToCMP122.agda
+              DASHI/Physics/YangMills/BalabanLinearIntervalEnclosure.agda
+              DASHI/Physics/YangMills/BalabanLinearInverseSquareEnclosure.agda
+              DASHI/Physics/YangMills/BalabanCumulativeBlockCorrection.agda
+              DASHI/Physics/YangMills/BalabanCumulativeBlockCorrectionComposition.agda
+              DASHI/Physics/YangMills/BalabanCumulativeDeterminantInterval.agda
+              DASHI/Physics/YangMills/BalabanCumulativeDeterminantToInverseSquare.agda
+              DASHI/Physics/YangMills/BalabanCumulativeDeterminantToPrefix.agda
+              DASHI/Physics/YangMills/BalabanCumulativeDeterminantToCMP122.agda
+              DASHI/Physics/YangMills/BalabanBlockDeterminantProduct.agda
+              DASHI/Physics/YangMills/BalabanBlockDeterminantLogAdditivity.agda
+              DASHI/Physics/YangMills/BalabanVacuumSubtractionAlgebra.agda
+              DASHI/Physics/YangMills/BalabanVacuumSubtractedBlockDeterminant.agda
+              DASHI/Physics/YangMills/BalabanProjectionIntervalLinearity.agda
+              DASHI/Physics/YangMills/BalabanProjectedEndpointDifference.agda
+              DASHI/Physics/YangMills/BalabanProjectedBlockCorrection.agda
+              DASHI/Physics/YangMills/BalabanProjectedBlockBetaIdentity.agda
+              DASHI/Physics/YangMills/BalabanProjectedBlockToCMP122.agda
+              DASHI/Physics/YangMills/BalabanProjectedBlockToInverseSquare.agda
+              DASHI/Physics/YangMills/BalabanEndpointBasisChangeCancellation.agda
+              DASHI/Physics/YangMills/BalabanConstrainedKKTLinearisation.agda
+              DASHI/Physics/YangMills/BalabanConstrainedEnvelopeHessian.agda
+            )
+            cd "$CHECK_ROOT"
+            for target in "${targets[@]}"; do
+              echo "Checking: $target"
+              "$AGDA_BIN" \
+                --no-libraries --no-default-libraries \
+                -i "$CHECK_ROOT" -i "$CHECK_ROOT/standard-library" \
+                "$CHECK_ROOT/$target"
+            done
+          ) > agda-focused-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 100 agda-focused-check.log
+          exit 0
+
+      - name: Upload focused Agda log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: balaban-focused-agda-log
+          path: agda-focused-check.log
+          if-no-files-found: error
+
+      - name: Fail on Agda error
+        if: steps.focused.outputs.status != '0'
+        run: exit 1
