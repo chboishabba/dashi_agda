@@ -10,7 +10,7 @@ module DASHI.Physics.YangMills.BalabanPeriodicLatticeEnumeration where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Fin.Base using (Fin; zero; suc)
+open import Data.Fin.Base using (Fin) renaming (zero to fzero; suc to fsuc)
 open import Data.List.Base using (List; []; _∷_; _++_; map)
 
 open import DASHI.Physics.YangMills.GraphCombinatorics using
@@ -79,14 +79,14 @@ allFin :
   (N : Nat) →
   List (Fin N)
 allFin zero = []
-allFin (suc N) = zero ∷ map suc (allFin N)
+allFin (suc N) = fzero ∷ map fsuc (allFin N)
 
 allFinComplete :
   ∀ {N : Nat} (i : Fin N) →
   i ∈ allFin N
-allFinComplete {suc N} zero = here
-allFinComplete {suc N} (suc i) =
-  there (mapMember suc (allFinComplete i))
+allFinComplete {suc N} fzero = here
+allFinComplete {suc N} (fsuc i) =
+  there (mapMember fsuc (allFinComplete i))
 
 allCube4 :
   (N : Nat) →
