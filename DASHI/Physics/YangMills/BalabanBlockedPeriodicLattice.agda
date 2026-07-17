@@ -28,6 +28,7 @@ open import Data.Fin.Properties using
   ; combine-remQuot
   )
 open import Data.Product.Base using (proj₁; proj₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂)
 
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using
   ( Cube4
@@ -78,14 +79,21 @@ splitFinePointFinePoint :
   ∀ {M L : Nat}
   (blocked : BlockedCube4 M L) →
   splitFinePoint (finePoint blocked) ≡ blocked
-splitFinePointFinePoint
+splitFinePointFinePoint {L = L}
   (blockedCube4
     (cube4 c₀ c₁ c₂ c₃)
-    (cube4 o₀ o₁ o₂ o₃))
-  rewrite remQuot-combine c₀ o₀
-        | remQuot-combine c₁ o₁
-        | remQuot-combine c₂ o₂
-        | remQuot-combine c₃ o₃ = refl
+    (cube4 o₀ o₁ o₂ o₃)) =
+  cong₂ blockedCube4
+    (cube4Ext
+      (cong proj₁ (remQuot-combine c₀ o₀))
+      (cong proj₁ (remQuot-combine c₁ o₁))
+      (cong proj₁ (remQuot-combine c₂ o₂))
+      (cong proj₁ (remQuot-combine c₃ o₃)))
+    (cube4Ext
+      (cong proj₂ (remQuot-combine c₀ o₀))
+      (cong proj₂ (remQuot-combine c₁ o₁))
+      (cong proj₂ (remQuot-combine c₂ o₂))
+      (cong proj₂ (remQuot-combine c₃ o₃)))
 
 finePointSplitFinePoint :
   ∀ {M L : Nat}
@@ -102,27 +110,13 @@ coarseOfFine :
   ∀ {M L : Nat} →
   Cube4 (M * L) →
   Cube4 M
-coarseOfFine = coarseCube ∘ splitFinePoint
-  where
-    _∘_ :
-      ∀ {A B C : Set} →
-      (B → C) →
-      (A → B) →
-      A → C
-    (f ∘ g) x = f (g x)
+coarseOfFine fine = coarseCube (splitFinePoint fine)
 
 offsetOfFine :
   ∀ {M L : Nat} →
   Cube4 (M * L) →
   Cube4 L
-offsetOfFine = blockOffset ∘ splitFinePoint
-  where
-    _∘_ :
-      ∀ {A B C : Set} →
-      (B → C) →
-      (A → B) →
-      A → C
-    (f ∘ g) x = f (g x)
+offsetOfFine fine = blockOffset (splitFinePoint fine)
 
 finePointFromCoarseAndOffset :
   ∀ {M L : Nat}
