@@ -10,7 +10,7 @@ module DASHI.Physics.YangMills.BalabanDeterminantToInverseSquareInterval where
 
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Nat.Base using (ℕ; suc; _+_)
-open import Data.Product using (_×_)
+open import Data.Product using (_×_; proj₁; proj₂)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
   ( ℝ
@@ -123,5 +123,3 @@ determinantBoundsToInverseSquareInterval
           endpointUpperBound correctionUpperBound interactionUpperBound
           i length))
     k n
-  where
-    open import Data.Product using (proj₁; proj₂)
