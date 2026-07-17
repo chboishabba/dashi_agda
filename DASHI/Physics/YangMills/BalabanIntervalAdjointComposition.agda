@@ -15,9 +15,9 @@ open import DASHI.Physics.YangMills.BalabanNestedConstraintMinimum using
 open import DASHI.Physics.YangMills.BalabanIntervalConstraintCovariance using
   ( intervalAdjoint )
 open import DASHI.Physics.YangMills.BalabanIntervalConstraintComposition using
-  ( transport )
-open import DASHI.Physics.YangMills.BalabanIntervalCompositionAlgebra using
-  ( natAddAssoc )
+  ( transport
+  ; natAddAssocTransport
+  )
 
 sym : {A : Set} → {x y : A} → x ≡ y → y ≡ x
 sym refl = refl
@@ -42,13 +42,13 @@ intervalAdjointAppend :
   intervalAdjoint Space Q* k (m + n) z
     ≡ intervalAdjoint Space Q* k n
         (intervalAdjoint Space Q* (n + k) m
-          (transport Space (natAddAssoc m n k) z))
+          (transport Space (natAddAssocTransport m n k) z))
 intervalAdjointAppend Space Q* k n zero z = refl
 intervalAdjointAppend Space Q* k n (suc m) z =
   let
     leftIndex = (m + n) + k
     rightIndex = m + (n + k)
-    indexEquality = natAddAssoc m n k
+    indexEquality = natAddAssocTransport m n k
     pulled = Q* leftIndex z
     ih = intervalAdjointAppend Space Q* k n m pulled
     stepEquality = adjointTransportStep Space Q* indexEquality z
