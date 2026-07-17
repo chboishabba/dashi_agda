@@ -1,5 +1,15 @@
 # 2026-07-17 NS interaction-closure pivot
 
+- **Current finite promotion:** an exact positive-signed-chi survivor has
+  resolved frozen-packet growth on the first `.05T` segment
+  (`R=.1.04534501`, heat-compensated `1.3099675`).  Exact-state restart mode
+  then gives local frozen ratios `.62068407` and `.55569644` on segments 2 and
+  3.  The five contiguous segments are now complete: at `.25T=15.625`, the
+  common-reference moving packet is `.10985340` and the original frozen `j=2`
+  packet is `.11234973` of initial mass.  This is delayed collapse after a
+  short nonlinear burst, not sustained recurrence.  It is empirical,
+  finite-Galerkin evidence only and changes no NS/BKM/Clay authority.
+
 - Added `scripts/ns_normalized_profile_quotient_audit.py`, the first
   non-self-similar profile-side receipt after the scale-copy audit.  It
   generates reality-symmetric Leray Fourier fields whose independent shape

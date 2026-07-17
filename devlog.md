@@ -18,6 +18,22 @@
   been promoted to a `.25T` exact-state run; no longer-window claim is made
   until that receipt lands.
 
+- Added `--continuation-state` to the normalized-profile audit. It is an
+  explicit finite-Galerkin restart mode: exact solver state is retained, while
+  fresh-profile signed-chi and target-dominance gates are intentionally not
+  reapplied after packet migration. Checkpointed promotion: initial `.05T`
+  frozen `R=.1.04534501`; segment 2 has `R=.62068407`, nonlinear input/loss
+  `.18359744/.56429618`; segment 3 has `R=.55569644`,
+  `.05089179/.33060626`. This is one delayed-collapse trajectory under
+  evaluation, not a theorem or Clay-facing result.
+- The bounded five-segment promotion is complete.  With the original segment-1
+  state as common reference, elapsed time `.25T=15.625`, the moving packet is
+  `.10985340` and the original frozen `j=2` packet is `.11234973` of its
+  initial mass.  Local segment ratios after the initial burst are `.62068407`,
+  `.55569644`, `.55815397`, `.56317250`; each has nonlinear input below
+  viscous loss.  The next empirical gate is robustness under nearby admissible
+  positive-signed-chi profile perturbations, not another continuation segment.
+
 - Built the positive-signed-chi adversarial search gate.  The profile audit
   now filters signed chi and target dominance, can select by short endpoint
   survival while requiring positive integrated nonlinear input, and can impose

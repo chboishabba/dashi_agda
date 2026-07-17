@@ -33,6 +33,15 @@
   positive-signed-chi quotient search rather than another named full-window
   profile run.
 - The first selected positive-signed-chi short-window state has now been
+  checkpointed from its exact NPZ state. The initial `.05T` frozen growth is
+  resolved (`R=.1.04534501`, heat-compensated `1.3099675`), but continuation
+  segment 2 falls to `.62068407` and segment 3 to `.55569644` of their local
+  frozen packet starts. A `--continuation-state` mode now distinguishes these
+  restarts from fresh admissible profile trials. The bounded `.25T` chain is
+  complete: common-reference moving/frozen ratios are `.10985340/.11234973`.
+  Thus this state has a resolved short burst but delayed collapse, not
+  recurrence. Next: perturb the profile locally while re-matching positive
+  signed chi, before any full-window or theorem-facing inference.
   preserved as a compressed raw Fourier receipt (`seed=20260718`, replay attempt 0).
   Its moving packet changes centre from shell 2 to shell 3, so the audit was
   upgraded with frozen-initial-window telemetry and the promotion gate uses the

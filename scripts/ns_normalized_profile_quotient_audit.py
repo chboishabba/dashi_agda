@@ -96,6 +96,8 @@ def parse_args() -> argparse.Namespace:
                         help="write the exact selected raw Fourier state and selection metadata as a compressed NPZ receipt")
     parser.add_argument("--state-input", type=Path, default=None,
                         help="load an exact compressed raw Fourier state saved by --save-selected-state; bypass profile regeneration")
+    parser.add_argument("--continuation-state", action="store_true",
+                        help="treat --state-input as a finite-Galerkin restart: preserve its exact state but skip fresh-profile signed-chi and target-dominance gates")
     parser.add_argument("--save-final-state", type=Path, default=None,
                         help="write the exact final raw Fourier state after --evolve as a compressed NPZ checkpoint")
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT)
@@ -593,13 +595,16 @@ def main() -> None:
         field = raw_to_field_hat(raw, wave, norm_sq)
         nonlinear, metrics = static_metrics(args, field, wave, norm, norm_sq)
         signed = float(metrics["chi_signed"])
-        if (args.chi_sign == "positive" and signed <= 0.0) or (args.chi_sign == "negative" and signed >= 0.0):
+        if (not args.continuation_state
+                and ((args.chi_sign == "positive" and signed <= 0.0)
+                     or (args.chi_sign == "negative" and signed >= 0.0))):
             raise RuntimeError("loaded state does not meet the requested signed-chi convention")
         matched_chi = abs(signed) if args.chi_sign == "absolute" else (signed if args.chi_sign == "positive" else -signed)
         mismatch = abs(matched_chi - args.chi_target) if args.chi_target is not None else 0.0
         metrics["chi_matching_value"] = matched_chi
         metrics["chi_matching_convention"] = args.chi_sign
-        if metrics["target_packet_dominance"] < args.target_dominance_min:
+        if (not args.continuation_state
+                and metrics["target_packet_dominance"] < args.target_dominance_min):
             raise RuntimeError("loaded state does not meet target-dominance admissibility")
         candidates.append((mismatch, attempt, raw, field, metrics, nonlinear))
     else:
