@@ -13,6 +13,10 @@ on:
       - 'DASHI/Physics/YangMills/Balaban*.agda'
       - '.github/workflows/balaban-nested-constraint-check.yml'
 
+concurrency:
+  group: balaban-focused-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
@@ -22,31 +26,28 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check focused Yang-Mills modules
+      - name: Check focused Yang-Mills modules with Agda 2.9
         id: focused
         shell: bash
         run: |
           set +e
           (
             set -euo pipefail
-            AGDA_BIN="$(nix build --no-link --print-out-paths nixpkgs#agda)/bin/agda"
-            STDLIB_OUT="$(nix build --no-link --print-out-paths nixpkgs#agdaPackages.standard-library)"
-            STDLIB_FILE="$(find "$STDLIB_OUT" -type f -path '*/Data/Product.agda' -print -quit)"
-            if [ -z "$STDLIB_FILE" ]; then
-              echo "Unable to locate Data/Product.agda under $STDLIB_OUT" >&2
-              exit 2
-            fi
-            STDLIB_INCLUDE="${STDLIB_FILE%/Data/Product.agda}"
+            AGDA_REF=6a5169a469d506ee848ad99ef574c3df8e329a02
+            AGDA_BIN="$(nix build --no-link --print-out-paths \
+              "github:agda/agda/$AGDA_REF#debug.bin")/bin/agda"
+            STDLIB_ROOT="$(mktemp -d)"
+            git clone --depth=1 --branch experimental \
+              https://github.com/agda/agda-stdlib.git "$STDLIB_ROOT"
+            STDLIB_INCLUDE="$STDLIB_ROOT/src"
             CHECK_ROOT="$(mktemp -d)"
             cp -a "$GITHUB_WORKSPACE/DASHI" "$CHECK_ROOT/DASHI"
-            cp -a "$STDLIB_INCLUDE" "$CHECK_ROOT/standard-library"
-            chmod -R u+w "$CHECK_ROOT/standard-library"
             "$AGDA_BIN" --version
+            printf 'agda-stdlib %s\n' "$(git -C "$STDLIB_ROOT" rev-parse HEAD)"
             targets=(
               DASHI/Physics/YangMills/BalabanPeriodicLatticeBonds.agda
               DASHI/Physics/YangMills/BalabanPeriodicLatticePaths.agda
@@ -64,9 +65,20 @@ jobs:
               DASHI/Physics/YangMills/BalabanPlaquetteCovariantDerivative.agda
               DASHI/Physics/YangMills/BalabanFiniteAdjointQuadraticForms.agda
               DASHI/Physics/YangMills/BalabanPenaltyMismatchQuadraticForm.agda
+              DASHI/Physics/YangMills/BalabanRealRingSolverProbe.agda
               DASHI/Physics/YangMills/BalabanSU2QuaternionCarrier.agda
               DASHI/Physics/YangMills/BalabanSU2LieAlgebraCarrier.agda
               DASHI/Physics/YangMills/BalabanSU2AdjointInnerProduct.agda
+              DASHI/Physics/YangMills/BalabanSU2LiteralOperatorInstances.agda
+              DASHI/Physics/YangMills/BalabanSU2LieBracket.agda
+              DASHI/Physics/YangMills/BalabanSU2AdjointPolynomialCalculus.agda
+              DASHI/Physics/YangMills/BalabanSU2AdjointCubicReduction.agda
+              DASHI/Physics/YangMills/BalabanSU2ReducedAdjointCalculus.agda
+              DASHI/Physics/YangMills/BalabanSU2AdjointMatrixDeterminant.agda
+              DASHI/Physics/YangMills/BalabanSU2ReducedAdjointDeterminantProduct.agda
+              DASHI/Physics/YangMills/BalabanSU2ReducedAdjointAdjugate.agda
+              DASHI/Physics/YangMills/BalabanSU2AdjointRotationDeterminant.agda
+              DASHI/Physics/YangMills/BalabanSU2ReducedAdjointGaugeCovariance.agda
               DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
               DASHI/Physics/YangMills/BalabanConstrainedGaussianCarrierAlgebra.agda
               DASHI/Physics/YangMills/BalabanFiniteConstraintChain.agda
@@ -106,18 +118,16 @@ jobs:
               DASHI/Physics/YangMills/BalabanConstrainedKKTLinearisation.agda
               DASHI/Physics/YangMills/BalabanConstrainedEnvelopeHessian.agda
             )
-            cd "$CHECK_ROOT"
             for target in "${targets[@]}"; do
               echo "Checking: $target"
-              "$AGDA_BIN" \
-                --no-libraries --no-default-libraries \
-                -i "$CHECK_ROOT" -i "$CHECK_ROOT/standard-library" \
+              "$AGDA_BIN" --no-libraries --no-default-libraries -j0 \
+                -i "$CHECK_ROOT" -i "$STDLIB_INCLUDE" \
                 "$CHECK_ROOT/$target"
             done
           ) > agda-focused-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
-          tail -n 100 agda-focused-check.log
+          tail -n 180 agda-focused-check.log
           exit 0
 
       - name: Upload focused Agda log
