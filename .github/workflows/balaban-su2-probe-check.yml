@@ -13,6 +13,7 @@ on:
       - 'DASHI/Physics/YangMills/BalabanSU2AdjointInnerProduct.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2LiteralOperatorInstances.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2LieBracket.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2AdjointPolynomialCalculus.agda'
       - '.github/workflows/balaban-su2-probe-check.yml'
 
 permissions:
@@ -49,6 +50,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanSU2AdjointInnerProduct.agda
               DASHI/Physics/YangMills/BalabanSU2LiteralOperatorInstances.agda
               DASHI/Physics/YangMills/BalabanSU2LieBracket.agda
+              DASHI/Physics/YangMills/BalabanSU2AdjointPolynomialCalculus.agda
             )
             for target in "${targets[@]}"; do
               echo "Checking: $target"
