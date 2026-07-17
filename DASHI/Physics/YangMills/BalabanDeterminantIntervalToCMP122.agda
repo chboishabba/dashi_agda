@@ -12,7 +12,7 @@ module DASHI.Physics.YangMills.BalabanDeterminantIntervalToCMP122 where
 -- theorem owns only their mechanical composition.
 
 open import Agda.Builtin.Bool using (false)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Nat.Base using (ℕ; zero; suc; _≤_; _+_)
 
@@ -30,6 +30,7 @@ open import DASHI.Physics.YangMills.YMSourceAuthoritySurface using
   )
 open import DASHI.Physics.YangMills.BalabanSection2InductivePackage using
   ( UniformBalabanRGClosure
+  ; UniformBalabanRGClosureAt
   ; BalabanSection2InductivePackage
   )
 open import DASHI.Physics.YangMills.BalabanEffectiveCouplingTrajectory using
@@ -54,6 +55,32 @@ open import DASHI.Physics.YangMills.BalabanCMP122ConditionalRGClosure using
   ; finiteCutoffUniformBalabanRG
   ; CouplingBoundCoversSection2
   )
+
+replaceLeftNat≤ :
+  ∀ {m n p : ℕ} →
+  m ≡ n →
+  n ≤ p →
+  m ≤ p
+replaceLeftNat≤ refl n≤p = n≤p
+
+-- Repackage a source closure at a larger ultraviolet cutoff.  The equality in
+-- `UniformBalabanRGClosure` ties its terminal scale to the source Sect. 2
+-- package, so a bound on that package is sufficient.
+uniformClosureAtFromSourceTerminal :
+  {K : ℕ} →
+  (closure : UniformBalabanRGClosure) →
+  BalabanSection2InductivePackage.terminalScale
+    (UniformBalabanRGClosure.section2 closure)
+    ≤ K →
+  UniformBalabanRGClosureAt K
+uniformClosureAtFromSourceTerminal closure sourceTerminal≤K =
+  record
+    { closure = closure
+    ; sourceTerminalWithinCutoff =
+        replaceLeftNat≤
+          (UniformBalabanRGClosure.terminalScaleAgrees closure)
+          sourceTerminal≤K
+    }
 
 determinantIntervalBoundsToFiniteCutoffRG :
   (theorem : BalabanCMP122ConditionalTheorem) →
