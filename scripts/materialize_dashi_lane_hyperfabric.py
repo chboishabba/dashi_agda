@@ -296,9 +296,9 @@ def state_colour(state: str) -> str:
 def render_svg(ir: dict[str, Any]) -> str:
     carriers = {c["id"]: c for c in ir["carriers"]}
     layers = topological_layers(ir)
-    width = 1700
     x_step = 250
     margin_x = 120
+    width = max(1700, margin_x + (len(layers) - 1) * x_step + 220)
     max_rows = max(len(layer) for layer in layers)
     height = max(880, 250 + max_rows * 145)
 
