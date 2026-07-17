@@ -42,6 +42,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanIntervalCompositionAlgebra.agda
               DASHI/Physics/YangMills/BalabanIntervalDeterminantAlgebra.agda
               DASHI/Physics/YangMills/BalabanBilateralIntervalBounds.agda
+              DASHI/Physics/YangMills/BalabanIntervalMismatchBounds.agda
               DASHI/Physics/YangMills/BalabanInverseSquareIntervalIdentity.agda
               DASHI/Physics/YangMills/BalabanDeterminantToInverseSquareInterval.agda
               DASHI/Physics/YangMills/BalabanIntervalToPrefixBridge.agda
