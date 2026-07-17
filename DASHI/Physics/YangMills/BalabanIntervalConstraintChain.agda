@@ -111,15 +111,15 @@ sequentialMinimumToDirectInterval :
   (Space : ℕ → Set) →
   (Q : (i : ℕ) → Space i → Space (suc i)) →
   (_≼_ : Value → Value → Set) →
-  (objective : Space k → Value) →
   (k n : ℕ) →
+  (objective : Space k → Value) →
   (z : Space (n + k)) →
   (x : Space k) →
   Minimises _≼_ objective
     (SequentialFeasibleInterval Space Q k n z) x →
   Minimises _≼_ objective
     (DirectFeasibleInterval Space Q k n z) x
-sequentialMinimumToDirectInterval Space Q _≼_ objective k n z x minimum =
+sequentialMinimumToDirectInterval Space Q _≼_ k n objective z x minimum =
   sequentialToDirectInterval Space Q k n z x (proj₁ minimum) ,
   λ y direct-y →
     proj₂ minimum y
@@ -130,15 +130,15 @@ directMinimumToSequentialInterval :
   (Space : ℕ → Set) →
   (Q : (i : ℕ) → Space i → Space (suc i)) →
   (_≼_ : Value → Value → Set) →
-  (objective : Space k → Value) →
   (k n : ℕ) →
+  (objective : Space k → Value) →
   (z : Space (n + k)) →
   (x : Space k) →
   Minimises _≼_ objective
     (DirectFeasibleInterval Space Q k n z) x →
   Minimises _≼_ objective
     (SequentialFeasibleInterval Space Q k n z) x
-directMinimumToSequentialInterval Space Q _≼_ objective k n z x minimum =
+directMinimumToSequentialInterval Space Q _≼_ k n objective z x minimum =
   directToSequentialInterval Space Q k n z x (proj₁ minimum) ,
   λ y sequential-y →
     proj₂ minimum y
@@ -149,8 +149,8 @@ intervalSequentialMinimumEqualsDirectMinimum :
   (Space : ℕ → Set) →
   (Q : (i : ℕ) → Space i → Space (suc i)) →
   (_≼_ : Value → Value → Set) →
-  (objective : Space k → Value) →
   (k n : ℕ) →
+  (objective : Space k → Value) →
   (z : Space (n + k)) →
   (x : Space k) →
   Minimises _≼_ objective
@@ -158,9 +158,9 @@ intervalSequentialMinimumEqualsDirectMinimum :
     ⇔ Minimises _≼_ objective
         (DirectFeasibleInterval Space Q k n z) x
 intervalSequentialMinimumEqualsDirectMinimum
-  Space Q _≼_ objective k n z x =
+  Space Q _≼_ k n objective z x =
   iff
     (sequentialMinimumToDirectInterval
-      Space Q _≼_ objective k n z x)
+      Space Q _≼_ k n objective z x)
     (directMinimumToSequentialInterval
-      Space Q _≼_ objective k n z x)
+      Space Q _≼_ k n objective z x)
