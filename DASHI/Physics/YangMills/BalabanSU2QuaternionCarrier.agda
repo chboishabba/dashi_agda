@@ -53,7 +53,26 @@ realCommutativeRing = record
   ; isCommutativeRing = realIsCommutativeRing
   }
 
-module R = CommutativeRing realCommutativeRing
+derivedRealSolverRing : ACR.AlmostCommutativeRing 0ℓ 0ℓ
+derivedRealSolverRing =
+  ACR.fromCommutativeRing realCommutativeRing (λ _ → nothing)
+
+realSolverRing : ACR.AlmostCommutativeRing 0ℓ 0ℓ
+realSolverRing = record
+  { Carrier = ℝ
+  ; _≈_ = _≡_
+  ; _+_ = _+ℝ_
+  ; _*_ = _*ℝ_
+  ; -_ = -ℝ_
+  ; 0# = 0ℝ
+  ; 0≟_ = λ _ → nothing
+  ; 1# = 1ℝ
+  ; isAlmostCommutativeRing =
+      ACR.AlmostCommutativeRing.isAlmostCommutativeRing
+        derivedRealSolverRing
+  }
+
+module R = ACR.AlmostCommutativeRing realSolverRing
 open R using ()
   renaming
     ( _+_ to _+R_
@@ -62,10 +81,6 @@ open R using ()
     ; 0#  to zeroR
     ; 1#  to oneR
     )
-
-realSolverRing : ACR.AlmostCommutativeRing 0ℓ 0ℓ
-realSolverRing =
-  ACR.fromCommutativeRing realCommutativeRing (λ _ → nothing)
 
 ------------------------------------------------------------------------
 -- Quaternion algebra
