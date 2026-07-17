@@ -23,13 +23,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Nat.Base using (NonZero)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4)
 open import DASHI.Physics.YangMills.BalabanPeriodicLatticePaths using
   ( LatticePath4 )
 open import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport using
   ( GroupStructure
+  ; Carrier
   ; multiply
   ; inverse
   )
@@ -87,8 +88,7 @@ transportedSegmentIntegral group linear U A sample =
 conjugatedTransportAction :
   (group : GroupStructure) →
   (linear : AdjointLinearModule group) →
-  (gRoot transport gJunction :
-    DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport.Carrier group) →
+  (gRoot transport gJunction : Carrier group) →
   (X : Vector (additive linear)) →
   action (additive linear)
     (multiply group gRoot
@@ -133,7 +133,7 @@ transportedSegmentIntegralGaugeCovariant :
   action (additive linear) (gauge root)
     (transportedSegmentIntegral group linear U A sample)
 transportedSegmentIntegralGaugeCovariant
-  group linear gauge U A sample =
+  group linear gauge U A {root = root} sample =
   trans
     (cong
       (action (additive linear)
@@ -154,7 +154,7 @@ transportedSegmentIntegralGaugeCovariant
           group gauge U (prefix sample)))
       (conjugatedTransportAction
         group linear
-        (gauge _)
+        (gauge root)
         (directedPathTransport group U (prefix sample))
         (gauge (junction sample))
         (covariantPathIntegral group linear U A (segment sample))))
@@ -192,9 +192,9 @@ rootedSampleSumGaugeCovariant :
     (rootedSampleSum group linear U A samples)
 rootedSampleSumGaugeCovariant
   group linear gauge U A {root = root} [] =
-  trans refl (actionZero linear (gauge root))
+  sym (actionZero linear (gauge root))
 rootedSampleSumGaugeCovariant
-  group linear gauge U A (sample ∷ samples) =
+  group linear gauge U A {root = root} (sample ∷ samples) =
   trans
     (cong
       (λ tail →
@@ -210,14 +210,15 @@ rootedSampleSumGaugeCovariant
       (cong
         (λ head →
           addVector linear head
-            (action (additive linear) (gauge _)
+            (action (additive linear) (gauge root)
               (rootedSampleSum group linear U A samples)))
         (transportedSegmentIntegralGaugeCovariant
           group linear gauge U A sample))
-      (trans refl
-        (DASHI.Physics.YangMills.BalabanPeriodicLatticePaths.transportEndpoint
-          refl
-          refl)))
+      (sym
+        (actionAdd linear
+          (gauge root)
+          (transportedSegmentIntegral group linear U A sample)
+          (rootedSampleSum group linear U A samples))))
 
 record ScalarAdjointLinearModule (group : GroupStructure) : Set₁ where
   field
@@ -246,3 +247,36 @@ linearBlockPathAverage :
 linearBlockPathAverage group scalarLinear weight U A samples =
   scale scalarLinear weight
     (rootedSampleSum group (linear scalarLinear) U A samples)
+
+linearBlockPathAverageGaugeCovariant :
+  ∀ {N : Nat} {{_ : NonZero N}}
+  (group : GroupStructure) →
+  (scalarLinear : ScalarAdjointLinearModule group) →
+  (weight : Scalar scalarLinear) →
+  (gauge : GaugeFunction4 N group) →
+  (U : DirectedGaugeField4 N group) →
+  (A : DirectedAdjointBondField4 N group
+    (linear scalarLinear)) →
+  {root : Cube4 N} →
+  (samples : List (RootedSegmentSample root)) →
+  linearBlockPathAverage group scalarLinear weight
+    (gaugeTransformBond group gauge U)
+    (transformAdjointBondField
+      group (linear scalarLinear) gauge A)
+    samples
+  ≡
+  action (additive (linear scalarLinear)) (gauge root)
+    (linearBlockPathAverage
+      group scalarLinear weight U A samples)
+linearBlockPathAverageGaugeCovariant
+  group scalarLinear weight gauge U A samples =
+  trans
+    (cong
+      (scale scalarLinear weight)
+      (rootedSampleSumGaugeCovariant
+        group (linear scalarLinear) gauge U A samples))
+    (sym
+      (actionScale scalarLinear
+        _ weight
+        (rootedSampleSum
+          group (linear scalarLinear) U A samples)))
