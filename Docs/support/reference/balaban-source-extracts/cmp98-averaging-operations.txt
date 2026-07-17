@@ -1,0 +1,1686 @@
+                                                                     Communications in
+Commun. Math. Phys. 98, 17-51 (1985)                                 Mathematical
+                                                                         Physics
+                                                                     © Springer-Verlag 1985
+
+
+
+
+Averaging Operations for Lattice Gauge Theories*
+T. Ba~aban
+Department of Physics, Harvard University,Cambridge, MA 02138, USA
+
+
+    Abstract. Usually renormalization group transformations are defined by some
+    averaging operations. In this paper we study such operations for lattice gauge
+    fields and for gauge transformations. We are interested especially in character-
+    izing some classes of field configurations on which the averaging operations are
+    regular (e.g., analytic). These results will be used in subsequent papers on the
+    renormalization group method in lattice gauge theories.
+
+
+Introduction
+In Wilson's approach to renormalization group transformations I-9, 10] for lattice
+gauge systems, it is necessary to define an operation of taking an average of field
+configurations over subdomains of a lattice. These subdomains are usually some
+simple subsets, for example cubes of a fixed size, or sums of several such cubes. In
+this paper we will study one such definition of an averaging operation. This
+operation will be used in other papers on gauge field theories.
+    Let us introduce some definitions and notations. We will be very sketchy
+because these definitions have already appeared several times in the earlier papers
+[1, 2] of the author and we refer the reader to these papers, especially to [2], for
+more detailed explanations. We consider a subdomain f2 of the lattice qZ d with a
+lattice spacing q. A sequence of sets f2u) is defined as the intersections
+                                     (2(j) -= (2nLJtIz a ,                               (1)
+where L is a fixed integer, L > 1. For a point y e L"tlZ a (or any lattice 6Za), we define
+a block of an order j as the cube
+                BJ(y) = {x e L-JUrl Za : y, < x~, < y~, + L"q, /~ = 1, ..., d}            (2)
+ (or the corresponding cube with L"t/replaced by 6). We wilt omit the subscript j if
+j = 1. For a subset A C L"tlZ d (or C 6Zn), we define
+                     B~(A) = U BJ(y)CL-JlYrl Za (or CL-JfZa).                             (3)
+                               yeA
+
+
+*   Research supported in part by the National ScienceFoundation under Grant PHY-82-03669
+18                                                                             T. Bataban
+
+We assume that
+                             BJ(~ °)) =/2       for j = 1,..., k                       (4)
+for some k. In fact, we will assume that q = L -k. Thus O is a sum of blocks of the
+order k.
+     Besides the blocks of different orders, there are two other geometric objects
+important for us. Bonds of the lattice Q are ordered pairs (x, x') of nearest
+neighbor points x, x' of ~2. We identify them with the corresponding oriented
+intervals with endpoints x, x'. We will denote them also by the letters b, b', c, etc.
+For example, b denotes a bond (b_, b + ) with an initial point b_ and a final point
+b + ; b_, b + are nearest neighbors. Plaquettes are oriented elementary squares of
+the lattice ~2and are denoted by p, p', etc. A boundary of a plaquette p is a sum of
+four bonds, and an orientation of the plaquette may be indicated by an orientation
+of the bonds. A plaquette p may be identified also with an ordered quadruple
+(x, y, z, w) of corners x, y, z, w of the elementary square p; the ordering indicates
+the orientations of bonds (x, y), (y, z), (z, w), (w, x) forming the boundary 0p.
+Speaking precisely, the symbol (x, y, z, w) indicates not only the oriented square,
+but also the initial point x of its boundary. In this paper we will consider positively
+oriented plaquettes and such a plaquette p C/2 is represented as
+                   p = (x, x + ~leu, x + qe~, + tle~, x + qe~),    it < v.             (5)
+
+The above definitions of bonds and ptaquettes may be applied to an arbitrary
+lattice, e.g., to f2cj).
+     Gauge field configurations U are defined on a set of bonds in (2, and with values
+in a Lie subgroup G of a unitary group U(N). A value of U at a bond b = (x, x') is
+denoted by
+                             Ub = U <~,~,>= U(x, x') = U(b) ,                          (6)
+and we assume that U satisfies the condition
+                           U(x, x3 = U- l(x', x) = U*(x', x).                          (7)
+In the sequel, we will consider quantities which are invariant with respect to some
+important transformations in the space of gauge field configurations, the so-called
+gauge transformations. They are determined by gauge functions u : f2~ G, and are
+given by
+                   U"(x, x3 = u(x) U(x, x3u- 1(x3,           (x, x') c O.              (8)
+                                  n--1
+For an oriented contour F = ~ (xi, xi+~) we define
+                                  i=0
+
+                                          n-1
+                                U(F) = I-[ U ( x , x~+ 1),                             (9)
+                                          i=0
+
+where the order of factors in the product is the same as the order of bonds in F. This
+definition will be applied also to contours on arbitrary lattices. For a plaquette
+p = (x, y, z, w) we define 0p as the oriented contour Op = (x, y ) w ( y , z ) w ( z , w )
+w ( w , x ) , and U(Op) is defined by (9).
+Averaging Operations for Lattice Gauge Theories                                      19
+
+    The renormalization group transformations are integral operators transform-
+ing functions defined on gauge field configurations on a lattice, into functions
+defined on configurations on the lattice of blocks. We will consider transform-
+ations of the form
+                          e'(V) = ~ dUa(VU- 1)Q(U),                         (10)
+where, for example, U is a gauge field configuration on the lattice f2~/), V is a
+configuration on the lattice f2~+ 1) and dU is a product of Haar measures of the
+group G. The most important part of the above definition is an averaging
+operation U. It transforms a configuration U defined on ~2~/)into a configuration G
+defined on f2(j+ 1). In fact, ~(J) may be replaced by any other lattice. We will demand
+that this averaging operation has to satisfy some important and natural
+conditions. A first condition is connected with the fact that we consider gauge-
+invariant quantities, so we demand that the averaging preserves gauge transfor-
+mations, i.e.,
+                 (U-~)(y,y')=u(y)U(y,y')u-l(y'),      or    U-a=(U) ".            (11)
+This property implies that the renormalization transformation (10) transforms
+gauge-invariant functions Qinto gauge-invariant e'. Indeed, if v is a gauge function
+on a new lattice, then
+               q'(v°) = I cIUa(V°U - ')a(U) = I d U a ( W ( ~ ) - t)e(U")
+                      = I dUa(V'(U")- ')e(e),                                     (12)
+where we have used the gauge-invariance of the Haar measure d U and the function
+Q, besides the condition (11). Now if we choose u coinciding with v at points of the
+new lattice, then we get
+             e'(vv) = f dO FI a(v(y) V(y, y) (U(y, y'))- iv- l(y))e(V)
+                                 (y,y')
+
+                    = i aUa(VU- 1)o(U ) -- e'(V).                                 (13)
+We have used also the invariance of the a-function concentrated at the identity of
+the group G with respect to transformations U~vUv- 1. A second condition on
+averages [7 is formulated in the following way. We consider configurations U with
+values in a small neighborhood of the identity of G, hence U = e*A and A is a Lie
+algebra valued configuration with values in a small neighborhood of 0. For such
+configurations we demand that 4log t7 is well approximated by the linear
+                                          l
+averaging operation (1.8) defined in [2]. Let us write this operation
+             ac= X                                                                (14)
+                   x~B(c   - )
+
+
+We refer the reader to paper [2] for explanations of symbols used above. Let us
+notice that F~_,xu[x, x(c)]uF~(~),~+ is an oriented contour with c_ as an initial
+point and c+ as a final point. We denote it by Fc,~.
+   There are many ways of implementing these two conditions. We will write now
+a definition of an average which satisfies these conditions and which has some
+other advantages. We define
+
+                  tT~=exp [i x~(~
+                               ~ _) L-dl'I°gU(F~'~)U(c)-I]
+                                        U (    c ) ' ,                             (15)
+20                                                                           T. Bat~aban
+
+It is easy to see that taking U = e ia with A small and expanding the logarithm of the
+expression on the right-hand side above in powers of A, we get the expression (14)
+as a linear term in the expansion.
+     In this paper we will study properties of this and other averaging operations,
+and especially their compositions. In the future we will need many properties of
+these compositions. For example, it will be necessary to know that a composition
+of many averaging operations applied to a regular or small gauge field
+configuration gives a regular or small configuration also, the notions of regularity
+or smallness being related to scales on which the gauge field configurations are
+considered. This is the basic property of averagings we would like to understand.
+Another important property is an analyticity of a result of the averaging operation
+with respect to an averaged field.
+     The analysis and the propositions we prove in this paper can be easily extended
+to other definitions of averaging operations satisfying the requirements postulated
+in this introduction. The definitions we have used in this paper were chosen for
+their simplicity but in some future papers we will need somewhat more
+complicated definitions. We will discuss them at the proper time when they appear.
+
+A. Norms, Important Inequalities, and Functions
+We consider a Lie subgroup G of a unitary group U(N). Its Lie algebra g is a
+subalgebra of the algebra of hermitian matrices. Because of analyticity properties
+we are looking for, we will consider complexified algebras and groups. The
+complexification of the algebra of herrnitian matrices is the algebra of all complex
+N x N matrices, and the complexification of U(N) is the general linear complex
+group GL(IE, N).
+    The complexification g~ is a subalgebra of the algebra of all complex matrices.
+It may be defined in the following way: we take a basis {to} of the algebra g, then all
+elements A E g can be written as linear combinations A = ~ A,t a, where A, are
+                                                                       a
+arbitrary real numbers, A, ~ ~ , and we form a complexification gC taking A, as
+arbitrary complex numbers, Aa e 112.It is easy to see that this complexification is
+independent of any particular basis {ta} chosen in the above definition. For a
+function F(A) defined on the complexified algebra, a notion of analyticity is well
+defined and means analyticity with respect to complex variables A,. The unitary
+group U(N) can be obtained by an application of the exponential mapping to the
+algebra of hermitian matrices. This exponential mapping is simply given by the
+exponential function d a, where
+                                                   oo   X n
+                                 eX=exp X = Z n-T.                                 (16)
+                                                  n=0
+
+
+is defined for an arbitrary matrix X. The group G is obtained by applying the
+function e ia to A e g, and the complexified group G~may be defined as an image of
+the exponential function applied to the complexified algebra gO.Of course, Gc is a
+subgroup of GL(tE, N). We wilt need only a neighborhood of G in this subgroup.
+We introduce a scalar product in the algebra of all complex matrices
+                                                            1 N
+                         ( X , Y ) = t r X * Y , t r X = - - Y~ Xj j               (17)
+                                                           Nj=j   '
+Averaging Operations for Lattice Gauge Theories                                           21
+
+and a scalar product in spaces of matrix valued functions defined on subsets O
+c ~Z d
+                            (X, Y~ = ~ ~/dtrX*(x) Y(x),                                 (18)
+                                        x~D
+
+similarly for functions defined at bonds or plaquettes of ~. The scalar products
+define the corresponding norms. They are L2 norms and are denoted by H" II, e.g.,
+for a matrix X the norm is given by IIXllz = trX*X. The Lp norms, 1 ~ p ~ ~ , are
+defined in an obvious way. In estimates we will use much more frequently another
+norm for matrices. It is the operator norm given by
+                     IXt=suplX~pI=supl~. X~pL,                     q~,q , ~ N ,
+                                                         N
+                             I~l = I~;I = 1, [WI2 = E tWj[2.                            (19)
+                                                        j=l
+
+We have the following inequalities for the norms introduced:
+
+                        ItrXl < IXl, IlS II--<ISl, ISl ~ 1/N IIg II,                    (20)
+                           IXYI<IXI IYI, IIXYII _-< IlSll II YII •
+    Now we will introduce several important functions on the matrix algebra. The
+first is a logarithmic function. It is an inverse to the exponential function and for
+matrices X satisfying IX - 11< 1 it is given by
+
+                            logX= ~ ( - 1 ) " + 1 ( X - 1 ) " .                         (21)
+                                     n=l          /'/
+
+   Of course, both functions are analytic functions of complex matrices X. For
+any branch logz of the ordinary logarithmic function, we may define logX for X
+defining a normal operator on ~s. If X is such a matrix, then X = ~ ziPi, zj ~ C,
+                                                                                  j=l
+{Pj} is a spectral family of orthogonal projections (i.e., P*=Pj, PjPk=PkPj
+= 6jkPj), and we define
+                                 logX= ~ logzjP~.                                       (22)
+                                           j=l
+
+We will use this definition for logz = loglzl + i argz, where argz ~ ] -zc, re], and for
+unitary matrices. Every unitary matrix U can be represented uniquely in the form
+         /,
+U = ~., eiXJP~,where the numbers )ojare different and satisfy 2j ~ ] - re,rc], and then
+     j=l
+we define
+                                l o g U = i ~ 21P~=iA,                                  (23)
+                                           j=l
+
+A is a hermitian matrix, tAI <~. From this definition the following inequalities
+follow:
+
+              [g-ll=l~axle~S-ll=max~j                     12il<maxl2jl=llogg I ,        (24)
+                                              121
+
+              IlogUl<~lU-1l, because s_inx >-2                     for    x~[-~,~].     (25)
+                                              X               7Z
+22                                                                                  T. BMaban
+
+    We will need also inequalities of this type for arbitrary complex matrices X
+instead of U. For matrices X satisfying IX-11 < ½, we have
+
+                   II°gX[ < ,=1 ,, I X - 11"---- 1           II < 2 I X - 1 1 ,          (26)
+
+             I X - 1[= [e l ° g x - 11< e II°gxl - 1 < e II°gxlIlogX[ < 2 [logX[.        (27)
+    Let us consider now the most important function for all future considerations,
+the function describing the group multiplication in terms of Lie algebra elements.
+Let us define
+                               Z(u, v) = log eUXevr .                         (28)
+It is a well-defined and analytic function of uX, vY, for example, in the domain
+luXI <~, IvYI <-~. Its power series expansion is given by the Baker-Campbell-
+Haussdorf formula (see E7], Sect. 2.15)
+                                      ( _ 1 ) ,.+1                     1
+     Z=log exer= ~            Z
+                     m = l p~+q~>_l        m         Pl+P2+...+Pm+ql+qz+"'+qm
+                      1
+          Pl! q l !" ... "Pro!qm! (adx)m (ady)q~" "'"" (adx)P"(ady)q"- ~Y
+       = X + Y + ½IX, Y] + ~2[Y, [Y, X]] + ~2[X, IX, Y]] + . . . ,                       (29)
+where adxY= [X, Y] = X Y - YX, and the series is convergent in a neighborhood
+of 0: IXt, IYI < Co for some positive Co. From the structure of this power series
+expansion, we get easily the bound
+                   IZ- x-    Y - ½[x, Y]I _-<o(1) (IX121YI+ IXI Ir12),                   (30)
+and this implies
+                      Iz-x-Yi<2IXIIYI                 for   lXl, IYl<q,                  (31)
+where ct is a sufficiently small positive constant, ca<=co. We will treat the
+expression adx Y for a fixed X as a linear operator on a space of matrices Y, and we
+will consider functions of this operator f(adx). For analytic functions f defined in
+a neighborhood of 0 and for X with a sufficiently small norm, the function f(adx)
+can be defined by the power series expansion.
+    We will be interested in calculating derivatives of the function Z(u, v) and some
+other functions of this type. Let us start with the following basic formula (see [7,
+Theorem 2.14.3])
+                 _A,0d          ~ (--1)"
+             e           ca(O= ,=0 (n+ 1)! (ada(t))"A'(t)=o(ada(t))A'(t),                (32)
+
+where A(O is a differentiable matrix-valued function of t. The function 9(z) defined
+by the above formula is an entire function given by
+                             (--1)n zn=__e-Z--1 for z+0, 9(0)= 1
+                        Z (n+ 1)!                                                        (33)
+                 9(z)= ,=o                       -z
+Averaging Operations for Lattice Gauge Theories                                                              23
+
+
+                                          1
+hence the function g-~(z)= ~                  is an analytic function in a neighborhood of 0,
+more exactly for z # 2krci, k = _+ 1, _+2, .,., and we have the identities
+                               --Z
+           9-~(Z)=e_Z_ 1 ,9-1(-z)=9-1(z)-z,g-~(z)=l+½z+                                             ....   (34)
+
+Defining f(z) = 9 - i(z) - ½z, we have f ( - z) = f(z), so
+
+          f(z)=l+         ~ kzpzZP, g - l ( z ) = f ( z ) + ½ z , o - l ( - z ) = f ( z ) - ½ z .          (35)
+                          p=l
+
+Using (32) we can derive easily the following formulas:
+              ~Z(u, v)                                    8Z(u, v)
+                 0u            = 9 - l ( _ adz(.,v))X,        Ov       = 9- l(adz<u,,)) Y-                 (36)
+
+We apply them to derive the second-order Taylor expansion of Z(u, v) with respect
+to the variable u, for example:
+                                      .       8Z(O, v)            1             o 2 Z ( t u , v)
+               Z(u,v)=Z(O,v)+u                  ~u        +u2Sdt(1-t)
+                                                                  0                  ~U2
+                                                                                                           (37)
+               Z(O, v) = vY, 0Z(0, v) = 9 - 1 ( _ advr)X = 9- l ( _ v adr)X
+                               au
+From this we get
+                      1
+                      _ l ogeiXeir = Y + g- I ( _ i adr) X + ~ ( X ; Y),
+                      1
+                                                                                                           (38)
+                                          I~(X; Y)[ < 0(1)IX] 2
+for IXI, tYI sufficiently small, where 0(1) is an absolute constant [e.g., we can take
+0(1) = 24 for IXI < ~o, IYI ~ ~ ] - Another important function we will need later is
+                             Z(u) = log e ux + r e- r.                                                     (39)
+Repeating the above calculations, we get
+                                                              1
+                          Z(u) = u g ( - adr)X + u 2 ~ dt(1 - t)Z"(tu),                                    (40)
+                                                             0
+and
+
+                          1 logei X +ire_ ir = O ( - i adr) X + o(IxI2).                                   (41)
+                           l
+
+
+
+
+B. Compositions of Averaging Operations
+Let us recall the basic definitions. Let U be a gauge field configuration with values
+in U(N). The one-step averaging operation is defined by
+
+                          ~ _) L-ell°gU(Fc'x)U(c)-llU(c)'cfif2~)'t
+             Uc=exp [ i x~8~c                                                                              (42)
+24                                                                                  T. Bat'aban
+
+and if k th order averaging ~.~k is defined at bonds of ~c~(k) then
+
+     [Tk+ 1 = (Gk)~ = exp [ i x~l~(c
+                                 ~-" _ ) L-dl'10gGk(F~'x)(Gk(c))-tlGk(c)'cCg2(k+t)'(43)t
+
+where the contours Fc, x are defined on the lattice f2(k).
+    Let us notice that this definition is local in the sense that Uck, c C f2(k), depends
+only on the bond variables Ub for b C Bk(c - ) w Bk(c +). This property will play a very
+important role in the future. Let us notice also that the property (i 1) is satisfied.
+Indeed, for an arbitrary gauge field configuration U and a gauge transformation u,
+we have U"(Fc,x)UU(c)-l=u(c_)U(F~,~)U(c)-iu-i(c_);                  thus the matrices
+U"(Fc, x) UU(c)- t and U(F~, ~) U(c) - 1 are unitarily equivalent, their eigenvalues are
+equal, and by the definition (22) their logarithms are unitarily equivalent with the
+same unitary operator u(c_). Then from (42) we get (U--a)~= u(c_)Ucu-1(c+).
+   Now we would like to understand how regular the configuration              •     U
+                                                                                    -k is,
+assuming some regularity of U. We will investigate carefully the one-step
+averaging operation from this point of view. We assume that a configuration V
+defined on a unit lattice f2' satisfies
+                                 IV(Sp) - I I < % ,        p C f2',                        (44)
+and % sufficiently small. We would like to get optimal bounds for IP(OP')- 11, P'
+ C 0'(~).
+     Let us denote by y the upper right corner of the plaquette p' and let us introduce
+locally the axial gauge with the initial point y. This means that we take the
+contours
+                 rr, x = [Y, (Yl, ..., Ya- i, xa)] w... w [Yl, X 2 . . . . . Xd), X]
+for X in some neighborhood of y containing 2 a blocks having the point y as one of
+the corners, and we make a gauge transformation Vo such that the gauge
+transformed configuration V0= Vv° satisfies the conditions Vo(Fy,x)= 1. Such a
+gauge transformation can be easily found because Vo(Fy,~)=VV°(Fy,~)
+= Vo(y) V(Fy,~)Vo i(x) = 1 implies Vo(X) = vo(y) V(Fy,~); thus Vo is determined
+uniquely if Vo(y) is given. Of course, we have
+               IVo(Op)-ll=lV(Sp)-l]<%,              IP(Op')-ll=lPo(Op')-ll.                (45)
+
+
+
+
+                            ~a
+                                 C)          ()Y
+                                      p'
+
+
+                            Yo                 Yl
+
+
+The conditions Vo(Fr, x) = 1 imply Vo(x, x + e 1) = 1, [Vo(x, x + e2) - 11< Ix 1 - Yl[ %,
+Igo(x,x+ea)-ll<(lxl-Yll+lx2-Y2])~o,                 ...,     IVo(x,x+e,)-ll<(lxl-yll+...
+Averaging Operations for Lattice Gauge Theories                                         25
+
++ Ix,_ 1-Y~,-11)~o, P = 2, ..., d, for x in the neighborhood of y. If we denote
+                        A(p') = B(yo) uB(y 1)uB(y2) u B(y),                       (46)
+then for bcA(p') we have IVo,b-ll<lb_-yl%<dL~o, hence Vo,b=eiAb and
+lAb[< 2 Ib- -y] ~o < 2dL~o. For c C @', the contours Fc,~, are contained in A(p') and
+we have
+     [Vo(Yc,~,)- II <      ~2 ]Vo,b - ll<lF,,~ldL~o<(2d+ 1)LdLczo=O(1)L2c%,
+                         bCFe, x
+
+               [Vo(F,,~)- t - iA(r~,~)l < ½([AI(Fc,~))2 < 0(1) (L2%) 2 ,
+so using the definition (21) of the logarithmic function, we have
+
+                [
+                {logVo(r~,xU(-c))-A(rc,~u(-c)) < 0(1) (L2%) 2
+
+for L2~o sufficiently small. From this and (31) we get
+                 P°,¢ =exp [ i x.~.(~_) L-aA(F~,~w(-c))+O((L2eo)2)]
+
+                            • exp [iA(c) + O((L2ao)2)]
+                        =exp[i ~_)L-aA(F~,~)+O((L2eo)2) 1,
+
+hence
+                        Fo,c- 1 - i :,~B(cZ_) L-eA(Fc, x)< o(1) (L2c~o)2.
+
+Now we can estimate [Po(Op')- t l- We have
+                V°(0P')- 1-i~cop,Z ~(~-)~L-dA(r,,A <O(1)(L2~o) 2 .                    (47)
+
+Denoting by (p')~ a plaquette obtained by translation of the plaquette p' to the
+point x, we have the identity
+                    X        X L-aA(Fc,x) = X L-dA(O(P)x)
+                 cCOp" x E B ( c - )                   x~B(yo)
+
+                                                   =     Z       L-a Z       A(Op).   (48)
+                                                       x~B(yo)     pC(p')~
+
+Further, we have for pCA(p')
+            ]Vo(0p)- 1 -iA(Op)] < {(]A[ (Op))2 < ½(8dL%)2 = O(1)L2c~.                 (49)
+Gathering together the above three inequalities, we obtain
+               IFo(Op')-l[<              2       L-a 2        [A(OP)i+O(1)(L2eo)2
+                                       x~B(yo)     pC(p')x
+
+                                   < Z L-a X [Vo(ap)-ll+O(1)(LZeo) 2
+                                       x~B(yo)     p C(P')x
+                                   <L2% + 0(1) (L2~o) 2 .                             (50)
+   This is the estimate we are looking for. Let us notice that it is a local result; the
+bound above depends on bounds for V(Op)-1 on A(p), i.e., for pCA(p'). We
+formulate the results in the following:
+26                                                                                 T. Bataban
+
+Proposition 1. There exist positive constants Co, c"2 such that for every configuration
+V satisfying (44) for pCA(p') and for O~0 ~<C 2"~ w e have
+                              [F'(Dp') - II <L2% + Co(L2%) 2 •                          (51)
+The constant Co depends on d and c'2 depends on d and L.
+   Now it becomes obvious what assumption we have to make for a configuration
+U in order to get a bound on Gk(Op) -- 1, p C ~2(k). Each averaging operation rescales
+a bound on plaquette variables approximately by the factor L2, hence k operations
+by the factor L 2k. To get some small number yet, we have to assume that
+                               [U(ap)- II <%r/2 ,      q = L -k                         (52)
+on some set of plaquettes. If % < c~, then by the above Proposition, IG(Op3-11
+< L2%r/2 + C0(L2%~2). We take k > 1 so %L2~/2+ C0(%L2~/2)z ~ % + Co~Zoand we
+                        c, - 2 =
+assume further that % + ,~0%   < c2.
+                                 _, Applying the Proposition again, we get for p"
+C 0 (2)
+
+        tG2(Dp") - I t < ,oL4~/2 + CoL2(L20~o~12) 2 + Co(cZoL4r/2+ CoL2(L2%~12)2)2
+                      =,oL4q 2 + Co(,oL4rlz) 2
+                         -I- C0(0~oL4/']2)2 L- 2 [1 + 2Co~oL4~] 2 + C~L- 2(~xoL4n2)2]
+                      =_<~xoL4q2 + Co(~XoL4~/2)2 [1 + L- 2(1 + Co%)2].
+We make the following inductive assumption for j ~ k:
+         IGi(Op) - 11< ~oUSq 2 + Co(%l-Nq2) 2
+                         • [1 +L-Z(1 + C 0 % ) 2 + . . . +L-2t/-1)(1 +C0%)2(s-1)].      (53)
+
+The right-hand side can be bounded by % + C o ~ 2 if L- 2(1 + C0%) 2 < ½. The last
+inequality holds if, e.g., C0% < 7, and then % + C0%22 < 2 % . We assume further
+         < , Then f o r j < k , we can apply Proposition 1 to the configuration U j
+that 2% =c2.
+and we get for pCf2 ti+l)
+     IUs+ a(Op)- 11<~o L2o+ ~)rl2 + CoZ2(%Z2Sq2) 2 I-1 + . . . ]
+                       + Co(o~oL2(j+1)q2 ..~ CoL2(o~oL2Jrl2)2F1 +...])z
+                    < o~oL2(J+ 1)/,/2 + Co(%L2~i+ 1)q2)2 {1 + [1 + . . . ] L-z(1 + Co%)2}.
+Thus the inequality (53) is proved for all j < k. Taking j = k, we get
+                                                            f 1      1,]
+eropositio,, 2. If v satisfies (52 with           c2 = min )3-600'          then
+
+                       Iuk(Op) -- I I< % + 2Co%2 < 2%,        p C f2(k) .               (54)
+The result is local in the sense that if p = (x, y, z, w), then it is enough to assume
+(52) for p C Bk(x)uBk(y)uBk(z)wBk(w).
+
+
+C. Other Averaging Operations
+In future analysis of variational problems we will have a situation, where the
+averaging operation will be composed with a change of gauge conditions, i.e., with
+Averaging Operations for Lattice Gauge Theories                                           27
+
+a gauge transformation. Let us recall that if we apply a gauge transformation v to a
+configuration V, V{ = v(b _) Vbv-l(b +), b C f2', then (V~)c= v(c_) ~ v - 1(c +), c C f2'(1).
+We will consider gauge field configurations V of the form V= V'Vo, where Vo is a
+fLxed configuration and V' may have values in the complexified group Gc. We find
+easily that if we apply a gauge transformation v to V and we write Vv= V'VVo, then
+                V;~= v(b_ ) V;R(Vo,b) V- l(b +) = v(b_ ) Vb'Ro,bV- ~(b +),              (55)
+where for arbitrary invertible matrix X the operator R(X) is given by the formula
+                                    R(X) r = x Y X - 1 .                                (56)
+R(X) acts on the algebra of all matrices and has the following properties:
+                  R ( X ) f ( Y ) = f ( R ( X ) Y) for analytic functions f ,
+                      R(X) R(Y) = R(X r),             R(X)-~ = R ( X - ~),              (57)
+                                            R(X)* =R(X*).
+In a one-step renormalizafion transformation we consider configurations V"
+satisfying axial gauge conditions in blocks:
+             (Ro,,V')(r,,x)=       1-I R(Vo(Fr,b_))Vb'=I,x~B(y),x*Y.                    (58)
+                                  bCFy,x
+It will be convenient to change this gauge into another one. We apply a gauge
+transformation v-1 to V' and we get a configuration 111,thus
+            V'= V~ and           ~=(V'Vo)c=(V~Vo)c=v(c)(V1Voo)cV-l(c+).
+We will consider this average for configurations V" and 111with values close to 1
+and we will be interested in the expression
+             Vc(Vo)~ ~= v(c_) (V1Vo)c(Vo)~-1R~o:V- ~(c +), R-~o,c= R((~)~).             (59)
+The gauge conditions (58) written in terms of the configurations 111and v have the
+form
+                (R0,r V') (Fr,x) = v(y) (Ro,yVx) (Fy:,) (Ro,yV)- l(x) = 1,
+                    (Ro,r v) (x) = R( Vo(Fy, ~)) v (x),
+and they imply
+              (Ro,yV)(X)=v(y)(Ro,yVO(Fy,~), x~B(y), x~-y, y ~ 2 '(1) .                  (60)
+To determine the configuration v uniquely, we will impose on it an additional
+condition at each block.
+    To find a form of this condition, let us recall the simplest case of one vector field
+considered in paper [1]. To change a gauge, we make a gauge transformation 2
+satisfying (Q'2) (y) = ~ L-a2(x) =0. Such a transformation does not change the
+                        x~B(y)
+average given by (1.11) in I-2], and this is very important because the explicit
+representations of propagators, and other formulas, hold for this specific form of
+the averaging operation. In the considered general case, we will also try to find the
+additional condition on gauge transformation requiring that the form of the
+28                                                                                          T. B a t a b a n
+
+
+averaging operation should be preserved. We will be able to obtain only an
+approximate invariance. Because of the axial gauge conditions (58), the average
+(V'Vo)~ depends on (Ro,~_V')([x,x(c)])= 1-I R(Vo(F~_.xu[x,b-]))V~,
+                                                                       b CIx, x(c)]
+                                                                                      ,i
+
+
+x~B(c_), and a good approximation of the function ~log(V-TVoo)c(Fo)~-~ for
+                                                  1
+V'=e iA, A small, is given by (QoA)(c)= ~ L-d(Ro,c_A)([x,x(c)]), where
+                                                                  xeB(c - )
+Ro,c_ A is defined as Ro,c_ V', only the product over b is replaced by the sum. If we
+make a small gauge transformation v= eil, then a good approximation of this
+transformation acting on Lie algebra variables A is given by A~ = A b-(Ro, b2(b ÷)
+-  2(b _)) = Ab -- (Dvo 2) (b). Under such a transformation the average QoA changes
+as follows:
+                      (QoAi)(c) = E L-a(Ro,¢_2)(x)+(QoA)(c)
+                                          x~B(c - )
+
+                                          -        ~, L-a(Ro,~_4)(x').
+                                                x ' eB(c ÷)
+
+                "2) ( y ) =
+If we define ( Q o              Z       L-d(Ro,y2)(x), then the first term in the right-hand
+                               xEB(y)
+side above is equal to (Q~2) (c_). There are troubles with the second term because
+          E L-d(Ro,c_2)(x') = Z L-dR(Vo(F~_,~u[x,x']))2(x ")
+       x'~B(c + )                             x'~B(c + )
+
+                         =       Z
+                              x'EB(c +)
+
+and this expression is only approximately equal to R(Vo(c))(Q'o2)(c+), because
+Vo(F~,xu(-c)) are close to 1 for Vo regular, but not necessarily equal to 1. N o w if
+we assume that 2 satisfies the conditions Q~2=0, then the form of QoA is
+approximately preserved under such a gauge transformation. Finally, these
+conditions are approximations for 2 small to the conditions
+
+              (~VoV)(y)=v(y)expFiL ~
+                                  ~R(y) L-dl'togv-l(y)(R°yv)(x)]
+                                            = 1      " ,,                                            (61)
+
+We assume that the gauge transformation v we have applied to the configuration
+V' satisfies these conditions. The equality (60) and the condition (61) imply
+                              v- l(y) (Ro,yV)(x) = (Ro,yV1) (Fy,~,),
+and                                                                                                   (62)
+
+                     v(y)=exp[-i Z L-nl. log(RoyVi)(Fyx)] •
+                                     L         x~B(y)         t               '       ' ]
+Thus the gauge transformation v is determined uniquely by the gauge conditions
+(58) and conditions (61). It is a function of the gauge transformed configuration V1.
+From (59) and (62) we get
+
+        V~(Vo)~ 1 = exp [ - i ~.~(~Z_) L-dl. log(Ro,~_Vi)(F~_,~)l(V1Vo)~(Vo)::-I
+
+                      • R--~~exp[i, ~'~~
+                                       B(~÷) L-dll°g(R°c+VO(Fc+'~')
+                                                 "     ~ ,          1                                 (63)
+Averaging Operations for Lattice Gauge Theories                                                                29
+
+   The same reasoning can be applied to a higher order average t7k, where
+U = U'Uo, Uo is a fixed configuration and U' satisfies a sequence of axial gauge
+conditions in blocks of lattices f2, t2¢1).... , f2~k-1). More precisely, we describe these
+conditions in the following way. For blocks of the lattice g2, we assume
+                            (Ro, rU 3 (Fr,:,) = 1, x ~ B(y), x # y, y ~ f2~1),                               (64)
+where Ro is defined by the configuration Uo. Next defining
+                                          (t~')c = (U'Uo)~(Uo);- ' ,                                         (65)
+we assume
+                             (Roo,~ U') ( F~,~) = 1, y ~ B ( z ) , y + z, z ~ 0 ~2) ,                        (66)
+and Woois defined by Uo. If an average ~7'~is defined on the lattice O~),j < k, then we
+assume
+                          (g~o,rl~'J)(Fr,~)= 1, x ~ B(y), x # y, y ¢ O ~+1) ,                                (67)
+and we define
+                                         /.7~j+l = (U'JtT~)c(t~)~-1                                          (68)
+From this inductive definition of the average t.7'J, it follows easily that
+                                   t7 bt j _- (U , Uo)b(Uo)b
+                                                      j  --j - 1
+                                                                 ,     b C £2tj) •                           (69)
+Now we would like to change these gauge conditions and we apply a gauge
+transformation u-1 to U'. We get some configuration U 1 and U ' = U~. The jth
+order averages U j transform as follows,
+                      U~=(U~Uo)~=u(b_)(U1Uo)~U-l(b+),                                bc£2 tj),               (70)
+and this implies a transformation law for U'2,
+                       U'bJ=(U~)~=u(b_)(l~O~RJo,bu-l(b+),                            bcf2 ~j) .              (71)
+The gauge conditions (67) written in terms of U 1 give us the following equations:
+                                         (Ro,yU1)
+                    ( R G ty'~)(G,~)=u(y) ~    -J (Fy,~,) ~-j
+                                                         (Ro.rU) -1 ( x ) _- 1                               (72)
+for x ~ B ( y ) , x#-y, y r f 2 o + l ) , j < k .   Solving these equations, we get
+             (Ro,,~,u)(x)=u(xl)(Ro,,:yO(F~,~)                        for   x e B ( x l ) , x 1 ~f2 ~1),      (73)
+           (Roo,~u)(xl)=u(xz)(K-O,x~U1)(F~,:,,)                      for    x l ~ B ( x z ) , x 2 E O ~z),   (74)
+hence
+( G , ~ R o , ~ u ) (x) = U(Xz) (Ro,x~ U O (G~,~) Ro, x~(Ro,., U O (G~,~), x ~ B2(xz),
+                                                                                                             (75)
+and for arbitrary j < k we have
+(R~o,xj+~u)(xj)=u(xj+O ( og~, ~ . , t T ~ ) ( G ~ + , , x )          for    xj~ n(xj+O, Xj+l ~ o ~j+"
+                                                                                                             (76)
+Let us denote              Uo(F~°~,~)= UJo- I(F~,j,:,~_ ) " ... " Uo(F~,~,~) Uo(F,~,x), then
+          j 1 • --- •/~o. ,~Ro,x~ u) (x) = R(Uo(F~+,,
+(/~, xj+~/~-x~                                       (/+ 1)~))u(x), and we have the equat'ty
+                                                                                          1
+30                                                                                                      T. Bataban
+
+     R(Uo(F~++~?~))u(x) = u(x~+ 1) ( R J , x i + 1[-~j) ( f xj+ 1,xj) RJ,xj+ l
+
+                                   • (Ro, x~ Ua) (rx,, x) = u(xj+ ,)                        80          x,)
+                                       -i   (1) ~.~,)) ( R
+                                   • R(Uo(r~+            ~ jo- 1, ~ ,~Uj -~1 ) ( F~ , . ~ , _ ) . ...
+
+                                   • R(Oo(r~ .... )) (Ro,~lUO ( r ~ , , x )
+                                                    t'NU+ 1) "~ xEBJ+l(xj+l)
+                               =u(xj+l)(Ro,xj+,Ul)~-x~+,,xj,                                                  (77)
+where the symbol(Ro,~j.lU1) (F~+    u+l)1,~) •lS defined by the lastequation. Taking (77)
+forj = k - 1, we may determine the gauge transformation u uniquely, given values
+u(y) at points y of the lattice 0 % We calculate these values from additional
+conditions, as in (61) and (62).These conditions are straightforward generalizations
+of the conditions (61). At first we define inductively a k ta order averaging operation
+for gauge transformations• Generally a one-step averaging transformation defined
+by a field configuration Vo is given by
+          (Ro v) (y) = (R(Vo) v) (y) = {(R(Vo) v) (x))~B(y)
+
+                     =v(y)exp[i ~_, L-allogv-a(y)R(Vo(Fr~))v(x)~                                              (78)
+                              L ~B(y)   t                "       j'
+where v is defined on a lattice f2', y ~ O 'm.
+   For a given configuration U o we define inductively
+                           (R--~oU)(x0 = (R---(Uo)u)( x 0 ,                x~ e f2m ,                         (79)
+                 (~ooUJ+1) (xj+ 1) = (n(UJo)Ro uj) (x j+ 1),                     x~+l ~ (2~+ 1).              (80)
+The additional conditions are
+                                        (RTuk) (y) = 1,           y ~ f2(k) .                                 (81 )
+   Now using the identities (76), (77) we will solve the equations (81) and we will
+determine u uniquely as a function of U> We have
+                    (Rou) (xl) = u(x,) (Ro, ~, U1) (F~,.) = u(xl) Ro,x, U1                                    (82)
+for xa e O °}, where the expression Ro,~,U 1 is defined by the last equation. Next
+from (74) we have
+         (R~ou2) (x2) = (R(Uo)Roou) (x2)
+                       = {(R-oo,.~u) (xO (Ro,.2Ro,x, UO (xl))~n(~)
+                       = u(x9                                    (RO,x Ro, U1) (x
+                       = u ( x 2 ) R o , x Y - l l (2) ,   X 2 e Q(2),                                        (83)
+
+where the last equation defines the symbol Ro,x~
+                                           U------~ (z). We easily find by induction
+that
+                          (Roouj) (x j) = u(xj)Ro.~,U-~I o ,                 xj ~ 0 u) ,                      (84)
+where Ro,~;-UT,u) is defined inductively as
+Averaging Operations for Lattice Gauge Theories                                            31
+
+           R           rr ( j + l )
+               O,xj + 1"1
+
+
+                = {( o.,j+, U1 ) (Fx,+,,~) (Ro.,,+,Ro,x, U1 ) (xj)}x~B(x,+ O,
+                  xj+ 1 ~ O(J+1)                                                         (85)
+The formula (84) together with the conditions (81) give the equation
+                        (R~k)(y)=u(y)~                      (k)= 1 for       y~f2 (k),   (86)
+hence
+                                          u ( y ) = ( R o,r U 1 (k)) - , .               (87)
+
+Thus the gauge transformation is uniquely determined by all the conditions and is
+given by the formulas (77) for j = k - 1 and by (87). Similarly as in (63) we get
+        --k --k -
+        Vb(Vo)b   1= (V---~0k)b(~7~)b  1 = u(b_ ) (U1Uok)b(GkO); *~o,bU-- l(b +)
+
+                   = (Ro,b---U~i(k))-I U1Ro,bRo,b+
+                                        ~k --k       U1 (k) , b C f2(k) •                (88)
+We may consider this expression as a new averaging operation of k th order acting
+on a configuration U 1 defined at bonds of the lattice O. A result of the averaging is
+a configuration defined at bonds of the lattice f2(k). Such an operation for k = 1 is
+given by the formula (63).
+    N o w we will prove the following fundamental fact: the new k th order averaging
+operation defined by the last expression in (88) is a composition of k averaging
+operations defined by (63) with properly chosen configurations V0. More precisely,
+for a j th factor in this composition, we take Vo = U~- 1. Let us introduce some new
+notations. We denote the averaging operation in (63) by
+                   (R(Vo) V1)c= (Ro, c_ V~)-I (V-~)c (~,o)- 1/~o,~Ro,c +111
+                                      = (Ro,~_ V1)-1 ViRo,cRo,c ÷V1"                     (89)
+We define inductively a sequence of averaging operations ofj th order composingj
+operations defined above for Vo = U o, (70 ..... U~- 1 correspondingly. F o r j = 1 we
+define
+                                              U1 = R(Uo) U1,                             (90)
+and if the operation 0~ is defined, then
+
+                                            U{ +1 = R((7{) U j ,                         (91)
+i.e., it is a composition of the operation (89) for V0 = (7~ and of the jth order
+operation 0{.
+     Let us remark that these averages have the same locality properties as the
+averages U k, namely (Uk)c, cCf2 (k), depends on the variables Ub for bcBk(c_)
+voBk(c +).
+     We are going to prove now the fundamental equality
+                            (Ro,b_lT-(k)~-lrTkO--k
+                                   "~1  .]
+                                                      o     rT (k)--(U~)b.
+                                             Wl*"O,b*'~O,b+ ~"1   --
+                                                                                         (92)
+    The proof will be by induction. For k = 1 the equality holds by the definitions
+(89), (90), and the Eq. (63). If we have a configuration V = V1Vo on a lattice f2', then
+32                                                                                                     T. Ba-l'aban
+
+for an arbitrary gauge transformation v we write V = (V ~- ' y = (V~ ~VoY and we
+have
+           (V1)c= (V-~)c Vo, -c = v(c_) (@-~l)cRo,cV- 1(c+),    c C f2'(1) • (93)
+Let us consider the case k = 2, and let us start with an analysis of [72. We have by
+(68) [7~=(U~) and we apply the above identity with V1 = [71, Vo= [7o, and
+v ( x ) = R o , x U 1 , x ~ f2(1):
+                ([7~)c = Ro, ~_ U1 ([7~- ~)cR~,c(Ro,c+ U1)-1,                           c C O (2) •          (94)
+Further, by the definition (89), we have
+                     ([7~- ~)b = ( R o o , ~ )      -1 [71,bRo,bRo,b+ U1 = U1,                                (95)
+hence
+
+           ([72)c = R-~o,c_ ~ (0,)¢/~2,~(Ro,~ +U1)-1 = Ro,¢ - U1 (Ro,c_ Ua )
+                       • [(go,. G ) -                                   G)] g L ( G , . 01)-1
+                       •/~o2,c(Ro,~÷U1)-1                                                                    (96)
+The expression in the square bracket above is equal to U 2. Let us make the
+following inductive hypothesis:
+            ([7~)b = vj(b_) (O~)bRJo,bV] - l(b+) = (0~)~/,                           b C f2 ~j) ,
+                                                                                                             (97)
+             vj(x) = (Ro,xU 0 ( R o , x U O . . . . .         (Rio.) U{- 1),             x ~ Y2~i) .
+We have proved it for j = 1,2. The definition (68) and the hypothesis imply
+           t,V~l j{ +1 ]ch----1 )
+                              \K"F~{ j[ hVd""
+                                           f~jOlc
+                                               "t vO,f~J+l_c = Vj(C _ ) ( 0 i )c RJTcl V; 1(C + )
+
+                       = vj(c_) (/~,c_ U{) [(R~,c_ U{)-a (~{)¢/~+1 (/~,~ ÷U{)]
+                                 j+l,    j
+                           • ~t~.O, c \~t~-O,c+
+
+
+                       = v j + l ( c _ ) ( U = j1+ l )~Ro,j + cl vj+l(c+),
+                                                                  --1
+                                                                                                             (98)
+where we have used the identity (93) again and the other definitions.
+   Let us now consider the expressions Ro,~U1 ° , x ~ f2t/). We will prove that
+                                    Ro,--~l ti) = vj(x) ,           x ~ f2 ~j) .                             (99)
+For j = 1 it is the definition (97) of vj. For j + 1 we have by (85), (97), and (99)
+              Ro,yUlti+ 1)= {(/~,y [7~) (Fr,x) (R2o,yRo,~U-~lti)) (x)}x~B(y,
+                                  =                               (RG@
+                                  = vj(y) (RJo,r U{) = vj +1 (Y),                  y ~ f2tj +1),            (100)
+hence the identity (99) is proved by induction• From (97), (99) forj = k we get (92).
+    Let us consider again the gauge transformation u calculated before in terms of
+U1 and given by the equalities (77) forj = k - 1, (87). In the future we will need this
+transformation expressed by the averagings 0~. Let us write explicitly the formula
+Averaging Operations for Lattice Gauge Theories                                                                     33
+
+for u
+                                                                      o
+               R(Uo(r~*,~))u(x)
+                        ,       =t°~.-o,,,~lrTt ~x-/                  H      orm+l,r(*-J-
+                                                                             ~tx~, ~ / 0 ~ - J y , X j + 1 1~
+                                                                                                            21
+                                                                    j=k-1
+                                               • (g~,~+, 8 0 (r~,+ ~,~),                                         (IOI)
+where x e Bk(y), y e f2~k), Xk = y, X o = X.
+   We use the equalities (97) and we get for j > 0
+
+
+                                                          • (RJo,xj+t 0 - 1 (X j ) .                             (102)
+
+If we take two neighboring factors for j, j - 1 in (101), then the last factor on the
+right-hand side above for j and the first factor for j - 1 give the product
+           - - j + l ( F (r,.j+,
+        (R(Uo              k - j - 1 ) ) ) R ( V--J
+                                                 o ( F .,+~,x))Vj- 1 (xj))(R(Uo(
+                                                                              - j f ( ky,~j
+                                                                                        -j) ))IJj-I(Xj))
+
+         -_ R(Uo
+              --j (Fy,
+                    (k ~j
+                       - j) )) (vf x( x ) v j _ l (xj)) _-R(Uo(r~,~j
+                                                             --j  (k - j) )) (K~?A~0{- 1) - 1 ,                  (103)
+where we have used the second Eq. (97). We connect this expression with the factor
+corresponding to j - 1. We get such an expression for j - 1 = 0 also. The first factor
+in (102) for j + l = k and the first factor on the right-hand side of (101) give
+V;I(y)Vk _ ~(y) and this is equal to (103) for j = k . Thus we obtain the equality
+                                           0
+               (k) U X                          12[y~j+ l [ l " ( k - j - t)~
+        n(Uo(Fy,~,)) ()=               H        *-~'~o    v* r, xj+, /~
+                                   j=k-1
+                                      • [(K~,.~ +, 8{)-l(RJo, ~j+~8{) (F~j+ ~,~j)].                              (104)
+Let us recall that we have
+
+             ( O,xj,,U~)=exp i                    2        L -d     log(/~,~+y~)(r~j+,,~)].
+                                               x~B(xj+ 0
+
+The Eq. (104) can be written also in the following way:
+               0
+   g(X) =     n           (j+l)
+                  (R(Uo(F~j+,,~))) - 1 ~-j
+                                      [(Ro,xj+~8{)-'                         (Ro,~+,O{) (r~+,,~)], (106)
+                                                                                 ~j
+            j=k-1
+
+and this gives the formulas
+                                       J
+                (Roou)J(xj) =       H     (R(Uo(r~,+,,~)))
+                                               --j (/+ X-j)                 -1
+                                  l=k-1
+                                      --I .... O~)-i -z
+                                   [(Ro                                   =t
+                                  •                   ~           (Ro,~,+,uo(r~,+,,x)],                          (107)
+        ( R o uj) - l ( x j + OR(UJo(r~s +~,,,)) (Rott j) ( x j ) = (/~J,xs + , 8 j ) (Fxs + ,, x ) .            (108)
+
+
+D. Properties of the Averages U~
+We will now investigate the new averaging operations• For the averages/7 k natural
+quantities to consider were plaquette variables. For O k we expect that the
+configuration itself, i.e., bond variables, has good bounds in terms of bounds of UI.
+We will prove to this effect propositions analogous to Propositions 1 and 2.
+34                                                                                      T. Bataban
+
+
+     Let us recall that the definition of (U])~, c C f2(k), involves only the gauge fields
+Ul,b, Uo,b at bonds bcBk(c_)uBk(c+).
+   Let us start with a detailed analysis of the one-step averaging operation ~]. We
+assume that the configurations Vo, 171 satisfy the conditions
+                     [Vo(Sp)- 11<%, Vl,b=e iab, lAb[ <czl,              p, bcO',            (109)
+and Ao belong to the complexified Lie algebra g*.
+   We would like to prove that for %, e~ sufficiently small the average (~), is an
+analytic function of the variables Ab, b CB(c_)uB(c +), c Cf2"(~),and to find bounds
+for (V1)~-I, or rather -1.1og(P0c. We assume that % is so small that the
+Propositions 1 and 2 hold, i.e., % <Cz.
+   At first let us consider the expressions
+
+             RoyVl=exp[i ~. L-allog(RoyV1)(Fy~)],                           y~(2 '0).       (110)
+                 "            L   xeB(y)         t          "       '
+
+
+We have
+
+                1. log(R0,yV0 (Fy,x) = (Ro,rA) (Fy,~) + O(([A[ (Fy,~))2),                   (111)
+                 l
+
+hence
+                     R o yV1 = exp [i 2          L-a(Ro yA) (Fy ~) + O(L2c~)l .             (112)
+                        '           k   x~B(y)          '       "
+                                                                               J
+Next let us consider VI:
+
+          (~'0c = (V' ~)c(P°)c' = exp [ i ~(cY"_) L-dl'l°g(V'V°)(Fc'xW(-c))
+                                                      I      t
+
+                     "(V1V°) (c) V°(c)- l exp [ -ix~B(c
+                                                     ~_) L-d l l°g V°(F~'~(-c))l
+
+               = e x p [ i ~(~2 _) L-dllog(Ro
+                                       ~  ,   , _VO(Fc,~W(-c))Vo(Fc,~w(-c))],
+
+                     "(R°'c- V') (c) exp l - i x~.(~
+                                                 ~ _) L-d l"l°g V°(F~'xu(-c)) ]             (113)
+
+and let us denote
+
+             A . = ltog(Ro,~_ VO (F~.xu(-c)), Y~=               llogVo(rc,~u(-c)).          (1 14)
+
+As in (111) we have
+           A~,= (Ro,~_A) (Fc,~w( - c)) + 0 (L2e~) = (Ro,c_a) (F.... u[x, x'])
+                --R(e iY~)(Ro,¢_A) (cuFf+ ,~,)+ O(LZa~).                                    (115)
+                                                                1      lAx iYx
+A logarithm in the first exponential in (113) can be written as -:loge    e .
+                                                                                    I
+Averaging Operations for Lattice Gauge Theories                                                   35
+
+Applying the results of Sect. A, more exactly (38), we have
+                        1
+                        _ loge~Axeirx = y~ + g- 1( _ i adyx)Ax + O(IAxt2).                    (116)
+
+All these formulas give us
+        (V1)c= exp [ i 52~B(c_) L-d y~ + i ~B(~
+                                             ~ _) L-d g- l(-iadrx)A~ + O(L2°~2)]
+
+                   • exp[i(Ro,c_A)(c)+O(Ua~)]exp[-i2x~tc _~L-dYe]"                            (117)
+
+Denoting       ~        L-dYe= Y and using the formula (41), we have further
+            xeB(c - )
+
+
+           (V')c : exp [ i x~B(cZ_) L-dg-l(-iadyx)A~+O(L2ct2)+ iY ]
+
+                        • exp [ - i Y] exp [iR(e it) (Ro,~_ A) (c) + 0 (L2e~)]
+                   =exp[ig(-iady) ~s(~2_) L-d g - l ( - i a d r . ) A ~ +O(L2c~)]
+
+                      • exp[iR(e ~r) (Ro,~_A) (c) + O(L2a~)]
+                   = exp [(Q'(Vo) A)c + 0 (L2a~)],                                            ( 1 18)
+where
+(Q'(Vo)A)~=g(-iadr)                  52 L-ag-X(-iadrx)
+                                  x~B(e - )
+
+                • [(Ro, c- A) (F~_ ,xw[x, x']) - R(e iY~)(Ro,~ _A) ( c w F . , x')]
+               + R(e 'r) (Ro,¢_A) (c),                                                        (119)
+as it follows from (115).
+     We can transform this linear expression using the identities R(e ir~) = ei~a~, and
+g - x( _ i adr~) e iad~ = g - 1(i adv. ). The last follows from the corresponding identity
+for functions of a complex variable: g - 1 ( _ z)e~= 9-1 (z). We have also
+                    (Ro, ~_A) (F~+,~,,)= R(Vo(c)) (Ro, ~+A) (F,+, ~,)
+                                       = R (e - Jr)R((Po)~) (Ro,~+A) (F~+,~,)
+                                       = e-i"d~/~O, c(Ro,~ +A) (F~+,x').
+These identities imply the following formula:
+(Q'(Vo)A)~=g(-iadr)                   52 L-dg-l(-iadr.)(Ro,.A)(Fc_,~w[x,x'])
+                                  x~B(c - )
+
+               -g(--iadr)                   E     L-dg-l(iadr,)e-iaarZRo,c(Ro,~+A)(Fc+,x ")
+                                      xeB(c - )
+
+               + [ eiaar-'q(-iadr) x~B(o
+                                     52-) L-do-l(iadr~)l(R°'~-A)(c)"
+
+From (118) and (112) we get finally
+           (V1)c~--( ~ )                   -1 (~rl)c~o,~Ro,~ +111
+                              ~_)L-d(R°'c-A) (F~-'~) + i(Q'(V°) A)~
+                   =exp[--i~B(~
+
+                        +i      Z          L-aKo,~(Ro,.A)(F~+,x,)+O(LEa~)].                   (120)
+                             x' eB(c + )
+                                                                          3
+36                                                                                  T. Ba¢aban
+
+In all the estimates above, we have assumed that %, 0q are sufficiently small so that
+the formulas and inequalities proved in Sect. A hold, and that IY~I= O(LZ%) are
+small. We restrict further cq assuming that the norm of the element in the
+exponential above is small also; for example, it is enough that it is < ½. Under these
+assumptions it is obvious that functions of the variables A involved in all the
+formulas until now are analytic functions of A. Let us define
+
+                                         Q(Vo, A, c) =       ~log(~L,                   (121)
+
+then Q(Vo, A, c) is an analytic function of A and from (120) it follows that its Taylor
+expansion begins with a first-order polynomial. Let us denote it by L(Q(Vo)A)~.
+Thus we have
+                        Q(Vo, A, c) = L(Q(Vo) A)c + C(Vo, A, e).                  (122)
+C(Vo, A, c) is an analytic function of A whose Taylor's expansion begins with a
+second-order polynomial (a quadratic form), and
+                                   IC(Vo, A, c)l _--<CI L21At2 < CI(L~) z •             (123)
+The linear form Q(Vo)A is given by
+
+     (Q(Vo)A)~ =       ~, L-(a+l)(Ro,~A)([x,x'-])+                   Y~ L-(a+l)
+                   x~B(c - )                                     x~B(c - )
+
+                   • [g( - i ady)g- ~( - i adr~) - 1] (Ro, ~_A) (F . . . . )
+                   +      Z        L-td+~)[a(-iadr)v-~(-iadr~)-l]
+                       x~B(c - )
+
+                   • (Ro.c_A)([x,x'])-              ~. L-(a+l)
+                                                 xeB(c - )
+
+                   • [g( - i adr)g- 1(i adrx) e-i"aY - 1] Ro, c(Ro,~+A) (F c+,x,)
+                   + [ ei"aY-g(-iadr) x~B(cT~_)L-ag-l(iadrx)lL-l(Ro,~_A)(c).            (124)
+
+The first term on the right-hand side above is the main term in this linear form, and
+it resembles the definition of the averaging operation Q in [2]. The remaining
+terms are small because the functions 9( - z), 9-1(z), ei~ are equal to I for z = 0, so
+the operators occurring in these terms can be estimated by 0(I_3%) and the terms
+can be estimated by O(1)LZ%LIAI < O(1)LZ%Lcq. We will denote the main term
+by Qvo, or Q0
+                (QoA)c=(QvoA)c= ~. L-(a+l)(Ro,c_A)([x,x']),                       (125)
+                                               x~B(c- )
+
+and it has an estimate
+                                            I(QoA)~[ < tA[ < a l ,
+so we have for the whole linear term
+           I(Q(Vo)A)d < IA] + O(1)L2aolAI < (1 + O(1)L2%)al < eO(a)L~°~1 .              (126)
+Thus we have proved the following
+Proposition 3. There exist constants C~, %, c 3 <c2, such that for %, ~ < % the
+                              1      =
+function Q( Vo, A) = ~log t~ is an analytic function of A satisfying the equalities and
+bounds (122)-(124). The constant C1 depends on d and c 3 depends on d and L.
+Averaging Operations for Lattice Gauge Theories                                          37
+
+      Now we will consider the kth order average 0 ]. Its definition implies that
+_1.log 0 ] as a function of 1. log U i is a composition of the functions
+
+                   Q(Uo ' .), Q(t.7o' .),-.., Q(~k-Z, .), Q(~ko-~ ' .).               (127)
+We assume that U o satisfies the assumptions of Proposition 2 and Ul=e "ra,
+I A l < e r Then by this proposition the configurations t?~ for j < k satisfy the
+assumptions of Proposition 3 for Vo=tTJo if %L2612+2Co(%L2jq2) 2
+ < 2~oLZJt/2< 0~o _--<Ca.
+     We will now investigate compositions of functions in the sequence (127). For
+the first function we have
+                 IQ(Uo, t/A) -Lt/Q(Uo)A[ ~ CI(LIt/AI) 2 < C~ (aaLt/) 2 ,
+hence
+
+                          ~-~ Q(U o, t/A) - Q(Uo)A < C~Lt/a 2 ,
+and
+
+         ~ Q ( U o , t/A) < [Q(Uo)AI + C I Lt/a 2 < (1 + O(1)L2~ot/2) ~1 + C1Lt/~ 2
+                         < eO(1)L2,2~oa 1 + C aLqcq2-                                 (128)
+Because e°(1)L2~°al + C1Lt/a~ < e°(i)~°al + Ci ~2 < 2~ i for ao, al sufficiently small
+(0(1) % < ½, C1~ < ½), so IQ(Uo, ~/A)I< 2 a l b / < 2~1 < c3 for ~i < ½c3, and we can
+apply Proposition 3 to function Q((?o, ") calculated at Q(Uo, t/A). For this
+composition we have
+
+                     fQ(Uo. Q(Uo. t/A))-L2qQ(Go)-~q Q( Uo. t/A)
+
+                        <cl(/}t/) 2       Q(Uo,~A) <Cl(L~t/)2(2~0 ~,
+denoting
+               Q(Uo, Q(Uo, t/A)) = Q2(Uo, t/A), Q([7o) Q(Uo) = Q2(Uo),
+and using (128) we get
+
+                                   eO(1) L 4tl2cto C1L~ 2
+L~Q2(Uo, t/A)- Q2(Uo)A <                                    + 4C1L2r/~ 2
+                                 < eO(1)tL~+L~),~o4C i (L + L2) t/~2 '
+
+              t~--~Q2(Uo, t/A)<e°(i)(L4+Z:)'?~°~ 1
+                                   + eO(1)(L'+L:),2~o4Ci(L + L2)t/~
+                                 < e°(1)(i +L 2)~°(1 +4Cl(1 +L-1)cq)~ 1
+                                 <e°(i)2~°(1 + 8Ci~i)~l
+                                 <2a I    for %,al sufficiently small [e.g., 0 ( 0 % < ±
+                                          8Clal <½].                                  (t29)
+38                                                                                     T. BMcaban
+
+Continuing these arguments, we arrive at the following inductive assumption for
+the composition Qj(Uo, tlA) of the first j functions (127) aad the composition
+Qj(Uo) of their linear parts:
+                                                      + L4+L2)~2gO.
+ ~ Q j ( g o , tlA)-Q~(Uo) A < eo(1 )(L2~                             4C~(L~+... + L 2 +L) tla~.
+                                                                                            (130)
+This implies
+
+  ~ Q j ( U o, qA) < eO(t)(L2J+      + L4 + L2)~'/2a:o(0~ 1 + 4C1(/J+ ... + L 2 +L)t/aaz)
+
+
+                      < eOOm +L-: +... +L- 2(j- ~))~o(a~+ 4C1(1 + L- 1 + . . . + L- ~- 1))~2)
+
+                      < e°(1)2~°(1 + 8Cloh)cq < 211,                                        (131)
+and for al < ½c3 we can apply Proposition 3 to the function Q(U~, • ) calculated at
+Qj(Uo, tlA), and we get
+
+                   Q(Uio, Qi(Uo, qA))    -   -   LJ+aqQ(O~o) ~    Qj(Uo, tla )
+
+                                           1
+                       < Cl (LJ+ ltl) 2 -ff~q    U      2
+                                              Qj( o, qA) <4Cl(LJ+lq)2a 2.                   (132)
+
+Applying (130) and denoting
+            Qj+ l(Uo, tlA) = Q(UJo, Qj(U o, tlA)), Qi+ i(Uo) = Q(U~)Qj(Uo),
+we have
+
+     I~ 1            A
+            QJ+i(U°'tl)-Qj+I(Uo)AI<4C1L j+ lrla2-I-eO(1)L2L2Jn2ao
+
+                                                   • e °(l)(L~j+ "'" +L~)"~°4CI(U + ... + L) t/c~
+                                                 < eO(1)(L2(~+t)+L2J+... +LZ)e2ao4CI(LJ+I
+                                                   +LJ+...+L)q~.
+Thus the inductive hypothesis (130) is proved for j<k. For j = k, we have
+            ]Qk(Uo' tlA)_ Qk(Uo)A] < eO(lm +L- :+ ... +L- :(k ~))~o
+               • 4Ca(l+L-i+...+L-(k-~))e2<e°m2~°8Cae2=C2a2.                                 (133)
+We formulate the obtained results in
+Proposition 4. There exist constants C2, c4 such that for ~o, 11 < c4 the function
+                  1       =k
+Qk(Uo, t/A, c) = ~ log (U 1)~, c C ~?tk), is an analytic function of the variables Ab, b
+cBk(c_)wBk(e +). Further we have
+                           Qk(Uo, tIA) = Qk(Uo)A + Ck(Uo, A),                               (134)
+and
+                               [Ck(Uo, A)[ _-<C2 IA]z < C2a 2 •                             (135)
+Averaging Operations for Lattice Gauge Theories                                                   39
+
+The constants C2, C4 are independent of k, C 2 depends on d and c4 depends on d and
+L.
+    The function Ck can be decomposed further into a sum of homogeneous
+polynomials,
+                    Ck(Uo, A) = C~k2)(Uo,A) + Ctk3)(Uo,A) + ....                               (136)
+     We will need some more precise information about the function Qk. This
+information is connected with a notion of the functional derivative. Let us recall
+this notion. If F(A) is a differentiable function defined at field configurations A on
+f2, then the differential
+
+                           dV(A, 6A) = ~ v ( a + t6a) t=o                                      (137)
+
+is a linear functional of the variable 6A and can be represented as a scalar product
+of 6A and some Lie algebra valued function. This function is called the functional
+derivative and is denoted by 6-~ F(A), thus we have
+
+
+                F(A+t6A)           = 2. q tr~5-.---OAb=                                ,3A .   (138)
+                             t=O        bCg2               o~t b
+
+From this definition it follows easily that the functional derivative coincides with
+partial derivatives (gradient) of F(A) multiplied by q-d.
+    We would like to prove that the functional derivative of Qk(Uo, rlA) is bounded
+by a constant independent of r/. This property is not clear even for the linear part of
+Qk, so let us start with an analysis of this linear part. The linear part of the one-step
+renormalization transformation is given by the formula (124). It is a sum of the
+main term QvoA given by (125) and a remainder which we will denote by Q"(Vo)A.
+From (124) it is clear that we have the inequalities
+                      IQvoAt < Q IAt, IQ"(Vo)A! < C'~L2%Q"IAI ,                                (139)
+where the operator Q is defined as in [2], and Q" is defined as
+                             (Q"A)¢ =                 ~,               L-aAb.                  (140)
+                                             bCB(c-)uB(c+          )
+
+The constant C] depends on d and L. A composition of k operators Q is the
+operator Qk. The operators Q" do not compose in a simple way, but if we introduce
+an operator Q~ by the formula
+                       (Q'k'A)c=             Z                 qdAb ,      c C~2(k),           (141)
+                                   b CBk(c - ) u B k ( c + )
+
+then we have the inequality
+                           tQ"Q)'AI £ Q"Q)'tAI < 2dQ)'+ 1tAI.                                  (142)
+
+Now we will prove by induction the bound
+                  IQj(Uo)A[<=QjIAI+ 2C"1~o,, ,i
+                                          tU-)2Q"IAI,
+                                                j                                 j~k          (143)
+40                                                                           T. Ba~:aban
+
+assuming that Uo satisfies the bound (52). Forj = 1 it is a consequence of(139). We
+assume (143) for j < k and we have
+     IQj+ I(U0)AI = IQ(UJo)Qi(Uo)AI< QIQ~(Uo)AI+ c i 2%(Uy) 2 Q"IQj(Uo)AI
+                  _-<Q(Q~IAI + 2c~ ~o(/J~/)2QjIAI) + C~ 2%(/J,i) 2
+                    • Q"(QjlAI + 2c~ ~o(IJt/) 2 QTIAI)
+                                  t    j   2    tt
+                  = Q~+1 IAI+ 2C1 ao(/Zr/) QQj IAI + 2C~ %(/Jr/) 2 Q"QjIAI
+                    +4C1t 2 ao(Lt/)
+                             2  j   4
+                                      QHQjlAI
+                                         //
+                                                                                 (144)
+by (139) and Proposition 2. Further using the inequalities (142), QQ~IA]
+<2Q~+llA], and Q"QjlAI<Q~+IIAI, we get
+  IQj+ I(U0)A[ < Qj+ 11a[ + 2C~ a0(ZJ+ lt/)2 QT+a IAI-(2L-2 + L- 2 + 4dC'~%L-4).
+Because                                                                           (145)
+                  2L- 2 + L- 2 + 4dC'1%L-'* < ¼+ 4dC'IL- 4% < 1
+if 16dC'~L-4%< 1, so the bound (143) is proved for a l l j < k . F o r j = k we have
+               IQk(Uo)AI< QklAI+ 2C1%Q, IAi= (1 + 2C 1%) QkIAI                   (146)
+and this bound implies the required property, namely
+              6
+            bah (Qk(U°)h)c = Qk(Uo;c, b), IQk(U0; c, b)l ~ 1 + 2C~%.             (147)
+
+Now we will generalize it to the whole function Qk. It is enough to prove it for Ck.
+For one-step renormalization transformation we have the bound
+
+                          (6C~OA,A) , bA) < C'~IA1Q"I,~AI                        (148)
+
+following easily from general properties of the function C(Vo, A). The constant C~
+depends on d and L. We will prove that a similar bound holds for the functional
+derivative of Cj(Uo, A) for arbitrary j < k. We will prove by induction that
+
+                        (~--~Cj(Uo, A),bA) <C31AIQ}'I3AI,                        (149)
+
+where the configurations A are considered on L-t-lattice and C3 is a positive
+constant satisfying conditions which will be written later.
+   From the definition of the functions Qj(Uo, tlA) we have
+                   Qj+l (Uo, ~lA)= Q(UJo,Q/Uo, tlA)) ,
+                     Qj(Uo, ~lA)= IJ~IQ/Uo)A + C~(Uo,L#IA),                      (150)
+hence
+          Qj+,(Uo, tlA)= LQ(UJo)Qj(Uo, tIA) + C(UJo,Q_i(Uo,~IA))
+                       = Lj+ l~lQ(UJo)Qj(Uo)A + LQ(UJo)Cj(Uo, L#lA )
+                         + c(UJo, Q/Uo, ~a))
+                       =LJ+ ~IQj+ ~(Uo)A + Cj+ ~(Uo, LJ+~tIA),                   (151)
+Averaging Operations for Lattice Gauge Theories                                               41
+
+and
+   Cj+~(Uo, A)=LQ(UJo)Cj(Uo, L-~A)+ C(Uo,
+                                      -j L -1 Qj(Uo)A + Cj(Uo, L- 1A)),
+                                                                                           (152)
+A is a field configuration considered on L- ~ +1)Z a, [At < Lj +~rlc~1. Differentiation of
+the above equality gives
+
+
+
+                              / ~ C Uj
+                           +~        ( o, L- 1Qj(Uo)A + Cj(Uo, L- 1A)), L- 1Qj(Uo)6A
+                              x
+
+
+
+
+                           + L - I < ~ ( U o , L-IA),6A)).                                 (153)
+
+Using (143), (148), (149) we obtain the following bound:
+
+( ~ C j + I(Uo, A), 6A> ~ QC3L-IIA[Q~'I6A[
+
+                             + CI2%(Ur/) 2 Q"CaZ- 11AIQj 16AI
+                             + C7 IE ~Q/Uo) A + Cj(Uo, L- ~A)I
+
+                             • Q" L-~Qj(Uo)6A+L-a<bb-~(Uo, L-~A),6A>
+
+                          __<C 3 ( 2 - L- 1)L- l lAI Q.~'+xt,~AI ,,
+                             + C'~C32%2d(LJq) 2L- 11AIQj +~16At
+                             + C"L
+                                1 -2 (Qjl A [+2C'~ao(LJq)2Q'jIA[+CzL-1IAI2)
+                            • Q"(QilfA[ + 2c'~ao(lJq)ZQ~'lbAI + C3L- ~IAiQ~'I6At)
+                          <C 3 A ~j+
+                          =        ~" 1 16AI[1-L-Z+4dC'~%L -3]
+                            + C~L-Z(1 +4dC'~%L -2 + C2L- ~1)
+                            • IAI (1 + 4df'~%L- 2 + 2dC3L-, ~ ) Q~+11~AI
+                                       ""      I      -2        ,-    -3        C~ L - 2
+                          < Ca IA[Q i+ 116A1t_1--L         +4dCl%L         -4     C3
+
+                                  • (1 + 4dC'~%L- 2.4_ C2 L - ltz 1 .q_ 2dC3 L- ~~1)2J. (154)
+
+This bound implies the inequality (149) for j + 1 if
+
+         4dC,x~toL_ 1 + __C~ +4dC]~oL-2 + C2L- l~q +2dC3L- 1~1)2 < 1                       (155)
+                         C3( 1                                                     -- .
+This inequality is satisfied if C 3 > C~ and c~o, cq are sufficiently small, e.g., we may
+take C3=6C~ and C~o,~i satisfying 4dC'1~oL-1 <=½, (C2L -1 + 12dC'~L-1)~l < 2
+Thus we have proved
+42                                                                                                     T. Bal'aban
+
+
+Proposition5. The functional derivative of Qk(Uo, tlA) is a bounded function for c%,
+al sufficiently small, and we have the bounds
+
+                 Qk(Uo, qA, c) -1+
+                                <_2C1~o+C3[A1<1+2C'1~o+C3~1,"                                               (156)
+
+
+                             6~--~bCk(Uo,A, C) < C3 ]A[ < C 3 o [ 1 •                                       (157)
+
+
+E. Analyticity Properties of the Averaging Operations
+In this section we will prove some simple analyticity results for the averages. Let us
+begin with the average t7k. Formally, it is defined for all configurations, but we
+have good control over it for configurations U satisfying the regularity condition
+(52). We will prove that [7k is an analytic function of U on this domain. In fact, we
+will prove a little bit stronger result. Let us take a configuration Uo satisfying (52)
+and U = U'Uo, U ' = e ina', IA'I bounded by a small constant a r Such configurations
+U do not necessarily satisfy (52), so we get a neighborhood of Uo which is larger
+than neighborhoods of U 0 in the domain. This neighborhood may be also
+described by the conditions
+                                 IU -     Uol = IUUo a _ 11 < ~ Z I ~ ,                                     (158)
+
+cq is a sufficiently small number.
+    We will prove that U k = U-TU-~ok is an analytic function of A' and Uk(U~) - ~ is
+close to 1; the difference may be estimated by a constant proportional to e~. We
+have
+                --k --k - 1
+                u~(Uo)~     = (C-~o)~(tT~o); ~ = (t73~
+                               =Vk(b-)(u'k)bRko,bVkl(b+),                       bcf2 (g) ,                  (159)
+where
+              vk(x) = (Ro , xU3 (Ro , xU'). . . . . to--k-
+                                                    k*"O,x 1 ~.*, k - 1 ) ,         x e 0 (k) .             (160)
+From Proposition 4, and especially from (131), we get
+
+                                        O'J
+                             ~log             = IQj(Uo, nA')I < 2 a ~ / J n ,                               (161)
+
+hence
+
+llog(/~,~U4) = x~,xL-dllog(RJo,~U4)(F~,,)
+
+                 < 8a~dl_]+1~ e2~dV+ 1, < O(1) ~ U + hi,                        j = O , 1..... k - 1        (162)
+and
+                                                       k-1
+                          Irk(x)- II <O(1)cq Z Li+lr/50(1)cq                                                (163)
+                                                       j=O
+
+for a 1 sufficiently small. Moreover, Proposition 4 implies that the functions of A in
+(159) are analytic. We get the following
+Averaging Operations for Lattice Gauge Theories                                     43
+
+Proposition 6. If U o satisfies (52), then U--7-~ok is an analytic function of
+A' = 1 log U" for A" with values in the complexified algebra, and satisfying IA'I< ~ .
+     ttl
+Moreover, we have a bound
+                            IU----Z-uok(~7~)-t _ 11< O(1)Cq.                     (164)
+Of course, we assume that %, ~ are sufficiently small.
+    Another analyticity result we will need is an analyticity of Qk(Uo, tlA) with
+respect to U 0. We will understand it in a similar way as for ~7k. We take U'Uo
+instead of U0, U'= ei"a', IA'I< ~x, and we consider the function Qk(U'Uo, tIA). We
+want to prove that it is an analytic function of both variables A" and A, and that
+Proposition 4 holds uniformly with respect to A'.
+    Let us analyze the proof of Proposition 3 first. The bounds depend on bounds
+of the quantities Yx= I log Vo(Fc,x u ( - c)). Previously we had IYxl = O(L2%), but
+
+now we allow complex perturbations V'Vo of V0, and for these we have
+IY~I= O(L2% + La 0. Thus Proposition 3 holds unifirmly for V'Vo instead of Voand
+with the only change in the inequality (126), where the constant e°(~)L2~° on the
+right-hand side is replaced by e°(1)(L~°+L~l), Similarly we repeat the reasoning
+connected with Proposition 4, but with U~ replaced by U'UoJ= fJ'JUJo. Because of
+the bound (164), we have to replace the factors e°(~)L~J÷'"~° by
+e°(~(L~c~+~>"~°+Lj+~"~*),but this change is easily incorporated into the consider-
+ations and the estimates. We get the same results as before for %, a~ sufficiently
+small, uniformly in A', and additionally, we get the analyticity of Qk with respect to
+A'. Let us formulate these results in
+Proposition 7. For Uo satisfying (52) and U'= e inA', IA'I< ~1, %, ~1 sufficiently
+small, the function Qk(U'Uo, rlA) is analytic in complex variables A', A, and
+Proposition 4 holds uniformly in A'.
+    Similarly, Proposition 5 may be extended to include analyticity and uniformity
+statements. The formulations are obvious.
+
+
+F. Averaging Operations for Gauge Transformations
+In the last section of the paper we will study the averaging operations for gauge
+transformations, given by (61), (78)-(80). A natural analog of the regularity
+condition (52) would be the condition
+                t(Ovou)(b)l=lR(Uo,b)u(b+)-u(b_)l<%q,            bCO.             (165)
+We will consider functions u satisfying this condition, but we have to consider also
+the functions u given by the formulas (104)-(106). They appear naturally in our
+considerations and generally they do not satisfy the regularity condition (165), but
+they satisfy other conditions following from (107), (108) if the configuration U1 is
+small, i.e., I U 1 - l l < a d l , cq small. We define:
+44                                                                                           T. Ba~aban
+
+           Ak(Uo,    53) is a set of gauge transformations u defined on O,
+                                    and satisfying the conditions
+                      ](R~J)(xj)--l[<~3, x ~ f 2 ~),                 j = 0 , 1..... k,           (166)
+                    ](R--o--ffJ)- 1(xj+ 1) (/~,:,j +1RouO (x) - 11< a3LJ+ l r/,
+                    xj+IUQO+I),xjEB(xj+I),                 j = 0 , 1 ..... k - 1 .               (167)
+From this it is obvious that for u ~ Ak(Uo, ~3) and 53 small, all operations needed to
+define R-~0 uk are done always in a case where proper expressions are small. More
+exactly, we have to calculate a logarithm of the expression in (167) and this
+expression is small.
+     We need to consider a product of two gauge transformations satisfying (166),
+(167), so we would like to know that it also satisfies similar conditions• Let us
+consider at first the following situation: we have functions v, vl, v2 defined on a
+lattice f2' and a gauge field configuration Vo, and we assume that
+v(x) = v a(x)v2(x)e i'(:O, Ir(x)l < cl, IvF i (y) (Ro,yVi) (x)-- 11< c2, i = I, 2, x e B(y),
+y e f2'(1). We will find relations between R~ovand Rovl, Rov2, and bounds satisfied
+by Roy. We have
+v- l(y) (Ro,rV) (x) = e-i'(r)v; 1(y) Vl- l(y) (Ro,yV 0 (x)
+                         • (Ro, rv2) (x) e i(R°,'r)(x)
+                     = e-i'(r)R(v/l(y)) [vi- l(y) (R0,yVl)(X)]
+                     • t~2-l(y) (Ro,yV2) (x) e "R°,')txl
+
+                     =exp
+
+                         +         logq                    +/(Ro,,,)              +      +        (16S)
+hence
+(Roy) (y) = v(y) exp [i 52 L- d log V- l(y) (Ro, yv) (x)] = v l (y) v2(Y)
+                     L x~n(y)                           J
+             • exp [ir(y) +i 2 L-a logv- l(y) (Ro,rV) (x) + O((c 1 + ca)2)]
+                   k        xsB(y)                                        J
+          = vl(Y)V2(y ) exp [ix,~y)L-aR(v ~ l(y))1 logv~-l(y)(Ro,yVl)(x)
+
+            + i Y. L - e l l o g v 2 ~(y) (Ro,yV2) (x)
+                xeB(y)         1
+                                                               --1
+
+
+            +i 2       L-d(Ro,r r) (x) + 0((cl + c2)2)l
+                x~B(y)                                A
+          =vl(y)v2(y)R(vZl(y))exp I i Z L- dl_logv~- 1(y)(R o yvO(x)
+                                                  x~B(y)   Z
+                                                                                             ]
+                                    d1       J.
+             •e x p [ i ~      L-71ogv~-(y)(Ro,yV2)(x)]
+                    L x~BO,)         t                                J
+             • exp[i E L-a(Ro yr)(x)+O((q +c2)2)]
+                  L x~B~y)                                 A
+          = ( vO (y) (ROY2) (Y) e i~(y), If(Y)[ < cl + O((c~ + c2)2).                            (169)
+Averaging Operations for Lattice Gauge Theories                                                          45
+
+Let us denote the constant in the above bound by C3, so we have
+    (ROY)(y) = (R--o~l)(y) ( R ~ ) (y) e ~y), If(y)[ < cl + C3(c~ + c2) 2 , y e O '(1). (170)
+   N o w let us take two gauge transformations ul, u2 satisfying (166), (167).
+Applying the above result to u = u l u 2, we get
+           (R--~oU)(xO = (~oU~) (xO (~oU~) (xO e ''~'), lra(x,)l < C3(%Lrl) 2                         (t 71)
+for xl e f2it). Next applying it to Rou, Roul, Rou2, we get
+                ( R ~ 2) (x2) = (R--0~ 2) (x2) (RoU-Ez2) (x2) e irz(x2),
+                     [r2(x2) [ < C3(0~3L/~) 2 q- C3(C3(0~3Lrl) 2 + ~3L2/'/) 2
+                                  C3(0~3L2/~)2 [1 +L2(1 + C3~3) 2]                                    (172)
+for x2 ~ 0 t2). We can prove by an easy induction that
+
+     (RoW) (x j) = (~oU~ j) (x j) (R--~2 j) (x j) e %(~j),         xj ~ f2ti) ,
+          Ir~(xi)l < C3(~Jdq) 2 [1 + L- 2(1 + C3~3) 2 + . . . + (L- 2(1 + C3~3)2) j- ~]
+                  < 2C3(0~3/Jq) 2                                                                     (173)
+for c~3 sufficiently small, i.e., such that L- 2(1 + C3~3) 2 < ½. From this it follows that
+
+       I(~UoUJ)(xj)-l[<2ct3+2C3(~aL~tl)2<2~3+2C3 ~2,                              j = 0 , 1..... k,
+       I ( R ~ j) - ~(xj+ 1) (R~, ~ +~R~0uj) (x~) - 11< 2 ~ L j+ ~ + 4Ca(~LJ.) ~
+           <(2a3+2Caa2)U+~tl,                 j = 0 , 1 ..... k - 1 .                                 (175)
+
+We can formulate these results in
+Proposition 8. I f ul, u2 ~ Ak(Uo, c%) and a3 is sufficiently small, i.e., ~3 < c6 for some
+C6, then u =ulu2 ~ Ak(Uo, 2~3 + 2C3c~2) and we have (173).
+    We will need to consider regular configurations u' in the sense that the
+following conditions are satisfied:
+                                     [u'(x) - 11< 0~4,         X e f2,                                (176)
+                          ]u'-l(b_)Ro,bu'(b+)-ll<~zj1,                     boO.                       (177)
+We would like to know that if u' is such a configuration and u~ belongs to a class
+Ak(~3), then the product u'u~ belongs to some class Ak(O(1) (~3 + a4)) also. Because
+                                                       4
+
+
+
+we want some analyticity properties of ~ l o g R 0 u ~ ~, we will consider configu-
+                                           l
+rations u' with values in the comptexified group G ~, i.e., u' = e ~ and 2 has values in
+the complexified algebra go. We will consider the averages
+                                      ~,~ = Rou, u~ (Rou j ) - 1.                                     (178)
+As in the case of averages tT'~, it can be easily seen that they may be defined
+inductively as
+             ffl = i f = R0--U-~x( R - ~ ) - ~, t7'~+~ = / ~ ' J R - ~ J ( / ~    ~     ~)-~          (179)
+46                                                                                              T. B a ~ a b a n
+
+
+We will prove that the configuration ff'J for j < k satisfy the regularity conditions
+(176), (177) on proper scales and with different constants. As usual, we start with a
+careful analysis of a one-step operation. Let us assume that we have a gauge field
+configuration Vo satisfying the regularity condition IVo(~p)-11 < ~o, P C f2', and
+two gauge transformations v', vl satisfying the conditions
+                           Iv'- iI <~4, Iv'-~(b-)Ro,bv'(b+) - 11<c~,
+                                                                                                       (18o)
+                          Iv1 - i I < ~3, Ivi- l(y) (Roy1) ( x ) - I I < L0~;,
+x ~ B(y), y ~ f2"m. We assume that the constants are sufficiently small, so that we
+can apply proper theorems and estimates. We will find a bound for
+g'- l(c_)Ro,cg'(c+)- 1. We have
+        (~)          (y) = v '(y) v~ (y)
+
+                             • exp[ix~n,,,Z L-allog(v'va)-l(Y)(Ro.yvO(x)],                             (181)
+
+               (v'vO- ~(y) (Ro,yvo (x) = R(v; ~(y)) Iv'- l(y) (Ro,rV3 (x)]
+                                                            • v; a(y) (Ro,rVl) (x),                    (182)
+and Iv'- l(y) ( R o , y ) (x) - l I< [Fr, xl ~'4elr''xl~a = O(L~'4) by (180), hence
+
+                 1.log(v'v0- ~(y)(Ro,,¢v0 (~)= R(~; l(y))1, log~,-l(y)
+                 l                                                                l
+
+                                           1            1
+                     • (Ro,rV') (x) + 71ogv; (y) (Ro,rVl) (x) + O(LZ~;e~).                             (183)
+
+A constant in the bound above is an absolute constant. Using (41) and (181), (183)
+we get
+
+                 g'(y) = v'(y)vl(y ) exp [i Z L-dR(v; a(y))1, logv'- l(y)
+                                         k xen(r)           t
+
+                             • ( R o , y ) (x) + 0(L2a;~) + (L2c~2)J v; l ( y )
+
+                              ,        [-                   al          ,             ,
+                         =v(y)exp|i             2 L- _logv-~(y)(Ro,rV)(x)
+                                       /       x~B(y)            l
+
+                             + O(L2(e; + c~) e~) / .                                                   (184)
+                                                 d
+Let us denote
+                     Vb'=v'-l(b_)Ro,bv'(b+),                         then   [Vb'--ll<ce~e =a,
+                     V b ' = e iAb ,   [Abl < 2 ~ , .                                                  (185)
+Using this we can write
+              v'- l(y) (Ro,rV,) (x) =            1-[ R(Vo(Fy.b_))Vi=(Ro,yV')(I~y.~,),                  (186)
+                                               bCFy,x
+Averaging Operations for Lattice Gauge Theories                                                              47
+
+and we have
+
+                      1. log (Ro,y V') (Fy, ~) = (R o, r A ) (r,.,) + o                                  (187)
+                      l
+Now using this and the representation (184), we have
+g'-~(c_)Ro,fi'(c+)=exp[-i                     Z        L-a(Ro,¢_A)( F . . . . )
+                       k                   xeB(c - )
+
+                             + O(L2(¢a + ~) <0] ¢- 1(t-)go, f(c +)
+
+                             • exp I i ,,,~B(c
+                                           ~-" +) L-e(R°' cRo,¢ +A) (F . . . . ') + 0 (L2(~t; + e:,)e:0].
+
+                                                                                                         (188)
+Let us recall that
+
+         goc=exp[i            Z         L-allogB)(F~xw(-c))]Vo(c)=e'°(L2=°'Vo(c)
+              '             xEB(c - )         i               '
+
+hence
+                       Ro,cV'(c +) = R(go(c))v'(c +) + o(g2%lv'(c +) - l I)
+                                   = R(Vo(c))v'(c +) + O(L2otoa4).
+Similarly,
+             (go,cRo,~ +A) (V . . . . ,) = (R(Vo(c))Ro,c+ A) (F . . . . ,) + O(L2ctoa'4) .
+Further we can write
+                  v'- 1(c_) R (Vo(c)) v'(c +) = (Ro,~_ V3 (c)
+                                              = 1 + i(Ro, c_ A) (c) + O((L.:,)2),
+and this implies the following representation
+g'-*(c_)go,~ff(c+)-l=-i                    Y~ L-a(Ro,~_A)(F~_,x)
+                                         x~B(c - )
+
+                                    +i(Ro,~_A)(c)+i                   Y,       L-a(R(Vo(c))Ro,c+A)(F¢+,x,)
+                                                                  x'~B(c + )
+                                    + 0 (L2(~0~4 + ~0~ + ~;~Z~+ ~2)).                                    (189)
+We will transform the linear terms in A on the right-hand side of (189). Let us
+notice that by the definition (185) of A and by the identity logv- * = - l o g v we have
+
+             --Ab= -- 1l°gu'-" l(b-)R° ' bu'(b+)= lt°g(R°i ' bu'- l(b+))u'(b-)
+
+                    = Ro,b~lOgu'-          l(b+)Ro, _ b U ' ( b _ )
+
+                    = Ro,b ~ logu'- l((-b)-)Ro,-bU'((--b)+),
+48                                                                                        T. Bataban
+
+hence
+                                       --Ab=Ro,bA_           b .                               (190)
+
+For the term (No,c_A)(c), we have for x e B(c_),
+         (Ro,~_A) (c)= Z R(Vo([c-, b - ] ) ) A b = - Z R(Vo([C-, b+]))A-b
+                          bCc                                      bCc
+
+                        =-- Z R(Vo(c~(-Fc,x)))R(Vo(Fc, xu[c+,b-]))Ab
+                             bC - c
+
+                        =-      Z R(Vo(r~,xuEc+,b-]))&+O(L~o~;);                               (191)
+                             bE -c
+similarly for the third term on the right-hand side of (189). Taking this into
+account, we have
+                g'-t(c-)Ro,Y(c+)-l=i                 Z     L-a(Ro,~_A)([x,x'-])
+                                               x~B(c - )
+
+                                               -i        if2 L-d(Ro,¢_A)(Fc,:,u(-c))
+                                                     x~B(c - )
+
+                                               + 0(L2(c~00~4 -1-aoO~ + ~ ; ~ + 0~2)).          (192)
+
+Let us now estimate the terms (Ro, ~_A) ( F ~ , . u ( - c)). They almost vanish because
+by the definition (185) A is almost equal to the derivative of 2 = -~logv'. We will
+                                                                    l
+prove in fact that they are small. Similarly, as in (187) we have
+
+         (no,c_ A) ( F c , ~ u ( - c)) = 1 log(Ro,~ V') ( F ~ , . w ( - c)) + O((Le~)2),       (193)
+
+and
+      (Ro,c_ V3 (L, x u ( - c)) = v'- ~(c_)R(Vo(L, xU( - c)))v'(c_ )
+                                = 1 + v'-l(c_) [R(Vo(F~,x~(-c)))- 1] (v'(c_)- 1)
+                                = 1 + 0(L20~0~4),                                              (194)
+hence
+                      (Ro,c_ A) (L,x~(-c)) = 0(L2(~o~4+ .;2)).                                 (t95)
+This gives us finally
+                 F-l(c_)Ro,cg'(c+) - 1 =i Z L-a(Ro,c-A)([x,x'])
+                                                xEB(c)
+
+                                                + 0(L2(~o~4 + ~ o ~ * + %, e ,4 + e 4,z) ) .   (196)
+From this we easily get a bound if we notice that
+
+                        Ab = l (v'- l(b-)Ro,bV'(b + ) - 1) + O(a~2).
+
+This implies t&l < c~; + 0(~2), and
+          Ig'-l(c-)Ro,cg'(c + ) - 11< LO~'4 + O(L2(%~4 + C~oa4
+                                                            . +. .
+                                                                %a4. + %z))-                   (197)
+Averaging Operations for Lattice Gauge Theories                                                    49
+
+From representation (184) we obtain also
+                                                            s ! ,~             f
+             tg'(Y) - 1t < e4 + O ( L A 4 ) + 0 (L2(o~; q- ~4) c~4)= ~4 q- O(L~4) •             (198)
+
+Let us formulate these results in
+Proposition 9. There exist positive constants C'4, C5; c 6" such that for arbitrary
+functions Vo, v', vl satisfying (180) with c%, ~3, ~'3, cq, ~'4 <=c'6, the following bounds
+hold:
+              If'- 1@_) Ro, cg'(c +) - 11< Le~ + C;L2(~ZoC~4-t- (~;0~ + 0~2),                   (199)
+                                    If'(Y)- 11< ~4 + C'sLA4.                                    (200)
+In these bounds we have assumed that e; = O(c~4), which will always be true here
+and in forthcoming papers.
+    Let us apply this result to configurations Uo, u', ul many times. We assume that
+Uo satisfies (52), u satisfies (176), (177), and ul satisfies (166), (167). When we apply it
+the first time, we get bounds
+            Iff- 1@_)Ro,cff(c +) - 1[ < e4Lt/+ C~(c~0e4 + e3c~4+ c~) (Lt/) 2 ,                  (201)
+                                   Iff(Y) - 11< ~4 + C'5°~4Ltl •                                (202)
+Let us denote/~ =eoC~4+ e3e4 + 0~, C5 = 1 + 4C;, C4 = 8C~C5. We will prove by
+induction that
+             l(tT,j)- 1@_) I~Jo,ca,J(c+) _ 11< cz4ZJtl-t- C41~ ( / i n ) 2 ,      C Q ~-~(J),   (203)
+               IffJ(y) -- 11< ~4 + 2C'5o~4Lrl+ ... + 2C5~4Lr/,'
+                                                           J                   y 6 f2(j) .      (204)
+Let us notice that
+           c~4LJt/+ C4fl(Ur/) 2 < e4Ut/( 1 + C4(~0 ~- ~3 -{- ~4)) ~ 2~4LJt/~ 2e4
+
+for c~o, e3, e4 sufficiently small, so the condition e; = O(e4) mentioned above is
+satisfied indeed. The inequalities (203), (204) hold f o r j = 0, 1. We assume them for
+some j and we will prove them for j + 1. We apply Proposition 9 with Vo = U~,
+v'=ff j, vl =RoulL We have So replaced by 2eo(Ut/) 2, c~; replaced by e3/Jt/, cq
+replaced by the right-hand side of (204), which can be bounded by
+e4(1 + 4 C ; ) = C5e4, and e~ replaced by the right-hand side of (203), which can be
+bounded by 2e4. The conditions of the proposition are satisfied if, e.g., 2e o, e3,
+C5c~4, 2~4=c6, SO we can apply it and we get
+              1(~7,a+ 1)- l/,~    a ~ + c 1 a,~+ ~(c+) - I I < ~4/2 + ~t/+ LC4fl(Z~tl) 2
+                            \t.--].t~,O,
+
+                    + C;(2eoCse 4 + e32c¢4+ 4e~) (/J + ~r/)z
+
+                 < a , g ~+ ~1 + C4fl( U+ 1~/)2[ g - ~ + CX4Cs[
+                                                          C, J
+                    ~4 Lj+ 'I,I -]- C4fl(j~ + lt])2,                                            (205)
+
+            lff3+ l(y) _ I I < (~4 -~"2C;a4Lrl +... + 2C'5~4LJ~1 -I- 2C'5~4L j + lr I .         (206)
+Thus we have proved the following
+50                                                                                        T. B a t a b a n
+
+
+Proposition 10. There exist positive constants C4, C5, c6 such that for arbitrary
+configurations U o, u 1, u 1 satisfying (52), (176), (177), (166), (167) with %, a 3, %=<%
+the bounds (203), (204) hold for j < k.
+   This result implies in particular that the configuration u' belongs to the class
+Ak(C5% ). The assumptions (176), (177) can be reformulated in terms of the
+                 4
+
+functions 2 = ~logu'. If we assume
+                 1
+
+
+                         I(Dbo2)(b)l<~4,            12(x)l<a4,           2(x) ~ 9=,
+                                         % sufficiently small,                                   (207)
+then assumptions (176), (177) are satisfied with a constant 4~ 4 instead of a4- It is
+obvious from the definition of the averaging operations that ~'J are analytic
+functions of 4, and
+                                                 1         ,.
+                                     Qj(ul, 2) = ? l o g a s ,   j<k,                            (208)
+
+are analytic functions of 2 also. We want to calculate a linear term in an expansion
+of this function. In fact, we will be satisfied with a good approximation of this term.
+From (184), (187), we have for v'=e i;"
+                   •
+     if(y) = exp [t2(y) + t" ~        L - - 4 (Ro,rA) (Fy, x) + O(~4La4)
+                                                                      t              ]  ¢ -]
+                                                                         + O(L2(~ + ~4)%)    •
+                 I_         x~n(y)
+                                                                                                 (209)
+By definition of A,
+
+                         A b = .~-loge-i;~(b-)eiRo,b.~(b+)
+                                l
+
+
+                            = _ 1l o g e - ' 12b( -)e"t 2(-)
+                                                         b +tDv, 2 b
+                                                             "¢ o )~ )
+                                 1
+
+                            = (Ovo2) (b) + O(a4a"4 + a:,2),                                      (210)
+hence
+
+            ~logff(y) =               L-~(Ro,r2)(x)+O(a4La~ + L2~'3~'4+L2~'42) .                 (211)
+             t              x~B(y)
+                        I u
+By (179) the function Q j(  i, 2) is a composition of one-step functions and from the
+above formula we can easily see that
+                                                                             j-1
+                      O~(ul, 2, y)= Y L-~g(Vo(r~))2(x) + Z
+                                       x~BJ(y)                               1= 0
+                                        • O(Csa42c~4/Jt/+ ~32~,(/_Jt/) 2 + 4a](Lttl)2),          (212)
+hence
+                            Q~(u1, 2, y) = (Q}2) (y) + C~(ut, 2, y),                             (213)
+                              [C~(u1, 2, y)l = O((aacz4 + cc])IJrl).                             (214)
+Averaging Operations for Lattice Gauge Theories                                                   51
+
+References
+ 1. Balaban, T.: (Higgs)2, s quantum fields in a finite volume. I. A lower bound. Commun. Math.
+    Phys. 85, 603-636 (1982)
+ 2. Balaban, T.: Propagators and renormalization transformations for lattice gauge theories. I.
+    Commun. Math. Phys. 95, 1740 (1984)
+ 3. Brydges, D.C., Fr6hlich, J., Seiler, E.: On the construction ofquantized gauge fields. I. General
+    results. Ann. Phys. 121, 227-284 (1979)
+ 4. Kadanoff, L.P.: Notes on Migdal's recursion formulas. Ann. Phys. 100, 359-394 (1976)
+ 5. Kadanoff, L.P.: The application of renormalization group techniques to quarks and strings.
+    Rev. Mod. Phys. 49, 267-296 (1977)
+ 6. Osterwalder, K., Seiler, E.: Gauge field theories on a lattice. Ann. Phys. 110, 440-471 (1978)
+ 7. Varadarajan, V.S.: Lie groups, Lie algebras and their representations. New York: Prentice-
+    Hall 1974
+ 8. Wilson, K.G.: Confinement of quarks. Phys. Rev. D 10, 2445-2459 (1974)
+ 9. Wilson, K.G.: Quantum chromodynamics on a lattice. In: Quantum field theory and
+    statistical mechanics, Carg+se 1976, pp. 143-172. Lrvy, M., Mitter, P., eds. New York:
+    Plenum Press 1977
+10. Wilson, K.G.: Monte Carlo calculations for the lattice gauge theory. In: Recent developments
+    in gauge theories, pp. 363-402. 't Hoott, G., Itzykson, C., Jaffe, A., Lehmann, M., Mitter, P.K.,
+    Singer, I.M., Stora, R., eds. New York: Plenum Press 1980
+
+Communicated by A. Jaffe
+
+Received January 12, 1984; in revised form September 4, 1984
+

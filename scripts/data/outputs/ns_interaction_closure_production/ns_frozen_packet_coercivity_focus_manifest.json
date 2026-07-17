@@ -1,0 +1,74 @@
+{
+  "contract": "preregistered_frozen_packet_coercivity_focus_panel_nonpromoting",
+  "authority": {
+    "empirical_non_promoting": true,
+    "theorem_authority": false,
+    "clay_authority": false
+  },
+  "rationale": "The completed 50-point panel placed all three factor declines in the same first post-peak interval. This refinement samples only the already-observed peak/downcrossing band [0.07T,0.16T] at 100 equal intervals; no profile, solver, normalization, or endpoint objective changes.",
+  "entries": [
+    {
+      "id": "baseline",
+      "stage_a_static_arguments": [
+        "--n", "32", "--nu", "0.001", "--target-shell", "2", "--critical-mass", "1.0",
+        "--state-input", "scripts/data/outputs/ns_interaction_closure_production/N32j2_profile_positive_chi_attempt1_state.npz",
+        "--chi-sign", "positive", "--chi-target", "0.16518290321070614", "--chi-tolerance", "0.05",
+        "--require-chi-tolerance", "--target-dominance-min", "0.8"
+      ],
+      "stage_b_short_residence_additions": [], "stage_c_medium_residence_additions": [],
+      "stage_d_parabolic_window_additions": [
+        "--evolve", "--backend", "gpu", "--window-c", "0.25", "--checkpoint-fractions", "0,1",
+        "--mechanism-trace-count", "100", "--mechanism-trace-start-fraction", "0.07",
+        "--mechanism-trace-end-fraction", "0.16"
+      ]
+    },
+    {
+      "id": "radial_neg_0p04",
+      "stage_a_static_arguments": [
+        "--n", "32", "--nu", "0.001", "--target-shell", "2", "--critical-mass", "1.0",
+        "--state-input", "scripts/data/outputs/ns_interaction_closure_production/N32j2_profile_positive_chi_attempt1_state.npz",
+        "--state-perturbation", "radial", "--perturb-epsilon", "-0.04", "--perturb-seed", "20284935",
+        "--chi-sign", "positive", "--chi-target", "0.16518290321070614", "--chi-tolerance", "0.05",
+        "--require-chi-tolerance", "--target-dominance-min", "0.8"
+      ],
+      "stage_b_short_residence_additions": [], "stage_c_medium_residence_additions": [],
+      "stage_d_parabolic_window_additions": [
+        "--evolve", "--backend", "gpu", "--window-c", "0.25", "--checkpoint-fractions", "0,1",
+        "--mechanism-trace-count", "100", "--mechanism-trace-start-fraction", "0.07",
+        "--mechanism-trace-end-fraction", "0.16"
+      ]
+    },
+    {
+      "id": "phase_pos_0p04",
+      "stage_a_static_arguments": [
+        "--n", "32", "--nu", "0.001", "--target-shell", "2", "--critical-mass", "1.0",
+        "--state-input", "scripts/data/outputs/ns_interaction_closure_production/N32j2_profile_positive_chi_attempt1_state.npz",
+        "--state-perturbation", "phase", "--perturb-epsilon", "0.04", "--perturb-seed", "20265764",
+        "--chi-sign", "positive", "--chi-target", "0.16518290321070614", "--chi-tolerance", "0.05",
+        "--require-chi-tolerance", "--target-dominance-min", "0.8"
+      ],
+      "stage_b_short_residence_additions": [], "stage_c_medium_residence_additions": [],
+      "stage_d_parabolic_window_additions": [
+        "--evolve", "--backend", "gpu", "--window-c", "0.25", "--checkpoint-fractions", "0,1",
+        "--mechanism-trace-count", "100", "--mechanism-trace-start-fraction", "0.07",
+        "--mechanism-trace-end-fraction", "0.16"
+      ]
+    },
+    {
+      "id": "coherence_pos_0p04",
+      "stage_a_static_arguments": [
+        "--n", "32", "--nu", "0.001", "--target-shell", "2", "--critical-mass", "1.0",
+        "--state-input", "scripts/data/outputs/ns_interaction_closure_production/N32j2_profile_positive_chi_attempt1_state.npz",
+        "--state-perturbation", "coherence", "--perturb-epsilon", "0.04", "--perturb-seed", "20277872",
+        "--chi-sign", "positive", "--chi-target", "0.16518290321070614", "--chi-tolerance", "0.05",
+        "--require-chi-tolerance", "--target-dominance-min", "0.8"
+      ],
+      "stage_b_short_residence_additions": [], "stage_c_medium_residence_additions": [],
+      "stage_d_parabolic_window_additions": [
+        "--evolve", "--backend", "gpu", "--window-c", "0.25", "--checkpoint-fractions", "0,1",
+        "--mechanism-trace-count", "100", "--mechanism-trace-start-fraction", "0.07",
+        "--mechanism-trace-end-fraction", "0.16"
+      ]
+    }
+  ]
+}

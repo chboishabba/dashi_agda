@@ -84,6 +84,35 @@ All canonical chain steps have now executed and Lemma A/B elimination is lodged 
 
 ## NS Experimental Sidecar (2026-07-17, non-canonical)
 
+- **Protocol freeze — durable coercivity panel:** no new profile search or
+  production launch proceeds until the saved baseline plus radial `-0.04`,
+  phase `+0.04`, and coherence `+0.04` can all pass one shared artifact
+  contract: validated JSON, stdout, stderr, status, and SHA-256 visible in the
+  workspace. The primary event is fixed in advance as the first post-peak
+  adjacent positive-input/viscous-loss window with ratio `<= 1`; the new
+  factor report compares forcing, packet geometry, and nonlinear alignment
+  before treating radial or angular coordinates as explanatory. Existing
+  traces remain finite discovery receipts, not causal or theorem evidence.
+  **Panel result:** all four traces passed this contract and exhibit delayed
+  collapse, but the 50-point trace cadence makes the three preregistered
+  factor-decline events simultaneous at first resolution. The next bounded
+  milestone is a narrow peak-to-downcrossing telemetry refinement, not a
+  fifth shape or another endpoint run.
+  **Focused refinement:** the four receipts now show alignment loses roughly
+  22--23% from focused-window start to peak, compared with 10--10.5% for the
+  forcing and geometry factors. The active discovery question is whether this
+  alignment loss can be linked to a concrete triadic phase observable; do not
+  infer causality from these finite correlations alone.
+
+- **Current bounded milestone — frozen coercivity transition:** run exactly
+  the saved positive-chi survivor (and, only if needed, its strongest radial
+  perturbation) with fine frozen-packet checkpoints. Measure
+  `Gamma=[N_frozen]_+/(2 nu D_frozen)`, windowed positive-input/viscous-loss
+  ratios, packet peak time, and quotient-shape coordinates. This is intended
+  to discover a reproducible loss trigger, not to fit a theorem or launch a
+  new profile-search tranche. Coarse interaction sampling remains endpoint
+  telemetry and cannot support a fine turnover conclusion.
+
 - **Branch-Closing Result (Finite Sparse-Network Retired)**: The 1024-output replay completed with 100% modal activity capture and classified the target shell as effectively dense (`M90 = 742,606`, `M90 / N_nonzero ~ 0.549`, Shannon fraction `~0.57`, IPR fraction `~0.36`, and `C(2048) = 0.0247` with near-total turnover). This retires the sparse finite-network mechanism for the tested critical packet. Future work will not perform phase tuning, pure-helicity completion, mixed-polarization, or search for hand-designed networks.
 - **Scaling Audit Closed**: The `(N32,j2,mass=1) -> (N64,j3,mass=8)` map has exact finite static factors `packet=8`, `nonlinear rate=32`, `viscous rate=32`, and invariant replenishment ratio.  Literal dyadic copies are scaling-conjugate diagnostics, so an N128 copy cannot discover a new theorem.
 - **Next High-Alpha Experiment**:

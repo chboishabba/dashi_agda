@@ -22,9 +22,11 @@ import argparse
 import importlib.util
 import json
 import math
+import os
 from collections import defaultdict
 from pathlib import Path
 import sys
+import tempfile
 from typing import Any
 
 import numpy as np
@@ -87,6 +89,13 @@ def parse_args() -> argparse.Namespace:
                         help="multiple of 2**(-2*target_shell)/nu when --evolve")
     parser.add_argument("--checkpoint-fractions", default="0,0.25,0.5,0.75,1",
                         help="comma-separated fractions of the evolved window to retain in the receipt")
+    parser.add_argument("--mechanism-trace-count", type=int, default=0,
+                        help=("add this many evenly spaced finite-Galerkin checkpoints for frozen-packet "
+                              "coercivity telemetry; interaction sampling remains endpoints only"))
+    parser.add_argument("--mechanism-trace-start-fraction", type=float, default=0.0,
+                        help="start fraction of the evolved window for evenly spaced mechanism telemetry")
+    parser.add_argument("--mechanism-trace-end-fraction", type=float, default=1.0,
+                        help="end fraction of the evolved window for evenly spaced mechanism telemetry")
     parser.add_argument("--moving-packet-radius", type=int, default=1)
     parser.add_argument("--cfd-root", type=Path, default=DEFAULT_CFD_ROOT)
     parser.add_argument("--fft-backend", default="vkfft-vulkan")
@@ -121,6 +130,31 @@ def authority() -> dict[str, bool]:
         "clay_authority": False,
         "promoted": False,
     }
+
+
+def write_json_atomically(path: Path, payload: dict[str, Any]) -> None:
+    """Promote a complete JSON receipt with one same-filesystem rename.
+
+    This protects direct invocations as well as manifest-runner invocations:
+    a crashed solver may leave no receipt, but it cannot leave a half-written
+    JSON file at the declared authority path.  The outer runner is still
+    responsible for stdout, stderr, exit-status, and checksum sidecars.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        mode="w", encoding="utf-8", dir=path.parent,
+        prefix=f".{path.name}.", suffix=".partial", delete=False,
+    ) as handle:
+        temporary = Path(handle.name)
+        json.dump(payload, handle, indent=2, sort_keys=True)
+        handle.write("\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+    try:
+        os.replace(temporary, path)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
 
 
 def mode_index(mode: tuple[int, int, int], n: int) -> tuple[int, int, int]:
@@ -324,6 +358,66 @@ def static_metrics(args: argparse.Namespace, field_hat: np.ndarray, wave: np.nda
     }
 
 
+def frozen_packet_coercivity_factors(
+    field_hat: np.ndarray, nonlinear_hat: np.ndarray, norm: np.ndarray, norm_sq: np.ndarray,
+    frozen_lower: int, frozen_upper: int, nu: float,
+) -> dict[str, float]:
+    """Factor the frozen packet's positive coercivity ratio exactly.
+
+    The packet energy convention weights shell ``j`` by ``2**j``.  Writing
+    ``p = <u, N>_w``, ``P = ||u||_w**2`` and ``D = ||grad u||_w**2`` gives
+
+        [2 Re p]_+ / (2 nu D)
+        = (||N||_w / (nu sqrt(D))) (sqrt(P) / sqrt(D)) alignment_+.
+
+    This is finite telemetry only.  It deliberately avoids attributing a
+    subsequent Gamma drop to broadening, angular dispersion, or phase
+    cancellation before the three factors have been compared across traces.
+    """
+    weighted_packet = 0.0
+    weighted_gradient = 0.0
+    weighted_forcing = 0.0
+    pairing = 0.0j
+    for shell in range(frozen_lower, frozen_upper):
+        lower = float(2 ** shell)
+        upper = float(2 ** (shell + 1))
+        mask = (norm >= lower) & (norm < upper)
+        weight = float(2 ** shell)
+        packet_modes = field_hat[:, mask]
+        forcing_modes = nonlinear_hat[:, mask]
+        weighted_packet += weight * float(np.sum(np.abs(packet_modes) ** 2))
+        weighted_gradient += weight * float(np.sum(norm_sq[mask] * np.abs(packet_modes) ** 2))
+        weighted_forcing += weight * float(np.sum(np.abs(forcing_modes) ** 2))
+        pairing += weight * np.sum(np.conjugate(packet_modes) * forcing_modes)
+    packet_norm = math.sqrt(max(weighted_packet, 0.0))
+    gradient_norm = math.sqrt(max(weighted_gradient, 0.0))
+    forcing_norm = math.sqrt(max(weighted_forcing, 0.0))
+    denominator = packet_norm * forcing_norm
+    signed_alignment = float(np.real(pairing) / denominator) if denominator > 1.0e-30 else 0.0
+    positive_alignment = max(signed_alignment, 0.0)
+    viscous_rate = 2.0 * nu * weighted_gradient
+    positive_gamma = max(2.0 * float(np.real(pairing)), 0.0) / viscous_rate if viscous_rate > 1.0e-30 else math.nan
+    forcing_to_viscous_gradient = (
+        forcing_norm / (nu * gradient_norm) if gradient_norm > 1.0e-30 else math.nan
+    )
+    packet_to_gradient = packet_norm / gradient_norm if gradient_norm > 1.0e-30 else math.nan
+    reconstructed_gamma = forcing_to_viscous_gradient * packet_to_gradient * positive_alignment
+    return {
+        "weighted_packet_norm": packet_norm,
+        "weighted_gradient_norm": gradient_norm,
+        "weighted_nonlinear_forcing_norm": forcing_norm,
+        "weighted_pairing_real": float(np.real(pairing)),
+        "weighted_pairing_imaginary": float(np.imag(pairing)),
+        "signed_nonlinear_alignment": signed_alignment,
+        "positive_nonlinear_alignment": positive_alignment,
+        "forcing_to_viscous_gradient_ratio": forcing_to_viscous_gradient,
+        "packet_to_gradient_ratio": packet_to_gradient,
+        "positive_coercivity_ratio_from_factors": reconstructed_gamma,
+        "positive_coercivity_ratio_direct": positive_gamma,
+        "positive_coercivity_factorisation_residual": reconstructed_gamma - positive_gamma,
+    }
+
+
 def load_cfd_module(args: argparse.Namespace) -> Any:
     scripts_dir = args.cfd_root / "scripts"
     if not scripts_dir.is_dir():
@@ -358,6 +452,11 @@ def packet_telemetry(args: argparse.Namespace, field_hat: np.ndarray, wave: np.n
     frozen_upper = min(len(packets), frozen_centre + args.moving_packet_radius + 1)
     previous_lower = max(0, (previous_centre if previous_centre is not None else centre) - args.moving_packet_radius)
     previous_upper = min(len(packets), (previous_centre if previous_centre is not None else centre) + args.moving_packet_radius + 1)
+    frozen_nonlinear = float(np.sum(nonlinear_shell_rates[frozen_lower:frozen_upper]))
+    frozen_viscous = float(2.0 * args.nu * np.sum(dissipations[frozen_lower:frozen_upper]))
+    frozen_factors = frozen_packet_coercivity_factors(
+        field_hat, nonlinear, norm, norm_sq, frozen_lower, frozen_upper, args.nu,
+    )
     return {
         "time": time,
         "shell_packets": [float(value) for value in packets],
@@ -366,12 +465,20 @@ def packet_telemetry(args: argparse.Namespace, field_hat: np.ndarray, wave: np.n
         "frozen_initial_packet": float(np.sum(packets[frozen_lower:frozen_upper])),
         "moving_packet_nonlinear_rate": float(np.sum(nonlinear_shell_rates[moving_lower:moving_upper])),
         "moving_packet_viscous_rate": float(2.0 * args.nu * np.sum(dissipations[moving_lower:moving_upper])),
-        "frozen_initial_packet_nonlinear_rate": float(np.sum(nonlinear_shell_rates[frozen_lower:frozen_upper])),
-        "frozen_initial_packet_viscous_rate": float(2.0 * args.nu * np.sum(dissipations[frozen_lower:frozen_upper])),
+        "frozen_initial_packet_nonlinear_rate": frozen_nonlinear,
+        "frozen_initial_packet_positive_coercivity_ratio": (
+            max(frozen_nonlinear, 0.0) / frozen_viscous if frozen_viscous > 1.0e-30 else math.nan
+        ),
+        "frozen_initial_packet_signed_coercivity_ratio": (
+            frozen_nonlinear / frozen_viscous if frozen_viscous > 1.0e-30 else math.nan
+        ),
+        "frozen_initial_packet_viscous_rate": frozen_viscous,
+        "frozen_initial_packet_coercivity_factors": frozen_factors,
         "moving_packet_if_previous_centre": float(np.sum(packets[previous_lower:previous_upper])),
         "checkpoint_recentering_jump": float(np.sum(packets[moving_lower:moving_upper]) - np.sum(packets[previous_lower:previous_upper])),
         "heat_moving_packet_exact_spectrum": heat_moving,
         "heat_frozen_initial_packet_exact_spectrum": float(np.sum(heat_packets[frozen_lower:frozen_upper])),
+        "profile_shape_metrics": profile_shape_metrics(field_hat, wave, norm),
         "static_packet_metrics": static,
         "_nonlinear": nonlinear,
     }
@@ -408,6 +515,13 @@ def evolve_profile(args: argparse.Namespace, raw: np.ndarray, wave: np.ndarray,
     if not checkpoint_fractions or checkpoint_fractions[0] < 0.0 or checkpoint_fractions[-1] > 1.0:
         raise ValueError("checkpoint fractions must lie in [0, 1]")
     checkpoints = {int(round(fraction * steps)) for fraction in checkpoint_fractions}
+    if args.mechanism_trace_count:
+        checkpoints.update({
+            int(round((args.mechanism_trace_start_fraction
+                       + (args.mechanism_trace_end_fraction - args.mechanism_trace_start_fraction)
+                       * index / args.mechanism_trace_count) * steps))
+            for index in range(args.mechanism_trace_count + 1)
+        })
     checkpoints.update({0, steps})
     history: list[dict[str, Any]] = []
     coarse_at: dict[int, dict[str, Any]] = {}
@@ -464,12 +578,48 @@ def evolve_profile(args: argparse.Namespace, raw: np.ndarray, wave: np.ndarray,
     frozen_nonlinear = np.asarray([row["frozen_initial_packet_nonlinear_rate"] for row in history], dtype=np.float64)
     frozen_viscous = np.asarray([row["frozen_initial_packet_viscous_rate"] for row in history], dtype=np.float64)
     recentering_jumps = np.asarray([row["checkpoint_recentering_jump"] for row in history], dtype=np.float64)
+    frozen_positive = np.maximum(frozen_nonlinear, 0.0)
+    frozen_gamma = np.asarray([row["frozen_initial_packet_positive_coercivity_ratio"] for row in history], dtype=np.float64)
+    frozen_packets = np.asarray([row["frozen_initial_packet"] for row in history], dtype=np.float64)
+    coercivity_windows: list[dict[str, float]] = []
+    for index in range(1, len(history)):
+        left, right = history[index - 1], history[index]
+        duration = float(right["time"] - left["time"])
+        positive_input = float(0.5 * duration * (
+            max(float(left["frozen_initial_packet_nonlinear_rate"]), 0.0)
+            + max(float(right["frozen_initial_packet_nonlinear_rate"]), 0.0)
+        ))
+        viscous_loss = float(0.5 * duration * (
+            float(left["frozen_initial_packet_viscous_rate"])
+            + float(right["frozen_initial_packet_viscous_rate"])
+        ))
+        coercivity_windows.append({
+            "start_time": float(left["time"]),
+            "end_time": float(right["time"]),
+            "positive_nonlinear_input": positive_input,
+            "viscous_loss": viscous_loss,
+            "positive_coercivity_ratio": positive_input / viscous_loss if viscous_loss > 1.0e-30 else math.nan,
+        })
+    below_one = np.flatnonzero(frozen_gamma <= 1.0)
+    first_below_one = (float(times[int(below_one[0])]) if len(below_one) else None)
+    packet_peak = int(np.argmax(frozen_packets))
+    below_one_after_peak = np.flatnonzero((np.arange(len(frozen_gamma)) > packet_peak) & (frozen_gamma <= 1.0))
+    first_below_one_after_peak = (
+        float(times[int(below_one_after_peak[0])]) if len(below_one_after_peak) else None
+    )
     return {
         "contract": "finite-Galerkin normalized-profile parabolic-window receipt; no profile-uniform inference",
         "nominal_window_time": nominal_time,
         "actual_window_time": actual_time,
         "steps": steps,
         "checkpoint_fractions_requested": checkpoint_fractions,
+        "mechanism_trace_count_requested": args.mechanism_trace_count,
+        "mechanism_trace_start_fraction_requested": args.mechanism_trace_start_fraction,
+        "mechanism_trace_end_fraction_requested": args.mechanism_trace_end_fraction,
+        "mechanism_trace_contract": (
+            "fine frozen-packet rate and shape telemetry; coarse interaction sampling is retained only at the two endpoints "
+            "and must not be interpreted as a fine turnover trace"
+        ),
         "backend": args.backend,
         "moving_packet_recurrence_ratio": endpoint["moving_packet"] / initial_row["moving_packet"],
         "moving_packet_heat_compensated_ratio": endpoint["moving_packet"] / endpoint["heat_moving_packet_exact_spectrum"],
@@ -491,6 +641,17 @@ def evolve_profile(args: argparse.Namespace, raw: np.ndarray, wave: np.ndarray,
         "integrated_frozen_initial_packet_nonlinear_input": float(np.trapezoid(frozen_nonlinear, times)),
         "integrated_frozen_initial_packet_positive_nonlinear_input": float(np.trapezoid(np.maximum(frozen_nonlinear, 0.0), times)),
         "integrated_frozen_initial_packet_viscous_loss": float(np.trapezoid(frozen_viscous, times)),
+        "integrated_frozen_initial_packet_positive_coercivity_ratio": (
+            float(np.trapezoid(frozen_positive, times) / np.trapezoid(frozen_viscous, times))
+            if float(np.trapezoid(frozen_viscous, times)) > 1.0e-30 else math.nan
+        ),
+        "frozen_initial_packet_positive_coercivity_ratio_sample_max": float(np.nanmax(frozen_gamma)),
+        "frozen_initial_packet_positive_coercivity_ratio_sample_min": float(np.nanmin(frozen_gamma)),
+        "frozen_initial_packet_first_sampled_time_gamma_at_most_one": first_below_one,
+        "frozen_initial_packet_first_sampled_time_gamma_at_most_one_after_packet_peak": first_below_one_after_peak,
+        "frozen_initial_packet_peak_sample_time": float(times[packet_peak]),
+        "frozen_initial_packet_peak_sample_value": float(frozen_packets[packet_peak]),
+        "frozen_packet_coercivity_windows": coercivity_windows,
         "packet_centre_changes_at_checkpoints": int(sum(
             row["dominant_shell"] != initial_row["dominant_shell"] for row in history[1:]
         )),
@@ -659,8 +820,11 @@ def stratified_interaction_estimate(args: argparse.Namespace, field_hat: np.ndar
 def main() -> None:
     args = parse_args()
     if (args.n < 12 or args.nu <= 0.0 or args.critical_mass <= 0.0 or args.chi_attempts <= 0
-            or args.dt <= 0.0 or args.window_c <= 0.0 or args.moving_packet_radius < 0):
-        raise ValueError("n >= 12, nonnegative packet radius, and positive nu/mass/attempts/dt/window-c are required")
+            or args.dt <= 0.0 or args.window_c <= 0.0 or args.moving_packet_radius < 0
+            or args.mechanism_trace_count < 0):
+        raise ValueError("n >= 12, nonnegative packet radius/trace count, and positive nu/mass/attempts/dt/window-c are required")
+    if not (0.0 <= args.mechanism_trace_start_fraction < args.mechanism_trace_end_fraction <= 1.0):
+        raise ValueError("mechanism trace fractions must satisfy 0 <= start < end <= 1")
     if args.require_chi_tolerance and args.chi_target is None:
         raise ValueError("--require-chi-tolerance requires --chi-target")
     if args.state_perturbation != "none" and args.state_input is None:
@@ -779,6 +943,10 @@ def main() -> None:
             "chi_target": args.chi_target, "chi_sign": args.chi_sign, "chi_attempts": args.chi_attempts,
             "chi_tolerance": args.chi_tolerance, "require_chi_tolerance": args.require_chi_tolerance,
             "target_dominance_min": args.target_dominance_min,
+            "checkpoint_fractions": args.checkpoint_fractions,
+            "mechanism_trace_count": args.mechanism_trace_count,
+            "mechanism_trace_start_fraction": args.mechanism_trace_start_fraction,
+            "mechanism_trace_end_fraction": args.mechanism_trace_end_fraction,
             "selection_objective": args.selection_objective,
             "require_positive_short_input": args.require_positive_short_input,
         },
@@ -839,8 +1007,7 @@ def main() -> None:
             "format": "npz-compressed raw FFT coefficients after the declared finite-Galerkin segment",
             "segment_window_c": args.window_c,
         }
-    args.output_json.parent.mkdir(parents=True, exist_ok=True)
-    args.output_json.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+    write_json_atomically(args.output_json, payload)
     print(json.dumps(payload, indent=2, sort_keys=True))
 
 
