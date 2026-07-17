@@ -4,10 +4,11 @@ module DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier where
 -- Concrete SU(2) carrier as the group of unit quaternions over DASHI's
 -- canonical real-number authority boundary.
 --
--- The quaternion operations are explicit polynomial expressions.  Their
--- algebraic laws are discharged by the standard-library ring solver from one
--- honest foundational socket: the postulated real carrier is a commutative
--- ring.  No Yang--Mills source theorem or analytic estimate is assumed here.
+-- The quaternion operations are explicit polynomial expressions. Their laws
+-- are reduced componentwise and discharged by the standard-library ring
+-- solver from one honest foundational socket: the postulated real carrier is
+-- a commutative ring. No Yang--Mills source theorem or analytic estimate is
+-- assumed here.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -16,7 +17,7 @@ open import Algebra.Structures using (IsCommutativeRing)
 open import Data.List.Base using ([]; _∷_)
 open import Data.Maybe.Base using (nothing)
 open import Level using (0ℓ)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import Tactic.RingSolver as Solver
 import Tactic.RingSolver.Core.AlmostCommutativeRing as ACR
@@ -73,11 +74,9 @@ infixl 20 _+q_
 
 zeroQ : Quaternion
 zeroQ = quat 0ℝ 0ℝ 0ℝ 0ℝ
-{-# INLINE zeroQ #-}
 
 oneQ : Quaternion
 oneQ = quat 1ℝ 0ℝ 0ℝ 0ℝ
-{-# INLINE oneQ #-}
 
 _+q_ : Quaternion → Quaternion → Quaternion
 quat a0 a1 a2 a3 +q quat b0 b1 b2 b3 =
@@ -86,17 +85,14 @@ quat a0 a1 a2 a3 +q quat b0 b1 b2 b3 =
     (a1 +ℝ b1)
     (a2 +ℝ b2)
     (a3 +ℝ b3)
-{-# INLINE _+q_ #-}
 
 negQ : Quaternion → Quaternion
 negQ (quat a0 a1 a2 a3) =
   quat (-ℝ a0) (-ℝ a1) (-ℝ a2) (-ℝ a3)
-{-# INLINE negQ #-}
 
 conjugateQ : Quaternion → Quaternion
 conjugateQ (quat a0 a1 a2 a3) =
   quat a0 (-ℝ a1) (-ℝ a2) (-ℝ a3)
-{-# INLINE conjugateQ #-}
 
 _*q_ : Quaternion → Quaternion → Quaternion
 quat a0 a1 a2 a3 *q quat b0 b1 b2 b3 =
@@ -113,14 +109,12 @@ quat a0 a1 a2 a3 *q quat b0 b1 b2 b3 =
     (((a0 *ℝ b3) +ℝ (a1 *ℝ b2))
       +ℝ (-ℝ (a2 *ℝ b1))
       +ℝ (a3 *ℝ b0))
-{-# INLINE _*q_ #-}
 
 normSquaredQ : Quaternion → ℝ
 normSquaredQ (quat a0 a1 a2 a3) =
   (((a0 *ℝ a0) +ℝ (a1 *ℝ a1))
     +ℝ (a2 *ℝ a2)
     +ℝ (a3 *ℝ a3))
-{-# INLINE normSquaredQ #-}
 
 scaleRealQ : ℝ → Quaternion → Quaternion
 scaleRealQ scalar (quat a0 a1 a2 a3) =
@@ -129,7 +123,6 @@ scaleRealQ scalar (quat a0 a1 a2 a3) =
     (scalar *ℝ a1)
     (scalar *ℝ a2)
     (scalar *ℝ a3)
-{-# INLINE scaleRealQ #-}
 
 quaternionExt :
   ∀ {a b : Quaternion} →
@@ -141,107 +134,320 @@ quaternionExt :
 quaternionExt {quat a0 a1 a2 a3} {quat .a0 .a1 .a2 .a3}
   refl refl refl refl = refl
 
+------------------------------------------------------------------------
+-- Definitional component exposure
+------------------------------------------------------------------------
+
+q0Multiply :
+  ∀ a b →
+  q0 (a *q b)
+    ≡
+  (((q0 a *ℝ q0 b) +ℝ (-ℝ (q1 a *ℝ q1 b)))
+    +ℝ (-ℝ (q2 a *ℝ q2 b))
+    +ℝ (-ℝ (q3 a *ℝ q3 b)))
+q0Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3) = refl
+
+q1Multiply :
+  ∀ a b →
+  q1 (a *q b)
+    ≡
+  (((q0 a *ℝ q1 b) +ℝ (q1 a *ℝ q0 b))
+    +ℝ (q2 a *ℝ q3 b)
+    +ℝ (-ℝ (q3 a *ℝ q2 b)))
+q1Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3) = refl
+
+q2Multiply :
+  ∀ a b →
+  q2 (a *q b)
+    ≡
+  (((q0 a *ℝ q2 b) +ℝ (-ℝ (q1 a *ℝ q3 b)))
+    +ℝ (q2 a *ℝ q0 b)
+    +ℝ (q3 a *ℝ q1 b))
+q2Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3) = refl
+
+q3Multiply :
+  ∀ a b →
+  q3 (a *q b)
+    ≡
+  (((q0 a *ℝ q3 b) +ℝ (q1 a *ℝ q2 b))
+    +ℝ (-ℝ (q2 a *ℝ q1 b))
+    +ℝ (q3 a *ℝ q0 b))
+q3Multiply (quat a0 a1 a2 a3) (quat b0 b1 b2 b3) = refl
+
+q0Conjugate : ∀ a → q0 (conjugateQ a) ≡ q0 a
+q0Conjugate (quat a0 a1 a2 a3) = refl
+
+q1Conjugate : ∀ a → q1 (conjugateQ a) ≡ -ℝ q1 a
+q1Conjugate (quat a0 a1 a2 a3) = refl
+
+q2Conjugate : ∀ a → q2 (conjugateQ a) ≡ -ℝ q2 a
+q2Conjugate (quat a0 a1 a2 a3) = refl
+
+q3Conjugate : ∀ a → q3 (conjugateQ a) ≡ -ℝ q3 a
+q3Conjugate (quat a0 a1 a2 a3) = refl
+
+q0Scale : ∀ scalar a → q0 (scaleRealQ scalar a) ≡ scalar *ℝ q0 a
+q0Scale scalar (quat a0 a1 a2 a3) = refl
+
+q1Scale : ∀ scalar a → q1 (scaleRealQ scalar a) ≡ scalar *ℝ q1 a
+q1Scale scalar (quat a0 a1 a2 a3) = refl
+
+q2Scale : ∀ scalar a → q2 (scaleRealQ scalar a) ≡ scalar *ℝ q2 a
+q2Scale scalar (quat a0 a1 a2 a3) = refl
+
+q3Scale : ∀ scalar a → q3 (scaleRealQ scalar a) ≡ scalar *ℝ q3 a
+q3Scale scalar (quat a0 a1 a2 a3) = refl
+
+normSquaredExpand :
+  ∀ a →
+  normSquaredQ a
+    ≡
+  (((q0 a *ℝ q0 a) +ℝ (q1 a *ℝ q1 a))
+    +ℝ (q2 a *ℝ q2 a)
+    +ℝ (q3 a *ℝ q3 a))
+normSquaredExpand (quat a0 a1 a2 a3) = refl
+
+------------------------------------------------------------------------
+-- Polynomial quaternion laws
+------------------------------------------------------------------------
+
+assoc0 : ∀ a b c → q0 ((a *q b) *q c) ≡ q0 (a *q (b *q c))
+assoc0 a@(quat a0 a1 a2 a3)
+       b@(quat b0 b1 b2 b3)
+       c@(quat c0 c1 c2 c3)
+  rewrite q0Multiply (a *q b) c
+        | q0Multiply a (b *q c)
+        | q0Multiply a b | q1Multiply a b | q2Multiply a b | q3Multiply a b
+        | q0Multiply b c | q1Multiply b c | q2Multiply b c | q3Multiply b c =
+  Solver.solve
+    (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+     c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
+    realSolverRing
+
+assoc1 : ∀ a b c → q1 ((a *q b) *q c) ≡ q1 (a *q (b *q c))
+assoc1 a@(quat a0 a1 a2 a3)
+       b@(quat b0 b1 b2 b3)
+       c@(quat c0 c1 c2 c3)
+  rewrite q1Multiply (a *q b) c
+        | q1Multiply a (b *q c)
+        | q0Multiply a b | q1Multiply a b | q2Multiply a b | q3Multiply a b
+        | q0Multiply b c | q1Multiply b c | q2Multiply b c | q3Multiply b c =
+  Solver.solve
+    (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+     c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
+    realSolverRing
+
+assoc2 : ∀ a b c → q2 ((a *q b) *q c) ≡ q2 (a *q (b *q c))
+assoc2 a@(quat a0 a1 a2 a3)
+       b@(quat b0 b1 b2 b3)
+       c@(quat c0 c1 c2 c3)
+  rewrite q2Multiply (a *q b) c
+        | q2Multiply a (b *q c)
+        | q0Multiply a b | q1Multiply a b | q2Multiply a b | q3Multiply a b
+        | q0Multiply b c | q1Multiply b c | q2Multiply b c | q3Multiply b c =
+  Solver.solve
+    (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+     c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
+    realSolverRing
+
+assoc3 : ∀ a b c → q3 ((a *q b) *q c) ≡ q3 (a *q (b *q c))
+assoc3 a@(quat a0 a1 a2 a3)
+       b@(quat b0 b1 b2 b3)
+       c@(quat c0 c1 c2 c3)
+  rewrite q3Multiply (a *q b) c
+        | q3Multiply a (b *q c)
+        | q0Multiply a b | q1Multiply a b | q2Multiply a b | q3Multiply a b
+        | q0Multiply b c | q1Multiply b c | q2Multiply b c | q3Multiply b c =
+  Solver.solve
+    (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
+     c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
+    realSolverRing
+
 quaternionMultiplyAssociative :
-  ∀ a b c →
-  (a *q b) *q c ≡ a *q (b *q c)
-quaternionMultiplyAssociative
-  (quat a0 a1 a2 a3)
-  (quat b0 b1 b2 b3)
-  (quat c0 c1 c2 c3) =
-  quaternionExt
-    (Solver.solve
-      (a0 ∷ a1 ∷ a2 ∷ a3 ∷
-       b0 ∷ b1 ∷ b2 ∷ b3 ∷
-       c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
-      realSolverRing)
-    (Solver.solve
-      (a0 ∷ a1 ∷ a2 ∷ a3 ∷
-       b0 ∷ b1 ∷ b2 ∷ b3 ∷
-       c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
-      realSolverRing)
-    (Solver.solve
-      (a0 ∷ a1 ∷ a2 ∷ a3 ∷
-       b0 ∷ b1 ∷ b2 ∷ b3 ∷
-       c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
-      realSolverRing)
-    (Solver.solve
-      (a0 ∷ a1 ∷ a2 ∷ a3 ∷
-       b0 ∷ b1 ∷ b2 ∷ b3 ∷
-       c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
-      realSolverRing)
+  ∀ a b c → (a *q b) *q c ≡ a *q (b *q c)
+quaternionMultiplyAssociative a b c =
+  quaternionExt (assoc0 a b c) (assoc1 a b c) (assoc2 a b c) (assoc3 a b c)
 
-quaternionOneLeft :
-  ∀ a → oneQ *q a ≡ a
-quaternionOneLeft (quat a0 a1 a2 a3) =
-  quaternionExt
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
+oneLeft0 : ∀ a → q0 (oneQ *q a) ≡ q0 a
+oneLeft0 a@(quat a0 a1 a2 a3)
+  rewrite q0Multiply oneQ a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
 
-quaternionOneRight :
-  ∀ a → a *q oneQ ≡ a
-quaternionOneRight (quat a0 a1 a2 a3) =
-  quaternionExt
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
+oneLeft1 : ∀ a → q1 (oneQ *q a) ≡ q1 a
+oneLeft1 a@(quat a0 a1 a2 a3)
+  rewrite q1Multiply oneQ a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
 
-quaternionConjugateInvolutive :
-  ∀ a → conjugateQ (conjugateQ a) ≡ a
-quaternionConjugateInvolutive (quat a0 a1 a2 a3) =
-  quaternionExt
-    refl
-    (Solver.solve (a1 ∷ []) realSolverRing)
-    (Solver.solve (a2 ∷ []) realSolverRing)
-    (Solver.solve (a3 ∷ []) realSolverRing)
+oneLeft2 : ∀ a → q2 (oneQ *q a) ≡ q2 a
+oneLeft2 a@(quat a0 a1 a2 a3)
+  rewrite q2Multiply oneQ a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
 
-quaternionNormConjugate :
-  ∀ a → normSquaredQ (conjugateQ a) ≡ normSquaredQ a
-quaternionNormConjugate (quat a0 a1 a2 a3) =
+oneLeft3 : ∀ a → q3 (oneQ *q a) ≡ q3 a
+oneLeft3 a@(quat a0 a1 a2 a3)
+  rewrite q3Multiply oneQ a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
+quaternionOneLeft : ∀ a → oneQ *q a ≡ a
+quaternionOneLeft a =
+  quaternionExt (oneLeft0 a) (oneLeft1 a) (oneLeft2 a) (oneLeft3 a)
+
+oneRight0 : ∀ a → q0 (a *q oneQ) ≡ q0 a
+oneRight0 a@(quat a0 a1 a2 a3)
+  rewrite q0Multiply a oneQ =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
+oneRight1 : ∀ a → q1 (a *q oneQ) ≡ q1 a
+oneRight1 a@(quat a0 a1 a2 a3)
+  rewrite q1Multiply a oneQ =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
+oneRight2 : ∀ a → q2 (a *q oneQ) ≡ q2 a
+oneRight2 a@(quat a0 a1 a2 a3)
+  rewrite q2Multiply a oneQ =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
+oneRight3 : ∀ a → q3 (a *q oneQ) ≡ q3 a
+oneRight3 a@(quat a0 a1 a2 a3)
+  rewrite q3Multiply a oneQ =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
+quaternionOneRight : ∀ a → a *q oneQ ≡ a
+quaternionOneRight a =
+  quaternionExt (oneRight0 a) (oneRight1 a) (oneRight2 a) (oneRight3 a)
+
+conjugateInvolutive0 : ∀ a → q0 (conjugateQ (conjugateQ a)) ≡ q0 a
+conjugateInvolutive0 a rewrite q0Conjugate (conjugateQ a) | q0Conjugate a = refl
+
+conjugateInvolutive1 : ∀ a → q1 (conjugateQ (conjugateQ a)) ≡ q1 a
+conjugateInvolutive1 a@(quat a0 a1 a2 a3)
+  rewrite q1Conjugate (conjugateQ a) | q1Conjugate a =
+  Solver.solve (a1 ∷ []) realSolverRing
+
+conjugateInvolutive2 : ∀ a → q2 (conjugateQ (conjugateQ a)) ≡ q2 a
+conjugateInvolutive2 a@(quat a0 a1 a2 a3)
+  rewrite q2Conjugate (conjugateQ a) | q2Conjugate a =
+  Solver.solve (a2 ∷ []) realSolverRing
+
+conjugateInvolutive3 : ∀ a → q3 (conjugateQ (conjugateQ a)) ≡ q3 a
+conjugateInvolutive3 a@(quat a0 a1 a2 a3)
+  rewrite q3Conjugate (conjugateQ a) | q3Conjugate a =
+  Solver.solve (a3 ∷ []) realSolverRing
+
+quaternionConjugateInvolutive : ∀ a → conjugateQ (conjugateQ a) ≡ a
+quaternionConjugateInvolutive a =
+  quaternionExt
+    (conjugateInvolutive0 a)
+    (conjugateInvolutive1 a)
+    (conjugateInvolutive2 a)
+    (conjugateInvolutive3 a)
+
+quaternionNormConjugate : ∀ a → normSquaredQ (conjugateQ a) ≡ normSquaredQ a
+quaternionNormConjugate a@(quat a0 a1 a2 a3)
+  rewrite normSquaredExpand (conjugateQ a)
+        | q0Conjugate a | q1Conjugate a | q2Conjugate a | q3Conjugate a
+        | normSquaredExpand a =
   Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
 
 quaternionNormMultiplicative :
-  ∀ a b →
-  normSquaredQ (a *q b)
-    ≡ normSquaredQ a *ℝ normSquaredQ b
+  ∀ a b → normSquaredQ (a *q b) ≡ normSquaredQ a *ℝ normSquaredQ b
 quaternionNormMultiplicative
-  (quat a0 a1 a2 a3)
-  (quat b0 b1 b2 b3) =
+  a@(quat a0 a1 a2 a3) b@(quat b0 b1 b2 b3)
+  rewrite normSquaredExpand (a *q b)
+        | q0Multiply a b | q1Multiply a b | q2Multiply a b | q3Multiply a b
+        | normSquaredExpand a | normSquaredExpand b =
   Solver.solve
-    (a0 ∷ a1 ∷ a2 ∷ a3 ∷
-     b0 ∷ b1 ∷ b2 ∷ b3 ∷ [])
+    (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷ [])
     realSolverRing
 
+multiplyConjugateRight0 :
+  ∀ a → q0 (a *q conjugateQ a) ≡ q0 (scaleRealQ (normSquaredQ a) oneQ)
+multiplyConjugateRight0 a@(quat a0 a1 a2 a3)
+  rewrite q0Multiply a (conjugateQ a)
+        | q0Conjugate a | q1Conjugate a | q2Conjugate a | q3Conjugate a
+        | q0Scale (normSquaredQ a) oneQ | normSquaredExpand a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
+multiplyConjugateRight1 :
+  ∀ a → q1 (a *q conjugateQ a) ≡ q1 (scaleRealQ (normSquaredQ a) oneQ)
+multiplyConjugateRight1 a@(quat a0 a1 a2 a3)
+  rewrite q1Multiply a (conjugateQ a)
+        | q0Conjugate a | q1Conjugate a | q2Conjugate a | q3Conjugate a
+        | q1Scale (normSquaredQ a) oneQ | normSquaredExpand a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
+multiplyConjugateRight2 :
+  ∀ a → q2 (a *q conjugateQ a) ≡ q2 (scaleRealQ (normSquaredQ a) oneQ)
+multiplyConjugateRight2 a@(quat a0 a1 a2 a3)
+  rewrite q2Multiply a (conjugateQ a)
+        | q0Conjugate a | q1Conjugate a | q2Conjugate a | q3Conjugate a
+        | q2Scale (normSquaredQ a) oneQ | normSquaredExpand a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
+multiplyConjugateRight3 :
+  ∀ a → q3 (a *q conjugateQ a) ≡ q3 (scaleRealQ (normSquaredQ a) oneQ)
+multiplyConjugateRight3 a@(quat a0 a1 a2 a3)
+  rewrite q3Multiply a (conjugateQ a)
+        | q0Conjugate a | q1Conjugate a | q2Conjugate a | q3Conjugate a
+        | q3Scale (normSquaredQ a) oneQ | normSquaredExpand a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
 quaternionMultiplyConjugateRight :
-  ∀ a →
-  a *q conjugateQ a ≡ scaleRealQ (normSquaredQ a) oneQ
-quaternionMultiplyConjugateRight (quat a0 a1 a2 a3) =
+  ∀ a → a *q conjugateQ a ≡ scaleRealQ (normSquaredQ a) oneQ
+quaternionMultiplyConjugateRight a =
   quaternionExt
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
+    (multiplyConjugateRight0 a)
+    (multiplyConjugateRight1 a)
+    (multiplyConjugateRight2 a)
+    (multiplyConjugateRight3 a)
+
+multiplyConjugateLeft0 :
+  ∀ a → q0 (conjugateQ a *q a) ≡ q0 (scaleRealQ (normSquaredQ a) oneQ)
+multiplyConjugateLeft0 a@(quat a0 a1 a2 a3)
+  rewrite q0Multiply (conjugateQ a) a
+        | q0Conjugate a | q1Conjugate a | q2Conjugate a | q3Conjugate a
+        | q0Scale (normSquaredQ a) oneQ | normSquaredExpand a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
+multiplyConjugateLeft1 :
+  ∀ a → q1 (conjugateQ a *q a) ≡ q1 (scaleRealQ (normSquaredQ a) oneQ)
+multiplyConjugateLeft1 a@(quat a0 a1 a2 a3)
+  rewrite q1Multiply (conjugateQ a) a
+        | q0Conjugate a | q1Conjugate a | q2Conjugate a | q3Conjugate a
+        | q1Scale (normSquaredQ a) oneQ | normSquaredExpand a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
+multiplyConjugateLeft2 :
+  ∀ a → q2 (conjugateQ a *q a) ≡ q2 (scaleRealQ (normSquaredQ a) oneQ)
+multiplyConjugateLeft2 a@(quat a0 a1 a2 a3)
+  rewrite q2Multiply (conjugateQ a) a
+        | q0Conjugate a | q1Conjugate a | q2Conjugate a | q3Conjugate a
+        | q2Scale (normSquaredQ a) oneQ | normSquaredExpand a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
+
+multiplyConjugateLeft3 :
+  ∀ a → q3 (conjugateQ a *q a) ≡ q3 (scaleRealQ (normSquaredQ a) oneQ)
+multiplyConjugateLeft3 a@(quat a0 a1 a2 a3)
+  rewrite q3Multiply (conjugateQ a) a
+        | q0Conjugate a | q1Conjugate a | q2Conjugate a | q3Conjugate a
+        | q3Scale (normSquaredQ a) oneQ | normSquaredExpand a =
+  Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing
 
 quaternionMultiplyConjugateLeft :
-  ∀ a →
-  conjugateQ a *q a ≡ scaleRealQ (normSquaredQ a) oneQ
-quaternionMultiplyConjugateLeft (quat a0 a1 a2 a3) =
+  ∀ a → conjugateQ a *q a ≡ scaleRealQ (normSquaredQ a) oneQ
+quaternionMultiplyConjugateLeft a =
   quaternionExt
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
-    (Solver.solve (a0 ∷ a1 ∷ a2 ∷ a3 ∷ []) realSolverRing)
+    (multiplyConjugateLeft0 a)
+    (multiplyConjugateLeft1 a)
+    (multiplyConjugateLeft2 a)
+    (multiplyConjugateLeft3 a)
 
-scaleOneQ :
-  scaleRealQ 1ℝ oneQ ≡ oneQ
-scaleOneQ =
-  quaternionExt
-    (Solver.solve [] realSolverRing)
-    (Solver.solve [] realSolverRing)
-    (Solver.solve [] realSolverRing)
-    (Solver.solve [] realSolverRing)
+scaleOneQ : scaleRealQ 1ℝ oneQ ≡ oneQ
+scaleOneQ = quaternionExt
+  (trans (q0Scale 1ℝ oneQ) (Solver.solve [] realSolverRing))
+  (trans (q1Scale 1ℝ oneQ) (Solver.solve [] realSolverRing))
+  (trans (q2Scale 1ℝ oneQ) (Solver.solve [] realSolverRing))
+  (trans (q3Scale 1ℝ oneQ) (Solver.solve [] realSolverRing))
 
 ------------------------------------------------------------------------
 -- Unit quaternions and the literal gauge-group instance
@@ -256,14 +462,16 @@ record SU2Quaternion : Set where
 open SU2Quaternion public
 
 su2QuaternionExt :
-  ∀ {a b : SU2Quaternion} →
-  quaternion a ≡ quaternion b →
-  a ≡ b
+  ∀ {a b : SU2Quaternion} → quaternion a ≡ quaternion b → a ≡ b
 su2QuaternionExt {su2q a aUnit} {su2q .a bUnit} refl = refl
 
+oneQUnitNorm : normSquaredQ oneQ ≡ 1ℝ
+oneQUnitNorm
+  rewrite normSquaredExpand oneQ =
+  Solver.solve [] realSolverRing
+
 su2Identity : SU2Quaternion
-su2Identity = su2q oneQ
-  (Solver.solve [] realSolverRing)
+su2Identity = su2q oneQ oneQUnitNorm
 
 su2Multiply : SU2Quaternion → SU2Quaternion → SU2Quaternion
 su2Multiply (su2q a aUnit) (su2q b bUnit) =
@@ -281,25 +489,21 @@ su2Inverse (su2q a aUnit) =
 
 su2MultiplyAssociative :
   ∀ a b c →
-  su2Multiply (su2Multiply a b) c
-    ≡ su2Multiply a (su2Multiply b c)
+  su2Multiply (su2Multiply a b) c ≡ su2Multiply a (su2Multiply b c)
 su2MultiplyAssociative a b c =
   su2QuaternionExt
     (quaternionMultiplyAssociative
       (quaternion a) (quaternion b) (quaternion c))
 
-su2IdentityLeft :
-  ∀ a → su2Multiply su2Identity a ≡ a
+su2IdentityLeft : ∀ a → su2Multiply su2Identity a ≡ a
 su2IdentityLeft a =
   su2QuaternionExt (quaternionOneLeft (quaternion a))
 
-su2IdentityRight :
-  ∀ a → su2Multiply a su2Identity ≡ a
+su2IdentityRight : ∀ a → su2Multiply a su2Identity ≡ a
 su2IdentityRight a =
   su2QuaternionExt (quaternionOneRight (quaternion a))
 
-su2InverseLeft :
-  ∀ a → su2Multiply (su2Inverse a) a ≡ su2Identity
+su2InverseLeft : ∀ a → su2Multiply (su2Inverse a) a ≡ su2Identity
 su2InverseLeft (su2q a aUnit) =
   su2QuaternionExt
     (trans
@@ -308,8 +512,7 @@ su2InverseLeft (su2q a aUnit) =
         (cong (λ scalar → scaleRealQ scalar oneQ) aUnit)
         scaleOneQ))
 
-su2InverseRight :
-  ∀ a → su2Multiply a (su2Inverse a) ≡ su2Identity
+su2InverseRight : ∀ a → su2Multiply a (su2Inverse a) ≡ su2Identity
 su2InverseRight (su2q a aUnit) =
   su2QuaternionExt
     (trans
@@ -318,8 +521,7 @@ su2InverseRight (su2q a aUnit) =
         (cong (λ scalar → scaleRealQ scalar oneQ) aUnit)
         scaleOneQ))
 
-su2InverseInvolutive :
-  ∀ a → su2Inverse (su2Inverse a) ≡ a
+su2InverseInvolutive : ∀ a → su2Inverse (su2Inverse a) ≡ a
 su2InverseInvolutive a =
   su2QuaternionExt
     (quaternionConjugateInvolutive (quaternion a))
