@@ -60,6 +60,9 @@ jobs:
               DASHI/Physics/YangMills/BalabanSU2ReducedAdjointAdjugate.agda
               DASHI/Physics/YangMills/BalabanSU2AdjointRotationDeterminant.agda
               DASHI/Physics/YangMills/BalabanSU2ReducedAdjointGaugeCovariance.agda
+              DASHI/Physics/YangMills/BalabanSU2RadialAdjointOperator.agda
+              DASHI/Physics/YangMills/BalabanSU2RadialAdjointComposition.agda
+              DASHI/Physics/YangMills/BalabanSU2RadialAdjointInverse.agda
             )
             for target in "${targets[@]}"; do
               echo "Checking: $target"
