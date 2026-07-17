@@ -1,5 +1,13 @@
 # 2026-07-17 NS target interaction-closure instrumentation
 
+- Built the positive-signed-chi adversarial search gate.  The profile audit
+  now filters signed chi and target dominance, can select by short endpoint
+  survival while requiring positive integrated nonlinear input, and can impose
+  requested output-modal activity coverage.  Added a 64-point joint
+  Latin-hypercube manifest over angular/radial/helicity/coherence coordinates;
+  it is non-executing and stages static admissibility -> short survival ->
+  full-window survivor.
+
 - Collected the completed 32-output closure replay.  Its endpoint output
   carrier captures `.1257548` of full target-shell absolute modal activity;
   consequently the report withholds a full-shell verdict.  Within the selected
@@ -5427,3 +5435,14 @@
 - Ran the spatial-coherence contrast at matched chi.  Despite physical-space
   localization (IPR fraction `.06164`), it gave `R_move=.00104664`,
   `G_move=.0201230`, and `Hellinger^2=.916276` over the same full window.
+- Ran the helicity-bias `.8` contrast at matched chi.  It has
+  `R_move=.00138334`, `G_move=.0265966`, displacement `-1`, and
+  `Hellinger^2=.744322`: different coarse turnover, but no recurrence.
+
+- Corrected the adversary authority: absolute chi matching selected negative
+  initial target transfer in the first three profile runs.  The profile audit
+  now filters on signed chi, target-shell dominance, and can evolve every
+  admissible phase trial over a short window to choose endpoint survival while
+  requiring positive integrated nonlinear input.  It can also choose a
+  dominant output carrier by requested modal-activity coverage rather than a
+  fixed low-coverage count.  N16 static and one-step staged CPU smokes pass.

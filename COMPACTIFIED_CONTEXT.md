@@ -21,6 +21,21 @@
 - Spatial coherence is the second completed point: IPR fraction `.06164`,
   `R_move=.00104664`, `G_move=.0201230`, Hellinger-squared `.916276`.  It did
   not create recurrence in the tested finite slice.
+- Helicity bias `.8` is the third tight matched point: `R_move=.00138334`,
+  `G_move=.0265966`, shell displacement `-1`, Hellinger-squared `.744322`.
+  It changes route geometry but does not recur.
+- Important correction: those three points matched absolute chi and began with
+  negative signed target transfer, so they are loss-oriented atlas/calibration
+  data, not high-alpha recurrence adversaries.  The profile audit now supports
+  positive/negative signed chi, target-dominance filtering, short-window
+  endpoint-survival selection with optional positive integrated input, and
+  requested output-modal coverage.  The next production work is a staged,
+  positive-signed-chi quotient search rather than another named full-window
+  profile run.
+- `scripts/ns_normalized_profile_staged_manifest.py` emits a deterministic
+  64-point joint Latin-hypercube design over angular/radial/helicity/coherence
+  coordinates, staged as static positive-chi gate -> short endpoint survival
+  -> full-window survivor.  The manifest itself is non-executing.
 
 - The first production closure replay is complete.  Its 32 selected outputs
   cover only `.125755` of endpoint target-shell absolute modal activity, so a
