@@ -1,28 +1,32 @@
-name: Balaban SU2 probe check
+name: Balaban SU2 carrier check
 
 on:
   push:
     branches:
       - codex/balaban-su2-quaternion-carrier
+      - codex/balaban-su2-quaternion-carrier-clean
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/BalabanRealRingSolverProbe.agda'
       - 'DASHI/Physics/YangMills/BalabanSU2QuaternionCarrier.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2LieAlgebraCarrier.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2AdjointInnerProduct.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2LiteralOperatorInstances.agda'
       - '.github/workflows/balaban-su2-probe-check.yml'
 
 permissions:
   contents: read
 
 jobs:
-  probe-agda:
+  su2-agda:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check real ring solver probe
+      - name: Check concrete SU2 carrier lane
         shell: bash
         run: |
           set -euo pipefail
@@ -34,6 +38,16 @@ jobs:
           cp -a "$GITHUB_WORKSPACE/DASHI" "$CHECK_ROOT/DASHI"
           cp -a "$STDLIB_INCLUDE" "$CHECK_ROOT/standard-library"
           chmod -R u+w "$CHECK_ROOT/standard-library"
-          "$AGDA_BIN" --no-libraries --no-default-libraries \
-            -i "$CHECK_ROOT" -i "$CHECK_ROOT/standard-library" \
-            "$CHECK_ROOT/DASHI/Physics/YangMills/BalabanRealRingSolverProbe.agda"
+          targets=(
+            DASHI/Physics/YangMills/BalabanRealRingSolverProbe.agda
+            DASHI/Physics/YangMills/BalabanSU2QuaternionCarrier.agda
+            DASHI/Physics/YangMills/BalabanSU2LieAlgebraCarrier.agda
+            DASHI/Physics/YangMills/BalabanSU2AdjointInnerProduct.agda
+            DASHI/Physics/YangMills/BalabanSU2LiteralOperatorInstances.agda
+          )
+          for target in "${targets[@]}"; do
+            echo "Checking: $target"
+            "$AGDA_BIN" --no-libraries --no-default-libraries \
+              -i "$CHECK_ROOT" -i "$CHECK_ROOT/standard-library" \
+              "$CHECK_ROOT/$target"
+          done
