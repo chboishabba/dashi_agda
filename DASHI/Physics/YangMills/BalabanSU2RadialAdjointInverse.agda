@@ -11,7 +11,7 @@ module DASHI.Physics.YangMills.BalabanSU2RadialAdjointInverse where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
@@ -27,6 +27,7 @@ open import DASHI.Physics.YangMills.BalabanSU2ReducedAdjointCalculus using
   ; applyReducedAdjoint
   ; identityReducedAdjoint
   ; applyIdentityReducedAdjoint
+  ; applyReducedComposition
   )
 open import DASHI.Physics.YangMills.BalabanSU2RadialAdjointOperator using
   ( RadialReducedOperator
@@ -86,7 +87,7 @@ applyRadialInverse :
   ≡ X
 applyRadialInverse left right Y X equations =
   trans
-    (DASHI.Physics.YangMills.BalabanSU2ReducedAdjointCalculus.applyReducedComposition
+    (applyReducedComposition
       Y
       (evaluateRadialReduced left Y)
       (evaluateRadialReduced right Y)
@@ -95,7 +96,6 @@ applyRadialInverse left right Y X equations =
       (cong
         (λ operator → applyReducedAdjoint Y operator X)
         (trans
-          (DASHI.Relation.Binary.PropositionalEquality.sym
-            (evaluateComposeRadialReduced left right Y))
+          (sym (evaluateComposeRadialReduced left right Y))
           (radialInverseEvaluatesToIdentity left right Y equations)))
       (applyIdentityReducedAdjoint Y X))
