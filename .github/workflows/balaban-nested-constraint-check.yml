@@ -5,6 +5,7 @@ on:
     branches:
       - codex/balaban-nested-constraint-minimum
       - codex/balaban-literal-lattice-operators
+      - codex/balaban-literal-lattice-operators-clean
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/Balaban*.agda'
@@ -53,6 +54,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanGaugeTransformationCovariance.agda
               DASHI/Physics/YangMills/BalabanPeriodicPlaquetteHolonomy.agda
               DASHI/Physics/YangMills/BalabanLatticeAdjointCovariantDerivative.agda
+              DASHI/Physics/YangMills/BalabanLatticeCovariantDivergence.agda
               DASHI/Physics/YangMills/BalabanCovariantPathIntegral.agda
               DASHI/Physics/YangMills/BalabanLinearBlockPathAverage.agda
               DASHI/Physics/YangMills/BalabanCanonicalBlockPathSamples.agda
