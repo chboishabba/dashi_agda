@@ -104,11 +104,12 @@ projectedBlockCorrectionGivesCumulativeIdentity :
         gaussian determinant logDet projection background vacuum k n
 projectedBlockCorrectionGivesCumulativeIdentity
   arith gaussian determinant logDet projection background vacuum k n =
-  restoreDifference
-    arith
-    (intervalSum gaussian k n)
-    (projectedEndpointDifference
-      determinant logDet projection background vacuum k n)
+  sym
+    (restoreDifference
+      arith
+      (intervalSum gaussian k n)
+      (projectedEndpointDifference
+        determinant logDet projection background vacuum k n))
 
 projectedBlockCorrectionEqualsShellMismatch :
   {Background Scalar : Set} →
