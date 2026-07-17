@@ -1,0 +1,23 @@
+{
+  "schema": "dashi-lane-hyperfabric-v1",
+  "title": "DASHI YANG–MILLS BETA / RG HYPERFABRIC",
+  "slug": "dashi-yang-mills-lane-hyperfabric",
+  "scan_root": "DASHI",
+  "claim_boundary": "The animated fabric records the verified algebraic assembly and its named analytic inputs. It does not promote the four-dimensional Clay theorem.",
+  "authority_rules": {
+    "source_imported_module_patterns": ["^DASHI\\.Physics\\.YangMills\\.SourceImports\\."],
+    "open_declaration_patterns": ["Open$", "Unproved$", "Obligation$"],
+    "conditional_input_type_patterns": ["EndpointDeterminantPrefixData", "InverseSquareBudgetArithmetic", "InverseSquareBudgetOrderBridge", "InverseSquareThresholdControlsCoupling", "BalabanBetaPrefixBound", "BalabanBareCouplingSchedule"]
+  },
+  "carriers": [
+    {"id":"beta-prefix-sum","declaration":"DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget.betaPrefixSum","title":"Cumulative beta correction","lane":"beta lane"},
+    {"id":"inverse-square-telescope","declaration":"DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget.inverseSquareTelescoping","title":"Inverse-square telescope","lane":"coupling budget","dependencies":["beta-prefix-sum"]},
+    {"id":"total-beta-split","declaration":"DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge.sumShellsTotalBeta","title":"Gaussian / interaction split","lane":"endpoint bridge"},
+    {"id":"gaussian-telescope","declaration":"DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge.gaussianPrefixTelescopes","title":"Endpoint shell telescope","lane":"endpoint bridge","dependencies":["total-beta-split"]},
+    {"id":"beta-sum-identity","declaration":"DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge.betaSumEquality","title":"Endpoint beta identity","lane":"beta prefix bridge","dependencies":["beta-prefix-sum","total-beta-split","gaussian-telescope"]},
+    {"id":"endpoint-to-prefix","declaration":"DASHI.Physics.YangMills.BalabanEndpointDeterminantPrefixBridge.endpointDeterminantToBetaPrefix","title":"Endpoint to beta-prefix bound","lane":"beta prefix bridge","dependencies":["beta-sum-identity"]},
+    {"id":"threshold-lower-bound","declaration":"DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget.inverseSquareAboveGammaThreshold′","title":"Inverse-square threshold","lane":"coupling budget","dependencies":["inverse-square-telescope","endpoint-to-prefix"]},
+    {"id":"bounded-coupling-trajectory","declaration":"DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget.couplingTrajectoryBoundedByGamma","title":"Bounded finite-cutoff trajectory","lane":"coupling trajectory","dependencies":["threshold-lower-bound"]},
+    {"id":"scheduled-trajectory","declaration":"DASHI.Physics.YangMills.BalabanInverseSquareCouplingBudget.scheduleTrajectoryBoundedByGamma","title":"Cutoff-indexed tuned trajectory","lane":"coupling trajectory","dependencies":["bounded-coupling-trajectory"]}
+  ]
+}
