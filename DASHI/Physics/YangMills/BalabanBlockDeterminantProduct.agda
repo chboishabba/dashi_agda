@@ -32,6 +32,13 @@ cong :
   f x ≡ f y
 cong f refl = refl
 
+natAddAssoc :
+  ∀ a b c →
+  (a + b) + c ≡ a + (b + c)
+natAddAssoc zero b c = refl
+natAddAssoc (suc a) b c =
+  cong suc (natAddAssoc a b c)
+
 shellProduct :
   {Scalar : Set} →
   Scalar →
@@ -74,6 +81,40 @@ intervalProduct :
 intervalProduct one _*_ factor k zero = one
 intervalProduct one _*_ factor k (suc n) =
   intervalProduct one _*_ factor k n * factor (n + k)
+
+intervalProductAppend :
+  {Scalar : Set} →
+  (one : Scalar) →
+  (_*_ : Scalar → Scalar → Scalar) →
+  (assoc : ∀ a b c → (a * b) * c ≡ a * (b * c)) →
+  (rightIdentity : ∀ a → a * one ≡ a) →
+  (factor : ℕ → Scalar) →
+  ∀ k n m →
+  intervalProduct one _*_ factor k (m + n)
+    ≡ intervalProduct one _*_ factor k n
+        * intervalProduct one _*_ factor (n + k) m
+intervalProductAppend
+  one _*_ assoc rightIdentity factor k n zero =
+  sym (rightIdentity (intervalProduct one _*_ factor k n))
+intervalProductAppend
+  one _*_ assoc rightIdentity factor k n (suc m) =
+  let
+    leftPrefix = intervalProduct one _*_ factor k n
+    rightPrefix = intervalProduct one _*_ factor (n + k) m
+    leftIndex = (m + n) + k
+    rightIndex = m + (n + k)
+    leftFactor = factor leftIndex
+    ih = intervalProductAppend
+      one _*_ assoc rightIdentity factor k n m
+    indexEquality = natAddAssoc m n k
+    factorEquality = cong factor indexEquality
+    p1 = cong (λ product → product * leftFactor) ih
+    p2 = assoc leftPrefix rightPrefix leftFactor
+    p3 = cong
+      (λ finalFactor → leftPrefix * (rightPrefix * finalFactor))
+      factorEquality
+  in
+    trans p1 (trans p2 p3)
 
 -- The same induction starting from an arbitrary determinant D_k.
 blockDeterminantIntervalFromStep :
