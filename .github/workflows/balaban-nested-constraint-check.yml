@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          nix develop .# --command bash -lc '
+          nix shell .#agda-with-dashi-deps --command bash -lc '
             set -euo pipefail
             agda --version
             targets=(
@@ -62,6 +62,8 @@ jobs:
               DASHI/Physics/YangMills/BalabanProjectionIntervalLinearity.agda
               DASHI/Physics/YangMills/BalabanProjectedEndpointDifference.agda
               DASHI/Physics/YangMills/BalabanProjectedBlockCorrection.agda
+              DASHI/Physics/YangMills/BalabanProjectedBlockBetaIdentity.agda
+              DASHI/Physics/YangMills/BalabanEndpointBasisChangeCancellation.agda
               DASHI/Physics/YangMills/BalabanConstrainedKKTLinearisation.agda
               DASHI/Physics/YangMills/BalabanConstrainedEnvelopeHessian.agda
             )
