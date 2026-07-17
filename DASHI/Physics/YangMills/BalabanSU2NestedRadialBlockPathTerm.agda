@@ -8,8 +8,6 @@ module DASHI.Physics.YangMills.BalabanSU2NestedRadialBlockPathTerm where
 -- operator there.  This module constructs precisely that typed pattern for
 -- arbitrary radial reduced functions of ad_y, together with the `[operator-I]`
 -- correction and its finite sample sum.
---
--- The scalar radial functions and the source-selected paths remain explicit.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -30,10 +28,10 @@ open import DASHI.Physics.YangMills.BalabanCovariantPathIntegral using
   ( DirectedAdjointBondField4
   ; transformAdjointBondField
   ; covariantPathIntegral
+  ; covariantPathIntegralGaugeCovariant
   )
 open import DASHI.Physics.YangMills.BalabanLinearBlockPathAverage using
   ( RootedSegmentSample
-  ; root
   ; junction
   ; prefix
   ; segment
@@ -42,7 +40,9 @@ open import DASHI.Physics.YangMills.BalabanLinearBlockPathAverage using
   ; conjugatedTransportAction
   )
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
-  ( su2QuaternionGroup )
+  ( SU2Quaternion
+  ; su2QuaternionGroup
+  )
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   ( SU2LieAlgebra
   ; lieZero
@@ -51,6 +51,7 @@ open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   ; su2Adjoint
   ; su2AdjointAdd
   ; su2AdjointSubtract
+  ; su2AdjointZero
   ; su2AdjointLinearModule
   )
 open import DASHI.Physics.YangMills.BalabanSU2RadialAdjointOperator using
@@ -80,8 +81,9 @@ nestedRadialSegmentTerm :
   {root : Cube4 N} →
   RootedSegmentSample root →
   SU2LieAlgebra
-nestedRadialSegmentTerm rootOperator junctionOperator Y U A sample =
-  applyRadialReduced rootOperator (Y (root sample))
+nestedRadialSegmentTerm
+  rootOperator junctionOperator Y U A {root = root} sample =
+  applyRadialReduced rootOperator (Y root)
     (su2Adjoint
       (directedPathTransport
         su2QuaternionGroup U (prefix sample))
@@ -122,7 +124,7 @@ nestedRadialSegmentGaugeCovariant
               (su2Adjoint (gauge (junction sample))
                 (Y (junction sample)))
               segmentValue)))
-      (DASHI.Physics.YangMills.BalabanCovariantPathIntegral.covariantPathIntegralGaugeCovariant
+      (covariantPathIntegralGaugeCovariant
         su2QuaternionGroup su2AdjointLinearModule gauge U A
         (segment sample)))
     (trans
@@ -175,14 +177,12 @@ nestedRadialSegmentGaugeCovariant
       applyRadialReduced junctionOperator
         (Y (junction sample)) originalSegment
 
-    originalPrefix :
-      DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier.SU2Quaternion
+    originalPrefix : SU2Quaternion
     originalPrefix =
       directedPathTransport
         su2QuaternionGroup U (prefix sample)
 
-    transformedPrefix :
-      DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier.SU2Quaternion
+    transformedPrefix : SU2Quaternion
     transformedPrefix =
       directedPathTransport su2QuaternionGroup
         (gaugeTransformBond su2QuaternionGroup gauge U)
@@ -230,7 +230,7 @@ nestedRadialDifferenceGaugeCovariant :
     (nestedRadialDifferenceTerm
       rootOperator junctionOperator Y U A sample)
 nestedRadialDifferenceGaugeCovariant
-  rootOperator junctionOperator gauge Y U A sample =
+  rootOperator junctionOperator gauge Y U A {root = root} sample =
   trans
     (cong
       (λ first → lieSubtract first
@@ -245,7 +245,7 @@ nestedRadialDifferenceGaugeCovariant
     (trans
       (cong
         (lieSubtract
-          (su2Adjoint (gauge (root sample))
+          (su2Adjoint (gauge root)
             (nestedRadialSegmentTerm
               rootOperator junctionOperator Y U A sample)))
         (transportedSegmentIntegralGaugeCovariant
@@ -253,7 +253,7 @@ nestedRadialDifferenceGaugeCovariant
           gauge U A sample))
       (sym
         (su2AdjointSubtract
-          (gauge (root sample))
+          (gauge root)
           (nestedRadialSegmentTerm
             rootOperator junctionOperator Y U A sample)
           (transportedSegmentIntegral
@@ -301,8 +301,7 @@ nestedRadialDifferenceSumGaugeCovariant :
       rootOperator junctionOperator Y U A samples)
 nestedRadialDifferenceSumGaugeCovariant
   rootOperator junctionOperator gauge Y U A {root = root} [] =
-  DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier.su2AdjointZero
-    (gauge root)
+  su2AdjointZero (gauge root)
 nestedRadialDifferenceSumGaugeCovariant
   rootOperator junctionOperator gauge Y U A {root = root}
   (sample ∷ samples) =
