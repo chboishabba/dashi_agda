@@ -19,6 +19,7 @@ open import DASHI.Physics.YangMills.BalabanPeriodicLatticeBonds using
   ; source
   ; target
   ; reverseBond
+  ; reverseSourceIsTarget
   ; reverseTargetIsSource
   )
 
@@ -85,6 +86,14 @@ pathLengthAppend empty q = refl
 pathLengthAppend (b ▷ p) q =
   cong suc (pathLengthAppend p q)
 
+transportStart :
+  ∀ {N : Nat} {{_ : NonZero N}}
+  {x y z : Cube4 N} →
+  x ≡ y →
+  LatticePath4 x z →
+  LatticePath4 y z
+transportStart eq p = subst (λ q → LatticePath4 q _) eq p
+
 transportEndpoint :
   ∀ {N : Nat} {{_ : NonZero N}}
   {x y z : Cube4 N} →
@@ -100,7 +109,9 @@ reverseSingle :
 reverseSingle b =
   transportEndpoint
     (reverseTargetIsSource b)
-    (single (reverseBond b))
+    (transportStart
+      (reverseSourceIsTarget b)
+      (single (reverseBond b)))
 
 reversePath :
   ∀ {N : Nat} {{_ : NonZero N}}
