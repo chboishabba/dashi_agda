@@ -36,14 +36,14 @@ mapMember :
   ∀ {A B : Set}
   (f : A → B) {x : A} {xs : List A} →
   x ∈ xs →
-  f x ∈ map f xs
+  f x ∈ (map f xs)
 mapMember f here = here
 mapMember f (there x∈) = there (mapMember f x∈)
 
 inAppendLeft :
   ∀ {A : Set} {x : A} {xs ys : List A} →
   x ∈ xs →
-  x ∈ xs ++ ys
+  x ∈ (xs ++ ys)
 inAppendLeft here = here
 inAppendLeft (there x∈) = there (inAppendLeft x∈)
 
@@ -51,7 +51,7 @@ inAppendRight :
   ∀ {A : Set} {x : A}
   (xs : List A) {ys : List A} →
   x ∈ ys →
-  x ∈ xs ++ ys
+  x ∈ (xs ++ ys)
 inAppendRight [] x∈ = x∈
 inAppendRight (y ∷ ys) x∈ = there (inAppendRight ys x∈)
 
@@ -69,8 +69,8 @@ concatMapMember :
   {x : A} {xs : List A}
   {y : B} →
   x ∈ xs →
-  y ∈ f x →
-  y ∈ concatMap f xs
+  y ∈ (f x) →
+  y ∈ (concatMap f xs)
 concatMapMember f here y∈ = inAppendLeft y∈
 concatMapMember f (there x∈) y∈ =
   inAppendRight _ (concatMapMember f x∈ y∈)
@@ -83,7 +83,7 @@ allFin (suc N) = fzero ∷ map fsuc (allFin N)
 
 allFinComplete :
   ∀ {N : Nat} (i : Fin N) →
-  i ∈ allFin N
+  i ∈ (allFin N)
 allFinComplete {suc N} fzero = here
 allFinComplete {suc N} (fsuc i) =
   there (mapMember fsuc (allFinComplete i))
@@ -107,7 +107,7 @@ allCube4 N =
 
 allCube4Complete :
   ∀ {N : Nat} (x : Cube4 N) →
-  x ∈ allCube4 N
+  x ∈ (allCube4 N)
 allCube4Complete (cube4 a₀ a₁ a₂ a₃) =
   concatMapMember _
     (allFinComplete a₀)
@@ -139,7 +139,7 @@ allPositiveBonds N =
 positiveBondMember :
   ∀ {N : Nat}
   (x : Cube4 N) (a : Axis4) →
-  positiveBond x a ∈ allPositiveBonds N
+  positiveBond x a ∈ (allPositiveBonds N)
 positiveBondMember x a =
   concatMapMember _
     (allCube4Complete x)
