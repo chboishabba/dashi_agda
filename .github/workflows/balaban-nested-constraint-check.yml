@@ -38,6 +38,8 @@ jobs:
               exit 2
             fi
             STDLIB_INCLUDE="${STDLIB_FILE%/Data/Product.agda}"
+            CHECK_ROOT="$(mktemp -d)"
+            cp -a "$GITHUB_WORKSPACE/DASHI" "$CHECK_ROOT/DASHI"
             "$AGDA_BIN" --version
             targets=(
               DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
@@ -76,13 +78,13 @@ jobs:
               DASHI/Physics/YangMills/BalabanConstrainedKKTLinearisation.agda
               DASHI/Physics/YangMills/BalabanConstrainedEnvelopeHessian.agda
             )
-            cd /tmp
+            cd "$CHECK_ROOT"
             for target in "${targets[@]}"; do
               echo "Checking: $target"
               "$AGDA_BIN" \
                 --no-libraries --no-default-libraries \
-                -i "$GITHUB_WORKSPACE" -i "$STDLIB_INCLUDE" \
-                "$GITHUB_WORKSPACE/$target"
+                -i "$CHECK_ROOT" -i "$STDLIB_INCLUDE" \
+                "$CHECK_ROOT/$target"
             done
           } > agda-focused-check.log 2>&1
           status=$?
