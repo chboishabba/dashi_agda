@@ -63,6 +63,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanSU2RadialAdjointOperator.agda
               DASHI/Physics/YangMills/BalabanSU2RadialAdjointComposition.agda
               DASHI/Physics/YangMills/BalabanSU2RadialAdjointInverse.agda
+              DASHI/Physics/YangMills/BalabanSU2NestedRadialBlockPathTerm.agda
             )
             for target in "${targets[@]}"; do
               echo "Checking: $target"
