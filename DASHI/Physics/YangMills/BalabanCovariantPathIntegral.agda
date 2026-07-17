@@ -235,14 +235,15 @@ covariantPathIntegralAppend group linear U A (b ▷ p) q =
             (directedPathTransport group U p)
             (covariantPathIntegral group linear U A q)))))
     (trans
-      (addAssociative linear
-        (A b)
-        (action (additive linear) (U b)
-          (covariantPathIntegral group linear U A p))
-        (action (additive linear) (U b)
-          (action (additive linear)
-            (directedPathTransport group U p)
-            (covariantPathIntegral group linear U A q))))
+      (sym
+        (addAssociative linear
+          (A b)
+          (action (additive linear) (U b)
+            (covariantPathIntegral group linear U A p))
+          (action (additive linear) (U b)
+            (action (additive linear)
+              (directedPathTransport group U p)
+              (covariantPathIntegral group linear U A q)))))
       (cong
         (addVector linear
           (addVector linear
