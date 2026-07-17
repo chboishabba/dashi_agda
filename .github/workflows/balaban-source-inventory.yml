@@ -35,6 +35,12 @@ jobs:
             echo '# Yang-Mills Agda files'
             git ls-files 'DASHI/Physics/YangMills/*.agda' | sort
             echo
+            echo '# Everything imports'
+            grep -n 'DASHI.Physics.YangMills' DASHI/Everything.agda || true
+            echo
+            echo '# Tracked PDF sources'
+            git ls-files '*.pdf' | sort || true
+            echo
             echo '# Candidate literal operator definitions'
             grep -RInE \
               'DeltaHat|Delta\^|3\.156|3\.155|CMP 99|CMP99|Q G|Q-bar|Qbar|coarseSchur|conditionalCovariance|covariance|determinant|constraintCurvature|constrainedLagrangian|augmented.*operator|gauge.*operator' \
@@ -47,6 +53,11 @@ jobs:
               DASHI \
               --include='*.agda' --include='*.md' || true
           } > "$out"
+          tar -czf balaban-source-tree.tar.gz \
+            DASHI/Physics/YangMills \
+            DASHI/Everything.agda \
+            flake.nix flake.lock \
+            scripts/run_agda29_parallel_check.sh
           wc -l "$out"
           tail -n 120 "$out"
 
@@ -54,6 +65,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: balaban-source-inventory
-          path: balaban-source-inventory.txt
+          path: |
+            balaban-source-inventory.txt
+            balaban-source-tree.tar.gz
           if-no-files-found: error
           retention-days: 7
