@@ -1,0 +1,14 @@
+{
+  "schema": "dashi-agda-termflow-v1",
+  "title": "DASHI Navier–Stokes Term-Flow Hyperfabric",
+  "slug": "dashi-navier-stokes-termflow",
+  "scan_root": "DASHI",
+  "roots": [
+    "DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.canonicalNSFullClayGatewayTheoremBoundaryReceipt",
+    "DASHI.Physics.Closure.NSFullClayGatewayTheoremBoundaryReceipt.fullClayNSPromotedIsFalse"
+  ],
+  "max_declarations": 38,
+  "max_term_nodes_per_declaration": 48,
+  "output_json": "artifacts/dashi-navier-stokes-termflow.json",
+  "output_svg": "artifacts/dashi-navier-stokes-termflow.svg"
+}
