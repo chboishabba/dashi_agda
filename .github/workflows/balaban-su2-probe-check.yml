@@ -35,8 +35,13 @@ jobs:
           (
             set -euo pipefail
             AGDA_REF=6a5169a469d506ee848ad99ef574c3df8e329a02
-            AGDA_BIN="$(nix build --no-link --print-out-paths \
-              "github:agda/agda/$AGDA_REF#debug.bin")/bin/agda"
+            AGDA_BIN="$(nix build --impure --no-link --print-out-paths --expr '
+              let
+                agdaFlake = builtins.getFlake "github:agda/agda/6a5169a469d506ee848ad99ef574c3df8e329a02";
+                package = agdaFlake.packages.${builtins.currentSystem}.debug;
+                patched = package.overrideAttrs (_: { postInstall = ""; });
+              in patched.bin
+            ')/bin/agda"
             STDLIB_ROOT="$(mktemp -d)"
             git clone --depth=1 --branch experimental \
               https://github.com/agda/agda-stdlib.git "$STDLIB_ROOT"
