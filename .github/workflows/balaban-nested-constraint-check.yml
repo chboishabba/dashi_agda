@@ -41,6 +41,7 @@ jobs:
             CHECK_ROOT="$(mktemp -d)"
             cp -a "$GITHUB_WORKSPACE/DASHI" "$CHECK_ROOT/DASHI"
             cp -a "$STDLIB_INCLUDE" "$CHECK_ROOT/standard-library"
+            chmod -R u+w "$CHECK_ROOT/standard-library"
             "$AGDA_BIN" --version
             targets=(
               DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
