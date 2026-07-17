@@ -2,6 +2,38 @@
 
 ## Current Interaction-Closure Pivot
 
+- **Current protocol boundary:** production finite-Galerkin runs are paused.
+  The next admissible work is one preregistered four-trace frozen-packet
+  panel: baseline, radial `-0.04`, phase `+0.04`, and coherence `+0.04`.
+  Receipt authority now requires workspace-visible validated JSON, stdout,
+  stderr, status, and SHA-256. The comparison surface fixes a post-peak
+  adjacent-window Gamma criterion and separates exact finite forcing,
+  geometry, and nonlinear-alignment factors. Existing radial/phase traces are
+  discovery receipts only; no causal order, profile-uniform estimate, NS/BKM,
+  or Clay conclusion may be drawn yet.
+
+- The four-trace durable panel is now complete: baseline, radial `-0.04`,
+  phase `+0.04`, and coherence `+0.04` all pass status/checksum verification
+  and end with frozen packet ratios `.11234912/.11357468/.11221915/.11228539`.
+  Each has a post-peak windowed Gamma downcrossing. The finite
+  forcing-geometry-alignment product is exact to `4.45e-16`, but all three
+  factors meet the preregistered 80% decline threshold at the same next
+  sampled checkpoint. The mechanism remains unresolved: the required next
+  instrument is focused temporal telemetry around the peak/downcrossing, not
+  another profile or endpoint search.
+
+- A first focused-telemetry attempt was interrupted and left only zero-byte
+  partial files, so it is discarded. The runner now prewrites `state: running`
+  and has verified promoted and failed terminal paths. Any future focused run
+  must use a detached, workspace-visible launcher and produce that status
+  chain before it can enter the comparison report.
+
+- The detached focused rerun completed under that status chain. On the common
+  `[.07T,.16T]` early band, alignment falls to `.7701--.7750` by packet peak,
+  while forcing and geometry remain `.8964--.8990` and `.9022--.9055` over the
+  same interval. This is a robust finite alignment/dephasing candidate, not
+  a causal theorem or profile-uniform coercivity estimate.
+
 - `scripts/ns_normalized_profile_quotient_audit.py` is now the first
   non-self-similar profile receipt.  It creates static finite Fourier profiles
   with angular width, radial width, helicity bias and phase/spatial coherence,
@@ -45,6 +77,23 @@
   candidate is re-normalised to finite critical mass and must retain positive
   signed chi within tolerance plus target dominance before `.05T -> .10T ->
   .25T` promotion. This remains empirical and non-promoting.
+- The strongest tested local radial perturbation (`epsilon=-.04`) has completed
+  `.25T`: frozen/moving ratios `.11357468/.11108409`, essentially matching the
+  original delayed-collapse state. Its frozen nonlinear integral is positive
+  `.39650541`, while viscous loss is `.1.61254634`; short replenishment is real
+  but insufficient for residence. This remains finite local evidence only.
+  The audit now has a bounded `--mechanism-trace-count` mode for a single
+  saved-state follow-up: it records the authoritative frozen-packet
+  `Gamma=[N]_+/(2 nu D)`, its adjacent-window averages, packet peak/crossing
+  times, and shape metrics at fine checkpoints. Interaction Hellinger remains
+  endpoints only, explicitly not a fine turnover trace. N16 CPU contract smoke
+  passes; no GPU trace or theorem claim has landed yet.
+  The one radial GPU trace now lands: frozen packet peaks at `t=1.875` with
+  `P=1.14576`; positive-part windowed Gamma crosses from `1.0138` on
+  `[1.5625,1.875]` to `.8306` on `[1.875,2.1875]` and remains subcritical.
+  Fine positive input/viscous loss is `.46734`; radial width rises and angular
+  concentration falls through the burst. This is a single finite correlation,
+  not a uniform trigger or theorem.
   preserved as a compressed raw Fourier receipt (`seed=20260718`, replay attempt 0).
   Its moving packet changes centre from shell 2 to shell 3, so the audit was
   upgraded with frozen-initial-window telemetry and the promotion gate uses the

@@ -1,0 +1,2677 @@
+                                                               Communications in
+Commun. Math. Phys. 109, 249-301 (1987)                        Mathematical
+                                                                      Physics
+                                                               © Springer-Verlag 1987
+
+
+
+
+Renormalization Group Approach
+to Lattice Gauge Field Theories
+I. Generation of Effective Actions in a Small Field Approximation
+and a Coupling Constant Renormalization in Four Dimensions
+
+Tadeusz Balaban
+Department of Physics, Lyman Laboratory, Harvard University,
+Cambridge, MA 02138, USA
+
+
+
+    Abstract. We study four-dimensional pure gauge field theories by the
+    renormalization group approach. The analysis is restricted to small field
+    approximation. In this region we construct a sequence of localized effective
+    actions by cluster expansions in one step renormalization transformations. We
+    construct also β-functions and we define a coupling constant renormalization
+    by a recursive system of renormalization group equations.
+
+
+Contents
+0. Introduction. Formulations of Results                                         249
+1. An Inductive Description of the Effective Actions                             260
+2. Fluctuation Fields Integral in k + 1-st Renormalization Transformation        265
+3. An Expansion of Terms in Fluctuation Fields Integral, and Preliminary Analytic
+   Extensions                                                                    269
+4. Ward-Takahashi Identities and Their Consequences                              281
+5. The Analysis of the Vacuum Polarization Tensor and the ^-Functions            292
+
+References                                                                       298
+
+
+0. Introduction. Formulations of Results
+In this paper we continue our study of the ultraviolet stability problem for lattice
+approximations of gauge field models. We consider here the renormalization
+group approach to four-dimensional pure gauge field theories. We restrict the
+study to a part of the problem, namely we want to understand how to generate the
+effective actions in a small field approximation, and how to perform a coupling
+constant renormalization by a system of recursive renormalization group
+equations (Callan-Symanzik equations).
+    The renormalization group approach we use here follows the ideas of Wilson
+[74, 75]. This approach was developed by the author for superrenormalizable
+gauge field theories in the papers [4-16], see especially [4-6] for an explanation of
+ideas and an introduction to techniques. The renormalization group approach
+250                                                                         T. Bafaban
+
+was pursued by Gawedzki and Kupiainen in [39-44], and other papers, for an-
+other class of models. Some of their ideas are very important here, and we use them
+quite extensively.
+    Renormalization group ideas in rigorous results in quantum field theory
+already have a long history. We do not intend to give a responsible account of it,
+but we would like to mention here some papers and methods which were especially
+important for us. Some aspects of these ideas are present in early papers of Glimm
+and Jaffe, most clearly in [46] in the form of the phase space cell expansion. This
+method has been developed since then by many authors [30, 61-63, 31-34]. The
+most recent and interesting achievement is a control of the infrared renormalizable
+and asymptotically free critical Λ(^4)4 model [31], and the construction of the two-
+dimensional Gross-Neveu model [76*], see also [77*]. The next important and
+decisive step towards the constructive renormalization group approach was done
+by Gallavotti and collaborators [19-21,37,38]. In these papers some fundamental
+ideas and techniques were introduced, which laid a basis for future developments.
+Especially the papers of this author were influenced by them in an essential way.
+The renormalization group approach was developed in numerous papers, mainly
+from a perturbative, or a numerical point of view. Nonperturbative and discretized
+versions of renormalization group equations, called Callan-Symanzik equations,
+play an important role in this and subsequent papers. Some fundamental papers
+on these equations are [45, 69, 70]. Also we mention that renormalization group
+methods in Wilson's form were investigated in the papers [65, 37, 38] from a
+perturbative point of view. The fully developed, nonperturbative methods were
+presented in the above mentioned papers by Gawedzki and Kupiainen.
+    Applications of renormalization transformations involve two kinds of prob-
+lems. An integral defining the transformation is divided into two subintegrals,
+one determined by the "small field" region, another by a "large field" region.
+Controlling small field integrals is connected with understanding renormalization
+problems. In our case the only important renormalization is a coupling constant
+renormalization, but there also is a simple vacuum energy renormalization. We
+study the renormalization transformations under the simplifying assumption that
+integrals are restricted to small fields. This simplification allows the representation
+of renormalization group transformations by transformations acting on effective
+actions. Thus applying a sequence of small field renormalization transformations,
+we obtain a sequence of effective actions with new effective coupling constants. We
+use methods and results developed for gauge field theories, Abelian and non-
+Abelian, in the series of papers [7-16]. The fundamental technical results obtained
+in those papers are valid in four-dimensional theories (in fact they are dimension-
+independent), and they form a technical core of this paper. Not only technical
+results are important here, but also some ideas used previously in a simpler
+framework. For example the analysis of renormalization in Higgs models done in
+the paper [7], which seems to be restricted to superrenormalizable models,
+provides ideas how to represent effective actions and how to analyze them using
+Ward-Takahashi identities, which are essential for renormalizable models. We can
+say, with some exaggeration, that the method of this paper is the method of [7] for
+the resummed perturbative expansion. Other methods and results used in this
+paper are taken from the papers [41-43] of Gawedzki, Kupiainen; especially we
+Renormalization Group Approach to Lattice Field Theories                                     251
+
+ use the idea that the effective actions should be considered as analytic functions
+defined on spaces of complex field configurations. In the above papers it was used
+ as a method of proving convergence to a fixed point. Here we use it as a purely
+technical device, simplifying a formulation of inductive assumptions on effective
+actions, and simplifying many technical aspects of cluster expansions. In
+Gawedzki and Kupiainen's papers, scaling transformations play a fundamental
+role. We do not have them in the class of nonlinear models considered here; instead
+we analyze effective actions using regularity properties of field configurations, and
+symmetries. The important symmetries are given by lattice Euclidean transforma-
+tions and gauge transformations. They yield a set of Ward-Takahashi identities.
+These identities, together with the regularity properties, allow the analysis of
+renormalization transformations and the reduction of them to simple transforma-
+tions of effective coupling constants. More precisely, the identities determine
+^-functions which we use to transform the coupling constants by discrete analogs
+of Callan-Symanzik equations. These ideas form the core of our method, although
+they are rather simple from a technical point of view. The Ward-Takahashi
+identities are discussed in Sects. 4 and 5. The analysis of the Callan-Symanzik
+equations, based on perturbative calculations, will be discussed in another paper.
+    Let us recall now some geometric definitions. Consider a lattice as a subset of a
+continuous Euclidean space Rd, or a torus T obtained by the usual identification of
+boundary points of the cube {x e Rd: - Lμ ^ xμ ^ Lμ, μ = 1,..., d}. We take Lμ = Lm,
+where L is an odd, positive integer > 11, and m is a positive integer. These spaces
+are divided into regular lattices of cubes with corners at points of L~nZd,
+n = 0 , 1 , . . . . Each lattice determines a lattice of centers of these cubes, i.e. the lattice
+            d
+
+L~nZd+     Σ 2L~neμ, where eμ denotes a unit vector of the positive μ-th axis. Field
+          μ=l
+
+configurations are defined on these lattices. Define the initial lattice approxi-
+mation on the torus
+
+
+                Tε=\xeεZd+          Σ-εeμ:-Lμ<xμ<Lμ,μ              = l,...,dϊ,             (0.1)
+
+
+with a lattice spacing ε = L~κ. This torus determines a sequence of tori denoted by
+T[ϊ\ and defined by (0.1) with ε replaced by L% fc=l,2,.... A point yeT$ε
+determines a cube of the continuous torus with a center at y and the size Us. We
+denote it by A(y), or Ak(y) if it is necessary to indicate the scale. Usually we drop
+subscripts, or superscripts, indicating lattice spacing, or other scales, if a meaning
+of a symbol is clear, or if the scale is unessential. It is convenient to determine
+subsets of a lattice by subsets of continuous space. We consider only subsets which
+are unions of cubes of a division described above. Such a subset determines a set of
+lattice points, of a given scale, belonging to it, a set of bonds, i.e. intervals b
+connecting nearest neighbor points £>_, b + , which intersect it, and a set of
+plaquettes, i.e. elementary squares of the lattice, which intersect it. We denote all
+these sets by the same symbol denoting the continuous space set.
+     Field configurations have values in a compact Lie group G. For definitions
+concerning Lie groups and algebras see [71]. We assume that G is semisimple and
+252                                                                                T. Balaban
+
+that it is a Lie subgroup of a group of complex unitary matrices, for example
+GcU(N). (In fact a bigger part of our considerations does not depend on the
+semisimplicity assumption.) Gauge field configurations U are functions defined on
+bonds of the lattice T, with values in G. A value of a gauge field configuration U at
+b = <x, x'> is denoted by Ub = U(b) = (7«x, x'» = U(x9x'\
+   An action for gauge field models was proposed by Wilson [73], and is given by
+
+                           A%U)= Σ ε d - 4 [l-Retrt/(3p)],                              (0.2)
+                                     peTE
+
+where tr is the normalized trace, i.e. trl = 1. For rf=4we drop the superscript ε
+from the symbol of the action. We denote also the plaquette variable by dU, hence
+U(dp) = (dU)(p).
+    The gauge field action and its properties were discussed in many papers [22,64,
+67, 2, 27, 56, 57, 74, 75].
+    In this paper we are interested mainly in d = 4 gauge field theories. We do all
+considerations, and write all formulas below for this case, and only occasionally we
+discuss some special features of d = 3.
+    Our basic object of investigation is a sequence of actions defined recursively by
+applications of small field renormalization transformations, starting with the
+action (0.2). We apply renormalization transformations similar to those intro-
+duced by Wilson [74, 75]. To write a definition we have to recall some geometric
+definitions of [4,5,9,10]. If}/ is a point of a lattice 7J(lf) with a lattice spacing δ, then
+a block of fe-th order, determined by the point y, is defined by
+                                   Bk(y) = A(y)nT[n-~k»                                  (0.3)
+\_Δ{y) is a continuous space cube with a center at y and with the size δ~\. Blocks of
+order 1 are denoted by B{y). For a point x e B(y) we take a family G(y9 x) of
+shortest contours with the initial point at y, and the final point at x. If x — y
+      d
+
+— Σ <>nμeμ (<5 is a lattice spacing, nμ an integer such that \nμ\ ^ L —1/2), then we
+   μ=l
+construct contours of G(y, x) in the following way: take a permutation {π(l),
+π(2),...} of indices μ with nonzero numbers nμ, next take |n π ( 1 ) | bonds in the
+direction sign n π ( 1 ) e π ( 1 ) starting at y, \nπ(2)\ bonds in the direction sign nπ{2)e%{2)
+starting at y + δn π(1) e π(1) , and so on. We define G(y, x) as the family of contours
+                                                                                             7
+generated by all such permuations. For a bond c and a point x e £(c_), let [x, x ]
+denote a contour which is obtained by a parallel transport of c to the point x.
+    Renormalization transformations are defined by averaging operations. In the
+previous papers we have used the definition introduced in [12]. This definition has
+one disadvantage, it is not symmetric with respect to lattice Euclidean transforma-
+tions. Preserving this symmetry is very important for the method; therefore it is
+necessary to modify the definition. For technical reasons we wish to establish
+analyticity with respect to group valued gauge fields. Therefore we also consider
+                                     c
+the complexified group G . Elements of this group are defined as matrices of the
+                                                                     c
+form U = U'U, where 17 e G and U' = expiA\ A'eg^ g is the complexification of
+the real Lie algebra g. Let us write the simplest, immediate extension of the
+definition of averages in [12]. The set of contours used in this definition was too
+small to be lattice Euclidean symmetric, so we extend it. We define an average of a
+Renormalization Group Approach to Lattice Field Theories                                          253
+
+gauge field configuration U, corresponding to a bond ce T ( 1 ) , by
+
+
+                                 β(c_)
+                                                                                   Σ    *
+                                                 ΓeG(c_,Jc)|G(C_,X)| Γ'eG(c+,*') |CJ(C + , X )|
+
+
+            x ylogU(Γu[x,xlu(-Γ)u(-c))lu(c).                                                  (0.4)
+
+    We need also a Euclidean invariant definition of the axial gauge fixing. A
+natural idea, in agreement with the above definition, would be to use variables
+obtained by averaging the contour variables {U(Γ)}TeG{ytX)9 rather than to use one
+contour variable U(ΓyiX). Thus we have to define an average of a finite set of group
+elements. We introduce an axiomatric definition of such an average. It is a Gc-
+valued function defined on sets {Uy: j = 1,2,..., n}, U 7 e Gc, with sufficiently small
+diameters. We denote it by {Uj}=M({\Jj}), and we assume that it is an analytic
+function having the following properties:
+                                                                   1
+                                                                       ;                     (0.5)
+                                             J              J)V;                              (0.6)
+     M(π{Uj}) = M({Uj}) for an arbitrary permutation π of the set {Uy}; (0.7)
+for a set {Uy} of elements close to the identity of the group, i.e. Uy = expL4y with Aj
+in a small neighborhood of 0 in gc, the average is close to the identity also, and
+               1                  1 n
+               τ logM({expL4y})= -  Σ >!,• +(higher order terms);                                 (0.8)
+               i                             n j =i
+
+                      if   U7 e G ,    then           M({U;})eG            also.              (0.9)
+There are several proposals how to define such averages, see [74, 75, 35]. Let us
+write a definition which is equivalent to the one given by Federbush in [35]. The
+average of the set {Uy} is the element U e G c such that Uy are in a small
+neighborhood of U, and it satisfies the equation
+
+                                  Σ -logU U - ^ 0 .                                          (0.10)
+                                         ι
+                                 j=ι
+
+This definition has all the properties listed above, as it was proved by Federbush in
+[35 (II)].
+    The considerations and results of this, and previous papers, do not depend on
+any particular averaging operation used; they are valid universally for all averages
+satisfying the above properties. Having such an average we introduce the averaged
+contour variable corresponding to the set of contours G(y, x),
+
+                             υ(y,x) = M({υ(Γ)}ΓeG(y,x)).                                     (0.11)
+
+In fact the only reason for introducing the group averages with the properties (0.5)-
+(0.10) is to define the controur variables (0.11) which are invariant with respect to
+permutations of the contours Γ in G(x, y). Using these variables simplifies a little
+bit the subsequent discussion of the Euclidean invariant axial gauge fixing. To
+match a bit better the new axial gauge fixing to the definition of the averages of
+254                                                                           T. Balaban
+
+gauge field configurations, as in [12], we introduce the definition
+
+ϋ(c)=eχp|i Σ            L-**iogυ(c-9x)υ(iχ9xTi)υ(x\c+)υ(-c)\υ(c).                 (0.12)
+            L xeB(c-)      I                                         J
+
+This average has properties similar to the properties of the average introduced in
+(0.4), especially all results of the paper [12] are valid for it. The proofs are in most
+cases unchanged; in others only minor and obvious modifications are needed.
+These modifications are connected again rather with the fact that we consider Gc-
+valued configurations, than with the different definition of the average. Let us
+stress that both definitions are equally good for our purposes, in fact we may use
+many other definitions. It is possible to axiomatize them also, listing all essential
+properties, but it is not interesting enough to do it here. We mention only this
+possibility in case it will be convenient to use some other definitions.
+    Now we consider renormalization transformations, which have the general
+form
+                               (Tρ)(V)=$dUt(V,U)ρ(U).                              (0.13)
+Here 17, V are gauge field configurations on the lattices T, T ( 1 ) correspondingly,
+and t(V, U) is a gauge invariant kernel, for example see the definitions in [9,12]. If ρ
+is a gauge invariant function, then Tρ is gauge invariant also. We are interested in
+functions restricted to small field regions, which in this case means that the
+function ρ and the integral in (0.13) are restricted to regular configurations U, i.e.
+configurations satisfying bounds \U(dp) — ί\<εθ9 peT, with ε0 positive and
+sufficiently small, and we consider Tρ on configurations V satisfying similar
+bounds on Γ (1) . The kernel t(V9 U) introduces connections between fields U and V,
+like the equalities Ό = Vin the definitions of [9,16], or more generally \U — V\<ε0
+on bonds of T ( 1 ) . Even with these restrictions the underintegral expression in (0.13)
+is still invariant with respect to the gauge transformations u satisfying u(y) = 1 for
+y G Γ (1) . We have to fix a gauge in order to remove this invariance, as in [9,16],
+where the block axial gauge was used to this purpose. In order to maintain the
+Euclidean invariance on the lattice T ( 1 ) we have to use other expressions than the
+contour variables U(Γy x). We use the variables U(y,x) defined in (0.11). It is
+inconvenient to fix the gauge by the ^-functions δ(U(y, x)), because unlike the axial
+gauge fixing in [9,16] these functions determine complicated nonlinear restric-
+tions on gauge fields. Instead we introduce exponential gauge fixing functions,
+
+                                         =exp[-i[l-RetrC/(j;,x)]J.                (0.14)
+
+It is convenient to introduce simultaneously restrictions on the variables U(y, x).
+We have the following identities for ye Tw, xeB(y), xφy,
+
+
+
+
+                                                                                  (0.15)
+Renormalization Group Approach to Lattice Field Theories                                   255
+
+where z is defined by the last integral. We introduce (0.15) under the integral in
+(0.13) and we apply the usual Faddeev-Popov procedure, i.e. we change the order
+of integrations and apply the gauge transformation U^Uul with u(y) = ί for
+yeT{1).   By the gauge invariance with respect to such transformations the
+integrand does not depend on u and the integral over u is equal to 1. Thus we get
+
+       (Γρ)(7)=Jdl/ί(7,Γ7) Π                 Π          ~exp[- - [1 -Retrl/fox)]]
+                                yeT^)    xeB(y),x*y     Z         \_       CC        J
+
+                   χχ({\U(y,x)~ί\<εo})ρ(U).                                              (0.16)
+
+The new restrictions on U(y, x) together with the previously discussed restrictions
+determine finally a small field region in the following sense: fix a configuration Uo
+in this region, then configurations U from this region satisfy \U — Uo\< 0(1 )ε 0 on
+T, with an absolute constant 0(1). In concrete situations considered in this paper
+there is a natural choice of the configuration Uo as a minimal configuration of an
+action.
+     We now define the renormalization transformations. According to our point of
+view, connected with small field restrictions, they map actions into actions. In the
+first step we define
+
+
+
+
+                          -A" Σ               Σ         [1 - Retr [/(}/, x ) ] - 4 ^ ) 1 (0.17)
+                             0 T < i >                                          0    J
+
+where the normalization factor N o is given by the same integral as above, but with
+V=l.
+    The action Ax determines a function βλ(g0) of the bare coupling constant g0,
+defined on an interval [0,7], y > 0. This is a function in a sequence of jS-functions. In
+the next section we will relate them to effective actions. Now we assume the
+existence of the first function, and we define the new coupling constant gx
+
+                    i = 4+^(00), or ±Ί = lΊ-βM.                                             (0.18)
+
+The equation (0.18) written in the form (l/g21)-(l/gl) = (d(ί/g2))0= -β^go) is a
+finite difference approximation, corresponding to two consecutive lattice spacings
+                                                                 2
+(on a logarithmic scale) of the differential equation (d/ds) (l/# ) = — β(g), or (dg/ds)
+              3
+ = i/2β(g)g . This is the usual differential renormalization group equation, an
+example of a Callan-Symanzik equation, considered in quantum field theory.
+     The fe-th action Ak determines a coupling constant gk. The (fe+l)-st action
+Ak + 1 is defined by the generalization of (0.17),
+
+                                                                       Π
+                                                                 6 T   (k+l)
+
+
+                                ^        Σ             Σ         ll
+                                9k ysT^*D         XE  B(y),x*y
+                                                                                         (0.19)
+256                                                                         T. Bataban
+
+where the constant N fc is given by the integral above with V= 1, and the coupling
+constant gk+1 is determined from the equation
+
+                               •4 = -f-+& + i(&)                                (°2°)
+                               9k
+The characteristic function χk restricts the integral to small fluctuation fields!
+     We continue the calculation of the effective actions until we reach the unit
+lattice, or rather until we reach a scale which we define as the unit scale. Let us
+denote the corresponding index by X, hence ε = L~κ, and the sequence of actions
+and coupling constants is defined forfc= 0,1,...,K.
+     Now let us describe a general form of the actions suggested by the previous
+work on superrenormalizable models [4-7,16,17, 55]. In these papers the actions
+were expressed as functions of external (background) fields. Each action was
+represented as a sum of localized contributions coming from integrations in
+successive renormalization transformations, i.e. see the sums over; in (2.7) [7], (41),
+(47) [16]. This representation is important here also. The background fields are the
+same as in [16]. The integrals in (0.17), (0.19) are calculated by a variation of the
+steepest descent method, and an important part of it is to find critical
+configurations of the actions, or rather of these terms in the actions, which go to oo
+if the effective coupling constants go to 0. These critical configurations are the
+minimal configurations investigated in [15], i.e. the minima of the functional
+
+                      U-+AXU),       on U:Uk = Mk(U) = V,                       (0.21)
+                                                                   {k)
+where V is a gauge field configuration on the lattice T . The space of
+configurations U in (0.21) is invariant with respect to the gauge transformations u
+defined on T and satisfying the condition u = 1 on T(fe). These transformations form
+a group, and the functional (0.21) can be considered on orbits of this group. In [15]
+it was proved that in a space of regular orbits there exists exactly one critical orbit,
+which is a set of minima of the function (0.21). We denote a configuration in this
+orbit by Uk(V), or simply by Uk. These configurations are the background fields,
+and the effective action Ak depends on V through these fields. We have, as in [16]
+
+             Ak(gk, V) = Ak(gk, Uk(V)) = - 1- A\Uk(V))     + Ek(Uk(V)).         (0.22)
+                                             9k
+
+The function Ek depends also on the effective coupling constants g0,..., gk _λ. It is a
+sum of contributions coming from the k successive integrations in the k
+renormalization transformations. In the first step the integral (0.17) yields the
+action A1=—(ί/go)AL~1+Eil\         and then applying Eq. (0.18) we obtain the
+                               L ί                  11    ay
+representation Ax= — (l/gl)A ~ + [_ — fi^g^A ' + E ]. The expression in the
+square bracket is equal to Ev In the second step a new expression of this type is
+created, in the old only a background field is changed. Thus we obtain after k steps
+
+                    W k ) = Σ C-βfa- M\Uk) + E ^ ) ] .                          (0.23)
+
+   The functions EU) are represented as sums of localized terms. Such a
+representation arises in a natural way as a result of cluster expansion, see [39-44,
+Renormalization Group Approach to Lattice Field Theories                            257
+
+25,26]. To describe it we have to introduce new geometric definitions. Let us take a
+nonnegative integer j , and the continuous space T scaled properly, so that it
+corresponds to the lattice Tξ, ξ = L~j. We decompose the space Γinto the lattice of
+closed cubes of a size M, where M = Lm, with centers at points of the lattice 7 $ + m ) .
+Let us notice that we have already several scales of big blocks, for example, the
+scale M o connected with the exponential decay of basic propagators, or the scale
+M x connected with properties of the variational problem, etc. In this paper we
+choose the size M much bigger than the previously fixed scales. We denote this
+family of cubes by πj9 and the cubes by •, D', etc. For a cube D e π,- and n = 1,2,...
+we define 0 " as a cube of the size (1 + 2w)M and with a center at the center of D.
+We introduce a notion of a localization domain. Such a domain is a union of a
+connected, finite family of cubes from πy A connected family means that for every
+pair D, D ' of cubes from the family there exists a sequence Π, D l 5 . . . , •„, D'of
+cubes belonging to the family and such that two consecutive cubes have a common
+wall, i.e. their intersection is a d—\-dimensional cube. We denote localization
+domains by X, X', 7, etc. The meaning of the symbol Xn should be obvious. The
+class of all these localization domains is denoted by D 7 . Domains from different
+classes, i.e. classes corresponding to different indices j , are connected by scaling
+transformations.
+    Thus every localization domain X is a union of continuous space cubes from π,-.
+Consider a class of tree graphs contained in X and intersecting all the cubes in X. A
+length of a shortest graph in this class, divided by M, is the linear size of X, and is
+denoted by dj(X). Thus we rescale the space, so that cubes from π, become unit
+cubes, and we take the distance in this scale. Let us stress the fact that we consider
+graphs in the continuous space. For a given X usually there are many of these
+shortest tree graphs. It is easy to see that there are also the shortest tree graphs
+formed by edges of cubes in X, hence an equivalent definition can be formulated,
+based on such graphs only.
+    We assume that the functions E 0 ) (l7), for regular gauge field configurations 17,
+have the following representation
+                                E°' ) ([/)= Σ E ω ( X , 17),                     (0.24)
+                                          XeΌj
+
+where E (J) (X, U) are analytic and gauge invariant functions of U, depending on U
+restricted to X, and satisfying the inequality
+
+                                     J)\^E0 exp( - κdj(X)),                      (0.25)
+with a sufficiently large constant K. In the next section we will give precise
+definitions, now we are interested in basic properties of the above representation.
+Let us study implications of the inequality (0.25). We obtain
+
+                   S ΣιχΣΌ         Eoeχp(-κdj(Xj)
+
+                   S Σ      Σ       Σ      Eoexp(-κdj(X))^     Σ    Σ   E0O(l)
+
+                   = Σ
+                     .7=1
+                                                                                 (0.26)
+258                                                                               T. Baίaban
+
+Of course a bound of this type, with a divergence typical for a vacuum energy in the
+four-dimensional space, should be expected, without use of cancellations. The
+purpose of the terms with ^-functions in (0.23) is to provide necessary cancella-
+tions, i.e. they are renormalization counterterms. In fact there is one more
+renormalization counterterm needed, it is a vacuum energy counterterm. It is
+contained in the normalization factors in the integrals (0.17), (0.19), hence we may
+assume that it is included already in the definition of the function E o ) , and
+E 0 ) (l) = 0. Let us explain a fundamental idea behind a definition of the /^-functions
+and the cancellations. The guiding principle here is the gauge invariance. It
+identifies the action Aη(Uk), through a set of Ward-Takahashi identities, as a basic
+term in the effective action, the so-called marginal variable in the renormalization
+group language. The remaining terms sum up to a uniformly bounded expression.
+The gauge invariance is used here in the same way as in the analysis of the Abelian
+Higgs model in [7]. Let us remark that the analysis of the non-Abelian models in
+[16] is based on slightly different ideas. In fact we follow the method of [7] closely,
+as will become clear in Sects. 3-5. Now we sketch it very briefly. Consider a term in
+the sum (0.24). If its localization domain X is large, for example it is not contained
+in any cube 0 , with D eπ fe , then the inequality (0.25) ensures that
+
+               |E ω (X, Uk)\ S Eo exp( - κ(Ljη)'')    e x p ( - l/2κdj(X)),            (0.27)
+and the first exponential can be bounded by an arbitrary positive power oϊIJη, e.g.
+by (5\/κ5){Ljη)5. This power is enough to control the sums in (0.23), (0.24). If the
+localization domain is contained in a cube G, then we introduce the local
+coordinates constructed in Sect. F [15] for the configurations Uk on 0 . This
+means that Uk = expiηH modulo a gauge transformation, where H is a regular,
+g-valued configuration on Π, and where the cube D is considered as a subset of the
+^-lattice Tη. By the gauge invariance we have E 0 ) (X, Uk) = E ω (X, exp iηΉ), and we
+expand the last expression in H up to the fifth order. The fifth order term can be
+bounded by E0O((Ljη)5) exp(-κdj(X)). The sum of lower order terms is analyzed
+with a help of Ward-Takahashi identities. They allow the extraction of terms,
+                                                   η
+which grouped together yield an expansion of βA (expiηΉ). The remaining terms
+have bounds as above. We define the function /?/#/_ 0 to be equal to the coefficient
+β. Thus we obtain
+
+                          j   j                                       Uk),            (0.28)
+                                                     XeΌj
+
+where the functions V(7) satisfy the inequalities
+                  ω                      j   4   +
+                                                                      α>0,           (0.29)
+instead of (0.25). These inequalities yield a uniform bound of the sum (0.23) on the
+lattice Tψ i.e. the only dependence on k is through the volume \Tη\
+corresponding to the scale η. Indeed, we have
+
+                      Σ       Σ 0(l)(Uη)4 + «exp(-κdj(X))S Σ           Σ      Σ
+                      =ίXΌ                                      j l   Π
+
+
+
+                                                      j = 1 D e Kj
+                                  j     4
+               = Σ 0(i)(L ηγM~ \ψ\S0(i){l               -L~xy 'M-^Tί^ .               (0.30)
+Renormalization Group Approach to Lattice Field Theories                                259
+
+For the effective action corresponding to the unit lattice, where k = K = log L l/ε,
+the above bound is uniform in the lattice spacing ε. This is the essence of the
+ultraviolet stability concept, and the construction summarized in the representa-
+tion (0.28) is, from a technical point of view, the main subject of this paper. Terms
+satisfying the inequality (0.29) are called irrelevant - a word, borrowed from the
+renormalization group language - but which should not suggest that these terms
+are irrelevant operators in that sense. There are no scaling transformations here,
+and these terms do not behave in a regular way under the renormalization
+transformations.
+    The ultraviolet stability concept has two aspects. The first concerns the
+effective actions generated by the renormalization group transformations, their
+description and the bounds they satisfy. The second concerns the behavior of the
+sequence of the effective coupling constants gk generated from the bare coupling
+constant g0 by the renormalization group equations (0.18), (0.20). In this paper we
+prove a theorem concerning the first aspect. To formulate this theorem we
+introduce small field domains. For the fc-th action such a domain is determined by
+the condition \dUk(V) —1| <ε0η2 on Tη, for ε0 sufficiently small. Another possible
+definition, technically less convenient, is given by the condition \dV— l | < ε 0 on
+T^\ Now the main result can be formulated in a general way as follows:
+
+Theorem 1. // the sequence of the effective coupling constants is contained in an
+interval ]0, y] with a sufficiently small positive y, then the effective actions for small
+fields are given by the formulas (0.22)-(0.24), with terms satisfying (0.29).
+     It is interesting to notice that we do not assume any special asymptotic
+behavior of the coupling constants, like asymptotic freedom. Hence in principle
+arguments could be applied to models with different behavior of running coupling
+constants, for example to the so-called asymptotically safe models, or finite
+models.
+     The above theorem will be reformulated more elaborately in the next section. It
+will be proved in this paper for an arbitrary semisimple compact Lie group
+G C U(N), and for d = 4. The proof also covers the dimension d = 3, but in that case
+it is not necessary to consider the β-functions and the renormalization group
+equations (0.18), (0.20). The effective coupling constants are given by     gk=g2ϋε;
+hence the assumption of the above theorem is satisfied for g sufficiently small. The
+problem of whether the assumption is satisfied in dimension d = 4 is addressed in
+the next theorem.
+
+Theorem 2. Let d = 4,G = St/(2), and let y be a sufficiently small positive constant,
+then for a sufficiently small positive g there exists a bare coupling constant
+θo= #o(ε> O)sucn t n a t t n e sequence of the effective coupling constants gk is contained
+in the interval ]0,y], and gκ = g. Moreover, there exist constants β, β\
+such that gk satisfy the inequality
+
+                                                            1
+                                           4 SK        βg(y .                       (0.31)
+                    9                      0k    9
+   A proof of this theorem, based on perturbative calculations, will be given in a
+separate paper, where more precise asymptotic behavior will be proved. The
+260                                                                              T. Balaban
+
+restriction to the group SU(2) is superficial and is done only to simplify
+calculations.
+    Finally let us mention that all results of this paper are valid for a certain class of
+two-dimensional nonlinear σ-models, the so-called nonlinear chiral models. For
+these models field configurations are functions U defined on sites of the lattice T,
+with values in the Lie group G, and the action is given by
+                                                                             1
+             = Σ [l-Retrl/(3i)L               U(db) = (dU)(b) = U(b^)U' (b+). (0.32)
+                bCT
+In fact all the results were obtained at first for this class of models. They are
+technically much easier, and many modifications and simplications are possible in
+this case; therefore we will discuss them separately in the future.
+
+1. The Inductive Description of the Effective Actions
+The inductive assumption is based on the results of the previous papers, e.g. see
+(2.7) [7], (41), (47) [16], and on the general remarks in the previous section. At first
+let us recall the definition of the background field configurations on which the fc-th
+action depends. They are determined by regular gauge field configurations V given
+on the unit lattice 7?k). The regularity means that the plaquette variables of V are
+small, I V(dp") — 11 < ε'o for p' e T[k). For such a configuration there exists exactly one
+regular, critical orbit of the functional
+                      U-+A(U)9         U:Uk = M\U) = V       on   T(fe\               (1.1)
+and it is a minimal orbit (a set of minima). This variational problem was
+investigated in the paper [15], see Theorem 1 there for precise formulations. We
+denote by Uk(V), or simply Uk9 a configuration in the minimal orbit.
+     Thefc-thaction Ak{V) depends on V through the minimal configuration Uk(V),
+Ak(V) = Ak(Uk(V)). It is defined on configurations belonging to the space Uk(ε0),
+i.e., Uk(V)eUk(ε0). The space was introduced in [14, 15], in a more general
+context, and here it is defined as the set of all configurations U satisfying the
+following regularity properties:
+                                                        η = L~\       peT,
+                                                    η    2
+                        \J\<ε0    on     T,   J = D uη~ πImdU,
+with ε0 sufficiently small. By Proposition 2 [12] this condition implies that |F(δ//)
+— 11 < 2ε0 for pf s T{k\ and is implied by the condition on F, with 2ε0 replaced by
+Bϊιεθ9 see Theorem 1 [15]. The action has the following form
+
+
+                                 J=O
+
+                             Uk)-E^k%, 1)]}.                                          (1.3)
+We have written explicitly terms of the order 0 in the coupling constants. Let us
+recall that the factor Z{j)(Uk) is given by the Gaussian integral normalizing the
+Gaussian measure for a fluctuation field in -th step integration
+                                                                                      (1.4)
+Renormalization Group Approach to Lattice Field Theories                           261
+
+The quadratic form in the integral is given by
+
+
+                                 - 2(Huj(Uk)hC^(Ui         B), J) + G (2) (£),   (1.5)
+                                                                        {2)
+where the operators Hιtj, Δ1 are defined in Sect. D [13], and C (U{,B) is the
+second order polynomial in the expansion of Q(U{,B).
+    In many considerations it is not necessary to separate the terms of zeroth order
+from the remaining terms in the interaction, and then we write
+               1           k-l
+
+              gl          J=O
+
+                                                                                  (1.6)
+    The terms in (1.3) given by explicit formulas, like (1.4), can be easily extended,
+by the same formulas, to a much wider class of regular gauge field configurations.
+For example we can extend to Gc-valued configurations satisfying the conditions
+(3.35)—(3.38) [13], and from results of that paper we conclude that these terms are
+analytic functions of the configurations. We assume that extensions of this type
+exist for all terms in the effective action (1.3), or (1.6).
+    The function E{j\gj_ι, Uj) is a result of an integration in thej-th step, after a
+subtraction of the previous action evaluated at Uj. We assume that it has the
+representation
+
+                                        XeΌj
+
+
+Again, the term corresponding to a domain X depends on Uj restricted to X. We
+can assume that this representation holds for the functions E 0 ) in (1.3) and (1.6),
+because the expansion of the logZu~1\Uj) constructed in [16], implies, that we
+can represent this term in the form (1.7). Further, we assume that the terms in (1.7)
+are determined by functions defined on larger spaces of regular gauge field
+configurations. The regularity means that at least the conditions (3.35)—(3.38) [13],
+or (1.7)—(1.10) [14] are satisfied, i.e. first order derivatives and the special second
+order derivative of a configuration are small. For technical reasons it is convenient
+to separate the dependence on the second order derivative. From the previous
+papers it is clear that it appears only in the functions
+
+                                       £                                         (1.8)
+where π denotes the projection in the space of all complex N x N-matrices onto the
+
+algebra gc, and imU = ^—(U—U'1). They appear in expansions of the action, and
+in expressions defining propagators. We extend the terms in (1.7) introducing two
+variables U, J, the second variable replacing the functions (1.8), and the first
+satisfying milder regularity conditions involving first order derivatives at most.
+Thus we assume that there are functions E 0 ) (X, gj_u\J, J), analytic on a space of
+regular, complex configurations U, J, such that
+
+                                                  gj_l9 Uj9Jj).                  (1.9)
+262                                                                                            T. Bataban
+
+   Now we define spaces of configurations U, J. We define them for each j , and we
+are interested in local spaces determined by localization domains X e D,. The
+gauge field configuration U is defined at bonds of X and has values in Gc, the
+configuration J is also defined at bonds of X and has values in gc. A Gc-valued
+gauge transformation u acts on pairs (U, J) in the following way
+                                      1I                         1
+                     ( U , J ) " = (U ,R(M)J) = ( I I - U I I ; , R ( M . ) J ) ,                 (1.10)
+where for a bond b = (JD_, b+> we define u±{b) — u(b±). The orbit of the group of
+Gc-valued gauge transformations determined by a pair (U,J) is denoted by
+[(U, J)]. We are ready to formulate the following fundamental definition.
+   The space Ucj(X,ccθ9ai,yo) is a union of orbits [(U,J)] determined by
+configurations U, J satisfying the four conditions written below.
+     (i) U = U'U, U has values in the group G,
+                                    \dU-ί\«x0ξ2          on X,                                    (1.11)
+for each cube D CX of a size 0(ί)LM there exists a G-valued gauge transformation
+u defined on D and such, that Uu = expiξA,
+                        \A\,        \VξA\<0(l)LMBoc0                 on       D,                   (1.12)
+with a sufficiently large constant B (it will be determined later).
+    (ii) U/ = QxpiξA/, A has values in the algebra gc,
+                               μ4Ί, . IViA'lK*!             on X.                                 (1.13)
+      (iii) The configurations U, J satisfy the bounds
+                       \d\]-l\<aoξ\        | J | < 7 0 on X.                    (1.14)
+    (iv) We consider X as Ωo, and we construct the sequence {Ωn}, n = ί, ...,7, of
+maximal possible domains satisfying the conditions (1.3)—(1.6) [14] (withj, ξ instead
+of k,η, R = Rί). For this sequence, or rather for its subsequences {Ωo, Ωί9..., ΩB},
+n=l,...yj, we construct the functions Un(V) in the axial gauges, for regular
+  c
+G -valued configurations V. We consider the pair
+                       (ί/ π (M'(U)),J n (M (U))),              n=l,...J,                          (1.15)
+where M'(υ,b) = Mp(\J,b) = Upφ) for beΛp (see (1.5) [14]J, and JH(M'(U)) is
+defined by the formula (1.8) with l/n(M"(U)) instead of Uj9 L~n instead of ξ. This
+pair satisfies the bounds.
+                                2                                         2               2
+           \dUn(M\V))-l\«x0ξ ,                \Jn(MχV))\<a0(Πξ)                     on X " ,       (1.16)
+
+and the same bounds hold for U instead of U.
+    The domain X~2 is obtained from X by taking away two layers of cubes from
+πp which are closest to the boundary of X. Thus it is a domain Xr such that
+X'2 = X. The first three conditions (ΓHm) i n the above definition are rather simple
+and natural, the conditions of this form appeared many times in the previous
+papers, e.g. see (3.35H3.38) [13]. The last condition (iv) is connected with the fact
+that in some important constructions in the next sections we have to substitute the
+Renormalization Group Approach to Lattice Field Theories                                263
+
+functions (1.15) in place of the variables U, J. We have to make sure, then, that they
+have required properties. Usually we consider spaces with y0 = α 0 , and then we
+omit the constant y0 from the symbol denoting the space.
+      Let us make now a few remarks about the above definition.
+      At first we show that there are some simple and natural spaces contained in
+UCj(X, α 0 , α j . Let us take the space of configurations (U,J) satisfying the
+conditions (i)—(iii) with constants αό, αl instead of α 0 , ot1. We assume that the
+constants αό, <x\ are smaller than α 0 , a x correspondingly, then obviously these three
+conditions are satisfied in the original formulation. Now consider the functions
+l/ w (M'(U)). We have M'(U) = U P on Λp9 \dΪJp-l\<2θL'o(Lpξ)2.        From Proposi-
+tion 9 [15] we obtain
+
+                  \d Un(M \V)) -11 < B32κ'0L- 2\Πξ)2              = 2B3oι'oξ2,
+                       \Jn(M'(U))\<B32^(Lnξ)2               on      X~2.
+It is obvious that for αό sufficiently small the above estimates imply the condition
+(iv), thus the configuration (U, J) belongs to the space U^X, α 0 , α j . We specialize
+this example even more and consider configurations satisfying (i)-(iii) with αό, OL\ as
+above, and such that J = D^*£~ 2 πImδU satisfies the bound |J|<αό, similarly the
+configuration constructed for U instead of U. Then the pairs (U, J) belong to
+UftXyOίQjOCi). In particular the minimal configurations Uj satisfying the bound
+\dUj—l\<ε0ξ2 with ε 0 sufficiently small, satisfy the above conditions.
+       Let us come back to the description of the actions. We assume that the function
+E 0 ) (X, #,._!, U, J) is defined and analytic on the space UCj(X, oc0,oίι), with some
+positive, absolute constants α 0 , aι (i.e., constants independent of X and j). It
+depends on the configurations restricted to X, i.e. on (U, J)\x. It is a C°°-function of
+#/-1 e [0, y], (or analytic), with a positive, absolute y. There exists a constant Eo
+such that
+
+                       \EU\X, gj_u      U, J ) | ^ E o e x p ( - κd y (*))           (1.18)
+                                                                                 C
+for M ^ M(κ), y sufficiently small, and for all configurations (U, J) e U j(X, α 0 , α j .
+       Symmetries are the subject of this point in our discussion of properties of the
+actions. The most important is gauge invariance. We assume that all functions
+E 0 ) (X, Qj-ι, U, J) are gauge invariant with respect to the group of all gauge
+transformations (1.10). Explicitly
+                                  u
+                           , gi.l9V ,    R(u)J) = ΈW(X9 gs. ί9 U, J)                 (1.19)
+         c
+for all G -valued gauge transformations u. The spaces UfiX, (t^oti) are, by the
+definition, gauge invariant also. This assumption is an easily verifiable statement
+for all explicitly defined terms in the action (1.3). These assumptions imply that the
+action Ak(U) defined on the space Uk(ε0), which is contained in all the spaces
+UfiXtOίQiOίi), is gauge invariant with respect to all G-valued transformations.
+Other symmetries are Euclidean lattice transformations. We assume that the
+action (1.3) is invariant with respect to the transformations of the lattice T(k\ More
+precisely, we notice that the explicitly defined expressions in the j-th term in (1.3)
+                                                                                   ϋ+1
+are invariant with respect to the Euclidean transformations of the lattice T \
+and we assume that this is true for all expressions in this term.
+264                                                                              T. Baiaban
+
+   Now we describe the most important expressions in (1.3), (1.6), the ^-functions
+βj+ίidj)- They are determined by the functions Eu+1)(gp Uj+1) in (1.6). Let us
+denote Ea+1)(gpB) = Έu+1)(gp Uj+1(expiB)). We define
+
+
+                                                                                    (1.20)
+
+This is the vacuum polarization tensor of the theory defined by thej-th fluctuation
+field integral. We will analyze this tensor thoroughly in Sect. 5; now we describe its
+basic properties necessary to formulate a definition of the ^-functions. The
+function E o + 1 ) is gauge invariant, hence it is invariant with respect to global
+transformations V^R{v)V, veG, or B^>R(v)B. The function (1.20) can be
+considered as a function of μ, v, x, x', with values in the tensor product g®g, and
+these values are invariant with respect to the transformations R(v)®R(v), veG.
+This is possible only if they are proportional to the identity matrix, i.e. to δab. By the
+Euclidean invariance of E ( J + 1 ) the function (1.20) is Euclidean covariant. This
+implies
+                         Πf+Uμv(gpx,x')   =     δabΠj+Uμv(gpx-x'),
+                          Π ( b b ' )            Π(bb')
+
+where Πj+ίiflv(gpx)    is a real valued function, and r is a Euclidean rotation
+leaving the lattice Tu+ί) invariant. Now we take a limit of these functions as
+Tu+1)/*Zd. This limit exists by the localized representation (1.7). The func-
+tion βj+ι(gj) is defined by
+
+
+
+
+                     =
+                         ~ ( a a Πj+Lμv)(gj>°)=      ΣΠj + x tμv (gj,x)x μ x v        (1.22)
+                           \opμopv     J             x
+
+for μ, v arbitrary, μ φ v, where f(p) denotes the Fourier transform of the function
+           d
+f{x\xeZ .
+    It is a smooth function defined on the interval [0, y], (or analytic), uniformly
+bounded on this interval together with all derivatives. We will investigate other
+properties in a separate paper.
+    This completes the description of the inductive assumptions. Now we can
+formulate a precise version of Theorem 1.
+Theorem 3. There exist positive constants κ0, M(κ), γ, ε0, εu α0, oc1 such, that if
+κ^κ0, M^M(K),        0<gk^y forfc= 0,1, ...,iC, then the sequence of actions Λk,
+defined inductively by the small field renormalization transformations (0.17)-(0.20),
+satisfy all the inductive assumptions described between (1.1)-(1.22). The constants ε0,
+ε1? α0, oc1 depend on M and satisfy numerous restrictions, which will become clear in
+the proof The constant y depends on all other constants.
+      In the rest of the paper we will be proving this theorem.
+ Renormalization Group Approach to Lattice Field Theories                              265
+
+2. Fluctuation Field Integral in k + 1 Renormalization Transformation
+We assume that after k steps we have obtained the action Ak described in the
+previous section, and we apply the next renormalization transformation Ύk
+restricted to a small field region by a characteristic function χk
+
+
+
+                       xχkexp\ -\G(V)-^A(Uk(V))                      + Ek(Uk(V))\.    (2.1)
+
+The gauge covariance of the averages implies that the ^-functions in (2.1) are
+invariant under the gauge transformations V-+Vvy W->WV, because δ(U) is
+invariant under the transformations U^R(u)U, ueG. The meaning of the
+function Ek is obvious, it is equal to (l/gk)A + Ak. We consider the new action on
+regular configurations W defined on T(k+υ . More exactly we assume that W is so
+regular that the minimal configurations Uk+1(W) exist and belong to the space
+Uk + 1(ε0). By Proposition 2 from the paper [12] this implies that | W(dp') — 11 < 2ε0
+for p' G T(k + 1). We will define the characteristic function χk in such a way that the
+domain of integration in (2.1) is restricted to configurations V for which
+Uk(V) e Uk(ε0). Thus the inductive assumption of the previous section is valid for
+the action Ak(Uk(V)).
+    We calculate the integral (2.1) applying the saddle point method. At first we
+look for critical points of the function
+
+                        V^G(V) + A(Uk(Y))9           V: V=W.                         (2.2)
+
+Under the above regularity assumptions there exists the exactly one critical point,
+which is obtained by taking the critical orbit of the function A(Uk(V)) considered
+on the subspace, and choosing the element of the orbit satisfying the axial gauge
+conditions G(F) = 0. This critical configuration, which is a minimum of the
+function (2.2), is denoted by V{k)= V{k\W), and is related to the minimal
+configuration Uk+1(W) in the axial gauge by the equality
+                                      k      k
+                              V^ = U k + 1=M (Uk     + 1   ).                        (2.3)
+                                                 /         (k)   1            {k
+We introduce new integration variables V =V(V )~ 9 or V=VΎ \ and we
+assume that the characteristic function χk and the (5-functions in (2.1) restrict the
+variables B' = (\/i)\ogV to a sufficiently small neighborhood of 0. A gauge
+transformation D of F induces the gauge transformation υ of V{k) and the
+transformation B'-±R(v)B'. The expressions in (2.1) are invariant with respect to
+these transformations.
+    As in Sect. G [15] we write Uk(VΎ(k)) = Uk(Vr)Uk+u and we transform at first
+U'k(V) into the axial gauge Axk(T{k\ Uk+1). This does not change the expressions
+in (2.1) because this gauge transformation is equal to 1 on T{k). Next we apply the
+gauge transformation uk constructed in [14] and changing the axial gauge into the
+Landau gauge. We obtain Uku*1 =expiηHk(B/), where the g-valued configuration
+Hk(l?') is regular and of the same order as B\ Its properties are described in Sect. G
+[15]. The gauge transformation uk can be expressed in terms of the configuration
+Hfc(2J') by the formula (106) in [12] with Uί =expiηHk, and it implies that uk is an
+266                                                                          T. Balaban
+
+analytic function of H k , hence of Bf for Hfc satisfying a boundedness condition of the
+form |H f e |<α 1 ? with an absolute, positive constant av
+   Let us write the expressions under the integral (2.1) in the new variables B'. The
+expression under the <5-function is equal to
+                         MiVΎ^MiyWy1 =expϊβ(50.                                  (2.4)
+   The gauge fixing term under the exponential in (2.1) is equal to G(VΎ{k))
+= G(F0 = G(JB0- The ^variables V\y,x) = {VΎ{k)) (y,x) ( F ^ x ) ) " 1 have an
+expansion of the form Ϋ'(y, x) = 1 + B'(y, x) +..., where B'{y, x) is a linear function,
+hence the gauge fixing expression has the representation
+              =     Σ        Σ     i\B'(y,x)\2 + G3(B0 =W2\B')      + Gi{B').     (2.5)
+
+The function G 3 (JB0 is an analytic function of B\ with an expansion beginning with
+third order terms, localized in blocks of the lattice T(k\
+    Now we analyze an expansion of the action under the exponential in (2.1).
+Using the gauge invariance of the action, and the formulas (41), (174) [15] we have
+
+
+                   + (Uk(B% Jk+x>+KIW),          AHk(B')> + V0(Mk(B'))
+               =                 A(Uk+1)+<H1ΛB'+A1Λ,Jk+1)-(HkDk(H1,kB'+AίΛ),Jk+ίy
+                   +KH1ΛB'+AUk,          A(HUkB'+Auk)}
+                   -<H1ΛB'+Auk,AHkDk(HltkB'+A1Λ)}
+                   +KHkDk(HukB'+A1Λ),ΔHkDk(HukB'+Auk))
+                   + V0(HίΛB'+Auk-HkDk(HukB'+Auk)).                               (2.6)
+Let us omit for simplicity the subscript k. By Eq. (171) [15] we have <AX, J) = 0. In
+the third term on the right hand side above we decompose the function D into the
+sum D(2)+D3, where D ( 2 ) is the second order term equal to C (2) , and D3 is the
+higher order remainder. The term with C ( 2 ) together with the next term on the right
+hand side of (2.6) yield the expression
+        t(HιB'+Aί,Δι(HίB'+A1)y=i(HίB',Δ1HίB'>+KA1,ΔιA1y,                          (2.7)
+see the definitions (3.127), (3.128) [13]. Denoting terms of at least third order in
+RγB' by V{HίB') we get
+                                         ', J> +i<H 1 B', Δ ,H,B'y + V(Hx B0. (2.8)
+Finally we can define the characteristic function χk
+                                    Π          z({|B'(6)|<e1}).                  (2.9)
+
+Another possibility is to take gk/ykε1 instead of ε1? where yk = Clog(Lkε)~1 with C
+sufficiently large. It has the advantage that the functions E 0 ) , βj are analytic
+functions of the effective coupling constants, but it has some disadvantages in
+perturbative calculations also. We have formulated the implications of both
+possibilities in the inductive description. The above restrictions imply also
+Renormalization Group Approach to Lattice Field Theories                                            267
+
+restrictions on B'(bo(c))9 with the constant εί replaced by 0 ^ ) , because these
+variables can be expressed in terms of the remaining ones as in the first step. This
+we will discuss in detail.
+    Let us write the integral we obtain from (2.1) by the above described
+transformation
+
+       (2.1) = logNΓ* ί dB'σ(B')δ(Q(B'))
+
+                            \    (   )   \    (    k   +   1
+                                                               ) \ (          1
+                                                                                  \ )
+                            9k               9k                9k
+
+                                                                                        (k)
+               - - L <HXB\ A !# X B'> - -i- V(H,B') + E k (t7 k (expi5T ))l, (2.10)
+                 2
+                  9k                          9k                                              J
+where the factors σ 0 are included into the normalization factor N£. In this integral
+we make a change of variables linearizing the function Q(Br). This operation was
+discussed several times in the previous papers, e.g. see Sect. C [15], Sect. E [14].
+Here we have a particularly simple unit lattice situation.
+    At first we introduce an operator h. It transforms g-valued functions B defined
+at bonds of the lattice T{k + 1) into such functions defined at bonds of T(/c). The
+function hB is equal to 0 everywhere, except the set {bo(c) :ceT(k+1)}. [Let us recall
+that for ceT{k+1) the bond bo(c) is defined as the bond of the lattice T{k) contained
+in c and belonging to the corridor B(c) = {beT{k):b^eB(c_),                             b+eB(c + )}.]
+Furthermore, the operator h satisfies the identity LQh = I on T{k+1). Of course h is
+uniquely defined by these conditions, in fact it is a very simple operator given by
+the equality (hB) (bo(c)) = h(c)B(c), where h(c) is a linear operator on the Lie
+algebra g, equal to an inverse of a coefficient at the variable B'(bo(c)) in (QB') (c),
+multiplied by L~1. We are looking for an analytic, g-valued function D(B/), defined
+at bonds of T(k+1\ and such that the transformation B; = B — hD(B) linearizes the
+function Q(B'). The function D(B) is determined by the equation
+               LQ Bf + C(B') = LQB - D(B) + C(B - hD(B)) = LQB.
+It is easy to prove, following the proofs in the above mentioned papers, that there
+exists exactly one solution of this equation, and that it is an analytic function of B.
+From this equation we obtain also that D(B) has an expansion beginning with
+quadratic terms, and D{2)(B) = C{2)(B). The above change of variables yields the
+integral with the (5-function δ(QB). Next we make the scaling transformation
+B = gkB\ In the expression under the exponential the third, linear term in (2.10)
+vanishes now, — (l/gk) (,HXB\ J} = 0 because (δA\ J} = 0 for all δA' satisfying the
+condition QQ^A' = 0, and H1B/ satisfies it. Hence the only term with a negative
+power oϊgk is the action evaluated at the configuration Uk + 1. Terms of the order 0
+in gk are
+                       C - K H ^ A ^ ^ ' y .                                                      (2.11)
+                                                                    {k)   r
+The quadratic form in B' above is equal to —\l2(B\A B y,          see the definition
+(3.156) [13] with the ^-function gauge fixing term replaced by the exponential one.
+This quadratic form defines the fc-th normalization factor Z(kXUk+1) given by the
+formula (1.4) with j = k. The quadratic form defines also a Gaussian measure. We
+perform the same operation as in the first step, namely using the (5-functions.
+268                                                                                              T. Bataban
+
+δ{QB') we eliminate the variables B\bo(c)), csTik+1).   Denoting the remaining
+variables by B we have Bf = CB, C is the operator determined by the configuration
+V{k\ and the measure becomes a Gaussian measure in variables B, with the
+covariance C(fc) = C{k\Uk+1) = (C*A{k)C) ~ι.
+    After these transformations we obtain the following expression for the new
+action:
+
+                      9k
+
+
+
+
+                                                           βk                               9k
+
+                      ^(H1gkCB,A1H1hD(gkCB))
+                      9k
+
+                      ~ (H.hDig.CB), A .H.hDig.CB)}
+                      9k
+
+
+                      9k
+
+                                                                                                       (2.12)
+
+Let us notice that the normalization constant N£ is equal to the integral above at
+Uk+ί = ί. The expression under the exponential is clearly a sum of two terms, one
+is connected with the expansion of the action - (ί/gl)A(Uk(V)) and the measure in
+(2.1), and we denote it by P(fc)(#fe, Uk+l9 B), another is the expression in the curly
+bracket {...}. The integral in (2.12) defines the new term E ( k + 1 ) in the inductive
+definition of the action Ak+ι by the formula
+
+         E<k+1>(0k, I7 k + 1 ) = logf ^ c w ( B ) χ k e x p [ P ( f e ) ( f e I7 k + 1 ,B) +{...}] .   (2.13)
+
+Let us remark that the expression under the exponential above vanishes at gk = 0,
+and
+                                       <*+1>l).                            (2.14)
+Finally we perform the coupling constant renormalization
+
+                                      4 = -^-+&+i(&)                                                   (2-15)
+                                      9k       9k+i
+with the /?-function defined by the formulas (1.20), (1.22) for j = k. The equalities
+(2.12), (2.14) together with the definitions (2.13), (2.15) imply that the action Ak +1 is
+given by (1.3) withfc+1instead of k. By the inductive assumption, and by the
+properties of the expressions given by explicit formulas, all terms in this
+representation satisfy the required properties, except possibly the last term (2.13) in
+the sum.
+Renormalization Group Approach to Lattice Field Theories                              269
+
+    Let us discuss briefly the gauge invariance and the Euclidean invariance of this
+term. The gauge invariance was discussed already several times in the previous
+papers, so let us recall only that all the expressions in (2.12), together with the
+measure, are invariant with respect to the gauge transformations
+                      u
+          Uk+ i-> U k + x ,     B'-*R{u)B',         (R(u)B') φ) = R(uφ.))B'φ).         (2.16)
+
+The characteristic function is invariant with respect to the transformations of the
+fluctuation field B\ because they are local, orthogonal transformations; therefore
+the expression (2.13) is gauge invariant. Now consider a Euclidean symmetry r of
+the torus T, preserving the torus T(k+i). We define generally
+                 (rU)φ) = U(rb),          rb = r(b_,b + ) = (rb_,rb + ) .           (2.17)
+By their definitions the expressions in (2.1) are invariant with respect to these
+transformations. If we split the field V= VΎ{k\ and V{k\ Uk+1 transform as above,
+then the expressions are still invariant assuming that V transforms as follows:
+                   (rV) φ) = V'(rb) if rb is positively oriented,
+         (rV) φ) = R(V{k\rb))F        ~ * (-(rb))   if rb is negatively oriented.
+In these formulas the bonds b are positively oriented. Let us recall that the
+representation Vφ) = V\b)V{k\b) holds for such bonds only. The above definition
+secures the identity r(VΎ{k)) = (rV')(rV{k)\ hence the invariance also. The trans-
+formation (2.18) generates an orthogonal transformation of the fluctuation field B\
+hence all the remaining operations preserve the invariance for the same reasons as
+for the gauge invariance. Thus the effective action is invariant with respect to the
+Euclidean transformations (2.17) of the background field.
+    Thus the proof of Theorem 3 is reduced to proving the remaining properties of
+(2.13), i.e. to a construction of the representation (1.7) with terms having the
+analytic extensions satisfying the bound (1.18). We will do it in several steps, and
+the rest of the paper is almost completely devoted to these problems.
+
+
+3. An Expansion of Terms in Fluctuation Field Integral,
+and Preliminary Analytic Extension
+The underintegral expression in (2.12), (2.13) is a sum of two expressions. One is the
+function F(k)(gk,Uk + 1,B), which is given by the sum of all terms under the
+exponential in (2.12), except the terms in the curly bracket. This function, although
+it has a complicated structure, is simple to understand. It is an analytic function of
+the fluctuation field B defined on the unit lattice T^\ It is bounded by a second
+order polynomial in 22, with coefficients of the order O ^ ) , hence it can be treated
+as a small perturbation of the basic quadratic form in the Gaussian measure dμC(k).
+As a function of the gauge field configuration Uk+ί it has a straightforwardly
+defined extension P(k)(gk, U, J, B) such, that
+                    P(kXgk,Uk   + 1,B) = P<kXgk,Uk+ι,Jk      + 1,B).                (3.1)
+
+This extension is obtained by replacing the function Jk+ί in all propagators and
+operators by the variable J, and by replacing the configuration Uk+ ί in all other
+270                                                                         T. Balaban
+
+places by the variable U. The function P(/c)(#fc, U, J, B) is defined and analytic on
+the space of all configurations U, J satisfying the conditions (iHiϋ) * n Sect. 1, for
+some oco, oc[ sufficiently small, but much bigger than α0, aί there. The only problem
+is to localize this function, i.e., to construct the representation (1.7) with terms
+satisfying bounds of the type (1.18), modified by factors connected with the
+fluctuation field B. We will analyze this problem in one of the next sections in a
+general case.
+     The problem we consider in this section is connected with terms in the curly
+bracket in (2.12). We want to represent them as a sum of localized, irrelevant terms,
+i.e. terms satisfying the bound (0.28). We make a first step to get the desired
+representation, we expand terms in the curly bracket, and we construct prelimi-
+nary analytic extensions of terms in the expansions.
+     Let us take the partition πk. We construct a cover of the space T by cubes D,
+which are unions of 2d neighbouring cubes from πk. For this cover we take a
+partition of unity 1 = ΣCπ w ^ smooth functions "ζΠ. More exactly we assume
+                        •                                 d
+that if y is a center of the cube D, then ζΠ(x)= Π ζ(M~1(xμ — yμ)), where
+ζeCJftJί1), ζ(t) = ί for |ί|gl/3, ζ(ί) = 0 for |ί|^2/3, ζ has derivatives up to the
+second order bounded by 5. Let us recall that we consider the continuous space T
+and all the cubes in the scale corresponding to the lattice TΨ
+      Let us denote for simplicity the expression under the exponential in {...} by B\
+i.e.,
+                                 B' = gkCB-hD(gkCB).                              (3.2)
+The first expansion we write below depends on the index) in the sum (1.7). We write
+it for the function E o ) . Making use of the gauge invariance we have
+            Eω(t/k(exp iBΎ{k))) - EU)(Uk(V{k)))
+               =     Eu\Uj(U{(QxpiBΎik))))-Eu\Uj(U{(V{k))))
+
+
+                                                                  )),            (3.3)
+
+where we have used the results of Sect. G [15], and the equality (97) [12]. The
+function Hfc and the operation Qj are dependent on the configuration Uk+1. Next
+we have
+           U)            (k)   u      {k)
+         E (Uk(QxpίBΎ ))-E \Uk(V ))
+
+
+
+
+             = Σ ί it ( ( J | E ^ (UjicxpiQjiηtH^B^OU J),
+
+                                                                                 (3.4)
+Renormalization Group Approach to Lattice Field Theories                                          271
+
+This yields a first localization of the expression {...}. We consider now one term in
+the above sum, the term corresponding to a cube Π. Decomposing E 0 ) according
+to (1.7), we obtain a sum of terms labeled by X e D 7 . We divide this sum into two
+subsums, assigning a term to one of them according to a position of its localization
+domain X with respect to D. The division is according to the conditions
+                              Zn(D2)cΦ0,             or    XcO2.                                (3.5)
+    Consider a domain X satisfying the first condition above. Assume that X e Όj.
+There are two cases possible, either I n D = 0 , or I n D + 0 . In the first case
+                   the distance is in the scale η, hence in the scale ξ dist(ξ)(X,D)
+             1
+               . In the second case X is a big domain in ξ-scale, for example dj(X)
+             Thus either the exponential decay of propagators corresponding to
+ξ-scale, or the exponential bound (1.18) should give a small factor O((Ljη)N) with an
+arbitrary power N, enough to control the sums. Terms with domains X satisfying
+the first condition in (3.5) are simple to deal with, we have to write them only in a
+form in which the exponential factors can be clearly seen. Making use of the gauge
+invariance, and denoting
+
+
+we have
+                                                   ^           1       )       .                (3.6)
+The function Hy depends on the configuration Uk+1. The expression on the right-
+hand side is differential with respect to tπ, at tπ =0, and this yields
+
+                    (v   p Y n ί ^ l J ( Ώ(tWTT   \ I I        T-f I CϊϊίtW         R I
+          dA    /                  '                \\oB           /          dtΏ
+
+                     (x, exp iξ ΓH/B(0) +1π / ( A H j j (β(ί)),
+
+                         )j                               ^l J Uk+ ^ |tα=0 .                  (3.7)
+The derivative -— H is an exponentially decaying function, with the decay rate
+               oB
+δ0 on the ξ-scale, see Proposition 9, (190) [15]. Let us denote
+
+                                                                              Hk(B>)^     .     (3.8)
+
+In the case when dist(ί)(Z, Π)^.M{Uη)~x, this function satisfies the bound
+
+
+
+                                                  on      X,                                    (3.9)
+
+and the same for derivatives and the second order operators applied to it. Using
+the above bound, and the analyticity properties of E ω , we can obtain easily the
+272                                                                            T. Balaban
+
+required bound for (3.7). In the second, simpler case, we obtain the exponential
+factor exp( — δκ{lJη)~~ι) directly from the bound (1.18), here δ is a small, positive
+number. The remaining factor exp( — (1 — δ)κdj(X)) from the bound (1.18) will be
+used in a proof of the inductive assumptions for new terms. Thus in both cases we
+have irrelevant terms.
+      To fulfill the conditions of the inductive assumption we have to construct an
+analytic extension of the expression (3.7). Let us consider more generally the
+function ΈU)(X, QxpiξAUk+1). It is obtained from the analytic function
+E (j) (X,U', JO by the substitution
+          U' = expίξAUk + 1,          J' = DϊxpiζAϋh+ιξ-2πlmdexpiξAUk+1.           (3.10)
+We expand the expression on the right-hand side above with respect to A using the
+formulas (1.43)—{1-54) [14]. We obtain more generally, for any regular configur-
+ation U
+       DfxpiξAl}ξ-2πlmdQχpίξAU     = Dξ*ξ-2πlmdU + D^DiA + F(U,A)9 (3.11)
+where F is a local operator depending on 17,517, A, V&A only. It is the term D^Df A
+in this formula which is a source of a trouble. For A = Hy we have bounds for this
+second order operator, but only if we use the second representation for un-
+connected with the Eq. (180) [15]. We use the fact that H, satisfies the Landau
+gauge condition RD*ϊlj = 0, and we replace the operator D*D by D*D + DRD*
+ = D*D + DD* -DPD* = Δξv-Pί + (lower order, local operator). In the next steps
+we will construct an expansion of H J? and for terms in this expansion we will have
+good bounds, including bounds for the covariant Laplace operator. Such bounds
+do not hold for the operator D*D, and this is the reason why we do not formulate
+second order regularity conditions, as in (1.9) [14], (2) [15], but we replace the
+expression Jj by the new variable J. Consider now the formula (3.11) for U = Uk+x.
+We have
+                        D f ; k + 1 Γ 2 π I m 5 l 7 k + 1 = ( L ^ V Λ + i5        (3.12)
+
+and we replace Jk+1by the variable J, and in the remaining expressions we replace
+Uk+! by the new variable U. Thus we obtain the following function of the variables
+U, J
+                                                            V^A)).          (3.13)
+
+We consider it on the space U*j(X9 l/2α0, l/2αl5 α0) (notice the different constant in
+the bound for J). It is an analytic function on this space, and also an analytic
+function of A, for A, P^A, zl^A sufficiently small. These restrictions can be easily
+obtained from the definition of the spaces, and from the form of the expressions in
+(3.13). Thus, there exists a constant α2, depending on α0 and on some absolute
+constants, such that the function (3.13) is analytic in A, for A satisfying the
+conditions
+                 |A|,      \PXA\,       |F£A|,        |4A|<α2          on X.       (3.14)
+
+Of course, on these spaces of configurations U, J, A the function (3.13) satisfies the
+inequality (1.18).
+Renormalization Group Approach to Lattice Field Theories                                      273
+
+    To get an analytic extension of (3.7) we substitute A = Hj(B(t)) + tπ <...>, with
+functions Up Hk depending on U, J. These functions are given by (179), (180) [15],
+and we replace the configurations Uk+uJk+1 occurring in operators there by the
+configurations U, J. The derivative with respect to tπ, at tπ = 0, can be written as
+the Cauchy integral
+                              -1-:    j    Λ D jrE^(X,...,...),                            (3.15)
+                              lπi\tu\=r         tu
+
+with the radius r given by the equality
+
+                  r max{|(5H7 | x , I P ^ H , ^ , | F ^ H 7 | X , \A&H:\X} = 4 α 2 .
+
+We assume also that ε1 is so small that Hj(B(t)) satisfies (3.14) with l/3α 2 on the
+right-hand side. Thus we have constructed the analytic extension (3.15) of the
+function (3.7), defined on the space
+
+               Ucj(X9^oco,jθίί,oίo)n{(\Ji3):      U, J     satisfy the conditions
+
+       (i)—(iii) for j = k+i, and with the constants (l+/?)α 0 , ( l + j 8 ) α l 9 α 0 } . (3.16)
+This function has the bound
+
+                                                                                1
+                                               ^ Eo exp( - κdj{X))6ocϊ           LjηB0B3
+
+                                                                         1
+                                                                          )\ζΠΆk(B/)\9     (3.17)
+
+following from (3.9). Let us stress that it follows only from the fact that Hj(B(t))
+satisfies (3.14) with l/3α 2 , and δHj satisfies (3.9). Later we will change these
+functions by a localization procedure, but new localized functions will satisfy the
+bounds (3.14), (3.9), hence (3.17) will be preserved also.
+    We remark that the above considerations apply almost without a change to the
+second case, with a big domain X. The only difference is that we do not have the
+exponential factors in (3.9), (3.17) connected with the decay rate of the functional
+ derivative - — H .
+              oB
+     Now we consider the fundamental case, the case when the second condition in
+ (3.5) is satisfied, i.e. when Xc Q 2 . This case includes all localization domains of
+ small sizes, and with small distances to D, hence without obvious small factors.
+The real renormalization problem is connected exactly with this case, and we have
+ to analyze it carefully. To do the analysis we transform the terms in (3.4). We take
+the function Uj constructed for the cube D0 = 0 5 as in the condition (iv) in the
+definition of spaces Up Thus we construct a sequence of cubes { Π J ,
+n = 0,l,...,/c + l, satisfying the conditions (1.3)—(1.6) [14] (with k+ί,L~1η instead
+oϊk,η,R = Rί), hence D4 C • k +1. For this sequence we construct the functions Up
+j = 1,2,..., k + 1 , which we denote by Uj( • 0 ). The configuration in terms of (3.4)
+with localization domains X satisfying I c D 2 can be written as
+
+                                                                        t7ί + 1 ))).       (3.18)
+274                                                                                 T. Balaban
+
+Using the gauge invariance, and similar transformations as in (3.3), we obtain
+
+
+                                                                    ί/ k + 1 ))).       (3.19)
+
+For the expression under the exponential function above we have
+          Q(ξHj(Bπ)) = Qj(ξUj(Bπ)) = ΰ D o n a neighborhood of 0 4 .                   (3.20)
+Later it will be important to have the configuration Bπ only, instead of the
+expression on the left hand side, so we remove from (3.19) a part of this expression
+localized outside D 3 . Take a function ζπ e Q?(D 0 ), ζΏ = 1 on • 3 , ζΏ = 0 outside
+ D 4 . We have
+
+
+
+
+                  tί.Έ(X9          expi€H/D o, (Γ(l - ΓD
+                   ut
+                   , 17/ Π0 , exp iζΏBaM            \Uk+,)))
+
+              J d ? 4 - E (Λ ( x , exp iξ
+              o    αt          V
+
+
+
+
+           x (1 - Γ α ) β ( ξ H / B D ) ) ^ I 7 t + 1 j |ro = 0 .                      (3.21)
+
+Again, from the exponential decay of the derivative (δ/δB)Hp and from the
+condition dist(ξ)(X, supp(l — ζπ)) ^ MiLJηy1, we obtain a bound of the type (3.9)
+for the expression <...> under the exponential. Thus a bound for the second term
+above has the small factor O((Ljη)N), and we treat this term in exactly the same way
+as the terms (3.7) before, i.e. constructing the analytic extensions and proving the
+bounds (3.17).
+    To simplify some formulas in the future we change the first term on the right-
+hand side of the last equality in (3.21). Taking into account the definition of BΏ, we
+write
+        ΓQBΠ=iCπQMt+t D C α )H,(β')) -               QMtζa+ίDCD)H,(F))]+Sa,
+
+
+We remove the expression in the square brackets [...] repeating the procedure in
+(3.21). The expression is localized in D 4 \Π 3 , and the term corresponding to the
+second term in (3.21) has a very similar form and the same properties, so we apply
+the same considerations as before.
+    Thus we consider the expression
+
+
+                                                                                        (3.23)
+Renormalization Group Approach to Lattice Field Theories                                     275
+
+This equality is connected with the way we introduce the variables U, J, namely in
+the interior averages M'(Uk + 1) we replace the configuration Uk+1 by U. The
+function Hfe and the averaging operations Qj in the definition of Bu depend on
+Uk+1. Now we introduce the variables U, J in these expressions in a slightly
+different way. The variable J replaces the function Jk+1 as usual, but the
+configuration Uk + 1 is replaced by the configuration Uk+ί(D0, M'(U))5 extended
+as equal to U outside D0 . We do it in order to get better properties with respect to
+gauge transformations of this configuration, as it will become clear in the future.
+Let us remark that C/fc+ 1 (D θ 5 M'(U)) has approximately the same regularity
+properties as U, hence all necessary theorems are valid for operations with this
+configuration. Thus we consider the function
+
+                      E^XX, l//D 0 , expiBDM ([/ k + 1 (D 0 ,M (U))))).                    (3.24)
+
+In fact we should replace the function EU)(X, Uj) by Eij)(X, Up J3) determined by
+the analytic function E0)(X, U, J), as in (3.13), but this would make the formulas
+even much more complicated, so we will keep the above notation. Taking into
+account the definition (3.22) of Bπ we can write the expression (3.24) as
+
+                 9   t//D0,M'(expiη(tζπ + ί D ί D ) H k ( W * + .(Do,M'(U))))).           (3.25)
+
+This is obviously a well defined and analytic function of the variables U, J in a
+sufficiently small domain. We will prove that it is analytic on the space Uk+ i(Π0>
+(1 + 2β)cc0, (1 + 2β)aί, α0). This space is defined by the same conditions (i)-(iv)> o n ly
+the configurations U, J are defined and satisfy (i)-(iii) on the whole lattice Tη. Let us
+assume this and let us transform further the above function. We repeat the
+constructions of Sect. F [15], and we introduce the same generalized axial gauge
+for the configuration M *(U). This is achieved by a gauge transformation v, and we
+have
+                     V\ |7(&)-l|<0(l)Mα 0 ,               |i;-l|<O(l)Mα 1 .        (3.26)
+
+The variables V can be expressed simply in terms of the contour variables
+introduced in (77) [12], e.g. in the simplest situation for a bond b e D 4 n Γ ( / c + 1 ) we
+have V(b) = \Jk+1(Γyθtb_ubuΓb +>yo). We assume that αθ5 ot1 are chosen so that Mα 0 ,
+Moc1 are still small. We make the next gauge transformation uk+ι changing the
+axial gauge into Landau gauge for the configuration Uk+1(Π0, V), hence
+
+
+                                                      1
+                                                          ( Do, j
+                                                                D 0 ,τlogK
+                                                                                          (3.27)
+                                                                4
+         +1
+              ( Π 0 ,-logF         <B3O(l)Ma0         on      G , for     O^ i 8^ i 8 0
+
+                            |M f c + 1 -l|<B 3 O(l)Mα 0    on       Do.
+276                                                                        T. Balaban
+
+Performing these gauge transformations in (3.25) we obtain
+
+Eω(x,C//π0,M                 ^
+
+
+           x, Uj(Do,expiρ \jlogexp w/(ίΓD + ί D ζ D )H k (B0
+
+
+                                                                               (3.28)
+
+Making use of the gauge invariance of the function (3.25) it is necessary to apply the
+gauge transformations to the variables J, B also, not only to the gauge field
+configurations in (3.26), (3.27). Thus in the function Hfc(£0 the variables J, B are
+replaced by l?(%+11)JR(ι;~1)J, K(wfc~+11).R(£>~1)i?. This is a complication, but not a
+very serious one for the following reasons. First, there are the bounds in (3.26),
+(3.27) for v9 uk+ ί. They imply that the above expressions have almost the same
+bounds as J, B. Second, these gauge transformations are explicitly given analytic
+functions of U, depending on U restricted to the cube D o . This will be important
+later on in a final localization.
+    The functions (3.25), (3.26) are gauge invariant with respect to the simultaneous
+gauge transformations
+                       U->U",        J->JR(ιι)J,         B-+R(μ)B9              (3.29)
+for Gc-valued transformations u in a sufficiently small neighborhood of G-valued
+transformations, so that the configurations after the transformations belong to
+proper spaces also. The expressions in (3.28) transform in a very simple way under
+(3.29), namely by R(μ(y0)) (where y0 is the center of the cube • ) . Of course this is
+connected with the fact that the contour variables V transform this way.
+     In the final localization the function Hk(B') will be transformed into many
+different functions, hence it is important to understand properties of the expression
+obtained from (3.28) by replacing (tζπ + tπζπ)Ή.k(B/) by a gc-valued variable A. Let
+us denote                .                           /    1
+                   A= —logexpwjAexpilΓ^Hfc+J D 0 , τ l o g F
+                        iη                                ι
+                                                     \          /
+                                                                               ( 3 3 0 )
+
+                                             on D o .
+We hope that the last function will not be confused with the fluctuation field
+variable B defined on the lattice T/k). The function B above is defined on the set of
+
+bonds determining l//D 0 ), i.e. on I (J An luDyλ Now we define a class of
+                                         \π = 0     /
+functions A. We assume that A is regular and satisfies the bounds
+
+                      |A|,       |FΆ|,    ||A|| l f / ,<α 2   on   Do,          (3.31)
+
+for Q^β^βo<l.      Obviously such bounds are satisfied by the function (tζπ
+ + tDζπ)Hk(B') for εx sufficiently small. We have similar bounds for the function
+
+        • 0 ,τlog Fj, with α 2 replaced by £ 3 0(l)Mα 0 , and D o by D 4 , see (3.27).
+Renormalization Group Approach to Lattice Field Theories                             277
+
+The assumption (3.31) implies that A satisfies
+             \A\,     \V«A\,    \\A\\Uβ<2(oί2 + B30(l)M(x0)       on D 4 .          (3.32)
+
+These regularity conditions are basic for the further analysis.
+   Thus we consider the function
+
+                                                      , l//D 0 ,expίfl)),           (3.33)
+and we expand it in B up to the fifth order
+
+
+
+
+                    + j d τ ^ ^ - (βs^KX,        l//Π0>expίτB)), (g)BJ .            (3.34)
+
+This is the fundamental expansion for the analysis of renormalization. Such
+expansions with respect to background fields were used many times for this
+purpose, on perturbative and non-perturbative levels for example see [72, 54, 68,
+27, 7, 16, 41-44]. Here we will follow the methods of the papers [7, 43].
+    Let us consider the last term in the expansion (3.34). By the definiton of B and
+by the inequalities (3.32) we have \B\ < O(l)Ljη, hence we expect that this term can
+be bounded by
+                           O(l)exp(-/cd/X))(O(l)L^) 5 .                        (3.35)
+To prove this statement we have to go into rather lengthy considerations. The
+main problem is to investigate analyticity properties of this term on proper spaces.
+    We consider functions in (3.28), or (3.34), on the space L^ C + 1 (Π O ,(1 +2β)oto,
+(1 +2β)ot1, α 0 ) of configurations U, J, and on the space of fields A satisfying (3.31).
+In (3.34), which is of main interest for us, we have configurations U, A only. We
+have to prove that
+
+                 (UjiΠo^xpiτBlJjiDo.QxpiτB^eU^X^o,^)                               (3.36)
+for all U, J, A in the above spaces, and for the parameters τ in the interval [0,1]. We
+will prove a stronger statement, which will allow us eventually to get the bound
+(3.35). The analyticity of the functions in (3.34) follows from the analyticity of the
+two functions in (3.36), and the assumed analyticity of Έϋ)(X, U, J) on the space
+£/5(X, α o , ^ ) .
+    At first let us take A = 0. We have
+         Uj(Π 0 , expiτρ(L- ^Hk +,)) = ( e x p ^ H / ϋ 0 , τβ(L" ^Hk +   1)))u',
+                                                                L^^      on D 3 ,
+                                  7
+                                                                                   (3.37)
+
+Assume now that J B3θ(l)Mα 0 <l/2α 1 , then the orbit of the configuration
+Uj(Π0,...) above contains the configuration exp/£Hy(...) satisfying the conditions
+(i), (ii) on the cube 0 3 , hence on X. We will prove that this configuration satisfies
+278                                                                                    T. Balaban
+
+all the conditions (i)-(iv) The following identity holds:
+                   Un(X, M -(exp^H/D o, τβ(ίΓ ^Uk+1))))
+                      = UH(X9 M XUj(D 0 , expiτβ(IΓ ^ H f c + J ) ) ) ^ " '
+
+
+                      = (expiξH/D o, τβ(L" ^ H f c + J ) ) " ^ " ι ,                       (3.38)
+where ΰy is a gauge transformation constant on blocks naturally connected with
+the function Un(X, •), and equal to Uj at centers of the blocks. This identity and the
+bound on Uj in (3.37) imply that the condition (iv) is a consequence of the condition
+(iii), with a bit better constant, for the pair of configurations
+                  expiξH/     ),       D
+      Using (97) [12], (3.27), (3.26) we obtain for τ = 1
+
+
+
+
+                                                                         -> ^ \            (3.39)
+The assumption that the configuration U belongs to the space                           U£+1(Π0,
+(1 +2β)<x0, (1 +β)a1,<xQ) implies in particular the inequalities
+
+                                                               αo   (L- 1 > 7 ) 2 ,
+                                                               on         D3.
+The first inequality, and the identities (3.39), (3.37) imply
+                |0expiξH/Do,β(IΓ 1 fjH i t + 1 ))-l|
+                                                         o, M (U))-1)1
+
+
+                      x e x p O ^ A M l +2jS)ao(L- ιη)2
+                                       J 1   2 2           3
+                   <(l + 3/?)ao(L - ί?) ξ           on   D ,                               (3.41)
+for a t sufficiently small, e.g. O(l)Ma : ^jS. A similar inequality holds for the
+expression replacing the variable J
+
+
+                                              <(i+3β)a0(Lj~1ηfon                 Π3.       (3.42)
+From the bounds in (3.37), and an elementary inequality, we get
+
+
+             < 8(Blθ(ί)Ma0Lj- ^fξ2 exp4BiO(l)Mα0L- ιη
+                               ^(L i - 1 ^) 2 ξ 2   on   Π3.                               (3.43)
+                                   2
+We assume that (4BlO(ί)M) a0^β. This second restriction is not essentially
+stronger than the first one, because we have already assumed the restriction
+ Renormalization Group Approach to Lattice Field Theories                                                        279
+
+
+          γ^β    on α x . The above inequality and (3.41) yield
+                                   1                                    /       1       2              3
+                |^H/D0?β(L- ^Hk+1))|<(l-f4i9)α0(L - /ί)                                          on Q .        (3.44)
+
+Furthermore, thefunctionH 7 is given by (174) [15] ? i.e.H/D 0 ,J5) = H
+           J
+— HjDj(HijB rAij(B)),    where the functions on the righ-hand side are at least of
+second order, except the first term. This implies
+
+
+                                             j     ι                ι           2                  3
+                   < B3(B30(l)Mot0L -               Ά
+                                                       f   <j8αo(ί/- η)                 on D .                (3.45)
+
+Of course we have used also the exponential decay properties of all the functions
+which appeared above. Thus finally we obtain
+                   ξ                                                                2              3
+                 \d HuJQ(L-        ^ H f c + 0 K 1 + 5β)ao(lJ- 'η)                          on 0 .            (3.46)
+This inequality is linear in Q(...), hence it is valid also for this expression replaced
+by τ<2(...), τ e [ 0 , 1]. From the above considerations it is obvious that we can
+reverse the arguments, thus we obtain (3.44) with τQ(...), and the factor 1 + 6β on
+the right-hand side. Similarly, the inequality (3.43) yields
+                                                                        iϋ-'ηyξ2                   on D 3 .   (3.47)
+                                         j                                  2
+Let us notice that j <; k, hence L η <; 1 and (1 + Ίβ)L~ ^ 1 for β not too large. The
+above inequality is the required first inequality in the condition (ίii). The second
+inequality in this condition is obtained in the same way. We start with (3.42) and we
+use again the formulas and the bounds (1.43)—(1.54) [14]. They give a bound of the
+type (3.44), but for the second order operator dξ*dξ. Then the same reasoning as
+between (3.44)-(3.47) gives the required second inequality in (iii).
+    Now we consider the general case, with A satisfying (3.31). From (3.30) we have
+
+
+
+Q'= Uh ((^QJiηAit^L-^                              + J), η ((^^)(ίi^L^H,^), A\\ , (3.48)
+
+                       Λ(A, L~ 1 H ί c + 1 ) = —                                            fc
+
+The function Q' satisfies the inequality
+
+                           |GΊgO(l)L^|A|<O(l)α2L^                   on D o ,                                  (3.49)
+with an absolute constant 0(1). It is an analytic and almost local function of A and
+Hfc +1 We can prove that for α 2 sufficiently small we still have (3.36). Instead we will
+prove a more general result. We replace τQf by the variable Bf with values in gc, and
+we prove (3.36) for B' satisfying \B'\ < α 3 , with a sufficiently small constant α 3 . To
+prove the conditions (i)—(iv) we write
+
+
+
+
+                                                                                                              (3.50)
+280                                                                                T. Balaban
+
+where the last equality is a definition of A2. It implies
+                            |A 2 |,       \V*A2\£B3\B'\<B3*3,
+and if B3a3 < l/2α l5 then this and the inequality in (3.37) imply the conditions (i),
+(ii). Consider now the derivative
+
+
+
+                                                            on    D3,                  (3.51)
+                                            2
+where we have assumed 2B3oc3 ^ βLΓ α 0 . The above inequality, and the inequality
+(3.43) slightly modified for the present situation, give the bound
+                                                                   ^oξ2     on    O3.(3.52)
+This implies the first inequality in the condition (iii). The second is proved in the
+same way, as it was already discussed. The condition (iv) follows from the
+corresponding identity (3.38). Thus we have proved (3.36) in several versions. Let
+us formulate the one which will be used to bound the terms in (3.34).
+Lemma 4. For U e U'kc+ x (D 0 , (1 + 2β)α0, (1 + 2/OαJ, A defined onΠ0 and satisfy-
+ing (3.31), W defined on the set of bonds connected with the definition of t7/Π θ 5 •)
+and satisfying \B'\<cc3, we have
+           (l/j(D 0 , expz(τ# + 2Γ)), J / D o , expί(τB-h B')))\x e U*j(X, α0, α j        (3.53)
+for α 0 , α l 5 α 2 , α 3 sufficiently small and satisfying all the restrictions. The functions in
+(3.53) are analytic on the above spaces.
+    Let us consider the last term in (3.34). We want to bound it by an expression of
+the form (3.35). We have
+
+                \dτ—-f-
+                                       1
+                   ^ sup       ί
+                      re[O,l] \σ\=r   σ
+                                                j                                      (3.54)
+                       j
+Because \B\ < 0(1)L η, e.g. |ΰ| < ot^η, hence we have the required bound. In fact we
+                                                             4
+have to be more careful, because this bound holds o n Π only. We should localize
+                                    4    4 c
+the inner product in domains • , (• ) , and if at least one factor has a localization
+      4 c                                                                       j
+in (Q ) , then the expression can be estimated by an arbitrary power of L η using
+the exponential decay properties. The considerations are similar to those done on
+several occasions, e.g. (3.6), (3.21), and we do not repeat them. Let us make a final
+remark about the constant in the inequality (3.54). It is much bigger than Eθ9 and
+further bounds and summations will make it worse. Eventually we have to recover
+the constant Eo in the inductive assumption (1.18), and the mechanism for it is
+provided by the differentiation with respect to ίD, at tD = 0. This differentiation
+yields a factor O(l)α2 1 ε 1 , and taking εx sufficiently small we can get the required
+constant.
+Renormalization Group Approach to Lattice Field Theories                                                        281
+
+    The considerations of this section gave a full control over the terms of the
+expansion of the difference Έk(Uk(expίBΎ{k)))-Έk(Uk(Vik))),    except the terms in
+the sum on the right-hand side of (3.34). These terms are connected with the
+renormalization, and we will analyze them in the next section. The remaining
+terms are irrelevant according to our terminology, i.e. they satisfy bounds of the
+form (0.28) on their domains of analyticity.
+
+
+
+4. Ward-Takahashi Identities and Their Consequences
+Let us consider the sum on the right-hand side of (3.34). We can still separate some
+terms which are very small due to the exponential decay. It is convenient to localize
+the configuration B in a neighborhood of the cube D 3 , hence we write
+
+
+
+
+                                                /Do. 1)),((§)ΓDβ) Θ C ® (1 - Γ D ) * ) ) . (4-1)
+where the function ζπ was introduced in the previous section [see the definition
+after (3.20)]. Terms with m < n are exponentially small in Ljη. To see it we write the
+functional derivatives in a form, which will be convenient for other estimates also.
+Consider a more general expression with different functions Bu ...,Bn. Using the
+gauge transformation in (3.37), and the gauge invariance of the function E 0 ) (X, [/),
+we have
+                  Έ^XX, Uj(D 0 , expiB)) = E^(X, expiξUj(Π 0 ,B)).                (4.2)
+Differentiating the composite function on the right-hand side above n times with
+respect to B, we obtain the identities
+
+
+
+                                                                    Xn(p)
+                     / ,          \   »__„ ΛL    ( A , 1 ), LXJ \ TΓZΓΓTΓT -tt/i I I n > ^/?   vAJ       D\
+                        1                   r    v     7                               7             J
+                                                           ^ < \ λΏn\P)      Jx   u
+                     /rr ..   ,., . \ ^ U                                                   ^—^
+                                                                    D
+                                                                                           ieiV(p)
+
+       -Σ       "'                                                                               τ=0
+
+
+                            ^ E ω U ί ί Σ H / D θ ! 0 ) )                              (X) Bt ) . (4.3)
+
+Now, let us recall the considerations connected with the function (3.13). We have
+noticed there that this function is analytic on the corresponding spaces of variables
+U, J, A, and this fact is quite general, valid for an arbitrary domain X. In the last
+formula above we have the function E 0 ) (X, cxpiξA), i.e. the function with U = 1,
+J = 0. Thus it is defined and analytic on the space of configurations A satisfying
+
+                                                      , \VξA\x, \Δ*A\x}«x2 .                                  (4.4)
+282                                                                              T. Balaban
+
+The functional derivative (δn{p))/(δBn{p))Hj(Πo,0) is given by a sum of several
+perturbative expressions discussed in Sect. G [15]. Each expression corresponds
+to a tree graph with n(p) initial points and one final point, and it has an exponential
+decay in a length of this graph. The derivative has an exponential decay in a length
+of a shortest tree graph of this type. The norm in (4.4) of the expression
+
+                                  ^ H / Π o , 0 ) , (X) Bt
+
+can be estimated by B3 f| \Bila n d if o n e °f Λe functions Bt is localized outside
+                         ίeN(p)
+the domain X, then we have the additional exponential factor
+exp( — δ0 dist(ξ)(X, suppi^ )). Consider a term in (4.1) with m < n. Using (4.3) and the
+last remarks we obtain
+
+
+
+                            Eo exp( - κdj(X)) exp( - <S0 dist«>(X, supp(l - f D )))
+
+            x\ζπBr\(l-ζπ)Brm.                                                          (4.5)
+                                                                             j
+The distance in the second exponential is bounded from below by M(L η) ~ \ hence
+we get the exponential factor QX^( — 5QM{LJY\)~x). This implies that the terms in
+(4.1) with m<n are irrelevant.
+    We have to consider the terms with m = n only. They are localized in 0 \ hence
+the function ζπB is defined on the unit lattice T}j\ We denote it simply by B again,
+hence B = ζDQj(ηA).
+    At this point it is convenient to perform the differentiation with respect to ίD, at
+tπ=0. We replace the function A by (tζD + ίDCπ)Hfc(5/), and we differentiate the
+sum over n. It is a simple polynomial in B, and the differentiation yields
+
+
+
+
+                     δB =          Qj{ηΛl   η                                         (4 6)
+                             (JΛ
+                                                   A
+                                                (JA '
+                                                        C Π H
+                                                                ^/})) '
+
+                    A = A^tζπHk(B%L-'Hk +               ί
+                                                         ^Π0,-i\ogV)),
+where
+                            A(A, B) = — log exp ίηA exp iηB.
+
+The fields A and φ/δA)A, ζDHfc(B0> satisfy the bounds (3.32), the second field is
+localized in suppCπ, hence δB is localized in D.
+    The tools to investigate the sum in (4.6) are provided by a set of Ward-
+Takahashi identities. They express gauge invariance of a considered function.
+Take a function E(F) defined and analytic on a domain of small gauge field
+configurations V on a unit lattice, and assume that it is gauge invariant, i.e.,
+                                                                                        (4-7)
+Renormalization Group Approach to Lattice Field Theories                                    283
+
+We assume the gauge invariance with respect to Gc-valued gauge transformations,
+but it is implied by the invariance with respect to G-valued transformations, and by
+the analyticity of the function, as it was noticed already. For a small gauge field
+V = QxpίB, and a small gauge transformation v = expiλ, B and λ small, we have
+
+     Vv(b) = exp iλφ _) exp iBφ) exp( - iλφ+))
+                                                λφ^-λφ+)-iίlλφ_lλφ            +
+                                                                                  )-] + ...),
+
+                                                                                          (4.8)
+
+
+
+
+where the dots denote terms of higher order in λ, and g ~1 (z) = (— z)/(e ~z — 1) = 1
++\z + k2z2 + .... For more remarks about the above equalities and expressions see
+(32)-(41) [12]. Now differentiate the equality (4.7) with respect to λ, at 2 = 0. This
+gives the identity
+
+                    ~E(exPLB), i[2(fc_), Bφ)-]-g-\iadm)            (32) φ)\ = 0           (4.9)
+
+
+holding for all gc-valued functions λ, and small, gc-valued configurations B. It is the
+fundamental identity expressing the gauge invariance of the function E. Let us
+notice that it was derived in exactly the same way as the Ward-Takahashi identities
+for the Abelian Higgs model were derived in (2.23)-(2.28) [7]. We will call the
+identity (4.9) also the Ward-Takahashi identity. From this we derive a whole
+sequence of identities by differentiations with respect to B. For our purpose it is
+enough to consider expressions with four derivatives at most. Let us write the
+corresponding sequence of identities
+
+
+        c*p2   V    ^   /'   A-      Ό
+
+                C                           A
+
+
+
+               j^E(expίB)Jadλ_B1--ίadBίdλ-k2{ίadBιJadB}δλ-...'f                   = 0 , (4.10)
+
+where
+                                         {A,B} = ΆB + BA;
+
+         j^E(QxpίBlίadλ_B-g-1(ίadB)dλ,BuB2
+
+                                  , iadλ_B2--iadBldλ-k2{ίadB2,        ίadB}dλ-...,,
+
+          + CB 1 <-»B 2 )+ ( - — E(exp/5), -k2{ίadBιJadB2}dλ-...          ) -0,          (4.11)
+284                                                                           T. Balaban
+
+where the symbol (Bί*-+B2) denotes an expression obtained from the preceding
+one by the exchange of Bί with B2;
+
+       — ^ E(expiβ), iadλ_B — g 1(ίadB)dλ, Bu B2, B3
+
+             j^ΈiexpiB),iadλ^B3--iadB3dλ-k2{iadBl,iadB}dλ-...,BuB2
+
+
+
+
+             ^E(expiB),...\ = 0 .                                                 (4.12)
+
+We are interested in the above identities at B = 0, because such expressions only
+appear in the sum (4.6). This simplifies them in an essential way. Consider at first
+(4.10)atB = 0
+
+                      , -dλ,B^ + ^ E ( l ) , i a d ^ B ^ - i a d ^ d λ = 0.      (4.13)
+
+For constant λ we get ((δ/δB)Έ(\), ίadλB1} = 0, and since the configuration Bx is
+arbitrary, we get [/I, (δ/δB)Έ(l)~] = 0 for all λ e gc. The group G is semisimple, hence
+this is possible only for the element 0 in the algebra gc. Thus we have the first, very
+important consequence of the gauge invariance
+                                     ^ E ( l ) = 0.                               (4.14)
+
+This equality simplifies the identities, and also the sum (4.6), we can drop the term
+with n = 1. We obtain the following set of Ward-Takahashi identities
+
+
+
+  53
+       —        \BuB2,dλ)-(i-2
+
+
+       δB4 ^s,Bί9B2,B3,dλ}                                                        (4.15)
+
+
+
+
+                       ,Buk2{iadB2,iadB?}dλ
+
+for an arbitrary gauge function λ, and arbitrary gauge fields Bu B2, B3.
+    Applying the above identities to the terms in (4.6) we will get expressions with
+derivatives of the field B. Let us analyze bounds for these derivatives. The field
+           Bμ(x) = B(x, x + eμ) = ζπ(x)Qj(ηA, <x, x + eμ}) = ζu{x)Qhμ{γ]A, x)
+Renormalization Group Approach to Lattice Field Theories                                             285
+
+is defined on the unit lattice T}j\ The operation Qjtfl is translation invariant, i.e.,
+QjtlL(rjA, x + a) = Qjιfl(ηtaA, x), where (taAv) (x) = Av(x + a), a e T^\ hence we have
+the following formula for the derivative dvBμ
+
+              (dvBμ) (x) = ζπ(x + ev)Qjtμ(ηA, x + ev)- ζπ(x)Qjtμ(ηA,                         x)
+                                                         ξ
+                                  =        Σ          ξ(d ζπ)(b)QJ9μ(ηA,x     + ev)
+                                       bC[χ,x + ev]
+
+                                       + ζπ(x)} dt ( ~ Qjt In A + ηt(tevA - A)), η(tevA - A)) ,
+                                               o \όA                                       I
+                                      where xe Tlj),               and for x'eT^,
+     (tevA-A)λM=                            Σ         ξ(dξAλ)φ).                                  (4.16)
+
+The field A is regular on //-lattice, it satisfies the bounds (3.32), hence the derivative
+cξAλ can be bounded by O(\)JJη. The same remark applies to the derivative dξζD.
+More precisely, (3.32) and Proposition 5 [7] on functional derivatives of averaging
+operations imply
+                      \(dvBμ) (x)\ < 0(1) (α 2 + B30(l)Ma0)                 (ljη)2 < ax(Ljη)2 .   (4.17)
+Thus the differentiation increases the power of Ljη by 1, and improves an overall
+bound of an expression. For second order derivatives we have a weaker
+conclusion, because we do not have bounds for second order derivatives of the field
+A, only for Holder norms of first order derivatives in (3.32). They imply the bound
+                                 \(dλdvBμ)(x)\<a1(tiη)2 + β,                0^^0<1,               (4.18)
+by similar considerations as in the proof of (4.17). The inequalities (4.17), (4.18) hold
+for the field δB also.
+    We begin the analysis of (4.6) introducing simpler notations. We drop the
+superscript (/) in (4.6), and denote
+
+                                                                                         (
+                             ^     ,         l / / D 0 , 1 ) ) = E<">(Z),   or simply E "\        (4.19)
+
+                        n
+        {n)                                                  n)
+hence E is a (X)g-valuedfunction Έμ u...,μn(xi, . . . 5 x j defined on a neighborhood
+    4
+of D in the unit lattice T^\ and
+
+                                       (4-6) = Σ 7 - ^ T 7 ( E ( " } , δB, "(X) B) .              (4.20)
+                                                 n = 2\n—    1)1    \             I
+
+Let us consider the third term in the above sum. We apply the same method which
+was used in [7], see especially (3.25)—(3.32) [7]. We write
+
+
+
+
+         (μ,χ),...,(μ3,X3)
+286                                                                              T. Bataban
+
+Because of the bound (4.17) the second term on the right-hand side above should
+have a bound of the form (3.35). To prove it we use the identities (4.3) again. There
+is a problem now, connected with the facts that the last factor (dBμ)(Γx X3) is a
+function of two points instead of one, and it has the bound \(dBμ3)(ΓXiX3)\
+ < (XiiUη)2 \ΓXfX3\. The length \ΓXyX3\ = |x 3 — x| is in £-scale, so it can be very big (of the
+order O(M(Ljη)~x) for points x, x3 in Π 4 , but far apart. We have to use the
+exponential decay properties to get a proper bound. Consider two possible cases.
+In the first the points x, x3 are connected with the same set N(p) in (4.3). Then the
+exponential factor, with a length of a shortest tree graph in the exponent, yields the
+factor exρ( — δ0 \x3 — x|), and the product of it with \x3 — x\ is bounded by 6$ 1. The
+second case is more complicated, the points x, x 3 are connected with different sets
+in a partition, and we apply the identities (4.3) with localizations at the points x, x 3
+fixed, i.e. with the summations over x, x 3 left undone. A term corresponding to
+such a partition can be estimated by
+
+            3   —X Eo exp( - κdj(X) - δ0 dist«>(X, x)
+
+        - δ0 dist«>(X, x 3 )) \B\2 \δB(x)\ \(dB) (Γ, iXs )|
+
+      < Σ
+where x 0 is a fixed point in X. The exponential decay factors with δi are
+determined by the three factors on the left-hand side, therefore the decay rate is
+rather poor, δx = O(M~ *), because of the factor with κdj(X). Summing over x, x 3
+we get finally the following estimate
+                                       /
+                                       α                      \4
+  |(the second sum in (4.21))|^ 32£ 3 -^ 0 ((S 1 )c 1 (<5 1 )      Qxp(-iκdj(X))(Ljη)5,
+                                              α
+                                       \          2           /
+                                                                                     (4.22)
+hence this sum in (4.21) represents an irrelevant term. More generally, let us notice
+that by a similar argument we can bound the derivative E ( π ) (X,x l 9 ...,xM) by a
+constant times the exponential
+                             exp(-O(ί)κd£Xv{xl9...9xn}))9
+where dj{Xv{xl9..., xn}) is a length of a shortest tree graph connecting cubes D
+building the domain X, and points xl9 ...,xπ. This bound is enough to prove
+bounds of the type (4.22), although with a worse constant.
+    Consider now the first sum in (4.21). The last factor Bμ3(x) is constant as a
+function of x 3 , and we have
+
+                  Bμ3(x) = (dμ3λx) (x 3 ),   λx(x3) = £ (* 3 .v- *v)*v(*)            (4-23)
+                                                        v=l
+
+The first sum can be written as <E (4) , δB, B, B, dλx}, where we have indicated the
+dependence on x explicitly. We apply the third identity in (4.15) taking into acount
+the special role of the first variable x. It is simplest to differentiate this identity with
+respect to Bu take B2 = B3 = B,λ = λx, and then multiply by δB(x) and sum over x.
+Renormalization Group Approach to Lattice Field Theories                                                                     287
+
+We get
+                     <E(4>, δB, B, B, dλx) = 2<E (3) , δB, B, i[λx, B]-$i[B,                               dλj)
+                                                                    3
+                                                           + <E< >, i [ 4 , <5B] -ftδB,              δλxl B, β>
+                                                                        2)                    2
+                                                           -2<E< ,              δB,k2(iadB) dλxy
+                                                           -2<E< 2 >, k2{iadB, iadδB}dλx,              B} .                (4.24)
+Now we analyze successively all the terms on the right-hand side. For the last term
+we have as in (4.21),
+
+      (E^\{iadB,iadδB}dλx,B)
+             =          Σ            <E<ί ) μ i (x,x 1 ),{iαd J , μ W ,iad 4 B μ W }β μ (x),B / 1 1 (χ)>
+                 (μ,x),(μi,xi)
+
+
+                 +            Σ         <E^ 1 (x,x 1 ),{ίαί B μ ( J φ κ«ί 4 1 ) μ ( ; e ) }5 μ (x),(55 ί , 1 )(r X ) j e i )>. (4.25)
+                     (μ,x),(μί,χί)
+
+
+In the first sum above we write again Bμi(x) = (3μiAx) ( x j , and by the first identity
+in (4.15) this sum equals 0. The second sum can be bounded as in (4.22), hence it is
+irrelevant. The second function in the term before the last is equal to
+
+
+                                                       = h ίadBμiiXl)ίl(dBμi)           (ΓXtXί), B μi (x)] ,
+
+hence this term is irrelevant also. Consider the second term on the right-hand side
+in (4.24). The first function in it is equal to - l/2i[<5Bμ(x), Bμ(xy]9 because λx(x) = 0.
+We apply again the same procedure as in (4.21), or (4.25), and it yields
+    - i < E ( 3 ) , ilδB, B], £, B} = - i < E ( 3 ) , i[_δB, JB], B, dλx)
+                                                    + (the irrelevant term)
+
+
+                                                                                 9
+                                                                                     BJ\ -ϊίVίδB,         B], dλxl B)
+                                                    -f- (the irrelevant term)
+
+
+                                                    +i<E ( 2 ) 9 ip[δB,B],B],B>
+                                                    + (the irrelevant terms),                                              (4.26)
+where we have used again the equalities
+ilBμι(Xl),       (dλx)μι(Xly]          = ilBμι(Xl),       B μi (x)] = WBJ             (ΓXtXι), B,,(x)],            λjx) = 0.
+The second term on the right-hand side of the last equality in (4.26) is treated as in
+(4.25), hence it is irrelevant and we obtain
+                       -i<E ( 3 >, /[δB, B], B, £> - -i<E<2>, i[δB, B], i [ 4 , £]>
+                                                                   + (the irrelevant terms).                               (4.27)
+
+Finally consider the first term on the right-hand side of (4.24). This term with the
+function — l/2ΐ[B, dλx~\ is irrelevant, by the equality written after (4.26). We apply
+288                                                                               T. Bataban
+
+the procedure in (4.21) to the term with i\_λx,B~\
+
+
+        2<E<3>, δB, ilλX9 B], £> = 2<E<3\ δB, i\_λx, B], dλx}
+                                   + (the irrelevant term)
+                                 = 2<E<2>, δB9 ilλx, ilλx, B]] - iiplλc Bl dλj >
+                                   + 2 < E ( 2 ) , iiλx, δB] - i p B , a y , ί[
+                                   + (the irrelevant term)
+
+
+
+                                   -<E<2U<5B,B],i[4,B]>
+                                   + (the irrelevant term).                           (4.28)
+
+We can still simplify expressions in the last equalities in (4.27), (4.28), replacing all
+fields B by their values at the point x. The difference B() — B(x) = (dB) (Γx .) gives
+rise to irrelevant terms. Thus the equalities (4.21), (4.24), and the simplified
+equalities (4.27), (4.28) yield
+
+
+   E<4), δB, 0B\   = 2<E<2\ δB, ίlλx, ilλx, B(x)]]> - <E<2\ δB, i\
+
+
+                      + (the irrelevant terms).                                       (4.29)
+
+   Let us consider now the second term in the sum (4.20). Again, we apply the
+procedure in (4.21), but we expand the last factor up to second order around the
+point x. We have the following Taylor's formula on a unit lattice, analogous to the
+formula (3.10) [7]
+
+
+
+
+                                                                                      (4.30)
+
+where [Γxy[μ denotes the part of the contour /^parallel to the μ-th axis, including
+the initial point and excluding the final point. This formula is applied to the
+function Bμs(x3) at y = x3. By (4.18) the last term on the right-hand side can be
+estimated by 2l^,jc 3 l 2 α i(^) 2 + ^ with a positive β. For the expression
+    (3)      (2)                                                  (2
+<E ,B,B,B >, with this last term inserted in the place of B \ it implies the
+bound (4.22) with the power 4 + β instead of 5 in the last factor. Hence this is an
+irrelevant term. Let us denote
+
+
+                                     Σ
+                                     v= 1
+Renormalization Group Approach to Lattice Field Theories                                              289
+
+We have
+
+     / E ( 3 ) , δB, (g) fl\ = <E ( 3 ) , δB, B, dλx) + <E ( 3 ) , δB, B, B(-, x)>
+                                + (the irrelevant term)
+                             = <E ( 2 ) , δB, ilλx, B] - i ί [ B , dλj)-i<E(2),      i[_δB, B], B)
+                                       (3)
+                                + <E , δB, B( , x), δ/ίx> + (the irrelevant term)
+                             = <E<2>, δB, i[_λ
+
+
+                               -\-\ML, ,0D, ιιλx,r>{',x)] —2ι\_t>y',X), Cλx\)
+                                - i<E ( 2 ) , i[δB, B], B( , x)> + (the irrelevant terms)
+                             = <E ( 2 ) , δB, i\_λx, B(x)]> + 2<E ( 2 ) , (55, z[Ax, B( , x)]>
+                               -<E<2>,<5B,ί[B(.,x),B(x)]>
+                               - <E ( 2 ) , ί[δB, B], B( , x)> + (the irrelevant terms).             (4.31)
+Here, in the last equality, all fields and their derivatives are taken at the point x.
+    Thus we have reduced the analysis of the sum in (4.20) to the expression
+involving the functions E ( 2 ) only. We will investigate these functions carefully in
+the next section, now we will draw further consequences of the gauge in variance.
+The basic identity (4.9) holds for all gauge transformations, hence for constant
+transformations it is E(expi7?(i;)B) = E(expiB), and it implies
+
+                        <E ( 2 ) , R(v)B, R(v)B} = <E ( 2 ) , B,B),          veG.                 (4.32)
+
+The corresponding function E{^v(x, y) has values in the tensor product g® g, and
+the above identity implies
+
+                            R(υ)® R(v)Ef\(x,       y) = Ef\(x,     y),      veG.                  (4.33)
+
+The infinitesimal form of this identity is a consequence of (4.11), or the second
+identity in (4.15). An element E in g(x)g can be identified with the matrix Eab of
+components in the basis {τα(χ)τ&}, τa are generators of the algebra g, or with the
+bilinear form <E, A®By on g. With our assumptions on the group G the identity
+(4.33) holds for E if and only if Eab is proportional to the identity matrix, Eab = Eδab,
+and then <E,A®By = EtrAB. This gives a further simplification of the ex-
+pressions in (4.29), (4.31).
+    Let us write the result of the preceding analysis
+
+    (4.6) =      Σ          E£>V(X, x, y) tvδBμ(x)Bv(y)
+              (x,μ),(y,v)
+
+
+              + Σ Σ (ΣV?Mx,χ,y)(yκ-χκ)(yχ-χJ
+                  x μ, v,κ, λ \ y
+
+              x {trδBμ(x)iίBκ(x), ( 3 A ) (*)] +^rδBμ(x)i[Bκ(x), i[Bλ(x), Bv(
+
+              + Σ Σ (Σ K2Mχ> *> y) (yκ - χκ)) \ I tvδBμ(x)iiBκ(x),                     B V (X)]
+290                                                                                        T. Balaban
+
+              X                                          X
+                    v        )        (x), B v (x)] -     -tvδBμ(x)i[_Bμ(x\     (dκBx)   (x)]
+
+
+                                 κ
+                                     {x\ B v (x)], B v (x)]
+
+
+                    μ
+                        x)i\_Bμ{x\      i[BK(x),Bv(x
+
+           + (the irrelevant terms).                                                            (4.34)
+The sums over x above are restricted to suρp<S2?C •, and the sums over y are
+restricted to s u p p B c s u p p ^ . The expressions in this formula are local poly-
+nomials in the fields δB, B. The first expression on the right-hand side, which is
+simply <E ( 2 ) (X), δB, B}, is not analyzed yet. We will analyze it in the next section
+using momentum representation and symmetries. The second expression is
+already in an almost correct form; we have to use only Euclidean symmetries to
+reduce it to a final form. By the Euclidean symmetries the third expression should
+vanish.
+    To make use of the Euclidean symmetries we have still to make changes and
+resummations of the expressions in (4.34). At first we have to change the function
+£7/Π 0 ) used in the definitions of E (n) (X). For n = 2, and by the identity (4.14), the
+formula (4.3) yields                   2
+
+                    E(2)(X) = / JpE(X, 1),ff/Do),H/po)\ .                                       (4.35)
+
+If we replace Hj(Ώ0) by Hj with free boundary conditions, then the difference
+Hj( D 0 ) — Hj restricted to X x supp<fD, yields the factor Bo exp( - δ0M(Ljη) ~ *) in a
+bound of the corresponding expression. Thus this change increases the sum of the
+irrelevant terms by the expression of the form (4.34), but with very small
+coefficients. Next, we extend summations over y to the whole lattice Z 4 . The
+difference between the sum over suρp<fD and the sum over Z 4 is a sum over a subset
+of ( D 3 ) c n Z 4 . This gives again the exponentially small coefficients. Finally, the
+crucial step is an extension of the sum over localization domains X. In this section
+we consider the expressions with the localization domains X satisfying the
+condition X C • 2 , for a given cube D. The expressions with localization domains,
+which do not satisfy this condition, are exponentially small in LJη, either because
+the domains are large, or because their distances to D are large. We have analyzed
+it in Sect. 3. Of course we have the sum over all X e D 7 in (3.7), the sum connected
+with the representation (1.7) of E°λ This sum was divided into two subsums for a
+                                                                                  2
+given D, and in this section we consider this subsum for which X e D^, X c Q . We
+extend it to all X e D^, where Dj is the class of localization domains constructed
+for the lattice ξZ4. More exactly we make this extension for all explicitly written
+terms in (3.34), not for irrelevant terms. This means that we sum the function
+E ( 2 ) (X) over X e D j , because the other expressions do not depend on X. The
+difference between the two sums gives a function satisfying the following inequality
+
+
+
+
+                                                        (-δ 1 |x-3;|),    for      xeD,         (4.36)
+hence, substituting it into (4.34), we get an irrelevant expression again.
+Renormalization Group Approach to Lattice Field Theories                                 291
+
+   Thus, after all the changes and resummations, we obtain an expression which is
+equal to this in (4.34), with the function Έμ2\(X, x, y) replaced by
+                                       Πμ,v(x,y) = Σ Έ™(X,x,y)9                         (4.37)
+                                                 XeΌf
+
+and the irrelevant terms resummed over X eΌp XcQ 2. The function Π is called
+the vacuum polarization tensor. We will investigate it in the next section.
+    In this and the previous sections we were concerned with the term
+EU)(Uk(expiBΎ{k)))-E{j)(Uk(V{k)))  in the fluctuation field action. There is the
+second term under the sum over j , the term
+
+                          βjigj. 0 (A(l//expiBΎ(fc>)) - Λ(Uk(V^))).                     (4.38)
+We localize it by the partition of unity connected with the partition πp and we
+apply to it the whole procedure of these two sections. As a result we obtain all the
+well controlled terms, and the terms in (4.34) with the function E ( 2 ) replaced by the
+corresponding function calculated for the expression (4.38). By (4.35) it is equal to
+
+
+            ydxl       χ,μ<v
+                   ξ
+     = βJ<gj-1)<d HJ{Π0)9ζπ.d%{Π0)>9                       Π'επj.                       (4.39)
+                                                                                    4
+Replacing the functions Hj(Π0) by Hj and summing over all D' in £ Z yields the
+following expression, as the expression corresponding to (4.37)
+
+                                βjiθj-1) <dξHj9 dξHj) = βj(gj_ ι)Δj,                    (4.40)
+where Aj is given by the explicit formula (1.66) [10]. This formula allos us to
+understand clearly a final form of the expression (4.34) in this case. The function
+Ajμv(x — y) in the momentum representation of (1.66) has the following expansion
+around 0:
+         Aj,μv(p') = Ao(p')δμv — d1μ(p')dl(p') + (tevms of higher order in //),         (4.41)
+see (1.29)—(1.37) [10] for an explanation of symbols used in connection with
+momentum representations. This implies that the first term in (4.34), written for
+(4.40) instead of E ( 2 ) , is represented as
+              βji9j-i)ί          Σ tτ(dδB)μv(x)(dB)μv(x)    + (irrelevant terms).       (4.42)
+                               x,μ,v
+
+
+In the second term we have the expression
+
+     βj(gj-ί)ΣΛj,μAχ-y)(yκ-χκ)(yλ-χλ)=-βj(gj-1)(j^-Alμ)i(0)
+
+
+
+Using this equality we represent the second term as
+
+              ;•- I) Σ trδBμ(x) {ι[Bv(x), (δB)μv(x)'] + i[B μ (x), (dvBv) (x)]
+                       χ,μ,v
+
+            + i[(3vBJ (x), B,(x)] + j[B v (χ), HBJx), B v (x)]]}.                       (4.44)
+292                                                                                           T. Balaban
+
+In the third term we have the expression
+
+          βj(9j-i) Σ Λ,,v(* - y) (yκ - *κ) = βjiθj- ,) ( T / r ΔhΛ ι   a
+                                                                                   (0) = 0,      (4.45)
+                   y                                           \        Pκ    /
+
+hence this term vanishes. Thus the only terms in the expansion of (4.38), which we
+do not control yet, more exactly for which the sum over j has not a uniform bound,
+are terms (4.42), (4.44). In the next section we will prove that the polarization tensor
+Π has a similar structure as the operator Aj9 especially it has an expansion of the
+form (4.41), but with a coefficient. We define the /^-function βj(gj_1) equal to this
+coefficient. The corresponding terms from (4.34) are equal to (4.42), (4.44) also,
+hence both groups of terms cancel, because (4.38) appears with the minus sign in
+the effective action (1.6).
+
+
+
+5. The Analysis of the Vacuum Polarization Tensor and the jS-Functions
+
+The vacuum polarization tensor is defined by the formula (4.37) of the previous
+section. From this it follows that it can be defined also as
+
+
+
+
+This representation is basic for the further analysis, because it implies symme-
+tries of the tensor. The function Eu\Uj(QxpίB)) is invariant with respect to all
+Euclidean symmetries r of the lattice Tfj\
+                E 0) (l7/exp irB)) = Eu\r L7/exp ίB)) = E 0 ) (l//exp iB)),                        (5.2)
+where the fields rU,rB are defined by the identity (rll)(rb)= U(b), hence
+                       (rU)(b) =U(r~1b),            (rB)(b) = B{y-1b).                             (5.3)
+The invariance (5.2) yields the following covariant transformation law for the
+polarization tensor:
+                                    Π(rb,rbf) = Π(b,br),                                           (5.4)
+where Π is extended to negatively oriented bonds by the equality Π( — b,b')
+= —Π(b,b'\ similarly for the second argument. We would like to get the
+representation (4.41) for the function
+
+                        Πμv(x, y) = JI(<x, x + eμ>, <j, y + e v » .                                (5.5)
+Unfortunately the Euclidean covariance (5.4) takes on a more complicated form
+for this function. We formulate it explicitly in two special cases, which we will
+use in the sequel. If r is a transformation defined by a permutation π:
+(rx)μ = xπ-ιiμ), then the equality (5.4) can be written as
+                 Πμv(rx, ry) = Πn - Hμh π - 1 ( v ) (x, y) = ((r®r)Π)μv(x9   y).                   (5.6)
+Renormalization Group Approach to Lattice Field Theories                                         293
+
+If r is a reflection in a part of the components of x: rx = εx, (εx)μ = εμxμ, εμ = ± 1,
+μ = l , ...,d, then (5.4) can be written as
+                K, εx + εμeμ}, (εy, εy + εvev)) = Π((x, x + eμ}, <y, y + ev)).
+This and the definition (5.5) yield
+
+                                             • εy — τ ^ ~ ev)     = ε ε
+                                                                     μ
+                                                                         vΠμv(χ,   y) •        (5.7)
+
+The function Π is also translation invariant and symmetric, hence
+                    J7 μ v (x, 3;) = Πμv(x - y),         Πμv(x) = Πvμ( -x).                    (5.8)
+The gauge in variance, expressed in the first identity (4.15), implies
+                            X d*Πμv{x -y)=Σ            SvΠμv(x   -y) = 0.                      (5.9)
+                            μ                      v
+
+   The representation (4.37) yields the following inequality
+                                                                 δt\x-y\),                    (5.10)
+with a positive constant δ1 determined by δ0, K, and M (e.g.,
+δ1 = l/2min{(50, /cM"1}). Take the momentum representation of this tensor
+                                x
+          Πμv(p)=    Σ e-^ Π (x)
+                     Σ              μv   9         Πμv(x) = (2πΓ4μPeίx             p
+                                                                                    Πμv(p),   (5.11)
+                        4
+                      Z
+                    xeZ4
+the integration over p with components pμ satisfying \pμ\^n. The function
+Πμv(p) is periodic in variables pμ, with the period 2π. By the inequality (5.10) it
+can be extended as an analytic function to complex variables ζμ = pμ + iqμ,
+\qμ\<δ1. This property is the basic reason why we have taken the infinite
+volume limit in (5.1). Let us write the symmetry properties (5.6)—(5.9) for the
+function Πμv(ζ)\
+                  Πμv(rζ) = ((r®r)Π)μv(ζ)              if r is a permutation,                 (5.12)
+
+                                                                               )πμv(ζ),       (5.13)
+
+                                         ^ ( 0 =^ - 0 ,                                       (5.14)
+                            Σ dμ( - 0Πμv(ζ) = Σ δΛOΠ^ίί) = 0,                                 (5.15)
+
+where dμ(ζ) = eiζμ-l.
+   We will analyze this function using the above properties only. Our goal is to
+prove a representation of the form (4.41), more exactly of the form
+Πμv(p) = β(δμvA(p)~dμ(p)dv(p)) + (terms of higher orders in derivatives d{p),d(p)),
+                                                                                              (5.16)
+and to find the coefficient β. To prove bounds for the expression in (4.34)
+connected with the remainder in the above representation, it is important to
+write it explicitly as a higher order polynomial in d(p),d(p) with analytic
+294                                                                                             T. Bataban
+
+
+coefficients. We obtain such a representation using some simple expansion
+connected with the Laurent series expansion. It was used already in [43] for a
+similar purpose. To use this expansion we have to choose properly new
+variables. Because of the periodicity properties of the function Πμv(ζ) it is
+natural to choose the variables zμ = βlζμ, hence we define
+
+                                                                               e~δ"<\zμ\<eδ\        (5.17)
+                                        \l                  I        J
+
+or
+
+
+                                                                                  δl
+The functions fμv(z) are analytic on the polyring χ{e                               <\zμ\<eδί], and the
+properties (5.12)—(5.15) imply the following ones: μ
+                   fμv{rz) = ((r®r)f)μv(z)              if r is a permutation,                      (5.18)
+
+
+[here zε = (zV,..., ff)\
+                                             fμM=U(z~ι),                                            (5.20)
+                                    1
+                           Σ(z; -l)/ μ v (z)= Σ(^v-l)/μv(z) = 0.                                    (5.21)
+                           μ                            v
+
+    Now, a given function /(z) analytic on the ring {e~δι<\z\<eδι} can be
+represented as f(z) = g+(z) + g~(z~ι\ where g+{z\g~(z) are analytic on the disc
+{|z|<e δl }. This representation is obtained by taking regular and singular parts
+of the Laurent expansion. It is unique up to an additive constant, and it can be
+made unique requiring some normalization conditions. These conditions de-
+pend on the property (5.19). Consider cases with one component of ε equal to
+ — 1. If the index of this component is different from μ, v, then the transformation
+law in the one variable is f(z~i)=f(z).              The normalization condition
+g+(0) = g~(0) implies then g~(z) = g+(z), and we have the representation /(z)
+ = g{z) + g{z~1), g(z) = g+{z). If the index is equal to μ, then the transformation
+law is f(z~ί)= — z~1f(z). The normalization condition g+(0) = 0 implies g~(z)
+ = —z~ιg+{z), and we have f(z) = g(z) — zg(z~1). Finally, if the index is equal to
+                1                                                     1
+v, then /(z~ )= — zf(z\ and the normalization condition g~ (0) = 0 implies
+             +                      1    1
+g~(z)=-zg (z% f(z) = g(z) — z~ g(z~ ). Applying these representations to the
+functions fμv(z), to each variable separately, we obtain
+                                             Jμ\\Δ)—   Zjσμvv^ /5                                    \J.ΔJLJ
+                                                       ε
+                                                                                               δl
+where the functions gμv{z) are analytic on the polydisc X{\zμ\<e }. They
+                                                        μ
+satisfy the normalization conditions:
+                      (ε',ε λ = + l,ε")/y Π /') — cr^'' ε ^ = ~ ^"J/V Π z")                         ί5 23)
+
+for the indices λ different from μ, v, if μ φ v, or for all the indices λ9 if μ = v;
+                               +1   ε                       εμ=    1 ε )   /
+                  g(ε\εμ= > ")(z\09z") = g^'                      ~ ' " (z , 0, z") = 0,            (5.24)
+Renormalization Group Approach to Lattice Field Theories                                                   295
+
+if μφv. These normalization conditions and the transformation laws (5.19)
+imply the equalities
+
+
+                       (   1 >       + 1)
+Denoting gμv(z) = g μv' "        '          (z), we get the following representation:
+                             f f-\— V P P 7 ( 1 - ε μ ) / 2 7 - ( l - ε v ) / 2 o . /_ε\                 (*> Ί&\
+                            J W V ^ Z J— 2-ι U v U            V                  σuvv   /*                ^J.ZίU^
+                                                 £
+
+
+Let us now write properties of the functions gμv(z) equivalent to the properties
+(5.18H5.20). The equalities (5.18) are equivalent to
+                       gμv(rz) = ((r®ήg)μv(z)                              if r is a permutation.        (5.27)
+The equalities (5.19) are implied by the form of the representation (5.26). The
+equalities (5.20) are equivalent to
+                                                 gjz) = z;1zμgvμ(z).                                     (5.28)
+From the definition of the function fμv(z%                                          we have also the following
+representation:
+                                             /μv(*)= Σ z-χΠμv(x),                                        (5.29)
+                                                                       d
+                                                             xeZ
+
+hence the terms of the representation (5.22) are obtained by restricting corre-
+spondingly the range of the summation in (5.29). This implies that all these
+terms, and in particular the function gμv(z% are real functions for real variables z.
+It is possible also to write the gauge invariance (5.21) in terms of the functions
+gμx(z), but it is much simpler to investigate its consequences later on, for
+simplified representations.
+     The first step to get (5.16) is to expand the functions gμv(z) up to the third
+order around the point (1,...,1)=1,
+                                                 d           \         ,     1                    id
+                             .       -       i       ^
+
+
+                Σ (zκ-
+              κ,λ,ρ                                                Zθ                \CZκ0Zλ0Zρ
+                 λ
+
+
+         =ZgμvW+Σaμv,κ(ZK-1)+^                                   Σ           bμy%κλ(Zκ-\){Zλ-\)
+                       K                                 ^       κ,λ
+
+            + Σ gμv,κλί(z)(zκ-i)(zλ-ί)(ze-i).                                                            (5.30)
+              K, λ,ρ
+
+
+
+The coefficients a, b and the functions g above are real for real values of z, the
+                                                  δl
+functions are analytic on the polydisc \{\zμ\<e }.       Let us investigate the
+                                           μ
+coefficients. The properties (5.27) imply
+                                                                                           lz)          (531)
+                                                                                 (έ)~
+296                                                                                                       T. Balaban
+
+for all permutations r, identically for higher order derivatives, hence
+                   a
+                    μv,ρ=            Σ rμκrvλrQϋaκλtσ,                the same for bμVtKλ.                    (5.32)
+
+This implies that all the coefficients aμvκ with three different indices are equal,
+similarly all the coefficients aμμv with μΦv are equal, and so on. The same
+conclusions hold for bμvκλ.
+    Now we substitute the expansion (5.30) into the representation (5.26). Only
+the first three terms on the right-hand side of (5.30) may contribute to the basic
+second order operator in (5.16), the third order terms in (5.30) give rise to the
+higher order terms of the remainder in (5.16). They have also the desired
+analyticity properties. Some of the lower order terms in (5.30) generate higher
+order terms also. Writing explicitly only the lower order terms, and making
+simple algebraic transformations, we finally get the following representation:
+                                                  -(z;1 -            ί)(zμ-1)]
+
+
+
+                                                         1
+                                tμ   + bμμt μμ){zμ           -
+
+                   + Σ [/^K
+                        K,λ,Q
+
+
+                         μ            ρ            ;             .       l       ,                            (5.33)
+
+where the dots denote summation over other possible third order monomials in
+z " 1 —1, z —1. The coefficients / ' are analytic functions on the polyring in (5.17).
+Let us make a few comments about the above formula. For z = l we get fμv(l)
+ = δμv2dgμμ(l), hence / μv (l) = 0 for μφv. Differentiating the second identity in
+(5.21) with respect to zμ and taking it at the point 1 yields /^(l) = 0, hence
+gμμ(l) = 0 by the above equality. Thus the whole term in the first line on the
+right-hand side of (5.33) is equal to 0. Now we investigate consequences of the
+gauge invariance (5.21) for the explicitly written lower order terms in (5.33). We
+multiply (5.33) by zv —1, sum over v, and we obtain an expression identically
+equal to 0. This expression is an analytic function in a neighborhood of the
+point 1. Expanding it into a power series we obtain a system of equations from
+the fact that the coefficients of this power series are equal to 0. We have to
+consider third order terms only, and the equations are
+           gμv()          μv,μ            μv   , v ~ 4bμv> μv = 2(dμμ> v + feμμ, v v )   for   // φ V ,
+                                                                                                              (5.34)
+          &μμ\*)       ^μμ,μ     •" ^®μμ, μ             *μμ,μμ=          A^μμ,μ ' ®μμ, μμ) '
+Denoting the left-hand side of these equations by — βμv, we have
+
+
+
+We have discussed already the consequences of the symmetries (5.32). They
+imply that all the coefficients βμv for μΦv are equal. Denoting the common
+Renormalization Group Approach to Lattice Field Theories                                                         297
+
+value of 2d~2βμv         by β9 we get
+                fμv(z) = β/δμvYj(z~1-l)(zκ-l)-(z;1-l)(zv-l))                                      + ... .        (5.36)
+                                            κ
+                                   \                                                          J
+This is the desired representation of the functions /μv(z). Using the relations
+(5.17) and substituting zμ = eiPμ9 we obtain finally
+                                 Πμv(p) = β(δμvA(p) ~ W)dM                    + Π'μv(p).                         (5.37)
+The function Π'μv(p) has all the symmetries of the function Πμv(p) and it can be
+written in the form of a third order polynomial in the derivatives d(p), d(p),
+      Π'μJp)=       Σ ίΠ'μv<κφ)dκ(p)dλ(p)dβ{p)                      + Π'μ^λQ{p)dκ(p)5λ{p)dβ{p)+             ...-] .(5.38)
+                  K,    λ,Q
+
+
+
+The coefficients W can be extended to analytic functions of ζ = p-\-iq on the
+polystrip X { l l ^ }
+            μ
+
+   It remains to calculate the coefficient β, i.e., to express it in terms of the
+tensor 77. We have
+
+                                                      μ         μ   , μ μ ,            , )
+                                                                                       μ μv                     (5.39)
+for μφv, e.g., for μ = l, v = 2. The representation (5.26) yields
+
+
+                                                                         (Zl,z2,l)).                             (5.40)
+Differentiating it with respect to zuz2,                        at z 1 = z 2 = l, we obtain
+
+
+                                                                                                   tl2) = β9     (5.41)
+
+and
+                        id2                       \         ί       d2        \
+
+
+for μ Φ v. This is the fundamental equality defining the β-function.
+    Let us finish now the analysis of the previous section. The first term on the
+right-hand side of (4.34), after all the changes and resummations, and using
+(5.37), (5.38), can be written as
+                    Σ                  Πμv(x-y)trδBμ(x)Bv(y)
+                (x,μ),(y,v)
+
+                   = βi Σ tr(dδB)μv(x)(dB)μv(x)
+                              x, μ, v
+
+
+                         +                Σ               \.Tl^κλe{x-y)ir(dκdλdβδBμ)(x)Bv{y)
+                              (x,μ),(y,v),κ,λ,ρ
+
+
+                         + Π'μVt Kt λQ (x ~ y) tr(dλdρδBμ)(x)(dκBv)(y)                 +...].                   (5.43)
+
+The analyticity properties mentioned after (5.38) imply the corresponding
+exponential decay properties of the functions in the above formula. More
+exactly, we have
+                                                                    (5.44)
+298                                                                               T. Bataban
+
+In the third order terms in (5.43) we can always shift the derivatives onto the
+other function, so we can write them in the form in which SB is differentiated
+once, and B twice. The bound (5.44), and the bounds (4.14), (4.15) for derivatives
+of δB, B imply that all these third order terms in (5.43) are irrelevant. Defining
+the function βj as equal to the coefficient β in (5.43), we see that the first
+expression there is cancelled by the first expression in (4.42). The second term
+on the right-hand side of (4.34) is equal to (4.44), and is cancelled by this
+expression. The third term is equal to 0. In both cases we have used the fact that
+the first and second order derivatives of the function Π'μv(p) vanish at p = 0, so
+we have to calculate the corresponding expressions in (4.34) for the first term on
+the right-hand side of (5.37). These calculations are the same as in (4.43), (4.45).
+     Thus we have finished the analysis of the fluctuation field effective action in
+(2.13) from the point of view of analyticity properties and bounds. We have
+transformed this action in such a way that a uniform bound is clear. The terms
+of the transformed action have also good analyticity properties, but they are
+still nonlocal in the fluctuation and the background field; more exactly they do
+not have localization properties connected with good bounds. In the next paper
+we will construct such localizations and prove the bounds. They are used to
+construct a cluster expansion of the integral in (2.13), and to finish the proof of
+the inductive assumptions for the term E ( f c + 1 ) defined by (2.13).
+     Finally, let us make some remarks about the functions E(n\ obtained by the
+changes and the resummations of the functions Έ{n\X) in (4.3), and about the β-
+functions. In this section we have analyzed the function E ( 2 ) = i7 using the
+symmetry properties and the analyticity properties of the momentum represen-
+tation. We can do a similar analysis for the higher functions, e.g., for E (3) , E (4) ,
+again using the symmetry properties, especially the Ward-Takahashi identities
+(4.15). We can represent these functions as sums of basic marginal operators
+with the coefficient β, and higher order operators leading to irrelevant terms.
+Then we can use this representation to analyze the whole expression (4.3) in the
+same way as the term with E ( 2 ) was analyzed in (5.43). This would give a
+method alternative to that applied in the previous section. It is connected,
+unfortunately, with a lot of technicalities and calculations of an algebraic
+character, and it seems that the method presented in the last section is more
+clear and simpler. The β-functions are related in the simple way to the tensors
+Π by the formula (5.42). In fact we should write the superscript (j) at the tensor
+in the formula (5.42) defining the function βj. We write βj as explicitly
+dependent on g^u although it depends also on all preceding coupling con-
+stants. The dependence on g 7 _! is important and it determines main properties
+of the renormalization group equations.
+
+
+References
+ 1. Abers, E., Lee, B.W.: Gauge theories. Phys. Rep. 9, 1 (1973)
+ 2. Baaquie, B.: Gauge fixing and mass renormalization in the lattice gauge theory. Phys. Rev.
+    D16, 2612-2627(1977)
+ 3. Baίaban, T., Gawedzki, K.: A low temperature expansion for the pseudoscalar Yukawa
+    model of the quantum fields in two space-time dimensions. Ann. Inst. H. Poincare 36,
+    271-400 (1982)
+Renormalization Group Approach to Lattice Field Theories                                         299
+
+  4. Balaban, TV. Ultraviolet stability for a model of interacting scalar and vector fields. Aarhus
+      Universitet, Matematisk Institut, preprint series 1981/1982, No. 19. An extended version in
+      Harvard preprints HUTMP 82/B 116 and B 117
+  5. Balaban, T.: (Higgs)2 3 quantum fields in a finite volume. I. A lower bound. Commun. Math.
+      Phys. 85, 603-636(1982)
+  6. Balaban, T.: (Higgs)2>3 quantum fields in a finite volume. II. An upper bound. Commun.
+      Math. Phys. 86, 555-594 (1982)
+  7. Balaban, T.: (Higgs)2 3 quantum fields in a finite volume. III. Renormalization. Commun.
+      Math. Phys. 89, 411^445 (1983)
+  8. Balaban, T.: Regularity and decay of lattice Green's functions. Commun. Math. Phys. 89,
+      571-597 (1983)
+  9. Balaban, T.: Renormalization group methods in non-abelian gauge theories. Harvard
+      preprint HUTMP 84/B 134, or Recent results in constructing gauge fields. Physica 124 A,
+      79-90 (1984)
+ 10. Balaban, T.: Propagators and renormalization transformations for lattice gauge theories. I.
+      Commun. Math. Phys. 95, 17-40 (1984)
+ 11. Balaban, T.: Propagators and renormalization transformations for lattice gauge theories. II.
+      Commun. Math. Phys. 96, 223-250 (1984)
+ 12. Balaban, T.: Averaging operations for lattice gauge theories. Commun. Math. Phys. 98,
+      17-51 (1985)
+ 13. Balaban, T.: Propagators for lattice gauge theories in a background field. Commun. Math.
+      Phys. 99, 389-434 (1985)
+14. Balaban, T.: Spaces of regular gauge field configurations on a lattice and gauge fixing
+      conditions. Commun. Math. Phys. 99, 75-102 (1985)
+15. Balaban, T.: The variational problem and background fields in renormalization group
+     method for lattice gauge theories. Commun. Math. Phys. 102, 277-309 (1985)
+16. Balaban, T.: Ultraviolet stability of three-dimensional lattice pure gauge field theories.
+      Commun. Math. Phys. 102, 255-275 (1985)
+17. Balaban, T., Imbrie, J., Jaίfe, A.: Exact renormalization group for gauge theories In: Progress
+     in gauge theories, pp. 79-104, 1983 Cargese Lectures. Lehmann, G., t'Hooft, G., Jaffe, A.,
+     Mitter, P., Singer, I., Stova, R. (eds.). New York: Plenum Press 1984
+18. Balaban, T., Imbrie, J., Jaffe, A.: Renormalization of the Higgs model: minimizers,
+     propagators and the stability of mean field theory. Commun. Math. Phys. 97,299-329 (1985)
+19. Benfatto, G., Cassandro, M., Gallavotti, G., Nicolό, F., Olivieri, E., Presutti, E., Scaciatelli,
+     E.: Some probabilistic techniques in field theory. Commun. Math. Phys. 59,143-166 (1978)
+20. Benfatto, G., Cassandro, M., Gallavotti, G., Nicolό, F., Olivieri, E., Presutti, E., Scaciatelli,
+     E.: Ultraviolet stability in Euclidean scalar field theories. Commun. Math. Phys. 71,95-130
+     (1980)
+21. Benfatto, G., Gallavotti, G., Nicolό, F.: Elliptic equations and Gaussian processes. J. Funct.
+     Anal. 36, 343^00 (1980)
+22. Brydges, D., Frόhlich, J. Seiler, E.: On the construction of quantized gauge fields. I. General
+     results. Ann. Phys. 121, 227-284 (1979)
+23. Brydges, D., Frόhlich, J., Seiler, E.: Construction of quantized gauge fields. II. Convergence
+     of the lattice approximation. Commun. Math. Phys. 71, 159-205 (1980)
+24. Brydges, D., Frόhlich, J., Seiler, E.: On the construction of quantized gauge fields. III. The
+     two-dimensional abelian Higgs model without cutoffs. Commun. Math. Pyhs. 79, 353-399
+     (1981)
+25. Brydges, D.: A short course on cluster expansions. Lectures given at the XLIΠ session of 1984
+     Les Houches Summer School on: Critical Phenomena, Random Systems, Gauge Theories
+26. Cammarota, C : Decay of correlations for infinite range interactions in unbounded spin
+     systems. Commun. Math. Phys. 85, 517-528 (1982)
+27. Dashen, R., Gross, D.: Relationship between lattice and continuum definitions of the gauge
+     theory coupling. Phys. Rev. D23, 2340-2348 (1981)
+28. Eckmann, J.-P., Magnen, J., Seneor, R.: Decay properties and Borel summability for the
+     Schwinger functions in P(φ)2 theories. Commun. Math. Phys. 39, 251-271 (1975)
+300                                                                                    T. Baίaban
+
+29. Faddeev, L., Popov, V.: Feynman diagrams for the Yang-Mills field. Phys. Lett. 25 B, 29-30
+    (1967)
+30. Feldman, J., Osterwalder, K.: The Wightman axioms and the mass gap for weakly coupled
+    (φ% quantum field theories. Ann. Phys. 97, 80-135 (1976)
+31. Feldman, J., Magnen, J., Rivasseau, V., Seneor, R.: The infrared behaviour of φ\ (in
+    preparation)
+32. Feldman, J., Magnen, J., Rivasseau, V., Seneor, R.: Methodes pour la theorie constructive
+    des champs renormalisable, asymptotiquement libres. Proceedings of RCP 25, Strasbourg,
+    June 1984
+33. Feldman, J., Magnen, J., Rivasseau, V., Seneor, R.: Bounds on completely convergent
+    Euclidean Feynman graphs. Commun. Math. Phys. 98, 273-288 (1985)
+34. Feldman, J., Magnen, J., Rivasseau, V., Seneor, R.: Bounds on renormalized Feynman
+    graphs. Commun. Math. Phys. 100, 23-55 (1985)
+35. Federbusch, P.: A phase cell approach to Yang-Mills theory. I. Small field modes. II.
+    Stability, modified renormalίzation group transformations. University of Michigan
+    preprints
+36. Gallavotti, G., Martin-Lόf, A., Miracle-Sole, S.: Some problems connected with the
+    description of coexisting phases at low temperature in the Ising model. In: Statistical
+    mechanics and mathematical problems, pp. 162-202. Lenard, A. (ed.) Lecture Notes in
+    Physics, Vol. 20. Berlin, Heidelberg, New York: Springer 1973
+37. Gallavotti, G.: Renormalization theory and ultraviolet stability for scalar fields via
+    renormalization group methods, preprint Dipartamento di Matematica, II Universita degli
+    studi di Roma, 1984
+38. Gallavotti, G., Nicolό, F.: Renormalization theory in four-dimensional scalar fields I and II.
+    Commun. Math. Phys. 100, 545-590 (1985); 101, 247-282 (1985)
+39. Gawedzki, K., Kupiainen, A.: Renormalization group study of a critical lattice model. I.
+    Convergence to the line of fixed points. Commun. Math. Phys. 82, 407-433 (1981)
+40. Gawedzki, K., Kupiainen, A.: Renormalization group for a critical lattice model. Commun.
+    Math. Phys. 88, 77-94 (1983)
+41. Gawedzki, K., Kupiainen, A.: Rigorous renormalization group and asymptotic freedom. In:
+    Scaling and self-similarity in physics, pp. 227-262, Frόhlich, J. (ed.). Boston: Birkhauser 1983
+42. Gawedzki, K., Kupiainen, A.: Block spin renormalization group for dipole gas and (Vφ)4.
+    Ann. Phys. 147, 198-243 (1983)
+43. Gawedzki, K., Kupiainen, A.: Massless lattice φ\ theory: rigorous control of a renormaliz-
+    able asymptotically free model. Commun. Math. Phys. 99, 197-252 (1985)
+44. Gawedzki, K., Kupiainen, A.: Asymptotic freedom beyond perturbation theory. Lectures
+    given at 1984 Les Houches Summer School on: Critical Phenomena, Random Systems,
+    Gauge Theories. Harvard preprint HUTMP 85/B177
+45. Gell-Mann, M., Low, F.: Quantum electrodynamics at small distances. Phys. Rev. 95,
+    1300-1312 (1954)
+46. Glimm, J., Jaffe, A.: Positivity of the φ% Hamiltonian. Fortschr. Phy. 21, 327-376 (1973)
+47. Glimm, J., Jaffe, A., Spencer, T.: The Wightman axioms and particle structure in the P(φ)2
+    quantum field model. Ann. Math. 100, 585-632 (1974)
+48. Glimm, J., Jaffe, A., Spencer, T.: The particle structure of the weakly coupled P(φ)2 model and
+    other applications of high temperature expansions. Part I: Physics of quantum field models.
+    Part II: The cluster expansion. In: Constructive quantum field theory, pp. 132-242. Velo, G.,
+    Wightman, A. (eds.). Lecture Notes in Physics, Vol. 25. Berlin, Heidelberg, New York:
+    Springer 1973
+49. Glimm, J., Jaffe, A., Spencer, T.: A convergent expansion about mean field theory. I. The
+    expansion. II. Convergence of the expansion. Ann. Phys. 101,610-630 (I), 631-669 (II) (1976)
+50. Glimm, J., Jaffe, A.: Quantum physics: a functional point of view. New York, Heidelberg,
+    Berlin: Springer 1981, a new edition in preparation
+51. Gruber, C, Kunz, H.: General properties of polymer systems. Commun. Math. Phys. 22,
+    133-161 (1971)
+Renormalization Group Approach to Lattice Field Theories                                    301
+
+ 52. t'Hooft, G.: Renormalization of massless Yang-Mills fields. Nucl. Phys. B 33,173-199 (1971)
+ 53. t'Hooft, G.: Renormalizable Lagrangians for massive Yang-Mills fields. Nucl. Phys. B35,
+      167-188 (1971)
+ 54. Honerkamp, J.: The question of invariant renormalizability of the massless Yang-Mills
+      theory in a manifest covariant approach. Nucl. Phys. B48, 269-287 (1972)
+ 55. Imbrie, J.: Renormalization group methods in gauge field theories. Lectures given at the
+      XLVIII session of 1984 Les Houches Summer School on: Critical phenomena, random
+      systems, gauge theories. Harvard preprint HUTMP 85/B176
+ 56 Kadanoff, L.: Notes in Migdal's recursion formulas. Ann. Phys. 100, 359-394 (1976)
+ 57. Kadanoff, L.: The application of renormalization group techniques to quarks and strings.
+      Rev. Mod. Phys. 49, 267-296 (1977)
+58. King, C : The U(ί) Higgs model. I. The continuum limit. II. The infinite volume limit.
+      Commun. Math. Phys. 103, 323-349 (1986)
+59. Kunz, H.: Analyticity and clustering properties of unbounded spin systems. Commun. Math.
+      Phys. 59, 53-69 (1978)
+60. Kunz, H., Souillard, B.: Manuscript
+61. Magnen, J., Seneor, R.: The infinite volume limit of the φ\ model. Ann. Inst. Henri Poincare
+      24,95-159(1976)
+62. Magnen, J., Seneor, R.: Phase space cell expansion and Borel summability for the Euclidean
+      φ% theory. Commun. Math. Phys. 56, 237-276 (1977)
+63. Magnen, J., Seneor, R.: The (Vφ)4 model. CPTh preprint, Ecole Polytechnique
+64. Osterwalder, K., Seiler, E.: Gauge field theories on a lattice. Ann. Phys. 110,440^71 (1978)
+65. Polchinski, J.: Renormalization and effective Lagrangians. Nulc. Phys. B 231,269-295 (1984)
+66. Ruelle, D.: Statistical mechanics. New York: Benjamin 1969
+67. Seiler, E.: Gauge theories as a problem of constructive quantum field theory and statistical
+     mechanics. Lecture Notes in Physics, Vol. 159. Berlin, Heidelberg, New York: Springer 1982
+68. Shigemitsu, J., Kogut, J.: A study of A parameters and crossover phenomena in SU(N)
+      xSU(N) sigma models in two dimensions. Nulc. Phys. B 190 [FS3], 365-411 (1981)
+69. Symanzik, K.: Small distance behaviour in field theory and power counting. Commun.
+     Math. Phys. 18, 227-246 (1970)
+70. Symanzik, K.: Small-distance-behaviour analysis and Wilson expansions. Commun. Math.
+     Phys. 23, 49-86(1971)
+71. Varadarajan, V.S.: Lie groups, Lie algebras and their representations. New York: Prentice-
+     Hall 1974
+72. De Witt, B.: Quantum theory of gravity. II. The manifestly covariant theories. III.
+     Applications of the covariant theory. Phys. Rev. 162, 1195-1239 (I), 1239-1256 (II) (1967)
+73. Wilson, K.G.: Confinement of quarks. Phys. Rev. D 10, 2445-2459 (1974)
+74. Wilson, K.G.: Quantum chromodynamics on a lattice. In: Quantum field theory and
+     statistical mechanics, pp. 143-172, 1976 Cargese Lectures, Levy, M., Mitter, P. (eds). New
+     York: Plenum Press 1977
+75. Wilson, K.G.: Monte Carlo calculations of the lattice gauge theory. In: Recent developments
+     in gauge theories, pp. 363-402, 1979 Cargese Lectures. t'Hooft, G., Itzykson, C, Jaffe, A.,
+     Lehmann, M., Mitter, P., Singer, L., Stora, R. (eds.). New York: Plenum Press 1980
+76*. Feldman, J., Magnen, J., Rivasseau, V., Seneor, R.: A renormalizable field theory: the
+     massive Gross-Neveu model in two dimensions. Commun. Math. Phys. 103, 67-103 (1986)
+77*. Gawedzki, K., Kupiainen, A.: Gross-Neveu model through convergent perturbation
+     expansions. Commun. Math. Phys. 102, 1-30 (1985)
+
+
+Communicated by A. Jaffe
+
+
+Received September 23, 1985; in revised form March 31, 1986
+

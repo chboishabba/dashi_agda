@@ -1,0 +1,236 @@
+{
+  "authority": {
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "theorem_authority": false
+  },
+  "contract": "preregistered_frozen_packet_coercivity_trace_comparison_nonpromoting",
+  "event_rule": "first adjacent positive-input/viscous-loss window starting at or after the sampled frozen-packet peak with ratio <= 1",
+  "factor_decline_fraction": 0.8,
+  "traces": [
+    {
+      "authority": {
+        "candidate_only": true,
+        "clay_authority": false,
+        "empirical_non_promoting": true,
+        "promoted": false,
+        "theorem_authority": false
+      },
+      "backend": "gpu",
+      "contract": "ns_normalized_profile_quotient_audit_nonpromoting",
+      "endpoint_frozen_packet_ratio": 0.1123491209482769,
+      "factors": {
+        "components": {
+          "alignment": {
+            "decline_threshold": 0.07451971847820503,
+            "first_postpeak_decline_time": 1.875,
+            "prepeak_maximum": 0.09314964809775629,
+            "value_at_endpoint": 0.02260969848492986,
+            "value_at_peak": 0.06444799350584714
+          },
+          "forcing": {
+            "decline_threshold": 189.29892037540233,
+            "first_postpeak_decline_time": 1.875,
+            "prepeak_maximum": 236.6236504692529,
+            "value_at_endpoint": 42.38842476228228,
+            "value_at_peak": 153.70274645098104
+          },
+          "geometry": {
+            "decline_threshold": 0.13024140012961596,
+            "first_postpeak_decline_time": 1.875,
+            "prepeak_maximum": 0.16280175016201995,
+            "value_at_endpoint": 0.10028762625728481,
+            "value_at_peak": 0.11170664346426715
+          }
+        },
+        "decline_fraction": 0.8,
+        "maximum_absolute_factorisation_residual": 4.440892098500626e-16,
+        "status": "available"
+      },
+      "frozen_balance_trapezoid_residual": 0.00693350505731094,
+      "peak": {
+        "packet": 1.1416038260092563,
+        "time": 1.562
+      },
+      "postpeak_gamma_sample_downcrossing_time": 1.875,
+      "postpeak_gamma_window_downcrossing": {
+        "end_time": 1.875,
+        "positive_coercivity_ratio": 0.9973814257049944,
+        "positive_nonlinear_input": 0.05931251339008033,
+        "start_time": 1.562,
+        "viscous_loss": 0.05946823538262261
+      },
+      "receipt": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_coercivity_panel/baseline_parabolic.json",
+      "trace_count": 50,
+      "warning": "finite-Galerkin descriptive comparison only; shape metrics are secondary and no causal ordering is inferred from this report"
+    },
+    {
+      "authority": {
+        "candidate_only": true,
+        "clay_authority": false,
+        "empirical_non_promoting": true,
+        "promoted": false,
+        "theorem_authority": false
+      },
+      "backend": "gpu",
+      "contract": "ns_normalized_profile_quotient_audit_nonpromoting",
+      "endpoint_frozen_packet_ratio": 0.11357468366077848,
+      "factors": {
+        "components": {
+          "alignment": {
+            "decline_threshold": 0.07465790044285027,
+            "first_postpeak_decline_time": 2.188,
+            "prepeak_maximum": 0.09332237555356283,
+            "value_at_endpoint": 0.025264404396771144,
+            "value_at_peak": 0.057315234431116746
+          },
+          "forcing": {
+            "decline_threshold": 190.36021750517193,
+            "first_postpeak_decline_time": 2.188,
+            "prepeak_maximum": 237.9502718814649,
+            "value_at_endpoint": 42.65711284094402,
+            "value_at_peak": 147.45714926916511
+          },
+          "geometry": {
+            "decline_threshold": 0.1311419918658276,
+            "first_postpeak_decline_time": 2.188,
+            "prepeak_maximum": 0.16392748983228447,
+            "value_at_endpoint": 0.09998584239895973,
+            "value_at_peak": 0.10784645938435429
+          }
+        },
+        "decline_fraction": 0.8,
+        "maximum_absolute_factorisation_residual": 4.440892098500626e-16,
+        "status": "available"
+      },
+      "frozen_balance_trapezoid_residual": 0.0069344494580372285,
+      "peak": {
+        "packet": 1.1457633676025936,
+        "time": 1.875
+      },
+      "postpeak_gamma_sample_downcrossing_time": 2.188,
+      "postpeak_gamma_window_downcrossing": {
+        "end_time": 2.188,
+        "positive_coercivity_ratio": 0.8306460509374556,
+        "positive_nonlinear_input": 0.052449824685083454,
+        "start_time": 1.875,
+        "viscous_loss": 0.06314341063307206
+      },
+      "receipt": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_coercivity_panel/radial_neg_0p04_parabolic.json",
+      "trace_count": 50,
+      "warning": "finite-Galerkin descriptive comparison only; shape metrics are secondary and no causal ordering is inferred from this report"
+    },
+    {
+      "authority": {
+        "candidate_only": true,
+        "clay_authority": false,
+        "empirical_non_promoting": true,
+        "promoted": false,
+        "theorem_authority": false
+      },
+      "backend": "gpu",
+      "contract": "ns_normalized_profile_quotient_audit_nonpromoting",
+      "endpoint_frozen_packet_ratio": 0.11221915034501372,
+      "factors": {
+        "components": {
+          "alignment": {
+            "decline_threshold": 0.0744606537147108,
+            "first_postpeak_decline_time": 1.875,
+            "prepeak_maximum": 0.0930758171433885,
+            "value_at_endpoint": 0.026316291540731906,
+            "value_at_peak": 0.06454145798576308
+          },
+          "forcing": {
+            "decline_threshold": 189.32913553489576,
+            "first_postpeak_decline_time": 1.875,
+            "prepeak_maximum": 236.6614194186197,
+            "value_at_endpoint": 42.018183088536325,
+            "value_at_peak": 153.73599184118288
+          },
+          "geometry": {
+            "decline_threshold": 0.13024140006312648,
+            "first_postpeak_decline_time": 1.875,
+            "prepeak_maximum": 0.1628017500789081,
+            "value_at_endpoint": 0.10032774587970103,
+            "value_at_peak": 0.11169844324743977
+          }
+        },
+        "decline_fraction": 0.8,
+        "maximum_absolute_factorisation_residual": 4.440892098500626e-16,
+        "status": "available"
+      },
+      "frozen_balance_trapezoid_residual": 0.006936042881992011,
+      "peak": {
+        "packet": 1.1420652199017012,
+        "time": 1.562
+      },
+      "postpeak_gamma_sample_downcrossing_time": 1.875,
+      "postpeak_gamma_window_downcrossing": {
+        "end_time": 1.875,
+        "positive_coercivity_ratio": 0.9977932557481553,
+        "positive_nonlinear_input": 0.05936465585524679,
+        "start_time": 1.562,
+        "viscous_loss": 0.05949594819693844
+      },
+      "receipt": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_coercivity_panel/phase_pos_0p04_parabolic.json",
+      "trace_count": 50,
+      "warning": "finite-Galerkin descriptive comparison only; shape metrics are secondary and no causal ordering is inferred from this report"
+    },
+    {
+      "authority": {
+        "candidate_only": true,
+        "clay_authority": false,
+        "empirical_non_promoting": true,
+        "promoted": false,
+        "theorem_authority": false
+      },
+      "backend": "gpu",
+      "contract": "ns_normalized_profile_quotient_audit_nonpromoting",
+      "endpoint_frozen_packet_ratio": 0.11228539237757072,
+      "factors": {
+        "components": {
+          "alignment": {
+            "decline_threshold": 0.07493827617510514,
+            "first_postpeak_decline_time": 1.875,
+            "prepeak_maximum": 0.09367284521888142,
+            "value_at_endpoint": 0.026563603735673003,
+            "value_at_peak": 0.06480079626001953
+          },
+          "forcing": {
+            "decline_threshold": 189.46902455074408,
+            "first_postpeak_decline_time": 1.875,
+            "prepeak_maximum": 236.8362806884301,
+            "value_at_endpoint": 43.35515040774193,
+            "value_at_peak": 152.94931819539212
+          },
+          "geometry": {
+            "decline_threshold": 0.1302414001409603,
+            "first_postpeak_decline_time": 1.875,
+            "prepeak_maximum": 0.16280175017620038,
+            "value_at_endpoint": 0.10073294022971972,
+            "value_at_peak": 0.11169131832114941
+          }
+        },
+        "decline_fraction": 0.8,
+        "maximum_absolute_factorisation_residual": 4.440892098500626e-16,
+        "status": "available"
+      },
+      "frozen_balance_trapezoid_residual": 0.006975056962213122,
+      "peak": {
+        "packet": 1.1430262788688381,
+        "time": 1.562
+      },
+      "postpeak_gamma_sample_downcrossing_time": 1.875,
+      "postpeak_gamma_window_downcrossing": {
+        "end_time": 1.875,
+        "positive_coercivity_ratio": 0.9972051525980744,
+        "positive_nonlinear_input": 0.059370544720566916,
+        "start_time": 1.562,
+        "viscous_loss": 0.059536941386519625
+      },
+      "receipt": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_coercivity_panel/coherence_pos_0p04_parabolic.json",
+      "trace_count": 50,
+      "warning": "finite-Galerkin descriptive comparison only; shape metrics are secondary and no causal ordering is inferred from this report"
+    }
+  ]
+}

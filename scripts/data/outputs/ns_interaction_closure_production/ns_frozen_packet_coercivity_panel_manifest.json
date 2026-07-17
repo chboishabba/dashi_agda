@@ -1,0 +1,74 @@
+{
+  "contract": "preregistered_frozen_packet_coercivity_panel_nonpromoting",
+  "authority": {
+    "empirical_non_promoting": true,
+    "theorem_authority": false,
+    "clay_authority": false
+  },
+  "comparison_rule": "same saved state reference, finite critical mass, positive signed-chi admissibility band, GPU backend, dt, frozen packet radius, .25T window, and 50-point mechanism trace",
+  "entries": [
+    {
+      "id": "baseline",
+      "stage_a_static_arguments": [
+        "--n", "32", "--nu", "0.001", "--target-shell", "2", "--critical-mass", "1.0",
+        "--state-input", "scripts/data/outputs/ns_interaction_closure_production/N32j2_profile_positive_chi_attempt1_state.npz",
+        "--chi-sign", "positive", "--chi-target", "0.16518290321070614", "--chi-tolerance", "0.05",
+        "--require-chi-tolerance", "--target-dominance-min", "0.8"
+      ],
+      "stage_b_short_residence_additions": [],
+      "stage_c_medium_residence_additions": [],
+      "stage_d_parabolic_window_additions": [
+        "--evolve", "--backend", "gpu", "--window-c", "0.25",
+        "--checkpoint-fractions", "0,1", "--mechanism-trace-count", "50"
+      ]
+    },
+    {
+      "id": "radial_neg_0p04",
+      "stage_a_static_arguments": [
+        "--n", "32", "--nu", "0.001", "--target-shell", "2", "--critical-mass", "1.0",
+        "--state-input", "scripts/data/outputs/ns_interaction_closure_production/N32j2_profile_positive_chi_attempt1_state.npz",
+        "--state-perturbation", "radial", "--perturb-epsilon", "-0.04", "--perturb-seed", "20284935",
+        "--chi-sign", "positive", "--chi-target", "0.16518290321070614", "--chi-tolerance", "0.05",
+        "--require-chi-tolerance", "--target-dominance-min", "0.8"
+      ],
+      "stage_b_short_residence_additions": [],
+      "stage_c_medium_residence_additions": [],
+      "stage_d_parabolic_window_additions": [
+        "--evolve", "--backend", "gpu", "--window-c", "0.25",
+        "--checkpoint-fractions", "0,1", "--mechanism-trace-count", "50"
+      ]
+    },
+    {
+      "id": "phase_pos_0p04",
+      "stage_a_static_arguments": [
+        "--n", "32", "--nu", "0.001", "--target-shell", "2", "--critical-mass", "1.0",
+        "--state-input", "scripts/data/outputs/ns_interaction_closure_production/N32j2_profile_positive_chi_attempt1_state.npz",
+        "--state-perturbation", "phase", "--perturb-epsilon", "0.04", "--perturb-seed", "20265764",
+        "--chi-sign", "positive", "--chi-target", "0.16518290321070614", "--chi-tolerance", "0.05",
+        "--require-chi-tolerance", "--target-dominance-min", "0.8"
+      ],
+      "stage_b_short_residence_additions": [],
+      "stage_c_medium_residence_additions": [],
+      "stage_d_parabolic_window_additions": [
+        "--evolve", "--backend", "gpu", "--window-c", "0.25",
+        "--checkpoint-fractions", "0,1", "--mechanism-trace-count", "50"
+      ]
+    },
+    {
+      "id": "coherence_pos_0p04",
+      "stage_a_static_arguments": [
+        "--n", "32", "--nu", "0.001", "--target-shell", "2", "--critical-mass", "1.0",
+        "--state-input", "scripts/data/outputs/ns_interaction_closure_production/N32j2_profile_positive_chi_attempt1_state.npz",
+        "--state-perturbation", "coherence", "--perturb-epsilon", "0.04", "--perturb-seed", "20277872",
+        "--chi-sign", "positive", "--chi-target", "0.16518290321070614", "--chi-tolerance", "0.05",
+        "--require-chi-tolerance", "--target-dominance-min", "0.8"
+      ],
+      "stage_b_short_residence_additions": [],
+      "stage_c_medium_residence_additions": [],
+      "stage_d_parabolic_window_additions": [
+        "--evolve", "--backend", "gpu", "--window-c", "0.25",
+        "--checkpoint-fractions", "0,1", "--mechanism-trace-count", "50"
+      ]
+    }
+  ]
+}

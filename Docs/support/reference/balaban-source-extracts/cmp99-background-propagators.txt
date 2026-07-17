@@ -1,0 +1,2202 @@
+                                                                      Communications in
+Commun. Math. Phys. 99, 389^34 (1985)                                    M    t   h   ΐ   l
+                                                                             Physics
+                                                                      © Springer-Verlag 1985
+
+
+
+
+Propagators for Lattice Gauge Theories in a
+Background Field
+
+T. Balaban*
+Department of Physics, Harvard University, Cambridge, MA 02138, USA
+
+
+    Abstract. We prove regularity and decay properties for propagators connected
+    with the renormalization group method in lattice gauge theories. These
+    propagators depend on an external gauge field configuration, called a back-
+    ground field.
+
+
+Introduction
+
+This is the third paper on propagators in renormalization group method for lattice
+gauge field theories. In the two previous papers [3, 4] we have investigated
+propagators for renormalization transformations applied to the simplest Abelian
+gauge field theory action 1/2 Σ ηd\(dΆ)(p)\2. This action is obtained by an
+                                    p^τη
+expansion of Wilson's action for a general lattice gauge field theory. The reader
+is referred to the papers [9,10,7,6,1,5] for definitions. If a gauge field configuration
+U, with values in a compact Lie group G c U(N% is represented as U(x, x') =
+expiηA(x,x% where <x,x'> is a bond of the lattice T and A is a configuration
+with values in the Lie algebra g of the group G, then
+             A"(U)= Σ >Λ 4 [l
+
+
+                      pczTη                          a   p^τη
+                                               a
+where A eg is represented as A = ΣA ta,            ta are generators of the algebra. We
+                                           a
+assume that they are normalized, i.e. tr tatb = δab. The above expansion may be
+viewed as an expansion of the action around the configuration identically equal
+to 1. In [1] it was explained that in our method we have to consider operators
+obtained by an expansion around more general configurations, for example one
+of the minimal configurations Uk described there. Here we consider operators
+obtained by expansions around arbitrary regular configurations Uo. The averaging
+
+
+* Research supported in part by the National Science Foundation under Grant PHY-82-0369
+390                                                                               T. Balaban
+
+operators and gauge fixing conditions depend on Uo too. We will consider operators
+analogous to the operators Gfc, Hk, G'k, Rk introduced and investigated in the
+papers [3, 4]. Now they are much more complicated and they depend on ί/0, but
+we will prove regularity and exponential decay properties analogous to the
+properties proved in these papers. We will give formulations of theorems later in
+the text of this paper, because they demand a lot of preparatory definitions and
+are quite complicated and technical, but the reader, who wants to get some idea
+of the results, is advised to look at [2-4].
+    We will use the notations, the methods and the results of [1-5]. Let us remark
+only that in this paper a norm \X\ of a N x N matrix means the Hilbert-
+Schmidt norm: \X\2 = tr X*X.
+
+A. Definitions of Basic Operators and Formulations of Results
+A main term in the operators we will consider in this paper is defined by second
+order terms in an expansion of the action Aη(U) around a configuration Uo. Let
+us write this expansion up to second order terms. We take U=U'U0,            U'=
+exp iηA, and we assume only that ηA is in a sufficiently small neighbourhood of
+0 in the Lie algebra g. We have
+
+                       A'{U'U0)=      Σ ^-4[l-Retr(t/'ί/0)(δp)],
+                                     p<=τn
+
+                   tτ(U'U0)(dp) = tr(d0U')((p)z)U0(dp),                                (3.1)
+where for a plaquette p = (x,y,z, w> we define (p)z = (z,w,x,y),          and
+
+        ( W ( ( p ) z ) = *(fo(x, *))U'(z9 w)U'(w, x)U'(x, y)R(U0{x9 y))U'(y9 z).
+Let us recall that R(U)X = UXU~ι. This operation will be widely used in this
+paper, as it was in [5], and the reader is referred to that paper for an explanation
+of notations used in connection with it. Expanding V in powers of A we get
+                              x9 w))A(z9 w) + A(w9 x) + A(x9 y) + R(U0(x9 y))A(y9 z))
+
+                - iη2L(R(U0(x,     w))A(z, w)) 2 + 2R(U0(x,   w))A(z9 w)A(w9 x)
+
+                + 2R(U0(x,    w))A(z9 w)A(x9 y)+'~]     + ~
+
+
+
+
+                +2        Σ        A'(b1)A'Φ2)\ + -,                                 (3.2)
+
+where A'(b) are defined for bonds b^d(p)z          by the equalities Af(z,w) =
+R(U0(x9 w))A(z, w), A'(w9 x) = A(w, χ)9 A'(x, y) = A(x, y\ A'(y9 z) = R(U0(x9 y))-
+A(y9 z\ and -< denotes a natural ordering among bonds of the oriented contour
+
+    Let us introduce covariant derivatives. For a matrix valued function A defined
+at points of the lattice we put
+                     (Dl0A)(b) = η-1(R(U0(b))A(b+)        - A{bJ))9
+Propagators for Lattice Gauge Theories                                                391
+
+or
+                    (DηUo,μΛ)(x) = {Dl0A)(x, x + ηeμ\     μ = 1,..., d.              (3.3)
+
+For a function A defined at bonds of the lattice we put
+     (Dl0A)(p) = η- ι(A(x,y) + R(U0(x,y))A(y,z) + R(U0(x,w))A(z, w) + A(w,x))        (3.4)
+for a plaquette p = (x, y, z, w), and if p = pμv(x) = <x, x + ηeμ, x + ηeμ + ηev,
+x + ηev}, then we have
+              (Dl0A)(pμv(x)) = Φl0A)μix)     = (Dlo,μAv)(x) -    (Dlo,vAμ)(x).
+We have made here the identification A(x, x + ηeμ) = Aμ(x). The above definitions
+are for oriented bonds and plaquettes. For example if we change an orientation
+of a plaquette p — < x, y, z, w) and we take —/? = <( x, w, z, y), then assuming
+A(x9xf)= -A(x\x\    we have (DηUoA){-p)=     -(DηUoA)(p). We always make this
+assumption about gauge field configurations, i.e.,
+            U{x,x')=Ό~ V , x ) ,      Λ(x,x') = - A(x\x) for a bond <x,x'>.          (3.5)
+     Using the above definitions we can write further
+                  (d0U')((p)z) = 1 +       iη2{Dl0A){p)-^η\(Dl0A){p)f
+
+                                   + iη2     Σ       i[>l/(&i),^(62)] + - ,          (3.6)
+
+and we get
+
+
+
+
+                        tr
+
+                   = A»(U0) + (DΊj^η-ΠmdUo}             +±(A,A»(U0)A)       + '-•.   (3.7)
+
+This expansion is valid also for configurations A and Uo with values respectively
+                             c                c
+in the complexified algebra g and the group G , we have to interpret only Re U0(ΰp)
+and Im U0(dp) as
+
+       Re U0(dp) = i(t/ 0 (3p) + Uo(- dp)), Im I/0(δp) = γ.(U0(dp) - Uo(- dp)).
+
+Here — dp is the contour δ( — p\ and ί70(—δ/?) = ((70(3p))~1.
+    Let us introduce a simplifed notation. We will no longer consider in this paper
+the two configurations U, Uo, so let us write U instead of Uo. Let us also drop
+the symbols η, U in the symbols denoting covariant derivatives, thus we write
+simply D, Dμ.
+    In the sequel we will frequently use adjoint operators to derivatives D. The
+adjoints are taken with respect to natural L 2 scalar products for functions with
+values in N x N hermitian matrices. The inner product for these matrices is defined
+392                                                                                            T. Balaban
+
+by X Y = tr XY Let us recall that the trace is normalized, i.e., tr 1 = 1. For example,
+for derivative D acting on functions defined at points of the lattice, the adjoint
+operator D* is acting on functions A defined at bonds of the lattice by the formulas
+
+         (D*A)(x) = t η-1(R(U(x,x-ηeμ))A(x-ηeμ,x)-A(x,x                                  + ηeμ))
+                         μ=l
+
+
+                        = t (D*AJ(x)= t (DAμ)(x,x-ηeμ).                                            (3.8)
+                         μ=ί                          μ=ί
+
+The operator adjoint to derivative D, acting on functions defined at bonds, is the
+operator acting on functions F defined at plaquetts by the formula
+
+          (D*F){x9x + ηeμ) = (D*F)μ(x) = Σ ( W J M " Σ W v ) M
+                                                            v<μ               v>μ
+
+                                  = Σ (D*FJ(x),                                                    (3.9)
+                                        V= 1
+
+
+where Fμv(x) = F(pμv(x)\        and in the last equality above we have assumed that
+            F   X
+Fμvfr) = ~ vμ( )'
+  The quadratic terms in the expansion (3.7) define the basic operator generalizing
+the operator d*d in the Abelian case. We denote it by Δη(U), or simply by A.
+For U with values in the unitary group U(N) it is a hermitian operator given by
+the quadratic form
+            (A,ΔA) = (A,
+           <A,ΔΆ}= Σ
+
+                               + tr            Σ            *'[^(bi)> A\b2)-]η-2 Im U(dp).         (3.10)
+                                      bί,b2czd(p)z,bί<b2
+
+We have written it this way because with our assumptions on the configuration
+U the operator Δ' will be a bounded, small operator, which will be treated as a
+small perturbation of D*Zλ
+   Let us write the linear term in (3.7) as
+                                  < Λ , J > = X ηdtτA(b)J(b),                                      (3.11)
+
+                    2
+where J = D*η~ lmdU, (dU)(p) = U(δp). The expansion (3.7) can be written now
+as
+
+                A%expiηAU)             = A"(U) + <A,jy            +%<A,ΔA}      + •••.             (3.12)
+
+   A next class of operators we have to consider is determined by averaging
+operators. They were defined in [5], and because the definition is quite long and
+complicated we refer the reader to that paper. Let us remark only that the averaging
+operation used here is the operation Uj defined by the formulas (89)-(92) of that
+paper. We replace Uo by U in these definitions, and we have for the function
+
+                                                                                                   (3.13)
+Propagators for Lattice Gauge Theories                                                                      393
+
+the following expansion
+
+                          ^Qj(U9ηA)              = Qj(U)A + ^CjiU9ϋηA)9                                  (3.14)
+
+where Qj(U)A is a linear part of the function (3.13) and CfU.A) is an analytic
+function of A whose expansion begins with second order terms. We are interested
+in the linear operators QfU). They are compositions of j one-step averaging
+operators
+                                    j 1
+                                        )    Q(U)Q(U)9                   (3.15)
+where Q(V) is given by the explicit formula (124) in [5].
+    These definitions extend straightforwardly to configurations U, A with values
+in the complexified group Gc and algebra gc, see Sect. E in [5].
+    To introduce an operator similar to the operator Q*aQ °f the paper [4] (see
+(2.20), (2.14)), we need the geometric setting of that paper. We refer the reader to
+the beginning of Sect. A of [4], especially to (2.1)—(2.4). The only change we make
+is that the sequence (2.1) starts with ί2 0 , thus we have Ω0^>Ωί^          •• z>β k ,
+Ωj^Tη,      and         we   define           ΛJ = Ω(j)\Ω{flί9            j = O,l,...9k,   Ωk+1   = 0,       or
+                 j
+Ωj\Ωj+1   =B (Λj), hence ΛjCi TψJη. The condition (2.2) is unchanged. We have
+introduced the domain Ωo because we will consider operators with Dirichlet
+boundary conditions on Ωc0. We define an operator Q*aQ by the quadratic form
+
+                        (AQ*aQA>=               t       * Σ (Ljη)d-2\(Qj(U)A)(b)\2.                      (3.16)
+                                                7=0      beΛj
+
+       Finally we have to consider operators determining gauge fixing conditions.
+We choose gauge fixing terms which are straightforward generalizations of (1.27),
+or (2.12), (2.19). It is best to introduce them by an integral similar to this in (1.27).
+Let us recall that the configuration V = eiηΛ transforms by the formula (55) in
+[5] under a gauge transformation M, i.e., Ufu(x,xf) = u(x)U'(x,x')R(U(x,xf))
+u - 1 (x'), and if u = eiλ, then the part of this transformation linear in A and λ is
+given by Aλ = A ~ Dλ. We define a gauge fixing density by the expression
+
+                                                                               - ^ ^              \      (3.17)
+
+                                          k
+where Qλ is defined on 93 = (J Λj by the formulas
+                                      j=o
+                        (Q'λ)(y) = (β}(£/μ)G0                   for ye A j 5                             (3.18)
+
+                     (Q'{V)λ)(y)=    Σ L
+                                    xeB(y)
+
+                                                    )     Q{U)Q'(U)λ){y)
+                                =     £        L-'άR{υ{Γ%))λ(x),                 yeT$η.                  (3.19)
+                                    xeBJ(y)
+
+The contours JΓ^, xeBj(y), and the contour variables U(Γ^X) were defined
+by (52), (53) in [5]. The norm || || in (3.17) is determined by the scalar product
+<A, λ'}= Σ ηdtrλ(x)λ'(x) in the Hubert space L2(Ω0, g). The above averaging
+          xeΩo
+394                                                                                    T. Balaban
+
+operators Q'j(U) are linear parts of the averaging operations RuJ for gauge
+transformations u = eiλ, operations defined by (78)-(8O) in [5].
+    The integral in (3.17) can be calculated in the same way as in [3], (1.42)—(1.44),
+and we get
+
+                                                 f          ^     Y                       (3.20)
+where R = R(U) is an orthogonal projection in the Hubert space L 2 (ί2 0 ,g) onto
+the subspace
+                       R = ΔIN{Q\                    N{Q') = {λ:Q'λ = 0}.                  (3.21)
+                                     2                                      η
+For an arbitrary function feL (Ω0,q)                        we have Rf = Δ vλOi   where λ0 is a
+minimum of the function
+                                 λeN(β'), λ^\\f-Alλ\\2.                                    (3.22)
+In the above formulas A υ is the covariant Laplce operator
+
+                                 Δl = DΐDl = t < A                                            (3.23)
+Let us introduce the operator Δ'a = Δfa(U) = (Δηv + Q'*aQ') \ΩQ9 where Q'*aQf is
+defined by the same quadratic form as in (2.14), i.e.
+
+                  <λ,β'*αβM> = t                aj Σ (Ljη)d-2\(Qrj(U)λ)(y)\\              (3.24)
+                                         j =0        yeAj
+
+the numbers α7- satisfy the recursive equations aj+1— acijftaLΓ2 + α, ), aί=a0 =
+a > 0. The operator Δηυ \ Ωo is the covariant Laplace operator with Dirichlet
+boundary conditions on Ωc0. Let us elaborate this point a little bit more. By the
+definition of space N(Q') the functions λ in (3.22) vanish on Ω\. This permits us
+to express R in terms of operators with some boundary conditions outside Ωv
+We will use only Dirichlet boundary conditions. Let us introduce a domain Ωo
+such that Ω± c Ωo and Ωo is a union of big blocks of the lattice T l 5 e.g. we may
+take ί 2 0 = {a union of big blocks in T 1 ? with distances to Ω^^RM),       or we
+may add to Ωι a thinner layer of the big blocks surrounding Ωι. For such Ωo
+we consider the operator Δ'a with Dirichlet boundary conditions on dΩOi i.e.
+the operator Δ'a \Ωo = Ω0Δ'aΩ0.        In the last expression Ωo denotes a
+characteristic function of Ωo, Its inverse is denoted by G', or G\U). The operators
+with the boundary conditions have a very important property. They depend on
+the configuration U restricted to Ωo. This property is essential for many
+constructions, and we will use it extensively in the future. All operators we will
+consider will be defined by using Dirichlet boundary conditions on Ωo. Usually
+we will not mention it, and we do not indicate this fact in our notations.
+    Using the Lagrange multipliers method the minimum of (3.22) can be found
+by the same calculations as in [4], (2.15)—(2.17), and we obtain the formula
+                           Rf = (I- G'Q'*{Q'G'2Q'*)-ιQfG')f,                              (3.25)
+                       f     1
+where G' = G'(U) = (Δ a)~' . We do not know yet if the operators in the above
+Propagators for Lattice Gauge Theories                                                 395
+
+formula are well defined. Assuming some regularity of the configuration U it can
+be easily shown that the operator A'a is positive. This implies positivity of the
+operators G', Q'G'2<2'*, hence the existence of the operator R.
+   Now we are ready to define one of the basic operators of this paper. It is an
+immediate generalization of the operator Δa given by (2.19) in [4]. We define
+                     Λl(U) = A\U) + DlR{U)Dt           + Q*(U)aQ(U),                 (3.26)
+or simply Δa = A + DRD* + Q*aQ. It coincides with Δa in (2.19) if U = 1.
+Similarly as for the operator Δ'a we will need Δa with Dirichlet boundary
+conditions on Ωc0, thus Δa \Ωo = Ω0AaΩ0,         and we denote its inverse again
+by G, or G(U), if we need to stress explicitly the dependence on the configuration
+U,
+                                  G(U) = G = (Δa\ΩoyK                                (3.27)
+Understanding regularity and decay properties of these operators is the main
+subject of the paper. It is crucial for our method of analyzing the ultraviolet
+stability of lattice gauge field theories.
+    All the operators introduced above depend on a gauge field configuration U.
+Let us discuss how these operators transform under gauge transformations of the
+configuration U. Let us start with the operator A η(U). It is defined by the expansion
+(3.12), and the gauge invariance of the action (3.1) implies that if we make the
+transformations
+                                  U-+Uu, U'-*R(u)Ur,                                 (3.28)
+where
+           l/"(x, x') = u(x)U(x, x')u- \x'\    (R(u)U')(x, x') = R(u(x))U'(x, x')9
+then
+                         A\R{u)U'Uu) = A\{U'U)U) = A\U'U).                           (3.29)
+                                                          /
+Of course R(u(x))QxpiηA(x,x') = QxpiηR(u(x))A(x,x ) and R(ύ)A is linear in A,
+hence expanding both sides of the above equality in A we get a sequence of
+equalities between homogeneous polynomials of the same order. Taking the
+polynomials of first and second order we get
+
+          < R(u)A, JU) = (A,J),          < R(u)A, A \Uu)R{ύ)A ) = <A,Δ»(U)A},         (3.30)
+or
+                        Γ = R(u)J9       A \UU) = R(u)A       ^UMu-1).
+We have a similar situation for the other operators. For the covariant Laplace
+operator (3.23) we have
+
+           iR(u)λ,ΔηuuR(u)λy     = {λ,Δηvλy,      hence Δηuu = R{u)ΔηuR(u-1).        (3.31)
+                                                                                 U
+The matrices in the definitions (3.19) transform as follows R{U (Γ^X)) =
+R(u(y))R(U(Γyx))R(u-\x)% hence
+
+                     (Q'j(UηR(u)λ)(y) = R(u(y))(Q'j(U)λ)(y),                         (3.32)
+and
+396                                                                               T. Balaban
+
+The equalities (3.31), (3.32) imply further
+                G'(UU) = R{u)G\U)R{u~ι\          R(UU) = R(u)R(U)R(u~Λ).              (3.33)
+Finally inspecting the definitions of the averaging operators Qj{U) for gauge fields
+we can see that the equalities (3.32) hold again. This implies the transformation
+laws for the operators Δa and G
+                       = R(u)Δa(U)R(u-1),        G(Uu) = R(u)G(U)R(u-1).             (3.34)
+    Now we will introduce the regularity conditions for gauge field configurations
+U. They depend on the sequence of domains {Ωj}. At first let us introduce a
+class of cubes. For each cube • of this class there exists a unique index j , 0 ^ j ^ fc,
+such that • dBs(Λj)uBi+1(Λj+ί),           Π nB j (Λ 3 ) Φ 0 , and • is a union of several
+big blocks of the lattice T L _ J? which implies that its size in the lattice Tη is O(\)MVη.
+Here 0(1) will mean a number ^ 10. The set Λo in the above condition means
+Λ0 = Ω0\Ωl9     where Ωo = {a union of big blocks of the lattice Tl9 such that
+their distances to Ωx are ^RM}. For a given positive number α 0 we consider
+the class of gauge field configurations U defined on T and satisfying the following
+regularity conditions:
+             for an arbitrary cube • of the described above class, and
+             for a configuration U there exists a gauge transformation
+             u on • such that Uu = eiηΛ. and if the index of • is
+            j , then
+            \A\<0(l)Moc0(LJηΓ\         \ΨA\<0(l)Moc0(LJηΓ2          on Π,
+            where O(\)M is a size of • in TL_,;                                      (3.35)
+            \dη*dηA\ < 0(l)Ma0(Ljηy3        on ••                                    (3.36)
+The number α 0 characterizes this class of configurations. We will need α 0 so small
+that 0(l)Mα 0 is still a sufficiently small number. Let us notice that these regularity
+conditions do not impose any constraints on U outside the domain Ωo. For the
+operators introduced until now we need only the condition (3.35), but later on we
+will have to assume (3.36) also.
+    We have to consider operators extended to configurations U with values in
+the complexified group Gc. We may define regularity conditions for such con-
+figurations in the same way, i.e. by the conditions (3.35), (3.36). Instead we specify
+somewhat more the class of configurations considered. We assume that they have
+the form U'U, where U has values in G and U' = eiηA\ A'etf. For a given pair
+of positive numbers cno,a1 we consider the class of these configurations satisfying:
+             U satisfies the condition (3.35), and
+            lA'lKa^Uη)-1,        WlA'lKzάlJηr2          on Ωpj    = 0,...,k;         (3.37)
+             U satisfies (3.35), (3.36), A satisfies (3.37) and
+            \Ό%Ό\A\ < oc^LJη)-3        on Ωp j = 0,..., k.                           (3.38)
+We will prove in another paper that if U'U satisfies the conditions (3.37), (3.38),
+Propagators for Lattice Gauge Theories                                                              397
+
+then it satisfies also (3.35), (3.36) with α 0 replaced by O(l)(α 0 + α j , but we will not
+use this fact here.
+    To formulate the regularity and decay properties we have to introduce several
+norms. They are identical to the norms used in [3, 4], e.g., given by (1.108), (1.109),
+but the derivatives there have to be replaced by the corresponding covariant
+derivatives determined by a configuration U. Thus we have the supremum norms
+                      \A\ = maxsup|4 μ (x)|,               \VA\ = maxsup|(D^ v )(x)|,              (3.39)
+                                 μ       x                         μ,v   x
+
+and the Holder norms
+
+            = max         sup -^JRMΓ^A^-AJLxy,                                                 (3.40)
+                 A*    x,x':|x-x'|^l   x' - x
+
+  || A ||l i β = || VA || β = max         sup -^—\R(υ(ΓXtX))φμAy)(x!)              - {DμAv)(x)\,
+                               μ,v     χ,χ':\χ-χ'\<Ll 1^   *Ί
+
+where Γxx, is a shortest contour connecting points x and x'. It is understood
+that the η-scalε is used in the above definitions. If we use another scale, then it is
+indicated explicitly by a superscript, e.g. || | | | means that functions and distances
+are on the ^-lattice. Besides the above norms we will use also weighted norms,
+connected with the sequence of domains {Ωj}. We define for an arbitrary real
+number α
+                          μ4|(β)=sup     sup (VηΓ*\A(b)\.                         (3.41)
+
+Thus the norm \A\ia) can be defined as the smallest number C such, that
+                      \A(b)\^C(UηY                 for beΩj\Ωj+l9        y = 0,1   fc.
+For α negative we can take Ωj instead of Ωj\Ωj+ί      above. Finally, we will use
+the weighted distance d(y9yf) defined by (2.36) in [4], and the families of cubes
+                                              k
+
+Δ(y)9 Ά{y). Here y9y'e9i=     \J Ay Let us recall that if yeΛj9     then Δ(y) =
+ J
+                             J=°        J
+B (y), and Δ(y) is a cube of the size 2L η on the lattice Tψ with center at the
+point y.
+    We are ready to formulate the basic regularity and decay results. The main
+operator Δa depends on the projection R, hence we have to understand at first
+the properties of the operators determining R, as in Sect. B of [4]. Let us start
+with the operator G'. We have the following theorem analogous to Proposition
+2.2. of [4].
+Theorem 3.1. There exist positive constants M 1 ? <50, a0, Bo dependent on d and L
+only, a constant B0(β) dependent on d, L and β, 0 ^ β < 1 (B0(β)^cc if β->l), such
+that for M^-M± and for an arbitrary configuration U satisfying the regularity
+condition (3.35) with Mα 0 ^ aθ9 the operator G'(U) (a = 1) satisfies the inequalities
+                  \(G'(U)λ)(x)\9                  \(Vvσ(U)λ)(x)l
+                  \{Δ ^G'ίl/μKx)! ^ Bol(Vη)\                    L% L%
+                         for xeΔ (y), ye Ap supp λaΔ (/);                                      (3.42)
+398                                                                                     T. Balaban
+
+
+                    \\ζVυG'(U)λ\\β,         ||ζG'(ί/)VίAH,     ^B<tfώW~'
+
+
+                                    βo<l,     ζeC${Ά{y)), yeλj, suppλc Δ(y').              (3.43)
+Furthermore, there exist constants B'0(ε), B'0(ε, β) dependent on d, L and the indicated
+parameters, 0 < ε ^ l , 0 ^ / ? < l (β'0(ε)-»oo if ε->0, B'0(s^)->oo if either ε->0,
+or β-> 1), such that
+
+         \(VuG'(U)Vϊλ){x)\ ^ ^ ( φ - ^ ^ ' ^ μ i i f + μi)
+           for 0 < ε S 1, xsA{y\ supp /I c 2(/), j/e/1,, ξ' = L"Λ                          (3.44)
+
+
+           for       0<ε^
+                                                         j
+                 suppΛ c ^(y), /eyl^, ξ = L~ \                                             (3.45)
+                                                 2
+Finally, we have the inequalities in L -norms
+
+  \\hG'(U)λ\\9 H/zV^GWμil, \\h
+      \\hG'{U)X/φW\\ ύ Bol(Lψ9lJη,L%                         1,1,
+      for supp /i c zl (y), ye A p supp ^ c 4 (/);                                         (3.46)
+and the global inequalities
+                     |G'(t/μ| ( 2 + y ) ,   \vvσ(U)λ\a+y),          \G'(U)v*vλ\(l+y),
+                                                                                           (3.47)
+for y in a fixed compact subset of real numbers, e.g. for ye[— 4,4].
+      All these inequalities are invariant with respect to gauge transformations of U.
+      Let us make two remarks in connection with the formulation of the above
+ theorem. At first the choice of derivatives Vu? V£ is conventional, we may always
+ replace V^ by VJJ, and vice versa, in arbitrary place and combination. Next, the
+ choice of powers Ljη is conventional also. Using Lemma 2.1 in [4] we may replace
+ the factor (LjηY by (Ljη)β(Lj'η)y with β + y = α, j , / are indices of localizations.
+      It is easy to see that the global inequalities (3.47) are consequences of the local
+ ones (3.42) and Lemma 2.1. We will prove the above theorem by constructing a
+ random walk representation similar to that in (2.40), but with different boundary
+ conditions used, and then repeating the arguments of Sect. 2 in [2]. We will do
+ it together with a proof of the corresponding theorem for the gauge field propagator
+ G(U), because the constructions in both cases are almost identical.
+      We need also a theorem analogous to Proposition 2.3 of [4].
+
+Theorem 3.2. Under the assumptions of Theorem 3.1, and with the same constants,
+the following inequality holds:
+                 \(Q'(U)G'2(U)Q'*(U)Γ\y,y')\             ύ    BoiUηΓWηΓ'e-«*»-*'>,
+                                                     (yeApy'eAr).                          (3.48)
+Propagators for Lattice Gauge Theories                                              399
+
+     Let us stress that the constants in the formulations of both theorems do not
+depend on the sequence {Ω3), j = 0, l,...,fc, if the conditions (2.1), (2.2) are
+satisfied.
+    These theorems imply all the properties of the operator R, or DRD*, we will
+need in the future. For the operator P = / — R we obtain, using again Lemma 2.1,
+             [ |P(x, *') |,| (DP)μ(x, x%\ (PD*)v(x, x%\ (DPD*)μv(x, x') | ]
+                                                J
+                ^O(l)[l,(Lfy)Λ(^)Λ(£ ^
+                   for xeΔ(y)9yeΛj9x'eΔ(y'),y'eΛr.                                (3.49)
+We have also the corresponding bounds for Holder norms of the kernel
+(DPD*)Jx,x').
+  Thus the operator Δa is well defined. For its inverse G we have
+Theorem 3.3. Under the assumptions of Theorem 3.1, and with the constants
+described there, the operator G(U) (a = 1) satisfies the inequalities (3.42)-(3.47), with
+G'{Ό) replaced by G(U) and λ replaced by a function J defined at bonds of the lattice
+ Tφ or Ωo, and with values in g.
+     The above theorems do not exhaust important properties of the operators
+G', R, G we will need in the future. For example we will have to localize them to
+some domain, that is to change the domains {Ωj}. We would like to estimate a
+difference of two operators corresponding to different sequences. Such results were
+proved in [2] for scalar field propagators, see (1.11), (1.12) in the formulation of
+the theorem there. They are connected naturally with generalized random walk
+expansions, and we defer formulations of these results to the section where these
+expansions will be constructed.
+     As we have remarked already we will prove the above theorems by constructing
+generalized random walk expansions. Terms of these expansions are built of the
+above defined propagators localized to subdomains, e.g. to cubes belonging to the
+class defined at the end of Sect. A in [4]. We have to prove the theorems for the
+localized propagators. This is accomplished by using the regularity conditions
+(3.35) and expanding with respect to A = (\/iη)\og Uu. This way the theorems are
+reduced to the corresponding theorems for propagators without external gauge
+field. They were proved in [4]. In the next section we will study the expansions
+with respect to the external gauge field A in a more general situation. We will
+prove that the propagators are analytic functions of configurations U'U in a space
+defined by the conditions (3.37), and we will do it by studying expansions with
+respect to (l/iη)\og V.
+
+
+B. Analytίcity Properties of the Operators
+The operators introduced in the previous section depend on a gauge field
+configuration U with values in the Lie group G. We would like to prove that this
+dependence is analytic. The simplest way to do it is to extend the operators to
+configurations with values in the complexified group Gc and to prove the usual
+complex analyticity. We need only a complex neighbourhood of the space of
+400                                                                                                  T. Balaban
+
+
+configurations U satisfying (3.35). Such a neighbourhood is given by configurations
+                                                iηA
+U'U satisfying the condition (3.37), i.e. U' = e , where A is a sufficiently regular
+                                                                c
+configuration with values in the complexified Lie algebra g . The regularity is
+described by the inequality (3.37). We will assume that OLX is sufficiently small.
+   A qualitative part of our results is formulated in
+Theorem 3.4. There exists a positive constant a1 such that the operators G\U\
+         2
+(Q'(U)G' {U)Q'*{U)y\ R(U), G(U) extend to configurations U'U for aι^aί         as
+analytic functions of A. The extended operators satisfy all the inequalities of
+Theorems 3.1-3.3 correspondingly.
+    In fact we prove quantitative statements which are more precise, describing
+these analytic extensions as small perturbations of the operators depending on U
+only. In the future we will need these more precise statements.
+    Let us start with the covariant Laplace operator A υ given by (3.23). We have
+
+                                      -       Σ         R((U'U)b)λ(b
+                                            best(x)
+
+
+
+
+                                      , x - ηeJ)R(U'(x9 x - ηeμ))λ(x - ηeμ)
+
+
+                = η-2(2dλ(x)-                 X expiηadΛ.{b)R(Ub)λίb+)\                                  (3.50)
+                       \                    best(x)                                  )
+
+where A\b) — A(b) for positively oriented bonds £>, and A\b) = R(Ub)A(b) for
+negatively oriented b. Expanding the exponential above we get
+         (Δu,uλ)(x)   = (Δuλ)(x)-η-ί                    Σ       iadA,(b)R(Ub)λ(b+)
+                                                      best(x)
+
+                        -     Σ           F'1,k(iadA.φ))λ(b+)
+                            best(x)
+
+                      = (Δΰλ)(x)-               Σ       ifld i4 . w (D I ,A)(6)-i[(Dί^)(x) > λ(x)]
+                                             b<=st{x)
+
+
+                        -     Σ F'uk(iadA,(b))λ(b               +   ),                                  (3.51)
+                            best(x)
+                                                        1
+where F'Uk(z) = η~2(eηz -\-r\z)    = z2\ dt(\ - t)eηt\ hence F\^{iadA>{b))    is an
+                                        o
+analytic function of A(b). Let us denote the first order operator on the right-hand
+side above by V\(A\ thus
+              (V\(A)λ)(x) = X ilA\b\ 0M)(6)] + il(D%A)(x\ A(x)]
+                                  best(x)
+
+                                  +       Σ F'Uk(iadA,(b))λ(b+),                                        (3.52)
+                                      best(x)
+
+and
+                                       Δu.ϋ = Δϋ-Vt1(A).                                                (3.53)
+Propagators for Lattice Gauge Theories                                                         401
+
+We assume that A satisfies (3.37), hence for                 j
+                                         1                       2                  2
+        \(V'1(A)λ)(x)\^4da1(LJηΓ \Vuλ\            + 2da1(tiηΓ \λ\     + $ daKtiηΓ       \λ\, (3.54)
+the norms on the right-hand side involve only nearest neighbours of x because
+V\ is local.
+    Let us consider now the averaging operators Q'j(U) given by (3.19). We have
+to find an expansion of R((U'U)(Γ^X)). By the definitions (52), (53) in [5], and
+                  j    fj j                  fj
+the definition U'U = U O of the averages O , we have
+                              1
+               )=(l/'t/)^ (Γ y i J C j _ 1 )        {U'U)(ΓX2tXι)(U'U)(ΓXllX)
+
+
+
+
+                                                                                             (3.55)
+
+where the sequence of points y = xj9 xj-1,...,x2,      xi9 x = x0 is defined by the
+conditions x ^ e ^ ^ + J , or xeB^Xt). We apply the identity (97) [5]
+                      (ϋ'ι)(x, x') = vjx)(U'l)(x9 x')R(Uι(x, xf)K V ) ,                     (3-56)
+where v^x) is given by (160). Using (102), (103) we get
+
+
+
+
+                                                                                .            (3.57)
+Let us notice that the above expressions involve the gauge field variables U'b, Ub
+for b a Bι(y). T h e / h order averages are considered on A p hence yeΛj9 Bj(y) a Ωp
+and A satisfies the inequality \A\ < oc^ϋη)'1 on Bj(y). Taking A' = LjηA we have
+U' = eiξA>, ξ = L~j, \A'\<ttv Applying the inequalities (161), (162) [5], we
+have
+
+                       ^log Ό'1 = QtfJ, ξA'\        \Qt(U, ξA')\ < loLtϋξ,
+
+                  1
+                  -.log(R'Xι+iU")        <O(ί)aιL'+iξ,         \υ{y)-l\<O(l)<x1
+
+for α t sufficiently small. By Proposition 4 [5] the expression on the right-hand
+side of (3.57) is an analytic function of A, and by the above bounds
+
+                           \(U'U)(Γ%)([/(Γ«         )Γι - 1|
+
+This implies
+
+                                        = R{U(ΓfJ) + F'2J{A;y,x)
+402                                                                             T. Balaban
+
+and
+
+                                                                                    (3.58)
+hence finally
+                          (Q}{U'U)λ){y) = (Q'βJ)λ){y) + (F'2J(A)λ)(y),
+                           (F'2j(A)λ)(y) = £          L-jάF'2J(A;y,x)λ(x),
+                                            xeBJ(y)
+
+and
+                          \(Ff2J(Λ)λ)(y)\ £ O(l) α i (βίμ|)0>).                     (3.59)
+The operator F2tj(A) is an analytic function of A in the domain given by the
+inequality \A\ <α 1 (ίΛ/)- 1 for aι sufficiently small.
+    We have a similar expansion for the adjoint operator. We denote operators
+in this expansion by adding a star as a superscript. Let us remark that Ff2*j(A)
+is not an adjoint of F'2J(A). Combining (3.53) and (3.59) we get
+      4u>u + Q'*{U'U)aQ'{U'U) = ΔV + Q'*(U)aQ'(U)-                     V\(A)
+                                        + F'2*(A)aQ'(U) + Q'*(U)aF'2(A) + F'2*(A)aF'2(A)
+                                     = ΔV + Q'*(U)aQ'(U)-              V'(A)9       (3.60)
+
+where V\A) is defined by the last equality. It satisfies the bound
+
+                    \(Vf(A)λ)(x)\SO(l)oc1((Uηy1\Vuλ\+(Ljη)-2\λ\)                    (3.61)
+        j
+for xeB (Λj), the norms on the right-hand side restricted to the block B\y)
+containing the point x. It is an analytic function of A on the domain (3.37), for
+OL1 sufficiently small.
+     We assume that Theorem 3.1 is valid for the operator G'(U). The equality
+(3.60) can be written as
+
+            Δ u'u + Q'*(U'U)aQ'(U'U) = (/ - V'(A)G'(U))(Δ υ + Q'*{U)aQ\U)\          (3-62)
+and the operator V\A)G'(Ό) satisfies the bound
+                            \(V'{A)G'{Ό)λ){x)\ ^ O^BoOL^-00^^                       (3.63)
+                                                        f          f
+for xeΔ(y\ suppλaΔ(y% or the bound \V (A)G (U)λ\iγ)^0(l)B0otί\λ\iyy Thus
+for oίί sufficiently small the norm of this operator is small and /— V\A)G'(U) is
+an invertible operator, the inverse is given by a convergent Neumann series. This
+implies the existence of the operator G'(Ό'U) and the equality
+
+              G'(U'U) = G'(U)(I - V\A)G\U))-1 = £ G'(U)(V'(A)G'(U))n.               (3.64)
+                                                            n =0
+
+Each term in the series is analytic in A on the domain (3.37), and the series is
+convergent uniformly, hence G'(U'U) is an analytic function of A also. What is
+more important we have
+                      f
+        G'(U'U) = G (U) + G'(U)V'(A)G'(U'U) = G'(U) + G'(U'U)V'(A)G'(U),            (3.65)
+Propagators for Lattice Gauge Theories                                                                403
+
+and norms of the second operators on the right-hand sides are small.
+    Now applying Theorem 3.1 for G'(Ό\ the bound (3.63), the representation
+(3.64) and Lemma 2.1 of [4] we can prove all the statements (3.42)-(3.47) of
+Theorem 3.1 for the operator G'(U'Ό\ of course with different constants, although
+changes are small. We define new constants in such a way that the statements of
+Theorem 3.1 hold for extended operators. This allows us to formulate a statement
+concerning the remainders G\U)V\A)G\U'U) and G\U'U)V\A)G\U) in (3.65).
+They satisfy Theorem 3.1 with the additional small factor O(\)OLV
+    Let us consider the operator {Q'{U)G'2(U)Q'*(U))~ι. Its inverse can be
+analytically continued to configurations U'U and has the expansion
+   Q'{U'U)Gf2{U'U)Qf*{U'U) = Q'{U)G'2{U)Q'*{U) + Ff2{A)G'2{U'U)Q'*{U)
+                                          + Q'(U)G'2(U'U)Ff2*(A) + F'2{A)G'2{U'U)F'*{A)
+                                           + Q'(U)G'(U'U)V'(A)G'2(U)Q'*(U)
+                                           + Q'(U)G'2(U)V'(A)G'(U'U)Q'*(U)
+                                           + QXU)Gf(U)Vf(A)G'2(U'U)V'(A)G'(U)Q'*(U)
+                                       = Q'(U)G'2(U)Q'*(U) + C(A),                                  (3.65)
+where the operator C\A) is defined by the last equality. Using the results obtained
+for operators building it, and Lemma 2.1 [4], in the same way as in the bounds
+(2.68) in [4], we get
+
+          \C(A;y,y')\ ^ O(l)α 1 (L^) 4 (L / ^~^" ( 1 / 2 ) 5 o ί i ( y ' > '' ) for yeΛp   y'eΛr.   (3.66)
+Using Theorem 3.2 and the above bound we obtain
+                                                 = (/ + C(A)(Q'(U)G'2(U)Q'*(U)Γ*)
+                                                     Q'(U)G'2(U)Q'*(U),
+                                                                                                    (3.67)
+thus the operators in the equality are invertible and an inverse of the left-hand
+side can be expressed by a Neumann series convergent for otί sufficiently small.
+Each term of the series is an analytic function of A on the domain (3.37). The
+inverse satisfies Theorem 3.2.
+    These results imply that the operators R(U\ P(U) = I — R(U) extend analytically
+to the domain (3.37) and satisfy the same bounds, e.g. the operator P(U'U) satisfies
+the bounds (3.49). Moreover we have
+
+
+        \P'(A;x,x%       \(DF(A))μ(x,x')\9 |(P'(Λ)D*)v(x,x')l,                \(DF(A)D*)Jx,x')\
+
+
+
+              for xeΔ(y)9yeΛj9x'eΔ{y')9y'eΛr.                                                       (3.68)
+
+The remainder can be written explicitly in terms of the operators introduced until
+now by writing the expansions of the operators determining P(U'U).
+   Now we consider the basic operator Δa(U) given by (3.26). We know already
+404                                                                                     T. Balaban
+
+
+that each term on the right-hand side of the definition has an analytic extension.
+This follows either from the above results, or from the results of Sect. E [5],
+especially Proposition 7, concerning the averaging operations, or from the explicit
+formulas (3.10) for the operator Δ(U). We will estimate terms involving the field
+U'. Let us consider at first the operator Δ(U'U). It is a sum of two operators,
+Δ(U'U) = DfruDw + Δf(U'U). From the formula (3.10) it follows that Δ'{U'U)
+is a small perturbation itself in the sense that we have the bound
+                 |(zl'(l/ / C/μ')W|^O(l)(Mα 0 + α 1 )(L^)- 2 |XΊ, bεΩj                      (3.69)
+the supremum on the right-hand side is taken over bonds belonging to one of the
+plaquettes containing the bond b (i.e. we have vaΆxh';b,cdPyPesm\A'{b')\, where
+st(b) = {plaquettes p:b<=dp and orientation of dp agrees with that of b}). This
+bound follows from the estimates
+
+
+Let us recall that the operations Re and Im in this case were defined after formula
+(3.7), and the estimates follow directly from the assumptions (3.35), (3.37). It is easy
+to see that for the difference Δ'(U'U)—Δ'(U) we have a bound similar to (3.69),
+but with additional factor α^ It is not essential in the sequal. Thus we have to
+investigate only an expansion of the operator D^vDUfUm         We do it in a way
+similar to (3.5O)-(3.53) for άυ.υ. We have
+  {DUΊJA'\μ(x)    = {DυA')xμ{x) + >? H e χ P ΨadAy{x) - 1)(JR(C/(X, X + fjeJJΛ'^x + ^βv)
+                    - η~1(expηiadAΛx)       - l)R(U(x,x + ηeμ)A\(x + ηeμ\                  (3.70)
+
+
+                      v= 1
+
+
+
+
+                               d
+
+
+                             v= 1
+
+
+                      - R(U(x, x - ηev))iadAv(x_ηe%)R(U(x         - ηev, x))A'μ(x)
+                      + R(U{x, x - ηev))iadAμ(x_ηev)R(U(x         - ηev, x - ηev + ηeμ))
+                     • A'v(x - ηev + ηeμ) + iadAy{x)R(U{x, x + ηev))A'μ(x + ηey)
+
+                     - iadAμ(x)R(U(x, x + ηeμ))A'v(x + ηeμ)] -           (FUk(A)A%(x)
+
+                   = (D*DA%(x)- f
+
+
+                        R(U(x,x-            ηev))iadAμ(x_ηeJDμA'v)(x-
+                        iadAvix)(DvAμ)(x)   -     iadAμ(x){DμA'v)(x)
+                                                - ηev))A'v(x - ηev)
+Propagators for Lattice Gauge Theories                                                                  405
+
+
+                             μ                      -    (Fltk(A)A%{x)
+                    = (D*DA\(x) - (V1(A)A')μ(x).                                                    (3.71)
+The operator Fljk is defined similarly to F\k by taking the remainder of the
+expansion R{U') = exp ηiadA = 1 + ηiadA + • • in the expressions above. It is a local,
+bounded operator satisfying the bound
+                                              2                      2
+              \(FUk(^X(x)\^O(i)\A\ \A'\^O(l)ai(L^r \A'\,                            beΩj            (3.72)
+with the same norms \A\, \Ά\ determined by the set st(b) as in (3.69). The
+operator V1 satisfies
+                                                                         2
+                                                        \VA\\A'\ + \A\ \A'\)
+                                                        WA^+iϋηy^A'W               beΩp             (3.73)
+with the same conditions on norms as above. The derivatives are, of course, the
+covariant derivatives defined by U. The constant 0(1) is an absolute constant
+depending on d only.
+    Next we consider the operator DRD*. We have discussed already the expansion
+(3.68) of the operator P(U'U\ so we have to consider the differential operators
+again. We have
+                                         d
+
+
+                                     X                                        v    v      v
+                                    v= 1
+
+                       •R(U(x,x-ηev))AΆx-ηev),                                                      (3.74)
+
+ {DVΊJD*,vA')μ(x)   = {DυD*A\(x)         - £ [ - iadA,x)R(U(x,x              +ηeμ))(D*A'y)(x      + ηeμ)
+                                             v= 1
+
+
+                       + R(U(x,x + ηeμ))iadΛv{x + ηeμ)(D*A'v)(x + ηeμ)
+                       - iadAv(x)(DΐA'v)(x)         + iadAv(x)(DμA'v)(x)
+                       + iadiDμAvHx)R(U(x,          x + ηeμ))A'x{x + ηeμ)
+                       + R{U(x9 x +           ηeμ))iad{DUv){x+ηβμ)
+                       R(U(x + ηeμ, x + ηeμ- ηev))A'v(x + ηeμ - ηev)
+                       - iad{D*Av){x)R(U(x, x - ηev))Afγ(x - ηev)~] -                  (F2Λ(A)A')μ(x)
+                    = (DD*A%(x) - (V2(A)A\(x)9                                                      (3.75)
+
+
+where the operators F2^k(A\ V2(A) satisfy the bounds (3.72), (3.73). These expansions
+imply the following one:
+
+
+       DVlUR(U'U)Dlv       = DυR(U)D* - V2(A) - (DVlU - DV)P{U)D$
+                             -DVP(V)(D*WV-D*,)
+
+                             - (Dv,v - Du)P{U)(Dt.u              - D*) -          Dv.vF(A)Di.v
+                           = DRD* - V2(A) - P^A),                                                   (3.76)
+406                                                                            T. Balaban
+
+where the operator P^A) is a non-local operator whose kernel satisfies the bound
+
+
+
+                          iorxeΔ(yl yeλj, x'eΔ(y% yΈΛj,.                           (3.77)
+    Of course, all the functions and operators introduced above are analytic on the
+domain (3.37).
+    Finally we consider the averaging operator Q(U). It coincides with Qj(U) on
+BJ(Λj)9 and QfiJ'U) is given by the product
+                                             j 1
+                                              -)        Q(U'U)Q{U'U)
+                                              1
+                                               Uj-1)         Q(ΰU)Q(U'U).          (3.78)
+                                       fn
+By Proposition 6 [5] the averages ϋ , n=j— 1, •••, 0, are analytic functions of A on
+configurations satisfying the first inequality in (3.37), i.e. \A\ < ax (Ljη)~x on Bj(Λj).
+Denoting Ufn = expiBn, we have \Bn\ <0(l)α 1 L"ξ, ξ = L~j. It follows from the
+explicit formula (124) [5] that the averaging operator Q(QxpiBV) is an analytic
+function of B, for B sufficiently small. Moreover this formula implies easily that
+
+
+
+and
+
+                             \F2(B)Bf\^0(l)sup\B\Q"\Bl                             (3.79)
+where the averages g", Q'j were introduced in [5] by the formulas (140), (141). The
+constant 0(1) above depends only on d and L. From (3.78) if follows that Qj{U'U)
+depends analytically on A in the above domain, and we have
+
+
+
+
+                                        'n-lU"-1)            Q(U'U)
+                                                       n+1
+                                            Q3-1-n(U )F2(Bn)Qn-l(U'U)
+
+                                            (A),                                   (3.80)
+
+where F2J is defined by the last equality. It is of course analytic in A. The inequality
+(143) [5] implies the following bound
+
+
+                                 n=0
+
+                               ^θ(i)αiρ;MΊ             on     ΛJ9                 (3.81)
+
+for Mα 0 , α x sufficiently small and with a constant 0(1) depending on d and L only.
+    We have a similar expansion for QJ{U'U\ i.e. Qj{U'U) = Qj{U) + F^{A\ and
+F%tJ(A) satisfies (3.81). (Let us notice that for complex configurations A the operator
+Flj{A) is not the adjoint of F2J (A).)
+Propagators for Lattice Gauge Theories                                                   407
+
+    Combining the expansions (3.71), (3.76) and (3.80) we get
+                                /
+       ΔJJJ'U) = D$.uDϋ.u+Δ (U'U)           + Dϋ.υR{U'U)D$.υ      + Q*(U'U)aQ(U'U)
+                                             f
+                 = Λa(U) - VM) + (Λ'(U U)-Δ'(U))             - V2{A) - P,(A)
+                    + F*{A)aQ(Ό) + Q*(U)aF2(A) 4- F*(Ά)aF2(A)
+                 = Δa(U) - V3(A) ~ P,(A) - P2(A).                                      (3.82)
+
+The operator V3(A) is a local differential operator of the first order satisfying the
+bound (3.73). The operator PX(A) was defined in (3.76). It is a non-local bounded
+operator and satisfies the bound (3.77). The operator P2(A) is a sum of three terms
+obtained by the expansion of averaging operators. It is a semi-local operator in the
+sense that the value (P2{A)Ar) (b) at a bond beBj(Δj) depends on A, A' restricted toy-
+blocks neighbouring the block containing the bond b. It satisfies the bound
+                    \(P2(A)A')(b)\^0(l)ocί(UηΓ2\Al             beBj(Λj\               (3.83)
+with the norm \A'\ restricted to the blocks defined above. The operators V3(A),
+P2(A) depend analytically on A in the domain (3.37). Let us denote the sum of these
+three operators by V(A). We can write (3.82) as
+                   Δa(U'U)=Δa(U)         - V(A) = (I- V(A)G(U))Δa(U).                 (3.84)
+Using the bounds (3.73), (3.77), (3.83) and assuming that Theorem 3.3 holds for G((/),
+we get
+       \(V(A)G(U)J)(b)\^0{l)θLίe-il/2)δodiy'yΊ\J\          for beA(y\suppJ   a A(yf). (3.85)
+(Here J is an arbitrary gauge field configuration with values in of.) This bound
+implies in particular the bound \V(A)G(U)J\ g 0(1)^1   hence V(A) G(U) is a small
+operator in supremum norm, and we have
+
+              G(U'U) = G{U)(I-V{A)G{U)y1=              f     G(U)(V{A)G(U))n,         (3.86)
+                                                       n=0
+
+and convergence is in the operator norm for OL1 sufficiently mall. Each term in the
+series is an analytic function of A in the domain (3.37). Theorem (3.3) implies also
+convergence in all norms appearing in its formulation, thus in all norms on the left-
+hand sides of the inequalities (3.42)-(3.47). This way we get all these inequalities for
+the operator G(U'U), the local ones follow from the bound (3.85) and Lemma 2.1 [4].
+    Thus Theorem 3.4 is proved, assuming that Theorems 3.1-3.3 hold.
+    This allows us to prove Theorems 3.1-3.3 in some special situations, where we
+can use the results of [4]. There we have proved these theorems for operators with
+the external gauge field configuration U = 1. Applying the results of that paper
+together with the above results we get
+
+Corollary 3.5. // a configuration U' is in the domain (3.37) with U = 1 and aλ ^
+au then Theorems 3.1-3.3 hold for the operators G'(U'\ {Q{U')Gf2{Uf)Q'*{U'))~\
+G(V) correspondingly.
+    Let us consider a general configuration U satisfying the regularity condition
+(3.35), and let us suppose that we have a sequence of domains Ω'0,Ω\,Ω'k satisfying
+408                                                                              T. Balaban
+
+
+ the conditions (2.1)-(2.4) of [4], and such that β' o a •, where • is one of the cubes
+ appearing in the formulation of (3.35). For simplicity we have assumed that j = k,
+                                                         7
+ otherwise we can rescale from ^-lattice to L~ -lattice. Applying the gauge
+                                  U    ιηA
+ transformation u we get U' = U = e with A satisfying the inequalities in (3.35) for
+                             f                                        w i t n
+j = k. This implies that U satisfies (3.37) for the sequence {β}}>            U = l and
+ a1 = 0(l)Mα 0 . Assuming 0(l)Mα o ^ a1 we can apply the above Corollary and we get
+                                                                             f
+Corollary 3.6 If a configuration U satisfies (3.35) with 0(l)M(x0 ^ a1,andΩ 0 a • far
+a cube Π of the class described in this condition, then Theorems 3.1-3.3 hold for
+the operators G(Ό\ (Qf(U)G'2(U)Q'*(U)y\ G(U) constructed for the sequence {β}}.
+    This follows from Corollary 3.5 applied to the configuration U' = Uu, and we
+have to recall only that all the results of these theorems are gauge invariant.
+    Corollary 3.6 gives crucial results for our future considerations. We will prove
+Theorems 3.1-3.3 in full generality localizing them by generalized random walk
+expansions to small domains contained in cubes •> and then using the results of this
+corollary.
+
+
+C. Generalized Random Walk Expansions
+We will construct these expansions in almost the same way as the expansions of [4]
+were constructed, especially in (2.141). Let us recall the geometric setting of these
+expansions. Each set Bj(Λj) is a union of big blocks, which are elementary cubes
+(cells) of the lattice MUηZd (or rather the lattice Γ&£#, if M = Lm). We take a family
+@j of cubes Π, with centers at points of this lattice, which are unions of 2d big blocks,
+with at least one of them contained in Bj(Aj). A union of these families for all j is
+denoted by 2. Let us take here the set Tx \Ω1 instead of/l 0 = Ω0\Ω1. The family 3} is
+a partition of the lattice T. We take the partition of unity {hπ} defined at the end of
+Sect. A in [4]. We have £ h2J = l. For a cube • e ^ and n = 1, 2,... we define Π"
+as a cube of the size (2 + 2n)MLjη, and with the same center as Π, hence it is a union
+              d
+of (2 + 2 n) big blocks.
+      We need two different scales, given by two sizes of big blocks. In [4] we have
+proved all theorems under the assumption that R, M are sufficiently large. We take
+these numbers as powers of L. Let us fix a pair Ro, Mo of smallest possible numbers
+satisfying conditions needed in the proofs. We assume that the size M of big blocks
+we are using in this paper is much bigger than M o , more precisely we assume that
+M = KR0M0, K is a positive integer. Thus a big block of the size M can be represen-
+ted as a union of cubes of the size R0M0. Let us take a cube Q e % and let us
+define a sequence {β,,(D)}π = o,...,7 + i °f domains in the following way. The cube
+Π 3 is either contained in Bj(Λj), or intersects also the domain Bj+ 1(Aj+ x ). Let us as-
+sume the second case, then we defined Ωj+ X (Π) = D 3 r\Bj+ ι(Aj+ x ). We take β / Π ) =
+D 4 , βj-iflZl) is a cube with a center at the center of • and dist (Ωj-άΠY, β,{D))
+ = 2R0M0Lj~ 1η, and generally β Λ (Π) is a cube with a center at the center of • and
+dist(Ωn(Π)c,Ωn + 1(Π)) = 2R0M0L\ordist(Ωn(Π)\          D 4 ) = 2R0M0Lnη + • + 2R0M0
+  j 1                n     j n
+L ~ η = 2R0M0L η (L ~ - 1/L- 1). This sequence satisfies the conditions (2.1),
+(2.2) with j instead of k, if rescaled from ^/-lattice to L"J'-lattice. For n ^ O w e have
+dist(ί2 0 (Π) c , Π4)<2R0M0Ljη,     hence β o ( Π ) c U 5 . We have assumed that the
+Propagators for Lattice Gauge Theories                                                        409
+
+                                                                                               5
+number 0(1) in the condition (3.35) can be taken as equal to 12, thus the cube Π is
+contained in one of the cubes for which this condition holds, and the sequence
+{ΏΠ(D)} satisfies the assumptions of Corollary 3.6. The operators constructed for
+this sequence, which we denote by G'D(l/), CΠ(U) = {Q\U)G£{U)Q*{U)y\ GΠ(U\
+satisfy all the inequalities of Theorems 3.1-3.3 correspondingly. This is the basis of
+all estimates for the expansions we will construct. The arguments will be almost
+identical to those in [4], so we will sketch them rather briefly. We will elaborate only
+the points which are different from the corresponding ones in [4].
+    Let us drop the symbol U in formulas below. We construct approximations
+GO, C o , G o of the operators G', ( β ' G ^ β ' * ) " 1 , G taking
+
+            G ' o = Σ hπσπhΠ9            C0=Σ         hπCπhπ,        G0=Σ          hDGπho.   (3.87)
+                   ΠeΘ                           Πε®                        E\e@
+As in [4] we have to express the operators Δ'aG'o, (Q'G'2Q')C0, ΛaG0 as small
+perturbations of identity. Let us start with the operator Δ'aG'o. Using (3.50) we get for
+xeΔ(y)9 yeΛj9
+
+   (Δ>ahλ)(x) = h(x)(Δ'aλ)(x)-           X (dh)(b)(Dλ)(b) + (Δh)(x)λ(x)
+                                     best(x)
+
+
+
+
+              = h(x)(Δ'aλ)(x)-(K(h)λ)(x),                                                    (3.88)
+hence
+
+
+
+
+Using the inequalities (3.42) for G'G, we get the bound
+                         \(K(hπ)G'πhπλ)(x)\ £ 0{M-')e-δ»^y->\λ\                               (3.89)
+
+for xeΔ(y), supp λ a Δ(y'), y,y'e\Z\ e ^ It is exactly the bound (2.44) of [4], rescaled
+to ^-scale. This bound was a basis of all the remaining considerations in that paper,
+connected with the convergence of the expansion (2.50), so we may apply them here
+also. We get
+Theorem 3.7. For M sufficiently large, and a configuration U satisfying (3.35), the
+operator G' can be represented as
+
+                    G^GW-RT^GΌΣ R'n
+                                                      n= 0
+
+
+                         = Σ *DoG' D o Λ D ( Λ(A D l )G' D l λ D l    K(hDn)G'DJhDn,         (3.90)
+
+where ω = (Do, Di.           . D j , D ; e^, • i π Π i + i ^ 0
+
+The expansion is convergent in all norms appearing in the inequalities (3.42)-(3.47).
+ 410                                                                                                       T. Balaban
+
+This theorem follows simply from Corollary 3.6 holding for all G'D, Π e ^ , from the
+bound (3.89) and Lemma 2.1. The arguments are exactly the same as in proofs of
+Proposition 1.2 [3] and Proposition 2.2 [4], so we will not repeat them here.
+      Theorem 3.7 implies that all the inequalities (3.42)-(3.47) hold for G', thus we
+have completed the proof of Theorem 3.1.
+      Let us make again the remark we made after Corollary 3.6. We have proved the
+exponential decay of the propagator G' using the expansion (3.90) and Lemma 2.1.
+We can get a decay rate arbitrarily close to the decay rate of the localized
+propagators, hence to the decay rate of propagators without external gauge field.
+The main purpose of the expansion (3.90) is to express G' in terms of localized
+operators, so that we can apply the results of the previous section. Let us elaborate a
+little bit more on these localization properties, and on bounds for terms of (3.90). We
+are interested in localization for the gauge field U. A propagator G'D depends on U
+restricted to ί2 0 (D) <= U 5 ? and the operator K(h) is semi-local, hence a term in (3.90)
+corresponding to a walk ω = (Πo>Πi> 5 D M ) depends on U restricted t o Π ou 0 1
+u . . . u D Λ 5 . The bound (3.89) implies a bound for this term. There are two important
+factors, one is a product of the factors O{M~% and one is an exponential factor,
+connected with this in (3.89). To describe it let us localize the term, inserting
+characteristic functions of Δ(y\ y E23, between the operators K(hπ)G'πhΏ. We get the
+sum
+       X        Δ{y)hΏoG'ΏohΏoΛ{yλ)K(hΏ)σΌιhΏiΔ{y2)                                       Λ{yn)K{hQn)G'ΌhΏnΔ{y')λ,
+ y,U^>=K.,                                                                                                     ( 3 9 1 )
+
+
+
+
+and each term in this sum can be estimated by
+                                                                                                              (3.92)
+                              j     2
+The first factor 0(1) {L η) is unessential and is connected with the supremum norm,
+if we take another norm we get another factor with a different power of Ljη. We
+use part of the exponentials to control the sum over y?s, let us say the exponentials
+with jδ0 instead of <50, the remaining are used to construct an overall exponential
+factor. Let us define a distance relative to the walk ω by
+
+           d{ω,y,y') =        inf              {dfryj       + d(yuy2)       + - + d(yn_uyn)   + d{yn9γ)\      (3.93)
+                         (yι,y2,        ,yn)
+
+the infimum is taken over all sequences ( j / ^ ^ J'J of points ^ - e Π i e S . Let us
+denote | ω | = n. We summarize the above considerations in
+Corollary 3.8. The term in the expansion (3.90) corresponding to a walk ω =
+( D o , • ! , . . . , •„) depends on U restricted to D o u D f u . . u D j , and
+
+
+                                               o    Π
+                                                   i=   1
+
+                                                                        ^                                     (3.94)
+
+for ye\3o^Λj, / e Π π Similar estimates hold for the other norms.
+     We will use the factor O(M~112) to control the sum over random walks ω, and the
+ last two factors in (3.94) will be important for other purposes.
+Propagators for Lattice Gauge Theories                                               411
+
+    We will construct random walk expansions having properties described in this
+Corollary for all operators we consider in this paper. These constructions will play
+a very important role in the future.
+    Next let us consider the operator (β'G^β'*)" 1 . We will find an expansion of
+this operator as usual considering β'G' 2 β'*C 0 . We write it in the same way as
+in (2.82) [4]
+   β'G' 2 β'*C 0 = / + Σ ( l - D)β'G' 2 β'*/ι D C D /z D + Σ ΏQ\G'2 - G'D2)β'*/zDCD/zD
+
+                   + Σ [Πβ'G' D 2 β'*, ftD]CDAD = I-R                              (3.95)
+                      D
+
+By the same estimates as in [4], especially (2.83)—(2.85), we can see that the operator
+R is small and
+
+                          (β'G'β'*)- 1 = Coil-RΓ1   = f C0R\                     (3.96)
+                                                       «= o
+ The series is convergent in the weighted supremum norm on 33 appearing in the
+ inequality (3.48) in Theorem 3.2. This expansion is unsatisfactory yet, because it
+ is expressed in terms of the unlocalized operator G. To get an expansion having
+ the desired properties we replace the operator G everywhere in the series (3.96)
+ by an expansion similar to (3.90). Let us notice that we may construct (3.90) for
+ an arbitrary partition of the lattice Tη. Let us take a term with the propagator G
+ on the right-hand side of (3.95). It is determined by a cube Π e ^ . We construct
+ a new partition 3)' changing Q) locally around •• Let us assume that Π ^ . If
+ Π does not intersect any cube of the family @j+χ, then we define & replacing
+ in Of the cube D by 0 2 , and removing all the cubes intersecting 0 . If D intersects
+ a cube from @j+ ί9 then we take a cube Πi from @j+1 which is closest to the center
+of •> we replace • by Π 2 , and we remove all the cubes which intersect Πi
+ Let us denote by Do the cube Π 2 in the first case, and Π 2 in the second. The
+partition 3' coincides with 3 outside Πo We construct the corresponding partition
+of unity {h'π}Πe@,, and the random walk expansion (3.90) for the partition 3)\
+Now in terms corresponding to a fixed • on the right-hand side of (3.95) we
+replace the propagator G by the expansion (3.90) constructed for the partition
+3>'. Let us consider a term in the first sum in (3.95), and let us replace propagators
+G by terms in this expansion. We get a product of possibly many operators of
+the type K(h'π)Gπh'Q, each of them satisfying (3.89), and of three operators of
+the type h'πG'πhπ       or hπCπhπ.        These three operators satisfy bounds
+with exponential factors as in (3.89), but without small factors O(M~1). We use a
+part of an overall exponential factor to produce these small factors. The
+characteristic function 1 — Π at the beginning of the term, and the function hπ
+at the end, restrict a kernel of the term to points separated at least by a distance
+Mϋη (if Πe@j). Hence the part of the exponential factor can be estimated by
+e-a/4)δQM^3l
+                 μμ δ0M)-\ and we attach the factor δ ^ M " 1 to each of
+the three operators. The term considered is a product of operators which have the
+same localization properties and bounds as the operator in (3.89). Next let us
+consider a term in the second sum on the right-hand side of (3.95). We expand
+412                                                                            T. Balaban
+
+
+the propagators G' into the random walk expansion (3.90) constructed for 3)'.
+Terms in this expansion have the same structure as described above, the only
+difference is that the function 1 — Π is replaced by Π Thus the exponential
+factor may not be small. If we have at least one operator K(h'π)G'πtiπ, then we
+connect operators in the term into groups, each group having an estimate with a
+small factor. We attach each operator h'ΠιG'Πιh'Πι          to a closest operator
+K(h'Π2)G'Π2h'Π2   on the right, and the operator hπCπhπ              to a closest
+operator of that type on the left. At a worst case we have three operators attached
+to one operator K(h'U2)G'U2h'U2.       We consider the resulting products as
+single factors in the random walk expanson we are constructing. Such factors have
+bounds (3.89), possibly with a power of Ljη. We have to consider yet the case when
+we have only operators h'π,GΠ'h'u> in the term. Because of the restrictions
+introduced by the functions Π, hΏ, it is possible only if Π' = Do f° r both
+operators. Thus we have the term
+
+
+Let us notice that by the construction of the partition 3)' we have h'Πo = 1 on
+Π, hence we have only the function h'£0 in the above expression. We move
+this function to the left, i.e. we write this expression as
+
+
+The commutator in the first term gives O(M~1). We consider this term as one
+factor in the random walk expansion. We take the second term together with the
+term in the second sum we have not considered yet, i.e. we take
+                             0β'(G' D 2 o -G' π 2 )ρ'*Λ D C D Λ D .                (3.97)
+We have proved in [2] that if we have a difference of propagators defined on two
+domains, then in an estimate of this difference we have, besides the usual factors
+connected with propagators of a considered type, an exponential factor with a
+distance between localizations and a closest point where a change was made. Such
+inequalities were proved using only the random walk expansions, hence they are
+valid for all propagators we have considered in [4]. By an argument similar to
+the one used in the proof of Corollary 3.5, they are valid for propagators defined
+by sequences {Ωj} with Ωo contained in a cube for which the condition (3.25) is
+ satisfied. Hence, they are valid in the considered case, and the differences DQ'
+(G'^o — G^)β'*Π can be estimated by the usual factors multiplied by
+e-2(5oM ^y e j i a v e
+                        t 0 notice only that the operators may differ outside Πo> a n < ^
+the distance from Π to Do is a t l e a s t M (on L~J-scale). This exponential can
+be estimated by (2δ0M)~ι and we consider the operator (3.97) as on factor in the
+expansion. Finally let us notice that terms in the third sum on the right-hand side
+of (3.95) are already localized and give small factors O(M~ι).
+     Let us describe generally the random walk expansion we have constructed.
+Each term in this expansion is a product of factors. The basic example is the operator
+K(h'Ώ)Gruh'u, but we have several other possibilities, like h'Ώ G'u h'u K(h'Ώ2) x
+G'ϋ2Λ'D2, K(h'Ώo)G'Doh'ΏohuCDhΏ9          OQ'lG'^h'iJG'^Q'^Cvh^             Dβ'(G'D2o-
+G'π)Q'*hπCπhD9         etc. Each factor is a product of several operators localized
+Propagators for Lattice Gauge Theories                                              413
+
+correspondingly in cubes D 1 ? D 2 , . . . with the property that two neighboring cubes
+in the sequence have a non-empty intersection, i.e., Π i Π Π 2 ^ 0 ?          A sum of
+these cubes determines a localization domain X i.e. X = Π i ^ D ^                  More
+generally, we consider a class of localization domains, each domain is a union of
+a connected, finite family of cubes from 3. A connected family means that for
+every pair Π, D' of cubes from the family there exists a sequence Π i , , D m of
+cubes belonging to the family and such that D π D i ΐ 0 , Di<^ D2 ϊ^ 0> ?
+Π m π • ' Φ 0. We consider only very small families, containing several cubes. A
+biggest is connected with operators localized in Do? which is a sum of 5d cubes
+from 3). For each factor in the expansion it is obvious how to construct a
+corresponding domain X. A domain X does not determine the factor uniquely,
+usually there are several possibilities, and we introduce an index a enumerating
+these possibilities. We denote a factor by R'a(X). We assume that 0 is a possible
+value of the index α, and that R'0(\3) = hπCπhπ,             R'0(X) = 0 for localization
+domains bigger than a cube from 3). Thus a random walk ω is a sequence ω =
+((cco,Xo), (oc1,X1),...,(oίn,Xn)). We will have always α o = 0. Let us again denote
+|ω| = n. An operator R(X) has the following important properties: it is localized
+in X, i.e. its kernel has a support in X x X, it depends on U restricted to X 5 ,
+and satisfies a bound of the type (3.89), possibly with an additional power of Uη.
+It is difficult to make the last statement more precise. Instead we will write a
+bound for a whole term in the expansion. We have
+
+
+Theorem 3.9. For M sufficiently large, and a configuration U satisfying (3.35), the
+operator Q'Gf2Q'* has an inverse which can be represented as
+
+                     (Q'G'ϊQ'*)-1 = ΣR'0(X0)R'aι(Xι)       Kn(Xn)                (3.98)
+
+the sum is over walks ω = ((0,Xo), (al,Xi\...,{(xn,Xn))     satisfying Xi
+i=\,...,n.   A term in this expansion corresponding to a walk ω depends on U
+restructed to X^uXlu...    u l n 5 , and has the following bound:
+
+                                     R'jxn))(y,y')\ ύ
+                                                         y'eΛr.                  (3.99)
+
+ The distance d(ω,y,y') is defined by (3.93), but the infimum is taken over j ^G
+    Let us remark that generally the operators R'a(X) act between different scales,
+for example K(h'Πί)G'Πιh'ΠιQ'*        transforms functions defined on S3 into
+functions defined on ^-lattice, hence not all combinations of indices αf are
+admissible. We have not included this fact into the description of the expansion
+(3.98) because it does not affect bounds.
+    This theorem implies Theorem 3.2.
+    Finally we consider the basic operator G. We have to calculate the composition
+ΔaG0. For covariant derivatives we have
+
+          (DμhAv)(x) = h(x)(DμAv)(x) + (dμh)(x)R(U(x9 x + ηeμ))Av(x + ηeμ\      (3.100)
+similarly for adjoint derivatives, hence the commutators [D*D, h] and [Z)D*,/z]
+414                                                                                         T. Balaban
+
+
+are first order differential operators with coefficients determined by derivatives of
+the function h. They are of the order O(M~ι\ or O(M~2), if considered on a proper
+scale. The operator A' is small and local by (3.10), hence the commutator \A\ h]
+gives the factor O(M~ι) too. Now let us consider the commutator [DRD*, h]. We
+have DRD* = DD* - DPD*. The operator DD* was considered above, and DPD*
+has a regular kernel satisfying (3.49), hence
+      {DPD*hA)μ{x) = h(x)(DPD*A)μ(x) + £                       ηd(DPD*)Jx,x')(δh)(Γx,x,)Av(x')
+                                                      v,x'
+
+                      = h(x)(DPD*A)μ(x) + {P,{dh)A)μ(x).                                       (3.101)
+The operator Px{dh) satisfies the inequalities (3.49) with the additional small factor
+OiM'1) coming from an estimate of the expression (dh)(ΓXyX)togttheτ with the
+exponential decay of DPD*. Similarly for averaging operators, if we introduce
+kernels by the representation
+                        (QjA)(c)=           Σ     .          L-JdQj(c,b)A(b\
+                                     bcBJ(c_)uBj(c + )
+
+then we have
+               (QjhA)(c) = h(c_)(QjA)(c)+ΣL~JdQj(c>d)(dh)(Γc                    b   )A(b)
+                                                  b
+
+                        = h(c_)(QjA)(c) + (Sj(δh)A)(c).                                        (3.102)
+This implies
+       (Q*aQhA)(b) = h(b_)(Q*aQA)(b)-(S*(dh)aQA)(b)                       + (Q*aS(dh)A)(b). (3.103)
+Thus we have generalizations of the formulas (1.120) [3]. They imply that
+                              AahA = hΔa- K{h)A - P^dtyA,                                      (3.104)
+where K(h) is a sum of a first order differential operator and the last two terms
+on the right-hand side of (3.103). Applying this formula to ΛaG0 we get
+          ΔaG0 = I - ^K{hΏ)GahQ           - Σ(l -              ζQ)DPD*hDGπha
+                          D                   D
+                    - Σ ζQ(DPD* - DPDD*)haGaha                      - Σ        ζQPaΛ3hD)Gahπ
+                      D                                               D
+                 = I-R,                                                                        (3.105)
+where the function ζQ is defined similarly to hπ, i.e. ( Q G Q ^ Π ) and £Q = 1
+on a cube containing Π, whose boundary is in a distance ^ §M to the boundary
+of •• This implies that supp hπ is separated from supp (1 — CQ) by a distance ^
+M. The operator K(hπ)Gπhπ          satisfies the inequality (3.89), hence it is small.
+Next we will analyze the other operators in R and we will prove that they are
+small also. More exactly, it will follow from this analysis that JR satisfies the bound
+                 ι
+(3.85) with O(M~ ) instead of O(αJ. For M sufficiently large this implies
+                                                              OO
+
+
+                               G = G 0 ( / - i ? ) " 1 = Σ G0R".                               (3.106)
+                                                             n =0
+
+Substituting the expression in (3.105) for R we get the expansion (2.135) [4]. It
+Propagators for Lattice Gauge Theories                                             415
+
+ does not satisfy yet the properties we need, because of the nonlocality of the
+ operator P. We proceed in a similar way as for the expansion (3.96), we replace
+the operator P by its random walk expansion. It can be done easily because
+          f       2  f  1
+P = G'Q *{Q'G' Q *y Q'G\ and we have the expansions (3.90), (3.98) for factors
+in this product. We use again the flexibility of these expansions, the fact that they
+can be constructed for an arbitrary partition instead of <3). We fix a cube • in the
+sums in (3.105), and for this cube we construct the same partition & as for terms
+in (3.95). For this partition we construct the expansions (3.90), (3.98) of the operators
+G', {Q'G'2Q*)~ι. We will use the same notations as in the analysis connected
+with the expansion (3.98). Let us notice that if we use the partition 3)' in (3.95),
+then we have to take other partitions for expansions of propagators G'. If a cube
+ • in 3)' is different from Πo> then it belongs to 3) and we may use the same
+constructions as before, especially we may use again the partition 3)' for this cube.
+For the cube Π o we construct a new partition 3)" replacing Π o by Do
+removing from 3)' all the cubes which intersect Qo We take the operator
+with the boundary conditions outside Πo In terms of the original cubes
+D, or [Hi, we have Do = D 4 , or Do = D 4 , and the boundary conditions
+are outside Π 8 , or Π? Now let us take the expansions (3.90), (3.98) constructed
+for the partition 3)\ and let us insert them in the place of the operator P in terms
+of (3.105) determined by the fixed •• We have to consider only two terms in the
+second and third sum in (3.105). The term in the second sum gives rise to small
+terms in the expansion because of the overall exponential factor and the fact that
+localizations introduced by 1 — ( Q and hπ are separated by a distance ^ M.
+The analysis is the same as before. The expansion of the term in the third sum gives
+also small terms, except the following one:
+
+
+We transform this expression in several steps. At first we replace each function
+h'Do by ζ Q , terms with the difference ft'Do — CQ are small again because
+localizations are separated by a distance ^ M. Next we replace the operators
+G'Do and CΏo by G'D, C π , terms with the differences G'Ώo — G'Ό and
+C D o — C D are small by the same reason as before. We get the expression
+                       ζaDGDζ0Q'*ζΰCaζ0Q'ζ0G'aD*hDGaha.
+Now we move the functions ζ Q , except the first one, to the right. Terms with
+commutators like K ^ C J , [ ζ ΰ ? G ' D ] , etc. are small. Using the fact that
+ζfihπ = ho we get the following expression without small factors
+                ζQDG'ΏQ'*CoQ'G'aD*haGΏhΏ        =     ζQDPaD*haGDhΏ.
+
+This expression cancels the second term in the third sum. Thus we have decomposed
+R and G into convergent expansions, the terms in the expansion of R being small.
+The factors in these expansions are very similar to the factors # i ( Π ) m (3.98), we
+have only few possibilities more, like the operators K(hu)Gπhπ,                     £•
+Dh'ΠoG'ΠohfΠoQ'*, etc. The above considerations give
+
+Theorem 3.10. For M sufficiently large, and a configuration U satisfying (3.95), the
+416                                                                            T. Balaban
+
+operator G has the expansion
+
+                          G = ΣRoiXoWatXi)            RJXn),                      (3.107)
+
+the sum is over walks ω = ((0, Xo), (<x1,Xί)9...,(<xn, Xn)) satisfying X{ _x n Xt =/= 0 , i =
+1,..., n. A term in this expansion, corresponding to a walk ω, depends on configuration
+                                      5
+U restricted to XQUXIKJ...       u l w , satisfies the inequality
+
+
+                                      >yy\9 xeΔ(yl                                 (3.108)
+and the corresponding inequalities for norms on the left-hand sides of (3.42)-(3.47).
+The constant 0(1) depends on d and L only.
+    From (3.108) it follows that the expansion (3.107) is convergent in all norms
+in the inequalities (3.42)-(3.47). This implies Theorem 3.3.
+    Thus we have completed the proofs of all theorems formulated until now. In
+the next section we will need one property more. We have
+Theorem 3.11. Under the assumptions of the Theorems 3.1-3.10 (i.e. for M
+sufficiently large and α 0 sufficiently small) the operators Δ'a, G', (β'G^Q'*)" 1 , Δa,
+G are positive definite.
+    This is obvious for the first three operators, and also for P and R, hence it is
+enough to prove it for G. It is a symmetric and invertible operator, so if it is not
+positive, then there exists Aoφ0, λo>0 such that GA0 = — λ0Λ0. By (3.106)
+G = Go(/ — R)~ \ R is an operator with small norm. Let us assume that the operator
+G o is positive, then we can write the above eigenvalue equation as G j / 2
+(I-R)~1Gy2Aι       = -λ0Al9    Ax = GQ1/2A0.    This implies that the quadratic form
+      (A,Gy2{l - RΓ'G^A}          = <(/ - R)-'Gy2AXI - R*)(I -         RΓ'G^A}
+assumes negative values for some configurations A, hence the same is true for the
+form (A,(I — R*)A}. This is in contradiction with the inequality
+                - R*)A) = (A,A) -Re(A,RA}^(l               - OiM-^ζA^A)        >0
+holding for M sufficiently large. Thus we have to prove the positivity of G o . By
+the definition (3.87) it is enough to prove a positivity of the operators G D . Now
+we use the results of Sect. B in the same way as in the proof of Corollary 3.6.
+Doing the gauge transformation we get the configuration U = eιηA with A small,
+and by (3.86) we get Gπ(eiηA) = GΠ(1)(I - V(A)GΠ(1))~1. In [4] we have
+proved that the operator GD(1) is positive, hence by the same reasoning as above
+we prove positivity of G D .
+
+
+D. Other Operators
+The operators considered in the previous sections are not the only important ones,
+in fact other operators will appear more frequently in our method. The importance
+of the considered operators is based on the fact that the others can be expressed
+in terms of them. In this section we will derive these representations and we will
+formulate properties of the represented operators, properties implied by the results
+Propagators for Lattice Gauge Theories                                           417
+
+of the previous sections. We will consider operators being generalizations of the
+operators H and P constructed in [3] by the formulas (1.103) and (1.107).
+    Let us consider at first the operators H. In the future we will need several
+operators of this type. We start with the simplest one. We assume that the geometric
+setting is the same as in previous sections, and that a gauge field configuration U
+is defined on Ωo and satisfies the condition (3.35). For a configuration B defined
+on 33 and with values in the Lie algebra cj we define H(U)B, or simply HB, as a
+minimal configuration of the functional
+                                    A^<A9Δ{U)A>,                              (3.109)
+on a set of configurations A defined on ί2 0 , with values in g, satisfying
+              LjηQj{U)A    =B     on Λj9    = 0, l,...,/c,   R(U)D*A   = 0.   (3.110)
+                                     j
+We have written the factor L η in the first condition because the expression
+LjηQj(U)A is a linear part of the function Qj(U,ηA), and this variational problem
+is a linear approximation to a general non-linear variational problem for
+group-valued configurations we will consider in forthcoming papers. For the
+above linear problem the factor Ljη is unessential because it may be included into
+the configuration B. In the future we will write the first condition in (3.110) as
+Q(U)A = B.
+   The variational problem (3.109), (3.110) has a unique solution. Indeed, the
+functional (3.109) is equal to
+  A^A,(Δ+DRD*              + Q*aQ)Ay-$<B9aBy=HA9ΔaAy-HB9aBy                   (3.111)
+on the hyperplane (3.110), hence the existence of a unique minimum on this
+hyperplane follows from positive definiteness of the operator Δa. This minimum
+is denoted by HB. It define a linear operator H. We would like to represent this
+operator in terms of the already introduced operators, similarly to (1.103) in [3]
+and (2.35) in [4]. We will follow the method of [4], Sect. A.
+    Let us start with an integral representation of HB. All integrals in this section
+will be on sets of configurations defined on the domain Ωo, so all operators are
+defined on/2 0 also, with Dirichlet boundary conditions onί^o We do not introduce
+any special notation indicating this fact. We have
+                 HB = Z-\B)\dAδ{QA         - B)δR(RD*A)e-m<AΔA>A,             (3.112)
+where Z(B) is given by the same integral with the last A replaced by 1. This formula
+can be proved easily by making the translation A = A' + HB and then noticing
+that the term with A vanishes, and the coefficient at HB cancels with Z~\B).
+The integrals in (3.112) are convergent because on the domains of integration we
+can replace the form \/2(A,ΔAy         by the right-hand side of (3.111), and we can
+use again the positive definiteness of Δa. The method of Sect. A in [4] was to
+replace the ^-function gauge fixing expression by an exponential gauge fixing
+density, using the Faddeev-Popov procedure. Unfortunately, in the present case
+there are additional difficulties because some expressions in (3.112) are not invariant
+wih respect to the linear gauge transformations used in the definition (3.17) of
+the gauge fixing density.
+418                                                                                T. Balaban
+
+
+    Let us investigate how the averaging operators act on gauge transformed
+configurations. The linear gauge transformations were defined as A -» A — Dλ, and
+Qj(A — Dλ) = QjA — QjDλ, hence it is enough to investigate averaging operators
+acting on gauge transformations. We use the fact that a linear gauge transformation
+defined by λ is a linear part of the transformation U' -» U'u defined by u = eιλ, and
+we study at first the non-linear averaging operation acting on the non-linear gauge
+transformation. We consider the one-step average
+
+                       U'e = (Rc- U'Γ1(U'U)tίUc)-1RcRc+                       U\
+where
+                                              d
+                                        Σ L- -log(RyU')(ΓyΛ                          (3.113)
+                                                  ι
+                                      eB(y)                                    J
+
+and we calculate it for Ufu with U' = 1, thus for U'(x,xf) = u{x)R(U(x,xf))u~1(xf).
+We have (UΊJ)C = u(c_)U^u~ \c+\ and (ΪΠJ)c{TΓcy' = u(c_)Rcu- 1 (c + ). Next we get
+
+                                   L-d-\ogu(y)R(U(ΓyJ)u-1(x)]
+                                  ) l                         J
+                 = u(y)exp\ -i Σ L-^logu
+                                   l
+                         L
+
+                              1
+hence U'c — (Ru)(c _)Rc(Ru)    (c+). Taking logarithms of both sides, and linear parts
+in λ, we obtain
+
+                (QDL1λ)(c)    = UQ'λ){c+)     - (β'A)(c_) = (DΌQ'λ)(c).               (3.114)
+Iterating this identity we obtain finally
+                              Qflλ = DLΌJ?Q)λ = DjQ'jλ,                               (3.115)
+                                                                        j
+where the last equality is a definition of the symbol D . These equalities are simple
+                                         1
+generalizations of the identity Qkd = d Q'k used in [3,4]. In particular they imply
+that the average QA are invariant with respect to gauge transformations λ satisfying
+ρ'Λ = 0, i.e. λeN(Q').
+    Let us consider how the basic quadratic form (A,ΔA}          changes under the
+gauge transformations. We use again the non-linear gauge transformations
+        ru                    η   u        η
+U'-+U and the identity A (U' U) = A (U'U). Now we need expansions up to
+second order in A, λ. Let us write an expansion of U'u, Uf — eιηA, u = eιλ
+
+                  U
+                                                      iλ b
+                              = — log             e    ( -ϊeiηA{b)e~iRbHh+)
+                                iη
+
+
+
+
+                                                                                     (3.116)
+Propagators for Lattice Gauge Theories                                                     419
+
+the dots denote higher order terms. Expanding the both sides of the identity
+according to (3.12), and comparing terms of the same order, we get the identities
+                                  (Dλ,J> = 0,     or       D*J = O
+       (A-    Dλ,Δ(A -Dλ)}         = (A,ΔA)     - <i[A(b_), A(bU - ilA{b), Rbλ(b+ )]
+                                                               ).                      (3.117)
+The last equality can be interpreted as almost invariance of the quadratic form,
+the error terms are small because the function J = D*η~2lmdU               is small, if U
+satisfies the condition (3.36). From now on we assume that U satisfies the regularity
+conditions (3.35), (3.36).
+    It is convenient to have a gauge invariant quadratic form, because then we
+can repeat the calculations of Sect. A in [4]. We take advantage of the fact that
+in (3.109), and in the integral (3.112), the quadratic form is restricted to A satisfying
+the gauge condition RD*A = 0. We define a new quadratic form extending (A,ΔA)
+in a gauge invariant way to all configurations A. It is easy to see that such an
+extension, which we denote by (A,ΔπA},         is given by the formula
+                                                                                 λ)
+                                                                                   \   (3.118)
+where we have used the identity RD*(A - Dλ) = RD*A -RΔλ = RD*A -Δλ, which
+holds by the definition of R and the fact that λeN(Q'). Calculating the integral
+above we get
+                 (A,ΔπA) = (A - DG'RD*A,Δ{A -DG'RD*A)>.                  (3.119)
+The quadratic form is invariant with respect to gauge transformations determined
+by λeN(Q'). This follows from the integral formula (3.118), but also from the
+above explicit representation. In fact the expression A — DG'RD*A has this
+invariance property. It is obtained by gauge transforming an arbitrary configuration
+A to the subspace {A:RD*A = 0}. Let us now apply the second identity (3.117)
+to the right-hand side of (3.119). It gives the equality
+
+                                                           ''RD*A)(b-\A(b)~\
+
+                                      ίt(G'RD*A)(b_)ΛDG'RD*A)(b)y}
+                                                 (A,ΔfπA>.                             (3.120)
+The quadratic form Δ'π is a small perturbation of Δ. Later we will write bounds
+for this form, now let us proceed with the derivation of a formula for HB. We
+replace the operatorΔ by Δπ in (3.112), and we apply the Faddeev-Popov procedure
+                 Z~ \B)\dA δ(QA -            B)δR(RD*A)e-{[/2KA>Δ«A>A
+
+
+
+
+                 • j dλ δ(Q'λ)δR(RD*A +Δλ)(A + Dλ)
+                              1          1             ι
+             =              Z- (B)Z'- \det(Δ\N{QΊ)Γ $dAδ(QA-B)
+                       - ϊ < A , Δ κ A > -KA,DRD*A}~](A             - DG'RD*A)         (3.121)
+420                                                                        T. Balaban
+
+
+In the second equality we have used (3.115) and the condition Q'λ = 0. They imply
+that QA is gauge invariant with respect to gauge transformations satisfying this
+condition. To calculate the last integral we have to find a minimum of the functional
+
+                         Δπ + DRD*)A} =%(A,G~lAy             -%(B,aB}         (3.122)
+                                                  1
+on configurations A satisfying QA = B, and G' defined as G~* =Δπ + DRD* +
+Q*aQ. Now this is an easy problem. We take the Lagrange function h(A,ω) =
+1/2{A,G~ιA) — <ω,QA — B}, and we get the following equations for the
+minimum
+
+                   ^ = G-M-Q*ω = 0, £- = QA-B = 0,
+                όA                   δω
+hence A = GQ*ω, QGQ*ω = B,ω = (βGβ*)" ιB, and finally A = Gβ*(βGβ*)~ ιB.
+Making in the last integral in (3.121) a translation to this minimum we get
+              HB = Z~1$dA     δ(QA)e-{l/2)<A>G~lA\A     + Gβ*(βGβ*Γ *5
+                     - DG'RD*A -       DG'RD*GQ*(QGQ*y1B)
+                   = GQ*(QGQ*y ιB - DG'RD*GQ*(QGQ*)1B.                     (3.123)
+We will prove that the second term in the last line vanishes. More exactly we will
+prove the identities
+                        #Z)*Gρ* = 0?     hence        QGDR = 0.               (3.124)
+The proof is similar to the proof of the corresponding identities (2.34) in [4]. We
+write the expression RD*GQ* with the help of a Gaussian integral with the
+covariance G, and we apply the transformations used in (3.121) in a reversed order.
+We have
+
+
+
+
+               'RD*AQA\det(Δ\N{QΊ)\μλδ(Q'λ)δR(RD*A
+
+
+                                                         2
+              δR{RD*A)\dλδ{Q'λ)exvί-\\\RD*A-Δλ\\ MRD*A-Δλ)QA
+             =0                                                               (3.125)
+because RD*A = 0, and then both integrals above, in A and λ, vanish (by the
+symmetries A -> — A, λ -> — λ, and the presence of linear terms in A and λ only).
+Thus the identities (3.124) are proved. They imply the formula
+                              HB = GQ*(QGQ*y ιB.                              (3.126)
+We have obtained formally the same representation for the operator H as in [3,4]
+(1.103), (2.35), but now the operator G is much more complicated. It differs from
+the operator investigated in previous sections by the additional term Δ'π, but we
+will prove that this term is a small perturbation of Δa, and that the operator G
+used in the above formula has all the properties formulated in Theorems 3.3, 3.10,
+Propagators for Lattice Gauge Theories                                                          421
+
+                                                                     1
+3.11. We have to investigate also the operator (βGQ*)" , but the analysis is very
+                                              1
+similar to this for the operator     (QΌ^Q'*)' .
+    We will need other operators of the same type as H and G introduced above.
+In the future we will consider a non-linear variational problem, a generalization
+of the problem (3.109), (3.110) in which, among other changes, the linear averaging
+operators in (3.110) are replaced by non-linear ones. To solve this problem the
+non-linear averaging operations have to be linearized, and a linearizing transfor-
+mation creates new quadratic terms in an expansion of the action. Fortunately
+they are connected with the linear term in the expansion (3.12), so they are small
+because the configuration J is small. Let us write a quadratic form replacing (3.109)
+in the variational problem.
+                                                                y.                         (3.127)
+The function C (A) is defined at bonds of 53, and on Λj it coincides with C{2)
+                  i2)
+
+
+(LjηA)—a second order term in the expansion of Qj(ηA). The operator H is defined
+by the problem (3.109), (3.110), hence in the representation (3.126) we have to
+multiply the function B by (Uη)'1 on/l J 5 or we take H given by (3.126), and C{2\A)
+equals to UηCf\A) on Λ}. We solve the variational problem (3.127), (3.110) in
+exactly the same way as the problem (3.109), (3.110). At first we construct a gauge
+invariant extension of the form on the right-hand side of (3.127) by the formulas
+(3.118), (3.119), and next we repeat the calculations in (3.121)—(3.125). Let us denote
+the operator defined by the problem (3.127), (3.110) by Hί9 and by Gι the operator
+defined by the quadratic form
+
+                                                                         || 2 + a\\QA\\2
+                        = {A-   DG'RD*A,A{A - DG'RD*A)}
+                          - 2 < HCi2)(A - DG'RD*A% J >
+                          + \\RD*A\\2 + a\\QA\\2.                                          (3 1 2 8 )
+Then we have the formula
+                                 H,B = G^iQG^y'B.                                          (3.129)
+    Now we will prove that Theorems 3.3, 3.10, 3.11 hold for the propagators
+G, Gί. This will be an immediate consequence of perturbative expansions we will
+construct. Let us denote for a moment the operator we have investigated in previous
+sections by G o , i.e. G o = (A + DRD* + Q*aQ)~ί. From (3.120) we get
+
+                           G^GOOΓ-ZI G O Γ 1 - f           Go{Δ'κGor.                      (3.130)
+                                                    n =0
+
+It is easy to find estimates for the operator Δ'π9 using Theorem 3.1 and the inequality
+(3.49), we have to be careful only with the third term in the definition (3.120) of
+Δ'π. One of the three derivatives there has to be applied either to an expression
+on the right, or on the left, of Δ'π. For example one of the terms in         (A1,A'πA2}
+is
+422                                                                                           T. Balaban
+
+and we apply the derivative D* to A1. We have
+
+
+
+
+                          for supp Aγ czΔ(y),          yeΛj,   suppΛ 2 <z:Δ(y% y'eΛr.           (3.131)
+This inequality and Theorem 3.3 for G o imply a convergence of the series (3.130),
+for α 0 sufficiently small, in all norms appearing on the left-hand sides of the
+inequalities (3.42)-(3.47), except the inequality involving the Laplace operator in
+(3.42). Thus we have Theorem 3.3. for G, with this exception. Of course Theorem
+3.10 holds also because we replace each operator in (3.130) by its random walk
+expansion. We do not have problems now with operators without small factors,
+because each operator Δ'π provides the small factor α 0 , which we can choose to
+                                                 1             1
+be arbitrarily small. The operators ( β G β * ) " , or (QGig*)" , can be analyzed in
+                                    2     ι
+the same way as the operator (Q'G' Q'*y . We will not repeat these considerations
+here, let us write only bounds. We have
+              '           ^      ϋ     '      '    ^       ^                     yfeλr,         (3.132)
+and the same for the operator with G x instead of G. The above inequality together
+with Theorem 3.3 for G, with the exception of the inequality involving the covariant
+Laplace operator in (3.42), give
+           \Hμv(x,y%\VHJx,y%\\ζVH(;y')\\β
+             ^ oci)^!^/.^)- 1 , Hem + ιci)(x- J ^)" 1 - /ϊ ](^ J »-- f β-< 1 / 2 > Λ ^<^'>,
+                  for         xeΔ{y\   or    ζeC${Δ{y)\ yeΛpy'eΛr.                              (3.133)
+These inequalities are for the operator H given by the formula (3.126). If we want
+to have H giving solutions of the variational problems (3.109), (3.110), then we
+have to include the additional factor (Uη)'1 in this formula, and we get (3.133)
+with an additional factor (L-fy)"1, or (Lrη)~ι, on the right-hand side.
+   To get similar results for Gx, Hι, we have to investigate the operator determined
+by the second quadratic form on the right-hand side of (3.128). Let us define
+                                                                     ).                         (3.134)
+                    {2)
+A meaning oϊ Δ             is obvious, it defines the second quadratic form in (3.128), i.e.
+we have
+        Δ
+          (2)=Δ(2)            _ j)RGfD*Δi2)-Δ(2)DG'RD*          + DRGfD*Δ(2)DG'RD*.             (3.135)
+
+To find bounds for the operator Δ{2) let us write it in the form
+
+                        Δ{2)A    =ΣΣ        (Ljη)d+1tr^Cf(A,b)(H*J)(b)                          (3.136)
+
+From the regularity condition (3.36) and the inequality (3.133) we have the estimate
+\{H*J){b)\ g 0{l)M(x0{Ljηy3  for bsΛj. The inequality (149) in [5] implies
+ Propagators for Lattice Gauge Theories                                                         423
+
+hence
+                                                   2
+                   \(Δ^A)(b)\^O(ί)Ma0(Uηy \A\,                beΔ{y), yeΛp                   (3.137)
+and the supremum \A\ is taken over several 7-blocks surrounding Λ(y). This
+                                        {2   {2)
+bound implies that the operators Δ \ Δ are small in a proper sense, if α 0 is
+sufficiently small. Similarly as in (3.130) we get
+
+                                          2)   ι
+                 Gx = G0(I - (Δ'π + Δ[ )G0)-       = f G0((Δ'π + Δ?)G0)".                    (3.138)
+                                                       «= 0
+
+Estimates of the terms in this series are now a little bit more complicated. It is
+connected with the fact that we have derivatives in the operator Δ'π + Δ{2) which
+have to be applied either to the operator on the right, or on the left, because
+kernels of the operators defining Δπ + Δ{2) are not regular enough.
+
+
+
+
+                                                                δod{yi
+                                                         ~            >y2)\Δ(y2)Δi2)Δ(/)A\
+
+
+
+
+the supremum \A\ is taken over several/-blocks surrounding Δ(yf). This estimate
+is given for first factors in a term, the remaining factors are easier to estimate,
+following the above pattern. Let us notice that constants 0(1) we get depend only
+on B0(ε) with ε properly chosen (e.g. ε = 1/2), so they are absolute constants
+depending on d and L only, and the series (3.138) is convergent for α 0 restricted
+by a small, absolute constant. The convergence is in all norms appearing in the
+formulation of Theorem 3.3. This implies that the theorem is valid for Gx. Replacing
+the operators in (3.138) by their random walk expansions we get a random walk
+expansion for Gx. From (3.129) and (3.132) with Gί instead of G we get the
+inequalities (3.133) for Hx. Thus we have
+ Theorem 3.12. // an external gauge field configuration U satisfies both regularity
+ conditions (3.35), (3.36) for α 0 sufficiently small, then Theorems 3.3, 3.10, 3.11 hold
+for the propagators G, Glf with one exception and the inequality (1.133) together
+ with Theorem 3.10 hold for the operators H, Hλ. The exception is the inequality
+ in (3.42) involving the covariant Laplace operator. It does not hold for G, Gί.
+      Let us denote a common, best possible, decay rate for all these operators by
+ <50. It is a positive, absolute constant depending on d and L only. Similarly, let us
+ denote common, best possible constants on the right-hand sides of the inequalities
+ for these operators, with all possible norms, either by Bo, or by Bo with parameters
+424                                                                                      T. Balaban
+
+
+indicating a dependence on Holder norms. These constants also depend on d and
+L only, or on the indicated parameters additionally.
+    Finally let us introduce two other important operators. The first is a projection
+operator φ . It is a generalization of the operator P introduced in [3], and given
+by the formula (1.107). We define it as an orthogonal projection onto the subspace
+{A:QA = 0,RD*Ά = 0} in a Hubert space with the scalar product               (A,G^A}.
+The projection tyA0 of an arbitrary configuration Ao can be defined as a minimum
+of the functional
+                                                                                            (3.139)
+It is connected in a natural way with the Gaussian integral
+                                                                              1
+                                                                                            (3.140)
+We will derive a representation of this operator applying the same transformations
+as in (3.121). We get
+
+
+
+
+                   {A-DG'RD*A).                                                             (3.141)
+The integral can be calculated by a translation to a minimum of the functional
+                  A^iA^Gϊ1               A} - (A9J}9        Ae{A:QA = 0},                   (3.142)
+                   {   )
+where J = {Δn + Δ Ί? )A0. Doing usual calculations with the Lagrange function
+g(A,ω) = (1/2)(A, G;1 Ay - <A,J) + (ω,QAy we get the following formula for
+the minimum:
+                       A = GίJ = G,J - G.Q^QG.Qη-'QG.J.                                     (3.143)
+Making the translation in (3.141) we obtain
+
+
+                                                                    2)
+                           - DG'RD*A - DG'RD*G1(Δπ+Δ'              π
+                                                                       )A0)
+                                    ( 2)
+                   = G,(An +Δ π )A0 - DG'RD*Gί{Δ% +Δ?*)A0.                                  (3.144)
+                                  i2)
+The operator RD*G1(Δπ + Δ ) vanishes by the same argument as in (3.125)
+
+RD*Gί(Δπ + Δ[2)) = 2~1 \dA δ{QA)e-{mKA               G
+                                                      ^AyRD*A{Δπ         + Δ™)A
+                   = Z'1 μAδ(QA)exp[-HAΛAπ                      + Δ™)A>           -\\\RD*A\\2-\
+                           RD*A(Δπ + Δ™)A\det(Δ \N(QΊ)\μλδ(Q'λ)δR(RD*A                    + Δλ)
+                   = 2-1\det(Δ\Nm)\fdA                   δ(QA)δR(RD*A)
+                                                     2
+                           exp[ - i < A, (Δ π + Δ < »μ >](4 , + Δ ™)A \dλ δ(Q'λ)
+                       •e-imιΔllι\-Δλ)        = 0.                                          (3.145)
+Thus the second term in the last line of (3.144) vanishes and we have
+Propagators for Lattice Gauge Theories                                             425
+
+                                             2)
+                   φA0 = G1(Δπ + Δ i )Ao = Gι(Gχ ' - DRD*)Λ0
+                             = Λ0-      G&^QGiQ yiQAo - G1DRD*AQ
+                                                  1
+                              + G1Q*(QG1Q*)- QG1DRD*A0.                         (3.146)
+
+The last term vanishes by the identities (3.129), which hold also for the operator
+Gί9 hence
+                                                      ι
+                             Sβ = I - G&^QG&η-            Q - G,DRD*.           (3.147)
+It is easy to verify explicitly properties of the operator ^ , i.e. Qty = 0, RD*S$ = 0,
+φ 2 = φ, if ^ [ * ] denotes an adjoint of φ in the Hubert space with the scalar
+product <X,Gΐ ι A'y, then
+        φ[*] = Gly*G-1        =   Gl
+                                       ( / - Q*(QG1Q*Γ1QG1 - DRD*G1)Gϊ' = φ.
+Thus φ is an orthogonal projection in the Hubert space onto a subspace contained
+in {A:QA = 0, RD*A = 0}. If we take Ao from the last subspace, then S$A0 = Ao
+by (3.147), hence the range of ty is equal to it. Verifying the above properties we
+need to know only the identities (3.124) and KD*G1DK = R. The last can be proved
+by the same method as used in the proof of (3.124), and in the proof of the same
+identity in (2.30) [4].
+    The last operator we need is an operator (5 defined as a covariance of the
+Gaussian integral
+
+
+                                                                                (3.148)
+Let us find connections between the operators G l 5 φ and (5. Repeating again the
+calculations in (3.121) for the above integral we get
+
+
+
+
+                                                      9   J -
+                                          [£< J ~ DRG'D*J, G^J - DRG'D*J)}],     (3.149)
+hence
+               © = (/ - DG'RD^G^I - DRG'D*)
+                  = Gx - DGfRD*Gι - GίDRG'D* + DG'RD*GιDRG'D*
+                    -G^iQG.Qη'QG,.                                             (3.150)
+Let us derive more identities. We have
+
+
+
+
+               \dλδ{Qλ)exp\_-\\\Δλ\\2
+                         ,                                                      (3.151)
+426                                                                                   T. Balaban
+
+where ^ is a covariance of the last Gaussian integral in λ. Let us notice that ^
+is also a covariance of the integral (3.17) defining the operator R, and from this
+integral we get R = Δ<&Δ. It is the formula (2.26) in [4], and we have also the
+                        2                         2
+formula (2.27): <S = G' - G^Q'^Q'G^Q'^y^'G .            It can be easily proved by
+the usual Lagrange function argument. From these identities we get Q^ =
+$Q'* = 0 and
+             A $D*J = A$(A + Q'*aQ')G'D*J = A$AG'D*J                    = RG'D*J,
+hence (3.151) gives
+                                      RD*Gi = RG'D*,
+and
+                                        G1DR = DG'R.                                     (3.152)
+Let us notice that these identities imply the identities (3.124), because QGXDR =
+QDG'R = DιQG'R = 0. The equalities (3.150), (3.152) give
+         (5 = G1 - G1DRD*G1 - DG'RG'D* + DG'RG'D*DRG'D*
+
+
+            = Gx - G1DRD*G1 - G1Q*{QG1Q*y1QG1                   = G,ψ     = ^Gx.         (3.153)
+The formulas (3.147), (3.153) permit us to reduce properties of the operators
+φ, (5 to the corresponding properties of the operators G', (Q'G^Q'*)" 1 , Gί9
+      * ) " 1 - Especially for © we have, assuming (3.132)
+ Theorem 3.13. // an external gauge field configuration U satisfies the regularity
+ conditions (3.35), (3.36) for oc0 sufficiently small, then Theorems 3.3, 3.10, 3.11 hold
+for the propagator ©, with the exception of the inequality in (3.42) involving the
+ covariant Laplace operator.
+      The random walk expansions we have constructed for all the operators provides
+ a convenient tool to prove many other properties. One of the most important is
+ connected with a problem of dependence on domains {Ωj}. We would like to
+ understand how a change of these domains influences operators, more precisely
+ we would like to prove an analog of the theorem in [2], especially the inequality
+ (1.12) for the operator (1.11). It states that if we change a domain Ω outside some
+ region, then changes in the operator are exponentially small in distances between
+ localizations of the operator and a boundary of the region. We have used already
+ properties of this type in special cases, for example in the analysis of the term
+ (3.97) in Sect. C. Now let us formulate this property generally, for an arbitrary
+ operator constructed above. Let us assume that we have two sequences of domains
+ {Ωj}, {Ωj}9 both satisfying the conditions (2.1)-(2.4) in [4], with M and R
+ sufficiently large, so that all the conditions needed in this paper are satisfied. We
+ construct operators for both sequences and we define Ω = ΩknΩ'k. Let us take
+ localizations determined by points y,y'eΩik)          (i.e. these are cubes Ά(y)9 Ά(y')
+ in the case of operators G', G, G 1 ? (S, the cube Ά(y) and the point y' in the case
+ of H, Hu and the points y, y' in the case of ( β ' G ^ β ' * ) " 1 , ( β G β * ) " 1 , etc.). We
+ have
+
+Theorem 3.14. // we take a pair of operators constructed for the two sequences
+ Propagators for Lattice Gauge Theories                                                    427
+
+{Ωj}9 {Ω'j}, then their difference satisfies all the inequalities characteristic for
+operators of the considered type, with the additional factor
+            exp(-δod(y,y\Ω)\         d(y,y\Ω) =    inf   (|j>-j>il + | j > i - / I )   (3.154)
+
+on the right-hand sides.
+    This theorem can be proved in exactly the same way as the corresponding
+property in the theorem of [2]. We take random walk expansions for both
+operators, and in the difference all terms for walks with localizations contained
+in Ω are cancelled. Remaining terms correspond to walks of the general type
+(3.107), for which at least one localization Xt intersects Ωc. Then the exponential
+factor in (3.108) gives the factor (3.154) (after adjusting a definition of δ0).
+    Finally, let us make a remark about the random walk expansions for the
+operators Gu Hv The expansion for Gx is obtained from (3.138) by inserting there
+the expansions of all operators in the series on the right-hand side. The expansion
+of Δ(2) determined by (3.135), (3.134) has a peculiar feature. The operator
+Δ(2\ defined by (3.134), involves the operator H. To have a localization in U we
+have to expand this operator also. This complicates a little bit the geometric
+situation, because three chains of operators of the type (3.107) described in
+Theorem 3.10 meet in a localization domain determined by the function C{2\Λ).
+One is connected with an expansion of an operator on the left-hand side of A(2),
+one with an operator on the right-hand side, and one is connected with the
+expansion of H. Thus instead of a linear chain, or walk, appearing in the formulation
+of Theorem 3.10, we have an expansion (3.107) with ω having a tree-like structure.
+The tree graphs involved have a very simple structure; there is a main line and
+at some vertices additional lines spring off. The estimates are the same as in (3.108),
+d(ω, y, y') is now a length of a shortest tree intersecting all domains Xt in ω. We
+call these expansions random walk expansions also. We have the same situation
+for the operators H1.
+
+
+E. Unit Lattice Propagators
+After each renormalization transformation we have to calculate a Gaussian integral.
+For lattice gauge field theories these Gaussian measures are defined by covariances,
+which are unit lattice operators. We need operators with Dirichlet boundary
+conditions outside some domain A of the unit lattice. We assume that A czAk=Ω^\
+yl is a union of big blocks, and a distance between A and/l£ is bigger than RM. The
+covariances are defined by the following Gaussian integrals
+                                          11dB ϊ
+
+                                                                                       (3.155)
+where the operators are defined by the sequence {Ωj} and a configuration U
+satisfying (3.35), (3.36), the function D(2)(B) is a quadratic polynomial in B with
+properties similar to C{2\A\ only restricted to unit blocks, and g is an arbitrary Lie
+algebra valued function defined at bonds of yl. The quadratic form in the above
+428                                                                               T. Balaban
+
+
+integral can be written also as
+           <B,(QGlQ^-1B)-a(B,B)-2(H1&2\B),jy                        = (B,AkB).           (3.156)
+                                                                    c
+This form is considered on the subspace {B:B = 0 on A , B = 0 on (J Ax(y\
+                                                                                 ye A'
+Q1B=0}.     We can parametrize this subspace in the same way as in [4]
+(2.154-2.155), using part of the variables B, which we denote by B. These are
+variables B restricted to the set of bonds yϊ = Λ \ I (J Ax(y)κj (J B(c)nc I.
+                                                              Wye A'         ceΛ             /
+Let us recall that B(c) = {bonds b connecting blocks B{c_\ B(c+\ i.e. bonds b
+such that έ>_e£(c_), b+ eB(c+)}, hence B(c)nc consists of the exactly one bond
+b0 of B(c) contained in c. Variables B depend linearly on B and we have B = CB,
+where C is a linear operator. It is an identity operator on almost all bonds, except
+the bonds b0 for which a value (CB) (b0) is equal to a solution of the equation
+(QB) (c) = 0, considered as an equation on the variable B(b0). This implies that the
+operator C is almost local, a value (CB) (b) depends on B restricted to several
+blocks surrounding the bond b. Of course we have as in (2.155) [4]
+
+
+                    _ e{\!2)(c*g,{c*Δkc)-ιc*gy                                           β 257)
+
+hence C(fc) {/ϊ) = C(C*ΔkQ-ιC*9 or
+                         (CMfcC)" 1 =C (fc) (Λ) = C(k)(Λ)Γλ.                             (3.158)
+                                                               (k       {k
+These equalities allow us to express one of the operators C \A), C \A) by the other.
+It is more convenient to work with the operator C{k)(A% because it is defined by a
+positive definite operator C*ΔkC with a lower bound y0 > 0 independent offcand U.
+We have proved it in [4], Lemma 2.4, for operators with U = 1. Localizing the
+operators in Δk and using the methods of Sect. B we can prove it for C*ΔkC with an
+arbitrary configuration U satisfying (3.35), (3.36) with Mα 0 sufficiently small. This
+property, together with a uniform exponential decay of C*ΔkC implies bounds and
+                                  (k)                {k
+uniform exponential decay for C (A\ hence for C \A), by the theorem of Sect. 5 in
+[2]. Now we are interested much more in generalized random walk expansions and
+localization properties with respect to U, so we will proceed in a different way,
+                                                                          (k)
+similar to the method of Sect. 3 in [2]. We will express the co variance C (A) in terms
+of an operator similar to G l 5 and then we will use the results of previous sections.
+                                                                              ik)
+This way we will get an expansion, and properties following from it, for C (A), hence
+      ik
+for C \A) also by (3.158).
+    To get the desired representation we transform the integral in (3.155). Atfirstwe
+replace the exponential with the first two quadratic forms by the integral
+representation
+                                                    ' JdB \
+
+                                                 ^ dA δ(QA - B)δR(RD*A)
+
+                                                                                         (3.159)
+ Propagators for Lattice Gauge Theories                                                  429
+
+Let us recall that the operators above are defined by the sequence {Ωj}J = 0,1,..., k.
+                                                       k
+We form a new sequence adding the set Ωk+ 1 = B (Λ). Let us denote operators
+constructed for this sequence by a wavy line, e.g. G1, H1, g, etc. If we perform the B-
+integration above, we get an A-integral with the ^-function δ(QA). We want to
+change the gauge fixing expressions above into the Landau gauge corresponding to
+the new sequence of domains. We apply the Faddeev-Popov procedure inserting
+the identity
+                        1 = |det(4 \Nm)\μλδ{Q'λ)δk{RD*A            -Δλ).              (3.160)
+
+As usual we change the order of integrations and in the ^-integral we make the
+gauge transformation A-+A + Dλ. We get
+
+                                          1
+                                     ^        |det(4 \m)\
+                          x $dBδ{Q1B)δΛJtB)expl+            <H 1 5 ( 2 ) (B),J> + <
+                          x$dASdμ\Λδ(Q'1μ)Sdλδ(Q'λ-μ)δ(QA                  + DQ'λ-
+                          x δR{RD*A + RAλ)exp[-|<^               + Dλ,(Δ +Δ(2))(A
+                          x δR(RD*Al                                                  (3.161)
+
+where we have applied the identity (3.115), and for beAj (DQ'λ)(b) = (J5jβ}λ)(b).
+    Our next step is similar to the one in [4] yielding the formula (2.105) from (2.97).
+We make a translation λ = λ' -b λ0 such that Q'λ — μ = Qλ\ i.e. Qλ0 = μ, and
+RΔλ0 = 0. To find such λ0 we make use of the last equation. The formula (3.25)
+for R implies
+
+                  Δλ0 - G'Q'*(QfG'2Q'*y \Q'λ0 - aQ'G'Q'*Q'λ0) = 0,                    (3.162)
+and the condition Q'λ0 = μ yields
+
+                  λ0 = Gl2Q*{Q:Gt2Q*)-ι{μ - aQG'Q*μ) + aG'Q'*μ.                       (3.163)
+Thus the configuration λ0 is determined uniquely by the two conditions. It is easy to
+verify that the operator on the right-hand side of (3.163) is equal to the operator
+
+                         H'μ = {Z\μ))-1 \dλδ(Qλ - μ)e^ιlmm\                           (3.164)
+
+The translation λ = λ' + H'μ changes the expressions dependent on λ in (3.161) in the
+following way
+                δ(Q'λ - μ) = δ(Q'λ)9 DQ'λ = DQ'λ' + DQΉ'μ
+                            = Dμ, RΔλ = RΔλ'=Δλ\             Dλ = Dλ' + DH'μ.         (3.165)
+
+The ^/-integral can be easily calculated, and we have
+          \dλ'δ{Q'λ')δR{RD*A +AkW)                = I det(4 U^Γ^-             G'RD*A) (3.166)
+for an arbitrary function F(λr).
+430                                                                                    T. Balaban
+
+      The above transformations give the following equality
+
+        exp(i<0, C<*>(/t)0» = Z - ' jdB         hdiQ^d^B)
+                                    x exp[+ < f f ^ ( B ) , J> + <£,#>] J dμ \Λδ(Q'μ)
+                                    x j <L4 <5(β4 + Dμ - B)δR(RD*A)
+                                    x exp [-%(A - DG'RD*A + DH'μ,(Δ + 4 ( 2 ) )
+                                    x (A - DG'RD*A + Dif'μ))].                  (3 1 6 7 )
+In this integral we change the order of B- and //-integrations, and we perform the
+gauge transformation B -> B + Dμ. This gives us the following μ-integral to calculate
+
+                                                                                         (3.168)
+The (5-functions above determine μ uniquely as a linear function of B. Indeed,
+denoting V = Uk, we have for xeB(y\ ye A'
+           (Ry(V)(B + Dμ))(ΓyJ = (Ry(V)B)(ΓyJ + K(F(Γ,5jc))μ(x) - μ(y) = 0,
+hence
+                            Λ(F(Γ yt J)μ(x) = μ(y) -         (Ry(V)B)(ΓyJ,
+and
+
+           (Q'μ)(y)=    Σ L-dΛ(K(ΓyfX))Ai(x) = μ ( y ) - Σ               L-
+                       xeB(y)                                   xeB(y)
+
+                   = μ(y) - β'(Λy(K)jB)(Γy J = 0.            This implies
+                   = Q'(Ry(V)B)(ΓJ,          μ(x) = R(V(ΓxJ)Q'(Ry(V)B)(ΓJ
+                       -R(V(ΓxJ)(Ry(V)B)(ΓyJ,                xcB(y),          x + y.      (3.169)
+We denote the linear function defined by the above formulas by μ(B). The integral
+(3.168) is equal to G(μ(B)). Applying this result to the integral in (3.167) and
+calculating the integral with respect to B we get
+                                = Z-^dA    δ(QA)δR(RD* A)
+                                  x exp [ + (Hfi^iQA         + Dμ(QA)),J}
+
+                                                       (2)
+                                  x DH'μ(QA)9 (Δ +Δ )(A - DG'RD*A + DH'μ(QA)))
+                                                                                         (3.170)
+    The next step in our derivation will be the same as in (3.121). By the
+Faddeev-Popov procedure we will change the ^-function gauge fixing expression
+into an exponential density. This will yield terms in the exponent in (3.170), terms
+connected with the expression G'RD*A. Let us understand at first how the
+operators G'R and G'R are related. After the equality (3.151) we have noticed
+that R=Δ&Δ, where ^ is a covariance of the Gaussian integral
+                                                                          λ
+                                                                         < ^,            (3.171)
+and that 0 is given by the formula (2.27) in [4]. This implies
+                                     G'R = <$Δ, G'R = §Δ,                                (3.172)
+Propagators for Lattice Gauge Theories                                              431
+
+hence it is enough to relate Ή and #. From (3.171) we obtain
+
+
+
+
+The second equality was obtained by the translation λ = λ' -f H'μ, and C'(fc)(Λ)
+denotes a unit lattice covariance with Dirichlet boundary conditions outside Λ,
+determined by the last integral above. Doing the calculations in a reversed order
+we obtain easily the representation
+                                                β'#ρ;*.                          (3.174)
+                              (k)
+It implies all properties of C (Λ), especially a random walk expansion. The equality
+(3.173) gives
+                                    § = 9 + H'C{k)(A)H'*,                        (3.175)
+hence by (3.172)
+                              G'R = G'R + H'Cik){Λ)H'*Δ.                         (3.176)
+Let us notice that by (3.163) we have
+                      AH'μ = GfQf*{Q'G'2Q'*y\μ         ~ aQ'G'Q'*μ)9             (3.177)
+hence ΔH'μ is a regular function, more exactly, DΔH'μ is bounded, and even Holder
+norms are bounded.
+    Using the Landau gauge condition RD*A = 0 in (3.170), and the identity
+(3.176), we can write
+                         DG'RD*A = - DH'Cik)(Λ)H'*ΔD*A.                          (3.178)
+Now we make the same transformation as in (3.121). We get the integral (3.170)
+with the exponential gauge fixing density instead of the (5-function, and with A
+replaced by A — DG'RD*A in the remaining expressions. Let us calculate how
+this replacement changes the expressions. We have
+      H'*ΔD*(A - DG'RD*A) = H'*ΔD*A -               Hf*Δ2@ΔD*A
+                                    = H'*ΔD*A - H'*ΔRD*A = H'*ΔPD*A,             (3.179)
+                   μ(Q(A - DG'RD*A)) = μ(QA) - μψQ&RD*A\                         (3.180)
+but μ(Dv) = — v if Q\ v = 0, as it follows from the formula (3.169). Also we have
+v = Q'G'RD*A = 0 outside A, Q\ v = 0 on A\ hence.
+                     μ(Q(A - DG'RD*A)) = μ(QA) + Q'G'RD*A.                       (3.181)
+Finally we have quite generally
+         Q(A - Dλ) + Dμ(Q(A ~ Dλ)) = QA-           DQ'λ + Dμ(QA) -     DμφQ'λ)
+                                           = QA-Dμ(QA\        if   Q'λ = O.      (3.182)
+432                                                                                    T. Balaban
+
+
+These identities give
+
+
+                                                                       y-i(A   -DG'RD*A
+                                                      i2)
+                                 + Dl(A\ [A + A )(A - DG'RD*A + Dλ(A)) >
+                                 + <QA + Dμ(QA)9gy],                                      (3.183)
+where
+                X(A) = H'CW{A)H'*APD*A             + H'μ(QA) + H'Q'G'RD*A.                (3.184)
+Let us denote a covariance operator of the Gaussian integral in (3.183) by G 2 ,
+then we obtain
+                            C{k\A) = {I + Dμ)QG2Q*(l + μ*D*).                             (3.185)
+                                                                   2
+It is the formula we are looking for. The operator G can be related in a simple
+way to the operator G 2 defined by the Gaussian integral (3.183), but with the
+^-function δ(QA) replaced by exp[ — %(QA,aQAy]. We have
+                             G2 = G 2 - G2Q*@G2Q*ΓiQG2.                                   (3.186)
+The operator G 2 differs from G1 only by the small and regular operators connected
+with the second term in the exponential in (3.183), and with terms containing
+Dλ(A). Thus we can investigate the operator G 2 perturbatively in the same way
+as the operator Gx in (3.138). The analysis is even simpler because the new terms
+are more regular, as it follows easily from (3.184). This way we can express C{k\A)
+in terms of the operators of the type G', ( g ' G ' 2 ^ ' * ) " 1 , G, ( β G g * ) " 1 . Expanding
+these into random walks we get a random walk expansion of C{k\A). The formula
+(3.185) implies immediately bounds and an exponential decay. Thus we get
+ Theorem 3.15. For Mα 0 sufficiently small the propagator C{k\A) is given by the
+formula (3.185), and satisfies the bound
+                            \Cik\Λ',y,y')\^Boe-δo]y-y\          y,y'eΛ                    (3.187)
+with the constants Bo, δ0 depending on d and L only. This propagator has a
+convergent random walk expansion of the type described previously. Of course we
+have all the other consequences following from the random walk expansion.
+
+
+Appendix. Propagators for Non-Linear Chiral Models
+In this appendix we will make remarks about propagators for another class of
+models. Field configurations in these models are the same as configurations defining
+gauge transformations for gauge field theories, i.e. they are functions U:Tη-+G.
+An action for a model determined by a Lie group G is given by
+                                                d 2
+                            A\U)=      X      η - [l-RQtvU(db)l
+
+                                                            U-1(b + ).                   (3.188)
+                                               1
+Let us notice that Retr U(db) = Retr U~ (b_)U(b+). As for gauge field theories we
+Propagators for Lattice Gauge Theories                                                            433
+
+
+have to expand the action around a background configuration, thus we take U'U
+                     f   iA                  η
+instead of U, with U = e , AEQ. Expanding Λ (U'U) up to second order in A
+we get
+                           2
+      A"(U'U)=      Σ^- [l
+
+                                                                            -..,               (3.189)
+where
+                                   J= -η-^mUidb),                                              (3.190)
+                               Δ*(U) = d*d+Δ"'{U)=Δ+Δ"'(U)9                                    (3.191)
+and
+
+
+                                                              1
+                                                                  Im 1/(56)].                  (3.192)
+                                                                                          fη
+We consider only regular background fields I/, for which the operator Δ (U) is
+a first order differential operator with sufficiently small coefficients. Thus the
+operator Δη(U) has a very simple structure, it is a small perturbation of the Laplace
+operator d*d=Δ.
+    A similar situation holds for averaging operations. They are given by the
+formulas (61), (78)-(80) in [5], with the external gauge field Uo = 1. Taking
+
+                         β/C/, A) = jlog ϋ'j = jlog(ΊJΊJYiϋ*)-1                            (3.193)
+and expanding in A, we can easily see that for the linear term we have
+
+                                   J          j
+                                                        J                                 (3.194)
+where the operator F2j(U) is small.
+     These two remarks imply that the operator Aηa(U) = Δη(U) + Q(U)*aQ(U), with
+the second term defined by (3.24), is a small perturbation of the simplest scalar
+field operator A + Q*aQ investigated in [2,4]. This implies that all the results of
+these two papers hold for the operator G(U) = (Δηa(U))~1, and also for operators
+which can be expressed in terms of it, like //-operators, unit lattice propagators,
+etc. We refer the reader to the two papers for precise formulations.
+
+
+References
+1. Balaban, T.: "Renormalization group methods in non-Abelian gauge theories," Harvard preprint
+   HUTMP B134
+2. Balaban, T.: "Regularity and decay of lattice Green's functions." Commun. Math. Phys. 89, 571-597
+   (1983)
+3. Balaban, T.: "Propagators and renormalization transformations for lattice gauge theories. I".
+   Commun. Math. Phys. 95, 17-40 (1984)
+4. Balaban, T.: "Propagators and renormalization transformations for lattice gauge theories. II."
+   Commun. Math. Phys. 96, 223-250 (1984)
+434                                                                                               T. Balaban
+
+
+ 5. Balaban, T.: "Averaging operations for lattice gauge theories." Harvard preprint HUTMP B147, to
+    be published in CMP.
+ 6. Brydges, D. Frδhlich, J., Seller, E.: "On the construction of quantized gauge fields. I. General results."
+    Ann. Phys. 121, 227-284 (1979)
+ 7. Osterwalder, K. Seller, E.: "Gauge field theories on a lattice." Ann. Phys. 110, 440-471 (1978)
+ 8. Seiler, E.: Gauge Theories as a Problem of Constructive Quantum Field Theory and Statistical
+    Mechanics. Lecture Notes in Physics, vol. 159, Berlin-Heidelberg-New York: Springer-Verlag,
+    1982
+ 9. Wilson, K. G.: "Quantum chromodynamics on a lattice." In: Quantum Field Theory and Statistical
+    Mechanics, Cargese 1976, ed. by M. Levy and P. Mitter. New York: Plenum Press, 1977, pp.
+    143-172
+10. Wilson, K. G.: "Monte Carlo calculations for the lattice gauge theory." In: Recent Developments in
+    Gauge Theories, ed. by G. 't Hooft, C. Itzykson, A. Jaffe, M. Lehmann, P. K. Mitter, I. M. Singer
+    and R. Stora. New York Plenum Press, 1980, pp. 363-402
+
+Communicated by A. Jaffe
+
+Received August 13, 1984; in revised form October 31, 1984
+

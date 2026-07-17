@@ -1,0 +1,29 @@
+{
+  "authority": {
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "theorem_authority": false
+  },
+  "contract": "sequential_local_perturbation_stage_receipt_nonpromoting",
+  "failed": 0,
+  "manifest": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_manifest.json",
+  "requested_ids": [
+    "radialmr0mem0.0400"
+  ],
+  "rows": [
+    {
+      "chi_signed": 0.16094818919563725,
+      "frozen_integrated_nonlinear_input": 0.39650541378144694,
+      "frozen_packet_recurrence_ratio": 0.11357468366077848,
+      "id": "radialmr0mem0.0400",
+      "moving_packet_recurrence_ratio": 0.11108409046675487,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/radialmr0mem0.0400_parabolic.json",
+      "returncode": 0,
+      "stage": "parabolic",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/radialmr0mem0.0400_parabolic.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_profile_positive_chi_local_perturbation_runs/radialmr0mem0.0400_parabolic.stdout"
+    }
+  ],
+  "stage": "parabolic",
+  "successful": 1
+}

@@ -1,0 +1,31 @@
+{
+  "authority": {
+    "clay_authority": false,
+    "empirical_non_promoting": true,
+    "theorem_authority": false
+  },
+  "contract": "sequential_local_perturbation_stage_receipt_nonpromoting",
+  "failed": 0,
+  "manifest": "/tmp/ns-gpu-artifact-probe-manifest.json",
+  "requested_ids": [
+    "n16_gpu_handoff_probe"
+  ],
+  "rows": [
+    {
+      "chi_signed": -0.5497967521071313,
+      "frozen_integrated_nonlinear_input": -0.00013059114819768836,
+      "frozen_packet_recurrence_ratio": 0.9993468561298933,
+      "id": "n16_gpu_handoff_probe",
+      "moving_packet_recurrence_ratio": 0.9993468561298933,
+      "output_json": "scripts/data/outputs/ns_interaction_closure_production/gpu_artifact_probe/n16_gpu_handoff_probe_short.json",
+      "receipt_promoted": true,
+      "returncode": 0,
+      "stage": "short",
+      "status": "scripts/data/outputs/ns_interaction_closure_production/gpu_artifact_probe/n16_gpu_handoff_probe_short.status.json",
+      "stderr": "scripts/data/outputs/ns_interaction_closure_production/gpu_artifact_probe/n16_gpu_handoff_probe_short.stderr",
+      "stdout": "scripts/data/outputs/ns_interaction_closure_production/gpu_artifact_probe/n16_gpu_handoff_probe_short.stdout"
+    }
+  ],
+  "stage": "short",
+  "successful": 1
+}

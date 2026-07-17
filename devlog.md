@@ -1,5 +1,72 @@
 # 2026-07-17 NS target interaction-closure instrumentation
 
+- Paused further production runs to freeze evidence authority and comparison
+  rules. `ns_normalized_profile_quotient_audit.py` now atomically writes JSON
+  receipts. The local perturbation runner writes stdout/stderr directly to
+  same-directory temporary files, validates the JSON authority surface,
+  atomically promotes the receipt, and records return status plus SHA-256.
+  A static N32 smoke produced all required artifacts. Added a non-promoting
+  coercivity report and protocol document: the primary event is the first
+  adjacent post-peak positive-input/viscous-loss window with ratio at most one;
+  factor-level attribution waits for the fixed comparison panel. No NS/BKM or
+  Clay gate changed.
+
+- Completed the preregistered four-trace `.25T` GPU coercivity panel through
+  the new durable runner. Baseline, radial `-0.04`, phase `+0.04`, and
+  coherence `+0.04` all have validated JSON/log/status/checksum artifacts;
+  the static signed-chi range was `.16095--.16922`. The common factor report
+  confirms exact finite product residuals at `<=4.45e-16` and robust
+  post-peak Gamma-window downcrossing, but its 50-point cadence places all
+  three factor-decline events in the same first post-peak interval. This is a
+  mechanism-discrimination null, not evidence for any preferred cause of
+  collapse. Further profile searches remain paused.
+
+- Hardened the local perturbation runner after a focused telemetry invocation
+  was interrupted with only zero-byte partial files. It now commits a durable
+  `running` status before child launch and replaces it with terminal
+  `promoted`/`failed` status after validation. Success and intentional-failure
+  smokes both pass. The interrupted focused attempt remains non-evidence and
+  is not reused.
+
+- Ran the detached focused `[.07T,.16T]` factor panel for baseline, radial,
+  phase, and coherence states after the runner hardening. All four receipts
+  and SHA-256 sidecars verify. A report enhancement now measures each factor
+  from the declared focused-window start to packet peak: alignment retains
+  `.7701--.7750`, versus forcing `.8964--.8990` and geometry `.9022--.9055`.
+  This nominates alignment loss as a repeatable finite mechanism candidate;
+  no causal, continuum, or Clay claim is made.
+
+- Added a bounded fine-cadence frozen-packet coercivity trace to
+  `ns_normalized_profile_quotient_audit.py`. `--mechanism-trace-count` merges
+  evenly spaced steps into the existing checkpoint set. Each row now records
+  `Gamma=[N_frozen]_+/(2 nu D_frozen)`, its signed counterpart, packet mass,
+  and radial/angular/spatial shape coordinates. The receipt aggregates
+  adjacent trapezoidal coercivity windows, the sampled packet peak, and the
+  first sampled `Gamma <= 1` time. Coarse interaction sampling remains at
+  endpoints only and is explicitly excluded as a fine turnover claim. Python
+  compilation, N16 CPU JSON-contract smoke, and `git diff --check` pass. The
+  next use is one saved-state trace, not another profile-search tranche.
+
+- The first bounded GPU coercivity trace has landed for the strongest radial
+  local perturbation. It reproduces the endpoint ratio `.11357468` and finds
+  packet peak `1.14576337` at `t=1.875`. Windowed positive-part Gamma is
+  `2.4494` on `[.3125,.625]`, `1.0138` on `[1.5625,1.875]`, then `.8306` on
+  `[1.875,2.1875]`; it stays strongly subcritical afterwards. Fine positive
+  input over viscous loss is `.46734239`. The endpoint sampler is still only
+  endpoint telemetry; no turnover mechanism has been inferred. A
+  post-peak-Gamma-crossing field is now recorded so the initial negative
+  frozen rate cannot be mistaken for the burst-collapse transition.
+
+- Completed the locally most promising radial state perturbation at `.25T`
+  (`epsilon=-.04`, within the same admissibility slice as the delayed-collapse
+  survivor). It does **not** extend residence: frozen/moving common-reference
+  ratios are `.11357468/.11108409`, essentially the original
+  `.11234973/.10985340`. The receipt separates real replenishment from net
+  survival: frozen nonlinear input is positive `.39650541`, but frozen viscous
+  loss is `.1.61254634`. The packet re-centres from shell 2 to 3 by the first
+  checkpoint; frozen packet data remain the authority. This is bounded local
+  finite-Galerkin evidence for delayed collapse, not a profile-uniform theorem.
+
 - Repaired the normalized-profile promotion surface after identifying that the
   moving packet re-centres from shell 2 to shell 3.  The audit now records a
   frozen-initial packet, its nonlinear/viscous integrals, checkpoint centre

@@ -1,5 +1,76 @@
 # 2026-07-17 NS interaction-closure pivot
 
+- **Evidence-authority freeze:** further finite-Galerkin production is paused
+  pending a pre-registered four-trace frozen-packet coercivity comparison.
+  The audit now atomically promotes JSON on its own filesystem; the sequential
+  runner additionally requires validated JSON, stdout, stderr, a status
+  receipt, and SHA-256 before declaring success. Added
+  `Docs/NSFrozenPacketCoercivityProtocol.md` and
+  `scripts/ns_normalized_profile_coercivity_report.py`. The report fixes a
+  post-peak adjacent-window Gamma-downcrossing rule and records the exact
+  finite forcing/geometry/alignment factorization when a trace contains it.
+  The durable phase `+0.04` trace has the same delayed-collapse pattern as
+  radial `-0.04`, but radial is legacy factor-free and phase lacks the new
+  runner sidecars; neither is a validated mechanism comparison yet.
+
+- **Preregistered coercivity panel completed:** the baseline, radial `-0.04`,
+  phase `+0.04`, and coherence `+0.04` N32 `.25T` GPU traces all promoted
+  through the durable receipt contract and all four SHA-256 sidecars verify.
+  Their frozen endpoint ratios are `.11234912`, `.11357468`, `.11221915`, and
+  `.11228539`; every trace has a post-peak adjacent-window Gamma ratio below
+  one. The exact finite factorization residual is at most `4.45e-16`.
+  However, forcing, geometry, and alignment all first cross the fixed 80%
+  decline threshold at the same next sampled checkpoint as the Gamma event.
+  Thus the panel supports robust delayed collapse in this local slice but does
+  **not** discriminate a leading mechanism. The next instrument is focused
+  subwindow factor telemetry, not another endpoint/profile search.
+
+- **Runner failure authority checked:** the local perturbation runner now
+  writes a durable `running` status before launching its child, then atomically
+  replaces it with `promoted` or `failed`. A success smoke verified the
+  checksum path; an intentional exit-7 audit verified that failed runs retain
+  stderr and a terminal failed status but no promoted receipt. The earlier
+  focused-telemetry attempt is explicitly discarded: it predates this guard
+  and left only zero-byte partials.
+
+- **Focused factor panel:** a detached rerun of the same four states completed
+  with 100 factor samples restricted to `[.07T,.16T]`; all status/checksum
+  receipts verify. From focused-window start to packet peak, positive
+  nonlinear alignment falls to `.7701--.7750` across all four traces, while
+  forcing and packet geometry retain `.8964--.8990` and `.9022--.9055`.
+  This is the first robust finite candidate for alignment/dephasing as the
+  leading loss factor. It remains a correlated finite-Galerkin observation:
+  it does not prove causality, a profile-uniform estimate, or any NS/BKM/Clay
+  statement.
+
+- **Frozen-packet coercivity trace:** `ns_normalized_profile_quotient_audit.py`
+  now accepts `--mechanism-trace-count` to add bounded fine checkpoints without
+  turning the endpoint-only interaction sampler into a false turnover trace.
+  Every trace row records frozen packet mass, signed and positive-part
+  nonlinear-to-viscous ratios, and profile-shape metrics; adjacent rows also
+  receive a trapezoidal positive-input/viscous-loss receipt. The evolution
+  summary records sampled packet peak and the first sampled `Gamma <= 1` time.
+  An N16 CPU smoke validated the JSON contract. This is instrumentation only:
+  it does not establish a profile-uniform coercivity bound or change any
+  NS/BKM/Clay gate.
+
+- **Radial coercivity receipt:** the same `epsilon=-.04` finite trajectory
+  was replayed with 50 mechanism checkpoints. The frozen packet peaks at
+  `t=1.875` with mass `1.14576`; its adjacent-window positive-part coercivity
+  ratio falls from `2.449` on `[.3125,.625]` to `.831` on `[1.875,2.1875]`,
+  then remains below `.49` after `t=2.5` and near `.10` late in the window.
+  The fine positive-part aggregate is `.46734`, distinct from the prior signed
+  aggregate `.39651/1.61255≈.246`. Radial width rises from `.2942` to `.4657`
+  by the peak while angular concentration drops from `.4721` to `.3884`; this
+  is a single finite correlation, not a coercive mechanism theorem.
+
+- **Local radial residence check:** the `epsilon=-.04` radial deformation of
+  the exact positive-chi survivor completes `.25T` with frozen/moving packet
+  ratios `.11357468/.11108409`. It has positive frozen nonlinear input
+  `.39650541` but viscous loss `.1.61254634`; it does not improve on the
+  original delayed-collapse trajectory. This is non-promoting finite-Galerkin
+  evidence only; no NS/BKM/Clay gate changes.
+
 - **Current finite promotion:** an exact positive-signed-chi survivor has
   resolved frozen-packet growth on the first `.05T` segment
   (`R=.1.04534501`, heat-compensated `1.3099675`).  Exact-state restart mode
