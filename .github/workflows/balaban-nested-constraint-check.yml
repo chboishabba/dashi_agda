@@ -45,6 +45,7 @@ jobs:
             "$AGDA_BIN" --version
             targets=(
               DASHI/Physics/YangMills/BalabanNestedConstraintMinimum.agda
+              DASHI/Physics/YangMills/BalabanConstrainedGaussianCarrierAlgebra.agda
               DASHI/Physics/YangMills/BalabanFiniteConstraintChain.agda
               DASHI/Physics/YangMills/BalabanFiniteConstraintCovariance.agda
               DASHI/Physics/YangMills/BalabanIntervalConstraintChain.agda
