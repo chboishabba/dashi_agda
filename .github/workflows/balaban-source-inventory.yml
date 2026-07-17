@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - codex/balaban-nested-constraint-minimum
+  pull_request:
+    paths:
+      - '.github/workflows/balaban-source-inventory.yml'
+      - 'DASHI/Physics/YangMills/**'
   workflow_dispatch:
 
 permissions:
