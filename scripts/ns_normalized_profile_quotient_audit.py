@@ -63,11 +63,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--angular-axis", type=float, nargs=3, default=(1.0, 0.0, 0.0))
     parser.add_argument("--seed", type=int, default=20260717)
     parser.add_argument("--chi-target", type=float, default=None,
-                        help="optional absolute target-shell nonlinear/viscous ratio for rejection matching")
+                        help="target-shell nonlinear/viscous ratio in the selected --chi-sign convention")
+    parser.add_argument("--chi-sign", choices=("absolute", "positive", "negative"), default="absolute",
+                        help="absolute is calibration-only; positive/negative preserve signed nonlinear direction")
     parser.add_argument("--chi-attempts", type=int, default=8)
     parser.add_argument("--chi-tolerance", type=float, default=0.05)
+    parser.add_argument("--target-dominance-min", type=float, default=0.8,
+                        help="reject a profile trial unless its target shell is this fraction of the largest packet")
     parser.add_argument("--output-modes", type=int, default=16,
                         help="dominant target-shell outputs used by the stratified interaction receipt")
+    parser.add_argument("--output-activity-coverage", type=float, default=0.0,
+                        help="if positive, enlarge the fixed dominant-output carrier until this modal-activity fraction is covered")
     parser.add_argument("--samples-per-stratum", type=int, default=48)
     parser.add_argument("--exact-check", action="store_true",
                         help="also enumerate the selected finite carrier, for small-N estimator validation")
@@ -80,6 +86,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--moving-packet-radius", type=int, default=1)
     parser.add_argument("--cfd-root", type=Path, default=DEFAULT_CFD_ROOT)
     parser.add_argument("--fft-backend", default="vkfft-vulkan")
+    parser.add_argument("--selection-objective", choices=("chi-match", "short-survival"), default="chi-match",
+                        help="short-survival evolves admissible phase trials over --window-c and chooses maximum moving survival")
+    parser.add_argument("--require-positive-short-input", action="store_true",
+                        help="with short-survival, reject trials whose saved moving-packet nonlinear integral is nonpositive")
     parser.add_argument("--output-json", type=Path, default=DEFAULT_OUTPUT)
     return parser.parse_args()
 
@@ -244,11 +254,17 @@ def packet_telemetry(args: argparse.Namespace, field_hat: np.ndarray, wave: np.n
     heat_centre = int(np.argmax(heat_packets))
     heat_moving = float(np.sum(heat_packets[max(0, heat_centre - args.moving_packet_radius):min(len(heat_packets), heat_centre + args.moving_packet_radius + 1)]))
     nonlinear, static = static_metrics(args, field_hat, wave, norm, norm_sq)
+    dissipations = shell_dissipation(field_hat, norm_sq, norm, max_shell)
+    nonlinear_shell_rates = shell_nonlinear_rate(field_hat, nonlinear, norm, max_shell)
+    moving_lower = max(0, centre - args.moving_packet_radius)
+    moving_upper = min(len(packets), centre + args.moving_packet_radius + 1)
     return {
         "time": time,
         "shell_packets": [float(value) for value in packets],
         "dominant_shell": centre,
         "moving_packet": moving,
+        "moving_packet_nonlinear_rate": float(np.sum(nonlinear_shell_rates[moving_lower:moving_upper])),
+        "moving_packet_viscous_rate": float(2.0 * args.nu * np.sum(dissipations[moving_lower:moving_upper])),
         "heat_moving_packet_exact_spectrum": heat_moving,
         "static_packet_metrics": static,
         "_nonlinear": nonlinear,
@@ -318,6 +334,11 @@ def evolve_profile(args: argparse.Namespace, raw: np.ndarray, wave: np.ndarray,
                 current = module.rk2_step(current, kx, ky, kz, k2, mask, args.dt, args.nu)
     initial_row, endpoint = history[0], history[-1]
     initial_coarse, endpoint_coarse = coarse_at[0], coarse_at[steps]
+    times = np.asarray([row["time"] for row in history], dtype=np.float64)
+    target_nonlinear = np.asarray([row["static_packet_metrics"]["target_nonlinear_rate"] for row in history], dtype=np.float64)
+    target_viscous = np.asarray([row["static_packet_metrics"]["target_viscous_rate"] for row in history], dtype=np.float64)
+    moving_nonlinear = np.asarray([row["moving_packet_nonlinear_rate"] for row in history], dtype=np.float64)
+    moving_viscous = np.asarray([row["moving_packet_viscous_rate"] for row in history], dtype=np.float64)
     return {
         "contract": "finite-Galerkin normalized-profile parabolic-window receipt; no profile-uniform inference",
         "nominal_window_time": nominal_time,
@@ -327,6 +348,12 @@ def evolve_profile(args: argparse.Namespace, raw: np.ndarray, wave: np.ndarray,
         "moving_packet_recurrence_ratio": endpoint["moving_packet"] / initial_row["moving_packet"],
         "moving_packet_heat_compensated_ratio": endpoint["moving_packet"] / endpoint["heat_moving_packet_exact_spectrum"],
         "moving_packet_scale_displacement": endpoint["dominant_shell"] - initial_row["dominant_shell"],
+        "integrated_target_nonlinear_input": float(np.trapezoid(target_nonlinear, times)),
+        "integrated_target_positive_nonlinear_input": float(np.trapezoid(np.maximum(target_nonlinear, 0.0), times)),
+        "integrated_target_viscous_loss": float(np.trapezoid(target_viscous, times)),
+        "integrated_moving_packet_nonlinear_input": float(np.trapezoid(moving_nonlinear, times)),
+        "integrated_moving_packet_positive_nonlinear_input": float(np.trapezoid(np.maximum(moving_nonlinear, 0.0), times)),
+        "integrated_moving_packet_viscous_loss": float(np.trapezoid(moving_viscous, times)),
         "coarse_interaction_hellinger_squared_initial_to_endpoint": hellinger_squared(
             coarse_distribution(initial_coarse), coarse_distribution(endpoint_coarse)
         ),
@@ -404,7 +431,15 @@ def stratified_interaction_estimate(args: argparse.Namespace, field_hat: np.ndar
     shell_flat = np.flatnonzero(((norm >= lower) & (norm < upper)).ravel())
     modal_rate = 2.0 * (2 ** args.target_shell) * np.real(np.sum(np.conjugate(field_hat) * nonlinear_hat, axis=0)).ravel()
     activity = np.abs(modal_rate[shell_flat])
-    chosen = shell_flat[np.argsort(activity)[::-1][:min(args.output_modes, len(shell_flat))]]
+    sorted_outputs = shell_flat[np.argsort(activity)[::-1]]
+    requested_count = min(args.output_modes, len(shell_flat))
+    if args.output_activity_coverage > 0.0 and float(np.sum(activity)) > 1.0e-30:
+        coverage_count = int(np.searchsorted(
+            np.cumsum(activity[np.argsort(activity)[::-1]]),
+            args.output_activity_coverage * float(np.sum(activity)), side="left"
+        ) + 1)
+        requested_count = max(requested_count, coverage_count)
+    chosen = sorted_outputs[:requested_count]
     full_output_activity = float(np.sum(activity))
     selected_output_activity = float(np.sum(np.abs(modal_rate[chosen])))
     grid = np.arange(n ** 3, dtype=np.int64)
@@ -483,6 +518,10 @@ def main() -> None:
     if not (0.0 < args.angular_width <= math.pi and args.radial_log_width > 0.0
             and -1.0 <= args.helicity_bias <= 1.0 and 0.0 <= args.spatial_coherence <= 1.0):
         raise ValueError("invalid profile-shape coordinate range")
+    if not (0.0 <= args.target_dominance_min <= 1.0 and 0.0 <= args.output_activity_coverage <= 1.0):
+        raise ValueError("target dominance and output activity coverage must lie in [0,1]")
+    if args.selection_objective == "short-survival" and not args.evolve:
+        raise ValueError("--selection-objective short-survival requires --evolve")
     wave, norm = frequency_grid(args.n)
     norm_sq = norm ** 2
     candidates: list[tuple[float, int, np.ndarray, np.ndarray, dict[str, float], np.ndarray]] = []
@@ -490,9 +529,61 @@ def main() -> None:
         raw = profile_raw_hat(args, args.seed + attempt)
         field = raw_to_field_hat(raw, wave, norm_sq)
         nonlinear, metrics = static_metrics(args, field, wave, norm, norm_sq)
-        mismatch = abs(metrics["chi_absolute"] - args.chi_target) if args.chi_target is not None else 0.0
+        signed = float(metrics["chi_signed"])
+        if args.chi_sign == "positive" and signed <= 0.0:
+            continue
+        if args.chi_sign == "negative" and signed >= 0.0:
+            continue
+        matched_chi = abs(signed) if args.chi_sign == "absolute" else (signed if args.chi_sign == "positive" else -signed)
+        mismatch = abs(matched_chi - args.chi_target) if args.chi_target is not None else 0.0
+        metrics["chi_matching_value"] = matched_chi
+        metrics["chi_matching_convention"] = args.chi_sign
+        if metrics["target_packet_dominance"] < args.target_dominance_min:
+            continue
         candidates.append((mismatch, attempt, raw, field, metrics, nonlinear))
-    mismatch, attempt, raw, field, static, nonlinear = min(candidates, key=lambda row: row[0])
+    if not candidates:
+        raise RuntimeError("no phase trial met the signed-chi and target-dominance admissibility slice")
+    selected_evolution: dict[str, Any] | None = None
+    survival_scores: list[dict[str, Any]] = []
+    selection_status = "chi_match"
+    if args.selection_objective == "short-survival":
+        survivors: list[tuple[float, float, tuple[float, int, np.ndarray, np.ndarray, dict[str, float], np.ndarray], dict[str, Any]]] = []
+        trial_records: list[tuple[float, float, tuple[float, int, np.ndarray, np.ndarray, dict[str, float], np.ndarray], dict[str, Any]]] = []
+        for ordinal, candidate in enumerate(candidates, start=1):
+            print(
+                f"short-survival trial {ordinal}/{len(candidates)} attempt={candidate[1]} "
+                f"chi={candidate[4]['chi_signed']:.8g}",
+                file=sys.stderr,
+                flush=True,
+            )
+            evolution = evolve_profile(args, candidate[2], wave, norm, norm_sq)
+            integrated_input = float(evolution["integrated_moving_packet_nonlinear_input"])
+            score = float(evolution["moving_packet_recurrence_ratio"])
+            survival_scores.append({
+                "attempt": candidate[1], "chi_mismatch": candidate[0], "moving_packet_recurrence_ratio": score,
+                "integrated_moving_packet_nonlinear_input": integrated_input,
+                "accepted_positive_short_input": integrated_input > 0.0,
+            })
+            if not args.require_positive_short_input or integrated_input > 0.0:
+                survivors.append((score, -candidate[0], candidate, evolution))
+            trial_records.append((score, -candidate[0], candidate, evolution))
+            print(
+                f"short-survival trial {ordinal}/{len(candidates)} Rmove={score:.8g} "
+                f"integrated_input={integrated_input:.8g}",
+                file=sys.stderr,
+                flush=True,
+            )
+        if not survivors:
+            # Keep the best rejected trajectory as a receipt: failure of a
+            # promotion gate is data, not grounds for deleting the screen.
+            selection_status = "no_trial_met_positive_moving_packet_input_gate"
+            selected_trial = max(trial_records, key=lambda row: (row[0], row[1]))
+            _, _, selected, selected_evolution = selected_trial
+        else:
+            _, _, selected, selected_evolution = max(survivors, key=lambda row: (row[0], row[1]))
+        mismatch, attempt, raw, field, static, nonlinear = selected
+    else:
+        mismatch, attempt, raw, field, static, nonlinear = min(candidates, key=lambda row: row[0])
     shape = profile_shape_metrics(field, wave, norm)
     estimate = stratified_interaction_estimate(args, field, nonlinear, wave, norm, np.random.default_rng(args.seed + 1000003))
     payload = {
@@ -503,7 +594,10 @@ def main() -> None:
             "angular_width": args.angular_width, "radial_log_width": args.radial_log_width,
             "helicity_bias": args.helicity_bias, "spatial_coherence": args.spatial_coherence,
             "angular_axis": list(args.angular_axis), "seed": args.seed,
-            "chi_target": args.chi_target, "chi_attempts": args.chi_attempts,
+            "chi_target": args.chi_target, "chi_sign": args.chi_sign, "chi_attempts": args.chi_attempts,
+            "target_dominance_min": args.target_dominance_min,
+            "selection_objective": args.selection_objective,
+            "require_positive_short_input": args.require_positive_short_input,
         },
         "quotient_slice": {
             "translation_fixed": "origin-centred phase convention",
@@ -512,6 +606,9 @@ def main() -> None:
             "chi_match_attempt": attempt,
             "chi_absolute_mismatch": mismatch,
             "chi_match_within_requested_tolerance": (mismatch <= args.chi_tolerance if args.chi_target is not None else None),
+            "candidate_count_after_signed_chi_and_tightness_filter": len(candidates),
+            "short_survival_screen": survival_scores if survival_scores else None,
+            "selection_status": selection_status,
             "warning": "critical mass and chi cannot both be imposed by a single scalar rescaling at fixed carrier scale; chi is matched by profile/phase selection",
         },
         "shape_metrics": shape,
@@ -519,7 +616,7 @@ def main() -> None:
         "stratified_interaction_measure": estimate,
     }
     if args.evolve:
-        payload["finite_galerkin_evolution"] = evolve_profile(args, raw, wave, norm, norm_sq)
+        payload["finite_galerkin_evolution"] = selected_evolution or evolve_profile(args, raw, wave, norm, norm_sq)
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
     print(json.dumps(payload, indent=2, sort_keys=True))

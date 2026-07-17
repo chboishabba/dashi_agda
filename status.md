@@ -36,6 +36,29 @@
   turnover `.916276`.  Thus spatial coherence did not rescue the packet in
   this pair of matched finite profiles; this remains a two-point empirical
   observation, not a uniform conclusion.
+- Third tight-slice result: the plus-helicity-biased profile (`helicity bias
+  .8`, matched chi `.15017`) gives `R_move=.00138334`, `G_move=.0265966`,
+  shell displacement `-1`, and Hellinger-squared `.744322`.  Polarization
+  changes the coarse route but has not produced recurrence in the first three
+  matched profile axes.  This remains a finite, three-point empirical census.
+- **Adversarial-search correction:** the prior three profile trajectories were
+  selected by `chi_absolute`; their initial signed target transfer was
+  negative, so they are loss-oriented atlas points rather than recurrence
+  adversaries.  `ns_normalized_profile_quotient_audit.py` now has
+  `--chi-sign positive|negative|absolute`, target-dominance filtering,
+  `--selection-objective short-survival`, and an optional positive integrated
+  short-time nonlinear-input gate.  It can also enlarge a fixed output carrier
+  to a requested modal-activity coverage before computing coarse turnover.
+  N16 smokes cover signed filtering, 50% carrier coverage, and staged
+  short-survival selection.  The next production run must use this positive-
+  signed-chi staged selector; no further manually selected full-window atlas
+  run is scheduled first.
+- Added `scripts/ns_normalized_profile_staged_manifest.py` and its initial
+  64-row Latin-hypercube manifest.  It covers angular width, radial width,
+  helicity bias and spatial coherence jointly, with a static signed-chi gate,
+  short survival stage, and full-window survivor stage.  The manifest is
+  non-executing; the first positive-signed-chi baseline short-screen is
+  running separately.
 
 - **Decision: Sparse Finite-Network Retired**: The sparse finite-network mechanism is retired for the tested finite packet. The 1024-output replay provisionally classifies its target shell as effectively dense with strong dominant-set switching, so the nine-triad core does not control this trajectory. Future tuning of that hand-designed graph is retired; this is not a universal finite-network impossibility theorem.
 - **New Critical Path**:
