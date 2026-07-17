@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          {
+          (
             set -euo pipefail
             AGDA_BIN="$(nix build --no-link --print-out-paths nixpkgs#agda)/bin/agda"
             STDLIB_OUT="$(nix build --no-link --print-out-paths nixpkgs#agdaPackages.standard-library)"
@@ -88,7 +88,7 @@ jobs:
                 -i "$CHECK_ROOT" -i "$CHECK_ROOT/standard-library" \
                 "$CHECK_ROOT/$target"
             done
-          } > agda-focused-check.log 2>&1
+          ) > agda-focused-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
           tail -n 100 agda-focused-check.log
