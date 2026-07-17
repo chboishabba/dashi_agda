@@ -212,7 +212,7 @@ sumAxisContributionsGaugeCovariant :
     (sumAxisContributions group linear U A x axes)
 sumAxisContributionsGaugeCovariant
   group linear gauge U A x [] =
-  actionZero linear (gauge x)
+  sym (actionZero linear (gauge x))
 sumAxisContributionsGaugeCovariant
   group linear gauge U A x (axis ∷ axes) =
   trans
