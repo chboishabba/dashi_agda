@@ -37,12 +37,12 @@ open import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport using
   ; unit
   ; multiply
   ; inverse
-  ; pathTransport
   )
 open import DASHI.Physics.YangMills.BalabanGaugeTransformationCovariance using
   ( DirectedGaugeField4
   ; GaugeFunction4
   ; gaugeTransformBond
+  ; directedPathTransport
   )
 open import DASHI.Physics.YangMills.BalabanLatticeAdjointCovariantDerivative using
   ( AdjointAdditiveModule
@@ -209,7 +209,7 @@ covariantPathIntegralAppend :
   addVector linear
     (covariantPathIntegral group linear U A p)
     (action (additive linear)
-      (pathTransport group U p)
+      (directedPathTransport group U p)
       (covariantPathIntegral group linear U A q))
 covariantPathIntegralAppend group linear U A empty q =
   sym
@@ -232,7 +232,7 @@ covariantPathIntegralAppend group linear U A (b ▷ p) q =
           (U b)
           (covariantPathIntegral group linear U A p)
           (action (additive linear)
-            (pathTransport group U p)
+            (directedPathTransport group U p)
             (covariantPathIntegral group linear U A q)))))
     (trans
       (addAssociative linear
@@ -241,7 +241,7 @@ covariantPathIntegralAppend group linear U A (b ▷ p) q =
           (covariantPathIntegral group linear U A p))
         (action (additive linear) (U b)
           (action (additive linear)
-            (pathTransport group U p)
+            (directedPathTransport group U p)
             (covariantPathIntegral group linear U A q))))
       (cong
         (addVector linear
@@ -252,5 +252,5 @@ covariantPathIntegralAppend group linear U A (b ▷ p) q =
         (sym
           (actionMultiply (additive linear)
             (U b)
-            (pathTransport group U p)
+            (directedPathTransport group U p)
             (covariantPathIntegral group linear U A q)))))
