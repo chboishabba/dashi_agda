@@ -11,7 +11,7 @@ module DASHI.Physics.YangMills.BalabanProjectedBlockToInverseSquare where
 -- decoration.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Nat.Base using (ℕ; zero; suc)
+open import Data.Nat.Base using (ℕ; zero; suc; _+_)
 open import Data.Product using (_×_)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
