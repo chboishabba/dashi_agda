@@ -7,7 +7,7 @@ module DASHI.Physics.YangMills.BalabanCumulativeDeterminantToInverseSquare where
 --   sum Gaussian = endpointDifference + J_{k:n}.
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Nat.Base using (ℕ; suc)
+open import Data.Nat.Base using (ℕ; suc; _+_)
 open import Data.Product using (_×_; proj₁; proj₂)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
