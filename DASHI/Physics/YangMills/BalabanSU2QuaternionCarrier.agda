@@ -12,7 +12,7 @@ module DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Base using ([]; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 
 import Tactic.RingSolver as Solver
@@ -26,13 +26,16 @@ open import DASHI.Physics.YangMills.BalabanRealPolynomialRing public using
   ; oneR
   ; realIsCommutativeRing
   ; realCommutativeRing
+  ; *-identityˡ
+  ; *-identityʳ
+  ; +-identityˡ
+  ; +-identityʳ
+  ; zeroˡ
+  ; zeroʳ
   ; realSolverRing
   )
 open import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport using
   ( GroupStructure )
-
-emptyRealVariables : List ℝ
-emptyRealVariables = []
 
 ------------------------------------------------------------------------
 -- Quaternion algebra
@@ -420,10 +423,10 @@ quaternionMultiplyConjugateLeft a =
 
 scaleOneQ : scaleRealQ oneR oneQ ≡ oneQ
 scaleOneQ = quaternionExt
-  (trans (q0Scale oneR oneQ) (Solver.solve emptyRealVariables realSolverRing))
-  (trans (q1Scale oneR oneQ) (Solver.solve emptyRealVariables realSolverRing))
-  (trans (q2Scale oneR oneQ) (Solver.solve emptyRealVariables realSolverRing))
-  (trans (q3Scale oneR oneQ) (Solver.solve emptyRealVariables realSolverRing))
+  (trans (q0Scale oneR oneQ) (*-identityˡ oneR))
+  (trans (q1Scale oneR oneQ) (*-identityˡ zeroR))
+  (trans (q2Scale oneR oneQ) (*-identityˡ zeroR))
+  (trans (q3Scale oneR oneQ) (*-identityˡ zeroR))
 
 ------------------------------------------------------------------------
 -- Unit quaternions and the literal gauge-group instance
@@ -442,15 +445,28 @@ su2QuaternionExt :
 su2QuaternionExt {su2q a aUnit} {su2q .a bUnit} refl = refl
 
 oneQUnitNorm : normSquaredQ oneQ ≡ oneR
-oneQUnitNorm
-  rewrite normSquaredExpand oneQ =
-  Solver.solve emptyRealVariables realSolverRing
+oneQUnitNorm =
+  trans
+    (normSquaredExpand oneQ)
+    (trans
+      (cong₂ _+R_
+        (cong₂ _+R_
+          (cong₂ _+R_
+            (*-identityˡ oneR)
+            (zeroˡ zeroR))
+          (zeroˡ zeroR))
+        (zeroˡ zeroR))
+      (trans
+        (+-identityʳ ((oneR +R zeroR) +R zeroR))
+        (trans
+          (+-identityʳ (oneR +R zeroR))
+          (+-identityʳ oneR))))
 
 su2Identity : SU2Quaternion
 su2Identity = su2q oneQ oneQUnitNorm
 
 oneTimesOne : oneR *R oneR ≡ oneR
-oneTimesOne = Solver.solve emptyRealVariables realSolverRing
+oneTimesOne = *-identityˡ oneR
 
 su2Multiply : SU2Quaternion → SU2Quaternion → SU2Quaternion
 su2Multiply (su2q a aUnit) (su2q b bUnit) =
