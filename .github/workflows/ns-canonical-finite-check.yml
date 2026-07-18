@@ -8,7 +8,6 @@ on:
     paths:
       - 'DASHI/Physics/Closure/NSTriadKNCanonical*.agda'
       - 'DASHI/Physics/Closure/NSTriadKNExactComplex*.agda'
-      - 'DASHI/Physics/Closure/NSTriadKNCanonicalEnvelope*.agda'
       - '.github/workflows/ns-canonical-finite-check.yml'
 
 concurrency:
@@ -44,6 +43,7 @@ jobs:
               DASHI/Physics/Closure/NSTriadKNCanonicalTriadOrbitEnumerationConcrete.agda
               DASHI/Physics/Closure/NSTriadKNCanonicalOrbitFoldEquality.agda
               DASHI/Physics/Closure/NSTriadKNExactComplexModalTransfer.agda
+              DASHI/Physics/Closure/NSTriadKNCanonicalEnvelopeProductIdentity.agda
             )
             scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-focused-check.log 2>&1
