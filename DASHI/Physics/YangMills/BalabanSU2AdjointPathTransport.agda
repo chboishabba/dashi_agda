@@ -3,7 +3,7 @@ module DASHI.Physics.YangMills.BalabanSU2AdjointPathTransport where
 open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Nat.Base using (NonZero)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 open import DASHI.Physics.YangMills.P06FaceCubeTorusGeometry using (Cube4)
 open import DASHI.Physics.YangMills.BalabanPeriodicLatticePaths using
@@ -11,7 +11,7 @@ open import DASHI.Physics.YangMills.BalabanPeriodicLatticePaths using
 open import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport using
   (GaugeField4; pathTransport; pathTransportAppend)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
-  (SU2Quaternion; su2QuaternionGroup; su2Multiply)
+  (SU2Quaternion; su2QuaternionGroup)
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
   (SU2LieAlgebra; su2Adjoint; su2AdjointMultiply)
 open import DASHI.Physics.YangMills.BalabanSU2AdjointInnerProduct using
@@ -42,8 +42,6 @@ su2AdjointPathTransportAppend U p q X =
     (cong (λ transport → su2Adjoint transport X)
       (pathTransportAppend su2QuaternionGroup U p q))
     (su2AdjointMultiply (su2PathTransport U p) (su2PathTransport U q) X)
-  where
-  open import Relation.Binary.PropositionalEquality using (cong)
 
 su2AdjointPathTransportInnerInvariant :
   ∀ {N : Nat} {{_ : NonZero N}}
