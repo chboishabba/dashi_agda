@@ -64,6 +64,17 @@ realCommutativeRing = record
   ; isCommutativeRing = realIsCommutativeRing
   }
 
+module RealRingLaws = CommutativeRing realCommutativeRing
+
+open RealRingLaws public using
+  ( *-identityˡ
+  ; *-identityʳ
+  ; +-identityˡ
+  ; +-identityʳ
+  ; zeroˡ
+  ; zeroʳ
+  )
+
 realSolverRing : ACR.AlmostCommutativeRing 0ℓ 0ℓ
 realSolverRing =
   ACR.fromCommutativeRing realCommutativeRing (λ _ → nothing)
