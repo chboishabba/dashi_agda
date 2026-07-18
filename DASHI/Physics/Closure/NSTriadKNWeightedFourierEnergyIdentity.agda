@@ -138,6 +138,52 @@ weightedZeroSumTriadContributions S M z T (σ ∷ σs) =
   weightedZeroSumTriadContribution S M z T σ ∷
   weightedZeroSumTriadContributions S M z T σs
 
+------------------------------------------------------------------------
+-- Canonical packet-transfer fold.
+--
+-- A `ZeroSumTriad` is still a labelled representative.  The concrete
+-- Fourier lane supplies input-symmetrisation through
+-- `canonicalModalTransfer`, and its cyclic copies supply the three modal
+-- legs.  A separate finite enumeration must still prove that the list below
+-- has exactly one representative of every permutation/reality orbit.  This
+-- module deliberately does not assert that quotient theorem.
+--
+-- Once such an enumeration is supplied, this is the exact finite object
+-- corresponding to Q_K = sum_Δ T^K_Δ in the canonical-orbit audit.  The
+-- unsigned envelope and cancellation efficiency require an ordered absolute
+-- value authority and are intentionally not introduced here.
+------------------------------------------------------------------------
+
+canonicalPacketTransferContribution :
+  (S : Scalar.ExactOrderedScalar) → (M : Nat) →
+  AdmissibleFourierMultiplier S M → ZeroSumTriadTransferField S →
+  ZeroSumTriad → Scalar.Scalar S
+canonicalPacketTransferContribution = weightedZeroSumTriadContribution
+
+canonicalPacketTransferContributions :
+  (S : Scalar.ExactOrderedScalar) → (M : Nat) →
+  AdmissibleFourierMultiplier S M → ZeroSumTriadTransferField S →
+  List ZeroSumTriad → List (Scalar.Scalar S)
+canonicalPacketTransferContributions = weightedZeroSumTriadContributions
+
+canonicalPacketTransferSum :
+  (S : Scalar.ExactOrderedScalar) → (M : Nat) →
+  AdmissibleFourierMultiplier S M → ZeroSumTriadTransferField S →
+  List ZeroSumTriad → Scalar.Scalar S
+canonicalPacketTransferSum S M z T representatives =
+  sumScalarList S
+    (canonicalPacketTransferContributions S M z T representatives)
+
+canonicalPacketTransferSumUnfolds :
+  (S : Scalar.ExactOrderedScalar) → (M : Nat) →
+  (z : AdmissibleFourierMultiplier S M) →
+  (T : ZeroSumTriadTransferField S) →
+  (representatives : List ZeroSumTriad) →
+  canonicalPacketTransferSum S M z T representatives ≡
+  sumScalarList S
+    (weightedZeroSumTriadContributions S M z T representatives)
+canonicalPacketTransferSumUnfolds S M z T representatives = refl
+
 weightedTriadContribution :
   (S : Scalar.ExactOrderedScalar) → (M : Nat) →
   AdmissibleFourierMultiplier S M → TriadTransferField S →

@@ -1,8 +1,8 @@
 {
   "artifacts": {
     "receipt": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_canonical_orbit_panel_run2/baseline_parabolic.json",
-    "receipt_sha256": null,
-    "receipt_sha256_file": null,
+    "receipt_sha256": "fa27cf72647ad2dc5f45ca70d0da07e9d23cf73d0ee32d6dfcbcf878d675d04e",
+    "receipt_sha256_file": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_canonical_orbit_panel_run2/baseline_parabolic.sha256",
     "stderr": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_canonical_orbit_panel_run2/baseline_parabolic.stderr",
     "stdout": "scripts/data/outputs/ns_interaction_closure_production/ns_frozen_packet_canonical_orbit_panel_run2/baseline_parabolic.stdout"
   },
@@ -52,10 +52,10 @@
   ],
   "contract": "durable_local_perturbation_execution_receipt_nonpromoting",
   "id": "baseline",
-  "receipt_promoted": false,
-  "recorded_unix_time": 1784351936.7896256,
-  "returncode": null,
+  "receipt_promoted": true,
+  "recorded_unix_time": 1784352474.3383596,
+  "returncode": 0,
   "stage": "parabolic",
-  "state": "running",
+  "state": "promoted",
   "validation_error": null
 }

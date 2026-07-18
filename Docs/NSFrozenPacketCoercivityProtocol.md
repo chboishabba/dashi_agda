@@ -109,6 +109,45 @@ exact. Both unsigned envelopes are Monte-Carlo estimates, so this supplies a
 finite algebraic audit—not a certified inequality or a continuum triad
 dephasing theorem.
 
+## Formal bridge boundary
+
+`NSTriadKNWeightedFourierEnergyIdentity.agda` now names the exact finite
+packet-transfer fold
+
+\[
+Q_K=\sum_{\Delta\in\mathcal R}T^K_\Delta
+\]
+
+as `canonicalPacketTransferSum`, for any supplied list `R` of zero-sum triad
+representatives. The local Fourier lane already handles input symmetrisation
+and the three cyclic output legs.
+
+`NSTriadKNCanonicalTriadOrbitEnumeration.agda` now supplies the typed target
+for the remaining quotient step. Its twelve-element orbit explicitly contains
+all six leg permutations and their reality partners; the required witness must
+prove both complete retained-triad coverage and separation of representatives.
+The contract is deliberately parameterized by an arbitrary retained-triad
+predicate: the same-shell lattice enumerator is not the CFD carrier, whose
+frozen output packet has inputs throughout a finite cutoff. The corresponding
+`FullCutoffZeroSumTriad` / `fullCutoffZeroSumTriads` now name that symmetric
+three-mode cutoff carrier. Its quotient enumeration remains fail-closed, so
+neither file asserts that a physical quotient has already been constructed.
+
+An ordered absolute-value/envelope authority remains a separate prerequisite
+for a fully formal canonical-cancellation statement.
+
+For a positive packet rate, the empirical report also records the
+identity-shaped finite decomposition
+
+\[
+\Gamma_K=E_{K,+}\frac{A_K}{2\nu D_K},\qquad
+E_{K,+}=\frac{[Q_K]_+}{A_K}.
+\]
+
+Here `Q_K` is exact while `A_K` is sampled. The report exposes the sampled
+log-factor closure residual; it is a sampling diagnostic, not an analytic
+proof of the product estimate.
+
 ## Interpretation boundary
 
 Radial width and angular concentration are secondary explanatory observables.
