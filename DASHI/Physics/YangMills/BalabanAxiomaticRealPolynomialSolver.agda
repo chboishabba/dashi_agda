@@ -23,8 +23,10 @@ module DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Algebra.Bundles using (CommutativeRing)
 open import Algebra.Bundles.Raw using (RawRing)
-open import Data.Maybe.Base using (Maybe; just; nothing)
+open import Data.List.Base using ([]; _∷_)
+open import Data.Maybe.Base using (just; nothing)
 open import Data.Nat.Base as Nat using (_+_; _*_)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.Definitions using (WeaklyDecidable)
@@ -49,7 +51,7 @@ open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
   )
 
 private
-  module RealRing = Algebra.Bundles.CommutativeRing realCommutativeRing
+  module RealRing = CommutativeRing realCommutativeRing
   module RealRingProperties = RingProperties RealRing.ring
   module Natural = NaturalMultiplication RealRing.semiring
 
