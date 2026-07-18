@@ -1,0 +1,75 @@
+name: Balaban SU2 carrier check
+
+on:
+  push:
+    branches:
+      - codex/balaban-su2-quaternion-carrier
+      - codex/balaban-su2-quaternion-carrier-clean
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/BalabanRealRingSolverProbe.agda'
+      - 'DASHI/Physics/YangMills/BalabanSU2*.agda'
+      - '.github/workflows/balaban-su2-probe-check.yml'
+
+concurrency:
+  group: balaban-su2-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  su2-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check concrete SU2 carrier lane with Agda 2.9
+        id: check
+        shell: bash
+        run: |
+          set +e
+          (
+            set -euo pipefail
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/su2-carrier-check.log"
+            export AGDA_JOBS=4
+            scripts/run_agda29_parallel_check.sh \
+              DASHI/Physics/YangMills/BalabanRealRingSolverProbe.agda \
+              DASHI/Physics/YangMills/BalabanSU2QuaternionCarrier.agda \
+              DASHI/Physics/YangMills/BalabanSU2LieAlgebraCarrier.agda \
+              DASHI/Physics/YangMills/BalabanSU2AdjointInnerProduct.agda \
+              DASHI/Physics/YangMills/BalabanSU2LiteralOperatorInstances.agda \
+              DASHI/Physics/YangMills/BalabanSU2LieBracket.agda \
+              DASHI/Physics/YangMills/BalabanSU2AdjointPolynomialCalculus.agda \
+              DASHI/Physics/YangMills/BalabanSU2AdjointCubicReduction.agda \
+              DASHI/Physics/YangMills/BalabanSU2ReducedAdjointCalculus.agda \
+              DASHI/Physics/YangMills/BalabanSU2AdjointMatrixDeterminant.agda \
+              DASHI/Physics/YangMills/BalabanSU2ReducedAdjointDeterminantProduct.agda \
+              DASHI/Physics/YangMills/BalabanSU2ReducedAdjointAdjugate.agda \
+              DASHI/Physics/YangMills/BalabanSU2AdjointRotationDeterminant.agda \
+              DASHI/Physics/YangMills/BalabanSU2ReducedAdjointGaugeCovariance.agda \
+              DASHI/Physics/YangMills/BalabanSU2RadialAdjointOperator.agda \
+              DASHI/Physics/YangMills/BalabanSU2RadialAdjointComposition.agda \
+              DASHI/Physics/YangMills/BalabanSU2RadialAdjointInverse.agda \
+              DASHI/Physics/YangMills/BalabanSU2NestedRadialBlockPathTerm.agda
+          ) > su2-carrier-check.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          tail -n 180 su2-carrier-check.log
+          exit 0
+      - name: Upload SU2 check log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: balaban-su2-carrier-log
+          path: su2-carrier-check.log
+          if-no-files-found: error
+      - name: Fail on Agda error
+        if: steps.check.outputs.status != '0'
+        run: exit 1
