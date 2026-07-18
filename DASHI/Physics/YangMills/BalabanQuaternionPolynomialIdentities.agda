@@ -148,6 +148,39 @@ q3P a0 a1 a2 a3 b0 b1 b2 b3 =
     :+ (:- (a2 :* b1))
     :+ (a3 :* b0))
 
+conjugateProduct1Polynomial :
+  ∀ a0 a1 a2 a3 b0 b1 b2 b3 →
+  -R (q1R a0 a1 a2 a3 b0 b1 b2 b3)
+  ≡ q1R b0 (-R b1) (-R b2) (-R b3)
+    a0 (-R a1) (-R a2) (-R a3)
+conjugateProduct1Polynomial =
+  solve 8 (λ a0 a1 a2 a3 b0 b1 b2 b3 →
+    :- (q1P a0 a1 a2 a3 b0 b1 b2 b3) :=
+    q1P b0 (:- b1) (:- b2) (:- b3)
+      a0 (:- a1) (:- a2) (:- a3)) refl
+
+conjugateProduct2Polynomial :
+  ∀ a0 a1 a2 a3 b0 b1 b2 b3 →
+  -R (q2R a0 a1 a2 a3 b0 b1 b2 b3)
+  ≡ q2R b0 (-R b1) (-R b2) (-R b3)
+    a0 (-R a1) (-R a2) (-R a3)
+conjugateProduct2Polynomial =
+  solve 8 (λ a0 a1 a2 a3 b0 b1 b2 b3 →
+    :- (q2P a0 a1 a2 a3 b0 b1 b2 b3) :=
+    q2P b0 (:- b1) (:- b2) (:- b3)
+      a0 (:- a1) (:- a2) (:- a3)) refl
+
+conjugateProduct3Polynomial :
+  ∀ a0 a1 a2 a3 b0 b1 b2 b3 →
+  -R (q3R a0 a1 a2 a3 b0 b1 b2 b3)
+  ≡ q3R b0 (-R b1) (-R b2) (-R b3)
+    a0 (-R a1) (-R a2) (-R a3)
+conjugateProduct3Polynomial =
+  solve 8 (λ a0 a1 a2 a3 b0 b1 b2 b3 →
+    :- (q3P a0 a1 a2 a3 b0 b1 b2 b3) :=
+    q3P b0 (:- b1) (:- b2) (:- b3)
+      a0 (:- a1) (:- a2) (:- a3)) refl
+
 quaternionAssoc0Polynomial :
   ∀ a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3 →
   q0R
