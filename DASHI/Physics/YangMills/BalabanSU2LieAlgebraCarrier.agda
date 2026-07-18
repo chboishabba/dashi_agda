@@ -22,7 +22,8 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import Tactic.RingSolver as Solver
 
 open import DASHI.Foundations.RealAnalysisAxioms using (+-assoc; +-identityˡ; +-identityʳ)
-open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using (-‿inverseʳ; zeroʳ)
+open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
+  (-‿inverseʳ; zeroʳ; [-x][-y]≈xy)
 
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
   ( zeroCoefficient
@@ -68,6 +69,8 @@ open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ; _*q_
   ; quaternionOneLeft
   ; quaternionOneRight
+  ; quaternionMultiplyAssociative
+  ; quaternionExt
   ; oneQ
   ; -0#≈0#
   ; oneRight1
@@ -352,6 +355,138 @@ su2AdjointUnit (su2Lie x y z) =
             su2IdentityConjugate)
           (quaternionOneRight (lieQuaternion (su2Lie x y z))))))
 
+quaternionConjugateMultiply :
+  ∀ a b → conjugateQ (a *q b) ≡ conjugateQ b *q conjugateQ a
+quaternionConjugateMultiply a@(quat a₀ a₁ a₂ a₃) b@(quat b₀ b₁ b₂ b₃) =
+  quaternionExt
+    (conjugateMultiply0 a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃)
+    (conjugateMultiply1 a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃)
+    (conjugateMultiply2 a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃)
+    (conjugateMultiply3 a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃)
+  where
+  conjugateMultiply0 :
+    ∀ a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃ →
+    q0 (conjugateQ (quat a₀ a₁ a₂ a₃ *q quat b₀ b₁ b₂ b₃))
+      ≡ q0 (conjugateQ (quat b₀ b₁ b₂ b₃) *q
+        conjugateQ (quat a₀ a₁ a₂ a₃))
+  conjugateMultiply0 a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃
+    rewrite q0Conjugate (quat a₀ a₁ a₂ a₃ *q quat b₀ b₁ b₂ b₃)
+      | q0Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q0Multiply (conjugateQ (quat b₀ b₁ b₂ b₃))
+          (conjugateQ (quat a₀ a₁ a₂ a₃))
+      | q0Conjugate (quat b₀ b₁ b₂ b₃)
+      | q1Conjugate (quat b₀ b₁ b₂ b₃)
+      | q2Conjugate (quat b₀ b₁ b₂ b₃)
+      | q3Conjugate (quat b₀ b₁ b₂ b₃)
+      | q0Conjugate (quat a₀ a₁ a₂ a₃)
+      | q1Conjugate (quat a₀ a₁ a₂ a₃)
+      | q2Conjugate (quat a₀ a₁ a₂ a₃)
+      | q3Conjugate (quat a₀ a₁ a₂ a₃)
+      | [-x][-y]≈xy b₁ a₁
+      | [-x][-y]≈xy b₂ a₂
+      | [-x][-y]≈xy b₃ a₃ =
+    Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷ [])
+      realSolverRing
+
+  conjugateMultiply1 :
+    ∀ a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃ →
+    q1 (conjugateQ (quat a₀ a₁ a₂ a₃ *q quat b₀ b₁ b₂ b₃))
+      ≡ q1 (conjugateQ (quat b₀ b₁ b₂ b₃) *q
+        conjugateQ (quat a₀ a₁ a₂ a₃))
+  conjugateMultiply1 a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃
+    rewrite q1Conjugate (quat a₀ a₁ a₂ a₃ *q quat b₀ b₁ b₂ b₃)
+      | q0Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q1Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q2Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q3Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q1Multiply (conjugateQ (quat b₀ b₁ b₂ b₃))
+          (conjugateQ (quat a₀ a₁ a₂ a₃))
+      | q0Conjugate (quat b₀ b₁ b₂ b₃)
+      | q1Conjugate (quat b₀ b₁ b₂ b₃)
+      | q2Conjugate (quat b₀ b₁ b₂ b₃)
+      | q3Conjugate (quat b₀ b₁ b₂ b₃)
+      | q0Conjugate (quat a₀ a₁ a₂ a₃)
+      | q1Conjugate (quat a₀ a₁ a₂ a₃)
+      | q2Conjugate (quat a₀ a₁ a₂ a₃)
+      | q3Conjugate (quat a₀ a₁ a₂ a₃)
+      | [-x][-y]≈xy b₂ a₃
+      | [-x][-y]≈xy b₃ a₂ =
+    Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷ [])
+      realSolverRing
+
+  conjugateMultiply2 :
+    ∀ a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃ →
+    q2 (conjugateQ (quat a₀ a₁ a₂ a₃ *q quat b₀ b₁ b₂ b₃))
+      ≡ q2 (conjugateQ (quat b₀ b₁ b₂ b₃) *q
+        conjugateQ (quat a₀ a₁ a₂ a₃))
+  conjugateMultiply2 a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃
+    rewrite q2Conjugate (quat a₀ a₁ a₂ a₃ *q quat b₀ b₁ b₂ b₃)
+      | q0Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q1Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q2Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q3Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q2Multiply (conjugateQ (quat b₀ b₁ b₂ b₃))
+          (conjugateQ (quat a₀ a₁ a₂ a₃))
+      | q0Conjugate (quat b₀ b₁ b₂ b₃)
+      | q1Conjugate (quat b₀ b₁ b₂ b₃)
+      | q2Conjugate (quat b₀ b₁ b₂ b₃)
+      | q3Conjugate (quat b₀ b₁ b₂ b₃)
+      | q0Conjugate (quat a₀ a₁ a₂ a₃)
+      | q1Conjugate (quat a₀ a₁ a₂ a₃)
+      | q2Conjugate (quat a₀ a₁ a₂ a₃)
+      | q3Conjugate (quat a₀ a₁ a₂ a₃)
+      | [-x][-y]≈xy b₁ a₃
+      | [-x][-y]≈xy b₃ a₁ =
+    Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷ [])
+      realSolverRing
+
+  conjugateMultiply3 :
+    ∀ a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃ →
+    q3 (conjugateQ (quat a₀ a₁ a₂ a₃ *q quat b₀ b₁ b₂ b₃))
+      ≡ q3 (conjugateQ (quat b₀ b₁ b₂ b₃) *q
+        conjugateQ (quat a₀ a₁ a₂ a₃))
+  conjugateMultiply3 a₀ a₁ a₂ a₃ b₀ b₁ b₂ b₃
+    rewrite q3Conjugate (quat a₀ a₁ a₂ a₃ *q quat b₀ b₁ b₂ b₃)
+      | q0Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q1Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q2Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q3Multiply (quat a₀ a₁ a₂ a₃) (quat b₀ b₁ b₂ b₃)
+      | q3Multiply (conjugateQ (quat b₀ b₁ b₂ b₃))
+          (conjugateQ (quat a₀ a₁ a₂ a₃))
+      | q0Conjugate (quat b₀ b₁ b₂ b₃)
+      | q1Conjugate (quat b₀ b₁ b₂ b₃)
+      | q2Conjugate (quat b₀ b₁ b₂ b₃)
+      | q3Conjugate (quat b₀ b₁ b₂ b₃)
+      | q0Conjugate (quat a₀ a₁ a₂ a₃)
+      | q1Conjugate (quat a₀ a₁ a₂ a₃)
+      | q2Conjugate (quat a₀ a₁ a₂ a₃)
+      | q3Conjugate (quat a₀ a₁ a₂ a₃)
+      | [-x][-y]≈xy b₁ a₂
+      | [-x][-y]≈xy b₂ a₁ =
+    Solver.solve
+      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷ [])
+      realSolverRing
+
+adjointQuaternionMultiply :
+  ∀ a b X →
+  ((a *q b) *q X) *q conjugateQ (a *q b)
+    ≡ a *q (b *q X) *q conjugateQ b *q conjugateQ a
+adjointQuaternionMultiply a b X =
+  trans
+    (cong (λ q → q *q conjugateQ (a *q b))
+      (quaternionMultiplyAssociative a b X))
+    (trans
+      (cong (λ q → (a *q (b *q X)) *q q)
+        (quaternionConjugateMultiply a b))
+      (trans
+        (sym (quaternionMultiplyAssociative a (b *q X)
+          (conjugateQ b *q conjugateQ a)))
+        (cong (λ q → a *q q)
+          (quaternionMultiplyAssociative b X (conjugateQ b)))))
+
 su2AdjointMultiply :
   ∀ u v X →
   su2Adjoint (su2Multiply u v) X
@@ -360,19 +495,14 @@ su2AdjointMultiply
   (su2q (quat a₀ a₁ a₂ a₃) a-unit)
   (su2q (quat b₀ b₁ b₂ b₃) b-unit)
   (su2Lie x y z) =
-  su2LieExt
-    (Solver.solve
-      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷
-       x ∷ y ∷ z ∷ [])
-      realSolverRing)
-    (Solver.solve
-      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷
-       x ∷ y ∷ z ∷ [])
-      realSolverRing)
-    (Solver.solve
-      (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ b₀ ∷ b₁ ∷ b₂ ∷ b₃ ∷
-       x ∷ y ∷ z ∷ [])
-      realSolverRing)
+  let proof = adjointQuaternionMultiply
+        (quat a₀ a₁ a₂ a₃)
+        (quat b₀ b₁ b₂ b₃)
+        (quat zeroR x y z)
+  in su2LieExt
+    (cong q1 proof)
+    (cong q2 proof)
+    (cong q3 proof)
 
 su2AdjointAdd :
   ∀ u X Y →
