@@ -40,7 +40,7 @@ jobs:
             export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-focused-check.log"
             export AGDA_JOBS=4
             targets=(
-              DASHI/Physics/Closure/NSTriadKNCanonicalTriadOrbitEnumerationConcrete.agda
+              DASHI/Physics/Closure/NSTriadKNCanonicalTriadOrbitQuotient.agda
               DASHI/Physics/Closure/NSTriadKNCanonicalOrbitFoldEquality.agda
               DASHI/Physics/Closure/NSTriadKNExactComplexModalTransfer.agda
               DASHI/Physics/Closure/NSTriadKNCanonicalEnvelopeProductIdentity.agda
