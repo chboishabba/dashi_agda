@@ -17,9 +17,23 @@ module DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using ([]; _∷_)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import Tactic.RingSolver as Solver
+
+open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
+  ( zeroCoefficient
+  ; module RealPolynomialSolver
+  )
+open RealPolynomialSolver using
+  ( Polynomial
+  ; solve
+  ; _:=_
+  ; _:+_
+  ; _:*_
+  ; con
+  ; :-_
+  )
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanLatticeAdjointCovariantDerivative using
@@ -127,14 +141,77 @@ su2Adjoint :
   SU2Quaternion → SU2LieAlgebra → SU2LieAlgebra
 su2Adjoint u X = lieFromQuaternion (adjointQuaternion u X)
 
+-- After expanding both quaternion products, the real component contains only
+-- the twelve cancelling monomials below.  In particular, the intermediate
+-- pure-imaginary component is not represented by terms such as 0 * x or x +
+-- 0; those terms have already been removed with the real-ring laws.
+adjointPureImaginaryCancellation :
+  ∀ a₀ a₁ a₂ a₃ x y z →
+  (((((((((((
+      -R ((a₀ *R a₁) *R x)
+      +R (-R ((a₀ *R a₂) *R y)))
+      +R (-R ((a₀ *R a₃) *R z)))
+      +R ((a₁ *R a₀) *R x))
+      +R ((a₁ *R a₂) *R z))
+      +R (-R ((a₁ *R a₃) *R y)))
+      +R ((a₂ *R a₀) *R y))
+      +R (-R ((a₂ *R a₁) *R z)))
+      +R ((a₂ *R a₃) *R x))
+      +R ((a₃ *R a₀) *R z))
+      +R ((a₃ *R a₁) *R y))
+      +R (-R ((a₃ *R a₂) *R x)))
+    ≡ zeroR
+adjointPureImaginaryCancellation =
+  solve 7
+    (λ a₀ a₁ a₂ a₃ x y z →
+      (((((((((((
+        :- ((a₀ :* a₁) :* x)
+        :+ :- ((a₀ :* a₂) :* y))
+        :+ :- ((a₀ :* a₃) :* z))
+        :+ ((a₁ :* a₀) :* x))
+        :+ ((a₁ :* a₂) :* z))
+        :+ :- ((a₁ :* a₃) :* y))
+        :+ ((a₂ :* a₀) :* y))
+        :+ :- ((a₂ :* a₁) :* z))
+        :+ ((a₂ :* a₃) :* x))
+        :+ ((a₃ :* a₀) :* z))
+        :+ ((a₃ :* a₁) :* y))
+        :+ :- ((a₃ :* a₂) :* x))
+      := con zeroCoefficient)
+    refl
+
+-- The four component formulae expose the nested quaternion product.  Ring
+-- normalization removes the zero coordinates of lieQuaternion and connects
+-- that expansion to the zero-free cancellation above.
+adjointQuaternionRealPartExpanded :
+  ∀ a₀ a₁ a₂ a₃ x y z →
+  q0 ((quat a₀ a₁ a₂ a₃ *q quat zeroR x y z)
+      *q conjugateQ (quat a₀ a₁ a₂ a₃))
+    ≡
+  (((((((((((
+      -R ((a₀ *R a₁) *R x)
+      +R (-R ((a₀ *R a₂) *R y)))
+      +R (-R ((a₀ *R a₃) *R z)))
+      +R ((a₁ *R a₀) *R x))
+      +R ((a₁ *R a₂) *R z))
+      +R (-R ((a₁ *R a₃) *R y)))
+      +R ((a₂ *R a₀) *R y))
+      +R (-R ((a₂ *R a₁) *R z)))
+      +R ((a₂ *R a₃) *R x))
+      +R ((a₃ *R a₀) *R z))
+      +R ((a₃ *R a₁) *R y))
+      +R (-R ((a₃ *R a₂) *R x)))
+adjointQuaternionRealPartExpanded a₀ a₁ a₂ a₃ x y z =
+  Solver.solve (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ x ∷ y ∷ z ∷ []) realSolverRing
+
 adjointQuaternionPureImaginary :
   ∀ u X → q0 (adjointQuaternion u X) ≡ zeroR
 adjointQuaternionPureImaginary
   (su2q (quat a₀ a₁ a₂ a₃) a-unit)
   (su2Lie x y z) =
-  Solver.solve
-    (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ x ∷ y ∷ z ∷ [])
-    realSolverRing
+  trans
+    (adjointQuaternionRealPartExpanded a₀ a₁ a₂ a₃ x y z)
+    (adjointPureImaginaryCancellation a₀ a₁ a₂ a₃ x y z)
 
 lieQuaternionAdjoint :
   ∀ u X → lieQuaternion (su2Adjoint u X) ≡ adjointQuaternion u X
