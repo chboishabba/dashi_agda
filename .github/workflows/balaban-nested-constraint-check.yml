@@ -37,25 +37,11 @@ jobs:
           set +e
           (
             set -euo pipefail
-            AGDA_BIN="$(nix build --impure --no-link --print-out-paths --expr '
-              let
-                agdaFlake = builtins.getFlake "github:agda/agda/6a5169a469d506ee848ad99ef574c3df8e329a02";
-                package = agdaFlake.packages.${builtins.currentSystem}.debug;
-                patched = package.overrideAttrs (_: { postInstall = ""; });
-              in patched.bin
-            ')/bin/agda"
-            STDLIB_ROOT="$(mktemp -d)"
-            git clone --depth=1 --branch experimental \
-              https://github.com/agda/agda-stdlib.git "$STDLIB_ROOT"
-            STDLIB_INCLUDE="$STDLIB_ROOT/src"
-            CHECK_ROOT="$(mktemp -d)"
-            AGDA_DATA_DIR="$("$AGDA_BIN" --print-agda-data-dir)"
-            AGDA_DATA_ROOT="$(dirname "$(dirname "$(dirname "$(dirname "$AGDA_DATA_DIR")")")")"
-            cp -a "$AGDA_DATA_ROOT/lib/prim" "$CHECK_ROOT/prim"
-            PRIM_INCLUDE="$CHECK_ROOT/prim"
-            cp -a "$GITHUB_WORKSPACE/DASHI" "$CHECK_ROOT/DASHI"
-            "$AGDA_BIN" --version
-            printf 'agda-stdlib %s\n' "$(git -C "$STDLIB_ROOT" rev-parse HEAD)"
+            export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+            export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+            export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+            export AGDA_LOG_PATH="$GITHUB_WORKSPACE/agda-focused-check.log"
+            export AGDA_JOBS=4
             targets=(
               DASHI/Physics/YangMills/BalabanPeriodicLatticeBonds.agda
               DASHI/Physics/YangMills/BalabanPeriodicLatticePaths.agda
@@ -130,12 +116,7 @@ jobs:
               DASHI/Physics/YangMills/BalabanConstrainedKKTLinearisation.agda
               DASHI/Physics/YangMills/BalabanConstrainedEnvelopeHessian.agda
             )
-            for target in "${targets[@]}"; do
-              echo "Checking: $target"
-              "$AGDA_BIN" --no-libraries --no-default-libraries -j0 \
-                -i "$PRIM_INCLUDE" -i "$CHECK_ROOT" -i "$STDLIB_INCLUDE" \
-                "$CHECK_ROOT/$target"
-            done
+            scripts/run_agda29_parallel_check.sh "${targets[@]}"
           ) > agda-focused-check.log 2>&1
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
