@@ -263,11 +263,12 @@ orbitRepresentativesCover {[]} ()
 orbitRepresentativesCover {pivot ∷ xs} {τ} (here eq)
   rewrite eq = pivot , (here refl , sameOrbitRefl pivot)
 orbitRepresentativesCover {pivot ∷ xs} {τ} (there τ∈xs)
-  with sameOrbit? τ pivot
-... | true = pivot , (here refl , sameOrbitSound τ pivot refl)
+  with sameOrbit? τ pivot in orbitResult
+... | true = pivot , (here refl , sameOrbitSound τ pivot orbitResult)
 ... | false
   with orbitRepresentativesCover
-    (∈-filter⁺ (T? ∘ notSameOrbit? pivot) τ∈xs (tNotFromFalse refl))
+    (∈-filter⁺ (T? ∘ notSameOrbit? pivot) τ∈xs
+      (tNotFromFalse orbitResult))
 ... | σ , σ∈ , τ~σ = σ , (there σ∈ , τ~σ)
 
 laterRepresentativeNotSame :
