@@ -4,11 +4,10 @@ module DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier where
 -- Concrete SU(2) carrier as the group of unit quaternions over DASHI's
 -- canonical real-number authority boundary.
 --
--- The quaternion operations are explicit polynomial expressions. Their laws
--- are reduced componentwise and discharged by the standard-library ring
--- solver from one honest foundational socket: the postulated real carrier is
--- a commutative ring. No Yang--Mills source theorem or analytic estimate is
--- assumed here.
+-- Small polynomial identities are discharged directly by the reflective
+-- standard-library solver.  The large associativity and norm identities use
+-- the dedicated integer-coefficient solver socket, so coefficient arithmetic
+-- is computational even though the target real operations remain axiomatic.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -34,6 +33,14 @@ open import DASHI.Physics.YangMills.BalabanRealPolynomialRing public using
   ; zeroʳ
   ; realSolverRing
   )
+open import DASHI.Physics.YangMills.BalabanQuaternionPolynomialIdentities using
+  ( quaternionAssoc0Polynomial
+  ; quaternionAssoc1Polynomial
+  ; quaternionAssoc2Polynomial
+  ; quaternionAssoc3Polynomial
+  )
+open import DASHI.Physics.YangMills.BalabanQuaternionNormPolynomialIdentity using
+  ( quaternionNormMultiplicativePolynomial )
 open import DASHI.Physics.YangMills.BalabanPeriodicGaugeTransport using
   ( GroupStructure )
 
@@ -198,10 +205,8 @@ assoc0 a@(quat a0 a1 a2 a3)
         | q0Multiply a (b *q c)
         | q0Multiply a b | q1Multiply a b | q2Multiply a b | q3Multiply a b
         | q0Multiply b c | q1Multiply b c | q2Multiply b c | q3Multiply b c =
-  Solver.solve
-    (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
-     c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
-    realSolverRing
+  quaternionAssoc0Polynomial
+    a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3
 
 assoc1 : ∀ a b c → q1 ((a *q b) *q c) ≡ q1 (a *q (b *q c))
 assoc1 a@(quat a0 a1 a2 a3)
@@ -211,10 +216,8 @@ assoc1 a@(quat a0 a1 a2 a3)
         | q1Multiply a (b *q c)
         | q0Multiply a b | q1Multiply a b | q2Multiply a b | q3Multiply a b
         | q0Multiply b c | q1Multiply b c | q2Multiply b c | q3Multiply b c =
-  Solver.solve
-    (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
-     c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
-    realSolverRing
+  quaternionAssoc1Polynomial
+    a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3
 
 assoc2 : ∀ a b c → q2 ((a *q b) *q c) ≡ q2 (a *q (b *q c))
 assoc2 a@(quat a0 a1 a2 a3)
@@ -224,10 +227,8 @@ assoc2 a@(quat a0 a1 a2 a3)
         | q2Multiply a (b *q c)
         | q0Multiply a b | q1Multiply a b | q2Multiply a b | q3Multiply a b
         | q0Multiply b c | q1Multiply b c | q2Multiply b c | q3Multiply b c =
-  Solver.solve
-    (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
-     c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
-    realSolverRing
+  quaternionAssoc2Polynomial
+    a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3
 
 assoc3 : ∀ a b c → q3 ((a *q b) *q c) ≡ q3 (a *q (b *q c))
 assoc3 a@(quat a0 a1 a2 a3)
@@ -237,10 +238,8 @@ assoc3 a@(quat a0 a1 a2 a3)
         | q3Multiply a (b *q c)
         | q0Multiply a b | q1Multiply a b | q2Multiply a b | q3Multiply a b
         | q0Multiply b c | q1Multiply b c | q2Multiply b c | q3Multiply b c =
-  Solver.solve
-    (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷
-     c0 ∷ c1 ∷ c2 ∷ c3 ∷ [])
-    realSolverRing
+  quaternionAssoc3Polynomial
+    a0 a1 a2 a3 b0 b1 b2 b3 c0 c1 c2 c3
 
 quaternionMultiplyAssociative :
   ∀ a b c → (a *q b) *q c ≡ a *q (b *q c)
@@ -335,9 +334,7 @@ quaternionNormMultiplicative
   rewrite normSquaredExpand (a *q b)
         | q0Multiply a b | q1Multiply a b | q2Multiply a b | q3Multiply a b
         | normSquaredExpand a | normSquaredExpand b =
-  Solver.solve
-    (a0 ∷ a1 ∷ a2 ∷ a3 ∷ b0 ∷ b1 ∷ b2 ∷ b3 ∷ [])
-    realSolverRing
+  quaternionNormMultiplicativePolynomial a0 a1 a2 a3 b0 b1 b2 b3
 
 multiplyConjugateRight0 :
   ∀ a → q0 (a *q conjugateQ a) ≡ q0 (scaleRealQ (normSquaredQ a) oneQ)
