@@ -43,6 +43,8 @@ open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ; normSquaredQ
   ; normSquaredExpand
   ; realSolverRing
+  ; _*q_
+  ; conjugateQ
   ; q1Multiply
   ; q2Multiply
   ; q3Multiply
