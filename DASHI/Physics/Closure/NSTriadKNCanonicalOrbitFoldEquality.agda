@@ -43,6 +43,7 @@ canonicalFoldBy :
   (same? : A → A → Bool) →
   (A → Scalar.Scalar (Algebra.orderedScalar K)) →
   List A → Scalar.Scalar (Algebra.orderedScalar K)
+{-# TERMINATING #-}
 canonicalFoldBy K same? f [] = Scalar.zero (Algebra.orderedScalar K)
 canonicalFoldBy K same? f (pivot ∷ xs) =
   Scalar._+_ S
@@ -109,6 +110,7 @@ canonicalFoldByEqualsOrderedFold :
   (xs : List A) →
   canonicalFoldBy K same? f xs ≡
   sumBy (Algebra.orderedScalar K) f xs
+{-# TERMINATING #-}
 canonicalFoldByEqualsOrderedFold K same? f [] = refl
 canonicalFoldByEqualsOrderedFold K same? f (pivot ∷ xs) =
   trans
