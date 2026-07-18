@@ -1,13 +1,14 @@
 module DASHI.Physics.YangMills.BalabanSU2AdScalarReduction where
 
-open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.List.Base using ([]; _∷_)
+import Tactic.RingSolver as Solver
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
-  (_+R_; _*R_; -R_)
+  (_+R_; _*R_; -R_; realSolverRing)
 open import DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier using
-  (SU2LieAlgebra; lieAdd; lieScale)
+  (SU2LieAlgebra; su2Lie; su2LieExt; lieAdd; lieScale)
 open import DASHI.Physics.YangMills.BalabanSU2LieBracket using
   (adOperator)
 open import DASHI.Physics.YangMills.BalabanSU2AdOperator using
@@ -33,7 +34,6 @@ adQuadratic coefficients Y X =
       (lieScale (quadraticCoefficient coefficients)
         (adOperator Y (adOperator Y X))))
 
--- Any cubic contribution can be folded back into the linear coefficient.
 reduceCubicCoefficient :
   ℝ → AdQuadraticCoefficients → SU2LieAlgebra → AdQuadraticCoefficients
 reduceCubicCoefficient cubic coefficients Y =
@@ -50,10 +50,22 @@ adQuadraticPlusCubicReduced :
     (lieScale cubic
       (adOperator Y (adOperator Y (adOperator Y X))))
   ≡ adQuadratic (reduceCubicCoefficient cubic coefficients Y) Y X
-adQuadraticPlusCubicReduced cubic coefficients Y X
-  rewrite adCubic Y X = refl
+adQuadraticPlusCubicReduced
+  cubic (adCoefficients identity linear quadratic)
+  Y@(su2Lie x₀ y₀ z₀) X@(su2Lie x y z)
+  rewrite adCubic Y X =
+  su2LieExt
+    (Solver.solve
+      (cubic ∷ identity ∷ linear ∷ quadratic ∷ x₀ ∷ y₀ ∷ z₀ ∷ x ∷ y ∷ z ∷ [])
+      realSolverRing)
+    (Solver.solve
+      (cubic ∷ identity ∷ linear ∷ quadratic ∷ x₀ ∷ y₀ ∷ z₀ ∷ x ∷ y ∷ z ∷ [])
+      realSolverRing)
+    (Solver.solve
+      (cubic ∷ identity ∷ linear ∷ quadratic ∷ x₀ ∷ y₀ ∷ z₀ ∷ x ∷ y ∷ z ∷ [])
+      realSolverRing)
 
-record BoundedAdScalarApproximation : Set where
+record BoundedAdScalarApproximation : Set₁ where
   constructor boundedAdApproximation
   field
     coefficients : AdQuadraticCoefficients
