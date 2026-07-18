@@ -56,29 +56,6 @@ triad≟ τ σ with mode≟ (Lattice.left τ) (Lattice.left σ)
 ...     | no out≢ = no (λ τ≡σ → out≢ (cong Lattice.out τ≡σ))
 ...     | yes out≡ = yes (triadExt left≡ right≡ out≡)
 
-decToBool : {A : Set} → Dec A → Bool
-decToBool (yes _) = true
-decToBool (no _) = false
-
-decToBoolSound : {A : Set} → (d : Dec A) → decToBool d ≡ true → A
-decToBoolSound (yes a) _ = a
-decToBoolSound (no _) ()
-
-decToBoolComplete : {A : Set} → (d : Dec A) → A → decToBool d ≡ true
-decToBoolComplete (yes _) _ = refl
-decToBoolComplete (no notA) a = ⊥-elim (notA a)
-
-triadEq? : Lattice.LatticeTriad → Lattice.LatticeTriad → Bool
-triadEq? τ σ = decToBool (triad≟ τ σ)
-
-triadEqSound :
-  (τ σ : Lattice.LatticeTriad) → triadEq? τ σ ≡ true → τ ≡ σ
-triadEqSound τ σ = decToBoolSound (triad≟ τ σ)
-
-triadEqComplete :
-  (τ σ : Lattice.LatticeTriad) → τ ≡ σ → triadEq? τ σ ≡ true
-triadEqComplete τ σ = decToBoolComplete (triad≟ τ σ)
-
 modeNegInvolutive :
   (p : Lattice.LatticeMode3) → Lattice.modeNeg (Lattice.modeNeg p) ≡ p
 modeNegInvolutive (Lattice.mkLatticeMode3 k₁ k₂ k₃) =
@@ -195,28 +172,26 @@ memberToAction τ σ
 
 triadMember? : Lattice.LatticeTriad → List Lattice.LatticeTriad → Bool
 triadMember? τ [] = false
-triadMember? τ (σ ∷ σs) with triadEq? τ σ
-... | true = true
-... | false = triadMember? τ σs
+triadMember? τ (σ ∷ σs) with triad≟ τ σ
+... | yes _ = true
+... | no _ = triadMember? τ σs
 
 triadMemberSound :
   (τ : Lattice.LatticeTriad) → (xs : List Lattice.LatticeTriad) →
   triadMember? τ xs ≡ true → τ ∈ xs
 triadMemberSound τ [] ()
-triadMemberSound τ (σ ∷ σs) member with triadEq? τ σ
-... | true = here (triadEqSound τ σ refl)
-... | false = there (triadMemberSound τ σs member)
+triadMemberSound τ (σ ∷ σs) member with triad≟ τ σ
+... | yes τ≡σ = here τ≡σ
+... | no _ = there (triadMemberSound τ σs member)
 
 triadMemberComplete :
   (τ : Lattice.LatticeTriad) → (xs : List Lattice.LatticeTriad) →
   τ ∈ xs → triadMember? τ xs ≡ true
-triadMemberComplete τ (σ ∷ σs) (here τ≡σ)
-  with triadEq? τ σ | triadEqComplete τ σ τ≡σ
-... | true | _ = refl
-... | false | ()
-triadMemberComplete τ (σ ∷ σs) (there τ∈σs) with triadEq? τ σ
-... | true = refl
-... | false = triadMemberComplete τ σs τ∈σs
+triadMemberComplete τ (σ ∷ σs) member with triad≟ τ σ
+... | yes _ = refl
+... | no τ≢ with member
+...   | here τ≡σ = ⊥-elim (τ≢ τ≡σ)
+...   | there τ∈σs = triadMemberComplete τ σs τ∈σs
 
 sameOrbit? : Lattice.LatticeTriad → Lattice.LatticeTriad → Bool
 sameOrbit? τ σ = triadMember? τ (Orbit.canonicalOrbitMembers σ)
