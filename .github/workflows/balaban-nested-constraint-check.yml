@@ -49,6 +49,9 @@ jobs:
               https://github.com/agda/agda-stdlib.git "$STDLIB_ROOT"
             STDLIB_INCLUDE="$STDLIB_ROOT/src"
             CHECK_ROOT="$(mktemp -d)"
+            AGDA_DATA_DIR="$("$AGDA_BIN" --print-agda-data-dir)"
+            cp -a "$AGDA_DATA_DIR/prim" "$CHECK_ROOT/prim"
+            PRIM_INCLUDE="$CHECK_ROOT/prim"
             cp -a "$GITHUB_WORKSPACE/DASHI" "$CHECK_ROOT/DASHI"
             "$AGDA_BIN" --version
             printf 'agda-stdlib %s\n' "$(git -C "$STDLIB_ROOT" rev-parse HEAD)"
@@ -129,7 +132,7 @@ jobs:
             for target in "${targets[@]}"; do
               echo "Checking: $target"
               "$AGDA_BIN" --no-libraries --no-default-libraries -j0 \
-                -i "$CHECK_ROOT" -i "$STDLIB_INCLUDE" \
+                -i "$PRIM_INCLUDE" -i "$CHECK_ROOT" -i "$STDLIB_INCLUDE" \
                 "$CHECK_ROOT/$target"
             done
           ) > agda-focused-check.log 2>&1
