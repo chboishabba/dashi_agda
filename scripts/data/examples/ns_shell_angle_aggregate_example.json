@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "authority": {
+    "candidate_only": true,
+    "empirical_non_promoting": true,
+    "truth_authority": false,
+    "theorem_authority": false,
+    "clay_authority": false,
+    "promoted": false
+  },
+  "export_receipts": [
+    {
+      "source_state": "synthetic-shell-angle-state.npz",
+      "target_shell": 2,
+      "aggregate_only": true,
+      "full_packet_signed_rate": -0.1,
+      "full_packet_gross_activity": 1.0,
+      "coarse_shell_angle_groups": [
+        {
+          "p_shell_offset": 0,
+          "q_shell_offset": 0,
+          "angle_bin": 0,
+          "signed_rate": -0.05,
+          "gross_activity": 0.5,
+          "gross_activity_fraction": 0.5,
+          "atom_count": 8
+        },
+        {
+          "p_shell_offset": 1,
+          "q_shell_offset": 0,
+          "angle_bin": 0,
+          "signed_rate": -0.03,
+          "gross_activity": 0.25,
+          "gross_activity_fraction": 0.25,
+          "atom_count": 4
+        },
+        {
+          "p_shell_offset": 1,
+          "q_shell_offset": 1,
+          "angle_bin": 1,
+          "signed_rate": -0.02,
+          "gross_activity": 0.25,
+          "gross_activity_fraction": 0.25,
+          "atom_count": 4
+        }
+      ],
+      "truth_authority": false,
+      "theorem_authority": false,
+      "promoted": false
+    }
+  ]
+}
