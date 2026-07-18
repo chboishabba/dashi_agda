@@ -17,12 +17,12 @@ module DASHI.Physics.YangMills.BalabanSU2LieAlgebraCarrier where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using ([]; _∷_)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import Tactic.RingSolver as Solver
 
 open import DASHI.Foundations.RealAnalysisAxioms using (+-assoc; +-identityˡ; +-identityʳ)
-open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using (-‿inverseʳ)
+open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using (-‿inverseʳ; zeroʳ)
 
 open import DASHI.Physics.YangMills.BalabanAxiomaticRealPolynomialSolver using
   ( zeroCoefficient
@@ -55,9 +55,24 @@ open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ; -R_
   ; zeroR
   ; realSolverRing
+  ; q0Multiply
+  ; q1Multiply
+  ; q2Multiply
+  ; q3Multiply
+  ; q0Conjugate
+  ; q1Conjugate
+  ; q2Conjugate
+  ; q3Conjugate
   ; _+q_
   ; conjugateQ
   ; _*q_
+  ; quaternionOneLeft
+  ; quaternionOneRight
+  ; oneQ
+  ; -0#≈0#
+  ; oneRight1
+  ; oneRight2
+  ; oneRight3
   ; SU2Quaternion
   ; su2q
   ; quaternion
@@ -148,6 +163,70 @@ su2Adjoint u X = lieFromQuaternion (adjointQuaternion u X)
 -- the twelve cancelling monomials below.  In particular, the intermediate
 -- pure-imaginary component is not represented by terms such as 0 * x or x +
 -- 0; those terms have already been removed with the real-ring laws.
+adjointInner0 :
+  ∀ a₀ a₁ a₂ a₃ x y z →
+  q0 (quat a₀ a₁ a₂ a₃ *q quat zeroR x y z)
+    ≡
+  ((-R (a₁ *R x)) +R (-R (a₂ *R y))) +R (-R (a₃ *R z))
+adjointInner0 a₀ a₁ a₂ a₃ x y z
+  rewrite q0Multiply (quat a₀ a₁ a₂ a₃) (quat zeroR x y z)
+        | zeroʳ a₀
+        | +-identityˡ (-R (a₁ *R x)) =
+  refl
+
+adjointInner1 :
+  ∀ a₀ a₁ a₂ a₃ x y z →
+  q1 (quat a₀ a₁ a₂ a₃ *q quat zeroR x y z)
+    ≡
+  ((a₀ *R x) +R (a₂ *R z)) +R (-R (a₃ *R y))
+adjointInner1 a₀ a₁ a₂ a₃ x y z
+  rewrite q1Multiply (quat a₀ a₁ a₂ a₃) (quat zeroR x y z)
+        | zeroʳ a₁
+        | +-identityʳ (a₀ *R x) =
+  refl
+
+adjointInner2 :
+  ∀ a₀ a₁ a₂ a₃ x y z →
+  q2 (quat a₀ a₁ a₂ a₃ *q quat zeroR x y z)
+    ≡
+  ((a₀ *R y) +R (-R (a₁ *R z))) +R (a₃ *R x)
+adjointInner2 a₀ a₁ a₂ a₃ x y z
+  rewrite q2Multiply (quat a₀ a₁ a₂ a₃) (quat zeroR x y z)
+        | zeroʳ a₂
+        | +-identityʳ ((a₀ *R y) +R (-R (a₁ *R z))) =
+  refl
+
+adjointInner3 :
+  ∀ a₀ a₁ a₂ a₃ x y z →
+  q3 (quat a₀ a₁ a₂ a₃ *q quat zeroR x y z)
+    ≡
+  ((a₀ *R z) +R (a₁ *R y)) +R (-R (a₂ *R x))
+adjointInner3 a₀ a₁ a₂ a₃ x y z
+  rewrite q3Multiply (quat a₀ a₁ a₂ a₃) (quat zeroR x y z)
+        | zeroʳ a₃
+        | +-identityʳ
+            (((a₀ *R z) +R (a₁ *R y)) +R (-R (a₂ *R x))) =
+  refl
+
+adjointQuaternionRealPartPolynomial :
+  ∀ a₀ a₁ a₂ a₃ x y z →
+  ((((
+       (((-R ((a₁ *R x))) +R (-R ((a₂ *R y)))) +R (-R ((a₃ *R z)))) *R a₀)
+       +R (-R (((((a₀ *R x) +R (a₂ *R z)) +R (-R (a₃ *R y))) *R (-R a₁)))))
+       +R (-R (((((a₀ *R y) +R (-R (a₁ *R z))) +R (a₃ *R x)) *R (-R a₂)))))
+       +R (-R (((((a₀ *R z) +R (a₁ *R y)) +R (-R (a₂ *R x))) *R (-R a₃)))))
+    ≡ a₀ +R (-R a₀)
+adjointQuaternionRealPartPolynomial =
+  solve 7
+    (λ a₀ a₁ a₂ a₃ x y z →
+      (((
+        (((((:- ((a₁ :* x)) :+ :- ((a₂ :* y))) :+ :- ((a₃ :* z))) :* a₀)))
+        :+ :- (((((a₀ :* x) :+ (a₂ :* z)) :+ :- (a₃ :* y)) :* :- a₁)))
+        :+ :- (((((a₀ :* y) :+ :- ((a₁ :* z))) :+ (a₃ :* x)) :* :- a₂)))
+        :+ :- (((((a₀ :* z) :+ (a₁ :* y)) :+ :- ((a₂ :* x))) :* :- a₃)))
+      := (a₀ :+ (:- a₀)))
+    refl
+
 adjointPureImaginaryCancellation :
   ∀ a₀ a₁ a₂ a₃ x y z →
   (((((((((((
@@ -204,8 +283,19 @@ adjointQuaternionRealPartExpanded :
       +R ((a₃ *R a₀) *R z))
       +R ((a₃ *R a₁) *R y))
       +R (-R ((a₃ *R a₂) *R x)))
-adjointQuaternionRealPartExpanded a₀ a₁ a₂ a₃ x y z =
-  Solver.solve (a₀ ∷ a₁ ∷ a₂ ∷ a₃ ∷ x ∷ y ∷ z ∷ []) realSolverRing
+adjointQuaternionRealPartExpanded a₀ a₁ a₂ a₃ x y z
+  rewrite q0Multiply (quat a₀ a₁ a₂ a₃ *q quat zeroR x y z) (conjugateQ (quat a₀ a₁ a₂ a₃))
+    | adjointInner0 a₀ a₁ a₂ a₃ x y z
+    | adjointInner1 a₀ a₁ a₂ a₃ x y z
+    | adjointInner2 a₀ a₁ a₂ a₃ x y z
+    | adjointInner3 a₀ a₁ a₂ a₃ x y z
+    | q0Conjugate (quat a₀ a₁ a₂ a₃)
+    | q1Conjugate (quat a₀ a₁ a₂ a₃)
+    | q2Conjugate (quat a₀ a₁ a₂ a₃)
+    | q3Conjugate (quat a₀ a₁ a₂ a₃) =
+  trans
+    (adjointQuaternionRealPartPolynomial a₀ a₁ a₂ a₃ x y z)
+    (sym (adjointPureImaginaryCancellation a₀ a₁ a₂ a₃ x y z))
 
 adjointQuaternionPureImaginary :
   ∀ u X → q0 (adjointQuaternion u X) ≡ zeroR
@@ -227,11 +317,40 @@ lieQuaternionAdjoint u X =
 
 su2AdjointUnit :
   ∀ X → su2Adjoint su2Identity X ≡ X
+su2IdentityConjugate : conjugateQ (quaternion su2Identity) ≡ oneQ
+su2IdentityConjugate =
+  DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier.quaternionExt
+    refl
+    -0#≈0#
+    -0#≈0#
+    -0#≈0#
+
 su2AdjointUnit (su2Lie x y z) =
   su2LieExt
-    (Solver.solve (x ∷ y ∷ z ∷ []) realSolverRing)
-    (Solver.solve (x ∷ y ∷ z ∷ []) realSolverRing)
-    (Solver.solve (x ∷ y ∷ z ∷ []) realSolverRing)
+    (cong q1
+      (trans
+        (cong (λ q → q *q conjugateQ (quaternion su2Identity))
+          (quaternionOneLeft (lieQuaternion (su2Lie x y z))))
+        (trans
+          (cong (λ q → lieQuaternion (su2Lie x y z) *q q)
+            su2IdentityConjugate)
+          (quaternionOneRight (lieQuaternion (su2Lie x y z))))))
+    (cong q2
+      (trans
+        (cong (λ q → q *q conjugateQ (quaternion su2Identity))
+          (quaternionOneLeft (lieQuaternion (su2Lie x y z))))
+        (trans
+          (cong (λ q → lieQuaternion (su2Lie x y z) *q q)
+            su2IdentityConjugate)
+          (quaternionOneRight (lieQuaternion (su2Lie x y z))))))
+    (cong q3
+      (trans
+        (cong (λ q → q *q conjugateQ (quaternion su2Identity))
+          (quaternionOneLeft (lieQuaternion (su2Lie x y z))))
+        (trans
+          (cong (λ q → lieQuaternion (su2Lie x y z) *q q)
+            su2IdentityConjugate)
+          (quaternionOneRight (lieQuaternion (su2Lie x y z))))))
 
 su2AdjointMultiply :
   ∀ u v X →
