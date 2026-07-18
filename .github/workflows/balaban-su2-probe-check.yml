@@ -47,8 +47,9 @@ jobs:
               https://github.com/agda/agda-stdlib.git "$STDLIB_ROOT"
             STDLIB_INCLUDE="$STDLIB_ROOT/src"
             CHECK_ROOT="$(mktemp -d)"
-            AGDA_PREFIX="$(dirname "$(dirname "$AGDA_BIN")")"
-            cp -a "$AGDA_PREFIX/lib/prim" "$CHECK_ROOT/prim"
+            AGDA_DATA_DIR="$("$AGDA_BIN" --print-agda-data-dir)"
+            AGDA_DATA_ROOT="$(dirname "$(dirname "$(dirname "$(dirname "$AGDA_DATA_DIR")")")")"
+            cp -a "$AGDA_DATA_ROOT/lib/prim" "$CHECK_ROOT/prim"
             PRIM_INCLUDE="$CHECK_ROOT/prim"
             cp -a "$GITHUB_WORKSPACE/DASHI" "$CHECK_ROOT/DASHI"
             "$AGDA_BIN" --version
