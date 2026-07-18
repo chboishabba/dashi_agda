@@ -9,7 +9,7 @@ open import Data.List.Base using (List; []; _∷_; filterᵇ)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNCanonicalTriadOrbitEnumeration as Orbit
-import DASHI.Physics.Closure.NSTriadKNCanonicalTriadOrbitEnumerationConcrete as Concrete
+import DASHI.Physics.Closure.NSTriadKNCanonicalTriadOrbitQuotient as Concrete
 import DASHI.Physics.Closure.NSTriadKNExactOrderedScalar as Scalar
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffInnerProduct as Algebra
 import DASHI.Physics.Closure.NSTriadKNWeightedFourierEnergyIdentity as Energy
