@@ -1,9 +1,10 @@
 module DASHI.Physics.YangMills.BalabanRealRingSolverProbe where
 
 ------------------------------------------------------------------------
--- Minimal regression probe for the exact solver socket exported by the
--- quaternion carrier.  Keeping one socket avoids the non-definitional mismatch
--- produced by independently reconstructing `fromCommutativeRing` records.
+-- Minimal regression probe for the exact solver socket used by the concrete
+-- SU(2) lane.  This module deliberately does not import the quaternion carrier:
+-- it must establish first that the reflective solver recognises the public
+-- operation names definitionally.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
@@ -12,7 +13,7 @@ open import Data.List.Base using ([]; _∷_)
 import Tactic.RingSolver as Solver
 
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
-open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
+open import DASHI.Physics.YangMills.BalabanRealPolynomialRing using
   ( _+R_
   ; _*R_
   ; -R_
