@@ -28,10 +28,10 @@ open import DASHI.Physics.YangMills.BalabanSU2QuaternionCarrier using
   ; _*R_
   ; -R_
   ; oneR
+  ; *-identityˡ
   ; normSquaredQ
   ; normSquaredExpand
   ; realSolverRing
-  ; emptyRealVariables
   ; SU2Quaternion
   ; su2q
   ; quaternion
@@ -104,4 +104,6 @@ su2AdjointMatrixDeterminantOne u =
       (cong
         (λ norm → norm *R (norm *R norm))
         (unitNormSquared u))
-      (Solver.solve emptyRealVariables realSolverRing))
+      (trans
+        (*-identityˡ (oneR *R oneR))
+        (*-identityˡ oneR)))
