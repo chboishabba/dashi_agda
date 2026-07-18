@@ -6,7 +6,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Primitive using (Set)
 open import Data.Bool.Base using (not)
 open import Data.List.Base using (List; []; _∷_; filterᵇ)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNCanonicalTriadOrbitEnumeration as Orbit
 import DASHI.Physics.Closure.NSTriadKNCanonicalTriadOrbitEnumerationConcrete as Concrete
@@ -99,9 +99,7 @@ filterPartitionSum K same? f pivot (x ∷ xs) with same? x pivot
     (a b c : Scalar.Scalar S) →
     Scalar._+_ S a (Scalar._+_ S b c) ≡
     Scalar._+_ S (Scalar._+_ S a b) c
-  symAssoc a b c =
-    Relation.Binary.PropositionalEquality.sym
-      (Algebra.addAssociative K a b c)
+  symAssoc a b c = sym (Algebra.addAssociative K a b c)
 
 canonicalFoldByEqualsOrderedFold :
   {A : Set} →
