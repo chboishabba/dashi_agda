@@ -4,10 +4,12 @@ open import Agda.Primitive using (Level; lsuc; _⊔_)
 
 import DASHI.Physics.Closure.NSTriadKNForcedTailCountingMagnitudeTheorem as CountingMagnitude
 
+open import DASHI.Physics.Closure.NSTriadKNPairIncidenceProfileDecomposition
+  using ( Shell )
+
 open import DASHI.Physics.Closure.NSTriadKNForcedTailCountingMagnitudeTheorem
   using ( NSTriadKNForcedTailCountingMagnitudeTheoremModel
         ; Bound
-        ; Shell
         ; _≤_
         ; _*_
         ; forcedTailColumnFunctional
@@ -36,11 +38,11 @@ record NSTriadKNForcedTailWeightedProductBoundModel
         {ℓS} {ℓE} {ℓW} {ℓV} {ℓR}
 
     forcedTailTargetBound :
-      Shell (decompositionModel countingMagnitudeModel) ->
+      Shell (CountingMagnitude.decompositionModel countingMagnitudeModel) ->
       Bound countingMagnitudeModel
 
     forcedTailWeightedProductBound :
-      (N : Shell (decompositionModel countingMagnitudeModel)) ->
+      (N : Shell (CountingMagnitude.decompositionModel countingMagnitudeModel)) ->
       let wN = weightAt countingMagnitudeModel N in
       _≤_ countingMagnitudeModel
         (_*_ countingMagnitudeModel
@@ -50,11 +52,11 @@ record NSTriadKNForcedTailWeightedProductBoundModel
 
 open NSTriadKNForcedTailWeightedProductBoundModel public
 
-decompositionModel :
+weightedDecompositionModel :
   ∀ {ℓS ℓE ℓW ℓV ℓR} ->
   NSTriadKNForcedTailWeightedProductBoundModel {ℓS} {ℓE} {ℓW} {ℓV} {ℓR} ->
   _
-decompositionModel m =
+weightedDecompositionModel m =
   CountingMagnitude.decompositionModel
     (countingMagnitudeModel m)
 
@@ -66,7 +68,7 @@ forcedTailWeightedProductBoundReceipt =
 forcedTailUniformProductTheorem :
   ∀ {ℓS ℓE ℓW ℓV ℓR}
   (m : NSTriadKNForcedTailWeightedProductBoundModel {ℓS} {ℓE} {ℓW} {ℓV} {ℓR}) ->
-  (N : Shell (decompositionModel m)) ->
+  (N : Shell (weightedDecompositionModel m)) ->
   let wN = weightAt (countingMagnitudeModel m) N in
   _≤_ (countingMagnitudeModel m)
     (_*_ (countingMagnitudeModel m)
@@ -79,7 +81,7 @@ forcedTailUniformProductTheorem m =
 forcedTailProductRouteAvailable :
   ∀ {ℓS ℓE ℓW ℓV ℓR}
   (m : NSTriadKNForcedTailWeightedProductBoundModel {ℓS} {ℓE} {ℓW} {ℓV} {ℓR}) ->
-  (N : Shell (decompositionModel m)) ->
+  (N : Shell (weightedDecompositionModel m)) ->
   let wN = weightAt (countingMagnitudeModel m) N in
   _≤_ (countingMagnitudeModel m)
     (_*_ (countingMagnitudeModel m)

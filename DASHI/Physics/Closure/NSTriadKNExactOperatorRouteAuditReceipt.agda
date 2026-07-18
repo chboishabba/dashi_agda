@@ -1,7 +1,7 @@
 module DASHI.Physics.Closure.NSTriadKNExactOperatorRouteAuditReceipt where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
