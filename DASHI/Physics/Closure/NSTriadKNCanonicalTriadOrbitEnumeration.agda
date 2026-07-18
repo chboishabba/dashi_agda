@@ -1,14 +1,20 @@
 module DASHI.Physics.Closure.NSTriadKNCanonicalTriadOrbitEnumeration where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Primitive using (Set)
+open import Data.Bool.Base using (T)
 open import Data.List.Base using (List; []; _∷_; cartesianProductWith; filterᵇ)
 open import Data.List.Membership.Propositional using (_∈_)
+open import Data.List.Membership.Propositional.Properties using
+  (∈-cartesianProductWith⁺; ∈-cartesianProductWith⁻; ∈-filter⁺; ∈-filter⁻)
 open import Data.Product using (Σ; _,_; _×_; proj₁; proj₂)
+open import Function.Base using (_∘_)
+open import Relation.Nullary.Decidable.Core using (T?)
 
 import DASHI.Physics.Closure.NSTriadKNExactLatticeShellTriads as Lattice
+import DASHI.Physics.Closure.NSTriadKNExactLatticeTriadZeroSum as ZeroSum
 import DASHI.Physics.Closure.NSTriadKNPhysicalRetainedSector as Sector
 import DASHI.Physics.Closure.NSTriadKNWeightedFourierEnergyIdentity as Energy
 
@@ -89,6 +95,60 @@ FullCutoffZeroSumTriad R τ =
    ((Lattice.out τ ∈ Sector.cutoffModes R) ×
     (Lattice.zeroSum? τ ≡ true)))
 
+-- Unlike the labelled-output convolution carrier, the full symmetric cutoff
+-- is closed under every generator of a physical triad orbit.  These are
+-- concrete finite facts, derived from the cutoff decoder and zero-sum
+-- algebra; they are not fields of the still-open representative-enumeration
+-- contract below.
+fullCutoffZeroSumTriadCycle :
+  (R : Nat) → (τ : Lattice.LatticeTriad) →
+  FullCutoffZeroSumTriad R τ →
+  FullCutoffZeroSumTriad R (Lattice.triadCycle τ)
+fullCutoffZeroSumTriadCycle R (Lattice.mkLatticeTriad left right out)
+  (left∈ , (right∈ , (out∈ , zeroSum))) =
+  right∈ , (out∈ , (left∈ , ZeroSum.zeroSumCycle
+    (Lattice.mkLatticeTriad left right out) zeroSum))
+
+fullCutoffZeroSumTriadSwap :
+  (R : Nat) → (τ : Lattice.LatticeTriad) →
+  FullCutoffZeroSumTriad R τ →
+  FullCutoffZeroSumTriad R (Lattice.triadSwap τ)
+fullCutoffZeroSumTriadSwap R (Lattice.mkLatticeTriad left right out)
+  (left∈ , (right∈ , (out∈ , zeroSum))) =
+  right∈ , (left∈ , (out∈ , ZeroSum.zeroSumSwap
+    (Lattice.mkLatticeTriad left right out) zeroSum))
+
+fullCutoffZeroSumTriadNeg :
+  (R : Nat) → (τ : Lattice.LatticeTriad) →
+  FullCutoffZeroSumTriad R τ →
+  FullCutoffZeroSumTriad R (Lattice.triadNeg τ)
+fullCutoffZeroSumTriadNeg R (Lattice.mkLatticeTriad left right out)
+  (left∈ , (right∈ , (out∈ , zeroSum))) =
+  Sector.cutoffModesNeg R left left∈ ,
+  (Sector.cutoffModesNeg R right right∈ ,
+   (Sector.cutoffModesNeg R out out∈ , ZeroSum.zeroSumNeg
+     (Lattice.mkLatticeTriad left right out) zeroSum))
+
+record FullCutoffPermutationRealityClosure (R : Nat) : Set where
+  field
+    cyclePreserves :
+      (τ : Lattice.LatticeTriad) → FullCutoffZeroSumTriad R τ →
+      FullCutoffZeroSumTriad R (Lattice.triadCycle τ)
+    swapPreserves :
+      (τ : Lattice.LatticeTriad) → FullCutoffZeroSumTriad R τ →
+      FullCutoffZeroSumTriad R (Lattice.triadSwap τ)
+    realityPreserves :
+      (τ : Lattice.LatticeTriad) → FullCutoffZeroSumTriad R τ →
+      FullCutoffZeroSumTriad R (Lattice.triadNeg τ)
+
+fullCutoffPermutationRealityClosure :
+  (R : Nat) → FullCutoffPermutationRealityClosure R
+fullCutoffPermutationRealityClosure R = record
+  { cyclePreserves = fullCutoffZeroSumTriadCycle R
+  ; swapPreserves = fullCutoffZeroSumTriadSwap R
+  ; realityPreserves = fullCutoffZeroSumTriadNeg R
+  }
+
 fullCutoffZeroSumTriads : Nat → List Lattice.LatticeTriad
 fullCutoffZeroSumTriads R =
   filterᵇ Lattice.zeroSum?
@@ -97,6 +157,69 @@ fullCutoffZeroSumTriads R =
         (proj₂ pair))
       (Sector.cutoffModes R)
       (cartesianProductWith _,_ (Sector.cutoffModes R) (Sector.cutoffModes R)))
+
+boolTrueFromT : {b : Bool} → T b → b ≡ true
+boolTrueFromT {true} _ = refl
+boolTrueFromT {false} ()
+
+tFromBoolTrue : {b : Bool} → b ≡ true → T b
+tFromBoolTrue {true} _ = _
+tFromBoolTrue {false} ()
+
+fullCutoffCandidateMember :
+  (R : Nat) → (τ : Lattice.LatticeTriad) →
+  FullCutoffZeroSumTriad R τ →
+  τ ∈ cartesianProductWith
+    (λ left pair → Lattice.mkLatticeTriad left (proj₁ pair) (proj₂ pair))
+    (Sector.cutoffModes R)
+    (cartesianProductWith _,_ (Sector.cutoffModes R) (Sector.cutoffModes R))
+fullCutoffCandidateMember R (Lattice.mkLatticeTriad left right out)
+  (left∈ , (right∈ , (out∈ , zeroSum))) =
+  ∈-cartesianProductWith⁺
+    (λ left pair → Lattice.mkLatticeTriad left (proj₁ pair) (proj₂ pair))
+    left∈
+    (∈-cartesianProductWith⁺ _,_ right∈ out∈)
+
+fullCutoffCandidateMembership :
+  (R : Nat) → (τ : Lattice.LatticeTriad) →
+  τ ∈ cartesianProductWith
+    (λ left pair → Lattice.mkLatticeTriad left (proj₁ pair) (proj₂ pair))
+    (Sector.cutoffModes R)
+    (cartesianProductWith _,_ (Sector.cutoffModes R) (Sector.cutoffModes R)) →
+  (Lattice.left τ ∈ Sector.cutoffModes R) ×
+  ((Lattice.right τ ∈ Sector.cutoffModes R) ×
+   (Lattice.out τ ∈ Sector.cutoffModes R))
+fullCutoffCandidateMembership R τ τ∈candidates
+  with ∈-cartesianProductWith⁻
+    (λ left pair → Lattice.mkLatticeTriad left (proj₁ pair) (proj₂ pair))
+    (Sector.cutoffModes R)
+    (cartesianProductWith _,_ (Sector.cutoffModes R) (Sector.cutoffModes R))
+    τ∈candidates
+... | left , pair , left∈ , pair∈ , τ≡
+  with ∈-cartesianProductWith⁻ _,_ (Sector.cutoffModes R) (Sector.cutoffModes R) pair∈
+... | right , out , right∈ , out∈ , pair≡
+  rewrite τ≡ | pair≡ = left∈ , (right∈ , out∈)
+
+fullCutoffZeroSumTriadsSound :
+  (R : Nat) → (τ : Lattice.LatticeTriad) →
+  τ ∈ fullCutoffZeroSumTriads R → FullCutoffZeroSumTriad R τ
+fullCutoffZeroSumTriadsSound R τ τ∈
+  with ∈-filter⁻ (T? ∘ Lattice.zeroSum?) τ∈
+... | τ∈candidates , zeroSum =
+  let modes = fullCutoffCandidateMembership R τ τ∈candidates in
+  proj₁ modes , (proj₁ (proj₂ modes) ,
+    (proj₂ (proj₂ modes) , boolTrueFromT zeroSum))
+
+fullCutoffZeroSumTriadsComplete :
+  (R : Nat) → (τ : Lattice.LatticeTriad) →
+  FullCutoffZeroSumTriad R τ → τ ∈ fullCutoffZeroSumTriads R
+fullCutoffZeroSumTriadsComplete R τ τ∈ =
+  ∈-filter⁺ (T? ∘ Lattice.zeroSum?)
+    (fullCutoffCandidateMember R τ τ∈)
+    (substT τ∈)
+  where
+  substT : FullCutoffZeroSumTriad R τ → T (Lattice.zeroSum? τ)
+  substT (_ , (_ , (_ , zeroSum))) = tFromBoolTrue zeroSum
 
 FullCutoffCanonicalTriadOrbitEnumeration : Nat → Set₁
 FullCutoffCanonicalTriadOrbitEnumeration R =
