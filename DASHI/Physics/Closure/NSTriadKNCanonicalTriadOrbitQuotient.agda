@@ -85,6 +85,13 @@ triadEqComplete :
   (τ σ : Lattice.LatticeTriad) → τ ≡ σ → triadEq? τ σ ≡ true
 triadEqComplete τ σ = decToBoolComplete (triad≟ τ σ)
 
+modeNegInvolutive :
+  (p : Lattice.LatticeMode3) →
+  Lattice.modeNeg (Lattice.modeNeg p) ≡ p
+modeNegInvolutive (Lattice.mkLatticeMode3 k₁ k₂ k₃) =
+  modeExt (ℤP.neg-involutive k₁)
+    (ℤP.neg-involutive k₂) (ℤP.neg-involutive k₃)
+
 ------------------------------------------------------------------------
 -- The twelve concrete actions and their inverses.
 ------------------------------------------------------------------------
@@ -132,12 +139,24 @@ inverseActionLaw cycle (Lattice.mkLatticeTriad _ _ _) = refl
 inverseActionLaw swapCycle (Lattice.mkLatticeTriad _ _ _) = refl
 inverseActionLaw cycleTwice (Lattice.mkLatticeTriad _ _ _) = refl
 inverseActionLaw swapCycleTwice (Lattice.mkLatticeTriad _ _ _) = refl
-inverseActionLaw negIdentity (Lattice.mkLatticeTriad _ _ _) = refl
-inverseActionLaw negSwap (Lattice.mkLatticeTriad _ _ _) = refl
-inverseActionLaw negCycle (Lattice.mkLatticeTriad _ _ _) = refl
-inverseActionLaw negSwapCycle (Lattice.mkLatticeTriad _ _ _) = refl
-inverseActionLaw negCycleTwice (Lattice.mkLatticeTriad _ _ _) = refl
-inverseActionLaw negSwapCycleTwice (Lattice.mkLatticeTriad _ _ _) = refl
+inverseActionLaw negIdentity (Lattice.mkLatticeTriad left right out) =
+  triadExt (modeNegInvolutive left) (modeNegInvolutive right)
+    (modeNegInvolutive out)
+inverseActionLaw negSwap (Lattice.mkLatticeTriad left right out) =
+  triadExt (modeNegInvolutive left) (modeNegInvolutive right)
+    (modeNegInvolutive out)
+inverseActionLaw negCycle (Lattice.mkLatticeTriad left right out) =
+  triadExt (modeNegInvolutive left) (modeNegInvolutive right)
+    (modeNegInvolutive out)
+inverseActionLaw negSwapCycle (Lattice.mkLatticeTriad left right out) =
+  triadExt (modeNegInvolutive left) (modeNegInvolutive right)
+    (modeNegInvolutive out)
+inverseActionLaw negCycleTwice (Lattice.mkLatticeTriad left right out) =
+  triadExt (modeNegInvolutive left) (modeNegInvolutive right)
+    (modeNegInvolutive out)
+inverseActionLaw negSwapCycleTwice (Lattice.mkLatticeTriad left right out) =
+  triadExt (modeNegInvolutive left) (modeNegInvolutive right)
+    (modeNegInvolutive out)
 
 actionInOrbit :
   (a : TriadAction) → (τ : Lattice.LatticeTriad) →
