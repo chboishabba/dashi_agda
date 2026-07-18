@@ -51,7 +51,7 @@ open RealRing using
   ; +-cong
   ; +-identityˡ
   ; +-identityʳ
-  ; +-inverseʳ
+  ; -‿inverseʳ
   ; distribˡ
   ; distribʳ
   )
@@ -318,7 +318,7 @@ private
         +R (natCoefficient m +R (-R natCoefficient m))
         ≡⟨ cong
              ((natCoefficient p +R (-R natCoefficient n)) +R_)
-             (+-inverseʳ (natCoefficient m)) ⟩
+             (-‿inverseʳ (natCoefficient m)) ⟩
       (natCoefficient p +R (-R natCoefficient n)) +R zeroR
         ≡⟨ +-identityʳ
              (natCoefficient p +R (-R natCoefficient n)) ⟩
