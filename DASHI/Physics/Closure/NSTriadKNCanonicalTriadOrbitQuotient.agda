@@ -280,6 +280,7 @@ laterRepresentativeNotSame :
 laterRepresentativeNotSame {pivot} {τ} {xs} τ∈reps =
   boolFalseFromTNot
     (proj₂ (∈-filter⁻ (T? ∘ notSameOrbit? pivot)
+      {v = τ} {xs = xs}
       (orbitRepresentativesSubset
         {xs = removeOrbit pivot xs} {τ = τ} τ∈reps)))
 
